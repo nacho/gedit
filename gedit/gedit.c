@@ -41,10 +41,16 @@ void  destroy_window (GtkWidget *widget, GtkWidget **window)
 
 void file_quit_cmd_callback (GtkWidget *widget, gpointer data)
 {
-   /* g_print ("%s\n", (char *) data);*/
+   /* g_print ("%s\n", (char *) data);
    gtk_exit(0);
-
+  */
+  file_close_cmd_callback (widget, main_window);
 }
+
+void gE_quit ()
+{
+	gtk_exit (0);
+}	
 
 /*
 void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)

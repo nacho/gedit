@@ -12,7 +12,7 @@
 
 void save_no_sel (GtkWidget *w, gpointer data);
 void save_yes_sel (GtkWidget *w, gpointer data);
-void popup_close_verify (gE_document *doc);
+void popup_close_verify (gE_document *doc, gE_window *quitting);
 
 /* handles changes in the text widget... */
 void document_changed_callback (GtkWidget *w, gpointer doc)
@@ -28,24 +28,28 @@ void document_changed_callback (GtkWidget *w, gpointer doc)
 void save_yes_sel (GtkWidget *w, gpointer data)
 {
 	gE_document *doc;
+	gE_window *quitting;
+	quitting = gtk_object_get_data (GTK_OBJECT (w), "quitting");
 	doc = (gE_document *) data;
 	file_save_cmd_callback (NULL, NULL);
 	if (doc->filename == NULL)
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(main_window->save_fileselector)->ok_button), "clicked",
-		(GtkSignalFunc) file_close_cmd_callback, data);
+		(GtkSignalFunc) file_close_cmd_callback, quitting);
 	else
-		file_close_cmd_callback (NULL, NULL);
+		file_close_cmd_callback (NULL, quitting);
 }
 
 void save_no_sel (GtkWidget *w, gpointer data)
 {
 	gE_document *doc;
+	gE_window *quitting;
+	quitting = gtk_object_get_data (GTK_OBJECT (w), "quitting");
 	doc = (gE_document *) data;
 	doc->changed = FALSE;
-	file_close_cmd_callback (NULL, NULL);
+	file_close_cmd_callback (NULL, quitting);
 }
 
-void popup_close_verify(gE_document *doc)
+void popup_close_verify(gE_document *doc, gE_window *quitting)
 {
 	GtkWidget *verify_window, *yes, *no, *cancel, *label;
 	verify_window = gtk_dialog_new();
@@ -72,6 +76,8 @@ void popup_close_verify(gE_document *doc)
 	gtk_widget_show (no);
 	gtk_widget_show (cancel);
 	gtk_widget_show (verify_window);
+	gtk_object_set_data (GTK_OBJECT (yes), "quitting", quitting);
+	gtk_object_set_data (GTK_OBJECT (no), "quitting", quitting);
 	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(save_yes_sel), doc);
 	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(save_no_sel), doc);
 	gtk_signal_connect_object (GTK_OBJECT(yes), "clicked", 
@@ -311,7 +317,7 @@ void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 	}
 }
 
-void file_close_cmd_callback (GtkWidget *widget, gpointer data)
+void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 {
   /* This works, but sometimes  segfaults! need someway to check if file has been edited....
   				- Alex */
@@ -332,6 +338,8 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 				g_free (doc->filename);
 			g_free (doc);
 			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Closed..."));
+			if (quitting)
+				file_close_cmd_callback (widget, quitting);
 		}
 		else {
 			gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
@@ -341,11 +349,14 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 			g_free (doc);
 			g_list_free (main_window->documents);
 			main_window->documents = NULL;
-			gE_document_new (main_window);
+			if (!quitting)
+				gE_document_new (main_window);
+			else
+				gE_quit();
 		}
 	}
 	else
-		popup_close_verify(doc);
+		popup_close_verify(doc, quitting);
 
 		gtk_statusbar_pop (GTK_STATUSBAR(main_window->statusbar), 1);
 
@@ -544,8 +555,9 @@ void search_search_cmd_callback (GtkWidget *w, gpointer data)
 	if (!main_window->search->window)
 		search_popup (main_window->search, 0);
 	else {
-		gtk_widget_show (main_window->search->window);
+		gtk_window_set_title (GTK_WINDOW (main_window->search->window), _("Search"));
 		gtk_widget_hide (main_window->search->replace_box);
+		gtk_widget_show (main_window->search->window);
 		main_window->search->replace = 0;
 		main_window->search->again = 0;
 	}
@@ -556,9 +568,9 @@ void search_replace_cmd_callback (GtkWidget *w, gpointer data)
 	if (!main_window->search->window)
 		search_popup (main_window->search, 1);
 	else {
-		gtk_widget_show (main_window->search->window);
 		gtk_window_set_title (GTK_WINDOW (main_window->search->window), _("Search and Replace"));
 		gtk_widget_show (main_window->search->replace_box);
+		gtk_widget_show (main_window->search->window);
 		main_window->search->replace = 1;
 		main_window->search->again = 0;
 	}

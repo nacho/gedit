@@ -42,9 +42,9 @@ GnomeUIInfo gedit_file_menu [] = {
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	  'S', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
 	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
 	  'W', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, NULL, NULL,
@@ -64,7 +64,8 @@ GnomeUIInfo gedit_edit_menu [] = {
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
 	  'V', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Select all"),  NULL, edit_selall_cmd_callback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
 	GNOMEUIINFO_END
 };	
 
@@ -73,8 +74,9 @@ GnomeUIInfo gedit_search_menu [] = {
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
 	GNOMEUIINFO_END
 };
 

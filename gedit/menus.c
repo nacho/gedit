@@ -19,7 +19,7 @@ static GtkMenuEntry menu_items[] =
      {"<Main>/File/Save As...", NULL, file_save_as_cmd_callback, NULL},
      {"<Main>/File/Close", "<alt>W", file_close_cmd_callback, NULL},
      {"<Main>/File/<separator>", NULL, NULL, NULL},
-     {"<Main>/File/Quit", "<control>Q", file_quit_cmd_callback, NULL},
+     {"<Main>/File/Quit", "<control>Q", file_close_cmd_callback, main_window},
      {"<Main>/Edit/Cut", "<control>X", edit_cut_cmd_callback, NULL},
      {"<Main>/Edit/Copy", "<control>C", edit_copy_cmd_callback, NULL},
      {"<Main>/Edit/Paste", "<control>V", edit_paste_cmd_callback, NULL},
