@@ -143,6 +143,13 @@ dialog_destroyed (GtkObject  *obj,
 }
 
 static void
+destroy_dialog (GeditPreferencesDialog *dialog)
+{
+	g_object_unref (dialog->tooltips);
+	gtk_widget_destroy (dialog->dialog);
+}
+
+static void
 dialog_response_handler (GtkDialog              *dlg, 
 			 gint                    res_id,
 			 GeditPreferencesDialog *dialog)
@@ -162,7 +169,7 @@ dialog_response_handler (GtkDialog              *dlg,
 			break;
 
 		default:
-			gtk_widget_destroy (dialog->dialog);
+			destroy_dialog (dialog);
 	}
 }
 
@@ -1344,9 +1351,11 @@ get_preferences_dialog (GtkWindow *parent)
 
 		return NULL;
 	}
-	
+
 	dialog->tooltips = gtk_tooltips_new ();
-		
+	g_object_ref (dialog->tooltips);
+	gtk_object_sink (GTK_OBJECT (dialog->tooltips));
+
 	setup_editor_page (dialog);
 	setup_view_page (dialog);
 	setup_font_colors_page (dialog);
@@ -1367,7 +1376,6 @@ get_preferences_dialog (GtkWindow *parent)
 	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
 
 	return dialog;
-
 }
 
 void
