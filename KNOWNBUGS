@@ -5,15 +5,3 @@ Known bugs in version 0.3.2 of gEdit:
 
 	* The "Start at cursor position" option in search and replace
 	  doesn't really work...
-
-	* When you press Ctrl-W to close the file, if the tab is selected
-	  then it will close using the shortcut, otherwise it will erase
-	  the word that the text cursor is in (Shortcut built into text widget,
-          have to use another shortcut to close)...
-
-	* If there is only one file open, and you close it, it should exit
-	  the program AND GTK, but sometimes it sigsegv's out! But it doesn't
-	  core dump! :-) (Fixed, forgotten how)
-
-	* When you close a file you opened from the command line, gEdit SigSegvs
-	  and crashes
