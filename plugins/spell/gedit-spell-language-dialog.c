@@ -89,7 +89,6 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditSpellLanguageDialog 
 			/* FIXME */
 
 			break;
-
 	
 		default:
 			gtk_widget_destroy (dialog->dialog);
@@ -195,6 +194,15 @@ scroll_to_selected (GtkTreeView *tree_view)
 	}
 }
 
+static void
+language_row_activated (GtkTreeView *tree_view,
+			GtkTreePath *path,
+			GtkTreeViewColumn *column,
+			GeditSpellLanguageDialog *dialog)
+{
+	gtk_dialog_response (GTK_DIALOG (dialog->dialog), GTK_RESPONSE_OK);
+}
+
 static GeditSpellLanguageDialog *
 get_languages_dialog (GeditSpellChecker *spell_checker)
 {
@@ -259,14 +267,14 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 			COLUMN_LANGUAGE_NAME);
 
 	g_signal_connect (G_OBJECT (dialog->languages_treeview), "realize", 
-			  G_CALLBACK (scroll_to_selected), 
-			  dialog);
-	
+			  G_CALLBACK (scroll_to_selected), dialog);
+	g_signal_connect (G_OBJECT (dialog->languages_treeview), "row-activated", 
+			  G_CALLBACK (language_row_activated), dialog);
+
 	g_object_unref (gui);
 
 	return dialog;
 }
-
 
 void 
 gedit_spell_language_dialog_run (GeditSpellChecker *spell_checker, GtkWindow *parent)

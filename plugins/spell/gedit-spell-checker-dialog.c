@@ -106,6 +106,10 @@ static void	change_button_clicked_handler 			(GtkButton *button,
 								 GeditSpellCheckerDialog *dlg);
 static void	change_all_button_clicked_handler 		(GtkButton *button, 
 								 GeditSpellCheckerDialog *dlg);
+static void	suggestions_list_row_activated_handler		(GtkTreeView *view,
+								 GtkTreePath *path,
+								 GtkTreeViewColumn *column,
+								 GeditSpellCheckerDialog *dlg);
 
 
 static GtkWindowClass *parent_class = NULL;
@@ -333,6 +337,9 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 			  G_CALLBACK (change_button_clicked_handler), dlg);
 	g_signal_connect (G_OBJECT (dlg->change_all_button), "clicked",
 			  G_CALLBACK (change_all_button_clicked_handler), dlg);
+
+	g_signal_connect (G_OBJECT (dlg->suggestions_list), "row-activated",
+			  G_CALLBACK (suggestions_list_row_activated_handler), dlg);
 
 	g_object_unref (G_OBJECT (gui));
 }
@@ -642,7 +649,6 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	}
 }
 
-
 static void
 add_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
@@ -713,9 +719,7 @@ change_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
 	gchar *word;
 	gchar *change;
-	
 	GError *error = NULL;
-	
 		
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (dlg->mispelled_word != NULL);
@@ -739,6 +743,18 @@ change_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 
 	g_free (word);
 	g_free (change);	
+}
+
+/* double click on one of the suggestions is like clicking on "change" */
+static void
+suggestions_list_row_activated_handler (GtkTreeView *view,
+		GtkTreePath *path,
+		GtkTreeViewColumn *column,
+		GeditSpellCheckerDialog *dlg)
+{
+	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
+
+	change_button_clicked_handler (GTK_BUTTON (dlg->change_button), dlg);
 }
 
 static void
@@ -774,7 +790,6 @@ change_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	g_free (change);	
 }
 
-
 void 
 gedit_spell_checker_dialog_set_completed (GeditSpellCheckerDialog *dlg)
 {
@@ -799,5 +814,4 @@ gedit_spell_checker_dialog_set_completed (GeditSpellCheckerDialog *dlg)
 	gtk_widget_set_sensitive (dlg->add_word_button, FALSE);
 	gtk_widget_set_sensitive (dlg->suggestions_list, FALSE);
 }
-
 
