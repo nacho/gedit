@@ -27,6 +27,9 @@
 #include "main.h"
 #include "gE_prefs.h"
 #include "menus.h"
+#if PLUGIN_TEST
+#include "plugin.h"
+#endif
 
 gE_window *main_window;
 char home[STRING_LENGTH_MAX];
@@ -39,7 +42,13 @@ void  destroy_window (GtkWidget *widget, GtkWidget **window)
  /*  *window = NULL;
    gtk_exit(0);*/
   file_close_cmd_callback (widget, main_window);
-   
+#if PLUGIN_TEST
+  if( main_window->hello )
+    {
+      plugin_finish( main_window->hello );
+      main_window->hello = 0;
+    }
+#endif
 }
 
 

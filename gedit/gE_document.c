@@ -25,6 +25,7 @@
 #include <glib.h>
 #if PLUGIN_TEST
 #include "plugin.h"
+#include "gE_plugin_api.h"
 #endif
 #include "main.h"
 #include "menus.h"
@@ -144,6 +145,10 @@ GnomeUIInfo gedit_help_menu []= {
 GnomeUIInfo gedit_plugins_menu []= {
   { GNOME_APP_UI_ITEM, N_("Hello World"), NULL, send_hello, NULL, NULL,
     GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
   { GNOME_APP_UI_ENDOFINFO}
 };
 #endif
@@ -186,7 +191,7 @@ gE_window *gE_window_new()
   
 #if PLUGIN_TEST
   window->hello = plugin_new( "/usr/local/bin/hello-plugin" );
-  g_print( "Starting plugin with pid #%d", window->hello->pid );
+  g_print( "Starting plugin with pid #%d\n", window->hello->pid );
 #endif
 
 #ifdef WITHOUT_GNOME
@@ -429,6 +434,30 @@ void gE_show_version()
 #if PLUGIN_TEST
 void send_hello( GtkWidget *widget, gpointer data )
 {
-  plugin_send( main_window->hello, "Hello World\n", 12 );
+  plugin_send( main_window->hello, N_( "Hello World\n" ), 12 );
+}
+
+void start_diff( GtkWidget *widget, gpointer data )
+{
+  plugin_callback_struct callbacks =
+  { gE_plugin_create,
+    gE_plugin_append,
+    gE_plugin_show,
+    gE_plugin_current,
+    gE_plugin_filename};
+  plugin *plug = plugin_new( "/usr/local/bin/diff-plugin" );
+  plugin_register( plug, &callbacks );
+}
+
+void start_cvsdiff( GtkWidget *widget, gpointer data )
+{
+  plugin_callback_struct callbacks =
+  { gE_plugin_create,
+    gE_plugin_append,
+    gE_plugin_show,
+    gE_plugin_current,
+    gE_plugin_filename};
+  plugin *plug = plugin_new( "/usr/local/bin/cvsdiff-plugin" );
+  plugin_register( plug, &callbacks );
 }
 #endif

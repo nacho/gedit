@@ -24,6 +24,8 @@ typedef struct
   int (*create_callback) ( gchar *title );
   void (*append_callback) ( gint id, gchar *data, gint length );
   void (*show_callback) ( gint id );
+  int (*current_callback) ();
+  gchar * (*filename_callback) ( gint id );
 } plugin_callback_struct;
 
 typedef struct

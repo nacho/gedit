@@ -19,13 +19,15 @@ gedit_SOURCES = 	\
 	gE_files.c	\
 	gE_prefs.c	\
 	gE_init.c	\
-	toolbar.c  \
+	toolbar.c	\
 #	plugin.c        \
+#	gE_plugin_api.c	\
 	gE_prefs.h	\
 	main.h		\
-	toolbar.h  \
+	toolbar.h	\
 #	plugin.h        \
-	menus.h         
+#	gE_plugin_api.h	\
+	menus.h
 
 #	menus.c		\
 

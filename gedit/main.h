@@ -57,6 +57,8 @@ void tab_toggle_cback (GtkWidget *widget, gpointer data);
 #if PLUGIN_TEST
   /* Plugins */
   void send_hello (GtkWidget *widget, gpointer data);
+  void start_diff (GtkWidget *widget, gpointer data);
+  void start_cvsdiff (GtkWidget *widget, gpointer data);
 #endif
 
 /* Auto indent */

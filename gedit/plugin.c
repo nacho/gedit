@@ -68,12 +68,6 @@ plugin *plugin_new( gchar *plugin_name )
   close( toline[0] );
   close( fromline[1] );
   close( dataline[0] );
-#if 0
-  new_plugin->in_call = gdk_input_add( new_plugin->pipe_from,
-				       GDK_INPUT_READ,
-				       callback_function,
-				       new_plugin );
-#endif
   return new_plugin;
 }
 
@@ -110,6 +104,12 @@ void plugin_send_data_int( plugin *the_plugin, gint number)
   write( the_plugin->pipe_data, &number, sizeof( number ) );
 }
 
+void plugin_send_data_with_length( plugin *plug, gchar *buffer, gint length )
+{
+  plugin_send_data_int( plug, length );
+  plugin_send_data( plug, buffer, length );
+}
+
 void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
 {
   read( the_plugin->pipe_from, buffer, length );
@@ -129,12 +129,19 @@ typedef struct
 static void plugin_get_more( gpointer data, gint source, GdkInputCondition condition )
 {
   partly_read *partly = (partly_read *) data;
+  int count;
 
-  partly->sofar += read( partly->plug->pipe_from, partly->buff + partly->sofar, partly->length - partly->sofar );
+  partly->sofar += (count = read( partly->plug->pipe_from, partly->buff + partly->sofar, partly->length - partly->sofar ) );
   if( partly->length - partly->sofar == 0 )
     {
       gdk_input_remove( partly->incall );
       partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+      g_free( partly->buff );
+      g_free( partly );
+    }
+  else if( count == 0 )
+    {
+      gdk_input_remove( partly->incall );
       g_free( partly->buff );
       g_free( partly );
     }
@@ -173,15 +180,18 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 4:
-      if ( plug->callbacks.create_callback )
-	plugin_send_data_int( plug, plug->callbacks.create_callback( "diff file" ) );
-      else
-	plugin_send_data_int( plug, 0 );
+      if ( plug->callbacks.show_callback )
+	plug->callbacks.show_callback( *( (int *) buffer ) );
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 5:
-      if ( plug->callbacks.show_callback )
-	plug->callbacks.show_callback( *( (int *) buffer ) );
+      if ( plug->callbacks.filename_callback )
+	{
+	  char *filename = plug->callbacks.filename_callback( *( (int *) buffer ) );
+	  plugin_send_data_with_length( plug, filename, strlen( filename ) );
+	}
+      else
+	plugin_send_data_with_length( plug, "abcd", 4 );
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     }
@@ -195,9 +205,23 @@ static void process_command( plugin *plug, gchar *buffer, int length, gpointer d
       plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 1 ) );
       break;
     case 'n':
-      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 4 ) );
+      if ( plug->callbacks.create_callback )
+	plugin_send_data_int( plug, plug->callbacks.create_callback( "diff file" ) );
+      else
+	plugin_send_data_int( plug, 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 's':
+      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 4 ) );
+      break;
+    case 'c':
+      if ( plug->callbacks.current_callback )
+	plugin_send_data_int( plug, plug->callbacks.current_callback() );
+      else
+	plugin_send_data_int( plug, 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 'f':
       plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 5 ) );
       break;
     }
