@@ -43,6 +43,7 @@
 #include "gedit-view.h"
 #include "gedit-file.h"
 #include "gedit-print.h"
+#include "gedit-prefs.h"
 #include "dialogs/gedit-dialogs.h"
 #include "dialogs/gedit-preferences-dialog.h"
 
@@ -372,6 +373,8 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 	GtkWidget *dlg;
 	gint ret;
 
+	gedit_debug (DEBUG_COMMANDS, "");
+
 	dlg = gedit_preferences_dialog_new (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
 
@@ -402,35 +405,45 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 void 
 gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	/* FIXME */
-	static const char *authors[] = { "Chema Celorio", 
-					 "Paolo Maggi", 
-					  NULL };
+	/* TODO: add logo */
+
+	static GtkWidget *about = NULL;
+
+	gchar *authors[] = {
+		"Chema Celorio",
+		"Paolo Maggi",
+		NULL
+	};
 	
-	static const char *documentors[] = { "Eric Baudais", NULL };
+	gchar *documenters[] = {
+		"Eric Baudais",
+		NULL
+	};
 	
-	GtkWidget *about_box = NULL;
-	
+	/* Translator credits */
+	gchar *translator_credits = _("");
+
 	gedit_debug (DEBUG_COMMANDS, "");
+
+	if (about != NULL)
+	{
+		gdk_window_show(about->window);
+		gdk_window_raise(about->window);
+		return;
+	}
 	
-	g_print ("****** About box in gedit2 is completely broken. Please don't report bugs about it.\n");
-
-	about_box = gnome_about_new ("gedit",
-				VERSION,
-				"(c) 1998-2000 Alex Robert and Ewan Lawrence\n"
-				"(c) 2000-2001 Chema Celorio and Paolo Maggi",
-				"gedit is a small and lightweight text editor for GNOME",
-				authors,
-				documentors,
-				NULL /*"Translation credits"*/,
-				NULL /* logo pixbuf */);
-
-
-	gtk_window_set_transient_for (GTK_WINDOW (about_box),
-			      GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
-
-	gtk_dialog_run (GTK_DIALOG (about_box));
-
-	gtk_widget_destroy (about_box);
+	about = gnome_about_new (_("gedit"), VERSION,
+				"(C) 1998-2000 Alex Robert and Evan Lawrence\n"
+				"(C) 2000-2001 Chema Celorio and Paolo Maggi",
+				_("A small and lightweight text editor for Gnome"),
+				(const char **)authors,
+				(const char **)documenters,
+				(const char *)translator_credits,
+				NULL);
+	
+	gtk_signal_connect(GTK_OBJECT(about), "destroy",
+			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), &about);
+	
+	gtk_widget_show (about);
 }
 
