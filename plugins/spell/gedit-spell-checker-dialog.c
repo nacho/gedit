@@ -660,8 +660,6 @@ add_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
-
-		return;
 	}
 
 	word = g_strdup (dlg->mispelled_word);
@@ -702,8 +700,6 @@ ignore_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
-
-		return;
 	}
 
 	word = g_strdup (dlg->mispelled_word);
@@ -736,8 +732,6 @@ change_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
-
-		return;
 	}
 	
 	word = g_strdup (dlg->mispelled_word);
@@ -771,8 +765,6 @@ change_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	{
 		g_warning ("%s", error->message);
 		g_error_free (error);
-
-		return;
 	}
 	
 	word = g_strdup (dlg->mispelled_word);

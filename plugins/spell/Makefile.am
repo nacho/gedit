@@ -24,13 +24,12 @@ libspell_la_SOURCES = spell.c 				\
 	gedit-spell-checker.h				\
 	gedit-spell-checker-dialog.c			\
 	gedit-spell-checker-dialog.h			\
-	$(BUILT_SOURCES)	
-
-#	preload.c					\
-#	preload.h					\
+	$(BUILT_SOURCES)				\
+	preload.c					\
+	preload.h					
 
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
-libspell_la_LIBADD =  -l$(PSPELL_LIBS)
+libspell_la_LIBADD =  $(PSPELL_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = spell-checker.glade2

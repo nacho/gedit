@@ -43,7 +43,7 @@ if pspell-config version > /dev/null 2>&1; then
 	else
 		AC_MSG_RESULT([found ($pspell_ver)])
 		AC_CHECK_HEADER(pspell/pspell.h,
-			PSPELL_LIBS="pspell"
+			PSPELL_LIBS="-lpspell"
 			SPELL_PLUGIN_DIR="spell"
 			AC_SUBST(SPELL_PLUGIN_DIR))
 	fi
@@ -51,13 +51,13 @@ else
 	AC_MSG_RESULT([not found])
 fi
 
-#AC_CHECK_LIB(aspell,main,
-#	     AC_CHECK_LIB(pspell_aspell,main,
-#             PSPELL_LIBS="$PSPELL_LIBS -lpspell_aspell -laspell"
-#             AC_DEFINE(HAVE_ASPELL_MODULE),,-laspell $PSPELL_LIBS),,)
-#AC_CHECK_LIB(pspell_ispell,main,
-#             PSPELL_LIBS="$PSPELL_LIBS -lpspell_ispell"
-#             AC_DEFINE(HAVE_ISPELL_MODULE),,$PSPELL_LIBS)
+AC_CHECK_LIB(aspell,main,
+	     AC_CHECK_LIB(pspell_aspell,main,
+             PSPELL_LIBS="$PSPELL_LIBS -lpspell_aspell -laspell"
+             AC_DEFINE(HAVE_ASPELL_MODULE),,-laspell $PSPELL_LIBS),,)
+AC_CHECK_LIB(pspell_ispell,main,
+             PSPELL_LIBS="$PSPELL_LIBS -lpspell_ispell"
+             AC_DEFINE(HAVE_ISPELL_MODULE),,$PSPELL_LIBS)
 
 AC_SUBST(PSPELL_LIBS)
 AC_SUBST(CFLAGS)
