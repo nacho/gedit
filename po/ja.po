@@ -1,23 +1,23 @@
 # gedit ja.po.
-# Copyright (C) 1999,2000,2002-2003 Free Software Foundation, Inc.
+# Copyright (C) 1999,2000,2002-2004 Free Software Foundation, Inc.
 # Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999
 # Yuusuke Tahara <tahara@gnome.gr.jp>
 # Yukihiro Nakai <nakai@gnome.gr.jp>
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
-# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003.
+# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
-"POT-Creation-Date: 2004-01-15 18:27+0100\n"
-"PO-Revision-Date: 2003-10-30 00:48+0900\n"
-"Last-Translator: KAMAGASASAKO Masatoshi <emerald@gnome.gr.jp>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-17 19:26+0900\n"
+"PO-Revision-Date: 2004-01-17 19:23+0900\n"
+"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -165,8 +165,8 @@ msgid ""
 "document. Otherwise, gedit will print line numbers every such number of "
 "lines."
 msgstr ""
-"この値が 0 の場合は文書を印刷する時に行番号を挿入しません。それ以外の場合は "
-"gedit は行番号を印刷します。"
+"この値が 0 の場合はドキュメントを印刷する時に行番号を挿入しません。それ以外の"
+"場合は gedit は行番号を印刷します。"
 
 #: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
@@ -274,7 +274,7 @@ msgstr ""
 #: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
-msgstr "文書を印刷する際の本文に使用するフォントを指定します。"
+msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
 
 #: data/gedit.schemas.in.h:41
 msgid ""
@@ -289,8 +289,8 @@ msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
-"文書を印刷する際のページ・ヘッダに使用するフォントを指定します。これは \"ヘッ"
-"ダの印刷\" オプションが有効の場合のみ効果があります。"
+"ドキュメントを印刷する際のページ・ヘッダに使用するフォントを指定します。これ"
+"は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
 
 #: data/gedit.schemas.in.h:43
 msgid ""
@@ -354,7 +354,7 @@ msgid ""
 msgstr ""
 "ファイルを保存する際に使用するエンコーディングを指定します。可能な値は強制的"
 "に UTF-8 で保存する \"GEDIT_SAVE_ALWAYS_UTF8\"、現在使用しているロケールのエ"
-"ンコーディングで保存するために文書を変換しようとする "
+"ンコーディングで保存するためにドキュメントを変換しようとする "
 "\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\"、元のファイルのエンコーディング (新"
 "規ファイルなら UTF-8) を使って保存しようとする "
 "\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\"、そして元のファイルのエン"
@@ -419,7 +419,7 @@ msgstr "強調表示を有効にするかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:62
 msgid "Whether gedit should include a document header when printing documents."
-msgstr "文書を印刷する際に文書のヘッダを含めるかどうかを指定します。"
+msgstr "ドキュメントを印刷する際にヘッダを含めるかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:63
 msgid "Whether gedit should insert spaces instead of tabs."
@@ -427,7 +427,7 @@ msgstr "タブ文字の代わりに空白文字を使うかどうかを指定し
 
 #: data/gedit.schemas.in.h:64
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr "文書を印刷する際に強調表示を印刷するかどうかを指定します。"
+msgstr "ドキュメントを印刷する際に強調表示も印刷するかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:65
 msgid ""
@@ -466,30 +466,29 @@ msgid "Activate %s"
 msgstr "%s をアクティブにします"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:1
-#, fuzzy
 msgid ""
 "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
 "changes. </span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">マネージャ</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">変更を保存していない X 個のドキュメント"
+"があります。</span>"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:2
 msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
+msgstr "ドキュメントを保存しないと、全ての変更が失われます。"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:653
-#, fuzzy
 msgid "S_elect the documents you want to save:"
-msgstr "使用するタグのグループを選択して下さい"
+msgstr "保存するドキュメントを選択して下さい(_E):"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:4
 msgid "Save _None"
-msgstr ""
+msgstr "何も保存しない(_N)"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:5
-#, fuzzy
 msgid "_Save Selected"
-msgstr "全て保存(_S)"
+msgstr "選択したものを保存(_S)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:141
 msgid "Do_n't save"
@@ -503,13 +502,13 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "保存しないと、%ld秒前の変更が完全に失われます。"
+msgstr[1] "保存しないと、%ld秒前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:369
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
-msgstr ""
+msgstr "保存しないと、1分前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:375
 #, c-format
@@ -519,8 +518,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "保存しないと、1分 %ld秒前の変更が完全に失われます。"
+msgstr[1] "保存しないと、1分 %ld秒前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:385
 #, c-format
@@ -530,13 +529,13 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "保存しないと、%ld分前の変更が完全に失われます。"
+msgstr[1] "保存しないと、%ld分前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:400
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
-msgstr ""
+msgstr "保存しないと、1時間前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:406
 #, c-format
@@ -546,8 +545,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "保存しないと、1時間 %d分前の変更が完全に失われます。"
+msgstr[1] "保存しないと、1時間 %d分前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:421
 #, c-format
@@ -555,24 +554,25 @@ msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "保存しないと、%d時間前の変更が完全に失われます。"
+msgstr[1] "保存しないと、%d時間前の変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:465
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "閉じる前にドキュメント \"%s\" の変更を保存しますか？"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:639
 #, c-format
 msgid ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr ""
+"変更を保存していないドキュメントが %d 個あります。閉じる前にそれらを保存しま"
+"すか？"
 
-#. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:670
 msgid "If you don't save, all your changes will be definitively lost."
-msgstr ""
+msgstr "保存しないと、全ての変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -607,11 +607,11 @@ msgid "Find"
 msgstr "検索"
 
 #: gedit/dialogs/gedit-dialog-replace.c:1130
-#, fuzzy, c-format
+#, c-format
 msgid "Found and replaced %d occurrence."
 msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "%d ヶ所を検出して置換しました。"
-msgstr[1] "%d ヶ所を検出して置換しました。"
+msgstr[0] "%d ヶ所で検索と置換を行いました。"
+msgstr[1] "%d ヶ所で検索と置換を行いました。"
 
 #: gedit/dialogs/gedit-dialog-uri.c:91
 msgid "Open Location"
@@ -791,7 +791,7 @@ msgstr "<b>テキストの折り返し</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<b>Undo</b>"
-msgstr "<b>取り消し</b>"
+msgstr "<b>元に戻す</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
@@ -803,7 +803,7 @@ msgstr "太字"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
-msgstr "保存する前にファイルのバックアップ・コピーを作成する(_B)"
+msgstr "保存する前にバックアップを生成する(_B)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "D_isplay right margin"
@@ -812,7 +812,7 @@ msgstr "右マージンを表示する(_I)"
 #: gedit/dialogs/gedit-preferences.glade2.h:15
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
-msgstr "単語を 2 行以上に分割しない(_S)"
+msgstr "単語を二行以上に分割しない(_S)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "Editor"
@@ -845,31 +845,31 @@ msgstr "斜体"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Normal _text color:"
-msgstr "ノーマルなテキストの色(_T):"
+msgstr "標準テキストの色(_T):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick a color"
-msgstr "色を取得します"
+msgstr "色の取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the background color"
-msgstr "背景色を取得します"
+msgstr "背景色の取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Pick the editor font"
-msgstr "エディタのフォントを取得します"
+msgstr "エディタで使用するフォントの取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick the normal text color"
-msgstr "ノーマルなテキスト色を取得します"
+msgstr "標準テキストの色の取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the selected text color"
-msgstr "テキストを選択した際の色を取得します"
+msgstr "選択したテキストの色の取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the selection color"
-msgstr "選択範囲の色を取得します"
+msgstr "選択範囲の色の取得"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Plugins"
@@ -885,7 +885,7 @@ msgstr "選択範囲の色(_L):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Selecte_d text color:"
-msgstr "選択されたテキストの色(_D):"
+msgstr "選択したテキストの色(_D):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Strikethrough"
@@ -909,7 +909,7 @@ msgstr "表示"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "_Autosave files every"
-msgstr "すべてのファイルを自動保存する(_A)"
+msgstr "ファイルを自動的に保存する間隔(_A)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Background color:"
@@ -917,7 +917,7 @@ msgstr "背景色(_B): "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_Background:"
-msgstr "背景(_B):"
+msgstr "背景色(_B):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Display line numbers"
@@ -933,11 +933,11 @@ msgstr "文法の強調表示を有効にする(_E)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Foreground:"
-msgstr "前景(_F):"
+msgstr "前景色(_F):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Limit to"
-msgstr "限界(_L)"
+msgstr "制限する回数(_L)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Reset to Default "
@@ -953,7 +953,7 @@ msgstr "タブの幅(_T):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
-msgstr "無制限の取り消し(_U)"
+msgstr "制限しない"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Use default theme font"
@@ -961,7 +961,7 @@ msgstr "デフォルト・テーマのフォントを使う(_U)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_minutes"
-msgstr "分(_M)"
+msgstr "分ごと(_M)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "act_ions"
@@ -1160,7 +1160,7 @@ msgstr "置換後の文字列(_W): "
 
 #: gedit/dialogs/replace.glade2.h:7
 msgid "Search _backwards"
-msgstr "前へ検索(_B)"
+msgstr "前方へ検索する(_B)"
 
 #: gedit/dialogs/replace.glade2.h:8
 msgid "_Match case"
@@ -1172,7 +1172,7 @@ msgstr "検索する文字列(_S): "
 
 #: gedit/dialogs/replace.glade2.h:10
 msgid "_Wrap around"
-msgstr "折り返す(_W)"
+msgstr "折り返しも対象にする(_W)"
 
 #: gedit/dialogs/uri.glade2.h:2
 msgid "Ch_aracter coding:"
@@ -1180,7 +1180,7 @@ msgstr "文字のエンコーディング(_A):"
 
 #: gedit/dialogs/uri.glade2.h:3
 msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "開くファイルの格納場所 (URI) を入力して下さい:"
+msgstr "開くファイルの格納場所 (URI) を入力して下さい(_L):"
 
 #: gedit/dialogs/uri.glade2.h:4
 msgid "Open from URI"
@@ -1392,28 +1392,22 @@ msgid "Thai"
 msgstr "タイ語"
 
 #: gedit/gedit-file-selector-util.c:162
-#, fuzzy, c-format
+#, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr "ファイル \"%s\" は既に存在します。"
+msgstr "\"%s\" という名前のファイルが既に存在しています。\n"
 
 #: gedit/gedit-file-selector-util.c:163
-#, fuzzy
 msgid "Do you want to replace it with the one you are saving?"
-msgstr ""
-"\"%s\" という名前のファイルが既に存在しています。\n"
-"このファイルで上書きしてもよろしいですか？"
+msgstr "このファイルで上書きしてもよろしいですか？"
 
 #: gedit/gedit-file-selector-util.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "ファイル \"%s\" は既に存在します。"
+msgstr "ファイル \"%s\" は読み込み専用です。\n"
 
 #: gedit/gedit-file-selector-util.c:173
-#, fuzzy
 msgid "Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"ファイル \"%s\" は読み込み専用です。\n"
-"このファイルで上書きしてもよろしいですか？"
+msgstr "このファイルで上書きしてみますか？"
 
 #: gedit/gedit-file-selector-util.c:445
 msgid "Ch_aracter Coding:"
@@ -1436,19 +1430,19 @@ msgid "Open File..."
 msgstr "ファイルを開く..."
 
 #: gedit/gedit-file.c:264 gedit/gedit-file.c:413
-#, fuzzy, c-format
+#, c-format
 msgid "Saving document \"%s\"..."
-msgstr "ファイル '%s' を保存しています..."
+msgstr "ドキュメント \"%s\" を保存しています..."
 
 #: gedit/gedit-file.c:292 gedit/gedit-file.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been saved."
-msgstr "ドキュメントは保存されていません。"
+msgstr "ドキュメント \"%s\" は保存されていません。"
 
 #: gedit/gedit-file.c:306 gedit/gedit-file.c:426
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been saved."
-msgstr "ドキュメントは保存されていません。"
+msgstr "ドキュメント \"%s\" は保存されました。"
 
 #: gedit/gedit-file.c:392
 msgid "Save as..."
@@ -1457,7 +1451,7 @@ msgstr "別名で保存..."
 #: gedit/gedit-file.c:592
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr ""
+msgstr "保存していない変更をドキュメント \"%s\" へ戻しますか？"
 
 #: gedit/gedit-file.c:601
 #, c-format
@@ -1467,13 +1461,13 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:610
 msgid ""
 "Changes made to the document in the last minute will be definitively lost."
-msgstr ""
+msgstr "1分前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:616
 #, c-format
@@ -1483,8 +1477,8 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:626
 #, c-format
@@ -1494,13 +1488,13 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:641
 msgid ""
 "Changes made to the document in the last hour will be definitively lost."
-msgstr ""
+msgstr "1時間前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:647
 #, c-format
@@ -1510,8 +1504,8 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:662
 #, c-format
@@ -1519,32 +1513,32 @@ msgid ""
 "Changes made to the document in the last %d hour will be definitively lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "戻す(_R)"
 
 #: gedit/gedit-file.c:730
-#, fuzzy, c-format
+#, c-format
 msgid "Error reverting the document \"%s\"."
-msgstr "ファイル \"%s\" を元に戻せませんでした。"
+msgstr "ドキュメント \"%s\" へ戻す際にエラーが発生しました。"
 
 #: gedit/gedit-file.c:737
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been reverted."
-msgstr "ドキュメントを戻していません。"
+msgstr "ドキュメント \"%s\" は戻していません。"
 
 #: gedit/gedit-file.c:741
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been reverted."
-msgstr "ドキュメントを戻していません。"
+msgstr "ドキュメント \"%s\" を戻しました。"
 
 #: gedit/gedit-file.c:769
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting the document \"%s\"..."
-msgstr "ファイル '%s' を戻しています..."
+msgstr "ドキュメント \"%s\" を戻しています..."
 
 #: gedit/gedit-file.c:904
 msgid "Could not read data from stdin."
@@ -1556,39 +1550,37 @@ msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "ファイル \"%s\" は存在しません。作成してもよろしいですか？"
 
 #: gedit/gedit-file.c:1077
-#, fuzzy
 msgid "Reverting file:"
-msgstr "ファイル '%s' を戻しています..."
+msgstr "戻すファイル:"
 
 #: gedit/gedit-file.c:1081
-#, fuzzy
 msgid "Loading file:"
-msgstr "%d 個のファイルを読み込んでいます..."
+msgstr "読み込むファイル:"
 
 #: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
 #, c-format
 msgid "Error loading file \"%s\""
-msgstr ""
+msgstr "ファイル \"%s\" を読み込む際にエラー"
 
 #: gedit/gedit-file.c:1271
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file \"%s\""
 msgstr "ファイル '%s' を読み込みました"
 
 #: gedit/gedit-file.c:1348
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
-msgstr[0] "%i 個のファイルを読み込みました"
-msgstr[1] "%i 個のファイルを読み込みました"
+msgstr[0] "%d 個のファイルを読み込みました"
+msgstr[1] "%d 個のファイルを読み込みました"
 
 #: gedit/gedit-file.c:1382
-#, fuzzy, c-format
+#, c-format
 msgid "Loading file \"%s\"..."
-msgstr "%d 個のファイルを読み込んでいます..."
+msgstr "ファイル \"%s\" を読み込んでいます..."
 
 #: gedit/gedit-file.c:1529
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "%d 個のファイルを読み込んでいます..."
@@ -1614,16 +1606,15 @@ msgstr "Unicode (UTF-8)"
 
 #: gedit/gedit-mdi-child.c:741
 msgid "Name:"
-msgstr ""
+msgstr "名前:"
 
 #: gedit/gedit-mdi-child.c:742
 msgid "MIME Type:"
-msgstr ""
+msgstr "MIME 型:"
 
 #: gedit/gedit-mdi-child.c:743
-#, fuzzy
 msgid "Encoding:"
-msgstr "エンコーディング(_E)"
+msgstr "エンコーディング:"
 
 #. Translators: %s is a URI
 #: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
@@ -1637,7 +1628,7 @@ msgstr "最近使用したファイルを開きます"
 
 #: gedit/gedit-mdi.c:1291
 msgid "(modified)"
-msgstr "(修正しました)"
+msgstr "(変更しました)"
 
 #: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
@@ -1968,7 +1959,7 @@ msgstr "文字列を検索し置換します"
 
 #: gedit/gedit-ui.xml.h:57
 msgid "Search for text"
-msgstr "検索する文字列"
+msgstr "文字列を検索します"
 
 #: gedit/gedit-ui.xml.h:58
 msgid "Search forwards for the same text"
@@ -2011,7 +2002,7 @@ msgstr "ツールバーにある重要なアイコンの横にラベルを表示
 
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
-msgstr "重要なアイコンのテキスト(_E)"
+msgstr "重要なアイコンのラベル(_E)"
 
 #: gedit/gedit-ui.xml.h:68
 msgid "Undo"
@@ -2135,7 +2126,7 @@ msgstr "ステータスバー(_S)"
 
 #: gedit/gedit-ui.xml.h:100
 msgid "_Text for All Icons"
-msgstr "全てのアイコンにテキスト(_T)"
+msgstr "全てのアイコンにラベル(_T)"
 
 #: gedit/gedit-ui.xml.h:101
 msgid "_Toolbar"
@@ -2333,7 +2324,7 @@ msgstr ""
 "して下さい。"
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
@@ -2816,7 +2807,6 @@ msgstr "作業フォルダ(_W):"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: SHELL 出力プラグイン"
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "ソート(_O)..."
@@ -3220,148 +3210,3 @@ msgstr "選択したテキストをクリップボードにコピーします"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "テキストのコピー(_C)"
-
-#~ msgid ""
-#~ "Could not find '%s'.\n"
-#~ "\n"
-#~ "Please, reinstall gedit"
-#~ msgstr ""
-#~ "'%s' が見つかりませんでした。\n"
-#~ "\n"
-#~ "gedit を再インストールして下さい。"
-
-#~ msgid ""
-#~ "Could not find the required widgets inside '%s'.\n"
-#~ "\n"
-#~ "Please, reinstall gedit."
-#~ msgstr ""
-#~ "%s の中に要求したウィジットが見つかりませんでした。\n"
-#~ "\n"
-#~ "gedit を再インストールして下さい。"
-
-#~ msgid "Could not find '"
-#~ msgstr "glade ファイルが見つかりませんでした:"
-
-#~ msgid ""
-#~ "gedit-preferences.glade2'.\n"
-#~ "\n"
-#~ "Reinstall gedit."
-#~ msgstr ""
-#~ "page-setup-dialog.glade2'\n"
-#~ "\n"
-#~ "gedit を再インストールして下さい。"
-
-#~ msgid "Could not find the required widgets inside '"
-#~ msgstr "要求したウィジットが見つかりませんでした:"
-
-#~ msgid "It is not possible to revert an Untitled document"
-#~ msgstr "\"名前なし\" のドキュメントを元には戻せません"
-
-#~ msgid "File '%s' saved."
-#~ msgstr "ファイル '%s' を保存しました。"
-
-#~ msgid ""
-#~ "Do you want to revert to saved the document '%s'?\n"
-#~ "\n"
-#~ "You will not be able to undo this operation."
-#~ msgstr ""
-#~ "保存済みのドキュメント \"%s\" に戻してもよろしいですか？\n"
-#~ "実行後にこの処理を取り消すことはできません。"
-
-#~ msgid "File '%s' reverted."
-#~ msgstr "ファイル '%s' は戻されました。"
-
-#~ msgid ""
-#~ "Do you want to save the changes you made to the document \"%s\"? \n"
-#~ "\n"
-#~ "Your changes will be lost if you don't save them."
-#~ msgstr ""
-#~ "ドキュメント \"%s\" の変更を保存してもよろしいですか？\n"
-#~ "保存しない場合は変更が失われてしまいます。"
-
-#~ msgid "_Don't quit"
-#~ msgstr "終了しない(_D)"
-
-#~ msgid "_Don't close"
-#~ msgstr "閉じない(_D)"
-
-#~ msgid "Tabs"
-#~ msgstr "タブ"
-
-#~ msgid "Wrap Mode"
-#~ msgstr "折り返しモード"
-
-#~ msgid "Line Numbers"
-#~ msgstr "行番号"
-
-#~ msgid "Manager"
-#~ msgstr "マネージャ"
-
-#~ msgid "Cat_egories:"
-#~ msgstr "カテゴリ(_E):"
-
-#~ msgid "Categories"
-#~ msgstr "カテゴリ"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">自動インデント</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">フォントと色</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">行番号</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">保存</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">タブ</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">取り消し</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">折り返しモード</span>"
-
-#~ msgid "Fonts & Colors"
-#~ msgstr "フォントと色"
-
-#~ msgid "LOGO"
-#~ msgstr "LOGO"
-
-#~ msgid "Line numbers"
-#~ msgstr "行番号"
-
-#~ msgid "Plugin manager"
-#~ msgstr "プラグイン・マネージャ"
-
-#~ msgid "Set _tabs width equivalent to"
-#~ msgstr "タブ幅(_T):"
-
-#~ msgid "Set limit on _undo actions to"
-#~ msgstr "元に戻せる回数(_U):"
-
-#~ msgid "Wrap mode"
-#~ msgstr "折り返しモード"
-
-#~ msgid "character(s)"
-#~ msgstr "文字"
-
-#~ msgid "About selected plugin"
-#~ msgstr "選択したプラグインの情報を表示します"
-
-#~ msgid "Configure the selected plugin"
-#~ msgstr "選択したプラグインを設定します"
-
-#~ msgid "Replace a string"
-#~ msgstr "文字列を置換します"
-
-#~ msgid "Search again for the same string"
-#~ msgstr "同じ文字列を再度検索します"
-
-#~ msgid "Tag Groups Combo"
-#~ msgstr "タグのグループ・コンボ"
-
-#~ msgid "Tags Name List"
-#~ msgstr "タグ名の一覧"
