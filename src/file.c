@@ -647,6 +647,11 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	default:
 		g_return_if_fail (FALSE);
 	}
+	
+	/* We need to set the revert menu item sensitivity if we where saving
+	   as from an Untitled doc */
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+
 }
 
 

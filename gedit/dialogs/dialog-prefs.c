@@ -100,17 +100,6 @@ destroy_cb (void)
 }
 
 static void
-help_cb (void)
-{
-	GnomeHelpMenuEntry help_entry = { NULL, "properties.html" };
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	help_entry.name = gnome_app_id;
-	gnome_help_display (NULL, &help_entry);
-}
-
-static void
 apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 {
 	GtkStyle *style;
@@ -146,7 +135,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
 #endif
 
-#if 0 /* We are leaking memory here but it is crashing, I will continue tomorrow. */
+#if 0 /* FIXME We are leaking memory here but it is crashing, I will continue tomorrow. */
 	g_print("Font : %s\n:", settings->font);
 	if (settings->font)
 		g_free (settings->font);
@@ -200,7 +189,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	gtk_style_unref (style);
 
-
+	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 	temp_mdi_mode = gtk_option_menu_get_active_index (mdimode);
 	temp_mdi_mode = temp_mdi_mode != 3 ? temp_mdi_mode : GNOME_MDI_DEFAULT_MODE;
 
@@ -213,6 +202,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	{
 		gedit_window_refresh_all (FALSE);
 	}
+	
 
 	gedit_prefs_save_settings ();
 
@@ -349,10 +339,10 @@ prepare_documents_page (GladeXML *gui)
 {
 	gedit_debug (DEBUG_PREFS, "");
 	
-	mdimode = glade_xml_get_widget (gui, "mdimode");
-	tabpos = glade_xml_get_widget (gui, "tabpos");
-	undo_levels = glade_xml_get_widget (gui, "undo_levels");
-	undo_levels_label = glade_xml_get_widget (gui, "undo_levels_label");
+	mdimode                  = glade_xml_get_widget (gui, "mdimode");
+	tabpos                   = glade_xml_get_widget (gui, "tabpos");
+	undo_levels              = glade_xml_get_widget (gui, "undo_levels");
+	undo_levels_label        = glade_xml_get_widget (gui, "undo_levels_label");
 	undo_levels_spin_button  = glade_xml_get_widget (gui, "undo_levels_spin_button");
 
 	if ( !mdimode ||
@@ -545,19 +535,19 @@ gedit_prefs_notebook_switch_page (GtkWidget *widget, gpointer data)
 static void
 dialog_prefs_impl (GladeXML *gui)
 {
-	GtkWidget *notebook;
-	
+	static GnomeHelpMenuEntry help_entry = { NULL, "prefs.html" };
+
 	gedit_debug (DEBUG_PREFS, "");
-	
+
 	propertybox = glade_xml_get_widget (gui, "propertybox");
-	/*
+#ifdef USE_NOTEBOOK	
 	notebook    = glade_xml_get_widget (gui, "notebook");
-	*/
+#endif
 
 	g_return_if_fail (propertybox != NULL);
-	/*
+#ifdef USE_NOTBEOOK	
 	g_return_if_fail (notebook    != NULL);
-	*/
+#endif	
 	
 	/* glade won't let me set the title of the propertybox */
 	gtk_window_set_title (GTK_WINDOW (propertybox), _("gedit: Preferences"));
@@ -575,15 +565,15 @@ dialog_prefs_impl (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (destroy_cb), NULL);
 	gtk_signal_connect (GTK_OBJECT (propertybox),"delete_event",
 			    GTK_SIGNAL_FUNC (gtk_false), NULL);
+
+	help_entry.name = gnome_app_id;
 	gtk_signal_connect (GTK_OBJECT (propertybox),"help",
-			    GTK_SIGNAL_FUNC (help_cb), NULL);
-	/*
+			    GTK_SIGNAL_FUNC (gnome_help_pbox_goto), &help_entry);
+#ifdef USE_NOTEBBOK	
 	gtk_signal_connect (GTK_OBJECT (notebook),"switch_page",
 			    GTK_SIGNAL_FUNC (gedit_prefs_notebook_switch_page), NULL);
-	*/
+#endif
 
-
-	
 	gnome_dialog_set_parent (GNOME_DIALOG (propertybox),
 				 gedit_window_active());
 

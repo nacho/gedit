@@ -91,7 +91,7 @@ gedit_plugins_menu_add (GnomeApp *app)
 	/* Add the plugin manager item */
 	menu[0].type = GNOME_APP_UI_ITEM;
 	menu[0].label = g_strdup(_("Manager ..."));
-	menu[0].hint = g_strdup (_("Add/Remove installed plugins"));
+	menu[0].hint  = g_strdup (_("Add/Remove installed plugins"));
 	menu[0].moreinfo = gedit_plugin_manager_create;
 	menu[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
 	
@@ -131,7 +131,8 @@ gedit_plugins_menu_add (GnomeApp *app)
 		g_free (menu [menu_pos].label);
 		menu_pos++;
 	}
-	
+
+	g_free (menu[0].label);
 	g_free (path);
 	g_free (menu);
 

@@ -283,6 +283,17 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 					if (widget)
 						gtk_widget_set_sensitive (widget, sensitivity);
 				}
+				if (sub_ui_info [sub_count].moreinfo == file_revert_cb)
+				{
+					/* We need to check if there are more than 2 views opened */
+					/* The only info we have is *app, and we can't use view_active. */
+					Document *doc;
+					doc = gedit_document_current();
+
+					widget =  sub_ui_info [sub_count].widget;
+					if (widget != NULL && doc != NULL)
+						gtk_widget_set_sensitive (widget, doc->filename!=NULL);
+				}
 				sub_count++;
 			}
 		}

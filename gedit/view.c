@@ -123,6 +123,8 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
 	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
 
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+
 	gedit_debug (DEBUG_VIEW, "end");
 }
 
