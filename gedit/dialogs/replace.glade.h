@@ -5,7 +5,7 @@
  */
 
 gchar *s = N_("Replace");
-gchar *s = N_("Find Next");
+gchar *s = N_("Find");
 gchar *s = N_("Replace");
 gchar *s = N_("Replace All");
 gchar *s = N_("_Search for: ");

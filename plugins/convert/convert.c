@@ -30,6 +30,8 @@
 
 static GtkWidget *from, *to;
 
+void convert_plugin (void);
+
 static void
 destroy_plugin (PluginData *pd)
 {
@@ -40,44 +42,48 @@ static void
 conv_hex (GtkWidget *widget, gpointer data)
 {
 	int start;
-	char value[255];
+	gchar *value;
 
 	start = atoi (gtk_entry_get_text (GTK_ENTRY (from)));
-  
-	sprintf (value,"%X",start);
+  	value = g_strdup_printf ("%X", start);
+	
 	gtk_entry_set_text (GTK_ENTRY(to), value);
+
+	g_free (value);
 }
 
 static void
 conv_oct (GtkWidget *widget, gpointer data)
 {
 	int start;
-	char value[255];
+	gchar *value;
 
 	start = atoi (gtk_entry_get_text( GTK_ENTRY( from ) ));
-  
-	sprintf(value,"%o",start);
+  	value = g_strdup_printf ("%o", start);
 	gtk_entry_set_text(GTK_ENTRY(to), value);
+
+	g_free (value);
 }
 
 static void
 conv_dec (GtkWidget *widget, gpointer data)
 {
 	long start;
-	char value[255];
+	gchar *value;
 
 	start = strtol (gtk_entry_get_text (GTK_ENTRY (from)), NULL, 16);
 
-	sprintf (value,"%d",start);
+	value = g_strdup_printf ("%lui", start);
 	gtk_entry_set_text (GTK_ENTRY(to), value);
+
+	g_free (value);
 }
 
 static void
-close_plugin (GtkWidget *widget, gpointer data)
+destroy_convert_dialog (GtkWidget *widget, gpointer data)
 {
 	gtk_widget_destroy (data);
 }
-
 void
 convert_plugin (void)
 {
@@ -109,17 +115,32 @@ convert_plugin (void)
 
 	gtk_signal_connect (GTK_OBJECT (dectohex),
 			    "clicked",
-			    GTK_SIGNAL_FUNC (conv_hex), NULL);
+			    GTK_SIGNAL_FUNC (conv_hex),
+			    NULL);
 
-	gtk_signal_connect (GTK_OBJECT (dectooct), "clicked", GTK_SIGNAL_FUNC( conv_oct ), NULL );
+	gtk_signal_connect (GTK_OBJECT (dectooct),
+			    "clicked",
+			    GTK_SIGNAL_FUNC( conv_oct ),
+			    NULL );
 
-	gtk_signal_connect (GTK_OBJECT (hextodec), "clicked", GTK_SIGNAL_FUNC( conv_dec ), NULL );
+	gtk_signal_connect (GTK_OBJECT (hextodec),
+			    "clicked",
+			    GTK_SIGNAL_FUNC( conv_dec ),
+			    NULL);
+
+	gtk_signal_connect (GTK_OBJECT (dialog),
+			    "destroy",
+			    GTK_SIGNAL_FUNC (destroy_convert_dialog),
+			    dialog);
 
 	gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
 				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
 				   GTK_OBJECT (dialog));
 
 	gtk_widget_show_all (dialog);
+
+	gtk_object_unref (GTK_OBJECT (gui));
+
 }
 
 gint

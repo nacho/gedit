@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* *- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
  *
@@ -312,12 +312,16 @@ static void
 child_changed_cb (GnomeMDI *mdi, Document *doc)
 {
 	Document *doc2 = gedit_document_current();
+	View *view;
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
 	if (doc2)
 	{
-		gtk_widget_grab_focus (VIEW (mdi->active_view)->text);
+		view = gedit_view_current();
+		if (view==NULL)
+			return;
+		gtk_widget_grab_focus (view->text);
 		gedit_set_title (doc2);
 	}
 }
@@ -334,7 +338,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	
 	fname = GNOME_MDI_CHILD(doc)->name;
 
-	if (!mdi->active_view)
+	if (!gedit_view_current())
 	{
 		return TRUE;
 	}

@@ -31,6 +31,7 @@
 #include "document.h"
 #include "commands.h"
 #include "prefs.h"
+#include "window.h"
 
 enum {
 	CURSOR_MOVED_SIGNAL,
@@ -474,7 +475,7 @@ gedit_view_init (View *view)
 
 	view->split_parent = GTK_WIDGET (view->split_screen)->parent;
 #endif
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (mdi->active_window)));
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (gedit_window_active())));
   	gdk_font_unref (style->font);
 
 	bg = &style->base[0];
@@ -778,7 +779,7 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 	{
 		view = gedit_view_current();
 		buffer = gedit_document_get_buffer (view->doc);
-		child = gnome_mdi_get_child_from_view (mdi->active_view);
+		child = gnome_mdi_get_child_from_view (GTK_WIDGET(view));
 		gnome_mdi_add_view (mdi, child);
 		view = gedit_view_current();
 		gedit_view_insert ( view, 0, buffer, strlen (buffer));
@@ -797,14 +798,20 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 	
-	if (mdi->active_view == NULL)
+	if (gedit_view_current() == NULL)
 		return;
 
+	if (g_list_length (doc->views) < 2)
+	{
+		gnome_app_error (gedit_window_active_app(), _("You can't remove the last view of a document."));
+		return;
+	}
+	 
 	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, VIEW (mdi->active_view));
+	doc->views = g_list_remove (doc->views, gedit_view_current());
 	  
 	/* Now, we can remove the view proper */
-	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
+	gnome_mdi_remove_view (mdi, GTK_WIDGET(gedit_view_current()), FALSE);
 }
 
 static void
@@ -813,14 +820,15 @@ line_pos_cb (GtkWidget *widget, gpointer data)
 	static char col [32];
 
 	return;
+	
 	/* FIXME: Disable by chema for 0.7.0 . this hack is not working */
 	gedit_debug ("", DEBUG_VIEW);
 
-	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
+	sprintf (col, "Column: %d", GTK_TEXT(VIEW(gedit_view_current())->text)->cursor_pos_x/7);
 
 	if (settings->show_status)
 	{
-		GnomeApp *app = gnome_mdi_get_active_window (mdi);
+		GnomeApp *app = gedit_window_active_app();
 		gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
 	}
 }

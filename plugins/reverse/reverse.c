@@ -22,33 +22,28 @@ static void
 reverse (void)
 {
      Document *doc = gedit_document_current();
-     gchar *buf ;
+     gchar *buffer ;
      gchar tmp ;
-     gint len ;
+     gint buffer_length ;
      gint i;
 
      if (!doc)
 	  return;
 
-     /*
-     if ((len=gedit_document_get_buffer_length (doc))==0){
-	  gnome_app_error (gedit_window_active(), _("There isn't any text to reverse."));
-	  return ;
-  }*/
+     buffer_length = gedit_document_get_buffer_length (doc);
+     buffer = gedit_document_get_buffer (doc);
 
-     buf = gedit_document_get_buffer (doc);
-
-     for (i=0; i < ( len / 2 ); i++)
+     for (i=0; i < ( buffer_length / 2 ); i++)
      {
-	  tmp = buf[i];
-	  buf[i] = buf[len - i - 1];
-	  buf[len - i - 1] = tmp;
+	  tmp = buffer [i];
+	  buffer [i] = buffer [buffer_length - i - 1];
+	  buffer [buffer_length - i - 1] = tmp;
      }
      
-     gedit_document_delete_text (doc, 0, len, TRUE);
-     gedit_document_insert_text (doc, buf, 0, FALSE);
+     gedit_document_delete_text (doc, 0, buffer_length, TRUE);
+     gedit_document_insert_text (doc, buffer, 0, TRUE);
      
-     g_free (buf);
+     g_free (buffer);
      
 }
 gint

@@ -108,7 +108,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	
 	if ((tmp_buf = g_new0 (gchar, stats.st_size + 1)) == NULL)
 	{
-		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
+		gnome_app_error (gedit_window_active_app(), _("Could not allocate the required memory."));
 		return 1;
 	}
 
@@ -116,7 +116,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: \n\n%s\n\n"
 						   "Make sure that you have permissions for opening the file."), fname);
-		gnome_app_error (mdi->active_window, errstr);
+		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
 		return 1;
 	}
@@ -136,7 +136,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	recent_add (fname);
-	recent_update (GNOME_APP (mdi->active_window));
+	recent_update (gedit_window_active_app());
 
 	return 0;
 }

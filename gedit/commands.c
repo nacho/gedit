@@ -137,10 +137,10 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 {
 	if (!gedit_document_current())
 		return;
-	
-	gtk_editable_cut_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
-	gnome_app_flash (mdi->active_window, MSGBAR_CUT);
+	gtk_editable_cut_clipboard (gedit_editable_current());
+
+	gnome_app_flash (gedit_window_active_app(), MSGBAR_CUT);
 }
 
 void
@@ -149,9 +149,9 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 		
-	gtk_editable_copy_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
+	gtk_editable_copy_clipboard (gedit_editable_current());
 
-	gnome_app_flash (mdi->active_window, MSGBAR_COPY);
+	gnome_app_flash (gedit_window_active_app(), MSGBAR_COPY);
 }
 	
 void
@@ -160,28 +160,30 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	gtk_editable_paste_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
+	gtk_editable_paste_clipboard (gedit_editable_current());
 
-	gnome_app_flash (mdi->active_window, MSGBAR_PASTE);
+	gnome_app_flash (gedit_window_active_app(), MSGBAR_PASTE);
 }
 
 void
 edit_selall_cb (GtkWidget *widget, gpointer data)
 {
-	if (!gedit_document_current())
+	Document *doc = gedit_document_current();
+	
+	if (doc == NULL)
 		return;
 	
-	gtk_editable_select_region (GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
-				    gtk_text_get_length (GTK_TEXT(VIEW (mdi->active_view)->text)));
+	gtk_editable_select_region (gedit_editable_current(), 0,
+				    gedit_document_get_buffer_length(doc));
 
-	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
+	gnome_app_flash (gedit_window_active_app(), MSGBAR_SELECT_ALL);
 }
 
 
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	View *view = VIEW (mdi->active_view);
+	View *view = gedit_view_current();
 
 	if (!gedit_document_current())
 		return;
@@ -192,7 +194,7 @@ options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	View *view = VIEW (mdi->active_view);
+	View *view = gedit_view_current();
 	
 	if (!gedit_document_current())
 		return;
