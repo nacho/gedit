@@ -1,3 +1,12 @@
+2005-04-02  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* gedit-document.c: (gedit_document_save_as_real):
+	* gedit-print.c: (save_gedit_print_config_to_file): Fixed write () usage.
+	write () returns a ssize_t which is signed.
+	
+	* gedit-mdi.c: (get_dirname): Removed unneeded and unsafe
+	g_return_val_if_fail ().
+
 ==== gedit 2.10.1 ====
 
 2005-03-25  Paolo Borelli  <pborelli@katamail.com>

@@ -126,7 +126,8 @@ save_gedit_print_config_to_file (GnomePrintConfig *gedit_print_config)
 {
 	gint fd;
 	gchar *str;
-	gint bytes;
+	size_t bytes;
+	ssize_t written;
 	gchar *file_name;
 	gboolean res;
 
@@ -148,7 +149,8 @@ save_gedit_print_config_to_file (GnomePrintConfig *gedit_print_config)
 	bytes = strlen (str);
 
 	/* Save the file content */
-	res = (write (fd, str, bytes) == bytes);
+	written = write (fd, str, bytes);
+	res = ((written != -1) && ((size_t)written == bytes));
 
 	close (fd);
 

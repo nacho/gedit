@@ -1755,6 +1755,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	GtkTextIter start_iter;
 	GtkTextIter end_iter;
 	gchar *detected_mime;
+	ssize_t written;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1915,7 +1916,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	}
 
 	/* Save the file content */
-	res = (write (fd, chars, new_len) == new_len);
+	written = write (fd, chars, new_len);
+	res = ((written != -1) && ((gsize)written == new_len));
 
 	if (res && add_cr)
 	{
@@ -1936,7 +1938,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 			}
 			else
 			{
-				res = (write (fd, converted_n, new_len) == new_len);
+				written = write (fd, converted_n, new_len);
+				res = ((written != -1) && ((gsize)written == new_len));
 				g_free (converted_n);
 			}
 		}

@@ -1370,9 +1370,8 @@ get_dirname (const gchar *uri)
 	gchar *str;
 
 	str = g_path_get_dirname (uri);
-	g_return_val_if_fail (str != NULL, ".");
 
-	if ((strlen (str) == 1) && (*str == '.'))
+	if (strcmp (str, ".") == 0)
 	{
 		g_free (str);
 		
