@@ -68,11 +68,15 @@ struct _GeditPrintJobInfo {
 	gdouble			 margin_right;
 	gdouble			 margin_bottom;
 	gdouble			 header_height;
-
+	gdouble			 numbers_width;
+	
 	/* Fonts */
 	GnomeFont		*font_body;
 	GnomeFont		*font_header;
 	GnomeFont		*font_numbers;	
+
+	gint 			 first_line_to_print;
+	gint			 printed_lines;
 };
 
 static GQuark gedit_print_error_quark ();
@@ -94,6 +98,7 @@ static void gedit_print_line 		(GeditPrintJobInfo *pji, const gchar *start,
 		                         const gchar *end, gdouble y, gboolean first_line_of_par);
 static gdouble gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, 
 		  			 const gchar *end, gdouble y);
+static void gedit_print_line_number (GeditPrintJobInfo *pji, gdouble y);
 
 GQuark 
 gedit_print_error_quark ()
@@ -157,6 +162,11 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	else
 		pji->header_height = 0;
 
+	pji->numbers_width = CM(0);
+	
+	pji->first_line_to_print = 1;
+	pji->printed_lines = 0;
+
 	return pji;
 }	
 
@@ -183,7 +193,7 @@ static void
 gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
 {
 	const GnomePrintUnit *unit;
-
+		
 	gedit_debug (DEBUG_PRINT, "");
 
 	gnome_print_master_get_page_size_from_config (pji->config, 
@@ -210,6 +220,15 @@ gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
 				&pji->margin_bottom, &unit)) 
 	{
 		gnome_print_convert_distance (&pji->margin_bottom, unit, GNOME_PRINT_PS_UNIT);
+	}
+
+	if (gedit_settings->print_line_numbers > 0)
+	{
+		gchar* num_str;
+
+		num_str = g_strdup_printf ("%d", gedit_document_get_line_count (pji->doc));
+		pji->numbers_width = gnome_font_get_width_utf8 (pji->font_numbers, num_str);
+		g_free (num_str);
 	}
 }
 /**
@@ -384,12 +403,19 @@ gedit_print_document (GeditPrintJobInfo *pji)
            	     wc == '\r' ||
                      wc == PARAGRAPH_SEPARATOR))
 		{
+			if (pji->numbers_width > 0.0)
+				gedit_print_line_number (pji, y);
+	
 			y -= 1.2 * gnome_font_get_size (pji->font_body);
+
+			/* FIXME: eventually create a new page */
 		}
 		else
 		{	
 			y = gedit_print_paragraph (pji, p, end, y);
 		}
+		
+		++pji->printed_lines;
 		
 		p = p + next_paragraph_start;
 		
@@ -578,7 +604,12 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 	
 	gedit_debug (DEBUG_PRINT, "");
 
-	printable_page_width = pji->page_width - (pji->margin_right + pji->margin_left);
+	if (pji->numbers_width > 0.0)
+		printable_page_width = pji->page_width - 
+			(pji->margin_right + pji->margin_left) - pji->numbers_width - CM(0.5);
+	else
+		printable_page_width = pji->page_width - 
+			(pji->margin_right + pji->margin_left);
 	
 	p = start;
 
@@ -656,6 +687,36 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 }
 
 static void
+gedit_print_line_number (GeditPrintJobInfo *pji, gdouble y)
+{
+	gchar *num_str;
+	gdouble len;
+	gdouble x;
+		
+	gint line_num = pji->first_line_to_print + pji->printed_lines;
+
+	if ((pji->printed_lines + 1) % gedit_settings->print_line_numbers != 0)
+	       return;	
+		
+	num_str = g_strdup_printf ("%d", line_num);
+
+	gnome_print_setfont (pji->print_ctx, pji->font_numbers);
+
+	len = gnome_font_get_width_utf8 (pji->font_numbers, num_str);
+
+	x = pji->margin_left + pji->numbers_width - len;
+
+	gnome_print_moveto (pji->print_ctx, x, y - 
+				gnome_font_get_ascender (pji->font_numbers));
+	gnome_print_show (pji->print_ctx, num_str);
+
+	g_free (num_str);
+
+	/* Restore body font */
+	gnome_print_setfont (pji->print_ctx, pji->font_body);
+}	
+
+static void
 gedit_print_line (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, gdouble y, 
 		gboolean first_line_of_par)
 {
@@ -673,7 +734,16 @@ gedit_print_line (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, 
 	
 	gnome_glyphlist_advance (gl, TRUE);
 	
-	x = pji->margin_left;
+	if (pji->numbers_width > 0.0)
+	{
+		if (first_line_of_par)
+			gedit_print_line_number (pji, y);
+
+		x = pji->margin_left + pji->numbers_width + CM(0.5);
+	}
+	else
+		x = pji->margin_left;
+	
 	gnome_glyphlist_moveto (gl, x, y - gnome_font_get_ascender (pji->font_body));
 	
 	if (!first_line_of_par)
