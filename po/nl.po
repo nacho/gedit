@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-02 15:42-0400\n"
+"POT-Creation-Date: 2000-04-14 20:54-0400\n"
 "PO-Revision-Date: 1999-08-09 20:17+0100\n"
 "Last-Translator: Unknown :-(\n"
 "Language-Team: \n"
@@ -11,467 +11,368 @@ msgstr ""
 "Date: 1998-10-13 14:49:47+0200\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 
-#: plugins/sample/sample.c:51
+#: plugins/sample/sample.c:52
 msgid "Hello World"
 msgstr ""
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:53
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: plugins/time/time.c:96
+#: plugins/time/time.c:97
 msgid "Insert Time"
 msgstr ""
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:98
 msgid "Inserts the current date and time"
 msgstr ""
 
-#: plugins/email/email.c:101
-msgid "The gEdit Email Plugin"
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:281
+msgid "Untitled"
 msgstr ""
 
-#: plugins/email/email.c:202
+#: plugins/email/email.c:155
 msgid "Email"
 msgstr ""
 
-#: plugins/email/email.c:203
+#: plugins/email/email.c:156
 msgid "Email the current document"
 msgstr ""
 
-#: src/commands.c:97
-msgid "Could not save file!"
+#: src/window.c:54
+#, fuzzy
+msgid "Filename"
+msgstr "Bestand"
+
+#: src/menus.c:368 src/window.c:55
+#, fuzzy
+msgid "Line"
+msgstr "Regel wrap"
+
+#: src/window.c:56
+msgid "Contents"
 msgstr ""
 
-#: src/commands.c:371
-msgid "Open File..."
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
 msgstr ""
 
-#: src/commands.c:425 src/commands.c:473
-msgid "Read only file!"
+#: src/file.c:94
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file is not beeing used by another aplication."
 msgstr ""
 
-#: src/commands.c:512 src/commands.c:582
+#: src/file.c:103
+msgid "Could not allocate the requrired memory."
+msgstr ""
+
+#: src/file.c:109
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+
+#: src/file.c:177
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+
+#: src/file.c:191 src/file.c:205
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+
+#: src/file.c:271
+msgid "Open File ..."
+msgstr ""
+
+#: src/file.c:313
+#, fuzzy
+msgid "Save As..."
+msgstr "Bewaren als.."
+
+#: src/file.c:351
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/file.c:417
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr ""
+
+#: src/file.c:428
+#, fuzzy
+msgid "Document has not been saved."
+msgstr "Document Tabs"
+
+#: src/file.c:436
 msgid "Error saving file!"
 msgstr ""
 
-#: src/commands.c:542
-#, fuzzy, c-format
-msgid "Save %s As..."
-msgstr "Bewaren als.."
-
-#: src/commands.c:615
-#, fuzzy, c-format
-msgid "Save %s As ..."
-msgstr "Bewaren als.."
-
-#: src/commands.c:701
+#: src/file.c:518
 #, c-format
-msgid ""
-"Are you sure you wish to revert all changes?\n"
-"(%s)"
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr ""
 
-#: src/commands.c:749
-msgid "Document Unchanged..."
-msgstr ""
-
-#: src/commands.c:753
-#, fuzzy
-msgid "Document Unsaved..."
-msgstr "Document Tabs"
-
-#: src/commands.c:937
-#, fuzzy
-msgid "_File/"
-msgstr "Bestand"
-
-#: src/commands.c:946 src/commands.c:947
-msgid "_File"
-msgstr "Bestand"
-
-#: src/gE_about.c:39
-msgid "With special thanks to:"
-msgstr ""
-
-#: src/gE_about.c:54
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr ""
-
-#: src/gE_about.c:56
-msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr "gEdit is een lichtgewicht text editor voor GNOME/Gtk"
-
-#: src/gE_files.c:95
-msgid "Can't open file!"
-msgstr ""
-
-#: src/gE_mdi.c:78
-msgid "Find _Line..."
-msgstr ""
-
-#: src/gE_mdi.c:79
-#, fuzzy
-msgid "Search for a line"
-msgstr "Opnieuw Zoeken..."
-
-#: src/gE_mdi.c:84
-msgid "Find _In Files..."
-msgstr ""
-
-#: src/gE_mdi.c:85
-msgid "Find text in all open files"
-msgstr ""
-
-#: src/gE_mdi.c:100
-msgid "_Add View"
-msgstr ""
-
-#: src/gE_mdi.c:101
-msgid "Add a new view of the document"
-msgstr ""
-
-#: src/gE_mdi.c:102
-msgid "_Remove View"
-msgstr ""
-
-#: src/gE_mdi.c:103
-msgid "Remove view of the document"
-msgstr ""
-
-#: src/gE_mdi.c:411
+#: src/document.c:340
 #, c-format
-msgid " '%s' has been modified. Do you wish to save it?"
+msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr ""
 
-#: src/gE_plugin.c:57
+#: src/plugin.c:56
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr ""
 
-#: src/gE_plugin.c:67
+#: src/plugin.c:67
 msgid "Error, plugin does not contain init_plugin function."
 msgstr ""
 
-#: src/gE_plugin.c:74
+#: src/plugin.c:75
 msgid "Error, init_plugin returned an error"
 msgstr ""
 
-#: src/gE_plugin.c:98
+#: src/plugin.c:101
 msgid "Error, plugin is still in use"
 msgstr ""
 
-#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
-#: src/gE_plugin.c:182 src/menus.c:245
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
 msgid "_Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:103
-msgid "Default"
-msgstr ""
-
-#: src/gE_prefs_box.c:104
-msgid "Notebook"
-msgstr ""
-
-#: src/gE_prefs_box.c:105
-msgid "Toplevel"
-msgstr ""
-
-#: src/gE_prefs_box.c:106
-msgid "Modal"
-msgstr ""
-
-#: src/gE_prefs_box.c:337
-msgid "Appearance"
-msgstr ""
-
-#: src/gE_prefs_box.c:350
-#, fuzzy
-msgid "Show Statusbar"
-msgstr "Statusbalk"
-
-#: src/gE_prefs_box.c:359
-#, fuzzy
-msgid "Show Splitscreen"
-msgstr "Gespleten Scherm"
-
-#: src/gE_prefs_box.c:369
-msgid "Editor Behavior"
-msgstr ""
-
-#: src/gE_prefs_box.c:382
-#, fuzzy
-msgid "Enable Autoindent"
-msgstr "Automatisch inspringen"
-
-#: src/gE_prefs_box.c:386
-#, fuzzy
-msgid "Enable Wordwrap"
-msgstr "Woord wrap"
-
-#: src/gE_prefs_box.c:408
-msgid "Text Background"
-msgstr ""
-
-#: src/gE_prefs_box.c:429
-msgid "Text Foreground"
-msgstr ""
-
-#. Document Closing stuffs
-#: src/gE_prefs_box.c:498
-#, fuzzy
-msgid "Document Settings"
-msgstr "Documentlijst"
-
-#: src/gE_prefs_box.c:512
-msgid "New Document After Closing Last"
-msgstr ""
-
-#: src/gE_prefs_box.c:518
-msgid "Close Window After Closing Last"
-msgstr ""
-
-#. End of docyment closing stuffs
-#. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:527
-msgid "Current Font"
-msgstr ""
-
-#: src/gE_prefs_box.c:544
-#, fuzzy
-msgid "Select..."
-msgstr "Selecteer Alles"
-
-#. End of Font Setttings
-#. Print COmmand
-#: src/gE_prefs_box.c:560
-msgid "Print Command"
-msgstr ""
-
-#. Window Size Settings
-#: src/gE_prefs_box.c:620
-#, fuzzy
-msgid "Window Size"
-msgstr "Venster"
-
-#: src/gE_prefs_box.c:633
-msgid "Current Width:"
-msgstr ""
-
-#: src/gE_prefs_box.c:653
-msgid "Startup Width:"
-msgstr ""
-
-#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
-msgid "Use Current"
-msgstr ""
-
-#: src/gE_prefs_box.c:673
-msgid "Current Height:"
-msgstr ""
-
-#: src/gE_prefs_box.c:693
-msgid "Startup Height:"
-msgstr ""
-
-#. MDI Mode settnigs
-#: src/gE_prefs_box.c:709
-msgid "MDI Mode"
-msgstr ""
-
-#. General Settings
-#: src/gE_prefs_box.c:780
-msgid "General"
-msgstr ""
-
-#. Window Settings
-#: src/gE_prefs_box.c:785
-#, fuzzy
-msgid "Window"
-msgstr "Venster"
-
-#. Docuemnt Settings
-#: src/gE_prefs_box.c:790
-#, fuzzy
-msgid "Document"
-msgstr "Document Tabs"
-
-#: src/gE_print.c:175
+#: src/print.c:211
 #, c-format
-msgid "gEdit (%s): Print Preview"
+msgid "gedit (%s): Print Preview"
 msgstr ""
 
-#: src/gE_print.c:277
+#: src/print.c:361
 #, c-format
 msgid "Page: %i/%i"
 msgstr ""
 
-#: src/menus.c:71
-#, fuzzy
-msgid "_Autoindent"
-msgstr "Automatisch inspringen"
-
-#: src/menus.c:72
-#, fuzzy
-msgid "Status_bar"
-msgstr "Statusbalk"
-
-#: src/menus.c:73
-#, fuzzy
-msgid "_Wordwrap"
-msgstr "Woord wrap"
-
-#: src/menus.c:74
-#, fuzzy
-msgid "_Linewrap"
-msgstr "Regel wrap"
-
-#: src/menus.c:75
-#, fuzzy
-msgid "_Readonly"
-msgstr "Alleen Lezen"
-
-#: src/menus.c:76
-#, fuzzy
-msgid "_Splitscreen"
-msgstr "Gespleten Scherm"
-
-#: src/menus.c:77
-#, fuzzy
-msgid "_Show tabs"
-msgstr "Statusbalk"
-
-#: src/menus.c:78
-#, fuzzy
-msgid "Toolbar _relief"
-msgstr "Taakbalk reliëf aan"
-
-#: src/menus.c:79
-#, fuzzy
-msgid "_Show tooltips"
-msgstr "Laat Taakbalk zien"
-
-#: src/menus.c:80
-#, fuzzy
-msgid "Show toolbar _text"
-msgstr "Laat Taakbalk zien"
-
-#: src/menus.c:81
-#, fuzzy
-msgid "Show toolbar _icons"
-msgstr "Laat Taakbalk zien"
-
-#. and this one is the default file name
-#: src/menus.c:83
-msgid "Untitled"
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
 msgstr ""
 
-#: src/menus.c:89
+#: src/menus.c:58
 #, fuzzy
 msgid "_New"
 msgstr "Nieuw"
 
-#: src/menus.c:89
+#: src/menus.c:59 src/menus.c:323
 msgid "Create a new document"
 msgstr ""
 
-#: src/menus.c:96
+#: src/menus.c:64
 #, fuzzy
 msgid "Save All"
 msgstr "Bewaren"
 
-#: src/menus.c:96
+#: src/menus.c:65
 msgid "Save All Open Files"
 msgstr ""
 
-#: src/menus.c:101
-msgid "Revert"
+#: src/menus.c:80
+msgid "Print preview..."
 msgstr ""
 
-#: src/menus.c:111
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr ""
+
+#: src/menus.c:87
 msgid "Close All"
 msgstr "Alles sluiten"
 
-#: src/menus.c:111
+#: src/menus.c:88
 #, fuzzy
 msgid "Close All Open Files"
 msgstr "Alles sluiten"
 
+#: src/menus.c:123
+msgid "Goto _Line..."
+msgstr ""
+
 #: src/menus.c:124
-#, fuzzy
-msgid "_Top"
-msgstr "Begin"
-
-#: src/menus.c:125
-msgid "Put the document tabs at the top"
+msgid "Go to a specific line number"
 msgstr ""
-
-#: src/menus.c:128
-#, fuzzy
-msgid "_Bottom"
-msgstr "Eind"
-
-#: src/menus.c:129
-msgid "Put the document tabs at the bottom"
-msgstr ""
-
-#: src/menus.c:132
-#, fuzzy
-msgid "_Left"
-msgstr "Links"
 
 #: src/menus.c:133
-msgid "Put the document tabs on the left"
+msgid "_Add View"
+msgstr ""
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
 msgstr ""
 
 #: src/menus.c:136
-#, fuzzy
-msgid "_Right"
-msgstr "Rechts"
+msgid "_Remove View"
+msgstr ""
 
 #: src/menus.c:137
-msgid "Put the document tabs on the right"
+msgid "Remove view of the document"
 msgstr ""
 
-#: src/menus.c:176
-msgid "Toggle Readonly"
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+#, fuzzy
+msgid "Show Statusbar"
+msgstr "Statusbalk"
+
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
+
+#: src/menus.c:323
+msgid "New"
+msgstr "Nieuw"
+
+#: src/menus.c:327
+#, fuzzy
+msgid "Open"
+msgstr "Open..."
+
+#: src/menus.c:327
+msgid "Open a file"
+msgstr ""
+
+#: src/menus.c:331
+msgid "Save"
+msgstr "Bewaren"
+
+#: src/menus.c:331
+msgid "Save the current file"
+msgstr ""
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "Sluiten"
+
+#: src/menus.c:335
+#, fuzzy
+msgid "Close the current file"
+msgstr "Alles sluiten"
+
+#: src/menus.c:339
+#, fuzzy
+msgid "Print"
+msgstr "Afdrukken..."
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr ""
+
+#: src/menus.c:344
+#, fuzzy
+msgid "Undo"
+msgstr "Venster"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr ""
+
+#: src/menus.c:348
+#, fuzzy
+msgid "Redo"
 msgstr "Alleen Lezen"
 
-#: src/menus.c:187
-#, fuzzy
-msgid "_Document Tabs"
-msgstr "Document Tabs"
-
-#: src/menus.c:188
-msgid "Change the placement of the document tabs"
+#: src/menus.c:348
+msgid "Redo last operation"
 msgstr ""
 
-#: src/menus.c:192
-#, fuzzy
-msgid "Sa_ve Settings"
-msgstr "Instellingen bewaren"
+#: src/menus.c:352
+msgid "Cut"
+msgstr "Knippen"
 
-#: src/menus.c:193
-msgid "Save the current settings for future sessions"
+#: src/menus.c:352
+msgid "Cut the selection"
 msgstr ""
 
-#: src/search.c:415
+#: src/menus.c:356
+msgid "Copy"
+msgstr "Copiëren"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr ""
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "Plakken"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr ""
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+#, fuzzy
+msgid "Find"
+msgstr "Venster"
+
+#: src/menus.c:364
+#, fuzzy
+msgid "Search for a string"
+msgstr "Opnieuw Zoeken..."
+
+#: src/menus.c:368
+msgid "Get the current and total lines"
+msgstr ""
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "Verlaten"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr ""
+
+#: src/search.c:286
 msgid "Find In Files"
 msgstr ""
 
-#. GtkWidget *radio, *check;
-#: src/search.c:416 src/search.c:836 src/search.c:837
+#: src/search.c:287
 #, fuzzy
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/search.c:420 src/search.c:841 src/search.c:870
+#: src/search.c:291
 #, fuzzy
 msgid "Search for:"
 msgstr "Zoeken"
 
-#: src/search.c:740
+#: src/search.c:611
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -480,72 +381,317 @@ msgid ""
 "Current Line: %i"
 msgstr ""
 
-#: src/search.c:762
-msgid "Go to line"
-msgstr ""
-
-#: src/search.c:772
-msgid "Line number"
-msgstr ""
-
-#: src/search.c:795
+#: src/search.c:634
 #, fuzzy
 msgid "Search from cursor"
 msgstr "Opnieuw Zoeken..."
 
-#: src/search.c:802
+#: src/search.c:641
 msgid "Search from beginning of document"
 msgstr ""
 
-#: src/search.c:809
+#: src/search.c:648
 msgid "Search from end of document"
 msgstr ""
 
-#: src/search.c:816
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
 msgid "Case sensitive"
 msgstr ""
 
-#: src/search.c:822
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
 msgid "Reverse search"
 msgstr ""
 
-#. GtkWidget *radio;
-#: src/search.c:864 src/search.c:865
+#: src/dialogs/dialog-about.c:52
+msgid "With special thanks to:"
+msgstr ""
+
+#: src/dialogs/dialog-about.c:67
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/dialogs/dialog-about.c:69
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEdit is een lichtgewicht text editor voor GNOME/Gtk"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/find-line.glade.h:7
+msgid "Goto Line"
+msgstr ""
+
+#: src/dialogs/find-line.glade.h:8
+msgid "Line number:"
+msgstr ""
+
+#: src/dialogs/find-line.glade.h:9
+msgid "Enter the line number you wish to go to."
+msgstr ""
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/prefs.glade.h:7
+msgid "Appearance"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:9
+#, fuzzy
+msgid "Show splitscreen"
+msgstr "Gespleten Scherm"
+
+#: src/dialogs/prefs.glade.h:10
+msgid "Editor Behavior"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:11
+#, fuzzy
+msgid "Enable Auto-indent"
+msgstr "Automatisch inspringen"
+
+#: src/dialogs/prefs.glade.h:12
+#, fuzzy
+msgid "Enable Wordwrap"
+msgstr "Woord wrap"
+
+#: src/dialogs/prefs.glade.h:13
+msgid "General"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:14
+msgid "MDI (Multiple Document Interface)"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
+msgid ""
+"Left\n"
+"Right\n"
+"Top\n"
+"Bottom\n"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:20
+msgid ""
+"Notebook\n"
+"Toplevel\n"
+"Modal\n"
+"Default\n"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:25
+msgid "Mode: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:26
+msgid "Notebook Tab Position: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:27
+#, fuzzy
+msgid "Documents"
+msgstr "Document Tabs"
+
+#: src/dialogs/prefs.glade.h:28
+msgid "Fonts"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:29
+msgid "Pick a Font"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:30
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:31
+msgid "Default Font: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:32
+#, fuzzy
+msgid "Colors"
+msgstr "Sluiten"
+
+#: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
+msgid "Pick a color"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:35
+msgid "Background: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:36
+msgid "Foreground: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:37
+msgid "Fonts/Colors"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
+#, fuzzy
+msgid "Printing"
+msgstr "Afdrukken..."
+
+#: src/dialogs/prefs.glade.h:39
+msgid "Add header"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:40
+msgid "Wrap long lines at the page width"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:41
+msgid "Print line numbers every:"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:42
+msgid "line(s)"
+msgstr ""
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+
+#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#, fuzzy
+msgid "Search for: "
+msgstr "Zoeken"
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+#, fuzzy
+msgid "Search from: "
+msgstr "Zoeken"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
 msgid "Replace"
 msgstr ""
 
-#: src/search.c:866
-msgid "Replace all"
+#: src/dialogs/replace.glade.h:9
+#, fuzzy
+msgid "Replace All"
+msgstr "Bewaren"
+
+#: src/dialogs/replace.glade.h:11
+msgid "Replace with: "
 msgstr ""
 
-#: src/search.c:880
-msgid "Replace with:"
+#: src/dialogs/replace.glade.h:13
+msgid ""
+"Cursor\n"
+"Beginning of document\n"
+"End of document\n"
 msgstr ""
 
-#: src/search.c:891
+#: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr ""
 
-#: src/search.c:1096
-msgid "Replace?"
-msgstr ""
-
-#: src/gE_view.c:43
-msgid "Save"
-msgstr "Bewaren"
-
-#: src/gE_view.c:44
-msgid "Close"
-msgstr "Sluiten"
-
-#: src/gE_view.c:45
 #, fuzzy
-msgid "Print"
-msgstr "Afdrukken..."
+#~ msgid "Save %s As ..."
+#~ msgstr "Bewaren als.."
 
-#: src/gE_view.c:49
-msgid "Open (swap) .c/.h file"
-msgstr ""
+#, fuzzy
+#~ msgid "_File/"
+#~ msgstr "Bestand"
+
+#~ msgid "_File"
+#~ msgstr "Bestand"
+
+#, fuzzy
+#~ msgid "Search for a line"
+#~ msgstr "Opnieuw Zoeken..."
+
+#, fuzzy
+#~ msgid "Document Settings"
+#~ msgstr "Documentlijst"
+
+#, fuzzy
+#~ msgid "Select..."
+#~ msgstr "Selecteer Alles"
+
+#, fuzzy
+#~ msgid "Window Size"
+#~ msgstr "Venster"
+
+#, fuzzy
+#~ msgid "_Autoindent"
+#~ msgstr "Automatisch inspringen"
+
+#, fuzzy
+#~ msgid "Status_bar"
+#~ msgstr "Statusbalk"
+
+#, fuzzy
+#~ msgid "_Wordwrap"
+#~ msgstr "Woord wrap"
+
+#, fuzzy
+#~ msgid "_Splitscreen"
+#~ msgstr "Gespleten Scherm"
+
+#, fuzzy
+#~ msgid "_Show tabs"
+#~ msgstr "Statusbalk"
+
+#, fuzzy
+#~ msgid "Toolbar _relief"
+#~ msgstr "Taakbalk reliëf aan"
+
+#, fuzzy
+#~ msgid "_Show tooltips"
+#~ msgstr "Laat Taakbalk zien"
+
+#, fuzzy
+#~ msgid "Show toolbar _text"
+#~ msgstr "Laat Taakbalk zien"
+
+#, fuzzy
+#~ msgid "Show toolbar _icons"
+#~ msgstr "Laat Taakbalk zien"
+
+#, fuzzy
+#~ msgid "_Top"
+#~ msgstr "Begin"
+
+#, fuzzy
+#~ msgid "_Bottom"
+#~ msgstr "Eind"
+
+#, fuzzy
+#~ msgid "_Left"
+#~ msgstr "Links"
+
+#, fuzzy
+#~ msgid "_Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Toggle Readonly"
+#~ msgstr "Alleen Lezen"
+
+#, fuzzy
+#~ msgid "_Document Tabs"
+#~ msgstr "Document Tabs"
+
+#, fuzzy
+#~ msgid "Sa_ve Settings"
+#~ msgstr "Instellingen bewaren"
 
 #, fuzzy
 #~ msgid "Plugin Selector"
@@ -569,29 +715,6 @@ msgstr ""
 #~ msgid "_None"
 #~ msgstr "Nieuw"
 
-#~ msgid "Cut"
-#~ msgstr "Knippen"
-
-#~ msgid "Copy"
-#~ msgstr "Copiëren"
-
-#~ msgid "Paste"
-#~ msgstr "Plakken"
-
-#~ msgid "New"
-#~ msgstr "Nieuw"
-
-#, fuzzy
-#~ msgid "Open"
-#~ msgstr "Open..."
-
-#, fuzzy
-#~ msgid "Search for a string"
-#~ msgstr "Opnieuw Zoeken..."
-
-#~ msgid "Exit"
-#~ msgstr "Verlaten"
-
 #, fuzzy
 #~ msgid "Toggle autoindent"
 #~ msgstr "Automatisch inspringen"
@@ -614,9 +737,6 @@ msgstr ""
 
 #~ msgid "Hide Toolbar"
 #~ msgstr "Verberg Taakbalk"
-
-#~ msgid "File"
-#~ msgstr "Bestand"
 
 #~ msgid "_Help"
 #~ msgstr "Help"

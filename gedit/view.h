@@ -87,7 +87,6 @@ GtkWidget* gedit_view_new 		(Document *doc);
 /* View settings */
 void 	   gedit_view_set_font 		(View *view, gchar *font);
 void 	   gedit_view_set_word_wrap 	(View *view, gint word_wrap);
-void 	   gedit_view_set_line_wrap 	(View *view, gint line_wrap);
 void 	   gedit_view_set_read_only 	(View *view, gint read_only);
 void 	   gedit_view_set_split_screen 	(View *view, gint split_screen);
 

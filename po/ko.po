@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-02 15:42-0400\n"
+"POT-Creation-Date: 2000-04-14 20:54-0400\n"
 "PO-Revision-Date: 1999-06-09 13:27:10+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -13,447 +13,367 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:51
+#: plugins/sample/sample.c:52
 msgid "Hello World"
 msgstr ""
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:53
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: plugins/time/time.c:96
+#: plugins/time/time.c:97
 msgid "Insert Time"
 msgstr ""
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:98
 #, fuzzy
 msgid "Inserts the current date and time"
 msgstr "현재 파일 닫기"
 
-#: plugins/email/email.c:101
-msgid "The gEdit Email Plugin"
-msgstr "gEdit 전자우편 플러그인"
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:281
+msgid "Untitled"
+msgstr "이름없음"
 
-#: plugins/email/email.c:202
+#: plugins/email/email.c:155
 msgid "Email"
 msgstr ""
 
-#: plugins/email/email.c:203
+#: plugins/email/email.c:156
 #, fuzzy
 msgid "Email the current document"
 msgstr "현재 파일 저장"
 
-#: src/commands.c:97
-msgid "Could not save file!"
+#: src/window.c:54
+#, fuzzy
+msgid "Filename"
+msgstr "파일(_F)"
+
+#: src/menus.c:368 src/window.c:55
+msgid "Line"
+msgstr "라인"
+
+#: src/window.c:56
+msgid "Contents"
 msgstr ""
 
-#: src/commands.c:371
-msgid "Open File..."
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+
+#: src/file.c:94
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file is not beeing used by another aplication."
+msgstr ""
+
+#: src/file.c:103
+msgid "Could not allocate the requrired memory."
+msgstr ""
+
+#: src/file.c:109
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+
+#: src/file.c:177
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+
+#: src/file.c:191 src/file.c:205
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+
+#: src/file.c:271
+#, fuzzy
+msgid "Open File ..."
 msgstr "파일 열기..."
 
-#: src/commands.c:425 src/commands.c:473
-msgid "Read only file!"
-msgstr "읽기 전용 파일!"
+#: src/file.c:313
+#, fuzzy
+msgid "Save As..."
+msgstr "다른 이름으로 저장..."
 
-#: src/commands.c:512 src/commands.c:582
+#: src/file.c:351
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/file.c:417
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr ""
+
+#: src/file.c:428
+#, fuzzy
+msgid "Document has not been saved."
+msgstr "문서가 저장되지 않음..."
+
+#: src/file.c:436
 msgid "Error saving file!"
 msgstr "파일 저장 에러!"
 
-#: src/commands.c:542
-#, fuzzy, c-format
-msgid "Save %s As..."
-msgstr "다른 이름으로 저장..."
-
-#: src/commands.c:615
-#, fuzzy, c-format
-msgid "Save %s As ..."
-msgstr "다른 이름으로 저장..."
-
-#: src/commands.c:701
-#, fuzzy, c-format
-msgid ""
-"Are you sure you wish to revert all changes?\n"
-"(%s)"
-msgstr "정말로 모든 수정을 취소하고 싶으세요?"
-
-#: src/commands.c:749
-msgid "Document Unchanged..."
-msgstr "문서가 바뀌지 않음..."
-
-#: src/commands.c:753
-msgid "Document Unsaved..."
-msgstr "문서가 저장되지 않음..."
-
-#: src/commands.c:937
-#, fuzzy
-msgid "_File/"
-msgstr "파일(_F)"
-
-#: src/commands.c:946 src/commands.c:947
-msgid "_File"
-msgstr "파일(_F)"
-
-#: src/gE_about.c:39
-msgid "With special thanks to:"
-msgstr "With special thanks to:"
-
-#: src/gE_about.c:54
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-
-#: src/gE_about.c:56
-msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
-
-#: src/gE_files.c:95
-#, fuzzy
-msgid "Can't open file!"
-msgstr "읽기 전용 파일!"
-
-#: src/gE_mdi.c:78
-msgid "Find _Line..."
-msgstr "라인 찾기(_L)..."
-
-#: src/gE_mdi.c:79
-msgid "Search for a line"
-msgstr "라인 찾기"
-
-#: src/gE_mdi.c:84
-#, fuzzy
-msgid "Find _In Files..."
-msgstr "라인 찾기(_L)..."
-
-#: src/gE_mdi.c:85
-msgid "Find text in all open files"
+#: src/file.c:518
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr ""
 
-#: src/gE_mdi.c:100
-msgid "_Add View"
-msgstr "보기창 추가(_A)"
-
-#: src/gE_mdi.c:101
-msgid "Add a new view of the document"
-msgstr "문서의 새로운 보기창 추가"
-
-#: src/gE_mdi.c:102
-msgid "_Remove View"
-msgstr "보기창 삭제(_R)"
-
-#: src/gE_mdi.c:103
-msgid "Remove view of the document"
-msgstr "문서의 보기창 삭제"
-
-#: src/gE_mdi.c:411
-#, c-format
-msgid " '%s' has been modified. Do you wish to save it?"
+#: src/document.c:340
+#, fuzzy, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s'가 바뀌었습니다. 저장할까요?"
 
-#: src/gE_plugin.c:57
+#: src/plugin.c:56
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr ""
 
-#: src/gE_plugin.c:67
+#: src/plugin.c:67
 msgid "Error, plugin does not contain init_plugin function."
 msgstr ""
 
-#: src/gE_plugin.c:74
+#: src/plugin.c:75
 msgid "Error, init_plugin returned an error"
 msgstr ""
 
-#: src/gE_plugin.c:98
+#: src/plugin.c:101
 msgid "Error, plugin is still in use"
 msgstr ""
 
-#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
-#: src/gE_plugin.c:182 src/menus.c:245
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
 msgid "_Plugins"
 msgstr "플러그인(_P)"
 
-#: src/gE_prefs_box.c:103
-msgid "Default"
-msgstr "기본값"
-
-#: src/gE_prefs_box.c:104
-msgid "Notebook"
-msgstr "노트북"
-
-#: src/gE_prefs_box.c:105
-msgid "Toplevel"
-msgstr "최상위레벨"
-
-#: src/gE_prefs_box.c:106
-msgid "Modal"
-msgstr "형태"
-
-#: src/gE_prefs_box.c:337
-msgid "Appearance"
-msgstr "형상"
-
-#: src/gE_prefs_box.c:350
-msgid "Show Statusbar"
-msgstr "상태막대 보이기"
-
-#: src/gE_prefs_box.c:359
-msgid "Show Splitscreen"
-msgstr "화면 분할 보이기"
-
-#: src/gE_prefs_box.c:369
-msgid "Editor Behavior"
-msgstr "편집기 동작"
-
-#: src/gE_prefs_box.c:382
-msgid "Enable Autoindent"
-msgstr "Autoindent 사용"
-
-#: src/gE_prefs_box.c:386
-msgid "Enable Wordwrap"
-msgstr "Wordwrap 사용"
-
-#: src/gE_prefs_box.c:408
-msgid "Text Background"
-msgstr ""
-
-#: src/gE_prefs_box.c:429
-msgid "Text Foreground"
-msgstr ""
-
-#. Document Closing stuffs
-#: src/gE_prefs_box.c:498
-#, fuzzy
-msgid "Document Settings"
-msgstr "문서 탭(_D)"
-
-#: src/gE_prefs_box.c:512
-msgid "New Document After Closing Last"
-msgstr ""
-
-#: src/gE_prefs_box.c:518
-msgid "Close Window After Closing Last"
-msgstr ""
-
-#. End of docyment closing stuffs
-#. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:527
-msgid "Current Font"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:544
-msgid "Select..."
-msgstr "선택..."
-
-#. End of Font Setttings
-#. Print COmmand
-#: src/gE_prefs_box.c:560
-msgid "Print Command"
-msgstr "인쇄 명령"
-
-#. Window Size Settings
-#: src/gE_prefs_box.c:620
-msgid "Window Size"
-msgstr "창 크기"
-
-#: src/gE_prefs_box.c:633
-#, fuzzy
-msgid "Current Width:"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:653
-msgid "Startup Width:"
-msgstr ""
-
-#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
-#, fuzzy
-msgid "Use Current"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:673
-#, fuzzy
-msgid "Current Height:"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:693
-msgid "Startup Height:"
-msgstr ""
-
-#. MDI Mode settnigs
-#: src/gE_prefs_box.c:709
-msgid "MDI Mode"
-msgstr "MDI 모드"
-
-#. General Settings
-#: src/gE_prefs_box.c:780
-msgid "General"
-msgstr "일반"
-
-#. Window Settings
-#: src/gE_prefs_box.c:785
-msgid "Window"
-msgstr "창"
-
-#. Docuemnt Settings
-#: src/gE_prefs_box.c:790
-#, fuzzy
-msgid "Document"
-msgstr "문서 탭(_D)"
-
-#: src/gE_print.c:175
+#: src/print.c:211
 #, c-format
-msgid "gEdit (%s): Print Preview"
+msgid "gedit (%s): Print Preview"
 msgstr ""
 
-#: src/gE_print.c:277
+#: src/print.c:361
 #, c-format
 msgid "Page: %i/%i"
 msgstr ""
 
-#: src/menus.c:71
-msgid "_Autoindent"
-msgstr "Autoindent(_A)"
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
+msgstr ".c/.h 파일 (스왑) 열기"
 
-#: src/menus.c:72
-msgid "Status_bar"
-msgstr "상태막대(_b)"
-
-#: src/menus.c:73
-msgid "_Wordwrap"
-msgstr "Wordwrap(_W)"
-
-#: src/menus.c:74
-msgid "_Linewrap"
-msgstr "Linewrap(_L)"
-
-#: src/menus.c:75
-msgid "_Readonly"
-msgstr "읽기전용(_R)"
-
-#: src/menus.c:76
-msgid "_Splitscreen"
-msgstr "화면 분할(_S)"
-
-#: src/menus.c:77
-msgid "_Show tabs"
-msgstr "탭 보이기(_S)"
-
-#: src/menus.c:78
-msgid "Toolbar _relief"
-msgstr "툴바 relief(_r)"
-
-#: src/menus.c:79
-msgid "_Show tooltips"
-msgstr "툴바 보이기(_S)"
-
-#: src/menus.c:80
-msgid "Show toolbar _text"
-msgstr "툴바 텍스트 보이기(_t)"
-
-#: src/menus.c:81
-msgid "Show toolbar _icons"
-msgstr "툴바 아이콘 보이기(_i)"
-
-#. and this one is the default file name
-#: src/menus.c:83
-msgid "Untitled"
-msgstr "이름없음"
-
-#: src/menus.c:89
+#: src/menus.c:58
 msgid "_New"
 msgstr "새 문서(_N)"
 
-#: src/menus.c:89
+#: src/menus.c:59 src/menus.c:323
 msgid "Create a new document"
 msgstr "새 문서 생성"
 
-#: src/menus.c:96
+#: src/menus.c:64
 #, fuzzy
 msgid "Save All"
 msgstr "다른 이름으로 저장..."
 
-#: src/menus.c:96
+#: src/menus.c:65
 #, fuzzy
 msgid "Save All Open Files"
 msgstr "현재 파일 저장"
 
-#: src/menus.c:101
-msgid "Revert"
-msgstr "복원"
+#: src/menus.c:80
+msgid "Print preview..."
+msgstr ""
 
-#: src/menus.c:111
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr ""
+
+#: src/menus.c:87
 #, fuzzy
 msgid "Close All"
 msgstr "닫기"
 
-#: src/menus.c:111
+#: src/menus.c:88
 #, fuzzy
 msgid "Close All Open Files"
 msgstr "현재 파일 닫기"
 
+#: src/menus.c:123
+#, fuzzy
+msgid "Goto _Line..."
+msgstr "라인 찾아가기"
+
 #: src/menus.c:124
-msgid "_Top"
-msgstr "위(_T)"
-
-#: src/menus.c:125
-msgid "Put the document tabs at the top"
-msgstr "문서 탭을 위에 위치"
-
-#: src/menus.c:128
-msgid "_Bottom"
-msgstr "아래(_B)"
-
-#: src/menus.c:129
-msgid "Put the document tabs at the bottom"
-msgstr "문서 탭을 아래에 위치"
-
-#: src/menus.c:132
-msgid "_Left"
-msgstr "왼쪽(_L)"
+msgid "Go to a specific line number"
+msgstr ""
 
 #: src/menus.c:133
-msgid "Put the document tabs on the left"
-msgstr "문서 탭을 왼쪽에 위치"
+msgid "_Add View"
+msgstr "보기창 추가(_A)"
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
+msgstr "문서의 새로운 보기창 추가"
 
 #: src/menus.c:136
-msgid "_Right"
-msgstr "오른쪽(_R)"
+msgid "_Remove View"
+msgstr "보기창 삭제(_R)"
 
 #: src/menus.c:137
-msgid "Put the document tabs on the right"
-msgstr "문서 탭을 오른쪽에 위치"
+msgid "Remove view of the document"
+msgstr "문서의 보기창 삭제"
 
-#: src/menus.c:176
-msgid "Toggle Readonly"
-msgstr "읽기전용 토글"
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+msgid "Show Statusbar"
+msgstr "상태막대 보이기"
 
-#: src/menus.c:187
-msgid "_Document Tabs"
-msgstr "문서 탭(_D)"
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
 
-#: src/menus.c:188
-msgid "Change the placement of the document tabs"
-msgstr "문서 탭의 위치를 바꿈"
+#: src/menus.c:323
+msgid "New"
+msgstr "새 문서"
 
-#: src/menus.c:192
-msgid "Sa_ve Settings"
-msgstr "설정 저장(_v)"
+#: src/menus.c:327
+msgid "Open"
+msgstr "열기"
 
-#: src/menus.c:193
-msgid "Save the current settings for future sessions"
-msgstr "내일을 위해 현재 설정을 저장"
+#: src/menus.c:327
+msgid "Open a file"
+msgstr "파일 열기"
 
-#: src/search.c:415
+#: src/menus.c:331
+msgid "Save"
+msgstr "저장"
+
+#: src/menus.c:331
+#, fuzzy
+msgid "Save the current file"
+msgstr "현재 파일 인쇄"
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "닫기"
+
+#: src/menus.c:335
+#, fuzzy
+msgid "Close the current file"
+msgstr "현재 파일 인쇄"
+
+#: src/menus.c:339
+msgid "Print"
+msgstr "인쇄"
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr "현재 파일 인쇄"
+
+#: src/menus.c:344
+#, fuzzy
+msgid "Undo"
+msgstr "창"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr ""
+
+#: src/menus.c:348
+#, fuzzy
+msgid "Redo"
+msgstr "읽기전용(_R)"
+
+#: src/menus.c:348
+msgid "Redo last operation"
+msgstr ""
+
+#: src/menus.c:352
+msgid "Cut"
+msgstr "자르기"
+
+#: src/menus.c:352
+msgid "Cut the selection"
+msgstr "선택 내용 잘라내기"
+
+#: src/menus.c:356
+msgid "Copy"
+msgstr "복사"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr "선택 내용 복사하기"
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "붙이기"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr "클립보드에서 붙이기"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+msgid "Find"
+msgstr "찾기"
+
+#: src/menus.c:364
+msgid "Search for a string"
+msgstr "문자열 찾기"
+
+#: src/menus.c:368
+#, fuzzy
+msgid "Get the current and total lines"
+msgstr "현재 파일 닫기"
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "종료"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr "프로그램 종료"
+
+#: src/search.c:286
 msgid "Find In Files"
 msgstr ""
 
-#. GtkWidget *radio, *check;
-#: src/search.c:416 src/search.c:836 src/search.c:837
+#: src/search.c:287
 msgid "Search"
 msgstr "찾기"
 
-#: src/search.c:420 src/search.c:841 src/search.c:870
+#: src/search.c:291
 msgid "Search for:"
 msgstr "찾기:"
 
-#: src/search.c:740
+#: src/search.c:611
 #, fuzzy, c-format
 msgid ""
 "Filename: %s\n"
@@ -464,71 +384,382 @@ msgstr ""
 "총 라인: %i\n"
 "현재 라인: %i"
 
-#: src/search.c:762
-msgid "Go to line"
-msgstr "라인 찾아가기"
-
-#: src/search.c:772
-msgid "Line number"
-msgstr "라인 번호"
-
-#: src/search.c:795
+#: src/search.c:634
 msgid "Search from cursor"
 msgstr "커서 위치부터 찾기"
 
-#: src/search.c:802
+#: src/search.c:641
 msgid "Search from beginning of document"
 msgstr "문서의 처음부터 찾기"
 
-#: src/search.c:809
+#: src/search.c:648
 msgid "Search from end of document"
 msgstr "문서의 마지막부터 찾기"
 
-#: src/search.c:816
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
 msgid "Case sensitive"
 msgstr "대소문자 구별"
 
-#: src/search.c:822
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
 msgid "Reverse search"
 msgstr "뒤로 찾기"
 
-#. GtkWidget *radio;
-#: src/search.c:864 src/search.c:865
+#: src/dialogs/dialog-about.c:52
+msgid "With special thanks to:"
+msgstr "With special thanks to:"
+
+#: src/dialogs/dialog-about.c:67
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+
+#: src/dialogs/dialog-about.c:69
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/find-line.glade.h:7
+#, fuzzy
+msgid "Goto Line"
+msgstr "라인 찾아가기"
+
+#: src/dialogs/find-line.glade.h:8
+#, fuzzy
+msgid "Line number:"
+msgstr "라인 번호"
+
+#: src/dialogs/find-line.glade.h:9
+msgid "Enter the line number you wish to go to."
+msgstr ""
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/prefs.glade.h:7
+msgid "Appearance"
+msgstr "형상"
+
+#: src/dialogs/prefs.glade.h:9
+#, fuzzy
+msgid "Show splitscreen"
+msgstr "화면 분할 보이기"
+
+#: src/dialogs/prefs.glade.h:10
+msgid "Editor Behavior"
+msgstr "편집기 동작"
+
+#: src/dialogs/prefs.glade.h:11
+#, fuzzy
+msgid "Enable Auto-indent"
+msgstr "Autoindent 사용"
+
+#: src/dialogs/prefs.glade.h:12
+msgid "Enable Wordwrap"
+msgstr "Wordwrap 사용"
+
+#: src/dialogs/prefs.glade.h:13
+msgid "General"
+msgstr "일반"
+
+#: src/dialogs/prefs.glade.h:14
+msgid "MDI (Multiple Document Interface)"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
+msgid ""
+"Left\n"
+"Right\n"
+"Top\n"
+"Bottom\n"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:20
+msgid ""
+"Notebook\n"
+"Toplevel\n"
+"Modal\n"
+"Default\n"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:25
+msgid "Mode: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:26
+msgid "Notebook Tab Position: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:27
+#, fuzzy
+msgid "Documents"
+msgstr "문서 탭(_D)"
+
+#: src/dialogs/prefs.glade.h:28
+#, fuzzy
+msgid "Fonts"
+msgstr "글꼴"
+
+#: src/dialogs/prefs.glade.h:29
+msgid "Pick a Font"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:30
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:31
+#, fuzzy
+msgid "Default Font: "
+msgstr "기본값"
+
+#: src/dialogs/prefs.glade.h:32
+#, fuzzy
+msgid "Colors"
+msgstr "닫기"
+
+#: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
+msgid "Pick a color"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:35
+msgid "Background: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:36
+msgid "Foreground: "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:37
+msgid "Fonts/Colors"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
+#, fuzzy
+msgid "Printing"
+msgstr "인쇄"
+
+#: src/dialogs/prefs.glade.h:39
+msgid "Add header"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:40
+msgid "Wrap long lines at the page width"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:41
+msgid "Print line numbers every:"
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:42
+msgid "line(s)"
+msgstr ""
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+
+#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#, fuzzy
+msgid "Search for: "
+msgstr "찾기:"
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+#, fuzzy
+msgid "Search from: "
+msgstr "찾기:"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
 msgid "Replace"
 msgstr "바꾸기"
 
-#: src/search.c:866
+#: src/dialogs/replace.glade.h:9
 #, fuzzy
-msgid "Replace all"
+msgid "Replace All"
 msgstr "바꾸기"
 
-#: src/search.c:880
-msgid "Replace with:"
+#: src/dialogs/replace.glade.h:11
+#, fuzzy
+msgid "Replace with: "
 msgstr "바꾸기:"
 
-#: src/search.c:891
+#: src/dialogs/replace.glade.h:13
+msgid ""
+"Cursor\n"
+"Beginning of document\n"
+"End of document\n"
+msgstr ""
+
+#: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "바꾸기 전에 묻기"
 
-#: src/search.c:1096
-msgid "Replace?"
-msgstr "바꿀까요?"
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit 전자우편 플러그인"
 
-#: src/gE_view.c:43
-msgid "Save"
-msgstr "저장"
+#~ msgid "Read only file!"
+#~ msgstr "읽기 전용 파일!"
 
-#: src/gE_view.c:44
-msgid "Close"
-msgstr "닫기"
+#, fuzzy
+#~ msgid "Save %s As ..."
+#~ msgstr "다른 이름으로 저장..."
 
-#: src/gE_view.c:45
-msgid "Print"
-msgstr "인쇄"
+#, fuzzy
+#~ msgid ""
+#~ "Are you sure you wish to revert all changes?\n"
+#~ "(%s)"
+#~ msgstr "정말로 모든 수정을 취소하고 싶으세요?"
 
-#: src/gE_view.c:49
-msgid "Open (swap) .c/.h file"
-msgstr ".c/.h 파일 (스왑) 열기"
+#~ msgid "Document Unchanged..."
+#~ msgstr "문서가 바뀌지 않음..."
+
+#, fuzzy
+#~ msgid "_File/"
+#~ msgstr "파일(_F)"
+
+#, fuzzy
+#~ msgid "Can't open file!"
+#~ msgstr "읽기 전용 파일!"
+
+#~ msgid "Find _Line..."
+#~ msgstr "라인 찾기(_L)..."
+
+#~ msgid "Search for a line"
+#~ msgstr "라인 찾기"
+
+#, fuzzy
+#~ msgid "Find _In Files..."
+#~ msgstr "라인 찾기(_L)..."
+
+#~ msgid "Notebook"
+#~ msgstr "노트북"
+
+#~ msgid "Toplevel"
+#~ msgstr "최상위레벨"
+
+#~ msgid "Modal"
+#~ msgstr "형태"
+
+#, fuzzy
+#~ msgid "Document Settings"
+#~ msgstr "문서 탭(_D)"
+
+#~ msgid "Current Font"
+#~ msgstr "현재 글꼴"
+
+#~ msgid "Select..."
+#~ msgstr "선택..."
+
+#~ msgid "Print Command"
+#~ msgstr "인쇄 명령"
+
+#~ msgid "Window Size"
+#~ msgstr "창 크기"
+
+#, fuzzy
+#~ msgid "Current Width:"
+#~ msgstr "현재 글꼴"
+
+#, fuzzy
+#~ msgid "Use Current"
+#~ msgstr "현재 글꼴"
+
+#, fuzzy
+#~ msgid "Current Height:"
+#~ msgstr "현재 글꼴"
+
+#~ msgid "MDI Mode"
+#~ msgstr "MDI 모드"
+
+#~ msgid "_Autoindent"
+#~ msgstr "Autoindent(_A)"
+
+#~ msgid "Status_bar"
+#~ msgstr "상태막대(_b)"
+
+#~ msgid "_Wordwrap"
+#~ msgstr "Wordwrap(_W)"
+
+#~ msgid "_Linewrap"
+#~ msgstr "Linewrap(_L)"
+
+#~ msgid "_Splitscreen"
+#~ msgstr "화면 분할(_S)"
+
+#~ msgid "_Show tabs"
+#~ msgstr "탭 보이기(_S)"
+
+#~ msgid "Toolbar _relief"
+#~ msgstr "툴바 relief(_r)"
+
+#~ msgid "_Show tooltips"
+#~ msgstr "툴바 보이기(_S)"
+
+#~ msgid "Show toolbar _text"
+#~ msgstr "툴바 텍스트 보이기(_t)"
+
+#~ msgid "Show toolbar _icons"
+#~ msgstr "툴바 아이콘 보이기(_i)"
+
+#~ msgid "Revert"
+#~ msgstr "복원"
+
+#~ msgid "_Top"
+#~ msgstr "위(_T)"
+
+#~ msgid "Put the document tabs at the top"
+#~ msgstr "문서 탭을 위에 위치"
+
+#~ msgid "_Bottom"
+#~ msgstr "아래(_B)"
+
+#~ msgid "Put the document tabs at the bottom"
+#~ msgstr "문서 탭을 아래에 위치"
+
+#~ msgid "_Left"
+#~ msgstr "왼쪽(_L)"
+
+#~ msgid "Put the document tabs on the left"
+#~ msgstr "문서 탭을 왼쪽에 위치"
+
+#~ msgid "_Right"
+#~ msgstr "오른쪽(_R)"
+
+#~ msgid "Put the document tabs on the right"
+#~ msgstr "문서 탭을 오른쪽에 위치"
+
+#~ msgid "Toggle Readonly"
+#~ msgstr "읽기전용 토글"
+
+#~ msgid "_Document Tabs"
+#~ msgstr "문서 탭(_D)"
+
+#~ msgid "Change the placement of the document tabs"
+#~ msgstr "문서 탭의 위치를 바꿈"
+
+#~ msgid "Sa_ve Settings"
+#~ msgstr "설정 저장(_v)"
+
+#~ msgid "Save the current settings for future sessions"
+#~ msgstr "내일을 위해 현재 설정을 저장"
+
+#~ msgid "Replace?"
+#~ msgstr "바꿀까요?"
 
 #~ msgid ""
 #~ "Enter print command below\n"
@@ -609,51 +840,6 @@ msgstr ".c/.h 파일 (스왑) 열기"
 #~ msgid "Shell"
 #~ msgstr "쉘"
 
-#~ msgid "Cut"
-#~ msgstr "자르기"
-
-#~ msgid "Copy"
-#~ msgstr "복사"
-
-#~ msgid "Paste"
-#~ msgstr "붙이기"
-
-#~ msgid "New"
-#~ msgstr "새 문서"
-
-#~ msgid "Open"
-#~ msgstr "열기"
-
-#~ msgid "Open a file"
-#~ msgstr "파일 열기"
-
-#~ msgid "Print the current file"
-#~ msgstr "현재 파일 인쇄"
-
-#~ msgid "Cut the selection"
-#~ msgstr "선택 내용 잘라내기"
-
-#~ msgid "Copy the selection"
-#~ msgstr "선택 내용 복사하기"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "클립보드에서 붙이기"
-
-#~ msgid "Find"
-#~ msgstr "찾기"
-
-#~ msgid "Search for a string"
-#~ msgstr "문자열 찾기"
-
-#~ msgid "Exit"
-#~ msgstr "종료"
-
-#~ msgid "Exit the program"
-#~ msgstr "프로그램 종료"
-
-#~ msgid "Font"
-#~ msgstr "글꼴"
-
 #~ msgid "MDI"
 #~ msgstr "MDI"
 
@@ -701,6 +887,3 @@ msgstr ".c/.h 파일 (스왑) 열기"
 
 #~ msgid "Column:"
 #~ msgstr "열:"
-
-#~ msgid "Line"
-#~ msgstr "라인"

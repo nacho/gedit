@@ -1,1 +1,3 @@
-SUBDIRS = convert diff email sample time
+SUBDIRS = diff email time
+
+EXTRA_DIST = sample convert
