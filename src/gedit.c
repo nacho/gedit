@@ -54,22 +54,6 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)
 
 */
 
-void line_pos_callback(GtkWidget *w, GtkWidget *text)
-{
-static char statustext[32];
-
-if (main_window->documents > 0)
-{
-/*print("%s\n", GTK_TEXT(text)->current_line);*/
-sprintf (statustext,_("Line: %d, Col: %d"), 
-				GTK_TEXT(text)->cursor_pos_y/13,
-				GTK_TEXT(text)->cursor_pos_x/7);
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, statustext);
-}
-	
-
-}
-
 #ifdef WITHOUT_GNOME
 int main (int argc, char **argv)
 {
