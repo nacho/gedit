@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "POT-Creation-Date: 2002-07-23 19:06+0200\n"
-"PO-Revision-Date: 2002-07-23 20:45+0200\n"
+"PO-Revision-Date: 2002-07-31 12:17+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Okres pomiędzy automatycznymi zapisami"
 
 #: data/gedit.schemas.in.h:1
 msgid "Background Color"
-msgstr "Kolor _tła"
+msgstr "Kolor tła"
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -196,6 +196,12 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Określa sposób zawijania długich wierszy przy drukowaniu. Wartość "
+"\"GTK_WRAP_NONE\" powoduje brak zawijania, \"GTK_WRAP_WORD\" - zawijanie "
+"wierszy na granicach słów, zaś \"GTK_WRAP_CHAR\" - na granicach pojedynczych "
+"znaków. Należy pamiętać o tym, że przy odczytywaniu wartości rozpoznawane są "
+"małe i wielkie litery, więc powinny być one wpisane dokładnie w podanej "
+"postaci."
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -205,6 +211,12 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Określa sposób zawijania długich wierszy w obszarze redagowania tekstu. "
+"Wartość \"GTK_WRAP_NONE\" powoduje brak zawijania, \"GTK_WRAP_WORD\" - "
+"zawijanie wierszy na granicach słów, zaś \"GTK_WRAP_CHAR\" - na granicach "
+"pojedynczych znaków. Należy pamiętać o tym, że przy odczytywaniu wartości "
+"rozpoznawane są małe i wielkie litery, więc powinny być one wpisane "
+"dokładnie w podanej postaci."
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -255,6 +267,13 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
+"Ustawienie określa styl przycisków na pasku narzędziowym. Akceptowane "
+"wartości to: \"GEDIT_TOOLBAR_SYSTEM\", powodująca użycie domyślnego stylu w "
+"systemie, \"GEDIT_TOOLBAR_ICONS\", powodująca wyświetlanie wyłącznie ikon "
+"oraz \"GEDIT_TOOLBAR_ICONS_AND_TEXT\", która oznacza wyświetlanie ikon wraz "
+"z tekstem. Należy pamiętać o tym, że przy odczytywaniu wartości rozpoznawane "
+"są małe i wielkie litery, więc powinny być one wpisane dokładnie w podanej "
+"postaci."
 
 #: data/gedit.schemas.in.h:1
 msgid "Tab Size"
@@ -278,6 +297,18 @@ msgid ""
 "UTF-8 will be used. Note that the values are case-sensitive, so make sure "
 "they appear exactly as mentioned here."
 msgstr ""
+"Ustawienie określa sposób kodowania znaków, używany przy zapisywaniu plików. "
+"Akceptowane wartości to: \"GEDIT_SAVE_ALWAYS_UTF8\" - obowiązkowy zapis przy "
+"użyciu UTF-8, \"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" - wcześniejsza próba "
+"użycia kodowania używanego przez aktualne ustawienia narodowe, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" - zachowanie, o ile to "
+"możliwe, pierwotnego kodowania pliku (UTF-8 w przypadku nowych plików) oraz "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" - zachowanie, o ile to "
+"możliwe, pierwotnego kodowania pliku, jednak w następnej kolejności próba "
+"użycia kodowania używanego przez aktualne ustawienia narodowe. W przypadku, "
+"gdy konwersja się nie powiedzie, zostanie użyte kodowanie UTF-8. Należy "
+"pamiętać o tym, że przy odczytywaniu wartości rozpoznawane są małe i wielkie "
+"litery, więc powinny być one wpisane dokładnie w podanej postaci."
 
 #: data/gedit.schemas.in.h:1
 msgid "Toolbar Buttons Style"
@@ -315,7 +346,7 @@ msgid ""
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 "Określa, czy program gedit powinien przy zapisywaniu plików tworzyć kopie "
-"zapasowe.Rozszerzenie nazw plików zapasowych można ustawić korzystając z "
+"zapasowe. Rozszerzenie nazw plików zapasowych można ustawić korzystając z "
 "opcji \"Rozszerzenie kopii zapasowej\"."
 
 #: data/gedit.schemas.in.h:1
@@ -343,6 +374,9 @@ msgid ""
 "Make sure you turn on the \"Status Bar is Visible\" option for this to take "
 "effect."
 msgstr ""
+"Określa, czy na pasku stanu w oknach redagowania powinno być wyświetlane "
+"położenie kursora. Opcja jest brana pod uwagę tylko, jeśli aktywna jest "
+"opcja \"Wyświetlanie paska stanu\"."
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -350,6 +384,9 @@ msgid ""
 "windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
 "to take effect."
 msgstr ""
+"Określa, czy na pasku stanu w oknach redagowania powinien być wyświetlany "
+"tryb redagowania - wstawianie lub nadpisywanie. Opcja jest brana pod uwagę "
+"tylko, jeśli aktywna jest opcja \"Wyświetlanie paska stanu\"."
 
 #: data/gedit.schemas.in.h:1
 msgid "Whether the toolbar should be visible in editing windows."
@@ -364,6 +401,10 @@ msgid ""
 "specified in the \"Background Color\", \"Text Color\", \"Selected Text "
 "Color\", and \"Selection Color\" options."
 msgstr ""
+"Określa, czy w obszarze redagowania tekstu powinny być używane domyślne "
+"kolory systemowe. Jeśli opcja jest nieaktywna, wówczas używane są kolory "
+"pobrane z ustawień \"Kolor tła\", \"Kolor tekstu\", \"Kolor zaznaczonego "
+"tekstu\", oraz \"Kolor zaznaczenia\"."
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -371,6 +412,9 @@ msgid ""
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
 msgstr ""
+"Określa, czy w obszarze redagowania tekstu powinna być używana domyślna "
+"czcionka systemowa. Jeśli opcja jest nieaktywna, wówczas używana jest "
+"czcionka zdefiniowana w ustawieniu \"Czcionka w edytorze\"."
 
 #: plugins/ASCII/ascii.c:1
 msgid "_ASCII Table"
@@ -442,12 +486,12 @@ msgstr ""
 
 #: plugins/cvschangelog/cvschangelog.c:1
 msgid "CVS ChangeLog"
-msgstr "Plik Changelog z CVS"
+msgstr "Plik ChangeLog z CVS"
 
 #: plugins/cvschangelog/cvschangelog.c:1
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
-"Wtyczka otwierająca pliki Changelog znalezione w komunikatach zatwierdzania "
+"Wtyczka otwierająca pliki ChangeLog znalezione w komunikatach zatwierdzania "
 "CVS."
 
 #: plugins/cvschangelog/cvschangelog.c:1
@@ -1086,7 +1130,7 @@ msgstr " wierszy"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Używanie zawsze kodowania UTTF-8 (szybsze)"
+msgstr "Używanie zawsze kodowania U_TF-8 (szybsze)"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Always use _UTF-8 encoding (faster)"
@@ -1205,12 +1249,13 @@ msgstr ""
 msgid "The print page settings let you customize how gedit prints documents."
 msgstr ""
 "Ustawienia drukowania strony pozwalają na wybranie sposobu drukowania "
-"dokumentów przez gedita."
+"dokumentów przez program gedit."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
-"Ustawienia zapisu pozwalają na wybranie sposobu zapisu plików przez gedita."
+"Ustawienia zapisu pozwalają na wybranie sposobu zapisu plików przez program "
+"gedit."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The tabs settings let you customize the tabs width."
@@ -1222,7 +1267,7 @@ msgid ""
 "undo."
 msgstr ""
 "Ustawienia cofania zmian pozwalają na określenie maksymalnej liczby "
-"operacji, które można wycofać w danym momencie pracy z geditem."
+"operacji, które można wycofać w danym momencie pracy z programem gedit."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
@@ -1890,7 +1935,7 @@ msgstr "Otwiera plik spod podanego adresu URI"
 
 #: src/gedit-ui.xml.h:1
 msgid "Open the gedit manual"
-msgstr "Otwiera podręcznik gedita"
+msgstr "Otwiera podręcznik programu gedit"
 
 #: src/gedit-ui.xml.h:1
 msgid "Paste"
