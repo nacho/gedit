@@ -9,10 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.8\n"
-"POT-Creation-Date: 2002-05-07 11:59-0400\n"
-"PO-Revision-Date: 2002-05-07 11:25GMT\n"
-"Last-Translator: Pablo del Campo <pablodc@bigfoot.com>\n"
-"Language-Team: Español <traductores@es.gnome.org>\n"
+"POT-Creation-Date: 2002-05-16 23:06+0200\n"
+"PO-Revision-Date: 2002-05-17 23:27GMT\n"
+"Last-Translator: Pablo Gonzalo del Campo <pablodc@bigfoot.com>\n"
+"Language-Team: español <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -312,7 +312,7 @@ msgstr "Caracteres (con espacios)"
 msgid "File Name"
 msgstr "Nombre del archivo"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
 msgid "Lines"
 msgstr "Líneas"
 
@@ -542,7 +542,7 @@ msgid "Could not create the Plugin Manager dialog"
 msgstr "No se pudo crear la ventana del Administrador de Extensiones"
 
 #: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Reemplazar"
 
@@ -551,12 +551,12 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:104
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:103
 msgid "_Replace"
 msgstr "_Reemplazar"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Buscar"
 
@@ -581,8 +581,7 @@ msgid "Set program location ..."
 msgstr "Configurar ruta del programa..."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgid "Could not find the required widgets inside program-location-dialog.glade2.\n"
 msgstr ""
 "No se pudo encontrar los controles necesarios dentro de la ventana de "
 "dirección del programa glade2\n"
@@ -638,12 +637,12 @@ msgid "Line numbers"
 msgstr "Números de línea"
 
 #: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:63
+#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Guardar"
 
 #: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:83
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
 msgid "Undo"
 msgstr "Deshacer"
 
@@ -660,7 +659,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:47
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Imprimir"
 
@@ -672,7 +672,7 @@ msgstr "Interfaz de usuario"
 msgid "Cat_egories:"
 msgstr "Cat_egorías:"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:46
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Preferencias"
 
@@ -693,15 +693,13 @@ msgid "Push this button to configure background color"
 msgstr "Presione este botón para configurar el color de fondo"
 
 #: src/dialogs/gedit-preferences-dialog.c:913
-msgid ""
-"Push this button to configure color in which selected text should appear"
+msgid "Push this button to configure color in which selected text should appear"
 msgstr ""
 "Pulse este botón para configurar el color con el cual aparecerá el texto "
 "seleccionado"
 
 #: src/dialogs/gedit-preferences-dialog.c:915
-msgid ""
-"Push this button to configure color in which selected text should be marked"
+msgid "Push this button to configure color in which selected text should be marked"
 msgstr ""
 "Pulse este botón para configurar el color con el cual aparecerá el texto "
 "marcado"
@@ -915,8 +913,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:48
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
-"La configuración de solapas le permite personalizar el ancho de las solapas."
+msgstr "La configuración de solapas le permite personalizar el ancho de las solapas."
 
 #: src/dialogs/gedit-preferences.glade2.h:49
 msgid ""
@@ -954,8 +951,7 @@ msgstr "Encima"
 
 #: src/dialogs/gedit-preferences.glade2.h:55
 msgid "U_se current locale only if the file already use it"
-msgstr ""
-"U_sar la _localización actual sólo si el archivo ya la está utilizando."
+msgstr "U_sar la _localización actual sólo si el archivo ya la está utilizando."
 
 #: src/dialogs/gedit-preferences.glade2.h:56
 msgid "U_se default theme colors"
@@ -1001,7 +997,7 @@ msgstr "_Fuente utilizada por el editor: "
 msgid "_Font used to print headers:"
 msgstr "_Fuente utilizada para imprimir encabezados:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:96
 msgid "_Icon"
 msgstr "_Icono"
 
@@ -1225,42 +1221,46 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit es un editor de texto compacto y simple para Gnome"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 msgid "Untitled"
 msgstr "SinNombre"
 
-#: src/gedit-document.c:660 src/gedit-document.c:766
+#: src/gedit-document.c:556 src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Nombre de archivo inválido"
+
+#: src/gedit-document.c:700 src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Datos UTF-8 inválidos"
 
-#: src/gedit-document.c:966
+#: src/gedit-document.c:1006
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "No se pudo leer la información del enlace simbólico para %s"
 
-#: src/gedit-document.c:1012
+#: src/gedit-document.c:1052
 msgid "The file has too many symbolic links."
 msgstr "El archivo tiene demasiados enlaces simbólicos."
 
-#: src/gedit-document.c:1061
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit no puede manejar %s direcciones en el modo escritura."
 
-#: src/gedit-document.c:1068
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit no puede manejar este tipo de dirección en el modo escritura."
 
-#: src/gedit-document.c:1080
+#: src/gedit-document.c:1120
 msgid "Invalid filename."
 msgstr "Nombre de archivo inválido."
 
-#: src/gedit-document.c:1158
+#: src/gedit-document.c:1198
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1268,7 +1268,7 @@ msgstr ""
 "No hay suficiente espacio en el disco para guardar el archivo.\n"
 "Por favor libere un poco de espacio en el disco e intente nuevamente."
 
-#: src/gedit-document.c:1163
+#: src/gedit-document.c:1203
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1278,15 +1278,15 @@ msgstr ""
 "los tamaños de archivo. Por favor intente guardar un archivo mas pequeño o "
 "guardarlo en un disco que no posea estas limitaciones."
 
-#: src/gedit-document.c:1200
+#: src/gedit-document.c:1240
 msgid "Could not create a backup file."
 msgstr "No se pudo crear un archivo de respaldo."
 
-#: src/gedit-document.c:1348
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "No es posible recuperar un documento Sin Título"
 
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1295,11 +1295,11 @@ msgstr ""
 "Ya existe un archivo llamado \"%s\".\n"
 "¿Desea reemplazarlo con el que esta guardando ahora?"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "No Ree_mplazar"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:481
 msgid "Select a filename to save"
 msgstr "Seleccione el nombre de archivo a guardar"
 
@@ -1307,54 +1307,54 @@ msgstr "Seleccione el nombre de archivo a guardar"
 msgid "Open File ..."
 msgstr "Abrir un archivo ..."
 
-#: src/gedit-file.c:134 src/gedit-file.c:636
+#: src/gedit-file.c:141 src/gedit-file.c:708
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Archivo '%s' cargado"
 
-#: src/gedit-file.c:242 src/gedit-file.c:314
+#: src/gedit-file.c:264 src/gedit-file.c:351
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Guardando archivo '%s'..."
 
-#: src/gedit-file.c:263 src/gedit-file.c:321
+#: src/gedit-file.c:285 src/gedit-file.c:361
 msgid "The document has not been saved."
 msgstr "El documento no ha sido guardado"
 
-#: src/gedit-file.c:275 src/gedit-file.c:319
+#: src/gedit-file.c:299 src/gedit-file.c:358
 #, c-format
 msgid "File '%s' saved."
 msgstr "Se guardó el archivo '%s'."
 
-#: src/gedit-file.c:306
+#: src/gedit-file.c:340
 msgid "Save as ..."
 msgstr "Guardar como..."
 
-#: src/gedit-file.c:464
+#: src/gedit-file.c:519
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Recuperando el archivo '%s'..."
 
-#: src/gedit-file.c:477
+#: src/gedit-file.c:532
 msgid "The document has not been reverted."
 msgstr "El documento no ha sido recuperado."
 
-#: src/gedit-file.c:487
+#: src/gedit-file.c:542
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Archivo '%s' recuperado."
 
-#: src/gedit-file.c:530
+#: src/gedit-file.c:589
 #, c-format
 msgid "Loading %d file..."
 msgstr "Cargando el archivo %d..."
 
-#: src/gedit-file.c:566
+#: src/gedit-file.c:625
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i archivos cargados"
 
-#: src/gedit-file.c:690
+#: src/gedit-file.c:766
 msgid "Could not read data from stdin."
 msgstr "No se pudo leer datos desde la entrada estándar."
 
@@ -1437,10 +1437,9 @@ msgstr "Error: Imposible desactivar la extensión '%s'"
 #: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
-"Error: Imposible actualizar la interfaz de usuario de la extensión '%s'"
+msgstr "Error: Imposible actualizar la interfaz de usuario de la extensión '%s'"
 
-#: src/gedit-print.c:166
+#: src/gedit-print.c:178
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1448,26 +1447,22 @@ msgstr ""
 "gedit no puede imprimir debido a que no puede\n"
 "encontrar una de las fuentes necesarias."
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit-Imprimir Documento"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "Archivo: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "Página: %d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit - Vista Preliminar"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1483,416 +1478,412 @@ msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "Acerca de..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Agregar/Eliminar extensiones"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "P_ersonalizar Barra de Estado"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Cambia la visibilidad de la barra de estado en la ventana actual"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Cambia la visibilidad de la barra de herramientas en la ventana actual"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Cerrar t_odo"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Cerrar T_odo"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Cerrar todos los archivos abiertos"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Cerrar el archivo actual"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Configurar la aplicación"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Contenidos"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Copiar la selección"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "Cor_tar"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Personalizar"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Personalizar Barras de Herramientas"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Cortar la selección"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
 msgid "Delete"
 msgstr "Borrar"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Borrar el texto seleccionado"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
 msgstr "Volcar XML"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
 msgstr "Volcar la descripción UI Xml"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:25
 msgid "Find Again"
 msgstr "Buscar Siguiente"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "Buscar Siguiente"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Ir a la línea cuyo número se especifica"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "Ir a la _Línea"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Icono y _Texto"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Barra de Herramientas principal"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Nuevo"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Mostrar únicamente iconos en la barra"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Abrir"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 msgid "Open Location..."
 msgstr "Abrir Dirección..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 msgid "Open _Location..."
 msgstr "Abrir _Dirección..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
 msgstr "Abrir un archivo desde una dirección especifica"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Abrir el manual de gedit"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Pegar el contenido del portapapeles"
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:41
 msgid "Plugin _Manager"
 msgstr "Administrador de Extensiones"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:42
 msgid "Plugin _Manager..."
 msgstr "Administrad_or de Extensiones..."
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
 msgstr "Pr_eferencias..."
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:46
 msgid "Print Previe_w"
 msgstr "Vista prelimina_r de impresión"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:47
 msgid "Print Preview"
 msgstr "Vista prelimina_r de la impresión"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:48
 msgid "Print Setup"
 msgstr "Configurar Impresora"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:49
 msgid "Print preview"
 msgstr "Vista preliminar de la impresión..."
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:50
 msgid "Print the current file"
 msgstr "Imprimir el archivo actual"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:51
 msgid "Quit"
 msgstr "Salir"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:52
 msgid "Quit the program"
 msgstr "Salir del programa"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:53
 msgid "Recent _Files"
 msgstr "Archivos Rec_ientes"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:54
 msgid "Redo"
 msgstr "Rehacer"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:55
 msgid "Redo the undone action"
 msgstr "Rehacer la última operación deshecha"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:57
 msgid "Replace a string"
 msgstr "Reemplazar una cadena"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:58
 msgid "Revert"
 msgstr "Recuperar"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:59
 msgid "Revert to a saved version of the file"
 msgstr "Recuperar una versión guardada del archivo"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:60
 msgid "Sa_ve All"
 msgstr "Guardar _Todo"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:62
 msgid "Save All"
 msgstr "Guardar Todo"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:63
 msgid "Save As"
 msgstr "Guardar Como"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:64
 msgid "Save _As..."
 msgstr "Guardar Como"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:65
 msgid "Save all open files"
 msgstr "Guardar todos los archivos abiertos"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:66
 msgid "Save the current file"
 msgstr "Guardar el archivo actual"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:67
 msgid "Save the current file with a different name"
 msgstr "Guardar el archivo actual con un nombre distinto"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:68
 msgid "Search again for the same string"
 msgstr "Buscar de nuevo la misma cadena"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:69
 msgid "Search for a string"
 msgstr "Buscar una cadena de texto"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:70
 msgid "Select All"
 msgstr "Seleccionar Todo"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:71
 msgid "Select _All"
 msgstr "Seleccionar Todo"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:72
 msgid "Select the entire document"
 msgstr "Seleccionar el documento completo"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:73
 msgid "Set toolbar button style according to desktop default"
 msgstr ""
 "Configurar el estilo de la barra de herramientas de acuerdo al estilo del "
 "escritorio por omisión"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:74
 msgid "Setup the page settings for your current printer"
 msgstr "Configurar los seteos de página para su impresora actual"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:75
 msgid "Show _Cursor Position"
 msgstr "Mostrar la Posición del _Cursor"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:76
 msgid "Show _Overwrite Mode"
 msgstr "Mostrar M_odo de Sobreescritura"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:77
 msgid "Show _Tooltips"
 msgstr "Mostrar Conse_jos"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:78
 msgid "Show cursor position in the statusbar"
 msgstr "Mostrar la posición del cursor en la barra de estado"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:79
 msgid "Show overwrite mode in the statusbar"
 msgstr "Mostrar el modo de sobreescritura en la barra de estado"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:80
 msgid "Show tooltips in the toolbar"
 msgstr "Mostrar consejos en la barra de herramientas"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Deshacer la última operación"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_About..."
 msgstr "_Acerca de..."
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
+msgid "_Contents"
+msgstr "_Contenidos"
+
+#: src/gedit-ui.xml.h:86
 msgid "_Copy"
 msgstr "_Copiar"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:87
 msgid "_Customize Toolbar"
 msgstr "_Personalizar Barra de Herramientas"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Debug"
 msgstr "_Depurar"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Delete"
 msgstr "_Borrar"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:90
 msgid "_Desktop Default"
 msgstr "E_scritorio por Omisión"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:91
 msgid "_Documents"
 msgstr "_Documentos"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:92
 msgid "_Edit"
 msgstr "_Editar"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:93
 msgid "_File"
 msgstr "_Archivo"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:94
 msgid "_Find"
 msgstr "_Buscar"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:95
 msgid "_Help"
 msgstr "_Ayuda"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:97
 msgid "_New"
 msgstr "_Nuevo"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:98
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:99
 msgid "_Paste"
 msgstr "_Pegar"
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:100
 msgid "_Print..."
 msgstr "_Imprimir..."
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:101
 msgid "_Quit"
 msgstr "_Salir"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:102
 msgid "_Redo"
 msgstr "_Rehacer"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:104
 msgid "_Revert"
 msgstr "Revertir"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:105
 msgid "_Save"
 msgstr "_Guardar"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:106
 msgid "_Search"
 msgstr "_Buscar"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:107
 msgid "_Statusbar"
 msgstr "_Barra de Estado"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:108
 msgid "_Toolbar"
 msgstr "Ba_rra de Herramientas"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:109
 msgid "_Tools"
 msgstr "_Herramientas"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:110
 msgid "_Undo"
 msgstr "_Deshacer"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:111
 msgid "_View"
 msgstr "_Ver"
 
@@ -1915,8 +1906,7 @@ msgstr "No se pudo abrir el archivo \"%s\" porque contiene datos corruptos."
 
 #: src/gedit-utils.c:857
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "No se pudo abrir el archivo \"%s\" porque gedit no puede manejar %s "
 "direcciones."
@@ -1928,8 +1918,7 @@ msgstr "No se pudo abrir el archivo \"%s\""
 
 #: src/gedit-utils.c:872
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
+msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "No se pudo abrir el archivo \"%s\" porque contiene datos en un formato "
 "inválido."
@@ -2087,13 +2076,11 @@ msgstr ""
 #: src/gedit-utils.c:1116
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"No se pudo recuperar el archivo \"%s\" porque contiene datos corruptos."
+msgstr "No se pudo recuperar el archivo \"%s\" porque contiene datos corruptos."
 
 #: src/gedit-utils.c:1127
 #, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "No se pudo recuperar el archivo \"%s\" porque gedit no puede manejar %s "
 "direcciones."
@@ -2205,57 +2192,75 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:69
 msgid "Show mdi debugging messages."
 msgstr "Desplegar mensajes de depuración mdi"
 
-#: src/gedit2.c:71
+#: src/gedit2.c:72
 msgid "Show commands debugging messages."
 msgstr "Desplegar mensajes de depuración de comandos"
 
-#: src/gedit2.c:74
+#: src/gedit2.c:75
 msgid "Show document debugging messages."
 msgstr "Desplegar mensajes de depuración de documento."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:78
 msgid "Show file debugging messages."
 msgstr "Desplegar mensajes de depuración de File"
 
-#: src/gedit2.c:80
+#: src/gedit2.c:81
 msgid "Show plugin debugging messages."
 msgstr "Mostrar mensajes de depuración de extensiones."
 
-#: src/gedit2.c:83
+#: src/gedit2.c:84
 msgid "Show prefs debugging messages."
 msgstr "Desplegar mensajes de depuración de prefs."
 
-#: src/gedit2.c:86
+#: src/gedit2.c:87
 msgid "Show printing debugging messages."
 msgstr "Desplegar mensajes de depuración de impresión"
 
-#: src/gedit2.c:89
+#: src/gedit2.c:90
 msgid "Show search debugging messages."
 msgstr "Desplegar mensajes de depuración de buscar."
 
-#: src/gedit2.c:92
+#: src/gedit2.c:93
 msgid "Show undo debugging messages."
 msgstr "Desplegar mensajes de depuración de deshacer."
 
-#: src/gedit2.c:95
+#: src/gedit2.c:96
 msgid "Show view debugging messages."
 msgstr "Desplegar mensajes de depuración de ver."
 
-#: src/gedit2.c:98
+#: src/gedit2.c:99
 msgid "Show recent debugging messages."
 msgstr "Desplegar mensajes de depuración recientes"
 
-#: src/gedit2.c:101
+#: src/gedit2.c:102
+msgid "Show session management debugging messages."
+msgstr "Desplegar mensajes de depuración del manejador de sesiones."
+
+#: src/gedit2.c:105
 msgid "Turn on all debugging messages."
 msgstr "Desplegar todos los mensajes de depuración"
 
-#: src/gedit2.c:159
+#: src/gedit2.c:164
 msgid "The GNOME text editor"
 msgstr "El Editor de texto de GNOME"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Abrir %s"
+
+#~ msgid "gedit - Print Document"
+#~ msgstr "gedit-Imprimir Documento"
+
+#~ msgid "About..."
+#~ msgstr "Acerca de..."
+
+#~ msgid "Contents"
+#~ msgstr "Contenidos"
 
 #~ msgid "gtk-cancel"
 #~ msgstr "gtk-cancel"
@@ -2288,12 +2293,6 @@ msgstr "El Editor de texto de GNOME"
 #~ "Asegúrese que la ruta que ha proporcionado exista, y que tiene los "
 #~ "permisos de escritura necesarios."
 
-#~ msgid "Open %s"
-#~ msgstr "Abrir %s"
-
-#~ msgid "_Contents"
-#~ msgstr "_Contenidos"
-
 #~ msgid "_Plugin Manager"
 #~ msgstr "Administrad_or de extensiones"
 
@@ -2302,3 +2301,4 @@ msgstr "El Editor de texto de GNOME"
 
 #~ msgid "Could not revert the file \"%s\""
 #~ msgstr "No se pudo recuperar el archivo \"%s\""
+
