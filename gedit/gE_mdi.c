@@ -219,7 +219,7 @@ gE_document *gE_document_new ()
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
 	    
-	    doc->buf = g_string_new(" ");
+	    /*doc->buf = g_string_new();*/
 	    
 	    /* gE_documents = g_list_append(gE_documents, doc); */
 

@@ -146,7 +146,11 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	
 		
 	doc = view->document;
-	doc->buf = g_string_insert (doc->buf, position, buffer);
+	if (doc->buf)
+	  doc->buf = g_string_insert (doc->buf, position, buffer);
+	else
+	  doc->buf = g_string_new (buffer);
+	  
 	g_free (buffer);
 
 }
@@ -186,7 +190,8 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	gtk_text_thaw (GTK_TEXT (significant_other));
 	
 	doc = view->document;
-	doc->buf = g_string_erase (doc->buf, end_pos, start_pos);
+	if (doc->buf)
+	  doc->buf = g_string_erase (doc->buf, end_pos, start_pos);
 	
 }
 
@@ -549,7 +554,7 @@ GtkWidget *gE_view_new (gE_document *doc)
 	
 	view->document = doc;
 
-	if (view->document->buf->str)
+	if (view->document->buf)
 	{
 	  	g_print ("gE_view_init: inserting buffer..\n");
 	  	

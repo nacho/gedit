@@ -1,3 +1,12 @@
+Sun Aug  8 19:26:18 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: (gE_document_new) Don't initialise the GString here.
+	
+	* gE_view.c: (doc_insert_text_cb) Check whether the GString is initialised,
+	  if not, create it and insert the buffer.
+	  (gE_view_new) Erm, dont check for the GString content (as it may not have
+	  been initialised), instead just check wheter the GSTring exists.
+
 Sun Aug  8 18:53:39 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* main.h: (gE_document) Made the buffer a GString.
