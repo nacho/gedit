@@ -62,4 +62,6 @@ gint		init_plugin (PluginData *pd);
 void		gedit_plugins_window_add (GnomeApp *app);
 void		gedit_plugin_program_location_clear (gchar *program_name);
 gchar *		gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
+gchar *		gedit_plugin_program_location_string (gchar *program_name);
+
 #endif /* __PLUGIN_H__ */

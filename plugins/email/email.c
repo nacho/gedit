@@ -98,18 +98,39 @@ change_location_cb (GtkWidget *button, gpointer userdata)
 	gchar * new_location;
 	GtkWidget *dialog;
 	GtkWidget *label;
+	gchar * config_string;
+	gchar * old_location = NULL;
+
+	gedit_debug ("start", DEBUG_PLUGINS);
 
 	dialog = userdata;
-	g_return_if_fail (GTK_IS_WIDGET(dialog));
+
+	/* Save a copy of the old location, in case the user cancels the dialog */
+	config_string = gedit_plugin_program_location_string ("sendmail");
+	if (gnome_config_get_string (config_string))
+		old_location = g_strdup (gnome_config_get_string (config_string));
+	g_free (config_string);
 
 	/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 	   it is used to display "you can not use the [name] plugin without this program... */
 	gedit_plugin_program_location_clear ("sendmail");
 	new_location  = gedit_plugin_program_location_get ("sendmail",  _("email"), TRUE);
 
+	g_print ("New location : *%s* !!!!!!!!!!!!\n", new_location);
+
 	if (!new_location)
 	{
 		gdk_window_raise (dialog->window);
+		if (old_location != NULL)
+		{
+			config_string = gedit_plugin_program_location_string ("sendmail");
+			g_print ("Setting config string to %s\n", old_location);
+			gnome_config_set_string (config_string, old_location);
+			g_free (config_string);
+			gnome_config_sync ();
+			g_free (old_location);
+		}
+		gedit_debug ("return", DEBUG_PLUGINS);
 		return;
 	}
 
@@ -119,15 +140,11 @@ change_location_cb (GtkWidget *button, gpointer userdata)
 	gtk_label_set_text (GTK_LABEL (label),
 			    new_location);
 	g_free (new_location);
+	g_free (old_location);
 	
-	/* Set the dialog parent and modal type */
-	/*
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	*/
-
 	gdk_window_raise (dialog->window);	
+
+	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 static void
@@ -188,7 +205,6 @@ email (void)
 		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
 				    gnome_config_get_string ("/gedit/email_plugin/From"));
 	}
-	
 	else if (fullname && hostname)
 	{
 		from = g_strdup_printf ("%s <%s@%s>",
@@ -209,7 +225,7 @@ email (void)
 
 	/* Set the filename label */
 	if (doc->filename)
-		filename_label_label = g_strdup (doc->filename);
+		filename_label_label = g_strdup (g_basename(doc->filename));
 	else
 		filename_label_label = g_strdup (_("Untitled"));
 	gtk_label_set_text (GTK_LABEL (filename_label),
