@@ -27,14 +27,21 @@
 #define GEDIT_ID	"gEdit "VERSION
 
 #define UNKNOWN		N_("Unknown")
-/*#define UNTITLED	N_("Untitled") */
 
 #define DEFAULT_FONT \
 	"-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
 #define DEFAULT_FONTSET \
 	"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
 
-typedef struct _gedit_window {
+
+typedef struct _gedit_document gedit_document;
+typedef struct _gedit_data gedit_data;
+typedef struct _gedit_function gedit_function;
+typedef struct _gedit_window gedit_window;
+
+extern gedit_window *window;
+
+struct _gedit_window {
 	GtkWidget *window;
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
@@ -52,13 +59,9 @@ typedef struct _gedit_window {
 	GtkWidget *popup;
 
 	GtkPositionType tab_pos;
+};
 
-} gedit_window;
-
-extern gedit_window *window;
-
-typedef struct _gedit_document {
-
+struct _gedit_document {
 	GnomeMDIChild mdi_child;
 	
 	GList *views;
@@ -79,23 +82,22 @@ typedef struct _gedit_document {
 	GList *undo;		/* Undo Stack */
 	GList *undo_top;	
 	GList *redo;		/* Redo Stack */
+};
 
-} gedit_document;
-
-typedef struct _gedit_data {
+struct _gedit_data {
 	gedit_window *window;
 	gedit_document *document;
 	gpointer temp1;
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
-} gedit_data;
+};
 
-typedef struct _gedit_function {
+struct _gedit_function {
 	gchar *name;
 	gchar *tooltip_text;
 	gchar *icon;
 	GtkSignalFunc callback;
-} gedit_function;
+};
 
 extern GList *window_list;
 GList *gedit_documents;

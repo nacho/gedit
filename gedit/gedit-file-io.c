@@ -27,7 +27,7 @@
 #include "gE_view.h"
 #include "gE_window.h"
 #include "gedit-file-io.h"
-
+#include "gedit-utils.h"
 
 /**
  * gedit_file_open:
@@ -77,12 +77,7 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 											   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
 				}
 
-/*				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname); */
-
-				flash = g_strdup_printf ("%s %s", _(MSGBAR_FILE_OPENED), fname);
-				gnome_app_flash (mdi->active_window, flash);
-				g_free (flash);
-				doc->changed = FALSE;
+				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname); 
 
 				/* update the recent files menu */
 				recent_add (fname);

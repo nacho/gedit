@@ -1,5 +1,9 @@
 2000-04-03  Jason Leach  <leach@wam.umd.edu>
 
+	* gE_mdi.c (gedit_document_destroy): fixed a crash when gedit
+	tries to open a document without read permissions, and then when
+	you go to exit.
+
 	* gE_window.c (gedit_window_set_status_bar): new function, it will
 	change your life (if your life is lacking dynamic control of
 	enabling/disabling the statusbar)

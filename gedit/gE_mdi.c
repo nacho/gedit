@@ -157,12 +157,13 @@ gedit_document_destroy (GtkObject *obj)
 {
 	gedit_document *doc;
 	
-	doc = GE_DOCUMENT(obj);
-	
-	if (doc->filename)
-		g_free (doc->filename);
-	
-	g_free (doc->buf->str);
+	doc = GE_DOCUMENT (obj);
+
+	g_free (doc->filename);
+
+	if (doc->buf)
+		g_free (doc->buf->str);
+
 	doc->buf = NULL;
 	
 	if (doc->undo)
