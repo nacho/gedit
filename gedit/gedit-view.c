@@ -32,6 +32,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <libgnome/gnome-i18n.h>
 #include "gedit-view.h"
 #include "gedit-debug.h"
@@ -55,6 +57,17 @@ struct _GeditViewPrivate
 };
 
 
+/* Implement DnD for application/x-color drops */
+typedef enum {
+	TARGET_COLOR = 200
+} GeditViewDropTypes;
+
+static GtkTargetEntry drop_types[] = {
+	{"application/x-color", 0, TARGET_COLOR}
+};
+
+static gint n_drop_types = sizeof (drop_types) / sizeof (drop_types[0]);
+
 static void gedit_view_class_init 	(GeditViewClass	*klass);
 static void gedit_view_init 		(GeditView 	*view);
 static void gedit_view_finalize 	(GObject 	*object);
@@ -75,6 +88,15 @@ static gint gedit_view_calculate_real_tab_width (GeditView *view, gint tab_size)
 static void gedit_view_populate_popup (GtkTextView *textview, GtkMenu *menu, gpointer data);
 static void gedit_view_undo_activate_callback (GtkWidget *menu_item, GeditDocument *doc);
 static void gedit_view_redo_activate_callback (GtkWidget *menu_item, GeditDocument *doc);
+
+static void gedit_view_dnd_drop (GtkTextView *view, 
+			     GdkDragContext *context,
+			     gint x,
+			     gint y,
+			     GtkSelectionData *selection_data,
+			     guint info,
+			     guint time,
+			     gpointer data);
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -143,6 +165,7 @@ gedit_view_class_init (GeditViewClass *klass)
   	object_class->finalize = gedit_view_finalize;
 
 	GTK_WIDGET_CLASS (klass)->grab_focus = gedit_view_grab_focus;
+	
 }
 
 /* This function is taken from gtk+/tests/testtext.c */
@@ -450,6 +473,7 @@ GeditView*
 gedit_view_new (GeditDocument *doc)
 {
 	GeditView *view;
+	GtkTargetList *tl;
 	
 	gedit_debug (DEBUG_VIEW, "START");
 
@@ -476,7 +500,18 @@ gedit_view_new (GeditDocument *doc)
 	/* Set tab size: this function must be called after show */
 	gedit_view_set_tab_size (view, gedit_prefs_manager_get_tabs_size ());
 
-	g_signal_connect (GTK_TEXT_BUFFER (doc),
+
+	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view->priv->text_view));
+	g_return_val_if_fail (tl != NULL, view);
+
+	gtk_target_list_add_table (tl, drop_types, n_drop_types);
+	
+	g_signal_connect (G_OBJECT (view->priv->text_view), 
+			  "drag_data_received", 
+			  G_CALLBACK (gedit_view_dnd_drop), 
+			  NULL);
+
+	g_signal_connect (GTK_TEXT_BUFFER (doc), 
 			  "changed",
 			  G_CALLBACK (gedit_view_update_cursor_position_statusbar),
 			  view);
@@ -1006,5 +1041,55 @@ gedit_view_populate_popup (GtkTextView *textview, GtkMenu *menu, gpointer data)
 		      	  G_CALLBACK (gedit_view_undo_activate_callback), doc);
 	gtk_widget_show (menu_item);
 	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);	
+}
+
+static void 
+gedit_view_dnd_drop (GtkTextView *view, 
+		     GdkDragContext *context,
+		     gint x,
+		     gint y,
+		     GtkSelectionData *selection_data,
+		     guint info,
+		     guint time,
+		     gpointer data)
+{
+
+	GtkTextIter iter;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (info == TARGET_COLOR) 
+	{
+		guint16 *vals;
+		gchar string[] = "#000000";
+		
+		if (selection_data->length < 0)
+			return;
+
+		if ((selection_data->format != 16) || (selection_data->length != 8)) 
+		{
+			g_warning ("Received invalid color data\n");
+			return;
+		}
+
+		vals = (guint16 *) selection_data->data;
+
+		vals[0] /= 256;
+	        vals[1] /= 256;
+		vals[2] /= 256;
+		
+		g_snprintf (string, sizeof (string), "#%02X%02X%02X", vals[0], vals[1], vals[2]);
+		
+		gtk_text_view_get_iter_at_location (view, &iter, x, y);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (view->buffer), &iter, string, strlen (string));
+
+		/*
+		 * FIXME: Check if the iter is inside a selection
+		 * If it is, remove the selection and then insert at
+		 * the cursor position
+		 */
+
+		return;
+	}
 }
 

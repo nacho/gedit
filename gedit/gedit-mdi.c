@@ -119,6 +119,19 @@ static void		 gedit_window_prefs_save 		(GeditWindowPrefs *prefs);
 
 static BonoboMDIClass *parent_class = NULL;
 
+enum
+{
+	TARGET_URI_LIST = 100
+};
+
+static GtkTargetEntry drag_types[] =
+{
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+};
+
+static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
+
+
 GType
 gedit_mdi_get_type (void)
 {
@@ -254,14 +267,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GnomeRecentModel *model;
 	GeditWindowPrefs *prefs;
 	GdkWindowState state;
-
-	static GtkTargetEntry drag_types[] =
-	{
-		{ "text/uri-list", 0, 0 },
-	};
-
-	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
-
+	
 	gedit_debug (DEBUG_MDI, "");
 	
 	ui_component = bonobo_mdi_get_ui_component_from_window (win);
@@ -509,6 +515,9 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 	
 	gedit_debug (DEBUG_MDI, "");
 
+	if (info != TARGET_URI_LIST)
+		return;
+			
 	list = gnome_vfs_uri_list_parse (selection_data->data);
 	p = list;
 
@@ -760,13 +769,6 @@ gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 static gint 
 gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 {
-	static GtkTargetEntry drag_types[] =
-	{
-		{ "text/uri-list", 0, 0 },
-	};
-
-	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
-
 	gedit_debug (DEBUG_MDI, "");
 	
 	/* FIXME */
