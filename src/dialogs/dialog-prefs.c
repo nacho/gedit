@@ -58,6 +58,8 @@ static GtkWidget *undo_levels;
 static GtkWidget *undo_levels_spin_button;
 static GtkWidget *undo_levels_label;
 
+void gedit_window_refresh (void);
+
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
 {
@@ -87,6 +89,7 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 
 	return 0;
 }
+
 
 void
 gedit_window_refresh (void)
@@ -245,7 +248,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	gtk_style_unref (style);
 	gedit_window_refresh ();
-	gedit_save_settings ();
+	gedit_prefs_save_settings ();
 }
 
 static void

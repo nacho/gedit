@@ -33,6 +33,7 @@
 #include "utils.h"
 #include "plugin.h"
 #include "recent.h"
+#include "file.h"
 #include "undo.h"
 #include "../pixmaps/gedit-icon.xpm"
 
@@ -52,9 +53,6 @@ void	gedit_window_set_toolbar_labels (void);
 void	gedit_window_load_toolbar_widgets (void);
 
 static void	gedit_window_set_icon (GtkWidget *window, char *icon);
-#if 0
-static gint gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data);
-#endif 
 
 GeditToolbar *gedit_toolbar = NULL;
 
@@ -62,7 +60,10 @@ GtkWindow *
 gedit_window_active (void)
 {
 	gedit_debug ("", DEBUG_WINDOW);
-	return GTK_WINDOW (mdi->active_window);
+	if (GTK_IS_WIDGET (mdi->active_window))
+		return GTK_WINDOW (mdi->active_window);
+	else
+		return NULL;
 }
 
 GnomeApp *
@@ -297,14 +298,4 @@ gedit_window_set_toolbar_labels (void)
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 
 }
-/* Unused functions. We should enable it!!! Chema */
-#if 0
-static gint
-gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
-{
-	gedit_debug ("", DEBUG_FILE);
-	window_close_cb (widget, data);
-	return TRUE;
-}
 
-#endif 

@@ -121,7 +121,7 @@ main (int argc, char **argv)
 
 	glade_gnome_init ();
 
-	gedit_load_settings ();
+	gedit_prefs_load_settings ();
 
 	gedit_mdi_init ();
 	gedit_document_load (file_list);

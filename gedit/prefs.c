@@ -37,11 +37,10 @@
 
 Preferences *settings = NULL;
 
-
 void 
-gedit_save_settings (void)
+gedit_prefs_save_settings (void)
 {
-	gedit_debug ("Saving preferences", DEBUG_PREFS);
+	gedit_debug ("start", DEBUG_PREFS);
 	
 	gnome_config_push_prefix ("/gedit/Global/");
 
@@ -68,9 +67,10 @@ gedit_save_settings (void)
 	gnome_config_set_int ("fgg", settings->fg[1]);
 	gnome_config_set_int ("fgb", settings->fg[2]);
 
-	if (GTK_IS_WIDGET (gedit_window_active()))
+	if (gedit_window_active())
 		gdk_window_get_size (GTK_WIDGET (gedit_window_active())->window,
 				     &settings->width, &settings->height);
+	
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
 
@@ -89,6 +89,8 @@ gedit_save_settings (void)
 	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+
+	gedit_debug ("end", DEBUG_PREFS);
 }
 
 /* Determine we use fonts or fontsets. If a fontset is supplied for
@@ -96,7 +98,7 @@ gedit_save_settings (void)
  * normal fonts instead.
  */
 static gboolean
-prefs_determine_use_fontset (void)
+gedit_prefs_determine_use_fontset (void)
 {
 	GtkWidget *dummy_widget;
 	gboolean retval;
@@ -114,7 +116,7 @@ prefs_determine_use_fontset (void)
 }
 
 void
-gedit_load_settings (void)
+gedit_prefs_load_settings (void)
 {
 	gchar * mdi_mode_string;
 	gedit_debug ("Loading preferencesn", DEBUG_PREFS);
@@ -170,7 +172,7 @@ gedit_load_settings (void)
 		strcpy (settings->papersize, gnome_paper_name_default());
 	}
 
-	settings->use_fontset = prefs_determine_use_fontset ();
+	settings->use_fontset = gedit_prefs_determine_use_fontset ();
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
 	{

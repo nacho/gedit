@@ -415,10 +415,11 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	gint ret;
 	gchar *fname, *msg;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 	
 	if (!gedit_view_current())
 	{
+		gedit_debug ("returning, since views. are NULL", DEBUG_DOCUMENT);
 		return TRUE;
 	}
 
@@ -448,6 +449,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 		}
 	}
 
+	gedit_debug ("end", DEBUG_DOCUMENT);
 	return TRUE;
 }
 
@@ -474,7 +476,7 @@ gedit_document_destroy (GtkObject *obj)
 {
 	Document *doc = DOCUMENT (obj);
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 	
 	g_free (doc->filename);
 	gedit_undo_free_list (&doc->undo);
@@ -483,6 +485,7 @@ gedit_document_destroy (GtkObject *obj)
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
 
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 static void

@@ -550,9 +550,8 @@ gedit_view_init (View *view)
    	gtk_widget_set_style (GTK_WIDGET(view->text), style);
 	gtk_style_unref (style);
 
-
 	/* Popup Menu */
-	menu = gnome_popup_menu_new (popup_menu);
+/*	menu = gnome_popup_menu_new (popup_menu);
 	gnome_popup_menu_attach (menu, view->text, view);
 	
         gnome_config_push_prefix ("/gedit/Global/");
@@ -562,6 +561,7 @@ gedit_view_init (View *view)
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
 
 	gtk_widget_grab_focus (view->text);
+*/
 	
 #ifdef ENABLE_SPLIT_SCREEN    
 	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);

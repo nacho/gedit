@@ -667,39 +667,53 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug("start", DEBUG_FILE);
 
 	gedit_close_all_flag_status("File_close_all_cb. Before");
 	
 	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_QUIT)
 		gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL;
-	
+
+	gedit_debug("1", DEBUG_FILE);
+
 	if (mdi->active_child == NULL)
 		return;
+
+	gedit_debug("2", DEBUG_FILE);
+	
 	gnome_mdi_remove_all (mdi, FALSE);
 
 	/* If this close all was successful, clear the flag */
 	if (gedit_document_current()==NULL)
 		gedit_close_all_flag_clear();
+
+	gedit_debug("endt", DEBUG_FILE);
 }
 
 void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug("start", DEBUG_FILE);
 
 	gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_QUIT;
 	file_close_all_cb (NULL, NULL);
+
+	gedit_debug("1", DEBUG_FILE);
 	
 	if (gedit_document_current()!=NULL)
 		return;
+
+	gedit_debug("2", DEBUG_FILE);
 
 	/* We need to disconnect the signal because mdi "destroy" event
 	   is connected to file_quit_cb ( i.e. this function ). Chema */
 	gtk_signal_disconnect (GTK_OBJECT(mdi), gedit_mdi_destroy_signal);
 	
+	gedit_debug("3", DEBUG_FILE);
 	gtk_object_destroy (GTK_OBJECT (mdi));
-	gedit_save_settings ();
+
+	gedit_debug("3", DEBUG_FILE);
+	gedit_prefs_save_settings ();
 	gedit_recent_history_write_config ();
 
 	gtk_main_quit ();
