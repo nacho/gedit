@@ -49,7 +49,7 @@ init_plugin(gE_Plugin_Object * plugin, gint context)
 void
 child_died_cb(ZvtTerm * zterm, int docid)
 {
-   fprintf(stderr, "Terminal %p child %d died.\n", zterm, docid);
+   g_message("Terminal %p child %d exited.\n", zterm, docid);
 
    gE_plugin_document_close(docid);
 }
@@ -64,8 +64,8 @@ start_plugin(gE_Plugin_Object * plugin, gint context)
 
    docid = gE_plugin_create_widget(context, _("Shell"), &container, NULL);
 
-   fprintf(stderr, "Plugin context %d, widget %p, docid %d.\n",
-	   context, container, docid);
+   g_message("Plugin context %d, widget %p, docid %d.\n",
+	     context, container, docid);
 
    zterm = zvt_term_new();
    gtk_widget_ensure_style(zterm);
