@@ -22,6 +22,10 @@
  * Author: Paolo Maggi 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "bonobo-mdi.h"
 
 #include <bonobo/bonobo-i18n.h>

@@ -42,9 +42,11 @@
  *
  */
 
-#include "gedit-file-selector-util.h"
-
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#include "gedit-file-selector-util.h"
 
 #include <bonobo/bonobo-file-selector-util.h>
 
