@@ -5,12 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-08-19 04:59+0200\n"
-"PO-Revision-Date: 2002-08-19 23:49+0200\n"
-"Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
+"POT-Creation-Date: 2002-08-22 05:00+0200\n"
+"PO-Revision-Date: 2002-08-23 11:17+0200\n"
+"Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <ll10nt@inbox.lv>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/GNOME_Gedit.server.in.h:1
@@ -32,7 +32,7 @@ msgstr "Teksta Redaktors"
 
 #: data/gedit.schemas.in.h:1
 msgid "A custom font that will be used for the editing area. This will only take effect if the \"Use Default Font\" option is turned off."
-msgstr "Izvēles fonts, kas tiks izmantos rediģēšanas laukā. Šī opcija darbosies tikai tad ja opcija \"Lietot Noklusēto Fontu\" būs izslēgta."
+msgstr "Pielāgots fonts, kas tiks izmantos rediģēšanas laukā. Šī opcija darbosies tikai tad, ja opcija \"Lietot Noklusēto Fontu\" būs izslēgta."
 
 #: data/gedit.schemas.in.h:2
 msgid "Auto Save"
@@ -60,7 +60,7 @@ msgstr "Rezerves Kopijas Paplašinājums"
 
 #: data/gedit.schemas.in.h:8
 msgid "Body Font for Printing"
-msgstr ""
+msgstr "Rumpja Fonts Drukāšanai"
 
 #: data/gedit.schemas.in.h:9
 msgid "Create Backup Copies"
@@ -80,7 +80,7 @@ msgstr "Kodējums Saglabājot"
 
 #: data/gedit.schemas.in.h:13
 msgid "Extension or suffix to use for backup file names. This will only take effect if the \"Create Backup Copies\" option is turned on."
-msgstr "Paplašinājums vai priedēklis ko izmantot veidojot rezerves failu nosaukumus. Šī opcija būs aktīva tad, ja opcija \"Izveidot Rezerves Kopijas\" būs ieslēgta."
+msgstr "Paplašinājums vai piedēklis, ko izmantot, veidojot rezerves failu nosaukumus. Šī opcija būs aktīva tad, ja opcija \"Izveidot Rezerves Kopijas\" būs ieslēgta."
 
 #: data/gedit.schemas.in.h:14
 msgid "Foreground color for selected text in the editing area. This will only take effect if the \"Use Default Colors\" option is turned off."
@@ -96,15 +96,15 @@ msgstr "Galvenes Fonti Drukāšanai"
 
 #: data/gedit.schemas.in.h:17
 msgid "If this value is 0, then no line numbers will be inserted when printing a document. Otherwise, gedit will print line numbers every such number of lines."
-msgstr ""
+msgstr "Ja vērtība ir 0, tad rindu numuri netiks iekļauti, drukājot dokumentu. Citādi, gedit drukās rindu numurus katras tik rindas."
 
 #: data/gedit.schemas.in.h:18
 msgid "Line Number Font for Printing"
-msgstr "Līnijas Numuru Fonts Drukāšanai"
+msgstr "Rindas Numuru Fonts Drukāšanai"
 
 #: data/gedit.schemas.in.h:19
 msgid "Line Wrapping Mode"
-msgstr ""
+msgstr "Rindu Iekļaušanas Režīms"
 
 #: data/gedit.schemas.in.h:20
 msgid "Maximum Recent Files"
@@ -112,23 +112,23 @@ msgstr "Maksimums Neseno Failu"
 
 #: data/gedit.schemas.in.h:21
 msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "Maksimums darbību ko gedit var atsaukt vai atdarīt."
+msgstr "Maksimums darbību, ko gedit var atsaukt vai pāratsaukt."
 
 #: data/gedit.schemas.in.h:22
 msgid "Number of minutes after which gedit will automatically save modified files. This will only take effect if the \"Auto Save\" option is turned on."
-msgstr "Minūšu skaits pēc kurām gedit automātiski saglabās izmainītos failus. Šī funkcija strādās tad, ja opcija \"Auto Saglabāšana\" būs ieslēgta."
+msgstr "Minūšu skaits, pēc kurām gedit automātiski saglabās izmainītos failus. Šī funkcija strādās tad, ja opcija \"Auto Saglabāšana\" būs ieslēgta."
 
 #: data/gedit.schemas.in.h:23
 msgid "Print Header"
-msgstr ""
+msgstr "Drukāt Galveni"
 
 #: data/gedit.schemas.in.h:24
 msgid "Print Line Numbers"
-msgstr "Drukāt Līniju Numurus"
+msgstr "Drukāt Rindu Numurus"
 
 #: data/gedit.schemas.in.h:25
 msgid "Printing Line Wrapping Mode"
-msgstr ""
+msgstr "Drukāšanas Rindu Iekļaušanas Režīms"
 
 #: data/gedit.schemas.in.h:26
 msgid "Selected Text Color"
@@ -148,31 +148,31 @@ msgstr "Parādīt Pārklāšanās Režīmu"
 
 #: data/gedit.schemas.in.h:30
 msgid "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and \"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
-msgstr ""
+msgstr "Nosaka, kā iekļaut garas rindas drukājot. Lietoiet \"GTK_WRAP_NONE\" neiekļaušanai, \"GTK_WRAP_WORD\" iekļaušanai vārdu robežās, un \"GTK_WRAP_CHAR\" iekļaušanai atsevišķu rakstzīmju robežās. Atceries, ka vērtības ir reģistrjūtīgas, tāpēc pārliecinies, ka tās parādās tieši tāpat kā šeit."
 
 #: data/gedit.schemas.in.h:31
 msgid "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and \"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
-msgstr ""
+msgstr "Nosaka, kā iekļaut garas rindas rediģēšanas laukā. Lietoiet \"GTK_WRAP_NONE\" neiekļaušanai, \"GTK_WRAP_WORD\" iekļaušanai vārdu robežās, un \"GTK_WRAP_CHAR\" iekļaušanai atsevišķu rakstzīmju robežās. Atceries, ka vērtības ir reģistrjūtīgas, tāpēc pārliecinies, ka tās parādās tieši tāpat kā šeit."
 
 #: data/gedit.schemas.in.h:32
 msgid "Specifies the font to use for a document's body when printing documents."
-msgstr ""
+msgstr "Nosaka lietojamo dokumenta rumpja fontu pie dokumentu drukāšanas."
 
 #: data/gedit.schemas.in.h:33
 msgid "Specifies the font to use for line numbers when printing. This will only take effect if the \"Print Line Numbers\" option is non-zero."
-msgstr ""
+msgstr "Nosaka lietojamo rindu numuru fontu pie dokumentu drukāšanas. Šī opcija darbosies tikai tad, ja opcija \"Drukāt Rindu Numurus\" nebūs nulle."
 
 #: data/gedit.schemas.in.h:34
 msgid "Specifies the font to use for page headers when printing a document. This will only take effect if the \"Print Header\" option is turned on."
-msgstr ""
+msgstr "Nosaka lietojamo fontu lapu galvenēs pie dokumentu drukāšanas. Šī opcija darbosies tikai tad, ja opcija \"Drukāt Galvenes\" būs ieslēgta."
 
 #: data/gedit.schemas.in.h:35
 msgid "Specifies the maximum number of recently opened files that will be displayed in the \"Recent Files\" submenu."
-msgstr ""
+msgstr "Nosaka maksimālo nesen atvērto failu skaitu, ko parādīt \"Nesenie Faili\" apakšizvēlnē."
 
 #: data/gedit.schemas.in.h:36
 msgid "Specifies the number of spaces that should be displayed instead of Tab characters."
-msgstr ""
+msgstr "Nosaka atstarpju skaitu, kuru parādīt Tabulācijas rakstzīmju vietā."
 
 #: data/gedit.schemas.in.h:37
 msgid "Status Bar is Visible"
@@ -180,11 +180,11 @@ msgstr "Statusjosla ir Redzama"
 
 #: data/gedit.schemas.in.h:38
 msgid "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
-msgstr ""
+msgstr "Rīkjoslas pogu stils. Iespējamās vērtības ir \"GEDIT_TOOLBAR_SYSTEM\", lai lietotu sistēmas noklusēto stilu, \"GEDIT_TOOLBAR_ICONS\", lai parādītu tikai ikonas, un \"GEDIT_TOOLBAR_ICONS_AND_TEXT\", lai parādītu tikai ikonas un tekstu. Atceries, ka vērtības ir reģistrjūtīgas, tāpēc pārliecinies, ka tās parādās tāpat kā šeit."
 
 #: data/gedit.schemas.in.h:39
 msgid "Tab Size"
-msgstr "Tab Izmērs"
+msgstr "Sadaļas Izmērs"
 
 #: data/gedit.schemas.in.h:40
 msgid "Text Color"
@@ -192,7 +192,7 @@ msgstr "Teksta Krāsa"
 
 #: data/gedit.schemas.in.h:41
 msgid "The encoding method to use for saving files. Possible values are \"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, \"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to convert the document it is saving to your current locale's encoding, \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try to use the original file encoding (new files in UTF8) and \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to try to use the original file encoding (new files in current locale's encoding). If the conversion is successful, it will be used. Otherwise, UTF-8 will be used. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
-msgstr ""
+msgstr "Lietojamā kodējuma metode pie failu saglabāšanas. Iespējamās vērtības ir \"GEDIT_SAVE_ALWAYS_UTF8\" obligātai UTF-8 saglabāšanai, \"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\", ja vēlaties, lai gedit mēģinātu konvertēt dokumentu, kuru tas sagabā, uz jūsu pašreizējās lokāles kodējumu, \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\", ja vēlaties, lai gedit mēģinātu lietot oriģinālo faila kodējumu (jaunie faili ar UTF8) un \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\", ja vēlaties, lai gedit mēģinātu lietot oriģinālo faila kodējumu (jaunie faili ar pašreizējās lokāles kodējumu). Ja konvertācija ir veiksmīga, tā tiks lietota. Citādi tiks lietots UTF-8. Atceries, ka vērtības ir reģistrjūtīgas, tāpēc pārliecinies, ka tās parādās tāpat kā šeit."
 
 #: data/gedit.schemas.in.h:42
 msgid "Toolbar Buttons Style"
@@ -216,43 +216,43 @@ msgstr "Lietot Noklusēto Fontu"
 
 #: data/gedit.schemas.in.h:47
 msgid "Whether gedit should automatically save modified files after a time interval. You can set the time interval with the \"Auto Save Interval\" option."
-msgstr "Gedit varētu automātiski saglabāt izmainītos failus pēc laika intervāla. Jūs varat uzstādīt šo laika intervālu ar \"Auto Glabāšanas Intervāls\" opciju."
+msgstr "Vai gedit automātiski jāsaglabā izmainītos failus pēc laika intervāla. Jūs varat uzstādīt šo laika intervālu ar \"Auto Glabāšanas Intervāls\" opciju."
 
 #: data/gedit.schemas.in.h:48
 msgid "Whether gedit should create backup copies for the files it saves. You can set the backup file extension with the \"Backup Copy Extension\" option."
-msgstr ""
+msgstr "Vai gedit vajadzētu izveidot rezerves kopijas failiem, kurus tas saglabā. Jūs varat iestādīt rezerves faila paplašinājumu ar \"Rezerves Kopijas Paplašinājums\" opciju."
 
 #: data/gedit.schemas.in.h:49
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr ""
+msgstr "Vai gedit būtu jāparāda rindu numuri rediģēšanas laukā."
 
 #: data/gedit.schemas.in.h:50
 msgid "Whether gedit should include a document header when printing documents."
-msgstr ""
+msgstr "Vai gedit būtu jāiekļauj dokumenta galvene pie dokumentu drukāšanas."
 
 #: data/gedit.schemas.in.h:51
 msgid "Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
+msgstr "Vai rediģēšanas logu apakšā statusjoslai būtu jabūt redzamai."
 
 #: data/gedit.schemas.in.h:52
 msgid "Whether the status bar should show the cursor position in editing windows. Make sure you turn on the \"Status Bar is Visible\" option for this to take effect."
-msgstr ""
+msgstr "Vai statusjoslai būtu jāparāda kursora pozīciju rediģēšanas logos. Pārliecinieties, ka ieslēdzat opciju \"Statusjosla ir Redzama\", lai šis uzstādījums darbotos."
 
 #: data/gedit.schemas.in.h:53
 msgid "Whether the status bar should show the insert/overwrite mode in editing windows. Make sure you turn on the \"Status Bar is Visible\" option for this to take effect."
-msgstr ""
+msgstr "Vai statusjoslai būtu jāparāda ievietošanas/pārrakstīšanas režīms rediģēšanas logos. Pārliecinieties, ka ieslēdzat opciju \"Statusjosla ir Redzama\", lai šis uzstādījums darbotos."
 
 #: data/gedit.schemas.in.h:54
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr ""
+msgstr "Vai rīkjoslai būtu jābūt redzamai rediģēšanas logos."
 
 #: data/gedit.schemas.in.h:55
 msgid "Whether to use the system's default colors for the editing area. If this option is turned off, then the colors of the editing area will be those specified in the \"Background Color\", \"Text Color\", \"Selected Text Color\", and \"Selection Color\" options."
-msgstr ""
+msgstr "Vai rediģēšanas laukā lietot sistēmas noklusētās krāsas. Ja šī opcija ir izslēgta, tad krāsas rediģēšanas laukam būs tās, kas noteiktas \"Fona Krāsa\", \"Teksta Krāsa\", \"Izvēlētā Teksta Krāsa\", un \"Izvēles Krāsa\" opcijās."
 
 #: data/gedit.schemas.in.h:56
 msgid "Whether to use the system's default font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
-msgstr ""
+msgstr "Vai lietot teksta rediģēšanai sistēmas noklusēto fontu gedit noteiktā vietā. Ja šī opcija ir izslēgta, tad fonts ar nosaukumu opcijā \"Redaktora Fonts\" tiks lietots sistēmas fonta vietā."
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -260,7 +260,7 @@ msgstr "_ASCII Tabula"
 
 #: plugins/ASCII/ascii.c:46
 msgid "Pop-up a dialog containing an ASCII Table"
-msgstr ""
+msgstr "Parādīt ASCII Tabulu saturošu dialogu"
 
 #: plugins/ASCII/ascii.c:336
 msgid "Char"
@@ -301,10 +301,13 @@ msgid ""
 "document, select the character and click the \"Insert Char\" \n"
 "button or double click the character in the table."
 msgstr ""
+"Ja vēlaties ievietot jebkuru no rakstzīmēm aktīvajā\n"
+"dokumentā, izvēlies rakstzīmi un klikšķini uz \"Ievietot Simbolu\"\n"
+"pogas vai izpildi dubultklikšķi uz rakstzīmes tabulā."
 
 #: plugins/ASCII/asciitable.glade2.h:4
 msgid "Insert char"
-msgstr "_Ievietot simbolu"
+msgstr "Ievietot simbolu"
 
 #: plugins/ASCII/asciitable.glade2.h:5
 msgid "gedit: ASCII table"
@@ -313,11 +316,11 @@ msgstr "gedit: ASCII tabula"
 #. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:49
 msgid "Open CVS Chan_geLogs"
-msgstr "Atvērt CVS ChangeLogs"
+msgstr "Atvērt CVS Chan_geLogs"
 
 #: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr "Meklēt ChangeLog pašreizējā dokumentā un atvērt tos"
+msgstr "Meklē ChangeLog pašreizējā dokumentā un atver tos"
 
 #: plugins/cvschangelog/cvschangelog.c:269
 msgid "CVS ChangeLog"
@@ -331,85 +334,100 @@ msgstr "Iespraudnis, kas atver CVS nosūtīšanas ziņās atrastos ChangeLog ier
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Autortiesības (C) 2002 - James Willcox"
 
-#: plugins/diff/diff.c:61
+#: plugins/diff/diff.c:62
 msgid "Co_mpare Files..."
 msgstr "Sa_līdzināt Failus..."
 
-#: plugins/diff/diff.c:64
+#: plugins/diff/diff.c:65
 msgid "Makes a diff file from two documents or files"
-msgstr ""
+msgstr "Izveido diff failu no diviem dokumentiem vai failiem"
 
-#: plugins/diff/diff.c:66
+#: plugins/diff/diff.c:67
 msgid "Compare files"
 msgstr "Salīdzināt failus"
 
 #. Create the dialog
-#: plugins/diff/diff.c:267
+#: plugins/diff/diff.c:268
 msgid "Compare two files..."
 msgstr "Salīdzināt divus failus..."
 
-#: plugins/diff/diff.c:281
+#: plugins/diff/diff.c:282
 msgid "C_ompare"
 msgstr "_Salīdzināt"
 
-#: plugins/diff/diff.c:502
+#: plugins/diff/diff.c:503
 msgid "The two documents you selected are the same."
-msgstr "Divi dokumenti ko tu izēlējies ir viens un tas pats."
+msgstr "Divi dokumenti, kurus jūs izvēlējāties, ir tie paši."
 
-#: plugins/diff/diff.c:510
+#: plugins/diff/diff.c:511
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
 "Please provide a valid file."
 msgstr ""
+"\"Pirmais\" fails, ko izvēlējāties, neeksistē.\n"
+"\n"
+"Lūdzu nodrošiniet ar derīgu failu."
 
-#: plugins/diff/diff.c:519
+#: plugins/diff/diff.c:520
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
 "Please provide a valid file."
 msgstr ""
+"\"Otrais\" fails, ko izvēlējāties, neeksistē.\n"
+"\n"
+"Lūdzu nodrošiniet ar derīgu failu."
 
-#: plugins/diff/diff.c:527
+#: plugins/diff/diff.c:528
 msgid "The two files you selected are the same."
-msgstr ""
+msgstr "Izvēlētie divi faili ir tie paši."
 
-#: plugins/diff/diff.c:544
+#: plugins/diff/diff.c:546
 msgid "The \"first\" document contains no text."
 msgstr "\"Pirmais\" dokuments nesatur tekstu."
 
-#: plugins/diff/diff.c:573
+#: plugins/diff/diff.c:581
 msgid "The \"second\" document contains no text."
-msgstr ""
+msgstr "\"Otrais\" dokuments nesatur tekstu."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:594
+#: plugins/diff/diff.c:607
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
+"Neiespējami salīdzināt izvēlētos dokumentus.\n"
+"\n"
+"gedit nevarēja izveidot pagaidu failu."
 
-#: plugins/diff/diff.c:612
 #: plugins/diff/diff.c:625
+#: plugins/diff/diff.c:638
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "Error executing the diff command."
 msgstr ""
+"Neiespējami salīdzināt izvēlētos dokumentus.\n"
+"\n"
+"Kļūda izpildot komandu diff."
 
-#: plugins/diff/diff.c:647
+#: plugins/diff/diff.c:660
 msgid "No differences were found between the selected documents."
 msgstr "Neatradu nekādas atšķirības starp izvēlētajiem dokumentiem."
 
-#: plugins/diff/diff.c:688
+#: plugins/diff/diff.c:701
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "The result contains invalid UTF-8 data."
 msgstr ""
+"Neiespējami salīdzināt izvēlētos dokumentus.\n"
+"\n"
+"Rezultāts satur nederīgus UTF-8 datus."
 
-#: plugins/diff/diff.c:912
+#: plugins/diff/diff.c:925
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
@@ -421,7 +439,7 @@ msgstr ""
 "Lai uzzinātu ko vairak par \"diff\" programmu, ievadi \"man diff\" komandrindā.\n"
 ""
 
-#: plugins/diff/diff.c:915
+#: plugins/diff/diff.c:928
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
@@ -471,11 +489,11 @@ msgstr "_No faila uz diska"
 
 #: plugins/diff/diff.glade2.h:11
 msgid "Ignore _blanks (-b option)"
-msgstr ""
+msgstr "Ignorēt _tukšumus (-b opcija)"
 
 #: plugins/diff/diff.glade2.h:12
 msgid "Note that this option is only supported by GNU diff"
-msgstr ""
+msgstr "Atceries, ka šī opcija atbalsta tikai GNU diff"
 
 #: plugins/diff/diff.glade2.h:13
 msgid "Second"
@@ -491,11 +509,11 @@ msgstr "Otrais fails no atvērtā dokumenta"
 
 #: plugins/diff/diff.glade2.h:16
 msgid "Select the \"first\" file..."
-msgstr ""
+msgstr "Izvēlieties \"pirmo\" failu..."
 
 #: plugins/diff/diff.glade2.h:17
 msgid "Select the \"second\" file..."
-msgstr ""
+msgstr "Izvēlieties \"otro\" failu..."
 
 #: plugins/diff/diff.glade2.h:18
 msgid "Select the first file to compare"
@@ -515,7 +533,7 @@ msgstr "Izvēlieties otro atvērto dokumentu salīdzināšanai"
 
 #: plugins/diff/diff.glade2.h:22
 msgid "Use the _unified output format (-u option)"
-msgstr ""
+msgstr "Lietot _unificēto izvades formātu (-u opcija)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
@@ -523,7 +541,7 @@ msgstr "_Vārdu Skaits"
 
 #: plugins/docinfo/docinfo.c:49
 msgid "Get info on current document"
-msgstr ""
+msgstr "Dabūt info par pašreizējo dokumentu"
 
 #: plugins/docinfo/docinfo.c:145
 #: plugins/docinfo/docinfo.c:365
@@ -536,7 +554,7 @@ msgstr "_Atjaunināt"
 
 #: plugins/docinfo/docinfo.c:366
 msgid "The word count plugin analyzes the current document and determines the number of words, lines, characters and non-space characters in it and display the result."
-msgstr ""
+msgstr "Vārdu skaitīšanas iespraudnis analizē pašreizējo dokumentu un noskaidro vārdu, rindu, rakstzīmju un ne-atstarpju rakstzīmju skaitu un parāda rezultātu."
 
 #: plugins/docinfo/docinfo.c:370
 #: plugins/sample/sample.c:175
@@ -601,11 +619,11 @@ msgstr "Ievieto lietotāja vārdu kursora pozīcijā."
 
 #: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
-msgstr ""
+msgstr "Ievietot Čaulas _Izvadi"
 
 #: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
-msgstr ""
+msgstr "Ievietot čaulas izvadi pašreizējā dokumentā"
 
 #: plugins/shell_output/shell_output.c:137
 msgid "An error occurs while running the selected command."
@@ -614,7 +632,7 @@ msgstr "Kļūda veicot izvēlēto komandu."
 #: plugins/shell_output/shell_output.c:187
 #: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
-msgstr ""
+msgstr "Čaulas izvade"
 
 #: plugins/shell_output/shell_output.c:200
 msgid "_Run"
@@ -626,6 +644,9 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Čaulas komandas ieraksts ir tukšs.\n"
+"\n"
+"Lūdzu ievadiet derīgu čaulas komandu."
 
 #: plugins/shell_output/shell_output.c:389
 msgid ""
@@ -633,22 +654,25 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Kļūda parsējot čaulas komandu.\n"
+"\n"
+"Lūdzu ievadiet derīgu čaulas komandu."
 
 #: plugins/shell_output/shell_output.c:551
 msgid "Execute an external program and insert its output in a new document."
-msgstr ""
+msgstr "Izpildīt ārēju programmu un ievietot tās izvadi jaunā dokumentā."
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Capture the command _output"
-msgstr ""
+msgstr "Uztvert komandas _izvadi"
 
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
-msgstr ""
+msgstr "Norādi darba direktoriju un komandu, ko vēlaties palaist."
 
 #: plugins/shell_output/shell_output.glade2.h:3
 msgid "_Shell command:"
-msgstr ""
+msgstr "_Čaulas komanda:"
 
 #: plugins/shell_output/shell_output.glade2.h:4
 msgid "_Working directory:"
@@ -656,50 +680,50 @@ msgstr "_Darba direktorija:"
 
 #: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
-msgstr ""
+msgstr "gedit: Čaulas Izvades iesraudnis"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
 msgid "Tag list plugin"
-msgstr ""
+msgstr "Tagu saraksta ispraudnis"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
 msgid "Select the group of tab you want to use"
-msgstr ""
+msgstr "Izvēlieties sadaļu grupu, ko vēlaties lietot"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
 msgid "Tag Groups Combo"
-msgstr ""
+msgstr "Taga Grupu Kombinācija"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
 msgid "Tags Name List"
-msgstr ""
+msgstr "Tagu Nosaukumu Saraksts"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:187
 msgid "Double-click on a tag to insert it in the current document"
-msgstr ""
+msgstr "Dubultklikšķis uz taga, lai ievietotu to pašreizējajā dokumentā"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:198
 msgid "Tags"
-msgstr ""
+msgstr "Tagi"
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr ""
+msgstr "Tagu _Saraksts"
 
 #.
 #. #define MENU_ITEM_NAME		"TagList"
 #.
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
-msgstr ""
+msgstr "Parādīt tagu saraksta logu"
 
 #: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
-msgstr ""
+msgstr "Tagu saraksts"
 
 #: plugins/taglist/gedit-taglist-plugin.c:161
 msgid "The tag list plugin provides a method to easily insert into a document commonly used tabs/strings without having to type them."
-msgstr ""
+msgstr "Tagu saraksta iespraudnis piedāvā paņēmienu vienkārši ievietot dokumentā biežāk lietotās tabulācijas/virknes bez nepieciešamības tās rakstīt"
 
 #: plugins/time/time.c:45
 msgid "_Insert Date/Time"
@@ -728,7 +752,7 @@ msgstr "Ievieto pašreizējo datumu un laiku kursora pozīcijā."
 
 #: plugins/time/time.glade2.h:2
 msgid "Select the format to use when inserting date/time."
-msgstr "Izvēlies formātu kādu lietot, ievietojot datumu/laiku."
+msgstr "Izvēlies formātu, kādu lietot, ievietojot datumu/laiku."
 
 #: src/bonobo-mdi.c:532
 #: src/bonobo-mdi.c:622
@@ -739,18 +763,20 @@ msgstr "Aktivizēt %s"
 
 #: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
-msgstr "Ej uz līniju..."
+msgstr "Iet uz rindu..."
 
 #. Add Goto Line button
 #: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
-msgstr "_Ej uz līniju"
+msgstr "_Iet uz rindu"
 
 #: src/dialogs/gedit-dialog-goto-line.c:165
 msgid ""
 "Could not find the required widgets inside goto-line.glade2.\n"
 ""
 msgstr ""
+"Nevarēju atrast pieprasītās logdaļas iekš goto-line.glade2.\n"
+""
 
 #: src/dialogs/gedit-dialog-replace.c:172
 #: src/dialogs/replace.glade2.h:2
@@ -812,12 +838,16 @@ msgid ""
 "Could not find plugin-manager.glade2, reinstall gedit.\n"
 ""
 msgstr ""
+"Nevarēju atrast plugin-manager.glade2, pārinstalē gedit.\n"
+""
 
 #: src/dialogs/gedit-plugin-manager.c:511
 msgid ""
 "Invalid glade file for plugin manager -- not all widgets found.\n"
 ""
 msgstr ""
+"Nederīgs glade fails iespraudņu pārvaldniekam -- ne visas logdaļas atrastas.\n"
+""
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
@@ -828,6 +858,8 @@ msgid ""
 "Could not find the required widgets inside program-location-dialog.glade2.\n"
 ""
 msgstr ""
+"Nevarēju atrast pieprasītās logdaļas iekš program-location-dialog.glade2.\n"
+""
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
@@ -836,10 +868,13 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
+"Iespraudnis %s lieto ārējo programmu, kas saucas <tt>%s</tt>, lai veiktu tā uzdevumu.\n"
+"\n"
+"Lūdzu norādiet programmas <tt>%s</tt> lokāciju."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
-msgstr "Izvēlētais fails nav palaižams."
+msgstr "Izvēlētais fails nav izpildāms."
 
 #: src/dialogs/gedit-preferences-dialog.c:207
 msgid "Font & Colors"
@@ -848,12 +883,12 @@ msgstr "Fonti un Krāsas"
 #: src/dialogs/gedit-preferences-dialog.c:209
 #: src/dialogs/gedit-preferences.glade2.h:30
 msgid "Tabs"
-msgstr "Tabi"
+msgstr "Sadaļas"
 
 #: src/dialogs/gedit-preferences-dialog.c:210
 #: src/dialogs/gedit-preferences.glade2.h:51
 msgid "Wrap mode"
-msgstr ""
+msgstr "Iekļaušanas režīms"
 
 #: src/dialogs/gedit-preferences-dialog.c:211
 #: src/dialogs/gedit-preferences.glade2.h:15
@@ -914,23 +949,23 @@ msgstr "Kategorijas"
 
 #: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai izvēlētos jūsu redaktora lietojamo fontu"
 
 #: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai konfigurētu teksta krāsu"
 
 #: src/dialogs/gedit-preferences-dialog.c:805
 msgid "Push this button to configure background color"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai konfigurētu fona krāsu"
 
 #: src/dialogs/gedit-preferences-dialog.c:807
 msgid "Push this button to configure the color in which the selected text should appear"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai konfigurētu krāsu, kādā jāparādās izvēlētajam tekstam"
 
 #: src/dialogs/gedit-preferences-dialog.c:810
 msgid "Push this button to configure the color in which the selected text should be marked"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai konfigurētu krāsu, ar kādu iezīmēt izvēlēto tekstu"
 
 #: src/dialogs/gedit-preferences-dialog.c:1592
 #: src/dialogs/gedit-preferences-dialog.c:1594
@@ -949,19 +984,19 @@ msgstr "Helvetica 8"
 
 #: src/dialogs/gedit-preferences-dialog.c:1733
 msgid "Push this button to select the font to be used to print the body"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai izvēlētos lietojamo fontu drukājot teksta rumpi"
 
 #: src/dialogs/gedit-preferences-dialog.c:1735
 msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai izvēlētos lietojamo fontu drukājot galvenes"
 
 #: src/dialogs/gedit-preferences-dialog.c:1737
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
+msgstr "Nospiediet šo pogu, lai izvēlētos lietojamo fontu drukājot rindu numurus"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
-msgstr ""
+msgstr "_Iekļaut rindas (rakstzīmju robežās)"
 
 #: src/dialogs/gedit-preferences.glade2.h:2
 msgid " character(s)"
@@ -993,7 +1028,7 @@ msgstr "Krāsas"
 
 #: src/dialogs/gedit-preferences.glade2.h:9
 msgid "Create a _backup copy of files before saving"
-msgstr "Izveidot failu rezerves kopiju pirms glabāšanas"
+msgstr "Izveidot failu _rezerves kopiju pirms saglabāšanas"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
 #: src/dialogs/gnome-print-font-picker.c:1014
@@ -1002,11 +1037,11 @@ msgstr "Fonts"
 
 #: src/dialogs/gedit-preferences.glade2.h:11
 msgid "Font used to print line _numbers:"
-msgstr ""
+msgstr "Lietojamais fonts rindu _numuru drukāšanai:"
 
 #: src/dialogs/gedit-preferences.glade2.h:12
 msgid "Font used to print the _body:"
-msgstr ""
+msgstr "Lietojamais fonts _rumpja drukāšanai:"
 
 #: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Fonts & Colors"
@@ -1022,11 +1057,11 @@ msgstr "Izvēlies fona krāsu"
 
 #: src/dialogs/gedit-preferences.glade2.h:17
 msgid "Pick the selected text color"
-msgstr "Izvēlies iezīmētā teksta krāsu"
+msgstr "Izvēlies izvēlētā teksta krāsu"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Pick the selection color"
-msgstr "Izvēlies iezīmējuma krāsu"
+msgstr "Izvēlies izvēles krāsu"
 
 #: src/dialogs/gedit-preferences.glade2.h:19
 msgid "Pick the text color"
@@ -1038,11 +1073,11 @@ msgstr "Iespraudņu pārvaldnieks"
 
 #: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Print _line numbers every"
-msgstr "Drukāt _līnijas numurus katras "
+msgstr "Drukāt _rindu numurus katras "
 
 #: src/dialogs/gedit-preferences.glade2.h:23
 msgid "Print _page headers"
-msgstr ""
+msgstr "Drukāt lap_u galvenes"
 
 #: src/dialogs/gedit-preferences.glade2.h:24
 msgid "Print fonts"
@@ -1050,79 +1085,79 @@ msgstr "Drukāt fontus"
 
 #: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Se_lection color:"
-msgstr ""
+msgstr "Iz_vēles krāsa:"
 
 #: src/dialogs/gedit-preferences.glade2.h:27
 msgid "Selecte_d text color:"
-msgstr "Izvēlē_tā teksta krāsa:"
+msgstr "Izvē_lētā teksta krāsa:"
 
 #: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Set _tabs width equivalent to  "
-msgstr ""
+msgstr "Iestatīt _sadaļu patumu vienādu ar"
 
 #: src/dialogs/gedit-preferences.glade2.h:29
 msgid "Set limit on _undo actions to"
-msgstr ""
+msgstr "Iestatīt ierobežojumu _atsaucamajām darbībām uz"
 
 #: src/dialogs/gedit-preferences.glade2.h:31
 msgid "The font & colors settings let you choose the font and the colors to be used in the editor windows."
-msgstr ""
+msgstr "Fonta un krāsu uzstādījumi ļauj jums izvēlēties redaktora logos lietojamo fontu un krāsas."
 
 #: src/dialogs/gedit-preferences.glade2.h:32
 msgid "The line numbers setting lets you choose to display the line numbers on the left hand side of the window."
-msgstr ""
+msgstr "Rindu numuru uzstādījums ļauj jums izvēlēties parādīt rindu numurus kreisajā loga pusē."
 
 #: src/dialogs/gedit-preferences.glade2.h:33
 msgid "The plugin manager settings let you choose which plugins you want to have loaded."
-msgstr ""
+msgstr "Iespraudņu pārvaldnieka uzstādījumi ļauj jums izvēlēties, kurus iespraudņus jūs vēlaties ielādēt."
 
 #: src/dialogs/gedit-preferences.glade2.h:34
 msgid "The print fonts settings let you choose the fonts to be used to print documents."
-msgstr ""
+msgstr "Drukas fontu uzstādījumi ļauj jums izvēlēties drukāšanā dokumentos lietojamos fontus."
 
 #: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr ""
+msgstr "Drukas lapas uzstādījumi ļauj jums pielāgot to, kā gedit drukā dokumentus."
 
 #: src/dialogs/gedit-preferences.glade2.h:36
 msgid "The save settings let you customize how gedit saves files."
-msgstr ""
+msgstr "Saglabāšanas uzstādījumi ļauj jums pielāgot to, kā gedit saglabā failus."
 
 #: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
+msgstr "Sadaļu uzstādījumi ļauj jums pielāgot sadaļu platumu."
 
 #: src/dialogs/gedit-preferences.glade2.h:38
 msgid "The undo settings let you set the maximum number of actions that gedit can undo."
-msgstr ""
+msgstr "Atsaukšanas uzstādījumi ļauj jums iestatīt maksimālo darbību skaitu, ko gedit var atsaukt."
 
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr ""
+msgstr "Iekāušanas režīma uzstādījumi ļauj jums pielāgot to, kā rindam jabūt iekļautām."
 
 #: src/dialogs/gedit-preferences.glade2.h:40
 msgid "U_se default theme colors"
-msgstr "Lietot noklusētās tēmas krāsas"
+msgstr "_Lietot noklusētās tēmas krāsas"
 
 #: src/dialogs/gedit-preferences.glade2.h:41
 msgid "U_se original file encoding if possible"
-msgstr ""
+msgstr "Liet_ot oriģinālo faila kodējumu, ja iespējams"
 
 #: src/dialogs/gedit-preferences.glade2.h:43
 msgid "Use cu_rrent locale's encoding if possible"
-msgstr ""
+msgstr "Lietot paš_reizējās lokāles kodējumu, ja iespējams"
 
 #: src/dialogs/gedit-preferences.glade2.h:44
 msgid "Use current _locale's encoding if possible"
-msgstr ""
+msgstr "Lietot pašreizējās _lokāles kodējumu, ja iespējams"
 
 #: src/dialogs/gedit-preferences.glade2.h:45
 msgid "Use current locale's encoding if possible when creating a new file"
-msgstr ""
+msgstr "Lietot pašreizējās lokāles kodējumu, ja iespējams, kad veidoju jaunu failu"
 
 #: src/dialogs/gedit-preferences.glade2.h:46
 msgid "Use current locale's encoding if possible when saving"
-msgstr ""
+msgstr "Lietot pašreizējās lokāles kodējumu, ja iespējams, kad saglabāju"
 
 #: src/dialogs/gedit-preferences.glade2.h:47
 msgid "When creating a new file..."
@@ -1134,15 +1169,15 @@ msgstr "Saglabājot..."
 
 #: src/dialogs/gedit-preferences.glade2.h:49
 msgid "Wrap lines at _word boundaries"
-msgstr ""
+msgstr "Iekļaut rindas _vārdu robežās"
 
 #: src/dialogs/gedit-preferences.glade2.h:50
 msgid "Wrap lines at ch_aracter boundaries"
-msgstr ""
+msgstr "Iekļaut rindas ra_kstzīmju robežās"
 
 #: src/dialogs/gedit-preferences.glade2.h:52
 msgid "_Autosave current file every"
-msgstr "_Saglabāt automātiski pašreizējo failu katras "
+msgstr "_Saglabāt automātiski pašreizējo failu katras"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
 msgid "_Background color:"
@@ -1154,7 +1189,7 @@ msgstr "_Parādīt rindu numurus"
 
 #: src/dialogs/gedit-preferences.glade2.h:55
 msgid "_Font used by the editor: "
-msgstr "Redaktora izmantotie _fonti:"
+msgstr "Redaktora izmantotie _fonti: "
 
 #: src/dialogs/gedit-preferences.glade2.h:56
 msgid "_Font used to print headers:"
@@ -1162,11 +1197,11 @@ msgstr "Drukāšanas galvenēm izmantotie _fonti:"
 
 #: src/dialogs/gedit-preferences.glade2.h:57
 msgid "_Never wrap lines"
-msgstr ""
+msgstr "_Nekad neiekļaut rindas"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
 msgid "_Restore default fonts"
-msgstr ""
+msgstr "_Atjaunot noklusētos fontus"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
 msgid "_Text color:"
@@ -1186,11 +1221,11 @@ msgstr "minūtes"
 
 #: src/dialogs/gnome-print-font-dialog.c:107
 msgid "_Insert a new preview phrase."
-msgstr ""
+msgstr "_Ievietot jaunu pirmsapskates fāzi."
 
 #: src/dialogs/gnome-print-font-dialog.c:113
 msgid "Modify preview phrase..."
-msgstr ""
+msgstr "Modificēt pirmsapskates fāzi..."
 
 #: src/dialogs/gnome-print-font-dialog.c:167
 msgid "Preview"
@@ -1198,7 +1233,7 @@ msgstr "Pirmsapskats"
 
 #: src/dialogs/gnome-print-font-dialog.c:180
 msgid "_Modify preview phrase..."
-msgstr ""
+msgstr "_Modificēt pirmsapskates fāzi..."
 
 #: src/dialogs/gnome-print-font-dialog.c:243
 msgid "Font Selection"
@@ -1210,7 +1245,7 @@ msgstr "sans 12"
 
 #: src/dialogs/gnome-print-font-picker.c:90
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaĀāBbCcČčDdEeĒēFfGgĢģHhIiĪīJjKkĶķLlĻļMmNnŅņOoPpQqRrSsŠšTtUuŪūVvWwXxYyZz"
+msgstr "AaĀāBbCcČčDdEeĒēFfGgĢģHhIiĪīJjKkĶķLlĻļMmNnŅņOoPpQqRrSsŠšTtUuŪūVvWwXxYyZzŽž"
 
 #: src/dialogs/gnome-print-font-picker.c:91
 msgid "Pick a Font"
@@ -1222,7 +1257,7 @@ msgstr "Virsraksts"
 
 #: src/dialogs/gnome-print-font-picker.c:177
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Izvēles dialoga lodziņa virsraksts"
 
 #: src/dialogs/gnome-print-font-picker.c:197
 msgid "Font name"
@@ -1238,23 +1273,23 @@ msgstr "Pirmsapskatīt tekstu"
 
 #: src/dialogs/gnome-print-font-picker.c:207
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "Dialogā parādītais pirmsapskates teksts"
 
 #: src/dialogs/gnome-print-font-picker.c:215
 msgid "Use font in label"
-msgstr ""
+msgstr "Lietot etiķetes fontu"
 
 #: src/dialogs/gnome-print-font-picker.c:216
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Lietot etiķetes fontu fonta info režīmā"
 
 #: src/dialogs/gnome-print-font-picker.c:224
 msgid "Font size for label"
-msgstr ""
+msgstr "Fonta izmērs etiķetē"
 
 #: src/dialogs/gnome-print-font-picker.c:225
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Fonta izmērs etiķetē fonta info režīmā"
 
 #: src/dialogs/gnome-print-font-picker.c:235
 msgid "Show size"
@@ -1267,11 +1302,11 @@ msgstr "Parādīt izmēru fonta info režīmā"
 #. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
-msgstr "Ej uz Līniju"
+msgstr "Iet uz Rindu"
 
 #: src/dialogs/goto-line.glade2.h:2
 msgid "_Line number:"
-msgstr "_Līnijas numurs:"
+msgstr "_Rindas numurs:"
 
 #: src/dialogs/plugin-manager.glade2.h:1
 msgid "C_onfigure plugin"
@@ -1303,11 +1338,11 @@ msgstr "Kur _meklēt:"
 
 #: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
-msgstr "virsraksts"
+msgstr "etiķete"
 
 #: src/dialogs/replace.glade2.h:1
 msgid "Case sensi_tive"
-msgstr ""
+msgstr "Reģistr_jūtīgs"
 
 #: src/dialogs/replace.glade2.h:3
 msgid "Replace _with: "
@@ -1315,11 +1350,11 @@ msgstr "Aizvietot a_r:"
 
 #: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
-msgstr ""
+msgstr "Meklēt _no dokumenta sākuma"
 
 #: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
-msgstr ""
+msgstr "Meklēt no _kursora pozīcijas"
 
 #: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
@@ -1340,11 +1375,13 @@ msgstr "Virkne \"%s\" nav atrasta."
 
 #: src/gedit-commands.c:437
 msgid "translator_credits"
-msgstr "Pēteris Krišjānis <pecisk@inbox.lv>"
+msgstr ""
+"Pēteris Krišjānis <pecisk@inbox.lv>\n"
+"Artis Trops <hornet@navigators.lv>"
 
 #: src/gedit-commands.c:462
 msgid "gedit"
-msgstr "geditx"
+msgstr "gedit"
 
 #: src/gedit-commands.c:463
 msgid ""
@@ -1356,7 +1393,7 @@ msgstr ""
 
 #: src/gedit-commands.c:465
 msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit ir mazs un ļoti viegls teksta redaktors Gnome videi."
+msgstr "gedit ir mazs un ļoti viegls teksta redaktors Gnome videi"
 
 #: src/gedit-document.c:573
 #: src/gedit-document.c:591
@@ -1406,12 +1443,12 @@ msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 msgstr ""
-"Nav pietiekami diska vietas, lai saglabātu failu.\n"
+"Nepietiek diska vietas, lai saglabātu failu.\n"
 "Lūdzu atbrīvojiet diska vietu un mēģiniet vēlreiz."
 
 #: src/gedit-document.c:1387
 msgid "The disk where you are trying to save the file has a limitation on file sizes.  Please try saving a smaller file or saving it to a disk that does not have this limitation."
-msgstr "Diskam, uz kura jūs mēģināt saglabāt failu, ir limitācija uz failu izmēriem. Lūdzu mēģiniet saglabāt mazāku failu vai arī saglabāt to uz diska kuram nav šāda limitācija."
+msgstr "Diskam, uz kura jūs mēģināt saglabāt failu, ir ierobežojums uz failu izmēriem. Lūdzu mēģiniet saglabāt mazāku failu vai arī saglabāt to uz diska, kuram nav šāda ierobežojuma."
 
 #: src/gedit-document.c:1426
 msgid "Could not create a backup file."
@@ -1419,7 +1456,7 @@ msgstr "Nevarēju izveidot rezerves failu."
 
 #: src/gedit-document.c:1574
 msgid "It is not possible to revert an Untitled document"
-msgstr "Nav iespējams pāratvērt Nenosauktu dokumentu"
+msgstr "Nav iespējams atgriezt Nenosauktu dokumentu"
 
 #: src/gedit-file-selector-util.c:125
 msgid "Do_n't replace"
@@ -1461,18 +1498,18 @@ msgstr "Ielādēts fails '%s'"
 #: src/gedit-file.c:433
 #, c-format
 msgid "Saving file '%s' ..."
-msgstr "Saglabājam failu '%s' ..."
+msgstr "Saglabāju failu '%s' ..."
 
 #: src/gedit-file.c:332
 #: src/gedit-file.c:448
 msgid "The document has not been saved."
-msgstr "Dokuments nav noglabāts."
+msgstr "Dokuments nav ticis saglabāts."
 
 #: src/gedit-file.c:345
 #: src/gedit-file.c:445
 #, c-format
 msgid "File '%s' saved."
-msgstr "Fails '%s' noglabāts."
+msgstr "Fails '%s' saglabāts."
 
 #: src/gedit-file.c:412
 msgid "Save as ..."
@@ -1481,11 +1518,11 @@ msgstr "Saglabāt kā ..."
 #: src/gedit-file.c:626
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr "Atgriežam failu '%s' ..."
+msgstr "Atgriežu failu '%s' ..."
 
 #: src/gedit-file.c:639
 msgid "The document has not been reverted."
-msgstr "Dokuments nav atgriezts."
+msgstr "Dokuments nav ticis atgriezts."
 
 #: src/gedit-file.c:649
 #, c-format
@@ -1524,15 +1561,15 @@ msgstr ""
 
 #: src/gedit-mdi.c:855
 msgid "Do_n't save"
-msgstr "Nesaglabāt"
+msgstr "Nesa_glabāt"
 
 #: src/gedit-mdi.c:874
 msgid "_Don't quit"
-msgstr "Neiziet"
+msgstr "Ne_iziet"
 
 #: src/gedit-mdi.c:878
 msgid "_Don't close"
-msgstr "Neaizvērt"
+msgstr "Ne_aizvērt"
 
 #: src/gedit-mdi.c:968
 msgid "(modified)"
@@ -1548,7 +1585,7 @@ msgid ""
 "Error, unable to open module file '%s'\n"
 ""
 msgstr ""
-"Kļūda, nevar atvērt moduļa failu '%s'\n"
+"Kļūda, nevaru atvērt moduļa failu '%s'\n"
 ""
 
 #: src/gedit-plugins-engine.c:174
@@ -1574,7 +1611,7 @@ msgstr "Kļūda, nespēju inicializēt iespraudni '%s'"
 #: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr "Kļūda, iespraudnis '%s' nenorāda nosaukumu"
+msgstr "Kļūda, iespraudnis '%s' nenorādīja nosaukumu"
 
 #: src/gedit-plugins-engine.c:312
 #, c-format
@@ -1646,7 +1683,7 @@ msgstr "Par šo aplikāciju"
 
 #: src/gedit-ui.xml.h:2
 msgid "C_ustomize Statusbar"
-msgstr "_Pārveidot Statusjoslu"
+msgstr "_Pielāgot Statusjoslu"
 
 #: src/gedit-ui.xml.h:3
 msgid "Change the visibility of the statusbar in the current window"
@@ -1686,7 +1723,7 @@ msgstr "Kopēt"
 
 #: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
-msgstr "Kopēt izvēlējumu"
+msgstr "Kopēt izvēlēto"
 
 #: src/gedit-ui.xml.h:13
 msgid "Create a new document"
@@ -1698,11 +1735,11 @@ msgstr "Iz_griezt"
 
 #: src/gedit-ui.xml.h:15
 msgid "Customize"
-msgstr "Mainīt"
+msgstr "Pielāgot"
 
 #: src/gedit-ui.xml.h:16
 msgid "Customize toolbars"
-msgstr "Mainīt rīkjoslas"
+msgstr "Pielāgot rīkjoslas"
 
 #: src/gedit-ui.xml.h:17
 msgid "Cut"
@@ -1710,7 +1747,7 @@ msgstr "Izgriezt"
 
 #: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
-msgstr "Izgriezt izvēlējumu"
+msgstr "Izgriezt izvēlēto"
 
 #: src/gedit-ui.xml.h:19
 msgid "Delete"
@@ -1718,7 +1755,7 @@ msgstr "Dzēst"
 
 #: src/gedit-ui.xml.h:20
 msgid "Delete the selected text"
-msgstr "Dzēst iezīmēto tekstu"
+msgstr "Dzēst izvēlēto tekstu"
 
 #: src/gedit-ui.xml.h:21
 msgid "Dump XML"
@@ -1742,7 +1779,7 @@ msgstr "Iet uz norādīto rindas numuru"
 
 #: src/gedit-ui.xml.h:27
 msgid "Goto _Line"
-msgstr "Ej uz _Līniju"
+msgstr "Iet uz _Rindu"
 
 #: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
@@ -1786,11 +1823,11 @@ msgstr "Atvērt gedit rokasgrāmatu"
 
 #: src/gedit-ui.xml.h:38
 msgid "Paste"
-msgstr "Izlikt"
+msgstr "Ielīmēt"
 
 #: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
-msgstr "Izlikt starpliktuvi"
+msgstr "Ielīmēt starpliktuvi"
 
 #: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
@@ -1810,7 +1847,7 @@ msgstr "Drukāšanas Uzstādījumi"
 
 #: src/gedit-ui.xml.h:46
 msgid "Print preview"
-msgstr "Drukāšanas Pirmsapskats"
+msgstr "Drukāšanas pirmsapskats"
 
 #: src/gedit-ui.xml.h:47
 msgid "Print the current file"
@@ -1830,11 +1867,11 @@ msgstr "Nesenie _Faili"
 
 #: src/gedit-ui.xml.h:51
 msgid "Redo"
-msgstr "Atdarīt"
+msgstr "Pāratcelt"
 
 #: src/gedit-ui.xml.h:52
 msgid "Redo the undone action"
-msgstr "Atdarīt atsaukto darbību"
+msgstr "Pāratcelt atsaukto darbību"
 
 #: src/gedit-ui.xml.h:54
 msgid "Replace a string"
@@ -1842,11 +1879,11 @@ msgstr "Aizvietot virkni"
 
 #: src/gedit-ui.xml.h:55
 msgid "Revert"
-msgstr "Pāratvērt"
+msgstr "Atgriezt"
 
 #: src/gedit-ui.xml.h:56
 msgid "Revert to a saved version of the file"
-msgstr "Pāratvērt faila saglabāto versiju"
+msgstr "Atgriezt faila saglabāto versiju"
 
 #: src/gedit-ui.xml.h:57
 msgid "Sa_ve All"
@@ -1886,19 +1923,19 @@ msgstr "Meklēt virkni"
 
 #: src/gedit-ui.xml.h:67
 msgid "Select All"
-msgstr "Iezīmēt Visu"
+msgstr "Izvēlēties Visu"
 
 #: src/gedit-ui.xml.h:68
 msgid "Select _All"
-msgstr "_Iezīmēt Visu"
+msgstr "Izvēlēties _Visu"
 
 #: src/gedit-ui.xml.h:69
 msgid "Select the entire document"
-msgstr "Izzīmēt visu dokumentu"
+msgstr "Izēlēties visu dokumentu"
 
 #: src/gedit-ui.xml.h:70
 msgid "Set toolbar button style according to desktop default"
-msgstr "Uzstādīt rīkjoslas pogu stilu tādu kā darbavirsmas noklusētais stils"
+msgstr "Uzstādīt rīkjoslas pogu stilu tādu, kā darbavirsmas noklusētais stils"
 
 #: src/gedit-ui.xml.h:71
 msgid "Setup the page settings for your current printer"
@@ -1942,7 +1979,7 @@ msgstr "_Kopēt"
 
 #: src/gedit-ui.xml.h:82
 msgid "_Customize Toolbar"
-msgstr "_Pārveidot Rīkjoslu"
+msgstr "_Pielāgot Rīkjoslu"
 
 #: src/gedit-ui.xml.h:83
 msgid "_Debug"
@@ -1990,7 +2027,7 @@ msgstr "_Atvērt..."
 
 #: src/gedit-ui.xml.h:94
 msgid "_Paste"
-msgstr "_Ievietot"
+msgstr "_Ielīmēt"
 
 #: src/gedit-ui.xml.h:95
 msgid "_Print..."
@@ -2002,11 +2039,11 @@ msgstr "_Iziet"
 
 #: src/gedit-ui.xml.h:97
 msgid "_Redo"
-msgstr "_Atdarīt"
+msgstr "_Pāratsaukt"
 
 #: src/gedit-ui.xml.h:99
 msgid "_Revert"
-msgstr "_Pāratvērt"
+msgstr "_Atgriezt"
 
 #: src/gedit-ui.xml.h:100
 msgid "_Save"
