@@ -197,25 +197,6 @@ insert_char (gint i)
 	g_free (ch_utf8);
 }
 
-#if 0
-static void
-ascii_table_row_selected (GtkCList *clist, gint row, gint column, 
-		          GdkEventButton *event, gpointer user_data)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	selected_row = row;
-	
-	if (!event) 
-		return;
-
-	if (event->type == GDK_2BUTTON_PRESS)
-	{
-		insert_char (selected_row);
-	}
-}
-#endif
-
 static GtkTreeModel*
 create_model (void)
 {
@@ -241,7 +222,7 @@ create_model (void)
 	/* add data to the list store */
 	for (i = 0; i <= 0x7f; ++i)
 	{
-		if (i < 0x21)
+		if ((i < 0x21) || (i == 0x7f))
 			sprintf (ch, "    ");
 		else
 			sprintf (ch, "   %c", i);
@@ -385,7 +366,7 @@ get_dialog (void)
 
 	dialog = g_new0 (ASCIITableDialog, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons (_("ASCII table"),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("ASCII Table"),
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
