@@ -22,6 +22,8 @@
  *   Chema Celorio <chema@celorio.com>
  */ 
 
+
+#define DO_REAL_WORD_WRAPPING FALSE
 #define PRINT_DEBUG_ON
 #undef  PRINT_DEBUG_ON
 
@@ -93,11 +95,9 @@ typedef struct _PrintJobInfo {
 } PrintJobInfo;
 
 
-/*     void file_print_cb (GtkWidget *widget, gpointer cbdata);*/
-/* */
+       void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
        void file_print_preview_cb (GtkWidget *widget, gpointer data);
 static void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
-/* tatic void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);*/
 static void print_line (PrintJobInfo *pji, int line, int will_continue);
 static void print_ps_line(PrintJobInfo * pji, int line);
 static int  print_determine_lines (PrintJobInfo *pji, int real);
@@ -171,7 +171,12 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		}
 		printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
 		/* Lets get print_first and print last page */
+		pji->print_first =0;
+		pji->print_last =0;
+		g_print("Print First : %i Print last : %i\n ", pji->print_first, pji->print_last);
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
+		g_print("Print First : %i Print last : %i\n ", pji->print_first, pji->print_last);
+		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
 	else
@@ -203,17 +208,9 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		gnome_print_master_print (pji->master);
 	}
 	
-/*	if (printer)
-	{
-	}
-	else
-	{
-	}*/
-	
 	print_pji_destroy (pji);
 	
-/*	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window));
-	gtk_signal_connect (GTK_OBJECT(dialog), "clicked", GTK_SIGNAL_FUNC (print_dialog_clicked_cb), dialog);
+/*	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 
 	gtk_widget_show_all (dialog);*/
 }
 
@@ -283,7 +280,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 		if (pji->buffer[ pji->file_offset -1] != '\n' && i>1 && pji->wrapping)
 		{
 #ifdef PRINT_DEBUG_ON
-			g_print("decrementing -j- my friend !\n");
+			g_print("decrementing 'j' my friend !\n");
 #endif
 			j--;
 		}
@@ -294,8 +291,6 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 			debugmsg = g_strdup_printf("Printing line: %i\n", j);
 			gedit_debug_mess (debugmsg, DEBUG_PRINT_DEEP);
 			g_free (debugmsg);
-			/* Podemos ver si el apuntador se quedo
-			   en una /n o no */
 #endif
 			print_line (pji, j, will_continue_in_next);
 			if (pji->current_line % pji->lines_per_page == 0)
@@ -338,6 +333,17 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 		i++;
 		if( i == pji->chars_per_line + 1 )
 		{
+			/* We need to back i so that the last word does
+			   not get broken in the middle */
+#if 0			
+			g_print("Evaluating pji->buffer[ pji->file_offset + i] ======%c\n",pji->buffer[ pji->file_offset + i]);
+			while(pji->buffer[ pji->file_offset + i]!=' ')
+			{
+				i--;
+				g_print("11111\n");
+			}
+#endif			
+				
 			pji->temp[i]=(guchar) '\0';
 			pji->file_offset = pji->file_offset + i;
 			if (print_line)
@@ -367,6 +373,21 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 	}
 	if (i>pji->chars_per_line)
 		g_print("Check failed i>pji->cpl :%i\n", i);
+        /* If word wrapping v.s. word breaking, subsctract i till we find a space or a tab */
+	pji->temp[i]=(guchar) '\0';
+	g_print("Line: %i pji->temp %s\n", line, pji->temp);
+
+	
+	if (DO_REAL_WORD_WRAPPING && pji->temp[i-1]!=' ' && pji->temp[i-1]!='\t' && pji->wrapping)
+	{
+		g_print("The if is executing ...\n");
+		/* We need to check if the line was exaclty the same chars long,
+		   since temp will end with a char, but we need not to do word wrapping*/
+		while ( pji->temp[i-1]!=' ' && pji->temp[i-1]!='\t' && i==1 )
+			i--;
+	}
+
+	/*  - */
 	pji->temp[i]=(guchar) '\0';
 	pji->file_offset = pji->file_offset + i + 1;
 	if (print_line && i > 0)
@@ -404,7 +425,6 @@ set_pji (PrintJobInfo * pji, Document *doc)
 #ifdef PRINT_DEBUG_ON
 	gchar * debugmsg;
 #endif	
-	
 	
 	pji->view = VIEW(mdi->active_view);
 	pji->doc = doc;

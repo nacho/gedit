@@ -132,9 +132,8 @@ gedit_flash_va (gchar *format, ...)
 void
 gedit_debug_mess (gchar *message, DebugSection type)
 {
-#if 0
-	g_print(message);
-	return;
+#if 1
+/*	return;*/
 	switch (type)
 	{
 	case DEBUG_UNDO:
@@ -158,6 +157,7 @@ gedit_debug_mess (gchar *message, DebugSection type)
 	case DEBUG_SEARCH_DEEP:
 		break;
 	case DEBUG_PRINT:
+		g_print(message);
 		break;
 	case DEBUG_PRINT_DEEP:
 		break;

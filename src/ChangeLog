@@ -1,3 +1,13 @@
+2000-04-27  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_line): Started doing the word wrapping
+	versus word clipping so that we can use the printing 
+	code in pan.
+
+	* menus.c (gedit_file_menu): Fixed a small bug where the
+	print menu item will appear in the wrong place if gedit
+	is launched with a file as an argument.
+
 2000-04-25  Jason Leach  <leach@wam.umd.edu>
 
 	* recent.c: Replaced the use of gnome-history with custom routines
