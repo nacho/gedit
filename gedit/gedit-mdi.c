@@ -182,15 +182,14 @@ menu_position_under_widget (GtkMenu *menu, int *x, int *y,
 			    gboolean *push_in, gpointer user_data)
 {
 	GtkWidget *w;
-	int width, height;
 	int screen_width, screen_height;
 	GtkRequisition requisition;
 
 	w = GTK_WIDGET (user_data);
 	
-	gdk_drawable_get_size (w->window, &width, &height);
 	gdk_window_get_origin (w->window, x, y);
-	*y = *y + height;
+	*x += w->allocation.x;
+	*y += w->allocation.y + w->allocation.height;
 
 	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
@@ -250,11 +249,7 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 	GtkWidget *menu;
 	EggRecentViewGtk *view;
 	EggRecentModel *model;
-	BonoboUIToolbarItem *item;
-	BonoboControl *wrapper;
 	GtkWidget *button;
-
-	item = BONOBO_UI_TOOLBAR_ITEM (bonobo_ui_toolbar_item_new ());
 
 	button = gtk_toggle_button_new ();
 	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
@@ -262,9 +257,7 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 	gtk_container_add (GTK_CONTAINER (button),
 			   gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT));
 
-	gtk_container_add (GTK_CONTAINER (item), button);
-
-	gtk_widget_show_all (GTK_WIDGET (item));
+	gtk_widget_show_all (GTK_WIDGET (button));
 
 	model = gedit_recent_get_model ();
 
@@ -285,13 +278,8 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 				 G_CALLBACK (open_button_pressed_cb),
 				 mdi, 0);
 
-	wrapper = bonobo_control_new (GTK_WIDGET (item));
-	bonobo_ui_component_object_set (ui_component,
-					path,
-					BONOBO_OBJREF (wrapper),
+	bonobo_ui_component_widget_set (ui_component, path, GTK_WIDGET (button),
 					NULL);
-
-	bonobo_object_unref (wrapper);
 }
 
 static void 
