@@ -76,7 +76,7 @@ impl_gedit_window_server_openURIList (PortableServer_Servant _servant,
 
 	if (list != NULL) 
 	{
-		gedit_file_open_uri_list (list, 0, TRUE);
+		gedit_file_open_uri_list (list, NULL, 0, TRUE);
 
 		g_slist_foreach (list, (GFunc)g_free, NULL);
 		g_slist_free (list);

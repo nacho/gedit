@@ -69,9 +69,6 @@ static gchar 	*get_dirname_from_uri 		(const char          *uri);
 static gboolean  gedit_file_save_as_real 	(const gchar         *file_name, 
 						 const GeditEncoding *encoding,
 						 GeditMDIChild       *child);
-static gboolean	 gedit_file_open_uri_list_real 	(GSList              *uri_list, 
-						 const GeditEncoding *encoding, 
-						 gboolean             create);
 static void	 open_files 			(void);
 static void	 show_progress_bar 		(gchar               *uri, 
 						 gboolean             show, 
@@ -217,7 +214,7 @@ gedit_file_open (GeditMDIChild *active_child)
 			default_path,
 			&encoding);
 
-	gedit_file_open_uri_list_real (files, encoding, TRUE);
+	gedit_file_open_uri_list (files, encoding, 0, TRUE);
 
 	g_slist_free (files);
 	g_free (default_path);
@@ -800,14 +797,6 @@ gedit_file_revert (GeditMDIChild *child)
 }
 
 gboolean 
-gedit_file_open_uri_list (GSList* uri_list, gint l, gboolean create)
-{
-	line = l;
-	
-	return gedit_file_open_uri_list_real (uri_list, NULL, create);
-}
-
-gboolean 
 gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 {
 	gboolean ret = FALSE;
@@ -863,12 +852,12 @@ gedit_file_open_single_uri (const gchar* uri, const GeditEncoding *encoding)
 	
 	if (uri == NULL) 
 		return FALSE;
-	
+
 	full_path = eel_make_uri_from_input (uri);
 
 	uri_list = g_slist_prepend (NULL, full_path);
 	
-	gedit_file_open_uri_list_real (uri_list, encoding, FALSE);
+	gedit_file_open_uri_list (uri_list, encoding, 0, FALSE);
 
 	return TRUE;
 }
@@ -1169,7 +1158,6 @@ set_progress_bar (gulong size, gulong total_size)
 					       frac);
 	}
 }
-
 
 static void 
 document_loading_cb (GeditDocument *document,
@@ -1476,8 +1464,11 @@ open_files ()
 }
 
 /* Note that all the uris will be opened with the same encoding */
-static gboolean
-gedit_file_open_uri_list_real (GSList *uri_list, const GeditEncoding *encoding, gboolean create)
+gboolean
+gedit_file_open_uri_list (GSList *uri_list,
+			  const GeditEncoding *encoding,
+			  gint line_pos,
+			  gboolean create)
 {
 	gedit_debug (DEBUG_FILE, "");
 	
@@ -1551,7 +1542,8 @@ gedit_file_open_uri_list_real (GSList *uri_list, const GeditEncoding *encoding, 
 		}
 
 		encoding_to_use = encoding;
-		
+		line = line_pos > 0 ? line_pos : 0;
+
 		gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_LOADING);
 		
 		open_files ();

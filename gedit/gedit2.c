@@ -44,6 +44,7 @@
 #include "gedit-mdi.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-debug.h"
+#include "gedit-encodings.h"
 #include "gedit-file.h"
 #include "gedit-utils.h"
 #include "gedit-session.h"
@@ -57,8 +58,11 @@
 #endif
 
 GeditMDI *gedit_mdi = NULL;
+gboolean gedit_close_x_button_pressed = FALSE;
+gboolean gedit_exit_button_pressed = FALSE; 
 BonoboObject *gedit_app_server = NULL;
 
+static gchar *encoding_charset = NULL;
 static gboolean quit_option = FALSE;
 static gboolean new_window_option = FALSE;
 static gboolean new_document_option = FALSE;
@@ -68,6 +72,10 @@ typedef struct _CommandLineData CommandLineData;
 struct _CommandLineData
 {
 	GSList* file_list;
+
+	/* note that encoding is const and should not be freed */
+	const GeditEncoding *encoding;
+
 	gint line_pos;
 };
 
@@ -76,6 +84,9 @@ static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
 {
+	{ "encoding", '\0', POPT_ARG_STRING, &encoding_charset,	0,
+	  N_("Set the character encoding to be used to open the files listed on the command line"), NULL },
+
 	{ "quit", '\0', POPT_ARG_NONE, &quit_option, 0,
 	  N_("Quit an existing instance of gedit"), NULL },
 
@@ -121,9 +132,9 @@ gedit_load_file_list (CommandLineData *data)
 	{
 		return;
 	}
-	
+
 	/* Load files */
-	gedit_file_open_uri_list (data->file_list, data->line_pos, TRUE);
+	gedit_file_open_uri_list (data->file_list, data->encoding, data->line_pos, TRUE);
 	
 	g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
 	g_slist_free (data->file_list);
@@ -166,8 +177,15 @@ gedit_get_command_line_data (GnomeProgram *program)
 		}
 
 		data->file_list = g_slist_reverse (data->file_list);
+
+		if (encoding_charset)
+		{
+			data->encoding = gedit_encoding_get_from_charset (encoding_charset);
+			if (data->encoding == NULL)
+				g_print (_("The specified encoding \"%s\" is not valid\n"), encoding_charset);
+		}
 	}
-		
+
 	return data;
 }
 

@@ -46,7 +46,7 @@ gboolean	gedit_file_close_all 	(void);
 void		gedit_file_exit 	(void);
 void		gedit_file_revert 	(GeditMDIChild *child);
 
-gboolean 	gedit_file_open_uri_list (GSList* uri_list, gint line, gboolean create);
+gboolean 	gedit_file_open_uri_list (GSList* uri_list, const GeditEncoding *encoding, gint line_pos, gboolean create);
 gboolean 	gedit_file_open_recent   (EggRecentView *view, EggRecentItem *item, gpointer data);
 gboolean 	gedit_file_open_single_uri (const gchar* uri, const GeditEncoding *encoding);
 

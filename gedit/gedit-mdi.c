@@ -759,7 +759,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 	if (file_list == NULL)
 		return;
 
-	gedit_file_open_uri_list (file_list, 0, FALSE);	
+	gedit_file_open_uri_list (file_list, NULL, 0, FALSE);	
 	
 	g_slist_foreach (file_list, (GFunc)g_free, NULL);	
 	g_slist_free (file_list);
