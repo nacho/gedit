@@ -138,7 +138,6 @@ text_not_found_dialog (const gchar *text, GtkWindow *parent)
 	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
-	gtk_dialog_set_has_separator (GTK_DIALOG (message_dlg), FALSE);
 	
 	gtk_dialog_run (GTK_DIALOG (message_dlg));
   	gtk_widget_destroy (message_dlg);
