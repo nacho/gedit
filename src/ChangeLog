@@ -1,3 +1,8 @@
+2000-06-29  Charles Kerr <charles@skywalker.ou.edu>
+
+	* document.c (gedit_document_set_title): small memory leak fixed:
+	g_free docname before exiting the function
+
 2000-06-28  Chema Celorio  <chema@celorio.com>
 
 	* dialogs/dialog-plugins.c (gedit_plugin_manager_item_clicked): add the plugin description

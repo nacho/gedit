@@ -649,6 +649,7 @@ gedit_document_set_title (Document *doc)
 
 	gtk_window_set_title (gedit_window_active(), title);
 
+	g_free (docname);
 	g_free (title);
 }
 
