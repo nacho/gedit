@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2005-02-02 08:12+0100\n"
+"POT-Creation-Date: 2005-02-12 10:29+0100\n"
+"PO-Revision-Date: 2005-02-12 14:00+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "vytváracie rozhranie pre gedit automation"
 msgid "Edit text files"
 msgstr "Úprava textových súborov"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -1753,36 +1753,26 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Nastala chyba pri vracaní obsahu súboru \"%s\"."
+msgstr "Nepodarilo sa vrátiť obsah súboru \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Nepodarilo sa vrátiť súbor \"%s\", pretože ho gedit nemôže nájsť.\n"
-"\n"
-"Možno ste ho nedávno odstránili."
+msgstr "gedit ho nemôže nájsť. Pravdepodobne bol nedávno odstránený."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Nepodarilo sa otvoriť súbor \"%s\", pretože je otvorených príliš veľa "
-"súborov.\n"
-"\n"
-"Prosím, zatvorte niektoré súbory a skúste to znovu."
+"Je otvorených príliš veľa súborov. Prosím, zatvorte niektoré otvorené súbory a skúste to znova."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Nedostatok pamäti pre otvorenie súboru \"%s\". Prosím, zatvorte niektoré "
-"bežiace aplikácie a skúste to znovu."
+"Nedostatok dostupnej pamäte. Prosím, zatvorte niektoré bežiace aplikácie a skúste to znova."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
@@ -1797,15 +1787,10 @@ msgid "Attempt to log in failed."
 msgstr "Pokus o prihlásenie zlyhal."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr ""
-"Nepodarilo sa vrátiť obsah súboru \"%s\", pretože je obsahuje neplatné dáta "
-"UTF-8.\n"
-"\n"
-"Možno sa snažíte vrátiť binárny súbor."
+msgstr "Súbor obsahuje neplatné dáta UTF-8. Pravdepodobne sa pokúšate vrátiť binárny súbor."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
@@ -2379,7 +2364,7 @@ msgstr "  CEZ"
 msgid "  INS"
 msgstr "  VKL"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2387,19 +2372,19 @@ msgstr ""
 "Nastaviť kódovanie znakov, ktoré bude použité na otvorenie súborov uvedené v "
 "príkazovom riadku"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Ukončiť bežiaci gedit"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Vytvoriť nové hlavné okno v už bežiacom gedit"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Vytvoriť nový dokument v už bežiacom gedit"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:161
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Zadané kódovanie \"%s\" nie je platné\n"
@@ -2434,7 +2419,7 @@ msgstr "_Ignorovať veľkosť písmen"
 
 #: plugins/changecase/changecase.c:52
 msgid "_Title Case"
-msgstr "Veľkosť písma nadpisu"
+msgstr "Veľkosť písma _nadpisu"
 
 #: plugins/changecase/changecase.c:54
 msgid "Change selected text to upper case"
@@ -2445,9 +2430,8 @@ msgid "Change selected text to lower case"
 msgstr "Zmeniť označený text na malé písmená"
 
 #: plugins/changecase/changecase.c:56
-#, fuzzy
 msgid "Invert the case of selected text"
-msgstr "Odstráni vybraný text"
+msgstr ""
 
 #: plugins/changecase/changecase.c:57
 msgid "Capitalize the first letter of each selected word"
@@ -2584,7 +2568,7 @@ msgstr "Uložiť kópiu..."
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kópia)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2767,18 +2751,16 @@ msgid "Afrikaans"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "Arabská"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbajdžanský"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "Bulharský"
+msgstr "Bieloruský"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2809,9 +2791,8 @@ msgid "Danish"
 msgstr "Dánsky"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "Nemecký (Nemecko)"
+msgstr "Nemecký (Rakúsko)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2842,14 +2823,12 @@ msgid "Spanish"
 msgstr "Španielsky"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "Rumunská"
+msgstr "Estónsky"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "Tlačiť"
+msgstr "Perzský"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2868,41 +2847,36 @@ msgid "French (Swiss)"
 msgstr "Francúzsky (Švajčiarsko)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "Turecká"
+msgstr "Írsky"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "Gruzínska"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "Nájsť"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "Katalánsky"
+msgstr "Chorvátsky"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "Bulharský"
+msgstr "Maďarský"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
@@ -2910,7 +2884,7 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonézsky"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2921,22 +2895,20 @@ msgid "Italian"
 msgstr "Taliansky"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "Turecká"
+msgstr "Kurdský"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "Výpis"
+msgstr "Latinsky"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litovský"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "Lotyšský"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
@@ -2948,11 +2920,11 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:124
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedónsky"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolský"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
@@ -2960,7 +2932,7 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "Maltézsky"
 
 #: plugins/spell/gedit-spell-checker.c:128
 #, fuzzy
@@ -3009,9 +2981,8 @@ msgid "Kinyarwanda"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Ukrajinský"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3027,17 +2998,15 @@ msgstr "Švédsky"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "Svahilský"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "Thajská"
+msgstr "Tamilský"
 
 #: plugins/spell/gedit-spell-checker.c:146
-#, fuzzy
 msgid "Tetum"
-msgstr "Text"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
@@ -3053,7 +3022,7 @@ msgstr "Ukrajinský"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "Uzbecký"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
@@ -3061,11 +3030,11 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Jidiš"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3229,9 +3198,8 @@ msgid "Anchor URI"
 msgstr "URI kotvy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Vyberte súbor"
+msgstr "Kód súboru triedy apletu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3300,8 +3268,8 @@ msgid "Center"
 msgstr "Vystredené"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr "Kódovanie znakov spojeného zdroja"
+msgid "Character encoding of linked resource"
+msgstr "Kódovanie znakov zviazaného zdroja"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3365,7 +3333,7 @@ msgstr "Súradnice"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "Kontajner štýlu DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
@@ -3412,9 +3380,8 @@ msgid "Disabled"
 msgstr "Zablokované"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document base"
-msgstr "_Dokumenty"
+msgstr "Základ dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document body"
@@ -3453,9 +3420,8 @@ msgid "Figure"
 msgstr "Obrázok"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
 msgid "Font face"
-msgstr "Meno písmo"
+msgstr "Typ písma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "For label"
@@ -3479,7 +3445,7 @@ msgstr "Riadiaca skupina formulára"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
-msgstr ""
+msgstr "Text popisu poľa formulára"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
@@ -3539,7 +3505,7 @@ msgstr "Všeobecný vložený objekt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
-msgstr ""
+msgstr "Všeobecné metainformácie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
 #, fuzzy
@@ -3572,7 +3538,7 @@ msgstr "Názov hlavičky HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Header cell ID's"
-msgstr ""
+msgstr "ID bunky hlavičky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
@@ -3624,15 +3590,15 @@ msgstr "Obrázok"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image map"
-msgstr ""
+msgstr "Obrazová mapa"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map area"
-msgstr ""
+msgstr "Oblasť obrazovej mapy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map name"
-msgstr ""
+msgstr "Názov obrazovej mapy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image source"
@@ -3727,8 +3693,8 @@ msgid "Marquee"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
+msgid "Maximum length of text field"
+msgstr "Maximálna dĺžka textového poľa"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Media-independent link"
@@ -3812,7 +3778,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Posun pre zarovnanie znaku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
@@ -3931,14 +3897,12 @@ msgid "Prompt message"
 msgstr "Správa výzvy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr "Tlačidlo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "Koniec"
+msgstr "Citát"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Range"
@@ -3950,7 +3914,7 @@ msgstr "Text a heslo len na čítanie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
-msgstr ""
+msgstr "Redukovaná medzera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reverse link"
@@ -4002,12 +3966,11 @@ msgstr "Označené"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "Obrazová mapa na serveri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Uložiť"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -4042,9 +4005,8 @@ msgid "Space separated archive list"
 msgstr "Zoznam archívov oddelený medzerami"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "Nahradiť"
+msgstr "Medzerník"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
@@ -4080,7 +4042,7 @@ msgstr "Prečiarknutý štýl textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
-msgstr ""
+msgstr "Silné zdôraznenie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
@@ -4364,11 +4326,11 @@ msgstr "Položka"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Položka s popisom"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - značky"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
 msgid "List description"
@@ -4391,9 +4353,8 @@ msgid "Maths (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Otvoriť umiestnenie"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4606,14 +4567,14 @@ msgstr "Dvojitým kliknutím na tag ho vloží do aktuálneho dokumentu."
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr "_Zoznam tagov"
+msgstr "_Zoznam značiek"
 
 #.
 #. #define MENU_ITEM_NAME		"TagList"
 #.
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
-msgstr "Zobraziť okno zoznamu tagov"
+msgstr "Zobraziť okno zoznamu značiek"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
 #, fuzzy
@@ -4636,11 +4597,11 @@ msgstr "Vl_ožiť dátum a čas..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Vloží aktuálny dátum a čas na aktuálnu pozíciu kurzoru."
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Dostupné formáty"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Nastaviť modul pre vkladanie dátumu/času..."
 
