@@ -58,6 +58,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	}
 
 	doc->undo = g_list_prepend (doc->undo, undo);
+
+	g_print("The undo list size is : %i taking %i bytes \n", g_list_length (doc->undo), g_list_length (doc->undo)*sizeof (gedit_undo));
 }
 
 void
@@ -81,8 +83,6 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	undo = g_list_nth_data (doc->undo, 0);
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
-
-        /*("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);*/ 
 
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(VIEW(undo->view)->text)->vadj),
 				  undo->window_position);
