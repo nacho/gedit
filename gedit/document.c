@@ -278,6 +278,29 @@ gedit_document_new_with_file (gchar *filename)
 }
 
 Document *
+gedit_document_stdin (void) 
+{
+	Document *doc;
+
+	gedit_debug ("\n", DEBUG_DOCUMENT);
+
+	doc = gtk_type_new (gedit_document_get_type ());
+
+	if (doc)
+	{
+		if (!gedit_file_stdin (doc))
+			return doc;
+		else
+			return NULL;
+	}
+
+	g_assert_not_reached ();
+	gtk_object_destroy (GTK_OBJECT(doc));
+
+	return NULL;
+}       
+
+Document *
 gedit_document_current (void)
 {
 	Document *current_document = NULL;

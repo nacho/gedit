@@ -30,6 +30,7 @@
 /* we should be able to not expose this functions ...*/
 extern gint gedit_file_open (Document *doc, gchar *fname);
 extern gint gedit_file_save (Document *doc, gchar *fname);
+/* extern gint gedit_file_stdin (Document *doc);*/
 
 extern void file_new_cb (GtkWidget *widget, gpointer cbdata);
 

@@ -25,6 +25,8 @@
 #include <config.h>
 #include <gnome.h>
 #include <sys/stat.h> /* for stat() */
+#include <unistd.h>  /* for gedit_stdin_open () */
+#include <stdio.h>   /* for gedit_stdin_open () */
 
 #include "gedit.h"
 #include "commands.h"
@@ -39,6 +41,7 @@ GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
 gint gedit_file_open (Document *doc, gchar *fname);
+gint gedit_file_stdin (Document *doc);
 gint gedit_file_save (Document *doc, gchar *fname);
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
@@ -150,6 +153,64 @@ gedit_file_open (Document *doc, gchar *fname)
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	recent_add (fname);
+	recent_update (GNOME_APP (mdi->active_window));
+
+	return 0;
+}
+
+/**
+ * gedit_file_stdin:
+ * @doc: Document window to fill with text
+ *
+ * Open stdin and read it into the text widget.
+ *
+ * Return value: 0 on success, 1 on error.
+ */
+gint
+gedit_file_stdin (Document *doc)
+{
+	gchar *tmp_buf;
+	struct stat stats;
+	View *nth_view;
+	gint i;
+	gint stdin_buffer_size=100000;
+	
+	gedit_debug ("\n", DEBUG_FILE);
+	g_return_val_if_fail (doc != NULL, 1);
+
+	fstat(STDIN_FILENO, &stats);
+	
+	if (stats.st_size  == 0)
+	{
+		return 1;
+	}
+	
+	doc->buffer_size = stdin_buffer_size;
+        
+	if ((tmp_buf = g_new0 (gchar,doc->buffer_size + 1)) == NULL)
+	{
+		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
+		return 1;
+	}
+        
+	gedit_debug ("\n", DEBUG_FILE);
+	doc->buffer_size = fread (tmp_buf,1,doc->buffer_size,stdin) ;
+        doc->buffer = g_string_new (tmp_buf);
+	g_free (tmp_buf);
+        fclose(stdin);
+	
+	for (i = 0; i < g_list_length (doc->views); i++) 
+	{
+		nth_view = g_list_nth_data (doc->views, i);
+		gedit_view_refresh (nth_view);
+		gedit_view_set_read_only (nth_view,TRUE);
+		if (!nth_view->changed_id)
+			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
+								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
+		gedit_set_title (nth_view->document);
+	}
+	
+	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), "STDIN");
 	recent_update (GNOME_APP (mdi->active_window));
 
 	return 0;

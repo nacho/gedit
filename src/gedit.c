@@ -133,16 +133,9 @@ main (int argc, char **argv)
 	char **args;
 	poptContext ctx;
 	int i;
+	
 	GList *file_list = NULL;
 	Document *doc;
-
-#if 0
-	/* Pipes */
-	FILE *std_in;
-	gint chars_read;
-	gchar *buffer;
-	gint character_in;
-#endif	
 
 	/* Initialize i18n */
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
@@ -182,17 +175,11 @@ main (int argc, char **argv)
 
 	gnome_mdi_open_toplevel (mdi);
 
-	doc = gedit_document_new ();
-
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
+	
 	if (file_list)
 	{
-		g_return_val_if_fail (mdi->active_child != NULL, -1);
-
-		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
-		for (;file_list; file_list = file_list->next)
+		
+                for (;file_list; file_list = file_list->next)
 		{
 			if (g_file_exists (file_list->data))
 			{
@@ -208,26 +195,24 @@ main (int argc, char **argv)
 				popup_create_new_file (NULL, file_list->data);
 			}
 		}
+         
 	}
 
+	doc = gedit_document_stdin ();
+	if (doc != NULL)
+	{
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	}
 
-#if 0
-	character_in = 'A';
+	if (gedit_document_current() == NULL)
+	{
+		doc = gedit_document_new ();
+		
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+        }
 
-	std_in = fdopen (1, "r");
-	if (std_in==NULL)
-		g_print("Null\n");
-	buffer = g_malloc (10);
-
-	chars_read = 'a';
-	do
-		chars_read = fgetc (std_in);
-	while ( chars_read != 'a');
-	
-	buffer[chars_read]='\0';
-	g_print("Chars read :%i buffer\n%s", chars_read, buffer);
-#endif
-	
 	gtk_main();
 
 	return 0;

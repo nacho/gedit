@@ -72,6 +72,7 @@ GtkType gedit_document_get_type (void);
 Document* gedit_document_new (void);
 Document* gedit_document_new_with_title (gchar *title);
 Document* gedit_document_new_with_file (gchar *filename);
+Document* gedit_document_stdin ();
 Document* gedit_document_current (void);
 
 void gedit_add_view     (GtkWidget *w, gpointer data);
