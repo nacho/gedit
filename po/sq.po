@@ -1,15 +1,14 @@
-# translation of sq.po to Albanian
-# Albanian translation of gedit-2.4
+# Albanian translation of gedit
 # This file is distributed under the same license as the gedit package.
 # Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 # Laurent Dhima <laurenti@alblinux.net>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sq\n"
+"Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-04 15:42+0100\n"
-"PO-Revision-Date: 2004-01-04 15:53+0100\n"
+"POT-Creation-Date: 2004-01-15 00:11+0100\n"
+"PO-Revision-Date: 2004-01-15 00:36+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +44,7 @@ msgstr "Fabrika e automatizimit të gedit"
 msgid "Edit text files"
 msgstr "Ndrysho files teksti"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:365
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
 msgid "Text Editor"
 msgstr "Editues teksti"
 
@@ -214,7 +213,7 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:30
 msgid "Print Header"
-msgstr "Kreu i printimit"
+msgstr "Printo kreun (Header)"
 
 #: data/gedit.schemas.in.h:31
 msgid "Print Line Numbers"
@@ -474,10 +473,130 @@ msgstr ""
 "ç'aktivuar, atëhere gërmat e specifikuara me anë të opcionit \"Gërmat e "
 "editorit\" do të përdoren në vend të gërmave të sistemit."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1965
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivo %s"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Keni X dokumente me ndryshime të "
+"paruajtura. </span>"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr "Nëse nuk ruani dokumentet tuaja, të gjithë ndryshimet e kryera do të humbasin."
+
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:653
+msgid "S_elect the documents you want to save:"
+msgstr "Z_gjidh dokumentet që dëshironi të ruani:"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr "Mos ruaj _Asnjë"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+msgid "_Save Selected"
+msgstr "_Ruaji të zgjedhurit"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+msgid "Do_n't save"
+msgstr "Mo_s ruaj"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:360
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+"Nëse nuk ruani, ndryshimet nga sekonda %ld e fundit do të humbin "
+"përfundimisht."
+msgstr[1] ""
+"Nëse nuk ruani, ndryshimet nga sekonda %ld e fundit do të humbin "
+"përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:369
+msgid "If you don't save, changes from the last minute will be definitively lost."
+msgstr "Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:375
+#, c-format
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+"Nëse nuk ruani, ndryshimet nga minuti i fundit dhe sekonda %ld do të humbin "
+"përfundimisht."
+msgstr[1] ""
+"Nëse nuk ruani, ndryshimet nga minuti i fundit dhe sekonda %ld do të humbin "
+"përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:385
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+"Nëse nuk ruani, ndryshimet nga minuti %ld i fundit do të humbin "
+"përfundimisht."
+msgstr[1] ""
+"Nëse nuk ruani, ndryshimet nga minuti %ld i fundit do të humbin "
+"përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:400
+msgid "If you don't save, changes from the last hour will be definitively lost."
+msgstr "Nëse nuk ruani, ndryshimet nga ora e fundit do të humbin përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:406
+#, c-format
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+"Nëse nuk ruani, ndryshimet nga ora e fundit dhe minuti i %ld do të humbin "
+"përfundimisht."
+msgstr[1] ""
+"Nëse nuk ruani, ndryshimet nga ora e fundit dhe minuti i %ld do të humbin "
+"përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:421
+#, c-format
+msgid "If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural "If you don't save, changes from the last %d hours will be definitively lost."
+msgstr[0] "Nëse nuk ruani, ndryshimet nga ora %d e fundit do të humbin përfundimisht."
+msgstr[1] "Nëse nuk ruani, ndryshimet nga ora %d e fundit do të humbin përfundimisht."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:465
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "Ruan ndryshimet tek dokumenti \"%s\" para se t'a mbyllni?"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:639
+#, c-format
+msgid "There are %d documents with unsaved changes. Save changes before closing?"
+msgstr ""
+"Keni %d dokumente me ndryshime të paruajtura. Ruan ndryshimet para "
+"se t'i mbyllni?"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:670
+msgid "If you don't save, all your changes will be definitively lost."
+msgstr "Nëse nuk ruani, të gjithë ndryshimet tuaja do të humbasin përgjithmonë."
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -488,7 +607,7 @@ msgid "_Go to Line"
 msgstr "_Shko tek rreshti"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:402
+#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teksti \"%s\" nuk u gjet."
@@ -525,7 +644,7 @@ msgstr "Hap pozicionin"
 #: gedit/dialogs/gedit-encodings-dialog.c:76
 #, c-format
 msgid "There was an error displaying help: %s"
-msgstr "Gabim gjatë shfaqjes së ndihmës: %s"
+msgstr "U verifikua një gabim gjatë shfaqjes së ndihmës: %s"
 
 #: gedit/dialogs/gedit-encodings-dialog.c:381
 #: gedit/dialogs/gedit-encodings-dialog.c:449
@@ -547,7 +666,7 @@ msgstr "Kodifikimi i shkronjave"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
 msgid "E_ncodings shown in menu:"
-msgstr "Kodifikime të paraqitur në me_nu:"
+msgstr "Kodifiki_me të shfaqura në menu:"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:489
 msgid "Body font picker"
@@ -781,7 +900,7 @@ msgstr "Plugins"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Preferences"
-msgstr "Preferime"
+msgstr "Preferimet"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Se_lection color:"
@@ -793,7 +912,7 @@ msgstr "Ngjyra e tekstit të zgje_dhur:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Strikethrough"
-msgstr "Strikethrough"
+msgstr "Vizuar"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Syntax Highlighting"
@@ -805,7 +924,7 @@ msgstr "Përdor ngjyrat e prezgjedhura të temë_s"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Underline"
-msgstr "Nënvizuar"
+msgstr "Nënvizimi"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "View"
@@ -821,7 +940,7 @@ msgstr "_Ngjyra e sfondit:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_Background:"
-msgstr "_Ngjyra e sfondit:"
+msgstr "_Sfondi:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Display line numbers"
@@ -837,7 +956,7 @@ msgstr "_Aktivo vënien në dukje të s_intaksës"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Foreground:"
-msgstr "_Ngjyra e planit të parë:"
+msgstr "Pam_ja Ballore:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Limit to"
@@ -909,7 +1028,7 @@ msgstr "Titulli"
 
 #: gedit/dialogs/gnome-print-font-picker.c:180
 msgid "The title of the selection dialog box"
-msgstr "Titulli i drutares së dialogut të zgjedhjes"
+msgstr "Titulli i dritares së dialogut të zgjedhjes"
 
 #: gedit/dialogs/gnome-print-font-picker.c:200
 msgid "Font name"
@@ -921,7 +1040,7 @@ msgstr "Emri i gërmës së zgjedhur"
 
 #: gedit/dialogs/gnome-print-font-picker.c:209
 msgid "Preview text"
-msgstr "Pamja e parë e tekstit"
+msgstr "Teksti i pamjes së parë"
 
 #: gedit/dialogs/gnome-print-font-picker.c:210
 msgid "Preview text shown in the dialog"
@@ -929,7 +1048,7 @@ msgstr "Pamja e parë e tekstit të shfaqur në dritaren e dialogut"
 
 #: gedit/dialogs/gnome-print-font-picker.c:218
 msgid "Use font in label"
-msgstr "Përdor gërmat në etiketë"
+msgstr "Përdor gërma në etiketë"
 
 #: gedit/dialogs/gnome-print-font-picker.c:219
 msgid "Use font in the label in font info mode"
@@ -1056,7 +1175,7 @@ msgstr "V_etëm fjalën e plotë"
 
 #: gedit/dialogs/replace.glade2.h:5
 msgid "Replace All"
-msgstr "Zevëndësoi të gjitha"
+msgstr "Zevëndësoi të gjithë"
 
 #: gedit/dialogs/replace.glade2.h:6
 msgid "Replace _with: "
@@ -1090,59 +1209,59 @@ msgstr "Shkruaj _pozicionin (URI) e file që dëshironi të hapni:"
 msgid "Open from URI"
 msgstr "Hap nga URI"
 
-#: gedit/gedit-commands.c:553
+#: gedit/gedit-commands.c:556
 msgid "translator_credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
-#: gedit/gedit-commands.c:578
+#: gedit/gedit-commands.c:581
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:585
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit është një editor teksti i thjeshtë për Desktop GNOME"
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 msgid "Untitled"
 msgstr "Pa titull"
 
-#: gedit/gedit-document.c:608 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
 msgid "Invalid file name"
 msgstr "Emër file i pasaktë"
 
-#: gedit/gedit-document.c:824 gedit/gedit-document.c:930
+#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Të dhëna UTF-8 të pavlefshme"
 
-#: gedit/gedit-document.c:1229
+#: gedit/gedit-document.c:1615
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "I pamundur leximi i të dhënave të lidhjes simbolike për %s"
 
-#: gedit/gedit-document.c:1275
+#: gedit/gedit-document.c:1661
 msgid "The file has too many symbolic links."
 msgstr "Ky file ka shumë lidhje simbolike."
 
-#: gedit/gedit-document.c:1331
+#: gedit/gedit-document.c:1717
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nuk mund të manazhojë pozicionet \"%s\" në shkrim."
 
-#: gedit/gedit-document.c:1338
+#: gedit/gedit-document.c:1724
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit nuk mund të manazhojë këtë lloj pozicioni në shkrim."
 
-#: gedit/gedit-document.c:1351
+#: gedit/gedit-document.c:1737
 msgid "Invalid filename."
 msgstr "Emër file i pasaktë."
 
-#: gedit/gedit-document.c:1463
+#: gedit/gedit-document.c:1849
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1150,7 +1269,7 @@ msgstr ""
 "Hapësirë e pamjaftueshme në disk për të ruajtur këtë file.\n"
 "Liro pak vend në disk dhe provo përsëri."
 
-#: gedit/gedit-document.c:1468
+#: gedit/gedit-document.c:1854
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1160,13 +1279,9 @@ msgstr ""
 "madhësinë e file.  Provo të ruash një file më të vogël ose ruaje në një disk "
 "ku limitet nuk ekzistojnë."
 
-#: gedit/gedit-document.c:1512
+#: gedit/gedit-document.c:1898
 msgid "Could not create a backup file."
 msgstr "I pamundur krijimi i file të backup."
-
-#: gedit/gedit-document.c:1633
-msgid "It is not possible to revert an Untitled document"
-msgstr "Nuk është i mundur rikthimi i një dokumenti pa emër"
 
 #: gedit/gedit-encodings-option-menu.c:203
 msgid "Auto Detected"
@@ -1196,7 +1311,7 @@ msgstr "Perëndimore"
 #: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
 #: gedit/gedit-encodings.c:251
 msgid "Central European"
-msgstr "Europa qëndrore"
+msgstr "Europa Qendrore"
 
 #: gedit/gedit-encodings.c:149
 msgid "South European"
@@ -1224,12 +1339,12 @@ msgstr "Greqisht"
 
 #: gedit/gedit-encodings.c:159
 msgid "Hebrew Visual"
-msgstr "Hebrew Visual"
+msgstr "Hebraike vizuale"
 
 #: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
 #: gedit/gedit-encodings.c:261
 msgid "Hebrew"
-msgstr "Hebrew"
+msgstr "Hebraike"
 
 #: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
 #: gedit/gedit-encodings.c:259
@@ -1246,7 +1361,7 @@ msgstr "Celtic"
 
 #: gedit/gedit-encodings.c:173
 msgid "Romanian"
-msgstr "Romanisht"
+msgstr "Rumanisht"
 
 #: gedit/gedit-encodings.c:185
 msgid "Armenian"
@@ -1274,11 +1389,11 @@ msgstr "Koreane"
 #: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
 #: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
 msgid "Chinese Simplified"
-msgstr "Kineze e thjeshtë"
+msgstr "Kineze e thjeshtëzuar"
 
 #: gedit/gedit-encodings.c:207
 msgid "Georgian"
-msgstr "Georgian"
+msgstr "Gjeorgjisht"
 
 #: gedit/gedit-encodings.c:237
 msgid "Cyrillic/Ukrainian"
@@ -1287,7 +1402,7 @@ msgstr "Cyrillic/Ukrahina"
 #: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
 #: gedit/gedit-encodings.c:267
 msgid "Vietnamese"
-msgstr "Vietnameze"
+msgstr "Vietnamisht"
 
 #: gedit/gedit-encodings.c:244
 msgid "Thai"
@@ -1317,171 +1432,242 @@ msgstr "Kodifikimi i gërm_ave:"
 
 #: gedit/gedit-file-selector-util.c:569
 msgid "Select a file to open"
-msgstr "Zgjidh një file për t'a hapur"
+msgstr "Zgjidh file që duhet hapur"
 
 #: gedit/gedit-file-selector-util.c:595
 msgid "Select files to open"
-msgstr "Zgjidh files për të hapur"
+msgstr "Zgjidh files që duhen hapur"
 
 #: gedit/gedit-file-selector-util.c:622
 msgid "Select a filename to save"
 msgstr "Zgjidh emrin e file për të ruajtur"
 
-#: gedit/gedit-file.c:157
+#: gedit/gedit-file.c:208
 msgid "Open File..."
 msgstr "Hap file..."
 
-#: gedit/gedit-file.c:185 gedit/gedit-file.c:908
+#: gedit/gedit-file.c:264 gedit/gedit-file.c:413
 #, c-format
-msgid "Loaded file '%s'"
-msgstr "Fie '%s' u ngarkua"
+msgid "Saving document \"%s\"..."
+msgstr "Duke ruajtur dokumentin \"%s\"..."
 
-#: gedit/gedit-file.c:323 gedit/gedit-file.c:472
+#: gedit/gedit-file.c:292 gedit/gedit-file.c:434
 #, c-format
-msgid "Saving file '%s'..."
-msgstr "Duke ruajtur file '%s'..."
+msgid "The document \"%s\" has not been saved."
+msgstr "Dokumenti \"%s\" nuk u ruajt."
 
-#: gedit/gedit-file.c:351 gedit/gedit-file.c:487
-msgid "The document has not been saved."
-msgstr "Dokumenti nuk u ruajt."
-
-#: gedit/gedit-file.c:365 gedit/gedit-file.c:484
+#: gedit/gedit-file.c:306 gedit/gedit-file.c:426
 #, c-format
-msgid "File '%s' saved."
-msgstr "File '%s' u ruajt."
+msgid "The document \"%s\" has been saved."
+msgstr "Dokumenti \"%s\" u ruajt."
 
-#: gedit/gedit-file.c:451
+#: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "Ruaje si..."
 
-#: gedit/gedit-file.c:645
+#: gedit/gedit-file.c:592
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "Dëshironi të ktheni ndryshimet e paruajtura tek dokumenti \"%s\"?"
+
+#: gedit/gedit-file.c:601
 #, c-format
 msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"Dëshironi të riktheheni tek dokumenti i ruajtur '%s'?\n"
-"\n"
-"Ky operacion nuk mund të anullohet."
+"Changes made to the document in the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+"Ndryshimet e kryera në dokument në %ld sekondën e fundit do të "
+"humbasin përgjithmonë."
+msgstr[1] ""
+"Ndryshimet e kryera në dokument në %ld sekondën e fundit do të "
+"humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:655 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:610
+msgid "Changes made to the document in the last minute will be definitively lost."
+msgstr "Ndryshimet e kryera në dokument në minutën e fundit do të humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:616
+#, c-format
+msgid ""
+"Changes made to the document in the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+"Ndryshimet e kryera në dokument në minutën e fundit dhe %ld sekondë do "
+"të humbasin përgjithmonë."
+msgstr[1] ""
+"Ndryshimet e kryera në dokument në minutën e fundit dhe %ld sekondë do "
+"të humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:626
+#, c-format
+msgid ""
+"Changes made to the document in the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld minutes will be definitively "
+"lost."
+msgstr[0] "Ndryshimet e kryera në dokument në minutën e fundit %ld do të humbasin përgjithmonë."
+msgstr[1] "Ndryshimet e kryera në dokument në minutën e fundit %ld do të humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:641
+msgid "Changes made to the document in the last hour will be definitively lost."
+msgstr "Ndryshimet e kryera në dokument në orën e fundit do të humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:647
+#, c-format
+msgid ""
+"Changes made to the document in the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+"Ndryshimet e kryera në dokument në orën e fundit dhe %d minutë do të "
+"humbasin përgjithmonë."
+msgstr[1] ""
+"Ndryshimet e kryera në dokument në orën e fundit dhe %d minutë do të "
+"humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:662
+#, c-format
+msgid "Changes made to the document in the last %d hour will be definitively lost."
+msgid_plural "Changes made to the document in the last %d hours will be definitively lost."
+msgstr[0] "Ndryshimet e kryera në dokument në %d orën e fundit do të humbasin përgjithmonë."
+msgstr[1] "Ndryshimet e kryera në dokument në %d orën e fundit do të humbasin përgjithmonë."
+
+#: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "_Rikthe"
 
-#: gedit/gedit-file.c:689
+#: gedit/gedit-file.c:730
 #, c-format
-msgid "Reverting file '%s'..."
-msgstr "Duke rikthyer file '%s'..."
+msgid "Error reverting the document \"%s\"."
+msgstr "Gabim gjatë rikthimit të dokumentit \"%s\"."
 
-#: gedit/gedit-file.c:702
-msgid "The document has not been reverted."
-msgstr "Dokumenti nuk u rikthye."
-
-#: gedit/gedit-file.c:712
+#: gedit/gedit-file.c:737
 #, c-format
-msgid "File '%s' has been reverted."
-msgstr "File '%s' u rikthye."
+msgid "The document \"%s\" has not been reverted."
+msgstr "Dokumenti \"%s\" nuk u rikthye."
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:741
+#, c-format
+msgid "The document \"%s\" has been reverted."
+msgstr "Dokumenti \"%s\" u rikthye."
+
+#: gedit/gedit-file.c:769
+#, c-format
+msgid "Reverting the document \"%s\"..."
+msgstr "Duke rikthyer dokumentin '%s'..."
+
+#: gedit/gedit-file.c:904
+msgid "Could not read data from stdin."
+msgstr "I pamundur leximi i të dhënave nga stdin."
+
+#: gedit/gedit-file.c:954
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "File \"%s\" nuk ekziston. Dëshironi t'a krijoni?"
+
+#: gedit/gedit-file.c:1077
+msgid "Reverting file:"
+msgstr "Duke rikthyer file:"
+
+#: gedit/gedit-file.c:1081
+msgid "Loading file:"
+msgstr "Duke ngarkuar file:"
+
+#: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
+#, c-format
+msgid "Error loading file \"%s\""
+msgstr "Gabim gjatë ngarkimit të file \"%s\""
+
+#: gedit/gedit-file.c:1271
+#, c-format
+msgid "Loaded file \"%s\""
+msgstr "Fie \"%s\" u ngarkua"
+
+#: gedit/gedit-file.c:1348
+#, c-format
+msgid "Loaded %d file"
+msgid_plural "Loaded %d files"
+msgstr[0] "U ngarkua %d file"
+msgstr[1] "U ngarkua %d file"
+
+#: gedit/gedit-file.c:1382
+#, c-format
+msgid "Loading file \"%s\"..."
+msgstr "Duke ngarkuar file \"%s\"..."
+
+#: gedit/gedit-file.c:1529
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Duke ngarkuar %d file..."
 msgstr[1] "Duke ngarkuar %d file..."
 
-#: gedit/gedit-file.c:777
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "File \"%s\" nuk ekziston. Dëshironi t'a krijoni?"
-
-#: gedit/gedit-file.c:832
-#, c-format
-msgid "Loaded %i files"
-msgstr "U ngarkuan %i files"
-
-#: gedit/gedit-file.c:966
-msgid "Could not read data from stdin."
-msgstr "I pamundur leximi i të dhënave nga stdin."
-
 #. Read only
-#: gedit/gedit-mdi-child.c:246
+#: gedit/gedit-mdi-child.c:248
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:582 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "_Lëvize në një dritare të re"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:726
 msgid "Unknown"
-msgstr "E panjohur"
+msgstr "I/e panjohur"
 
-#: gedit/gedit-mdi-child.c:680
+#: gedit/gedit-mdi-child.c:734
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:687
+#: gedit/gedit-mdi-child.c:741
 msgid "Name:"
 msgstr "Emri:"
 
-#: gedit/gedit-mdi-child.c:688
+#: gedit/gedit-mdi-child.c:742
 msgid "MIME Type:"
 msgstr "Lloji i MIME:"
 
-#: gedit/gedit-mdi-child.c:689
+#: gedit/gedit-mdi-child.c:743
 msgid "Encoding:"
 msgstr "Kodifikimi:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
+#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
 #, c-format
 msgid "Open '%s'"
 msgstr "Hap '%s'"
 
-#: gedit/gedit-mdi.c:491
+#: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
 msgstr "Hap një nga file të përdorur të fundit"
 
-#: gedit/gedit-mdi.c:1006
-#, c-format
-msgid "Do you want to save the changes you made to the document \"%s\"?"
-msgstr "Dëshironi të ruani ndryshimet e kryera tek dokumenti \"%s\"?"
-
-#: gedit/gedit-mdi.c:1014
-msgid "Your changes will be lost if you don't save them."
-msgstr "Ndryshimet do të humbasin nëse nuk e ruani atë."
-
-#: gedit/gedit-mdi.c:1022
-msgid "_Don't quit"
-msgstr "_Mos dil"
-
-#: gedit/gedit-mdi.c:1026
-msgid "_Don't close"
-msgstr "_Mos mbyll"
-
-#: gedit/gedit-mdi.c:1030
-msgid "Do_n't save"
-msgstr "Mo_s ruaj"
-
-#: gedit/gedit-mdi.c:1122
+#: gedit/gedit-mdi.c:1291
 msgid "(modified)"
 msgstr "(i ndryshuar)"
 
-#: gedit/gedit-mdi.c:1128
+#: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
 msgstr "(vetëm në lexim)"
 
-#: gedit/gedit-mdi.c:1734
+#: gedit/gedit-mdi.c:1927
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:1735
+#: gedit/gedit-mdi.c:1928
 msgid "Use Normal highlight mode"
 msgstr "Përdor mënyrën normale të vënies në dukje"
 
-#: gedit/gedit-mdi.c:1811
+#: gedit/gedit-mdi.c:2004
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Përdor mënyrën %s të vënies në dukje"
@@ -1610,7 +1796,7 @@ msgstr "Ndrysho dukshmërinë e panelit të instrumentëve në dritaren aktuale"
 
 #: gedit/gedit-ui.xml.h:5
 msgid "Close"
-msgstr "Mbyll"
+msgstr "Mbylle"
 
 #: gedit/gedit-ui.xml.h:6
 msgid "Close all open files"
@@ -1618,7 +1804,7 @@ msgstr "Mbyll të gjithë files e hapur"
 
 #: gedit/gedit-ui.xml.h:7
 msgid "Close the current file"
-msgstr "Mbyll file aktual"
+msgstr "Mbylle file aktual"
 
 #: gedit/gedit-ui.xml.h:8
 msgid "Configure the application"
@@ -1638,7 +1824,7 @@ msgstr "Krijo një dokument të ri"
 
 #: gedit/gedit-ui.xml.h:12
 msgid "Cu_t"
-msgstr "Pri_je"
+msgstr "_Prije"
 
 #: gedit/gedit-ui.xml.h:13
 msgid "Cut"
@@ -1658,11 +1844,11 @@ msgstr "Fshi tekstin e zgjedhur"
 
 #: gedit/gedit-ui.xml.h:18
 msgid "Find Ne_xt"
-msgstr "Gjej pasardhë_sen"
+msgstr "Gjej në va_zhdim"
 
 #: gedit/gedit-ui.xml.h:20
 msgid "Find Pre_vious"
-msgstr "Gjej paraardhës_en"
+msgstr "Gjej para_ardhësen"
 
 #: gedit/gedit-ui.xml.h:21
 msgid "Find Previous"
@@ -1678,7 +1864,7 @@ msgstr "Shko tek një rresht i caktuar"
 
 #: gedit/gedit-ui.xml.h:24
 msgid "Main toolbar"
-msgstr "Paneli qëndror i instrumentëve"
+msgstr "Paneli qendror i instrumentëve"
 
 #: gedit/gedit-ui.xml.h:25
 msgid "Move the current document to a new window"
@@ -1718,7 +1904,7 @@ msgstr "Konfig_urimi i faqes për printim"
 
 #: gedit/gedit-ui.xml.h:34
 msgid "Paste"
-msgstr "Ngjit"
+msgstr "Ngjite"
 
 #: gedit/gedit-ui.xml.h:35
 msgid "Paste the clipboard"
@@ -1746,11 +1932,11 @@ msgstr "Dil"
 
 #: gedit/gedit-ui.xml.h:43
 msgid "Quit the program"
-msgstr "Dil nga programi"
+msgstr "Mbyll programin"
 
 #: gedit/gedit-ui.xml.h:44
 msgid "Redo"
-msgstr "Përsërit"
+msgstr "Përsërite"
 
 #: gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
@@ -1762,7 +1948,7 @@ msgstr "Rikthe"
 
 #: gedit/gedit-ui.xml.h:48
 msgid "Revert to a saved version of the file"
-msgstr "Rikthe tek një nga versionet e ruajtur të file"
+msgstr "Riktheje tek një nga versionet e ruajtur të file"
 
 #: gedit/gedit-ui.xml.h:49
 msgid "Save"
@@ -1810,7 +1996,7 @@ msgstr "Zgjidhe të gjithë"
 
 #: gedit/gedit-ui.xml.h:60
 msgid "Select _All"
-msgstr "Zgjidhe _të gjithë"
+msgstr "Zgjidh _gjithçka"
 
 #: gedit/gedit-ui.xml.h:61
 msgid "Select the entire document"
@@ -1858,7 +2044,7 @@ msgstr "_Informacione"
 
 #: gedit/gedit-ui.xml.h:71
 msgid "_Close"
-msgstr "_Mbyll"
+msgstr "_Mbylle"
 
 #: gedit/gedit-ui.xml.h:72
 msgid "_Close All"
@@ -1882,7 +2068,7 @@ msgstr "_Debug"
 
 #: gedit/gedit-ui.xml.h:77
 msgid "_Delete"
-msgstr "_Fshi"
+msgstr "_Elemino"
 
 #: gedit/gedit-ui.xml.h:78
 msgid "_Desktop Default"
@@ -1930,7 +2116,7 @@ msgstr "Dritarja e _output"
 
 #: gedit/gedit-ui.xml.h:90
 msgid "_Paste"
-msgstr "_Ngjit"
+msgstr "_Ngjite"
 
 #: gedit/gedit-ui.xml.h:91
 msgid "_Print..."
@@ -1962,7 +2148,7 @@ msgstr "_Kërko"
 
 #: gedit/gedit-ui.xml.h:99
 msgid "_Statusbar"
-msgstr "_Paneli i gjëndjes"
+msgstr "_Paneli i gjendjes"
 
 #: gedit/gedit-ui.xml.h:100
 msgid "_Text for All Icons"
@@ -1974,7 +2160,7 @@ msgstr "_Paneli i instrumentëve"
 
 #: gedit/gedit-ui.xml.h:102
 msgid "_Tools"
-msgstr "_Instrumentë"
+msgstr "_Instrumentët"
 
 #: gedit/gedit-ui.xml.h:103
 msgid "_Undo"
@@ -1982,9 +2168,9 @@ msgstr "_Anullo"
 
 #: gedit/gedit-ui.xml.h:104
 msgid "_View"
-msgstr "_Paraqitja"
+msgstr "_Shfaq"
 
-#: gedit/gedit-utils.c:365
+#: gedit/gedit-utils.c:407
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1996,34 +2182,34 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:373
+#: gedit/gedit-utils.c:415
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "E pamundur hapja e file \"%s\" pasi përmban të dhëna të dëmtuara."
 
-#: gedit/gedit-utils.c:384
+#: gedit/gedit-utils.c:426
 #, c-format
 msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "E pamundur hapja e file \"%s\" pasi gedit nuk mund të manazhojë pozicionet %"
 "s: ."
 
-#: gedit/gedit-utils.c:390
+#: gedit/gedit-utils.c:432
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "E pamundur hapja e file \"%s\""
 
-#: gedit/gedit-utils.c:400
+#: gedit/gedit-utils.c:442
 #, c-format
 msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "E pamundur hapja e file \"%s\" pasi përmban të dhëna në një format të gabuar."
 
-#: gedit/gedit-utils.c:407
+#: gedit/gedit-utils.c:449
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "E pamundur hapja e file \"%s\" pasi është tepër i madh."
 
-#: gedit/gedit-utils.c:414
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2035,12 +2221,12 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "E pamundur hapja e fille \"%s\" pasi hyrja është e ndaluar."
 
-#: gedit/gedit-utils.c:429
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2051,7 +2237,7 @@ msgstr ""
 "\n"
 "Ju lutem, mbyllni ndonjërin prej tyre dhe provoni përsëri."
 
-#: gedit/gedit-utils.c:437
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2063,7 +2249,7 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:445
+#: gedit/gedit-utils.c:487
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2072,7 +2258,7 @@ msgstr ""
 "Memorje e pamjaftueshme për të hapur file \"%s\". Ju lutem, mbyll ndonjë nga "
 "programet në ekzekutim dhe provoni përsëri."
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:513
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2085,7 +2271,7 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe që "
 "konfigurimi i proxy tuaj është korrekt dhe provoni përsëri."
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:528
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2097,7 +2283,7 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:495
+#: gedit/gedit-utils.c:537
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2109,7 +2295,7 @@ msgstr ""
 "Ju lutem, kontrolloni që konfigurimi i proxy tuaj është korrekt dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:504
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2121,7 +2307,7 @@ msgstr ""
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:513 gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:555 gedit/gedit-utils.c:628
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2132,7 +2318,12 @@ msgstr ""
 "\n"
 "Ndoshta, po përpiqeni të hapni një file binar."
 
-#: gedit/gedit-utils.c:557
+#: gedit/gedit-utils.c:564 gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "E pamundur hapja e file \"%s\"."
+
+#: gedit/gedit-utils.c:604
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2149,7 +2340,7 @@ msgstr ""
 "zgjedhur një kodifikim gërmash nga dritarja e dialogut «Hap file...» (ose "
 "«Hap pozicionin...»)."
 
-#: gedit/gedit-utils.c:569 gedit/gedit-utils.c:599
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2164,28 +2355,23 @@ msgstr ""
 "zgjedhur një kodifikim gërmash nga dritarja e dialogut «Hap file...» (ose "
 "«Hap pozicionin...»)."
 
-#: gedit/gedit-utils.c:615
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "E pamundur hapja e file \"%s\"."
-
-#: gedit/gedit-utils.c:619
+#: gedit/gedit-utils.c:666
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 msgstr ""
 "E pamundur hapja e file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
-#: gedit/gedit-utils.c:671
+#: gedit/gedit-utils.c:718
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Nuk arrij të ruaj këtë file \"%s\"."
 
-#: gedit/gedit-utils.c:675
+#: gedit/gedit-utils.c:722
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2196,7 +2382,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:728
+#: gedit/gedit-utils.c:775
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2207,24 +2393,24 @@ msgstr ""
 "\n"
 "Mos ndoshta, e ke fshirë?"
 
-#: gedit/gedit-utils.c:735
+#: gedit/gedit-utils.c:782
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "I pamundur rikthimi i file \"%s\" pasi përmban të dhëna të dëmtuara."
 
-#: gedit/gedit-utils.c:746
+#: gedit/gedit-utils.c:793
 #, c-format
 msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "I pamundur rikthimi i file \"%s\" pasi gedit nuk mund të manazhojë "
 "pozicionet %s: ."
 
-#: gedit/gedit-utils.c:752 gedit/gedit-utils.c:892
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "I pamundur rikthimi i file \"%s\""
 
-#: gedit/gedit-utils.c:762
+#: gedit/gedit-utils.c:809
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2233,17 +2419,17 @@ msgstr ""
 "I pamundur rikthimi i file \"%s\" pasi përmban të dhëna në një format të "
 "gabuar."
 
-#: gedit/gedit-utils.c:769
+#: gedit/gedit-utils.c:816
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "I pamundur rikthimi i file \"%s\" pasi është tepër i madh."
 
-#: gedit/gedit-utils.c:776
+#: gedit/gedit-utils.c:823
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "I pamundur rikthimi i file \"%s\" pasi hyrja është ndaluar."
 
-#: gedit/gedit-utils.c:783
+#: gedit/gedit-utils.c:830
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2254,7 +2440,7 @@ msgstr ""
 "\n"
 "Ju lutem, mbyllni ndonjërin prej tyre dhe provoni përsëri."
 
-#: gedit/gedit-utils.c:791
+#: gedit/gedit-utils.c:838
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2263,7 +2449,7 @@ msgstr ""
 "Memorje e pamjaftueshme për të rikthyer file \"%s\". Ju lutem, mbyll ndonjë "
 "nga programet në ekzekutim dhe provoni përsëri."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:864
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2275,7 +2461,7 @@ msgstr ""
 "Ju lutem, kontrolloni që konfigurimi i proxy tuaj është korrekt dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:831
+#: gedit/gedit-utils.c:878
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2287,12 +2473,12 @@ msgstr ""
 "Ju lutem, kontrolloni që konfigurimi i proxy tuaj është korrekt dhe provoni "
 "përsëri."
 
-#: gedit/gedit-utils.c:838
+#: gedit/gedit-utils.c:885
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "I pamundur rikthimi i file \"%s\" pasi përpjekja për të kryer login dështoi."
 
-#: gedit/gedit-utils.c:845
+#: gedit/gedit-utils.c:892
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2304,16 +2490,16 @@ msgstr ""
 "\n"
 "Ndoshta po përpiqeni të riktheni një file binar."
 
-#: gedit/gedit-utils.c:854
+#: gedit/gedit-utils.c:901
 msgid "It is not possible to revert an Untitled document."
 msgstr "Nuk është i pundur rikthimi i një dokumenti pa emër."
 
-#: gedit/gedit-utils.c:943
+#: gedit/gedit-utils.c:990
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "File \"%s\" ekziston."
 
-#: gedit/gedit-utils.c:949
+#: gedit/gedit-utils.c:996
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2324,7 +2510,7 @@ msgstr ""
 "\n"
 "Ju lutem, kontrolloni që e keni shkruar si duhet pozicionin."
 
-#: gedit/gedit-utils.c:958
+#: gedit/gedit-utils.c:1005
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2335,7 +2521,7 @@ msgstr ""
 "\n"
 "Sigurohuni që keni të drejtat e duhura për të shkruar."
 
-#: gedit/gedit-utils.c:965
+#: gedit/gedit-utils.c:1012
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2346,7 +2532,7 @@ msgstr ""
 "\n"
 "Emri i file është tepër i gjatë."
 
-#: gedit/gedit-utils.c:972
+#: gedit/gedit-utils.c:1019
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2359,7 +2545,7 @@ msgstr ""
 "Një directory në pozicionin e file nuk ekziston, ose është një lidhje "
 "simbolike e gabuar."
 
-#: gedit/gedit-utils.c:981
+#: gedit/gedit-utils.c:1028
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2370,7 +2556,7 @@ msgstr ""
 "\n"
 "Liro pak hapësirë dhe provo përsëri."
 
-#: gedit/gedit-utils.c:987
+#: gedit/gedit-utils.c:1034
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "I pamundur krijimi i file \"%s\"."
@@ -2381,16 +2567,16 @@ msgstr "I pamundur krijimi i file \"%s\"."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:686
+#: gedit/gedit-view.c:697
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rr %d, Kol %d"
 
-#: gedit/gedit-view.c:724
+#: gedit/gedit-view.c:735
 msgid "  OVR"
 msgstr "  MSH"
 
-#: gedit/gedit-view.c:726
+#: gedit/gedit-view.c:737
 msgid "  INS"
 msgstr "  SHT"
 
@@ -2468,7 +2654,7 @@ msgstr "Krijo një dokument të ri në një instancë ekzistuese të gedit"
 
 #: gedit/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
-msgstr " (Unicode e pavlefshme)"
+msgstr " (Unicode i pavlefshëm)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2478,12 +2664,12 @@ msgstr "_Statistikat e dokumentit"
 msgid "Get statistic info on current document"
 msgstr "Shiko informacionet statistikore për dokumentin aktual"
 
-#: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.c:140
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid "Document Statistics"
 msgstr "Statistikat e dokumentit"
 
-#: plugins/docinfo/docinfo.c:153
+#: plugins/docinfo/docinfo.c:154
 msgid "_Update"
 msgstr "_Rifresko"
 
@@ -2578,31 +2764,27 @@ msgid "Run a command"
 msgstr "Zbato një komandë"
 
 #: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:523
+#: plugins/shell_output/shell_output.c:502
 msgid "Stopped"
 msgstr "U ndërpre"
 
-#: plugins/shell_output/shell_output.c:246
-msgid "An error occured while running the selected command."
-msgstr "Gabim gjatë ekzekutimit të komandës së zgjedhur."
-
-#: plugins/shell_output/shell_output.c:302
+#: plugins/shell_output/shell_output.c:282
 msgid "Run Command"
 msgstr "Zbato komandën"
 
-#: plugins/shell_output/shell_output.c:318
+#: plugins/shell_output/shell_output.c:301
 msgid "_Run"
 msgstr "_Zbato"
 
-#: plugins/shell_output/shell_output.c:529
+#: plugins/shell_output/shell_output.c:508
 msgid "Done"
 msgstr "U plotësua"
 
-#: plugins/shell_output/shell_output.c:531
+#: plugins/shell_output/shell_output.c:510
 msgid "Failed"
 msgstr "Dështoi"
 
-#: plugins/shell_output/shell_output.c:703
+#: plugins/shell_output/shell_output.c:676
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2612,7 +2794,7 @@ msgstr ""
 "\n"
 "Shkruani një komandë shell të vlefshme."
 
-#: plugins/shell_output/shell_output.c:736
+#: plugins/shell_output/shell_output.c:695
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2622,9 +2804,13 @@ msgstr ""
 "\n"
 "Shkruani një komandë shell të vlefshme."
 
-#: plugins/shell_output/shell_output.c:822
+#: plugins/shell_output/shell_output.c:773
 msgid "Executing command"
 msgstr "Duke zbatuar komandën"
+
+#: plugins/shell_output/shell_output.c:841
+msgid "An error occured while running the selected command."
+msgstr "Gabim gjatë ekzekutimit të komandës së zgjedhur."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -2658,12 +2844,11 @@ msgstr "Directory e _punës:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: plugin i output nga shell"
 
-#. Key in case the plugin ever needs any settings
-#: plugins/sort/sort.c:26
+#: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "_Rreshto..."
 
-#: plugins/sort/sort.c:29
+#: plugins/sort/sort.c:30
 msgid "Sort the current document or selection."
 msgstr "Rendit dokumentin apo zgjedhjen aktuale."
 
@@ -2689,7 +2874,7 @@ msgstr "Nuk mund të anullosh operacionin e renditjes."
 
 #: plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
-msgstr "_Injoro gërma të mëdha/të vogla"
+msgstr "_Injoro ndryshimin gërma të mëdha/të vogla"
 
 #: plugins/sort/sort.glade2.h:6
 msgid "_Reverse order"
@@ -2744,7 +2929,7 @@ msgstr "Breton"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Catalan"
-msgstr "Catalan"
+msgstr "Katalane"
 
 #: plugins/spell/gedit-spell-checker.c:82
 msgid "Czech"
@@ -2768,7 +2953,7 @@ msgstr "Anglisht (Amerikë)"
 
 #: plugins/spell/gedit-spell-checker.c:87
 msgid "English (British)"
-msgstr "Anglisht (Britanike)"
+msgstr "Anglisht (Britani)"
 
 #: plugins/spell/gedit-spell-checker.c:88
 msgid "English (Canadian)"
@@ -2792,7 +2977,7 @@ msgstr "Frengjisht (Francë)"
 
 #: plugins/spell/gedit-spell-checker.c:93
 msgid "French (Swiss)"
-msgstr "Frengjisht (Svicër)"
+msgstr "Frengjisht (Zvicër)"
 
 #: plugins/spell/gedit-spell-checker.c:94
 msgid "Italian"
@@ -2800,23 +2985,23 @@ msgstr "Italisht"
 
 #: plugins/spell/gedit-spell-checker.c:95
 msgid "Dutch"
-msgstr "Hollandisht"
+msgstr "Hollandeze"
 
 #: plugins/spell/gedit-spell-checker.c:96
 msgid "Norwegian"
-msgstr "Norvegjisht"
+msgstr "Norvegjeze"
 
 #: plugins/spell/gedit-spell-checker.c:97
 msgid "Polish"
-msgstr "Polake"
+msgstr "Polonisht"
 
 #: plugins/spell/gedit-spell-checker.c:98
 msgid "Portuguese (Portugal)"
-msgstr "Portogeze (Portogali)"
+msgstr "Portugeze (Portugali)"
 
 #: plugins/spell/gedit-spell-checker.c:99
 msgid "Portuguese (Brazilian)"
-msgstr "Portogeze (Brazil)"
+msgstr "Portugeze (Brazil)"
 
 #: plugins/spell/gedit-spell-checker.c:100
 msgid "Russian"
@@ -2832,7 +3017,7 @@ msgstr "Ukrahinase"
 
 #: plugins/spell/gedit-spell-checker.c:735
 msgid "Default"
-msgstr "E prezgjedhur"
+msgstr "I/e prezgjedhur"
 
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #, c-format
@@ -2901,7 +3086,7 @@ msgstr "Fjalori i përdoruesit:"
 
 #: plugins/spell/spell-checker.glade2.h:14
 msgid "_Ignore"
-msgstr "_Injoro"
+msgstr "_Shpërfill"
 
 #: plugins/spell/spell-checker.glade2.h:15
 msgid "_Suggestions:"
@@ -3004,7 +3189,7 @@ msgstr "Sh_to datën dhe orën..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Shto datën dhe orën aktuale tek pozicioni i kursorit"
 
-#: plugins/time/time.c:450
+#: plugins/time/time.c:449
 msgid "Available formats"
 msgstr "Formatet në dispozicion"
 
@@ -3042,7 +3227,7 @@ msgstr "Përdor formatin e _zgjedhur"
 
 #: plugins/time/time.glade2.h:8
 msgid "_Insert"
-msgstr "_Shto"
+msgstr "_Shkruaj"
 
 #: plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
@@ -3058,7 +3243,7 @@ msgstr "Funksion ruajtje akoma i pakompletuar për shikuesin gedit"
 
 #: viewer/gedit-viewer-ui.xml.h:1
 msgid "Copy the selected text to the clipboard"
-msgstr "Kopjo tekstin e seleksionuar në bllokun e shënimeve"
+msgstr "Kopjo tekstin e zgjedhur në bllokun e shënimeve"
 
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
