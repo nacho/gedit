@@ -18,7 +18,6 @@
  */
 #include <stdio.h>
 #include <stdarg.h>
-#include <time.h>
 #include <string.h>
 #include <config.h>
 #ifndef WITHOUT_GNOME
@@ -26,6 +25,7 @@
 #endif
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <time.h>
 #include "main.h"
 #include "msgbox.h"
 

@@ -22,7 +22,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <config.h>
@@ -30,6 +29,7 @@
 #include <gnome.h>
 #endif
 #include <gtk/gtk.h>
+#include <time.h>
 #include "main.h"
 #include "gE_print.h"
 #include "gE_files.h"

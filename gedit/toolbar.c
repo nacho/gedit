@@ -389,7 +389,7 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	}
 	#else
 	gtk_widget_queue_resize 
-		(gnome_app_get_dock (GNOME_APP (window->window)));
+		(GTK_WIDGET (gnome_app_get_dock (GNOME_APP (window->window))));
 	#endif
 }
 
@@ -423,7 +423,7 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	}
 	#else
 	gtk_widget_queue_resize 
-		(gnome_app_get_dock (GNOME_APP(window->window)));
+		(GTK_WIDGET (gnome_app_get_dock (GNOME_APP(window->window))));
 	#endif
 }
 

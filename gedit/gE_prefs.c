@@ -17,7 +17,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 #include <stdio.h>
-#include <time.h>
 #include <string.h>
 #include <config.h>
 #ifndef WITHOUT_GNOME
@@ -25,6 +24,7 @@
 #endif
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <time.h>
 #include "main.h"
 #include "gE_prefs.h"
 #include "toolbar.h"
