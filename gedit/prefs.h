@@ -32,6 +32,7 @@ struct _Preferences
 {
 	guint auto_indent;
 	gint  word_wrap;
+	gint  toolbar_labels;
 	gint  show_tabs;
 	gint  tab_pos;
 	guint show_status;
