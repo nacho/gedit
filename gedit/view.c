@@ -32,8 +32,6 @@
 #include "prefs.h"
 #include "gedit.h"
 
-#define GE_DATA		1
-
 enum {
 	CURSOR_MOVED_SIGNAL,
 	LAST_SIGNAL
@@ -44,14 +42,14 @@ GtkVBoxClass *parent_class = NULL;
 
        void view_changed_cb (GtkWidget *w, gpointer cbdata);
 static void gedit_view_list_insert (View *view, gedit_data *data);
-       void view_list_erase (View *view, gedit_data *data);
+static void view_list_erase (View *view, gedit_data *data);
        gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
        void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
        void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
    gboolean auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
-       void line_pos_cb (GtkWidget *widget, gedit_data *data);
-       gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
-       gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
+static void line_pos_cb (GtkWidget *widget, gedit_data *data);
+static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
+static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
 static void gedit_view_class_init (ViewClass *klass);
 static void gedit_view_init (View *view);
       guint gedit_view_get_type (void);
@@ -59,13 +57,12 @@ GtkWidget * gedit_view_new (Document *doc);
        void gedit_view_set_group_type (View *view, guint type); /* Why is this here ??? maybe taken from ghex. we dont use group types asaik */
        void gedit_view_set_split_screen (View *view, gint split_screen);
        void gedit_view_set_word_wrap (View *view, gint word_wrap);
-       void gedit_view_set_line_wrap (View *view, gint line_wrap);
+static void gedit_view_set_line_wrap (View *view, gint line_wrap);
        void gedit_view_set_read_only (View *view, gint read_only);
        void gedit_view_set_font (View *view, gchar *fontname);
        void gedit_view_set_position (View *view, gint pos);
       guint gedit_view_get_position (View *view);
       guint gedit_view_get_length (View *view);
-       void gedit_view_set_selection (View *view, gint start, gint end);
        void gedit_view_buffer_sync (View *view);
        void gedit_view_refresh (View *view);
 
@@ -126,7 +123,7 @@ gedit_view_list_insert (View *view, gedit_data *data)
 	}	
 }
 
-void
+static void
 view_list_erase (View *view, gedit_data *data)
 {
 	gedit_debug_mess ("F:gedit_view_list_erase. FIXME: I am empty \n", DEBUG_VIEW);
@@ -349,7 +346,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	return TRUE;
 }
 
-void
+static void
 line_pos_cb (GtkWidget *widget, gedit_data *data)
 {
 	static char col [32];
@@ -367,7 +364,7 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 	}
 }
 
-gint
+static gint
 gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	gedit_data *data;
@@ -380,7 +377,7 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 	return FALSE;
 }
 
-gint
+static gint
 gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
 	gint mask;
@@ -394,8 +391,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 
 	if (event->state & GDK_MOD1_MASK)
 	{
-		/* We dont need this. Chema 
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");*/
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
 		return FALSE;
 	}
 
@@ -414,7 +410,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		file_print_cb (w, NULL);
 	    		break;
 		case 'n':
-/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");*/
+/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event"); */
 			return FALSE;
 			break;
 		case 'w':
@@ -442,8 +438,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 
 	return TRUE;
 }
-
-/* The Widget Stuff */
 
 static void
 gedit_view_class_init (ViewClass *klass)
@@ -540,10 +534,8 @@ gedit_view_init (View *view)
 	view->indent = gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
 						 GTK_SIGNAL_FUNC (auto_indent_cb), view);
 
-	/*	
-	I'm not even sure why these are here.. i'm sure there are much easier ways
-	of implementing undo/redo... 
-	*/
+	/* I'm not even sure why these are here.. i'm sure there are
+	   much easier ways of implementing undo/redo...  */
 	view->insert = gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
 		                           GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
 	view->delete = gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
@@ -726,9 +718,6 @@ gedit_view_new (Document *doc)
 	return GTK_WIDGET (view);
 }
 
-
-
-/* Public Functions */
 void
 gedit_view_set_group_type (View *view, guint type)
 {
@@ -763,15 +752,6 @@ gedit_view_set_word_wrap (View *view, gint word_wrap)
 
 	gtk_text_set_word_wrap (GTK_TEXT (view->text), word_wrap);
 	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), word_wrap);
-}
-
-void
-gedit_view_set_line_wrap (View *view, gint line_wrap)
-{
-	gedit_debug_mess ("F:gedit_view_set_line_wrap\n", DEBUG_VIEW);
-
-	view->line_wrap = line_wrap;
-	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
 }
 
 void
@@ -862,15 +842,6 @@ gedit_view_get_length (View *view)
 	return gtk_text_get_length (GTK_TEXT (view->text));
 }
 
-void
-gedit_view_set_selection (View *view, gint start, gint end)
-{
-	gedit_debug_mess ("F:gedit_view_set_seletion\n", DEBUG_VIEW);
-	
-	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
-	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
-}
-
 /* Sync the itnernal document buffer with what is visible in the text box */
 void
 gedit_view_buffer_sync (View *view) 
@@ -921,3 +892,36 @@ gedit_view_refresh (View *view)
 		gedit_view_set_position (view, 0);
 	}
 }
+
+static void
+gedit_view_set_line_wrap (View *view, gint line_wrap)
+{
+	gedit_debug_mess ("F:gedit_view_set_line_wrap\n", DEBUG_VIEW);
+
+	view->line_wrap = line_wrap;
+	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
+}
+
+void
+options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
+{
+	View *view = VIEW (mdi->active_view);
+
+	if (!gedit_document_current())
+		return;
+
+	gedit_view_set_line_wrap (view, !view->line_wrap);
+}
+
+
+/* Functions that are never used */
+#if 0
+void
+gedit_view_set_selection (View *view, gint start, gint end)
+{
+	gedit_debug_mess ("F:gedit_view_set_seletion\n", DEBUG_VIEW);
+	
+	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
+	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
+}
+#endif

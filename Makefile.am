@@ -2,10 +2,9 @@
 
 SUBDIRS = macros po intl pixmaps plugins src help
 
-EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins \
+EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	INSTALL gedit.1 gedit.desktop \
 	ABOUT-NLS TODO TODO-road_to_1.0.0 gedit.spec.in gedit.keys
-#	gE-icon-1.xpm gE-icon-2.xpm
 
 man_MANS = gedit.1
 

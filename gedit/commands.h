@@ -77,7 +77,6 @@ extern void filenames_dropped (GtkWidget * widget,
 extern void options_toggle_split_screen_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_status_bar_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data);
-extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 
 void tab_pos (GtkPositionType pos);

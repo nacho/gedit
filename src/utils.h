@@ -19,8 +19,8 @@
  * Utility functions by Jason Leach <leach@wam.umd.edu>
  */
 
-#ifndef __GEDIT_UTILS_H__
-#define __GEDIT_UTILS_H__
+#ifndef __UTILS_H__
+#define __UTILS_H__
 
 typedef enum {
 	DEBUG_UNDO,
@@ -50,4 +50,4 @@ int  gtk_radio_group_get_selected (GSList *radio_group);
 void gtk_radio_button_select (GSList *group, int n);
 void gedit_debug_mess (gchar *message, DebugSection type);
 
-#endif /* __GEDIT_UTILS_H__ */
+#endif /* __UTILS_H__ */

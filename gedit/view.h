@@ -80,8 +80,6 @@ struct _ViewClass
 };
 
 
-/* Ok, i thought i might as well make at least ONE header look nice =) */
-
 /* General utils */
 guint	   gedit_view_get_type 		(void);
 GtkWidget* gedit_view_new 		(Document *doc);
@@ -105,8 +103,6 @@ void 	   gedit_view_set_split_screen 	(View *view, gint split_screen);
 void 	   gedit_view_insert_text 	(View *view, const gchar *text,
 					 gint length, gint pos);
 
-void	   gedit_view_set_selection	(View *view, gint start, gint end);
-
 guint 	   gedit_view_get_position	(View *view);
 void	   gedit_view_set_position	(View *view, gint pos);
 guint 	   gedit_view_get_length 	(View *view);
@@ -127,5 +123,11 @@ void	   gedit_view_refresh		(View *view);
 void gedit_view_undo (View *view);
 void gedit_view_redo (View *view);
 */
+
+extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
+
+#if 0
+void	   gedit_view_set_selection	(View *view, gint start, gint end);
+#endif
 
 #endif /* __VIEW_H__ */

@@ -206,8 +206,8 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 	if (!view->split_parent)
 		return;
 
-	gedit_view_set_split_screen
-		(view, !GTK_WIDGET_VISIBLE (view->split_parent));
+	gedit_view_set_split_screen (view,
+				     !GTK_WIDGET_VISIBLE (view->split_parent));
 }
 
 void
@@ -233,17 +233,6 @@ options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 }
 
 void
-options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
-{
-	View *view = VIEW (mdi->active_view);
-
-	if (!gedit_document_current())
-		return;
-
-	gedit_view_set_line_wrap (view, !view->line_wrap);
-}
-
-void
 options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 {
 	if (!gedit_document_current())
@@ -261,21 +250,3 @@ find_line_cb (GtkWidget *widget, gpointer data)
 		return;
 	dialog_find_line ();
 }
-
-void
-replace_cb (GtkWidget *widget, gpointer data)
-{
-	dialog_replace ();
-}
-
-void
-about_cb (GtkWidget *widget, gpointer data)
-{
-	dialog_about ();
-}
-
-
-
-
-
-

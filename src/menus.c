@@ -116,7 +116,7 @@ GnomeUIInfo gedit_edit_menu[] =
 
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM (replace_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM (dialog_replace, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM,
@@ -202,7 +202,7 @@ GnomeUIInfo gedit_settings_menu[] =
 /*      
         GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
 				    N_("Toggle autoindent"),
-				    auto_indent_toggle_cb, (gpointer) GE_DATA,
+				    auto_indent_toggle_cb, NULL,
 				    NULL),
 */
 
@@ -267,7 +267,7 @@ GnomeUIInfo gedit_window_menu[] =
  	GNOMEUIINFO_MENU_NEW_WINDOW_ITEM (window_new_cb, NULL),
 
 /*FIXME        GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(window_close_cb,
-					   (gpointer) GE_DATA),*/
+					   NULL),*/
 	
 /*	GNOMEUIINFO_SEPARATOR,
 
