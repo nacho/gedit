@@ -58,8 +58,7 @@ dialog_goto_line_get_dialog (void)
 	if (dialog != NULL)
 		return dialog;
 
-	/* FIXME */
-	gui = glade_xml_new ( /*GEDIT_GLADEDIR */ "./dialogs/goto-line.glade2",
+	gui = glade_xml_new (GEDIT_GLADEDIR "goto-line.glade2",
 			     "goto_line_dialog_content", NULL);
 
 	if (!gui) {

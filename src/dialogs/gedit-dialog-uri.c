@@ -58,8 +58,7 @@ dialog_open_uri_get_dialog (void)
 	if (dialog != NULL)
 		return dialog;
 
-	/* FIXME */
-	gui = glade_xml_new ( /*GEDIT_GLADEDIR */ "./dialogs/uri.glade2",
+	gui = glade_xml_new (GEDIT_GLADEDIR "uri.glade2",
 			     "open_uri_dialog_content", NULL);
 
 	if (!gui) {

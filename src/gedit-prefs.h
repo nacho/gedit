@@ -61,12 +61,14 @@ struct _GeditPreferences
 
 /*	gboolean use_fontset;
  */
+	gint  use_default_font;
 	gchar *font;
 
 	gint  splitscreen;
 
-	gint mdi_mode;
+	gint  mdi_mode;
 	
+	gint  use_default_colors;
 	guint16 bg[3];
 	guint16 fg[3];
 	

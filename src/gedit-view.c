@@ -154,7 +154,8 @@ gedit_view_init (GeditView  *view)
 #endif 
 }
 
-static void gedit_view_finalize	(GObject *object)
+static void 
+gedit_view_finalize (GObject *object)
 {
 	GeditView *view;
 

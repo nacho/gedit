@@ -1201,15 +1201,8 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 	else
 		if (mdi->priv->ui_file_name)
 		{
-			/* FIXME */
-			
 			bonobo_ui_util_set_ui (ui_component, "", mdi->priv->ui_file_name,
 				       mdi->priv->mdi_name, NULL);
-			/*
-			bonobo_ui_util_set_ui (ui_component, "/opt/gedit2/src", mdi->priv->ui_file_name,
-				       mdi->priv->mdi_name);
-
-			*/
 		}
 
 	if (mdi->priv->verbs)

@@ -131,18 +131,10 @@ gedit_mdi_init (GeditMDI  *mdi)
 
 	/* FIXME */
 	gedit_debug (DEBUG_MDI, "------ %s\n", 
-			bonobo_ui_util_get_ui_fname ("", "./gedit-ui.xml"));
+			bonobo_ui_util_get_ui_fname ("", GEDIT_UI_DIR "gedit-ui.xml"));
 	
-	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), "./gedit-ui.xml", gedit_verbs);
+	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), GEDIT_UI_DIR "gedit-ui.xml", gedit_verbs);
 	
-	/*
-	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), "gedit-ui.xml", gedit_verbs);
-	*/
-
-#if 0
-	/* FIXME */
-	bonobo_mdi_set_child_menu_path (BONOBO_MDI (mdi), GNOME_MENU_FILE_STRING);
-#endif
 	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
 
 	bonobo_mdi_set_mode (BONOBO_MDI (mdi), settings->mdi_mode);

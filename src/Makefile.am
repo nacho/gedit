@@ -3,14 +3,17 @@ SUBDIRS= dialogs
 
 bin_PROGRAMS = gedit2
 
+uidir = $(datadir)/gedit2/ui/
+
 INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
 	-I$(top_srcdir)/dialogs	\
 	$(GEDIT_CFLAGS) \
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" \
-	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\"
-
+	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" \
+	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" \
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"
 
 CFLAGS = -g -O2 -Wall 
 
@@ -45,6 +48,8 @@ gedit2_SOURCES = 		\
 	gedit-recent.c		\
 	gedit-undo-manager.h	\
 	gedit-undo-manager.c	\
+	gedit-print.h		\
+	gedit-print.c		\
 	bonobo-mdi-child.c	\
 	bonobo-mdi-child.h	\
 	bonobo-mdi.c		\
@@ -52,7 +57,8 @@ gedit2_SOURCES = 		\
 	gnome-vfs-helpers.c	\
 	gnome-vfs-helpers.h
 
-# FIXME
-EXTRA_DIST = gedit-ui.xml	
+ui_DATA = gedit-ui.xml
+
+EXTRA_DIST = $(ui_DATA)
 
 

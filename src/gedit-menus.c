@@ -44,6 +44,8 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB ("FileSaveAll", gedit_cmd_file_save_all),
 	BONOBO_UI_VERB ("FileRevert", gedit_cmd_file_revert),
 	BONOBO_UI_VERB ("FileOpenURI", gedit_cmd_file_open_uri),
+	BONOBO_UI_VERB ("FilePrint", gedit_cmd_file_print),
+	BONOBO_UI_VERB ("FilePrintPreview", gedit_cmd_file_print_preview),
 	BONOBO_UI_VERB ("FileClose", gedit_cmd_file_close),
 	BONOBO_UI_VERB ("FileCloseAll", gedit_cmd_file_close_all),
 	BONOBO_UI_VERB ("FileExit", gedit_cmd_file_exit),
@@ -57,6 +59,7 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB ("SearchFind", gedit_cmd_search_find),
 	BONOBO_UI_VERB ("SearchReplace", gedit_cmd_search_replace),
 	BONOBO_UI_VERB ("SearchGoToLine", gedit_cmd_search_goto_line),
+	BONOBO_UI_VERB ("SettingsPreferences", gedit_cmd_settings_preferences),
 	BONOBO_UI_VERB ("About", gedit_cmd_help_about),
 
 	BONOBO_UI_VERB_END

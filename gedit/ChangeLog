@@ -1,3 +1,39 @@
+2001-11-26  Paolo Maggi  <maggi@athena.polito.it>
+
+	* Makefile.am: -DGEDIT_UI_DIR and -DGEDIT_GLADE_DIR added to INCLUDES,
+	ui_DATA defined, added gedit-print.c and gedit-print.h to gedit2_SOURCES
+
+	* bonobo-mdi.c (app_create): removed old commented code
+
+	* gedit-commands.[ch] (gedit_cmd_file_print): new function
+	  (gedit_cmd_file_print_preview): ditto
+          (gedit_cmd_settings_preferences): ditto
+	  
+	* gedit-file.c	(gedit_file_save_as_ok_button_clicked_handler): typo
+
+	* gedit-mdi.c (gedit_mdi_init): removed old commented code, search
+	gedit-ui.xml in the rigth location
+
+	* gedit-menus.c: added FilePrint, FilePrintPreview and SettingsPreferences to
+	gedit_verbs []
+
+	* gedit-prefs.[ch]: added two new preferences, i.e. use_default_font and use_default_colors
+
+        * dialogs/Makefile.am: -DGEDIT_UI_DIR and -DGEDIT_GLADE_DIR added to INCLUDES,
+	added gedit-preferences-dialog.[ch] to libdialogs_a_SOURCES
+
+	* dialogs/gedit-dialog-goto-line.c (dialog_goto_line_get_dialog): search glade file in the rigth location
+
+	* dialogs/gedit-dialog-uri.c (dialog_open_uri_get_dialog): ditto
+
+	* dialogs/gedit-dialog-replace.c (dialog_replace_get_dialog): ditto
+	  (gedit_dialog_replace): close window only when "replace all" or "close" button is pressed
+	
+	* gedit-print.[ch]
+	* dialogs/gedit-preferences.glade2
+	* src/dialogs/gedit-preferences-dialog.[ch]: new files
+
+
 2001-11-23  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-commands.[ch] (gedit_cmd_search_replace): new function 

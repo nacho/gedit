@@ -655,7 +655,7 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 				file_name);
 
 		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-                             _("Replace"),
+                             _("_Replace"),
                              GTK_RESPONSE_YES);
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);

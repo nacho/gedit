@@ -83,8 +83,7 @@ dialog_replace_get_dialog (void)
 		return dialog;
 	}
 
-	/* FIXME */
-	gui = glade_xml_new ( /*GEDIT_GLADEDIR */ "./dialogs/replace.glade2",
+	gui = glade_xml_new ( GEDIT_GLADEDIR "replace.glade2",
 			     "replace_dialog_content", NULL);
 
 	if (!gui) {
@@ -161,8 +160,7 @@ dialog_find_get_dialog (void)
 		return dialog;
 	}
 
-	/* FIXME */
-	gui = glade_xml_new ( /*GEDIT_GLADEDIR */ "./dialogs/replace.glade2",
+	gui = glade_xml_new (GEDIT_GLADEDIR "replace.glade2",
 			     "replace_dialog_content", NULL);
 
 	if (!gui) {
@@ -214,7 +212,7 @@ dialog_find_get_dialog (void)
 			    content, FALSE, FALSE, 0);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
-					 GTK_RESPONSE_OK);
+					 GEDIT_RESPONSE_FIND);
 
 	g_object_unref (G_OBJECT (gui));
 	
@@ -271,24 +269,31 @@ gedit_dialog_replace (void)
 
 	gtk_widget_grab_focus (dialog->search_entry);
 
-	response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+			GEDIT_RESPONSE_REPLACE, FALSE);
+	
+	do
+	{
+		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
 
-	switch (response) {
-		case GEDIT_RESPONSE_FIND:
-			replace_dlg_find_button_pressed (dialog);
-			break;
+		switch (response) {
+			case GEDIT_RESPONSE_FIND:
+				replace_dlg_find_button_pressed (dialog);
+				break;
 
-		case GEDIT_RESPONSE_REPLACE:
-			replace_dlg_replace_button_pressed (dialog);
-			break;
+			case GEDIT_RESPONSE_REPLACE:
+				replace_dlg_replace_button_pressed (dialog);
+				break;
 
-		case GEDIT_RESPONSE_REPLACE_ALL:
-			replace_dlg_replace_all_button_pressed (dialog);
-			break;
+			case GEDIT_RESPONSE_REPLACE_ALL:
+				replace_dlg_replace_all_button_pressed (dialog);
+				break;
 
-		default:
-			gtk_widget_hide (dialog->dialog);
-	}
+			default:
+				gtk_widget_hide (dialog->dialog);
+		}
+				
+	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
 }
 
 static void
@@ -303,14 +308,12 @@ static void
 replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 {
 	/* FIXME */
-	gtk_widget_hide (dialog->dialog);
 }
 
 static void
 replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 {
 	/* FIXME */
-	gtk_widget_hide (dialog->dialog);
 }
 
 static void

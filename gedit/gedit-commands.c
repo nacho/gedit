@@ -42,7 +42,9 @@
 #include "gedit-debug.h"
 #include "gedit-view.h"
 #include "gedit-file.h"
+#include "gedit-print.h"
 #include "dialogs/gedit-dialogs.h"
+#include "dialogs/gedit-preferences-dialog.h"
 
 void 
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -120,6 +122,34 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	gedit_dialog_open_uri ();
+}
+
+void
+gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditMDIChild *active_child;
+	
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	if (active_child == NULL)
+		return;
+	
+	gedit_print (active_child);
+}
+
+void
+gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditMDIChild *active_child;
+	
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	if (active_child == NULL)
+		return;
+	
+	gedit_print_preview (active_child);
 }
 
 void 
@@ -264,6 +294,19 @@ gedit_cmd_search_goto_line (BonoboUIComponent *uic, gpointer user_data, const gc
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	gedit_dialog_goto_line ();
+}
+
+void
+gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GtkWidget *dlg;
+
+	dlg = gedit_preferences_dialog_new (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
+
+	gtk_dialog_run (GTK_DIALOG (dlg));
+
+	gtk_widget_destroy (dlg);
 }
 
 void 
