@@ -330,6 +330,18 @@ gedit_view_line_numbers_expose (GtkWidget      *widget,
 			      pixels,
 			      numbers,
 			      &count);
+	
+	/* a zero-lined document should display a "1"; we don't need to worry about
+	scrolling effects of the text widget in this special case */
+	
+	if (count == 0)
+	{
+		gint y = 0;
+		gint n = 0;
+		count = 1;
+		g_array_append_val (pixels, y);
+		g_array_append_val (numbers, n);
+	}
   
 	layout = gtk_widget_create_pango_layout (widget, "");
   
