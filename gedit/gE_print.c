@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -17,6 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
 #include <stdio.h>
@@ -38,316 +41,294 @@
 #include "commands.h"
 #include "gE_prefs.h"
 
-static void print_destroy(GtkWidget *widget, gpointer data);
-static void file_print_execute(GtkWidget *w, gpointer cbdata);
-static char *generate_temp_file(gE_view *view);
-static char *get_filename(gE_data *data);
 
-/* these should probably go into gE_window */
-static GtkWidget *print_dialog = NULL;
-static GtkWidget *print_cmd_entry = NULL;
+#include <libgnomeprint/gnome-print.h>
+#include <libgnomeprint/gnome-printer.h>
+#include <libgnomeprint/gnome-print-preview.h>
+#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-master-preview.h>
+#include <libgnomeprint/gnome-printer-dialog.h>
 
+typedef struct {
+	/* gnome print stuff */
+        GnomePrintMaster *master;
+	GnomePrintContext *pc;
+	const GnomePaper *paper;
+
+	/* document stuff */
+	gE_document *doc;
+	guchar *buffer;
+	gE_view *view;
+	guint buffer_size;
+	guchar *filename;
+	
+	/* Font stuff */ 
+	guchar *font_name;
+	int   font_size;
+	float font_char_width;
+	float font_char_height;
+
+	/* Page stuff */ 
+	int   pages;
+	float page_width, page_height;
+	float margin_top, margin_bottom, margin_left, margin_right;
+	float printable_width, printable_height;
+	float header_height;
+	int   total_lines;
+	int   lines_per_page;
+
+	/* Variables */
+	int   file_offset;
+	int   current_line; 
+} gE_PrintJobInfo;
+
+
+       void file_print_cb(GtkWidget *widget, gpointer cbdata);
+static void print_document( gE_document *doc, GnomePrinter *printer);
+static void print_dialog_clicked_cb(GtkWidget *widget, gint button, gpointer data);
+static void print_line(gE_PrintJobInfo *pji);
+static int  print_determine_lines(gE_PrintJobInfo *pji);
+static void print_header(gE_PrintJobInfo *pji, unsigned int page);
+static void start_job(GnomePrintContext *pc);
+static void print_header(gE_PrintJobInfo *pji, unsigned int page);
+static void print_row(gE_PrintJobInfo *pji, unsigned int offset, unsigned int bytes, int row);
+static void end_page(GnomePrintContext *pc);
+static void end_job(GnomePrintContext *pc);
+static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji);
+static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer);
 
 /*
  * PUBLIC: file_print_cb
  *
- * creates print dialog box.  this should be the only routine global to
+ * calls gnome-print to create a print dialog box.
+ * This should be the only routine global to
  * the world.
  */
 void
 file_print_cb(GtkWidget *widget, gpointer cbdata)
 {
-
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-	GtkWidget *tmp;
-	gE_data *data = (gE_data *)cbdata;
-
-	g_assert(data != NULL);
-
-	if (print_dialog)
-	  return;
-
-	print_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-
-	gtk_window_set_title(GTK_WINDOW(print_dialog), _("Print"));
-	gtk_signal_connect(GTK_OBJECT(print_dialog), "destroy",
-		GTK_SIGNAL_FUNC(print_destroy), NULL);
-
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(print_dialog), vbox);
-	gtk_container_border_width(GTK_CONTAINER(print_dialog), 6);
-	gtk_widget_show(vbox);
-
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 10);
-	gtk_widget_show(hbox);
-
-	tmp = gtk_label_new(_("Enter print command below\nRemember to include '%s'"));
-	gtk_box_pack_start(GTK_BOX(hbox), tmp, FALSE, TRUE, 5);
-	gtk_widget_show(tmp);
-
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 5);
-	gtk_widget_show(hbox);
-
-	tmp = gtk_label_new(_("Print Command:"));
-	gtk_box_pack_start(GTK_BOX(hbox), tmp, FALSE, TRUE, 5);
-	gtk_widget_show(tmp);
-
-	print_cmd_entry = gtk_entry_new_with_max_length(255);
-	
-	if (settings->print_cmd)
-	  gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), settings->print_cmd);
-	  
-	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, TRUE, TRUE, 10);
-	gtk_widget_show(print_cmd_entry);
-
-	tmp = gtk_hseparator_new();
-	gtk_box_pack_start(GTK_BOX(vbox), tmp, FALSE, TRUE, 10);
-	gtk_widget_show(tmp);
-
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 5);
-	gtk_widget_show(hbox);
-
-	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
-	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(file_print_execute), data);
-	gtk_widget_show(tmp);
-
-	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
-	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(print_destroy), NULL);
-	gtk_widget_show(tmp);
-
-	gtk_widget_show(print_dialog);
-	
-} /* file_print_cb */
-
-
-/*
- * PRIVATE: print_destroy
- *
- * destroy the print dialog box
- */
-static void
-print_destroy(GtkWidget *widget, gpointer data)
-{
-
-	if (print_dialog) {
-	
-	  gtk_widget_destroy(print_dialog);
-	  print_dialog = NULL;
-	
-	}
-
-} /* print_destroy */
-
-
-/*
- * PRIVATE: file_print_execute
- *
- * actually execute the print command
- */
-static void
-file_print_execute(GtkWidget *w, gpointer cbdata)
-{
-
-	gchar *scmd, *pcmd, *tmp, *fname;
-	gE_data *data = (gE_data *)cbdata;
-
-	g_assert(data != NULL);
-
-	if (settings->print_cmd)
-	  strcpy(settings->print_cmd, gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
-
-	/* print using specified command */
-	if ((pcmd = gtk_entry_get_text(GTK_ENTRY(print_cmd_entry))) == NULL)
-	  return;
-
-	/* look for "file variable" and place marker */
-	if ((tmp = strstr (pcmd, "%s")) == NULL)
-	  return;
-
-	*tmp = '\0';
-	tmp += 2;
-
-	if ((fname = get_filename(data)) == NULL) {
-
-	  print_destroy(NULL, NULL);
-	  
-	  return;	/* canceled */
-
-	}
-
-	/* build command and execute; g_malloc handles memory alloc errors */
-	scmd = g_malloc (strlen(pcmd) + strlen(fname) + 1);
-	sprintf (scmd, "%s%s%s", pcmd, fname, tmp);
-
-#ifdef DEBUG
-	g_print("%s\n", scmd);
-#endif
-
-	if (system (scmd) == -1)
-	  perror ("file_print_execute: system() error");
-
-	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_PRINTED));
-
-	g_free (scmd);
-
-	/* delete temporary file.  TODO: allow temp dir to be customizable */
-	if (strncmp (fname, "/tmp", 4) == 0)
-	  if (unlink (fname))
-	    perror ("file_print_execute: unlink() error");
-
-	g_free (fname);
-
-	print_destroy (NULL, NULL);
-
-} /* file_print_execute */
-
-
-/*
- * PRIVATE: get_filename
- *
- * returns the filename to be printed in a newly allocated buffer.
- * the filename is determined by this algorithm:
- *
- * 1. if the file to be printed has not been updated and exists on disk,
- * then print the file on disk immediately.
- * 2. if the file has been updated, or if it is "Untitled", we should
- * prompt the user whether or not to save the file, and then print it.
- * 2a.  if the user does not want to save it, then this is the only time
- * we actually need to create a temporary file.
- */
-#define PRINT_TITLE	"Save before printing?"
-#define PRINT_MSG	"has not been saved!"
-static char *
-get_filename(gE_data *data)
-{
-
 	gE_document *doc;
-	char *fname = NULL;
-	char *buttons[] =
-		{ N_("Print anyway"), N_(" Save, then print "), N_("Cancel")};
-	char *title, *msg;
-
-	g_assert(data != NULL);
-
+	GtkWidget   *dialog;
+	
 	doc = gE_document_current();
+	dialog = gnome_printer_dialog_new ();
 
-	if (!GE_VIEW(mdi->active_view)->changed && doc->filename) {
-	  
-	  if (doc->sb == NULL)
-	     doc->sb = g_malloc(sizeof(struct stat));
-	  
-	  if (stat(doc->filename, doc->sb) == -1) {
-	    
-	    /* print warning */
-	    g_free(doc->sb);
-	    doc->sb = NULL;
-	    fname = generate_temp_file(GE_VIEW(mdi->active_child));
-	    
-	  } else
-	   fname = g_strdup(doc->filename);
-	   
-	} else { /* doc changed or no filename */
-	 int ret;
+	gnome_dialog_set_parent(GNOME_DIALOG(dialog),
+				GTK_WINDOW(mdi->active_window));
+	gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
+			   (GtkSignalFunc)print_dialog_clicked_cb, doc);
+	gtk_widget_show_all(dialog);
+}
 
-	 title = g_strdup(_(PRINT_TITLE));
-	 if (doc->filename)
-	   msg = (char *)g_malloc(strlen(_(PRINT_MSG)) + strlen(doc->filename) + 6);
-	 else
-	   msg = (char *)g_malloc(strlen(_(PRINT_MSG)) + strlen(_(UNTITLED)) + 6);
-	   sprintf(msg, " '%s' %s ", (doc->filename) ? doc->filename : _(UNTITLED), PRINT_MSG);
-
-	 ret = gnome_dialog_run_and_close ((GnomeDialog *)
-			gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, 
-				buttons[0], buttons[1], buttons[2], NULL)) + 1;
-		
-	 g_free(msg);
-	 g_free(title);
-
-	 switch (ret) {
-		
-	 case 1 :
-	 		fname = generate_temp_file(GE_VIEW(mdi->active_view));
-			break;
-
-	 case 2 :
-			if (doc->filename == NULL) {
-			
-			  data->temp1 = (gpointer)TRUE;	/* non-zero */
-			  file_save_as_cb(NULL, data);
-			  while (data->temp1 != NULL)
-			    gtk_main_iteration_do(TRUE);
-			
-			} else
-			 gE_file_save(doc, doc->filename);
-
-			fname = g_strdup(doc->filename);
-			break;
-
-	 case 3 :
-			fname = NULL;
-			break;
-
-	 default:
-			printf("get_filename: ge_dialog returned %d\n", ret);
-			exit(-1);
-	 } /* switch */
-	 
-	} /* doc changed or no filename */
-
-	return fname;
-	
-} /* get_filename */
-
-
-/*
- * PRIVATE: generate_temp_file
- *
- * create and write to temp file.  returns name of temp file in malloc'd
- * buffer (needs to be freed afterwards).
- *
- * TODO: define and use system wide temp directory (saved in preferences).
- */
-static char *
-generate_temp_file(gE_view *view)
+static void
+print_dialog_clicked_cb(GtkWidget *widget, gint button, gpointer data)
 {
+	if(button == 0) {
+		GnomePrinter *printer;
+		GnomePrinterDialog *dialog = GNOME_PRINTER_DIALOG(widget);
+		gE_document *doc = (gE_document *)data;
 
-	FILE *fp;
-	char *fname;
+		printer = gnome_printer_dialog_get_printer(dialog);
 
-	fname = (char *)g_malloc(STRING_LENGTH_MAX);
-
-	sprintf(fname, "/tmp/.gedit_print.%d%d", (int)time(NULL), getpid());
-	if ((fp = fopen(fname, "w")) == NULL) {
-		
-	  g_error("generate_temp_file: unable to open '%s'\n", fname);
-	  g_free(fname);
-		
-	  return NULL;
-		
+		if(printer){
+			print_document(doc, printer);
+		}
 	}
+	gnome_dialog_close(GNOME_DIALOG(widget));
+}
 
-	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(view->text), 0,
-		gtk_text_get_length(GTK_TEXT(view->text))), fp) == EOF) {
+static void
+print_document( gE_document *doc, GnomePrinter *printer)
+{
+	gE_PrintJobInfo *pji;
+	int i;
 
-	  perror("generate_temp_file: can't write to tmp file");
-	  g_free(fname);
-	  fclose(fp);
-	  
-	  return NULL;
-	  
+	pji = g_new0( gE_PrintJobInfo, 1);
+	set_pji( pji, doc, printer);
+
+	start_job(pji->pc);
+	for(i = 1; i <= pji->pages; i++)
+	{
+		print_header(pji, i);
+		while( pji->file_offset < pji->buffer_size )
+		{
+			print_line(pji);
+			if(pji->current_line % pji->lines_per_page == 0)
+				break;
+		}
+		end_page(pji->pc);
 	}
-	
-	fflush(fp);
-	fclose(fp);
+	end_job(pji->pc);
 
-	return fname;
+	gnome_print_context_close(pji->pc);
+	gnome_print_master_close(pji->master);
+
+	if(printer) {
+		gnome_print_master_print(pji->master);
+  		gtk_object_unref(GTK_OBJECT(pji->master));
+		g_free(pji);
+	}
+	else {
+		GnomePrintMasterPreview *preview;
+		gchar *title;
+
+		title = g_strdup_printf(_("gEdit (%s): Print Preview"), pji->filename);
+		preview = gnome_print_master_preview_new(pji->master, title);
+		g_free(title);
+		gtk_signal_connect(GTK_OBJECT(preview), "destroy",
+				   GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
+		gtk_widget_show(GTK_WIDGET(preview));
+	}
+	g_free( pji->buffer);
+	g_free( pji->filename);
+}
+
+static void print_line(gE_PrintJobInfo *pji)
+{
+	float x, y;
+	char * temp = g_malloc(265);
+	int i;
+
+	i = 0;
+	while( pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i < pji->buffer_size) )
+	{
+		temp[i]=pji->buffer[ pji->file_offset + i];
+		i++;
+		if( i > 254)
+			break;
+	}
+	temp[i]=(guchar) '\0';	
+	pji->file_offset = pji->file_offset + i + 1;
+
+	y = pji->page_height -
+	    pji->margin_top -
+ 	    pji->header_height -
+	    (pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
+	x = pji->margin_left;
+	gnome_print_moveto(pji->pc, x , y);
+	gnome_print_show(pji->pc, temp);
+	gnome_print_stroke(pji->pc);
+	g_free(temp);
+}
+
+static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer)
+{
+	pji->master = gnome_print_master_new();
+	pji->paper = gnome_paper_with_name( gnome_paper_name_default());
+	gnome_print_master_set_paper( pji->master, pji->paper);
+	if(printer)
+		gnome_print_master_set_printer(pji->master, printer);
+	pji->pc = gnome_print_master_get_context(pji->master);
+	g_return_if_fail(pji->pc != NULL);
+	pji->view = GE_VIEW(mdi->active_view);
+	pji->doc = doc;
+	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
+	pji->buffer = gtk_editable_get_chars(GTK_EDITABLE(pji->view->text),0,pji->buffer_size);
+	if( doc->filename == NULL )
+		pji->filename = g_strdup("Untitled"); /* I don't know if this is 
+							appropiate for translations */
+	else
+		pji->filename = g_strdup(doc->filename);
+	pji->page_width  = gnome_paper_pswidth( pji->paper);
+	pji->page_height = gnome_paper_psheight( pji->paper);
+	pji->margin_top = .75 * 72;       /* Printer margins, not page margins */
+	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
+	pji->margin_left = .75 * 72;      /* gnome-print implements them */ 
+	pji->margin_right = .75 * 72;
+	pji->header_height = 1 * 72;
+	pji->printable_width  = pji->page_width -
+		                pji->margin_left -
+		                pji->margin_right;
+	pji->printable_height = pji->page_height -
+		                pji->margin_top -
+		                pji->margin_bottom;
+	pji->font_name = "Courier"; /* FIXME: Use courier 10 for now but set to actual font */
+	pji->font_size = 10;
+	pji->font_char_width = 0.0808 * 72;
+	pji->font_char_height = .14 * 72;
+	pji->total_lines = print_determine_lines(pji);
+	pji->lines_per_page = (pji->printable_height -
+			      pji->header_height)/pji->font_char_height
+		              - 1 ;
+	pji->pages = ((int) (pji->total_lines-1)/pji->lines_per_page)+1;
+	pji->file_offset = 0;
+	pji->current_line = 0;
+}
+
+static int print_determine_lines(gE_PrintJobInfo *pji)
+{
+	/* For now count the number of /n 's*/
+	int lines=1;
+	int i;
+
+	for(i=0;i<pji->buffer_size;i++)
+		if( pji->buffer[i] == '\n')
+			lines++;
+	return lines;
+}
+
+static void start_job(GnomePrintContext *pc)
+{
+}
+
+static void print_header(gE_PrintJobInfo *pji, unsigned int page)
+{
+	guchar* text1 = g_strdup(pji->filename);
+	guchar* text2 = g_strdup_printf(_("Page: %i/%i"),page,pji->pages);
+	GnomeFont *font;
+	float x,y,len;
 	
-} /* generate_temp_file */
+	font = gnome_font_new("Helvetica", 12);
+	gnome_print_setfont(pji->pc, font);
+
+	/* Print the file name */
+	y = pji->page_height - pji->margin_top - pji->header_height/2;
+	len = gnome_font_get_width_string (font, text1);
+	x = pji->page_width/2 - len/2;
+	gnome_print_moveto(pji->pc, x, y);
+	gnome_print_show(pji->pc, text1);
+	gnome_print_stroke(pji->pc);
+	/* Print the page/pages  */
+	y = pji->page_height - pji->margin_top - pji->header_height/4;
+	len = gnome_font_get_width_string (font, text2);
+	x = pji->page_width - len - 36;
+	gnome_print_moveto(pji->pc, x, y);
+	gnome_print_show(pji->pc, text2);
+	gnome_print_stroke(pji->pc); 
+	/* Set the font for the rest of the page */
+	font = gnome_font_new (pji->font_name, pji->font_size);
+	gnome_print_setfont (pji->pc, font);
+}
+
+static void end_page(GnomePrintContext *pc)
+{
+	gnome_print_showpage (pc);
+}
+
+static void end_job(GnomePrintContext *pc)
+{
+}
+
+static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji)
+{
+	gtk_object_unref(GTK_OBJECT(pji->master));
+	g_free(pji);
+}
+
+static void print_preview_cb(GtkWidget *w)
+{
+	if(!gnome_mdi_get_active_view(mdi))
+		return;
+	print_document(gE_document_current(), NULL);
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -10,7 +10,9 @@ INCLUDES = -I$(includedir) -I$(top_srcdir) \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DLOCALEDIR=\"$(datadir)/locale\" \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
-	$(GNOME_INCLUDEDIR)
+	$(GNOME_INCLUDEDIR) \
+	$(GNOME_PRINT_CFLAGS)
+
 
 ## This need to be two distinct directories
 plugindir = $(libexecdir)/go/plugins
@@ -86,7 +88,8 @@ gedit_SOURCES = 	\
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(corba_libs) \
-	      $(libgnorba_libs) $(INTLLIBS)
+	      $(libgnorba_libs) $(INTLLIBS) \
+              $(GNOME_PRINT_LIBS)
 
 EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm $(gtkrc_DATA) $(appicon_DATA) $(applogo_DATA)
 

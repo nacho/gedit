@@ -112,3 +112,13 @@ extern gboolean use_fontset;
 #endif /* __cplusplus */
 
 #endif /* __MAIN_H__ */
+
+
+
+
+
+
+
+
+
+
