@@ -5,34 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-05-22 00:54+0200\n"
-"PO-Revision-Date: 2000-05-22 00:59+02:00\n"
+"POT-Creation-Date: 2000-05-22 16:23+0200\n"
+"PO-Revision-Date: 2000-05-22 16:23+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit webleser tillegg"
-
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "gEdit e-post tillegg"
-
-#: editor-plugins/man.c:121
-msgid "The Man Page Viewer Plugin"
-msgstr "Manualside tillegg"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Dok-id er %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Skall"
 
 #: plugins/browse/browse.c:166
 msgid "Browse"
@@ -84,7 +63,7 @@ msgid "Diff plugin."
 msgstr "Diff-tillegg."
 
 #: plugins/email/email.c:129 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:420 src/search.c:709 src/search.c:716
+#: src/print.c:420 src/search.c:736 src/search.c:743
 msgid "Untitled"
 msgstr "Navnløs"
 
@@ -193,7 +172,7 @@ msgstr "Erstatt"
 msgid "Replace all"
 msgstr "Erstatt alle"
 
-#: src/dialogs/dialog-replace.c:129 src/search.c:1056
+#: src/dialogs/dialog-replace.c:129 src/search.c:1083
 msgid "Search for:"
 msgstr "Søk etter:"
 
@@ -205,11 +184,11 @@ msgstr "Erstatt med:"
 msgid "Ask before replacing"
 msgstr "Spør før erstatting"
 
-#: src/dialogs/dialog-search.c:145
+#: src/dialogs/dialog-search.c:118
 msgid "Text not found"
 msgstr "Teksten ble ikke funnet"
 
-#: src/dialogs/dialog-search.c:149
+#: src/dialogs/dialog-search.c:122
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Teksten funnet på linje :%i"
@@ -851,7 +830,13 @@ msgstr "_Fil/"
 msgid "_File"
 msgstr "_Fil"
 
-#: src/search.c:179
+#: src/search.c:187
+msgid ""
+"Can't count lines if another search operation is active, please close the "
+"search dialog."
+msgstr "Kan ikke telle linjer hvis et annet søk er aktivt. Vennligst lukk den andre søkedialogen."
+
+#: src/search.c:202
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -864,11 +849,11 @@ msgstr ""
 "Totalt antall linjer: %i\n"
 "Nåværende linje: %i"
 
-#: src/search.c:1051
+#: src/search.c:1078
 msgid "Find In Files"
 msgstr "Finn i filer"
 
-#: src/search.c:1052
+#: src/search.c:1079
 msgid "Search"
 msgstr "Søk"
 
