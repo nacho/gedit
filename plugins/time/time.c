@@ -793,21 +793,17 @@ static void
 time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
-        gint prompt_response;
-	GeditView *view;
+	gint prompt_response;
 	gchar *the_time = NULL;
 	GeditTimePluginPromptType prompt_type;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	view = gedit_get_active_view ();
-	g_return_if_fail (view != NULL);
-	
-	doc = gedit_view_get_document (view);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	prompt_type = get_prompt_type ();
-	
+
         if (prompt_type == USE_CUSTOM_FORMAT)
         {
 		gchar *cf = get_custom_format ();
@@ -824,31 +820,44 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
         else
         {
 		ChoseFormatDialog *dialog;
-		
+		GError *error = NULL;
+
 		BonoboWindow *aw = gedit_get_active_window ();
 		g_return_if_fail (aw != NULL);
 
 		dialog = get_chose_format_dialog (GTK_WINDOW (aw));
 		g_return_if_fail (dialog != NULL);
 
-		prompt_response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
-
-		switch (prompt_response)
+		do
 		{
+			prompt_response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+
+			switch (prompt_response)
+			{
+			case GTK_RESPONSE_HELP:
+				gnome_help_display ("gedit.xml","gedit-insert-date-time-plugin",
+						    &error);
+
+				if (error != NULL)
+				{
+					gedit_warning (GTK_WINDOW (dialog->dialog),
+						       error->message);
+
+					g_error_free (error);
+				}
+				continue;
+
 			case GTK_RESPONSE_OK:
 				/* Get the user's chosen format */
-				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
-							dialog->use_list)))
+				if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->use_list)))
 				{
 					gint sel_format;
-					
+						
 					sel_format = get_format_from_list (dialog->list);
-					
-					the_time = get_time (formats [sel_format]);
-					
+					the_time = get_time (formats[sel_format]);
+						
 					g_free (dialog_selected_format);		
-					dialog_selected_format =
-					       g_strdup	(formats [sel_format]);
+					dialog_selected_format = g_strdup (formats[sel_format]);
 
 					dialog_prompt_type = USE_SELECTED_FORMAT;
 					set_selected_format (dialog_selected_format);
@@ -856,38 +865,34 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 				else
 				{
 					const gchar *format;
-					
-					format = gtk_entry_get_text (
-								GTK_ENTRY (dialog->custom_entry));
+						
+					format = gtk_entry_get_text (GTK_ENTRY (dialog->custom_entry));
 					the_time = get_time (format);
-					
+
 					g_free (dialog_custom_format);					
 					dialog_custom_format = g_strdup (format);
 
 					dialog_prompt_type = USE_CUSTOM_FORMAT;
 					set_custom_format (dialog_custom_format);
 				}
-						
+
 				gtk_widget_destroy (dialog->dialog);
 				break;
-				
+					
 			case GTK_RESPONSE_CANCEL:
 				gtk_widget_destroy (dialog->dialog);
 				return;
-	           
-			case GTK_RESPONSE_HELP:
-				/* FIXME: help hooks go in here! */
-				gtk_widget_destroy (dialog->dialog);
-		     		return;
-		}
+			}
+
+		} while (prompt_response == GTK_RESPONSE_HELP );
 	}
-   
+
 	g_return_if_fail (the_time != NULL);
 
 	gedit_document_begin_user_action (doc);
-	
-	gedit_document_insert_text_at_cursor (doc, the_time, -1);
-	gedit_document_insert_text_at_cursor (doc, " ", -1);
+
+	gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (doc), the_time, -1);
+	gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (doc), " ", -1);
 
 	gedit_document_end_user_action (doc);
 
