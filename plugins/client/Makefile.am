@@ -1,28 +1,21 @@
 ## Process this file with automake to produce Makefile.in
 
-plugindir = $(libdir)/go/plugins
+pluginlibdir = $(libdir)
 
-plugin_PROGRAMS = cvsdiff-plugin
+pluginlib_LIBRARIES = libclient.a
 
-cvsdiff_plugin_SOURCES = \
-	$(top_srcdir)/plugins/client/client.h \
-	cvsdiff.c
+libclient_a_SOURCES = \
+	client.c	\
+	client.h
 
 INCLUDES = -I$(includedir) 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
 	-I..						\
-	$(GNOME_INCLUDEDIR)				\
-	-I$(top_srcdir)/plugins/client
+	$(GNOME_INCLUDEDIR)
 
 LDADD = \
-	$(top_builddir)/plugins/client/libclient.a	\
 	$(GTK_LIBS)
-
-DEPS = \
-	$(top_builddir)/plugins/client/libclient.a
-
-cvsdiff_plugin_DEPENDENCIES = $(DEPS)
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
