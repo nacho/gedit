@@ -108,11 +108,11 @@ line_to_pos (gE_document *doc, gint line, gint *numlines)
 		}
 		g_free (c);
 		if (lines == line) {
-			current = lines;
+			current = i;
 		}
 	}
 	*numlines = lines;
-	return (i);
+	return (current);
 }
 
 gint
@@ -444,13 +444,17 @@ line_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 {
 	GtkWidget *spin;
 	gint line, linecount;
-	gulong pos;
+	gint pos;
 
 	if (button == 0) {
 		spin = gtk_object_get_data (GTK_OBJECT (widget), "line");
 		line = gtk_spin_button_get_value_as_int
 			(GTK_SPIN_BUTTON (spin));
 		seek_to_line (doc, line, -1);
+		g_warning ("line is %i", line);
+		pos = line_to_pos (doc, line, &linecount);
+		g_warning ("pos is %i", pos);
+		gtk_editable_set_position (GTK_EDITABLE (doc->text), pos);
 	}
 	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
 			GTK_SIGNAL_FUNC (line_dialog_button_cb),
