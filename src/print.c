@@ -399,7 +399,8 @@ print_ps_line (PrintJobInfo * pji, int line)
 	if (line>0 && settings->printlines>0 && line%settings->printlines==0)
 	{
 		char * number_text = g_strdup_printf ("%i",line);
-		gnome_print_setfont (pji->pc, gnome_font_new (pji->font_name, 6));
+		GnomeFont *temp_font = gnome_font_new (pji->font_name, 6);
+		gnome_print_setfont (pji->pc, temp_font);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
 		gnome_print_show   (pji->pc, number_text);
 		g_free (number_text);
@@ -555,15 +556,19 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	gnome_print_show (pji->pc, text2);
 	gnome_print_stroke (pji->pc); 
 
+
+	gtk_object_unref (GTK_OBJECT(font));
+	g_free (text1);
+	g_free (text2);
 }
 
 static void
 print_setfont (PrintJobInfo *pji)
 {
 	GnomeFont *font;
-	/* Set the font for the rest of the page */
 	font = gnome_font_new (pji->font_name, pji->font_size);
 	gnome_print_setfont (pji->pc, font);
+	gtk_object_unref (GTK_OBJECT(font));
 }
 	
 

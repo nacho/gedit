@@ -43,7 +43,6 @@ GtkVBoxClass *parent_class = NULL;
 
        void view_changed_cb (GtkWidget *w, gpointer cbdata);
 static void gedit_view_list_insert (View *view, gedit_data *data);
-static void view_list_erase (View *view, gedit_data *data);
        gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
        void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
        void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
@@ -123,11 +122,13 @@ gedit_view_list_insert (View *view, gedit_data *data)
 	}	
 }
 
+#if 0 /* Disabled by chema to kill compile warning abuto not beeing used */
 static void
 view_list_erase (View *view, gedit_data *data)
 {
 	gedit_debug ("F:gedit_view_list_erase. FIXME: I am empty \n", DEBUG_VIEW);
 }
+#endif 
 
 gint
 insert_into_buffer (Document *doc, gchar *buffer, gint position)
@@ -634,7 +635,6 @@ gedit_view_init (View *view)
 	
 	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style (GTK_WIDGET(view->text), style);
-
 	gtk_style_unref (style);
 
 	gtk_widget_show (view->split_screen);
@@ -775,8 +775,12 @@ gedit_view_set_read_only (View *view, gint read_only)
 			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
 						  g_basename (view->document->filename));
 		else
+		{
+			gchar * doc_name = gedit_get_document_tab_name();
 			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
 						  gedit_get_document_tab_name ());
+			g_free (doc_name);
+		}
 	}
 	 
 	if (view->split_screen)
