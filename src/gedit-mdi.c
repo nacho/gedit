@@ -49,6 +49,7 @@
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
 
+#include <gconf/gconf-client.h>
 
 struct _GeditMDIPrivate
 {
@@ -311,7 +312,9 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
 	BonoboUIEngine *ui_engine;
 	BonoboUIError ret;
-	
+	GConfClient *client;
+	gboolean labels;
+
 	gedit_debug (DEBUG_MDI, "");
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
@@ -345,24 +348,33 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	switch (gedit_settings->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
-			/* FIXME
-			if (gnome_preferences_get_toolbar_labels())
-			{
-			*/
+						
+			client = gconf_client_get_default ();
+			if (client == NULL) 
+				goto error;
+
+			labels = gconf_client_get_bool (client, 
+					"/desktop/gnome/interface/toolbar-labels", NULL);
+
+			g_object_unref (G_OBJECT (client));
+			
+			if (labels)
+			{			
 				gedit_debug (DEBUG_MDI, "SYSTEM: BOTH");
 				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "both");
 				if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
-			/*
+			
 			}
 			else
 			{
 				gedit_debug (DEBUG_MDI, "SYSTEM: ICONS");
 				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "icons");
-				g_return_if_fail (ret == BONOBO_UI_ERROR_OK);
-			}*/
+				if (ret != BONOBO_UI_ERROR_OK) 
+					goto error;
+			}
 			break;
 		case GEDIT_TOOLBAR_ICONS:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");

@@ -425,20 +425,24 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	/* FIXME: set window position at the center of the active window -- Paolo */
 
 	static GtkWidget *about = NULL;
-
+	GdkPixbuf* pixbuf;
+	
 	gchar *authors[] = {
-		"Chema Celorio",
-		"Paolo Maggi",
+		"", "", 
+		"Paolo Maggi <maggi@athena.polito.it>",
+		"Chema Celorio <chema@celorio.com>", 
 		NULL
 	};
 	
 	gchar *documenters[] = {
-		"Eric Baudais",
+		"Eric Baudais <baudais@okstate.edu>",
 		NULL
 	};
 	
 	/* Translator credits */
+	/*
 	gchar *translator_credits = _("");
+	*/
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -450,13 +454,24 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	}
 	
 	about = gnome_about_new (_("gedit"), VERSION,
-				"(C) 1998-2000 Alex Robert and Evan Lawrence\n"
-				"(C) 2000-2001 Chema Celorio and Paolo Maggi",
-				_("A small and lightweight text editor for Gnome"),
+				"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+				"(C) 2000-2002 Chema Celorio and Paolo Maggi",
+				_("gedit is a small and lightweight text editor for Gnome"),
 				(const char **)authors,
 				(const char **)documenters,
-				(const char *)translator_credits,
+				NULL, /*(const char *)translator_credits,*/
 				NULL);
+
+	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-logo.png", NULL);
+
+	if (pixbuf != NULL)
+	{
+		g_object_set (G_OBJECT (about), "background", pixbuf,
+			"background_start_opacity", 0.4,
+			"background_end_opacity", 0.1, NULL);
+
+		g_object_unref (pixbuf);
+	}
 	
 	gtk_signal_connect (GTK_OBJECT (about), "destroy",
 			   GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
