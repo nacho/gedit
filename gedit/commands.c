@@ -399,8 +399,12 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	static char line [32];
 	static char col [32];
 	GtkWidget *text = data->temp2;
+	int x;
 	
-	sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
+	x = GTK_TEXT(text)->current_line->data;
+	
+	/*sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);*/
+	sprintf(line,"%d", x);
 	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
 	
 	gtk_label_set (GTK_LABEL(data->window->line_label), line);

@@ -6,4 +6,4 @@ endif
 
 SUBDIRS = client cvsdiff diff email encrypt reverse $(spell) prm convert testselect
 
-EXTRA_DIST = plugin-howto
+EXTRA_DIST = plugin_howto gmodule_plugin_howto ChangeLog

@@ -29,7 +29,6 @@
 
 #include "main.h"
 #include "commands.h"
-#include "gE_init.h"
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"

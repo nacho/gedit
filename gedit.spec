@@ -1,0 +1,64 @@
+# Note that this is NOT a relocatable package
+%define ver      0.4.5
+%define rel      SNAP
+%define prefix   /usr
+
+Summary:   gEdit 
+Name:      gEdit
+Version:   %ver
+Release:   %rel
+Copyright: GPL
+Group:     Editors
+Source0:   gEdit-%{PACKAGE_VERSION}.tar.gz
+URL:       http://gedit.home.ml.org
+BuildRoot: /tmp/gEdit-%{PACKAGE_VERSION}-root
+Packager: Alex Roberts <bse@dial.pipex.com>
+Requires: gtk+ >= 1.1.1
+Requires: gnome-libs
+#Docdir: %{prefix}/doc
+
+%description
+gEdit is a small and lightweight Gtk+ based Text Editor... 
+ 
+%prep
+%setup
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
+	--prefix=%{prefix} 
+
+if [ "$SMP" != "" ]; then
+  (make "MAKE=make -k -j $SMP"; exit 0)
+  make
+else
+  make
+fi
+
+%install
+rm -rf $RPM_BUILD_ROOT
+#install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
+
+make prefix=$RPM_BUILD_ROOT%{prefix} install
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-, root, root)
+%doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS
+%{prefix}/bin/gedit
+%{prefix}/include/*
+%{prefix}/share/*
+%{prefix}/man/*
+%{prefix}/libexec/*
+
+
+%changelog
+
+* Thu Oct 22 1998 Alex Roberts <bse@dial.pipex.com>
+
+- First try at an RPM
+
+
+
+
