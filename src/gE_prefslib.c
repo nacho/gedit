@@ -198,7 +198,7 @@ void gE_prefs_close ()
 	FILE *temp_fp;
 	int i;
 	gE_pref *pref;
- 	char *temp_fn, *prefs_fn;
+ 	char *temp_fn, *prefs_fn, *command;
  	
 	if ((temp_fp = gE_prefs_open_temp (&temp_fn)) == NULL)
 	{
@@ -236,10 +236,18 @@ void gE_prefs_close ()
 	}
 	if (rename (temp_fn, prefs_fn) == -1)
 	{
-		printf ("gE_prefs_close: Couldn't move temporary file %s to %s.\n", temp_fn, prefs_fn);
-		g_free (temp_fn);
-		g_free (prefs_fn);
-		return;
+		command = g_malloc0 (strlen (temp_fn) + strlen (prefs_fn) + 6);
+		sprintf (command, "cp %s %s", temp_fn, prefs_fn);
+		if (system (command) == -1)
+		{
+			printf ("gE_prefs_close: Couldn't move temporary file %s to %s.\n", temp_fn, prefs_fn);
+			g_free (temp_fn);
+			g_free (prefs_fn);
+			g_free (command);
+			return;
+		}
+		g_free (command);
+		unlink (temp_fn);
 	}
 	/*g_free (temp_fn);*/
 	/*g_free (prefs_fn);*/
