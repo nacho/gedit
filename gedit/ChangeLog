@@ -1,3 +1,25 @@
+2003-01-02  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit-utils.[ch]: remove gedit_button_new_with_stock_image
+	since eel has an analougus function, modify gedit_warning to
+	take a format, define common error strings MISSING_FILE and
+	MISSING_WIDGETS.
+
+	* dialogs/gedit-dialog-goto-line.c: remove separator and use
+	gedit_warning and gedit_dialogs_add_button where appropriate.
+
+	* dialogs/gedit-dialog-replace.c: ditto.
+
+	* dialogs/gedit-dialog-uri.c: ditto.
+
+	* dialogs/gedit-page-setup-dialog.c: ditto.
+
+	* dialogs/gedit-plugin-program-location-dialog.c: ditto.
+
+	* dialogs/gedit-preferences-dialog: fix the use of gedit_warning.
+
+	* plugins/time/time.c: ditto.
+
 2003-01-02  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-document.[ch]: new function 

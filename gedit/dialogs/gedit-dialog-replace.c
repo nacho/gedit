@@ -138,6 +138,7 @@ text_not_found_dialog (const gchar *text, GtkWindow *parent)
 	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (message_dlg), FALSE);
 	
 	gtk_dialog_run (GTK_DIALOG (message_dlg));
   	gtk_widget_destroy (message_dlg);
@@ -238,13 +239,16 @@ dialog_replace_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *button;
 	GtkWidget *replace_with_label;
 	
 	gedit_debug (DEBUG_SEARCH, "");
 	
+	window = GTK_WINDOW (gedit_get_active_window ());
+
 	if (dialog != NULL)
 	{
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+					      GTK_WINDOW (window));
 		gtk_window_present (GTK_WINDOW (dialog->dialog));
 		gtk_widget_grab_focus (dialog->dialog);
 
@@ -253,15 +257,13 @@ dialog_replace_get_dialog (void)
 
 	gui = glade_xml_new ( GEDIT_GLADEDIR "replace.glade2",
 			     "replace_dialog_content", NULL);
-
-	if (!gui) {
-		g_warning
-		    ("Could not find replace.glade2, reinstall gedit.\n");
+	if (!gui)
+	{
+		gedit_warning (window,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "replace.glade2");
 		return NULL;
 	}
-
-	window = GTK_WINDOW (bonobo_mdi_get_active_window
-			     (BONOBO_MDI (gedit_mdi)));
 
 	dialog = g_new0 (GeditDialogReplace, 1);
 
@@ -274,22 +276,16 @@ dialog_replace_get_dialog (void)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
-	/* Add Replace All button */
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
+
 	gtk_dialog_add_button (GTK_DIALOG (dialog->dialog), 
 			       _("Replace _All"), GEDIT_RESPONSE_REPLACE_ALL);
-	
-	/* Add Replace button */
-	button = gedit_button_new_with_stock_image (_("_Replace"), GTK_STOCK_FIND_AND_REPLACE);
-	g_return_val_if_fail (button != NULL, NULL);
 
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog),
+				 _("_Replace"), GTK_STOCK_FIND_AND_REPLACE,
+				 GEDIT_RESPONSE_REPLACE);
 
-	gtk_widget_show (button);
-
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog->dialog), 
-				      button, GEDIT_RESPONSE_REPLACE);
-
-	/* Add Find button */
 	gtk_dialog_add_button (GTK_DIALOG (dialog->dialog), 
 			       GTK_STOCK_FIND, GEDIT_RESPONSE_FIND);
 
@@ -315,8 +311,9 @@ dialog_replace_get_dialog (void)
 	    !dialog->wrap_around_checkbutton 	||
 	    !dialog->search_backwards_checkbutton)
 	{
-		g_print
-		    ("Could not find the required widgets inside replace.glade2.\n");
+		gedit_warning (window,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "replace.glade2");
 		return NULL;
 	}
 
@@ -347,8 +344,6 @@ dialog_replace_get_dialog (void)
 
 	g_object_unref (G_OBJECT (gui));
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-	
 	return dialog;
 }
 
@@ -381,8 +376,12 @@ dialog_find_get_dialog (void)
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
+	window = GTK_WINDOW (gedit_get_active_window ());
+
 	if (dialog != NULL)
 	{
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+					      GTK_WINDOW (window));
 		gtk_window_present (GTK_WINDOW (dialog->dialog));
 		gtk_widget_grab_focus (dialog->dialog);
 
@@ -391,15 +390,13 @@ dialog_find_get_dialog (void)
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "replace.glade2",
 			     "replace_dialog_content", NULL);
-
-	if (!gui) {
-		g_warning
-		    ("Could not find replace.glade2, reinstall gedit.\n");
+	if (!gui)
+	{
+		gedit_warning (window,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "replace.glade2");
 		return NULL;
 	}
-
-	window = GTK_WINDOW (bonobo_mdi_get_active_window
-			     (BONOBO_MDI (gedit_mdi)));
 
 	dialog = g_new0 (GeditDialogFind, 1);
 
@@ -413,6 +410,9 @@ dialog_find_get_dialog (void)
 						      NULL);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 
@@ -440,11 +440,12 @@ dialog_find_get_dialog (void)
 	    !dialog->wrap_around_checkbutton	||
 	    !dialog->search_backwards_checkbutton)
 	{
-		g_print
-		    ("Could not find the required widgets inside replace.glade2.\n");
+		gedit_warning (window,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "replace.glade2");
 		return NULL;
 	}
-	
+
 	gtk_widget_hide (replace_with_label);
 	gtk_widget_hide (replace_entry);
 
@@ -470,8 +471,6 @@ dialog_find_get_dialog (void)
 
 	g_object_unref (G_OBJECT (gui));
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-	
 	return dialog;
 }
 
@@ -557,7 +556,6 @@ insert_text_handler (GtkEditable *editable, const gchar *text, gint length, gint
 	g_free (escaped_text);
 }
 
-
 void
 gedit_dialog_find (void)
 {
@@ -576,21 +574,14 @@ gedit_dialog_find (void)
 	gedit_debug (DEBUG_SEARCH, "");
 
 	dialog = dialog_find_get_dialog ();
-	if (dialog == NULL) {
-		g_warning ("Cannot create the Find dialog");
+	if (!dialog)
 		return;
-	}
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW
-				      (bonobo_mdi_get_active_window
-				       (BONOBO_MDI (gedit_mdi))));
 
 	if (GTK_WIDGET_VISIBLE (dialog->dialog))
 		return;
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
-			GEDIT_RESPONSE_FIND, FALSE);
+					   GEDIT_RESPONSE_FIND, FALSE);
 
 	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
 	g_return_if_fail (active_child != NULL);
@@ -666,8 +657,7 @@ gedit_dialog_find (void)
 
 	gtk_widget_grab_focus (dialog->search_entry);
 	
-	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
-		gtk_widget_show (dialog->dialog);
+	gtk_widget_show (dialog->dialog);
 }
 
 void
@@ -689,15 +679,8 @@ gedit_dialog_replace (void)
 	gedit_debug (DEBUG_SEARCH, "");
 
 	dialog = dialog_replace_get_dialog ();
-	if (dialog == NULL) {
-		g_warning ("Cannot create the Replace dialog");
+	if (!dialog)
 		return;
-	}
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW
-				      (bonobo_mdi_get_active_window
-				       (BONOBO_MDI (gedit_mdi))));
 
 	if (GTK_WIDGET_VISIBLE (dialog->dialog))
 		return;
@@ -789,9 +772,8 @@ gedit_dialog_replace (void)
 				      was_search_backwards);
 
 	gtk_widget_grab_focus (dialog->search_entry);
-	
-	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
-		gtk_widget_show (dialog->dialog);
+
+	gtk_widget_show (dialog->dialog);
 }
 
 static void
@@ -1071,7 +1053,6 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 
 	gedit_debug (DEBUG_SEARCH, "END");
 }
-
 
 static void
 replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)

@@ -38,14 +38,17 @@
 #include <atk/atk.h>
 #include <gedit/gedit-encodings.h>
 
+
+/* some common error strings, %s must be a file path */
+#define MISSING_FILE    N_("Could not find \"%s\". Please, reinstall gedit.")
+#define MISSING_WIDGETS N_("Could not find the required widgets inside\"%s\". Please, reinstall gedit.")
+
+
 void	gedit_utils_flash     (gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
 
 gboolean gedit_utils_is_uri_read_only (const gchar* uri);
 gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
-
-GtkWidget *gedit_button_new_with_stock_image (const gchar* text, 
-					      const gchar* stock_id);
 
 GtkWidget *gedit_dialog_add_button (GtkDialog *dialog, 
 				    const gchar* text, 
@@ -84,7 +87,7 @@ gboolean gedit_utils_create_empty_file (const gchar *uri);
 
 gchar *gedit_utils_get_stdin (void);
 
-void gedit_warning (gchar *str, GtkWindow *parent);
+void gedit_warning (GtkWindow *parent, gchar *format, ...);
 
 #endif /* __GEDIT_UTILS_H__ */
 

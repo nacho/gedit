@@ -951,7 +951,7 @@ help_button_pressed (TimeConfigureDialog *dialog)
 
 	if (error != NULL)
 	{
-		gedit_warning (error->message, GTK_WINDOW (dialog->dialog));
+		gedit_warning (GTK_WINDOW (dialog->dialog), error->message);
 
 		g_error_free (error);
 	}

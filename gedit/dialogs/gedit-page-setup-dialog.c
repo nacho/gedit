@@ -106,7 +106,6 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditPageSetupDialog *dia
 	}
 }
 
-
 static void
 syntax_checkbutton_toggled (GtkToggleButton *button, GeditPageSetupDialog *dlg)
 {
@@ -561,7 +560,7 @@ setup_font_page (GeditPageSetupDialog *dlg)
 }
 
 static GeditPageSetupDialog *
-get_page_setup_dialog (GtkWindow *parent)
+page_setup_get_dialog (GtkWindow *parent)
 {
 	static GeditPageSetupDialog *dialog = NULL;
 	GladeXML *gui;
@@ -570,31 +569,20 @@ get_page_setup_dialog (GtkWindow *parent)
 
 	if (dialog != NULL)
 	{
-
-		gtk_window_present (GTK_WINDOW (dialog->dialog));
-
 		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 					      parent);
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
 
 		return dialog;
 	}
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "page-setup-dialog.glade2",
 			     "dialog", NULL);
-
 	if (!gui)
 	{
-		gchar *tmp;
-		
-		/* Translators: %s is a file path */
-		tmp = g_strdup_printf (
-			_("Could not find '%s'.\n\nPlease, reinstall gedit"),
-			GEDIT_GLADEDIR "page-setup-dialog.glade2");
-
-		gedit_warning (tmp, parent);
-
-		g_free (tmp);
-
+		gedit_warning (parent,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "page-setup-dialog.glade2");
 		return NULL;
 	}
 
@@ -634,17 +622,9 @@ get_page_setup_dialog (GtkWindow *parent)
 	    !dialog->numbers_font_label		||
 	    !dialog->restore_button)
 	{
-		gchar *tmp;
-		
-		/* Translators: %s is a file path */
-		tmp = g_strdup_printf (
-			_("Could not find the required widgets inside '%s'.\n\n"
-			  "Please, reinstall gedit."),
-			GEDIT_GLADEDIR "page-setup-dialog.glade2");
-
-		gedit_warning (tmp, parent);
-
-		g_free (tmp);
+		gedit_warning (parent,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "page-setup-dialog.glade2");
 
 		if (!dialog->dialog)
 			gtk_widget_destroy (dialog->dialog);
@@ -655,7 +635,7 @@ get_page_setup_dialog (GtkWindow *parent)
 
 		return NULL;
 	}
-	
+
 	setup_general_page (dialog);
 	setup_font_page (dialog);
 	
@@ -685,9 +665,8 @@ gedit_show_page_setup_dialog (GtkWindow *parent)
 
 	g_return_if_fail (parent != NULL);
 
-	dialog = get_page_setup_dialog (parent);
-	
-	if (dialog == NULL) 
+	dialog = page_setup_get_dialog (parent);
+	if (!dialog)
 		return;
 
 	if (!GTK_WIDGET_VISIBLE (dialog->dialog))

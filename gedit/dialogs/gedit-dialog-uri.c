@@ -67,20 +67,24 @@ dialog_open_uri_get_dialog (void)
 	GtkWidget *encoding_label;
 	GtkWidget *encoding_hbox;
 	
+	window = GTK_WINDOW (gedit_get_active_window ());
+
 	if (dialog != NULL)
+	{
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+					      GTK_WINDOW (window));
 		return dialog;
+	}
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "uri.glade2",
 			     "open_uri_dialog_content", NULL);
-
-	if (!gui) {
-		g_warning
-		    ("Could not find uri.glade2, reinstall gedit.\n");
+	if (!gui)
+	{
+		gedit_warning (window,
+			       MISSING_FILE,
+		    	       GEDIT_GLADEDIR "uri.glade2");
 		return NULL;
 	}
-
-	window = GTK_WINDOW (bonobo_mdi_get_active_window
-			     (BONOBO_MDI (gedit_mdi)));
 
 	dialog = g_new0 (GeditDialogOpenUri, 1);
 
@@ -97,6 +101,9 @@ dialog_open_uri_get_dialog (void)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
+
 	content = glade_xml_get_widget (gui, "open_uri_dialog_content");
 
 	dialog->uri = glade_xml_get_widget (gui, "uri");
@@ -106,7 +113,9 @@ dialog_open_uri_get_dialog (void)
 	
 	if (!dialog->uri || !dialog->uri_list || !encoding_label || !encoding_hbox) 
 	{
-		g_print ("Could not find the required widgets inside uri.glade.\n");
+		gedit_warning (window,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "uri.glade2");
 		return NULL;
 	}
 
@@ -131,11 +140,8 @@ dialog_open_uri_get_dialog (void)
 
 	g_object_unref (gui);
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-
 	return dialog;
 }
-
 
 void
 gedit_dialog_open_uri (void)
@@ -144,21 +150,14 @@ gedit_dialog_open_uri (void)
 	gint response;
 
 	dialog = dialog_open_uri_get_dialog ();
-	if (dialog == NULL) {
-		g_warning ("Could not create the Open URI dialog");
+	if (!dialog)
 		return;
-	}
 
 	gedit_encodings_option_menu_set_selected_encoding (
 		GEDIT_ENCODINGS_OPTION_MENU (dialog->encoding_menu),
 		NULL);	
 
 	gtk_widget_grab_focus (dialog->uri);
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW
-				      (bonobo_mdi_get_active_window
-				       (BONOBO_MDI (gedit_mdi))));
 
 	gtk_entry_set_text (GTK_ENTRY (dialog->uri), "");
 

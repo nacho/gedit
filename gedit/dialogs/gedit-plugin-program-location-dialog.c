@@ -43,7 +43,6 @@
 
 #define PLUGIN_MANAGER_LOGO "/gedit-plugin-manager.png"
 
-static void error_dialog (const gchar* str, GtkWindow *parent);
 
 /* Return a newly allocated string containing the full location
  * of program_name
@@ -76,10 +75,11 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	
 	gui = glade_xml_new (GEDIT_GLADEDIR "program-location-dialog.glade2",
 			     "dialog_content", NULL);
-
-	if (!gui) {
-		gedit_warning (
-		    "Could not find program-location-dialog.glade2, reinstall gedit.", parent);
+	if (!gui)
+	{
+		gedit_warning (parent,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "program-location-dialog.glade2");
 		return NULL;
 	}
 
@@ -105,8 +105,9 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 
 	if (!content || !program_location_entry || !label || !logo)
 	{
-		g_warning (_("Could not find the required widgets inside %s."),
-			     "program-location-dialog.glade2");
+		gedit_warning (parent,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "program-location-dialog.glade2");
 		return NULL;
 	}
 	
@@ -164,11 +165,13 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 
 				if (!g_file_test (program_location, G_FILE_TEST_IS_EXECUTABLE))
 				{
-					error_dialog (_("The selected file is not executable."),
-						      GTK_WINDOW (dialog));
+					gedit_warning (GTK_WINDOW (dialog),
+						       _("The selected file is not executable."));
 				}
 				else
+				{
 					gtk_widget_hide (dialog);
+				}
 				
 				break;
 				
@@ -184,8 +187,7 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	
 				if (error != NULL)
 				{
-					gedit_warning (error->message, GTK_WINDOW (dialog));
-	
+					gedit_warning (GTK_WINDOW (dialog), error->message);
 					g_error_free (error);
 				}
 
@@ -211,25 +213,5 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	g_object_unref (gconf_client);
 
 	return program_location;
-}
-
-static void 
-error_dialog (const gchar* str, GtkWindow *parent)
-{
-	GtkWidget *message_dlg;
-
-	message_dlg = gtk_message_dialog_new (
-			parent,
-			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_ERROR,
-			GTK_BUTTONS_OK, 
-			str);
-		
-	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
-
-	gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
-	
-	gtk_dialog_run (GTK_DIALOG (message_dlg));
-  	gtk_widget_destroy (message_dlg);
 }
 

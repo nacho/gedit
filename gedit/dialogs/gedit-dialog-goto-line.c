@@ -131,29 +131,29 @@ dialog_goto_line_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *button;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
+	window = GTK_WINDOW (gedit_get_active_window ());
+
 	if (dialog != NULL)
 	{
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+					      GTK_WINDOW (window));
 		gtk_window_present (GTK_WINDOW (dialog->dialog));
-		gtk_widget_grab_focus (dialog->dialog);
 
 		return dialog;
 	}
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "goto-line.glade2",
 			     "goto_line_dialog_content", NULL);
-
-	if (!gui) {
-		g_warning
-		    ("Could not find goto-line.glade2, reinstall gedit.\n");
+	if (!gui)
+	{
+		gedit_warning (window,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "goto-line.glade2");
 		return NULL;
 	}
-
-	window = GTK_WINDOW (bonobo_mdi_get_active_window
-			     (BONOBO_MDI (gedit_mdi)));
 
 	dialog = g_new0 (GeditDialogGotoLine, 1);
 
@@ -166,35 +166,32 @@ dialog_goto_line_get_dialog (void)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
-	/* Add Goto Line button */
-	button = gedit_button_new_with_stock_image (_("_Go to Line"), GTK_STOCK_JUMP_TO);
-	g_return_val_if_fail (button != NULL, NULL);
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
 
-	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog),
+				 _("_Go to Line"), GTK_STOCK_JUMP_TO,
+				 GTK_RESPONSE_OK);
 
-	gtk_widget_show (button);
-
-	gtk_dialog_add_action_widget (GTK_DIALOG (dialog->dialog), 
-				      button, GTK_RESPONSE_OK);
-	
 	content = glade_xml_get_widget (gui, "goto_line_dialog_content");
 
 	dialog->entry = glade_xml_get_widget (gui, "entry");
 
-	if (!dialog->entry) {
-		g_warning (
-			_("Could not find the required widgets inside %s."),
-			"goto-line.glade2");
+	if (!dialog->entry)
+	{
+		gedit_warning (window,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "goto-line.glade2");
 		g_object_unref (gui);
 		g_free (dialog);
 		return NULL;
 	}
-	
+
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
-			GTK_RESPONSE_OK, FALSE);
+					   GTK_RESPONSE_OK, FALSE);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);
@@ -213,11 +210,8 @@ dialog_goto_line_get_dialog (void)
 
 	g_object_unref (gui);
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-
 	return dialog;
 }
-
 
 void
 gedit_dialog_goto_line (void)
@@ -227,15 +221,8 @@ gedit_dialog_goto_line (void)
 	gedit_debug (DEBUG_SEARCH, "");
 
 	dialog = dialog_goto_line_get_dialog ();
-	if (dialog == NULL) {
-		g_warning ("Could not create the Goto Line dialog");
+	if (!dialog)
 		return;
-	}
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW
-				      (bonobo_mdi_get_active_window
-				       (BONOBO_MDI (gedit_mdi))));
 
 	gtk_widget_grab_focus (dialog->entry);
 

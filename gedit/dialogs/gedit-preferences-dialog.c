@@ -1153,22 +1153,20 @@ get_preferences_dialog (GtkWindow *parent)
 
 	if (dialog != NULL)
 	{
-
-		gtk_window_present (GTK_WINDOW (dialog->dialog));
-
 		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 					      parent);
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
 
 		return dialog;
 	}
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "gedit-preferences.glade2",
 			     "preferences_dialog", NULL);
-
 	if (!gui)
 	{
-		gedit_warning (_("Could not find '" GEDIT_GLADEDIR "gedit-preferences.glade2'.\n\n"
-			       "Reinstall gedit."), parent);
+		gedit_warning (parent,
+			       MISSING_FILE,
+			       GEDIT_GLADEDIR "gedit-preferences.glade2");
 		return NULL;
 	}
 
@@ -1271,9 +1269,9 @@ get_preferences_dialog (GtkWindow *parent)
 	    !dialog->background_colorpicker_2 ||
 	    !dialog->reset_button)
 	{
-		gedit_warning (_("Could not find the required widgets inside '" 
-			       GEDIT_GLADEDIR "gedit-preferences.glade2'.\n\n"
-			       "Reinstall gedit."), parent);
+		gedit_warning (parent,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "gedit-preferences.glade2");
 
 		if (!dialog->dialog)
 			gtk_widget_destroy (dialog->dialog);
@@ -1320,8 +1318,7 @@ gedit_show_preferences_dialog (GtkWindow *parent)
 	g_return_if_fail (parent != NULL);
 
 	dialog = get_preferences_dialog (parent);
-	
-	if (dialog == NULL) 
+	if (!dialog) 
 		return;
 
 	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
