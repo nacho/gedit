@@ -48,7 +48,7 @@ gedit_SOURCES = 	\
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
-
+EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
