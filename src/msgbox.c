@@ -79,7 +79,7 @@ mbprintf(const char *fmt, ...)
 	g_free (buf);
 } /* mbprintf */
 
-void
+static void
 log_handler(const gchar *log_domain, GLogLevelFlags log_level,
 	    const gchar *message, gpointer user_data)
 {
