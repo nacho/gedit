@@ -518,7 +518,8 @@ void search_replace_yes_sel (GtkWidget *w, gpointer data)
 
 void search_replace_no_sel (GtkWidget *w, gpointer data)
 {
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(main_window->search->start_at_cursor), TRUE);
+	/*gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(main_window->search->start_at_cursor), TRUE);*/
+	main_window->search->again = 1;
 	search_start (w, main_window->search);
 }
 
