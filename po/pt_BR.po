@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
 "POT-Creation-Date: 2002-08-10 16:40-0300\n"
-"PO-Revision-Date: 2002-08-10 17:14-0300\n"
+"PO-Revision-Date: 2002-08-12 17:06-0300\n"
 "Last-Translator: Gustavo Noronha Silva <kov@debian.org>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>, Debian-"
 "BR <debian-l10n-portuguese@lists.debian.org>\n"
@@ -42,7 +42,7 @@ msgstr "Salvar Automaticamente"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save Interval"
-msgstr "Intervalo para Auto-Salvar"
+msgstr "Intervalo para Salvar Automaticamente"
 
 #: data/gedit.schemas.in.h:4
 msgid "Background Color"
@@ -184,31 +184,31 @@ msgstr "Especifica quando quebrar linhas na área de edição. Use \"GTK_WRAP_NO
 #: data/gedit.schemas.in.h:32
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
-msgstr ""
+msgstr "Especifica a fonte a ser usada para o corpo de um documento ao imprimir."
 
 #: data/gedit.schemas.in.h:33
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
-msgstr ""
+msgstr "Especifica a fonte a ser usada para números de linhas ao imprimir. Isso só terá efeito se a opção \"Imprimir Números de Linhas\" for diferente de zero."
 
 #: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
-msgstr ""
+msgstr "Especifica a fonte a ser usada para cabeçalhos de páginas ao imprimir um documento. Isso só terá efeito se a opção \"Imprimir Cabeçalho\" estiver ligada."
 
 #: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
-msgstr ""
+msgstr "Especifica o número máximo de arquivos abertos recentemente que serão mostrados no sub-menu \"Arquivos Recentes\"."
 
 #: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
-msgstr ""
+msgstr "Especifica o número de espaços que deve esr mostrado ao invés de caracteres de tabulação."
 
 #: data/gedit.schemas.in.h:37
 msgid "Status Bar is Visible"
@@ -221,11 +221,11 @@ msgid ""
 "only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
-msgstr ""
+msgstr "Estilo para os botões da barra de ferramentas. Valores possíveis são \"GEDIT_TOOLBAR_SYSTEM\" para usar o estilo padrão do sistema, \"GEDIT_TOOLBAR_ICONS\" para mostrar apenas ícones e \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" para mostrar ícones e texto. Note que os valores são sensíveis a maiúsculas, então assegure-se de que eles estejam idênticos aos mencionados aqui."
 
 #: data/gedit.schemas.in.h:39
 msgid "Tab Size"
-msgstr ""
+msgstr "Tamanho da Tabulação"
 
 #: data/gedit.schemas.in.h:40
 msgid "Text Color"
@@ -244,20 +244,19 @@ msgid ""
 "encoding). If the conversion is successful, it will be used. Otherwise, UTF-"
 "8 will be used. Note that the values are case-sensitive, so make sure they "
 "appear exactly as mentioned here."
-msgstr ""
+msgstr "O método de codificação a ser usado para salvar arquivos. Valores possíveis são \"GEDIT_SAVE_ALWAYS_UTF8\" para salvar obrigatoriamente como UTF-8, \"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" se você quer que o gedit tente converter o documento que está salvando para a codificação do seu locale, \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" se você quer que o gedit tente usar a codificação original do arquivo (novos arquivos em UTF8) e \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" se você quer que o gedit tente uar a codificação original do arquivo (novos arquivo na codificação do locale atual). Se a conversão tiver sucesso, ela será usada. Se não, o UTF-8 será usado. Note que os valores são sensíveis a maiúsculas, então assegure-se de que eles estão idênticos aos mencionados aqui."
 
 #: data/gedit.schemas.in.h:42
 msgid "Toolbar Buttons Style"
 msgstr "Estilo de Botões da Barra de Ferramentas"
 
 #: data/gedit.schemas.in.h:43
-#, fuzzy
 msgid "Toolbar is Visible"
 msgstr "Barras de Ferramentas está Visível"
 
 #: data/gedit.schemas.in.h:44
 msgid "Undo Actions Limit"
-msgstr ""
+msgstr "Limite de Ações Desfazer"
 
 #: data/gedit.schemas.in.h:45
 msgid "Use Default Colors"
@@ -272,44 +271,44 @@ msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
-msgstr ""
+msgstr "Se o gedit deve salvar arquivos modificados automaticamente depois de um intervalo de tempo. Você pode definir o intervalo de tempo com a opção \"Intervalo para Salvar Automaticamente\"."
 
 #: data/gedit.schemas.in.h:48
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
-msgstr ""
+msgstr "Se o gedit deve criar cópias de backup dos arquivos que salvar. Você pode definir a extensão do arquivo de backup com a opção \"Extensão da Cópia Backup\"."
 
 #: data/gedit.schemas.in.h:49
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr ""
+msgstr "Se o gedit deve mostrar números de linhas na área de edição."
 
 #: data/gedit.schemas.in.h:50
 msgid "Whether gedit should include a document header when printing documents."
-msgstr ""
+msgstr "Se o gedit deve incluir um cabeçalho de documento ao imprimir documentos."
 
 #: data/gedit.schemas.in.h:51
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
+msgstr "Se a barra de status na parte de baixo da janela de edição deve ser visível."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
 "Whether the status bar should show the cursor position in editing windows. "
 "Make sure you turn on the \"Status Bar is Visible\" option for this to take "
 "effect."
-msgstr ""
+msgstr "Se a barra de status mostra a posição do cursor nas janelas de edição. Assegure-se de ligar a opção \"Barra de Status está Visível\" para que isso tenha efeito."
 
 #: data/gedit.schemas.in.h:53
 msgid ""
 "Whether the status bar should show the insert/overwrite mode in editing "
 "windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
 "to take effect."
-msgstr ""
+msgstr "Se a barra de status deve mostrar o modo de inserção/sobrescrição nas janelas de edição. Assegure-se de ligar a opção \"Barra de Status está Visível\" para que isso tenha efeito."
 
 #: data/gedit.schemas.in.h:54
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr ""
+msgstr "Se a barra de ferramentas deve ser visível em janelas de edição."
 
 #: data/gedit.schemas.in.h:55
 msgid ""
@@ -317,14 +316,14 @@ msgid ""
 "option is turned off, then the colors of the editing area will be those "
 "specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
 "\", and \"Selection Color\" options."
-msgstr ""
+msgstr "Se deve-se usar as cores padrão do sistema para a área de edição. Se essa opção estiver desligada, então as cores da área de edição serão as especificadas em \"Cor de Fundo\", \"Cor do Texto\", \"Cor do Texto Selecionado\" e \"Cor da Seleção\"."
 
 #: data/gedit.schemas.in.h:56
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
-msgstr ""
+msgstr "Se deve-se usar as fontes padrão do sistema para editar texto ao invés da fonte especificada para o gedit. Se essa opção estiver desligada, então a fonte indicada na opção \"Fonte do Editor\" será usada ao invés da fonte do sistema."
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -692,7 +691,7 @@ msgstr "Executa um programa externo e insere sua saída em um novo documento."
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Capture the command _output"
-msgstr ""
+msgstr "Capturar a _saída do comando"
 
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
@@ -1867,7 +1866,7 @@ msgstr "Sair do programa"
 
 #: src/gedit-ui.xml.h:50
 msgid "Recent _Files"
-msgstr "_Arquivos recentes"
+msgstr "_Arquivos Recentes"
 
 #: src/gedit-ui.xml.h:51
 msgid "Redo"
