@@ -31,6 +31,7 @@
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"
 #include "menus.h"
+#include "msgbox.h"
 
 GList *window_list;
 extern GList *plugins;
@@ -161,6 +162,7 @@ int main (int argc, char **argv)
 
 	gE_rc_parse();
 
+	msgbox_create ();
 	data = g_malloc0 (sizeof (gE_data));
 	window_list = NULL;
 	window = gE_window_new();

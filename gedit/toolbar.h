@@ -30,15 +30,16 @@ typedef struct {
 	char *text;
 	char *tooltip_text;
 	char *tooltip_private_text;
-	#ifdef WITHOUT_GNOME
+#ifdef WITHOUT_GNOME
 	char **icon;
-	#else
+#else
 	char *icon;
-	#endif
+#endif
 	GtkSignalFunc callback;
 } toolbar_data_t;
 
 extern void gE_create_toolbar(gE_window *gw, gE_data *data);
+extern GtkWidget * gE_create_toolbar_flw(gE_data *data);
 extern void tb_on_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_off_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_pic_text_cb(GtkWidget *w, gpointer cbwindow);

@@ -1,3 +1,38 @@
+1998-07-26  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch below, and made the necassary modifications
+	  to the gnome version - I also moved New Window and Close Window
+	  into, logically, the Window menu...
+
+	* Wrote up a TODO file of some of the things I'd like to get done, most of
+	  them before 0.5.0...
+	
+	* After modifying the gnome Makefile.am to reflect Andy's changes,
+	  I added his actual Makefile.am as GTK.Makefile.am, so any new gtk-only
+	  developers don't have to hack their own..
+
+	* Renamed the plugins_README to README.plugins on CVS...
+
+1998-07-25  Andy Kahn <kahn@zk3.dec.com>
+
+	* add a popup window to show files/document list.  includes its own
+	mini-toolbar, to let you print/open/save a file shown in the list.
+	doc list auto-updates as you open/close/rename files.
+
+	* implement new read/write file algorithms, which should
+	read/write large(r) files a LOT faster.
+
+	* add a "Close All Files" command.
+
+	* rework and modularize a lot of code.  consequently, closing
+	files/docs and windows, especially if you have a lot files open,
+	will "appear" a lot faster now.
+
+	* add message box popup window.  you can see a "log" of gedit
+	messages.  e.g., which files were opened, closed, saved, etc.
+
+	* new files: msgbox.c, msgbox.h, xpm/tb_exit.xpm
+
 1998-07-21  Alex Roberts  <bse@dial.pipex.com>
 
 	* Added Evan's email plugin to plugins_README...

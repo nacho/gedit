@@ -16,27 +16,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_FILES_H__
-#define __GE_FILES_H__
+#ifndef __MSGBOX_H__
+#define __MSGBOX_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+#define mbprint(x)	mbprintf(x);
 
-typedef enum { FlwFnumColumn = 0, FlwFsizeColumn, FlwFnameColumn } flw_col_t;
+extern void mbprintf(const char *fmt, ...);
+extern void msgbox_create(void);
+extern void msgbox_show(GtkWidget *, gpointer data);
+extern void msgbox_close(void);
+extern void msgbox_destroy(GtkWidget *w, gpointer data);
 
-
-extern gint gE_file_open (gE_window *w, gE_document *doc, gchar *fname);
-extern gint gE_file_save (gE_window *w, gE_document *doc, gchar *fname);
-extern void files_list_popup(GtkWidget *widget, gpointer cbdata);
-extern void flw_destroy(GtkWidget *widget, gpointer data);
-extern void flw_remove_entry(gE_window *w, int num);
-extern void flw_append_entry(gE_window *w, gE_document *, int , char *);
-extern void flw_select_file(GtkWidget *, gint, gint, GdkEventButton *,
-	gpointer data);
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif /* __GE_FILES_H__ */
+#endif	/* __MSGBOX_H__ */

@@ -97,14 +97,14 @@ file_print_execute(GtkWidget *w, gpointer cbdata)
 		g_error("\n    Unable to Open '%s'    \n", fname);
 		return;
 	}
-	if (fputs(
-			 gtk_editable_get_chars(GTK_EDITABLE(current->text), 0,
-				  gtk_text_get_length(GTK_TEXT(current->text))),
-			 fp) == EOF) {
+	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(current->text), 0,
+		gtk_text_get_length(GTK_TEXT(current->text))), fp) == EOF) {
+
 		perror("file_print_execute: can't write to tmp file");
 		fclose(fp);
 		return;
 	}
+	fflush(fp);
 	fclose(fp);
 
 	/* build command and execute; g_malloc handles memory alloc errors */

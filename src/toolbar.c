@@ -21,6 +21,7 @@
  */
 
 #include <stdio.h>
+#include <assert.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
@@ -32,6 +33,7 @@
 #include "commands.h"
 #include "menus.h"
 #include "gE_print.h"
+#include "gE_files.h"
 #include "toolbar.h"
 
 #ifdef WITHOUT_GNOME
@@ -44,6 +46,7 @@
 #include "xpm/tb_copy.xpm"
 #include "xpm/tb_paste.xpm"
 #include "xpm/tb_search.xpm"
+#include "xpm/tb_exit.xpm"
 #endif
 
 
@@ -72,7 +75,7 @@ static toolbar_data_t toolbar_data[] = {
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
-#else
+#else	/* USING GNOME */
 
 static toolbar_data_t toolbar_data[] = {
 	{ N_(" New "), N_("Start a new file"), "Toolbar/New", GNOME_STOCK_PIXMAP_NEW,
@@ -97,59 +100,59 @@ static toolbar_data_t toolbar_data[] = {
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
-#endif
+#endif	/* #ifdef WITHOUT_GNOME */
 
+#ifdef WITHOUT_GNOME
+static toolbar_data_t flw_tb_data[] = {
+	{ " Save ", "Save file", "Toolbar/Save", tb_save_xpm,
+		(GtkSignalFunc)file_save_cmd_callback },
+	{ " Close ", "Close the current file", "Toolbar/Close", cancel_xpm,
+		(GtkSignalFunc)file_close_cmd_callback },
+	{ " Print ", "Print file", "Toolbar/Print", tb_print_xpm,
+		(GtkSignalFunc)file_print_cmd_callback },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ " Ok ", "Close list window", "Ok", exit_xpm,
+		(GtkSignalFunc)flw_destroy },
+	{ NULL, NULL, NULL, NULL, NULL }
+};
+#else
+static toolbar_data_t flw_tb_data[] = {
+	{ N_(" Save "), "Save file", "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
+		(GtkSignalFunc)file_save_cmd_callback },
+	{ N_(" Close "), "Close the current file", "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
+		(GtkSignalFunc)file_close_cmd_callback },
+	{ N_(" Print "), "Print file", "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
+		(GtkSignalFunc)file_print_cmd_callback },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ N_(" OK "), "Close list window", "Ok", GNOME_STOCK_PIXMAP_QUIT,
+		(GtkSignalFunc)flw_destroy },
+	{ NULL, NULL, NULL, NULL, NULL }
+};
+#endif /* #ifdef WITHOUT_GNOME */
 
 #ifdef WITHOUT_GNOME
 static GtkWidget *new_pixmap(char **icon, GtkWidget *gdkw, GtkWidget *w);
 #else
 static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
 #endif
+static GtkWidget *toolbar_create_common(toolbar_data_t *tbdata, gE_data *data);
 
 
 /*
  * PUBLIC: gE_create_toolbar
  *
- * creates toolbar
+ * creates main toolbar that goes below menu bar
  */
 void
 gE_create_toolbar(gE_window *gw, gE_data *data)
 {
 	GtkWidget *toolbar;
 
-	toolbar_data_t *tbdp = toolbar_data;
-
 #ifdef WITHOUT_GNOME
 	gtk_widget_realize(gw->window);
 #endif
-	toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 
-	while (tbdp->text != NULL) {
-		gtk_toolbar_append_item(
-			GTK_TOOLBAR(toolbar),
-#ifdef WITHOUT_GNOME
-			tbdp->text,
-			tbdp->tooltip_text,
-#else
-			_(tbdp->text),
-			_(tbdp->tooltip_text),
-#endif
-			tbdp->tooltip_private_text,
-#ifdef WITHOUT_GNOME
-			new_pixmap(tbdp->icon, gw->window, toolbar),
-#else
-			new_pixmap(tbdp->icon, toolbar),
-#endif
-			(GtkSignalFunc)tbdp->callback,
-			data);
-
-		tbdp++;
-
-		if (tbdp->text != NULL && strcmp(tbdp->text, " SPACE ") == 0) {
-			gtk_toolbar_append_space(GTK_TOOLBAR(toolbar));
-			tbdp++;
-		}
-	}
+	toolbar = toolbar_create_common(toolbar_data, data);
 
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
@@ -164,6 +167,69 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 	gw->have_toolbar = TRUE;
 
 } /* gE_create_toolbar */
+
+
+/*
+ * PUBLIC: gE_create_toolbar_flw
+ *
+ * creates toolbar for files list window
+ */
+GtkWidget *
+gE_create_toolbar_flw(gE_data *data)
+{
+	return toolbar_create_common(flw_tb_data, data);
+}
+
+
+/*
+ * PRIVATE: toolbar_create_common
+ *
+ * common routine to create a toolbar.
+ *
+ * in: toolbar_data_t and pointer to callback data of gE_data type
+ * out: GtkWidget *toolbar
+ */
+static GtkWidget *
+toolbar_create_common(toolbar_data_t *tbdata, gE_data *data)
+{
+	GtkWidget *tb;
+	GtkWidget *parent = data->window->window;
+	toolbar_data_t *tbdp = tbdata;
+
+	assert(tbdp != NULL);
+	assert(parent != NULL);
+
+	tb = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+
+	while (tbdp->text != NULL) {
+		gtk_toolbar_append_item(
+			GTK_TOOLBAR(tb),
+#ifdef WITHOUT_GNOME
+			tbdp->text,
+			tbdp->tooltip_text,
+#else
+			_(tbdp->text),
+			_(tbdp->tooltip_text),
+#endif
+			tbdp->tooltip_private_text,
+#ifdef WITHOUT_GNOME
+			new_pixmap(tbdp->icon, parent, tb),
+#else
+			new_pixmap(tbdp->icon, tb),
+#endif
+			(GtkSignalFunc)tbdp->callback,
+			(gpointer)data);
+
+		tbdp++;
+
+		if (tbdp->text != NULL && strcmp(tbdp->text, " SPACE ") == 0) {
+			gtk_toolbar_append_space(GTK_TOOLBAR(tb));
+			tbdp++;
+		}
+	}
+
+	return tb;
+} /* toolbar_create_common */
 
 
 /*
@@ -229,8 +295,8 @@ tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_BOTH);
-	window->have_tb_text = 1;
-	window->have_tb_pix = 1;
+	window->have_tb_text = TRUE;
+	window->have_tb_pix = TRUE;
 }
 
 
@@ -245,16 +311,15 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_ICONS);
-	window->have_tb_text = 0;
-	window->have_tb_pix = 1;
+	window->have_tb_text = FALSE;
+	window->have_tb_pix = TRUE;
 	
 	/*
-	 * forces the toolbar to resize itself.. slows it down some,
+	 * forces the gnome toolbar to resize itself.. slows it down some,
 	 * but not much..
 	 */
 	gtk_widget_hide (window->toolbar);
 	gtk_widget_show (window->toolbar);
-
 }
 
 
@@ -269,12 +334,11 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
-	window->have_tb_text = 1;
-	window->have_tb_pix = 0;
+	window->have_tb_text = TRUE;
+	window->have_tb_pix = FALSE;
 
 	gtk_widget_hide (window->toolbar);
 	gtk_widget_show (window->toolbar);
-
 }
 
 

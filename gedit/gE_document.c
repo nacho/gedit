@@ -18,9 +18,9 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#define PLUGIN_TEST 1
 #include <stdio.h>
 #include <string.h>
+#include <assert.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
@@ -29,6 +29,7 @@
 #include <glib.h>
 #include "main.h"
 #include "gE_document.h"
+#include "gE_files.h"
 #define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
@@ -38,10 +39,6 @@
 #include "menus.h"
 #include "toolbar.h"
 
-static void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
-	gint num, gE_window *window);
-static void gE_msgbar_clear(gpointer data);
-static void gE_msgbar_timeout_add(gE_window *window);
 static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
 
 static char *lastmsg = NULL;
@@ -68,6 +65,9 @@ gE_window *gE_window_new()
   window->auto_indent = TRUE;
   window->show_tabs = TRUE;
   window->tab_pos = GTK_POS_TOP;
+  window->files_list_window = NULL;
+  window->files_list_window_data = NULL;
+  window->toolbar = NULL;
   
   data = g_malloc0 (sizeof (gE_data));
 
@@ -188,85 +188,89 @@ void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow)
 	}
 }
 
-gE_document *gE_document_new(gE_window *window)
+gE_document
+*gE_document_new(gE_window *w)
 {
-	gE_document *document;
+	gE_document *doc;
 	GtkWidget *table, *hscrollbar, *vscrollbar;
 	GtkStyle *style;
 
-	document = g_malloc0(sizeof(gE_document));
+	doc = g_malloc0(sizeof(gE_document));
 
-	document->window = window;
+	doc->window = w;
 
-	if (window->notebook == NULL) {
-		window->notebook = gtk_notebook_new ();
-		gtk_notebook_set_scrollable (GTK_NOTEBOOK(window->notebook), TRUE);
-		gtk_signal_connect_after (GTK_OBJECT (window->notebook), "switch_page",
-		                                     GTK_SIGNAL_FUNC (notebook_switch_page), window);
-		GTK_WIDGET_UNSET_FLAGS (window->notebook, GTK_CAN_FOCUS);
-		/* gtk_notebook_popup_enable (GTK_NOTEBOOK(window->notebook)); */
+	if (w->notebook == NULL) {
+		w->notebook = gtk_notebook_new();
+		gtk_notebook_set_scrollable(GTK_NOTEBOOK(w->notebook), TRUE);
+		gtk_signal_connect_after(GTK_OBJECT(w->notebook),
+			"switch_page",
+			GTK_SIGNAL_FUNC(notebook_switch_page),
+			w);
 	}
+	doc->tab_label = gtk_label_new(UNTITLED);
+	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
+	doc->filename = NULL;
+	doc->word_wrap = 1;
+	gtk_widget_show(doc->tab_label);
 
-	document->tab_label = gtk_label_new (("Untitled"));
-	GTK_WIDGET_UNSET_FLAGS (document->tab_label, GTK_CAN_FOCUS);
-	document->filename = NULL;
-	document->word_wrap = 1;
-	gtk_widget_show (document->tab_label);
+	table = gtk_table_new(2, 2, FALSE);
+	gtk_table_set_row_spacing(GTK_TABLE(table), 0, 2);
+	gtk_table_set_col_spacing(GTK_TABLE(table), 0, 2);
+	gtk_widget_show(table);
 
-	table = gtk_table_new (2, 2, FALSE);
-	gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
-	gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
-	gtk_widget_show (table);
+	doc->text = gtk_text_new(NULL, NULL);
+	gtk_text_set_editable(GTK_TEXT(doc->text), TRUE);
+	gtk_text_set_word_wrap(GTK_TEXT(doc->text), TRUE);
 
-	document->text = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT (document->text), TRUE);
-	gtk_text_set_word_wrap (GTK_TEXT (document->text), TRUE);
+	gtk_signal_connect_after(GTK_OBJECT(doc->text), "button_press_event",
+		GTK_SIGNAL_FUNC(gE_event_button_press), w);
 
-	gtk_signal_connect_after (GTK_OBJECT (document->text), "button_press_event",
-	                    GTK_SIGNAL_FUNC (gE_event_button_press), window);
+	gtk_signal_connect_after(GTK_OBJECT(doc->text), "key_press_event",
+		GTK_SIGNAL_FUNC(auto_indent_callback), w);
 
-	gtk_signal_connect_after (GTK_OBJECT(document->text), "key_press_event",
-	                                                  GTK_SIGNAL_FUNC(auto_indent_callback), window);
-
-
-	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
-	style = gtk_style_new ();
-	/*style->bg[GTK_STATE_NORMAL] = style->white;
-        document->text->style->font = "-adobe-helvetica-medium-r-normal--12-*-*-*-*-*-*-*";*/
-	gtk_widget_set_style (GTK_WIDGET(document->text), style);
-        /*style = gtk_style_attach (style, document->window);*/
-	gtk_widget_set_rc_style(GTK_WIDGET(document->text));
-	gtk_widget_ensure_style(GTK_WIDGET(document->text));
+	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
+	style = gtk_style_new();
+	/*
+	 * style->bg[GTK_STATE_NORMAL] = style->white;
+	 * doc->text->style->font =
+	 * "-adobe-helvetica-medium-r-normal--12-*-*-*-*-*-*-*";
+	 */
+	gtk_widget_set_style(GTK_WIDGET(doc->text), style);
+	/* style = gtk_style_attach (style, doc->w); */
+	gtk_widget_set_rc_style(GTK_WIDGET(doc->text));
+	gtk_widget_ensure_style(GTK_WIDGET(doc->text));
 
 
-	document->changed = FALSE;
-	document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", 
-	                                                                  GTK_SIGNAL_FUNC(document_changed_callback), document);
-	gtk_widget_show (document->text);
-	gtk_text_set_point (GTK_TEXT (document->text), 0);
-     
-	hscrollbar = gtk_hscrollbar_new (GTK_TEXT (document->text)->hadj);
-	gtk_table_attach (GTK_TABLE (table), hscrollbar, 0, 1, 1, 2,
- 		  	GTK_EXPAND | GTK_FILL, GTK_FILL, 0, 0);
+	doc->changed = FALSE;
+	doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
+		GTK_SIGNAL_FUNC(doc_changed_callback), doc);
+	gtk_widget_show(doc->text);
+	gtk_text_set_point(GTK_TEXT(doc->text), 0);
+
+	hscrollbar = gtk_hscrollbar_new(GTK_TEXT(doc->text)->hadj);
+	gtk_table_attach(GTK_TABLE(table), hscrollbar, 0, 1, 1, 2,
+		GTK_EXPAND | GTK_FILL, GTK_FILL, 0, 0);
 	/* gtk_widget_show (hscrollbar); */
-   
-	vscrollbar = gtk_vscrollbar_new (GTK_TEXT (document->text)->vadj);
-	gtk_table_attach (GTK_TABLE (table), vscrollbar, 1, 2, 0, 1,
-     			GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
-     	
-     	GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
-	gtk_widget_show (vscrollbar);
 
-	gtk_notebook_append_page (GTK_NOTEBOOK(window->notebook), table, document->tab_label);
+	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->text)->vadj);
+	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
+		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 
-	window->documents = g_list_append (window->documents, document);
+	GTK_WIDGET_UNSET_FLAGS(vscrollbar, GTK_CAN_FOCUS);
+	gtk_widget_show(vscrollbar);
 
-	gtk_notebook_set_page (GTK_NOTEBOOK(window->notebook), 
-	                       g_list_length(GTK_NOTEBOOK (window->notebook)->children) - 1);
+	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), table,
+		doc->tab_label);
 
-	gtk_widget_grab_focus (document->text);
-	return document;
-}
+	w->documents = g_list_append(w->documents, doc);
+
+	gtk_notebook_set_page(GTK_NOTEBOOK(w->notebook),
+		g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1);
+
+	gtk_widget_grab_focus(doc->text);
+
+	return doc;
+} /* gE_document_new */
 
 /* This is currently not used, but I'm leaving it here in case we find some bugs
    in how we're doing it now.... -Evan
@@ -287,6 +291,9 @@ gE_document *gE_document_current(gE_window *window)
 	gint cur;
 	gE_document *current_document;
 	current_document = NULL;
+
+	assert(window != NULL);
+	assert(window->notebook != NULL);
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook));
 	/*g_print("%d\n",cur);*/
 	current_document = g_list_nth_data (window->documents, cur);
@@ -305,23 +312,35 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
-static void
+void
 notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	gint num, gE_window *window)
 {
 	gE_document *doc;
 	gchar *title;
 
+	assert(window != NULL);
+	assert(window->window != NULL);
+
 	if (window->documents == NULL)
 		return;	
-	if (GTK_WIDGET_REALIZED (window->window)) {
-	doc = g_list_nth_data (window->documents, num);
-	gtk_widget_grab_focus (doc->text);
-	title = g_malloc0 (strlen (GEDIT_ID) + strlen (GTK_LABEL(doc->tab_label)->label) + 4);
-	
-	sprintf (title, "%s - %s", GEDIT_ID, GTK_LABEL (doc->tab_label)->label);
-	gtk_window_set_title (GTK_WINDOW (window->window), title);
-	g_free (title);
+
+	if (GTK_WIDGET_REALIZED(window->window)) {
+		doc = g_list_nth_data(window->documents, num);
+		gtk_widget_grab_focus(doc->text);
+		title = g_malloc0(strlen(GEDIT_ID) +
+				strlen(GTK_LABEL(doc->tab_label)->label) + 4);
+		sprintf(title, "%s - %s",
+			GEDIT_ID, GTK_LABEL(doc->tab_label)->label);
+		gtk_window_set_title(GTK_WINDOW(window->window), title);
+		g_free(title);
+
+		/* update highlighted file in the doclist */
+		if (window->files_list_window)
+			gtk_clist_select_row(
+				GTK_CLIST(window->files_list_window_data),
+				num,
+				FlwFnumColumn);
 	}
 }
 
@@ -353,11 +372,11 @@ gE_msgbar_set(gE_window *window, char *msg)
 
 
 /*
- * PRIVATE: gE_msgbar_timeout_add
+ * PUBLIC: gE_msgbar_timeout_add
  *
  * automatically clears the text after 3 seconds
  */
-static void
+void
 gE_msgbar_timeout_add(gE_window *window)
 {
 	msgbar_timeout_id =
@@ -366,12 +385,12 @@ gE_msgbar_timeout_add(gE_window *window)
 
 
 /*
- * PRIVATE: gE_msgbar_clear
+ * PUBLIC: gE_msgbar_clear
  *
  * clears the text by using a space (" ").  apparently, Gtk has no
  * provision for clearing a label widget.
  */
-static void
+void
 gE_msgbar_clear(gpointer data)
 {
 	gE_window *window = (gE_window *)data;

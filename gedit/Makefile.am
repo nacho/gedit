@@ -9,7 +9,7 @@ plugindir = $(prefix)/share/go/plugins
 
 SUBDIRS = plugins
 
-EXTRA_DIST = KNOWNBUGS ChangeLog README INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm gedit.desktop
+EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE_icon.xpm gedit.desktop xpm/*
 
 man_MANS = gedit.1
 
@@ -34,7 +34,9 @@ gedit_SOURCES = 	\
 	plugin.h        \
 	gE_plugin_api.h	\
 	menus.h		\
-	menus.c
+	menus.c		\
+	msgbox.h	\
+	msgbox.c
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 

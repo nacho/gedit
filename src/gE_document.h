@@ -41,6 +41,10 @@ extern gE_document *gE_document_new(gE_window *window);
 extern gE_document *gE_document_current(gE_window *window);
 extern void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow);
 extern void gE_msgbar_set(gE_window *window, char *msg);
+extern void gE_msgbar_clear(gpointer data);
+extern void gE_msgbar_timeout_add(gE_window *window);
+extern void notebook_switch_page(GtkWidget *w, GtkNotebookPage *page,
+    gint num, gE_window *window);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

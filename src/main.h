@@ -31,6 +31,9 @@ extern "C" {
 #define STRING_LENGTH_MAX	256
 #define GEDIT_ID	"gEdit 0.4.5"
 
+#define UNKNOWN		"Unknown"
+#define UNTITLED	"Untitled"
+
 typedef struct _gE_search {
 	GtkWidget *window;
 	GtkWidget *start_at_cursor;
@@ -58,6 +61,8 @@ typedef struct _gE_window {
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;
 	GtkWidget *line_label, *col_label;
+	GtkWidget *files_list_window;
+	GtkWidget *files_list_window_data;
 #ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *accel;
 #else
@@ -96,6 +101,7 @@ typedef struct _gE_document {
 	gint changed_id;
 	gint changed;
 	gint word_wrap;
+	struct stat *sb;
 } gE_document;
 
 typedef struct _gE_prefs {
@@ -118,6 +124,7 @@ typedef struct _gE_data {
 	gE_document *document;
 	gpointer temp1;
 	gpointer temp2;
+	gboolean flag;	/* general purpose flag to indicate if action completed */
 } gE_data;
 
 

@@ -1,3 +1,22 @@
+/* vi:set ts=4 sts=0 sw=4:
+ *
+ * gEdit
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+#include <assert.h>
 #include <signal.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -17,63 +36,121 @@
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
+#include "msgbox.h"
 
 /* ---- Misc callbacks ---- */
 
-static void save_no_sel (GtkWidget *w, gE_data *data);
-static void save_yes_sel (GtkWidget *w, gE_data *data);
+static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
+static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
+static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
 static void popup_close_verify (gE_document *doc, gE_data *data);
+static void close_doc_common(gE_data *data);
+static void close_doc_execute(GtkWidget *widget, gpointer cbdata);
+static void close_window_common(gE_window *w);
+static void file_saveas_destroy(GtkWidget *w, gpointer cbdata);
+static void file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
+static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
+static void seek_to_line (gE_document *doc, gint line_number);
+static int point_to_line (gE_document *doc, gint point);
+static void search_create (gE_window *, gE_search *options, gint replace);
+
 
 /* handles changes in the text widget... */
-void document_changed_callback (GtkWidget *w, gpointer doc)
+void doc_changed_callback (GtkWidget *w, gpointer cbdata)
 {
-	gE_document *document;
-	document = (gE_document *) doc;
-	/* g_print ("change signal emitted...\n"); */ /* was useful for debugging... */
-	document->changed = TRUE;
-	gtk_signal_disconnect (GTK_OBJECT(document->text), (gint) document->changed_id);
-	document->changed_id = FALSE;
+	gE_document *doc = (gE_document *) cbdata;
+
+	doc->changed = TRUE;
+	gtk_signal_disconnect (GTK_OBJECT(doc->text), (gint) doc->changed_id);
+	doc->changed_id = FALSE;
 }
 
-static void save_yes_sel (GtkWidget *w, gE_data *data)
-{
-	gE_document *doc;
-	doc = data->document;
-	file_save_cmd_callback (NULL, data);
-	if (doc->filename == NULL)
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(data->window->save_fileselector)->ok_button), "clicked",
-		(GtkSignalFunc) file_close_cmd_callback, data);
-	else
-		file_close_cmd_callback (NULL, data);
-}
 
-static void save_no_sel (GtkWidget *w, gE_data *data)
+/*
+ * file save callback : user selected "No"
+ */
+static void
+close_file_save_no_sel(GtkWidget *w, gE_data *data)
 {
-	gE_document *doc;
-	doc = data->document;
-	doc->changed = FALSE;
-	file_close_cmd_callback (NULL, data);
-}
-
-void save_cancel_sel (GtkWidget *w, gE_data *data)
-{
-	data->temp1 = NULL; /* In case we're quitting, make sure cancelling it clears the quitting flag.. */
+	assert(data != NULL);
+	close_doc_execute(w, data);
+	gtk_widget_destroy(data->temp1);	/* verify dialog box */
+	data->temp1 = NULL;
 	data->temp2 = NULL;
-}
+	data->flag = TRUE;
+} /* close_file_save_no_sel */
 
-static void popup_close_verify(gE_document *doc, gE_data *data)
+
+/*
+ * file save callback : user selected "Yes"
+ */
+static void
+close_file_save_yes_sel(GtkWidget *w, gE_data *data)
 {
-	GtkWidget *verify_window, *yes, *no, *cancel, *label;
-	gchar *filename;
-	
-	verify_window = gtk_dialog_new();
-	
-	gtk_window_set_title (GTK_WINDOW(verify_window), ("Save File?"));
+	gE_document *doc;
 
-	filename = g_malloc0 (strlen ("The file   has been modified, do you wish to save it?")
-	                               + strlen (GTK_LABEL (doc->tab_label)->label) + 1);
-	sprintf (filename, "The file %s has been modified, do you wish to save it?", GTK_LABEL (doc->tab_label)->label);
-	label = gtk_label_new (filename);
+	assert(data != NULL);
+	doc = data->document;
+
+	if (doc->filename == NULL) {
+		gtk_widget_destroy(data->temp1);	/* del verify box */
+		data->temp1 = NULL;
+		file_save_as_cmd_callback(w, data);
+		if (data->flag == TRUE) /* close document if successful */
+			close_doc_execute(NULL, data);
+	} else {
+		int error;
+
+		error = gE_file_save(data->window, doc, doc->filename);
+		if (!error) {
+			gtk_widget_destroy(data->temp1);	/* verify box */
+			data->temp1 = NULL;
+			close_doc_execute(NULL, data);
+			data->temp2 = NULL;
+			data->flag = TRUE;
+		} else
+			data->flag = FALSE;
+	}
+} /* close_file_save_yes_sel */
+
+
+/*
+ * file save callback : user selected "Cancel"
+ */
+static void
+close_file_save_cancel_sel(GtkWidget *w, gE_data *data)
+{
+	assert(data != NULL);
+	gtk_widget_destroy((GtkWidget *)(data->temp1));	/* verify dialog box */
+	data->temp1 = NULL;
+	data->temp2 = NULL;
+	data->flag = FALSE;
+} /* close_file_save_cancel_sel */
+
+
+/*
+ * creates file save (yes/no/cancel) dialog box
+ *
+ * returns TRUE if file was closed
+ */
+static void
+popup_close_verify(gE_document *doc, gE_data *data)
+{
+	GtkWidget *verify, *yes, *no, *cancel, *label;
+	char buf[STRING_LENGTH_MAX];
+	char *fname;
+
+	fname = (doc->filename) ? basename(doc->filename) : UNTITLED;
+	
+	verify = gtk_dialog_new();
+	
+	g_snprintf(buf, STRING_LENGTH_MAX, "Save File '%s'?", fname);
+	gtk_window_set_title(GTK_WINDOW(verify), buf);
+
+	g_snprintf(buf, STRING_LENGTH_MAX,
+		" '%s' has been modified.  Do you wish to save it? ", fname);
+
+	label = gtk_label_new(buf);
 #ifdef WITHOUT_GNOME
 	yes = gtk_button_new_with_label ("Yes");
 	no = gtk_button_new_with_label ("No");
@@ -84,90 +161,138 @@ static void popup_close_verify(gE_document *doc, gE_data *data)
 	no     = gnome_stock_button (GNOME_STOCK_BUTTON_NO);
 	cancel = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
 #endif
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (verify_window)->vbox), label, TRUE, FALSE, 10);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (verify_window)->action_area), yes, TRUE, TRUE, 2);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (verify_window)->action_area), no, TRUE, TRUE, 2);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (verify_window)->action_area), cancel, TRUE, TRUE, 2);
-	gtk_widget_show (label);
-	gtk_widget_show (yes);
-	gtk_widget_show (no);
-	gtk_widget_show (cancel);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(verify)->vbox),
+		label, TRUE, FALSE, 10);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(verify)->action_area),
+		yes, TRUE, TRUE, 2);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(verify)->action_area),
+		no, TRUE, TRUE, 2);
+	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(verify)->action_area),
+		cancel, TRUE, TRUE, 2);
+	gtk_widget_show(label);
+	gtk_widget_show(yes);
+	gtk_widget_show(no);
+	gtk_widget_show(cancel);
+	gtk_widget_show(verify);
 
-	gtk_widget_show (verify_window);
-	gtk_widget_set_usize (GTK_WIDGET (verify_window), (GTK_WIDGET (label)->allocation.width) + 8, 90);
+	/* use data->flag to indicate whether or not to quit */
+	data->flag = FALSE;
+	data->temp1 = verify;
+	gtk_signal_connect(GTK_OBJECT(yes), "clicked",
+		GTK_SIGNAL_FUNC(close_file_save_yes_sel), data);
+	gtk_signal_connect(GTK_OBJECT(no), "clicked",
+		GTK_SIGNAL_FUNC(close_file_save_no_sel), data);
+	gtk_signal_connect(GTK_OBJECT(cancel), "clicked",
+		GTK_SIGNAL_FUNC(close_file_save_cancel_sel), data);
+
+	gtk_grab_add(verify);
+
 	data->document = doc;
-	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(save_yes_sel), data);
-	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(save_no_sel), data);
-	gtk_signal_connect (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC (save_cancel_sel), data);
-	gtk_signal_connect_object (GTK_OBJECT(yes), "clicked", 
-	                                       GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) verify_window);
-	gtk_signal_connect_object (GTK_OBJECT(no), "clicked", 
-	                                       GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) verify_window);
-	gtk_signal_connect_object (GTK_OBJECT(cancel), "clicked",
-	                                       GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) verify_window);
-	gtk_grab_add (verify_window);
-}
+
+	/* loop around doing nothing until user has decided on file save */
+	while (data->temp1 != NULL) {
+		gtk_main_iteration_do(TRUE);
+		if (data->flag == TRUE)
+			break;
+	}
+} /* popup_close_verify */
 
 
-
-void file_open_ok_sel (GtkWidget *w, gE_data *data)
+/*
+ * file open callback : user selects "Ok"
+ */
+void
+file_open_ok_sel(GtkWidget *widget, gE_data *data)
 {
-  char *filename;
-  char *nfile;
-  struct stat filetype;
-  
-  GtkFileSelection *fs = (GtkFileSelection *) data->window->open_fileselector;
-  
-  if ((gE_document_current (data->window)->filename) || 
-      (gE_document_current (data->window)->changed))
-  	gE_document_new(data->window);
-   
-   filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
-   
-  if (filename != NULL) {
-    if (stat (filename, &filetype))
-    	return;
-    if (S_ISDIR (filetype.st_mode))
-    {
-    	nfile = g_malloc0 (strlen (filename) + 3);
-    	sprintf (nfile, "%s/.", filename);
-    	gtk_file_selection_set_filename (GTK_FILE_SELECTION (fs), nfile);
-    	return;
-    }
-    nfile = g_malloc(strlen(filename)+1);
-    strcpy(nfile, filename);
-    gE_file_open (data->window, gE_document_current(data->window), nfile);
-  }
+	char *filename;
+	char *nfile;
+	struct stat sb;
+	gE_window *w;
+	gE_document *curdoc;
+	GtkFileSelection *fs;
+
+
+	assert(data != NULL);
+	w = data->window;
+	assert(w != NULL);
+	fs = GTK_FILE_SELECTION(w->open_fileselector);
+
+	filename = gtk_file_selection_get_filename(fs);
+
+	if (filename != NULL) {
+		if (stat(filename, &sb) == -1)
+			return;
+
+		if (S_ISDIR(sb.st_mode)) {
+			nfile = g_malloc0(strlen (filename) + 3);
+			sprintf(nfile, "%s/.", filename);
+			gtk_file_selection_set_filename(GTK_FILE_SELECTION(
+				w->open_fileselector), nfile);
+			g_free(nfile);
+			return;
+		}
+
+		curdoc = gE_document_current(w);
+		if (curdoc->filename || curdoc->changed)
+			gE_document_new(data->window);
+
+		nfile = g_strdup(filename);
+		gE_file_open(data->window, gE_document_current(w), nfile);
+	}
+	if (GTK_WIDGET_VISIBLE(fs))
+		gtk_widget_hide (GTK_WIDGET(fs));
+} /* file_open_ok_sel */
+
+/*
+ * file save-as callback : user selects "Ok"
+ *
+ * data->temp1 must be the file saveas dialog box
+ */
+void
+file_saveas_ok_sel(GtkWidget *w, gE_data *data)
+{
+	char *fname;
+	GtkWidget *safs;
+
+	assert(data != NULL);
+	safs = (GtkWidget *)(data->temp1);
+	assert(safs != NULL);
+
+	fname = gtk_file_selection_get_filename(GTK_FILE_SELECTION(safs));
+	if (fname != NULL) {
+		if (gE_file_save(data->window,
+			gE_document_current(data->window), fname) == 0) {
+
+			gtk_widget_destroy(data->temp1);
+			data->temp1 = NULL;
+			data->temp2 = NULL;
+			data->flag = TRUE;	/* indicate saved */
+		} else
+			data->flag = FALSE;	/* indicate not saved */
+	}
+} /* file_saveas_ok_sel */
+
+
+/*
+ * file open callback : user selects "Cancel"
+ */
+static void
+file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
+{
   if (GTK_WIDGET_VISIBLE(fs))
     gtk_widget_hide (GTK_WIDGET(fs));
 }
 
-void file_save_ok_sel (GtkWidget *w, gE_data *data)
-{
-  char *filename, *nfile;
-  GtkFileSelection *fs = (GtkFileSelection *) data->window->save_fileselector;
-  filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
-  if (filename != NULL)
-  {
-    nfile = g_malloc(strlen(filename)+1);
-    strcpy(nfile, filename);
-    gE_file_save (data->window, gE_document_current(data->window), nfile);
-  }
-  
-  if (GTK_WIDGET_VISIBLE(fs))
-    gtk_widget_hide (GTK_WIDGET(fs));
-}
 
-void file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
-{
-  if (GTK_WIDGET_VISIBLE(fs))
-    gtk_widget_hide (GTK_WIDGET(fs));
-}
-
-void destroy (GtkWidget *w, GtkFileSelection *fs)
+/*
+ * file selection dialog callback
+ */
+static void
+file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 {
 	fs = NULL;
 }
+
 
 void prefs_callback (GtkWidget *widget, gpointer cbwindow)
 {
@@ -320,9 +445,20 @@ void gE_event_button_press (GtkWidget *w, GdkEventButton *event, gE_window *wind
 void file_new_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
+	gE_window *w;
+	gE_document *doc;
 
-	gE_msgbar_set(data->window, MSGBAR_FILE_NEW);
-	gE_document_new(data->window);
+	assert(data != NULL);
+	w = data->window;
+	assert(w != NULL);
+	gE_msgbar_set(w, MSGBAR_FILE_NEW);
+	gE_document_new(w);
+	doc = gE_document_current(w);
+
+	if (w->files_list_window)
+		flw_append_entry(w, doc,
+			g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1,
+			doc->filename);
 }
 
 
@@ -346,23 +482,32 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata)
 void file_open_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
+	gE_window *w;
 
-  if (data->window->open_fileselector == NULL) {
-	data->window->open_fileselector = gtk_file_selection_new(("Open File..."));
-	gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (data->window->open_fileselector));
-	gtk_signal_connect (GTK_OBJECT (data->window->open_fileselector), 
-		"destroy", (GtkSignalFunc) destroy, data->window->open_fileselector);
-	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->open_fileselector)->ok_button), 
-		"clicked", (GtkSignalFunc) file_open_ok_sel, data);
-	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->open_fileselector)->cancel_button),
-		"clicked", (GtkSignalFunc) file_cancel_sel, data->window->open_fileselector);
-  }
+	assert(data != NULL);
+	w = data->window;
+	assert(w != NULL);
 
-  if (GTK_WIDGET_VISIBLE(data->window->open_fileselector))
-    return;
-  else {
-	gtk_widget_show (data->window->open_fileselector);
-  }
+	if (w->open_fileselector == NULL) {
+		w->open_fileselector = gtk_file_selection_new("Open File...");
+		gtk_file_selection_hide_fileop_buttons(
+			GTK_FILE_SELECTION(w->open_fileselector));
+		gtk_signal_connect(GTK_OBJECT(w->open_fileselector), "destroy",
+			(GtkSignalFunc)file_sel_destroy, w->open_fileselector);
+		gtk_signal_connect(GTK_OBJECT(
+			GTK_FILE_SELECTION(w->open_fileselector)->ok_button), 
+			"clicked", (GtkSignalFunc)file_open_ok_sel, data);
+		gtk_signal_connect(GTK_OBJECT(
+			GTK_FILE_SELECTION(
+				w->open_fileselector)->cancel_button),
+			"clicked", (GtkSignalFunc)file_cancel_sel,
+			w->open_fileselector);
+	}
+
+	if (GTK_WIDGET_VISIBLE(w->open_fileselector))
+		return;
+
+	gtk_widget_show(w->open_fileselector);
 }
 
 void file_save_cmd_callback (GtkWidget *widget, gpointer cbdata)
@@ -370,122 +515,253 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gchar *fname;
 	gE_data *data = (gE_data *)cbdata;
 
- 	fname =   gE_document_current(data->window)->filename;
- /*	g_print("%s\n",fname);*/
+	assert(data != NULL);
+	assert(data->window != NULL);
+ 	fname = gE_document_current(data->window)->filename;
 	if (fname == NULL)
-	{	g_print("..\n");
-		#ifdef DEBUG
-		g_warning("The file hasn't been saved yet!\n");
-		#endif
 		file_save_as_cmd_callback(NULL, data);
-	}
 	else
-		gE_file_save (data->window,
-							gE_document_current(data->window),
-							gE_document_current(data->window)->filename);
+		gE_file_save(data->window, gE_document_current(data->window),
+			gE_document_current(data->window)->filename);
 }
 
 void file_save_as_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
+	GtkWidget *safs;
 	gE_data *data = (gE_data *)cbdata;
 
-	if (data->window->save_fileselector == NULL) {
-		data->window->save_fileselector = gtk_file_selection_new(("Save As..."));
-		gtk_signal_connect (GTK_OBJECT (data->window->save_fileselector), 
-			"destroy", (GtkSignalFunc) destroy, data->window->save_fileselector);
-		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->save_fileselector)->ok_button), 
-			"clicked", (GtkSignalFunc) file_save_ok_sel, data);
-		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->save_fileselector)->cancel_button),
-			"clicked", (GtkSignalFunc) file_cancel_sel, data->window->save_fileselector);
- 	}
-	if (GTK_WIDGET_VISIBLE(data->window->save_fileselector))
-    		return;
-  	else {
-   		gtk_widget_show (data->window->save_fileselector);
-	}
+	assert(data != NULL);
+
+	safs = gtk_file_selection_new("Save As...");
+
+	data->temp1 = safs;
+	gtk_signal_connect(GTK_OBJECT(safs), "destroy",
+		(GtkSignalFunc)file_saveas_destroy, safs);
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(safs)->ok_button),
+		"clicked", (GtkSignalFunc)file_saveas_ok_sel, data);
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(safs)->cancel_button),
+		"clicked", (GtkSignalFunc)file_saveas_destroy, safs);
+
+	gtk_widget_show(safs);
 }
 
-void file_close_cmd_callback (GtkWidget *widget, gpointer cbdata)
+
+/*
+ * destroy the "save as" dialog box
+ */
+static void
+file_saveas_destroy(GtkWidget *w, gpointer cbdata)
 {
+	gtk_widget_destroy((GtkWidget *)cbdata);
+}
+
+
+/*
+ * file close callback (used from menus.c)
+ */
+void
+file_close_cmd_callback (GtkWidget *widget, gpointer cbdata)
+{
+	gE_data *data = (gE_data *)cbdata;
+
+	assert(data != NULL);
+	close_doc_common(data);
+}
+
+
+/*
+ * common routine for closing a file.  will prompt for saving if the
+ * file was changed.
+ *
+ * data->flag is set to TRUE if file closed
+ */
+static void
+close_doc_common(gE_data *data)
+{
+	gE_document *doc;
+
+	assert(data != NULL);
+	assert(data->window != NULL);
+	doc = gE_document_current(data->window);
+	if (doc->changed)
+		popup_close_verify(doc, data);
+	else {
+		close_doc_execute(NULL, data);
+		data->flag = TRUE;	/* indicate closed */
+	}
+} /* close_doc_common */
+
+
+/*
+ * actually close the document.
+ */
+static void
+close_doc_execute(GtkWidget *widget, gpointer cbdata)
+{
+	int num, numdoc;
+	GtkNotebook *nb;
+	gE_window *w;
 	gE_document *doc;
 	gE_data *data = (gE_data *)cbdata;
 
-	doc = gE_document_current(data->window);
-	if (doc->changed != TRUE) {
-		if (g_list_length(GTK_NOTEBOOK(data->window->notebook)->children) > 1) {
-			gtk_notebook_remove_page(GTK_NOTEBOOK(data->window->notebook),
-				gtk_notebook_current_page (GTK_NOTEBOOK(data->window->notebook)));
-			data->window->documents = g_list_remove(data->window->documents, doc);
-			if (doc->filename != NULL)
-				g_free (doc->filename);
-			g_free (doc);
-			gE_msgbar_set(data->window, MSGBAR_FILE_CLOSED);
-			if (data->temp1)
-				file_close_cmd_callback (widget, data);
-		}
-		else {
-			gtk_notebook_remove_page(GTK_NOTEBOOK(data->window->notebook),
-						 gtk_notebook_current_page (GTK_NOTEBOOK(data->window->notebook)));
-			if (doc->filename != NULL)
-				g_free (doc->filename);
-			g_free (doc);
-			g_list_free (data->window->documents);
-			data->window->documents = NULL;
-			if (!data->temp1)
-				gE_document_new (data->window);
-			else
-			{
-				#ifndef WITHOUT_GNOME
-				gE_save_settings(data->window, data->window->print_cmd);
-				#endif
-				file_close_window_cmd_callback (NULL, data);
-				return;
-			}
-		}
-	}
-	else
-		popup_close_verify(doc, data);
+	assert(data != NULL);
+	w = data->window;
+	assert(w != NULL);
+	nb = GTK_NOTEBOOK(w->notebook);
+	assert(nb != NULL);
+	doc = gE_document_current(w);
+	assert(doc != NULL);
 
-
-}
-
-void file_close_window_cmd_callback (GtkWidget *widget, gpointer cbdata)
-{
-	gE_data *data = (gE_data *)cbdata;
-
-	data->temp1 = data->window;
-	if (data->window->documents) {
-		file_close_cmd_callback (NULL, data);
+	/* if all we have is a blank, Untitled doc, then return immediately */
+	if (!doc->changed && g_list_length(nb->children) == 1 &&
+		doc->filename == NULL)
 		return;
+
+	/* remove notebook entry and item from document list */
+	num = gtk_notebook_current_page(nb);
+	gtk_notebook_remove_page(nb, num);
+	w->documents = g_list_remove(w->documents, doc);
+	mbprintf("closed %s", (doc->filename) ? doc->filename : UNTITLED);
+	if (doc->filename)
+		g_free(doc->filename);
+	if (doc->sb)
+		g_free(doc->sb);
+	g_free(doc);
+
+	/* if files list window present, remove corresponding entry */
+	flw_remove_entry(w, num);
+
+	/* echo message to user */
+	gE_msgbar_set(w, MSGBAR_FILE_CLOSED);
+
+	num = g_list_length(nb->children);
+	numdoc = g_list_length(w->documents);
+	assert(num == numdoc);
+
+	/*
+	 * we always have at least one document (e.g., "Untitled").
+	 * so if we just closed the last document, create "Untitled".
+	 */
+	if (num < 1) {
+		g_list_free(w->documents);
+		w->documents = NULL;
+		gE_document_new(w);
+		if (w->files_list_window)
+			flw_append_entry(w, doc,
+				g_list_length(nb->children) - 1, NULL);
 	}
-	if (g_list_length (window_list) > 1)
-	{
-		g_free (data->window->search);
-		gtk_widget_destroy (data->window->window);
-		window_list = g_list_remove (window_list, data->window);
-		g_free (data->window);
-		if (data->temp2)
-		{
-			data->window = g_list_nth_data (window_list, 0);
-			file_close_window_cmd_callback (NULL, data);
+
+} /* close_doc_execute */
+
+
+/*
+ * close all documents in invoking window
+ */
+void
+file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata)
+{
+	gE_data *data = (gE_data *)cbdata;
+	GtkNotebook *nb;
+	int num, i;
+	gboolean allclosed = TRUE;
+
+	assert(data != NULL);
+	assert(data->window != NULL);
+	nb = GTK_NOTEBOOK(data->window->notebook);
+	assert(nb != NULL);
+	num = g_list_length(nb->children);
+	assert(num > 0);
+	gtk_widget_hide(data->window->notebook);
+
+	for (i = 0; i < num; i++) {
+		close_doc_common(data);
+
+		/* if a file was not closed, then all files were not closed */
+		if (!data->flag) {
+			allclosed = FALSE;
+			break;
 		}
 	}
-	else {
-		g_free (data->window->search);
-		gtk_widget_destroy (data->window->window);
-		g_list_free (window_list);
-		g_free (data->window);
-		g_free (data);
-		gtk_exit (0);
-	}
-}
 
-void file_quit_cmd_callback (GtkWidget *widget, gpointer cbdata)
+	gtk_widget_show(data->window->notebook);
+
+	data->flag = allclosed;
+
+	if (i == num) {
+		assert(allclosed == TRUE);
+		gE_msgbar_set(data->window, MSGBAR_FILE_CLOSED_ALL);
+		mbprintf("closed all documents");
+	}
+} /* file_close_all_cmd_callback */
+
+
+/*
+ * closes gEdit window by closing all documents.  only if all documents are
+ * closed will the window actually go away.
+ */
+void
+file_close_window_cmd_callback(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-  data->temp2 = data->window;
-  file_close_window_cmd_callback (NULL, data);
+	assert(data != NULL);
+	assert(data->window != NULL);
+	gtk_widget_hide(data->window->window);
+	flw_destroy(NULL, data);
+
+	data->flag = FALSE;	/* use flag to indicate all files closed */
+	file_close_all_cmd_callback(widget, cbdata);
+
+	if (data->flag) {
+		gE_msgbar_clear((gpointer)(data->window));
+		mbprintf("window closed");
+
+		close_window_common(data->window);	/* may not return */
+
+		data->window = g_list_nth_data(window_list, 0);
+	}
+}
+
+
+/*
+ * actually close the window.  exits if last window is closed.
+ */
+static void
+close_window_common(gE_window *w)
+{
+	assert(w != NULL);
+	window_list = g_list_remove(window_list, (gpointer)w);
+
+	if (w->files_list_window)
+		gtk_widget_destroy(w->files_list_window);
+	gtk_widget_destroy(w->window);
+	g_free(w->search);
+	g_free(w);
+
+	if (window_list == NULL)
+		gtk_exit(0);
+}
+
+
+/*
+ * quits gEdit by closing all windows.  only quits if all windows closed.
+ */
+void
+file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata)
+{
+	gE_data *data = (gE_data *)cbdata;
+
+	assert(data != NULL);
+
+	msgbox_close();
+	while (window_list) {
+		data->window = g_list_nth_data(window_list, 0);
+		gtk_widget_hide(data->window->window);
+		file_close_window_cmd_callback(widget, data);
+		if (data->flag == FALSE)	/* cancelled by user */
+			return;
+	}
+	gtk_exit(0);	/* should not reach here */
 }
 
 
@@ -551,7 +827,8 @@ void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata)
    to speed up searching, etc - it's still a good idea (or a must) to insert a char and delete one
    to get it to go to the exact position. */
 
-void seek_to_line (gE_document *doc, gint line_number)
+static void
+seek_to_line (gE_document *doc, gint line_number)
 {
 	gfloat value, ln, tl;
 	gchar *c;
@@ -575,16 +852,17 @@ void seek_to_line (gE_document *doc, gint line_number)
 	ln = line_number;
 	value = (ln * GTK_ADJUSTMENT (GTK_TEXT(doc->text)->vadj)->upper) / tl - GTK_ADJUSTMENT (GTK_TEXT(doc->text)->vadj)->page_increment;
 
-	#ifdef DEBUG
+#ifdef DEBUG
 	printf ("%i\n", total_lines);
 	printf ("%f\n", value);
 	printf ("%f, %f\n", GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj)->lower, GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj)->upper);
-	#endif
+#endif
 
 	gtk_adjustment_set_value (GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj), value);
 }
 
-gint point_to_line (gE_document *doc, gint point)
+static gint
+point_to_line (gE_document *doc, gint point)
 {
 	gint i, lines;
 	gchar *c = g_malloc0 (3);
@@ -758,7 +1036,8 @@ void search_goto_line_callback (GtkWidget *w, gpointer cbwindow)
 }
 
 
-void search_create (gE_window *window, gE_search *options, gint replace)
+static void
+search_create (gE_window *window, gE_search *options, gint replace)
 {
 	GtkWidget *search_label, *replace_label, *ok, *cancel, *search_hbox, *replace_hbox, *hbox;
 	GtkWidget *search_for_menu_items, *search_for_label;
@@ -978,7 +1257,4 @@ void popup_replace_window(gE_data *data)
 	gtk_signal_connect_object (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
 	gtk_grab_add (window);
 }
-
-
-
 

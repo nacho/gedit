@@ -15,14 +15,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
 #include <gtk/gtk.h>
 #include <string.h>
+#include <stdio.h>
 #include "main.h"
 #include "gE_init.h"
 #include "gE_files.h"
 #include "gE_document.h"
 #include "gE_plugin_api.h"
+#include "msgbox.h"
 
 extern GList *plugins;
 
@@ -52,6 +53,7 @@ void prog_init(char **file)
 	g_print("%s\n",*file);
 #endif
 
+	msgbox_create();
 
 	window_list = NULL;
 	window = gE_window_new();
@@ -71,7 +73,7 @@ void prog_init(char **file)
 			file++;
 		}
 	}
-	
+
 	/* Init plugins... */
 	plugins = NULL;
 	

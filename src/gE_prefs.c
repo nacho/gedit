@@ -309,7 +309,8 @@ gE_prefs *prefs_window;
 	gtk_widget_show (prefs->label);
 	
 	prefs->pcmd = gtk_entry_new();
-	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), window->print_cmd);
+	if (window->print_cmd)
+		gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), window->print_cmd);
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->pcmd, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->pcmd);
       
