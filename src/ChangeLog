@@ -1,3 +1,10 @@
+2002-12-17  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-utils.c (g_utf8_strcasestr): use strncmp instead of
+	memcmp
+	(g_utf8_caselessnmatch): ditto
+	(lines_match): fix a cut and paste bug
+
 2002-12-16  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* dialogs/gedit-preferences-dialog.c 

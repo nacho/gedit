@@ -371,7 +371,7 @@ g_utf8_strcasestr(const gchar *haystack, const gchar *needle)
 	/* Not so efficient */
 	while (*p)
 	{
-		if ((memcmp (caseless_haystack, caseless_needle, needle_len) == 0))
+		if ((strncmp (caseless_haystack, caseless_needle, needle_len) == 0))
 		{
 			ret = p;
 			goto finally_1;
@@ -406,7 +406,7 @@ g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
 	gint len_s1;
 	gint len_s2;
 	gboolean ret = FALSE;
-	
+
 	g_return_val_if_fail (s1 != NULL, FALSE);
 	g_return_val_if_fail (s2 != NULL, FALSE);
 	g_return_val_if_fail (n1 > 0, FALSE);
@@ -423,10 +423,10 @@ g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
 	len_s1 = strlen (normalized_s1);
 	len_s2 = strlen (normalized_s2);
 
-	if (len_s1 != len_s2)
+	if (len_s1 < len_s2)
 		goto finally_2;
 
-	ret = (memcmp (normalized_s1, normalized_s2, len_s1) == 0);
+	ret = (strncmp (normalized_s1, normalized_s2, len_s2) == 0);
 	
 finally_2:
 	g_free (normalized_s1);
@@ -532,7 +532,7 @@ lines_match (const GtkTextIter *start,
       /* If it's not the first line, we have to match from the
        * start of the line.
        */
-      if (g_utf8_caselessnmatch (line_text, *lines, strlen (line_text), strlen (*lines)) == 0)
+      if (g_utf8_caselessnmatch (line_text, *lines, strlen (line_text), strlen (*lines)))
         found = line_text;
       else
         found = NULL;
@@ -578,7 +578,6 @@ lines_match (const GtkTextIter *start,
    */
   return lines_match (&next, lines, visible_only, slice, NULL, match_end);
 }
-
 /* strsplit () that retains the delimiter as part of the string. */
 static gchar **
 strbreakup (const char *string,
