@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-09 15:40+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -18,22 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr ""
-
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr ""
 
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Li docid est %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Shell"
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
+msgstr ""
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -95,35 +86,6 @@ msgstr "© 1998, 1999 Alex Roberts eyèt Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit est on pitit èt ahessåve aspougneu di tekse po GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Côper"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Copyî"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Aclaper"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Schaper"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Cloyu"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Rexhe"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Drovî (swap) fitchî .c/.h"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -244,12 +206,12 @@ msgid "Plugin Selector"
 msgstr ""
 
 #: src/gE_prefs_box.c:626
-msgid "Name"
-msgstr "No"
-
-#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr "Eplaeçmint"
+
+#: src/gE_prefs_box.c:626
+msgid "Name"
+msgstr "No"
 
 #. Plugins Settings
 #: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
@@ -313,7 +275,11 @@ msgstr "Purnea"
 msgid "Document"
 msgstr "Documint"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Rexhe"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -322,17 +288,33 @@ msgstr ""
 "Scrijhoz li comande po rexhe\n"
 "Ni rouvyoz nén d' î mete '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Comande po rexhe:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
+msgid " Save, then print "
+msgstr "Schaper, puis rexhe"
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
+
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Rexhe cwand minme"
 
-#: src/gE_print.c:236
-msgid " Save, then print "
-msgstr "Schaper, puis rexhe"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Schaper"
+
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Cloyu"
+
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Drovî (swap) fitchî .c/.h"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -392,12 +374,12 @@ msgid "Untitled"
 msgstr "Sins no"
 
 #: src/menus.c:87
-msgid "_New"
-msgstr "_Novea"
-
-#: src/menus.c:87 src/toolbar.c:38
 msgid "Create a new document"
 msgstr "Fé on novea documint"
+
+#: src/menus.c:87
+msgid "_New"
+msgstr "_Novea"
 
 #: src/menus.c:94
 msgid "Save All"
@@ -460,8 +442,8 @@ msgid "Don't have a scrollbar"
 msgstr ""
 
 #: src/menus.c:154
-msgid "_Always"
-msgstr ""
+msgid "A_lways"
+msgstr "_Todi"
 
 #: src/menus.c:155
 msgid "Always have the scrollbar"
@@ -469,7 +451,7 @@ msgstr ""
 
 #: src/menus.c:158
 msgid "_Automatic"
-msgstr ""
+msgstr "_Åtomatike"
 
 #: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
@@ -576,59 +558,6 @@ msgstr "Dimander divant di mete èl plaece"
 msgid "Replace?"
 msgstr "Mete el plaece?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Novea"
-
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Drovî"
-
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Drovî on fitchî"
-
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Schaper li fitchî do moumint"
-
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Cloyu li fitchî ki vos ovres dsu"
-
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Rexhe li fitchî do moumint"
-
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Côper li tchûze"
-
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Copyî li tchûze"
-
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Aclapler çu k' i gn a è tchapea emacralé"
-
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Trover"
-
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Cwerî on tchinne de tekse"
-
-# "Moussî Foû" est trop grand, çoula fwait on bår di botons trop lårdje
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Foû"
-
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Moussî foû di ci programe chal"
-
 #~ msgid "Font"
 #~ msgstr "Fonte"
 
@@ -676,3 +605,58 @@ msgstr "Moussî foû di ci programe chal"
 
 #~ msgid "Start searching at cursor position"
 #~ msgstr "Cmincer a cwerî al plaece do curseu"
+
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Li docid est %ld.\n"
+
+#~ msgid "Shell"
+#~ msgstr "Shell"
+
+#~ msgid "Cut"
+#~ msgstr "Côper"
+
+#~ msgid "Copy"
+#~ msgstr "Copyî"
+
+#~ msgid "Paste"
+#~ msgstr "Aclaper"
+
+#~ msgid "New"
+#~ msgstr "Novea"
+
+#~ msgid "Open"
+#~ msgstr "Drovî"
+
+#~ msgid "Open a file"
+#~ msgstr "Drovî on fitchî"
+
+#~ msgid "Save the current file"
+#~ msgstr "Schaper li fitchî do moumint"
+
+#~ msgid "Close the current file"
+#~ msgstr "Cloyu li fitchî ki vos ovres dsu"
+
+#~ msgid "Print the current file"
+#~ msgstr "Rexhe li fitchî do moumint"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Côper li tchûze"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copyî li tchûze"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Aclapler çu k' i gn a è tchapea emacralé"
+
+#~ msgid "Find"
+#~ msgstr "Trover"
+
+#~ msgid "Search for a string"
+#~ msgstr "Cwerî on tchinne de tekse"
+
+# "Moussî Foû" est trop grand, çoula fwait on bår di botons trop lårdje
+#~ msgid "Exit"
+#~ msgstr "Foû"
+
+#~ msgid "Exit the program"
+#~ msgstr "Moussî foû di ci programe chal"

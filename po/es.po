@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-09 15:40+0200\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -15,22 +15,13 @@ msgstr ""
 "Date: 1999-01-13 12:44+0100\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "La extensión de correo electrónico de gEdit"
-
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "La extensión de navegador Web de gEdit"
 
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Docid es %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Shell"
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
+msgstr "La extensión de correo electrónico de gEdit"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -94,35 +85,6 @@ msgstr "© 1998, 1999 Alex Roberts y Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit es un editor de texto pequeño y liviano para GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Cortar"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Copiar"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Pegar"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Guardar"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Cerrar"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Impresión"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Abrir (alternar) archivo .c/.h"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -243,12 +205,12 @@ msgid "Plugin Selector"
 msgstr "Selector de extensiones"
 
 #: src/gE_prefs_box.c:626
-msgid "Name"
-msgstr "Nombre"
-
-#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr "Posición"
+
+#: src/gE_prefs_box.c:626
+msgid "Name"
+msgstr "Nombre"
 
 #. Plugins Settings
 #: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
@@ -312,7 +274,11 @@ msgstr "Ventana"
 msgid "Document"
 msgstr "Documento"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Impresión"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -321,17 +287,33 @@ msgstr ""
 "Entre el comando de impresión\n"
 "No olvide de incluir '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Comando de Impresión:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
+msgid " Save, then print "
+msgstr " Guardar, luego imprimir "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Imprimir igual"
 
-#: src/gE_print.c:236
-msgid " Save, then print "
-msgstr " Guardar, luego imprimir "
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Guardar"
+
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Abrir (alternar) archivo .c/.h"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -391,12 +373,12 @@ msgid "Untitled"
 msgstr "SinNombre"
 
 #: src/menus.c:87
-msgid "_New"
-msgstr "_Nuevo"
-
-#: src/menus.c:87 src/toolbar.c:38
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
+
+#: src/menus.c:87
+msgid "_New"
+msgstr "_Nuevo"
 
 #: src/menus.c:94
 msgid "Save All"
@@ -459,7 +441,7 @@ msgid "Don't have a scrollbar"
 msgstr "Sin barra de desfile"
 
 #: src/menus.c:154
-msgid "_Always"
+msgid "A_lways"
 msgstr "_Siempre"
 
 #: src/menus.c:155
@@ -575,58 +557,6 @@ msgstr "Preguntar antes de remplazar"
 msgid "Replace?"
 msgstr "¿Remplazar?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Nuevo"
-
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Abrir"
-
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Abrir un archivo"
-
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Guardar el archivo actual"
-
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Cerrar el archivo actual"
-
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Imprimir el archivo actual"
-
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Cortar la selección"
-
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Copiar la selección"
-
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Pegar el contenido del pisapapeles"
-
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Buscar"
-
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Buscar una cadena de texto"
-
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Salir"
-
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Salir del programa"
-
 #~ msgid "Font"
 #~ msgstr "Fuente"
 
@@ -680,3 +610,57 @@ msgstr "Salir del programa"
 
 #~ msgid "Alex Roberts"
 #~ msgstr "Alex Roberts"
+
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Docid es %ld.\n"
+
+#~ msgid "Shell"
+#~ msgstr "Shell"
+
+#~ msgid "Cut"
+#~ msgstr "Cortar"
+
+#~ msgid "Copy"
+#~ msgstr "Copiar"
+
+#~ msgid "Paste"
+#~ msgstr "Pegar"
+
+#~ msgid "New"
+#~ msgstr "Nuevo"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"
+
+#~ msgid "Open a file"
+#~ msgstr "Abrir un archivo"
+
+#~ msgid "Save the current file"
+#~ msgstr "Guardar el archivo actual"
+
+#~ msgid "Close the current file"
+#~ msgstr "Cerrar el archivo actual"
+
+#~ msgid "Print the current file"
+#~ msgstr "Imprimir el archivo actual"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Cortar la selección"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copiar la selección"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Pegar el contenido del pisapapeles"
+
+#~ msgid "Find"
+#~ msgstr "Buscar"
+
+#~ msgid "Search for a string"
+#~ msgstr "Buscar una cadena de texto"
+
+#~ msgid "Exit"
+#~ msgstr "Salir"
+
+#~ msgid "Exit the program"
+#~ msgstr "Salir del programa"

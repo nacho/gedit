@@ -151,7 +151,7 @@ GnomeUIInfo gedit_scrbar_menu []= {
 	  N_("Don't have a scrollbar"),
 	  scrollbar_none_cb, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("_Always"),
+	{ GNOME_APP_UI_ITEM, N_("A_lways"),
 	  N_("Always have the scrollbar"),
 	  scrollbar_always_cb, NULL },
 
