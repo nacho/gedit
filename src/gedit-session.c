@@ -39,8 +39,8 @@
 #include "gedit-session.h"
 #include "gedit-file.h"
 #include "gedit-debug.h"
-#include "gedit-prefs.h"
 #include "gedit-plugins-engine.h"
+#include "gedit-prefs-manager.h"
 
 /* The master client we use for SM */
 static GnomeClient *master_client = NULL;
@@ -132,7 +132,7 @@ client_die_cb (GnomeClient *client, gpointer data)
 
 	gedit_plugins_engine_save_settings ();
 	
-	gedit_prefs_save_settings ();
+	gedit_prefs_manager_shutdown ();
 
 	/* FIXME: we should enable it, but it crashes here - Paolo */
 	/*

@@ -43,6 +43,7 @@
 #define BONOBO_MDI_CHILD_KEY 	"BonoboMDIChild"
 #define UI_COMPONENT_KEY 	"UIComponent"
 #define BOOK_KEY		"Book"
+#define WINDOW_INFO_KEY		"BonoboMDIWindowInfo"
 
 static void            bonobo_mdi_class_init     (BonoboMDIClass  *);
 static void            bonobo_mdi_instance_init  (BonoboMDI *);
@@ -100,6 +101,7 @@ enum {
 	CHILD_CHANGED,
 	VIEW_CHANGED,
 	TOP_WINDOW_CREATED,
+	TOP_WINDOW_DESTROYED,
 	ALL_WINDOWS_DESTROYED,
 	LAST_SIGNAL
 };
@@ -249,6 +251,17 @@ bonobo_mdi_class_init (BonoboMDIClass *class)
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (BonoboMDIClass, top_window_created),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 
+			      1, 
+			      BONOBO_TYPE_WINDOW);
+
+	mdi_signals[TOP_WINDOW_DESTROYED] = 
+		g_signal_new ("top_window_destroyed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, top_window_destroyed),
 			      NULL, NULL,
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE, 
@@ -558,9 +571,12 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 	GList *win_node;
 	gchar *child_name, *escaped_name;
 	gchar* xml, *cmd, *verb_name, *tip;
+	int accel_num;
 	
 	if(mdi->priv->child_list_path == NULL)
 		return;
+
+	accel_num = g_list_length (mdi->priv->children);
 	
 	win_node = mdi->priv->windows;
 
@@ -571,8 +587,15 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 	tip = g_strdup_printf (_("Activate %s"), child_name);
 	xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
 				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
-	cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+
+	if (accel_num > 9)
+		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
 				" _tip=\"%s\"/>", verb_name, escaped_name, tip);
+	else
+		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+			" _tip=\"%s\" accel=\"*Alt*%d\"/>", verb_name,
+			escaped_name, tip, accel_num);
+
 	
 	while (win_node) 
 	{
@@ -712,7 +735,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 						win = BONOBO_WINDOW (gtk_widget_get_toplevel (
 									GTK_WIDGET (old_book)));
 						mdi->priv->windows = g_list_remove(mdi->priv->windows, win);
-						gtk_widget_destroy (GTK_WIDGET(win));
+						gtk_widget_destroy (GTK_WIDGET (win));
 					}					
 										
 					g_signal_emit (G_OBJECT (mdi), 
@@ -893,6 +916,24 @@ toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 	return FALSE;
 }
 
+static gboolean 
+app_configure_event_handler (GtkWidget *widget, GdkEventConfigure *event)
+{
+	BonoboMDIWindowInfo *window_info;
+
+	g_return_val_if_fail (BONOBO_IS_WINDOW (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+	
+	window_info = (BonoboMDIWindowInfo*) 
+			g_object_get_data (G_OBJECT (widget), WINDOW_INFO_KEY);
+	g_return_val_if_fail (window_info != NULL, FALSE);
+	
+	window_info->width = event->width;
+	window_info->height = event->height;
+	
+	return FALSE;
+}
+
 static void 
 app_clone (BonoboMDI *mdi, BonoboWindow *win, const char *window_role)
 {
@@ -940,6 +981,15 @@ app_clone (BonoboMDI *mdi, BonoboWindow *win, const char *window_role)
 	if (layout_string)
 		g_free(layout_string);
 	*/
+	if (win != NULL)
+	{
+		const BonoboMDIWindowInfo *window_info = bonobo_mdi_get_window_info (win);
+		g_return_if_fail (window_info != NULL);
+
+		gtk_window_set_default_size (GTK_WINDOW (mdi->priv->active_window), 
+					     window_info->width,
+					     window_info->height);				
+	}
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -1008,7 +1058,7 @@ app_close_book (BonoboWindow *win, GdkEventAny *event, BonoboMDI *mdi)
 			if (node == NULL) 
 			{   
 				/* all the views reside in this BonoboWindow */
-				g_signal_emit(G_OBJECT(mdi), 
+				g_signal_emit (G_OBJECT(mdi), 
 					      mdi_signals [REMOVE_CHILD],
 					      0,
 					      child, 
@@ -1112,8 +1162,9 @@ app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 	GtkWidget *window;
 	BonoboWindow *bw;
 	gchar* config_path;
-	BonoboUIContainer* ui_container = NULL;
-  	BonoboUIComponent* ui_component = NULL;
+	BonoboUIContainer *ui_container = NULL;
+  	BonoboUIComponent *ui_component = NULL;
+	BonoboMDIWindowInfo *window_info = NULL;
 
 	gedit_debug (DEBUG_MDI, "");
 
@@ -1140,6 +1191,8 @@ app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 			  G_CALLBACK (toplevel_focus), mdi);
 	g_signal_connect (G_OBJECT (window), "destroy",
 			  G_CALLBACK (app_destroy), mdi);
+	g_signal_connect (G_OBJECT (window), "configure_event",
+	                  G_CALLBACK (app_configure_event_handler), NULL);
 
 	/* Create Container: */
  	ui_container = bonobo_window_get_ui_container (bw);
@@ -1178,7 +1231,10 @@ app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 	mdi->priv->active_child = NULL;
 	mdi->priv->active_view = NULL;
 
+	window_info = g_new0 (BonoboMDIWindowInfo, 1);
+			
 	g_object_set_data (G_OBJECT (bw), UI_COMPONENT_KEY, ui_component);
+	g_object_set_data_full (G_OBJECT (bw), WINDOW_INFO_KEY, window_info, g_free);
 
 	g_signal_emit (G_OBJECT (mdi), mdi_signals [TOP_WINDOW_CREATED], 0, window);
 
@@ -2106,4 +2162,11 @@ bonobo_mdi_get_ui_component_from_window (BonoboWindow* win)
 {
 	return BONOBO_UI_COMPONENT (
 			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
+}
+
+const BonoboMDIWindowInfo *
+bonobo_mdi_get_window_info (BonoboWindow *win)
+{
+	return (const BonoboMDIWindowInfo *) 
+			g_object_get_data (G_OBJECT (win), WINDOW_INFO_KEY);
 }

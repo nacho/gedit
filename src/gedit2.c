@@ -33,16 +33,17 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
+#include <eel/eel-vfs-extensions.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
-#include "gedit-prefs.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-file.h"
 #include "gedit-utils.h"
 #include "gedit-session.h"
-
 #include "gedit-plugins-engine.h"
+#include "gedit-application-server.h"
 
 #ifndef GNOME_ICONDIR
 #define GNOME_ICONDIR "" 
@@ -51,6 +52,11 @@
 GeditMDI *gedit_mdi = NULL;
 gboolean gedit_close_x_button_pressed = FALSE;
 gboolean gedit_exit_button_pressed = FALSE; 
+BonoboObject *gedit_app_server = NULL;
+
+static gboolean quit_option = FALSE;
+static gboolean new_window_option = FALSE;
+static gboolean new_document_option = FALSE;
 
 typedef struct _CommandLineData CommandLineData;
 
@@ -104,6 +110,15 @@ static const struct poptOption options [] =
 	{ "debug", '\0', POPT_ARG_NONE, &debug, 0,
 	  N_("Turn on all debugging messages."), NULL },
 
+	{ "quit", '\0', POPT_ARG_NONE, &quit_option, 0,
+	  N_("Quit an existing instance of gedit"), NULL },
+
+	{ "new-window", '\0', POPT_ARG_NONE, &new_window_option, 0,
+	  N_("Create a new toplevel window in an existing instance of gedit"), NULL },
+
+	{ "new-document", '\0', POPT_ARG_NONE, &new_document_option, 0,
+	  N_("Create a new document in an existing instance of gedit"), NULL },
+
 	{NULL, '\0', 0, NULL, 0}
 };
 
@@ -126,6 +141,13 @@ gedit_set_default_icon ()
 static void 
 gedit_load_file_list (CommandLineData *data)
 {	
+
+	if (!data) 
+	{
+		gedit_file_new ();
+		return;
+	}
+	
 	/* Update UI */
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
@@ -140,17 +162,125 @@ gedit_load_file_list (CommandLineData *data)
 	g_free (data);
 }
 
+
+static CommandLineData *
+gedit_get_command_line_data (GnomeProgram *program)
+{
+	GValue value = { 0, };
+	poptContext ctx;
+	char **args;
+	CommandLineData *data = NULL;
+	int i;
+
+	g_value_init (&value, G_TYPE_POINTER);
+	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
+	ctx = g_value_get_pointer (&value);
+	g_value_unset (&value);
+
+	args = (char**) poptGetArgs(ctx);
+
+
+	if (args) 
+	{	
+		data = g_new0 (CommandLineData, 1);
+		for (i = 0; args[i]; i++) 
+		{
+			if (*args[i] == '+') 
+				data->line_pos = atoi (args[i] + 1);		
+			else
+				data->file_list = g_list_append (data->file_list, 
+								 eel_make_uri_from_shell_arg (args[i]));
+		}
+	}
+	
+	return data;
+}
+
+
+
+static void
+gedit_handle_automation_cmdline (GnomeProgram *program)
+{
+        CORBA_Environment env;
+        GNOME_Gedit_Application server;
+	GNOME_Gedit_Window window;
+	GNOME_Gedit_Document document;
+	CommandLineData *data;
+	GNOME_Gedit_URIList *uri_list;
+	GList *list;
+	int i;
+	
+        CORBA_exception_init (&env);
+
+        server = bonobo_activation_activate_from_id ("OAFIID:GNOME_Gedit_Application",
+                                                     0, NULL, &env);
+	g_return_if_fail (server != NULL);
+
+	if (quit_option)
+		GNOME_Gedit_Application_quit (server, &env);
+		
+	
+	if (new_window_option) 
+		GNOME_Gedit_Application_newWindow (server, &env);
+
+	if (new_document_option) 
+	{
+		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
+		GNOME_Gedit_Window_newDocument (window, &env);
+	}
+
+	data = gedit_get_command_line_data (program);
+
+	if (data) 
+	{
+		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
+
+		/* convert the GList of files into a CORBA sequence */
+
+		uri_list = GNOME_Gedit_URIList__alloc ();
+		uri_list->_maximum = g_list_length (data->file_list);
+		uri_list->_length = uri_list->_maximum;
+		uri_list->_buffer = CORBA_sequence_GNOME_Gedit_URI_allocbuf (uri_list->_length);
+
+		list = data->file_list;
+		i=0;
+		while (list != NULL) 
+		{
+			uri_list->_buffer[i] = CORBA_string_dup ((gchar*)list->data);
+			list = list->next;
+			i++;
+		}
+
+		CORBA_sequence_set_release (uri_list, CORBA_TRUE);
+		GNOME_Gedit_Window_openURIList (window, uri_list, &env);
+
+		document = GNOME_Gedit_Application_getActiveDocument (server, &env);
+
+		GNOME_Gedit_Document_setLinePosition (document, data->line_pos, &env);
+
+		g_list_foreach (data->file_list, (GFunc)g_free, NULL);
+		g_list_free (data->file_list);
+		g_free (data);
+	}
+
+	if (!quit_option)
+	{
+		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
+
+		/* at the very least, we focus the active window */
+		GNOME_Gedit_Window_grabFocus (window, &env);
+	}
+
+	bonobo_object_release_unref (server, &env);
+        CORBA_exception_free (&env);
+}
+
 int
 main (int argc, char **argv)
 {
-	GValue value = { 0, };
     	GnomeProgram *program;
-	poptContext ctx;
-	char **args;
 	gboolean restored = FALSE;
-
-	CommandLineData *data = NULL;
-	gint i;
+	CORBA_Object factory;
 
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -165,12 +295,28 @@ main (int argc, char **argv)
 			    GNOME_PARAM_APP_DATADIR, DATADIR,
 			    NULL);
 
+	/* check whether we are running already */
+        factory = bonobo_activation_activate_from_id
+                ("OAFIID:GNOME_Gedit_Factory",
+                 Bonobo_ACTIVATION_FLAG_EXISTING_ONLY,
+                 NULL, NULL);
+
+        if (factory != NULL) 
+	{
+		/* there is an instance already running, so send
+		 * commands to it if needed
+		 */
+                gedit_handle_automation_cmdline (program);
+
+                /* and we're done */
+                exit (0);
+        }
+
 	/* Set default icon */
 	gedit_set_default_icon ();
 	
 	/* Load user preferences */
-	gedit_prefs_init ();
-	gedit_prefs_load_settings ();
+	gedit_prefs_manager_init ();
 	gedit_recent_init ();
 
 	/* Init plugins engine */
@@ -185,34 +331,22 @@ main (int argc, char **argv)
 	if (gedit_session_is_restored ())
 		restored = gedit_session_load ();
 
-	if (!restored) {
-		/* Parse args and build the list of files to be loaded at startup */
-		g_value_init (&value, G_TYPE_POINTER);
-		g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
-		ctx = g_value_get_pointer (&value);
-		g_value_unset (&value);
+	if (!restored) 
+	{
+		CommandLineData *data;
 
-		args = (char**) poptGetArgs(ctx);
-	
-		data = g_new0 (CommandLineData, 1);
-
-		if (args)	
-			for (i = 0; args[i]; i++) 
-			{
-				if (*args[i] == '+') 
-					data->line_pos = atoi (args[i] + 1);		
-				else
-					data->file_list = g_list_append (data->file_list, args[i]);
-			}
+		data = gedit_get_command_line_data (program);
 		
 		gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
 
 		/* Open the first top level window */
 		bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi), NULL);
 	}
+
+	gedit_app_server = gedit_application_server_new ();
 	
 	gtk_main();
-		
+	
 	return 0;
 }
 

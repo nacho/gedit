@@ -36,7 +36,7 @@
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"
-#include "gedit-prefs.h"
+#include "gedit-prefs-manager.h"
 
 #define MIN_NUMBER_WINDOW_WIDTH 20
 
@@ -370,22 +370,27 @@ gedit_view_init (GeditView  *view)
 	 *  Set tab, fonts, wrap mode, colors, etc. according
 	 *  to preferences 
 	 */
-	if (!gedit_settings->use_default_font)
-		gedit_view_set_font (view, FALSE, gedit_settings->editor_font);
-
-	if (!gedit_settings->use_default_colors)
+	if (!gedit_prefs_manager_get_use_default_font ())
 	{
-		background = gedit_settings->background_color;
-		text = gedit_settings->text_color;
-		selection = gedit_settings->selection_color;
-		sel_text = gedit_settings->selected_text_color;
+		gchar *editor_font = gedit_prefs_manager_get_editor_font ();
+		
+		gedit_view_set_font (view, FALSE, editor_font);
+
+		g_free (editor_font);
+	}
+
+	if (!gedit_prefs_manager_get_use_default_colors ())
+	{
+		background = gedit_prefs_manager_get_background_color ();
+		text = gedit_prefs_manager_get_text_color ();
+		selection = gedit_prefs_manager_get_selection_color ();
+		sel_text = gedit_prefs_manager_get_selected_text_color ();
 
 		gedit_view_set_colors (view, FALSE,
 				&background, &text, &selection, &sel_text);
 	}	
 
-	gedit_view_set_wrap_mode (view, gedit_settings->wrap_mode);
-
+	gedit_view_set_wrap_mode (view, gedit_prefs_manager_get_wrap_mode ());
 		
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
 	
@@ -463,13 +468,13 @@ gedit_view_new (GeditDocument *doc)
 				      gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
 				      0, TRUE, 0.0, 1.0);
 
-	if (gedit_settings->show_line_numbers)
+	if (gedit_prefs_manager_get_display_line_numbers ())
 		gedit_view_show_line_numbers (view, TRUE);
 			
 	gtk_widget_show_all (GTK_WIDGET (view));
 
 	/* Set tab size: this function must be called after show */
-	gedit_view_set_tab_size (view, gedit_settings->tab_size);
+	gedit_view_set_tab_size (view, gedit_prefs_manager_get_tabs_size ());
 
 	g_signal_connect (GTK_TEXT_BUFFER (doc),
 			  "changed",
@@ -641,29 +646,32 @@ gedit_view_set_colors (GeditView* view, gboolean def, GdkColor* backgroud, GdkCo
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	if (!def)
-	{
-		g_return_if_fail (backgroud 	!= NULL);
-		g_return_if_fail (text 		!= NULL);
-		g_return_if_fail (selection 	!= NULL);
-		g_return_if_fail (sel_text 	!= NULL);
+	{	
+		if (backgroud != NULL)
+			gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_NORMAL, backgroud);
 
-		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_NORMAL, backgroud);
-
-		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_NORMAL, text);
+		if (text != NULL)			
+			gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_NORMAL, text);
 	
-		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_SELECTED, selection);
+		if (selection != NULL)
+		{
+			gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_SELECTED, selection);
 
-		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_SELECTED, sel_text);		
+			gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_ACTIVE, selection);
+		}
 
-		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_ACTIVE, selection);
+		if (sel_text != NULL)
+		{
+			gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_SELECTED, sel_text);		
 
-		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-					GTK_STATE_ACTIVE, sel_text);		
+			gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+						GTK_STATE_ACTIVE, sel_text);		
+		}
 	}
 	else
 	{

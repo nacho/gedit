@@ -58,8 +58,18 @@ typedef struct {
 	void 		(*child_changed)	(BonoboMDI *mdi, BonoboMDIChild *child);
 	void 		(*view_changed)		(BonoboMDI *mdi, GtkWidget *view);
 	void 		(*top_window_created)	(BonoboMDI *mdi, BonoboWindow *window);
+	void 		(*top_window_destroyed)	(BonoboMDI *mdi, BonoboWindow *window);
 	void		(*all_windows_destroyed)(BonoboMDI *mdi);
 } BonoboMDIClass;
+
+typedef struct _BonoboMDIWindowInfo BonoboMDIWindowInfo;
+
+struct _BonoboMDIWindowInfo {
+	gint width;
+	gint height;
+	
+	GdkWindowState state;
+};
 
 /*
  * description of BonoboMDI signals:
@@ -172,7 +182,12 @@ GtkWidget		*bonobo_mdi_get_view_from_window	(BonoboMDI *mdi,
 GList          		*bonobo_mdi_get_children		(BonoboMDI *mdi);
 GList          		*bonobo_mdi_get_windows			(BonoboMDI *mdi);
 
-BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow* win);
+BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow *win);
+
+/* Utility function to generate unique window roles */
+char *bonobo_mdi_generate_window_role (void);
+
+const BonoboMDIWindowInfo *bonobo_mdi_get_window_info		(BonoboWindow *win);
 
 /* Utility function to generate unique window roles */
 char *bonobo_mdi_generate_window_role (void);

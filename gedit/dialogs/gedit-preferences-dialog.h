@@ -62,6 +62,4 @@ GtkType    	gedit_preferences_dialog_get_type 	(void) G_GNUC_CONST;
 
 GtkWidget*	gedit_preferences_dialog_new		(GtkWindow *parent);
 
-gboolean 	gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg);
-
 #endif /* __GEDIT_PREFERENCES_DIALOG_H__ */

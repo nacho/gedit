@@ -1,3 +1,37 @@
+2002-07-04  Paolo Maggi <maggi@athena.polito.it>
+
+	* dialogs/gedit-dialog-replace.c: fixed bug #86333
+
+2002-07-04  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-document.c: save used encoding while loading a file,
+	try to use "ISO-8859-15" as last resource while loading a file.
+	
+	* gedit-file.c (gedit_file_save_as): fix bug #87276
+
+	* gedit-prefs-manager.c (GPM_DEFAULT_BACKUP_COPY_EXTENSION): Changed
+	the default to ~.  This is also reflected in the new GConf
+	schema file.
+
+2002-07-03  Federico Mena Quintero  <federico@ximian.com>
+
+	* gedit-prefs-manager.c (GPM_DEFAULT_CREATE_BACKUP_COPY): Changed
+	the default to true.  This is also reflected in the new GConf
+	schema file.
+
+2002-07-03  Paolo Maggi <maggi@athena.polito.it>
+
+	* bonobo-mdi.[ch] (bonobo_mdi_get_window_info)
+	new method
+	(app_clone): set the size of the new window to the
+	one of the cloned one
+	
+2002-07-03  Paolo Maggi <maggi@athena.polito.it>
+
+	* gnome-vfs-helpers.[ch]: removed
+
+	* *.c: s/gnome_vfs_x/eel
+
 2002-06-28  James Willcox  <jwillcox@cs.indiana.edu>
 
 	* dialogs/gedit-dialog-goto-line.c:  Only allow digits in the entry
@@ -25,6 +59,24 @@
 
 2002-06-14  Paolo Maggi <maggi@athena.polito.it>
 
+	* gedit-prefs-manager.[ch]: new files
+
+	* Makefile.am:
+	* gedit-commands.c:
+	* gedit-document.c:
+	* gedit-file.c:
+	* gedit-mdi.[ch]:
+	* gedit-print.c:
+	* gedit-recent.c:
+	* gedit-session.c:
+	* gedit-undo-manager.c:
+	* gedit-view.c:
+	* gedit2.c:
+	* dialogs/gedit-preferences-dialog.[ch]:
+	* dialogs/gedit-preferences.glade2: use gedit-prefs-manager API
+
+2002-06-14  Paolo Maggi <maggi@athena.polito.it>
+
 	* src/gedit-preferences.glade2: fixed a typo
 
 2002-06-11  Federico Mena Quintero  <federico@ximian.com>
@@ -44,6 +96,11 @@
 	(hidetoshi.tajima@sun.com) to fix the localedir on Solaris.  Fixes
 	#83614.
 
+2002-05-30  James Willcox <jwillcox@cs.indiana.edu>
+
+	* bonobo-mdi.c (child_list_menu_add_item):
+	Assign keyboard accelerators to items in the "Documents" menu.
+
 2002-05-29  Paolo Maggi <maggi@athena.polito.it>
 
 	* bonobo-mdi-session.c: save and restore window role
@@ -58,6 +115,15 @@
 	(gedit_mdi_app_created_handler): set unique window role using gen_role
 
 	* dialogs/gedit-dialog-replace.c: fix bug #83401
+
+2002-05-28  James Willcox <jwillcox@cs.indiana.edu>
+ 
+	* gedit-application-server.[ch], gedit-document-server.[ch],
+	gedit-window-server.[ch]: new files, provides an implementation for a
+	CORBA interface to gedit.
+ 
+	* gedit2.c: added command line arguments for using the new CORBA
+	interface.  Lets you open files, create new windows, etc.
 
 2002-05-27  Paolo Maggi <maggi@athena.polito.it>
 

@@ -67,8 +67,9 @@
 #include <bonobo/bonobo-i18n.h>
 
 #include <libgnomevfs/gnome-vfs.h>
+#include <eel/eel-vfs-extensions.h>
+#include <eel/eel-string.h>
 
-#include "gnome-vfs-helpers.h"
 #include "gedit-utils.h"
 
 static GQuark user_data_id = 0;
@@ -86,9 +87,21 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 {
 	GtkWidget *msgbox;
 	gint ret;
-	gchar* uri;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
 	
-	uri = gnome_vfs_x_format_uri_for_display (file_name);
+	full_formatted_uri = eel_format_uri_for_display (file_name);
+	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
+	
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 50);
+	g_return_val_if_fail (uri_for_display != NULL, FALSE);
+
+	g_free (full_formatted_uri);
+
 	msgbox = gtk_message_dialog_new (parent,
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_QUESTION,
@@ -96,8 +109,8 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 			_("A file named ''%s'' already exists.\n"
 			  "Do you want to replace it with the "
 			  "one you are saving?"), 
-			uri);
-	g_free (uri);
+			uri_for_display);
+	g_free (uri_for_display);
 
 	/* Add Don't Replace button */
 	gedit_dialog_add_button (GTK_DIALOG (msgbox), 

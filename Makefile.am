@@ -2,15 +2,20 @@
 
 SUBDIRS = src pixmaps po plugins help omf-install
 
-GEDIT_SCHEMA = gedit.schemas
-
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir  = $(datadir)/applications
 desktop_in_files = gedit.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-
 @INTLTOOL_KEYS_RULE@
+
+schemadir = $(sysconfdir)/gconf/schemas
+schema_DATA = gedit.schemas
+
+serverdir = $(libdir)/bonobo/servers
+server_in_files = GNOME_Gedit.server.in
+server_DATA = $(server_in_files:.server.in=.server)
+@INTLTOOL_SERVER_RULE@
 
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	gedit.1 \
@@ -18,14 +23,8 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	$(desktop_DATA) \
 	TODO gedit.keys.in xmldocs.make \
 	intltool-extract.in intltool-merge.in intltool-update.in \
-	$(GEDIT_SCHEMA)
-
-
-pixmapsdir = $(datadir)/pixmaps
-pixmaps_DATA = 
-
-schemadir = $(sysconfdir)/gconf/schemas
-schema_DATA = gedit.schemas
+	$(schema_DATA) \
+	$(server_in_files)
 
 install-data-local:
 	        if test -z "$(DESTDIR)" ; then \

@@ -3,7 +3,8 @@
  * gedit-print.c
  * This file is part of gedit
  *
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi
+ * Copyright (C) 2002  Paolo Maggi  
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +23,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -36,6 +37,7 @@
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-master-preview.h>
+#include <eel/eel-string.h>
 
 #include <string.h>	/* For strlen */
 
@@ -43,7 +45,7 @@
 #include "gedit-print.h"
 #include "gedit-debug.h"
 #include "gedit-document.h"
-#include "gedit-prefs.h"
+#include "gedit-prefs-manager.h"
 
 #define CM(v) ((v) * 72.0 / 2.54)
 #define A4_WIDTH (210.0 * 72 / 25.4)
@@ -84,6 +86,11 @@ struct _GeditPrintJobInfo {
 
 	gint 			 first_line_to_print;
 	gint			 printed_lines;
+
+	gint 			 print_line_numbers;
+	gboolean		 print_header;
+	gint			 tabs_size;
+	GtkWrapMode		 print_wrap_mode;
 };
 
 
@@ -131,10 +138,13 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 {	
 	GeditPrintJobInfo *pji;
 	
+	gchar *print_font_body;
+	gchar *print_font_header;
+	gchar *print_font_numbers;
+	
 	gedit_debug (DEBUG_PRINT, "");
 	
 	g_return_val_if_fail (doc != NULL, NULL);
-	g_return_val_if_fail (gedit_settings != NULL, NULL);
 
 	if (gedit_print_config == NULL)
 	{
@@ -161,14 +171,17 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	pji->margin_bottom = CM (1);
 	pji->header_height = CM (0);
 
-	pji->font_body = gnome_font_find_closest_from_full_name (
-					gedit_settings->print_font_body);
+	print_font_body = gedit_prefs_manager_get_print_font_body ();
+	print_font_header = gedit_prefs_manager_get_print_font_header ();
+	print_font_numbers = gedit_prefs_manager_get_print_font_numbers ();
+	
+	pji->font_body = gnome_font_find_closest_from_full_name (print_font_body);
+	pji->font_header = gnome_font_find_closest_from_full_name (print_font_header);
+	pji->font_numbers = gnome_font_find_closest_from_full_name (print_font_numbers);
 
-	pji->font_header = gnome_font_find_closest_from_full_name (
-					gedit_settings->print_font_header);
-
-	pji->font_numbers = gnome_font_find_closest_from_full_name (
-					gedit_settings->print_font_numbers);
+	g_free (print_font_body);
+	g_free (print_font_header);
+	g_free (print_font_numbers);
 
 	if ((pji->font_body == NULL) || 
 	    (pji->font_header == NULL) ||
@@ -182,8 +195,8 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 		
 		return NULL;
 	}
-
-	if (gedit_settings->print_header)
+	
+	if (gedit_prefs_manager_get_print_header ())
 		pji->header_height = 2.5 * gnome_font_get_size (pji->font_header);
 	else
 		pji->header_height = 0;
@@ -193,6 +206,10 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	pji->first_line_to_print = 1;
 	pji->printed_lines = 0;
 
+	pji->print_line_numbers = gedit_prefs_manager_get_print_line_numbers ();
+	pji->print_header = gedit_prefs_manager_get_print_header ();
+	pji->tabs_size = gedit_prefs_manager_get_tabs_size ();
+	pji->print_wrap_mode = gedit_prefs_manager_get_print_wrap_mode ();
 		
 	pji->config = gedit_print_config;
 	gnome_print_config_ref (pji->config);
@@ -252,7 +269,7 @@ gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
 		gnome_print_convert_distance (&pji->margin_bottom, unit, GNOME_PRINT_PS_UNIT);
 	}
 
-	if (gedit_settings->print_line_numbers > 0)
+	if (pji->print_line_numbers  > 0)
 	{
 		gchar* num_str;
 
@@ -336,7 +353,9 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 	gdouble y, x, len;
 	gchar* l_text;
 	gchar* r_text;
-
+	gchar* uri;
+	gchar* uri_to_print;
+	
 	gedit_debug (DEBUG_PRINT, "");	
 
 	g_return_if_fail (pji != NULL);
@@ -351,7 +370,13 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 	/* Print left text */
 	x = pji->margin_right;
 	
-	l_text = g_strdup_printf (_("File: %s"), gedit_document_get_uri (pji->doc));
+	uri = gedit_document_get_uri (pji->doc);
+	uri_to_print = eel_str_middle_truncate (uri, 60);
+	g_free (uri);
+
+	l_text = g_strdup_printf (_("File: %s"), uri_to_print);
+	g_free (uri_to_print);
+
 	gnome_print_moveto (pji->print_ctx, x, y);
 	gnome_print_show (pji->print_ctx, l_text);
 
@@ -637,9 +662,7 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 	gdouble printable_page_width;
 	ArtPoint space_advance;
 	gint space;
-
 	gint chars_in_this_line = 0;
-	gint tab_size = gedit_settings->tab_size;
 	
 	gedit_debug (DEBUG_PRINT, "");
 
@@ -680,7 +703,7 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 			/* FIXME: use a tabs array */
 			gint num_of_equivalent_spaces;
 			
-			num_of_equivalent_spaces = tab_size - ((chars_in_this_line - 1) % tab_size); 
+			num_of_equivalent_spaces = pji->tabs_size - ((chars_in_this_line - 1) % pji->tabs_size); 
 			chars_in_this_line += num_of_equivalent_spaces - 1;
 			
 			line_width += (num_of_equivalent_spaces * space_advance.x); 
@@ -736,7 +759,7 @@ gedit_print_line_number (GeditPrintJobInfo *pji, gdouble y)
 
 	gedit_debug (DEBUG_PRINT, "");
 
-	if ((pji->printed_lines + 1) % gedit_settings->print_line_numbers != 0)
+	if ((pji->printed_lines + 1) % pji->print_line_numbers != 0)
 	       return;	
 		
 	num_str = g_strdup_printf ("%d", line_num);
@@ -765,7 +788,6 @@ gedit_print_line (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, 
 	gdouble x;
 	const gchar* p;
 	gint chars_in_this_line = 0;
-	gint tab_size = gedit_settings->tab_size;
 	
 	gedit_debug (DEBUG_PRINT, "");
 
@@ -814,7 +836,9 @@ gedit_print_line (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, 
 			
 			glyph = gnome_font_lookup_default (pji->font_body, ' ');
 			
-			num_of_equivalent_spaces = tab_size - ((chars_in_this_line - 1) % tab_size); 
+			num_of_equivalent_spaces = pji->tabs_size - 
+				((chars_in_this_line - 1) % pji->tabs_size); 
+
 			chars_in_this_line += num_of_equivalent_spaces - 1;
 			
 			for (i = 0; i < num_of_equivalent_spaces; ++i)
@@ -866,7 +890,8 @@ gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *
 			y = gedit_print_create_new_page (pji);
 		}
 
-		if (!gedit_settings->print_wrap_lines)
+		/* FIXME: "word wrap" - Paolo */
+		if (pji->print_wrap_mode == GTK_WRAP_NONE)
 			return y;
 
 	}
@@ -887,7 +912,7 @@ gedit_print_create_new_page (GeditPrintJobInfo *pji)
 
 	g_free (pn_str);
 
-	if (gedit_settings->print_header)
+	if (pji->print_header)
 	{	
 		gedit_print_header (pji, +pji->page_num);
 		return pji->page_height - pji->margin_top - pji->header_height;

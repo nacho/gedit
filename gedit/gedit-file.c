@@ -36,23 +36,45 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 
-#include "gnome-vfs-helpers.h"
+#include <eel/eel-vfs-extensions.h>
+
 #include "gedit2.h"
 #include "gedit-file.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-mdi.h"
 #include "gedit-recent.h" 
-#include "gedit-prefs.h"
 #include "gedit-file-selector-util.h"
 #include "gedit-plugins-engine.h"
 #include "gnome-recent-model.h"
+#include "gedit-prefs-manager.h"
 
-static gboolean gedit_file_open_real (const gchar* file_name, GeditMDIChild* child);
-static gboolean gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child);
-
+static gchar 	*get_dirname_from_uri 		(const char *uri);
+static gboolean  gedit_file_open_real 		(const gchar* file_name, 
+						 GeditMDIChild* child);
+static gboolean  gedit_file_save_as_real 	(const gchar* file_name, 
+						 GeditMDIChild *child);
 
 static gchar* gedit_default_path = NULL;
+
+static gchar *
+get_dirname_from_uri (const char *uri)
+{
+	GnomeVFSURI *vfs_uri;
+	char *name;
+
+	/* Make VFS version of URI. */
+	vfs_uri = gnome_vfs_uri_new (uri);
+	if (vfs_uri == NULL) {
+		return NULL;
+	}
+
+	/* Extract name part. */
+	name = gnome_vfs_uri_extract_dirname (vfs_uri);
+	gnome_vfs_uri_unref (vfs_uri);
+
+	return name;
+}
 
 
 void 
@@ -134,15 +156,13 @@ gedit_file_open (GeditMDIChild *active_child)
 		gint i;
 		for (i = 0; files[i]; ++i)
 		{
+			gedit_debug (DEBUG_FILE, "[%d]: %s", i, files[i]);
+
 			if (gedit_file_open_real (files[i], active_child))
 			{
-				gchar *uri;
 				gchar *uri_utf8;
 				
-				uri = gnome_vfs_x_format_uri_for_display (files[i]);
-				uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
-				g_free (uri);
-				
+				uri_utf8 = eel_format_uri_for_display (files[i]);	
 				if (uri_utf8 != NULL)
 				{
 					gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
@@ -155,7 +175,7 @@ gedit_file_open (GeditMDIChild *active_child)
 					if (gedit_default_path != NULL)
 						g_free (gedit_default_path);
 
-					gedit_default_path = gnome_vfs_x_uri_get_dirname (files[i]);
+					gedit_default_path = get_dirname_from_uri (files[i]);
 				}				
 			}
 			
@@ -176,8 +196,9 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
 
-	uri = gnome_vfs_x_make_uri_canonical (file_name);
+	uri = eel_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
+	gedit_debug (DEBUG_FILE, "Canonical uri: %s", uri);
 
 	uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 	if (uri_utf8 == NULL)
@@ -199,7 +220,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri_utf8, error,
+			gedit_utils_error_reporting_loading_file (uri, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -224,7 +245,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri_utf8, error,
+			gedit_utils_error_reporting_loading_file (uri, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -319,11 +340,10 @@ gedit_file_save (GeditMDIChild* child)
 		raw_uri = gedit_document_get_raw_uri (doc);
 		g_return_val_if_fail (raw_uri != NULL, TRUE);
 		
-		canonical_uri = gnome_vfs_x_make_uri_canonical (raw_uri);
+		canonical_uri = eel_make_uri_canonical (raw_uri);
 		g_return_val_if_fail (canonical_uri != NULL, TRUE);
 
 		/* canonical_uri is not valid utf8 */
-		
 		canonical_uri_utf8 = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
 		g_return_val_if_fail (canonical_uri_utf8 != NULL, TRUE);
 
@@ -362,14 +382,14 @@ gedit_file_save_as (GeditMDIChild *child)
 	{
 		path = (gedit_default_path != NULL) ? 
 			g_strdup (gedit_default_path) : NULL;
-		fname = uri;
+		fname = g_strdup (uri);
 	}
 	else
 	{
-		fname = gnome_vfs_x_uri_get_basename (uri);
+		fname = eel_uri_get_basename (uri);
 
 		if (gedit_utils_uri_has_file_scheme (uri))
-			path = gnome_vfs_x_uri_get_dirname (uri);
+			path = get_dirname_from_uri (uri);
 		else
 			path = (gedit_default_path != NULL) ? 
 				g_strdup (gedit_default_path) : NULL;
@@ -410,7 +430,7 @@ gedit_file_save_as (GeditMDIChild *child)
 			if (gedit_default_path != NULL)
 				g_free (gedit_default_path);
 
-			gedit_default_path = gnome_vfs_x_uri_get_dirname (file);
+			gedit_default_path = get_dirname_from_uri (file);
 		}
 		else
 			gedit_utils_flash_va (_("The document has not been saved."));
@@ -440,7 +460,7 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	uri = gnome_vfs_x_make_uri_canonical (file_name);
+	uri = eel_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
 	ret = gedit_document_save_as (doc, uri, &error);
@@ -516,13 +536,19 @@ gedit_file_exit (void)
 	
 	gedit_plugins_engine_save_settings ();
 	
-	gedit_prefs_save_settings ();
-
+	gedit_prefs_manager_shutdown ();
+	
 	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
 
 	g_object_unref (G_OBJECT (gedit_mdi));
 
 	gedit_debug (DEBUG_FILE, "Unref gedit_mdi: DONE");
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_app_server.");
+
+	bonobo_object_unref (gedit_app_server);
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_app_server: DONE");
 
 	gtk_main_quit ();
 }
@@ -583,7 +609,7 @@ gedit_file_revert (GeditMDIChild *child)
 					GTK_WINDOW (gedit_get_active_window ()));
 
 		g_error_free (error);
-		
+
 		gedit_utils_flash_va (_("The document has not been reverted."));
 
 		g_free (uri);
@@ -610,7 +636,7 @@ gedit_file_make_uri_from_shell_arg (const char *location)
 	
 	gedit_debug (DEBUG_FILE, "LOCATION: %s", location);
 	
-	uri = gnome_vfs_x_make_uri_from_shell_arg (location);
+	uri = eel_make_uri_from_shell_arg (location);
 
 	gedit_debug (DEBUG_FILE, "URI: %s", uri);
 
@@ -723,9 +749,9 @@ gedit_file_make_canonical_uri_from_input (const char *location)
 	
 	gedit_debug (DEBUG_FILE, "");
 	
-	uri = gnome_vfs_x_make_uri_from_input (location);
+	uri = eel_make_uri_from_input (location);
 
-	canonical_uri = gnome_vfs_x_make_uri_canonical (uri);
+	canonical_uri = eel_make_uri_canonical (uri);
 
 	g_free (uri);
 

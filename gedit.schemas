@@ -1,295 +1,403 @@
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/apps/gedit-2/default-TRUE-booleans</key>
-      <applyto>/apps/gedit-2/use-default-colors</applyto>
-      <applyto>/apps/gedit-2/toolbar-visible</applyto>
-      <applyto>/apps/gedit-2/toolbar-view-tooltips</applyto>
-      <applyto>/apps/gedit-2/statusbar-visible</applyto>
-      <applyto>/apps/gedit-2/print-header</applyto>
-      <applyto>/apps/gedit-2/print-wrap-lines</applyto>
-      <applyto>/apps/gedit-2/statusbar-view-cursor-position</applyto>
-      <applyto>/apps/gedit-2/statusbar-view-overwrite-mode</applyto>
-      <owner>gedit</owner>
-      <default>TRUE</default>
-      <type>bool</type>
-      <locale name="C">
-        <short>Default TRUE booleans</short>
-        <long>Default TRUE booleans</long>
-      </locale>
-    </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/default-FALSE-booleans</key>
-      <applyto>/apps/gedit-2/use-default-font</applyto>
-      <applyto>/apps/gedit-2/auto-save</applyto>
-      <applyto>/apps/gedit-2/create-backup-copy</applyto>
-      <applyto>/apps/gedit-2/show-line-numbers</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/font/use_default_font</key>
+      <applyto>/apps/gedit-2/preferences/editor/font/use_default_font</applyto>
       <owner>gedit</owner>
       <type>bool</type>
       <default>FALSE</default>
       <locale name="C">
-        <short>Default FALSE booleans</short>
-        <long>Default FALSE booleans</long>
+	<short>Use Default Font</short>
+	<long>Whether to use the system's default font for editing text
+	instead of a font specific to gedit.  If this option is turned
+	off, then the font named in the "Editor Font" option will be
+	used instead of the system font.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/editor-font</key>
-      <applyto>/apps/gedit-2/editor-font</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/font/editor_font</key>
+      <applyto>/apps/gedit-2/preferences/editor/font/editor_font</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>Courier Medium 12</default>
       <locale name="C">
-        <short>Default font</short>
-        <long>Default font used by the editor</long>
+	<short>Editor Font</short>
+	<long>A custom font that will be used for the editing area.
+	This will only take effect if the "Use Default Font" option is
+	turned off.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/background-color</key>
-      <applyto>/apps/gedit-2/background-color</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/colors/use_default_colors</key>
+      <applyto>/apps/gedit-2/preferences/editor/colors/use_default_colors</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Use Default Colors</short>
+	<long>Whether to use the system's default colors for the
+	editing area.  If this option is turned off, then the colors
+	of the editing area will be those specified in the "Background
+	Color", "Text Color", "Selected Text Color", and "Selection
+	Color" options.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/colors/background_color</key>
+      <applyto>/apps/gedit-2/preferences/editor/colors/background_color</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>#ffffffffffff</default>
       <locale name="C">
-        <short>Default background color</short>
-        <long>Default background color</long>
+	<short>Background Color</short>
+	<long>Background color for unselected text in the editing
+	area.  This will only take effect if the "Use Default Colors"
+	option is turned off.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/text-color</key>
-      <applyto>/apps/gedit-2/text-color</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/colors/text_color</key>
+      <applyto>/apps/gedit-2/preferences/editor/colors/text_color</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>#000000000000</default>
       <locale name="C">
-        <short>Default text color</short>
-        <long>Default text color</long>
+	<short>Text Color</short>
+	<long>Foreground color for the unselected text in the editing
+	area.  This will only take effect if the "Use Default Colors"
+	option is turned off.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/selected-text_color</key>
-      <applyto>/apps/gedit-2/selected-text-color</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/colors/selected_text_color</key>
+      <applyto>/apps/gedit-2/preferences/editor/colors/selected_text_color</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>#ffffffffffff</default>
       <locale name="C">
-        <short>Default selected text color</short>
-        <long>Default selected text color</long>
+	<short>Selected Text Color</short>
+	<long>Foreground color for selected text in the editing area.
+	This will only take effect if the "Use Default Colors" option
+	is turned off.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/selection-color</key>
-      <applyto>/apps/gedit-2/selection-color</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/colors/selection_color</key>
+      <applyto>/apps/gedit-2/preferences/editor/colors/selection_color</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>#000000009c9c</default>
       <locale name="C">
-        <short>Default selection color</short>
-        <long>Default selection color</long>
+	<short>Selection Color</short>
+	<long>Background color for selected text in the editing area.
+	This will only take effect if the "Use Default Colors" option
+	is turned off.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/backup-copy-extension</key>
-      <applyto>/apps/gedit-2/backup-copy-extension</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/create_backup_copy</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/create_backup_copy</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Create Backup Copies</short>
+	<long>Whether gedit should create backup copies for the files
+	it saves.  You can set the backup file extension with the
+	"Backup Copy Extension" option.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/backup_copy_extension</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/backup_copy_extension</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>~</default>
       <locale name="C">
-        <short>Extension of the backup files</short>
-        <long>Extension of the backup files (it is added to the actual file name)</long>
+	<short>Backup Copy Extension</short>
+	<long>Extension or suffix to use for backup file names.  This
+	will only take effect if the "Create Backup Copies" option is
+	turned on.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/auto-save-interval</key>
-      <applyto>/apps/gedit-2/auto-save-interval</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/auto_save</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/auto_save</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+	<short>Auto Save</short>
+	<long>Whether gedit should automatically save modified files
+	after a time interval.  You can set the time interval with the
+	"Auto Save Interval" option.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/auto_save_interval</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/auto_save_interval</applyto>
       <owner>gedit</owner>
       <type>int</type>
       <default>10</default>
       <locale name="C">
-        <short>Auto save interval in minutes</short>
-        <long>Auto save interval in minutes</long>
+	<short>Auto Save Interval</short>
+	<long>Number of minutes after which gedit will automatically
+	save modified files.  This will only take effect if the "Auto
+	Save" option is turned on.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/save-encoding</key>
-      <applyto>/apps/gedit-2/save-encoding</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/save_encoding</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/save_encoding</applyto>
       <owner>gedit</owner>
-      <type>int</type>
-      <default>0</default>
+      <type>string</type>
+      <default>GEDIT_SAVE_ALWAYS_UTF8</default>
       <locale name="C">
-        <short>Save encoding</short>
-        <long>Save encoding (0: Always use UTF-8, 1: Use current locale if possible,
-	2: Use current locale if the file already used it)</long>
+	<short>Encoding for Saving</short>
+	<long>The encoding method to use for saving files.  Possible
+	values are "GEDIT_SAVE_ALWAYS_UTF8" for mandatory UTF-8
+	saving, and "GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE" if you
+	want gedit to try to convert the document it is saving to your
+	current locale's encoding.  If the conversion is successful,
+	it will be used.  Otherwise, UTF-8 will be used.  Note that
+	the values are case-sensitive, so make sure they appear
+	exactly as mentioned here.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/undo-levels</key>
-      <applyto>/apps/gedit-2/undo-levels</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/undo/undo_actions_limit</key>
+      <applyto>/apps/gedit-2/preferences/editor/undo/undo_actions_limit</applyto>
       <owner>gedit</owner>
       <type>int</type>
       <default>25</default>
       <locale name="C">
-        <short>Undo levels</short>
-        <long>Undo levels (-1: no limits)</long>
+	<short>Undo Actions Limit</short>
+	<long>Maximum number of actions that gedit will be able to
+	undo or redo.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/wrap-mode</key>
-      <applyto>/apps/gedit-2/wrap-mode</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/wrap_mode/wrap_mode</key>
+      <applyto>/apps/gedit-2/preferences/editor/wrap_mode/wrap_mode</applyto>
       <owner>gedit</owner>
-      <type>int</type>
-      <default>1</default>
+      <type>string</type>
+      <default>GTK_WRAP_WORD</default>
       <locale name="C">
-        <short>Wrap mode</short>
-        <long>Wrap mode (0: no wrap, 1: wrap lines at word boundaries,
-        2: wrap lines at char boundaries)</long>
+	<short>Line Wrapping Mode</short>
+	<long>Specifies how to wrap long lines in the editing area.
+	Use "GTK_WRAP_NONE" for no wrapping, "GTK_WRAP_WORD" for
+	wrapping at word boundaries, and "GTK_WRAP_CHAR" for wrapping
+	at individual character boundaries.  Note that the values are
+	case-sensitive, so make sure they appear exactly as mentioned
+	here.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/tab-size</key>
-      <applyto>/apps/gedit-2/tab-size</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/tabs/tabs_size</key>
+      <applyto>/apps/gedit-2/preferences/editor/tabs/tabs_size</applyto>
       <owner>gedit</owner>
       <type>int</type>
       <default>8</default>
       <locale name="C">
-        <short>Tab size</short>
-        <long>Tab size</long>
+	<short>Tab Size</short>
+	<long>Specifies the number of spaces that should be displayed
+	instead of Tab characters.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/toolbar-buttons-style</key>
-      <applyto>/apps/gedit-2/toolbar-buttons-style</applyto>
+      <key>/schemas/apps/gedit-2/preferences/editor/line_numbers/display_line_numbers</key>
+      <applyto>/apps/gedit-2/preferences/editor/line_numbers/display_line_numbers</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+	<short>Display Line Numbers</short>
+	<long>Whether gedit should display line numbers in the editing
+	area.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/toolbar/toolbar_visible</key>
+      <applyto>/apps/gedit-2/preferences/ui/toolbar/toolbar_visible</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Toolbar is Visible</short>
+	<long>Whether the toolbar should be visible in editing windows.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/toolbar/toolbar_buttons_style</key>
+      <applyto>/apps/gedit-2/preferences/ui/toolbar/toolbar_buttons_style</applyto>
+      <owner>gedit</owner>
+      <type>string</type>
+      <default>GEDIT_TOOLBAR_SYSTEM</default>
+      <locale name="C">
+	<short>Toolbar Buttons Style</short>
+	<long>Style for the toolbar buttons.  Possible values are
+	"GEDIT_TOOLBAR_SYSTEM" to use the system's default style,
+	"GEDIT_TOOLBAR_ICONS" to display icons only, and
+	"GEDIT_TOOLBAR_ICONS_AND_TEXT" to display both icons and text.
+	Note that the values are case-sensitive, so make sure they
+	appear exactly as mentioned here.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/statusbar/statusbar_visible</key>
+      <applyto>/apps/gedit-2/preferences/ui/statusbar/statusbar_visible</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Status Bar is Visible</short>
+	<long>Whether the status bar at the bottom of editing windows
+	should be visible.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/statusbar/statusbar_show_cursor_position</key>
+      <applyto>/apps/gedit-2/preferences/ui/statusbar/statusbar_show_cursor_position</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Show Cursor Position</short>
+	<long>Whether the status bar should show the cursor position
+	in editing windows.  Make sure you turn on the "Status Bar is
+	Visible" option for this to take effect.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/statusbar/statusbar_show_overwrite_mode</key>
+      <applyto>/apps/gedit-2/preferences/ui/statusbar/statusbar_show_overwrite_mode</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Show Overwrite Mode</short>
+	<long>Whether the status bar should show the insert/overwrite
+	mode in editing windows.  Make sure you turn on the "Status
+	Bar is Visible" option for this to take effect.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/page/print_header</key>
+      <applyto>/apps/gedit-2/preferences/print/page/print_header</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Print Header</short>
+	<long>Whether gedit should include a document header when
+	printing documents.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/page/print_wrap_mode</key>
+      <applyto>/apps/gedit-2/preferences/print/page/print_wrap_mode</applyto>
+      <owner>gedit</owner>
+      <type>string</type>
+      <default>GTK_WRAP_CHAR</default>
+      <locale name="C">
+	<short>Printing Line Wrapping Mode</short>
+	<long>Specifies how to wrap long lines for printing.  Use
+	"GTK_WRAP_NONE" for no wrapping, "GTK_WRAP_WORD" for wrapping
+	at word boundaries, and "GTK_WRAP_CHAR" for wrapping at
+	individual character boundaries.  Note that the values are
+	case-sensitive, so make sure they appear exactly as mentioned
+	here.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/page/print_line_numbers</key>
+      <applyto>/apps/gedit-2/preferences/print/page/print_line_numbers</applyto>
       <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
-        <short>Toolbar buttons style</short>
-        <long>Toolbar buttons style (0: According to system preferences, 1: icons,
-        2: icons and text)</long>
+	<short>Print Line Numbers</short>
+	<long>If this value is 0, then no line numbers will be
+	inserted when printing a document.  Otherwise, gedit will
+	print line numbers every such number of lines.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/mdi-mode</key>
-      <applyto>/apps/gedit-2/mdi-mode</applyto>
-      <owner>gedit</owner>
-      <type>int</type>
-      <default>0</default>
-      <locale name="C">
-        <short>MDI Mode</short>
-        <long>MDI Mode (0: Notebook, 1: Toplevel, 2: Modal)</long>
-      </locale>
-    </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/mdi-tabs-position</key>
-      <applyto>/apps/gedit-2/mdi-tabs-position</applyto>
-      <owner>gedit</owner>
-      <type>int</type>
-      <default>2</default>
-      <locale name="C">
-        <short>MDI tabs position</short>
-        <long>MDI tabs position (0: Left, 1: Right, 2: Top, 3: Bottom)</long>
-      </locale>
-    </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/print-line-numbers</key>
-      <applyto>/apps/gedit-2/print-line-numbers</applyto>
-      <owner>gedit</owner>
-      <type>int</type>
-      <default>0</default>
-      <locale name="C">
-        <short>Print line numbers every x lines</short>
-        <long>Print line numbers every x lines (x == 0: no numbers)</long>
-      </locale>
-    </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/print-font-body</key>
-      <applyto>/apps/gedit-2/print-font-body</applyto>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_body</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_body</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>Courier 9</default>
       <locale name="C">
-        <short>Font used to print the body of a document</short>
-        <long>Font used to print the body of a document</long>
+	<short>Body Font for Printing</short>
+	<long>Specifies the font to use for a document's body when
+	printing documents.</long>
       </locale>
     </schema>
-    
+
     <schema>
-      <key>/schemas/apps/gedit-2/print-font-header</key>
-      <applyto>/apps/gedit-2/print-font-header</applyto>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_header</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_header</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>Helvetica 11</default>
       <locale name="C">
-        <short>Font used to print page headers</short>
-        <long>Font used to print page headers</long>
+	<short>Header Font for Printing</short>
+	<long>Specifies the font to use for page headers when printing
+	a document.  This will only take effect if the "Print Header"
+	option is turned on.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/print-font-numbers</key>
-      <applyto>/apps/gedit-2/print-font-numbers</applyto>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_numbers</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_numbers</applyto>
       <owner>gedit</owner>
       <type>string</type>
       <default>Helvetica 8</default>
       <locale name="C">
-        <short>Font used to print line numbers</short>
-        <long>Font used to print line numbers</long>
+	<short>Line Number Font for Printing</short>
+	<long>Specifies the font to use for line numbers when
+	printing.  This will only take effect if the "Print Line
+	Numbers" option is non-zero.</long>
       </locale>
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/window-width</key>
-      <applyto>/apps/gedit-2/window-width</applyto>
+      <key>/schemas/apps/gedit-2/preferences/ui/recents/max_recents</key>
+      <applyto>/apps/gedit-2/preferences/ui/recents/max_recents</applyto>
       <owner>gedit</owner>
       <type>int</type>
-      <default>700</default>
+      <default>5</default>
       <locale name="C">
-        <short>Default window width</short>
-        <long>Default window width</long>
+	<short>Maximum Recent Files</short>
+	<long>Specifies the maximum number of recently opened files
+	that will be displayed in the "Recent Files" submenu.</long>
       </locale>
     </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/window-height</key>
-      <applyto>/apps/gedit-2/window-height</applyto>
-      <owner>gedit</owner>
-      <type>int</type>
-      <default>500</default>
-      <locale name="C">
-        <short>Default window eight</short>
-        <long>Default window eight</long>
-      </locale>
-    </schema>
-
-    <schema>
-      <key>/schemas/apps/gedit-2/max-recents</key>
-      <applyto>/apps/gedit-2/max-recents</applyto>
-      <owner>gedit</owner>
-      <type>int</type>
-      <default>4</default>
-      <locale name="C">
-        <short>Max number of recent file</short>
-        <long>Max number of files in the Recent Files menu</long>
-      </locale>
-    </schema>
-
-
-
   </schemalist>
 </gconfschemafile>

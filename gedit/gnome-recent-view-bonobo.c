@@ -183,7 +183,7 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 
 		/* Maybe we should use a gnome-vfs call here?? */
 		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
-	
+		
 		escaped_name = gnome_recent_util_escape_underlines (uri);
 
 		tip =  g_strdup_printf (_("Open %s"), uri);

@@ -31,7 +31,9 @@
 #include <libgnomeui/libgnomeui.h>
 #include <glib/gunicode.h>
 #include <libgnome/gnome-i18n.h>
-#include <libgnomevfs/gnome-vfs-uri.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <eel/eel-vfs-extensions.h>
+#include <eel/eel-string.h>
 
 
 #include <string.h>
@@ -39,7 +41,6 @@
 #include "gedit-utils.h"
 #include "gedit2.h"
 #include "bonobo-mdi.h"
-#include "gnome-vfs-helpers.h"
 #include "gedit-document.h"
 
 /* =================================================== */
@@ -187,40 +188,16 @@ gedit_utils_flash_va (gchar *format, ...)
 	g_free (msg);
 }
 
-static gboolean
-istr_has_prefix (const char *haystack, const char *needle)
-{
-	const char *h, *n;
-	char hc, nc;
-
-	/* Eat one character at a time. */
-	h = haystack == NULL ? "" : haystack;
-	n = needle == NULL ? "" : needle;
-	do {
-		if (*n == '\0') {
-			return TRUE;
-		}
-		if (*h == '\0') {
-			return FALSE;
-		}
-		hc = *h++;
-		nc = *n++;
-		hc = g_ascii_tolower (hc);
-		nc = g_ascii_tolower (nc);
-	} while (hc == nc);
-	return FALSE;
-}
-
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
 {
 	gchar* canonical_uri = NULL;
 	gboolean res;
 	
-	canonical_uri = gnome_vfs_x_make_uri_canonical (uri);
+	canonical_uri = eel_make_uri_canonical (uri);
 	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
-	res = istr_has_prefix (canonical_uri, "file");
+	res = eel_istr_has_prefix (canonical_uri, "file:");
 	
 	g_free (canonical_uri);
 
@@ -231,16 +208,21 @@ gboolean
 gedit_utils_is_uri_read_only (const gchar* uri)
 {
 	gchar* file_uri = NULL;
+	gchar* canonical_uri = NULL;
+
 	gint res;
 
 	/* FIXME: all remote files are marked as readonly */
 	if (!gedit_utils_uri_has_file_scheme (uri))
 		return TRUE;
 			
-	file_uri = gnome_vfs_x_format_uri_for_display (uri);
-		
-	res = access (file_uri, W_OK);
+	canonical_uri = eel_make_uri_canonical (uri);
+	file_uri = gnome_vfs_unescape_string_for_display (canonical_uri);
+	
+	/* Note that: strlen ("file://") == 7 */	
+	res = access (file_uri + 7, W_OK);
 
+	g_free (canonical_uri);
 	g_free (file_uri);
 
 	return res;	
@@ -756,55 +738,6 @@ gedit_text_iter_forward_search (const GtkTextIter *iter,
  * ERROR REPORTING CODE
  ************************************************************/
 
-/* Note: eel_string_ellipsize_* that use a length in pixels
- * rather than characters can be found in eel_gdk_extensions.h
- * 
- */
-gchar *
-gedit_utils_str_middle_truncate (const gchar *string, guint truncate_length)
-{
-	gchar *truncated;
-	guint length;
-	guint num_left_chars;
-	guint num_right_chars;
-
-	const gchar delimter[] = "...";
-	const guint delimter_length = strlen (delimter);
-	const guint min_truncate_length = delimter_length + 2;
-
-	if (string == NULL) {
-		return NULL;
-	}
-
-	/* It doesn't make sense to truncate strings to less than
-	 * the size of the delimiter plus 2 characters (one on each
-	 * side)
-	 */
-	if (truncate_length < min_truncate_length) {
-		return g_strdup (string);
-	}
-
-	length = strlen (string);
-
-	/* Make sure the string is not already small enough. */
-	if (length <= truncate_length) {
-		return g_strdup (string);
-	}
-
-	/* Find the 'middle' where the truncation will occur. */
-	num_left_chars = (truncate_length - delimter_length) / 2;
-	num_right_chars = truncate_length - num_left_chars - delimter_length + 1;
-
-	truncated = g_new (char, truncate_length + 1);
-
-	strncpy (truncated, string, num_left_chars);
-	strncpy (truncated + num_left_chars, delimter, delimter_length);
-	strncpy (truncated + num_left_chars + delimter_length, string + length - num_right_chars + 1, 
-		 num_right_chars);
-	
-	return truncated;
-}
-
 #define MAX_URI_IN_DIALOG_LENGTH 50
 
 void
@@ -825,13 +758,13 @@ gedit_utils_error_reporting_loading_file (
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (error != NULL);
 	
-	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+	full_formatted_uri = eel_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -852,22 +785,23 @@ gedit_utils_error_reporting_loading_file (
 			break;			 
 
 		case GNOME_VFS_ERROR_NOT_SUPPORTED:
-			scheme_string = gnome_vfs_x_uri_get_scheme (uri);
+			scheme_string = eel_uri_get_scheme (uri);
                 
-			if (scheme_string != NULL)
+			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
 				error_message = g_strdup_printf (
 					_("Could not open the file \"%s\" because "
 					  "gedit cannot handle %s: locations."),
                                 	uri_for_display, scheme_string);
-
-				g_free (scheme_string);
 			}
 			else
 				error_message = g_strdup_printf (
 					_("Could not open the file \"%s\""),
                                 	uri_for_display);
 	
+			if (scheme_string != NULL)
+				g_free (scheme_string);
+
         	        break;
 				
 		case GNOME_VFS_ERROR_WRONG_FORMAT:
@@ -926,17 +860,32 @@ gedit_utils_error_reporting_loading_file (
 		 	* But this case is also hit for legitimate web addresses when
 		 	* the proxy is set up wrong.
 		 	*/
-			vfs_uri = gnome_vfs_uri_new (uri);
-                	error_message = g_strdup_printf (
-				_("Could not open the file \"%s\" because no host \"%s\" " 
-				  "could be found.\n\n"
-                		  "Please, check that you typed the location correctly "
-				  "and that your proxy settings are correct and then "
-				  "try again."),
-				uri_for_display,
-				gnome_vfs_uri_get_host_name (vfs_uri));
+			{
+				gchar *host_name;
+				vfs_uri = gnome_vfs_uri_new (uri);
+				
+				if (vfs_uri == NULL)
+					host_name = g_strdup ("XXX");
+				else
+				{
+					host_name = eel_make_valid_utf8 (
+							gnome_vfs_uri_get_host_name (vfs_uri));
 
-			gnome_vfs_uri_unref (vfs_uri);
+					gnome_vfs_uri_unref (vfs_uri);		
+				}
+				
+                		error_message = g_strdup_printf (
+					_("Could not open the file \"%s\" because no host \"%s\" " 
+				  	  "could be found.\n\n"
+                		  	  "Please, check that you typed the location correctly "
+				  	  "and that your proxy settings are correct and then "
+				  	  "try again."),
+					  uri_for_display,
+					  host_name);
+
+				g_free (host_name);
+			}
+
 			break;
 
 		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
@@ -1040,13 +989,13 @@ gedit_utils_error_reporting_saving_file (
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (error != NULL);
 	
-	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+	full_formatted_uri = eel_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -1095,13 +1044,13 @@ gedit_utils_error_reporting_reverting_file (
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (error != NULL);
 	
-	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+	full_formatted_uri = eel_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -1122,22 +1071,23 @@ gedit_utils_error_reporting_reverting_file (
 			break;			 
 
 		case GNOME_VFS_ERROR_NOT_SUPPORTED:
-			scheme_string = gnome_vfs_x_uri_get_scheme (uri);
+			scheme_string = eel_uri_get_scheme (uri);
                 
-			if (scheme_string != NULL)
+			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
 				error_message = g_strdup_printf (
 					_("Could not revert the file \"%s\" because "
 					  "gedit cannot handle %s: locations."),
                                 	uri_for_display, scheme_string);
-
-				g_free (scheme_string);
 			}
 			else
 				error_message = g_strdup_printf (
 					_("Could not revert the file \"%s\"."),
                                 	uri_for_display);
 	
+			if (scheme_string != NULL)
+				g_free (scheme_string);
+
         	        break;
 				
 		case GNOME_VFS_ERROR_WRONG_FORMAT:
@@ -1182,16 +1132,31 @@ gedit_utils_error_reporting_reverting_file (
 		 	* But this case is also hit for legitimate web addresses when
 		 	* the proxy is set up wrong.
 		 	*/
-			vfs_uri = gnome_vfs_uri_new (uri);
-                	error_message = g_strdup_printf (
-				_("Could not revert the file \"%s\" because no host \"%s\" " 
-				  "could be found.\n\n"
-                		  "Please, check that your proxy settings are correct and "
-				  "try again."),
-				uri_for_display,
-				gnome_vfs_uri_get_host_name (vfs_uri));
+			{
+				gchar *host_name;
+				vfs_uri = gnome_vfs_uri_new (uri);
+				
+				if (vfs_uri == NULL)
+					host_name = g_strdup ("XXX");
+				else
+				{
+					host_name = eel_make_valid_utf8 (
+							gnome_vfs_uri_get_host_name (vfs_uri));
 
-			gnome_vfs_uri_unref (vfs_uri);
+					gnome_vfs_uri_unref (vfs_uri);		
+				}
+				
+				error_message = g_strdup_printf (
+					_("Could not revert the file \"%s\" because no host \"%s\" " 
+				  	  "could be found.\n\n"
+                		  	  "Please, check that your proxy settings are correct and "
+				  	  "try again."),
+					  uri_for_display,
+					  host_name);
+
+				g_free (host_name);
+			}
+
 			break;
             
 		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:

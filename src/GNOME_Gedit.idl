@@ -1,0 +1,39 @@
+/*
+ * Interface for gedit
+ */
+
+#include <Bonobo.idl>
+
+module GNOME {
+
+	module Gedit {
+
+		/* URIs are just plain strings, but we use a typedef to make
+		 * the interface definitions clearer.
+		 */
+		typedef string URI;
+		typedef sequence<URI> URIList;
+
+		interface Document : Bonobo::Unknown {
+			oneway void setLinePosition (in long line);
+		};
+
+		interface Window : Bonobo::Unknown {
+			oneway void openURIList (in URIList locations);
+			oneway void grabFocus ();
+			Document newDocument ();
+		};
+
+
+		interface Application : Bonobo::Unknown {
+			Window newWindow ();
+
+			Document getActiveDocument ();
+			Window getActiveWindow ();
+
+			oneway void quit ();
+		};
+
+
+	};
+};

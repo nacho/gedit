@@ -34,7 +34,7 @@
 
 #include "gedit-undo-manager.h"
 #include "gedit-debug.h"
-#include "gedit-prefs.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-marshal.h"
 
 typedef struct _GeditUndoAction  		GeditUndoAction;
@@ -672,15 +672,19 @@ gedit_undo_manager_free_first_n_actions (GeditUndoManager *um, gint n)
 static void 
 gedit_undo_manager_check_list_size (GeditUndoManager *um)
 {
+	gint undo_levels;
+	
 	gedit_debug (DEBUG_UNDO, "TODO");
 
 	g_return_if_fail (GEDIT_IS_UNDO_MANAGER (um));
 	g_return_if_fail (um->priv != NULL);
 	
-	if (gedit_settings->undo_levels < 1)
+	undo_levels = gedit_prefs_manager_get_undo_actions_limit ();
+	
+	if (undo_levels < 1)
 		return;
 
-	if (gedit_undo_manager_get_number_of_groups (um) > gedit_settings->undo_levels)
+	if (gedit_undo_manager_get_number_of_groups (um) > undo_levels)
 	{
 		GeditUndoAction *undo_action;
 		GList* last;
@@ -707,7 +711,7 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 
 		} while ((undo_action->order_in_group > 1) || 
 			 (gedit_undo_manager_get_number_of_groups (um) > 
-			  gedit_settings->undo_levels));
+			  undo_levels));
 	}	
 }
 

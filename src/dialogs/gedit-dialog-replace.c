@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-dialog-goto-line.c
+ * gedit-dialog-replace.c
  * This file is part of gedit
  *
  * Copyright (C) 2001 Paolo Maggi 
@@ -466,7 +466,7 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 		GtkWidget *message_dlg;
 
 		message_dlg = gtk_message_dialog_new (
-				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_WINDOW (dialog->dialog),
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
@@ -537,7 +537,7 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 		GtkWidget *message_dlg;
 
 		message_dlg = gtk_message_dialog_new (
-				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_WINDOW (dialog->dialog),
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
@@ -711,7 +711,7 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	if (replaced_items <= 0)
 	{
 		message_dlg = gtk_message_dialog_new (
-			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_WINDOW (dialog->dialog),
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_INFO,
 			GTK_BUTTONS_OK,
@@ -720,7 +720,7 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	else
 	{	
 		message_dlg = gtk_message_dialog_new (
-			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_WINDOW (dialog->dialog),
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_INFO,
 			GTK_BUTTONS_OK,

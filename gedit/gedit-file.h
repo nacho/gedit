@@ -32,6 +32,7 @@
 #define __GEDIT_FILE_H__
 
 #include "gedit-mdi-child.h"
+#include "gnome-recent-view.h"
 
 void 		gedit_file_new 		(void);
 void 		gedit_file_open 	(GeditMDIChild *active_child);

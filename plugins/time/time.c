@@ -128,6 +128,7 @@ static char *
 get_time (const gchar* format)
 {
   	gchar *out = NULL;
+	gchar *out_utf8 = NULL;
   	time_t clock;
   	struct tm *now;
   	size_t out_length = 0;
@@ -144,7 +145,18 @@ get_time (const gchar* format)
 	}
   	while (strftime (out, out_length, format, now) == 0);
   	
-  	return out;
+	if (g_utf8_validate (out, -1, NULL))
+		out_utf8 = out;
+	else
+	{
+		out_utf8 = g_locale_to_utf8 (out, -1, NULL, NULL, NULL);
+		g_free (out);
+
+		if (out_utf8 == NULL)
+			out_utf8 = g_strdup (" ");
+	}
+	
+  	return out_utf8;
 }
 
 static void

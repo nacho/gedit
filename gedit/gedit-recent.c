@@ -33,7 +33,7 @@
 #endif
 
 #include "gedit-recent.h"
-#include "gedit-prefs.h"
+#include "gedit-prefs-manager.h"
 
 
 static GnomeRecentModel *model;
@@ -48,5 +48,5 @@ gedit_recent_get_model (void)
 void
 gedit_recent_init (void)
 {
-	model = gnome_recent_model_new ("gedit-2", gedit_settings->max_recents);
+	model = gnome_recent_model_new ("gedit-2", gedit_prefs_manager_get_max_recents ());
 }

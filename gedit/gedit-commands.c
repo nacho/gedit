@@ -44,7 +44,6 @@
 #include "gedit-view.h"
 #include "gedit-file.h"
 #include "gedit-print.h"
-#include "gedit-prefs.h"
 #include "dialogs/gedit-dialogs.h"
 #include "dialogs/gedit-preferences-dialog.h"
 
@@ -385,72 +384,25 @@ gedit_cmd_tools_plugin_manager (BonoboUIComponent *uic, gpointer user_data, cons
 void
 gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GtkWidget *dlg;
-	gint ret;
+	static GtkWidget *dlg = NULL;
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	dlg = gedit_preferences_dialog_new (
-			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
-
-	do
+	if (dlg != NULL)
 	{
-		GError *error = NULL;
+		gtk_window_present (GTK_WINDOW (dlg));
+		gtk_window_set_transient_for (GTK_WINDOW (dlg),	
+					      GTK_WINDOW (gedit_get_active_window ()));
+
+		return;
+	}
 		
-		ret = gtk_dialog_run (GTK_DIALOG (dlg));
+	dlg = gedit_preferences_dialog_new (GTK_WINDOW (gedit_get_active_window ()));
 
-		switch (ret)
-		{
-			case GTK_RESPONSE_OK:
-				if (gedit_preferences_dialog_update_settings (GEDIT_PREFERENCES_DIALOG (dlg)))
-				{
-					gedit_mdi_update_ui_according_to_preferences (gedit_mdi);
-					gedit_prefs_save_settings ();
-
-					gtk_widget_hide (dlg);
-				}
-				else
-				{
-					GtkWidget *message_dlg;
-
-					message_dlg = gtk_message_dialog_new (
-						GTK_WINDOW (bonobo_mdi_get_active_window (
-								BONOBO_MDI (gedit_mdi))),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_OK,
-						_("Impossible to update gedit settings."));
-
-					gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), 
-							GTK_RESPONSE_OK);
-
-					gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
-
-					gtk_dialog_run (GTK_DIALOG (message_dlg));
-  					gtk_widget_destroy (message_dlg);
-				}
-
-				break;
-								
-			case GTK_RESPONSE_HELP:
-				gnome_help_display ("gedit.xml", "gedit-prefs", &error);
+	g_signal_connect (G_OBJECT (dlg), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed), &dlg);
 	
-				if (error != NULL)
-				{
-					g_warning (error->message);
-
-					g_error_free (error);
-				}
-
-				break;
-
-			default:
-				gtk_widget_hide (dlg);
-		}	
-		
-	} while (GTK_WIDGET_VISIBLE (dlg));
-
-	gtk_widget_destroy (dlg);
+	gtk_widget_show (dlg);
 }
 
 void 
@@ -480,10 +432,12 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 		"Paolo Maggi <maggi@athena.polito.it>",
 		"Chema Celorio <chema@ximian.com>", 
 		"James Willcox <jwillcox@cs.indiana.edu>",
+		"Federico Mena Quintero <federico@ximian.com>",
 		NULL
 	};
 	
 	gchar *documenters[] = {
+		"Sun GNOME Documentation Team <gdocteam@sun.com>",
 		"Eric Baudais <baudais@okstate.edu>",
 		NULL
 	};

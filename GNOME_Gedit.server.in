@@ -1,0 +1,18 @@
+<oaf_info>
+
+<oaf_server iid="OAFIID:GNOME_Gedit_Factory" type="exe" location="gedit">
+  <oaf_attribute name="repo_ids" type="stringv">
+    <item value="IDL:GNOME/ObjectFactory:1.0"/>
+  </oaf_attribute>
+  <oaf_attribute name="name" type="string" _value="gedit automation factory"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:GNOME_Gedit_Application" type="factory" location="OAFIID:GNOME_Gedit_Factory">
+  <oaf_attribute name="repo_ids" type="stringv">
+	<item value="IDL:Bonobo/Unknown:1.0"/>
+        <item value="IDL:GNOME/Gedit/Application:1.0"/>
+  </oaf_attribute>
+  <oaf_attribute name="name" type="string" _value="gedit application"/>
+</oaf_server>
+
+</oaf_info>

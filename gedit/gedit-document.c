@@ -42,9 +42,9 @@
 
 #include <libgnome/libgnome.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <eel/eel-vfs-extensions.h>
 
-#include "gedit-prefs.h"
-#include "gnome-vfs-helpers.h"
+#include "gedit-prefs-manager.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
@@ -62,10 +62,15 @@
 #define GEDIT_MAX_PATH_LEN  2048
 #endif
 
+#define DEFAULT_ENCODING "ISO-8859-15"
+
 struct _GeditDocumentPrivate
 {
 	gchar		*uri;
 	gint 		 untitled_number;	
+
+
+	gchar		*encoding;
 
 	gchar		*last_searched_text;
 	gchar		*last_replace_text;
@@ -434,14 +439,18 @@ gedit_document_new_with_uri (const gchar *uri, GError **error)
 void 		
 gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 {
+	gboolean auto_save;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
 	g_return_if_fail (document->priv != NULL);
 
+	auto_save = gedit_prefs_manager_get_auto_save ();
+	
 	if (readonly) 
 	{
-		if (gedit_settings->auto_save && (document->priv->auto_save_timeout > 0))
+		if (auto_save && (document->priv->auto_save_timeout > 0))
 		{
 			gedit_debug (DEBUG_DOCUMENT, "Remove autosave timeout");
 
@@ -451,12 +460,17 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 	}
 	else
 	{
-		if (gedit_settings->auto_save && (document->priv->auto_save_timeout <= 0))
+		if (auto_save && (document->priv->auto_save_timeout <= 0))
 		{
+			gint auto_save_interval;
+			
 			gedit_debug (DEBUG_DOCUMENT, "Install autosave timeout");
 
+			auto_save_interval = 
+				gedit_prefs_manager_get_auto_save_interval ();
+				
 			document->priv->auto_save_timeout = g_timeout_add 
-				(gedit_settings->auto_save_interval*1000*60,
+				(auto_save_interval * 1000 * 60,
 		 		 (GSourceFunc)gedit_document_auto_save_timeout,
 		  		 document);		
 		}
@@ -550,15 +564,10 @@ gedit_document_get_uri (const GeditDocument* doc)
 	else
 	{
 		gchar *res;
-		gchar *uri = g_filename_to_utf8 (doc->priv->uri, -1, NULL, NULL, NULL);
 
-		if (uri == NULL)
-			return g_strdup (_("Invalid file name"));
+		res = eel_format_uri_for_display (doc->priv->uri);
+		g_return_val_if_fail (res != NULL, g_strdup (_("Invalid file name")));
 		
-		res = gnome_vfs_x_format_uri_for_display (uri);
-
-		g_free (uri);
-
 		return res;
 	}
 }
@@ -572,17 +581,39 @@ gedit_document_get_short_name (const GeditDocument* doc)
 		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
 	else
 	{
-		gchar *res;
-		gchar *uri = g_filename_to_utf8 (doc->priv->uri, -1, NULL, NULL, NULL);
+		gchar *basename;
+		gchar *utf8_basename;
 		
-		if (uri == NULL)
-			return g_strdup (_("Invalid file name"));
+		basename = eel_uri_get_basename (doc->priv->uri);
 
-		res = gnome_vfs_x_uri_get_basename (uri);
+		if (basename != NULL) 
+		{
+			gboolean filenames_are_locale_encoded;
+		       	filenames_are_locale_encoded = g_getenv ("G_BROKEN_FILENAMES") != NULL;
 
-		g_free (uri);
-
-		return res;
+			if (filenames_are_locale_encoded) 
+			{
+				utf8_basename = g_locale_to_utf8 (basename, -1, NULL, NULL, NULL);
+				
+				if (utf8_basename != NULL) 
+				{
+					g_free (basename);
+					return utf8_basename;
+				} 
+			}
+			else 
+			{
+				if (g_utf8_validate (basename, -1, NULL)) 
+					return basename;
+			}
+			
+			/* there are problems */
+			utf8_basename = eel_make_valid_utf8 (basename);
+			g_free (basename);
+			return utf8_basename;
+		}
+		else
+			return 	g_strdup (_("Invalid file name"));
 	}
 }
 
@@ -606,8 +637,8 @@ gedit_document_auto_save_timeout (GeditDocument *doc)
 
 	g_return_val_if_fail (!gedit_document_is_readonly (doc), FALSE);
 
-	/* Romove timeout if now gedit_settings->auto_save is FALSE */
-	if (!gedit_settings->auto_save) 
+	/* Remove timeout if now auto_save is FALSE */
+	if (!gedit_prefs_manager_get_auto_save ()) 
 		return FALSE;
 
 	if (!gedit_document_get_modified (doc))
@@ -662,7 +693,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
-	res = gnome_vfs_x_read_entire_file (uri, &file_size, &file_contents);
+	res = eel_read_entire_file (uri, &file_size, &file_contents);
 
 	gedit_debug (DEBUG_DOCUMENT, "End reading %s (result: %s)", uri, gnome_vfs_result_to_string (res));
 	
@@ -685,9 +716,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 			
 			converted_file_contents = g_locale_to_utf8 (file_contents, file_size,
 					NULL, &bytes_written, &conv_error); 
-			
-			g_free (file_contents);
-
+						
 			if ((conv_error != NULL) || 
 			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
 			{
@@ -695,18 +724,64 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 				if (conv_error != NULL)
 					g_error_free (conv_error);
 
-				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
-					     GEDIT_ERROR_INVALID_UTF8_DATA,
-					     _("Invalid UTF-8 data"));
-				
 				if (converted_file_contents != NULL)
 					g_free (converted_file_contents);
 				
-				return FALSE;
+				/* Try to convert it to UTF-8 from default encoding */
+				converted_file_contents = g_convert (file_contents, file_size, 
+						"UTF-8", DEFAULT_ENCODING,
+						NULL, &bytes_written, &conv_error); 
+							
+				if ((conv_error != NULL) || 
+			    		!g_utf8_validate (converted_file_contents, bytes_written, NULL))		
+				{
+					/* Coversion failed */	
+					if (conv_error != NULL)
+						g_error_free (conv_error);
+
+					g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
+						     GEDIT_ERROR_INVALID_UTF8_DATA,
+					     	     _("Invalid UTF-8 data"));
+				
+					if (converted_file_contents != NULL)
+						g_free (converted_file_contents);
+				
+					g_free (file_contents);
+
+					return FALSE;
+				}
+				else
+				{
+					if (doc->priv->encoding != NULL)
+						g_free (doc->priv->encoding);	
+				
+					doc->priv->encoding = g_strdup (DEFAULT_ENCODING);
+				}
+					
 			}
+			else
+			{
+				const gchar *encoding = NULL;
+				g_get_charset(&encoding);
+				
+				if (doc->priv->encoding != NULL)
+					g_free (doc->priv->encoding);	
+				
+				doc->priv->encoding = g_strdup (encoding);
+			}
+			
+			g_free (file_contents);
 
 			file_contents = converted_file_contents;
 			file_size = bytes_written;
+		}
+		else
+		{
+			if (doc->priv->encoding != NULL)
+			{
+				g_free (doc->priv->encoding);	
+				doc->priv->encoding = NULL;
+			}
 		}
 
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
@@ -873,6 +948,9 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 gboolean 
 gedit_document_save (GeditDocument* doc, GError **error)
 {	
+	gboolean auto_save;
+	gboolean create_backup_copy;
+
 	gboolean ret;
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -880,7 +958,10 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 
-	if (gedit_settings->auto_save) 
+	auto_save = gedit_prefs_manager_get_auto_save ();
+	create_backup_copy = gedit_prefs_manager_get_create_backup_copy ();
+		
+	if (auto_save) 
 	{
 		if (doc->priv->auto_save_timeout > 0)
 		{
@@ -889,17 +970,23 @@ gedit_document_save (GeditDocument* doc, GError **error)
 		}
 	}
 	
-	ret = gedit_document_save_as_real (doc, doc->priv->uri, 
-			gedit_settings->create_backup_copy, error);
+	ret = gedit_document_save_as_real (doc, 
+					   doc->priv->uri, 
+					   create_backup_copy, 
+					   error);
 
 	if (ret)
 		doc->priv->last_save_was_manually = TRUE;
 
-	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
+		gint auto_save_interval = 
+			gedit_prefs_manager_get_auto_save_interval ();
+
 		doc->priv->auto_save_timeout =
-			g_timeout_add (gedit_settings->auto_save_interval*1000*60,
-				       (GSourceFunc)gedit_document_auto_save, doc);
+			g_timeout_add (auto_save_interval * 1000 * 60,
+				       (GSourceFunc) gedit_document_auto_save, 
+				       doc);
 	}
 
 	return ret;
@@ -908,6 +995,8 @@ gedit_document_save (GeditDocument* doc, GError **error)
 gboolean	
 gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 {	
+	gboolean auto_save;
+	
 	gboolean ret = FALSE;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -916,7 +1005,9 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
-	if (gedit_settings->auto_save) 
+	auto_save = gedit_prefs_manager_get_auto_save ();
+
+	if (auto_save) 
 	{
 
 		if (doc->priv->auto_save_timeout > 0)
@@ -935,10 +1026,13 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 		ret = TRUE;
 	}		
 
-	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
+		gint auto_save_interval =
+			gedit_prefs_manager_get_auto_save_interval ();
+		
 		doc->priv->auto_save_timeout =
-			g_timeout_add (gedit_settings->auto_save_interval*1000*60,
+			g_timeout_add (auto_save_interval * 1000 * 60,
 				       (GSourceFunc)gedit_document_auto_save, doc);
 	}
 
@@ -1093,8 +1187,12 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	if (!gedit_utils_uri_has_file_scheme (uri))
 	{
 		gchar *error_message;
-		gchar *scheme_string = gnome_vfs_x_uri_get_scheme (uri);
-                
+		gchar *scheme_string;
+
+		gchar *temp = eel_uri_get_scheme (uri);
+                scheme_string = eel_make_valid_utf8 (temp);
+		g_free (temp);
+
 		if (scheme_string != NULL)
 		{
 			error_message = g_strdup_printf (
@@ -1112,8 +1210,17 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		return FALSE;
 	}
 
-	filename = gnome_vfs_x_format_uri_for_display (uri);
+	/* Get filename from uri */
+	temp_filename = eel_make_uri_canonical (uri);
+	
+	if ((temp_filename == NULL) || (strlen (temp_filename) <= 7))
+		filename = NULL;
+	else
+		filename = g_strdup (temp_filename + 7);
 
+	if (temp_filename != NULL)
+		g_free (temp_filename);
+	
 	if (!filename)
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 0,
@@ -1168,7 +1275,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 
       	chars = gedit_document_get_buffer (doc);
 
-	if (gedit_settings->save_encoding == GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE)
+	if (gedit_prefs_manager_get_save_encoding () == GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE)
 	{
 		GError *conv_error = NULL;
 		gchar* converted_file_contents = NULL;
@@ -1230,7 +1337,9 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	{
 		gint result;
 
-		backup_filename = g_strconcat (real_filename, gedit_settings->backup_extension, NULL);
+		backup_filename = g_strconcat (real_filename, 
+				               gedit_prefs_manager_get_backup_extension (), 
+					       NULL);
 
 		result = rename (real_filename, backup_filename);
 

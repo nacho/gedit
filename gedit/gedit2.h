@@ -33,6 +33,7 @@
 
 #include <gmodule.h>
 #include <glib/glist.h>
+#include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-window.h>
 
 #include "gedit-mdi.h"
@@ -42,6 +43,7 @@
 extern GeditMDI* gedit_mdi;
 extern gboolean gedit_close_x_button_pressed;
 extern gboolean gedit_exit_button_pressed;
+extern BonoboObject *gedit_app_server;
 
 BonoboWindow* 		gedit_get_active_window 		(void);
 GeditDocument* 		gedit_get_active_document 		(void);

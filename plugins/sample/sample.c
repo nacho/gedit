@@ -58,6 +58,7 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	GeditDocument *doc;
 	GeditView *view;
 	gchar *user_name;
+	gchar *user_name_utf8;
 	const gchar *temp;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -80,13 +81,24 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	user_name = g_strdup_printf ("%s ", temp);
 	g_return_if_fail (user_name != NULL);
 
+	if (g_utf8_validate (user_name, -1, NULL))
+		user_name_utf8 = user_name;
+	else
+	{
+		user_name_utf8 = g_locale_to_utf8 (user_name, -1, NULL, NULL, NULL);
+		g_free (user_name);
+
+		if (user_name_utf8 == NULL)
+			user_name_utf8 = g_strdup (" ");
+	}
+
 	gedit_document_begin_user_action (doc);
 	
-	gedit_document_insert_text_at_cursor (doc, user_name, -1);
+	gedit_document_insert_text_at_cursor (doc, user_name_utf8, -1);
 
 	gedit_document_end_user_action (doc);
 
-	g_free (user_name);
+	g_free (user_name_utf8);
 }
 
 G_MODULE_EXPORT GeditPluginState
