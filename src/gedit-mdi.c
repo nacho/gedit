@@ -894,22 +894,26 @@ gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 static gint 
 gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 {
+	GtkTextView *text_view;
+	GtkTargetList *tl;
+
 	gedit_debug (DEBUG_MDI, "");
+
+	g_return_val_if_fail (view != NULL, TRUE);
+
+	text_view = gedit_view_get_gtk_text_view (GEDIT_VIEW (view));
+	g_return_val_if_fail (text_view != NULL, TRUE);
 	
-	/* FIXME */
 	/* Drag and drop support */
-	/*
-	gtk_drag_dest_set (view,
-			   GTK_DEST_DEFAULT_MOTION |
-			   GTK_DEST_DEFAULT_HIGHLIGHT |
-			   GTK_DEST_DEFAULT_DROP,
-			   drag_types, n_drag_types,
-			   GDK_ACTION_COPY);
-		
-	g_signal_connect (G_OBJECT (view), "drag_data_received",
+	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (text_view));
+	g_return_val_if_fail (tl != NULL, TRUE);
+
+	gtk_target_list_add_table (tl, drag_types, n_drag_types);
+
+	g_signal_connect (G_OBJECT (text_view), "drag_data_received",
 			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
 			  NULL);
-*/
+
 	return TRUE;
 }
 
@@ -1018,7 +1022,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 		switch (ret)
 		{
 			case GTK_RESPONSE_YES:
-				close = gedit_file_save (GEDIT_MDI_CHILD (child));
+				close = gedit_file_save (GEDIT_MDI_CHILD (child), TRUE);
 				break;
 			case GTK_RESPONSE_NO:
 				close = TRUE;

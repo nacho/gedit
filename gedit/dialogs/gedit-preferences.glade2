@@ -199,8 +199,8 @@
 		      <property name="wrap">False</property>
 		      <property name="adjustment">25 1 250 1 10 10</property>
 		      <accessibility>
-			<atkrelation target="undo_levels_label" type="labelled-by"/>
 			<atkrelation target="undo_checkbutton" type="controlled-by"/>
+			<atkrelation target="undo_levels_label" type="labelled-by"/>
 		      </accessibility>
 		    </widget>
 		    <packing>
@@ -1646,10 +1646,10 @@
 		  <property name="spacing">6</property>
 
 		  <child>
-		    <widget class="GtkRadioButton" id="wrap_never_radiobutton">
+		    <widget class="GtkCheckButton" id="wrap_text_checkbutton">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">_Never wrap lines</property>
+		      <property name="label" translatable="yes">Enable text _wrapping</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
@@ -1664,40 +1664,20 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkRadioButton" id="wrap_word_radiobutton">
+		    <widget class="GtkCheckButton" id="split_checkbutton">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Wrap lines at _word boundaries</property>
+		      <property name="label" translatable="yes">Do not _split words over two lines</property>
 		      <property name="use_underline">True</property>
 		      <property name="relief">GTK_RELIEF_NORMAL</property>
 		      <property name="active">False</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
-		      <property name="group">wrap_never_radiobutton</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
-		      <property name="expand">True</property>
-		      <property name="fill">True</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkRadioButton" id="wrap_char_radiobutton">
-		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="label" translatable="yes">Wrap lines at ch_aracter boundaries</property>
-		      <property name="use_underline">True</property>
-		      <property name="relief">GTK_RELIEF_NORMAL</property>
-		      <property name="active">False</property>
-		      <property name="inconsistent">False</property>
-		      <property name="draw_indicator">True</property>
-		      <property name="group">wrap_never_radiobutton</property>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">True</property>
-		      <property name="fill">True</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
 		    </packing>
 		  </child>
 		</widget>

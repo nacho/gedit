@@ -38,7 +38,7 @@
 void 		gedit_file_new 		(void);
 void 		gedit_file_open 	(GeditMDIChild *active_child);
 void 		gedit_file_close 	(GtkWidget *view);
-gboolean	gedit_file_save 	(GeditMDIChild *child);
+gboolean	gedit_file_save 	(GeditMDIChild *child, gboolean force);
 gboolean 	gedit_file_save_as 	(GeditMDIChild *child);
 void		gedit_file_save_all 	(void);
 gboolean	gedit_file_close_all 	(void);

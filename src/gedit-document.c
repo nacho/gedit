@@ -1093,6 +1093,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	gint fd;
 	gint retval;
 	GeditSaveEncodingSetting encoding_setting;
+	gboolean res;
+	gboolean add_cr;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1264,7 +1266,17 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	}	    
 
 	chars_len = strlen (chars);
-	if (write (fd, chars, chars_len) != chars_len)
+
+	add_cr = (*(chars + chars_len - 1) != '\n');
+
+	/* Save the file content */
+	res = (write (fd, chars, chars_len) == chars_len);
+
+	if (res && add_cr)
+		/* Add \n if needed */
+		res = (write (fd, "\n", 1) == 1);
+
+	if (!res)
 	{
 		gchar *msg;
 

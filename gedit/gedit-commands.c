@@ -89,7 +89,7 @@ gedit_cmd_file_save (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 	if (active_child == NULL)
 		return;
 	
-	gedit_file_save (active_child);
+	gedit_file_save (active_child, TRUE);
 }
 
 void 

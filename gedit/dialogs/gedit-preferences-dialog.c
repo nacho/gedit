@@ -111,9 +111,8 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*auto_indent_checkbutton;
 
 	/* Wrap mode page */
-	GtkWidget	*wrap_never_radiobutton;
-	GtkWidget	*wrap_word_radiobutton;
-	GtkWidget	*wrap_char_radiobutton;
+	GtkWidget	*wrap_text_checkbutton;
+	GtkWidget	*split_checkbutton;
 
 	/* Save page */
 	GtkWidget	*backup_copy_checkbutton;
@@ -216,7 +215,7 @@ static void gedit_preferences_dialog_editor_color_picker_color_set (GnomeColorPi
 								    guint b, 
 								    guint a,  
 								    GeditPreferencesDialog *dlg);
-static void gedit_preferences_dialog_wrap_mode_radiobutton_toggled (GtkToggleButton *button,
+static void gedit_preferences_dialog_wrap_mode_checkbutton_toggled (GtkToggleButton *button,
 								    GeditPreferencesDialog *dlg);
 static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (GtkToggleButton *button,
 									       GeditPreferencesDialog *dlg);
@@ -1178,35 +1177,44 @@ gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML 
 	return TRUE;
 }
 
+static gboolean split_button_state = TRUE;
+
 static void
-gedit_preferences_dialog_wrap_mode_radiobutton_toggled (GtkToggleButton *button,
+gedit_preferences_dialog_wrap_mode_checkbutton_toggled (GtkToggleButton *button,
 		GeditPreferencesDialog *dlg)
 {
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->wrap_never_radiobutton))
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_text_checkbutton)))
 	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gedit_prefs_manager_set_wrap_mode (GTK_WRAP_NONE);
-			return;
-		}
-	}
+		gedit_prefs_manager_set_wrap_mode (GTK_WRAP_NONE);
+		
+		gtk_widget_set_sensitive (dlg->priv->split_checkbutton, 
+					  FALSE);
+		gtk_toggle_button_set_inconsistent (
+			GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), TRUE);
 
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->wrap_char_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gedit_prefs_manager_set_wrap_mode (GTK_WRAP_CHAR);
-			return;
-		}
 	}
-
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->wrap_word_radiobutton))
+	else
 	{
-		if (gtk_toggle_button_get_active (button))
+		gtk_widget_set_sensitive (dlg->priv->split_checkbutton, 
+					  TRUE);
+
+		gtk_toggle_button_set_inconsistent (
+			GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), FALSE);
+
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton)))
 		{
+			split_button_state = TRUE;
+			
 			gedit_prefs_manager_set_wrap_mode (GTK_WRAP_WORD);
-			return;
 		}
+		else
+		{
+			split_button_state = FALSE;
+			
+			gedit_prefs_manager_set_wrap_mode (GTK_WRAP_CHAR);
+		}
+			
 	}
 }
 
@@ -1214,50 +1222,60 @@ static gboolean
 gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
 	GtkWidget *wrap_mode_frame;
+	GtkWrapMode wrap_mode;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
-	dlg->priv->wrap_never_radiobutton = glade_xml_get_widget (gui, "wrap_never_radiobutton");
-	dlg->priv->wrap_word_radiobutton = glade_xml_get_widget (gui, "wrap_word_radiobutton");
-	dlg->priv->wrap_char_radiobutton = glade_xml_get_widget (gui, "wrap_char_radiobutton");
+	dlg->priv->wrap_text_checkbutton = glade_xml_get_widget (gui, "wrap_text_checkbutton");
+	dlg->priv->split_checkbutton = glade_xml_get_widget (gui, "split_checkbutton");
 	wrap_mode_frame = glade_xml_get_widget (gui, "wrap_mode_frame");
 	
-	g_return_val_if_fail (dlg->priv->wrap_never_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->wrap_word_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->wrap_char_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->wrap_text_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->split_checkbutton, FALSE);
 	g_return_val_if_fail (wrap_mode_frame, FALSE);
 	
+	wrap_mode = gedit_prefs_manager_get_wrap_mode ();
 	/* Set initial state */
-	switch (gedit_prefs_manager_get_wrap_mode ())
+	switch (wrap_mode )
 	{
 		case GTK_WRAP_WORD:
 			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->wrap_word_radiobutton), TRUE);
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_text_checkbutton), TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), TRUE);
 			break;
 		case GTK_WRAP_CHAR:
 			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->wrap_char_radiobutton), TRUE);
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_text_checkbutton), TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), FALSE);
 			break;
 		default:
 			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->wrap_never_radiobutton), TRUE);
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_text_checkbutton), FALSE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), split_button_state);
+			gtk_toggle_button_set_inconsistent (
+				GTK_TOGGLE_BUTTON (dlg->priv->split_checkbutton), TRUE);
+
 	}
 
 	/* Set widget sensitivity */
 	gtk_widget_set_sensitive (wrap_mode_frame, 
 				  gedit_prefs_manager_wrap_mode_can_set ());
 
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (dlg->priv->wrap_never_radiobutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_wrap_mode_radiobutton_toggled), 
-			dlg);
-	g_signal_connect (G_OBJECT (dlg->priv->wrap_word_radiobutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_wrap_mode_radiobutton_toggled), 
-			dlg);
-	g_signal_connect (G_OBJECT (dlg->priv->wrap_char_radiobutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_wrap_mode_radiobutton_toggled), 
-			dlg);
+	gtk_widget_set_sensitive (dlg->priv->split_checkbutton, 
+				  gedit_prefs_manager_wrap_mode_can_set () && 
+				  (wrap_mode != GTK_WRAP_NONE));
 
+
+	/* Connect signals */
+	g_signal_connect (G_OBJECT (dlg->priv->wrap_text_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_wrap_mode_checkbutton_toggled), 
+			dlg);
+	g_signal_connect (G_OBJECT (dlg->priv->split_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_wrap_mode_checkbutton_toggled), 
+			dlg);
 	
 	return TRUE;
 }

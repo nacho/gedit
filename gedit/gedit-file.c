@@ -261,7 +261,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 }
 
 gboolean 
-gedit_file_save (GeditMDIChild* child)
+gedit_file_save (GeditMDIChild* child, gboolean force)
 {
 	gint ret;
 	GeditDocument* doc = NULL;
@@ -282,7 +282,7 @@ gedit_file_save (GeditMDIChild* child)
 		return gedit_file_save_as (child);
 	}
 
-	if (!gedit_document_get_modified (doc))	
+	if (!force && !gedit_document_get_modified (doc))	
 	{
 		gchar *raw_uri;
 		gboolean deleted = FALSE;
@@ -584,10 +584,7 @@ gedit_file_save_all (void)
 		child = GEDIT_MDI_CHILD (g_list_nth_data (
 				bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi)), i));
 
-		if (gedit_document_get_modified (child->document))
-		{
-			gedit_file_save (child);	
-		}
+		gedit_file_save (child, FALSE);	
 	}
 
 	if (view !=  bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)))
