@@ -76,7 +76,7 @@ create_search_dialog (void)
 }
 
 void
-search_cb (GtkWidget *widget, gpointer data)
+dialog_search (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 
@@ -94,11 +94,3 @@ search_cb (GtkWidget *widget, gpointer data)
 			    GTK_SIGNAL_FUNC (search_dialog_button_cb), doc);
 	gtk_widget_show (search_dialog);
 }
-
-
-
-
-
-
-
-
