@@ -36,42 +36,53 @@
 #include <stdio.h>
 #include "gedit-debug.h"
 
-/* External debug options, used here and in gedit.c */
-gint debug = 0;
-gint debug_view = 0;
-gint debug_undo = 0;
-gint debug_search = 0;
-gint debug_prefs = 0;
-gint debug_print = 0;
-gint debug_plugins = 0;
-gint debug_file = 0;
-gint debug_document = 0;
-gint debug_commands = 0;
-gint debug_recent = 0;
-gint debug_mdi = 0;
-gint debug_session = 0;
-gint debug_utils = 0;
-gint debug_metadata = 0;
+static GeditDebugSection debug = GEDIT_NO_DEBUG;
 
 void
-gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
+gedit_debug_init ()
 {
-	if (debug ||
-	    (debug_view     && section == GEDIT_DEBUG_VIEW)     ||
-	    (debug_undo     && section == GEDIT_DEBUG_UNDO)     ||
-	    (debug_search   && section == GEDIT_DEBUG_SEARCH)   ||
-	    (debug_print    && section == GEDIT_DEBUG_PRINT)    ||
-	    (debug_prefs    && section == GEDIT_DEBUG_PREFS)    ||
-	    (debug_plugins  && section == GEDIT_DEBUG_PLUGINS)  ||
-	    (debug_file     && section == GEDIT_DEBUG_FILE)     ||
-	    (debug_document && section == GEDIT_DEBUG_DOCUMENT) ||
-	    (debug_commands && section == GEDIT_DEBUG_COMMANDS) ||
-	    (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
-	    (debug_session  && section == GEDIT_DEBUG_SESSION)  ||
-	    (debug_mdi      && section == GEDIT_DEBUG_MDI)	||
-	    (debug_utils    && section == GEDIT_DEBUG_UTILS)	||
-	    (debug_metadata && section == GEDIT_DEBUG_METADATA))
+	if (g_getenv ("GEDIT_DEBUG") != NULL)
+	{
+		/* enable all debugging */
+		debug = ~GEDIT_NO_DEBUG;
+		return;
+	}
 
+	if (g_getenv ("GEDIT_DEBUG_VIEW") != NULL)
+		debug = debug | GEDIT_DEBUG_VIEW;
+	if (g_getenv ("GEDIT_DEBUG_UNDO") != NULL)
+		debug = debug | GEDIT_DEBUG_UNDO;
+	if (g_getenv ("GEDIT_DEBUG_SEARCH") != NULL)
+		debug = debug | GEDIT_DEBUG_SEARCH;
+	if (g_getenv ("GEDIT_DEBUG_PREFS") != NULL)
+		debug = debug | GEDIT_DEBUG_PREFS;
+	if (g_getenv ("GEDIT_DEBUG_PRINT") != NULL)
+		debug = debug | GEDIT_DEBUG_PRINT;
+	if (g_getenv ("GEDIT_DEBUG_PLUGINS") != NULL)
+		debug = debug | GEDIT_DEBUG_PLUGINS;
+	if (g_getenv ("GEDIT_DEBUG_FILE") != NULL)
+		debug = debug | GEDIT_DEBUG_FILE;
+	if (g_getenv ("GEDIT_DEBUG_DOCUMENT") != NULL)
+		debug = debug | GEDIT_DEBUG_DOCUMENT;
+	if (g_getenv ("GEDIT_DEBUG_COMMANDS") != NULL)
+		debug = debug | GEDIT_DEBUG_COMMANDS;
+	if (g_getenv ("GEDIT_DEBUG_RECENT") != NULL)
+		debug = debug | GEDIT_DEBUG_RECENT;
+	if (g_getenv ("GEDIT_DEBUG_MDI") != NULL)
+		debug = debug | GEDIT_DEBUG_MDI;
+	if (g_getenv ("GEDIT_DEBUG_SESSION") != NULL)
+		debug = debug | GEDIT_DEBUG_SESSION;
+	if (g_getenv ("GEDIT_DEBUG_UTILS") != NULL)
+		debug = debug | GEDIT_DEBUG_UTILS;
+	if (g_getenv ("GEDIT_DEBUG_METADATA") != NULL)
+		debug = debug | GEDIT_DEBUG_METADATA;
+}
+
+void
+gedit_debug (GeditDebugSection section, gchar *file,
+	     gint line, gchar* function, gchar* format, ...)
+{
+	if  (debug & section)
 	{
 		va_list args;
 		gchar *msg;
@@ -81,10 +92,11 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 		va_start (args, format);
 		msg = g_strdup_vprintf (format, args);
 		va_end (args);
-	
+
 		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
 		g_free (msg);
 
 		fflush (stdout);
 	}
 }
+

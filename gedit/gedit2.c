@@ -78,51 +78,6 @@ static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
 {
-	{ "debug-utils", '\0', POPT_ARG_NONE, &debug_utils, 0,
-	  N_("Show utility debugging messages."), NULL },
-
-	{ "debug-metadata", '\0', POPT_ARG_NONE, &debug_utils, 0,
-	  N_("Show metadata debugging messages."), NULL },
-
-	{ "debug-mdi", '\0', POPT_ARG_NONE, &debug_mdi, 0,
-	  N_("Show mdi debugging messages."), NULL },
-
-	{ "debug-commands", '\0', POPT_ARG_NONE, &debug_commands, 0,
-	  N_("Show commands debugging messages."), NULL },
-
-	{ "debug-document", '\0', POPT_ARG_NONE, &debug_document, 0,
-	  N_("Show document debugging messages."), NULL },
-
-	{ "debug-file", '\0', POPT_ARG_NONE, &debug_file, 0,
-	  N_("Show file debugging messages."), NULL },
-
-	{ "debug-plugins", '\0', POPT_ARG_NONE, &debug_plugins, 0,
-	  N_("Show plugin debugging messages."), NULL },
-
-	{ "debug-prefs", '\0', POPT_ARG_NONE, &debug_prefs, 0,
-	  N_("Show prefs debugging messages."), NULL },
-
-	{ "debug-print", '\0', POPT_ARG_NONE, &debug_print, 0,
-	  N_("Show printing debugging messages."), NULL },
-
-	{ "debug-search", '\0', POPT_ARG_NONE, &debug_search, 0,
-	  N_("Show search debugging messages."), NULL },
-
-	{ "debug-undo", '\0', POPT_ARG_NONE, &debug_undo, 0,
-	  N_("Show undo debugging messages."), NULL },
-
-	{ "debug-view", '\0', POPT_ARG_NONE, &debug_view, 0,
-	  N_("Show view debugging messages."), NULL },
-
-	{ "debug-recent", '\0', POPT_ARG_NONE, &debug_recent, 0,
-	  N_("Show recent debugging messages."), NULL },
-
-	 { "debug-session", '\0', POPT_ARG_NONE, &debug_session, 0,
-	  N_("Show session management debugging messages."), NULL },
-
-	{ "debug", '\0', POPT_ARG_NONE, &debug, 0,
-	  N_("Turn on all debugging messages."), NULL },
-
 	{ "quit", '\0', POPT_ARG_NONE, &quit_option, 0,
 	  N_("Quit an existing instance of gedit"), NULL },
 
@@ -178,7 +133,6 @@ gedit_load_file_list (CommandLineData *data)
 	g_free (data);
 }
 
-
 static CommandLineData *
 gedit_get_command_line_data (GnomeProgram *program)
 {
@@ -218,8 +172,6 @@ gedit_get_command_line_data (GnomeProgram *program)
 		
 	return data;
 }
-
-
 
 static void
 gedit_handle_automation_cmdline (GnomeProgram *program)
@@ -287,7 +239,6 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 		g_slist_free (data->file_list);
 		g_free (data);
 	}
-
 
 	stdin_data = gedit_utils_get_stdin ();
 
@@ -392,6 +343,9 @@ main (int argc, char **argv)
                 exit (0);
         }
 
+	/* Setup debugging */
+	gedit_debug_init ();
+
 	/* Set default icon */
 	gedit_set_default_icon ();
 	
@@ -432,7 +386,6 @@ main (int argc, char **argv)
 	
 	return 0;
 }
-
 
 BonoboWindow *
 gedit_get_active_window (void)
