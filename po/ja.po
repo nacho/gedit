@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-21 20:01+0100\n"
-"PO-Revision-Date: 2004-12-05 17:39+0900\n"
+"POT-Creation-Date: 2004-12-22 13:42+0900\n"
+"PO-Revision-Date: 2004-12-22 13:40+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -589,11 +589,12 @@ msgstr[1] "保存しないと、%ld分前からの変更が完全に失われま
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "保存しないと、1時間前からの変更が完全に失われます。"
+msgstr[1] "保存しないと、%d時間前からの変更が完全に失われます。"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -762,7 +763,6 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>自動インデント</b>"
 
@@ -788,9 +788,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>右マージン</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>タブ</b>"
+msgstr "<b>タブ文字</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -932,7 +931,6 @@ msgid "_Display line numbers"
 msgstr "行番号を表示する(_D)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "自動インデントを有効にする(_E)"
 
@@ -1423,11 +1421,12 @@ msgstr[0] "%ld分前に編集したドキュメントへの変更が完全に失
 msgstr[1] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "1時間前に編集したドキュメントへの変更が完全に失われます。"
+msgstr[1] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1511,18 +1510,14 @@ msgstr[0] "%d 個のファイルを読み込んでいます..."
 msgstr[1] "%d 個のファイルを読み込んでいます..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "ファイル \"%s\" を開けませんでした。"
+msgstr "ファイル \"%s\" がありませんでした。"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" はフォルダです。\n"
-"\n"
-"入力した場所が正しいかチェックしてやり直して下さい。"
+msgstr "入力した場所が正しいかチェックしてやり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1538,159 +1533,130 @@ msgid "Could not open the file \"%s\""
 msgstr "ファイル \"%s\" を開けませんでした。"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "不正なデータを含んでいるのでファイル \"%s\" を開けませんでした。"
+msgstr "おかしななデータが含まれています。"
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit は書き込みモードで %s: 場所を処理できません。"
+msgstr "場所 %s: を処理できません。"
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit は書き込みモードで %s: 場所を処理できません。"
+msgstr "この場所を処理できません。"
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "データ型式が無効なためファイル \"%s\" を開けませんでした。"
+msgstr "書式が無効なデータが含まれています。"
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "シンボリック・リンクが多すぎます。"
+msgstr "ファイル・サイズが大きすぎます。"
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" は適切な場所ではありません"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "アクセスが拒否されました"
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open file and try again."
 msgstr ""
-"開いたファイルが多すぎるためファイル \"%s\" を開けませんでした。\n"
-"\n"
-"開いたファイルを閉じてやり直して下さい。"
+"開いているファイルが多すぎます。開いたファイルを閉じてやり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" はフォルダです"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "application and try again."
 msgstr ""
-"ファイル \"%s\" を開くために利用できる十分なメモリがありません。動作中のアプ"
-"リケーションを閉じてやり直して下さい。"
+"ファイルを開くのに十分なメモリがありません。動作中のアプリケーションを閉じて"
+"やり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"ホスト名 \"%2$s\" が見つからなかったのでファイル \"%1$s\" を元に戻せませんで"
-"した。\n"
-"\n"
-"プロキシの設定が正しいかチェックしてやり直して下さい。"
+"ホスト名 \"%s\" が見つかりませんでした。プロキシの設定が正しいかチェックして"
+"やり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\" は有効な格納場所ではありません。\n"
-"\n"
-"入力した場所が正しいかチェックしてやり直して下さい。"
+"ホスト名が間違っています。入力した場所が正しいかチェックしてやり直して下さ"
+"い。"
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"ホスト名が空だったためファイル \"%s\" を開けませんでした。\n"
-"\n"
-"プロキシの設定が正しいかチェックしてやり直して下さい。"
+"ホスト名が空です。プロキシの設定が正しいかチェックしてやり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"ファイル \"%s\" が見つかりませんでした。\n"
-"\n"
-"入力した場所が正しいかチェックしてやり直して下さい。"
+"ログインに失敗しました。入力した場所が正しいかチェックしてやり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"不正なデータを含んでいるためファイル \"%s\" を開けませんでした。\n"
-"\n"
-"バイナリファイルを開こうとしたのかもしれません。"
+"不正なデータが含まれています。バイナリ・ファイルを開こうとしたのかもしれませ"
+"ん。"
 
 #: gedit/gedit-io-error-dialogs.c:248
-#, fuzzy
 msgid "The file you are trying to open is not a regular file."
-msgstr "開こうとしているファイルに不正なバイト列が含まれています。"
+msgstr "開こうとしているファイルは通常のファイルではありません。"
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"gedit で自動的に文字コードを検出できなかったためファイル \"%s\" を開けません"
-"でした。\n"
-"\n"
-"開こうとしているバイナリ・ファイルをチェックして、'ファイルを開く...' (また"
-"は '場所を開く') ダイアログで文字コードを選択し直して下さい。"
+"自動的に文字コードを検出できませんでした。開こうとしているバイナリ・ファイル"
+"をチェックして、'ファイルを開く...' (または '場所を開く') ダイアログで文字"
+"コードを選択し直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "ファイルが大きすぎるため \"%s\" を開けませんでした。"
+msgstr "ファイル \"%s\" を文字コード %s で開けませんでした"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not tryingto open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"文字コード %2$s を使用しているためファイル \"%1$s\" を開けませんでした。\n"
-"\n"
 "バイナリ・ファイルを開こうとしていないか、そして 'ファイルを開く...' (または "
 "'場所を開く') ダイアログで正しい文字コードを選択したどうかチェックしてやり直"
 "して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid data. Probably, you are trying to open "
 "a binary file."
 msgstr ""
-"不正なデータを含んでいるためファイル \"%s\" を開けませんでした。\n"
-"\n"
-"バイナリファイルを開こうとしたのかもしれません。"
+"不正なデータが含まれています。バイナリ・ファイルを開こうとしたのかもしれませ"
+"ん。"
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1699,39 +1665,29 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "ファイル \"%s\" を元に戻せませんでした。"
+msgstr "ファイル \"%s\" を元に戻せませんでした"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr ""
-"gedit でバックアップ・ファイルを見つけることができなかったためファイル \"%s"
-"\" を元に戻せませんでした。\n"
-"\n"
-"それは最近削除されたのかもしれません。"
+"指定したファイルが見つかりません。それは最近削除されたのかもしれません。"
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open file and try again."
-msgstr ""
-"開いたファイルが多すぎるためファイル \"%s\" を開けませんでした。\n"
-"\n"
-"開いたファイルを閉じてやり直して下さい。"
+msgstr "開くファイルが多すぎます。いくつかファイルを閉じてやり直して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running application and try "
 "again."
 msgstr ""
-"ファイル \"%s\" を開くために利用できる十分なメモリがありません。動作中のアプ"
-"リケーションを閉じてやり直して下さい。"
+"利用可能なメモリが足りません。動作中のアプリケーションを閉じてやり直して下さ"
+"い。"
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
@@ -1742,81 +1698,64 @@ msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "ログインに失敗しました"
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"無効な UTF-8 データを含んでいるためファイル \"%s\" を元に戻せませんでした。\n"
-"\n"
-"バイナリファイルを元に戻そうとしたのかもしれません。"
+"無効な UTF-8 データが含まれています。バイナリ・ファイルを元に戻そうとしたのか"
+"もしれません。"
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "名前無しのドキュメントを元には戻せません。"
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "ファイル \"%s\" を保存できませんでした。"
+msgstr "ファイル \"%s\" を保存できませんでした"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
 msgstr "ファイル \"%s\" は既に存在します。"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" はフォルダです。\n"
-"\n"
-"入力した場所が正しいかチェックして下さい。"
+msgstr "入力した場所が正しいかチェックして下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "ファイル \"%s\" を作成できませんでした。"
+msgstr "ファイル \"%s\" を作成できませんでした"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"ファイル \"%s\" を作成できません。\n"
-"適切な書き込み権限が設定されているか確認して下さい。"
+msgstr "適切な書き込み権限が設定されているか確認して下さい。"
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"ファイル \"%s\" を作成できません。\n"
-"\n"
-"ファイル名が長すぎます。"
+msgstr "ファイル名が長すぎます"
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"ファイル \"%s\" を作成できません。\n"
-"\n"
-"ファイル名のうちフォルダ名は存在しないかループしたシンボリック・リンクです。"
+"ファイル名のうちフォルダ名は存在しないか、あるいはループしたシンボリック・リ"
+"ンクです。"
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"ファイル \"%s\" を作成するための十分な空きディスクがありません。\n"
-"\n"
-"ディスク・スペースを空けてやり直して下さい。"
+"ファイルを生成するのに十分な空きディスクがありません。ディスク・スペースを空"
+"けてやり直して下さい。"
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -2916,14 +2855,12 @@ msgid "The document is empty."
 msgstr "ドキュメントは空です。"
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
-msgstr "選択したテキストには間違ったスペルの単語を含んでいません。"
+msgstr "選択したテキストにある単語のスペルは間違っていません。"
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
-msgstr "ドキュメントには間違ったスペルの単語を含んでいません。"
+msgstr "ドキュメントにある単語のスペルは間違っていません。"
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
@@ -3032,159 +2969,3 @@ msgstr "フォーマットのためのプロンプト(_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "フォーマットをカスタマイズする(_U)"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "保存しないと、%d時間前からの変更が完全に失われます。"
-#~ msgstr[1] "保存しないと、%d時間前からの変更が完全に失われます。"
-
-#~ msgid "Body font picker"
-#~ msgstr "本文に使用するフォントの取得"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr ""
-#~ "ドキュメントの本文を印刷する際に使用するフォントを選択する場合は、このボタ"
-#~ "ンをクリックして下さい"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "ページ・ヘッダに使用するフォントの取得"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr ""
-#~ "ドキュメントのページ・ヘッダを印刷する際に使用するフォントを選択する場合"
-#~ "は、このボタンをクリックして下さい"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "行番号に使用するフォントの取得"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr ""
-#~ "行番号を印刷する際に使用するフォントを選択する場合は、このボタンをクリック"
-#~ "して下さい"
-
-#~ msgid "_Tabs width:"
-#~ msgstr "タブの幅(_T):"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
-#~ msgstr[1] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr ""
-#~ "gedit で %s: 場所 を扱うことができないのでファイル \"%s\" を開けませんでし"
-#~ "た。"
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "アクセスが拒否されたためファイル \"%s\" は開けませんでした。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "ホスト名が無効なためファイル \"%s\" を開けませんでした。\n"
-#~ "\n"
-#~ "入力した場所が正しいかチェックしてやり直して下さい。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "ホスト \"%s\" が見つからなかったのでファイル \"%s\" を開けませんでした。\n"
-#~ "\n"
-#~ "入力した場所とプロキシの設定が正しいかをチェックしてやり直して下さい。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "ログインが失敗したためファイル \"%s\" を開けませんでした。\n"
-#~ "\n"
-#~ "入力した場所が正しいかチェックしてやり直して下さい。"
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "ファイル \"%s\" を開けませんでした。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "ファイル \"%s\" を開けませんでした。\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "ファイル \"%s\" を保存できませんでした。\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr ""
-#~ "バックアップ・ファイルのデータが破壊されていたためファイル \"%s\" を元に戻"
-#~ "せませんでした。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr ""
-#~ "gedit で %s: 場所を扱うことができないためファイル \"%s\" を元に戻せません"
-#~ "でした。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr "データ型式が無効なためファイル \"%s\" を元に戻せませんでした。"
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "ファイルが大きすぎるため \"%s\" を元に戻せませんでした。"
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr "アクセスが拒否されたためファイル \"%s\" を元に戻せませんでした。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "開いたファイルが多すぎるためファイル \"%s\" を元に戻せませんでした。\n"
-#~ "\n"
-#~ "開いたファイルを閉じてやり直して下さい。"
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "ファイル \"%s\" を戻すために利用できる十分なメモリがありません。動作中のア"
-#~ "プリケーションを閉じてやり直して下さい。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "ホスト名が空だったためファイル \"%s\" を元に戻せませんでした。\n"
-#~ "\n"
-#~ "プロキシの設定が正しいかチェックしてやり直して下さい。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr "ログインに失敗したためファイル \"%s\" を元に戻せませんでした。"
