@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-10 19:59+0200\n"
-"PO-Revision-Date: 2005-02-10 22:27+0200\n"
+"POT-Creation-Date: 2005-02-14 02:21+0200\n"
+"PO-Revision-Date: 2005-02-14 02:59+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -28,12 +29,12 @@ msgstr "Gedit vaizdas"
 
 #: ../data/GNOME_Gedit.server.in.in.h:3
 msgid "Gedit viewer factory"
-msgstr "Gedit viewer factory"
+msgstr "Gedit žiūryklės gamykla"
 
 #: ../data/GNOME_Gedit.server.in.in.h:4
 #: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "Source"
-msgstr "Kodas"
+msgstr "Pradinis tekstas"
 
 #: ../data/GNOME_Gedit.server.in.in.h:5
 msgid "gedit application"
@@ -57,7 +58,7 @@ msgid ""
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
 "Redagavimo vietoje naudojamas savas šriftas. Jis galios tik tada, jei "
-"parinktis \"Naudoti įprastą šriftą\" yra išjungta."
+"parinktis „Naudoti įprastą šriftą yra išjungta."
 
 #: ../data/gedit.schemas.in.h:2
 msgid "Active plugins"
@@ -97,7 +98,7 @@ msgid ""
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Redagavimo vietoje nepažymėto teksto fono spalva. Ji galios tik tada, jei "
-"parinktis \"Naudoti įprastas spalvas\" yra išjungta."
+"parinktis „Naudoti įprastas spalvas“ yra išjungta."
 
 #: ../data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
@@ -136,8 +137,8 @@ msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
-"Atsarginių bylų vardų priesaga. Ji galios tik tada, jei parinktis \"Kurti "
-"atsargines kopijas\" yra įjungta."
+"Atsarginių bylų vardų priesaga. Ji galios tik tada, jei parinktis „Kurti "
+"atsargines kopijas“ yra įjungta."
 
 #: ../data/gedit.schemas.in.h:19
 msgid ""
@@ -145,7 +146,7 @@ msgid ""
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Redagavimo vietoje pažymėto teksto spalva. Ji galios tik tada, jei parinktis "
-"\"Naudoti įprastas spalvas\" yra išjungta."
+"„Naudoti įprastas spalvas“ yra išjungta."
 
 #: ../data/gedit.schemas.in.h:20
 msgid ""
@@ -652,7 +653,6 @@ msgstr[2] ""
 "Yra %d dokumentų su neišsaugotais pakeitimais. Išsaugoti prieš uždarant?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: ../gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "Pasirinkite norimą išsaugoti dokumentą:"
 
@@ -1159,27 +1159,6 @@ msgstr "Įvesk norimo atidaryti failo _vietą (URI)"
 #: ../gedit/dialogs/uri.glade2.h:4
 msgid "Open from URI"
 msgstr "Atidaryti iš URI"
-
-#: ../gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Jūs turite X dokumentų su "
-"neišsaugotais pakeitimais. </span>"
-
-#: ../gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
-"Jeigu Jūs neišsaugosite savo dokumentų, visi Jūsų pakeitimai bus prarasti."
-
-#: ../gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_Nieko neišsaugoti"
-
-#: ../gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "Iš_saugoti pasirinktus"
 
 #: ../gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
@@ -2371,16 +2350,16 @@ msgstr " (invalid Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:843
+#: ../gedit/gedit-view.c:841
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr " Eil %d, Stl %d"
 
-#: ../gedit/gedit-view.c:881
+#: ../gedit/gedit-view.c:877
 msgid "  OVR"
 msgstr "  OVR"
 
-#: ../gedit/gedit-view.c:883
+#: ../gedit/gedit-view.c:879
 msgid "  INS"
 msgstr "  INS"
 
@@ -3282,8 +3261,8 @@ msgid "Center"
 msgstr "Vidurys"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr "Susijusio resurso simbolių koduotė"
+msgid "Character encoding of linked resource"
+msgstr "Susieto resurso simbolių koduotė"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3707,8 +3686,8 @@ msgid "Marquee"
 msgstr "Marquee"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr "Daugiausiai simbolių teksto lauke"
+msgid "Maximum length of text field"
+msgstr "Teksto laukelio maksimalus ilgis"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Media-independent link"
@@ -4610,11 +4589,11 @@ msgstr "Į_terpti datą ir laiką..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Žymeklio vietoje įterpti dabartinę datą ir laiką "
 
-#: ../plugins/time/time.c:445
+#: ../plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Galimi formatai"
 
-#: ../plugins/time/time.c:553
+#: ../plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Derinti datos/laiko įterpimo įrankį..."
 
@@ -4657,6 +4636,26 @@ msgstr "_Paklausti formato"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Na_udoti savą formatą"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Jūs turite X dokumentų su "
+#~ "neišsaugotais pakeitimais. </span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr ""
+#~ "Jeigu Jūs neišsaugosite savo dokumentų, visi Jūsų pakeitimai bus prarasti."
+
+#~ msgid "Save _None"
+#~ msgstr "_Nieko neišsaugoti"
+
+#~ msgid "_Save Selected"
+#~ msgstr "Iš_saugoti pasirinktus"
+
+#~ msgid "Max text field chars"
+#~ msgstr "Daugiausiai simbolių teksto lauke"
 
 #~ msgid "Irish (Gaeilge)"
 #~ msgstr "Airių (Gaeilge)"
