@@ -315,7 +315,6 @@ gedit_window_refresh_all (gint mdi_mode_changed, gboolean tab_size_changed)
 	GtkStyle *style;
 	GdkColor *bg, *fg;
 
-	
 	gedit_debug (DEBUG_WINDOW, "");
 
 	/* Set mdi mode */

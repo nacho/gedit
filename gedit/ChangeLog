@@ -1,3 +1,19 @@
+2001-10-10  Jason Leach  <jasonleach@usa.net>
+
+	[Fix #61989, Text selection color unthemed]
+	
+	* view.c (gedit_view_init): Get a copy of a mapped widget, the
+	GnomeApp in this case, then modify that copy's foreground and
+	background colors to the ones from settings, then apply this to
+	the text widget style, ensuring everything except foreground and
+	background colors come from the user's theme.
+
+	[Fix #60223, Use 'want' instead of 'wish' in dialogs]
+	
+	* document.c (remove_child_cb): s/wish/want/
+
+	* file.c (file_revert_cb): Ditto.
+
 2001-09-11  Chema Celorio  <chema@celorio.com>
 
 	* view.c (gedit_switch_view): wrap arround. And the keys where inverted

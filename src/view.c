@@ -746,7 +746,7 @@ gedit_view_init (GeditView *view)
 	gtk_text_set_point (view->text, 0);
 
 	/* Set colors */
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->text)));
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (mdi->active_window)));
 
 	bg = &style->base[0];
 	bg->red   = settings->bg[0];
@@ -757,9 +757,8 @@ gedit_view_init (GeditView *view)
 	fg->red   = settings->fg[0];
 	fg->green = settings->fg[1];
 	fg->blue  = settings->fg[2];
-	
-   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
-	
+
+   	gtk_widget_set_style (GTK_WIDGET (view->text), style);
 	gtk_style_unref (style);
 
 	/* Popup Menu */

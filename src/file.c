@@ -1197,7 +1197,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	}
 		
 	
-	msg = g_strdup_printf (_("Are you sure you wish to revert all changes?\n(%s)"),
+	msg = g_strdup_printf (_("Are you sure you want to revert all changes?\n(%s)"),
 			       doc->filename);
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
 					GNOME_STOCK_BUTTON_NO, NULL);

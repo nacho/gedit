@@ -168,7 +168,7 @@ main (int argc, char **argv)
 
 	gtk_init_add ((GtkFunction)gedit_file_load_list, (gpointer)file_list);
 
-	gtk_main();
+	gtk_main ();
 
 	return 0;
 }

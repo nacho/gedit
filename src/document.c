@@ -474,7 +474,7 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 
 		fname = gedit_document_get_tab_name (doc, FALSE);
 
-		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"),
+		msg = g_strdup_printf (_("``%s'' has been modified.  Do you want to save the changes?"),
 				       fname);
 		
 		msgbox = gnome_message_box_new (msg,
