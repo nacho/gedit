@@ -30,13 +30,4 @@ glade_DATA =			\
 	plugin-manager.glade	\
 	uri.glade
 
-glade_msgs =			\
-	about.glade.h		\
-	goto-line.glade.h	\
-	prefs.glade.h		\
-	replace.glade.h		\
-	program.glade.h		\
-	plugin-manager.glade.h	\
-	uri.glade.h
-
-EXTRA_DIST = $(glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(glade_DATA)

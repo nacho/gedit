@@ -14,7 +14,5 @@ INCLUDES =						\
 
 gladedir = $(datadir)/gedit/glade
 glade_DATA = diff.glade
-glade_msgs = diff.glade.h
 
-EXTRA_DIST = $(glade_DATA) $(glade_msgs)
-
+EXTRA_DIST = $(glade_DATA)

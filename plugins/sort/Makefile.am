@@ -17,6 +17,4 @@ INCLUDES = -I$(top_srcdir)/src \
 gladedir = $(datadir)/gedit/glade
 glade_DATA = sort.glade
 
-glade_msgs = sort.glade.h 
-
-EXTRA_DIST = $(glade_DATA) $(glade_msgs)
+EXTRA_DIST = $(glade_DATA)
