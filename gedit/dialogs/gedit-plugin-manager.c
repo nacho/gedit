@@ -104,6 +104,7 @@ about_button_cb (GtkWidget *button, GeditPluginManager *pm)
 			      "name", info->plugin->name,
 			      "copyright", info->plugin->copyright,
 			      "authors", (const gchar**) authors,
+			      "comments", info->plugin->desc,
 			      "logo", pixbuf,
 			      NULL);
 
