@@ -41,12 +41,11 @@ if pspell-config version > /dev/null 2>&1; then
 	if test ${pspell_num} -lt 1200; then
 		AC_MSG_RESULT([pspell version .12 or later required, you have ${pspell_ver} installed])
 	else
-		PSPELL_LIBS="-lpspell"
-		SPELL_PLUGIN_DIR="spell"
-		AC_SUBST(SPELL_PLUGIN_DIR)
-
 		AC_MSG_RESULT([found ($pspell_ver)])
-
+		AC_CHECK_HEADER(pspell/pspell.h,
+			PSPELL_LIBS="-lpspell"
+			SPELL_PLUGIN_DIR="spell"
+			AC_SUBST(SPELL_PLUGIN_DIR))
 	fi
 else
 	AC_MSG_RESULT([not found])
