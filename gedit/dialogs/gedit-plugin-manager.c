@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-dialog-uri.c
+ * gedit-plugin-manager.c
  * This file is part of gedit
  *
  * Copyright (C) 2002 Paolo Maggi and James Willcox
@@ -37,6 +37,8 @@
 
 #include <string.h>
 
+#include "gedit-plugin-manager.h"
+
 #include "gedit2.h"
 #include "gedit-mdi.h"
 #include "gedit-utils.h"
@@ -53,10 +55,10 @@
 
 #define PLUGIN_MANAGER_LOGO "/gedit-plugin-manager.png"
 
-typedef struct _GeditDialogPluginManager GeditDialogPluginManager;
+typedef struct _GeditPluginManager GeditPluginManager;
 
-struct _GeditDialogPluginManager {
-	GtkWidget *dialog; 	/* a GtkDialog */
+struct _GeditPluginManager {
+	GtkWidget *page; 	/* a GtkNotebook page */
 
 	GtkWidget *tree; 	/* a GtkTreeView, shows plugins */
 	GtkWidget *notebook; 	/* a GtkNotebook, shows info about plugins */
@@ -66,42 +68,42 @@ struct _GeditDialogPluginManager {
 	GtkWidget *desc; 	/* a GtkLabel, shows the description of the plugin */
 	GtkWidget *name; 	/* a GtkLabel, shows the name of the plugin */
 	GtkWidget *copyright; 	/* a GtkLabel, shows the copyright info of the plugin */
-	GtkWidget *logo; 	/* a GtkImage, a small logo */
 	GtkWidget *configure_button; /* a GtkButton,configures a plugin when clicked */
 
 	const GList *plugins; 	/* a list of type GeditPlugin  */
 };
 
-static GeditPluginInfo *dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog);
-static void dialog_plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model);
-static void dialog_plugin_manager_toggle_all (GeditDialogPluginManager *dialog);
-static void dialog_plugin_manager_update_info (GeditDialogPluginManager *dialog,
+static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *dialog);
+static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model);
+static void plugin_manager_toggle_all (GeditPluginManager *dialog);
+static void plugin_manager_update_info (GeditPluginManager *dialog,
 					       GeditPluginInfo *info);
-static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
-static void dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogPluginManager *dialog);
+
+static void plugin_manager_destroyed (GtkObject *obj,  void *dialog_pointer);
 
 
 static void
 configure_button_cb (GtkWidget *button, gpointer data)
 {
-	GeditDialogPluginManager *dialog = data;
+	GeditPluginManager *pm = data;
 	GeditPluginInfo *info;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 	
-	info = dialog_plugin_manager_get_selected_plugin (dialog);
+	info = plugin_manager_get_selected_plugin (pm);
 
 	g_return_if_fail (info != NULL);
 
 	gedit_debug (DEBUG_PLUGINS, "Configuring: %s\n", info->plugin->name);
 
-	gedit_plugins_engine_configure_plugin (info->plugin, dialog->dialog);
+	gedit_plugins_engine_configure_plugin (info->plugin, 
+			gtk_widget_get_toplevel (pm->page));
 
 	gedit_debug (DEBUG_PLUGINS, "Done");	
 }
 
 static void
-dialog_plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
+plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 				    GtkCellRenderer   *cell,
 				    GtkTreeModel      *tree_model,
 				    GtkTreeIter       *iter,
@@ -124,7 +126,7 @@ dialog_plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 
 	title = gtk_tree_view_column_get_title (tree_column);
 
-	/* this string comparison stuff sucks.  is there a better way? */
+	/* FIXME: this string comparison stuff sucks.  is there a better way? */
 	if (!strcmp (title, PLUGIN_MANAGER_NAME_TITLE))
 		g_object_set (G_OBJECT (cell), "text", info->plugin->name, NULL);
 }
@@ -134,7 +136,7 @@ active_toggled_cb (GtkCellRendererToggle     *cell,
 		   gchar                 *path_str,
 		   gpointer               data)
 {
-	GeditDialogPluginManager *dialog = (GeditDialogPluginManager *)data;
+	GeditPluginManager *dialog = (GeditPluginManager *)data;
 	GtkTreeIter  iter;
 	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 	GtkTreeModel *model;
@@ -148,7 +150,7 @@ active_toggled_cb (GtkCellRendererToggle     *cell,
 	gtk_tree_model_get_iter (model, &iter, path);
 
 	if (&iter != NULL) {
-		dialog_plugin_manager_toggle_active (&iter, model);
+		plugin_manager_toggle_active (&iter, model);
 	}
   
 	/* clean up */
@@ -158,18 +160,18 @@ active_toggled_cb (GtkCellRendererToggle     *cell,
 static void
 cursor_changed_cb (GtkTreeView  *view, gpointer data)
 {
-	GeditDialogPluginManager *dialog = data;
+	GeditPluginManager *dialog = data;
 	GeditPluginInfo *info;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	info = dialog_plugin_manager_get_selected_plugin (dialog);
+	info = plugin_manager_get_selected_plugin (dialog);
 	g_return_if_fail (info != NULL);
 
 	gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
 		
-	dialog_plugin_manager_update_info (dialog, info);
+	plugin_manager_update_info (dialog, info);
 }
 
 static void
@@ -178,7 +180,7 @@ row_activated_cb (GtkTreeView *tree_view,
 		  GtkTreeViewColumn *column,
 		  gpointer data)
 {
-	GeditDialogPluginManager *dialog = data;
+	GeditPluginManager *dialog = data;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 
@@ -192,24 +194,24 @@ row_activated_cb (GtkTreeView *tree_view,
 
 	g_return_if_fail (&iter != NULL);
 	
-	dialog_plugin_manager_toggle_active (&iter, model);
+	plugin_manager_toggle_active (&iter, model);
 }
 
 static void
 column_clicked_cb (GtkTreeViewColumn *tree_column, gpointer data)
 {
-	GeditDialogPluginManager *dialog = data;
+	GeditPluginManager *dialog = data;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (dialog != NULL);
 
-	dialog_plugin_manager_toggle_all (dialog);
+	plugin_manager_toggle_all (dialog);
 }
 
 
 static void
-dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
+plugin_manager_populate_lists (GeditPluginManager *dialog)
 {
 	const GList *plugins;
 	GtkListStore *model;
@@ -248,12 +250,12 @@ dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
 
-		dialog_plugin_manager_update_info (dialog, info);
+		plugin_manager_update_info (dialog, info);
 	}
 }
 
 static void
-dialog_plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboolean active)
+plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboolean active)
 {
 	GeditPluginInfo *info;
 	
@@ -286,7 +288,7 @@ dialog_plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboole
 }
 
 static void
-dialog_plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
+plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 {
 	gboolean active;
 	
@@ -296,13 +298,13 @@ dialog_plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 
 	active ^= 1;
 
-	dialog_plugin_manager_set_active (iter, model, active);
+	plugin_manager_set_active (iter, model, active);
 }
 
 
 
 static void
-dialog_plugin_manager_update_info (GeditDialogPluginManager *dialog, GeditPluginInfo *info)
+plugin_manager_update_info (GeditPluginManager *dialog, GeditPluginInfo *info)
 {
 	gchar *t;
 	gchar *filename;
@@ -332,7 +334,7 @@ dialog_plugin_manager_update_info (GeditDialogPluginManager *dialog, GeditPlugin
 }
 
 static GeditPluginInfo *
-dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog)
+plugin_manager_get_selected_plugin (GeditPluginManager *dialog)
 {
 	GeditPluginInfo *info = NULL;
 	GtkTreeModel *model;
@@ -357,7 +359,7 @@ dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog)
 
 
 static void
-dialog_plugin_manager_toggle_all (GeditDialogPluginManager *dialog)
+plugin_manager_toggle_all (GeditPluginManager *dialog)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -374,14 +376,14 @@ dialog_plugin_manager_toggle_all (GeditDialogPluginManager *dialog)
 	gtk_tree_model_get_iter_root (model, &iter);
 
 	do {
-		dialog_plugin_manager_set_active (&iter, model, active);		
+		plugin_manager_set_active (&iter, model, active);		
 	}
 	while (gtk_tree_model_iter_next (model, &iter));
 }
 
 
 static void
-dialog_plugin_manager_construct_tree (GeditDialogPluginManager *dialog)
+plugin_manager_construct_tree (GeditPluginManager *dialog)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
@@ -409,7 +411,7 @@ dialog_plugin_manager_construct_tree (GeditDialogPluginManager *dialog)
 	cell = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_NAME_TITLE, cell, NULL);
 	gtk_tree_view_column_set_resizable (column, TRUE);
-	gtk_tree_view_column_set_cell_data_func (column, cell, dialog_plugin_manager_view_cell_cb,
+	gtk_tree_view_column_set_cell_data_func (column, cell, plugin_manager_view_cell_cb,
 						 dialog, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->tree), column);
 
@@ -424,24 +426,15 @@ dialog_plugin_manager_construct_tree (GeditDialogPluginManager *dialog)
 	gtk_widget_show (dialog->tree);
 }
 
-static GeditDialogPluginManager *
-dialog_plugin_manager_get_dialog (void)
+GtkWidget *
+gedit_plugin_manager_get_page (void)
 {
-	static GeditDialogPluginManager *dialog = NULL;
+	GeditPluginManager *pm = NULL;
 	GladeXML *gui;
-	GtkWindow *window;
 	GtkWidget *content;
 	GtkWidget *viewport;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (dialog != NULL)
-	{
-		gdk_window_show (dialog->dialog->window);
-		gdk_window_raise (dialog->dialog->window);
-
-		return dialog;
-	}
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "plugin-manager.glade2",
 			     "plugin_manager_dialog_content", NULL);
@@ -451,36 +444,24 @@ dialog_plugin_manager_get_dialog (void)
 		return NULL;
 	}
 
-	window =  GTK_WINDOW (gedit_get_active_window ());
+	pm = g_new0 (GeditPluginManager, 1);
 
-	dialog = g_new0 (GeditDialogPluginManager, 1);
-
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Plugin Manager"),
-						      window,
-						      GTK_DIALOG_DESTROY_WITH_PARENT,
-						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CLOSE,
-						      GTK_STOCK_HELP,
-						      GTK_RESPONSE_HELP,
-						      NULL);
-
-	g_return_val_if_fail (dialog->dialog != NULL, NULL);
+	pm->page = gtk_vbox_new (FALSE, 0);
 
 	content = glade_xml_get_widget (gui, "plugin_manager_dialog_content");
-	dialog->tree = glade_xml_get_widget (gui, "plugin_tree");
-	dialog->notebook = glade_xml_get_widget (gui, "plugin_notebook");
-	dialog->desc = glade_xml_get_widget (gui, "desc_label");
-	dialog->author = glade_xml_get_widget (gui, "author_label");
-	dialog->filename = glade_xml_get_widget (gui, "file_label");
-	dialog->name = glade_xml_get_widget (gui, "name_label");
-	dialog->copyright = glade_xml_get_widget (gui, "copyright_label");
-	dialog->configure_button = glade_xml_get_widget (gui, "configure_button");
-	dialog->logo = glade_xml_get_widget (gui, "plugin_logo");
+	pm->tree = glade_xml_get_widget (gui, "plugin_tree");
+	pm->notebook = glade_xml_get_widget (gui, "plugin_notebook");
+	pm->desc = glade_xml_get_widget (gui, "desc_label");
+	pm->author = glade_xml_get_widget (gui, "author_label");
+	pm->filename = glade_xml_get_widget (gui, "file_label");
+	pm->name = glade_xml_get_widget (gui, "name_label");
+	pm->copyright = glade_xml_get_widget (gui, "copyright_label");
+	pm->configure_button = glade_xml_get_widget (gui, "configure_button");
 	viewport = glade_xml_get_widget (gui, "plugin_viewport");
 
-	if (!(content && dialog->tree && dialog->notebook && dialog->desc &&
-	      dialog->author && dialog->filename && dialog->configure_button &&
-	      dialog->logo && viewport && dialog->name && dialog->copyright)) {
+	if (!(content && pm->tree && pm->notebook && pm->desc &&
+	      pm->author && pm->filename && pm->configure_button &&
+	      viewport && pm->name && pm->copyright)) {
 
 		g_warning (_("Invalid glade file for plugin manager -- not all widgets found.\n"));
 		g_object_unref (gui);
@@ -489,107 +470,39 @@ dialog_plugin_manager_get_dialog (void)
 	}
 
 	/* setup a window of a sane size. */
-	gtk_widget_set_size_request (GTK_WIDGET (dialog->notebook), 270, 140);
-	gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 140);
-	
-	/* stick the plugin manager logo in there */
-	gtk_image_set_from_file (GTK_IMAGE (dialog->logo), GNOME_ICONDIR PLUGIN_MANAGER_LOGO);
+	gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 100);
 
 	/* connect something to the "configure" button */
-	g_signal_connect (G_OBJECT (dialog->configure_button), "clicked",
-			  G_CALLBACK (configure_button_cb), dialog);
+	g_signal_connect (G_OBJECT (pm->configure_button), "clicked",
+			  G_CALLBACK (configure_button_cb), pm);
 
-	dialog_plugin_manager_construct_tree (dialog);
+	plugin_manager_construct_tree (pm);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
-			    content, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (pm->page),
+			    content, TRUE, TRUE, 0);
 
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
-					 GTK_RESPONSE_CLOSE);
-
-	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
-			 G_CALLBACK (dialog_destroyed), &dialog);
-
-	g_signal_connect(G_OBJECT (dialog->dialog), "response",
-			 G_CALLBACK (dialog_response_handler), dialog);
+	g_signal_connect(G_OBJECT (pm->page), "destroy",
+			 G_CALLBACK (plugin_manager_destroyed), pm);
 
 	g_object_unref (gui);
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-
 	/* get the list of available plugins (or installed) */
-	dialog->plugins = gedit_plugins_engine_get_plugins_list ();
+	pm->plugins = gedit_plugins_engine_get_plugins_list ();
 
-	dialog_plugin_manager_populate_lists (dialog);
+	plugin_manager_populate_lists (pm);
 
-	return dialog;
+	return pm->page;
 }
 
 static void
-help_button_pressed (GeditDialogPluginManager * dialog)
-{
-	GError *error = NULL;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gnome_help_display ("gedit.xml", "gedit-install-plugins", &error);
-	
-	if (error != NULL)
-	{
-		g_warning (error->message);
-
-		g_error_free (error);
-	}
-}
-
-static void
-dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
+plugin_manager_destroyed (GtkObject *obj,  void *pm_pointer)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	if (dialog_pointer != NULL)
-	{
-		g_free (*dialog_pointer);
-		*dialog_pointer = NULL;
-	}	
+	if (pm_pointer != NULL)
+		g_free (pm_pointer);
+
 }
 
-static void
-dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogPluginManager *dialog)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	switch (res_id) {
-		case GTK_RESPONSE_HELP:
-			help_button_pressed (dialog);
-			break;
-			
-		default:
-			gtk_widget_destroy (dialog->dialog);
-	}
-}
-
-
-void
-gedit_dialog_plugin_manager (void)
-{
-	GeditDialogPluginManager *dialog;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	dialog = dialog_plugin_manager_get_dialog ();
-	if (dialog == NULL) {
-		g_warning (_("Could not create the Plugin Manager dialog"));
-		return;
-	}
-	
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      GTK_WINDOW (gedit_get_active_window ()));
-
-	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
-		gtk_widget_show (dialog->dialog);
-
-	gtk_widget_grab_focus (dialog->tree);
-}
 
 
