@@ -462,13 +462,31 @@ void gE_document_set_line_wrap (gE_document *doc, gint line_wrap)
 
 void gE_document_set_read_only (gE_document *doc, gint read_only)
 {
+gchar RO_label[255];
+gchar *fname;
+
 	doc->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (doc->text), !doc->read_only);
+	
+	if(read_only)
+	{
+	  sprintf(RO_label, "RO - %s", GTK_LABEL(doc->tab_label)->label);
+	  gtk_label_set(GTK_LABEL(doc->tab_label), RO_label);
+	}
+	else
+	{
+	 #ifdef GTK_HAVE_FEATURES_1_1_0
+	 gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(doc->filename));
+	 #else
+	 gtk_label_set(GTK_LABEL(doc->tab_label), strrchr (doc->filename, '/'));
+	 #endif
+	}
 	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	 if (doc->split_screen)
 		gtk_text_set_editable
 			(GTK_TEXT (doc->split_screen), !doc->read_only);
 	#endif
+	
 }
 
 #ifndef WITHOUT_GNOME
