@@ -1078,7 +1078,6 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 	column = gtk_tree_view_column_new_with_attributes (_("Elements"), renderer,
 							   "text", NAME_COLUMN, NULL);
 
-	gtk_tree_view_column_set_sort_column_id (column, 0);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->tags_treeview), column);
 
 	/* Connect signals */
