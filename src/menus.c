@@ -367,7 +367,7 @@ GnomeUIInfo gedit_plugins_menu []= {
 
 GnomeUIInfo gedit_menu [] = {
 	#ifdef WITH_FOOT
-	{ GNOME_APP_UI_SUBTREE, "", NULL, &gedit_program_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, " ", NULL, &gedit_program_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_DATA, foot_xpm, 0, 0, NULL },
 	#else
 	{ GNOME_APP_UI_SUBTREE, N_("Program"), NULL, &gedit_program_menu, NULL, NULL,
