@@ -33,6 +33,7 @@ void gE_plugin_append( gint docid, gchar *buffer, gint length )
   gtk_text_set_point( text, gtk_text_get_length( text ) );
   gtk_text_insert( text, NULL, NULL, NULL, buffer, length );
   gtk_text_thaw( text );
+  document->changed = 1;
 }
 
 void gE_plugin_show( gint docid )
@@ -47,5 +48,8 @@ int gE_plugin_current()
 gchar *gE_plugin_filename( gint docid )
 {
   gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
-  return document->filename;
+  if (document->filename == NULL)
+  	return "";
+  else
+  	return document->filename;
 }
