@@ -42,7 +42,7 @@
 
 
 #define MENU_ITEM_LABEL		N_("Open _CVS ChangeLogs")
-#define MENU_ITEM_PATH		"/menu/File/FileOps/"
+#define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
 #define MENU_ITEM_NAME		"CVSChangeLog"	
 #define MENU_ITEM_TIP		N_("Searches for ChangeLogs in the current document and opens them.")
 

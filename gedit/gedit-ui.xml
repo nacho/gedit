@@ -2,59 +2,63 @@
 
 <commands>
         <cmd name="FileNew" _label="New"
-	_tip="Create a new document" pixtype="stock" pixname="gtk-new"/>
+	_tip="Create a new document" pixtype="stock" pixname="gtk-new" accel="*Control*N"/>
         
         <cmd name="FileOpen" _label="Open"
-	_tip="Open a file" pixtype="stock" pixname="gtk-open" accel="F3"/>
+	_tip="Open a file" pixtype="stock" pixname="gtk-open" accel="*Control*O"/>
 	
         <cmd name="FileSave" _label="Save"
 	_tip="Save the current file" pixtype="stock" pixname="gtk-save"
-	accel="*Control*s"/>
+	accel="*Control*S"/>
 	
 	<cmd name="FileSaveAll" _label="Save All"
         _tip="Save all open files" pixtype="stock" pixname="gtk-save"/>
 
         <cmd name="FileSaveAs" _label="Save As"
         _tip="Save the current file with a different name"
-	pixtype="stock" pixname="gtk-save-as"/>
+	pixtype="stock" pixname="gtk-save-as"
+	accel="*Shift**Control*S"/>
 
-        <cmd name="FileRevert" _label="Revert to saved"
+        <cmd name="FileRevert" _label="Revert"
         _tip="Revert to a saved version of the file"
         pixtype="stock" pixname="gtk-revert-to-saved"/>
 	
-	<cmd name="FileOpenURI" _label="Open from URI"
-	_tip="Open a file from a specified URI" pixtype="stock" pixname="gtk-open"/>
+	<cmd name="FileOpenURI" _label="Open Location..."
+	_tip="Open a file from a specified location" pixtype="stock" pixname="gtk-open"/>
 
         <cmd name="FilePrint" _label="Print"
-	_tip="Print the current file" pixtype="stock" pixname="gtk-print"/>
+	_tip="Print the current file" pixtype="stock" pixname="gtk-print"
+	accel="*Control*P"/>
 	
         <cmd name="FilePrintSetup" _label="Print Setup"
           _tip="Setup the page settings for your current printer"
 	  pixtype="stock" pixname="gtk-print"/>
 
 	<cmd name="FilePrintPreview" _label="Print Preview"
-	_tip="Print preview" pixtype="stock" pixname="gtk-print-preview"/>
-	
+	_tip="Print preview" pixtype="stock" pixname="gtk-print-preview"
+	accel="*Shift**Control*P"/>
+
         <cmd name="FileClose" _label="Close"
 	_tip="Close the current file" pixtype="stock" pixname="gtk-close"
-	accel="*Control*w"/>
+	accel="*Alt*F4"/>
 
 	<cmd name="FileCloseAll" _label="Close All"
-	_tip="Close all open files" pixtype="stock" pixname="gtk-close"/>
+	_tip="Close all open files" pixtype="stock" pixname="gtk-close"
+	accel="*Shift**Alt*F4"/>
 
-        <cmd name="FileExit" _label="Exit" _tip="Exit the program"
-           pixtype="stock" pixname="gtk-quit" accel="*Control*q"/>
+        <cmd name="FileExit" _label="Quit" _tip="Quit the program"
+        pixtype="stock" pixname="gtk-quit" accel="*Control*Q"/>
 
 
 
 	<cmd name="EditUndo" _label="Undo" _tip="Undo the last action"
-        pixtype="stock" pixname="gtk-undo" accel="*Control*z"/>
+        pixtype="stock" pixname="gtk-undo" accel="*Control*Z"/>
 	
         <cmd name="EditRedo" _label="Redo" _tip="Redo the undone action"
-        pixtype="stock" pixname="gtk-redo" accel="*Control*r"/>
+        pixtype="stock" pixname="gtk-redo" accel="*Shift**Control*Z"/>
 	
         <cmd name="EditCut" _label="Cut" _tip="Cut the selection"
-        pixtype="stock" pixname="gtk-cut" accel="*Control*x"/>
+        pixtype="stock" pixname="gtk-cut" accel="*Control*X"/>
 	
         <cmd name="EditCopy" _label="Copy"
 	_tip="Copy the selection" pixtype="stock" pixname="gtk-copy" accel="*Control*c"/>
@@ -62,21 +66,25 @@
         <cmd name="EditPaste" _label="Paste"
 	_tip="Paste the clipboard" pixtype="stock" pixname="gtk-paste" accel="*Control*v"/>
 	
-        <cmd name="EditClear" _label="Clear" 
-       _tip="Clear the selection"/>
+        <cmd name="EditClear" _label="Deleted" 
+       _tip="Delete the selected text"/>
 
-	<cmd name="EditSelectAll" _label="Select All" _tip="Select the entire document"/>
+	<cmd name="EditSelectAll" _label="Select All" _tip="Select the entire document"
+	accel="*Control*A"/>
 
-        
+        <cmd name="ViewToolbar" _label="_Toolbar" _tip="Change the visibility of the toolbar" state="1"/>
+
+	<cmd name="ViewStatusbar" _label="_Status bar" _tip="Change the visibility of the status bar" state="1"/>
+
 
 	<cmd name="SearchFind" _label="Find" _tip="Search for a string"
-        pixtype="stock" pixname="gtk-find" accel="F6"/>
+        pixtype="stock" pixname="gtk-find" accel="*Control*F"/>
 	
         <cmd name="SearchFindAgain" _label="Find Again" _tip="Search again for the same string"
-          pixtype="stock" pixname="gtk-find" accel="*Shift*F6"/>
+          pixtype="stock" pixname="gtk-find" accel="*Control*G"/>
 	
         <cmd name="SearchReplace" _label="Replace" _tip="Replace a string"
-          pixtype="stock" pixname="gtk-find-and-replace" accel="F7"/>
+          pixtype="stock" pixname="gtk-find-and-replace" accel="*Control*R"/>
 
 	<cmd name="SearchGoToLine" _label="Replace" _tip="Go to a specific line number"
           pixtype="stock" pixname="gtk-jump-to" />
@@ -92,6 +100,9 @@
 
 	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
 
+	<cmd name="HelpContents" _label="Contents" _tip="Open the gedit manual"
+	accel="F1"/>
+
         <cmd name="About" _label="About..." _tip="About this application"/>
 
 	<cmd name="BonoboUIDump" _label="Dump XML" _tip="Dump the UI Xml description" hidden="0"/>
@@ -105,38 +116,40 @@
         <menuitem name="FileNew" verb="" _label="_New"/>
         
         <menuitem name="FileOpen" verb="" _label="_Open..."/>
-	
-        <menuitem name="FileSave" verb=""  _label="_Save"/>
+
+	<menuitem name="FileOpenURI" verb="" _label="Open _Location"/>
+
+	<submenu name="Recents" _label="Recent _Files">
+
+	</submenu>
+
+	<separator/>
+
+        <menuitem name="FileSave" verb="" _label="_Save"/>
 	
         <menuitem name="FileSaveAs" verb="" _label="Save _As..."/>
 
-	<menuitem name="FileSaveAll" verb="" _label="Sav_e All"/>
+	<menuitem name="FileSaveAll" verb="" _label="Sa_ve All"/>
 
         <menuitem name="FileRevert" verb="" _label="_Revert"/>
 	
-	<placeholder name="Recents" delimit="top"/>
-	
 	<separator/>
+			
+	<menuitem name="FilePrintPreview" verb="" _label="Print Previe_w"/>
 
-	<menuitem name="FileOpenURI" verb="" _label="Open from _URI..."/>
+	<menuitem name="FilePrint" verb="" _label="_Print..."/>
 
-	<separator/>
+	<placeholder name="FileOps_1" />
 
-	<menuitem name="FilePrint" verb="" _label="_Print"/>
-	
-	<menuitem name="FilePrintPreview" verb="" _label="Print Pre_view"/>
-
-	<placeholder name="FileOps" delimit="top"/>
+	<placeholder name="FileOps_2" delimit="top"/>
 
 	<separator/>
 	
         <menuitem name="FileClose" verb="" _label="_Close"/>
 
-	<menuitem name="FileCloseAll" verb="" _label="C_lose All"/>
+	<menuitem name="FileCloseAll" verb="" _label="Clos_e All"/>
 
-	<separator/>
-
-        <menuitem name="FileExit" verb="" _label="E_xit"/>
+        <menuitem name="FileExit" verb="" _label="_Quit"/>
 
 </submenu>
 
@@ -154,7 +167,7 @@
 	
         <menuitem name="EditPaste" verb="" _label="_Paste"/>
 	
-        <menuitem name="EditClear" verb="" _label="C_lear"/>
+        <menuitem name="EditClear" verb="" _label="_Delete"/>
 	
 	<placeholder name="EditOps_1" /> 
 	
@@ -170,10 +183,24 @@
 
 	<placeholder name="EditOps_5" delimit="top"/>
 
+	<separator/>
+
+	<menuitem name="SettingsPreferences" verb="" _label="Pr_eferences..."/>
 
 </submenu>
 
-<submenu name="Search" _label="Se_arch">
+<submenu name="View" _label="_View" hidden="0">
+
+	<menuitem name="ViewToolbar" verb="" _label="_Toolbar" type="toggle"/>
+
+	<menuitem name="ViewStatusbar" verb="" _label="_Status bar" type="toggle"/>
+
+	<placeholder name="ViewOps" delimit="top"/>
+
+</submenu>
+
+
+<submenu name="Search" _label="_Search">
 
 	<menuitem name="SearchFind" verb="" _label="_Find"/>
 
@@ -191,24 +218,16 @@
 
 	<placeholder name="SearchOps_3" delimit="top"/>
 
-
-</submenu>
+	</submenu>
 
 <submenu name="Tools" _label="_Tools" hidden="0">
 
-	<menuitem name="PluginsManager" verb="" _label="_Plugins manager"/>
+	<menuitem name="PluginsManager" verb="" _label="_Plugins manager..."/>
 
 	<placeholder name="ToolsOps" delimit="top"/>
 
 </submenu>
 
-<submenu name="Settings" _label="_Settings" hidden="0">
-
-        <menuitem name="SettingsPreferences" verb="" _label="_Preferences"/>
-
-	<placeholder name="SettingsOps" delimit="top"/>
-
-</submenu>
 
 <submenu name="Documents" _label="_Documents">
 
@@ -222,8 +241,8 @@
 
 <submenu name="Help" _label="_Help">
 	
-	<placeholder name="BuiltMenuItems"/>
-
+	<menuitem name="HelpContents" verb="" _label="_Contents"/>
+	
         <menuitem name="About" verb="" _label="_About..."/>
 
 </submenu>
