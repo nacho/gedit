@@ -6,11 +6,6 @@ applogodir = $(datadir)/pixmaps
 applogo_DATA = gedit-logo.png 		\
 	gedit-plugin-manager.png 	
 
-SOURCES = 				\
-	gedit-icon.png 			\
-	gedit-logo.png 			\
-	gedit-plugin-manager.png 	
-
 EXTRA_DIST = \
 	$(appicon_DATA) \
 	$(applogo_DATA)
