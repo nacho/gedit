@@ -36,8 +36,6 @@
 #include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
 
-#include <eel/eel-alert-dialog.h>
-
 #include "gedit2.h"
 #include "gedit-file.h"
 #include "gedit-debug.h"
@@ -513,8 +511,7 @@ gedit_file_save_all (void)
 static gboolean
 gedit_file_revert_dialog (GeditDocument *doc)
 {
-	GtkWidget *msgbox;
-	AtkObject *obj;
+	GtkWidget *dialog;
 	gint ret;
 	gchar *name;
 	gchar *primary_msg;
@@ -600,34 +597,28 @@ gedit_file_revert_dialog (GeditDocument *doc)
 					hours);
 	}
 
-	msgbox = eel_alert_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
-				       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_QUESTION,
-				       GTK_BUTTONS_NONE,
-				       primary_msg,
-				       secondary_msg, 
-				       NULL);
+	dialog = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 primary_msg);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  secondary_msg);
 	g_free (primary_msg);
 	g_free (secondary_msg);
 
-	/* Add Cancel button */
-	gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
-	/* Add Revert button */
-	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
+	gedit_dialog_add_button (GTK_DIALOG (dialog), 
 			_("_Revert"), GTK_STOCK_REVERT_TO_SAVED, GTK_RESPONSE_YES);
 
-	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+	gtk_dialog_set_default_response	(GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
 
-	obj = gtk_widget_get_accessible (msgbox);
-	if (GTK_IS_ACCESSIBLE (obj))
-		atk_object_set_name (obj, _("Question"));
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
-	gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+	ret = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
-		
-	gtk_widget_destroy (msgbox);
+	gtk_widget_destroy (dialog);
 
 	return (ret == GTK_RESPONSE_YES);
 }

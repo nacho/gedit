@@ -46,23 +46,12 @@
 #include <config.h>
 #endif
 
-#include "gedit-file-selector-util.h"
-
 #include <string.h>
-#include <unistd.h>
-#include <errno.h>
-
-#include <bonobo/bonobo-event-source.h>
-#include <bonobo/bonobo-exception.h>
-#include <bonobo/bonobo-widget.h>
-
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-
-#include <bonobo/bonobo-i18n.h>
-
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel-alert-dialog.h>
 
+#include "gedit-file-selector-util.h"
 #include "gedit-utils.h"
 #include "gedit-encodings-option-menu.h"
 
@@ -88,8 +77,7 @@ replace_dialog (GtkWindow *parent,
 		const gchar *uri,
 		const gchar *secondary_message)
 {
-	GtkWidget *msgbox;
-	AtkObject *obj;
+	GtkWidget *dialog;
 	gint ret;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
@@ -97,7 +85,7 @@ replace_dialog (GtkWindow *parent,
 
 	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
-	
+
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
@@ -109,31 +97,29 @@ replace_dialog (GtkWindow *parent,
 	message_with_uri = g_strdup_printf (primary_message, uri_for_display);
 	g_free (uri_for_display);
 
-	msgbox = eel_alert_dialog_new (parent,
-				       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				       GTK_MESSAGE_QUESTION,
-				       GTK_BUTTONS_NONE,
-				       message_with_uri,
-				       secondary_message,
-				       NULL);
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 message_with_uri);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  secondary_message);
+
 	g_free (message_with_uri);
 
-	/* Add Cancel button */
-	gtk_dialog_add_button (GTK_DIALOG (msgbox), 
-			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), 
+			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
-	/* Add Replace button */
-	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
+	gedit_dialog_add_button (GTK_DIALOG (dialog), 
 			_("_Replace"), GTK_STOCK_REFRESH, GTK_RESPONSE_YES);
 
-	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+	gtk_dialog_set_default_response	(GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
 
-	obj = gtk_widget_get_accessible (msgbox);
-	if (GTK_IS_ACCESSIBLE (obj))
-		atk_object_set_name (obj, _("Question"));
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
-	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
-	gtk_widget_destroy (msgbox);
+	ret = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
 
 	return (ret == GTK_RESPONSE_YES);
 }
