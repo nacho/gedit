@@ -100,10 +100,6 @@ static void	gedit_spell_checker_class_init 		(GeditSpellCheckerClass * klass);
 static void	gedit_spell_checker_init 		(GeditSpellChecker *spell_checker);
 static void 	gedit_spell_checker_finalize 		(GObject *object);
 
-static gboolean	set_language_internal 			(GeditSpellChecker *spell, 
-							 const GeditLanguage *language, 
-							 GError **error);
-static const GSList *get_languages 			(void);
 static gboolean is_digit 				(const char *text, gint length);
 
 /* FIXME: should be freed by the class finalizer */
@@ -259,15 +255,11 @@ gedit_spell_checker_finalize (GObject *object)
 	g_print ("Spell checker finalized.\n");
 }
 
-static gboolean
-set_language_internal (GeditSpellChecker *spell, const GeditLanguage *language, GError **error) 
+static const gchar*
+get_lang_code (const GeditLanguage *language)
 {
-	PspellConfig *config;
-	PspellCanHaveError *err;
 	const gchar *lang;
 
-	g_return_val_if_fail (spell != NULL, FALSE);
-		
 	if (language == NULL) 
 	{
 		lang = g_getenv ("LANG");
@@ -282,6 +274,23 @@ set_language_internal (GeditSpellChecker *spell, const GeditLanguage *language, 
 	}
 	else
 		lang = language->abrev;
+
+	return lang;
+}
+
+static gboolean
+lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **error) 
+{
+	PspellConfig *config;
+	PspellCanHaveError *err;
+	const gchar *lang;
+
+	g_return_val_if_fail (spell != NULL, FALSE);
+
+	if (spell->manager != NULL)
+		return TRUE;
+
+	lang = get_lang_code (language);
 
 	config = new_pspell_config ();
 	g_return_val_if_fail (config != NULL, FALSE);
@@ -313,21 +322,11 @@ set_language_internal (GeditSpellChecker *spell, const GeditLanguage *language, 
 	spell->active_lang = language;
 
 	return TRUE;
+
 }
 
-static gboolean
-lazy_init (GeditSpellChecker *spell, GError **error) 
-{
-	g_return_val_if_fail (spell != NULL, FALSE);
-
-	if (spell->manager == NULL)
-		return set_language_internal (spell, NULL, error);
-	else
-		return TRUE;
-}
-
-static const GSList *
-get_languages (void)
+const GSList *
+gedit_spell_checker_get_available_languages (void)
 {
 	PspellCanHaveError *err;
 	PspellConfig  *config;
@@ -359,24 +358,42 @@ get_languages (void)
 	return available_languages;
 }
 
-const GSList *
-gedit_spell_checker_get_available_languages (GeditSpellChecker *spell)
-{
-	g_return_val_if_fail (spell != NULL, NULL);
-	g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (spell), NULL);
-
-	return get_languages ();
-}
-
 gboolean
 gedit_spell_checker_set_language (GeditSpellChecker *spell, 
-			const GeditLanguage *lang,
+			const GeditLanguage *language,
 			GError **error)
 {
+	PspellConfig *config;
+	const gchar *lang;
+	gint ret;
+
 	g_return_val_if_fail (spell != NULL, FALSE);
 	g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (spell), FALSE);
 
-	return set_language_internal (spell, lang, error);
+	if (spell->manager == NULL)
+		return lazy_init (spell, spell->active_lang, error);
+
+	lang = get_lang_code (language);
+	
+	config = pspell_manager_config (spell->manager);
+	g_return_val_if_fail (config != NULL, FALSE);
+
+	if (lang == NULL)
+		ret = pspell_config_remove (config, "language-tag");
+	else
+		ret = pspell_config_replace (config, "language-tag", lang);
+
+	if (ret != 0)
+	{
+		g_set_error (error, GEDIT_SPELL_CHECKER_ERROR, GEDIT_SPELL_CHECKER_ERROR_PSPELL,
+				"pspell: %s", pspell_config_error_message (config));
+
+		return FALSE;
+	} 
+
+	spell->active_lang = language;
+
+	return TRUE;
 }
 
 const GeditLanguage *
@@ -402,7 +419,7 @@ gedit_spell_checker_check_word (GeditSpellChecker *spell,
 	
 	g_return_val_if_fail (word != NULL, FALSE);
 
-	if (!lazy_init (spell, error))
+	if (!lazy_init (spell, spell->active_lang, error))
 		return FALSE;
 
 	g_return_val_if_fail (spell->manager != NULL, FALSE);
@@ -463,7 +480,7 @@ gedit_spell_checker_get_suggestions (GeditSpellChecker *spell,
 	
 	g_return_val_if_fail (word != NULL, FALSE);
 
-	if (!lazy_init (spell, error))
+	if (!lazy_init (spell, spell->active_lang, error))
 		return FALSE;
 
 	g_return_val_if_fail (spell->manager != NULL, FALSE);
@@ -516,7 +533,7 @@ gedit_spell_checker_add_word_to_personal (GeditSpellChecker *spell,
 	
 	g_return_val_if_fail (word != NULL, FALSE);
 
-	if (!lazy_init (spell, error))
+	if (!lazy_init (spell, spell->active_lang, error))
 		return FALSE;
 
 	g_return_val_if_fail (spell->manager != NULL, FALSE);
@@ -554,7 +571,7 @@ gedit_spell_checker_add_word_to_session (GeditSpellChecker *spell,
 	
 	g_return_val_if_fail (word != NULL, FALSE);
 
-	if (!lazy_init (spell, error))
+	if (!lazy_init (spell, spell->active_lang, error))
 		return FALSE;
 
 	g_return_val_if_fail (spell->manager != NULL, FALSE);
@@ -621,7 +638,7 @@ gedit_spell_checker_set_correction (GeditSpellChecker *spell,
 	g_return_val_if_fail (word != NULL, FALSE);
 	g_return_val_if_fail (replacement != NULL, FALSE);
 
-	if (!lazy_init (spell, error))
+	if (!lazy_init (spell, spell->active_lang, error))
 		return FALSE;
 
 	g_return_val_if_fail (spell->manager != NULL, FALSE);

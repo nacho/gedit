@@ -69,9 +69,9 @@ GQuark 			 gedit_spell_checker_error_quark	(void);
 /* Constructors */
 GeditSpellChecker	*gedit_spell_checker_new		(void);
 
-/* GSList contains GeditLanguage items */
-const GSList 		*gedit_spell_checker_get_available_languages 
-								(GeditSpellChecker *spell);
+/* GSList contains GeditLanguage* items */
+const GSList 		*gedit_spell_checker_get_available_languages (void);
+
 
 gboolean		 gedit_spell_checker_set_language 	(GeditSpellChecker *spell, 
 								 const GeditLanguage *lang,
