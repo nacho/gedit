@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-25 03:36+0200\n"
+"POT-Creation-Date: 2000-04-29 21:22+0200\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Andreas Hyden <a.hyden@cyberpoint.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Diff plugin."
 msgstr "Diff instickningsprogram."
 
 #: plugins/email/email.c:131 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:415
+#: src/print.c:419
 msgid "Untitled"
 msgstr "Namnlös"
 
@@ -273,8 +273,8 @@ msgid "Add header"
 msgstr "Lägg till rubrik"
 
 #: src/dialogs/prefs.glade.h:40
-msgid "Wrap long lines at the page width"
-msgstr "Radbryt långa linjer vid radbredden"
+msgid "Enable word wrapping"
+msgstr "Använd ordbryting"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
@@ -357,6 +357,7 @@ msgstr ""
 "Var god och se till om filen finns."
 
 #: src/file.c:98
+#, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
 "\n"
@@ -394,6 +395,7 @@ msgstr ""
 "Se till att du har rättigheter för att öppna filen."
 
 #: src/file.c:185
+#, c-format
 msgid ""
 "gedit was unable to save the file: \n"
 "\n"
@@ -440,6 +442,7 @@ msgid "Loaded file %s"
 msgstr "Laddade filen %s"
 
 #: src/file.c:425
+#, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "\"%s\" kommer att skrivas över. Vill du fortsätta ?"
 
@@ -485,6 +488,11 @@ msgstr "Spara alla"
 msgid "Save All Open Files"
 msgstr "Spara alla öppna filer"
 
+#. GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),
+#: src/menus.c:74
+msgid "Revert"
+msgstr "Återgå"
+
 #: src/menus.c:82
 msgid "Print preview..."
 msgstr "Förhandsgranskning..."
@@ -501,29 +509,73 @@ msgstr "Stäng alla"
 msgid "Close All Open Files"
 msgstr "Stäng alla öppna filer"
 
-#: src/menus.c:125
+#: src/menus.c:114
+msgid "Find _In Files..."
+msgstr "Hitta _i filer..."
+
+#: src/menus.c:115
+msgid "Find text in all open files"
+msgstr "Hitta text i alla öppna filer"
+
+#: src/menus.c:127
 msgid "Goto _Line..."
 msgstr "Gå till _rad"
 
-#: src/menus.c:126
+#: src/menus.c:128
 msgid "Go to a specific line number"
 msgstr "Gå till en specifik linje"
 
-#: src/menus.c:135
+#: src/menus.c:137
 msgid "_Add View"
 msgstr "_Lägg till vy"
 
-#: src/menus.c:136
+#: src/menus.c:138
 msgid "Add a new view of the document"
 msgstr "Lägg till en ny vy av dokumentet"
 
-#: src/menus.c:138
+#: src/menus.c:140
 msgid "_Remove View"
 msgstr "_Ta bort vy"
 
-#: src/menus.c:139
+#: src/menus.c:141
 msgid "Remove view of the document"
 msgstr "Tar bort en vy av dokumentet"
+
+#: src/menus.c:163
+msgid "_Top"
+msgstr "_Överst"
+
+#: src/menus.c:164
+msgid "Put the document tabs at the top"
+msgstr "Placera dokument-flikarna överst"
+
+#: src/menus.c:169
+msgid "_Bottom"
+msgstr "_Nederst"
+
+#: src/menus.c:170
+msgid "Put the document tabs at the bottom"
+msgstr "Placera dokument-flikarna nederst"
+
+#: src/menus.c:175
+msgid "_Left"
+msgstr "_Vänster"
+
+#: src/menus.c:176
+msgid "Put the document tabs on the left"
+msgstr "Placera dokument-flikarna till vänster"
+
+#: src/menus.c:181
+msgid "_Right"
+msgstr "_Höger"
+
+#: src/menus.c:182
+msgid "Put the document tabs on the right"
+msgstr "Placera dokument-flikarna till höger"
+
+#: src/menus.c:190
+msgid "Toggle the presence of the document tabs"
+msgstr "Växla placeringen av dokument-flikarna"
 
 #: src/menus.c:212
 msgid ""
@@ -649,7 +701,7 @@ msgstr "Fel, init_plugin retunerade ett fel"
 msgid "Error, plugin is still in use"
 msgstr "Fel, insticksprogrammet används fortfarande"
 
-#: src/print.c:156
+#: src/print.c:152
 msgid "Pages"
 msgstr "Sidor"
 
@@ -658,16 +710,16 @@ msgstr "Sidor"
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Förhandsgranskning"
 
-#: src/print.c:527
+#: src/print.c:535
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Sida: %i/%i"
 
-#: src/recent.c:54
+#: src/recent.c:175
 msgid "_File/"
 msgstr "_Arkiv/"
 
-#: src/recent.c:61 src/recent.c:62
+#: src/recent.c:182 src/recent.c:183
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -707,6 +759,9 @@ msgstr "Filnamn"
 #: src/window.c:56
 msgid "Contents"
 msgstr "Innehåll"
+
+#~ msgid "Wrap long lines at the page width"
+#~ msgstr "Radbryt långa linjer vid radbredden"
 
 #~ msgid "Notebook"
 #~ msgstr "Flikar"
@@ -756,36 +811,6 @@ msgstr "Innehåll"
 #~ msgid "Window"
 #~ msgstr "Fönster"
 
-#~ msgid "Find _In Files..."
-#~ msgstr "Hitta _i filer..."
-
-#~ msgid "Find text in all open files"
-#~ msgstr "Hitta text i alla öppna filer"
-
-#~ msgid "_Top"
-#~ msgstr "_Överst"
-
-#~ msgid "Put the document tabs at the top"
-#~ msgstr "Placera dokument-flikarna överst"
-
-#~ msgid "_Bottom"
-#~ msgstr "_Nederst"
-
-#~ msgid "Put the document tabs at the bottom"
-#~ msgstr "Placera dokument-flikarna nederst"
-
-#~ msgid "_Left"
-#~ msgstr "_Vänster"
-
-#~ msgid "Put the document tabs on the left"
-#~ msgstr "Placera dokument-flikarna till vänster"
-
-#~ msgid "_Right"
-#~ msgstr "_Höger"
-
-#~ msgid "Put the document tabs on the right"
-#~ msgstr "Placera dokument-flikarna till höger"
-
 #~ msgid "_Readonly"
 #~ msgstr "S_krivskydd"
 
@@ -794,9 +819,6 @@ msgstr "Innehåll"
 
 #~ msgid "_Document Tabs"
 #~ msgstr "_Dokumentflikar"
-
-#~ msgid "Change the placement of the document tabs"
-#~ msgstr "Ändra placeringen av dokument-flikarna"
 
 #~ msgid "Sa_ve Settings"
 #~ msgstr "Sp_ara inställningar"
@@ -867,9 +889,6 @@ msgstr "Innehåll"
 
 #~ msgid "Show toolbar _icons"
 #~ msgstr "Visa _ikoner på verktygsraden"
-
-#~ msgid "Revert"
-#~ msgstr "Återgå"
 
 #~ msgid ""
 #~ "Enter print command below\n"
