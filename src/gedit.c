@@ -124,14 +124,12 @@ static struct argp parser =
 int main (int argc, char **argv)
 {
 	argp_program_version = VERSION;
-
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
 
 	gnome_init ("gEdit", &parser, argc, argv, 0, NULL);
-  
-	/*gE_get_rc_file();
-	gE_rc_parse();*/
+
+	gE_rc_parse();
 
 	main_window = gE_window_new ();
 	auto_indent_toggle_callback (NULL,NULL);
@@ -149,6 +147,7 @@ int main (int argc, char **argv)
 		for (;file_list; file_list = file_list->next)
 			gtk_idle_add ((GtkFunction) file_open_wrapper, file_list->data);
 	}
+
 	gtk_main ();
 	return 0;
 }

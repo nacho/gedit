@@ -145,7 +145,7 @@ gE_window *gE_window_new()
   window->documents = NULL;
   window->search = g_malloc (sizeof(gE_search));
   window->search->window = NULL;
-  window->auto_indent = 0;
+  window->auto_indent = 1;
   window->show_tabs = 1;
 
 #ifdef WITHOUT_GNOME
@@ -167,7 +167,7 @@ gE_window *gE_window_new()
 #endif
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
   gtk_container_border_width (GTK_CONTAINER (window->window), 0);
-       
+      
   box1 = gtk_vbox_new (FALSE, 0);
 
 #ifdef WITHOUT_GNOME
@@ -216,7 +216,7 @@ gE_window *gE_window_new()
       gtk_widget_set_usize (window->col_label, 40, 0);
       gtk_widget_show (box2);
       window->statusbox = box2;
-            
+	            
   gtk_widget_show(window->menubar);
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
@@ -245,7 +245,8 @@ gE_document *gE_document_new(gE_window *window)
 {
 	gE_document *document;
 	GtkWidget *table, *hscrollbar, *vscrollbar;
-	GtkStyle *style;
+	/*GtkStyle *style;*/
+
 
 	document = g_malloc0(sizeof(gE_document));
 
@@ -279,11 +280,12 @@ gE_document *gE_document_new(gE_window *window)
 
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
-	style = gtk_style_new ();
+/*	style = gtk_style_new ();
 	style->bg[GTK_STATE_NORMAL] = style->white;
 	style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
-	gtk_widget_set_style (GTK_TEXT(document->text), style);
-	gtk_widget_set_rc_style(GTK_TEXT(document->text));
+	gtk_widget_set_style (GTK_TEXT(document->text), style);*/
+        /*style = gtk_style_attach (style, document->window);*/
+	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
 
 
 	document->changed = FALSE;

@@ -78,9 +78,36 @@ gE_prefs *prefs_window;
 
  void gE_rc_parse()
  {
-	gE_get_rc_file();
+GList *toplevels;
+/*	gE_get_rc_file();*/
+		home2 = getenv("HOME");
+	#ifdef DEBUG
+	g_print("Home Dir: %s\n", home2);
+	#endif
+	strcpy(rc, "");
+	strcpy(home_dir, home2);
+	strcat(rc, home_dir);
+	strcat(rc, rcfile);
+		/*#ifdef DEBUG*/
+		g_print("rc: %s\n\n", rc);
+		/*#endif*/
 		
    	gtk_rc_parse (rc);
+   	gtk_rc_reparse_all();
+
+   toplevels = gdk_window_get_toplevels();
+  while (toplevels)
+    {
+      GtkWidget *widget;
+      gdk_window_get_user_data (toplevels->data, (gpointer *)&widget);
+      
+      if (widget)
+	gtk_widget_reset_rc_styles (widget);
+
+      toplevels = toplevels->next;
+    }
+
+  g_list_free (toplevels);
 
  }
  
