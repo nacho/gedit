@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2003 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -129,8 +129,10 @@ gedit_file_close (GtkWidget *view)
 		gedit_debug (DEBUG_COMMANDS, "Child removed.");
 	}
 
+	/*
 	if (ret)
 		gedit_mdi_set_active_window_title (BONOBO_MDI (gedit_mdi));
+	*/
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 	{
@@ -707,7 +709,7 @@ gedit_file_revert (GeditMDIChild *child)
 	{
 		gedit_debug (DEBUG_FILE, "OK");
 
-		gedit_utils_flash_va (_("File '%s' reverted."), uri);
+		gedit_utils_flash_va (_("File '%s' has been reverted."), uri);
 
 		g_free (uri);
 

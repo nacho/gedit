@@ -118,8 +118,8 @@ gchar* gedit_menus_untitled_doc_sensible_verbs [] = {
 gchar* gedit_menus_not_modified_doc_sensible_verbs [] = {
 	/*
 	"/commands/FileSave",
-	*/
 	"/commands/FileRevert",
+	*/
 
 	NULL
 };

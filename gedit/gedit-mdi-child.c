@@ -38,6 +38,7 @@
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <eel/eel-input-event-box.h>
+#include <eel/eel-string.h>
 
 #include <bonobo/bonobo-i18n.h>
 
@@ -212,9 +213,12 @@ gedit_mdi_child_finalize (GObject *obj)
 	gedit_debug (DEBUG_MDI, "END");
 }
 
+#define MAX_DOC_NAME_LENGTH 40
+
 static void 
 gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 {
+	gchar* name = NULL;
 	gchar* docname = NULL;
 	gchar* tab_name = NULL;
 
@@ -223,9 +227,13 @@ gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 	g_return_if_fail (child != NULL);
 	g_return_if_fail (child->document != NULL);
 
-	docname = gedit_document_get_short_name (child->document);
-	g_return_if_fail (docname != NULL);
-	
+	name = gedit_document_get_short_name (child->document);
+	g_return_if_fail (name != NULL);
+
+	/* Truncate the name so it doesn't get insanely wide. */
+	docname = eel_str_middle_truncate (name, MAX_DOC_NAME_LENGTH);
+	g_free (name);
+
 	if (gedit_document_get_modified (child->document))
 	{
 		tab_name = g_strdup_printf ("%s*", docname);

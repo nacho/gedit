@@ -1297,7 +1297,6 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_not_modified_doc_sensible_verbs, FALSE);
-		goto end;
 	}
 
 	if (gedit_document_is_untitled (doc))

@@ -1601,6 +1601,7 @@ gedit_document_get_line_count (const GeditDocument *doc)
 	return gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
 }
 
+/* FIXME: should we restore the cursor position too? - Paolo */
 gboolean 
 gedit_document_revert (GeditDocument *doc,  GError **error)
 {

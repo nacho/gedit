@@ -1,3 +1,33 @@
+2003-12-30  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixes bug #120727 - Unnecessary calls to gtk_window_set_title
+
+	* bonobo-mdi.c (app_set_view): sets window title only if
+	view == NULL
+
+	* gedit-file.c (gedit_file_close): does not call 
+	gedit_mdi_set_active_window_title
+
+	Patch by <padraig.obriain@sun.com>
+
+2003-12-30  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixes bug #87172 - Should never disable (unsensitive) the 
+	Revert functions
+
+	* gedit-menus.c: removed /commands/FileRever from 
+	gedit_menus_not_modified_doc_sensible_verbs
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity): checks
+	if the document is untiled even when it has not been modified 
+	(to disable Revert)
+
+2003-12-30  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-mdi-child.c (gedit_mdi_child_real_state_changed): 
+	truncate the doc name to 40 chars (bug #127638 -
+	window tabs should truncate filenames if its to long)
+
 2003-12-30  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-file-selector-util.c (replace_dialog):

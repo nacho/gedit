@@ -1226,7 +1226,8 @@ app_set_view (BonoboMDI *mdi, BonoboWindow *win, GtkWidget *view)
 {
 	gedit_debug (DEBUG_MDI, "");
 
-	gtk_window_set_title (GTK_WINDOW (win), mdi->priv->title);
+	if (view == NULL)
+		gtk_window_set_title (GTK_WINDOW (win), mdi->priv->title);
 	
 	set_active_view (mdi, view);
 
