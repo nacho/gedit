@@ -220,3 +220,51 @@ gedit_utils_is_uri_read_only (const gchar* uri)
 	return res;	
 }
 
+GtkWidget* 
+gedit_button_new_with_stock_image (const gchar* text, const gchar* stock_id)
+{
+	GtkWidget *button;
+	GtkStockItem item;
+	GtkWidget *label;
+	GtkWidget *image;
+	GtkWidget *hbox;
+	GtkWidget *align;
+
+	button = gtk_button_new ();
+
+ 	if (GTK_BIN (button)->child)
+    		gtk_container_remove (GTK_CONTAINER (button),
+				      GTK_BIN (button)->child);
+
+  	if (gtk_stock_lookup (stock_id, &item))
+    	{
+      		label = gtk_label_new_with_mnemonic (text);
+
+		gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
+      
+		image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
+      		hbox = gtk_hbox_new (FALSE, 2);
+
+      		align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+      
+      		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+      		gtk_box_pack_end (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+      
+      		gtk_container_add (GTK_CONTAINER (button), align);
+      		gtk_container_add (GTK_CONTAINER (align), hbox);
+      		gtk_widget_show_all (align);
+
+      		return button;
+    	}
+
+      	label = gtk_label_new_with_mnemonic (text);
+      	gtk_label_set_mnemonic_widget (GTK_LABEL (label), GTK_WIDGET (button));
+  
+  	gtk_misc_set_alignment (GTK_MISC (label), 0.5, 0.5);
+
+  	gtk_widget_show (label);
+  	gtk_container_add (GTK_CONTAINER (button), label);
+
+	return button;
+}
+

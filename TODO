@@ -1,4 +1,4 @@
-TODO (last update: January 8, 2002)
+TODO (last update: January 9, 2002)
 ===================================
 
 - General 
@@ -6,19 +6,19 @@ TODO (last update: January 8, 2002)
 [X] Implementing Print and Print Preview
 [X] Implementing Find 
 [X] Implementing Replace 
-[ ] Adding a MDI Mode page to Preferences dialog (already implemented, to be debugged)
-[ ] Adding a Tabs page to Preferences dialog (already implemented, 
-    but gedit_view_set_tab_size is broken,  see pango-layout.c function ensure_tab_width) 
-		
 [ ] Finishing About Box
 [X] Debugging Open from URI (It will be removed when we will use the new file selector.
     The Open button is not activated when the ENTER button is pressed)
-[ ] Fixing bug with UTF8 text in undo actions merge code
 [X] Reading non UTF8 files
 [ ] Saving files in locale encoding when needed
-[ ] Goto line dialog should not be modal
+[X] Goto line dialog should not be modal
 [ ] Removing EXIT button from toolbar as requested on #gnome (chema: ?)
 [ ] Removing unused code from gedit-file-selector-util.c
+[ ] Set toolbar buttons style according to system setting when requested (GConf key???)
+[ ] Implementing case sensitive Find and Replace
+[ ] Check all strings (this is a task for a native english person)
+[ ] Use gconf in gedit-recent.c 
+
 
 - Plugins
 
@@ -39,3 +39,9 @@ TODO (last update: January 8, 2002)
 [ ] Backup files before crashing, like AbiWord (I hope this code will never be used)
 [ ] Save menubar and toolbar layout 
 [ ] Instant apply in Preferences dialog
+[ ] Print from line x to line y
+[ ] Improve the behavior of the undo actions merging code when dealing with non ASCII text 
+[ ] Add a current line and col indicator on the status bar
+[ ] Adding a MDI Mode page to Preferences dialog (already implemented, to be debugged)
+[ ] Adding a Tabs page to Preferences dialog (already implemented, 
+    but gedit_view_set_tab_size is broken,  see pango-layout.c function ensure_tab_width) 		

@@ -32,12 +32,15 @@
 #define __GEDIT_UTILS_H__
 
 #include <glib.h>
+#include <gtk/gtkwidget.h>
 
 void	gedit_utils_flash     (gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
 
 gboolean gedit_utils_is_uri_read_only (const gchar* uri);
 gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
+
+GtkWidget* gedit_button_new_with_stock_image (const gchar* text, const gchar* stock_id);
 
 #endif /* __GEDIT_UTILS_H__ */
 

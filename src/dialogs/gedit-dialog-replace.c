@@ -135,7 +135,8 @@ dialog_replace_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-
+	GtkWidget *button;
+	
 	gedit_debug (DEBUG_SEARCH, "");
 	
 	if (dialog != NULL)
@@ -161,20 +162,33 @@ dialog_replace_get_dialog (void)
 
 	dialog = g_new0 (GeditDialogReplace, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons ("Replace",
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Replace"),
 						      window,						      
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CLOSE,						      
-						      "Replace _All",
-						      GEDIT_RESPONSE_REPLACE_ALL,
-						      "_Replace",
-						      GEDIT_RESPONSE_REPLACE,
-						      GTK_STOCK_FIND,
-						      GEDIT_RESPONSE_FIND,
+						      GTK_RESPONSE_CLOSE,
 						      NULL);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
+
+	/* Add Replace All button */
+	gtk_dialog_add_button (GTK_DIALOG (dialog->dialog), 
+			       _("Replace _All"), GEDIT_RESPONSE_REPLACE_ALL);
+	
+	/* Add Replace button */
+	button = gedit_button_new_with_stock_image (_("_Replace"), GTK_STOCK_FIND_AND_REPLACE);
+	g_return_val_if_fail (button != NULL, NULL);
+
+	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+
+	gtk_widget_show (button);
+
+	gtk_dialog_add_action_widget (GTK_DIALOG (dialog->dialog), 
+				      button, GEDIT_RESPONSE_REPLACE);
+
+	/* Add Find button */
+	gtk_dialog_add_button (GTK_DIALOG (dialog->dialog), 
+			       GTK_STOCK_FIND, GEDIT_RESPONSE_FIND);
 
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
@@ -252,7 +266,7 @@ dialog_find_get_dialog (void)
 
 	dialog = g_new0 (GeditDialogFind, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons ("Find",
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Find"),
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
