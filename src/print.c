@@ -23,10 +23,6 @@
  */ 
 
 
-#define DO_REAL_WORD_WRAPPING FALSE
-#define PRINT_DEBUG_ON
-#undef  PRINT_DEBUG_ON
-
 #include <config.h>
 #include <gnome.h>
 
@@ -98,7 +94,7 @@ typedef struct _PrintJobInfo {
        void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
        void file_print_preview_cb (GtkWidget *widget, gpointer data);
 static void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
-static void print_line (PrintJobInfo *pji, int line, int will_continue);
+static void print_line (PrintJobInfo *pji, int line);
 static void print_ps_line(PrintJobInfo * pji, int line);
 static int  print_determine_lines (PrintJobInfo *pji, int real);
 static void print_header (PrintJobInfo *pji, unsigned int page);
@@ -133,7 +129,6 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	if ( doc == NULL)
 		return;
 
-
 	pji = g_new0 (PrintJobInfo, 1);
 	pji->paper = gnome_paper_with_name (settings->papersize);
 	g_return_if_fail (pji->paper != NULL);
@@ -148,11 +143,8 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	{
 		dialog = (GnomePrintDialog *)gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
-							  GNOME_PRINT_RANGE_ALL |
-							  GNOME_PRINT_RANGE_RANGE,
-							  1,
-							  pji->pages,
-							  "A",
+							  GNOME_PRINT_RANGE_ALL | GNOME_PRINT_RANGE_RANGE,
+							  1, pji->pages, "A",
 							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
 
 		/* We need to calculate the number of pages
@@ -166,16 +158,15 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		case -1:
 			return;
 		default:
-		gnome_dialog_close (GNOME_DIALOG (dialog));
-		return;
+			gnome_dialog_close (GNOME_DIALOG (dialog));
+			return;
 		}
+
 		printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
-		/* Lets get print_first and print last page */
+
 		pji->print_first =0;
 		pji->print_last =0;
-		g_print("Print First : %i Print last : %i\n ", pji->print_first, pji->print_last);
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
-		g_print("Print First : %i Print last : %i\n ", pji->print_first, pji->print_last);
 		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
@@ -210,9 +201,14 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	
 	print_pji_destroy (pji);
 	
-/*	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 
-	gtk_widget_show_all (dialog);*/
+/*	FIXME : we need to set the parent of the dialog to be the active window,
+	because of some window manager issues */
+#if 0	
+        gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 
+	gtk_widget_show_all (dialog);
+#endif
 }
+
 
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
@@ -229,73 +225,56 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
  * print_document:
  * @doc: the document to be printed, we need this for doc->filename
  * @pji: the PrintJobInfo struct
- * @printer: the printer to do the printing to
+ * @printer: the printer to do the printing to, NULL for printpreview
  * 
  * prints *doc
  **/
 static void
 print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
-	int i,j;
-	int will_continue_in_next = FALSE;
-#ifdef PRINT_DEBUG_ON
-	gchar * debugmsg;
-#endif	
+	int current_page, current_line;
 	
 	gedit_debug_mess ("F:print_document\n", DEBUG_PRINT);
 	
-#ifdef PRINT_DEBUG_ON
-	debugmsg = g_strdup_printf("Pages : %i Total Lines : %i Total Lines Real :%i\n", pji->pages, pji->total_lines, pji->total_lines_real);
-	gedit_debug_mess (debugmsg, DEBUG_PRINT);
-	g_free (debugmsg);
-#endif
-	j=0;
+	current_line=0;
 	pji->temp = g_malloc( pji->chars_per_line + 2);
+
 	start_job (pji->pc);
-	for(i = 1; i <= pji->pages; i++)
+	for (current_page = 1; current_page <= pji->pages; current_page++)
 	{
-#ifdef PRINT_DEBUG_ON
-		debugmsg = g_strdup_printf("Printing page %i\n", i);
-		gedit_debug_mess (debugmsg, DEBUG_PRINT);
-		g_free (debugmsg);
-#endif
-		/* Need to know if we are going to print this page */ 
 		if (pji->range != GNOME_PRINT_RANGE_ALL)
-			pji->print_this_page=(i>=pji->print_first && i<=pji->print_last)?TRUE:FALSE;
+			pji->print_this_page = (current_page>=pji->print_first && current_page<=pji->print_last) ? TRUE:FALSE;
 		else
-			pji->print_this_page=TRUE;
+			pji->print_this_page = TRUE;
 
 		if (pji->print_this_page)
 		{
+			/* We need to call gnome_print_beginpage so that it adds
+			   "%% Page x" comment needed for viewing postcript files (i.e. in gv)*/
 			gchar * pagenumbertext;
-			pagenumbertext = g_strdup_printf ("%d", i);
+			pagenumbertext = g_strdup_printf ("%d", current_page);
 			gnome_print_beginpage (pji->pc, pagenumbertext);
 			g_free (pagenumbertext);
+
+			/* Print the header of the page */
 			if (settings->printheader)
-				print_header(pji, i);
+				print_header(pji, current_page);
 			print_setfont (pji);
 		}
-		/* in case the first line in the page is a continuation
-		   of the last line in the previous page. Chema */
-		if (pji->buffer[ pji->file_offset -1] != '\n' && i>1 && pji->wrapping)
-		{
-#ifdef PRINT_DEBUG_ON
-			g_print("decrementing 'j' my friend !\n");
-#endif
-			j--;
-		}
 		
-		for ( j++; j <= pji->total_lines; j++)
+		/* we do this when the first line in the page is a continuation
+		   of the last line in the previous page. This will prevent that
+		   the line number in the previous page is repeated in the next*/
+		if (pji->buffer [pji->file_offset-1] != '\n' && current_page>1 && pji->wrapping)
+			current_line--;
+		
+		for ( current_line++; current_line <= pji->total_lines; current_line++)
 		{
-#ifdef PRINT_DEBUG_ON
-			debugmsg = g_strdup_printf("Printing line: %i\n", j);
-			gedit_debug_mess (debugmsg, DEBUG_PRINT_DEEP);
-			g_free (debugmsg);
-#endif
-			print_line (pji, j, will_continue_in_next);
+			print_line (pji, current_line);
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
+		
 		if (pji->print_this_page)
 			end_page (pji);
 	}
@@ -308,16 +287,18 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 }
 
 static void
-print_line (PrintJobInfo *pji, int line, int will_continue)
+print_line (PrintJobInfo *pji, int line)
 {
 	int i;
+	int temp_i; /* We need to store i before scanning for a word wrap. If we cant wrap a word
+		      ( the word size > chars_per_row ) we break that line and resotore the old_i value*/
 	int print_line = TRUE;
 	int first_line = TRUE;
 
 	i = 0;
 
-	/* Blank line */
-	if (pji->buffer [pji->file_offset] == '\n')
+	/* blank line ...*/
+	if (pji->buffer [pji->file_offset] == '\n' )
 	{
 		pji->temp[0]=(guchar) '\0';
 		print_ps_line (pji, line);
@@ -327,35 +308,36 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 		
 	while( (pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size))
 	{
-		if (i>pji->chars_per_line)
-			g_print("Check failed i>pji->cpl %i\n", i);
 		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
+		
 		if( i == pji->chars_per_line + 1 )
 		{
 			/* We need to back i so that the last word does
-			   not get broken in the middle */
-#if 0			
-			g_print("Evaluating pji->buffer[ pji->file_offset + i] ======%c\n",pji->buffer[ pji->file_offset + i]);
-			while(pji->buffer[ pji->file_offset + i]!=' ')
+			   not get broken in 2 */
+			if (pji->wrapping)
 			{
+				temp_i=i;
 				i--;
-				g_print("11111\n");
+				while (pji->buffer [pji->file_offset+i] != ' ' && pji->buffer [pji->file_offset+i] != '\t' && i!= 0)
+					i--;
+				/* if the "word" is longer than a row then we break the "word" at the line width */
+				i++;
+				if (i==1)
+					i=temp_i;
 			}
-#endif			
-				
 			pji->temp[i]=(guchar) '\0';
 			pji->file_offset = pji->file_offset + i;
 			if (print_line)
 				print_ps_line (pji, (first_line)?line:0);
 			if (!pji->wrapping)
 				print_line = FALSE;
-			i=0;
 			first_line=FALSE;
 			if (pji->current_line % pji->lines_per_page == 0)
 			{
 				if (!pji->wrapping)
 				{
+					i=0;
 					/* If we are clipping lines, we need to
 					   advance pji->file_offset till the next \n */
 					while( (pji->buffer[ pji->file_offset + i] != '\n'
@@ -366,28 +348,19 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 				}
 				else
 				{
+					/* This is a special case in which the last line
+					   of a page has the same lenght as chars_per_line, so
+					   we need to advance file_offset to not print a blank
+					   line in the next page */
+					if ( i == pji->chars_per_line + 1)
+						pji->file_offset++;
 					return;
 				}
 			}
+			i=0;
 		}
 	}
-	if (i>pji->chars_per_line)
-		g_print("Check failed i>pji->cpl :%i\n", i);
-        /* If word wrapping v.s. word breaking, subsctract i till we find a space or a tab */
-	pji->temp[i]=(guchar) '\0';
-	g_print("Line: %i pji->temp %s\n", line, pji->temp);
 
-	
-	if (DO_REAL_WORD_WRAPPING && pji->temp[i-1]!=' ' && pji->temp[i-1]!='\t' && pji->wrapping)
-	{
-		g_print("The if is executing ...\n");
-		/* We need to check if the line was exaclty the same chars long,
-		   since temp will end with a char, but we need not to do word wrapping*/
-		while ( pji->temp[i-1]!=' ' && pji->temp[i-1]!='\t' && i==1 )
-			i--;
-	}
-
-	/*  - */
 	pji->temp[i]=(guchar) '\0';
 	pji->file_offset = pji->file_offset + i + 1;
 	if (print_line && i > 0)
@@ -422,10 +395,6 @@ print_ps_line (PrintJobInfo * pji, int line)
 static void
 set_pji (PrintJobInfo * pji, Document *doc)
 {
-#ifdef PRINT_DEBUG_ON
-	gchar * debugmsg;
-#endif	
-	
 	pji->view = VIEW(mdi->active_view);
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
@@ -466,27 +435,27 @@ set_pji (PrintJobInfo * pji, Document *doc)
 			      pji->header_height)/pji->font_char_height
 		              - 1 ;
 	pji->pages = ((int) (pji->total_lines_real-1)/pji->lines_per_page)+1;
-#ifdef PRINT_DEBUG_ON
-	debugmsg = g_strdup_printf("Pages : %i - Lines pp: %i - Lines real: %i - Lines total: %i\n",
-				   pji->pages,
-				   pji->lines_per_page,
-				   pji->total_lines_real,
-				   pji->total_lines);
-	gedit_debug_mess (debugmsg, DEBUG_PRINT);
-	g_free (debugmsg);
-#endif
-	if (pji->pages==0)
-		return;
-	
+
 	pji->file_offset = 0;
 	pji->current_line = 0;
 }
 
+/**
+ * print_determine_lines: 
+ * @pji: PrintJobInfo struct
+ * @real: this flag determines if we count rows of text or lines
+ * of rows splitted by wrapping.
+ *
+ * Determine the lines in the document so that we can calculate the pages
+ * needed to print it. We need this in order for us to do page/pages
+ *
+ * Return Value: number of lines in the document
+ **/
 static int
 print_determine_lines (PrintJobInfo *pji, int real)
 {
 	int lines=0;
-	int i;
+	int i, temp_i;
 	int character = 0;
 
 	for (i=0; i <= pji->buffer_size; i++)
@@ -495,9 +464,6 @@ print_determine_lines (PrintJobInfo *pji, int real)
 		{
 			if ((character>0 || !real || !pji->wrapping)||(character==0&&pji->wrapping))
 				lines++;
-#ifdef PRINT_DEBUG_ON
-			g_print("%i:%c\n",lines,pji->buffer[i+1]);
-#endif
 			character=0;
 		}
 		else
@@ -507,19 +473,28 @@ print_determine_lines (PrintJobInfo *pji, int real)
 				character++;
 				if (character == pji->chars_per_line + 2)
 				{
+					/* We do word wrapping here */ 
+					if (pji->buffer[i+1] != ' ' || pji->buffer[i+1] != '\t') 
+					{
+						temp_i = i;
+						i--;
+						while (pji->buffer [i] != ' ' && pji->buffer [i] != '\t' && i!= temp_i-pji->chars_per_line+2)
+						{
+							i--;
+						}
+						/* if the "word" is longer than a row then we break the word at the line width */
+						if (i == temp_i-pji->chars_per_line+2)
+							i = temp_i;
+						i++;
+					}
+					
 					lines++;
 					character=1;
-#ifdef PRINT_DEBUG_ON
-					g_print("added a line because of Wrapping\n");
-#endif					
 				}
 			}
 		}
 	}
 
-#ifdef PRINT_DEBUG_ON
-	g_print("Determine lines found %i lines\n", lines);
-#endif
         /* After counting, scan the doc backwards to determine how many
 	   blanks lines there are (at the bottom),substract that from lines */
 	for ( i=pji->buffer_size-1; i>0; i--)
@@ -529,15 +504,13 @@ print_determine_lines (PrintJobInfo *pji, int real)
 			if (pji->buffer[i] == '\n')
 				lines--;
 
-#ifdef PRINT_DEBUG_ON
-      g_print("And after substracting blank lines we have %i\n", lines);
-#endif
 	return lines;
 }
 
 static void
 start_job (GnomePrintContext *pc)
 {
+
 }
 
 static void

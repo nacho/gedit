@@ -172,7 +172,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	g_return_if_fail (app != NULL);
 
 	if (settings->num_recent)
-		gnome_app_remove_menu_range (app, _("_File/"), 6, 5);
+		gnome_app_remove_menu_range (app, _("_File/"), 6, 1+settings->num_recent);
 
 	if (recent_files == NULL)
 		return;
