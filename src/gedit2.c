@@ -154,9 +154,10 @@ main (int argc, char **argv)
 	/* Initialize gnome program */
 	program = gnome_program_init ("gedit", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, options,
+			    GNOME_PARAM_POPT_TABLE, options,			    
 			    GNOME_PARAM_HUMAN_READABLE_NAME,
 		            _("The GNOME text editor"),
+			    GNOME_PARAM_APP_DATADIR, DATADIR,
 			    NULL);
 
 	/* Set default icon */
