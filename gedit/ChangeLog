@@ -1,8 +1,15 @@
+2003-05-08  Yogeesh MB  <yogeeshappa.mathighatta@wipro.com>
+ 
+ 	* gedit-utils.c (remove_timeout_cb)(bonobo_window_flash): 
+ 	Replaced deprecated calls gtk_timeout_remove and gtk_timeout_add 
+ 	(fixes bug#105363)
+
 2003-05-06  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* Makefile.am: install the minimal set of header files needed by plugins
 
-	* *.[ch] #include the installed header files in the right way (ex. #include <gedit/gedit.view.h>)
+	* *.[ch]: #include the installed header files in the right way 
+	(ex. #include <gedit/gedit.view.h>)
 
 	* dialogs/Makefile.am
 	* recent-files/Makefile.am: cleaned up

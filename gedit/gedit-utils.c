@@ -98,7 +98,7 @@ remove_message_timeout (MessageInfo * mi)
 static void
 remove_timeout_cb (GtkWidget *win, MessageInfo *mi) 
 {
- 	gtk_timeout_remove (mi->timeoutid);
+ 	g_source_remove (mi->timeoutid);
   	g_free (mi);
 
 	if (mi == current_mi)
@@ -131,7 +131,7 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 	
 	if (current_mi != NULL)
 	{
-		gtk_timeout_remove (current_mi->timeoutid);
+		g_source_remove (current_mi->timeoutid);
 		remove_message_timeout (current_mi);
 	}
 	
@@ -144,8 +144,8 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 		mi = g_new(MessageInfo, 1);
 
     		mi->timeoutid = 
-      			gtk_timeout_add (flash_length,
-				(GtkFunction) remove_message_timeout,
+      			g_timeout_add (flash_length,
+				(GSourceFunc) remove_message_timeout,
 				mi);
     
     		mi->handlerid = 

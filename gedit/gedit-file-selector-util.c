@@ -399,6 +399,7 @@ create_gtk_selector (const char *default_path,
 		gtk_editable_select_region (GTK_EDITABLE (
 					    GTK_FILE_SELECTION (filesel)->selection_entry), 
 					    0, -1);
+					    
 	}
 	else
 		gtk_file_selection_set_filename (GTK_FILE_SELECTION (filesel), path);
