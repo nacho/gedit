@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-04-28 22:09+0200\n"
-"PO-Revision-Date: 2002-05-07 09:04+0200\n"
+"POT-Creation-Date: 2002-05-19 11:27+0200\n"
+"PO-Revision-Date: 2002-05-19 11:27+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -281,6 +281,9 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
+"Wtyczka licząca słowa analizuje bieżący dokument oraz umożliwia wyświetlenie "
+"liczby słów, wierszy, znaków oraz \"białych\" znaków. (spacje, tabulacje "
+"itd.)"
 
 #: plugins/docinfo/docinfo.c:1 plugins/sample/sample.c:1
 #: plugins/shell_output/shell_output.c:1
@@ -379,13 +382,15 @@ msgstr ""
 
 #: plugins/shell_output/shell_output.c:1
 msgid "An error occurs while running the selected command."
-msgstr ""
+msgstr "Podczas uruchamiania wybranego polecenia wystąpił błąd."
 
 #: plugins/shell_output/shell_output.c:1
 msgid ""
 "Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
+"Wykonuje dowolny program i wstawia zawartość jego standardowego wyjścia do "
+"bieżącego dokumentu."
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Specify the working directory and the command you want to run."
@@ -494,7 +499,7 @@ msgstr "_Przejdź do wiersza"
 
 #: src/dialogs/gedit-dialog-goto-line.c:1
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Nie można odnaleźć w pliku goto-line.glade2 wymaganych widgetów.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:1
 msgid "Plugin"
@@ -515,6 +520,8 @@ msgstr "Autorzy:"
 #: src/dialogs/gedit-dialog-plugin-manager.c:1
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
+"Nie można odnaleźć pliku plugin-menager.glade2, upewnij się, że gedit jest "
+"poprawnie zainstalowany.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:1
 msgid "Plugin Manager"
@@ -649,7 +656,8 @@ msgid "Editor"
 msgstr "Edytor"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
-#: src/dialogs/gedit-preferences.glade2.h:1 src/gedit-ui.xml.h:1
+#: src/dialogs/gedit-preferences.glade2.h:1 src/gedit-print.c:1
+#: src/gedit-ui.xml.h:1
 msgid "Print"
 msgstr "Wydrukuj"
 
@@ -814,7 +822,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Se_lection color:"
-msgstr ""
+msgstr "Kolor zazna_czenia:"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Set _tabs width equivalent to  "
@@ -849,48 +857,63 @@ msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr ""
+"Ustawienia czcionek i kolorów pozwalają na wybranie czcionki i kolorów "
+"używanych w oknie edytora."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
+"Ustawienia liczby wierszy pozwalają na wybranie opcji wyświetlania liczby "
+"wierszy z lewej strony okna."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
 msgstr ""
+"Ustawienia drukowania czcionek pozwalają na wybranie czcionek używanych przy "
+"drukowaniu dokumentów."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The print page settings let you customize how gedit prints documents."
 msgstr ""
+"Ustawienia drukowania strony pozwalają na wybranie sposobu drukowania "
+"dokumentów przez gedita."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
+"Ustawienia zapisu pozwalają na wybranie sposobu zapisu plików przez gedita."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The status bar settings let you show or hide status bar and customize its "
 "appearance."
 msgstr ""
+"Ustawienia paska stanu pozwalają na wybranie opcji wyświetlania lub "
+"ukrywania paska stanu oraz na określenie jego wyglądu."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
+msgstr "Ustawienia zakładek pozwalają na dopasowanie szerokości zakładek."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The toolbar settings let you show or hide toolbar and customize its "
 "appearance."
 msgstr ""
+"Ustawienia paska narzędziowego pozwalają na wybranie opcji wyświetlania lub "
+"ukrywania paska narzędziowego oraz na określenie jego wyglądu."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr ""
+"Ustawienia cofania zmian pozwalają na określenie maksymalnej liczby "
+"operacji, które można wycofać w danym momencie pracy z geditem."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
@@ -970,7 +993,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Restore default fonts"
-msgstr "_Przywróć domyślne czionki"
+msgstr "_Przywróć domyślne czcionki"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Show status bar"
@@ -986,15 +1009,15 @@ msgstr "Kolor _tekstu:"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Use default theme font"
-msgstr "Użycie _domyślnej czionki motywu"
+msgstr "Użycie _domyślnej czcionki motywu"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "action(s)"
-msgstr ""
+msgstr "operacje"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "minutes"
-msgstr ""
+msgstr "minuty"
 
 #: src/dialogs/gnome-print-font-dialog.c:1
 msgid "_Insert a new preview phrase."
@@ -1022,11 +1045,11 @@ msgstr "sans 12"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpQqRrSsŚśUuVvWwXxYyZzŹźŻż"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Pick a Font"
-msgstr ""
+msgstr "Wybór czcionki"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Title"
@@ -1034,7 +1057,7 @@ msgstr "Tytuł"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Tytuł okna dialogowego wyboru"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Font name"
@@ -1042,7 +1065,7 @@ msgstr "Nazwa czcionki"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Nazwa wybranej czcionki"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Preview text"
@@ -1062,11 +1085,11 @@ msgstr ""
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Font size for label"
-msgstr ""
+msgstr "Rozmiar czcionki dla etykiety"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Rozmiar czcionki dla etykiety w trybie informacyjnym czcionek"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Show size"
@@ -1166,7 +1189,7 @@ msgstr "Nie można zaktualizować ustawień gedita."
 
 #: src/gedit-commands.c:1
 msgid "translator_credits"
-msgstr ""
+msgstr "GNOME PL Team <translators@gnome.pl>"
 
 #: src/gedit-commands.c:1
 msgid "gedit"
@@ -1186,48 +1209,34 @@ msgid "Untitled"
 msgstr "BezNazwy"
 
 #: src/gedit-document.c:1 src/gedit-document.c:1
+msgid "Invalid file name"
+msgstr "Niepoprawna nazwa pliku"
+
+#: src/gedit-document.c:1 src/gedit-document.c:1
 msgid "Invalid UTF-8 data"
 msgstr "Niepoprawne dane UTF-8"
 
 #: src/gedit-document.c:1
 #, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Nie można odczytać informacji o dowiązaniu symbolicznym związanym z %s"
+
+#: src/gedit-document.c:1
+msgid "The file has too many symbolic links."
+msgstr "Plik posiada zbyt wiele dowiązań symbolicznych."
+
+#: src/gedit-document.c:1
+#, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
+msgstr "gedit nie obsługuje lokalizacji %s: w trybie zapisu."
 
 #: src/gedit-document.c:1
 msgid "gedit cannot handle this kind of location in write mode."
-msgstr ""
+msgstr "gedit nie może obsłużyć tego rodzaju lokalizacji w trybie zapisu."
 
 #: src/gedit-document.c:1
 msgid "Invalid filename."
 msgstr "Niepoprawna nazwa pliku"
-
-#: src/gedit-document.c:1
-#,, c-format
-msgid "Could not open backup file %s."
-msgstr "Nie można otworzyć pliku zapasowego \"%s\"."
-
-#: src/gedit-document.c:1
-#, c-format
-msgid "Could not open file %s."
-msgstr "Nie można otworzyć pliku \"%s\"."
-
-#: src/gedit-document.c:1 src/gedit-document.c:1
-msgid "Could not create backup file."
-msgstr "Nie można stworzyć kopii zapasowej pliku."
-
-#: src/gedit-document.c:1
-msgid "Could not write backup file."
-msgstr "Nie można zapisać kopii zapasowej pliku."
-
-#: src/gedit-document.c:1
-msgid "Error when creating backup file."
-msgstr "Błąd przy tworzeniu kopii zapasowej pliku."
-
-#: src/gedit-document.c:1 src/gedit-document.c:1
-#: src/gedit-document.c:1
-msgid "Could not save the file."
-msgstr "Nie można zapisać pliku."
 
 #: src/gedit-document.c:1
 msgid ""
@@ -1239,11 +1248,17 @@ msgstr ""
 
 #: src/gedit-document.c:1
 msgid ""
-"The file is too big.\n"
-"Please try saving a smaller file."
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
 msgstr ""
-"Plik jest zbyt duży.\n"
-"Spróbuj zapisać mniejszy plik."
+"Dysk, na którym są zapisywane dane posiada ograniczenia na wielość plików. "
+"Spróbuj zapisywać mniejsze pliki lub zapisywać je na dysku nie posiadającym "
+"tego typu ograniczeń."
+
+#: src/gedit-document.c:1
+msgid "Could not create a backup file."
+msgstr "Nie można stworzyć kopii zapasowej pliku."
 
 #: src/gedit-document.c:1
 msgid "It is not possible to revert an Untitled document"
@@ -1310,7 +1325,7 @@ msgstr "Plik \"%s\" został przywrócony."
 #: src/gedit-file.c:1
 #, c-format
 msgid "Loading %d file..."
-msgstr ""
+msgstr "Wczytywanie %d. pliku..."
 
 #: src/gedit-file.c:1
 #, c-format
@@ -1328,6 +1343,9 @@ msgid ""
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"Czy chcesz zapisać zmiany naniesione w dokumencie \"%s\"?\n"
+"\n"
+"Niezapisane zmiany zostaną utracone."
 
 #: src/gedit-mdi.c:1
 msgid "Do_n't save"
@@ -1335,11 +1353,11 @@ msgstr "_Nie zapisuj"
 
 #: src/gedit-mdi.c:1
 msgid "_Don't quit"
-msgstr ""
+msgstr "_Nie kończ"
 
 #: src/gedit-mdi.c:1
 msgid "_Don't close"
-msgstr ""
+msgstr "_Nie zamykaj"
 
 #: src/gedit-mdi.c:1
 msgid "(modified)"
@@ -1397,17 +1415,15 @@ msgstr "Błąd, nie można unieaktywnić wtyczki \"%s\""
 #: src/gedit-plugins-engine.c:1
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Błąd, nie można uaktualnić interfejsu użytkownika wtyczki \"%s\""
 
 #: src/gedit-print.c:1
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
-
-#: src/gedit-print.c:1
-msgid "gedit - Print Document"
-msgstr "gedit - wydruk dokumentu"
+"Wydruk z programu gedit nie jest możliwy, gdyż nie można\n"
+"odnaleźć jednej z wymaganych czcionek."
 
 #: src/gedit-print.c:1
 #, c-format
@@ -1435,18 +1451,9 @@ msgstr ""
 "\n"
 "%s,"
 
-#: src/gedit-recent.c:1
-#, c-format
-msgid "Open %s"
-msgstr "Otwiera %s"
-
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
 msgstr "Informacje o aplikacji"
-
-#: src/gedit-ui.xml.h:1
-msgid "About..."
-msgstr "Informacje o..."
 
 #: src/gedit-ui.xml.h:1
 msgid "Add/Remove plugins"
@@ -1489,10 +1496,6 @@ msgid "Configure the application"
 msgstr "Konfiguruje aplikację"
 
 #: src/gedit-ui.xml.h:1
-msgid "Contents"
-msgstr "Zawartość"
-
-#: src/gedit-ui.xml.h:1
 msgid "Copy"
 msgstr "Skopiuj"
 
@@ -1514,7 +1517,7 @@ msgstr "Dopasuj"
 
 #: src/gedit-ui.xml.h:1
 msgid "Customize toolbars"
-msgstr ""
+msgstr "Dopasowuje paski narzędziowe"
 
 #: src/gedit-ui.xml.h:1
 msgid "Cut"
@@ -1534,11 +1537,11 @@ msgstr "Usuwa zaznaczony tekst"
 
 #: src/gedit-ui.xml.h:1
 msgid "Dump XML"
-msgstr ""
+msgstr "Zrzuć XML"
 
 #: src/gedit-ui.xml.h:1
 msgid "Dump the UI Xml description"
-msgstr ""
+msgstr "Zrzuca plik XML z opisem interfejsu użytkownika"
 
 #: src/gedit-ui.xml.h:1
 msgid "Find Again"
@@ -1957,6 +1960,11 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ nie można znalećź komputera "
+"\"%s\".\n"
+"\n"
+"Upewnij się, że lokalizacja została wpisana poprawnie oraz czy ustawienia "
+"pośrednika są poprawne, a następnie spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1965,6 +1973,9 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest niepoprawna.\n"
+"\n"
+"Sprawdź czy lokalizacja została wpisana poprawnie i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1973,6 +1984,9 @@ msgid ""
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
+"\n"
+"Sprawdź czy ustawienia pośrednika są poprawne i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1981,6 +1995,9 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nie można otworzyć pliku \"%s\" poniewać nie można przeprowadzić logowania.\n"
+"\n"
+"Sprawdź czy lokalizacja została wpisana poprawnie i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1989,6 +2006,8 @@ msgid ""
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ zawiera on niepoprawne dane UTF-8.\n"
+"Prawdopodobnie próbowano otworzyć plik binarny."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2018,6 +2037,9 @@ msgid ""
 "\n"
 "Perhaps, it has recently been deleted."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ nie można go odnaleźć.\n"
+"\n"
+"Prawdopodobnie ostatnio plik ten został wykasowany."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2030,6 +2052,8 @@ msgstr ""
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ gedit nie potrafi obsługiwać "
+"lokalizacji %s."
 
 #: src/gedit-utils.c:1 src/gedit-utils.c:1
 #, c-format
@@ -2042,6 +2066,8 @@ msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ zawiera on dane zapisane w "
+"niepoprawnym formacie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2070,6 +2096,8 @@ msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Brak wolnej pamięci do przywrócenia pliku \"%s\". Zamknij kilka z "
+"uruchomionych aplikacji i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2078,6 +2106,9 @@ msgid ""
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" gdyż nie można znaleźć komputera \"%s\".\n"
+"\n"
+"Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2086,11 +2117,16 @@ msgid ""
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
+"\n"
+"Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ próba zalogowania zakończyła się "
+"niepowodzeniem."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -2099,6 +2135,9 @@ msgid ""
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ zawiera niepoprawne dane UTF-8.\n"
+"\n"
+"Prawdopodobnie próbowano przywrócić plik binarny."
 
 #: src/gedit-utils.c:1
 msgid "It is not possible to revert an Untitled document."
@@ -2162,9 +2201,18 @@ msgid "Show recent debugging messages."
 msgstr ""
 
 #: src/gedit2.c:1
+msgid "Show session management debugging messages."
+msgstr ""
+
+#: src/gedit2.c:1
 msgid "Turn on all debugging messages."
 msgstr ""
 
 #: src/gedit2.c:1
 msgid "The GNOME text editor"
 msgstr "Edytor tekstu dla GNOME"
+
+#: src/gnome-recent-view-bonobo.c:1
+#, c-format
+msgid "Open %s"
+msgstr "Otwiera %s"
