@@ -29,6 +29,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
+#include <gconf/gconf-client.h>
 
 #include <time.h>
 
@@ -40,9 +41,13 @@
 #define MENU_ITEM_NAME		"PluginInsertDateAndTime"	
 #define MENU_ITEM_TIP		N_("Insert current date and time at the cursor position.")
 
+#define TIME_BASE_KEY 	"/apps/gedit2/plugins/time"
+#define SEL_FORMAT_KEY	"/sel-format"
+
 enum
 {
   COLUMN_FORMATS,
+  COLUMN_INDEX,
   NUM_COLUMNS
 };
 
@@ -81,8 +86,9 @@ static gchar *formats[] =
 	NULL
 };
 
-const gchar* sel_format = "%d/%m/%Y %H:%M:%S";
-	
+static gint 		 sel_format 		= 0;
+static GConfClient 	*time_gconf_client 	= NULL;	
+
 /* Gratiously ripped out of GIMP (app/general.c), with a fiew minor changes */
 static char *
 get_time (const gchar* format)
@@ -96,24 +102,13 @@ get_time (const gchar* format)
 	gedit_debug (DEBUG_PLUGINS, "");
 
   	clock = time (NULL);
-  	/*now = gmtime (&clock);*/
   	now = localtime (&clock);
 	  	
   	tmp = static_buf;
 	
-  	/* date format derived from ISO 8601:1988 */
-  	/*sprintf(tmp, "%04d-%02d-%02d%c%02d:%02d:%02d%c",
-	  now->tm_year + 1900, now->tm_mon + 1, now->tm_mday,
-	  ' ',
-	  now->tm_hour, now->tm_min, now->tm_sec,
-	  '\000'); 
-	
-	  return tmp;
-	*/
-
 	do
 	{
-		out_length += 200;
+		out_length += 255;
 		out = (char *) realloc (out, out_length);
 	}
   	while (strftime (out, out_length, format, now) == 0);
@@ -135,7 +130,7 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 }
 
 static GtkTreeModel*
-create_model (void)
+create_model (TimeConfigureDialog *dialog)
 {
 	gint i = 0;
 	GtkListStore *store;
@@ -144,7 +139,11 @@ create_model (void)
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	/* create list store */
-	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING);
+	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+
+	/* Set tree view model*/
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->list), GTK_TREE_MODEL (store));
+	g_object_unref (G_OBJECT (store));
 
 	/* add data to the list store */
 	while (formats[i] != NULL)
@@ -157,8 +156,18 @@ create_model (void)
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
 				    COLUMN_FORMATS, str,
+				    COLUMN_INDEX, i,
 				    -1);
 		g_free (str);
+
+		if (i == sel_format)
+		{
+			GtkTreeSelection *selection;
+		
+			selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->list));
+			g_return_val_if_fail (selection != NULL, GTK_TREE_MODEL (store));
+			gtk_tree_selection_select_iter (selection, &iter);
+		}
 
 		++i;
 	}
@@ -171,28 +180,21 @@ create_formats_list (TimeConfigureDialog *dialog)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
-	GtkTreeModel *model;
 	GtkWidget *button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (dialog != NULL);
 
-	model = create_model ();
+	create_model (dialog);
 
-	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->list), model);
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (dialog->list), FALSE);
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (dialog->list), TRUE);
 
-	g_object_unref (G_OBJECT (model));
-
-	/* the First column */
+	
+	/* the Available formats column */
 	cell = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Available formats"), cell, 
 			"text", COLUMN_FORMATS, NULL);
-	/*
-	gtk_tree_view_column_set_cell_data_func (column, cell, dialog_plugin_manager_view_cell_cb,
-						 dialog, NULL);
-	*/
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->list), column);
 
 	gtk_widget_show (dialog->list);
@@ -287,7 +289,7 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 	doc = gedit_view_get_document (view);
 	g_return_if_fail (doc != NULL);
 
-	the_time = get_time (sel_format);
+	the_time = get_time (formats[sel_format]);
 
 	gedit_document_begin_user_action (doc);
 	
@@ -296,13 +298,43 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 	gedit_document_end_user_action (doc);
 }
 
+static void
+ok_button_pressed (TimeConfigureDialog *dialog)
+{
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->list));
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->list));
+	g_return_if_fail (selection != NULL);
+
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+	{
+		gtk_tree_model_get (model, &iter, COLUMN_INDEX, &sel_format, -1);
+	}
+
+	gedit_debug (DEBUG_PLUGINS, "Sel: %d", sel_format);
+}
+
+static void
+help_button_pressed (TimeConfigureDialog *dialog)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	/* FIXME */
+}
+
 G_MODULE_EXPORT GeditPluginState
 configure (GeditPlugin *p, GtkWidget *parent)
 {
 	TimeConfigureDialog *dialog;
-
+	gint ret;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
-
 	
 	dialog = get_configure_dialog (GTK_WINDOW (parent));
 
@@ -313,9 +345,28 @@ configure (GeditPlugin *p, GtkWidget *parent)
 		return PLUGIN_ERROR;
 	}
 
-	gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+	do
+	{
+		ret = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+
+		switch (ret)
+		{
+			case GTK_RESPONSE_OK:
+				ok_button_pressed (dialog);
+				gtk_widget_hide (dialog->dialog);
+				break;
+			case GTK_RESPONSE_HELP:
+				help_button_pressed (dialog);
+				break;
+			default:
+				gtk_widget_hide (dialog->dialog);
+		}
+
+	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
 
 	gtk_widget_destroy (dialog->dialog);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState
@@ -344,6 +395,10 @@ G_MODULE_EXPORT GeditPluginState
 destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	plugin->deactivate (plugin);
+
+	g_object_unref (G_OBJECT (time_gconf_client));
 }
 	
 G_MODULE_EXPORT GeditPluginState
@@ -428,6 +483,24 @@ deactivate (GeditPlugin *pd)
 }
 
 G_MODULE_EXPORT GeditPluginState
+save_settings (GeditPlugin *pd)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (time_gconf_client != NULL, PLUGIN_ERROR);
+	
+	gconf_client_set_int (
+			time_gconf_client,
+			TIME_BASE_KEY SEL_FORMAT_KEY,
+			sel_format,
+		      	NULL);
+
+	gconf_client_suggest_sync (time_gconf_client, NULL);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
 init (GeditPlugin *pd)
 {
 	/* initialize */
@@ -435,11 +508,24 @@ init (GeditPlugin *pd)
      
 	pd->name = _("Insert Date/Time");
 	pd->desc = _("Inserts the current date and time at the cursor position.");
-	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
-	pd->copyright = _("Copyright (C) 2002 - Alex Roberts");
+	pd->author = "Paolo Maggi <maggi@athena.politol.it>";
+	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
 	pd->private_data = NULL;
 		
+	time_gconf_client = gconf_client_get_default ();
+	g_return_val_if_fail (time_gconf_client != NULL, PLUGIN_ERROR);
+
+	gconf_client_add_dir (time_gconf_client,
+			      TIME_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
+	
+	sel_format = gconf_client_get_int (
+				time_gconf_client,
+				TIME_BASE_KEY SEL_FORMAT_KEY,
+			      	NULL);
+
 	return PLUGIN_OK;
 }
 

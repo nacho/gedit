@@ -604,3 +604,4 @@ gboolean gedit_prefs_configure_event_handler (GtkWidget	     *widget,
 
 	return FALSE;
 }
+

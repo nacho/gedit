@@ -41,6 +41,7 @@
 #include "gedit-recent.h" 
 #include "gedit-prefs.h"
 #include "gedit-file-selector-util.h"
+#include "gedit-plugins-engine.h"
 
 #define USE_BONOBO_FILE_SEL_API	
 
@@ -880,7 +881,9 @@ gedit_file_exit (void)
 	   is connected to gedit_file_exit ( i.e. this function ). */
 	gtk_signal_disconnect_by_func (GTK_OBJECT (gedit_mdi),
 			    GTK_SIGNAL_FUNC (gedit_file_exit), NULL);
-		
+	
+	gedit_plugins_engine_save_settings ();
+	
 	gedit_prefs_save_settings ();
 
 	gedit_recent_history_save ();

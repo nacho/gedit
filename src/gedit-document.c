@@ -372,9 +372,6 @@ gedit_document_new_with_uri (const gchar *uri, GError **error)
 void 		
 gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 {
-	GtkTextIter start;
-	GtkTextIter end;
-
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
@@ -406,23 +403,6 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 	if (document->priv->readonly == readonly) 
 		return;
 
-	/* No more needed - Remove it - Paolo */
-	/*
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
-      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
-
-	if (readonly) 
-	{
-		gtk_text_buffer_apply_tag_by_name (GTK_TEXT_BUFFER (document), 
-					NOT_EDITABLE_TAG_NAME, &start, &end);
-	}
-	else
-	{
-		gtk_text_buffer_remove_tag_by_name (GTK_TEXT_BUFFER (document), 
-					NOT_EDITABLE_TAG_NAME, &start, &end);
-	}
-	*/
-	
 	document->priv->readonly = readonly;
 
 	g_signal_emit (G_OBJECT (document),

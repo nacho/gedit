@@ -33,10 +33,14 @@
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-i18n.h>
 
+#include <gconf/gconf-client.h>
+
 #include "gedit-plugins-engine.h"
 #include "gedit-debug.h"
 
 #define USER_GEDIT_PLUGINS_LOCATION ".gedit2/plugins/"
+
+#define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit2/plugins"
 
 static void		 gedit_plugins_engine_load_all 	();
 static void		 gedit_plugins_engine_load_dir	();
@@ -47,6 +51,8 @@ static void		 gedit_plugins_engine_reactivate_all ();
 
 static GList *gedit_plugins_list = NULL;
 
+static GConfClient *gedit_plugins_engine_gconf_client = NULL;
+
 gboolean
 gedit_plugins_engine_init ()
 {
@@ -54,6 +60,14 @@ gedit_plugins_engine_init ()
 	
 	if (!g_module_supported ())
 		return FALSE;
+
+	gedit_plugins_engine_gconf_client = gconf_client_get_default ();
+	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, FALSE);
+
+	gconf_client_add_dir (gedit_plugins_engine_gconf_client,
+			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
 	
 	gedit_plugins_engine_load_all ();
 
@@ -116,10 +130,13 @@ gedit_plugins_engine_load (const gchar *file)
 
 	GeditPlugin *plugin;
 	guint res;
+	gboolean to_be_activated;
+	gchar* key;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_val_if_fail (file != NULL, NULL);
+	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, NULL);
 	
 	info = g_new0 (GeditPluginInfo, 1);
 	g_return_val_if_fail (info != NULL, NULL);
@@ -212,12 +229,29 @@ gedit_plugins_engine_load (const gchar *file)
 
 		goto error;
 	}
+		
+	key = g_strdup_printf ("%s%s", 
+			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+			g_basename (plugin->file));
+			
+	to_be_activated = gconf_client_get_bool (
+				gedit_plugins_engine_gconf_client,
+				key,
+				NULL);
+	
+	g_free (key);
+
+	/* Actually, the plugin will be activated when reactivate_all
+	 * will be called for the first time.
+	 * */
+	if (to_be_activated)
+		info->state = GEDIT_PLUGIN_ACTIVATED;
+	else
+		info->state = GEDIT_PLUGIN_DEACTIVATED;
+	
+	gedit_plugins_list = g_list_append (gedit_plugins_list, info);
 
 	gedit_debug (DEBUG_PLUGINS, "Plugin: %s (INSTALLED)", plugin->name);
-
-	info->state = GEDIT_PLUGIN_DEACTIVATED;
-
-	gedit_plugins_list = g_list_append (gedit_plugins_list, info);
 
 	return plugin;
 
@@ -240,9 +274,50 @@ error:
 void
 gedit_plugins_engine_save_settings ()
 {
+	GList *pl;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	/* TODO */
+	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
+
+	/* save settings of all the plugins that implement the
+	 * save_settings function
+	 */
+	pl = gedit_plugins_list;
+	
+	while (pl)
+	{
+		gchar* key;
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+		
+		if (info->plugin->save_settings != NULL)
+		{
+			gint r;
+		       	gedit_debug (DEBUG_PLUGINS, "Save settings of %s", info->plugin->name);
+
+			r = info->plugin->save_settings (info->plugin);
+			
+			if (r != PLUGIN_OK)
+			{
+				g_warning (_("Error, impossible to save settings of the plugin '%s'"),
+			   		info->plugin->name);
+			}
+		}
+
+		key = g_strdup_printf ("%s%s", 
+			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+			g_basename (info->plugin->file));
+			
+		gconf_client_set_bool (
+				gedit_plugins_engine_gconf_client,
+				key,
+				info->state == GEDIT_PLUGIN_ACTIVATED,
+				NULL);
+	
+		g_free (key);
+	
+		pl = g_list_next (pl);
+	}
 }
 
 
@@ -294,7 +369,7 @@ gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 	{
 		g_warning (_("Error, impossible to activate plugin '%s'"),
 			   plugin->name);
-		
+	
 		return FALSE;
 	}
 
@@ -344,9 +419,7 @@ gedit_plugins_engine_reactivate_all ()
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
-		/* FIXME: uncomment when we will have a Plugin Manager - Paolo
 		if (info->state == GEDIT_PLUGIN_ACTIVATED)
-		*/
 		{
 			gint r = info->plugin->activate (info->plugin);
 			
@@ -354,10 +427,9 @@ gedit_plugins_engine_reactivate_all ()
 			{
 				g_warning (_("Error, impossible to activate plugin '%s'"),
 			   		info->plugin->name);
+				
+				info->state = GEDIT_PLUGIN_DEACTIVATED;			
 			}
-			/* FIXME: remove when we will have a Plugin Manager - Paolo */
-			else
-				info->state = GEDIT_PLUGIN_ACTIVATED;
 		}
 	
 		pl = g_list_next (pl);

@@ -449,11 +449,11 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	/* FIXME: set window position at the center of the active window -- Paolo */
 
 	static GtkWidget *about = NULL;
-	GdkPixbuf* pixbuf;
+	GdkPixbuf* pixbuf = NULL;
 	
 	gchar *authors[] = {
 		"Paolo Maggi <maggi@athena.polito.it>",
-		"Chema Celorio <chema@celorio.com>", 
+		"Chema Celorio <chema@ximian.com>", 
 		"James Willcox <jwillcox@cs.indiana.edu>",
 		NULL
 	};
@@ -477,6 +477,20 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 		return;
 	}
 	
+	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-logo.png", NULL);
+	if (pixbuf != NULL)
+	{
+		GdkPixbuf* temp_pixbuf = NULL;
+
+		temp_pixbuf = gdk_pixbuf_scale_simple (pixbuf, 
+					 gdk_pixbuf_get_width (pixbuf) / 2,
+					 gdk_pixbuf_get_height (pixbuf) / 2,
+					 GDK_INTERP_HYPER);
+		g_object_unref (pixbuf);
+
+		pixbuf = temp_pixbuf;
+	}
+
 	about = gnome_about_new (_("gedit"), VERSION,
 				"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
 				"(C) 2000-2002 Chema Celorio and Paolo Maggi",
@@ -484,18 +498,15 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 				(const char **)authors,
 				(const char **)documenters,
 				NULL, /*(const char *)translator_credits,*/
-				NULL);
+				pixbuf);
 
-	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-logo.png", NULL);
+	gtk_window_set_transient_for (GTK_WINDOW (about),
+			GTK_WINDOW (gedit_get_active_window ()));
+
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
 
 	if (pixbuf != NULL)
-	{
-		g_object_set (G_OBJECT (about), "background", pixbuf,
-			"background_start_opacity", 0.4,
-			"background_end_opacity", 0.1, NULL);
-
 		g_object_unref (pixbuf);
-	}
 	
 	gtk_signal_connect (GTK_OBJECT (about), "destroy",
 			   GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
