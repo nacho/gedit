@@ -49,6 +49,14 @@ plugin_in_files = spell.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(glade_DATA) $(plugin_DATA) gedit-spell-checker-dialog-marshal.list 
+EXTRA_DIST = 					\
+	$(glade_DATA)				\
+	$(plugin_DATA)				\
+	gedit-spell-checker-dialog-marshal.list 
 
 CLEANFILES = $(BUILT_SOURCES) 
+
+dist-hook:
+	cd $(distdir); rm -f $(BUILT_SOURCES)
+
+

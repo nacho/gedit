@@ -34,13 +34,13 @@ gedit-@GEDIT_MAJOR@.pc: gedit.pc
 	cp gedit.pc gedit-@GEDIT_MAJOR@.pc
 
 EXTRA_DIST = $(desktop_in_files)	\
-	$(desktop_DATA)			\
+#	$(desktop_DATA)			\
 	$(keys_in_files)		\
-	$(keys_DATA)			\
+#	$(keys_DATA)			\
 	$(schemas_in_files)		\
-	$(schemas_DATA)			\
+#	$(schemas_DATA)			\
 	$(server_in_files)		\
-	$(server_DATA)			\
+#	$(server_DATA)			\
 	$(man_MANS)			\
 	$(app_DATA)			\
 	gedit.pc.in
