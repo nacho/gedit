@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-11-15 23:45+0100\n"
-"PO-Revision-Date: 2002-11-15 23:50+0100\n"
+"POT-Creation-Date: 2002-11-22 22:23+0100\n"
+"PO-Revision-Date: 2002-11-22 22:32+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -266,7 +266,6 @@ msgid "Status Bar is Visible"
 msgstr "Statuslinjen er synlig"
 
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -274,12 +273,7 @@ msgid ""
 "\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
-msgstr ""
-"Stil for verktøylinjeknapper. Mulige verdier er «GEDIT_TOOLBAR_SYSTEM» for å "
-"bruke systemets forvalgte stil, «GEDIT_TOOLBAR_ICONS» for å vise kun ikoner "
-"og «GEDIT_TOOLBAR_ICONS_AND_TEXT» for å vise både ikoner og tekst. Merk at "
-"det skilles mellom store og små bokstaver så de må brukes eksakt som de er "
-"skrevet her."
+msgstr "Stil for verktøylinjeknapper. Mulige verdier er «GEDIT_TOOLBAR_SYSTEM» for å bruke systemets forvalgte stil, «GEDIT_TOOLBAR_ICONS» for å vise kun ikoner, «GEDIT_TOOLBAR_ICONS_AND_TEXT» for å vise både ikoner og tekst og «GEDIT_TOOLBAR_ICONS_BOTH_HORIZ» for å vise prioritert tekst ved siden av ikoner. Merk at det skilles mellom store og små bokstaver så de må brukes eksakt som de er skrevet her."
 
 #: data/gedit.schemas.in.h:43
 msgid "Tab Size"
@@ -357,18 +351,16 @@ msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Om gedit skal vise linjenummer i redigeringsområdet."
 
 #: data/gedit.schemas.in.h:54
-#, fuzzy
 msgid "Whether gedit should enable auto indentation."
-msgstr "Om gedig skal ta med en topptekst ved utskrift av dokumenter."
+msgstr "Om gedit skal aktivere automatisk indentering."
 
 #: data/gedit.schemas.in.h:55
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Om gedig skal ta med en topptekst ved utskrift av dokumenter."
 
 #: data/gedit.schemas.in.h:56
-#, fuzzy
 msgid "Whether gedit should insert spaces instead of tabs."
-msgstr "Om gedit skal vise linjenummer i redigeringsområdet."
+msgstr "Om gedit skal sette inn mellomrom i stedet for tabulator."
 
 #: data/gedit.schemas.in.h:57
 msgid ""
@@ -451,17 +443,9 @@ msgstr "ASCII-tabell"
 msgid "_Insert char"
 msgstr "Sett _inn tegn"
 
-#: plugins/ASCII/ascii.c:490 plugins/ASCII/asciitable.glade2.h:1
+#: plugins/ASCII/asciitable.glade2.h:1
 msgid "ASCII table"
 msgstr "ASCII-tabell"
-
-#: plugins/ASCII/ascii.c:491
-msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr "Dette tillegget viser en pop-up dialog som inneholder en ASCII-tabell."
-
-#: plugins/ASCII/ascii.c:493
-msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr "Opphavsrett © 2001-2002 Paolo Maggi"
 
 #. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:49
@@ -472,20 +456,6 @@ msgstr "Åpne CVS-endrin_gslogg"
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Søker etter ChangeLog i aktivt dokument og åpner dem"
 
-#: plugins/cvschangelog/cvschangelog.c:269
-msgid "CVS ChangeLog"
-msgstr "CVS endringslogg"
-
-#: plugins/cvschangelog/cvschangelog.c:270
-msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr ""
-"Et tillegg som åpner endringslogger (ChangeLog) som finnes i CVS-"
-"loggmeldinger."
-
-#: plugins/cvschangelog/cvschangelog.c:272
-msgid "Copyright (C) 2002 - James Willcox"
-msgstr "Opphavsrett © 2002 - James Willcox"
-
 #: plugins/diff/diff.c:65
 msgid "Co_mpare Files..."
 msgstr "Sa_mmenlign filer..."
@@ -494,10 +464,6 @@ msgstr "Sa_mmenlign filer..."
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
-
-#: plugins/diff/diff.c:70
-msgid "Compare files"
-msgstr "Sammenlign filer"
 
 #. Create the dialog
 #: plugins/diff/diff.c:271
@@ -512,11 +478,11 @@ msgstr "S_ammenlign"
 msgid "Executed command"
 msgstr "Kjørt kommando"
 
-#: plugins/diff/diff.c:638
+#: plugins/diff/diff.c:652
 msgid "The two documents you selected are the same."
 msgstr "De to valgte dokumentene du valgte er like."
 
-#: plugins/diff/diff.c:646
+#: plugins/diff/diff.c:660
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -526,7 +492,7 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:655
+#: plugins/diff/diff.c:669
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -536,20 +502,20 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:663
+#: plugins/diff/diff.c:677
 msgid "The two files you selected are the same."
 msgstr "De to filene du valgte er like."
 
-#: plugins/diff/diff.c:681
+#: plugins/diff/diff.c:695
 msgid "The \"first\" document contains no text."
 msgstr "Det \"første\" dokumentet inneholder ingen tekst."
 
-#: plugins/diff/diff.c:716
+#: plugins/diff/diff.c:730
 msgid "The \"second\" document contains no text."
 msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:742
+#: plugins/diff/diff.c:756
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -559,7 +525,7 @@ msgstr ""
 "\n"
 "gedit kunne ikke opprette en midlertidig file."
 
-#: plugins/diff/diff.c:762 plugins/diff/diff.c:775
+#: plugins/diff/diff.c:776 plugins/diff/diff.c:789
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -569,11 +535,11 @@ msgstr ""
 "\n"
 "Feil under kjøring av diff-kommandoen."
 
-#: plugins/diff/diff.c:797
+#: plugins/diff/diff.c:811
 msgid "No differences were found between the selected documents."
 msgstr "Ingen forskjeller mellom de valgte dokumentene funnet."
 
-#: plugins/diff/diff.c:838
+#: plugins/diff/diff.c:852
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -583,26 +549,7 @@ msgstr ""
 "\n"
 "Resultatet inneholder ugyldige UTF-8 data."
 
-#: plugins/diff/diff.c:1066
-msgid ""
-"Makes a diff file from two documents or files on disk.\n"
-"\n"
-"For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
-msgstr ""
-"Lager en fil med forskjellene mellom to dokumenter eller filer på disk\n"
-"\n"
-"For mer informasjon om diff, skriv «man diff» på kommandolinjen\n"
-
-#: plugins/diff/diff.c:1069
-msgid ""
-"Copyright (C) 2000 - 2001 Chema Celorio \n"
-"Copyright (C) 2002 Paolo Maggi"
-msgstr ""
-"Opphavsrett © 2000 - 2001 Chema Celorio \n"
-"Opphavsrett © 2002 Paolo Maggi"
-
-#: plugins/diff/diff.glade2.h:1 plugins/email/email.glade2.h:1
-#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
 #: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:4
 #: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
 msgid "*"
@@ -700,29 +647,13 @@ msgstr "_Ordteller"
 msgid "Get info on current document"
 msgstr "Hent informasjon om dette dokumentet"
 
-#: plugins/docinfo/docinfo.c:142 plugins/docinfo/docinfo.c:362
+#: plugins/docinfo/docinfo.c:142
 msgid "Word count"
 msgstr "Ordteller"
 
 #: plugins/docinfo/docinfo.c:153
 msgid "_Update"
 msgstr "_Oppdater"
-
-#: plugins/docinfo/docinfo.c:363
-msgid ""
-"The word count plugin analyzes the current document and determines the "
-"number of words, lines, characters and non-space characters in it and "
-"display the result."
-msgstr ""
-"Ordteller-tillegget analyserer aktivt dokument og bestemmer antall ord, "
-"linjer, tegn og tegn som ikke er tomme områder og viser resultatet."
-
-#: plugins/docinfo/docinfo.c:367 plugins/indent/indent.c:258
-#: plugins/sample/sample.c:175 plugins/shell_output/shell_output.c:963
-#: plugins/spell/spell.c:823 plugins/taglist/gedit-taglist-plugin.c:164
-#: plugins/time/time.c:1036
-msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr "Opphavsrett © 2002 - Paolo Maggi"
 
 #: plugins/docinfo/docinfo.glade2.h:1
 msgid "0"
@@ -776,6 +707,10 @@ msgstr "Brukernavn"
 msgid "Inserts the user name at the cursor position."
 msgstr "Setter inn brukernavn i markørposisjonen."
 
+#: plugins/sample/sample.c:175
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr "Opphavsrett © 2002 - Paolo Maggi"
+
 #: plugins/shell_output/shell_output.c:56
 msgid "_Execute Shell Command..."
 msgstr "Kjør _skallkommando..."
@@ -784,32 +719,32 @@ msgstr "Kjør _skallkommando..."
 msgid "Execute a shell command"
 msgstr "Kjør en skallkommando"
 
-#: plugins/shell_output/shell_output.c:160
-#: plugins/shell_output/shell_output.c:519
+#: plugins/shell_output/shell_output.c:164
+#: plugins/shell_output/shell_output.c:525
 msgid "Stopped"
 msgstr "Stoppet"
 
-#: plugins/shell_output/shell_output.c:243
+#: plugins/shell_output/shell_output.c:249
 msgid "An error occurs while running the selected command."
 msgstr "En feil oppsto under kjøring av valgt kommando."
 
-#: plugins/shell_output/shell_output.c:299
+#: plugins/shell_output/shell_output.c:305
 msgid "Shell output"
 msgstr "Skallutskrift"
 
-#: plugins/shell_output/shell_output.c:315
+#: plugins/shell_output/shell_output.c:321
 msgid "_Run"
 msgstr "Kjø_r"
 
-#: plugins/shell_output/shell_output.c:525
+#: plugins/shell_output/shell_output.c:531
 msgid "Done"
 msgstr "Ferdig"
 
-#: plugins/shell_output/shell_output.c:527
+#: plugins/shell_output/shell_output.c:533
 msgid "Failed"
 msgstr "Feilet"
 
-#: plugins/shell_output/shell_output.c:699
+#: plugins/shell_output/shell_output.c:705
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -819,7 +754,7 @@ msgstr ""
 "\n"
 "Vennligst sett inn en gyldig skallkommando."
 
-#: plugins/shell_output/shell_output.c:732
+#: plugins/shell_output/shell_output.c:738
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -829,20 +764,9 @@ msgstr ""
 "\n"
 "Vennligst sett inn en gyldig skallkommando."
 
-#: plugins/shell_output/shell_output.c:816
+#: plugins/shell_output/shell_output.c:824
 msgid "Executing command"
 msgstr "Kjører kommando"
-
-#: plugins/shell_output/shell_output.c:960
-msgid "Shell command"
-msgstr "Skallkommando"
-
-#: plugins/shell_output/shell_output.c:961
-#, fuzzy
-msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
-msgstr "Kjør et eksternt program og sett inn utdata i et nytt dokument."
 
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Capture the command _output"
@@ -903,18 +827,6 @@ msgstr "«Tag»-liste"
 msgid "Show the tag list window"
 msgstr "Vis vindu for tag-liste"
 
-#: plugins/taglist/gedit-taglist-plugin.c:160
-msgid "Tag list"
-msgstr "Tag-liste"
-
-#: plugins/taglist/gedit-taglist-plugin.c:161
-msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tabs/strings without having to type them."
-msgstr ""
-"Tag-listen gir deg en lett metode for å sette inn ofte brukte faner eller "
-"strenger uten å måtte skrive dem."
-
 #: plugins/time/time.c:47
 msgid "In_sert Date/Time"
 msgstr "_Sett inn dato/klokkeslett"
@@ -923,22 +835,13 @@ msgstr "_Sett inn dato/klokkeslett"
 msgid "Insert current date and time at the cursor position"
 msgstr "Sett inn dagens dato og klokkeslett i markørposisjonen"
 
-#: plugins/time/time.c:440
+#: plugins/time/time.c:439
 msgid "Available formats"
 msgstr "Tilgjengelige formater"
 
-#: plugins/time/time.c:540
-#, fuzzy
+#: plugins/time/time.c:539
 msgid "Configure insert date/time plugin..."
-msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett"
-
-#: plugins/time/time.c:1033
-msgid "Insert Date/Time"
-msgstr "Sett inn dato/klokkeslett"
-
-#: plugins/time/time.c:1034
-msgid "Inserts current date and time at the cursor position."
-msgstr "Setter inn dagens dato og klokkeslett i markørposisjonen."
+msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett..."
 
 #: plugins/sort/sort.glade2.h:1 plugins/time/time.glade2.h:1
 #: src/dialogs/gedit-preferences.glade2.h:1 src/dialogs/replace.glade2.h:1
@@ -952,16 +855,15 @@ msgstr "%d.%m.%Y %H:%M%:%S"
 
 #: plugins/time/time.glade2.h:5
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
-msgstr ""
+msgstr "<span size=\"small\">01.11.2002 17:52:00</span>"
 
 #: plugins/time/time.glade2.h:6
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\">Når dato/tid settes inn...</span>"
 
 #: plugins/time/time.glade2.h:7
-#, fuzzy
 msgid "Configure date/time plugin"
-msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett"
+msgstr "Konfigurer tillegg for dato/klokkeslett"
 
 #: plugins/time/time.glade2.h:8
 msgid "Select a format"
@@ -999,17 +901,9 @@ msgstr "Fjern i_ndentering"
 msgid "Unindent selected lines"
 msgstr "Fjern indentering for valgte linjer"
 
-#: plugins/indent/indent.c:255
-msgid "Indent lines"
-msgstr "Indenter linjer"
-
-#: plugins/indent/indent.c:256
-msgid "Indent or un-indent selected lines."
-msgstr ""
-
 #: plugins/sort/sort.glade2.h:2
 msgid "<i>You will not be able to undo the sort operation.</i>"
-msgstr ""
+msgstr "<i>Du vil ikke kunne angre sorteringsoperasjonen.</i>"
 
 #: plugins/sort/sort.glade2.h:3
 msgid "<span weight=\"bold\">Sort Order</span>"
@@ -1023,7 +917,7 @@ msgstr "Skiller mellom _store/små bokstaver"
 msgid "S_tart ordering at column"
 msgstr "S_tart plassering ved kolonne"
 
-#: plugins/sort/sort.c:493 plugins/sort/sort.glade2.h:6
+#: plugins/sort/sort.glade2.h:6
 msgid "Sort"
 msgstr "Sorter"
 
@@ -1246,84 +1140,6 @@ msgstr "_Ignorer"
 msgid "_Suggestions:"
 msgstr "_Forslag:"
 
-#: plugins/email/email.glade2.h:2
-msgid "_From:"
-msgstr "_Fra:"
-
-#: plugins/email/email.glade2.h:3
-msgid "_Subject:"
-msgstr "_Emne:"
-
-#: plugins/email/email.glade2.h:4
-msgid "_To:"
-msgstr "_Til:"
-
-#: plugins/email/email.c:55
-msgid "E_mail..."
-msgstr "E-_post..."
-
-#: plugins/email/email.c:58
-msgid "Email a file."
-msgstr "Send en fil."
-
-#: plugins/email/email.c:60
-msgid "Email"
-msgstr "E-post"
-
-#. Create the dialog
-#: plugins/email/email.c:138
-msgid "Email current document..."
-msgstr "Send dette dokumentet..."
-
-#: plugins/email/email.c:151
-msgid "Se_nd"
-msgstr "Se_nd"
-
-#: plugins/email/email.c:265
-msgid ""
-"Error sending email.\n"
-"\n"
-"Please provide a recipient."
-msgstr ""
-
-#: plugins/email/email.c:271
-msgid ""
-"Error sending email.\n"
-"\n"
-"Please provide a from address."
-msgstr ""
-
-#: plugins/email/email.c:277
-msgid ""
-"Error sending email.\n"
-"\n"
-"Please provide a subject."
-msgstr ""
-
-#: plugins/email/email.c:294
-#, fuzzy
-msgid ""
-"Error sending email.\n"
-"\n"
-"Error executing the sendmail command."
-msgstr ""
-"Umulig å sammenligne valgte dokumenter.\n"
-"\n"
-"Feil under kjøring av diff-kommandoen."
-
-#: plugins/email/email.c:467
-msgid ""
-"Sends the current document via email.  You must have sendmail installed for "
-"this to work."
-msgstr ""
-
-#: plugins/email/email.c:469
-#, fuzzy
-msgid ""
-"Copyright (C) 2000 - 2002 Alex Roberts,Chema Celorio\n"
-"James Willcox"
-msgstr "Opphavsrett © 2002 - James Willcox"
-
 #. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:26
 msgid "Sor_t..."
@@ -1332,19 +1148,6 @@ msgstr "Sor_ter..."
 #: plugins/sort/sort.c:29
 msgid "Sort the current document or selection."
 msgstr "Sorter aktivt dokument eller utvalg."
-
-#: plugins/sort/sort.c:494
-msgid "Sort a document or selected text."
-msgstr "Sorter et dokument eller valgte tekst."
-
-#: plugins/sort/sort.c:499
-#, fuzzy
-msgid ""
-"Copyright (C) 2001 Carlo Borreo\n"
-"Copyright (C) 2002 Lee Mallabone and Paolo Maggi"
-msgstr ""
-"Opphavsrett © 2000 - 2001 Chema Celorio \n"
-"Opphavsrett © 2002 Paolo Maggi"
 
 #: plugins/spell/spell.c:51
 msgid "_Spelling..."
@@ -1356,48 +1159,35 @@ msgstr "_Sjekk staving..."
 
 #: plugins/spell/spell.c:58
 msgid "Check the current document for incorrect spelling"
-msgstr ""
+msgstr "Sjekk aktivt dokument for ukorrekt staving"
 
 #: plugins/spell/spell.c:60
 msgid "_Auto Spellcheck"
 msgstr "_Automatisk stavekontroll"
 
 #: plugins/spell/spell.c:63
-#, fuzzy
 msgid "Automatically spell-check the current document"
-msgstr "Sett inn utskrift fra skallet i aktivt dokument"
+msgstr "Automatisk stavekontroll av aktivt dokument"
 
 #: plugins/spell/spell.c:65
 msgid "Set _Language"
 msgstr "Sett _språk"
 
 #: plugins/spell/spell.c:68
-#, fuzzy
 msgid "Set the language of the current document"
-msgstr "Velg _språk for aktivt dokument."
+msgstr "Sett språk for aktivt dokument"
 
-#: plugins/spell/spell.c:554
+#: plugins/spell/spell.c:553
 msgid "The document is empty."
 msgstr "Dokumentet er tomt."
 
-#: plugins/spell/spell.c:572
-#, fuzzy
+#: plugins/spell/spell.c:571
 msgid "The selected text does not contain mispelled words."
-msgstr "Valgt fil er ikke kjørbar."
+msgstr "Valgt tekst inneholder ingen feilstavede ord."
 
-#: plugins/spell/spell.c:573
-#, fuzzy
+#: plugins/spell/spell.c:572
 msgid "The document does not contain mispelled words."
-msgstr "Endringer i dokumentet ble ikke forkastet."
-
-#: plugins/spell/spell.c:820
-msgid "Spell checker"
-msgstr "Stavekontroll"
-
-#: plugins/spell/spell.c:821
-#, fuzzy
-msgid "Checks the spelling of the current document."
-msgstr "Velg _språk for aktivt dokument."
+msgstr " Dokumentet inneholder ikke feilstavede ord."
 
 #: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1886
 #, c-format
@@ -1673,7 +1463,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:15
 msgid "<span weight=\"bold\">Colors</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Farger</span>"
 
 #: src/dialogs/gedit-preferences.glade2.h:16
 msgid "<span weight=\"bold\">When creating a new file...</span>"
@@ -2242,52 +2032,47 @@ msgstr "(endret)"
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
-#: src/gedit-plugins-engine.c:162
+#: src/gedit-plugins-engine.c:349
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Feil, kunne ikke åpne modulfil «%s»\n"
 
-#: src/gedit-plugins-engine.c:177
+#: src/gedit-plugins-engine.c:359
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Feil, tillegg «%s» inneholder ikke init-funksjonen."
 
-#: src/gedit-plugins-engine.c:187
+#: src/gedit-plugins-engine.c:369
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Feil. Tillegg «%s» inneholder ikke aktiveringsfunksjonen."
 
-#: src/gedit-plugins-engine.c:197
+#: src/gedit-plugins-engine.c:379
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Feil. Tillegg «%s» inneholder ikke deaktiveringsfunksjonen."
 
-#: src/gedit-plugins-engine.c:227
+#: src/gedit-plugins-engine.c:404
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Feil. Kunne ikke initiere tillegg «%s»"
 
-#: src/gedit-plugins-engine.c:235
+#: src/gedit-plugins-engine.c:455
 #, c-format
-msgid "Error, the plugin '%s' did not specified a name"
-msgstr "Feil. Tillegg «%s» spesifiserte ikke et navn"
+msgid "Error, impossible to destroy plugin '%s'"
+msgstr "Feil. Umulig å ødelegge tillegg «%s»"
 
-#: src/gedit-plugins-engine.c:315
-#, c-format
-msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr "Feil. Uulig å lagre innstillinger for tillegg «%s»"
-
-#: src/gedit-plugins-engine.c:387 src/gedit-plugins-engine.c:445
+#: src/gedit-plugins-engine.c:538 src/gedit-plugins-engine.c:626
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Feil. Umulig å aktivere tillegg «%s»"
 
-#: src/gedit-plugins-engine.c:414
+#: src/gedit-plugins-engine.c:577
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Feil. Umulig å deaktivere tillegg «%s»"
 
-#: src/gedit-plugins-engine.c:489
+#: src/gedit-plugins-engine.c:670
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Feil. Umulig å oppdatere ui for tillegg «%s»"
@@ -2344,9 +2129,8 @@ msgid "C_ustomize Statusbar"
 msgstr "Tilpass stat_uslinjen"
 
 #: src/gedit-ui.xml.h:3
-#, fuzzy
 msgid "Change the visibility of the output window in the current window"
-msgstr "Endre synlighet for verktøylinen i aktivt vindu"
+msgstr "Endre synlighet for utdatavindu i aktivt vindu"
 
 #: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
@@ -2682,7 +2466,7 @@ msgstr "_Åpne..."
 
 #: src/gedit-ui.xml.h:93
 msgid "_Output Window"
-msgstr ""
+msgstr "_Utdatavindu"
 
 #: src/gedit-ui.xml.h:94
 msgid "_Paste"
@@ -2694,7 +2478,7 @@ msgstr "S_kriv ut..."
 
 #: src/gedit-ui.xml.h:96
 msgid "_Priority Text beside Icons"
-msgstr ""
+msgstr "_Prioritetstekst ved siden av ikoner"
 
 #: src/gedit-ui.xml.h:97
 msgid "_Quit"
@@ -3156,9 +2940,8 @@ msgid "Create a new document in an existing instance of gedit"
 msgstr "Opprett et nytt dokument i en eksisterende instans av gedit"
 
 #: src/gedit-output-window.c:278
-#, fuzzy
 msgid "Close the output window"
-msgstr "Vis vindu for tag-liste"
+msgstr "Lukk utdatavindu"
 
 #: src/gedit-output-window.c:316
 msgid "Copy selected lines"
@@ -3166,11 +2949,11 @@ msgstr "Kopier valgte linjer"
 
 #: src/gedit-output-window.c:336
 msgid "Clear the output window"
-msgstr ""
+msgstr "Tøm utdatavindu"
 
 #: src/gedit-output-window.c:374
 msgid "Output Lines"
-msgstr ""
+msgstr "Utdatalinjer"
 
 #: src/dialogs/gedit-encodings-dialog.c:238
 msgid ""
@@ -3321,6 +3104,109 @@ msgstr "Thai"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (ugyldig Unicode)"
+
+#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+#~ msgstr ""
+#~ "Dette tillegget viser en pop-up dialog som inneholder en ASCII-tabell."
+
+#~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
+#~ msgstr "Opphavsrett © 2001-2002 Paolo Maggi"
+
+#~ msgid "CVS ChangeLog"
+#~ msgstr "CVS endringslogg"
+
+#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+#~ msgstr ""
+#~ "Et tillegg som åpner endringslogger (ChangeLog) som finnes i CVS-"
+#~ "loggmeldinger."
+
+#~ msgid "Copyright (C) 2002 - James Willcox"
+#~ msgstr "Opphavsrett © 2002 - James Willcox"
+
+#~ msgid "Compare files"
+#~ msgstr "Sammenlign filer"
+
+#~ msgid ""
+#~ "Makes a diff file from two documents or files on disk.\n"
+#~ "\n"
+#~ "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
+#~ msgstr ""
+#~ "Lager en fil med forskjellene mellom to dokumenter eller filer på disk\n"
+#~ "\n"
+#~ "For mer informasjon om diff, skriv «man diff» på kommandolinjen\n"
+
+#~ msgid ""
+#~ "Copyright (C) 2000 - 2001 Chema Celorio \n"
+#~ "Copyright (C) 2002 Paolo Maggi"
+#~ msgstr ""
+#~ "Opphavsrett © 2000 - 2001 Chema Celorio \n"
+#~ "Opphavsrett © 2002 Paolo Maggi"
+
+#~ msgid ""
+#~ "The word count plugin analyzes the current document and determines the "
+#~ "number of words, lines, characters and non-space characters in it and "
+#~ "display the result."
+#~ msgstr ""
+#~ "Ordteller-tillegget analyserer aktivt dokument og bestemmer antall ord, "
+#~ "linjer, tegn og tegn som ikke er tomme områder og viser resultatet."
+
+#~ msgid "Shell command"
+#~ msgstr "Skallkommando"
+
+#~ msgid "Tag list"
+#~ msgstr "Tag-liste"
+
+#~ msgid ""
+#~ "The tag list plugin provides a method to easily insert into a document "
+#~ "commonly used tabs/strings without having to type them."
+#~ msgstr ""
+#~ "Tag-listen gir deg en lett metode for å sette inn ofte brukte faner eller "
+#~ "strenger uten å måtte skrive dem."
+
+#~ msgid "Insert Date/Time"
+#~ msgstr "Sett inn dato/klokkeslett"
+
+#~ msgid "Inserts current date and time at the cursor position."
+#~ msgstr "Setter inn dagens dato og klokkeslett i markørposisjonen."
+
+#~ msgid "Indent lines"
+#~ msgstr "Indenter linjer"
+
+#~ msgid "_From:"
+#~ msgstr "_Fra:"
+
+#~ msgid "_Subject:"
+#~ msgstr "_Emne:"
+
+#~ msgid "_To:"
+#~ msgstr "_Til:"
+
+#~ msgid "E_mail..."
+#~ msgstr "E-_post..."
+
+#~ msgid "Email a file."
+#~ msgstr "Send en fil."
+
+#~ msgid "Email"
+#~ msgstr "E-post"
+
+#~ msgid "Email current document..."
+#~ msgstr "Send dette dokumentet..."
+
+#~ msgid "Se_nd"
+#~ msgstr "Se_nd"
+
+#~ msgid "Sort a document or selected text."
+#~ msgstr "Sorter et dokument eller valgte tekst."
+
+#~ msgid "Spell checker"
+#~ msgstr "Stavekontroll"
+
+#~ msgid "Error, the plugin '%s' did not specified a name"
+#~ msgstr "Feil. Tillegg «%s» spesifiserte ikke et navn"
+
+#~ msgid "Error, impossible to save settings of the plugin '%s'"
+#~ msgstr "Feil. Uulig å lagre innstillinger for tillegg «%s»"
 
 #~ msgid ""
 #~ "If you wish to insert any of the characters in to the active \n"
