@@ -127,7 +127,7 @@ dialog_find_line (void)
 	GtkAdjustment *adj;
 	Document *doc;
 	gint linecount;
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = GE_VIEW (mdi->active_view);
 
 	doc = gedit_document_current ();
 

@@ -357,6 +357,8 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 {
 	static char col [32];
 
+	return;
+	/* Disable by chema for 0.7.0 . this hack is not working */
 	gedit_debug_mess ("F:line_pos_cb\n", DEBUG_VIEW);
 
 	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
