@@ -5,6 +5,7 @@
 #include <strings.h>
 
 #include "main.h"
+#include "toolbar.h"
 
 static void menus_remove_accel(GtkWidget * widget, gchar * signal_name, gchar * path);
 static gint menus_install_accel(GtkWidget * widget, gchar * signal_name, gchar key, gchar modifiers, gchar * path);
@@ -43,6 +44,15 @@ static GtkMenuEntry menu_items[] =
      {"<Main>/Options/Document Tabs/Right", NULL, tab_rgt_cback, NULL},
      {"<Main>/Options/Document Tabs/<separator>", NULL, NULL, NULL},
      {"<Main>/Options/Document Tabs/Toggle", NULL, tab_toggle_cback, NULL},
+	 {"<Main>/Options/Toolbar/Show Toolbar", NULL, tb_on_cb, NULL},
+	 {"<Main>/Options/Toolbar/Hide Toolbar", NULL, tb_off_cb, NULL},
+	 {"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
+	 {"<Main>/Options/Toolbar/Pictures and Text", NULL, tb_pic_text_cb, NULL},
+	 {"<Main>/Options/Toolbar/Pictures only", NULL, tb_pic_only_cb, NULL},
+	 {"<Main>/Options/Toolbar/Text only", NULL, tb_text_only_cb, NULL},
+	 {"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
+	 {"<Main>/Options/Toolbar/Tooltips On", NULL, tb_tooltips_on_cb, NULL},
+	 {"<Main>/Options/Toolbar/Tooltips Off", NULL, tb_tooltips_off_cb, NULL},
      {"<Main>/Help/About", "<control>H", gE_about_box, NULL}
 };
 

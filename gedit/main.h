@@ -106,6 +106,7 @@ struct _gE_window {
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
 	GtkWidget *menubar;
+	GtkWidget *toolbar;
 	GtkWidget *notebook;
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;

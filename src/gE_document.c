@@ -28,6 +28,7 @@
 #endif
 #include "main.h"
 #include "menus.h"
+#include "toolbar.h"
 
 /*
 #ifdef WITHOUT_GNOME
@@ -100,6 +101,19 @@ GnomeUIInfo gedit_tab_menu []= {
 	GNOMEUIINFO_END
 };
 
+GnomeUIInfo gedit_toolbar_menu []= {
+	{GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, NULL, NULL },
+	{GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, NULL, NULL },
+	{GNOME_APP_UI_SEPARATOR},
+	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, NULL, NULL },
+	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, NULL, NULL },
+	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, NULL, NULL },
+	{GNOME_APP_UI_SEPARATOR},
+	{GNOME_APP_UI_ITEM, N_("Tooltips On"), NULL, tb_tooltips_on_cb, NULL, NULL },
+	{GNOME_APP_UI_ITEM, N_("Tooltips Off"), NULL, tb_tooltips_off_cb, NULL, NULL },
+	GNOMEUIINFO_END
+};
+
 GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_callback, NULL, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
@@ -108,6 +122,7 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, NULL, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings },
 	GNOMEUIINFO_END
@@ -220,6 +235,11 @@ gE_window *gE_window_new()
   gnome_app_set_contents (GNOME_APP(window->window), box1);
   gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
 #endif
+
+  gE_create_toolbar(window);
+  gtk_box_pack_start(GTK_BOX(box1), window->toolbar, FALSE, TRUE, 0);
+  gtk_widget_show(window->toolbar);
+
   gtk_widget_show (box1);
 
   gE_document_new(window);
