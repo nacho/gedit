@@ -227,11 +227,6 @@ action_replace_all (GeditReplaceDialog *dialog,
 	
 	if (dialog->replacements > 0)
 	{
-		/* Check if there is a selection active */
-		if (gedit_view_get_selection (dialog->view, NULL, NULL))
-			gedit_view_set_selection (dialog->view, 0, 0);
-		/* Move the view (scrollbars) to the correct position */
-		gnome_dialog_close (dialog->dialog);
 		gedit_document_delete_text (dialog->view->doc, 0,
 					    gedit_document_get_buffer_length(dialog->view->doc),
 					    TRUE);
@@ -341,10 +336,9 @@ gedit_dialog_replace (gboolean replace)
 		dialog_action (dialog, button, replace);
 		gedit_search_end ();
 
-		if (button == 2) /* Replace all */
+		if (button == 2)
 			break;
 
-		/* Call again to update the buttons & the entries */
 		dialog_set (dialog, replace, FALSE);
 	}
 
