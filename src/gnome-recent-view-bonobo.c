@@ -337,6 +337,20 @@ gnome_recent_view_bonobo_get_property (GObject *object,
 	}
 }
 
+
+static void
+gnome_recent_view_bonobo_finalize (GObject *object)
+{
+	GnomeRecentViewBonobo *view = GNOME_RECENT_VIEW_BONOBO (object);
+
+	if (view->path)
+		g_free (view->path);
+
+	if (view->model)
+		g_signal_handler_disconnect (G_OBJECT (view->model),
+					     view->changed_cb_id);
+}
+
 static void
 gnome_recent_view_bonobo_class_init (GnomeRecentViewBonoboClass * klass)
 {
@@ -347,6 +361,7 @@ gnome_recent_view_bonobo_class_init (GnomeRecentViewBonoboClass * klass)
 
 	object_class->set_property = gnome_recent_view_bonobo_set_property;
 	object_class->get_property = gnome_recent_view_bonobo_get_property;
+	object_class->finalize = gnome_recent_view_bonobo_finalize;
 
 	gnome_recent_view_bonobo_signals[ACTIVATE] = g_signal_new ("activate",
 			G_OBJECT_CLASS_TYPE (object_class),

@@ -426,7 +426,8 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 				       GCONF_VALUE_STRING, NULL);
 
 	/* if this is already in our list, remove it */
-	uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst, uri);
+	uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst,
+						       uri);
 
 	/* prepend the new one */
 	uri_lst = g_slist_prepend (uri_lst, g_strdup (uri));
@@ -485,7 +486,8 @@ gnome_recent_model_delete (GnomeRecentModel * recent, const gchar * uri)
 				       gconf_key,
 				       GCONF_VALUE_STRING, NULL);
 
-	new_uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst, uri);
+	new_uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst,
+							   uri);
 
 	/* if it wasn't deleted, no need to cause unneeded updates */
 	/*
@@ -515,6 +517,33 @@ gnome_recent_model_delete (GnomeRecentModel * recent, const gchar * uri)
 	return ret;
 }
 
+static GSList *
+gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
+{
+	GSList *newlist=NULL;
+	GSList *tmp;
+	gchar *uri;
+	gchar *unescaped_uri;
+
+	tmp = list;
+
+	while (tmp) {
+		uri = (gchar *)tmp->data;
+
+		unescaped_uri = gnome_vfs_unescape_string_for_display (uri);
+		newlist = g_slist_prepend (newlist, unescaped_uri);
+
+		tmp = tmp->next;
+	}
+
+	newlist = g_slist_reverse (newlist);
+
+	gnome_recent_model_g_slist_deep_free (list);
+
+	return newlist;
+}
+
+
 /**
  * gnome_recent_model_get_list:
  * @recent: A GnomeRecentModel object.
@@ -537,11 +566,12 @@ gnome_recent_model_get_list (GnomeRecentModel * recent)
 	uri_lst = gconf_client_get_list (recent->gconf_client,
 				       gconf_key,
 				       GCONF_VALUE_STRING, NULL);
-
 	g_free (gconf_key);
+
 
 	/* FIXME:  This sucks. */
 	gnome_recent_model_monitor_uri_list (recent, uri_lst);
+	uri_lst = gnome_recent_model_unescape_list (recent, uri_lst);
 
 	return uri_lst;
 }
@@ -687,9 +717,9 @@ gnome_recent_model_gconf_to_list (GConfValue* value)
 	while (iter != NULL)
 	{
 		GConfValue* element = iter->data;
-		gchar *text = g_strdup (gconf_value_get_string (element));
+		gchar *uri = g_strdup (gconf_value_get_string (element));
 
-		list = g_slist_prepend (list, text);
+		list = g_slist_prepend (list, uri);
 
 		iter = g_slist_next(iter);
 	}
@@ -757,6 +787,8 @@ gnome_recent_model_notify_cb (GConfClient *client, guint cnxn_id,
 	list = gnome_recent_model_gconf_to_list (entry->value);
 
 	gnome_recent_model_monitor_uri_list (recent, list);
+
+	list = gnome_recent_model_unescape_list (recent, list);
 
 	g_signal_emit (G_OBJECT(recent), model_signals[CHANGED], 0, list);
 

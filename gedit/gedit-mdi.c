@@ -341,7 +341,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	g_signal_connect (G_OBJECT (view), "activate",
 			  G_CALLBACK (gedit_file_open_recent), NULL);
 	
-	g_object_set_data (G_OBJECT (win), RECENT_KEY, view);
+	g_object_set_data_full (G_OBJECT (win), RECENT_KEY, view,
+				g_object_unref);
 
 	/* FIXME: Set the window size. */
 	gtk_window_set_default_size (GTK_WINDOW (win), 
