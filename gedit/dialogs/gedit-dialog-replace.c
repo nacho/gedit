@@ -472,7 +472,7 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
-				_("The string \"%s\" has not been found."), search_string);
+				_("The text \"%s\" was not found."), search_string);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
@@ -543,7 +543,7 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
-				_("The string \"%s\" has not been found."), search_string);
+				_("The text \"%s\" was not found."), search_string);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
@@ -700,7 +700,7 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_INFO,
 			GTK_BUTTONS_OK,
-			_("The string \"%s\" has not been found."), search_string);
+			_("The text \"%s\" was not found."), search_string);
 	}
 	else
 	{	
