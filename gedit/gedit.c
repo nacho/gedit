@@ -31,7 +31,6 @@
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"
-#include "msgbox.h"
 #include "gE_files.h"
 
 #ifdef WITH_GMODULE_PLUGINS
@@ -101,7 +100,6 @@ void prog_init(char **file)
 #endif
 
 	gE_prefs_open();
-	msgbox_create();
 
 #ifdef GTK_HAVE_FEATURES_1_1_0	
 	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
@@ -325,7 +323,6 @@ int main (int argc, char **argv)
 	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
 	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
 
-	msgbox_create ();
 	data = g_malloc (sizeof (gE_data));
 	window_list = NULL;
 	window = gE_window_new();

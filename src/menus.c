@@ -35,7 +35,6 @@
 #include "gE_print.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
-#include "msgbox.h"
 #include "search.h"
 
 
@@ -171,8 +170,6 @@ static GtkMenuEntry menu_items[] =
 		NULL, NULL },
 	{"<Main>/Window/Document List", "<control>L",
 		files_list_popup, (gpointer)GE_DATA, NULL},
-	{"<Main>/Window/Message Box", NULL,
-		msgbox_show, NULL, NULL},
 	{"<Main>/Help/About", "<control>H",
 		gE_about_box, NULL, NULL}
 };
@@ -426,9 +423,6 @@ GnomeUIInfo gedit_window_menu []={
 	  files_list_popup, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 'L', GDK_CONTROL_MASK, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("_Message Box"), N_("Display the message box"),
-	  msgbox_show, NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL },
-
 	GNOMEUIINFO_END
 };
 
@@ -592,14 +586,10 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 
 	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
 	{
-		if (menu[i].type == GNOME_APP_UI_ITEM
-		    || menu[i].type == GNOME_APP_UI_TOGGLEITEM)
-		{
-			if (menu[i].user_data == (gpointer)GE_DATA)
-				menu[i].user_data = data;
-			if (menu[i].user_data == (gpointer)GE_WINDOW)
-				menu[i].user_data = window;
-		}
+		if (menu[i].user_data == (gpointer)GE_DATA)
+			menu[i].user_data = data;
+		if (menu[i].user_data == (gpointer)GE_WINDOW)
+			menu[i].user_data = window;
 		i++;
 	}
 }
@@ -609,13 +599,10 @@ void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 	int i = 0;
 	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
 	{
-		if (menu[i].type == GNOME_APP_UI_ITEM)
-		{
-			if (menu[i].user_data == data)
-				menu[i].user_data = (gpointer) GE_DATA;
-			if (menu[i].user_data == window)
-				menu[i].user_data = (gpointer) GE_WINDOW;
-		}
+		if (menu[i].user_data == data)
+			menu[i].user_data = (gpointer) GE_DATA;
+		if (menu[i].user_data == window)
+			menu[i].user_data = (gpointer) GE_WINDOW;
 		i++;
 	}
 }

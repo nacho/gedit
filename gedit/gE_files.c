@@ -33,7 +33,6 @@
 #include "gE_files.h"
 #include "commands.h"
 #include "toolbar.h"
-#include "msgbox.h"
 
 static void flw_update_entry(gE_window *w, gE_document *, int, char *text);
 static void flw_select_file(GtkWidget *, gint, gint, GdkEventButton *,
@@ -210,7 +209,6 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 			g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1,
 			doc->filename);
 
-	mbprintf("opened %s", doc->filename);
 	gE_msgbar_set(w, MSGBAR_FILE_OPENED);
 	recent_add (doc->filename);
 	recent_update (w);
@@ -288,8 +286,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
 		strrchr(fname, '/'));	
 	#endif
-
-	mbprintf("saved %s", doc->filename);
+	
 	gE_msgbar_set(window, MSGBAR_FILE_SAVED);
 	return 0;
 } /* gE_file_save */

@@ -41,7 +41,6 @@
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "gE_plugin_api.h"
-#include "msgbox.h"
 #include "dialog.h"
 
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
@@ -698,7 +697,6 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 	num = gtk_notebook_current_page(nb);
 	gtk_notebook_remove_page(nb, num);
 	w->documents = g_list_remove(w->documents, doc);
-	mbprintf("closed %s", (doc->filename) ? doc->filename : _(UNTITLED));
 	if (doc->filename)
 		g_free(doc->filename);
 	if (doc->sb)
@@ -776,7 +774,6 @@ file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 	if (i == num) {
 		g_assert(allclosed == TRUE);
 		gE_msgbar_set(data->window, MSGBAR_FILE_CLOSED_ALL);
-		mbprintf("closed all documents");
 	}
 } /* file_close_all_cb */
 
@@ -801,7 +798,6 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 
 	if (data->flag) {
 		gE_msgbar_clear((gpointer)(data->window));
-		mbprintf("window closed");
 
 		close_window_common(data->window);	/* may not return */
 
@@ -855,7 +851,6 @@ file_quit_cb(GtkWidget *widget, gpointer cbdata)
 
 	g_assert(data != NULL);
 
-	msgbox_close();
 	while (window_list) {
 		data->window = g_list_nth_data(window_list, 0);
 		/*gtk_widget_hide(data->window->window);*/
@@ -1057,7 +1052,7 @@ recent_update_menus (gE_window *window, GList *recent_files)
 	
 	if (window->num_recent > 0)
 		gnome_app_remove_menu_range (GNOME_APP (window->window), 
-		                                         "_File/", 8, window->num_recent + 1);
+		                                         "_File/", 5, window->num_recent + 1);
 
 	if (recent_files == NULL)
 		return;

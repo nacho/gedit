@@ -33,7 +33,6 @@
 #include "gE_print.h"
 #include "gE_files.h"
 #include "search.h"
-#include "msgbox.h"
 #include "toolbar.h"
 #include "gE_prefs_box.h"
 #include "gE_prefslib.h"
@@ -556,7 +555,6 @@ tb_relief_toggle_cb (GtkWidget *w, gpointer cbwindow)
 #endif /* WITHOUT_GNOME */
      }
 #else /* GTK_HAVE_FEATURES_1_1_0 */
-   mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
 
    return TRUE;

@@ -86,7 +86,7 @@ gE_window_new(void)
 	gint *ptr; /* For plugin stuff. */
 
 	/* various initializations */
-	w = g_malloc(sizeof(gE_window));
+	w = g_malloc0(sizeof(gE_window));
 	w->popup = NULL;
 	w->notebook = NULL;
 	w->save_fileselector = NULL;

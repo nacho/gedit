@@ -26,7 +26,6 @@
 #ifdef WITH_GMODULE_PLUGINS
 #include "gE_plugin.h"
 #endif
-#include "msgbox.h"
 
 extern GList *plugins;
 
@@ -55,8 +54,6 @@ void prog_init(char **file)
 
 	g_print("%s\n",*file);
 #endif
-
-	msgbox_create();
 
 	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
 	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);

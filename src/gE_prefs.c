@@ -28,7 +28,6 @@
 #include "main.h"
 #include "gE_prefs.h"
 #include "toolbar.h"
-#include "msgbox.h"
 
 
 typedef struct _gE_prefbox {
@@ -288,16 +287,6 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 {
 	window = (gE_window *) cbwindow;
 
-	/*mbprintf("window->tab_pos = %d", window->tab_pos);*/
-	mbprintf("window->auto_indent = %d", window->auto_indent);
-	mbprintf("window->show_status = %d", window->show_status);
-	mbprintf("window->have_toolbar = %d", window->have_toolbar);
-	mbprintf("window->have_tb_text = %d", window->have_tb_text);
-	mbprintf("window->have_tb_pix = %d", window->have_tb_pix);
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	mbprintf("window->use_relief_toolbar = %d", window->use_relief_toolbar);
-#endif
-
 	gE_prefs_set_int("tab pos", (gint) window->tab_pos);
 	gE_prefs_set_int("auto indent", (gboolean) window->auto_indent);
 	gE_prefs_set_int("show statusbar", (gboolean) window->show_status);
@@ -339,18 +328,6 @@ void gE_get_settings(gE_window *w)
 	   w->print_cmd = "lpr %s";
 
 
-	mbprintf("window->tab_pos = %d", w->tab_pos);
-	mbprintf("window->auto_indent = %d", w->auto_indent);
-	mbprintf("window->show_status = %d", w->show_status);
-	mbprintf("window->have_toolbar = %d", w->have_toolbar);
-	mbprintf("window->have_tb_text = %d", w->have_tb_text);
-	mbprintf("window->have_tb_pix = %d", w->have_tb_pix);
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	mbprintf("window->use_relief_toolbar = %d", w->use_relief_toolbar);
-#endif
-	mbprintf("window->font = %s", w->font);
-	mbprintf("window->print_cmd = %s", w->print_cmd);	
-	
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
 
 	if (w->show_status == FALSE)
