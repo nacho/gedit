@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 
 #include "main.h"
+#include "commands.h"
 #include "gE_prefs.h"
 #include "menus.h"
 #define PLUGIN_TEST 1
@@ -169,7 +170,7 @@ int main (int argc, char **argv)
 		for (;file_list; file_list = file_list->next)
 		{
 			data->temp2 = file_list->data;
-			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
+			file_open_wrapper (data);
 		}
 	}
 

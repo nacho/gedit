@@ -13,7 +13,7 @@ plugindir = $(prefix)/share/go/plugins
 
 bin_PROGRAMS = gedit
 
-plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin
+plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin #email-plugin
 
 gedit_SOURCES = 	\
 	gedit.c		\
@@ -38,6 +38,7 @@ gedit_SOURCES = 	\
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
+
 diff_plugin_SOURCES =	\
 	diff.c		\
 	client.c	\
@@ -59,10 +60,18 @@ reverse_plugin_SOURCES=	\
 
 reverse_plugin_LDFLAGS = `gtk-config --libs`
 
+#email_plugin_SOURCES =	\
+#	email.c		\
+#	client.c	\
+#	client.h
+
+#email_plugin_LDFLAGS = `gtk-config --libs`
+
 sysdir   = $(datadir)/apps/Applications
 sys_DATA = gedit.desktop
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\"
+	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
+	-Wall -ansi -pedantic

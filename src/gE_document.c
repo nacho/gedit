@@ -18,6 +18,7 @@
 
 #define PLUGIN_TEST 1
 #include <stdio.h>
+#include <string.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
@@ -30,6 +31,7 @@
 #include "plugin.h"
 #include "gE_plugin_api.h"
 #endif
+#include "commands.h"
 #include "menus.h"
 #include "toolbar.h"
 
@@ -41,7 +43,7 @@ gE_window *gE_window_new()
   gE_data *data;
   GtkWidget *box1;
   GtkWidget *box2;
-  GtkWidget *line_button, *col_button, *button;
+  GtkWidget *line_button, *col_button;
  
   window = g_malloc(sizeof(gE_window));
   window->notebook = NULL;
@@ -148,15 +150,17 @@ gE_window *gE_window_new()
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
 
-  g_list_foreach (plugins, add_plugins_to_window, window);
+  g_list_foreach (plugins, (GFunc)add_plugins_to_window, window);
   
   window_list = g_list_append (window_list, (gpointer) window);
  
   return window;
 }
 
-void gE_window_toggle_statusbar (GtkWidget *w, gE_window *window)
+void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	if (window->show_status == 1)
 	{
 		gtk_widget_hide (window->statusbox);
@@ -285,9 +289,11 @@ gE_document *gE_document_current(gE_window *window)
 	return current_document;
 }
 
-void gE_document_toggle_wordwrap (GtkWidget *w, gE_window *window)
+void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
 {
 	gE_document *doc;
+	gE_window *window = (gE_window *)cbwindow;
+
 	doc = gE_document_current (window);
 	doc->word_wrap = !doc->word_wrap;
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);

@@ -17,11 +17,12 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "client.h"
 #include <glib.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include "client.h"
 
 static int getnumber( int fd )
 {
@@ -40,7 +41,6 @@ static int getnumber( int fd )
 static gboolean getbool( int fd )
 {
   unsigned char number = 0;
-  int length = 1;
   if ( read( fd, &number, 1 ) )
     {
 #ifdef DEBUG

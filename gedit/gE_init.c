@@ -66,7 +66,7 @@ void prog_init(char **file)
 
 		while (*file) {
 			data->temp2 = *file;
-			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
+			file_open_wrapper (data);
 			file++;
 		}
 	}

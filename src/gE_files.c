@@ -7,6 +7,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
+#include "commands.h"
 
 /* Strips away the leading path... Should maybe be optional? */
 char *strip_filename (gchar *string)

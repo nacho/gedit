@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
+#include "commands.h"
 #include "menus.h"
 #include "toolbar.h"
 
@@ -143,6 +144,7 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 		}
 	}
 
+	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
 	gtk_widget_show (toolbar);
 
@@ -161,8 +163,10 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
  * unhides toolbar
  */
 void
-tb_on_cb(GtkWidget *w, gE_window *window)
+tb_on_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	if (!GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_show (window->toolbar);
 
@@ -180,8 +184,10 @@ tb_on_cb(GtkWidget *w, gE_window *window)
  * hides toolbar
  */
 void
-tb_off_cb(GtkWidget *w, gE_window *window)
+tb_off_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	if (GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_hide (window->toolbar);
 		
@@ -203,8 +209,10 @@ tb_off_cb(GtkWidget *w, gE_window *window)
  * updates toolbar to show buttons with icons and text
  */
 void
-tb_pic_text_cb(GtkWidget *w, gE_window *window)
+tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_BOTH);
 }
 
@@ -215,8 +223,10 @@ tb_pic_text_cb(GtkWidget *w, gE_window *window)
  * updates toolbar to show buttons with icons only
  */
 void
-tb_pic_only_cb(GtkWidget *w, gE_window *window)
+tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_ICONS);
 
 #ifndef WITHOUT_GNOME
@@ -236,8 +246,10 @@ tb_pic_only_cb(GtkWidget *w, gE_window *window)
  * updates toolbar to show buttons with text only
  */
 void
-tb_text_only_cb(GtkWidget *w, gE_window *window)
+tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
 #ifndef WITHOUT_GNOME
 	gtk_widget_hide (window->toolbar);
@@ -252,8 +264,10 @@ tb_text_only_cb(GtkWidget *w, gE_window *window)
  * turns off tooltips
  */
 void
-tb_tooltips_on_cb(GtkWidget *w, gE_window *window)
+tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), TRUE);
 }
 
@@ -264,8 +278,10 @@ tb_tooltips_on_cb(GtkWidget *w, gE_window *window)
  * turns on tooltips
  */
 void
-tb_tooltips_off_cb(GtkWidget *w, gE_window *window)
+tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
 {
+	gE_window *window = (gE_window *)cbwindow;
+
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), FALSE);
 }
 

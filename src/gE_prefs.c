@@ -120,7 +120,6 @@ gE_prefs *prefs_window;
  {
     FILE *file;
     char stamp[50];
-    gchar *cmd2;
     /* GtkStyle *style; */
 
  	
@@ -161,10 +160,9 @@ gE_prefs *prefs_window;
 					- Alex */
 	
 
-	#ifndef WITHOUT_GNOME
-	 cmd2 = gtk_entry_get_text(GTK_ENTRY (prefs->pcmd));
-	 gE_save_settings(window, cmd2);
-	#endif
+#ifndef WITHOUT_GNOME
+	 gE_save_settings(window, gtk_entry_get_text(GTK_ENTRY (prefs->pcmd)));
+#endif
 
     gtk_widget_destroy(prefs_window->window);
     prefs_window->window = NULL;

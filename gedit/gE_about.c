@@ -46,7 +46,7 @@ int animate_thanks (GtkWidget *label)
 }
 	
 	
-void gE_about_box()
+void gE_about_box(GtkWidget *w, gpointer cbdata)
 {
 	GtkWidget *button;
 	GtkWidget *id, *copyright, *url, *specthanks, *label;
@@ -101,7 +101,7 @@ void gE_about_box()
 	label = gtk_label_new ("                         ");
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(about_window)->vbox), label, TRUE, TRUE, 1);
 	gtk_widget_show (label);
-	timeout_id = gtk_timeout_add (50, animate_thanks, label);
+	timeout_id = gtk_timeout_add (50, (GtkFunction)animate_thanks, label);
 	
 	button = gtk_button_new_with_label ("OK");
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
