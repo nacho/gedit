@@ -6,8 +6,9 @@
 
 gchar *s = N_("Appearance");
 gchar *s = N_("Show Statusbar");
-gchar *s = N_("Show splitscreen");
-gchar *s = N_("Display text on toolbar buttons");
+gchar *s = N_("Set toolbar according to system settings");
+gchar *s = N_("Set toolbar to Icons only");
+gchar *s = N_("Set toolbar to Icons with text");
 gchar *s = N_("Editor Behavior");
 gchar *s = N_("Enable Auto-indent");
 gchar *s = N_("General");

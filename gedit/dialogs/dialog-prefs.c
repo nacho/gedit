@@ -35,12 +35,17 @@
 
 static GtkWidget *propertybox;
 static GtkWidget *statusbar;
+#ifdef ENABLE_SPLIT_SCREEN
 static GtkWidget *splitscreen;
+#endif
 static GtkWidget *autoindent;
 #if 0
 static GtkWidget *wordwrap;
 #endif
-static GtkWidget *toolbar_labels;
+static GtkWidget *toolbar_radio_button_1;
+static GtkWidget *toolbar_radio_button_2;
+static GtkWidget *toolbar_radio_button_3;
+
 static GtkWidget *mdimode;
 static GtkWidget *tabpos;
 static GtkWidget *foreground;
@@ -182,8 +187,33 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->auto_indent = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (autoindent));
 	settings->show_status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (statusbar));
+#if 0	
 	settings->toolbar_labels = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toolbar_labels));
+#else
+
+	switch (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group))
+	{
+	case 0:
+		settings->toolbar_labels = GEDIT_TOOLBAR_SYSTEM;
+		break;
+	case 1:
+		settings->toolbar_labels = GEDIT_TOOLBAR_ICONS;
+		break;
+	case 2:
+		settings->toolbar_labels = GEDIT_TOOLBAR_ICONS_AND_TEXT;
+		break;
+	default:
+		g_return_if_fail (FALSE);
+		break;
+		
+	}
+
+	g_print ("Toolbar Labels %i\n", settings->toolbar_labels);
+#endif
+
+#ifdef ENABLE_SPLIT_SCREEN
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
+#endif
 #if 0	
 	settings->word_wrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (wordwrap));
 #endif	
@@ -194,10 +224,8 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		g_free (settings->font);
 #endif	
 	settings->font = g_strdup (gnome_font_picker_get_font_name (GNOME_FONT_PICKER (defaultfont)));
-
 	settings->mdi_mode = gtk_option_menu_get_active_index (mdimode);
 	settings->mdi_mode = settings->mdi_mode != 3 ? settings->mdi_mode : GNOME_MDI_DEFAULT_MODE;
-
 	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
 	if (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group)==0)
@@ -291,35 +319,81 @@ prepare_general_page (GladeXML *gui)
 	gedit_debug("", DEBUG_PREFS);
 
 	statusbar = glade_xml_get_widget (gui, "statusbar");
+#ifdef ENABLE_SPLIT_SCREEN
 	splitscreen = glade_xml_get_widget (gui, "splitscreen");
+#endif	
 	autoindent = glade_xml_get_widget (gui, "autoindent");
-	toolbar_labels = glade_xml_get_widget (gui, "toolbar_labels");
+	toolbar_radio_button_1 = glade_xml_get_widget (gui, "toolbar_radio_button_1");
+	toolbar_radio_button_2 = glade_xml_get_widget (gui, "toolbar_radio_button_2");
+	toolbar_radio_button_3 = glade_xml_get_widget (gui, "toolbar_radio_button_3");
 #if 0	
 	wordwrap = glade_xml_get_widget (gui, "wordwrap");
-#endif	
+#endif
+
+
+	if ( !statusbar ||
+#ifdef ENABLE_SPLIT_SCREEN
+	     !splitscreen ||
+#endif
+	     !autoindent ||
+	     !toolbar_radio_button_1 ||
+	     !toolbar_radio_button_2 ||
+	     !toolbar_radio_button_3 ||
+#if 0
+	     !wordwrap ||
+#endif
+		FALSE)
+	{
+		g_warning ("Could not load widgets from prefs.glade correctly\n");
+		return;
+	}
+	     
 
 	/* set initial button status */
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (statusbar),
 				     settings->show_status);
+#ifdef ENABLE_SPLIT_SCREEN
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (splitscreen),
 				     settings->splitscreen);
+#endif
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (autoindent),
 				     settings->auto_indent);
+#if 0	
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (toolbar_labels),
 				     settings->toolbar_labels);
+#else
+	switch (settings->toolbar_labels)
+	{
+	case GEDIT_TOOLBAR_SYSTEM:
+		gtk_radio_button_select (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group, 0);
+		break;
+	case GEDIT_TOOLBAR_ICONS:
+		gtk_radio_button_select (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group, 1);
+		break;
+	case GEDIT_TOOLBAR_ICONS_AND_TEXT:
+		gtk_radio_button_select (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group, 2);
+		break;
+	}
+#endif
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (statusbar), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+#ifdef ENABLE_SPLIT_SCREEN
 	gtk_signal_connect (GTK_OBJECT (splitscreen), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+#endif
 	gtk_signal_connect (GTK_OBJECT (autoindent), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 #if 0	
 	gtk_signal_connect (GTK_OBJECT (wordwrap), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 #endif	
-	gtk_signal_connect (GTK_OBJECT (toolbar_labels), "toggled",
+	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_1), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_2), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_3), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 

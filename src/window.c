@@ -274,10 +274,24 @@ gedit_window_set_toolbar_labels (void)
 	
 	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
 	toolbar = GTK_TOOLBAR (gnome_dock_item_get_child (dock_item));
-	if (settings->toolbar_labels)
-		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
-	else
-		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 
+	switch (settings->toolbar_labels)
+	{
+	case GEDIT_TOOLBAR_SYSTEM:
+		g_warning ("Implement get system settings for toolbar. Defaulting to no text!");
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+		break;
+	case 1:
+		g_print ("Icons only\n");
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+		break;
+	case 2:
+		g_print ("Text and Icons\n");
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
+		break;
+	default:
+		g_return_if_fail (FALSE);
+		break;
+	}
 }
 

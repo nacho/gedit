@@ -28,6 +28,12 @@
 
 typedef struct _Preferences Preferences;
 
+typedef enum {
+	GEDIT_TOOLBAR_SYSTEM,
+	GEDIT_TOOLBAR_ICONS,
+	GEDIT_TOOLBAR_ICONS_AND_TEXT
+} GeditToolbarSetting;
+
 struct _Preferences
 {
 	guint auto_indent;
