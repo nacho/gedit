@@ -53,6 +53,11 @@ extern gint debug_commands;
 extern gint debug_recent;
 extern gint debug_window;
 
+/* __FUNCTION_ is not defined in Irix according to David Kaelbling <drk@sgi.com>*/
+#ifndef __GNUC__
+#define __FUNCTION__   ""
+#endif
+
 #define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_UNDO	GEDIT_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, __FUNCTION__

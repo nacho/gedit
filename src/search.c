@@ -257,7 +257,7 @@ find_again_execute (void)
 	text = gedit_search_info.last_text_searched;
 	if (text == NULL)
 	{
-		gedit_flash_va (_("Can't find again. There is not a text string to search for."),line_found);
+		gedit_flash_va (_("Can't find again. There is not a text string to search for."));
 		return;
 	}
 	case_sensitive = gedit_search_info.last_text_searched_case_sensitive;
