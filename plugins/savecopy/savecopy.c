@@ -58,7 +58,7 @@ G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 
 static gchar *
-get_contents (GeditDocument *doc, GeditEncoding *encoding, GError **error)
+get_contents (GeditDocument *doc, const GeditEncoding *encoding, GError **error)
 {
 	gchar *chars;
 	GtkTextIter start, end;
@@ -168,9 +168,13 @@ real_save_copy (GeditDocument *doc,
 			     gnome_vfs_result_to_string (vfs_res));
 
 		gnome_vfs_close (handle);
+
+		return FALSE;
 	}
 
 	gnome_vfs_close (handle);
+
+	return TRUE;
 }
 
 static void
@@ -220,7 +224,7 @@ save_copy_cb (BonoboUIComponent *uic,
 		GError *error = NULL;
 
 		uri = gnome_vfs_make_uri_canonical (file_uri);
-		g_return_val_if_fail (uri != NULL, FALSE);
+		g_return_if_fail (uri != NULL);
 
 		ret = real_save_copy (doc, uri, encoding, &error);
 		if (!ret)
@@ -287,7 +291,7 @@ activate (GeditPlugin *plugin)
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
 				     save_copy_cb);
 
-                pd->update_ui (plugin, BONOBO_WINDOW (top_windows->data));
+                plugin->update_ui (plugin, BONOBO_WINDOW (top_windows->data));
 
                 top_windows = g_list_next (top_windows);
         }
