@@ -381,6 +381,45 @@ plugin_manager_toggle_all (GeditPluginManager *dialog)
 	while (gtk_tree_model_iter_next (model, &iter));
 }
 
+/* Callback used as the interactive search comparison function */
+static gboolean
+name_search_cb (GtkTreeModel *model,
+		gint column,
+		const gchar *key,
+		GtkTreeIter *iter,
+		gpointer data)
+{
+	GeditPluginInfo *info;
+	gchar *normalized_string;
+	gchar *normalized_key;
+	gchar *case_normalized_string;
+	gchar *case_normalized_key;
+	gint key_len;
+	gboolean retval;
+
+	gtk_tree_model_get (model, iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+	if (!info)
+		return FALSE;
+
+	normalized_string = g_utf8_normalize (info->plugin->name, -1, G_NORMALIZE_ALL);
+	normalized_key = g_utf8_normalize (key, -1, G_NORMALIZE_ALL);
+	case_normalized_string = g_utf8_casefold (normalized_string, -1);
+	case_normalized_key = g_utf8_casefold (normalized_key, -1);
+
+	key_len = strlen (case_normalized_key);
+
+	/* Oddly enough, this callback must return whether to stop the search
+	 * because we found a match, not whether we actually matched.
+	 */
+	retval = (strncmp (case_normalized_key, case_normalized_string, key_len) != 0);
+
+	g_free (normalized_key);
+	g_free (normalized_string);
+	g_free (case_normalized_key);
+	g_free (case_normalized_string);
+
+	return retval;
+}
 
 static void
 plugin_manager_construct_tree (GeditPluginManager *dialog)
@@ -415,6 +454,12 @@ plugin_manager_construct_tree (GeditPluginManager *dialog)
 						 dialog, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->tree), column);
 
+	/* Enable search for our non-string column */
+	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dialog->tree), PLUGIN_MANAGER_NAME_COLUMN);
+	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (dialog->tree),
+					     name_search_cb,
+					     NULL,
+					     NULL);
 
 	g_signal_connect (G_OBJECT (dialog->tree), "cursor_changed",
 			  G_CALLBACK (cursor_changed_cb), dialog);
