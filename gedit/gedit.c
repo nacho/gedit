@@ -37,16 +37,44 @@
 #endif
 
 gint debug = 0;
+gint debug_view = 0;
+gint debug_undo = 0;
+gint debug_search = 0;
+gint debug_prefs = 0;
 gint debug_print = 0;
+gint debug_plugins = 0;
 gint debug_file = 0;
+gint debug_document = 0;
+gint debug_commands = 0;
 
 static const struct poptOption options[] =
 {
+	{ "debug-commands", '\0', 0, &debug_commands, 0,
+	  N_("Show commands debugging messages."), NULL },
+
+	{ "debug-document", '\0', 0, &debug_document, 0,
+	  N_("Show document debugging messages."), NULL },
+
 	{ "debug-file", '\0', 0, &debug_file, 0,
 	  N_("Show file debugging messages."), NULL },
 
+	{ "debug-plugins", '\0', 0, &debug_plugins, 0,
+	  N_("Show plugin debugging messages."), NULL },
+
+	{ "debug-prefs", '\0', 0, &debug_prefs, 0,
+	  N_("Show prefs debugging messages."), NULL },
+
 	{ "debug-print", '\0', 0, &debug_print, 0,
 	  N_("Show printing debugging messages."), NULL },
+
+	{ "debug-search", '\0', 0, &debug_search, 0,
+	  N_("Show search debugging messages."), NULL },
+
+	{ "debug-undo", '\0', 0, &debug_undo, 0,
+	  N_("Show undo debugging messages."), NULL },
+
+	{ "debug-view", '\0', 0, &debug_view, 0,
+	  N_("Show view debugging messages."), NULL },
 
 	{ "debug", '\0', 0, &debug, 0,
 	  N_("Turn on all debugging messages."), NULL },

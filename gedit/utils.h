@@ -27,28 +27,49 @@
 #define __UTILS_H__
 
 typedef enum {
-	DEBUG_UNDO,
 	DEBUG_VIEW,
+	DEBUG_UNDO,
+	DEBUG_SEARCH,
+	DEBUG_PRINT,
+	DEBUG_PREFS,
 	DEBUG_PLUGINS,
 	DEBUG_FILE,
-	DEBUG_SEARCH,
-	DEBUG_PREFS,
-	DEBUG_PRINT,
 	DEBUG_DOCUMENT,
 	DEBUG_COMMANDS
 } DebugSection;
 
 extern gint debug;
+extern gint debug_view;
+extern gint debug_undo;
+extern gint debug_search;
 extern gint debug_print;
+extern gint debug_prefs;
+extern gint debug_plugins;
 extern gint debug_file;
+extern gint debug_document;
+extern gint debug_commands;
 
-#define gedit_debug(str, num) \
+#define gedit_debug(str, section) \
     if (debug) \
 	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
     else { \
-    if (debug_print && num == DEBUG_PRINT) \
+    if (debug_view && section == DEBUG_VIEW) \
 	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_file && num == DEBUG_FILE) \
+    if (debug_undo && section == DEBUG_UNDO) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_search && section == DEBUG_SEARCH) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_print && section == DEBUG_PRINT) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_prefs && section == DEBUG_PREFS) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_plugins && section == DEBUG_PLUGINS) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_file && section == DEBUG_FILE) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_document && section == DEBUG_DOCUMENT) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_commands && section == DEBUG_COMMANDS) \
 	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 
