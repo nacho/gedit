@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2002-03-19 10:30+0200\n"
-"PO-Revision-Date: 2002-03-19 19:20+0200\n"
+"POT-Creation-Date: 2002-03-29 10:54+0200\n"
+"PO-Revision-Date: 2002-03-29 19:27+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,9 +76,8 @@ msgid "C_ompare"
 msgstr "_Порівняти"
 
 #: plugins/diff/diff.c:502
-#, fuzzy
 msgid "The two documents you selected are the same."
-msgstr "Документ не було збережено."
+msgstr "Ви вибрали однакові документи."
 
 #: plugins/diff/diff.c:510
 msgid ""
@@ -119,6 +118,9 @@ msgid ""
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
+"Неможливо порівняти вибрані документи.\n"
+"\n"
+"Не вдалося створити ттмчасовий файл."
 
 #: plugins/diff/diff.c:612
 #: plugins/diff/diff.c:625
@@ -127,10 +129,13 @@ msgid ""
 "\n"
 "Error executing the diff command."
 msgstr ""
+"Неможливо порівняти вибрані документи.\n"
+"\n"
+"Помилка виконання команди diff."
 
 #: plugins/diff/diff.c:647
 msgid "No differences were found between the selected documents."
-msgstr ""
+msgstr "Не знаденно відмінностей в документах."
 
 #: plugins/diff/diff.c:688
 msgid ""
@@ -148,11 +153,12 @@ msgid ""
 msgstr ""
 
 #: plugins/diff/diff.c:915
-#, fuzzy
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
-msgstr "Авторські права © 2002 - Паоло Маґґі"
+msgstr ""
+"Copyright © 2000 - 2001 Chema Celorio \n"
+"Copyright © 2002 Paolo Maggi"
 
 #: plugins/docinfo/docinfo.c:145
 #: plugins/docinfo/docinfo.c:365
@@ -217,17 +223,8 @@ msgid "An error occurs while running the selected command."
 msgstr "Сталася помилка під час виконання вибраної команди."
 
 #: plugins/shell_output/shell_output.c:433
-#, fuzzy
 msgid "Execute a program and insert its output in the current document at the current cursor position"
-msgstr "Виконати програму, і вставити її вивід у поточний документ у позицію курсора"
-
-#: plugins/taglist/gedit-taglist-plugin.c:140
-msgid "Tag list"
-msgstr ""
-
-#: plugins/taglist/gedit-taglist-plugin.c:141
-msgid "The tag list plugin provides a method to easily insert into a document commonly used tabs/strings without having to type them."
-msgstr ""
+msgstr "Виконати програму, і вставити її вивід у поточний документ у поточну позицію курсора"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:117
 msgid "Tag list plugin"
@@ -245,6 +242,14 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
+#: plugins/taglist/gedit-taglist-plugin.c:140
+msgid "Tag list"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:141
+msgid "The tag list plugin provides a method to easily insert into a document commonly used tabs/strings without having to type them."
+msgstr ""
+
 #: plugins/time/time.c:259
 msgid "Available formats"
 msgstr "Доступні формати"
@@ -258,13 +263,12 @@ msgid "Insert Date/Time"
 msgstr "Вставити дату й час"
 
 #: plugins/time/time.c:554
-#, fuzzy
 msgid "Inserts current date and time at the cursor position."
-msgstr "Вставити поточну дату й час в позицію курсора"
+msgstr "Вставляє поточну дату й час в позицію курсора."
 
 #: src/bonobo-mdi.c:489
 #: src/bonobo-mdi.c:569
-#: src/bonobo-mdi.c:1719
+#: src/bonobo-mdi.c:1721
 #, c-format
 msgid "Activate %s"
 msgstr "Активувати %s"
@@ -341,12 +345,12 @@ msgstr "Знайти"
 
 #: src/dialogs/gedit-dialog-replace.c:469
 #: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695
+#: src/dialogs/gedit-dialog-replace.c:710
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Тексту \"%s\" не знайдено."
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:719
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Знайдено і замінено %d входжень."
@@ -448,57 +452,73 @@ msgstr "Приорітети"
 msgid "Categories"
 msgstr "Категорії"
 
-#: src/gedit2.c:68
-msgid "Show mdi debugging messages."
-msgstr "Показати повідомлення налагодження MDI."
+#: src/dialogs/gnome-print-font-dialog.c:110
+msgid "Modify preview phrase..."
+msgstr ""
 
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Показати повідомлення налагодження командної підсистеми."
+#: src/dialogs/gnome-print-font-dialog.c:164
+msgid "Preview"
+msgstr "Перегляд"
 
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Показати повідомлення налагодження документної підсистеми."
+#: src/dialogs/gnome-print-font-dialog.c:177
+msgid "_Modify preview phrase..."
+msgstr ""
 
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Показати повідомлення налагодження файлової підсистеми."
+#: src/dialogs/gnome-print-font-dialog.c:235
+msgid "Font Selection"
+msgstr "Вибір шрифта"
 
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Показати повідомлення налагодження доповнень."
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Назва"
 
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Показати повідомлення налагодження налаштувань."
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr ""
 
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Показати повідомлення налагодження друку."
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "Назва шрифта"
 
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Показати повідомлення налагодження пошуку."
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "Назва вибраного шрифта"
 
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Показати повідомлення налагодження відкату."
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Перегляд тексту"
 
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Показати повідомлення налагодження відображення."
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr "Перегляд тексту в діалозі"
 
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Показати останні повідомлення налагодження."
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr ""
 
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Увімкнути всі повідомлення налагодження."
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr ""
 
-#: src/gedit2.c:159
-msgid "The GNOME text editor"
-msgstr "Текстовий редактор GNOME"
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:1014
+msgid "Font"
+msgstr "Шрифт"
 
 #: src/gedit-commands.c:339
 #, c-format
@@ -543,9 +563,8 @@ msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 
 #: src/gedit-document.c:972
-#, fuzzy
 msgid "Could not create the backup copy of the file."
-msgstr "Не вдалося створити діалог керування доповненнями"
+msgstr "Не вдалося створити резервну копію файлу."
 
 #: src/gedit-document.c:991
 msgid "Make sure that the path you provided exists, and that you have the appropriate write permissions."
@@ -564,6 +583,23 @@ msgstr "Файл надто великий."
 #: src/gedit-document.c:1184
 msgid "It is not possible to revert an Untitled document"
 msgstr "Неможливо відновити документ Неназваний"
+
+#: src/gedit-file-selector-util.c:97
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Файл \"%s\" вже існує.\n"
+"Чи хочете ви замінити його тим, що записуєте?"
+
+#: src/gedit-file-selector-util.c:105
+msgid "Do_n't replace"
+msgstr "Не _заміняти"
+
+#: src/gedit-file-selector-util.c:459
+msgid "Select a filename to save"
+msgstr "Оберіть назву файлу"
 
 #: src/gedit-file.c:123
 msgid "Open File ..."
@@ -623,23 +659,6 @@ msgstr "Завантажено %i файлів"
 #: src/gedit-file.c:688
 msgid "Could not read data from stdin."
 msgstr "Не вдалося зчитати дані з стандартного вводу."
-
-#: src/gedit-file-selector-util.c:97
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Файл \"%s\" вже існує.\n"
-"Чи хочете ви замінити його тим, що записуєте?"
-
-#: src/gedit-file-selector-util.c:105
-msgid "Do_n't replace"
-msgstr "Не _заміняти"
-
-#: src/gedit-file-selector-util.c:459
-msgid "Select a filename to save"
-msgstr "Оберіть назву файлу"
 
 #: src/gedit-mdi.c:758
 #, fuzzy, c-format
@@ -859,12 +878,12 @@ msgid "Cut the selection"
 msgstr "Вирізати вибране"
 
 #: src/gedit-ui.xml.h:22
-msgid "Delete the selected text"
-msgstr "Стерти вибраний текст"
+msgid "Delete"
+msgstr "Стерти"
 
 #: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr "Стерто"
+msgid "Delete the selected text"
+msgstr "Стерти вибраний текст"
 
 #: src/gedit-ui.xml.h:24
 msgid "Dump XML"
@@ -1201,7 +1220,7 @@ msgstr "Від_мінити"
 msgid "_View"
 msgstr "_ідображення"
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:839
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1209,32 +1228,32 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:847
+#: src/gedit-utils.c:846
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr ""
 
-#: src/gedit-utils.c:858
+#: src/gedit-utils.c:857
 #, c-format
 msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: src/gedit-utils.c:866
+#: src/gedit-utils.c:865
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Неможливо відкрити файл: \"%s\"."
 
-#: src/gedit-utils.c:873
+#: src/gedit-utils.c:872
 #, c-format
 msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 
-#: src/gedit-utils.c:880
+#: src/gedit-utils.c:879
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr ""
 
-#: src/gedit-utils.c:887
+#: src/gedit-utils.c:886
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1242,12 +1261,12 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:894
+#: src/gedit-utils.c:893
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr ""
 
-#: src/gedit-utils.c:901
+#: src/gedit-utils.c:900
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1255,7 +1274,7 @@ msgid ""
 "Please, close some open file and try again."
 msgstr ""
 
-#: src/gedit-utils.c:909
+#: src/gedit-utils.c:908
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1263,12 +1282,12 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:916
+#: src/gedit-utils.c:915
 #, c-format
 msgid "Not enough available memory to open the file \"%s\". Please, close some running application and try again."
 msgstr ""
 
-#: src/gedit-utils.c:929
+#: src/gedit-utils.c:928
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1276,7 +1295,7 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy settings are correct and then try again."
 msgstr ""
 
-#: src/gedit-utils.c:942
+#: src/gedit-utils.c:941
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1284,7 +1303,7 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:949
+#: src/gedit-utils.c:948
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1292,7 +1311,7 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:955
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -1300,7 +1319,7 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:964
+#: src/gedit-utils.c:963
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1308,17 +1327,17 @@ msgid ""
 "Probably, you are trying to open a binary file."
 msgstr ""
 
-#: src/gedit-utils.c:1002
+#: src/gedit-utils.c:1001
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Неможливо відкрити файл \"%s\"."
 
-#: src/gedit-utils.c:1053
+#: src/gedit-utils.c:1052
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Не вдалося зберегти файл \"%s\"."
 
-#: src/gedit-utils.c:1057
+#: src/gedit-utils.c:1056
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1329,7 +1348,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1110
+#: src/gedit-utils.c:1109
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -1337,38 +1356,38 @@ msgid ""
 "Perhaps, it has recently been deleted."
 msgstr ""
 
-#: src/gedit-utils.c:1117
+#: src/gedit-utils.c:1116
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 
-#: src/gedit-utils.c:1128
+#: src/gedit-utils.c:1127
 #, c-format
 msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: src/gedit-utils.c:1136
-#: src/gedit-utils.c:1258
+#: src/gedit-utils.c:1135
+#: src/gedit-utils.c:1257
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Не вдалося відновити файл \"%s\"."
 
-#: src/gedit-utils.c:1143
+#: src/gedit-utils.c:1142
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 
-#: src/gedit-utils.c:1150
+#: src/gedit-utils.c:1149
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr ""
 
-#: src/gedit-utils.c:1157
+#: src/gedit-utils.c:1156
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr ""
 
-#: src/gedit-utils.c:1164
+#: src/gedit-utils.c:1163
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -1376,12 +1395,12 @@ msgid ""
 "Please, close some open file and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1172
+#: src/gedit-utils.c:1171
 #, c-format
 msgid "Not enough available memory to revert the file \"%s\". Please, close some running application and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1185
+#: src/gedit-utils.c:1184
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1389,7 +1408,7 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1197
+#: src/gedit-utils.c:1196
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -1397,12 +1416,12 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1204
+#: src/gedit-utils.c:1203
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 
-#: src/gedit-utils.c:1211
+#: src/gedit-utils.c:1210
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1410,7 +1429,7 @@ msgid ""
 "Probably, you are trying to revert a binary file."
 msgstr ""
 
-#: src/gedit-utils.c:1220
+#: src/gedit-utils.c:1219
 msgid "It is not possible to revert an Untitled document."
 msgstr "Неможливо відновити неназваний документ."
 
@@ -1426,4 +1445,56 @@ msgstr "ЗАМ"
 #: src/gedit-view.c:930
 msgid "  INS"
 msgstr "ВСТ"
+
+#: src/gedit2.c:68
+msgid "Show mdi debugging messages."
+msgstr "Показати повідомлення налагодження MDI."
+
+#: src/gedit2.c:71
+msgid "Show commands debugging messages."
+msgstr "Показати повідомлення налагодження командної підсистеми."
+
+#: src/gedit2.c:74
+msgid "Show document debugging messages."
+msgstr "Показати повідомлення налагодження документної підсистеми."
+
+#: src/gedit2.c:77
+msgid "Show file debugging messages."
+msgstr "Показати повідомлення налагодження файлової підсистеми."
+
+#: src/gedit2.c:80
+msgid "Show plugin debugging messages."
+msgstr "Показати повідомлення налагодження доповнень."
+
+#: src/gedit2.c:83
+msgid "Show prefs debugging messages."
+msgstr "Показати повідомлення налагодження налаштувань."
+
+#: src/gedit2.c:86
+msgid "Show printing debugging messages."
+msgstr "Показати повідомлення налагодження друку."
+
+#: src/gedit2.c:89
+msgid "Show search debugging messages."
+msgstr "Показати повідомлення налагодження пошуку."
+
+#: src/gedit2.c:92
+msgid "Show undo debugging messages."
+msgstr "Показати повідомлення налагодження відкату."
+
+#: src/gedit2.c:95
+msgid "Show view debugging messages."
+msgstr "Показати повідомлення налагодження відображення."
+
+#: src/gedit2.c:98
+msgid "Show recent debugging messages."
+msgstr "Показати останні повідомлення налагодження."
+
+#: src/gedit2.c:101
+msgid "Turn on all debugging messages."
+msgstr "Увімкнути всі повідомлення налагодження."
+
+#: src/gedit2.c:159
+msgid "The GNOME text editor"
+msgstr "Текстовий редактор GNOME"
 
