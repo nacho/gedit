@@ -376,6 +376,7 @@ gE_document
 		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "delete_text",
 		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
+gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
 	
