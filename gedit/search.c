@@ -97,10 +97,13 @@ pos_to_line (gE_document *doc, gint pos, gint *numlines)
 gint
 line_to_pos (gE_document *doc, gint line, gint *numlines)
 {
-	gulong lines = 1, i, current;
+	gulong lines = 1, i, current = 0;
 	gchar *c;
 
 
+	if (gtk_text_get_length(GTK_TEXT (doc->text)) == 0) {
+		return 0;
+	}
 	for (i = 1; i < gtk_text_get_length(GTK_TEXT(doc->text)) - 1; i++) {
 		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i - 1, i);
 		if (!strcmp(c, "\n")) {
@@ -163,6 +166,9 @@ gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
 	gint i, textlen;
 
 	textlen = gtk_text_get_length(GTK_TEXT(doc->text));
+	if (textlen < strlen (str)) {
+		return -1;
+	}
 
 	if (options & SEARCH_BACKWARDS) {
 		pos -= strlen (str);
@@ -451,9 +457,7 @@ line_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 		line = gtk_spin_button_get_value_as_int
 			(GTK_SPIN_BUTTON (spin));
 		seek_to_line (doc, line, -1);
-		g_warning ("line is %i", line);
 		pos = line_to_pos (doc, line, &linecount);
-		g_warning ("pos is %i", pos);
 		gtk_editable_set_position (GTK_EDITABLE (doc->text), pos);
 	}
 	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
