@@ -1,180 +1,88 @@
-AC_INIT(src/gedit.c)
+dnl Process this file with autoconf to produce a configure script.
 
-AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gedit, 0.9.8cvs)
+AC_INIT(src/gedit2.c)
 
+AM_INIT_AUTOMAKE(gedit, 1.103.0)
 AM_MAINTAINER_MODE
-AM_ACLOCAL_INCLUDE(macros)
+AM_CONFIG_HEADER(config.h)
 
 AC_PROG_INTLTOOL([0.11])
 
-AC_ISC_POSIX
-AC_PROG_CC
-AC_STDC_HEADERS
-AC_ARG_PROGRAM
+GNOME_COMMON_INIT
+GNOME_PLATFORM_GNOME_2(yes, force)
+
 AM_PROG_LIBTOOL
 
-GNOME_INIT
+AC_ISC_POSIX
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
 
-GNOME_COMPILE_WARNINGS
-GNOME_X_CHECKS
+AC_CHECK_HEADERS(os2.h)
 
-dnl AM_CONDITIONAL(FALSE, test foo = bar)
+dnl ================================================================
+dnl Gettext stuff.
+dnl ================================================================
+GETTEXT_PACKAGE=gedit-2.0
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
+ALL_LINGUAS="az ca cs da de el es fi fr ga gl hu it ja ko lt nl nn no pl pt pt_BR ru sv sk sl ta tr uk wa zh_TW zh_CN"
+AM_GLIB_GNU_GETTEXT
 
 dnl
-dnl Let the user disable ORBit even if it can be found
-dnl AC_ARG_ENABLE(orbit,
-dnl	      [  --enable-orbit          Try to use ORBit [default=no] ],
-dnl	      enable_orbit="$enableval", enable_orbit=no)
-dnl We only need CORBA for plugins
-dnl if test x$have_gmodule_plugins = xyes ; then
-dnl  if test x$enable_orbit = xyes ; then
-dnl    GNOME_ORBIT_HOOK([have_orbit=yes])
-dnl  fi
-dnl fi
-AM_CONDITIONAL(HAVE_ORBIT, test x$have_orbit = xyes)
+dnl Start of pkg-config checks
+dnl
+PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 1.104.0 libglade-2.0 >= 1.99.2)
+GEDIT_LIBS="${GEDIT_LIBS}"
+AC_SUBST(GEDIT_LIBS)
+AC_SUBST(GEDIT_CFLAGS)
 
-dnl Check if we also have LibGnorba
-dnl if test x$have_orbit = xyes; then
-dnl  AC_CHECK_LIB(gnorba, gnome_CORBA_init, have_libgnorba=yes, have_libgnorba=no,
-dnl               $ORBIT_LIBS $GNOMEUI_LIBS)
-dnl fi
-dnl if test x$have_libgnorba = xyes ; then
-dnl  AC_DEFINE(HAVE_LIBGNORBA)
-dnl fi
-AM_CONDITIONAL(HAVE_LIBGNORBA, test x$have_libgnorba = xyes)
-
-dnl Check for libzvt from gnome-libs/zvt
-dnl AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
-AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
-
-ALL_LINGUAS="az ca cs da de el es fi fr ga gl hu it ja ko lt nl nn no pl pt pt_BR ru sv sk sl ta tr uk wa zh_TW zh_CN"
-AM_GNOME_GETTEXT
-
-dnl ******************************
-dnl gtk+ checking
-dnl ******************************
-AM_PATH_GTK(1.2.9,,
-  AC_MSG_ERROR([
-*** GTK+ 1.2.9 or better is required. The latest version of GTK+
-*** is always available from ftp://ftp.gtk.org/.]),
-    )
+AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
+gedit2. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
 
 
-dnl ******************************
-dnl GnomePrint checking
-dnl ******************************
-AC_MSG_CHECKING(for GnomePrint libraries >= 0.28)
-if gnome-config --libs print > /dev/null 2>&1; then 
-    vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
-        awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 28; then
-        AC_MSG_RESULT(found)
-    else
-        AC_MSG_ERROR(You need at least GNOME print 0.28 for this version of gedit)
-    fi
+dnl ================================================================
+dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install
+dnl source files added to projects (such as all the Gnome m4 macros).
+dnl This will substitute GEDIT_DATA_DIR in config.h (from acconfig.h).
+dnl ================================================================
+if test "x${datadir}" = 'x${prefix}/share'; then
+  if test "x${prefix}" = "xNONE"; then
+    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${ac_default_prefix}/share/${PACKAGE}")
+  else
+    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${prefix}/share/${PACKAGE}")
+  fi
 else
-    AC_MSG_ERROR(Did not find GnomePrint installed)
+  AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${datadir}/${PACKAGE}")
 fi
 
-
-dnl ******************************
-dnl LibGlade checking
-dnl ******************************
-AC_MSG_CHECKING(for Glade libraries >= 0.16)
-if gnome-config --libs libglade > /dev/null 2>&1; then 
-    vers=`gnome-config --modversion libglade | awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 16; then
-        AC_MSG_RESULT(found)
-    else
-        AC_MSG_ERROR(You need at least libglade 0.16 for this version of gedit)
-    fi
+dnl ================================================================
+dnl PIXMAPS 
+dnl ================================================================
+if test "x${prefix}" = "xNONE"; then
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
 else
-    AC_MSG_ERROR(Did not find libGlade installed)
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
 fi
 
-
-dnl ******************************
-dnl gnome-libs checking
-dnl ******************************
-AC_MSG_CHECKING(for gnome-libs >= 1.2.13)
-if gnome-config --version > /dev/null 2>&1; then
-   vers=`gnome-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   if test "$vers" -ge 2013; then
-      AC_MSG_RESULT(found)
-   else
-      AC_MSG_ERROR(You need at least gnome-libs 1.2.13 for this version of gedit)
-   fi
-else
-   AC_MSG_ERROR(Did not find gnome-libs installed)
-fi
-
-dnl  verstxt=`xml-config --version`
-dnl    vers=`echo "$verstxt" | sed -e "s/libxml //" | \
-dnl	awk -F. '{ printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-dnl    if test "$vers" -ge 1008010; then
-dnl	if test "$vers" -lt 2000000; then
-
-dnl ******************************
-dnl gnome-vfs checking
-dnl ******************************
-AC_MSG_CHECKING(for gnome-vfs >= 1.0)
-if gnome-config --libs vfs > /dev/null 2>&1; then
-   vers=`gnome-config --modversion vfs | sed -e "s/gnome-vfs-//" | awk -F. '{printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   if test "$vers" -ge 1000000; then
-      AC_MSG_RESULT(found)
-   else
-      AC_MSG_ERROR(You need at least gnome-vfs 1.0 for this version of gedit.)
-   fi
-else
-   AC_MSG_ERROR(Did not find gnome-vfs installed)
-fi
-
-EXTRA_GNOME_LIBS=`gnome-config --libs print libglade vfs`
-EXTRA_GNOME_CFLAGS=`gnome-config --cflags print libglade vfs`
-
-AC_SUBST(EXTRA_GNOME_LIBS)
-AC_SUBST(EXTRA_GNOME_CFLAGS)
-
-AC_SUBST(CFLAGS)
-AC_SUBST(CPPFLAGS)
-AC_SUBST(LDFLAGS)
-
-
-dnl ******************************
-dnl Makefiles
-dnl ******************************
+AC_SUBST(pixmapsdir)
 
 AC_OUTPUT([
-gedit.spec
 Makefile
-intl/Makefile
 po/Makefile.in
-macros/Makefile
-help/Makefile
-help/C/Makefile
-help/ja/Makefile
-pixmaps/Makefile
-plugins/Makefile
-plugins/ASCII/Makefile
-plugins/browse/Makefile
-plugins/convert/Makefile
-plugins/diff/Makefile
-plugins/docinfo/Makefile
-plugins/email/Makefile
-plugins/sample/Makefile
-plugins/time/Makefile
-plugins/reverse/Makefile
-plugins/shell_output/Makefile
-plugins/sort/Makefile
 src/Makefile
 src/dialogs/Makefile
-],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+pixmaps/Makefile
+])
 
 
 echo "
+
 Configuration:
 
-        Source code location:   ${srcdir}
-        Compiler:               ${CC} 
+	Source code location:	${srcdir}
+	Compiler:		${CC} 
+
 "

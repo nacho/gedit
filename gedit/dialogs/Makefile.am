@@ -1,33 +1,22 @@
 gladedir = $(datadir)/gedit/glade/
 
-INCLUDES = 						\
-	-I$(top_srcdir)/src				\
-	-I$(includedir)/src				\
-	$(GNOME_INCLUDEDIR)				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
-	$(EXTRA_GNOME_CFLAGS)
+INCLUDES = \
+	-I$(top_srcdir)/src \
+	$(GEDIT_CFLAGS) \
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"	
 
 noinst_LIBRARIES = libdialogs.a
 
-libdialogs_a_SOURCES = 		\
-	dialog-about.c		\
-	dialog-goto-line.c	\
-	dialog-prefs.c		\
-	dialog-plugins.c	\
-	dialog-replace.c	\
-	dialog-uri.c		\
-	dialogs.h		\
-	gtkchecklist.c		\
-	gtkchecklist.h
+libdialogs_a_SOURCES = 			\
+	gedit-dialog-uri.c		\
+	gedit-dialog-goto-line.c	\
+	gedit-dialog-replace.c		\
+	gedit-dialogs.h		
 
 glade_DATA =			\
-	about.glade		\
-	goto-line.glade 	\
-	prefs.glade		\
-	replace.glade		\
-	program.glade		\
-	plugin-manager.glade	\
-	uri.glade
+	uri.glade2		\
+	goto-line.glade2	\
+	replace.glade2
 
-EXTRA_DIST = $(glade_DATA)
+EXTRA_DIST = $(glade_DATA) 
+

@@ -1,0 +1,2238 @@
+2001-10-10  Jason Leach  <jasonleach@usa.net>
+
+	[Fix #61989, Text selection color unthemed]
+	
+	* view.c (gedit_view_init): Get a copy of a mapped widget, the
+	GnomeApp in this case, then modify that copy's foreground and
+	background colors to the ones from settings, then apply this to
+	the text widget style, ensuring everything except foreground and
+	background colors come from the user's theme.
+
+	[Fix #60223, Use 'want' instead of 'wish' in dialogs]
+	
+	* document.c (remove_child_cb): s/wish/want/
+
+	* file.c (file_revert_cb): Ditto.
+
+2001-09-11  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_switch_view): wrap arround. And the keys where inverted
+
+2001-09-10  Chema Celorio  <chema@celorio.com>
+
+	* prefs.c (gedit_prefs_load_settings): gettextize the default font.
+
+2001-09-08  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_switch_view): fix 60209. When in notebook mode you can
+	switch documents with Ctrl+Page_UP & Ctrl+Page_Down
+
+	* recent.c : Fix 59114. Recent file menu entries that contain underscores
+	are displayed properly. This resulted in a ugly hack because this is a limitation
+	in libgnomeui so i had to borrow a lot of code. 
+
+2001-06-04  Vlad Harchev <hvv@hippo.ru>
+
+	* print-util.[ch] (gedit_print_show): Added gedit_print_show - printing
+	routine that is fully i18n-wise correct (taken from gnumeric-0.64). 
+	(gedit_print_show_iso8859_1): compile it only if i18n-wise incorrect
+	printing is requested by undefining _PROPER_I18N
+
+	* print-doc.c (print_ps_line)(print_header): Use just added 
+	gedit_print_show instead of gedit_print_show_iso8859_1
+
+2001-06-04  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_open): if the file is not an URI, ask the user if he
+	wants to create it.
+
+2001-05-27  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_convert_to_full_pathname): handle uris. Make static,
+	fix a bug.
+	(gedit_file_determine_read_only): split from file_open
+
+	* document.c (gedit_document_load): fix. Remove the file opening code from
+	here. move to file.c
+	* other files : cosmetic improvements
+
+2001-05-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/gtkchecklist.c (gtk_check_list_finalize): memleak
+	(gtk_check_list_clear): memleak
+ 
+2001-05-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (gedit_document_get_buffer): clean the code and
+	update documentation 
+
+2001-05-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* print.c: #included "print-util.h" to silent a warning
+
+2001-05-10  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (remove_child_cb): msgbox parented
+
+	* plugin.c (gedit_plugins_menu_add): hint for "Manager..." menu entry
+	  set to "Manage available plugin modules" (like in Gnumeric)
+
+	* prefs.[ch]: Preferences::use_fontset removed
+
+	* view.c (gedit_view_set_font): now gedit can use fontsets
+
+	* dialogs/plugin-manager.glade: cosmetic changes
+
+2001-04-23  Jason Leach  <jasonleach@usa.net>
+
+	* debug.[ch]: New files, split off the debugging stuff from
+	utils.[ch] and put them here.
+
+2001-04-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/dialo-plugins.c: fix typo in
+	GEDIT_PLUGIN_MANAGER_GLADE_FILE
+
+2001-04-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/uri.glade: changed the title of the dialog to
+	"Open from URI..."
+
+	* dialogs/dialog-about.c (dialog_about): set a parent for the about 
+	dialog
+
+	* dialogs/about.glade: set visible to FALSE
+
+2001-03-28  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/gtkchecklist.h: new file
+
+	* dialogs/gtkchecklist.c: new file
+	
+	* dialogs/Makefile.am (libdialogs_a_SOURCES): added gtkchecklist.h
+	and gtkchecklist.c
+
+	* dialogs/dialog-plugins.c: 
+	* dialogs/plugin-manager.glade: 
+	* dialogs/plugin-manager.glade.h: rewritten for the new plugin manager
+
+2001-03-28  Jason Leach  <jasonleach@usa.net>
+
+	* view.h (struct _GeditToolbar): chaned the @undo and @redo to
+	1-bit gboolean instead of gint types.
+
+	* search.c: S/DEBUG_RECENT/DEBUG_SEARCH/ everywhere in here.
+
+2001-03-24  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_event_key_press): fix a long time know
+	nasty code
+
+2001-03-19  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (gedit_document_load): new check on URI
+
+	* menus.c: comment the File Info menu item. Now we have the
+	Document Info plugin
+
+	* search.c (file_info)(gedit_file_info_cb): commented with #if0 
+	(should I remove them?)
+
+	* search.h (gedit_file_info_cb): commented 
+	
+	* window.c (gedit_window_set_widgets_sensitivity): don't change
+	sensitivity of the  the File Info menu item. 
+
+2001-03-18  Chema Celorio  <chema@celorio.com>
+
+	* release 0.9.6
+
+2001-03-10  Chema Celorio  <chema@celorio.com>
+
+	* gedit.c (options): debug-window should set debug_window.
+	Thanks  Gary Benson <garyb@ee.bath.ac.uk> for pointing this out
+
+2001-03-18  Chema Celorio  <chema@celorio.com>
+
+	* menus.c (toolbar_data): uncomment the Exit menu ;-)
+
+2001-03-09  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_open): bug fix
+
+2001-03-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* menus.c: litte menus and toolbar reorganization
+	
+	* dialogs/dialog-replace.c (search_not_found_notify): 
+	"Text not found" string replaced with "Search string not found"
+
+	* dialogs/prefs.glade: added accelletators
+
+2001-03-03  Jason Leach  <jasonleach@usa.net>
+
+	* file.c (gedit_file_open): Update for gnome-vfs-0.6.2 by changing
+	gnome_vfs_file_info_init() to gnome_vfs_file_info_new() and
+	adjusting a few other small things.
+
+2001-02-28  Chema Celorio  <chema@celorio.com>
+
+	* print.c (gedit_print): handle canceled and hittin print
+	on the print preview window ok.
+
+	* print-doc.c (gedit_print_document_determine_lines): remove
+	debugin output
+
+2001-02-25  Chema Celorio  <chema@celorio.com>
+
+	* print-doc.c (gedit_print_document): clean the code a bit.
+	But it really need a rewrite
+
+	* print-util.c (gedit_print_progress_clicked): implement.
+	Printing can now be canceled
+
+	* print.c (gedit_print): run verify fonts
+	(gedit_print): actually print
+
+2001-02-25  Chema Celorio  <chema@celorio.com>
+
+	* print.h: add progress_bar * progress_dialog
+
+	* print-util.c (gedit_print_progress_start): implement.
+	(gedit_print_progress_tick): implement
+	(gedit_print_progress_end): implement
+	
+
+2001-02-24  Chema Celorio  <chema@celorio.com>
+
+	* print-doc.c: move all the actual printing code here. print.c
+	is the glue between gedit & gnome-print. This code is butt ugly.
+	It has my name, but I didn't write it ;-)!
+
+	* print-util.c: new file
+	* print-doc.h: ditto
+	* print-util.h: ditto
+
+	* print.c: full rewrite.
+	I need no longer to hide the fact that i wrote this code.
+
+	* Makefile.am: add print-doc.[ch] & print-util.[ch]
+
+	* menus.c (popup_menu): the priting functions where renamed. update.
+	* window.c (gedit_window_set_widgets_sensitivity): ditto
+
+	* document.h (GEDIT_IS_DOCUMENT): the macro should be GEDIT_IS_DOCUMENT
+
+	* view.c (gedit_view_get_document): Implement
+
+	* document.c (gedit_document_set_undo): use new macro GEDIT_IS_DOCUMENT
+
+2001-02-20  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/dialogs.h: modified gedit_plugin_program_location_dialog
+	prototype
+
+	* dialogs/dialog-plugins.c (gedit_plugin_program_location_dialog):
+	added two parameters
+
+	* dialogs/dialog-plugins.c:
+	* dialogs/program.glade:
+	* plugin-manager.glade: embellishment of the dialogs
+
+	* plugin.c (gedit_plugin_program_location_get): use the modified
+	gedit_plugin_program_location_dialog 
+
+2001-02-19  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (gedit_document_set_readonly): now uses g_return_if_fail
+	instead of g_assert
+	(gedit_document_get_tab_name): now uses g_return_val_if_fail
+	instead of g_assert
+
+	* recent.c (gedit_recent_update_all_windows): now uses g_return_if_fail
+	instead of g_assert
+
+	* window.c (gedit_window_set_widgets_sensitivity_ro): g_asserts removed
+
+	* dialogs/dialog-replace.c (dialog_display_messages): fix typo
+
+2001-02-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_open): flash a message on the status bar
+	reporting the name of the file is going to be loaded
+
+	* gedit.c (main): now gedit_document_load is called after
+	the gtk main loop is started
+
+	* window.h: added new macro MSGBAR_LOADING_FILE
+
+2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
+
+	*  document.c (gedit_document_load): stupid bug fixed
+	when loading files with escaped name.
+
+2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (gedit_document_get_tab_name)(gedit_document_load)
+	(gedit_document_set_title):
+	* file.c (gedit_file_open)(gedit_file_save_as)(gedit_file_save)
+	(gedit_file_save_as_ok_sel)
+	* print.c (print_set_pji):
+	* recent.c (gedit_recent_add_menu_item) : added support for 
+	escaped file names and URIs
+
+2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_open): now uses g_return_val_if_fail
+	instead of g_assert
+	(gedit_file_open_ok_sel): now uses g_return_if_fail
+	instead of g_assert
+
+	* document.c (gedit_document_load):  now uses
+	g_return_val_if_fail instead of g_assert
+
+2001-02-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_save_as_ok_sel): remove g_assert
+	that crashed gedit when exiting and saving a file.
+	(file_save_document): before saving a document raise
+	one of its views.
+	
+	* document.c (remove_child_cb): before removing a mdi child
+	raise a view if the document is changed.	
+
+	
+2001-02-11  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_save_as_ok_sel): remove g_asserts
+	that where crashing then exiting gedit and saving a file.
+
+	* view.c (gedit_view_set_tab_size): implement
+	(gedit_view_init): call _set_tab_size after creating the gtk_text
+	widget.
+
+	* window.c (gedit_window_refresh_all): call set_tab_size
+
+	* prefs.c (gedit_prefs_load_settings): tab size. Save load and
+	add to struct.
+
+	* dialogs/dialog-prefs.c (apply_cb): support for tab size
+
+	* window.c (gedit_window_refresh_all): add a tab size changed parameter
+
+	* file.c: remove message to translators
+
+2001-02-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/dialog-uri.c (open_button_pressed):
+	hide dlg before trying to load file from URI
+
+2001-02-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* view.c (gedit_view_init): the same popup menu is attached
+	to all the wiews
+
+	* window.c (gedit_window_set_widgets_sensitivity_ro): fix
+
+	* dialogs/dialog-uri.c (dialog_open_uri_get_dialog)(open_button_pressed):
+	now uri history is not saved
+
+2001-02-05  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c: new variable  save_all_flag, new enum GeditSaveAllFlagStates
+	(save_all_continue): new function
+	(gedit_file_save_as): now it saves the right file and the save as dialog is modal
+	(gedit_file_save): active a document's view before saving the document
+	(file_save_all): now it really saves all the modified files
+	(file_open_cb): now the open dialog is modal
+	(gedit_file_save_as_ok_sel): call file_save_all when needed
+
+	* dialogs/dialog-uri.c (dialog_open_uri_get_dialog): the open from uri 
+	dialog is modal
+
+2001-02-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (file_save_all_cb): only call file_save_all
+	(file_save_all): new function
+	(gedit_file_save_as): show file name in the save as dialog
+	
+	* file.h: added definition of file_save_all
+	
+	* window.c (gedit_window_set_widgets_sensitivity_ro): now it 
+	does not set "Save All" menu item sensitivity
+	
+	* document.c (gedit_document_set_readonly): set doc->changed to FALSE
+	(gedit_document_get_tab_name): add the 'star' parameter 
+	(remove_child_cb): little code reorganization
+	(gedit_document_set_title): now the title contains also the path of the file
+
+	* document.h: added the 'star' parameter to gedit_document_get_tab_name
+
+	* print.c(print_set_pji): new title for the preview window
+
+	* search.c (gedit_file_info_cb): now it uses the new gedit_document_get_tab_name
+
+	* view.c (gedit_view_set_readonly): now it uses the new 
+	gedit_document_get_tab_name
+	(gedit_view_text_changed_cb): now it changes the tab name when a document is
+	modified
+	
+	* dialogs/dialog-uri.c (open_button_pressed): set ro sensitivity when needed
+
+2001-01-30  Paolo Maggi  <maggi@athena.polito.it>
+	
+	* document.c: #included  <libgnomevfs/gnome-vfs.h>
+	(gedit_document_load): re-written to use gnome-vfs
+
+	* file.c: #include <libgnomevfs/gnome-vfs.h> and "dialogs/dialogs.h"
+	#defined PREALLOCATED_BUF_LEN 
+	(gedit_file_open): re-written to use gnome-vfs
+	(uri_open_cb): new function
+	(gedit_file_open_ok_sel): check if gedit_document_current() != NULL
+	before setting readonly flag
+
+	* file.h: added definition of uri_open_cb
+
+	* gedit.c: #included  <libgnomevfs/gnome-vfs.h>
+	(main): initialize gnome-vfs
+
+	* menus.c: added item "Open from _URI..." in File menu
+	
+	* dialogs/uri.glade: new file
+
+	* dialogs/uri.glade.h: new file
+
+	* dialogs/dialog-uri.c: new file
+	
+	* dialogs/Makefile.am: new files added
+
+	* dialogs/dialogs.h: added definition of gedit_dialog_open_uri 
+
+2001-01-26  Paolo Maggi  <maggi@athena.polito.it>
+
+	* menus.c: added a separator in the toolbar
+
+2001-01-26  Paolo Maggi  <maggi@athena.polito.it>
+
+	* plugin.h: new field modify_an_existing_doc 
+
+	* plugin.c (gedit_plugin_load) : default setting for 
+	modify_an_existing_doc is FALSE
+
+	* window.h:
+	* window.c: new function gedit_window_set_widgets_sensitivity_ro 
+
+	* file.c (gedit_file_save_as_ok_sel)(gedit_file_open_ok_sel)
+	* document.c (gedit_document_load )
+	* recent.c (recent_cb)
+	* view.c (gedit_view_changed_cb)(gedit_view_add_cb)(gedit_view_remove):
+	  correctly set menu and toolbar item sensitivity when a read only file
+	  is opened (or saved)
+
+2000-12-14  Alex Roberts  <bse@bakterium.com>
+
+	* prefs.c (gedit_prefs_save_settings): only save the run flag 
+	if it's FALSE. we really dont need to save it each time we save.
+
+	* file.c: added missing semicolon to the message. now it
+	actually compile ;)
+
+2000-11-28  Chema Celorio  <chema@celorio.com>
+
+	* file.c: add message for Translators
+
+2000-11-20  Chema Celorio  <chema@celorio.com>
+
+	* new branch: HEAD is going to get ported to the
+	new text widget and gnome-vfs.
+	This is the unstable branch of gedit.
+	
+2000-11-22  Paolo Maggi  <maggi@athena.polito.it>
+
+	* menus.c: litte menus and toolbar reorganization
+
+	* plugin.c (gedit_plugins_menu_add): add an icon to the
+	"Manager..." menu entry
+
+	* dialogs/replace.glade: cosmetic layout changes
+
+2000-11-20  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/about.glade: Added paolo and roberto to the about
+	box.
+
+	* prefs.c (gedit_prefs_load_settings): fix a crash.
+
+2000-11-20  Paolo Maggi  <maggi@athena.polito.it>
+
+	* recent.c (recent_cb): when needed update the recent file 
+	menu in all open windows
+
+2000-11-18  Paolo Maggi  <maggi@athena.polito.it>
+
+        * plugin.c: #defined DATA_PLUGINS_TO_REMOVE
+	(gedit_plugins_menu_add): fix problems when used
+	with more than one toplevel windows; remove old broken
+	code
+
+	* plugin.h: menu_item attribute commented because it is not 
+	needed
+
+	* window.c (gedit_window_set_widgets_sensitivity): fix 
+	problems withplugins sensitivity; remove old broken code
+	(gedit_window_set_plugins_menu_sensitivity): new method
+
+	* window.h: new method gedit_window_set_plugins_menu_sensitivity
+
+	* dialogs/dialog-plugins.c: #included <string.h> to fix warnings
+	(gedit_plugin_manager_clicked): set plugins menu sensitivity
+
+	* undo.c: #included <string.h> to fix warnings
+
+	* dialogs/dialog-replace.c: #included <string.h> to fix warnings
+	(dialog_display_messages): fix warning
+
+	* dialogs/dialog-prefs.c: #included <string.h> to fix warnings
+
+2000-11-17  Paolo Maggi  <maggi@athena.polito.it>
+
+	* recent.c: #defined DATA_ITEMS_TO_REMOVE
+	(gedit_recent_update_menus): fix recent items
+	bugs. Now the right number of items are removed from menu
+	(gedit_recent_update_all_windows): new method
+	(gedit_recent_update): documentation modified
+
+	* recent.h: new method gedit_recent_update_all_windows
+
+	* file.c (gedit_file_open): now it uses 
+	gedit_recent_update_all_windows in place of gedit_recent_update
+	(gedit_file_save_as_ok_sel):  now it uses 
+	gedit_recent_update_all_windows in place of gedit_recent_update
+
+2000-10-30  Chema Celorio  <chema@celorio.com>
+
+	* recent.c (gedit_recent_update_menus): add a comment for
+	tranlators
+
+2000-10-28  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_view_menu_sensitivity): add some
+	g_return_ and GTK_IS_WIDGET to avoid a crash.
+	(gedit_window_set_widgets_sensitivity): ditto
+
+2000-10-28  Chema Celorio  <chema@celorio.com>
+	
+	* print.c (g_unichar_to_utf8): new function temp.
+	(print_show_iso8859_1): new function so that we can print
+	with the new gnome-print. Remove when we use unicode internally
+	(print_ps_line): use new function for show
+
+2000-10-21  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_set_font): memleak
+	(gedit_view_destroy): new method
+	(gedit_view_finalize): remove
+
+	* document.c (gedit_document_destroy): memleak
+
+	* recent.c (gedit_recent_add_menu_item): memleak
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_pos_to_line): rename from pos_to_line
+	(gedit_replace_all_execute): add a parameter to cursor position
+
+	* dialogs/dialog-replace.c (action_replace_all): set the window
+	and cursor position after replace all.
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (action_replace_all): use g_doc_replace_text
+	v.s. using g_doc_delte + g_doc_insert so that undo is a 1 step process
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+	
+	* search.c (gedit_replace_all_execute): I need to write 100 pages
+	of "I shall not use unsigned numbers ..."
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_execute): kill a warning
+	(gedit_replace_all_execute): fix a stupid crash
+
+	* dialogs/dialog-replace.c (action_replace_all): fix #29036
+	(action_find): kill a warning
+
+2000-10-17  Chema Celorio  <chema@celorio.com>
+
+	* prefs.c (gedit_prefs_save_settings): quick fix to not crash
+	when gedit is beeing closed thru the window manager.
+	/me opens the brown paper bag drawer
+
+2000-10-16  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_replace_all_execute): fix a crash when replacing
+	all. (gmorten found it).
+
+	* recent.c (gedit_recent_update_menus): rewrite, fix recent items
+	bugs.
+	(gedit_recent_add_menu_item): implement
+	(gedit_recent_remove): clean
+
+	* prefs.h (struct _Preferences): remove settings->num_recent, we have
+	recent file list, and we know the size of the list.
+
+	* recent.c (gedit_recent_update_menus): don't return if list == NULL.
+	This was causing a crash.
+
+	* menus.c: clean the file, remove unused stuff
+	add ifndef's for stuff that is disabled
+	* menus.h: ditto
+
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c (apply_cb): fix a crash when starting with
+	a clean ~/.gnome/gedit. You Shall strdup a string you plan to free.
+
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
+	* menus.c: renamed some public functions prepending gedit_
+	to their names
+
+	* search.h: clean and leave only the functions that are called.	
+
+	* search.c: make this struct private, move from .h to .c
+	start cleaning this file too.
+
+	* document.h (struct _GeditDocument): ditto. Rename from Document
+	to GeditDocument
+
+	* view.h (struct _GeditView): start to clean this mess. This struct
+	is much smaller now. Rename from View to GeditView
+
+	* view.c (gedit_view_get_type): start cleaning this file. Adding function
+	descriptions and removing the nonsense code.
+
+	* file.c (file_revert_cb): kill a memleak when reverting documents.
+	(gedit_file_open): do not allow doc->filename & fname to point at the
+	same location. We might free doc->filename inside.
+
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_add): allow adding 0 size undo elements. The user
+	might replace "foo" with "".
+
+	* prefs.c (gedit_prefs_save_settings): only save the window size when
+	the window is not maximized.
+
+	* dialogs/dialogs.h: prepend gedit_ to all the functions. Rename
+	the references to this function names.
+
+	* dialogs/dialog-replace.c (gedit_find_again): implement find again
+
+	* undo.c (gedit_undo_check_size): when removing undo objects from the stack
+	verify that we remove pairs of replaces together. We where leaving half of
+	an undo state in the stack
+
+	* search.c (gedit_search_replace_all_execute): limit the size that the buffer
+	can grow to. Gedit pukes on large g_reallocs.
+
+2000-10-14  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_replace_all_execute): grow the buffer using levien's
+	method (<<=1). This helps gedit to not crash when allocating for large buffers.
+
+	* view.c (gedit_view_init): remove the panned window again
+
+2000-10-14  Chema Celorio  <chema@celorio.com>
+	
+	* dialogs/dialog-replace.c: rewrite, use coolio gnome-dialog functions.
+	This code looks so much cleaner.
+
+	* view.c (gedit_view_delete): fix a problem that was causing replace
+	all to really suck.
+
+	* search.c (gedit_search_replace_all_execute): constify &
+	fix a small bug that was causing a warning to be emited
+
+	* view.c (gedit_view_set_window_position_from_lines): fine tune
+
+	* search.c (search_text_execute): constify
+	* undo.c (gedit_undo_add): constify
+	(gedit_undo_merge): constify
+	(struct _GeditUndoInfo): make this struct private to undo.c
+	: remove <gnome.h>
+
+	* document.c (gedit_document_replace_text): constify
+
+	* dialogs/dialog-prefs.c: remove g_print
+	* print.c: ditto
+
+2000-10-13  Yuri Syrota	<rasta@renome.rovno.ua>
+
+	* file.c: replace "0pplication" with "application"
+	(syntax error in message)
+	
+2000-10-10  Chema Celorio  <chema@celorio.com>
+
+	* prefs.h (struct _Preferences): print_lines was marked as ": 1" and
+	the print lines function did not worked. Fix.
+
+	* file.c (gedit_file_open_ok_sel): if there aren't any selected files.
+	Open the file specified in the entry
+
+	* plugin.c (gedit_plugin_guess_program_location): kill 3 leaks
+	gnoem_config_get_string returns g_malloc'ed strings
+	(gedit_plugin_program_location_change): mem leak
+	(gedit_plugin_program_location_get): another one
+
+	* file.c (gedit_file_selector_key_event): if the user hits ESC in the
+	open or save dialog, destroy the dialog
+
+	* search.c (file_info_cb): kill another memleak
+
+	* commands.c (tab_right_cb): use left,bottom & right. Not lft,btm &rgt
+
+	* dialogs/dialog-goto-line.c: rewrite. Actually understand gnome_dialog
+	and use it.
+
+2000-10-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* dialogs/dialog-prefs.c: Changed to really work with
+	gnome_help_pbox_display().
+	
+2000-10-09  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-goto-line.c: the goto line dialog is no longer public
+	kill memleaks and clean the file a bit
+
+	* plugin.c (gedit_plugins_menu_add): kill 2 strings that we
+	where leaking
+
+	* recent.c (gedit_recent_update_menus): kill a mem-leak
+
+	* view.c (gedit_view_class_init): After months of not beeing
+	able to sleep well over this bug. Killed this mother fucker !
+	I wached this bug ask for forgiveness before squashing it to the
+	floor.
+
+	Close :
+	#14756, #5260, #12325, #13576, #14104, #14204,
+	#15528, #15669, #15746, #16197, #20325;
+
+	* file.c (gedit_file_open): allow the opening of 0 bytes files,
+	users have requested this feature.
+	(gedit_file_save): allow the user to save 0 bytes files
+
+	make open_file_selector private and static
+
+	(file_open_cb): Implement multiple file opening
+	(gedit_file_selector_get_filenames): 
+	(gedit_file_open_ok_sel): 
+
+
+2000-10-08  Chema Celorio  <chema@celorio.com>
+
+	* print.c: clean 
+
+2000-10-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* dialogs/dialog-prefs.c: (dialog_prefs_impl): Use
+	gnome_help_pbox_display() instead of gnome_help_pbox_goto()
+	to make sure the help comes up in the gnome-help-browser.
+	 
+2000-09-08  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_refresh_line_hack): finally fixed the problem when
+	deleting a complete line of text. close bug #19862
+
+2000-08-31  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_save): add more checks to improve robustness
+
+	* window.c (gedit_window_new): no need to load the icon here.
+
+	* gedit.c (main): use new icon
+
+	* view.c (gedit_views_insert): if text length <1, return
+
+2000-08-30  Chema Celorio  <chema@celorio.com>
+
+	Fixed small bugs/issues here & there
+
+	* file.c (gedit_view_insert_if_mapped): after more than 10 hrs. finaly
+	fixed the crash reported in
+       #19044: program crashed
+       #20097: gedit DnD crash
+       #20743: crashes when opening DOS file
+       #22287: (crash during mime) loaded a temp file from gftp. bryce weiner <cogburn@fuse.net>.
+	It is based on a semi-hacky soltuion, but users want a stable editor.
+
+2000-07-09  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_save): fix 16143
+
+2000-07-07  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugin_load): do not "_(" mark warning messages for
+	translation
+
+2000-07-06  Chema Celorio  <chema@celorio.com>
+
+	* view.c (doc_insert_text_real_cb): new function to fix #16374. We cant assume that
+	a parameter that is not passed to a funciton will be TRUE.
+
+	* document.c (gedit_document_insert_text): call doc_insert_text_real_cb
+
+	same for the _delete_ function
+
+2000-07-05  Chema Celorio  <chema@celorio.com>
+
+	* search.c (file_info_cb): added total size to the dialog
+
+2000-07-05  Chema Celorio  <chema@celorio.com>
+
+	* search.c (file_info_cb): kill compile warning
+
+	* view.c (gedit_view_init): fix the code a bit
+
+2000-07-05  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_init): try to fix the speed problems with sucky
+	themes. I think they are gone, but we need to verify it.
+
+2000-07-02    <phoenix@nova.es>
+
+	* search.c (count_lines_cb): This function is reform . add file_info ()
+	* search.c (file_info): Add new function . Return -> total chars , total
+	words , total lines , total paragraphs ....
+
+2000-07-01  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_view_menu_sensitivity): set the sensitivity
+	of the revert menu item
+
+	* view.c (gedit_view_changed_cb): set sentivity of the add/remove view
+	menu
+
+	* dialogs/dialog-prefs.c (apply_cb): we where not setting tab_pos.
+	set tab pos after apply.
+
+2000-06-30    <chema@celorio.com>
+
+	* plugin.h (struct _PluginData): add long_desc
+
+	* dialogs/dialog-plugins.c: 
+	(gedit_plugin_manager_item_clicked): use pd->long_desc v.s. pd->desc
+
+2000-06-30    <chema@celorio.com>
+
+	* dialogs/dialog-plugins.c: find a work arround for the crash.
+
+2000-06-29  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_set_title): fix leak.
+
+2000-06-29  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-plugins.c: remove g_print's
+
+	* document.c: Do not free docname. back Charles commit.
+
+2000-06-29  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_add_cb): call set_view_menu_sensitivity after adding a view
+	(gedit_view_remove): call set_view_menu_sensitivity after removing a view
+
+	* plugin.c (gedit_plugin_load): add installed_by_default code.
+	* plugin.h (struct _PluginData): ditto
+
+2000-06-29  Charles Kerr <charles@skywalker.ou.edu>
+
+	* document.c (gedit_document_set_title): small memory leak fixed:
+	g_free docname before exiting the function
+
+2000-06-28  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-plugins.c (gedit_plugin_manager_item_clicked): add the plugin description
+	in the plugin manager when the plugin name is clicked.
+
+2000-06-27  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_load_widgets): fix a ugly piece of code.
+
+	* window.c (gedit_window_set_view_menu_sensitivity): new function.
+
+2000-06-26  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugin_save_settings): save the plugins that are installed
+
+	* prefs.c (gedit_prefs_save_settings): call gedit_plugin_save_settings
+
+2000-06-26  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-plugins.c (gedit_plugin_manager_create): new function
+	(gedit_plugin_manager_clicked): new func
+	(gedit_plugin_manager_destroy): new func
+	(gedit_plugin_manager_item_remove_all): new func
+	(gedit_plugin_manager_item_add_all): 
+	(gedit_plugin_manager_item_remove): 
+	(gedit_plugin_manager_item_add): 
+	(gedit_plugin_manager_item_load): 
+	(gedit_plugin_clist_compare_function): 
+	(gedit_plugin_lists_freeze): 
+	(gedit_plugin_lists_thaw): 
+
+	* plugin.c (gedit_plugins_menu_add): plugin manager stuff
+	* plugin.h: ditto
+
+2000-06-25  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_widgets_sensitivity): set sensitity of
+	the plugins menu items.
+
+	* plugin.h (struct _PluginData): add menu_item and
+	needs_a_document.
+
+2000-06-25  Chema Celorio  <chema@celorio.com>
+
+	* utils.c (gedit_utils_error_dialog): new function
+	(gedit_utils_delete_temp): new function [unfinished]
+	(gedit_utils_create_temp_from_doc): new function
+
+2000-06-22  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_get_position): fix a bug in which the text
+	position will not get updated in the text widget when the position
+	is changed with the mouse.
+
+2000-06-22  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugin_program_location_get): clean g_prints
+	* dialogs/dialog-plugins.c: ditto
+
+2000-06-21  Chema Celorio  <chema@celorio.com>
+
+	* utils.h: remove the defines used for accesing the toolbar/menus.
+
+	* view.c (gedit_view_load_widgets): call gnome_mdi_get[menubar/toolbar]
+	to get the menu/tooblar UI_INFO
+	* window.c (gedit_window_set_widgets_sensitivity): ditto
+
+2000-06-21  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_replace_all_execute): add sanity check
+
+	* window.c (gedit_window_set_widgets_sensitivity): fix a bug 
+
+2000-06-20  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): fix a bug
+	adjust start_position after a replace
+
+	* plugin.c (gedit_plugin_program_location_get): fix
+	(gedit_plugin_program_location_clear): new
+
+2000-06-20  Chema Celorio  <chema@celorio.com>
+
+	* plugin.h: add prototype
+
+	* plugin.c (gedit_plugin_program_location_get): new func.
+	(gedit_plugin_guess_program_location): new, func.
+
+	* dialogs/dialog-plugins.c (gedit_plugin_program_location_dialog): new file
+	new function. Move the code from the email plugin to here so that it can
+	be reused.
+
+	* window.c (gedit_window_set_widgets_sensitivity): fix a bug that made the
+	new documents unshade the undo && redo items.
+
+	* dialogs/dialog-prefs.c (apply_cb): raise the props box
+
+	* window.c (gedit_window_refresh_all): fix small bug
+
+2000-06-20  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_widgets_sensitivity): new function that turns
+	on and off the sensitivty of the menus & toolbar items.
+
+	* file.c (file_close_cb): turn off sensitivty of toolbar and menu
+	items ( that need a document to work)
+	(file_close_all_cb): ditto
+
+	* document.c (gedit_document_new_with_file): turn toolbar and 
+	menu items sensitivity on
+	(gedit_document_new_with_title): ditto
+	(gedit_document_new): ditto
+
+	* window.c (gedit_window_refresh_all): fix a crash that happened
+	when apply was clicked in the prefs box and there where no documents
+	open.
+
+2000-06-19  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_refresh_all): queue_resize the toolbar when setting
+	to system settings and system setings = ICONS_ONLY
+
+2000-06-19  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_refresh_all): fix the bug in which the toolbars will
+	no get loaded when the mdi_mode is changed.
+
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_check_size): fix the bug that messed the undo stack when reducing
+	the number of undo levels in the prefs. We need to remove elements from the bottom
+	up, since the list length is changed every time we removed an element from the top.
+
+	* document.c (gedit_document_swap_hc_cb): kill bug
+
+	* view.c (gedit_view_load_toolbar_widgets): unshade/shade the undo&redo menu items
+	too
+	(gedit_view_set_undo): ditto
+
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_toolbar_labels): fix the problem in which the
+	toolbar will not resize if the prefs are changed from text to icons.
+
+	* document.c (gedit_document_set_title): set title to $docname $(readonly)
+	for doc->readonly == TRUE.
+
+	(doc_delete_text_cb): if start_pos == end_pos, return. This caused
+	a warning to appear when the user typed CTL+K and the line length
+	was null. Should we enable this kind of shortcuts ? I don't think
+	so.
+
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_init): dont create vpane, since the split screen
+	is disabled now.
+
+	* window.c (gedit_window_set_toolbar_labels): finish preference toolbar
+	labels set to system-wide setting.
+
+	* view.c (gedit_view_changed_cb): install menu hints for the Document
+	menus
+
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* view.c: the toolbar is a view element not a window one
+	because if mdi_mode = TOPLEVEL, each view has it's own toolbar
+	* window.c: ditto
+	* document.c: ditto
+
+2000-06-17  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c: add toobar_labels group
+
+	* prefs.c (gedit_prefs_save_settings): toolbar_labels, change to int
+	(gedit_prefs_determine_use_fontset): ditto
+
+	* window.c (gedit_window_new): fix the problems with mdi_mode = TOPLEVEL
+
+	* gedit.c (main): reorder the *_init_functions
+
+	* print.c (file_print_cb): #ifdef PRINT_SELECTION so that we can
+	compile against gnome-print-0.20
+
+2000-06-16  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_status_bar): fix
+	( still has problems with Mdi_mode=TOP_level)
+
+	* gedit.c (main): change the order of initialization
+
+	* view.c (gedit_view_get_position): add sanity check
+
+	* file.c (gedit_file_open_ok_sel): fix a crash
+
+2000-06-15  Chema Celorio  <chema@celorio.com>
+
+	* prefs.c (gedit_prefs_save_settings): fix a g_warning if the windows is closed
+	by clickin on the [X]
+
+	* window.c (gedit_window_destroy): remove
+
+2000-06-15  Chema Celorio  <chema@celorio.com>
+
+	* print.c (file_print_cb): finish print_range = selection
+	you will need to update gnome_print.
+
+	* view.c (gedit_view_get_selection): if star_pos = end_pos
+	selection is not active.
+
+2000-06-15  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_get_tab_name): mark strings for tranlation
+	in a different way. They are not beeing tranlated.
+	(gedit_document_set_title): mark string
+
+	* dialogs/dialog-prefs.c (prepare_printing_page): dont' set print_lines sensitivity
+	(print_lines_toggled): ditto
+
+2000-06-15  Valek Filippov  <frob@df.ru>
+
+	* search.c: microchange for i18n.
+
+2000-06-15  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugins_window_add): add hints to the plugin menu
+	use plugin_data->description;
+
+	* window.c (gedit_window_set_status_bar): fix the statusbar.
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): memleak fix
+
+2000-06-14  Chema Celorio  <chema@celorio.com>
+
+	* window.h (struct _GeditToolbar): new
+
+	* undo.c (gedit_undo_redo): add the stuff needed to set the
+	undo and redo buttons sensitivity
+	(gedit_undo_undo): ditto
+
+	* document.c (gedit_mdi_init): move mdi_open_toplevel here
+
+	* dialogs/dialog-prefs.c (gedit_window_refresh): set toolbar_labels on/off
+	* gedit.c (main): ditto
+	* prefs.c (gedit_save_settings): 
+	(gedit_load_settings): ditto
+	* prefs.h (struct _Preferences): ditto
+
+	* document.c (gedit_mdi_init): rename the "Files" menu to
+	"Documents"
+
+	* window.c : remove swap hc and move to document.c
+
+	* document.c (gedit_document_swap_hc_cb): moved here & rename
+
+	* window.h: comment out a structure and some variables
+	that are not beeing used.
+
+2000-06-14  Chema Celorio  <chema@celorio.com>
+
+	* print.c (gedit_print_verify_fonts): new function. It verifies
+	that the user has the fonts required.	
+	(print_set_pji): fix a stupid bug, close 13922.
+
+	* window.c (doc_swaphc_cb): add error dialogs.
+	if the file is allready open, don't open it again
+	set it's view active.
+
+	* search.c (dump_search_state): remove unused enums
+	SEARCH_IN_PROGRESS_COUNT_LINES & _REPLACE
+
+2000-06-13  Chema Celorio  <chema@celorio.com>
+
+	* utils.h (gedit_debug): add debug_window macro
+
+	* gedit.c: add "gint debug_window"
+
+	* document.c (gedit_document_load): convert the file_list->data
+	to a full_pathname.
+
+	* file.c (gedit_file_convert_to_full_pathname): new function to convert
+	the file_name passed as argument to a full path name.
+	* file.h: add prototype
+
+	* recent.c: rename functions for consistency with the rest
+	of the code.
+	
+	* prefs.c (gedit_load_settings): compose mdi string from
+	enum and not use a number.
+
+	* file.c (file_close_cb): after closing a doc, set the
+	title.
+
+	* document.c (gedit_mdi_init): don't display "gedit "VERSION
+	in the title window, since gedit_document_set_title is not.
+	If you want to add the version number to the title window
+	pleas also add it to the function gedit_docuemnt_set_title.
+
+	* view.c (gedit_view_remove_cb): after removing a view, set
+	the title again.
+
+2000-06-13  Chema Celorio  <chema@celorio.com>
+
+	* file.c: finish fixing the BUG in which gedit will not
+	exit after a quit request is made from the user or a close
+	all encounters an Untitled document. This had to be done with
+	a hack to fix the problem that gnome_mdi_remove_all can't wait
+	for a save_as dialog encountered when saving Untitled documents.
+	(gedit_close_all_flag_status): new function
+	(gedit_close_all_flag_clear): new function
+	(gedit_close_all_flag_verify): new function
+
+2000-06-12  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_open): connect the text_changed signal after opening a file.
+
+	* document.c (gedit_document_new_with_file): return TRUE/FALSE upon succes/error
+	modified all the functions that called this one.
+
+	* view.c (gedit_view_update_line_indicator): new name for line_pos_cb.
+
+	* document.c (gedit_mdi_init): dont' connect to "child_changed"
+	connect to view_changed so that we set the title of the window
+	when switching to/from diferent views and not only diferent docs.
+
+	* file.c (file_quit_cb): disconect the "destroy" signal before
+	calling gedit_object_destroy. Because it was conected to this
+	function and it was beeing called twice.
+
+	* document.h: added a variable to hold the signal "destroy"
+	for mdi
+
+	* dialogs/dialog-prefs.c: don't make the dialog modal, if
+	it Settings->Preferences is called again show and raise
+	the
+
+	* file.c (gedit_dump_close_all_flag_status): new function
+	usefull for debuging, remove later.
+
+	* utils.h: add gedit_close_all_flag enums'
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
+	* file.c (file_save_document): new function
+
+	* dialogs/dialog-prefs.c (dialog_prefs_impl): make the window modal
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_undo): renamed, Implement GEDIT_UNDO_REPLACE
+	* undo.c (gedit_undo_redo): Implement GEDIT_UNDO_REPLACE
+
+	* menus.c (toolbar_data): replace undo_do with undo_undo 
+
+	* file.c (gedit_file_open): after opening a doc
+	set the position to 0
+
+	* undo.h (struct _GeditUndoInfo): add GEDIT_UNDO_REPLACE
+
+	* document.c (gedit_document_replace_text): new function
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
+	* utils.c: remove gedit_set_title from here
+
+	* document.h: add new prototype
+
+	* document.c (gedit_document_set_title): move here, adn rename
+
+	* file.c (gedit_file_open): call insert_text first and then set
+	the readonly flag. 
+
+	* document.c (gedit_document_delete_text): if doc->readonly return
+	(gedit_document_insert_text): ditto
+
+	* file.c (gedit_file_save): call save as if doc->filename = NULL
+	(gedit_file_save_as): new function
+	(file_save_as_cb): call gedit_file_save_as
+
+	* dialogs/dialog-replace.c (dialog_replace): set the find & replace
+	dialog title accordingly
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_remove_cb): don't remove views if views # < 2
+	( this fixes a crash too )
+
+	* commands.c (edit_cut_cb): use gedit_editable_current() and
+	not GTK_TEXT(mdi->whatever....
+
+	* utils.h (gedit_editable_current): macro for gedit_editable_current()
+
+	* document.c (child_changed_cb): dont use mdi->active view
+	use gedit_view_current()
+
+2000-06-10  Chema Celorio  <chema@celorio.com>
+
+	* search.c (count_lines_cb): don't display filename (NULL)
+	use "Untitled #"
+
+2000-06-09  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_create_popup): dont str_dup the filename
+	gedit_docuement_new_with_title will.
+
+	* dialogs/dialog-replace.c (dialog_replace): call the correct callback
+	for "activate" in replace_entry and search_entry they where switched
+	(replace_entry_activate_cb): act as if the replace button has been clicked
+	(replace_text_clicked_cb): use gedit_search_info.replace_start & replace_end
+	when replacing, not the active selection.
+	(replace_text_clicked_cb): save search_start & end values for replace
+	when find next gets clicked
+
+	* search.h: add replace_start & replace_end to gedit_search_info
+
+	* search.c (gedit_search_start): clear .replace_start and .replace_end 
+
+	* file.c (gedit_file_stdin): fix
+
+2000-06-09  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_status_bar): fix status bar bug
+
+	* utils.h (options): add DEBUG_WINDOW
+
+	* window.c: add calls to gedit_debug
+
+	* undo.c (gedit_undo_check_size): add call to gedit_debug
+
+	* dialogs/dialog-prefs.c (gtk_option_menu_get_active_index): remove
+	the \n in gedit_debug(....
+
+2000-06-08  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_stdin): use new function to set
+	the position in the view.
+
+	* view.c (views_delete): make static.
+	(views_insert): make static
+	Use new functions to insert into the documents
+
+	* plugin.h: add prototype to kill warning
+
+	* dialogs/prefs.glade: typo
+
+2000-06-08  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_replace_all_execute): fix an ugly
+	crash.
+
+2000-06-06  Roberto Majadas  <phoenix@nova.es>
+ 
+ 	* file.c (gedit_file_stdin): fix the pipe constant problem  
+
+2000-06-06  Chema Celorio  <chema@celorio.com>
+
+	* search.h: add last_text_searched to the structure and start_pos parameter
+	to find again.
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): save the last text
+	searched for find again.
+
+	* menus.c (gedit_edit_menu): add FIND_AGAIN menu entry
+
+	* file.c (gedit_shutdown): move this function here.
+
+	* gedit.h (gedit_shutdown): delete and remove from repository
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* gedit.h (gedit_shutdown): remove structure from here.
+
+	* search.h: added new prototype
+	* search.c (search_text_not_found_notify): move here
+	(find_again_execute): implement
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* search.c (gedit_search_replace_all_execute): done.
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): call replace all.
+	and display dialog.
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_get_tab_name): added comments
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): start
+	replace all stuff
+
+	* search.c (gedit_search_replace_all_execute): start implementing
+
+	* prefs.c: new pref print_orientation
+	* dialogs/dialog-prefs.c: ditto
+
+	* print.c : implement orientation. 
+
+	* view.h (struct _View): clean the struct and optimize it.
+
+	* menus.c (view_menu): call the new functions
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_create_popup): rename
+
+	* document.c (gedit_get_document_tab_name): rewrite.
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* document.h (struct _Document): clean the structure.
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* file.c (file_revert_cb): before reverting a file delete it's text.
+
+	* search.c: remove all direct access to the text
+	and mdi. Use the new functions to make the code textwidget and mdi
+	independendant.
+
+	* view.c (gedit_view_get_window_position): new function
+	(gedit_view_set_window_position): new function
+	(gedit_view_get_selection): new function
+	(gedit_view_set_selection): enable it.
+	* view.c (gedit_view_set_window_position_from_lines): new function
+
+	* window.c (gedit_window_active): new function
+
+	* dialogs/dialog-replace.c: remove all direct access to the text
+	and mdi. Use the new functions to make the code textwidget and mdi
+	independendant.
+
+	* undo.c (gedit_undo_do): use the new function to set the scrollbar
+	position
+	(gedit_undo_redo): ditto
+	* undo.h: remove the "extern" directive before each function name
+	* prefs.h: ditto
+	* utils.h: ditto
+
+	* view.c (gedit_view_toggle_line_wrap_cb): delete, it was not beeing
+	used
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_delete_text): new function.
+
+	* undo.c (gedit_undo_do): use gedit_document_delete_text and
+	gedit_document_insert_text.
+	(gedit_undo_redo): ditto
+
+	* file.c (gedit_file_open_ok_sel): don't create the
+	view here. gedit_document_new_with_file will.
+
+	* view.c (views_delete): use gedit_view_delete
+	(gedit_view_delete): new function. 
+	* view.c (doc_delete_text_cb): rewrite
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_insert): don't freeze and thaw the view.
+	(views_delete): ditto.
+
+	* file.c (gedit_file_stdin): insert to view with the new method.
+	(gedit_file_save): ditto
+	(gedit_file_open): if doc = null create one.
+
+	* document.h: add new functions
+
+	* view.c (gedit_add_view): fix . use gedit_document_get_buffer
+	(gedit_view_buffer_sync): delete
+	(gedit_view_refresh): delete
+
+	* document.c (gedit_document_new_with_title): set doc->filename
+	(gedit_document_load): implement.
+
+	* gedit.c (main): call gedit_document_load.
+
+	* view.c (gedit_view_buffer_sync): dont need it anymore
+	(gedit_view_refresh): don't need it anymore
+	(gedit_view_insert): new function
+	(views_insert): call gedit_view_insert
+
+	* document.c (gedit_document_destroy): we don't keep an
+	internal buffer of the file. So remove all references to it.
+	(gedit_document_new): ditto
+	(gedit_document_new_with_title): ditto
+
+	* file.c: renamed the functios to gedit_file_[function]
+
+2000-06-03  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_event_key_press): undo/redo was beeing
+	called twice when pressing the shortcut key.
+
+	* view.c: remove \n from gedit_debug
+	* document.c: ditto
+	* print.c: ditto
+	* file.c: ditto
+	* recent.c: ditto
+	* search.c : ditto
+
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_merge): consider deleting
+	text with the backspace and the delete key.
+
+2000-06-04 Roberto Majadas <phoenix@nova.es>
+
+	* gedit.c (main): added a call to gedit_file_stdin
+	* file.c (gedit_file_stdin): new function. Reads file from
+	stdin.
+	* document.c (gedit_document_stdin): new function
+
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_check_size): implement.
+	checks the undo list size and deletes the objects
+	with levels < settings->undo_levels
+
+	* dialogs/dialog-prefs.c (apply_cb): added undo_levels_stuff
+	(undo_levels_toggled): new function
+	(prepare_documents_page): add undo levels stuff
+
+	* prefs.c: add undo levels.
+	* prefs.h (struct _Preferences): ditto.
+
+	* undo.c (gedit_undo_merge): check if the position
+	of the undo text is the same as the last_undo
+	(gedit_undo_merge): merge GEDIT_UNDO_DELETE too.
+
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_merge): New function. Merges
+	a previous undo item with the new data. We now undo
+	words and not chars. This also saves memory because
+	of less gedit_undo struct's used.
+	(gedit_undo_free_list): new function. Plugs a memleak
+	(gedit_undo_add): verify if the data can be merged
+	and call gedit_free_list
+
+	* utils.h (gedit_debug): add newline to the undo macros,
+	we have to delete the newline from all the other files.
+
+	* undo.h (GEDIT_UNDO_DELETE): use unique enum's
+	and not DELETE & INSERT
+
+2000-06-01  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_current): new function we should use
+	this function now to add an abstraction layer for future
+	changes.
+
+	* undo.c (gedit_undo_add): plug a HUGe leak
+	(gedit_undo_do): plug another leak.
+	(gedit_undo_redo): adjust the current view, not undo->view
+	(gedit_undo_do): ditto
+
+	* undo.h (struct _gedit_undo): remove *view from _gedit_undo
+	structure, we don't need it anymore and saves memory.
+
+
+2000-06-01  Jason Leach  <leach@wam.umd.edu>
+
+	* dialogs/Makefile.am (glade_msgs): removed find-line.glade.h so
+	make distcheck could pass
+
+2000-06-01  Chema Celorio  <chema@celorio.com>
+
+	* document.h (struct _Document): rename buff to buffer
+	to find all the places where it is beeing used.
+
+	* file.c: use buffer now v.s. buff
+
+	* document.c (gedit_document_get_buffer): new function,
+	this provides an abstraction layey on the method to get
+	the text buffer.
+
+	* undo.c (gedit_undo_do): don't update the internal
+	buffer, this was causing a crash.
+	* undo.c (gedit_undo_redo): ditto
+
+	* view.c (insert_into_buffer): remove
+
+	* dialogs/dialog-replace.c (dialog_replace): kill
+	warning
+
+
+2000-05-31  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c: use the new function
+
+	* undo.c (gedit_undo_do): use new function
+	(gedit_undo_redo): ditto
+
+	* view.c: added views_insert and view_delete
+	(gedit_view_list_insert): deleted
+	(views_delete): moved here
+	(views_insert): moved here
+	(doc_insert_text_cb): rewrote and. Now uses the new
+	view function
+
+	Starting to clean this ugly file.
+
+	* undo.c: move the views_insert and view_delete to view
+
+	* dialogs/dialog-replace.c (dialog_replace): fix the problem when
+	the dialog pops up in 2 diferent locations.
+
+	moved the views_insert code to view.c
+
+2000-05-30  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_do): before undoing/redoing
+	adjust the window so that we dont have to see
+	the document scroll in a very anoying fashion
+	(gedit_undo_redo): ditto.
+
+	* document.h (struct _Document): added untitled_number
+	entry.
+
+	* view.c : #ifdef out split screen code
+	* undo.c : #ifdef out split screen code
+	* document.c : #ifdef out split screen code
+	It seems that the speed problems have been solved !
+	We need to confirm this whit the users that reported
+	them.
+	(gedit_get_document_tab_name): fix, added new parameter.
+
+	* dialogs/dialog-prefs.c (gedit_window_refresh): set split screen in
+	all docs and all views.
+
+2000-05-29  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_determine_lines): fix
+	(print_line): fix
+
+	* pixmaps/gedit-icon.xpm : fix
+
+
+2000-05-25  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): first
+	implementation of replace all.
+
+	* view.c: use new debug function ( macro )
+
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (views_insert): before undoing check whether there
+	is a piece of text selected.If there is, unselect it.
+	(views_delete): same
+
+	* view.c (doc_insert_text_cb): go back to the original
+	parameters, we were overloading a mdi_view function so we
+	can't change those.
+
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): replace now
+	works, it still needs some love.
+
+	* undo.c (views_insert): disable split screen, it
+	was making gedit slow
+	(views_delete): ditto
+
+	* view.c (doc_insert_text_cb): changed parameters for
+	function.
+	* view.h: reflect new parameters
+
+	* dialogs/dialog-replace.c (views_delete): added this function
+	to delete text before replacing. **-- Found more about what
+	the speed problems with gedit are --**. 
+
+	* file.c (file_revert_cb): do not revert a (NULL) file,
+	since we don't have a filename to rever it to.
+
+	* undo.c (gedit_undo_redo): clean the code a bit
+
+	* dialogs/dialog-replace.c: merge dialog-search and
+	dialog-replace, they now share the code and the glade
+	file. We just hide the "replace" stuff in the dialog
+	when called from search.
+	
+	* dialogs/dialog-search.c : deleted
+	* dialogs/search.glade : deleted
+	* dialogs/search.glade.h : deleted
+
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c: start the replace stuff.
+
+	* dialogs/dialog-search.c (search_text_clicked_cb): Improve fix
+	behaivor
+	(search_text_clicked_cb): let the user know that the search was
+	not successfull. I am still don't like the way we are doing so
+	but is better than nothing.
+
+2000-05-23  Chema Celorio  <chema@celorio.com>
+
+	* view.c (view_changed_cb): don't call set readonly
+	this was causing a mess with the "Untitled #" name for each view.
+
+	* file.c (gedit_file_save): after saving as, turn the
+	readonly flag off in all views. 
+
+	* document.c: change gedit_debug to the new form
+	(gedit_get_document_tab_name): fixed a small bug
+
+	* dialogs/dialog-goto-line.c (dialog_goto_line): set dialog's parent
+	* dialogs/dialog-search.c (dialog_find): ditto
+
+2000-05-23  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-search.c (dialog_find): make window
+	modal and do more checks.
+
+	* dialogs/dialog-goto-line.c (goto_line_activate_cb):
+	rename find_line -> goto_line
+	(dialog_goto_line): make window modal to avoid weird
+	situations
+
+	* dialogs/dialogs.h: ditto
+	* search.c (goto_line_cb): ditto
+
+2000-05-22  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_icon): use the correct
+	name for the new transparent icon.
+
+	* search.c (search_text_execute): use a mask for case
+	sensitive. It's better than duplicating code.
+
+2000-05-22  Chema Celorio  <chema@celorio.com>
+
+	* search.c: improve search robustnes a bit,
+	there is still more work to do.
+
+2000-05-21  Chema Celorio  <chema@celorio.com>
+
+	* search.c: Rewrote
+
+2000-05-13  Chema Celorio  <chema@celorio.com>
+
+	* utils.h (gedit_debug): add debug recent
+
+	* gedit.c (options): add debug recent
+
+	* utils.c: deleted debug function, we are now
+	using a macro Jason wrote.
+	
+
+2000-05-17  Jason Leach  <leach@wam.umd.edu>
+
+	* view.c: cleaning up some of the debug messages.
+	* prefs.c: ditto.
+
+2000-05-12  Jason Leach  <leach@wam.umd.edu>
+
+	* view.c (gedit_event_key_press): removed unused variable 'gint
+	mask'
+
+2000-05-05  Jason Leach  <leach@wam.umd.edu>
+
+	* window.c: changed references to gE_icon to point to the new
+	gedit-icon
+
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c (prepare_fontscolors_page): leak.
+	(apply_cb): leak.
+
+	* view.c (doc_delete_text_cb): leak
+
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_header): leak x 3
+	(print_ps_line): leak.
+
+2000-05-01  Jason Leach  <leach@wam.umd.edu>
+
+	* undo.c (gedit_undo_do): plugged a leak that happened everytime
+	you did undo then redo.
+
+	* recent.c (recent_update_menus): fixed a 35-45 byte leak that
+	happened every time you opened a file or this was called (visit a
+	file already in your recent list, etc).
+
+	* view.c (gedit_event_button_press): fixed a silly 20-byte leak
+	that happened on every button press event in a document.
+
+	* view.c (gedit_view_init): fixed a 624-byte leak that happened
+	with every document you opened.
+
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_new): leak
+
+2000-05-01  Jason Leach  <leach@wam.umd.edu>
+
+	* view.c (doc_insert_text_cb): added a call to insert_into_buffer,
+	this is important because otherwise doc->buf->str otherwise won't
+	contain the contents of your document until you save or something,
+	so like the e-mail plugin sends no body on Untitled documents.
+
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugins_window_add): memleaks -= 1;
+
+	* recent.c (recent_update_menus): memleaks -= 1;
+
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* recent.c (recent_update_menus): memleaks -= 4;
+
+	* plugin.c (gedit_plugins_window_add): memleaks -= 6;
+	
+	* prefs.c (prefs_determine_use_fontset): memleaks -= 1;
+
+2000-04-29  Jason Leach  <leach@wam.umd.edu>
+
+	* gedit.c (options): new command-line options --debug-print and
+	--debug-file, to show only sections of debugging messages.
+	
+	* utils.h (gedit_debug): added sectioning of DEBUG_PRINT and
+	DEBUG_FILE
+	
+	* all files: renamed gedit_debug_mess -> gedit_debug
+	
+	* gedit.c (options): new command-line option --debug to turn on
+	debug messages in gedit, default to disable.
+
+	* utils.h (gedit_debug): new debug stdout thingy.
+
+	* utils.c (gedit_debug_mess): #if'd out this, it's getting
+	replaced with a #define'd gedit_debug in utils.h
+
+2000-04-29  Chema Celorio  <chema@celorio.com>
+
+	* print.c: typo.
+
+	* plugin.c (gedit_plugins_window_add): Memory leak fix,
+	free path.
+
+2000-04-28  Chema Celorio  <chema@celorio.com>
+
+	* print.c (file_print_cb): Finished the word wrapping
+	stuff
+
+	* recent.c (recent_update_menus): Fix a bug that will make
+	the print item in the File menu disapear when the recent
+	file list was < 4. 
+
+
+2000-04-27  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_line): Started doing the word wrapping
+	versus word clipping so that we can use the printing 
+	code in pan.
+
+	* menus.c (gedit_file_menu): Fixed a small bug where the
+	print menu item will appear in the wrong place if gedit
+	is launched with a file as an argument.
+
+2000-04-25  Jason Leach  <leach@wam.umd.edu>
+
+	* recent.c: Replaced the use of gnome-history with custom routines
+	to store history in ~/.gnome/gedit, much better.
+
+2000-04-21  Alex Roberts  <bse@error.fsnet.co.uk>
+
+	* file.c: Fixed various spelling mistakes.
+	(file_revert_do): added translation tags
+
+2000-04-20  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_document): Added gnome_print_beginpage
+	  we can now navigate postscript output with gv
+
+2000-04-20  Alex Roberts  <bse@error.fsnet.co.uk>
+
+	* dialogs/about.glade: Added my email address.
+
+2000-04-18  Chema Celorio  <chema@celorio.com>
+
+	* print.c: added a print range to the print
+	  dialog and moved the initialization for
+	  printing.
+
+2000-04-15  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c (prepare_pagesize_page): new function
+	(prepare_printing_page): load spin button with value
+
+	* prefs.c (gedit_load_settings): Added paper stuff
+	(gedit_save_settings): ditto
+
+	* dialogs/dialog-prefs.c (apply_cb): ditto
+
+2000-04-14  Chema Celorio  <chema@celorio.com>
+
+	* gedit.c (main): if the file is empty, dont
+	crash
+
+2000-04-14  Jason Leach  <leach@wam.umd.edu>
+
+	* window.c (gedit_window_set_status_bar): fixed a bug with status
+	bar getting toggled in prefs, even when the user hasn't asked for
+	it to toggle.
+
+2000-04-14  Chema Celorio  <chema@celorio.com>
+
+	* file.c: if the file is opened by another
+	app, let the user know.
+
+2000-04-14  Jason Leach  <leach@wam.umd.edu>
+
+	* view.c (gedit_event_button_press): made private
+	(gedit_event_key_press): ditto
+	(view_list_erase): ditto
+	(gedit_event_key_press): fix ALT-F menu accessing again...
+
+2000-04-13  Chema Celorio  <chema@celorio.com>
+
+	* print.c (print_setfont): new function
+	finish the printing prefs stuff
+
+2000-04-13  Chema Celorio  <chema@celorio.com>
+
+	* utils.c (gtk_radio_button_select): created, copied
+	from gnumeric
+	(gtk_radio_group_get_selected): ditto
+
+	* dialogs/dialog-prefs.c : add printing stuff,
+	still need to do the print.c part tho
+
+	* dialogs/dialog-search.c (search_dialog_button_cb): if
+	not doc is open, return.
+	(search_cb): ditto
+
+	* commands.[ch] (about_cb): moved here find_line, replace
+	and about callbacks
+	
+	* menus.c: moved some callbacks to commands.c
+
+	* dialogs/dialog-prefs.c: included "commands.h" and "window.h"
+	to kill two compilation warnings.
+	(gedit_window_refresh): made non-static since prefs.c is
+	calling it.
+
+	* utils.h and utils.c (gedit_debug_mess): added new debug
+	enum DEBUG_PREFS and DEBUG_PRINT
+
+	* prefs.c: included #utils for debuging some bugs.
+
+	* undo.c (gedit_undo_do): If no document is active
+	dont crash.
+	(gedit_undo_redo): ditto
+	* commands.c (edit_cut_cb): ditto
+	(edit_copy_cb): ditto
+	(edit_paste_cb): ditto
+	(edit_selall_cb): ditto
+	(options_toggle_split_screen_cb): ditto
+	(options_toggle_read_only_cb): ditto
+	(options_toggle_word_wrap_cb): ditto
+	(options_toggle_line_wrap_cb): ditto
+	(options_toggle_status_bar_cb): ditto
+
+	* dialogs/dialog-prefs.c (gedit_window_refresh): ditto
+
+	* file.c (file_revert_cb): ditto
+	* file.c (file_save_as_cb): ditto
+
+	* print.c (file_print_cb): ditto
+	* print.c: added utils.h
+
+	
+2000-04-13  Jason Leach  <leach@wam.umd.edu>
+
+	* dialogs/dialog-prefs.c (apply_cb): fixed problems with changes
+	to the colors not getting applied and "show statusbar" not working
+	correctly.
+
+2000-04-10  Valek Filippov <frob@df.ru>
+
+	* file.c: typo fix
+
+2000-04-09  Chema Celorio  <chema@celorio.com>
+
+	* document.c (gedit_document_real_changed): not used, delete it.
+	(gedit_document_marshal): not used, delete it.
+	(gedit_add_view): commented out a g_print function ..
+
+	* dialogs/dialog-replace.c: Removed some compile
+	warnings.
+
+	* menus.c (gedit_tab_menu): simpify the menus
+	set the tabs in the prefs box not on a menu entry.
+	(gedit_settings_menu): why would the user change
+	the RO setting ?. Removed from menu
+	(gedit_settings_menu): Removed the save settings
+	entry from the menu. Settings should be saved automaticlly
+	by the prefs box.
+
+	* prefs.c:  removed compile warnings
+	* recent.c: removed a compile warning
+	* dialogs/dialog-find-line.c: removed a compile
+	warning.
+	* dialogs/dialog-replace.c: removed a compile
+	warning.
+
+	* search_backup.c:
+	* search_backup.h:
+	I have included this files in the CVS because I am
+	goint to delete some search functions that we might
+	want to implement as plugins in the future. We need
+	to simplify the find & search/replace functions. The
+	more complex stuff like find in all files ( or something
+	like grep ) will be better off, if implemented as a plugin
+
+2000-04-09  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_init): Do not connect key_press_event
+	with gtk_signal_connect_after. key_press_event has to be
+	the first function to handle this event. This fixes the Ctrl+W
+	bug.
+
+	**We still need to add wrapping to the
+	prefs box.***
+	* print.c (print_line): Implemented text
+	wrapping.
+	(print_ps_line): created
+	(set_pji): added wrapping stuff
+	(print_determine_lines): added wrapping stuff
+
+	* document.c (gedit_document_create_view): call
+	"gedit_view_set_read_only" when creating a new view
+	to update the title and the RO status.
+
+2000-04-08  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_open): Close the Untiled
+	doc only if the open was succesfull.
+
+	(popup_create_new_file): dont save the
+	file. Just set doc->filename.
+
+2000-04-08  Chema Celorio  <chema@celorio.com>
+
+	* file.c (file_saveas_ok_sel): ask user
+	before overwriting a file.
+	(popup_create_new_file): moved
+	from commands. and added a g_free call.
+
+	* gedit.c (main): fixed when you call gedit myfile.txt
+	and myfile.txt does not exists.
+
+	* commands.c (edit_cut_cb): removed the commented
+	functions that where moved to file.c
+	(popup_create_new_file): moved to file.c
+
+	* recent.c (recent_update): cleaned a bit
+	(recent_cb): FIXME: we need to delete a file
+	from the recent menu if an error was encountered
+	while trying to open it.
+
+	* commands.c: removed some prototpes that where not
+	longer used.
+	(popup_create_new_file): shut up a warning.
+	(gedit_shutdown): comment it out, looks like
+	it is not beeing used.
+
+	* recent.c : Include file.h
+	(recent_cb): rewrote.
+	
+	* view.c (view_changed_cb): call
+	gedit_view_set_read_only.
+
+	* file.c (gedit_file_open): Rewrote
+	(file_open_ok_sel): Don't report to the
+	user if there was an error, let file_open
+	do it.
+
+	* document.h (struct _Document): Added a read
+	only entry in the Document structure
+
+2000-04-06  Jason Leach  <leach@wam.umd.edu>
+
+	* prefs.c (gedit_window_refresh): fixed a problem jpr just
+	mentioned about changes to the font not getting applied to the
+	documents already open.
+
+2000-04-05  Jason Leach  <leach@wam.umd.edu>
+
+	* prefs.c (get_prefs): fixed the crash with preferences when you
+	have no documents open.
+
+2000-04-04  Jason Leach  <leach@wam.umd.edu>
+
+	* gedit-window.c (doc_swaphc_cb): fix a crash that was just
+	earlier added to BUGS
+
+	* gE_view.c (gedit_view_init): make the style actually follow your
+	GTK+ theme, so no more default blue selection.
+	(gedit_event_key_press): fixed the ALT-F bug
+
+2000-04-04  Chema Celorio  <chema@celorio.com>
+
+	* gedit-file-io.c (gedit_file_save): cleaned
+	  the code and fixed bug #5929. 
+	  (file_save_all_cb): rewrote it.
+	  (file_open_cb): fixed small bug
+	  (file_saveas_destroy): no longer needed
+	  use generic destroy_cb
+	  (file_save_all_as_cb): deleted, no need
+	  to have a save_all_as func.
+	  (file_save_all_as_destroy): ditto
+	  (file_save_all_as_ok_sel): ditto
+	  (file_close_all_cb): rewrote
+	  (file_close_cb): rewrote
+	  (file_revert_do): no longer needed, removed
+	  (file_save_as_cb): fixed a bug
+
+2000-04-04  Chema Celorio  <chema@celorio.com>
+
+	* commands.c: Removed all the file-io
+	functions from here and the prototypes
+	from commands.h
+
+	* gE_view.c: removed popup_menu from
+	here.#included gedit-file-io.h because
+	sortcut key's uses some file functions.
+
+	* gedit-menus.c (popup_menu): moved
+	popup_menu to here
+	* gedit-menus.h (gedit_menus_init): moved
+	popup_menu to here and share it with the
+	outside world.
+
+	* gedit-file-io.c: Rewriten part of
+	the file-io functions, will continue ma~ana.
+	(delete_event_cb): added
+	(cancel_cb): added
+	(file_open_cb): rewriten
+	(file_open_ok_sel): rewriten, file opening
+	is not done here anymore, call gedit_doc_new_with_file
+	(file_cancel_sel): no longer needed replaced by a generic
+	cancel_cb
+
+2000-04-03  Chema Celorio  <chema@celorio.com>
+
+	* gedit-utils.c (gedit_debug_mess): Added
+	  switch to display only some types of
+	  messages.
+
+	* gedit-file-io.c: Moved file related functions
+	from commands.c to here
+	
+	* commands.c: .
+
+2000-04-03  Jason Leach  <leach@wam.umd.edu>
+
+	* gedit-print.c: took out some unecessary #include's
+
+2000-04-03  Chema Celorio  <chema@celorio.com>
+
+	* gedit-undo.c: Cleaned the debug code
+	  it now uses gedit_debug_mess.
+
+	* gedit-utils.h: Added more debug types
+
+	* gedit-menus.c (gedit_edit_menu): Moved all the
+  	  menus definition to gedit-menus from gE_mdi.c
+	  (gedit_tab_menu): Disbled the windows menu.
+
+	* gedit-utils.c (gedit_debug_mess): New function
+	  not finished, we need to be able to turn some
+	  message types on and off
+	* gE_view.c: Added debug calls
+	* other files: code cleanup
+	
+
+2000-04-03  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_plugin.c (load_all_plugins): replaced a getenv() with a
+	g_get_home_dir()
+
+	* gE_plugin.c: removed 4 unnecessary #include's
+
+	* commands.c (file_open_ok_sel): replaced some stat() stuff with a
+	nice g_file_test() call
+
+	* gedit-undo.c (gedit_undo_add): fix for the double CTRL-K crash
+	just added to BUGS
+
+	* gedit.c (main): who added the && FALSE to the
+	if (g_list_length(mdi->children) == 0) ?  Took that out.
+
+	* gE_view.c (popup_menu): cleaned up this GnomeUIInfo
+
+	* commands.c: removed 5 unnecessar #includes
+	(file_quit_cb): lets quit via gtk_main_quit() rather than a
+	gtk_exit(0);
+	(recent_update_menus): don't need to if() before g_free()
+	(recent_update): replace resource heavy g_list_length calls with
+	an integer counter.
+
+2000-04-03  Chema Celorio  <chema@celorio.com>
+
+	* gedit-menus.c (gedit_menu): When compiling
+	without plugin support, do not show plugin menu
+	entry
+	* BUGS : added a bug { CTRL+K }
+
+2000-04-03  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_mdi.c (gedit_document_destroy): fixed a crash when gedit
+	tries to open a document without read permissions, and then when
+	you go to exit.
+	(gedit_document_new_with_file): bugfix with having the a busted up
+	gedit when you try and open files you don't have access to.
+
+	* gE_window.c (gedit_window_set_status_bar): new function, it will
+	change your life (if your life is lacking dynamic control of
+	enabling/disabling the statusbar)
+
+	* gE_prefs_box.c (gedit_apply): fixed a bug where everytime you
+	pressed OK in the preferences, it would run the apply callback
+	twice, that's like, way lame and stuff.
+
+2000-04-03  Chema Celorio  <chema@celorio.com>
+	* gedit-undo.c (views_insert): fixed a cursor positioning problem
+	  when undoing
+	  (views_delete): ditto basiclly thaw gtk_text befor
+   	  inserting/deleting this keeps the cursor in the correct position
+	
+2000-04-02  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_mdi.c (get_untitled_as_string): made static
+	(gedit_document_new): woops, broke something here, its fixed.
+
+	* *.[ch]: perl -p -i -e 's/gE_/gedit_/' changing all instances of
+	gE_ to gedit_, meaning our #include lines are busted right now,
+	will fix asap.
+
+2000-04-02  Chema Celorio  <chema@celorio.com>
+
+	* menus.c: Added print preview entry.
+
+	* gE_print.c (file_print_preview_cb): Added print preview
+	capabilities
+	(print_document): ditto
+	(preview_destroy_cb): ditto
+
+2000-04-02  Jason Leach  <leach@wam.umd.edu>
+
+	* search.c (create_search_dialog): marked a string for i18n that
+	wasn't but should have been.
+	(destroy_clist_data): don't need to do if(b) before g_free(b)
+
+	* search.c: removed 5 unnecessary #include's, killed all
+	warnings.
+
+	* gE_print.c: killed 2 warnings.
+
+	* gE_prefs_box.c: killed all warnings.
+
+	* gE_files.c: removed 8 unnecessary #include's, killed all
+	warnings.
+
+	* gE_undo.c: killed all warnings.
+
+	* gE_mdi.c: removed 5 unnecessary #include's, killed all warnings.
+
+2000-04-01  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_prefs_box.c (cancel_cb): destroy the font selector window
+	when we close the preferences, closes bug #4432.
+	(font_sel): open pop open one font selector at a time, preventing
+	any potential future bugs with this happening.
+	(properties_changed): fix indentation
+
+	* gE_prefs_box.c: commented out 5 unnecessary #include's
+

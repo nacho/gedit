@@ -1,0 +1,940 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * gedit-document.c
+ * This file is part of gedit
+ *
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA.
+ */
+ 
+/*
+ * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
+
+#include <libgnome/libgnome.h>
+#include <libgnomevfs/gnome-vfs.h>
+
+#include "gnome-vfs-helpers.h"
+#include "gedit-document.h"
+#include "gedit-debug.h"
+#include "gedit-utils.h"
+#include "gedit-undo-manager.h"
+
+#define NOT_EDITABLE_TAG_NAME "not_editable_tag"
+
+struct _GeditDocumentPrivate
+{
+	gchar*	uri;
+	gint 	untitled_number;	
+
+	gboolean readonly;
+
+	GeditUndoManager* undo_manager;
+};
+
+static gint current_max_untitled_num = 0;
+
+enum {
+	NAME_CHANGED,
+	SAVED,
+	LOADED,
+	READONLY_CHANGED,
+	CAN_UNDO,
+	CAN_REDO,
+	LAST_SIGNAL
+};
+
+static void gedit_document_base_init 		(GeditDocumentClass 	*klass);
+static void gedit_document_base_finalize	(GeditDocumentClass 	*klass);
+static void gedit_document_class_init 		(GeditDocumentClass 	*klass);
+static void gedit_document_init 		(GeditDocument 		*document);
+static void gedit_document_finalize 		(GObject 		*object);
+
+static void gedit_document_real_name_changed		(GeditDocument *document);
+static void gedit_document_real_loaded			(GeditDocument *document);
+static void gedit_document_real_saved			(GeditDocument *document);
+static void gedit_document_real_readonly_changed	(GeditDocument *document,
+							 gboolean readonly);
+
+static gboolean	gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, 
+					     GError **error);
+static void gedit_document_set_uri (GeditDocument* doc, const gchar* uri);
+
+static void gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, 
+					     GeditDocument* doc);
+
+static void gedit_document_can_redo_handler (GeditUndoManager* um, gboolean can_redo, 
+					     GeditDocument* doc);
+
+static GtkTextBufferClass *parent_class 	= NULL;
+static guint document_signals[LAST_SIGNAL] 	= { 0 };
+
+
+GType
+gedit_document_get_type (void)
+{
+	static GType document_type = 0;
+
+  	if (document_type == 0)
+    	{
+      		static const GTypeInfo our_info =
+      		{
+        		sizeof (GeditDocumentClass),
+        		(GBaseInitFunc) gedit_document_base_init,
+        		(GBaseFinalizeFunc) gedit_document_base_finalize,
+        		(GClassInitFunc) gedit_document_class_init,
+        		NULL,           /* class_finalize */
+        		NULL,           /* class_data */
+        		sizeof (GeditDocument),
+        		0,              /* n_preallocs */
+        		(GInstanceInitFunc) gedit_document_init
+      		};
+
+      		document_type = g_type_register_static (GTK_TYPE_TEXT_BUFFER,
+                					"GeditDocument",
+                                           	 	&our_info,
+                                           		0);
+    	}
+
+	return document_type;
+}
+
+static void
+gedit_document_base_init (GeditDocumentClass *klass)
+{
+	GtkTextTag *not_editable_tag;
+
+	klass->tag_table = gtk_text_tag_table_new ();
+
+	not_editable_tag =  gtk_text_tag_new (NOT_EDITABLE_TAG_NAME);	
+	g_object_set (G_OBJECT (not_editable_tag), "editable", FALSE, NULL);
+	
+	gtk_text_tag_table_add (klass->tag_table, not_editable_tag);	
+}
+
+static void
+gedit_document_base_finalize (GeditDocumentClass *klass)
+{
+	g_object_unref (G_OBJECT (klass->tag_table));
+	klass->tag_table = NULL;
+}
+	
+static void
+gedit_document_class_init (GeditDocumentClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  	parent_class = g_type_class_peek_parent (klass);
+
+  	object_class->finalize = gedit_document_finalize;
+
+        klass->name_changed 	= gedit_document_real_name_changed;
+	klass->loaded 	    	= gedit_document_real_loaded;
+	klass->saved        	= gedit_document_real_saved;
+	klass->readonly_changed = gedit_document_real_readonly_changed;
+	klass->can_undo		= NULL;
+	klass->can_redo		= NULL;
+
+  	document_signals[NAME_CHANGED] =
+   		g_signal_new ("name_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, name_changed),
+			      NULL, NULL,
+			      gtk_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+	
+	document_signals[LOADED] =
+   		g_signal_new ("loaded",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
+			      NULL, NULL,
+			      gtk_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+	
+	document_signals[SAVED] =
+   		g_signal_new ("saved",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, saved),
+			      NULL, NULL,
+			      gtk_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+
+	document_signals[READONLY_CHANGED] =
+   		g_signal_new ("readonly_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, readonly_changed),
+			      NULL, NULL,
+			      gtk_marshal_VOID__BOOLEAN,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_BOOLEAN);
+
+	document_signals[CAN_UNDO] =
+   		g_signal_new ("can_undo",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, can_undo),
+			      NULL, NULL,
+			      gtk_marshal_VOID__BOOLEAN,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_BOOLEAN);
+
+	document_signals[CAN_REDO] =
+   		g_signal_new ("can_redo",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, can_redo),
+			      NULL, NULL,
+			      gtk_marshal_VOID__BOOLEAN,
+			      G_TYPE_NONE,
+			      1,
+			      G_TYPE_BOOLEAN);
+
+}
+
+static void
+gedit_document_init (GeditDocument *document)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document->buffer.tag_table == NULL);
+	document->buffer.tag_table = (GEDIT_DOCUMENT_GET_CLASS (document))->tag_table;
+	g_object_ref (G_OBJECT (document->buffer.tag_table));
+		
+	document->priv = g_new0 (GeditDocumentPrivate, 1);
+	
+	document->priv->uri = NULL;
+	document->priv->untitled_number = 0;
+
+	document->priv->readonly = FALSE;
+
+	document->priv->undo_manager = gedit_undo_manager_new (document);
+
+	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_undo",
+			  G_CALLBACK (gedit_document_can_undo_handler), 
+			  document);
+
+	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_redo",
+			  G_CALLBACK (gedit_document_can_redo_handler), 
+			  document);
+}
+
+static void
+gedit_document_finalize (GObject *object)
+{
+	GeditDocument *document;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (object));
+
+   	document = GEDIT_DOCUMENT (object);
+
+	g_return_if_fail (document->priv != NULL);
+
+	if (document->priv->uri)
+    	{
+		g_free (document->priv->uri);
+      		document->priv->uri = NULL;
+
+		if (current_max_untitled_num == document->priv->untitled_number)
+			--current_max_untitled_num;
+    	}
+	else
+	{
+		if (current_max_untitled_num == document->priv->untitled_number)
+			--current_max_untitled_num;	
+	}
+
+	g_object_unref (G_OBJECT (document->priv->undo_manager));
+	
+	g_free (document->priv);
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+/**
+ * gedit_document_new:
+ *
+ * Creates a new untitled document.
+ *
+ * Return value: a new untitled document
+ **/
+GeditDocument*
+gedit_document_new (void)
+{
+ 	GeditDocument *document;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	document = GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
+
+	g_return_val_if_fail (document->priv != NULL, NULL);
+  	document->priv->untitled_number = ++current_max_untitled_num;
+
+	return document;
+}
+
+/**
+ * gedit_document_new_with_uri:
+ * @uri: the URI of the file that has to be loaded
+ * @error: return location for error or NULL
+ * 
+ * Creates a new untitled document.
+ *
+ * Return value: a new untitled document
+ **/
+GeditDocument*
+gedit_document_new_with_uri (const gchar *uri, GError **error)
+{
+ 	GeditDocument *document;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	document = GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
+
+	g_return_val_if_fail (document->priv != NULL, NULL);
+	document->priv->uri = g_strdup (uri);
+
+	if (!gedit_document_load (document, uri, error))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "ERROR");
+
+		g_object_unref (document);
+		return NULL;
+	}
+	
+	return document;
+}
+
+/**
+ * gedit_document_set_readonly:
+ * @document: a #GeditDocument
+ * @readonly: if TRUE (FALSE) the @document will be set as (not) readonly
+ * 
+ * Set the value of the readonly flag.
+ **/
+void 		
+gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+	g_return_if_fail (document->priv != NULL);
+
+	if (document->priv->readonly == readonly) 
+		return;
+
+	g_signal_emit (G_OBJECT (document),
+                       document_signals[READONLY_CHANGED],
+                       0,
+		       readonly);
+}
+
+/**
+ * gedit_document_is_readonly:
+ * @document: a #GeditDocument
+ *
+ * Returns TRUE is @document is readonly. 
+ * 
+ * Return value: TRUE if @document is readonly. FALSE otherwise.
+ **/
+gboolean
+gedit_document_is_readonly (GeditDocument *document)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (document != NULL, TRUE);
+	g_return_val_if_fail (document->priv != NULL, TRUE);
+
+	return document->priv->readonly;	
+}
+
+static void 
+gedit_document_real_name_changed (GeditDocument *document)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+}
+
+static void 
+gedit_document_real_loaded (GeditDocument *document)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+}
+
+static void 
+gedit_document_real_saved (GeditDocument *document)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+}	
+
+static void 
+gedit_document_real_readonly_changed (GeditDocument *document, gboolean readonly)
+{
+	GtkTextIter start;
+	GtkTextIter end;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+	g_return_if_fail (document->priv != NULL);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
+      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
+
+	if(readonly) 
+	{
+		gtk_text_buffer_apply_tag_by_name (GTK_TEXT_BUFFER (document), 
+					NOT_EDITABLE_TAG_NAME, &start, &end);
+	}
+	else
+	{
+		gtk_text_buffer_remove_tag_by_name (GTK_TEXT_BUFFER (document), 
+					NOT_EDITABLE_TAG_NAME, &start, &end);
+	}
+
+	document->priv->readonly = readonly;
+}
+
+gchar*
+gedit_document_get_uri (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	if (doc->priv->uri == NULL)
+		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
+	else
+		return gnome_vfs_x_format_uri_for_display (doc->priv->uri);
+}
+
+gchar*
+gedit_document_get_short_name (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	if (doc->priv->uri == NULL)
+		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
+	else
+		gnome_vfs_x_uri_get_basename (doc->priv->uri);
+}
+
+GQuark 
+gedit_document_io_error_quark()
+{
+  static GQuark quark;
+  if (!quark)
+    quark = g_quark_from_static_string ("gedit_io_load_error");
+
+  return quark;
+}
+
+/**
+ * gedit_document_load:
+ * @doc: a GeditDocument
+ * @uri: the URI of the file that has to be loaded
+ * @error: return location for error or NULL
+ * 
+ * Read a document from a file
+ *
+ * Return value: TRUE if the file is correctly loaded
+ **/
+gboolean
+gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
+{
+	char* file_contents;
+	GnomeVFSResult res;
+   	int file_size;
+	GtkTextIter iter, end;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	res = gnome_vfs_x_read_entire_file (uri, &file_size, &file_contents);
+
+	if (res != GNOME_VFS_OK)
+	{
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, res,
+			gnome_vfs_result_to_string (res));
+		return FALSE;
+	}
+
+	if (file_size > 0)
+	{
+		if (!g_utf8_validate (file_contents, file_size, NULL))
+		{
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
+				_("Invalid UTF-8 data encountered reading file"));
+			g_free (file_contents);
+			return FALSE;
+		}
+
+		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+		/* Insert text in the buffer */
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, file_contents, file_size);
+
+		/* We had a newline in the buffer to begin with. (The buffer always contains
+   		 * a newline, so we delete to the end of the buffer to clean up. */
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+ 		gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &end);
+
+		/* Place the cursor at the start of the document */
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+
+		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+	}
+
+	g_free (file_contents);
+
+	if (gedit_utils_is_uri_read_only (uri))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "READ-ONLY");
+
+		gedit_document_set_readonly (doc, TRUE);
+	}
+	else
+	{
+		gedit_debug (DEBUG_DOCUMENT, "NOT READ-ONLY");
+
+		gedit_document_set_readonly (doc, FALSE);
+	}
+
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
+
+	gedit_document_set_uri (doc, uri);
+	
+	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
+
+	return TRUE;
+}
+
+gboolean 
+gedit_document_is_untouched (const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	return (doc->priv->uri == NULL) && 
+		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
+}
+
+static void
+gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (doc->priv != NULL);
+
+	if (doc->priv->uri == uri)
+		return;
+
+	if (doc->priv->uri != NULL)
+		g_free (doc->priv->uri);
+			
+	doc->priv->uri = g_strdup (uri);
+	doc->priv->untitled_number = 0;
+	
+	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
+}
+	
+gboolean 
+gedit_document_save (GeditDocument* doc, GError **error)
+{	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	g_return_val_if_fail (!doc->priv->readonly, FALSE);
+
+	return gedit_document_save_as_real (doc, doc->priv->uri, error);
+}
+
+gboolean	
+gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
+{	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+	g_return_val_if_fail (!doc->priv->readonly, FALSE);
+
+	if (gedit_document_save_as_real (doc, uri, error))
+	{
+		gedit_document_set_uri (doc, uri);
+		gedit_document_set_readonly (doc, FALSE);
+		return TRUE;
+	}		
+
+	return FALSE;
+}
+
+static gboolean	
+gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, GError **error)
+{
+	/* TODO: backup file? */
+	FILE* file;
+	gchar* chars;
+	gchar* fname;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+	g_return_val_if_fail (!doc->priv->readonly, FALSE);
+
+	if (!gedit_utils_uri_has_file_scheme (uri))
+	{
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, EROFS, g_strerror (EROFS));
+		return FALSE;
+	
+	}
+	
+	fname = gnome_vfs_x_format_uri_for_display (uri);
+
+	if ((fname == NULL) || ((file = fopen (fname, "w")) == NULL))
+	{
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+			"Make sure that the path you provided exists,\n"
+			"and that you have the appropriate write permissions.");
+		
+		if (fname != NULL) 
+			g_free (fname);
+		
+		return FALSE;
+	}
+
+	g_free (fname);
+
+      	chars = gedit_document_get_buffer (doc);
+
+	if (fputs (chars, file) == EOF || fclose (file) == EOF)
+	{
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, g_strerror (errno));
+		g_free (chars);
+
+		return FALSE;
+	}
+
+	g_free (chars);
+
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);	  
+
+	return TRUE;
+}
+
+gchar* 
+gedit_document_get_buffer (const GeditDocument *doc)
+{
+	GtkTextIter start, end;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, 0);
+      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+  
+      	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start, &end, TRUE);
+}
+
+gboolean	
+gedit_document_is_untitled (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	return (doc->priv->uri == NULL);
+}
+
+gboolean	
+gedit_document_get_modified (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	return gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc));
+}
+
+/**
+ * gedit_document_get_char_count:
+ * @doc: a #GeditDocument 
+ * 
+ * Gets the number of characters in the buffer; note that characters
+ * and bytes are not the same, you can't e.g. expect the contents of
+ * the buffer in string form to be this many bytes long. 
+ * 
+ * Return value: number of characters in the document
+ **/
+gint 
+gedit_document_get_char_count (const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	return gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc));
+}
+
+/**
+ * gedit_document_get_line_count:
+ * @doc: a #GeditDocument 
+ * 	
+ * Obtains the number of lines in the buffer. 
+ * 
+ * Return value: number of lines in the document
+ **/
+gint 
+gedit_document_get_line_count (const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	return gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
+}
+
+void 
+gedit_document_delete_all_text (GeditDocument *doc)
+{
+	GtkTextIter start, end;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (doc != NULL);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, 0);
+      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+	
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start, &end);
+}
+
+gboolean 
+gedit_document_revert (GeditDocument *doc,  GError **error)
+{
+	gchar* buffer = NULL;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	if (gedit_document_is_untitled (doc))
+	{
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_GENERIC,
+			_("It is not possible to revert an Untitled document"));
+		return FALSE;
+	}
+			
+	buffer = gedit_document_get_buffer (doc);
+
+	gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+
+	gedit_document_delete_all_text (doc);
+
+	if (!gedit_document_load (doc, doc->priv->uri, error))
+	{
+		GtkTextIter iter;
+		
+		/* Insert text in the buffer */
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, buffer, -1);
+
+		g_free (buffer);
+
+		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+
+		return FALSE;
+	}
+
+	gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+
+	g_free (buffer);
+
+	return TRUE;
+}
+
+void 
+gedit_document_insert_text (GeditDocument *doc, gint pos, const gchar *text, gint len)
+{
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (pos >= 0);
+	g_return_if_fail (text != NULL);
+	g_return_if_fail (g_utf8_validate (text, len, NULL));
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, pos);
+	
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, text, len);
+}
+
+void 
+gedit_document_delete_text (GeditDocument *doc, gint start, gint end)
+{
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (start >= 0);
+	g_return_if_fail (end >= 0);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
+
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter);
+}
+
+gchar*
+gedit_document_get_chars (GeditDocument *doc, gint start, gint end)
+{
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (start >= 0, NULL);
+	g_return_val_if_fail (end >= 0, NULL);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
+
+	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter, TRUE);
+}
+
+
+gboolean
+gedit_document_can_undo	(const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	return gedit_undo_manager_can_undo (doc->priv->undo_manager);
+}
+
+gboolean
+gedit_document_can_redo (const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	return gedit_undo_manager_can_redo (doc->priv->undo_manager);	
+}
+
+void gedit_document_undo (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+	g_return_if_fail (gedit_undo_manager_can_undo (doc->priv->undo_manager));
+
+	gedit_undo_manager_undo (doc->priv->undo_manager);
+}
+
+void gedit_document_redo (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+	g_return_if_fail (gedit_undo_manager_can_redo (doc->priv->undo_manager));
+
+	gedit_undo_manager_redo (doc->priv->undo_manager);
+}
+
+static void
+gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	g_signal_emit (G_OBJECT (doc),
+                       document_signals [CAN_UNDO],
+                       0,
+		       can_undo);
+}
+
+static void
+gedit_document_can_redo_handler (GeditUndoManager* um, gboolean can_redo, GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	g_signal_emit (G_OBJECT (doc),
+                       document_signals [CAN_REDO],
+                       0,
+		       can_redo);
+}
+
+void
+gedit_document_goto_line (GeditDocument* doc, guint line)
+{
+	guint line_count;
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+	
+	line_count = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
+	
+	if (line > line_count)
+		line = line_count;
+
+	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, line);
+
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+}

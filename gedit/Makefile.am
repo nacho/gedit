@@ -1,76 +1,58 @@
-# Process this file with automake to produce Makefile.in
+## Process this file with automake to produce Makefile.in
+SUBDIRS= dialogs
 
-SUBDIRS = dialogs
+bin_PROGRAMS = gedit2
 
 INCLUDES = \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DLOCALEDIR=\"$(datadir)/locale\" 		\
-	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit/plugins"\"	\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"	\
-	-I$(includedir) 				\
-	-I$(top_srcdir) 				\
-	-I$(srcdir)/dialogs				\
-	-I$(top_srcdir)/intl 				\
-	-I$(top_builddir)/intl 				\
-	$(GNOME_INCLUDEDIR) 				\
-	$(EXTRA_GNOME_CFLAGS)
-
-if HAVE_ORBIT
-corba_libs = @ORBIT_LIBS@
-endif
-
-if HAVE_LIBGNORBA
-libgnorba_libs = -lgnorba
-endif
-
-bin_PROGRAMS = gedit
-
-gedit_SOURCES = 	\
-	auto.c		\
-	auto.h		\
-	commands.c	\
-	commands.h	\
-	debug.c		\
-	debug.h		\
-	document.c	\
-	document.h	\
-	file.c 		\
-	file.h		\
-	gedit.c		\
-	menus.c 	\
-	menus.h 	\
-	plugin.c 	\
-	plugin.h 	\
-	prefs.c		\
-	prefs.h		\
-	print.c 	\
-	print.h 	\
-	print-doc.c	\
-	print-doc.h	\
-	print-util.c	\
-	print-util.h	\
-	recent.c	\
-	recent.h	\
-	search.c 	\
-	search.h	\
-	undo.c 		\
-	undo.h		\
-	utils.c 	\
-	utils.h 	\
-	view.c		\
-	view.h		\
-	window.c 	\
-	window.h
+	-I$(top_srcdir) \
+	-I$(top_builddir) \
+	-I$(top_srcdir)/dialogs	\
+	$(GEDIT_CFLAGS) \
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" \
+	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\"
 
 
-gedit_LDADD = 				\
-	dialogs/libdialogs.a		\
-	$(GNOME_LIBDIR) 		\
-	$(GNOMEUI_LIBS) 		\
-	$(corba_libs) 			\
-	$(libgnorba_libs) 		\
-	$(INTLLIBS) 			\
-	$(EXTRA_GNOME_LIBS)
+CFLAGS = -g -O2 -Wall 
 
-EXTRA_DIST =
+gedit2_LDADD = \
+	dialogs/libdialogs.a	\
+	$(GEDIT_LIBS)
+
+gedit2_SOURCES = 		\
+	gedit2.c		\
+	gedit2.h		\
+	gedit-mdi.c		\
+	gedit-mdi.h		\
+	gedit-mdi-child.c	\
+	gedit-mdi-child.h	\
+	gedit-document.c 	\
+	gedit-document.h 	\
+	gedit-view.c 		\
+	gedit-view.h 		\
+	gedit-menus.h		\
+	gedit-menus.c		\
+	gedit-debug.c 		\
+	gedit-debug.h 		\
+	gedit-prefs.c 		\
+	gedit-prefs.h 		\
+	gedit-utils.c 		\
+	gedit-utils.h 		\
+	gedit-commands.h	\
+	gedit-commands.c	\
+	gedit-file.h		\
+	gedit-file.c		\
+	gedit-recent.h		\
+	gedit-recent.c		\
+	gedit-undo-manager.h	\
+	gedit-undo-manager.c	\
+	bonobo-mdi-child.c	\
+	bonobo-mdi-child.h	\
+	bonobo-mdi.c		\
+	bonobo-mdi.h		\
+	gnome-vfs-helpers.c	\
+	gnome-vfs-helpers.h
+
+# FIXME
+EXTRA_DIST = gedit-ui.xml	
+
 

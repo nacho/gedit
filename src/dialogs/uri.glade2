@@ -1,0 +1,134 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd" >
+
+<glade-interface>
+  <requires lib="gnome" />
+
+  <widget class="GtkDialog" id="open_uri_dialog">
+    <property name="visible">no</property>
+    <property name="title" translatable="yes">Open from URI</property>
+    <property name="type">GTK_WINDOW_TOPLEVEL</property>
+    <property name="modal">no</property>
+    <property name="allow_shrink">no</property>
+    <property name="allow_grow">no</property>
+    <property name="window-position">GTK_WIN_POS_NONE</property>
+
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="dialog-vbox2">
+        <property name="homogeneous">no</property>
+        <property name="visible">yes</property>
+
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="dialog-action_area2">
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="visible">yes</property>
+            <property name="spacing">10</property>
+
+            <child>
+              <widget class="GtkButton" id="open_button">
+                <property name="can_default">yes</property>
+		<property name="has_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>                
+                <property name="label" translatable="yes">gtk-open</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+	      </widget>
+            </child>
+
+            <child>
+              <widget class="GtkButton" id="cancel_button">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label" translatable="yes">gtk-cancel</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
+
+            <child>
+              <widget class="GtkButton" id="help_button">
+                <property name="can_default">yes</property>
+                <property name="can_focus">yes</property>
+                <property name="visible">yes</property>
+                <property name="label" translatable="yes">gtk-help</property>
+                <property name="use_stock">yes</property>
+                <property name="use_underline">yes</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">no</property>
+            <property name="fill">yes</property>
+            <property name="pack">GTK_PACK_END</property>
+          </packing>
+        </child>
+
+        <child>
+          <widget class="GtkVBox" id="open_uri_dialog_content">
+            <property name="border_width">5</property>
+            <property name="homogeneous">no</property>
+            <property name="spacing">8</property>
+            <property name="visible">yes</property>
+
+            <child>
+              <widget class="GtkLabel" id="label1">
+                <property name="label" translatable="yes">Enter the location (URI) of the file you would like to open:</property>
+                <property name="justify">GTK_JUSTIFY_LEFT</property>
+                <property name="wrap">no</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0.5</property>
+                <property name="xpad">0</property>
+                <property name="ypad">0</property>
+                <property name="visible">yes</property>
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">no</property>
+                <property name="fill">no</property>
+              </packing>
+            </child>
+
+            <child>
+              <widget class="GnomeEntry" id="uri_list">
+                <property name="history_id">gedit_open_uri</property>
+                <property name="width-request">380</property>
+                <property name="visible">yes</property>
+                <property name="has_focus">yes</property>
+
+                <child internal-child="entry">
+                  <widget class="GtkEntry" id="uri">
+                    <property name="activates_default">yes</property>
+                    <property name="can_focus">yes</property>
+                    <property name="has_focus">yes</property>
+                    <property name="editable">yes</property>
+                    <property name="text" translatable="yes"></property>
+                    <property name="max-length">0</property>
+                    <property name="visibility">yes</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="padding">0</property>
+                <property name="expand">yes</property>
+                <property name="fill">yes</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">0</property>
+            <property name="expand">yes</property>
+            <property name="fill">yes</property>
+          </packing>
+        </child>
+      </widget>
+      <packing>
+        <property name="padding">4</property>
+        <property name="expand">yes</property>
+        <property name="fill">yes</property>
+      </packing>
+    </child>
+  </widget>
+</glade-interface>
