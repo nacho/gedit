@@ -56,17 +56,13 @@ static void
 sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
-	GeditView *view;
 	gchar *user_name;
 	gchar *user_name_utf8;
 	const gchar *temp;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	view = gedit_get_active_view ();
-	g_return_if_fail (view != NULL);
-	
-	doc = gedit_view_get_document (view);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	temp = g_get_real_name ();

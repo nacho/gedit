@@ -61,28 +61,19 @@ void
 gedit_cmd_file_open (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	BonoboMDIChild *active_child;
-	/* GeditView *active_view; */
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 
 	gedit_file_open ((GeditMDIChild*) active_child);
-
-	/* FIXME */
-	/*
-	active_view = gedit_get_active_view ();
-
-	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
-	*/
 }
 
 void 
 gedit_cmd_file_save (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditMDIChild *active_child;
-	GeditView *active_view;
+	GtkWidget *active_view;
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -93,7 +84,7 @@ gedit_cmd_file_save (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 		return;
 	
 	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+		gtk_widget_grab_focus (active_view);
 
 	gedit_file_save (active_child, TRUE);
 }
@@ -159,7 +150,7 @@ void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
-	GeditView *active_view;
+	GtkWidget *active_view;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -170,7 +161,7 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	active_view = gedit_get_active_view ();
 
 	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+		gtk_widget_grab_focus (active_view);
 
 	gedit_print (doc);
 }
@@ -196,7 +187,7 @@ gedit_cmd_file_close (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
+	active_view = gedit_get_active_view ();
 	if (active_view == NULL)
 		return;
 
@@ -222,100 +213,100 @@ gedit_cmd_file_exit (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 void 
 gedit_cmd_edit_undo (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
-	GeditDocument* active_document;
+	GtkWidget *active_view;
+	GeditDocument *active_document;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
 
-	active_document = gedit_view_get_document (active_view);
+	active_document = gedit_view_get_document (GEDIT_VIEW (active_view));
 	g_return_if_fail (active_document);
 
 	gedit_document_undo (active_document);
 
-	gedit_view_scroll_to_cursor (active_view);
+	gedit_view_scroll_to_cursor (GEDIT_VIEW (active_view));
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_edit_redo (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
-	GeditDocument* active_document;
+	GtkWidget *active_view;
+	GeditDocument *active_document;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
 
-	active_document = gedit_view_get_document (active_view);
+	active_document = gedit_view_get_document (GEDIT_VIEW (active_view));
 	g_return_if_fail (active_document);
 
 	gedit_document_redo (active_document);
 
-	gedit_view_scroll_to_cursor (active_view);
+	gedit_view_scroll_to_cursor (GEDIT_VIEW (active_view));
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_edit_cut (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
+	GtkWidget *active_view;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
-	
-	gedit_view_cut_clipboard (active_view); 
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gedit_view_cut_clipboard (GEDIT_VIEW (active_view)); 
+
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_edit_copy (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
+	GtkWidget *active_view;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
-	
-	gedit_view_copy_clipboard (active_view);
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gedit_view_copy_clipboard (GEDIT_VIEW (active_view));
+
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_edit_paste (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
+	GtkWidget *active_view;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
-	
-	gedit_view_paste_clipboard (active_view); 
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gedit_view_paste_clipboard (GEDIT_VIEW (active_view));
+
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_edit_clear (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
+	GtkWidget *active_view;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
-	
-	gedit_view_delete_selection (active_view);
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gedit_view_delete_selection (GEDIT_VIEW (active_view));
+
+	gtk_widget_grab_focus (active_view);
 }
 
 void
 gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditDocument* active_doc;
-	GeditView* active_view;
+	GtkWidget *active_view;
+	GeditDocument *active_doc;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	active_view = gedit_get_active_view ();
 	g_return_if_fail (active_view);
 
 	active_doc = gedit_get_active_document ();
@@ -323,20 +314,20 @@ gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gch
 
 	gedit_document_set_selection (active_doc, 0, -1); 
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	gtk_widget_grab_focus (active_view);
 }
 
 void 
 gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView *active_view;
-	
+	GtkWidget *active_view;
+
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	active_view = gedit_get_active_view ();
 
 	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+		gtk_widget_grab_focus (active_view);
 
 	gedit_dialog_find ();
 }
@@ -344,14 +335,10 @@ gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* 
 static void 
 search_find_again (GeditDocument *doc, gchar *last_searched_text, gboolean backward)
 {
-	GeditView *active_view;
 	gpointer data;
 	gboolean found;
 	gboolean was_wrap_around;
 	gint flags = 0;
-	
-	active_view = gedit_get_active_view ();
-	g_return_if_fail (active_view != NULL);
 
 	data = g_object_get_qdata (G_OBJECT (doc), gedit_was_wrap_around_quark ());
 	if (data == NULL)
@@ -400,7 +387,12 @@ search_find_again (GeditDocument *doc, gchar *last_searched_text, gboolean backw
 	}
 	else
 	{
-		gedit_view_scroll_to_cursor (active_view);
+		GtkWidget *active_view;
+
+		active_view = gedit_get_active_view ();
+		g_return_if_fail (active_view != NULL);
+
+		gedit_view_scroll_to_cursor (GEDIT_VIEW (active_view));
 	}
 }
 
@@ -457,14 +449,14 @@ gedit_cmd_search_find_prev (BonoboUIComponent *uic, gpointer user_data, const gc
 void 
 gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView *active_view;
+	GtkWidget *active_view;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	active_view = gedit_get_active_view ();
 
 	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+		gtk_widget_grab_focus (active_view);
 
 	gedit_dialog_replace ();
 }
@@ -493,14 +485,14 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 void
 gedit_cmd_documents_move_to_new_window (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView *view;
+	GtkWidget *view;
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	view = gedit_get_active_view ();
 	g_return_if_fail (view != NULL);
 
-	bonobo_mdi_move_view_to_new_window (BONOBO_MDI (gedit_mdi), GTK_WIDGET (view));
+	bonobo_mdi_move_view_to_new_window (BONOBO_MDI (gedit_mdi), view);
 }
 
 void 

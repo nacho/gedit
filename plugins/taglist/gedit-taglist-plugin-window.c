@@ -436,7 +436,7 @@ tag_list_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 static void
 insert_tag (Tag *tag, gboolean focus_to_document)
 {
-	GeditView *view;
+	GtkWidget *view;
 	GeditDocument *doc;
 	gint cursor = 0;
 	gint start;
@@ -451,8 +451,8 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 
 	gtk_window_set_transient_for (tag_list_window->window,
 			GTK_WINDOW (gedit_get_active_window ()));
-			
-	doc = gedit_view_get_document (view);
+
+	doc = gedit_view_get_document (GEDIT_VIEW (view));
 	g_return_if_fail (doc != NULL);
 	
 	sel = gedit_document_get_selection (doc, &start, &end);
@@ -496,7 +496,7 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 	if (focus_to_document)
 	{
 		gtk_window_present (GTK_WINDOW (gedit_get_active_window ()));
-		gtk_widget_grab_focus (GTK_WIDGET (view));
+		gtk_widget_grab_focus (view);
 	}
 }
 

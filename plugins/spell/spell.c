@@ -391,6 +391,8 @@ get_next_mispelled_word (GeditDocument *doc)
 
 	if (word != NULL)
 	{
+		GtkWidget *active_view;
+
 		range->mw_start = start;
 		range->mw_end = end;
 
@@ -398,7 +400,9 @@ get_next_mispelled_word (GeditDocument *doc)
 
 		gedit_document_set_selection (doc, start, end);
 
-		gedit_view_scroll_to_cursor (gedit_get_active_view ());
+		active_view = gedit_get_active_view ();
+		if (active_view != NULL)
+			gedit_view_scroll_to_cursor (GEDIT_VIEW (active_view));
 	}
 	else	
 	{
@@ -689,8 +693,13 @@ auto_spell_cb (BonoboUIComponent           *ui_component,
 	{
 		if (autospell == NULL)	
 		{
+			GtkWidget *active_view;
+
+			active_view = gedit_get_active_view ();
+			g_return_if_fail (active_view != NULL);
+
 			autospell = gedit_automatic_spell_checker_new (doc, spell);
-			gedit_automatic_spell_checker_attach_view (autospell, gedit_get_active_view ());
+			gedit_automatic_spell_checker_attach_view (autospell, GEDIT_VIEW (active_view));
 			gedit_automatic_spell_checker_recheck_all (autospell);
 		}
 	}

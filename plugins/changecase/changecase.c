@@ -174,15 +174,11 @@ static void
 change_case (ChangeCaseChoice choice)
 {
 	GeditDocument *doc;
-	GeditView *view;
 	GtkTextIter start, end;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	view = gedit_get_active_view ();
-	g_return_if_fail (view != NULL);
-
-	doc = gedit_view_get_document (view);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),

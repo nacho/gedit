@@ -62,17 +62,13 @@ static void
 indent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
-	GeditView *view;
 	GtkTextIter start, end, iter;
 	gint i, start_line, end_line;
 	gchar *tab_buffer = NULL;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	view = gedit_get_active_view ();
-	g_return_if_fail (view != NULL);
-	
-	doc = gedit_view_get_document (view);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	gedit_document_begin_user_action (doc);
@@ -114,15 +110,11 @@ static void
 unindent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
-	GeditView *view;
 	GtkTextIter start, end, iter, iter2;
 	gint i, start_line, end_line;
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	view = gedit_get_active_view ();
-	g_return_if_fail (view != NULL);
-	
-	doc = gedit_view_get_document (view);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	gedit_document_begin_user_action (doc);

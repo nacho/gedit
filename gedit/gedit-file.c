@@ -137,7 +137,7 @@ gedit_file_new (void)
 	g_return_if_fail (ret != FALSE);
 	gedit_debug (DEBUG_COMMANDS, "View added.");
 	
-	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
+	gtk_widget_grab_focus (gedit_get_active_view ());
 }
 
 gboolean
@@ -151,7 +151,7 @@ gedit_file_close (GtkWidget *view)
 	g_return_val_if_fail (view != NULL, FALSE);
 
 	child = bonobo_mdi_get_child_from_view (view);
-	g_return_if_fail (child != NULL);
+	g_return_val_if_fail (child != NULL, FALSE);
 
 	if (g_list_length (bonobo_mdi_child_get_views (child)) > 1)
 	{		
@@ -563,12 +563,12 @@ void
 gedit_file_save_all (void)
 {
 	guint i = 0;
-	GeditMDIChild* child;
-	GtkWidget* view;
+	GeditMDIChild *child;
+	GtkWidget *view;
 
 	gedit_debug (DEBUG_FILE, "");
 
-	view = bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
+	view = gedit_get_active_view ();
 
 	for (i = 0; i < g_list_length (bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi))); i++)
 	{
@@ -578,7 +578,7 @@ gedit_file_save_all (void)
 		gedit_file_save (child, FALSE);	
 	}
 
-	if (view != bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)))
+	if (view != gedit_get_active_view ())
 	{
 		GtkWindow *window;
 
@@ -802,7 +802,7 @@ gboolean
 gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 {
 	gboolean ret = FALSE;
-	GeditView* active_view;
+	GtkWidget *active_view;
 	gchar *uri_utf8;
 
 	if (gedit_mdi_get_state (gedit_mdi) != GEDIT_STATE_NORMAL)
@@ -832,7 +832,7 @@ gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 		
 	active_view = gedit_get_active_view ();
 	if (active_view != NULL)
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+		gtk_widget_grab_focus (active_view);
 
 	g_free (uri_utf8);
 
@@ -942,7 +942,6 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 	return ret;
 }
 
-
 static void 
 create_new_file (const gchar *uri)
 {
@@ -958,7 +957,7 @@ create_new_file (const gchar *uri)
 	g_return_if_fail (ret != FALSE);
 	gedit_debug (DEBUG_COMMANDS, "View added.");
 
-	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
+	gtk_widget_grab_focus (gedit_get_active_view ());
 }
 
 static gboolean

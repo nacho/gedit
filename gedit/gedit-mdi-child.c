@@ -464,13 +464,13 @@ gedit_mdi_child_tab_close_clicked (GtkWidget *button, GtkWidget *view)
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	active_view = gedit_get_active_view();
+	active_view = gedit_get_active_view ();
 
 	if (active_view != view)
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 	else
 		active_view = NULL;
-	
+
 	closed = gedit_file_close (view);
 
 	/* If a view is closed while another one is active, re-activate the previous

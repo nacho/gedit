@@ -423,19 +423,12 @@ gedit_get_active_document (void)
 	return GEDIT_MDI_CHILD (active_child)->document;
 }
 
-GeditView *
+GtkWidget *
 gedit_get_active_view (void)
 {
-	GtkWidget *active_view;
-
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
 
-	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
-	
-	if (active_view == NULL)
-		return NULL;
-
-	return GEDIT_VIEW (active_view);
+	return bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
 }
 
 GList * 
