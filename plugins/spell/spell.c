@@ -458,6 +458,61 @@ change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change,
 }
 
 static void
+change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change, GeditDocument *doc)
+{
+	CheckRange *range;
+	gchar *w = NULL;
+
+	gchar *last_searched_text;
+	gchar *last_replaced_text;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (word != NULL);
+	g_return_if_fail (change != NULL);
+
+	range = get_check_range (doc);
+	g_return_if_fail (range != NULL);
+
+	w = gedit_document_get_chars (doc, range->mw_start, range->mw_end);
+	g_return_if_fail (w != NULL);
+
+	if (strcmp (w, word) != 0)
+	{
+		g_free (w);
+		return;
+	}
+
+	g_free (w);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+	last_replaced_text = gedit_document_get_last_replace_text (doc);
+       	
+	gedit_document_replace_all (doc, word, change, TRUE);
+
+	update_current (doc, range->mw_start + g_utf8_strlen (change, -1));
+
+	if (last_searched_text != NULL)
+	{
+		gedit_document_set_last_searched_text (doc, last_searched_text);
+
+		g_free (last_searched_text);
+	}
+
+	if (last_replaced_text != NULL)
+	{
+		gedit_document_set_last_replace_text (doc, last_replaced_text);
+	
+		g_free (last_replaced_text);
+	}
+
+	/* go to next mispelled word */
+	ignore_cb (dlg, word, doc);
+}
+
+
+static void
 add_word_cb (GeditSpellCheckerDialog *dlg, const gchar *word, GeditDocument *doc)
 {
 	g_return_if_fail (doc != NULL);
@@ -562,6 +617,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	g_signal_connect (G_OBJECT (dlg), "ignore_all", G_CALLBACK (ignore_cb), doc);
 
 	g_signal_connect (G_OBJECT (dlg), "change", G_CALLBACK (change_cb), doc);
+	g_signal_connect (G_OBJECT (dlg), "change_all", G_CALLBACK (change_all_cb), doc);
 
 	g_signal_connect (G_OBJECT (dlg), "add_word_to_personal", G_CALLBACK (add_word_cb), doc);
 

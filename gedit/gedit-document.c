@@ -1820,6 +1820,36 @@ gedit_document_get_last_replace_text (GeditDocument* doc)
 		g_strdup (doc->priv->last_replace_text) : NULL;	
 }
 
+void 
+gedit_document_set_last_searched_text (GeditDocument* doc, const gchar *text)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+	g_return_if_fail (text != NULL);
+
+	if (doc->priv->last_searched_text != NULL)
+		g_free (doc->priv->last_searched_text);
+
+	doc->priv->last_searched_text = g_strdup (text);
+}
+
+void 
+gedit_document_set_last_replace_text (GeditDocument* doc, const gchar *text)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+	g_return_if_fail (text != NULL);
+
+	if (doc->priv->last_replace_text != NULL)
+		g_free (doc->priv->last_replace_text);
+
+	doc->priv->last_replace_text = g_strdup (text);
+}
+
 gboolean
 gedit_document_find (GeditDocument* doc, const gchar* str, 
 		gboolean from_cursor, gboolean case_sensitive)

@@ -334,7 +334,6 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 	g_signal_connect (G_OBJECT (dlg->change_all_button), "clicked",
 			  G_CALLBACK (change_all_button_clicked_handler), dlg);
 
-
 	g_object_unref (G_OBJECT (gui));
 }
 

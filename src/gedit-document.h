@@ -157,6 +157,9 @@ void		gedit_document_goto_line 	(GeditDocument* doc, guint line);
 gchar* 		gedit_document_get_last_searched_text (GeditDocument* doc);
 gchar* 		gedit_document_get_last_replace_text  (GeditDocument* doc);
 
+void 		gedit_document_set_last_searched_text (GeditDocument* doc, const gchar *text);
+void 		gedit_document_set_last_replace_text  (GeditDocument* doc, const gchar *text);
+
 gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str, 
 						 gboolean from_cursor, 
 						 gboolean case_sensitive);
