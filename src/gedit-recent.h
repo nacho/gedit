@@ -39,7 +39,7 @@ void 	gedit_recent_update (BonoboWindow *win);
 void 	gedit_recent_init (BonoboWindow *win);
 
 void	gedit_recent_add (const gchar *filename);
-void	gedit_recent_history_write_config (void);
+void	gedit_recent_history_save (void);
 
 #endif /* __GEDIT_RECENT_H__ */
 

@@ -35,6 +35,8 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 
+#include <gconf/gconf-client.h>
+
 #include "gnome-vfs-helpers.h"
 #include "gedit-recent.h"
 #include "gedit-mdi.h"
@@ -48,15 +50,17 @@
 #define MAX_RECENT 4
 #endif
 
-static void 	gedit_recent_update_menus 		(BonoboWindow *win, GList *recent_files);
-static void 	gedit_recent_cb 			(BonoboUIComponent *uic, gpointer user_data, 
-							 const gchar* verbname);
-static void 	gedit_recent_remove 			(char *filename);
-static GList   *gedit_recent_history_get_list 		(void);
-static gchar   *gedit_recent_history_update_list 	(const gchar *filename);
+#define GEDIT_RECENT_BASE_KEY "/apps/gedit2/recent-files"
 
-static GList *gedit_recent_history_list = NULL;
+static void 	gedit_recent_update_menus 	(BonoboWindow *win, GList *recent_files);
+static void 	gedit_recent_cb 		(BonoboUIComponent *uic, gpointer user_data, 
+						 const gchar* verbname);
+static void 	gedit_recent_remove 		(char *filename);
+static GList   *recent_history_get_list 	(void);
+static gchar   *recent_history_update_list 	(const gchar *filename);
 
+static GList        *gedit_recent_history_list = NULL;
+static GConfClient  *gedit_gconf_client        = NULL;
 
 static gchar* 
 escape_underscores (const gchar* text)
@@ -97,47 +101,36 @@ escape_underscores (const gchar* text)
 }
 
 static GList *
-gedit_recent_history_get_list (void)
+recent_history_get_list (void)
 {
         gchar *filename, *key;
-        gint max_entries, i;
-        gboolean do_set = FALSE;
+        gint i;
 
 	gedit_debug (DEBUG_RECENT, "");
 	
 	if (gedit_recent_history_list)
 		return gedit_recent_history_list;
 
-	gnome_config_push_prefix ("/gedit2/History/");
-
-        /* Get maximum number of history entries.  Write default value to 
-         * config file if no entry exists. */
-        max_entries = gnome_config_get_int_with_default ("MaxFiles=4", &do_set);
-	if (do_set)
-                gnome_config_set_int ("MaxFiles", 4);
-
-        /* Read the history filenames from the config file */
-        for (i = 0; i < max_entries; i++)
+        /* Read the history filenames from gconf */
+        for (i = 0; i < MAX_RECENT; i++)
 	{
-                key = g_strdup_printf ("File%d", i);
-                filename = gnome_config_get_string (key);
-                if (filename == NULL)
-		{
-			/* Ran out of filenames. */
-			g_free (key);
-			break;
-                }
-                gedit_recent_history_list = g_list_append (gedit_recent_history_list, filename);
-                g_free (key);
-        }
+                key = g_strdup_printf ("%s/file%d", GEDIT_RECENT_BASE_KEY, i+1);
+		filename = gconf_client_get_string (gedit_gconf_client,
+						    key,
+						    NULL);
+		g_free (key);
 
-        gnome_config_pop_prefix ();
+		if (filename == NULL)
+			break;
+
+		gedit_recent_history_list = g_list_append (gedit_recent_history_list, filename);
+        }
 
         return gedit_recent_history_list;
 }
 
 /**
- * gedit_recent_history_update_list:
+ * recent_history_update_list:
  * @filename: 
  * 
  * This function updates the history list.  The return value is a 
@@ -147,35 +140,27 @@ gedit_recent_history_get_list (void)
  * Return value: 
  **/
 static gchar *
-gedit_recent_history_update_list (const gchar *filename)
+recent_history_update_list (const gchar *filename)
 {
-        gchar *name, *old_name = NULL;
+        gchar *removed = NULL;
         GList *l = NULL;
         GList *new_list = NULL;
-        gint max_entries, count = 0;
-        gboolean do_set = FALSE;
+        gint count = 0;
         gboolean found = FALSE;
 
 	gedit_debug (DEBUG_RECENT, "");
 
         g_return_val_if_fail (filename != NULL, NULL);
 
-        /* Get maximum list length from config */
-        gnome_config_push_prefix ("/gedit2/History/");
-        max_entries = gnome_config_get_int_with_default ("MaxFiles=4", &do_set);
-	if (do_set)
-                gnome_config_set_int ("MaxFiles", max_entries);
-        gnome_config_pop_prefix ();
-
         /* Check if this filename already exists in the list */
-        for (l = gedit_recent_history_list; l && (count < max_entries); l = l->next)
+        for (l = gedit_recent_history_list; l && (count < MAX_RECENT); l = l->next)
 	{
                 if (!found && (!strcmp ((gchar *)l->data, filename)
-			       || (count == max_entries - 1)))
+			       || (count == MAX_RECENT - 1)))
 		{
                         /* This is either the last item in the list, or a
                          * duplicate of the requested entry. */
-                        old_name = (gchar *)l->data;
+                        removed = (gchar *)l->data;
                         found = TRUE;
                 }
 		else  /* Add this item to the new list */
@@ -185,45 +170,38 @@ gedit_recent_history_update_list (const gchar *filename)
         }
 
         /* Insert the new filename to the new list and free up the old list */
-        name = g_strdup (filename);
-        new_list = g_list_prepend (new_list, name);
+        new_list = g_list_prepend (new_list, g_strdup (filename));
         g_list_free (gedit_recent_history_list);
         gedit_recent_history_list = new_list;
 
-        return old_name;
+        return removed;
 }
 
 /**
- * gedit_recent_history_write_config:
- * @void: 
+ * gedit_recent_history_save:
  * 
- * Write contents of the history list to the configuration file.
- * 
- * Return Value: 
+ * Write contents of the history list to gconf.
  **/
 void
-gedit_recent_history_write_config (void)
+gedit_recent_history_save (void)
 {
         gchar *key; 
         GList *l;
-        gint max_entries, i = 0;
+        gint i = 1;
 
 	gedit_debug (DEBUG_RECENT, "");
 
-        max_entries = gnome_config_get_int ("/gedit2/History/MaxFiles=4");
-        gnome_config_clean_section ("/gedit2/History");
-	
-        gnome_config_push_prefix ("/gedit2/History/");
-        gnome_config_set_int ("MaxFiles", max_entries);
-
         for (l = gedit_recent_history_list; l; l = l->next) {
-                key = g_strdup_printf ("File%d", i++);
-                gnome_config_set_string (key, (gchar *)l->data);
-                g_free (l->data);
+                key = g_strdup_printf ("%s/file%d", GEDIT_RECENT_BASE_KEY, i++);
+		gconf_client_set_string (gedit_gconf_client,
+					 key,
+					 l->data,
+					 NULL);
+
                 g_free (key);
+                g_free (l->data);
         }
-	gnome_config_sync ();
-        gnome_config_pop_prefix ();
+	gconf_client_suggest_sync (gedit_gconf_client, NULL);
 
         g_list_free (gedit_recent_history_list);
         gedit_recent_history_list = NULL;
@@ -232,11 +210,10 @@ gedit_recent_history_write_config (void)
 
 /**
  * gedit_recent_update_menus:
- * @app: 
+ * @win: 
  * @recent_files: 
  * 
  * Update the gui part of the recently-used menu
- * 
  **/
 static void
 gedit_recent_update_menus (BonoboWindow *win, GList *recent_files)
@@ -294,13 +271,13 @@ gedit_recent_update_menus (BonoboWindow *win, GList *recent_files)
 
 			g_free (xml); 
 		}
-		
-		g_free (uri);
+
+		g_free (label);
+		g_free (verb_name);
 		g_free (tip);
 		g_free (escaped_name);
-		g_free (label); 
-		g_free (verb_name);
 		g_free (item_path);
+		g_free (uri);
 	}
 
 	for (i = g_list_length (recent_files) + 1; i <= MAX_RECENT; ++i)
@@ -337,14 +314,14 @@ gedit_recent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbna
 		gedit_utils_flash_va (_("Unable to open recent file: %s"), t);
 		g_free (t);
 		gedit_recent_remove (uri);
-		gedit_recent_history_write_config ();
+		gedit_recent_history_save ();
 		gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi));		
 	}
 }
 
 /**
- * recent_update:
- * @app: 
+ * gedit_recent_update:
+ * @win: 
  *
  * Grabs the list of recently used documents, then updates the menus by
  * calling recent_update_menus().  Should be called when a new
@@ -357,14 +334,14 @@ gedit_recent_update (BonoboWindow *win)
 
 	gedit_debug (DEBUG_RECENT, "");
 
-	filelist = gedit_recent_history_get_list ();
+	filelist = recent_history_get_list ();
 
 	gedit_recent_update_menus (win, filelist);
 }
 
 /**
- * recent_update_all_windows:
- * @app: 
+ * gedit_recent_update_all_windows:
+ * @mdi: 
  *
  * Updates the recent files menus in all open windows.
  * Should be called after each addition to the recent documents list.
@@ -383,32 +360,30 @@ gedit_recent_update_all_windows (BonoboMDI *mdi)
        	g_return_if_fail (windows != NULL);
        
 	for (i = 0; i < g_list_length (windows); i++)
-        {
                 gedit_recent_update (BONOBO_WINDOW (g_list_nth_data (windows, i)));
-        }
 }
 
 
 /**
- * recent_add:
+ * gedit_recent_add:
  * @filename: Filename of document to add to the recently accessed list
  *
  * Record a file in GNOME's recent documents database 
  **/
 void
-gedit_recent_add (const char *file_name)
+gedit_recent_add (const char *filename)
 {
 	gchar *del_name;
 	gchar *uri;
 
 	gedit_debug (DEBUG_RECENT, "");
 
-	g_return_if_fail (file_name != NULL);
+	g_return_if_fail (filename != NULL);
 
-	uri = gnome_vfs_x_make_uri_canonical (file_name);
+	uri = gnome_vfs_x_make_uri_canonical (filename);
 	g_return_if_fail (uri != NULL);
 
-	del_name = gedit_recent_history_update_list (uri);
+	del_name = recent_history_update_list (uri);
 
 	g_free (uri);
 	g_free (del_name);
@@ -416,13 +391,13 @@ gedit_recent_add (const char *file_name)
 
 
 /**
- * recent_remove:
+ * gedit_recent_remove:
  * @filename: Filename of document to remove from the recently accessed list
  *
  * Record a file in GNOME's recent documents database 
  **/
-void
-gedit_recent_remove (char *file_name)
+static void
+gedit_recent_remove (char *filename)
 {
 	gint n;
 	guchar * nth_list_item;
@@ -432,7 +407,7 @@ gedit_recent_remove (char *file_name)
 	for (n=0; n < g_list_length (gedit_recent_history_list); n++)
 	{
 		nth_list_item = g_list_nth_data (gedit_recent_history_list, n);
-		if (strcmp (nth_list_item, file_name) == 0)
+		if (strcmp (nth_list_item, filename) == 0)
 		{
 			gedit_recent_history_list = g_list_remove (gedit_recent_history_list, nth_list_item);
 			g_free (nth_list_item);			
@@ -462,7 +437,7 @@ gedit_recent_init (BonoboWindow *win)
 		
 		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
 		bonobo_ui_component_add_verb (ui_component, verb_name, gedit_recent_cb, 
-				GINT_TO_POINTER (i)); 
+					      GINT_TO_POINTER (i)); 
 
 		g_free (cmd);
 		g_free (verb_name);
@@ -471,6 +446,13 @@ gedit_recent_init (BonoboWindow *win)
 	
 	bonobo_ui_component_thaw (ui_component, NULL);
 
+	gedit_gconf_client = gconf_client_get_default ();
+
+	gconf_client_add_dir (gedit_gconf_client,
+			      GEDIT_RECENT_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
+		
 	gedit_recent_update (win);
 }
 

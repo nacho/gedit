@@ -836,11 +836,3 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 */
 }
-
-
-
-
-		
-
-
-		

@@ -1,3 +1,14 @@
+2002-01-10  Jason Leach  <jasonleach@usa.net>
+
+	[Use gconf to store recent documents opened]
+
+	* gedit-recent.c (gedit_recent_history_save): Renamed from
+	gedit_recent_history_write_config.
+
+	* gedit-recent.c (recent_history_get_list): Use gconf in place of
+	gnome_config.
+	(recent_history_update_list): Ditto.
+
 2002-01-10  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-ui.xml: Exit button removed from toolbar

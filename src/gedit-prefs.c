@@ -30,7 +30,6 @@
 
 
 /* TODO: 
- * [X] It should be rewritten to use GConf 
  * [X] check if all the preferences are really used in the code 
  */
 
@@ -337,10 +336,8 @@ gedit_prefs_load_settings (void)
 	gedit_debug (DEBUG_PREFS, "START");
 	g_return_if_fail (gedit_gconf_client != NULL);
 
-	if (!gedit_settings)
-	{
+	if (gedit_settings == NULL)
 		gedit_settings = g_new0 (GeditPreferences, 1);
-	}
 
 	gedit_settings->use_default_font = gconf_client_get_bool (
 				gedit_gconf_client,

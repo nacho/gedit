@@ -388,8 +388,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
 		       	
 			errstr = g_strdup_printf (_("An error occurred while "
-							   "opening the file \"%s\".\n\n%s."),
-							   formatted_uri, error->message);
+						    "opening the file \"%s\".\n\n%s."),
+						  formatted_uri, error->message);
 		
 			dialog = gtk_message_dialog_new (
 					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
@@ -434,8 +434,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
 		       	
 			errstr = g_strdup_printf (_("An error occurred while "
-							   "opening the file \"%s\".\n\n%s."),
-							   formatted_uri, error->message);
+						    "opening the file \"%s\".\n\n%s."),
+						  formatted_uri, error->message);
 		
 			dialog = gtk_message_dialog_new (
 					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
@@ -796,7 +796,7 @@ gedit_file_exit (void)
 	
 	gedit_prefs_save_settings ();
 
-	gedit_recent_history_write_config ();
+	gedit_recent_history_save ();
 
 	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
 
