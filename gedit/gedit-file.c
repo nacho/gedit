@@ -789,7 +789,7 @@ gedit_file_open_uri_list (GSList* uri_list, gint l, gboolean create)
 {
 	line = l;
 	
-	gedit_file_open_uri_list_real (uri_list, NULL, create);
+	return gedit_file_open_uri_list_real (uri_list, NULL, create);
 }
 
 gboolean 

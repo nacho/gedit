@@ -123,6 +123,7 @@ struct _BonoboMDIPrivate
 
 	guint 		 signal_id;
 	gint 		 in_drag : 1;
+	gint		 x_start, y_start;
 
 	gchar 		*mdi_name; 
 	gchar		*title;
@@ -404,7 +405,6 @@ bonobo_mdi_instance_init (BonoboMDI *mdi)
 	gedit_debug (DEBUG_MDI, "END");
 }
 
-
 /**
  * bonobo_mdi_new:
  * @mdi_name: Application name as used in filenames and paths.
@@ -671,8 +671,6 @@ child_list_menu_remove_all (BonoboMDI *mdi)
 	}
 }
 
-
-
 static gboolean 
 book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 {
@@ -680,9 +678,18 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 
 	mdi = BONOBO_MDI (data);
 
+	if (!gtk_drag_check_threshold (widget,
+				      mdi->priv->x_start,
+				      mdi->priv->y_start,
+				      e->x_root,
+				      e->y_root))
+	{
+			return FALSE;
+	}
+
 	if (!drag_cursor)
 		drag_cursor = gdk_cursor_new (/*GDK_HAND2*/GDK_FLEUR);
-		
+
 	mdi->priv->in_drag = TRUE;
 	gtk_grab_add (widget);
 	gdk_pointer_grab (widget->window, 
@@ -692,14 +699,14 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 			  NULL,
 			  drag_cursor, 
 			  GDK_CURRENT_TIME);
-	
+
 	if (mdi->priv->signal_id) 
 	{
 		g_signal_handler_disconnect (G_OBJECT (widget), 
 					     mdi->priv->signal_id);
 		mdi->priv->signal_id = 0;
 	}
-	
+
 	return FALSE;
 }
 
@@ -710,11 +717,16 @@ book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 	BonoboMDIChild *child;
 
 	g_return_val_if_fail (GTK_IS_WIDGET (data), FALSE);
-	
+
 	child = bonobo_mdi_get_child_from_view (GTK_WIDGET (data));
 	mdi = BONOBO_MDI (g_object_get_data (G_OBJECT (child), BONOBO_MDI_KEY));
 
-	if (e->button == 1)
+	if (mdi->priv->in_drag)
+	{
+		return TRUE;
+	}
+
+	if (e->button == 1 && (e->type == GDK_BUTTON_PRESS))
 	{
 		GtkNotebook *book;
 		BonoboWindow *win;
@@ -727,11 +739,12 @@ book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 		if (g_list_length (mdi->priv->children) <= 1)
 			return FALSE;
 
-		mdi->priv->signal_id = g_signal_connect (
-				G_OBJECT (book), 
-				"motion_notify_event",
-				G_CALLBACK (book_motion), 
-				mdi);
+		mdi->priv->x_start = e->x_root;
+		mdi->priv->y_start = e->y_root;
+		mdi->priv->signal_id = g_signal_connect (G_OBJECT (book), 
+							 "motion_notify_event",
+							 G_CALLBACK (book_motion),
+							 mdi);
 	}
 
 	return FALSE;
