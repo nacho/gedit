@@ -38,7 +38,7 @@ GnomeUIInfo popup_menu[] =
 	GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
         GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_select_all_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 
@@ -116,7 +116,7 @@ GnomeUIInfo gedit_edit_menu[] =
         GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
         GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_select_all_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 

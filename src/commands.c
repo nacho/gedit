@@ -160,7 +160,7 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 }
 
 void
-edit_selall_cb (GtkWidget *widget, gpointer data)
+edit_select_all_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	

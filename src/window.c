@@ -448,6 +448,12 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 				    sub_ui_info [sub_count].moreinfo == edit_copy_cb    ||
 				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||
 				    sub_ui_info [sub_count].moreinfo == find_cb         ||
+				    sub_ui_info [sub_count].moreinfo == edit_select_all_cb ||
+				    sub_ui_info [sub_count].moreinfo == find_again_cb ||
+				    sub_ui_info [sub_count].moreinfo == replace_cb ||
+				    sub_ui_info [sub_count].moreinfo == goto_line_cb ||
+				    sub_ui_info [sub_count].moreinfo == gedit_view_add_cb||
+				    sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb ||
 				    sub_ui_info [sub_count].moreinfo == count_lines_cb  )
 				{
 					widget =  sub_ui_info [sub_count].widget;
@@ -459,6 +465,9 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 		}
 		count++;
 	}
+
+	if (sensitive)
+		gedit_window_set_view_menu_sensitivity (app);
 
 	/* plugin menus */
 	for (count = 0; count < g_list_length (plugins_list); count++)

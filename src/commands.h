@@ -31,7 +31,7 @@ extern void window_new_cb (GtkWidget *widget, gpointer cbdata);
 void edit_cut_cb (GtkWidget *widget, gpointer cbdata);
 void edit_copy_cb (GtkWidget *widget, gpointer cbdata);
 void edit_paste_cb (GtkWidget *widget, gpointer cbdata);
-void edit_selall_cb (GtkWidget *widget, gpointer cbdata);
+void edit_select_all_cb (GtkWidget *widget, gpointer cbdata);
 
 /* Tab positioning */
 void tab_top_cb (GtkWidget *widget, gpointer cbwindow);
