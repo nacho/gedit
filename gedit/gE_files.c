@@ -48,7 +48,7 @@ void clear_text (gE_document *document)
 	}
 }
 
-gint gE_file_open(gE_document *document, gchar *filename)
+gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 {
 	char str[10];
 	FILE *file_handle;
@@ -64,7 +64,7 @@ gint gE_file_open(gE_document *document, gchar *filename)
 			                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-		gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Opened..."));
+		gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Opened..."));
 		
 		return 1;
 	}
@@ -91,11 +91,11 @@ gint gE_file_open(gE_document *document, gchar *filename)
 		                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Opened..."));
+	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Opened..."));
 	return 0;
 }
 
-gint gE_file_save(gE_document *document, gchar *filename)
+gint gE_file_save(gE_window *window, gE_document *document, gchar *filename)
 {
 	int i;
 	FILE *file_handle;
@@ -126,7 +126,7 @@ gint gE_file_save(gE_document *document, gchar *filename)
 	if (!document->changed_id)
 		document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", GTK_SIGNAL_FUNC(document_changed_callback), document);
 
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Saved..."));
+	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Saved..."));
 	return 0;
 }
 
