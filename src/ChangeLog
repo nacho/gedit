@@ -1,5 +1,36 @@
 2000-05-24  Chema Celorio  <chema@celorio.com>
 
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): replace now
+	works, it still needs some love.
+
+	* undo.c (views_insert): disable split screen, it
+	was making gedit slow
+	(views_delete): ditto
+
+	* view.c (doc_insert_text_cb): changed parameters for
+	function.
+	* view.h: reflect new parameters
+
+	* dialogs/dialog-replace.c (views_delete): added this function
+	to delete text before replacing. **-- Found more about what
+	the speed problems with gedit are --**. 
+
+	* file.c (file_revert_cb): do not revert a (NULL) file,
+	since we don't have a filename to rever it to.
+
+	* undo.c (gedit_undo_redo): clean the code a bit
+
+	* dialogs/dialog-replace.c: merge dialog-search and
+	dialog-replace, they now share the code and the glade
+	file. We just hide the "replace" stuff in the dialog
+	when called from search.
+	
+	* dialogs/dialog-search.c : deleted
+	* dialogs/search.glade : deleted
+	* dialogs/search.glade.h : deleted
+
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
 	* dialogs/dialog-replace.c: start the replace stuff.
 
 	* dialogs/dialog-search.c (search_text_clicked_cb): Improve fix

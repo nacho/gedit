@@ -58,7 +58,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>replace_button</name>
+	<name>find_next_button</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<label>Find Next</label>
@@ -66,7 +66,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>replaceall_button</name>
+	<name>replace_button</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<label>Replace</label>
@@ -74,7 +74,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>close_button</name>
+	<name>replace_all_button</name>
 	<can_default>True</can_default>
 	<has_default>True</has_default>
 	<can_focus>True</can_focus>
@@ -83,7 +83,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button1</name>
+	<name>close_button</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
@@ -146,7 +146,7 @@
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GnomeEntry:entry</child_name>
-	    <name>text_entry</name>
+	    <name>search_for_text_entry</name>
 	    <width>300</width>
 	    <can_focus>True</can_focus>
 	    <has_focus>True</has_focus>
@@ -160,7 +160,7 @@
 
       <widget>
 	<class>GtkHBox</class>
-	<name>hbox1</name>
+	<name>hbox_replace_with</name>
 	<homogeneous>False</homogeneous>
 	<spacing>0</spacing>
 	<child>
@@ -202,7 +202,7 @@
 	  <widget>
 	    <class>GtkEntry</class>
 	    <child_name>GnomeEntry:entry</child_name>
-	    <name>replace</name>
+	    <name>replace_with_text_entry</name>
 	    <width>220</width>
 	    <can_focus>True</can_focus>
 	    <editable>True</editable>
@@ -297,7 +297,7 @@
 
 	<widget>
 	  <class>GtkCheckButton</class>
-	  <name>ask</name>
+	  <name>ask_before_replacing</name>
 	  <can_focus>True</can_focus>
 	  <label>Ask before replacing</label>
 	  <active>False</active>

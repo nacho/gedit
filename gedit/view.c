@@ -44,7 +44,7 @@ GtkVBoxClass *parent_class = NULL;
        void view_changed_cb (GtkWidget *w, gpointer cbdata);
 static void gedit_view_list_insert (View *view, gedit_data *data);
        gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
-       void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
+       void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int pos, View *view);
        void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
    gboolean auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
 static void line_pos_cb (GtkWidget *widget, gedit_data *data);
@@ -157,15 +157,15 @@ insert_into_buffer (Document *doc, gchar *buffer, gint position)
 
 void
 doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
-		    int length, int *pos, View *view)
+		    int length, int pos, View *view)
 {
 	GtkWidget *significant_other;
 	guchar *buffer;
-	gint position = *pos;
+	gint position = pos;
 	Document *doc;
 	gedit_data *data;
 
-	gedit_debug ("F:doc_insert_text_cb\n", DEBUG_VIEW);
+	gedit_debug ("start \n", DEBUG_VIEW);
 	
 	if (!view->split_screen)
 		return;
@@ -202,6 +202,8 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	gtk_text_set_point (GTK_TEXT (significant_other), position);
 	g_free (data);
 	g_free (buffer);
+
+	gedit_debug ("end \n", DEBUG_VIEW);
 }
 
 void
@@ -214,7 +216,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	gchar *buffer;
 	gint n;
 
-	gedit_debug ("F:doc_delete_text_cb\n", DEBUG_VIEW);
+	gedit_debug ("start\n", DEBUG_VIEW);
 
 	if (!view->split_screen)
 		return;
@@ -270,6 +272,8 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 								 view);	
 		}
 	}
+
+	gedit_debug ("end\n", DEBUG_VIEW);
 }
 
 gboolean

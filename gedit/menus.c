@@ -32,7 +32,6 @@
 #include "document.h"
 #include "dialogs/dialogs.h"
 
-
 GnomeUIInfo popup_menu[] =
 {
 	GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
@@ -54,7 +53,6 @@ GnomeUIInfo popup_menu[] =
 	GNOMEUIINFO_END
 };
 
-
 GnomeUIInfo gedit_file_menu[] =
 {
         GNOMEUIINFO_MENU_NEW_ITEM (N_("_New"),
@@ -69,7 +67,6 @@ GnomeUIInfo gedit_file_menu[] =
 				GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
-/*	GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),*/
 
 	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
 				NULL,
@@ -146,7 +143,7 @@ GnomeUIInfo view_menu[] =
 GnomeUIInfo doc_menu[] =
 {
 	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE (view_menu), 
+	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
 	GNOMEUIINFO_END
 };
 

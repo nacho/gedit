@@ -145,7 +145,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	/* file_print preview is a false when preview is requested */ 
 	if (file_printpreview)
 	{
-		dialog = (GnomePrintDialog *)gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
+		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
 							  GNOME_PRINT_RANGE_ALL | GNOME_PRINT_RANGE_RANGE,
 							  1, pji->pages, "A",

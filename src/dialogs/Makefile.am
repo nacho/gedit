@@ -15,21 +15,18 @@ libdialogs_a_SOURCES = 		\
 	dialog-goto-line.c	\
 	dialog-prefs.c		\
 	dialog-replace.c	\
-	dialog-search.c		\
 	dialogs.h
 
 glade_DATA =		\
 	about.glade	\
 	goto-line.glade \
 	prefs.glade	\
-	search.glade	\
 	replace.glade
 
 glade_msgs =			\
 	about.glade.h		\
 	find-line.glade.h	\
 	prefs.glade.h		\
-	search.glade.h		\
 	replace.glade.h
 
 EXTRA_DIST = $(glade_DATA) $(glade_msgs)

@@ -80,7 +80,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	gint i;
 	View *nth_view;
 	
-	gedit_debug ("F:gedit_file_open.\n", DEBUG_FILE);
+	gedit_debug ("\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
 	g_return_val_if_fail (doc != NULL, 1);
 
@@ -172,7 +172,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	gchar *tmpstr;
 	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
 
-	gedit_debug ("F:gedit_file_save.\n", DEBUG_FILE);
+	gedit_debug ("\n", DEBUG_FILE);
 
 	if (fname == NULL)
 		fname = doc->filename;
@@ -212,7 +212,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file :"
 						   "\n\n %s \n\n"
-						   "Because of an unknown reason (1). Please report this "
+						   "Because of an unknown reason (2). Please report this "
 						   "Problem to submit@bugs.gnome.org"), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		fclose (fp);
@@ -247,7 +247,7 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 
-	gedit_debug("F:file_new_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
 	doc = gedit_document_new ();
@@ -260,7 +260,7 @@ void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("F:file_open_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	if (open_file_selector && GTK_WIDGET_VISIBLE (open_file_selector))
 		return;
@@ -291,7 +291,7 @@ void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("F:file_save_as_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	if (!gedit_document_current())
 		return;
@@ -331,7 +331,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
-	gedit_debug("F:(file) delete event cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	gtk_widget_hide (widget);
 	return TRUE;
@@ -340,7 +340,7 @@ delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
-	gedit_debug("F:(file) cance_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	gtk_widget_hide (data);
 }
@@ -350,7 +350,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	Document *doc;
 
-	gedit_debug("f:file_open_ok_sel\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
@@ -368,16 +368,13 @@ file_save_cb (GtkWidget *widget)
 {
 	Document *doc;
 
-	gedit_debug("f:file_save_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 
 	if (gnome_mdi_get_active_child(mdi) == NULL)
 		return;
 
 	doc = gedit_document_current ();
-	/* if (doc->changed) */
-	/* We want to save even if the doc has not been modified
-	   since the doc on disk might have been modified externally
-	   and the user wants to overwrite it. Chema */
+
 	if (doc->filename == NULL)
 		file_save_as_cb (widget, NULL);
 	else
@@ -391,7 +388,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	int i;
 	Document *doc;
 
-	gedit_debug ("F:file_save_all_cb.\n", DEBUG_FILE);
+	gedit_debug ("\n", DEBUG_FILE);
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
@@ -460,7 +457,7 @@ void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("f:file_close_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -470,7 +467,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("f:file_close_all\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -480,7 +477,7 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("f:file_quit_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	gedit_save_settings ();
 
@@ -499,10 +496,26 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	gchar * msg;
 	Document *doc = gedit_document_current ();
 
-	gedit_debug("f:file_revert_cb\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	if (!doc)
 		return;
+
+	if (doc->filename==NULL)
+	{
+		
+		msg = g_strdup (_("You can't revert an Untitled document\n"));
+		msgbox = gnome_message_box_new (msg,
+						GNOME_MESSAGE_BOX_INFO,
+						GNOME_STOCK_BUTTON_OK,
+						NULL);
+		gnome_dialog_set_parent (GNOME_DIALOG (msgbox),
+					 GTK_WINDOW (mdi->active_window));
+		gnome_dialog_run_and_close (GNOME_DIALOG(msgbox));
+		g_free (msg);
+		return;
+	}
+		
 	
 	msg = g_strdup_printf (_("Are you sure you wish to revert all changes?\n(%s)"),
 			       doc->filename);
@@ -530,7 +543,7 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	int ret;
 	char *msg;
 
-	gedit_debug("f:popup_create_new_file\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	msg = g_strdup_printf (_("The file ``%s'' does not exist.  Would you like to create it?"),
 			       title);

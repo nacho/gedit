@@ -112,7 +112,9 @@ search_start (void)
 	gedit_search_info.view = VIEW (mdi->active_view);
 	gedit_search_info.doc = gedit_document_current();
 	gedit_search_info.original_readonly_state = gedit_search_info.view->read_only;
+#if 0 /* Speed problems when using large files */
 	gedit_view_set_read_only (gedit_search_info.view, TRUE);
+#endif
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -147,9 +149,11 @@ search_end (void)
 {
 	gedit_debug("\n", DEBUG_SEARCH);
 
+#if 0 /* Speed problems when using large files */	
 	if (mdi->active_child != NULL)
 		gedit_view_set_read_only (gedit_search_info.view,
 					  gedit_search_info.original_readonly_state);
+#endif	
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -239,14 +243,14 @@ void
 find_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug ("\n", DEBUG_SEARCH);
-	dialog_find ();
+	dialog_replace (FALSE);
 }
 
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug ("\n", DEBUG_SEARCH);
-	dialog_replace();
+	dialog_replace(TRUE);
 }
 
 
