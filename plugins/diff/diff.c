@@ -38,6 +38,7 @@
 #include <libgnome/gnome-help.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include <gconf/gconf-client.h>
+#include <eel/eel-vfs-extensions.h>
 
 #include <unistd.h> /* getpid and unlink */
 #include <stdlib.h> /* rand   */
@@ -531,6 +532,7 @@ diff_execute (DiffDialog *dialog)
 
 	if (!state_1)
 	{
+		gchar *uri;
 		gchar *sn;
 		
 		if (file_name_1 != NULL)
@@ -550,17 +552,23 @@ diff_execute (DiffDialog *dialog)
 		file_name_1 = temp_file_name_new (sn);
 		gedit_debug (DEBUG_PLUGINS, "file_name_1: %s", file_name_1);
 		g_free (sn);
-
-		if (!gedit_document_save_a_copy_as (document, file_name_1, NULL))
+		
+		uri = eel_make_uri_canonical (file_name_1);
+		g_return_val_if_fail (uri != NULL, FALSE);
+		
+		if (!gedit_document_save_a_copy_as (document, uri, NULL))
 		{
 			g_free (file_name_1);
 			file_name_1 = NULL;
 		}
+
+		g_free (uri);
 	}
 
 	if (!state_2)
 	{
 		gchar *sn;
+		gchar *uri;
 
 		if (file_name_2 != NULL)
 			g_free (file_name_2);
@@ -581,11 +589,16 @@ diff_execute (DiffDialog *dialog)
 		gedit_debug (DEBUG_PLUGINS, "file_name_2: %s", file_name_2);
 		g_free (sn);
 		
-		if (!gedit_document_save_a_copy_as (document, file_name_2, NULL))
+		uri = eel_make_uri_canonical (file_name_2);
+		g_return_val_if_fail (uri != NULL, FALSE);
+
+		if (!gedit_document_save_a_copy_as (document, uri, NULL))
 		{
 			g_free (file_name_2);
 			file_name_2 = NULL;
 		}
+
+		g_free (uri);
 	}
 
 	if (file_name_1 == NULL || file_name_2 == NULL)
