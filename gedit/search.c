@@ -141,8 +141,8 @@ gedit_search_start (void)
 		return;
 	}
 	
-	search_info.length = gedit_document_get_buffer_length (search_info.view->doc);
 	search_info.buffer = gedit_document_get_buffer (search_info.view->doc);
+	search_info.length = strlen (search_info.buffer);
 	search_info.state  = SEARCH_IN_PROGRESS_YES;
 }
 
@@ -511,7 +511,7 @@ gedit_search_execute ( guint starting_position,
 	if (return_the_line_number)
 		*line_found = pos_to_line ( p2, total_lines);
 
-	*pos_found = p2 - text_length;
+	*pos_found = p2 - text_length + 1;
 
 	if (gedit_view_active() != search_info.view)
 		g_warning("View is not the same F:%s L:%i", __FILE__, __LINE__);
@@ -594,9 +594,9 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 
 	delta = replace_text_length - search_text_length;
 	if (delta > 0)
-		buffer_out_length = buffer_in_length + (grow_factor) * delta;
+		buffer_out_length = buffer_in_length + 1 + (grow_factor) * delta ;
 	else
-		buffer_out_length = buffer_in_length;
+		buffer_out_length = buffer_in_length + 1;
 
 	buffer_out = g_malloc (buffer_out_length);
 
@@ -625,8 +625,9 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 	/* Do the actual replace all */
 	while (p1 < buffer_in_length)
 	{
-		if (p2 > buffer_out_length - (delta*2)) /* Allocate for at leas 2 more replacements */
+		if (p2 > buffer_out_length - (delta*2)) /* Allocate for at least 2 more replacements */
 		{
+			g_print ("reallocating ......\n");
 			if (delta < 1) {
 				g_warning ("This should not happen.\n");
 				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
@@ -666,16 +667,14 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 
 	buffer_out [p2] = '\0';
 
-	if (p2 > buffer_out_length )
+	if (p2 >= buffer_out_length )
 	{
-		g_warning ("Error ...\n");
-		g_assert_not_reached();
+		g_warning ("Error. Replace all has written outside of the memory requested.\n"
+			   "P2:%i -  buffer_out_length:%i", p2, buffer_out_length);
 	}
 
 	*buffer = buffer_out;
 
-	g_warning ("Return ...\n");
-	
 	return replacements;
 }
 

@@ -173,6 +173,8 @@ action_find (GeditReplaceDialog *dialog,
 	guint pos_found;
 	gint line_found, total_lines;
 
+	gedit_debug (DEBUG_SEARCH, "");
+
 	found = gedit_search_execute (start_pos, case_sensitive, search_text,
 				      &pos_found, &line_found, &total_lines, TRUE);
 
@@ -182,12 +184,11 @@ action_find (GeditReplaceDialog *dialog,
 		return;
 	}
 
-	gedit_flash_va (_("Text found at line :%i"),line_found);
 	gedit_view_set_window_position_from_lines (dialog->view, line_found, total_lines);
 	gedit_view_set_position	(dialog->view, pos_found);
 	gedit_view_set_selection (dialog->view,
-				  pos_found + 1,
-				  pos_found + 1 + strlen (search_text));
+				  pos_found,
+				  pos_found + strlen (search_text));
 	
 	gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 1);
 }
@@ -199,6 +200,7 @@ action_replace (GeditReplaceDialog *dialog,
 		const gchar *replace_text,
 		gboolean case_sensitive)
 {
+	gedit_debug (DEBUG_SEARCH, "");
 
 	gedit_document_replace_text (dialog->view->doc,
 				     replace_text,
@@ -225,8 +227,10 @@ action_replace_all (GeditReplaceDialog *dialog,
 {
 	guchar *new_buffer = NULL;
 
+	gedit_debug (DEBUG_SEARCH, "");
+
 	dialog->replacements = gedit_replace_all_execute (dialog->view,
-							  start_pos,
+							  MAX (start_pos - strlen (search_text), 0),
 							  search_text,
 							  replace_text,
 							  case_sensitive,
@@ -273,7 +277,7 @@ dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
 		return;
 	}
 	
-	/* Get the initial position */
+	/* Get the initial position, selected = start of doc, !selected = current pos */
 	selected = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(dialog->position)->group);
 	switch (selected) {
 	case 0:
@@ -313,6 +317,8 @@ search_not_found_notify (GeditView * view)
 	GtkWidget *gnome_dialog;
 	gchar * msg;
 	
+	gedit_debug (DEBUG_SEARCH, "");
+
 	gedit_flash_va (_("Text not found"));
 
 	if (gedit_view_get_selection (view, NULL, NULL))
@@ -334,6 +340,9 @@ static void
 dialog_display_messages (GeditReplaceDialog *dialog)
 {
 	gchar *msg;
+
+	gedit_debug (DEBUG_SEARCH, "");
+	
 	/* This is done like this, since we need to close the other
 	   dialog before poping this dialogs*/
 	if (dialog->not_found || dialog->replacements == 0)
@@ -416,6 +425,8 @@ gedit_find_again (void)
 {
 	GeditReplaceDialog *dialog;
 	const gchar *search_text;
+
+	gedit_debug (DEBUG_SEARCH, "");
 	
 	dialog = get_dialog ();
 
