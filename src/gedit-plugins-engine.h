@@ -59,6 +59,8 @@ gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPlugin *plugin);
  */
 void		 gedit_plugins_engine_update_plugins_ui	(BonoboWindow *window, gboolean new_window);
 
+gboolean	gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin);
+
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
 
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.4\n"
-"POT-Creation-Date: 2002-01-18 09:59+0100\n"
+"POT-Creation-Date: 2002-01-22 15:42+0100\n"
 "PO-Revision-Date: 2000-11-01 20:54+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -17,9 +17,75 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Edytor tekstu"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:480
 msgid "gedit"
 msgstr "gedit"
+
+#: plugins/cvschangelog/cvschangelog.c:219
+msgid "CVS ChangeLog"
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:220
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:222
+msgid "Copyright (C) 2002 - James Willcox"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:40
+msgid "_Word Count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:43
+#, fuzzy
+msgid "Get info on current document."
+msgstr "Wysyła bieżący dokument e-mailem"
+
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:401
+msgid "Word count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:147
+msgid "Update"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:402
+msgid ""
+"The word count plugin analyzes the current document and determines the "
+"number of words, lines, characters and non-space characters in it and "
+"display the result."
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:406 plugins/sample/sample.c:173
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr ""
+
+#: plugins/sample/sample.c:52
+#, fuzzy
+msgid "Hello World "
+msgstr "Witaj świecie"
+
+#: plugins/sample/sample.c:170
+msgid "Hello World"
+msgstr "Witaj świecie"
+
+#: plugins/sample/sample.c:171
+msgid "Sample 'hello world' plugin."
+msgstr "Przykładowa wtyczka \"witaj świecie\"."
+
+#: plugins/time/time.c:216
+msgid "Time"
+msgstr ""
+
+#: plugins/time/time.c:217
+#, fuzzy
+msgid "Inserts the current time into the current document."
+msgstr "Wstawia bieżącą datę i czas"
+
+#: plugins/time/time.c:219
+msgid "Copyright (C) 2002 - Alex Roberts"
+msgstr ""
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, c-format
@@ -36,6 +102,36 @@ msgstr "Przejdź do _wiersza..."
 #, fuzzy
 msgid "_Goto line"
 msgstr "Przejdź do wiersza"
+
+#: src/dialogs/gedit-dialog-goto-line.c:140
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:45
+#, fuzzy
+msgid "Plugin"
+msgstr "W_tyczki"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:46
+msgid "Load"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:418
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:426
+#, fuzzy
+msgid "Plugin Manager"
+msgstr "Menedżer wtyczek programu gedit"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:539
+msgid "Could not create the Plugin Manager dialog"
+msgstr ""
 
 #: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 #, fuzzy
@@ -144,11 +240,11 @@ msgstr ""
 msgid "The string \"%s\" has not been found."
 msgstr "Nie odnaleziono tekstu."
 
-#: src/gedit-commands.c:411
+#: src/gedit-commands.c:419
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:482
+#: src/gedit-commands.c:483
 #, fuzzy
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit jest niewielkim edytorem tekstu dla GNOME."
@@ -191,8 +287,8 @@ msgstr "Zmień"
 msgid "Select a filename to save"
 msgstr "Wybór instalowanych wtyczek"
 
-#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1091
-#: src/gedit-file.c:1132
+#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1094
+#: src/gedit-file.c:1137
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "Wczytano plik %s"
@@ -291,7 +387,7 @@ msgstr "Dokument nie został zapisany."
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1186
+#: src/gedit-file.c:1191
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -301,7 +397,7 @@ msgstr ""
 "Przy otwieraniu pliku \"%s\" wystąpił błąd.\n"
 "Upewnij się, że plik istnieje."
 
-#: src/gedit-mdi.c:579
+#: src/gedit-mdi.c:573
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -309,59 +405,69 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:584
+#: src/gedit-mdi.c:578
 msgid "Do_n't save"
 msgstr ""
 
-#: src/gedit-mdi.c:602
+#: src/gedit-mdi.c:596
 msgid "_Don't quit"
 msgstr ""
 
-#: src/gedit-mdi.c:606
+#: src/gedit-mdi.c:600
 msgid "_Don't close"
 msgstr ""
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:684
 msgid "(modified)"
 msgstr "(zmodyfikowany)"
 
-#: src/gedit-mdi.c:696
+#: src/gedit-mdi.c:690
 msgid "(readonly)"
 msgstr "(tylko do odczytu)"
 
-#: src/gedit-plugins-engine.c:134
+#: src/gedit-plugins-engine.c:137
 #, fuzzy, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Błąd. Nie można otworzyć pliku z modułem, %s."
 
-#: src/gedit-plugins-engine.c:149
+#: src/gedit-plugins-engine.c:152
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Błąd. Wtyczka nie zawiera funkcji init_plugin."
 
-#: src/gedit-plugins-engine.c:159
+#: src/gedit-plugins-engine.c:162
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Błąd. Wtyczka nie zawiera funkcji init_plugin."
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:172
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Błąd. Wtyczka nie zawiera funkcji init_plugin."
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:202
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:187
+#: src/gedit-plugins-engine.c:210
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:244
+#: src/gedit-plugins-engine.c:295 src/gedit-plugins-engine.c:355
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:322
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:397
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
 
 #: src/gedit-print.c:158
@@ -798,16 +904,16 @@ msgstr "Do:"
 msgid "_Undo"
 msgstr "Cofnij"
 
-#: src/gedit-view.c:786
+#: src/gedit-view.c:803
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:841
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:826
+#: src/gedit-view.c:843
 msgid "  INS"
 msgstr ""
 
@@ -871,9 +977,6 @@ msgstr "Edytor tekstu"
 #, fuzzy
 #~ msgid "_Manager"
 #~ msgstr "Menedżer..."
-
-#~ msgid "_Plugins"
-#~ msgstr "W_tyczki"
 
 #~ msgid "Browse"
 #~ msgstr "Przeglądaj"
@@ -955,10 +1058,6 @@ msgstr "Edytor tekstu"
 #~ msgstr "Dokumenty"
 
 #, fuzzy
-#~ msgid "Get info on current document."
-#~ msgstr "Wysyła bieżący dokument e-mailem"
-
-#, fuzzy
 #~ msgid "email"
 #~ msgstr "E-mail"
 
@@ -985,12 +1084,6 @@ msgstr "Edytor tekstu"
 #~ msgid "Reverse text"
 #~ msgstr "Przywraca tekst"
 
-#~ msgid "Hello World"
-#~ msgstr "Witaj świecie"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Przykładowa wtyczka \"witaj świecie\"."
-
 #~ msgid "Shell Output"
 #~ msgstr "Wynik działania powłoki"
 
@@ -1007,9 +1100,6 @@ msgstr "Edytor tekstu"
 
 #~ msgid "Insert Time"
 #~ msgstr "Wstaw czas"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Wstawia bieżącą datę i czas"
 
 #, fuzzy
 #~ msgid "Insert char"

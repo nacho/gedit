@@ -62,6 +62,7 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB ("SearchGoToLine", gedit_cmd_search_goto_line),
 	BONOBO_UI_VERB ("SettingsPreferences", gedit_cmd_settings_preferences),
 	BONOBO_UI_VERB ("About", gedit_cmd_help_about),
+	BONOBO_UI_VERB ("PluginsManager", gedit_cmd_tools_plugin_manager),
 
 	BONOBO_UI_VERB_END
 };

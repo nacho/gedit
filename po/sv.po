@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-01-18 09:59+0100\n"
+"POT-Creation-Date: 2002-01-22 15:42+0100\n"
 "PO-Revision-Date: 2002-01-17 04:06+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -22,9 +22,77 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Gnome-textredigerare"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:480
 msgid "gedit"
 msgstr "gedit"
+
+#: plugins/cvschangelog/cvschangelog.c:219
+msgid "CVS ChangeLog"
+msgstr "CVS ChangeLog"
+
+#: plugins/cvschangelog/cvschangelog.c:220
+#, fuzzy
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr ""
+"En insticksmodul som öppnar ChangeLog-filer som hittas i CVS commit-"
+"loggmeddelanden."
+
+#: plugins/cvschangelog/cvschangelog.c:222
+msgid "Copyright (C) 2002 - James Willcox"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:40
+msgid "_Word Count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:43
+msgid "Get info on current document."
+msgstr "Få information om det aktuella dokumentet."
+
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:401
+msgid "Word count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:147
+msgid "Update"
+msgstr "Uppdatera"
+
+#: plugins/docinfo/docinfo.c:402
+msgid ""
+"The word count plugin analyzes the current document and determines the "
+"number of words, lines, characters and non-space characters in it and "
+"display the result."
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:406 plugins/sample/sample.c:173
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr ""
+
+#: plugins/sample/sample.c:52
+#, fuzzy
+msgid "Hello World "
+msgstr "Hej världen"
+
+#: plugins/sample/sample.c:170
+msgid "Hello World"
+msgstr "Hej världen"
+
+#: plugins/sample/sample.c:171
+msgid "Sample 'hello world' plugin."
+msgstr "Exempel-\"Hej världen\"-insticksmodul."
+
+#: plugins/time/time.c:216
+msgid "Time"
+msgstr ""
+
+#: plugins/time/time.c:217
+#, fuzzy
+msgid "Inserts the current time into the current document."
+msgstr "Infogar aktuellt datum och tid"
+
+#: plugins/time/time.c:219
+msgid "Copyright (C) 2002 - Alex Roberts"
+msgstr ""
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, c-format
@@ -39,6 +107,36 @@ msgstr "Gå till rad..."
 #: src/dialogs/gedit-dialog-goto-line.c:124
 msgid "_Goto line"
 msgstr "_Gå till rad"
+
+#: src/dialogs/gedit-dialog-goto-line.c:140
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:45
+#, fuzzy
+msgid "Plugin"
+msgstr "_Insticksmoduler"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:46
+msgid "Load"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:418
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:426
+#, fuzzy
+msgid "Plugin Manager"
+msgstr "_Insticksmodulhanterare"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:539
+msgid "Could not create the Plugin Manager dialog"
+msgstr ""
 
 #: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 msgid "Replace"
@@ -138,11 +236,11 @@ msgstr "Inte implementerat än."
 msgid "The string \"%s\" has not been found."
 msgstr "Strängen \"%s\" kunde inte hittas."
 
-#: src/gedit-commands.c:411
+#: src/gedit-commands.c:419
 msgid "Impossible to update gedit settings."
 msgstr "Omöjligt att uppdatera gedit-inställningar."
 
-#: src/gedit-commands.c:482
+#: src/gedit-commands.c:483
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit är en liten och enkel textredigerare för Gnome"
 
@@ -180,8 +278,8 @@ msgstr "Ersätt i_nte"
 msgid "Select a filename to save"
 msgstr "Välj ett filnamn att spara"
 
-#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1091
-#: src/gedit-file.c:1132
+#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1094
+#: src/gedit-file.c:1137
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Läste in filen \"%s\""
@@ -282,7 +380,7 @@ msgstr "Dokumentet har inte återställts."
 msgid "File '%s' reverted."
 msgstr "Filen \"%s\" återställdes."
 
-#: src/gedit-file.c:1186
+#: src/gedit-file.c:1191
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -293,7 +391,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:579
+#: src/gedit-mdi.c:573
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -304,59 +402,69 @@ msgstr ""
 "\n"
 "Dina ändringar kommer att gå förlorade om du inte sparar dem."
 
-#: src/gedit-mdi.c:584
+#: src/gedit-mdi.c:578
 msgid "Do_n't save"
 msgstr "Spara i_nte"
 
-#: src/gedit-mdi.c:602
+#: src/gedit-mdi.c:596
 msgid "_Don't quit"
 msgstr "Avsluta in_te"
 
-#: src/gedit-mdi.c:606
+#: src/gedit-mdi.c:600
 msgid "_Don't close"
 msgstr "St_äng inte"
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:684
 msgid "(modified)"
 msgstr "(ändrad)"
 
-#: src/gedit-mdi.c:696
+#: src/gedit-mdi.c:690
 msgid "(readonly)"
 msgstr "(skrivskyddad)"
 
-#: src/gedit-plugins-engine.c:134
+#: src/gedit-plugins-engine.c:137
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Fel, kan inte öppna modulfilen \"%s\"\n"
 
-#: src/gedit-plugins-engine.c:149
+#: src/gedit-plugins-engine.c:152
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte initieringsfunktion."
 
-#: src/gedit-plugins-engine.c:159
+#: src/gedit-plugins-engine.c:162
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte aktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:172
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte inaktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:202
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Fel, omöjligt att initiera insticksmodulen \"%s\""
 
-#: src/gedit-plugins-engine.c:187
+#: src/gedit-plugins-engine.c:210
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr "Fel, insticksmodulen \"%s\" angav inte ett namn"
 
-#: src/gedit-plugins-engine.c:244
+#: src/gedit-plugins-engine.c:295 src/gedit-plugins-engine.c:355
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
+msgstr "Fel omöjligt att aktivera insticksmodulen \"%s\""
+
+#: src/gedit-plugins-engine.c:322
+#, fuzzy, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr "Fel omöjligt att aktivera insticksmodulen \"%s\""
+
+#: src/gedit-plugins-engine.c:397
+#, fuzzy, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Fel omöjligt att aktivera insticksmodulen \"%s\""
 
 #: src/gedit-print.c:158
@@ -747,16 +855,16 @@ msgstr "_Verktyg"
 msgid "_Undo"
 msgstr "_Ångra"
 
-#: src/gedit-view.c:786
+#: src/gedit-view.c:803
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Rad %d, kolumn %d"
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:841
 msgid "  OVR"
 msgstr "  ÖVR"
 
-#: src/gedit-view.c:826
+#: src/gedit-view.c:843
 msgid "  INS"
 msgstr "  INF"
 
@@ -821,9 +929,6 @@ msgstr "Gnome-textredigeraren"
 #~ msgid "_Manager"
 #~ msgstr "_Hanterare"
 
-#~ msgid "_Plugins"
-#~ msgstr "_Insticksmoduler"
-
 #~ msgid "ASCII table"
 #~ msgstr "ASCII-tabell"
 
@@ -842,14 +947,6 @@ msgstr "Gnome-textredigeraren"
 
 #~ msgid "Number Converter"
 #~ msgstr "Talkonverterare"
-
-#~ msgid "CVS ChangeLog"
-#~ msgstr "CVS ChangeLog"
-
-#~ msgid "A plugin that opens ChangeLogs found in CVS commit log messages."
-#~ msgstr ""
-#~ "En insticksmodul som öppnar ChangeLog-filer som hittas i CVS commit-"
-#~ "loggmeddelanden."
 
 #~ msgid "diff"
 #~ msgstr "diff"
@@ -914,9 +1011,6 @@ msgstr "Gnome-textredigeraren"
 #~ msgid "Document info"
 #~ msgstr "Dokumentinformation"
 
-#~ msgid "Get info on current document."
-#~ msgstr "Få information om det aktuella dokumentet."
-
 #~ msgid ""
 #~ "This plugin displays a pop-up dialog which contains basic information on "
 #~ "current document."
@@ -949,12 +1043,6 @@ msgstr "Gnome-textredigeraren"
 #~ msgid "Reverse text"
 #~ msgstr "Skriv texten baklänges"
 
-#~ msgid "Hello World"
-#~ msgstr "Hej världen"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Exempel-\"Hej världen\"-insticksmodul."
-
 #~ msgid ""
 #~ "The shell command entry is empty.\n"
 #~ "\n"
@@ -984,9 +1072,6 @@ msgstr "Gnome-textredigeraren"
 
 #~ msgid "Insert Time"
 #~ msgstr "Infoga tid"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Infogar aktuellt datum och tid"
 
 #~ msgid "The gEdit Web Browse Plugin"
 #~ msgstr "gEdit-webbläsarinsticksmodulen"
@@ -1101,9 +1186,6 @@ msgstr "Gnome-textredigeraren"
 
 #~ msgid "Paragraphs"
 #~ msgstr "Stycken"
-
-#~ msgid "Update"
-#~ msgstr "Uppdatera"
 
 #~ msgid "Words"
 #~ msgstr "Ord"

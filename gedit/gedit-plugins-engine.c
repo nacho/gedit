@@ -403,3 +403,12 @@ gedit_plugins_engine_update_plugins_ui (BonoboWindow* window, gboolean new_windo
 	}
 }
 
+gboolean
+gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (plugin != NULL, FALSE);
+
+	return (plugin->configure != NULL);	
+}

@@ -142,7 +142,8 @@ gedit_view_get_lines (GtkTextView  *text_view,
 {
 	GtkTextIter iter;
 	gint count;
-	gint size;  
+	gint size;
+      	gint last_line_num;	
 
 	gedit_debug (DEBUG_VIEW, "");
 
@@ -161,13 +162,12 @@ gedit_view_get_lines (GtkTextView  *text_view,
   	while (!gtk_text_iter_is_end (&iter))
     	{
 		gint y, height;
-		gint line_num;
       
 		gtk_text_view_get_line_yrange (text_view, &iter, &y, &height);
 
 		g_array_append_val (buffer_coords, y);
-		line_num = gtk_text_iter_get_line (&iter);
-		g_array_append_val (numbers, line_num);
+		last_line_num = gtk_text_iter_get_line (&iter);
+		g_array_append_val (numbers, last_line_num);
       	
 		++count;
 
@@ -175,6 +175,23 @@ gedit_view_get_lines (GtkTextView  *text_view,
 			break;
       
 		gtk_text_iter_forward_line (&iter);
+	}
+
+	if (gtk_text_iter_is_end (&iter))
+    	{
+		gint y, height;
+		gint line_num;
+      
+		gtk_text_view_get_line_yrange (text_view, &iter, &y, &height);
+
+		line_num = gtk_text_iter_get_line (&iter);
+
+		if (line_num != last_line_num)
+		{
+			g_array_append_val (buffer_coords, y);
+			g_array_append_val (numbers, line_num);
+			++count;
+		}
 	}
 
 	*countp = count;

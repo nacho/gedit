@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.0\n"
-"POT-Creation-Date: 2002-01-18 09:59+0100\n"
+"POT-Creation-Date: 2002-01-22 15:42+0100\n"
 "PO-Revision-Date: 2001-06-25 18:55+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian (Nynorsk)\n"
@@ -17,8 +17,74 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:480
 msgid "gedit"
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:219
+msgid "CVS ChangeLog"
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:220
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:222
+msgid "Copyright (C) 2002 - James Willcox"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:40
+msgid "_Word Count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:43
+#, fuzzy
+msgid "Get info on current document."
+msgstr "Skriv ut dokumentet"
+
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:401
+msgid "Word count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:147
+msgid "Update"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:402
+msgid ""
+"The word count plugin analyzes the current document and determines the "
+"number of words, lines, characters and non-space characters in it and "
+"display the result."
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:406 plugins/sample/sample.c:173
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr ""
+
+#: plugins/sample/sample.c:52
+msgid "Hello World "
+msgstr ""
+
+#: plugins/sample/sample.c:170
+msgid "Hello World"
+msgstr ""
+
+#: plugins/sample/sample.c:171
+#, fuzzy
+msgid "Sample 'hello world' plugin."
+msgstr "Bruk den valde tilleggsmodulen."
+
+#: plugins/time/time.c:216
+msgid "Time"
+msgstr ""
+
+#: plugins/time/time.c:217
+#, fuzzy
+msgid "Inserts the current time into the current document."
+msgstr "Snur om på merkinga"
+
+#: plugins/time/time.c:219
+msgid "Copyright (C) 2002 - Alex Roberts"
 msgstr ""
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
@@ -36,6 +102,36 @@ msgstr "&Gå til linje ..."
 #, fuzzy
 msgid "_Goto line"
 msgstr "Gå til linje"
+
+#: src/dialogs/gedit-dialog-goto-line.c:140
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:45
+#, fuzzy
+msgid "Plugin"
+msgstr "Tilleggsmodular"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:46
+msgid "Load"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:418
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:426
+#, fuzzy
+msgid "Plugin Manager"
+msgstr "&Plugin-handsamar ..."
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:539
+msgid "Could not create the Plugin Manager dialog"
+msgstr ""
 
 #: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 #, fuzzy
@@ -143,11 +239,11 @@ msgstr ""
 msgid "The string \"%s\" has not been found."
 msgstr "Fann ikkje søketekst."
 
-#: src/gedit-commands.c:411
+#: src/gedit-commands.c:419
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:482
+#: src/gedit-commands.c:483
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 
@@ -187,8 +283,8 @@ msgstr "Byt ut"
 msgid "Select a filename to save"
 msgstr "Vel det ikontemaet du vil bruka:"
 
-#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1091
-#: src/gedit-file.c:1132
+#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1094
+#: src/gedit-file.c:1137
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "lastar fil"
@@ -283,7 +379,7 @@ msgstr "Opna dokument."
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1186
+#: src/gedit-file.c:1191
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -291,7 +387,7 @@ msgid ""
 "%s."
 msgstr "Feil ved opning av fil."
 
-#: src/gedit-mdi.c:579
+#: src/gedit-mdi.c:573
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -299,61 +395,71 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:584
+#: src/gedit-mdi.c:578
 msgid "Do_n't save"
 msgstr ""
 
-#: src/gedit-mdi.c:602
+#: src/gedit-mdi.c:596
 msgid "_Don't quit"
 msgstr ""
 
-#: src/gedit-mdi.c:606
+#: src/gedit-mdi.c:600
 msgid "_Don't close"
 msgstr ""
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:684
 #, fuzzy
 msgid "(modified)"
 msgstr "endra"
 
-#: src/gedit-mdi.c:696
+#: src/gedit-mdi.c:690
 #, fuzzy
 msgid "(readonly)"
 msgstr "berre lesing"
 
-#: src/gedit-plugins-engine.c:134
+#: src/gedit-plugins-engine.c:137
 #, fuzzy, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Feil: Kan ikkje opna oppsett-fila 'smb.conf'"
 
-#: src/gedit-plugins-engine.c:149
+#: src/gedit-plugins-engine.c:152
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:159
+#: src/gedit-plugins-engine.c:162
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:172
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:202
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:187
+#: src/gedit-plugins-engine.c:210
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:244
+#: src/gedit-plugins-engine.c:295 src/gedit-plugins-engine.c:355
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:322
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:397
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
 
 #: src/gedit-print.c:158
@@ -801,16 +907,16 @@ msgstr "Til:"
 msgid "_Undo"
 msgstr "Angra"
 
-#: src/gedit-view.c:786
+#: src/gedit-view.c:803
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:841
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:826
+#: src/gedit-view.c:843
 msgid "  INS"
 msgstr ""
 
@@ -886,10 +992,6 @@ msgstr ""
 #~ msgid "_Manager"
 #~ msgstr "Behandlar"
 
-#, fuzzy
-#~ msgid "_Plugins"
-#~ msgstr "Tilleggsmodular"
-
 #~ msgid "Browse"
 #~ msgstr "Bla gjennom"
 
@@ -939,10 +1041,6 @@ msgstr ""
 #~ msgstr "Dokument"
 
 #, fuzzy
-#~ msgid "Get info on current document."
-#~ msgstr "Skriv ut dokumentet"
-
-#, fuzzy
 #~ msgid "email"
 #~ msgstr "e-post: "
 
@@ -965,10 +1063,6 @@ msgstr ""
 #~ msgid "Reverse text"
 #~ msgstr "Omvendt"
 
-#, fuzzy
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Bruk den valde tilleggsmodulen."
-
 #~ msgid "Shell Output"
 #~ msgstr "Meldingar frå skalet"
 
@@ -987,10 +1081,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Insert Time"
 #~ msgstr "Set inn fil"
-
-#, fuzzy
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Snur om på merkinga"
 
 #, fuzzy
 #~ msgid "Insert char"

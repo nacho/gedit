@@ -1084,11 +1084,16 @@ gboolean
 gedit_file_open_recent (GeditMDIChild *child, gchar* uri)
 {
 	gboolean ret;
-	gedit_debug (DEBUG_FILE, "");
+	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 	
-	ret = gedit_file_open_real (uri, child);	
+	ret = gedit_file_open_real (uri, child);
+
 	if (ret)
-		gedit_utils_flash_va (_("Loaded file '%s'"), uri);
+	{
+		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
+		gedit_utils_flash_va (_("Loaded file '%s'"), t);
+		g_free (t);
+	}
 
 	gedit_debug (DEBUG_FILE, "END");
 

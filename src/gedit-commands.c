@@ -373,6 +373,14 @@ gedit_cmd_search_goto_line (BonoboUIComponent *uic, gpointer user_data, const gc
 	gedit_dialog_goto_line ();
 }
 
+void 
+gedit_cmd_tools_plugin_manager (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	gedit_dialog_plugin_manager ();
+}
+
 void
 gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
@@ -444,16 +452,9 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	GdkPixbuf* pixbuf;
 	
 	gchar *authors[] = {
-		"", "", 
-		/*
-		"", "", "", "",
-		"James Willcox <jwillcox@cs.indiana.edu>",
-		"Jason Leach <jasonleach@usa.net>",
-		N_("Thanks to:"),
-		"",
-		*/
 		"Paolo Maggi <maggi@athena.polito.it>",
 		"Chema Celorio <chema@celorio.com>", 
+		"James Willcox <jwillcox@cs.indiana.edu>",
 		NULL
 	};
 	
@@ -501,4 +502,5 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	gtk_widget_show (about);
 }
+
 

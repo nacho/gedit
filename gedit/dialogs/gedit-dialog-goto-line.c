@@ -136,8 +136,9 @@ dialog_goto_line_get_dialog (void)
 	dialog->entry = glade_xml_get_widget (gui, "entry");
 
 	if (!dialog->entry) {
-		g_print
-		    ("Could not find the required widgets inside goto-line.glade2.\n");
+		g_warning (
+			_("Could not find the required widgets inside goto-line.glade2.\n"));
+		g_object_unref (gui);
 		return NULL;
 	}
 	

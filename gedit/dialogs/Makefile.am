@@ -15,12 +15,14 @@ libdialogs_a_SOURCES = 			\
 	gedit-dialog-replace.c		\
 	gedit-preferences-dialog.h	\
 	gedit-preferences-dialog.c	\
+	gedit-dialog-plugin-manager.c	\
 	gedit-dialogs.h		
 
 glade_DATA =			\
 	uri.glade2		\
 	goto-line.glade2	\
 	replace.glade2		\
+	plugin-manager.glade2	\
 	gedit-preferences.glade2
 
 EXTRA_DIST = $(glade_DATA) 

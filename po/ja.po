@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2002-01-18 09:59+0100\n"
+"POT-Creation-Date: 2002-01-22 15:42+0100\n"
 "PO-Revision-Date: 2001-06-27 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -19,9 +19,74 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:480
 msgid "gedit"
 msgstr "gedit"
+
+#: plugins/cvschangelog/cvschangelog.c:219
+msgid "CVS ChangeLog"
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:220
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:222
+msgid "Copyright (C) 2002 - James Willcox"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:40
+msgid "_Word Count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:43
+msgid "Get info on current document."
+msgstr "現在のドキュメントから情報を取得"
+
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:401
+msgid "Word count"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:147
+msgid "Update"
+msgstr "更新"
+
+#: plugins/docinfo/docinfo.c:402
+msgid ""
+"The word count plugin analyzes the current document and determines the "
+"number of words, lines, characters and non-space characters in it and "
+"display the result."
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:406 plugins/sample/sample.c:173
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr ""
+
+#: plugins/sample/sample.c:52
+#, fuzzy
+msgid "Hello World "
+msgstr "Hello World"
+
+#: plugins/sample/sample.c:170
+msgid "Hello World"
+msgstr "Hello World"
+
+#: plugins/sample/sample.c:171
+msgid "Sample 'hello world' plugin."
+msgstr "'hello world'を出力するサンプルプラグインです。"
+
+#: plugins/time/time.c:216
+msgid "Time"
+msgstr ""
+
+#: plugins/time/time.c:217
+#, fuzzy
+msgid "Inserts the current time into the current document."
+msgstr "現在の時間をファイルに挿入"
+
+#: plugins/time/time.c:219
+msgid "Copyright (C) 2002 - Alex Roberts"
+msgstr ""
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, fuzzy, c-format
@@ -38,6 +103,36 @@ msgstr "指定行へ移動(_L)..."
 #, fuzzy
 msgid "_Goto line"
 msgstr "指定行へ移動"
+
+#: src/dialogs/gedit-dialog-goto-line.c:140
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:45
+#, fuzzy
+msgid "Plugin"
+msgstr "プラグイン(_P)"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:46
+msgid "Load"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:418
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:426
+#, fuzzy
+msgid "Plugin Manager"
+msgstr "プラグインマネージャ..."
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:539
+msgid "Could not create the Plugin Manager dialog"
+msgstr ""
 
 #: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 #, fuzzy
@@ -145,11 +240,11 @@ msgstr ""
 msgid "The string \"%s\" has not been found."
 msgstr "検索文字列は見つかりませんでした。"
 
-#: src/gedit-commands.c:411
+#: src/gedit-commands.c:419
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:482
+#: src/gedit-commands.c:483
 #, fuzzy
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "geditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
@@ -193,8 +288,8 @@ msgstr "置換"
 msgid "Select a filename to save"
 msgstr "有効にするプラグインの選択:"
 
-#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1091
-#: src/gedit-file.c:1132
+#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1094
+#: src/gedit-file.c:1137
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "読み込み完了: %s"
@@ -296,7 +391,7 @@ msgstr "この文書は保存されていません。"
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1186
+#: src/gedit-file.c:1191
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -307,7 +402,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:579
+#: src/gedit-mdi.c:573
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -315,59 +410,69 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:584
+#: src/gedit-mdi.c:578
 msgid "Do_n't save"
 msgstr ""
 
-#: src/gedit-mdi.c:602
+#: src/gedit-mdi.c:596
 msgid "_Don't quit"
 msgstr ""
 
-#: src/gedit-mdi.c:606
+#: src/gedit-mdi.c:600
 msgid "_Don't close"
 msgstr ""
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:684
 msgid "(modified)"
 msgstr "(修正されました)"
 
-#: src/gedit-mdi.c:696
+#: src/gedit-mdi.c:690
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
 
-#: src/gedit-plugins-engine.c:134
+#: src/gedit-plugins-engine.c:137
 #, fuzzy, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "エラー: モジュール %s を開けません"
 
-#: src/gedit-plugins-engine.c:149
+#: src/gedit-plugins-engine.c:152
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:159
+#: src/gedit-plugins-engine.c:162
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:172
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:202
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:187
+#: src/gedit-plugins-engine.c:210
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:244
+#: src/gedit-plugins-engine.c:295 src/gedit-plugins-engine.c:355
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:322
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:397
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
 
 #: src/gedit-print.c:158
@@ -798,16 +903,16 @@ msgstr "宛先(_T):"
 msgid "_Undo"
 msgstr "元に戻す"
 
-#: src/gedit-view.c:786
+#: src/gedit-view.c:803
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:841
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:826
+#: src/gedit-view.c:843
 msgid "  INS"
 msgstr ""
 
@@ -871,9 +976,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "_Manager"
 #~ msgstr "マネージャ(_M) ..."
-
-#~ msgid "_Plugins"
-#~ msgstr "プラグイン(_P)"
 
 #~ msgid "ASCII table"
 #~ msgstr "ASCIIテーブル"
@@ -957,9 +1059,6 @@ msgstr ""
 #~ msgid "Document info"
 #~ msgstr "ドキュメント情報"
 
-#~ msgid "Get info on current document."
-#~ msgstr "現在のドキュメントから情報を取得"
-
 #~ msgid ""
 #~ "This plugin displays a pop-up dialog which contains basic information on "
 #~ "current document."
@@ -992,12 +1091,6 @@ msgstr ""
 #~ msgid "Reverse text"
 #~ msgstr "テキストをリバースします"
 
-#~ msgid "Hello World"
-#~ msgstr "Hello World"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "'hello world'を出力するサンプルプラグインです。"
-
 #~ msgid ""
 #~ "The shell command entry is empty.\n"
 #~ "\n"
@@ -1024,9 +1117,6 @@ msgstr ""
 
 #~ msgid "Insert Time"
 #~ msgstr "現在時刻"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "現在の時間をファイルに挿入"
 
 #~ msgid "Dec#"
 #~ msgstr "10進数"
@@ -1135,9 +1225,6 @@ msgstr ""
 
 #~ msgid "Paragraphs"
 #~ msgstr "段落"
-
-#~ msgid "Update"
-#~ msgstr "更新"
 
 #~ msgid "Words"
 #~ msgstr "ワード"

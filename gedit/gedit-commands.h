@@ -64,4 +64,6 @@ void gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data,
 
 void gedit_cmd_help_about 	(BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 
+void gedit_cmd_tools_plugin_manager 	(BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
+
 #endif /* __GEDIT_COMMANDS_H__ */ 
