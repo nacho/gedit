@@ -885,7 +885,7 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 		if ( strchr( buffer, ']' ) == 0 )
 		  break;
 		*strchr( buffer, ']' ) = 0;
-		if ( strcmp( buffer, "_Plugins" ) )
+		if ( strcmp( buffer, "Plugins" ) )
 		  break;
 		info = g_malloc0( sizeof( plugin_info ) );
 		info->type = PLUGIN_STANDARD;
