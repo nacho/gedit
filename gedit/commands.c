@@ -48,7 +48,7 @@ static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
 static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
 static void close_doc_common(gE_data *data);
 static void close_window_common(gE_window *w);
-static gint file_saveas_destroy(GtkWidget *w, gpointer cbdata);
+static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static gint file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
 static void line_pos_cb(GtkWidget *w, gE_data *data);
@@ -56,6 +56,8 @@ static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb(GtkWidget *w, gE_data *data);
 
 static GtkWidget *open_fs, *save_fs;
+GtkWidget *ssel = NULL;
+GtkWidget *osel = NULL;
 
 /* handles changes in the text widget... */
 void
@@ -183,118 +185,6 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	} /* switch */
 	
 } /* popup_close_verify */
-
-
-/*
- * file open callback : user selects "Ok"
- */
-gint
-file_open_ok_sel(GtkWidget *widget, gE_data *data)
-{
-	gchar *filename;
-	gchar *nfile;
-	struct stat sb;
-	gE_document *doc;
-	GtkFileSelection *fs;
-
-
-	fs = GTK_FILE_SELECTION(open_fs);
-
-	filename = gtk_file_selection_get_filename(fs);
-
-	if (filename != NULL) {
-		if (stat(filename, &sb) == -1)
-			return TRUE;
-
-		if (S_ISDIR(sb.st_mode)) {
-			nfile = g_malloc0(strlen (filename) + 3);
-			sprintf(nfile, "%s/.", filename);
-			gtk_file_selection_set_filename(GTK_FILE_SELECTION(
-				open_fs), nfile);
-			g_free(nfile);
-			return TRUE;
-		}
-			g_print("file_open_ok_sel: filename=%s\n",filename);
-
-		   if ((doc = gE_document_current ()))
-		     {
-		      if (doc->filename || doc->changed)
-		        doc = gE_document_new_with_file (filename);
-		      else
-		        gE_file_open (doc, filename);
-		     }
-		   else
-		     doc = gE_document_new_with_file (filename);
-	
-		
-/*..with_file is better		  if ((doc = gE_document_new()))
-		    {
-		      gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		      gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		    }
-
-
-		nfile = g_strdup(filename);
-		gE_file_open(doc, nfile);*/
-	}
-	if (GTK_WIDGET_VISIBLE(fs))
-		gtk_widget_hide (GTK_WIDGET(fs));
-
-	return TRUE;
-} /* file_open_ok_sel */
-
-/*
- * file save-as callback : user selects "Ok"
- *
- * data->temp1 must be the file saveas dialog box
- */
-gint
-file_saveas_ok_sel(GtkWidget *w, gE_data *data)
-{
-	char *fname;
-	GtkWidget *safs;
-
-	g_assert(data != NULL);
-	safs = (GtkWidget *)(data->temp1);
-	g_assert(safs != NULL);
-	g_assert(gE_document_current() != NULL);
-
-	fname = gtk_file_selection_get_filename(GTK_FILE_SELECTION(safs));
-	if (fname != NULL) {
-		if (gE_file_save(gE_document_current(), fname) == 0) {
-			gtk_widget_destroy(data->temp1);
-			data->temp1 = NULL;
-			data->temp2 = NULL;
-			data->flag = TRUE;	/* indicate saved */
-		} else
-			data->flag = FALSE;	/* indicate not saved */
-	}
-
-	return TRUE;
-} /* file_saveas_ok_sel */
-
-
-/*
- * file open callback : user selects "Cancel"
- */
-static gint
-file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
-{
-  if (GTK_WIDGET_VISIBLE(fs))
-    gtk_widget_hide (GTK_WIDGET(fs));
-  return TRUE;
-}
-
-
-/*
- * file selection dialog callback
- */
-static gint
-file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
-{
-	fs = NULL;
-	return TRUE;
-}
 
 
 /* --- Notebook Tab Stuff --- */
@@ -489,17 +379,11 @@ filenames_dropped (GtkWidget * widget,
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gE_data *data = (gE_data *)cbdata;
-	gE_window *w;
 	gE_document *doc;
 
-	/*g_assert(data != NULL);
-	w = data->window;
-	g_assert(w != NULL);
-	gE_msgbar_set(w, MSGBAR_FILE_NEW);*/
 	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
 	doc = gE_document_new();
-	/*doc = gE_document_current();*/
+
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD(doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(doc));
 }
@@ -523,37 +407,102 @@ void window_new_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 
+/*
+ * file open callback : user selects "Ok"
+ */
+static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
+{
+	gchar *filename;
+	gchar *nfile;
+	struct stat sb;
+	gE_document *doc;
+	/*GtkFileSelection *fs;
+
+
+	fs = GTK_FILE_SELECTION(open_fs);*/
+
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));
+
+	if (filename != NULL) 
+	  {
+		if (stat(filename, &sb) == -1)
+			return;
+
+		if (S_ISDIR(sb.st_mode)) 
+		  {
+			nfile = g_malloc0(strlen (filename) + 3);
+			sprintf(nfile, "%s/.", filename);
+			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
+			g_free(nfile);
+			return;
+		  }
+
+		 if ((doc = gE_document_current ()))
+		   {
+		     if (doc->filename || doc->changed)
+		       doc = gE_document_new_with_file (filename);
+		     else
+		       gE_file_open (doc, filename);
+		   }
+		 else
+		     doc = gE_document_new_with_file (filename);
+	
+		
+
+	  }
+
+	gtk_widget_hide (GTK_WIDGET(osel));
+
+} /* file_open_ok_sel */
+
+/*
+ * file selection dialog callback
+ */
+static gint
+file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
+{
+	gtk_widget_destroy (GTK_WIDGET(fs));
+	fs = NULL;
+	
+	return TRUE;
+}
+
+/*
+ * file open callback : user selects "Cancel"
+ */
+static gint
+file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
+{
+  if (GTK_WIDGET_VISIBLE(fs))
+    gtk_widget_hide (GTK_WIDGET(fs));
+  return TRUE;
+}
+
 void file_open_cb(GtkWidget *widget, gpointer cbdata)
 {
-	/*gE_data *data = (gE_data *)cbdata;
-	gE_window *w;*/
 	
-	static GtkWidget *open_fileselector;
+	/*static GtkWidget *open_fileselector;*/
 	
+	if (osel == NULL)
+	  osel = gtk_file_selection_new(_("Open File..."));
+		
+	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
 	
-	/*g_assert(data != NULL);
-	w = data->window;
-	g_assert(w != NULL);*/
+	/*gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
+			(GtkSignalFunc)file_sel_destroy, open_fs);*/
+			
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->ok_button), 
+				   "clicked", (GtkSignalFunc)file_open_ok_sel,
+				   NULL);
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->cancel_button),
+				   "clicked", (GtkSignalFunc)file_cancel_sel,
+			       osel);
 
-	if (open_fs == NULL) {
-		open_fs = gtk_file_selection_new(_("Open File..."));
-		gtk_file_selection_hide_fileop_buttons(
-			GTK_FILE_SELECTION(open_fs));
-		gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
-			(GtkSignalFunc)file_sel_destroy, open_fs);
-		gtk_signal_connect(GTK_OBJECT(
-			GTK_FILE_SELECTION(open_fs)->ok_button), 
-			"clicked", (GtkSignalFunc)file_open_ok_sel, NULL);
-		gtk_signal_connect(GTK_OBJECT(
-			GTK_FILE_SELECTION(open_fs)->cancel_button),
-			"clicked", (GtkSignalFunc)file_cancel_sel,
-			open_fs);
-	}
 
-	if (GTK_WIDGET_VISIBLE(open_fs))
+/*	if (GTK_WIDGET_VISIBLE(open_fs))
 		return;
-
-	gtk_widget_show(open_fs);
+*/
+	gtk_widget_show(osel);
 }
 
 
@@ -591,66 +540,88 @@ file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 }
 */
 
-gint
-file_save_cb(GtkWidget *widget, gpointer cbdata)
+void file_save_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gchar *fname;
-	gE_data *data = (gE_data *)cbdata;
+	gE_document *doc;
 
-	g_assert(data != NULL);
-
-	if (gE_document_current()->changed)
+	if (gE_document_current())
 	  {
- 	    fname = gE_document_current()->filename;
- 	    if (data->document == NULL)
- 	      data->document = gE_document_current();
+	    doc = gE_document_current();
+	    if (doc->changed)
+	      {
+ 	        fname = doc->filename;
  	    
-	    if (fname == NULL)
-	      file_save_as_cb(NULL, data);
-	    else
-	      if ((gE_file_save(gE_document_current(),
-	               gE_document_current()->filename)) != 0)
-	        {
-		 gnome_app_flash (mdi->active_window, _("Read only file!"));
-		 file_save_as_cb(NULL, data);
-        	}
+	        if (fname == NULL)
+	           file_save_as_cb(widget, NULL);
+	        else
+	           if ((gE_file_save(doc, doc->filename)) != 0)
+	             {
+		       gnome_app_flash (mdi->active_window, _("Read only file!"));
+		       file_save_as_cb(widget, NULL);
+        	     }
+              }
           }
-        
-        return 0;
-
 }
 
-void
-file_save_as_cb(GtkWidget *widget, gpointer cbdata)
+
+/*
+ * file save-as callback : user selects "Ok"
+ *
+ * data->temp1 must be the file saveas dialog box
+ */
+static void file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 {
-	static GtkWidget *safs;
-	gE_data *data = (gE_data *)cbdata;
+	gchar *fname = gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel));
+	gE_document *doc;
 
-	g_assert(data != NULL);
+	if (mdi->active_child == NULL)
+	  return;
+	
+	doc = gE_document_current();
+	
+	if (fname) 
+	  {
+	    if (gE_file_save(doc, fname) != 0) 
+	      gnome_app_flash (mdi->active_window, _("Error saving file!"));
+	  }
 
-	safs = gtk_file_selection_new(_("Save As..."));
-
-	data->temp1 = safs;
-	gtk_signal_connect(GTK_OBJECT(safs), "destroy",
-		(GtkSignalFunc)file_saveas_destroy, safs);
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(safs)->ok_button),
-		"clicked", (GtkSignalFunc)file_saveas_ok_sel, data);
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(safs)->cancel_button),
-		"clicked", (GtkSignalFunc)file_saveas_destroy, safs);
-
-	gtk_widget_show(safs);
-}
-
+	gtk_widget_destroy (GTK_WIDGET (ssel));
+	ssel = NULL;
+} /* file_saveas_ok_sel */
 
 /*
  * destroy the "save as" dialog box
  */
 static gint
-file_saveas_destroy(GtkWidget *w, gpointer cbdata)
+file_saveas_destroy(GtkWidget *w, GtkWidget **sel)
 {
-	gtk_widget_destroy((GtkWidget *)cbdata);
+	gtk_widget_destroy(*sel);
+	*sel = NULL;
+	
 	return TRUE;
 }
+
+void
+file_save_as_cb(GtkWidget *widget, gpointer cbdata)
+{
+
+	ssel = gtk_file_selection_new(_("Save As..."));
+
+/*	gtk_signal_connect(GTK_OBJECT(safs), "destroy",
+		(GtkSignalFunc)file_saveas_destroy, safs);*/
+		
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(ssel)->ok_button),
+				   "clicked", (GtkSignalFunc)file_saveas_ok_sel, 
+				   NULL);
+	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(ssel)->cancel_button),
+				"clicked", (GtkSignalFunc)file_saveas_destroy, 
+				&ssel);
+
+	gtk_widget_show(ssel);
+}
+
+
 
 
 /*

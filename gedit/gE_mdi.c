@@ -434,6 +434,7 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	   if (buf)
 	     {
 	      gtk_editable_insert_text (GTK_EDITABLE (GE_DOCUMENT(mdi->active_child)->text), buf, strlen (buf), &pos);
+	      GE_DOCUMENT(mdi->active_child)->changed_id = child->changed_id;
 	     }
 	     
 	   }

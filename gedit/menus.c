@@ -83,11 +83,11 @@ void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
         GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), N_("Create a new document"),
-				  file_new_cb, (gpointer) GE_DATA),
+				  file_new_cb, NULL),
 
-	GNOMEUIINFO_MENU_OPEN_ITEM(file_open_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_OPEN_ITEM(file_open_cb, NULL),
 
-	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, NULL),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, NULL),
 

@@ -1,3 +1,23 @@
+1999-04-08 (15:05) Alex Roberts  <bse@gedit.pn.org>
+
+	* menus.c: Instead of sending GE_DATA gpointers, send NULL. The
+	  gE_data pointers dont do anything. THis was adding to our 
+	  original save problems.
+
+	* commands.c: Ok i fixed the Save As bugs. Ok, installed a 
+	  global pointer for each dialog (save and open). Now, instead
+	  of packing them into a gE_data (which was borking up before)
+	  we just reference these global dialogs...
+	  (..) Removed masses of code in the file op's callbacks that was
+	  making gE_data's.. we don't need them now.
+	  (file_open_ok_sel) Made a static void, instead of a gint function.
+	  (file_save_cb) 
+	  (file_saveas_ok_sel) Made a void, instead of a gint.
+	
+	* gE_mdi.c: (gE_add_view) Set the changed_id of the view to the same
+	  as the one in the original child. Now I just have to implement 
+	  keeping the views in sync with each other.
+
 1999-04-07 (15:13) Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_files: Tidied up code. Removed old, commented out, cruft.
