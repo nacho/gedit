@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-document.h
+ * gedit-plugin.h
  * This file is part of gedit
  *
  * Copyright (C) 2002 Paolo Maggi 

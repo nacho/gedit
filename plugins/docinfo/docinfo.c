@@ -149,7 +149,7 @@ get_dialog ()
 
 	/* Add the update button */
 	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog), 
-				 _("Update"), GTK_STOCK_REFRESH, GTK_RESPONSE_OK);
+				 _("_Update"), GTK_STOCK_REFRESH, GTK_RESPONSE_OK);
 
 	content			= glade_xml_get_widget (gui, "docinfo_dialog_content");
 

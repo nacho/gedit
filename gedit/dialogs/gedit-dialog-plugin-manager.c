@@ -528,6 +528,8 @@ help_button_pressed (GeditDialogPluginManager * dialog)
 	/* FIXME */
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	gedit_plugin_program_location_dialog ("diff", "diff", GTK_WINDOW (dialog->dialog));
+
 }
 
 static void

@@ -255,3 +255,26 @@ gedit_get_ui_component_from_window (BonoboWindow* win)
 
 	return bonobo_mdi_get_ui_component_from_window (win);
 }
+
+/* Return a newly allocated list */
+GList*
+gedit_get_open_documents (void)
+{
+	GList* children;
+	GList* docs = NULL;
+	g_return_val_if_fail (gedit_mdi != NULL, NULL);
+
+	children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+	while (children != NULL)
+	{
+		GeditMDIChild *child;
+
+		child = GEDIT_MDI_CHILD (children->data);
+		
+		docs = g_list_append (docs, child->document);
+		children = g_list_next (children);
+	}
+	
+	return docs;
+}

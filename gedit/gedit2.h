@@ -48,6 +48,7 @@ GeditDocument* 		gedit_get_active_document 		(void);
 GeditView* 		gedit_get_active_view 			(void);
 GList* 			gedit_get_top_windows 			(void);
 BonoboUIComponent*	gedit_get_ui_component_from_window 	(BonoboWindow* win);
+GList*			gedit_get_open_documents 		(void);
 
 
 #endif /* __GEDIT2_H__ */

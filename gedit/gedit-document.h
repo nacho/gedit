@@ -105,6 +105,9 @@ gboolean	gedit_document_save 		(GeditDocument* doc, GError **error);
 gboolean	gedit_document_save_as 		(GeditDocument* doc, 
 						 const gchar *uri, GError **error);
 
+gboolean	gedit_document_save_a_copy_as 	(GeditDocument* doc, 
+						 const gchar *uri, GError **error);
+
 gboolean 	gedit_document_revert 		(GeditDocument *doc,  GError **error);
 
 gboolean	gedit_document_is_untitled 	(const GeditDocument* doc);

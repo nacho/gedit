@@ -838,6 +838,27 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 	return ret;
 }
 
+gboolean	
+gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **error)
+{
+	gboolean m;
+	gboolean ret;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+	
+	m = gedit_document_get_modified (doc);
+
+	ret = gedit_document_save_as_real (doc, uri, FALSE, error);
+	
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), m);	 
+
+	return ret;
+}
+
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	       gboolean create_backup_copy, GError **error)

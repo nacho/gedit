@@ -1,18 +1,22 @@
-plugindir = $(libdir)/gedit/plugins
+# Diff plugin
+plugindir = $(libdir)/gedit2/plugins
+
+INCLUDES = \
+	-I$(top_srcdir)/src 				\
+	$(GEDIT_CFLAGS) 				\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"	\
+	-DG_DISABLE_DEPRECATED				\
+	-DGDK_DISABLE_DEPRECATED			\
+	-DGTK_DISABLE_DEPRECATED			\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-DGNOME_DISABLE_DEPRECATED			
 
 plugin_LTLIBRARIES = libdiff.la
 
 libdiff_la_SOURCES = diff.c
 
-INCLUDES =						\
-	-I$(top_srcdir)/src				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
-	-I$(includedir)					\
-	$(GNOME_INCLUDEDIR) \
-	$(EXTRA_GNOME_CFLAGS)
-
-gladedir = $(datadir)/gedit/glade
-glade_DATA = diff.glade
+gladedir = $(datadir)/gedit2/glade
+glade_DATA = diff.glade2
 
 EXTRA_DIST = $(glade_DATA)
