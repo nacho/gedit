@@ -42,6 +42,7 @@
 #include "GNOME_Gedit.h"
 #include "gedit-file.h"
 #include "gedit-mdi.h"
+#include "gedit-utils.h"
 #include "gedit2.h"
 
 
@@ -108,15 +109,47 @@ impl_gedit_application_server_newWindow (PortableServer_Servant _servant,
 	return BONOBO_OBJREF (win_server);
 }
 
-
 static GNOME_Gedit_Window
-impl_gedit_application_server_getActiveWindow (PortableServer_Servant _servant,
-					       CORBA_Environment * ev)
+impl_gedit_application_server_getWindowInWorkspace (PortableServer_Servant _servant,
+						    const CORBA_long workspace,
+						    CORBA_Environment *ev)
 {
 	BonoboWindow *win;
 	BonoboObject *win_server;
+	GList *l;
+	guint ws;
 
+	/* first try if the active window is in the rquired workspace */
 	win = bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
+	ws = gedit_utils_get_window_workspace (GTK_WINDOW (win));
+
+	if (ws != workspace && ws != GEDIT_ALL_WORKSPACES)
+	{
+		/* try to see if there is a window on this workspace */
+		l = bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
+		while (l != NULL)
+		{
+			win = l->data;
+			ws = gedit_utils_get_window_workspace (GTK_WINDOW (win));
+			if (ws == workspace || ws == GEDIT_ALL_WORKSPACES)
+				break;
+
+			l = g_list_next (l);
+		}
+
+		/* no window on this workspace... create a new one */
+		if (l == NULL)
+		{
+			bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi), NULL);
+			gedit_file_new ();
+
+			/* let the UI update */
+			while (gtk_events_pending ())
+				gtk_main_iteration ();
+
+			win = bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
+		}
+	}
 
 	win_server = gedit_window_server_new (win);
 
@@ -155,11 +188,10 @@ gedit_application_server_class_init (GeditApplicationServerClass *klass)
         object_class->finalize = gedit_application_server_object_finalize;
 
         /* connect implementation callbacks */
-	epv->newWindow         = impl_gedit_application_server_newWindow;
-	epv->getActiveDocument = impl_gedit_application_server_getActiveDocument;
-	epv->getActiveWindow   = impl_gedit_application_server_getActiveWindow;
-
-	epv->quit              = impl_gedit_application_server_quit;
+	epv->newWindow            = impl_gedit_application_server_newWindow;
+	epv->getActiveDocument    = impl_gedit_application_server_getActiveDocument;
+	epv->getWindowInWorkspace = impl_gedit_application_server_getWindowInWorkspace;
+	epv->quit                 = impl_gedit_application_server_quit;
 }
 
 static void

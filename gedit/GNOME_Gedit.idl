@@ -34,7 +34,7 @@ module GNOME {
 			Window newWindow ();
 
 			Document getActiveDocument ();
-			Window getActiveWindow ();
+			Window getWindowInWorkspace (in long workspace);
 
 			oneway void quit ();
 		};

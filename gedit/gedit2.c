@@ -195,10 +195,16 @@ gedit_handle_automation (GnomeProgram *program)
 		return;
 	}
 
-	if (new_window_option) 
+	if (new_window_option)
+	{
 		window = GNOME_Gedit_Application_newWindow (server, &env);
+	}
 	else
-		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
+	{
+		gint ws = gedit_utils_get_current_workspace (gdk_screen_get_default ());
+
+		window = GNOME_Gedit_Application_getWindowInWorkspace (server, ws, &env);
+	}
 
 	if (new_document_option)
 		GNOME_Gedit_Window_newDocument (window, &env);

@@ -665,10 +665,13 @@ child_list_menu_remove (BonoboMDI *mdi, BonoboWindow *win)
 		path = g_strdup_printf ("%sView_%p", mdi->priv->child_list_path, views->data);
 		cmd = g_strdup_printf ("/commands/%s", verb_name);
 
-		bonobo_ui_component_remove_verb (ui_component, verb_name);
+		if (bonobo_ui_component_path_exists (ui_component, path, NULL))
+		{
+			bonobo_ui_component_remove_verb (ui_component, verb_name);
 
-		bonobo_ui_component_rm (ui_component, path, NULL);
-		bonobo_ui_component_rm (ui_component, cmd, NULL);
+			bonobo_ui_component_rm (ui_component, path, NULL);
+			bonobo_ui_component_rm (ui_component, cmd, NULL);
+		}
 
 		g_free (path); 
 		g_free (cmd);

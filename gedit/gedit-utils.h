@@ -43,6 +43,8 @@
 #define MISSING_FILE    N_("Could not find \"%s\". Please, reinstall gedit.\n")
 #define MISSING_WIDGETS N_("Could not find the required widgets inside\"%s\". Please, reinstall gedit.\n")
 
+enum { GEDIT_ALL_WORKSPACES = 0xffffffff };
+
 
 void	gedit_utils_flash     (const gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
@@ -87,6 +89,10 @@ gchar *gedit_utils_uri_get_basename (const char *uri);
 gchar *gedit_utils_uri_get_dirname (const char *uri);
 
 gchar *gedit_utils_replace_home_dir_with_tilde (const gchar *uri);
+
+guint gedit_utils_get_current_workspace (GdkScreen *screen);
+
+guint gedit_utils_get_window_workspace (GtkWindow *gtkwindow);
 
 #endif /* __GEDIT_UTILS_H__ */
 

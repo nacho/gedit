@@ -38,7 +38,11 @@
 #include <sys/time.h>
 #include <fcntl.h>
 #include <string.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
 
+#include <gdk/gdkx.h>
 #include <glib/gunicode.h>
 #include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
@@ -777,6 +781,80 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 	}
 
 	g_free (home);
+
 	return g_strdup (uri);
+}
+
+/* the following two functions are courtesy of galeon */
+
+/**
+ * gedit_utils_get_current_workspace: Get the current workspace
+ *
+ * Get the currently visible workspace for the #GdkScreen.
+ *
+ * If the X11 window property isn't found, 0 (the first workspace)
+ * is returned.
+ */
+guint
+gedit_utils_get_current_workspace (GdkScreen *screen)
+{
+       GdkWindow *root_win = gdk_screen_get_root_window (screen);
+       GdkDisplay *display = gdk_screen_get_display (screen);
+
+       Atom type;
+       gint format;
+       gulong nitems;
+       gulong bytes_after;
+       guint *current_desktop;
+       guint ret = 0;
+
+       XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+                           gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
+                           0, G_MAXLONG,
+                           False, XA_CARDINAL, &type, &format, &nitems,
+                           &bytes_after, (gpointer)&current_desktop);
+
+       if (type == XA_CARDINAL && format == 32 && nitems > 0)
+       {
+               ret = current_desktop[0];
+               XFree (current_desktop);
+       }
+
+       return ret;
+}
+
+/**
+ * gedit_utils_get_window_workspace: Get the workspace the window is on
+ *
+ * This function gets the workspace that the #GtkWindow is visible on,
+ * it returns GEDIT_ALL_WORKSPACES if the window is sticky, or if
+ * the window manager doesn support this function
+ */
+guint
+gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
+{
+       GdkWindow *window = GTK_WIDGET (gtkwindow)->window;
+       GdkDisplay *display = gdk_drawable_get_display (window);
+
+       Atom type;
+       gint format;
+       gulong nitems;
+       gulong bytes_after;
+       guint *workspace;
+       guint ret = GEDIT_ALL_WORKSPACES;
+
+       XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
+                           gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
+                           0, G_MAXLONG,
+                           False, XA_CARDINAL, &type, &format, &nitems,
+                           &bytes_after, (gpointer)&workspace);
+
+       if (type == XA_CARDINAL && format == 32 && nitems > 0)
+       {
+               ret = workspace[0];
+               XFree (workspace);
+       }
+
+       return ret;
 }
 
