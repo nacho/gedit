@@ -1,4 +1,64 @@
-Sigh... I didn't update the NEWS since 2.4.1
+=============
+gedit 2.5.90"
+=============
+
+New features
+============
+
+- added a --enable-deprecations flag to configure.in
+  to switch on the DISABLE_DEPRECATED cflags (Mark McLoughlin)
+
+Fixes
+=====
+
+- Bug #133178 (Underquoted definitions in acinclude.m4) (Alexander Winston)
+- Removed unused gconf key 
+  schemas/apps/gedit-2/preferences/editor/save/save_encoding (Paolo Maggi)
+- Removed AC_SUBST(CFLAGS), AC_SUBST(CPPFLAGS) and AC_SUBST(LDFLAGS) 
+  from configure.in (Tomasz Kłoczko)
+- Bug #135000 ("Save the changes to document before closing" 
+  dialog should have Accessible Role "ALERT") (Padraig O'Briain)
+- Uses the new file chooser in the shell_output plugin (Paolo Borelli)
+- Disables the menu items when the gedit state is not NORMAL (Paolo M.)
+- Bug #133851 (Saves the file on pressing ESC from the 
+  "Save As" dialog) (Paolo B.)
+- Don't highlight single column lists (Jeroen Zwartepoorte)
+- Uses latest libegg recent-files code (Paolo M.)
+- Bug #133604 (The name of filters are not marked for translation) (Paolo M.)
+- Bug #133269 (check box check or uncheck is not having any bearing) (Paolo M.)
+- Bug #133481 (check box selection is not habing any bearing) (Paolo M.)
+- Fixed a lot of bugs in the preferences dialog (Paolo B. and Paolo M.)
+- Fixed a lot of bugs in the Open/Save As dialog (Paolo M.)
+
+New and updated translations
+============================
+
+- Adam Weinberger (en_CA)
+- Alastair McKinstry (ga)
+- Åsmund Skjæveland (nn)
+- Chanchai Junlouchai (th)
+- Changwoo Ryu (ko)
+- Christian Neumair (de)
+- Christian Rose (sv)
+- Christophe Merlet (RedFox) (fr)
+- Duarte Loreto (pt)
+- GNOME PL Team (pl)
+- Hasbullah Bin Pit (ms)
+- Jarkko Ranta (fi)
+- Joao Emanuel (pt_BR)
+- John C Barstow (mi)
+- Kjartan Maraas (no)
+- Kostas Papadimas (el)
+- Laurent Dhima (sq)
+- Miloslav Trmac (cs)
+- Mətin Əmirov (az)
+- Ole Laursen (da)
+- Pablo G. del Campo (es)
+- Reinout van Schouwen (nl)
+- Sanlig Badral (mn)
+- Takeshi AIHANA (ja)
+- Данило Шеган (sr)
+
 
 =============================
 gedit 2.5.[0123] - "I'm lazy"
