@@ -382,10 +382,15 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	 * forces the gnome toolbar to resize itself.. slows it down some,
 	 * but not much..
 	 */
+	#ifdef WITHOUT_GNOME
 	if (GTK_WIDGET_VISIBLE(window->toolbar)) {
 		gtk_widget_hide(window->toolbar);
 		gtk_widget_show(window->toolbar);
 	}
+	#else
+	gtk_widget_queue_resize 
+		(gnome_app_get_dock (GNOME_APP (window->window)));
+	#endif
 }
 
 
@@ -411,10 +416,15 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	}*/
 	window->have_tb_text = TRUE;
 	window->have_tb_pix = FALSE;
+	#ifdef WITHOUT_GNOME
 	if (GTK_WIDGET_VISIBLE(window->toolbar)) {
 		gtk_widget_hide(window->toolbar);
 		gtk_widget_show(window->toolbar);
 	}
+	#else
+	gtk_widget_queue_resize 
+		(gnome_app_get_dock (GNOME_APP(window->window)));
+	#endif
 }
 
 

@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      0.4.5
+%define ver      0.4.8
 %define rel      SNAP
 %define prefix   /usr
 
@@ -13,12 +13,12 @@ Source0:   gEdit-%{PACKAGE_VERSION}.tar.gz
 URL:       http://gedit.home.ml.org
 BuildRoot: /tmp/gEdit-%{PACKAGE_VERSION}-root
 Packager: Alex Roberts <bse@dial.pipex.com>
-Requires: gtk+ >= 1.1.1
+Requires: gtk+ >= 1.1.7
 Requires: gnome-libs
 #Docdir: %{prefix}/doc
 
 %description
-gEdit is a small and lightweight Gtk+ based Text Editor... 
+gEdit is a small but powerful text editor for GTK+ and/or GNOME.  
  
 %prep
 %setup

@@ -65,7 +65,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 	struct stat gedit_stats;
 	mode_t mode = 484;
 
-	homedir = gedit_dir = gedit_dir_old = fn = NULL;
+	/*homedir = gedit_dir = gedit_dir_old = fn = NULL;*/
 	
 	if ((gedit_dir = getenv ("GEPREFSDIR")) == NULL)
 	{
@@ -180,9 +180,9 @@ int gE_prefs_open ()
 			*ptr2 = '\0';
 			ptr2++;
 
-			new->name = g_malloc0 (strlen(ptr));
 			new->value = g_malloc0 (strlen(ptr2));
-			strcpy(new->name, ptr);
+			new->name = g_strdup (ptr);
+			
 			strncpy(new->value, ptr2, strlen (ptr2) - 1);
 		}
          	
@@ -339,7 +339,7 @@ char *gE_prefs_get_default (char *name)
 		{ "splitscreen", "0" },
 #endif
 #ifndef WITHOUT_GNOME
-		{ "scrollball", "1" },
+		{ "scrollball", "0" },
 #endif
 		{ NULL, NULL }
 	};
@@ -392,13 +392,13 @@ int gE_prefs_get_int(char *name)
 	i = gnome_config_get_int (name);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
-	if (i == NULL)
+/*	if (i == NULL)
 	  {
 		value = gE_prefs_get_data (name);
 		i = atoi (value);
 		g_free(value);
 	  }
-
+*/
 	return i;
 	
 #endif

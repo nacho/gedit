@@ -375,15 +375,18 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 			if (newlines > 0)
 			{
 				g_free (buffer);
+				buffer = NULL;
 				break;
 			}
 			else {
 				newlines++;
 				newline_1 = i;
 				g_free (buffer);
+				buffer = NULL;
 			}
 		}
 		g_free (buffer);
+		buffer = NULL;
 	}
 
 	whitespace = g_malloc0 (newline_1 - i + 2);
@@ -394,6 +397,7 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 		if ((buffer[0] != 32) & (buffer[0] != 9))
 		{
 			g_free (buffer);
+			buffer = NULL;
 			break;
 		}
 		strncat (whitespace, buffer, 1);
@@ -1021,7 +1025,6 @@ void recent_update (gE_window *window)
 		}
 	}
 	gnome_history_free_recently_used_list (gnome_recent_list);
-	window->num_recent = g_list_length (filelist);
 	
 #endif /* Using GNOME */
 

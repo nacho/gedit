@@ -199,6 +199,9 @@ gE_window_new(void)
 	recent_update(w);
 	window_list = g_list_append(window_list, (gpointer) w);
 
+	gE_window_refresh (w);
+	
+	gtk_signal_emit_by_name (GTK_OBJECT (w->window), "check_resize");
 	return w;
 } /* gE_window_new */
 
@@ -280,9 +283,6 @@ gE_document
 
 	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
 
-	/* QUESTION: Are you supposed to free the style when you're
-	   done assigning it to a widget? Purify says there's a mem
-	   leak here */
 	style = gtk_style_new();
 	gtk_widget_set_style(GTK_WIDGET(doc->text), style);
 

@@ -498,10 +498,13 @@ void gE_property_box_new(gE_data *data)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);  
   
-  pbox->ok_button = gtk_button_new_with_label ("Ok");
+  pbox->ok_button = gtk_button_new_with_label ("OK");
   gtk_signal_connect (GTK_OBJECT (pbox->ok_button), "clicked",
-  		      GTK_SIGNAL_FUNC (apply_close),
+			  GTK_SIGNAL_FUNC (gE_apply),
 			  data);
+  gtk_signal_connect (GTK_OBJECT (pbox->ok_button), "clicked",
+			  GTK_SIGNAL_FUNC (cancel),
+			  NULL);
   gtk_box_pack_start(GTK_BOX(hbox), pbox->ok_button, TRUE, TRUE, 0);
   gtk_widget_show (pbox->ok_button);
 
