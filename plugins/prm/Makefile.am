@@ -23,6 +23,6 @@ CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-#	-Wall -ansi -pedantic  \
+	-Wall -ansi -pedantic  \
 	-DPLUGIN	\
 	#-DDEBUG
