@@ -140,6 +140,9 @@ gfsd_modify_preview_phrase (GtkButton *button, GnomePrintFontDialog *fontseldiag
 	}
 
 	gtk_widget_destroy (dialog);
+
+	/* FIXME: should it return something else? */
+	return NULL;
 }
 	
 
