@@ -40,7 +40,6 @@ struct _gE_Plugin_Object
 	gchar *plugin_name;
 	gchar *library_name;
 	gchar *config_path;
-	gchar *config_prefix;
 	GList *dependency_libs;
 	gE_Plugin_Info *info;
 	GModule *module;

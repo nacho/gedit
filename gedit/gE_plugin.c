@@ -140,9 +140,6 @@ gE_Plugin_Query (gchar *plugin_name)
 	new_plugin->config_path = g_strconcat
 		("=", PLUGINLIBDIR, "/", plugin_name, "/", "Plugin", NULL);
 
-	new_plugin->config_prefix = g_strconcat
-		(new_plugin->config_path, "/", NULL);
-
 	dummy = g_string_new ("");
 
 	/* Get new config iterator. */
@@ -165,7 +162,7 @@ gE_Plugin_Query (gchar *plugin_name)
 
 	/* Read additional config keys. */
 
-	gnome_config_push_prefix (new_plugin->config_prefix);
+	gnome_config_push_prefix (new_plugin->config_path);
 
 	new_plugin->plugin_name = gnome_config_get_string ("name");
 
@@ -184,7 +181,6 @@ gE_Plugin_Query (gchar *plugin_name)
 	g_free (new_plugin->name);
 	g_free (new_plugin->library_name);
 	g_free (new_plugin->config_path);
-	g_free (new_plugin->config_prefix);
 	g_list_free (new_plugin->dependency_libs);
 	g_free (new_plugin);
 
@@ -223,7 +219,7 @@ gE_Plugin_Load (gE_Plugin_Object *plugin, gint context)
 
 	/* Push config prefix. */
 
-	gnome_config_push_prefix (plugin->config_prefix);
+	gnome_config_push_prefix (plugin->config_path);
 
 	/* Load all required libraries. */
 
