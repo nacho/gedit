@@ -65,7 +65,7 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 			                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-		gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Opened..."));
+		gtk_label_set (GTK_LABEL(window->statusbar), ("File Opened..."));
 		
 		return 1;
 	}
@@ -92,7 +92,7 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 
-	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Opened..."));
+	gtk_label_set (GTK_LABEL(window->statusbar), ("File Opened..."));
 	return 0;
 }
 
@@ -134,7 +134,7 @@ gint gE_file_save(gE_window *window, gE_document *document, gchar *filename)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 	
-	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Saved..."));
+	gtk_label_set (GTK_LABEL(window->statusbar), ("File Saved..."));
 	return 0;
 }
 

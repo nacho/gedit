@@ -292,7 +292,7 @@ void gE_event_button_press (GtkWidget *w, GdkEventButton *event, gE_window *wind
 
 void file_new_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-	gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("New File..."));
+	gtk_label_set (GTK_LABEL(data->window->statusbar), ("New File..."));
 	gE_document_new(data->window);
 }
 
@@ -381,7 +381,7 @@ void file_close_cmd_callback (GtkWidget *widget, gE_data *data)
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
-			gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("File Closed..."));
+			gtk_label_set (GTK_LABEL(data->window->statusbar), ("File Closed..."));
 			if (data->temp1)
 				file_close_cmd_callback (widget, data);
 		}
@@ -462,7 +462,7 @@ char print[256];
 	strcat(print, gE_document_current(data->window)->filename);
 	system (print);   
 	
-   			gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("File Printed..."));
+   			gtk_label_set (GTK_LABEL(data->window->statusbar), ("File Printed..."));
    /*system("rm -f temp001");*/
 
 }

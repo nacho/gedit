@@ -73,9 +73,7 @@ gE_window *gE_window_new()
 		      data);
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
-#ifdef WITHOUT_GNOME
   gtk_window_set_title (GTK_WINDOW (window->window), GEDIT_ID);
-#endif
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
   gtk_window_set_policy(GTK_WINDOW(window->window), TRUE, TRUE, FALSE);
   gtk_container_border_width (GTK_CONTAINER (window->window), 0);
@@ -120,8 +118,9 @@ gE_window *gE_window_new()
       gtk_container_border_width (GTK_CONTAINER (box2), 0);
       gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
 
-      window->statusbar = gtk_statusbar_new ();
+      window->statusbar = gtk_label_new ("Welcome to gEdit");
       gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
+      gtk_misc_set_alignment (GTK_MISC (window->statusbar), 0.0, 0.5);
       gtk_widget_show (window->statusbar);
       
       line_button = gtk_button_new_with_label ("Line");
@@ -253,7 +252,7 @@ gE_document *gE_document_new(gE_window *window)
 	window->documents = g_list_append (window->documents, document);
 
 	gtk_notebook_set_page (GTK_NOTEBOOK(window->notebook), 
-	                       g_list_length(GTK_NOTEBOOK (window->notebook)->children));
+	                       g_list_length(GTK_NOTEBOOK (window->notebook)->children) - 1);
 
 	gtk_widget_grab_focus (document->text);
 	return document;
