@@ -134,15 +134,11 @@ gE_Prop_Box *pbox,
   FILE *file;
   gchar *rc;
 
-g_print("bumble...\n");
   
   /* General Settings */
-  g_print(" is itme? %d..\n", (GTK_TOGGLE_BUTTON (prefs->autoindent)->active));
-  g_print("hmm.. %d\n",data->window->auto_indent);
   data->window->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
-  g_print("bumble... work\n");
   data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
-g_print("bumble... work!\n");
+
   /* Print Settings */
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
   
@@ -167,57 +163,12 @@ g_print("bumble... work!\n");
 	fprintf(file, "}\n");
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);  
-g_print("bumble... work!!\n");
-  gE_window_refresh(data->window);
-  g_print("bumble... work!!!\n");
-  gE_save_settings(data->window, data->window);
-  g_print("bumble..\n");
 
-}
-
-
-
-#ifdef FOOBAR
-void gE_gtk_apply (gE_Prop_Box *pbox, gint page, gE_data *data)
-{
-  FILE *file;
-  gchar *rc;
-
-
-  printf("eh\n");
-  /* General Settings */
-  data->window->auto_indent = GTK_TOGGLE_BUTTON (prefs->autoindent)->active;
-  data->window->show_status = GTK_TOGGLE_BUTTON (prefs->status)->active;  
-printf("eh.\n");
-  /* Print Settings */
-  data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
-  
-  /* Font Settings */
-    data->window->font = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->font)));
-  /*	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
-	{
-		printf ("Couldn't open gtk rc file for parsing.\n");
-		return;
-	}
-
-	
-	if ((file = fopen(rc, "w")) == NULL) {
-		g_print("Cannot open %s!\n", rc);
-		return;
-	}
-	fprintf(file, "# gEdit rc file...\n");
-	fprintf(file, "#\n");
-	fprintf(file, "style \"text\"\n");
-	fprintf(file, "{\n");
-	fprintf(file, "  font = \"%s\"\n", data->window->font);
-	fprintf(file, "}\n");
-	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
-	fclose(file); */ 
-printf("huh\n");
   gE_window_refresh(data->window);
   gE_save_settings(data->window, data->window);
 }
-#endif
+
+
 
 void get_prefs(gE_data *data)
 {
@@ -233,9 +184,7 @@ static GtkWidget *general_page_new()
 {
   GtkWidget *vbox, *hbox;
 
-#ifdef DEBUG
-printf("gpn...\n");
-#endif
+
 
   vbox = gtk_vbox_new(FALSE, 0);
   /*gtk_container_border_width (GTK_CONTAINER (GTK_BOX(vbox)), 10);*/
@@ -448,8 +397,8 @@ static GtkWidget *font_page_new()
 #ifdef WITHOUT_GNOME
 void apply_close(gE_data *data)
 {
- /* gE_apply(NULL, NULL, data);*/
-  
+  /*gE_apply(NULL, NULL,data);*/
+
   cancel();
 
 }
@@ -460,21 +409,17 @@ void gE_property_box_new(gE_data *data)
 
 
  
-  printf(".\n");
   pbox = g_malloc(sizeof(gE_Prop_Box));
-printf("..\n");
   pbox->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-printf(".X.\n");
+
       gtk_signal_connect (GTK_OBJECT (pbox->window), "destroy",
 			  GTK_SIGNAL_FUNC(cancel),
 			  NULL);
   gtk_signal_connect (GTK_OBJECT (pbox->window), "delete_event",
 		      GTK_SIGNAL_FUNC (gtk_false), NULL);
 		      
-printf(".!.\n");
       gtk_window_set_title (GTK_WINDOW (pbox->window), "gedit");
       gtk_container_border_width (GTK_CONTAINER (pbox->window), 0);
- printf("..\n");     
  
  	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(pbox->window), vbox);
@@ -484,12 +429,11 @@ printf(".!.\n");
 	gtk_container_border_width(GTK_CONTAINER(GTK_BOX(hbox)), 10);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
- printf("..\n");
+
   pbox->notebook = gtk_notebook_new();
   gtk_box_pack_start(GTK_BOX(hbox), pbox->notebook, TRUE, TRUE, 0);
   gtk_widget_show (pbox->notebook);
  
-  printf("..\n");
   /* General Settings */
   label = gtk_label_new ("General");
   pbox->gen_vbox = gtk_vbox_new (FALSE, 0);
@@ -501,21 +445,18 @@ printf(".!.\n");
   general_page_new();
   
   
- printf(".t.\n");
   /* Print Settings */
   label = gtk_label_new ("Print");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
                                print_page_new(), label);
- printf("e..\n");                                          
+
   /* Font Settings */
   label = gtk_label_new ("Font");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
                                            font_page_new(), label);
  gtk_widget_show (pbox->notebook);
-  printf("..e\n");  
   get_prefs(data); 
  
-  printf("ARGH\n");
  
  	hbox = gtk_hbox_new(FALSE, 10);
 	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
