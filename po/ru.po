@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-16 14:15+0000\n"
-"PO-Revision-Date: 2000-06-16 14:16+00:00\n"
+"POT-Creation-Date: 2000-06-17 19:05+0000\n"
+"PO-Revision-Date: 2000-06-17 19:05+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgid "Diff plugin."
 msgstr "Дополнение diff"
 
 #: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:261
-#: src/print.c:575
+#: src/print.c:576
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -135,11 +135,11 @@ msgstr "Здравствуй, Мир!"
 msgid "Sample 'hello world' plugin."
 msgstr "Пример дополнения \"Здравствуй, Мир!\"."
 
-#: plugins/shell_output/shell_output.c:170
+#: plugins/shell_output/shell_output.c:172
 msgid "Shell Output"
 msgstr "Вывод оболочки"
 
-#: plugins/shell_output/shell_output.c:171
+#: plugins/shell_output/shell_output.c:173
 msgid "Insert the shell output in the document"
 msgstr "Вставить вывод оболочки в документ"
 
@@ -182,7 +182,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:546
+#: src/dialogs/dialog-prefs.c:545
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -282,7 +282,7 @@ msgstr "Режим:"
 msgid "Notebook Tab Position: "
 msgstr "Положение ярлыков блокнота:"
 
-#: src/dialogs/prefs.glade.h:27 src/menus.c:228
+#: src/dialogs/prefs.glade.h:27 src/menus.c:241
 msgid "Undo"
 msgstr "Откат"
 
@@ -375,7 +375,7 @@ msgstr "Бумага"
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs/replace.glade.h:8 src/menus.c:248
+#: src/dialogs/replace.glade.h:8 src/menus.c:261
 msgid "Find"
 msgstr "Найти"
 
@@ -412,15 +412,15 @@ msgstr "Только чтение - "
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/document.c:639
+#: src/document.c:641
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/document.c:716
+#: src/document.c:718
 msgid "This file does not end with a valid extension\n"
 msgstr "Этот файл заканчивается недопустимым расширением\n"
 
-#: src/document.c:724
+#: src/document.c:726
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
@@ -540,24 +540,24 @@ msgstr "Открыть файл..."
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
 
-#: src/file.c:594
+#: src/file.c:593
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:606
+#: src/file.c:605
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:616
+#: src/file.c:615
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:739
+#: src/file.c:738
 msgid "You can't revert an Untitled document\n"
 msgstr "Вы не можете восстановить неозаглавленный документ\n"
 
-#: src/file.c:752
+#: src/file.c:751
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -566,7 +566,7 @@ msgstr ""
 "Вы уверены в том что хотите отменить все изменения?\n"
 "(%s)"
 
-#: src/file.c:781
+#: src/file.c:780
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
@@ -579,7 +579,7 @@ msgstr "Открыть (переключить) .c/.h файл"
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:60 src/menus.c:207
+#: src/menus.c:60 src/menus.c:220
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
@@ -591,147 +591,155 @@ msgstr "Сохранить все"
 msgid "Save All Open Files"
 msgstr "Сохранить все открытые файлы"
 
-#: src/menus.c:72
+#: src/menus.c:72 src/menus.c:77
 msgid "Revert"
 msgstr "Вернуть"
 
-#: src/menus.c:80
+#: src/menus.c:88
+msgid "Print pre_view"
+msgstr "Просмотр печати"
+
+#: src/menus.c:88
+msgid "Print preview"
+msgstr "Просмотр печати"
+
+#: src/menus.c:92
 msgid "Print preview..."
 msgstr "Просмотр печати..."
 
-#: src/menus.c:81
+#: src/menus.c:93
 msgid "Preview data to be printed"
 msgstr "Просмотр данных, которые будут напечатаны"
 
-#: src/menus.c:87
+#: src/menus.c:100
 msgid "Close All"
 msgstr "Закрыть Все"
 
-#: src/menus.c:88
+#: src/menus.c:101
 msgid "Close All Open Files"
 msgstr "Закрыть все открытые файлы"
 
-#: src/menus.c:118
+#: src/menus.c:131
 msgid "Goto _Line..."
 msgstr "Перейти к строке..."
 
-#: src/menus.c:119
+#: src/menus.c:132
 msgid "Go to a specific line number"
 msgstr "Перейти к строке с указанным номером"
 
-#: src/menus.c:129
+#: src/menus.c:142
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/menus.c:130
+#: src/menus.c:143
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/menus.c:132
+#: src/menus.c:145
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/menus.c:133
+#: src/menus.c:146
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:183 src/plugin.c:114 src/plugin.c:210
+#: src/menus.c:196 src/plugin.c:115 src/plugin.c:211
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/menus.c:193
+#: src/menus.c:206
 msgid "_Documents"
 msgstr "Документы"
 
-#: src/menus.c:207
+#: src/menus.c:220
 msgid "New"
 msgstr "Новый"
 
-#: src/menus.c:211
+#: src/menus.c:224
 msgid "Open"
 msgstr "Открыть"
 
-#: src/menus.c:211
+#: src/menus.c:224
 msgid "Open a file"
 msgstr "Открыть файл"
 
-#: src/menus.c:215
+#: src/menus.c:228
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/menus.c:215
+#: src/menus.c:228
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: src/menus.c:219
+#: src/menus.c:232
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/menus.c:219
+#: src/menus.c:232
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: src/menus.c:223
+#: src/menus.c:236
 msgid "Print"
 msgstr "Печать"
 
-#: src/menus.c:223
+#: src/menus.c:236
 msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
-#: src/menus.c:228
+#: src/menus.c:241
 msgid "Undo last operation"
 msgstr "Отмена последнего действия"
 
-#: src/menus.c:232
+#: src/menus.c:245
 msgid "Redo"
 msgstr "Возврат"
 
-#: src/menus.c:232
+#: src/menus.c:245
 msgid "Redo last operation"
 msgstr "Повтор отмененного действия"
 
-#: src/menus.c:236
+#: src/menus.c:249
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/menus.c:236
+#: src/menus.c:249
 msgid "Cut the selection"
 msgstr "Вырезать выделение"
 
-#: src/menus.c:240
+#: src/menus.c:253
 msgid "Copy"
 msgstr "Скопировать"
 
-#: src/menus.c:240
+#: src/menus.c:253
 msgid "Copy the selection"
 msgstr "Скопировать выделение"
 
-#: src/menus.c:244
+#: src/menus.c:257
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/menus.c:244
+#: src/menus.c:257
 msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
-#: src/menus.c:248
+#: src/menus.c:261
 msgid "Search for a string"
 msgstr "Поиск строки"
 
-#: src/menus.c:252
+#: src/menus.c:265
 msgid "Line"
 msgstr "Строка"
 
-#: src/menus.c:252
+#: src/menus.c:265
 msgid "Get the current and total lines"
 msgstr "Указать текущую строку и общее количество строк"
 
-#: src/menus.c:257
+#: src/menus.c:270
 msgid "Exit"
 msgstr "Выход"
 
-#: src/menus.c:257
+#: src/menus.c:270
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
@@ -748,7 +756,7 @@ msgstr "Ошибка, дополнение не содержит функции init_plugin."
 msgid "Error, init_plugin returned an error"
 msgstr "Ошибка, init_plugin вернула ошибку"
 
-#: src/plugin.c:104
+#: src/plugin.c:105
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
 
@@ -756,12 +764,12 @@ msgstr "Ошибка, дополнение еще используется"
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:231
+#: src/print.c:232
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:524 src/print.c:539
+#: src/print.c:525 src/print.c:540
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -770,7 +778,7 @@ msgstr ""
 "gedit: невозможно найти шрифт \"%s\".\n"
 "gedit: невозможно напечатать без установленного шрифта."
 
-#: src/print.c:832
+#: src/print.c:833
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -869,6 +877,6 @@ msgstr "Показать последние отладочные сообщения."
 msgid "Turn on all debugging messages."
 msgstr "Включить все отладочные сообщения."
 
-#: src/view.c:856
+#: src/view.c:868
 msgid "You can't remove the last view of a document."
 msgstr "Вы не можете удалить последнее окно документа."
