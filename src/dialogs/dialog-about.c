@@ -31,7 +31,6 @@ void dialog_about (void);
 void
 dialog_about (void)
 {
-#if 1
 	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR "about.glade", NULL);
 
 	if (!gui)
@@ -41,38 +40,4 @@ dialog_about (void)
 	}
 	gtk_widget_show (glade_xml_get_widget (gui, "about"));
 	gtk_object_destroy (GTK_OBJECT (gui));
-#else
-	static GtkWidget *about;
-	
-	const gchar *authors[] = {
-		"Alex Roberts",
-		"Evan Lawrence",
-		"http://gedit.pn.org",
-		"",
-		N_("With special thanks to:"),
-		"     Will LaShell, Chris Lahey, Andy Kahn,",
-		"     Miguel de Icaza, Martin Baulig,",
-		"     Thomas Holmgren, Martijn van Beers",
-		NULL
-	};
-
-	if (about != NULL)
-	{
-		gdk_window_show (about->window);
-		gdk_window_raise (about->window);
-		return;
-	}
-
-	about = gnome_about_new ("gedit", VERSION,
-				 _("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
-				 authors,
-				 _("gedit is a small and lightweight text "
-				   "editor for GNOME/Gtk+"),
-				 "gedit-logo.png");
-
-	gtk_signal_connect (GTK_OBJECT (about), "destroy",
-			    GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
-
-	gtk_widget_show (about);
-#endif
 }

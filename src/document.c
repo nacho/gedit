@@ -235,17 +235,13 @@ gedit_document_get_tab_name (Document *doc)
 	Document *nth_doc;
 	int max_number = 0;
 	int i;
-	const char *UNTITLED = N_("Untitled");
-	 /* xgettext translators : RO = Read Only, it apears before
-	    the document "tab" in the mdi window like "R0 - file.txt"*/
-	const char *RO = N_("RO - ");
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
 	if (doc->filename != NULL)
 	{
 		gchar * tab_name;
-		tab_name = g_strdup_printf ("%s%s", doc->readonly?RO:"", g_basename(doc->filename));
+		tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(doc->filename));
 		return tab_name;
 	}
 	else
@@ -263,7 +259,7 @@ gedit_document_get_tab_name (Document *doc)
 			}
 			doc->untitled_number = max_number + 1;
 		}
-		return _(g_strdup_printf ("%s %d", UNTITLED, doc->untitled_number));
+		return _(g_strdup_printf ("%s %d", _("Untitled"), doc->untitled_number));
 	}
 }
 
@@ -629,6 +625,7 @@ gedit_document_set_title (Document *doc)
 {
 	gchar *title;
 	gchar *docname;
+	const char *MODIFIED = N_("(modified)");
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
@@ -638,7 +635,7 @@ gedit_document_set_title (Document *doc)
 	docname = GNOME_MDI_CHILD (doc)->name;
 
 	if (doc->changed)
-		title = g_strdup_printf ("gedit: %s (modified)", docname);
+		title = g_strdup_printf ("gedit: %s %s", docname, MODIFIED);
 	else
 		title = g_strdup_printf ("gedit: %s", docname);
 

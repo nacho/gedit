@@ -445,15 +445,11 @@ print_lines_toggled (GtkWidget *widget, gpointer data)
 {
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
 	{
-		gtk_toggle_button_update_label_sensitivity (print_lines, TRUE);
-
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), TRUE);
 	}
 	else
 	{
-		gtk_toggle_button_update_label_sensitivity (print_lines, FALSE);
-
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), FALSE);
 	}
@@ -500,8 +496,6 @@ prepare_printing_page (GladeXML *gui)
 
 	if (!settings->print_lines)
 	{
-		gtk_toggle_button_update_label_sensitivity (print_lines, FALSE);
-
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), FALSE);
 	}
