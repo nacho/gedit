@@ -1,5 +1,5 @@
-DIST_SUBDIRS = ASCII diff docinfo sample cvschangelog indent taglist time shell_output spell sort
+DIST_SUBDIRS = docinfo sample time spell
 
-SUBDIRS =  ASCII diff docinfo sample cvschangelog indent taglist time shell_output $(SPELL_PLUGIN_DIR) sort
+SUBDIRS =  docinfo sample time $(SPELL_PLUGIN_DIR)
 
 EXTRA_DIST = ChangeLog
