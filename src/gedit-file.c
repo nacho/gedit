@@ -136,10 +136,13 @@ gedit_file_open (GeditMDIChild *active_child)
 		{
 			if (gedit_file_open_real (files[i], active_child))
 			{
+				gchar *uri;
 				gchar *uri_utf8;
-
-				uri_utf8 = g_filename_to_utf8 (files[i], -1, NULL, NULL, NULL);
-
+				
+				uri = gnome_vfs_x_format_uri_for_display (files[i]);
+				uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
+				g_free (uri);
+				
 				if (uri_utf8 != NULL)
 				{
 					gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
