@@ -164,16 +164,20 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 
 	toolbar = toolbar_create_common(toolbar_data, data);
 
+
 #ifdef GTK_HAVE_FEATURES_1_1_0
-#ifndef WITHOUT_GNOME
-/*	if ( ! gnome_preferences_get_toolbar_relief() ) */
-#endif
-/*		Dunno if it's me, but i find relief buttons ugly... --Alex
+gw->use_relief_toolbar = gE_prefs_get_int("tb relief");
+ if (gw->use_relief_toolbar == TRUE)
+ {
+   /*   #ifndef WITHOUT_GNOME
+	if ( ! gnome_preferences_get_toolbar_relief() ) 
+      #endif 
+   */
 		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar), 
 					      GTK_RELIEF_NONE);
-*/
+ }
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
-
+      
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
 #ifdef WITHOUT_GNOME	
@@ -448,6 +452,50 @@ tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
 	window->show_tooltips = FALSE;
 }
 
+
+/* Make Toolbar buttons reliefed... */
+void tb_relief_on (GtkWidget *w, gpointer cbwindow)
+{
+
+   gE_window *gw = (gE_window *)cbwindow;
+#ifdef GTK_HAVE_FEATURES_1_1_0
+ if (gw->use_relief_toolbar == FALSE)
+ {
+   /*   #ifndef WITHOUT_GNOME
+	if ( ! gnome_preferences_get_toolbar_relief() ) 
+      #endif 
+   */
+		gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
+					      GTK_RELIEF_NONE);
+
+	gw->use_relief_toolbar = TRUE;
+ }
+#else
+	mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
+#endif /* GTK_HAVE_FEATURES_1_1_0 */
+}
+
+/* Turn toolbar relief off... */
+void tb_relief_off (GtkWidget *w, gpointer cbwindow)
+{
+
+   gE_window *gw = (gE_window *)cbwindow;
+#ifdef GTK_HAVE_FEATURES_1_1_0
+if (gw->use_relief_toolbar == TRUE)
+ {
+   /*   #ifndef WITHOUT_GNOME
+	if ( ! gnome_preferences_get_toolbar_relief() ) 
+      #endif 
+   */
+		gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
+					      GTK_RELIEF_NORMAL);
+
+	gw->use_relief_toolbar = FALSE;
+ }
+#else
+	mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
+#endif /* GTK_HAVE_FEATURES_1_1_0 */
+}
 
 /*
  * PRIVATE: new_pixmap

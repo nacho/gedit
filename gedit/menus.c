@@ -126,6 +126,13 @@ static GtkMenuEntry menu_items[] =
 		tb_pic_only_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toolbar/Text only", NULL,
 		tb_text_only_cb, (gpointer)GE_WINDOW, NULL},
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Toolbar/Toolbar Relief On", NULL,
+		tb_relief_on, (gpointer)GE_WINDOW, NULL},
+	{"<Main>/Options/Toolbar/Toolbar Relief Off", NULL,
+		tb_relief_off, (gpointer)GE_WINDOW, NULL},
+#endif
 	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Toolbar/Tooltips On", NULL,
 		tb_tooltips_on_cb, (gpointer)GE_WINDOW, NULL},
@@ -306,6 +313,11 @@ GnomeUIInfo gedit_toolbar_menu []= {
 	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, (gpointer) GE_WINDOW, NULL },
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	{GNOME_APP_UI_SEPARATOR},
+	{GNOME_APP_UI_ITEM, N_("Toolbar Relief On"), NULL, tb_relief_on, (gpointer) GE_WINDOW, NULL },
+	{GNOME_APP_UI_ITEM, N_("Toolbar Relief Off"), NULL, tb_relief_off, (gpointer) GE_WINDOW, NULL },
+#endif
 	{GNOME_APP_UI_SEPARATOR},
 	{GNOME_APP_UI_ITEM, N_("Tooltips On"), NULL, tb_tooltips_on_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Tooltips Off"), NULL, tb_tooltips_off_cb, (gpointer) GE_WINDOW, NULL },

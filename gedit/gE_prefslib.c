@@ -332,6 +332,9 @@ char *gE_prefs_get_default (char *name)
 		{ "tb pix", "1" },
 		{ "tb text", "1" },
 		{ "show statusbar", "1" },
+#ifdef GTK_HAVE_FEATURES_1_1_0
+		{ "tb relief", "0" },
+#endif
 		{ NULL, NULL }
 	};
 

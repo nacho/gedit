@@ -47,6 +47,8 @@ extern void tb_pic_only_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_text_only_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow);
+extern void tb_relief_on (GtkWidget *w, gpointer cbwindow);
+extern void tb_relief_off (GtkWidget *w, gpointer cbwindow);
 
 #endif
 

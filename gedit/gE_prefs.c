@@ -293,6 +293,9 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	mbprintf("window->have_toolbar = %d", window->have_toolbar);
 	mbprintf("window->have_tb_text = %d", window->have_tb_text);
 	mbprintf("window->have_tb_pix = %d", window->have_tb_pix);
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	mbprintf("window->use_relief_toolbar = %d", window->use_relief_toolbar);
+#endif
 
 	gE_prefs_set_int("tab pos", (gint) window->tab_pos);
 	gE_prefs_set_int("auto indent", (gboolean) window->auto_indent);
@@ -300,6 +303,9 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	gE_prefs_set_int("toolbar", (gint) window->have_toolbar);
 	gE_prefs_set_int("tb text", (gint) window->have_tb_text);
 	gE_prefs_set_int("tb pix", (gint) window->have_tb_pix);
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	gE_prefs_set_int("tb relief", (gint) window->use_relief_toolbar);
+#endif
 	gE_prefs_set_char("font", window->font);
 	if (window->print_cmd == "")
 		gE_prefs_set_char ("print command", "lpr -rs %s");
@@ -316,6 +322,9 @@ void gE_get_settings(gE_window *w)
 	 w->have_toolbar = gE_prefs_get_int("toolbar");
 	 w->have_tb_text = gE_prefs_get_int("tb text");
 	 w->have_tb_pix = gE_prefs_get_int("tb pix");
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	 w->use_relief_toolbar = gE_prefs_get_int("tb relief");
+#endif
 	 w->font = gE_prefs_get_char("font");
 	 if (w->font == NULL)
 	   w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
@@ -330,6 +339,9 @@ void gE_get_settings(gE_window *w)
 	mbprintf("window->have_toolbar = %d", w->have_toolbar);
 	mbprintf("window->have_tb_text = %d", w->have_tb_text);
 	mbprintf("window->have_tb_pix = %d", w->have_tb_pix);
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	mbprintf("window->use_relief_toolbar = %d", w->use_relief_toolbar);
+#endif
 	mbprintf("window->font = %s", w->font);
 	mbprintf("window->print_cmd = %s", w->print_cmd);	
 	

@@ -78,6 +78,7 @@ typedef struct _gE_window {
 	gboolean have_tb_pix;
 	gboolean have_tb_text;
 	gboolean show_tooltips;
+	gboolean use_relief_toolbar;
 #else
 	gint auto_indent;
 	gint show_tabs;
@@ -86,6 +87,7 @@ typedef struct _gE_window {
 	gint have_toolbar;
 	gint have_tb_pix;
 	gint have_tb_text;
+	gint use_relief_toolbar;
 #endif
 	gchar *print_cmd;
 	gchar *font;
