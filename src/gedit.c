@@ -234,7 +234,7 @@ int main (int argc, char **argv)
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 	
-	
+	gnome_mdi_set_mode (mdi, mdiMode);	
 	/*window = gE_window_new();
 
 	data->window = window;*/
@@ -250,7 +250,6 @@ int main (int argc, char **argv)
 	/*custom_plugin_query ( "/usr/gnome/libexec", "print-plugin", &pl_callbacks);*/
 	plugin_load_list("gEdit");
 
-	gnome_mdi_set_mode (mdi, mdiMode);
 		
     /* connect signals -- FIXME -- We'll do the rest later */
     gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
@@ -261,7 +260,8 @@ int main (int argc, char **argv)
     gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);		
 	gnome_mdi_open_toplevel(mdi);
-	
+
+
 	if (file_list){
 
 

@@ -85,19 +85,6 @@ gE_file_open(gE_document *doc, gchar *fname)
 		gtk_text_freeze(GTK_TEXT(GE_DOCUMENT(doc)->text));
 		clear_text(doc);
 
-#ifdef USE_SIMPLE_READ_ALGORITHM
-#define READ_CHUNK	32767
-		/*
-		 * the simple read algorithm basically just reads in READ_CHUNK
-		 * bytes at a time.  we can still do better, but this a >>lot<<
-		 * better than before, where we were reading 10 bytes at a
-		 * time!  ideally, we'd like to alloc a buffer to read the
-		 * entire file in at once, or a buffer as large as possible if
-		 * the file is really really large.
-		 */
-		size = READ_CHUNK;
-		buf = (char *)g_malloc(size+1);
-#else
 		/*
 		 * the more aggressive/intelligent method is to try to allocate
 		 * a buffer to fit all the contents of the file; that way, we
@@ -125,7 +112,6 @@ gE_file_open(gE_document *doc, gchar *fname)
 			close(fd);
 			return 1;
 		}
-#endif	/* ifdef USE_CONSERVATIVE_READ_ALGORITHM */
 
 #ifdef DEBUG
 		printf("malloc'd %lu bytes for read buf\n", (gulong)(size+1));
@@ -156,7 +142,6 @@ gE_file_open(gE_document *doc, gchar *fname)
 
 	/* misc settings */
 	doc->filename = fname;
-/*	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(fname));*/
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(fname));
 	
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
@@ -178,22 +163,10 @@ gE_file_open(gE_document *doc, gchar *fname)
 	/* enable document change detection */
 	doc->changed = FALSE;
 	if (!doc->changed_id)
-		doc->changed_id =
-			gtk_signal_connect(
-				GTK_OBJECT(doc->text),
-				"changed", 
-				GTK_SIGNAL_FUNC(doc_changed_cb),
-				doc);
+	  doc->changed_id =	gtk_signal_connect(GTK_OBJECT(doc->text),"changed", 
+				                       GTK_SIGNAL_FUNC(doc_changed_cb),doc);
 
-	/* reset the title of the gedit window */
-/*	title = g_malloc(strlen(GEDIT_ID) +
-			strlen(GTK_LABEL(doc->tab_label)->label) + 4);
-	sprintf(title, "%s - %s",
-		GTK_LABEL (doc->tab_label)->label, GEDIT_ID);
-	gtk_window_set_title(GTK_WINDOW (w->window), title);
-	g_free (title);
 
-	gE_msgbar_set(w, MSGBAR_FILE_OPENED);*/
 	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_OPENED));
 	recent_add (doc->filename);
 	recent_update (GNOME_APP (mdi->active_window));
@@ -222,59 +195,38 @@ gE_file_save(gE_document *doc, gchar *fname)
 	/* FIXME: not sure what to do with all the gE_window refs.. 
 	          i'll comment them out for now.. 				    */
 
-	/*g_assert(window != NULL);*/
 	g_assert(doc != NULL);
 	g_assert(fname != NULL);
 
-	if ((fp = fopen(fname, "w")) == NULL) {
+	if ((fp = fopen (fname, "w")) == NULL) {
 		g_warning ("Can't open file %s for saving", fname);
 		return 1;
 	}
 	gtk_text_thaw (GTK_TEXT(doc->text));
 
-	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(doc->text), 0,
-		gtk_text_get_length(GTK_TEXT(doc->text))), fp) == EOF) {
-		perror("Error saving file");
-		fclose(fp);
-		return 1;
-	}
+	if (fputs (gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0,
+		 gtk_text_get_length (GTK_TEXT (doc->text))), fp) == EOF) 
+	  {
+	   perror("Error saving file");
+	   fclose(fp);
+	   return 1;
+	  }
 	fflush(fp);
 	fclose(fp);
 
-	if (doc->filename && doc->filename != fname)
-		g_free(doc->filename);
+	if (doc->filename != fname)
+	  g_free(doc->filename);
+	  
 	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
-/*FIXME	gtk_label_set(GTK_LABEL(doc->tab_label),
-		(const char *)g_basename(doc->filename));
-*/
+	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));
-	
+
 	if (!doc->changed_id)
-		doc->changed_id =
-			gtk_signal_connect (
-				GTK_OBJECT(doc->text), "changed",
-				GTK_SIGNAL_FUNC(doc_changed_cb), doc);
+	  doc->changed_id =	gtk_signal_connect (GTK_OBJECT(doc->text), "changed",
+									    GTK_SIGNAL_FUNC(doc_changed_cb),doc);
 
-/*FIXME	title = g_malloc0(strlen(GEDIT_ID) +
-			strlen(GTK_LABEL(doc->tab_label)->label) + 4);
-	sprintf(title, "%s - %s",
-			GTK_LABEL (doc->tab_label)->label, GEDIT_ID);
-	gtk_window_set_title (GTK_WINDOW (window->window), title);
-	g_free (title);*/
-
-	
-	/*gE_msgbar_set(window, MSGBAR_FILE_SAVED);*/
 	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_SAVED));
+	
 	return 0;
 } /* gE_file_save */
-
-
-/*
- * PUBLIC: files_list_popup
- *
- * creates a new popup window containing a list of open files/documents
- * for the gE_window from which it was invoked.  callback data should be a
- * pointer to the invoking gE_window.
- */
-/* No Use For this Bloating feature.. the main menu bar will work in a similar way */

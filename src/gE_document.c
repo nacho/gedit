@@ -40,6 +40,7 @@
 
 extern GList *plugins;
 gE_window *window;
+GtkWidget  *col_label;
 
 /* local definitions */
 
@@ -148,10 +149,10 @@ gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 1);
 	gtk_widget_show(tmp);
 
-	w->col_label = gtk_label_new("0");
-	gtk_box_pack_start(GTK_BOX(w->statusbar), w->col_label, FALSE, FALSE, 1);
-	gtk_widget_set_usize(w->col_label, 40, 0);
-	gtk_widget_show(w->col_label);
+	col_label = gtk_label_new("0");
+	gtk_box_pack_start(GTK_BOX(w->statusbar), col_label, FALSE, FALSE, 1);
+	gtk_widget_set_usize(col_label, 40, 0);
+	gtk_widget_show(col_label);
 
 	tmp = gtk_button_new_with_label(_("Line"));
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",

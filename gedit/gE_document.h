@@ -35,6 +35,8 @@ extern "C" {
 #define MSGBAR_PASTE			"Selection Pasted..."
 #define MSGBAR_SELECT_ALL		"All Text Selected..."
 
+extern GtkWidget *col_label;
+
 extern void gE_window_set_auto_indent (gint auto_indent);
 extern void gE_window_set_status_bar (gint show_status);
 extern /*gE_window */ void gE_window_new(GnomeMDI *mdi, GnomeApp *app);

@@ -89,7 +89,7 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, (gpointer) GE_DATA),
 
-	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR, 
 

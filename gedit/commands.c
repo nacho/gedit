@@ -257,11 +257,11 @@ file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 	g_assert(data != NULL);
 	safs = (GtkWidget *)(data->temp1);
 	g_assert(safs != NULL);
+	g_assert(gE_document_current() != NULL);
 
 	fname = gtk_file_selection_get_filename(GTK_FILE_SELECTION(safs));
 	if (fname != NULL) {
 		if (gE_file_save(gE_document_current(), fname) == 0) {
-
 			gtk_widget_destroy(data->temp1);
 			data->temp1 = NULL;
 			data->temp2 = NULL;
@@ -437,23 +437,23 @@ static void
 line_pos_cb(GtkWidget *w, gE_data *data)
 {
 	static char col [32];
-	GtkWidget *text = data->temp2;
+	/*GtkWidget *text = data->temp2;*/
 	int x;
 
-	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
+	sprintf (col, "%d", GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
 	
-	gtk_label_set (GTK_LABEL(data->window->col_label), col);
+	gtk_label_set (GTK_LABEL(col_label), col);
 
 }
 
 
 gint gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 {
-/*	gE_data *data;
+	gE_data *data;
 	data = g_malloc0 (sizeof (gE_data));
-	data->temp2 = w;
-	data->window = window;
-	line_pos_cb(NULL, data);*/
+/*	data->temp2 = w;
+	data->window = window;*/
+	line_pos_cb(NULL, data);
 #ifdef DEBUG
 	g_print ("you pressed a button\n");
 #endif
@@ -493,10 +493,10 @@ void file_new_cb (GtkWidget *widget, gpointer cbdata)
 	gE_window *w;
 	gE_document *doc;
 
-	g_assert(data != NULL);
+	/*g_assert(data != NULL);
 	w = data->window;
 	g_assert(w != NULL);
-	/*gE_msgbar_set(w, MSGBAR_FILE_NEW);*/
+	gE_msgbar_set(w, MSGBAR_FILE_NEW);*/
 	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
 	doc = gE_document_new();
 	/*doc = gE_document_current();*/
@@ -598,18 +598,23 @@ file_save_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	g_assert(data != NULL);
-/*	g_assert(data->window != NULL);*/
- 	fname = gE_document_current()->filename;
-	if (fname == NULL)
-		file_save_as_cb(NULL, data);
-	else
-	 if ((gE_file_save(gE_document_current(),
+
+	if (gE_document_current()->changed)
+	  {
+ 	    fname = gE_document_current()->filename;
+ 	    if (data->document == NULL)
+ 	      data->document = gE_document_current();
+ 	    
+	    if (fname == NULL)
+	      file_save_as_cb(NULL, data);
+	    else
+	      if ((gE_file_save(gE_document_current(),
 	               gE_document_current()->filename)) != 0)
-	   {
-	/*E_msgbar_set(data->window, _("Read only file!"));*/
-	gnome_app_flash (mdi->active_window, _("Read only file!"));
-	file_save_as_cb(NULL, data);
-        }
+	        {
+		 gnome_app_flash (mdi->active_window, _("Read only file!"));
+		 file_save_as_cb(NULL, data);
+        	}
+          }
         
         return 0;
 

@@ -1,3 +1,25 @@
+1999-04-07 (15:13) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_files: Tidied up code. Removed old, commented out, cruft.
+	  (gE_file_open) We only use the second method of opening a
+	  file, why keep the first method!?
+
+1999-04-07 (14:37) Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (file_save_cb) Check whether the file has been
+	  changed before saving.
+
+1999-04-07 (14:12) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: (gE_document_create_view) Removed the doc->changed
+	  and doc->changed_id settings from this function. Should fix
+	  some of the add_view problems.
+	 (gE_document_init) Added the doc->changed_id signal
+	  connection that was in gE_document_create_view.
+	
+	* gE_mdi.c: Uncommented the view menu options. At least the
+	  changed flags should be ok now.
+
 1999-04-06 (15:57) Alex Roberts  <bse@gedit.pn.org>
 
 	* main.h: Added GtkWidget *scrwindow member to the gE_document

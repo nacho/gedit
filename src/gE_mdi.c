@@ -71,9 +71,7 @@ GnomeUIInfo gedit_edit_menu [] = {
 	
 	GNOMEUIINFO_END
 };
-/*	This view stuff is really annoying.. if anyone would like to take up the 
- 	challenge of trying to figure out the view stuff, with gEdit, then please
- 	do.. its much different to the way GHex implements it... -Alex
+
 GnomeUIInfo view_menu[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
 					   N_("Add a new view of the document"), gE_add_view),
@@ -81,10 +79,10 @@ GnomeUIInfo view_menu[] = {
 					   N_("Remove view of the document"), gE_remove_view),
 	GNOMEUIINFO_END
 };
-*/
+
 GnomeUIInfo doc_menu[] = {
 	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
-/*	GNOMEUIINFO_MENU_VIEW_TREE(view_menu),*/
+	GNOMEUIINFO_MENU_VIEW_TREE(view_menu),
 	GNOMEUIINFO_END
 };
 
@@ -203,7 +201,7 @@ BORK!!	*ptr = ++last_assigned_integer;
 /*FIXME	gtk_signal_connect_object(GTK_OBJECT(doc->text), "event",
 GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_window)->popup));*/
 
-	doc->changed = FALSE;
+/*	doc->changed = FALSE;*/
 	doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
 		GTK_SIGNAL_FUNC(doc_changed_cb), doc);
 
@@ -319,7 +317,7 @@ static void gE_document_class_init (gE_document_class *class)
 	
 }
 
-static void gE_document_init (gE_document *doc)
+void gE_document_init (gE_document *doc)
 {
 	/* FIXME: This prolly needs work.. */
 	
@@ -329,8 +327,10 @@ static void gE_document_init (gE_document *doc)
 	doc->read_only = FALSE;
 	doc->splitscreen = FALSE;
 	doc->changed = FALSE;
-	doc->search = g_malloc0 (sizeof(gE_search));
-	
+	doc->search = g_malloc (sizeof(gE_search));
+	/*doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
+									GTK_SIGNAL_FUNC(doc_changed_cb), doc);*/
+		
 	gnome_mdi_child_set_menu_template (GNOME_MDI_CHILD (doc), doc_menu);
 }
 
@@ -365,7 +365,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
 /*	if ((doc = gtk_type_new (gE_document_get_type ())))*/
 	  {
 
-   	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(filename));
+   	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), filename);
 
 /*	    nfile = g_malloc(strlen(name)+1);
 	    strcpy(nfile, name);*/
@@ -409,7 +409,7 @@ static gchar *gE_document_get_config_string (GnomeMDIChild *child)
 	return g_strdup (GE_DOCUMENT(child)->filename);
 }
 
-GnomeMDIChild *gE_document_new_from_config (const gchar *file)
+GnomeMDIChild *gE_document_new_from_config (gchar *file)
 {
 	gE_document *doc;
 	
@@ -420,18 +420,12 @@ GnomeMDIChild *gE_document_new_from_config (const gchar *file)
 
 void gE_add_view (GtkWidget *w, gpointer data)
 {
-	GnomeMDIChild *child = GNOME_MDI_CHILD (data);
+	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
+	gE_document *child = (gE_document *)data;
 	gchar *buf;
 	gint len, pos = 0;
-	gint mod = 0;
 	
-	if (GTK_TEXT(GE_DOCUMENT(child)->text)->text.ch)
-	  {
-	   buf = gtk_editable_get_chars (GTK_EDITABLE (GE_DOCUMENT(child)->text), 0, -1);
-	  }
-	
-	if (GE_DOCUMENT(child)->changed)
-	  mod = GE_DOCUMENT(child)->changed;
+	buf = gtk_editable_get_chars (GTK_EDITABLE (child->text), 0, -1);
 	
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(child));
 	
@@ -442,7 +436,6 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	      gtk_editable_insert_text (GTK_EDITABLE (GE_DOCUMENT(mdi->active_child)->text), buf, strlen (buf), &pos);
 	     }
 	     
-	     GE_DOCUMENT(mdi->active_child)->changed = mod;
 	   }
 
 }
