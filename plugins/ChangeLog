@@ -1,3 +1,11 @@
+2002-07-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* shell_output/shell_output.c: executed shell command in an
+	async way. This should also fix bug #84096
+
+	* shell_output/shell_output.glade2: added a "Capture the command output"
+	checkbutton
+
 2002-07-03  Paolo Maggi  <maggi@athena.polito.it>
 
 	* sample/sample.c (sample_cb): convert the username to UTF-8 
@@ -291,7 +299,7 @@
 
 	* Makefile.am (SUBDIRS): added docinfo 
 
-	* docinfo/docinfo.c: rewritte
+	* docinfo/docinfo.c: rewritten
 
 	* docinfo/Makefile.am: ditto
 
