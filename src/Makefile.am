@@ -73,6 +73,7 @@ gedit_SOURCES = 			\
 	gedit-plugins-engine.h		\
 	gedit-plugins-engine.c		\
 	gedit-plugin.h			\
+	gedit-plugin.c			\
 	$(BUILT_SOURCES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)

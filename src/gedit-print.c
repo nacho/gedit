@@ -865,6 +865,8 @@ gedit_print_create_new_page (GeditPrintJobInfo *pji)
 {
 	gchar *pn_str;
 
+	gedit_debug (DEBUG_PRINT, "");
+
 	++pji->page_num;
 	pn_str = g_strdup_printf ("%d", pji->page_num);
 	gnome_print_beginpage (pji->print_ctx, pn_str);

@@ -28,6 +28,7 @@
  */
 
 #include <glade/glade-xml.h>
+#include <libgnome/gnome-help.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
@@ -184,5 +185,15 @@ open_button_pressed (GeditDialogOpenUri * dialog)
 static void
 help_button_pressed (GeditDialogOpenUri * dialog)
 {
-	/* FIXME */
+	GError *error = NULL;
+
+	gnome_help_display ("gedit.xml", "gedit-open-from-uri", &error);
+	
+	if (error != NULL)
+	{
+		g_warning (error->message);
+
+		g_error_free (error);
+	}
+
 }

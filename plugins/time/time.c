@@ -34,6 +34,7 @@
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
 #include <gconf/gconf-client.h>
+#include <libgnome/gnome-help.h>
 
 #include <time.h>
 
@@ -110,7 +111,9 @@ static TimeConfigureDialog 	*get_configure_dialog (GtkWindow* parent);
 static void			 time_world_cb (BonoboUIComponent *uic, gpointer user_data, 
 						const gchar* verbname);
 static void			 ok_button_pressed (TimeConfigureDialog *dialog);
+
 static void			 help_button_pressed (TimeConfigureDialog *dialog);
+
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
@@ -301,7 +304,7 @@ get_configure_dialog (GtkWindow* parent)
 						      GTK_STOCK_CANCEL,
 						      GTK_RESPONSE_CANCEL,
 						      GTK_STOCK_OK,
-						      GTK_RESPONSE_OK,
+						      GTK_RESPONSE_OK,						      
 						      GTK_STOCK_HELP,
 						      GTK_RESPONSE_HELP,
 						      NULL);
@@ -387,13 +390,24 @@ ok_button_pressed (TimeConfigureDialog *dialog)
 	gedit_debug (DEBUG_PLUGINS, "Sel: %d", sel_format);
 }
 
+
 static void
 help_button_pressed (TimeConfigureDialog *dialog)
 {
+	GError *error = NULL;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	/* FIXME */
+	gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+
+	if (error != NULL)
+	{
+		g_warning (error->message);
+
+		g_error_free (error);
+	}
 }
+
 
 G_MODULE_EXPORT GeditPluginState
 configure (GeditPlugin *p, GtkWidget *parent)
@@ -422,10 +436,12 @@ configure (GeditPlugin *p, GtkWidget *parent)
 				gedit_debug (DEBUG_PLUGINS, "Ok button pressed");
 				ok_button_pressed (dialog);
 				break;
+			
 			case GTK_RESPONSE_HELP:
 				gedit_debug (DEBUG_PLUGINS, "Help button pressed");
 				help_button_pressed (dialog);
 				break;
+			
 			default:
 				gedit_debug (DEBUG_PLUGINS, "Default");
 		}

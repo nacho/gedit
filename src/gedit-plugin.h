@@ -69,6 +69,9 @@ struct _GeditPlugin
 	gpointer	private_data;
 };	
 	
+gchar* gedit_plugin_locate_program  (gchar *program_name, 
+				     gchar *plugin_name, 
+				     GtkWindow *parent);
 
 #endif  /* __GEDIT_PLUGIN_H__ */
 

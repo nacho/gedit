@@ -33,6 +33,7 @@
 
 #include <gtk/gtk.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-help.h>
 #include <gdk/gdkkeysyms.h>
 
 #include <string.h>
@@ -367,7 +368,7 @@ tag_list_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 		GtkTreeIter iter;
 		gint index;
 
-		gedit_debug (DEBUG_PLUGINS, "");
+		gedit_debug (DEBUG_PLUGINS, "RETURN Pressed");
 
 		model = gtk_tree_view_get_model (GTK_TREE_VIEW (tag_list_window->tags_list));
 		g_return_val_if_fail (model != NULL, FALSE);
@@ -384,6 +385,26 @@ tag_list_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 			insert_tag ((Tag*)g_list_nth_data (tag_list_window->selected_tag_group->tags, index),
 				    event->state & GDK_CONTROL_MASK);
 		}
+
+		return FALSE;
+	}
+
+	if (event->keyval == GDK_F1)
+	{
+		GError *error = NULL;
+
+		gedit_debug (DEBUG_PLUGINS, "F1 Pressed");
+
+		gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	
+		if (error != NULL)
+		{
+			g_warning (error->message);
+	
+			g_error_free (error);
+		}
+
+		return FALSE;
 	}
 
 	return FALSE;

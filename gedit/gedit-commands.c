@@ -394,6 +394,8 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 
 	do
 	{
+		GError *error = NULL;
+		
 		ret = gtk_dialog_run (GTK_DIALOG (dlg));
 
 		switch (ret)
@@ -430,7 +432,15 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 				break;
 								
 			case GTK_RESPONSE_HELP:
-				/* FIXME */
+				gnome_help_display ("gedit.xml", "gedit-prefs", &error);
+	
+				if (error != NULL)
+				{
+					g_warning (error->message);
+
+					g_error_free (error);
+				}
+
 				break;
 
 			default:
@@ -449,7 +459,7 @@ gedit_cmd_help_contents (BonoboUIComponent *uic, gpointer user_data, const gchar
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	gnome_help_display_with_doc_id (NULL, NULL, "gedit.xml", NULL, &error);
+	gnome_help_display ("gedit.xml", NULL, &error);
 	
 	if (error != NULL)
 	{

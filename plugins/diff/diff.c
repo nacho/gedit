@@ -35,6 +35,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-help.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include <gconf/gconf-client.h>
 
@@ -51,7 +52,6 @@
 #include <gedit-utils.h>
 #include <gedit-debug.h>
 #include <gedit-file.h>
-#include <dialogs/gedit-dialogs.h>
 
 #define DIFF_BASE_KEY 		"/apps/gedit-2/plugins/diff"
 #define DIFF_LOCATION_KEY	"/diff-program-location"
@@ -420,6 +420,8 @@ diff_real (void)
 
 	do 
 	{
+		GError *error = NULL;
+		
 		ret = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
 
 		switch (ret) {
@@ -431,7 +433,16 @@ diff_real (void)
 				break;
 
 			case GTK_RESPONSE_HELP:
-				
+				/* FIXME: choose a better link id */
+				gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	
+				if (error != NULL)
+				{
+					g_warning (error->message);
+
+					g_error_free (error);
+				}
+
 				break;
 
 			default:
@@ -776,9 +787,9 @@ configure_real (GtkWindow *parent)
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
-	temp = gedit_plugin_program_location_dialog (DIFF_PROGRAM_NAME, 
-					      	     PLUGIN_NAME, 
-					      	     parent);
+	temp = gedit_plugin_locate_program (DIFF_PROGRAM_NAME,
+					    PLUGIN_NAME, 
+					    parent);
 
 	if (temp != NULL)
 	{

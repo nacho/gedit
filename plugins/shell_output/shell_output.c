@@ -33,6 +33,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-help.h>
 
 #include <string.h>
 
@@ -89,6 +90,8 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 static void
 dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog)
 {
+	GError *error = NULL;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	switch (res_id) {
@@ -98,7 +101,16 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog
 			break;
 			
 		case GTK_RESPONSE_HELP:
-			/* TODO */
+			/* FIXME: choose a better link id */
+			gnome_help_display ("gedit.xml", "gedit-pipe-output", &error);
+	
+			if (error != NULL)
+			{
+				g_warning (error->message);
+
+				g_error_free (error);
+			}
+
 			break;
 	
 		default:

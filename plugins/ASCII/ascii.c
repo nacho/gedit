@@ -33,6 +33,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-help.h>
 
 #include <gedit-plugin.h>
 #include <gedit-debug.h>
@@ -132,6 +133,7 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  ASCIITableDialog *dialog)
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
 	gint index;
+	GError *error = NULL;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -156,7 +158,16 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  ASCIITableDialog *dialog)
 			break;
 
 		case GTK_RESPONSE_HELP:
-			/* FIXME */
+			/* FIXME: Choose a better link id */
+			gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	
+			if (error != NULL)
+			{
+				g_warning (error->message);
+
+				g_error_free (error);
+			}
+			
 			break;
 			
 		default:

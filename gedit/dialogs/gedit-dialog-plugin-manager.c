@@ -524,11 +524,18 @@ dialog_plugin_manager_get_dialog (void)
 static void
 help_button_pressed (GeditDialogPluginManager * dialog)
 {
-	/* FIXME */
+	GError *error = NULL;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gedit_plugin_program_location_dialog ("diff", "diff", GTK_WINDOW (dialog->dialog));
+	gnome_help_display ("gedit.xml", "gedit-install-plugins", &error);
+	
+	if (error != NULL)
+	{
+		g_warning (error->message);
 
+		g_error_free (error);
+	}
 }
 
 static void
