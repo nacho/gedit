@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-06-12 20:19+0200\n"
-"PO-Revision-Date: 2000-06-12 20:20+02:00\n"
+"POT-Creation-Date: 2000-06-13 14:52+0200\n"
+"PO-Revision-Date: 2000-06-13 14:53+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Diff-tillegg."
 
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:216
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:237
 #: src/print.c:475
 msgid "Untitled"
 msgstr "Navnløs"
@@ -142,7 +142,7 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gedit er en liten lettvekt tekst editor for GNOME/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:535
+#: src/dialogs/dialog-prefs.c:536
 msgid "gedit: Preferences"
 msgstr "gedit: Brukervalg"
 
@@ -371,16 +371,16 @@ msgstr "Sk_ill mellom store/små bokstaver"
 
 #. xgettext translators : RO = Read Only, it apears before
 #. the document "tab" in the mdi window like "R0 - file.txt"
-#: src/document.c:219
+#: src/document.c:240
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:432
+#: src/document.c:433
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' er endret. Vil du lagre den?"
 
-#: src/file.c:98
+#: src/file.c:103
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -388,7 +388,7 @@ msgstr ""
 "En feil oppstod under åpning av filen.\n"
 "Vennligst underøk in filen eksisterer."
 
-#: src/file.c:105
+#: src/file.c:110
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -407,11 +407,11 @@ msgstr ""
 "Vennligst underøk om filen er i bruk av en annen applikasjon og\n"
 "at filen ikke er tom."
 
-#: src/file.c:115 src/file.c:336
+#: src/file.c:120 src/file.c:362
 msgid "Could not allocate the required memory."
 msgstr "Kunne ikke hente nødvendig minne."
 
-#: src/file.c:121
+#: src/file.c:126
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -426,7 +426,7 @@ msgstr ""
 "\n"
 "Forsikre deg om at du har rettigheter til å åpne filen."
 
-#: src/file.c:202
+#: src/file.c:208
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -443,7 +443,7 @@ msgstr ""
 "Forsikre deg om at stien du oppga eksisterer, og at du har tilstrekkelige "
 "skriverettigheter."
 
-#: src/file.c:215
+#: src/file.c:222
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -460,7 +460,7 @@ msgstr ""
 "På grunn av en ukjent feil (1). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:229
+#: src/file.c:237
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -477,41 +477,41 @@ msgstr ""
 "På grunn av en ukjent feil (2). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:298
+#: src/file.c:324
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/file.c:355
+#: src/file.c:381
 msgid "Error in the pipe ."
 msgstr "Feil i røret."
 
-#: src/file.c:406
+#: src/file.c:436
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/file.c:460
+#: src/file.c:494
 #, c-format
 msgid "Loaded file %s"
 msgstr "Lastet fil %s"
 
-#: src/file.c:545
+#: src/file.c:586
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' er i ferd med å bli overskrevet. Vil du fortsette ?"
 
-#: src/file.c:556
+#: src/file.c:598
 msgid "Document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/file.c:565
+#: src/file.c:608
 msgid "Error saving file!"
 msgstr "Feil under lagring av fil!"
 
-#: src/file.c:636
+#: src/file.c:708
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke forkaste et dokument uten tittel\n"
 
-#: src/file.c:649
+#: src/file.c:721
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -520,7 +520,7 @@ msgstr ""
 "Er du sikker på at du vil forkaste alle endringer?\n"
 "(%s)"
 
-#: src/file.c:678
+#: src/file.c:750
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen ``%s'' eksisterer ikke. Vil du opprette den?"
@@ -765,13 +765,18 @@ msgstr "gedit (%s): Utskriftsforhåndsvisning"
 msgid "Page: %i/%i"
 msgstr "Side: %i %i"
 
-#: src/recent.c:187
+#: src/recent.c:188
 msgid "_File/"
 msgstr "_Fil/"
 
-#: src/recent.c:195 src/recent.c:196
+#: src/recent.c:196 src/recent.c:197
 msgid "_File"
 msgstr "_Fil"
+
+#: src/recent.c:251
+#, c-format
+msgid "Unable to open recent file : %s"
+msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #: src/search.c:190
 msgid ""
@@ -813,6 +818,3 @@ msgstr "Filnavn"
 #: src/window.c:81
 msgid "Contents"
 msgstr "Innhold"
-
-#~ msgid "Find Next"
-#~ msgstr "Finn neste"
