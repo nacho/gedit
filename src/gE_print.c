@@ -28,32 +28,31 @@
 #include <glib.h>
 #include "main.h"
 #include "commands.h"
+#include "gE_print.h"
 
-GtkWidget *print_dialog;
-GtkWidget *print_cmd_entry;
 
-static void print_destroy( GtkWidget *widget, gpointer data )
+void print_destroy(GtkWidget *widget, gpointer data)
 {
     gtk_widget_destroy( print_dialog );
     print_dialog = NULL;
 }
 
 /*
-static void print_show_lpr( GtkWidget *widget, gpointer data )
+void print_show_lpr(GtkWidget *widget, gpointer data)
 {
     gtk_widget_set_sensitive( e_print_other, FALSE );
     print_lpr = TRUE;
 }
 
 
-static void print_show_other( GtkWidget *widget, gpointer data )
+void print_show_other(GtkWidget *widget, gpointer data)
 {
     gtk_widget_set_sensitive( e_print_other, TRUE );
     print_lpr = FALSE;
 }
 */
 
-static void _file_print(gpointer cbdata )
+void _file_print(gpointer cbdata)
 {
     FILE *file;
     gE_document *current;

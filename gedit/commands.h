@@ -40,7 +40,7 @@ void file_save_as_cmd_callback(GtkWidget *widget, gpointer cbdata);
 void file_close_cmd_callback(GtkWidget *widget, gpointer cbdata);
 void file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata);
 void file_close_window_cmd_callback (GtkWidget *widget, gpointer cbdata);
-void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata);
+
 
 void prefs_callback(GtkWidget *widget, gpointer cbwindow);
 
