@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
+"POT-Creation-Date: 2005-01-25 20:53+0100\n"
 "PO-Revision-Date: 2004-09-06 16:29+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -623,7 +623,7 @@ msgid "Replace _All"
 msgstr "แทนที่ทั้งห_มด"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:266
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:316
 msgid "_Replace"
 msgstr "แ_ทนที่"
 
@@ -1171,20 +1171,20 @@ msgstr "อ่านข้อมูล symbolic link สำหรับ %s ไ�
 msgid "The file has too many symbolic links."
 msgstr "แฟ้มนี้มี symbolic link มากเกินไป"
 
-#: gedit/gedit-document.c:1788
+#: gedit/gedit-document.c:1789
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
 
-#: gedit/gedit-document.c:1795
+#: gedit/gedit-document.c:1796
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ไม่สามารถทำงานที่ตำแหน่งนี้ใน write mode ได้"
 
-#: gedit/gedit-document.c:1808
+#: gedit/gedit-document.c:1809
 msgid "Invalid filename."
 msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1922
+#: gedit/gedit-document.c:1958
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1192,7 +1192,7 @@ msgstr ""
 "พื้นที่บนดิสก์เต็ม บันทึกข้อมูลไม่ได้\n"
 "กรุณาลบข้อมูลที่ไม่จำเป็นออกและทำการบันทึกอีกครั้ง"
 
-#: gedit/gedit-document.c:1927
+#: gedit/gedit-document.c:1963
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1200,7 +1200,7 @@ msgid ""
 msgstr ""
 "ดิสก์ที่คุณกำลังบันทึกแฟ้มมีข้อจำกัดด้านขนาดของแฟ้ม ลองบันทึกแฟ้มขนาดเล็กลงหรือบันทึกลงดิสก์อื่น"
 
-#: gedit/gedit-document.c:1971
+#: gedit/gedit-document.c:2007
 msgid "Could not create a backup file."
 msgstr "สร้างแฟ้มสำรองไม่ได้"
 
@@ -1334,12 +1334,12 @@ msgstr "ภาษาไทย"
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
-#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:253
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "มีแฟ้มชื่อ \"%s\" อยู่ก่อนแล้ว\n"
 
-#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:257
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "คุณต้องการที่จะทับมันด้วยข้อมูลที่คุณจะบันทึกหรือไม่?"
 
@@ -1352,15 +1352,15 @@ msgstr "แฟ้ม \"%s\" อ่านได้อย่างเดียว.
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "คุณต้องการที่จะพยายามแทนที่มันด้วยข้อมูลที่คุณต้องการจะบันทึกหรือไม่?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
 msgid "All Text Files"
 msgstr "แฟ้มข้อความทั้งหมด"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "_รหัสอักขระ:"
@@ -1594,7 +1594,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:143
 #, fuzzy
 msgid ""
-"there are too many open files. Please, close some open file and try again."
+"there are too many open files. Please, close some open files and try again."
 msgstr ""
 "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากไป\n"
 "\n"
@@ -1609,7 +1609,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
-"application and try again."
+"applications and try again."
 msgstr "มีหน่วยความจำไม่เพียงพอที่จะเปิดแฟ้ม \"%s\" กรุณาปิดโปรแกรมอื่นๆ และลองอีกครั้ง"
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
@@ -1686,7 +1686,7 @@ msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เ�
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
 #, fuzzy
 msgid ""
-"Please, check that you are not tryingto open a binary file and that you "
+"Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
@@ -1698,8 +1698,8 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:315
 #, fuzzy
 msgid ""
-"The file contains data in an invalid data. Probably, you are trying to open "
-"a binary file."
+"The file contains data in an invalid format. Probably, you are trying to "
+"open a binary file."
 msgstr ""
 "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะแฟ้มมีข้อมูลที่ไม่ถูกต้อง\n"
 "\n"
@@ -1727,7 +1727,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:449
 #, fuzzy
 msgid ""
-"There are too many open files. Please, close some open file and try again."
+"There are too many open files. Please, close some open files and try again."
 msgstr ""
 "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากไป\n"
 "\n"
@@ -1736,7 +1736,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:456
 #, fuzzy
 msgid ""
-"Not enough available memory. Please, close some running application and try "
+"Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr "มีหน่วยความจำไม่เพียงพอที่จะเปิดแฟ้ม \"%s\" กรุณาปิดโปรแกรมอื่นๆ และลองอีกครั้ง"
 
@@ -2340,16 +2340,16 @@ msgstr " (ยูนิโค้ดที่ไม่ถูกต้อง)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  บรรทัด %d, คอลัมน์ %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr "  ทับ"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr "  แทรก"
 
@@ -2528,7 +2528,7 @@ msgstr "ชื่อผู้ใช้"
 
 #: plugins/savecopy/savecopy.c:49
 #, fuzzy
-msgid "Sa_ve Copy"
+msgid "Sa_ve Copy..."
 msgstr "_คัดลอก"
 
 #: plugins/savecopy/savecopy.c:52
@@ -2536,18 +2536,18 @@ msgstr "_คัดลอก"
 msgid "Save a copy of the current document"
 msgstr "ตั้งค่าภาษาของเอกสารปัจจุบัน"
 
-#: plugins/savecopy/savecopy.c:212
+#: plugins/savecopy/savecopy.c:262
 #, fuzzy, c-format
-msgid "Could not save a copy the file to \"%s\""
+msgid "Could not save a copy of the file to \"%s\""
 msgstr "ไม่สามารถบันทึกแฟ้ม \"%s\" ได้"
 
-#: plugins/savecopy/savecopy.c:311
+#: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:362
+#: plugins/savecopy/savecopy.c:413
 #, fuzzy
-msgid "Save Copy"
+msgid "Save Copy..."
 msgstr "ไ_ม่บันทึก"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
@@ -2687,26 +2687,26 @@ msgstr "เรียงย้อ_นลำดับ"
 msgid "_Sort"
 msgstr "เ_รียงลำดับ"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:351
+#: plugins/spell/gedit-automatic-spell-checker.c:350
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(ไม่มีคำแนะ)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:375
+#: plugins/spell/gedit-automatic-spell-checker.c:374
 msgid "_More..."
 msgstr "เ_พิ่มเติม..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:428
+#: plugins/spell/gedit-automatic-spell-checker.c:427
 msgid "_Ignore All"
 msgstr "ไ_ม่แก้ไขทั้งหมด"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:441
+#: plugins/spell/gedit-automatic-spell-checker.c:440
 msgid "_Add"
 msgstr "เ_พิ่ม"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:478
+#: plugins/spell/gedit-automatic-spell-checker.c:477
 msgid "_Spelling Suggestions..."
 msgstr "แนะนำตัว_สะกด..."
 
@@ -3059,7 +3059,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 #, fuzzy
-msgid "Base font size"
+msgid "Base font"
 msgstr "ใช้แบบอักษรนี้กับแถบข้อความ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
@@ -3219,169 +3219,168 @@ msgstr "เปิดใช้งาน"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
 #, fuzzy
-msgid "Document ID"
+msgid "Document base"
 msgstr "เ_อกสาร"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 #, fuzzy
-msgid "Document base URI"
+msgid "Document body"
 msgstr "เ_อกสาร"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
 #, fuzzy
-msgid "Document body"
+msgid "Document head"
 msgstr "เ_อกสาร"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
 #, fuzzy
-msgid "Document head"
-msgstr "เ_อกสาร"
-
-#: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
 msgstr "สถิติต่างๆ ของเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:61
 #, fuzzy
 msgid "Document type"
 msgstr "เ_อกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:62
 #, fuzzy
-msgid "Document version"
-msgstr "เ_อกสาร"
+msgid "Element ID"
+msgstr "องค์ประกอบ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:67
 #, fuzzy
 msgid "Font face"
 msgstr "ชื่อของแบบอักษร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:68
 #, fuzzy
 msgid "For label"
 msgstr "แถบข้อความ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:70
 #, fuzzy
 msgid "Form"
 msgstr "ปกติ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:78
 #, fuzzy
 msgid "Frame"
 msgstr "ชื่อ:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame target"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:82
 #, fuzzy
 msgid "Frameborder"
 msgstr "โหมดตัดเส้นบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:83
 #, fuzzy
 msgid "Frameset"
 msgstr "ภาษาฟาโร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:84
 #, fuzzy
 msgid "Frameset columns"
 msgstr "เริ่มจาก_คอลัมน์ที่:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:89
 #, fuzzy
 msgid "Generic span"
 msgstr "ทั่วไป"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Tags"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:94
+msgid "HTML version"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
@@ -3503,8 +3502,8 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
 #, fuzzy
-msgid "Link"
-msgstr "บรรทัด"
+msgid "Link color"
+msgstr "เลือกสีของตัวอักษร"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3557,182 +3556,182 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
-msgid "Media"
-msgstr "gedit"
-
-#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multiple"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:141
 #, fuzzy
 msgid "Name"
 msgstr "ชื่อ:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Named property value"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Next ID"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:149
 #, fuzzy
 msgid "No resize"
 msgstr "แสดงขนาดตัวอักษร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Note"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:154
 #, fuzzy
 msgid "Object applet file"
 msgstr "เปิดแฟ้ม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:158
 #, fuzzy
 msgid "OnChange event"
 msgstr "เปลี่ยนตัวพิมพ์ใหญ่-เล็ก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:176
 #, fuzzy
 msgid "Option selector"
 msgstr "อักษรแบบต่างๆ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
 msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:178
+#, fuzzy
+msgid "Output media"
+msgstr "บรรทัดที่แสดงผล"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
@@ -3959,11 +3958,11 @@ msgid "Table caption"
 msgstr "เปิดตำแหน่งแฟ้ม"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-msgid "Table column"
+msgid "Table column group properties"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-msgid "Table column group"
+msgid "Table column properties"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
@@ -4546,6 +4545,22 @@ msgstr "_ถามรูปแบบ"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "ใช้รูปแบบ_กำหนดเอง"
+
+#, fuzzy
+#~ msgid "Document ID"
+#~ msgstr "เ_อกสาร"
+
+#, fuzzy
+#~ msgid "Document version"
+#~ msgstr "เ_อกสาร"
+
+#, fuzzy
+#~ msgid "Link"
+#~ msgstr "บรรทัด"
+
+#, fuzzy
+#~ msgid "Media"
+#~ msgstr "gedit"
 
 #~ msgid "Do_n't save"
 #~ msgstr "ไ_ม่บันทึก"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
+"POT-Creation-Date: 2005-01-25 20:53+0100\n"
 "PO-Revision-Date: 2003-12-05 02:00+0530\n"
 "Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
 "Language-Team: Marathi <www.indictrans.org>\n"
@@ -646,7 +646,7 @@ msgid "Replace _All"
 msgstr "सर्व बदलून घ्या"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:266
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:316
 msgid "_Replace"
 msgstr "बदलून घ्या"
 
@@ -1216,20 +1216,20 @@ msgstr "सूचक संबंधीत माहीती वाचता �
 msgid "The file has too many symbolic links."
 msgstr "या फाइल मध्ये अनेक पूरक सूचके आहेत"
 
-#: gedit/gedit-document.c:1788
+#: gedit/gedit-document.c:1789
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "लिहा मधील स्थिती दर्शके %s गेडीट द्वारा हाताळता येत नाहीत"
 
-#: gedit/gedit-document.c:1795
+#: gedit/gedit-document.c:1796
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "लिहा मधील अशा प्रकारची स्थिती दर्शके गेडीट द्वारा हाताळता येत नाहीत"
 
-#: gedit/gedit-document.c:1808
+#: gedit/gedit-document.c:1809
 msgid "Invalid filename."
 msgstr "फाइलचे नाव चुकीचे आहे"
 
-#: gedit/gedit-document.c:1922
+#: gedit/gedit-document.c:1958
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1237,7 +1237,7 @@ msgstr ""
 "डिस्कमध्ये फाइल रक्षित करण्यासाठी पुरेशी जागा नाहीकृपया डिस्कमधील काही फाइल मोकळ्या "
 "करा आणि पुन्हा प्रयत्न करा"
 
-#: gedit/gedit-document.c:1927
+#: gedit/gedit-document.c:1963
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1246,7 +1246,7 @@ msgstr ""
 "ज्या डिस्कमध्ये तुम्ही फाइल रक्षित करु पहाता त्या डिस्कमध्ये फाइलींसाठी मर्यादित जागा आहे "
 "कृपया अशी मर्यादित जागा नसणार्या डिस्कमध्ये फाइल रक्षित करता येईल असे पहा"
 
-#: gedit/gedit-document.c:1971
+#: gedit/gedit-document.c:2007
 msgid "Could not create a backup file."
 msgstr "पूरक फाइल तयार करता आली नाही"
 
@@ -1380,12 +1380,12 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:253
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
 #, fuzzy, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "\"%s\" ही फाइल अस्तित्वात आहे"
 
-#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:257
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
 #, fuzzy
 msgid "Do you want to replace it with the one you are saving?"
 msgstr ""
@@ -1404,16 +1404,16 @@ msgstr ""
 "\"%s\" नामक फाइल केवऴ वाचण्यासाठी आहेअस्तित्वात असणारी फाइल काढून त्या ठिकाणी नविन "
 "फाइल टाकण्याचा प्रयत्न करायचा आहे का ?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
 msgid "All Files"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
 #, fuzzy
 msgid "All Text Files"
 msgstr "गद्य फाइल संपादित करा"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "अक्षरे (रिकाम्या जागेशिवाय)"
@@ -1653,7 +1653,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:143
 #, fuzzy
 msgid ""
-"there are too many open files. Please, close some open file and try again."
+"there are too many open files. Please, close some open files and try again."
 msgstr ""
 "अनेक फाइल उघड्या असल्यामुळे \"%s\"ती फाइल उघडू शकली नाही\n"
 "कृपया, नको असलेल्या काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा"
@@ -1667,7 +1667,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
-"application and try again."
+"applications and try again."
 msgstr ""
 "\"%s\"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया काही फाइल बंद कराचालू स्थितीतील "
 "(फाइल) बंद करून पुन्हा प्रयत्न करा"
@@ -1745,7 +1745,7 @@ msgstr "\"%s\" ही फाइल खूप मोठी असल्याम�
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
 #, fuzzy
 msgid ""
-"Please, check that you are not tryingto open a binary file and that you "
+"Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
@@ -1757,8 +1757,8 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:315
 #, fuzzy
 msgid ""
-"The file contains data in an invalid data. Probably, you are trying to open "
-"a binary file."
+"The file contains data in an invalid format. Probably, you are trying to "
+"open a binary file."
 msgstr ""
 "अयोग्य UTF-8 डाटा \n"
 " समाविष्ट असल्यामुळे फाइल उघडू शकली नाही\n"
@@ -1785,7 +1785,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:449
 #, fuzzy
 msgid ""
-"There are too many open files. Please, close some open file and try again."
+"There are too many open files. Please, close some open files and try again."
 msgstr ""
 "अनेक फाइल उघड्या असल्यामुळे \"%s\"ती फाइल उघडू शकली नाही\n"
 "कृपया, नको असलेल्या काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा"
@@ -1793,7 +1793,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:456
 #, fuzzy
 msgid ""
-"Not enough available memory. Please, close some running application and try "
+"Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
 "\"%s\"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया काही फाइल बंद कराचालू स्थितीतील "
@@ -2417,16 +2417,16 @@ msgstr ""
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, fuzzy, c-format
 msgid "  Ln %d, Col %d"
 msgstr "Ln %d, Col. %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr "ओव्हीआर"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr "आयएनएस"
 
@@ -2619,7 +2619,7 @@ msgstr "उपयोगकर्त्याचे नाव"
 
 #: plugins/savecopy/savecopy.c:49
 #, fuzzy
-msgid "Sa_ve Copy"
+msgid "Sa_ve Copy..."
 msgstr "प्रतबनवा(_C)"
 
 #: plugins/savecopy/savecopy.c:52
@@ -2627,18 +2627,18 @@ msgstr "प्रतबनवा(_C)"
 msgid "Save a copy of the current document"
 msgstr "चालू दस्तऐवजातील भाषा सुरचित करा"
 
-#: plugins/savecopy/savecopy.c:212
+#: plugins/savecopy/savecopy.c:262
 #, fuzzy, c-format
-msgid "Could not save a copy the file to \"%s\""
+msgid "Could not save a copy of the file to \"%s\""
 msgstr "फाइल रक्षित करता आली नाही\"%s\""
 
-#: plugins/savecopy/savecopy.c:311
+#: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:362
+#: plugins/savecopy/savecopy.c:413
 #, fuzzy
-msgid "Save Copy"
+msgid "Save Copy..."
 msgstr "...प्रमाणे सुरक्षित करा"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
@@ -2789,26 +2789,26 @@ msgstr ""
 msgid "_Sort"
 msgstr "छाननी करा"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:351
+#: plugins/spell/gedit-automatic-spell-checker.c:350
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr ""
 
-#: plugins/spell/gedit-automatic-spell-checker.c:375
+#: plugins/spell/gedit-automatic-spell-checker.c:374
 msgid "_More..."
 msgstr "अधिक"
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:428
+#: plugins/spell/gedit-automatic-spell-checker.c:427
 msgid "_Ignore All"
 msgstr "सर्व दुर्लक्ष करा"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:441
+#: plugins/spell/gedit-automatic-spell-checker.c:440
 msgid "_Add"
 msgstr ""
 
-#: plugins/spell/gedit-automatic-spell-checker.c:478
+#: plugins/spell/gedit-automatic-spell-checker.c:477
 msgid "_Spelling Suggestions..."
 msgstr ""
 
@@ -3168,7 +3168,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 #, fuzzy
-msgid "Base font size"
+msgid "Base font"
 msgstr "लेबल साठी फोन्ट वापरा"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
@@ -3326,166 +3326,165 @@ msgstr "अयशस्वी झाले"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
 #, fuzzy
-msgid "Document ID"
+msgid "Document base"
 msgstr "दस्तऐवज(_D)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 #, fuzzy
-msgid "Document base URI"
+msgid "Document body"
 msgstr "दस्तऐवज(_D)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
 #, fuzzy
-msgid "Document body"
+msgid "Document head"
 msgstr "दस्तऐवज(_D)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
 #, fuzzy
-msgid "Document head"
-msgstr "दस्तऐवज(_D)"
-
-#: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
 msgstr "दस्तऐवजांचे संख्यांकन"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:61
 #, fuzzy
 msgid "Document type"
 msgstr "दस्तऐवज(_D)"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:62
 #, fuzzy
-msgid "Document version"
+msgid "Element ID"
 msgstr "दस्तऐवज(_D)"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:67
 #, fuzzy
 msgid "Font face"
 msgstr "फोन्टचे नाव"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:68
 #, fuzzy
 msgid "For label"
 msgstr "लेबल"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Form"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:78
 #, fuzzy
 msgid "Frame"
 msgstr "नाव"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame target"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:82
 #, fuzzy
 msgid "Frameborder"
 msgstr "पद्धती कव्हर करा"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:83
 #, fuzzy
 msgid "Frameset"
 msgstr "फारसी"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset columns"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic span"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Tags"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:94
+msgid "HTML version"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
@@ -3608,8 +3607,8 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
 #, fuzzy
-msgid "Link"
-msgstr "रेषा"
+msgid "Link color"
+msgstr "टेक्स्ट रंग ध्या"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3662,182 +3661,181 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
-msgid "Media"
-msgstr "स्वरूप"
-
-#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multiple"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:141
 #, fuzzy
 msgid "Name"
 msgstr "नाव"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Named property value"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Next ID"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:149
 #, fuzzy
 msgid "No resize"
 msgstr "आकार दाखवा"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:153
 #, fuzzy
 msgid "Note"
 msgstr "नोंदवही"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:154
 #, fuzzy
 msgid "Object applet file"
 msgstr "फाइल उघडा"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:158
 #, fuzzy
 msgid "OnChange event"
 msgstr "बदला"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:176
 #, fuzzy
 msgid "Option selector"
 msgstr "फोन्ट निवड"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:178
+msgid "Output media"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
@@ -4063,11 +4061,11 @@ msgid "Table caption"
 msgstr "जागा उघडा"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-msgid "Table column"
+msgid "Table column group properties"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-msgid "Table column group"
+msgid "Table column properties"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
@@ -4651,6 +4649,18 @@ msgstr ""
 #, fuzzy
 msgid "_Use custom format"
 msgstr "निवडलेली रीती वापरा"
+
+#, fuzzy
+#~ msgid "Document version"
+#~ msgstr "दस्तऐवज(_D)"
+
+#, fuzzy
+#~ msgid "Link"
+#~ msgstr "रेषा"
+
+#, fuzzy
+#~ msgid "Media"
+#~ msgstr "स्वरूप"
 
 #~ msgid "Do_n't save"
 #~ msgstr "रक्षित करु नये"
