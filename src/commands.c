@@ -23,6 +23,7 @@
 #define __need_timespec
 #include <time.h>
 /*#include <signal.h>*/
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #include <stdio.h>
