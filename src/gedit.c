@@ -206,7 +206,7 @@ main (int argc, char **argv)
 			}
 		}
                 /* if there are no open documents create a blank one */
-		if (g_list_length(mdi->children) == 0)
+		if (g_list_length(mdi->children) == 0 && FALSE )
 		{
 			doc = gedit_document_new ();
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));

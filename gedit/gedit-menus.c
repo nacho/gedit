@@ -229,7 +229,7 @@ GnomeUIInfo gedit_plugins_menu[] =
 GnomeUIInfo gedit_menu[] =
 {
         GNOMEUIINFO_MENU_FILE_TREE (gedit_file_menu),
-
+#ifdef WITH_GMODULE_PLUGINS
 	{
 		GNOME_APP_UI_SUBTREE,
 		N_("_Plugins"),
@@ -238,7 +238,7 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
-
+#endif
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
 	GNOMEUIINFO_MENU_WINDOWS_TREE (gedit_window_menu),
 	GNOMEUIINFO_MENU_FILES_TREE (gedit_docs_menu),

@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* gEdit - New Document interface  
  *
  * gEdit
@@ -450,47 +451,44 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	gint mask;
 	gedit_data *data = g_malloc0 (sizeof (gedit_data));
 
+	if(FALSE)
+		g_print("Key event pressed :%i\n", event->keyval);
+
 	line_pos_cb (NULL, NULL);
 	
 	mask = GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD2_MASK |
-		GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
+	       GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
 	
 	/* Control key related */
-	if (event->state == GDK_CONTROL_MASK) {
-	  
-	  switch (event->keyval) {
-	    
-	    case 's':
-	    		file_save_cb (w, NULL);
+	if (event->state == GDK_CONTROL_MASK)
+	{
+		switch (event->keyval)
+		{
+		case 's':
+			file_save_cb (w, NULL);
 	    		break;
-	    
-	    case 'p':
+		case 'p':
 	    		file_print_cb (w, (gpointer)data);
 	    		break;
-
-	    case 'w':
+		case 'w':
 	    		file_close_cb (w, NULL);
 	    		break;
-	    
-	    case 'z':
+		case 'z':
 	    		gedit_undo_do (w, NULL);
 	    		break;
-	    
-	    case 'r':
+		case 'r':
 	    		gedit_undo_redo (w, NULL);
 	    		break;
-	    
-	    default:
+		case 'k':
+		        g_warning("About to crash .. ");
+	    		gedit_undo_redo (w, NULL);
+	    		break;
+		default:
 	    		return TRUE;
 	    		break;
-	  
-	  }
-	
+		}
 	}
-
-	
 	return TRUE;
-
 }
 
 /* The Widget Stuff */
@@ -506,23 +504,19 @@ gedit_view_class_init (gedit_view_class *klass)
 	/*widget_class = (GtkWidgetClass *)klass;*/
 	
 	gedit_view_signals[CURSOR_MOVED_SIGNAL] = gtk_signal_new ("cursor_moved",
-														GTK_RUN_FIRST,
-														object_class->type,
-														GTK_SIGNAL_OFFSET (gedit_view_class, cursor_moved),
-														gtk_signal_default_marshaller,
-														GTK_TYPE_NONE,
-														0);
-	
+								  GTK_RUN_FIRST,
+								  object_class->type,
+								  GTK_SIGNAL_OFFSET (gedit_view_class, cursor_moved),
+								  gtk_signal_default_marshaller,
+								  GTK_TYPE_NONE,
+								  0);
 	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
-	
 	klass->cursor_moved = NULL;
-	
 	/*widget_class->size_allocate = gedit_view_size_allocate;
 	widget_class->size_request = gedit_view_size_request;
 	widget_class->expose_event = gedit_view_expose;
 	widget_class->realize = gedit_view_realize;
 	object_class->finalize = gedit_view_finalize;
-	
 	parent_class = gtk_type_class (gtk_vbox_get_type ());*/
 }
 
@@ -565,17 +559,15 @@ gedit_view_init (gedit_view *view)
 
 	
 	/* - Signals - */
-
 	gtk_signal_connect_after(GTK_OBJECT(view->text), "button_press_event",
-		GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);
-
+				 GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
-					GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
+				  GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
 
 
 	/* Handle Auto Indent */
 	view->indent = gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
-										 GTK_SIGNAL_FUNC(auto_indent_cb), view);
+						 GTK_SIGNAL_FUNC(auto_indent_cb), view);
 
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
@@ -587,12 +579,8 @@ gedit_view_init (gedit_view *view)
 		                           GTK_SIGNAL_FUNC(doc_delete_text_cb),
 		                           (gpointer) view);
 
-
-
 /*	gtk_signal_connect_after (GTK_OBJECT(view->text), "key_press_event",
 		GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);*/
-
-
 	gtk_container_add (GTK_CONTAINER (view->scrwindow[0]), view->text);
 
 /*	style = gtk_style_new();
@@ -604,8 +592,7 @@ gedit_view_init (gedit_view *view)
 	*/	
 /*	doc->changed = FALSE; */
 	view->changed_id = gtk_signal_connect(GTK_OBJECT(view->text), "changed",
-		GTK_SIGNAL_FUNC(view_changed_cb), view);
-
+					      GTK_SIGNAL_FUNC(view_changed_cb), view);
 
 	gtk_widget_show(view->text);
 	gtk_text_set_point(GTK_TEXT(view->text), 0);
@@ -614,10 +601,12 @@ gedit_view_init (gedit_view *view)
 	/* Create the bottom split screen */
 	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
 	gtk_paned_pack2 (GTK_PANED (view->pane), view->scrwindow[1], TRUE, TRUE);
+
 	/*gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[1], TRUE, TRUE, 1);*/
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[1]),
-				      GTK_POLICY_NEVER,
-				      GTK_POLICY_AUTOMATIC);
+					GTK_POLICY_NEVER,
+					GTK_POLICY_AUTOMATIC);
+
 	/*gtk_fixed_put (GTK_FIXED(view), view->scrwindow[1], 0, 0);*/
       	gtk_widget_show (view->scrwindow[1]);
 
@@ -628,26 +617,23 @@ gedit_view_init (gedit_view *view)
 
 	
 	/* - Signals - */
-
-	gtk_signal_connect_after(GTK_OBJECT(view->split_screen), "button_press_event",
-		GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);
+gtk_signal_connect_after(GTK_OBJECT(view->split_screen), "button_press_event",
+			 GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);
 
 	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "key_press_event",
-					GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
-
+				  GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
 	
 	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
-		                             GTK_SIGNAL_FUNC(doc_insert_text_cb),
-		                             (gpointer) view);
+					     GTK_SIGNAL_FUNC(doc_insert_text_cb),
+					     (gpointer) view);
 		                             
 	view->s_delete = gtk_signal_connect (GTK_OBJECT (view->split_screen), "delete_text",
-				                     GTK_SIGNAL_FUNC(doc_delete_text_cb),
-				                     (gpointer) view);
+					     GTK_SIGNAL_FUNC(doc_delete_text_cb),
+					     (gpointer) view);
 
 	view->s_indent = gtk_signal_connect_after (GTK_OBJECT(view->split_screen), "insert_text",
-	                                    GTK_SIGNAL_FUNC(auto_indent_cb),
-	                                    (gpointer) view);
-				
+						   GTK_SIGNAL_FUNC(auto_indent_cb),
+						   (gpointer) view);
 	gtk_container_add (GTK_CONTAINER (view->scrwindow[1]), view->split_screen);
 
 	view->split_parent = GTK_WIDGET (view->split_screen)->parent;
@@ -665,31 +651,27 @@ gedit_view_init (gedit_view *view)
 	fg->green = settings->fg[1];
 	fg->blue = settings->fg[2];
 
-	if (use_fontset) {
-	
+	if (use_fontset)
+	{
 		style->font = view->font ? gdk_fontset_load (view->font) : NULL;
-		
-		if (style->font == NULL) {
-		
+		if (style->font == NULL)
+		{
 			style->font = gdk_fontset_load (DEFAULT_FONTSET);
 			view->font = DEFAULT_FONTSET;
-		
-		} 
-
-	} else {
-		
+		}
+	}
+	else
+	{
 		style->font = view->font ? gdk_font_load (view->font) : NULL;
 		
-		if (style->font == NULL) {
-		
+		if (style->font == NULL)
+		{
 			style->font = gdk_font_load (DEFAULT_FONT);
 			view->font = DEFAULT_FONT;
-		
 		} 
 
 	}
 	
-
  	gtk_widget_push_style (style);     
 	gtk_widget_set_style(GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style(GTK_WIDGET(view->text), style);
@@ -702,7 +684,6 @@ gedit_view_init (gedit_view *view)
 	menu = gnome_popup_menu_new (popup_menu);
 	gnome_popup_menu_attach (menu, view->text, view);
 	gnome_popup_menu_attach (menu, view->split_screen, view);
-		
 	
         gnome_config_push_prefix ("/gEdit/Global/");
 	view->splitscreen = gnome_config_get_int("splitscreen");
@@ -712,10 +693,8 @@ gedit_view_init (gedit_view *view)
 	/*if (!view->splitscreen)
 	  gtk_widget_hide (GTK_WIDGET (view->split_screen)->parent);*/
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
-
 	/*gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
 	gtk_widget_show (view->vbox);*/
-
 	gtk_widget_grab_focus(view->text);
 	
 }
@@ -758,14 +737,14 @@ gedit_view_new (gedit_document *doc)
 #endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
-						 NULL,
-						 NULL, view->document->buf->str,
-						 view->document->buf->len);
+				 NULL, NULL,
+				 view->document->buf->str,
+				 view->document->buf->len);
 
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-						 NULL,
-						 NULL, view->document->buf->str,
-						 view->document->buf->len);
+				 NULL, NULL,
+				 view->document->buf->str,
+				 view->document->buf->len);
 
 		gedit_view_set_position (view, 0);
 
@@ -782,12 +761,10 @@ gedit_view_new (gedit_document *doc)
 
 
 /* Public Functions */
-
 void
 gedit_view_set_group_type (gedit_view *view, guint type)
 {
 	view->group_type = type;
-	
 	gtk_widget_queue_resize (GTK_WIDGET (view));
 }
 
@@ -797,15 +774,14 @@ gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 	if (!view->split_parent)
 		return;
 
-	if (split_screen) {
-
+	if (split_screen)
+	{
 	   	gtk_widget_show (view->split_parent);
-	
-	} else {
-
+	}
+	else
+	{
 		gtk_widget_hide (view->split_parent);
 	}
- 
    	view->splitscreen = split_screen;
 }
 
