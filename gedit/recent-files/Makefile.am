@@ -6,7 +6,7 @@ INCLUDES = \
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
 
-headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
+headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit/recent-files
 header_DATA =				\
         egg-recent-model.h		\
         egg-recent-item.h		\
