@@ -74,23 +74,30 @@ enum {
 	LAST_SIGNAL
 };
 
-#define KNOWN_LANGUAGES 23
+#define KNOWN_LANGUAGES 32
 static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] = 
 {
+	{"bg", N_("Bulgarian")},
+	{"bn", N_("Bengali")},
 	{"br", N_("Breton")},
 	{"ca", N_("Catalan")},
 	{"cs", N_("Czech")},
+	{"cy", N_("Welsh")},
 	{"da", N_("Danish")},
 	{"de_de", N_("German (Germany)")},
 	{"de_ch", N_("German (Swiss)")},
+	{"el", N_("Greek")},
 	{"en_us", N_("English (American)")},
 	{"en_gb", N_("English (British)")},
 	{"en_ca", N_("English (Canadian)")},
 	{"eo", N_("Esperanto")},
 	{"es", N_("Spanish")},
+	{"fi", N_("Finnish")},
 	{"fo", N_("Faroese")},
 	{"fr_fr", N_("French (France)")},
 	{"fr_ch", N_("French (Swiss)")},
+	{"ga", N_("Irish (Gaeilge)")},
+	{"is", N_("Icelandic")},
 	{"it", N_("Italian")},
 	{"nl", N_("Dutch")},
 	{"no", N_("Norwegian")},
@@ -98,6 +105,8 @@ static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] =
 	{"pt_pt", N_("Portuguese (Portugal)")},
 	{"pt_br", N_("Portuguese (Brazilian)")},
 	{"ru", N_("Russian")},
+	{"sk", N_("Slovak")},
+	{"sl", N_("Slovenian")},
 	{"sv", N_("Swedish")},
 	{"uk", N_("Ukrainian")},
 	{NULL, NULL}
