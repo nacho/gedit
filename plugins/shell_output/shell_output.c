@@ -414,7 +414,7 @@ init (GeditPlugin *pd)
 	gedit_debug (DEBUG_PLUGINS, "");
      
 	pd->name = _("Shell output");
-	pd->desc = _("Exucute a program and insert its output in the current document at the current "
+	pd->desc = _("Execute a program and insert its output in the current document at the current "
 		     "cursor position");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
