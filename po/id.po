@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-10-25 09:39+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <l10n@gnome.linux.or.id>\n"
@@ -44,7 +44,7 @@ msgstr "pabrikan pengotomatisan gedit"
 msgid "Edit text files"
 msgstr "Edit file teks"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Pengedit teks"
 
@@ -508,11 +508,16 @@ msgstr ""
 "dinamai dalam pilihan \"Huruf Pengedit\", akan digunakan daripada huruf "
 "system."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,SEKARANG,ISO-8859-15]"
 
@@ -599,9 +604,13 @@ msgstr[1] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#, fuzzy
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
+msgstr[1] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, fuzzy, c-format
@@ -615,15 +624,6 @@ msgstr[0] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 msgstr[1] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
-msgstr[1] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -719,39 +719,6 @@ msgstr "Pengkodean karakter"
 msgid "E_ncodings shown in menu:"
 msgstr "E_nkoding yang ditampilkan pada menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Pemilih huruf tubuh"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Tekan tombol ini untuk memilih huruf yang dipergunakan untuk mencetak tubuh "
-"dokumen"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Pemilih huruf untuk kepala halaman"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Tekan tombol ini untuk memilih huruf yang akan dipergunakan untuk mencetak "
-"kepala halaman."
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Pemilih jenis huruf untuk nomor baris"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Tekan tombol ini untuk memilih jenis huruf yang akan dipergunakan untuk "
-"mencetak nomor baris"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Plugin"
@@ -782,32 +749,32 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "File yang terpilih tidak dapat dijalankan."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Tekan tombol ini untuk memilih huruf yang akan digunakan oleh editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Tekan tombol ini untuk mengkonfigurasi warna teks"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Tekan tombol ini untuk menentukan warna latar"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Tekan tombol ini untuk menseting warna yang akan mewarnar teks yang muncul"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Tekan tombol ini untuk mengkonfigurasi warna teks yang ditandai"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Bagian"
 
@@ -818,7 +785,8 @@ msgid "    "
 msgstr "\t"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Indentasi Otomatis</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -843,7 +811,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Batas Kanan</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Tab</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -986,7 +955,8 @@ msgid "_Display line numbers"
 msgstr "Tampilkan _nomor baris"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "Aktifkan ind_entasi otomatis"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1010,22 +980,18 @@ msgid "_Right margin at column:"
 msgstr "Batas kanan pada kolom:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Lebar tab:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Pembatalan tidak terbatas"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "G_unakan tema huruf default"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_menit"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "kal_i"
 
@@ -1177,47 +1143,47 @@ msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Ahmad Riza H Nst <ari@160c.afraid.org>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Dokumen"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Nama file yang salah"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Data UTF-8 yang salah"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Tidak dapat membaca informasi symbolic link untuk %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "File ini terlalu banyak memiliki symbolic link"
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit gak bisa menangani lokasi %s dalam mode tulis."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit gak bisa menangani lokasi ini dalam mode tulis."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Nama file tidak benar."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1225,7 +1191,7 @@ msgstr ""
 "Tidak cukup ruang untuk menyimpan file.\n"
 "Silahkan kosongkan beberapa ruang dan coba lagi."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1235,7 +1201,7 @@ msgstr ""
 "coba menyimpan dengan file yang lebih kecil atau simpan ke disk yang gak "
 "menjalankan batasan."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Tidak dapat membuat file backup."
 
@@ -1365,7 +1331,7 @@ msgstr "Vietnam"
 msgid "Thai"
 msgstr "Thailand"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Tidak dikenal"
 
@@ -1412,35 +1378,35 @@ msgstr "Pilih file-file yang hendak dibuka"
 msgid "Select a filename to save"
 msgstr "Berikan nama file untuk menyimpan file ini"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Buka File..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Simpan dokument \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumen \"%s\" belun disimpan."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumen \"%s\" telah disimpan."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Simpan sebagai..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Ulangi dokumen yang belun tersimpan ke dokumen \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1450,12 +1416,12 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada jam terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1466,7 +1432,7 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1476,11 +1442,15 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Perubahan di dokumen pada jam terakhir akan hilang."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Perubahan di dokumen pada jam terakhir akan hilang."
+msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1491,84 +1461,398 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:592
-#, fuzzy, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Perubahan di dokumen pada jam terakhir akan hilang."
-msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Kembali ke asal"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Kesalahan mengembalikan dokumen \"%s\"."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumen \"%s\" tidak terkembalikan."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumen \"%s\" telah dikembalikan."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Mengembalikan dokumen \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Tidak bisa membaca data dari stdin."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Mengembalikan file:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Meload file:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Kesalahan saat meload file \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Telah meload file \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, fuzzy, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Sejumlah %d berkas telah dibuka"
 msgstr[1] "Sejumlah %d berkas telah dibuka"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Telah meload file \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Meload file \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Membuka %d berkas..."
 msgstr[1] "Membuka %d berkas..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Berkas \"%s\" tidak dapat dibuka"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" adalah direktori.\n"
+"\n"
+"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak kemudian "
+"coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Berkas \"%s\" tidak dapat dibuka"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Tidak dapat membuka file \"%s\" karena berisi data yang rusak."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit gak bisa menangani lokasi %s dalam mode tulis."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit gak bisa menangani lokasi %s dalam mode tulis."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena berisi data dengan bentuk/format "
+"yang salah."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "File ini terlalu banyak memiliki symbolic link"
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena terlalu banyak berkas yang sedang "
+"dibuka.\n"
+"\n"
+"Cobalah untuk menutup beberapa berkas dan coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Memori yang tersedia kurang mencukupi untuk membuka berkas \"%s\". Silakan "
+"tutup dulu beberapa aplikasi dan coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena host \"%s"
+"\" tidak ditemukan.\n"
+"\n"
+"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak dan apakah "
+"konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru Anda dapat "
+"mencobanya kembali."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" bukan lokasi yang benar.\n"
+"\n"
+"Silakan periksa apakah lokasi yang Anda ketikkan itu benar atau tidak, "
+"kemudian coba kembali."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena nama hostnya kosong.\n"
+"\n"
+"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
+"baru Anda dapat mencobanya kembali."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Tidak menemukan file \"%s\".\n"
+"\n"
+"Silahkan, periksa anda telah mengetikkan lokasi dengan benar dan coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena berisi data yang tidak dapat "
+"dikenali.\n"
+"\n"
+"Mungkin berkas ini adalah berkas biner."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka sebab gedit belum dapat mendeteksi otomatis "
+"pengkodean karakter yang dimiliki berkas tersebut.\n"
+"\n"
+"Silakan periksa apakah benar berkas tersebut bukanlah berkas biner dan coba "
+"lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
+"'Buka Lokasi')."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Berkas \"%s\" tidak dapat dibuka karena terlalu besar."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka dengan pengkodean karakter %s.\n"
+"\n"
+"Silakan periksa apakah benar berkas tersebut bukanlah berkas biner dan coba "
+"lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
+"'Buka Lokasi')."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena berisi data yang tidak dapat "
+"dikenali.\n"
+"\n"
+"Mungkin berkas ini adalah berkas biner."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena berkas "
+"aslinya hilang.\n"
+"\n"
+"Mungkin sudah dihapus ya?"
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena terlalu banyak berkas yang sedang "
+"dibuka.\n"
+"\n"
+"Cobalah untuk menutup beberapa berkas dan coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Memori yang tersedia kurang mencukupi untuk membuka berkas \"%s\". Silakan "
+"tutup dulu beberapa aplikasi dan coba lagi."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuka karena nama hostnya kosong.\n"
+"\n"
+"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
+"baru Anda dapat mencobanya kembali."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena berisi "
+"data dengan kode UTF-8 yang salah.\n"
+"\n"
+"Mungkin Anda sedang mengembalikan berkas biner."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Dokumen belum berjudul tidak dapat dikembalikan ke bentuk semula."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Berkas \"%s\" tidak dapat disimpan."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Berkas \"%s\" sudah ada."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" adalah direktori.\n"
+"\n"
+"Silakan periksa apakah Anda menuliskan lokasi yang benar."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Berkas \"%s\" tidak dapat dibuat."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuat.\n"
+"\n"
+"Pastikan Anda memiliki hak akses untuk menulis."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuat.\n"
+"\n"
+"Nama berkas terlalu panjang."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Berkas \"%s\" tidak dapat dibuat.\n"
+"\n"
+"Komponen direktori pada nama berkas tidak ada atau merupakan link simbolis "
+"yang salah."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Ruangan disk tidak mencukupi untuk membuat berkas \"%s\".\n"
+"\n"
+"Silakan kosongkan dulu dan coba lagi."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1580,46 +1864,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "Pi_ndah ke Jendela Baru"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unikode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Nama:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Tipe MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Encoding:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Buka '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Buka file yang sedang digunakan"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(baca saja)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Gunakan model penandaan normal"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Gunakan mode penandaan %s"
@@ -2071,415 +2355,7 @@ msgstr "_Batalkan"
 msgid "_View"
 msgstr "_Tampilan"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Tidak menemukan file \"%s\".\n"
-"\n"
-"Silahkan, periksa anda telah mengetikkan lokasi dengan benar dan coba lagi."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Tidak dapat membuka file \"%s\" karena berisi data yang rusak."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena gedit tidak dapat membuka lokasi %s."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Berkas \"%s\" tidak dapat dibuka"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena berisi data dengan bentuk/format "
-"yang salah."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Berkas \"%s\" tidak dapat dibuka karena terlalu besar."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" bukan lokasi yang benar.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda ketikkan itu benar atau tidak, "
-"kemudian coba kembali."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Berkas \"%s\" tidak dapat dibuka karena aksesnya ditolak."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena terlalu banyak berkas yang sedang "
-"dibuka.\n"
-"\n"
-"Cobalah untuk menutup beberapa berkas dan coba lagi."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" adalah direktori.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak kemudian "
-"coba lagi."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Memori yang tersedia kurang mencukupi untuk membuka berkas \"%s\". Silakan "
-"tutup dulu beberapa aplikasi dan coba lagi."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena gagal saat login.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
-"baru Anda dapat mencobanya kembali."
-
-#: gedit/gedit-utils.c:546
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena nama host tidak ditemukan.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak dan apakah "
-"konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru Anda dapat "
-"mencobanya kembali."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena nama hostnya kosong.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
-"baru Anda dapat mencobanya kembali."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena gagal saat login.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
-"baru Anda dapat mencobanya kembali."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka karena berisi data yang tidak dapat "
-"dikenali.\n"
-"\n"
-"Mungkin berkas ini adalah berkas biner."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Berkas \"%s\" tidak dapat dibuka."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka sebab gedit belum dapat mendeteksi otomatis "
-"pengkodean karakter yang dimiliki berkas tersebut.\n"
-"\n"
-"Silakan periksa apakah benar berkas tersebut bukanlah berkas biner dan coba "
-"lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
-"'Buka Lokasi')."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka dengan pengkodean karakter %s.\n"
-"\n"
-"Silakan periksa apakah benar berkas tersebut bukanlah berkas biner dan coba "
-"lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
-"'Buka Lokasi')."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuka.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Berkas \"%s\" tidak dapat disimpan."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Berkas \"%s\" tidak dapat disimpan.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena berkas "
-"aslinya hilang.\n"
-"\n"
-"Mungkin sudah dihapus ya?"
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena datanya rusak."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena gedit tidak "
-"dapat mengakses lokasi %s."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena berisi data "
-"dengan isi yang tidak benar."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena ukurannya "
-"terlalu besar."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Berkas \"%s\" tidak dapat dikembalikan ke aksesnya ditolak."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena saat ini "
-"terlalu banyak berkas yang dibuka.\n"
-"\n"
-"Silakan tutup beberapa berkas dan coba lagi."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Memori yang tersedia kurang mencukupi untuk mengembalikan berkas \"%s\" ke "
-"bentuk semula. Silakan tutup dulu beberapa aplikasi dan coba lagi."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena host \"%s"
-"\" tidak ditemukan.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak dan apakah "
-"konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru Anda dapat "
-"mencobanya kembali."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena nama hostnya "
-"kosong.\n"
-"\n"
-"Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
-"baru Anda dapat mencobanya kembali."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena gagal saat "
-"login."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena berisi "
-"data dengan kode UTF-8 yang salah.\n"
-"\n"
-"Mungkin Anda sedang mengembalikan berkas biner."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Dokumen belum berjudul tidak dapat dikembalikan ke bentuk semula."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Berkas \"%s\" sudah ada."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" adalah direktori.\n"
-"\n"
-"Silakan periksa apakah Anda menuliskan lokasi yang benar."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuat.\n"
-"\n"
-"Pastikan Anda memiliki hak akses untuk menulis."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuat.\n"
-"\n"
-"Nama berkas terlalu panjang."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Berkas \"%s\" tidak dapat dibuat.\n"
-"\n"
-"Komponen direktori pada nama berkas tidak ada atau merupakan link simbolis "
-"yang salah."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Ruangan disk tidak mencukupi untuk membuat berkas \"%s\".\n"
-"\n"
-"Silakan kosongkan dulu dan coba lagi."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Berkas \"%s\" tidak dapat dibuat."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2489,16 +2365,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Baris %d, Kolom %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  TIMPA"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  SISIP"
 
@@ -3078,11 +2956,13 @@ msgid "The document is empty."
 msgstr "Dokumen masih kosong"
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Tidak ada kata yang salah eja pada teks yang terpilih."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Tidak ada kata yang salah eja pada dokumen ini."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3192,6 +3072,179 @@ msgstr "_Masukkan format sendiri"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "G_unakan format ini"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
+#~ msgstr[1] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
+
+#~ msgid "Body font picker"
+#~ msgstr "Pemilih huruf tubuh"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Tekan tombol ini untuk memilih huruf yang dipergunakan untuk mencetak "
+#~ "tubuh dokumen"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Pemilih huruf untuk kepala halaman"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Tekan tombol ini untuk memilih huruf yang akan dipergunakan untuk "
+#~ "mencetak kepala halaman."
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Pemilih jenis huruf untuk nomor baris"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Tekan tombol ini untuk memilih jenis huruf yang akan dipergunakan untuk "
+#~ "mencetak nomor baris"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "Lebar tab:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Perubahan di dokumen pada jam terakhir akan hilang."
+#~ msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dibuka karena gedit tidak dapat membuka lokasi %"
+#~ "s."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Berkas \"%s\" tidak dapat dibuka karena aksesnya ditolak."
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dibuka karena gagal saat login.\n"
+#~ "\n"
+#~ "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. "
+#~ "Kemudian baru Anda dapat mencobanya kembali."
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dibuka karena nama host tidak ditemukan.\n"
+#~ "\n"
+#~ "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak dan "
+#~ "apakah konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru "
+#~ "Anda dapat mencobanya kembali."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dibuka karena gagal saat login.\n"
+#~ "\n"
+#~ "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. "
+#~ "Kemudian baru Anda dapat mencobanya kembali."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Berkas \"%s\" tidak dapat dibuka."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dibuka.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat disimpan.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena datanya "
+#~ "rusak."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena gedit "
+#~ "tidak dapat mengakses lokasi %s."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena berisi "
+#~ "data dengan isi yang tidak benar."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena "
+#~ "ukurannya terlalu besar."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Berkas \"%s\" tidak dapat dikembalikan ke aksesnya ditolak."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena saat "
+#~ "ini terlalu banyak berkas yang dibuka.\n"
+#~ "\n"
+#~ "Silakan tutup beberapa berkas dan coba lagi."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Memori yang tersedia kurang mencukupi untuk mengembalikan berkas \"%s\" "
+#~ "ke bentuk semula. Silakan tutup dulu beberapa aplikasi dan coba lagi."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena nama "
+#~ "hostnya kosong.\n"
+#~ "\n"
+#~ "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. "
+#~ "Kemudian baru Anda dapat mencobanya kembali."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena gagal "
+#~ "saat login."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Tidak menemukan tambahan-manager.glade2, pasang ulang gedit.\n"

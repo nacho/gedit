@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.118.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-03-23 11:09+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -50,7 +50,7 @@ msgstr "oujhene d' otomatijhaedje gedit"
 msgid "Edit text files"
 msgstr "Asspougnî des fitchîs tecses"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Aspougneu di tecse"
 
@@ -463,11 +463,16 @@ msgid ""
 "\"Editor Font\" option will be used instead of the system font."
 msgstr ""
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr ""
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr ""
 
@@ -563,9 +568,15 @@ msgstr[1] ""
 "pierdous po todi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#, fuzzy
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Si vos n' schapez nén, les candjmints del dierinne eure seront pierdous po "
+"todi."
+msgstr[1] ""
 "Si vos n' schapez nén, les candjmints del dierinne eure seront pierdous po "
 "todi."
 
@@ -583,19 +594,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Si vos n' schapez nén, les candjmints del dierinne eure et %d munutes seront "
 "pierdous po todi."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Si vos n' schapez nén, les candjmints del dierinne eure seront pierdous po "
-"todi."
-msgstr[1] ""
-"Si vos n' schapez nén, les candjmints des %d dierinnès eures seront pierdous "
-"po todi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -687,39 +685,6 @@ msgstr ""
 msgid "E_ncodings shown in menu:"
 msgstr "Ecôdaedjes _håynés e menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr ""
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer "
-"l' coir do tecse"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr ""
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer les "
-"tiestires"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr ""
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer les "
-"limeros d' roye"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Tchoûke-didins"
@@ -750,20 +715,20 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Li fitchî tchoezi n' est nén enondåve."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po l' aspougneu."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Tchôkîz so ç' boton chal po-z apontyî l' coleur do tecse"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Tchôkîz ci boton chal po-z apontyî li coleur do fond"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -771,7 +736,7 @@ msgstr ""
 "Tchôkîz so ç' boton chal po-z apontyî l' coleur po mostrer k' on tecse a stî "
 "tchoezi"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -779,7 +744,7 @@ msgstr ""
 "Tchôkîz so ç' boton chal po-z apontyî l' coleur ki l' tecse tchoezi dvreut "
 "esse marké"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr ""
 
@@ -790,7 +755,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Ritraits otomatikes</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -815,7 +781,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Mådje di droete</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulåcions</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -958,7 +925,7 @@ msgid "_Display line numbers"
 msgstr "_Håyner les limeros di roye"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+msgid "_Enable automatic indentation"
 msgstr ""
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -982,22 +949,18 @@ msgid "_Right margin at column:"
 msgstr ""
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Lårdjeu des _tabulåcions:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr ""
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Eployî li prémetowe fonte do tinme"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_munutes"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "acc_ion(s)"
 
@@ -1151,48 +1114,48 @@ msgstr ""
 "Ratournaedje e walon:\n"
 "Pablo Saratxaga <pablo@mandrakesoft.com>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Documints"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "No d' fitchî nén valide."
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Dinêyes UTF-8 nén valides"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Dji n' a savou lere les informåcions pol loyén simbolike %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Li fitchî a d' trop di loyéns simbolikes."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit èn pout nén manaedjî les eplaeçmints «%s:» e môde sicrijhaedje."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 "gedit èn pout nén manaedjî cisse sôre d' eplaeçmints e môde sicrijhaedje."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "No d' fitchî nén valide."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1200,7 +1163,7 @@ msgstr ""
 "I gn a nén del plaece assez sol deure plake po schaper l' fitchî.\n"
 "Fijhoz ene miete di plaece divant di rsayî s' i vs plait."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1210,7 +1173,7 @@ msgstr ""
 "sol grandeu des fitchîs. Sayîz di schaper on fitchî pus ptit, oudonbén del "
 "schaper so ene deure plake ki n' a nén cisse limitåcion la."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Dji n' a nén savou fé on fitchî copeye di såvrité."
 
@@ -1340,7 +1303,7 @@ msgstr "Vietnamyin"
 msgid "Thai"
 msgstr "Taylandès"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Nén cnoxhou"
 
@@ -1387,35 +1350,35 @@ msgstr "Tchoezixhoz les fitchîs a drovi"
 msgid "Select a filename to save"
 msgstr "Tchoezixhoz on no d' fitchî po schaper"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Drovi on fitchî..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Dji schape li documint «%s»..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Li documint «%s» n' a nén stî schapé."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Li documint «%s» a stî schapé."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Schaper et rlomer..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1425,13 +1388,13 @@ msgid_plural ""
 msgstr[0] "Les candjmints del dierinne segonde seront pierdous po todi."
 msgstr[1] "Les candjmints des %ld dierinnès segondes seront pierdous po todi."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 #, fuzzy
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Les candjmints del dierinne munute seront pierdous po todi."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1444,7 +1407,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Les candjmints del dierinne munute et %ld segondes seront pierdous po todi."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1454,12 +1417,15 @@ msgid_plural ""
 msgstr[0] "Les candjmints del dierinne munute seront pierdous po todi."
 msgstr[1] "Les candjmints des %ld dierinnès munutes seront pierdous po todi."
 
-#: gedit/gedit-file.c:571
-#, fuzzy
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Les candjmints del dierinne eure seront pierdous po todi."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Les candjmints del dierinne eure seront pierdous po todi."
+msgstr[1] "Les candjmints del dierinne eure seront pierdous po todi."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1472,84 +1438,378 @@ msgstr[0] ""
 msgstr[1] ""
 "Les candjmints del dierinne eure et %d munutes seront pierdous po todi."
 
-#: gedit/gedit-file.c:592
-#, fuzzy, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Les candjmints del dierinne eure seront pierdous po todi."
-msgstr[1] "Les candjmints des %d dierinnès eures seront pierdous po todi."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Rimete come divant"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, fuzzy, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Dji n' pout rimete come divant l' fitchî «%s»."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, fuzzy, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Li documint n' a nén stî rmetou come divant."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, fuzzy, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Li documint n' a nén stî rmetou come divant."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Dji rmete come divant l' documint «%s»..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Dji n' a savou lere les dnêyes del intrêye sitandård (stdin)."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Dji rmete come divant l' fitchî:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Dji tchedje li fitchî:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Åk n' a nén stî tot tcherdjant l' fitchî «%s»"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Fitchî «%s» tcherdjî"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d fitchî tcherdjî"
 msgstr[1] "%d fitchîs tcherdjîs"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Fitchî «%s» tcherdjî"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Dji tchedje li fitchî «%s»..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Dji tchedje %d fitchî..."
 msgstr[1] "Dji tchedje %d fitchîs..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Dji n' pout drovi l' fitchî «%s»"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"«%s» e-st on ridant.\n"
+"\n"
+"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Dji n' pout drovi l' fitchî «%s»"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca il a å dvins des crombès dnêyes."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit èn pout nén manaedjî les eplaeçmints «%s:» e môde sicrijhaedje."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit èn pout nén manaedjî les eplaeçmints «%s:» e môde sicrijhaedje."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca i contént des dnêyes dins ene cogne "
+"nén valide."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Li fitchî a d' trop di loyéns simbolikes."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» cåze k' i gn a di trop d' fitchîs "
+"d' drovous.\n"
+"\n"
+"I vs è fåt clôre sacwants et rsayî, s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nén del memwere libe assez po drovi l' fitchî «%s». I vs fåt clôre sacwants "
+"programes et rsayî, s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca l' no d' lodjoe esteut vude.\n"
+"\n"
+"Verifyîz ki l' apontiaedje di vosse proxy est corek, poy rissayîz s' i vs "
+"plait."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"«%s» n' est nén on eplaeçmint valide.\n"
+"\n"
+"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca l' no d' lodjoe esteut vude.\n"
+"\n"
+"Verifyîz ki l' apontiaedje di vosse proxy est corek, poy rissayîz s' i vs "
+"plait."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Dji n' a savou trover l' fitchî «%s».\n"
+"\n"
+"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca i gn a-st å dvins des dnêyes UTF-8 "
+"nén valides.\n"
+"\n"
+"Motoit bén ki vos sayîz d' drovi on fitchî binaire."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca dji n' trova nou lodjoe «%s».\n"
+"\n"
+"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et ki l' apontiaedje di "
+"vosse proxy est corek, poy rissayîz s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Dji n' a savou drovi l' fitchî «%s» ca il est pår trop gros."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca dji n' trova nou lodjoe «%s».\n"
+"\n"
+"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et ki l' apontiaedje di "
+"vosse proxy est corek, poy rissayîz s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca i gn a-st å dvins des dnêyes UTF-8 "
+"nén valides.\n"
+"\n"
+"Motoit bén ki vos sayîz d' drovi on fitchî binaire."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Dji n' pout rimete come divant l' fitchî «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:399
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» cåze k' i gn a di trop d' fitchîs "
+"d' drovous.\n"
+"\n"
+"I vs è fåt clôre sacwants et rsayî, s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nén del memwere libe assez po drovi l' fitchî «%s». I vs fåt clôre sacwants "
+"programes et rsayî, s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca l' no d' lodjoe esteut vude.\n"
+"\n"
+"Verifyîz ki l' apontiaedje di vosse proxy est corek, poy rissayîz s' i vs "
+"plait."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Dji n' a savou drovi l' fitchî «%s» ca i gn a-st å dvins des dnêyes UTF-8 "
+"nén valides.\n"
+"\n"
+"Motoit bén ki vos sayîz d' drovi on fitchî binaire."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Vos n' poloz nén rimete come divant on documint sins tite."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Dji n' pout schaper l' fitchî «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Li fitchî «%s» egzistêye dedja."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"«%s» e-st on ridant.\n"
+"\n"
+"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt, s' i vs plait."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Dji n' pout askepyî l' fitchî «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:670
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Dji n' a savou askepyî l' fitchî «%s».\n"
+"\n"
+"Li no d' fitchî est pår trop long."
+
+#: gedit/gedit-io-error-dialogs.c:682
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"I gn a nén del plaece assez sol deure plake po-z askepyî l' fitchî «%s».\n"
+"\n"
+"Fijhoz ene miete di plaece divant di rsayî s' i vs plait."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1561,47 +1821,47 @@ msgstr ""
 msgid "_Move to New Window"
 msgstr ""
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicôde (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "No:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Sôre MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Ecôdaedje:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Drovi «%s»"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 #, fuzzy
 msgid "Open a recently used file"
 msgstr "Drovi on fitchî"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(seulmint lere)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normå"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr ""
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr ""
@@ -2066,362 +2326,7 @@ msgstr "_Disfé"
 msgid "_View"
 msgstr "_Vey"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Dji n' a savou trover l' fitchî «%s».\n"
-"\n"
-"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca il a å dvins des crombès dnêyes."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» cåze ki gedit èn sait nén manaedjî les "
-"eplaeçmints «%s:»."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Dji n' pout drovi l' fitchî «%s»"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca i contént des dnêyes dins ene cogne "
-"nén valide."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Dji n' a savou drovi l' fitchî «%s» ca il est pår trop gros."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» n' est nén on eplaeçmint valide.\n"
-"\n"
-"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Dji n' a savou drovi l' fitchî «%s», dj' a nén l' droet d' accès."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» cåze k' i gn a di trop d' fitchîs "
-"d' drovous.\n"
-"\n"
-"I vs è fåt clôre sacwants et rsayî, s' i vs plait."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» e-st on ridant.\n"
-"\n"
-"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt et rsayîz s' i vs plait."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nén del memwere libe assez po drovi l' fitchî «%s». I vs fåt clôre sacwants "
-"programes et rsayî, s' i vs plait."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Dji n' a polou drovi l' fitchî «%s» ca l' no d' lodjoe n' est nén valide.\n"
-"\n"
-"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et rsayîz, s' i vs plait."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca dji n' trova nou lodjoe «%s».\n"
-"\n"
-"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et ki l' apontiaedje di "
-"vosse proxy est corek, poy rissayîz s' i vs plait."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca l' no d' lodjoe esteut vude.\n"
-"\n"
-"Verifyîz ki l' apontiaedje di vosse proxy est corek, poy rissayîz s' i vs "
-"plait."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca l' saye d' elodjaedje a fwait "
-"berwete.\n"
-"\n"
-"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et rissayîz, s' i vs plait."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca i gn a-st å dvins des dnêyes UTF-8 "
-"nén valides.\n"
-"\n"
-"Motoit bén ki vos sayîz d' drovi on fitchî binaire."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Dji n' a savou drovi l' fitchî «%s»."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Dji n' a savou drovi l' fitchî «%s» ca dji n' trova nou lodjoe «%s».\n"
-"\n"
-"Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et ki l' apontiaedje di "
-"vosse proxy est corek, poy rissayîz s' i vs plait."
-
-#: gedit/gedit-utils.c:700
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr "Dji n' a savou drovi l' fitchî «%s»."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Dji n' pout schaper l' fitchî «%s»."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Dji n' pout schaper l' fitchî «%s».\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Dji n' pout rimete come divant l' fitchî «%s»."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Vos n' poloz nén rimete come divant on documint sins tite."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Li fitchî «%s» egzistêye dedja."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"«%s» e-st on ridant.\n"
-"\n"
-"Verifyîz ki vs avoz tapé l' eplaeçmint comufåt, s' i vs plait."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Dji n' a savou askepyî l' fitchî «%s».\n"
-"\n"
-"Li no d' fitchî est pår trop long."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"I gn a nén del plaece assez sol deure plake po-z askepyî l' fitchî «%s».\n"
-"\n"
-"Fijhoz ene miete di plaece divant di rsayî s' i vs plait."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Dji n' pout askepyî l' fitchî «%s»."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2431,16 +2336,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  roye %d, colone %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  SIPOTCHÎ"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  SITITCHÎ"
 
@@ -3028,11 +2935,13 @@ msgid "The document is empty."
 msgstr "Li documint est vude."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Li tecse tchoezi n' a nou mot må scrît."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Li documint n' a nou mot må scrît."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3144,6 +3053,109 @@ msgstr ""
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr ""
+
+#, fuzzy
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Si vos n' schapez nén, les candjmints del dierinne eure seront pierdous "
+#~ "po todi."
+#~ msgstr[1] ""
+#~ "Si vos n' schapez nén, les candjmints des %d dierinnès eures seront "
+#~ "pierdous po todi."
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer "
+#~ "l' coir do tecse"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer les "
+#~ "tiestires"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Tchôkîz so ç' boton chal po tchoezi l' fonte a-z eployî po-z imprimer les "
+#~ "limeros d' roye"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "Lårdjeu des _tabulåcions:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Les candjmints del dierinne eure seront pierdous po todi."
+#~ msgstr[1] "Les candjmints des %d dierinnès eures seront pierdous po todi."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Dji n' a savou drovi l' fitchî «%s» cåze ki gedit èn sait nén manaedjî "
+#~ "les eplaeçmints «%s:»."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Dji n' a savou drovi l' fitchî «%s», dj' a nén l' droet d' accès."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Dji n' a polou drovi l' fitchî «%s» ca l' no d' lodjoe n' est nén "
+#~ "valide.\n"
+#~ "\n"
+#~ "Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et rsayîz, s' i vs plait."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Dji n' a savou drovi l' fitchî «%s» ca dji n' trova nou lodjoe «%s».\n"
+#~ "\n"
+#~ "Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et ki l' apontiaedje di "
+#~ "vosse proxy est corek, poy rissayîz s' i vs plait."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Dji n' a savou drovi l' fitchî «%s» ca l' saye d' elodjaedje a fwait "
+#~ "berwete.\n"
+#~ "\n"
+#~ "Verifyîz ki vos avoz tapé l' eplaeçmint comufåt et rissayîz, s' i vs "
+#~ "plait."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Dji n' a savou drovi l' fitchî «%s»."
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr "Dji n' a savou drovi l' fitchî «%s»."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Dji n' pout schaper l' fitchî «%s».\n"
+#~ "\n"
+#~ "%s"
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Dji n' a savou trover plugin-manager.glade2, rastalez gedit.\n"

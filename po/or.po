@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.or\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-07-22 17:20+0530\n"
 "Last-Translator: Gora Mohanty <gora_mohanty@yahoo.co.in>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
@@ -44,7 +44,7 @@ msgstr "ଡିଏଡିଟ୍ ସ୍ବୟଂତାଳନ କାରଖାନା"
 msgid "Edit text files"
 msgstr "ପାଠ୍ଯ ଫାଇଲଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "ପାଠ୍ଯ ସମ୍ପାଦକ"
 
@@ -492,11 +492,16 @@ msgstr ""
 "କରାଯିବ କି.ଏହି ଚୟନ ବଛା ନ ହୋଇଥିଲେ, ତନ୍ତ୍ରର ଅକ୍ଷରରୂପ ବଦଳରେ \"ସମ୍ପାଦକ ଅକ୍ଷରରୂପ\" ଚୟନରେ "
 "ଦିଆଯାଇଥିବା ଅକ୍ଷରରୂପବ୍ଯବହାର କରାଯିବ."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ଆଇ.ଏସ.ଓ.-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[ୟୁ.ଟି.ଏଫ.-୮,ସାମ୍ପ୍ରତିକ,ଆଇ.ଏସ.ଓ.-8859-15]"
 
@@ -575,8 +580,13 @@ msgstr[0] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %ld ମିନି�
 msgstr[1] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %ld ମିନିଟ୍ ର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
+msgstr[1] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -588,15 +598,6 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ ଘଣ୍ଟା ଓ %d ମିନିଟ୍ ର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
 msgstr[1] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ ଘଣ୍ଟା ଓ %d ମିନିଟ୍ ର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %d ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
-msgstr[1] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %d ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -688,33 +689,6 @@ msgstr "ଅକ୍ଷର ସଙ୍କେତାବଳୀ"
 msgid "E_ncodings shown in menu:"
 msgstr "ମେନୁରେ ପ୍ରଦର୍ଶିତ ସଙ୍କେତାବଳୀ: (_E)"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "ମୁଖ୍ଯ ଅଂଶର ଅକ୍ଷରରୂପର ଚୟକ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr "ମୁଦ୍ରଣ ସମୟରେ ଦଲିଲର ମୁଖ୍ଯ ଅଂଶର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "ପୃଷ୍ଠାର ଶୀର୍ଷଗୁଡ଼ିକର ଅକ୍ଷରରୂପର ଚୟକ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr "ମୁଦ୍ରଣ ସମୟରେ ପୃଷ୍ଠାର ଶୀର୍ଷଗୁଡ଼ିକର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "ଧାଡ଼ି ସଂଖ୍ଯାଗୁଡ଼ିକର ଅକ୍ଷରରୂପର ଚୟକ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr "ମୁଦ୍ରଣ ସମୟରେ ଧାଡ଼ି ସଂଖ୍ଯାଗୁଡ଼ିକର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "ପ୍ଲଗ୍ଇନ୍"
@@ -743,31 +717,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "ବଛା ହୋଇଥିବା ଫାଇଲ ନିଷ୍ପାଦନୀୟ ନୁହେଁ."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "ସମ୍ପାଦକ ବ୍ଯବହାର କରିବା ନିମନ୍ତେ ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବି ଦବାନ୍ତୁ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "ପାଠ୍ଯ ରଙ୍ଗ ବିନ୍ଯାସ କରିବା ପାଇଁ ଏହି ଚାବି ଦବାନ୍ତୁ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "ପୃଷ୍ଠଭୂମି ରଙ୍ଗ ବିନ୍ଯାସ କରିବା ପାଇଁ ଏହି ଚାବି ଦବାନ୍ତୁ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "ବଛା ହୋଇଥିବା ପାଠ୍ଯର ରଙ୍ଗ ବିନ୍ଯାସ କରିବା ପାଇଁ ଏହି ଚାବି ଦବାନ୍ତୁ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "ବଛା ହୋଇଥିବା ପାଠ୍ଯକୁ ଚିହ୍ନିତ କରିବା ପାଇଁ ରଙ୍ଗ ବିନ୍ଯାସ କରିବା ପାଇଁ ଏହି ଚାବି ଦବାନ୍ତୁ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "ମୌଳିକ ଉପାଦାନଗୁଡ଼ିକ"
 
@@ -778,7 +752,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>ସ୍ବଂୟଅନୁଛେଦକରଣ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -803,7 +778,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>ଡାହାଣ ମାର୍ଜିନ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>ଟ୍ଯାବ୍</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -946,7 +922,8 @@ msgid "_Display line numbers"
 msgstr "ଧାଡ଼ି ସଂଖ୍ଯା ପ୍ରଦର୍ଶିତ କରନ୍ତୁ (_D)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "ସ୍ବଅନୁଛେଦନ ସମର୍ଥ କରନ୍ତୁ (_E)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -970,22 +947,18 @@ msgid "_Right margin at column:"
 msgstr "ଡାହାଣ ମାର୍ଜିନ ଏହି ସ୍ତମ୍ବରେ: (_R)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "ଟ୍ଯାବର ଓସାର (_T)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "ଅସୀମିତ ପଦକ୍ଷେପ ବାତିଲ (_U)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ପ୍ରସଙ୍ଗର ଅକ୍ଷରରୂପ ବ୍ଯବହାର କରନ୍ତୁ (_U)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "ମିନିଟ୍ (_m)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "କାମ (_i)"
 
@@ -1135,47 +1108,47 @@ msgstr "ଜିଏଡିଟ୍"
 msgid "translator_credits"
 msgstr "ଗୋରା ମହାନ୍ତି <gora_mohanty@yahoo.co.in>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "ଦଲିଲଗୁଡ଼ିକ (_D)"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "ଅବୈଧ ଫାଇଲ ନାମ"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "ଅବୈଧ ୟୁ.ଟି.ଏଫ.-୮ ତଥ୍ଯ"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s ପାଇଁ ପ୍ରତୀକାତ୍ମକ ସଂଯୋଗର ସୂଚନା ପଢ଼ି ହେଲାନାହିଁ"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "ଏହି ଫାଇଲର ଅତ୍ଯଧିକ ପ୍ରତୀକାତ୍ମକ ସଂଯୋଗ ରହିଛି."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "ଲେଖା ଧାରାରେ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନ ବ୍ଯବହାର କରିପାରିବ ନାହିଁ."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "ଲେଖା ଧାରାରେ ଜିଏଡିଟ୍ ଏହି ପ୍ରକାର ଅବସ୍ଥାନ ବ୍ଯବହାର କରିପାରିବ ନାହିଁ."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "ଅବୈଧ ଫାଇଲ ନାମ."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1183,7 +1156,7 @@ msgstr ""
 "ଫାଇଲ ସଂରକ୍ଷଣ ପାଇଁ ଡିସ୍କରେ ପର୍ଯ୍ଯାପ୍ତ ସ୍ଥାନ ନାହିଁ.\n"
 "ଦୟାକରି କିଛି ସ୍ଥାନ ମୁକ୍ତ କଲା ପରେ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1192,7 +1165,7 @@ msgstr ""
 "ଫାଇଲ ସଂରକ୍ଷଣ କରିବାକୁ ଚେଷ୍ଟା କରୁଥିବା ଡିସ୍କରେ ଫାଇଲ ଆକାର ଉପରେ ଅକ୍ଷମତା ରହିଛି. ଦୟାକରି ଏହାଠାରୁ "
 "ଏକ ଛୋଟ ଫାଇଲ ସଂରକ୍ଷଣ କରନ୍ତୁ ବା ଏହି ଅକ୍ଷମତା ନଥିବା ଗୋଟିଏ ଅଲଗା ଡିସ୍କରେ ସଂରକ୍ଷଣ କରନ୍ତୁ."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "ନକଲ ଫାଇଲ ସୃଷ୍ଟି କରି ହେଲାନାହିଁ."
 
@@ -1322,7 +1295,7 @@ msgstr "ଭିଏତନାମୀୟ"
 msgid "Thai"
 msgstr "ଥାଇ"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "ଅଜଣା"
 
@@ -1369,35 +1342,35 @@ msgstr "ଖୋଲିବା ପାଇଁ ଫାଇଲଗୁଡ଼ିକ ବାଛ
 msgid "Select a filename to save"
 msgstr "ସଂରକ୍ଷଣ ପାଇଁ ଫାଇଲ ନାମ ବାଛନ୍ତୁ"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "ଫାଇଲ ଖୋଲନ୍ତୁ..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "\"%s\" ଫାଇଲ ସଂରକ୍ଷଣ କରାଯାଉଛି ..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "\"%s\" ଦଲିଲ ସଂରକ୍ଷିତ ହୋଇନାହିଁ."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "\"%s\" ଦଲିଲ ସଂରକ୍ଷିତ ହୋଇ ଯାଇଛି."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "ନିର୍ଦ୍ଧଷ୍ଟ ଭାବରେ ସଂରକ୍ଷଣ କରନ୍ତୁ..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "ଅସଂରକ୍ଷିତ ପରିବର୍ତ୍ତନଗୁଡ଼ିକ \"%s\" ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବେ କି?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1407,12 +1380,12 @@ msgid_plural ""
 msgstr[0] "ପୂର୍ବ %ld ସେକେଣ୍ଡରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 msgstr[1] "ପୂର୍ବ %ld ସେକେଣ୍ଡରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "ପୂର୍ବ ମିନିଟ୍ ରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1423,7 +1396,7 @@ msgid_plural ""
 msgstr[0] "ପୂର୍ବ ମିନିଟ୍ ଓ %ld ସେକେଣ୍ଡରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 msgstr[1] "ପୂର୍ବ ମିନିଟ୍ ଓ %ld ସେକେଣ୍ଡରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1433,11 +1406,15 @@ msgid_plural ""
 msgstr[0] "ପୂର୍ବ %ld ମିନିଟ୍ ରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 msgstr[1] "ପୂର୍ବ %ld ମିନିଟ୍ ରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "ପୂର୍ବ ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "ପୂର୍ବ ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
+msgstr[1] "ପୂର୍ବ ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1448,84 +1425,378 @@ msgid_plural ""
 msgstr[0] "ପୂର୍ବ ଘଣ୍ଟା ଓ %d ମିନିଟ୍ ରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 msgstr[1] "ପୂର୍ବ ଘଣ୍ଟା ଓ %d ମିନିଟ୍ ରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "ପୂର୍ବ %d ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
-msgstr[1] "ପୂର୍ବ %d ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରନ୍ତୁ (_R)"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "\"%s\" ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବାରେ ତ୍ରୁଟି."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "\"%s\" ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରା ଯାଇନାହିଁ."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "\"%s\" ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରାଯାଇଛି."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "\"%s\" ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରାଯାଉଛି..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "stdinରୁ ପାଠ୍ଯ ପଢ଼ି ହେଲାନାହିଁ."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରାଯାଉଛି:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "ଫାଇଲ ଧାରଣ କରାଯାଉଛି:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "\"%s\" ଫାଇଲ ଧାରଣ କରିବାରେ ତ୍ରୁଟି"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "\"%s\" ଫାଇଲ ଧାରଣ କରାଯାଇଛି"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d ଫାଇଲ ଧାରଣ କରାଯାଇଛି"
 msgstr[1] "%d ଫାଇଲଗୁଡ଼ିକ ଧାରଣ କରାଯାଇଛି"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "\"%s\" ଫାଇଲ ଧାରଣ କରାଯାଇଛି"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "\"%s\" ଫାଇଲ ଧାରଣ କରାଯାଉଛି..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "%d ଫାଇଲ ଧାରଣ କରାଯାଉଛି..."
 msgstr[1] "%d ଫାଇଲଗୁଡ଼ିକ ଧାରଣ କରାଯାଉଛି..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲାନାହିଁ"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" ଏକ ଡିରେକ୍ଟୋରି.\n"
+"\n"
+"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲାନାହିଁ"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "\"%s\" ଫାଇଲରେ ଅକାମୀ ତଥ୍ଯ ଥିବା ଯୋଗୁ ଏହା ଖୋଲିଲା ନାହିଁ."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "ଲେଖା ଧାରାରେ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନ ବ୍ଯବହାର କରିପାରିବ ନାହିଁ."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "ଲେଖା ଧାରାରେ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନ ବ୍ଯବହାର କରିପାରିବ ନାହିଁ."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଏଥିରେ ଅବୈଧ ସଂରୂପର ତଥ୍ଯ ରହିଛି."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "ଏହି ଫାଇଲର ଅତ୍ଯଧିକ ପ୍ରତୀକାତ୍ମକ ସଂଯୋଗ ରହିଛି."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ବହୁତ ଗୁଡ଼ିଏ ଫାଇଲ ଖୋଲାଯାଇଛି.\n"
+"\n"
+"ଦୟାକରି କିଛି ଖୋଲାଥିବା ଫାଇଲ ବନ୍ଦ କରନ୍ତୁ ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲିବାକୁ ପର୍ଯ୍ଯାପ୍ତ ସ୍ମ୍ରତି ଉପଲବ୍ଧ ନାହିଁ. ଦୟାକରି କିଛି ଚଳନ୍ତା ପ୍ରୟୋଗକୁ ବନ୍ଦ କରି ପୁଣି "
+"ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଆଧାର \"%s\" ମିଳିଲା ନାହିଁ.\n"
+"\n"
+"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" ଏକ ବୈଧ ଅବସ୍ଥାନ ନୁହେଁ.\n"
+"\n"
+"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲି ନାହିଁ କାରଣ ହୋଷ୍ଟର ନାମ ଖାଲି ଥିଲା.\n"
+"\n"
+"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ମିଳିଲା ନାହିଁ.\n"
+"\n"
+"ଦୟାକରି ଟାଇପ ହୋଇଥିବା ଅବସ୍ଥାନ ଯାଞ୍ଚ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲିଲା ହେଲା ନାହିଁ କାରଣ ଏଥିରେ ଅବୈଧ ତଥ୍ଯ ରହିଛି.\n"
+"\n"
+"ସମ୍ଭବତଃ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲିବାକୁ ଚେଷ୍ଟା କରୁଛନ୍ତି."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଜିଏଡିଟ୍ ଏହାର ଅକ୍ଷର ସଙ୍କେତ ସ୍ବଂୟ ଚିହ୍ନିପାରିଲା ନାହିଁ.\n"
+"\n"
+"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲୁନାହାନ୍ତି ଓ 'ଖୋଲା ଫାଇଲ...' (ବା 'ଅବସ୍ଥାନ "
+"ଖୋଲନ୍ତୁ') ସଂଳାପରୁ ଅକ୍ଷର ସଙ୍କେତ ବାଛି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଏହା ଅତି ବଡ଼."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"\"%2$s\" ଅକ୍ଷର ସଙ୍କେତ ବ୍ଯବହାର କରି \"%1$s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ.\n"
+"\n"
+"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲିବାକୁ ଚେଷ୍ଟା କରୁନାହାନ୍ତି ଓ ଆପଣ 'ଫାଇଲ "
+"ଖୋଲନ୍ତୁ' (ବା 'ଅବସ୍ଥାନ ଖୋଲନ୍ତୁ') ସଂଳାପରୁ ଅକ୍ଷର ସଙ୍କେତ ଠିକ ବାଛିଚନ୍ତି, ଏବଂ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲିଲା ହେଲା ନାହିଁ କାରଣ ଏଥିରେ ଅବୈଧ ତଥ୍ଯ ରହିଛି.\n"
+"\n"
+"ସମ୍ଭବତଃ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲିବାକୁ ଚେଷ୍ଟା କରୁଛନ୍ତି."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଜିଏଡିଟ୍ ତାକୁ ପାଇଲା ନାହିଁ.\n"
+"\n"
+"ବୋଧହୁଏ ଏହା ସାମ୍ପ୍ରତିକ କାଳରେ ଲିଭାଇ ଦିଆଯାଇଛି."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ବହୁତ ଗୁଡ଼ିଏ ଫାଇଲ ଖୋଲାଯାଇଛି.\n"
+"\n"
+"ଦୟାକରି କିଛି ଖୋଲାଥିବା ଫାଇଲ ବନ୍ଦ କରନ୍ତୁ ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲିବାକୁ ପର୍ଯ୍ଯାପ୍ତ ସ୍ମ୍ରତି ଉପଲବ୍ଧ ନାହିଁ. ଦୟାକରି କିଛି ଚଳନ୍ତା ପ୍ରୟୋଗକୁ ବନ୍ଦ କରି ପୁଣି "
+"ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ଖୋଲି ନାହିଁ କାରଣ ହୋଷ୍ଟର ନାମ ଖାଲି ଥିଲା.\n"
+"\n"
+"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏଥିରେ ଅବୈଧ ୟୁ.ଟି.ଏଫ.-୮ ତଥ୍ଯ ରହିଛି.\n"
+"ସମ୍ଭବତଃ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ପାଇଁ ଚେଷ୍ଟା କରୁଛନ୍ତି."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "ଅନାମିକା ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ଅସମ୍ଭବ."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "\"%s\" ଫାଇଲ ସଂରକ୍ଷିତ କରି ହେଲାନାହିଁ."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "\"%s\" ଫାଇଲ ପୂର୍ବରୁ ଅଛି."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" ଏକ ଡିରେକ୍ଟୋରି.\n"
+"\n"
+"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
+"\n"
+"ଦୟା କରି ନିଶ୍ଚିତ କରନ୍ତୁ କି ଆପଣଙ୍କର ଆବଶ୍ଯକ ଲିଖନ ଅନୁମତି ଅଛି."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
+"\n"
+"ଫାଇଲର ନାମ ଅତି ଲମ୍ବା ଅଛି."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
+"\n"
+"ଫାଇଲର ନାମରେ ଏକ ଡିରେକ୍ଟୋରି ଯନ୍ତ୍ରାଂଶ ଅବସ୍ଥିତ ନାହିଁ ବା ଏକ ଅସଂଯୁକ୍ତ ପ୍ରତିକାତ୍ମକ ସଂଯୋଗ ଅଟେ."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାକୁ ଡିସ୍କରେ ପର୍ଯାପ୍ତ ସ୍ଥାନ ନାହିଁ.\n"
+"\n"
+"ଦୟା କରି ଡିସ୍କରେ କିଛି ସ୍ଥାନ ଖାଲି କଲା ପରେ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1537,33 +1808,33 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "ନୂଆ ୱିଣ୍ଡୋକୁ ଯାଆନ୍ତୁ (_M)"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "ୟୁନିକୋଡ (ୟୁ.ଟି.ଏଫ.-୮)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "ନାମ"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "ମାଇମ ପ୍ରକାର"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "ସଙ୍କେତ:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' ଖୋଲନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "ସାମ୍ପ୍ରତିକ ବ୍ଯବହୃତ ହୋଇଥିବା ଏକ ଫାଇଲ ଖୋଲନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(କେବଳ ପଠନୀୟ)"
@@ -1575,15 +1846,15 @@ msgstr "(କେବଳ ପଠନୀୟ)"
 # gnome-session/gsm-client-row.c:50
 # #-#-#-#-#  gnome-session.HEAD.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/gsm-client-row.c:50
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "ସାଧାରଣ"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "ସାଧାରଣ ବିଶେଷଦର୍ଶନ ଧାରା ବ୍ଯବହାର କରନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s ବିଶେଷଦର୍ଶନ ଧାରା ବ୍ଯବହାର କରନ୍ତୁ"
@@ -2033,385 +2304,7 @@ msgstr "ପଦକ୍ଷେପ ବାତିଲ କରନ୍ତୁ (_U)"
 msgid "_View"
 msgstr "ଦେଖନ୍ତୁ (_V)"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ମିଳିଲା ନାହିଁ.\n"
-"\n"
-"ଦୟାକରି ଟାଇପ ହୋଇଥିବା ଅବସ୍ଥାନ ଯାଞ୍ଚ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "\"%s\" ଫାଇଲରେ ଅକାମୀ ତଥ୍ଯ ଥିବା ଯୋଗୁ ଏହା ଖୋଲିଲା ନାହିଁ."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନ ବ୍ଯବହାର କରି ପାରେନାହିଁ."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲାନାହିଁ"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଏଥିରେ ଅବୈଧ ସଂରୂପର ତଥ୍ଯ ରହିଛି."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଏହା ଅତି ବଡ଼."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ଏକ ବୈଧ ଅବସ୍ଥାନ ନୁହେଁ.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ପ୍ରବେଶାନୁମତି ନାହିଁ."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ବହୁତ ଗୁଡ଼ିଏ ଫାଇଲ ଖୋଲାଯାଇଛି.\n"
-"\n"
-"ଦୟାକରି କିଛି ଖୋଲାଥିବା ଫାଇଲ ବନ୍ଦ କରନ୍ତୁ ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ଏକ ଡିରେକ୍ଟୋରି.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିବାକୁ ପର୍ଯ୍ଯାପ୍ତ ସ୍ମ୍ରତି ଉପଲବ୍ଧ ନାହିଁ. ଦୟାକରି କିଛି ଚଳନ୍ତା ପ୍ରୟୋଗକୁ ବନ୍ଦ କରି ପୁଣି "
-"ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ ହୋଷ୍ଟର ନାମ ଅବୈଧ ଥିଲା.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ \"%s\" ନାମକ ଆଧାର ମିଳିଲା ନାହିଁ.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ଆପଣଙ୍କର ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଏବଂ ପୁଣି "
-"ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲି ନାହିଁ କାରଣ ହୋଷ୍ଟର ନାମ ଖାଲି ଥିଲା.\n"
-"\n"
-"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ ଲଗଇନ୍ କରିବାର ପ୍ରଚେଷ୍ଟା ଅସମର୍ଥ ହେଲା.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିଲା ହେଲା ନାହିଁ କାରଣ ଏଥିରେ ଅବୈଧ ତଥ୍ଯ ରହିଛି.\n"
-"\n"
-"ସମ୍ଭବତଃ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲିବାକୁ ଚେଷ୍ଟା କରୁଛନ୍ତି."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଜିଏଡିଟ୍ ଏହାର ଅକ୍ଷର ସଙ୍କେତ ସ୍ବଂୟ ଚିହ୍ନିପାରିଲା ନାହିଁ.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲୁନାହାନ୍ତି ଓ 'ଖୋଲା ଫାଇଲ...' (ବା 'ଅବସ୍ଥାନ "
-"ଖୋଲନ୍ତୁ') ସଂଳାପରୁ ଅକ୍ଷର ସଙ୍କେତ ବାଛି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"\"%2$s\" ଅକ୍ଷର ସଙ୍କେତ ବ୍ଯବହାର କରି \"%1$s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ.\n"
-"\n"
-"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲ ଖୋଲିବାକୁ ଚେଷ୍ଟା କରୁନାହାନ୍ତି ଓ ଆପଣ 'ଫାଇଲ "
-"ଖୋଲନ୍ତୁ' (ବା 'ଅବସ୍ଥାନ ଖୋଲନ୍ତୁ') ସଂଳାପରୁ ଅକ୍ଷର ସଙ୍କେତ ଠିକ ବାଛିଚନ୍ତି, ଏବଂ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "\"%s\" ଫାଇଲ ସଂରକ୍ଷିତ କରି ହେଲାନାହିଁ."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"\"%s\" ଫାଇଲ ସଂରକ୍ଷିତ କରି ହେଲାନାହିଁ.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଜିଏଡିଟ୍ ତାକୁ ପାଇଲା ନାହିଁ.\n"
-"\n"
-"ବୋଧହୁଏ ଏହା ସାମ୍ପ୍ରତିକ କାଳରେ ଲିଭାଇ ଦିଆଯାଇଛି."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏହା ଭିତରେ ଅକାମୀ ତଥ୍ଯ ରହିଛି."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନଗୁଡ଼ିକ ବ୍ଯବହାର କରି "
-"ପାରେନାହିଁ."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏହା ଭିତରେ ଅବୈଧ ସଂରୂପର ତଥ୍ଯ ରହିଛି."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "ଅତି ବଡ଼ ହୋଇଥିବାରୁ \"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "\"%s\" ଅନୁମତି ନଥିବାରୁ ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ କାରଣ ଅତ୍ଯଧିକ ଫାଇଲ ଖୋଲାଯାଇଛି.\n"
-"\n"
-"ଦୟାକରି କିଛି ଖୋଲାଥିବା ଫାଇଲକୁ ବନ୍ଦ କରନ୍ତୁ ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ପାଇଁ ପର୍ଯ୍ଯାପ୍ତ ସ୍ମ୍ରତି ଉପଲବ୍ଧ ନାହିଁ. ଦୟାକରି କିଛି ଚଳନ୍ତା  "
-"ପ୍ରୟୋଗକୁ ବନ୍ଦ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଆଧାର \"%s\" ମିଳିଲା ନାହିଁ.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଆଧାରର ନାମ ଖାଲି ଥିଲା.\n"
-"\n"
-"ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଲଗଇନ୍ କରିବାର ଚେଷ୍ଟା ବିଫଳ ହେଲା."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏଥିରେ ଅବୈଧ ୟୁ.ଟି.ଏଫ.-୮ ତଥ୍ଯ ରହିଛି.\n"
-"ସମ୍ଭବତଃ ଆପଣ ଏକ ଦ୍ବିମିକ ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ପାଇଁ ଚେଷ୍ଟା କରୁଛନ୍ତି."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "ଅନାମିକା ଦଲିଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ଅସମ୍ଭବ."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "\"%s\" ଫାଇଲ ପୂର୍ବରୁ ଅଛି."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" ଏକ ଡିରେକ୍ଟୋରି.\n"
-"\n"
-"ଦୟା କରି ଯାଞ୍ଚ କରନ୍ତୁ କି ଆପଣ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
-"\n"
-"ଦୟା କରି ନିଶ୍ଚିତ କରନ୍ତୁ କି ଆପଣଙ୍କର ଆବଶ୍ଯକ ଲିଖନ ଅନୁମତି ଅଛି."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
-"\n"
-"ଫାଇଲର ନାମ ଅତି ଲମ୍ବା ଅଛି."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ.\n"
-"\n"
-"ଫାଇଲର ନାମରେ ଏକ ଡିରେକ୍ଟୋରି ଯନ୍ତ୍ରାଂଶ ଅବସ୍ଥିତ ନାହିଁ ବା ଏକ ଅସଂଯୁକ୍ତ ପ୍ରତିକାତ୍ମକ ସଂଯୋଗ ଅଟେ."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାକୁ ଡିସ୍କରେ ପର୍ଯାପ୍ତ ସ୍ଥାନ ନାହିଁ.\n"
-"\n"
-"ଦୟା କରି ଡିସ୍କରେ କିଛି ସ୍ଥାନ ଖାଲି କଲା ପରେ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "\"%s\" ଫାଇଲ ସୃଷ୍ଟି କରିବାରେ ଅସମର୍ଥ."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2421,16 +2314,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr " ଧାଡ଼ି %d, ସ୍ତମ୍ଭ %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  INS"
 
@@ -3005,11 +2900,13 @@ msgid "The document is empty."
 msgstr "େହି ଦଲିଲ ଖାଲି ଅଛି."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "ବଛା ପାଠ୍ଯରେ କୌଣସି ଶବ୍ଦର ବନାନ ବୁଲ ହୋଇ ନାହିଁ."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "ଏବି ଦଲିଲର କୌଣସି ଶବ୍ଦର ବନାନ ଭୁଲ ହୋଇ ନାହିଁ."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3119,6 +3016,155 @@ msgstr "ସଂରୂପ ପାଇଁ ପଚାରନ୍ତୁ (_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "ଇଚ୍ଚାରୂପ ସଂରୂପ ବ୍ଯବହାର କରନ୍ତୁ (_U)"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %d ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
+#~ msgstr[1] "ସଂରକ୍ଷଣ ନ କଲେ ପୂର୍ବ %d ଘଣ୍ଟାର ପରିବର୍ତ୍ତନ ନିଶ୍ଚିତଭାବରେ ନଷ୍ଟ ହୋଇଯିବ."
+
+#~ msgid "Body font picker"
+#~ msgstr "ମୁଖ୍ଯ ଅଂଶର ଅକ୍ଷରରୂପର ଚୟକ"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr "ମୁଦ୍ରଣ ସମୟରେ ଦଲିଲର ମୁଖ୍ଯ ଅଂଶର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "ପୃଷ୍ଠାର ଶୀର୍ଷଗୁଡ଼ିକର ଅକ୍ଷରରୂପର ଚୟକ"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr "ମୁଦ୍ରଣ ସମୟରେ ପୃଷ୍ଠାର ଶୀର୍ଷଗୁଡ଼ିକର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "ଧାଡ଼ି ସଂଖ୍ଯାଗୁଡ଼ିକର ଅକ୍ଷରରୂପର ଚୟକ"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr "ମୁଦ୍ରଣ ସମୟରେ ଧାଡ଼ି ସଂଖ୍ଯାଗୁଡ଼ିକର ଅକ୍ଷରରୂପ ବାଛିବା ପାଇଁ ଏହି ଚାବିକୁ ଦବାନ୍ତୁ"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "ଟ୍ଯାବର ଓସାର (_T)"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "ପୂର୍ବ %d ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
+#~ msgstr[1] "ପୂର୍ବ %d ଘଣ୍ଟାରେ ହୋଇଥିବା ଦଲିଲର ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପୂରା ନଷ୍ଟ ହୋଇଯିବ."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନ ବ୍ଯବହାର କରି ପାରେନାହିଁ."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ କାରଣ ପ୍ରବେଶାନୁମତି ନାହିଁ."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ ହୋଷ୍ଟର ନାମ ଅବୈଧ ଥିଲା.\n"
+#~ "\n"
+#~ "ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ \"%s\" ନାମକ ଆଧାର ମିଳିଲା ନାହିଁ.\n"
+#~ "\n"
+#~ "ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ଆପଣଙ୍କର ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଏବଂ "
+#~ "ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ କାରଣ ଲଗଇନ୍ କରିବାର ପ୍ରଚେଷ୍ଟା ଅସମର୍ଥ ହେଲା.\n"
+#~ "\n"
+#~ "ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ଅବସ୍ଥାନ ଠିକ କରି ଟାଇପ କରିଛନ୍ତି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "\"%s\" ଫାଇଲ ଖୋଲି ହେଲା ନାହିଁ."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ଖୋଲିଲା ନାହିଁ.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ସଂରକ୍ଷିତ କରି ହେଲାନାହିଁ.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏହା ଭିତରେ ଅକାମୀ ତଥ୍ଯ ରହିଛି."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଜିଏଡିଟ୍ %s: ଅବସ୍ଥାନଗୁଡ଼ିକ ବ୍ଯବହାର କରି "
+#~ "ପାରେନାହିଁ."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଏହା ଭିତରେ ଅବୈଧ ସଂରୂପର ତଥ୍ଯ ରହିଛି."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "ଅତି ବଡ଼ ହୋଇଥିବାରୁ \"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "\"%s\" ଅନୁମତି ନଥିବାରୁ ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ କାରଣ ଅତ୍ଯଧିକ ଫାଇଲ ଖୋଲାଯାଇଛି.\n"
+#~ "\n"
+#~ "ଦୟାକରି କିଛି ଖୋଲାଥିବା ଫାଇଲକୁ ବନ୍ଦ କରନ୍ତୁ ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲକୁ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରିବା ପାଇଁ ପର୍ଯ୍ଯାପ୍ତ ସ୍ମ୍ରତି ଉପଲବ୍ଧ ନାହିଁ. ଦୟାକରି କିଛି "
+#~ "ଚଳନ୍ତା  ପ୍ରୟୋଗକୁ ବନ୍ଦ କରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଆଧାରର ନାମ ଖାଲି ଥିଲା.\n"
+#~ "\n"
+#~ "ଦୟାକରି ଯାଞ୍ଚ କରନ୍ତୁ ପ୍ରତିନିଧିର ବିନ୍ଯାସ ସଠିକ ଅଛି ଓ ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "\"%s\" ଫାଇଲ ପୁନଃପ୍ରତ୍ଯାବର୍ତ୍ତନ କରି ହେଲାନାହିଁ, କାରଣ ଲଗଇନ୍ କରିବାର ଚେଷ୍ଟା ବିଫଳ ହେଲା."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "ପ୍ଲଗ୍ଇନ୍-ପରିଚାଳକ.ଗ୍ଲେଡ୨ ମିଳିଲା ନାହିଁ, ଜିଏଡିଟ୍ କୁ ପୁନଃସ୍ଥାପନ କରନ୍ତୁ\n"

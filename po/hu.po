@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-08-18 18:10+0200\n"
 "Last-Translator: Laszlo Dvornik <dvornik@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -48,7 +48,7 @@ msgstr "gedit automation factory"
 msgid "Edit text files"
 msgstr "Szövegfájlok szerkesztése"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Szövegszerkesztő"
 
@@ -502,11 +502,16 @@ msgstr ""
 "gedit beállított fontja helyett. Ha ez a beállítás ki van kapcsolva, a "
 "\"Szerkesztő betűtípusa\" beállítást használja a rendszer betűtípusa helyett."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -598,8 +603,12 @@ msgstr[1] ""
 "elvesznek."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
 "Ha nem menti, akkor az elmúlt órában történt változások véglegesen elvesznek."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -616,19 +625,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Ha nem menti, akkor az elmúlt egy órában és %d percben történt változások "
 "véglegesen elvesznek."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
-"elvesznek."
-msgstr[1] ""
-"Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
-"elvesznek."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -718,39 +714,6 @@ msgstr "Karakterkódolások"
 msgid "E_ncodings shown in menu:"
 msgstr "A kódolás jele_njen meg a menüben:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Szövegtest betűkészletének kijelölése"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Nyomja meg ezt a gombot a törzs nyomtatásakor használt betűkészlet "
-"kiválasztásához"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Oldal fejléc"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Nyomja meg ezt a gombot a fejléc nyomtatásakor használt betűkészlet "
-"kiválasztásához"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Sorok számozása"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Nyomja meg ezt a gombot a sorok számának nyomtatáskor használt betűkészlet "
-"kiválasztásához"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Bővítmény"
@@ -780,33 +743,33 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "A kiválasztott fájl nem futtatható."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Nyomja meg ezt a gombot a szerkesztőben használt betűkészlet kiválasztásához"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Nyomja meg ezt a gombot a szöveg színének kiválasztásához"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Nyomja meg ezt a gombot a háttérszín beállításához"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Nyomja meg ezt a gombot a kiválasztott szöveg színének kiválasztásához"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Nyomja meg ezt a gombot a kiválasztott szöveg háttérszínének kiválasztásához"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elemek"
 
@@ -817,7 +780,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatikus behúzás</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -842,7 +806,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Jobb oldali margó</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulátorok</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -985,7 +950,8 @@ msgid "_Display line numbers"
 msgstr "Sorok számának _megjelenítése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Automatikus bekezdések engedélyezése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1009,22 +975,18 @@ msgid "_Right margin at column:"
 msgstr "_Jobb oldali margó ennél az oszlopnál:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Tabulátorok szélessége:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Végtelen visszavonás"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "A témához tartozó alapértelmezett betűkészlet _használata"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "p_ercenként"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "_művelet"
 
@@ -1180,47 +1142,47 @@ msgstr ""
 "Sári Gábor <saga@gnome.hu>\n"
 "Tímár András <timar@gnome.hu>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Dokumentumok"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Érvénytelen fájlnév"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Érvénytelen UTF-8 adat"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s szimbolikus link adatai nem olvashatóak"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "A fájl túl sok szimbolikus linkkel rendelkezik."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "A gedit nem tudja a(z) %s: típusú helyeket írásra használni."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "A gedit nem tudja ezt a típusú helyet írásra használni."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Érvénytelen fájlnév."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1228,7 +1190,7 @@ msgstr ""
 "Nincs elég hely a lemezen a fájl mentéséhez.\n"
 "Szabadítson fel egy kis helyet és próbálja meg újra."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1238,7 +1200,7 @@ msgstr ""
 "rendelkezik.  Próbáljon meg kisebb fájlt menteni, vagy egy olyan lemezre "
 "mentsen, amelyen nincs korlátozás."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "A biztonsági mentés létrehozása nem sikerült."
 
@@ -1368,7 +1330,7 @@ msgstr "Vietnami"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -1415,35 +1377,35 @@ msgstr "A megnyitandó fájlok kiválasztása"
 msgid "Select a filename to save"
 msgstr "A mentendő fájl nevének kiválasztása"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Fájl megnyitása..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "\"%s\" dokumentum mentése..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "A(z) \"%s\" dokumentum nincs elmentve."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "A(z) \"%s\" dokumentum el lett mentve."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Mentés másként..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Visszaállítja a(z) \"%s\" dokumentum nem mentett változásait?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1455,12 +1417,12 @@ msgstr[0] ""
 msgstr[1] ""
 "A dokumentum elmúlt %ld másodpercben történt változásai véglegesen elvesznek."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "A dokumentum elmúlt percben történt változásai véglegesen elvesznek."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1475,7 +1437,7 @@ msgstr[1] ""
 "A dokumentum elmúlt egy percben és %ld másodpercben történt változásai "
 "véglegesen elvesznek."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1487,11 +1449,14 @@ msgstr[0] ""
 msgstr[1] ""
 "A dokumentum elmúlt %ld percben történt változásai véglegesen elvesznek."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "A dokumentum elmúlt órában történt változásai véglegesen elvesznek."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "A dokumentum elmúlt órában történt változásai véglegesen elvesznek."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1506,86 +1471,388 @@ msgstr[1] ""
 "A dokumentum elmúlt egy órában és %d percben történt változásai véglegesen "
 "elvesznek."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
-msgstr[1] ""
-"A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Visszaállítás"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Hiba történt a(z) \"%s\" dokumentum visszaállításakor."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "A(z) \"%s\" dokumentum nem lett visszaállítva."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "A(z) \"%s\" dokumentum vissza lett állítva."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "\"%s\" dokumentum visszaállítása..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Nem lehet adatokat olvasni az stdin-ről."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Fájl visszaállítása:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Fájl betöltése:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Hiba a(z) \"%s\" fájl betöltése közben"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "\"%s\" fájl betöltve"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d fájl betöltve"
 msgstr[1] "%d fájl betöltve"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "\"%s\" fájl betöltve"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "\"%s\" fájl betöltése..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "%d fájl betöltése..."
 msgstr[1] "%d fájl betöltése..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" egy könyvtár.\n"
+"\n"
+"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert sérült adatokat tartalmaz."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "A gedit nem tudja a(z) %s: típusú helyeket írásra használni."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "A gedit nem tudja a(z) %s: típusú helyeket írásra használni."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen formátumú adatokat "
+"tartalmaz."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "A fájl túl sok szimbolikus linkkel rendelkezik."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
+"\n"
+"Zárjon be néhány nyitott fájlt és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nincs elég memória a(z) \"%s\" fájl megnyitásához. Zárjon be néhány futó "
+"alkalmazást és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
+"található.\n"
+"\n"
+"Ellenőrizze a proxy beállításait és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" nem létező hely.\n"
+"\n"
+"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
+"\n"
+"Ellenőrizze a proxy beállításait és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nem található a(z) \"%s\" fájl.\n"
+"\n"
+"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatokat "
+"tartalmaz.\n"
+"\n"
+"Valószínűleg egy bináris fájlt próbál megnyitni."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert nem sikerült meghatározni "
+"automatikusan a fájl karakterkódolását.\n"
+"\n"
+"Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és próbáljon a "
+"'Fájl megnyitása...' (vagy 'Hely megnyitása') párbeszédablakban másik "
+"karakterkódolást kiválasztani."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl nagy."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt %s karakterkódolással.\n"
+"\n"
+"Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és hogy jó "
+"karakterkódolást választott ki a 'Fájl megnyitása...' (vagy 'Hely "
+"megnyitása') párbeszédablakban és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatokat "
+"tartalmaz.\n"
+"\n"
+"Valószínűleg egy bináris fájlt próbál megnyitni."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem találja.\n"
+"\n"
+"Valószínűleg mostanában le lett törölve."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
+"\n"
+"Zárjon be néhány nyitott fájlt és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nincs elég memória a(z) \"%s\" fájl megnyitásához. Zárjon be néhány futó "
+"alkalmazást és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
+"\n"
+"Ellenőrizze a proxy beállításait és próbálja meg újra."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatot "
+"tartalmaz.\n"
+"\n"
+"Lehetséges, hogy egy bináris fájlt próbál visszaállítani."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Nem lehet visszaállítani egy Névtelen dokumentumot."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Nem lehet elmenteni a(z) \"%s\" fájlt."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "A(z) \"%s\" nevű fájl már létezik."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" egy könyvtár.\n"
+"\n"
+"Ellenőrizze, hogy pontosan írta-e be a helyet."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Nem lehet létrehozni a(z) \"%s\" fájlt."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
+"\n"
+"Győződjön meg róla, hogy rendelkezik-e a szükséges jogosultságokkal."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
+"\n"
+"A fájlnév túl hosszú."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
+"\n"
+"A fájlnévhez tartozó könyvtár nem létezik vagy hibás szimbolikus link."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Nincs elég hely a lemezen a(z) \"%s\" fájl létrehozásához.\n"
+"\n"
+"Szabadítson fel egy kis helyet a lemezen és próbálja meg újra."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1597,46 +1864,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "_Áthelyezés új ablakba"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Név:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME-típus:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Kódolás:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' megnyitása"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Nemrég használt fájl megnyitása"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(csak olvasható)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normál"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Normál szintaxiskiemelés használata"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "A(z) %s kiemelési mód használata"
@@ -2088,400 +2355,7 @@ msgstr "_Visszavonás"
 msgid "_View"
 msgstr "_Nézet"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nem található a(z) \"%s\" fájl.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert sérült adatokat tartalmaz."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a gedit nem támogatja a(z) %s: "
-"típusú helyeket."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen formátumú adatokat "
-"tartalmaz."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl nagy."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" nem létező hely.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt jogosultsági problémák miatt."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
-"\n"
-"Zárjon be néhány nyitott fájlt és próbálja meg újra."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" egy könyvtár.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nincs elég memória a(z) \"%s\" fájl megnyitásához. Zárjon be néhány futó "
-"alkalmazást és próbálja meg újra."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév érvénytelen.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
-"található.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a belépés nem sikerült.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatokat "
-"tartalmaz.\n"
-"\n"
-"Valószínűleg egy bináris fájlt próbál megnyitni."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert nem sikerült meghatározni "
-"automatikusan a fájl karakterkódolását.\n"
-"\n"
-"Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és próbáljon a "
-"'Fájl megnyitása...' (vagy 'Hely megnyitása') párbeszédablakban másik "
-"karakterkódolást kiválasztani."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt %s karakterkódolással.\n"
-"\n"
-"Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és hogy jó "
-"karakterkódolást választott ki a 'Fájl megnyitása...' (vagy 'Hely "
-"megnyitása') párbeszédablakban és próbálja meg újra."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Nem lehet elmenteni a(z) \"%s\" fájlt."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Nem lehet elmenteni a(z) \"%s\" fájlt.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem találja.\n"
-"\n"
-"Valószínűleg mostanában le lett törölve."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert sérült adatokat tartalmaz."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem támogatja a(z) "
-"\"%s:\" típusú helyeket."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen formátumú "
-"adatokat tartalmaz."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl nagy."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt jogosultsági problémák miatt."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
-"\n"
-"Zárjon be néhány nyitott fájlt és próbálja meg újra."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nincs elég memória a(z) \"%s\" fájl visszaállításához. Zárjon be néhány futó "
-"alkalmazást és próbálja meg újra."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
-"található.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a belépés nem sikerült."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatot "
-"tartalmaz.\n"
-"\n"
-"Lehetséges, hogy egy bináris fájlt próbál visszaállítani."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Nem lehet visszaállítani egy Névtelen dokumentumot."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "A(z) \"%s\" nevű fájl már létezik."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" egy könyvtár.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"Győződjön meg róla, hogy rendelkezik-e a szükséges jogosultságokkal."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"A fájlnév túl hosszú."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"A fájlnévhez tartozó könyvtár nem létezik vagy hibás szimbolikus link."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Nincs elég hely a lemezen a(z) \"%s\" fájl létrehozásához.\n"
-"\n"
-"Szabadítson fel egy kis helyet a lemezen és próbálja meg újra."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Nem lehet létrehozni a(z) \"%s\" fájlt."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2491,16 +2365,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  %d. sor, %d. oszlop"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  ÁTÍR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  BESZÚR"
 
@@ -3078,11 +2954,13 @@ msgid "The document is empty."
 msgstr "A dokumentum üres."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "A kijelölt szöveg nem tartalmaz rosszul írt szavakat."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "A dokumentum nem tartalmaz rosszul írt szavakat."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3192,6 +3070,174 @@ msgstr "_Formátum bekérése"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Egyéni formátum használata"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
+#~ "elvesznek."
+#~ msgstr[1] ""
+#~ "Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
+#~ "elvesznek."
+
+#~ msgid "Body font picker"
+#~ msgstr "Szövegtest betűkészletének kijelölése"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Nyomja meg ezt a gombot a törzs nyomtatásakor használt betűkészlet "
+#~ "kiválasztásához"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Oldal fejléc"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Nyomja meg ezt a gombot a fejléc nyomtatásakor használt betűkészlet "
+#~ "kiválasztásához"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Sorok számozása"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Nyomja meg ezt a gombot a sorok számának nyomtatáskor használt "
+#~ "betűkészlet kiválasztásához"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Tabulátorok szélessége:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
+#~ msgstr[1] ""
+#~ "A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a gedit nem támogatja a(z) %"
+#~ "s: típusú helyeket."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt jogosultsági problémák miatt."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév "
+#~ "érvénytelen.\n"
+#~ "\n"
+#~ "Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
+#~ "található.\n"
+#~ "\n"
+#~ "Ellenőrizze a proxy beállításait és próbálja meg újra."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a belépés nem sikerült.\n"
+#~ "\n"
+#~ "Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Nem lehet megnyitni a(z) \"%s\" fájlt.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nem lehet elmenteni a(z) \"%s\" fájlt.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert sérült adatokat "
+#~ "tartalmaz."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem támogatja a"
+#~ "(z) \"%s:\" típusú helyeket."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen formátumú "
+#~ "adatokat tartalmaz."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl nagy."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt jogosultsági problémák miatt."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
+#~ "\n"
+#~ "Zárjon be néhány nyitott fájlt és próbálja meg újra."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Nincs elég memória a(z) \"%s\" fájl visszaállításához. Zárjon be néhány "
+#~ "futó alkalmazást és próbálja meg újra."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
+#~ "\n"
+#~ "Ellenőrizze a proxy beállításait és próbálja meg újra."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a belépés nem sikerült."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Nem található a plugin-manager.glade2, telepítse újra a gedit-et.\n"

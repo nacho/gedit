@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-09-06 16:29+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "แก้ไขแฟ้มข้อความ"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "เครื่องมือแก้ไขข้อความ"
 
@@ -474,11 +474,16 @@ msgstr ""
 "ใช้ตัวอักษรปริยายสำหรับพื้นที่แก้ไขหรือไม่ ถ้าไม่ใช้ตัวเลือกนี้แบบอักษรที่ใช้จะเป็นไปตามตัวเลือก "
 "\"แบบอักษรของเครื่องมือแก้ไข\" แทนแบบอักษรของระบบ "
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[TIS-620]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,TIS-620]"
 
@@ -557,8 +562,13 @@ msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไ�
 msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วง %ld นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -570,15 +580,6 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
-msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -668,33 +669,6 @@ msgstr "รหัสอักขระ"
 msgid "E_ncodings shown in menu:"
 msgstr "รหัสอักขระที่แ_สดงในเมนู"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "ตัวเลือกแบบอักษรของเอกสาร"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์เอกสาร"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "ตัวเลือกแบบอักษรของหัวกระดาษ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์หัวกระดาษ"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "ตัวเลือกแบบอักษรของเส้นบรรทัด"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์เส้นบรรทัด"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "ปลั๊กอิน"
@@ -724,31 +698,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "แฟ้มที่เลือกไม่สามารถปฏิบัติการได้"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่จะใช้ใน gedit"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีตัวอักษร"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีของพื้นหลัง"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีของอักษรที่ถูกเน้น"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีที่ใช้เน้นตัวอักษรที่ถูกเลือก"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "องค์ประกอบ"
 
@@ -759,7 +733,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>ย่อหน้าโดยอัตโนมัติ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -784,7 +759,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>กั้นขวา</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>แท็บ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -927,7 +903,8 @@ msgid "_Display line numbers"
 msgstr "แสดงเ_ลขบรรทัด"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "ให้_ย่อหน้าโดยอัตโนมัติ"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -951,22 +928,18 @@ msgid "_Right margin at column:"
 msgstr "กั้นขวาเริ่มจาก_คอลัมน์ที่:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "ความกว้างแ_ท็บ:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "เรียกคืนไ_ม่จำกัด"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "ใช้แบบอักษรของชุดตกแต่ง_ปริยาย"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_นาที"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "_คำสั่ง"
 
@@ -1120,47 +1093,47 @@ msgstr ""
 "ชาญชัย จันฤๅชัย\n"
 "เทพพิทักษ์ การุญบุญญานันท์"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "เ_อกสาร"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "ข้อมูล UTF-8 ไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "อ่านข้อมูล symbolic link สำหรับ %s ไม่ได้"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "แฟ้มนี้มี symbolic link มากเกินไป"
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ไม่สามารถทำงานที่ตำแหน่งนี้ใน write mode ได้"
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1168,7 +1141,7 @@ msgstr ""
 "พื้นที่บนดิสก์เต็ม บันทึกข้อมูลไม่ได้\n"
 "กรุณาลบข้อมูลที่ไม่จำเป็นออกและทำการบันทึกอีกครั้ง"
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1176,7 +1149,7 @@ msgid ""
 msgstr ""
 "ดิสก์ที่คุณกำลังบันทึกแฟ้มมีข้อจำกัดด้านขนาดของแฟ้ม ลองบันทึกแฟ้มขนาดเล็กลงหรือบันทึกลงดิสก์อื่น"
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "สร้างแฟ้มสำรองไม่ได้"
 
@@ -1306,7 +1279,7 @@ msgstr "ภาษาเวียดนาม"
 msgid "Thai"
 msgstr "ภาษาไทย"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
@@ -1353,35 +1326,35 @@ msgstr "เลือกแฟ้มที่จะเปิด"
 msgid "Select a filename to save"
 msgstr "เลือกชื่อแฟ้มที่จะบันทึก"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "เปิดแฟ้ม..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "กำลังบันทึกแฟ้ม \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "เอกสาร \"%s\" ไม่ถูกบันทึก"
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "เอกสาร \"%s\" ถูกบันทึก"
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "บันทึกเป็น..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "ยกเลิกการแก้ไขเอกสาร \"%s\" เพื่อย้อนกลับสู่สภาพเดิมหรือไม่?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1391,12 +1364,12 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วง %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วง %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "การแก้ไขทั้งหมดในเอกสารในช่วงนาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1407,7 +1380,7 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วงนาทีกับอีก %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วงนาทีกับอีก %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1417,11 +1390,15 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วง %ld นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วง %ld นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1432,84 +1409,374 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
-msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "คืน_กลับ"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้"
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "เอกสาร\"%s\"ไม่ได้แปลงกลับ"
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "เอกสาร\"%s\"ได้แปลงกลับ"
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "กำลังแปลงแฟ้ม \"%s\" กลับ.."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "อ่านข้อมูลจาก stdin ไม่ได้"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "กำลังแปลงแฟ้มกลับ.."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "กำลังอ่านแฟ้ม..."
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "อ่านแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "อ่านทั้งหมด %d แฟ้ม"
 msgstr[1] "อ่านทั้งหมด %d แฟ้ม"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "อ่านแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "กำลังอ่านแฟ้ม \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "กำลังอ่าน %d แฟ้ม..."
 msgstr[1] "กำลังอ่าน %d แฟ้ม..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" เป็นไดเรกทอรี\n"
+"\n"
+"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีข้อมูลที่ได้รับความเสียหาย"
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีข้อมูลในรูปแบบไม่ถูกต้อง"
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "แฟ้มนี้มี symbolic link มากเกินไป"
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากไป\n"
+"\n"
+"กรุณาปิดบางแฟ้มและลองใหม่อีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr "มีหน่วยความจำไม่เพียงพอที่จะเปิดแฟ้ม \"%s\" กรุณาปิดโปรแกรมอื่นๆ และลองอีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะไม่มีโฮสต์ชื่อ \"%s\"\n"
+"\n"
+"กรุณาตรวจสอบการตั้งค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" เป็นตำแหน่งที่ไม่ถูกต้อง\n"
+"\n"
+"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะไม่มีชื่อโฮสต์\n"
+"\n"
+"กรุณาตรวจสอบค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"หาแฟ้ม \"%s\" ไม่พบ\n"
+"\n"
+"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะแฟ้มมีข้อมูลที่ไม่ถูกต้อง\n"
+"\n"
+"เป็นไปได้ว่าคุณอาจจะกำลังพยายามเปิดแฟ้มไบนารี"
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะ gedit ไม่สามารถตรวจหารหัสอักขระของแฟ้มโดยอัตโนมัติได้\n"
+"กรุณาตรวจสอบว่าแฟ้มนี้ไม่ใช่แฟ้มไบนารี และลองอีกครั้งโดยเลือกรหัสอักขระในไดอะล็อก "
+"เปิดแฟ้ม...' (หรือ 'เปิดตำแหน่งแฟ้ม')"
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีขนาดใหญ่เกินไป"
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" โดยใช้รหัสอักขระ %s ได้\n"
+"\n"
+"กรุณาตรวจว่าแฟ้มที่คุณพยายามเปิดนั้นไม่ใช่แฟ้มไบนารี และคุณได้เลือกรหัสที่ถูกต้องจากไดอะล็อก "
+"'เปิดแฟ้ม...' (หรือ 'เปิดตำแหน่งแฟ้ม')"
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะแฟ้มมีข้อมูลที่ไม่ถูกต้อง\n"
+"\n"
+"เป็นไปได้ว่าคุณอาจจะกำลังพยายามเปิดแฟ้มไบนารี"
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้"
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะ gedit หาไม่พบ\n"
+"\n"
+"เป็นไปได้ว่าแฟ้มอาจเพิ่งถูกลบไป"
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากไป\n"
+"\n"
+"กรุณาปิดบางแฟ้มและลองใหม่อีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr "มีหน่วยความจำไม่เพียงพอที่จะเปิดแฟ้ม \"%s\" กรุณาปิดโปรแกรมอื่นๆ และลองอีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะไม่มีชื่อโฮสต์\n"
+"\n"
+"กรุณาตรวจสอบค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะว่ามีข้อมูล UTF-8 ที่ไม่ถูกต้อง\n"
+"\n"
+"บางทีคุณอาจจะกำลังแปลงแฟ้มไบนารีกลับก็เป็นได้"
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "เป็นไปไม่ได้ที่จะแปลงกลับเอกสารที่ไม่มีชื่อ"
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "ไม่สามารถบันทึกแฟ้ม \"%s\" ได้"
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "มีแฟ้มชื่อ \"%s\" อยู่ก่อนแล้ว"
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" เป็นไดเรกทอรี\n"
+"\n"
+"กรุณาตรวจสอบว่าคุณพิมพ์ตำแหน่งแฟ้มถูกต้องหรือไม่"
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "ไม่สามารถสร้างแฟ้ม \"%s\" ได้"
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
+"\n"
+"ตรวจสอบว่าคุณมี write permissions"
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
+"\n"
+"ชื่อแฟ้มยาวเกินไป"
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
+"\n"
+"ไม่มีองค์ประกอบของไดเรกทอรีในชื่อแฟ้ม หรือเป็น symbolic link ที่ว่างเปล่า"
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"มีพื้นที่ไม่เพียงพอที่จะสร้างแฟ้ม \"%s\" ได้\n"
+"\n"
+"กรุณาเคลียร์พื้นที่ดิสก์ แล้วลองอีกครั้ง"
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1521,46 +1788,46 @@ msgstr ""
 msgid "_Move to New Window"
 msgstr "_ย้ายไปหน้าต่างใหม่"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "ยูนิโค้ด (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "ชื่อ:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "ชนิด MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "รหัสอักขระ:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "เปิดเอกสาร '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "เปิดแฟ้มที่เพิ่งถูกเปิด"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(อ่านอย่างเดียว)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "ปกติ"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "ใช้โหมดเน้นแบบปกติ"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "ใช้โหมดเน้นแบบ %s"
@@ -2010,380 +2277,7 @@ msgstr "เรี_ยกคืน"
 msgid "_View"
 msgstr "_มุมมอง"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"หาแฟ้ม \"%s\" ไม่พบ\n"
-"\n"
-"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีข้อมูลที่ได้รับความเสียหาย"
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะ gedit ไม่สามารถจัดการตำแหน่ง %s:"
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีข้อมูลในรูปแบบไม่ถูกต้อง"
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีขนาดใหญ่เกินไป"
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" เป็นตำแหน่งที่ไม่ถูกต้อง\n"
-"\n"
-"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะถูกปฏิเสธการเข้าถึง"
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากไป\n"
-"\n"
-"กรุณาปิดบางแฟ้มและลองใหม่อีกครั้ง"
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" เป็นไดเรกทอรี\n"
-"\n"
-"กรุณาตรวจสอบว่าพิมพ์ชื่อถูกต้องและลองใหม่อีกครั้ง"
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr "มีหน่วยความจำไม่เพียงพอที่จะเปิดแฟ้ม \"%s\" กรุณาปิดโปรแกรมอื่นๆ และลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะชื่อโฮสต์ไม่ถูกต้อง\n"
-"\n"
-"กรุณาตรวจสอบชื่อโฮต์ให้ถูกต้องและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะไม่พบโฮสต์ชื่อ \"%s\"\n"
-"\n"
-"กรุณาตรวจสอบชื่อโฮสต์และค่าพร็อกซีให้ถูกต้องและลองอีกครั้้ง"
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะไม่มีชื่อโฮสต์\n"
-"\n"
-"กรุณาตรวจสอบค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะล็อกอินไม่สำเร็จ\n"
-"\n"
-"กรุณาตรวจสอบการพิมพ์ที่อยู่แฟ้มให้ถูกต้องและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะแฟ้มมีข้อมูลที่ไม่ถูกต้อง\n"
-"\n"
-"เป็นไปได้ว่าคุณอาจจะกำลังพยายามเปิดแฟ้มไบนารี"
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้"
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะ gedit ไม่สามารถตรวจหารหัสอักขระของแฟ้มโดยอัตโนมัติได้\n"
-"กรุณาตรวจสอบว่าแฟ้มนี้ไม่ใช่แฟ้มไบนารี และลองอีกครั้งโดยเลือกรหัสอักขระในไดอะล็อก "
-"เปิดแฟ้ม...' (หรือ 'เปิดตำแหน่งแฟ้ม')"
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" โดยใช้รหัสอักขระ %s ได้\n"
-"\n"
-"กรุณาตรวจว่าแฟ้มที่คุณพยายามเปิดนั้นไม่ใช่แฟ้มไบนารี และคุณได้เลือกรหัสที่ถูกต้องจากไดอะล็อก "
-"'เปิดแฟ้ม...' (หรือ 'เปิดตำแหน่งแฟ้ม')"
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"ไม่สามารถเปิดแฟ้ม \"%s\" ได้\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "ไม่สามารถบันทึกแฟ้ม \"%s\" ได้"
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"ไม่สามารถบันทึกแฟ้ม \"%s\" ได้\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะ gedit หาไม่พบ\n"
-"\n"
-"เป็นไปได้ว่าแฟ้มอาจเพิ่งถูกลบไป"
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะมีข้อมูลบางส่วนเสียหาย"
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะ gedit หาตำแหน่ง %s: ไม่พบ"
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้"
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะมีข้อมูลในรูปแบบไม่ถูกต้อง"
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะแฟ้มมีขนาดใหญ่เกินไป"
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะถูกปฏิเสธการเข้าถึง"
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากเกินไป\n"
-"\n"
-"กรุณาปิดแฟ้มบางแฟ้มและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะหน่วยความจำไม่เพียงพอ\n"
-"\n"
-"กรุณาปิดบางโปรแกรม และลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะไม่มีโฮสต์ชื่อ \"%s\"\n"
-"\n"
-"กรุณาตรวจสอบการตั้งค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะไม่มีชื่อโฮสต์\n"
-"\n"
-"กรุณาตรวจสอบการตั้งค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะล็อกอินไม่สำเร็จ"
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะว่ามีข้อมูล UTF-8 ที่ไม่ถูกต้อง\n"
-"\n"
-"บางทีคุณอาจจะกำลังแปลงแฟ้มไบนารีกลับก็เป็นได้"
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "เป็นไปไม่ได้ที่จะแปลงกลับเอกสารที่ไม่มีชื่อ"
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "มีแฟ้มชื่อ \"%s\" อยู่ก่อนแล้ว"
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" เป็นไดเรกทอรี\n"
-"\n"
-"กรุณาตรวจสอบว่าคุณพิมพ์ตำแหน่งแฟ้มถูกต้องหรือไม่"
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
-"\n"
-"ตรวจสอบว่าคุณมี write permissions"
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
-"\n"
-"ชื่อแฟ้มยาวเกินไป"
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"ไม่สามารถสร้างแฟ้ม \"%s\" ได้\n"
-"\n"
-"ไม่มีองค์ประกอบของไดเรกทอรีในชื่อแฟ้ม หรือเป็น symbolic link ที่ว่างเปล่า"
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"มีพื้นที่ไม่เพียงพอที่จะสร้างแฟ้ม \"%s\" ได้\n"
-"\n"
-"กรุณาเคลียร์พื้นที่ดิสก์ แล้วลองอีกครั้ง"
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "ไม่สามารถสร้างแฟ้ม \"%s\" ได้"
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr " (ยูนิโค้ดที่ไม่ถูกต้อง)"
 
@@ -2393,16 +2287,18 @@ msgstr " (ยูนิโค้ดที่ไม่ถูกต้อง)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  บรรทัด %d, คอลัมน์ %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  ทับ"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  แทรก"
 
@@ -2975,11 +2871,13 @@ msgid "The document is empty."
 msgstr "เอกสารว่างเปล่า"
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "คำที่เลือกสะกดถูกต้องแล้ว"
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "เอกสารนี้ไม่มีคำผิด"
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3087,6 +2985,151 @@ msgstr "_ถามรูปแบบ"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "ใช้รูปแบบ_กำหนดเอง"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+#~ msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+
+#~ msgid "Body font picker"
+#~ msgstr "ตัวเลือกแบบอักษรของเอกสาร"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์เอกสาร"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "ตัวเลือกแบบอักษรของหัวกระดาษ"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์หัวกระดาษ"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "ตัวเลือกแบบอักษรของเส้นบรรทัด"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่ใช้ในการพิมพ์เส้นบรรทัด"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "ความกว้างแ_ท็บ:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+#~ msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วง %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะ gedit ไม่สามารถจัดการตำแหน่ง %s:"
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะถูกปฏิเสธการเข้าถึง"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะชื่อโฮสต์ไม่ถูกต้อง\n"
+#~ "\n"
+#~ "กรุณาตรวจสอบชื่อโฮต์ให้ถูกต้องและลองอีกครั้ง"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะไม่พบโฮสต์ชื่อ \"%s\"\n"
+#~ "\n"
+#~ "กรุณาตรวจสอบชื่อโฮสต์และค่าพร็อกซีให้ถูกต้องและลองอีกครั้้ง"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "ไม่สามารถเปิดแฟ้ม \"%s\" ได้เพราะล็อกอินไม่สำเร็จ\n"
+#~ "\n"
+#~ "กรุณาตรวจสอบการพิมพ์ที่อยู่แฟ้มให้ถูกต้องและลองอีกครั้ง"
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "ไม่สามารถเปิดแฟ้ม \"%s\" ได้"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "ไม่สามารถเปิดแฟ้ม \"%s\" ได้\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "ไม่สามารถบันทึกแฟ้ม \"%s\" ได้\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะมีข้อมูลบางส่วนเสียหาย"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับ เพราะ gedit หาตำแหน่ง %s: ไม่พบ"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะมีข้อมูลในรูปแบบไม่ถูกต้อง"
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะแฟ้มมีขนาดใหญ่เกินไป"
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะถูกปฏิเสธการเข้าถึง"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะมีแฟ้มอื่นๆ เปิดอยู่มากเกินไป\n"
+#~ "\n"
+#~ "กรุณาปิดแฟ้มบางแฟ้มและลองอีกครั้ง"
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะหน่วยความจำไม่เพียงพอ\n"
+#~ "\n"
+#~ "กรุณาปิดบางโปรแกรม และลองอีกครั้ง"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะไม่มีชื่อโฮสต์\n"
+#~ "\n"
+#~ "กรุณาตรวจสอบการตั้งค่าพร็อกซีให้ถูกต้องและลองอีกครั้ง"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้เพราะล็อกอินไม่สำเร็จ"
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "หา plugin-manager.glade2 ไม่พบ กรุณาติดตั้ง gedit ใหม่ \n"

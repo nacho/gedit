@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2003-11-15 01:43+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -48,7 +48,7 @@ msgstr "generator automatyzacji programu gedit"
 msgid "Edit text files"
 msgstr "Edytor plików tekstowych"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Edytor tekstu"
 
@@ -529,12 +529,17 @@ msgstr ""
 "czcionka zdefiniowana w ustawieniu \"Czcionka w edytorze\"."
 
 # FIXME - które ISO tu wpisać?
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-2]"
 
 # FIXME - czy to powinno być tłumaczone?
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,BIEŻĄCE,ISO-8859-2]"
 
@@ -637,8 +642,18 @@ msgstr[2] ""
 "utracone."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Jeżeli nie zapiszesz, zmiany z ostatniej godziny zostaną bezpowrotnie "
+"utracone."
+msgstr[1] ""
+"Jeżeli nie zapiszesz, zmiany z ostatniej godziny zostaną bezpowrotnie "
+"utracone."
+msgstr[2] ""
 "Jeżeli nie zapiszesz, zmiany z ostatniej godziny zostaną bezpowrotnie "
 "utracone."
 
@@ -659,22 +674,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Jeżeli nie zapiszesz, zmiany z ostatniej godziny i %d minut zostaną "
 "bezpowrotnie utracone."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Jeżeli nie zapiszesz, zmiany z ostatniej %d godziny zostaną bezpowrotnie "
-"utracone."
-msgstr[1] ""
-"Jeżeli nie zapiszesz, zmiany z ostatnich %d godzin zostaną bezpowrotnie "
-"utracone."
-msgstr[2] ""
-"Jeżeli nie zapiszesz, zmiany z ostatnich %d godzin zostaną bezpowrotnie "
-"utracone."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -770,39 +769,6 @@ msgstr "Kodowania znaków"
 msgid "E_ncodings shown in menu:"
 msgstr "Ko_dowania widoczne w menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Wybór czcionki tekstu"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
-"zawartości dokumentu"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Wybór czcionki nagłówków stron"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
-"nagłówków stron"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Wybór czcionki numerów wierszy"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
-"numerów wierszy"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Wtyczka"
@@ -833,26 +799,26 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Wybrany plik nie jest wykonywalny."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Wciśnięcie tego przycisku umożliwia wybór czcionki edytora"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Wciśnięcie tego przycisku umożliwia ustawienie koloru tekstu"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Wciśnięcie tego przycisku umożliwia ustawienie koloru tła"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Wciśnięcie tego przycisku umożliwia ustawienie koloru zaznaczonego tekstu"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -860,7 +826,7 @@ msgstr ""
 "Wciśnięcie tego przycisku umożliwia ustawienie koloru oznaczenia "
 "zaznaczonego tekstu"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elementy"
 
@@ -871,7 +837,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatyczne wcięcia</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -896,7 +863,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Prawy margines</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Zakładki</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -1039,7 +1007,8 @@ msgid "_Display line numbers"
 msgstr "_Numery wierszy"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Automatyczne tworzenie wcięć"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1063,23 +1032,19 @@ msgid "_Right margin at column:"
 msgstr "_Prawy margines od kolumny:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Szerokość zakładek:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Nieograniczona liczba cofnięć"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "Użycie _domyślnej czcionki motywu"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "m_inut"
 
 # Tak ma być, bo to jest część tekstu do undo
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "_akcji"
 
@@ -1229,47 +1194,47 @@ msgstr "gedit"
 msgid "translator_credits"
 msgstr "GNOME PL Team <translators@gnome.pl>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Dokumenty"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Niepoprawna nazwa pliku"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Niepoprawne dane UTF-8"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nie można odczytać informacji o dowiązaniu symbolicznym związanym z %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Plik posiada zbyt wiele dowiązań symbolicznych."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nie obsługuje położenia typu %s: w trybie zapisu."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit nie może obsłużyć tego rodzaju położenia w trybie zapisu."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Niepoprawna nazwa pliku"
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1277,7 +1242,7 @@ msgstr ""
 "Brak miejsca na dysku, aby zapisać plik.\n"
 "Zwolnij trochę miejsca i spróbuj ponownie."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1287,7 +1252,7 @@ msgstr ""
 "Spróbuj zapisywać mniejsze pliki lub zapisywać je na dysku nie posiadającym "
 "tego typu ograniczeń."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Nie można utworzyć kopii zapasowej pliku."
 
@@ -1417,7 +1382,7 @@ msgstr "Wietnamski"
 msgid "Thai"
 msgstr "Tajski"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Nieznane"
 
@@ -1464,35 +1429,35 @@ msgstr "Wybór plików do otwarcia"
 msgid "Select a filename to save"
 msgstr "Wybór pliku do zapisu"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Wybór pliku do odczytu..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Zapisywanie dokumentu \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nie został zapisany."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" został zapisany."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Wybór pliku do zapisu..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Czy chcesz cofnąć niezapisane zmiany w dokumencie \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1509,14 +1474,14 @@ msgstr[2] ""
 "Zmiany naniesione w dokumencie w ciągu ostatnich %ld sekund zostaną "
 "bezpowrotnie utracone."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Zmiany naniesione w dokumencie w ciągu ostatniej minuty zostaną bezpowrotnie "
 "utracone."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1534,7 +1499,7 @@ msgstr[2] ""
 "Zmiany naniesione w dokumencie w ciągu ostatniej minuty i %ld sekund zostaną "
 "bezpowrotnie utracone."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1551,13 +1516,22 @@ msgstr[2] ""
 "Zmiany naniesione w dokumencie w ciągu ostatnich %ld minut zostaną "
 "bezpowrotnie utracone."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Zmiany naniesione w dokumencie w ciągu ostatniej godziny zostaną "
+"bezpowrotnie utracone."
+msgstr[1] ""
+"Zmiany naniesione w dokumencie w ciągu ostatniej godziny zostaną "
+"bezpowrotnie utracone."
+msgstr[2] ""
 "Zmiany naniesione w dokumencie w ciągu ostatniej godziny zostaną "
 "bezpowrotnie utracone."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1575,69 +1549,53 @@ msgstr[2] ""
 "Zmiany naniesione w dokumencie w ciągu ostatniej godziny i %d minut zostaną "
 "bezpowrotnie utracone."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Zmiany naniesione w dokumencie w ciągu ostatniej %d godziny zostaną "
-"bezpowrotnie utracone."
-msgstr[1] ""
-"Zmiany naniesione w dokumencie w ciągu ostatnich %d godzin zostaną "
-"bezpowrotnie utracone."
-msgstr[2] ""
-"Zmiany naniesione w dokumencie w ciągu ostatnich %d godzin zostaną "
-"bezpowrotnie utracone."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Przywróć"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Błąd przywracania dokumentu \"%s\"."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nie został przywrócony."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" został przywrócony."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Przywracanie dokumentu \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Nie można odczytać danych ze standardowego wejścia."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Przywracanie pliku:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Wczytywanie pliku:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Błąd wczytywania pliku \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Wczytano plik \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1645,23 +1603,333 @@ msgstr[0] "Wczytano %d plik"
 msgstr[1] "Wczytano %d pliki"
 msgstr[2] "Wczytano %d plików"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Wczytano plik \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Wczytywanie pliku \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Wczytywanie %d pliku..."
 msgstr[1] "Wczytywanie %d plików..."
 msgstr[2] "Wczytywanie %d plików..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Nie można otworzyć pliku \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" jest katalogiem.\n"
+"\n"
+"Sprawdź czy wybrane zostało poprawne położenie i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Nie można otworzyć pliku \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Nie można otworzyć pliku \"%s\", gdyż zawiera on uszkodzone dane."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit nie obsługuje położenia typu %s: w trybie zapisu."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit nie obsługuje położenia typu %s: w trybie zapisu."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Nie można otworzyć pliku \"%s\", ponieważ zawiera on dane w niepoprawnym "
+"formacie."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Plik posiada zbyt wiele dowiązań symbolicznych."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nie można otworzyć pliku o nazwie \"%s\" ponieważ otwartych jest zbyt wiele "
+"plików.\n"
+"\n"
+"Zamknij kilka z nich oraz spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Brak pamięci na otwarcie pliku \"%s\". Zakończ część działających aplikacji "
+"i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Nie można przywrócić pliku \"%s\" gdyż nie można znaleźć komputera \"%s\".\n"
+"\n"
+"Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" nie jest poprawnym położeniem.\n"
+"\n"
+"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
+"\n"
+"Sprawdź czy ustawienia pośrednika są poprawne i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nie można odnaleźć pliku \"%s\".\n"
+"\n"
+"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ zawiera on niepoprawne dane.\n"
+"Prawdopodobnie próbowano otworzyć plik binarny."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ program gedit nie mógł "
+"automatycznie wykryć kodowania znaków.\n"
+"\n"
+"Sprawdź czy nie nastąpiła próba otwarcia pliku binarnego i spróbuj ponownie "
+"wybierając kodowanie znaków w oknie \"Otwórz plik...\" (lub \"Otwórz "
+"położenie\")."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Nie można otworzyć pliku \"%s\", ponieważ jest on zbyt duży."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" używającego kodowania znaków %s.\n"
+"\n"
+"Sprawdź czy nie nastąpiła próba otwarcia pliku binarnego i spróbuj ponownie "
+"wybierając kodowanie znaków w oknie \"Otwórz plik...\" (lub \"Otwórz "
+"położenie\")."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ zawiera on niepoprawne dane.\n"
+"Prawdopodobnie próbowano otworzyć plik binarny."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Nie można przywrócić pliku \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ nie można go odnaleźć.\n"
+"\n"
+"Prawdopodobnie ostatnio plik ten został wykasowany."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nie można otworzyć pliku o nazwie \"%s\" ponieważ otwartych jest zbyt wiele "
+"plików.\n"
+"\n"
+"Zamknij kilka z nich oraz spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Brak pamięci na otwarcie pliku \"%s\". Zakończ część działających aplikacji "
+"i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
+"\n"
+"Sprawdź czy ustawienia pośrednika są poprawne i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ zawiera niepoprawne dane UTF-8.\n"
+"\n"
+"Prawdopodobnie próbowano przywrócić plik binarny."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Nie można przywrócić dokumentu bez określonej nazwy."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Nie można zapisać pliku \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Plik \"%s\" już istnieje."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" jest katalogiem.\n"
+"\n"
+"Sprawdź, czy wprowadzone położenie jest poprawne i spróbuj ponownie."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Nie można utworzyć pliku \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Upewnij się, że masz odpowiednie prawa do zapisu."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Nazwa pliku jest za długa."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Katalogowa część ścieżki nie istnieje lub zawiera dowiązanie symboliczne "
+"wskazujące na nieistniejący plik."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Brak miejsca na dysku, aby utworzyć plik \"%s\".\n"
+"\n"
+"Zwolnij trochę miejsca i spróbuj ponownie."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1673,46 +1941,46 @@ msgstr "tylko do odczytu"
 msgid "_Move to New Window"
 msgstr "_Otwórz w nowym oknie"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Nazwa:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Typ MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Kodowanie:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Otwórz \"%s\""
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Otwiera ostatnio używany plik"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(tylko do odczytu)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Zwykły"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Używa zwykłego trybu wyróżniania elementów składni"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Używa trybu wyróżniania elementów składni %s"
@@ -2167,398 +2435,7 @@ msgstr "Cof_nij"
 msgid "_View"
 msgstr "_Widok"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nie można odnaleźć pliku \"%s\".\n"
-"\n"
-"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Nie można otworzyć pliku \"%s\", gdyż zawiera on uszkodzone dane."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nie można otworzyć pliku \"%s\", gdyż gedit nie obsługuje adresów typu %s:."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Nie można otworzyć pliku \"%s\""
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Nie można otworzyć pliku \"%s\", ponieważ zawiera on dane w niepoprawnym "
-"formacie."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Nie można otworzyć pliku \"%s\", ponieważ jest on zbyt duży."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" nie jest poprawnym położeniem.\n"
-"\n"
-"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Nie można otworzyć pliku \"%s\" z powodu braku dostępu."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nie można otworzyć pliku o nazwie \"%s\" ponieważ otwartych jest zbyt wiele "
-"plików.\n"
-"\n"
-"Zamknij kilka z nich oraz spróbuj ponownie."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" jest katalogiem.\n"
-"\n"
-"Sprawdź czy wybrane zostało poprawne położenie i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Brak pamięci na otwarcie pliku \"%s\". Zakończ część działających aplikacji "
-"i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest niepoprawna.\n"
-"\n"
-"Sprawdź czy położenie zostało wpisane poprawnie i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ nie można znaleźć komputera \"%s"
-"\".\n"
-"\n"
-"Upewnij się, że położenie zostało wpisane poprawnie oraz czy ustawienia "
-"pośrednika są poprawne, a następnie spróbuj ponownie."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
-"\n"
-"Sprawdź czy ustawienia pośrednika są poprawne i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ nie można przeprowadzić logowania.\n"
-"\n"
-"Sprawdź czy położenie zostało wpisane poprawnie i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ zawiera on niepoprawne dane.\n"
-"Prawdopodobnie próbowano otworzyć plik binarny."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Nie można otworzyć pliku \"%s\"."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" ponieważ program gedit nie mógł "
-"automatycznie wykryć kodowania znaków.\n"
-"\n"
-"Sprawdź czy nie nastąpiła próba otwarcia pliku binarnego i spróbuj ponownie "
-"wybierając kodowanie znaków w oknie \"Otwórz plik...\" (lub \"Otwórz "
-"położenie\")."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Nie można otworzyć pliku \"%s\" używającego kodowania znaków %s.\n"
-"\n"
-"Sprawdź czy nie nastąpiła próba otwarcia pliku binarnego i spróbuj ponownie "
-"wybierając kodowanie znaków w oknie \"Otwórz plik...\" (lub \"Otwórz "
-"położenie\")."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nie można otworzyć pliku \"%s\".\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Nie można zapisać pliku \"%s\"."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Nie można zapisać pliku \"%s\".\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ nie można go odnaleźć.\n"
-"\n"
-"Prawdopodobnie ostatnio plik ten został wykasowany."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Nie można przywrócić pliku \"%s\", ponieważ zawiera on uszkodzone dane."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ gedit nie potrafi obsługiwać "
-"położenia typu %s:."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Nie można przywrócić pliku \"%s\"."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ zawiera on dane zapisane w "
-"niepoprawnym formacie."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Nie można przywrócić pliku \"%s\" ponieważ jest on zbyt duży."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Nie można przywrócić pliku \"%s\" z powodu braku dostępu."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ otwartych jest za dużo plików.\n"
-"\n"
-"Zamknij kilka z nich i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Brak wolnej pamięci do przywrócenia pliku \"%s\". Zamknij kilka z "
-"uruchomionych aplikacji i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" gdyż nie można znaleźć komputera \"%s\".\n"
-"\n"
-"Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
-"\n"
-"Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ próba zalogowania zakończyła się "
-"niepowodzeniem."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Nie można przywrócić pliku \"%s\" ponieważ zawiera niepoprawne dane UTF-8.\n"
-"\n"
-"Prawdopodobnie próbowano przywrócić plik binarny."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Nie można przywrócić dokumentu bez określonej nazwy."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Plik \"%s\" już istnieje."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" jest katalogiem.\n"
-"\n"
-"Sprawdź, czy wprowadzone położenie jest poprawne i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Nie można utworzyć pliku \"%s\".\n"
-"\n"
-"Upewnij się, że masz odpowiednie prawa do zapisu."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Nie można utworzyć pliku \"%s\".\n"
-"\n"
-"Nazwa pliku jest za długa."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Nie można utworzyć pliku \"%s\".\n"
-"\n"
-"Katalogowa część ścieżki nie istnieje lub zawiera dowiązanie symboliczne "
-"wskazujące na nieistniejący plik."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Brak miejsca na dysku, aby utworzyć plik \"%s\".\n"
-"\n"
-"Zwolnij trochę miejsca i spróbuj ponownie."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Nie można utworzyć pliku \"%s\"."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2568,16 +2445,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Wrsz %d, Kol %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  NAD"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  WST"
 
@@ -3157,11 +3036,13 @@ msgid "The document is empty."
 msgstr "Dokument nie zawiera tekstu."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Zaznaczony tekst nie zawiera niepoprawnie napisanych słów."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Dokument nie zawiera niepoprawnie zapisanych słów."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3271,6 +3152,184 @@ msgstr "_Pytanie o format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Użycie formatu użytkownika"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Jeżeli nie zapiszesz, zmiany z ostatniej %d godziny zostaną bezpowrotnie "
+#~ "utracone."
+#~ msgstr[1] ""
+#~ "Jeżeli nie zapiszesz, zmiany z ostatnich %d godzin zostaną bezpowrotnie "
+#~ "utracone."
+#~ msgstr[2] ""
+#~ "Jeżeli nie zapiszesz, zmiany z ostatnich %d godzin zostaną bezpowrotnie "
+#~ "utracone."
+
+#~ msgid "Body font picker"
+#~ msgstr "Wybór czcionki tekstu"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
+#~ "zawartości dokumentu"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Wybór czcionki nagłówków stron"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
+#~ "nagłówków stron"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Wybór czcionki numerów wierszy"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
+#~ "numerów wierszy"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Szerokość zakładek:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Zmiany naniesione w dokumencie w ciągu ostatniej %d godziny zostaną "
+#~ "bezpowrotnie utracone."
+#~ msgstr[1] ""
+#~ "Zmiany naniesione w dokumencie w ciągu ostatnich %d godzin zostaną "
+#~ "bezpowrotnie utracone."
+#~ msgstr[2] ""
+#~ "Zmiany naniesione w dokumencie w ciągu ostatnich %d godzin zostaną "
+#~ "bezpowrotnie utracone."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Nie można otworzyć pliku \"%s\", gdyż gedit nie obsługuje adresów typu %"
+#~ "s:."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Nie można otworzyć pliku \"%s\" z powodu braku dostępu."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nie można otworzyć pliku \"%s\" ponieważ nazwa komputera jest "
+#~ "niepoprawna.\n"
+#~ "\n"
+#~ "Sprawdź czy położenie zostało wpisane poprawnie i spróbuj ponownie."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Nie można otworzyć pliku \"%s\" ponieważ nie można znaleźć komputera \"%s"
+#~ "\".\n"
+#~ "\n"
+#~ "Upewnij się, że położenie zostało wpisane poprawnie oraz czy ustawienia "
+#~ "pośrednika są poprawne, a następnie spróbuj ponownie."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nie można otworzyć pliku \"%s\" ponieważ nie można przeprowadzić "
+#~ "logowania.\n"
+#~ "\n"
+#~ "Sprawdź czy położenie zostało wpisane poprawnie i spróbuj ponownie."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Nie można otworzyć pliku \"%s\"."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Nie można otworzyć pliku \"%s\".\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nie można zapisać pliku \"%s\".\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\", ponieważ zawiera on uszkodzone dane."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\" ponieważ gedit nie potrafi obsługiwać "
+#~ "położenia typu %s:."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\" ponieważ zawiera on dane zapisane w "
+#~ "niepoprawnym formacie."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Nie można przywrócić pliku \"%s\" ponieważ jest on zbyt duży."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Nie można przywrócić pliku \"%s\" z powodu braku dostępu."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\" ponieważ otwartych jest za dużo "
+#~ "plików.\n"
+#~ "\n"
+#~ "Zamknij kilka z nich i spróbuj ponownie."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Brak wolnej pamięci do przywrócenia pliku \"%s\". Zamknij kilka z "
+#~ "uruchomionych aplikacji i spróbuj ponownie."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\" ponieważ nazwa komputera jest pusta.\n"
+#~ "\n"
+#~ "Sprawdź poprawność ustawień serwera pośredniczącego i spróbuj ponownie."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Nie można przywrócić pliku \"%s\" ponieważ próba zalogowania zakończyła "
+#~ "się niepowodzeniem."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr ""

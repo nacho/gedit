@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-12-01 19:31+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "generátor GEdit"
 msgid "Edit text files"
 msgstr "Úprava textových souborů"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -320,7 +320,9 @@ msgstr "Udává písmo, které bude použito pro tělo dokumentu při jeho tisku
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "Udává písmo, které bude použito pro tělo dokumentu při jeho tisku. Toto je název gnome-print, nahrazený za print_font_body_pango."
+msgstr ""
+"Udává písmo, které bude použito pro tělo dokumentu při jeho tisku. Toto je "
+"název gnome-print, nahrazený za print_font_body_pango."
 
 #: data/gedit.schemas.in.h:50
 msgid ""
@@ -336,7 +338,12 @@ msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
-msgstr "Udává písmo, které bude použito pro čísla řádků při tisku. Toto nastavení bude mít vliv pouze v případě, že hodnota \"Tisknout čísla řádků\" je nenulová. Toto je název písma gnome-print, nahrazený za print_font_numbers_pango. Toto je název písma gnome-print, nahrazený za print_font_numbers_pango."
+msgstr ""
+"Udává písmo, které bude použito pro čísla řádků při tisku. Toto nastavení "
+"bude mít vliv pouze v případě, že hodnota \"Tisknout čísla řádků\" je "
+"nenulová. Toto je název písma gnome-print, nahrazený za "
+"print_font_numbers_pango. Toto je název písma gnome-print, nahrazený za "
+"print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -352,7 +359,11 @@ msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
-msgstr "Udává písmo, které bude použito pro záhlaví dokumentu při tisku. Toto nastavení bude mít vliv pouze v případě, že je zapnuta hodnota \"Tisknout záhlaví\". Toto je název písma gnome-print, nahrazený za print_font_header_pango."
+msgstr ""
+"Udává písmo, které bude použito pro záhlaví dokumentu při tisku. Toto "
+"nastavení bude mít vliv pouze v případě, že je zapnuta hodnota \"Tisknout "
+"záhlaví\". Toto je název písma gnome-print, nahrazený za "
+"print_font_header_pango."
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -499,11 +510,16 @@ msgstr ""
 "specifického pro aplikaci GEdit. Je-li tato volba vypnuta, bude místo "
 "systémového písma použito písmo z volby \"Písmo editoru\""
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-2,ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-2,ISO-8859-15]"
 
@@ -604,8 +620,16 @@ msgstr[2] ""
 "ztraceny."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -625,22 +649,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu a %d minut "
 "navždy ztraceny."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Pokud je neuložíte, budou změny provedené za poslední %d hodinu navždy "
-"ztraceny."
-msgstr[1] ""
-"Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy "
-"ztraceny."
-msgstr[2] ""
-"Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy "
-"ztraceny."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -732,39 +740,6 @@ msgstr "Kódování znaků"
 msgid "E_ncodings shown in menu:"
 msgstr "Kódování zobrazovaná v _menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Výběr písma těla"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Chcete-li vybrat písmo používané pro tisk těla dokumentu, stiskněte toto "
-"tlačítko"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Výběr písma hlaviček stránky"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Chcete-li vybrat písmo používané pro tisk záhlaví dokumentu, stiskněte toto "
-"tlačítko"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Výběr písma čísel řádků"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Chcete-li vybrat písmo, které se použije pro tisk čísel řádků, zmáčkněte "
-"toto tlačítko."
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Plugin"
@@ -794,33 +769,33 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Vybraný soubor není spustitelný."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Chcete-li vybrat písmo, které bude editor používat, zmáčkněte toto tlačítko."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Chcete-li nastavit barvu textu, zmáčkněte toto tlačítko."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Chcete-li nastavit barvu pozadí, zmáčkněte toto tlačítko."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Chcete-li nastavit barvu pozadí vybraného textu, zmáčkněte toto tlačítko."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Chcete-li nastavit barvu vybraného textu, zmáčkněte toto tlačítko."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elementy"
 
@@ -831,7 +806,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatické odsazování</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -856,7 +832,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Pravý okraj</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabelátory</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -999,7 +976,8 @@ msgid "_Display line numbers"
 msgstr "Zobrazovat čísla řá_dků"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "Povolit _automatické odsazování"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1023,22 +1001,18 @@ msgid "_Right margin at column:"
 msgstr "_Pravý okraj ve sloupci:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Šířka _tabelátorů:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Neomezené vracení zpět"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "Používat _implicitní písmo tématu"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minut"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "_akcí"
 
@@ -1191,46 +1165,46 @@ msgstr ""
 "Michal Bukovjan <bukm@centrum.cz>\n"
 "Miloslav Trmač <mitr@volny.cz>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 msgid "Unsaved Document"
 msgstr "Neuložený dokument"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Chybný název souboru"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Nepovolená UTF-8 data"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nemohu načíst informace o symbolickém odkazu pro %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Soubor má příliš mnoho symbolických odkazů."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "GEdit nemůže zpracovat tento typ umístění v režimu zápisu."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Chybný název souboru."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1238,7 +1212,7 @@ msgstr ""
 "Pro uložení souboru není dostatek místa na disku.\n"
 "Uvolněte prosím nějaké místo a zkuste to znovu."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1248,7 +1222,7 @@ msgstr ""
 "souboru.  Zkuste prosím uložit menší soubor, nebo uložit tento soubor na "
 "disk, který nemá toto omezení."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Nemohu vytvořit záložní soubor."
 
@@ -1378,7 +1352,7 @@ msgstr "Vietnamské"
 msgid "Thai"
 msgstr "Thajské"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -1424,35 +1398,35 @@ msgstr "Vyberte soubory, které otevřít"
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Otevřít soubor..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Ukládám dokument \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nebyl uložen."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" byl uložen."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Vrátit neuložené změny v dokumentu \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1466,12 +1440,12 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld sekund budou navždy ztraceny."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Změny provedené v dokumentu za poslední minutu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1489,7 +1463,7 @@ msgstr[2] ""
 "Změny provedené v dokumentu za poslední minutu a %ld sekund budou navždy "
 "ztraceny."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1503,11 +1477,19 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1525,66 +1507,53 @@ msgstr[2] ""
 "Změny provedené v dokumentu za poslední hodinu a %d minut budou navždy "
 "ztraceny."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Změny provedené v dokumentu za poslední %d hodinu budou navždy ztraceny."
-msgstr[1] ""
-"Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
-msgstr[2] ""
-"Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Chyba při vracení dokumentu \"%s\" do původního stavu."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nebyl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" byl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vracím dokument \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Nemohu číst data ze standardního vstupu."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Vracím soubor:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Načítám soubor:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba při načítání souboru \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načten soubor \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1592,23 +1561,337 @@ msgstr[0] "Načten %i soubor."
 msgstr[1] "Načteny %i soubory."
 msgstr[2] "Načteno %i souborů."
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Vytvořen soubor \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítám soubor \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Načítám %d soubor ..."
 msgstr[1] "Načítám %d soubory ..."
 msgstr[2] "Načítám %d souborů ..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Nemohu otevřít soubor \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" je adresář.\n"
+"\n"
+"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Nemohu otevřít soubor \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Nemohu otevřít soubor \"%s\", protože obsahuje poškozená data."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože obsahuje data v nesprávném formátu."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Soubor má příliš mnoho symbolických odkazů."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
+"\n"
+"Zavřete prosím některé otevřené soubory a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím některé běžící "
+"aplikace a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Nemohu vrátit soubor \"%s\" do původního stavu, protože počítač \"%s\" nebyl "
+"nalezen.\n"
+"\n"
+"Zkontrolujte prosím, že je vaše nastavení proxy správné, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" není platné umístění.\n"
+"\n"
+"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože název počítače je prázdný.\n"
+"\n"
+"Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nemohu nalézt soubor \"%s\".\n"
+"\n"
+"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože obsahuje neplatná data.\n"
+"\n"
+"Pravděpodobně se pokoušíte otevřít binární soubor."
+
+#: gedit/gedit-io-error-dialogs.c:248
+#, fuzzy
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+"Soubor, který se pokoušíte otevřít, obsahuje neplatnou posloupnost bajtů."
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože gedit nemohl automaticky detekovat "
+"kódování znaků.\n"
+"\n"
+"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a zkuste znovu "
+"vybrat kódování znaků v dialogu 'Otevřít soubor...' (nebo 'Otevřít "
+"umístění')."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Nemohu otevřít soubor \"%s\", protože je příliš velký."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Nemohu otevřít soubor \"%s\" v kódování znaků %s.\n"
+"\n"
+"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a že jste v "
+"dialogu 'Otevřít soubor...' (nebo 'Otevřít umístění') vybrali správné "
+"kódování znaků, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože obsahuje neplatná data.\n"
+"\n"
+"Pravděpodobně se pokoušíte otevřít binární soubor."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Nemohu vrátit soubor \"%s\" do původního stavu."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Nemohu vrátit soubor \"%s\" do původního stavu, protože nebyl nalezen "
+"původní soubor.\n"
+"\n"
+"Původní soubor byl asi nedávno smazán."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
+"\n"
+"Zavřete prosím některé otevřené soubory a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím některé běžící "
+"aplikace a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Nemohu otevřít soubor \"%s\", protože název počítače je prázdný.\n"
+"\n"
+"Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
+"obsahuje neplatné data v kódování UTF-8.\n"
+"\n"
+"Pravděpodobně se pokoušíte o návrat do původního stavu z binárního souboru."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Není možné vrátit do původního stavu Nepojmenovaný dokument."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Nemohu uložit soubor \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Soubor \"%s\" již existuje."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" je adresář.\n"
+"\n"
+"Zkontrolujte prosím, že jste umístění napsali správně."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Nemohu vytvořit soubor \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Nemohu vytvořit soubor \"%s\".\n"
+"\n"
+"Zkontrolujte prosím, že máte odpovídající práva zápisu."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Nemohu vytvořit soubor \"%s\".\n"
+"\n"
+"Název souboru je příliš dlouhý."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nemohu vytvořit soubor \"%s\".\n"
+"\n"
+"Adresářová část názvu souboru neexistuje nebo to je porušený symbolický "
+"odkaz."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Na disku není dostatek místa pro vytvoření souboru \"%s\".\n"
+"\n"
+"Uvolněte prosím nějaké místo a zkuste to znova."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1620,45 +1903,45 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "Přes_unout do nového okna"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Název:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Typ MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Kódování:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Otevřít '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 msgid "Read Only"
 msgstr "Pouze pro čtení"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normální"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Použít režim zvýrazňování Normální"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použít režim zvýrazňování %s"
@@ -2110,407 +2393,7 @@ msgstr "_Zpět"
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nemohu nalézt soubor \"%s\".\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Nemohu otevřít soubor \"%s\", protože obsahuje poškozená data."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože aplikace GEdit neumí zpracovat "
-"umístění %s."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Nemohu otevřít soubor \"%s\"."
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože obsahuje data v nesprávném formátu."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Nemohu otevřít soubor \"%s\", protože je příliš velký."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" není platné umístění.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Nemohu otevřít soubor \"%s\", protože byl zamezen přístup."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
-"\n"
-"Zavřete prosím některé otevřené soubory a zkuste to znovu."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" je adresář.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím některé běžící "
-"aplikace a zkuste to znovu."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože název počítače není platný.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože nelze nalézt počítač \"%s\".\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně a že je vaše nastavení "
-"proxy správné, a pak to zkuste znovu."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože název počítače je prázdný.\n"
-"\n"
-"Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože pokus o přihlášení se nezdařil.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože obsahuje neplatná data.\n"
-"\n"
-"Pravděpodobně se pokoušíte otevřít binární soubor."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Nemohu otevřít soubor \"%s\"."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože gedit nemohl automaticky detekovat "
-"kódování znaků.\n"
-"\n"
-"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a zkuste znovu "
-"vybrat kódování znaků v dialogu 'Otevřít soubor...' (nebo 'Otevřít "
-"umístění')."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\" v kódování znaků %s.\n"
-"\n"
-"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a že jste v "
-"dialogu 'Otevřít soubor...' (nebo 'Otevřít umístění') vybrali správné "
-"kódování znaků, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nemohu otevřít soubor \"%s\".\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Nemohu uložit soubor \"%s\"."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Nemohu uložit soubor \"%s\".\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože nebyl nalezen "
-"původní soubor.\n"
-"\n"
-"Původní soubor byl asi nedávno smazán."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
-"obsahuje poškozené data."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože aplikace GEdit neumí "
-"zpracovat umístění %s."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Nemohu vrátit soubor \"%s\" do původního stavu."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
-"obsahuje data v neplatném formátu."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože je příliš velký."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože přístup k původnímu "
-"souboru byl odepřen."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože je již otevřeno "
-"příliš mnoho souborů.\n"
-"\n"
-"Zavřete prosím některé soubory a zkuste to znovu."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Pro vrácení souboru \"%s\" do původního stavu není dostatek paměti. Zavřete "
-"prosím některé běžící aplikace a zkuste to znovu."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože počítač \"%s\" nebyl "
-"nalezen.\n"
-"\n"
-"Zkontrolujte prosím, že je vaše nastavení proxy správné, a zkuste to znovu."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože název počítače je "
-"prázdný.\n"
-"\n"
-"\n"
-"Zkontrolujte prosím nastavení vaší proxy a zkuste to znovu."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože pokus o přihlášení "
-"selhal."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
-"obsahuje neplatné data v kódování UTF-8.\n"
-"\n"
-"Pravděpodobně se pokoušíte o návrat do původního stavu z binárního souboru."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Není možné vrátit do původního stavu Nepojmenovaný dokument."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Soubor \"%s\" již existuje."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" je adresář.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Zkontrolujte prosím, že máte odpovídající práva zápisu."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Název souboru je příliš dlouhý."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Adresářová část názvu souboru neexistuje nebo to je porušený symbolický "
-"odkaz."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Na disku není dostatek místa pro vytvoření souboru \"%s\".\n"
-"\n"
-"Uvolněte prosím nějaké místo a zkuste to znova."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Nemohu vytvořit soubor \"%s\"."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr " (neplatný Unicode)"
 
@@ -2520,16 +2403,18 @@ msgstr " (neplatný Unicode)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ř %d, Slo %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  PŘE"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  VLO"
 
@@ -2560,7 +2445,8 @@ msgstr "Zadané kódování \"%s\" není platné\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr "Soubor, který se pokoušíte otevřít, obsahuje neplatnou posloupnost bajtů."
+msgstr ""
+"Soubor, který se pokoušíte otevřít, obsahuje neplatnou posloupnost bajtů."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
@@ -3105,11 +2991,13 @@ msgid "The document is empty."
 msgstr "Dokument je prázdný."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Vybraný text neobsahuje chybně napsaná slova."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Dokument neobsahuje chybně napsaná slova."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3219,6 +3107,184 @@ msgstr "Ze_ptat se na formát"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Použít vlastní _formát"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Pokud je neuložíte, budou změny provedené za poslední %d hodinu navždy "
+#~ "ztraceny."
+#~ msgstr[1] ""
+#~ "Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy "
+#~ "ztraceny."
+#~ msgstr[2] ""
+#~ "Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy "
+#~ "ztraceny."
+
+#~ msgid "Body font picker"
+#~ msgstr "Výběr písma těla"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Chcete-li vybrat písmo používané pro tisk těla dokumentu, stiskněte toto "
+#~ "tlačítko"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Výběr písma hlaviček stránky"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Chcete-li vybrat písmo používané pro tisk záhlaví dokumentu, stiskněte "
+#~ "toto tlačítko"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Výběr písma čísel řádků"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Chcete-li vybrat písmo, které se použije pro tisk čísel řádků, zmáčkněte "
+#~ "toto tlačítko."
+
+#~ msgid "_Tabs width:"
+#~ msgstr "Šířka _tabelátorů:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Změny provedené v dokumentu za poslední %d hodinu budou navždy ztraceny."
+#~ msgstr[1] ""
+#~ "Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
+#~ msgstr[2] ""
+#~ "Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Nemohu otevřít soubor \"%s\", protože aplikace GEdit neumí zpracovat "
+#~ "umístění %s."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Nemohu otevřít soubor \"%s\", protože byl zamezen přístup."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nemohu otevřít soubor \"%s\", protože název počítače není platný.\n"
+#~ "\n"
+#~ "Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Nemohu otevřít soubor \"%s\", protože nelze nalézt počítač \"%s\".\n"
+#~ "\n"
+#~ "Zkontrolujte prosím, že jste umístění napsali správně a že je vaše "
+#~ "nastavení proxy správné, a pak to zkuste znovu."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nemohu otevřít soubor \"%s\", protože pokus o přihlášení se nezdařil.\n"
+#~ "\n"
+#~ "Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Nemohu otevřít soubor \"%s\"."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Nemohu otevřít soubor \"%s\".\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nemohu uložit soubor \"%s\".\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
+#~ "obsahuje poškozené data."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože aplikace GEdit "
+#~ "neumí zpracovat umístění %s."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
+#~ "obsahuje data v neplatném formátu."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože je příliš velký."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože přístup k "
+#~ "původnímu souboru byl odepřen."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože je již otevřeno "
+#~ "příliš mnoho souborů.\n"
+#~ "\n"
+#~ "Zavřete prosím některé soubory a zkuste to znovu."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Pro vrácení souboru \"%s\" do původního stavu není dostatek paměti. "
+#~ "Zavřete prosím některé běžící aplikace a zkuste to znovu."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože název počítače je "
+#~ "prázdný.\n"
+#~ "\n"
+#~ "\n"
+#~ "Zkontrolujte prosím nastavení vaší proxy a zkuste to znovu."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Nemohu vrátit soubor \"%s\" do původního stavu, protože pokus o "
+#~ "přihlášení selhal."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr ""

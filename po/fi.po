@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit (gnome-2-8)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-12-07 12:38+0200\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -45,7 +45,7 @@ msgstr "gedit-automaatiotehdas"
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -502,11 +502,16 @@ msgstr ""
 "geditissämääritellyn kirjasimen sijaan. Jos tämä otetaan pois päältä, "
 "käytetään kohdassa \"Muokkaimen kirjasin\" määriteltyä kirjasinta."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -599,8 +604,14 @@ msgstr[1] ""
 "pysyvästi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Mikäli et tallenna, muutokset viimeisen tunnin ajalta menetetään pysyvästi."
+msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen tunnin ajalta menetetään pysyvästi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -617,19 +628,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen tunnin ja %d minuutin ajalta "
 "menetetään pysyvästi."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
-"pysyvästi."
-msgstr[1] ""
-"Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
-"pysyvästi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -723,39 +721,6 @@ msgstr "Merkistön koodaustavat"
 msgid "E_ncodings shown in menu:"
 msgstr "Valikossa _näytettävät koodaustavat:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Viestirungon kirjasinvalitsin"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Napsauta tästä valitaksesi asiakirjan rungon tulostuksessa käytettävän "
-"kirjasimen"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Sivun otsikkotietojen kirjasinvalitsin"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Napsauta tästä valitaksesi sivuotsikkojen tulostuksessa käytettävän "
-"kirjasimen"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Rivinumeroiden kirjasinvalitsin"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Napsauta tästä valitaksesi rivinumeroiden tulostuksessa käytettävän "
-"kirjasimen"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Liitännäinen"
@@ -786,26 +751,26 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Valittu tiedosto ei ole suorituskelpoinen."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Napsauta tästä valitaksesi muokkaimessa käytettävän kirjasimen"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Napsauta tästä asettaaksesi tekstivärin"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Napsauta tästä asettaaksesi taustavärin"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna oleva teksti esitetään"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -813,7 +778,7 @@ msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna olevan tekstin tausta "
 "väritetään"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elementit"
 
@@ -824,7 +789,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automaattinen sisennys</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -849,7 +815,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Oikea reunus</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Sarkaimet</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -992,7 +959,8 @@ msgid "_Display line numbers"
 msgstr "Näytä rivi_numerot"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "Käytä auto_maattisisennystä"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1016,22 +984,18 @@ msgid "_Right margin at column:"
 msgstr "Oikea _reunus sarakkeessa:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Sarkainleveys:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Loppumattomat kumoamiskerrat"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Käytä teeman oletuskirjasinta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minuuttia"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "toim_intoa"
 
@@ -1186,48 +1150,48 @@ msgstr ""
 "\n"
 "http://gnome-fi.org/"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "A_siakirjat"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Epäkelpo tiedostonimi"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Viallista UTF-8 dataa"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Symbolisen linkin tietojen lukeminen kohteelle %s epäonnistui"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Tiedostolla on liian monta symbolista linkkiä."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
 "gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ei pysty käsittelemään tällaista sijaintia kirjoitustilassa."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Epäkelpo tiedostonimi."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1235,7 +1199,7 @@ msgstr ""
 "Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi.\n"
 "Vapauta levytilaa ja yritä uudelleen."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1245,7 +1209,7 @@ msgstr ""
 "Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
 "rajoitusta."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Tiedoston varmuuskopiointi ei onnistunut."
 
@@ -1375,7 +1339,7 @@ msgstr "Vietnamilainen"
 msgid "Thai"
 msgstr "Thailainen"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -1422,37 +1386,37 @@ msgstr "Valitse avattavat tiedostot"
 msgid "Select a filename to save"
 msgstr "Valitse tiedostonimi jolla tallennetaan"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Avaa tiedosto..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Tallennetaan asiakirjaa \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Asiakirjaa \"%s\" ei ole tallennettu."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Asiakirja \"%s\" on tallennettu."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Tallenna nimellä..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 "Haluatko palauttaa asiakirjan \"%s\" ja kumota tallentamisen jälkeen tehdyt "
 "muutokset?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1466,14 +1430,14 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %ld sekunnin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin aikana menetetään "
 "lopullisesti."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1488,7 +1452,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
 "aikana menetetään lopullisesti."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1502,13 +1466,19 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %ld minuutin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Muutokset jotka on tehty asiakirjaan viimeisen tunnin aikana menetetään "
+"lopullisesti."
+msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin aikana menetetään "
 "lopullisesti."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1523,88 +1493,392 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
-"lopullisesti."
-msgstr[1] ""
-"Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
-"lopullisesti."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Tiedoston \"%s\" palauttaminen epäonnistui."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Asiakirjaa \"%s\" ei palautettu."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Asiakirja \"%s\" on palautettu."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Palautetaan asiakirjaa \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Virhe luettaessa dataa stdin:istä."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Palautetaan tiedostoa:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Ladataan tiedostoa:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Tiedoston \"%s\" lataaminen epäonnistui"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Ladattu tiedosto \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Ladattu %d tiedosto"
 msgstr[1] "Ladattu %d tiedostoa"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Ladattu tiedosto \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Ladataan tiedostoa \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Ladataan %d tiedostoa..."
 msgstr[1] "Ladataan %d tiedostoa..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" on hakemisto.\n"
+"\n"
+"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää viallista dataa."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr ""
+"gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr ""
+"gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää dataa epäkelvossa "
+"muodossa."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Tiedostolla on liian monta symbolista linkkiä."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska liian monta tiedostoa on jo "
+"auki.\n"
+"\n"
+"Sulje ensin joku tiedosto ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
+"oleva ohjelma ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelinta \"%s\" "
+"ei löytynyt. \n"
+"\n"
+"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" ei ole kelvollinen sijainti.\n"
+"\n"
+"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
+"\n"
+"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Tiedostoa \"%s\" ei löytynyt.\n"
+"\n"
+"Tarkista että annoit sijainnin oikein ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa dataa.\n"
+"\n"
+"Yrität luultavasti avata binääritiedostoa."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska gedit ei tunnistanut merkistön "
+"koodaustapaa automaattisesti.\n"
+"\n"
+"Tarkista ettet yritä avata binääritiedostoa ja yritä uudestaan valitsemalla "
+"jokin merkistön koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -"
+"ikkunassa."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui koska se on liian suuri."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui käytettäessä merkistöä \"%s\".\n"
+"Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
+"koodaustavan 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa ja yritä "
+"uudestaan."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa dataa.\n"
+"\n"
+"Yrität luultavasti avata binääritiedostoa."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei löydä "
+"sitä.\n"
+"\n"
+"Tämä voi johtua siitä että se on poistettu."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska liian monta tiedostoa on jo "
+"auki.\n"
+"\n"
+"Sulje ensin joku tiedosto ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
+"oleva ohjelma ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
+"\n"
+"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
+"epäkelpoa UTF-8 dataa.\n"
+"\n"
+"Yrität luultavasti avata binääritiedostoa."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Tiedosto \"%s\" on jo olemassa."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" on hakemisto.\n"
+"\n"
+"Varmista että kirjoitit osoitteen oikein."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Tiedoston \"%s\" luominen epäonnistui."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Tiedoston \"%s\" luominen epäonnistui.\n"
+"\n"
+"Varmista että sinulla on tarvittavat kirjoitusoikeudet."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Tiedoston \"%s\" luominen epäonnistui.\n"
+"\n"
+"Tiedostonimi on liian pitkä."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Tiedoston \"%s\" luominen epäonnistui.\n"
+"\n"
+"Annetulla nimellä olevaa hakemistokomponenttia ei ole olemassa, tai se on "
+"symbolinen linkki jolla ei ole kohdetta."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi.\n"
+"\n"
+"Vapauta levytilaa ja yritä uudelleen."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1616,46 +1890,46 @@ msgstr "LUKU"
 msgid "_Move to New Window"
 msgstr "_Siirrä uuteen ikkunaan"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Nimi:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(vain luku)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Käytä tavallista väritystä"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2107,409 +2381,7 @@ msgstr "K_umoa"
 msgid "_View"
 msgstr "_Näytä"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Tiedostoa \"%s\" ei löytynyt.\n"
-"\n"
-"Tarkista että annoit sijainnin oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää viallista dataa."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska gedit epäonnistui käsittelemään "
-"kohdan %s: sijainnit."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää dataa epäkelvossa "
-"muodossa."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui koska se on liian suuri."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" ei ole kelvollinen sijainti.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui koska pääsy siihen kiellettiin."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska liian monta tiedostoa on jo "
-"auki.\n"
-"\n"
-"Sulje ensin joku tiedosto ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" on hakemisto.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
-"oleva ohjelma ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on epäkelpo.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelinta \"%s\" ei "
-"löytynyt. \n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja että välityspalvelimesi "
-"asetukset ovat oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska kirjautuminen epäonnistui.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa dataa.\n"
-"\n"
-"Yrität luultavasti avata binääritiedostoa."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska gedit ei tunnistanut merkistön "
-"koodaustapaa automaattisesti.\n"
-"\n"
-"Tarkista ettet yritä avata binääritiedostoa ja yritä uudestaan valitsemalla "
-"jokin merkistön koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -"
-"ikkunassa."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui käytettäessä merkistöä \"%s\".\n"
-"Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
-"koodaustavan 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa ja yritä "
-"uudestaan."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Tiedoston \"%s\" tallentaminen epäonnistui.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei löydä "
-"sitä.\n"
-"\n"
-"Tämä voi johtua siitä että se on poistettu."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
-"viallista dataa."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei onnistunut "
-"käsittelemään kohtaa %s: sijainnit."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
-"epäkelvossa muodossa olevaa dataa."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se on liian suuri."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska pääsy siihen "
-"estettiin."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska liian monta "
-"tiedostoa on jo auki.\n"
-"\n"
-"Sulje ensin joku avoin tiedosto ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen epäonnistui koska se vaatii enemmän muistia "
-"kuin on käytettävissä. Sulje joitain käynnissä olevia ohjelmia ja yritä "
-"uudelleen."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelinta \"%s\" "
-"ei löytynyt. \n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelimen nimi oli "
-"tyhjä.\n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen epäonnistui koska kirjautuminen ei onnistunut."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
-"epäkelpoa UTF-8 dataa.\n"
-"\n"
-"Yrität luultavasti avata binääritiedostoa."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Tiedosto \"%s\" on jo olemassa."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" on hakemisto.\n"
-"\n"
-"Varmista että kirjoitit osoitteen oikein."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
-"Varmista että sinulla on tarvittavat kirjoitusoikeudet."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
-"Tiedostonimi on liian pitkä."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
-"Annetulla nimellä olevaa hakemistokomponenttia ei ole olemassa, tai se on "
-"symbolinen linkki jolla ei ole kohdetta."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi.\n"
-"\n"
-"Vapauta levytilaa ja yritä uudelleen."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Tiedoston \"%s\" luominen epäonnistui."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2519,16 +2391,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rvi %d, Srke %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  PÄÄLLE"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  LISÄÄ"
 
@@ -3106,11 +2980,13 @@ msgid "The document is empty."
 msgstr "Asiakirja on tyhjä."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Valittu teksti ei sisällä väärinkirjoitettuja sanoja."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Asiakirja ei sisällä väärinkirjoitettuja sanoja."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3220,6 +3096,186 @@ msgstr "_Kysy muotoilua"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
+#~ "pysyvästi."
+#~ msgstr[1] ""
+#~ "Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
+#~ "pysyvästi."
+
+#~ msgid "Body font picker"
+#~ msgstr "Viestirungon kirjasinvalitsin"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Napsauta tästä valitaksesi asiakirjan rungon tulostuksessa käytettävän "
+#~ "kirjasimen"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Sivun otsikkotietojen kirjasinvalitsin"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Napsauta tästä valitaksesi sivuotsikkojen tulostuksessa käytettävän "
+#~ "kirjasimen"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Rivinumeroiden kirjasinvalitsin"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Napsauta tästä valitaksesi rivinumeroiden tulostuksessa käytettävän "
+#~ "kirjasimen"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Sarkainleveys:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana "
+#~ "menetetään lopullisesti."
+#~ msgstr[1] ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana "
+#~ "menetetään lopullisesti."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui koska gedit epäonnistui "
+#~ "käsittelemään kohdan %s: sijainnit."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui koska pääsy siihen kiellettiin."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on "
+#~ "epäkelpo.\n"
+#~ "\n"
+#~ "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui koska palvelinta \"%s\" ei "
+#~ "löytynyt. \n"
+#~ "\n"
+#~ "Tarkista että kirjoitit osoitteen oikein ja että välityspalvelimesi "
+#~ "asetukset ovat oikein ja yritä uudelleen."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui koska kirjautuminen epäonnistui.\n"
+#~ "\n"
+#~ "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Tiedoston \"%s\" avaaminen epäonnistui."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" avaaminen epäonnistui.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Tiedoston \"%s\" tallentaminen epäonnistui.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
+#~ "viallista dataa."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei "
+#~ "onnistunut käsittelemään kohtaa %s: sijainnit."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
+#~ "epäkelvossa muodossa olevaa dataa."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se on liian "
+#~ "suuri."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska pääsy siihen "
+#~ "estettiin."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska liian monta "
+#~ "tiedostoa on jo auki.\n"
+#~ "\n"
+#~ "Sulje ensin joku avoin tiedosto ja yritä uudelleen."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen epäonnistui koska se vaatii enemmän "
+#~ "muistia kuin on käytettävissä. Sulje joitain käynnissä olevia ohjelmia ja "
+#~ "yritä uudelleen."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelimen nimi "
+#~ "oli tyhjä.\n"
+#~ "\n"
+#~ "Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä "
+#~ "uudelleen."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Tiedoston \"%s\" palauttaminen epäonnistui koska kirjautuminen ei "
+#~ "onnistunut."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "plugin-manager.glade2:a ei löytynyt. Asenna gedit uudelleen.\n"

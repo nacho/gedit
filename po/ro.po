@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-09-05 01:32+0300\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -44,7 +44,7 @@ msgstr "Fabrica de automatizare Gedit"
 msgid "Edit text files"
 msgstr "Editare fişiere text"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Editor de text"
 
@@ -514,11 +514,16 @@ msgstr ""
 "atunci fontul specificat în opţiunea „Font editare“ va fi utilizat în locul "
 "fontului de sistem."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -603,8 +608,13 @@ msgstr[1] ""
 "Dacă nu salvaţi, modificările din ultimele %ld minute vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -618,15 +628,6 @@ msgstr[0] ""
 "Dacă nu salvaţi, modificările din ultimul oră şi un minut vor fi pierdute."
 msgstr[1] ""
 "Dacă nu salvaţi, modificările din ultima oră şi %d minute vor fi pierdute."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
-msgstr[1] "Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -720,37 +721,6 @@ msgstr "Codări caractere"
 msgid "E_ncodings shown in menu:"
 msgstr "C_odări afişate în meniu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Font text"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Apasă acest buton pentru a selecta fontul utilizat pentru tipărirea corpului "
-"documentului."
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Font antet pagină"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Apasă acest buton pentru a selecta fontul utilizat la tipărirea antetului"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Font numerotare linii"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Apasă acest buton pentru a selecta fontul utilizat la numerotarea liniilor"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Modul"
@@ -781,32 +751,32 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Fişierul selectat nu este executabil."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Apasă acest buton pentru a selecta fontul utilizat în editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Apasă acest buton pentru a configura culoarea textului"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Apasă acest buton pentru a configura culoarea fundalului"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Apasă acest buton pentru a configura culoarea textului selectat"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Apasă acest buton pentru a configura culoarea de marcare a textului selectat"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elemente"
 
@@ -817,7 +787,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Indentare automată</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -842,7 +813,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Marginea dreaptă</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Taburi</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -985,7 +957,8 @@ msgid "_Display line numbers"
 msgstr "_Numerotează liniile"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Activează indentarea automată"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1009,22 +982,18 @@ msgid "_Right margin at column:"
 msgstr "Marginea _dreaptă la coloana:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Lăţime _taburi:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "Anulări _nelimitate"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Utilizează fontul implicit al temei"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minut(e)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "acţ_iuni"
 
@@ -1176,47 +1145,47 @@ msgstr ""
 "Mişu Moldovan <dumol@go.ro>\n"
 "Mugurel Tudor <mugurelu@go.ro>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Documente"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Nume de fişier invalid"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Date UTF-8 invalide"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nu am putut citi datele legăturii simbolice pentru %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Acest fişier are prea multe legături simbolice."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "Gedit nu poate gestiona această locaţie în modul scriere."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Nume de fişier invalid."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1224,7 +1193,7 @@ msgstr ""
 "Nu este destul spaţiu pe disc pentru a salva fişierul.\n"
 "Eliberaţi vă rugăm puţin spaţiu pe disc şi încercaţi din nou."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1234,7 +1203,7 @@ msgstr ""
 "maximă a fişierului. Încercaţi vă rugăm să salvaţi un fişier mai mic sau să "
 "salvaţi pe un disc ce nu are această limitare."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Nu am putut crea un cópie de siguranţă."
 
@@ -1364,7 +1333,7 @@ msgstr "Vietnameză"
 msgid "Thai"
 msgstr "Thailandeză"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -1411,35 +1380,35 @@ msgstr "Selectaţi un fişier pentru deschidere"
 msgid "Select a filename to save"
 msgstr "Selectaţi un nume de fişier pentru salvare"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Deschide fişierul..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Salvez documentul „%s“..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Documentul „%s” nu a fost salvat."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Documentul „%s” a fost salvat."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Salvează ca..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Doriţi să reveniţi la ultima salvare a documentului „%s”?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1449,12 +1418,12 @@ msgid_plural ""
 msgstr[0] "Modificările aduse documentului în ultima secundă vor fi pierdute."
 msgstr[1] "Modificările aduse documentului în ultimele %ld vor fi pierdute."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1469,7 +1438,7 @@ msgstr[1] ""
 "Modificările aduse documentului în ultimul minut şi %ld secunde vor fi "
 "pierdute."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1480,11 +1449,15 @@ msgstr[0] "Modificările aduse documentului în ultimul minut vor fi pierdute."
 msgstr[1] ""
 "Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Modificările aduse documentului în ultima oră vor fi pierdute."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultima oră vor fi pierdute."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1497,84 +1470,388 @@ msgstr[0] ""
 msgstr[1] ""
 "Modificările aduse documentului în ultima oră şi %d minute vor fi pierdute."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
-msgstr[1] "Modificările aduse documentului în ultimele %d ore vor fi pierdute."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Restaurea_ză"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Nu am putut restaura documentul „%s“."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Documentul „%s” nu a fost restaurat."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Documentul „%s” a fost restaurat."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Restaurez documentul „%s“..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Nu am putut citi date de la stdin."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Restaurez fişierul:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Încarc fişierul:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Eroare la încărcarea fişierului „%s”"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Am încărcat fişierul „%s“"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Am încărcat %d fişier"
 msgstr[1] "Am încărcat %d fişier"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Am încărcat fişierul „%s“"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Încarc fişierul „%s”..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Încarc %d fişier ..."
 msgstr[1] "Încarc %d fişier ..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Nu am putut deschide fişierul „%s“"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"„%s“ este un director.\n"
+"\n"
+"Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Nu am putut deschide fişierul „%s“"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Nu am putut deschide fişierul „%s“ deoarece conţine date corupte."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece conţine date într-un format "
+"invalid."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Acest fişier are prea multe legături simbolice."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece sunt prea multe fişiere "
+"deschise.\n"
+"\n"
+"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
+"închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Nu am putut restaura fişierul „%s“ deoarece nici o gazdă „%s“ nu a putut fi "
+"găsită.\n"
+"\n"
+"Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"„%s“ nu este o locaţie validă.\n"
+"\n"
+"Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece numele gazdei lipsea.\n"
+"\n"
+"Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nu am putut găsi fişierul „%s“.\n"
+"\n"
+"Va rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece conţine date invalide.\n"
+"\n"
+"Probabil încercaţi să deschideţi un fişier binar."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut detecta automat "
+"codarea caracterelor.\n"
+"\n"
+"Verificaţi ca nu cumva să încercaţi să deschideţi un fişier binar şi "
+"încercaţi din nou selectând o codare în dialogul „Deschide...“ (sau "
+"„Deschide locaţia...“)"
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Nu am putut deschide fişierul „%s“ deoarece este prea mare."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ utilizând codarea %s.\n"
+"\n"
+"Vă rugăm verificaţi faptul că nu încercaţi să deschideţi un fişier binar şi "
+"că aţi selectat codarea corectă a caracterelor în dialogul „Deschide "
+"fişierul...“ (sau „Deschide locaţia“) apoi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece conţine date invalide.\n"
+"\n"
+"Probabil încercaţi să deschideţi un fişier binar."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Nu am putut restaura fişierul „%s“."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Nu am putut restaura fişierul „%s“ deoarece Gedit nu îl poate găsi.\n"
+"\n"
+"Probabil a fost şters de curând."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece sunt prea multe fişiere "
+"deschise.\n"
+"\n"
+"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
+"închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Nu am putut deschide fişierul „%s“ deoarece numele gazdei lipsea.\n"
+"\n"
+"Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Nu am putut restaura fişierul „%s“ deoarece conţine date invalide UTF-8.\n"
+"\n"
+"Probabil încercaţi să restauraţi un fişier binar."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Nu este posibilă restaurarea unui document fără titlu."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Nu am putut salva fişierul „%s“."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Fişierul „%s“ există deja."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"„%s“ este un director.\n"
+"\n"
+"Vă rugăm verificaţi corectitudinea datelor furnizate şi încercaţi din nou."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Nu am putut crea fişierul „%s“."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Nu am putut crea fişierul „%s“.\n"
+"\n"
+"Verificaţi dacă aveţi permisiile necesare pentru scriere."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Nu am putut crea fişierul „%s“\n"
+"\n"
+"Numele fişierului este prea lung."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nu am putut crea fişierul „%s“.\n"
+"\n"
+"Un director din numele fişierului nu există sau este o legătură simbolică "
+"greşită."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Nu este destul spaţiu pe disc pentru a crea fişierul „%s“.\n"
+"\n"
+"Eliberaţi spaţiu pe disc şi încercaţi din nou."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1586,46 +1863,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "_Mută în fereastră nouă"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Nume:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Tip MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Codare:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Deschide '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Deschide un fişier recent utilizat"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(doar citire)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normală"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Utilizează evidenţiere standard"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Utilizează modul %s de evidenţiere"
@@ -2077,399 +2354,7 @@ msgstr "_Anulează"
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nu am putut găsi fişierul „%s“.\n"
-"\n"
-"Va rugăm verificaţi locaţia introdusă şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Nu am putut deschide fişierul „%s“ deoarece conţine date corupte."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut gestiona %s: "
-"locaţii."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Nu am putut deschide fişierul „%s“"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece conţine date într-un format "
-"invalid."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Nu am putut deschide fişierul „%s“ deoarece este prea mare."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"„%s“ nu este o locaţie validă.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Nu am putut deschide fişierul „%s“ deoarece accesul a fost refuzat."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece sunt prea multe fişiere "
-"deschise.\n"
-"\n"
-"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"„%s“ este un director.\n"
-"\n"
-"Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
-"închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece numele gazdei este invalid.\n"
-"\n"
-"Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ pentru că nici o gazdă „%s“ nu a putut fi "
-"găsită.\n"
-"\n"
-"Vă rugăm verificaţi locaţia introdusă şi corectitudinea setărilor Proxy şi "
-"încercaţi din nou."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece numele gazdei lipsea.\n"
-"\n"
-"Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece logarea a eşuat.\n"
-"\n"
-"Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece conţine date invalide.\n"
-"\n"
-"Probabil încercaţi să deschideţi un fişier binar."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Nu am putut deschide fişierul „%s“."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut detecta automat "
-"codarea caracterelor.\n"
-"\n"
-"Verificaţi ca nu cumva să încercaţi să deschideţi un fişier binar şi "
-"încercaţi din nou selectând o codare în dialogul „Deschide...“ (sau "
-"„Deschide locaţia...“)"
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ utilizând codarea %s.\n"
-"\n"
-"Vă rugăm verificaţi faptul că nu încercaţi să deschideţi un fişier binar şi "
-"că aţi selectat codarea corectă a caracterelor în dialogul „Deschide "
-"fişierul...“ (sau „Deschide locaţia“) apoi încercaţi din nou."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nu am putut deschide fişierul „%s“.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Nu am putut salva fişierul „%s“."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Nu am putut salva fişierul „%s“.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece Gedit nu îl poate găsi.\n"
-"\n"
-"Probabil a fost şters de curând."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Nu am putut restaura fişierul „%s“ deoarece conţine date corupte."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Nu am putut restaura fişierul „%s” deoarece gedit nu a putut gestiona %s: "
-"locaţii."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Nu am putut restaura fişierul „%s“."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece conţine date într-un format "
-"invalid."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Nu am putut restaura fişierul „%s“ deoarece este prea mare."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Nu am putut restaura fişierul „%s“ deoarece accesul a fost refuzat."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece sunt prea multe fişiere "
-"deschise.\n"
-"\n"
-"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nu este destulă memorie disponibilă pentru a restaura fişierul „%s“. Vă "
-"rugăm închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece nici o gazdă „%s“ nu a putut fi "
-"găsită.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece numele gazdei era gol.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "Nu am putut restaura fişierul „%s“ deoarece logarea a eşuat."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece conţine date invalide UTF-8.\n"
-"\n"
-"Probabil încercaţi să restauraţi un fişier binar."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Nu este posibilă restaurarea unui document fără titlu."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Fişierul „%s“ există deja."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"„%s“ este un director.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea datelor furnizate şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Nu am putut crea fişierul „%s“.\n"
-"\n"
-"Verificaţi dacă aveţi permisiile necesare pentru scriere."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Nu am putut crea fişierul „%s“\n"
-"\n"
-"Numele fişierului este prea lung."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Nu am putut crea fişierul „%s“.\n"
-"\n"
-"Un director din numele fişierului nu există sau este o legătură simbolică "
-"greşită."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Nu este destul spaţiu pe disc pentru a crea fişierul „%s“.\n"
-"\n"
-"Eliberaţi spaţiu pe disc şi încercaţi din nou."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Nu am putut crea fişierul „%s“."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2479,16 +2364,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln %d, Col %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  INS"
 
@@ -3065,11 +2952,13 @@ msgid "The document is empty."
 msgstr "Acest document este gol."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Textul selectat nu conţine cuvinte scrise greşit."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Documentul nu conţine cuvinte scrise greşit."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3179,6 +3068,165 @@ msgstr "_Solicită un format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Utilizează un format personalizat"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
+#~ msgstr[1] ""
+#~ "Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute."
+
+#~ msgid "Body font picker"
+#~ msgstr "Font text"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Apasă acest buton pentru a selecta fontul utilizat pentru tipărirea "
+#~ "corpului documentului."
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Font antet pagină"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Apasă acest buton pentru a selecta fontul utilizat la tipărirea antetului"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Font numerotare linii"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Apasă acest buton pentru a selecta fontul utilizat la numerotarea liniilor"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "Lăţime _taburi:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
+#~ msgstr[1] ""
+#~ "Modificările aduse documentului în ultimele %d ore vor fi pierdute."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut gestiona %s: "
+#~ "locaţii."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Nu am putut deschide fişierul „%s“ deoarece accesul a fost refuzat."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nu am putut deschide fişierul „%s“ deoarece numele gazdei este invalid.\n"
+#~ "\n"
+#~ "Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Nu am putut deschide fişierul „%s“ pentru că nici o gazdă „%s“ nu a putut "
+#~ "fi găsită.\n"
+#~ "\n"
+#~ "Vă rugăm verificaţi locaţia introdusă şi corectitudinea setărilor Proxy "
+#~ "şi încercaţi din nou."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Nu am putut deschide fişierul „%s“ deoarece logarea a eşuat.\n"
+#~ "\n"
+#~ "Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Nu am putut deschide fişierul „%s“."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Nu am putut deschide fişierul „%s“.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nu am putut salva fişierul „%s“.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "Nu am putut restaura fişierul „%s“ deoarece conţine date corupte."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Nu am putut restaura fişierul „%s” deoarece gedit nu a putut gestiona %s: "
+#~ "locaţii."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Nu am putut restaura fişierul „%s“ deoarece conţine date într-un format "
+#~ "invalid."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Nu am putut restaura fişierul „%s“ deoarece este prea mare."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Nu am putut restaura fişierul „%s“ deoarece accesul a fost refuzat."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Nu am putut restaura fişierul „%s“ deoarece sunt prea multe fişiere "
+#~ "deschise.\n"
+#~ "\n"
+#~ "Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Nu este destulă memorie disponibilă pentru a restaura fişierul „%s“. Vă "
+#~ "rugăm închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Nu am putut restaura fişierul „%s“ deoarece numele gazdei era gol.\n"
+#~ "\n"
+#~ "Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr "Nu am putut restaura fişierul „%s“ deoarece logarea a eşuat."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Nu am putut găsi plugin-manager.glade2, reinstalaţi Gedit.\n"

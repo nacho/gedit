@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.6-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-03-30 17:02+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
@@ -45,7 +45,7 @@ msgstr "gedit-outomeerfabriek"
 msgid "Edit text files"
 msgstr "Redigeer tekslêers"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Teksredigeerder"
 
@@ -512,11 +512,16 @@ msgstr ""
 "is, sal die font wat in die \"Redigeerderfont\"-opsie vermeld word, gebruik "
 "word in plaas van die stelselfont."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr ""
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr ""
 
@@ -611,9 +616,14 @@ msgstr[1] ""
 "gaan."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#, fuzzy
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"As jy nie stoor nie, sal wysigings sedert 1 uur gelede beslis verlore gaan."
+msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert 1 uur gelede beslis verlore gaan."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -630,17 +640,6 @@ msgstr[0] ""
 msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert 1 uur en %d minute gelede beslis "
 "verlore gaan."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"As jy nie stoor nie, sal wysigings sedert %d uur gelede beslis verlore gaan."
-msgstr[1] ""
-"As jy nie stoor nie, sal wysigings sedert %d ure gelede beslis verlore gaan."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -735,39 +734,6 @@ msgstr "Karakterkoderings"
 msgid "E_ncodings shown in menu:"
 msgstr "E_nkoderings in kieslys vertoon:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Lyffontkiesier"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
-"die lyf van die dokument"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Bladsykop fontkieser"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
-"bladsykoppe"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Reëlnommer fontkieser"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
-"reëlnommers"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Inprop"
@@ -798,21 +764,21 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Die geselekteerde lêer is nie uitvoerbaar nie."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Druk dié knoppie om die font te kies wat gebruik moet word deur die "
 "redigeerder"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Druk dié knoppie om die tekskleur op te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Druk dié knoppie om die agtergrondkleur op te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -820,7 +786,7 @@ msgstr ""
 "Druk dié knoppie om die kleur waarin die gemerkte teks moet verskyn, op te "
 "stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -828,7 +794,7 @@ msgstr ""
 "Druk dié knoppie om die kleur waarin die gemerkte teks gemerk moet word, op "
 "te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elemente"
 
@@ -839,7 +805,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Outo-inkeping</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -864,7 +831,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Regterkantlyn</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Kepe</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -1007,7 +975,8 @@ msgid "_Display line numbers"
 msgstr "_Vertoon reëlnommers"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Aktiveer outo-inkeping"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1031,22 +1000,18 @@ msgid "_Right margin at column:"
 msgstr "_Regterkantlyn by kolom:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Keepwydte:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Onbeperkte ontdoen"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Gebruik verstektemafont"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minute"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "aks_ies"
 
@@ -1196,47 +1161,47 @@ msgstr "gedit"
 msgid "translator_credits"
 msgstr "vertaler_kredietes"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Dokumente"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Ongeldige lêernaam"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Ongeldige UTF-8-data"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kon nie simboliese skakel se inligting vir %s lees nie"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Die lêer het te veel simboliese skakels."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan nie met %s:-liggings in skryfmodus werk nie."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan nie met hierdie soort ligging in skryfmodus werk nie."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Ongeldige lêernaam."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1244,7 +1209,7 @@ msgstr ""
 "Daar is nie voldoende skyfspasie om die lêer te stoor nie.\n"
 "Maak 'n bietjie spasie beskikbaar en probeer weer."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1254,7 +1219,7 @@ msgstr ""
 "lêergroottes.  Probeer 'n kleiner lêer stoor, of stoor dit op 'n skyf wat "
 "nie hierdie beperking het nie."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Kon nie 'n rugsteunlêer skep nie."
 
@@ -1384,7 +1349,7 @@ msgstr "Viëtnamees"
 msgid "Thai"
 msgstr "Thais"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1431,35 +1396,35 @@ msgstr "Kies lêers om te open"
 msgid "Select a filename to save"
 msgstr "Kies 'n lêernaam om te stoor"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Open Lêer..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Stoor dokument \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Die dokument \"%s\" is nie gestoor nie."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Die dokument \"%s\" is gestoor."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Stoor as..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Keer ongestoorde wysigings in dokument \"%s\" terug?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1472,14 +1437,14 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert %ld sekondes gelede sal beslis verlore "
 "gaan."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 #, fuzzy
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Wysigings aan die dokument in die laaste minuut sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1494,7 +1459,7 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert 1 minuut en %ld sekondes gelede sal beslis "
 "verlore gaan."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1506,12 +1471,17 @@ msgstr[0] ""
 msgstr[1] ""
 "Wysigings aan die dokument sedert %ld minute gelede sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:571
-#, fuzzy
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Wysigings aan die dokument in die laaste uur sal beslis verlore gaan."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Wysigings aan die dokument in die laaste uur sal beslis verlore gaan."
+msgstr[1] ""
+"Wysigings aan die dokument in die laaste uur sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1526,86 +1496,389 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert 1 uur en %d minute gelede sal beslis "
 "verlore gaan."
 
-#: gedit/gedit-file.c:592
-#, fuzzy, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Wysigings aan die dokument sedert %d uur gelede sal beslis verlore gaan."
-msgstr[1] ""
-"Wysigings aan die dokument sedert %d ure gelede sal beslis verlore gaan."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Keer terug"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Fout by terugkering van dokument \"%s\"."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Daar is nie na die dokument \"%s\" teruggekeer nie."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Daar is na die dokument \"%s\" teruggekeer."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Keer terug tans terug na die dokument \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Kon nie data van stdin lees nie."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Keer terug tans terug na lêer:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Laai tans lêer:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Kon nie lêer \"%s\" laai nie"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Het lêer \"%s\" gelaai"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Het lêer %d gelaai"
 msgstr[1] "Het lêers %d gelaai"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Het lêer \"%s\" gelaai"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Laai tans lêers \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Laai tans %d lêer..."
 msgstr[1] "Laai tans %d lêers..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Kon nie die lêer \"%s\" open nie"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" is 'n gids.\n"
+"\n"
+"Maak seker jy't die ligging reg ingetik en probeer weer."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Kon nie die lêer \"%s\" open nie"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Kon nie die lêer \"%s\" open nie want dit bevat korrupte data."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit kan nie met %s:-liggings in skryfmodus werk nie."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit kan nie met %s:-liggings in skryfmodus werk nie."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want dit bevat data in 'n ongeldige formaat."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Die lêer het te veel simboliese skakels."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want daar is te veel lêers oop.\n"
+"\n"
+"Sluit 'n paar oop lêers en probeer gerus weer."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nie voldoende geheue om die lêer \"%s\" te open nie. Sluit 'n paar "
+"toepassings af en probeer gerus weer."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Kon nie na die lêer \"%s\" terugkeer nie want die gasheer \"%s\" kon nie "
+"gevind word nie.\n"
+"\n"
+"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
+"weer."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" is nie 'n geldige ligging nie.\n"
+"\n"
+"Maak seker jy't die ligging reg ingetik en probeer weer."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want die gasheernaam is leeg.\n"
+"\n"
+"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
+"weer."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Kon nie die lêer \"%s\" vind nie.\n"
+"\n"
+"Maak seker jy't die ligging reg ingetik en probeer weer."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want dit bevat ongeldige data.\n"
+"\n"
+"Jy het waarskynlik 'n binêre lêer probeer open."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want gedit kon nie die karakterkodering "
+"outomaties vasstel nie.\n"
+"\n"
+"Maak seker dat jy nie 'n binêre lêer probeer open nie, en wanneer jy weer "
+"probeer, kies 'n karakterkodering in die 'Open lêer...'- (of 'Open "
+"ligging'-) dialoog."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Kon nie die lêer \"%s\" open nie want dit is te groot."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Kon nie die lêer \"%s\" met die %s karakterkodering open nie.\n"
+"\n"
+"Maak seker dat jy nie 'n binêre lêer probeer open nie, en dat jy die "
+"korrekte karakterkodering in die 'Open lêer...'- (of 'Open ligging'-) "
+"dialoog gekies het, en probeer gerus weer."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want dit bevat ongeldige data.\n"
+"\n"
+"Jy het waarskynlik 'n binêre lêer probeer open."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Kon nie na die lêer \"%s\" terugkeer nie."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Kon nie na die lêer \"%s\" terugkeer nie want gedit kon dit nie vind nie.\n"
+"\n"
+"Dalk is die lêer onlangs geskrap."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want daar is te veel lêers oop.\n"
+"\n"
+"Sluit 'n paar oop lêers en probeer gerus weer."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nie voldoende geheue om die lêer \"%s\" te open nie. Sluit 'n paar "
+"toepassings af en probeer gerus weer."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Kon nie die lêer \"%s\" open nie want die gasheernaam is leeg.\n"
+"\n"
+"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
+"weer."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Kon nie na die lêer \"%s\" terugkeer nie want dit bevat ongeldige UTF-8-"
+"data.\n"
+"\n"
+"Jy probeer waarskynlik 'n binêre lêer open."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Dis nie moontlik om na 'n naamlose dokument terug te keer nie."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Kon nie die lêer \"%s\" stoor nie."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Die lêer \"%s\" bestaan reeds."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" is 'n gids.\n"
+"\n"
+"Maak seker jy't die ligging reg ingetik."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Kon nie die lêer \"%s\" skep nie."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Kan nie die lêer \"%s\" skep nie.\n"
+"\n"
+"Maak seker jy beskik oor voldoende skryftoestemming."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Kan nie die lêer \"%s\" skep nie.\n"
+"\n"
+"Die lêernaam is te lank."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Kan nie die lêer \"%s\" skep nie.\n"
+"\n"
+"'n Gidskomponent in die lêernaam bestaan nie of is 'n hangende simboliese "
+"skakel."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Daar is nie voldoende skyfspasie om die lêer \"%s\" te skep nie.\n"
+"\n"
+"Maak 'n bietjie spasie beskikbaar en probeer weer."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1617,46 +1890,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "_Skuif na nuwe venster"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unikode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Naam:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME-soort:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Enkodering:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Open '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Open 'n onlangs gebruikte lêer"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(leesalleen)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normaal"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Gebruik normaleverligting-modus"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Gebruik %s-verligting-modus"
@@ -2108,400 +2381,7 @@ msgstr "_Ontdoen"
 msgid "_View"
 msgstr "_Bekyk"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" vind nie.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik en probeer weer."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Kon nie die lêer \"%s\" open nie want dit bevat korrupte data."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want gedit werk nie met %s:-liggings nie."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Kon nie die lêer \"%s\" open nie"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want dit bevat data in 'n ongeldige formaat."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Kon nie die lêer \"%s\" open nie want dit is te groot."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" is nie 'n geldige ligging nie.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik en probeer weer."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Kon nie die lêer \"%s\" open nie want toegang is geweier."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want daar is te veel lêers oop.\n"
-"\n"
-"Sluit 'n paar oop lêers en probeer gerus weer."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" is 'n gids.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik en probeer weer."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nie voldoende geheue om die lêer \"%s\" te open nie. Sluit 'n paar "
-"toepassings af en probeer gerus weer."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want die gasheernaam is ongeldig.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik en probeer weer."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want die gasheer \"%s\" kon nie gevind word "
-"nie.\n"
-"\n"
-"Maak seker dat jy die ligging korrek ingetik het en dat jou "
-"instaanbedieneropstelling korrek is, en probeer gerus weer."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want die gasheernaam is leeg.\n"
-"\n"
-"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
-"weer."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want kon nie aanmeld nie.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik en probeer weer."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want dit bevat ongeldige data.\n"
-"\n"
-"Jy het waarskynlik 'n binêre lêer probeer open."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Kon nie die lêer \"%s\" open nie."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie want gedit kon nie die karakterkodering "
-"outomaties vasstel nie.\n"
-"\n"
-"Maak seker dat jy nie 'n binêre lêer probeer open nie, en wanneer jy weer "
-"probeer, kies 'n karakterkodering in die 'Open lêer...'- (of 'Open "
-"ligging'-) dialoog."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Kon nie die lêer \"%s\" met die %s karakterkodering open nie.\n"
-"\n"
-"Maak seker dat jy nie 'n binêre lêer probeer open nie, en dat jy die "
-"korrekte karakterkodering in die 'Open lêer...'- (of 'Open ligging'-) "
-"dialoog gekies het, en probeer gerus weer."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Kon nie die lêer \"%s\" open nie.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Kon nie die lêer \"%s\" stoor nie."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Kon nie die lêer \"%s\" stoor nie.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want gedit kon dit nie vind nie.\n"
-"\n"
-"Dalk is die lêer onlangs geskrap."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Kon nie na die lêer \"%s\" terugkeer nie want dit bevat korrupte data."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want gedit werk nie met %s:-"
-"liggings nie."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Kon nie na die lêer \"%s\" terugkeer nie."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want dit bevat data in 'n ongeldige "
-"formaat."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Kon nie na die lêer \"%s\" terugkeer nie want dit is te groot."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Kon nie die na lêer \"%s\" terugkeer nie want toegang is geweier."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer open nie want daar is te veel lêers "
-"oop.\n"
-"\n"
-"Sluit 'n paar oop lêers en probeer gerus weer."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nie voldoende geheue om na die lêer \"%s\" terug te keer nie. Sluit 'n paar "
-"toepassings af en probeer gerus weer."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want die gasheer \"%s\" kon nie "
-"gevind word nie.\n"
-"\n"
-"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
-"weer."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want die gasheernaam is leeg.\n"
-"\n"
-"Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
-"weer."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "Kon nie na die lêer \"%s\" terugkeer nie want aanmelding het gefaal."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Kon nie na die lêer \"%s\" terugkeer nie want dit bevat ongeldige UTF-8-"
-"data.\n"
-"\n"
-"Jy probeer waarskynlik 'n binêre lêer open."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Dis nie moontlik om na 'n naamlose dokument terug te keer nie."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Die lêer \"%s\" bestaan reeds."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" is 'n gids.\n"
-"\n"
-"Maak seker jy't die ligging reg ingetik."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Kan nie die lêer \"%s\" skep nie.\n"
-"\n"
-"Maak seker jy beskik oor voldoende skryftoestemming."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Kan nie die lêer \"%s\" skep nie.\n"
-"\n"
-"Die lêernaam is te lank."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Kan nie die lêer \"%s\" skep nie.\n"
-"\n"
-"'n Gidskomponent in die lêernaam bestaan nie of is 'n hangende simboliese "
-"skakel."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Daar is nie voldoende skyfspasie om die lêer \"%s\" te skep nie.\n"
-"\n"
-"Maak 'n bietjie spasie beskikbaar en probeer weer."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Kon nie die lêer \"%s\" skep nie."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr " (ongeldige Unikode)"
 
@@ -2511,16 +2391,18 @@ msgstr " (ongeldige Unikode)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Reël %d, kol %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  INS"
 
@@ -3110,11 +2992,13 @@ msgid "The document is empty."
 msgstr "Die dokument is leeg."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Die gemerkte teks bevat nie verkeerd gespelde woorde nie."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Die dokument bevat nie verkeerd gespelde woorde nie."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3225,6 +3109,175 @@ msgstr "_Vra vir 'n formaat"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Gebruik doelgemaakte formaat"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "As jy nie stoor nie, sal wysigings sedert %d uur gelede beslis verlore "
+#~ "gaan."
+#~ msgstr[1] ""
+#~ "As jy nie stoor nie, sal wysigings sedert %d ure gelede beslis verlore "
+#~ "gaan."
+
+#~ msgid "Body font picker"
+#~ msgstr "Lyffontkiesier"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Druk dié knoppie om die font te kies wat gebruik moet word by die druk "
+#~ "van die lyf van die dokument"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Bladsykop fontkieser"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Druk dié knoppie om die font te kies wat gebruik moet word by die druk "
+#~ "van bladsykoppe"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Reëlnommer fontkieser"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Druk dié knoppie om die font te kies wat gebruik moet word by die druk "
+#~ "van reëlnommers"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Keepwydte:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Wysigings aan die dokument sedert %d uur gelede sal beslis verlore gaan."
+#~ msgstr[1] ""
+#~ "Wysigings aan die dokument sedert %d ure gelede sal beslis verlore gaan."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" open nie want gedit werk nie met %s:-liggings nie."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Kon nie die lêer \"%s\" open nie want toegang is geweier."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" open nie want die gasheernaam is ongeldig.\n"
+#~ "\n"
+#~ "Maak seker jy't die ligging reg ingetik en probeer weer."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" open nie want die gasheer \"%s\" kon nie gevind "
+#~ "word nie.\n"
+#~ "\n"
+#~ "Maak seker dat jy die ligging korrek ingetik het en dat jou "
+#~ "instaanbedieneropstelling korrek is, en probeer gerus weer."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" open nie want kon nie aanmeld nie.\n"
+#~ "\n"
+#~ "Maak seker jy't die ligging reg ingetik en probeer weer."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Kon nie die lêer \"%s\" open nie."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" open nie.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kon nie die lêer \"%s\" stoor nie.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer nie want dit bevat korrupte data."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer nie want gedit werk nie met %s:-"
+#~ "liggings nie."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer nie want dit bevat data in 'n "
+#~ "ongeldige formaat."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Kon nie na die lêer \"%s\" terugkeer nie want dit is te groot."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Kon nie die na lêer \"%s\" terugkeer nie want toegang is geweier."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer open nie want daar is te veel lêers "
+#~ "oop.\n"
+#~ "\n"
+#~ "Sluit 'n paar oop lêers en probeer gerus weer."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Nie voldoende geheue om na die lêer \"%s\" terug te keer nie. Sluit 'n "
+#~ "paar toepassings af en probeer gerus weer."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer nie want die gasheernaam is leeg.\n"
+#~ "\n"
+#~ "Maak seker dat jou instaanbedieneropstelling korrek is, en probeer gerus "
+#~ "weer."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Kon nie na die lêer \"%s\" terugkeer nie want aanmelding het gefaal."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Kon nie plugin-manager.glade2 vind nie, herinstalleer gedit.\n"

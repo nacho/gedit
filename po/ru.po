@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-08-20 14:19+0300\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -50,7 +50,7 @@ msgstr "Фабрика программы gedit"
 msgid "Edit text files"
 msgstr "Редактор текстовых файлов"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Текстовый редактор"
 
@@ -506,11 +506,16 @@ msgstr ""
 "Если этот параметр отключен, для области редактирования будет использоваться "
 "шрифт, определенный в параметре \"Шрифт редактора\"."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,KOI8R,WINDOWS-1251,ISO-8859-5]"
 
@@ -612,8 +617,16 @@ msgstr[2] ""
 "утрачены."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Если вы не сохраните, изменения за последний час будут безвозвратно утрачены."
+msgstr[1] ""
+"Если вы не сохраните, изменения за последний час будут безвозвратно утрачены."
+msgstr[2] ""
 "Если вы не сохраните, изменения за последний час будут безвозвратно утрачены."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -633,22 +646,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Если вы не сохраните, изменения за последний час и %d минут будут "
 "безвозвратно утрачены."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Если вы не сохраните, изменения за последний %d час будут безвозвратно "
-"утрачены."
-msgstr[1] ""
-"Если вы не сохраните, изменения за последние %d часа будут безвозвратно "
-"утрачены."
-msgstr[2] ""
-"Если вы не сохраните, изменения за последние %d часов будут безвозвратно "
-"утрачены."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -746,33 +743,6 @@ msgstr "Кодировки символов"
 msgid "E_ncodings shown in menu:"
 msgstr "К_одировки, отображаемые в меню:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Выбор шрифта основного текста"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати основного текста"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Выбор шрифта заголовков страниц"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати заголовков"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Выбор шрифта номеров строк"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати номеров строк"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Модуль"
@@ -803,31 +773,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Выбранный файл не является исполняемым."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Нажмите эту кнопку для выбора шрифта, используемого редактором"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Нажмите эту кнопку для выбора цвета текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Нажмите эту кнопку для выбора цвета фона"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Нажмите эту кнопку для выбора цвета выделенного текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Нажмите эту кнопку для выбора цвета отметки выделенного текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Элементов"
 
@@ -838,7 +808,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Автоматический отступ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -863,7 +834,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Правая граница</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Вкладки</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -1006,7 +978,8 @@ msgid "_Display line numbers"
 msgstr "По_казывать номера строк"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "Включить автоматическую расстановку _отступов"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1030,22 +1003,18 @@ msgid "_Right margin at column:"
 msgstr "П_равая граница у столбца:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Ширина вкладок:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Неограниченная отмена"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "Использовать ис_ходный шрифт темы"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_минут"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "_действий"
 
@@ -1200,48 +1169,48 @@ msgstr ""
 "Андрей Носенко <awn@bcs.zp.ua>\n"
 "Леонид Кантер <leon@asplinux.ru>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Документы"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Имя файла недопустимо"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Данные в формате UTF-8 недопустимы"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr ""
 "Не удалось прочитать информацию о символической ссылке для файла \"%s\""
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Файл имеет слишком много символических ссылок."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не может работать с \"%s\": адресами в режиме записи."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не может работать с этим типом адреса в режиме записи."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Имя файла недопустимо."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1249,7 +1218,7 @@ msgstr ""
 "Недостаточно места на диске для сохранения файла.\n"
 "Освободите немного места на диске и попробуйте еще раз."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1259,7 +1228,7 @@ msgstr ""
 "файла. Попробуйте сохранить файл меньшего размера или воспользуйтесь диском, "
 "не имеющим подобного ограничения."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Не удалось создать резервную копию файла."
 
@@ -1389,7 +1358,7 @@ msgstr "Вьетнамская"
 msgid "Thai"
 msgstr "Тайская"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Неизвестно"
 
@@ -1436,35 +1405,35 @@ msgstr "Выбрать файл для открытия"
 msgid "Select a filename to save"
 msgstr "Выбрать имя файла для сохранения"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Открыть файл..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Сохранение документа \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Документ \"%s\" не был сохранен."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Документ \"%s\" был сохранен."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Сохранить как..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Восстановить несохраненные изменения в документе \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1481,14 +1450,14 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние %ld секунд, будут безвозвратно "
 "утрачены."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Изменения, сделанные в документе за последнюю минуту, будут безвозвратно "
 "утрачены."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1506,7 +1475,7 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние минуту и %ld секунд, будут "
 "безвозвратно утрачены."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1523,13 +1492,22 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние %ld минут, будут безвозвратно "
 "утрачены."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Изменения, сделанные в документе за последний час, будут безвозвратно "
+"утрачены."
+msgstr[1] ""
+"Изменения, сделанные в документе за последний час, будут безвозвратно "
+"утрачены."
+msgstr[2] ""
 "Изменения, сделанные в документе за последний час, будут безвозвратно "
 "утрачены."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1547,69 +1525,53 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последний час и %d минут, будут "
 "безвозвратно утрачены."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Изменения, сделанные в документе за последний %d час, будут безвозвратно "
-"утрачены."
-msgstr[1] ""
-"Изменения, сделанные в документе за последние %d часа, будут безвозвратно "
-"утрачены."
-msgstr[2] ""
-"Изменения, сделанные в документе за последние %d часов, будут безвозвратно "
-"утрачены."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Восста_новить"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Ошибка восстановления документа \"%s\"."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Документ \"%s\" не был восстановлен."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Документ \"%s\" был восстановлен."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Восстанавливается документ \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Не удалось прочитать данные из стандартного потока ввода."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Восстанавливается файл:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Загружается файл:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Ошибка загрузки файла \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Загружен файл \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1617,23 +1579,333 @@ msgstr[0] "Загружен %d файл"
 msgstr[1] "Загружено %d файла"
 msgstr[2] "Загружено %d файлов"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Загружен файл \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Загружается файл \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Загружается %d файл..."
 msgstr[1] "Загружается %d файла..."
 msgstr[2] "      ается %d файлов..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Не удалось открыть файл \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" является каталогом.\n"
+"\n"
+"Убедитесь, что адрес указан правильно, и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Не удалось открыть файл \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Не удалось открыть файл \"%s\", потому что он поврежден."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit не может работать с \"%s\": адресами в режиме записи."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit не может работать с \"%s\": адресами в режиме записи."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что он содержит данные в недопустимом "
+"формате."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Файл имеет слишком много символических ссылок."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что открыто слишком много файлов.\n"
+"\n"
+"Закройте несколько открытых файлов и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Недостаточно памяти, чтобы открыть файл \"%s\". Закройте несколько "
+"приложений и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Не удалось восстановить файл \"%s\", потому что узел \"%s\" не найден.\n"
+"\n"
+"Убедитесь, что путь введен правильно и параметры прокси верны, и попробуйте "
+"еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" не является допустимым адресом.\n"
+"\n"
+"Убедитесь, что путь введен правильно и попробуйте снова."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Не удалось открыть файл \"%s\", из-за пустого имени узла.\n"
+"\n"
+"Убедитесь, что путь введен правильно, и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Не удалось найти файл \"%s\".\n"
+"\n"
+"Убедитесь, что путь введен правильно, и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что он содержит недопустимые данные.\n"
+"\n"
+"Возможно, вы пытаетесь открыть двоичный файл."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что gedit не смог определить "
+"кодировку символов.\n"
+"\n"
+"Убедитесь, что вы не пытаетесь открыть двоичный файл, и попробуйте еще раз, "
+"выбрав кодировку символов в диалоге \"Открыть файл...\"."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Не удалось открыть файл \"%s\", потому что он слишком большой."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Не удалось открыть файл \"%s\" используя кодировку\"%s\".\n"
+"\n"
+"Убедитесь, что вы не пытаетесь открыть двоичный файл, и попробуйте еще раз, "
+"выбрав кодировку символов в диалоге \"Открыть файл...\"."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что он содержит недопустимые данные.\n"
+"\n"
+"Возможно, вы пытаетесь открыть двоичный файл."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Не удалось восстановить файл \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Не удалось восстановить файл \"%s\", потому что его не удалось найти.\n"
+"\n"
+"Возможно, он недавно был удален."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Не удалось открыть файл \"%s\", потому что открыто слишком много файлов.\n"
+"\n"
+"Закройте несколько открытых файлов и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Недостаточно памяти, чтобы открыть файл \"%s\". Закройте несколько "
+"приложений и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Не удалось открыть файл \"%s\", из-за пустого имени узла.\n"
+"\n"
+"Убедитесь, что путь введен правильно, и попробуйте еще раз."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Не удалось восстановить файл \"%s\", потому что он содержит недопустимые "
+"данные UTF-8.\n"
+"\n"
+"Возможно, вы пытаетесь восстановить двоичный файл."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Невозможно восстановить неозаглавленный документ."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Не удалось сохранить файл \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Файл \"%s\" уже существует."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" является каталогом.\n"
+"\n"
+"Убедитесь, что адрес введен правильно."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Не удалось создать файл \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Невозможно создать файл \"%s\".\n"
+"\n"
+"Убедитесь, что у вас есть достаточные права для записи."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Невозможно создать файл \"%s\".\n"
+"\n"
+"Имя файла слишком длинно."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Невозможно создать файл \"%s\".\n"
+"\n"
+"Каталог, указанный в имени файла не существует или является нарушенной "
+"символической ссылкой."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Недостаточно места на диске для сохранения файла \"%s\".\n"
+"\n"
+"Освободите немного места на диске и попробуйте еще раз."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1645,46 +1917,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "Пере_местить в новое окно"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Имя:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Тип MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Кодировка:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Открыть '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Открыть недавно использованный файл"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(только чтение)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Обычный"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Использовать обычный режим подсветки синтаксиса"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Использовать режим подсветки \"%s\""
@@ -2136,399 +2408,7 @@ msgstr "_Отменить"
 msgid "_View"
 msgstr "_Вид"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Не удалось найти файл \"%s\".\n"
-"\n"
-"Убедитесь, что путь введен правильно, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Не удалось открыть файл \"%s\", потому что он поврежден."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому программа \"gedit\" не может "
-"обработать путь \"%s\"."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Не удалось открыть файл \"%s\""
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что он содержит данные в недопустимом "
-"формате."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Не удалось открыть файл \"%s\", потому что он слишком большой."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" не является допустимым адресом.\n"
-"\n"
-"Убедитесь, что путь введен правильно и попробуйте снова."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Не удалось открыть файл \"%s\", так как доступ запрещен."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что открыто слишком много файлов.\n"
-"\n"
-"Закройте несколько открытых файлов и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" является каталогом.\n"
-"\n"
-"Убедитесь, что адрес указан правильно, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Недостаточно памяти, чтобы открыть файл \"%s\". Закройте несколько "
-"приложений и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Не удалось открыть файл \"%s\", из-за неправильного имени узла.\n"
-"\n"
-"Убедитесь, что путь введен правильно, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что узел \"%s\" не найден.\n"
-"\n"
-"Убедитесь, что путь введен правильно и параметры прокси верны, и попробуйте "
-"еще раз."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Не удалось открыть файл \"%s\", из-за пустого имени узла.\n"
-"\n"
-"Убедитесь, что путь введен правильно, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что не удалось зарегистрироваться в "
-"системе.\n"
-"\n"
-"Убедитесь, что путь введен правильно, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что он содержит недопустимые данные.\n"
-"\n"
-"Возможно, вы пытаетесь открыть двоичный файл."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Не удалось открыть файл \"%s\"."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Не удалось открыть файл \"%s\", потому что gedit не смог определить "
-"кодировку символов.\n"
-"\n"
-"Убедитесь, что вы не пытаетесь открыть двоичный файл, и попробуйте еще раз, "
-"выбрав кодировку символов в диалоге \"Открыть файл...\"."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Не удалось открыть файл \"%s\" используя кодировку\"%s\".\n"
-"\n"
-"Убедитесь, что вы не пытаетесь открыть двоичный файл, и попробуйте еще раз, "
-"выбрав кодировку символов в диалоге \"Открыть файл...\"."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Не удается открыть файл \"%s\".\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Не удалось сохранить файл \"%s\"."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Не удалось сохранить файл \"%s\".\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что его не удалось найти.\n"
-"\n"
-"Возможно, он недавно был удален."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Не удалось восстановить файл \"%s\", потому что он поврежден."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что программа gedit не может "
-"обработать %s."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Не удалось восстановить файл \"%s\"."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что он содержит данные в "
-"недопустимом формате."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Не удалось восстановить файл \"%s\", потому что он слишком большой."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Не удалось восстановить файл \"%s\", так как доступ запрещен."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что открыто слишком много "
-"файлов.\n"
-"\n"
-"Закройте несколько файлов и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Недостаточно памяти, чтобы восстановить файл \"%s\". Закройте несколько "
-"приложений и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что узел \"%s\" не найден.\n"
-"\n"
-"Убедитесь, что путь введен правильно и параметры прокси верны, и попробуйте "
-"еще раз."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что имя узла пусто.\n"
-"\n"
-"Убедитесь, что настройки прокси верны, и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что не удалась попытка "
-"зарегистрироваться в системе."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Не удалось восстановить файл \"%s\", потому что он содержит недопустимые "
-"данные UTF-8.\n"
-"\n"
-"Возможно, вы пытаетесь восстановить двоичный файл."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Невозможно восстановить неозаглавленный документ."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Файл \"%s\" уже существует."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" является каталогом.\n"
-"\n"
-"Убедитесь, что адрес введен правильно."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Невозможно создать файл \"%s\".\n"
-"\n"
-"Убедитесь, что у вас есть достаточные права для записи."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Невозможно создать файл \"%s\".\n"
-"\n"
-"Имя файла слишком длинно."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Невозможно создать файл \"%s\".\n"
-"\n"
-"Каталог, указанный в имени файла не существует или является нарушенной "
-"символической ссылкой."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Недостаточно места на диске для сохранения файла \"%s\".\n"
-"\n"
-"Освободите немного места на диске и попробуйте еще раз."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Не удалось создать файл \"%s\"."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2538,16 +2418,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Стр %d, Стлб %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  ЗАМ"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  ВСТ"
 
@@ -3124,11 +3006,13 @@ msgid "The document is empty."
 msgstr "Документ не содержит текста."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Выбранный текст не содержит неправильно написанных слов."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Документ не содержит неправильно написанных слов."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3238,6 +3122,175 @@ msgstr "_Запрашивать формат"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Использовать дру_гой формат"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Если вы не сохраните, изменения за последний %d час будут безвозвратно "
+#~ "утрачены."
+#~ msgstr[1] ""
+#~ "Если вы не сохраните, изменения за последние %d часа будут безвозвратно "
+#~ "утрачены."
+#~ msgstr[2] ""
+#~ "Если вы не сохраните, изменения за последние %d часов будут безвозвратно "
+#~ "утрачены."
+
+#~ msgid "Body font picker"
+#~ msgstr "Выбор шрифта основного текста"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати основного текста"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Выбор шрифта заголовков страниц"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати заголовков"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Выбор шрифта номеров строк"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати номеров строк"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Ширина вкладок:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Изменения, сделанные в документе за последний %d час, будут безвозвратно "
+#~ "утрачены."
+#~ msgstr[1] ""
+#~ "Изменения, сделанные в документе за последние %d часа, будут безвозвратно "
+#~ "утрачены."
+#~ msgstr[2] ""
+#~ "Изменения, сделанные в документе за последние %d часов, будут "
+#~ "безвозвратно утрачены."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Не удалось открыть файл \"%s\", потому программа \"gedit\" не может "
+#~ "обработать путь \"%s\"."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Не удалось открыть файл \"%s\", так как доступ запрещен."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Не удалось открыть файл \"%s\", из-за неправильного имени узла.\n"
+#~ "\n"
+#~ "Убедитесь, что путь введен правильно, и попробуйте еще раз."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Не удалось открыть файл \"%s\", потому что узел \"%s\" не найден.\n"
+#~ "\n"
+#~ "Убедитесь, что путь введен правильно и параметры прокси верны, и "
+#~ "попробуйте еще раз."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Не удалось открыть файл \"%s\", потому что не удалось зарегистрироваться "
+#~ "в системе.\n"
+#~ "\n"
+#~ "Убедитесь, что путь введен правильно, и попробуйте еще раз."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Не удалось открыть файл \"%s\"."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Не удается открыть файл \"%s\".\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не удалось сохранить файл \"%s\".\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "Не удалось восстановить файл \"%s\", потому что он поврежден."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Не удалось восстановить файл \"%s\", потому что программа gedit не может "
+#~ "обработать %s."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Не удалось восстановить файл \"%s\", потому что он содержит данные в "
+#~ "недопустимом формате."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Не удалось восстановить файл \"%s\", потому что он слишком большой."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Не удалось восстановить файл \"%s\", так как доступ запрещен."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Не удалось восстановить файл \"%s\", потому что открыто слишком много "
+#~ "файлов.\n"
+#~ "\n"
+#~ "Закройте несколько файлов и попробуйте еще раз."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Недостаточно памяти, чтобы восстановить файл \"%s\". Закройте несколько "
+#~ "приложений и попробуйте еще раз."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Не удалось восстановить файл \"%s\", потому что имя узла пусто.\n"
+#~ "\n"
+#~ "Убедитесь, что настройки прокси верны, и попробуйте еще раз."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Не удалось восстановить файл \"%s\", потому что не удалась попытка "
+#~ "зарегистрироваться в системе."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr ""

@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-03 12:31+0200\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-12-03 17:29+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -45,7 +46,7 @@ msgstr "gedit automatizacijos gamykla"
 msgid "Edit text files"
 msgstr "Redaguoti tekstines bylas"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Tekstų redaktorius"
 
@@ -183,8 +184,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"Aktyvių įskiepių sąrašas. Jame yra aktyvių įskiepių „Vietos“. Žr. "
-".gedit-plugin bylą norėdami gauti nurodyto įskiepio „vietą“."
+"Aktyvių įskiepių sąrašas. Jame yra aktyvių įskiepių „Vietos“. Žr. .gedit-"
+"plugin bylą norėdami gauti nurodyto įskiepio „vietą“."
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -334,8 +335,8 @@ msgid ""
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "Šriftas, kuriuo bus spausdinami eilučių numeriai. Jis galios tik tada, jei "
-"parametras \"Spausdinti eilučių numerius\" yra ne nulinis. Tai yra "
-"gnome-print šrifto vardas ir jis pakeistas print_font_numbers_pango."
+"parametras \"Spausdinti eilučių numerius\" yra ne nulinis. Tai yra gnome-"
+"print šrifto vardas ir jis pakeistas print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -360,8 +361,8 @@ msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
-"Nurodo maksimalų skaičių neseniai naudotų bylų, kurios bus rodomos "
-"„Naudotos bylos“ submeniu."
+"Nurodo maksimalų skaičių neseniai naudotų bylų, kurios bus rodomos „Naudotos "
+"bylos“ submeniu."
 
 #: data/gedit.schemas.in.h:55
 msgid ""
@@ -499,11 +500,16 @@ msgstr ""
 "parinktis nepasirinkta, tai vietoje sistemos naudojamo šrifto bus naudojamas "
 "šriftas pasirinktas \"Editor Font\" pasirinktyje."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -605,8 +611,16 @@ msgstr[2] ""
 "prarasti."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Jeigu neišsaugosite, pakeitimai padaryti per paskutinę valandą bus prarasti."
+msgstr[1] ""
+"Jeigu neišsaugosite, pakeitimai padaryti per paskutinę valandą bus prarasti."
+msgstr[2] ""
 "Jeigu neišsaugosite, pakeitimai padaryti per paskutinę valandą bus prarasti."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -626,22 +640,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Jeigu neišsaugosite, pakeitimai padaryti per paskutinę valandą ir %d minučių "
 "bus prarasti."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Jeigu neišsaugosite, pakeitimai padaryti per paskutinę %d valandą bus "
-"prarasti."
-msgstr[1] ""
-"Jeigu neišsaugosite, pakeitimai padaryti per paskutines %d valandas bus "
-"prarasti."
-msgstr[2] ""
-"Jeigu neišsaugosite, pakeitimai padaryti per paskutines %d valandų bus "
-"prarasti."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -736,39 +734,6 @@ msgstr "Simbolių koduotės"
 msgid "E_ncodings shown in menu:"
 msgstr "K_oduotės matomos meniu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Teksto šrifto parinkėjas"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Spausk šį mygtuką, norėdamas pasirinkti šriftą, kuriuo bus spausdinamas "
-"dokumento tekstas"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Puslapių antraštės šrifto parinkėjas"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Spausk šį mygtuką norėdamas pasirinkti šriftą, kuriuo bus spausdinamos "
-"puslapių antraštės"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Eilučių numerių šrifto parinkėjas"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Spausk šį mygtuką, norėdamas pasirinkti šriftą, kuriuo bus spausdinami "
-"eilučių numeriai"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Priedas"
@@ -798,25 +763,25 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Pasirinkta byla nėra paleidžiama."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Spausk šį mygtuką, norėdamas pasirinkti redaktoriaus naudojamą šriftą"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Spausk šį mygtuką norėdamas pakeisti teksto spalvą"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Paspausk šį mygtuką fono spalvai pasirinkti"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Paspausk šį mygtuką pažymėto teksto spalvai pasirinkti"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -824,7 +789,7 @@ msgstr ""
 "Spausk šį mygtuką, norėdamas keisti spalvą, kuria būtų nuspalvintas "
 "pažymėtas tekstas"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Elementai"
 
@@ -835,7 +800,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatinis atitraukimas</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -860,7 +826,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Dešinė paraštė</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Kortelės</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -1003,7 +970,8 @@ msgid "_Display line numbers"
 msgstr "_Rodyti eilučių numerius"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "Įjungti _automatinį atitraukimą"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1027,22 +995,18 @@ msgid "_Right margin at column:"
 msgstr "_Dešinė paraštė stulpelyje:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_Kortelių plotis:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Neribotas atšaukimas"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Naudoti įprastą temos šrifą"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minučių"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "v_eiksmų(o)"
 
@@ -1199,46 +1163,46 @@ msgstr ""
 "Gediminas Paulauskas <menesis@chatsubo.lt>\n"
 "Vaidotas Zemlys <mpiktas@delfi.lt>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 msgid "Unsaved Document"
 msgstr "Neišsaugotas dokumentas"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Neteisingas bylos vardas"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Neteisingi UTF-8 duomenys"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Negalima nuskaityti simbolinės nuorodos informacijos %s "
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Byla turi per daug simbolinių nuorodų"
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit negali priimti %s: vietos rašymo režime."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit negali priimti tokios vietos rašymo režime."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Neteisingas bylos vardas."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1246,7 +1210,7 @@ msgstr ""
 "Neužtenka vietos diske.\n"
 " Atlaisvink kiek nors disko vietos ir bandyk iš naujo."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1256,7 +1220,7 @@ msgstr ""
 "Pabandyk išsaugoti mažesnę bylą, arba saugok į diską, kuris tokių apribojimų "
 "neturi"
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Nepavyko sukurti atsarginės bylos kopijos."
 
@@ -1386,7 +1350,7 @@ msgstr "Vietnamese"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1432,35 +1396,35 @@ msgstr "Pasirink bylas atidarymui"
 msgid "Select a filename to save"
 msgstr "Pasirinkite vardą bylai, kurią norite išsaugoti"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Atidaryti bylą..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Saugojama byla \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumentas \"%s\" nebuvo išsaugotas."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumentas \"%s\" buvo išsaugotas."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Išsaugoti kaip..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Atstatyti neišsaugotus pakeitimus dokumente \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1471,12 +1435,12 @@ msgstr[0] "Pakeitimai padaryti per paskutinę %ld sekundę bus prarasti."
 msgstr[1] "Pakeitimai padaryti per paskutines %ld sekundes bus prarasti."
 msgstr[2] "Pakeitimai padaryti per paskutines %ld sekundžių bus prarasti."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Pakeitimai padaryti per paskutinę minutę bus prarasti."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1491,7 +1455,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Pakeitimai padaryti per paskutinę minutę ir %ld sekundžių bus prarasti."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1502,11 +1466,16 @@ msgstr[0] "Pakeitimai padaryti per paskutinę %ld minutę bus prarasti."
 msgstr[1] "Pakeitimai padaryti per paskutines %ld minutes bus prarasti."
 msgstr[2] "Pakeitimai padaryti per paskutines %ld minučių bus prarasti."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Pakeitimai padaryti per paskutinę valandą bus prarasti."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Pakeitimai padaryti per paskutinę valandą bus prarasti."
+msgstr[1] "Pakeitimai padaryti per paskutinę valandą bus prarasti."
+msgstr[2] "Pakeitimai padaryti per paskutinę valandą bus prarasti."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1521,63 +1490,53 @@ msgstr[1] ""
 msgstr[2] ""
 "Pakeitimai padaryti per paskutinę valandą ir %d minučių bus prarasti."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Pakeitimai padaryti per paskutinę %d valandą bus prarasti."
-msgstr[1] "Pakeitimai padaryti per paskutines %d valandas bus prarasti."
-msgstr[2] "Pakeitimai padaryti per paskutines %d valandų bus prarasti."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "A_tstatyti"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Atstatant bylą „%s“ įvyko klaida."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumentas „%s“ nebuvo atstatytas."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumentas „%s“ buvo atstatytas."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Atstatinėjamas dokumentas „%s“..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Negalėjau nuskaityti duomenų iš stdin."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Atstatinėjama byla:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Įkeliama byla:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Klaida įkeliant bylą „%s“"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Įkelta byla „%s“"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1585,23 +1544,328 @@ msgstr[0] "Įkelta %d byla"
 msgstr[1] "Įkeltos %d bylos"
 msgstr[2] "Įkeltos %d bylų"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Sukurta byla „%s“"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Įkeliama byla „%s“..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Įkeliama %d byla..."
 msgstr[1] "Įkeliamos %d bylos..."
 msgstr[2] "Įkeliamos %d bylų..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Nepavyko atidaryti bylos \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" yra katalogas.\n"
+"\n"
+"Pasitikrink ar teisingai surinkai norimos vietos pavadinimą ir pabandyk dar "
+"kartą."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Nepavyko atidaryti bylos \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Nepavyko atidaryti bylos \"%s\", nes jame yra sugadinti duomenys"
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit negali priimti %s: vietos rašymo režime."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit negali priimti %s: vietos rašymo režime."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Nepavyko atidaryti bylos \"%s\", nes duomenys joje pateikti blogu formatu"
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Byla turi per daug simbolinių nuorodų"
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Negalėjau atidaryti bylos \"%s\", nes yra per daug atidarytų bylų.\n"
+" Uždaryk kokį nors atidarytą bylą ir pabandyk iš naujo"
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Nežtenka atminties bylai \"%s\" atidaryti. Uždarykite keletą šiuo metu "
+"veikiančių programų ir bandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Neįmanoma atstatytii bylos \"%s\", nes nerastas kompiuteris \"%s\".\n"
+"\n"
+"Pasitikrinkite ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" yra neteisinga vieta.\n"
+"\n"
+" Pasitikrinkite ar teisingai įrašėte vietą ir pabandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Neįmanoma atidaryti bylos \"%s\", nes nenurodytas kompiuterio vardas.\n"
+"\n"
+"Pasitikrinkite  ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Neradau bylos \"%s\".\n"
+"\n"
+" Pasitikrinkite, ar teisingai nurodėte bylos vietą ir pabandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Nepavyko atidaryti bylos \"%s\", nes duomenys joje pateikti blogu formatu."
+"\\nTikriausiai bandoma atidaryti ne tekstinę bylą"
+
+#: gedit/gedit-io-error-dialogs.c:248
+#, fuzzy
+msgid "The file you are trying to open is not a regular file."
+msgstr "Jūsų bandomoje atidaryti byloje yra bloga bitų tvarka."
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Neįmanoma atidaryti bylos \"%s\", nes gedit nesugebėjo nustatyti simbolių "
+"koduotės.\n"
+"\n"
+"Pasitikrinkite ar byla, kurią bandote atidaryti tikrai yra tekstinė ir "
+"bandykite dar kartą pasirinkdami simbolių koduotę 'Atidaryti bylą...' lange."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Nepavyko atidaryti bylos \"%s\", nes ji per didelė"
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Negaliu atidaryti bylos \"%s\", taikant %s simbolių koduotę.\n"
+"\n"
+"Pasitikrinkite ar byla, kurią bandote atidaryti tikrai yra tekstinė ir "
+"simbolių koduotė 'Atidaryti bylą...' lange pasirinkta teisingai, bei "
+"bandykite dar kartą."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Nepavyko atidaryti bylos \"%s\", nes duomenys joje pateikti blogu formatu."
+"\\nTikriausiai bandoma atidaryti ne tekstinę bylą"
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Nepavyko atstatyti bylos \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Neįmanoma atstatyti bylos \"%s\", nes gedit jos neranda.\n"
+"\n"
+"Gali būti, kad ji neseniai ištrinta."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Negalėjau atidaryti bylos \"%s\", nes yra per daug atidarytų bylų.\n"
+" Uždaryk kokį nors atidarytą bylą ir pabandyk iš naujo"
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Nežtenka atminties bylai \"%s\" atidaryti. Uždarykite keletą šiuo metu "
+"veikiančių programų ir bandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Neįmanoma atidaryti bylos \"%s\", nes nenurodytas kompiuterio vardas.\n"
+"\n"
+"Pasitikrinkite  ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Neįmanoma atstatyti bylos \"%s\", nes jame yra neteisingų UTF-8 duomenų.\n"
+"\n"
+"Tikriausiai byla, kurią bandote atstatytii nėra tekstinė."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Tu negali atkurti Bevardžio dokumento."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Nepavyko išsaugoti bylos \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Byla \"%s\" jau egzistuoja."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" yra katalogas.\n"
+"\n"
+" Pasitikrink ar teisingai suvedei bylos vietą"
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Nepavyko sukurti bylos \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Nepavyko sukurti bylos \"%s\".\n"
+"\n"
+" Pasitikrink ar tu turi atitinkamas rašymo teises"
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Nepavyko sukurti bylos \"%s\".\n"
+"\n"
+" Bylos vardas per ilgas"
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Neįmanoma sukurti bylos \"%s\".\n"
+"\n"
+"Katalogo dalis bylos pavadinime arba neegzistuoja arba yra neteisinga "
+"simbolinė nuoroda."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Bylai \"%s\" išsaugoti nėra pakankamai vietos.\n"
+" Atlaisvink vietos diske ir bandyk dar kartą"
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1613,19 +1877,19 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "_Perkelti į naują langą"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Vardas:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME tipas:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Koduotė:"
 
@@ -2103,390 +2367,7 @@ msgstr "Atša_ukti"
 msgid "_View"
 msgstr "_Rodyti"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Neradau bylos \"%s\".\n"
-"\n"
-" Pasitikrinkite, ar teisingai nurodėte bylos vietą ir pabandykite dar kartą"
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Nepavyko atidaryti bylos \"%s\", nes jame yra sugadinti duomenys"
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Negalėjau atidaryti bylos \"%s\" nes gedit nemokai tvarkytis su %s: vietomis."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Nepavyko atidaryti bylos \"%s\"."
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Nepavyko atidaryti bylos \"%s\", nes duomenys joje pateikti blogu formatu"
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Nepavyko atidaryti bylos \"%s\", nes ji per didelė"
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" yra neteisinga vieta.\n"
-"\n"
-" Pasitikrinkite ar teisingai įrašėte vietą ir pabandykite dar kartą"
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Negalėjau atidaryti bylos \"%s\", nes neturėjau tam atitinkamų teisių"
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Negalėjau atidaryti bylos \"%s\", nes yra per daug atidarytų bylų.\n"
-" Uždaryk kokį nors atidarytą bylą ir pabandyk iš naujo"
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" yra katalogas.\n"
-"\n"
-"Pasitikrink ar teisingai surinkai norimos vietos pavadinimą ir pabandyk dar "
-"kartą."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nežtenka atminties bylai \"%s\" atidaryti. Uždarykite keletą šiuo metu "
-"veikiančių programų ir bandykite dar kartą"
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Neįmanoma atidaryti bylos \"%s\", nes kompiuterio vardas neteisingas.\n"
-"\n"
-"Pasitikrinkite ar teisingai surinkote vietos pavadinimą iir bandykite dar "
-"kartą."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Neįmanoma atidaryti bylos \"%s\", nes nerastas kompiuteris \"%s\".\n"
-"\n"
-"Pasitikrinkite ar teisingai surinkote vietos pavadinimą, ar jūsų proxy "
-"nustatymai yra teisingi ir bandykite dar kartą."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Neįmanoma atidaryti bylos \"%s\", nes nenurodytas kompiuterio vardas.\n"
-"\n"
-"Pasitikrinkite  ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Neįmanoma atidaryti bylos \"%s\", nes bandymas įsivardinti nepavyko.\n"
-"\n"
-"Pasitikrinkite ar teisingai surinkote vietos pavadinimą iir bandykite dar "
-"kartą"
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Nepavyko atidaryti bylos \"%s\", nes duomenys joje pateikti blogu formatu."
-"\\nTikriausiai bandoma atidaryti ne tekstinę bylą"
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Nepavyko atidaryti bylos \"%s\"."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Neįmanoma atidaryti bylos \"%s\", nes gedit nesugebėjo nustatyti simbolių "
-"koduotės.\n"
-"\n"
-"Pasitikrinkite ar byla, kurią bandote atidaryti tikrai yra tekstinė ir "
-"bandykite dar kartą pasirinkdami simbolių koduotę 'Atidaryti bylą...' lange."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Negaliu atidaryti bylos \"%s\", taikant %s simbolių koduotę.\n"
-"\n"
-"Pasitikrinkite ar byla, kurią bandote atidaryti tikrai yra tekstinė ir "
-"simbolių koduotė 'Atidaryti bylą...' lange pasirinkta teisingai, bei "
-"bandykite dar kartą."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nepavyko atidaryti bylos \"%s\".\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Nepavyko išsaugoti bylos \"%s\"."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Nepavyko išsaugoti bylos \"%s\".\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Neįmanoma atstatyti bylos \"%s\", nes gedit jos neranda.\n"
-"\n"
-"Gali būti, kad ji neseniai ištrinta."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Neįmanoma atstatyti bylos \"%s\", nes joje yra sugadintų duomenų"
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Neįmanoma atstatyti bylos \"%s\", nes gedit nemoka dirbti su %s: vietomis "
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Nepavyko atstatyti bylos \"%s\"."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Neįmanoma atstatyti bylos \"%s\", nes duomenys joje pateikti blogu formatu."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Neįmanoma atstatyti bylos \"%s\", nes ji per didelė"
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Neįmanoma atstatyti bylos \"%s\", nes priėjimas prie jos uždraustas"
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Neįmanoma atstatyti bylos \"%s\", nes yra per daug atidarytų bylų.\n"
-"\n"
-"Uždarykite porą aitdarytų bylų ir bandykite dar kartą."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Nežtenka atminties bylos \"%s\" atstatymui. Uždarykite porą veikiančių "
-"programų ir bandykite dar kartą."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Neįmanoma atstatytii bylos \"%s\", nes nerastas kompiuteris \"%s\".\n"
-"\n"
-"Pasitikrinkite ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Neįmanoma atstatytii bylos \"%s\", nes nenurodytas kompiuterio vardas.\n"
-"\n"
-"Pasitikrinkite  ar jūsų proxy nustatymai yra teisingi ir bandykite dar kartą"
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "Neįmanoma atstatyti bylos \"%s\", nes bandymas įsivardinti nepavyko."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Neįmanoma atstatyti bylos \"%s\", nes jame yra neteisingų UTF-8 duomenų.\n"
-"\n"
-"Tikriausiai byla, kurią bandote atstatytii nėra tekstinė."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Tu negali atkurti Bevardžio dokumento."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Byla \"%s\" jau egzistuoja."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" yra katalogas.\n"
-"\n"
-" Pasitikrink ar teisingai suvedei bylos vietą"
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Nepavyko sukurti bylos \"%s\".\n"
-"\n"
-" Pasitikrink ar tu turi atitinkamas rašymo teises"
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Nepavyko sukurti bylos \"%s\".\n"
-"\n"
-" Bylos vardas per ilgas"
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Neįmanoma sukurti bylos \"%s\".\n"
-"\n"
-"Katalogo dalis bylos pavadinime arba neegzistuoja arba yra neteisinga "
-"simbolinė nuoroda."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Bylai \"%s\" išsaugoti nėra pakankamai vietos.\n"
-" Atlaisvink vietos diske ir bandyk dar kartą"
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Nepavyko sukurti bylos \"%s\"."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr " (invalid Unicode)"
 
@@ -2496,16 +2377,18 @@ msgstr " (invalid Unicode)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr " Eil %d, Stl %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  INS"
 
@@ -3083,11 +2966,13 @@ msgid "The document is empty."
 msgstr "Dokumentas tuščias."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Pažymėtame tekste nėra rašybos klaidų"
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Dokumente nėra rašybos klaidų"
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3197,6 +3082,175 @@ msgstr "_Paklausti formato"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Na_udoti savą formatą"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Jeigu neišsaugosite, pakeitimai padaryti per paskutinę %d valandą bus "
+#~ "prarasti."
+#~ msgstr[1] ""
+#~ "Jeigu neišsaugosite, pakeitimai padaryti per paskutines %d valandas bus "
+#~ "prarasti."
+#~ msgstr[2] ""
+#~ "Jeigu neišsaugosite, pakeitimai padaryti per paskutines %d valandų bus "
+#~ "prarasti."
+
+#~ msgid "Body font picker"
+#~ msgstr "Teksto šrifto parinkėjas"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Spausk šį mygtuką, norėdamas pasirinkti šriftą, kuriuo bus spausdinamas "
+#~ "dokumento tekstas"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Puslapių antraštės šrifto parinkėjas"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Spausk šį mygtuką norėdamas pasirinkti šriftą, kuriuo bus spausdinamos "
+#~ "puslapių antraštės"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Eilučių numerių šrifto parinkėjas"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Spausk šį mygtuką, norėdamas pasirinkti šriftą, kuriuo bus spausdinami "
+#~ "eilučių numeriai"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_Kortelių plotis:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Pakeitimai padaryti per paskutinę %d valandą bus prarasti."
+#~ msgstr[1] "Pakeitimai padaryti per paskutines %d valandas bus prarasti."
+#~ msgstr[2] "Pakeitimai padaryti per paskutines %d valandų bus prarasti."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Negalėjau atidaryti bylos \"%s\" nes gedit nemokai tvarkytis su %s: "
+#~ "vietomis."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Negalėjau atidaryti bylos \"%s\", nes neturėjau tam atitinkamų teisių"
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Neįmanoma atidaryti bylos \"%s\", nes kompiuterio vardas neteisingas.\n"
+#~ "\n"
+#~ "Pasitikrinkite ar teisingai surinkote vietos pavadinimą iir bandykite dar "
+#~ "kartą."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Neįmanoma atidaryti bylos \"%s\", nes nerastas kompiuteris \"%s\".\n"
+#~ "\n"
+#~ "Pasitikrinkite ar teisingai surinkote vietos pavadinimą, ar jūsų proxy "
+#~ "nustatymai yra teisingi ir bandykite dar kartą."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Neįmanoma atidaryti bylos \"%s\", nes bandymas įsivardinti nepavyko.\n"
+#~ "\n"
+#~ "Pasitikrinkite ar teisingai surinkote vietos pavadinimą iir bandykite dar "
+#~ "kartą"
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Nepavyko atidaryti bylos \"%s\"."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Nepavyko atidaryti bylos \"%s\".\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nepavyko išsaugoti bylos \"%s\".\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "Neįmanoma atstatyti bylos \"%s\", nes joje yra sugadintų duomenų"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Neįmanoma atstatyti bylos \"%s\", nes gedit nemoka dirbti su %s: vietomis "
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Neįmanoma atstatyti bylos \"%s\", nes duomenys joje pateikti blogu "
+#~ "formatu."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "Neįmanoma atstatyti bylos \"%s\", nes ji per didelė"
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "Neįmanoma atstatyti bylos \"%s\", nes priėjimas prie jos uždraustas"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Neįmanoma atstatyti bylos \"%s\", nes yra per daug atidarytų bylų.\n"
+#~ "\n"
+#~ "Uždarykite porą aitdarytų bylų ir bandykite dar kartą."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Nežtenka atminties bylos \"%s\" atstatymui. Uždarykite porą veikiančių "
+#~ "programų ir bandykite dar kartą."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Neįmanoma atstatytii bylos \"%s\", nes nenurodytas kompiuterio vardas.\n"
+#~ "\n"
+#~ "Pasitikrinkite  ar jūsų proxy nustatymai yra teisingi ir bandykite dar "
+#~ "kartą"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Neįmanoma atstatyti bylos \"%s\", nes bandymas įsivardinti nepavyko."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "Nerasta plugin-manager.glade2, įdiek gedit iš naujo.\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-08-30 21:44+0000\n"
 "Last-Translator: Åsmund Skjæveland <aasmunds@fys.uio.no>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -46,7 +46,7 @@ msgstr "automatiseringsfabrikk for gedit"
 msgid "Edit text files"
 msgstr "Rediger tekstfiler"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Tekstredigering"
 
@@ -501,11 +501,16 @@ msgstr ""
 "dette valet er slått av, vert skrifta som er namngjeven i «skrifttype i "
 "redigeringsområdet» brukt i staden."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -594,8 +599,13 @@ msgstr[1] ""
 "Dersom du ikkje lagrar, vil endringane frå dei siste %ld minutta gå tapt."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "Dersom du ikkje lagrar, vil endringane frå den siste timen gå tapt."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Dersom du ikkje lagrar, vil endringane frå den siste timen gå tapt."
+msgstr[1] "Dersom du ikkje lagrar, vil endringane frå den siste timen gå tapt."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -611,16 +621,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Dersom du ikkje lagrar, vil endringane frå den siste timen og %d minutta gå "
 "tapt."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Dersom du ikkje lagrar, vil endringane frå den siste timen gå tapt."
-msgstr[1] ""
-"Dersom du ikkje lagrar, vil endringane frå dei siste %d timane gå tapt."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -713,37 +713,6 @@ msgstr "Teiknkodingar"
 msgid "E_ncodings shown in menu:"
 msgstr "Teiknkodi_ngar som vert viste i menyen:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Skriftveljar til dokumentttekst"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Trykk på denne knappen for å velja skrifta som vert brukt til sjølve "
-"dokumentet"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Skriftveljar til topptekst"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Trykk på denne knappen for å velja skrifta som vert brukt til toppteksten"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Skriftveljar til linjenummer"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Trykk på denne knappen for å velja skrifta som vert brukt til linjenummera"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Tilleggsmodular"
@@ -774,33 +743,33 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Den valde fila er ikkje køyrbar."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Trykk på denne knappen for å velja skrifttypen som vert brukt av "
 "redigeringsprogrammet"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Trykk på denne knappen for å velja skriftfarge"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Trykk på denne knappen for å velja bakgrunnsfarge"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Trykk på denne knappen for å velja kva farge merka tekst skal ha"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Trykk på denne knappen for å velja fargen merka tekst skal merkast med"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Element"
 
@@ -811,7 +780,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatisk innrykk</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -837,7 +807,8 @@ msgstr "<b>Høgremarg</b>"
 
 # TRN: Arkfaner? Tabulatorar? Feilmeld!
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulatorar</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -980,7 +951,8 @@ msgid "_Display line numbers"
 msgstr "_Vis linjenummer"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Bruk automatisk innrykk"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1004,24 +976,19 @@ msgstr "_Gå tilbake til standardverdiar"
 msgid "_Right margin at column:"
 msgstr "Høg_remarg i kolonne nr:"
 
-# TRN: Feilmeld: Bruk 'tabulators' i staden for 'tabs'?
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Breidde på _tabulatorar:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Uavgrensa angring"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "Br_uk skrifttypen i drakta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_minutt"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "handl_ingar"
 
@@ -1177,48 +1144,48 @@ msgstr ""
 "Kjartan Maraas  <kmaraas@gnome.org>"
 
 # TRN: Og dette er? Kommentar, takk.
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Dokument"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Ugyldig filnamn"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Klarte ikkje å lesa informasjon om den symbolske lenkja «%s»"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Fila har for mange symbolske lenkjer."
 
 # TRN: Be om stadfesting på fornuftig omsetjing?
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikkje skriva til adresser av typen «%s»."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikkje skriva til denne adressa."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Ugyldig filnamn."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1226,7 +1193,7 @@ msgstr ""
 "Det er ikkje nok ledig plass på disken til å lagra fila.\n"
 "Frigjer litt plass og prøv igjen."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1236,7 +1203,7 @@ msgstr ""
 "Prøv å lagra mindre filer eller å lagra til ein disk som ikkje har slike "
 "grenser."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Klarte ikkje å laga tryggleikskopi."
 
@@ -1366,7 +1333,7 @@ msgstr "Vietnamesisk"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Ukjend"
 
@@ -1413,35 +1380,35 @@ msgstr "Vel filer som skal opnast"
 msgid "Select a filename to save"
 msgstr "Vel eit filnamn å lagra"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Opna fil ..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Lagrar dokumentet «%s» ..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumentet «%s» er ikkje lagra."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumentet «%s» er lagra."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Lagra som ..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Forkasta ulagra endringar i dokumentet «%s»?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1451,12 +1418,12 @@ msgid_plural ""
 msgstr[0] "Endringar gjort i dokumentet det siste sekundet vil gå tapt."
 msgstr[1] "Endringar gjort i dokumentet dei siste %ld sekunda vil gå tapt."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Endringar gjort i dokumentet det siste minuttet vil gå tapt."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1469,7 +1436,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringar gjort i dokumentet det siste minuttet og %ld sekunda vil gå tapt."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1479,11 +1446,15 @@ msgid_plural ""
 msgstr[0] "Endringar gjort i dokumentet det siste minuttet vil gå tapt."
 msgstr[1] "Endringar gjort i dokumentet dei siste %ld minutta vil gå tapt."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Endringar gjort i dokumentet den siste timen vil gå tapt."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Endringar gjort i dokumentet den siste timen vil gå tapt."
+msgstr[1] "Endringar gjort i dokumentet den siste timen vil gå tapt."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1496,87 +1467,386 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringar gjort i dokumentet den siste timen og %d minutta vil gå tapt."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Endringar gjort i dokumentet den siste timen vil gå tapt."
-msgstr[1] "Endringar gjort i dokumentet dei siste %d timane vil gå tapt."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Forkast endringar"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Feil ved forkasting av endringar i dokumentet «%s»."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Endringane i dokumentet «%s» vart ikkje forkasta."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Endringane i dokumentet «%s» vart forkasta."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Forkastar ulagra endringar i dokumentet «%s» ..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Klarte ikkje å lesa data frå stdin."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Forkastar ulagra endringar i fila:"
 
 # c-format
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Lastar fil:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Feil under lasting av fila «%s»"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Lasta fila «%s»"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Lasta ei fil"
 msgstr[1] "Lasta %i filer"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Lasta fila «%s»"
 
 # c-format
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Lastar fila «%s» ..."
 
 # c-format
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Lastar ei fil ..."
 msgstr[1] "lastar %d filer ..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Klarte ikkje å opna fila «%s»"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"«%s» er ein katalog.\n"
+"\n"
+"Kontroller at du skreiv adressa rett og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Klarte ikkje å opna fila «%s»"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "Klarte ikkje å opna fila «%s». Ho inneheld øydelagte data."
+
+# TRN: Be om stadfesting på fornuftig omsetjing?
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit kan ikkje skriva til adresser av typen «%s»."
+
+# TRN: Be om stadfesting på fornuftig omsetjing?
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit kan ikkje skriva til adresser av typen «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr "Klarte ikkje å opna fila «%s». Ho inneheld data i eit ugyldig format."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Fila har for mange symbolske lenkjer."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Det er for mange opne filer.\n"
+"\n"
+"Lukk nokre opne filer og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Ikkje nok minne til å opna fila «%s». Avslutt nokre program og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Klarte ikkje forkasta ulagra endringar i fila «%s». Fann ikkje verten «%s».\n"
+"\n"
+"Kontroller mellomtenarinnstillingane dine og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"«%s» er ikkje ei gyldig adresse.\n"
+"\n"
+"Kontroller at du skreiv adressa rett og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Tomt vertsnamn.\n"
+"\n"
+"Kontroller mellomtenarinnstillingane dine og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Fann ikkje fila «%s».\n"
+"\n"
+"Kontroller at du skreiv rett adresse og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Ho inneheld ugyldige data.\n"
+"\n"
+"Kanskje du prøver å opna ei binærfil."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Gedit klarte ikkje å kjenna att "
+"teiknkodinga.\n"
+"\n"
+"Kontroller at du ikkje prøver å opna ei binærfil og prøv å velja ei "
+"teiknkoding i «Opna fil»- eller «Opna adresse»-dialogen."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "Klarte ikkje å opna fila «%s». Ho er for stor."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Klarte ikkje å opna fila «%s» med teiknkodinga «%s».\n"
+"\n"
+"Kontroller at du ikkje prøver å opna ei binærfil, og at du har vald rett "
+"teiknkoding i  «Opna fil»- eller «Opna adresse»-dialogen."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Ho inneheld ugyldige data.\n"
+"\n"
+"Kanskje du prøver å opna ei binærfil."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Klarte ikkje forkasta ulagra endringar i fila «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Klarte ikkje forkasta ulagra endringar i fila «%s»: gedit kan ikkje finna "
+"den lagra versjonen av fila.\n"
+"\n"
+"Kanskje ho vart sletta nyleg."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Det er for mange opne filer.\n"
+"\n"
+"Lukk nokre opne filer og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Ikkje nok minne til å opna fila «%s». Avslutt nokre program og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Klarte ikkje å opna fila «%s». Tomt vertsnamn.\n"
+"\n"
+"Kontroller mellomtenarinnstillingane dine og prøv igjen."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Klarte ikkje forkasta ulagra endringar i fila «%s». Ho inneheld ugyldige UTF-"
+"8-data.\n"
+"\n"
+"Du prøver truleg å gå tilbake til ei binærfil."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr ""
+"Det er ikkje mogleg å forkasta ulagra endringar i eit dokument utan tittel."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Klarte ikkje å lagra fila «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Fila «%s» finst frå før."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"«%s» er ein katalog.\n"
+"\n"
+"Kontroller at du skreiv adressa rett."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Kan ikkje laga fila «%s»."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Kan ikkje laga fila «%s».\n"
+"\n"
+"Kontroller at du har dei naudsynte skriveløyva."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Kan ikkje laga fila «%s».\n"
+"\n"
+"Filnamnet er for langt."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Kan ikkje laga fila «%s».\n"
+"\n"
+"Ein katalog i stien finst ikkje eller er ei broten symbolsk lenkje."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Det er ikkje nok ledig diskplass til å laga fila «%s».\n"
+"\n"
+"Frigjer noko diskplass og prøv igjen."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1588,47 +1858,47 @@ msgstr "Skrivebeskytta"
 msgid "_Move to New Window"
 msgstr "_Flytt til nytt vindauge"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Namn:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Teiknkoding:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Opna «%s»"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Opna ei nyleg brukt fil"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(skrivebeskytta)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Bruk vanleg utheving"
 
 # TRN: Kva kva %s vera her?
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Bruk %s utheving"
@@ -2082,396 +2352,7 @@ msgstr "_Angra"
 msgid "_View"
 msgstr "_Vis"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Fann ikkje fila «%s».\n"
-"\n"
-"Kontroller at du skreiv rett adresse og prøv igjen."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Klarte ikkje å opna fila «%s». Ho inneheld øydelagte data."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "Klarte ikkje å opna fila «%s». Gedit kan ikkje opna «%s»-adresser."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Klarte ikkje å opna fila «%s»"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "Klarte ikkje å opna fila «%s». Ho inneheld data i eit ugyldig format."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Klarte ikkje å opna fila «%s». Ho er for stor."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» er ikkje ei gyldig adresse.\n"
-"\n"
-"Kontroller at du skreiv adressa rett og prøv igjen."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Klarte ikkje å opna fila «%s». Tilgang nekta."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Det er for mange opne filer.\n"
-"\n"
-"Lukk nokre opne filer og prøv igjen."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» er ein katalog.\n"
-"\n"
-"Kontroller at du skreiv adressa rett og prøv igjen."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Ikkje nok minne til å opna fila «%s». Avslutt nokre program og prøv igjen."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Ugyldig vertsnamn.\n"
-"\n"
-"Kontroller at du skreiv rett adresse og prøv igjen."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Fann ikkje verten «%s».\n"
-"\n"
-"Kontroller at du skreiv adressa rett og at mellomtenarinnstillingane dine er "
-"rette, og prøv på nytt."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Tomt vertsnamn.\n"
-"\n"
-"Kontroller mellomtenarinnstillingane dine og prøv igjen."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Klarte ikkje å logga inn.\n"
-"\n"
-"Kontroller at du skreiv rett adresse og prøv på nytt."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Ho inneheld ugyldige data.\n"
-"\n"
-"Kanskje du prøver å opna ei binærfil."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Klarte ikkje å opna fila «%s»."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Klarte ikkje å opna fila «%s». Gedit klarte ikkje å kjenna att "
-"teiknkodinga.\n"
-"\n"
-"Kontroller at du ikkje prøver å opna ei binærfil og prøv å velja ei "
-"teiknkoding i «Opna fil»- eller «Opna adresse»-dialogen."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Klarte ikkje å opna fila «%s» med teiknkodinga «%s».\n"
-"\n"
-"Kontroller at du ikkje prøver å opna ei binærfil, og at du har vald rett "
-"teiknkoding i  «Opna fil»- eller «Opna adresse»-dialogen."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Klarte ikkje å opna fila «%s».\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Klarte ikkje å lagra fila «%s»."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Klarte ikkje å lagra fila «%s».\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s»: gedit kan ikkje finna "
-"den lagra versjonen av fila.\n"
-"\n"
-"Kanskje ho vart sletta nyleg."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho inneheld "
-"øydelagte data."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s» fordi gedit ikkje kan "
-"handsama «%s:»-adresser."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Klarte ikkje forkasta ulagra endringar i fila «%s»."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho inneheld data i "
-"eit ugyldig format."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho er for stor."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Klarte ikkje å forkasta ulagra endringar i fila «%s». Tilgang til lagra "
-"versjon vart nekta."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Klarte ikkje å forkasta ulagra endringar i fila «%s». For mange opne filer.\n"
-"\n"
-"Lukk nokre filer og prøv igjen."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Ikkje nok minne til å forkasta ulagra endringar i fila «%s». Avslutt nokre "
-"program og prøv igjen."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s». Fann ikkje verten «%s».\n"
-"\n"
-"Kontroller mellomtenarinnstillingane dine og prøv igjen."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s». Vertsnamnet var tomt.\n"
-"\n"
-"Kontroller mellomtenarinnstillingane dine og prøv igjen."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s». Klarte ikkje logga inn."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Klarte ikkje forkasta ulagra endringar i fila «%s». Ho inneheld ugyldige UTF-"
-"8-data.\n"
-"\n"
-"Du prøver truleg å gå tilbake til ei binærfil."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr ""
-"Det er ikkje mogleg å forkasta ulagra endringar i eit dokument utan tittel."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Fila «%s» finst frå før."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"«%s» er ein katalog.\n"
-"\n"
-"Kontroller at du skreiv adressa rett."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Kan ikkje laga fila «%s».\n"
-"\n"
-"Kontroller at du har dei naudsynte skriveløyva."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Kan ikkje laga fila «%s».\n"
-"\n"
-"Filnamnet er for langt."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Kan ikkje laga fila «%s».\n"
-"\n"
-"Ein katalog i stien finst ikkje eller er ei broten symbolsk lenkje."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Det er ikkje nok ledig diskplass til å laga fila «%s».\n"
-"\n"
-"Frigjer noko diskplass og prøv igjen."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Kan ikkje laga fila «%s»."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2481,16 +2362,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Li %d, kol %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  SET"
 
@@ -3067,11 +2950,13 @@ msgid "The document is empty."
 msgstr "Dokumentet er tomt."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Den merka teksten inneheld ingen feilstava ord."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Dokumentet inneheld ikkje feilstava ord."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3181,6 +3066,171 @@ msgstr "S_pør etter eit format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Br_uk sjølvvald format"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Dersom du ikkje lagrar, vil endringane frå den siste timen gå tapt."
+#~ msgstr[1] ""
+#~ "Dersom du ikkje lagrar, vil endringane frå dei siste %d timane gå tapt."
+
+#~ msgid "Body font picker"
+#~ msgstr "Skriftveljar til dokumentttekst"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Trykk på denne knappen for å velja skrifta som vert brukt til sjølve "
+#~ "dokumentet"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Skriftveljar til topptekst"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Trykk på denne knappen for å velja skrifta som vert brukt til toppteksten"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Skriftveljar til linjenummer"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Trykk på denne knappen for å velja skrifta som vert brukt til linjenummera"
+
+# TRN: Feilmeld: Bruk 'tabulators' i staden for 'tabs'?
+#~ msgid "_Tabs width:"
+#~ msgstr "Breidde på _tabulatorar:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Endringar gjort i dokumentet den siste timen vil gå tapt."
+#~ msgstr[1] "Endringar gjort i dokumentet dei siste %d timane vil gå tapt."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr "Klarte ikkje å opna fila «%s». Gedit kan ikkje opna «%s»-adresser."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "Klarte ikkje å opna fila «%s». Tilgang nekta."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Klarte ikkje å opna fila «%s». Ugyldig vertsnamn.\n"
+#~ "\n"
+#~ "Kontroller at du skreiv rett adresse og prøv igjen."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Klarte ikkje å opna fila «%s». Fann ikkje verten «%s».\n"
+#~ "\n"
+#~ "Kontroller at du skreiv adressa rett og at mellomtenarinnstillingane dine "
+#~ "er rette, og prøv på nytt."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Klarte ikkje å opna fila «%s». Klarte ikkje å logga inn.\n"
+#~ "\n"
+#~ "Kontroller at du skreiv rett adresse og prøv på nytt."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Klarte ikkje å opna fila «%s»."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Klarte ikkje å opna fila «%s».\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Klarte ikkje å lagra fila «%s».\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho inneheld "
+#~ "øydelagte data."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s» fordi gedit ikkje kan "
+#~ "handsama «%s:»-adresser."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho inneheld data "
+#~ "i eit ugyldig format."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s» fordi ho er for stor."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Klarte ikkje å forkasta ulagra endringar i fila «%s». Tilgang til lagra "
+#~ "versjon vart nekta."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Klarte ikkje å forkasta ulagra endringar i fila «%s». For mange opne "
+#~ "filer.\n"
+#~ "\n"
+#~ "Lukk nokre filer og prøv igjen."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Ikkje nok minne til å forkasta ulagra endringar i fila «%s». Avslutt "
+#~ "nokre program og prøv igjen."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s». Vertsnamnet var "
+#~ "tomt.\n"
+#~ "\n"
+#~ "Kontroller mellomtenarinnstillingane dine og prøv igjen."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Klarte ikkje forkasta ulagra endringar i fila «%s». Klarte ikkje logga "
+#~ "inn."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr ""

@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-09-06 12:50-0300\n"
 "Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
 "Language-Team:  <nls@tux.hellug.gr>\n"
@@ -67,7 +67,7 @@ msgstr "Αυτοματοποιήσεις gedit "
 msgid "Edit text files"
 msgstr "Επεξεργασία αρχείων κειμένου"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Επεξεργαστής Κειμένου"
 
@@ -544,11 +544,16 @@ msgstr ""
 "επιλογή απενεργοποιηθεί τότε θα χρησιμοποιηθεί η γραμματοσειρά που ορίζεται "
 "στην επιλογή \"Γραμματοσειρά Επεξεργαστή\"."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -641,8 +646,15 @@ msgstr[1] ""
 "οριστικά."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα "
+"χαθούν."
+msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα "
 "χαθούν."
 
@@ -660,19 +672,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν την τελευταία ώρα και %d λεπτά θα "
 "χαθούν οριστικά."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν την τελευταία %d ώρα θα χαθούν "
-"οριστικά."
-msgstr[1] ""
-"Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν τις τελευταίες %d ώρες θα χαθούν "
-"οριστικά."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -766,39 +765,6 @@ msgstr "Κωδικοποιήσεις χαρακτήρων"
 msgid "E_ncodings shown in menu:"
 msgstr "Κω_δικοποιήσεις που εμφανίζονται στο μενού:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Σώμα για τον επιλογέα"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
-"χρησιμοποιείται για την εκτύπωση του σώματος του εγγράφου"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Επιλογέας γραμματοσειράς για κεφαλίδες σελίδας"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Πατήστε αυτό το κουμπί για να επιλέξετε την γραμματοσειρά που θα "
-"χρησιμοποιείται για την εκτύπωση των κεφαλίδων"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Επιλογέας γραμματοσειράς αριθμών γραμμής"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
-"χρησιμοποιείται για την εκτύπωση αριθμών γραμμής"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Πρόσθετη Λειτουργία"
@@ -829,21 +795,21 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Το επιλεγμένο αρχείο δεν είναι εκτελέσιμο."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
 "χρησιμοποιείται από τον επεξεργαστή"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα κειμένου"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Πιέστε αυτό το κουμπί για τη ρύθμιση χρώματος παρασκηνίου"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -851,7 +817,7 @@ msgstr ""
 "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα στο οποίο θα εμφανίζεται το "
 "κείμενο"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -859,7 +825,7 @@ msgstr ""
 "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα στο οποίο θα σημειώνεται το "
 "επιλεγμένο κείμενο"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Στοιχεία"
 
@@ -870,7 +836,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Αυτόματη Εσοχή</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -895,7 +862,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Δεξιό Περιθώριο</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>Στήλες</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -1038,7 +1006,8 @@ msgid "_Display line numbers"
 msgstr "_Προβολή αριθμών γραμμής:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Ενεργοποίηση αυτόματης εσοχής"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1062,22 +1031,18 @@ msgid "_Right margin at column:"
 msgstr "_Δεξιό περιθώριο στη στήλη:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "Πλάτος σ_τηλών:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "Α_περιόριστες αναιρέσεις"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "_Χρήση προεπιλεγμένης γραμματοσειράς θέματος"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_λεπτά"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "ε_νέργειες"
 
@@ -1230,50 +1195,50 @@ msgstr ""
 "Συμεών (σίμος) Ξενιτέλλης <simos@hellug.gr>\n"
 "Κώστας Παπαδήμας <pkst@gnome.org>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "Έ_γγραφα"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Μη έγκυρο όνομα αρχείου"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Μη έγκυρα δεδομένα UTF-8 "
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Δεν είναι δυνατή η ανάγνωση πληροφοριών συμβολικού δεσμού για %s"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Το αρχείο έχει πάρα πολλούς συμβολικούς δεσμούς."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
 "Η εφαρμογή δεν μπορεί να χειριστεί τοποθεσίες %s: σε λειτουργία εγγραφής."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 "Η εφαρμογή δεν μπορεί να χειριστεί αυτό το είδος της τοποθεσίας σε "
 "λειτουργία εγγραφής."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Μη έγκυρο όνομα αρχείου."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1281,7 +1246,7 @@ msgstr ""
 "Δεν υπάρχει αρκετός χώρος στο δίσκο για την αποθήκευση του αρχείου.\n"
 "Ελευθερώστε κάποιο χώρο στο δίσκο και προσπαθήστε ξανά."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1291,7 +1256,7 @@ msgstr ""
 "στα μεγέθη αρχείων. Προσπαθείστε να αποθηκεύσετε ένα μικρότερο αρχείο ή "
 "διαλέξτε ένα δίσκο χωρίς περιορισμούς."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας."
 
@@ -1421,7 +1386,7 @@ msgstr "Βιετναμέζικη"
 msgid "Thai"
 msgstr "Ταϊλανδέζικη"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -1469,35 +1434,35 @@ msgstr "Επιλογή αρχείων για άνοιγμα"
 msgid "Select a filename to save"
 msgstr "Επιλογή ενός ονόματος αρχείου για αποθήκευση"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Άνοιγμα Αρχείου ..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Αποθήκευση εγγράφου \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Το έγγραφο \"%s\" δεν αποθηκεύτηκε."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Το έγγραφο  \"%s\" αποθηκεύτηκε."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Επαναφορά μη αποθηκευμένων αλλαγών στο έγγραφο \"%s\"?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1511,13 +1476,13 @@ msgstr[1] ""
 "Οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld δευτερόλεπτα θα χαθούν "
 "οριστικά."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1532,7 +1497,7 @@ msgstr[1] ""
 "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό και %ld δευτερόλεπτα  "
 "θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1544,12 +1509,17 @@ msgstr[0] ""
 msgstr[1] ""
 "Οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld λεπτά θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα χαθούν οριστικά."
+msgstr[1] ""
 "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1564,86 +1534,403 @@ msgstr[1] ""
 "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και %d λέπτα θα χαθούν "
 "οριστικά."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Οι αλλαγές που έγιναν στο έγγραφο την τελευταία %d ώρα θα χαθούν οριστικά."
-msgstr[1] ""
-"Οι αλλαγές που έγιναν στο έγγραφο τις τελευταίες %d  ώρες θα χαθούν οριστικά."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Επανα_φορά"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Σφάλμα επαναφοράς του εγγράφου \"%s\"."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Δεν έγινε επαναφορά του εγγράφου  \"%s\"."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Έγινε επαναφορά του εγγράφου  \"%s\"."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Γίνεται επαναφορά αρχείου \"%s\"..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Αδυναμία ανάγνωσης δεδομένων από stdin."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Γίνεται επαναφορά αρχείου:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "Φόρτωση αρχείου:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Σφάλμα φόρτωσης αρχείου  \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Φόρτωμένο αρχείο \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Φορτώθηκε %d αρχείο"
 msgstr[1] "Φορτώθηκαν %d αρχεία"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "Φόρτωμένο αρχείο \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Φόρτωση αρχείου \"%s\"..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Φορτώνεται %d αρχείο..."
 msgstr[1] "Φορτώνονται %d αρχεία..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"Το \"%s\" είναι ένας κατάλογος.\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\""
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει κατεστραμμένα "
+"δεδομένα."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr ""
+"Η εφαρμογή δεν μπορεί να χειριστεί τοποθεσίες %s: σε λειτουργία εγγραφής."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr ""
+"Η εφαρμογή δεν μπορεί να χειριστεί τοποθεσίες %s: σε λειτουργία εγγραφής."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μη έγκυρο "
+"τύπο δεδομένων."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Το αρχείο έχει πάρα πολλούς συμβολικούς δεσμούς."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή  υπάρχουν πολλά "
+"ανοικτά αρχεία.\n"
+"\n"
+"Κλείστε κάποια ανοικτά αρχεία και προσπαθείστε ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"Δεν υπάρχει αρκετή διαθέσιμη μνήμη για το άνοιγμα του αρχείου \"%s\".  "
+"Κλείστε μερικές εφαρμογές και προσπαθείστε ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή δεν μπορεί να βρεθεί "
+"το σύστημα \"%s\".\n"
+"\n"
+"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
+"ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"Το \"%s\" δεν είναι έγκυρη τοποθεσία.\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το όνομα συστήματος "
+"ήταν άδειο.\n"
+"\n"
+"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
+"ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Δεν είναι δυνατή η εύρεση του αρχείου \"%s\".\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μή έγκυρα "
+"δεδομένα.\n"
+"\n"
+"Πιθανόν να προσπαθείτε να επαναφέρεται ένα αρχείο binary."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το gedit δεν κατάφερε "
+"να εντοπίσει αυτόματα την κωδικοποίηση χαρακτήρων.\n"
+"\n"
+"Παρακαλώ ελέγξτε ότι δεν προσπαθείτε να ανοίξετε ένα binary αρχείο και "
+"προσπαθείστε ξανά επιλέγοντας μια κωδικοποίηση χαρακτήρων στον διάλογο "
+"'Άνοιγμα Αρχείου...' (ή Άνοιγμα Τοποθεσίας)."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" με την χρήση της "
+"κωδικοποίησης %s .\n"
+"\n"
+"Παρακαλώ ελέγξτε ότι δεν προσπαθείτε να ανοίξετε ένα binary αρχείο και ότι "
+"έχετε επιλέξει την σωστή κωδικοποίηση χαρακτήρων στον διάλογο 'Άνοιγμα "
+"αρχείου...' (ή Άνοιγμα τοποθεσίας) και προσπαθείστε ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μή έγκυρα "
+"δεδομένα.\n"
+"\n"
+"Πιθανόν να προσπαθείτε να επαναφέρεται ένα αρχείο binary."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "Αδυναμία επαναφοράς του αρχείου \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή δεν μπορεί να βρεθεί "
+"από την εφαρμογή.\n"
+"\n"
+"Πιθανόν να έχει διαγραφεί πρόσφατα."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή  υπάρχουν πολλά "
+"ανοικτά αρχεία.\n"
+"\n"
+"Κλείστε κάποια ανοικτά αρχεία και προσπαθείστε ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"Δεν υπάρχει αρκετή διαθέσιμη μνήμη για το άνοιγμα του αρχείου \"%s\".  "
+"Κλείστε μερικές εφαρμογές και προσπαθείστε ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το όνομα συστήματος "
+"ήταν άδειο.\n"
+"\n"
+"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
+"ξανά."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει μή έγκυρα "
+"δεδομένα UTF-8.\n"
+"\n"
+"Πιθανόν να προσπαθείτε να επαναφέρεται ένα αρχείο binary."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Δε μπορείτε να επαναφέρετε ένα Ανώνυμο έγγραφο."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "Αδυναμία αποθήκευσης του αρχείου \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "Το αρχείο \"%s\" υπάρχει ήδη."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"Το \"%s\" είναι ένας κατάλογος.\n"
+"\n"
+"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "Αδυναμία δημιουργίας του αρχείου \"%s\"."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"Αδυναμία δημιουργίας του αρχείου \"%s\".\n"
+"\n"
+"Επιβεβαιώστε ότι έχετε τα κατάλληλα δικαιώματα εγγραφής."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"Δεν είναι δυνατή η δημιουργία του αρχείου \"%s\".\n"
+"\n"
+"Το όνομα αρχείου είναι πολύ μακρύ."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Δεν είναι δυνατή η δημιουργία του αρχείου \"%s\".\n"
+"\n"
+"Ένα στοιχείο καταλόγου στο όνομα αρχείου δεν υπάρχει ή υπάρχει πρόβλημα στο "
+"symbolic link."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"Δεν υπάρχει αρκετός ελεύθερος χώρος για τη δημιουργία του αρχείου \"%s\".\n"
+"\n"
+"Ελευθερώστε κάποιο χώρο στο δίσκο και προσπαθήστε ξανά."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1655,46 +1942,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "_Μετακίνηση σε Νέο Παράθυρο"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Όνομα:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "Τύπος MIME:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Κωδικοποίηση:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "Άνοιγμα '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Άνοιγμα ενός πρόσφατου αρχείου"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(μόνο ανάγνωση)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Χρήση Κανονικής λειτουργίας επισήμανσης"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Χρήση %s λειτουργίας επισήμανσης"
@@ -2145,423 +2432,7 @@ msgstr "_Αναίρεση"
 msgid "_View"
 msgstr "_Προβολή"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Δεν είναι δυνατή η εύρεση του αρχείου \"%s\".\n"
-"\n"
-"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει κατεστραμμένα "
-"δεδομένα."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" η εφαρμογή δεν μπορεί να "
-"χειριστεί τοποθεσίες %s:."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\""
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μη έγκυρο "
-"τύπο δεδομένων."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Το \"%s\" δεν είναι έγκυρη τοποθεσία.\n"
-"\n"
-"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή υπήρξε άρνηση "
-"πρόσβασης."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή  υπάρχουν πολλά "
-"ανοικτά αρχεία.\n"
-"\n"
-"Κλείστε κάποια ανοικτά αρχεία και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Το \"%s\" είναι ένας κατάλογος.\n"
-"\n"
-"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Δεν υπάρχει αρκετή διαθέσιμη μνήμη για το άνοιγμα του αρχείου \"%s\".  "
-"Κλείστε μερικές εφαρμογές και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το όνομα συστήματος "
-"δεν ήταν έγκυρο.\n"
-"\n"
-"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
-"ξανά."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή δεν μπορεί να βρεθεί "
-"το σύστημα \"%s\".\n"
-"\n"
-"Βεβαιωθείτε ότι πληκτρολογήσατε την τοποθεσία σωστά και ότι οι ρυθμίσεις "
-"διαμεσολαβητή είναι σωστές και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το όνομα συστήματος "
-"ήταν άδειο.\n"
-"\n"
-"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
-"ξανά."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή  απέτυχε η προσπάθεια "
-"εισόδου.\n"
-"\n"
-"Βεβαιωθείτε ότι πληκτρολογήσατε σωστά την τοποθεσία και προσπαθήστε ξανά."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μή έγκυρα "
-"δεδομένα.\n"
-"\n"
-"Πιθανόν να προσπαθείτε να επαναφέρεται ένα αρχείο binary."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\"."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το gedit δεν κατάφερε "
-"να εντοπίσει αυτόματα την κωδικοποίηση χαρακτήρων.\n"
-"\n"
-"Παρακαλώ ελέγξτε ότι δεν προσπαθείτε να ανοίξετε ένα binary αρχείο και "
-"προσπαθείστε ξανά επιλέγοντας μια κωδικοποίηση χαρακτήρων στον διάλογο "
-"'Άνοιγμα Αρχείου...' (ή Άνοιγμα Τοποθεσίας)."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" με την χρήση της "
-"κωδικοποίησης %s .\n"
-"\n"
-"Παρακαλώ ελέγξτε ότι δεν προσπαθείτε να ανοίξετε ένα binary αρχείο και ότι "
-"έχετε επιλέξει την σωστή κωδικοποίηση χαρακτήρων στον διάλογο 'Άνοιγμα "
-"αρχείου...' (ή Άνοιγμα τοποθεσίας) και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Αδυναμία ανοίγματος του αρχείου  \"%s\".\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Αδυναμία αποθήκευσης του αρχείου \"%s\"."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Αδυναμία αποθήκευσης του αρχείου \"%s\".\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή δεν μπορεί να βρεθεί "
-"από την εφαρμογή.\n"
-"\n"
-"Πιθανόν να έχει διαγραφεί πρόσφατα."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει "
-"κατεστραμμένα δεδομένα."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή η εφαρμογή δεν μπορεί "
-"να χειριστεί τοποθεσίες%s:."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Αδυναμία επαναφοράς του αρχείου \"%s\"."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει μη έγκυρο "
-"τύπο δεδομένων."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή υπήρξε άρνηση "
-"πρόσβασης."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή  υπάρχουν πολλά "
-"ανοικτά αρχεία.\n"
-"\n"
-"Κλείστε κάποια ανοικτά αρχεία και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Δεν υπάρχει αρκετή διαθέσιμη μνήμη για την επαναφορά του αρχείου \"%s\".  "
-"Κλείστε μερικές εφαρμογές και προσπαθείστε ξανά."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή δεν μπορεί να βρεθεί "
-"το σύστημα \"%s\".\n"
-"\n"
-"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
-"ξανά."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή το όνομα συστήματος "
-"ήταν άδειο.\n"
-"\n"
-"Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
-"ξανά."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή  απέτυχε η προσπάθεια "
-"εισόδου."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει μή έγκυρα "
-"δεδομένα UTF-8.\n"
-"\n"
-"Πιθανόν να προσπαθείτε να επαναφέρεται ένα αρχείο binary."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Δε μπορείτε να επαναφέρετε ένα Ανώνυμο έγγραφο."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Το αρχείο \"%s\" υπάρχει ήδη."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"Το \"%s\" είναι ένας κατάλογος.\n"
-"\n"
-"Βεβαιωθείτε ότι έχετε πληκτρολογήσει σωστά την τοποθεσία."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Αδυναμία δημιουργίας του αρχείου \"%s\".\n"
-"\n"
-"Επιβεβαιώστε ότι έχετε τα κατάλληλα δικαιώματα εγγραφής."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Δεν είναι δυνατή η δημιουργία του αρχείου \"%s\".\n"
-"\n"
-"Το όνομα αρχείου είναι πολύ μακρύ."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Δεν είναι δυνατή η δημιουργία του αρχείου \"%s\".\n"
-"\n"
-"Ένα στοιχείο καταλόγου στο όνομα αρχείου δεν υπάρχει ή υπάρχει πρόβλημα στο "
-"symbolic link."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Δεν υπάρχει αρκετός ελεύθερος χώρος για τη δημιουργία του αρχείου \"%s\".\n"
-"\n"
-"Ελευθερώστε κάποιο χώρο στο δίσκο και προσπαθήστε ξανά."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Αδυναμία δημιουργίας του αρχείου \"%s\"."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2571,16 +2442,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Γρ %d, Στηλ. %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  ΑΝΤ"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  ΕΙΣ"
 
@@ -3158,11 +3031,13 @@ msgid "The document is empty."
 msgstr "Το έγγραφο είναι κενό."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Το επιλεγμένο αρχείο δεν περιέχει ανορθόγραφες λέξεις."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Το έγγραφο δεν περιέχει ανορθόγραφες λέξεις."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3272,6 +3147,186 @@ msgstr "_Ερώτηση για τύπο"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Χρήση προσαρμοσμένου τύπου"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν την τελευταία %d ώρα θα χαθούν "
+#~ "οριστικά."
+#~ msgstr[1] ""
+#~ "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν τις τελευταίες %d ώρες θα "
+#~ "χαθούν οριστικά."
+
+#~ msgid "Body font picker"
+#~ msgstr "Σώμα για τον επιλογέα"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
+#~ "χρησιμοποιείται για την εκτύπωση του σώματος του εγγράφου"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Επιλογέας γραμματοσειράς για κεφαλίδες σελίδας"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Πατήστε αυτό το κουμπί για να επιλέξετε την γραμματοσειρά που θα "
+#~ "χρησιμοποιείται για την εκτύπωση των κεφαλίδων"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Επιλογέας γραμματοσειράς αριθμών γραμμής"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
+#~ "χρησιμοποιείται για την εκτύπωση αριθμών γραμμής"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "Πλάτος σ_τηλών:"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία %d ώρα θα χαθούν οριστικά."
+#~ msgstr[1] ""
+#~ "Οι αλλαγές που έγιναν στο έγγραφο τις τελευταίες %d  ώρες θα χαθούν "
+#~ "οριστικά."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" η εφαρμογή δεν μπορεί να "
+#~ "χειριστεί τοποθεσίες %s:."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή υπήρξε άρνηση "
+#~ "πρόσβασης."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή το όνομα συστήματος "
+#~ "δεν ήταν έγκυρο.\n"
+#~ "\n"
+#~ "Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
+#~ "ξανά."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή δεν μπορεί να "
+#~ "βρεθεί το σύστημα \"%s\".\n"
+#~ "\n"
+#~ "Βεβαιωθείτε ότι πληκτρολογήσατε την τοποθεσία σωστά και ότι οι ρυθμίσεις "
+#~ "διαμεσολαβητή είναι σωστές και προσπαθείστε ξανά."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή  απέτυχε η "
+#~ "προσπάθεια εισόδου.\n"
+#~ "\n"
+#~ "Βεβαιωθείτε ότι πληκτρολογήσατε σωστά την τοποθεσία και προσπαθήστε ξανά."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\"."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "Αδυναμία ανοίγματος του αρχείου  \"%s\".\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Αδυναμία αποθήκευσης του αρχείου \"%s\".\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει "
+#~ "κατεστραμμένα δεδομένα."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή η εφαρμογή δεν "
+#~ "μπορεί να χειριστεί τοποθεσίες%s:."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή περιέχει μη έγκυρο "
+#~ "τύπο δεδομένων."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή υπήρξε άρνηση "
+#~ "πρόσβασης."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή  υπάρχουν πολλά "
+#~ "ανοικτά αρχεία.\n"
+#~ "\n"
+#~ "Κλείστε κάποια ανοικτά αρχεία και προσπαθείστε ξανά."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "Δεν υπάρχει αρκετή διαθέσιμη μνήμη για την επαναφορά του αρχείου \"%s\".  "
+#~ "Κλείστε μερικές εφαρμογές και προσπαθείστε ξανά."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή το όνομα "
+#~ "συστήματος ήταν άδειο.\n"
+#~ "\n"
+#~ "Βεβαιωθείτε ότι οι ρυθμίσεις διαμεσολαβητή είναι σωστές και προσπαθείστε "
+#~ "ξανά."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή  απέτυχε η "
+#~ "προσπάθεια εισόδου."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-03-09 10:39+0100\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -45,7 +45,7 @@ msgstr "Гедит-автоматжуулалтын үйлдвэр"
 msgid "Edit text files"
 msgstr "Текст файл боловсруулах"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "Текст боловсруулагч"
 
@@ -501,11 +501,16 @@ msgstr ""
 "оронд хэрэглэх үү? Хэрвээ энэ сонголт хаагдсан бол »боловсруулагч-бичиг«ын "
 "доор өгөгдсөн бичгийг системийн стандарт бичгийн оронд хэрэглэнэ ."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr ""
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr ""
 
@@ -598,9 +603,14 @@ msgstr[1] ""
 "устана!"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#, fuzzy
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай устана!"
+msgstr[1] ""
 "Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай устана!"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -617,17 +627,6 @@ msgstr[0] ""
 msgstr[1] ""
 "Хэрвээ та хадгалахгүй бол сүүлийн минутад хийсэн өөрчилөлтүүд найдвартай "
 "устана!"
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай устана!"
-msgstr[1] ""
-"Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай устана!"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -722,39 +721,6 @@ msgstr "Тэмдэгт кодчилолууд"
 msgid "E_ncodings shown in menu:"
 msgstr "_Кодчилолуудыг цэсэнд харуулах:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "Эх биеийн бичиг сонгогч"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"Баримтын биеийг хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин "
-"дээр дарна уу"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "Хуудсын толгойн фонт сонгогч"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Толгойн хэсэгийг хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин "
-"дээр дарна уу"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "Мөрийн дугаарын бичгийн хэв сонгогч"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Мөрийн дугаар хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин дээр "
-"дарна уу"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Плугин"
@@ -785,34 +751,34 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Сонгосон файл ажилын бус."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Боловсруулагчийн хэрэглэх бичгийг сонгохдоо та энэ товчин дээр дарна уу"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "Текстын өнгө тохируулахдаа энэ товчин дээр дарна уу"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "Дэвсгэрийн өнгө тохируулахдаа энэ товчин дээр дарна уу"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Сонгосон текстийн харагдах өнгийг тохируулахдаа энэ товчин дээр дарна уу"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Сонгосон текстийн тэмдэглэгдсэн өнгийг тохируулахдаа энэ товчин дээр дарна уу"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "Элементүүд"
 
@@ -823,7 +789,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Авто-догол мөр</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -848,7 +815,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Баруун захын зай</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>ТАВ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -991,7 +959,8 @@ msgid "_Display line numbers"
 msgstr "_Мөрийн дугаар харуулах"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "_Авто догол мөр идэвхижүүлэл"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -1015,22 +984,18 @@ msgid "_Right margin at column:"
 msgstr "Баганы _баруун захын зай"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "_ТАВын өргөн:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "_Хязгааргүй буцалт"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "Стандарт хэлбэрийн бичиг х_эрэглэх"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_Минут"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "Үй_лдэл(үүд)"
 
@@ -1181,47 +1146,47 @@ msgstr "Гедит"
 msgid "translator_credits"
 msgstr "Санлигийн Бадрал <badral@openmn.org>"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Баримтууд"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "Хүчингүй файлын нэр"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "Хүчингүй UTF-8 өгөгдөл"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s символик холбоосын мэдээлэл уншигдсангүй"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "Энэ файл хэт олон символик холбоостой байна."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "Гедит бичих горимд %s:-байрлалыг боловсруулж чадахгүй."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "Гедит бичих горимд ийм байрлалыг боловсруулж чадахгүй."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "Хүчингүй файлын нэр"
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1229,7 +1194,7 @@ msgstr ""
 "Дискэн дээр энэ файлыг хадгалах хангалттай зай алга.\n"
 "Дискэн дээрээ зай гаргаад ахин оролдоно уу."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1239,7 +1204,7 @@ msgstr ""
 "байна.  Та жижиг файл руу хадгалах эсвэл ийм хязгаарлалт байхгүй дискэн дээр "
 "хадгалахыг оролдоно уу."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "Хамгаалалтын хуулбар файл үүсгэгдсэнгүй."
 
@@ -1369,7 +1334,7 @@ msgstr "Ветьнам"
 msgid "Thai"
 msgstr "Тайланд"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "Мэдэгдэхгүй"
 
@@ -1416,35 +1381,35 @@ msgstr "Нээх файлууд сонгох"
 msgid "Select a filename to save"
 msgstr "Хадгалах файлын нэр сонгох"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "Файл нээх..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "»%s« баримтыг хадгалаж байна..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "»%s« баримт хадгалагдсангүй."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "»%s« баримт хадгалагдлаа."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "Доош хадгалах..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Та »%s« баримтад хийсэн өөрчилөлтүүдээ буцаахыг хүсэж байна уу?"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1454,13 +1419,13 @@ msgid_plural ""
 msgstr[0] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 msgstr[1] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 #, fuzzy
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1471,7 +1436,7 @@ msgid_plural ""
 msgstr[0] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 msgstr[1] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1481,12 +1446,15 @@ msgid_plural ""
 msgstr[0] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 msgstr[1] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:571
-#, fuzzy
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
+msgstr[1] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1497,84 +1465,382 @@ msgid_plural ""
 msgstr[0] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 msgstr[1] "Сүүлийн минутад баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
 
-#: gedit/gedit-file.c:592
-#, fuzzy, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
-msgstr[1] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Урвуулах"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "»%s« файлыг урвуулж байхад алдаа."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "\"%s\" баримт урвуулагдсангүй."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "\"%s\" баримт урвуулагдлаа."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "\"%s\" баримтыг урвуулж байна..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "stdin ээс өгөгдөл уншигдсангүй."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "Урвуулах файл:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "файл ачаалж байна:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "\"%s\" файлыг ачаалж байхад алдаа"
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "»%s« файл ачаалагдав"
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d файл ачаалагдав"
 msgstr[1] "%i файл ачаалагдав"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "»%s« файл ачаалагдав"
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "\"%s\" файл ачаалж байна..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "%d файл ачаалж байна..."
 msgstr[1] "%d файл ачаалж байна..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "»%s« файл нээгдсэнгүй"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"»%s« бол лавлах.\n"
+"\n"
+"Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "»%s« файл нээгдсэнгүй"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "»%s« файл нээгдсэнгүй, учир нь тэр гэмтсэн өгөгдөл агуулж байна."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "Гедит бичих горимд %s:-байрлалыг боловсруулж чадахгүй."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "Гедит бичих горимд %s:-байрлалыг боловсруулж чадахгүй."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь тэр хүчингүй форматтай өгөгдөл агуулж байна."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "Энэ файл хэт олон символик холбоостой байна."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь хэт олон файл нээгдсэн байна.\n"
+"\n"
+"Та файлуудаасаа заримыг нь хаагаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"»%s« файлыг нээх хангалттай сул зай санах ойд алга.Та зарим х.программуудаа "
+"хааж байгаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"»%s« файлыг урвуулж чадсангүй, учир нь хост »%s« олдсонгүй.\n"
+"\n"
+"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"»%s« нь хүчингүй байрлал.\n"
+"\n"
+"Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь хостын нэр хоосон байв.\n"
+"\n"
+"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"»%s« файл олдсонгүй.\n"
+"\n"
+"Та түүнийг зөв байрлалд байгаа эсэхийг нь нягтлаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь тэр хүчингүй өгөгдөл агуулж байна\n"
+"\n"
+"Та магад бинар файл нээхийг оролдсон байх."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь Гедит автомат тэмдэгт кодчилолоороо юу ч "
+"илрүүлсэнгүй.\n"
+"\n"
+"Та бинар файл нээхийг оролдоогүй эсэхээ шалгаад  'Файл нээх...' (эсвэл "
+"'Байрлал нээх') диалогоос тэмдэгт кодчилолыг сонгоод ахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "»%s« файл нээгдсэнгүй, учир нь тэр хэтэрхий том байна."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"»%2$s« тэмдэгт кодчилол бүхий »%1$s« файл нээгдсэнгүй.\n"
+"\n"
+"Та бинар файл нээхийг оролдоогүй эсэхээ шалгаад  'Файл нээх...' (эсвэл "
+"'Байрлал нээх') диалогоос зөв тэмдэгт кодчилолыг сонгоод ахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь тэр хүчингүй өгөгдөл агуулж байна\n"
+"\n"
+"Та магад бинар файл нээхийг оролдсон байх."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "»%s« файлыг урвуулж чадсангүй."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"»%s« файлыг урвуулж чадсангүй учир нь Гедит түүнийг олсонгүй.\n"
+"\n"
+"Магадгүй тэр саяхан устгагдсан байх."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь хэт олон файл нээгдсэн байна.\n"
+"\n"
+"Та файлуудаасаа заримыг нь хаагаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"»%s« файлыг нээх хангалттай сул зай санах ойд алга.Та зарим х.программуудаа "
+"хааж байгаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"»%s« файл нээгдсэнгүй, учир нь хостын нэр хоосон байв.\n"
+"\n"
+"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"»%s« файлыг урвуулж чадсангүй, учир нь тэр хүчингүй UTF-8 өгөгдөл агуулж "
+"байна\n"
+"\n"
+"Та магад бинар файл урвуулахыг оролдсон байх."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "Та нэргүй баримт урвуулж чадахгүй."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "»%s« файлыг хадгалаж чадсангүй."
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "»%s« файл хэдийнэ оршин байна."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"»%s« нь лавлах.\n"
+"\n"
+"Та байрлалаа зөв өгсөн эсэхийг нягтлаад дахин оролдоно уу."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "»%s« файл үүсгэгдсэнгүй."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"»%s« файлыг үүсгэж чадсангүй.\n"
+"\n"
+"Та өөртөө шаардлагатай хандах эрх байгаа эсэхээ нягтлана уу."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"»%s« файлыг үүсгэж чадсангүй.\n"
+"\n"
+"Файлын нэр хэтэрхий урт байна."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"»%s« файлыг үүсгэж чадсангүй.\n"
+"\n"
+"Лавлах бүрэлдхүүн файлын нэрэнд алга эсвэл өнчирсөн символик холбоос байна."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"»%s« файлыг хадгалах хангалттай зай дискэн дээр алга.\n"
+"\n"
+"Дискэн дээрээ зай гаргаад дахин оролдоно уу."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1586,46 +1852,46 @@ msgstr "ЗӨВХӨН-УНШИХ"
 msgid "_Move to New Window"
 msgstr "Шинэ цонх руу _шилжүүлэх"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "Юникод (ЮТФ-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "Нэр:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "MIME Төрөл:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "Кодчилол:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s'-г нээх"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "Шинэхэн хэрэглэсэн файл нээх"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(зөвхөн унших)"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "Энгийн"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "Энгийн онцгойлолын горим хэрэглэх"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s онцгойлолын горим хэрэглэх"
@@ -2075,390 +2341,7 @@ msgstr "_Цуцлах"
 msgid "_View"
 msgstr "_Харах"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"»%s« файл олдсонгүй.\n"
-"\n"
-"Та түүнийг зөв байрлалд байгаа эсэхийг нь нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "»%s« файл нээгдсэнгүй, учир нь тэр гэмтсэн өгөгдөл агуулж байна."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"»%s« файл нээгдсэнгүй , учир нь Гедит %s:-байрлалыг боловсруулж чадахгүй."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "»%s« файл нээгдсэнгүй"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь тэр хүчингүй форматтай өгөгдөл агуулж байна."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "»%s« файл нээгдсэнгүй, учир нь тэр хэтэрхий том байна."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"»%s« нь хүчингүй байрлал.\n"
-"\n"
-"Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "»%s« файл нээгдсэнгүй, учир нь хандалт бүтэлгүйтэв."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь хэт олон файл нээгдсэн байна.\n"
-"\n"
-"Та файлуудаасаа заримыг нь хаагаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"»%s« бол лавлах.\n"
-"\n"
-"Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"»%s« файлыг нээх хангалттай сул зай санах ойд алга.Та зарим х.программуудаа "
-"хааж байгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь хостын нэр хүчингүй байв.\n"
-"\n"
-"Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь хост »%s« олдсонгүй.\n"
-"\n"
-"Та өгсөн байрлалаа зөв эсэхийг нягтлаад мөн итгэмжилэгчийн тохируулгаа зөв "
-"эсэхийг шалгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь хостын нэр хоосон байв.\n"
-"\n"
-"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь бүртгүүлэх оролдлого нурлаа.\n"
-"Та байрлалаа зөв өгсөн эсэхийг нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь тэр хүчингүй өгөгдөл агуулж байна\n"
-"\n"
-"Та магад бинар файл нээхийг оролдсон байх."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "»%s« файл нээгдсэнгүй."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"»%s« файл нээгдсэнгүй, учир нь Гедит автомат тэмдэгт кодчилолоороо юу ч "
-"илрүүлсэнгүй.\n"
-"\n"
-"Та бинар файл нээхийг оролдоогүй эсэхээ шалгаад  'Файл нээх...' (эсвэл "
-"'Байрлал нээх') диалогоос тэмдэгт кодчилолыг сонгоод ахин оролдоно уу."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"»%2$s« тэмдэгт кодчилол бүхий »%1$s« файл нээгдсэнгүй.\n"
-"\n"
-"Та бинар файл нээхийг оролдоогүй эсэхээ шалгаад  'Файл нээх...' (эсвэл "
-"'Байрлал нээх') диалогоос зөв тэмдэгт кодчилолыг сонгоод ахин оролдоно уу."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"»%s« файл нээгдсэнгүй.\n"
-"\n"
-"%s."
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "»%s« файлыг хадгалаж чадсангүй."
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"»%s« файлыг хадгалаж чадсангүй.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй учир нь Гедит түүнийг олсонгүй.\n"
-"\n"
-"Магадгүй тэр саяхан устгагдсан байх."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй учир нь тэр гэмтэлтэй өгөгдөл агуулж байна."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй учир нь Гедит %s:-байрлалыг боловсруулж "
-"чадахгүй."
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "»%s« файлыг урвуулж чадсангүй."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй учир нь тэр хүчингүй формат агуулсан байна."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "»%s« файлыг урвуулж чадсангүй, учир нь тэр хэтэрхий том байна."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "»%s« файлыг урвуулж чадсангүй, учир нь хандалт бүтэлгүйтэв."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй, учир нь хэт олон файл нээгдсэн байна.\n"
-"\n"
-"Та файлуудаасаа заримыг нь хаагаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"»%s« файлыг урвуулахад хангалттай сул зай санах ойд алга.Та зарим х."
-"программуудаа хааж байгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй, учир нь хост »%s« олдсонгүй.\n"
-"\n"
-"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй, учир нь хостын хоосон байв.\n"
-"\n"
-"Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "»%s« файлыг урвуулж чадсангүй, учир нь бүртгүүлэх оролдлого нурлаа."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"»%s« файлыг урвуулж чадсангүй, учир нь тэр хүчингүй UTF-8 өгөгдөл агуулж "
-"байна\n"
-"\n"
-"Та магад бинар файл урвуулахыг оролдсон байх."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "Та нэргүй баримт урвуулж чадахгүй."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "»%s« файл хэдийнэ оршин байна."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"»%s« нь лавлах.\n"
-"\n"
-"Та байрлалаа зөв өгсөн эсэхийг нягтлаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"»%s« файлыг үүсгэж чадсангүй.\n"
-"\n"
-"Та өөртөө шаардлагатай хандах эрх байгаа эсэхээ нягтлана уу."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"»%s« файлыг үүсгэж чадсангүй.\n"
-"\n"
-"Файлын нэр хэтэрхий урт байна."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"»%s« файлыг үүсгэж чадсангүй.\n"
-"\n"
-"Лавлах бүрэлдхүүн файлын нэрэнд алга эсвэл өнчирсөн символик холбоос байна."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"»%s« файлыг хадгалах хангалттай зай дискэн дээр алга.\n"
-"\n"
-"Дискэн дээрээ зай гаргаад дахин оролдоно уу."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "»%s« файл үүсгэгдсэнгүй."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr " (хүчингүй юникод)"
 
@@ -2468,16 +2351,18 @@ msgstr " (хүчингүй юникод)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "   Мөр %d, Баг %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr "  ДАР"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr "  ОРХ"
 
@@ -3067,11 +2952,13 @@ msgid "The document is empty."
 msgstr "Баримт текст агуулаагүй байна"
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "Баримт алдаатай үг агуулаагүй байна."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "Баримт алдаатай үг агуулаагүй байна."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3182,6 +3069,167 @@ msgstr "Форматыг _асуух"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Хэвшмэл форматыг хэрэглэх"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай "
+#~ "устана!"
+#~ msgstr[1] ""
+#~ "Хэрвээ та хадгалахгүй бол сүүлийн цагт хийсэн өөрчилөлтүүд найдвартай "
+#~ "устана!"
+
+#~ msgid "Body font picker"
+#~ msgstr "Эх биеийн бичиг сонгогч"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "Баримтын биеийг хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин "
+#~ "дээр дарна уу"
+
+#~ msgid "Page headers font picker"
+#~ msgstr "Хуудсын толгойн фонт сонгогч"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "Толгойн хэсэгийг хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин "
+#~ "дээр дарна уу"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "Мөрийн дугаарын бичгийн хэв сонгогч"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "Мөрийн дугаар хэвлэхэд хэрэглэгдэх бичгийг тохируулахдаа та энэ товчин "
+#~ "дээр дарна уу"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "_ТАВын өргөн:"
+
+#, fuzzy
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
+#~ msgstr[1] "Сүүлийн цагт баримтад хийсэн өөрчилөлтүүд сэргэхээргүй устана."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "»%s« файл нээгдсэнгүй , учир нь Гедит %s:-байрлалыг боловсруулж чадахгүй."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "»%s« файл нээгдсэнгүй, учир нь хандалт бүтэлгүйтэв."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "»%s« файл нээгдсэнгүй, учир нь хостын нэр хүчингүй байв.\n"
+#~ "\n"
+#~ "Та өгсөн байрлалаа зөв эсэхийг нягтлаад дахин оролдоно уу."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "»%s« файл нээгдсэнгүй, учир нь хост »%s« олдсонгүй.\n"
+#~ "\n"
+#~ "Та өгсөн байрлалаа зөв эсэхийг нягтлаад мөн итгэмжилэгчийн тохируулгаа "
+#~ "зөв эсэхийг шалгаад дахин оролдоно уу."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "»%s« файл нээгдсэнгүй, учир нь бүртгүүлэх оролдлого нурлаа.\n"
+#~ "Та байрлалаа зөв өгсөн эсэхийг нягтлаад дахин оролдоно уу."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "»%s« файл нээгдсэнгүй."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "»%s« файл нээгдсэнгүй.\n"
+#~ "\n"
+#~ "%s."
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "»%s« файлыг хадгалаж чадсангүй.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулж чадсангүй учир нь тэр гэмтэлтэй өгөгдөл агуулж байна."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулж чадсангүй учир нь Гедит %s:-байрлалыг боловсруулж "
+#~ "чадахгүй."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулж чадсангүй учир нь тэр хүчингүй формат агуулсан байна."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "»%s« файлыг урвуулж чадсангүй, учир нь тэр хэтэрхий том байна."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "»%s« файлыг урвуулж чадсангүй, учир нь хандалт бүтэлгүйтэв."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулж чадсангүй, учир нь хэт олон файл нээгдсэн байна.\n"
+#~ "\n"
+#~ "Та файлуудаасаа заримыг нь хаагаад дахин оролдоно уу."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулахад хангалттай сул зай санах ойд алга.Та зарим х."
+#~ "программуудаа хааж байгаад дахин оролдоно уу."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "»%s« файлыг урвуулж чадсангүй, учир нь хостын хоосон байв.\n"
+#~ "\n"
+#~ "Та итгэмжилэгчийн тохируулгаа зөв эсэхийг шалгаад дахин оролдоно уу."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr "»%s« файлыг урвуулж чадсангүй, учир нь бүртгүүлэх оролдлого нурлаа."
 
 #~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 #~ msgstr "plugin-manager.glade2 олдсонгүй; Та Гедит -г шинээр суулгана уу.\n"

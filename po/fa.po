@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
+"POT-Creation-Date: 2004-12-21 20:01+0100\n"
 "PO-Revision-Date: 2004-11-15 15:59+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@bamdad.org>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -44,7 +44,7 @@ msgstr "کارخانه‌ی خودکارسازی gedit"
 msgid "Edit text files"
 msgstr "ویرایش پرونده‌های متنی"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
 msgid "Text Editor"
 msgstr "ویرایشگر متن"
 
@@ -498,11 +498,16 @@ msgstr ""
 "استفاده بشود یا نه.اگر این گزینه خاموش باشد، قلمی که در گزینه‌ی \"Editor Font"
 "\" آمده است به جای قلم سیستم مورد استفاده قرار خواهد گرفت."
 
-#: data/gedit.schemas.in.h:79
+#. Translators: This is the list of encodings shown by default in the Character Coding
+#. menu in open/save file selector. Only recognized encodings are displayed.
+#: data/gedit.schemas.in.h:81
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:80
+#. Translators: This is the sorted list of encodings used by gedit
+#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. Only recognized encodings are used.
+#: data/gedit.schemas.in.h:85
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -582,9 +587,12 @@ msgid_plural ""
 msgstr[0] "اگر ذخیره نکنید، تغییرات‮ %ld دقیقه‌ی اخیر مطمئناً از دست خواهد رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#, fuzzy
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#, fuzzy, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgstr "اگر ذخیره نکنید، تغییرات یک ساعت اخیر مطمئناً از دست خواهد رفت."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "اگر ذخیره نکنید، تغییرات یک ساعت اخیر مطمئناً از دست خواهد رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, fuzzy, c-format
@@ -596,14 +604,6 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] ""
 "اگر ذخیره نکنید، تغییرات یک ساعت و  %Id دقیقه‌ی اخیر مطمئناً از دست خواهد رفت."
-
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
-msgid ""
-"If you don't save, changes from the last %d hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "اگر ذخیره نکنید، تغییرات   %Id ساعت اخیر مطمئناً از دست خواهد رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -693,35 +693,6 @@ msgstr "کدگذاری‌های نویسه‌ها"
 msgid "E_ncodings shown in menu:"
 msgstr "کد_گذاری‌هایی که در منو نمایش داده می‌شود:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:428
-msgid "Body font picker"
-msgstr "انتخاب‌گر قلم بدنه"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:429
-msgid ""
-"Push this button to select the font to be used to print the body of the "
-"document"
-msgstr ""
-"برای انتخاب قلم مورد استفاده برای چاپ بدنه‌ی نوشتار این دکمه را فشار دهید."
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:430
-msgid "Page headers font picker"
-msgstr "انتخاب‌گر قلم سرصفحه"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:431
-msgid ""
-"Push this button to select the font to be used to print the page headers"
-msgstr "برای انتخاب قلم مورد استفاده برای چاپ سرصفحه‌ها این دکمه را فشار دهید"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:432
-msgid "Line numbers font picker"
-msgstr "انتخاب‌گر قلم شماره‌ی سطر"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:433
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"برای انتخاب قلم مورد استفاده برای چاپ شماره‌ی سطر‌ها این دکمه را فشار دهید"
-
 #: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "متصل شونده"
@@ -752,31 +723,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "پرونده‌ی انتخاب شده قابل اجرا نیست."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid "Push this button to select the font to be used by the editor"
 msgstr "برای انتخاب قلم مورد استفاده‌ی ویرایش‌گر این دکمه را فشار دهید"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:681
+#: gedit/dialogs/gedit-preferences-dialog.c:687
 msgid "Push this button to configure text color"
 msgstr "برای تنظیم رنگ متن این دکمه را فشار دهید"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:683
+#: gedit/dialogs/gedit-preferences-dialog.c:689
 msgid "Push this button to configure background color"
 msgstr "برای تنظیم رنگ پس‌زمینه این دکمه را فشار دهید"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:691
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "برای تنظیم رنگ نمایش متن انتخاب شده این دکمه را فشار دهید"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:688
+#: gedit/dialogs/gedit-preferences-dialog.c:694
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "برای تنظیم رنگ علامت‌گذاری متن انتخاب شده این دکمه را فشار دهید"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1138
+#: gedit/dialogs/gedit-preferences-dialog.c:1144
 msgid "Elements"
 msgstr "اجزاء"
 
@@ -787,7 +758,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Auto Indentation</b>"
+#, fuzzy
+msgid "<b>Automatic Indentation</b>"
 msgstr "تورفتگی خودکار"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
@@ -812,7 +784,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>حاشیه‌ی راست</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<b>Tabs</b>"
+#, fuzzy
+msgid "<b>Tab Stops</b>"
 msgstr "<b>جدول بندی</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
@@ -955,7 +928,8 @@ msgid "_Display line numbers"
 msgstr "نمایش _شماره سطرها"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "_Enable auto indentation"
+#, fuzzy
+msgid "_Enable automatic indentation"
 msgstr "به کار انداختن _تورفتگی خودکار"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
@@ -979,22 +953,18 @@ msgid "_Right margin at column:"
 msgstr "حاشیه‌ی _راست از ستون:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "_Tabs width:"
-msgstr "عرض خانه‌های _جدول"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
 msgstr "برگردان _نامحدود"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Use default theme font"
 msgstr "استفاده از قلم _تم پیش‌فرض"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_minutes"
 msgstr "_دقیقه به طور خودکار ذخیره شود"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "act_ions"
 msgstr "عم_ل"
 
@@ -1147,47 +1117,47 @@ msgstr ""
 "روزبه پورنادر\n"
 "میلاد زکریا"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "نوشتارها"
 
-#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
+#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
 msgstr "نام پرونده غیر مجاز است"
 
-#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
+#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
 msgid "Invalid UTF-8 data"
 msgstr "داده‌های UTF-8 غیر مجازند"
 
-#: gedit/gedit-document.c:1696
+#: gedit/gedit-document.c:1657
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "خواندن اطلاعات پیوند نمادین برای %s مقدور نیست"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1703
 msgid "The file has too many symbolic links."
 msgstr "تعداد پیوندهای نمادین زیاد است."
 
-#: gedit/gedit-document.c:1800
+#: gedit/gedit-document.c:1785
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit نمی‌تواند با %sکار کند.: مکان در حالت نوشتن است."
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit نمی‌تواند با ابن نوع مکان در حالت نوشتن کار کند."
 
-#: gedit/gedit-document.c:1820
+#: gedit/gedit-document.c:1805
 msgid "Invalid filename."
 msgstr "نام پرونده نامعتبر است."
 
-#: gedit/gedit-document.c:1934
+#: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1195,7 +1165,7 @@ msgstr ""
 "برای ذخیره‌ی پرونده روی دیسک به قدر کافی فضا موجود نیست.\n"
 "لطفاً کمی فضا روی دیسک آزاد کنید و دوباره امتحان کنید."
 
-#: gedit/gedit-document.c:1939
+#: gedit/gedit-document.c:1924
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1205,7 +1175,7 @@ msgstr ""
 "لطفاً سعی کنید پرونده‌ی کوچک‌تری را ذخیره کنید یا آن را روی دیسکی ذخیره کنید  "
 "که این محدودیت را ندارد."
 
-#: gedit/gedit-document.c:1983
+#: gedit/gedit-document.c:1968
 msgid "Could not create a backup file."
 msgstr "ایجاد پرونده‌ی پشتیبان ممکن نیست."
 
@@ -1335,7 +1305,7 @@ msgstr "ویتنامی"
 msgid "Thai"
 msgstr "تایلندی"
 
-#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+#: gedit/gedit-encodings.c:433
 msgid "Unknown"
 msgstr "نامعلوم"
 
@@ -1383,35 +1353,35 @@ msgstr "فایل‌هایی که می‌خواهید باز کنید را انت
 msgid "Select a filename to save"
 msgstr "نام پرونده برای ذخیره‌سازی را  انتخاب کنید"
 
-#: gedit/gedit-file.c:190
+#: gedit/gedit-file.c:191
 msgid "Open File..."
 msgstr "باز کردن پرونده..."
 
-#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
+#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "ذخیره سازی نوشتار \"%s\"..."
 
-#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
+#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "نوشتار \"%s\" ذخیره نشد."
 
-#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
+#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "نوشتار \"%s\" ذخیره شد."
 
-#: gedit/gedit-file.c:369
+#: gedit/gedit-file.c:371
 msgid "Save as..."
 msgstr "ذخیره به نام..."
 
-#: gedit/gedit-file.c:522
+#: gedit/gedit-file.c:525
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "آیا تغییرات ذخیره نشده‌ی نوشتار \"%s\" به آن بازگردانده شوند؟"
 
-#: gedit/gedit-file.c:531
+#: gedit/gedit-file.c:534
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1421,13 +1391,13 @@ msgid_plural ""
 msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در %ld ثانیه‌ی اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:540
+#: gedit/gedit-file.c:543
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "تغییرات اعمال شده روی نوشتار در یک دقیقه‌ی اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:549
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1439,7 +1409,7 @@ msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در یک دقیقه و %ld ثانیه‌ی اخیر برای همیشه از دست "
 "خواهند رفت."
 
-#: gedit/gedit-file.c:556
+#: gedit/gedit-file.c:559
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1449,12 +1419,15 @@ msgid_plural ""
 msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در %ld دقیقه‌ی اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:571
+#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr ""
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در یک ساعت اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:577
+#: gedit/gedit-file.c:580
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1466,82 +1439,381 @@ msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در یک ساعت و %Id دقیقه‌ی اخیر برای همیشه از دست "
 "خواهند رفت."
 
-#: gedit/gedit-file.c:592
-#, c-format
-msgid ""
-"Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"تغییرات اعمال شده روی نوشتار در %Id ساعت اخیر برای همیشه از دست خواهند رفت."
-
-#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "بازگشت"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:661
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "خطا در بازگرداندن نوشتار \"%s\""
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "نوشتار \"%s\" بازگردانده نشد."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "نوشتار \"%s\" بازگردانده شد."
 
-#: gedit/gedit-file.c:697
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "در حال بازگرداندن نوشتار \"%s\" ..."
 
-#: gedit/gedit-file.c:820
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "خواندن داده‌ها از stdin مقدور نیست."
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Reverting file:"
 msgstr "در حال بازگرداندن پرونده:"
 
-#: gedit/gedit-file.c:907
+#: gedit/gedit-file.c:911
 msgid "Loading file:"
 msgstr "در حال بار کردن پرونده:"
 
-#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
+#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "خطا در بار کردن پرونده‌ی \"%s\""
 
-#: gedit/gedit-file.c:1108
+#: gedit/gedit-file.c:1112
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "پرونده‌ی \"%s\""
 
-#: gedit/gedit-file.c:1203
+#: gedit/gedit-file.c:1207
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%Id پرونده بارگذاری شدند"
 
-#: gedit/gedit-file.c:1262
+#: gedit/gedit-file.c:1266
 #, fuzzy, c-format
 msgid "Created file \"%s\""
 msgstr "پرونده‌ی \"%s\""
 
-#: gedit/gedit-file.c:1280
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "در حال بار کردن پرونده‌ی \"%s\" ..."
 
-#: gedit/gedit-file.c:1431
+#: gedit/gedit-file.c:1437
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "در حال بار کردن ?Id پرونده..."
+
+#: gedit/gedit-io-error-dialogs.c:84
+#, fuzzy, c-format
+msgid "Could not find the file \"%s\""
+msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست"
+
+#: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
+#: gedit/gedit-io-error-dialogs.c:150
+#, fuzzy
+msgid "Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" یک شاخه است.\n"
+"\n"
+"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
+#: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
+#: gedit/gedit-io-error-dialogs.c:135 gedit/gedit-io-error-dialogs.c:141
+#: gedit/gedit-io-error-dialogs.c:155 gedit/gedit-io-error-dialogs.c:171
+#: gedit/gedit-io-error-dialogs.c:215 gedit/gedit-io-error-dialogs.c:223
+#: gedit/gedit-io-error-dialogs.c:231 gedit/gedit-io-error-dialogs.c:239
+#: gedit/gedit-io-error-dialogs.c:246 gedit/gedit-io-error-dialogs.c:252
+#: gedit/gedit-io-error-dialogs.c:292 gedit/gedit-io-error-dialogs.c:313
+#: gedit/gedit-io-error-dialogs.c:341
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست"
+
+#: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
+#, fuzzy
+msgid "The file contains corrupted data."
+msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های مخدوش است."
+
+#: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations."
+msgstr "gedit نمی‌تواند با %sکار کند.: مکان در حالت نوشتن است."
+
+#: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
+#, fuzzy
+msgid "gedit cannot handle this location."
+msgstr "gedit نمی‌تواند با %sکار کند.: مکان در حالت نوشتن است."
+
+#: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
+#, fuzzy
+msgid "The file contains data in an invalid format."
+msgstr ""
+"باز کردن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌هایی با قالب نامعتبر است."
+
+#: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
+#, fuzzy
+msgid "The file is too big."
+msgstr "تعداد پیوندهای نمادین زیاد است."
+
+#: gedit/gedit-io-error-dialogs.c:128
+#, c-format
+msgid "\"%s\" is not a valid location"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
+msgid "Access was denied."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
+msgid ""
+"there are too many open files. Please, close some open file and try again."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون تعداد پرونده‌های باز زیاد است.\n"
+"\n"
+"لطفاً چند پرونده‌ی باز را ببندید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
+#, c-format
+msgid "\"%s\" is a directory"
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
+msgid ""
+"Not enough available memory to open the file. Please, close some running "
+"application and try again."
+msgstr ""
+"حافظه‌ی موجود برای باز کردن پرونده‌ی \"%s\" کافس نیست. لطفاً چند برنامه‌ی در حال "
+"اجرا را ببندید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
+#, fuzzy, c-format
+msgid ""
+"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون میزبان \"%s\" پیدا نمی‌شود.\n"
+"\n"
+"لطفاً تنظیمات وکیل خود را تصحیح کنید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
+#: gedit/gedit-io-error-dialogs.c:217
+#, fuzzy
+msgid ""
+"Host name was invalid. Please, check that you typed the location correctly "
+"and try again."
+msgstr ""
+"\"%s\" یک مکان معتبرنیست.\n"
+"\n"
+"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:225
+#, fuzzy
+msgid ""
+"Host name was empty. Please, check that your proxy settings are correct and "
+"try again."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان خالی است.\n"
+"\n"
+"لطفا امتحان کنید که تنظیمات وکیلتان درست است و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:233
+#, fuzzy
+msgid ""
+"Attempt to log in failed. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"پرونده‌ی \"%s\" پیدا نشد.\n"
+"\n"
+"لطفاً کنترل کنید که مکان آن را درست تایپ کرده باشید."
+
+#: gedit/gedit-io-error-dialogs.c:241
+#, fuzzy
+msgid ""
+"The file contains invalid data. Probably, you are trying to open a binary "
+"file."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های نامعتبر است.\n"
+"\n"
+"احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را باز کنید."
+
+#: gedit/gedit-io-error-dialogs.c:248
+msgid "The file you are trying to open is not a regular file."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:294
+#, fuzzy
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"باز کردن پرونده‌ی \"%s\" مقدور نیست چون gedit نتوانست به طور خودکار کدگذاری "
+"نویسه‌ها را آشکار کند.\n"
+"\n"
+"لطفاً اطمینان حاصل کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و با "
+"انتخاب کدگذاری نویسه‌ها در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») "
+"یک بار دیگر سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" using the %s character coding"
+msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست چون خیلی بزرگ است."
+
+#: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
+msgid ""
+"Please, check that you are not tryingto open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"باز کردن پرونده‌ی \"%s\" با استفاده از کدگذاری نویسه‌ی %s مقدور نیست.\n"
+"\n"
+"لطفاً اطمینان حاصل کنید که سعی نمی‌کنید یک پرونده‌ی دودویی را باز کنید و "
+"کدگذاری نویسه‌ی درست را در محاوره‌ی؛باز کردن پرونده...« (یا «باز کردن مکان») "
+"انتخاب کرده‌اید."
+
+#: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
+msgid ""
+"The file contains data in an invalid data. Probably, you are trying to open "
+"a binary file."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های نامعتبر است.\n"
+"\n"
+"احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را باز کنید."
+
+#: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
+#: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
+#: gedit/gedit-io-error-dialogs.c:435 gedit/gedit-io-error-dialogs.c:441
+#: gedit/gedit-io-error-dialogs.c:447 gedit/gedit-io-error-dialogs.c:454
+#: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
+#: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
+#: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\""
+msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست ."
+
+#: gedit/gedit-io-error-dialogs.c:399
+#, fuzzy
+msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+msgstr ""
+"برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون gedit نمی‌تواند آن را پیدا کند.\n"
+"\n"
+"شاید پرونده اخیراً حذف شده باشد."
+
+#: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some open file and try again."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون تعداد پرونده‌های باز زیاد است.\n"
+"\n"
+"لطفاً چند پرونده‌ی باز را ببندید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
+msgid ""
+"Not enough available memory. Please, close some running application and try "
+"again."
+msgstr ""
+"حافظه‌ی موجود برای باز کردن پرونده‌ی \"%s\" کافس نیست. لطفاً چند برنامه‌ی در حال "
+"اجرا را ببندید و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:499
+#, fuzzy
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان خالی است.\n"
+"\n"
+"لطفا امتحان کنید که تنظیمات وکیلتان درست است و دوباره سعی کنید."
+
+#: gedit/gedit-io-error-dialogs.c:507
+msgid "Attempt to log in failed."
+msgstr ""
+
+#: gedit/gedit-io-error-dialogs.c:513
+#, fuzzy
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های UTF-8 نامعتبر است.\n"
+"\n"
+"احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را برگردانید."
+
+#: gedit/gedit-io-error-dialogs.c:520
+msgid "It is not possible to revert an Untitled document."
+msgstr "برگرداندن نوشتار بدون اسم ممکن نیست."
+
+#: gedit/gedit-io-error-dialogs.c:607
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\""
+msgstr "ذخیره‌ی پرونده‌ی \"%s\" مقدور نیست"
+
+#: gedit/gedit-io-error-dialogs.c:656
+#, fuzzy, c-format
+msgid "The file \"%s\" already exists"
+msgstr "پرونده‌ی \"%s\" از قبل موجود است."
+
+#: gedit/gedit-io-error-dialogs.c:662
+#, fuzzy
+msgid "Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" یک شاخه است.\n"
+"\n"
+"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید."
+
+#: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
+#: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
+#: gedit/gedit-io-error-dialogs.c:694
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\""
+msgstr "ایجاد پرونده‌ی \"%s\"‌ مقدور نیست ."
+
+#: gedit/gedit-io-error-dialogs.c:670
+#, fuzzy
+msgid "Make sure you have the appropriate write permissions."
+msgstr ""
+"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
+"\n"
+"اطمینان حاصل کنید که اجازه‌ی نوشتن مناسب را داشته باشید."
+
+#: gedit/gedit-io-error-dialogs.c:676
+#, fuzzy
+msgid "The file name is too long."
+msgstr ""
+"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
+"\n"
+"نام پرونده طولانی است."
+
+#: gedit/gedit-io-error-dialogs.c:682
+#, fuzzy
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
+"\n"
+"یک جزء شاخه در نام پرونده وجود ندارد یا یک پیوند نمادین نامتصل است."
+
+#: gedit/gedit-io-error-dialogs.c:689
+#, fuzzy
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"فضای دیسک برای ایجاد پرونده‌ی \"%s\" کافی نیست.\n"
+"\n"
+"لطفاً مقداری فضا روی دیسک آزاد کنید و دوباره سعی کنید."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1553,46 +1825,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "انتقال به پنجره‌ی جدید"
 
-#: gedit/gedit-mdi-child.c:780
+#: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
 msgstr "یونی‌کد (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:790
+#: gedit/gedit-mdi-child.c:746
 msgid "Name:"
 msgstr "نام:"
 
-#: gedit/gedit-mdi-child.c:791
+#: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
 msgstr "نوع ‏MIME‏‏:"
 
-#: gedit/gedit-mdi-child.c:792
+#: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "کدگذاری:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "باز کردن «%s»"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "باز کردن پرونده‌ای که اخیراً به کار رفته"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 #, fuzzy
 msgid "Read Only"
 msgstr "(فقط خواندنی("
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "عادی"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "استفاده از حالت پررنگ عادی"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "استفاده از حالت پررنگ %s"
@@ -2042,392 +2314,7 @@ msgstr "برگردان"
 msgid "_View"
 msgstr "نمایش"
 
-#: gedit/gedit-utils.c:421
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"پرونده‌ی \"%s\" پیدا نشد.\n"
-"\n"
-"لطفاً کنترل کنید که مکان آن را درست تایپ کرده باشید."
-
-#: gedit/gedit-utils.c:429
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های مخدوش است."
-
-#: gedit/gedit-utils.c:440
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون gedit نمی‌تواند با %s کار کند: موقعیت."
-
-#: gedit/gedit-utils.c:446
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست"
-
-#: gedit/gedit-utils.c:456
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
-"باز کردن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌هایی با قالب نامعتبر است."
-
-#: gedit/gedit-utils.c:463
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "باز کردن پرونده‌ی \"%s\" مقدور نیست چون خیلی بزرگ است."
-
-#: gedit/gedit-utils.c:470
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" یک مکان معتبرنیست.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:478
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون دسترسی مجاز نیست."
-
-#: gedit/gedit-utils.c:485
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون تعداد پرونده‌های باز زیاد است.\n"
-"\n"
-"لطفاً چند پرونده‌ی باز را ببندید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:493
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" یک شاخه است.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:501
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"حافظه‌ی موجود برای باز کردن پرونده‌ی \"%s\" کافس نیست. لطفاً چند برنامه‌ی در حال "
-"اجرا را ببندید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان نامعتبر است.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:546
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون میزبان \"%s\" پیدا نشد.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و تنظیمات وکیلتان درست است و "
-"دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:571
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان خالی است.\n"
-"\n"
-"لطفا امتحان کنید که تنظیمات وکیلتان درست است و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:580
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون  اقدام به ورود به سیستم با شکست مواجه "
-"شد.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده باشید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"بار کذدن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های نامعتبر است.\n"
-"\n"
-"احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را باز کنید."
-
-#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "بار کذدن پرونده‌ی \"%s\" مقدور نیست."
-
-#: gedit/gedit-utils.c:638
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit has not been able to "
-"automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again "
-"selecting a character coding in the 'Open File...' (or 'Open Location') "
-"dialog."
-msgstr ""
-"باز کردن پرونده‌ی \"%s\" مقدور نیست چون gedit نتوانست به طور خودکار کدگذاری "
-"نویسه‌ها را آشکار کند.\n"
-"\n"
-"لطفاً اطمینان حاصل کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و با "
-"انتخاب کدگذاری نویسه‌ها در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») "
-"یک بار دیگر سعی کنید."
-
-#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
-#, c-format
-msgid ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File...' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"باز کردن پرونده‌ی \"%s\" با استفاده از کدگذاری نویسه‌ی %s مقدور نیست.\n"
-"\n"
-"لطفاً اطمینان حاصل کنید که سعی نمی‌کنید یک پرونده‌ی دودویی را باز کنید و "
-"کدگذاری نویسه‌ی درست را در محاوره‌ی؛باز کردن پرونده...« (یا «باز کردن مکان») "
-"انتخاب کرده‌اید."
-
-#: gedit/gedit-utils.c:700
-#, c-format
-msgid ""
-"Could not open the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"باز کردن پرونده‌ی \"%s\" مقدور نیست.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:752
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "ذخیره‌ی پرونده‌ی \"%s\" مقدور نیست"
-
-#: gedit/gedit-utils.c:756
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"ذخیره‌ی پرونده‌ی \"%s\" مقدور نیست.\n"
-"\n"
-"%s"
-
-#: gedit/gedit-utils.c:806
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون gedit نمی‌تواند آن را پیدا کند.\n"
-"\n"
-"شاید پرونده اخیراً حذف شده باشد."
-
-#: gedit/gedit-utils.c:813
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون حاوی داده‌های مخدوش است."
-
-#: gedit/gedit-utils.c:824
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون gedit نمی ‌تواند با %s کار کند: مکان"
-
-#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
-#: gedit/gedit-utils.c:984
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست ."
-
-#: gedit/gedit-utils.c:840
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون حاوی داده‌هایی با قالب نامعتبر است."
-
-#: gedit/gedit-utils.c:847
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون بزرگ است."
-
-#: gedit/gedit-utils.c:854
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون دسترسی مجاز نیست."
-
-#: gedit/gedit-utils.c:861
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون تعداد پرونده‌های باز زیاد است.\n"
-"\n"
-"لطفاً چند پرونده‌ی باز را ببندید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:869
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"حافظه‌ی موجود برای برگرداندن پرونده‌ی \"%s\" کافی نیست. لطفاً چند برنامه‌ی در "
-"حال اجرا را ببندید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:908
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون میزبان \"%s\" پیدا نمی‌شود.\n"
-"\n"
-"لطفاً تنظیمات وکیل خود را تصحیح کنید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:923
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان خالی است.\n"
-"\n"
-"لطفاً تنظیمات وکیل خود را تصحیح کنید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:930
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون تلاش برای ورود به سیستم شکست خورد."
-
-#: gedit/gedit-utils.c:937
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"برگرداندن پرونده‌ی \"%s\" مقدور نیست چون حاوی داده‌های UTF-8 نامعتبر است.\n"
-"\n"
-"احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را برگردانید."
-
-#: gedit/gedit-utils.c:946
-msgid "It is not possible to revert an Untitled document."
-msgstr "برگرداندن نوشتار بدون اسم ممکن نیست."
-
-#: gedit/gedit-utils.c:1035
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "پرونده‌ی \"%s\" از قبل موجود است."
-
-#: gedit/gedit-utils.c:1041
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" یک شاخه است.\n"
-"\n"
-"لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید."
-
-#: gedit/gedit-utils.c:1050
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
-"\n"
-"اطمینان حاصل کنید که اجازه‌ی نوشتن مناسب را داشته باشید."
-
-#: gedit/gedit-utils.c:1057
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
-"\n"
-"نام پرونده طولانی است."
-
-#: gedit/gedit-utils.c:1064
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"ایجاد پرونده‌ی \"%s\" مقدور نیست.\n"
-"\n"
-"یک جزء شاخه در نام پرونده وجود ندارد یا یک پیوند نمادین نامتصل است."
-
-#: gedit/gedit-utils.c:1073
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"فضای دیسک برای ایجاد پرونده‌ی \"%s\" کافی نیست.\n"
-"\n"
-"لطفاً مقداری فضا روی دیسک آزاد کنید و دوباره سعی کنید."
-
-#: gedit/gedit-utils.c:1079
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "ایجاد پرونده‌ی \"%s\"‌ مقدور نیست ."
-
-#: gedit/gedit-utils.c:1416
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2437,16 +2324,18 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:663
+#. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+#. use abbreviations if possible to avoid space problems.
+#: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "سطر %Id، ستون %Id"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:703
 msgid "  OVR"
 msgstr ""
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:705
 msgid "  INS"
 msgstr ""
 
@@ -3025,11 +2914,13 @@ msgid "The document is empty."
 msgstr "نوشتار خالی است."
 
 #: plugins/spell/spell.c:643
-msgid "The selected text does not contain mispelled words."
+#, fuzzy
+msgid "The selected text does not contain misspelled words."
 msgstr "متن انتخاب شده غلط املایی ندارد."
 
 #: plugins/spell/spell.c:644
-msgid "The document does not contain mispelled words."
+#, fuzzy
+msgid "The document does not contain misspelled words."
 msgstr "نوشتار غلط املایی ندارد."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
@@ -3139,6 +3030,164 @@ msgstr "درخواست قالب"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "استفاده از قالب سفارشی"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you don't save, changes from the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "If you don't save, changes from the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "اگر ذخیره نکنید، تغییرات   %Id ساعت اخیر مطمئناً از دست خواهد رفت."
+
+#~ msgid "Body font picker"
+#~ msgstr "انتخاب‌گر قلم بدنه"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the body of the "
+#~ "document"
+#~ msgstr ""
+#~ "برای انتخاب قلم مورد استفاده برای چاپ بدنه‌ی نوشتار این دکمه را فشار دهید."
+
+#~ msgid "Page headers font picker"
+#~ msgstr "انتخاب‌گر قلم سرصفحه"
+
+#~ msgid ""
+#~ "Push this button to select the font to be used to print the page headers"
+#~ msgstr ""
+#~ "برای انتخاب قلم مورد استفاده برای چاپ سرصفحه‌ها این دکمه را فشار دهید"
+
+#~ msgid "Line numbers font picker"
+#~ msgstr "انتخاب‌گر قلم شماره‌ی سطر"
+
+#~ msgid "Push this button to select the font to be used to print line numbers"
+#~ msgstr ""
+#~ "برای انتخاب قلم مورد استفاده برای چاپ شماره‌ی سطر‌ها این دکمه را فشار دهید"
+
+#~ msgid "_Tabs width:"
+#~ msgstr "عرض خانه‌های _جدول"
+
+#~ msgid ""
+#~ "Changes made to the document in the last %d hour will be permanently lost."
+#~ msgid_plural ""
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr[0] ""
+#~ "تغییرات اعمال شده روی نوشتار در %Id ساعت اخیر برای همیشه از دست خواهند "
+#~ "رفت."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+#~ msgstr ""
+#~ "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون gedit نمی‌تواند با %s کار کند: "
+#~ "موقعیت."
+
+#~ msgid "Could not open the file \"%s\" because access was denied."
+#~ msgstr "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون دسترسی مجاز نیست."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the host name was invalid.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان نامعتبر است.\n"
+#~ "\n"
+#~ "لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و دوباره سعی کنید."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and that your proxy "
+#~ "settings are correct and then try again."
+#~ msgstr ""
+#~ "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون میزبان \"%s\" پیدا نشد.\n"
+#~ "\n"
+#~ "لطفاً امتحان کنید که مکان را درست تایپ کرده‌اید و تنظیمات وکیلتان درست است "
+#~ "و دوباره سعی کنید."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
+#~ "\n"
+#~ "Please, check that you typed the location correctly and try again."
+#~ msgstr ""
+#~ "بار کذدن پرونده‌ی \"%s\" مقدور نیست چون  اقدام به ورود به سیستم با شکست "
+#~ "مواجه شد.\n"
+#~ "\n"
+#~ "لطفاً امتحان کنید که مکان را درست تایپ کرده باشید و دوباره سعی کنید."
+
+#~ msgid "Could not open the file \"%s\"."
+#~ msgstr "بار کذدن پرونده‌ی \"%s\" مقدور نیست."
+
+#~ msgid ""
+#~ "Could not open the file \"%s\".\n"
+#~ "\n"
+#~ "%s."
+#~ msgstr ""
+#~ "باز کردن پرونده‌ی \"%s\" مقدور نیست.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid ""
+#~ "Could not save the file \"%s\".\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "ذخیره‌ی پرونده‌ی \"%s\" مقدور نیست.\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
+#~ msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون حاوی داده‌های مخدوش است."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
+#~ "locations."
+#~ msgstr ""
+#~ "برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون gedit نمی ‌تواند با %s کار کند: "
+#~ "مکان"
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because it contains data in an invalid "
+#~ "format."
+#~ msgstr ""
+#~ "برگرداندن پرونده‌ی \"%s\" مقدور نیست  چون حاوی داده‌هایی با قالب نامعتبر "
+#~ "است."
+
+#~ msgid "Could not revert the file \"%s\" because it is too big."
+#~ msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون بزرگ است."
+
+#~ msgid "Could not revert the file \"%s\" because access was denied."
+#~ msgstr "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون دسترسی مجاز نیست."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because there are too many open files.\n"
+#~ "\n"
+#~ "Please, close some open file and try again."
+#~ msgstr ""
+#~ "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون تعداد پرونده‌های باز زیاد است.\n"
+#~ "\n"
+#~ "لطفاً چند پرونده‌ی باز را ببندید و دوباره سعی کنید."
+
+#~ msgid ""
+#~ "Not enough available memory to revert the file \"%s\". Please, close some "
+#~ "running application and try again."
+#~ msgstr ""
+#~ "حافظه‌ی موجود برای برگرداندن پرونده‌ی \"%s\" کافی نیست. لطفاً چند برنامه‌ی در "
+#~ "حال اجرا را ببندید و دوباره سعی کنید."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the host name was empty.\n"
+#~ "\n"
+#~ "Please, check that your proxy settings are correct and try again."
+#~ msgstr ""
+#~ "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون نام میزبان خالی است.\n"
+#~ "\n"
+#~ "لطفاً تنظیمات وکیل خود را تصحیح کنید و دوباره سعی کنید."
+
+#~ msgid ""
+#~ "Could not revert the file \"%s\" because the attempt to log in failed."
+#~ msgstr ""
+#~ "برگرداندن پرونده‌ی \"%s\" مقدور نیست چون تلاش برای ورود به سیستم شکست خورد."
 
 #~ msgid "_Insert a new preview phrase."
 #~ msgstr "در_ج عبارت جدید برای پیش‌نمایش."
