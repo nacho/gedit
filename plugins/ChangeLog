@@ -1,5 +1,24 @@
 2005-02-04  Paolo Maggi  <paolo@gnome.org>
 
+	Synchronized with gtkspell 2.0.8
+
+	* spell/gedit-automatic-spell-checker.c (check_range)
+	(check_deferred_range) (insert_text_before) (insert_text_after)
+	(delete_range_after) (mark_set)
+	(gedit_automatic_spell_checker_recheck_all) (button_press_event)
+	(popup_menu_event) (gedit_automatic_spell_checker_new):
+	Added deferred spell checking: make the misspelled word highlighting work 
+	like other apps and delay checking the current word until the cursor exits it.
+	Patch by Nathan Fredrickson <nathan@silverorange.com> backported 
+	from gtkspell 2.0.8
+
+	(gedit_automatic_spell_checker_free):
+	(gedit_automatic_spell_checker_free_internal):
+	(gedit_automatic_spell_checker_detach_view): fixed a crash that happens
+	if you remove automatic spell checker and the press Shift+F10
+
+2005-02-04  Paolo Maggi  <paolo@gnome.org>
+
 	* spell/gedit-spell-checker.c: update the list of known languages with
 	the list available at http://aspell.sourceforge.net/man-html/Supported.html.
 	Thanks to Yaacov Zamir <kzamir@walla.co.il> for the first version of the
@@ -239,7 +258,7 @@
 	(gedit_automatic_spell_checker_attach_view): Change behavior on a 
 	right click so that cutting/copying with the mouse works again.
 	Patch by Nathan Fredrickson <nathan@silverorange.com> backported 
-	from gtkspell 2.5.0
+	from gtkspell 2.0.5
 
 2004-03-05  Albert Chin-A-Young  <china@thewrittenword.com>
 

@@ -47,7 +47,10 @@ struct _GeditAutomaticSpellChecker {
 	GeditDocument		*doc;
 	GSList 			*views;
 	
-	GtkTextMark 		*mark_insert;
+	GtkTextMark 		*mark_insert_start;
+	GtkTextMark		*mark_insert_end;
+	gboolean 		 deferred_check;
+
 	GtkTextTag 		*tag_highlight;
 	GtkTextMark		*mark_click;
 
@@ -93,13 +96,20 @@ check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *
 }
 
 static void
-check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter end) 
+check_range (GeditAutomaticSpellChecker *spell, 
+	     GtkTextIter                 start, 
+	     GtkTextIter                 end,
+	     gboolean                    force_all) 
 {
 	/* we need to "split" on word boundaries.
 	 * luckily, Pango knows what "words" are 
 	 * so we don't have to figure it out. */
 
-	GtkTextIter wstart, wend;
+	GtkTextIter wstart;
+	GtkTextIter wend;
+	GtkTextIter cursor; 
+	GtkTextIter precursor;
+  	gboolean    highlight;
 
 	/*
 	g_print ("Check range: [%d - %d]\n", gtk_text_iter_get_offset (&start),
@@ -116,7 +126,8 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 		{
 			gtk_text_iter_backward_word_start (&start);
 		} 
-		else {
+		else 
+		{
 			/* if we're neither at the beginning nor inside a word,
 			 * me must be in some spaces.
 			 * skip forward to the beginning of the next word. */
@@ -125,6 +136,16 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 				gtk_text_iter_backward_word_start (&start);
 		}
 	}
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (spell->doc), 
+					  &cursor,
+					  gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (spell->doc)));
+  	 
+	precursor = cursor;
+	gtk_text_iter_backward_char (&precursor);
+	
+  	highlight = gtk_text_iter_has_tag (&cursor, spell->tag_highlight) ||
+  	            gtk_text_iter_has_tag (&precursor, spell->tag_highlight);
 	
 	gtk_text_buffer_remove_tag (GTK_TEXT_BUFFER (spell->doc), 
 				    spell->tag_highlight, 
@@ -135,7 +156,7 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 	 * An iter at offset 0 seems to always be inside a word,
   	 * even if it's not.  Possibly a pango bug.
 	 */
-  	if (gtk_text_iter_get_offset(&start) == 0) 
+  	if (gtk_text_iter_get_offset (&start) == 0) 
 	{
 		gtk_text_iter_forward_word_end(&start);
 		gtk_text_iter_backward_word_start(&start);
@@ -145,12 +166,31 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 	
 	while (gtk_text_iter_compare (&wstart, &end) < 0) 
 	{
+		gboolean inword; 
+
 		/* move wend to the end of the current word. */
 		wend = wstart;
 		
 		gtk_text_iter_forward_word_end (&wend);
 
-		check_word (spell, &wstart, &wend);
+		inword = (gtk_text_iter_compare (&wstart, &cursor) < 0) &&
+			 (gtk_text_iter_compare (&cursor, &wend) <= 0);
+  	 
+		if (inword && !force_all)
+		{
+			/* this word is being actively edited,
+			 * only check if it's already highligted,
+			 * otherwise defer this check until later. */
+			if (highlight)
+				check_word (spell, &wstart, &wend);
+			else
+				spell->deferred_check = TRUE;
+		} 
+		else 
+		{
+			check_word (spell, &wstart, &wend);
+			spell->deferred_check = FALSE;
+		}
 
 		/* now move wend to the beginning of the next word, */
 		gtk_text_iter_forward_word_end (&wend);
@@ -166,6 +206,22 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 	}
 }
 
+static void
+check_deferred_range (GeditAutomaticSpellChecker *spell, 
+		      gboolean                    force_all) 
+{
+	GtkTextIter start, end;
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (spell->doc), 
+					  &start, 
+					  spell->mark_insert_start);
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (spell->doc),
+					  &end, 
+					  spell->mark_insert_end);
+
+	check_range (spell, start, end, force_all);
+}
+
 /* insertion works like this:
  *  - before the text is inserted, we mark the position in the buffer.
  *  - after the text is inserted, we see where our mark is and use that and
@@ -177,7 +233,7 @@ static void
 insert_text_before (GtkTextBuffer *buffer, GtkTextIter *iter,
 		gchar *text, gint len, GeditAutomaticSpellChecker *spell) 
 {
-	gtk_text_buffer_move_mark (buffer, spell->mark_insert, iter);
+	gtk_text_buffer_move_mark (buffer, spell->mark_insert_start, iter);
 }
 
 static void
@@ -187,9 +243,11 @@ insert_text_after (GtkTextBuffer *buffer, GtkTextIter *iter,
 	GtkTextIter start;
 
 	/* we need to check a range of text. */
-	gtk_text_buffer_get_iter_at_mark (buffer, &start, spell->mark_insert);
+	gtk_text_buffer_get_iter_at_mark (buffer, &start, spell->mark_insert_start);
 	
-	check_range (spell, start, *iter);
+	check_range (spell, start, *iter, FALSE);
+
+	gtk_text_buffer_move_mark (buffer, spell->mark_insert_end, iter);
 }
 
 /* deleting is more simple:  we're given the range of deleted text.
@@ -203,7 +261,18 @@ static void
 delete_range_after (GtkTextBuffer *buffer, GtkTextIter *start, GtkTextIter *end, 
 		GeditAutomaticSpellChecker *spell) 
 {
-	check_range (spell, *start, *end);
+	check_range (spell, *start, *end, FALSE);
+}
+
+static void
+mark_set (GtkTextBuffer              *buffer, 
+	  GtkTextIter                *iter,
+	  GtkTextMark                *mark, 
+	  GeditAutomaticSpellChecker *spell) 
+{
+	/* if the cursor has moved and there is a deferred check so handle it now */
+	if ((mark == gtk_text_buffer_get_insert (buffer)) && spell->deferred_check)
+		check_deferred_range (spell, FALSE);
 }
 
 static void
@@ -495,7 +564,7 @@ gedit_automatic_spell_checker_recheck_all (GeditAutomaticSpellChecker *spell)
 
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (spell->doc), &start, &end);
 
-	check_range (spell, start, end);
+	check_range (spell, start, end, TRUE);
 }
 
 static void 
@@ -547,6 +616,10 @@ button_press_event (GtkTextView *view,
 
 		GtkTextBuffer *buffer = gtk_text_view_get_buffer (view);
 
+		/* handle deferred check if it exists */
+  	        if (spell->deferred_check)
+			check_deferred_range (spell, TRUE);
+
 		gtk_text_view_window_to_buffer_coords (view, 
 				GTK_TEXT_WINDOW_TEXT, 
 				event->x, event->y,
@@ -571,6 +644,10 @@ popup_menu_event (GtkTextView *view, GeditAutomaticSpellChecker *spell)
 	GtkTextBuffer *buffer;
 
 	buffer = gtk_text_view_get_buffer (view);
+
+	/* handle deferred check if it exists */
+	if (spell->deferred_check)
+		check_deferred_range (spell, TRUE);
 
 	gtk_text_buffer_get_iter_at_mark (buffer, &iter,
 					  gtk_text_buffer_get_insert (buffer));
@@ -635,6 +712,10 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 			  "delete-range",
 			  G_CALLBACK (delete_range_after), 
 			  spell);
+	g_signal_connect (G_OBJECT (doc),
+			  "mark-set",
+			  G_CALLBACK (mark_set), 
+			  spell);
 
 	g_signal_connect (G_OBJECT (spell->spell_checker),
 			  "add_word_to_session",
@@ -677,19 +758,34 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 	 * inserted, so we don't really care where iter points.  */
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
 	
-	spell->mark_insert = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					"gedit-automatic-spell-checker-insert");
+	spell->mark_insert_start = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					"gedit-automatic-spell-checker-insert-start");
 
-	if (spell->mark_insert == NULL)
-		spell->mark_insert = 
+	if (spell->mark_insert_start == NULL)
+		spell->mark_insert_start = 
 			gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
-						     "gedit-automatic-spell-checker-insert",
+						     "gedit-automatic-spell-checker-insert-start",
 						     &start, 
 						     TRUE);
 	else
 		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
-					   spell->mark_insert,
+					   spell->mark_insert_start,
 					   &start);
+
+	spell->mark_insert_end = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					"gedit-automatic-spell-checker-insert-end");
+
+	if (spell->mark_insert_end == NULL)
+		spell->mark_insert_end = 
+			gtk_text_buffer_create_mark (GTK_TEXT_BUFFER (doc),
+						     "gedit-automatic-spell-checker-insert-end",
+						     &start, 
+						     TRUE);
+	else
+		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+					   spell->mark_insert_end,
+					   &start);
+
 
 	spell->mark_click = gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					"gedit-automatic-spell-checker-click");
@@ -705,6 +801,7 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 					   spell->mark_click,
 					   &start);
 
+	spell->deferred_check = FALSE;
 
 	return spell;
 }
@@ -726,6 +823,9 @@ gedit_automatic_spell_checker_free (GeditAutomaticSpellChecker *spell)
 	g_return_if_fail (spell != NULL);
 	g_return_if_fail (gedit_automatic_spell_checker_get_from_document (spell->doc) == spell);
 	
+	if (automatic_spell_checker_id == 0)
+		return;
+
 	g_object_set_qdata (G_OBJECT (spell->doc), automatic_spell_checker_id, NULL);	
 }
 
@@ -749,6 +849,12 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 					    spell->tag_highlight, 
 					    &start, 
 					    &end);
+
+		g_signal_handlers_disconnect_matched (G_OBJECT (table),
+					G_SIGNAL_MATCH_DATA,
+					0, 0, NULL, NULL,
+					spell);
+
 		gtk_text_tag_table_remove (table, spell->tag_highlight);
 	}
 		
@@ -773,6 +879,11 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 				G_SIGNAL_MATCH_DATA,
 				0, 0, NULL, NULL,
 				spell);
+
+		g_signal_handlers_disconnect_matched (G_OBJECT (gedit_view_get_gtk_text_view (view)),
+			G_SIGNAL_MATCH_DATA,
+			0, 0, NULL, NULL,
+			spell);
 
 		list = g_slist_next (list);
 	}
@@ -825,6 +936,11 @@ gedit_automatic_spell_checker_detach_view (
 	g_return_if_fail (spell->views != NULL);
 
 	g_signal_handlers_disconnect_matched (G_OBJECT (view),
+			G_SIGNAL_MATCH_DATA,
+			0, 0, NULL, NULL,
+			spell);
+
+	g_signal_handlers_disconnect_matched (G_OBJECT (gedit_view_get_gtk_text_view (view)),
 			G_SIGNAL_MATCH_DATA,
 			0, 0, NULL, NULL,
 			spell);
