@@ -32,6 +32,7 @@
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-file-entry.h>
+#include <gconf/gconf-client.h>
 
 #include <unistd.h> /* getpid and unlink */
 #include <stdlib.h> /* rand   */
@@ -48,6 +49,10 @@
 #include <gedit-file.h>
 #include <dialogs/gedit-dialogs.h>
 
+#define DIFF_BASE_KEY 		"/apps/gedit2/plugins/diff"
+#define DIFF_LOCATION_KEY	"/diff-program-location"
+#define UNIFIED_FORMAT_KEY	"/use-unified-format"
+#define IGNORE_BLANKS		"/ignore-blanks"
 
 #define MENU_ITEM_LABEL		N_("_Compare files...")
 #define MENU_ITEM_PATH		"/menu/File/FileOps/"
@@ -91,6 +96,7 @@ G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState configure (GeditPlugin *p, GtkWidget *parent);
+G_MODULE_EXPORT GeditPluginState save_settings (GeditPlugin *pd);
 
 static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 static void diff_file_selected (GtkWidget *widget, gpointer data);
@@ -110,6 +116,8 @@ static gchar* diff_program_location = NULL;
 
 static gboolean use_unified_format;
 static gboolean ignore_blanks;
+
+static GConfClient 	*diff_gconf_client 	= NULL;	
 
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
@@ -713,6 +721,13 @@ finally:
 
 	if (command_line != NULL)
 		g_free (command_line);
+
+	if (ret)
+	{
+		ignore_blanks = ib;
+		use_unified_format = uf;
+	}
+	
 	return ret;
 }
 
@@ -797,15 +812,49 @@ configure (GeditPlugin *p, GtkWidget *parent)
 		return PLUGIN_ERROR;	
 }
 
-
 G_MODULE_EXPORT GeditPluginState
 destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	plugin->deactivate (plugin);
+
+	g_object_unref (G_OBJECT (diff_gconf_client));
+
 	return PLUGIN_OK;
 }
-	
+
+G_MODULE_EXPORT GeditPluginState
+save_settings (GeditPlugin *pd)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (diff_gconf_client != NULL, PLUGIN_ERROR);
+
+	if (diff_program_location != NULL)
+		gconf_client_set_string (
+				diff_gconf_client,
+				DIFF_BASE_KEY DIFF_LOCATION_KEY,
+				diff_program_location,
+		      		NULL);
+
+	gconf_client_set_bool (
+			diff_gconf_client,
+			DIFF_BASE_KEY UNIFIED_FORMAT_KEY,
+			use_unified_format,
+	      		NULL);
+
+	gconf_client_set_bool (
+			diff_gconf_client,
+			DIFF_BASE_KEY IGNORE_BLANKS,
+			ignore_blanks,
+	      		NULL);
+
+	gconf_client_suggest_sync (diff_gconf_client, NULL);
+
+	return PLUGIN_OK;
+}
+
 G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
 {
@@ -852,6 +901,29 @@ init (GeditPlugin *pd)
 			  "Copyright (C) 2002 Paolo Maggi");
 	
 	pd->private_data = NULL;
+
+	diff_gconf_client = gconf_client_get_default ();
+	g_return_val_if_fail (diff_gconf_client != NULL, PLUGIN_ERROR);
+
+	gconf_client_add_dir (diff_gconf_client,
+			      DIFF_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
+	
+	diff_program_location = gconf_client_get_string (
+				diff_gconf_client,
+				DIFF_BASE_KEY DIFF_LOCATION_KEY,
+			      	NULL);
+
+	use_unified_format = gconf_client_get_bool (
+			 	diff_gconf_client,
+				DIFF_BASE_KEY UNIFIED_FORMAT_KEY,
+			      	NULL);
+
+	ignore_blanks = gconf_client_get_bool (
+			 	diff_gconf_client,
+				DIFF_BASE_KEY IGNORE_BLANKS,
+			      	NULL);
 		
 	return PLUGIN_OK;
 }
