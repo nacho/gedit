@@ -243,7 +243,7 @@ gedit_document_new (void)
 /*	int i; */
 
 	/* FIXME: Blarg!! */
-	if ((doc = gtk_type_new (gedit_document_get_type ()) != NULL))
+	if ((doc = gtk_type_new (gedit_document_get_type ())))
 	{
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
 					  gedit_get_document_tab_name());
