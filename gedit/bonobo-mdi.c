@@ -57,12 +57,13 @@ static void            bonobo_mdi_class_init     (BonoboMDIClass  *);
 static void            bonobo_mdi_instance_init  (BonoboMDI *);
 static void            bonobo_mdi_finalize       (GObject *);
 static void            child_list_menu_create    (BonoboMDI *, BonoboWindow *);
+static void            child_list_menu_create_all (BonoboMDI *);
+static void            child_list_menu_remove    (BonoboMDI *, BonoboWindow *);
+static void            child_list_menu_remove_all (BonoboMDI *);
+
 
 static void            child_list_activated_cb   (BonoboUIComponent *uic, gpointer user_data, 
 						  const gchar* verbname);
-
-void                   child_list_menu_remove_item(BonoboMDI *, BonoboMDIChild *);
-void                   child_list_menu_add_item   (BonoboMDI *, BonoboMDIChild *);
 
 static void            app_create               (BonoboMDI *, gchar *, const char *);
 static void            app_clone                (BonoboMDI *, BonoboWindow *, const char *);
@@ -517,6 +518,7 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 {
 	GList *child;
 	BonoboUIComponent *ui_component;
+	gint accell_num = 1;
 
 	if (mdi->priv->child_list_path == NULL)
 		return;
@@ -548,9 +550,17 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 		verb_name = g_strdup_printf ("Child_%p", child->data);
 		xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
 				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
-		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
-				" _tip=\"%s\"/>", verb_name, escaped_name, tip);
 
+		if (accell_num <= 9)
+			cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+				" _tip=\"%s\" accel=\"*Alt*%d\"/>", 
+				verb_name, escaped_name, tip, accell_num);
+		else
+			cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+				" _tip=\"%s\"/>", verb_name, escaped_name, tip);
+	
+		++ accell_num;
+		
 		g_free (tip);
 		g_free (child_name);
 		g_free (safe_name);
@@ -570,106 +580,83 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
-
-void 
-child_list_menu_remove_item (BonoboMDI *mdi, BonoboMDIChild *child)
+static void 
+child_list_menu_remove (BonoboMDI *mdi, BonoboWindow *win)
 {
-	GList *win_node;
-	gchar *path, *cmd, *verb_name;
-	
-	gedit_debug (DEBUG_MDI, "");
+	GList *child;
+	BonoboUIComponent *ui_component;
 
-	if(mdi->priv->child_list_path == NULL)
+	if (mdi->priv->child_list_path == NULL)
 		return;
 	
-	win_node = mdi->priv->windows;
-
-	verb_name = g_strdup_printf ("Child_%p", child);
-	path = g_strdup_printf ("%s%s", mdi->priv->child_list_path, verb_name);
-	cmd = g_strdup_printf ("/commands/%s", verb_name);
-
-	while (win_node) 
+	ui_component = BONOBO_UI_COMPONENT (
+			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
+			
+	child = mdi->priv->children;
+	
+	bonobo_ui_component_freeze (ui_component, NULL);
+	
+	while (child) 
 	{
-		BonoboUIComponent *ui_component;
+		gchar *verb_name = NULL;
+		gchar *path;
+		gchar *cmd;
 		
-		ui_component = BONOBO_UI_COMPONENT (
-			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
-		
+		verb_name = g_strdup_printf ("Child_%p", child->data);
+		path = g_strdup_printf ("%s%s", mdi->priv->child_list_path, verb_name);
+		cmd = g_strdup_printf ("/commands/%s", verb_name);
+	
 		bonobo_ui_component_remove_verb (ui_component, verb_name);
 		bonobo_ui_component_rm (ui_component, path, NULL);
 		bonobo_ui_component_rm (ui_component, cmd, NULL);
-		win_node = g_list_next (win_node);
+
+		g_free (path); 
+		g_free (cmd);
+		g_free (verb_name);
+
+		child = g_list_next (child);
 	}
 
-	g_free (path);
-	g_free (cmd);
-	g_free (verb_name);
-
-	gedit_debug (DEBUG_MDI, "END");
+	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
-
-void 
-child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
+static void 
+child_list_menu_create_all (BonoboMDI *mdi)
 {
 	GList *win_node;
-	gchar *child_name, *escaped_name, *safe_name;
-	gchar* xml, *cmd, *verb_name, *tip;
-	int accel_num;
-	
-	if(mdi->priv->child_list_path == NULL)
+
+	if (mdi->priv->child_list_path == NULL)
 		return;
 
-	accel_num = g_list_length (mdi->priv->children);
-	
 	win_node = mdi->priv->windows;
-
-	child_name = bonobo_mdi_child_get_name (child);
-
-	safe_name = g_markup_escape_text (child_name, strlen (child_name));
-	g_return_if_fail (safe_name != NULL);
-
-	escaped_name = escape_underscores (safe_name);
-	g_return_if_fail (escaped_name != NULL);
-
-	verb_name = g_strdup_printf ("Child_%p", child);
-	
-	tip = g_strdup_printf (_("Activate %s"), safe_name);
-	xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
-				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
-
-	if (accel_num > 9)
-		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
-				" _tip=\"%s\"/>", verb_name, escaped_name, tip);
-	else
-		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
-			" _tip=\"%s\" accel=\"*Alt*%d\"/>", verb_name,
-			escaped_name, tip, accel_num);
-
-	
+		
 	while (win_node) 
 	{
-		BonoboUIComponent *ui_component;
-		
-		ui_component = BONOBO_UI_COMPONENT (
-			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
-		
-
-		bonobo_ui_component_set_translate (ui_component, mdi->priv->child_list_path, xml, NULL);
-		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
-		bonobo_ui_component_add_verb (ui_component, verb_name, child_list_activated_cb, child); 
+		child_list_menu_create (mdi, BONOBO_WINDOW (win_node->data));
 
 		win_node = g_list_next (win_node);
 	}
-	
-	g_free (tip);
-	g_free (escaped_name);
-	g_free (child_name);
-	g_free (xml);
-	g_free (cmd);
-	g_free (verb_name);
-	g_free (safe_name);
 }
+
+static void 
+child_list_menu_remove_all (BonoboMDI *mdi)
+{
+	GList *win_node;
+
+	if (mdi->priv->child_list_path == NULL)
+		return;
+
+	win_node = mdi->priv->windows;
+
+	while (win_node) 
+	{
+		child_list_menu_remove (mdi, BONOBO_WINDOW (win_node->data));
+
+		win_node = g_list_next (win_node);
+	}
+}
+
+
 
 static gboolean 
 book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
@@ -1666,12 +1653,14 @@ bonobo_mdi_add_child (BonoboMDI *mdi, BonoboMDIChild *child)
 
 	bonobo_mdi_child_set_parent (child, G_OBJECT (mdi));
 
+	child_list_menu_remove_all (mdi);
+	
 	mdi->priv->children = g_list_append (mdi->priv->children, child);
 
 	g_signal_connect (G_OBJECT (child), "name_changed",
 			  G_CALLBACK (child_name_changed), mdi);
 
-	child_list_menu_add_item (mdi, child);
+	child_list_menu_create_all (mdi);
 
 	g_object_set_data (G_OBJECT (child), BONOBO_MDI_KEY, mdi);
 
@@ -1731,9 +1720,11 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 		bonobo_mdi_remove_view (mdi, GTK_WIDGET (view), TRUE);
 	}
 
+	child_list_menu_remove_all (mdi);
+	
 	mdi->priv->children = g_list_remove (mdi->priv->children, child);
 
-	child_list_menu_remove_item (mdi, child);
+	child_list_menu_create_all (mdi);
 
 	if (child == mdi->priv->active_child)
 		mdi->priv->active_child = NULL;
