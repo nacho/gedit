@@ -53,15 +53,24 @@ static GtkMenuFactory *factory = NULL;
 static GtkMenuFactory *subfactory[1];
 static GHashTable *entry_ht = NULL;
 
+#ifdef GTK_HAVE_ACCEL_GROUP
 void get_main_menu(GtkWidget ** menubar, GtkAccelGroup ** group)
+#else
+void get_main_menu(GtkWidget ** menubar, GtkAcceleratorTable ** table)
+#endif
 {
     if (initialize)
     	    menus_init();
     
     if (menubar)
             *menubar = subfactory[0]->widget;
+#ifdef GTK_HAVE_ACCEL_GROUP
     if(group)
        	    *group = subfactory[0]->accel_group;
+#else
+    if(table)
+       	    *table = subfactory[0]->table;
+#endif
 }
 
 void menus_init(void)

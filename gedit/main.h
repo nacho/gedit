@@ -110,7 +110,11 @@ struct _gE_window {
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;
 	GtkWidget *line_label, *col_label;
+#ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *accel;
+#else
+        GtkAcceleratorTable *accel;
+#endif
 	GList *documents;
 	gE_search *search;
 	gint auto_indent;
