@@ -220,7 +220,7 @@ action_replace (GeditReplaceDialog *dialog,
 
 static void
 action_replace_all (GeditReplaceDialog *dialog,
-		    guint start_pos,
+		    gint start_pos,
 		    const gchar *search_text,
 		    const gchar *replace_text,
 		    gboolean case_sensitive)
@@ -229,12 +229,17 @@ action_replace_all (GeditReplaceDialog *dialog,
 
 	gedit_debug (DEBUG_SEARCH, "");
 
+	start_pos -= strlen (search_text);
+	if (start_pos < 0)
+		start_pos = 0;
+	
 	dialog->replacements = gedit_replace_all_execute (dialog->view,
-							  MAX (start_pos - strlen (search_text), 0),
+							  start_pos,
 							  search_text,
 							  replace_text,
 							  case_sensitive,
 							  &new_buffer);
+
 	if (dialog->replacements > 0)
 	{
 		gedit_document_delete_text (dialog->view->doc, 0,

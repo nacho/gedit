@@ -554,7 +554,7 @@ gedit_search_line_to_pos (gint line, gint *lines)
 
 #define GEDIT_EXTRA_REPLACEMENTS_ 4
 gint
-gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *search_text,
+gedit_replace_all_execute (GeditView *view, gint start_pos, const guchar *search_text,
 			   const guchar *replace_text, gint case_sensitive,
 			   guchar **buffer)
 {
@@ -575,8 +575,9 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 	gint grow_factor = GEDIT_EXTRA_REPLACEMENTS_;
 
 	gedit_debug (DEBUG_RECENT, "");
-	
+
 	g_return_val_if_fail (search_info.state == SEARCH_IN_PROGRESS_YES, 0);
+	g_return_val_if_fail (start_pos > -1, 0);
 
 	search_text_length = strlen (search_text);
 	replace_text_length = strlen (replace_text);
@@ -594,9 +595,9 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 
 	delta = replace_text_length - search_text_length;
 	if (delta > 0)
-		buffer_out_length = buffer_in_length + 1 + (grow_factor) * delta ;
+		buffer_out_length = buffer_in_length + 100 + (grow_factor) * delta ;
 	else
-		buffer_out_length = buffer_in_length + 1;
+		buffer_out_length = buffer_in_length + 100;
 
 	buffer_out = g_malloc (buffer_out_length);
 
@@ -627,7 +628,6 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 	{
 		if (p2 > buffer_out_length - (delta*2)) /* Allocate for at least 2 more replacements */
 		{
-			g_print ("reallocating ......\n");
 			if (delta < 1) {
 				g_warning ("This should not happen.\n");
 				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
@@ -675,6 +675,8 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 
 	*buffer = buffer_out;
 
+	gedit_debug (DEBUG_RECENT, "end");
+	
 	return replacements;
 }
 

@@ -49,7 +49,7 @@ gint gedit_search_execute (guint starting_position,
 			   gboolean return_the_line_number);
 
 gint gedit_replace_all_execute (GeditView *view,
-				guint start_pos,
+				gint start_pos,
 				const guchar *search_text,
 				const guchar *replace_text,
 				gint case_sensitive,
