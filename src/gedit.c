@@ -105,8 +105,8 @@ int main (int argc, char **argv)
 	global_ev = g_new0 (CORBA_Environment, 1);
 
 	CORBA_exception_init (global_ev);
-	global_orb = gnome_CORBA_init
-		("gEdit", VERSION, &argc, argv, options, 0, &ctx, global_ev);
+	global_orb = gnome_CORBA_init ("gEdit", VERSION, &argc, argv,
+				       options, 0, &ctx, global_ev);
 	corba_exception (global_ev);
 	
 	root_poa = CORBA_ORB_resolve_initial_references
@@ -123,9 +123,7 @@ int main (int argc, char **argv)
 	name_service = gnome_name_service_get ();
 
 #else
-
 	gnome_init_with_popt_table ("gEdit", VERSION, argc, argv, options, 0, &ctx);
-	
 #endif /* HAVE_LIBGNORBA */
 
 	/* Determine we use fonts or fontsets. If a fontset is supplied
@@ -138,13 +136,10 @@ int main (int argc, char **argv)
 	gtk_widget_destroy(dummy_widget);
 
 
-	args = poptGetArgs(ctx);
+	args = (char**) poptGetArgs(ctx);
 
-	for (i = 0; args && args[i]; i++) {
-
-	  file_list = g_list_append (file_list, args[i]);
-
-	}
+	for (i = 0; args && args[i]; i++)
+		file_list = g_list_append (file_list, args[i]);
 	
 	poptFreeContext(ctx);
 	

@@ -1,4 +1,16 @@
+2000-03-31  Jason Leach  <leach@wam.umd.edu>
+
+	* src/gedit.c (main): fixed a compiler warning.
+
+	* src/gE_about.c (gE_about_box): only show one About dialog at a
+	time.
+
+	* src/Makefile.am: take out some of the extra whitespace from the
+	INCLUDES, so the 'make' process isn't spaced apart all
+	goofy-looking.
+
 2000-03-20  Pablo Saratxaga <pablo@mandrakesoft.com>
+	
 	* makeconfig.pl: added Lithuanian language (laso Greek, that was
 	in po/ directory but missing from ALL_LINGUAS)
 
@@ -247,21 +259,22 @@ Mon Oct  4 16:29:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 Mon Oct  4 15:00:07 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
-	* src/gE_about.c: (gE_about_box) Tided up the authors section, and added
+	* src/gE_about.c (gE_about_box): Tided up the authors section, and added
 	  the gEdit logo. 
 	
 	* src/Makefile.am: Added the gEdit logo to be installed.		  	
 
 Mon Oct  4 14:45:56 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
-	* src/gE_plugin_api.c: (gE_plugin_text_insert) Get an accurate position,
+	* src/gE_plugin_api.c (gE_plugin_text_insert): Get an accurate position,
 	  for some reason get_point doesnt seem to return the proper postiion.
 	  The insert time plugin now functions properly.. as does every other
 	  plugin that inserts text. =)	  	  		
 
 Sun Oct  3 21:15:27 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
-	* commands.c: (file_save_cb) (file_save_all_cb) Let's duplicate the
+	* commands.c (file_save_cb),
+	(file_save_all_cb): Let's duplicate the
 	  filename, string, instead of just pointing to it.. eh? g_free was
 	  	scking up the filename after saving.	
 
@@ -388,104 +401,108 @@ Sat Sep 11 13:50:59 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 Sat Sep 11 13:42:42 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
-	* src/gE_view.c: (auto_indent_cb) insert the auto indent whitespace into the
-	  mini-buffer too.. 
-	 (gE_view_init) Send the gE_view struct to the auto_indent_cb signal connection.
+	* src/gE_view.c: (auto_indent_cb) insert the auto indent
+	  whitespace into the mini-buffer too..
+	 (gE_view_init) Send the gE_view struct to the auto_indent_cb
+	signal connection.
 
 Sat Sep 11 13:23:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* MAINTAINERS: Removed Evan from the list, as he is no-longer with the
 	  project.
 	
-	* src/gE_view.c: (gE_event_key_press) Removed tjhe handlers for cut/copy/paste.
-	  They're built into the widget aren't they...
+	* src/gE_view.c: (gE_event_key_press) Removed tjhe handlers for
+	  cut/copy/paste.  They're built into the widget aren't they...
 	
-	* src/gE_prefs.c: (gE_save_settings) Save the value of mdi->tab_pos, not
-	  settings->tab_pos, as the settings one is no longer loaded on startup,
-	  so would reset the position back to 0 each time we quit.
+	* src/gE_prefs.c: (gE_save_settings) Save the value of
+	  mdi->tab_pos, not settings->tab_pos, as the settings one is no
+	  longer loaded on startup, so would reset the position back to 0
+	  each time we quit.
 
 Fri Sep  12 1999 	Kosta Arvanitis <kosta@uvic.ca>
 
-	* src/gE_window.c (create_find_in_files_result_window)
-	Changed the look of the window. Added a diffrent button a slight change
-	to the layout. I think this looks better than what I had before. 	
+	* src/gE_window.c (create_find_in_files_result_window) Changed the
+	look of the window. Added a diffrent button a slight change to the
+	layout. I think this looks better than what I had before.
 	
-	
-	*  src/gE_window.c 
+	* src/gE_window.c 
+
 Fri Sep  11 1999 	Kosta Arvanitis <kosta@uvic.ca>
 
-	*  src/command.c Fixed a small bug in file_save_as_cb. 
+	* src/command.c Fixed a small bug in file_save_as_cb. 
 	
-	*  src/gE_window.c (create_find_in_files_result_window) Connected signal
-	"select row" to search_result_clist.
+	* src/gE_window.c (create_find_in_files_result_window) Connected
+	signal "select row" to search_result_clist.
 	
-	*  src/search.c:  (gE_clist_data) New Struct.
-	Struct to hold data about each row in the clist. Used by clist callback.
+	* src/search.c: (gE_clist_data) New Struct.  Struct to hold data
+	about each row in the clist. Used by clist callback.
 	
-	*  src/search.c:  (search_results_clist_insert) New Function.
-	Add items too the search_result_clist. Each row stores a gE_clist_data
+	* src/search.c: (search_results_clist_insert) New Function.  Add
+	items too the search_result_clist. Each row stores a gE_clist_data
 	struct containing its correspondin information.
 	
-	*  src/search/c:  (void search_result_clist_cb) New Function.
-	New callback for clist . Called when a user click on a row 
-	in the clist. Activates the file which was clicked and highlights line of 
+	* src/search/c: (void search_result_clist_cb) New Function.  New
+	callback for clist . Called when a user click on a row in the
+	clist. Activates the file which was clicked and highlights line of
 	text where contents are located.
 	
-	*  src/search.c:  (destroy_clist_data)  New Function.
-	Callback for when clist items are destoryed. Clears up memory.	
+	* src/search.c (destroy_clist_data): New Function.  Callback for
+	when clist items are destoryed. Clears up memory.
 
 Fri Sep  10 1999 	Kosta Arvanitis <kosta@uvic.ca>
 
-	* src/command.c:  (file_save_cb and file_save_all_cb) Re-added code to get
-	filename of doc being saved and passed it to dialog box callbacks. Code
-	was displaying NULL instead of filename.
+	* src/command.c: (file_save_cb and file_save_all_cb) Re-added code
+	to get filename of doc being saved and passed it to dialog box
+	callbacks. Code was displaying NULL instead of filename.
 	
-	* below is the comments for the added functionality of Find In Files ...
+	* below is the comments for the added functionality of Find In
+	Files ...
 	
-	* src/gE_mdi.c:  Added the Find In Files option to the edit menu. Calls
-	the find_in_files_cb located in search.c
+	* src/gE_mdi.c: Added the Find In Files option to the edit
+	menu. Calls the find_in_files_cb located in search.c
 	
-	* src/gE_window.h:   Added new extern GtkWidgets search_reult_window and
-	search_result_clist. The need to also be available to search.c. The are
-	defined in src/gE_window.c
+	* src/gE_window.h: Added new extern GtkWidgets search_reult_window
+	and search_result_clist. The need to also be available to
+	search.c. The are defined in src/gE_window.c
 	
-	* src/gE_window.c:   Added function (create_find_in_files_result_window) to
-	create the new area for the search results. It contains a scrolled window
-	with a clist in it and a button to remove the window from the app. I want 
-	to change the button to look better. Any graphics people??
+	* src/gE_window.c: Added function
+	(create_find_in_files_result_window) to create the new area for
+	the search results. It contains a scrolled window with a clist in
+	it and a button to remove the window from the app. I want to
+	change the button to look better. Any graphics people??
 	
-	* src/gE_window.c:  In function (gE_window_new) create the new window 
-	using the create_find_in_files_result_window and
-	pack it into the main app. Used gtk_box_pack instead of app_add_docked for 
-	cosmetic reasons. If anyone want it to be dockable you can try to change it.
-	 
-	
+	* src/gE_window.c: In function (gE_window_new) create the new
+	window using the create_find_in_files_result_window and pack it
+	into the main app. Used gtk_box_pack instead of app_add_docked for
+	cosmetic reasons. If anyone want it to be dockable you can try to
+	change it.
+
 	* src/search.[ch] grouped all find in files functions together.
 	
-	* src/search.[ch] (find_in_files_cb) New Function. Called by the edit menu
-	in gE_mdi.c. Creates the find in files dialog box.
+	* src/search.[ch] (find_in_files_cb) New Function. Called by the
+	edit menu in gE_mdi.c. Creates the find in files dialog box.
 	
-	* src/search.[ch] (create_find_in_files_dialog) New Functions. Creates the
-	dialog box for searching all files.
+	* src/search.[ch] (create_find_in_files_dialog) New
+	Functions. Creates the dialog box for searching all files.
 	
-	* src/search.[ch] (find_in_files_dialog_button_cb) New Function. Call
-	back for the above dialog box. If close was clicked the search dialog is 
-	destroyed. If search was clicked it initialize the search result window 
-	and perform the search.
+	* src/search.[ch] (find_in_files_dialog_button_cb) New
+	Function. Call back for the above dialog box. If close was clicked
+	the search dialog is destroyed. If search was clicked it
+	initialize the search result window and perform the search.
 	
-	* src/search.[ch]:  (show_search_result_window) New Function. 
+	* src/search.[ch]:  (show_search_result_window) New Function.
 	
-	* src/search.[ch]:  (remove_search_result_window) New Function. 	
+	* src/search.[ch]:  (remove_search_result_window) New Function.
 	
-	* src/search.[ch]: 	(search_for_text_in_files) New Function.
-	Call search function on all files in the mdi child list. Appending to the 
-	end of the search_result_clist number of matched found.
+	* src/search.[ch]: (search_for_text_in_files) New Function.  Call
+	search function on all files in the mdi child list. Appending to
+	the end of the search_result_clist number of matched found.
 	
-	* src/search.[ch]:	(find_in_file_search) New Function.
-	Search a given file for a given text string. Using already defined search
-	string everytime a match is found append to the search_result_clist the 
-	filename, line number, and the text of the line its on. Returns total number
-	of matches found in file.
+	* src/search.[ch]: (find_in_file_search) New Function.  Search a
+	given file for a given text string. Using already defined search
+	string everytime a match is found append to the
+	search_result_clist the filename, line number, and the text of the
+	line its on. Returns total number of matches found in file.
 	
 	* src/search.[ch]:	(get_line_as_text) New Function.
 	Given a gE_view instance and the position of a specific index in it text

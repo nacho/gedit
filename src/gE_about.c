@@ -22,13 +22,12 @@
 #include <gnome.h>
 #include "main.h"
 
-void gE_about_box(GtkWidget *w, gpointer cbdata)
+void
+gE_about_box (GtkWidget *widget, gpointer cbdata)
 {
-
-	GtkWidget *about;
+	static GtkWidget *about;
 	
 	const gchar *authors[] = {
-	
 		"Alex Roberts",
 		"Evan Lawrence",
 		"http://gedit.pn.org",
@@ -38,19 +37,24 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		"     Miguel de Icaza, Martin Baulig,",
 		"     Thomas Holmgren, Martijn van Beers",
 		NULL
-		
 	};
 
-			
+	if (about != NULL)
+	{
+		gdk_window_show (about->window);
+		gdk_window_raise (about->window);
+		return;
+	}
 
 	about = gnome_about_new ("gEdit", VERSION,
-			_("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
-			authors,
-			_("gEdit is a small and lightweight text editor for GNOME/Gtk+"),
-			"gedit-logo.png");
-			
+				 _("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
+				 authors,
+				 _("gEdit is a small and lightweight text "
+				   "editor for GNOME/Gtk+"),
+				 "gedit-logo.png");
+
+	gtk_signal_connect (GTK_OBJECT (about), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
+
 	gtk_widget_show (about);
-	
-	/*gtk_widget_destroy (about);
-	g_free (authors);	*/
 }
