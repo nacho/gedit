@@ -250,7 +250,9 @@ gedit_print_run_dialog (PrintJobInfo *pji)
 	}
 	
 	pji->printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
-	if (pji->printer)
+	/* If preview, do not set the printer so that the print button in the preview
+	 * window will pop another print dialog */
+	if (pji->printer && !pji->preview)
 		gnome_print_master_set_printer (pji->master, pji->printer);
 	
 	pji->range = gnome_print_dialog_get_range_page (
@@ -310,9 +312,15 @@ gedit_print (gboolean preview)
 	if (!pji->preview)
 		cancel = gedit_print_run_dialog (pji);
 
-	if (!cancel)
-		gedit_print_document (pji);
+	/* The canceled button on the dialog was clicked */
+	if (cancel) {
+		gedit_print_job_info_destroy (pji);
+		return;
+	}
+		
+	gedit_print_document (pji);
 
+	/* The printing was canceled while in progress */
 	if (pji->canceled) {
 		gedit_print_job_info_destroy (pji);
 		return;

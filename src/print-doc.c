@@ -324,7 +324,7 @@ gedit_print_document_determine_lines (PrintJobInfo *pji, gboolean real)
 
 	int dump_info = FALSE;
 	int dump_info_basic = FALSE;
-	int dump_text = TRUE;
+	int dump_text = FALSE;
 
 	gedit_debug (DEBUG_PRINT, "");
 
