@@ -35,6 +35,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/libgnome.h>
+#include <libgnomeui/gnome-entry.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
@@ -58,6 +59,8 @@ struct _GeditDialogReplace {
 
 	GtkWidget *search_entry;
 	GtkWidget *replace_entry;
+	GtkWidget *search_entry_list;
+	GtkWidget *replace_entry_list;
 	GtkWidget *case_sensitive;
 	GtkWidget *entire_word_checkbutton;
 	GtkWidget *beginning;
@@ -68,6 +71,7 @@ struct _GeditDialogFind {
 	GtkWidget *dialog;
 
 	GtkWidget *search_entry;
+	GtkWidget *search_entry_list;
 	GtkWidget *case_sensitive;
 	GtkWidget *entire_word_checkbutton;
 	GtkWidget *beginning;
@@ -202,6 +206,8 @@ dialog_replace_get_dialog (void)
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
 	dialog->replace_entry      = glade_xml_get_widget (gui, "replace_with_text_entry");
+	dialog->search_entry_list  = glade_xml_get_widget (gui, "search_for_text_entry_list");
+	dialog->replace_entry_list = glade_xml_get_widget (gui, "replace_with_text_entry_list");
 	replace_with_label         = glade_xml_get_widget (gui, "replace_with_label");
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
 	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
@@ -210,7 +216,9 @@ dialog_replace_get_dialog (void)
 
 	if (!content			||
 	    !dialog->search_entry 	||
-	    !dialog->replace_entry  	|| 
+	    !dialog->replace_entry  	||
+	    !dialog->search_entry_list	||
+	    !dialog->replace_entry_list	||  
 	    !replace_with_label 	||
 	    !dialog->case_sensitive 	||
 	    !dialog->entire_word_checkbutton ||
@@ -223,7 +231,8 @@ dialog_replace_get_dialog (void)
 	}
 
 	gtk_widget_show (replace_with_label);
-	gtk_widget_show (dialog->replace_entry );
+	gtk_widget_show (dialog->replace_entry);
+	gtk_widget_show (dialog->replace_entry_list);
 	
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
@@ -293,7 +302,8 @@ dialog_find_get_dialog (void)
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
-	replace_entry      	   = glade_xml_get_widget (gui, "replace_with_text_entry");
+	dialog->search_entry_list  = glade_xml_get_widget (gui, "search_for_text_entry_list");	
+	replace_entry      	   = glade_xml_get_widget (gui, "replace_with_text_entry_list");
 
 	replace_with_label         = glade_xml_get_widget (gui, "replace_with_label");
 	
@@ -307,6 +317,7 @@ dialog_find_get_dialog (void)
 
 	if (!content			||
 	    !dialog->search_entry 	||
+	    !dialog->search_entry_list 	||
 	    !replace_entry		||
 	    !replace_with_label 	||
 	    !dialog->case_sensitive 	||
@@ -321,7 +332,7 @@ dialog_find_get_dialog (void)
 	}
 	
 	gtk_widget_hide (replace_with_label);
-	gtk_widget_hide (replace_entry );
+	gtk_widget_hide (replace_entry);
 
 	gtk_table_set_row_spacings (GTK_TABLE (table), 0);
 
@@ -469,6 +480,8 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 
 	if (strlen (search_string) <= 0)
 		return;
+
+	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->beginning)))
 		from_cursor = FALSE;
@@ -547,6 +560,8 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 	if (strlen (search_string) <= 0)
 		return;
 	
+	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
+
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->beginning)))
 		from_cursor = FALSE;
 	else
@@ -639,6 +654,13 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	if (strlen (search_string) <= 0)
 		return;
 	
+	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
+
+	if (strlen (replace_string) > 0)
+		gnome_entry_prepend_history (GNOME_ENTRY (dialog->replace_entry_list), 
+					     TRUE, 
+					     replace_string);
+
 	if (gedit_document_get_selection (doc, &start, &end))
 		selected_text = gedit_document_get_chars (doc, start, end);
 	
@@ -744,6 +766,13 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	if (strlen (search_string) <= 0)
 		return;
 	
+	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
+
+	if (strlen (replace_string) > 0)
+		gnome_entry_prepend_history (GNOME_ENTRY (dialog->replace_entry_list), 
+					     TRUE, 
+					     replace_string);
+
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
 		case_sensitive = TRUE;
 	else
