@@ -61,25 +61,37 @@ void
 gedit_cmd_file_open (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	BonoboMDIChild *active_child;
+	GeditView *active_view;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
-	
+
 	gedit_file_open ((GeditMDIChild*) active_child);
+
+	active_view = gedit_get_active_view ();
+
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
 gedit_cmd_file_save (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditMDIChild *active_child;
-	
+	GeditView *active_view;
+
 	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_view = gedit_get_active_view ();
 
 	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
 	if (active_child == NULL)
 		return;
 	
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+
 	gedit_file_save (active_child, TRUE);
 }
 
@@ -131,6 +143,7 @@ void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditMDIChild *active_child;
+	GeditView *active_view;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -138,8 +151,12 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	if (active_child == NULL)
 		return;
 	
-	gedit_print (active_child);
+	active_view = gedit_get_active_view ();
 
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+
+	gedit_print (active_child);
 }
 
 void
@@ -309,7 +326,14 @@ gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gch
 void 
 gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	GeditView *active_view;
+	
 	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_view = gedit_get_active_view ();
+
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	gedit_dialog_find ();
 }
@@ -382,7 +406,14 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 void 
 gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	GeditView *active_view;
+	
 	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_view = gedit_get_active_view ();
+
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	gedit_dialog_replace ();
 }
