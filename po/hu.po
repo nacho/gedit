@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.4\n"
-"POT-Creation-Date: 2002-12-19 12:43+0100\n"
-"PO-Revision-Date: 2002-12-19 16:37+0100\n"
+"POT-Creation-Date: 2003-01-04 14:55+0100\n"
+"PO-Revision-Date: 2003-01-04 22:58+0100\n"
 "Last-Translator: Emese KOVACS <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,7 @@ msgstr "Sortörési mód"
 msgid ""
 "List of encodings used by gedit for reading files not encoded in UTF-8 or in "
 "the current locale encoding."
-msgstr ""
+msgstr "A gedit által használt kódolások listája, amelyeket az olyan fájlok beolvasására használ, amelyek se nem UTF-8-ban, se nem az aktuális locale kódolásában vannak."
 
 #: data/gedit.schemas.in.h:24
 msgid "Maximum Recent Files"
@@ -267,7 +267,6 @@ msgid "Status Bar is Visible"
 msgstr "Státuszsor látható"
 
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -275,12 +274,7 @@ msgid ""
 "\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
-msgstr ""
-"Az eszköztár gombjainak stílusa. Lehetséges értékei: \"GEDIT_TOOLBAR_SYSTEM"
-"\" a rendszer alapértelmezett stílusának használatához, \"GEDIT_TOOLBAR_ICONS"
-"\" csak ikon megjelenítéséhez és \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" szöveg és "
-"ikon megjelenítéséhez. Megjegyzés: ezek az értékek kisbetű/nagybetű "
-"érzékenyek, pontosan úgy használd, ahogy itt le vannak írva."
+msgstr "Az eszköztár gombjainak stílusa. Lehetséges értékei: \"GEDIT_TOOLBAR_SYSTEM\" a rendszer alapértelmezett stílusának használatához, \"GEDIT_TOOLBAR_ICONS\" csak ikon megjelenítéséhez, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" szöveg és ikon megjelenítéséhez és \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" a fontos szövegek az ikonok melletti megjelenítéséhez. Megjegyzés: ezek az értékek kisbetű/nagybetű érzékenyek, pontosan úgy használd, ahogy itt le vannak írva."
 
 #: data/gedit.schemas.in.h:43
 msgid "Tab Size"
@@ -359,18 +353,16 @@ msgid "Whether gedit should display line numbers in the editing area."
 msgstr "A sorok számának megjelenítése a szerkesztő területen."
 
 #: data/gedit.schemas.in.h:54
-#, fuzzy
 msgid "Whether gedit should enable auto indentation."
-msgstr "Nyomtatáskor a dokumentumok fejlécének ki/bekapcsolása."
+msgstr "Automatikus bekezdések engedélyezésének ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:55
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Nyomtatáskor a dokumentumok fejlécének ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:56
-#, fuzzy
 msgid "Whether gedit should insert spaces instead of tabs."
-msgstr "A sorok számának megjelenítése a szerkesztő területen."
+msgstr "Tabulátor helyett szóköz használatának ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:57
 msgid ""
@@ -455,8 +447,26 @@ msgid "_Insert char"
 msgstr "_Karakter beszúrása"
 
 #: plugins/ASCII/asciitable.glade2.h:1
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:1
 msgid "ASCII table"
 msgstr "ASCII-tábla"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:2
+msgid "Copyright (C) 2001-2002 Paolo Maggi"
+msgstr "Copyright © 2001-2002 Paolo Maggi"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:3
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:3
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:3
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:4
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:3
+msgid "Paolo Maggi <maggi@athena.polito.it>"
+msgstr "Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:4
+msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+msgstr "Ez a bővítmény megnyit egy ablakot, benne egy ASCII-táblával"
 
 #. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:49
@@ -468,6 +478,22 @@ msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr ""
 "ChangeLog bejegyzéseket keres a jelenlegi dokumentumban, és megnyitja őket."
 
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:1
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr "A CVS commit üzenetekben található ChangeLogot megnyitó bővítmény"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:2
+msgid "CVS ChangeLog"
+msgstr "CVS ChangeLog"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:3
+msgid "Copyright (C) 2002 James Willcox"
+msgstr "Copyright © 2002 James Willcox"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:4
+msgid "James Willcox <jwillcox@cs.indiana.edu>"
+msgstr "James Willcox <jwillcox@cs.indiana.edu>"
+
 #: plugins/diff/diff.c:65
 msgid "Co_mpare Files..."
 msgstr "Fájlok össze_hasonlítása..."
@@ -477,7 +503,7 @@ msgid "Makes a diff file from two documents or files"
 msgstr "diff (különbség) fájlt készít 2 dokumentumból vagy fájlból"
 
 #. Create the dialog
-#: plugins/diff/diff.c:271
+#: plugins/diff/diff.c:271 plugins/diff/diff.gedit-plugin.desktop.in.h:2
 msgid "Compare Files"
 msgstr "Fájlok összehasonlítása"
 
@@ -650,6 +676,31 @@ msgstr "Válaszd ki a második megnyitott összehasonlítandó dokumentumot"
 msgid "Use the _unified output format (-u option)"
 msgstr "Használja az _unified kimeneti formátumot (-u paraméter)"
 
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:1
+msgid ""
+"Chema Celorio <chema@celorio.com> and Paolo Maggi <maggi@athena.polito.it>"
+msgstr "Chema Celorio <chema@celorio.com> és Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:3
+msgid ""
+"Copyright (C) 2000 - 2001 Chema Celorio\n"
+"Copyright (C) 2002 Paolo Maggi"
+msgstr ""
+"Copyright © 2000 - 2001 Chema Celorio\n"
+"Copyright © 2002 Paolo Maggi"
+
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:4
+msgid ""
+"The Compare Files plugin uses the <tt>diff</tt> program to compare two "
+"documents or files on disk.\n"
+"\n"
+"For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
+"prompt."
+msgstr ""
+"A fájlösszehasonlító bővítmény a <tt>diff</tt> programot használja két lemezen lévő dokumentum vagy fájl összehasonlítására.\n"
+"\n"
+"A <tt>diff</tt> programról többet tudhatsz meg a <tt>man diff</tt> parancs kiadásával."
+
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
 msgstr "_Statisztika  a dokumentumról"
@@ -659,6 +710,7 @@ msgid "Get statistic info on current document"
 msgstr "Statisztikai adatok az aktuális dokumentumról"
 
 #: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Statisztika a dokumentumról"
 
@@ -686,7 +738,7 @@ msgstr "Karakterek (szóközökkel)"
 msgid "File Name"
 msgstr "Fájlnév"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:315
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:373
 msgid "Lines"
 msgstr "Sor"
 
@@ -702,6 +754,26 @@ msgstr "Szavak"
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Dokumentum információs bővítmény"
 
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:1
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
+msgid "Copyright (C) 2002 Paolo Maggi"
+msgstr "Copyright © 2002 Paolo Maggi"
+
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:3
+msgid "Paolo Maggi <paolo.maggi@polito.it>"
+msgstr "Paolo Maggi <paolo.maggi@polito.it>"
+
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:4
+msgid ""
+"The Document Statistics plugin analyzes the current document and determines "
+"the number of words, lines, characters and non-space characters in it and "
+"displays the result."
+msgstr "A dokumentumstatisztika bővítmény elemzi az aktuális dokumentumot, és meghatározza a szavak, sorok, karakterek és nem szóköz karakterek számát, és megjeleníti az eredményt."
+
 #: plugins/sample/sample.c:43
 msgid "Insert User Na_me"
 msgstr "Felhasználói _név beszúrása"
@@ -711,16 +783,14 @@ msgid "Insert the user name at the cursor position"
 msgstr "Beszúrja a felhasználónevet"
 
 #: plugins/sample/sample.c:172
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:4
 msgid "User name"
 msgstr "Felhasználónév"
 
 #: plugins/sample/sample.c:173
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "Inserts the user name at the cursor position."
 msgstr "Beszúrja a felhasználó nevét a kurzor pozíciójába."
-
-#: plugins/sample/sample.c:175
-msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr "Copyright © 2002 - Paolo Maggi"
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -797,14 +867,23 @@ msgstr "_Munkakönyvtár:"
 
 #: plugins/shell_output/shell_output.glade2.h:6
 msgid "gedit: Shell Output plugin"
-msgstr "gedit: Shellkimenet-beépülő"
+msgstr "gedit: Héjkimenet bővítmény"
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr "Végrehajt egy külső programot, és annak kimenetét a kimeneti ablakra írja ki."
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:4
+msgid "Shell command"
+msgstr "Héjparancs"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
 msgid "Tag list plugin"
-msgstr "Tag lista bővítmény"
+msgstr "Elemlista bővítmény"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
-#, fuzzy
 msgid "Select the group of tags you want to use"
 msgstr "Válaszd ki az elemcsoportok közül azt, amit használni szeretnél"
 
@@ -834,6 +913,16 @@ msgstr "Elem_lista"
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
 msgstr "Mutassa az elem lista ablakát"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:3
+msgid "Tag list"
+msgstr "Elemlista"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:4
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tags/strings without having to type them."
+msgstr "Az elemlista bővítmény a gyakran használt elemek egyszerű beillesztésének lehetőségét kínálja, anélkül hogy be kellene írni őket."
 
 #: plugins/time/time.c:48
 msgid "In_sert Date and Time..."
@@ -881,41 +970,63 @@ msgstr "_Beszúrás"
 
 #: plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
-msgstr ""
+msgstr "_Formátum bekérése"
 
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
-msgstr ""
+msgstr "_Egyéni formátum használata"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:1
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr "Copyright © 2002 - Paolo Maggi"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:2
+msgid "Insert Date/Time"
+msgstr "Dátum és idő beszúrása"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:3
+msgid "Inserts current date and time at the cursor position."
+msgstr "Beszúrja a jelenlegi időt és dátumot az aktuális kurzorpozícióba"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:4
+msgid ""
+"Paolo Maggi <maggi@athena.polito.it> and Lee Mallabone <gnome@fonicmonkey."
+"net>"
+msgstr "Paolo Maggi <maggi@athena.polito.it> és Lee Mallabone <gnome@fonicmonkey.net>"
 
 #: plugins/indent/indent.c:45
 msgid "_Indent"
 msgstr "_Behúzás"
 
 #: plugins/indent/indent.c:47
-#, fuzzy
 msgid "Indent selected lines"
-msgstr "A kiválasztott bővítmény beállítása"
+msgstr "A kiválasztott sorok behúzása"
 
 #: plugins/indent/indent.c:49
 msgid "U_nindent"
 msgstr "Behúzás _csökkentése"
 
 #: plugins/indent/indent.c:51
-#, fuzzy
 msgid "Unindent selected lines"
-msgstr "A kiválasztott bővítmény beállítása"
+msgstr "A kiválasztott sorok behúzásának csökkentése"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent lines"
+msgstr "Sorok behúzása"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:3
+msgid "Indent or un-indent selected lines."
+msgstr "A kiválasztott sorok behúzásának növelése vagy csökkentése"
 
 #: plugins/sort/sort.glade2.h:1
-#, fuzzy
 msgid "R_emove duplicates"
-msgstr "Telepített plugin-okat hozzáad/eltávolít"
+msgstr "Duplikátumok _eltávolítása"
 
 #: plugins/sort/sort.glade2.h:2
-#, fuzzy
 msgid "S_tart at column:"
-msgstr "Nincs találat"
+msgstr "Kezdőoszlop:"
 
-#: plugins/sort/sort.glade2.h:3
+#: plugins/sort/sort.glade2.h:3 plugins/sort/sort.gedit-plugin.desktop.in.h:3
 msgid "Sort"
 msgstr "Rendezés"
 
@@ -924,9 +1035,8 @@ msgid "You cannot undo a sort operation"
 msgstr "A rendezést nem lehet visszavonni"
 
 #: plugins/sort/sort.glade2.h:5
-#, fuzzy
 msgid "_Ignore case"
-msgstr "_Kihagyás"
+msgstr "_Kis- és nagybetű nem számít"
 
 #: plugins/sort/sort.glade2.h:6
 msgid "_Reverse order"
@@ -935,6 +1045,24 @@ msgstr "_Fordított sorrend"
 #: plugins/sort/sort.glade2.h:7
 msgid "_Sort"
 msgstr "_Rendezés"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1
+msgid ""
+"Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
+"and Paolo Maggi <maggi@athena.polito.it>"
+msgstr "Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> és Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+msgid ""
+"Copyright (C) 2001 Carlo Borreo\n"
+"Copyright (C) 2002 Lee Mallabone and Paolo Maggi"
+msgstr ""
+"Copyright © 2001 Carlo Borreo\n"
+"Copyright © 2002 Lee Mallabone and Paolo Maggi"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:4
+msgid "Sorts a document or selected text."
+msgstr "Rendezi a dokumentumot vagy a kijelölt szöveget."
 
 #: plugins/spell/gedit-automatic-spell-checker.c:318
 #: plugins/spell/gedit-spell-checker-dialog.c:504
@@ -947,9 +1075,8 @@ msgstr "_Több..."
 
 #. Ignore all
 #: plugins/spell/gedit-automatic-spell-checker.c:395
-#, fuzzy
 msgid "_Ignore All"
-msgstr "Mindent bezár"
+msgstr "Mindet á_tugorja"
 
 #. + Add to Dictionary
 #: plugins/spell/gedit-automatic-spell-checker.c:408
@@ -1022,7 +1149,7 @@ msgstr "Spanyol"
 
 #: plugins/spell/gedit-spell-checker.c:84
 msgid "Faroese"
-msgstr "Faroer-szigeteki"
+msgstr "Färöi"
 
 #: plugins/spell/gedit-spell-checker.c:85
 msgid "French (France)"
@@ -1072,13 +1199,21 @@ msgstr "Alapértelmezett"
 #: src/dialogs/gedit-dialog-goto-line.c:165
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 #: src/dialogs/gedit-encodings-dialog.c:238
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the required widgets inside %s."
-msgstr "Nem találom a szükséges widgeteket a goto-line.glade2-ben.\n"
+msgstr "Nem találom a szükséges widgeteket a(z) %s belsejében."
 
 #: plugins/spell/gedit-spell-language-dialog.c:249
 msgid "Languages"
 msgstr "Nyelvek"
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
+msgid "Checks the spelling of the current document."
+msgstr "Az aktuális dokumentum helyesírás-ellenőrzése"
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:4
+msgid "Spell checker"
+msgstr "Helyesírás-ellenőrző"
 
 #: plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -1150,9 +1285,8 @@ msgid "S_ort..."
 msgstr "_Rendezés..."
 
 #: plugins/sort/sort.c:29
-#, fuzzy
 msgid "Sort the current document or selection."
-msgstr "A két kijelölt dokumentum megegyezik."
+msgstr "Az aktuális dokumentum vagy kijelölés rendezése."
 
 #: plugins/spell/spell.c:51
 msgid "_Check Spelling"
@@ -1167,33 +1301,28 @@ msgid "_Autocheck Spelling"
 msgstr "_Helyesírás automatikus ellenőrzése"
 
 #: plugins/spell/spell.c:59
-#, fuzzy
 msgid "Automatically spell-check the current document"
-msgstr "Küldd el az aktuális dokumentumot"
+msgstr "Az aktuális dokumentum automatikus helyesírás-ellenőrzése"
 
 #: plugins/spell/spell.c:61
 msgid "Set _Language"
 msgstr "_Nyelv megadása"
 
 #: plugins/spell/spell.c:64
-#, fuzzy
 msgid "Set the language of the current document"
-msgstr "_Dokumentum nyelvének kiválasztása"
+msgstr "Az aktuális dokumentum nyelvének megadása"
 
 #: plugins/spell/spell.c:549
-#, fuzzy
 msgid "The document is empty."
-msgstr "A dokumentum üres (nem tartalmaz adatot)."
+msgstr "A dokumentum üres."
 
 #: plugins/spell/spell.c:567
-#, fuzzy
 msgid "The selected text does not contain mispelled words."
-msgstr "A kiválasztott fájl nem futtatható."
+msgstr "A kijelölt szöveg nem tartalmaz rosszul írt szavakat."
 
 #: plugins/spell/spell.c:568
-#, fuzzy
 msgid "The document does not contain mispelled words."
-msgstr "A dokumentum üres (nem tartalmaz adatot)."
+msgstr "A dokumentum nem tartalmaz rosszul írt szavakat."
 
 #: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1962
 #, c-format
@@ -1340,7 +1469,7 @@ msgid "Editor"
 msgstr "Szerkesztő"
 
 #: src/dialogs/gedit-preferences-dialog.c:267
-#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:306
+#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:364
 #: src/gedit-ui.xml.h:41
 msgid "Print"
 msgstr "Nyomtatás"
@@ -1483,7 +1612,7 @@ msgstr "_Biztonsági másolatok létrehozása mentés előtt"
 
 #: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Do not _split words over two lines"
-msgstr ""
+msgstr "Ne _törje a szavakat két sorba"
 
 #: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Editor _font: "
@@ -1570,7 +1699,6 @@ msgid "Selecte_d text color:"
 msgstr "_Kiválasztott szöveg színe:"
 
 #: src/dialogs/gedit-preferences.glade2.h:45
-#, fuzzy
 msgid "Set _tabs width equivalent to"
 msgstr "_Tabulátor mérete megegyezik  "
 
@@ -1615,12 +1743,10 @@ msgid "_Display line numbers"
 msgstr "Sorok számának _megjelenítése"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-#, fuzzy
 msgid "_Print page headers"
 msgstr "_Oldal fejlécének nyomtatása"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
 msgid "_Restore Default Fonts"
 msgstr "_Alapértelmezett betűkészletek visszaállítása"
 
@@ -1673,8 +1799,8 @@ msgid "Font Selection"
 msgstr "Betűkészlet kiválasztása"
 
 #: src/dialogs/gnome-print-font-picker.c:89
-msgid "sans 12"
-msgstr "sans 12"
+msgid "Sans Regular 12"
+msgstr "Sans Regular 12"
 
 #: src/dialogs/gnome-print-font-picker.c:90
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1732,7 +1858,7 @@ msgstr "Méret mutatása"
 msgid "Show size in font info mode"
 msgstr "Mutassa a mérete a betűtípus információs módban"
 
-#: src/dialogs/gnome-print-font-picker.c:1014
+#: src/dialogs/gnome-print-font-picker.c:1015
 msgid "Font"
 msgstr "Betűkészletek"
 
@@ -1779,7 +1905,7 @@ msgstr "Következő találat"
 
 #: src/dialogs/replace.glade2.h:3
 msgid "Match _entire word only"
-msgstr ""
+msgstr "Csak _teljes szóra"
 
 #: src/dialogs/replace.glade2.h:5
 msgid "Replace All"
@@ -1791,21 +1917,19 @@ msgstr "_Csere ezzel: "
 
 #: src/dialogs/replace.glade2.h:7
 msgid "_Match case"
-msgstr ""
+msgstr "_Kis- és nagybetű"
 
 #: src/dialogs/replace.glade2.h:8
 msgid "_Search for: "
 msgstr "_Keresés erre: "
 
 #: src/dialogs/replace.glade2.h:9
-#, fuzzy
 msgid "_Wrap around"
-msgstr "Sortörési mód"
+msgstr "_Körbe"
 
 #: src/dialogs/uri.glade2.h:2
-#, fuzzy
 msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Írd be a megnyitandó fájl helyét (URI):"
+msgstr "Írd be a _megnyitandó fájl helyét (URI):"
 
 #: src/dialogs/uri.glade2.h:3
 msgid "Open from URI"
@@ -1821,14 +1945,6 @@ msgstr ""
 #: src/gedit-commands.c:496
 msgid "gedit"
 msgstr "gedit"
-
-#: src/gedit-commands.c:497
-msgid ""
-"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
-"(C) 2000-2002 Chema Celorio and Paolo Maggi"
-msgstr ""
-"© 1998-2000 Evan Lawrence and Alex Robert\n"
-"© 2000-2002 Chema Celorio and Paolo Maggi"
 
 #: src/gedit-commands.c:499
 msgid "gedit is a small and lightweight text editor for Gnome"
@@ -1949,22 +2065,22 @@ msgid "Save as..."
 msgstr "Mentés másként..."
 
 #: src/gedit-file.c:628
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
 "\n"
 "You will not be able to undo this operation."
 msgstr ""
-"El akarod menteni a \"%s\" fájlban történt változtatásokat?\n"
+"Visszaállítod a dokumentumot a mentésből: '%s'?\n"
 "\n"
-"Ha nem mented el, a változtatások elvesznek."
+"Ezt a műveletet nem lehet visszavonni."
 
 #: src/gedit-file.c:638 src/gedit-ui.xml.h:99
 msgid "_Revert"
 msgstr "_Visszaállítás"
 
 #: src/gedit-file.c:672
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting file '%s'..."
 msgstr "'%s' fájl visszaállítása..."
 
@@ -2041,47 +2157,48 @@ msgstr "(változott)"
 msgid "(readonly)"
 msgstr "(csak olvasható)"
 
-#: src/gedit-plugins-engine.c:352
+#: src/gedit-plugins-engine.c:362
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Hiba, nem tudom a %s modulfájlt megnyitni\n"
 
-#: src/gedit-plugins-engine.c:362
+#: src/gedit-plugins-engine.c:372
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Hiba, a '%s' bővítmény nem tartalmazza az init függvényt."
 
-#: src/gedit-plugins-engine.c:372
+#: src/gedit-plugins-engine.c:382
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Hiba, a '%s' bővítmény nem tartalmazza az activate függvényt."
 
-#: src/gedit-plugins-engine.c:382
+#: src/gedit-plugins-engine.c:392
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Hiba, a '%s' bővítmény nem tartalmazza az deactivate függvényt."
 
-#: src/gedit-plugins-engine.c:407
+#: src/gedit-plugins-engine.c:417
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Hiba, lehetetlen a '%s' bővítmény indítása"
 
-#: src/gedit-plugins-engine.c:458
-#, fuzzy, c-format
+#: src/gedit-plugins-engine.c:468
+#, c-format
 msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Hiba, lehetetlen a '%s' bővítményt kikapcsolni"
+msgstr "Hiba, lehetetlen a(z) '%s' bővítményt kilőni"
 
-#: src/gedit-plugins-engine.c:541 src/gedit-plugins-engine.c:629
+#: src/gedit-plugins-engine.c:551 src/gedit-plugins-engine.c:639
+#: src/gedit-plugins-engine.c:764
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Hiba, lehetetlen a '%s' bővítményt bekapcsolni"
 
-#: src/gedit-plugins-engine.c:580
+#: src/gedit-plugins-engine.c:590 src/gedit-plugins-engine.c:782
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Hiba, lehetetlen a '%s' bővítményt kikapcsolni"
 
-#: src/gedit-plugins-engine.c:673
+#: src/gedit-plugins-engine.c:683
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Hiba, lehetetlen a '%s' bővítmény ui-ját frissíteni"
@@ -2095,28 +2212,28 @@ msgstr "Nem tudom indítani a beállításkezelőt."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "A %s kulcs várt `%s' értéke helyett a jelenlegi érték `%s'"
 
-#: src/gedit-print.c:188
+#: src/gedit-print.c:254
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr "A gedit nem tud nyomtatni, mert nem található egy szükséges betűtípus."
 
-#: src/gedit-print.c:374
+#: src/gedit-print.c:432
 #, c-format
 msgid "File: %s"
 msgstr "Fájl: %s"
 
 #. Print right text
-#: src/gedit-print.c:381
+#: src/gedit-print.c:439
 #, c-format
 msgid "Page: %d"
 msgstr "%d. oldal"
 
-#: src/gedit-print.c:522
+#: src/gedit-print.c:580
 msgid "gedit - Print Preview"
 msgstr "gedit - Nyomtatási kép"
 
-#: src/gedit-print.c:600
+#: src/gedit-print.c:658
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -2136,9 +2253,8 @@ msgid "C_ustomize Statusbar"
 msgstr "Állapotsor _beállítása"
 
 #: src/gedit-ui.xml.h:3
-#, fuzzy
 msgid "Change the visibility of the output window in the current window"
-msgstr "Az eszköztárak megjelenítésének módosítása a jelenlegi ablakban"
+msgstr "A kimeneti ablak láthatóságának módosítása a jelenlegi ablakban"
 
 #: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
@@ -2879,16 +2995,16 @@ msgstr "Nem sikerült létrehozni a \"%s\" fájlt."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: src/gedit-view.c:1045
+#: src/gedit-view.c:1072
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  %d. sor, %d. oszlop"
 
-#: src/gedit-view.c:1083
+#: src/gedit-view.c:1110
 msgid "  OVR"
 msgstr "  ÁTÍR"
 
-#: src/gedit-view.c:1085
+#: src/gedit-view.c:1112
 msgid "  INS"
 msgstr "  BESZÚR"
 
@@ -2960,21 +3076,19 @@ msgstr "Új felső szintű ablak létrehozása a gedit egy már futó példány�
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Új dokumentum létrehozása egy már megnyitott gedit példányban"
 
-#: src/gedit-output-window.c:278
-#, fuzzy
+#: src/gedit-output-window.c:329
 msgid "Close the output window"
-msgstr "Mutassa az elem lista ablakát"
+msgstr "Kimeneti ablak bezárása"
 
-#: src/gedit-output-window.c:316
-#, fuzzy
+#: src/gedit-output-window.c:367
 msgid "Copy selected lines"
-msgstr "A kiválasztott bővítmény beállítása"
+msgstr "Kiválasztott sorok másolása"
 
-#: src/gedit-output-window.c:336
+#: src/gedit-output-window.c:387
 msgid "Clear the output window"
 msgstr "Kimeneti ablak törlése"
 
-#: src/gedit-output-window.c:374
+#: src/gedit-output-window.c:427
 msgid "Output Lines"
 msgstr "Kimenet sorai"
 
@@ -2982,142 +3096,152 @@ msgstr "Kimenet sorai"
 msgid "Choose one or more e_ncodings:"
 msgstr "Válassz egy vagy több kódolást:"
 
-#: src/gedit-encodings.c:142 src/gedit-encodings.c:166
-#: src/gedit-encodings.c:207 src/gedit-encodings.c:257
-#: src/gedit-encodings.c:282
+#: src/gedit-encodings.c:143 src/gedit-encodings.c:169
+#: src/gedit-encodings.c:210 src/gedit-encodings.c:260
+#: src/gedit-encodings.c:285
 msgid "Western"
 msgstr "Nyugati"
 
-#: src/gedit-encodings.c:144
-msgid "South European"
-msgstr "Dél-európai"
-
-#: src/gedit-encodings.c:146 src/gedit-encodings.c:162
-#: src/gedit-encodings.c:292
-msgid "Baltic"
-msgstr "Balti"
-
-#: src/gedit-encodings.c:148 src/gedit-encodings.c:211
-#: src/gedit-encodings.c:224 src/gedit-encodings.c:228
-#: src/gedit-encodings.c:241 src/gedit-encodings.c:280
-msgid "Cyrillic"
-msgstr "Cirill"
-
-#: src/gedit-encodings.c:150 src/gedit-encodings.c:217
-#: src/gedit-encodings.c:235 src/gedit-encodings.c:290
-msgid "Arabic"
-msgstr "Arab"
-
-#: src/gedit-encodings.c:152 src/gedit-encodings.c:247
-#: src/gedit-encodings.c:284
-msgid "Greek"
-msgstr "Görög"
-
-#: src/gedit-encodings.c:154
-msgid "Hebrew Visual"
-msgstr "Héber (vizuális)"
-
-#: src/gedit-encodings.c:156 src/gedit-encodings.c:215
-#: src/gedit-encodings.c:253 src/gedit-encodings.c:288
-msgid "Hebrew"
-msgstr "Héber"
-
-#: src/gedit-encodings.c:158 src/gedit-encodings.c:213
-#: src/gedit-encodings.c:261 src/gedit-encodings.c:286
-msgid "Turkish"
-msgstr "Török"
-
-#: src/gedit-encodings.c:160
-msgid "Nordic"
-msgstr "Északi"
-
-#: src/gedit-encodings.c:164
-msgid "Celtic"
-msgstr "Kelta"
-
-#: src/gedit-encodings.c:168 src/gedit-encodings.c:259
-msgid "Romanian"
-msgstr "Román"
-
-#: src/gedit-encodings.c:171 src/gedit-encodings.c:173
-#: src/gedit-encodings.c:175 src/gedit-encodings.c:177
-msgid "Unicode"
-msgstr "Unicode"
-
-#: src/gedit-encodings.c:180
-msgid "Armenian"
-msgstr "Örmény"
-
-#: src/gedit-encodings.c:182 src/gedit-encodings.c:184
-#: src/gedit-encodings.c:193
-msgid "Chinese Traditional"
-msgstr "Hagyományos kínai"
-
-#: src/gedit-encodings.c:186
-msgid "Cyrillic/Russian"
-msgstr "Cirill/orosz"
-
-#: src/gedit-encodings.c:189 src/gedit-encodings.c:220
-#: src/gedit-encodings.c:267
-msgid "Japanese"
-msgstr "Japán"
-
-#: src/gedit-encodings.c:191 src/gedit-encodings.c:222
-#: src/gedit-encodings.c:226 src/gedit-encodings.c:273
-msgid "Korean"
-msgstr "Koreai"
-
-#: src/gedit-encodings.c:196 src/gedit-encodings.c:198
-#: src/gedit-encodings.c:200 src/gedit-encodings.c:204
-msgid "Chinese Simplified"
-msgstr "Egyszerűsített kínai"
-
-#: src/gedit-encodings.c:202
-msgid "Georgian"
-msgstr "Grúz"
-
-#: src/gedit-encodings.c:209 src/gedit-encodings.c:237
-#: src/gedit-encodings.c:278
+#: src/gedit-encodings.c:145 src/gedit-encodings.c:212
+#: src/gedit-encodings.c:240 src/gedit-encodings.c:281
 msgid "Central European"
 msgstr "Közép-európai"
 
-#: src/gedit-encodings.c:230 src/gedit-encodings.c:263
+#: src/gedit-encodings.c:147
+msgid "South European"
+msgstr "Dél-európai"
+
+#: src/gedit-encodings.c:149 src/gedit-encodings.c:165
+#: src/gedit-encodings.c:295
+msgid "Baltic"
+msgstr "Balti"
+
+#: src/gedit-encodings.c:151 src/gedit-encodings.c:214
+#: src/gedit-encodings.c:227 src/gedit-encodings.c:231
+#: src/gedit-encodings.c:244 src/gedit-encodings.c:283
+msgid "Cyrillic"
+msgstr "Cirill"
+
+#: src/gedit-encodings.c:153 src/gedit-encodings.c:220
+#: src/gedit-encodings.c:238 src/gedit-encodings.c:293
+msgid "Arabic"
+msgstr "Arab"
+
+#: src/gedit-encodings.c:155 src/gedit-encodings.c:250
+#: src/gedit-encodings.c:287
+msgid "Greek"
+msgstr "Görög"
+
+#: src/gedit-encodings.c:157
+msgid "Hebrew Visual"
+msgstr "Héber (vizuális)"
+
+#: src/gedit-encodings.c:159 src/gedit-encodings.c:218
+#: src/gedit-encodings.c:256 src/gedit-encodings.c:291
+msgid "Hebrew"
+msgstr "Héber"
+
+#: src/gedit-encodings.c:161 src/gedit-encodings.c:216
+#: src/gedit-encodings.c:264 src/gedit-encodings.c:289
+msgid "Turkish"
+msgstr "Török"
+
+#: src/gedit-encodings.c:163
+msgid "Nordic"
+msgstr "Északi"
+
+#: src/gedit-encodings.c:167
+msgid "Celtic"
+msgstr "Kelta"
+
+#: src/gedit-encodings.c:171 src/gedit-encodings.c:262
+msgid "Romanian"
+msgstr "Román"
+
+#: src/gedit-encodings.c:174 src/gedit-encodings.c:176
+#: src/gedit-encodings.c:178 src/gedit-encodings.c:180
+msgid "Unicode"
+msgstr "Unicode"
+
+#: src/gedit-encodings.c:183
+msgid "Armenian"
+msgstr "Örmény"
+
+#: src/gedit-encodings.c:185 src/gedit-encodings.c:187
+#: src/gedit-encodings.c:196
+msgid "Chinese Traditional"
+msgstr "Hagyományos kínai"
+
+#: src/gedit-encodings.c:189
+msgid "Cyrillic/Russian"
+msgstr "Cirill/orosz"
+
+#: src/gedit-encodings.c:192 src/gedit-encodings.c:223
+#: src/gedit-encodings.c:270
+msgid "Japanese"
+msgstr "Japán"
+
+#: src/gedit-encodings.c:194 src/gedit-encodings.c:225
+#: src/gedit-encodings.c:229 src/gedit-encodings.c:276
+msgid "Korean"
+msgstr "Koreai"
+
+#: src/gedit-encodings.c:199 src/gedit-encodings.c:201
+#: src/gedit-encodings.c:203 src/gedit-encodings.c:207
+msgid "Chinese Simplified"
+msgstr "Egyszerűsített kínai"
+
+#: src/gedit-encodings.c:205
+msgid "Georgian"
+msgstr "Grúz"
+
+#: src/gedit-encodings.c:233 src/gedit-encodings.c:266
 msgid "Cyrillic/Ukrainian"
 msgstr "Cirill/ukrán"
 
-#: src/gedit-encodings.c:239
+#: src/gedit-encodings.c:242
 msgid "Croatian"
 msgstr "Horvát"
 
-#: src/gedit-encodings.c:243
+#: src/gedit-encodings.c:246
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/gedit-encodings.c:245
+#: src/gedit-encodings.c:248
 msgid "Farsi"
 msgstr "Fárszi"
 
-#: src/gedit-encodings.c:249
+#: src/gedit-encodings.c:252
 msgid "Gujarati"
 msgstr "Gudzsarati"
 
-#: src/gedit-encodings.c:251
+#: src/gedit-encodings.c:254
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: src/gedit-encodings.c:255
+#: src/gedit-encodings.c:258
 msgid "Icelandic"
 msgstr "Izlandi"
 
-#: src/gedit-encodings.c:269 src/gedit-encodings.c:275
-#: src/gedit-encodings.c:294
+#: src/gedit-encodings.c:272 src/gedit-encodings.c:278
+#: src/gedit-encodings.c:297
 msgid "Vietnamese"
 msgstr "Vietnami"
 
-#: src/gedit-encodings.c:271
+#: src/gedit-encodings.c:274
 msgid "Thai"
 msgstr "Thai"
 
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (érvénytelen Unicode)"
+
+#~ msgid "sans 12"
+#~ msgstr "sans 12"
+
+#~ msgid ""
+#~ "(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+#~ "(C) 2000-2002 Chema Celorio and Paolo Maggi"
+#~ msgstr ""
+#~ "© 1998-2000 Evan Lawrence and Alex Robert\n"
+#~ "© 2000-2002 Chema Celorio and Paolo Maggi"
