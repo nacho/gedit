@@ -145,7 +145,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 						       &pos_found,
 						       &line_found,
 						       &total_lines,
-						       TRUE);
+						       FALSE);
 
 			if (!eureka)
 				break;

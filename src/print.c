@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 2000 Jose Maria Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@ typedef struct _PrintJobInfo {
 	/* Text Wrapping */
 	gint wrapping;
 	gint break_chars;
-	gint add_marks; /* little mark on lines that are a continuation of the above */ 
+	gint tab_size;
 } PrintJobInfo;
 
 
@@ -94,7 +94,7 @@ typedef struct _PrintJobInfo {
        void file_print_preview_cb (GtkWidget *widget, gpointer data);
 static void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
 static void print_line (PrintJobInfo *pji, int line);
-static void print_ps_line(PrintJobInfo * pji, int line);
+static void print_ps_line(PrintJobInfo * pji, gint line, gint first_line);
 static int  print_determine_lines (PrintJobInfo *pji, int real);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void start_job (GnomePrintContext *pc);
@@ -138,8 +138,8 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	pji->pc = gnome_print_master_get_context(pji->master);
 	g_return_if_fail(pji->pc != NULL);
 	
-	/* We need to calculate the number of pages
-	   before running the dialog */
+	/* We need to calculate the number of pages before running
+	   the dialog, so load pji with info now */
 	set_pji (pji, doc);
 
 	/* file_print preview is a false when preview is requested */ 
@@ -206,7 +206,8 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	print_pji_destroy (pji);
 	
 /*	FIXME : we need to set the parent of the dialog to be the active window,
-	because of some window manager issues, tha clahey told me about*/
+	because of some window manager issues, tha clahey told me about Chema*/
+	/* see dialogs/dialog-replace.c for the solution. Chema */ 
 #if 0	
         gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 
 	gtk_widget_show_all (dialog);
@@ -226,7 +227,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("F:file_print_preview_cb\n", DEBUG_PRINT);
+	gedit_debug ("\n", DEBUG_PRINT);
 
 	if (!gnome_mdi_get_active_view (mdi))
 		return;
@@ -248,12 +249,14 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
 	int current_page, current_line;
 	
-	gedit_debug ("F:print_document\n", DEBUG_PRINT);
+	gedit_debug ("\n", DEBUG_PRINT);
 	
-	current_line=0;
 	pji->temp = g_malloc( pji->chars_per_line + 2);
 
+	current_line = 0;
+	
 	start_job (pji->pc);
+	
 	for (current_page = 1; current_page <= pji->pages; current_page++)
 	{
 		if (pji->range != GNOME_PRINT_RANGE_ALL)
@@ -262,6 +265,9 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 		else
 			pji->print_this_page = TRUE;
 
+		/* FIXME : This pji->print_this_page is not top hacking. I need
+		   to advance the pointer to buffer to the rigth place not to
+		   semi-print the non-printable pages. Chema */
 		if (pji->print_this_page)
 		{
 			/* We need to call gnome_print_beginpage so that it adds
@@ -276,20 +282,21 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 				print_header(pji, current_page);
 			print_setfont (pji);
 		}
-		
+
 		/* we do this when the first line in the page is a continuation
 		   of the last line in the previous page. This will prevent that
 		   the line number in the previous page is repeated in the next*/
 		if (pji->buffer [pji->file_offset-1] != '\n' && current_page>1 && pji->wrapping)
 			current_line--;
-		
+
 		for ( current_line++; current_line <= pji->total_lines; current_line++)
 		{
 			print_line (pji, current_line);
+
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
-		
+
 		if (pji->print_this_page)
 			end_page (pji);
 	}
@@ -304,102 +311,145 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 static void
 print_line (PrintJobInfo *pji, int line)
 {
-	int i;
-	int temp_i; /* We need to store i before scanning for a word wrap. If we cant wrap a word
-		      ( the word size > chars_per_row ) we break that line and resotore the old i value*/
-	int print_line = TRUE;
-	int first_line = TRUE;
+	gint dump_info = FALSE;
+	gint chars_in_this_line = 0;
+	gint i, temp;
+	gint first_line = TRUE;
 
-	i = 0;
+	while( pji->buffer [pji->file_offset ] != '\n' && pji->file_offset < pji->buffer_size)
+	{
+		chars_in_this_line++;
 
-	/* blank line ...*/
-	if (pji->buffer [pji->file_offset] == '\n' )
-	{
-		pji->temp[0]=(guchar) '\0';
-		print_ps_line (pji, line);
-		pji->file_offset++;
-		return;
-	}
-		
-	while( (pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size))
-	{
-		pji->temp[i]=pji->buffer[ pji->file_offset + i];
-		i++;
-		
-		if( i == pji->chars_per_line + 1 )
+		if (pji->buffer [pji->file_offset] == '\t')
 		{
-			/* We need to back i so that the last word does
-			   not get broken in 2 */
-			if (pji->wrapping)
+			temp = chars_in_this_line;
+
+			chars_in_this_line += pji->tab_size - ( (chars_in_this_line-1) % pji->tab_size) - 1;
+
+			if (chars_in_this_line > pji->chars_per_line + 1)
+			    chars_in_this_line = pji->chars_per_line + 1;
+
+			for (i=temp;i<chars_in_this_line+1;i++)
 			{
-				temp_i=i;
-				i--;
-				while (pji->buffer [pji->file_offset+i] != ' ' && pji->buffer [pji->file_offset+i] != '\t' && i!= 0)
-					i--;
-				/* if the "word" is longer than a row then we break the "word" at the line width */
-				i++;
-				if (i==1)
-					i=temp_i;
+				pji->temp [i-1] = ' ';
 			}
-			pji->temp[i]=(guchar) '\0';
-			pji->file_offset = pji->file_offset + i;
-			if (print_line)
-				print_ps_line (pji, (first_line)?line:0);
-			if (!pji->wrapping)
-				print_line = FALSE;
-			first_line=FALSE;
-			if (pji->current_line % pji->lines_per_page == 0)
-			{
-				if (!pji->wrapping)
-				{
-					i=0;
-					/* If we are clipping lines, we need to
-					   advance pji->file_offset till the next \n */
-					while( (pji->buffer[ pji->file_offset + i] != '\n'
-						&& (pji->file_offset+i) < pji->buffer_size))
-						i++;
-					pji->file_offset = pji->file_offset + i + 1;
-					return;
-				}
-				else
-				{
-					/* This is a special case in which the last line
-					   of a page has the same lenght as chars_per_line, so
-					   we need to advance file_offset to not print a blank
-					   line in the next page */
-					if ( i == pji->chars_per_line + 1)
-						pji->file_offset++;
-					return;
-				}
-			}
-			i=0;
 		}
+		else
+		{
+			pji->temp  [chars_in_this_line-1] = pji->buffer [pji->file_offset];
+		}
+
+		
+		if (chars_in_this_line == pji->chars_per_line + 1)
+		{
+			if (!pji->wrapping)
+			{
+				/* We need to advance pji->file_offset until the next NL char */
+				while( pji->buffer [pji->file_offset ] != '\n')
+					pji->file_offset++;
+				pji->file_offset--;
+
+				pji->temp [chars_in_this_line] = (guchar) '\0';
+				print_ps_line (pji, line, TRUE);
+				pji->current_line++;
+				chars_in_this_line = 0;
+			}
+			else
+			{
+				if (dump_info)
+					g_print ("\nThis lines needs breaking\n");
+
+				temp = pji->file_offset; /* We need to save the value of i in case we have to break the line */
+
+				/* We back i till we find a space that we can break the line at */
+				while (pji->buffer [pji->file_offset] != ' '  &&
+				       pji->buffer [pji->file_offset] != '\t' &&
+				       pji->file_offset > temp - pji->chars_per_line - 1 )
+				{
+					pji->file_offset--;
+				}
+
+				if (dump_info)
+					g_print("file offset got backed up [%i] times\n", temp - pji->file_offset);
+
+				/* If this line was "unbreakable" break it at chars_per_line width */
+				if (pji->file_offset == temp - pji->chars_per_line - 1)
+				{
+					pji->file_offset = temp;
+					if (dump_info)
+						g_print ("We are breaking the line\n");
+				}
+
+				if (dump_info)
+				{
+					g_print ("Breaking temp at : %i\n", chars_in_this_line + pji->file_offset - temp - 1);
+					g_print ("Chars_in_this_line %i File Offset %i Temp %i\n",
+						 chars_in_this_line,
+						 pji->file_offset,
+						 temp);
+				}
+				pji->temp [ chars_in_this_line + pji->file_offset - temp - 1] = (guchar) '\0';
+				print_ps_line (pji, line, first_line);
+				first_line = FALSE;
+				pji->current_line++;
+				chars_in_this_line = 0;
+
+				/* We need to remove the trailing blanks so that the next line does not start with
+				   a space or a tab char */
+				while (pji->buffer [pji->file_offset] == ' ' || pji->buffer [pji->file_offset] == '\t')
+					pji->file_offset++;
+
+				/* We need to back i 1 time because this is a for loop and we did not processed the
+				   last character */
+				pji->file_offset--;
+
+				/* If this is the last line of the page return */
+				if (pji->current_line%pji->lines_per_page == 0)
+				{
+					pji->file_offset++;
+					return;
+				}
+			}
+		}
+	
+		pji->file_offset++;
 	}
 
-	pji->temp[i]=(guchar) '\0';
-	pji->file_offset = pji->file_offset + i + 1;
-	if (print_line && i > 0)
-		print_ps_line (pji, (first_line)?line:0);
+	/* We need to terminate the string and print it */ 
+	pji->temp [chars_in_this_line] = (guchar) '\0';
+	print_ps_line (pji, line, first_line);
+	pji->current_line++;
+
+	/* We need to skip the newline char for the new line character */
+	pji->file_offset++;
+
 }
 
 static void
-print_ps_line (PrintJobInfo * pji, int line)
+print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 {
-	float y = pji->page_height -  pji->margin_top - pji->header_height -
-	(pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
+	gfloat y;
+
+        gedit_debug ("\n", DEBUG_PRINT);
+
+	y = pji->page_height -  pji->margin_top - pji->header_height -
+	(pji->font_char_height*( (pji->current_line % pji->lines_per_page)+1 ));
 
 	if (!pji->print_this_page)
 		return;
-
+	
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gnome_print_show (pji->pc, pji->temp);
+	/* Why is this here ??? Chema. */
 	if ( pji->temp!='\0')
 		gnome_print_stroke (pji->pc);
 
-	if (line>0 && settings->printlines>0 && line%settings->printlines==0)
+	if (settings->printlines>0 && line%settings->printlines==0 && first_line)
 	{
 		char * number_text = g_strdup_printf ("%i",line);
 		GnomeFont *temp_font = gnome_font_new (pji->font_name, 6);
+		g_assert (pji->font_name!=NULL);
+		
 		gnome_print_setfont (pji->pc, temp_font);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
 		gnome_print_show   (pji->pc, number_text);
@@ -411,6 +461,8 @@ print_ps_line (PrintJobInfo * pji, int line)
 static void
 set_pji (PrintJobInfo * pji, Document *doc)
 {
+	gedit_debug ("\n", DEBUG_PRINT);
+
 	pji->view = VIEW(mdi->active_view);
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
@@ -423,7 +475,6 @@ set_pji (PrintJobInfo * pji, Document *doc)
 
 	pji->page_width  = gnome_paper_pswidth (pji->paper);
 	pji->page_height = gnome_paper_psheight (pji->paper);
-
 	pji->margin_numbers = .25 * 72;
 	pji->margin_top = .75 * 72;       /* Printer margins, not page margins */
 	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
@@ -445,13 +496,12 @@ set_pji (PrintJobInfo * pji, Document *doc)
 	pji->font_char_height = .14 * 72;
 	pji->wrapping = settings->printwrap;
 	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
+	pji->lines_per_page = (pji->printable_height -
+			      pji->header_height) /pji->font_char_height -  1;
+	pji->tab_size = 8;
 	pji->total_lines = print_determine_lines(pji, FALSE);
 	pji->total_lines_real = print_determine_lines(pji, TRUE);
-	pji->lines_per_page = (pji->printable_height -
-			      pji->header_height)/pji->font_char_height
-		              - 1 ;
 	pji->pages = ((int) (pji->total_lines_real-1)/pji->lines_per_page)+1;
-
 	pji->file_offset = 0;
 	pji->current_line = 0;
 }
@@ -466,59 +516,173 @@ set_pji (PrintJobInfo * pji, Document *doc)
  * needed to print it. We need this in order for us to do page/pages
  *
  * Return Value: number of lines in the document
+ *
+ * The code for this function is small, but it is has a lot
+ * of debuging code, remove later. Chema
+ *
  **/
 static int
 print_determine_lines (PrintJobInfo *pji, int real)
 {
-	int lines=0;
-	int i, temp_i;
-	int character = 0;
+	gint lines=0;
+	gint i, temp_i, j;
+	gint chars_in_this_line = 0;
 
-	for (i=0; i <= pji->buffer_size; i++)
+	/* use local variables so that this code can be reused */
+	guchar * buffer = pji->buffer;
+	gint chars_per_line = pji->chars_per_line;
+	gint tab_size = pji->tab_size;
+	gint wrapping = pji->wrapping;
+	gint buffer_size = pji->buffer_size;
+	gint lines_per_page = pji->lines_per_page; /* Needed for dump_text stuff */ 
+
+	int dump_info = FALSE;
+	int dump_info_basic = FALSE;
+	int dump_text = FALSE;
+
+	gedit_debug ("\n", DEBUG_PRINT);
+
+	/* here we modify real if !pji->wrapping */
+	if (real && !wrapping)
+		real = FALSE;
+
+	if (!real)
 	{
-		if (pji->buffer[i] == '\n' || i==pji->buffer_size)
-		{
-			if ((character>0 || !real || !pji->wrapping)||(character==0&&pji->wrapping))
-				lines++;
-			character=0;
-		}
+		dump_info = FALSE;
+		dump_info_basic = FALSE;
+		dump_text = FALSE;
+	}
+		
+	if (dump_info_basic)
+	{
+		if (real)
+			g_print ("Determining lines in REAL mode. Lines Per page =%i\n", lines_per_page);
 		else
+			g_print ("Determining lines in WRAPPING mode. Lines Per page =%i\n", lines_per_page);
+	}
+	
+	if (dump_text && lines%lines_per_page == 0)
+		g_print("\n\n-Page %i-\n\n", lines / lines_per_page + 1);
+	
+	for (i=0; i < buffer_size; i++)
+	{
+		chars_in_this_line++;
+
+		if (buffer[i] != '\t' && dump_text)
+			g_print("%c", buffer[i]);
+
+		if (buffer[i] == '\n')
 		{
-			if( pji->wrapping && real)
-			{
-				character++;
-				if (character == pji->chars_per_line + 2)
-				{
-					/* We do word wrapping here */ 
-					if (pji->buffer[i+1] != ' ' || pji->buffer[i+1] != '\t') 
-					{
-						temp_i = i;
-						i--;
-						while (pji->buffer [i] != ' ' && pji->buffer [i] != '\t' && i!= temp_i-pji->chars_per_line+2)
-						{
-							i--;
-						}
-						/* if the "word" is longer than a row then we break the word at the line width */
-						if (i == temp_i-pji->chars_per_line+2)
-							i = temp_i;
-						i++;
-					}
-					
-					lines++;
-					character=1;
-				}
-			}
+			lines++;
+			if (dump_text && lines%lines_per_page == 0)
+				g_print("\n\n-Page %i-\n\n", lines/lines_per_page + 1);
+			
+			chars_in_this_line=0;
+			continue;
 		}
+
+		if (buffer[i] == '\t')
+		{
+			temp_i = chars_in_this_line;
+
+			chars_in_this_line += tab_size - ((chars_in_this_line-1) % tab_size) - 1;
+
+			if (chars_in_this_line > chars_per_line + 1)
+			    chars_in_this_line = chars_per_line + 1;
+
+			if (dump_text)
+				for (j=temp_i;j<chars_in_this_line+1;j++)
+					g_print(".");
+			/*
+			g_print("\ntabs agregados = %i\n", chars_in_this_line - temp_i);
+			*/
+
+		}
+
+
+		/* Do word wapping here */ 
+		if (chars_in_this_line == chars_per_line + 1 && real)
+		{
+			if (dump_info)
+				g_print ("\nThis lines needs breaking\n");
+
+			temp_i = i; /* We need to save the value of i in case we have to break the line */
+
+			/* We back i till we find a space that we can break the line at */
+			while (buffer[i] != ' ' && buffer[i] != '\t' && i > temp_i - chars_per_line - 1 )
+			{
+				i--;
+				if (dump_text)
+					g_print("\b");
+			}
+
+			if (dump_info)
+				g_print("i got backed up [%i] times\n", temp_i - i);
+
+			/* If this line was "unbreakable" break it at chars_per_line width */
+			if (i == temp_i - chars_per_line - 1)
+			{
+				i = temp_i;
+				if (dump_info)
+					g_print ("We are breaking the line\n");
+			}
+
+			/* We need to remove the trailing blanks so that the next line does not start with
+			   a space or a tab char */
+			temp_i = i; /* Need to be able to determine who many spaces/tabs where removed */
+			while (buffer[i] == ' ' || buffer[i] == '\t')
+				i++;
+			if (dump_info && i!=temp_i)
+				g_print("We removed %i trailing spaces/tabs", i - temp_i);
+
+			/* We need to back i 1 time because this is a for loop and we did not processed the
+			   last character */
+			i--;
+			lines++;
+			if (dump_text && lines%lines_per_page == 0)
+				g_print("\n\n-Page %i-\n\n", lines / lines_per_page + 1);
+
+			chars_in_this_line = 0;
+
+			if (dump_text)
+				g_print("\n");
+		}
+
 	}
 
+	/* If the last line did not finished with a '\n' increment lines */
+	if (buffer[i]!='\n')
+	{
+		lines++;
+		if (dump_info_basic)
+			g_print("\nAdding one line because it was not terminated with a slash+n\n");
+	}
+
+	if (dump_info_basic)
+	{
+		g_print("determine_lines found %i lines.\n", lines);
+	}
+	
+	temp_i = lines;
+	
         /* After counting, scan the doc backwards to determine how many
 	   blanks lines there are (at the bottom),substract that from lines */
-	for ( i=pji->buffer_size-1; i>0; i--)
-		if (pji->buffer[i] != '\n' && pji->buffer[i] != ' ' )
+	for ( i = buffer_size-1; i>0; i--)
+	{
+		if ( buffer[i] != '\n' && buffer[i] != ' ' && buffer[i] != '\t')
 			break;
 		else
-			if (pji->buffer[i] == '\n')
+			if (buffer[i] == '\n')
 				lines--;
+	}
+
+	if (dump_info_basic && lines != temp_i)
+	{
+		g_print("We removed %i line(s) because they contained no text\n", temp_i - lines);
+	}
+
+	if (dump_text)
+		g_print(".\n.\n.\n");
 
 	return lines;
 }
@@ -526,7 +690,7 @@ print_determine_lines (PrintJobInfo *pji, int real)
 static void
 start_job (GnomePrintContext *pc)
 {
-
+	gedit_debug ("\n", DEBUG_PRINT);
 }
 
 static void
@@ -537,6 +701,8 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	GnomeFont *font;
 	float x,y,len;
 	
+	gedit_debug ("\n", DEBUG_PRINT);
+
 	font = gnome_font_new ("Helvetica", 12);
 	gnome_print_setfont (pji->pc, font);
 
@@ -566,6 +732,9 @@ static void
 print_setfont (PrintJobInfo *pji)
 {
 	GnomeFont *font;
+
+	gedit_debug ("\n", DEBUG_PRINT);
+	
 	font = gnome_font_new (pji->font_name, pji->font_size);
 	gnome_print_setfont (pji->pc, font);
 	gtk_object_unref (GTK_OBJECT(font));
@@ -575,18 +744,22 @@ print_setfont (PrintJobInfo *pji)
 static void
 end_page (PrintJobInfo *pji)
 {
+	gedit_debug ("\n", DEBUG_PRINT);
+
 	gnome_print_showpage (pji->pc);
 }
 
 static void
 end_job (GnomePrintContext *pc)
 {
-	
+	gedit_debug ("\n", DEBUG_PRINT);
 }
 
 static void
 print_pji_destroy (PrintJobInfo *pji)
 {
+	gedit_debug ("\n", DEBUG_PRINT);
+
 	gtk_object_unref (GTK_OBJECT (pji->master));
 	g_free (pji->buffer);
 	g_free (pji->filename);
@@ -596,7 +769,7 @@ print_pji_destroy (PrintJobInfo *pji)
 static void
 preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
-	gedit_debug ("F:preview_destroy_cb\n", DEBUG_PRINT);
+	gedit_debug ("\n", DEBUG_PRINT);
 }
 
 
