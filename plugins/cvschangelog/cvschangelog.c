@@ -42,7 +42,7 @@
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
 
 /* AFAIK, all cvs commit messages start with this */
-#define GEDIT_CVSCHANGELOG_START_HEADER "CVS: ------"
+#define GEDIT_CVSCHANGELOG_START_HEADER "\nCVS: ------"
 
 
 #define MENU_ITEM_LABEL		N_("Open CVS Chan_geLogs")
@@ -79,14 +79,17 @@ get_cwd (void)
 static gint
 is_changelog (const gchar * path)
 {
-	int index = strlen (path) - 9;
+	gboolean ret = FALSE;
+	gchar *base;
 
-	if (index >= 0) {
-		if (!strcasecmp (&path[index], "changelog"))
-			return TRUE;
-	}
+	base = g_path_get_basename (path);
 
-	return FALSE;
+	if (g_ascii_strcasecmp (base, "changelog") == 0)
+		ret = TRUE;
+
+	g_free (base);
+
+	return ret;
 }
 
 
@@ -122,6 +125,7 @@ get_changelogs (const gchar *buf)
 					continue;
 
 				local_path = g_strdup_printf("%s/%s", current_dir, filename);
+
 				uri = gnome_vfs_get_uri_from_local_path (local_path);
 				list = g_list_append (list, uri);
 
@@ -178,7 +182,7 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 
 	tmp = list;
 	while (tmp) {
-		gedit_file_open_single_uri ((gchar *)list->data);
+		gedit_file_open_single_uri ((gchar *)tmp->data);
 
 		tmp = tmp->next;
 	}
