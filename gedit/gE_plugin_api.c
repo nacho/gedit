@@ -51,8 +51,10 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
 
+#if 0
   callbacks.document.open = NULL;
   callbacks.document.close = NULL;
+#endif
   callbacks.text.get_selected_text = NULL;
   callbacks.text.set_selected_text = NULL;
   callbacks.document.get_position = NULL;
