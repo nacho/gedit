@@ -1,5 +1,22 @@
 2000-04-04  Chema Celorio  <chema@celorio.com>
 
+	* gedit-file-io.c (gedit_file_save): cleaned
+	  the code and fixed bug #5929. 
+	  (file_save_all_cb): rewrote it.
+	  (file_open_cb): fixed small bug
+	  (file_saveas_destroy): no longer needed
+	  use generic destroy_cb
+	  (file_save_all_as_cb): deleted, no need
+	  to have a save_all_as func.
+	  (file_save_all_as_destroy): ditto
+	  (file_save_all_as_ok_sel): ditto
+	  (file_close_all_cb): rewrote
+	  (file_close_cb): rewrote
+	  (file_revert_do): no longer needed, removed
+	  (file_save_as_cb): fixed a bug
+
+2000-04-04  Chema Celorio  <chema@celorio.com>
+
 	* commands.c: Removed all the file-io
 	functions from here and the prototypes
 	from commands.h

@@ -23,16 +23,19 @@
 #include <gnome.h>
 #include <sys/stat.h>
 #include "gedit.h"
+
 #include "gedit-undo.h"
-#include "gE_prefs.h"
 #include "gedit-window.h"
-#include "gE_view.h"
 #include "gedit-file-io.h"
-#include "commands.h"
 #include "gedit-search.h"
-#include "gE_mdi.h"
 #include "gedit-print.h"
 #include "gedit-menus.h"
+#include "gedit-utils.h"
+
+#include "gE_prefs.h"
+#include "gE_view.h"
+#include "commands.h"
+#include "gE_mdi.h"
 
 
 static void 	  gedit_document_class_init (gedit_document_class *);
@@ -230,6 +233,8 @@ gedit_document_new_with_file (gchar *filename)
 	gedit_document *doc;
 	struct stat stats;
 
+	gedit_debug_mess("gE_mdi.c-gedit-document-new-with-file\n", DEBUG_FILE);
+	
 	if ((doc = gtk_type_new (gedit_document_get_type ())))
 	{
 		if (!gedit_file_open (doc, filename))

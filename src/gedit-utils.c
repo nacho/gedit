@@ -115,10 +115,8 @@ gedit_debug_mess (gchar *message, gint type)
 	case DEBUG_PLUGINS_DEEP:
 		break;
 	case DEBUG_FILE:
-		print = TRUE;
 		break;
 	case DEBUG_FILE_DEEP:
-		print = TRUE;
 		break;
 	}
 	if ( print )

@@ -267,6 +267,8 @@ doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 	size_t len;
 	char *newfname;
 	gedit_document *doc;
+
+	gedit_debug_mess("NO MAMES !", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc || !doc->filename)

@@ -27,7 +27,7 @@
 #include <signal.h>
 #define __need_timespec
 #include <time.h>
-/*#include <signal.h>*/
+#include <signal.h>
 
 #include "gedit.h"
 #include "gE_view.h"
@@ -65,10 +65,10 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	gedit_document *doc;
 	int ret;
 	char msg[100];
+
+	gedit_debug_mess("commands.c - popup create new file", DEBUG_FILE);
 	
 	sprintf (msg  , "The file %s does not exist. Would you like to create it?", title);
-
-
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
 					GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
 					NULL);
@@ -202,6 +202,8 @@ filenames_dropped (GtkWidget        *widget,
 	GList *names, *tmp_list;
 	gedit_document *doc;
 
+	gedit_debug_mess("commands.c : filenames_dropped", DEBUG_FILE);
+	
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
 
