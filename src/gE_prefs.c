@@ -34,7 +34,7 @@ gE_save_settings()
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 
-/*	gE_prefs_set_int ("tab pos", (gint) settings->tab_pos);*/
+	gnome_config_set_int ("tab pos", (gint) settings->tab_pos);
 	gnome_config_set_int ("auto indent", (gboolean) settings->auto_indent);
 	gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
@@ -68,7 +68,8 @@ void gE_get_settings()
 	 
 	gnome_config_push_prefix ("/gEdit/Global/");
 	 
-/*	settings->tab_pos = gE_prefs_get_int("tab pos");*/
+	/*settings->tab_pos = gnome_config_get_int("tab pos");*/
+	mdi->tab_pos = gnome_config_get_int ("tab pos");
 	settings->run = gnome_config_get_int ("run");
 	settings->show_status = gnome_config_get_int ("show statusbar");
 	settings->have_toolbar = gnome_config_get_int ("toolbar");

@@ -916,6 +916,8 @@ file_quit_cb(GtkWidget *widget, gpointer cbdata)
 
 	plugin_save_list();
 
+	gE_save_settings ();
+
 	if (gnome_mdi_remove_all (mdi, FALSE)) {
 	
 	  gtk_object_destroy (GTK_OBJECT (mdi));
