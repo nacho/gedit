@@ -5,241 +5,1552 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2001-11-24 17:00+0100\n"
+"POT-Creation-Date: 2002-02-28 22:42+0100\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gedit2.desktop.in.h:1
-msgid "Gnome Text Editor"
-msgstr "Urejevalnik besedil GNOME"
+#: gedit.desktop.in.h:1
+msgid "Edit text files"
+msgstr "Urejanje datotek z besedili"
 
-#: gedit2.desktop.in.h:2
-msgid "gedit"
-msgstr "gedit"
+#: gedit.desktop.in.h:2
+msgid "Text Editor"
+msgstr "Urejevalnik besedil"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1909
+#: plugins/ASCII/ascii.c:42
+msgid "_ASCII Table"
+msgstr "Tabela _ASCII"
+
+#: plugins/ASCII/ascii.c:45
+msgid "Pop-up a dialog containing an ASCII Table"
+msgstr "Prika≈æi dialog, ki vsebuje tabelo ASCII"
+
+#: plugins/ASCII/ascii.c:325
+msgid "Char"
+msgstr "Znak"
+
+#: plugins/ASCII/ascii.c:332
+msgid "Dec#"
+msgstr "Des#"
+
+#: plugins/ASCII/ascii.c:339
+msgid "Hex#"
+msgstr "≈†est#"
+
+#: plugins/ASCII/ascii.c:346
+msgid "Name"
+msgstr "Ime"
+
+#: plugins/ASCII/ascii.c:391 plugins/ASCII/ascii.c:512
+msgid "ASCII table"
+msgstr "Tabela ASCII"
+
+#: plugins/ASCII/ascii.c:404
+msgid "_Insert char"
+msgstr "_Vstavi znak"
+
+#: plugins/ASCII/ascii.c:513
+msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+msgstr "Ta vtiƒçnik prika≈æe vzkliƒçni dialog, ki vsebuje tabelo ASCII."
+
+#: plugins/ASCII/ascii.c:515
+msgid "Copyright (C) 2001-2002 Paolo Maggi"
+msgstr "Avtorske pravice pridr≈æane (C) 2001-20002 Paolo Maggi"
+
+#: plugins/cvschangelog/cvschangelog.c:44
+msgid "Open CVS Chan_geLogs"
+msgstr "Odpri dnevnike sprememb CVS"
+
+#: plugins/cvschangelog/cvschangelog.c:47
+msgid "Searches for ChangeLogs in the current document and opens them"
+msgstr "I≈°ƒçe za dnevnike sprememb v trenutnem dokumentu in jih odpr"
+
+#: plugins/cvschangelog/cvschangelog.c:235
+msgid "CVS ChangeLog"
+msgstr "Dnevnik sprememb CVS"
+
+#: plugins/cvschangelog/cvschangelog.c:236
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr "Vtiƒçnik, ki odpira dnevnike sprememb najdene v sporoƒçilih udejanjanja CVS."
+
+#: plugins/cvschangelog/cvschangelog.c:238
+msgid "Copyright (C) 2002 - James Willcox"
+msgstr "Avtorske pravice pridr≈æane (C) 2002 - James Willcox"
+
+#: plugins/diff/diff.c:61
+msgid "Co_mpare Files..."
+msgstr "Pri_merjaj datoteki..."
+
+#: plugins/diff/diff.c:64
+msgid "Makes a diff file from two documents or files"
+msgstr "Ustvari datoteko diff iz dveh dokumentov ali datotek"
+
+#: plugins/diff/diff.c:66
+msgid "Compare files"
+msgstr "Primerjaj datoteki"
+
+#. Create the dialog
+#: plugins/diff/diff.c:267
+msgid "Compare two files..."
+msgstr "Primerjaj dve datoteki..."
+
+#: plugins/diff/diff.c:281
+msgid "C_ompare"
+msgstr "Pr_imerjaj"
+
+#: plugins/diff/diff.c:491
+msgid "The two documents you selected are the same."
+msgstr "Dokumenta, ki ste ju izbrali sta enaka."
+
+#: plugins/diff/diff.c:499
+msgid ""
+"The \"first\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"Prva datoteka, ki ste jo izbrali, ne obstaja.\n"
+"\n"
+"Prosim, izberite veljavno datoteko."
+
+#: plugins/diff/diff.c:508
+msgid ""
+"The \"second\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"Druga datoteka, ki ste jo izbrali, ne obstaja.\n"
+"\n"
+"Prosim, izberite veljavno datoteko."
+
+#: plugins/diff/diff.c:516
+msgid "The two files you selected are the same."
+msgstr "Dve datoteki, ki ste ju izbrali sta enaki."
+
+#: plugins/diff/diff.c:533
+msgid "The \"first\" document contains no text."
+msgstr "Prvi dokument ne vsebuje besedila."
+
+#: plugins/diff/diff.c:562
+msgid "The \"second\" document contains no text."
+msgstr "Drugi dokument ne vsebuje besedila."
+
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:583
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"gedit could not create a temporary file."
+msgstr ""
+"Izbranih dokumentov ni mogoƒçe primerjati.\n"
+"\n"
+"gedit ne more ustvariti zaƒçasne datoteke."
+
+#: plugins/diff/diff.c:601 plugins/diff/diff.c:614
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"Error executing the diff command."
+msgstr ""
+"Izbranih dokumentov ni mogoƒçe primerjati.\n"
+"\n"
+"Napaka ob izvajanju ukaza diff."
+
+#: plugins/diff/diff.c:636
+msgid "No differences were found between the selected documents."
+msgstr "Razlike med izbranima dokumentoma niso bile najdene."
+
+#: plugins/diff/diff.c:677
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"The result contains invalid UTF-8 data."
+msgstr ""
+"Izbranih dokumentov ni mogoƒçe primerjati.\n"
+"\n"
+"Rezultat vsebuje neveljavne podatke UTF-8."
+
+#: plugins/diff/diff.c:901
+msgid ""
+"Makes a diff file from two documents or files on disk.\n"
+"\n"
+"For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
+msgstr ""
+"Ustvari datoteko diff iz dveh dokumentov ali datotek na disku\n"
+"Za veƒç informacij o programu diff v ukazni lupini vpi≈°ite \"man diff\".\n"
+
+#: plugins/diff/diff.c:904
+msgid ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
+msgstr ""
+"Avtorske pravice pridr≈æane (C) 2000 - 2001 Chema Celorio \n"
+"Avtorske pravice pridr≈æane (C) 2002 Paolo Maggi"
+
+#: plugins/docinfo/docinfo.c:46
+msgid "_Word Count"
+msgstr "≈†tevilo _besed"
+
+#: plugins/docinfo/docinfo.c:49
+msgid "Get info on current document"
+msgstr "Dobi podatke o trenutnem dokumentu"
+
+#: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
+msgid "Word count"
+msgstr "≈†tevilo besed"
+
+#: plugins/docinfo/docinfo.c:156
+msgid "_Update"
+msgstr "_Osve≈æi"
+
+#: plugins/docinfo/docinfo.c:366
+msgid ""
+"The word count plugin analyzes the current document and determines the "
+"number of words, lines, characters and non-space characters in it and "
+"display the result."
+msgstr ""
+"Vtiƒçnik ≈°tevilo besed analizira trenutni dokument in ugotovi ≈°tevilo besed, "
+"vrstic, znakov in ne-presledkov v njem in prika≈æe rezultat."
+
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
+#: plugins/shell_output/shell_output.c:424
+#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:540
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr "Avtorske pravice pridr≈æane (C) 2002 - Paolo Maggi"
+
+#: plugins/sample/sample.c:41
+msgid "Insert User _Name"
+msgstr "Vstavi uporabni≈°ko _ime"
+
+#: plugins/sample/sample.c:44
+msgid "Insert the user name at the cursor position"
+msgstr "Na polo≈æaju kazalca vstavi uporabni≈°ko ime"
+
+#: plugins/sample/sample.c:148
+msgid "User name"
+msgstr "Uporabni≈°ko ime"
+
+#: plugins/sample/sample.c:149
+msgid "Inserts the user name at the cursor position."
+msgstr "Na polo≈æaju kazalca vstavi uporabni≈°ko ime."
+
+#: plugins/shell_output/shell_output.c:44
+msgid "Insert Shell _Output"
+msgstr "Vstavi _izhod lupine"
+
+#: plugins/shell_output/shell_output.c:47
+msgid "Insert the shell output in the current document"
+msgstr "Vstavi izhod lupine v trenutni dokument"
+
+#: plugins/shell_output/shell_output.c:151
+#: plugins/shell_output/shell_output.c:420
+msgid "Shell output"
+msgstr "Izhod lupine"
+
+#: plugins/shell_output/shell_output.c:164
+msgid "_Run"
+msgstr "_Po≈æeni"
+
+#: plugins/shell_output/shell_output.c:252
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Vnos ukaza lupine je prazen.\n"
+"\n"
+"Prosim, vpi≈°ite veljaven ukaz lupine."
+
+#: plugins/shell_output/shell_output.c:281
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Vnos ukaza lupine je prazen.\n"
+"\n"
+"Prosim, vpi≈°ite veljaven ukaz lupine."
+
+#: plugins/shell_output/shell_output.c:334
+msgid "An error occurs while running the selected command."
+msgstr ""
+"Ob izvajanju izbranega ukaza se je zgodila napaka."
+
+#: plugins/shell_output/shell_output.c:421
+msgid ""
+"Execute a program and insert its output in the current document at the "
+"current cursor position"
+msgstr ""
+"Izvedi program in vstavi njegov izhod v trenutni dokument na polo≈æaju kazalca"
+
+#: plugins/taglist/gedit-taglist-plugin.c:44
+msgid "Tag _List"
+msgstr "_Seznam oznak"
+
+#: plugins/taglist/gedit-taglist-plugin.c:47
+msgid "Show the tag list window"
+msgstr "Ka≈æi okno seznama oznak"
+
+#: plugins/taglist/gedit-taglist-plugin.c:140
+msgid "Tag list"
+msgstr "Seznam oznak"
+
+#: plugins/taglist/gedit-taglist-plugin.c:141
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tabs/strings without having to type them."
+msgstr ""
+"Vtiƒçnik Seznam oznak omogoƒça naƒçin enostavnega vstavljanja pogostih "
+"tabulatorjev/nizov v dokument brez potrebe po tipkanju."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:116
+msgid "Tag list plugin"
+msgstr "Vtiƒçnik seznam oznak"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:134
+msgid "Select the group of tab you want to use."
+msgstr "Izberi skupino tabulatorjev, ki naj se uporabijo."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:158
+msgid "Double-click on a tag to insert it in the current document."
+msgstr "Dvokliknite na oznako za vstavitev v trenutni dokument."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:169
+msgid "Tags"
+msgstr "Oznake"
+
+#: plugins/time/time.c:44
+msgid "_Insert Date/Time"
+msgstr "_Vstavi datum/uro"
+
+#: plugins/time/time.c:47
+msgid "Insert current date and time at the cursor position"
+msgstr "Vstavi trenutni datum in uro na polo≈æaju kazalca"
+
+#: plugins/time/time.c:256
+msgid "Available formats"
+msgstr "Oblike na voljo"
+
+#: plugins/time/time.c:297
+msgid "Configure insert date/time plugin"
+msgstr "Nastavi vtiƒçnik vstavljanja datuma/ure"
+
+#: plugins/time/time.c:537
+msgid "Insert Date/Time"
+msgstr "Vstavi datum/uro"
+
+#: plugins/time/time.c:538
+msgid "Inserts current date and time at the cursor position."
+msgstr "Vstavi trenutna datum in uro na polo≈æaju kazalca."
+
+#: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
+#, c-format
 msgid "Activate %s"
 msgstr "Aktiviraj %s"
 
-#: src/gedit2.c:57
+#: src/dialogs/gedit-dialog-goto-line.c:114
+msgid "Goto line..."
+msgstr "Skoƒçi na vrstico..."
+
+#. Add Goto Line button
+#: src/dialogs/gedit-dialog-goto-line.c:124
+msgid "_Goto line"
+msgstr "_Skoƒçi na vrstico"
+
+#: src/dialogs/gedit-dialog-goto-line.c:140
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr "Nisem mogel najti zahtevanih gradnikov v goto-line.glade2.\n"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:47
+msgid "Plugin"
+msgstr "Vtiƒçnik"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:48
+msgid "Load"
+msgstr "Nalo≈æi"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:314
+msgid "Module file name"
+msgstr "Ime datoteke modula"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:315
+msgid "Author(s)"
+msgstr "Avtor(ji)"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:446
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Nisem na≈°el datoteke plugin-manager.glade2, znova namestite gedit.\n"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:454
+msgid "Plugin Manager"
+msgstr "Upravljalnik vtiƒçnikov"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:481
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr "Neveljavna datoteka glade za upravljalnik vtiƒçnikov -- vsi gradniki niso bili najdeni.\n"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:571
+msgid "Could not create the Plugin Manager dialog"
+msgstr "Nisem mogel ustvariti dialoga upravljalnika vtiƒçnikov"
+
+#: src/dialogs/gedit-dialog-replace.c:167 src/gedit-ui.xml.h:56
+msgid "Replace"
+msgstr "Zamenjaj"
+
+#: src/dialogs/gedit-dialog-replace.c:178
+msgid "Replace _All"
+msgstr "Zamenjaj _vse"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
+#: src/gedit-ui.xml.h:105
+msgid "_Replace"
+msgstr "_Zamenjaj"
+
+#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
+msgid "Find"
+msgstr "Poi≈°ƒçi"
+
+#: src/dialogs/gedit-dialog-replace.c:469
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:695
+msgid "The text \"%s\" was not found."
+msgstr "Besedilo \"%s\" ni bilo najdeno."
+
+#: src/dialogs/gedit-dialog-replace.c:704
+msgid "Found and replaced %d occurences."
+msgstr "Na≈°el in zamenjal sem %d pojavitev."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:73
+msgid "Set program location ..."
+msgstr "Nastavi lokacijo programa..."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:95
+msgid ""
+"Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr ""
+"Nisem mogel najti zahtevanih gradnikov znotraj datoteke program-location-dialog.glade2.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#, c-format
+msgid ""
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
+"\n"
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr ""
+"Vtiƒçnik %s za to nalogo uporablja zunanji program imenovan <tt>%s</tt>.\n"
+"\n"
+"Prosimo, doloƒçite lokacijo programa <tt>%s</tt>."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+msgid "The selected file is not executable."
+msgstr "Izbrana datoteka ni izvr≈°ljiva"
+
+#: src/dialogs/gedit-preferences-dialog.c:202
+msgid "Toolbar"
+msgstr "Orodjarna"
+
+#: src/dialogs/gedit-preferences-dialog.c:203
+msgid "Status bar"
+msgstr "Vrstica stanja"
+
+#: src/dialogs/gedit-preferences-dialog.c:206
+msgid "MDI"
+msgstr "Veƒçdokumentni vmesnik"
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+msgid "Font & Colors"
+msgstr "Pisave in barve"
+
+#: src/dialogs/gedit-preferences-dialog.c:217
+msgid "Tabs"
+msgstr "Uhlj"
+
+#: src/dialogs/gedit-preferences-dialog.c:218
+msgid "Wrap mode"
+msgstr "Naƒçin lomljenja"
+
+#: src/dialogs/gedit-preferences-dialog.c:219
+msgid "Line numbers"
+msgstr "≈†tevilke vrstic"
+
+#: src/dialogs/gedit-preferences-dialog.c:221 src/gedit-ui.xml.h:61
+msgid "Save"
+msgstr "Shrani"
+
+#: src/dialogs/gedit-preferences-dialog.c:222 src/gedit-ui.xml.h:81
+msgid "Undo"
+msgstr "Razveljavi"
+
+#: src/dialogs/gedit-preferences-dialog.c:230
+msgid "Page"
+msgstr "Stran"
+
+#: src/dialogs/gedit-preferences-dialog.c:237
+msgid "Editor"
+msgstr "Urejevalni"
+
+#: src/dialogs/gedit-preferences-dialog.c:238 src/gedit-ui.xml.h:45
+msgid "Print"
+msgstr "Natisni"
+
+#: src/dialogs/gedit-preferences-dialog.c:240
+msgid "User interface"
+msgstr "Uporabni≈°ki vmesnik"
+
+#: src/dialogs/gedit-preferences-dialog.c:307
+msgid "Cat_egories:"
+msgstr "Kategorije"
+
+#: src/dialogs/gedit-preferences-dialog.c:331 src/gedit-ui.xml.h:44
+msgid "Preferences"
+msgstr "Nastavitve"
+
+#: src/dialogs/gedit-preferences-dialog.c:498
+msgid "Categories"
+msgstr "Kategorije"
+
+#: src/gedit2.c:68
 msgid "Show mdi debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje mdi."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje mdi."
 
-#: src/gedit2.c:60
+#: src/gedit2.c:71
 msgid "Show commands debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje ukazov."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje ukazov."
 
-#: src/gedit2.c:63
+#: src/gedit2.c:74
 msgid "Show document debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje dokumenta."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje dokumenta."
 
-#: src/gedit2.c:66
+#: src/gedit2.c:77
 msgid "Show file debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje datoteke."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje datoteke."
 
-#: src/gedit2.c:69
+#: src/gedit2.c:80
 msgid "Show plugin debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje vtiËnikov."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje vtiƒçnikov."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:83
 msgid "Show prefs debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje nastavitev."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje nastavitev."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:86
 msgid "Show printing debugging messages."
-msgstr "Kaæi sporoËil za razhroπËevanje tiska."
+msgstr "Ka≈æi sporoƒçil za razhro≈°ƒçevanje tiska."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:89
 msgid "Show search debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje iskanja."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje iskanja."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:92
 msgid "Show undo debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje razveljavljanja."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje razveljavljanja."
 
-#: src/gedit2.c:84
+#: src/gedit2.c:95
 msgid "Show view debugging messages."
-msgstr "Kaæi sporoËila za razhroπËevanje pogledov."
+msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje pogledov."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:98
 msgid "Show recent debugging messages."
-msgstr "Kaæi zadnja sporoËila za razhroπËevanje."
+msgstr "Ka≈æi zadnja sporoƒçila za razhro≈°ƒçevanje."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:101
 msgid "Turn on all debugging messages."
-msgstr "Vklopi prikazovanje vseh sporoËil za razhroπËevanje."
+msgstr "Vklopi prikazovanje vseh sporoƒçil za razhro≈°ƒçevanje."
 
-#: src/gedit2.c:145
-msgid "The gnome text editor"
+#: src/gedit2.c:159
+msgid "The GNOME text editor"
 msgstr "Urejevalnik besedil GNOME"
 
-#: src/gedit-document.c:443 src/gedit-document.c:454
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr "≈†e ni implementiran."
+
+#: src/gedit-commands.c:339
+msgid "The string \"%s\" has not been found."
+msgstr "Besedilo \"%s\" ni bilo najdeno."
+
+#: src/gedit-commands.c:419
+msgid "Impossible to update gedit settings."
+msgstr "Nastavitev gedit-a ni mogoƒçe posodobiti."
+
+#: src/gedit-commands.c:508
+msgid "gedit"
+msgstr "gedit"
+
+#: src/gedit-commands.c:511
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gedit je majhen enostaven urejevalnik besedil za Gnome"
+
+#: src/gedit-document.c:521 src/gedit-document.c:532
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:443 src/gedit-document.c:454
+#: src/gedit-document.c:521 src/gedit-document.c:532
 msgid "Untitled"
 msgstr "Neimenovan"
 
-#: src/gedit-document.c:506 src/gedit-document.c:605
-msgid "Invalid UTF-8 data encountered reading file"
+#: src/gedit-document.c:648 src/gedit-document.c:754
+msgid "Invalid UTF-8 data"
+msgstr "Neveljavni podatki UTF-8"
+
+#: src/gedit-document.c:948
+#, c-format
+msgid "gedit cannot handle %s: locations in write mode."
+msgstr "gedit ne more obravnavati %s: lokacije v pisljivem naƒçinu."
+
+#: src/gedit-document.c:955
+msgid "gedit cannot handle this kind of location in write mode."
+msgstr "gedit ne more obravnavati tak≈°no vrsto lokacije v pisljivem naƒçinu."
+
+#: src/gedit-document.c:972
+msgid "Could not create the backup copy of the file."
 msgstr ""
-"Ob branju iz datoteke sem naletel na neveljavne podatke UTF-8"
+"Nisem mogel ustvariti varnostne kopije datoteke."
 
-#: src/gedit-document.c:855
+#: src/gedit-document.c:991
+msgid ""
+"Make sure that the path you provided exists, and that you have the "
+"appropriate write permissions."
+msgstr ""
+"Prepriƒçajte se, da pot, ki ste jo navedli obstaja in, da imate ustrezno "
+"dovoljenje za pisanje."
+
+
+#: src/gedit-document.c:1029
+msgid ""
+"There is no enough disk space to save the file.\n"
+"Please, free some space on the disk and try again."
+msgstr ""
+"Ni dovolj diskovnega prostora za shranitev datoteke.\n"
+"Prosim, sprostite nekaj prostora na disku in poskusite znova."
+
+#: src/gedit-document.c:1034
+msgid "The file is too big."
+msgstr "Datoteka je prevelika"
+
+#: src/gedit-document.c:1184
 msgid "It is not possible to revert an Untitled document"
-msgstr "Ne morete razveljaviti neimenovanega dokumenta"
+msgstr "Neimenovanega dokumenta ni mogoƒçe povrniti"
 
-#: src/gedit-file.c:227 src/gedit-file.c:238
-#, c-format
-msgid "Loaded file %s"
-msgstr "Naloæena datoteka %s"
-
-#: src/gedit-file.c:248
-#, c-format
-msgid "Loaded %i files"
-msgstr "Naloæenih %i datotek"
-
-#: src/gedit-file.c:324
+#: src/gedit-file.c:121
 msgid "Open File ..."
 msgstr "Odpri datoteko ..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:411
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Ob odpiranju datoteke \"%s\" se je zgodila napaka.\n"
-"\n"
-"%s."
+#: src/gedit-file.c:131 src/gedit-file.c:630
+msgid "Loaded file '%s'"
+msgstr "Nalo≈æena datoteka '%s'"
 
-#: src/gedit-file.c:479 src/gedit-file.c:676
+#: src/gedit-file.c:241 src/gedit-file.c:315
+#, c-format
 msgid "Saving file '%s' ..."
 msgstr "Shranjujem datoteko '%s' ..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
-msgstr "Neznana napaka"
-
-#: src/gedit-file.c:501 src/gedit-file.c:697
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Ob zapiranju datoteke \"%s\" se je zgodila napaka.\n"
-"\n"
-"%s."
-
-#: src/gedit-file.c:525 src/gedit-file.c:716
+#: src/gedit-file.c:262 src/gedit-file.c:322
 msgid "The document has not been saved."
 msgstr "Dokument ni bil shranjen."
 
-#: src/gedit-file.c:535 src/gedit-file.c:723
+#: src/gedit-file.c:275 src/gedit-file.c:320
 #, c-format
 msgid "File '%s' saved."
 msgstr "Datoteka '%s' je bila shranjena."
 
-#: src/gedit-file.c:602
-msgid "Save As..."
-msgstr "Shrani kot..."
+#: src/gedit-file.c:307
+msgid "Save as ..."
+msgstr "Shrani kot ..."
 
-#: src/gedit-file.c:653
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-"Datoteka imenovana ``%s'' na tem mestu æe obstaja. Jo æelite nadomestiti s "
-"to, ki jo shranjujete?"
-
-#: src/gedit-file.c:658
-msgid "Replace"
-msgstr "Zamenjaj"
-
-#: src/gedit-file.c:808
+#: src/gedit-file.c:473
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr "PovraËam datoteko '%s' ..."
+msgstr "Povraƒçam datoteko '%s' ..."
 
-#: src/gedit-file.c:829
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Ob povraËanju daoteke \"%s\" se je zgodila napaka.\n"
-"\n"
-"%s."
-
-#: src/gedit-file.c:853
+#: src/gedit-file.c:486
 msgid "The document has not been reverted."
 msgstr "Dokument ni bil povrnjen."
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:496
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Datoteka '%s' je bila povrnjena."
 
-#: src/gedit-file.c:1008
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-"Ob branju iz obiËajnega vhoda, se je zgoidla napaka.\n"
-"\n"
-"%s."
+#: src/gedit-file.c:539
+msgid "Loading %d file..."
+msgstr "Nalagam datoteko ≈°t. %d..."
 
-#: src/gedit-mdi.c:456
+#: src/gedit-file.c:575
 #, c-format
+msgid "Loaded %i files"
+msgstr "Nalo≈æenih %i datotek"
+
+#: src/gedit-file.c:684
+msgid "Could not read data from stdin."
+msgstr "Nisem mogel brati podatkov iz standardnega vhoda."
+
+#: src/gedit-file-selector-util.c:97
 msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Datoteka imenovana ''%s'' ≈æe obstaja.\n"
+"Jo ≈æelite nadomestiti s to, ki jo shranjujete?"
+
+#: src/gedit-file-selector-util.c:105
+msgid "Do_n't replace"
+msgstr "_Ne zamenjaj"
+
+#: src/gedit-file-selector-util.c:459
+msgid "Select a filename to save"
+msgstr "Izberite ime datoteke za shranitev"
+
+#: src/gedit-mdi.c:746
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
-"Æelite shraniti spremembe, ki ste jih naredili na dokumentu ``%s''? \n"
+"≈Ωelite shraniti spremembe, ki ste jih naredili na dokumentu \"%s\"? \n"
 "\n"
-"V kolikor jih ne shranite, bodo vaπe spremembe izgubljene."
+"V kolikor jih ne shranite, bodo va≈°e spremembe izgubljene."
 
-#: src/gedit-mdi.c:461
-msgid "_Don't save"
+#: src/gedit-mdi.c:751
+msgid "Do_n't save"
 msgstr "_Ne shrani"
 
-#: src/gedit-mdi.c:541
+#: src/gedit-mdi.c:770
+msgid "_Don't quit"
+msgstr "N_e konƒçaj"
+
+#: src/gedit-mdi.c:774
+msgid "_Don't close"
+msgstr "N_e zapri"
+
+#: src/gedit-mdi.c:861
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/gedit-mdi.c:547
+#: src/gedit-mdi.c:867
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
-#: src/gedit-recent.c:269
-msgid "Open file %s"
-msgstr "Odpri datoteko %s"
+#: src/gedit-plugins-engine.c:159
+msgid "Error, unable to open module file '%s'\n"
+msgstr "Napaka, ne morem odpreti datoteke modula ''%s''\n"
 
-#: src/gedit-recent.c:337
+#: src/gedit-plugins-engine.c:174
+msgid "Error, plugin '%s' does not contain init function."
+msgstr "Napaka, vtiƒçnik '%s' ne vsebuje inicializacijske funkcije."
+
+#: src/gedit-plugins-engine.c:184
+msgid "Error, plugin '%s' does not contain activate function."
+msgstr "Napaka, vtiƒçnik '%s' ne vsebuje aktivacijske funkcije."
+
+#: src/gedit-plugins-engine.c:194
+msgid "Error, plugin '%s' does not contain deactivate function."
+msgstr "Napaka, vtiƒçnik '%s' ne vsebuje deaktivacijske funkcije."
+
+#: src/gedit-plugins-engine.c:224
 #, c-format
-msgid "Unable to open recent file: %s"
-msgstr "Ne morem odpreti nedavne datoteke: %s"
+msgid "Error, impossible to initialize plugin '%s'"
+msgstr "Napaka, ni mogoƒçe inicializirati vtiƒçnika '%s'"
+
+#: src/gedit-plugins-engine.c:232
+msgid "Error, the plugin '%s' did not specified a name"
+msgstr "Napaka, vtiƒçnik '%s' ni navedel imena"
+
+#: src/gedit-plugins-engine.c:312
+#, c-format
+msgid "Error, impossible to save settings of the plugin '%s'"
+msgstr "Napaka, nastavitev vtiƒçnika '%s' ni mogoƒçe shraniti"
+
+#: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
+#, c-format
+msgid "Error, impossible to activate plugin '%s'"
+msgstr "Napka, vtiƒçnika '%s' ni mogoƒçe aktivirati"
+
+#: src/gedit-plugins-engine.c:411
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr "Napaka, vtiƒçnika '%s' ni mogoƒçe deaktivirati"
+
+#: src/gedit-plugins-engine.c:483
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
+msgstr "Napaka, ni mogoƒçe posodobiti uporabni≈°kega vmesnika vtiƒçnika '%s'"
+
+#: src/gedit-print.c:166
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+"gedit ne more tiskati, saj ni na≈°el\n"
+"ene od zahtevanih pisav."
+
+#: src/gedit-print.c:273
+msgid "gedit - Print Document"
+msgstr "gedit - Natisni dokument"
+
+#: src/gedit-print.c:282
+msgid "Lines"
+msgstr "Vrstice"
+
+#: src/gedit-print.c:338
+msgid "File: %s"
+msgstr "Datoteka: %s"
+
+#. Print right text
+#: src/gedit-print.c:343
+msgid "Page: %d"
+msgstr "Stran: %d"
+
+#: src/gedit-print.c:476
+msgid "gedit - Print Preview"
+msgstr "gedit - Predogled tiskanja"
+
+#: src/gedit-print.c:552
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+"Ob tiskanju, se je zgoidla napaka.\n"
+"\n"
+"%s."
+
+#: src/gedit-recent.c:483
+msgid "Open %s"
+msgstr "Odpri %s"
+
+#: src/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr "O tem programu"
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr "O programu..."
+
+#: src/gedit-ui.xml.h:3
+msgid "Add/Remove plugins"
+msgstr "Dodaj/odstrani vtiƒçnike"
+
+#: src/gedit-ui.xml.h:4
+msgid "C_ustomize Status Bar"
+msgstr "P_rikroji vrstico stanja"
+
+#: src/gedit-ui.xml.h:5
+msgid "Change the visibility of the status bar in the current window"
+msgstr "Spremeni vidnost vrstice stanja v trenutnem oknu"
+
+#: src/gedit-ui.xml.h:6
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "Spremeni vidnost orodjarne v trenutnem oknu"
+
+#: src/gedit-ui.xml.h:7
+msgid "Clos_e All"
+msgstr "_Zapri vse"
+
+#: src/gedit-ui.xml.h:8
+msgid "Close"
+msgstr "Zapri"
+
+#: src/gedit-ui.xml.h:9
+msgid "Close All"
+msgstr "Zapri vse"
+
+#: src/gedit-ui.xml.h:10
+msgid "Close all open files"
+msgstr "Zapri vse odprte datoteke"
+
+#: src/gedit-ui.xml.h:11
+msgid "Close the current file"
+msgstr "Zapri trenutno datoteko"
+
+#: src/gedit-ui.xml.h:12
+msgid "Configure the application"
+msgstr "Nastavi program"
+
+#: src/gedit-ui.xml.h:13
+msgid "Contents"
+msgstr "Vsebina"
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr "Kopiraj"
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr "Kopiraj izbrano"
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr "Ustvari nov dokument"
+
+#: src/gedit-ui.xml.h:17
+msgid "Cu_t"
+msgstr "_Izre≈æi"
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize"
+msgstr "Prikroji"
+
+#: src/gedit-ui.xml.h:19
+msgid "Customize toolbars"
+msgstr "Prikroji orodjarne"
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut"
+msgstr "Izre≈æi"
+
+#: src/gedit-ui.xml.h:21
+msgid "Cut the selection"
+msgstr "Izre≈æi izbrano"
+
+#: src/gedit-ui.xml.h:22
+msgid "Delete the selected text"
+msgstr "Zbri≈°i izbrano besedilo"
+
+#: src/gedit-ui.xml.h:23
+msgid "Deleted"
+msgstr "Zbrisano"
+
+#: src/gedit-ui.xml.h:24
+msgid "Dump XML"
+msgstr "Izpi≈°i XML"
+
+#: src/gedit-ui.xml.h:25
+msgid "Dump the UI Xml description"
+msgstr "IZpi≈°i opis uporabni≈°kega vmesnika v XML"
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr "Poi≈°ƒçi znova"
+
+#: src/gedit-ui.xml.h:28
+msgid "Find Ne_xt"
+msgstr "Poi≈°ƒçi naslednjega"
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr "Pojdi na doloƒçeno ≈°tevilko vrstice"
+
+#: src/gedit-ui.xml.h:30
+msgid "Goto _Line"
+msgstr "Skoƒçi na _vrstico"
+
+#: src/gedit-ui.xml.h:31
+msgid "Icon and _Text"
+msgstr "Ikona in _besedilo"
+
+#: src/gedit-ui.xml.h:32
+msgid "Main toolbar"
+msgstr "Glavna orodjarna"
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr "Nova"
+
+#: src/gedit-ui.xml.h:34
+msgid "Only show icons in the toolbar"
+msgstr "V orodjarni ka≈æi le ikone"
+
+#: src/gedit-ui.xml.h:35
+msgid "Open"
+msgstr "Odpri"
+
+#: src/gedit-ui.xml.h:36
+msgid "Open Location..."
+msgstr "Odpri lokacijo ..."
+
+#: src/gedit-ui.xml.h:37
+msgid "Open _Location..."
+msgstr "Odpri _lokacijo ..."
+
+#: src/gedit-ui.xml.h:38
+msgid "Open a file"
+msgstr "Odpri datoteko"
+
+#: src/gedit-ui.xml.h:39
+msgid "Open a file from a specified location"
+msgstr "Odpri datoteko iz navedene lokacije"
+
+#: src/gedit-ui.xml.h:40
+msgid "Open the gedit manual"
+msgstr "Odpri priroƒçnik za gedit"
+
+#: src/gedit-ui.xml.h:41
+msgid "Paste"
+msgstr "Prilepi"
+
+#: src/gedit-ui.xml.h:42
+msgid "Paste the clipboard"
+msgstr "Prilepi odlo≈æi≈°ƒçe"
+
+#: src/gedit-ui.xml.h:43
+msgid "Pr_eferences..."
+msgstr "_Nastavitve..."
+
+#: src/gedit-ui.xml.h:46
+msgid "Print Previe_w"
+msgstr "P_redogled tiskanja"
+
+#: src/gedit-ui.xml.h:47
+msgid "Print Preview"
+msgstr "Predogled tiskanja"
+
+#: src/gedit-ui.xml.h:48
+msgid "Print Setup"
+msgstr "Nastavitve tiskanja"
+
+#: src/gedit-ui.xml.h:49
+msgid "Print preview"
+msgstr "Predogled tiskanja"
+
+#: src/gedit-ui.xml.h:50
+msgid "Print the current file"
+msgstr "Natisni trenutno datoteko"
+
+#: src/gedit-ui.xml.h:51
+msgid "Quit"
+msgstr "Konƒçaj"
+
+#: src/gedit-ui.xml.h:52
+msgid "Quit the program"
+msgstr "Konƒçaj program"
+
+#: src/gedit-ui.xml.h:53
+msgid "Recent _Files"
+msgstr "Nedavne _datoteke"
+
+#: src/gedit-ui.xml.h:54
+msgid "Redo"
+msgstr "Obnovi"
+
+#: src/gedit-ui.xml.h:55
+msgid "Redo the undone action"
+msgstr "Obnovi razveljavljeno dejanje"
+
+#: src/gedit-ui.xml.h:57
+msgid "Replace a string"
+msgstr "Zamenjaj niz"
+
+#: src/gedit-ui.xml.h:58
+msgid "Revert"
+msgstr "Povrni"
+
+#: src/gedit-ui.xml.h:59
+msgid "Revert to a saved version of the file"
+msgstr "Povrni na shranjeno razliƒçico datoteke"
+
+#: src/gedit-ui.xml.h:60
+msgid "Sa_ve All"
+msgstr "S_hrani vse"
+
+#: src/gedit-ui.xml.h:62
+msgid "Save All"
+msgstr "_Shrani vse"
+
+#: src/gedit-ui.xml.h:63
+msgid "Save As"
+msgstr "Shrani kot..."
+
+#: src/gedit-ui.xml.h:64
+msgid "Save _As..."
+msgstr "Shrani _kot..."
+
+#: src/gedit-ui.xml.h:65
+msgid "Save all open files"
+msgstr "Shrani vse odprte datoteke"
+
+#: src/gedit-ui.xml.h:66
+msgid "Save the current file"
+msgstr "Shrani trenutno datoteko"
+
+#: src/gedit-ui.xml.h:67
+msgid "Save the current file with a different name"
+msgstr "Shrani trenutno datoteko pod drugim imenom"
+
+#: src/gedit-ui.xml.h:68
+msgid "Search again for the same string"
+msgstr "Znova i≈°ƒçi enak niz"
+
+#: src/gedit-ui.xml.h:69
+msgid "Search for a string"
+msgstr "I≈°ƒçi niz"
+
+#: src/gedit-ui.xml.h:70
+msgid "Select All"
+msgstr "Izberi vse"
+
+#: src/gedit-ui.xml.h:71
+msgid "Select _All"
+msgstr "Izberi _vse"
+
+#: src/gedit-ui.xml.h:72
+msgid "Select the entire document"
+msgstr "Izberi celoten dokument"
+
+#: src/gedit-ui.xml.h:73
+msgid "Set toolbar button style according to desktop default"
+msgstr "Gumbi orodjarne naj ustrezajo nastavitvam namizja"
+
+#: src/gedit-ui.xml.h:74
+msgid "Setup the page settings for your current printer"
+msgstr "Nastavi stran za va≈° trenutni tiskalnik"
+
+#: src/gedit-ui.xml.h:75
+msgid "Show _Cursor Position"
+msgstr "Ka≈æi polo≈æaj _kazalca"
+
+#: src/gedit-ui.xml.h:76
+msgid "Show _Overwrite Mode"
+msgstr "Ka≈æi naƒçin _prepisovanja"
+
+#: src/gedit-ui.xml.h:77
+msgid "Show _Tooltips"
+msgstr "Ka≈æi _namige"
+
+#: src/gedit-ui.xml.h:78
+msgid "Show cursor position in the statusbar"
+msgstr "Ka≈æi polo≈æaj kazalca v vrstici stanja"
+
+#: src/gedit-ui.xml.h:79
+msgid "Show overwrite mode in the statusbar"
+msgstr "Ka≈æi naƒçin prepisovanja v vrstici stanja"
+
+#: src/gedit-ui.xml.h:80
+msgid "Show tooltips in the toolbar"
+msgstr "Ka≈æi namige v orodjarni"
+
+#: src/gedit-ui.xml.h:82
+msgid "Undo the last action"
+msgstr "Razveljavi zadnje dejanje"
+
+#: src/gedit-ui.xml.h:83
+msgid "_About..."
+msgstr "_O programu..."
+
+#: src/gedit-ui.xml.h:84
+msgid "_Close"
+msgstr "_Zapri"
+
+#: src/gedit-ui.xml.h:85
+msgid "_Contents"
+msgstr "_Vsebina"
+
+#: src/gedit-ui.xml.h:86
+msgid "_Copy"
+msgstr "_Kopiraj"
+
+#: src/gedit-ui.xml.h:87
+msgid "_Customize Toolbar"
+msgstr "_Prikroji orodjarno"
+
+#: src/gedit-ui.xml.h:88
+msgid "_Debug"
+msgstr "_Razhro≈°ƒçuj"
+
+#: src/gedit-ui.xml.h:89
+msgid "_Delete"
+msgstr "_Zbri≈°i"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Desktop Default"
+msgstr "Privzeto po _namizju"
+
+#: src/gedit-ui.xml.h:91
+msgid "_Documents"
+msgstr "_Dokumenti"
+
+#: src/gedit-ui.xml.h:92
+msgid "_Edit"
+msgstr "_Uredi"
+
+#: src/gedit-ui.xml.h:93
+msgid "_File"
+msgstr "_Datoteka"
+
+#: src/gedit-ui.xml.h:94
+msgid "_Find"
+msgstr "_Poi≈°ƒçi"
+
+#: src/gedit-ui.xml.h:95
+msgid "_Help"
+msgstr "_Pomoƒç"
+
+#: src/gedit-ui.xml.h:96
+msgid "_Icon"
+msgstr "_Ikona"
+
+#: src/gedit-ui.xml.h:97
+msgid "_New"
+msgstr "_Nova"
+
+#: src/gedit-ui.xml.h:98
+msgid "_Open..."
+msgstr "_Odpri..."
+
+#: src/gedit-ui.xml.h:99
+msgid "_Paste"
+msgstr "_Prilepi"
+
+#: src/gedit-ui.xml.h:100
+msgid "_Plugin Manager"
+msgstr "_Upravljalnik vtiƒçnikov"
+
+#: src/gedit-ui.xml.h:101
+msgid "_Plugin Manager..."
+msgstr "_Upravljalnik vtiƒçnikov..."
+
+#: src/gedit-ui.xml.h:102
+msgid "_Print..."
+msgstr "Na_tisni..."
+
+#: src/gedit-ui.xml.h:103
+msgid "_Quit"
+msgstr "_Konƒçaj"
+
+#: src/gedit-ui.xml.h:104
+msgid "_Redo"
+msgstr "_Obnovi"
+
+#: src/gedit-ui.xml.h:106
+msgid "_Revert"
+msgstr "_Povrni"
+
+#: src/gedit-ui.xml.h:107
+msgid "_Save"
+msgstr "_Shrani"
+
+#: src/gedit-ui.xml.h:108
+msgid "_Search"
+msgstr "_Iskanje"
+
+#: src/gedit-ui.xml.h:109
+msgid "_Status Bar"
+msgstr "Vrstica _stanja"
+
+#: src/gedit-ui.xml.h:110
+msgid "_Toolbar"
+msgstr "_Orodjarna"
+
+#: src/gedit-ui.xml.h:111
+msgid "_Tools"
+msgstr "_Orodja"
+
+#: src/gedit-ui.xml.h:112
+msgid "_Undo"
+msgstr "_Razveljavi"
+
+#: src/gedit-ui.xml.h:113
+msgid "_View"
+msgstr "_Poglej"
+
+#: src/gedit-utils.c:840
+#, c-format
+msgid ""
+"Could not find the file \"%s\".\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Nisem na≈°el datoteke \"%s\".\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:847
+#, c-format
+msgid "Could not open the file \"%s\" because it contains corrupted data."
+msgstr "Nisem mogel odpreti datoteke \"%s\", ker vsebuje pokvarjene podatke."
+
+#: src/gedit-utils.c:858
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker gedit ne zna obravnavati lokacij %s"
+
+#: src/gedit-utils.c:866
+msgid "Could not open the file \"%s\""
+msgstr "Nisem mogel odpreti datoteke \"%s\""
+
+#: src/gedit-utils.c:873
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr "Nisem mogel odpreti datoteke \"%s\", ker vsebuje podatke v neveljavni obliki zapisa"
+
+#: src/gedit-utils.c:880
+#, c-format
+msgid "Could not open the file \"%s\" because it is too big."
+msgstr "Nisem mogel odpreti datoteke \"%s\", ker je predolga"
+
+#: src/gedit-utils.c:887
+#, c-format
+msgid ""
+"\"%s\" is not a valid location.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" ni veljavna lokacija.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:894
+#, c-format
+msgid "Could not open the file \"%s\" because access was denied."
+msgstr "Nisem mogel odpreti datoteke \"%s\", ker je bil dostop zavrnjen."
+
+#: src/gedit-utils.c:901
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because there are too many open files\n"
+"\n"
+".Please, close some open file and try again."
+msgstr "Nisem mogel odpreti datoteke \"%s\", ker je preveƒç odprtih datotek\n"
+"\n"
+"Prosim, nekaj jih zaprite in poskusite znova."
+
+#: src/gedit-utils.c:909
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" je imenik.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:916
+#, c-format
+msgid ""
+"Not enough available memory to open the file \"%s\".Please, close some "
+"running application and try again."
+msgstr ""
+"Na voljo je premalo pomnilnika za odprtje datoteke \"%s\". Prosim, zaprite nekaj programov in poskusite znova."
+
+#: src/gedit-utils.c:929
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because no host \"%s\" could be found. \n"
+"\n"
+"Please, check that you typed the location correctly and that your proxy "
+"settings are correct and then try again"
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker stre≈ænik \"%s\" ni bil najden.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in ali so nastavitve "
+"va≈°ega posrednika pravilne ter poskusite znova."
+
+#: src/gedit-utils.c:942
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker je ime stre≈ænika neveljavno.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:949
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker je ime stre≈ænika prazno.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:956
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the attempt to log in failed.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker poskus prijave ni uspel.\n"
+"\n"
+"Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
+
+#: src/gedit-utils.c:964
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
+"\n"
+"Probably, you are trying to open a binary file."
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\", ker vsebuje neveljavne podatke UTF-8.\n"
+"\n"
+"Verjetno posku≈°ate odpreti binarno datoteko."
+
+#: src/gedit-utils.c:1002
+msgid "Could not open the file \"%s\"."
+msgstr "Nisem mogel odpreti datoteke \"%s\"."
+
+#: src/gedit-utils.c:1053
+msgid "Could not save the file \"%s\"."
+msgstr "Nisem shraniti datoteke \"%s\"."
+
+#: src/gedit-utils.c:1057
+msgid ""
+"Could not save the file \"%s\".\n"
+"\n"
+"%s"
+msgstr "Nisem mogel shraniti datoteke \"%s\".\n"
+"\n"
+"%s."
+
+#: src/gedit-utils.c:1110
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot find it.\n"
+"\n"
+"Perhaps, it has recently been deleted."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker je gedit ne najde.\n"
+"\n"
+"Morda je bila nedavno zbrisana."
+
+#: src/gedit-utils.c:1117
+#, c-format
+msgid "Could not revert the file \"%s\" because it contains corrupted data."
+msgstr "Nisem mogel povrniti datoteke \"%s\", ker vsebuje pokvarjene podatke."
+
+#: src/gedit-utils.c:1128
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker gedit ne zna obravnavati lokacij %s."
+
+#: src/gedit-utils.c:1136
+msgid "Could not revert the file \"%s\""
+msgstr "Nisem mogel povrniti datoteke \"%s\""
+
+#: src/gedit-utils.c:1143
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains data in an invalid "
+"format."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker vsebuje podatke v neveljavni obliki zapisa"
+
+
+#: src/gedit-utils.c:1150
+#, c-format
+msgid "Could not revert the file \"%s\" because it is too big."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker je prevelika."
+
+#: src/gedit-utils.c:1157
+#, c-format
+msgid "Could not revert the file \"%s\" because access was denied."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker je bil dostop zavrnjen."
+
+#: src/gedit-utils.c:1164
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because there are too many open files\n"
+"\n"
+".Please, close some open file and try again."
+msgstr ""
+"Ne morem povrniti datoteke \"%s\", ker je preveƒç odprtih datotek\n"
+"\n"
+"Prosim, zaprite nekaj datotek in poskusite znova."
+
+#: src/gedit-utils.c:1172
+#, c-format
+msgid ""
+"Not enough available memory to revert the file \"%s\".Please, close some "
+"running application and try again."
+msgstr ""
+"Za povrnitev datoteke \"%s\" ni dovolj pomnilnika. Prosim zaprite nekaj programov in poskusite znova."
+
+#: src/gedit-utils.c:1185
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because no host \"%s\" could be found. \n"
+"\n"
+"Please, check that your proxy settings are correct and try again"
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker stre≈ænik \"%s\" ni bil najden. \n"
+"\n"
+"Prosim, preverite ali so nastavitve va≈°ega posrednika pravilne in poskusite znova."
+
+#: src/gedit-utils.c:1197
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker je bilo ime stre≈ænika prazno.\n"
+"\n"
+"Prosim, preverite ali so nastavitve va≈°ega posrednika pravilne in poskusite znova."
+
+
+#: src/gedit-utils.c:1204
+#, c-format
+msgid "Could not revert the file \"%s\" because the attempt to log in failed."
+msgstr "Nisem mogel povrniti datoteke \"%s\", ker je poskus prijave ni uspel."
+
+#: src/gedit-utils.c:1211
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
+"\n"
+"Probably, you are trying to revert a binary file."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\", ker vsebuje neveljavne podatke UTF-8.\n"
+"\n"
+"Verjetno posku≈°ate povrniti binarno datoteko."
+
+#: src/gedit-utils.c:1220
+msgid "It is not possible to revert an Untitled document."
+msgstr "Neimenovanega dokumenta ni mogoƒçe povrniti"
+
+#: src/gedit-utils.c:1258
+msgid "Could not revert the file \"%s\"."
+msgstr ""
+"Nisem mogel povrniti datoteke \"%s\"."
+
+#: src/gedit-view.c:878
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr "  Vr. %d, St. %d"
+
+#: src/gedit-view.c:916
+msgid "  OVR"
+msgstr "  PREP"
+
+#: src/gedit-view.c:918
+msgid "  INS"
+msgstr "  VSTAV"
+
+#~ msgid "Invalid UTF-8 data encountered reading file"
+#~ msgstr "Ob branju iz datoteke sem naletel na neveljavne podatke UTF-8"
+
+#~ msgid "Unknow error"
+#~ msgstr "Neznana napaka"
 
 #~ msgid "Browse"
 #~ msgstr "Splet"
 
 #~ msgid "Web browse plugin"
-#~ msgstr "VtiËnik za brskanje po spletu"
+#~ msgstr "Vtiƒçnik za brskanje po spletu"
 
 #~ msgid "gedit: Web Browse plugin"
-#~ msgstr "gedit: VtiËnik za splet"
+#~ msgstr "gedit: Vtiƒçnik za splet"
 
 #~ msgid "Enter the _URL to browse for:"
-#~ msgstr "Vpiπite _URL za brskanje:"
+#~ msgstr "Vpi≈°ite _URL za brskanje:"
 
 #~ msgid "Lynx found at: "
 #~ msgstr "Program lynx je bil najden v:"
@@ -254,10 +1565,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Pretvori"
 
 #~ msgid "Number Converter"
-#~ msgstr "Pretvornik πtevil"
+#~ msgstr "Pretvornik ≈°tevil"
 
 #~ msgid "gedit: Number Converter plugin"
-#~ msgstr "gedit: VtiËnik za pretvorbo πtevil"
+#~ msgstr "gedit: Vtiƒçnik za pretvorbo ≈°tevil"
 
 #~ msgid "_Value to be converted:"
 #~ msgstr "_Vrednost za pretvorbo:"
@@ -266,50 +1577,16 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "_Pretvorjena vrednost:"
 
 #~ msgid " Decimal to _Hex "
-#~ msgstr " Desetiπko v πe_stnajstiπko "
+#~ msgstr " Deseti≈°ko v ≈°e_stnajsti≈°ko "
 
 #~ msgid " Decimal to _Octal "
-#~ msgstr " Desetiπko v _osmiπko "
+#~ msgstr " Deseti≈°ko v _osmi≈°ko "
 
 #~ msgid " Hex to Decima_l "
-#~ msgstr " ©estnajstiπko v dese_tiπko "
+#~ msgstr " ≈†estnajsti≈°ko v dese_ti≈°ko "
 
 #~ msgid "diff"
 #~ msgstr "Program diff"
-
-#~ msgid "The two documents you selected are the same."
-#~ msgstr "Dokumenta, ki ste ju izbrali sta enaka."
-
-#~ msgid ""
-#~ "The \"first\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Prva datoteka, ki ste jo izbrali, ne obstaja.\n"
-#~ "\n"
-#~ "Prosim izberite veljavno datoteko."
-
-#~ msgid ""
-#~ "The \"second\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Druga datoteka, ki ste jo izbrali, ne obstaja.\n"
-#~ "\n"
-#~ "Prosim izberite veljavno datoteko."
-
-#~ msgid "The \"first\" document contains no text."
-#~ msgstr "Prvi dokument vsebuje besedila."
-
-#~ msgid "The \"second\" document contains no text."
-#~ msgstr "Drugi dokument ne vsebuje besedila."
-
-#~ msgid ""
-#~ "gedit could not create a temp file.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "gedit ne more ustvariti zaËasne datoteke.\n"
-#~ "\n"
 
 #~ msgid "Untitled %i"
 #~ msgstr "Neimenovan %i"
@@ -317,18 +1594,8 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "Diff"
 #~ msgstr "Program diff"
 
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr "Ustvari datoteko diff iz dveh dokumentov ali datotek"
-
-#~ msgid ""
-#~ "Makes a diff file from two documents or files on disk\n"
-#~ "For more info on diff, type \"man diff\" in a shell prompt\n"
-#~ msgstr ""
-#~ "Ustvari datoteko diff iz dveh dokumentov ali datotek na disku\n"
-#~ "Za veË informacij programu o diff v ukazni lupini vpiπite \"man diff\"\n"
-
 #~ msgid "gedit: Diff plugin"
-#~ msgstr "gedit: VtiËnik diff"
+#~ msgstr "gedit: Vtiƒçnik diff"
 
 #~ msgid "Choose the files to compare"
 #~ msgstr "Izberi datoteke za primerjavo"
@@ -352,32 +1619,29 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Izberi drugo datoteko..."
 
 #~ msgid "Use the _unified output format (-u option)"
-#~ msgstr "Uporabi poenoteno obliko izpisa (moænost -u)"
+#~ msgstr "Uporabi poenoteno obliko izpisa (mo≈ænost -u)"
 
 #~ msgid "Diff found at: "
 #~ msgstr "Program diff je bil najden v: "
 
 #~ msgid "email"
-#~ msgstr "e-poπta"
+#~ msgstr "e-po≈°ta"
 
 #~ msgid "Executing command: %s"
 #~ msgstr "Izvajam ukaz: %s"
 
 #~ msgid "Email"
-#~ msgstr "E-poπta"
-
-#~ msgid "Email the current document"
-#~ msgstr "E-poπlji trenutni dokument"
+#~ msgstr "E-po≈°ta"
 
 #~ msgid ""
 #~ "Email the current document to a specified email address\n"
 #~ "gedit searches for sendmail to use this plugin."
 #~ msgstr ""
-#~ "Poπlji trenutni dokument po elektronski poπti na doloËen naslov\n"
-#~ "vtiËnik uporablja program sendmail."
+#~ "Po≈°lji trenutni dokument po elektronski po≈°ti na doloƒçen naslov\n"
+#~ "vtiƒçnik uporablja program sendmail."
 
 #~ msgid "gedit: e-mail plugin"
-#~ msgstr "gedit: vtiËnik za e-poπto"
+#~ msgstr "gedit: vtiƒçnik za e-po≈°to"
 
 #~ msgid "From:"
 #~ msgstr "Od:"
@@ -395,7 +1659,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "label12"
 
 #~ msgid "File to use as body of message: "
-#~ msgstr "Datoteka, ki naj se uporabi kot telo sporoËila: "
+#~ msgstr "Datoteka, ki naj se uporabi kot telo sporoƒçila: "
 
 #~ msgid "Sendmail found at:"
 #~ msgstr "Sendmail najden v:"
@@ -404,19 +1668,13 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "label13"
 
 #~ msgid "gedit: E-mail plugin"
-#~ msgstr "gedit: VtiËnik za e-poπto"
+#~ msgstr "gedit: Vtiƒçnik za e-po≈°to"
 
 #~ msgid "F_rom:"
 #~ msgstr "_Od:"
 
 #~ msgid "_Subject:"
 #~ msgstr "_Zadeva:"
-
-#~ msgid "_To:"
-#~ msgstr "_Za:"
-
-#~ msgid "filename"
-#~ msgstr "ime datoteke"
 
 #~ msgid "Reverse"
 #~ msgstr "Obrni"
@@ -428,28 +1686,13 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Pozdravljen svet"
 
 #~ msgid "Sample 'hello world' plugin."
-#~ msgstr "VzorËni vtiËnik 'pozdravljen svet'."
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Vnos ukaza lupine je prazen.\n"
-#~ "\n"
-#~ "Prosim, napiπite veljaven ukaz lupine."
-
-#~ msgid "Shell Output"
-#~ msgstr "Izhod lupine"
-
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "Vstavi izhod lupine v dokument"
+#~ msgstr "Vzorƒçni vtiƒçnik 'pozdravljen svet'."
 
 #~ msgid "gedit: Shell Output plugin"
-#~ msgstr "gedit: VtiËnik izhoda lupine"
+#~ msgstr "gedit: Vtiƒçnik izhoda lupine"
 
 #~ msgid "Specify the working directory and the command you want to run."
-#~ msgstr "Navedite delovni imenik in ukaz, ki ga æelite pognati"
+#~ msgstr "Navedite delovni imenik in ukaz, ki ga ≈æelite pognati"
 
 #~ msgid "_Working directory:"
 #~ msgstr "_Delovni imenik:"
@@ -460,26 +1703,14 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "Select the working directory..."
 #~ msgstr "Izberi delovni imenik"
 
-#~ msgid "Insert Time"
-#~ msgstr "Vstavi Ëas"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Vstavi trenutni datum in uro"
-
 #~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 #~ msgstr "(C) 1998, 1999, 2000 Alex Roberts in Evan Lawrence"
 
-#~ msgid "gedit is a small and lightweight text editor for GNOME."
-#~ msgstr "gedit je majhen enostaven urejevalnik besedil za GNOME."
-
 #~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
-#~ msgstr "Za uporabo vtiËnika %s morate navesti lokacijo za \"%s\"."
+#~ msgstr "Za uporabo vtiƒçnika %s morate navesti lokacijo za \"%s\"."
 
 #~ msgid "gedit: Preferences"
 #~ msgstr "gedit: Nastavitve"
-
-#~ msgid "Find"
-#~ msgstr "PoiπËi"
 
 #~ msgid "Search string not found"
 #~ msgstr "Iskano besedilo ni bilo najdeno"
@@ -487,29 +1718,11 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "Search string not found."
 #~ msgstr "Iskano besedilo ni bilo najdeno."
 
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Naπel in zamenjal %i pojavitev."
-
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr "Nisem mogel rezervirati pomnilnika za Zamenjaj vse pojavitve."
 
-#~ msgid "Goto Line"
-#~ msgstr "SkoËi na vrstico"
-
-#~ msgid "Line number:"
-#~ msgstr "©tevilka vrstice:"
-
-#~ msgid "Preferences"
-#~ msgstr "Nastavitve"
-
 #~ msgid "Appearance"
 #~ msgstr "Videz"
-
-#~ msgid "S_how statusbar"
-#~ msgstr "_Kaæi vrstico stanja"
-
-#~ msgid "Set toolbar according to _system settings"
-#~ msgstr "Nastavi orodno vrstico ustrezno _sistemskim nastavitvam"
 
 #~ msgid "Set toolbar to _icons only"
 #~ msgstr "Nastavi orodno vrstico le na _ikone"
@@ -518,19 +1731,19 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Nastavi orodno vrstico na ikone z _besedilom"
 
 #~ msgid "Editor Behavior"
-#~ msgstr "Obnaπanje urejevalnika"
+#~ msgstr "Obna≈°anje urejevalnika"
 
 #~ msgid "Enable _Auto-indent"
-#~ msgstr "VkljuËi s_amodejno oznaËevanje"
+#~ msgstr "Vkljuƒçi s_amodejno oznaƒçevanje"
 
 #~ msgid "Tab _width: "
-#~ msgstr "©irina _uhlja: "
+#~ msgstr "≈†irina _uhlja: "
 
 #~ msgid "General"
-#~ msgstr "Sploπno"
+#~ msgstr "Splo≈°no"
 
 #~ msgid "MDI (Multiple Document Interface)"
-#~ msgstr "MDI (veËdokumentni vmesnik)"
+#~ msgstr "MDI (veƒçdokumentni vmesnik)"
 
 #~ msgid ""
 #~ "Left\n"
@@ -555,13 +1768,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "Privzet\n"
 
 #~ msgid "_Mode: "
-#~ msgstr "_NaËin: "
+#~ msgstr "_Naƒçin: "
 
 #~ msgid "Notebook _tab position: "
 #~ msgstr "Mesto _uhljev notesnika: "
-
-#~ msgid "Undo"
-#~ msgstr "Razveljavi"
 
 #~ msgid "Set limit on _undo levels to:"
 #~ msgstr "Nastavi omejitev _razeljavitvenih stopenj na:"
@@ -579,7 +1789,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Izberi pisavo"
 
 #~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCc»ËDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSs©πTtUuVvWwXxYyZzÆæ"
+#~ msgstr "AaBbCcƒåƒçDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSs≈†≈°TtUuVvWwXxYyZz≈Ω≈æ"
 
 #~ msgid "_Default font: "
 #~ msgstr "_Privzeta pisava: "
@@ -596,9 +1806,6 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "_Foreground: "
 #~ msgstr "Os_predje: "
 
-#~ msgid "Fonts/Colors"
-#~ msgstr "Pisave/Barve"
-
 #~ msgid "Printing"
 #~ msgstr "Tiskanje"
 
@@ -606,10 +1813,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Dodaj _glavo"
 
 #~ msgid "Enable word _wrapping"
-#~ msgstr "VkljuËi lo_mljenje vrstic ob besedah"
+#~ msgstr "Vkljuƒçi lo_mljenje vrstic ob besedah"
 
 #~ msgid "Print line _numbers every:"
-#~ msgstr "Natisni π_tevilke vrstic vsakih:"
+#~ msgstr "Natisni ≈°_tevilke vrstic vsakih:"
 
 #~ msgid "l_ine(s)"
 #~ msgstr "_vrstic"
@@ -618,52 +1825,34 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Orientacija"
 
 #~ msgid "_Portrait"
-#~ msgstr "_PokonËno"
+#~ msgstr "_Pokonƒçno"
 
 #~ msgid "_Landscape"
-#~ msgstr "_LeæeËe"
+#~ msgstr "_Le≈æeƒçe"
 
 #~ msgid "Paper"
 #~ msgstr "Papir"
-
-#~ msgid "gedit: Set program location..."
-#~ msgstr "gedit: Nastavi lokacijo programa..."
 
 #~ msgid "label"
 #~ msgstr "label"
 
 #~ msgid "_Location to search for:"
-#~ msgstr "_Pot kjer naj se iπËe:"
+#~ msgstr "_Pot kjer naj se i≈°ƒçe:"
 
 #~ msgid "gedit: Browse for program location..."
 #~ msgstr "gedit: Brskaj za lokacijo programa..."
 
-#~ msgid "Find Next"
-#~ msgstr "PoiπËi naslednjega"
-
-#~ msgid "Replace All"
-#~ msgstr "Zamenjaj vse"
-
 #~ msgid "_Search for: "
-#~ msgstr "_IπËi za: "
+#~ msgstr "_I≈°ƒçi za: "
 
 #~ msgid "_Replace with: "
 #~ msgstr "_Zamenjaj z: "
 
 #~ msgid "Search from the _beginning of the document"
-#~ msgstr "IπËi od _zaËetka dokumenta"
-
-#~ msgid "Search from the _cursor position"
-#~ msgstr "IπËi od _kazalca"
+#~ msgstr "I≈°ƒçi od _zaƒçetka dokumenta"
 
 #~ msgid "Case _sensitive"
-#~ msgstr "_Razlikuj velike in male Ërke"
-
-#~ msgid "Plugins manager..."
-#~ msgstr "Upravljalnik vtiËnikov..."
-
-#~ msgid "Select the plugins to activate:"
-#~ msgstr "Izberite vtiËnike, ki naj bodo aktivirani:"
+#~ msgstr "_Razlikuj velike in male ƒçrke"
 
 #~ msgid "_Deactivate all"
 #~ msgstr "_Deaktiviraj vse"
@@ -671,23 +1860,14 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "De_scription"
 #~ msgstr "_Opis"
 
-#~ msgid "File name:"
-#~ msgstr "Ime datoteke:"
-
-#~ msgid "Author(s):"
-#~ msgstr "Avtor(ji):"
-
 #~ msgid "De_tails"
 #~ msgstr "_Podrobnosti"
 
 #~ msgid "Open from URI"
 #~ msgstr "Odpri iz URIja"
 
-#~ msgid "Open"
-#~ msgstr "Odpri"
-
 #~ msgid "Enter the location (URI) of the file you would like to open:"
-#~ msgstr "Vnesite lokacijo (URI) datoteke, ki jo æelite odpreti:"
+#~ msgstr "Vnesite lokacijo (URI) datoteke, ki jo ≈æelite odpreti:"
 
 #~ msgid "RO - "
 #~ msgstr "Le branje - "
@@ -696,13 +1876,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "%s %d*"
 
 #~ msgid "``%s'' has been modified.  Do you wish to save it?"
-#~ msgstr "``%s'' je bil spremenjen.  Ga æelite shraniti?"
+#~ msgstr "``%s'' je bil spremenjen.  Ga ≈æelite shraniti?"
 
 #~ msgid "This file does not end with a valid extension\n"
 #~ msgstr "Ime te datoteke nima velajvne pripone\n"
-
-#~ msgid "The file %s was not found."
-#~ msgstr "Datoteka %s ni bila najdena."
 
 #~ msgid ""
 #~ "An error was encountered while opening the file \"%s\".\n"
@@ -730,7 +1907,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "%s\n"
 #~ "\n"
 #~ "se je zgodila napaka\n"
-#~ "PrepriËajte se, da imate dovoljenje za odprtje datoteke."
+#~ "Prepriƒçajte se, da imate dovoljenje za odprtje datoteke."
 
 #~ msgid ""
 #~ "Internal error reading the file: \n"
@@ -743,25 +1920,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "\n"
 #~ " %s \n"
 #~ "\n"
-#~ "Prosim, sporoËite hroπËa na submit@bugs.gnome.org."
+#~ "Prosim, sporoƒçite hro≈°ƒça na submit@bugs.gnome.org."
 
 #~ msgid "The document contains no data."
 #~ msgstr "Dokument ne vsebuje podatkov."
-
-#~ msgid ""
-#~ "gedit was unable to save the file: \n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Make sure that the path you provided exists,and that you have the "
-#~ "appropriate write permissions."
-#~ msgstr ""
-#~ "gedit ni uspel shraniti datoteke: \n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "PrepriËajte se, Ëe pot, ki ste jo navedli obstaja in ali imate ustrezno "
-#~ "dovoljenje za pisanje."
 
 #~ msgid ""
 #~ "gedit was unable to save the file:\n"
@@ -775,7 +1937,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "\n"
 #~ " %s \n"
 #~ "\n"
-#~ "zaradi neznanega razloga (1). Prosim sporoËite ta problem na submit@bugs."
+#~ "zaradi neznanega razloga (1). Prosim sporoƒçite ta problem na submit@bugs."
 #~ "gnome.org"
 
 # c-format
@@ -791,17 +1953,14 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "\n"
 #~ " %s \n"
 #~ "\n"
-#~ "Zaradi neznanega razloga (2). Prosim sporoËite ta problem na submit@bugs."
+#~ "Zaradi neznanega razloga (2). Prosim sporoƒçite ta problem na submit@bugs."
 #~ "gnome.org"
-
-#~ msgid "Could not allocate the required memory."
-#~ msgstr "Nisem mogel rezervirati æelenega pomnilnika."
 
 #~ msgid "Error in the pipe."
 #~ msgstr "Napaka v cevi."
 
 #~ msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-#~ msgstr "Datoteka ``%s'' bo prepisana. Æelite nadaljevati?"
+#~ msgstr "Datoteka ``%s'' bo prepisana. ≈Ωelite nadaljevati?"
 
 #~ msgid "Error saving file!"
 #~ msgstr "Napaka pri shranjevanju datoteke!"
@@ -810,14 +1969,14 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "Are you sure you wish to revert all changes?\n"
 #~ "(%s)"
 #~ msgstr ""
-#~ "Ste prepriËani, da æelite razveljaviti vse spremembe?\n"
+#~ "Ste prepriƒçani, da ≈æelite razveljaviti vse spremembe?\n"
 #~ "(%s)"
 
 #~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
-#~ msgstr "Datoteka ``%s'' ne obstaja. Ali jo æelite ustvariti?"
+#~ msgstr "Datoteka ``%s'' ne obstaja. Ali jo ≈æelite ustvariti?"
 
 #~ msgid "Show window debugging messages."
-#~ msgstr "Kaæi sporoËila za razhroπËevanje oken."
+#~ msgstr "Ka≈æi sporoƒçila za razhro≈°ƒçevanje oken."
 
 #~ msgid "Cannot initialize gnome-vfs."
 #~ msgstr "Nisem mogel inicializirati gnome-vfs."
@@ -825,53 +1984,17 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "Open (swap) .c/.h file"
 #~ msgstr "Odpri (zamenjaj) .s/.h datoteko"
 
-#~ msgid "_New"
-#~ msgstr "_Nova"
-
-#~ msgid "Create a new document"
-#~ msgstr "Ustvari nov dokument"
-
-#~ msgid "Sav_e All"
-#~ msgstr "_Shrani vse"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "Shrani vse odprte datoteke"
-
-#~ msgid "_Revert"
-#~ msgstr "_Povrni"
-
 #~ msgid "Open from _URI..."
 #~ msgstr "Odpri iz _URIja ..."
 
-#~ msgid "Open a file from a specified URI"
-#~ msgstr "Odpri datoteko iz navedenega URIja"
-
 #~ msgid "Print pre_view"
 #~ msgstr "Pre_dogled tiskanja"
-
-#~ msgid "Print preview"
-#~ msgstr "Predogled tiskanja"
 
 #~ msgid "Print pre_view..."
 #~ msgstr "_Predogled tiskanja..."
 
 #~ msgid "Preview data to be printed"
 #~ msgstr "Predoglej si podatke, ki bodo natisnjeni"
-
-#~ msgid "C_lose All"
-#~ msgstr "_Zapri vse"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "Zapri vse odprte datoteke"
-
-#~ msgid "Goto _Line..."
-#~ msgstr "_SkoËi na vrstico..."
-
-#~ msgid "Go to a specific line number"
-#~ msgstr "Pojdi na doloËeno πtevilko vrstice"
-
-#~ msgid "_Add View"
-#~ msgstr "_Dodaj Pogled"
 
 #~ msgid "Add a new view of the document"
 #~ msgstr "Dodaj nov pogled dokumenta"
@@ -882,77 +2005,11 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "Remove view of the document"
 #~ msgstr "Odstrani pogled na dokument"
 
-#~ msgid "Se_arch"
-#~ msgstr "_Iskanje"
-
-#~ msgid "_Plugins"
-#~ msgstr "_VtiËniki"
-
-#~ msgid "_Documents"
-#~ msgstr "Do_kumenti"
-
-#~ msgid "New"
-#~ msgstr "Nova"
-
-#~ msgid "Save"
-#~ msgstr "Shrani"
-
-#~ msgid "Save the current file"
-#~ msgstr "Shrani trenutno datoteko"
-
-#~ msgid "Close"
-#~ msgstr "Zapri"
-
-#~ msgid "Close the current file"
-#~ msgstr "Zapri trenutno datoteko"
-
-#~ msgid "Print"
-#~ msgstr "Natisni"
-
-#~ msgid "Print the current file"
-#~ msgstr "Natisni trenutno datoteko"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Razveljavi zadnje dejanje"
-
-#~ msgid "Redo"
-#~ msgstr "Obnovi"
-
-#~ msgid "Redo last operation"
-#~ msgstr "Obnovi zadnje dejanje"
-
-#~ msgid "Cut"
-#~ msgstr "Izreæi"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Izreæi izbrano"
-
-#~ msgid "Copy"
-#~ msgstr "Kopiraj"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Kopiraj izbrano"
-
-#~ msgid "Paste"
-#~ msgstr "Prilepi"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Prilepi odloæiπËe"
-
-#~ msgid "Search for a string"
-#~ msgstr "IπËi niz"
-
-#~ msgid "Exit"
-#~ msgstr "Izhod"
-
-#~ msgid "Exit the program"
-#~ msgstr "Izhod iz programa"
-
 #~ msgid "_Manager ..."
 #~ msgstr "_Upravljalnik ..."
 
 #~ msgid "Manage available plugin modules"
-#~ msgstr "Upravljaj z vtiËniki, ki so na voljo"
+#~ msgstr "Upravljaj z vtiƒçniki, ki so na voljo"
 
 #~ msgid ""
 #~ "The program %s could not be found.\n"
@@ -965,7 +2022,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "'%s' doesn't seem to exist.\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Kaæe, da '%s' ne obstaja.\n"
+#~ "Ka≈æe, da '%s' ne obstaja.\n"
 #~ "\n"
 
 #~ msgid ""
@@ -973,7 +2030,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "but '%s' could not be found inside it.\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Kaæe, da je '%s' imenik.\n"
+#~ "Ka≈æe, da je '%s' imenik.\n"
 #~ "a v njem se nahaja '%s'.\n"
 #~ "\n"
 
@@ -981,64 +2038,40 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "'%s' doesn't seem to be a program.\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Kaæe, da '%s' ni program.\n"
+#~ "Ka≈æe, da '%s' ni program.\n"
 #~ "\n"
 
 #~ msgid ""
 #~ "%sYou won't be able to use the %s plugin without %s. \n"
 #~ " Do you want to specify a new location for %s?"
 #~ msgstr ""
-#~ "%sVtiËnika %s ne boste mogli uporabiti brez %s. \n"
-#~ " Æelite navesti imenik v katerem se nahaja %s?"
-
-#~ msgid "Error, unable to open module file, %s"
-#~ msgstr "Napaka, ne morem odpreti datoteke vtiËnika, %s"
-
-#~ msgid "Error, plugin does not contain init_plugin function."
-#~ msgstr "Napaka, vtiËnik ne vsebuje init_plugin funkcije."
+#~ "%sVtiƒçnika %s ne boste mogli uporabiti brez %s. \n"
+#~ " ≈Ωelite navesti imenik v katerem se nahaja %s?"
 
 #~ msgid "Error, init_plugin returned an error"
 #~ msgstr "Napaka, funkcija init_plugin je vrnila napako"
 
 #~ msgid "Error, plugin is still in use"
-#~ msgstr "Napaka, vtiËnik je πe vedno v uporabi"
-
-#~ msgid "Print Document"
-#~ msgstr "Natisni dokument"
-
-#~ msgid "Pages"
-#~ msgstr "Strani"
-
-#~ msgid "gedit: Print Preview\n"
-#~ msgstr "gedit: Predogled tiskanja\n"
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Stran %i/%i"
+#~ msgstr "Napaka, vtiƒçnik je ≈°e vedno v uporabi"
 
 #~ msgid ""
 #~ "gedit could not find the font \"%s\".\n"
 #~ "gedit is unable to print without this font installed."
 #~ msgstr ""
 #~ "gedit ni mogel najti pisave \"%s\".\n"
-#~ "gedit ne more tiskati, Ëe ta pisava ni nameπËena."
+#~ "gedit ne more tiskati, ƒçe ta pisava ni name≈°ƒçena."
 
 #~ msgid "Printing .."
 #~ msgstr "Tiskanje .."
 
-#~ msgid "Printing ..."
-#~ msgstr "Tiskanje ..."
-
 #~ msgid "_File/"
 #~ msgstr "_Datoteka/"
-
-#~ msgid "_File"
-#~ msgstr "_Datoteka"
 
 #~ msgid ""
 #~ "Can't count lines if another search operation is active, please close the "
 #~ "search dialog."
 #~ msgstr ""
-#~ "Ne morem πteti vrstic, Ëe je dejavna druga operacija iskanja, prosim "
+#~ "Ne morem ≈°teti vrstic, ƒçe je dejavna druga operacija iskanja, prosim "
 #~ "zapritedialog za iskanje."
 
 #~ msgid ""
@@ -1083,15 +2116,12 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "_Remove all"
 #~ msgstr "_Odstrani vse"
 
-#~ msgid "Add/Remove installed plugins"
-#~ msgstr "Dodaj/Odstrani nameπËene vtiËnike"
-
 #~ msgid ""
 #~ "Plugin Name: %s\n"
 #~ "Author: %s\n"
 #~ "Description: %s\n"
 #~ msgstr ""
-#~ "Ime vtiËnika: %s\n"
+#~ "Ime vtiƒçnika: %s\n"
 #~ "Avtor: %s\n"
 #~ "Opis: %s\n"
 
@@ -1105,7 +2135,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Dodaj vse >>"
 
 #~ msgid "Installed Plugins"
-#~ msgstr "NameπËeni vtiËniki"
+#~ msgstr "Name≈°ƒçeni vtiƒçniki"
 
 #~ msgid "Open as URI"
 #~ msgstr "Odpri kot URI"
@@ -1119,23 +2149,17 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgid "browse"
 #~ msgstr "brskaj"
 
-#~ msgid "Change"
-#~ msgstr "Spremeni"
-
 #~ msgid "don't translate this"
 #~ msgstr "tega ne prevedi"
 
 #~ msgid "File to use as body of message : "
-#~ msgstr "Datoteka, ki naj se uporabi kot telo sporoËila : "
+#~ msgstr "Datoteka, ki naj se uporabi kot telo sporoƒçila : "
 
 #~ msgid "Directory  "
 #~ msgstr "Imenik     "
 
 #~ msgid "Bottom"
 #~ msgstr "Dno"
-
-#~ msgid "Default"
-#~ msgstr "Privzeto"
 
 #~ msgid "Left"
 #~ msgstr "Levo"
@@ -1173,13 +2197,10 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "in ali datoteka ni prazna."
 
 #~ msgid "plugin allocation error"
-#~ msgstr "napaka vtiËnika pri alociranju"
-
-#~ msgid "Error, the plugin did not specify a description"
-#~ msgstr "Napaka, vtiËnik ni navedel opisa"
+#~ msgstr "napaka vtiƒçnika pri alociranju"
 
 #~ msgid "Error, the plugin did not specify a long description"
-#~ msgstr "Napaka, vtiËnik ni navedel dolgega opisa"
+#~ msgstr "Napaka, vtiƒçnik ni navedel dolgega opisa"
 
 #~ msgid ""
 #~ "Hello Dear Translator :\n"
@@ -1197,33 +2218,24 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "Thank you. Chema"
 
 #~ msgid "b_eginning of document"
-#~ msgstr "z_aËetka dokumenta"
-
-#~ msgid "_cursor position"
-#~ msgstr "mesta _kazalca"
-
-#~ msgid "Line"
-#~ msgstr "Vrstica"
+#~ msgstr "z_aƒçetka dokumenta"
 
 #~ msgid "Text found at line :%i"
 #~ msgstr "Besedilo najdeno v vrstici :%i"
 
 #~ msgid "Enter the line number you wish to go to."
-#~ msgstr "Vnesite πtevilko vrstice kamor æelite iti."
+#~ msgstr "Vnesite ≈°tevilko vrstice kamor ≈æelite iti."
 
 #~ msgid "Get file info like characters, lines, words & paragraphs count."
 #~ msgstr ""
-#~ "Izpiπe podatke o datoteki kot so πtevilo znakov, vrstic, besed in "
+#~ "Izpi≈°e podatke o datoteki kot so ≈°tevilo znakov, vrstic, besed in "
 #~ "odstavkov."
 
 #~ msgid "Can't find again. There is not a text string to search for."
-#~ msgstr "Ne morem najti znova. Ni besedila, ki naj ga iπËem."
-
-#~ msgid "diff plugin"
-#~ msgstr "diff vtiËnik"
+#~ msgstr "Ne morem najti znova. Ni besedila, ki naj ga i≈°ƒçem."
 
 #~ msgid "Get the current and total lines"
-#~ msgstr "Povej trenutno vrstico in koliËino vrstic"
+#~ msgstr "Povej trenutno vrstico in koliƒçino vrstic"
 
 #~ msgid ""
 #~ "Filename: %s\n"
@@ -1233,20 +2245,17 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr ""
 #~ "Datoteka: %s\n"
 #~ "\n"
-#~ "©tevilo vrstic: %i\n"
+#~ "≈†tevilo vrstic: %i\n"
 #~ "Trenutna vrstica: %i"
 
 #~ msgid "Choose a file"
 #~ msgstr "Izberi datoteko"
 
-#~ msgid "Choose files to diff:"
-#~ msgstr "Izberi datoteke za diff:"
-
 #~ msgid "Browse..."
 #~ msgstr "Brskaj..."
 
 #~ msgid "Calculate Diff"
-#~ msgstr "IzraËunaj Diff"
+#~ msgstr "Izraƒçunaj Diff"
 
 #~ msgid "With special thanks to:"
 #~ msgstr "S posebnimi zahvalami:"
@@ -1258,16 +2267,16 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "gedit je majhen enostaven urejevalnik besedil za GNOME/Gtk+"
 
 #~ msgid "Show splitscreen"
-#~ msgstr "Kaæi razdeljeno povrπino"
+#~ msgstr "Ka≈æi razdeljeno povr≈°ino"
 
 #~ msgid "Enable Wordwrap"
-#~ msgstr "VkljuËi lom besed"
+#~ msgstr "Vkljuƒçi lom besed"
 
 #~ msgid "Find _In Files..."
-#~ msgstr "PoiπËi _V Datotekah..."
+#~ msgstr "Poi≈°ƒçi _V Datotekah..."
 
 #~ msgid "Find text in all open files"
-#~ msgstr "PoiπËi besedilo v vseh odpritih datotekah"
+#~ msgstr "Poi≈°ƒçi besedilo v vseh odpritih datotekah"
 
 #~ msgid "Put the document tabs at the top"
 #~ msgstr "Postavi uhlje dokumentov na vrh"
@@ -1283,28 +2292,22 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 
 #~ msgid ""
 #~ "Enable or disable the statusbar at the bottom of this application window."
-#~ msgstr "VkljuËi ali izkljuËi vrstico stanja na dnu okna aplikacije."
-
-#~ msgid "Contents"
-#~ msgstr "Vsebina"
+#~ msgstr "Vkljuƒçi ali izkljuƒçi vrstico stanja na dnu okna aplikacije."
 
 #~ msgid "%s%s"
 #~ msgstr "%s%s"
 
 #~ msgid "Ask before replacing"
-#~ msgstr "Vpraπaj pred zamenjavo"
+#~ msgstr "Vpra≈°aj pred zamenjavo"
 
 #~ msgid "Find In Files"
-#~ msgstr "PoiπËi V Datotekah"
+#~ msgstr "Poi≈°ƒçi V Datotekah"
 
 #~ msgid "Search for:"
-#~ msgstr "IπËi za:"
-
-#~ msgid "Go to line"
-#~ msgstr "Pojdi v vrstico"
+#~ msgstr "I≈°ƒçi za:"
 
 #~ msgid "Line number: "
-#~ msgstr "©tevilka vrstice: "
+#~ msgstr "≈†tevilka vrstice: "
 
 #~ msgid "Replace?"
 #~ msgstr "Zamenjaj?"
@@ -1313,7 +2316,7 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ msgstr "Zamenjaj z:"
 
 #~ msgid "Search from: "
-#~ msgstr "Iπli od: "
+#~ msgstr "I≈°li od: "
 
 #~ msgid ""
 #~ "Cursor\n"
@@ -1321,11 +2324,11 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "End of document\n"
 #~ msgstr ""
 #~ "Kazalca\n"
-#~ "ZaËetka Dokumenta\n"
+#~ "Zaƒçetka Dokumenta\n"
 #~ "Konca Dokumenta\n"
 
 #~ msgid "Search for : "
-#~ msgstr "IπËi za : "
+#~ msgstr "I≈°ƒçi za : "
 
 #~ msgid ""
 #~ "Cursor\n"
@@ -1333,5 +2336,5 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 #~ "End of Document\n"
 #~ msgstr ""
 #~ "Kazalca\n"
-#~ "ZaËetka Dokumenta\n"
+#~ "Zaƒçetka Dokumenta\n"
 #~ "Konca Dokumenta\n"
