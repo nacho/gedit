@@ -33,6 +33,7 @@
 #include <gconf/gconf-value.h>
 
 #include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-config.h>
 
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
@@ -101,12 +102,10 @@
 #define GPM_PRINT_FONT_HEADER		GPM_PRINT_FONT_DIR "/print_font_header"
 #define GPM_PRINT_FONT_NUMBERS		GPM_PRINT_FONT_DIR "/print_font_numbers"
 
-/* Window geometry and state */
-#define GPM_WINDOW_DIR			GPM_PREFS_DIR "/ui/window"
+#define GPM_WINDOW_DIR			"/gedit-2/window"
 #define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
 #define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
 #define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
-
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -156,6 +155,11 @@
 #define GPM_DEFAULT_WINDOW_STATE	0
 #define GPM_DEFAULT_WINDOW_WIDTH	650
 #define GPM_DEFAULT_WINDOW_HEIGHT	500
+
+#define GPM_DEFAULT_WINDOW_STATE_STR	"0"
+#define GPM_DEFAULT_WINDOW_WIDTH_STR	"650"
+#define GPM_DEFAULT_WINDOW_HEIGHT_STR	"500"
+
 
 
 #define DEFINE_BOOL_PREF(name, key, def) gboolean 			\
@@ -373,6 +377,8 @@ gedit_prefs_manager_shutdown ()
 	gedit_debug (DEBUG_PREFS, "");
 
 	g_return_if_fail (gedit_prefs_manager != NULL);
+
+	gnome_config_sync ();
 
 	g_object_unref (gedit_prefs_manager->gconf_client);
 	gedit_prefs_manager->gconf_client = NULL;
@@ -1392,31 +1398,94 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 	}
 }
 
+static gint window_state = -1;
+static gint window_height = -1;
+static gint window_width = -1;
+
 /* Window state */
-DEFINE_INT_PREF (window_state,
-		 GPM_WINDOW_STATE,
-		 GPM_DEFAULT_WINDOW_STATE)
-
-/* Window width */
-DEFINE_INT_PREF (window_width,
-		 GPM_WINDOW_WIDTH,
-		 GPM_DEFAULT_WINDOW_WIDTH)
-
-gint
-gedit_prefs_manager_get_default_window_width (void)
+gint gedit_prefs_manager_get_window_state (void)
 {
-	return GPM_DEFAULT_WINDOW_WIDTH;
+	if (window_state == -1)
+		window_state = gnome_config_get_int (GPM_WINDOW_STATE "=" GPM_DEFAULT_WINDOW_STATE_STR);
+
+	return window_state;
+}
+			
+void
+gedit_prefs_manager_set_window_state (gint ws)
+{
+	g_return_if_fail (ws != -1);
+	
+	window_state = ws;
+	gnome_config_set_int (GPM_WINDOW_STATE, ws);
+}
+
+gboolean
+gedit_prefs_manager_window_state_can_set (void)
+{
+	return TRUE;
 }
 
 /* Window height */
-DEFINE_INT_PREF (window_height,
-		 GPM_WINDOW_HEIGHT,
-		 GPM_DEFAULT_WINDOW_HEIGHT)
+gint
+gedit_prefs_manager_get_window_height (void)
+{
+	if (window_height == -1)
+		window_height = gnome_config_get_int (GPM_WINDOW_HEIGHT "=" GPM_DEFAULT_WINDOW_HEIGHT_STR);
+
+	return window_height;
+}
+
 
 gint
 gedit_prefs_manager_get_default_window_height (void)
 {
 	return GPM_DEFAULT_WINDOW_HEIGHT;
+}
+
+void gedit_prefs_manager_set_window_height (gint wh)
+{
+	g_return_if_fail (wh != -1);
+
+	window_height = wh;
+	gnome_config_set_int (GPM_WINDOW_HEIGHT, wh);
+}
+
+gboolean 
+gedit_prefs_manager_window_height_can_set (void)
+{
+	return TRUE;
+}
+
+/* Window width */
+gint
+gedit_prefs_manager_get_window_width (void)
+{
+	if (window_width == -1)
+		window_width = gnome_config_get_int (GPM_WINDOW_WIDTH "=" GPM_DEFAULT_WINDOW_WIDTH_STR);
+
+	return window_width;
+}
+
+gint 
+gedit_prefs_manager_get_default_window_width (void)
+{
+	return GPM_DEFAULT_WINDOW_WIDTH;
+}
+
+void 
+gedit_prefs_manager_set_window_width (gint ww)
+{
+	g_return_if_fail (ww != -1);
+	
+	window_width = ww;
+	gnome_config_set_int (GPM_WINDOW_WIDTH, ww);
+}
+
+gboolean 
+gedit_prefs_manager_window_width_can_set (void)
+{
+	return TRUE;
 }
 
 
