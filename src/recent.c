@@ -246,7 +246,7 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 
 	if(items_to_remove != NULL) {
 
-	        /* xgettext translators : Use the name of the stock 
+	        /* xgettext translators: Use the name of the stock 
 		 * Menu item for "File"	if it is not the same, we are going to 
 		 * fail to insert the recent menu items.*/
 		gnome_app_remove_menu_range (app, _("_File/"), 7, *items_to_remove);
@@ -256,7 +256,7 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 
 	items_in_menu = g_list_length (recent_files);
 	
-        /* xgettext translators : Use the name of the stock Menu item for "File"
+        /* xgettext translators: Use the name of the stock Menu item for "File"
 	   if it is not the same, we are going to fail to insert the recent menu items. */
 	path = g_strdup_printf ("%s/%s", _("_File"), "<Separator>");
 	for (i = items_in_menu; i > 0;  i--) {
@@ -280,7 +280,7 @@ recent_cb (GtkWidget *widget, gpointer data)
 
 	if (!gedit_document_new_with_file (data))
 	{
-		gedit_flash_va (_("Unable to open recent file : %s"), (gchar *) data);
+		gedit_flash_va (_("Unable to open recent file: %s"), (gchar *) data);
 		gedit_recent_remove ((gchar *) data);
 		gedit_recent_history_write_config ();
 		gedit_recent_update_all_windows (mdi);		

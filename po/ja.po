@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-10-15 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -143,21 +143,21 @@ msgstr ""
 "gedit用の一時ファイルを生成できません。\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "無題 %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "比較"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "2つのドキュメントまたはファイルを比較します"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -209,12 +209,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diffが見つかりました : "
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "実行するコマンド: %s"
 
 #: plugins/email/email.c:276
@@ -262,12 +262,14 @@ msgstr "変更..."
 msgid "label12"
 msgstr "label12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+#, fuzzy
+msgid "File to use as body of message: "
 msgstr "メッセージの本文にするファイル : "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmailが見つかりました :"
 
 #: plugins/email/email.glade.h:15
@@ -293,16 +295,6 @@ msgstr "件名:"
 #, fuzzy
 msgid "_To:"
 msgstr "宛先:"
-
-#: plugins/email/email.glade.h:20
-#, fuzzy
-msgid "File to use as body of message: "
-msgstr "メッセージの本文にするファイル : "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmailが見つかりました :"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -396,11 +388,11 @@ msgstr ""
 " %sの場所をもう一度指定しますか?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "プラグイン名 : %s\n"
 "作者 : %s\n"
@@ -490,8 +482,9 @@ msgid "Enable Auto-indent"
 msgstr "自動字下げ"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "置換(_R): "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -538,7 +531,8 @@ msgid "Undo"
 msgstr "元に戻す"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "元に戻せる回数 :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -632,7 +626,7 @@ msgid "label"
 msgstr "label12"
 
 #: src/dialogs/program.glade.h:9
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr ""
 
 #: src/dialogs/program.glade.h:10
@@ -849,9 +843,9 @@ msgstr ""
 "ファイルのパーミッションを確認してください。"
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -866,9 +860,9 @@ msgstr ""
 "問題を submit@bugs.gnome.org に報告してください。"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -887,7 +881,8 @@ msgid "Could not allocate the required memory."
 msgstr "要求されたメモリを割り当てることができません。"
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "パイプのエラーです。"
 
 #: src/file.c:828 src/file.c:835
@@ -1194,27 +1189,27 @@ msgstr "ドキュメント"
 msgid "Pages"
 msgstr "ページ"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit (%s): 印刷のプレビュー"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "ファイル(_F)/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "ファイル(_F)"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "最近使ったファイルを開けません: %s"
 
 #: src/search.c:393
@@ -1253,6 +1248,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "ドキュメントの最後のビューは削除できません。"
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "メッセージの本文にするファイル : "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmailが見つかりました :"
 
 #~ msgid "browse"
 #~ msgstr "ブラウズ"

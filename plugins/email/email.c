@@ -17,7 +17,7 @@
 #include "utils.h"
 
 #define GEDIT_PLUGIN_PROGRAM "sendmail"
-/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+/* xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
    it is used to display "you can not use the [name] plugin without this program... */
 #define GEDIT_PLUGIN_NAME  _("email")
 #define GEDIT_PLUGIN_GLADE_FILE "/email.glade"
@@ -73,7 +73,7 @@ gedit_plugin_execute (GtkWidget *widget, /*gint button,*/ GtkWidget* data)
 	g_return_if_fail (program_location != NULL);
 	command = g_strdup_printf ("%s %s", program_location, to);
 
-	gedit_flash_va (_("Executing command : %s"), command);
+	gedit_flash_va (_("Executing command: %s"), command);
 		
 	if (!from || strlen (from) == 0 || !to || strlen (to)==0)
 	{

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-10-25 22:00-0300\n"
 "Last-Translator: Ariel Bressan da Silva <ariel@conectiva.com.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -141,21 +141,21 @@ msgstr ""
 "Não foi possível criar um arquivo temporário.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Sem título %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "Cria um arquivo com as diferênças entre dois documentos ou arquivos"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -206,12 +206,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diff encontrado em : "
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "Executando o comando : %s"
 
 #: plugins/email/email.c:276
@@ -259,12 +259,13 @@ msgstr "Mudar..."
 msgid "label12"
 msgstr ""
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
 msgstr "Arquivo a ser usado como corpo da mensagem: "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmail encontrado em : "
 
 #: plugins/email/email.glade.h:15
@@ -290,15 +291,6 @@ msgstr "Assunto:"
 #, fuzzy
 msgid "_To:"
 msgstr "Para:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Arquivo a ser usado como corpo da mensagem: "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmail encontrado em : "
 
 #: plugins/email/email.glade.h:23
 #, fuzzy
@@ -393,11 +385,11 @@ msgstr ""
 " Voce quer especificar uma nova localização para %s?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Nome do plugin : %s\n"
 "Autor : %s\n"
@@ -486,8 +478,9 @@ msgid "Enable Auto-indent"
 msgstr "Habilitar auto indentação"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "_Substituir por: "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -535,7 +528,7 @@ msgstr "Desfazer"
 
 #: src/dialogs/prefs.glade.h:30
 #, fuzzy
-msgid "Set limit on undo levels to :"
+msgid "Set limit on undo levels to:"
 msgstr "Número de níveis de \"desfazer\" :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -629,7 +622,7 @@ msgstr ""
 
 #: src/dialogs/program.glade.h:9
 #, fuzzy
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "Localização do sendmail :"
 
 #: src/dialogs/program.glade.h:10
@@ -846,9 +839,9 @@ msgstr ""
 "apropriadas de gravação."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -863,9 +856,9 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -884,7 +877,8 @@ msgid "Could not allocate the required memory."
 msgstr "Não pôde alocar a memória necessária."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "Erro no pipe ."
 
 #: src/file.c:828 src/file.c:835
@@ -1193,27 +1187,27 @@ msgstr "Documentos"
 msgid "Pages"
 msgstr "Páginas"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit (%s): Visualizar impressão"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Arquivo/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "_Arquivo"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "Não foi possível abrir arquivo recente : %s"
 
 #: src/search.c:393
@@ -1252,6 +1246,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Não é possível remover a última visão de um documento."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "Arquivo a ser usado como corpo da mensagem: "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail encontrado em : "
 
 #~ msgid "browse"
 #~ msgstr "Navegar"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-02-28 12:38+0100\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2001-02-22 12:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -208,12 +208,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diff löydetty polusta :"
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "Suoritetaan komentoa : %s"
 
 #: plugins/email/email.c:276
@@ -261,12 +261,13 @@ msgstr "Muuta..."
 msgid "label12"
 msgstr "label12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "Tiedosto, josta viesti muodostetaan:"
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "Tiedosto, josta viesti muodostetaan: "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmail löydetty polusta :"
 
 #: plugins/email/email.glade.h:15
@@ -292,15 +293,6 @@ msgstr "Aihe"
 #, fuzzy
 msgid "_To:"
 msgstr "Vastaanottaja:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Tiedosto, josta viesti muodostetaan: "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmail löydetty polusta :"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -396,11 +388,11 @@ msgstr ""
 " Haluatko antaa %s:lle uuden sijainnin?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Liitännäisen nimi : %s\n"
 "Tekijä : %s\n"
@@ -490,7 +482,8 @@ msgid "Enable Auto-indent"
 msgstr "Sisennä automaattisesti"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
+#, fuzzy
+msgid "Tab width: "
 msgstr "Painikkeiden leveys : "
 
 #: src/dialogs/prefs.glade.h:15
@@ -538,7 +531,8 @@ msgid "Undo"
 msgstr "Kumoa"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "Aseta kumoamiskerroille raja :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -851,9 +845,9 @@ msgstr ""
 "kirjoitusoikeudet."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -868,9 +862,9 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -889,7 +883,8 @@ msgid "Could not allocate the required memory."
 msgstr "Operaatiolle ei voitu varata tarvittavaa määrää muistia."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "Vika putkessa (pipe) ."
 
 #: src/file.c:828 src/file.c:835
@@ -1200,25 +1195,25 @@ msgstr "Sivut"
 
 #: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit - [%s]: Tulostuksen esikatselu"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Tiedosto/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "_Tiedosto"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "Virhe avattaessa tiedostoa %s pikavalinnan kautta"
 
 #: src/search.c:393
@@ -1257,6 +1252,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Viimeistä näkymää ei voi poistaa."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "Tiedosto, josta viesti muodostetaan:"
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail löydetty polusta :"
 
 #~ msgid "browse"
 #~ msgstr "selaa"

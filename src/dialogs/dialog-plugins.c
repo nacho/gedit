@@ -452,9 +452,9 @@ gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpoin
 	gedit_plugin_manager_info_clear (plugin_info_local);
 	
 	plugin = gtk_clist_get_row_data (clist, row);
-	plugin_description = g_strdup_printf (_("Plugin Name : %s\n"
-						"Author : %s\n"
-						"Description : %s\n"),
+	plugin_description = g_strdup_printf (_("Plugin Name: %s\n"
+						"Author: %s\n"
+						"Description: %s\n"),
 					      plugin->name,
 					      plugin->author,
 					      plugin->long_desc);

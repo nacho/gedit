@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.3\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-11-26 11:54+0100\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: deutsch <gnome-de@gnome.org>\n"
@@ -141,21 +141,21 @@ msgid ""
 "\n"
 msgstr "gedit kann keine temp-Datei erstellen.\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Unbenannt %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "Einen Vergleich von 2 Dateien oder Ordnern machen"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -207,12 +207,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diff gefunden in:"
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "Befehl wird ausgeführt: %s"
 
 #: plugins/email/email.c:276
@@ -260,12 +260,13 @@ msgstr "Bearbeiten..."
 msgid "label12"
 msgstr "label12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "Datei, die als Nachricht dient:"
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "Datei, die als Inhalt für Nachricht dient: "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmail gefunden in:"
 
 #: plugins/email/email.glade.h:15
@@ -291,15 +292,6 @@ msgstr "Betreff:"
 #, fuzzy
 msgid "_To:"
 msgstr "An:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Datei, die als Inhalt für Nachricht dient: "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmail gefunden in:"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -393,11 +385,11 @@ msgstr ""
 "Wollen die einen Pfad für %s angeben?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Plugin-Name : %s\n"
 "Autor : %s\n"
@@ -488,8 +480,9 @@ msgid "Enable Auto-indent"
 msgstr "Automatisch einrücken aktivieren"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "Ersetzen durch: "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -536,7 +529,8 @@ msgid "Undo"
 msgstr "Rückgängig"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "Ebenen möglicher Rückgängigmachung begrenzen auf:"
 
 #: src/dialogs/prefs.glade.h:31
@@ -631,7 +625,7 @@ msgstr "label12"
 
 #: src/dialogs/program.glade.h:9
 #, fuzzy
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "Ort an dem sendmail gesucht werden soll :"
 
 #: src/dialogs/program.glade.h:10
@@ -848,9 +842,9 @@ msgstr ""
 "Sie die notwendigen Schreibrechte haben."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -865,9 +859,9 @@ msgstr ""
 "einen Bericht über dieses Problem an submit@bugs.gnome.org."
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -886,7 +880,8 @@ msgid "Could not allocate the required memory."
 msgstr "Benötigter Speicher konnte nicht bereitgestellt werden."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "Fehler in Weiterleitung."
 
 #: src/file.c:828 src/file.c:835
@@ -1197,27 +1192,27 @@ msgstr "Dokumente"
 msgid "Pages"
 msgstr "Seiten"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gEdit (%s): Druckvorschau"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Datei/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "_Datei"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "Fehler, Datei %s kann nicht geöffnet werden"
 
 #: src/search.c:393
@@ -1256,6 +1251,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Sie können die letzte Ansicht eines Dokuments nicht entfernen"
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "Datei, die als Nachricht dient:"
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail gefunden in:"
 
 #~ msgid "browse"
 #~ msgstr "Durchsuchen"

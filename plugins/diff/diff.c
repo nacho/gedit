@@ -31,7 +31,7 @@
 #include "utils.h"
 
 #define GEDIT_PLUGIN_PROGRAM "diff"
-/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+/* xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
    it is used to display "you can not use the [name] plugin without this program... */
 #define GEDIT_PLUGIN_NAME  _("diff")
 #define GEDIT_PLUGIN_GLADE_FILE "/diff.glade"
@@ -104,7 +104,7 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 	file_name_1 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_1), FALSE);
 	file_name_2 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_2), FALSE);
 
-	/* We need to :
+	/* We need to:
 	   - if !state_1 & !state_2. Verify that the doc numbers are
 	   not the same. If they are display an err msg and return;
 	   - if state_x verify that the file exists and that we can read from

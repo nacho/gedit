@@ -732,7 +732,7 @@ gedit_document_load (GList *file_list)
 
 /**
  * gedit_set_title:
- * @docname : Document name in a string, the new title
+ * @docname: Document name in a string, the new title
  *
  * Set the title to "$docname - $gedit_ver" and if the document has
  * changed, lets show that it has. 

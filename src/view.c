@@ -1162,7 +1162,7 @@ gedit_view_set_undo (GeditView *view, gint undo_state, gint redo_state)
 		 (guint) view->toolbar->undo_menu_item,
 		 (guint) view->toolbar->redo_menu_item);
 	g_print ("undo state %i redo state %i\n", undo_state, redo_state);
-	g_print ("view->toolbar->undo :%i view->toolbar->redo:%i FALSE:%i TRUE:%i\n\n\n",
+	g_print ("view->toolbar->undo:%i view->toolbar->redo:%i FALSE:%i TRUE:%i\n\n\n",
 		 view->toolbar->undo,
 		 view->toolbar->redo,
 		 FALSE, TRUE);

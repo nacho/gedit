@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.35\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-11-16 17:48+0100\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -141,21 +141,21 @@ msgstr ""
 "gedit 無法建立暫存檔案.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "未命名 %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "差異"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "從二個文件或檔案找尋差異"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -206,12 +206,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "發現差異在:"
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "執行指令中: %s"
 
 #: plugins/email/email.c:276
@@ -259,12 +259,13 @@ msgstr "改變..."
 msgid "label12"
 msgstr "標籤 2"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
 msgstr "用以當作訊息主體的檔案: "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "找到 Sendmail 在:"
 
 #: plugins/email/email.glade.h:15
@@ -290,15 +291,6 @@ msgstr "主題:"
 #, fuzzy
 msgid "_To:"
 msgstr "收件人:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "用以當作訊息主體的檔案: "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "找到 Sendmail 在:"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -392,11 +384,11 @@ msgstr ""
 "您是否要指定 %s 的新位置?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Plugin名稱: %s\n"
 "作者: %s\n"
@@ -485,8 +477,9 @@ msgid "Enable Auto-indent"
 msgstr "啟用自動縮排"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "取代為 (_R): "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -533,7 +526,8 @@ msgid "Undo"
 msgstr "復原"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "設定復原的最大次數: "
 
 #: src/dialogs/prefs.glade.h:31
@@ -628,7 +622,7 @@ msgstr "標籤 2"
 
 #: src/dialogs/program.glade.h:9
 #, fuzzy
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "找尋sendmail的位置:"
 
 #: src/dialogs/program.glade.h:10
@@ -843,9 +837,9 @@ msgstr ""
 "請確定您提供的路徑存在,且您有正確寫入權限."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -859,9 +853,9 @@ msgstr ""
 "因為未知的原因 (1). 請回報這個問題給 submit@bugs.gnome.org"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -879,7 +873,8 @@ msgid "Could not allocate the required memory."
 msgstr "無法配置需要的記憶體"
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "管線發生錯誤."
 
 #: src/file.c:828 src/file.c:835
@@ -1189,27 +1184,27 @@ msgstr "文件"
 msgid "Pages"
 msgstr "頁"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit (%s): 預覽列印"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "檔案(_F)/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "檔案(_F)"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "錯誤, 無法開啟最近檔案: %s"
 
 #: src/search.c:393
@@ -1248,6 +1243,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "您不能移除文件最後一個檢視."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "用以當作訊息主體的檔案: "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "找到 Sendmail 在:"
 
 # plugins/browse/browse.c:189
 #~ msgid "browse"

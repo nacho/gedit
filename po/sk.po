@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.0\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2001-02-24 13:45CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
@@ -127,20 +127,20 @@ msgstr ""
 "gedit nemohol vytvoriť dočasný súbor.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Bez mena %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 msgid "Makes a diff file from two documents or files"
 msgstr "Vytvorí diff súbor z dvoch dokumentov alebo súborov"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -187,12 +187,13 @@ msgid "Select the \"second\" file..."
 msgstr "Vyberte \"Druhý\" súbor..."
 
 #: plugins/diff/diff.glade.h:17
-msgid "Diff found at : "
+#, fuzzy
+msgid "Diff found at: "
 msgstr "Diff nájdený na : "
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "Vykonávam príkaz: %s"
 
 #: plugins/email/email.c:276
@@ -240,13 +241,13 @@ msgstr "Zmeniť..."
 msgid "label12"
 msgstr "label12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "Súbor, ktorý sa použije ako telo správy: "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "Súbor, ktorý sa použije ako telo správy:"
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
-msgstr "Sendmail nájdený na : "
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+msgid "Sendmail found at:"
+msgstr "Sendmail nájdený na: "
 
 #: plugins/email/email.glade.h:15
 msgid "label13"
@@ -267,14 +268,6 @@ msgstr "_Predmet:"
 #: plugins/email/email.glade.h:19
 msgid "_To:"
 msgstr "_Komu:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Súbor, ktorý sa použije ako telo správy:"
-
-#: plugins/email/email.glade.h:21
-msgid "Sendmail found at:"
-msgstr "Sendmail nájdený na: "
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -367,11 +360,11 @@ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr "Pre použitie modulu %s musíte zadať umiestnenie pre \"%s\"."
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Meno modulu : %s\n"
 "Autor : %s\n"
@@ -460,7 +453,8 @@ msgid "Enable Auto-indent"
 msgstr "Povoliť automatické odsadzovanie"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
+#, fuzzy
+msgid "Tab width: "
 msgstr "Šírka tabulátoru:"
 
 #: src/dialogs/prefs.glade.h:15
@@ -508,7 +502,8 @@ msgid "Undo"
 msgstr "Vrátiť"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "Nastaviť počet úrovní vrátenia na :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -602,7 +597,8 @@ msgid "label"
 msgstr "label"
 
 #: src/dialogs/program.glade.h:9
-msgid "_Location to search for :"
+#, fuzzy
+msgid "_Location to search for:"
 msgstr "_Kde hľadať:"
 
 #: src/dialogs/program.glade.h:10
@@ -819,9 +815,9 @@ msgstr ""
 "Overte, že uvedená cesta existuje a že máte správne práva pre zápis."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -836,9 +832,9 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -857,7 +853,8 @@ msgid "Could not allocate the required memory."
 msgstr "Nepodarilo sa naalokovať požadovanú pamäť."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "Chyba v rúre "
 
 #: src/file.c:828 src/file.c:835
@@ -1166,27 +1163,27 @@ msgstr "Dokumenty"
 msgid "Pages"
 msgstr "Strany"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit - [%s]: Ukážka pred tlačou"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Súbor/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "_Súbor"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "Nepodarilo sa otvoriť súbor : %s"
 
 #: src/search.c:393
@@ -1225,6 +1222,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Nemô6ete odstrániť posledný pohľad dokumentu."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "Súbor, ktorý sa použije ako telo správy: "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail nájdený na : "
 
 #~ msgid "don't translate this\n"
 #~ msgstr "don't translate this\n"

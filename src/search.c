@@ -245,8 +245,8 @@ gedit_search_end (void)
    This is very memory ineficient, but is either this or an unusuable
    search.
 
-   NOTE :
-   Here is how the search functions work :
+   NOTE:
+   Here is how the search functions work:
 
    1. We have a function called search_start() that we call if
    seach_in_progress  = SEARCH_IN_PROGRESS_NO ;
@@ -479,7 +479,7 @@ gedit_search_execute ( guint starting_position,
 #if 0
 	/* FIXME: why do we get starting_position as a gulong ??? chema. It should
 	   be guint */
-	g_print ("Search text execute : start@ %i search for:%s buffer size :%i\n",
+	g_print ("Search text execute: start@ %i search for:%s buffer size :%i\n",
 		 (gint) starting_position,
 		 text_to_search_for,
 		 (gint) search_info.length);

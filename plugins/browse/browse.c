@@ -33,7 +33,7 @@
 #include "utils.h"
 
 #define GEDIT_PLUGIN_PROGRAM "lynx"
-/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+/* xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
    it is used to display "you can not use the [name] plugin without this program... */
 #define GEDIT_PLUGIN_NAME  _("Browse")
 
@@ -193,7 +193,7 @@ gedit_plugin_browse_create_dialog (void)
 
 	gedit_debug (DEBUG_PLUGINS, "");
 	
-        /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+        /* xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
 	 it is used to display "you can not use the [name] plugin without this program... */
 	browser_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
 							      GEDIT_PLUGIN_NAME,

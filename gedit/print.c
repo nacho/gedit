@@ -282,7 +282,7 @@ gedit_print_preview_real (PrintJobInfo *pji)
 	GnomePrintMasterPreview *gpmp;
 	gchar *title;
 	
-	title = g_strdup_printf (_("gedit : Print Preview\n"));
+	title = g_strdup_printf (_("gedit: Print Preview\n"));
 	gpmp = gnome_print_master_preview_new (pji->master, title);
 	g_free (title);
 

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-10-30 23:50+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -140,22 +140,22 @@ msgstr ""
 "gedit не удалось создать временный файл.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Безымянное %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Делает файл diff из 2-х документов или файлов"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -208,12 +208,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diff найден в:"
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "Выполнение команды: %s"
 
 #: plugins/email/email.c:276
@@ -263,12 +263,13 @@ msgstr "Изменить..."
 msgid "label12"
 msgstr "метка12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "Файл используемый как тело сообщения:"
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "Файл используемый как тело сообщения: "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmail найдена в:"
 
 #: plugins/email/email.glade.h:15
@@ -294,15 +295,6 @@ msgstr "Тема:"
 #, fuzzy
 msgid "_To:"
 msgstr "Кому:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Файл используемый как тело сообщения: "
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmail найдена в:"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -399,11 +391,11 @@ msgstr ""
 "Хотите указать новое расположение для %s?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Название дополнения: %s\n"
 "Автор: %s\n"
@@ -500,8 +492,9 @@ msgid "Enable Auto-indent"
 msgstr "Включить Автовыравнивание"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "Заменить на:"
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -548,7 +541,8 @@ msgid "Undo"
 msgstr "Откат"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "Установить предел уровней отката:"
 
 #: src/dialogs/prefs.glade.h:31
@@ -645,7 +639,7 @@ msgstr "метка12"
 
 #: src/dialogs/program.glade.h:9
 #, fuzzy
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "Место поиска sendmail: "
 
 #: src/dialogs/program.glade.h:10
@@ -873,9 +867,9 @@ msgstr ""
 "запись."
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -891,9 +885,9 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -914,7 +908,8 @@ msgstr ""
 "Не удалось получить необходимую память."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "Ошибка в канале."
 
 #: src/file.c:828 src/file.c:835
@@ -1237,27 +1232,27 @@ msgstr "Документы"
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gEdit (%s): Просмотр печати"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "Файл/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "Файл"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr ""
 "Ошибка, не удалось открыть недавно "
 "открывавшийся файл: %s"
@@ -1301,6 +1296,13 @@ msgid "You can't remove the last view of a document."
 msgstr ""
 "Вы не можете удалить последнее окно "
 "документа."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr ""
+#~ "Файл используемый как тело сообщения:"
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail найдена в:"
 
 #~ msgid "browse"
 #~ msgstr "просмотр"

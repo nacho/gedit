@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.5\n"
-"POT-Creation-Date: 2001-02-28 12:25+0100\n"
+"POT-Creation-Date: 2001-02-28 13:33+0100\n"
 "PO-Revision-Date: 2001-02-28 12:43+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@eikonex.org>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -187,12 +187,12 @@ msgid "Select the \"second\" file..."
 msgstr "Sélectionnez le second fichier..."
 
 #: plugins/diff/diff.glade.h:17
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "Différences trouvé à : "
 
 #: plugins/email/email.c:76
 #, c-format
-msgid "Executing command : %s"
+msgid "Executing command: %s"
 msgstr "Exécution de la commande : %s"
 
 #: plugins/email/email.c:276
@@ -240,12 +240,12 @@ msgstr "Changer..."
 msgid "label12"
 msgstr "label12"
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "Fichier à utiliser pour le corps du message : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "Fichier à utiliser comme corps du message : "
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+msgid "Sendmail found at:"
 msgstr "Sendmail trouvé à :"
 
 #: plugins/email/email.glade.h:15
@@ -267,14 +267,6 @@ msgstr "_Sujet :"
 #: plugins/email/email.glade.h:19
 msgid "_To:"
 msgstr "_À :"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "Fichier à utiliser comme corps du message : "
-
-#: plugins/email/email.glade.h:21
-msgid "Sendmail found at:"
-msgstr "Sendmail trouvé à :"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -365,14 +357,15 @@ msgstr "gedit est un petit éditeur de texte, léger,  pour GNOME."
 #, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr ""
-"Pour utiliser le greffon %s, vous devez spécifier un emplacement pour « %s »."
+"Pour utiliser le greffon %s, vous devez spécifier un emplacement pour « %s "
+"»."
 
 #: src/dialogs/dialog-plugins.c:455
 #, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "Nom du greffon : %s\n"
 "Auteur : %s\n"
@@ -461,7 +454,7 @@ msgid "Enable Auto-indent"
 msgstr "Activer l'auto-indentation"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
+msgid "Tab width: "
 msgstr "Largeur de tabulation : "
 
 #: src/dialogs/prefs.glade.h:15
@@ -509,7 +502,7 @@ msgid "Undo"
 msgstr "Annuler"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+msgid "Set limit on undo levels to:"
 msgstr "Définir la limite de niveaux d'annulation à :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -602,7 +595,7 @@ msgid "label"
 msgstr "label"
 
 #: src/dialogs/program.glade.h:9
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "_Emplacement dans lequel rechercher :"
 
 #: src/dialogs/program.glade.h:10
@@ -822,7 +815,7 @@ msgstr ""
 #: src/file.c:577
 #, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -839,7 +832,7 @@ msgstr ""
 #: src/file.c:595
 #, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -858,7 +851,7 @@ msgid "Could not allocate the required memory."
 msgstr "Ne peut allouer la mémoire nécessaire."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+msgid "Error in the pipe."
 msgstr "Erreur sur le tube."
 
 #: src/file.c:828 src/file.c:835
@@ -1167,17 +1160,17 @@ msgid "Pages"
 msgstr "Pages"
 
 #: src/print.c:285
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit : Aperçu avant impression\n"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Fichier/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
@@ -1185,7 +1178,7 @@ msgstr "_Fichier"
 
 #: src/recent.c:283
 #, c-format
-msgid "Unable to open recent file : %s"
+msgid "Unable to open recent file: %s"
 msgstr "Incapable d'ouvrir le fichier récent : %s"
 
 #: src/search.c:393
@@ -1193,7 +1186,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"Ne peut compter les lignes si une autre opération de recherche est active, \n"
+"Ne peut compter les lignes si une autre opération de recherche est active, "
+"\n"
 "fermez la boîte de dialogue de recherche."
 
 #: src/search.c:410
@@ -1224,6 +1218,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Vous ne pouvez supprimer la dernière vue d'un document"
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "Fichier à utiliser pour le corps du message : "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail trouvé à :"
 
 #~ msgid "browse"
 #~ msgstr "parcourir"
@@ -1461,7 +1461,8 @@ msgstr "Vous ne pouvez supprimer la dernière vue d'un document"
 #~ msgstr "Paramétres des documents"
 
 #~ msgid "New Document After Closing Last"
-#~ msgstr "Ouvrir une fenêtre vierge après fermeture de la dernière fenêtre"
+#~ msgstr ""
+#~ "Ouvrir une fenêtre vierge après fermeture de la dernière fenêtre"
 
 #~ msgid "Close Window After Closing Last"
 #~ msgstr "Arrét de gEdit après fermeture de la dernière fenêtre"

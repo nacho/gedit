@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-1-0POT-Creation-Date: 2000-12-04 10:18+0900\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 2000-12-04 11:15+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -142,21 +142,21 @@ msgstr ""
 "gedit가 임시 파일을 만들수 없습니다.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "이름없음 %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "두개의 문서나 파일에서 diff파일을 만듭니다"
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -208,12 +208,12 @@ msgstr ""
 
 #: plugins/diff/diff.glade.h:17
 #, fuzzy
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr "diff가 찾은것 : "
 
 #: plugins/email/email.c:76
-#, c-format
-msgid "Executing command : %s"
+#, fuzzy, c-format
+msgid "Executing command: %s"
 msgstr "명령 실행 : %s"
 
 #: plugins/email/email.c:276
@@ -261,12 +261,13 @@ msgstr "바꿈..."
 msgid "label12"
 msgstr ""
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
-msgstr "편지 본문으로 쓰일 파일 : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
+msgstr "편지 본문으로 쓰일 파일:"
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+#, fuzzy
+msgid "Sendmail found at:"
 msgstr "Sendmail이 발견된 곳 :"
 
 #: plugins/email/email.glade.h:15
@@ -292,15 +293,6 @@ msgstr "제목:"
 #, fuzzy
 msgid "_To:"
 msgstr "받는 이:"
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr "편지 본문으로 쓰일 파일:"
-
-#: plugins/email/email.glade.h:21
-#, fuzzy
-msgid "Sendmail found at:"
-msgstr "Sendmail이 발견된 곳 :"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
@@ -395,11 +387,11 @@ msgstr ""
 " %4$s를 위한 새 위치를 지정하겠습니까?"
 
 #: src/dialogs/dialog-plugins.c:455
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 "플러그인 이름 : %s\n"
 "제작자 : %s\n"
@@ -488,8 +480,9 @@ msgid "Enable Auto-indent"
 msgstr "자동 들여쓰기 사용"
 
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width : "
-msgstr ""
+#, fuzzy
+msgid "Tab width: "
+msgstr "치환할 문자열(_R): "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -536,7 +529,8 @@ msgid "Undo"
 msgstr "실행 취소"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+#, fuzzy
+msgid "Set limit on undo levels to:"
 msgstr "실행 취소 단계 제한 설정 :"
 
 #: src/dialogs/prefs.glade.h:31
@@ -630,7 +624,7 @@ msgstr ""
 
 #: src/dialogs/program.glade.h:9
 #, fuzzy
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr "sendmail을 찾을 위치 :"
 
 #: src/dialogs/program.glade.h:10
@@ -846,9 +840,9 @@ msgstr ""
 "확인하십시요"
 
 #: src/file.c:577
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -864,9 +858,9 @@ msgstr ""
 "보내주십시요"
 
 #: src/file.c:595
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -886,7 +880,8 @@ msgid "Could not allocate the required memory."
 msgstr "메모리를 할당할수가 없습니다."
 
 #: src/file.c:717
-msgid "Error in the pipe ."
+#, fuzzy
+msgid "Error in the pipe."
 msgstr "파이프에서 오류 ."
 
 #: src/file.c:828 src/file.c:835
@@ -1195,27 +1190,27 @@ msgstr "문서"
 msgid "Pages"
 msgstr "페이지"
 
-#: src/print.c:283
+#: src/print.c:285
 #, fuzzy
-msgid "gedit : Print Preview\n"
+msgid "gedit: Print Preview\n"
 msgstr "gedit (%s): 인쇄 미리보기"
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "파일(_F)/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
 msgstr "파일(_F)"
 
 #: src/recent.c:283
-#, c-format
-msgid "Unable to open recent file : %s"
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
 msgstr "최근 문서를 열수 없습니다 : %s"
 
 #: src/search.c:393
@@ -1253,6 +1248,12 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "문서의 마지막 보기창는 제거할수 없습니다."
+
+#~ msgid "File to use as body of message : "
+#~ msgstr "편지 본문으로 쓰일 파일 : "
+
+#~ msgid "Sendmail found at :"
+#~ msgstr "Sendmail이 발견된 곳 :"
 
 #~ msgid "browse"
 #~ msgstr "둘러보기"

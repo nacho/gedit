@@ -140,7 +140,7 @@ gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_bu
 	
 
 
-/* TODO : add flash on all operations ....Chema*/
+/* TODO: add flash on all operations ....Chema*/
 /*        what happens when you open the same doc
 	  twice. I think we should add another view
           of the same doc versus opening it twice. Chema*/
@@ -574,7 +574,7 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	
 	if (fputs (buffer, file_pointer) == EOF)
 	{
-		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file :"
+		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file:"
 						   "\n\n %s \n\n"
 						   "Because of an unknown reason (1). Please report this "
 						   "Problem to submit@bugs.gnome.org"), fname);
@@ -592,7 +592,7 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	
 	if (fclose (file_pointer) != 0)
 	{
-		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file :"
+		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file:"
 						   "\n\n %s \n\n"
 						   "Because of an unknown reason (2). Please report this "
 						   "Problem to submit@bugs.gnome.org"), fname);
@@ -714,7 +714,7 @@ gedit_file_stdin (GeditDocument *doc)
 		pos= pos + buffer_length ;
 		if (ferror(stdin)!=0)
 		{
-			gnome_app_error (mdi->active_window, _("Error in the pipe ."));
+			gnome_app_error (mdi->active_window, _("Error in the pipe."));
 			break ;
 		}
 	}
@@ -1244,11 +1244,11 @@ gedit_file_create_popup (const gchar *title)
 	g_free (msg);
 	switch (ret)
 	{
-	case 0 : 
+	case 0: 
 		doc = gedit_document_new_with_title (title);
 		doc->changed = TRUE;
 		return TRUE;
-	case 1 : 
+	case 1: 
 		return FALSE;
 	default:
 		return FALSE;
@@ -1275,7 +1275,7 @@ gedit_close_all_flag_status (guchar * function)
 
 	return;
 	
-	g_print("Close all flag state is : ");
+	g_print("Close all flag state is: ");
 	switch (gedit_close_all_flag){
 	case GEDIT_CLOSE_ALL_FLAG_NORMAL:
 		g_print("NORMAL");

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
+"POT-Creation-Date: 2001-02-28 13:55+0100\n"
 "PO-Revision-Date: 1999-08-09 20:17+0100\n"
 "Last-Translator: Unknown :-(\n"
 "Language-Team: \n"
@@ -124,20 +124,20 @@ msgid ""
 "\n"
 msgstr ""
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, fuzzy, c-format
 msgid "Untitled %i"
 msgstr "Nenazvaný"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr ""
 
-#: plugins/diff/diff.c:477
+#: plugins/diff/diff.c:475
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 
-#: plugins/diff/diff.c:478
+#: plugins/diff/diff.c:476
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -183,12 +183,12 @@ msgid "Select the \"second\" file..."
 msgstr ""
 
 #: plugins/diff/diff.glade.h:17
-msgid "Diff found at : "
+msgid "Diff found at: "
 msgstr ""
 
 #: plugins/email/email.c:76
 #, c-format
-msgid "Executing command : %s"
+msgid "Executing command: %s"
 msgstr ""
 
 #: plugins/email/email.c:276
@@ -235,12 +235,12 @@ msgstr ""
 msgid "label12"
 msgstr ""
 
-#: plugins/email/email.glade.h:13
-msgid "File to use as body of message : "
+#: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
+msgid "File to use as body of message: "
 msgstr ""
 
-#: plugins/email/email.glade.h:14
-msgid "Sendmail found at :"
+#: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
+msgid "Sendmail found at:"
 msgstr ""
 
 #: plugins/email/email.glade.h:15
@@ -262,14 +262,6 @@ msgstr ""
 
 #: plugins/email/email.glade.h:19
 msgid "_To:"
-msgstr ""
-
-#: plugins/email/email.glade.h:20
-msgid "File to use as body of message: "
-msgstr ""
-
-#: plugins/email/email.glade.h:21
-msgid "Sendmail found at:"
 msgstr ""
 
 #: plugins/email/email.glade.h:23
@@ -368,9 +360,9 @@ msgstr ""
 #: src/dialogs/dialog-plugins.c:455
 #, c-format
 msgid ""
-"Plugin Name : %s\n"
-"Author : %s\n"
-"Description : %s\n"
+"Plugin Name: %s\n"
+"Author: %s\n"
+"Description: %s\n"
 msgstr ""
 
 #. glade won't let me set the title of the propertybox
@@ -460,7 +452,7 @@ msgstr ""
 
 #: src/dialogs/prefs.glade.h:14
 #, fuzzy
-msgid "Tab width : "
+msgid "Tab width: "
 msgstr "Vyměnit za:"
 
 #: src/dialogs/prefs.glade.h:15
@@ -501,7 +493,7 @@ msgid "Undo"
 msgstr "Okno"
 
 #: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to :"
+msgid "Set limit on undo levels to:"
 msgstr ""
 
 #: src/dialogs/prefs.glade.h:31
@@ -598,7 +590,7 @@ msgid "label"
 msgstr ""
 
 #: src/dialogs/program.glade.h:9
-msgid "_Location to search for :"
+msgid "_Location to search for:"
 msgstr ""
 
 #: src/dialogs/program.glade.h:10
@@ -799,7 +791,7 @@ msgstr ""
 #: src/file.c:577
 #, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -810,7 +802,7 @@ msgstr ""
 #: src/file.c:595
 #, c-format
 msgid ""
-"gedit was unable to save the file :\n"
+"gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
@@ -823,8 +815,9 @@ msgid "Could not allocate the required memory."
 msgstr ""
 
 #: src/file.c:717
-msgid "Error in the pipe ."
-msgstr ""
+#, fuzzy
+msgid "Error in the pipe."
+msgstr "Chyba při ukládání souboru!"
 
 #: src/file.c:828 src/file.c:835
 #, c-format
@@ -1132,18 +1125,18 @@ msgstr "Dokument"
 msgid "Pages"
 msgstr ""
 
-#: src/print.c:283
-msgid "gedit : Print Preview\n"
+#: src/print.c:285
+msgid "gedit: Print Preview\n"
 msgstr ""
 
-#. xgettext translators : Use the name of the stock
+#. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
 #: src/recent.c:252
 msgid "_File/"
 msgstr "_Soubor/"
 
-#. xgettext translators : Use the name of the stock Menu item for "File"
+#. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
 #: src/recent.c:261
 msgid "_File"
@@ -1151,7 +1144,7 @@ msgstr "_Soubor"
 
 #: src/recent.c:283
 #, c-format
-msgid "Unable to open recent file : %s"
+msgid "Unable to open recent file: %s"
 msgstr ""
 
 #: src/search.c:393
