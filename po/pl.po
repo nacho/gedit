@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2000-10-17 02:54+0200\n"
-"PO-Revision-Date: 2000-10-19 18:03+0200\n"
+"POT-Creation-Date: 2000-10-31 15:20+0100\n"
+"PO-Revision-Date: 2000-11-01 20:54+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -160,19 +160,19 @@ msgstr ""
 "Wysy³a bie¿±cy dokument poczt± elektroniczn± pod podany adres e-mail\n"
 "Przed u¿yciem wtyczki wyszukiwany jest program sendmail."
 
-#: plugins/email/email.glade.h:1
+#: plugins/email/email.glade.h:1 src/dialogs/program.glade.h:1
 msgid "gedit: e-mail plugin"
 msgstr "gedit: wtyczka e-mail"
 
-#: plugins/email/email.glade.h:1
+#: plugins/email/email.glade.h:1 src/dialogs/program.glade.h:1
 msgid "From:"
 msgstr "Od:"
 
-#: plugins/email/email.glade.h:1
+#: plugins/email/email.glade.h:1 src/dialogs/program.glade.h:1
 msgid "To:"
 msgstr "Do:"
 
-#: plugins/email/email.glade.h:1
+#: plugins/email/email.glade.h:1 src/dialogs/program.glade.h:1
 msgid "Subject:"
 msgstr "Temat:"
 
@@ -273,10 +273,13 @@ msgstr "Zmieñ"
 msgid "Find"
 msgstr "Znajd¼"
 
-#: src/dialogs/dialog-replace.c:1 src/search.c:1
-#, c-format
-msgid "Text found at line :%i"
-msgstr "Znaleziono tekst w wierszu: %i"
+#: src/dialogs/dialog-replace.c:1
+msgid "Text not found"
+msgstr "Nie odnaleziono tekstu"
+
+#: src/dialogs/dialog-replace.c:1
+msgid "Text not found."
+msgstr "Nie odnaleziono tekstu."
 
 #: src/dialogs/dialog-replace.c:1
 #, c-format
@@ -446,6 +449,14 @@ msgstr "P_ejza¿"
 #: src/dialogs/prefs.glade.h:1
 msgid "Paper"
 msgstr "Papier"
+
+#: src/dialogs/program.glade.h:1
+msgid "File to use as body of message: "
+msgstr "Plik wykorzystany jako tre¶æ listu: "
+
+#: src/dialogs/program.glade.h:1
+msgid "Location of sendmail to search for :"
+msgstr "Po³o¿enie programu sendmail :"
 
 #: src/dialogs/replace.glade.h:1
 msgid "Find Next"
@@ -722,7 +733,7 @@ msgstr "Zapisz wszystkie"
 msgid "Save All Open Files"
 msgstr "Zapisuje wszystkie pliki"
 
-#: src/menus.c:1 src/menus.c:1
+#: src/menus.c:1
 msgid "Revert"
 msgstr "Przywróæ"
 
@@ -863,8 +874,8 @@ msgid "Line"
 msgstr "Wiersz"
 
 #: src/menus.c:1
-msgid "Get file info like characters, lines, words & paragraphs count."
-msgstr "Wy¶wietla zestawienie informacji o pliku"
+msgid "Get the basic file info."
+msgstr "Wy¶wietla podstawowe informacje o pliku."
 
 #: src/menus.c:1
 msgid "Exit"
@@ -973,7 +984,7 @@ msgstr "Strona: %i/%i"
 msgid "_File/"
 msgstr "_Plik/"
 
-#: src/recent.c:1 src/recent.c:1
+#: src/recent.c:1
 msgid "_File"
 msgstr "_Plik"
 
@@ -1014,18 +1025,6 @@ msgstr ""
 "\n"
 "Bie¿±cy wiersz: %i\n"
 "Bie¿±ca kolumna: %i"
-
-#: src/search.c:1
-msgid "Text not found"
-msgstr "Nie odnaleziono tekstu"
-
-#: src/search.c:1
-msgid "Text not found."
-msgstr "Nie odnaleziono tekstu."
-
-#: src/search.c:1
-msgid "Can't find again. There is not a text string to search for."
-msgstr "Nie mo¿na wyszukaæ ponownie. Nie ma testu, który mo¿na znale¼æ."
 
 #: src/view.c:1
 msgid "You can't remove the last view of a document."
