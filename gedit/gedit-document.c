@@ -2549,8 +2549,6 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (replace != NULL);	
 
-	converted_replace = gedit_utils_convert_search_text (replace);
-
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
@@ -2569,6 +2567,8 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	}
 	
 	gtk_text_iter_order (&sel_bound, &iter);		
+
+	converted_replace = gedit_utils_convert_search_text (replace);
 
 	gedit_document_begin_user_action (doc);
 
@@ -2591,6 +2591,7 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	doc->priv->last_replace_text = g_strdup (replace);
 
 	gedit_document_end_user_action (doc);
+
 	g_free (converted_replace);
 }
 
