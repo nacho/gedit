@@ -32,6 +32,7 @@ void tab_top_cback (GtkWidget *widget, gpointer data);
 void tab_bot_cback (GtkWidget *widget, gpointer data);
 void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
+void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
 
 gE_prefs *gE_prefs_window();
 void gE_get_rc_file();
@@ -92,7 +93,7 @@ struct _gE_search {
 	GtkWidget *start_at_beginning;
 	GtkWidget *case_sensitive;
 	GtkWidget *search_entry;
-	gint replace;
+	gint replace, again;
 	GtkWidget *replace_box;
 	GtkWidget *replace_entry;
 	GtkWidget *prompt_before_replacing;

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
+
 
 #include "main.h"
 #include "menus.h"
@@ -119,6 +121,59 @@ void prefs_callback (GtkWidget *widget, gpointer data)
 }
 
 
+/* ---- Auto-indent Callback(s) --- */
+
+void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
+{
+	int i, newlines, newline_1;
+	gchar *buffer, *whitespace;
+
+	if (event->keyval != GDK_Return)
+		return;
+	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
+		return;
+
+	newlines = 0;
+	for (i = GTK_EDITABLE (text)->current_pos; i > 0; i--)
+	{
+		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
+		if (buffer == NULL)
+			continue;
+		if (buffer[0] == 10)
+		{
+			if (newlines > 0)
+			{
+				g_free (buffer);
+				break;
+			}
+			else {
+				newlines++;
+				newline_1 = i;
+				g_free (buffer);
+			}
+		}
+	}
+
+	whitespace = g_malloc0 (newline_1 - i + 2);
+
+	for (i = i; i <= newline_1; i++)
+	{
+		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i, i+1);
+		if ((buffer[0] != 32) & (buffer[0] != 9))
+			break;
+		strncat (whitespace, buffer, 1);
+		g_free (buffer);
+	}
+
+	if (strlen(whitespace) > 0)
+	{
+		i = GTK_EDITABLE (text)->current_pos;
+		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);
+	}
+}
+
+
+
 /* ---- File Menu Callbacks ---- */
 
 void file_new_cmd_callback (GtkWidget *widget, gpointer data)
@@ -141,8 +196,10 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer data)
 
   if (GTK_WIDGET_VISIBLE(main_window->open_fileselector))
     return;
-  else
+  else {
+    gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->open_fileselector), "./");
     gtk_widget_show (main_window->open_fileselector);
+  }
 }
 
 void file_save_cmd_callback (GtkWidget *widget, gpointer data)
@@ -174,6 +231,7 @@ void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 	if (GTK_WIDGET_VISIBLE(main_window->save_fileselector))
     		return;
   	else {
+  		gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->save_fileselector), "./");
     		gtk_widget_show (main_window->save_fileselector);
 	}
 }
@@ -207,7 +265,7 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 			g_free (doc);
 			g_list_free (main_window->documents);
 			main_window->documents = NULL;
-			/*	gtk_exit(0);*/
+			gtk_exit(0);
 		}
 	}
 	else
@@ -259,8 +317,12 @@ void search_start (GtkWidget *w, gE_search *options)
 	buffer = g_malloc0 (sizeof(search_for));
 	len = strlen(search_for);
 
-	if (GTK_TOGGLE_BUTTON(options->start_at_cursor)->active)
-		start_pos = gtk_text_get_point (GTK_TEXT(doc->text));
+	if (options->again) {
+		start_pos = gtk_text_get_point (GTK_TEXT (doc->text));
+		options->again = 0;
+	}
+	else if (GTK_TOGGLE_BUTTON(options->start_at_cursor)->active)
+		start_pos = GTK_EDITABLE(doc->text)->current_pos;
 	else
 		start_pos = 0;
 
@@ -268,10 +330,12 @@ void search_start (GtkWidget *w, gE_search *options)
 		return;
 	gtk_text_freeze (GTK_TEXT(doc->text));
 
-	for (i = start_pos; i <= (text_len - start_pos - len - replace_diff); i++)
-	{
-		buffer = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i, i+len);
-		if (GTK_TOGGLE_BUTTON(options->case_sensitive)->active)
+/*	for (i = start_pos; i <= (text_len - start_pos - len - replace_diff); i++)
+*/
+	for (i = start_pos; i <= (text_len - len - replace_diff); i++)
+        {
+                buffer = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i, i+len);
+                if (GTK_TOGGLE_BUTTON(options->case_sensitive)->active)
 			match = strcmp(buffer, search_for);
 		else
 			match = strcasecmp(buffer, search_for);
@@ -293,6 +357,7 @@ void search_start (GtkWidget *w, gE_search *options)
 			if (options->replace)
 			{
 				if (GTK_TOGGLE_BUTTON(options->prompt_before_replacing)->active) {
+					gtk_text_set_point (GTK_TEXT(doc->text), i+2);
 					popup_replace_window();
 					return;
 				}
@@ -401,6 +466,7 @@ void search_search_cmd_callback (GtkWidget *w, gpointer data)
 		gtk_widget_show (main_window->search->window);
 		gtk_widget_hide (main_window->search->replace_box);
 		main_window->search->replace = 0;
+		main_window->search->again = 0;
 	}
 }
 
@@ -413,6 +479,7 @@ void search_replace_cmd_callback (GtkWidget *w, gpointer data)
 		gtk_window_set_title (GTK_WINDOW (main_window->search->window), "Search and Replace");
 		gtk_widget_show (main_window->search->replace_box);
 		main_window->search->replace = 1;
+		main_window->search->again = 0;
 	}
 }
 
@@ -420,7 +487,7 @@ void search_again_cmd_callback (GtkWidget *w, gpointer data)
 {
 	if (main_window->search->window) {
 		main_window->search->replace = 0;
-		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(main_window->search->start_at_cursor), TRUE);
+		main_window->search->again = 1;
 		search_start (w, main_window->search);
 	}
 }
@@ -432,7 +499,7 @@ void search_replace_yes_sel (GtkWidget *w, gpointer data)
 	gint i;
 	doc = gE_document_current (main_window);
 	replace_with = gtk_entry_get_text (GTK_ENTRY(main_window->search->replace_entry));
-	i = gtk_text_get_point (GTK_TEXT (doc->text)) - 1;
+	i = gtk_text_get_point (GTK_TEXT (doc->text)) - 2;
 	gtk_editable_delete_selection (GTK_EDITABLE(doc->text));
 	gtk_editable_insert_text (GTK_EDITABLE(doc->text), replace_with, strlen(replace_with), &i);
 	gtk_text_set_point (GTK_TEXT(doc->text), i+strlen(replace_with));
@@ -472,6 +539,7 @@ void popup_replace_window()
 	gtk_signal_connect_object (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
 	gtk_grab_add (window);
 }
+
 
 
 

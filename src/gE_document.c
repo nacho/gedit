@@ -121,6 +121,9 @@ gE_document *gE_document_new(gE_window *window)
 	document->text = gtk_text_new (NULL, NULL);
 	gtk_text_set_editable (GTK_TEXT (document->text), TRUE);
 	gtk_text_set_word_wrap (GTK_TEXT (document->text), TRUE);
+	gtk_signal_connect_after (GTK_OBJECT(document->text), "key_press_event",
+	                                                  GTK_SIGNAL_FUNC(auto_indent_callback), document->text);
+
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
 	/*style = gtk_style_new ();
