@@ -370,12 +370,9 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 static gint
 gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
-	gedit_data *data;
-	data = g_malloc0 (sizeof (gedit_data));
-
 	gedit_debug ("F:gedit_event_button_press\n", DEBUG_VIEW);
 	
-	line_pos_cb (NULL, data);
+	line_pos_cb (NULL, NULL);
 
 	return FALSE;
 }
@@ -635,10 +632,10 @@ gedit_view_init (View *view)
 
 	}
 	
- 	gtk_widget_push_style (style);
 	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style (GTK_WIDGET(view->text), style);
-   	gtk_widget_pop_style ();
+
+	gtk_style_unref (style);
 
 	gtk_widget_show (view->split_screen);
 	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
@@ -660,7 +657,6 @@ gedit_view_init (View *view)
 	gtk_widget_show (view->vbox);*/
 
 	gtk_widget_grab_focus (view->text);
-
 }
 
 guint

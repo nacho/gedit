@@ -1,3 +1,15 @@
+2000-05-01  Jason Leach  <leach@wam.umd.edu>
+
+	* recent.c (recent_update_menus): fixed a 35-45 byte leak that
+	happened every time you opened a file or this was called (visit a
+	file already in your recent list, etc).
+
+	* view.c (gedit_event_button_press): fixed a silly 20-byte leak
+	that happened on every button press event in a document.
+
+	* view.c (gedit_view_init): fixed a 624-byte leak that happened
+	with every document you opened.
+
 2000-05-01  Chema Celorio  <chema@celorio.com>
 
 	* document.c (gedit_document_new): leak

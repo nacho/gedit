@@ -34,7 +34,7 @@
 
        void recent_update (GnomeApp *app);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
-static void recent_cb (GtkWidget *w, gedit_data *data);
+static void recent_cb (GtkWidget *w, gpointer data);
        void recent_add (char *filename);
 
 
@@ -165,7 +165,7 @@ static void
 recent_update_menus (GnomeApp *app, GList *recent_files)
 {
 	GnomeUIInfo *menu;
-	gedit_data *data;
+	gchar *filename;
 	gchar *path;
 	int i;
 
@@ -189,17 +189,15 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 
 	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
 	{
-/*		g_free(menu);
-		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));*/
-		data = g_malloc0 (sizeof (gedit_data));
-		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
-		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
+		gchar *data = g_list_nth_data (recent_files, i);
 		
-		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
+		filename = g_strdup (data);
+
+		menu->label = g_strdup_printf ("_%i. %s", i+1, data);
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
 		menu->moreinfo = (gpointer) recent_cb;
-		menu->user_data = data;
+		menu->user_data = filename;
 		menu->unused_data = NULL;
 		menu->pixmap_type = 0;
 		menu->pixmap_info = NULL;
@@ -208,24 +206,26 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 
 		gnome_app_insert_menus (GNOME_APP(app), path, menu);
-		g_free (menu->label);
 
+		g_free (menu->label);
+		g_free (filename);
 	}
-	
+
 	g_free (menu);
+
 	settings->num_recent = g_list_length (recent_files);
 	g_free (path);
 }
 
 /* Callback for a click on a file in the recently used menu */
 static void
-recent_cb (GtkWidget *widget, gedit_data *data)
+recent_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 	
 	g_return_if_fail (data != NULL);
 
-	doc = gedit_document_new_with_file (data->temp1);
+	doc = gedit_document_new_with_file (data);
 	if (doc)
 	{
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
