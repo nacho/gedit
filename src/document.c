@@ -624,6 +624,11 @@ gedit_document_load ( GList *file_list)
 
 	if (gedit_document_current() == NULL)
 		gedit_document_new ();
+	
+	g_assert(gedit_window_active_app() != NULL);
+	g_assert(gedit_document_current() != NULL);
+ 
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
 
 	return FALSE;
 }

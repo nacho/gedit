@@ -53,6 +53,8 @@ struct _PluginData
 	   set sentivity off in the plugins menu */
 	gint needs_a_document;
 
+	gint modifies_an_existing_doc;
+
 #if 0 /* It is not needed*/
 	GtkWidget * menu_item;
 #endif 	

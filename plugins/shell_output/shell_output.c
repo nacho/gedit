@@ -193,6 +193,8 @@ init_plugin (PluginData *pd)
 	pd->long_desc = _("Insert the shell output in the document");
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
 	pd->needs_a_document = TRUE;
+	pd->modifies_an_existing_doc = TRUE;
+
 	pd->private_data = (gpointer)shell_output;
 	pd->installed_by_default = TRUE;
 

@@ -1,3 +1,21 @@
+2001-01-26  Paolo Maggi  <maggi@athena.polito.it>
+
+	* plugin.h: new field modify_an_existing_doc 
+
+	* plugin.c (gedit_plugin_load) : default setting for 
+	modify_an_existing_doc is FALSE
+
+	* window.h:
+	* window.c: new function gedit_window_set_widgets_sensitivity_ro 
+
+	* file.c (gedit_file_save_as_ok_sel)(gedit_file_open_ok_sel)
+	* document.c (gedit_document_load )
+	* recent.c (recent_cb)
+	* view.c (gedit_view_changed_cb)(gedit_view_add_cb)(gedit_view_remove):
+	  correctly set menu and toolbar item sensitivity when a read only file
+	  is opened (or saved)
+
+
 2000-12-14  Alex Roberts  <bse@bakterium.com>
 
 	* prefs.c (gedit_prefs_save_settings): only save the run flag 

@@ -86,7 +86,8 @@ init_plugin (PluginData *pd)
 	pd->long_desc = _("Inserts the current date and time");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = TRUE;
-	
+	pd->modifies_an_existing_doc = TRUE;
+
 	pd->private_data = (gpointer)insert_time;
 	pd->installed_by_default = TRUE;
 	

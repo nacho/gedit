@@ -270,6 +270,7 @@ init_plugin (PluginData *pd)
 			  "gedit searches for sendmail to use this plugin.");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = TRUE;
+	pd->modifies_an_existing_doc = FALSE;
 	pd->private_data = (gpointer)gedit_plugin_create_dialog;
 	pd->installed_by_default = TRUE;
 

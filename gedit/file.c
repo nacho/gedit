@@ -623,6 +623,8 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 	
 	gtk_widget_hide (GTK_WIDGET(file_selector));
 	
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
+	
 	return;
 }
 
@@ -865,6 +867,10 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	   as from an Untitled doc */
 	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
 
+	g_assert(gedit_window_active_app() != NULL);
+	g_assert(gedit_document_current() != NULL);
+
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), TRUE);	
 }
 
 

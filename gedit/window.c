@@ -377,6 +377,147 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 }
 
 
+void
+gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
+{
+	GnomeUIInfo *ui_info;
+	GnomeUIInfo *sub_ui_info;
+	GtkWidget *widget;
+	gint count, sub_count;
+	
+	PluginData  *pd;
+	GnomeDockItem *dock_item;
+	GtkWidget *menu_bar;
+
+	GList* children;
+	gchar* path;
+	gint menu_pos;
+
+	gedit_debug (DEBUG_WINDOW, "");
+
+	g_return_if_fail (GNOME_IS_APP (app));
+	
+	ui_info = gnome_mdi_get_toolbar_info (app);
+
+	g_return_if_fail (ui_info != NULL);
+
+	/* Set the toolbar tems */
+	count = 0;
+	while (ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (ui_info [count].moreinfo == file_save_cb    ||
+		    ui_info [count].moreinfo == edit_cut_cb     ||
+		    ui_info [count].moreinfo == edit_paste_cb	||
+		    ui_info [count].moreinfo == gedit_replace_cb)
+		{
+			widget =  ui_info [count].widget;
+			if (GTK_IS_WIDGET (widget))
+				gtk_widget_set_sensitive (widget, !unsensitive);
+		}
+		count++;
+	}
+
+	/* get the UI_info structures */
+	ui_info = gnome_mdi_get_menubar_info (app);
+
+	/* Set the menus and submenus */
+	count = 0;
+	while (ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (ui_info[count].type == GNOME_APP_UI_SUBTREE_STOCK ||
+		    ui_info[count].type == GNOME_APP_UI_SUBTREE)
+		{
+			sub_count = 0;
+			sub_ui_info = ui_info [count].moreinfo;
+			while (sub_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
+			{
+				if (sub_ui_info [sub_count].moreinfo == file_save_cb    ||
+				    sub_ui_info [sub_count].moreinfo == file_save_all_cb   ||
+				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||
+				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||
+				    sub_ui_info [sub_count].moreinfo == gedit_replace_cb)
+				{
+					widget =  sub_ui_info [sub_count].widget;
+					if (GTK_IS_WIDGET (widget))
+						gtk_widget_set_sensitive (widget, !unsensitive);
+				}
+
+				if (sub_ui_info [sub_count].moreinfo == file_revert_cb)
+				{
+					/* We need to check if there are more than 2 views opened */
+					/* The only info we have is *app, and we can't use view_active. */
+					GeditDocument *doc;
+					doc = gedit_document_current();
+
+					widget =  sub_ui_info [sub_count].widget;
+					if (GTK_IS_WIDGET (widget) && doc != NULL)
+						gtk_widget_set_sensitive (widget, (doc->filename!=NULL) && !unsensitive);
+				}
+
+				sub_count++;
+			}
+		}
+		count++;
+	}
+	
+	/* Set popup menu sensitivity*/
+	count = 0;
+	while (popup_menu[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (popup_menu [count].moreinfo == file_save_cb    ||
+		    popup_menu [count].moreinfo == file_save_all_cb   ||
+		    popup_menu [count].moreinfo == edit_cut_cb     ||
+		    popup_menu [count].moreinfo == edit_paste_cb   ||
+		    popup_menu [count].moreinfo == gedit_replace_cb)
+		{
+			widget =  popup_menu [count].widget;
+	
+			if (GTK_IS_WIDGET (widget) && (GTK_OBJECT(widget)->ref_count > 0))
+				gtk_widget_set_sensitive (widget, !unsensitive);			
+		}
+		
+		count++;
+	}
+	
+	/* Set plugins menu sensitivity*/
+	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_MENUBAR_NAME);	
+	g_return_if_fail (GNOME_IS_DOCK_ITEM (dock_item));
+	
+	menu_bar = gnome_dock_item_get_child (dock_item);
+			
+	for (count = 0; count < g_list_length (plugins_list); count++)
+	{
+		pd = g_list_nth_data (plugins_list, count);
+
+		if (pd->installed && pd->needs_a_document)
+		{			       
+			path = g_strdup_printf ("%s/%s", _("_Plugins"), pd->name);
+			
+			children = gtk_container_children (GTK_CONTAINER ( 
+				gnome_app_find_menu_pos (menu_bar, path, &menu_pos)));
+	
+			widget = GTK_WIDGET (g_list_nth_data (children, menu_pos - 1));
+
+			if (GTK_IS_WIDGET (widget))
+			{
+				if(pd->modifies_an_existing_doc)
+				{
+					gtk_widget_set_sensitive (widget, !unsensitive);
+				}
+				else
+				{
+					gtk_widget_set_sensitive (widget, TRUE);
+				}
+			}
+
+			g_free (path);
+		}
+	}
+	
+	return;
+	
+}
+
 /**
  * gedit_window_set_widgets_sensitivity:
  * @sensitive: 

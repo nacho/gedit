@@ -48,6 +48,7 @@ void	gedit_window_set_view_menu_sensitivity (GnomeApp *app);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
 void	gedit_window_set_widgets_sensitivity (gint unsensitive);
 void	gedit_window_set_plugins_menu_sensitivity (gint sensitive);
+void    gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive);
 
 #endif /* __WINDOW_H__ */
 

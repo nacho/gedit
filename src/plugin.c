@@ -334,6 +334,7 @@ gedit_plugin_load (const gchar *file)
 	}
 
 	pd->needs_a_document = TRUE;
+	pd->modifies_an_existing_doc = FALSE;
 	pd->installed_by_default = FALSE;
 	pd->desc = NULL;
 	pd->long_desc = NULL;

@@ -817,6 +817,7 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
 
 	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), doc->readonly);
 
 	gedit_debug (DEBUG_VIEW, "end");
 }
@@ -945,6 +946,7 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 		gedit_view_set_window_position (view, 0);
 		g_free (buffer);
 		gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), view->doc->readonly);
 	}
 
 }
@@ -973,6 +975,7 @@ gedit_view_remove (GeditView *view)
 	gedit_document_set_title (doc);
 
 	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), doc->readonly);
 }
 
 void

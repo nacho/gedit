@@ -279,6 +279,11 @@ recent_cb (GtkWidget *widget, gpointer data)
 		gedit_recent_history_write_config ();
 		gedit_recent_update_all_windows (mdi);		
 	}
+	else
+	{
+		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
+	}
+
 }
 
 /**

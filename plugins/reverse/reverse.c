@@ -72,7 +72,8 @@ init_plugin (PluginData *pd)
 	pd->long_desc = _("Reverse text");
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
 	pd->needs_a_document = TRUE;
-	
+	pd->modifies_an_existing_doc = TRUE;
+
 	pd->private_data = (gpointer)reverse;
 	
 	return PLUGIN_OK;

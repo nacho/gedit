@@ -1,3 +1,19 @@
+2001-01-26 Paolo Maagi <maggi@athena.polito.it>
+
+	* email/email.c (init_plugin): added pd->modifies_an_existing_doc = FALSE;
+	
+	* reverse/reverse.c (init_plugin): added 
+	pd->modifies_an_existing_doc = TRUE;
+
+	* sample/sample.c (init_plugin): added 
+	pd->modifies_an_existing_doc = TRUE;
+
+	* shell_output/shell_output.c (init_plugin): added 
+	pd->modifies_an_existing_doc = TRUE;
+
+	* time/time.c (init_plugin): added 
+	pd->modifies_an_existing_doc = TRUE;
+	
 2000-11-20  Chema Celorio  <chema@celorio.com>
 
 	* shell_output/shell_output.c: dont' crash if there isn't
