@@ -21,17 +21,7 @@
  * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
-/* FIXME :
-   We need to put this in the prefs. box but I need Jason to finish it
-   first.
-   [ a1 ] No wraping ( clip lines )
-   [ a2 ] Enable wrapping   ---------- break chars [ b1 ] 
-                                |----- break lines [ b2 ]
-	 Add marks [ c ]
-
-*/
-#define WRAPPING    TRUE
-#define ADD_MARKS   FALSE
+/*#define ADD_MARKS   FALSE */
 
 #include <config.h>
 #include <gnome.h>
@@ -104,6 +94,7 @@ static int  print_determine_lines (PrintJobInfo *pji);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void start_job (GnomePrintContext *pc);
 static void print_header (PrintJobInfo *pji, unsigned int page);
+static void print_setfont (PrintJobInfo *pji);
 static void end_page (PrintJobInfo *pji);
 static void end_job (GnomePrintContext *pc);
 static void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
@@ -189,9 +180,11 @@ print_document (Document *doc, GnomePrinter *printer)
 	start_job (pji->pc);
 	for(i = 1; i <= pji->pages; i++)
 	{
-		print_header(pji, i);
+		if (settings->printheader)
+			print_header(pji, i);
+
+		print_setfont (pji);
 		for (j = 1; j<= pji->total_lines; j++)
-/*		while (pji->file_offset < pji->buffer_size)*/ 
 		{
 			print_line (pji);
 			if (pji->current_line % pji->lines_per_page == 0)
@@ -297,7 +290,7 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
 	pji->margin_left = .75 * 72;      /* gnome-print implements them */ 
 	pji->margin_right = .75 * 72;
-	pji->header_height = 1 * 72;
+	pji->header_height = settings->printheader * 72;
 	pji->printable_width  = pji->page_width -
 		                pji->margin_left -
 		                pji->margin_right;
@@ -308,8 +301,7 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	pji->font_size = 10;
 	pji->font_char_width = 0.0808 * 72;
 	pji->font_char_height = .14 * 72;
-	pji->wrapping = WRAPPING;       /* We need to add this to the prefs box */ 
-	pji->add_marks = ADD_MARKS;     /* We need to add this to the prefs box */ 
+	pji->wrapping = settings->printwrap;
 	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
 	pji->total_lines = print_determine_lines(pji);
 	pji->lines_per_page = (pji->printable_height -
@@ -347,7 +339,7 @@ print_determine_lines (PrintJobInfo *pji)
 			}
 		}
 	}
-        /* After counteing, scan the doc backwards to determine how many
+        /* After counting, scan the doc backwards to determine how many
 	   blanks lines there are (at the bottom),substract that from lines */
 	for ( i=pji->buffer_size-1; i>0; i--)
 		if (pji->buffer[i] != '\n' && pji->buffer[i] != ' ' )
@@ -391,10 +383,17 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	gnome_print_show (pji->pc, text2);
 	gnome_print_stroke (pji->pc); 
 
+}
+
+static void
+print_setfont (PrintJobInfo *pji)
+{
+	GnomeFont *font;
 	/* Set the font for the rest of the page */
 	font = gnome_font_new (pji->font_name, pji->font_size);
 	gnome_print_setfont (pji->pc, font);
 }
+	
 
 static void
 end_page (PrintJobInfo *pji)
