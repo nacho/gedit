@@ -41,7 +41,7 @@ extern SearchInfo gedit_search_info;
   void gedit_search_end (void);
   void gedit_search_start (void);
   void dump_search_state (void);
-  void count_lines_cb (GtkWidget *widget, gpointer data);
+  void file_info_cb (GtkWidget *widget, gpointer data);
   void find_cb (GtkWidget *widget, gpointer data);
   void find_again_cb (GtkWidget *widget, gpointer data);
   void replace_cb (GtkWidget *widget, gpointer data);

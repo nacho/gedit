@@ -157,7 +157,7 @@ dump_search_state (void)
 }
 
 void
-count_lines_cb (GtkWidget *widget, gpointer data)
+file_info_cb (GtkWidget *widget, gpointer data)
 {
 	gint total_chars = 0 ;
 	gint total_words = 0 ;
@@ -429,9 +429,8 @@ line_to_pos (Document *doc, gint line, gint *lines)
 }
 
 void
-file_info ( gint pos ,  gint *total_chars , gint *total_words , gint *total_lines ,
-	    gint *total_paragraphs , gint *line_number , gint *column_number )
-
+file_info ( gint pos,  gint *total_chars, gint *total_words, gint *total_lines,
+	    gint *total_paragraphs, gint *line_number, gint *column_number )
 {
 	gint i=0 ;
 	gint newlines_number ; /* this variable is the number of '\n' that there are

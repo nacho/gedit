@@ -260,7 +260,7 @@ GnomeUIInfo toolbar_data[] =
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("Line"), N_("Get the current and total lines"), count_lines_cb,
+		GNOME_APP_UI_ITEM, N_("Line"), N_("Get file info like characters, lines, words & paragraphs count."), file_info_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_INDEX
 	},
 	GNOMEUIINFO_SEPARATOR,
