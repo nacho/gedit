@@ -95,20 +95,14 @@
 
             <child>
               <widget class="GtkScrolledWindow" id="plugin_viewport">
-                <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
+                <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                 <property name="vscrollbar_policy">GTK_POLICY_ALWAYS</property>
                 <property name="visible">yes</property>
+                <property name="shadow_type">GTK_SHADOW_IN</property>
 
                 <child>
-                  <widget class="GtkViewport" id="viewport1">
-                    <property name="shadow_type">GTK_SHADOW_IN</property>
+                  <widget class="GtkTreeView" id="plugin_tree">
                     <property name="visible">yes</property>
-
-                    <child>
-                      <widget class="GtkTreeView" id="plugin_tree">
-                        <property name="visible">yes</property>
-                      </widget>
-                    </child>
                   </widget>
                 </child>
 

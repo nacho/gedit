@@ -356,7 +356,9 @@ activate (GeditPlugin *pd)
 		}
 		
 		g_free (item_path);
-		
+
+		pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
 		top_windows = g_list_next (top_windows);
 	}
 }

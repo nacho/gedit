@@ -412,3 +412,14 @@ gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin)
 
 	return (plugin->configure != NULL);	
 }
+
+gboolean 	 
+gedit_plugins_engine_configure_plugin (GeditPlugin *plugin, GtkWidget* parent)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (plugin != NULL, FALSE);
+	g_return_val_if_fail (plugin->configure != NULL, FALSE);
+	
+	return (plugin->configure (plugin, parent) == PLUGIN_OK);
+}

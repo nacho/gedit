@@ -52,6 +52,8 @@ const GList	*gedit_plugins_engine_get_plugins_list 	();
 
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPlugin *plugin);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPlugin *plugin);
+gboolean 	 gedit_plugins_engine_configure_plugin	(GeditPlugin *plugin, GtkWidget* parent);
+
 
 /* 
  * new_window == TRUE if this function is called because a new top window

@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. * *
+ * Boston, MA 02111-1307, USA. 
  */
  
 /*
@@ -1081,7 +1081,7 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
 }
 
 gboolean 
-gedit_file_open_recent (GeditMDIChild *child, gchar* uri)
+gedit_file_open_recent (GeditMDIChild *child, const gchar* uri)
 {
 	gboolean ret;
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
@@ -1091,7 +1091,7 @@ gedit_file_open_recent (GeditMDIChild *child, gchar* uri)
 	if (ret)
 	{
 		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
-		gedit_utils_flash_va (_("Loaded file '%s'"), t);
+		gedit_utils_flash_va (_("Loaded file %s"), t);
 		g_free (t);
 	}
 

@@ -87,9 +87,8 @@ configure_button_cb (GtkWidget *button, gpointer data)
 
 	gedit_debug (DEBUG_PLUGINS, "Configuring: %s\n", info->plugin->name);
 
-	/*
-	gedit_plugins_engine_configure (info->plugin);
-	*/
+	gedit_plugins_engine_configure_plugin (info->plugin, dialog->dialog);
+	
 }
 
 static void
@@ -181,10 +180,9 @@ row_activated_cb (GtkTreeView *tree_view,
 	g_return_if_fail (info != NULL);
 
 	gedit_debug (DEBUG_PLUGINS, "Configuring: %s\n", info->plugin->name);
-
-	/*
-	gedit_plugins_engine_configure (info->plugin);
-	*/
+	
+	gedit_plugins_engine_configure_plugin (info->plugin, dialog->dialog);
+	
 }
 
 static void
@@ -206,7 +204,7 @@ dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
 	const GList *plugins;
 	GtkListStore *model;
 	GtkTreeIter iter;
-
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	plugins = dialog->plugins;
@@ -223,6 +221,19 @@ dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
 				    -1);
 
 		plugins = plugins->next;
+	}
+
+	if (gtk_tree_model_get_iter_root (GTK_TREE_MODEL (model), &iter))
+	{
+		GtkTreeSelection *selection;
+		GeditPluginInfo* info;
+		
+		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree));
+		g_return_if_fail (selection != NULL);
+		gtk_tree_selection_select_iter (selection, &iter);
+
+		gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+		dialog_plugin_manager_update_info (dialog, info);
 	}
 }
 
