@@ -78,6 +78,8 @@ gboolean           gnome_vfs_x_uris_match                        (const char    
 gboolean           gnome_vfs_x_uris_match_ignore_fragments       (const char           *uri_1,
 							  const char           *uri_2);
 char *             gnome_vfs_x_uri_get_basename                  (const char           *uri);
+char *		   gnome_vfs_x_uri_get_dirname 			 (const char *uri);
+
 char *             gnome_vfs_x_uri_get_scheme                    (const char           *uri);
 char *             gnome_vfs_x_uri_make_full_from_relative       (const char           *base_uri,
 							  const char           *uri);

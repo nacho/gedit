@@ -1,3 +1,21 @@
+2002-05-20  Paolo Maggi <maggi@athena.polito.it>
+
+	Fixed bug #81878
+
+	gedit-file-selector-util.c (run_file_selector): set 
+	using_bonobo_filesel to TRUE only if dialog != NULL
+
+	gedit-file.c: added the gedit_default_path variable
+	(gedit_file_open): use and update gedit_default_path
+	(gedit_file_save_as): ditto
+
+	gnome-vfs-helpers.[ch] (gnome_vfs_x_uri_get_dirname):
+	new function
+
+2002-05-20  Paolo Maggi <maggi@athena.polito.it>
+	
+	gedit-ui.xml: s/About/About...
+		
 2002-05-15  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-file.c (gedit_file_save): insert a canonical uri

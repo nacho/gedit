@@ -362,14 +362,13 @@ run_file_selector (GtkWindow  *parent,
 		user_data_id = g_quark_from_static_string ("GeditUserData");
 
 	if (!g_getenv ("GNOME_FILESEL_DISABLE_BONOBO"))
-	{
 		dialog = create_bonobo_selector (enable_vfs, mime_types, 
 						 default_path, default_filename);
-		using_bonobo_filesel = TRUE;
-	}
 	
 	if (!dialog)
 		dialog = create_gtk_selector (default_path, default_filename);
+	else
+		using_bonobo_filesel = TRUE;
 
 	gtk_window_set_title (dialog, title);
 	gtk_window_set_modal (dialog, TRUE);

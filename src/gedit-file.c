@@ -51,6 +51,10 @@
 static gboolean gedit_file_open_real (const gchar* file_name, GeditMDIChild* child);
 static gboolean gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child);
 
+
+static gchar* gedit_default_path = NULL;
+
+
 void 
 gedit_file_new (void)
 {
@@ -123,7 +127,7 @@ gedit_file_open (GeditMDIChild *active_child)
 			TRUE,
 		        _("Open File ..."), 
 			NULL, 
-			NULL);
+			gedit_default_path);
 	
 	if (files) 
 	{
@@ -142,6 +146,14 @@ gedit_file_open (GeditMDIChild *active_child)
 
 					g_free (uri_utf8);
 				}
+
+				if (gedit_utils_uri_has_file_scheme (files[i]))
+				{				
+					if (gedit_default_path != NULL)
+						g_free (gedit_default_path);
+
+					gedit_default_path = gnome_vfs_x_uri_get_dirname (files[i]);
+				}				
 			}
 			
 			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
@@ -322,9 +334,10 @@ gedit_file_save_as (GeditMDIChild *child)
 	gchar *file;
 	gboolean ret = FALSE;
 	GeditDocument *doc;
-	gchar *fname;
-	gchar *file_utf8;
-
+	gchar *fname = NULL;
+	gchar *path = NULL;
+	gchar *uri = NULL;
+	
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (child != NULL, FALSE);
@@ -332,21 +345,48 @@ gedit_file_save_as (GeditMDIChild *child)
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	fname = gedit_document_get_uri (doc);
+	uri = gedit_document_get_uri (doc);
+	g_return_val_if_fail (uri != NULL, FALSE);
 
+	if (gedit_document_is_untitled (doc))
+	{
+		path = (gedit_default_path != NULL) ? 
+			g_strdup (gedit_default_path) : NULL;
+		fname = uri;
+	}
+	else
+	{
+		fname = gnome_vfs_x_uri_get_basename (uri);
+
+		if (gedit_utils_uri_has_file_scheme (uri))
+			path = gnome_vfs_x_uri_get_dirname (uri);
+		else
+			path = (gedit_default_path != NULL) ? 
+				g_strdup (gedit_default_path) : NULL;
+	}
+				
+	g_return_val_if_fail (fname != NULL, FALSE);
+	
 	file = gedit_file_selector_save (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			FALSE,
 		        _("Save as ..."), 
 			NULL, 
-			NULL,
+			path,
 			fname);
+	
+	g_free (uri);
 	g_free (fname);
-
-	file_utf8 = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
+	
+	if (path != NULL)
+		g_free (path);
 
 	if (file != NULL) 
 	{
+		gchar *file_utf8;
+
+		file_utf8 = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
+
 		if (file_utf8 != NULL)
 			gedit_utils_flash_va (_("Saving file '%s' ..."), file_utf8);
 		
@@ -356,16 +396,21 @@ gedit_file_save_as (GeditMDIChild *child)
 		{
 			if (file_utf8 != NULL)
 				gedit_utils_flash_va (_("File '%s' saved."), file_utf8);
+
+			if (gedit_default_path != NULL)
+				g_free (gedit_default_path);
+
+			gedit_default_path = gnome_vfs_x_uri_get_dirname (file);
 		}
 		else
 			gedit_utils_flash_va (_("The document has not been saved."));
 
 		gedit_debug (DEBUG_FILE, "File: %s", file);
 		g_free (file);
-	}
 
-	if (file_utf8 != NULL)
-		g_free (file_utf8);
+		if (file_utf8 != NULL)
+			g_free (file_utf8);
+	}
 
 	return ret;
 }
