@@ -47,13 +47,13 @@ static GtkWidget *print_cmd_entry = NULL;
 
 
 /*
- * PUBLIC: file_print_cmd_callback
+ * PUBLIC: file_print_cb
  *
  * creates print dialog box.  this should be the only routine global to
  * the world.
  */
 void
-file_print_cmd_callback(GtkWidget *widget, gpointer cbdata)
+file_print_cb(GtkWidget *widget, gpointer cbdata)
 {
 	GtkWidget *hbox;
 	GtkWidget *vbox;
@@ -128,7 +128,7 @@ file_print_cmd_callback(GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(tmp);
 
 	gtk_widget_show(print_dialog);
-} /* file_print_cmd_callback */
+} /* file_print_cb */
 
 
 /*
@@ -264,7 +264,7 @@ get_filename(gE_data *data)
 		case 2 :
 			if (doc->filename == NULL) {
 				data->temp1 = (gpointer)TRUE;	/* non-zero */
-				file_save_as_cmd_callback(NULL, data);
+				file_save_as_cb(NULL, data);
 				while (data->temp1 != NULL)
 					gtk_main_iteration_do(TRUE);
 			} else

@@ -29,11 +29,7 @@
 #include "main.h"
 #include "gE_document.h"
 #include "gE_files.h"
-#define PLUGIN_TEST 1
-#if PLUGIN_TEST
-#include "plugin.h"
 #include "gE_plugin_api.h"
-#endif
 #include "commands.h"
 #include "gE_print.h"
 #include "menus.h"
@@ -54,161 +50,147 @@ typedef struct {
 
 static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
 static void gE_window_create_popupmenu(gE_data *);
-static void gE_document_swaphc_cb(GtkWidget *w, gpointer cbdata);
+static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
 static gboolean gE_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
+static void notebook_switch_page(GtkWidget *w, GtkNotebookPage *page,
+    gint num, gE_window *window);
+static void gE_msgbar_timeout_add(gE_window *window);
 
 static popup_t popup_menu[] =
 {
-	{ "Cut", edit_cut_cmd_callback },
-	{ "Copy", edit_copy_cmd_callback },
-	{ "Paste", edit_paste_cmd_callback },
+	{ "Cut", edit_cut_cb },
+	{ "Copy", edit_copy_cb },
+	{ "Paste", edit_paste_cb },
 	{ "<separator>", NULL },
 	{ "Open in new window", file_open_in_new_win_cb },
-	{ "Save", file_save_cmd_callback },
-	{ "Close", file_close_cmd_callback },
-	{ "Print", file_print_cmd_callback },
+	{ "Save", file_save_cb },
+	{ "Close", file_close_cb },
+	{ "Print", file_print_cb },
 	{ "<separator>", NULL },
-	{ "Open (swap) .c/.h file", gE_document_swaphc_cb },
+	{ "Open (swap) .c/.h file", doc_swaphc_cb },
 	{ NULL, NULL }
 };
 
 static char *lastmsg = NULL;
 static gint msgbar_timeout_id;
 
-gE_window *gE_window_new()
+gE_window *
+gE_window_new(void)
 {
-  gE_window *window;
-  gE_data *data;
-  GtkWidget *box1;
-  GtkWidget *box2;
-  GtkWidget *line_button, *col_button;
- 
-  window = g_malloc(sizeof(gE_window));
-  window->popup = NULL;
-  window->notebook = NULL;
-  window->save_fileselector = NULL;
-  window->open_fileselector = NULL;
-  window->documents = NULL;
-  window->search = g_malloc (sizeof(gE_search));
-  window->search->window = NULL;
-  window->auto_indent = TRUE;
-  window->show_tabs = TRUE;
-  window->tab_pos = GTK_POS_TOP;
-  window->files_list_window = NULL;
-  window->files_list_window_data = NULL;
-  window->toolbar = NULL;
-  
- 	  data = g_malloc0 (sizeof (gE_data));
+	gE_window *w;
+	gE_data *data;
+	GtkWidget *box1, *box2, *tmp;
 
+	/* various initializations */
+	w = g_malloc(sizeof(gE_window));
+	w->popup = NULL;
+	w->notebook = NULL;
+	w->save_fileselector = NULL;
+	w->open_fileselector = NULL;
+	w->documents = NULL;
+	w->search = g_malloc(sizeof(gE_search));
+	w->search->window = NULL;
+	w->auto_indent = TRUE;
+	w->show_tabs = TRUE;
+	w->tab_pos = GTK_POS_TOP;
+	w->files_list_window = NULL;
+	w->files_list_window_data = NULL;
+	w->toolbar = NULL;
+	data = g_malloc0(sizeof(gE_data));
 #ifdef WITHOUT_GNOME
-  window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_widget_set_name (window->window, "gedit window");
+	w->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_widget_set_name(w->window, "gedit window");
 #else
-  window->window = gnome_app_new ("gEdit", GEDIT_ID );
+	w->window = gnome_app_new("gEdit", GEDIT_ID);
 #endif
-/*  gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
-  		      GTK_SIGNAL_FUNC(destroy_window),
-		      data);
-*/
+	data->window = w;
+	gtk_signal_connect(GTK_OBJECT(w->window), "delete_event",
+		GTK_SIGNAL_FUNC(gE_destroy_window), data);
+	gtk_window_set_wmclass(GTK_WINDOW(w->window), "gEdit", "gedit");
+	gtk_window_set_title(GTK_WINDOW(w->window), GEDIT_ID);
+	gtk_widget_set_usize(GTK_WIDGET(w->window), 595, 390);
+	gtk_window_set_policy(GTK_WINDOW(w->window), TRUE, TRUE, FALSE);
+	gtk_container_border_width(GTK_CONTAINER(w->window), 0);
+	box1 = gtk_vbox_new(FALSE, 0);
+#ifdef WITHOUT_GNOME
+	gtk_container_add(GTK_CONTAINER(w->window), box1);
+#endif
 
-  data->window = window;
-
+	/* popup menu (activated when clicking on mouse button 3) */
 	gE_window_create_popupmenu(data);
 
-  
-   gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
-     		      GTK_SIGNAL_FUNC(gE_destroy_window),
-		      data);
-     
-  gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
-  gtk_window_set_title (GTK_WINDOW (window->window), GEDIT_ID);
-  gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
-  gtk_window_set_policy(GTK_WINDOW(window->window), TRUE, TRUE, FALSE);
-  gtk_container_border_width (GTK_CONTAINER (window->window), 0);
-      
-  box1 = gtk_vbox_new (FALSE, 0);
-
-  
+	/* main menu */
+	gE_menus_init(w, data);
 #ifdef WITHOUT_GNOME
-  gtk_container_add (GTK_CONTAINER (window->window), box1);
-#endif
-
-  gE_menus_init (window, data);
-
-#ifdef WITHOUT_GNOME
-/*
-#ifdef GTK_HAVE_FEATURES_1_1_0
-  gtk_window_add_accel_group(GTK_WINDOW(window->window), window->accel);
+	w->menubar_handle = gtk_handle_box_new();
+	gtk_container_add(GTK_CONTAINER(w->menubar_handle), w->menubar);
+	gtk_box_pack_start(GTK_BOX(box1), w->menubar_handle, FALSE, TRUE, 0);
 #else
-  gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
-#endif
-*/
-
-  gtk_widget_show(window->menubar);
-  window->menubar_handle = gtk_handle_box_new();
-  gtk_container_add(GTK_CONTAINER(window->menubar_handle), window->menubar);
-  gtk_widget_show(window->menubar_handle);
-  gtk_box_pack_start(GTK_BOX(box1), window->menubar_handle, FALSE, TRUE, 0);
-#else
-  gnome_app_set_contents (GNOME_APP(window->window), box1);
+	gnome_app_set_contents(GNOME_APP(w->window), box1);
 #endif
 
-  gE_create_toolbar(window, data);
-  
+	/* toolbar */
+	gE_create_toolbar(w, data);
 #ifdef WITHOUT_GNOME
-  gtk_box_pack_start(GTK_BOX(box1), window->toolbar_handle, FALSE, TRUE, 0);
-  gtk_widget_show(window->toolbar_handle);
+	gtk_box_pack_start(GTK_BOX(box1), w->toolbar_handle, FALSE, TRUE, 0);
 #endif
 
-  gtk_widget_show (box1);
+	/* add a new document to the window */
+	gE_document_new(w);
+	gtk_box_pack_start(GTK_BOX(box1), w->notebook, TRUE, TRUE, 0);
+	box2 = gtk_hbox_new(FALSE, 0);
+	gtk_container_border_width(GTK_CONTAINER(box2), 0);
+	gtk_box_pack_start(GTK_BOX(box1), box2, FALSE, TRUE, 0);
 
-  gE_document_new(window);
+	/* statusbar */
+	w->statusbar = gtk_label_new("Welcome to gEdit");
+	gE_msgbar_timeout_add(w);
+	gtk_box_pack_start(GTK_BOX(box2), w->statusbar, TRUE, TRUE, 0);
+	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);
 
+	/* line and column indicators */
+	tmp = gtk_button_new_with_label("Line");
+	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
+		GTK_SIGNAL_FUNC(goto_line_cb), w);
+	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
+	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 1);
+	gtk_widget_show(tmp);
 
-  gtk_box_pack_start(GTK_BOX(box1), window->notebook, TRUE, TRUE, 0);
+	w->line_label = gtk_label_new("1");
+	gtk_box_pack_start(GTK_BOX(box2), w->line_label, FALSE, FALSE, 1);
+	gtk_widget_set_usize(w->line_label, 40, 0);
+	gtk_widget_show(w->line_label);
 
-      box2 = gtk_hbox_new (FALSE, 0);
-      gtk_container_border_width (GTK_CONTAINER (box2), 0);
-      gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
+	tmp = gtk_label_new("Column");
+	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 1);
+	gtk_widget_show(tmp);
 
-      window->statusbar = gtk_label_new ("Welcome to gEdit");
-      gE_msgbar_timeout_add(window);
-      gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
-      gtk_misc_set_alignment (GTK_MISC (window->statusbar), 0.0, 0.5);
-      gtk_widget_show (window->statusbar);
-      
-      line_button = gtk_button_new_with_label ("Line");
-      gtk_signal_connect (GTK_OBJECT (line_button), "clicked",
-                                   GTK_SIGNAL_FUNC (search_goto_line_callback), window);
-      GTK_WIDGET_UNSET_FLAGS (line_button, GTK_CAN_FOCUS);
-      window->line_label = gtk_label_new ("1");
-      col_button = gtk_label_new ("Column");
-      window->col_label = gtk_label_new ("0");
-      gtk_box_pack_start (GTK_BOX (box2), line_button, FALSE, FALSE, 1);
-      gtk_box_pack_start (GTK_BOX (box2), window->line_label, FALSE, FALSE, 1);
-      gtk_box_pack_start (GTK_BOX (box2), col_button, FALSE, FALSE, 1);
-      gtk_box_pack_start (GTK_BOX (box2), window->col_label, FALSE, FALSE, 1);
-      gtk_widget_show (line_button);
-      gtk_widget_show (window->line_label);
-      gtk_widget_set_usize (window->line_label, 40, 0);
-      gtk_widget_show (col_button);
-      gtk_widget_show (window->col_label);
-      gtk_widget_set_usize (window->col_label, 40, 0);
-      gtk_widget_show (box2);
-      window->statusbox = box2;
+	w->col_label = gtk_label_new("0");
+	gtk_box_pack_start(GTK_BOX(box2), w->col_label, FALSE, FALSE, 1);
+	gtk_widget_set_usize(w->col_label, 40, 0);
+	gtk_widget_show(w->col_label);
 
-/*  gtk_widget_show(window->menubar); 
-*/
-  gtk_widget_show (window->notebook);
-  gtk_widget_show (window->window);
+	w->statusbox = box2;
 
-  g_list_foreach (plugins, (GFunc)add_plugins_to_window, window);
-  
-  recent_update (window);
-  window_list = g_list_append (window_list, (gpointer) window);
- 
-  return window;
-}
+	/* finish up */
+	#ifdef WITHOUT_GNOME
+	gtk_widget_show(w->menubar);
+	gtk_widget_show(w->menubar_handle);
+	gtk_widget_show(w->toolbar_handle);
+	#endif
+	gtk_widget_show(w->statusbar);
+	gtk_widget_show(box1);
+	gtk_widget_show(box2);
+	gtk_widget_show(w->notebook);
+	gtk_widget_show(w->window);
+
+	g_list_foreach(plugins, (GFunc) add_plugins_to_window, w);
+
+	recent_update(w);
+	window_list = g_list_append(window_list, (gpointer) w);
+
+	return w;
+} /* gE_window_new */
 
 void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow)
 {
@@ -272,7 +254,7 @@ gE_document
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "key_press_event",
-		GTK_SIGNAL_FUNC(auto_indent_callback), w);
+		GTK_SIGNAL_FUNC(auto_indent_cb), w);
 
 	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
 
@@ -287,17 +269,17 @@ gE_document
 
 	doc->changed = FALSE;
 	doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
-		GTK_SIGNAL_FUNC(doc_changed_callback), doc);
+		GTK_SIGNAL_FUNC(doc_changed_cb), doc);
 	gtk_widget_show(doc->text);
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
 	vbox = gtk_vbox_new (FALSE, FALSE);
-	#ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	scrollball = gtk_scrollball_new (NULL, GTK_TEXT(doc->text)->vadj);
 	gtk_box_pack_start (GTK_BOX (vbox), scrollball, FALSE, FALSE, 1);
 	gtk_widget_show (scrollball);
 	doc->scrollball = scrollball;
-	#endif
+#endif
 
 	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->text)->vadj);
 	gtk_box_pack_start (GTK_BOX (vbox), vscrollbar, TRUE, TRUE, 0);
@@ -308,12 +290,11 @@ gE_document
 	gtk_widget_show(vscrollbar);
 	gtk_widget_show (vbox);
 
-	#ifdef GTK_HAVE_FEATURES_1_1_0
-
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	gtk_signal_connect (GTK_OBJECT (doc->text), "insert_text",
-		GTK_SIGNAL_FUNC (document_insert_text_callback), (gpointer) doc);
+		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->text), "delete_text",
-		GTK_SIGNAL_FUNC (document_delete_text_callback), (gpointer) doc);
+		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
 
 	/* Create the bottom split screen */
 	table = gtk_table_new(2, 2, FALSE);
@@ -332,7 +313,7 @@ gE_document
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
-		"key_press_event", GTK_SIGNAL_FUNC(auto_indent_callback), w);
+		"key_press_event", GTK_SIGNAL_FUNC(auto_indent_cb), w);
 
 	gtk_table_attach_defaults(GTK_TABLE(table),
 		doc->split_screen, 0, 1, 0, 1);
@@ -355,15 +336,13 @@ gE_document
 	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
 		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 
-
 	GTK_WIDGET_UNSET_FLAGS(vscrollbar, GTK_CAN_FOCUS);
 	gtk_widget_show(vscrollbar);
 
 	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "insert_text",
-		GTK_SIGNAL_FUNC(document_insert_text_callback), (gpointer) doc);
+		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "delete_text",
-		GTK_SIGNAL_FUNC(document_delete_text_callback), (gpointer) doc);
-
+		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
 	
 	gtk_widget_show (vpaned);
@@ -420,6 +399,7 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
+#ifndef WITHOUT_GNOME
 void gE_document_toggle_scrollball (GtkWidget *w, gE_window *window)
 {
 	gE_document *doc = gE_document_current (window);
@@ -428,8 +408,9 @@ void gE_document_toggle_scrollball (GtkWidget *w, gE_window *window)
 	else
 		gtk_widget_show (doc->scrollball);
 }
+#endif
 
-void
+static void
 notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	gint num, gE_window *window)
 {
@@ -464,7 +445,7 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 static void
 gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
-	file_close_window_cmd_callback (widget, data);
+	window_close_cb(widget, data);
 }
 
 
@@ -564,11 +545,11 @@ gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
 		}
 	}
 	return FALSE;
-} /* gE_document_swaphc_cb */
+} /* gE_document_popup_cb */
 
 
 /*
- * PRIVATE: gE_document_swaphc_cb
+ * PRIVATE: doc_swaphc_cb
  *
  * if .c file is open open .h file 
  *
@@ -576,7 +557,7 @@ gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
  * check in there.  if both exist, then probably open both files.
  */
 static void
-gE_document_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
+doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 {
 	size_t len;
 	char *newfname;
@@ -633,6 +614,6 @@ gE_document_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 		flw_append_entry(w, doc,
 			g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1,
 			doc->filename);
-} /* gE_document_swaphc_cb */
+} /* doc_swaphc_cb */
 
 /* the end */

@@ -30,7 +30,6 @@
 #include <glib.h>
 #include "main.h"
 #include "commands.h"
-#include "menus.h"
 #include "gE_print.h"
 #include "gE_files.h"
 #include "search.h"
@@ -55,49 +54,49 @@
 
 static toolbar_data_t toolbar_data[] = {
 	{ " New ", "Start a new file", "Toolbar/New", tb_new_xpm,
-		(GtkSignalFunc)file_new_cmd_callback },
+		(GtkSignalFunc)file_new_cb },
 	{ " Open ", "Open a file", "Toolbar/Open", tb_open_xpm,
-		(GtkSignalFunc)file_open_cmd_callback },
+		(GtkSignalFunc)file_open_cb },
 	{ " Save ", "Save file", "Toolbar/Save", tb_save_xpm,
-		(GtkSignalFunc)file_save_cmd_callback },
+		(GtkSignalFunc)file_save_cb },
 	{ " Close ", "Close the current file", "Toolbar/Close", cancel_xpm,
-		(GtkSignalFunc)file_close_cmd_callback },
+		(GtkSignalFunc)file_close_cb },
 	{ " Print ", "Print file", "Toolbar/Print", tb_print_xpm,
-		(GtkSignalFunc)file_print_cmd_callback },
+		(GtkSignalFunc)file_print_cb },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ " Cut ", "Cut text", "Toolbar/Cut", tb_cut_xpm,
-		(GtkSignalFunc)edit_cut_cmd_callback },
+		(GtkSignalFunc)edit_cut_cb },
 	{ " Copy ", "Copy text", "Toolbar/Copy", tb_copy_xpm,
-		(GtkSignalFunc)edit_copy_cmd_callback },
+		(GtkSignalFunc)edit_copy_cb },
 	{ " Paste ", "Paste text", "Toolbar/Paste", tb_paste_xpm,
-		(GtkSignalFunc)edit_paste_cmd_callback },
+		(GtkSignalFunc)edit_paste_cb },
 	{ " Search ", "Search for text", "Toolbar/Search", tb_search_xpm,
-		(GtkSignalFunc)search_search_cmd_callback },
+		(GtkSignalFunc)search_cb },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
 #else	/* USING GNOME */
 
 static toolbar_data_t toolbar_data[] = {
-	{ N_(" New "), N_("Start a new file"), "Toolbar/New", GNOME_STOCK_PIXMAP_NEW,
-		(GtkSignalFunc)file_new_cmd_callback },
-	{ N_(" Open "), N_("Open a file"), "Toolbar/Open", GNOME_STOCK_PIXMAP_OPEN,
-		(GtkSignalFunc)file_open_cmd_callback },
-	{ N_(" Save "), N_("Save file"), "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
-		(GtkSignalFunc)file_save_cmd_callback },
-	{ N_(" Close "), N_("Close the current file"), "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
-		(GtkSignalFunc)file_close_cmd_callback },
-	{ N_(" Print "), N_("Print file"), "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
-		(GtkSignalFunc)file_print_cmd_callback },
+	{ N_(" New "), N_("Start a new file"), "Toolbar/New",
+		GNOME_STOCK_PIXMAP_NEW, (GtkSignalFunc)file_new_cb },
+	{ N_(" Open "), N_("Open a file"), "Toolbar/Open",
+		GNOME_STOCK_PIXMAP_OPEN, (GtkSignalFunc)file_open_cb },
+	{ N_(" Save "), N_("Save file"), "Toolbar/Save",
+		GNOME_STOCK_PIXMAP_SAVE, (GtkSignalFunc)file_save_cb },
+	{ N_(" Close "), N_("Close the current file"), "Toolbar/Close",
+		GNOME_STOCK_PIXMAP_CLOSE, (GtkSignalFunc)file_close_cb },
+	{ N_(" Print "), N_("Print file"), "Toolbar/Print",
+		GNOME_STOCK_PIXMAP_PRINT, (GtkSignalFunc)file_print_cb },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ N_(" Cut "), N_("Cut text"), "Toolbar/Cut", GNOME_STOCK_PIXMAP_CUT,
-		(GtkSignalFunc)edit_cut_cmd_callback },
-	{ N_(" Copy "), N_("Copy text"), "Toolbar/Copy", GNOME_STOCK_PIXMAP_COPY,
-		(GtkSignalFunc)edit_copy_cmd_callback },
-	{ N_(" Paste "), N_("Paste text"), "Toolbar/Paste", GNOME_STOCK_PIXMAP_PASTE,
-		(GtkSignalFunc)edit_paste_cmd_callback },
-	{ N_(" Search "), N_("Search for text"), "Toolbar/Search", GNOME_STOCK_PIXMAP_SEARCH,
-		(GtkSignalFunc)search_search_cmd_callback },
+	{ N_(" Cut "), N_("Cut text"), "Toolbar/Cut",
+		GNOME_STOCK_PIXMAP_CUT, (GtkSignalFunc)edit_cut_cb },
+	{ N_(" Copy "), N_("Copy text"), "Toolbar/Copy",
+		GNOME_STOCK_PIXMAP_COPY, (GtkSignalFunc)edit_copy_cb },
+	{ N_(" Paste "), N_("Paste text"), "Toolbar/Paste",
+		GNOME_STOCK_PIXMAP_PASTE, (GtkSignalFunc)edit_paste_cb },
+	{ N_(" Search "), N_("Search for text"), "Toolbar/Search",
+		GNOME_STOCK_PIXMAP_SEARCH, (GtkSignalFunc)search_cb },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
@@ -106,11 +105,11 @@ static toolbar_data_t toolbar_data[] = {
 #ifdef WITHOUT_GNOME
 static toolbar_data_t flw_tb_data[] = {
 	{ " Save ", "Save file", "Toolbar/Save", tb_save_xpm,
-		(GtkSignalFunc)file_save_cmd_callback },
+		(GtkSignalFunc)file_save_cb },
 	{ " Close ", "Close the current file", "Toolbar/Close", cancel_xpm,
-		(GtkSignalFunc)file_close_cmd_callback },
+		(GtkSignalFunc)file_close_cb },
 	{ " Print ", "Print file", "Toolbar/Print", tb_print_xpm,
-		(GtkSignalFunc)file_print_cmd_callback },
+		(GtkSignalFunc)file_print_cb },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ " Ok ", "Close list window", "Ok", exit_xpm,
 		(GtkSignalFunc)flw_destroy },
@@ -118,15 +117,15 @@ static toolbar_data_t flw_tb_data[] = {
 };
 #else
 static toolbar_data_t flw_tb_data[] = {
-	{ N_(" Save "), "Save file", "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
-		(GtkSignalFunc)file_save_cmd_callback },
-	{ N_(" Close "), "Close the current file", "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
-		(GtkSignalFunc)file_close_cmd_callback },
-	{ N_(" Print "), "Print file", "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
-		(GtkSignalFunc)file_print_cmd_callback },
+	{ N_(" Save "), "Save file", "Toolbar/Save",
+		GNOME_STOCK_PIXMAP_SAVE, (GtkSignalFunc)file_save_cb },
+	{ N_(" Close "), "Close the current file", "Toolbar/Close",
+		GNOME_STOCK_PIXMAP_CLOSE, (GtkSignalFunc)file_close_cb },
+	{ N_(" Print "), "Print file", "Toolbar/Print",
+		GNOME_STOCK_PIXMAP_PRINT, (GtkSignalFunc)file_print_cb },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ N_(" OK "), "Close list window", "Ok", GNOME_STOCK_PIXMAP_QUIT,
-		(GtkSignalFunc)flw_destroy },
+	{ N_(" OK "), "Close list window", "Ok",
+		GNOME_STOCK_PIXMAP_QUIT, (GtkSignalFunc)flw_destroy },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 #endif /* #ifdef WITHOUT_GNOME */

@@ -28,51 +28,48 @@ extern "C" {
 #endif
 
 /* File Ops */
-extern void file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_new_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata);
-extern void file_open_cmd_callback(GtkWidget *widget, gpointer cbdata);
+extern void file_quit_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_new_cb(GtkWidget *widget, gpointer cbdata);
+extern void window_new_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_open_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_open_in_new_win_cb(GtkWidget *widget, gpointer data);
-extern void file_save_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_save_as_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_close_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void file_close_window_cmd_callback(GtkWidget *widget, gpointer cbdata);
+extern void file_save_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_save_as_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_close_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
+extern void window_close_cb(GtkWidget *widget, gpointer cbdata);
 
-
-extern void prefs_callback(GtkWidget *widget, gpointer cbwindow);
 
 /* Edit functions */
-extern void edit_cut_cmd_callback(GtkWidget *widget, gpointer cbdata);
-extern void edit_copy_cmd_callback (GtkWidget *widget, gpointer cbdata);
-extern void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata);
-extern void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata);
+extern void edit_cut_cb(GtkWidget *widget, gpointer cbdata);
+extern void edit_copy_cb(GtkWidget *widget, gpointer cbdata);
+extern void edit_paste_cb(GtkWidget *widget, gpointer cbdata);
+extern void edit_selall_cb(GtkWidget *widget, gpointer cbdata);
 
-extern void doc_changed_callback (GtkWidget *widget, gpointer);
+extern void doc_changed_cb(GtkWidget *widget, gpointer);
 
 /* Tab positioning */
-extern void tab_top_cback (GtkWidget *widget, gpointer cbwindow);
-extern void tab_bot_cback (GtkWidget *widget, gpointer cbwindow);
-extern void tab_lef_cback (GtkWidget *widget, gpointer cbwindow);
-extern void tab_rgt_cback (GtkWidget *widget, gpointer cbwindow);
-extern void tab_toggle_cback (GtkWidget *widget, gpointer cbwindow);
+extern void tab_top_cb(GtkWidget *widget, gpointer cbwindow);
+extern void tab_bot_cb(GtkWidget *widget, gpointer cbwindow);
+extern void tab_lef_cb(GtkWidget *widget, gpointer cbwindow);
+extern void tab_rgt_cb(GtkWidget *widget, gpointer cbwindow);
+extern void tab_toggle_cb(GtkWidget *widget, gpointer cbwindow);
 
 /* Auto indent */
-extern void auto_indent_callback(GtkWidget *, GdkEventKey *, gE_window *);
-extern void auto_indent_toggle_callback(GtkWidget *w, gpointer cbdata);
-extern void line_pos_callback(GtkWidget *w, gE_data *data);
+extern void auto_indent_cb(GtkWidget *, GdkEventKey *, gE_window *);
+extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);
 extern void gE_event_button_press(GtkWidget *w, GdkEventButton *, gE_window *);
 
 /* Recent documents */
 extern void recent_add (char *filename);
 extern void recent_update (gE_window *window);
-extern void recent_update_menus (gE_window *window, GList *recent_files);
-extern void recent_callback (GtkWidget *w, gE_data *data);
 
 /* Insert/delete text callbacks for undo/redo and split screening */
 
-extern void document_insert_text_callback (GtkWidget *editable, gchar *insertion_text, gint length, gint *pos, gE_document *doc);
-extern void document_delete_text_callback (GtkWidget *editable, gint start_pos, gint end_pos, gE_document *doc);
+extern void doc_insert_text_cb(GtkWidget *editable,
+	char *insertion_text, int length, int *pos, gE_document *doc);
+extern void doc_delete_text_cb (GtkWidget *editable,
+	int start_pos, int end_pos, gE_document *doc);
 extern void options_toggle_split_screen (GtkWidget *widget, gE_window *window);
 
 /* Functions needed to be made external for the plugins api */

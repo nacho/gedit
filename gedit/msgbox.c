@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  *
@@ -50,6 +50,7 @@ static void msgbox_append(char *msg);
 static void msgbox_clear(void);
 static void msgbox_truncate(void);
 static void msgbox_set_sb(void);
+static void msgbox_destroy(GtkWidget *w, gpointer data);
 #ifdef DEBUG
 static void msgbox_append_dbg(GtkWidget *w, gpointer data);
 static char *msgdbg_str = "added a message!";
@@ -265,11 +266,11 @@ msgbox_close(void)
 
 
 /*
- * PUBLIC: msgbox_destroy
+ * PRIVATE: msgbox_destroy
  *
  * zap!
  */
-void
+static void
 msgbox_destroy(GtkWidget *w, gpointer data)
 {
 	g_return_if_fail(msgbox.toplev != NULL);

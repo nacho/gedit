@@ -182,7 +182,7 @@ gboolean gE_plugin_program_quit ()
 	window = g_list_nth_data (window_list, 1);
 	data->window = window;
 	data->temp1 = window;
-	file_close_cmd_callback (NULL, data);
+	file_close_cb (NULL, data);
 	return TRUE;
 }
 

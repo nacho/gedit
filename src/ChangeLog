@@ -1,3 +1,31 @@
+1998-08-12  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch, after making the neccassary modifications
+	  to get it to compile for the gnome version...
+
+	* Got a new (better) version of the scrollball widget from Daniel
+	  Dunbar, and committed that...
+
+1998-08-11  Andy Kahn <kahn@zk3.dec.com>
+
+	* remove "#include "plugin.h" from main.h because the whole world
+	doesn't need it.  include it only where needed.
+
+	* gE_prefs.[ch]: cleanup.  drop a ton of unneeded cruft.  pretty print.
+
+	* gE_document.c: cleanup gE_window_new().
+
+	* menus.c: (non-Gnome) simplify and drop unnecessary code.  no sorry,
+	menu accelerators still don't work.
+
+	* diff.c: drop erroneous printf's.
+
+	* put evan's scrollball menu option in ifdef's for non-Gnome.
+
+	* rename all *_callback routines to *_cb.
+
+	* lots of other misc changes as a result of the above changes...
+
 1998-08-10  Evan Lawrence <evan@worldpath.net>
 
 	* Committed Andy's patch (we do care Andy ;-)

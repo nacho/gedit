@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifndef WITHOUT_GNOME
@@ -35,6 +36,8 @@
 #include "msgbox.h"
 
 static void flw_update_entry(gE_window *w, gE_document *, int, char *text);
+static void flw_select_file(GtkWidget *, gint, gint, GdkEventButton *,
+	gpointer data);
 static void clear_text (gE_document *doc);
 
 
@@ -61,8 +64,8 @@ gint
 gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 {
 	char *buf;
-	int fd, pos;
-	gchar *title, *buff;
+	int fd;
+	gchar *title;
 	size_t size, bytesread, num;
 
 	/* get file stats (e.g., file size is used by files list window) */
@@ -161,21 +164,20 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)basename(fname));
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	/* Copy the buffer if split-screening enabled */
-	#ifdef GTK_HAVE_FEATURES_1_1_0
-	if (doc->split_screen)
-	{
-		buff = gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0, -1);
+	if (doc->split_screen) {
+		int pos;
+
+		buf = gtk_editable_get_chars(GTK_EDITABLE(doc->text), 0, -1);
 		pos = 0;
 		doc->flag = doc->split_screen;
-		gtk_text_freeze (GTK_TEXT (doc->split_screen));
-		gtk_editable_insert_text (GTK_EDITABLE (doc->split_screen),
-			buff,
-			strlen (buff),
-			&pos);
-		gtk_text_thaw (GTK_TEXT (doc->split_screen));
+		gtk_text_freeze(GTK_TEXT(doc->split_screen));
+		gtk_editable_insert_text(GTK_EDITABLE(doc->split_screen),
+			buf, strlen(buf), &pos);
+		gtk_text_thaw(GTK_TEXT(doc->split_screen));
 	}
-	#endif
+#endif
 	
 	/* enable document change detection */
 	doc->changed = FALSE;
@@ -184,7 +186,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 			gtk_signal_connect(
 				GTK_OBJECT(doc->text),
 				"changed", 
-				GTK_SIGNAL_FUNC(doc_changed_callback),
+				GTK_SIGNAL_FUNC(doc_changed_cb),
 				doc);
 
 	/* reset the title of the gedit window */
@@ -254,7 +256,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 		doc->changed_id =
 			gtk_signal_connect (
 				GTK_OBJECT(doc->text), "changed",
-				GTK_SIGNAL_FUNC(doc_changed_callback), doc);
+				GTK_SIGNAL_FUNC(doc_changed_cb), doc);
 
 	title = g_malloc0(strlen(GEDIT_ID) +
 			strlen(GTK_LABEL(doc->tab_label)->label) + 4);
@@ -477,13 +479,13 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 
 
 /*
- * PUBLIC: flw_select_file
+ * PRIVATE: flw_select_file
  *
  * callback routine when selecting a file in the files list window.
  * effectively, sets the notebook to show the selected file.
  * see select_row() in gtkclist.c to match function parameters.
  */
-void
+static void
 flw_select_file(GtkWidget *widget, gint row, gint column,
 	GdkEventButton *event, gpointer data)
 {

@@ -24,9 +24,7 @@
 extern "C" {
 #endif /* __cplusplus */
  
-void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata);
-
-
+extern void file_print_cb(GtkWidget *widget, gpointer cbdata);
 
 #ifdef __cplusplus
 }

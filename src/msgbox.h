@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  *
@@ -25,6 +25,5 @@ extern void mbprintf(const char *fmt, ...);
 extern void msgbox_create(void);
 extern void msgbox_show(GtkWidget *, gpointer data);
 extern void msgbox_close(void);
-extern void msgbox_destroy(GtkWidget *w, gpointer data);
 
 #endif	/* __MSGBOX_H__ */

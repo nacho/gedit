@@ -30,7 +30,6 @@
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"
-#include "menus.h"
 #include "msgbox.h"
 
 GList *window_list;
@@ -85,7 +84,6 @@ main (int argc, char **argv)
 	signal(SIGTERM, SIG_DFL);
 #endif
 
-	gE_get_rc_file();
 	gE_rc_parse();
 
 	prog_init(argv + 1);

@@ -23,11 +23,6 @@
 extern "C" {
 #endif /* __cplusplus */
 
-#define PLUGIN_TEST 1
-#if PLUGIN_TEST
-#include "plugin.h"
-#endif
-
 #define STRING_LENGTH_MAX	256
 #define GEDIT_ID	"gEdit 0.4.5"
 
@@ -106,30 +101,15 @@ typedef struct _gE_document {
 	gint changed;
 	gint word_wrap;
 	struct stat *sb;
-	#ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	GtkWidget *scrollball;
-	#endif
-	#ifdef GTK_HAVE_FEATURES_1_1_0
+#endif
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	gint split;
 	GtkWidget *split_screen;
 	GtkWidget *flag;
-	#endif
+#endif
 } gE_document;
-
-typedef struct _gE_prefs {
-	GtkWidget *window;
-	GtkWidget *button;
-	GtkWidget *label;
-	GtkWidget *tfont;
-	GtkWidget *abox;
-	GtkWidget *bbox;
-	GtkWidget *separator;
-	GtkWidget *wrap, *synhi, *indent;
-	GtkWidget *tslant;
-	GtkWidget *tweight;
-	GtkWidget *tsize;
-	GtkWidget *pcmd;
-} gE_prefs;
 
 typedef struct _gE_data {
 	gE_window *window;

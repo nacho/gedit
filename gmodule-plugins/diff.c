@@ -135,8 +135,6 @@ void call_diff( GtkWidget *widget, gpointer data )
       argv[1] = filenames[0];
       argv[2] = filenames[1];
       argv[3] = NULL;
-      g_print("%s\n",argv);
-      printf("%s\n",argv);
       execv( "/usr/bin/diff", argv );
       /* This is only reached if something goes wrong. */
       _exit( 1 );

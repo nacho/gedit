@@ -34,6 +34,7 @@
 #include "gE_document.h"
 #include "gE_about.h"
 #include "gE_print.h"
+#include "gE_prefs.h"
 #include "msgbox.h"
 #include "search.h"
 
@@ -42,55 +43,48 @@
 #define GE_WINDOW	2
 
 #ifdef WITHOUT_GNOME
-static void menus_init(gE_window *window, gE_data *data);
-static void menus_create(GtkMenuEntry * entries, int nmenu_entries);
-
-static GtkMenuFactory *factory = NULL;
-static GtkMenuFactory *subfactory;
-static GHashTable *entry_ht = NULL;
-
 
 static GtkMenuEntry menu_items[] =
 {
 	{"<Main>/File/New", "<control>N",
-		file_new_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_new_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Open", "<control>O",
-		file_open_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_open_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Save", "<control>S",
-		file_save_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_save_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Save As...", NULL,
-		file_save_as_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_save_as_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Print", NULL,
-		file_print_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_print_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Close", "<control>W",
-		file_close_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_close_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/Close All", NULL,
-		file_close_all_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_close_all_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/<separator>", NULL, NULL, NULL},
 	{"<Main>/File/Recent Documents/", NULL, NULL},
 	{"<Main>/File/<separator>", NULL, NULL, NULL},
 	{"<Main>/File/Quit", "<control>Q",
-		file_quit_cmd_callback, (gpointer)GE_DATA, NULL},
+		file_quit_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/Cut", "<control>X",
-		edit_cut_cmd_callback, (gpointer)GE_DATA, NULL},
+		edit_cut_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/Copy", "<control>C",
-		edit_copy_cmd_callback, (gpointer)GE_DATA, NULL},
+		edit_copy_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/Paste", "<control>V",
-		edit_paste_cmd_callback, (gpointer)GE_DATA, NULL},
+		edit_paste_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/<separator>", NULL, NULL, NULL},
 	{"<Main>/Edit/Select All", "<control>A",
-		edit_selall_cmd_callback, (gpointer)GE_DATA, NULL},
+		edit_selall_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Search/Search...", NULL,
-		search_search_cmd_callback, (gpointer)GE_DATA, NULL},
+		search_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Search/Search and Replace...", NULL,
-		search_replace_cmd_callback, (gpointer)GE_DATA, NULL},
+		search_replace_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Search/Search Again", NULL,
-		search_again_cmd_callback, (gpointer)GE_DATA, NULL},
+		search_again_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Options/Text Font...", NULL,
-		prefs_callback, (gpointer)GE_WINDOW, NULL},
+		prefs_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Toggle Autoindent", NULL,
-		auto_indent_toggle_callback, (gpointer)GE_DATA, NULL},
+		auto_indent_toggle_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Options/Toggle Statusbar", NULL,
 		gE_window_toggle_statusbar, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle Wordwrap", NULL,
@@ -99,7 +93,6 @@ static GtkMenuEntry menu_items[] =
 	{"<Main>/Options/Toggle Split Screen", NULL,
 		options_toggle_split_screen, (gpointer)GE_WINDOW, NULL},
 #endif
-
 #ifndef WITHOUT_GNOME
 	{"<Main>/Options/Toggle Scrollball", NULL,
 		gE_document_toggle_scrollball, (gpointer) GE_WINDOW, NULL},
@@ -107,16 +100,16 @@ static GtkMenuEntry menu_items[] =
 	{"<Main>/Options/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Document Tabs", NULL, NULL, NULL},
 	{"<Main>/Options/Document Tabs/Top", NULL,
-		tab_top_cback, (gpointer)GE_WINDOW, NULL},
+		tab_top_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Document Tabs/Bottom", NULL,
-		tab_bot_cback, (gpointer)GE_WINDOW, NULL},
+		tab_bot_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Document Tabs/Left", NULL,
-		tab_lef_cback, (gpointer)GE_WINDOW, NULL},
+		tab_lef_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Document Tabs/Right", NULL,
-		tab_rgt_cback, (gpointer)GE_WINDOW, NULL},
+		tab_rgt_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Document Tabs/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Document Tabs/Toggle", NULL,
-		tab_toggle_cback, (gpointer)GE_WINDOW, NULL},
+		tab_toggle_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toolbar/Show Toolbar", NULL,
 		tb_on_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toolbar/Hide Toolbar", NULL,
@@ -135,9 +128,9 @@ static GtkMenuEntry menu_items[] =
 		tb_tooltips_off_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Plugins/", NULL, NULL, NULL},
 	{"<Main>/Window/New Window", NULL,
-		file_newwindow_cmd_callback, (gpointer)GE_DATA, NULL},
+		window_new_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Window/Close Window", NULL,
-		file_close_window_cmd_callback, (gpointer)GE_DATA, NULL},
+		window_close_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Window/<separator>", NULL,
 		NULL, NULL },
 	{"<Main>/Window/Document List", "<control>L",
@@ -157,37 +150,10 @@ static GtkMenuEntry menu_items[] =
 void
 gE_menus_init (gE_window *window, gE_data *data)
 {
-	GtkWidget **menubar;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	GtkAccelGroup **accel;
-#else
-	GtkAcceleratorTable **accel;
-#endif
-
-	menubar = &window->menubar;
-	accel = &window->accel;
-
-	menus_init (window, data);
-
-	if (menubar)
-	{
-		*menubar = subfactory->widget;
-		window->factory = subfactory;
-	}
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	if(accel)
-		*accel = subfactory->accel_group;
-#else
-	if(accel)
-		*accel = subfactory->table;
-#endif
-}
-
-
-static void
-menus_init(gE_window *window, gE_data *data)
-{
 	int i;
+	GtkMenuPath *mpath;
+	GtkMenuFactory *factory;
+	GtkMenuFactory *subfactory;
 	int nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
 
 	for (i = 0; i < nmenu_items; i++) {
@@ -208,108 +174,40 @@ menus_init(gE_window *window, gE_data *data)
 	}
 
 	factory = gtk_menu_factory_new(GTK_MENU_FACTORY_MENU_BAR);
-	subfactory = gtk_menu_factory_new(GTK_MENU_FACTORY_MENU_BAR);
-	
+	window->factory = gtk_menu_factory_new(GTK_MENU_FACTORY_MENU_BAR);
+	subfactory = window->factory;
 	gtk_menu_factory_add_subfactory(factory, subfactory, "<Main>");
-	menus_create(menu_items, nmenu_items);
-
-	for (i = 0; i < nmenu_items; i++) {
-		if (menu_items[i].callback_data == (gpointer) data)
-			menu_items[i].callback_data = (gpointer) GE_DATA;
-		if (menu_items[i].callback_data == (gpointer) window)
-			menu_items[i].callback_data = (gpointer) GE_WINDOW;
-	}
-
-}
-	    
-static void
-menus_create(GtkMenuEntry * entries, int nmenu_entries)
-{
-	GtkMenuPath *mpath;
-	char *accelerator;
-	int i;
-
-	if (entry_ht)
-		for (i = 0; i < nmenu_entries; i++) {
-			accelerator = g_hash_table_lookup(entry_ht, entries[i].path);
-			if (accelerator) {
-				if (accelerator[0] == '\0')  
-					entries[i].accelerator = NULL;
-				else
-					entries[i].accelerator = accelerator;
-			}
-		}
-	gtk_menu_factory_add_entries(factory, entries, nmenu_entries);
-
-	/*   for (i = 0; i < nmenu_entries; i++)
-		 if (entries[i].widget) {
-		 gtk_signal_connect(GTK_OBJECT(entries[i].widget), "install_accelerator",
-		 (GtkSignalFunc) menus_install_accel,
-		 entries[i].path);
-		 gtk_signal_connect(GTK_OBJECT(entries[i].widget), "remove_accelerator",
-		 (GtkSignalFunc) menus_remove_accel,
-		 entries[i].path);
-		 }
-	 */
+	gtk_menu_factory_add_entries(factory, menu_items, nmenu_items);
 
 	mpath = gtk_menu_factory_find(factory, "<Main>/Help");
 	gtk_menu_item_right_justify(GTK_MENU_ITEM(mpath->widget));
-} /* menus_create */
 
-#if 0
-static gint menus_install_accel( GtkWidget * widget, gchar * signal_name, gchar key, char modifiers, gchar * path)
-{
-   char accel[64];
-   char *t1, t2[2];
-   
-   accel[0] = '\0';
-   if (modifiers & GDK_CONTROL_MASK)
-     strcat(accel, "<control>");
-   if (modifiers & GDK_SHIFT_MASK)
-     strcat(accel, "<shift>");
-   if (modifiers & GDK_MOD1_MASK)
-     strcat(accel, "<alt>");
-   
-   t2[0] = key;
-   t2[1] = '\0';
-   strcat(accel, t2);
-   
-   if (entry_ht) {
-      t1 = g_hash_table_lookup(entry_ht, path);
-      g_free(t1);
-   } else
-     entry_ht = g_hash_table_new(g_str_hash, g_str_equal);
-  
-   g_hash_table_insert(entry_ht, path, g_strdup(accel));
-   
-   return TRUE;
-   
-}
-
-static void menus_remove_accel(GtkWidget * widget, gchar * signal_name, gchar * path)
-{
-   char *t;
-   
-   if (entry_ht) {
-      t = g_hash_table_lookup(entry_ht, path);
-      g_free(t);
-      
-      g_hash_table_insert(entry_ht, path, g_strdup(""));
-   }
-}
-
-void menus_set_sensitive(char *path, int sensitive)
-{
-   GtkMenuPath *menu_path;
-   
-   menu_path = gtk_menu_factory_find(factory, path);
-   if (menu_path)
-     gtk_widget_set_sensitive(menu_path->widget, sensitive);
-   else
-     g_warning("Unable to set sensitivity for menu which doesn't exist: %s", path);
-}
+	window->menubar = subfactory->widget;
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	window->accel = subfactory->accel_group;
+#else
+	window->accel = subfactory->table;
 #endif
+	/*
+	 * XXX - menu accelerators still don't work correctly (ever since
+	 * having multiple windows capability).
+	 */
+#ifndef GTK_HAVE_FEATURES_1_1_0
+	gtk_window_add_accelerator_table(GTK_WINDOW(window->window),
+		subfactory->table);
+#else
+	gtk_window_add_accel_group(GTK_WINDOW(window->window),
+		subfactory->accel_group);
+#endif
+	for (i = 0; i < nmenu_items; i++) {
+		if (menu_items[i].callback_data == (gpointer)data)
+			menu_items[i].callback_data = (gpointer)GE_DATA;
+		if (menu_items[i].callback_data == (gpointer)window)
+			menu_items[i].callback_data = (gpointer)GE_WINDOW;
+	}
 
+} /* gE_menus_init */
+	    
 #else	/* USING GNOME */
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
@@ -321,36 +219,36 @@ GnomeUIInfo gedit_program_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("Preferences..."), NULL, NULL, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF },
 	{ GNOME_APP_UI_SEPARATOR },
-        { GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, (gpointer) GE_DATA, NULL,
+        { GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
           'Q', GDK_CONTROL_MASK, NULL },
         GNOMEUIINFO_END
 };
 
 GnomeUIInfo gedit_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
           'N', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
 	  'O', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	  'S', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
-	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
-	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
 	  'W', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
 
 	{ GNOME_APP_UI_SEPARATOR },
 
 #if 0
-	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
 	  'Q', GDK_CONTROL_MASK, NULL },
 #endif
@@ -360,39 +258,39 @@ GnomeUIInfo gedit_file_menu [] = {
 
 
 GnomeUIInfo gedit_edit_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
 	  'X', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
 	  'C', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
 	  'V', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
 	GNOMEUIINFO_END
 };	
 
 GnomeUIInfo gedit_search_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_search_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
 	GNOMEUIINFO_END
 };
 
 GnomeUIInfo gedit_tab_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cback, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cback, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cback, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cback, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cback, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cb, (gpointer) GE_WINDOW, NULL },
 	GNOMEUIINFO_END
 };
 
@@ -410,9 +308,9 @@ GnomeUIInfo gedit_toolbar_menu []= {
 };
 
 GnomeUIInfo gedit_options_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_callback, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_callback, (gpointer) GE_DATA, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Split Screen"), NULL, options_toggle_split_screen, (gpointer) GE_WINDOW, NULL },
@@ -428,9 +326,9 @@ GnomeUIInfo gedit_options_menu []= {
 };
 
 GnomeUIInfo gedit_window_menu []={
-        { GNOME_APP_UI_ITEM, N_("New Window"), NULL, file_newwindow_cmd_callback, (gpointer) GE_DATA, NULL,
+        { GNOME_APP_UI_ITEM, N_("New Window"), NULL, window_new_cb, (gpointer) GE_DATA, NULL,
           GNOME_APP_PIXMAP_NONE, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Close Window"), NULL, file_close_window_cmd_callback, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Close Window"), NULL, window_close_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Document List"), NULL, files_list_popup, (gpointer) GE_DATA, NULL,

@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  *
@@ -19,12 +19,9 @@
 #ifndef __GE_PREFS_H__
 #define __GE_PREFS_H__
 
-extern gE_prefs *prefs_window;
-
 extern void gE_save_settings(gE_window *window, gpointer cbwindow);
 extern void gE_get_settings(gE_window *window);
-extern gE_prefs *gE_prefs_window();
-extern void gE_get_rc_file();
-extern void gE_rc_parse();
+extern void gE_rc_parse(void);
+extern void prefs_cb(GtkWidget *widget, gpointer cbwindow);
 
 #endif /* __GE_PREFS_H__ */

@@ -24,10 +24,10 @@ extern "C" {
 #endif /* __cplusplus */
 
 /* Search and Replace */
-extern void search_search_cmd_callback(GtkWidget *w, gpointer cbdata);
-extern void search_replace_cmd_callback(GtkWidget *w, gpointer cbdata);
-extern void search_again_cmd_callback(GtkWidget *w, gpointer cbdata);
-extern void search_goto_line_callback(GtkWidget *w, gpointer cbwindow);
+extern void search_cb(GtkWidget *w, gpointer cbdata);
+extern void search_replace_cb(GtkWidget *w, gpointer cbdata);
+extern void search_again_cb(GtkWidget *w, gpointer cbdata);
+extern void goto_line_cb(GtkWidget *w, gpointer cbwindow);
 
 #ifdef __cplusplus
 }

@@ -32,14 +32,11 @@
 
 #include "main.h"
 #include "commands.h"
-#include "menus.h"
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "msgbox.h"
 #include "dialog.h"
-
-/* ---- Misc callbacks ---- */
 
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
 static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
@@ -49,10 +46,14 @@ static void close_window_common(gE_window *w);
 static void file_saveas_destroy(GtkWidget *w, gpointer cbdata);
 static void file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
+static void line_pos_cb(GtkWidget *w, gE_data *data);
+static void recent_update_menus (gE_window *window, GList *recent_files);
+static void recent_cb(GtkWidget *w, gE_data *data);
 
 
 /* handles changes in the text widget... */
-void doc_changed_callback (GtkWidget *w, gpointer cbdata)
+void
+doc_changed_cb(GtkWidget *w, gpointer cbdata)
 {
 	gE_document *doc = (gE_document *) cbdata;
 
@@ -89,7 +90,7 @@ close_file_save_yes_sel(GtkWidget *w, gE_data *data)
 
 	if (doc->filename == NULL) {
 		data->temp1 = NULL;
-		file_save_as_cmd_callback(w, data);
+		file_save_as_cb(w, data);
 		if (data->flag == TRUE) /* close document if successful */
 			close_doc_execute(NULL, data);
 	} else {
@@ -263,66 +264,68 @@ file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 }
 
 
-void prefs_callback (GtkWidget *widget, gpointer cbwindow)
-{
-	prefs_window = gE_prefs_window((gE_window *)cbwindow);
-}
-
 /* --- Notebook Tab Stuff --- */
 
-void tab_top_cback (GtkWidget *widget, gpointer cbwindow)
+void
+tab_top_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *)cbwindow;
+	gE_window *w = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_TOP);
-	window->tab_pos = GTK_POS_TOP;
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), GTK_POS_TOP);
+	w->tab_pos = GTK_POS_TOP;
 }
 
 
-void tab_bot_cback (GtkWidget *widget, gpointer cbwindow)
+void
+tab_bot_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *)cbwindow;
+	gE_window *w = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_BOTTOM);
-	window->tab_pos = GTK_POS_BOTTOM;
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), GTK_POS_BOTTOM);
+	w->tab_pos = GTK_POS_BOTTOM;
 }
 
-void tab_lef_cback (GtkWidget *widget, gpointer cbwindow)
+void
+tab_lef_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *)cbwindow;
+	gE_window *w = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_LEFT);
-	window->tab_pos = GTK_POS_LEFT;
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), GTK_POS_LEFT);
+	w->tab_pos = GTK_POS_LEFT;
 }
 
-void tab_rgt_cback (GtkWidget *widget, gpointer cbwindow)
+void
+tab_rgt_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *)cbwindow;
+	gE_window *w = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_RIGHT);
-	window->tab_pos = GTK_POS_RIGHT;
+	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), GTK_POS_RIGHT);
+	w->tab_pos = GTK_POS_RIGHT;
 }
 
-void tab_toggle_cback (GtkWidget *widget, gpointer cbwindow)
+void
+tab_toggle_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *)cbwindow;
+	gE_window *w = (gE_window *)cbwindow;
 
-	window->show_tabs = !window->show_tabs;
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->notebook), window->show_tabs);
+	w->show_tabs = !w->show_tabs;
+	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(w->notebook), w->show_tabs);
 }
 
 
 
 /* ---- Auto-indent Callback(s) --- */
 
-void auto_indent_toggle_callback (GtkWidget *w, gpointer cbdata)
+void
+auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
 	data->window->auto_indent = !data->window->auto_indent;
 }
 
-void auto_indent_callback (GtkWidget *text, GdkEventKey *event, gE_window *window)
+void
+auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 {
 	int i, newlines, newline_1 = 0;
 	gchar *buffer, *whitespace;
@@ -331,7 +334,7 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event, gE_window *windo
 	data = g_malloc0 (sizeof (gE_data));
 	data->temp2 = text;
 	data->window = window;
-	line_pos_callback (NULL, data);
+	line_pos_cb(NULL, data);
 
 	if (event->keyval != GDK_Return)
 		return;
@@ -380,11 +383,12 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event, gE_window *windo
 	
 	g_free (whitespace);
 	data->temp2 = text;
-	line_pos_callback (NULL, data); /* <-- this is so the statusbar updates when it auto-indents */
+	line_pos_cb(NULL, data); /* <-- this is so the statusbar updates when it auto-indents */
 }
 
 
-void line_pos_callback(GtkWidget *w, gE_data *data)
+static void
+line_pos_cb(GtkWidget *w, gE_data *data)
 {
 	static char line [32];
 	static char col [32];
@@ -405,13 +409,13 @@ void gE_event_button_press (GtkWidget *w, GdkEventButton *event, gE_window *wind
 	data = g_malloc0 (sizeof (gE_data));
 	data->temp2 = w;
 	data->window = window;
-	line_pos_callback (NULL, data);
+	line_pos_cb(NULL, data);
 }
 
 
 /* ---- File Menu Callbacks ---- */
 
-void file_new_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 	gE_window *w;
@@ -431,7 +435,7 @@ void file_new_cmd_callback (GtkWidget *widget, gpointer cbdata)
 }
 
 
-void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void window_new_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_window *window;
 	gE_data *data = (gE_data *)cbdata;
@@ -448,7 +452,7 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata)
 }
 
 
-void file_open_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void file_open_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 	gE_window *w;
@@ -489,7 +493,8 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer cbdata)
  * have to "close" the document in the original window without destroying the
  * actual contents.
  */
-void file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
+void
+file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_document *src_doc, *dest_doc;
 	gE_window *win;
@@ -510,7 +515,8 @@ void file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 
-void file_save_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+file_save_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gchar *fname;
 	gE_data *data = (gE_data *)cbdata;
@@ -519,13 +525,14 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	g_assert(data->window != NULL);
  	fname = gE_document_current(data->window)->filename;
 	if (fname == NULL)
-		file_save_as_cmd_callback(NULL, data);
+		file_save_as_cb(NULL, data);
 	else
 		gE_file_save(data->window, gE_document_current(data->window),
 			gE_document_current(data->window)->filename);
 }
 
-void file_save_as_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 {
 	GtkWidget *safs;
 	gE_data *data = (gE_data *)cbdata;
@@ -560,7 +567,7 @@ file_saveas_destroy(GtkWidget *w, gpointer cbdata)
  * file close callback (used from menus.c)
  */
 void
-file_close_cmd_callback (GtkWidget *widget, gpointer cbdata)
+file_close_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -663,7 +670,7 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
  * close all documents in invoking window
  */
 void
-file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata)
+file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 	GtkNotebook *nb;
@@ -697,7 +704,7 @@ file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata)
 		gE_msgbar_set(data->window, MSGBAR_FILE_CLOSED_ALL);
 		mbprintf("closed all documents");
 	}
-} /* file_close_all_cmd_callback */
+} /* file_close_all_cb */
 
 
 /*
@@ -705,7 +712,7 @@ file_close_all_cmd_callback(GtkWidget *widget, gpointer cbdata)
  * closed will the window actually go away.
  */
 void
-file_close_window_cmd_callback(GtkWidget *widget, gpointer cbdata)
+window_close_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -715,7 +722,7 @@ file_close_window_cmd_callback(GtkWidget *widget, gpointer cbdata)
 	flw_destroy(NULL, data);
 
 	data->flag = FALSE;	/* use flag to indicate all files closed */
-	file_close_all_cmd_callback(widget, cbdata);
+	file_close_all_cb(widget, cbdata);
 
 	if (data->flag) {
 		gE_msgbar_clear((gpointer)(data->window));
@@ -753,7 +760,7 @@ close_window_common(gE_window *w)
  * quits gEdit by closing all windows.  only quits if all windows closed.
  */
 void
-file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata)
+file_quit_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -763,7 +770,7 @@ file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata)
 	while (window_list) {
 		data->window = g_list_nth_data(window_list, 0);
 		gtk_widget_hide(data->window->window);
-		file_close_window_cmd_callback(widget, data);
+		window_close_cb(widget, data);
 		if (data->flag == FALSE)	/* cancelled by user */
 			return;
 	}
@@ -773,7 +780,8 @@ file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata)
 
 /* ---- Clipboard Callbacks ---- */
 
-void edit_cut_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -787,7 +795,8 @@ void edit_cut_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gE_msgbar_set(data->window, MSGBAR_CUT);
 }
 
-void edit_copy_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -801,7 +810,8 @@ void edit_copy_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gE_msgbar_set(data->window, MSGBAR_COPY);
 }
 	
-void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -810,12 +820,13 @@ void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata)
 		GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
 	gtk_editable_paste_clipboard(GTK_EDITABLE(
-			gE_document_current(data->window)->text), GDK_CURRENT_TIME);
+		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
 #endif
 	gE_msgbar_set(data->window, MSGBAR_PASTE);
 }
 
-void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
@@ -831,9 +842,9 @@ void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata)
 
 void recent_add (char *filename)
 {
-	#ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	gnome_history_recently_used (filename, "text/plain", "gEdit", "");
-	#endif
+#endif
 	
 }
 
@@ -938,9 +949,10 @@ void recent_update (gE_window *window)
 
 /* Actually updates the recent-used menu... */
 
-void recent_update_menus (gE_window *window, GList *recent_files)
+static void
+recent_update_menus (gE_window *window, GList *recent_files)
 {
-	#ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	GnomeUIInfo *menu;
 	gE_data *data;
 	gchar *path;
@@ -976,7 +988,7 @@ void recent_update_menus (gE_window *window, GList *recent_files)
 		sprintf (menu->label, "%i. %s", i+1, g_list_nth_data (recent_files, i));
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
-		menu->moreinfo = recent_callback;
+		menu->moreinfo = recent_cb;
 		menu->user_data = data;
 		menu->unused_data = NULL;
 		menu->pixmap_type = 0;
@@ -991,10 +1003,14 @@ void recent_update_menus (gE_window *window, GList *recent_files)
 	window->num_recent = g_list_length (recent_files);
 	g_list_free (recent_files);
 
-	#endif /* Using GNOME */
+#endif /* Using GNOME */
 }
 
-void recent_callback (GtkWidget *w, gE_data *data)
+
+#ifdef GTK_HAVE_FEATURES_1_1_0
+
+static void
+recent_cb(GtkWidget *w, gE_data *data)
 {
 	gE_document *doc = gE_document_current (data->window);
 	if (doc->filename != NULL || doc->changed != 0)
@@ -1003,14 +1019,13 @@ void recent_callback (GtkWidget *w, gE_data *data)
 }
 
 
-
 /* 
  * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
  */
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
-
-void document_insert_text_callback (GtkWidget *editable, gchar *insertion_text, gint length, gint *pos, gE_document *doc)
+void
+doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
+	int *pos, gE_document *doc)
 {
 	GtkWidget *significant_other;
 	gchar *buffer;
@@ -1041,7 +1056,9 @@ void document_insert_text_callback (GtkWidget *editable, gchar *insertion_text, 
 
 }
 
-void document_delete_text_callback (GtkWidget *editable, gint start_pos, gint end_pos, gE_document *doc)
+void
+doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
+	gE_document *doc)
 {
 	GtkWidget *significant_other;
 	

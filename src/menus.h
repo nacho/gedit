@@ -23,8 +23,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-   void gE_menus_init (gE_window *window, gE_data *data);
-   void menus_create(GtkMenuEntry *entries, int nmenu_entries);
+extern void gE_menus_init(gE_window *window, gE_data *data);
    
 #ifdef __cplusplus
 }

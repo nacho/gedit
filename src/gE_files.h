@@ -32,8 +32,6 @@ extern void files_list_popup(GtkWidget *widget, gpointer cbdata);
 extern void flw_destroy(GtkWidget *widget, gpointer data);
 extern void flw_remove_entry(gE_window *w, int num);
 extern void flw_append_entry(gE_window *w, gE_document *, int , char *);
-extern void flw_select_file(GtkWidget *, gint, gint, GdkEventButton *,
-	gpointer data);
 
 #ifdef __cplusplus
 }

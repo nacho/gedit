@@ -41,36 +41,36 @@ static void popup_replace_window(gE_data *data);
 
 
 /*
- * PUBLIC: search_search_cmd_callback
+ * PUBLIC: search_cb
  *
  * main callback routine from pulldown menu
  */
 void 
-search_search_cmd_callback(GtkWidget *wgt, gpointer cbdata)
+search_cb(GtkWidget *wgt, gpointer cbdata)
 {
 	search_replace_common((gE_data *)cbdata, FALSE);
-} /* search_search_cmd_callback */
+} /* search_cb */
 
 
 /*
- * PUBLIC: search_replace_cmd_callback
+ * PUBLIC: search_replace_cb
  *
  * menu callback
  */
 void 
-search_replace_cmd_callback(GtkWidget *w, gpointer cbdata)
+search_replace_cb(GtkWidget *w, gpointer cbdata)
 {
 	search_replace_common((gE_data *)cbdata, TRUE);
-} /* search_replace_cmd_callback */
+} /* search_replace_cb */
 
 
 /*
- * PUBLIC: search_again_cmd_callback
+ * PUBLIC: search_again_cb
  *
  * menu callback
  */
 void 
-search_again_cmd_callback(GtkWidget * w, gpointer cbdata)
+search_again_cb(GtkWidget * w, gpointer cbdata)
 {
 	gE_data *data = (gE_data *) cbdata;
 
@@ -80,17 +80,17 @@ search_again_cmd_callback(GtkWidget * w, gpointer cbdata)
 		data->window->search->again = TRUE;
 		search_start(w, data);
 	}
-} /* search_again_cmd_callback */
+} /* search_again_cb */
 
 
 /*
- * PUBLIC: search_goto_line_callback
+ * PUBLIC: goto_line_cb
  *
  * public callback routine to popup dialog box asking user which line number
  * to go to.
  */
 void 
-search_goto_line_callback(GtkWidget *wgt, gpointer cbwindow)
+goto_line_cb(GtkWidget *wgt, gpointer cbwindow)
 {
 	gE_window *w = (gE_window *)cbwindow;
 
@@ -104,7 +104,7 @@ search_goto_line_callback(GtkWidget *wgt, gpointer cbwindow)
 	search_for_line(NULL, w->search);
 	gtk_widget_show(w->search->window);
 
-} /* search_goto_line_callback */
+} /* goto_line_cb */
 
 
 static void

@@ -16,14 +16,13 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
 #ifndef __GTK_SCROLLBALL_H__
 #define __GTK_SCROLLBALL_H__
-
 
 #include <gdk/gdk.h>
 #include <gtk/gtkadjustment.h>
 #include <gtk/gtkwidget.h>
-
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,23 +37,21 @@ extern "C" {
 typedef struct _GtkScrollball        GtkScrollball;
 typedef struct _GtkScrollballClass   GtkScrollballClass;
 
-struct _GtkScrollball
-{
+struct _GtkScrollball {
   GtkWidget widget;
 
   guint8 button;
 
   guint8 acceleration;
 
-  gint xoff;
-  gint yoff;
-
   GtkAdjustment *hadjust;
   GtkAdjustment *vadjust;
+
+  gint hmove;
+  gint vmove;
 };
 
-struct _GtkScrollballClass
-{
+struct _GtkScrollballClass {
   GtkWidgetClass parent_class;
 };
 
