@@ -1732,7 +1732,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 		gchar *error_message;
 		gchar *scheme_string;
 
-		gchar *temp = eel_uri_get_scheme (uri);
+		gchar *temp = gnome_vfs_get_uri_scheme (uri);
                 scheme_string = eel_make_valid_utf8 (temp);
 		g_free (temp);
 

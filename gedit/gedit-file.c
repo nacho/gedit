@@ -417,7 +417,7 @@ gedit_file_save_as (GeditMDIChild *child)
 		uri = eel_make_uri_from_shell_arg (file);
 		g_return_val_if_fail (uri != NULL, FALSE);
 
-		file_utf8 = eel_format_uri_for_display (uri);
+		file_utf8 = gnome_vfs_format_uri_for_display (uri);
 		if (file_utf8 != NULL)
 			gedit_utils_flash_va (_("Saving document \"%s\"..."), file_utf8);
 		

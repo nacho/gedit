@@ -101,7 +101,7 @@ replace_dialog (GtkWindow *parent,
 	uri = eel_make_uri_from_shell_arg (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
-	full_formatted_uri = eel_format_uri_for_display (uri);
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
 	g_free (uri);
 	

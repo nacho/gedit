@@ -401,7 +401,7 @@ gedit_utils_error_reporting_loading_file (
 
 	g_return_if_fail (uri != NULL);
 	
-	full_formatted_uri = eel_format_uri_for_display (uri);
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -436,7 +436,7 @@ gedit_utils_error_reporting_loading_file (
 				break;			 
 	
 			case GNOME_VFS_ERROR_NOT_SUPPORTED:
-				scheme_string = eel_uri_get_scheme (uri);
+				scheme_string = gnome_vfs_get_uri_scheme (uri);
                 
 				if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 				{
@@ -741,7 +741,7 @@ gedit_utils_error_reporting_saving_file (
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (error != NULL);
 	
-	full_formatted_uri = eel_format_uri_for_display (uri);
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -820,7 +820,7 @@ gedit_utils_error_reporting_reverting_file (
 			break;			 
 
 		case GNOME_VFS_ERROR_NOT_SUPPORTED:
-			scheme_string = eel_uri_get_scheme (uri);
+			scheme_string = gnome_vfs_get_uri_scheme (uri);
                 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
@@ -1023,7 +1023,7 @@ gedit_utils_error_reporting_creating_file (
 
 	g_return_if_fail (uri != NULL);
 	
-	full_formatted_uri = eel_format_uri_for_display (uri);
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
