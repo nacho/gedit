@@ -55,7 +55,7 @@ GnomeUIInfo gedit_file_menu[] = {
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
 
-	GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),
+/*	GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),*/
 /*
 	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
 				NULL,
