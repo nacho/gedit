@@ -10,6 +10,7 @@
 #include <gnome.h>
 
 #include "document.h"
+#include "view.h"
 #include "plugin.h"
 
 
@@ -22,29 +23,42 @@ destroy_plugin (PluginData *pd)
 static void
 reverse (void)
 {
-     Document *doc = gedit_document_current();
-     gchar *buffer ;
-     gchar tmp ;
-     gint buffer_length ;
-     gint i;
+	Document *doc;
+	View *view = gedit_view_active();
+	gchar *buffer ;
+	gchar tmp ;
+	gint buffer_length ;
+	gint i;
+	gint *start = g_new(gint, 1);
+	gint *end = g_new(gint, 1);
+	
+	if (view == NULL)
+		return;
 
-     if (!doc)
-	  return;
+	doc = view->doc;
 
-     buffer_length = gedit_document_get_buffer_length (doc);
-     buffer = gedit_document_get_buffer (doc);
+	buffer_length = gedit_document_get_buffer_length (doc);
+	buffer = gedit_document_get_buffer (doc);
 
-     for (i=0; i < ( buffer_length / 2 ); i++)
-     {
-	  tmp = buffer [i];
-	  buffer [i] = buffer [buffer_length - i - 1];
-	  buffer [buffer_length - i - 1] = tmp;
-     }
+	if (!gedit_view_get_selection (view, start, end))
+	{
+		*start = 0;
+		*end = buffer_length;
+	}
+
+	for (i=*start; i < ( *start + (*end - *start) / 2 ); i++)
+	{
+		tmp = buffer [i];
+		buffer [i] = buffer [*end + *start - i - 1];
+		buffer [*end + *start - i - 1] = tmp;
+	}
      
-     gedit_document_delete_text (doc, 0, buffer_length, TRUE);
-     gedit_document_insert_text (doc, buffer, 0, TRUE);
-     
-     g_free (buffer);
+	gedit_document_delete_text (doc, 0, buffer_length, TRUE);
+	gedit_document_insert_text (doc, buffer, 0, TRUE);
+
+	g_free (start);
+	g_free (end);
+	g_free (buffer);
      
 }
 gint

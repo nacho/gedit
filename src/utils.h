@@ -126,7 +126,9 @@ typedef enum {
 
 gint	gedit_utils_is_program (gchar * program, gchar* default_name);
 
-void
-gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...);
+void	gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...);
+void 	gedit_utils_delete_temp (gchar* file_name);
+gchar*	gedit_utils_create_temp_from_doc (Document *doc, gint number);
+void	gedit_utils_error_dialog (gchar *error_message, GtkWidget *widget);
 
 #endif /* __UTILS_H__ */

@@ -158,6 +158,7 @@ handled_word_cb ( GtkWidget *spell , gpointer data )
 
 	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
 #endif
+	
 }
 
 static void

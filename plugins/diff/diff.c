@@ -64,11 +64,22 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	gint state_2;
 	gchar * file_name_1;
 	gchar * file_name_2;
-	gchar * temp_buffer_1;
-	gchar * temp_buffer_2;
 	Document *document;
-	FILE *temp_file_1;
-	FILE *temp_file_2;
+
+	int pid;
+	char buff[1025];
+	guint length, pos; 
+	Document *doc;
+	int fdpipe[2];
+	gchar * program_location;
+
+	GtkLabel *label;
+
+
+	label  = gtk_object_get_data (GTK_OBJECT (widget), "location_label");
+	g_return_if_fail (label!=NULL);
+
+	program_location = g_strdup (GTK_LABEL(label)->label);
 	
 	if (button != 0)
 	{
@@ -76,12 +87,11 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		return;
 	}
 	
-	
 	state_1 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_1)->group);
 	state_2 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_2)->group);
 
-	file_name_1 = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(file_entry_1), FALSE);
-	file_name_2 = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(file_entry_2), FALSE);
+	file_name_1 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_1), FALSE);
+	file_name_2 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_2), FALSE);
 
 	/* We need to :
 	   - if !state_1 & !state_2. Verify that the doc numbers are
@@ -94,45 +104,106 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	   - compose the diff command from the files or the temp files
 	   - execute the command and create a new document.
 	*/
-
 	if (!state_1 && !state_2 && (document_selected_1 == document_selected_2))
 	{
-		g_print ("Error, docs are the same number\n");
+		gedit_utils_error_dialog (_("The two documents selected are the same"), widget);
 		return;
 	}
 
 	if ((state_1 && ((file_name_1 == NULL ) || (!g_file_exists (file_name_1)))) ||
 	    (state_2 && ((file_name_2 == NULL ) || (!g_file_exists (file_name_2)))) )
 	{
-		g_print ("Please make sure that the files exist\n");
+		gedit_utils_error_dialog (_("The file selected does not exists\n\n"
+					    "Please provide a valid file"), widget);
 		return;
 	}
 
 	if (!state_1)
 	{
+		g_free (file_name_1);
 		document = (Document *)g_list_nth_data (mdi->children, document_selected_1);
+		if (gedit_document_get_buffer_length (document)<1)
+		{
+			gedit_utils_error_dialog (_("The document contains no text"), widget);
+			return;
+		}
+		file_name_1 = gedit_utils_create_temp_from_doc (document, 1);
+
 	}
-	else
+	if (!state_2)
 	{
-		temp_file_1 = tmpfile();
+		g_free (file_name_2);
+		document = (Document *)g_list_nth_data (mdi->children, document_selected_2);
+		if (gedit_document_get_buffer_length (document)<1)
+		{
+			gedit_utils_error_dialog (_("The document contains no text"), widget);
+			return;
+		}
+		file_name_2 = gedit_utils_create_temp_from_doc (document, 2);
 	}
 
-	if (!state_2)
+	if (file_name_1 == NULL || file_name_2 == NULL)
 	{
-		document = (Document *)g_list_nth_data (mdi->children, document_selected_2);
+		/* FIXME: do better error reporting ... . Chema */
+		gedit_utils_error_dialog (_("gedit could not create a temp file.\n\n"), widget);
+		return;
 	}
-	else
+	
+	g_print ("File 1 %s\n", file_name_1);
+	g_print ("File 2 %s\n", file_name_2);
+
+	document = NULL;
+
+	if (pipe (fdpipe) == -1)
 	{
+		_exit (1);
 	}
-		
+  
+	pid = fork();
+	if (pid == 0)
+	{
+		/* New process. */
+		char *argv[5];
+
+		close (1);
+		dup (fdpipe[1]);
+		close (fdpipe[0]);
+		close (fdpipe[1]);
+      
+		argv[0] = "diff";
+		argv[1] = "-u";
+		argv[2] = file_name_1;
+		argv[3] = file_name_2;
+		argv[4] = NULL;
+		execv (program_location, argv);
+		/* This is only reached if something goes wrong. */
+		_exit (1);
+	}
+	close (fdpipe[1]);
+
+	doc = gedit_document_new_with_title ("diff");
+
+	length = 1;
+	pos = 0;
+	while (length > 0)
+	{
+		buff [ length = read (fdpipe[0], buff, 1024) ] = 0;
+		if (length > 0)
+		{
+		     	gedit_document_insert_text (doc, buff, pos, FALSE);
+			pos += length;
+		}
+	}
+
+
+
 	if (!state_1)
-		g_print ("Document %i", document_selected_1);
-	else
-		g_print ("File %s\n", file_name_1);
+		gedit_utils_delete_temp (file_name_1);
 	if (!state_2)
-		g_print ("&  Document %i\n", document_selected_2);
-	else
-		g_print ("&  File %s\n", file_name_2);
+		gedit_utils_delete_temp (file_name_2);
+
+	g_free (file_name_1);
+	g_free (file_name_2);
 
 	gnome_dialog_close (GNOME_DIALOG (widget));
 }
@@ -345,6 +416,7 @@ gedit_plugin_create_dialog (void)
 	gtk_object_unref (GTK_OBJECT (gui));
 }
 
+
 gint
 init_plugin (PluginData *pd)
 {
@@ -364,57 +436,6 @@ init_plugin (PluginData *pd)
 void
 call_diff (GtkWidget *widget, gpointer data)
 {
-	char buff[1025];
-	int fdpipe[2];
-	int pid;
-	char *filenames[2] = { NULL, NULL };
-	guint length, pos; 
-	Document *doc;
-
-	filenames[0] = gtk_entry_get_text (GTK_ENTRY (entry1));
-	filenames[1] = gtk_entry_get_text (GTK_ENTRY (entry2));
-
-	if (pipe (fdpipe) == -1)
-	{
-		_exit (1);
-	}
-  
-	pid = fork();
-	if (pid == 0)
-	{
-		/* New process. */
-		char *argv[5];
-
-		close (1);
-		dup (fdpipe[1]);
-		close (fdpipe[0]);
-		close (fdpipe[1]);
-      
-		argv[0] = "diff";
-		argv[1] = "-u";
-		argv[2] = filenames[0];
-		argv[3] = filenames[1];
-		argv[4] = NULL;
-		execv ("/usr/bin/diff", argv);
-		/* This is only reached if something goes wrong. */
-		_exit (1);
-	}
-	close (fdpipe[1]);
-
-	doc = gedit_document_new_with_title ("diff");
-
-	length = 1;
-	pos = 0;
-	while (length > 0)
-	{
-		buff [ length = read (fdpipe[0], buff, 1024) ] = 0;
-		if (length > 0)
-		{
-		     	gedit_document_insert_text (doc, buff, pos, FALSE);
-			pos += length;
-		}
-	}
-
 }
 
 

@@ -30,8 +30,7 @@
 
 #include "document.h"
 #include "utils.h"
-
-
+#include "window.h"
 
 int
 gtk_radio_group_get_selected (GSList *radio_group)
@@ -243,3 +242,73 @@ print_time (void)
 }
 
 
+#define GEDIT_TEMP_DIR "/tmp"
+static gchar *
+gedit_utils_temp_file_name_new (gint number)
+{
+	return g_strdup_printf ("%s/gedit-%d-%d-%d", GEDIT_TEMP_DIR, (gint) time(NULL), (gint) getpid(), number);
+}
+
+/**
+ * gedit_utils_create_temp_from_doc:
+ * @doc: The document to use as the source for the temp file
+ * @number: a optional parameter to pass when gedit will be
+ *          asking for a number of temp files in a short amount of
+ *          time. 
+ * 
+ * Creates a temp file and returns a gchar* that point to the filename that was chossend
+ *
+ *
+ * Return Value: a pointer to a string containing the filename, NULL on error.
+ **/
+gchar *
+gedit_utils_create_temp_from_doc (Document *doc, gint number)
+{
+	gchar *file_name = NULL;
+	FILE  *file_pointer;
+	gchar *buffer = NULL;
+
+	g_return_val_if_fail (doc != NULL, NULL);
+	
+	file_name = gedit_utils_temp_file_name_new (number);
+
+	if (file_name == NULL)
+		return NULL;
+
+	file_pointer = fopen (file_name, "wr");
+
+	if (file_pointer == NULL)
+		return NULL;
+
+	buffer = gedit_document_get_buffer (doc);
+
+	if (buffer == NULL || strlen (buffer) < 1)
+		return NULL;
+
+	if (fputs (buffer, file_pointer) == EOF)
+		return NULL;
+
+	g_free (buffer);
+
+	if (fclose (file_pointer) != 0)
+		return NULL;
+	
+	return file_name;
+}
+	
+void 
+gedit_utils_delete_temp (gchar* file_name)
+{
+	g_print ("Deleting temp file :%s \n", file_name);
+}
+
+
+void
+gedit_utils_error_dialog (gchar *error_message, GtkWidget *widget)
+{
+	GnomeDialog *error_dialog;
+	error_dialog = GNOME_DIALOG (gnome_error_dialog_parented (error_message, gedit_window_active()));
+	gnome_dialog_run_and_close (error_dialog);
+	if (widget != NULL)
+		gdk_window_raise (widget->window);
+}
