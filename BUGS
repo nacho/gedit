@@ -1,0 +1,27 @@
+Known bugs in the current version of gEdit ( as of April/2000):
+
+	* You can't pull a menu by using the Alt+{menu key}
+	  alt+keys are doing different actions. We should disable
+          the use of alt keys to modify the file, this is a simple
+	  text editor.
+	  (Bug report#1478)
+
+	* We need to be able to deal with a broken config file after
+          launching gedit. It seems to crash with some problems with
+	  the config file.
+	  (Bug report# many ...)
+
+	* Deleting a line will sometimes make the next line down dissappear,
+	  until you highlight it.
+	  ( we need to confirm if this is still a problem )
+
+	* There are issues with auto indent and multiple views of a document
+	  ( we need to confirm if this is still a problem )
+
+PLUG-INS :
+	Plug-ins seem are a bit unstable at the moment :
+
+	* If you launch a plugin that starts a new document, then close
+	  the document while it's still writing to it, it will seg fault
+	  with a broken pipe error..
+	  
