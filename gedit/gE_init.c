@@ -48,7 +48,9 @@ g_print("Initialising gEdit...\n");
 	if (*file != NULL)
 	  {
 	   main_window = gE_window_new();
+	#ifdef DEBUG
 		g_print("Opening files...\n");
+	#endif
 
 	doc = gE_document_current(main_window);
 			gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),

@@ -30,6 +30,7 @@ gE_window *gE_window_new()
   GtkWidget *box1;
   GtkWidget *box2;
   GtkWidget *separator;
+  GtkWidget *line_button, *col_button;
  
   window = g_malloc(sizeof(gE_window));
   window->notebook = NULL;
@@ -61,26 +62,43 @@ gE_window *gE_window_new()
   get_main_menu(&window->menubar, &window->accel);
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
   gtk_box_pack_start(GTK_BOX(box1), window->menubar, FALSE, TRUE, 0);
-  gtk_widget_show(window->menubar);
+
 
   gE_document_new(window);
 
   gtk_box_pack_start(GTK_BOX(box1), window->notebook, TRUE, TRUE, 0);
-  gtk_widget_show (window->notebook);
+
 
       separator = gtk_hseparator_new ();
       gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, TRUE, 0);
       gtk_widget_show (separator);
 
-       box2 = gtk_vbox_new (FALSE, 0);
+      box2 = gtk_hbox_new (FALSE, 0);
       gtk_container_border_width (GTK_CONTAINER (box2), 0);
       gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
-      gtk_widget_show (box2);
+
       window->statusbar = gtk_statusbar_new ();
       gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
       gtk_widget_show (window->statusbar);
-/*	gtk_widget_show(box2);*/
-
+      gtk_widget_show (box2);
+      
+      line_button = gtk_button_new_with_label ("Line");
+      window->line_label = gtk_label_new ("1");
+      col_button = gtk_button_new_with_label ("Column");
+      window->col_label = gtk_label_new ("0");
+      gtk_box_pack_start (GTK_BOX (box2), line_button, FALSE, FALSE, 1);
+      gtk_box_pack_start (GTK_BOX (box2), window->line_label, FALSE, FALSE, 1);
+      gtk_box_pack_start (GTK_BOX (box2), col_button, FALSE, FALSE, 1);
+      gtk_box_pack_start (GTK_BOX (box2), window->col_label, FALSE, FALSE, 1);
+      gtk_widget_show (line_button);
+      gtk_widget_show (window->line_label);
+      gtk_widget_set_usize (window->line_label, 40, 0);
+      gtk_widget_show (col_button);
+      gtk_widget_show (window->col_label);
+      gtk_widget_set_usize (window->col_label, 40, 0);
+            
+  gtk_widget_show(window->menubar);
+  gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
           
   return window;

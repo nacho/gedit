@@ -177,6 +177,25 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 	line_pos_callback (NULL, text); /* <-- this is so the statusbar updates when it auto-indents */
 }
 
+
+void line_pos_callback(GtkWidget *w, GtkWidget *text)
+{
+	static char line [32];
+	static char col [32];
+	int timer = 0;	
+
+	if (main_window->documents > 0)
+	{
+
+		sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
+		sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
+	
+		gtk_label_set (GTK_LABEL(main_window->line_label), line);
+		gtk_label_set (GTK_LABEL(main_window->col_label), col);
+	}
+}
+
+
 void gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 {
 	line_pos_callback (NULL, w);
@@ -274,7 +293,7 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 			g_free (doc);
 			g_list_free (main_window->documents);
 			main_window->documents = NULL;
-			gtk_exit(0);
+			gE_document_new (main_window);
 		}
 	}
 	else

@@ -56,11 +56,13 @@ extern gE_window *main_window;
 struct _gE_window {
 	GtkWidget *window;
 	GtkWidget *text;
+	GtkWidget *statusbox;
 	GtkWidget *statusbar;
 	GtkWidget *menubar;
 	GtkWidget *notebook;
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;
+	GtkWidget *line_label, *col_label;
 	GtkAcceleratorTable *accel;
 	GList *documents;
 	gE_search *search;
