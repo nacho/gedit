@@ -307,22 +307,22 @@ static guint32
 get_startup_timestamp ()
 {
 	const gchar *startup_id_env;
-	gchar *startup_id;
+	gchar *startup_id = NULL;
 	gchar *time_str;
 	gchar *end;
-	gulong retval;
+	gulong retval = 0;
 
 	/* we don't unset the env, since startup-notification
 	 * may still need it */
 	startup_id_env = g_getenv ("DESKTOP_STARTUP_ID");
 	if (startup_id_env == NULL)
-		goto error;
+		goto out;
 
 	startup_id = g_strdup (startup_id_env);
 
 	time_str = g_strrstr (startup_id, "_TIME");
 	if (time_str == NULL)
-		goto error;
+		goto out;
 
 	errno = 0;
 
@@ -331,12 +331,12 @@ get_startup_timestamp ()
 
 	retval = strtoul (time_str, &end, 0);
 	if (end == time_str || errno != 0)
-		goto error;
+		retval = 0;
+
+ out:
+	g_free (startup_id);
 
 	return (retval > 0) ? retval : 0;
-
- error:
-	return 0;
 }
 
 int
