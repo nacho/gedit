@@ -1,113 +1,78 @@
+#
+#
+#
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-05-24 20:17+0100\n"
-"Content-Type: text/plain; charset=\n"
+"Project-Id-Version: gedit-0.5.5\n"
+"POT-Creation-Date: 1999-08-31 19:04+0200\n"
+"PO-Revision-Date: 1999-08-09 20:17+0100\n"
+"Last-Translator: Unknown :-(\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Date: 1998-10-13 14:49:47+0200\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
-"Xgettext-Options: --default-domain=gEdit "
-"--directory=/home/norwegen/gnomecvs/gedit --add-comments --keyword=_ "
-"--keyword=N_ --files-from=/home/norwegen/gnomecvs/gedit/po/POTFILES.in\n"
-"Files: plugins/spell/spell.c plugins/prm/maincode.c plugins/prm/msgbox.c "
-"plugins/diff/diff.c plugins/cvsdiff/cvsdiff.c plugins/email/email.c "
-"src/commands.c src/dialog.c src/gE_about.c src/gE_document.c src/gE_init.c "
-"src/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c src/msgbox.c "
-"src/search.c\n"
-
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr ""
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
-msgstr ""
+msgstr "O Plugin de Folhear na Web do gEdit"
+
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
+msgstr "O Plugin de Email do gEdit"
 
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
 msgid "Docid is %ld.\n"
-msgstr ""
+msgstr "Docid é %ld.\n"
 
 #: gmodule-plugins/shell/main.c:63
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:556
+#: src/commands.c:448
 msgid "Open File..."
-msgstr ""
+msgstr "Abrir Arquivo..."
 
-#: src/commands.c:633
+#: src/commands.c:530
 msgid "Read only file!"
-msgstr ""
+msgstr "Arquivo somente para leitura!"
 
-#: src/commands.c:659
+#: src/commands.c:556
 msgid "Error saving file!"
-msgstr ""
+msgstr "Erro salvando arquivo!"
 
-#: src/commands.c:682
-#, fuzzy
+#: src/commands.c:579
 msgid "Save As..."
 msgstr "Gravar como"
 
-#: src/commands.c:724
-msgid "Are you sure you wish to revert all changes?"
-msgstr ""
+#: src/commands.c:635
+#, fuzzy, c-format
+msgid ""
+"Are you sure you wish to revert all changes?\n"
+"(%s)"
+msgstr "Você tem certeza que quer voltar atrás em todas as mudanças?"
 
-#: src/commands.c:766
+#: src/commands.c:678
 msgid "Document Unchanged..."
-msgstr ""
+msgstr "Documento não foi modifico..."
 
-#: src/commands.c:768
-#, fuzzy
+#: src/commands.c:680
 msgid "Document Unsaved..."
-msgstr "?Nomes dos documentos?"
+msgstr "Documento não foi salvo..."
 
-#: src/commands.c:1079 src/commands.c:1080
-#, fuzzy
+#: src/commands.c:873
+msgid "_File/"
+msgstr "_Ficheiro/"
+
+#: src/commands.c:882 src/commands.c:883
 msgid "_File"
-msgstr "Ficheiro"
-
-#: src/gE_about.c:29
-msgid "Alex Roberts"
-msgstr ""
-
-#: src/gE_about.c:30
-msgid "Evan Lawrence"
-msgstr ""
-
-#: src/gE_about.c:31
-msgid "http://gedit.pn.org"
-msgstr ""
+msgstr "_Ficheiro"
 
 #: src/gE_about.c:33
 msgid "With special thanks to:"
-msgstr ""
-
-#: src/gE_about.c:34
-msgid "       Will LaShell"
-msgstr ""
-
-#: src/gE_about.c:35
-msgid "       Chris Lahey"
-msgstr ""
-
-#: src/gE_about.c:36
-msgid "       Andy Kahn"
-msgstr ""
-
-#: src/gE_about.c:37
-msgid "       Miguel de Icaza"
-msgstr ""
-
-#: src/gE_about.c:38
-msgid "       Martin Baulig"
-msgstr ""
-
-#: src/gE_about.c:39
-msgid "       Thomas Holmgren"
-msgstr ""
-
-#: src/gE_about.c:40
-msgid "       Martijn van Beers"
-msgstr ""
+msgstr "Com agradecimentos especiais para:"
 
 #: src/gE_about.c:52
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
@@ -117,609 +82,549 @@ msgstr ""
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit é um editor de texto pequeno e leve para GNOME/Gtk+"
 
-#: src/gE_document.c:61 src/toolbar.c:51
+#: src/gE_document.c:62 src/toolbar.c:51
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/gE_document.c:62 src/toolbar.c:53
+#: src/gE_document.c:63 src/toolbar.c:53
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/gE_document.c:63 src/toolbar.c:55
+#: src/gE_document.c:64 src/toolbar.c:55
 msgid "Paste"
 msgstr "Colar"
 
 #. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:66 src/gE_mdi.c:102 src/toolbar.c:42
+#: src/gE_document.c:67 src/toolbar.c:42
 msgid "Save"
 msgstr "Gravar"
 
-#: src/gE_document.c:67 src/gE_mdi.c:103 src/toolbar.c:44
+#: src/gE_document.c:68 src/toolbar.c:44
 msgid "Close"
 msgstr "Fechar"
 
-#. Print Settings
-#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:917
-#: src/gE_print.c:71 src/toolbar.c:46
-#, fuzzy
+#: src/gE_document.c:69 src/gE_print.c:73 src/toolbar.c:46
 msgid "Print"
 msgstr "Imprimir"
 
-#: src/gE_document.c:70 src/gE_mdi.c:107
+#: src/gE_document.c:71
 msgid "Open (swap) .c/.h file"
-msgstr ""
+msgstr "Abrir (alternar) arquivo .c/.h"
 
-#. line and column indicators
-#: src/gE_document.c:118
-msgid "Column:"
-msgstr ""
-
-#: src/gE_document.c:127
-msgid "Line"
-msgstr ""
-
-#: src/gE_mdi.c:64
+#: src/gE_mdi.c:66
 msgid "Find _Line..."
-msgstr ""
+msgstr "Achar _Linha..."
 
-#: src/gE_mdi.c:65
-#, fuzzy
+#: src/gE_mdi.c:67
 msgid "Search for a line"
-msgstr "Procurar Novamente"
-
-#: src/gE_mdi.c:78
-msgid "_Add View"
-msgstr ""
-
-#: src/gE_mdi.c:79
-msgid "Add a new view of the document"
-msgstr ""
+msgstr "Procurar por uma linha"
 
 #: src/gE_mdi.c:80
-msgid "_Remove View"
-msgstr ""
+msgid "_Add View"
+msgstr "_Adicionar Visão"
 
 #: src/gE_mdi.c:81
-msgid "Remove view of the document"
-msgstr ""
+msgid "Add a new view of the document"
+msgstr "Adicionar uma nova visão do documento"
 
-#: src/gE_mdi.c:486
+#: src/gE_mdi.c:82
+msgid "_Remove View"
+msgstr "_Remover Visão"
+
+#: src/gE_mdi.c:83
+msgid "Remove view of the document"
+msgstr "Remover visão do documento"
+
+#: src/gE_mdi.c:396
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
-msgstr ""
+msgstr "'%s' foi modificado. Você desejá salvá-lo?"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:508
-#: src/gE_prefs_box.c:509 src/gE_prefs_box.c:559 src/gE_prefs_box.c:560
-#: src/menus.c:251
-#, fuzzy
+#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:559
+#: src/gE_prefs_box.c:560 src/gE_prefs_box.c:610 src/gE_prefs_box.c:611
+#: src/menus.c:252
 msgid "_Plugins"
-msgstr "Plugins"
+msgstr "_Plugins"
 
-#: src/gE_prefs_box.c:89
+#: src/gE_prefs_box.c:98
 msgid "Default"
 msgstr ""
 
-#: src/gE_prefs_box.c:90
+#: src/gE_prefs_box.c:99
 msgid "Notebook"
 msgstr ""
 
-#: src/gE_prefs_box.c:91
+#: src/gE_prefs_box.c:100
 msgid "Toplevel"
-msgstr ""
+msgstr "Primeiro plano"
 
-#: src/gE_prefs_box.c:92
+#: src/gE_prefs_box.c:101
 msgid "Modal"
 msgstr ""
 
-#: src/gE_prefs_box.c:251
+#: src/gE_prefs_box.c:274
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
-#: src/gE_prefs_box.c:264
+#: src/gE_prefs_box.c:287
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "Mostrar Barra de Ferramentas"
 
-#: src/gE_prefs_box.c:273
+#: src/gE_prefs_box.c:296
+#, fuzzy
 msgid "Show Splitscreen"
-msgstr ""
+msgstr "Mostrar Barra de Ferramentas"
 
-#: src/gE_prefs_box.c:282
+#: src/gE_prefs_box.c:305
 msgid "Editor Behavior"
-msgstr ""
+msgstr "Comportamento do Editor"
 
-#: src/gE_prefs_box.c:295
+#: src/gE_prefs_box.c:318
 msgid "Enable Autoindent"
-msgstr ""
+msgstr "Habilitar Autoindent"
 
-#: src/gE_prefs_box.c:304
+#: src/gE_prefs_box.c:327
 msgid "Enable Wordwrap"
+msgstr "Habilitar retorno de linha automático"
+
+#. Document Closing stuffs
+#: src/gE_prefs_box.c:348
+#, fuzzy
+msgid "Document Settings"
+msgstr "_Gravar Preferências"
+
+#: src/gE_prefs_box.c:361
+msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:324
+#: src/gE_prefs_box.c:367
+msgid "Close Window After Closing Last"
+msgstr ""
+
+#. End of docyment closing stuffs
+#. Print COmmand
+#: src/gE_prefs_box.c:374
 msgid "Print Command"
-msgstr ""
+msgstr "Comando para Imprimir"
 
-#: src/gE_prefs_box.c:414
+#: src/gE_prefs_box.c:465
 msgid "Current Font"
-msgstr ""
+msgstr "Fonte Atual"
 
-#: src/gE_prefs_box.c:431
-#, fuzzy
+#: src/gE_prefs_box.c:482
 msgid "Select..."
-msgstr "Seleccionar Tudo"
+msgstr "Seleccionar..."
 
-#: src/gE_prefs_box.c:481
-#, fuzzy
+#: src/gE_prefs_box.c:532
 msgid "Plugin Selector"
-msgstr "Nome do Plugin"
-
-#: src/gE_prefs_box.c:602
-msgid "Name"
 msgstr ""
 
-#: src/gE_prefs_box.c:602
+#: src/gE_prefs_box.c:653
 msgid "Location"
-msgstr ""
+msgstr "Posição"
+
+#: src/gE_prefs_box.c:653
+msgid "Name"
+msgstr "Nome"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:609 src/gE_prefs_box.c:927
-#, fuzzy
+#: src/gE_prefs_box.c:660 src/gE_prefs_box.c:978
 msgid "Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:623
+#: src/gE_prefs_box.c:674
 #, fuzzy
 msgid "Use Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:690
+#: src/gE_prefs_box.c:741
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
-#: src/gE_prefs_box.c:695
+#: src/gE_prefs_box.c:746
 msgid "Remove"
-msgstr ""
+msgstr "Remover"
 
-#: src/gE_prefs_box.c:718
+#: src/gE_prefs_box.c:769
 msgid "MDI Mode"
-msgstr ""
+msgstr "Modo MDI"
 
-#: src/gE_prefs_box.c:773
+#: src/gE_prefs_box.c:824
 #, fuzzy
 msgid "Window Size"
 msgstr "Janela"
 
-#. General Settings
-#: src/gE_prefs_box.c:907
-msgid "General"
+#: src/gE_prefs_box.c:837
+#, fuzzy
+msgid "Current Width:"
+msgstr "Fonte Atual"
+
+#: src/gE_prefs_box.c:858
+msgid "Startup Width:"
 msgstr ""
 
-#. Window Settings
-#: src/gE_prefs_box.c:912
+#: src/gE_prefs_box.c:866 src/gE_prefs_box.c:906
 #, fuzzy
+msgid "Use Current"
+msgstr "Fonte Atual"
+
+#: src/gE_prefs_box.c:878
+#, fuzzy
+msgid "Current Height:"
+msgstr "Fonte Atual"
+
+#: src/gE_prefs_box.c:898
+msgid "Startup Height:"
+msgstr ""
+
+#. General Settings
+#: src/gE_prefs_box.c:958
+msgid "General"
+msgstr "Geral"
+
+#. Window Settings
+#: src/gE_prefs_box.c:963
 msgid "Window"
 msgstr "Janela"
 
+#. Print Settings
+#: src/gE_prefs_box.c:968
+#, fuzzy
+msgid "Document"
+msgstr "_Abas dos Documentos"
+
 #. Font Settings
-#: src/gE_prefs_box.c:922
+#: src/gE_prefs_box.c:973
 msgid "Font"
-msgstr ""
+msgstr "Fonte"
 
 #. MDI Settings
-#: src/gE_prefs_box.c:932
+#: src/gE_prefs_box.c:983
 msgid "MDI"
 msgstr ""
 
-#: src/gE_print.c:84
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr ""
+"Entre a seguir o comando para imprimir\n"
+"Lembre-se de incluir '%s'"
 
-#: src/gE_print.c:92
+#: src/gE_print.c:94
 msgid "Print Command:"
-msgstr ""
+msgstr "Comando para Imprimir:"
 
-#: src/gE_print.c:219
-msgid "Print anyway"
-msgstr ""
-
-#: src/gE_print.c:219
+#: src/gE_print.c:221
 msgid " Save, then print "
-msgstr ""
+msgstr "Salvar e imprimir em seguida"
 
-#: src/gedit.c:126
+#: src/gE_print.c:221
+msgid "Print anyway"
+msgstr "Imprimir de qualquer maneira"
+
+#: src/gedit.c:127
 msgid "Launch a plugin at startup"
 msgstr "Executar plugin ao iniciar"
 
-#: src/gedit.c:126
+#: src/gedit.c:127
 msgid "PLUGIN-NAME"
-msgstr ""
+msgstr "NOME-DO-PLUGIN"
 
-#: src/menus.c:65
+#: src/menus.c:66
 msgid "_Autoindent"
 msgstr ""
 
-#: src/menus.c:66
+#: src/menus.c:67
 #, fuzzy
 msgid "Status_bar"
 msgstr "Mostrar Barra de Ferramentas"
 
-#: src/menus.c:67
-msgid "_Wordwrap"
-msgstr ""
-
 #: src/menus.c:68
+msgid "_Wordwrap"
+msgstr "_Retorno de linha automático"
+
+#: src/menus.c:69
 msgid "_Linewrap"
 msgstr ""
 
-#: src/menus.c:69
-msgid "_Readonly"
-msgstr ""
-
 #: src/menus.c:70
-msgid "_Splitscreen"
-msgstr ""
+msgid "_Readonly"
+msgstr "_Somente para leitura"
 
 #: src/menus.c:71
+msgid "_Splitscreen"
+msgstr "_Divisão de tela"
+
+#: src/menus.c:72
 #, fuzzy
 msgid "_Show tabs"
 msgstr "Mostrar Barra de Ferramentas"
 
-#: src/menus.c:72
-#, fuzzy
-msgid "Toolbar _relief"
-msgstr "Não mostar ajudas de balão"
-
 #: src/menus.c:73
-msgid "_Show tooltips"
-msgstr ""
+msgid "Toolbar _relief"
+msgstr "Balões de ajuda na barra de ferramentas"
 
 #: src/menus.c:74
-msgid "Show toolbar _text"
-msgstr ""
+msgid "_Show tooltips"
+msgstr "_Mostrar dicas"
 
 #: src/menus.c:75
+msgid "Show toolbar _text"
+msgstr "Mostrar texto na barra de ferramentas"
+
+#: src/menus.c:76
 msgid "Show toolbar _icons"
-msgstr ""
+msgstr "Mostrar ícones na barra de ferramentas"
 
 #. and this one is the default file name
-#: src/menus.c:77
+#: src/menus.c:78
 msgid "Untitled"
-msgstr ""
+msgstr "Sem título"
 
-#: src/menus.c:85
-#, fuzzy
-msgid "_New"
-msgstr "Novo"
-
-#: src/menus.c:85 src/toolbar.c:38
+#: src/menus.c:86 src/toolbar.c:38
 msgid "Create a new document"
-msgstr ""
+msgstr "Criar um novo documento"
 
-#: src/menus.c:94
+#: src/menus.c:86
+msgid "_New"
+msgstr "_Novo"
+
+#: src/menus.c:95
 msgid "Revert"
-msgstr ""
-
-#: src/menus.c:116
-#, fuzzy
-msgid "_Top"
-msgstr "Topo"
+msgstr "Voltar atrás"
 
 #: src/menus.c:117
-msgid "Put the document tabs at the top"
-msgstr ""
+msgid "_Top"
+msgstr "_Alto"
 
-#: src/menus.c:120
-#, fuzzy
-msgid "_Bottom"
-msgstr "Fundo"
+#: src/menus.c:118
+msgid "Put the document tabs at the top"
+msgstr "Pôr as abas dos documentos no alto"
 
 #: src/menus.c:121
-msgid "Put the document tabs at the bottom"
-msgstr ""
+msgid "_Bottom"
+msgstr "_Fundo"
 
-#: src/menus.c:124
-#, fuzzy
-msgid "_Left"
-msgstr "Esquerda"
+#: src/menus.c:122
+msgid "Put the document tabs at the bottom"
+msgstr "Pôr as abas dos documentos em baixo"
 
 #: src/menus.c:125
-msgid "Put the document tabs on the left"
-msgstr ""
+msgid "_Left"
+msgstr "_Esquerda"
 
-#: src/menus.c:128
-#, fuzzy
-msgid "_Right"
-msgstr "Direita"
+#: src/menus.c:126
+msgid "Put the document tabs on the left"
+msgstr "Pôr as abas dos documentos à direita"
 
 #: src/menus.c:129
-msgid "Put the document tabs on the right"
-msgstr ""
+msgid "_Right"
+msgstr "_Direita"
 
-#: src/menus.c:142
-#, fuzzy
-msgid "_None"
-msgstr "Novo"
+#: src/menus.c:130
+msgid "Put the document tabs on the right"
+msgstr "Pôr as abas dos documentos à esquerda"
 
 #: src/menus.c:143
-msgid "Don't have a scrollbar"
-msgstr ""
+#, fuzzy
+msgid "_None"
+msgstr "_Novo"
 
-#: src/menus.c:146
-msgid "_Always"
-msgstr ""
+#: src/menus.c:144
+msgid "Don't have a scrollbar"
+msgstr "Não ter uma barra de rolagem"
 
 #: src/menus.c:147
-msgid "Always have the scrollbar"
-msgstr ""
+msgid "_Always"
+msgstr "_Sempre"
 
-#: src/menus.c:150
-msgid "_Automatic"
-msgstr ""
+#: src/menus.c:148
+msgid "Always have the scrollbar"
+msgstr "Sempre ter uma barra de rolagem"
 
 #: src/menus.c:151
+msgid "_Automatic"
+msgstr "_Automático"
+
+#: src/menus.c:152
 msgid "Only have scrollbar when it's needed"
-msgstr ""
+msgstr "Ter uma barra de rolagem somente quando for preciso"
 
-#: src/menus.c:160
+#: src/menus.c:161
 msgid "Toggle autoindent"
-msgstr ""
+msgstr "Ativar/Desativar autoindent"
 
-#: src/menus.c:165
-msgid "Toggle statusbar"
-msgstr ""
-
-#: src/menus.c:170
-msgid "Toggle Wordwrap"
-msgstr ""
-
-#: src/menus.c:175
-msgid "Toggle Linewrap"
-msgstr ""
-
-#: src/menus.c:180
-msgid "Toggle Readonly"
-msgstr ""
-
-#: src/menus.c:185
-msgid "Toggle Split Screen"
-msgstr ""
-
-#: src/menus.c:191
+#: src/menus.c:166
 #, fuzzy
-msgid "_Document Tabs"
-msgstr "?Nomes dos documentos?"
+msgid "Toggle statusbar"
+msgstr "Mostrar Barra de Ferramentas"
+
+#: src/menus.c:171
+msgid "Toggle Wordwrap"
+msgstr "Ativar/Desativar retorno de linha automático"
+
+#: src/menus.c:176
+msgid "Toggle Linewrap"
+msgstr "Ativar/Desativar Linewrap"
+
+#: src/menus.c:181
+msgid "Toggle Readonly"
+msgstr "Ativar/Desativar modo somente para leitura"
+
+#: src/menus.c:186
+msgid "Toggle Split Screen"
+msgstr "Ativar/Desativar divisão de tela"
 
 #: src/menus.c:192
-msgid "Change the placement of the document tabs"
-msgstr ""
+msgid "_Document Tabs"
+msgstr "_Abas dos Documentos"
 
-#: src/menus.c:194
-msgid "_Scrollbar"
-msgstr ""
+#: src/menus.c:193
+msgid "Change the placement of the document tabs"
+msgstr "Mudar a localização das abas dos documentos"
 
 #: src/menus.c:195
-msgid "Change visibility options of the scrollbar"
-msgstr ""
+msgid "_Scrollbar"
+msgstr "Barra de rolagem"
 
-#: src/menus.c:199
-#, fuzzy
-msgid "Sa_ve Settings"
-msgstr "Gravar Preferências"
+#: src/menus.c:196
+msgid "Change visibility options of the scrollbar"
+msgstr "Mudar opções de visibilidade da barra de rolagem"
 
 #: src/menus.c:200
-msgid "Save the current settings for future sessions"
-msgstr ""
+msgid "Sa_ve Settings"
+msgstr "_Gravar Preferências"
 
-#: src/search.c:288
+#: src/menus.c:201
+msgid "Save the current settings for future sessions"
+msgstr "Salvar a configuração atual para futuras sessões"
+
+#: src/search.c:326
 #, c-format
 msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
+"Total de Linhas: %i\n"
+"Linha Atual: %i"
 
-#: src/search.c:310
+#: src/search.c:348
 msgid "Go to line"
-msgstr ""
+msgstr "Ir para a linha"
 
-#: src/search.c:320
+#: src/search.c:358
 msgid "Line number"
-msgstr ""
+msgstr "Linha número"
 
-#: src/search.c:343
-#, fuzzy
+#: src/search.c:381
 msgid "Search from cursor"
-msgstr "Procurar Novamente"
+msgstr "Procurar a partir do cursor"
 
-#: src/search.c:350
+#: src/search.c:388
 msgid "Search from beginning of document"
-msgstr ""
+msgstr "Procurar a partir do começo do documento"
 
-#: src/search.c:357
+#: src/search.c:395
 msgid "Search from end of document"
-msgstr ""
+msgstr "Procurar a partir do fim do documento"
 
-#: src/search.c:364
+#: src/search.c:402
 msgid "Case sensitive"
-msgstr ""
+msgstr "Case sensitiva"
 
-#: src/search.c:370
+#: src/search.c:408
 msgid "Reverse search"
-msgstr ""
+msgstr "Inverter procura"
 
-#: src/search.c:382
-#, fuzzy
+#: src/search.c:420
 msgid "Search"
 msgstr "Procurar"
 
-#: src/search.c:387 src/search.c:415
+#: src/search.c:425 src/search.c:453
 #, fuzzy
 msgid "Search for:"
 msgstr "Procurar"
 
-#: src/search.c:409
+#: src/search.c:447 src/search.c:448
 msgid "Replace"
-msgstr ""
+msgstr "Substituir"
 
-#: src/search.c:425
+#: src/search.c:449
+#, fuzzy
+msgid "Replace all"
+msgstr "Substituir"
+
+#: src/search.c:463
 msgid "Replace with:"
-msgstr ""
+msgstr "Substituir com:"
 
-#: src/search.c:436
+#: src/search.c:474
 msgid "Ask before replacing"
-msgstr ""
+msgstr "Perguntar antes de substituir"
 
-#: src/search.c:629
+#: src/search.c:673
 msgid "Replace?"
-msgstr ""
+msgstr "Substituir?"
 
 #: src/toolbar.c:38
 msgid "New"
 msgstr "Novo"
 
 #: src/toolbar.c:40
-#, fuzzy
 msgid "Open"
 msgstr "Abrir"
 
 #: src/toolbar.c:40
 msgid "Open a file"
-msgstr ""
+msgstr "Abrir um arquivo"
 
 #: src/toolbar.c:42
 msgid "Save the current file"
-msgstr ""
+msgstr "Salvar o arquivo corrente"
 
 #: src/toolbar.c:44
 msgid "Close the current file"
-msgstr ""
+msgstr "Fechar o arquivo corrente"
 
 #: src/toolbar.c:46
 msgid "Print the current file"
-msgstr ""
+msgstr "Imprimir o arquivo corrente"
 
 #: src/toolbar.c:51
 msgid "Cut the selection"
-msgstr ""
+msgstr "Cortar o texto selecionado"
 
 #: src/toolbar.c:53
 msgid "Copy the selection"
-msgstr ""
+msgstr "Copiar o texto selecionado"
 
 #: src/toolbar.c:55
 msgid "Paste the clipboard"
-msgstr ""
-
-#: src/toolbar.c:57
-msgid "Find"
-msgstr ""
+msgstr "Colar o texto selecionado"
 
 #: src/toolbar.c:57
 #, fuzzy
+msgid "Find"
+msgstr "Janela"
+
+#: src/toolbar.c:57
 msgid "Search for a string"
-msgstr "Procurar Novamente"
+msgstr "Procurar por uma string"
 
 #: src/toolbar.c:62
-#, fuzzy
 msgid "Exit"
-msgstr "Editar"
+msgstr "Sair"
 
 #: src/toolbar.c:62
 msgid "Exit the program"
-msgstr ""
+msgstr "Sair do programa"
 
-#, fuzzy
-#~ msgid "Search and Replace"
-#~ msgstr "Procurar e Substituir"
+#~ msgid "Line"
+#~ msgstr "Linha"
 
-#, fuzzy
-#~ msgid "Text"
-#~ msgstr "Só texto"
-
-#, fuzzy
-#~ msgid "Search:"
-#~ msgstr "Procurar"
-
-#~ msgid "Close All"
-#~ msgstr "Fechar todos"
-
-#, fuzzy
-#~ msgid "_Document List"
-#~ msgstr "Lista de documentos"
-
-#, fuzzy
-#~ msgid "Display the document list"
-#~ msgstr "Lista de documentos"
-
-#, fuzzy
-#~ msgid " Save "
-#~ msgstr "Gravar"
-
-#, fuzzy
-#~ msgid " Close "
-#~ msgstr "Fechar"
-
-#, fuzzy
-#~ msgid " Print "
-#~ msgstr "Imprimir"
-
-#~ msgid "Search Again"
-#~ msgstr "Procurar Novamente"
-
-#~ msgid "Pictures and Text"
-#~ msgstr "Imagens e Texto"
-
-#~ msgid "Pictures only"
-#~ msgstr "Só imagens"
-
-#~ msgid "Tooltips On"
-#~ msgstr "Mostar ajudas de balão"
-
-#~ msgid "Tooltips Off"
-#~ msgstr "Não mostar ajudas de balão"
-
-#~ msgid "Preferences..."
-#~ msgstr "Preferências..."
-
-#~ msgid "Toolbar"
-#~ msgstr "Barra de Ferramentas"
-
-#~ msgid "New Window"
-#~ msgstr "Nova Janela"
-
-#~ msgid "Close Window"
-#~ msgstr "Fechar Janela"
-
-#~ msgid "Message Box"
-#~ msgstr "Caixa de Mensagem"
-
-#~ msgid "About..."
-#~ msgstr "Acerca..."
-
-#, fuzzy
-#~ msgid "_Edit"
-#~ msgstr "Editar"
-
-#, fuzzy
-#~ msgid "_Options"
-#~ msgstr "Opções"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Ajuda"
-
-#~ msgid "File"
-#~ msgstr "Ficheiro"
-
-#~ msgid "Hide Toolbar"
-#~ msgstr "Esconder Barra de Ferramentas"
-
-#~ msgid "Quit"
-#~ msgstr "Sair"
-
-#~ msgid "Program"
-#~ msgstr "Aplicação"
+#~ msgid "Column:"
+#~ msgstr "Coluna:"
