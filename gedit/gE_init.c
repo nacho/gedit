@@ -37,7 +37,7 @@ gint file_open_wrapper (gE_data *data)
 	gE_document_new(data->window);
 	nfile = g_malloc(strlen(name)+1);
 	strcpy(nfile, name);
-	gE_file_open (data->window, gE_document_current(data->window), nfile);
+	gE_file_open (window, gE_document_current(), nfile);
 
 	return FALSE;
 }

@@ -21,8 +21,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
-#include "main.h"
+#include <gnome.h>
 #include <config.h>
+
+#include "main.h"
 #ifdef WITH_GMODULE_PLUGINS
 #include "gE_plugin.h"
 #endif
@@ -30,7 +32,7 @@
 #include "gE_document.h"
 #include "gE_files.h"
 #include "commands.h"
-#include <gnome.h>
+#include "gE_mdi.h"
 
 GList *plugins;
 GHashTable *win_int_to_pointer,
@@ -90,30 +92,16 @@ start_plugin(GtkWidget * widget, gE_data * data)
 }
 
 void 
-add_plugin_to_menu(gE_window * window, plugin_info * info)
+add_plugin_to_menu(GnomeApp *app, plugin_info * info)
 {
    gE_data *data = g_malloc0(sizeof(gE_data));
 
-#ifdef WITHOUT_GNOME /* I would like to keep this WITHOUT_GNOME.. for future Plugins menu
-				references.. Thanks --Alex ' */
-   GtkMenuEntry *entry = g_malloc0(sizeof(GtkMenuEntry));
-
-   entry->path = g_malloc0(strlen(info->menu_location) + strlen("Plugins/") + 1);
-   sprintf(entry->path, "Plugins/%s", info->menu_location);
-   entry->accelerator = NULL;
-   entry->callback = (GtkMenuCallback) (GTK_SIGNAL_FUNC(start_plugin));
-   data->temp1 = g_strdup(info->plugin_name);
-   data->window = window;
-   entry->callback_data = data;
-
-   gtk_menu_factory_add_entries((GtkMenuFactory *) (window->factory), entry, 1);
-#else
    gchar *path;
    GnomeUIInfo *menu = g_malloc0(2 * sizeof(GnomeUIInfo));
 
    data->temp1 = g_strdup(info->plugin_name);
    data->temp2 = info;
-   data->window = window;
+ /*  data->window = app;*/
    path = g_new(gchar, strlen(_("_Plugins")) + 2);
    sprintf(path, "%s/", _("_Plugins"));
    menu->label = g_strdup(info->menu_location);
@@ -128,15 +116,14 @@ add_plugin_to_menu(gE_window * window, plugin_info * info)
 
    (menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 
-   gnome_app_insert_menus_with_data(GNOME_APP(window->window), path, menu, data);
-#endif
+   gnome_app_insert_menus(app, path, menu);
 
 }
 
 void 
-add_plugins_to_window(plugin_info * info, gE_window * window)
+add_plugins_to_window(plugin_info * info, GnomeApp *app)
 {
-   add_plugin_to_menu(window, info);
+   add_plugin_to_menu(app, info);
 }
 
 /* --- Direct interface to the plugins API --- */
@@ -220,7 +207,7 @@ gE_plugin_text_set_selected_text (gint docid, gchar *text)
 int 
 gE_plugin_document_create(gint context, gchar * title)
 {
-   return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new((gE_window *) g_hash_table_lookup(win_int_to_pointer, &context)));
+   return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new());
 }
 
 void 
@@ -231,7 +218,7 @@ gE_plugin_document_show(gint docid)
 int 
 gE_plugin_document_current(gint context)
 {
-   return *(int *) g_hash_table_lookup(doc_pointer_to_int, (gE_document_current(g_hash_table_lookup(win_int_to_pointer, &context))));
+   return *(int *) g_hash_table_lookup(doc_pointer_to_int, (gE_document_current()));
 }
 
 gchar *
@@ -252,9 +239,9 @@ gE_plugin_document_open(gint context, gchar * fname)
    gE_document *doc;
 
    newfname = g_strdup(fname);
-   doc = gE_document_new(g_hash_table_lookup(win_int_to_pointer, &context));
+   doc = gE_document_new_with_file(newfname);
 
-   gE_file_open(g_hash_table_lookup(win_int_to_pointer, &context), doc, newfname);
+/*   gE_file_open(g_hash_table_lookup(win_int_to_pointer, &context), doc, newfname);*/
    return *(int *) g_hash_table_lookup(doc_pointer_to_int, (doc));
 }
 
@@ -265,13 +252,14 @@ gE_plugin_document_close(gint docid)
    gE_data *data = g_new0(gE_data, 1);
    gboolean flag;
 
-   data->document = document;
+/*   data->document = document;
    data->window = document->window;
-
+*/
    if (document->changed)
       popup_close_verify(document, data);
    else {
-      close_doc_execute(document, data);
+      /*close_doc_execute(document, data);*/
+      file_close_cb (NULL,data);
       data->flag = TRUE;
    }
 
@@ -319,7 +307,7 @@ gE_plugin_set_auto_indent(gint docid, gint auto_indent)
 {
    gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
 
-   gE_window_set_auto_indent(document->window, auto_indent);
+   gE_window_set_auto_indent(auto_indent);
 }
 
 void 
@@ -327,7 +315,7 @@ gE_plugin_set_status_bar(gint docid, gint status_bar)
 {
    gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
 
-   gE_window_set_status_bar(document->window, status_bar);
+   gE_window_set_status_bar(status_bar);
 }
 
 void 

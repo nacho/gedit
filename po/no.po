@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.8\n"
-"POT-Creation-Date: 1999-02-28 00:17+0000\n"
+"POT-Creation-Date: 1999-04-02 00:20+0100\n"
 "PO-Revision-Date: 1999-01-04 23:40+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -15,36 +15,37 @@ msgstr ""
 
 #: editor-plugins/email.c:86
 msgid "The gEdit Email Plugin"
-msgstr "gEdit e-post tillegg"
+msgstr ""
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit web-leser tillegg"
+msgstr ""
 
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
 msgid "Docid is %ld.\n"
-msgstr "Dokument-id er %ld.\n"
+msgstr ""
 
 #: gmodule-plugins/shell/main.c:63
 msgid "Shell"
-msgstr "Skall"
+msgstr ""
 
-#: src/commands.c:517
+#: src/commands.c:538
 msgid "Open File..."
-msgstr "Åpne fil..."
+msgstr ""
 
-#: src/commands.c:588
+#. E_msgbar_set(data->window, _("Read only file!"));
+#: src/commands.c:609
 msgid "Read only file!"
-msgstr "Skrivebeskyttet fil!"
+msgstr ""
 
-#: src/commands.c:602
+#: src/commands.c:625
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/commands.c:1050 src/commands.c:1051
+#: src/commands.c:988 src/commands.c:989
 msgid "_File"
-msgstr "_Fil"
+msgstr "Fil"
 
 #: src/gE_about.c:29
 msgid "Alex Roberts"
@@ -60,7 +61,7 @@ msgstr ""
 
 #: src/gE_about.c:33
 msgid "With special thanks to:"
-msgstr "Med spesiell takk til:"
+msgstr ""
 
 #: src/gE_about.c:34
 msgid "       Will LaShell"
@@ -84,416 +85,407 @@ msgstr ""
 
 #: src/gE_about.c:50
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "(C) 1998, 1999 Alex Roberts og Evan Lawrence"
+msgstr ""
 
 #: src/gE_about.c:52
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit er en liten lettvekt tekst editor for GNOME/Gtk+"
 
-#: src/gE_document.c:61 src/toolbar.c:51
+#: src/gE_document.c:60 src/toolbar.c:51
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/gE_document.c:62 src/toolbar.c:53
+#: src/gE_document.c:61 src/toolbar.c:53
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/gE_document.c:63 src/toolbar.c:55
+#: src/gE_document.c:62 src/toolbar.c:55
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/gE_document.c:65
-msgid "Open in new window"
-msgstr "Åpne i nytt vindu"
-
-#: src/gE_document.c:66 src/toolbar.c:42
+#. { N_("Open in new window"), file_open_in_new_win_cb },
+#: src/gE_document.c:65 src/toolbar.c:42
 msgid "Save"
 msgstr "Lagre"
 
-#: src/gE_document.c:67 src/toolbar.c:44
+#: src/gE_document.c:66 src/toolbar.c:44
 msgid "Close"
 msgstr "Lukk"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
+#: src/gE_document.c:67 src/gE_prefs_box.c:679 src/gE_print.c:70
 #: src/toolbar.c:46
+#, fuzzy
 msgid "Print"
-msgstr "Skriv ut"
+msgstr "Skriv ut..."
 
-#: src/gE_document.c:70
+#: src/gE_document.c:69
 msgid "Open (swap) .c/.h file"
-msgstr "Åpne (bytt) .c/.h fil"
+msgstr ""
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:147
 msgid "Column:"
-msgstr "Kolonne:"
+msgstr ""
 
-#: src/gE_document.c:157
+#: src/gE_document.c:156
 msgid "Line"
-msgstr "Linje"
+msgstr ""
 
-#: src/gE_files.c:305
-msgid "Currently Open Files"
-msgstr "Allerede åpnete filer"
-
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
-#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
-#: src/menus.c:256
+#. data->window = app;
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:434
+#: src/gE_prefs_box.c:435 src/gE_prefs_box.c:485 src/gE_prefs_box.c:486
+#: src/menus.c:232
 msgid "_Plugins"
-msgstr "_Tillegg"
+msgstr "Tillegg"
 
-#: src/gE_prefs_box.c:179
+#: src/gE_prefs_box.c:183
 msgid "Appearance"
-msgstr "Utseende"
+msgstr ""
 
-#: src/gE_prefs_box.c:192
+#: src/gE_prefs_box.c:196
+#, fuzzy
 msgid "Show Statusbar"
-msgstr "Vis statuslinje"
+msgstr "Slå av/på statuslinje"
 
-#: src/gE_prefs_box.c:201
+#: src/gE_prefs_box.c:205
+#, fuzzy
 msgid "Show Splitscreen"
-msgstr "Slå på splittet skjerm"
+msgstr "Slå av/på splittet skjerm"
 
-#: src/gE_prefs_box.c:210
+#: src/gE_prefs_box.c:214
 msgid "Editor Behavior"
-msgstr "Redigerers oppførsel"
+msgstr ""
 
-#: src/gE_prefs_box.c:223
+#: src/gE_prefs_box.c:227
+#, fuzzy
 msgid "Enable Autoindent"
-msgstr "Slå på autoindentering"
+msgstr "Slå av/på autoindentering"
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:236
+#, fuzzy
 msgid "Enable Wordwrap"
-msgstr "Slå på ordbryting"
+msgstr "Slå av/på ordbryting"
 
-#: src/gE_prefs_box.c:252
+#: src/gE_prefs_box.c:256
 msgid "Print Command"
-msgstr "Utskriftskommando"
+msgstr ""
 
-#: src/gE_prefs_box.c:342
+#: src/gE_prefs_box.c:346
 msgid "Current Font"
-msgstr "Nåværende skrifttype"
+msgstr ""
 
-#: src/gE_prefs_box.c:359
+#: src/gE_prefs_box.c:363
+#, fuzzy
 msgid "Select..."
-msgstr "Velg..."
+msgstr "Marker alt"
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Name"
-msgstr "Navn"
+msgstr ""
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Location"
-msgstr "Plassering"
+msgstr ""
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+#: src/gE_prefs_box.c:536 src/gE_prefs_box.c:689
+#, fuzzy
 msgid "Plugins"
 msgstr "Tillegg"
 
-#: src/gE_prefs_box.c:613
+#: src/gE_prefs_box.c:617
 msgid "Add"
-msgstr "Legg til"
+msgstr ""
 
-#: src/gE_prefs_box.c:618
+#: src/gE_prefs_box.c:622
 msgid "Remove"
-msgstr "Fjern"
+msgstr ""
 
 #. General Settings
-#: src/gE_prefs_box.c:670
+#: src/gE_prefs_box.c:674
 msgid "General"
-msgstr "Generell"
+msgstr ""
 
 #. Font Settings
-#: src/gE_prefs_box.c:680
+#: src/gE_prefs_box.c:684
 msgid "Font"
-msgstr "Skrifttype"
+msgstr ""
 
-#: src/gE_print.c:82
+#: src/gE_print.c:83
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr ""
-"Skriv inn utskriftskommando under\n"
-"Husk å ta med '%s'"
 
-#: src/gE_print.c:90
+#: src/gE_print.c:91
 msgid "Print Command:"
-msgstr "Utskriftskommando:"
+msgstr ""
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid "Print anyway"
-msgstr "Skriv ut likevel"
+msgstr ""
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid " Save, then print "
-msgstr " Lagre, og skriv ut "
+msgstr ""
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "Launch a plugin at startup"
-msgstr "Last tillegg ved oppstart"
+msgstr "Last plugin ved oppstart"
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAVN"
 
 #: src/menus.c:65
+#, fuzzy
 msgid "_Autoindent"
-msgstr "_Autoindentering"
+msgstr "Slå av/på autoindentering"
 
 #: src/menus.c:66
+#, fuzzy
 msgid "Status_bar"
-msgstr "S_tatuslinje"
+msgstr "Slå av/på statuslinje"
 
 #: src/menus.c:67
+#, fuzzy
 msgid "_Wordwrap"
-msgstr "_Ordbryting"
+msgstr "Slå av/på ordbryting"
 
 #: src/menus.c:68
+#, fuzzy
 msgid "_Linewrap"
-msgstr "_Linjebryting"
+msgstr "Slå av på linjebryting"
 
 #: src/menus.c:69
+#, fuzzy
 msgid "_Readonly"
-msgstr "Sk_rivebeskyttelse"
+msgstr "Slå av/på skrivebeskyttelse"
 
 #: src/menus.c:70
+#, fuzzy
 msgid "_Splitscreen"
-msgstr "_Splittet skjerm"
+msgstr "Slå av/på splittet skjerm"
 
 #: src/menus.c:71
+#, fuzzy
 msgid "_Show tabs"
-msgstr "Vis tabulatorer"
+msgstr "Slå av/på statuslinje"
 
 #: src/menus.c:72
+#, fuzzy
 msgid "Toolbar _relief"
-msgstr "_Relief for verktøylinje"
+msgstr "Slå på relief for verktøylinje"
 
 #: src/menus.c:73
 msgid "_Show tooltips"
-msgstr "Vis verktøystips"
+msgstr ""
 
 #: src/menus.c:74
 msgid "Show toolbar _text"
-msgstr "Vis tekst på verktøylinje"
+msgstr ""
 
 #: src/menus.c:75
 msgid "Show toolbar _icons"
-msgstr "Vis ikoner på verktøylinje"
+msgstr ""
 
 #. and this one is the default file name
 #: src/menus.c:77
 msgid "Untitled"
-msgstr "Uten navn"
+msgstr ""
 
 #: src/menus.c:85
+#, fuzzy
 msgid "_New"
-msgstr "_Ny"
+msgstr "Ny"
 
 #: src/menus.c:85 src/toolbar.c:38
 msgid "Create a new document"
-msgstr "Oprett et nytt dokument"
+msgstr ""
 
-#: src/menus.c:102
-msgid "Close All"
-msgstr "Lukk alle"
-
-#: src/menus.c:102
-msgid "Close all open files"
-msgstr "Lukk alle åpne filer"
-
-#: src/menus.c:124
-msgid "Find _Line..."
-msgstr "Finn _Linje..."
-
-#: src/menus.c:125
-msgid "Search for a line"
-msgstr "Søk etter en linje"
-
-#: src/menus.c:139
+#: src/menus.c:114
+#, fuzzy
 msgid "_Top"
 msgstr "Øverst"
 
-#: src/menus.c:140
+#: src/menus.c:115
 msgid "Put the document tabs at the top"
-msgstr "Plasser dokumentfanene øverst"
+msgstr ""
 
-#: src/menus.c:143
+#: src/menus.c:118
+#, fuzzy
 msgid "_Bottom"
 msgstr "Nederst"
 
-#: src/menus.c:144
+#: src/menus.c:119
 msgid "Put the document tabs at the bottom"
-msgstr "Plasser dokumentfanene nederst"
+msgstr ""
 
-#: src/menus.c:147
+#: src/menus.c:122
+#, fuzzy
 msgid "_Left"
 msgstr "Venstre"
 
-#: src/menus.c:148
+#: src/menus.c:123
 msgid "Put the document tabs on the left"
-msgstr "Plasser dokumentfanene til venstre"
+msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:126
+#, fuzzy
 msgid "_Right"
 msgstr "Høyre"
 
-#: src/menus.c:152
+#: src/menus.c:127
 msgid "Put the document tabs on the right"
-msgstr "Plasser dokumentfanene til høyre"
+msgstr ""
 
-#: src/menus.c:158
-msgid "Toggle the presence of the document tabs"
-msgstr "Slå av/på dokumentfaner"
-
-#: src/menus.c:169
+#: src/menus.c:144
+#, fuzzy
 msgid "Toggle autoindent"
 msgstr "Slå av/på autoindentering"
 
-#: src/menus.c:174
+#: src/menus.c:149
+#, fuzzy
 msgid "Toggle statusbar"
 msgstr "Slå av/på statuslinje"
 
-#: src/menus.c:179
+#: src/menus.c:154
 msgid "Toggle Wordwrap"
 msgstr "Slå av/på ordbryting"
 
-#: src/menus.c:184
+#: src/menus.c:159
 msgid "Toggle Linewrap"
 msgstr "Slå av på linjebryting"
 
-#: src/menus.c:189
+#: src/menus.c:164
 msgid "Toggle Readonly"
 msgstr "Slå av/på skrivebeskyttelse"
 
-#: src/menus.c:194
+#: src/menus.c:169
 msgid "Toggle Split Screen"
 msgstr "Slå av/på splittet skjerm"
 
-#: src/menus.c:200
+#: src/menus.c:175
+#, fuzzy
 msgid "_Document Tabs"
-msgstr "_Dokumentfaner"
+msgstr "Dokumenttabulatorer"
 
-#: src/menus.c:201
+#: src/menus.c:176
 msgid "Change the placement of the document tabs"
-msgstr "Endre plasseringen til dokumentfanene"
+msgstr ""
 
-#: src/menus.c:205
+#: src/menus.c:180
+#, fuzzy
 msgid "Sa_ve Settings"
 msgstr "Lagre instillinger"
 
-#: src/menus.c:206
+#: src/menus.c:181
 msgid "Save the current settings for future sessions"
-msgstr "Lagre aktive innstillinger for fremtidige sesjoner"
+msgstr ""
 
-#: src/menus.c:224
-msgid "_Document List"
-msgstr "_Dokumentliste"
-
-#: src/menus.c:225
-msgid "Display the document list"
-msgstr "Vis dokumentlisten"
-
-#: src/search.c:149
+#: src/search.c:148
 #, c-format
 msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
-"Totalt antall linjer: %i\n"
-"Denne linjen: %i"
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
+#, fuzzy
 msgid "Search and Replace"
-msgstr "Søk og erstatt"
+msgstr "Søk og erstatt..."
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
+#, fuzzy
 msgid "Search"
 msgstr "Søk"
 
-#: src/search.c:366
+#: src/search.c:365
+#, fuzzy
 msgid "Search For:"
-msgstr "Søk etter:"
+msgstr "Søk"
 
-#: src/search.c:370
+#: src/search.c:369
+#, fuzzy
 msgid "Text"
-msgstr "Tekst"
+msgstr "Bare tekst"
 
-#: src/search.c:377
+#: src/search.c:376
 msgid "Line Number"
-msgstr "Linjenummer"
+msgstr ""
 
-#: src/search.c:396
+#: src/search.c:395
+#, fuzzy
 msgid "Search:"
-msgstr "Søk:"
+msgstr "Søk"
 
-#: src/search.c:399
+#: src/search.c:398
 msgid "Start searching at cursor position"
-msgstr "Start søk ved markørposisjonen"
+msgstr ""
 
-#: src/search.c:404
+#: src/search.c:403
 msgid "Start searching at beginning of the document"
-msgstr "Start søk ved begynnelsen av dokumentet"
+msgstr ""
 
-#: src/search.c:406
+#: src/search.c:405
 msgid "Case sensitive"
-msgstr "Skill mellom små/store bokstaver"
+msgstr ""
 
-#: src/search.c:410
+#: src/search.c:409
 msgid "Replace:"
-msgstr "Erstatt:"
+msgstr ""
 
-#: src/search.c:413
+#: src/search.c:412
 msgid "Prompt before replacing"
-msgstr "Spør før erstatting"
+msgstr ""
 
 #: src/toolbar.c:38
 msgid "New"
 msgstr "Ny"
 
 #: src/toolbar.c:40
+#, fuzzy
 msgid "Open"
-msgstr "Åpne"
+msgstr "Åpne..."
 
 #: src/toolbar.c:40
 msgid "Open a file"
-msgstr "Åpne en fil"
+msgstr ""
 
 #: src/toolbar.c:42
 msgid "Save the current file"
-msgstr "Lagre aktiv fil"
+msgstr ""
 
 #: src/toolbar.c:44
 msgid "Close the current file"
-msgstr "Lukk aktiv fil"
+msgstr ""
 
 #: src/toolbar.c:46
 msgid "Print the current file"
-msgstr "Skriv ut aktiv fil"
+msgstr ""
 
 #: src/toolbar.c:51
 msgid "Cut the selection"
-msgstr "Klipp ut utvalget"
+msgstr ""
 
 #: src/toolbar.c:53
 msgid "Copy the selection"
-msgstr "Kopier utvalget"
+msgstr ""
 
 #: src/toolbar.c:55
 msgid "Paste the clipboard"
-msgstr "Lim inn fra utklippstavlen"
+msgstr ""
 
 #: src/toolbar.c:57
 msgid "Find"
-msgstr "Finn"
+msgstr ""
 
 #: src/toolbar.c:57
+#, fuzzy
 msgid "Search for a string"
-msgstr "Søk etter en streng"
+msgstr "Søk etter linje..."
 
 #: src/toolbar.c:62
 msgid "Exit"
@@ -501,21 +493,88 @@ msgstr "Avslutt"
 
 #: src/toolbar.c:62
 msgid "Exit the program"
-msgstr "Avslutt programmet"
+msgstr ""
 
-#: src/toolbar.c:70
-msgid " Save "
-msgstr " Lagre "
+#~ msgid "Close All"
+#~ msgstr "Lukk alle"
 
-#: src/toolbar.c:72
-msgid " Close "
-msgstr " Lukk "
+#, fuzzy
+#~ msgid "Search for a line"
+#~ msgstr "Søk etter linje..."
 
-#: src/toolbar.c:74
-msgid " Print "
-msgstr " Skriv ut "
+#, fuzzy
+#~ msgid "_Document List"
+#~ msgstr "Dokumentliste"
 
-#: src/toolbar.c:77
-msgid " OK "
-msgstr " OK "
+#, fuzzy
+#~ msgid "Display the document list"
+#~ msgstr "Dokumentliste"
 
+#, fuzzy
+#~ msgid " Save "
+#~ msgstr "Lagre"
+
+#, fuzzy
+#~ msgid " Close "
+#~ msgstr "Lukk"
+
+#, fuzzy
+#~ msgid " Print "
+#~ msgstr "Skriv ut..."
+
+#~ msgid "Search for Text..."
+#~ msgstr "Søk etter tekst..."
+
+#~ msgid "Search Again"
+#~ msgstr "Søk igjen"
+
+#~ msgid "Toggle"
+#~ msgstr "Velg"
+
+#~ msgid "Pictures and Text"
+#~ msgstr "Bilder og tekst"
+
+#~ msgid "Pictures only"
+#~ msgstr "Bare bilder"
+
+#~ msgid "Toolbar Relief Off"
+#~ msgstr "Slå av relief for verktøylinje"
+
+#~ msgid "Tooltips On"
+#~ msgstr "Verktøytips på"
+
+#~ msgid "Tooltips Off"
+#~ msgstr "Verktøytips av"
+
+#~ msgid "Preferences..."
+#~ msgstr "Preferanser..."
+
+#~ msgid "Toggle Scrollball"
+#~ msgstr "Slå av/på rullekule"
+
+#~ msgid "Toolbar"
+#~ msgstr "Verktøylinje"
+
+#~ msgid "New Window"
+#~ msgstr "Nytt vindu"
+
+#~ msgid "Close Window"
+#~ msgstr "Lukk vindu"
+
+#~ msgid "Message Box"
+#~ msgstr "Meldingsboks"
+
+#~ msgid "About..."
+#~ msgstr "Om..."
+
+#~ msgid "_Edit"
+#~ msgstr "Rediger"
+
+#~ msgid "_Options"
+#~ msgstr "Alternativer"
+
+#~ msgid "_Window"
+#~ msgstr "Vindu"
+
+#~ msgid "_Help"
+#~ msgstr "Hjelp"

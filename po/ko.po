@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.5\n"
-"POT-Creation-Date: 1999-02-28 00:17+0000\n"
+"POT-Creation-Date: 1999-04-02 00:20+0100\n"
 "PO-Revision-Date: 1998-10-18 03:07:11+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -30,20 +30,21 @@ msgstr ""
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:517
+#: src/commands.c:538
 msgid "Open File..."
 msgstr ""
 
-#: src/commands.c:588
+#. E_msgbar_set(data->window, _("Read only file!"));
+#: src/commands.c:609
 msgid "Read only file!"
 msgstr ""
 
-#: src/commands.c:602
+#: src/commands.c:625
 #, fuzzy
 msgid "Save As..."
 msgstr "다른 이름으로 저장"
 
-#: src/commands.c:1050 src/commands.c:1051
+#: src/commands.c:988 src/commands.c:989
 #, fuzzy
 msgid "_File"
 msgstr "파일"
@@ -92,159 +93,151 @@ msgstr ""
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
 
-#: src/gE_document.c:61 src/toolbar.c:51
+#: src/gE_document.c:60 src/toolbar.c:51
 msgid "Cut"
 msgstr "자르기"
 
-#: src/gE_document.c:62 src/toolbar.c:53
+#: src/gE_document.c:61 src/toolbar.c:53
 msgid "Copy"
 msgstr "복사"
 
-#: src/gE_document.c:63 src/toolbar.c:55
+#: src/gE_document.c:62 src/toolbar.c:55
 msgid "Paste"
 msgstr "붙이기"
 
-#: src/gE_document.c:65
-msgid "Open in new window"
-msgstr ""
-
-#: src/gE_document.c:66 src/toolbar.c:42
+#. { N_("Open in new window"), file_open_in_new_win_cb },
+#: src/gE_document.c:65 src/toolbar.c:42
 msgid "Save"
 msgstr "저장"
 
-#: src/gE_document.c:67 src/toolbar.c:44
+#: src/gE_document.c:66 src/toolbar.c:44
 msgid "Close"
 msgstr "닫기"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
+#: src/gE_document.c:67 src/gE_prefs_box.c:679 src/gE_print.c:70
 #: src/toolbar.c:46
 #, fuzzy
 msgid "Print"
 msgstr "인쇄"
 
-#: src/gE_document.c:70
+#: src/gE_document.c:69
 msgid "Open (swap) .c/.h file"
 msgstr ""
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:147
 msgid "Column:"
 msgstr ""
 
-#: src/gE_document.c:157
+#: src/gE_document.c:156
 msgid "Line"
 msgstr ""
 
-#: src/gE_files.c:305
-msgid "Currently Open Files"
-msgstr ""
-
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
-#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
-#: src/menus.c:256
+#. data->window = app;
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:434
+#: src/gE_prefs_box.c:435 src/gE_prefs_box.c:485 src/gE_prefs_box.c:486
+#: src/menus.c:232
 #, fuzzy
 msgid "_Plugins"
 msgstr "플러그인"
 
-#: src/gE_prefs_box.c:179
+#: src/gE_prefs_box.c:183
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:192
+#: src/gE_prefs_box.c:196
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "상태막대 토글"
 
-#: src/gE_prefs_box.c:201
+#: src/gE_prefs_box.c:205
 msgid "Show Splitscreen"
 msgstr ""
 
-#: src/gE_prefs_box.c:210
+#: src/gE_prefs_box.c:214
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:223
+#: src/gE_prefs_box.c:227
 #, fuzzy
 msgid "Enable Autoindent"
 msgstr "Autoindent 토글"
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:236
 #, fuzzy
 msgid "Enable Wordwrap"
 msgstr "Wordwrap 토글"
 
-#: src/gE_prefs_box.c:252
+#: src/gE_prefs_box.c:256
 msgid "Print Command"
 msgstr ""
 
-#: src/gE_prefs_box.c:342
+#: src/gE_prefs_box.c:346
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:359
+#: src/gE_prefs_box.c:363
 #, fuzzy
 msgid "Select..."
 msgstr "전부 선택"
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Name"
 msgstr ""
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Location"
 msgstr ""
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+#: src/gE_prefs_box.c:536 src/gE_prefs_box.c:689
 #, fuzzy
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/gE_prefs_box.c:613
+#: src/gE_prefs_box.c:617
 msgid "Add"
 msgstr ""
 
-#: src/gE_prefs_box.c:618
+#: src/gE_prefs_box.c:622
 msgid "Remove"
 msgstr ""
 
 #. General Settings
-#: src/gE_prefs_box.c:670
+#: src/gE_prefs_box.c:674
 msgid "General"
 msgstr ""
 
 #. Font Settings
-#: src/gE_prefs_box.c:680
+#: src/gE_prefs_box.c:684
 msgid "Font"
 msgstr ""
 
-#: src/gE_print.c:82
+#: src/gE_print.c:83
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr ""
 
-#: src/gE_print.c:90
+#: src/gE_print.c:91
 msgid "Print Command:"
 msgstr ""
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid "Print anyway"
 msgstr ""
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid " Save, then print "
 msgstr ""
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "Launch a plugin at startup"
 msgstr "시작시 플러그인 실행"
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "PLUGIN-NAME"
 msgstr ""
 
@@ -314,170 +307,139 @@ msgstr "새 것"
 msgid "Create a new document"
 msgstr ""
 
-#: src/menus.c:102
-msgid "Close All"
-msgstr "전부 닫기"
-
-#: src/menus.c:102
-msgid "Close all open files"
-msgstr ""
-
-#: src/menus.c:124
-msgid "Find _Line..."
-msgstr ""
-
-#: src/menus.c:125
-#, fuzzy
-msgid "Search for a line"
-msgstr "다시 찾기"
-
-#: src/menus.c:139
+#: src/menus.c:114
 #, fuzzy
 msgid "_Top"
 msgstr "위"
 
-#: src/menus.c:140
+#: src/menus.c:115
 msgid "Put the document tabs at the top"
 msgstr ""
 
-#: src/menus.c:143
+#: src/menus.c:118
 #, fuzzy
 msgid "_Bottom"
 msgstr "아래"
 
-#: src/menus.c:144
+#: src/menus.c:119
 msgid "Put the document tabs at the bottom"
 msgstr ""
 
-#: src/menus.c:147
+#: src/menus.c:122
 #, fuzzy
 msgid "_Left"
 msgstr "왼쪽"
 
-#: src/menus.c:148
+#: src/menus.c:123
 msgid "Put the document tabs on the left"
 msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:126
 #, fuzzy
 msgid "_Right"
 msgstr "오른쪽"
 
-#: src/menus.c:152
+#: src/menus.c:127
 msgid "Put the document tabs on the right"
 msgstr ""
 
-#: src/menus.c:158
-msgid "Toggle the presence of the document tabs"
-msgstr ""
-
-#: src/menus.c:169
+#: src/menus.c:144
 #, fuzzy
 msgid "Toggle autoindent"
 msgstr "Autoindent 토글"
 
-#: src/menus.c:174
+#: src/menus.c:149
 #, fuzzy
 msgid "Toggle statusbar"
 msgstr "상태막대 토글"
 
-#: src/menus.c:179
+#: src/menus.c:154
 msgid "Toggle Wordwrap"
 msgstr "Wordwrap 토글"
 
-#: src/menus.c:184
+#: src/menus.c:159
 msgid "Toggle Linewrap"
 msgstr ""
 
-#: src/menus.c:189
+#: src/menus.c:164
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:194
+#: src/menus.c:169
 msgid "Toggle Split Screen"
 msgstr ""
 
-#: src/menus.c:200
+#: src/menus.c:175
 #, fuzzy
 msgid "_Document Tabs"
 msgstr "문서 탭"
 
-#: src/menus.c:201
+#: src/menus.c:176
 msgid "Change the placement of the document tabs"
 msgstr ""
 
-#: src/menus.c:205
+#: src/menus.c:180
 #, fuzzy
 msgid "Sa_ve Settings"
 msgstr "설정 저장"
 
-#: src/menus.c:206
+#: src/menus.c:181
 msgid "Save the current settings for future sessions"
 msgstr ""
 
-#: src/menus.c:224
-#, fuzzy
-msgid "_Document List"
-msgstr "문서 리스트"
-
-#: src/menus.c:225
-#, fuzzy
-msgid "Display the document list"
-msgstr "문서 리스트"
-
-#: src/search.c:149
+#: src/search.c:148
 #, c-format
 msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
 #, fuzzy
 msgid "Search and Replace"
 msgstr "찾아서 바꾸기"
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
 #, fuzzy
 msgid "Search"
 msgstr "찾기"
 
-#: src/search.c:366
+#: src/search.c:365
 #, fuzzy
 msgid "Search For:"
 msgstr "찾기"
 
-#: src/search.c:370
+#: src/search.c:369
 #, fuzzy
 msgid "Text"
 msgstr "글자만"
 
-#: src/search.c:377
+#: src/search.c:376
 msgid "Line Number"
 msgstr ""
 
-#: src/search.c:396
+#: src/search.c:395
 #, fuzzy
 msgid "Search:"
 msgstr "찾기"
 
-#: src/search.c:399
+#: src/search.c:398
 msgid "Start searching at cursor position"
 msgstr ""
 
-#: src/search.c:404
+#: src/search.c:403
 msgid "Start searching at beginning of the document"
 msgstr ""
 
-#: src/search.c:406
+#: src/search.c:405
 msgid "Case sensitive"
 msgstr ""
 
-#: src/search.c:410
+#: src/search.c:409
 msgid "Replace:"
 msgstr ""
 
-#: src/search.c:413
+#: src/search.c:412
 msgid "Prompt before replacing"
 msgstr ""
 
@@ -536,24 +498,32 @@ msgstr "편집"
 msgid "Exit the program"
 msgstr ""
 
-#: src/toolbar.c:70
-#, fuzzy
-msgid " Save "
-msgstr "저장"
+#~ msgid "Close All"
+#~ msgstr "전부 닫기"
 
-#: src/toolbar.c:72
 #, fuzzy
-msgid " Close "
-msgstr "닫기"
+#~ msgid "Search for a line"
+#~ msgstr "다시 찾기"
 
-#: src/toolbar.c:74
 #, fuzzy
-msgid " Print "
-msgstr "인쇄"
+#~ msgid "_Document List"
+#~ msgstr "문서 리스트"
 
-#: src/toolbar.c:77
-msgid " OK "
-msgstr ""
+#, fuzzy
+#~ msgid "Display the document list"
+#~ msgstr "문서 리스트"
+
+#, fuzzy
+#~ msgid " Save "
+#~ msgstr "저장"
+
+#, fuzzy
+#~ msgid " Close "
+#~ msgstr "닫기"
+
+#, fuzzy
+#~ msgid " Print "
+#~ msgstr "인쇄"
 
 #~ msgid "Search Again"
 #~ msgstr "다시 찾기"

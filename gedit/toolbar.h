@@ -34,6 +34,8 @@ typedef struct {
 	GtkSignalFunc callback;
 } toolbar_data_t;
 
+extern GnomeUIInfo toolbar_data[];
+
 extern void gE_create_toolbar(gE_window *gw, gE_data *data);
 extern GtkWidget * gE_create_toolbar_flw(gE_data *data);
 extern void tb_on_cb(GtkWidget *w, gpointer cbwindow);

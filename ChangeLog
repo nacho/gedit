@@ -1,16 +1,271 @@
+<<<<<<< ChangeLog
+1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
+
+	* aclocal-include.m4 (AM_ACLOCAL_INCLUDE): Add ACLOCAL_FLAGS in
+	ACLOCAL. This allows maintainer rules to work if any of the macros
+	change.
+
+1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
+
+	* gnome.m4 (GNOME_INIT_HOOK): Wrapped position parameter in
+	testing for additional inits. It gets expanded while generating
+	configure, resulting in an empty parameter list - syntax error in
+	for statement.
+
+1999-03-09  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome.m4 (GNOME_INIT): Add a new paramater, which is passed to
+	GNOME_INIT_HOOK. 
+	(GNOME_INIT_HOOK): New parameter "additional inits".  This is a
+	list like "applets capplet", and the corresponding
+	GNOME_APPLETS_LIBS and GNOME_CAPPLETS_LIBS are defined.
+
+1998-03-01  Mark Crichton <crichton@gimp.org>
+
+	* gnome-objc-checks : Added HAVE_GNOME_OBJC conditional
+
+
+
+=======
+1999-04-03 (15:57) Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (child_switch) Fixed the function for GnomeMDI.. it now
+	  sets the gEdit window title with the name of the doc as it did before
+	  GnomeMDI was introduced - One problem, the titlebar flickers when you
+	  change the child.
+	
+	* gedit.c: (main) Don't send a window pointer to the child_changed signal,
+	  no pointer at all is needed in fact.
+	
+	* gE_mdi.c: Removed unneeded debug output.
+
+1999-04-03 (15:30) Alex Roberts  <bse@gedit.pn.org>
+	
+	* gE_mdi.c:  (gE_document_create_view) Removed the signal connections
+	  that connect doc_insert_text_cb and doc_delete_text_cb.. It seems
+	  they were for Undo/Redo, but i'm sure there are easier/better ways
+	  to implement this. So there are no more Gtk-CRITCAL errors anymore!
+	
+1999-04-03 (14:47) Alex Roberts  <bse@gedit.pn.org>
+	
+	* gE_mdi.c: Commented out the view_menu.. the Add View and Remove
+	  View functions are completely borked.. The implementation is
+	  completely different to the way GHex implements it.. maybe Jaka
+	  could have a look?
+	
+1999-04-03 (13:16) Alex Roberts  <bse@gedit.pn.org>
+	
+	* gedit.c: (main) Don't send a GE_DOCUMENT reference to add_view.. 
+	  Otherwise we get a Gtk-WARNING on startup...
+	
+1999-04-03 (00:25) Alex Roberts  <bse@gedit.pn.org>
+	
+	* commands.[ch]: (auto_indent_cb) Added extra arg to the function, so
+	  we dont set the int *pos to 0 by accedent.
+
+1999-04-02 (23:53) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: (gE_document_create_view) Reactivated the signal connection
+	  for "insert_text"... now i just get Gtk-CRITICAL errors from
+	  gtk_text_set_point.. maybe its not referencing the TextWidget
+	  properly.. even tho the auto indent itself is working.. grr..
+	
+	* commands.c: (auto_indent_cb) !data->window->auto_indent should be
+	  !settings->auto_indent.. turning auto indent off should work now,
+	  as soon as i get the rest of auto indent implemented
+
+1999-04-02 (23:40) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: (gE_add_view) This is pretty much a kludge. Just the same
+	  as the old file_open_in_new_win_cb function (commands.c)..
+
+1999-04-02 (23:22) Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (gE_event_button_press) Put the debug output of this
+	  function into an #ifdef..
+
+1999-04-02 (23:07) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: Added replacement to the context popup menu for the text
+	  widget. Now in a Gnome Popup menu, with spiffy stock pixmaps :)
+	  (gE_document_create_view) Attached the popup menu GnomeUIINFO to the
+	  text widget.
+	  
+	* commands.c: (edit_cut_cb, edit_copy_cb, edit_paste_cb, edit_selall_cb)
+	  Replaced gnome_app_error with gnome_app_flash.. how the hell did that 
+	  get there?! I must have been tired when I wrote that! ;)
+
+1999-03-27 (20:18) Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c (doc_insert_text_cb) removed some really annoying debug 
+	  message.
+	
+	* gE_prefs_box.c: (gE_window_refresh) Re-implemented statusbar visibility
+	  refreshing from the prefs box.
+
+1999-03-20 (19:40) Alex Roberts  <bse@dial.pipex.com>
+
+	* menus.c:
+	  commands.[ch]: (window_new_cb): Use gnome_mdi_open_toplevel() to create a
+	  new window. We now have the "Create new window" feature back! YAY!
+
+	* gE_mdi.[ch]:
+	  gedit.c: (main) Added signal connections for add_view and add_child. They
+	  dont do anything yet, and i'm not sure if they ever will.
+
+1999-03-16 (20:46) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_mdi.c: (gE_add_view) Duplicate the text from the child into the new
+	  view. They don't simultaineously update tho.. Checking if the document has
+	  changed is working again tho :) 
+
+1999-03-14 (23:46) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_prefs.c: (get_settings)
+	  gE_document.c: (gE_window_set_status_bar) Use current (mdi)active_window
+	  to access the builtin GnomeApp statusbar member. Statusbar toggle is back!
+	  yay! Window doesnt refresh tho, leaving a gap (until the window is resized
+	  that is).. Ah well..
+	
+1999-03-14 (19:46) Alex Roberts  <bse@dial.pipex.com>
+
+	* commands.c: (file_quit_cb) If user presses cancel on mdi_remove_all, then
+	  we shouldn't close the app! And so, we don't.
+	
+1999-03-14 (19:01) Alex Roberts  <bse@dial.pipex.com>
+
+	* main.h:
+	  gE_document.c:
+	  gE_files.c:
+	  commands.[ch]: Converted all the respective recent document functions to
+	  using GnomeApp pointers, instead of gE_window's. Recent Documents list
+	  is back! Yay!
+
+1999-03-14 (18:02) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_document: (gE_document_set_read_only) Use gnome_mdi_child_set_name
+	  instead of setting the old (now defunct) tab label. 
+	  Read Only documents are BACK! yay!
+
+1999-03-14 (00:02) Alex Roberts  <bse@dial.pipex.com>
+
+	* gedit.c: (main) Doh.. open the toplevel first, before makeing a new
+	  document.. Now we don't get two windows open on startup (if we specify
+	  a file to open, or just have a plain file on startup).. Yippee!
+
+1999-03-13 (23:46) Alex Roberts  <bse@dial.pipex.com>
+
+	* menus.c:
+	  commands.[ch]: Document tab positioning is back.. Kinda.. If you change
+	  the tab position, you need to make a new MDI window.
+	
+	* gE_document.c: (gE_window_new) I've commented out the Recent_Document list
+	  update call, until i get that fixed with MDI. This stops most of the
+	  menus warnings on startup.
+	
+	* gE_plugin_api.[ch]: (add_plugins_to_window) Send a "GnomeApp" to this
+	  and the functions after this. This sort of fixes the startup menu 
+	  warnings (well.. atleast they're different ones now ;).
+
+1999-03-13 (19:37) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_mdi.c: (remove_doc_cb) Now we ask the user if they want to save the
+	  document if it has been modified. Unfortunatly, if the doc is Untitled,
+	  it won't ask for a filename, it'll just close the file... :(
+	
+1999-03-13 (16:12) Alex Roberts  <bse@dial.pipex.com>
+
+	* commands.c: (doc_changed_cb) Get the name from the actual MDI Child, not
+	  from the document's filename.
+	  (file_open_ok_sel): Check if there is a current document, then check if
+	  that document has been modified. If the doc has been modified, or if there
+	  aren't any current documents, make a new one (w/ file).
+
 1999-03-13 (15:46) Alex Roberts  <bse@dial.pipex.com>
 
+	* menus.c:
+	  gE_mdi.c: Moved Edit menu tree. It gets created when a new document
+	  is made; along with the View tree. This looks a lot neater.
+	
 	* makeconfig.pl: Taken out references to the old 'WITHOUT_GNOME' system
 	  of pre-0.5.0. And removed the old Gtk+ cehcking, its all done by the
 	  Gnome now. Much nicer.. yeah..
+
+1999-03-13 (00:55) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_document.c: Default window size (630,390) is BACK! yay!
+	
+	* gedit.c: Took out the gE_document_current reference, we can now load files
+	  from the command line again. Yippee!
+
+1999-03-12 (19:09) Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_mdi.c: (gE_document_create_view) The document being created is now
+	  built from the MDIChild specified in the function arguments. Instead of
+	  a fresh new gE_document; Now the text widget is being created properly,
+	  and file loading and saving now works again.. yay!
+	
+	* gE_mdi.c: Added creation of View menu to menubar, only problem is that
+	  the file doesnt get recreated properly when a new view is added; And a new
+	  window seems to get created when the first new document is added (on 
+	  startup)...
+
+1999-03-12 (18:25) Alex Roberts  <bse@dial.pipex.com>
+	
+	* toolbar.h:
+	  gedit.c: The Toolbar has returned :]
+
+1999-03-12 (18:00) Alex Roberts  <bse@dial.pipex.com>
+
+	* gedit.c:
+	  menus.c: Added Files menu, for use with MDI..
+
+1999-03-11 Alex Roberts  <bse@dial.pipex.com>
+
+	* I've been working on adding GnomeMDI to gEdit since the last entry.
+
+	* gE_mdi.[ch]: New files, containing the new gE_document class definition
+	  to work with GnomeMDI. This is the main work towards the new GnomeMDI
+	  stuff in gEdit. Work on this is based upon Ghex (and GTop)
+	  
+	* I've moved gE_document_new* and gE_document_current to gE_mdi.[ch].
+	
+	* gedit.c: Converted to using GnomeMDI.. so we initialise the MDI system
+	  here. Also includes the signals for new documents, chaning views, etc.
+	
+	* There's more.. but basically just MDI stuff..
+	
+1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
+
+	* aclocal-include.m4 (AM_ACLOCAL_INCLUDE): Add ACLOCAL_FLAGS in
+	ACLOCAL. This allows maintainer rules to work if any of the macros
+	change.
+
+1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
+
+	* gnome.m4 (GNOME_INIT_HOOK): Wrapped position parameter in
+	testing for additional inits. It gets expanded while generating
+	configure, resulting in an empty parameter list - syntax error in
+	for statement.
+
+1999-03-09  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome.m4 (GNOME_INIT): Add a new paramater, which is passed to
+	GNOME_INIT_HOOK. 
+	(GNOME_INIT_HOOK): New parameter "additional inits".  This is a
+	list like "applets capplet", and the corresponding
+	GNOME_APPLETS_LIBS and GNOME_CAPPLETS_LIBS are defined.
+
+1998-03-01  Mark Crichton <crichton@gimp.org>
+
+	* gnome-objc-checks : Added HAVE_GNOME_OBJC conditional
 
 1999-02-27 (22:19) Alex Roberts  <bse@dial.pipex.com>
 
 	* README*:
 	  INSTALL:
 	  makeconfig.pl: Upped version to 0.5.1
-	  
-
+  
 1999-02-27 (15:49) Alex Roberts  <bse@dial.pipex.com>
 
 	* Eek.. so much i have done.. Here's a summary:

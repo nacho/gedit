@@ -36,7 +36,7 @@ extern "C" {
 #include "gE_plugin.h"
 
    extern void gE_plugin_program_register(plugin_info * info);
-   extern void add_plugins_to_window(plugin_info * info, gE_window * window);
+   extern void add_plugins_to_window(plugin_info * info, GnomeApp *app);
 
 #ifdef __cplusplus
 }

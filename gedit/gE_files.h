@@ -26,12 +26,10 @@ extern "C" {
 typedef enum { FlwFnumColumn = 0, FlwFsizeColumn, FlwFnameColumn } flw_col_t;
 
 
-extern gint gE_file_open (gE_window *w, gE_document *doc, gchar *fname);
-extern gint gE_file_save (gE_window *w, gE_document *doc, gchar *fname);
-extern void files_list_popup(GtkWidget *widget, gpointer cbdata);
-extern void flw_destroy(GtkWidget *widget, gpointer data);
-extern void flw_remove_entry(gE_window *w, int num);
-extern void flw_append_entry(gE_window *w, gE_document *, int , char *);
+extern gint gE_file_open (gE_document *doc, gchar *fname);
+extern gint gE_file_save (gE_document *doc, gchar *fname);
+
+/* Files list popup: No need for this bloat! */
 
 #ifdef __cplusplus
 }

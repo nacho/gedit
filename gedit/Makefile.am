@@ -44,6 +44,8 @@ gedit_SOURCES = 	\
 	commands.h	\
 	gE_document.c	\
 	gE_document.h   \
+	gE_mdi.c	\
+	gE_mdi.h	\
 	gE_about.c	\
 	gE_about.h      \
 	gE_files.c	\

@@ -32,7 +32,7 @@
 #include "search.h"
 #include "toolbar.h"
 #include "gE_prefs_box.h"
-#include "gE_prefslib.h"
+#include "gE_prefs.h"
 
 GnomeUIInfo toolbar_data[] = {
 	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
@@ -66,19 +66,6 @@ GnomeUIInfo toolbar_data[] = {
 };
 
 
-static toolbar_data_t flw_tb_data[] = {
-	{ N_(" Save "), "Save file", "Toolbar/Save",
-		GNOME_STOCK_PIXMAP_SAVE, (GtkSignalFunc)file_save_cb },
-	{ N_(" Close "), "Close the current file", "Toolbar/Close",
-		GNOME_STOCK_PIXMAP_CLOSE, (GtkSignalFunc)file_close_cb },
-	{ N_(" Print "), "Print file", "Toolbar/Print",
-		GNOME_STOCK_PIXMAP_PRINT, (GtkSignalFunc)file_print_cb },
-	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ N_(" OK "), "Close list window", "Ok",
-		GNOME_STOCK_PIXMAP_QUIT, (GtkSignalFunc)flw_destroy },
-	{ NULL, NULL, NULL, NULL, NULL }
-};
-
 static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
 
 
@@ -99,21 +86,10 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
                                     toolbar_data,
                                     data );
 
-	gw->have_toolbar = TRUE;
+	settings->have_toolbar = TRUE;
 
 } /* gE_create_toolbar */
 
-
-/*
- * PUBLIC: gE_create_toolbar_flw
- *
- * creates toolbar for files list window
- */
-GtkWidget *
-gE_create_toolbar_flw(gE_data *data)
-{
-	return toolbar_create_common(flw_tb_data, data);
-}
 
 
 /*

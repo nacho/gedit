@@ -24,10 +24,9 @@
 #include <glib.h>
 #include <config.h>
 
-
 #include "main.h"
-#include "gE_document.h"
 #include "dialog.h"
+#include "gE_document.h"
 
 
 static void seek_to_line(gE_document *doc, gint line_number);
@@ -126,7 +125,7 @@ void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
 	gE_window *w =  (gE_window *) cbwindow;
 	
 	g_assert (w != NULL);
-	doc = gE_document_current (w);
+	doc = gE_document_current ();
 	
 	g_assert (doc != NULL);
 	g_assert (doc->text != NULL);
@@ -216,7 +215,7 @@ search_start(GtkWidget * w, gE_data * data)
 	end_line, oldchanged, replace_diff = 0;
 	/*options = data->temp2;*/
 	options = data->window->search;
-	doc = gE_document_current(data->window);
+	doc = gE_document_current();
 	search_for = gtk_entry_get_text(GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text(GTK_ENTRY(options->replace_entry));
 	buffer = g_malloc0(sizeof(search_for));
@@ -493,7 +492,7 @@ search_replace_yes_sel(GtkWidget * w, gE_data * data)
 	gE_document *doc;
 	gint i;
 
-	doc = gE_document_current(data->window);
+	doc = gE_document_current();
 	rep = gtk_entry_get_text(
 			GTK_ENTRY(data->window->search->replace_entry));
 	i = gtk_text_get_point(GTK_TEXT(doc->text)) - 2;

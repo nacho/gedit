@@ -22,6 +22,8 @@
 #include <ctype.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
+#include <gnome.h>
+
 #include "main.h"
 #include "gE_document.h"
 

@@ -21,9 +21,29 @@
 
 #include "gE_prefslib.h"
 
-extern void gE_save_settings(gE_window *window, gpointer cbwindow);
-extern void gE_get_settings(gE_window *window);
+extern void gE_save_settings();
+extern void gE_get_settings();
 extern void gE_rc_parse(void);
-extern void prefs_cb(GtkWidget *widget, gpointer cbwindow);
+
+typedef struct _gE_preference {
+
+	guint auto_indent;
+	gint show_tabs;
+	gint tab_pos;
+	guint show_status;
+	gint show_tooltips;
+	gint have_toolbar;
+	gint have_tb_pix;
+	gint have_tb_text;
+	gint use_relief_toolbar;
+	gchar *font;
+	gint splitscreen;
+	gchar *print_cmd;
+	int num_recent; /* Number of recently accessed documents in the 
+	                   Recent Documents menu */
+
+} gE_preference;
+
+extern gE_preference *settings;
 
 #endif /* __GE_PREFS_H__ */

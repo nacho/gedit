@@ -35,19 +35,20 @@ extern "C" {
 #define MSGBAR_PASTE			"Selection Pasted..."
 #define MSGBAR_SELECT_ALL		"All Text Selected..."
 
-extern void gE_window_set_auto_indent (gE_window *window, gint auto_indent);
-extern void gE_window_set_status_bar (gE_window *window, gint show_status);
-extern gE_window *gE_window_new();
-extern gE_document *gE_document_new(gE_window *window);
-extern gE_document *gE_document_new_with_file (gE_window *window, gchar *filename);
-extern gE_document *gE_document_current(gE_window *window);
+extern void gE_window_set_auto_indent (gint auto_indent);
+extern void gE_window_set_status_bar (gint show_status);
+extern /*gE_window */ void gE_window_new(GnomeMDI *mdi, GnomeApp *app);
+/* gE_document_new : relocated to gE_mdi.[ch] */
+/* gE_document_new_with_file : relocated to gE_mdi.[ch] */
+/* gE_document_current: relocated to gE_mdi.[ch] */
 extern void gE_document_set_word_wrap (gE_document *doc, gint word_wrap);
 extern void gE_document_set_line_wrap (gE_document *doc, gint line_wrap);
 extern void gE_document_set_read_only (gE_document *doc, gint read_only);
 
 extern void gE_document_set_split_screen (gE_document *doc, gint split_screen);
-extern void gE_msgbar_set(gE_window *window, char *msg);
-extern gboolean gE_msgbar_clear(gpointer data);
+
+
+extern void child_switch (GnomeMDI *mdi, gE_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
 extern gE_document *gE_document_new_container (gE_window *w, gchar *title,

@@ -34,6 +34,7 @@
 #include "gE_document.h"
 #include "commands.h"
 #include "dialog.h"
+#include "gE_prefs.h"
 
 static void print_destroy(GtkWidget *widget, gpointer data);
 static void file_print_execute(GtkWidget *w, gpointer cbdata);
@@ -92,9 +93,9 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(tmp);
 
 	print_cmd_entry = gtk_entry_new_with_max_length(255);
-	if (data->window->print_cmd)
+	if (settings->print_cmd)
 		gtk_entry_set_text(GTK_ENTRY(print_cmd_entry),
-			data->window->print_cmd);
+			settings->print_cmd);
 	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, FALSE, TRUE, 10);
 	gtk_widget_show(print_cmd_entry);
 
@@ -115,7 +116,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(print_destroy), data->window);
+		GTK_SIGNAL_FUNC(print_destroy), NULL);
 	gtk_widget_show(tmp);
 
 	gtk_widget_show(print_dialog);
@@ -150,8 +151,8 @@ file_print_execute(GtkWidget *w, gpointer cbdata)
 
 	g_assert(data != NULL);
 
-	if (data->window->print_cmd)
-		strcpy(data->window->print_cmd,
+	if (settings->print_cmd)
+		strcpy(settings->print_cmd,
 			gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
 
 	/* print using specified command */
@@ -177,7 +178,8 @@ file_print_execute(GtkWidget *w, gpointer cbdata)
 #endif
 	if (system(scmd) == -1)
 		perror("file_print_execute: system() error");
-	gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);
+	/*gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);*/
+	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_PRINTED));
 
 	g_free(scmd);
 
@@ -218,7 +220,7 @@ get_filename(gE_data *data)
 
 	g_assert(data != NULL);
 	g_assert(data->window != NULL);
-	doc = gE_document_current(data->window);
+	doc = gE_document_current();
 
 	if (!doc->changed && doc->filename) {
 		if (doc->sb == NULL)
@@ -261,7 +263,7 @@ get_filename(gE_data *data)
 				while (data->temp1 != NULL)
 					gtk_main_iteration_do(TRUE);
 			} else
-				gE_file_save(data->window, doc, doc->filename);
+				gE_file_save(doc, doc->filename);
 
 			fname = g_strdup(doc->filename);
 			break;

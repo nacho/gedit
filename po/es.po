@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.0\n"
-"POT-Creation-Date: 1999-02-28 00:17+0000\n"
+"POT-Creation-Date: 1999-04-02 00:20+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -36,19 +36,20 @@ msgstr "Docid es %ld.\n"
 msgid "Shell"
 msgstr "Shell"
 
-#: src/commands.c:517
+#: src/commands.c:538
 msgid "Open File..."
 msgstr "Abrir un Archivo..."
 
-#: src/commands.c:588
+#. E_msgbar_set(data->window, _("Read only file!"));
+#: src/commands.c:609
 msgid "Read only file!"
 msgstr "¡Archivo en solo lectura!"
 
-#: src/commands.c:602
+#: src/commands.c:625
 msgid "Save As..."
 msgstr "Guardar Como..."
 
-#: src/commands.c:1050 src/commands.c:1051
+#: src/commands.c:988 src/commands.c:989
 msgid "_File"
 msgstr "_Archivo"
 
@@ -96,129 +97,121 @@ msgstr "© 1998, 1999 Alex Roberts y Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit es un editor de texto pequeño y liviano para GNOME/Gtk+"
 
-#: src/gE_document.c:61 src/toolbar.c:51
+#: src/gE_document.c:60 src/toolbar.c:51
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/gE_document.c:62 src/toolbar.c:53
+#: src/gE_document.c:61 src/toolbar.c:53
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/gE_document.c:63 src/toolbar.c:55
+#: src/gE_document.c:62 src/toolbar.c:55
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/gE_document.c:65
-msgid "Open in new window"
-msgstr "Abrir en una nueva ventana"
-
-#: src/gE_document.c:66 src/toolbar.c:42
+#. { N_("Open in new window"), file_open_in_new_win_cb },
+#: src/gE_document.c:65 src/toolbar.c:42
 msgid "Save"
 msgstr "Guardar"
 
-#: src/gE_document.c:67 src/toolbar.c:44
+#: src/gE_document.c:66 src/toolbar.c:44
 msgid "Close"
 msgstr "Cerrar"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
+#: src/gE_document.c:67 src/gE_prefs_box.c:679 src/gE_print.c:70
 #: src/toolbar.c:46
 msgid "Print"
 msgstr "Impresión"
 
-#: src/gE_document.c:70
+#: src/gE_document.c:69
 msgid "Open (swap) .c/.h file"
 msgstr "Abrir (alternar) archivo .c/.h"
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:147
 msgid "Column:"
 msgstr "Columna:"
 
-#: src/gE_document.c:157
+#: src/gE_document.c:156
 msgid "Line"
 msgstr "Líneas"
 
-#: src/gE_files.c:305
-msgid "Currently Open Files"
-msgstr "Archivos Actualmente Abiertos"
-
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
-#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
-#: src/menus.c:256
+#. data->window = app;
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:434
+#: src/gE_prefs_box.c:435 src/gE_prefs_box.c:485 src/gE_prefs_box.c:486
+#: src/menus.c:232
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/gE_prefs_box.c:179
+#: src/gE_prefs_box.c:183
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/gE_prefs_box.c:192
+#: src/gE_prefs_box.c:196
 msgid "Show Statusbar"
 msgstr "Ver barra de estado"
 
-#: src/gE_prefs_box.c:201
+#: src/gE_prefs_box.c:205
 msgid "Show Splitscreen"
 msgstr "División de pantalla"
 
-#: src/gE_prefs_box.c:210
+#: src/gE_prefs_box.c:214
 msgid "Editor Behavior"
 msgstr "Comportamiento del Editor"
 
-#: src/gE_prefs_box.c:223
+#: src/gE_prefs_box.c:227
 msgid "Enable Autoindent"
 msgstr "Auto-indentación"
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:236
 msgid "Enable Wordwrap"
 msgstr "Wordwrap"
 
-#: src/gE_prefs_box.c:252
+#: src/gE_prefs_box.c:256
 msgid "Print Command"
 msgstr "Comando de Impresión"
 
-#: src/gE_prefs_box.c:342
+#: src/gE_prefs_box.c:346
 msgid "Current Font"
 msgstr "Fuente Actual"
 
-#: src/gE_prefs_box.c:359
+#: src/gE_prefs_box.c:363
 msgid "Select..."
 msgstr "Seleccionar..."
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Name"
 msgstr "Nombre"
 
-#: src/gE_prefs_box.c:525
+#: src/gE_prefs_box.c:529
 msgid "Location"
 msgstr "Localización"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+#: src/gE_prefs_box.c:536 src/gE_prefs_box.c:689
 msgid "Plugins"
 msgstr "Extensiones"
 
-#: src/gE_prefs_box.c:613
+#: src/gE_prefs_box.c:617
 msgid "Add"
 msgstr "Añadir"
 
-#: src/gE_prefs_box.c:618
+#: src/gE_prefs_box.c:622
 msgid "Remove"
 msgstr "Borrar"
 
 #. General Settings
-#: src/gE_prefs_box.c:670
+#: src/gE_prefs_box.c:674
 msgid "General"
 msgstr "General"
 
 #. Font Settings
-#: src/gE_prefs_box.c:680
+#: src/gE_prefs_box.c:684
 msgid "Font"
 msgstr "Fuente"
 
-#: src/gE_print.c:82
+#: src/gE_print.c:83
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -227,23 +220,23 @@ msgstr ""
 "Entre el comando de impresión\n"
 "No olvide de incluir '%s'"
 
-#: src/gE_print.c:90
+#: src/gE_print.c:91
 msgid "Print Command:"
 msgstr "Comando de Impresión:"
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid "Print anyway"
 msgstr "Imprimir igual"
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid " Save, then print "
 msgstr " Guardar, luego imprimir "
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "Launch a plugin at startup"
 msgstr "Lanzar una extensión al inicio"
 
-#: src/gedit.c:118
+#: src/gedit.c:125
 msgid "PLUGIN-NAME"
 msgstr "Nombre de la Extensión"
 
@@ -304,107 +297,79 @@ msgstr "_Nuevo"
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
 
-#: src/menus.c:102
-msgid "Close All"
-msgstr "Cerrar todos"
-
-#: src/menus.c:102
-msgid "Close all open files"
-msgstr "Cerrar todos los archivos abiertos"
-
-#: src/menus.c:124
-msgid "Find _Line..."
-msgstr "Buscar _Línea..."
-
-#: src/menus.c:125
-msgid "Search for a line"
-msgstr "Buscar una línea"
-
-#: src/menus.c:139
+#: src/menus.c:114
 msgid "_Top"
 msgstr "A_rriba"
 
-#: src/menus.c:140
+#: src/menus.c:115
 msgid "Put the document tabs at the top"
 msgstr "Poner las tabulaciones arriba"
 
-#: src/menus.c:143
+#: src/menus.c:118
 msgid "_Bottom"
 msgstr "Aba_jo"
 
-#: src/menus.c:144
+#: src/menus.c:119
 msgid "Put the document tabs at the bottom"
 msgstr "Poner las tabulaciones abajo"
 
-#: src/menus.c:147
+#: src/menus.c:122
 msgid "_Left"
 msgstr "_Izquierda"
 
-#: src/menus.c:148
+#: src/menus.c:123
 msgid "Put the document tabs on the left"
 msgstr "Poner las tabulaciones a la izquierda"
 
-#: src/menus.c:151
+#: src/menus.c:126
 msgid "_Right"
 msgstr "_Derecha"
 
-#: src/menus.c:152
+#: src/menus.c:127
 msgid "Put the document tabs on the right"
 msgstr "Poner las tabulaciones a la derecha"
 
-#: src/menus.c:158
-msgid "Toggle the presence of the document tabs"
-msgstr "Activar/Desactivar la presencia de las tabulaciones del documento"
-
-#: src/menus.c:169
+#: src/menus.c:144
 msgid "Toggle autoindent"
 msgstr "Activar/Desactivar Auto-indentación"
 
-#: src/menus.c:174
+#: src/menus.c:149
 msgid "Toggle statusbar"
 msgstr "Activar/Desactivar barra de estado"
 
-#: src/menus.c:179
+#: src/menus.c:154
 msgid "Toggle Wordwrap"
 msgstr "Activar/Desactivar Wordwrap"
 
-#: src/menus.c:184
+#: src/menus.c:159
 msgid "Toggle Linewrap"
 msgstr "Activar/Desactivar vuelta a la linea automática"
 
-#: src/menus.c:189
+#: src/menus.c:164
 msgid "Toggle Readonly"
 msgstr "Activar/Desactivar solo lectura"
 
-#: src/menus.c:194
+#: src/menus.c:169
 msgid "Toggle Split Screen"
 msgstr "Activar/Desactivar división de pantalla"
 
-#: src/menus.c:200
+#: src/menus.c:175
 msgid "_Document Tabs"
 msgstr "_Tabulaciones del documento"
 
-#: src/menus.c:201
+#: src/menus.c:176
 msgid "Change the placement of the document tabs"
 msgstr "Cambiar de sitio las tabulaciones del documento"
 
-#: src/menus.c:205
+#: src/menus.c:180
 msgid "Sa_ve Settings"
 msgstr "_Guardar la configuración"
 
-#: src/menus.c:206
+#: src/menus.c:181
 msgid "Save the current settings for future sessions"
 msgstr "Guardar la configuración actual para futuras sesiones"
 
-#: src/menus.c:224
-msgid "_Document List"
-msgstr "_Lista de Documentos"
-
-#: src/menus.c:225
-msgid "Display the document list"
-msgstr "Muestra la lista de documentos"
-
-#: src/search.c:149
+#: src/search.c:148
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -413,47 +378,47 @@ msgstr ""
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
 msgid "Search and Replace"
 msgstr "Búsqueda y Reemplazo"
 
-#: src/search.c:363 src/search.c:581
+#: src/search.c:362 src/search.c:580
 msgid "Search"
 msgstr "Búsqueda"
 
-#: src/search.c:366
+#: src/search.c:365
 msgid "Search For:"
 msgstr "Buscar por:"
 
-#: src/search.c:370
+#: src/search.c:369
 msgid "Text"
 msgstr "Texto"
 
-#: src/search.c:377
+#: src/search.c:376
 msgid "Line Number"
 msgstr "Número de Línea"
 
-#: src/search.c:396
+#: src/search.c:395
 msgid "Search:"
 msgstr "Buscar:"
 
-#: src/search.c:399
+#: src/search.c:398
 msgid "Start searching at cursor position"
 msgstr "Iniciar la búsqueda a la posición del cursor"
 
-#: src/search.c:404
+#: src/search.c:403
 msgid "Start searching at beginning of the document"
 msgstr "Iniciar la búsqueda al principio del documento"
 
-#: src/search.c:406
+#: src/search.c:405
 msgid "Case sensitive"
 msgstr "Distingir mayúsculas y minúsculas"
 
-#: src/search.c:410
+#: src/search.c:409
 msgid "Replace:"
 msgstr "Reemplazar con:"
 
-#: src/search.c:413
+#: src/search.c:412
 msgid "Prompt before replacing"
 msgstr "Preguntar antes de reemplazar"
 
@@ -509,21 +474,44 @@ msgstr "Salir"
 msgid "Exit the program"
 msgstr "Salir del programa"
 
-#: src/toolbar.c:70
-msgid " Save "
-msgstr " Guardar "
+#~ msgid "Open in new window"
+#~ msgstr "Abrir en una nueva ventana"
 
-#: src/toolbar.c:72
-msgid " Close "
-msgstr " Cerrar "
+#~ msgid "Currently Open Files"
+#~ msgstr "Archivos Actualmente Abiertos"
 
-#: src/toolbar.c:74
-msgid " Print "
-msgstr " Imprimir "
+#~ msgid "Close All"
+#~ msgstr "Cerrar todos"
 
-#: src/toolbar.c:77
-msgid " OK "
-msgstr " OK "
+#~ msgid "Close all open files"
+#~ msgstr "Cerrar todos los archivos abiertos"
+
+#~ msgid "Find _Line..."
+#~ msgstr "Buscar _Línea..."
+
+#~ msgid "Search for a line"
+#~ msgstr "Buscar una línea"
+
+#~ msgid "Toggle the presence of the document tabs"
+#~ msgstr "Activar/Desactivar la presencia de las tabulaciones del documento"
+
+#~ msgid "_Document List"
+#~ msgstr "_Lista de Documentos"
+
+#~ msgid "Display the document list"
+#~ msgstr "Muestra la lista de documentos"
+
+#~ msgid " Save "
+#~ msgstr " Guardar "
+
+#~ msgid " Close "
+#~ msgstr " Cerrar "
+
+#~ msgid " Print "
+#~ msgstr " Imprimir "
+
+#~ msgid " OK "
+#~ msgstr " OK "
 
 #~ msgid "Available Plugins"
 #~ msgstr "Extensiones disponibles"

@@ -1,6 +1,7 @@
 /* vi:set ts=4 sts=0 sw=4:
  *
  * gEdit
+ * Copyright (C) 1998, 1999 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,32 +60,25 @@ typedef struct _gE_window {
 	GtkWidget *files_list_window_data;
 	GtkWidget *files_list_window_toolbar;
 
-	GList *documents;
+/*	GList *documents;	Pah.. i dunno.. */
 	GtkWidget *popup;
 	gE_search *search;
-	int num_recent; /* Number of recently accessed documents in the 
-	                         Recent Documents menu */
-	guint auto_indent;
-	gint show_tabs;
-	guint show_status;
-	gint show_tooltips;
-	gint have_toolbar;
-	gint have_tb_pix;
-	gint have_tb_text;
-	gint use_relief_toolbar;
-	gint splitscreen;
-	
-	gchar *print_cmd;
-	gchar *font;
+
 	GtkPositionType tab_pos;
 
 } gE_window;
 
+extern gE_window *window;
+
 typedef struct _gE_document {
-	gE_window *window;
+
+	GnomeMDIChild mdi_child;
+	
+	/*gE_window *window;*/
 	GtkWidget *text;
 	GtkWidget *tab_label;
 	GtkWidget *viewport;
+	
 	gchar *filename;
 	gint changed_id;
 	gint changed;
@@ -92,6 +86,9 @@ typedef struct _gE_document {
 	gint line_wrap;
 	gint read_only;
 	struct stat *sb;
+
+	gchar *font;
+	gint splitscreen;
 
 	gint split;
 	GtkWidget *split_parent;
@@ -119,6 +116,9 @@ typedef struct _gE_function {
 } gE_function;
 
 extern GList *window_list;
+GList *gE_documents;
+
+extern GnomeMDI *mdi;
 
 #ifdef __cplusplus
 }
