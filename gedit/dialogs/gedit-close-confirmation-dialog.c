@@ -124,6 +124,7 @@ static void
 gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 {
 	GeditCloseConfirmationDialogPrivate *priv;
+	AtkObject *atk_obj;
 
 	priv = GEDIT_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE (dlg);
 
@@ -146,7 +147,9 @@ gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 				GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_YES);
-	atk_object_set_role (gtk_widget_get_accessible (GTK_WIDGET (dlg)), ATK_ROLE_ALERT);
+	atk_obj = gtk_widget_get_accessible (GTK_WIDGET (dlg));
+	atk_object_set_role (atk_obj, ATK_ROLE_ALERT);
+	atk_object_set_name (atk_obj, _("Question"));
 }
 
 static void 
@@ -547,7 +550,6 @@ save_toggled (GtkCellRendererToggle *renderer, gchar *path_str, GtkTreeModel *st
 
 	gtk_tree_path_free (path);
 }
-
 
 static GtkWidget *
 create_treeview (GeditCloseConfirmationDialogPrivate *priv)
