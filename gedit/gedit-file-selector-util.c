@@ -145,10 +145,7 @@ replace_dialog (GtkWindow *parent,
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
 
-	gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
-
 	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
-		
 	gtk_widget_destroy (msgbox);
 
 	return (ret == GTK_RESPONSE_YES);
@@ -273,7 +270,8 @@ response_cb (GtkWidget *widget, gint response, gpointer data)
 	
 	chooser = GTK_FILE_CHOOSER (widget);
 
-	if (response == GTK_RESPONSE_CANCEL) 
+	if (response == GTK_RESPONSE_CANCEL ||
+	    response == GTK_RESPONSE_DELETE_EVENT) 
 	{
 		gtk_widget_hide (GTK_WIDGET (chooser));
 		gtk_main_quit ();
