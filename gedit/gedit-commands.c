@@ -302,6 +302,7 @@ gedit_cmd_edit_clear (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 void
 gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	GtkTextIter start, end;
 	GtkWidget *active_view;
 	GeditDocument *active_doc;
 
@@ -311,7 +312,8 @@ gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gch
 	active_doc = gedit_get_active_document ();
 	g_return_if_fail (active_doc);
 
-	gedit_document_set_selection (active_doc, 0, -1); 
+	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (active_doc), &start, &end);
+	gtk_text_buffer_select_range (GTK_TEXT_BUFFER (active_doc), &start, &end);
 
 	gtk_widget_grab_focus (active_view);
 }

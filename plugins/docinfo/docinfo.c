@@ -209,6 +209,7 @@ word_count_real (void)
 	DocInfoDialog *dialog;
 
 	GeditDocument 	*doc;
+	GtkTextIter	 start, end;
 	gchar		*text;
 	PangoLogAttr 	*attrs;
 	gint		 words = 0;
@@ -234,7 +235,10 @@ word_count_real (void)
 		return;
 	}
 
-	text = gedit_document_get_chars (doc, 0, -1);
+	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
+	text = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
+					   &start, &end, TRUE);
+
 	g_return_if_fail (g_utf8_validate (text, -1, NULL));
 
 	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));

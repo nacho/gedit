@@ -253,7 +253,6 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 	update_current (doc, start);
 }
 
-
 static gboolean
 get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
 {
@@ -302,13 +301,9 @@ static gboolean
 goto_next_word (GeditDocument *doc)
 {
 	CheckRange *range;
-	
 	GtkTextIter current_iter;
 	GtkTextIter old_current_iter;
-
 	GtkTextIter end_iter;
-
-	gint current;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -319,20 +314,15 @@ goto_next_word (GeditDocument *doc)
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), 
 			&current_iter, range->current_mark);
-	
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), 
-			&end_iter, range->end_mark);
+	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
 
 	if (gtk_text_iter_compare (&current_iter, &end_iter) >= 0)
 		return FALSE;
 
 	old_current_iter = current_iter;
-	
-	gtk_text_iter_forward_word_ends (&current_iter, 2);
-	
-	gtk_text_iter_backward_word_start (&current_iter);
 
-	current = gtk_text_iter_get_offset (&current_iter);
+	gtk_text_iter_forward_word_ends (&current_iter, 2);
+	gtk_text_iter_backward_word_start (&current_iter);
 
 	if ((gtk_text_iter_compare (&old_current_iter, &current_iter) < 0) &&
 	    (gtk_text_iter_compare (&current_iter, &end_iter) < 0))
@@ -371,7 +361,7 @@ get_next_mispelled_word (GeditDocument *doc)
 	while (gedit_spell_checker_check_word (spell, word, -1, NULL))
 	{
 		gboolean res;
-		
+
 		g_free (word);
 
 		if (!goto_next_word (doc))
@@ -392,13 +382,17 @@ get_next_mispelled_word (GeditDocument *doc)
 	if (word != NULL)
 	{
 		GtkWidget *active_view;
+		GtkTextIter s, e;
 
 		range->mw_start = start;
 		range->mw_end = end;
 
 		gedit_debug (DEBUG_PLUGINS, "Select [%d, %d]", start, end);
 
-		gedit_document_set_selection (doc, start, end);
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &s, start);
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &e, end);
+
+		gtk_text_buffer_select_range (GTK_TEXT_BUFFER (doc), &s, &e);
 
 		active_view = gedit_get_active_view ();
 		if (active_view != NULL)
@@ -606,8 +600,8 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	GeditDocument *doc;
 	GeditSpellChecker *spell;
 	GtkWidget *dlg;
-	gint start;
-	gint end;
+	gint start, end;
+	GtkTextIter sel_start, sel_end;
 	gchar *word;
 	gboolean sel = FALSE;
 	
@@ -625,9 +619,11 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 		return;
 	}
 
-	if (gedit_document_get_selection (doc, &start, &end))
+	if (gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc), &sel_start, &sel_end))
 	{
 		/* get selection points */
+		start = gtk_text_iter_get_offset (&sel_start);
+		start = gtk_text_iter_get_offset (&sel_end);
 		set_check_range (doc, start, end);
 		sel = TRUE;
 	}
