@@ -71,31 +71,16 @@ static GConfClient *gedit_plugins_engine_gconf_client = NULL;
 static GeditPlugin *
 gedit_plugins_engine_load (const gchar *file)
 {
-	GeditPluginInfo *info;
-
 	GeditPlugin *plugin;
-
 	GeditPluginFile *gedit_plugin_file = NULL;
 	gchar *str;
-
-	gboolean to_be_activated;
-	gchar *key;
-
 	gchar *contents;
 
 	g_return_val_if_fail (file != NULL, NULL);
-	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, NULL);
 	
 	gedit_debug (DEBUG_PLUGINS, "Loading plugin: %s", file);
 
-	info = g_new0 (GeditPluginInfo, 1);
-	g_return_val_if_fail (info != NULL, NULL);
-
 	plugin = g_new0 (GeditPlugin, 1);
-	g_return_val_if_fail (plugin != NULL, NULL);
-	
-	info->plugin = plugin;
-
 	plugin->file = g_strdup (file);
 
 	if (!g_file_get_contents (file, &contents, NULL, NULL)) 
@@ -103,7 +88,7 @@ gedit_plugins_engine_load (const gchar *file)
 		g_warning ("Error loading %s", file);
 		goto error;
 	}
-		
+
 	gedit_plugin_file = gedit_plugin_file_new_from_string (contents, NULL);
 	g_free (contents);
 
@@ -183,43 +168,17 @@ gedit_plugins_engine_load (const gchar *file)
 		goto error;
 	}
 
-	key = g_strdup_printf ("%s/%s", 
-			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
-			plugin->location);
-
-	to_be_activated = gconf_client_get_bool (
-				gedit_plugins_engine_gconf_client,
-				key,
-				NULL);
-	
-	g_free (key);
-
-	/* Actually, the plugin will be activated when reactivate_all
-	 * will be called for the first time.
-	 * */
-	if (to_be_activated)
-		info->state = GEDIT_PLUGIN_ACTIVATED;
-	else
-		info->state = GEDIT_PLUGIN_DEACTIVATED;
-	
-	gedit_plugins_list = g_list_append (gedit_plugins_list, info);
-
-	gedit_debug (DEBUG_PLUGINS, "Plugin: %s (INSTALLED)", plugin->name);
-
 	gedit_plugin_file_free (gedit_plugin_file);
 
 	return plugin;
 
 error:
-	g_free (info);
-	
 	g_free (plugin->file);
 	g_free (plugin->location);
 	g_free (plugin->name);
 	g_free (plugin->desc);
 	g_free (plugin->author);
 	g_free (plugin->copyright);
-	
 	g_free (plugin);
 	gedit_plugin_file_free (gedit_plugin_file);
 
@@ -232,6 +191,8 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 	GError *error = NULL;
 	GDir *d;
 	const gchar *dirent;
+
+	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
 
 	gedit_debug (DEBUG_PLUGINS, "DIR: %s", dir);
 
@@ -247,11 +208,47 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 	{
 		if (g_str_has_suffix (dirent, PLUGIN_EXT))
 		{
-			gchar *plugin = g_build_filename (dir, dirent, NULL);
-			gedit_plugins_engine_load (plugin);
-			g_free (plugin);
+			gchar *plugin_file;
+			GeditPlugin *plugin;
+			GeditPluginInfo *info;
+			gboolean to_be_activated;
+			gchar *key;
+
+			plugin_file = g_build_filename (dir, dirent, NULL);
+			plugin = gedit_plugins_engine_load (plugin_file);
+			g_free (plugin_file);
+
+			if (plugin == NULL)
+				continue;
+
+			info = g_new0 (GeditPluginInfo, 1);
+			info->plugin = plugin;
+
+			key = g_strdup_printf ("%s/%s", 
+					       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+					       plugin->location);
+
+			to_be_activated = gconf_client_get_bool (
+						gedit_plugins_engine_gconf_client,
+						key,
+						NULL);
+			g_free (key);
+
+			/* Actually, the plugin will be activated when reactivate_all
+			 * will be called for the first time.
+			 * */
+			if (to_be_activated)
+				info->state = GEDIT_PLUGIN_ACTIVATED;
+			else
+				info->state = GEDIT_PLUGIN_DEACTIVATED;
+
+			gedit_plugins_list = g_list_prepend (gedit_plugins_list, info);
+
+			gedit_debug (DEBUG_PLUGINS, "Plugin %s loaded", plugin->name);
 		}
 	}
+
+	gedit_plugins_list = g_list_reverse (gedit_plugins_list);
 
 	g_dir_close (d);
 }
