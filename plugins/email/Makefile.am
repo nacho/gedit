@@ -18,6 +18,6 @@ libemail_la_SOURCES = email.c
 libemail_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
-glade_DATA = email.glade
+glade_DATA = email.glade2
 
 EXTRA_DIST = $(glade_DATA)

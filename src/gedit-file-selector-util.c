@@ -120,9 +120,9 @@ replace_dialog (GtkWindow *parent, const gchar *message, const gchar *file_name)
 					 uri_for_display);
 	g_free (uri_for_display);
 
-	/* Add Don't Replace button */
-	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
-			_("Do_n't replace"), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+	/* Add Cancel button */
+	gtk_dialog_add_button (GTK_DIALOG (msgbox), 
+			GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
 	/* Add Replace button */
 	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
