@@ -941,47 +941,22 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 }
 
 
-static gboolean
+static void 
 create_new_file (const gchar *uri)
 {
-	GtkWidget *dialog;
-	gboolean   created;
-	gchar     *formatted_uri;
+	gint ret;
+	GeditMDIChild *new_child;
 
-	formatted_uri = gnome_vfs_format_uri_for_display (uri);
-	g_return_val_if_fail (formatted_uri != NULL, FALSE);
-			
-	created = FALSE;
+	new_child = gedit_mdi_child_new_with_uri (uri, NULL);
+	ret = bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+	g_return_if_fail (ret != FALSE);
+	gedit_debug (DEBUG_COMMANDS, "Child added.");
 
-	/* FIXME: Is it conforming to GNOME HIG ? - Paolo (Jan 02, 2004) */	
-	dialog = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_YES_NO,
-					 _("The file \"%s\" does not exist. Would you like to create it?"),
-					 formatted_uri);
+	ret = bonobo_mdi_add_view (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+	g_return_if_fail (ret != FALSE);
+	gedit_debug (DEBUG_COMMANDS, "View added.");
 
-	g_free (formatted_uri);
-
-	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
-
-	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-	{
-		created = gedit_utils_create_empty_file (uri);
-
-		if (!created)
-		{
-			gedit_utils_error_reporting_creating_file (uri, 
-								   errno, 
-								   GTK_WINDOW (dialog));
-		}
-	}
-									
-	gtk_widget_destroy (dialog);
-
-	return created;
+	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
 }
 
 static gboolean
@@ -1512,10 +1487,7 @@ gedit_file_open_uri_list (GSList *uri_list,
 			{
 				if (create)
 				{
-					if (create_new_file (uri))
-					{
-						uris_to_open = g_slist_prepend (uris_to_open, uri);
-					}
+					create_new_file (uri);
 				}
 				else
 				{

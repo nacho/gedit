@@ -1,3 +1,11 @@
+2004-07-16  Vinay  <vinay.mandyakoppal@wipro.com>
+
+	* gedit/gedit2.c (gedit_load_file_list):
+	* gedit/gedit-file.c (create_new_file) (gedit_file_open_uri_list_real):
+	* gedit/gedit-utils.[ch]:
+	Removes alert and file will not be saved while creating a non-exsistent
+	file from command line. Fixes #135709.
+
 2004-07-16  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-file.[ch]: allow to specify the encoding when opening a

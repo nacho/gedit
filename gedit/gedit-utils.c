@@ -1208,47 +1208,6 @@ gedit_utils_convert_search_text (const gchar *text)
 	return g_string_free (str, FALSE);
 }
 
-gboolean
-gedit_utils_create_empty_file (const gchar *uri)
-{
-	gchar *canonical_uri;
-	gchar *filename;
-	int fd;
-	
-	g_return_val_if_fail (uri != NULL, FALSE);
-	
-	/* Get filename from uri */
-	if (!gedit_utils_uri_has_file_scheme (uri))
-		return FALSE;
-			
-	canonical_uri = eel_make_uri_canonical (uri);
-	g_return_val_if_fail (canonical_uri != NULL, FALSE);
-	
-	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
-
-	filename = gnome_vfs_get_local_path_from_uri (canonical_uri);
-	g_free (canonical_uri);
-	
-	if (filename == NULL)
-	{
-		gedit_debug (DEBUG_FILE, "FILENAME: NULL");
-
-		return FALSE;
-	}
-	
-	fd = open (filename, O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-
-	g_free (filename);
-	
-	if (fd == -1)
-		return FALSE;
-	
-	return (close (fd) == 0);
-}
-
-
-
-
 #define GEDIT_STDIN_BUFSIZE 1024
 
 gchar *

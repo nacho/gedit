@@ -122,12 +122,11 @@ gedit_load_file_list (CommandLineData *data)
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
-	gedit_file_new ();
-
 	res = gedit_file_open_from_stdin (NULL);
 
 	if (data == NULL) 
 	{
+		gedit_file_new ();
 		return;
 	}
 

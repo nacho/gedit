@@ -87,8 +87,6 @@ gboolean gedit_utils_uri_exists (const gchar* text_uri);
 
 gchar *gedit_utils_convert_search_text (const gchar *text);
 
-gboolean gedit_utils_create_empty_file (const gchar *uri);
-
 gchar *gedit_utils_get_stdin (void);
 
 void gedit_warning (GtkWindow *parent, gchar *format, ...);
