@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.5\n"
-"POT-Creation-Date: 2001-03-02 22:41+0100\n"
-"PO-Revision-Date: 2001-03-02 15:36CET\n"
+"POT-Creation-Date: 2001-04-18 16:46+0200\n"
+"PO-Revision-Date: 2001-04-18 17:15CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
 "MIME-Version: 1.0\n"
@@ -39,12 +39,12 @@ msgstr "Zadajte _URL, ktoré chcete zobraziť:"
 msgid "Lynx found at: "
 msgstr "Lynx nájdený na : "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "umiestnenie"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr "_Zmeniť..."
@@ -86,11 +86,11 @@ msgstr "z desiatkovej do _osmičkovej"
 msgid " Hex to Decima_l "
 msgstr "zo šestnástkovej do _desiatkovej"
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "Dva vybrané dokumenty sú rovnaké."
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -100,7 +100,7 @@ msgstr ""
 "\n"
 "Prosím, zadajte platný súbor"
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -110,16 +110,16 @@ msgstr ""
 "\n"
 "Prosím, zadajte platný súbor"
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "\"Prvý\" dokument neobsahuje text."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "\"Druhý\" dokument neobsahuje text."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -127,20 +127,20 @@ msgstr ""
 "gedit nemohol vytvoriť dočasný súbor.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:759
 #, c-format
 msgid "Untitled %i"
 msgstr "Bez mena %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr "Vytvorí diff súbor z dvoch dokumentov alebo súborov"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -187,6 +187,10 @@ msgid "Select the \"second\" file..."
 msgstr "Vyberte \"Druhý\" súbor..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Použiť _zjednotený výstupný formát (prepínač -u)"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Diff nájdený v: "
 
@@ -353,21 +357,10 @@ msgstr "(C) 1998, 1999, 2000 Alex Roberts a Evan Lawrence"
 msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit je malý a jednoduchý textový editor pre GNOME."
 
-#: src/dialogs/dialog-plugins.c:90
+#: src/dialogs/dialog-plugins.c:87
 #, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr "Pre použitie modulu %s musíte zadať umiestnenie pre \"%s\"."
-
-#: src/dialogs/dialog-plugins.c:455
-#, c-format
-msgid ""
-"Plugin Name: %s\n"
-"Author: %s\n"
-"Description: %s\n"
-msgstr ""
-"Meno modulu: %s\n"
-"Autor: %s\n"
-"Popis: %s\n"
 
 #. glade won't let me set the title of the propertybox
 #: src/dialogs/dialog-prefs.c:578
@@ -384,17 +377,17 @@ msgstr "gedit: Nastavenie"
 msgid "Replace"
 msgstr "Nahradiť"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Nájsť"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
-msgstr "Text nenájdený"
+msgid "Search string not found"
+msgstr "Hľadaný text nenájdený"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
-msgstr "Text nenájdený."
+msgid "Search string not found."
+msgstr "Hľadaný reťazec nenájdený."
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
@@ -405,7 +398,7 @@ msgstr "Nájdených a nahradených %i výskytov."
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Nemôžem naalokovať pamäť pre požiadavku Nahradiť všetky."
 
-#: src/dialogs/dialog-uri.c:138 src/file.c:828 src/file.c:835
+#: src/dialogs/dialog-uri.c:138 src/file.c:827 src/file.c:834
 #, c-format
 msgid "Loaded file %s"
 msgstr "Načítaný súbor %s"
@@ -429,46 +422,50 @@ msgstr "Číslo riadku:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Nastavenie"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
-msgstr "Zobraziť stavový riadok"
-
 #: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr "Nastaviť nástrojový pruh podľa systému"
+msgid "S_how statusbar"
+msgstr "Zobraziť _stavový riadok"
 
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Nastaviť nástrojový pruh len na ikony"
+msgid "Set toolbar according to _system settings"
+msgstr "Nastaviť panel nástrojov podľa s_ystému"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr "Nastaviť nástrojový pruh na ikony s textom"
+msgid "Set toolbar to _icons only"
+msgstr "Nastaviť panel nástrojov len na _ikony"
 
 #: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
+msgstr "Nastaviť panel nástrojov na ikony s _textom"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Chovanie editoru"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Povoliť automatické odsadzovanie"
-
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
-msgstr "Šírka tabulátoru:"
+msgid "Enable _Auto-indent"
+msgstr "Povoliť automatické o_dsadzovanie"
 
 #: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
+msgstr "Šírka _tabulátora:"
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Všeobecné"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Rozhranie pre viacero dokumentov)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -480,7 +477,7 @@ msgstr ""
 "Hore\n"
 "Dole\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -492,96 +489,99 @@ msgstr ""
 "Modálne\n"
 "Štandardné\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
-msgstr "Mód: "
-
 #: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Umiestnenie záložky:"
+msgid "_Mode: "
+msgstr "_Mód: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "Umiestnenie _záložky:"
+
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Vrátiť"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
-msgstr "Nastaviť počet úrovní vrátenia na:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr " "
+msgid "Set limit on _undo levels to:"
+msgstr "Nastaviť počet úrovní v_rátenia na:"
 
 #: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
+msgstr " "
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Dokumenty"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Písma"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Vyberte písmo"
 
-#: src/dialogs/prefs.glade.h:35
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"AaÁáÄäBbCcČčDdĎďEeÉéFfGgHhIiÍíJjKkLlĹĺMmNnŇňOoÓóÔôPpQqRr"
-
 #: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Štandardné písmo: "
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaÁáÄäBbCcČčDdĎďEeÉéFfGgHhIiÍíJjKkLlĹĺMmNnŇňOoÓóÔôPpQqRr"
 
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "Š_tandardné písmo: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Farby"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Vyberte farbu"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
-msgstr "Pozadie:"
-
 #: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
-msgstr "Popredie:"
+msgid "_Background: "
+msgstr "Po_zadie:"
 
 #: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
+msgstr "Pop_redie:"
+
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Písma/Farby"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Tlač"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Pridať _hlavičku"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Povoliť _zalamovanie slov"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
+#: src/dialogs/prefs.glade.h:47
+msgid "Print line _numbers every:"
 msgstr "Tlačiť čísla ria_dkov každých:"
 
-#: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
-msgstr "riadkov"
-
 #: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
+msgstr "_riadkov"
+
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Orientácia"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "Na _výšku"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "Na ší_rku"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Papier"
 
@@ -640,40 +640,36 @@ msgstr "Rozlišovať _veľkosť písmen"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/plugin-manager.glade.h:7
-msgid "gedit Plugin Manager"
-msgstr "Správca modulov gedit"
+msgid "Plugins manager..."
+msgstr "Správca modulov..."
 
 #: src/dialogs/plugin-manager.glade.h:8
-msgid "Select the plugins to install"
-msgstr "Vyberte nainštalované moduly"
+msgid "Select the plugins to install:"
+msgstr "Vyberte moduly pre inštaláciu:"
 
-#: src/dialogs/plugin-manager.glade.h:9 src/dialogs/plugin-manager.glade.h:10
-msgid "Available Plugins"
-msgstr "Moduly k dispozícii"
+#: src/dialogs/plugin-manager.glade.h:9
+msgid "_Select all"
+msgstr "Vybrať vš_etko"
+
+#: src/dialogs/plugin-manager.glade.h:10
+msgid "_Remove all"
+msgstr "Odstrániť _všetky"
 
 #: src/dialogs/plugin-manager.glade.h:11
-msgid "Add >"
-msgstr "Pridať >"
+msgid "_Description"
+msgstr "_Popis"
 
 #: src/dialogs/plugin-manager.glade.h:12
-msgid "< Remove"
-msgstr "< Odstrániť"
+msgid "File name:"
+msgstr "Meno súboru:"
 
 #: src/dialogs/plugin-manager.glade.h:13
-msgid "Add All >>"
-msgstr "Pridať všetky>"
+msgid "Author(s):"
+msgstr "Autor(i):"
 
 #: src/dialogs/plugin-manager.glade.h:14
-msgid "<< Remove All"
-msgstr "< Odstrániť všetky"
-
-#: src/dialogs/plugin-manager.glade.h:15 src/dialogs/plugin-manager.glade.h:16
-msgid "Installed Plugins"
-msgstr "Nainštalované moduly"
-
-#: src/dialogs/plugin-manager.glade.h:17
-msgid "Plugin description"
-msgstr "Popis modulu"
+msgid "De_tails"
+msgstr "De_taily"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -681,10 +677,10 @@ msgstr "Popis modulu"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/uri.glade.h:7
-msgid "Open as URI"
-msgstr "Otvoriť ako URI"
+msgid "Open from URI"
+msgstr "Otvoriť z URI"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Otvoriť"
 
@@ -706,7 +702,7 @@ msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' bol zmenený.  Chcete ho uložiť?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:710
+#: src/document.c:716
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -721,19 +717,19 @@ msgstr ""
 "\n"
 "Prosím, overte, že súbor existuje."
 
-#: src/document.c:763 src/document.c:771
+#: src/document.c:769 src/document.c:777
 msgid "(modified)"
 msgstr "(zmenené)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:771 src/document.c:779
 msgid "(readonly)"
 msgstr "(len pre čítanie)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:830 src/document.c:870
 msgid "This file does not end with a valid extension\n"
 msgstr "Tento súbor nemá platnú príponu.\n"
 
-#: src/document.c:872
+#: src/document.c:878
 #, c-format
 msgid "The file %s was not found."
 msgstr "Súbor %s nenájdený."
@@ -808,15 +804,15 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:482
+#: src/file.c:481
 msgid "Save As..."
 msgstr "Uložiť ako..."
 
-#: src/file.c:552
+#: src/file.c:551
 msgid "The document contains no data."
 msgstr "Dokument neobsahuje nič."
 
-#: src/file.c:563
+#: src/file.c:562
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -832,7 +828,7 @@ msgstr ""
 "\n"
 "Overte, že uvedená cesta existuje a že máte správne práva pre zápis."
 
-#: src/file.c:577
+#: src/file.c:576
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -849,7 +845,7 @@ msgstr ""
 "z neznámeho dôvodu (1). Prosím, oznámte tento problém na "
 "submit@bugs.gnome.org"
 
-#: src/file.c:595
+#: src/file.c:594
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -866,41 +862,41 @@ msgstr ""
 "z neznámeho dôvodu (2). Prosím, oznámte tento problém na "
 "submit@bugs.gnome.org"
 
-#: src/file.c:697
+#: src/file.c:696
 msgid "Could not allocate the required memory."
 msgstr "Nepodarilo sa naalokovať požadovanú pamäť."
 
-#: src/file.c:717
+#: src/file.c:716
 msgid "Error in the pipe."
 msgstr "Chyba v rúre."
 
-#: src/file.c:842
+#: src/file.c:841
 #, c-format
 msgid "Loaded %i files"
 msgstr "Načítaných %i súborov"
 
-#: src/file.c:908
+#: src/file.c:907
 msgid "Open File ..."
 msgstr "Otvoriť súbor..."
 
-#: src/file.c:1041
+#: src/file.c:1040
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' bude prepísaný. Chcete pokračovať?"
 
-#: src/file.c:1053
+#: src/file.c:1052
 msgid "Document has not been saved."
 msgstr "Dokument nebol uložený."
 
-#: src/file.c:1063
+#: src/file.c:1062
 msgid "Error saving file!"
 msgstr "Chyba pri ukladaní súboru!"
 
-#: src/file.c:1192
+#: src/file.c:1191
 msgid "You can't revert an Untitled document\n"
 msgstr "Nemôžete sa vrátiť v dokumente bez mena.\n"
 
-#: src/file.c:1205
+#: src/file.c:1204
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -909,7 +905,7 @@ msgstr ""
 "Naozaj sa chcete vrátiť k pôvodnej verzii?\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Súbor ``%s'' neexistuje.  Chcete ho vytvoriť?"
@@ -974,21 +970,21 @@ msgstr "Otvorí (zamení) .c/.h súbory"
 msgid "_New"
 msgstr "_Nový"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Vytvorí nový dokument"
 
 #: src/menus.c:68
-msgid "Save All"
-msgstr "Uložiť všetky"
+msgid "Sav_e All"
+msgstr "Uložiť všetk_y"
 
 #: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Uloží všetky otvorené súbory"
 
 #: src/menus.c:74
-msgid "Revert"
-msgstr "Vrátiť sa k pôvodnému"
+msgid "_Revert"
+msgstr "_Vrátiť"
 
 #: src/menus.c:83
 msgid "Open from _URI..."
@@ -1007,145 +1003,141 @@ msgid "Print preview"
 msgstr "Ukážka"
 
 #: src/menus.c:102
-msgid "Print preview..."
-msgstr "Ukážka..."
+msgid "Print pre_view..."
+msgstr "Ukážka p_red tlačou..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Ukážka pred tlačou"
 
 #: src/menus.c:110
-msgid "Close All"
-msgstr "Zavrieť všetky"
+msgid "C_lose All"
+msgstr "Zavr_ieť všetky"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Zavrie všetky otvorené súbory"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Prejsť na _riadok..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Prejde na daný riadok"
 
-#: src/menus.c:154
-msgid "File _Info"
-msgstr "_Informácie o súbore"
-
-#: src/menus.c:155
-msgid "Get the basic file info"
-msgstr "Zorazí základné informácie o súbore."
-
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Pridať pohľad"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Pridá nový pohľad dokumentu"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "_Odstrániť pohľad"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Odstráni pohľad dokumentu"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "_Nájsť"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "_Moduly"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Nový"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Otvorí súbor"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Uložiť"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Uloží aktuálny súbor"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Zavrieť"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Zavrie aktuálny súbor"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Tlačiť"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Vytlačí aktuálny súbor"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Vráti poslednú akciu späť"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Opakovať"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Opakuje naposledy vrátenú akciu"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Vystrihnúť"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Vystrihne výber"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Kopírovať"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Skopíruje výber"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Vložiť"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Vloží obsah schránky"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Nájsť reťazec"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit"
 msgstr "Koniec"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit the program"
 msgstr "Ukončí program"
 
 #: src/plugin.c:107
-msgid "Manager ..."
-msgstr "Správca ..."
+msgid "_Manager ..."
+msgstr "_Správca..."
 
 #: src/plugin.c:108
 msgid "Add/Remove installed plugins"
@@ -1227,7 +1219,7 @@ msgstr "Strany"
 msgid "gedit: Print Preview\n"
 msgstr "gedit: Ukážka pred tlačou\n"
 
-#: src/print-doc.c:504
+#: src/print-doc.c:505
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Strana: %i/%i"
@@ -1300,6 +1292,7 @@ msgstr ""
 "Aktuálny riadok: %i\n"
 "Aktuálny stĺpec: %i"
 
-#: src/view.c:994
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "Nemô6ete odstrániť posledný pohľad dokumentu."
+
