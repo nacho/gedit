@@ -393,7 +393,7 @@ create_gtk_selector (GtkWindow *parent,
 
 		hbox = gtk_hbox_new (FALSE, 6);
 
-		label = gtk_label_new_with_mnemonic (_("Ch_aracter Coding:"));
+		label = gtk_label_new_with_mnemonic (_("_Character Coding:"));
 		menu = gedit_encodings_option_menu_new (mode == FILESEL_SAVE);
 		
 		gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);				       		
