@@ -1,12 +1,13 @@
 
 appicondir = $(datadir)/pixmaps
-appicon_DATA = gnome-gedit.png
+appicon_DATA = gedit-icon.xpm
 
 applogodir = $(datadir)/pixmaps
 applogo_DATA = gedit-logo.png
 
 SOURCES = \
-	gedit-icon.xpm
+	gedit-icon.xpm \
+	gedit-logo.png
 
 
 EXTRA_DIST = \

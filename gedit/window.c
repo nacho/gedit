@@ -195,7 +195,7 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	
 	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
 					       &window->style->bg[GTK_STATE_NORMAL],
-					       (char **)gedit_icon);
+					       (char **)gedit_icon_xpm);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	

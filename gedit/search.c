@@ -251,6 +251,7 @@ search_text_execute ( gulong starting_position,
 	gint p1 = 0;
 	gulong p2 = 0;
 	gint text_length;
+	gint case_sensitive_mask;
 
 	gedit_debug ("\n", DEBUG_SEARCH);
 
@@ -265,38 +266,20 @@ search_text_execute ( gulong starting_position,
 		case_sensitive,
 		starting_position);
 	*/
-	
+
+	case_sensitive_mask = case_sensitive?0:32;
 	text_length = strlen (text_to_search_for);
-	if (!case_sensitive)
+	for ( p2=starting_position; p2 < gedit_search_info.buffer_length; p2 ++)
 	{
-		for ( p2=starting_position; p2 < gedit_search_info.buffer_length; p2 ++)
+		if ((gedit_search_info.buffer[p2]|case_sensitive_mask)==(text_to_search_for[p1]|case_sensitive_mask))
 		{
-			if ((gedit_search_info.buffer[p2]|32)==(text_to_search_for[p1]|32))
-			{
-				p1++;
-				if (p1==text_length)
-					break;
-			}
-			else
-				p1 = 0;
+			p1++;
+			if (p1==text_length)
+				break;
 		}
+		else
+			p1 = 0;
 	}
-	else
-	{
-		for ( p2=starting_position; p2 < gedit_search_info.buffer_length; p2 ++)
-		{
-			if (gedit_search_info.buffer[p2]==text_to_search_for[p1])
-			{
-				p1++;
-				if (p1==text_length)
-					break;
-			}
-			else
-				p1 = 0;
-		}
-	}
-		
-		
 
 	if (p2 == gedit_search_info.buffer_length)
 		return FALSE;
