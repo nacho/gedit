@@ -113,6 +113,8 @@ guint 		gE_view_get_position		(gE_view *view);
 void		gE_view_set_position		(gE_view *view, gint pos);
 guint 		gE_view_get_length 			(gE_view *view);
 
+void		gE_view_buffer_sync			(gE_view *view);
+
 void 		view_changed_cb				(GtkWidget *w, gpointer cbdata);
 
 void		gE_view_set_group_type		(gE_view *view, guint type);

@@ -77,7 +77,7 @@ gE_file_open (gE_document *doc, gchar *fname)
 	
    	  doc->buf_size = stats.st_size;
    	        
-   	  if ((tmp_buf = g_new0 (gchar, doc->buf_size)) != NULL) {
+   	  if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
    	    
    	    if ((doc->filename = g_strdup (fname)) != NULL) {
    	      
@@ -170,7 +170,10 @@ gE_file_save(gE_document *doc, gchar *fname)
 	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (view->text), 0,
 		gtk_text_get_length (GTK_TEXT (view->text)));
 */	
-	if (fputs (view->document->buf->str, fp) == EOF) {
+	/* sync the buffer */
+		gE_view_buffer_sync (view);
+	
+			if (fputs (view->document->buf->str, fp) == EOF) {
 	
 	  perror("Error saving file");
 	  fclose(fp);

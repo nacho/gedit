@@ -1,3 +1,21 @@
+Fri Nov 12 17:45:23 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (doc_insert_text_cb)
+	  (doc_delete_text_cb) (auto_indent_cb) Removed buffer updating code
+	
+	* src/gE_files.c: (gE_file_save)
+	  src/gE_mdi.c: (gE_add_view) Sync the buffer
+
+Fri Nov 12 17:28:40 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_files.c: (gE_file_open)
+	  src/gE_mdi.c: (gE_document_new_with_file) bug fix from Paul
+	     Schifferer, make the temporary buffer one byte bigger than
+	  the buffer size, to make room for a string terminator.
+	
+	* src/gE_view.[ch]: (gE_view_buffer_sync) New function to sync the
+	  document buffer.			  
+
 1999-11-01  Ruben Lopez <ryu@mundivia.es>
 
 	* Added Galician translation

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-09 15:40+0200\n"
+"POT-Creation-Date: 1999-10-20 22:41+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Date: 1999-01-13 12:44+0100\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "La extensión de navegador Web de gEdit"
-
 #: editor-plugins/email.c:89
 msgid "The gEdit Email Plugin"
 msgstr "La extensión de correo electrónico de gEdit"
+
+#: editor-plugins/browse.c:119
+msgid "The gEdit Web Browse Plugin"
+msgstr "La extensión de navegador Web de gEdit"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -205,12 +205,12 @@ msgid "Plugin Selector"
 msgstr "Selector de extensiones"
 
 #: src/gE_prefs_box.c:626
-msgid "Location"
-msgstr "Posición"
-
-#: src/gE_prefs_box.c:626
 msgid "Name"
 msgstr "Nombre"
+
+#: src/gE_prefs_box.c:626
+msgid "Location"
+msgstr "Posición"
 
 #. Plugins Settings
 #: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
@@ -292,28 +292,16 @@ msgid "Print Command:"
 msgstr "Comando de Impresión:"
 
 #: src/gE_print.c:235
+msgid "Print anyway"
+msgstr "Imprimir igual"
+
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Guardar, luego imprimir "
 
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr "Cancelar"
-
-#: src/gE_print.c:235
-msgid "Print anyway"
-msgstr "Imprimir igual"
-
-#: src/gE_view.c:46
-msgid "Save"
-msgstr "Guardar"
-
-#: src/gE_view.c:47
-msgid "Close"
-msgstr "Cerrar"
-
-#: src/gE_view.c:51
-msgid "Open (swap) .c/.h file"
-msgstr "Abrir (alternar) archivo .c/.h"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -373,12 +361,12 @@ msgid "Untitled"
 msgstr "SinNombre"
 
 #: src/menus.c:87
-msgid "Create a new document"
-msgstr "Crear un nuevo documento"
-
-#: src/menus.c:87
 msgid "_New"
 msgstr "_Nuevo"
+
+#: src/menus.c:87
+msgid "Create a new document"
+msgstr "Crear un nuevo documento"
 
 #: src/menus.c:94
 msgid "Save All"
@@ -501,8 +489,10 @@ msgid "Search for:"
 msgstr "Buscar:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -556,6 +546,18 @@ msgstr "Preguntar antes de remplazar"
 #: src/search.c:1113
 msgid "Replace?"
 msgstr "¿Remplazar?"
+
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Guardar"
+
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Abrir (alternar) archivo .c/.h"
 
 #~ msgid "Font"
 #~ msgstr "Fuente"

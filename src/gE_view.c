@@ -238,13 +238,13 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	strncpy (buffer, insertion_text, length);
 
 	doc = view->document;
-
+/*
 #ifdef DEBUG
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
 #endif
 
 	insert_into_buffer (doc, buffer, position);
-
+*/
 	gE_undo_add (buffer, position, (position + length), INSERT, doc);
 
 	data = g_malloc0 (sizeof (gE_data));
@@ -299,11 +299,11 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  return;
 	
 	doc = view->document;
-
+/*
 #ifdef DEBUG	
 	g_message ("start: %d end: %d len: %d", start_pos, end_pos, doc->buf->len);
 #endif	
-	/*if ((start_pos + end_pos) < doc->buf->len)*/
+	if ((start_pos + end_pos) < doc->buf->len)
 	if (end_pos + (end_pos - start_pos) <= doc->buf->len) {
 	
 #ifdef DEBUG
@@ -319,7 +319,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  doc->buf = g_string_truncate (doc->buf, start_pos);
 	
 	}
-
+*/
 	buffer = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	gE_undo_add (buffer, start_pos, end_pos, DELETE, doc);
 
@@ -457,8 +457,8 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
 			whitespace, strlen (whitespace));
 	
-		insert_into_buffer (doc, whitespace, i);
-
+/*		insert_into_buffer (doc, whitespace, i);
+*/
 		
 
 	}
@@ -1004,6 +1004,21 @@ void gE_view_set_selection (gE_view *view, gint start, gint end)
 	
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 
+}
+
+/* Sync the itnernal document buffer with what is visible in the text box */
+void gE_view_buffer_sync (gE_view *view) 
+{
+	gchar *buf;
+	gE_document *doc = view->document;
+
+	buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
+	   									  0, gE_view_get_length (view)));
+	
+	doc->buf = g_string_new (buf);
+	
+	g_free (buf);				   									  
+	
 }
 
 void gE_view_refresh (gE_view *view)

@@ -331,7 +331,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
 	  
    	    doc->buf_size = stats.st_size;
    	        
-   	    if ((tmp_buf = g_new0 (gchar, doc->buf_size)) != NULL) {
+   	    if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
    	    
    	      if ((doc->filename = g_strdup (filename)) != NULL) {
    	      
@@ -429,18 +429,8 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	  g_print ("contents: %d\n",
 		    GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
 	   
-	  buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
-	   									  0, gE_view_get_length (view)));
-	   
-	  if (strcmp (doc->buf->str, buf)) {
-	   
-	     /*g_free (doc->buf->str);*/
-	     
-	     g_warning ("Buffer problem!");
-	   	
-	     doc->buf = g_string_new (buf);
-	   	
-	  }
+	  /* sync the buffer before adding the view */
+	  	  gE_view_buffer_sync (view);
 	   
 	  child = gnome_mdi_get_child_from_view (mdi->active_view);
 	   
