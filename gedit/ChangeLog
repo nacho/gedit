@@ -1,3 +1,11 @@
+2004-12-07  Arvind Samptur  <arvind.samptur@wipro.com>
+
+	Patch from Srirama Sharma  <srirama.sharma@wipro.com>
+
+	* gedit/dialogs/gedit-page-setup-dialog.c: Setting the AtkRelation 
+	explicitly for the mnemonic widget is causing gnopernicus to read 
+	the label thrice. Hence removing the explicit declaration will fix the Bug #160322.
+
 2004-12-06  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-document.[ch]: store the myme_type in Document->priv.

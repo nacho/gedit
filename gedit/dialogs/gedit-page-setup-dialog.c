@@ -425,19 +425,6 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->numbers_font_label), 
 				       dlg->numbers_fontbutton);
 
-	gedit_utils_set_atk_name_description (dlg->body_fontbutton, _("Body font picker"),
-		_("Push this button to select the font to be used to print the body of the document"));
-	gedit_utils_set_atk_name_description (dlg->headers_fontbutton, _("Page headers font picker"),
-		_("Push this button to select the font to be used to print the page headers"));
-	gedit_utils_set_atk_name_description (dlg->numbers_fontbutton, _("Line numbers font picker"),
-		_("Push this button to select the font to be used to print line numbers"));
-
-	gedit_utils_set_atk_relation (dlg->body_fontbutton, dlg->body_font_label, 
-							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->headers_fontbutton, dlg->headers_font_label, 
-							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->numbers_fontbutton, dlg->numbers_font_label, 
-							ATK_RELATION_LABELLED_BY);
 
 	/* Set initial values */
 	font = gedit_prefs_manager_get_print_font_body ();
