@@ -77,6 +77,9 @@ static toolbar_data_t toolbar_data[] = {
 	{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ " Prefs ", "Preferences", "Toolbar/Prefs", tb_prefs_xpm,
 		(GtkSignalFunc)gE_prefs_dialog },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ " Quit ", "Quit", "Toolbar/Quit", tb_exit_xpm,
+		(GtkSignalFunc)file_quit_cb },
 
 	{ NULL, NULL, NULL, NULL, NULL }
 };
@@ -106,6 +109,9 @@ static toolbar_data_t toolbar_data[] = {
 		{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ N_(" Prefs "), N_("Preferences"), "Toolbar/Prefs",
 		GNOME_STOCK_PIXMAP_PREFERENCES, (GtkSignalFunc)gE_prefs_dialog },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ N_(" Quit "), N_("Quit"), "Toolbar/Quit",
+		GNOME_STOCK_PIXMAP_EXIT, (GtkSignalFunc)file_quit_cb },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
