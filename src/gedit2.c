@@ -147,11 +147,9 @@ main (int argc, char **argv)
 	CommandLineData *data = NULL;
 	gint i;
 
-#ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-#endif
 
 	/* Initialize gnome program */
 	program = gnome_program_init ("gedit", VERSION,
