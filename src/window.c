@@ -229,7 +229,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 	
 	gedit_debug (DEBUG_WINDOW, "");
 
-	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
 	
 	switch (settings->mdi_mode)
 	{
@@ -247,7 +247,8 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 			sensitivity = TRUE;
 		break;
 	default:
-		g_assert_not_reached();
+		g_warning ("Should not happen.\n");
+		return;
 	}
 
 	/* get the UI_info structures */
@@ -269,7 +270,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 				if (sub_ui_info [sub_count].moreinfo == gedit_view_add_cb)
 				{
 					widget =  sub_ui_info [sub_count].widget;
-					if (widget)
+					if (GTK_IS_WIDGET (widget))
 						gtk_widget_set_sensitive (widget, sensitivity);
 				}
 				if (sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb)
@@ -282,7 +283,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 						if (g_list_length(doc->views)<2)
 							sensitivity = FALSE;
 					widget =  sub_ui_info [sub_count].widget;
-					if (widget)
+					if (GTK_IS_WIDGET (widget))
 						gtk_widget_set_sensitive (widget, sensitivity);
 				}
 				if (sub_ui_info [sub_count].moreinfo == file_revert_cb)
@@ -293,7 +294,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 					doc = gedit_document_current();
 
 					widget =  sub_ui_info [sub_count].widget;
-					if (widget != NULL && doc != NULL)
+					if (GTK_IS_WIDGET (widget) && doc != NULL)
 						gtk_widget_set_sensitive (widget, doc->filename!=NULL);
 				}
 				sub_count++;
@@ -410,9 +411,9 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	if (sensitive && g_list_length (mdi->children) == 0)
 		return;
 
-	app = g_list_nth_data (mdi->windows, 0);
+	app = GNOME_APP (g_list_nth_data (mdi->windows, 0));
 
-	g_return_if_fail (app!=NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
 
 	/* get the UI_info structures */
 	ui_info = gnome_mdi_get_toolbar_info (app);

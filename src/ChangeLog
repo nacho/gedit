@@ -1,5 +1,11 @@
 2000-10-28  Chema Celorio  <chema@celorio.com>
 
+	* window.c (gedit_window_set_view_menu_sensitivity): add some
+	g_return_ and GTK_IS_WIDGET to avoid a crash.
+	(gedit_window_set_widgets_sensitivity): ditto
+
+2000-10-28  Chema Celorio  <chema@celorio.com>
+	
 	* print.c (g_unichar_to_utf8): new function temp.
 	(print_show_iso8859_1): new function so that we can print
 	with the new gnome-print. Remove when we use unicode internally

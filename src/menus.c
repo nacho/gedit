@@ -33,7 +33,7 @@
 #include "document.h"
 #include "dialogs/dialogs.h"
 
-#define __GEDIT_DISABLE_VIEW_MENU /* FIXME: This is not working correctly. Chema */
+#define GEDIT_DISABLE_VIEW_MENU /* FIXME: This is not working correctly. Chema */
 
 
 GnomeUIInfo popup_menu[] =
