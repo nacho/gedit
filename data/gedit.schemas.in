@@ -262,6 +262,31 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/right_margin/display_right_margin</key>
+      <applyto>/apps/gedit-2/preferences/editor/right_margin/display_right_margin</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+	<short>Display Right Margin</short>
+	<long>Whether gedit should display the right margin in the editing
+	area.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/right_margin/right_margin_position</key>
+      <applyto>/apps/gedit-2/preferences/editor/right_margin/right_margin_position</applyto>
+      <owner>gedit</owner>
+      <type>int</type>
+      <default>80</default>
+      <locale name="C">
+	<short>Right Margin Position</short>
+	<long>Specifies the position of the right margin.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <key>/schemas/apps/gedit-2/preferences/ui/toolbar/toolbar_visible</key>
       <applyto>/apps/gedit-2/preferences/ui/toolbar/toolbar_visible</applyto>
       <owner>gedit</owner>
@@ -440,6 +465,18 @@
 	<short>Encodings shown in menu</short>
 	<long>List of encodings shown in Character Coding menu in open/save file selector.
 	Only recognized encodings are used.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/syntax_highlighting/enable</key>
+      <applyto>/apps/gedit-2/preferences/syntax_highlighting/enable</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Enable Syntax Highlighting</short>
+	<long>Whether gedit should enable syntax highlighting.</long>
       </locale>
     </schema>
 

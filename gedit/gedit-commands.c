@@ -490,25 +490,14 @@ gedit_cmd_search_goto_line (BonoboUIComponent *uic, gpointer user_data, const gc
 void
 gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	static GtkWidget *dlg = NULL;
+	BonoboWindow *active_window;
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	if (dlg != NULL)
-	{
-		gtk_window_present (GTK_WINDOW (dlg));
-		gtk_window_set_transient_for (GTK_WINDOW (dlg),	
-					      GTK_WINDOW (gedit_get_active_window ()));
+	active_window = gedit_get_active_window ();
+	g_return_if_fail (active_window != NULL);
 
-		return;
-	}
-		
-	dlg = gedit_preferences_dialog_new (GTK_WINDOW (gedit_get_active_window ()));
-
-	g_signal_connect (G_OBJECT (dlg), "destroy",
-			  G_CALLBACK (gtk_widget_destroyed), &dlg);
-	
-	gtk_widget_show (dlg);
+	gedit_show_preferences_dialog (GTK_WINDOW (active_window));
 }
 
 void

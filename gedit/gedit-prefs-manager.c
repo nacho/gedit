@@ -1036,6 +1036,21 @@ gedit_prefs_manager_shown_in_menu_encodings_can_set (void)
 
 }
 
+/* Display Right Margin */
+DEFINE_BOOL_PREF (display_right_margin,
+		  GPM_DISPLAY_RIGHT_MARGIN,
+		  GPM_DEFAULT_DISPLAY_RIGHT_MARGIN)
+
+/* Right Margin Position */	
+DEFINE_INT_PREF (right_margin_position,
+		 GPM_RIGHT_MARGIN_POSITION,
+		 GPM_DEFAULT_RIGHT_MARGIN_POSITION)
+
+/* Enable syntax highlighting */
+DEFINE_BOOL_PREF (enable_syntax_highlighting,
+		  GPM_SYNTAX_HL_ENABLE,
+		  GPM_DEFAULT_SYNTAX_HL_ENABLE)
+
 
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 

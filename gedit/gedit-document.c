@@ -376,7 +376,7 @@ gedit_document_new (void)
   	
 	document->priv->untitled_number = gedit_document_get_untitled_number ();
 	g_return_val_if_fail (document->priv->untitled_number > 0, NULL);
-		
+	
 	return document;
 }
 
@@ -2276,6 +2276,9 @@ gedit_document_set_language (GeditDocument *doc, GtkSourceLanguage *lang)
 		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), FALSE);
 
 	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), lang);
+
+	if (lang != NULL)
+		gedit_language_init_tag_styles (lang);
 
 	if (doc->priv->uri != NULL)
 	{

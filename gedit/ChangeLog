@@ -1,3 +1,35 @@
+2003-09-18  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* dialogs/gedit-preferences.glade2:
+	* dialogs/gedit-preferences-dialog.[ch]: rewritten
+
+	* gedit-commands.c (gedit_cmd_settings_preferences): use the
+	  new preferences dialog
+
+	* gedit-document.c (gedit_document_set_language): call 
+	  gedit_language_init_tag_styles if needed
+
+	* gedit-languages-manager.c (gedit_get_languages_manager): initialize
+	  gconf_client
+	  (get_gconf_key)(gdk_color_to_string)(tag_style_to_string)
+	  (string_to_tag_style)(gedit_language_set_tag_style
+	  (gedit_language_init_tag_styles): new functions
+
+	* gedit-languages-manager.h (gedit_language_set_tag_style)
+	  (gedit_language_init_tag_styles): new functions
+
+	* gedit-prefs-manager-app.c (gedit_prefs_manager_right_margin_changed)
+	  (gedit_prefs_manager_syntax_hl_enable_changed): new functions
+
+	* gedit-prefs-manager.[ch]: manages the new gconf keys added in 
+	  the schema file
+
+	* gedit-view.c (gedit_view_init): show right margin if needed
+
+2003-09-09  Paolo Maggi  <paolo.maggi@polito.it>
+
+	[ gedit 2.4.0 released ]
+
 2003-09-09  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* Makefile.am: don't distribute generated files (patch by Michael Meeks)

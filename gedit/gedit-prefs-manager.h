@@ -73,6 +73,11 @@
 #define GPM_LINE_NUMBERS_DIR		GPM_PREFS_DIR "/editor/line_numbers"
 #define GPM_DISPLAY_LINE_NUMBERS 	GPM_LINE_NUMBERS_DIR "/display_line_numbers"
 
+#define GPM_RIGHT_MARGIN_DIR		GPM_PREFS_DIR "/editor/right_margin"
+#define GPM_DISPLAY_RIGHT_MARGIN	GPM_RIGHT_MARGIN_DIR "/display_right_margin"
+#define GPM_RIGHT_MARGIN_POSITION	GPM_RIGHT_MARGIN_DIR "/right_margin_position"
+
+
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
 #define GPM_TOOLBAR_VISIBLE	 	GPM_TOOLBAR_DIR "/toolbar_visible"
@@ -105,6 +110,10 @@
 #define GPM_ENCODINGS_DIR		GPM_PREFS_DIR "/encodings"
 #define GPM_AUTO_DETECTED_ENCODINGS	GPM_ENCODINGS_DIR "/auto_detected"
 #define GPM_SHOWN_IN_MENU_ENCODINGS	GPM_ENCODINGS_DIR "/shown_in_menu"
+
+/* Syntax highlighting */
+#define GPM_SYNTAX_HL_DIR		GPM_PREFS_DIR "/syntax_highlighting"
+#define GPM_SYNTAX_HL_ENABLE		GPM_SYNTAX_HL_DIR "/enable"
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -163,6 +172,10 @@
 #define GPM_DEFAULT_WINDOW_WIDTH_STR	"650"
 #define GPM_DEFAULT_WINDOW_HEIGHT_STR	"500"
 
+#define GPM_DEFAULT_DISPLAY_RIGHT_MARGIN  0 /* FALSE */
+#define GPM_DEFAULT_RIGHT_MARGIN_POSITION 80
+
+#define GPM_DEFAULT_SYNTAX_HL_ENABLE	1 /* TRUE */
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -329,6 +342,21 @@ GSList 			*gedit_prefs_manager_get_auto_detected_encodings (void);
 GSList			*gedit_prefs_manager_get_shown_in_menu_encodings (void);
 void			 gedit_prefs_manager_set_shown_in_menu_encodings (const GSList *encs);
 gboolean 		 gedit_prefs_manager_shown_in_menu_encodings_can_set (void);
+
+/* Display right margin */
+gboolean		 gedit_prefs_manager_get_display_right_margin	(void);
+void			 gedit_prefs_manager_set_display_right_margin	(gboolean drm);
+gboolean		 gedit_prefs_manager_display_right_margin_can_set (void);
+
+/* Right margin position */
+gint		 	 gedit_prefs_manager_get_right_margin_position	(void);
+void 			 gedit_prefs_manager_set_right_margin_position	(gint rmp);
+gboolean		 gedit_prefs_manager_right_margin_position_can_set (void);
+
+/* Enable syntax highlighting */
+gboolean 		 gedit_prefs_manager_get_enable_syntax_highlighting (void);
+void			 gedit_prefs_manager_set_enable_syntax_highlighting (gboolean esh);
+gboolean		 gedit_prefs_manager_enable_syntax_highlighting_can_set (void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

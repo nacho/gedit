@@ -42,6 +42,7 @@
 #include "gedit-view.h"
 #include "gedit-mdi.h"
 #include "gedit2.h"
+#include <gtksourceview/gtksourceview.h>
 
 static void		gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 				   				 guint cnxn_id,
@@ -72,7 +73,14 @@ static void 		gedit_prefs_manager_undo_changed (GConfClient *client,
 							  guint cnxn_id, 
 							  GConfEntry *entry, 
 							  gpointer user_data);
-
+static void 		gedit_prefs_manager_right_margin_changed (GConfClient *client,
+								  guint cnxn_id, 
+								  GConfEntry *entry, 
+								  gpointer user_data);
+static void 		gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
+								      guint cnxn_id, 
+								      GConfEntry *entry, 
+								      gpointer user_data);
 
 static gint window_state = -1;
 static gint window_height = -1;
@@ -131,7 +139,15 @@ gedit_prefs_manager_app_init (void)
 				gedit_prefs_manager_undo_changed,
 				NULL, NULL, NULL);
 
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_RIGHT_MARGIN_DIR,
+				gedit_prefs_manager_right_margin_changed,
+				NULL, NULL, NULL);
 
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SYNTAX_HL_ENABLE,
+				gedit_prefs_manager_syntax_hl_enable_changed,
+				NULL, NULL, NULL);
 	}
 
 	return gedit_prefs_manager != NULL;	
@@ -147,7 +163,6 @@ gedit_prefs_manager_app_shutdown ()
 
 	gnome_config_sync ();
 }
-
 
 
 /* Window state */
@@ -710,6 +725,124 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 		
 			docs = g_list_next (docs);
 		}
+	}
+}
+
+static void 
+gedit_prefs_manager_right_margin_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_RIGHT_MARGIN_POSITION) == 0)
+	{
+		gint pos;
+		GList *children;
+		
+		if (entry->value->type == GCONF_VALUE_INT)
+			pos = gconf_value_get_int (entry->value);
+		else
+			pos = GPM_DEFAULT_RIGHT_MARGIN_POSITION;
+	
+		pos = CLAMP (pos, 1, 160);
+
+		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+		while (children != NULL)
+		{
+			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+			while (views != NULL)
+			{
+				GeditView *v;
+				GtkSourceView *sv;
+			       
+				v = GEDIT_VIEW (views->data);
+				sv = GTK_SOURCE_VIEW (gedit_view_get_gtk_text_view (v));
+
+				gtk_source_view_set_margin (sv, pos);
+			
+				views = views->next;
+			}
+		
+			children = children->next;
+		}
+
+	}
+	else if (strcmp (entry->key, GPM_DISPLAY_RIGHT_MARGIN) == 0)
+	{
+		gboolean display;
+			
+		GList *children;
+		
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			display = gconf_value_get_bool (entry->value);	
+		else
+			display = GPM_DEFAULT_DISPLAY_RIGHT_MARGIN;
+	
+		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+		while (children != NULL)
+		{
+			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+			while (views != NULL)
+			{
+				GeditView *v;
+				GtkSourceView *sv;
+			       
+				v = GEDIT_VIEW (views->data);
+				sv = GTK_SOURCE_VIEW (gedit_view_get_gtk_text_view (v));
+
+				gtk_source_view_set_show_margin (sv, display);
+				
+				views = views->next;
+			}
+		
+			children = children->next;
+		}
+	}
+}
+
+static void 
+gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_SYNTAX_HL_ENABLE) == 0)
+	{
+		gboolean enable;
+			
+		GList *docs;
+		GList *l;
+		
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			enable = gconf_value_get_bool (entry->value);	
+		else
+			enable = GPM_DEFAULT_SYNTAX_HL_ENABLE;
+	
+		docs = gedit_get_open_documents ();
+		l = docs;
+
+		while (l != NULL)
+		{
+			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
+			
+			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (l->data),
+							 enable);
+
+			l = g_list_next (l);		
+		}
+
+		g_list_free (docs);
 	}
 }
 

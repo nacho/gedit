@@ -97,6 +97,7 @@ void		gedit_view_set_auto_indent	(GeditView *view, gboolean enable);
 
 void		gedit_view_show_line_numbers 	(GeditView *view, gboolean visible);
 
+
 void		gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status);
 void		gedit_view_set_overwrite_mode_statusbar  (GeditView *view, GtkWidget* status);
 

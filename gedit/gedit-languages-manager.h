@@ -32,11 +32,16 @@
 
 #include <gtksourceview/gtksourcelanguagesmanager.h>
 
-GtkSourceLanguagesManager *gedit_get_languages_manager (void);
+GtkSourceLanguagesManager *gedit_get_languages_manager    (void);
 
 GtkSourceLanguage	  *gedit_languages_manager_get_language_from_id
-						       (GtkSourceLanguagesManager *lm,
-						        const gchar               *lang_name);
+						          (GtkSourceLanguagesManager *lm,
+						           const gchar               *lang_id);
 
+void			   gedit_language_set_tag_style	  (GtkSourceLanguage         *language,
+							   const gchar               *tag_id,
+							   const GtkSourceTagStyle   *style);
+
+void 			   gedit_language_init_tag_styles (GtkSourceLanguage         *language);
 
 #endif /* __GEDIT_LANGUAGES_MANAGER_H__ */
