@@ -290,13 +290,11 @@ static void
 sort_document (SortDialog * dlg)
 {
 	GeditDocument *doc;
+	GtkTextIter start, end;
 	gchar *buffer;
 	gchar *p;
-	gint start;
-	gint end;
 	gunichar c;
 	gchar *last_row = NULL;
-	gint old_cur_pos;
 	gpointer *lines;
 	gint cont;
 	SortInfo *sort_info;
@@ -326,13 +324,16 @@ sort_document (SortDialog * dlg)
 	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 					      (dlg->col_num_spinbutton)) - 1;
 
-	if (!gedit_document_get_selection (doc, &start, &end)) {
-		buffer = gedit_document_get_chars (doc, 0, -1);
-		start = 0;
-		end = -1;
-	} else {
-		buffer = gedit_document_get_chars (doc, start, end);
+	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),			
+						   &start, &end))
+	{
+		/* no selection, get the whole doc */
+		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),			
+					    &start, &end);
 	}
+
+	buffer = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
+					    &start, &end, TRUE);
 
 	lines = g_new0 (gpointer, gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc)) + 1);
 
@@ -363,38 +364,37 @@ sort_document (SortDialog * dlg)
 
 	lines [cont] = buffer; 
 	++cont;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "Sort list...");
 
 	g_qsort_with_data (lines, cont, sizeof (gpointer), my_compare, sort_info);
 
 	gedit_debug (DEBUG_PLUGINS, "Rebuilding document...");
 
-	old_cur_pos = gedit_document_get_cursor (doc);
-
 	gedit_document_begin_not_undoable_action (doc);
-	gedit_document_delete_text (doc, start, end);
 
-	gedit_document_set_cursor (doc, start);
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start, &end);
 
 	cont = 0;
 
-	while (lines [cont] != NULL) {
+	while (lines [cont] != NULL)
+	{
 		gchar *current_row = lines [cont];
 
 		/* Don't insert this row if it's the same as the last one
 		 * and the user has specified to remove duplicates */
 		if (!sort_info->remove_duplicates ||
 		    last_row == NULL ||
-		    (strcmp (last_row, current_row) != 0)) {
-			gedit_document_insert_text_at_cursor (doc,
-							      current_row,
-							      -1);
+		    (strcmp (last_row, current_row) != 0))
+		{
+			gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+						&start,
+						current_row, -1);
 
 			if (lines [cont + 1] != NULL)
-				gedit_document_insert_text_at_cursor (doc,
-								      "\n",
-								      -1);
+				gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+							&start,
+							"\n", -1);
 		}
 
 		last_row = current_row;
@@ -402,9 +402,9 @@ sort_document (SortDialog * dlg)
 		++cont;
 	}
 
-	gedit_document_set_cursor (doc, old_cur_pos);
-
 	gedit_document_end_not_undoable_action (doc);
+
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &start);
 
 	g_free (lines);
 	g_free (buffer);
