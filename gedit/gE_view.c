@@ -677,7 +677,6 @@ static void gE_view_init (gE_view *view)
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
 					GTK_SIGNAL_FUNC (gE_event_key_press), 0);
 
-		
 
 	/* Handle Auto Indent */
 	gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
@@ -843,7 +842,7 @@ GtkWidget *gE_view_new (gE_document *doc)
 	gE_view *view = gtk_type_new (gE_view_get_type ());
 	
 	view->document = doc;
-
+	
 	if (view->document->buf) {
 	
 #ifdef DEBUG

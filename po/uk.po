@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.5.4\n"
-"POT-Creation-Date: 1999-09-14 00:26+0200\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1999-09-20 17:36+0300\n"
 "Last-Translator: Yuri Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -21,42 +21,33 @@ msgstr "Доповненя gEdit - електронна пошта"
 msgid "The gEdit Web Browse Plugin"
 msgstr "Доповненя gEdit - нав╕гатор Web"
 
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "╤дентиф╕катор документа - %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Командний ╕нтерпретатор"
-
-#: src/commands.c:215
+#: src/commands.c:93
 msgid "Could not save file!"
 msgstr "Неможливо зберегти файл!"
 
-#: src/commands.c:550
+#: src/commands.c:426
 msgid "Open File..."
 msgstr "В╕дкрити файл..."
 
-#: src/commands.c:603 src/commands.c:645
+#: src/commands.c:480 src/commands.c:528
 msgid "Read only file!"
 msgstr "Файл лише для зчитування!"
 
-#: src/commands.c:677 src/commands.c:742
+#: src/commands.c:567 src/commands.c:637
 msgid "Error saving file!"
 msgstr "Помилка при збереженн╕ файла!"
 
-#: src/commands.c:706
+#: src/commands.c:597
 #, c-format
 msgid "Save %s As..."
 msgstr "Записати %s як..."
 
-#: src/commands.c:774
+#: src/commands.c:670
 #, c-format
 msgid "Save %s As ..."
 msgstr "Записати %s як..."
 
-#: src/commands.c:859
+#: src/commands.c:756
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -65,19 +56,19 @@ msgstr ""
 "Ви впевнен╕, що хочете в╕дм╕нити ус╕ зм╕ни?\n"
 "(%s)"
 
-#: src/commands.c:907
+#: src/commands.c:804
 msgid "Document Unchanged..."
 msgstr "Документ не зм╕нено..."
 
-#: src/commands.c:911
+#: src/commands.c:808
 msgid "Document Unsaved..."
 msgstr "Документ не збережено..."
 
-#: src/commands.c:1102
+#: src/commands.c:991
 msgid "_File/"
 msgstr "_Файл/"
 
-#: src/commands.c:1111 src/commands.c:1112
+#: src/commands.c:1000 src/commands.c:1001
 msgid "_File"
 msgstr "_Файл"
 
@@ -85,42 +76,13 @@ msgstr "_Файл"
 msgid "With special thanks to:"
 msgstr "Особлива подяка:"
 
-#: src/gE_about.c:49
+#: src/gE_about.c:47
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "© 1998, 1999 Alex Roberts та Evan Lawrence"
 
-#: src/gE_about.c:51
+#: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit - малий та легкий текстовий редактор для GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Вир╕зати"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Коп╕ювати"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Вставити"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Зберегти"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Закрити"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Друкувати"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "В╕дкрити (обм╕няти) .c/.h файл"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -154,7 +116,7 @@ msgstr "_Видалити вигляд"
 msgid "Remove view of the document"
 msgstr "Видалення вигляду документа"
 
-#: src/gE_mdi.c:484
+#: src/gE_mdi.c:482
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' було модиф╕ковано. Зберегти його?"
@@ -310,7 +272,11 @@ msgstr "В╕кно"
 msgid "Document"
 msgstr "Документ"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Друкувати"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -319,17 +285,21 @@ msgstr ""
 "Введ╕ть команду друку\n"
 "Не забудьте включити '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Команда друку:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Друк в будь-якому випадку"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Зберегти, та друкувати "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -392,7 +362,7 @@ msgstr "Не названий"
 msgid "_New"
 msgstr "_Новий"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Створення нового документа"
 
@@ -517,8 +487,10 @@ msgid "Search for:"
 msgstr "Шукати:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -573,54 +545,68 @@ msgstr "Питати перед зам╕ною"
 msgid "Replace?"
 msgstr "Зам╕нити?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Новий"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Зберегти"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "В╕дкрити"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Закрити"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "В╕дкриття файла"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "В╕дкрити (обм╕няти) .c/.h файл"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Збереження поточного файла"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "╤дентиф╕катор документа - %ld.\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Закриття поточного файла"
+#~ msgid "Shell"
+#~ msgstr "Командний ╕нтерпретатор"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Друк поточного файла"
+#~ msgid "Cut"
+#~ msgstr "Вир╕зати"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Вир╕зання вид╕лення"
+#~ msgid "Copy"
+#~ msgstr "Коп╕ювати"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Коп╕ювання вид╕лення"
+#~ msgid "Paste"
+#~ msgstr "Вставити"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Вставка буфера обм╕ну"
+#~ msgid "New"
+#~ msgstr "Новий"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Шукати"
+#~ msgid "Open"
+#~ msgstr "В╕дкрити"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Пошук уривку тексту"
+#~ msgid "Open a file"
+#~ msgstr "В╕дкриття файла"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Вих╕д"
+#~ msgid "Save the current file"
+#~ msgstr "Збереження поточного файла"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Вих╕д з програми"
+#~ msgid "Close the current file"
+#~ msgstr "Закриття поточного файла"
+
+#~ msgid "Print the current file"
+#~ msgstr "Друк поточного файла"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Вир╕зання вид╕лення"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Коп╕ювання вид╕лення"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Вставка буфера обм╕ну"
+
+#~ msgid "Find"
+#~ msgstr "Шукати"
+
+#~ msgid "Search for a string"
+#~ msgstr "Пошук уривку тексту"
+
+#~ msgid "Exit"
+#~ msgstr "Вих╕д"
+
+#~ msgid "Exit the program"
+#~ msgstr "Вих╕д з програми"

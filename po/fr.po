@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1998-02-28 19:57+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -20,15 +20,6 @@ msgstr "Le plugin Email de gEdit"
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "Le plugin Web de gEdit"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Docid est %ld!\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Shell"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -92,35 +83,6 @@ msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit est un petit éditeur de texte pour GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Couper"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Copier"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Coller"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Enregistrer"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Fermer"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Imprimer"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Ouvrir (échanger) fichier .c/.h"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -311,7 +273,11 @@ msgstr "Fenêtre"
 msgid "Document"
 msgstr "Document"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Imprimer"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -320,17 +286,21 @@ msgstr ""
 "Entrez la commande d'impression ci-dessous\n"
 "Pensez à inclure '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Commande d'impression:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Imprimer quand même"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Enregistrer, puis imprimer "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -393,7 +363,7 @@ msgstr "SansTitre"
 msgid "_New"
 msgstr "_Nouveau"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Créér un nouveau document"
 
@@ -518,8 +488,10 @@ msgid "Search for:"
 msgstr "Rechercher:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -574,57 +546,71 @@ msgstr "Demander confirmation avant le remplacement"
 msgid "Replace?"
 msgstr "Remplacer?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Nouveau"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Enregistrer"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Ouvrir"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Fermer"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Ouvrir un fichier"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Ouvrir (échanger) fichier .c/.h"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Enregistrer le fichier courant"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Docid est %ld!\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Fermer le fichier courant"
+#~ msgid "Shell"
+#~ msgstr "Shell"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Imprimer le fichier courant"
+#~ msgid "Cut"
+#~ msgstr "Couper"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Couper la sélection"
+#~ msgid "Copy"
+#~ msgstr "Copier"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Copier la sélection"
+#~ msgid "Paste"
+#~ msgstr "Coller"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Coller le presse-papier"
+#~ msgid "New"
+#~ msgstr "Nouveau"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Rechercher"
+#~ msgid "Open"
+#~ msgstr "Ouvrir"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Rechercher une chaine"
+#~ msgid "Open a file"
+#~ msgstr "Ouvrir un fichier"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Quitter"
+#~ msgid "Save the current file"
+#~ msgstr "Enregistrer le fichier courant"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Quitter le programme"
+#~ msgid "Close the current file"
+#~ msgstr "Fermer le fichier courant"
+
+#~ msgid "Print the current file"
+#~ msgstr "Imprimer le fichier courant"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Couper la sélection"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copier la sélection"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Coller le presse-papier"
+
+#~ msgid "Find"
+#~ msgstr "Rechercher"
+
+#~ msgid "Search for a string"
+#~ msgstr "Rechercher une chaine"
+
+#~ msgid "Exit"
+#~ msgstr "Quitter"
+
+#~ msgid "Exit the program"
+#~ msgstr "Quitter le programme"
 
 #~ msgid "Font"
 #~ msgstr "Police"

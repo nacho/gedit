@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -20,15 +20,6 @@ msgstr "gEdits epost-tillägg"
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "gEdits webläsar-tillägg"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Dokid't är %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Skal"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -92,35 +83,6 @@ msgstr "(C) 1998, 1999 Alex Roberts och Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit är en liten och tunn texteditor för GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Klipp ut"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Kopiera"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Klistra in"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Spara"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Stäng"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Skriv ut"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Öppna (byt) .c/.h filen"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -311,7 +273,11 @@ msgstr "Fönster"
 msgid "Document"
 msgstr "Dokument"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Skriv ut"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -320,17 +286,21 @@ msgstr ""
 "Mata in utskriftskommano nedan\n"
 "Glöm ej att inkludera '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Utskriftskommando:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Skriv ut ändå"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Spara, sen skriv ut"
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -393,7 +363,7 @@ msgstr "Namnlös"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Skapa nytt dokument"
 
@@ -522,8 +492,10 @@ msgid "Search for:"
 msgstr "Sök efter:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -578,57 +550,71 @@ msgstr "Fråga före ersättning"
 msgid "Replace?"
 msgstr "Ersätt?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Nytt"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Spara"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Öppna"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Stäng"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Öppna en fil"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Öppna (byt) .c/.h filen"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Spara nuvarande fil"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Dokid't är %ld.\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Stäng nuvarande fil"
+#~ msgid "Shell"
+#~ msgstr "Skal"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Skriv ut nuvarande fil"
+#~ msgid "Cut"
+#~ msgstr "Klipp ut"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Klipp ut markeringen"
+#~ msgid "Copy"
+#~ msgstr "Kopiera"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Kopiera markeringen"
+#~ msgid "Paste"
+#~ msgstr "Klistra in"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Klistra in från urklippet"
+#~ msgid "New"
+#~ msgstr "Nytt"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Sök"
+#~ msgid "Open"
+#~ msgstr "Öppna"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Sök efter en sträng"
+#~ msgid "Open a file"
+#~ msgstr "Öppna en fil"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Avsluta"
+#~ msgid "Save the current file"
+#~ msgstr "Spara nuvarande fil"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Avslutar programmet"
+#~ msgid "Close the current file"
+#~ msgstr "Stäng nuvarande fil"
+
+#~ msgid "Print the current file"
+#~ msgstr "Skriv ut nuvarande fil"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Klipp ut markeringen"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Kopiera markeringen"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Klistra in från urklippet"
+
+#~ msgid "Find"
+#~ msgstr "Sök"
+
+#~ msgid "Search for a string"
+#~ msgstr "Sök efter en sträng"
+
+#~ msgid "Exit"
+#~ msgstr "Avsluta"
+
+#~ msgid "Exit the program"
+#~ msgstr "Avslutar programmet"
 
 #~ msgid "Font"
 #~ msgstr "Typsnitt"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1999-06-09 13:27:10+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -20,15 +20,6 @@ msgstr "gEdit 전자우편 플러그인"
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "gEdit 웹 브라우즈 플러그인"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Docid는 %ld입니다.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "쉘"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -91,35 +82,6 @@ msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "자르기"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "복사"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "붙이기"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "저장"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "닫기"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "인쇄"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr ".c/.h 파일 (스왑) 열기"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -315,7 +277,11 @@ msgstr "창"
 msgid "Document"
 msgstr "문서 탭(_D)"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "인쇄"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -324,17 +290,21 @@ msgstr ""
 "밑에 인쇄 명령을 입력하세요.\n"
 "'%s'를 포함해야 합니다."
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "인쇄 명령:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "무조건 인쇄"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " 저장 후 인쇄 "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -397,7 +367,7 @@ msgstr "이름없음"
 msgid "_New"
 msgstr "새 문서(_N)"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "새 문서 생성"
 
@@ -526,8 +496,10 @@ msgid "Search for:"
 msgstr "찾기:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -583,57 +555,71 @@ msgstr "바꾸기 전에 묻기"
 msgid "Replace?"
 msgstr "바꿀까요?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "새 문서"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "저장"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "열기"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "닫기"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "파일 열기"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr ".c/.h 파일 (스왑) 열기"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "현재 파일 저장"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Docid는 %ld입니다.\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "현재 파일 닫기"
+#~ msgid "Shell"
+#~ msgstr "쉘"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "현재 파일 인쇄"
+#~ msgid "Cut"
+#~ msgstr "자르기"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "선택 내용 잘라내기"
+#~ msgid "Copy"
+#~ msgstr "복사"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "선택 내용 복사하기"
+#~ msgid "Paste"
+#~ msgstr "붙이기"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "클립보드에서 붙이기"
+#~ msgid "New"
+#~ msgstr "새 문서"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "찾기"
+#~ msgid "Open"
+#~ msgstr "열기"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "문자열 찾기"
+#~ msgid "Open a file"
+#~ msgstr "파일 열기"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "종료"
+#~ msgid "Save the current file"
+#~ msgstr "현재 파일 저장"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "프로그램 종료"
+#~ msgid "Close the current file"
+#~ msgstr "현재 파일 닫기"
+
+#~ msgid "Print the current file"
+#~ msgstr "현재 파일 인쇄"
+
+#~ msgid "Cut the selection"
+#~ msgstr "선택 내용 잘라내기"
+
+#~ msgid "Copy the selection"
+#~ msgstr "선택 내용 복사하기"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "클립보드에서 붙이기"
+
+#~ msgid "Find"
+#~ msgstr "찾기"
+
+#~ msgid "Search for a string"
+#~ msgstr "문자열 찾기"
+
+#~ msgid "Exit"
+#~ msgstr "종료"
+
+#~ msgid "Exit the program"
+#~ msgstr "프로그램 종료"
 
 #~ msgid "Font"
 #~ msgstr "글꼴"

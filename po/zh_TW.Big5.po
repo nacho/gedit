@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1999-02-12 20:21+0800\n"
 "Last-Translator: Cd Chen <cdchen@mail.about.net.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -18,15 +18,6 @@ msgstr ""
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
-msgstr ""
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "文件序號 %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
 msgstr ""
 
 #: src/commands.c:93
@@ -92,35 +83,6 @@ msgstr ""
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdiit 是一個 GNOME/Gtk+ 的小型輕量級的文字編輯器"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "剪下"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "拷貝"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "貼上"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "儲存"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "關閉"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "列印"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "開啟 (切換) .c/.h 檔案"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -319,24 +281,32 @@ msgstr "搜尋"
 msgid "Document"
 msgstr "文件定位(_D)"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "列印"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr ""
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "列印的指令:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "直接列印"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr "先儲存，然後列印 "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -406,7 +376,7 @@ msgstr ""
 msgid "_New"
 msgstr "新建(_N)"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "建立一個新的文件"
 
@@ -536,8 +506,10 @@ msgid "Search for:"
 msgstr "搜尋:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -601,57 +573,68 @@ msgstr "取代前詢問"
 msgid "Replace?"
 msgstr "取代:"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "新建"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "儲存"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "開啟"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "關閉"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "開啟一個檔案"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "開啟 (切換) .c/.h 檔案"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "儲存現在的檔案"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "文件序號 %ld.\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "關閉現在的檔案"
+#~ msgid "Cut"
+#~ msgstr "剪下"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "顯示現在的檔案"
+#~ msgid "Copy"
+#~ msgstr "拷貝"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "剪下所圈選的範圍"
+#~ msgid "Paste"
+#~ msgstr "貼上"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "拷貝所圈選的範圍"
+#~ msgid "New"
+#~ msgstr "新建"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "貼到剪貼簿去"
+#~ msgid "Open"
+#~ msgstr "開啟"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "搜尋"
+#~ msgid "Open a file"
+#~ msgstr "開啟一個檔案"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "尋找一個字串"
+#~ msgid "Save the current file"
+#~ msgstr "儲存現在的檔案"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "離開"
+#~ msgid "Close the current file"
+#~ msgstr "關閉現在的檔案"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "離開本程式"
+#~ msgid "Print the current file"
+#~ msgstr "顯示現在的檔案"
+
+#~ msgid "Cut the selection"
+#~ msgstr "剪下所圈選的範圍"
+
+#~ msgid "Copy the selection"
+#~ msgstr "拷貝所圈選的範圍"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "貼到剪貼簿去"
+
+#~ msgid "Find"
+#~ msgstr "搜尋"
+
+#~ msgid "Search for a string"
+#~ msgstr "尋找一個字串"
+
+#~ msgid "Exit"
+#~ msgstr "離開"
+
+#~ msgid "Exit the program"
+#~ msgstr "離開本程式"
 
 #~ msgid "Font"
 #~ msgstr "字體"

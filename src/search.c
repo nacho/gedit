@@ -763,7 +763,7 @@ void count_lines_cb (GtkWidget *widget, gpointer data)
 								&total_lines);
 	
 	    msg = g_malloc0 (200);
-	    sprintf (msg, _("Total Lines: %i\nCurrent Line: %i"), total_lines, line_number);
+	    sprintf (msg, _("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"), doc->filename, total_lines, line_number);
 	
 	    gnome_dialog_run_and_close ((GnomeDialog *)
 		   gnome_message_box_new (msg, GNOME_MESSAGE_BOX_INFO,

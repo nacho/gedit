@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
+"POT-Creation-Date: 1999-10-20 17:45+0100\n"
 "PO-Revision-Date: 1999-06-05 12:08+0900\n"
 "Last-Translator: Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
 "Language-Team: Japanese <LL@li.org>\n"
@@ -19,15 +19,6 @@ msgstr ""
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
-msgstr ""
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr ""
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
 msgstr ""
 
 #: src/commands.c:93
@@ -90,35 +81,6 @@ msgstr ""
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "切り取り"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "複写"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "貼り付け"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "保存"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "閉じる"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "印刷"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "対応する .c/.h ファイルを開く"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -314,7 +276,11 @@ msgstr "ウインドウ"
 msgid "Document"
 msgstr "つまみの位置(_D)"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "印刷"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -323,17 +289,21 @@ msgstr ""
 "印刷に使用するコマンドを入力して下さい\n"
 "コマンド行には忘れずに '%s' を含めて下さい"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "印刷コマンド"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "そのまま印刷"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr "保存してから印刷"
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -396,7 +366,7 @@ msgstr "名前無し"
 msgid "_New"
 msgstr "新規(_N)"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "新規文書を作る"
 
@@ -525,8 +495,10 @@ msgid "Search for:"
 msgstr "検索対象:"
 
 #: src/search.c:766
-#, c-format
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
@@ -582,57 +554,65 @@ msgstr "置換前に確認"
 msgid "Replace?"
 msgstr "置換しますか？"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "新規"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "保存"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "開く"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "閉じる"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "ファイルを開く"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "対応する .c/.h ファイルを開く"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "現在編集中のファイルを保存"
+#~ msgid "Cut"
+#~ msgstr "切り取り"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "現在編集中のファイルを閉じる"
+#~ msgid "Copy"
+#~ msgstr "複写"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "現在編集中のファイルを印刷"
+#~ msgid "Paste"
+#~ msgstr "貼り付け"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "選択領域を切り取り"
+#~ msgid "New"
+#~ msgstr "新規"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "選択領域を複写"
+#~ msgid "Open"
+#~ msgstr "開く"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "クリップボードを張り付け"
+#~ msgid "Open a file"
+#~ msgstr "ファイルを開く"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "検索"
+#~ msgid "Save the current file"
+#~ msgstr "現在編集中のファイルを保存"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "文字列を検索"
+#~ msgid "Close the current file"
+#~ msgstr "現在編集中のファイルを閉じる"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "終了"
+#~ msgid "Print the current file"
+#~ msgstr "現在編集中のファイルを印刷"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "エディタを終了する"
+#~ msgid "Cut the selection"
+#~ msgstr "選択領域を切り取り"
+
+#~ msgid "Copy the selection"
+#~ msgstr "選択領域を複写"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "クリップボードを張り付け"
+
+#~ msgid "Find"
+#~ msgstr "検索"
+
+#~ msgid "Search for a string"
+#~ msgstr "文字列を検索"
+
+#~ msgid "Exit"
+#~ msgstr "終了"
+
+#~ msgid "Exit the program"
+#~ msgstr "エディタを終了する"
 
 #~ msgid "Font"
 #~ msgstr "フォント"
