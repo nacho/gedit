@@ -52,6 +52,8 @@ static GtkWidget *defaultfont;
 static GtkWidget *printwrap;
 static GtkWidget *printheader;
 static GtkWidget *printlines;
+static GtkWidget *printlinesspinb;
+static GtkWidget *lineslabel;
 
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
@@ -190,14 +192,13 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
-
 	settings->printheader = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printheader));
-	if (gtk_radio_group_get_selected ( gtk_radio_button_group (GTK_RADIO_BUTTON (printwrap )))==0)
-		settings->printwrap = TRUE;
+	settings->printwrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printwrap));
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines)))
+		settings->printlines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (printlinesspinb));
 	else
-		settings->printwrap = FALSE;
-	/* Add print lines */
-/*	settings->printlines  = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines));*/
+		settings->printlines = 0;
 	
         style = gtk_style_new ();
         
@@ -320,28 +321,89 @@ prepare_fontscolors_page (GladeXML *gui)
 }
 
 static void
+gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
+{
+	GList *children;
+	GList *l;
+	GtkContainer *container;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_CONTAINER (widget));
+
+	container = GTK_CONTAINER (widget);
+	children = gtk_container_children (container);
+
+	l = children;
+	while (l)
+	{
+		GtkWidget *child = (GtkWidget*)l->data;
+
+		if (GTK_IS_LABEL (child))
+			gtk_widget_set_sensitive (child, sens);
+
+		l = l->next;
+	}
+
+	g_list_free (children);
+}
+
+static void
+printlines_toggled (GtkWidget *widget, gpointer data)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines)))
+	{
+		gtk_toggle_button_update_label_sensitivity (printlines, TRUE);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), TRUE);
+	}
+	else
+	{
+		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
+	}
+
+	gnome_property_box_changed (GNOME_PROPERTY_BOX (propertybox));
+}
+
+static void
 prepare_printing_page (GladeXML *gui)
 {
 	gedit_debug_mess("F:prepare_priting_page\n", DEBUG_PREFS);
 
 	printheader = glade_xml_get_widget (gui, "printheader");
-	printlines  = glade_xml_get_widget (gui, "printlines");
-	printwrap   = glade_xml_get_widget (gui, "printwrap");
+	printlines = glade_xml_get_widget (gui, "printlines");
+	printlinesspinb = glade_xml_get_widget (gui, "printlinesspinb");
+	lineslabel = glade_xml_get_widget (gui, "lineslabel");
+	printwrap = glade_xml_get_widget (gui, "printwrap");
 
-	g_return_if_fail( printheader != NULL);
-	g_return_if_fail( printlines != NULL);
-	g_return_if_fail( printwrap != NULL);
-	
-	/* set initial button status */
+	/* set initial button states */
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printheader),
 				     settings->printheader);
-	gtk_radio_button_select ( gtk_radio_button_group (GTK_RADIO_BUTTON (printwrap )),
-				  !settings->printwrap);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printlines),
+				     settings->printlines);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printwrap),
+				     settings->printwrap);
+
+	if (!settings->printlines)
+	{
+		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
+	}
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (printheader), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT (printwrap), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT (printlines), "toggled",
+			    GTK_SIGNAL_FUNC (printlines_toggled), NULL);
+	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (printlinesspinb)->adjustment),
+			    "value_changed",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 
