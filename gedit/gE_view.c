@@ -136,7 +136,6 @@ view_list_erase (gedit_view *view, gedit_data *data)
 gint
 insert_into_buffer (gedit_document *doc, gchar *buffer, gint position)
 {
-
 	gedit_debug_mess ("F:insert_into_buffer\n", DEBUG_VIEW);
 
 	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position))
@@ -177,7 +176,6 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 		return;
 	}
 	
-	
 	if (editable == view->text)
 		significant_other = view->split_screen;
 	else if (editable == view->split_screen)
@@ -185,7 +183,6 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	else
 		return;
 	
-
 	view->flag = significant_other;	
 
 	buffer = g_new0 (guchar, length + 1);
@@ -270,17 +267,19 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	}
 }
 
-
-gint
+gboolean
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
-		int *pos, gpointer cbdata)
+		int *pos, gpointer data)
 {
-	int i, newlines, newline_1 = 0;
+	int i, newlines, newline_1;
 	gchar *buffer, *whitespace;
-	gedit_view *view = (gedit_view *)cbdata;
+	gedit_view *view;
 	gedit_document *doc;
 
-	gedit_debug_mess ("F:auto_indent_cb\n", DEBUG_VIEW);
+	g_return_val_if_fail (data != NULL, FALSE);
+
+	view = (gedit_view *)data;
+	newline_1 = 0;
 
 	if ((length != 1) || (insertion_text[0] != '\n'))
 		return FALSE;
@@ -288,6 +287,8 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		return FALSE;
 	if (!settings->auto_indent)
 		return FALSE;
+
+	gedit_debug_mess ("F:auto_indent_cb\n", DEBUG_VIEW);
 
 	doc = view->document;
 
@@ -462,9 +463,8 @@ gedit_view_init (gedit_view *view)
 	GtkStyle *style;
 	GdkColor *bg;
 	GdkColor *fg;
-	
 
-	gedit_debug_mess ("F:gedit_view_init.\n", DEBUG_VIEW);
+	gedit_debug_mess ("F:gedit_view_init\n", DEBUG_VIEW);
 
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
@@ -489,31 +489,30 @@ gedit_view_init (gedit_view *view)
 
 	view->line_wrap = 1;
 
-	view->text = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(view->text), !view->read_only);
-	gtk_text_set_word_wrap(GTK_TEXT(view->text), settings->word_wrap);
-	gtk_text_set_line_wrap(GTK_TEXT(view->text), view->line_wrap);
-
+	view->text = gtk_text_new (NULL, NULL);
+	gtk_text_set_editable (GTK_TEXT(view->text), !view->read_only);
+	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
+	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 	
 	/* - Signals - */
-	gtk_signal_connect_after(GTK_OBJECT(view->text), "button_press_event",
-				 GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);
+	gtk_signal_connect_after(GTK_OBJECT (view->text), "button_press_event",
+				 GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
 				  GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
 
 
 	/* Handle Auto Indent */
-	view->indent = gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
-						 GTK_SIGNAL_FUNC(auto_indent_cb), view);
+	view->indent = gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
+						 GTK_SIGNAL_FUNC (auto_indent_cb), view);
 
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
 	of implementing undo/redo... 
 	*/
 	view->insert = gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
-		                           GTK_SIGNAL_FUNC(doc_insert_text_cb), view);
+		                           GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
 	view->delete = gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
-		                           GTK_SIGNAL_FUNC(doc_delete_text_cb),
+		                           GTK_SIGNAL_FUNC (doc_delete_text_cb),
 		                           (gpointer) view);
 
 /*	gtk_signal_connect_after (GTK_OBJECT(view->text), "key_press_event",
@@ -533,7 +532,6 @@ gedit_view_init (gedit_view *view)
 
 	gtk_widget_show (view->text);
 	gtk_text_set_point (GTK_TEXT(view->text), 0);
-
 	
 	/* Create the bottom split screen */
 	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
@@ -547,29 +545,28 @@ gedit_view_init (gedit_view *view)
 	/*gtk_fixed_put (GTK_FIXED(view), view->scrwindow[1], 0, 0);*/
       	gtk_widget_show (view->scrwindow[1]);
 
-	view->split_screen = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT(view->split_screen), !view->read_only);
-	gtk_text_set_word_wrap (GTK_TEXT(view->split_screen), settings->word_wrap);
-	gtk_text_set_line_wrap (GTK_TEXT(view->split_screen), view->line_wrap);
-
+	view->split_screen = gtk_text_new (NULL, NULL);
+	gtk_text_set_editable (GTK_TEXT (view->split_screen), !view->read_only);
+	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), settings->word_wrap);
+	gtk_text_set_line_wrap (GTK_TEXT (view->split_screen), view->line_wrap);
 	
 	/* - Signals - */
-	gtk_signal_connect_after(GTK_OBJECT (view->split_screen), "button_press_event",
-				 GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
+	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "button_press_event",
+				  GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 
 	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "key_press_event",
 				  GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
 	
 	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
-					     GTK_SIGNAL_FUNC(doc_insert_text_cb),
+					     GTK_SIGNAL_FUNC (doc_insert_text_cb),
 					     (gpointer) view);
 		                             
 	view->s_delete = gtk_signal_connect (GTK_OBJECT (view->split_screen), "delete_text",
-					     GTK_SIGNAL_FUNC(doc_delete_text_cb),
+					     GTK_SIGNAL_FUNC (doc_delete_text_cb),
 					     (gpointer) view);
 
-	view->s_indent = gtk_signal_connect_after (GTK_OBJECT(view->split_screen), "insert_text",
-						   GTK_SIGNAL_FUNC(auto_indent_cb),
+	view->s_indent = gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "insert_text",
+						   GTK_SIGNAL_FUNC (auto_indent_cb),
 						   (gpointer) view);
 	gtk_container_add (GTK_CONTAINER (view->scrwindow[1]), view->split_screen);
 
@@ -642,8 +639,8 @@ gedit_view_get_type (void)
 
 	gedit_debug_mess ("F:gedit_view_get_type.\n", DEBUG_VIEW);
 
-	if (!gedit_view_type) {
-
+	if (!gedit_view_type)
+	{
 	  GtkTypeInfo gedit_view_info = {
 	  		"gedit_view",
 	  		sizeof (gedit_view),
@@ -654,7 +651,8 @@ gedit_view_get_type (void)
 	  		(GtkArgGetFunc) NULL,
 	  };
 	    
-	  gedit_view_type = gtk_type_unique (gtk_vbox_get_type (), &gedit_view_info);
+	  gedit_view_type = gtk_type_unique (gtk_vbox_get_type (),
+					     &gedit_view_info);
 	  
 	}
 	 
@@ -664,11 +662,15 @@ gedit_view_get_type (void)
 GtkWidget *
 gedit_view_new (gedit_document *doc)
 {
-	gedit_view *view = gtk_type_new (gedit_view_get_type ());
+	gedit_view *view;
+
+	if (doc == NULL)
+		return NULL;
+
+	view = gtk_type_new (gedit_view_get_type ());
+	view->document = doc;
 
 	gedit_debug_mess ("F:gedit_view_new\n", DEBUG_VIEW);
-
-	view->document = doc;
 	
 	if (view->document->buf)
 	{

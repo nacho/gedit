@@ -29,17 +29,17 @@ gedit_save_settings (void)
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 
-	gnome_config_set_int ("tab pos", (gint) mdi->tab_pos);
-	gnome_config_set_int ("auto indent", (gboolean) settings->auto_indent);
-	gnome_config_set_int ("word wrap", (gboolean) settings->word_wrap);
-	gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
+	gnome_config_set_int ("tab_pos", (gint) mdi->tab_pos);
+	gnome_config_set_int ("auto_indent", (gboolean) settings->auto_indent);
+	gnome_config_set_int ("word_wrap", (gboolean) settings->word_wrap);
+	gnome_config_set_int ("show_statusbar", (gboolean) settings->show_status);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
-	gnome_config_set_int ("tb text", (gint) settings->have_tb_text);
-	gnome_config_set_int ("tb pix", (gint) settings->have_tb_pix);
-	gnome_config_set_int ("tb relief", (gint) settings->use_relief_toolbar);
+	gnome_config_set_int ("tb_text", (gint) settings->have_tb_text);
+	gnome_config_set_int ("tb_pix", (gint) settings->have_tb_pix);
+	gnome_config_set_int ("tb_relief", (gint) settings->use_relief_toolbar);
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
-	gnome_config_set_int ("close doc", (gint) settings->close_doc);
-	gnome_config_set_int ("mdi mode", mdiMode);
+	gnome_config_set_int ("close_doc", (gint) settings->close_doc);
+	gnome_config_set_int ("mdi_mode", mdiMode);
 
 	gnome_config_set_int ("bgr", settings->bg[0]);
 	gnome_config_set_int ("bgg", settings->bg[1]);
@@ -53,9 +53,9 @@ gedit_save_settings (void)
 	gnome_config_set_string ("font", settings->font);
 
 	if (settings->print_cmd == "")
-		gnome_config_set_string ("print command", "lpr -rs %s");
+		gnome_config_set_string ("print_command", "lpr -rs %s");
 	else
-		gnome_config_set_string ("print command", settings->print_cmd);
+		gnome_config_set_string ("print_command", settings->print_cmd);
 	
 	if (!settings->run)
 		settings->run = TRUE;
@@ -71,18 +71,18 @@ gedit_load_settings (void)
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 	 
-	mdi->tab_pos = gnome_config_get_int ("tab pos");
-	settings->auto_indent = gnome_config_get_int ("auto indent");
-	settings->word_wrap = gnome_config_get_int ("word wrap");
+	mdi->tab_pos = gnome_config_get_int ("tab_pos");
+	settings->auto_indent = gnome_config_get_int ("auto_indent");
+	settings->word_wrap = gnome_config_get_int ("word_wrap");
 	settings->run = gnome_config_get_int ("run");
-	settings->show_status = gnome_config_get_int ("show statusbar");
+	settings->show_status = gnome_config_get_int ("show_statusbar");
 	settings->have_toolbar = gnome_config_get_int ("toolbar");
 	settings->have_tb_text = gnome_config_get_int ("tb text");
-	settings->have_tb_pix = gnome_config_get_int ("tb pix");
-	settings->use_relief_toolbar = gnome_config_get_int("tb relief");
+	settings->have_tb_pix = gnome_config_get_int ("tb_pix");
+	settings->use_relief_toolbar = gnome_config_get_int("tb_relief");
 	settings->splitscreen = gnome_config_get_int("splitscreen");
-	settings->close_doc = gnome_config_get_int ("close doc");
-	mdiMode = gnome_config_get_int ("mdi mode");
+	settings->close_doc = gnome_config_get_int ("close_doc");
+	mdiMode = gnome_config_get_int ("mdi_mode");
 	/*if (!mdiMode)
 	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];*/
 	settings->bg[0] = gnome_config_get_int( "bgr=65535" );
@@ -106,7 +106,7 @@ gedit_load_settings (void)
 			settings->font = DEFAULT_FONT;
 	}
 	
-	settings->print_cmd = gnome_config_get_string ("print command=lpr %s"); 
+	settings->print_cmd = gnome_config_get_string ("print_command=lpr %s"); 
 
 	if (settings->run)
 	{
@@ -116,7 +116,7 @@ gedit_load_settings (void)
 	else
 	{
 		settings->show_status = TRUE;
-		gnome_config_set_int ("show statusbar",
+		gnome_config_set_int ("show_statusbar",
 				      (gboolean) settings->show_status);
 	}
 	

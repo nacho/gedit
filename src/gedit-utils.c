@@ -65,7 +65,7 @@ gedit_flash (gchar *msg)
 
 /**
  * gedit_flash_va:
- * @format
+ * @format:
  */
 void
 gedit_flash_va (gchar *format, ...)
@@ -88,11 +88,14 @@ gedit_flash_va (gchar *format, ...)
  * @message: Message to display on the console
  * @type : Group type of message
  *
- * Flash a temporary message on the statusbar of gedit.
+ * Print a debug message out to the console
  */
-void gedit_debug_mess( gchar * message, gint type )
+void
+gedit_debug_mess (gchar *message, gint type)
 {
-     g_print( message);
+#if 1
+	g_print (message);
+#endif
 }
 
 

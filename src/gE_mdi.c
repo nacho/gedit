@@ -50,7 +50,6 @@ gchar* gedit_get_document_tab_name (void);
 #define GE_DATA		1
 #define GE_WINDOW	2
 
-
 enum {
 	LAST_SIGNAL
 };
@@ -65,8 +64,8 @@ gedit_document_get_type (void)
 {
 	static GtkType doc_type = 0;
 	
-	if (!doc_type) {
-	  	
+	if (!doc_type)
+	{
 	  static const GtkTypeInfo doc_info = {
 	  	"gedit_document",
 	  	sizeof (gedit_document),
@@ -75,11 +74,9 @@ gedit_document_get_type (void)
 	  	(GtkObjectInitFunc) gedit_document_init,
 	  	(GtkArgSetFunc) NULL,
 	  	(GtkArgGetFunc) NULL,
-	  
 	  };
 	  
 	  doc_type = gtk_type_unique (gnome_mdi_child_get_type (), &doc_info);
-	  
 	}
 	  
 	return doc_type;
