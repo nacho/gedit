@@ -1,25 +1,34 @@
 ## Process this file with automake to produce Makefile.in
 
+plugindir = $(libexecdir)/go/plugins
+
+plugin_PROGRAMS = hello-plugin
+
+hello_plugin_SOURCES = \
+	$(top_srcdir)/plugins/client/client.h \
+	hello.c
+
 INCLUDES = -I$(includedir) 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	-I../	\
-	$(GNOME_INCLUDEDIR)
+	-I..						\
+	$(GNOME_INCLUDEDIR)				\
+	-I$(top_srcdir)/plugins/client
 
-plugindir = $(prefix)/share/go/plugins
+LDADD = \
+	$(top_builddir)/plugins/client/libclient.a	\
+	$(GTK_LIBS)
 
-plugin_PROGRAMS = diff-plugin
+DEPS = \
+	$(top_builddir)/plugins/client/libclient.a
 
-diff_plugin_SOURCES =	\
-	diff.c		\
-	client.c	\
-	client.h
+plugin_PROGRAMS = hello-plugin
 
-diff_plugin_LDFLAGS = `gtk-config --libs`
+hello_plugin_DEPENDENCIES = $(DEPS)
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic  \
-	#-DDEBUG
+	-DPLUGINDIR=\""$(plugindir)"\" \
+	-Wall -ansi -pedantic 
+#	-DDEBUG

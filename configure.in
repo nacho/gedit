@@ -11,6 +11,8 @@ AC_STDC_HEADERS
 AC_ARG_PROGRAM
 AM_PROG_LIBTOOL
 
+AM_CONDITIONAL(FALSE, test foo = bar)
+
 dnl check for Gtk versions...
 AM_PATH_GTK(1.0.5,
  	    [LIBS="$LIBS $GTK_LIBS"

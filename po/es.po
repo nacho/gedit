@@ -1,19 +1,25 @@
 msgid ""
 msgstr ""
-"Date: 1998-11-18 12:44+0100\n"
 "Project-Id-Version: gedit 0.4.8\n"
-"POT-Creation-Date: 1998-10-13 14:49+0200\n"
+"POT-Creation-Date: 1998-12-14 21:08-0800\n"
 "PO-Revision-Date: 1998-11-18 12:44+0100\n"
-"From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Xgettext-Options: --default-domain=gEdit --directory=/home/norwegen/gnomecvs/gedit --add-comments --keyword=_ --keyword=N_ --files-from=/home/norwegen/gnomecvs/gedit/po/POTFILES.in\n"
-"Files: plugins/spell/spell.c plugins/prm/maincode.c plugins/prm/msgbox.c plugins/diff/diff.c plugins/cvsdiff/cvsdiff.c plugins/email/email.c src/commands.c src/dialog.c src/gE_about.c src/gE_document.c src/gE_init.c src/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c src/msgbox.c src/search.c\n"
+"Date: 1998-11-18 12:44+0100\n"
+"From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
+"Xgettext-Options: --default-domain=gEdit "
+"--directory=/home/norwegen/gnomecvs/gedit --add-comments --keyword=_ "
+"--keyword=N_ --files-from=/home/norwegen/gnomecvs/gedit/po/POTFILES.in\n"
+"Files: plugins/spell/spell.c plugins/prm/maincode.c plugins/prm/msgbox.c "
+"plugins/diff/diff.c plugins/cvsdiff/cvsdiff.c plugins/email/email.c "
+"src/commands.c src/dialog.c src/gE_about.c src/gE_document.c src/gE_init.c "
+"src/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c src/msgbox.c "
+"src/search.c\n"
 
-#: src/commands.c:1025 src/commands.c:1026 src/menus.c:393
+#: src/commands.c:1053 src/commands.c:1054
 msgid "File"
 msgstr "Archivo"
 
@@ -21,8 +27,6 @@ msgstr "Archivo"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit es un editor de texto pequeño y liviano para GNOME/Gtk+"
 
-#. We want to use a callback for this launch-plugin thing so we
-#. can get multiple opts
 #: src/gedit.c:255
 msgid "Launch a plugin at startup"
 msgstr "Lanzar un plugin al inicio"
@@ -31,206 +35,233 @@ msgstr "Lanzar un plugin al inicio"
 msgid "PLUGIN-NAME"
 msgstr "Nombre del Plugin"
 
-#: src/menus.c:233 src/menus.c:369
-msgid "About..."
-msgstr "Acerca de..."
-
-#: src/menus.c:235 src/menus.c:332
-msgid "Preferences..."
-msgstr "Preferencias..."
-
-#: src/menus.c:238 src/menus.c:267
-msgid "Quit"
-msgstr "Terminar"
-
-#: src/menus.c:245
+#: src/menus.c:232
 msgid "New"
 msgstr "Nuevo"
 
-#: src/menus.c:248
-msgid "Open"
+#: src/menus.c:235
+#, fuzzy
+msgid "Open..."
 msgstr "Abrir"
 
-#: src/menus.c:251
+#: src/menus.c:238
 msgid "Save"
 msgstr "Guardar"
 
-#: src/menus.c:254
-msgid "Save as"
+#: src/menus.c:241
+#, fuzzy
+msgid "Save As..."
 msgstr "Guardar como"
 
-#: src/menus.c:256
-msgid "Print"
+#: src/menus.c:243
+#, fuzzy
+msgid "Print..."
 msgstr "Imprimir"
 
-#: src/menus.c:258
+#: src/menus.c:245
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/menus.c:261
+#: src/menus.c:248
 msgid "Close All"
 msgstr "Cerrar todos"
 
-#: src/menus.c:277
+#: src/menus.c:253
+#, fuzzy
+msgid "Exit"
+msgstr "Edición"
+
+#: src/menus.c:262
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/menus.c:280
+#: src/menus.c:265
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/menus.c:283
+#: src/menus.c:268
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/menus.c:287
+#: src/menus.c:272
 msgid "Select All"
 msgstr "Seleccionar Todo"
 
-#: src/menus.c:293 src/menus.c:397
-msgid "Search"
-msgstr "Buscar"
+#: src/menus.c:278
+msgid "Search for Text..."
+msgstr ""
 
-#: src/menus.c:295
-msgid "Search and Replace"
+#: src/menus.c:280
+#, fuzzy
+msgid "Search for Line..."
+msgstr "Buscar de nuevo"
+
+#: src/menus.c:282
+#, fuzzy
+msgid "Search and Replace..."
 msgstr "Buscar y Remplazar"
 
-#: src/menus.c:298
+#: src/menus.c:285
 msgid "Search Again"
 msgstr "Buscar de nuevo"
 
-#: src/menus.c:304
+#: src/menus.c:291
 msgid "Top"
 msgstr "Arriba"
 
-#: src/menus.c:305
+#: src/menus.c:292
 msgid "Bottom"
 msgstr "Abajo"
 
-#: src/menus.c:306
+#: src/menus.c:293
 msgid "Left"
 msgstr "Izquierda"
 
-#: src/menus.c:307
+#: src/menus.c:294
 msgid "Right"
 msgstr "Derecha"
 
-#: src/menus.c:309
+#: src/menus.c:296
 msgid "Toggle"
 msgstr "Cambiar"
 
-#: src/menus.c:314
+#: src/menus.c:301
 msgid "Show Toolbar"
 msgstr "Mostrar barra de íconos"
 
-#: src/menus.c:315
+#: src/menus.c:302
 msgid "Hide Toolbar"
 msgstr "Esconder barra de íconos"
 
-#: src/menus.c:317
+#: src/menus.c:304
 msgid "Pictures and Text"
 msgstr "Íconos y Texto"
 
-#: src/menus.c:318
+#: src/menus.c:305
 msgid "Pictures only"
 msgstr "Solo íconos"
 
-#: src/menus.c:319
+#: src/menus.c:306
 msgid "Text only"
 msgstr "Solo texto"
 
-#: src/menus.c:322
+#: src/menus.c:309
 msgid "Toolbar Relief On"
 msgstr "Barra de íconos en relieve"
 
-#: src/menus.c:323
+#: src/menus.c:310
 msgid "Toolbar Relief Off"
 msgstr "Barra de íconos sin relieve"
 
-#: src/menus.c:326
+#: src/menus.c:313
 msgid "Tooltips On"
 msgstr "Tooltips Activados"
 
-#: src/menus.c:327
+#: src/menus.c:314
 msgid "Tooltips Off"
 msgstr "Tooltips Desactivados"
 
-#: src/menus.c:334
+#: src/menus.c:319
+msgid "Preferences..."
+msgstr "Preferencias..."
+
+#: src/menus.c:321
 msgid "Toggle Autoindent"
 msgstr "Activar/Desactivar Auto-indentación"
 
-#: src/menus.c:335
+#: src/menus.c:322
 msgid "Toggle Statusbar"
 msgstr "Activar/Desactivar barra de estado"
 
-#: src/menus.c:336
+#: src/menus.c:323
 msgid "Toggle Wordwrap"
 msgstr ""
 
-#: src/menus.c:337
+#: src/menus.c:324
 msgid "Toggle Linewrap"
 msgstr "Activar/Desactivar vuelta a la linea automática"
 
-#: src/menus.c:338
+#: src/menus.c:325
 msgid "Toggle Readonly"
 msgstr "Activar/Desactivar solo lectura"
 
-#: src/menus.c:339
+#: src/menus.c:326
 msgid "Toggle Split Screen"
 msgstr "Activar/Desactivar división de pantalla"
 
-#: src/menus.c:341
+#: src/menus.c:328
 msgid "Toggle Scrollball"
 msgstr "Activar/Desactivar Scrollball"
 
-#: src/menus.c:344
+#: src/menus.c:331
 msgid "Document Tabs"
 msgstr "Tabulacions del documento"
 
-#: src/menus.c:345
+#: src/menus.c:332
 msgid "Toolbar"
 msgstr "Barra de íconos"
 
-#: src/menus.c:347
+#: src/menus.c:334
 msgid "Save Settings"
 msgstr "Guardar la configuración"
 
-#: src/menus.c:352
+#: src/menus.c:339
 msgid "New Window"
 msgstr "Nueva Ventana"
 
-#: src/menus.c:354
+#: src/menus.c:341
 msgid "Close Window"
 msgstr "Cerrar Ventana"
 
-#: src/menus.c:357
+#: src/menus.c:344
 msgid "Document List"
 msgstr "Lista de Documentos"
 
-#: src/menus.c:360
+#: src/menus.c:347
 msgid "Message Box"
 msgstr "Cuadro de mensajes"
 
-#: src/menus.c:389
-msgid "Program"
-msgstr "Programa"
+#: src/menus.c:358
+msgid "About..."
+msgstr "Acerca de..."
 
-#: src/menus.c:395
-msgid "Edit"
+#: src/menus.c:373
+#, fuzzy
+msgid "_File"
+msgstr "Archivo"
+
+#: src/menus.c:375
+#, fuzzy
+msgid "_Edit"
 msgstr "Edición"
 
-#: src/menus.c:399
-msgid "Options"
+#: src/menus.c:377
+#, fuzzy
+msgid "_Search"
+msgstr "Buscar"
+
+#: src/menus.c:379
+#, fuzzy
+msgid "_Options"
 msgstr "Opciones"
 
-#: src/menus.c:402
-msgid "Plugins"
+#: src/menus.c:382
+#, fuzzy
+msgid "_Plugins"
 msgstr "Plugins"
 
-#: src/menus.c:405
-msgid "Window"
+#: src/menus.c:385
+#, fuzzy
+msgid "_Window"
 msgstr "Ventana"
 
-#: src/menus.c:408
-msgid "Help"
+#: src/menus.c:387
+#, fuzzy
+msgid "_Help"
 msgstr "Ayuda"
+
+#~ msgid "Quit"
+#~ msgstr "Terminar"
+
+#~ msgid "Program"
+#~ msgstr "Programa"
