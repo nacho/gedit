@@ -24,7 +24,11 @@
 #include "main.h"
 #include "menus.h"
 
+#ifdef WITHOUT_GNOME
 gchar gEdit_ID[] = "gEdit 0.3.2";
+#else
+gchar gEdit_ID[] = "gEdit 0.13";
+#endif
 
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
@@ -152,7 +156,7 @@ gE_window *gE_window_new()
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window->window, "gedit window");
 #else
-  window->window = gnome_app_new ("gEdit", "gEdit");
+  window->window = gnome_app_new ("gEdit", gEdit_ID );
 #endif
   gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
   		      GTK_SIGNAL_FUNC(destroy_window),
@@ -216,11 +220,13 @@ gE_window *gE_window_new()
       gtk_widget_set_usize (window->col_label, 40, 0);
       gtk_widget_show (box2);
       window->statusbox = box2;
-	            
-  gtk_widget_show(window->menubar);
+
+  /* gtk_widget_show(window->menubar); 
+  		Hmm, this seems to be the problem with Gtk 1.1, it 
+		seems to fix that segfault on startup --Alex */
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
-          
+
   return window;
 }
 
