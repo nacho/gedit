@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-04-29 13:28+0200\n"
-"PO-Revision-Date: 2002-04-29 13:29+0200\n"
+"POT-Creation-Date: 2002-05-07 12:43+0200\n"
+"PO-Revision-Date: 2002-05-07 12:44+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -541,7 +541,7 @@ msgstr "Erstatt _alle"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:104
 msgid "_Replace"
 msgstr "E_rstatt"
 
@@ -551,12 +551,12 @@ msgstr "Finn"
 
 #: src/dialogs/gedit-dialog-replace.c:473
 #: src/dialogs/gedit-dialog-replace.c:544
-#: src/dialogs/gedit-dialog-replace.c:714
+#: src/dialogs/gedit-dialog-replace.c:715
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teksten «%s» ble ikke funnet."
 
-#: src/dialogs/gedit-dialog-replace.c:723
+#: src/dialogs/gedit-dialog-replace.c:724
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Fant og erstattet %d oppføringer."
@@ -983,7 +983,7 @@ msgstr "Skri_ft som brukes ved redigering: "
 msgid "_Font used to print headers:"
 msgstr "Skri_ft som brukes ved utskrift av topptekst:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:98
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
 msgid "_Icon"
 msgstr "_Ikon"
 
@@ -1203,60 +1203,42 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit er en liten lettvekt tekst editor for GNOME"
 
-#: src/gedit-document.c:524 src/gedit-document.c:535
+#: src/gedit-document.c:533 src/gedit-document.c:544
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:524 src/gedit-document.c:535
+#: src/gedit-document.c:533 src/gedit-document.c:544
 msgid "Untitled"
 msgstr "Navnløs"
 
-#: src/gedit-document.c:651 src/gedit-document.c:757
+#: src/gedit-document.c:660 src/gedit-document.c:766
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: src/gedit-document.c:952
+#: src/gedit-document.c:966
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Kunne ikke lese informasjon om symbolsk lenke %s"
+
+#: src/gedit-document.c:1012
+msgid "The file has too many symbolic links."
+msgstr "Filen har for mange symbolske lenker."
+
+#: src/gedit-document.c:1061
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
 
-#: src/gedit-document.c:959
+#: src/gedit-document.c:1068
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikke håndtere denne typen lokasjon i skrivemodus."
 
-#: src/gedit-document.c:970
+#: src/gedit-document.c:1080
 msgid "Invalid filename."
 msgstr "Ugyldig filnavn."
 
-#: src/gedit-document.c:998
-#, c-format
-msgid "Could not open backup file %s."
-msgstr "Kunne ikke åpne sikkerhetskopi %s."
-
-#: src/gedit-document.c:1009
-#, c-format
-msgid "Could not open file %s."
-msgstr "Kunne ikke åpne fil %s."
-
-#: src/gedit-document.c:1029 src/gedit-document.c:1058
-msgid "Could not create backup file."
-msgstr "Kunne ikke opprette sikkerhetskopi."
-
-#: src/gedit-document.c:1042
-msgid "Could not write backup file."
-msgstr "Kunne ikke skrive sikkerhetskopi."
-
-#: src/gedit-document.c:1051
-msgid "Error when creating backup file."
-msgstr "Feil under oppretting av sikkerhetskopi."
-
-#: src/gedit-document.c:1069 src/gedit-document.c:1112
-#: src/gedit-document.c:1124
-msgid "Could not save the file."
-msgstr "Kunne ikke lagre filen."
-
-#: src/gedit-document.c:1102
+#: src/gedit-document.c:1158
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1264,15 +1246,18 @@ msgstr ""
 "Det er ikke nok plass på disken til å lagre filen.\n"
 "Vennligst frigjør plass og prøv igjen."
 
-#: src/gedit-document.c:1107
+#: src/gedit-document.c:1163
 msgid ""
-"The file is too big.\n"
-"Please try saving a smaller file."
-msgstr ""
-"Filen er for stor.\n"
-"Vennnligst prøv å lagre en mindre fil."
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr "Disken du prøver å lagre filen på har en begrensning på filstørrelse. Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har denne begrensningen."
 
-#: src/gedit-document.c:1241
+#: src/gedit-document.c:1200
+msgid "Could not create a backup file."
+msgstr "Kunne ikke opprette sikkerhetskopi."
+
+#: src/gedit-document.c:1348
 msgid "It is not possible to revert an Untitled document"
 msgstr "Du kan ikke forkaste et dokument uten tittel"
 
@@ -1293,62 +1278,62 @@ msgstr "I_kke erstatt"
 msgid "Select a filename to save"
 msgstr "Velg et filnavn for lagring"
 
-#: src/gedit-file.c:123
+#: src/gedit-file.c:124
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/gedit-file.c:133 src/gedit-file.c:634
+#: src/gedit-file.c:134 src/gedit-file.c:636
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Lastet fil «%s»"
 
-#: src/gedit-file.c:243 src/gedit-file.c:317
+#: src/gedit-file.c:242 src/gedit-file.c:314
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Lagrer fil «%s»..."
 
-#: src/gedit-file.c:264 src/gedit-file.c:324
+#: src/gedit-file.c:263 src/gedit-file.c:321
 msgid "The document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/gedit-file.c:277 src/gedit-file.c:322
+#: src/gedit-file.c:275 src/gedit-file.c:319
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fil «%s» lagret."
 
-#: src/gedit-file.c:309
+#: src/gedit-file.c:306
 msgid "Save as ..."
 msgstr "Lagre som..."
 
-#: src/gedit-file.c:469
+#: src/gedit-file.c:464
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Forkaster endringer i fil «%s»..."
 
-#: src/gedit-file.c:482
+#: src/gedit-file.c:477
 msgid "The document has not been reverted."
 msgstr "Endringer i dokumentet ble ikke forkastet."
 
-#: src/gedit-file.c:492
+#: src/gedit-file.c:487
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Forkastet endringer i fil «%s»."
 
-#: src/gedit-file.c:535
+#: src/gedit-file.c:530
 #, c-format
 msgid "Loading %d file..."
 msgstr "Laster %d fil..."
 
-#: src/gedit-file.c:571
+#: src/gedit-file.c:566
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/gedit-file.c:688
+#: src/gedit-file.c:690
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
-#: src/gedit-mdi.c:758
+#: src/gedit-mdi.c:763
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1359,23 +1344,23 @@ msgstr ""
 "\n"
 "Endringene vil gå tapt hvis du ikke lagrer dem."
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:768
 msgid "Do_n't save"
 msgstr "I_kke lagre"
 
-#: src/gedit-mdi.c:782
+#: src/gedit-mdi.c:787
 msgid "_Don't quit"
 msgstr "_Ikke avslutt"
 
-#: src/gedit-mdi.c:786
+#: src/gedit-mdi.c:791
 msgid "_Don't close"
 msgstr "_Ikke lukk"
 
-#: src/gedit-mdi.c:873
+#: src/gedit-mdi.c:878
 msgid "(modified)"
 msgstr "(endret)"
 
-#: src/gedit-mdi.c:879
+#: src/gedit-mdi.c:884
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
@@ -1466,11 +1451,6 @@ msgstr ""
 "En feil oppsto under utskrift.\n"
 "\n"
 "%s"
-
-#: src/gedit-recent.c:496
-#, c-format
-msgid "Open %s"
-msgstr "Åpne %s"
 
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
@@ -1793,102 +1773,98 @@ msgid "_Close"
 msgstr "_Lukk"
 
 #: src/gedit-ui.xml.h:87
-msgid "_Contents"
-msgstr "_Innhold"
-
-#: src/gedit-ui.xml.h:88
 msgid "_Copy"
 msgstr "_Kopier"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Customize Toolbar"
 msgstr "_Tilpass verktøylinjen"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Debug"
 msgstr "_Feilsøk"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:90
 msgid "_Delete"
 msgstr "_Slett"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:91
 msgid "_Desktop Default"
 msgstr "_Forvalgt verdi for skrivebord"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:92
 msgid "_Documents"
 msgstr "_Dokumenter"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:93
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:94
 msgid "_File"
 msgstr "_Fil"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:95
 msgid "_Find"
 msgstr "F_inn"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:96
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:98
 msgid "_New"
 msgstr "_Ny"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:99
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:100
 msgid "_Paste"
 msgstr "Li_m inn"
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:101
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:102
 msgid "_Quit"
 msgstr "_Avslutt"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:103
 msgid "_Redo"
 msgstr "_Gjenopprett"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:105
 msgid "_Revert"
 msgstr "Fo_rkast"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:106
 msgid "_Save"
 msgstr "_Lagre"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:107
 msgid "_Search"
 msgstr "_Søk"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:108
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:109
 msgid "_Toolbar"
 msgstr "Verk_tøylinje"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:110
 msgid "_Tools"
 msgstr "_Verktøy"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:111
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/gedit-ui.xml.h:113
+#: src/gedit-ui.xml.h:112
 msgid "_View"
 msgstr "_Vis"
 
