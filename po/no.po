@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-06-06 11:01+0200\n"
-"PO-Revision-Date: 2000-06-06 11:02+02:00\n"
+"POT-Creation-Date: 2000-06-08 21:40+0200\n"
+"PO-Revision-Date: 2000-06-08 21:41+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -146,12 +146,12 @@ msgstr "gedit er en liten lettvekt tekst editor for GNOME/Gtk+"
 msgid "gedit: Preferences"
 msgstr "gedit: Brukervalg"
 
-#: src/dialogs/dialog-replace.c:167
+#: src/dialogs/dialog-replace.c:172
 #, c-format
-msgid "found and replaced %i ocurrences."
-msgstr "funnet og erstattet %i oppføringer."
+msgid "found and replaced %i occurrences."
+msgstr "fant og erstattet %i oppføringer."
 
-#: src/dialogs/dialog-replace.c:222 src/search.c:286
+#: src/dialogs/dialog-replace.c:227 src/search.c:289
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Teksten funnet på linje :%i"
@@ -380,7 +380,7 @@ msgstr "RO - "
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' er endret. Vil du lagre den?"
 
-#: src/file.c:92
+#: src/file.c:94
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -388,7 +388,7 @@ msgstr ""
 "En feil oppstod under åpning av filen.\n"
 "Vennligst underøk in filen eksisterer."
 
-#: src/file.c:99
+#: src/file.c:101
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -407,11 +407,11 @@ msgstr ""
 "Vennligst underøk om filen er i bruk av en annen applikasjon og\n"
 "at filen ikke er tom."
 
-#: src/file.c:109 src/file.c:252
+#: src/file.c:111 src/file.c:256
 msgid "Could not allocate the required memory."
 msgstr "Kunne ikke hente nødvendig minne."
 
-#: src/file.c:115
+#: src/file.c:117
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -426,7 +426,7 @@ msgstr ""
 "\n"
 "Forsikre deg om at du har rettigheter til å åpne filen."
 
-#: src/file.c:169
+#: src/file.c:171
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -443,7 +443,7 @@ msgstr ""
 "Forsikre deg om at stien du oppga eksisterer, og at du har tilstrekkelige "
 "skriverettigheter."
 
-#: src/file.c:182
+#: src/file.c:184
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -460,7 +460,7 @@ msgstr ""
 "På grunn av en ukjent feil (1). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:196
+#: src/file.c:198
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -477,37 +477,41 @@ msgstr ""
 "På grunn av en ukjent feil (2). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:314
+#: src/file.c:275
+msgid "Error in the pipe ."
+msgstr "Feil i røret."
+
+#: src/file.c:326
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/file.c:355
+#: src/file.c:367
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/file.c:391
+#: src/file.c:403
 #, c-format
 msgid "Loaded file %s"
 msgstr "Lastet fil %s"
 
-#: src/file.c:455
+#: src/file.c:467
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' er i ferd med å bli overskrevet. Vil du fortsette ?"
 
-#: src/file.c:466
+#: src/file.c:478
 msgid "Document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/file.c:475
+#: src/file.c:487
 msgid "Error saving file!"
 msgstr "Feil under lagring av fil!"
 
-#: src/file.c:548
+#: src/file.c:560
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke forkaste et dokument uten tittel\n"
 
-#: src/file.c:561
+#: src/file.c:573
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -516,7 +520,7 @@ msgstr ""
 "Er du sikker på at du vil forkaste alle endringer?\n"
 "(%s)"
 
-#: src/file.c:590
+#: src/file.c:602
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen ``%s'' eksisterer ikke. Vil du opprette den?"
@@ -773,7 +777,7 @@ msgstr "_Fil/"
 msgid "_File"
 msgstr "_Fil"
 
-#: src/search.c:189
+#: src/search.c:191
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -781,7 +785,7 @@ msgstr ""
 "Kan ikke telle linjer hvis et annet søk er aktivt. Vennligst lukk den andre "
 "søkedialogen."
 
-#: src/search.c:204
+#: src/search.c:206
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -794,15 +798,15 @@ msgstr ""
 "Totalt antall linjer: %i\n"
 "Nåværende linje: %i"
 
-#: src/search.c:229
+#: src/search.c:231
 msgid "Text not found"
 msgstr "Teksten ble ikke funnet"
 
-#: src/search.c:234
+#: src/search.c:236
 msgid "Text not found."
 msgstr "Teksten ble ikke funnet."
 
-#: src/search.c:264
+#: src/search.c:267
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Kan ikke søke igjen. Ingen tekststreng å søke etter."
 
