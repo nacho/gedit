@@ -648,6 +648,31 @@ create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
 }
 
 
+/* FIXME: Remove this function when gnome-vfs will add an equivalent public
+   function - Paolo (Mar 05, 2004) */
+static gchar *
+get_slow_mime_type (const char *text_uri)
+{
+	GnomeVFSFileInfo *info;
+	char *mime_type;
+	GnomeVFSResult result;
+
+	info = gnome_vfs_file_info_new ();
+	result = gnome_vfs_get_file_info (text_uri, info,
+					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
+		mime_type = NULL;
+	} else {
+		mime_type = g_strdup (info->mime_type);
+	}
+	gnome_vfs_file_info_unref (info);
+
+	return mime_type;
+}
+
+
 /* FIXME: implementing theme changed handler */
 
 static GnomeIconTheme *theme = NULL;
@@ -675,7 +700,7 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
 	
 	if (raw_uri != NULL)
-		mime_type = gnome_vfs_get_mime_type (raw_uri);
+		mime_type = get_slow_mime_type (raw_uri);
 
 	if (mime_type == NULL)
 		mime_type = g_strdup ("text/plain");
@@ -717,7 +742,7 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
 	
 	if (raw_uri != NULL)
-		mime_type = gnome_vfs_get_mime_type (raw_uri);
+		mime_type = get_slow_mime_type (raw_uri);
 
 	if (mime_type != NULL)
 		mime_description = gnome_vfs_mime_get_description (mime_type);

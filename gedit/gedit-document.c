@@ -1366,6 +1366,30 @@ gedit_document_is_untouched (const GeditDocument *doc)
 		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
 }
 
+/* FIXME: Remove this function when gnome-vfs will add an equivalent public
+   function - Paolo (Mar 05, 2004) */
+static gchar *
+get_slow_mime_type (const char *text_uri)
+{
+	GnomeVFSFileInfo *info;
+	char *mime_type;
+	GnomeVFSResult result;
+
+	info = gnome_vfs_file_info_new ();
+	result = gnome_vfs_get_file_info (text_uri, info,
+					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
+		mime_type = NULL;
+	} else {
+		mime_type = g_strdup (info->mime_type);
+	}
+	gnome_vfs_file_info_unref (info);
+
+	return mime_type;
+}
+
 static void
 gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 {
@@ -1414,7 +1438,7 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 	{
 		gchar *mime_type;
 
-		mime_type = gnome_vfs_get_mime_type (uri);
+		mime_type = get_slow_mime_type (uri);
 	
 		if (mime_type != NULL)
 		{

@@ -1,3 +1,17 @@
+2004-03-05  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-document.c (get_slow_mime_type): new function (it will
+	be removed when gnome-vfs will expose an equivalent public
+	function)
+	(gedit_document_set_uri): use get_slow_mime_type to get the mime-type,
+	fixes bug #135565 (.cgi files no longer highlight)
+
+	* gedit-mdi-child.c (get_slow_mime_type): new function
+	(set_tab_icon)(set_tooltip): use get_slow_mime_type to get 
+	the mime-type
+
+	Probably we should add a gedit_document_get_mime_type function.
+
 2004-02-25  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-commands.c (gedit_cmd_help_about): added Paolo Borelli 
