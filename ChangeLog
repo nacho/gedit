@@ -1,0 +1,985 @@
+1998-08-24  Alex Roberts <bse@dial.pipex.com>
+
+	* Converted gEdit's source tree into its own Gnome/CVS module...
+
+1998-08-23  Alex Roberts <bse@dial.pipex.com>
+
+	* Separated plugins into their own directories
+
+Sat Aug 22 14:33:49 MET DST 1998  Jochen Friedrich <jochen@scram.de>
+
+	* commands.c, gE_files.c: replaced basename() by g_basename().
+
+Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* Restored gtk_widget_grab_focus's, because they seem
+	  to work now. (if you update to the latest CVS GTK+)
+
+	* For !WITHOUT_GNOME, don't create the toolbar handlebox
+	  ourselves, since gnome-app-helper creates it. Obey
+	  the ui_properties setting with respect to toolbar
+	  relief.
+
+1998-08-18  Evan Lawrence <evan@worldpath.net>
+
+	* Disabled several gtk_text_grab_focus's until I can figure out why
+	  recent changes in gtk cause gEdit to crash.. Owen?
+
+1998-08-1?  Evan Lawrence <evan@worldpath.net>
+
+	* Fixed the recent-list to remove duplicate entries...
+
+	* Added Martin Wahlen's spell-checking plugin to CVS.. We need to
+	  add some plugin functions to the API for him, but what's he's got
+	  looks great...
+
+	* Committed Dan's latest modifications to the scrollball widget...
+
+1998-08-13  Chris Lahey  <clahey@umich.edu>
+
+	* gE_document.c: 
+	* gE_plugin_api.c: 
+	* gedit.c: 
+	* gE_init.c: 
+	* commands.c:
+	Got rid of most of the GINT_TO_POINTER and GPOINTER_TO_INT calls.
+
+1998-08-13  Evan Lawrence <evan@worldpath.net>
+
+	* Following Chris's instructions, made an initial attempt at making the plugins
+	  api 64 bit clean...
+
+1998-08-12  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch, after making the neccassary modifications
+	  to get it to compile for the gnome version...
+
+	* Got a new (better) version of the scrollball widget from Daniel
+	  Dunbar, and committed that...
+
+1998-08-11  Andy Kahn <kahn@zk3.dec.com>
+
+	* remove "#include "plugin.h" from main.h because the whole world
+	doesn't need it.  include it only where needed.
+
+	* gE_prefs.[ch]: cleanup.  drop a ton of unneeded cruft.  pretty print.
+
+	* gE_document.c: cleanup gE_window_new().
+
+	* menus.c: (non-Gnome) simplify and drop unnecessary code.  no sorry,
+	menu accelerators still don't work.
+
+	* diff.c: drop erroneous printf's.
+
+	* put evan's scrollball menu option in ifdef's for non-Gnome.
+
+	* rename all *_callback routines to *_cb.
+
+	* lots of other misc changes as a result of the above changes...
+
+1998-08-10  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch (we do care Andy ;-)
+
+	* Added Toggle Scrollball option to the options menu...
+
+1998-08-10  Andy Kahn <kahn@zk3.dec.com>
+
+	* rewrite and improve popup-menu-on-right-mouse-click.  specifically:
+
+		- drop gE_text_popupmenu from main.h.  there is no good reason
+		to be storing every widget used to make the popup menu.  all
+		that is needed is a pointer to the top-level menu widget.
+
+		- make all the popup menu routines private only within
+		gE_document.c because they're never used anywhere else.
+
+		- use a table to generate the menu instead of individually
+		adding each one (eliminate repetitive code).
+
+		- when swapping .c and .h files, now swaps .cpp files and
+		handles upper/lower case too (e.g., swap .H and .C).
+
+	* menus.c: add ifdef GTK_HAVE_FEATURES_1_1_0 for the split-screen
+	menu entry.
+
+	* gE_document.c: code cleanup, reindendation.
+
+	* gE_files.c: drop unused variables from gE_file_open().
+
+	* rename file_open_in_new_win_cmd_callback to file_open_in_new_win_cb.
+	it's still a long name, but not ridiculously long. :)
+
+	* add dialog.[ch] to GTK.Makefile.am
+
+	* fix indendation in ChangeLog.
+
+1998-08-09  Evan Lawrence <evan@worldpath.net>
+
+	* Added "Open in new window" to the right-click popup-menu that calls
+	  file_open_in_new_win_cmd_callback, so that now you can be editting
+	  a file and immediately switch it over to its own window - will also
+	  help for when we implement DND to the desktop...
+
+	* Implemented (slightly buggy) split-screen support for users with gtk
+	  1.1 - still needs proper prefs implemented, as it's always on at
+	  startup now...
+
+1998-08-08  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch below, after making the neccassary
+	  modifications to the toolbar routines to get the gnome version to
+	  work, and removed the plugin changes per Chris's request - he made
+	  some changes today that weren't taken into account in the patch...
+
+	* Added the patch from Mikael Hermansson that creates a popup menu
+	  when you right click on the text widget, after I moved a couple
+	  items around to (I hope - this is debatable) more logical position,
+	  and added a couple more functions (Save and Print.) Also added the
+	  proper internationalization support for the gnome version...
+
+1998-08-08  Andy Kahn <kahn@zk3.dec.com>
+
+	* generalize popup dialog boxes by using a common routine.  currently,
+	the search/replace popup, the save-file-on-close popup, and the
+	save-file-before-printing popup, use this.
+
+	* improve print routine to be more intelligent and not have to always
+	create a temporary file.
+
+	* for non-Gnome version, add floating menubar.  whee
+
+	* moved all search routines out of commands.[ch] to search.[ch].
+
+	* change all assert() statements to g_assert().
+
+	* include plugin patch to cleanup compiler warnings that Alex included
+	for 0.4.5, but forgot to commit into cvs.
+
+	* update TODO list
+
+	* new files: dialog.[ch], search.[ch].
+
+	* main.h: drop unused from gE_window struct.  change some gint fields
+	back to gboolean, because that's what they are.  add toolbar field
+	to gE_window for files_list_window so that main toolbar options
+	(on/off, pic/text/both, etc.) also affect the toolbar for the files
+	list window.
+
+	* gE_files.c: fix bug where doing a Save after a Save-As would result
+	in a bogus filename.
+
+	* toolbar.c: minor code cleanup, including use boolean defs TRUE/FALSE
+	instead of 1/0.  i had these here before (see 1998-07-13 entry), but
+	alex changed them back to 1/0.
+
+1998-08-08  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.c: Fixed #include ordering.
+
+1998-08-07  Evan Lawrence <evan@worldpath.net>
+
+	* Made some changes to the way close_execute works, so we could
+	  use it in the document_close plugins api.
+
+	* Broke recent-documents. I was trying to fix it so it wouldn't show
+	  duplicates of the same document, but screwed some stuff up in the
+	  algorythm - nothing real bad, just doesn't work quite right. The
+	  reason I'm committing this is so I could commit the above changes..
+
+	* Added the proper api to plugin_document_open and plugin_document_close
+	  and had to make a minor modification of close_doc_execute to
+	  incorporate them...
+
+	* Temporarily added a gtkscrollball widget immediately above the
+	  scrollbar, per Dan Dunbar's request - this is all part of my quest
+	  for world domination...
+
+	* Temporarily added a foot/program menu, so as to give the gnome-gui
+	  guys something to play with...
+
+1998-08-06  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c (process_next): 
+	the plugin_document_close function is now required to return a
+	bool based on whether the document actually closed.  Returns TRUE
+	if the plugin actually closed.
+	* plugin.c: Added a document_close function to the API.
+
+1998-07-31  Andy Kahn <kahn@zk3.dec.com>
+
+	* fix three bugs reported by Mikael Hermansson:
+
+	    1. opening a file that doesn't exist from the command line
+	    results in seg fault.
+
+	    2. doing "Save As" with a new filename results in subsequent
+	    "Save" commands failing.
+
+	    3. if quitting gedit and a changed file has not been saved,
+	    selecting "Cancel" on the yes/no/cancel save dialog box results
+	    in the original window disappearing and never coming back.
+
+	* fix for bug reported by Marin Purgar, where if PLUGINDIR did not
+	exist, readdir() causes a segv (e.g., on Linux).
+
+1998-07-29  Alex Roberts  <bse@dial.pipex.com>
+
+	* Fixed the preferences routines, that had been mysteriously broken,
+	  without even a word in this ChangeLog...!
+
+1998-07-29  Evan Lawrence <evan@worldpath.net>
+
+	* Got recent documents working for the gnome version.. Currently you can
+	  change the # of documents it displays by redefining the  MAX_RECENT
+	  variable.. The default is 4, per the style guide..
+
+1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* main.h: check for #defined GTK_HAVE_FEATURES_1_1_0 instead of
+	GTK_HAVE_ACCEL_GROUP.
+
+1998-07-26  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch below, and made the necassary modifications
+	  to the gnome version - I also moved New Window and Close Window
+	  into, logically, the Window menu...
+
+	* Wrote up a TODO file of some of the things I'd like to get done, most
+	  of them before 0.5.0...
+	
+	* After modifying the gnome Makefile.am to reflect Andy's changes,
+	  I added his actual Makefile.am as GTK.Makefile.am, so any new gtk-only
+	  developers don't have to hack their own..
+
+	* Renamed the plugins_README to README.plugins on CVS...
+
+1998-07-25  Andy Kahn <kahn@zk3.dec.com>
+
+	* add a popup window to show files/document list.  includes its own
+	mini-toolbar, to let you print/open/save a file shown in the list.
+	doc list auto-updates as you open/close/rename files.
+
+	* implement new read/write file algorithms, which should
+	read/write large(r) files a LOT faster.
+
+	* add a "Close All Files" command.
+
+	* rework and modularize a lot of code.  consequently, closing
+	files/docs and windows, especially if you have a lot files open,
+	will "appear" a lot faster now.
+
+	* add message box popup window.  you can see a "log" of gedit
+	messages.  e.g., which files were opened, closed, saved, etc.
+
+	* new files: msgbox.c, msgbox.h, xpm/tb_exit.xpm
+
+1998-07-21  Alex Roberts  <bse@dial.pipex.com>
+
+	* Added Evan's email plugin to plugins_README...
+	
+	* Added a notice in plugins/plugin_howto to add the plugin details
+	  to plugins_README (I don't really want to add them myself!)...
+	  
+	* Fixed Evan's previous addition to ChangeLog...
+
+1998-07-21  Evan Lawrence <evan@worldpath.net>
+
+	* Added the email plugin - it currently grabs the text out of the
+	  document, instead of requiring you to save the file first - this
+	  does however mean it's affected by the problem in the plugins api
+	  wherein not all of the text is grabbed...
+	  
+	* Fixed the gtk version of the toolbar so it resizes properly when
+	  you switch to text/pic only...
+	
+1998-07-20  Alex Roberts  <bse@dial.pipex.com>
+
+	* Added plugins_README: information on the current plugins included
+	  with gEdit...
+
+1998-07-18  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c: Copied the latest versions of these from my copy of
+	go.  Lots of changes to increase robustness.
+
+	* gedit.c (parse_an_arg): Added argument parsing code.
+
+1998-07-18  Chris Lahey  <clahey@umich.edu>
+
+	* gE_plugin_api.c (add_plugin_to_menu): Fixed a problem with
+	plugin insertion if using a language other than English.
+
+1998-07-17  Andy Kahn <kahn@zk3.dec.com>
+
+	* rework and improve the print routine:
+		- rename _file_print() to file_print_execute()
+		- creates temporary file a *lot* faster now (dumps all the
+		text in one swell foop instead of one character at a time)
+		- deletes the temporary file
+		- drop a lot of excess/unnecessary variables
+		- add a small note that code was borrowed from gIDE
+		- misc code cleanup
+		- more todo: see file_print_execute() comments in code
+
+	* add a toolbar handle, so you can have floating toolbars.  whee
+
+1998-07-16  Alex Roberts  <bse@dial.pipex.com>
+
+	* Fixed printing in non-Gnome
+	
+	* Moved all plugins (and client.[ch]) into plugins/
+	  All new plugins must be placed there...
+	
+	* Added Encrypt/Decrypt plugins... Using ROT13 to encrypt
+	  and Caesar to decrypt...
+
+1998-07-15  Evan Lawrence <evan@worldpath.net>
+
+	* Added plugin_program_quit to the plugins api...
+
+	* Fixed main.h file so toolbar.c doesn't give an error about
+	  the struct not containing some things..
+
+1998-07-15  Alex Roberts  <bse@dial.pipex.com>
+
+	* Fixed hello.c: Now works with the current Plugin API! :)
+	
+	* Print functions work perfectly now (hopefully, i don't
+	  have my printer set up properly), and save the print command
+	  for the next session of gEdit.
+
+1998-07-14  Alex Roberts  <bse@dial.pipex.com>
+
+	* Put all Print specific functions, etc, into gE_print.h
+
+	* Started implementing new Print functions, bewarend, it sigsegvs!
+
+1998-07-13  Alex Roberts  <bse@dial.pipex.com>
+
+	* Implemented Pixmaps only, Text only, or Both to the 
+	  toolbar on start up...
+	  
+	* Modified homepage URL in the About box...
+	
+	* Upped version to 0.4.5, for next official release...
+	
+1998-07-13  Evan Lawrence <evan@worldpath.net>
+
+	* The previous changes to the gnome menu code broke the
+	  menus for multiple windows.. Fixed that..
+
+1998-07-13  Andy Kahn <kahn@zk3.dec.com>
+
+	(all changes are not Gnome specific)
+
+	* fix "blinky" label in the about box (gtk-only version).  cleanup
+	  and simplify gE_about.c.
+
+	* for now, include pixmap file/description directly into code as
+	  default pixmap for toolbar.
+
+	  (new files: xpm/tb_cancel.xpm, xpm/tb_copy.xpm, xpm/tb_cut.xpm,
+	  xpm/tb_edit.xpm, xpm/tb_help.xpm, xpm/tb_new.xpm, xpm/tb_open.xpm,
+	  xpm/tb_paste.xpm, xpm/tb_print.xpm, xpm/tb_save.xpm,
+	  xpm/tb_search.xpm)
+
+	  TODO: allow user configurable path (saved in ~/.gedit) to load
+	  user-prefered toolbar pixmaps.
+
+	* for the statusbar label: add gE_msgbar_XXX() routines to manipulate
+	  the label.  remembers last label printed and auto-clears the label
+	  after a small timeout.
+
+	* cleanup main.h:
+	  	- drop unneeded includes.
+		- for WITHOUT_GNOME, define auto_indent, show_tabs,
+		show_status, and have_toolbar to be gboolean's instead of
+		gint's.  define tab_pos to be GtkPositionType instead of gint.
+		- move all function prototypes to their respective .h files.
+		(new files: gE_about.h, gE_document.h, gE_files.h)
+
+	* where applicable:
+		- use GTK_TOP_{TOP,BOTTOM,LEFT,RIGHT} for notebook tab
+		positioning instead of directly using the numeric values.
+		- use boolean defs TRUE/FALSE instead of 1/0.
+		- drop variable Ctime.  use GDK_CURRENT_TIME instead.
+		- include new .h files as needed.
+		- use gE_msgbar_XXX() routines as needed.
+		- add GPL notice, drop unused, cleanup prototypes.
+
+	* other misc changes (these should go into the log entry for each file
+	  when checked into CVS, but we're not doing that too well, so...) :
+	  gE_document.c:
+		- move destroy_window() to here.  rename to gE_destroy_window().
+		- make notebook_switch_page() static.
+		- move gE_show_version() to gedit.c
+	  gedit.c:
+	  	- include new .h files as needed.  drop unused cruft.
+		- move gE_show_version() (now static) here.
+		- move destroy_window() to gE_document.c.  rename to
+		gE_destroy_window().
+
+1998-07-12  Evan Lawrence <evan@worldpath.net>
+
+	* Made corrections to gnome menu code to get it to compile
+	  properly with -Wall and -ansi - you still get warnings though
+	  due, I think, to gnome's general handling of menus.
+
+	* Fixed it so you can no longer open directories as files -
+	  now it switches to that directory like it should.. Also
+	  removed file op buttons in the open fileselector, since
+	  they're not needed and get in the way..
+
+	* Removed the gtk_idle_add used in command-line loading, so
+	  you can load more than one file correctly now..
+
+	* Committed Andy's cool patch below that fixes up a lot of stuff..
+
+1998-07-11  Andy Kahn <kahn@zk3.dec.com>
+
+	(all changes are not Gnome specific)
+
+	* modularize code: move function prototypes for routines in
+	  commands.c from main.h into commands.h (new file).
+	  include commands.h where needed.  still more to be done...
+
+	* tons of code cleanup to remove compiler warnings.
+
+	* menus.c : restructure entire file for cleaner code.  Gnome
+	  and non-Gnome code completely separated.  move menus_items to
+	  be a global variable and not contain any references/pointers
+	  to parameters passed into menus_init().  this should be done
+	  for the Gnome version as well.
+
+	* add "-Wall -ansi -pedantic' to Makefile.am.  this should really be
+	  automatically added to CFLAGS if GNU C is detected.  is this a
+	  configure.in (autoconf) option?
+
+	* reformatted some entries in ChangeLog file.
+
+1998-07-10  Evan Lawrence <evan@worldpath.net>
+
+	* New document tabs are automatically switched too now..
+
+	* Changed the statusbar so it's actually a gtk_label,
+	  instead of a gtk_statusbar, to fix a mem leak..
+
+1998-07-10  Evan Lawrence <evan@worldpath.net>
+
+	* I *think* I fixed all the bugs I added in my previous commit...
+
+1998-07-08  Chris Lahey  <clahey@umich.edu>
+
+	* menus.c (gE_menus_init): Added some example code relating to an
+	  idea I have about configurability.
+
+	* menus.c (gE_menus_init): Made it so that there wasn't a
+	  separator at the bottom of the plugins list.
+
+1998-07-08  Evan Lawrence <evan@worldpath.net>
+
+	* Made some changes to the gtk-only automatic plugin detection,
+	  although it's still broken.
+	
+	* Disabled the CAN_FOCUS flag on the scrollbar, line number button,
+	  and notebook tabs (On Chris's suggestion) - makes editting
+	  much smoother..
+	
+	* While I was at it made it so the titlebar changes to reflect the
+	  current document tab selected.
+
+1998-07-08  Chris Lahey  <clahey@umich.edu>
+
+	* gE_plugin_api.c (add_plugin_to_menu): Fixed the menus to display
+	  correctly.
+
+1998-07-08  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.c (plugin_query_all): Synced up changes from go to have
+	  it not detect "." and ".." as plugins.
+
+	* gE_plugin_api.c (add_plugin_to_menu): Added a second GnomeUIInfo
+	  to be the GNOME_APP_UI_ENDOFINFO entry.
+
+1998-07-07  Evan Lawrence <evan@worldpath.net>
+
+	* Some changes to the gtk-only menu code, and started
+	  on automatic plugin detection...
+
+1998-07-02  Chris Lahey  <clahey@umich.edu>
+
+	* client.h: Added stuff to support using client.h in a C++ file.
+
+	* plugin.h: 
+	* plugin.c (plugin_new_with_query): 
+	* client.c (client_init):
+	  Added stuff to better support passing parameters to plugins.
+
+1998-07-02  Chris Lahey  <clahey@umich.edu>
+
+	* reverse.c:
+	* cvsdiff.c: 
+	* diff.c: Added registration stuff.
+
+	* plugin.c:
+	* plugin.h:
+	* client.h: 
+	* client.c: Added stuff to do querying.  Also added a quit program
+	  function.
+
+	* gE_document.c: 
+	* Makefile.am: Made plugins install to a different directory.
+
+1998-07-01  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* gedit.desktop: Added Portuguese translation.
+
+1998-06-30  Chris Lahey  <clahey@umich.edu>
+
+	* main.h:
+	* reverse.c (main): New file
+	* Makefile.am (reverse_plugin_SOURCES): 
+	* gE_document.c (start_reverse): 
+	  (start_plugin): 
+	  (start_cvsdiff): 
+	  (start_reverse): Added reverse plugin.  Also simplified the code
+	  at the end of gE_document.c a bit.
+	  Made gedit aware of where plugins are installed.
+
+	* plugin.c :
+	* plugin.h :
+	* client.c :
+	* client.h :
+	* reverse.c :
+	* diff.c :
+	* cvsdiff.c : A few new plugin functions.
+
+1998-06-28  Evan Lawrence <evan@worldpath.net>
+
+	* Fixed bug I added in my last change that caused gedit to sigsegv when
+	  you closed the window via the window manager.
+
+	* Added a seek_to_line function that will jump the scrollbar to a
+	  specified line, to speed up searches, that kind of thing that
+	  previously crawled to the proper position.
+	
+	* Fixed other minor bugs in searching...
+
+1998-06-28  Alex Roberts  <bse@dial.pipex.com>
+
+	* Removed instances of main_window from gE_file_open and gE_file_save,
+	  and fixed the functions to match with their definitions in main.h...
+
+1998-06-26 and 27  Evan Lawrence  <evan@worldpath.net>
+
+	Sifted through all the code and removed all instances of the global
+	main_window variable, replacing them with either a gE_window pointer
+	or a gE_data pointer. Also added functions to open and close other
+	windows, so you don't have to run a separate copy of gedit - still to
+	be added are functions to move documents between windows, etc.
+	
+1998-06-26  Chris Lahey  <clahey@umich.edu>
+
+	* Makefile.am : 
+	* main.h :
+	* gedit.c : 
+	* gE_document.c (gE_window_new): Plugins are now compiled in by
+	  default.  Dropped the hello-plugin.
+
+	* configure.in: Checks for gedit.c instead of menus.c.  More unique.
+
+	* plugin.c (process_command): 
+	  (plugin_finish): File descriptors for plugins are now freed and
+	  gedit doesn't leave zombie processes.
+
+1998-06-26  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c (process_command, plugin_register, process_next): 
+	  A bit of plugin API expansion.  Broke up the structs a bit.
+
+	* gE_document.c: 
+	* gE_plugin_api.h: 
+	* gE_plugin_api.c:
+	  Using those changes.
+	
+	* client.c:
+	* client.h:
+	  New files defining the new plugin client API.
+
+	* diff.c (main): (call_diff): 
+	* cvsdiff.c (main): Changes to use the new plugin client API.
+
+1998-06-25  Chris Lahey  <clahey@umich.edu>
+
+	* gE_plugin_api.c: 
+	* gE_plugin_api.h: New files. The callback functions for the plugin api.
+	
+	* cvsdiff.c: New file.  The plugin to do a cvs diff.
+
+	* gE_document.c: 
+	* gedit.c:
+	* main.h: 
+	* plugin.h: 
+	* plugin.c: 
+	* diff.c: 
+	* Makefile.am (gedit_SOURCES):
+	More changes to support the plugin system.
+
+1998-06-25  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h, plugin.c: Lot's of new API.
+
+	* diff.c: New file.  A plugin to do diffs.
+
+1998-06-21  Andy Kahn <kahn@zk3.dec.com>
+ 
+       * fix new_pixmap() so that Gtk warning messages go away.
+ 
+       * massive code cleanup:
+              - remove all compiler warnings reported by using
+                 '-Wall -ansi -pedantic' with gcc v2.8.0
+               - simplified code logic in prog_init()
+               - fix bug in gE_about_box() where variable 'button' was
+                 being used before being initialized.  this caused
+                SEGV depending on compiler and compiler options used.
+                 basically, if you're lucky, you don't get the SEGV).
+               - in gE_about_box(), drop unnecessary calls to
+                 gtk_container_add().  were causing GTK warning messages
+                 to be printed.
+               - fix function prototype for file_close_cmd_callback()
+ 
+       * add ifdef to remap "fatal" signals to their default behavior
+         (which will likely cause a core dump).  this was done because
+         if you don't compile GDK with debugging enabled (e.g., you didn't
+         do "./configure --enable-debug=yes"), GDK automatically catches
+         the "fatal" signals and effectively does nothing with them.  gee,
+         that's not very helpful.  to get the signals back to their
+         regular behavior, define "GDK_IS_BRAINDEAD" in gedit.c.  this is
+         only present in main() when WITHOUT_GNOME is defined.
+ 
+       * main.h: drop unused variable gEdit_ID.  move to gE_document.c
+         (it's the only place where it's used).
+ 
+       * pretty print main (for WITHOUT_GNOME), gE_about_box() (also
+         for WITHOUT_GNOME)
+ 
+
+1998-06-22  Chris Lahey  <clahey@umich.edu>
+
+	* toolbar.c: Added internationalization code (N_ repeatedly) for
+	the gnome version of the toolbars.
+
+	* commands.c, main.h:
+	Made changes to follow api changes to functions
+	gtk_editable_{cut,copy,paste}_clipboard.
+
+1998-06-21  Evan Lawrence <evan@worldpath.net>
+
+	Heh, I have *not* been adding changelog entries like a good boy,
+	so here's a summary of what I've done recently..
+
+	* Commited patch from Andy Kahn that added toolbars, after modifying
+	  the buttons on the toolbar.
+
+	* Gnomified the toolbar code, so that it uses the gnome stock pixmaps,
+	  and uses some other gnome functions to make it look gnome-like..
+
+	* Rearanged the file menu, cause it didn't look good the way it was.
+
+	* Added search-for-line capabilities to the search feature, and tied
+	  the "Line" button on the statusbar to popup the search dialog with
+	  search for line selected.
+
+1998-06-20  Alex Roberts <bse@dial.pipex.com>
+
+	* Added 'Toolbar' to prefs file, if you select 'Turn Off Toolbar'
+	  it stys turned off even when you re-start gEdit ('Turn on toolbar'
+	  will keep it turned on)...
+
+1998-06-19  Chris Lahey  <clahey@umich.edu>
+
+	* gE_document.c (gE_window_new): Changed some code in the
+	WITHOUT_GNOME section to support the new accelerator system for
+	those with cvs gtk and without gnome.
+
+	* gE_document.c (gE_window_new): 
+	* plugin.h: 
+	* plugin.c (plugin_new): Changed plugin_init to plugin_new.  It
+	explains the function much better.
+
+	* hello.c (main): Fixed some segfaults.
+
+
+1998-06-18  Chris Lahey  <clahey@umich.edu>
+
+	* menus.c (get_main_menu):
+	* main.h: 
+	* menus.h: Changes to support both the old and new accelerator
+	systems.  Not tested for 1.0 because I only have 1.1.
+
+1998-06-17  Chris Lahey  <clahey@umich.edu>
+
+	* hello.c (main): Added a check to see if it's being run as a
+	plugin.  Also included the proper headers to get read of
+	warnings.
+	* main.h: Forgot to include plugin.h at the top of main.h.
+
+1998-06-17  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c: New files for plugins.
+	* hello.c: The test plugin.  Needs manual compilation still.
+	* gE_document.c, main.h: Changed to allow plugin test.  Changes
+	are #defined out unless PLUGIN_TEST is defined non-zero.
+
+	In general, this feature is not enabled by default.  This is the
+	very first draft, just to make sure the inter process stuff is
+	working.  To enable, compile hello.c and install it as
+	/usr/local/bin/hello-plugin, uncomment the two new files in
+	Makefile.am and define PLUGIN_TEST non-zero near the top of
+	gE_document.c and main.h.
+
+1998-06-10  Chris Lahey  <clahey@umich.edu>
+
+	* menus.c (get_main_menu): 
+	* menus.h: 
+	* main.h: Switched to new accelerator system.
+
+	* main.h: #included <stdio.h> to get declaration of size_t.
+
+1998-05-28   <bse@dial.pipex.com>
+
+	* Thanx to Eli Miller (spooge, his IRC nick) gEdit will now
+	  re-size smaller than its startup size :)
+
+1998-05-26   <evan@worldpath.net>
+
+	* Fixed >2 New file bug
+
+	* Fixed the bug wherein gedit was forced to strip non-ascii 
+	  letters to keep from crashing on openning binary files,
+	  apparently because of a bug in the text widget, (or possibly
+	  my code :) that has since been fixed..
+
+	* Synced the Options menu between the GNOME and non-GNOME versions
+
+1998-05-26   <bse@dial.pipex.com>
+
+	* Released 0.4.0 (Non-GNOME)
+
+	* Save/Restore settings! :)
+	  Currently, it will keep the Tab Position, and if the Statusbar is
+	  visible or not...
+
+1998-05-15   <bse@dial.pipex.com>
+
+	* Print partially implemented...
+
+1998-05-13   <bse@dial.pipex.com>
+
+	* Removed a piece of annoying debugging code...
+
+	* Made the file selector keep position at a file...
+	
+	* Fixed some errors in man page...
+
+1998-05-12   <bse@dial.pipex.com>
+
+	* Updated the README/AUTHORS files to my new email address
+	  (bse@dial.pipex.com)
+
+	* Upped version number to 0.4, ready for next release
+
+1998-05-10   <evan@worldpath.net>
+
+	* Fixed the bug with gEdit not asking if you want to save modified files when you quit...
+	  It's a bit of a hack, but I didn't feel like rewriting a lot of the code from the close routine..
+
+1998-05-09  <bse@dial.pipex.com>
+
+	* Added GNOME version number to the title, it looks better with a version number i feel...
+	
+	* Fixed segfault on startup when using GTK+ 1.1. Hopefully, the bug has gone...
+
+1998-05-03  <bse@dial.pipex.com>
+
+	* Fixed the sigsegv when loading a file from the cmd line.
+	   This does break the (already broken because of the .gnome/gtkrc) font settings
+
+Sun May 03 03:17:13  Kjartan Maraas  <kmaraas@fib.hl.no>
+
+	* .cvsignore: New file. Added some files to it as well.
+	
+1998-05-02   <bse@dial.pipex.com>
+
+	* Improved the description of gEdit in the About Box...
+
+	* Added keyboard shortcuts to the menus
+
+	* Made autoindent turn on when gEdit starts...
+
+	* Fixed the segfault on startup, it won't read it's RC file...
+
+	* robo@earthling.net -> bse@dial.pipex.com     (robo doesn't work anymore)
+
+1998-04-29   <evan@worldpath.net>
+
+	* Several changes in the past few days - you can toggle autoindent,
+	  wordwrap, the document tabs, and the statusbar now.. Other misc stuff...
+
+1998-04-20   <evan@worldpath.net>
+
+	* Made some more changes to the statusbar
+	
+Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
+
+	* Makefile.in, configure, aclocal.m4: Removed automatically
+	generated files. Hope this is OK.
+
+1998-04-19   <robo@earthling.net>
+
+	* Changed application class to gEdit.gedit (from gedit.Gedit), to help with
+	  window managers (e.g WindowMaker)
+
+1998-04-19   <robo@earthling.net>
+
+	* Fixed the configure.in script to include the GTK+ include directories,
+	  (/usr/local/include/glib, etc), and YES we _are_ using gtk-config to
+	  get the directories/libraries needed!
+
+	* Agh! Nobody seems to be updating this! Ok, changes since last entry...
+
+       -* Auto-Indent works, but no way to turn it off (evan@worldpath.net)
+       -* Flickering of the Line/Column fixed (evan@worldpath.net)
+       -* If file from command line doesn't exist, gEdit creates it (evan)
+
+1998-04-16   <robo@earthling.net>
+
+	* Implemented Line/Column display, buggy though, and the Line counter only counts up to the
+          height of the text box, so, it doesn't really work(probably to do with the Text Widget,
+	  that still needs some development)...
+
+	* Changed gEdit's default Width so 80 characters can be viewed on one
+	  line.
+
+	* Applied patch from Nicholas Lamb for better Search and Replace.
+
+	* Added gEdit.desktop for GNOME Panel, for a little GNOMEification of gEdit
+
+1998-04-15   <robo@earthling.net>
+
+	* Added keyboard shortcuts to the search and the 
+	  search and replace commands...
+
+	* Improved the About box: added homepage, and GTK Version
+	  labels, and added gEdit icon...
+
+1998-04-13   <robo@earthling.net>
+
+	* Changed File Close shortcut to Alt-W...
+
+	* Added support for multiple files from the command line
+	  (Which also fixes the Sigsegv when closing files from the command
+	   line)...
+
+1998-04-06   <robo@earthling.net>
+
+	* Added statusbar code
+
+1998-04-04   <robo@earthling.net>
+
+	* Released 0.3.2
+
+	* Added GTK+ version checking to configure
+
+	* Added 2 icons to distribution, one by me, and one by joatman
+	  (joatman@base.org)
+
+1998-04-01   <robo@earthling.net>
+
+	* Added man page to distribution
+
+1998-03-28   <robo@earthling.net>
+
+	* Released 0.3.1
+
+	* Words now wrap onto the next line (Thanks to
+	  GTK+-0.99.9)...
+
+	* Converted gEdit to GNU Autoconf and GNU Automake...
+
+	* Hopefully fixed the clipboard bugs, replaced the
+	  GDK_CURRENT_TIME with a size_t thingy...
+
+	* Fixed (mostly) the command line bug, you couldn't
+	  open a file using a command like 'gedit
+	  /etc/resolv.conf' that's fixed...
+
+1998-03-26   <robo@earthling.net>
+
+	* A file opened from the commandline, the tab no longer shows the
+	  './' before the filename...
+
+1998-03-25   <robo@earthling.net>
+	* Released 0.3
+
+	* Fixed the command line opening bug, now it inserts a './' so when
+	  it saves, all it erases from the tab is the './', instead of the
+	  whole filename.
+
+1998-03-24   <evan@worldpath.net>
+
+	* It no longer dies a horrible death when you try to save empty
+	  files (thanks to Taneli) and behaves quite normally when you open
+	  a binary file...
+
+1998-03-23   <evan@worldpath.net>
+
+	* OK, I think I'm done with search and replace, it now
+	  has the option to ask before replacing. Next up: fix the binary
+	  file bug and apply the patch from Taneli...
+
+1998-03-22   <evan@worldpath.net>
+
+	* Just about done with search and replace, just a few niceties to
+	  add..
+
+1998-03-15    <evan@worldpath.net>
+
+	* Close will now ask if you want to save
+	  before closing a modified file...
+
+1998-03-15    <robo@earthling.net>
+
+	* Woohoo! preferences work!! Now it will read and write ~/.gedit!! :)
+ 	  You can change the font of the text box (still need to restart
+	  gEdit tho,and when you put the text font dialog box up, it puts
+	  it back to the default!)
+
+1998-03-13    <evan@worldpath.net>
+
+	* Fixed the save bug... document->filename
+	  was going out of scope...
+
+1998-03-10    <evan@worldpath.net>
+
+	* Fixed those incredibly annoying close bugs
+
+1998-03-07    <robo@earthling.net>
+
+	* Command line options added
+
+1998-03-05    <robo@earthling.net>
+
+	* 0.2 -> 0.2.1
+
+	* Fixed the Save on an Untitled file bug
+
+	* I got Cut/Copy/Paste/Select All working
+
+	* Started Log
+	

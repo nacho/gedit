@@ -165,7 +165,7 @@ void prj_tree_callback_buttonclick (GtkWidget *pt,  GdkEventButton *ev,gpointer 
 	if (ev->type == GDK_BUTTON_PRESS && ev->button==3 
 			|| ev->type==GDK_2BUTTON_PRESS) { 
 	
-  	  treedata = (prj_tree_data*)gtk_ctree_get_row_data 
+  	  treedata = (prj_tree_data*)gtk_ctree_node_get_row_data 
 	    (GTK_CTREE (pt), GTK_CTREE_NODE(ptr->rowptr));
   	  if (!treedata) 
    	 	return;
@@ -270,10 +270,10 @@ void prj_create_treelist(gchar *fname,prj_manager_window *ptr)
 	treedataroot=g_malloc0(sizeof(prj_tree_data));
 	treedataroot->path=fname;
 	cols[0]=fname;
-	ptr->treeroot=gtk_ctree_insert(GTK_CTREE(ptr->tree),NULL,NULL,cols,5,NULL,
+	ptr->treeroot=gtk_ctree_insert_node (GTK_CTREE(ptr->tree),NULL,NULL,cols,5,NULL,
 										NULL,NULL,NULL,FALSE,TRUE);
 
-	gtk_ctree_set_row_data_full (GTK_CTREE(ptr->tree), ptr->treeroot,
+	gtk_ctree_node_set_row_data_full (GTK_CTREE(ptr->tree), ptr->treeroot,
 					   treedataroot,g_free);
 
 	ddata=readdir(dir);
@@ -288,9 +288,9 @@ void prj_create_treelist(gchar *fname,prj_manager_window *ptr)
 			treedata->is_includefile=FALSE;
 			treedata->filename=g_strconcat (fname, ddata->d_name, NULL);
 			cols[0]=ddata->d_name;
-			subtree	=gtk_ctree_insert(GTK_CTREE(ptr->tree),ptr->treeroot,NULL,cols,5,NULL,
+			subtree	=gtk_ctree_insert_node (GTK_CTREE(ptr->tree),ptr->treeroot,NULL,cols,5,NULL,
 										NULL,NULL,NULL,FALSE,FALSE);
-		    gtk_ctree_set_row_data_full (GTK_CTREE(ptr->tree), subtree,
+		    gtk_ctree_node_set_row_data_full (GTK_CTREE(ptr->tree), subtree,
 					   treedata,g_free);
 					   
 			
@@ -340,7 +340,8 @@ void prj_create_treelist(gchar *fname,prj_manager_window *ptr)
 							strncpy(includename,&buf[old],len-old);
 							includename[len-old]=0;   /* make sure its null terminated */
 							cols[0]=includename;
-							subsubtree=gtk_ctree_insert(GTK_CTREE(ptr->tree),subtree,NULL,cols,5,NULL,
+						
+							subsubtree=gtk_ctree_insert_node (GTK_CTREE(ptr->tree),subtree,NULL,cols,5,NULL,
 										NULL,NULL,NULL,FALSE,FALSE);
 							
 							treedata=g_malloc(sizeof(prj_tree_data));
@@ -348,7 +349,7 @@ void prj_create_treelist(gchar *fname,prj_manager_window *ptr)
 							treedata->is_includefile=TRUE;
 							treedata->filename=includename;
 							
-						    gtk_ctree_set_row_data_full (GTK_CTREE(ptr->tree), subsubtree,
+						    gtk_ctree_node_set_row_data_full (GTK_CTREE(ptr->tree), subsubtree,
 										   treedata,g_free);
 							
 							goto bufloopstart;   /* make sure bufmainloop will compare
