@@ -21,7 +21,7 @@ typedef struct _gE_document gE_document;
 typedef struct _gE_data gE_data;
 
 void prog_init(char **file);
-void destroy_window (GtkWidget *widget, gE_data *data);
+void destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data);
 
 /* File Ops */
 void file_quit_cmd_callback(GtkWidget *widget, gE_data *data);
@@ -45,6 +45,8 @@ void edit_selall_cmd_callback (GtkWidget *widget, gE_data *data);
 void document_changed_callback (GtkWidget *widget, gpointer);
 
 /* Search and Replace */
+void seek_to_line (gE_document *doc, gint line_number);
+int point_to_line (gE_document *doc, gint point);
 void search_search_cmd_callback (GtkWidget *w, gE_data *data);
 void search_replace_cmd_callback (GtkWidget *w, gE_data *data);
 void search_again_cmd_callback (GtkWidget *w, gE_data *data);

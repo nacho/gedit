@@ -38,16 +38,10 @@ char *homea;
 char rc[STRING_LENGTH_MAX];
 char fname[STRING_LENGTH_MAX];
 
-void destroy_window (GtkWidget *widget, gE_data *data)
+void destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
   file_close_window_cmd_callback (widget, data);
-#if PLUGIN_TEST
-  if( data->window->hello )
-    {
-      plugin_finish( data->window->hello );
-      data->window->hello = 0;
-    }
-#endif
+
 }
 
 

@@ -1,3 +1,14 @@
+1998-06-28  Evan Lawrence <evan@worldpath.net>
+
+	* Fixed bug I added in my last change that caused gedit to sigsegv when
+	  you closed the window via the window manager.
+
+	* Added a seek_to_line function that will jump the scrollbar to a specified
+	  line, to speed up searches, that kind of thing that previously crawled to the
+	  proper position.
+	
+	* Fixed other minor bugs in searching...
+
 1998-06-28  Alex Roberts  <bse@dial.pipex.com>
 
 	* Removed instances of main_window from gE_file_open and gE_file_save,

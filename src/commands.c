@@ -60,12 +60,16 @@ void save_cancel_sel (GtkWidget *w, gE_data *data)
 void popup_close_verify(gE_document *doc, gE_data *data)
 {
 	GtkWidget *verify_window, *yes, *no, *cancel, *label;
-
+	gchar *filename;
+	
 	verify_window = gtk_dialog_new();
 	
 	gtk_window_set_title (GTK_WINDOW(verify_window), ("Save File?"));
-	gtk_widget_set_usize (GTK_WIDGET (verify_window), 280, 90);
-	label = gtk_label_new (("File has been modified, do you wish to save it?"));
+
+	filename = g_malloc0 (strlen ("The file   has been modified, do you wish to save it?")
+	                               + strlen (GTK_LABEL (doc->tab_label)->label) + 1);
+	sprintf (filename, "The file %s has been modified, do you wish to save it?", GTK_LABEL (doc->tab_label)->label);
+	label = gtk_label_new (filename);
 #ifdef WITHOUT_GNOME
 	yes = gtk_button_new_with_label ("Yes");
 	no = gtk_button_new_with_label ("No");
@@ -84,7 +88,9 @@ void popup_close_verify(gE_document *doc, gE_data *data)
 	gtk_widget_show (yes);
 	gtk_widget_show (no);
 	gtk_widget_show (cancel);
+
 	gtk_widget_show (verify_window);
+	gtk_widget_set_usize (GTK_WIDGET (verify_window), (GTK_WIDGET (label)->allocation.width) + 8, 90);
 	data->document = doc;
 	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(save_yes_sel), data);
 	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(save_no_sel), data);
@@ -336,7 +342,7 @@ void file_save_cmd_callback (GtkWidget *widget, gE_data *data)
 		#ifdef DEBUG
 		g_warning("The file hasn't been saved yet!\n");
 		#endif
-		file_save_as_cmd_callback(NULL, NULL);
+		file_save_as_cmd_callback(NULL, data);
 	}
 	else
 		gE_file_save (data->window,
@@ -501,6 +507,62 @@ void edit_selall_cmd_callback (GtkWidget *widget, gE_data *data)
 
 
 /* ---- Search and Replace functions ---- */
+
+/* seek_to_line sets the scrollbar to the *approximate* position of the specified line, so as
+   to speed up searching, etc - it's still a good idea (or a must) to insert a char and delete one
+   to get it to go to the exact position. */
+
+void seek_to_line (gE_document *doc, gint line_number)
+{
+	gfloat value, ln, tl;
+	gchar *c;
+	gint i, total_lines = 0;
+
+	c = g_malloc0 (4);
+	for (i = 0; i < gtk_text_get_length (GTK_TEXT (doc->text)); i++)
+	{
+		c = gtk_editable_get_chars (GTK_EDITABLE (doc->text), i, i+1);
+		if  (strcmp (c, "\n") == 0)
+			total_lines++;
+	}
+	
+	g_free (c);
+
+	if (total_lines < 3)
+		return;
+	if (line_number > total_lines)
+		return;
+	tl = total_lines;
+	ln = line_number;
+	value = (ln * GTK_ADJUSTMENT (GTK_TEXT(doc->text)->vadj)->upper) / tl - GTK_ADJUSTMENT (GTK_TEXT(doc->text)->vadj)->page_increment;
+
+	#ifdef DEBUG
+	printf ("%i\n", total_lines);
+	printf ("%f\n", value);
+	printf ("%f, %f\n", GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj)->lower, GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj)->upper);
+	#endif
+
+	gtk_adjustment_set_value (GTK_ADJUSTMENT (GTK_TEXT (doc->text)->vadj), value);
+}
+
+gint point_to_line (gE_document *doc, gint point)
+{
+	gint i, lines;
+	gchar *c = g_malloc0 (3);
+	
+	lines = 0;
+	i = point;
+	for (i = point; i > 1; i--)
+	{
+		c = gtk_editable_get_chars (GTK_EDITABLE (doc->text), i-1, i);
+		if (strcmp (c, "\n") == 0)
+			lines++;
+	}
+	
+	g_free (c);
+	return lines;
+}
+
 void popup_replace_window(gE_data *data);
 
 void search_start (GtkWidget *w, gE_data *data)
@@ -509,14 +571,15 @@ void search_start (GtkWidget *w, gE_data *data)
 	gE_document *doc;
 	gchar *search_for, *buffer, *replace_with;
 	gchar bla[] = " ";
-	gint len, start_pos, text_len, match, i, search_for_line, cur_line, end_line, replace_diff = 0;
+	gint len, start_pos, text_len, match, i, search_for_line, cur_line, end_line, oldchanged, replace_diff = 0;
 	options = data->temp2;
 	doc = gE_document_current (data->window);
 	search_for = gtk_entry_get_text (GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text (GTK_ENTRY(options->replace_entry));
 	buffer = g_malloc0 (sizeof(search_for));
 	len = strlen(search_for);
-
+	oldchanged = doc->changed;
+	
 	if (options->again) {
 		start_pos = gtk_text_get_point (GTK_TEXT (doc->text));
 		options->again = 0;
@@ -553,8 +616,10 @@ void search_start (GtkWidget *w, gE_data *data)
 			if (strcmp (buffer, "\n") == 0)
 				break;
 		}
+		seek_to_line (doc, search_for_line);
 		gtk_editable_insert_text (GTK_EDITABLE(doc->text), bla, strlen(bla), &i);
 		gtk_editable_delete_text (GTK_EDITABLE(doc->text), i-1, i);
+		doc->changed = oldchanged;
 		gtk_editable_select_region (GTK_EDITABLE (doc->text), i-1, end_line);
 		return;
 	}
@@ -575,9 +640,11 @@ void search_start (GtkWidget *w, gE_data *data)
 			gtk_text_thaw (GTK_TEXT(doc->text));
 
 			/* This is so the text will scroll to the selection no matter what */
+			seek_to_line (doc, point_to_line (doc, i));
 			gtk_editable_insert_text (GTK_EDITABLE(doc->text), bla, strlen(bla), &i);
 			gtk_editable_delete_text (GTK_EDITABLE(doc->text), i-1, i);
 			i--;
+			doc->changed = oldchanged;
 
 			gtk_text_set_point (GTK_TEXT(doc->text), i+len);
 			gtk_editable_select_region (GTK_EDITABLE(doc->text), i, i+len);
@@ -594,7 +661,6 @@ void search_start (GtkWidget *w, gE_data *data)
 				}
 				else {
 					gtk_editable_delete_selection (GTK_EDITABLE(doc->text));
-					/*gtk_text_insert (GTK_TEXT(doc->text), NULL, &doc->text->style->black, NULL, replace_with, strlen(replace_with));*/
 					gtk_editable_insert_text (GTK_EDITABLE(doc->text), replace_with, strlen(replace_with), &i);
 					gtk_text_set_point (GTK_TEXT(doc->text), i+strlen(replace_with));
 					replace_diff = replace_diff + (strlen(search_for) - strlen(replace_with));

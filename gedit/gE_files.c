@@ -73,10 +73,6 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 	do {
 		if (fgets(str, sizeof(str)+1, file_handle) == NULL)
 			break;
-			
-/* Was needed to protect against openning binary files, doesn't seem to be needed anymore.. Fix in text widget? */
-/*		else if ( ((int) str[0] > 31)  || ((int) str[0] > 7 && (int)str[0] <14) || ((int)str[0] == 0)) */
-
 		gtk_text_insert (GTK_TEXT(document->text), NULL, &document->text->style->black, NULL, str, strlen(str));
 
 	} while(!feof(file_handle));

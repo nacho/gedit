@@ -53,8 +53,7 @@ gE_window *gE_window_new()
   window->show_tabs = 1;
   
   data = g_malloc0 (sizeof (gE_data));
-  data->window = window;
-  
+
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window->window, "gedit window");
@@ -65,8 +64,11 @@ gE_window *gE_window_new()
   		      GTK_SIGNAL_FUNC(destroy_window),
 		      data);
 */
+
+  data->window = window;
+
   gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
-     		      GTK_SIGNAL_FUNC(file_close_window_cmd_callback),
+     		      GTK_SIGNAL_FUNC(destroy_window),
 		      data);
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
