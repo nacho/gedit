@@ -7,6 +7,7 @@ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 
+AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AC_PROG_INTLTOOL([0.11])
 
 GNOME_PLATFORM_GNOME_2(yes, force)
@@ -35,6 +36,12 @@ PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 1.106.0 libglade-2.0 >= 1.99.2
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
+
+GCONF_CONFIG_SOURCE=
+
+if test "x$GCONF_CONFIG_SOURCE" = "x"; then
+	GCONF_CONFIG_SOURCE="xml::\${sysconfdir}/gconf/gconf.xml.defaults"
+fi
 
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 gedit2. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))

@@ -23,5 +23,12 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = 
 
+schemadir = $(sysconfdir)/gconf/schemas
+schema_DATA = gedit.schemas
+
 install-data-local:
-	gconftool-2 --install-schema-file $(srcdir)/$(GEDIT_SCHEMA)
+	        if test -z "$(DESTDIR)" ; then \
+	                for p in $(schema_DATA) ; do \
+	                        GCONF_CONFIG_SOURCE=$(GCONF_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$$p ; \
+	                done \
+	        fi
