@@ -142,6 +142,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 {
 	GError *error = NULL;
 	gchar* uri;
+	GeditRecent *recent;
+	BonoboWindow *win;
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
 
@@ -193,8 +195,9 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 		}	
 	}
 
-	gedit_recent_add (uri);
-	gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
+	win = gedit_get_active_window ();
+	recent = gedit_mdi_get_recent_from_window (win);
+	gedit_recent_add (recent, uri);
 
 	g_free (uri);
 
@@ -264,12 +267,16 @@ gedit_file_save (GeditMDIChild* child)
 	}	
 	else
 	{
+		BonoboWindow *win;
+		GeditRecent *recent;
+
 		gedit_debug (DEBUG_FILE, "OK");
 
 		gedit_utils_flash_va (_("File '%s' saved."), uri);
 
-		gedit_recent_add (uri);
-		gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
+		win = gedit_get_active_window ();
+		recent = gedit_mdi_get_recent_from_window (win);
+		gedit_recent_add (recent, uri);
 
 		g_free (uri);
 
@@ -357,10 +364,14 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
+		BonoboWindow *win;
+		GeditRecent *recent;
+
 		gedit_debug (DEBUG_FILE, "OK");
 
-		gedit_recent_add (uri);
-		gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
+		win = gedit_get_active_window ();
+		recent = gedit_mdi_get_recent_from_window (win);
+		gedit_recent_add (recent, uri);
 
 		g_free (uri);
 
@@ -405,8 +416,6 @@ gedit_file_exit (void)
 	gedit_plugins_engine_save_settings ();
 	
 	gedit_prefs_save_settings ();
-
-	gedit_recent_history_save ();
 
 	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
 
@@ -569,26 +578,13 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
 }
 
 gboolean 
-gedit_file_open_recent (GeditMDIChild *child, const gchar* uri)
+gedit_file_open_recent (GeditRecent *recent, const gchar *uri, gpointer data)
 {
 	gboolean ret;
-	gchar *temp_uri;
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 
-	/* we need to do this to avoid gedit_recent_add() freeing our uri */
-	temp_uri = g_strdup (uri);
-	
-	ret = gedit_file_open_real (temp_uri, child);
-
-	if (ret)
-	{
-		gchar* t = gnome_vfs_x_format_uri_for_display (temp_uri);
-		gedit_utils_flash_va (_("Loaded file %s"), t);
-		g_free (t);
-	}
-
-	g_free (temp_uri);
+	ret = gedit_file_open_single_uri (uri);
 
 	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
 

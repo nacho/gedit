@@ -56,6 +56,8 @@
 
 #include <gconf/gconf-client.h>
 
+#define RECENT_KEY "GeditRecent"
+
 struct _GeditMDIPrivate
 {
 	gint untitled_number;
@@ -221,6 +223,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GtkWidget *widget;
 	BonoboControl *control;
 	BonoboUIComponent *ui_component;
+	GeditRecent *recent;
 
 	static GtkTargetEntry drag_types[] =
 	{
@@ -312,6 +315,16 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			(gpointer)win);
 
 
+	/* add a GeditRecent object */
+	/* FIXME: maybe max recent files should be a pref? */
+	recent = gedit_recent_new_with_ui_component ("gedit",
+						     10,
+						     ui_component,
+						     "/menu/File/Recents");
+	g_signal_connect (G_OBJECT (recent), "activate",
+			  G_CALLBACK (gedit_file_open_recent), NULL);
+	g_object_set_data (G_OBJECT (win), RECENT_KEY, recent);
+
 	/* Set the window prefs. */
 	gtk_window_set_default_size (GTK_WINDOW (win), 
 			gedit_settings->window_width, 
@@ -321,9 +334,6 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	                  G_CALLBACK (gedit_prefs_configure_event_handler), 
 			  NULL);
 	
-	/* Add the recent files */
-	gedit_recent_init (win);
-
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
 }
@@ -1138,4 +1148,10 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 /*
 	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 */
+}
+
+GeditRecent*
+gedit_mdi_get_recent_from_window (BonoboWindow* win)
+{
+	return GEDIT_RECENT (g_object_get_data (G_OBJECT (win), RECENT_KEY));
 }

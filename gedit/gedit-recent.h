@@ -1,45 +1,37 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
- * gedit-recent.h
- * This file is part of gedit
- *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence, Jason Leach
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
- */
- 
-/*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
- */
-
+/* vim: set sw=8: -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #ifndef __GEDIT_RECENT_H__
 #define __GEDIT_RECENT_H__
 
-#include <bonobo-mdi.h>
+#include <libbonoboui.h>
 
-void	gedit_recent_update_all_windows (BonoboMDI *mdi);
-void 	gedit_recent_update (BonoboWindow *win);
+G_BEGIN_DECLS
 
-void 	gedit_recent_init (BonoboWindow *win);
+#define GEDIT_RECENT(obj)		G_TYPE_CHECK_INSTANCE_CAST (obj, gedit_recent_get_type (), GeditRecent)
+#define GEDIT_RECENT_CLASS(klass) 	G_TYPE_CHECK_CLASS_CAST (klass, gedit_recent_get_type (), GeditRecentClass)
+#define GEDIT_IS_RECENT(obj)		G_TYPE_CHECK_INSTANCE_TYPE (obj, gedit_recent_get_type ())
 
-void	gedit_recent_add (const gchar *filename);
-void	gedit_recent_history_save (void);
+#define GEDIT_RECENT_GLOBAL_LIST "gedit-recent-global"
+
+typedef struct _GeditRecent GeditRecent;
+
+typedef struct _GeditRecentClass GeditRecentClass;
+
+GType        gedit_recent_get_type (void);
+GeditRecent *   gedit_recent_new      (const gchar *appname, gint limit);
+GeditRecent *	gedit_recent_new_with_ui_component (const gchar *appname,
+						gint limit,
+						BonoboUIComponent *uic,
+						const gchar *path);
+
+void gedit_recent_set_ui_component (GeditRecent *recent, BonoboUIComponent *uic);
+
+gboolean     gedit_recent_add      (GeditRecent *recent, const gchar *uri);
+gboolean     gedit_recent_delete   (GeditRecent *recent, const gchar *uri);
+void         gedit_recent_clear    (GeditRecent *recent);
+GSList * gedit_recent_get_list     (GeditRecent *recent);
+void     gedit_recent_set_limit    (GeditRecent *recent, gint limit);
+gint     gedit_recent_get_limit    (GeditRecent *recent);
+
+G_END_DECLS
 
 #endif /* __GEDIT_RECENT_H__ */
-

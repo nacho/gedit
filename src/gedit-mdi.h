@@ -33,6 +33,7 @@
 #define __GEDIT_MDI_H__
 
 #include <bonobo-mdi.h>
+#include "gedit-recent.h"
 
 #define GEDIT_TYPE_MDI			(gedit_mdi_get_type ())
 #define GEDIT_MDI(obj)			(GTK_CHECK_CAST ((obj), GEDIT_TYPE_MDI, GeditMDI))
@@ -72,6 +73,8 @@ void		gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi);
 void 		gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi);
 
 void 		gedit_mdi_clear_active_window_statusbar (GeditMDI *mdi);
+
+GeditRecent	*gedit_mdi_get_recent_from_window (BonoboWindow* win);
 
 #endif /* __GEDIT_MDI_H__ */
 

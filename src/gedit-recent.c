@@ -1,15 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/*
- * gedit-recent.c
- * This file is part of gedit
- *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence, Jason Leach
- * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
- *
+/**
  * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,55 +12,843 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
- */
- 
-/*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
- * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors:
+ *   James Willcox <jwillcox@cs.indiana.edu>
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
-
-#include <gconf/gconf-client.h>
-
-#include "gnome-vfs-helpers.h"
-#include "gedit-recent.h"
-#include "gedit-mdi.h"
-#include "gedit2.h"
-#include "gedit-debug.h"
-#include "gedit-file.h"
-#include "gedit-utils.h"
-
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
+#include <libbonoboui.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include "gedit-recent.h"
 
-#ifndef MAX_RECENT
-#define MAX_RECENT 4
+#define GEDIT_RECENT_BASE_KEY "/desktop/gnome/gal-recent"
+#define GEDIT_RECENT_DEFAULT_LIMIT 10
+#define GEDIT_RECENT_GLOBAL_LIMIT_ENV "GEDIT_RECENT_GLOBAL_LIMIT"
+#define GEDIT_RECENT_VERB_NAME "-uri-"
+
+static void gedit_recent_class_init      (GeditRecentClass * klass);
+static void gedit_recent_init            (GeditRecent * recent);
+static gchar *gedit_recent_gconf_key     (GeditRecent * recent);
+static void gedit_recent_menu_cb         (BonoboUIComponent *uic, gpointer data,
+					  const char *cname);
+static void gedit_recent_notify_cb       (GConfClient *client, guint cnxn_id,
+				         GConfEntry *entry, gpointer user_data);
+
+static GSList * gedit_recent_delete_from_list (GeditRecent *recent,
+					       GSList *list,
+					       const gchar *uri);
+static gchar * gedit_recent_escape_underlines (const gchar *str);
+static GSList * gedit_recent_gconf_to_list    (GConfValue* value);
+static void gedit_recent_update_menus (GeditRecent *recent, GSList *list);
+static void gedit_recent_g_slist_deep_free (GSList *list);
+static void gedit_recent_set_appname (GeditRecent *recent, gchar *appname);
+
+struct _GeditRecent {
+	GObject parent_instance;	/* We emit signals */
+
+	gchar *appname; 		/* the app that this object is for */
+	GConfClient *gconf_client;	/* we use GConf to store the stuff */
+	unsigned int limit;		/* maximum number of items to store */
+
+	BonoboUIComponent *uic;
+	
+	GeditRecent *global;		/* Another GeditRecent object,
+					 * representing the global
+					 * recent uri list
+					 */
+
+	gchar *path;			/* The menu path where our stuff
+					 *  will go
+					 */
+	
+	GHashTable *monitors;		/* A hash table holding
+					 * GnomeVfsMonitorHandle objects.
+					 */
+};
+
+struct _GeditRecentClass {
+	GObjectClass parent_class;
+	
+	void (*activate) (GeditRecent *recent, const gchar *uri);
+};
+
+struct _GeditRecentMenuData {
+	GeditRecent *recent;
+	gchar *uri;
+};
+
+typedef struct _GeditRecentMenuData GeditRecentMenuData;
+
+enum {
+	ACTIVATE,
+	LAST_SIGNAL
+};
+
+/* GObject properties */
+enum {
+	PROP_BOGUS,
+	PROP_APPNAME,
+	PROP_LIMIT,
+	PROP_UI_COMPONENT,
+	PROP_MENU_PATH
+};
+
+static guint gedit_recent_signals[LAST_SIGNAL] = { 0 };
+static GtkObjectClass *parent_class = NULL;
+
+/**
+ * gedit_recent_get_type:
+ * @:
+ *
+ * This returns a GType representing a GeditRecent object.
+ *
+ * Returns: a GType
+ */
+GType
+gedit_recent_get_type (void)
+{
+	static GType gedit_recent_type = 0;
+
+	if(!gedit_recent_type) {
+		static const GTypeInfo gedit_recent_info = {
+			sizeof (GeditRecentClass),
+			NULL, /* base init */
+			NULL, /* base finalize */
+			(GClassInitFunc)gedit_recent_class_init, /* class init */
+			NULL, /* class finalize */
+			NULL, /* class data */
+			sizeof (GeditRecent),
+			5,
+			(GInstanceInitFunc) gedit_recent_init
+		};
+
+		gedit_recent_type = g_type_register_static (G_TYPE_OBJECT,
+							"GeditRecent",
+							&gedit_recent_info, 0);
+	}
+
+	return gedit_recent_type;
+}
+
+static void
+gedit_recent_set_property (GObject *object,
+			   guint prop_id,
+			   const GValue *value,
+			   GParamSpec *pspec)
+{
+	GeditRecent *recent = GEDIT_RECENT (object);
+	gchar *appname;
+
+	switch (prop_id)
+	{
+		case PROP_APPNAME:
+			appname = g_strdup (g_value_get_string (value));
+			gedit_recent_set_appname (recent, appname);
+		break;
+		case PROP_LIMIT:
+			gedit_recent_set_limit (GEDIT_RECENT (recent),
+						g_value_get_int (value));
+		break;
+		case PROP_UI_COMPONENT:
+			gedit_recent_set_ui_component (GEDIT_RECENT (recent),
+						       BONOBO_UI_COMPONENT (g_value_get_object (value)));
+		break;
+		case PROP_MENU_PATH:
+			recent->path = g_strdup (g_value_get_string (value));
+		break;
+		default:
+		break;
+	}
+}
+
+static void
+gedit_recent_get_property (GObject *object,
+			   guint prop_id,
+			   GValue *value,
+			   GParamSpec *pspec)
+{
+	GeditRecent *recent = GEDIT_RECENT (object);
+
+	switch (prop_id)
+	{
+		case PROP_APPNAME:
+			g_value_set_string (value, recent->appname);
+		break;
+		case PROP_LIMIT:
+			g_value_set_int (value, recent->limit);
+		break;
+		case PROP_UI_COMPONENT:
+			g_value_set_pointer (value, recent->uic);
+		break;
+		case PROP_MENU_PATH:
+			g_value_set_string (value, g_strdup (recent->path));
+		break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+	}
+}
+
+static void
+gedit_recent_class_init (GeditRecentClass * klass)
+{
+	GObjectClass *object_class;
+
+	object_class = G_OBJECT_CLASS (klass);
+
+	parent_class = g_type_class_peek_parent (klass);
+
+	object_class->set_property = gedit_recent_set_property;
+	object_class->get_property = gedit_recent_get_property;
+
+	gedit_recent_signals[ACTIVATE] = g_signal_new ("activate",
+			G_OBJECT_CLASS_TYPE (object_class),
+			G_SIGNAL_RUN_LAST,
+			G_STRUCT_OFFSET (GeditRecentClass, activate),
+			NULL, NULL,
+			g_cclosure_marshal_VOID__STRING,
+			G_TYPE_NONE, 1,
+			G_TYPE_STRING);
+
+	g_object_class_install_property (object_class,
+					 PROP_APPNAME,
+					 g_param_spec_string ("appname",
+						 	      "Application Name",
+							      "The name of the application using this object.",
+							      "gal-app",
+							      G_PARAM_READWRITE));
+	g_object_class_install_property (object_class,
+					 PROP_LIMIT,
+					 g_param_spec_int    ("limit",
+						 	      "Limit",
+							      "The maximum number of items to be allowed in the list.",
+							      1,
+							      1000,
+							      10,
+							      G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_UI_COMPONENT,
+					 g_param_spec_object ("ui-component",
+						 	      "UI Component",
+							      "The BonoboUIComponent where we will put menus.",
+							      bonobo_ui_component_get_type(),
+							      G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_MENU_PATH,
+					 g_param_spec_string ("ui-path",
+						 	      "Path",
+							      "The path to put the menu items.",
+							      "/menus/File/GeditRecentDocuments",
+							      G_PARAM_READWRITE));
+
+	klass->activate = NULL;
+}
+
+
+static void
+gedit_recent_init (GeditRecent * recent)
+{
+	int argc=0;
+	char **argv=NULL;
+
+	if (!gconf_init (argc, argv, NULL))
+	{
+		g_warning ("GConf Initialization failed.");
+		return;
+	}
+	
+	if (!gnome_vfs_init ()) {
+		g_warning ("gnome-vfs initialization failed.");
+		return;
+	}
+
+	recent->gconf_client = gconf_client_get_default ();
+	recent->monitors = g_hash_table_new (g_str_hash, g_str_equal);
+}
+
+
+/**
+ * gedit_recent_new:
+ * @appname: The name of your application.
+ * @limit:  The maximum number of items allowed.
+ *
+ * This creates a new GeditRecent object.
+ *
+ * Returns: a GeditRecent object
+ */
+GeditRecent *
+gedit_recent_new (const gchar *appname, gint limit)
+{
+	GeditRecent *recent;
+
+	g_return_val_if_fail (appname, NULL);
+	g_return_val_if_fail (limit > 0, NULL);
+
+	recent = GEDIT_RECENT (g_object_new (gedit_recent_get_type (),
+					   "appname",
+					   appname,
+					   "limit",
+					   limit, NULL));
+
+	g_return_val_if_fail (recent, NULL);
+	
+	return recent;
+}
+
+GeditRecent *
+gedit_recent_new_with_ui_component (const gchar *appname,
+				    gint limit,
+				    BonoboUIComponent *uic,
+				    const gchar *path)
+{
+	GeditRecent *recent;
+
+	g_return_val_if_fail (appname, NULL);
+	g_return_val_if_fail (limit > 0, NULL);
+	g_return_val_if_fail (uic, NULL);
+	g_return_val_if_fail (path, NULL);
+
+	recent = GEDIT_RECENT (g_object_new (gedit_recent_get_type (),
+					   "appname",
+					   appname,
+					   "limit",
+					   limit,
+					   "ui-path",
+					   path,
+					   "ui-component",
+					   uic, NULL));
+
+	return recent;
+}
+
+void
+gedit_recent_set_ui_component (GeditRecent *recent, BonoboUIComponent *uic)
+{
+	GSList *list;
+
+	g_return_if_fail (uic);
+
+	recent->uic = uic;
+	list = gedit_recent_get_list (recent);
+
+	gedit_recent_update_menus (recent, list);
+
+	gedit_recent_g_slist_deep_free (list);
+}
+
+static void
+gedit_recent_clear_menu (GeditRecent *recent)
+{
+	gint i=1;
+	gboolean done=FALSE;
+
+	g_return_if_fail (recent);
+	g_return_if_fail (recent->uic);
+
+	while (!done)
+	{
+		gchar *verb_name = g_strdup_printf ("%s%s%d", recent->appname,GEDIT_RECENT_VERB_NAME, i);
+		gchar *item_path = g_strconcat (recent->path, "/", verb_name, NULL);
+		if (bonobo_ui_component_path_exists (recent->uic, item_path, NULL))
+			bonobo_ui_component_rm (recent->uic, item_path, NULL);
+		else
+			done=TRUE;
+
+		g_free (item_path);
+		g_free (verb_name);
+
+		i++;
+	}
+}
+
+static void
+gedit_recent_monitor_cb (GnomeVFSMonitorHandle *handle,
+			 const gchar *monitor_uri,
+			 const gchar *info_uri,
+			 GnomeVFSMonitorEventType event_type,
+			 gpointer data)
+{
+	GeditRecent *recent= GEDIT_RECENT (data);
+
+	g_return_if_fail (recent);
+
+	/* if a file was deleted, we just remove it from our list */
+	switch (event_type) {
+		case GNOME_VFS_MONITOR_EVENT_DELETED:
+			gedit_recent_delete (recent, monitor_uri);
+			break;
+		default:
+		break;
+	}
+
+}
+
+static void
+gedit_recent_monitor_uri (GeditRecent *recent, const gchar *uri)
+{
+	GnomeVFSMonitorHandle *handle=NULL;
+	GnomeVFSResult result;
+
+	g_return_if_fail (recent);
+	g_return_if_fail (GEDIT_IS_RECENT (recent));
+	g_return_if_fail (uri);
+
+
+	handle = g_hash_table_lookup (recent->monitors, uri);
+	if (handle == NULL) {
+		/* this is a new uri, so we need to monitor it */
+		result = gnome_vfs_monitor_add (&handle,
+				       g_strdup (uri),
+				       GNOME_VFS_MONITOR_FILE,
+				       gedit_recent_monitor_cb,
+				       recent);
+		if (result == GNOME_VFS_OK) {
+			g_hash_table_insert (recent->monitors,
+					     g_strdup (uri),
+					     handle);
+		}
+		else {
+			const gchar *tmp = gnome_vfs_result_to_string (result);
+			g_warning ("%s: %s", tmp, uri);
+		}
+	}
+}
+
+#if 0
+static void
+gedit_recent_monitor_cancel (GeditRecent *recent, const gchar *uri)
+{
+	g_return_if_fail (recent);
+	g_return_if_fail (GEDIT_IS_RECENT (recent));
+	g_return_if_fail (uri);
+
+	g_hash_table_remove (recent->monitors, uri);
+}
 #endif
 
-#define GEDIT_RECENT_BASE_KEY "/apps/gedit-2/recent-files"
 
-static gchar* 	gedit_recent_escape_underscores (const gchar* text);
+static void
+gedit_recent_update_menus (GeditRecent *recent, GSList *list)
+{
+	BonoboUIComponent* ui_component;
+	unsigned int i;
 
-static void 	gedit_recent_update_menus 	(BonoboWindow *win, GList *recent_files);
-static void 	gedit_recent_cb 		(BonoboUIComponent *uic, gpointer user_data, 
-						 const gchar* verbname);
-static void 	gedit_recent_remove 		(char *filename);
-static GList   *gedit_recent_history_get_list 	(void);
-static gchar   *gedit_recent_history_update_list(const gchar *filename);
+	g_return_if_fail (recent);
 
-static GList        *gedit_recent_history_list = NULL;
-static GConfClient  *gedit_gconf_client        = NULL;
+	ui_component = recent->uic;
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
+	gedit_recent_clear_menu (recent);
+	
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	for (i = 1; i <= g_slist_length (list); ++i)
+	{
+		gchar *label = NULL;
+		gchar *verb_name = NULL;
+		gchar *tip = NULL;
+		gchar *escaped_name = NULL;
+		gchar *item_path = NULL;
+		gchar *uri;
+		gchar* cmd;
+		GeditRecentMenuData *md;
+		
+		/* this is what gets passed to our private "activate" callback */
+		md = (GeditRecentMenuData *)g_malloc (sizeof (GeditRecentMenuData));
+		md->recent = recent;
+		md->uri = g_strdup (g_slist_nth_data (list, i-1));
+
+
+		/* Maybe we should use a gnome-vfs call here?? */
+		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
+	
+		escaped_name = gedit_recent_escape_underlines (uri);
+
+		tip =  g_strdup_printf (_("Open %s"), uri);
+
+		verb_name = g_strdup_printf ("%s%s%d", recent->appname,GEDIT_RECENT_VERB_NAME, i);
+		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
+		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
+		bonobo_ui_component_add_verb (ui_component, verb_name,
+					      gedit_recent_menu_cb, md); 
+	        
+		if (i < 10)
+			label = g_strdup_printf ("_%d. %s", i, escaped_name);
+		else
+			label = g_strdup_printf ("%d. %s", i, escaped_name);
+			
+		
+		
+		item_path = g_strconcat (recent->path, "/", verb_name, NULL);
+
+		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			bonobo_ui_component_set_prop (ui_component, item_path, 
+					              "label", label, NULL);
+
+			bonobo_ui_component_set_prop (ui_component, item_path, 
+					              "tip", tip, NULL);
+		}
+		else
+		{
+			gchar *xml;
+			
+			xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
+						" _label=\"%s\"  _tip=\"%s \" hidden=\"0\" />", 
+						verb_name, verb_name, label, tip);
+
+			bonobo_ui_component_set_translate (ui_component, recent->path, xml, NULL);
+
+			g_free (xml); 
+		}
+		
+		gedit_recent_monitor_uri (recent, md->uri);
+
+		g_free (label);
+		g_free (verb_name);
+		g_free (tip);
+		g_free (escaped_name);
+		g_free (item_path);
+		g_free (uri);
+		g_free (cmd);
+	}
+
+
+
+	bonobo_ui_component_thaw (ui_component, NULL);
+}
+
+
+
+/**
+ * gedit_recent_add:
+ * @recent:  A GeditRecent object.
+ * @uri: The URI you want to add to the list.
+ *
+ * This function adds a URI to the list of recently used URIs.
+ *
+ * Returns: a gboolean
+ */
+gboolean
+gedit_recent_add (GeditRecent * recent, const gchar * uri)
+{
+	GSList *uri_lst;
+	gchar *gconf_key;
+
+	g_return_val_if_fail (recent, FALSE);
+	g_return_val_if_fail (GEDIT_IS_RECENT (recent), FALSE);
+	g_return_val_if_fail (recent->gconf_client, FALSE);
+	g_return_val_if_fail (uri, FALSE);
+
+	gconf_key = gedit_recent_gconf_key (recent);
+
+
+	uri_lst = gconf_client_get_list (recent->gconf_client,
+				       gconf_key,
+				       GCONF_VALUE_STRING, NULL);
+
+	/* if this is already in our list, remove it */
+	uri_lst = gedit_recent_delete_from_list (recent, uri_lst, uri);
+
+	/* prepend the new one */
+	uri_lst = g_slist_prepend (uri_lst, g_strdup (uri));
+
+	/* if we're over the limit, delete from the end */
+	while (g_slist_length (uri_lst) > recent->limit)
+	{
+		gchar *tmp_uri;
+		tmp_uri = g_slist_nth_data (uri_lst, g_slist_length (uri_lst)-1);
+		uri_lst = g_slist_remove (uri_lst, tmp_uri);
+	}
+	
+	gconf_client_set_list (recent->gconf_client,
+			      gconf_key,
+			      GCONF_VALUE_STRING,
+			      uri_lst, NULL);
+
+	gconf_client_suggest_sync (recent->gconf_client, NULL);
+
+	/* add to the global list */
+	if (recent->global)
+		gedit_recent_add (GEDIT_RECENT (recent->global), uri);
+
+	g_free (gconf_key);
+	gedit_recent_g_slist_deep_free (uri_lst);
+
+	return TRUE;
+}
+
+
+/**
+ * gedit_recent_delete:
+ * @recent:  A GeditRecent object.
+ * @uri: The URI you want to delete from the list.
+ *
+ * This function deletes a URI from the list of recently used URIs.
+ *
+ * Returns: a gboolean
+ */
+gboolean
+gedit_recent_delete (GeditRecent * recent, const gchar * uri)
+{
+	GSList *uri_lst;
+	GSList *new_uri_lst;
+	gboolean ret = FALSE;
+	gchar *gconf_key = gedit_recent_gconf_key (recent);
+
+	g_return_val_if_fail (recent, FALSE);
+	g_return_val_if_fail (GEDIT_IS_RECENT (recent), FALSE);
+	g_return_val_if_fail (recent->gconf_client, FALSE);
+	g_return_val_if_fail (uri, FALSE);
+
+	uri_lst = gconf_client_get_list (recent->gconf_client,
+				       gconf_key,
+				       GCONF_VALUE_STRING, NULL);
+
+	new_uri_lst = gedit_recent_delete_from_list (recent, uri_lst, uri);
+
+	/* if it wasn't deleted, no need to cause unneeded updates */
+	/*
+	if (new_uri_lst == uri_lst) {
+		return FALSE;
+	}
+	else
+		uri_lst = new_uri_lst;
+	*/
+
+	/* delete it from gconf */
+	gconf_client_set_list (recent->gconf_client,
+			       gconf_key,
+			       GCONF_VALUE_STRING,
+			       new_uri_lst,
+			       NULL);
+	gconf_client_suggest_sync (recent->gconf_client, NULL);
+
+	/* delete from the global list */
+	if (recent->global)
+		gedit_recent_delete (GEDIT_RECENT (recent->global), uri);
+
+
+	g_free (gconf_key);
+	gedit_recent_g_slist_deep_free (new_uri_lst);
+
+	return ret;
+}
+
+/**
+ * gedit_recent_get_list:
+ * @recent: A GeditRecent object.
+ *
+ * This returns a linked list of strings (URIs) currently held
+ * by this object.
+ *
+ * Returns: A GSList *
+ */
+GSList *
+gedit_recent_get_list (GeditRecent * recent)
+{
+	GSList *uri_lst;
+	gchar *gconf_key = gedit_recent_gconf_key (recent);
+
+	g_return_val_if_fail (recent, NULL);
+	g_return_val_if_fail (recent->gconf_client, NULL);
+	g_return_val_if_fail (GEDIT_IS_RECENT (recent), NULL);
+
+	uri_lst = gconf_client_get_list (recent->gconf_client,
+				       gconf_key,
+				       GCONF_VALUE_STRING, NULL);
+
+	g_free (gconf_key);
+
+	return uri_lst;
+}
+
+
+
+/**
+ * gedit_recent_set_limit:
+ * @recent: A GeditRecent object.
+ * @limit: The maximum number of items allowed in the list.
+ *
+ * Use this function to constrain the number of items allowed in the list.
+ * The default is %GEDIT_RECENT_DEFAULT_LIMIT.
+ *
+ */
+void
+gedit_recent_set_limit (GeditRecent *recent, gint limit)
+{
+	GSList *list;
+	int len;
+	unsigned int i;
+
+	g_return_if_fail (recent);
+	g_return_if_fail (GEDIT_IS_RECENT (recent));
+	g_return_if_fail (limit > 0);
+	recent->limit = limit;
+
+	list = gedit_recent_get_list (recent);
+	len = g_slist_length (list);
+
+	if (len <= limit) return;
+
+	/* if we're over the limit, delete from the end */
+	i=g_slist_length (list);
+	while (i > recent->limit)
+	{
+		gchar *uri = g_slist_nth_data (list, i-1);
+		gedit_recent_delete (recent, uri);
+
+		i--;
+	}
+
+	gedit_recent_g_slist_deep_free (list);
+}
+
+
+/**
+ * gedit_recent_get_limit:
+ * @recent: A GeditRecent object.
+ *
+ */
+gint
+gedit_recent_get_limit (GeditRecent *recent)
+{
+	g_return_val_if_fail (recent, -1);
+	g_return_val_if_fail (GEDIT_IS_RECENT (recent), -1);
+
+	return recent->limit;
+}
+
+
+/**
+ * gedit_recent_clear:
+ * @recent: A GeditRecent object.
+ *
+ * This function clears the list of recently used URIs.
+ *
+ */
+void
+gedit_recent_clear (GeditRecent *recent)
+{
+	gchar *key;
+
+	g_return_if_fail (recent);
+	g_return_if_fail (recent->gconf_client);
+	g_return_if_fail (GEDIT_IS_RECENT (recent));
+
+	key = gedit_recent_gconf_key (recent);
+
+	gconf_client_unset (recent->gconf_client, key, NULL);
+}
+
+static void
+gedit_recent_set_appname (GeditRecent *recent, gchar *appname)
+{
+	gchar *key;
+	gint notify_id;
+
+	g_return_if_fail (recent);
+	g_return_if_fail (appname);
+
+	recent->appname = appname;
+
+	/* if this isn't the global list embed a global one */
+	if (strcmp (appname, GEDIT_RECENT_GLOBAL_LIST)) {
+		recent->global = gedit_recent_new (GEDIT_RECENT_GLOBAL_LIST,
+						 GEDIT_RECENT_DEFAULT_LIMIT);
+	}
+
+	/* Set up the gconf notification stuff */
+	key = gedit_recent_gconf_key (recent);
+	gconf_client_add_dir (recent->gconf_client,
+			GEDIT_RECENT_BASE_KEY, GCONF_CLIENT_PRELOAD_NONE, NULL);
+	notify_id = gconf_client_notify_add (recent->gconf_client,
+					    key,
+					    gedit_recent_notify_cb,
+					    recent, NULL, NULL);
+
+
+
+	g_free (key);
+
+
+}
+
+static GSList *
+gedit_recent_delete_from_list (GeditRecent *recent, GSList *list,
+			       const gchar *uri)
+{
+	unsigned int i;
+	gchar *text;
+
+	for (i = 0; i < g_slist_length (list); i++) {
+		text = g_slist_nth_data (list, i);
+		
+		if (!strcmp (text, uri)) {
+			list = g_slist_remove (list, text);
+		}
+	}
+
+	return list;
+}
+
+static void
+gedit_recent_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
+{
+	GeditRecentMenuData *md = (GeditRecentMenuData *) data;
+
+	g_return_if_fail (md);
+
+	gedit_recent_add (md->recent, md->uri);
+	
+	g_signal_emit_by_name (G_OBJECT(md->recent),
+			      "activate",
+			      md->uri);
+
+	g_free (md);
+}
+
+
+/* this takes a list of GConfValues, and returns a list of strings */
+static GSList *
+gedit_recent_gconf_to_list (GConfValue* value)
+{    
+	GSList* iter;
+	GSList *list = NULL;
+
+	g_return_val_if_fail (value, NULL);
+
+	iter = gconf_value_get_list(value);
+
+	while (iter != NULL)
+	{
+		GConfValue* element = iter->data;
+		gchar *text = g_strdup (gconf_value_get_string (element));
+
+		list = g_slist_prepend (list, text);
+
+		iter = g_slist_next(iter);
+	}
+
+	list = g_slist_reverse (list);
+
+	return list;
+}
+
+/* ripped out of gedit2 */
 static gchar* 
-gedit_recent_escape_underscores (const gchar* text)
+gedit_recent_escape_underlines (const gchar* text)
 {
 	GString *str;
 	gint length;
@@ -103,368 +885,66 @@ gedit_recent_escape_underscores (const gchar* text)
 	return g_string_free (str, FALSE);
 }
 
-static GList *
-gedit_recent_history_get_list (void)
+static void
+gedit_recent_g_slist_deep_free (GSList *list)
 {
-        gchar *filename, *key;
-        gint i;
+	GSList *lst;
 
-	gedit_debug (DEBUG_RECENT, "");
-	
-	g_return_val_if_fail (gedit_gconf_client != NULL, NULL);
-	
-	if (gedit_recent_history_list)
-		return gedit_recent_history_list;
+	g_return_if_fail (list);
 
-        /* Read the history filenames from gconf */
-        for (i = 0; i < MAX_RECENT; i++)
-	{
-                key = g_strdup_printf ("%s/file%d", GEDIT_RECENT_BASE_KEY, i+1);
-		filename = gconf_client_get_string (gedit_gconf_client,
-						    key,
-						    NULL);
-		g_free (key);
+	lst = list;
+	while (lst) {
+		g_free (lst->data);
+		lst->data = NULL;
+		lst = lst->next;
+	}
 
-		if (filename == NULL)
-			break;
-
-		gedit_recent_history_list = g_list_append (gedit_recent_history_list, filename);
-        }
-
-        return gedit_recent_history_list;
+	g_slist_free (list);
 }
 
-/**
- * gedit_recent_history_update_list:
- * @filename: 
- * 
- * This function updates the history list.  The return value is a 
- * pointer to the filename that was removed, if the list was already full
- * or NULL if no items were removed.
- * 
- * Return value: 
- **/
 static gchar *
-gedit_recent_history_update_list (const gchar *filename)
+gedit_recent_gconf_key (GeditRecent * recent)
 {
-        gchar *removed = NULL;
-        GList *l = NULL;
-        GList *new_list = NULL;
-        gint count = 0;
-        gboolean found = FALSE;
+	gchar *key;
 
-	gedit_debug (DEBUG_RECENT, "");
+	g_return_val_if_fail (recent, NULL);
 
-        g_return_val_if_fail (filename != NULL, NULL);
-
-        /* Check if this filename already exists in the list */
-        for (l = gedit_recent_history_list; l && (count < MAX_RECENT); l = l->next)
-	{
-                if (!found && (!strcmp ((gchar *)l->data, filename)
-			       || (count == MAX_RECENT - 1)))
-		{
-                        /* This is either the last item in the list, or a
-                         * duplicate of the requested entry. */
-                        removed = (gchar *)l->data;
-                        found = TRUE;
-                }
-		else  /* Add this item to the new list */
-                        new_list = g_list_append (new_list, l->data);
-
-                count++;
-        }
-
-        /* Insert the new filename to the new list and free up the old list */
-        new_list = g_list_prepend (new_list, g_strdup (filename));
-        g_list_free (gedit_recent_history_list);
-        gedit_recent_history_list = new_list;
-
-        return removed;
+	key = g_strdup_printf ("%s/%s", GEDIT_RECENT_BASE_KEY, recent->appname);
+	return key;
 }
 
-/**
- * gedit_recent_history_save:
- * 
- * Write contents of the history list to gconf.
- **/
-void
-gedit_recent_history_save (void)
-{
-        gchar *key; 
-        GList *l;
-        gint i = 1;
-
-	gedit_debug (DEBUG_RECENT, "");
-
-	g_return_if_fail (gedit_gconf_client != NULL);
-
-        for (l = gedit_recent_history_list; l; l = l->next) {
-                key = g_strdup_printf ("%s/file%d", GEDIT_RECENT_BASE_KEY, i++);
-		gconf_client_set_string (gedit_gconf_client,
-					 key,
-					 l->data,
-					 NULL);
-
-                g_free (key);
-                g_free (l->data);
-        }
-	gconf_client_suggest_sync (gedit_gconf_client, NULL);
-
-        g_list_free (gedit_recent_history_list);
-        gedit_recent_history_list = NULL;
-}
-
-
-/**
- * gedit_recent_update_menus:
- * @win: 
- * @recent_files: 
- * 
- * Update the gui part of the recently-used menu
- **/
+/*
 static void
-gedit_recent_update_menus (BonoboWindow *win, GList *recent_files)
+print_list (GSList *list)
 {
-	BonoboUIComponent* ui_component;
-	guint i;
+	while (list) {
+		g_print ("%s, ", (char *)list->data);
 
-	gedit_debug (DEBUG_RECENT, "");
-
-	g_return_if_fail (win != NULL);
-
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
-	
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	for (i = 1; i <= g_list_length (recent_files); ++i)
-	{
-		gchar *label = NULL;
-		gchar *verb_name = NULL;
-		gchar *tip = NULL;
-		gchar *escaped_name = NULL;
-		gchar *item_path = NULL;
-		gchar *uri;
-
-		uri = gnome_vfs_x_format_uri_for_display (g_list_nth_data (recent_files, i - 1));
-	
-		escaped_name = gedit_recent_escape_underscores (uri);
-
-		tip =  g_strdup_printf (_("Open file %s"), uri);
-
-		verb_name = g_strdup_printf ("FileRecentOpen%d", i);
-	        
-		label = g_strdup_printf ("_%d. %s", i, escaped_name);
-
-		item_path = g_strdup_printf ("/menu/File/Recents/%s", verb_name);
-
-		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-		{
-			bonobo_ui_component_set_prop (ui_component, item_path, 
-					              "label", label, NULL);
-
-			bonobo_ui_component_set_prop (ui_component, item_path, 
-					              "tip", tip, NULL);
-		}
-		else
-		{
-			gchar *xml;
-			
-			xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
-						" _label=\"%s\"  _tip=\"%s \" hidden=\"0\" />", 
-						verb_name, verb_name, label, tip);
-
-			bonobo_ui_component_set_translate (ui_component, "/menu/File/Recents/", xml, NULL);
-
-			g_free (xml); 
-		}
-
-		g_free (label);
-		g_free (verb_name);
-		g_free (tip);
-		g_free (escaped_name);
-		g_free (item_path);
-		g_free (uri);
+		list = list->next;
 	}
-
-	for (i = g_list_length (recent_files) + 1; i <= MAX_RECENT; ++i)
-	{
-		gchar *item_path = g_strdup_printf ("/menu/File/Recents/FileRecentOpen%d", i);
-
-		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-			bonobo_ui_component_rm (ui_component, item_path, NULL);
-
-		g_free (item_path);
-	}
-
-	bonobo_ui_component_thaw (ui_component, NULL);
+	g_print ("\n\n");
 }
-	
-/* Callback for a click on a file in the recently used menu */
+*/
+          
+/* this is the gconf notification callback. */
 static void
-gedit_recent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+gedit_recent_notify_cb (GConfClient *client, guint cnxn_id,
+			GConfEntry *entry, gpointer user_data)
 {
-	BonoboMDIChild *active_child;
-	gchar *uri;
-	gint i;
-	
-	gedit_debug (DEBUG_RECENT, "%s", verbname);
+	GSList *list=NULL;
+	GeditRecent *recent = user_data;
 
-	i = GPOINTER_TO_INT (user_data);
-
-	uri = g_list_nth_data (gedit_recent_history_list, i - 1);
-	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
-
-	if (!gedit_file_open_recent (active_child != NULL ? GEDIT_MDI_CHILD (active_child) : NULL, uri))
-	{
-		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
-		gedit_utils_flash_va (_("Unable to open recent file: %s"), t);
-		g_free (t);
-		gedit_recent_remove (uri);
-		gedit_recent_history_save ();
-		gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi));		
-	}
-}
-
-/**
- * gedit_recent_update:
- * @win: 
- *
- * Grabs the list of recently used documents, then updates the menus by
- * calling recent_update_menus().  Should be called when a new
- * window is created. It updates the menu of a single window.
- **/
-void
-gedit_recent_update (BonoboWindow *win)
-{
-	GList *filelist = NULL;
-
-	gedit_debug (DEBUG_RECENT, "");
-
-	filelist = gedit_recent_history_get_list ();
-
-	gedit_recent_update_menus (win, filelist);
-}
-
-/**
- * gedit_recent_update_all_windows:
- * @mdi: 
- *
- * Updates the recent files menus in all open windows.
- * Should be called after each addition to the recent documents list.
- **/
-void
-gedit_recent_update_all_windows (BonoboMDI *mdi)
-{
-	guint i;
-	GList *windows;
-	
-	gedit_debug (DEBUG_RECENT, "");
-	
-	g_return_if_fail (mdi != NULL);
-
-	windows = bonobo_mdi_get_windows (mdi);
-       	g_return_if_fail (windows != NULL);
-       
-	for (i = 0; i < g_list_length (windows); i++)
-                gedit_recent_update (BONOBO_WINDOW (g_list_nth_data (windows, i)));
-}
-
-
-/**
- * gedit_recent_add:
- * @filename: Filename of document to add to the recently accessed list
- *
- * Record a file in GNOME's recent documents database 
- **/
-void
-gedit_recent_add (const char *filename)
-{
-	gchar *del_name;
-	gchar *uri;
-
-	gedit_debug (DEBUG_RECENT, "");
-
-	g_return_if_fail (filename != NULL);
-
-	uri = gnome_vfs_x_make_uri_canonical (filename);
-	g_return_if_fail (uri != NULL);
-
-	del_name = gedit_recent_history_update_list (uri);
-
-	g_free (uri);
-	g_free (del_name);
-}
-
-
-/**
- * gedit_recent_remove:
- * @filename: Filename of document to remove from the recently accessed list
- *
- * Record a file in GNOME's recent documents database 
- **/
-static void
-gedit_recent_remove (char *filename)
-{
-	guint n;
-	guchar * nth_list_item;
-
-	gedit_debug (DEBUG_RECENT, "");
-
-	for (n=0; n < g_list_length (gedit_recent_history_list); n++)
-	{
-		nth_list_item = g_list_nth_data (gedit_recent_history_list, n);
-		if (strcmp (nth_list_item, filename) == 0)
-		{
-			gedit_recent_history_list = g_list_remove (gedit_recent_history_list, nth_list_item);
-			g_free (nth_list_item);			
-			return;
-		}
-	}
-}
-
-void 
-gedit_recent_init (BonoboWindow *win)
-{
-	BonoboUIComponent* ui_component;
-	int i;
-
-	gedit_gconf_client = gconf_client_get_default ();
-	g_return_if_fail (gedit_gconf_client != NULL);
-
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
-	
-	bonobo_ui_component_freeze (ui_component, NULL);
-
-	for (i = 1; i <= MAX_RECENT; ++i)
-	{
-		gchar* cmd;
-		gchar* verb_name;
-		
-		verb_name = g_strdup_printf ("FileRecentOpen%d", i);
-		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
-		
-		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
-		bonobo_ui_component_add_verb (ui_component, verb_name, gedit_recent_cb, 
-					      GINT_TO_POINTER (i)); 
-
-		g_free (cmd);
-		g_free (verb_name);
+	/* this means the key was unset (cleared) */
+	if (entry->value == NULL) {
+		gedit_recent_clear_menu (recent);
+		return;
 	}
 
-	
-	bonobo_ui_component_thaw (ui_component, NULL);
+	list = gedit_recent_gconf_to_list (entry->value);
 
-	gconf_client_add_dir (gedit_gconf_client,
-			      GEDIT_RECENT_BASE_KEY,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL,
-			      NULL);
-		
-	gedit_recent_update (win);
+	if (recent->uic) {
+		gedit_recent_update_menus (recent, list);
+	}
+
+	//gedit_recent_g_slist_deep_free (list);
 }
-
-	
-
-			
-

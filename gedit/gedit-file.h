@@ -44,7 +44,7 @@ void		gedit_file_exit 	(void);
 gboolean	gedit_file_revert 	(GeditMDIChild *child);
 
 gboolean 	gedit_file_open_uri_list (GList* uri_list, gint line);
-gboolean 	gedit_file_open_recent   (GeditMDIChild *child, const gchar* uri);
+gboolean 	gedit_file_open_recent   (GeditRecent *recent, const gchar* uri, gpointer data);
 gboolean 	gedit_file_open_single_uri (const gchar* uri);
 
 gboolean	gedit_file_open_from_stdin (GeditMDIChild *active_child);
