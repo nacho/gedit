@@ -1,55 +1,54 @@
-TODO (last update: July 18, 2002)
+TODO (last update: August 24, 2002)
 ===================================
 
-2.0.1 Tasks
------------
+Here you can find a list of TODOs for gedit.
+For each item you will find a state flag (A: assigned, X: finished) and a responsible person.
+If you want to claim a task, please contact the person responsible for it.
+Even if you are not a developer or you have only a limited experience, 
+you can find tasks for you as well. 
+You can also find other taskes on bugzilla. If you are working for fixing a bug, 
+please attach a "I'm working on it" comment to the bug report.
 
-[X] Moving schemas, key, man files in a data dir (Paolo) 
-[x] Moving the plugin manager in the preferences dialog (Paolo)
 
-- New features
-[X] Saving files in locale encoding when needed (Paolo)
+Difficult tasks
+---------------
 
-- Bug fixing
-[ ] #86713 Crash in gedit_utils_flash()
-[X] #75861 Deleting a file in use does not prompt for "save" on close (Paolo)
-[X] #76001 Should not save window geometry on exit (Paolo)
-[X] #86333 modality problem on info/message box (Paolo)
-[X] #87265 s/gedit/Text Editor? (Paolo)
-[X] #84096  All the applications pop down menu becomes empty.when gedit command 
-    is typed in the shell output dialog(Paolo)
-[X] #77557 gedit doesn't create files specified on the command line that does 
-    not exist (Paolo)
-[X] #52512 add tab and carriage return to find/replace (James)
-[ ] #84986 gedit not fully session aware
-[ ] #88076 courier is not a good default font for all locales (Paolo)
-[X] #88270 gedit does not remember window positions or state (Paolo)
+[ ] Implementing syntax highlightening (Resp: Paolo)
+[ ] The remote files should be read in an async way (Resp: Paolo)
+[ ] Writing a new gedit shell to replace bonobo-mdi (Resp: Paolo)
+[ ] Writing a gedit nautilus view (Resp: Paolo)
 
-2.0.2 Tasks
------------
+Normal tasks
+------------
 
-- Bug fixing
-[ ] #86967 Gedit hogs the CPU usage
-[ ] #80342 gedit fails to build on RedHat 7.1 for Alpha (Paolo)
-[X] #85540 Plugins not built with -module (James)
-[ ] #77184 Undo should manage "need-saving" flag (Paolo)
+[ ] Implementing a spell checker plugin (Resp: Paolo)
+[ ] Porting the sort plugin (Resp: Paolo)
+[ ] Bug #77184 Undo should manage "need-saving" flag (Resp: Paolo)
+[ ] Implementing a tools plugin (Resp: James Willcox)
+[ ] Implementing a template plugin (Resp: Paolo)
+[ ] Fixing encoding related bugs (Resp: Paolo)
+[ ] Improving the tag list plugin (Resp: Paolo)
+[ ] Saving file using gnome-vfs (Resp: Paolo)
+[ ] Implementing a regex search plugin (Resp: Paolo)
+[ ] Implementing auto indent (Resp: Paolo)
+[ ] Implementing a serch/replace in files plugin (Resp: Paolo)
+[ ] Improving the plugin framework (Resp: Paolo)
+[A] Porting the mail plugin (Assigned to James Willcox)
 
-2.1.x Tasks (the list has to be completed)
-------------------------------------------
+Easy tasks
+----------
 
-- General
+[ ] Improving the time plugin (Resp: Paolo)
+[ ] Close button on the tabs, like in galeon (Resp: Paolo)
+[ ] Improving preferences management in existing plugins (Resp: Paolo)
+[A] Implementing an indent plugin (Assigned to Paolo)
 
-[ ] The remote files should be read in an async way
-[ ] Backup files before crashing, like AbiWord (I have a patch by Nate Case, to be commited)
-[ ] Save menubar and toolbar layout 
-[ ] Print from line x to line y
+Tasks for non developers
+------------------------
 
-- Plugins
-
-[ ] Spell checker plugin
-[ ] Porting sort plugin
-[ ] Porting email plugin (ported by snorp, to be committed)
-
-- Known bugs
-[ ] Autosave interval of open documents should be updated when the user change it in the 
-    preference dialog
+[ ] Designing a new logo (Resp: Paolo)
+[ ] Maintaining the web site (Resp: James Willcox)
+[ ] Writing new taglists (Resp: Paolo)
+[ ] Writing user documentation for plugins (Resp: Paolo)
+[ ] Writing release notes when needed (Resp: Paolo)
+[ ] Testing tarballs (Resp: Paolo)
