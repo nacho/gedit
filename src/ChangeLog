@@ -1,3 +1,13 @@
+Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* Restored gtk_widget_grab_focus's, because they seem
+	  to work now. (if you update to the latest CVS GTK+)
+
+	* For !WITHOUT_GNOME, don't create the toolbar handlebox
+	  ourselves, since gnome-app-helper creates it. Obey
+	  the ui_properties setting with respect to toolbar
+	  relief.
+
 1998-08-18  Evan Lawrence <evan@worldpath.net>
 
 	* Disabled several gtk_text_grab_focus's until I can figure out why

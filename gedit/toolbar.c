@@ -155,16 +155,20 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 
 	toolbar = toolbar_create_common(toolbar_data, data);
 
-#ifdef WITHOUT_GNOME
 #ifdef GTK_HAVE_FEATURES_1_1_0
-	gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar), GTK_RELIEF_NONE);
+#ifndef WITHOUT_GNOME
+	if ( ! gnome_preferences_get_toolbar_relief() ) 
 #endif
-#endif
+		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar), 
+					      GTK_RELIEF_NONE);
+#endif /* GTK_HAVE_FEATURES_1_1_0 */
 
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
+#ifdef WITHOUT_GNOME	
 	gw->toolbar_handle = gtk_handle_box_new();
 	gtk_container_add(GTK_CONTAINER(gw->toolbar_handle), toolbar);
+#endif
 	gtk_widget_show(toolbar);
 
 #ifndef WITHOUT_GNOME
@@ -252,8 +256,10 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 	if (!GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_show(window->toolbar);
 
+#ifdef WITHOUT_GNOME
 	if (!GTK_WIDGET_VISIBLE(window->toolbar_handle))
 		gtk_widget_show(window->toolbar_handle);
+#endif
 
 	if (window->files_list_window_toolbar &&
 		!GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))
@@ -280,8 +286,10 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 	if (GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_hide(window->toolbar);
 
+#ifdef WITHOUT_GNOME
 	if (GTK_WIDGET_VISIBLE(window->toolbar_handle))
 		gtk_widget_hide(window->toolbar_handle);
+#endif
 
 	if (window->files_list_window_toolbar &&
 		GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))

@@ -368,7 +368,7 @@ gE_document
 	gtk_notebook_set_page(GTK_NOTEBOOK(w->notebook),
 		g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1);
 
-/*	gtk_widget_grab_focus(doc->text);*/
+	gtk_widget_grab_focus(doc->text);
 
 	return doc;
 } /* gE_document_new */
