@@ -11,7 +11,7 @@ INCLUDES = \
 plugin_LTLIBRARIES = libchangecase.la
 
 libchangecase_la_SOURCES = changecase.c
-ibchangecase_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libchangecase_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 plugin_in_files = changecase.gedit-plugin.desktop.in
 
