@@ -105,7 +105,8 @@ GnomeUIInfo gedit_edit_menu[] =
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
 
-/*	Simplify the interface. Find in files should be a plugin
+/*
+	Simplify the interface. Find in files should be a plugin
 	Find in all the files open is something that will be used
 	very very little times. We should have it as a plugin, tho
 	{
@@ -114,7 +115,8 @@ GnomeUIInfo gedit_edit_menu[] =
 		N_("Find text in all open files"),
 		find_in_files_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
-	},*/
+	},
+*/
 
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),

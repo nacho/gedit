@@ -29,6 +29,7 @@
 #include "file.h"
 #include "menus.h"
 #include "plugin.h"
+#include "recent.h"
 
 
 #ifdef HAVE_LIBGNORBA
@@ -74,6 +75,7 @@ void
 gedit_shutdown (void)
 {
 	gedit_save_settings ();
+	history_write_config ();
 
 	gtk_main_quit ();
 }

@@ -22,7 +22,9 @@
 #ifndef __RECENT_H__
 #define __RECENT_H__
 
-extern void recent_add (char *filename);
-extern void recent_update (GnomeApp *app);
+void recent_add (char *filename);
+void recent_update (GnomeApp *app);
+
+void history_write_config (void);
 
 #endif
