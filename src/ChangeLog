@@ -1,3 +1,8 @@
+2002-02-07  Federico Mena Quintero  <federico@ximian.com>
+
+	* gedit2.c (main): Do not call setlocale().  We should not be
+	forcing the locale on anyone.
+
 2002-02-07  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-document.[ch] (gedit_document_get_cursor)
