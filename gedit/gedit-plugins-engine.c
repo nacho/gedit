@@ -34,8 +34,8 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
+#include <glib/gkeyfile.h>
 #include <libgnome/gnome-util.h>
-#include <libgnomeui/gnome-theme-parser.h>
 #include <gconf/gconf-client.h>
 
 #include "gedit-plugins-engine.h"
@@ -48,7 +48,6 @@
 
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
-
 #define PLUGIN_EXT	".gedit-plugin"
 
 
@@ -63,114 +62,103 @@ static GConfClient *gedit_plugins_engine_gconf_client = NULL;
 
 GSList *active_plugins = NULL;
 
-#define GeditPluginFile GnomeThemeFile
-#define gedit_plugin_file_new_from_string  gnome_theme_file_new_from_string
-#define gedit_plugin_file_free gnome_theme_file_free
-#define gedit_plugin_file_get_string gnome_theme_file_get_string
-#define gedit_plugin_file_get_locale_string gnome_theme_file_get_locale_string
-
-
 static GeditPlugin *
 gedit_plugins_engine_load (const gchar *file)
 {
 	GeditPlugin *plugin;
-	GeditPluginFile *gedit_plugin_file = NULL;
+	GKeyFile *plugin_file = NULL;
 	gchar *str;
-	gchar *contents;
 
 	g_return_val_if_fail (file != NULL, NULL);
-	
+
 	gedit_debug (DEBUG_PLUGINS, "Loading plugin: %s", file);
 
 	plugin = g_new0 (GeditPlugin, 1);
 	plugin->file = g_strdup (file);
 
-	if (!g_file_get_contents (file, &contents, NULL, NULL)) 
-	{
-		g_warning ("Error loading %s", file);
-		goto error;
-	}
-
-	gedit_plugin_file = gedit_plugin_file_new_from_string (contents, NULL);
-	g_free (contents);
-
-	if (gedit_plugin_file == NULL) 
+	plugin_file = g_key_file_new ();
+	if (!g_key_file_load_from_file (plugin_file, file, G_KEY_FILE_NONE, NULL))
 	{
 		g_warning ("Bad plugin file: %s", file);
 		goto error;
 	}
 
 	/* Get Location */
-	if (gedit_plugin_file_get_string (gedit_plugin_file, 
-					  "Gedit Plugin",
-					  "Location",
-					  &str)) 
+	str = g_key_file_get_string (plugin_file,
+				     "Gedit Plugin",
+				     "Location",
+				     NULL);
+	if (str)
 	{
 		plugin->location = str;
-	} 
-	else 
+	}
+	else
 	{
 		g_warning ("Could not find 'Location' in %s", file);
 		goto error;
 	}
 
 	/* Get Name */
-	if (gedit_plugin_file_get_locale_string (gedit_plugin_file, 
-					 	 "Gedit Plugin",
-						 "Name",
-						 &str)) 
+	str = g_key_file_get_locale_string (plugin_file,
+					    "Gedit Plugin",
+					    "Name",
+					    NULL, NULL);
+	if (str)
 	{
 		plugin->name = str;
-	} 
-	else 
+	}
+	else
 	{
 		g_warning ("Could not find 'Name' in %s", file);
 		goto error;
 	}
 
 	/* Get Description */
-	if (gedit_plugin_file_get_locale_string (gedit_plugin_file, 
-					 	 "Gedit Plugin",
-					 	 "Description",
-					 	 &str)) 
+	str = g_key_file_get_locale_string (plugin_file,
+					    "Gedit Plugin",
+					    "Description",
+					    NULL, NULL);
+	if (str)
 	{
 		plugin->desc = str;
-	} 
-	else 
+	}
+	else
 	{
-		g_warning ("Could not find 'Name' in %s", file);
+		g_warning ("Could not find 'Description' in %s", file);
 		goto error;
 	}
 
 	/* Get Author */
-	if (gedit_plugin_file_get_locale_string (gedit_plugin_file, 
-						 "Gedit Plugin",
-						 "Author",
-						 &str)) 
+	str = g_key_file_get_string (plugin_file,
+				     "Gedit Plugin",
+				     "Author",
+				     NULL);
+	if (str)
 	{
 		plugin->author = str;
-	} 
-	else 
+	}
+	else
 	{
 		g_warning ("Could not find 'Author' in %s", file);
 		goto error;
 	}
 
 	/* Get Copyright */
-	if (gedit_plugin_file_get_locale_string (gedit_plugin_file, 
-						 "Gedit Plugin",
-						 "Copyright",
-						 &str)) 
+	str = g_key_file_get_string (plugin_file,
+				     "Gedit Plugin",
+				     "Copyright",
+				     NULL);
+	if (str)
 	{
 		plugin->copyright = str;
-	} 
-	else 
+	}
+	else
 	{
 		g_warning ("Could not find 'Copyright' in %s", file);
 		goto error;
 	}
 
-	gedit_plugin_file_free (gedit_plugin_file);
+	g_key_file_free (plugin_file);
 
 	return plugin;
 
@@ -182,7 +170,7 @@ error:
 	g_free (plugin->author);
 	g_free (plugin->copyright);
 	g_free (plugin);
-	gedit_plugin_file_free (gedit_plugin_file);
+	g_key_file_free (plugin_file);
 
 	return NULL;
 }
@@ -200,7 +188,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 
 	d = g_dir_open (dir, 0, &error);
 	if (!d)
-	{		
+	{
 		gedit_debug (DEBUG_PLUGINS, "%s", error->message);
 		g_error_free (error);
 		return;
@@ -262,7 +250,7 @@ gedit_plugins_engine_load_all (void)
 		gedit_plugins_engine_load_dir (pdir);
 		g_free (pdir);
 	}
-	
+
 	/* load system plugins */
 	gedit_plugins_engine_load_dir (GEDIT_PLUGINDIR "/");
 }
