@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.5\n"
-"POT-Creation-Date: 1999-11-26 14:35+0000\n"
+"POT-Creation-Date: 1999-11-29 11:53+0100\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr ""
-
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
+msgstr ""
+
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
 msgstr ""
 
 #: src/commands.c:93
@@ -206,12 +206,12 @@ msgid "Plugin Selector"
 msgstr ""
 
 #: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "No"
-
-#: src/gE_prefs_box.c:630
 msgid "Location"
 msgstr "Eplaeçmint"
+
+#: src/gE_prefs_box.c:630
+msgid "Name"
+msgstr "No"
 
 #. Plugins Settings
 #: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
@@ -293,16 +293,28 @@ msgid "Print Command:"
 msgstr "Comande po rexhe:"
 
 #: src/gE_print.c:235
-msgid "Print anyway"
-msgstr "Rexhe cwand minme"
-
-#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr "Schaper, puis rexhe"
 
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr ""
+
+#: src/gE_print.c:235
+msgid "Print anyway"
+msgstr "Rexhe cwand minme"
+
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Schaper"
+
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Cloyu"
+
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Drovî (swap) fitchî .c/.h"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -362,12 +374,12 @@ msgid "Untitled"
 msgstr "Sins no"
 
 #: src/menus.c:87
-msgid "_New"
-msgstr "_Novea"
-
-#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Fé on novea documint"
+
+#: src/menus.c:87
+msgid "_New"
+msgstr "_Novea"
 
 #: src/menus.c:94
 msgid "Save All"
@@ -458,19 +470,20 @@ msgid "Search for:"
 msgstr "Cwerî on:"
 
 #: src/search.c:768
-#, fuzzy, c-format
 msgid ""
 "Filename: %s\n"
 "\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
+"No do fitchî: %s\n"
+"\n"
 "Royes å totå: %i\n"
 "Ci roye chal: %i"
 
 #: src/search.c:790
 msgid "Go to line"
-msgstr ""
+msgstr "Potchî al roye"
 
 #: src/search.c:800
 msgid "Line number"
@@ -516,126 +529,114 @@ msgstr "Dimander divant di mete èl plaece"
 msgid "Replace?"
 msgstr "Mete el plaece?"
 
-#: src/gE_view.c:46
-msgid "Save"
-msgstr "Schaper"
-
-#: src/gE_view.c:47
-msgid "Close"
-msgstr "Cloyu"
-
-#: src/gE_view.c:51
-msgid "Open (swap) .c/.h file"
-msgstr "Drovî (swap) fitchî .c/.h"
-
-#~ msgid "_None"
-#~ msgstr "_Nole"
-
-#~ msgid "A_lways"
-#~ msgstr "_Todi"
-
-#~ msgid "_Automatic"
-#~ msgstr "_Åtomatike"
-
-#~ msgid "Font"
-#~ msgstr "Fonte"
-
-#~ msgid "MDI"
-#~ msgstr "MDI"
-
-#~ msgid "Alex Roberts"
-#~ msgstr "Alex Roberts"
-
-#~ msgid "Evan Lawrence"
-#~ msgstr "Evan Lawrence"
-
-#~ msgid "http://gedit.pn.org"
-#~ msgstr "http://gedit.pn.org/"
-
-#~ msgid "       Will LaShell"
-#~ msgstr "       Will LaShell"
-
-#~ msgid "       Chris Lahey"
-#~ msgstr "       Chris Lahey"
-
-#~ msgid "       Andy Kahn"
-#~ msgstr "       Andy Kahn"
-
-#~ msgid "       Miguel de Icaza"
-#~ msgstr "       Miguel de Icaza"
-
-#~ msgid "       Martin Baulig"
-#~ msgstr "       Martin Baulig"
-
-#~ msgid "Column:"
-#~ msgstr "Colone:"
-
-#~ msgid "Line"
-#~ msgstr "Roye"
-
-#~ msgid "Search and Replace"
-#~ msgstr "Mete el plaece"
-
-#~ msgid "Text"
-#~ msgstr "Tekse"
-
-#~ msgid "Search:"
-#~ msgstr "Cwerî:"
-
-#~ msgid "Start searching at cursor position"
-#~ msgstr "Cmincer a cwerî al plaece do curseu"
-
-#~ msgid "Docid is %ld.\n"
-#~ msgstr "Li docid est %ld.\n"
-
-#~ msgid "Shell"
-#~ msgstr "Shell"
-
-#~ msgid "Cut"
-#~ msgstr "Côper"
-
-#~ msgid "Copy"
-#~ msgstr "Copyî"
-
-#~ msgid "Paste"
-#~ msgstr "Aclaper"
-
-#~ msgid "New"
-#~ msgstr "Novea"
-
-#~ msgid "Open"
-#~ msgstr "Drovî"
-
-#~ msgid "Open a file"
-#~ msgstr "Drovî on fitchî"
-
-#~ msgid "Save the current file"
-#~ msgstr "Schaper li fitchî do moumint"
-
-#~ msgid "Close the current file"
-#~ msgstr "Cloyu li fitchî ki vos ovres dsu"
-
-#~ msgid "Print the current file"
-#~ msgstr "Rexhe li fitchî do moumint"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Côper li tchûze"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Copyî li tchûze"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Aclapler çu k' i gn a è tchapea emacralé"
-
-#~ msgid "Find"
-#~ msgstr "Trover"
-
-#~ msgid "Search for a string"
-#~ msgstr "Cwerî on tchinne de tekse"
+#~ msgid "Exit the program"
+#~ msgstr "Moussî foû di ci programe chal"
 
 # "Moussî Foû" est trop grand, çoula fwait on bår di botons trop lårdje
 #~ msgid "Exit"
 #~ msgstr "Foû"
 
-#~ msgid "Exit the program"
-#~ msgstr "Moussî foû di ci programe chal"
+#~ msgid "Search for a string"
+#~ msgstr "Cwerî on tchinne de tekse"
+
+#~ msgid "Find"
+#~ msgstr "Trover"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Aclapler çu k' i gn a è tchapea emacralé"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copyî li tchûze"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Côper li tchûze"
+
+#~ msgid "Print the current file"
+#~ msgstr "Rexhe li fitchî do moumint"
+
+#~ msgid "Close the current file"
+#~ msgstr "Cloyu li fitchî ki vos ovres dsu"
+
+#~ msgid "Save the current file"
+#~ msgstr "Schaper li fitchî do moumint"
+
+#~ msgid "Open a file"
+#~ msgstr "Drovî on fitchî"
+
+#~ msgid "Open"
+#~ msgstr "Drovî"
+
+#~ msgid "New"
+#~ msgstr "Novea"
+
+#~ msgid "Paste"
+#~ msgstr "Aclaper"
+
+#~ msgid "Copy"
+#~ msgstr "Copyî"
+
+#~ msgid "Cut"
+#~ msgstr "Côper"
+
+#~ msgid "Shell"
+#~ msgstr "Shell"
+
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Li docid est %ld.\n"
+
+#~ msgid "Start searching at cursor position"
+#~ msgstr "Cmincer a cwerî al plaece do curseu"
+
+#~ msgid "Search:"
+#~ msgstr "Cwerî:"
+
+#~ msgid "Text"
+#~ msgstr "Tekse"
+
+#~ msgid "Search and Replace"
+#~ msgstr "Mete el plaece"
+
+#~ msgid "Line"
+#~ msgstr "Roye"
+
+#~ msgid "Column:"
+#~ msgstr "Colone:"
+
+#~ msgid "       Martin Baulig"
+#~ msgstr "       Martin Baulig"
+
+#~ msgid "       Miguel de Icaza"
+#~ msgstr "       Miguel de Icaza"
+
+#~ msgid "       Andy Kahn"
+#~ msgstr "       Andy Kahn"
+
+#~ msgid "       Chris Lahey"
+#~ msgstr "       Chris Lahey"
+
+#~ msgid "       Will LaShell"
+#~ msgstr "       Will LaShell"
+
+#~ msgid "http://gedit.pn.org"
+#~ msgstr "http://gedit.pn.org/"
+
+#~ msgid "Evan Lawrence"
+#~ msgstr "Evan Lawrence"
+
+#~ msgid "Alex Roberts"
+#~ msgstr "Alex Roberts"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Font"
+#~ msgstr "Fonte"
+
+#~ msgid "_Automatic"
+#~ msgstr "_Åtomatike"
+
+#~ msgid "A_lways"
+#~ msgstr "_Todi"
+
+#~ msgid "_None"
+#~ msgstr "_Nole"

@@ -4,24 +4,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-11-26 14:35+0000\n"
+"Project-Id-Version: gedit 0.5.5\n"
+"POT-Creation-Date: 1999-11-29 11:53+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Date: 1999-01-13 12:44+0100\n"
-"From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
-
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "La extensión de correo electrónico de gEdit"
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "La extensión de navegador Web de gEdit"
+
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
+msgstr "La extensión de correo electrónico de gEdit"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -205,12 +203,12 @@ msgid "Plugin Selector"
 msgstr "Selector de extensiones"
 
 #: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "Nombre"
-
-#: src/gE_prefs_box.c:630
 msgid "Location"
 msgstr "Posición"
+
+#: src/gE_prefs_box.c:630
+msgid "Name"
+msgstr "Nombre"
 
 #. Plugins Settings
 #: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
@@ -292,16 +290,28 @@ msgid "Print Command:"
 msgstr "Comando de Impresión:"
 
 #: src/gE_print.c:235
-msgid "Print anyway"
-msgstr "Imprimir igual"
-
-#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Guardar, luego imprimir "
 
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: src/gE_print.c:235
+msgid "Print anyway"
+msgstr "Imprimir igual"
+
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Guardar"
+
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Abrir (alternar) archivo .c/.h"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -361,12 +371,12 @@ msgid "Untitled"
 msgstr "SinNombre"
 
 #: src/menus.c:87
-msgid "_New"
-msgstr "_Nuevo"
-
-#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
+
+#: src/menus.c:87
+msgid "_New"
+msgstr "_Nuevo"
 
 #: src/menus.c:94
 msgid "Save All"
@@ -457,13 +467,14 @@ msgid "Search for:"
 msgstr "Buscar:"
 
 #: src/search.c:768
-#, fuzzy, c-format
 msgid ""
 "Filename: %s\n"
 "\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
+"Nombre de archivo: %s\n"
+"\n"
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
@@ -515,146 +526,134 @@ msgstr "Preguntar antes de remplazar"
 msgid "Replace?"
 msgstr "¿Remplazar?"
 
-#: src/gE_view.c:46
-msgid "Save"
-msgstr "Guardar"
-
-#: src/gE_view.c:47
-msgid "Close"
-msgstr "Cerrar"
-
-#: src/gE_view.c:51
-msgid "Open (swap) .c/.h file"
-msgstr "Abrir (alternar) archivo .c/.h"
-
-#~ msgid "_None"
-#~ msgstr "_Ninguna"
-
-#~ msgid "Don't have a scrollbar"
-#~ msgstr "Sin barra de desfile"
-
-#~ msgid "A_lways"
-#~ msgstr "_Siempre"
-
-#~ msgid "Always have the scrollbar"
-#~ msgstr "Con una barra de desfile siempre"
-
-#~ msgid "_Automatic"
-#~ msgstr "_Automática"
-
-#~ msgid "Only have scrollbar when it's needed"
-#~ msgstr "Con una barra de desfile sólo cuando es necesario"
-
-#~ msgid "_Scrollbar"
-#~ msgstr "Barra de _Desfile"
-
-#~ msgid "Change visibility options of the scrollbar"
-#~ msgstr "Cambiar las opciones de visibilidad de la barra de desfile"
-
-#~ msgid "Font"
-#~ msgstr "Fuente"
-
-#~ msgid "MDI"
-#~ msgstr "MDI"
-
-#~ msgid "Toggle autoindent"
-#~ msgstr "Activar/Desactivar Auto-indentación"
-
-#~ msgid "Toggle statusbar"
-#~ msgstr "Activar/Desactivar barra de estado"
-
-#~ msgid "Toggle Wordwrap"
-#~ msgstr "Activar/Desactivar Wordwrap"
-
-#~ msgid "Toggle Linewrap"
-#~ msgstr "Activar/Desactivar vuelta a la linea automática"
-
-#~ msgid "Line"
-#~ msgstr "Líneas"
-
-#~ msgid "Column:"
-#~ msgstr "Columna:"
-
-#~ msgid "       Martijn van Beers"
-#~ msgstr "       Martijn van Beers"
-
-#~ msgid "       Thomas Holmgren"
-#~ msgstr "       Thomas Holmgren"
-
-#~ msgid "       Martin Baulig"
-#~ msgstr "       Martin Baulig"
-
-#~ msgid "       Miguel de Icaza"
-#~ msgstr "       Miguel de Icaza"
-
-#~ msgid "       Andy Kahn"
-#~ msgstr "       Andy Kahn"
-
-#~ msgid "       Chris Lahey"
-#~ msgstr "       Chris Lahey"
-
-#~ msgid "       Will LaShell"
-#~ msgstr "       Will LaShell"
-
-#~ msgid "http://gedit.pn.org"
-#~ msgstr "http://gedit.pn.org/"
-
-#~ msgid "Evan Lawrence"
-#~ msgstr "Evan Lawrence"
-
-#~ msgid "Alex Roberts"
-#~ msgstr "Alex Roberts"
-
-#~ msgid "Docid is %ld.\n"
-#~ msgstr "Docid es %ld.\n"
-
-#~ msgid "Shell"
-#~ msgstr "Shell"
-
-#~ msgid "Cut"
-#~ msgstr "Cortar"
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
-
-#~ msgid "Paste"
-#~ msgstr "Pegar"
-
-#~ msgid "New"
-#~ msgstr "Nuevo"
-
-#~ msgid "Open"
-#~ msgstr "Abrir"
-
-#~ msgid "Open a file"
-#~ msgstr "Abrir un archivo"
-
-#~ msgid "Save the current file"
-#~ msgstr "Guardar el archivo actual"
-
-#~ msgid "Close the current file"
-#~ msgstr "Cerrar el archivo actual"
-
-#~ msgid "Print the current file"
-#~ msgstr "Imprimir el archivo actual"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Cortar la selección"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Copiar la selección"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Pegar el contenido del pisapapeles"
-
-#~ msgid "Find"
-#~ msgstr "Buscar"
-
-#~ msgid "Search for a string"
-#~ msgstr "Buscar una cadena de texto"
+#~ msgid "Exit the program"
+#~ msgstr "Salir del programa"
 
 #~ msgid "Exit"
 #~ msgstr "Salir"
 
-#~ msgid "Exit the program"
-#~ msgstr "Salir del programa"
+#~ msgid "Search for a string"
+#~ msgstr "Buscar una cadena de texto"
+
+#~ msgid "Find"
+#~ msgstr "Buscar"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Pegar el contenido del pisapapeles"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Copiar la selección"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Cortar la selección"
+
+#~ msgid "Print the current file"
+#~ msgstr "Imprimir el archivo actual"
+
+#~ msgid "Close the current file"
+#~ msgstr "Cerrar el archivo actual"
+
+#~ msgid "Save the current file"
+#~ msgstr "Guardar el archivo actual"
+
+#~ msgid "Open a file"
+#~ msgstr "Abrir un archivo"
+
+#~ msgid "Open"
+#~ msgstr "Abrir"
+
+#~ msgid "New"
+#~ msgstr "Nuevo"
+
+#~ msgid "Paste"
+#~ msgstr "Pegar"
+
+#~ msgid "Copy"
+#~ msgstr "Copiar"
+
+#~ msgid "Cut"
+#~ msgstr "Cortar"
+
+#~ msgid "Shell"
+#~ msgstr "Shell"
+
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Docid es %ld.\n"
+
+#~ msgid "Alex Roberts"
+#~ msgstr "Alex Roberts"
+
+#~ msgid "Evan Lawrence"
+#~ msgstr "Evan Lawrence"
+
+#~ msgid "http://gedit.pn.org"
+#~ msgstr "http://gedit.pn.org/"
+
+#~ msgid "       Will LaShell"
+#~ msgstr "       Will LaShell"
+
+#~ msgid "       Chris Lahey"
+#~ msgstr "       Chris Lahey"
+
+#~ msgid "       Andy Kahn"
+#~ msgstr "       Andy Kahn"
+
+#~ msgid "       Miguel de Icaza"
+#~ msgstr "       Miguel de Icaza"
+
+#~ msgid "       Martin Baulig"
+#~ msgstr "       Martin Baulig"
+
+#~ msgid "       Thomas Holmgren"
+#~ msgstr "       Thomas Holmgren"
+
+#~ msgid "       Martijn van Beers"
+#~ msgstr "       Martijn van Beers"
+
+#~ msgid "Column:"
+#~ msgstr "Columna:"
+
+#~ msgid "Line"
+#~ msgstr "Líneas"
+
+#~ msgid "Toggle Linewrap"
+#~ msgstr "Activar/Desactivar vuelta a la linea automática"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "Activar/Desactivar Wordwrap"
+
+#~ msgid "Toggle statusbar"
+#~ msgstr "Activar/Desactivar barra de estado"
+
+#~ msgid "Toggle autoindent"
+#~ msgstr "Activar/Desactivar Auto-indentación"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Font"
+#~ msgstr "Fuente"
+
+#~ msgid "Change visibility options of the scrollbar"
+#~ msgstr "Cambiar las opciones de visibilidad de la barra de desfile"
+
+#~ msgid "_Scrollbar"
+#~ msgstr "Barra de _Desfile"
+
+#~ msgid "Only have scrollbar when it's needed"
+#~ msgstr "Con una barra de desfile sólo cuando es necesario"
+
+#~ msgid "_Automatic"
+#~ msgstr "_Automática"
+
+#~ msgid "Always have the scrollbar"
+#~ msgstr "Con una barra de desfile siempre"
+
+#~ msgid "A_lways"
+#~ msgstr "_Siempre"
+
+#~ msgid "Don't have a scrollbar"
+#~ msgstr "Sin barra de desfile"
+
+#~ msgid "_None"
+#~ msgstr "_Ninguna"
