@@ -53,6 +53,8 @@ typedef struct _gE_Prop_Box{
 typedef struct _gE_prefs_data {
 	#ifndef WITHOUT_GNOME
 	 GnomePropertyBox *pbox;
+	#else
+	 gE_Prop_Box *pbox;
 	#endif
 	
 	
@@ -98,7 +100,7 @@ void gE_window_refresh(gE_window *w)
 {
 GtkStyle *style;
 
-	#ifndef WITHOUT_GNOME
+
     if (w->show_status == 0)
        gtk_widget_hide (w->statusbox);
      else
@@ -116,26 +118,31 @@ GtkStyle *style;
      gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->text), style);
   gtk_widget_pop_style ();
   	
-  	#endif
+  
 }
 
 void gE_apply(
 #ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 GnomePropertyBox *pbox,
 #else
 gE_Prop_Box *pbox,
+#endif
 #endif
  gint page, gE_data *data)
 {
   FILE *file;
   gchar *rc;
 
-
+g_print("bumble...\n");
   
   /* General Settings */
-  data->window->auto_indent = GTK_TOGGLE_BUTTON (prefs->autoindent)->active;
-  data->window->show_status = GTK_TOGGLE_BUTTON (prefs->status)->active;  
-
+  g_print(" is itme? %d..\n", (GTK_TOGGLE_BUTTON (prefs->autoindent)->active));
+  g_print("hmm.. %d\n",data->window->auto_indent);
+  data->window->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
+  g_print("bumble... work\n");
+  data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
+g_print("bumble... work!\n");
   /* Print Settings */
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
   
@@ -160,10 +167,11 @@ gE_Prop_Box *pbox,
 	fprintf(file, "}\n");
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);  
-
+g_print("bumble... work!!\n");
   gE_window_refresh(data->window);
+  g_print("bumble... work!!!\n");
   gE_save_settings(data->window, data->window);
-  
+  g_print("bumble..\n");
 
 }
 
@@ -440,7 +448,7 @@ static GtkWidget *font_page_new()
 #ifdef WITHOUT_GNOME
 void apply_close(gE_data *data)
 {
-  gE_apply(pbox, 1, data);
+ /* gE_apply(NULL, NULL, data);*/
   
   cancel();
 
@@ -453,13 +461,16 @@ void gE_property_box_new(gE_data *data)
 
  
   printf(".\n");
-  pbox = g_malloc0(sizeof(gE_Prop_Box));
+  pbox = g_malloc(sizeof(gE_Prop_Box));
 printf("..\n");
   pbox->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 printf(".X.\n");
       gtk_signal_connect (GTK_OBJECT (pbox->window), "destroy",
-			  GTK_SIGNAL_FUNC(gtk_widget_destroyed),
-			  pbox->window);
+			  GTK_SIGNAL_FUNC(cancel),
+			  NULL);
+  gtk_signal_connect (GTK_OBJECT (pbox->window), "delete_event",
+		      GTK_SIGNAL_FUNC (gtk_false), NULL);
+		      
 printf(".!.\n");
       gtk_window_set_title (GTK_WINDOW (pbox->window), "gedit");
       gtk_container_border_width (GTK_CONTAINER (pbox->window), 0);
@@ -483,7 +494,7 @@ printf(".!.\n");
   label = gtk_label_new ("General");
   pbox->gen_vbox = gtk_vbox_new (FALSE, 0);
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), pbox->gen_vbox, label);
- /* gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), general_page_new(), label);*/
+/*  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), general_page_new(), label);*/
   gtk_widget_show(pbox->gen_vbox);
   gtk_widget_show(label);
   
@@ -546,6 +557,8 @@ printf(".!.\n");
 
 }  
 #endif
+
+
 /* -------- */
 #ifndef WITHOUT_GNOME
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
@@ -557,15 +570,15 @@ void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 
 void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 {
-#ifndef WITHOUT_GNOME
   GtkWidget *label;
-#endif
+
   
   gE_data *data = (gE_data *)cbdata;
 
   prefs = g_malloc (sizeof(gE_prefs_data));
 
-  #ifdef WITHOUT_GNOME
+ 
+ #ifdef WITHOUT_GNOME
     gE_property_box_new (data);
   #endif
 #ifndef WITHOUT_GNOME
@@ -575,9 +588,9 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
       return;
     }
 
-  
 
    prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
+
   
 
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
@@ -630,6 +643,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
-  #endif                                    
+
+ #endif                                    
 }
 
