@@ -49,6 +49,8 @@ static GtkMenuEntry menu_items[] =
 	{"<Main>/File/Close All", NULL,
 		file_close_all_cmd_callback, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/<separator>", NULL, NULL, NULL},
+	{"<Main>/File/Recent Documents/", NULL, NULL},
+	{"<Main>/File/<separator>", NULL, NULL, NULL},
 	{"<Main>/File/Quit", "<control>Q",
 		file_quit_cmd_callback, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/Cut", "<control>X",
@@ -285,6 +287,7 @@ void menus_set_sensitive(char *path, int sensitive)
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
+
 
 GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, (gpointer) GE_DATA, NULL,

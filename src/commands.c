@@ -28,6 +28,7 @@
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#include <libgnome/gnome-history.h>
 #endif
 
 #include "main.h"
@@ -1257,4 +1258,162 @@ void popup_replace_window(gE_data *data)
 	gtk_signal_connect_object (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
 	gtk_grab_add (window);
 }
+
+/* Add a file to the Recent-used list... */
+
+void recent_add (char *filename)
+{
+	#ifndef WITHOUT_GNOME
+	gnome_history_recently_used (filename, "text/plain", "gEdit", "");
+	#endif
+	
+}
+
+/*
+ * gnome_app_remove_menu_range(app, path, start, num) removes num items from the existing app's menu structure
+ * begining with item described by path plus the number specified by start
+ */
+void
+gnome_app_remove_menu_range (GnomeApp *app,
+		       gchar *path,
+		       gint start,
+		       gint items)
+{
+  GtkWidget *parent, *child;
+  GList *children;
+  gint pos;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  /* find the first item (which is actually at position pos-1) to remove */
+  parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+
+  /* in case of path ".../" remove the first item */
+  if(pos == 0)
+    pos = 1;
+
+  pos += start;
+  
+  if( parent == NULL ) {
+    g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
+    return;
+  }
+
+  /* remove items */
+  children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+  while(children && items > 0) {
+    child = GTK_WIDGET(children->data);
+    /* children = g_list_next(children); */
+    gtk_container_remove(GTK_CONTAINER(parent), child);
+    children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+    items--;
+  }
+
+  gtk_widget_queue_resize(parent);
+}
+
+/* Grabs the recent used list, then updates the menus via a call to recent_update_menus 
+ * Should be called after each addition to the list 
+ */
+
+void recent_update (gE_window *window)
+{
+	GList *filelist;
+	
+	#ifndef WITHOUT_GNOME
+	GList *gnome_recent_list;
+	GnomeHistoryEntry histentry;
+	char *filename;
+	int i;
+	
+	filelist = NULL;
+	gnome_recent_list = gnome_history_get_recently_used ();
+	
+	if (g_list_length (gnome_recent_list) > 0)
+	{
+		for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
+		{
+			histentry = g_list_nth_data (gnome_recent_list, i);
+			if (strcmp ("gEdit", histentry->creator) == 0)
+			{
+				filename = g_malloc0 (strlen (histentry->filename) + 1);
+				strcpy (filename, histentry->filename);
+				filelist = g_list_append (filelist, filename);
+				if (g_list_length (filelist) == MAX_RECENT)
+					break;
+			}
+		}
+	}
+	gnome_history_free_recently_used_list (gnome_recent_list);
+	#endif /* Using GNOME */
+	
+	recent_update_menus (window, filelist);
+}
+
+/* Actually updates the recent-used menu... */
+
+void recent_update_menus (gE_window *window, GList *recent_files)
+{
+	#ifndef WITHOUT_GNOME
+	GnomeUIInfo *menu;
+	gE_data *data;
+	gchar *path;
+	int i;
+	
+	if (window->num_recent > 0)
+		gnome_app_remove_menu_range (GNOME_APP (window->window), 
+		                                         "File/", 8, window->num_recent + 1);
+
+	if (recent_files == NULL)
+		return;
+
+
+	/* insert a separator at the beginning */
+	
+	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+	path = g_new (gchar, strlen (_("File")) + strlen ("<Separator>") + 3 );
+	sprintf (path, "%s/%s", _("File"), "<Separator>");
+	menu->type = GNOME_APP_UI_SEPARATOR;
+
+	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
+	gnome_app_insert_menus (GNOME_APP(window->window), path, menu);
+
+
+	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
+	{
+		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+	
+		data = g_malloc0 (sizeof (gE_data));
+		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
+		data->window = window;
+		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
+		sprintf (menu->label, "%i. %s", i+1, g_list_nth_data (recent_files, i));
+		menu->type = GNOME_APP_UI_ITEM;
+		menu->hint = NULL;
+		menu->moreinfo = recent_callback;
+		menu->user_data = data;
+		menu->unused_data = NULL;
+		menu->pixmap_type = 0;
+		menu->pixmap_info = NULL;
+		menu->accelerator_key = 0;
+
+		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
+	
+		gnome_app_insert_menus_with_data (GNOME_APP(window->window), path, menu, data);
+	}
+	window->num_recent = g_list_length (recent_files);
+	
+
+	#endif /* Using GNOME */
+}
+
+void recent_callback (GtkWidget *w, gE_data *data)
+{
+	gE_document *doc = gE_document_current (data->window);
+	if (doc->filename != NULL || doc->changed != 0)
+		gE_document_new (data->window);
+	gE_file_open (data->window, gE_document_current (data->window), data->temp1);
+}
+
 

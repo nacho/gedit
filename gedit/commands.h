@@ -23,6 +23,10 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#ifndef MAX_RECENT
+#define MAX_RECENT 4
+#endif
+
 /* File Ops */
 extern void file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata);
 extern void file_new_cmd_callback(GtkWidget *widget, gpointer cbdata);
@@ -63,6 +67,13 @@ extern void auto_indent_callback(GtkWidget *, GdkEventKey *, gE_window *);
 extern void auto_indent_toggle_callback(GtkWidget *w, gpointer cbdata);
 extern void line_pos_callback(GtkWidget *w, gE_data *data);
 extern void gE_event_button_press(GtkWidget *w, GdkEventButton *, gE_window *);
+
+/* Recent documents */
+extern void recent_add (char *filename);
+extern void recent_update (gE_window *window);
+extern void recent_update_menus (gE_window *window, GList *recent_files);
+extern void recent_callback (GtkWidget *w, gE_data *data);
+
 
 #ifdef __cplusplus
 }

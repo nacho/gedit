@@ -188,6 +188,9 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 
 	mbprintf("opened %s", doc->filename);
 	gE_msgbar_set(w, MSGBAR_FILE_OPENED);
+	recent_add (doc->filename);
+	recent_update (w);
+	
 	return 0;
 } /* gE_file_open */
 

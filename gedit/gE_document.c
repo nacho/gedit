@@ -167,6 +167,7 @@ gE_window *gE_window_new()
 
   g_list_foreach (plugins, (GFunc)add_plugins_to_window, window);
   
+  recent_update (window);
   window_list = g_list_append (window_list, (gpointer) window);
  
   return window;

@@ -70,6 +70,8 @@ typedef struct _gE_window {
 #endif
 	GList *documents;
 	gE_search *search;
+	int num_recent; /* Number of recently accessed documents in the 
+	                         Recent Documents menu */
 #ifdef WITHOUT_GNOME
 	gboolean auto_indent;
 	gboolean show_tabs;
