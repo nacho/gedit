@@ -607,24 +607,24 @@ gedit_file_revert_dialog (GeditDocument *doc)
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("Changes made to the document in the last %ld second "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "Changes made to the document in the last %ld seconds "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  seconds),
 					seconds);
 	}
 	else if (seconds < 75) /* 55 <= seconds < 75 */
 	{
 		secondary_msg = g_strdup (_("Changes made to the document in the last minute "
-					    "will be definitively lost."));
+					    "will be permanently lost."));
 	}
 	else if (seconds < 110) /* 75 <= seconds < 110 */
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("Changes made to the document in the last minute and "
-						  "%ld second will be definitively lost.",
+						  "%ld second will be permanently lost.",
 						  "Changes made to the document in the last minute and "
-						  "%ld seconds will be definitively lost.",
+						  "%ld seconds will be permanently lost.",
 						  seconds - 60 ),
 					seconds - 60);
 	}
@@ -632,9 +632,9 @@ gedit_file_revert_dialog (GeditDocument *doc)
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("Changes made to the document in the last %ld minute "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "Changes made to the document in the last %ld minutes "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  seconds / 60),
 					seconds / 60);
 	}
@@ -647,15 +647,15 @@ gedit_file_revert_dialog (GeditDocument *doc)
 		if (minutes < 5)
 		{
 			secondary_msg = g_strdup (_("Changes made to the document in the last hour "
-						    "will be definitively lost."));
+						    "will be permanently lost."));
 		}
 		else
 		{
 			secondary_msg = g_strdup_printf (
 					ngettext ("Changes made to the document in the last hour and "
-						  "%d minute will be definitively lost.",
+						  "%d minute will be permanently lost.",
 						  "Changes made to the document in the last hour and "
-						  "%d minutes will be definitively lost.",
+						  "%d minutes will be permanently lost.",
 						  minutes),
 					minutes);
 		}
@@ -668,9 +668,9 @@ gedit_file_revert_dialog (GeditDocument *doc)
 
 		secondary_msg = g_strdup_printf (
 					ngettext ("Changes made to the document in the last %d hour "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "Changes made to the document in the last %d hours "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  hours),
 					hours);
 	}
