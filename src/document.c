@@ -223,7 +223,6 @@ gedit_document_new_with_file (gchar *filename)
 	{
 		if (!gedit_file_open (doc, filename))
 		{
-				/*g_free (filename);*/
 			return doc;
 		}
 		else

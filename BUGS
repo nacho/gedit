@@ -1,28 +1,17 @@
+Fixed BUGS have been moved to the bottom of the file.
+
 Known bugs in the current version of gEdit (as of April/2000):
+
+        * If you open a file it gets the name Untitled, if you
+	  type something it changed to Untitled1. If you then
+	  open another file it get opened witht the name Untilted1
+	  if you type in the file it changes to Untitled2
 
 	* if you ./configure --prefix to somewhere other than
           gnome-config --prefix, then the plugins won't be recognized.
 
-Done	* Should add version checking into configure.in such that it
-          will warn the user if they don't have the latest glib/gtk or
-          gnome-libs
-      
-Fixed	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
-          try to do "Open (swap) .c/.h file" for something that does
-          not have a file that's .c/.h to swap with.
-
-Fixed	* Crash: Change your preferences to enable "Close Window After
-	  Closing Last", then close all window tabs, then try to
-	  go to the Preferences.
-	
 	* Need to fix the text wrapping when printing and
 	  print previewing.
-
-	* You can't pull a menu by using the Alt+{menu key}
-	  alt+keys are doing different actions. We should disable
-          the use of alt keys to modify the file, this is a simple
-	  text editor.
-	  (Bug #1478)
 
 	* We need to be able to deal with a broken config file after
           launching gedit. It seems to crash with some problems with
@@ -38,21 +27,35 @@ Fixed	* Crash: Change your preferences to enable "Close Window After
 
 	* "Replace All" bug (Bug #6140, #4105)
 
-	* The "recent files" listing will include files that no longer
-	  exist, and when you go to select them from the list, there
-	  is no error message or any visual clue that the file is not
-	  going to be loaded because it no longer exists.
-
 	* small bug : if you delete with the delete key v.s. the
 	  backspace and the undo the cursor does reposition itself o.k.
 
 	* Revert is not working and thus it has been disabled.
 
-PLUG-INS :
-	Plug-ins seem are a bit unstable at the moment :
-
-????	* If you launch a plugin that starts a new document, then close
-	  the document while it's still writing to it, it will seg fault
-	  with a broken pipe error..
-	  
+------	  FIXED BUGS	  ----------------------
 Done	* Get gmodules to build
+
+Done	* Should add version checking into configure.in such that it
+          will warn the user if they don't have the latest glib/gtk or
+          gnome-libs
+      
+Fixed	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
+          try to do "Open (swap) .c/.h file" for something that does
+          not have a file that's .c/.h to swap with.
+
+Fixed	* Crash: Change your preferences to enable "Close Window After
+	  Closing Last", then close all window tabs, then try to
+	  go to the Preferences.
+	
+Fixed	* You can't pull a menu by using the Alt+{menu key}
+	  alt+keys are doing different actions. We should disable
+          the use of alt keys to modify the file, this is a simple
+	  text editor.
+	  (Bug #1478)
+
+Fixed	* The "recent files" listing will include files that no longer
+	  exist, and when you go to select them from the list, there
+	  is no error message or any visual clue that the file is not
+	  going to be loaded because it no longer exists.
+
+

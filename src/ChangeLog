@@ -1,5 +1,13 @@
 2000-04-08  Chema Celorio  <chema@celorio.com>
 
+	* file.c (gedit_file_open): Close the Untiled
+	doc only if the open was succesfull.
+
+	(popup_create_new_file): dont save the
+	file. Just set doc->filename.
+
+2000-04-08  Chema Celorio  <chema@celorio.com>
+
 	* file.c (file_saveas_ok_sel): ask user
 	before overwriting a file.
 	(popup_create_new_file): moved

@@ -34,10 +34,8 @@
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
-/* not yet rewriten . Chema */
 gint gedit_file_open (Document *doc, gchar *fname);
 gint gedit_file_save (Document *doc, gchar *fname);
-/* rewriten functions . Chema  ..*/ 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_cb (GtkWidget *widget);
@@ -79,19 +77,15 @@ gedit_file_open (Document *doc, gchar *fname)
 	struct stat stats;
 	FILE *fp;
 	Document *currentdoc;
-/*	gint i;
-	View *nth_view; diabled by chema */
+	/* FIXME: this variables never get used. See below ... Chema */
+	gint i;
+	View *nth_view; 
 	
 	gedit_debug_mess ("F:Entering gedit_file_open ..\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
 	g_return_val_if_fail (doc != NULL, 1);
 
-
 	currentdoc = gedit_document_current();
-	if (currentdoc != NULL && currentdoc->filename == NULL && !currentdoc->changed )
-	{
-		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
-	}
 		
 	if ( stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
@@ -113,7 +107,13 @@ gedit_file_open (Document *doc, gchar *fname)
 		gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: \n\n%s\n\n"
 						   "Make sure that you have permissions for opening the file."), fname);
 		gnome_app_error (mdi->active_window, errstr);
+		g_free (errstr);
 		return 1;
+	}
+
+	if (currentdoc != NULL && currentdoc->filename == NULL && !currentdoc->changed )
+	{
+		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 	}
 
 	doc->buf_size = fread (tmp_buf, 1, doc->buf_size, fp);
@@ -127,10 +127,9 @@ gedit_file_open (Document *doc, gchar *fname)
 	doc->readonly = access(fname, W_OK)?TRUE:FALSE;
 
 	/* FIXME: This never gets executed ... Chema */
-	/* I guess it it beeing done somewhere else   ...*/
-/*	for (i = 0; i < g_list_length (doc->views); i++) 
+	for (i = 0; i < g_list_length (doc->views); i++) 
 	{
-		g_print("Chema hack !\n");
+		g_print("-------------------------------------------------------------!\n");
 		nth_view = g_list_nth_data (doc->views, 0);
 		gedit_view_refresh (nth_view);
 		gedit_set_title (nth_view->document);
@@ -138,10 +137,12 @@ gedit_file_open (Document *doc, gchar *fname)
 		if (!nth_view->changed_id)
 			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
 								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
-	}*/
+	}
+	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	recent_add (fname);
 	recent_update (GNOME_APP (mdi->active_window));
+
 	return 0;
 }
 
@@ -496,7 +497,9 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 		doc = gedit_document_new_with_title (title);
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		gedit_file_save (doc, title);
+		/* gedit_file_save (doc, title); Why save it ? Chema */
+		doc->filename = g_strdup (title);
+		doc->changed = FALSE;
 		return TRUE;
 	case 1 : 
 		return FALSE;
