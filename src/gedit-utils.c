@@ -434,8 +434,9 @@ finally_2:
  * The following code is a modified version of the gtk one
  **********************************************************/
 
-	
+/*	
 gboolean      _gtk_text_btree_char_is_invisible (const GtkTextIter *iter);
+*/
 #define GTK_TEXT_UNKNOWN_CHAR 0xFFFC
 
 
@@ -462,7 +463,7 @@ forward_chars_with_skipping (GtkTextIter *iter,
 
       if (!ignored &&
           skip_invisible &&
-          _gtk_text_btree_char_is_invisible (iter))
+          /* _gtk_text_btree_char_is_invisible (iter)*/ FALSE)
         ignored = TRUE;
 
       gtk_text_iter_forward_char (iter);

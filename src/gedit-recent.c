@@ -407,7 +407,6 @@ gedit_recent_monitor_uri (GeditRecent *recent, const gchar *uri)
 	g_return_if_fail (GEDIT_IS_RECENT (recent));
 	g_return_if_fail (uri);
 
-
 	handle = g_hash_table_lookup (recent->monitors, uri);
 	if (handle == NULL) {
 

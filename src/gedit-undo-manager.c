@@ -469,9 +469,17 @@ gedit_undo_manager_free_action_list (GeditUndoManager *um)
 	{
 		GeditUndoAction *undo_action = 
 			(GeditUndoAction *)(g_list_nth_data (um->priv->actions, n));
-	
+
+		gedit_debug (DEBUG_UNDO, "Free action (tye %s) %d/%d", 
+				(undo_action->action_type == GEDIT_UNDO_ACTION_INSERT) ? "insert":
+				"delete", n, len);
+
 		if (undo_action->action_type == GEDIT_UNDO_ACTION_INSERT)
-			g_free (undo_action->action.insert.text);	
+			g_free (undo_action->action.insert.text);
+		else if (undo_action->action_type == GEDIT_UNDO_ACTION_DELETE)
+			g_free (undo_action->action.delete.text);
+		else
+			g_return_if_fail (FALSE);
 
 		g_free (undo_action);
 	}
@@ -496,7 +504,7 @@ gedit_undo_manager_insert_text_handler (GtkTextBuffer *buffer, GtkTextIter *pos,
 	undo_action.action_type = GEDIT_UNDO_ACTION_INSERT;
 
 	undo_action.action.insert.pos    = gtk_text_iter_get_offset (pos);
-	undo_action.action.insert.text   = g_strdup (text);
+	undo_action.action.insert.text   = (gchar*) text;
 	undo_action.action.insert.length = length;
 	undo_action.action.insert.chars  = g_utf8_strlen (text, length);
 
@@ -543,6 +551,8 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 	gedit_debug (DEBUG_UNDO, "TEXT: %s", undo_action.action.delete.text);
 
 	gedit_undo_manager_add_action (um, undo_action);
+
+	g_free (undo_action.action.delete.text);
 }
 
 static void 
@@ -589,7 +599,17 @@ gedit_undo_manager_add_action (GeditUndoManager *um, GeditUndoAction undo_action
 	{
 		action = g_new (GeditUndoAction, 1);
 		*action = undo_action;
-	
+
+		if (action->action_type == GEDIT_UNDO_ACTION_INSERT)
+			action->action.insert.text = g_strdup (undo_action.action.insert.text);
+		else if (action->action_type == GEDIT_UNDO_ACTION_DELETE)
+			action->action.delete.text = g_strdup (undo_action.action.delete.text); 
+		else
+		{
+			g_free (action);
+			g_return_if_fail (FALSE);
+		}
+		
 		++um->priv->actions_in_current_group;
 		action->order_in_group = um->priv->actions_in_current_group;
 	
