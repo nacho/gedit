@@ -117,6 +117,7 @@ AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 
 AC_OUTPUT([
+gedit.spec
 Makefile
 intl/Makefile
 po/Makefile.in

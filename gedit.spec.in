@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      0.5.0
+%define ver      @VERSION@
 %define rel      3
 %define prefix   /usr
 
@@ -11,7 +11,7 @@ Copyright: GPL
 Group:     Applications/Editors
 Source0:   gedit-%{PACKAGE_VERSION}.tar.gz
 URL:       http://gedit.pn.org/
-BuildRoot: /var/tmp/gedit-root
+BuildRoot: /var/tmp/gedit-%{PACKAGE_VERSION}-root
 Docdir: %{prefix}/doc
 
 %description
@@ -36,13 +36,7 @@ in arbitrary ways.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{prefix} 
-
-if [ "$SMP" != "" ]; then
-  (make "MAKE=make -k -j $SMP"; exit 0)
-  make
-else
-  make
-fi
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
