@@ -40,7 +40,6 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
-#include <eel/eel-string.h>
 #include <gtksourceview/gtksourceprintjob.h>
 
 #include <string.h>	/* For strlen */
@@ -48,6 +47,7 @@
 #include "gedit2.h"
 #include "gedit-print.h"
 #include "gedit-debug.h"
+#include "gedit-utils.h"
 #include "gedit-document.h"
 #include "gedit-prefs-manager-app.h"
 
@@ -542,7 +542,7 @@ gedit_print_job_info_new (GeditDocument* doc)
 		gchar *left;
 
 		doc_name = gedit_document_get_uri (doc);
-		name_to_display = eel_str_middle_truncate (doc_name, 60);
+		name_to_display = gedit_utils_str_middle_truncate (doc_name, 60);
 
 		left = g_strdup_printf (_("File: %s"), name_to_display);
 		

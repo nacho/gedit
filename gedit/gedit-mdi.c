@@ -36,7 +36,6 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel-string.h>
 
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagesmanager.h>
@@ -60,8 +59,6 @@
 #include "recent-files/egg-recent-model.h"
 #include "gedit-languages-manager.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
-
-#include <eel/eel-alert-dialog.h>
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -1291,7 +1288,7 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 	g_return_if_fail (uri != NULL);
 
 	/* Truncate the URI so it doesn't get insanely wide. */
-	docname = eel_str_middle_truncate (uri, MAX_URI_IN_TITLE_LENGTH);
+	docname = gedit_utils_str_middle_truncate (uri, MAX_URI_IN_TITLE_LENGTH);
 	g_free (uri);
 
 	if (gedit_document_get_modified (doc))

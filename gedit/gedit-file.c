@@ -39,7 +39,6 @@
 
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-alert-dialog.h>
-#include <eel/eel-string.h>
 
 #include "gedit2.h"
 #include "gedit-file.h"
@@ -1025,8 +1024,8 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide.  */
-        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
-						   MAX_URI_IN_DIALOG_LENGTH);
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+							   MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
 	g_return_if_fail (uri_for_display != NULL);
@@ -1062,7 +1061,7 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	{
 		str = g_strdup_printf ("<b>%s</b>\n%s", _("Loading file:"), uri_for_display);		
 	}
-	
+
 	label = gtk_label_new (str);
 	g_free (uri_for_display);
 	g_free (str);

@@ -91,6 +91,9 @@ gchar *gedit_utils_get_stdin (void);
 
 void gedit_warning (GtkWindow *parent, gchar *format, ...);
 
+gchar *gedit_utils_str_middle_truncate (const char *string,
+					guint truncate_length);
+
 #endif /* __GEDIT_UTILS_H__ */
 
 

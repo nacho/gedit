@@ -407,7 +407,7 @@ gedit_utils_error_reporting_loading_file (
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -747,7 +747,7 @@ gedit_utils_error_reporting_saving_file (
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -799,7 +799,7 @@ gedit_utils_error_reporting_reverting_file (
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -1029,7 +1029,7 @@ gedit_utils_error_reporting_creating_file (
 	 * though the dialog uses wrapped text, if the URI doesn't contain
 	 * white space then the text-wrapping code is too stupid to wrap it.
 	 */
-        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
@@ -1335,5 +1335,51 @@ gedit_warning (GtkWindow *parent, gchar *format, ...)
 	gtk_widget_destroy (dialog);
 
 	g_free (str);
+}
+
+/* taken from eel, except that we use "…" instead of "..."*/
+gchar *
+gedit_utils_str_middle_truncate (const char *string,
+				 guint truncate_length)
+{
+	char *truncated;
+	guint length;
+	guint num_left_chars;
+	guint num_right_chars;
+
+	const char delimter[] = "…";
+	const guint delimter_length = strlen (delimter);
+	const guint min_truncate_length = delimter_length + 2;
+
+	if (string == NULL) {
+		return NULL;
+	}
+
+	/* It doesnt make sense to truncate strings to less than
+	 * the size of the delimiter plus 2 characters (one on each
+	 * side)
+	 */
+	if (truncate_length < min_truncate_length) {
+		return g_strdup (string);
+	}
+
+	length = strlen (string);
+
+	/* Make sure the string is not already small enough. */
+	if (length <= truncate_length) {
+		return g_strdup (string);
+	}
+
+	/* Find the 'middle' where the truncation will occur. */
+	num_left_chars = (truncate_length - delimter_length) / 2;
+	num_right_chars = truncate_length - num_left_chars - delimter_length + 1;
+
+	truncated = g_new (char, truncate_length + 1);
+
+	strncpy (truncated, string, num_left_chars);
+	strncpy (truncated + num_left_chars, delimter, delimter_length);
+	strncpy (truncated + num_left_chars + delimter_length, string + length - num_right_chars + 1, num_right_chars);
+	
+	return truncated;
 }
 

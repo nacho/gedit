@@ -38,7 +38,6 @@
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <gtk/gtkeventbox.h>
-#include <eel/eel-string.h>
 
 #include <bonobo/bonobo-i18n.h>
 
@@ -52,6 +51,7 @@
 #include "recent-files/egg-recent-util.h"
 #include "gedit-encodings.h"
 #include "gedit-tooltips.h"
+#include "gedit-utils.h"
 
 struct _GeditMDIChildPrivate
 {
@@ -233,7 +233,7 @@ gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 	g_return_if_fail (name != NULL);
 
 	/* Truncate the name so it doesn't get insanely wide. */
-	docname = eel_str_middle_truncate (name, MAX_DOC_NAME_LENGTH);
+	docname = gedit_utils_str_middle_truncate (name, MAX_DOC_NAME_LENGTH);
 	g_free (name);
 
 	if (gedit_document_get_modified (child->document))
