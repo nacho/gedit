@@ -23,15 +23,15 @@
 #include <gnome.h>
 #include <sys/stat.h>
 #include "main.h"
-#include "gedit_undo.h"
-#include "gedit_prefs.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_files.h"
+#include "gE_undo.h"
+#include "gE_prefs.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_files.h"
 #include "commands.h"
 #include "search.h"
-#include "gedit_mdi.h"
-#include "gedit_print.h"
+#include "gE_mdi.h"
+#include "gE_print.h"
 #include "menus.h"
 
 /*
@@ -42,11 +42,11 @@
 #include <glib.h>
 */
 
-static void 	  gedit_document_class_init (gE_document_class *);
-static void 	  gedit_document_init (gE_document *);
+static void 	  gedit_document_class_init (gedit_document_class *);
+static void 	  gedit_document_init (gedit_document *);
 static GtkWidget *gedit_document_create_view (GnomeMDIChild *);
 static void	  gedit_document_destroy (GtkObject *);
-/*static void	  gedit_document_real_changed (gE_document *, gpointer); */
+/*static void	  gedit_document_real_changed (gedit_document *, gpointer); */
 static gchar *gedit_document_get_config_string (GnomeMDIChild *child);
        gchar *get_untitled_as_string ();
 
@@ -188,7 +188,7 @@ static void gedit_document_destroy (GtkObject *obj)
 
 }
 
-static void gedit_document_class_init (gE_document_class *class)
+static void gedit_document_class_init (gedit_document_class *class)
 {
 
 	GtkObjectClass 		*object_class;
@@ -214,7 +214,7 @@ static void gedit_document_class_init (gE_document_class *class)
 }
 
 void
-gedit_document_init (gE_document *doc)
+gedit_document_init (gedit_document *doc)
 {
 	/* FIXME: This prolly needs work.. */
 /*	gint *ptr; */
@@ -403,7 +403,7 @@ remove_doc_cb (GnomeMDI *mdi, gedit_document *doc)
 	GnomeMessageBox *msgbox;
 	int ret;
 	char *fname, *msg;
-	gedit_data *data = g_malloc (sizeof(gE_data));
+	gedit_data *data = g_malloc (sizeof(gedit_data));
 /*	int *ptr; */
 
 	fname = GNOME_MDI_CHILD (doc)->name;
@@ -517,7 +517,7 @@ gedit_document_marshal (GtkObject     *object,
 }
 
 static void
-gedit_document_real_changed (gE_document *doc, gpointer change_data)
+gedit_document_real_changed (gedit_document *doc, gpointer change_data)
 {
 	/* FIXME! */
 	

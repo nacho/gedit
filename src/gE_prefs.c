@@ -20,8 +20,8 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gedit_prefs.h"
-#include "gedit_mdi.h"
+#include "gE_prefs.h"
+#include "gE_mdi.h"
 
 /*
 #include <gtk/gtk.h> 

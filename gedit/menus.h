@@ -21,6 +21,6 @@
 
 extern GnomeUIInfo gedit_menu [];
 
-extern GnomeUIInfo * gedit_menus_init (gE_window *window, gE_data *data);
+extern GnomeUIInfo * gedit_menus_init (gedit_window *window, gedit_data *data);
    
 #endif /* __MENUS_H__ */

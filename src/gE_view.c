@@ -20,14 +20,14 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "gedit_view.h"
+#include "gE_view.h"
 #include "main.h"
-#include "gedit_undo.h"
-#include "gedit_mdi.h"
+#include "gE_undo.h"
+#include "gE_mdi.h"
 #include "commands.h"
-#include "gedit_prefs.h"
-#include "gedit_window.h"
-#include "gedit_print.h"
+#include "gE_prefs.h"
+#include "gE_window.h"
+#include "gE_print.h"
 
 #define GE_DATA		1
 
@@ -80,7 +80,7 @@ view_changed_cb(GtkWidget *w, gpointer cbdata)
 /*	gchar MOD_label[255]; */
 	gchar *str;
 
-	gedit_view *view = (gE_view *) cbdata;
+	gedit_view *view = (gedit_view *) cbdata;
 
 	if (view->document->changed)
 	  return;
@@ -110,7 +110,7 @@ view_changed_cb(GtkWidget *w, gpointer cbdata)
  */
 
 void
-gedit_view_list_insert (gE_view *view, gE_data *data)
+gedit_view_list_insert (gedit_view *view, gedit_data *data)
 {
 	gint p1;
 	gchar *buffer = (guchar *)data->temp2;
@@ -151,7 +151,7 @@ gedit_view_list_insert (gE_view *view, gE_data *data)
 }
 
 void
-view_list_erase (gedit_view *view, gE_data *data)
+view_list_erase (gedit_view *view, gedit_data *data)
 {
 	/* FIXME: I'm empty */
 }
@@ -341,7 +341,7 @@ void
 auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
 
-	gedit_data *data = (gE_data *)cbdata;
+	gedit_data *data = (gedit_data *)cbdata;
 
 	gedit_window_set_auto_indent (!settings->auto_indent);
 
@@ -355,7 +355,7 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 
 	int i, newlines, newline_1 = 0;
 	gchar *buffer, *whitespace;
-	gedit_view *view = (gE_view *)cbdata;
+	gedit_view *view = (gedit_view *)cbdata;
 	gedit_document *doc;
 /*	gedit_data *data; */
 	
@@ -469,7 +469,7 @@ gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
 
 	gint mask;
-	gedit_data *data = g_malloc0 (sizeof (gE_data));
+	gedit_data *data = g_malloc0 (sizeof (gedit_data));
 
 	line_pos_cb (NULL, NULL);
 	
@@ -516,7 +516,7 @@ gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 
 /* The Widget Stuff */
 
-static void gedit_view_class_init (gE_view_class *klass)
+static void gedit_view_class_init (gedit_view_class *klass)
 {
 	GtkObjectClass *object_class;
 	/*GtkWidgetClass *widget_class;
@@ -546,7 +546,7 @@ static void gedit_view_class_init (gE_view_class *klass)
 	parent_class = gtk_type_class (gtk_vbox_get_type ());*/
 }
 
-static void gedit_view_init (gE_view *view)
+static void gedit_view_init (gedit_view *view)
 {
 /*	GtkWidget *vpaned; */
 	GtkWidget *menu;
@@ -756,7 +756,7 @@ guint gedit_view_get_type (void)
 	  		(GtkArgGetFunc) NULL,
 	  };
 	    
-	  gedit_view_type = gtk_type_unique (gtk_vbox_get_type (), &gE_view_info);
+	  gedit_view_type = gtk_type_unique (gtk_vbox_get_type (), &gedit_view_info);
 	  
 	}
 	 
@@ -764,10 +764,10 @@ guint gedit_view_get_type (void)
 
 }
 
-GtkWidget *gedit_view_new (gE_document *doc)
+GtkWidget *gedit_view_new (gedit_document *doc)
 {
 
-	gedit_view *view = gtk_type_new (gE_view_get_type ());
+	gedit_view *view = gtk_type_new (gedit_view_get_type ());
 	
 	view->document = doc;
 	
@@ -803,7 +803,7 @@ GtkWidget *gedit_view_new (gE_document *doc)
 
 /* Public Functions */
 
-void gedit_view_set_group_type (gE_view *view, guint type)
+void gedit_view_set_group_type (gedit_view *view, guint type)
 {
 
 	view->group_type = type;
@@ -812,7 +812,7 @@ void gedit_view_set_group_type (gE_view *view, guint type)
 
 }
 
-void gedit_view_set_split_screen (gE_view *view, gint split_screen)
+void gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 {
 
 	if (!view->split_parent)
@@ -831,7 +831,7 @@ void gedit_view_set_split_screen (gE_view *view, gint split_screen)
 
 }
 
-void gedit_view_set_word_wrap (gE_view *view, gint word_wrap)
+void gedit_view_set_word_wrap (gedit_view *view, gint word_wrap)
 {
 
 	view->word_wrap = word_wrap;
@@ -841,7 +841,7 @@ void gedit_view_set_word_wrap (gE_view *view, gint word_wrap)
 
 }
 
-void gedit_view_set_line_wrap (gE_view *view, gint line_wrap)
+void gedit_view_set_line_wrap (gedit_view *view, gint line_wrap)
 {
 
 	view->line_wrap = line_wrap;
@@ -850,7 +850,7 @@ void gedit_view_set_line_wrap (gE_view *view, gint line_wrap)
 
 }
 
-void gedit_view_set_read_only (gE_view *view, gint read_only)
+void gedit_view_set_read_only (gedit_view *view, gint read_only)
 {
 	gchar RO_label[255];
 /*	gchar *fname; */
@@ -878,7 +878,7 @@ void gedit_view_set_read_only (gE_view *view, gint read_only)
 
 }
 
-void gedit_view_set_font (gE_view *view, gchar *font)
+void gedit_view_set_font (gedit_view *view, gchar *font)
 {
 
 	GtkStyle *style;
@@ -903,7 +903,7 @@ void gedit_view_set_font (gE_view *view, gchar *font)
 
 }
 
-void gedit_view_set_position (gE_view *view, gint pos)
+void gedit_view_set_position (gedit_view *view, gint pos)
 {
 
 	gtk_text_set_point (GTK_TEXT (view->text), pos);
@@ -912,21 +912,21 @@ void gedit_view_set_position (gE_view *view, gint pos)
 
 }
 
-guint gedit_view_get_position (gE_view *view)
+guint gedit_view_get_position (gedit_view *view)
 {
 
 	return gtk_text_get_point (GTK_TEXT (view->text));
 
 }
 
-guint gedit_view_get_length (gE_view *view)
+guint gedit_view_get_length (gedit_view *view)
 {
 
 	return gtk_text_get_length (GTK_TEXT (view->text));
 
 }
 
-void gedit_view_set_selection (gE_view *view, gint start, gint end)
+void gedit_view_set_selection (gedit_view *view, gint start, gint end)
 {
 
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
@@ -936,7 +936,7 @@ void gedit_view_set_selection (gE_view *view, gint start, gint end)
 }
 
 /* Sync the itnernal document buffer with what is visible in the text box */
-void gedit_view_buffer_sync (gE_view *view) 
+void gedit_view_buffer_sync (gedit_view *view) 
 {
 	gchar *buf;
 	gedit_document *doc = view->document;
@@ -950,7 +950,7 @@ void gedit_view_buffer_sync (gE_view *view)
 	
 }
 
-void gedit_view_refresh (gE_view *view)
+void gedit_view_refresh (gedit_view *view)
 {
 
 

@@ -22,7 +22,7 @@
 extern void gedit_save_settings (void);
 extern void gedit_get_settings (void);
 
-typedef struct _gedit_preference gE_preference;
+typedef struct _gedit_preference gedit_preference;
 
 struct _gedit_preference {
 

@@ -20,9 +20,9 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_mdi.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_mdi.h"
 #include "search.h"
 
 /*
@@ -263,7 +263,7 @@ seek_to_line (gedit_document *doc, gint line, gint numlines)
 }
 
 gint
-gedit_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
+gedit_search_search (gedit_document *doc, gchar *str, gint pos, gulong options)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gint i, textlen;
@@ -305,7 +305,7 @@ gedit_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
  * This doesn NOT do any sanity checking
  */ 
 void
-gedit_search_replace (gE_document *doc, gint pos, gint len, gchar *replace)
+gedit_search_replace (gedit_document *doc, gint pos, gint len, gchar *replace)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 

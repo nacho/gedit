@@ -19,11 +19,11 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gedit_prefs.h"
-#include "gedit_prefs_box.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_mdi.h"
+#include "gE_prefs.h"
+#include "gE_prefs_box.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_mdi.h"
 
 /*
 #include <gtk/gtk.h>
@@ -33,7 +33,7 @@
 #include <string.h>
 */
 
-typedef struct _gedit_prefs_data gE_prefs_data;
+typedef struct _gedit_prefs_data gedit_prefs_data;
 
 struct _gedit_prefs_data {
 	GnomePropertyBox *pbox;
@@ -122,7 +122,7 @@ cancel_cb (void)
 }
 
 void
-gedit_window_refresh (gE_window *w)
+gedit_window_refresh (gedit_window *w)
 {
 	gint i, j;
 	gedit_view *nth_view;
@@ -197,7 +197,7 @@ gedit_window_refresh (gE_window *w)
 }
 
 void
-gedit_apply (GnomePropertyBox *pbox, gint page, gE_data *data)
+gedit_apply (GnomePropertyBox *pbox, gint page, gedit_data *data)
 {
 	gint i;
 	GtkStyle *style;
@@ -748,7 +748,7 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 	GtkWidget *label;
 	gint i;
   
-	gedit_data *data = (gE_data *)cbdata;
+	gedit_data *data = (gedit_data *)cbdata;
 
 	prefs = g_malloc (sizeof(gedit_prefs_data));
 

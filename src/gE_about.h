@@ -19,6 +19,6 @@
 #ifndef __GE_ABOUT_H__
 #define __GE_ABOUT_H__
 
-extern void gE_about_box (GtkWidget *w, gpointer cbdata);
+extern void gedit_about_box (GtkWidget *w, gpointer cbdata);
 
 #endif /* __GE_ABOUT_H__ */

@@ -21,12 +21,12 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gedit_undo.h"
-#include "gedit_mdi.h"
-#include "gedit_view.h"
+#include "gE_undo.h"
+#include "gE_mdi.h"
+#include "gE_view.h"
 
-void views_insert (gedit_document *doc, gE_undo *undo);
-void views_delete (gedit_document *doc, gE_undo *undo);
+void views_insert (gedit_document *doc, gedit_undo *undo);
+void views_delete (gedit_document *doc, gedit_undo *undo);
 
 void
 gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
@@ -60,7 +60,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
 void
 gedit_undo_do (GtkWidget *w, gpointer data)
 {
-	gedit_document *doc = gE_document_current();
+	gedit_document *doc = gedit_document_current();
 	gedit_undo *undo;
 	
 	if (!doc->undo)
@@ -136,7 +136,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 void gedit_undo_redo (GtkWidget *w, gpointer data)
 {
 
-	gedit_document *doc = gE_document_current();
+	gedit_document *doc = gedit_document_current();
 	gedit_undo *redo;
 	
 	if (!doc->redo)
@@ -208,7 +208,7 @@ void gedit_undo_redo (GtkWidget *w, gpointer data)
 }
 
 void
-views_insert (gedit_document *doc, gE_undo *undo)
+views_insert (gedit_document *doc, gedit_undo *undo)
 {
 
 	gint i;
@@ -247,7 +247,7 @@ views_insert (gedit_document *doc, gE_undo *undo)
 	}  
 }
 
-void views_delete (gedit_document *doc, gE_undo *undo)
+void views_delete (gedit_document *doc, gedit_undo *undo)
 {
 
 	gedit_view *nth_view;

@@ -28,7 +28,7 @@
 #include <unistd.h>
 #include <gnome.h>
 
-#include "gedit_prefslib.h"
+#include "gE_prefslib.h"
 GList *gedit_prefs = NULL;
 
 FILE *gedit_prefs_open_temp (char **filename)

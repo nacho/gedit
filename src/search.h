@@ -28,8 +28,8 @@ gint line_to_pos (gedit_document *doc, gint line, gint *numlines);
 gint get_line_count (gedit_document *doc);
 void seek_to_line (gedit_document *doc, gint line, gint numlines);
 
-gint gedit_search_search (gE_document *doc, gchar *str, gint pos, gulong options);
-void gedit_search_replace (gE_document *doc, gint pos, gint len, gchar *replace);
+gint gedit_search_search (gedit_document *doc, gchar *str, gint pos, gulong options);
+void gedit_search_replace (gedit_document *doc, gint pos, gint len, gchar *replace);
 
 /* gui for interface */
 void search_cb (GtkWidget *widget, gpointer data);

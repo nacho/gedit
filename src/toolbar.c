@@ -21,10 +21,10 @@
 #include <config.h>
 #include <gnome.h>
 #include "commands.h"
-#include "gedit_files.h"
-#include "gedit_prefs.h"
-#include "gedit_print.h"
-#include "gedit_prefs_box.h"
+#include "gE_files.h"
+#include "gE_prefs.h"
+#include "gE_print.h"
+#include "gE_prefs_box.h"
 #include "search.h"
 #include "toolbar.h"
 

@@ -27,7 +27,7 @@
 */
 
 void
-gE_about_box (GtkWidget *widget, gpointer cbdata)
+gedit_about_box (GtkWidget *widget, gpointer cbdata)
 {
 	static GtkWidget *about;
 	

@@ -40,7 +40,7 @@ typedef struct _gedit_undo {
 
 
 /* add an undo node */
-extern void gedit_undo_add		(gchar*, gint, gint, gint, gE_document*);
+extern void gedit_undo_add (gchar*, gint, gint, gint, gedit_document*);
 
 /* clear the list */
 extern void gedit_undo_reset	(GList*);

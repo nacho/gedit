@@ -23,9 +23,9 @@
 
 #include <gtk/gtk.h>
 #include "main.h"
-#include "gedit_print.h"
+#include "gE_print.h"
 #include "search.h"
-#include "gedit_undo.h"
+#include "gE_undo.h"
 
 GnomeUIInfo toolbar_data[] = {
 	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,

@@ -22,24 +22,26 @@
  * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
+#include <config.h>
+#include <gnome.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <config.h>
-#include <gnome.h>
 #include <gtk/gtk.h>
 #include <time.h>
+
 #include "main.h"
-#include "gedit_print.h"
-#include "gedit_files.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_mdi.h"
+#include "gE_print.h"
+#include "gE_files.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_mdi.h"
 #include "commands.h"
-#include "gedit_prefs.h"
+#include "gE_prefs.h"
 
 
 #include <libgnomeprint/gnome-print.h>
@@ -95,7 +97,7 @@ static void print_header (gedit_PrintJobInfo *pji, unsigned int page);
 static void end_page (GnomePrintContext *pc);
 static void end_job (GnomePrintContext *pc);
 static void preview_destroy_cb (GtkObject *obj, gedit_PrintJobInfo *pji);
-static void set_pji ( gedit_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer);
+static void set_pji ( gedit_PrintJobInfo * pji, gedit_document *doc, GnomePrinter *printer);
 
 /*
  * PUBLIC: file_print_cb
@@ -135,7 +137,7 @@ print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data)
 	if(button == 0) {
 		GnomePrinter *printer;
 		GnomePrinterDialog *dialog = GNOME_PRINTER_DIALOG(widget);
-		gedit_document *doc = (gE_document *)data;
+		gedit_document *doc = (gedit_document *)data;
 
 		printer = gnome_printer_dialog_get_printer(dialog);
 
@@ -222,7 +224,7 @@ print_line (gedit_PrintJobInfo *pji)
 }
 
 static void
-set_pji (gedit_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer)
+set_pji (gedit_PrintJobInfo * pji, gedit_document *doc, GnomePrinter *printer)
 {
 	pji->master = gnome_print_master_new();
 	pji->paper = gnome_paper_with_name( gnome_paper_name_default());

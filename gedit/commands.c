@@ -39,12 +39,12 @@
 
 
 #include "main.h"
-#include "gedit_view.h"
+#include "gE_view.h"
 #include "commands.h"
-#include "gedit_mdi.h"
-#include "gedit_window.h"
-#include "gedit_prefs.h"
-#include "gedit_files.h"
+#include "gE_mdi.h"
+#include "gE_window.h"
+#include "gE_prefs.h"
+#include "gE_files.h"
 #include "search.h"
 
 /*
@@ -562,65 +562,60 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
  *
  * data->temp1 must be the file saveas dialog box
  */
-static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
+static void
+file_save_all_as_ok_sel (GtkWidget *w, GtkFileSelection *fs)
 {
-
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(fs)));
 	gedit_document *doc;
 
-	if (mdi->active_child == NULL) {
-	
-	  g_free (fname);
-	  return;
+	if (mdi->active_child == NULL)
+	{
+		g_free (fname);
+		return;
 	}	  
 	
 	doc = gedit_document_current();
 	
-	if (fname) {
-	
-	  if (gedit_file_save(doc, fname) != 0) 
-	    gnome_app_flash (mdi->active_window, _("Error saving file!"));
-	    
+	if (fname)
+	{
+		if (gedit_file_save(doc, fname) != 0) 
+			gnome_app_flash (mdi->active_window, _("Error saving file!"));
 	}
 
 	gtk_widget_destroy (GTK_WIDGET (fs)); 
 	fs = NULL;
 	g_free (fname);	
-	
 } 
 
 /*
  * destroy the "save all as" dialog box
  */
-static gint file_save_all_as_destroy(GtkWidget *w, GtkFileSelection *fs)
+static gint
+file_save_all_as_destroy (GtkWidget *w, GtkFileSelection *fs)
 {
-
 	gtk_widget_destroy (GTK_WIDGET (fs)); 
 	fs = NULL;
 	
 	return TRUE;
-	
 }
 
 /*
  * save all as callback
  */
 void 
-file_save_all_as_cb(GtkWidget *widget, gpointer cbdata)
+file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	GtkWidget *fs = NULL; 
 	gchar *title;
 
-	title = g_strdup_printf(_("Save %s As ..."), (gchar *)cbdata);
-	fs = gtk_file_selection_new(title);
+	title = g_strdup_printf (_("Save %s As ..."), (gchar *)cbdata);
+	fs = gtk_file_selection_new (title);
 
-	
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(fs)->ok_button),
-						"clicked", (GtkSignalFunc)file_save_all_as_ok_sel, fs);
+	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(fs)->ok_button),
+			    "clicked", (GtkSignalFunc)file_save_all_as_ok_sel, fs);
 						
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(fs)->cancel_button),
-						"clicked", (GtkSignalFunc)file_save_all_as_destroy, fs);
+	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(fs)->cancel_button),
+			    "clicked", (GtkSignalFunc)file_save_all_as_destroy, fs);
 
 
 	gtk_widget_show(fs);
@@ -799,45 +794,37 @@ edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 void
 edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 {
-
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_COPY);
-	
 }
 	
 void
 edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 {
-
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_PASTE);
-	
 }
 
 void
 edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 {
-
-	gtk_editable_select_region(
-		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
-		gtk_text_get_length( GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
+	gtk_editable_select_region(GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
+				   gtk_text_get_length( GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
-	
 }
 
 
 /* Add a file to the Recent-used list... */
 
-void recent_add (char *filename)
+void
+recent_add (char *filename)
 {
-
 	gnome_history_recently_used (filename, "text/plain", "gEdit", "");
-	
 }
 
 
@@ -845,7 +832,8 @@ void recent_add (char *filename)
  * Should be called after each addition to the list 
  */
 
-void recent_update (GnomeApp *app)
+void
+recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
 	

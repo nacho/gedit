@@ -21,8 +21,8 @@
 
 void gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata);
 
-void gedit_property_box_new (gE_data *data);
-void gedit_window_refresh (gE_window *w);
+void gedit_property_box_new (gedit_data *data);
+void gedit_window_refresh (gedit_window *w);
 
 
 #endif

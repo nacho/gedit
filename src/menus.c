@@ -24,14 +24,14 @@
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
-#include "gedit_about.h"
-#include "gedit_files.h"
-#include "gedit_mdi.h"
-#include "gedit_print.h"
-#include "gedit_prefs.h"
-#include "gedit_prefs_box.h"
-#include "gedit_view.h"
-#include "gedit_window.h"
+#include "gE_about.h"
+#include "gE_files.h"
+#include "gE_mdi.h"
+#include "gE_print.h"
+#include "gE_prefs.h"
+#include "gE_prefs_box.h"
+#include "gE_view.h"
+#include "gE_window.h"
 #include "search.h"
 
 /*
@@ -257,7 +257,7 @@ GnomeUIInfo gedit_menu [] = {
 };
 
 GnomeUIInfo *
-gedit_menus_init (gE_window *window, gE_data *data)
+gedit_menus_init (gedit_window *window, gedit_data *data)
 {
 
 	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);

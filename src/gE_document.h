@@ -41,7 +41,7 @@ extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
 extern void child_switch (GnomeMDI *mdi, gedit_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
-extern gedit_document *gE_document_new_container (gE_window *w, gchar *title,
+extern gedit_document *gedit_document_new_container (gedit_window *w, gchar *title,
 					       gint with_split_screen);
 #endif
 

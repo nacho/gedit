@@ -21,7 +21,7 @@
 #ifndef __GE_PLUGIN_H__
 #define __GE_PLUGIN_H__
 
-typedef struct _gedit_Plugin_Data gE_Plugin_Data;
+typedef struct _gedit_Plugin_Data gedit_Plugin_Data;
 
 #include <gmodule.h>
 
@@ -54,7 +54,7 @@ extern GSList	*plugin_list;
 /* Plugin MUST have this function */
 extern gint init_plugin (gedit_Plugin_Data *pd);
 
-void		 gedit_plugins_init 	();
+void		 gedit_plugins_init 	(void);
 gedit_Plugin_Data	*plugin_load 		(const gchar *file);
 void		 plugin_unload		(gedit_Plugin_Data *pd);
 

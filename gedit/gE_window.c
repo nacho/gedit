@@ -18,12 +18,15 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <stdio.h>
-#include <string.h>
 #include <config.h>
 #include <gnome.h>
+
+/*
+#include <stdio.h>
+#include <string.h>
 #include <gtk/gtk.h>
 #include <glib.h>
+*/
 
 #include "main.h"
 #include "gE_window.h"
@@ -32,13 +35,13 @@
 #include "gE_prefs_box.h"
 #include "commands.h"
 #include "gE_mdi.h"
+#include "gE_print.h"
 #include "menus.h"
 #include "gE_prefs.h"
 #include "search.h"
 #include "gE_plugin.h"
-#include "../pixmaps/gedit_icon.xpm"
+#include "../pixmaps/gE_icon.xpm"
 
-#include "gedit_print.h"
 
 extern GList *plugins;
 gedit_window *window;
@@ -194,7 +197,7 @@ void gedit_window_set_icon(GtkWidget *window, char *icon)
 	
 	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
                                 		&window->style->bg[GTK_STATE_NORMAL],
-                                		(char **)gedit_icon);
+                                		(char **)gE_icon);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
@@ -239,7 +242,7 @@ child_switch (GnomeMDI *mdi, gedit_document *doc)
 
 /*	umm.. FIXME?
 static gint
-gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
+gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
 {
 	window_close_cb(widget, data);
 	return TRUE;

@@ -22,11 +22,11 @@
 #include <gnome.h>
 #include <sys/stat.h>
 #include "main.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_files.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_files.h"
 #include "commands.h"
-#include "gedit_mdi.h"
+#include "gE_mdi.h"
 
 /*
 #include <sys/types.h>
@@ -48,7 +48,7 @@
  * TODO - lock/unlock file before/after
  */
 gint
-gedit_file_open (gE_document *doc, gchar *fname)
+gedit_file_open (gedit_document *doc, gchar *fname)
 {
 	gchar *name;
 	gchar *tmp_buf, *flash;
@@ -112,7 +112,7 @@ gedit_file_open (gE_document *doc, gchar *fname)
  * TODO - lock/unlock file before/after
  */
 gint
-gedit_file_save (gE_document *doc, gchar *fname)
+gedit_file_save (gedit_document *doc, gchar *fname)
 {
 	FILE *fp;
 /*	gchar *title; */

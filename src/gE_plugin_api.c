@@ -26,14 +26,14 @@
 
 #include "main.h"
 #ifdef WITH_GMODULE_PLUGINS
-#include "gedit_plugin.h"
+#include "gE_plugin.h"
 #endif
-#include "gedit_plugin_api.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_files.h"
+#include "gE_plugin_api.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_files.h"
 #include "commands.h"
-#include "gedit_mdi.h"
+#include "gE_mdi.h"
 
 GList *plugins;
 GHashTable *win_int_to_pointer,
