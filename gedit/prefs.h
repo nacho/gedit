@@ -69,10 +69,9 @@ struct _Preferences
 
 extern Preferences *settings;
 
-extern void gedit_save_settings (void);
-extern void gedit_load_settings (void);
-
-extern void gedit_window_refresh (void);
+void gedit_save_settings (void);
+void gedit_load_settings (void);
+void gedit_window_refresh (void);
 
 
 #endif /* __PREFS_H__ */

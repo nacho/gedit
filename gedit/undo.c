@@ -116,7 +116,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	undo->end_pos = end_pos;
 	undo->action = action;
 	undo->status = doc->changed;
-	undo->window_position = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
+	undo->window_position = gedit_view_get_window_position (view);
 	if (end_pos-start_pos!=1 || text[0]=='\n')
 		undo->mergeable = FALSE;
 	else
@@ -278,13 +278,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	GeditUndoInfo *undo;
-	View *view;
-	GtkText *text;
 
 	gedit_debug ("", DEBUG_UNDO);
-
-	view = VIEW (mdi->active_view);
-	text = GTK_TEXT (view->text);
 
 	if (doc->undo == NULL)
 	{
@@ -292,7 +287,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 		return;
 	}
 	
-	g_return_if_fail (doc!=NULL && view!=NULL && text!=NULL);
+	g_return_if_fail (doc!=NULL);
 
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */
@@ -302,9 +297,12 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
 
+	/* Check if there is a selection active */
+	if (gedit_view_get_selection (gedit_view_current(), NULL, NULL))
+		gedit_view_set_selection (gedit_view_current(), 0, 0);
+	
 	/* Move the view (scrollbars) to the correct position */
-	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
-				  undo->window_position);
+	gedit_view_set_window_position (gedit_view_current(), undo->window_position);
 	
 	if (undo->action == GEDIT_UNDO_DELETE)
 		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
@@ -328,27 +326,25 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	GeditUndoInfo *redo;
-	View *view;
-	GtkText *text;
 
 	gedit_debug ("", DEBUG_UNDO);
-
-	view = VIEW (mdi->active_view);
-	text = GTK_TEXT (view->text);
 
 	if (doc->redo == NULL)
 		return;
 	
-	if (doc==NULL || view==NULL || text==NULL)
+	if (doc==NULL)
 		return;
 	
 	redo = g_list_nth_data (doc->redo, 0);
 	doc->undo = g_list_prepend (doc->undo, redo);
 	doc->redo = g_list_remove (doc->redo, redo);
 
+	/* Check if there is a selection active */
+	if (gedit_view_get_selection (gedit_view_current(), NULL, NULL))
+		gedit_view_set_selection (gedit_view_current(), 0, 0);
+
 	/* Move the view to the right position. */
-	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(gedit_view_current()->text)->vadj),
-				  redo->window_position);
+	gedit_view_set_window_position (gedit_view_current(), redo->window_position);
 				  
 	if (redo->action == GEDIT_UNDO_INSERT)
 		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);

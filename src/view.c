@@ -41,7 +41,10 @@ enum {
 static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 GtkVBoxClass *parent_class = NULL;
 
-       void view_changed_cb (GtkWidget *w, gpointer cbdata);
+       void gedit_view_changed_cb (GtkWidget *w, gpointer cbdata);
+     gfloat gedit_view_get_window_position (View *view);
+       void gedit_view_set_window_position (View *view, gfloat position);
+       void gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
 
        void views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
        void views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
@@ -59,18 +62,16 @@ static void gedit_view_class_init (ViewClass *klass);
 static void gedit_view_init (View *view);
       guint gedit_view_get_type (void);
 GtkWidget * gedit_view_new (Document *doc);
-       void gedit_view_set_group_type (View *view, guint type); /* Why is this here ??? maybe taken from ghex. we dont use group types asaik */
 #ifdef ENABLE_SPLIT_SCREEN
        void gedit_view_set_split_screen (View *view, gint split_screen);
 #endif
        void gedit_view_set_word_wrap (View *view, gint word_wrap);
-static void gedit_view_set_line_wrap (View *view, gint line_wrap);
        void gedit_view_set_read_only (View *view, gint read_only);
        void gedit_view_set_font (View *view, gchar *fontname);
        void gedit_view_set_position (View *view, gint pos);
       guint gedit_view_get_position (View *view);
-      guint gedit_view_get_length (View *view);
-
+       void gedit_view_set_selection (View *view, guint  start, guint  end);
+       gint gedit_view_get_selection (View *view, guint *start, guint *end);
 
 View *
 gedit_view_current (void)
@@ -86,7 +87,7 @@ gedit_view_current (void)
 }
 
 void
-view_changed_cb (GtkWidget *w, gpointer cbdata)
+gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	View *view;
 	
@@ -110,6 +111,37 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	*/
 }
 
+
+gfloat
+gedit_view_get_window_position (View *view)
+{
+	return GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
+}
+
+void
+gedit_view_set_window_position (View *view, gfloat position)
+{
+	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
+				  position);
+}
+
+void
+gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
+{
+	float position;
+	float upper;
+	float page_increment;
+
+	g_return_if_fail (line <= lines);
+	
+	upper = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper;
+	page_increment = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_increment; 
+	position = ( line *  upper / lines - page_increment);
+
+	gedit_view_set_window_position (view, position);
+	
+}
+
 void
 views_insert (Document *doc, guint position, gchar * text, gint length, View * view_exclude)
 {
@@ -120,7 +152,7 @@ views_insert (Document *doc, guint position, gchar * text, gint length, View * v
 
 	if (!doc->changed)
 		if (g_list_length (doc->views))
-			view_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
+			gedit_view_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
@@ -203,39 +235,6 @@ gedit_view_delete (View *view, guint position, gint length)
 #endif
 }
 
-#if 0 /* Disabled by chema to kill compile warning about not beeing used */
-static void
-view_list_erase (View *view, gedit_data *data)
-{
-	gedit_debug ("", DEBUG_VIEW);
-}
-#endif 
-
-#if 0 /* Disabled by chema */
-gint
-insert_into_buffer (Document *doc, gchar *buffer, gint position)
-{
-	gedit_debug ("", DEBUG_VIEW);
-
-	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position))
-	{
-		doc->buf = g_string_insert (doc->buf, position, buffer);
-	}
-	else if (position == 0)
-	{
-		gedit_debug ("  pos==0, prepend", DEBUG_VIEW);
-		doc->buf = g_string_prepend (doc->buf, buffer);
-	}
-	else
-	{
-		gedit_debug ("  pos!=0, append", DEBUG_VIEW);
-		doc->buf = g_string_append (doc->buf, buffer);
-	}
-	return 0;		
-}d
-#endif
-
-
 void
 doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
 		    int *pos, View *view, gint exclude_this_view, gint undo)
@@ -262,15 +261,6 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 
 	g_free (text_to_insert);
 
-#ifdef ENABLE_SPLIT_SCREEN
-	/*
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-	gtk_text_set_point (GTK_TEXT (significant_other), position);
-	*/
-#endif
-
 	gedit_debug ("end", DEBUG_VIEW);
 }
 
@@ -287,7 +277,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	doc = view->document;
 
 	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
-
 	if (undo)
 		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_DELETE, doc, view);
 	g_free (text_to_delete);
@@ -296,15 +285,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 		views_delete (doc, start_pos, end_pos, NULL);
 	else
 		views_delete (doc, start_pos, end_pos, view);
-
-#ifdef ENABLE_SPLIT_SCREEN
-	/*
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-	gtk_text_set_point (GTK_TEXT (significant_other), position);
-	*/
-#endif
 
 	gedit_debug ("end", DEBUG_VIEW);
 }
@@ -401,7 +381,7 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 	static char col [32];
 
 	return;
-	/* Disable by chema for 0.7.0 . this hack is not working */
+	/* FIXME: Disable by chema for 0.7.0 . this hack is not working */
 	gedit_debug ("", DEBUG_VIEW);
 
 	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
@@ -456,7 +436,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		break;
 		case 'z':
 			/* Undo is getting called twice, 1 thru this function
-			   and 1 time thru the aceleratior. Chema 
+			   and 1 time thru the aceleratior (I guess). Chema 
 	    		gedit_undo_do (w, NULL);
 			*/
 	    		break;
@@ -481,6 +461,8 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	return TRUE;
 }
 
+
+
 static void
 gedit_view_class_init (ViewClass *klass)
 {
@@ -504,7 +486,8 @@ gedit_view_class_init (ViewClass *klass)
 
 	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
 	klass->cursor_moved = NULL;
-	/*widget_class->size_allocate = gedit_view_size_allocate;
+	/*
+	widget_class->size_allocate = gedit_view_size_allocate;
 	widget_class->size_request = gedit_view_size_request;
 	widget_class->expose_event = gedit_view_expose;
 	widget_class->realize = gedit_view_realize;
@@ -598,7 +581,7 @@ gedit_view_init (View *view)
 /*	doc->changed = FALSE; */
 
 	view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-					       GTK_SIGNAL_FUNC (view_changed_cb), view);
+					       GTK_SIGNAL_FUNC (gedit_view_changed_cb), view);
 
 	gtk_widget_show (view->text);
 	gtk_text_set_point (GTK_TEXT(view->text), 0);
@@ -757,15 +740,6 @@ gedit_view_new (Document *doc)
 	return GTK_WIDGET (view);
 }
 
-void
-gedit_view_set_group_type (View *view, guint type)
-{
-	gedit_debug ("", DEBUG_VIEW);
-
-	view->group_type = type;
-	gtk_widget_queue_resize (GTK_WIDGET (view));
-}
-
 #ifdef ENABLE_SPLIT_SCREEN    
 void
 gedit_view_set_split_screen (View *view, gint split_screen)
@@ -891,13 +865,7 @@ gedit_view_get_position (View *view)
 	return gtk_text_get_point (GTK_TEXT (view->text));
 }
 
-guint
-gedit_view_get_length (View *view)
-{
-	gedit_debug ("", DEBUG_VIEW);
-	return gtk_text_get_length (GTK_TEXT (view->text));
-}
-
+#if 0 /* Commented out by chema to kill warning. We should implement this */
 static void
 gedit_view_set_line_wrap (View *view, gint line_wrap)
 {
@@ -906,32 +874,65 @@ gedit_view_set_line_wrap (View *view, gint line_wrap)
 	view->line_wrap = line_wrap;
 	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
 }
-
-void
-options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
-{
-	View *view = VIEW (mdi->active_view);
-
-	gedit_debug ("", DEBUG_VIEW);
-
-	if (!gedit_document_current())
-		return;
-
-	gedit_view_set_line_wrap (view, !view->line_wrap);
-}
-
-
-/* Functions that are never used */
-#if 0
-void
-gedit_view_set_selection (View *view, gint start, gint end)
-{
-	gedit_debug ("", DEBUG_VIEW);
-	
-	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
-	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
-}
 #endif
+
+/**
+ * gedit_view_set_selection:
+ * @view: 
+ * @start: 
+ * @end: 
+ * 
+ * if start && end = 0 this is a unselect request
+ **/
+void
+gedit_view_set_selection (View *view, guint start, guint end)
+{
+	gedit_debug ("", DEBUG_VIEW);
+
+	if (start == 0 && end == 0)
+		gtk_text_set_point (GTK_TEXT(view->text), GTK_EDITABLE(GTK_TEXT(view->text))->selection_end_pos);
+
+	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
+
+	if (start == 0 && end == 0)
+	{
+		gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
+		gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+	}
+
+}
+
+/**
+ * gedit_view_get_selection:
+ * @view: 
+ * @start: 
+ * @end: 
+ * 
+ * 
+ * 
+ * Return Value: TRUE if there is a text slected
+ **/
+gint
+gedit_view_get_selection (View *view, guint *start, guint *end)
+{
+	guint start_pos, end_pos;
+
+	gedit_debug ("", DEBUG_VIEW);
+
+	start_pos = GTK_EDITABLE(view->text)->selection_start_pos;
+        end_pos   = GTK_EDITABLE(view->text)->selection_end_pos;
+
+	if (start != NULL)
+		*start = start_pos;
+	if (end != NULL)
+		*end = end_pos;
+
+	if (start_pos > 0 || end_pos > 0)
+		return TRUE;
+	else
+		return FALSE;
+}
+
 
 /* Called from the View menu */
 void

@@ -117,13 +117,14 @@
 	  <class>GtkLabel</class>
 	  <name>label1</name>
 	  <width>90</width>
-	  <label>Search for: </label>
+	  <label>_Search for: </label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>True</wrap>
 	  <xalign>1</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <default_focus_target>search_for_text_entry</default_focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -173,13 +174,14 @@
 	  <class>GtkLabel</class>
 	  <name>label2</name>
 	  <width>90</width>
-	  <label>Replace with: </label>
+	  <label>_Replace with: </label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>True</wrap>
 	  <xalign>1</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <default_focus_target>replace_with_text_entry</default_focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -228,7 +230,7 @@
 	  <class>GtkRadioButton</class>
 	  <name>radio_button_1</name>
 	  <can_focus>True</can_focus>
-	  <label>beginning of document</label>
+	  <label>b_eginning of document</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>start_search_from</group>
@@ -243,7 +245,7 @@
 	  <class>GtkRadioButton</class>
 	  <name>radio_button_2</name>
 	  <can_focus>True</can_focus>
-	  <label>cursor position</label>
+	  <label>_cursor position</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>start_search_from</group>
@@ -285,7 +287,7 @@
 	  <class>GtkCheckButton</class>
 	  <name>case_sensitive</name>
 	  <can_focus>True</can_focus>
-	  <label>Case sensitive</label>
+	  <label>Case se_nsitive</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>

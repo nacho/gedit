@@ -49,6 +49,21 @@ GList *window_list = NULL;
 
 /* Prototype for setting the window icon */
 static void gedit_window_set_icon (GtkWidget *window, char *icon);
+GtkWindow * gedit_window_active (void);
+GnomeApp  * gedit_window_active_app (void);
+
+
+GtkWindow *
+gedit_window_active (void)
+{
+	return GTK_WINDOW (mdi->active_window);
+}
+
+GnomeApp *
+gedit_window_active_app (void)
+{
+	return mdi->active_window;
+}
 
 
 #ifdef ENABLE_SEARCH_RESULT_CLIST

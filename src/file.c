@@ -88,8 +88,8 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
-		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
-						       "\nPlease make sure the file exists."));
+		gnome_app_error (gedit_window_active_app(), _("An error was encountered while opening the file."
+							      "\nPlease make sure the file exists."));
 		return 1;
 	}
 
@@ -98,7 +98,7 @@ gedit_file_open (Document *doc, gchar *fname)
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
 						    "\nPlease make sure the file is not being used by another application\n"
 						    "and that the file is not empty."), fname);
-		gnome_app_error (mdi->active_window, errstr);
+		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
 		return 1;
 	}
@@ -222,7 +222,7 @@ gedit_file_save (Document *doc, gchar *fname)
 
 	if (!view->changed_id)
 		view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-						       GTK_SIGNAL_FUNC(view_changed_cb), view);
+						       GTK_SIGNAL_FUNC(gedit_view_changed_cb), view);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
 	return 0;
@@ -572,6 +572,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	switch (gnome_dialog_run_and_close (GNOME_DIALOG (msgbox)))
 	{
 	case 0:
+		gedit_document_delete_text (doc, 0, gedit_document_get_buffer_length(doc), FALSE);
 		gedit_file_open (doc, doc->filename);
 		break;
 	default:

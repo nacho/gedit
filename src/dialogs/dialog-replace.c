@@ -2,6 +2,8 @@
 /*
  * gedit
  *
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose Celorio
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -28,6 +30,7 @@
 #include "search.h"
 #include "view.h"
 #include "utils.h"
+#include "window.h"
 #include "dialogs/dialogs.h"
 
 #include <glade/glade.h>
@@ -36,8 +39,10 @@ static void replace_text_destroyed_cb (GtkWidget *widget, gint button);
 static void replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void replace_text_clicked_cb (GtkWidget *widget, gint button);
+static void search_text_not_found_notify (View *view);
 
        void dialog_replace (gint full);
+
 
 static void
 replace_text_destroyed_cb (GtkWidget *widget, gint button)
@@ -59,16 +64,7 @@ replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 static void
 search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
-	GtkWidget *replace_entry;
-	
-	/* behave as if the user clicked Find/Find next button */
 	gedit_debug("", DEBUG_SEARCH);
-
-	/* We do a normal search, but we also need to move the cursor
-	   to the next field */
-	replace_entry  = gtk_object_get_data (GTK_OBJECT (widget), "replace_with_text_entry");
-	g_assert (replace_entry   != NULL);
-
 	replace_text_clicked_cb (dialog, 0);
 }
 
@@ -78,12 +74,11 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	GtkWidget *search_entry, *replace_entry, *case_sensitive, *radio_button_1;
 	gint line_found, total_lines, eureka;
 	gint start_search_from;
-	gulong pos_found, start_pos = 0;
+	guint pos_found, start_pos = 0, end_pos = 0;
 	gint search_text_length, replace_text_length;
 	gchar * text_to_search_for, *text_to_replace_with;
 	
 	View *view;
-	GtkText *text;
 
 	gedit_debug("", DEBUG_SEARCH);
 
@@ -94,10 +89,9 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		return;
 	}
 
-	view = VIEW (mdi->active_view);
-	text = GTK_TEXT (view->text);
+	view = gedit_view_current();
 
-	g_assert ((text!= NULL)&&(view!=NULL));
+	g_return_if_fail (view!=NULL);
 
 	search_entry   = gtk_object_get_data (GTK_OBJECT (widget), "search_for_text_entry");
 	replace_entry  = gtk_object_get_data (GTK_OBJECT (widget), "replace_with_text_entry");
@@ -195,29 +189,16 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   we will need to add a callback to the text entries on their
 		   chage signals */
 
-		int start, end;
+		guint start, end;
 
-		if (!GTK_EDITABLE(text)->selection_end_pos)
+		if (!gedit_view_get_selection (view, &start, &end))
 			g_warning("This should not happen !!!!. There should be some text selected");
- 
-		start = GTK_EDITABLE(text)->selection_start_pos;
-		end   = GTK_EDITABLE(text)->selection_end_pos;
-		
+		/* FIXME !!!!!!!!!! this is a big problem testing for a selection !!! */
+
 		/* Diselect the text and set the point after this occurence*/
-
-		doc_delete_text_cb (GTK_WIDGET(text), start, end, view, FALSE, TRUE);
-		/*
-		views_delete (view->document, start, end);
-		*/
-
-		/*
-		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view, FALSE, TRUE);
-		*/
+		gedit_view_set_selection (view, 0, 0);
+		gedit_document_delete_text (view->document, start, search_text_length, TRUE);
 		gedit_document_insert_text (view->document, text_to_replace_with, start, TRUE);
-		/*
-		views_insert (view->document, start, text_to_replace_with, replace_text_length, view);
-		*/
-
 		/*
 		gtk_text_set_point (text, end);
 		*/
@@ -239,10 +220,11 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			start_pos = 0;
 			break;
 		case 1:
-			if (GTK_EDITABLE(text)->selection_end_pos)
-				start_pos = GTK_EDITABLE(text)->selection_end_pos;
+			
+			if (gedit_view_get_selection (view, &start_pos, &end_pos))
+				start_pos = end_pos;
 			else
-				start_pos = gtk_text_get_point (text);
+				start_pos = gedit_view_get_position (view);
 			break;
 		default:
 			g_print("other ...\n");
@@ -260,19 +242,44 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (!eureka)
 		{
-			search_text_not_found_notify (text);
+			search_text_not_found_notify (view);
+			gtk_object_destroy (GTK_OBJECT(widget));
 			return;
 		}
 
 		gedit_flash_va (_("Text found at line :%i"),line_found);
-		update_window_position (text, line_found, total_lines);
-		gtk_text_set_point (text, pos_found+1);
-		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
-		gtk_text_backward_delete (text, 1);
-		gtk_editable_select_region (GTK_EDITABLE(text), pos_found+1, pos_found+1+search_text_length);
+		gedit_view_set_window_position_from_lines (view, line_found, total_lines);
+		
+		gtk_text_set_point (GTK_TEXT(view->text), pos_found+1);
+		gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
+		gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+		gtk_editable_select_region (GTK_EDITABLE(view->text), pos_found+1, pos_found+1+search_text_length);
 
 		gtk_radio_button_select (GTK_RADIO_BUTTON(radio_button_1)->group, 1);
 	}
+}
+
+static void
+search_text_not_found_notify (View * view)
+{
+	GtkWidget *gnome_dialog;
+	gchar * msg;
+	
+	gedit_flash_va (_("Text not found"));
+
+	if (gedit_view_get_selection (view, NULL, NULL))
+		gedit_view_set_selection (view, 0, 0);
+
+	msg = g_strdup (_("Text not found."));
+	gnome_dialog = gnome_message_box_new (msg,
+					      GNOME_MESSAGE_BOX_INFO,
+					      GNOME_STOCK_BUTTON_OK,
+					      NULL);
+	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
+				 GTK_WINDOW (mdi->active_window));
+	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
+
+	g_free (msg);
 }
 
 void
@@ -363,7 +370,7 @@ dialog_replace (gint full)
 			    GTK_SIGNAL_FUNC (search_entry_activate_cb), replace_text_dialog);
 
 	gnome_dialog_set_parent (GNOME_DIALOG (replace_text_dialog),
-				 GTK_WINDOW (mdi->active_window));
+				 gedit_window_active());
 	gtk_window_set_modal (GTK_WINDOW (replace_text_dialog), TRUE);
 
 

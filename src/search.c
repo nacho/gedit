@@ -103,21 +103,9 @@ search_verify_document (void)
 void
 search_start (void)
 {
-	GtkText *text_buffer;
-	Document *doc;
-	View *view;
-
 	gedit_debug("", DEBUG_SEARCH);
 
-	view = gedit_view_current();
-	doc = view->document;
-	text_buffer = GTK_TEXT (view->text);
-
-	g_return_if_fail ( view!= NULL &&
-			   doc != NULL &&
-			   text_buffer != NULL);
-
-	gedit_search_info.view = VIEW (mdi->active_view);
+	gedit_search_info.view = gedit_view_current();
 	gedit_search_info.doc = gedit_document_current();
 	gedit_search_info.original_readonly_state = gedit_search_info.view->read_only;
 #if 0 /* Speed problems when using large files. Chema */
@@ -126,8 +114,8 @@ search_start (void)
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
-		gedit_search_info.buffer_length = gtk_text_get_length (text_buffer);
-		gedit_search_info.buffer = gedit_document_get_buffer (doc);
+		gedit_search_info.buffer_length = gedit_document_get_buffer_length (gedit_search_info.doc);
+		gedit_search_info.buffer = gedit_document_get_buffer (gedit_search_info.doc);
 		gedit_search_info.state = SEARCH_IN_PROGRESS_YES;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
@@ -154,7 +142,7 @@ search_end (void)
 	gedit_debug("", DEBUG_SEARCH);
 
 #if 0 /* Speed problems when using large files. Chema */
-	if (mdi->active_child != NULL)
+	if (gedit_view_current() != NULL)
 		gedit_view_set_read_only (gedit_search_info.view,
 					  gedit_search_info.original_readonly_state);
 #endif	
@@ -224,9 +212,9 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 
 	if (!doc)
 		return;
-	
+
 	search_start();
-	line_number = pos_to_line (gtk_editable_get_position (GTK_EDITABLE (VIEW (mdi->active_view)->text)),
+	line_number = pos_to_line (gedit_view_get_position (gedit_search_info.view),
 				   &total_lines);
 
 	search_end();
@@ -275,7 +263,7 @@ gint
 search_text_execute ( gulong starting_position,
 		      gint case_sensitive,
 		      guchar *text_to_search_for,
-		      gulong * pos_found,
+		      guint * pos_found,
 		      gint * line_found,
 		      gint * total_lines,
 		      gint return_the_line_number)
@@ -287,10 +275,7 @@ search_text_execute ( gulong starting_position,
 
 	gedit_debug ("", DEBUG_SEARCH);
 
-	if (gedit_search_info.state !=  SEARCH_IN_PROGRESS_YES)
-		g_warning ("Search not started, watch out dude !\n");
-
-	/* TODO, we need to check if the buffer is current. ( RELOAD needed )*/
+	g_return_val_if_fail (gedit_search_info.state ==  SEARCH_IN_PROGRESS_YES, 0);
 
 	case_sensitive_mask = case_sensitive?0:32;
 	text_length = strlen (text_to_search_for);
@@ -314,8 +299,8 @@ search_text_execute ( gulong starting_position,
 
 	*pos_found = p2 - text_length;
 
-	if (VIEW (mdi->active_view) != gedit_search_info.view)
-		g_warning("View is not the same !!!!!!!!!!!! search.c:317");
+	if (gedit_view_current() != gedit_search_info.view)
+		g_warning("View is not the same !!!!!!!!!!!! search.c");
 
 	return TRUE;
 }
@@ -373,50 +358,5 @@ line_to_pos (Document *doc, gint line, gint *lines)
 	return pos;
 }
 
-void
-update_window_position (GtkText *text, gint line, gint lines)
-{
-	float adjustment;
-	float upper;
-	float page_increment;
-	
-
-	g_assert (lines >= line);
-
-	upper = GTK_ADJUSTMENT(text->vadj)->upper;
-	page_increment = GTK_ADJUSTMENT(text->vadj)->page_increment; 
-
-	adjustment = ( line *  upper / lines - page_increment);
-
-	gtk_adjustment_set_value (GTK_ADJUSTMENT(text->vadj), adjustment);
-}
 
 
-void
-search_text_not_found_notify (GtkText *text)
-{
-	GtkWidget *gnome_dialog;
-	gchar * msg;
-	
-	gedit_flash_va (_("Text not found"));
-	/* We need to set the cursor after the position of the last
-	   find so that we will not find it again. Chema */
-	if (GTK_EDITABLE(text)->selection_end_pos)
-	{
-		gtk_text_set_point (text, GTK_EDITABLE(text)->selection_end_pos);
-		gtk_editable_select_region (GTK_EDITABLE(text), 0, 0);
-		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
-		gtk_text_backward_delete (text, 1);
-	}
-
-	msg = g_strdup (_("Text not found."));
-	gnome_dialog = gnome_message_box_new (msg,
-					      GNOME_MESSAGE_BOX_INFO,
-					      GNOME_STOCK_BUTTON_OK,
-					      NULL);
-	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
-				 GTK_WINDOW (mdi->active_window));
-	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
-
-	g_free (msg);
-}

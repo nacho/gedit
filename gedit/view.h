@@ -62,8 +62,6 @@ struct _View
 	gint insert, delete, indent;
 	gint s_insert, s_delete, s_indent;
 	
-	guint group_type;
-	
 	gpointer flag;
 	
 	gint word_wrap;
@@ -83,67 +81,33 @@ struct _ViewClass
 	void (*cursor_moved)(View *view);
 };
 
-
-/* THIS files are a mess, needs some cleaning ...*/
-View * gedit_view_current (void);
+/* view changed callback */
+void	gedit_view_changed_cb		(GtkWidget *w, gpointer cbdata);
 
 /* General utils */
-guint	   gedit_view_get_type 		(void);
-GtkWidget* gedit_view_new 		(Document *doc);
+guint	   	gedit_view_get_type	(void);
+GtkWidget*	gedit_view_new		(Document *doc);
+View *		gedit_view_current	(void);
 
 /* View settings */
-void 	   gedit_view_set_font 		(View *view, gchar *font);
-void 	   gedit_view_set_word_wrap 	(View *view, gint word_wrap);
-void 	   gedit_view_set_read_only 	(View *view, gint read_only);
-void 	   gedit_view_set_split_screen 	(View *view, gint split_screen);
+void	gedit_view_set_font		(View *view, gchar *font);
+void	gedit_view_set_word_wrap	(View *view, gint word_wrap);
+void	gedit_view_set_read_only	(View *view, gint read_only);
+void	gedit_view_set_split_screen	(View *view, gint split_screen);
 
-/* Should we have the GtkText fucntions? */
+/* Scrolled window */
+gfloat	gedit_view_get_window_position	(View *view);
+void	gedit_view_set_window_position	(View *view, gfloat position);
+void	gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
 
-/* hmm.. we are basically reimplenting a text widget for the
- * needs of gedit.. so.. any util functions that could be used
- * should be implemented.. or atleast prototyped in case.. we can
- * always remove them later.. */
+/* Insert/delete text */
+void	doc_delete_text_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+void	doc_insert_text_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
 
-/* This is a function to insert text into the buffer, used for the GList of views 
-   in a gedit_document */
-void 	   gedit_view_insert_text 	(View *view, const gchar *text,
-					 gint length, gint pos);
-
-guint 	   gedit_view_get_position	(View *view);
-void	   gedit_view_set_position	(View *view, gint pos);
-guint 	   gedit_view_get_length 	(View *view);
-
-void	   gedit_view_buffer_sync	(View *view);
-
-void 	   view_changed_cb		(GtkWidget *w, gpointer cbdata);
-
-void	   gedit_view_set_group_type	(View *view, guint type);
-
-/*
-void	   gedit_view_refresh		(View *view);
-*/
-
-
-/*void gedit_view_set_color (View *view , teh Gdk colour thngies we need for a
-								func like this..  ); */
-
-/* At some point in the future we will have an Un/Re-do feature */
-/*
-void gedit_view_undo (View *view);
-void gedit_view_redo (View *view);
-*/
-
-extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
-
-#if 0
-void	   gedit_view_set_selection	(View *view, gint start, gint end);
-#endif
-
-
-void views_insert (Document *doc, guint position, gchar * text, gint length, View * view_exclude);
-void views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
-
-void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
-void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+/* selection and position */
+void	gedit_view_set_selection	(View *view, guint start, guint end);
+gint	gedit_view_get_selection	(View *view, guint *start, guint *end);
+void	gedit_view_set_position		(View *view, gint pos);
+guint	gedit_view_get_position		(View *view);
 
 #endif /* __VIEW_H__ */

@@ -88,6 +88,7 @@ gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 
 gchar  * gedit_get_document_tab_name (Document *doc);
 guchar * gedit_document_get_buffer (Document * doc);
+guint gedit_document_get_buffer_length (Document * doc);
 void gedit_mdi_init (void);
 
 void gedit_document_load ( GList *file_list);

@@ -50,6 +50,7 @@ static void gedit_document_class_init (DocumentClass *class);
 void gedit_document_init (Document *doc);
 gchar* gedit_get_document_tab_name (Document *doc);
 guchar * gedit_document_get_buffer (Document * doc);
+guint gedit_document_get_buffer_length (Document * doc);
 Document * gedit_document_new (void);
 Document * gedit_document_new_with_title (gchar *title);
 Document * gedit_document_new_with_file (gchar *filename);
@@ -156,7 +157,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 {
 	View  *new_view;
 
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
@@ -285,6 +286,25 @@ gedit_document_get_buffer (Document * doc)
 					  0,
 					  length);
 	return buffer;
+}
+
+guint
+gedit_document_get_buffer_length (Document * doc)
+{
+	guint length;
+	GtkText * text;
+	View * view;
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+
+	g_return_val_if_fail (doc!=NULL, 0);
+	view = g_list_nth_data (doc->views, 0);
+	g_return_val_if_fail (view!=NULL, 0);
+
+	text = GTK_TEXT (view->text);
+
+	length = gtk_text_get_length (text);
+	return length;
 }
 
 Document *

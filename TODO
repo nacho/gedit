@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
-  gedit 0.7.1 ( We should bump the version to 0.7.9. Chema )
+  gedit 0.7.9
 ----------------------------------------------------------------------
 
 ** Chema **
@@ -7,19 +7,19 @@
 [X] Added page_begin comment to navigate postscript files
 [~] Rewrite search.c
     TODO for rewrite search.c
-    [ ] Add acelerators to the find dialog
+    [X] Add acelerators to the find dialog
     [ ] Replace the "Find Next" tag with "Find" as needed
     [X] Fix the dialog poping in two diferent places
     [X] add replace stuff
     [ ] add replace all stuff
     [X] pop a message or find a better way of letting the user know
 	that the text was not found
-    [ ] some dialogs are going under the main window. Very annoying.
+    [X] some dialogs are going under the main window. Very annoying.
     [X] replace is not setting the file as modified=TRUE
     [X] rewrote count lines
     [X] rewrote goto lines
-    [ ] replace is not undoable anymore.
-[ ] when undoing/redoing test to see if there is a selection active
+    [X] replace is not undoable anymore.
+[X] when undoing/redoing test to see if there is a selection active
     if there is, unselect it so that the cursor repositions where the
     undo/redo happened
 [X] use gedit_document_get_buffer in all the functions that are getting
@@ -33,6 +33,7 @@
 [X] There is still some problems with the "Untitled" docs when opening
     multiple views.
 [X] Fix the multiple views crash
+[X] When reverting big files, makes the window scroll.
 
 ** Jason and Chema **
 [X] Seek and destroy all memory leaks

@@ -42,9 +42,9 @@ struct _GeditUndoInfo
 	gint mergeable;
 };
 
-extern void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-extern void gedit_undo_do	(GtkWidget*, gpointer);
-extern void gedit_undo_redo	(GtkWidget*, gpointer);
-extern void gedit_undo_free_list (GList **list_pointer);
+void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
+void gedit_undo_do	(GtkWidget*, gpointer);
+void gedit_undo_redo	(GtkWidget*, gpointer);
+void gedit_undo_free_list (GList **list_pointer);
 
 #endif /* __UNDO_H__ */

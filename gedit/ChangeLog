@@ -1,5 +1,34 @@
 2000-06-04  Chema Celorio  <chema@celorio.com>
 
+
+	* search.c: remove all direct access to the text
+	and mdi. Use the new functions to make the code textwidget and mdi
+	independendant.
+
+	* view.c (gedit_view_get_window_position): new function
+	(gedit_view_set_window_position): new function
+	(gedit_view_get_selection): new function
+	(gedit_view_set_selection): enable it.
+	* view.c (gedit_view_set_window_position_from_lines): new function
+
+	* window.c (gedit_window_active): new function
+
+	* dialogs/dialog-replace.c: remove all direct access to the text
+	and mdi. Use the new functions to make the code textwidget and mdi
+	independendant.
+
+	* undo.c (gedit_undo_do): use the new function to set the scrollbar
+	position
+	(gedit_undo_redo): ditto
+	* undo.h: remove the "extern" directive before each function name
+	* prefs.h: ditto
+	* utils.h: ditto
+
+	* view.c (gedit_view_toggle_line_wrap_cb): delete, it was not beeing
+	used
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
 	* document.c (gedit_document_delete_text): new function.
 
 	* undo.c (gedit_undo_do): use gedit_document_delete_text and
