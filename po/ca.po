@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-08 14:06+0100\n"
-"PO-Revision-Date: 2005-02-09 00:10+0100\n"
+"POT-Creation-Date: 2005-02-11 22:13+0100\n"
+"PO-Revision-Date: 2005-02-12 05:49+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -198,6 +198,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Llista de connectors actius. Conté la \"Ubicació\" dels connectors actius. "
+"Vegeu el fitxer .gedir-plugin per obtenir la \"Ubicació\" d'un connector "
+"determinat."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -620,7 +623,7 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
@@ -909,7 +912,7 @@ msgstr "Tipus de lletra i colors"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "Ressalta la _línia actual"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -917,7 +920,7 @@ msgstr "_Mode de ressaltat:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "Ressalta el claudàtor concordant"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -1878,15 +1881,12 @@ msgid "Attempt to log in failed."
 msgstr "L'intent d'entrar ha fallat."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"No s'ha pogut recuperar el fitxer \"%s\" perquè conté dades UTF-8 no "
-"vàlides.\n"
-"\n"
-"Probablement esteu intentant recuperar un fitxer binari."
+"El fitxer conté dades UTF-8 no vàlides. Probablement esteu intentant "
+"recuperar un fitxer binari."
 
 #
 #: gedit/gedit-io-error-dialogs.c:520
@@ -2549,13 +2549,15 @@ msgstr "La codificació especificada «%s» no és vàlida\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "El fitxer que intenteu obrir conté una seqüència d'octets invàlida."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"El gedit no ha pogut determinar automàticament la codificació del fitxer que "
+"volíeu obrir."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2931,7 +2933,7 @@ msgstr "S'ha completat la comprovació d'ortografia"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: plugins/spell/gedit-spell-checker.c:80
 msgid "Amharic"
@@ -3054,9 +3056,11 @@ msgstr "Hindi"
 msgid "Croatian"
 msgstr "Croat"
 
+# Segons el Termcat hi ha les següents variants del sòrab:
+#   Sòrab oriental, alt sòrab i baix sòrab
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Alt sòrab"
 
 #: plugins/spell/gedit-spell-checker.c:113
 msgid "Hungarian"
@@ -3134,9 +3138,11 @@ msgstr "Noruec nynorsk"
 msgid "Norwegian"
 msgstr "Noruec"
 
+# NOTA: el Termcat diu: "Chewa: Dialecte del _nyanja_ triat com a llengua
+#       oficial de Malawi." (Josep)
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3150,22 +3156,23 @@ msgstr "Portuguès (Portugal)"
 msgid "Portuguese (Brazilian)"
 msgstr "Portuguès (Brasil)"
 
+# NOTA: Segons el Termcat (Josep)
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "Quitxua"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "Rus"
 
+# NOTA: Segons el Termcat (Josep)
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Ucraïnès"
+msgstr "Sard"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3211,9 +3218,10 @@ msgstr "Uzbek"
 msgid "Walloon"
 msgstr "Való"
 
+# Nota: Segons el Termcat (Josep)
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Jiddisch"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
@@ -3418,9 +3426,8 @@ msgid "Background color"
 msgstr "Color de fons"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Color de fons"
+msgstr "Títol de la textura del fons"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
@@ -3461,8 +3468,9 @@ msgid "Center"
 msgstr "Centre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+#, fuzzy
+msgid "Character encoding of linked resource"
+msgstr "Codificacions de caràcters"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3470,7 +3478,7 @@ msgstr "Comprovat (estat)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
-msgstr "Cita"
+msgstr "Citació"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3478,27 +3486,31 @@ msgstr "Cita el motiu del canvi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "ID de la implementació de la classe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Class list"
 msgstr "Llistat de classes"
 
+# FIXME: Això no s'entén (Josep)
 #: plugins/taglist/HTML.tags.xml.in.h:35
+#, fuzzy
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Neteja el control de fluxe del text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "Codi del tipus de contingut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Color of selected links"
 msgstr "Color dels enllaços seleccionats"
 
+# FIXME: span == abast? (Josep)
 #: plugins/taglist/HTML.tags.xml.in.h:38
+#, fuzzy
 msgid "Column span"
-msgstr ""
+msgstr "Abast de la columna"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
@@ -3511,26 +3523,23 @@ msgstr "Comentari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Fragment codi d'ordinador"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Content scheme"
 msgstr "Esquema de continguts"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Content type"
 msgstr "Tipus de continguts"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Coordinates"
 msgstr "Coordenades"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "Contenidor d'estil DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
@@ -3542,13 +3551,12 @@ msgstr "Dia i hora del canvi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Declara senyalador"
 
-#
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "_Descripció"
+msgstr "Descripció de la definició"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
@@ -3602,9 +3610,8 @@ msgid "Document type"
 msgstr "Tipus de document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Element ID"
-msgstr "Elements"
+msgstr "ID de l'element"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
@@ -3641,39 +3648,41 @@ msgstr "Formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
-msgstr ""
+msgstr "Gestor d'accions del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
-msgstr ""
+msgstr "Grup de control del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
-msgstr ""
+msgstr "Etiqueta de text del camp del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
-msgstr ""
+msgstr "Entrada del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
-msgstr ""
+msgstr "Tipus d'entrada del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
-msgstr ""
+msgstr "Mètode del formulari"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
-msgstr ""
+msgstr "Enllaç endavant"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Frame"
 msgstr "Marc"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:79
+#, fuzzy
 msgid "Frame render parts"
-msgstr ""
+msgstr "Parts de representació del marc"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
@@ -3684,28 +3693,30 @@ msgid "Frame target"
 msgstr "Objectiu del marc"
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
-#, fuzzy
 msgid "Frameborder"
-msgstr "Mode d'ajustament"
+msgstr "Contorn del marc"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:83
 #, fuzzy
 msgid "Frameset"
-msgstr "Faroès"
+msgstr "Conjunt de marcs"
 
-#
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:84
 #, fuzzy
 msgid "Frameset columns"
-msgstr "_Comença per la columna:"
+msgstr "Columnes del conjunt de marcs"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:85
+#, fuzzy
 msgid "Frameset rows"
-msgstr ""
+msgstr "Files del conjunt de marcs"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
-msgstr ""
+msgstr "Espaiat entre marcs"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
@@ -3722,7 +3733,7 @@ msgstr "General"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
-msgstr ""
+msgstr "URI HREF"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
@@ -3734,7 +3745,7 @@ msgstr "HTML - Marcadors"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
-msgstr ""
+msgstr "Element arrel HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML version"
@@ -3746,7 +3757,7 @@ msgstr "Nom de la capçalera HTTP"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Header cell ID's"
-msgstr ""
+msgstr "ID de la cel·la de capçalera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
@@ -3815,25 +3826,21 @@ msgstr "Nom de la imatge sensible"
 msgid "Image source"
 msgstr "Font de la imatge"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "El nom del fitxer no és vàlid"
+msgstr "Marc inserit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
-msgstr ""
+msgstr "Capa inserida"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "Insereix la data/hora"
+msgstr "Text inserit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
-msgstr "Definició d'instància"
+msgstr "Definició de la instància"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Italic text"
@@ -3860,7 +3867,6 @@ msgstr "Estil de text gran"
 msgid "Layer"
 msgstr "Capa"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Link color"
 msgstr "Color de l'enllaç"
@@ -3871,23 +3877,20 @@ msgstr "Llista d'elements"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
-msgstr ""
+msgstr "Llista de tipus MIME per a la pujada de fitxers"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of supported character sets"
-msgstr ""
+msgstr "Llista de conjunts de caràcters implementats"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Listing"
 msgstr "Llistat"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "Escolliu el tipus de lletra de l'editor"
+msgstr "Canvi local del tipus de lletra"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Long description link"
 msgstr "Descripció llarga de l'enllaç"
@@ -3900,25 +3903,30 @@ msgstr "Citació llarga"
 msgid "Mail link"
 msgstr "Enllaç a correu"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:132
+#, fuzzy
 msgid "Margin pixel height"
-msgstr ""
+msgstr "Alçària del píxel del marge"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:133
+#, fuzzy
 msgid "Margin pixel width"
-msgstr ""
+msgstr "Amplada del píxel del marge"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Marquee"
 msgstr "Marquesina"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
+msgid "Maximum length of text field"
+msgstr "Longitud màxima del camp de text"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Media-independent link"
-msgstr ""
+msgstr "Enllaç independent del medi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
@@ -3926,7 +3934,7 @@ msgstr "Llista del menú"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
-msgstr ""
+msgstr "Camp de text multi-línia"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
@@ -3940,13 +3948,15 @@ msgstr "Múltiple"
 msgid "Name"
 msgstr "Nom"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:142
+#, fuzzy
 msgid "Named property value"
-msgstr ""
+msgstr "Valor de la propietat amb nom"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Next ID"
-msgstr ""
+msgstr "Següent ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
@@ -3975,11 +3985,11 @@ msgstr "No redimensionis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
-msgstr ""
+msgstr "Sense seqüència"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
-msgstr ""
+msgstr "Sense ombra"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
@@ -3989,29 +3999,25 @@ msgstr "Sense ajustament de paraules"
 msgid "Note"
 msgstr "Nota"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
 msgid "Object applet file"
-msgstr "Obre un fitxer"
+msgstr "Objecte fitxer de miniaplicació"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-#, fuzzy
 msgid "Object data reference"
-msgstr "gedit: Preferències"
+msgstr "Objecte referència a dades"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Desplaçament per a l'alineament caràcter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
-msgstr ""
+msgstr "Incidència OnBlur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "OnChange event"
-msgstr "Ca_nvia les majúscules/minúscules"
+msgstr "Incidència OnChange"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
@@ -4115,40 +4121,39 @@ msgstr "Llistat preformatat"
 msgid "Preformatted text"
 msgstr "Text preformatat"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:184
+#, fuzzy
 msgid "Profile metainfo dictionary"
-msgstr ""
+msgstr "Perfil del diccionari de meta-informació"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Prompt message"
-msgstr ""
+msgstr "Indica un missatge"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "botó1"
+msgstr "Botó per prémer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Quote"
 msgstr "Citació"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Range"
 msgstr "Rang"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
-msgstr ""
+msgstr "Text i contrasenya de només lectura"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
 msgstr "Espai reduït"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "Inve_rteix l'ordre"
+msgstr "Enllaç invertit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
@@ -4168,20 +4173,22 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Àmbit covert per cel·les de capçalera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Script execution defer"
 msgstr ""
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:198
 #, fuzzy
 msgid "Script language name"
-msgstr "Especifica l'idioma"
+msgstr "Nom del llenguatge de seqüència"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "Ordres de la seqüència"
 
 #
 #: plugins/taglist/HTML.tags.xml.in.h:200
@@ -4209,24 +4216,24 @@ msgstr "Forma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Citació curta en línia"
 
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
-msgstr ""
+msgstr "Indicador d'una sola línia"
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Size"
 msgstr "Mida"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "Tots els fitxers de text"
+msgstr "Estil de text petit"
 
+# FIXME
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "Salt de pàgina tou"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
@@ -4238,7 +4245,7 @@ msgstr "Espai"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Llista d'arxius separats per espais"
 
 #
 #: plugins/taglist/HTML.tags.xml.in.h:214
@@ -4262,9 +4269,11 @@ msgstr "Castellà"
 msgid "Square root"
 msgstr "Arrel quadrada"
 
+# FIXME (Josep)
 #: plugins/taglist/HTML.tags.xml.in.h:219
+#, fuzzy
 msgid "Standby load msg"
-msgstr ""
+msgstr "Missatge d'espera mentre es carrega"
 
 #
 #: plugins/taglist/HTML.tags.xml.in.h:220
@@ -4296,11 +4305,11 @@ msgstr "Subíndex"
 msgid "Superscript"
 msgstr "Superíndex"
 
-#
+# FIXME: incomprensible!!!
 #: plugins/taglist/HTML.tags.xml.in.h:227
 #, fuzzy
 msgid "Tab order position"
-msgstr "Mostra la _posició del cursor"
+msgstr "Posició de l'ordre de les tabulacions"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Table"
@@ -4316,7 +4325,7 @@ msgstr "Títol de la taula"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
-msgstr ""
+msgstr "Propietats del grup de columnes de la taula"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table column properties"
@@ -4336,7 +4345,7 @@ msgstr "Capçaleres de la taula"
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
-msgstr ""
+msgstr "Cel·la capçalera de la taula"
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
@@ -4364,13 +4373,12 @@ msgstr "Objectiu - A sobre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Estil de text teletip o monoespai"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
 msgstr "Text"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Text color"
 msgstr "Color del text"
@@ -4379,25 +4387,22 @@ msgstr "Color del text"
 msgid "Text entered by user"
 msgstr "Text que ha entrat l'usuari"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
 msgstr "Títol"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Marge superior en píxels"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
 msgstr "URL"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Underlined text style"
 msgstr "Estil de text subratllat"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Unordered list"
 msgstr "Llista sense ordre"
@@ -4412,7 +4417,7 @@ msgstr "Valor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "Interpretació del valor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
@@ -4426,7 +4431,6 @@ msgstr "Alineament vertical de les cel·les"
 msgid "Vertical space"
 msgstr "Espai vertical"
 
-#
 #: plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Visited link color"
 msgstr "Color dels enllaços visitats"
@@ -4445,7 +4449,7 @@ msgstr "Element bibliogràfic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr "Cita bibliogràfica curta"
+msgstr "Citació bibliogràfica curta"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
@@ -4647,13 +4651,14 @@ msgstr "Símbol &lt;&lt;"
 msgid "Symbol &lt;="
 msgstr "Símbol &lt;="
 
+# és \and en LaTeX (una instrucció)
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "Símbol and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "Símbol const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
@@ -4669,11 +4674,11 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Símbol creu"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Símbol d'equivalent"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
@@ -4687,21 +4692,24 @@ msgstr "Símbol guionet ---"
 msgid "Symbol infinity"
 msgstr "Símbol d'infinit"
 
+# En LaTeX "\," és el mateix que "\thinspace", que determina
+# l'espai entre nombres d'una mateixa xifra (o element). (Josep)
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Símbol , en el context matemàtic"
 
+# Nota: ídem que \,
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Símbol . en el context matemàtiques ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Símbol _ en el context matemàtic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Símbol __ en el context matemàtic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
@@ -4733,7 +4741,7 @@ msgstr "Text intrencable"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - Eixos"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
 msgid "XSLT - Elements"
@@ -4772,13 +4780,13 @@ msgstr "descendent-o-un-mateix"
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 #, fuzzy
 msgid "following"
-msgstr "Seguit"
+msgstr "següent"
 
 # FIXME (josep)
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 #, fuzzy
 msgid "following-sibling"
-msgstr "Seguit-germà"
+msgstr "següent-germà"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
 msgid "namespace"
@@ -4792,11 +4800,13 @@ msgstr "pare"
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 #, fuzzy
 msgid "preceding"
-msgstr "Precedint"
+msgstr "predecessor"
 
+# FIXME: terminologia, ordre invers? (josep)
 #: plugins/taglist/XSLT.tags.xml.in.h:15
+#, fuzzy
 msgid "preceding-sibling"
-msgstr ""
+msgstr "predecessor-germà"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
@@ -4859,11 +4869,11 @@ msgstr "In_sereix la data/hora..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Insereix la data i l'hora actual a la posició del cursor"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Formats disponibles"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Configura el connector per inserir la data/hora..."
 
