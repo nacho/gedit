@@ -171,7 +171,8 @@ search_start(GtkWidget * w, gE_data * data)
 	gchar bla[] = " ";
 	gint len, start_pos, text_len, match, i, search_for_line, cur_line,
 	end_line, oldchanged, replace_diff = 0;
-	options = data->temp2;
+	/*options = data->temp2;*/
+	options = data->window->search;
 	doc = gE_document_current(data->window);
 	search_for = gtk_entry_get_text(GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text(GTK_ENTRY(options->replace_entry));
@@ -220,14 +221,12 @@ search_start(GtkWidget * w, gE_data * data)
 	}
 	gtk_text_freeze(GTK_TEXT(doc->text));
 
-	/*      for (i = start_pos; i <= (text_len - start_pos - len - replace_diff); i++)
-	 */
 	for (i = start_pos; i <= (text_len - len - replace_diff); i++) {
 		buffer = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i, i + len);
 		if (GTK_TOGGLE_BUTTON(options->case_sensitive)->active)
 			match = strcmp(buffer, search_for);
 		else
-			match = strcasecmp(buffer, search_for);
+			match = g_strcasecmp(buffer, search_for);
 
 		if (match == 0) {
 			gtk_text_thaw(GTK_TEXT(doc->text));
@@ -272,13 +271,14 @@ search_for_text(GtkWidget * w, gE_search * options)
 	gtk_widget_show(options->start_at_cursor);
 	gtk_widget_show(options->start_at_beginning);
 	gtk_widget_show(options->case_sensitive);
+	if (options->line)
+		gtk_editable_delete_text(GTK_EDITABLE(options->search_entry), 0, -1);
 	options->line = 0;
 	if (options->replace)
 		gtk_widget_show(options->replace_box);
 	/*gtk_menu_item_select (GTK_MENU_ITEM (options->text_item));    */
 	gtk_option_menu_set_history(GTK_OPTION_MENU(options->search_for), 0);
 	gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(options->text_item), 1);
-	gtk_editable_delete_text(GTK_EDITABLE(options->search_entry), 0, -1);
 } /* search_for_text */
 
 
@@ -288,12 +288,13 @@ search_for_line(GtkWidget * w, gE_search * options)
 	gtk_widget_hide(options->start_at_cursor);
 	gtk_widget_hide(options->start_at_beginning);
 	gtk_widget_hide(options->case_sensitive);
+	if (!options->line)
+		gtk_editable_delete_text(GTK_EDITABLE(options->search_entry), 0, -1);
 	options->line = 1;
 	if (options->replace) {
 		gtk_widget_hide(options->replace_box);
 	}
 	gtk_option_menu_set_history(GTK_OPTION_MENU(options->search_for), 1);
-	gtk_editable_delete_text(GTK_EDITABLE(options->search_entry), 0, -1);
 } /* search_for_line */
 
 
@@ -438,9 +439,8 @@ search_create_dialog(gE_window *window, gE_search *options, gboolean replace)
 		GTK_SIGNAL_FUNC(search_start), data);
 	gtk_signal_connect_object(GTK_OBJECT(ok), "clicked",
 		GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
-	
-	  GTK_WIDGET_SET_FLAGS (GTK_WIDGET(ok), GTK_CAN_DEFAULT);
-	  gtk_widget_grab_default (GTK_WIDGET(ok));
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET(ok), GTK_CAN_DEFAULT);
+	gtk_widget_grab_default (GTK_WIDGET(ok));
 	 
 	gtk_signal_connect_object(GTK_OBJECT(cancel), "clicked",
 		GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
@@ -525,6 +525,7 @@ static void
 search_replace_common(gE_data *data, gboolean do_replace)
 {
 	gE_window *w;
+	gE_data *d;
 
 	g_assert(data != NULL);
 	w = data->window;
@@ -539,10 +540,28 @@ search_replace_common(gE_data *data, gboolean do_replace)
 	search_for_text(NULL, w->search);
 	gtk_window_set_title(GTK_WINDOW(w->search->window),
 			(do_replace) ? "Search and Replace" : "Search");
+
+	/*d = g_malloc0(sizeof(gE_data));
+	d->window = w;
+	d->temp2 = w->search;
+*/
 	if (do_replace)
+	{
+		gtk_signal_disconnect_by_func (GTK_OBJECT (w->search->search_entry),
+			GTK_SIGNAL_FUNC (search_start), data);
+		gtk_signal_disconnect_by_func (GTK_OBJECT (w->search->search_entry),
+			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer)w->search->window);
 		gtk_widget_show(w->search->replace_box);
+	}
 	else
+	{
+		gtk_signal_connect (GTK_OBJECT (w->search->search_entry), "activate",
+			GTK_SIGNAL_FUNC (search_start), data);
+		gtk_signal_connect_object (GTK_OBJECT (w->search->search_entry), "activate",
+			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer) w->search->window);
 		gtk_widget_hide(w->search->replace_box);
+	}
+	
 	gtk_widget_show(w->search->window);
 } /* search_replace_common */
 

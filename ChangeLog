@@ -1,3 +1,28 @@
+1998-11-27  Evan Lawrence <evan@worldpath.net>
+
+	* src/gE_document.c: Fixed it so the titlebar displays
+	  the filename, then GEDIT_ID, not the other way around.
+
+	* src/commands.c: Added accelerators for keyboard navigation
+	  to the Recent Documents list in the File menu.
+
+	* src/toolbar.c: Some minor tweaks to the relieved toolbars in the
+	  GTK-only version.
+
+	* src/gE_prefs_box.c: Added frames and other such niceties to make
+	  the dialog look a little more appealing.
+
+	* src/search.c: Fixed some bugs that have been bugging me - it no
+	  longer erases the previous search string unless you've actually
+	  switched to another mode (text vs. line), and, when Searching 
+	  (not Search and Replacing) it will act as though you clicked OK
+	  when you press enter.
+
+	* src/main.h: Added another #define for WITHOUT_GNOME to do with
+	  internationalization.
+
+	* xpm/tb_prefs.xpm: Fixed it so it's transparent.
+
 Thu Nov 26 19:30:08 EST 1998 Gregory McLean <gregm@comstar.net>
 
 	* src/gE_files.c : clist updates to bring into sync with gtk 1.1.5

@@ -1038,7 +1038,7 @@ recent_update_menus (gE_window *window, GList *recent_files)
 		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
 		data->window = window;
 		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
-		sprintf (menu->label, "%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
+		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
 		menu->moreinfo = (gpointer) recent_cb;

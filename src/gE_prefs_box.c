@@ -182,47 +182,29 @@ void get_prefs(gE_data *data)
 
 static GtkWidget *general_page_new()
 {
-  GtkWidget *vbox, *hbox;
+  GtkWidget *main_vbox, *vbox, *frame, *hbox;
 
-
-
-  vbox = gtk_vbox_new(FALSE, 0);
-  /*gtk_container_border_width (GTK_CONTAINER (GTK_BOX(vbox)), 10);*/
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
   #ifdef WITHOUT_GNOME
-  gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), vbox, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), main_vbox, TRUE, TRUE, 0);
   #endif
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("Appearance"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
   gtk_widget_show (vbox);
-  #ifdef DEBUG
-  printf("gpn..2.\n");
-  #endif
-
-  hbox = gtk_hbox_new(FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show(hbox);
-  
-  #ifdef DEBUG
-  printf("gpn..3.\n");
-  #endif
-  prefs->autoindent = gtk_check_button_new_with_label ("Autoindent");
-  #ifdef DEBUG
-  printf("gpn..3.1.\n");
-  #endif
-  gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
-    #ifdef DEBUG
-    printf("gpn..3.2.\n");
-    #endif
-  gtk_widget_show (prefs->autoindent);
-  #ifdef DEBUG
-  printf("gpn..4.\n");
-  #endif
   
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  prefs->status = gtk_check_button_new_with_label (N_("Statusbar"));
+  prefs->status = gtk_check_button_new_with_label (_("Show Statusbar"));
   gtk_box_pack_start(GTK_BOX(hbox), prefs->status, TRUE, TRUE, 0);
   gtk_widget_show (prefs->status);
   
@@ -231,54 +213,75 @@ static GtkWidget *general_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  prefs->wordwrap = gtk_check_button_new_with_label (N_("Wordwrap"));
-  gtk_box_pack_start(GTK_BOX(hbox), prefs->wordwrap, TRUE, TRUE, 0);
-  gtk_widget_show (prefs->wordwrap);
-  
-    hbox = gtk_hbox_new(FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show(hbox);
-  
-  prefs->split = gtk_check_button_new_with_label (N_("Splitscreen"));
+  prefs->split = gtk_check_button_new_with_label (_("Show Splitscreen"));
   gtk_box_pack_start(GTK_BOX(hbox), prefs->split, TRUE, TRUE, 0);
   gtk_widget_show (prefs->split);
-  
-    hbox = gtk_hbox_new(FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show(hbox);
-  
-  prefs->sball = gtk_check_button_new_with_label (N_("Scrollball"));
-  gtk_box_pack_start(GTK_BOX(hbox), prefs->sball, TRUE, TRUE, 0);
-  gtk_widget_show (prefs->sball);
-  
-  return vbox;
-}
-
-static GtkWidget *print_page_new()
-{
-  GtkWidget *vbox, *hbox;
-  GtkWidget *label;
-
-  vbox = gtk_vbox_new(FALSE, 0);
-  /*gtk_container_border_width (GTK_CONTAINER (vbox), 10);*/
-  gtk_widget_show (vbox);
   
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  label = gtk_label_new (N_("Print Command"));
-  gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  prefs->sball = gtk_check_button_new_with_label (_("Show Scrollball"));
+  gtk_box_pack_start(GTK_BOX(hbox), prefs->sball, TRUE, TRUE, 0);
+  gtk_widget_show (prefs->sball);
+
+  frame = gtk_frame_new (_("Editor Behavior"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
+  gtk_widget_show(hbox);
+
+  prefs->autoindent = gtk_check_button_new_with_label (_("Enable Autoindent"));
+  gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
+  gtk_widget_show (prefs->autoindent);
+  
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
+  gtk_widget_show(hbox);
+  
+  prefs->wordwrap = gtk_check_button_new_with_label (_("Enable Wordwrap"));
+  gtk_box_pack_start(GTK_BOX(hbox), prefs->wordwrap, TRUE, TRUE, 0);
+  gtk_widget_show (prefs->wordwrap);
+  
+  return main_vbox;
+}
+
+static GtkWidget *print_page_new()
+{
+  GtkWidget *main_vbox, *vbox, *frame, *hbox;
+  GtkWidget *label;
+
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("Print Command"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new(FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+  
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+  gtk_widget_show(hbox);
   
   prefs->pcmd = gtk_entry_new ();
   gtk_box_pack_start(GTK_BOX(hbox), prefs->pcmd, TRUE, TRUE, 0);
   gtk_widget_show (prefs->pcmd);
   
-  return vbox;
+  return main_vbox;
 }
 
 
@@ -343,40 +346,39 @@ void font_sel()
 
 static GtkWidget *font_page_new()
 {
-  GtkWidget *vbox, *hbox;
+  GtkWidget *main_vbox, *vbox, *hbox, *frame;
   GtkWidget *label;
   GtkWidget *button;
 
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("Current Font"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
   vbox = gtk_vbox_new(FALSE, 0);
-  /*gtk_container_border_width (GTK_CONTAINER (vbox), 10);*/
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
   gtk_widget_show (vbox);
   
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show(hbox);
-  
-  label = gtk_label_new (N_("Current Font"));
-  gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
   
   prefs->font = gtk_entry_new ();
   gtk_box_pack_start(GTK_BOX(hbox), prefs->font, TRUE, TRUE, 0);
   gtk_widget_show (prefs->font);
-  
-  hbox = gtk_hbox_new(FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-  gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-  gtk_widget_show(hbox);
     
   #ifdef GTK_HAVE_FEATURES_1_1_0	
-  button = gtk_button_new_with_label ("Select Font");
+  button = gtk_button_new_with_label (_("Select..."));
   gtk_signal_connect (GTK_OBJECT(button), "clicked",
    			  GTK_SIGNAL_FUNC(font_sel),
    			  NULL);
   
-  gtk_box_pack_start(GTK_BOX(hbox), button, TRUE, TRUE, 0);
-  gtk_widget_show(button);  
+  gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 2);
+  gtk_widget_show(button);
   #endif
   
   hbox = gtk_hbox_new(FALSE, 0);
@@ -390,7 +392,7 @@ static GtkWidget *font_page_new()
   gtk_widget_show (label);*/
 
   
-  return vbox;
+  return main_vbox;
 }
 
 /* -------- */
@@ -418,7 +420,7 @@ void gE_property_box_new(gE_data *data)
   gtk_signal_connect (GTK_OBJECT (pbox->window), "delete_event",
 		      GTK_SIGNAL_FUNC (gtk_false), NULL);
 		      
-      gtk_window_set_title (GTK_WINDOW (pbox->window), "gedit");
+      gtk_window_set_title (GTK_WINDOW (pbox->window), _("Preferences"));
       gtk_container_border_width (GTK_CONTAINER (pbox->window), 0);
  
  	vbox = gtk_vbox_new(FALSE, 0);
@@ -546,17 +548,17 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
 
   /* General Settings */
-  label = gtk_label_new ("General");
+  label = gtk_label_new (_("General"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            general_page_new(), label);
 
   /* Print Settings */
-  label = gtk_label_new ("Print");
+  label = gtk_label_new (_("Print"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            print_page_new(), label);
 
   /* Font Settings */
-  label = gtk_label_new ("Font");
+  label = gtk_label_new (_("Font"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            font_page_new(), label);
    

@@ -132,6 +132,7 @@ typedef struct _gE_function {
 
 #ifdef WITHOUT_GNOME
 #define N_(String) (String)	/* To avoid duplication of code when adding gnome internationalization. */
+#define _(String) (String)
 #endif
 
 extern GList *window_list;

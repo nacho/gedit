@@ -176,12 +176,11 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 gw->use_relief_toolbar = gE_prefs_get_int("tb relief");
  if (gw->use_relief_toolbar == TRUE)
  {
-   /*   #ifndef WITHOUT_GNOME
-	if ( ! gnome_preferences_get_toolbar_relief() ) 
-      #endif 
-   */
 		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar), 
 					      GTK_RELIEF_NONE);
+		#ifdef WITHOUT_GNOME
+		gtk_container_border_width (GTK_CONTAINER (toolbar), 2);
+		#endif
  }
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
       
@@ -468,13 +467,11 @@ void tb_relief_on (GtkWidget *w, gpointer cbwindow)
 #ifdef GTK_HAVE_FEATURES_1_1_0
  if (gw->use_relief_toolbar == FALSE)
  {
-   /*   #ifndef WITHOUT_GNOME
-	if ( ! gnome_preferences_get_toolbar_relief() ) 
-      #endif 
-   */
-		gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
 					      GTK_RELIEF_NONE);
-
+	#ifdef WITHOUT_GNOME
+	gtk_container_border_width (GTK_CONTAINER (gw->toolbar), 2);
+	#endif
 	gw->use_relief_toolbar = TRUE;
  }
 #else
@@ -490,13 +487,12 @@ void tb_relief_off (GtkWidget *w, gpointer cbwindow)
 #ifdef GTK_HAVE_FEATURES_1_1_0
 if (gw->use_relief_toolbar == TRUE)
  {
-   /*   #ifndef WITHOUT_GNOME
-	if ( ! gnome_preferences_get_toolbar_relief() ) 
-      #endif 
-   */
-		gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
-					      GTK_RELIEF_NORMAL);
 
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
+					      GTK_RELIEF_NORMAL);
+	#ifdef WITHOUT_GNOME
+	gtk_container_border_width (GTK_CONTAINER (gw->toolbar), 0);
+	#endif
 	gw->use_relief_toolbar = FALSE;
  }
 #else
