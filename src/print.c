@@ -112,6 +112,129 @@ static  gint gedit_print_verify_fonts (void);
 #define GEDIT_PRINT_BODY_FONT "Courier"
 #define GEDIT_PRINT_HEADER_FONT "Helvetica"
 
+
+
+
+/**
+ * g_unichar_to_utf8:
+ * @c: a ISO10646 character code
+ * @outbuf: output buffer, must have at least 6 bytes of space.
+ *       If %NULL, the length will be computed and returned
+ *       and nothing will be written to @out.
+ * 
+ * Convert a single character to utf8
+ * 
+ * Return value: number of bytes written
+ **/
+static int
+g_unichar_to_utf8 (gint c, gchar *outbuf)
+{
+  size_t len = 0;
+  int first;
+  int i;
+
+  if (c < 0x80)
+    {
+      first = 0;
+      len = 1;
+    }
+  else if (c < 0x800)
+    {
+      first = 0xc0;
+      len = 2;
+    }
+  else if (c < 0x10000)
+    {
+      first = 0xe0;
+      len = 3;
+    }
+   else if (c < 0x200000)
+    {
+      first = 0xf0;
+      len = 4;
+    }
+  else if (c < 0x4000000)
+    {
+      first = 0xf8;
+      len = 5;
+    }
+  else
+    {
+      first = 0xfc;
+      len = 6;
+    }
+
+  if (outbuf)
+    {
+      for (i = len - 1; i > 0; --i)
+	{
+	  outbuf[i] = (c & 0x3f) | 0x80;
+	  c >>= 6;
+	}
+      outbuf[0] = c | first;
+    }
+
+  return len;
+}
+
+
+/*
+ * print_show_iso8859_1
+ *
+ * Like gnome_print_show, but expects an ISO 8859.1 string.
+ *
+ * NOTE: This function got introduced when gnome-print switched to UTF-8,
+ * and will disappear again once Gnumeric makes the switch. Deprecated at
+ * birth! 
+ */
+static int
+print_show_iso8859_1 (GnomePrintContext *pc, char const *text)
+{
+	gchar *p, *utf, *udyn, ubuf[4096];
+	gint len, ret, i;
+
+	g_return_val_if_fail (pc && text, -1);
+
+	if (!*text)
+		return 0;
+
+	/* We need only length * 2, because iso-8859-1 is encoded in 1-2 bytes */
+	len = strlen (text);
+	if (len * 2 > sizeof (ubuf)) {
+		udyn = g_new (gchar, len * 2);
+		utf = udyn;
+	} else {
+		udyn = NULL;
+		utf = ubuf;
+	}
+	p = utf;
+
+	for (i = 0; i < len; i++) {
+		p += g_unichar_to_utf8 (((guchar *) text)[i], p);
+	}
+
+	ret = gnome_print_show_sized (pc, utf, p - utf);
+
+	if (udyn)
+		g_free (udyn);
+
+	return ret;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * file_print_cb:
  * @widget: 
@@ -487,8 +610,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 		return;
 	
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
-	gnome_print_show (pji->pc, pji->temp);
-
+	print_show_iso8859_1 (pji->pc, pji->temp);
 
 	if (settings->print_lines>0 && line%settings->print_lines==0 && first_line)
 	{
@@ -499,7 +621,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 
 		gnome_print_setfont (pji->pc, temp_font);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
-		gnome_print_show   (pji->pc, number_text);
+		print_show_iso8859_1 (pji->pc, number_text);
 		g_free (number_text);
 		gtk_object_unref (GTK_OBJECT(temp_font));
 		print_setfont (pji);
@@ -849,14 +971,14 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	len = gnome_font_get_width_string (font, text1);
 	x = pji->page_width/2 - len/2;
 	gnome_print_moveto(pji->pc, x, y);
-	gnome_print_show(pji->pc, text1);
+	print_show_iso8859_1 (pji->pc, text1);
 
 	/* Print the page/pages  */
 	y = pji->page_height - pji->margin_top - pji->header_height/4;
 	len = gnome_font_get_width_string (font, text2);
 	x = pji->page_width - len - 36;
 	gnome_print_moveto (pji->pc, x, y);
-	gnome_print_show (pji->pc, text2);
+	print_show_iso8859_1 (pji->pc, text2);
 
 	gtk_object_unref (GTK_OBJECT(font));
 	g_free (text1);
@@ -908,7 +1030,6 @@ preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
 	gedit_debug (DEBUG_PRINT, "");
 }
-
 
 
 
