@@ -180,9 +180,8 @@ main (int argc, char **argv)
 	gedit_mdi_init ();
 	gedit_close_all_flag_clear ();
 
-	gedit_document_load (file_list);
-	
-	
+	gtk_init_add ((GtkFunction)gedit_document_load, (gpointer)file_list);
+
 	gtk_main();
 
 	return 0;

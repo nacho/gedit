@@ -1,3 +1,13 @@
+2001-02-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_open): flash a message on the status bar
+	reporting the name of the file is going to be loaded
+
+	* gedit.c (main): now gedit_document_load is called after
+	the gtk main loop is started
+
+	* window.h: added new macro MSGBAR_LOADING_FILE
+
 2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
 
 	*  document.c (gedit_document_load): stupid bug fixed

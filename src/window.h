@@ -35,7 +35,7 @@
 #define MSGBAR_COPY		"Selection Copied..."
 #define MSGBAR_PASTE		"Selection Pasted..."
 #define MSGBAR_SELECT_ALL	"All Text Selected..."
-
+#define MSGBAR_LOADING_FILE     "Loading file..."
 
 GtkWindow *	gedit_window_active (void);
 GnomeApp *	gedit_window_active_app (void);

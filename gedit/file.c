@@ -178,6 +178,12 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		g_return_val_if_fail (doc->filename != fname, -1);
 	}
 
+	gedit_flash_va ("%s %s", _(MSGBAR_LOADING_FILE), fname);
+	
+	/* Update UI */
+	while (gtk_events_pending ())
+		  gtk_main_iteration ();
+
 	gnome_vfs_file_info_init (&info);
 	result = gnome_vfs_get_file_info (fname, 
 				 &info,

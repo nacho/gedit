@@ -640,7 +640,7 @@ gedit_mdi_init (void)
 
 
 gboolean
-gedit_document_load ( GList *file_list)
+gedit_document_load (GList *file_list)
 {
 	gchar *file_name;
 	gboolean can_be_created;
@@ -652,16 +652,17 @@ gedit_document_load ( GList *file_list)
         /* create a file for each document in the parameter list */
 	for (;file_list; file_list = file_list->next)
 	{
+		
 		const gchar* scheme; 
 		GnomeVFSURI *uri = gnome_vfs_uri_new (file_list->data);
-		
+
 		if(uri == NULL) 
 		{
 			g_print("Wrong URI: %s\n", (gchar*)file_list->data);
 			continue;
 		}
 
-		scheme = gnome_vfs_uri_get_scheme(uri);
+		scheme = gnome_vfs_uri_get_scheme (uri);
 
 		if ((scheme != NULL) && (strcmp (scheme, "file") == 0))
 		{
@@ -669,17 +670,16 @@ gedit_document_load ( GList *file_list)
 		        gchar* tmp_str2;
 			
 			can_be_created = TRUE;
-			
-			
+						
 			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
 			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
 
 			file_name = gedit_file_convert_to_full_pathname (tmp_str);			
 			
-			g_free(tmp_str);
-			g_free(tmp_str2);
+			g_free (tmp_str);
+			g_free (tmp_str2);
 
-			gnome_vfs_uri_unref(uri);	
+			gnome_vfs_uri_unref (uri);	
 			uri = gnome_vfs_uri_new (file_name);
 		}
 		else
