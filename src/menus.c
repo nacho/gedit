@@ -298,13 +298,11 @@ GnomeUIInfo toolbar_data[] =
 		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), gedit_find_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
 	},
-/*
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("Exit"), N_("Exit the program"), file_quit_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_QUIT
 	},
-*/
 	GNOMEUIINFO_END
 };
 
