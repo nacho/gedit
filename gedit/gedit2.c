@@ -360,8 +360,8 @@ main (int argc, char **argv)
 	
 	/* Load user preferences */
 	gedit_prefs_manager_app_init ();
+
 	gedit_recent_init ();
-	gedit_metadata_manager_init ();
 
 	/* Init plugins engine */
 	gedit_plugins_engine_init ();

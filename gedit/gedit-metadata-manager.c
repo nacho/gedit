@@ -92,7 +92,7 @@ item_free (gpointer data)
 	g_free (item);
 }
 
-gboolean
+static gboolean
 gedit_metadata_manager_init (void)
 {
 	gedit_debug (DEBUG_METADATA, "");
@@ -135,6 +135,9 @@ gedit_metadata_manager_shutdown (void)
 
 	if (gedit_metadata_manager->items != NULL)
 		g_hash_table_destroy (gedit_metadata_manager->items);
+
+	g_free (gedit_metadata_manager);
+	gedit_metadata_manager = NULL;
 }
 
 static void
@@ -277,9 +280,11 @@ gedit_metadata_manager_get (const gchar *uri,
 	
 	gedit_debug (DEBUG_METADATA, "");
 
-	g_return_val_if_fail (gedit_metadata_manager != NULL, NULL);
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (key != NULL, NULL);
+
+	if (gedit_metadata_manager == NULL)
+		gedit_metadata_manager_init ();
 
 	if (!gedit_metadata_manager->values_loaded)
 	{
@@ -319,9 +324,11 @@ gedit_metadata_manager_set (const gchar *uri,
 
 	gedit_debug (DEBUG_METADATA, "");
 
-	g_return_if_fail (gedit_metadata_manager != NULL);
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (key != NULL);
+
+	if (gedit_metadata_manager == NULL)
+		gedit_metadata_manager_init ();
 
 	if (!gedit_metadata_manager->values_loaded)
 	{
@@ -332,7 +339,6 @@ gedit_metadata_manager_set (const gchar *uri,
 		if (!res)
 			return;
 	}
-
 
 	item = (Item *)g_hash_table_lookup (gedit_metadata_manager->items,
 					    uri);

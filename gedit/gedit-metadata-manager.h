@@ -34,9 +34,6 @@
 
 G_BEGIN_DECLS
 
-/** LIFE CYCLE MANAGEMENT FUNCTIONS **/
-
-gboolean	 gedit_metadata_manager_init		(void);
 
 /* This function must be called before exiting gedit */
 void		 gedit_metadata_manager_shutdown 	(void);
