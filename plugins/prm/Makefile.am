@@ -11,11 +11,12 @@ plugindir = $(prefix)/share/go/plugins
 plugin_PROGRAMS = prm-plugin
 
 prm_plugin_SOURCES =	\
-	maincode.c		\
+	maincode.c	\
+	maincode.h	\
+	msgbox.c	\
+	msgbox.h	\
 	client.c	\
-#	client.h	\
-	msgbox.c	
-#	msgbox.h
+	client.h
 
 prm_plugin_LDFLAGS = `gtk-config --libs`
 
@@ -24,5 +25,5 @@ CPPFLAGS = \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
 	-Wall -ansi -pedantic  \
-	-DPLUGIN	\
-	#-DDEBUG
+	-DPLUGIN
+
