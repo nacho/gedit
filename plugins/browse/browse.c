@@ -87,7 +87,6 @@ goLynx (GtkWidget *widget, gpointer data)
 			pos += length;
 		}
 	}
-
 /*
 	gnome_config_push_prefix ("/Editor_Plugins/Browse/");
 	gnome_config_set_string ("Url", url[0]);

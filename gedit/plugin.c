@@ -39,8 +39,9 @@
 
 GSList	*plugin_list = NULL;
 
-gchar * gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name);
-gchar * gedit_plugin_program_location_dialog (void);
+void    gedit_plugin_program_location_clear (gchar *program_name);
+gchar * gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
+/*gchar * gedit_plugin_program_location_dialog (void);*/
 gchar * gedit_plugin_program_location_guess (gchar *program_name);
 
 PluginData *
@@ -170,7 +171,9 @@ load_all_plugins (void)
 	if (home != NULL)
 	{
 		pdir = gnome_util_prepend_user_home (".gedit/plugins/");
-/*		pdir = g_strconcat (home, "/.gedit/plugins/", NULL); */
+		/*
+		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
+		*/
 		plugin_load_plugins_in_dir (pdir);
 		g_free (pdir);
 	}
@@ -295,23 +298,41 @@ gedit_plugin_guess_program_location (gchar *program_name)
 }
 
 
+void
+gedit_plugin_program_location_clear (gchar *program_name)
+{
+	gchar *config_string;
+	
+	config_string = g_strdup_printf ("/gedit/plugin_programs/%s", program_name);
+	gnome_config_set_string (config_string, "");
+	gnome_config_sync ();
+	g_free (config_string);
+}
+
 gchar *
-gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name)
+gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess)
 {
 	gchar* program_location = NULL;
 	gchar* config_string = NULL;
-	gint error_code;
+	gint error_code = 100;
 	
-
-	program_location = gedit_plugin_guess_program_location (program_name);
+	if (!dont_guess)
+		program_location = gedit_plugin_guess_program_location (program_name);
 	
 	/* While "sendmail" is not valid, display error messages */
-	while ((error_code = gedit_utils_is_program (program_location, program_name))!=GEDIT_PROGRAM_OK)
+	while (dont_guess || (error_code = gedit_utils_is_program (program_location, program_name))!=GEDIT_PROGRAM_OK)
 	{
 		gchar *message = NULL;
 		gchar *message_full;
 		GtkWidget *dialog;
 
+		if (dont_guess)
+		{
+			program_location = g_strdup (gedit_plugin_program_location_dialog ());
+			dont_guess = FALSE;
+			continue;
+		}
+		
 		if (program_location == NULL)
 			message = g_strdup_printf (_("The program %s could not be found.\n\n"), program_name);
 		else if (error_code == GEDIT_PROGRAM_IS_INSIDE_DIRECTORY)
@@ -346,18 +367,22 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name)
 						program_name);
 		
 		dialog = gnome_question_dialog (message_full, NULL, NULL);
+		/*
 		gnome_dialog_set_parent (GNOME_DIALOG(dialog), gedit_window_active());
+		*/
 
 		g_free (message);
 		g_free (message_full);
 		if (GNOME_YES == gnome_dialog_run_and_close (GNOME_DIALOG (dialog)))
 		{
-			g_free (program_location);  
+			g_free (program_location);
 			program_location = g_strdup (gedit_plugin_program_location_dialog ());
 			continue;
 		}
 		else
+		{
 			return NULL;
+		}
 	}
 
 

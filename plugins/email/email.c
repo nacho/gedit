@@ -17,8 +17,7 @@
 #include "window.h"
 #include "utils.h"
 
-static GtkWidget *from_entry, *subject_entry, *to_entry;
-static gchar *mailer_location;
+static GtkWidget *from_entry, *subject_entry, *to_entry, *sendmail_label;
 
 static void
 destroy_plugin (PluginData *pd)
@@ -40,14 +39,19 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 	FILE *sendmail;
 	gchar *subject, *from, *to, *command;
 	guchar * buffer;
+	gchar *mailer_location = NULL;
 
 	if (button == 0)
 	{
 		to = gtk_entry_get_text (GTK_ENTRY (to_entry));
 		from = gtk_entry_get_text (GTK_ENTRY (from_entry));
 		subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
-
+		mailer_location = g_strdup (GTK_LABEL(sendmail_label)->label);
+		g_return_if_fail (mailer_location != NULL);
 		command = g_strdup_printf ("%s %s", mailer_location, to);
+		g_free (mailer_location);
+
+		gedit_flash_va (_("Executing command : %s"), command);
 		
 		if (!from || strlen (from) == 0 || !to || strlen (to)==0)
 		{
@@ -87,24 +91,65 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 
 	gnome_dialog_close (GNOME_DIALOG (w));
 }
+
+static void
+change_location_cb (GtkWidget *button, gpointer userdata)
+{
+	gchar * new_location;
+	GtkWidget *dialog;
+	GtkWidget *label;
+
+	dialog = userdata;
+	g_return_if_fail (GTK_IS_WIDGET(dialog));
+
+	/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+	   it is used to display "you can not use the [name] plugin without this program... */
+	gedit_plugin_program_location_clear ("sendmail");
+	new_location  = gedit_plugin_program_location_get ("sendmail",  _("email"), TRUE);
+
+	if (!new_location)
+	{
+		gdk_window_raise (dialog->window);
+		return;
+	}
+
+	/* We need to update the label */
+	label  = gtk_object_get_data (GTK_OBJECT (dialog), "sendmail_label");
+	g_return_if_fail (label!=NULL);
+	gtk_label_set_text (GTK_LABEL (label),
+			    new_location);
+	g_free (new_location);
 	
+	/* Set the dialog parent and modal type */
+	/*
+	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
+				 gedit_window_active());
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	*/
+
+	gdk_window_raise (dialog->window);	
+}
+
 static void
 email (void)
 {
 	GladeXML *gui;
 	GtkWidget *dialog;
+	GtkWidget *filename_label;
+	GtkWidget *change_location;
 	Document *doc = gedit_document_current ();
 	gchar *username, *fullname, *hostname;
 	gchar *from;
-	gchar *filename_label;
-	gchar *sendmail_label;
+	gchar *filename_label_label;
+	gchar *sendmail_label_label;
+	gchar *mailer_location;
 
 	if (!doc)
 	     return;
 	
-        /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only
+        /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 	 it is used to display "you can not use the [name] plugin without this program... */
-	mailer_location = gedit_plugin_program_location_get ("sendmail",  _("email"));
+	mailer_location = gedit_plugin_program_location_get ("sendmail",  _("email"), FALSE);
 	
 	if (mailer_location == NULL)
 		return;
@@ -117,15 +162,22 @@ email (void)
 		return;
 	}
 
-	dialog        = glade_xml_get_widget (gui, "dialog");
-	to_entry      = glade_xml_get_widget (gui, "to_entry");
-	from_entry    = glade_xml_get_widget (gui, "from_entry");
-	subject_entry = glade_xml_get_widget (gui, "subject_entry");
+	dialog          = glade_xml_get_widget (gui, "dialog");
+	to_entry        = glade_xml_get_widget (gui, "to_entry");
+	from_entry      = glade_xml_get_widget (gui, "from_entry");
+	subject_entry   = glade_xml_get_widget (gui, "subject_entry");
+	filename_label  = glade_xml_get_widget (gui, "filename_label");
+	sendmail_label  = glade_xml_get_widget (gui, "sendmail_label");
+	change_location = glade_xml_get_widget (gui, "change_location_button");
 
 	g_return_if_fail (dialog &&
 			  to_entry &&
 			  from_entry &&
-			  subject_entry);
+			  subject_entry &&
+			  filename_label &&
+			  sendmail_label &&
+			  change_location );
+
 
 	username = g_get_user_name ();
 	fullname = g_get_real_name ();
@@ -156,28 +208,31 @@ email (void)
 		gtk_entry_set_text (GTK_ENTRY (subject_entry), _("Untitled"));
 
 	/* Set the filename label */
-	filename_label = GTK_LABEL (glade_xml_get_widget (gui, "filename_label"))->label;
 	if (doc->filename)
-		filename_label = g_strconcat (filename_label, doc->filename, NULL);
+		filename_label_label = g_strdup (doc->filename);
 	else
-		filename_label = g_strconcat (filename_label, _("Untitled"), NULL);
-	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "filename_label")),
-			    filename_label);
-	g_free (filename_label);
+		filename_label_label = g_strdup (_("Untitled"));
+	gtk_label_set_text (GTK_LABEL (filename_label),
+			    filename_label_label);
+	g_free (filename_label_label);
 
-	/* Set the sendmail location label */
-	sendmail_label = GTK_LABEL (glade_xml_get_widget (gui, "sendmail_label"))->label;
-	sendmail_label = g_strconcat (sendmail_label, mailer_location, NULL);
+
+	
+        /* Set the sendmail location label */
+	gtk_object_set_data (GTK_OBJECT (dialog), "sendmail_label", sendmail_label);
+	sendmail_label_label = g_strdup (mailer_location);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "sendmail_label")),
-			    sendmail_label);
-	g_free (sendmail_label);
+			    sendmail_label_label);
+	g_free (sendmail_label_label);
+	
 
 	/* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
 			    GTK_SIGNAL_FUNC (email_clicked), NULL);
-
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (email_finish), NULL);
+	gtk_signal_connect (GTK_OBJECT (change_location), "clicked",
+			    GTK_SIGNAL_FUNC (change_location_cb), dialog);
 
 	/* Set the dialog parent and modal type */ 
 	gnome_dialog_set_parent (GNOME_DIALOG (dialog),

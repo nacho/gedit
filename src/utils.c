@@ -159,7 +159,8 @@ gedit_utils_is_program (gchar * program, gchar* default_name)
 		return GEDIT_PROGRAM_IS_INSIDE_DIRECTORY;
 	}
 
-	if (!(S_IXUSR & stats.st_mode))
+	/* Is this program executable ? */
+	if (!(S_IXOTH & stats.st_mode))
 		return GEDIT_PROGRAM_NOT_EXECUTABLE;
 
 	return GEDIT_PROGRAM_OK;

@@ -8,5 +8,6 @@ gchar *s = N_("gedit: e-mail plugin");
 gchar *s = N_("From:");
 gchar *s = N_("To:");
 gchar *s = N_("Subject:");
-gchar *s = N_("File to use as body of message: ");
 gchar *s = N_("Sendmail found at : ");
+gchar *s = N_("Change");
+gchar *s = N_("File to use as body of message : ");
