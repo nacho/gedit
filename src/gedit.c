@@ -17,7 +17,6 @@
  */
 
 #include <unistd.h>
-#include <signal.h>
 #include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
@@ -167,27 +166,6 @@ main (int argc, char **argv)
 			exit(0);
 		}
 	}
-
-	/*
-	 * gdk is so braindead in that it catches these "fatal" signals,
-	 * but does absolutely nothing with them unless you have compiled
-	 * it with a debugging flag (e.g., ./configure --enable-debug=yes).
-	 * we'll simply re-establish the signals to their default behavior.
-	 * this should produce a core dump in the normal case, which is a
-	 * lot more useful than what gdk does.
-	 *
-	 * if you've compiled GDK with debugging or simply don't care,
-	 * then you don't need this.
-	 */
-#ifdef GDK_IS_BRAINDEAD
-	signal(SIGHUP, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGBUS, SIG_DFL);
-	signal(SIGSEGV, SIG_DFL);
-	signal(SIGPIPE, SIG_DFL);
-	signal(SIGTERM, SIG_DFL);
-#endif
 
 	gE_rc_parse();
 
