@@ -74,7 +74,10 @@ void _file_print(GtkWidget *w, gpointer cbdata)
 
     current = gE_document_current (window);
 
-	strcpy(data->window->print_cmd,gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
+    #ifndef WITHOUT_GNOME
+      strcpy(data->window->print_cmd,
+       gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
+    #endif
 
    	/* print using specified command */
         ptr = gtk_entry_get_text( GTK_ENTRY( print_cmd_entry ) );
@@ -192,7 +195,9 @@ gE_data *data = (gE_data *)cbdata;
    gtk_widget_show( print_command);
 
     print_cmd_entry = gtk_entry_new_with_max_length(255);
-    gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), data->window->print_cmd);
+    #ifndef WITHOUT_GNOME
+     gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), data->window->print_cmd);
+    #endif
     gtk_box_pack_start( GTK_BOX( hbox ), print_cmd_entry, FALSE, TRUE, 10 );
     gtk_widget_show( print_cmd_entry );
 
