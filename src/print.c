@@ -440,14 +440,13 @@ print_setfont (PrintJobInfo *pji)
 static void
 end_page (PrintJobInfo *pji)
 {
-/*	if (!pji->wrapping)
-	g_print("FIXME: add a box over the text on right margin to 'clip' the text\n");*/
 	gnome_print_showpage (pji->pc);
 }
 
 static void
 end_job (GnomePrintContext *pc)
 {
+	
 }
 
 static void
