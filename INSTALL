@@ -4,10 +4,14 @@ Installation
 
 Ok, to install gEdit:
 	./configure
-	make
+	(For Gnome Users: If you want GModule Plugins 
+	 (See plugins/gmodule_plugin_howto) 
+	  do: ./configure --with-gmodule-plugins (also ass --enable-orbit if
+	  you're using ORBit)
+	  
+	make (If you are compiling with GModule Plugins, skip to make install)
 	su root
 	make install
-	(Copy the gE-icon-*.xpm files to /usr/local/share/pixmaps or your pixmap directory)
 
 Then you can type:
 	gedit
