@@ -321,6 +321,9 @@ create_model (void)
 
 		list = g_list_next (list);
 	}
+
+	gedit_debug (DEBUG_PLUGINS, "Rows: %d ", 
+			gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL));
 	
 	return GTK_TREE_MODEL (store);
 }
