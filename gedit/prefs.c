@@ -58,8 +58,9 @@ gedit_save_settings (void)
 	gnome_config_set_int ("fgg", settings->fg[1]);
 	gnome_config_set_int ("fgb", settings->fg[2]);
 
-	gdk_window_get_size (GTK_WIDGET (mdi->active_window)->window,
-			     &settings->width, &settings->height);
+	if (GTK_IS_WIDGET (mdi->active_window))
+		gdk_window_get_size (GTK_WIDGET (mdi->active_window)->window,
+				     &settings->width, &settings->height);
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
 	gnome_config_set_string ("font", settings->font);
