@@ -111,7 +111,7 @@ gedit_dialog_open_uri (void)
 
 	/* re-parent the dialog */
 	gnome_dialog_set_parent (GNOME_DIALOG (open_uri_dialog),
-				 GTK_WINDOW (mdi->active_window));
+				 GTK_WINDOW (gedit_window_active_app()));
 
 	/* set the entry text to "" */
 	gtk_entry_set_text(GTK_ENTRY(uri), "");
@@ -129,13 +129,13 @@ open_button_pressed (GtkWidget *widget, gpointer data)
 
 	if((file_name != NULL) && (strlen(file_name) != 0))
 	{
+		gtk_widget_hide(open_uri_dialog);
+
 		if (gedit_document_new_with_file (file_name))
 		{
 			gnome_entry_append_history ( GNOME_ENTRY (uri_list), FALSE, file_name);	
 
 			gedit_flash_va (_("Loaded file %s"), file_name);
-			
- 			gtk_widget_hide(open_uri_dialog);
 			
 			if (gedit_document_current())
 			{
