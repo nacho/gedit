@@ -1,4 +1,4 @@
-/* diff.c - diff plugin.
+/* encrypt.c - encryption plugin.
  *
  * Copyright (C) 1998 Chris Lahey.
  *
@@ -32,7 +32,7 @@ int main( int argc, char *argv[] )
   gchar *buff;
   client_info info;
 
-  info.menu_location = "[Plugins]Reverse";
+  info.menu_location = "[Plugins]Encrypt";
 
   context = client_init( &argc, &argv, &info );
 
@@ -43,7 +43,7 @@ int main( int argc, char *argv[] )
     {
       if ( ( buff[i] <= 'M' && buff[i] >= 'A' ) || ( buff[i] <= 'm' && buff[i] >= 'a' ) )
 	buff[i] += 13;
-      if ( ( buff[i] <= 'Z' && buff[i] >= 'N' ) || ( buff[i] <= 'z' && buff[i] >= 'n' ) )
+      else if ( ( buff[i] <= 'Z' && buff[i] >= 'N' ) || ( buff[i] <= 'z' && buff[i] >= 'n' ) )
 	buff[i] -= 13;
     }
   docid = client_document_new( context, "encrypted file" );

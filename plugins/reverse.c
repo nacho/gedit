@@ -1,4 +1,4 @@
-/* diff.c - diff plugin.
+/* reverse.c - reverse plugin.
  *
  * Copyright (C) 1998 Chris Lahey.
  *
