@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-15 21:18+0000\n"
-"PO-Revision-Date: 2000-06-15 21:20+00:00\n"
+"POT-Creation-Date: 2000-06-15 22:07+0000\n"
+"PO-Revision-Date: 2000-06-15 22:10+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:238
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:262
 #: src/print.c:551
 msgid "Untitled"
 msgstr "Безымянное"
@@ -98,6 +98,14 @@ msgstr "Тема:"
 #: plugins/email/email.glade.h:11
 msgid "File to use as body of message: "
 msgstr "Файл используемый как тело сообщения:"
+
+#: plugins/reverse/reverse.c:56
+msgid "Reverse"
+msgstr "Перевернуть"
+
+#: plugins/reverse/reverse.c:57
+msgid "Reverse text"
+msgstr "Перевернуть текст"
 
 #: plugins/sample/sample.c:43
 msgid "Hello World"
@@ -153,20 +161,8 @@ msgstr "(С) 1998-2000 Alex Roberts и Evan Lawrence"
 msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME."
 
-#: src/dialogs/dialog-about.c:52
-msgid "With special thanks to:"
-msgstr "С особой признательностью:"
-
-#: src/dialogs/dialog-about.c:67
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "(С) 1998б 1999 Alex Roberts и Evan Lawrence"
-
-#: src/dialogs/dialog-about.c:69
-msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
-
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:549
+#: src/dialogs/dialog-prefs.c:543
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -202,39 +198,39 @@ msgstr "Введите номер строки, к которой вы хотите перейти."
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: src/dialogs/prefs.glade.h:6
+#: src/dialogs/prefs.glade.h:7
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: src/dialogs/prefs.glade.h:7
+#: src/dialogs/prefs.glade.h:8
 msgid "Show Statusbar"
 msgstr "Показать строку состояния"
 
-#: src/dialogs/prefs.glade.h:8
+#: src/dialogs/prefs.glade.h:9
 msgid "Show splitscreen"
 msgstr "Разделенный экран"
 
-#: src/dialogs/prefs.glade.h:9
+#: src/dialogs/prefs.glade.h:10
 msgid "Display text on toolbar buttons"
 msgstr "Показывать текст на кнопках панели инструментов"
 
-#: src/dialogs/prefs.glade.h:10
+#: src/dialogs/prefs.glade.h:11
 msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
-#: src/dialogs/prefs.glade.h:11
+#: src/dialogs/prefs.glade.h:12
 msgid "Enable Auto-indent"
 msgstr "Включить Автовыравнивание"
 
-#: src/dialogs/prefs.glade.h:12
+#: src/dialogs/prefs.glade.h:13
 msgid "General"
 msgstr "Общие"
 
-#: src/dialogs/prefs.glade.h:13
+#: src/dialogs/prefs.glade.h:14
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Многодокументный интерфейс)"
 
-#: src/dialogs/prefs.glade.h:14
+#: src/dialogs/prefs.glade.h:15
 msgid ""
 "Left\n"
 "Right\n"
@@ -246,7 +242,7 @@ msgstr ""
 "Сверху\n"
 "Снизу\n"
 
-#: src/dialogs/prefs.glade.h:19
+#: src/dialogs/prefs.glade.h:20
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -258,95 +254,95 @@ msgstr ""
 "Модальный\n"
 "По умолчанию\n"
 
-#: src/dialogs/prefs.glade.h:24
+#: src/dialogs/prefs.glade.h:25
 msgid "Mode: "
 msgstr "Режим:"
 
-#: src/dialogs/prefs.glade.h:25
+#: src/dialogs/prefs.glade.h:26
 msgid "Notebook Tab Position: "
 msgstr "Положение ярлыков блокнота:"
 
-#: src/dialogs/prefs.glade.h:26 src/menus.c:228
+#: src/dialogs/prefs.glade.h:27 src/menus.c:228
 msgid "Undo"
 msgstr "Откат"
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Set limit on undo levels to :"
 msgstr "Установить предел уровней отката:"
 
-#: src/dialogs/prefs.glade.h:28
+#: src/dialogs/prefs.glade.h:29
 msgid "level(s)"
 msgstr "уровень(и)"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Documents"
 msgstr "Документы"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "Fonts"
 msgstr "Шрифты"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Pick a Font"
 msgstr "Выбрать шрифт"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМм"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Default Font: "
 msgstr "Шрифт по умолчанию:"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Colors"
 msgstr "Цвета"
 
-#: src/dialogs/prefs.glade.h:35 src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:36 src/dialogs/prefs.glade.h:37
 msgid "Pick a color"
 msgstr "Выбрать цвет"
 
-#: src/dialogs/prefs.glade.h:37
+#: src/dialogs/prefs.glade.h:38
 msgid "Background: "
 msgstr "Цвет фона:"
 
-#: src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:39
 msgid "Foreground: "
 msgstr "Цвет текста:"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Fonts/Colors"
 msgstr "Шрифты/Цвета"
 
-#: src/dialogs/prefs.glade.h:40 src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:41 src/dialogs/prefs.glade.h:48
 msgid "Printing"
 msgstr "Печать"
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Add _header"
 msgstr "Добавить заголовок"
 
-#: src/dialogs/prefs.glade.h:42
+#: src/dialogs/prefs.glade.h:43
 msgid "Enable word _wrapping"
 msgstr "Включить перевод строк"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Print _line numbers every:"
 msgstr "Печатать номера строк каждые:"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "line(s)"
 msgstr "строк(и)"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "_Portrait"
 msgstr "Портрет"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "_Landscape"
 msgstr "Блокнот"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "Paper"
 msgstr "Бумага"
 
@@ -387,22 +383,24 @@ msgstr "позиция курсора"
 msgid "Case se_nsitive"
 msgstr "Чувствительный к регистру"
 
-#. xgettext translators : RO = Read Only, it apears before
-#. the document "tab" in the mdi window like "R0 - file.txt"
-#: src/document.c:241
+#: src/document.c:244
 msgid "RO - "
 msgstr "Только чтение - "
 
-#: src/document.c:434
+#: src/document.c:430
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/document.c:718
+#: src/document.c:637
+msgid "(modified)"
+msgstr "(изменено)"
+
+#: src/document.c:714
 msgid "This file does not end with a valid extension\n"
 msgstr "Этот файл заканчивается недопустимым расширением\n"
 
-#: src/document.c:726
+#: src/document.c:722
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
@@ -802,3 +800,55 @@ msgstr "Текст не найден."
 #: src/search.c:245
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Повторный поиск невозможен. Нет текстовой строки для поиска."
+
+#: src/utils.h:87
+msgid "Show window debugging messages."
+msgstr "Показать окно отладочных сообщений."
+
+#: src/utils.h:90
+msgid "Show commands debugging messages."
+msgstr "Показать команды отладочных сообщений."
+
+#: src/utils.h:93
+msgid "Show document debugging messages."
+msgstr "Показать отладочные сообщений документа."
+
+#: src/utils.h:96
+msgid "Show file debugging messages."
+msgstr "Показать отладочные сообщения файла."
+
+#: src/utils.h:99
+msgid "Show plugin debugging messages."
+msgstr "Показать отладочные сообщения дополнения."
+
+#: src/utils.h:102
+msgid "Show prefs debugging messages."
+msgstr "Показать отладочные сообщения настроек."
+
+#: src/utils.h:105
+msgid "Show printing debugging messages."
+msgstr "Показать отладочные сообщения печати."
+
+#: src/utils.h:108
+msgid "Show search debugging messages."
+msgstr "Показать отладочные сообщения поиска."
+
+#: src/utils.h:111
+msgid "Show undo debugging messages."
+msgstr "Показать отладочные сообщения отката."
+
+#: src/utils.h:114
+msgid "Show view debugging messages."
+msgstr "Показать отладочные сообщения окна."
+
+#: src/utils.h:117
+msgid "Show recent debugging messages."
+msgstr "Показать последние отладочные сообщения."
+
+#: src/utils.h:120
+msgid "Turn on all debugging messages."
+msgstr "Включить все отладочные сообщения."
+
+#: src/view.c:850
+msgid "You can't remove the last view of a document."
+msgstr "Вы не можете удалить последнее окно документа."
