@@ -276,6 +276,9 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 		
 	pji->config = load_gedit_print_config_from_file ();
 	g_return_val_if_fail (pji->config != NULL, NULL);
+
+	gnome_print_config_set_int (pji->config, GNOME_PRINT_KEY_NUM_COPIES, 1);
+	gnome_print_config_set_boolean (pji->config, GNOME_PRINT_KEY_COLLATE, FALSE);
 	
 	return pji;
 }	
