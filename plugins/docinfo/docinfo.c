@@ -118,15 +118,12 @@ get_dialog ()
 
 	if (dialog != NULL)
 	{
-		gdk_window_show (dialog->dialog->window);
-		gdk_window_raise (dialog->dialog->window);
-		gtk_widget_grab_focus (dialog->dialog);
-
 		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 				window);
-	
-		if (!GTK_WIDGET_VISIBLE (dialog->dialog))
-			gtk_widget_show (dialog->dialog);
+
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
+		
+		gtk_widget_grab_focus (dialog->dialog);
 
 		return dialog;
 	}

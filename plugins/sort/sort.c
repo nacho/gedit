@@ -1,202 +1,464 @@
 /*
  * Sort plugin
- * Carlo Borreo borreo@softhome.net
+ * Original author: Carlo Borreo borreo@softhome.net
+ * Ported to Gedit2 by Lee Mallabone <gnome@fonicmonkey.net>
  *
  * Sorts the current document
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <string.h>
+#endif
+
 #include <gnome.h>
-#include <glib.h>
-#include <glade/glade.h>
+#include <string.h>
+#include <glade/glade-xml.h>
 
-#include "window.h"
-#include "document.h"
-#include "utils.h"
+#include <gedit-menus.h>
+#include <gedit-document.h>
+#include <gedit-debug.h>
+#include <gedit-view.h>
+#include <gedit-plugin.h>
 
-#include "view.h"
-#include "plugin.h"
+/* Key in case the plugin ever needs any settings */
+#define SORT_BASE_KEY "/apps/gedit-2/plugins/sort"
 
-#define GEDIT_PLUGIN_GLADE_FILE "/sort.glade"
+#define MENU_ITEM_LABEL		N_("Sor_t...")
+#define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
+#define MENU_ITEM_NAME		"Sort"
+#define MENU_ITEM_TIP		N_("Sort the current document or selection.")
 
-struct GeditSortInfo
-{
-	gint col_skip;
-	gboolean case_sensitive;
+
+typedef struct _SortDialog SortDialog;
+
+struct _SortDialog {
+	GtkWidget *dialog;
+
+	GtkWidget *descending_radiobutton;
 	GtkWidget *case_sensitive_checkbutton;
-	GtkWidget *col_entry;
-} sortinfo;
+	GtkWidget *remove_dups_checkbutton;
+	GtkWidget *col_num_spinbutton;
+};
+
+typedef struct _SortInfo SortInfo;
+
+struct _SortInfo {
+	gboolean case_sensitive;
+	gboolean ascending;
+	gboolean remove_duplicates;
+	
+	gint starting_column;
+};
+
+static SortInfo* sort_info = NULL;
+
+static void		 dialog_destroyed 		(GtkObject 	*obj,
+							 void 	       **dialog_pointer);
+static SortDialog 	*get_dialog 			(void);
+static void 		 dialog_response_handler 	(GtkDialog 	*dlg, 
+							 gint 		 res_id,  
+							 SortDialog 	*dialog);
+
+G_MODULE_EXPORT GeditPluginState update_ui 		(GeditPlugin 	*plugin, 
+							 BonoboWindow 	*window);
+G_MODULE_EXPORT GeditPluginState activate 		(GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate 		(GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init 			(GeditPlugin *pd);
+
+static void sort_document (SortDialog *dlg);
 
 static void
-gedit_plugin_finish (GtkWidget *widget, gpointer data)
-{
-	gnome_dialog_close (GNOME_DIALOG(widget));
-}
-
-static void
-destroy_plugin (PluginData *pd)
+dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	g_free (pd->name);
-}
-
-static int
-my_compare( const void *s1, const void *s2 )
-{
-	gint l1, l2;
-
-	l1 = strlen( s1 ) ;
-	l2 = strlen( s2 ) ;
-	if ( l1 < sortinfo.col_skip && l2 < sortinfo.col_skip )
-		return 0 ;
-	if ( l1 < sortinfo.col_skip )
-		return -1 ;
-	if ( l2 < sortinfo.col_skip )
-		return 1 ;
-	if ( sortinfo.case_sensitive )
-		return strcmp( s1 + sortinfo.col_skip, s1 + sortinfo.col_skip ) ;
-	else
-		return strcasecmp( s1 + sortinfo.col_skip, s2 + sortinfo.col_skip ) ;
+	if (dialog_pointer != NULL)
+	{
+		g_free (*dialog_pointer);
+		*dialog_pointer = NULL;
+	}	
 }
 
 static void
-callback_build_string( gpointer s, gchar **pointerptr )
+dialog_response_handler (GtkDialog *dlg, gint res_id,  SortDialog *dialog)
 {
-	strcpy( *pointerptr, s ) ;
-	*pointerptr += strlen( *pointerptr ) ;
-	*(*pointerptr)++ = 0x0a ;
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	switch (res_id) 
+	{
+		case GTK_RESPONSE_OK:
+			sort_document (dialog);
+			gtk_widget_destroy (dialog->dialog);
+
+			break;
+			
+		case GTK_RESPONSE_HELP:
+			/* FIXME */
+			gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	
+			if (error != NULL)
+			{
+				g_warning (error->message);
+				g_error_free (error);
+			}
+
+			break;
+		default:
+			gtk_widget_destroy (dialog->dialog);
+	}
+}
+
+
+static SortDialog*
+get_dialog ()
+{
+	static SortDialog *dialog = NULL;
+
+	GladeXML *gui;
+	GtkWindow *window;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	window = GTK_WINDOW (gedit_get_active_window ());
+
+	if (dialog != NULL)
+	{
+		gtk_widget_grab_focus (dialog->dialog);
+
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+				window);
+	
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
+
+		return dialog;
+	}
+
+	gui = glade_xml_new (GEDIT_GLADEDIR "sort.glade2",
+			     "sort_dialog", NULL);
+
+	if (!gui) {
+		g_warning
+		    ("Could not find sort.glade2, reinstall gedit.\n");
+		return NULL;
+	}
+	
+	dialog = g_new0 (SortDialog, 1);
+
+   	/* Save some references to the main dialog widgets */
+   	dialog->dialog			= glade_xml_get_widget (gui, "sort_dialog");
+   	dialog->descending_radiobutton	= glade_xml_get_widget (gui, "descending_radiobutton");
+   	dialog->col_num_spinbutton	= glade_xml_get_widget (gui, "col_num_spinbutton");
+   	dialog->case_sensitive_checkbutton = glade_xml_get_widget (gui, "case_sensitive_checkbutton");
+   	dialog->remove_dups_checkbutton	= glade_xml_get_widget (gui, "remove_dups_checkbutton");
+
+	g_return_val_if_fail (dialog->dialog, NULL);
+	g_return_val_if_fail (dialog->descending_radiobutton, NULL);
+	g_return_val_if_fail (dialog->col_num_spinbutton, NULL);
+	g_return_val_if_fail (dialog->case_sensitive_checkbutton, NULL);
+	g_return_val_if_fail (dialog->remove_dups_checkbutton, NULL);
+	
+	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
+			  G_CALLBACK (dialog_destroyed), &dialog);
+
+	g_signal_connect (G_OBJECT (dialog->dialog), "response",
+			  G_CALLBACK (dialog_response_handler), dialog);
+
+	g_object_unref (gui);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_window_set_modal (GTK_WINDOW (dialog->dialog), TRUE);
+	
+	gtk_widget_show (dialog->dialog);
+
+	return dialog;
+}
+
+
+static void
+sort_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	SortDialog *dialog = NULL;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	dialog = get_dialog ();
+
+	if (dialog == NULL) 
+		g_warning ("Could not create the Word Count dialog");
+
+}
+
+/*
+ * Compares two strings for the sorting algorithm. Uses the UTF-8 processing
+ * functions in GLib to be as correct as possible.
+ */
+static int
+my_compare (const void *s1, const void *s2)
+{
+	gint length1, length2, ret;
+	gchar *string1, *string2;
+        gchar *substring1, *substring2;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+  	g_return_val_if_fail (sort_info != NULL, -1);
+       	
+        if (sort_info->case_sensitive)
+        {
+		string1 = (gchar *)s1;
+	   	string2 = (gchar *)s2;
+        }
+  	else
+        {
+		/* If the user wants a case-insensitive sort, use the best functions
+		 * GLib has for getting rid of locale-specific case. */   
+		string1 = g_utf8_casefold ((gchar *)s1, -1);
+		string2 = g_utf8_casefold ((gchar *)s2, -1);
+        }
+   
+	/* Figure out the UTF-8 character lengths */
+	length1 = g_utf8_strlen (string1, -1) ;
+	length2 = g_utf8_strlen (string2, -1) ;
+	
+	if ((length1 < sort_info->starting_column) && 
+	    (length2 < sort_info->starting_column))
+		ret = 0 ;
+	else if (length1 < sort_info->starting_column)
+		ret = -1 ;
+	else if (length2 < sort_info->starting_column)
+		ret = 1 ;
+
+	/* Check the entire line of text */
+        else if (sort_info->starting_column < 1)
+        {
+		ret = g_utf8_collate (string1, string2);
+        }
+        else
+        {
+	        /* A character column offset is required, so figure out 
+		 * the correct offset into the UTF-8 string. */
+	        substring1 = g_utf8_offset_to_pointer (string1, sort_info->starting_column);
+	        substring2 = g_utf8_offset_to_pointer (string2, sort_info->starting_column);
+
+		ret = g_utf8_collate (substring1, substring2);
+	}
+
+	/* Do the necessary cleanup */
+	if (!sort_info->case_sensitive)
+	{
+		g_free (string1);
+		g_free (string2);
+	}
+   
+	if (!sort_info->ascending)
+	{
+		/* Reverse the order */
+		ret = -1 * ret;
+	}
+       
+	return ret;
 }
 
 #define GLIST_MY_INSERT(S) rows = g_slist_insert_sorted( rows, (S), my_compare ) ;
 
-/* the function that actually does the work
- * Here I am assuming that gedit_document_get_buffer allocates an extra byte and returns the buffer NULL-terminated
- * This was already true, but only recently it was documented
- */
-static void
-sort_document (void)
-{
-	GeditDocument *doc;
-	GeditView *view;
-	gchar *buffer, *target, *pointer;
-	gint length, start, end, i;
-	GSList *rows;
-
-	view = gedit_view_active();
-	if (view == NULL)
-		return;
-
-	doc = view->doc;
-
-	buffer = gedit_document_get_buffer (doc);
-
-	if (!gedit_view_get_selection (view, &start, &end))
-	{
-		start = 0;
-		length = gedit_document_get_buffer_length (doc);
-		end = length;
-	}
-	else
-	{
-		buffer[ end ] = 0 ;
-		length = end - start ;
-	}
-
-	rows = NULL ;
-	for ( i = end - 1 ; i >= start ; i -- )
-		if ( buffer[ i ] == 0x0a || buffer[ i ] == '\0' )
-		{
-			buffer[ i ] = '\0' ;
-			if ( i != end - 1 )
-				GLIST_MY_INSERT( buffer + i + 1 ) ;
-		}
-	GLIST_MY_INSERT( buffer + start ) ;
-
-	target = pointer = g_new( gchar, length + 1 ) ;
-
-	g_slist_foreach (rows, callback_build_string, & pointer);
-	*pointer = '\0' ;
-
-	gedit_document_delete_text (doc, start, length, TRUE);
-	gedit_document_insert_text (doc, target, start, TRUE);
-
-	g_slist_free (rows);
-	g_free (target);
-	g_free (buffer);
-}
+/* The function that actually does the work */
 
 static void
-gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
+sort_document (SortDialog *dlg)
 {
-	if ( button == 0 )
-	{
-		sortinfo.col_skip = atoi(gtk_entry_get_text (GTK_ENTRY (sortinfo.col_entry))) - 1 ;
-		sortinfo.case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sortinfo.case_sensitive_checkbutton));
-		sort_document() ;
-	}
-	gnome_dialog_close (GNOME_DIALOG(widget));
-}
-
-static void
-gedit_plugin_browse_create_dialog (void)
-{
-	GladeXML *gui;
-	GtkWidget *dialog, *ok_button, *cancel_button;
+	GeditDocument 	*doc;
+	gchar 		*buffer; 
+	gchar 		*p;
+	gint 		 start;
+	gint		 end;
+	GSList 		*rows;
+	GSList		*tmp;
+	gunichar 	 c;
+	gchar 		*last_row = NULL;
+	gint		 old_cur_pos;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gui = glade_xml_new (GEDIT_GLADEDIR GEDIT_PLUGIN_GLADE_FILE, NULL);
-
-	if (!gui)
-	{
-		g_warning ("Could not find %s", GEDIT_PLUGIN_GLADE_FILE);
+	doc = gedit_get_active_document();
+	if (doc == NULL)
 		return;
+
+	g_return_if_fail (sort_info == NULL);
+	sort_info = g_new0 (SortInfo, 1);
+
+	sort_info->case_sensitive = gtk_toggle_button_get_active (
+					GTK_TOGGLE_BUTTON (dlg->case_sensitive_checkbutton));
+   
+	sort_info->ascending = !gtk_toggle_button_get_active (
+					GTK_TOGGLE_BUTTON (dlg->descending_radiobutton));
+
+	sort_info->remove_duplicates = gtk_toggle_button_get_active (
+					GTK_TOGGLE_BUTTON (dlg->remove_dups_checkbutton));
+	
+	sort_info->starting_column = gtk_spin_button_get_value_as_int (
+					GTK_SPIN_BUTTON (dlg->col_num_spinbutton)) - 1;
+	
+	if (!gedit_document_get_selection (doc, &start, &end))
+	{
+		buffer = gedit_document_get_chars (doc, 0, -1);
+		start = 0;
+		end = -1;
+	}
+	else
+	{
+		buffer = gedit_document_get_chars (doc, start, end);
 	}
 
-	dialog              = glade_xml_get_widget (gui, "dialog");
-	sortinfo.col_entry	= glade_xml_get_widget (gui, "col_entry");
-	ok_button			= glade_xml_get_widget (gui, "ok_button");
-	cancel_button		= glade_xml_get_widget (gui, "cancel_button");
-	sortinfo.case_sensitive_checkbutton = glade_xml_get_widget (gui, "case_sensitive_checkbutton");
+	rows = NULL ;
+		
+	p = buffer;
+	c = g_utf8_get_char (p);
+	
+	while (c != '\0')
+	{
+		if (c == '\n')
+		{
+			*p = '\0';
+			
+			p = g_utf8_next_char (p);
 
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (sortinfo.col_entry != NULL);
-	g_return_if_fail (ok_button != NULL);
-	g_return_if_fail (cancel_button != NULL);
-	g_return_if_fail (sortinfo.case_sensitive_checkbutton != NULL);
+			GLIST_MY_INSERT (p);
+		}
+		else
+			p = g_utf8_next_char (p);
 
-	/* Connect the signals */
-	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",GTK_SIGNAL_FUNC (gedit_plugin_execute),  NULL);
-	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
+		c = g_utf8_get_char (p);
+	}
 
-	/* Set the dialog parent and modal type */
-	gnome_dialog_set_parent 	(GNOME_DIALOG (dialog),	 gedit_window_active());
-	gtk_window_set_modal 		(GTK_WINDOW (dialog), TRUE);
-	gnome_dialog_set_default     	(GNOME_DIALOG (dialog), 0);
-	gnome_dialog_editable_enters 	(GNOME_DIALOG (dialog), GTK_EDITABLE (sortinfo.col_entry));
+	GLIST_MY_INSERT (buffer) ;
 
-	/* Show everything then free the GladeXML memmory */
-	gtk_widget_show_all (dialog);
-	gtk_object_unref (GTK_OBJECT (gui));
+	gedit_debug (DEBUG_PLUGINS, "Rebuilding document...");
+
+     	old_cur_pos = gedit_document_get_cursor (doc);
+	
+	gedit_document_begin_not_undoable_action (doc);
+	gedit_document_delete_text (doc, start, end); 
+
+	gedit_document_set_cursor (doc, start);
+
+	tmp = rows;
+	
+	while (tmp != NULL)
+	{
+	        gchar *current_row = (gchar *)tmp->data;
+
+		/* Don't insert this row if it's the same as the last one
+	         * and the user has specified to remove duplicates */
+	        if (!sort_info->remove_duplicates || 
+		    last_row == NULL || 
+		    (strcmp (last_row, current_row) != 0))
+	        {
+			gedit_document_insert_text_at_cursor (doc, current_row, -1);
+
+			if (g_slist_next (tmp) != NULL)
+				gedit_document_insert_text_at_cursor (doc, "\n", -1);
+		}
+		
+                last_row = current_row;
+
+		tmp = g_slist_next (tmp);
+	}
+	
+	gedit_document_set_cursor (doc, old_cur_pos);
+
+	gedit_document_end_not_undoable_action (doc);
+
+	g_slist_free (rows);
+
+	g_free (buffer);
+
+	g_free (sort_info);
+	sort_info = NULL;
 }
 
-gint
-init_plugin (PluginData *pd)
+/*
+ * Activates the plugin. This adds a menu item onto the edit menu.
+ * When clicked, the item will open a dialog window.
+ */
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList *top_windows;
+   
+        gedit_debug (DEBUG_PLUGINS, "");
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+
+        /* Add a menu item to each open window */
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+					   MENU_ITEM_PATH, MENU_ITEM_NAME,
+					   MENU_ITEM_LABEL, MENU_ITEM_TIP,
+					   GTK_STOCK_SORT_ASCENDING, sort_cb);
+                top_windows = g_list_next (top_windows);
+	}
+   
+	return PLUGIN_OK;
+}
+
+/*
+ * Removes any traces of the plugin from the window GUIs. Called when the
+ * plugin is unloaded
+ */
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+	
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
+{
+	BonoboUIComponent *uic;
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	uic = gedit_get_ui_component_from_window (window);
+
+	doc = gedit_get_active_document ();
+
+	if ((doc == NULL) || (gedit_document_is_readonly (doc)))		
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
+	else
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
+
+	return PLUGIN_OK;
+}
+
+
+
+/*
+ * Initialise basic plugin information
+ */
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Sort");
-	pd->desc = _("Sort a document.");
-	pd->long_desc = _("Sort a document or selected text.");
-	pd->author = "Carlo Borreo <borreo@softhome.net>";
-	pd->needs_a_document = TRUE;
-	pd->modifies_an_existing_doc = TRUE;
+	pd->desc = _("Sort a document or selected text.");
+	pd->author = "Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
+		     "and Paolo Maggi <maggi@athena.polito.it>";
+	pd->copyright = _("Copyright (C) 2001 Carlo Borreo\n"
+			  "Copyright (C) 2002 Lee Mallabone and Paolo Maggi");
 
-	pd->private_data = (gpointer)gedit_plugin_browse_create_dialog;
-
+	pd->private_data = NULL;
+   
 	return PLUGIN_OK;
 }
