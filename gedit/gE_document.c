@@ -191,6 +191,8 @@ gE_window_new(void)
 	gtk_widget_show(w->notebook);
 	gtk_widget_show(w->window);
 
+	gE_get_settings (w);
+
 	g_list_foreach(plugins, (GFunc) add_plugins_to_window, w);
 
 	recent_update(w);

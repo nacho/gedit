@@ -1,6 +1,5 @@
-/* vi:set ts=8 sts=0 sw=8:
- *
- * gEdit
+/* gEdit
+ * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +15,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_PREFS_H__
-#define __GE_PREFS_H__
 
-#include "gE_prefslib.h"
 
-extern void gE_save_settings(gE_window *window, gpointer cbwindow);
-extern void gE_get_settings(gE_window *window);
-extern void gE_rc_parse(void);
-extern void prefs_cb(GtkWidget *widget, gpointer cbwindow);
+struct _gE_pref {
+	char *name;
+	char *value;
+};
 
-#endif /* __GE_PREFS_H__ */
+typedef struct _gE_pref gE_pref;
+
+extern GList *gE_prefs;
+
+char *gE_prefs_open_file (char *filename, char *rw);
+int gE_prefs_open ();
+void gE_prefs_close ();
+char *gE_prefs_get_data (char *name);
+char *gE_prefs_get_default (char *name);
+char *gE_prefs_get_char (char *name);
+void gE_prefs_set_data (char *name, char *value);
+void gE_prefs_set_char (char *name, char *value);
+int gE_prefs_get_int (char *name);
+void gE_prefs_set_int (char *name, int value);

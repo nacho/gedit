@@ -29,19 +29,18 @@
 #include "gE_prefs.h"
 #include "toolbar.h"
 
-#define GEDIT_RC	".gedit"
 
-typedef struct _gE_prefs {
+typedef struct _gE_prefbox {
 	GtkWidget *window;
 	GtkWidget *tfont;
 	GtkWidget *tslant;
 	GtkWidget *tweight;
 	GtkWidget *tsize;
 	GtkWidget *pcmd;
-} gE_prefs;
+} gE_prefbox;
 
 
-static gE_prefs *prefs;
+static gE_prefbox *prefs;
 static char *rc;
 
 
@@ -61,14 +60,11 @@ prefs_cb (GtkWidget *widget, gpointer cbwindow)
 void 
 gE_rc_parse(void)
 {
-	char *home;
-
-	if ((home = getenv("HOME")) == NULL)
+	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
+	{
+		printf ("gE_rc_parse: Couldn't open gtk rc file for parsing.\n");
 		return;
-
-	rc = (char *)g_malloc(strlen(home) + strlen(GEDIT_RC) + 2);
-	sprintf(rc, "%s/%s", home, GEDIT_RC);
-
+	}
 	gtk_rc_parse(rc);
 }
 
@@ -100,9 +96,7 @@ ok_prefs(GtkWidget *widget, gE_window *window)
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);
 
-#ifndef WITHOUT_GNOME
 	gE_save_settings(window, gtk_entry_get_text(GTK_ENTRY(prefs->pcmd)));
-#endif
 	gtk_widget_destroy(prefs->window);
 	prefs->window = NULL;
 } /* ok_prefs */
@@ -137,7 +131,7 @@ gE_prefs_window(gE_window *window)
 	slant = g_list_append(slant, "i");
 	slant = g_list_append(slant, "r");
 
-	prefs = (gE_prefs *)g_malloc(sizeof(gE_prefs));
+	prefs = (gE_prefbox *)g_malloc(sizeof(gE_prefbox));
 	prefs->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_signal_connect(GTK_OBJECT(prefs->window), "destroy",
 		GTK_SIGNAL_FUNC(cancel_prefs), prefs->window);
@@ -287,14 +281,10 @@ gettime(char *buf)
 	return buffer;
 }
 
-#ifndef WITHOUT_GNOME
-
 void 
 gE_save_settings(gE_window *window, gpointer cbwindow)
 {
 	window = (gE_window *) cbwindow;
-
-	gnome_config_push_prefix("/gEdit/Global/");
 
 	mbprintf("window->tab_pos = %d", window->tab_pos);
 	mbprintf("window->auto_indent = %d", window->auto_indent);
@@ -303,37 +293,30 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	mbprintf("window->have_tb_text = %d", window->have_tb_text);
 	mbprintf("window->have_tb_pix = %d", window->have_tb_pix);
 
-	gnome_config_set_int("tab pos", (gint) window->tab_pos);
-	gnome_config_set_int("auto indent", (gboolean) window->auto_indent);
-	gnome_config_set_int("show statusbar", (gboolean) window->show_status);
-	gnome_config_set_int("toolbar", (gint) window->have_toolbar);
-	gnome_config_set_int("tb text", (gint) window->have_tb_text);
-	gnome_config_set_int("tb pix", (gint) window->have_tb_pix);
+	gE_prefs_set_int("tab pos", (gint) window->tab_pos);
+	gE_prefs_set_int("auto indent", (gboolean) window->auto_indent);
+	gE_prefs_set_int("show statusbar", (gboolean) window->show_status);
+	gE_prefs_set_int("toolbar", (gint) window->have_toolbar);
+	gE_prefs_set_int("tb text", (gint) window->have_tb_text);
+	gE_prefs_set_int("tb pix", (gint) window->have_tb_pix);
 
 	if (window->print_cmd == "")
-		gnome_config_set_string("print command", "lpr -rs %s");
+		gE_prefs_set_char ("print command", "lpr -rs %s");
 	else
-		gnome_config_set_string("print command", window->print_cmd);
-	/*gnome_config_set_string ("print command", cmd); */
+		gE_prefs_set_char ("print command", window->print_cmd);
 
-	gnome_config_pop_prefix();
-	gnome_config_sync();
 }
 
 void gE_get_settings(gE_window *w)
 {
-	gnome_config_push_prefix("/gEdit/Global/");
 
-	w->tab_pos = gnome_config_get_int("tab pos");
-	w->show_status = gnome_config_get_int("show statusbar");
-	w->have_toolbar = gnome_config_get_int("toolbar");
-	w->have_tb_text = gnome_config_get_int("tb text");
-	w->have_tb_pix = gnome_config_get_int("tb pix");
+	w->tab_pos = gE_prefs_get_int("tab pos");
+	w->show_status = gE_prefs_get_int("show statusbar");
+	w->have_toolbar = gE_prefs_get_int("toolbar");
+	w->have_tb_text = gE_prefs_get_int("tb text");
+	w->have_tb_pix = gE_prefs_get_int("tb pix");
 
-	w->print_cmd = gnome_config_get_string("print command");
-
-	gnome_config_pop_prefix();
-	gnome_config_sync();
+	w->print_cmd = gE_prefs_get_char("print command");
 
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
 
@@ -355,4 +338,3 @@ void gE_get_settings(gE_window *w)
 		tb_off_cb(NULL, w);
 	}
 }
-#endif

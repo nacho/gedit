@@ -15,6 +15,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
@@ -35,8 +36,84 @@
 GList *window_list;
 extern GList *plugins;
 
-#ifdef WITHOUT_GNOME
+
+gint file_open_wrapper (gE_data *data)
+{
+	char *nfile, *name;
+
+	name = data->temp2;
+	gE_document_new(data->window);
+	nfile = g_malloc(strlen(name)+1);
+	strcpy(nfile, name);
+	gE_file_open (data->window, gE_document_current(data->window), nfile);
+
+	return FALSE;
+}
+
+#ifdef WITHOUT_GNOME 
+
+/* 
+ *  GTK-ONLY CODE 
+ *  STARTS HERE
+ */
+
 static void gE_show_version(void);
+
+void prog_init(char **file)
+{
+	gE_window *window;
+	gE_document *doc;
+	gE_data *data;
+	plugin_callback_struct callbacks;
+	data = g_malloc0 (sizeof (gE_data));
+#ifdef DEBUG
+	g_print("Initialising gEdit...\n");
+
+	g_print("%s\n",*file);
+#endif
+
+	gE_prefs_open();
+	msgbox_create();
+
+	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
+	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
+	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
+	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
+
+	window_list = NULL;
+	window = gE_window_new();
+	data->window = window;
+	if (*file != NULL) {
+		doc = gE_document_current(window);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
+			gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));
+		window->documents = g_list_remove(window->documents, doc);
+		if (doc->filename != NULL)
+			g_free (doc->filename);
+		g_free (doc);
+
+		while (*file) {
+			data->temp2 = *file;
+			file_open_wrapper (data);
+			file++;
+		}
+	}
+
+	/* Init plugins... */
+	plugins = NULL;
+	
+	callbacks.document.create = gE_plugin_document_create;
+	callbacks.text.append = gE_plugin_text_append;
+	callbacks.document.show = gE_plugin_document_show;
+	callbacks.document.current = gE_plugin_document_current;
+	callbacks.document.filename = gE_plugin_document_filename;
+	callbacks.text.get = gE_plugin_text_get;
+	callbacks.program.quit = gE_plugin_program_quit;
+	callbacks.program.reg = gE_plugin_program_register;
+	
+	plugin_query_all (&callbacks);
+	
+}
 
 int
 main (int argc, char **argv)
@@ -90,6 +167,7 @@ main (int argc, char **argv)
 	
 	gtk_main ();
 
+	gE_prefs_close ();
 	return 0;
 } /* main */
 
@@ -100,7 +178,16 @@ gE_show_version(void)
     g_print ("%s\n", GEDIT_ID);
 }
 
-#else	/* USING GNOME */
+
+#else
+
+
+/* 
+ *  GTK-ONLY CODE ENDS 
+ *  GNOME CODE BEGINS
+ */
+
+
 static struct argp_option argp_options [] = {
   { "launch-plugin", 'p', N_("Plugin Name"), 0, N_("Launch a plugin at startup"), 1 },
   { NULL, 0, NULL, 0, NULL, 0 },
@@ -171,9 +258,6 @@ int main (int argc, char **argv)
 	window = gE_window_new();
 
 	data->window = window;
-	window->show_status = TRUE;
-	window->have_toolbar = FALSE;
-	gE_get_settings(window);
 
 	#ifdef DEBUG
 	  g_print("...\n");
