@@ -71,7 +71,7 @@ impl_gedit_document_server_setLinePosition (PortableServer_Servant _servant,
 
 	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
 
-	gedit_document_goto_line (doc_server->doc, position);
+	gedit_document_goto_line (doc_server->doc, MAX (0, position - 1));
 }
 
 static void

@@ -141,7 +141,8 @@ void          bonobo_mdi_set_child_list_path 	(BonoboMDI *mdi,
 gboolean      bonobo_mdi_add_view            	(BonoboMDI *mdi, 
 						 BonoboMDIChild *child);
 gint	      bonobo_mdi_add_views 		(BonoboMDI *mdi, 
-						 GSList *children);
+						 GSList *children,
+						 gboolean set_view);
 gboolean      bonobo_mdi_add_toplevel_view   	(BonoboMDI *mdi, 
 						 BonoboMDIChild *child,
 						 const char *window_role);

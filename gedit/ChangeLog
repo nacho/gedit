@@ -1,3 +1,50 @@
+2005-02-21  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #167874: Specify the line number on the command line is broken
+	
+	* GNOME_Gedit.idl: added line_pos argument to openURIList
+
+	* bonobo-mdi.[ch] (bonobo_mdi_add_views): added set_view argument, if
+	set_view is TRUE,  sets as active the first added view
+
+	* gedit-document-server.c
+	(impl_gedit_document_server_setLinePosition): goes to the right line
+
+	* gedit-document.c (gedit_document_class_init): uses G_SIGNAL_RUN_FIRST 
+	for the "loaded" signal
+	(gedit_document_real_loaded):  places cursor at line 0
+	when the document is loaded.
+
+	* gedit-file.c: added the "first" field to the UriToLoad struct, new
+	static variables first_document and active_doc_reused
+	(document_loaded_cb): removed a call to 
+	gedit_document_goto_line 
+	(open_files_done): for the first document, moves the cursor to the 
+	requested  line 
+	(open_files): initialize first_document and active_doc_reused
+	(gedit_file_open_uri_list): set the value of the first field of UriToLoad
+
+	* gedit-view.c (gedit_view_expose): new function, scrolls to "insert"
+	on the first expose
+	(gedit_view_new): does not scroll to "insert", connect the "expose-event"
+	signal
+	(move_cursor)(gedit_view_cut_clipboard) (gedit_view_copy_clipboard)
+	(gedit_view_paste_clipboard) (gedit_view_delete_selection)
+	(gedit_view_scroll_to_cursor): uses gtk_text_view_scroll_to_mark with
+	margin set to GEDIT_VIEW_SCROLL_MARGIN (0.02) instead of 
+	gtk_text_view_scroll_mark_onscreen, this should improve a bit the way
+	gedit scrolls text when searching for text
+
+	* gedit-window-server.c (impl_gedit_window_server_openURIList): added
+	line_pos argument
+
+	* gedit2.c (gedit_load_file_list): manages the case in which "gedit +line"
+	with no files on the command line is called
+	(gedit_get_command_line_data): goes to the last line when of the file
+	"gedit + file" is called
+	(gedit_handle_automation): use the new GNOME_Gedit_Window_openURIList
+	prototype
+
 2005-02-12  Paolo Maggi  <paolo@gnome.org>
 
 	* dialogs/close_all_dialog.glade2: removed from CVS since it is 

@@ -45,6 +45,7 @@
 #include "gedit-marshal.h"
 
 #define MIN_NUMBER_WINDOW_WIDTH 20
+#define GEDIT_VIEW_SCROLL_MARGIN 0.02
 
 struct _GeditViewPrivate
 {
@@ -186,8 +187,12 @@ move_cursor (GtkTextView       *text_view,
 	else
 		gtk_text_buffer_place_cursor (buffer, new_location);
 
-	gtk_text_view_scroll_mark_onscreen (text_view,
-					    gtk_text_buffer_get_insert (buffer));
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
 }
 
 /*
@@ -370,6 +375,33 @@ gedit_view_finalize (GObject *object)
 	gedit_debug (DEBUG_VIEW, "END");
 }
 
+static gboolean
+gedit_view_expose (GtkTextView *widget, GdkEventExpose *event,
+                   GeditView *view)
+{
+	GtkTextBuffer* buffer = NULL;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), FALSE);
+	
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view->priv->text_view));
+	g_return_val_if_fail (buffer != NULL, FALSE);
+
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      0.25,
+				      FALSE,
+				      0.0,
+				      0.0);
+
+	g_signal_handlers_disconnect_by_func (widget, 
+					      G_CALLBACK  (gedit_view_expose), 
+					      view);
+
+	return FALSE;
+}
+
 /**
  * gedit_view_new:
  * @doc: a #GeditDocument
@@ -399,15 +431,9 @@ gedit_view_new (GeditDocument *doc)
 	view->priv->document = doc;
 	g_object_ref (view->priv->document);
 
-	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
-				      gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
-				      0, TRUE, 0.0, 1.0);
-
 	if (gedit_prefs_manager_get_display_line_numbers ())
 		gedit_view_show_line_numbers (view, TRUE);
 			
-	gtk_widget_show_all (GTK_WIDGET (view));
-
 	g_signal_connect (GTK_TEXT_BUFFER (doc), 
 			  "changed",
 			  G_CALLBACK (gedit_view_update_cursor_position_statusbar),
@@ -428,10 +454,17 @@ gedit_view_new (GeditDocument *doc)
 			  G_CALLBACK (gedit_view_doc_readonly_changed_handler),
 			  view);
 
+	g_signal_connect_after (GTK_TEXT_VIEW (view->priv->text_view),
+			  "expose-event",
+			  G_CALLBACK (gedit_view_expose),
+			  view);
+
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (view->priv->text_view), 
 				    !gedit_document_is_readonly (doc));	
 	
 	gedit_debug (DEBUG_VIEW, "END: %d", G_OBJECT (view)->ref_count);
+
+	gtk_widget_show_all (GTK_WIDGET (view));
 
 	return view;
 }
@@ -452,9 +485,12 @@ gedit_view_cut_clipboard (GeditView *view)
 				gtk_clipboard_get (GDK_NONE),
 				!gedit_document_is_readonly (view->priv->document));
   	
-	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (view->priv->text_view),
-				gtk_text_buffer_get_mark (buffer,
-				"insert"));
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
 }
 
 void
@@ -469,10 +505,13 @@ gedit_view_copy_clipboard (GeditView *view)
 	
   	gtk_text_buffer_copy_clipboard (buffer,
 				gtk_clipboard_get (GDK_NONE));
-  	
-	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (view->priv->text_view),
-				gtk_text_buffer_get_mark (buffer,
-				"insert"));
+
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
 }
 
 void
@@ -491,10 +530,14 @@ gedit_view_paste_clipboard (GeditView *view)
 				gtk_clipboard_get (GDK_NONE),
 				NULL,
 				!gedit_document_is_readonly (view->priv->document));
-  	
-	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (view->priv->text_view),
-				gtk_text_buffer_get_mark (buffer,
-				"insert"));
+
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
+
 }
 
 void
@@ -512,10 +555,13 @@ gedit_view_delete_selection (GeditView *view)
 	gtk_text_buffer_delete_selection (buffer, 
 				TRUE,
 				!gedit_document_is_readonly (view->priv->document));
-  	
-	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (view->priv->text_view),
-				gtk_text_buffer_get_mark (buffer,
-				"insert"));
+
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
 }
 
 GeditDocument*	
@@ -542,9 +588,12 @@ gedit_view_scroll_to_cursor (GeditView *view)
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view->priv->text_view));
 	g_return_if_fail (buffer != NULL);
 
-	gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (view->priv->text_view),
-				gtk_text_buffer_get_mark (buffer,
-				"insert"));
+	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+				      gtk_text_buffer_get_insert (buffer),
+				      GEDIT_VIEW_SCROLL_MARGIN,
+				      FALSE,
+				      0.0,
+				      0.0);
 }
 
 /* assign a unique name */

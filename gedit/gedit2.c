@@ -103,9 +103,10 @@ gedit_load_file_list (CommandLineData *data)
 
 	res = gedit_file_open_from_stdin (NULL);
 
-	if (data == NULL) 
+	if ((data == NULL) || (data->file_list == NULL)) 
 	{
 		gedit_file_new ();
+		g_free (data);
 		return;
 	}
 
@@ -142,7 +143,11 @@ gedit_get_command_line_data (GnomeProgram *program)
 		{
 			if (*args[i] == '+')
 			{	
-				data->line_pos = atoi (args[i] + 1);		
+				if (*(args[i] + 1) == '\0')
+					/* goto the last line of the document */
+					data->line_pos = G_MAXINT;
+				else
+					data->line_pos = atoi (args[i] + 1);		
 			}
 			else
 			{
@@ -218,11 +223,7 @@ gedit_handle_automation (GnomeProgram *program)
 		}
 
 		CORBA_sequence_set_release (uri_list, CORBA_TRUE);
-		GNOME_Gedit_Window_openURIList (window, uri_list, &env);
-
-		document = GNOME_Gedit_Application_getActiveDocument (server, &env);
-
-		GNOME_Gedit_Document_setLinePosition (document, data->line_pos, &env);
+		GNOME_Gedit_Window_openURIList (window, uri_list, data->line_pos, &env);
 
 		g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
 		g_slist_free (data->file_list);

@@ -75,7 +75,8 @@ static gchar* gedit_default_path = NULL;
 /* type of the elements of the uris_to_open list */
 typedef struct {
 	gchar *uri;
-	gboolean create;
+	gint create: 1;
+	gint first: 1;
 } UriToLoad;
 
 /* Global variables for managing async loading */
@@ -87,6 +88,8 @@ static gint                 line 		= -1;
 static GSList              *new_children 	= NULL;
 static GSList		   *children_to_unref	= NULL;
 static gint		    times_called	= 0;
+static GeditDocument	   *first_document	= NULL;
+static gboolean		    active_doc_reused   = FALSE;
 
 static GtkWidget           *loading_window	= NULL;
 static GtkWidget           *progress_bar	= NULL;
@@ -1111,8 +1114,6 @@ document_loaded_cb (GeditDocument *document,
 		gedit_utils_set_status (NULL);
 		gedit_utils_flash_va (_("Loaded file \"%s\""), uri_to_display);
 
-		gedit_document_goto_line (document, MAX (0, line - 1));
-
 		if (new_child != NULL)
 		{
 			bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
@@ -1182,12 +1183,31 @@ open_files_done ()
 	/* Add all the views in the right order */
 	new_children = g_slist_reverse (new_children);
 
+	if (first_document != NULL)
+		gedit_document_goto_line (first_document, MAX (0, line - 1));	
+	
 	PROFILE (
 		g_message ("Document Loaded: %.3f", g_timer_elapsed (timer, NULL));
 	)
 
 	bonobo_mdi_add_views (BONOBO_MDI (gedit_mdi),
-			      new_children);
+			      new_children,
+			      !active_doc_reused);
+
+	if (active_doc_reused)
+	{
+		GeditView *view = GEDIT_VIEW (gedit_get_active_view ());
+		GtkTextBuffer *buffer;
+
+		buffer = gtk_text_view_get_buffer (gedit_view_get_gtk_text_view (view));
+
+		gtk_text_view_scroll_to_mark (gedit_view_get_gtk_text_view (view),
+				      gtk_text_buffer_get_insert (buffer),
+				      0.25,
+				      FALSE,
+				      0.0,
+				      0.0);
+	}
 
 	PROFILE (
 		g_message ("View added: %.3f", g_timer_elapsed (timer, NULL));
@@ -1215,6 +1235,8 @@ open_files_done ()
 	opened_uris = 0;
 	encoding_to_use = NULL;
 	line = -1;
+	first_document = NULL;
+	active_doc_reused = FALSE;
 
 	PROFILE (
 		g_message ("Done all: %.3f", g_timer_elapsed (timer, NULL));
@@ -1322,6 +1344,9 @@ open_files ()
 			return;
 		}
 
+		if (utl->first)
+			first_document = new_child->document;
+
 		g_signal_connect (G_OBJECT (new_child->document),
 				  "loading",
 				  G_CALLBACK (document_loading_cb),
@@ -1336,6 +1361,13 @@ open_files ()
 	}
 	else
 	{	
+
+		if (utl->first)
+		{
+			first_document = active_document;
+			active_doc_reused = TRUE;
+		}
+
 		PROFILE (
 			g_message ("Load file: %.3f", g_timer_elapsed (timer, NULL));
 		)
@@ -1411,6 +1443,7 @@ gedit_file_open_uri_list (GSList *uri_list,
 		u = g_new (UriToLoad, 1);
 
 		u->uri = uri;
+		u->first = FALSE;
 
 		if (create &&
 		    gedit_utils_uri_has_file_scheme (uri) &&
@@ -1421,6 +1454,9 @@ gedit_file_open_uri_list (GSList *uri_list,
 		else
 		{
 			u->create = FALSE;
+
+			if (l == uri_list)
+				u->first = TRUE;
 		}
 
 		uris_to_open = g_slist_prepend (uris_to_open, u);

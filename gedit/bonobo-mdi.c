@@ -1641,7 +1641,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 }
 
 gint
-bonobo_mdi_add_views (BonoboMDI *mdi, GSList *children)
+bonobo_mdi_add_views (BonoboMDI *mdi, GSList *children, gboolean set_view)
 {
 	gint i = 0;
 	
@@ -1656,7 +1656,7 @@ bonobo_mdi_add_views (BonoboMDI *mdi, GSList *children)
 
 		if (bonobo_mdi_add_view_real (mdi, 
 					      BONOBO_MDI_CHILD (children->data), 
-					      (children->next == NULL)))
+					      set_view && (i == 0)));
 		{
 			++i;
 		}

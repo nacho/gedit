@@ -25,7 +25,8 @@ module GNOME {
 		};
 
 		interface Window : Bonobo::Unknown {
-			oneway void openURIList (in URIList locations);
+			oneway void openURIList (in URIList locations,
+						 in long line_pos);
 			oneway void grabFocus ();
 			Document newDocument ();
 		};

@@ -247,7 +247,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	document_signals[LOADED] =
    		g_signal_new ("loaded",
 			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
+			      G_SIGNAL_RUN_FIRST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
 			      NULL, NULL,
 			      gedit_marshal_VOID__POINTER,
@@ -582,7 +582,17 @@ gedit_document_real_loaded (GeditDocument *document, const GError *error)
 
 		g_free (data);
 	}
+	else
 	*/
+	{
+		GtkTextIter iter;
+
+		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (document),
+						  &iter,
+						  0);
+
+		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (document), &iter);
+	}
 
 	data = gedit_metadata_manager_get (document->priv->uri,
 					   "last_searched_text");
@@ -2252,6 +2262,7 @@ gedit_document_end_user_action (GeditDocument *doc)
 	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
 }
 
+/* FIXME: line should be an "int" -- Paolo (Feb. 20, 2005) */
 void
 gedit_document_goto_line (GeditDocument* doc, guint line)
 {

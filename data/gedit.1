@@ -1,20 +1,26 @@
-.TH GEDIT 1 "16 Jul 2004"
+.TH GEDIT 1 "20 Feb 2005"
 .SH NAME
-\fBgedit\fP \- simple text editor for GNOME
+\fBgedit\fP \- text editor for the GNOME Desktop
 
-The gedit application is a simple text editor. You can use gedit to create and edit text files. You can use gedit plugins to perform a variety of tasks related to text-editing from within the gedit window.
-
-.SH SYNTAX
+.SH SYNOPSIS
 .B gedit
 .RI [--help]
 .RI [--encoding]
 .RI [--new-window]
 .RI [--new-document]
 .RI [--quit]
+.RI [+[num]]
 .RI [filename(s)...]
 .SH DESCRIPTION
 .B gedit
-is a text editor for the GNOME Desktop.
+gedit is the official text editor of the GNOME desktop environment.
+
+While aiming at simplicity and ease of use, gedit is a powerful general purpose 
+text editor.
+It can be used to create and edit all kinds of text files.
+
+gedit features a flexible plugin system which can be used to dynamically add 
+new advanced features to gedit itself.
 .LP
 .SH OPTIONS
 
@@ -34,26 +40,32 @@ Create a new document in an existing instance of gedit.
 \fB\-\-quit\fR
 Quit an existing instance of gedit.
 .TP
+\fB+[num]\fR
+For the first file, go to the line specified by "num" (do not insert a space between the "+" sign and the number).
+If "num" is missing, go to the last line.
+.TP
 \fBfilename(s)...\fR
-Specifies the file to open when gedit starts - if this is not specified, gedit will
-load a blank file with an Untitled label. Multiple files can be loaded if they are
+Specifies the file to open when gedit starts. If this is not specified, gedit will
+load a blank file with an "Unsaved Document" label. Multiple files can be loaded if they are
 separated by spaces.  
-gedit also supports handling of remote files.  For example, you can pass the location of a webpage to gedit, like "http://www.gnome.org", or load a file from a FTP server,
+gedit also supports handling of remote files.  For example, you can pass the location 
+of a webpage to gedit, like "http://www.gnome.org", or load a file from a FTP server,
 like "ftp://ftp.gnome.org/robots.txt".
 .SH PIPES
-Gedit accepts pipes, so it can be run after another command to load the output into
+gedit accepts pipes, so it can be run after another command to load the output into
 gedit. For example :
 .TP
 ls -l | gedit
 .SH BUGS
 If you find a bug, please report it at http://bugzilla.gnome.org/enter_bug.cgi?product=gedit.
-
 .SH AUTHORS
-Paolo Maggi (maggi@athena.polito.it)
+Paolo Maggi (paolo@gnome.org)
+.TP
+Paolo Borelli (pborelli@katamail.com)
 .TP
 James Willcox (jwillcox@cs.indiana.edu)
 .TP
 Federico Mena Quintero (federico@ximian.com)
 .TP
-Chema Celorio (chema@celorio.com)
+Chema Celorio
 
