@@ -174,7 +174,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file: "
 						   "\n\n %s \n\n"
-						   "Make sure that the path you provided exits,"
+						   "Make sure that the path you provided exists,"
 						   "and that you have the appropiate write permissions."), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
