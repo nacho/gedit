@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2001-06-27 12:08+0900\n"
+"POT-Creation-Date: 2001-06-27 20:41+0900\n"
 "PO-Revision-Date: 2001-06-27 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -210,6 +210,7 @@ msgid "email"
 msgstr "電子メール"
 
 #: plugins/email/email.c:75
+#, c-format
 msgid "Executing command: %s"
 msgstr "実行するコマンド: %s"
 
@@ -372,6 +373,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "geditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
 
 #: src/dialogs/dialog-plugins.c:87
+#, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr "%sプラグインを使うには、\"%s\"の位置を指定してください。"
 
@@ -403,6 +405,7 @@ msgid "Search string not found."
 msgstr "検索文字列は見つかりませんでした。"
 
 #: src/dialogs/dialog-replace.c:362
+#, c-format
 msgid "Found and replaced %i occurrences."
 msgstr "%i個が見つかって置換しました。"
 
@@ -607,8 +610,8 @@ msgid "gedit: Set program location..."
 msgstr "gedit: プログラム位置の設定..."
 
 #: src/dialogs/program.glade.h:8
-msgid "label12"
-msgstr "label12"
+msgid "label13"
+msgstr "label13"
 
 #: src/dialogs/program.glade.h:9
 msgid "_Location to search for:"
@@ -697,7 +700,7 @@ msgid "Open"
 msgstr "開く"
 
 #: src/dialogs/uri.glade.h:9
-msgid "enter the location (URI) of the file you would like to open:"
+msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "開きたいファイルの位置(URI)を入力して下さい:"
 
 #: src/document.c:267 src/document.c:271
@@ -750,6 +753,7 @@ msgstr ""
 "ファイルが存在するか、確認してください。"
 
 #: src/file.c:245
+#, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
 "Could not allocate the required memory."
@@ -758,6 +762,7 @@ msgstr ""
 "要求されたメモリを確保できませんでした。"
 
 #: src/file.c:257
+#, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
 "\n"
@@ -772,6 +777,7 @@ msgstr ""
 "ファイルのパーミッションを確認してください。"
 
 #: src/file.c:277
+#, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
 "\n"
@@ -782,6 +788,7 @@ msgstr ""
 "%s"
 
 #: src/file.c:298
+#, c-format
 msgid ""
 "Internal error reading the file: \n"
 "\n"
@@ -796,6 +803,7 @@ msgstr ""
 "このエラーを submit@bugs.gnome.org に報告してください。"
 
 #: src/file.c:314
+#, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
 "\n"
@@ -830,6 +838,7 @@ msgstr ""
 "ファイルのパーミッションを確認してください。"
 
 #: src/file.c:572
+#, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
@@ -846,6 +855,7 @@ msgstr ""
 "この問題を submit@bugs.gnome.org に報告してください。"
 
 #: src/file.c:590
+#, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
@@ -900,7 +910,7 @@ msgstr "無題のドキュメントを元には戻せません。\n"
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
-msgstr ""
+msgstr 
 "変更を全て取り消していいですか？\n"
 "(%s)"
 
@@ -1251,6 +1261,7 @@ msgid "_File"
 msgstr "ファイル(_F)"
 
 #: src/recent.c:283
+#, c-format
 msgid "Unable to open recent file: %s"
 msgstr "最近使ったファイルを開けません: %s"
 
@@ -1259,8 +1270,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"他の検索操作がアクティブなときに行数をカウントできません。検索ダイアログを"
-"閉じてください。"
+"他の検索操作がアクティブなときに行数をカウントできません。検索ダイアログを閉"
+"じてください。"
 
 #: src/search.c:410
 #, c-format
