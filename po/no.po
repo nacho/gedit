@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.5.2\n"
-"POT-Creation-Date: 1999-05-24 20:17+0100\n"
+"POT-Creation-Date: 1999-06-26 22:40+0100\n"
 "PO-Revision-Date: 1999-05-24 01:36+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -30,81 +30,46 @@ msgstr "Dokid er %ld.\n"
 msgid "Shell"
 msgstr "Skall"
 
-#: src/commands.c:556
+#: src/commands.c:575
 msgid "Open File..."
 msgstr "Åpne Fil..."
 
-#: src/commands.c:633
+#: src/commands.c:652
 msgid "Read only file!"
 msgstr "Skrivebeskyttet fil!"
 
-#: src/commands.c:659
+#: src/commands.c:678
 msgid "Error saving file!"
 msgstr "Feil under lagring av fil!"
 
-#: src/commands.c:682
+#: src/commands.c:701
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/commands.c:724
+#: src/commands.c:752
 msgid "Are you sure you wish to revert all changes?"
 msgstr "Er du sikker på at du ønsker å forkaste alle endringer?"
 
-#: src/commands.c:766
+#: src/commands.c:794
 msgid "Document Unchanged..."
 msgstr "Dokumentet er uendret..."
 
-#: src/commands.c:768
+#: src/commands.c:796
 msgid "Document Unsaved..."
 msgstr "Dokumentet er ikke lagret..."
 
-#: src/commands.c:1079 src/commands.c:1080
-msgid "_File"
+#: src/commands.c:1098
+#, fuzzy
+msgid "_File/"
 msgstr "_Fil"
 
-#: src/gE_about.c:29
-msgid "Alex Roberts"
-msgstr "Alex Roberts"
-
-#: src/gE_about.c:30
-msgid "Evan Lawrence"
-msgstr "Evan Lawrence"
-
-#: src/gE_about.c:31
-msgid "http://gedit.pn.org"
-msgstr "http://gedit.pn.org"
+#: src/commands.c:1107 src/commands.c:1108
+msgid "_File"
+msgstr "_Fil"
 
 #: src/gE_about.c:33
 msgid "With special thanks to:"
 msgstr "Med spesiell takk til:"
-
-#: src/gE_about.c:34
-msgid "       Will LaShell"
-msgstr "       Will LaShell"
-
-#: src/gE_about.c:35
-msgid "       Chris Lahey"
-msgstr "       Chris Lahey"
-
-#: src/gE_about.c:36
-msgid "       Andy Kahn"
-msgstr "       Andy Kahn"
-
-#: src/gE_about.c:37
-msgid "       Miguel de Icaza"
-msgstr "       Miguel de Icaza"
-
-#: src/gE_about.c:38
-msgid "       Martin Baulig"
-msgstr "       Martin Baulig"
-
-#: src/gE_about.c:39
-msgid "       Thomas Holmgren"
-msgstr "       Thomas Holmgren"
-
-#: src/gE_about.c:40
-msgid "       Martijn van Beers"
-msgstr "       Martijn van Beers"
 
 #: src/gE_about.c:52
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
@@ -127,175 +92,216 @@ msgid "Paste"
 msgstr "Lim inn"
 
 #. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:66 src/gE_mdi.c:102 src/toolbar.c:42
+#: src/gE_document.c:66 src/gE_mdi.c:103 src/toolbar.c:42
 msgid "Save"
 msgstr "Lagre"
 
-#: src/gE_document.c:67 src/gE_mdi.c:103 src/toolbar.c:44
+#: src/gE_document.c:67 src/gE_mdi.c:104 src/toolbar.c:44
 msgid "Close"
 msgstr "Lukk"
 
-#. Print Settings
-#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:917
-#: src/gE_print.c:71 src/toolbar.c:46
+#: src/gE_document.c:68 src/gE_mdi.c:105 src/gE_print.c:71 src/toolbar.c:46
 msgid "Print"
 msgstr "Skriv ut"
 
-#: src/gE_document.c:70 src/gE_mdi.c:107
+#: src/gE_document.c:70 src/gE_mdi.c:108
 msgid "Open (swap) .c/.h file"
 msgstr "Åpne (bytt) .c/.h fil"
 
 #. line and column indicators
-#: src/gE_document.c:118
-msgid "Column:"
+#. tmp = gtk_label_new(_("Column:"));
+#. gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
+#. gtk_widget_show(tmp);
+#: src/gE_document.c:128
+#, fuzzy
+msgid "Column:\t0"
 msgstr "Kolonne:"
 
-#: src/gE_document.c:127
+#. box = gtk_hbox_new (FALSE, 1);
+#. gtk_widget_show (box);
+#: src/gE_document.c:141
 msgid "Line"
 msgstr "Linje"
 
-#: src/gE_mdi.c:64
+#: src/gE_mdi.c:65
 msgid "Find _Line..."
 msgstr "Finn _linje"
 
-#: src/gE_mdi.c:65
+#: src/gE_mdi.c:66
 msgid "Search for a line"
 msgstr "Søk etter en linje"
 
-#: src/gE_mdi.c:78
+#: src/gE_mdi.c:79
 msgid "_Add View"
 msgstr "_Legg til visning"
 
-#: src/gE_mdi.c:79
+#: src/gE_mdi.c:80
 msgid "Add a new view of the document"
 msgstr "Legg til en ny visning for dokumentet"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:81
 msgid "_Remove View"
 msgstr "Fje_rn visning"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:82
 msgid "Remove view of the document"
 msgstr "Fjern visning for dokumentet"
 
-#: src/gE_mdi.c:486
+#: src/gE_mdi.c:502
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' er endret. Vil du lagre det?"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:508
-#: src/gE_prefs_box.c:509 src/gE_prefs_box.c:559 src/gE_prefs_box.c:560
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:557
+#: src/gE_prefs_box.c:558 src/gE_prefs_box.c:608 src/gE_prefs_box.c:609
 #: src/menus.c:251
 msgid "_Plugins"
 msgstr "_Tillegg"
 
-#: src/gE_prefs_box.c:89
+#: src/gE_prefs_box.c:97
 msgid "Default"
 msgstr "Standard"
 
-#: src/gE_prefs_box.c:90
+#: src/gE_prefs_box.c:98
 msgid "Notebook"
 msgstr "Notisblokk"
 
-#: src/gE_prefs_box.c:91
+#: src/gE_prefs_box.c:99
 msgid "Toplevel"
 msgstr "Toppnivå"
 
-#: src/gE_prefs_box.c:92
+#: src/gE_prefs_box.c:100
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:251
+#: src/gE_prefs_box.c:272
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/gE_prefs_box.c:264
+#: src/gE_prefs_box.c:285
 msgid "Show Statusbar"
 msgstr "Vis statuslinje"
 
-#: src/gE_prefs_box.c:273
+#: src/gE_prefs_box.c:294
 msgid "Show Splitscreen"
 msgstr "Vis splittet skjerm"
 
-#: src/gE_prefs_box.c:282
+#: src/gE_prefs_box.c:303
 msgid "Editor Behavior"
 msgstr "Editorens oppførsel"
 
-#: src/gE_prefs_box.c:295
+#: src/gE_prefs_box.c:316
 msgid "Enable Autoindent"
 msgstr "Slå på autoindentering"
 
-#: src/gE_prefs_box.c:304
+#: src/gE_prefs_box.c:325
 msgid "Enable Wordwrap"
 msgstr "Slå på ordbryting"
 
-#: src/gE_prefs_box.c:324
+#. Document Closing stuffs
+#: src/gE_prefs_box.c:346
+#, fuzzy
+msgid "Document Settings"
+msgstr "_Dokumenttabulatorer"
+
+#. End of docyment closing stuffs
+#. Print COmmand
+#: src/gE_prefs_box.c:372
 msgid "Print Command"
 msgstr "Utskriftskommando"
 
-#: src/gE_prefs_box.c:414
+#: src/gE_prefs_box.c:463
 msgid "Current Font"
 msgstr "Aktiv skrifttype"
 
-#: src/gE_prefs_box.c:431
+#: src/gE_prefs_box.c:480
 msgid "Select..."
 msgstr "Marker..."
 
-#: src/gE_prefs_box.c:481
+#: src/gE_prefs_box.c:530
 msgid "Plugin Selector"
 msgstr "Valg av tillegg"
 
-#: src/gE_prefs_box.c:602
+#: src/gE_prefs_box.c:651
 msgid "Name"
 msgstr "Navn"
 
-#: src/gE_prefs_box.c:602
+#: src/gE_prefs_box.c:651
 msgid "Location"
 msgstr "Plassering"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:609 src/gE_prefs_box.c:927
+#: src/gE_prefs_box.c:658 src/gE_prefs_box.c:976
 msgid "Plugins"
 msgstr "Tillegg"
 
-#: src/gE_prefs_box.c:623
+#: src/gE_prefs_box.c:672
 msgid "Use Plugins"
 msgstr "Bruk tillegg"
 
-#: src/gE_prefs_box.c:690
+#: src/gE_prefs_box.c:739
 msgid "Add"
 msgstr "Legg til"
 
-#: src/gE_prefs_box.c:695
+#: src/gE_prefs_box.c:744
 msgid "Remove"
 msgstr "Fjern"
 
-#: src/gE_prefs_box.c:718
+#: src/gE_prefs_box.c:767
 msgid "MDI Mode"
 msgstr "MDI-modus"
 
-#: src/gE_prefs_box.c:773
+#: src/gE_prefs_box.c:822
 msgid "Window Size"
 msgstr "Vindustørrelse"
 
+#: src/gE_prefs_box.c:835
+#, fuzzy
+msgid "Current Width:"
+msgstr "Aktiv skrifttype"
+
+#: src/gE_prefs_box.c:856
+msgid "Startup Width:"
+msgstr ""
+
+#: src/gE_prefs_box.c:864 src/gE_prefs_box.c:904
+#, fuzzy
+msgid "Use Current"
+msgstr "Aktiv skrifttype"
+
+#: src/gE_prefs_box.c:876
+#, fuzzy
+msgid "Current Height:"
+msgstr "Aktiv skrifttype"
+
+#: src/gE_prefs_box.c:896
+msgid "Startup Height:"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:907
+#: src/gE_prefs_box.c:956
 msgid "General"
 msgstr "Generelt"
 
 #. Window Settings
-#: src/gE_prefs_box.c:912
+#: src/gE_prefs_box.c:961
 msgid "Window"
 msgstr "Vindu"
 
+#. Print Settings
+#: src/gE_prefs_box.c:966
+#, fuzzy
+msgid "Document"
+msgstr "_Dokumenttabulatorer"
+
 #. Font Settings
-#: src/gE_prefs_box.c:922
+#: src/gE_prefs_box.c:971
 msgid "Font"
 msgstr "Skrifttype"
 
 #. MDI Settings
-#: src/gE_prefs_box.c:932
+#: src/gE_prefs_box.c:981
 msgid "MDI"
 msgstr "MDI"
 
@@ -320,11 +326,11 @@ msgstr "Skriv ut likevel"
 msgid " Save, then print "
 msgstr " Lagre og skriv ut "
 
-#: src/gedit.c:126
+#: src/gedit.c:127
 msgid "Launch a plugin at startup"
 msgstr "Last plugin ved oppstart"
 
-#: src/gedit.c:126
+#: src/gedit.c:127
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAVN"
 
@@ -493,7 +499,7 @@ msgstr "La_gre instillinger"
 msgid "Save the current settings for future sessions"
 msgstr "Lagre nåværende innstillinger for fremtidige sesjoner"
 
-#: src/search.c:288
+#: src/search.c:289
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -502,55 +508,60 @@ msgstr ""
 "Totalt antall linjer: %i\n"
 "Nåværende linje: %i"
 
-#: src/search.c:310
+#: src/search.c:311
 msgid "Go to line"
 msgstr "Gå til linje"
 
-#: src/search.c:320
+#: src/search.c:321
 msgid "Line number"
 msgstr "Linjenummer"
 
-#: src/search.c:343
+#: src/search.c:344
 msgid "Search from cursor"
 msgstr "Søk fra markør"
 
-#: src/search.c:350
+#: src/search.c:351
 msgid "Search from beginning of document"
 msgstr "Søk fra begynnelsen av dokumentet"
 
-#: src/search.c:357
+#: src/search.c:358
 msgid "Search from end of document"
 msgstr "Søk fra slutten av dokumentet"
 
-#: src/search.c:364
+#: src/search.c:365
 msgid "Case sensitive"
 msgstr "Skill mellome store/små bokstaver"
 
-#: src/search.c:370
+#: src/search.c:371
 msgid "Reverse search"
 msgstr "Baklengs søk"
 
-#: src/search.c:382
+#: src/search.c:383
 msgid "Search"
 msgstr "Søk"
 
-#: src/search.c:387 src/search.c:415
+#: src/search.c:388 src/search.c:416
 msgid "Search for:"
 msgstr "Søk etter:"
 
-#: src/search.c:409
+#: src/search.c:410 src/search.c:411
 msgid "Replace"
 msgstr "Erstatt"
 
-#: src/search.c:425
+#: src/search.c:412
+#, fuzzy
+msgid "Replace all"
+msgstr "Erstatt"
+
+#: src/search.c:426
 msgid "Replace with:"
 msgstr "Erstatt med:"
 
-#: src/search.c:436
+#: src/search.c:437
 msgid "Ask before replacing"
 msgstr "Spør før du erstatter"
 
-#: src/search.c:629
+#: src/search.c:633
 msgid "Replace?"
 msgstr "Erstatt?"
 
@@ -605,3 +616,33 @@ msgstr "Avslutt"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "Avslutt programmet"
+
+#~ msgid "Alex Roberts"
+#~ msgstr "Alex Roberts"
+
+#~ msgid "Evan Lawrence"
+#~ msgstr "Evan Lawrence"
+
+#~ msgid "http://gedit.pn.org"
+#~ msgstr "http://gedit.pn.org"
+
+#~ msgid "       Will LaShell"
+#~ msgstr "       Will LaShell"
+
+#~ msgid "       Chris Lahey"
+#~ msgstr "       Chris Lahey"
+
+#~ msgid "       Andy Kahn"
+#~ msgstr "       Andy Kahn"
+
+#~ msgid "       Miguel de Icaza"
+#~ msgstr "       Miguel de Icaza"
+
+#~ msgid "       Martin Baulig"
+#~ msgstr "       Martin Baulig"
+
+#~ msgid "       Thomas Holmgren"
+#~ msgstr "       Thomas Holmgren"
+
+#~ msgid "       Martijn van Beers"
+#~ msgstr "       Martijn van Beers"
