@@ -37,7 +37,7 @@
 #include "gE_prefs.h"
 #include "search.h"
 #include "gE_plugin.h"
-#include "gE_icon.xpm"
+#include "../pixmaps/gE_icon.xpm"
 
 extern GList *plugins;
 gE_window *window;

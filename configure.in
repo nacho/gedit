@@ -77,6 +77,7 @@ macros/Makefile
 help/Makefile
 help/C/Makefile
 help/no/Makefile
+pixmaps/Makefile
 src/Makefile
 dnl gmodule-plugins/Makefile
 dnl gmodule-plugins/idl/Makefile
@@ -85,6 +86,6 @@ dnl gmodule-plugins/client/Makefile
 dnl gmodule-plugins/shell/Makefile
 dnl gmodule-plugins/launcher/Makefile
 dnl gmodule-plugins/hello/Makefile
-editor-plugins/Makefile
-editor-plugins/prm/Makefile
+dnl editor-plugins/Makefile
+dnl editor-plugins/prm/Makefile
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])

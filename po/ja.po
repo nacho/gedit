@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-03-08 19:59+0000\n"
+"POT-Creation-Date: 2000-04-02 15:42-0400\n"
 "PO-Revision-Date: 1999-06-05 12:08+0900\n"
 "Last-Translator: Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
 "Language-Team: Japanese <LL@li.org>\n"
@@ -13,109 +13,136 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-japan\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:64
+#: plugins/sample/sample.c:51
 msgid "Hello World"
 msgstr ""
 
-#: plugins/sample/sample.c:65
+#: plugins/sample/sample.c:52
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: src/commands.c:91
+#: plugins/time/time.c:96
+msgid "Insert Time"
+msgstr ""
+
+#: plugins/time/time.c:97
+#, fuzzy
+msgid "Inserts the current date and time"
+msgstr "現在編集中のファイルを閉じる"
+
+#: plugins/email/email.c:101
+msgid "The gEdit Email Plugin"
+msgstr ""
+
+#: plugins/email/email.c:202
+msgid "Email"
+msgstr ""
+
+#: plugins/email/email.c:203
+#, fuzzy
+msgid "Email the current document"
+msgstr "現在編集中のファイルを保存"
+
+#: src/commands.c:97
 msgid "Could not save file!"
 msgstr ""
 
-#: src/commands.c:364
+#: src/commands.c:371
 msgid "Open File..."
 msgstr "開くファイル名..."
 
-#: src/commands.c:418 src/commands.c:466
+#: src/commands.c:425 src/commands.c:473
 msgid "Read only file!"
 msgstr "読み込み専用のファイルです！"
 
-#: src/commands.c:505 src/commands.c:575
+#: src/commands.c:512 src/commands.c:582
 msgid "Error saving file!"
 msgstr "保存中にエラーが起きました！"
 
-#: src/commands.c:535
+#: src/commands.c:542
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr "保存するファイル名.."
 
-#: src/commands.c:608
+#: src/commands.c:615
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr "保存するファイル名.."
 
-#: src/commands.c:694
+#: src/commands.c:701
 #, fuzzy, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr "変更を全て取り消していいですか？"
 
-#: src/commands.c:742
+#: src/commands.c:749
 msgid "Document Unchanged..."
 msgstr "この文書は変更されていません..."
 
-#: src/commands.c:746
+#: src/commands.c:753
 msgid "Document Unsaved..."
 msgstr "この文書は保存されていません..."
 
-#: src/commands.c:928
+#: src/commands.c:937
 msgid "_File/"
 msgstr "ファイル(_F)/"
 
-#: src/commands.c:937 src/commands.c:938
+#: src/commands.c:946 src/commands.c:947
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: src/gE_about.c:36
+#: src/gE_about.c:39
 msgid "With special thanks to:"
 msgstr ""
 
-#: src/gE_about.c:47
+#: src/gE_about.c:54
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr ""
 
-#: src/gE_about.c:49
+#: src/gE_about.c:56
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
 
-#: src/gE_mdi.c:75
+#: src/gE_files.c:95
+#, fuzzy
+msgid "Can't open file!"
+msgstr "読み込み専用のファイルです！"
+
+#: src/gE_mdi.c:78
 msgid "Find _Line..."
 msgstr "指定行へ(_L)..."
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:79
 msgid "Search for a line"
 msgstr "指定された行を見付ける"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:84
 #, fuzzy
 msgid "Find _In Files..."
 msgstr "指定行へ(_L)..."
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:85
 msgid "Find text in all open files"
 msgstr ""
 
-#: src/gE_mdi.c:97
+#: src/gE_mdi.c:100
 msgid "_Add View"
 msgstr "ビューを追加(_A)"
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:101
 msgid "Add a new view of the document"
 msgstr "文書に新しいビューを追加"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:102
 msgid "_Remove View"
 msgstr "ビューを削除"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:103
 msgid "Remove view of the document"
 msgstr "文書のビューを削除する"
 
-#: src/gE_mdi.c:471
+#: src/gE_mdi.c:411
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr "'%s' は変更されています。保存しますか？"
@@ -142,308 +169,290 @@ msgstr ""
 msgid "_Plugins"
 msgstr "プラグイン(_P)"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Default"
 msgstr "デフォルト"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Notebook"
 msgstr "ノートブック"
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Toplevel"
 msgstr "トップレベル"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:106
 msgid "Modal"
 msgstr "モーダル"
 
-#: src/gE_prefs_box.c:332
+#: src/gE_prefs_box.c:337
 msgid "Appearance"
 msgstr "外見"
 
-#: src/gE_prefs_box.c:345
+#: src/gE_prefs_box.c:350
 msgid "Show Statusbar"
 msgstr "ステータスバーを表示"
 
-#: src/gE_prefs_box.c:354
+#: src/gE_prefs_box.c:359
 msgid "Show Splitscreen"
 msgstr "分割表示"
 
-#: src/gE_prefs_box.c:364
+#: src/gE_prefs_box.c:369
 msgid "Editor Behavior"
 msgstr "エディタの動作"
 
-#: src/gE_prefs_box.c:377
+#: src/gE_prefs_box.c:382
 msgid "Enable Autoindent"
 msgstr "自動字下げ"
 
-#: src/gE_prefs_box.c:381
+#: src/gE_prefs_box.c:386
 msgid "Enable Wordwrap"
 msgstr "単語の次行送り"
 
-#: src/gE_prefs_box.c:403
+#: src/gE_prefs_box.c:408
 msgid "Text Background"
 msgstr ""
 
-#: src/gE_prefs_box.c:424
+#: src/gE_prefs_box.c:429
 msgid "Text Foreground"
 msgstr ""
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:487
+#: src/gE_prefs_box.c:498
 #, fuzzy
 msgid "Document Settings"
 msgstr "つまみの位置(_D)"
 
-#: src/gE_prefs_box.c:501
+#: src/gE_prefs_box.c:512
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:507
+#: src/gE_prefs_box.c:518
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:516
+#: src/gE_prefs_box.c:527
 msgid "Current Font"
 msgstr "フォント"
 
-#: src/gE_prefs_box.c:533
+#: src/gE_prefs_box.c:544
 msgid "Select..."
 msgstr "選択..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:549
+#: src/gE_prefs_box.c:560
 msgid "Print Command"
 msgstr "印刷コマンド"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:607
+#: src/gE_prefs_box.c:620
 msgid "Window Size"
 msgstr "ウインドウの大きさ"
 
-#: src/gE_prefs_box.c:620
+#: src/gE_prefs_box.c:633
 #, fuzzy
 msgid "Current Width:"
 msgstr "フォント"
 
-#: src/gE_prefs_box.c:640
+#: src/gE_prefs_box.c:653
 msgid "Startup Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
+#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
 #, fuzzy
 msgid "Use Current"
 msgstr "フォント"
 
-#: src/gE_prefs_box.c:660
+#: src/gE_prefs_box.c:673
 #, fuzzy
 msgid "Current Height:"
 msgstr "フォント"
 
-#: src/gE_prefs_box.c:680
+#: src/gE_prefs_box.c:693
 msgid "Startup Height:"
 msgstr ""
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:696
+#: src/gE_prefs_box.c:709
 msgid "MDI Mode"
 msgstr "MDIモード"
 
 #. General Settings
-#: src/gE_prefs_box.c:766
+#: src/gE_prefs_box.c:780
 msgid "General"
 msgstr "一般"
 
 #. Window Settings
-#: src/gE_prefs_box.c:771
+#: src/gE_prefs_box.c:785
 msgid "Window"
 msgstr "ウインドウ"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:776
+#: src/gE_prefs_box.c:790
 #, fuzzy
 msgid "Document"
 msgstr "つまみの位置(_D)"
 
-#: src/gE_print.c:73 src/gE_view.c:48
-msgid "Print"
-msgstr "印刷"
-
-#: src/gE_print.c:86
+#: src/gE_print.c:175
 #, c-format
-msgid ""
-"Enter print command below\n"
-"Remember to include '%s'"
-msgstr ""
-"印刷に使用するコマンドを入力して下さい\n"
-"コマンド行には忘れずに '%s' を含めて下さい"
-
-#: src/gE_print.c:94
-msgid "Print Command:"
-msgstr "印刷コマンド"
-
-#: src/gE_print.c:235
-msgid "Print anyway"
-msgstr "そのまま印刷"
-
-#: src/gE_print.c:235
-msgid " Save, then print "
-msgstr "保存してから印刷"
-
-#: src/gE_print.c:235
-msgid "Cancel"
+msgid "gEdit (%s): Print Preview"
 msgstr ""
 
-#: src/menus.c:66
+#: src/gE_print.c:277
+#, c-format
+msgid "Page: %i/%i"
+msgstr ""
+
+#: src/menus.c:71
 msgid "_Autoindent"
 msgstr "自動字下げ(_A)"
 
-#: src/menus.c:67
+#: src/menus.c:72
 msgid "Status_bar"
 msgstr "ステータスバー(_B)"
 
-#: src/menus.c:68
+#: src/menus.c:73
 msgid "_Wordwrap"
 msgstr "単語の次行送り(_W)"
 
-#: src/menus.c:69
+#: src/menus.c:74
 msgid "_Linewrap"
 msgstr "行送り(_L)"
 
-#: src/menus.c:70
+#: src/menus.c:75
 msgid "_Readonly"
 msgstr "読出し専用"
 
-#: src/menus.c:71
+#: src/menus.c:76
 msgid "_Splitscreen"
 msgstr "分割表示(_S)"
 
-#: src/menus.c:72
+#: src/menus.c:77
 msgid "_Show tabs"
 msgstr ""
 
-#: src/menus.c:73
+#: src/menus.c:78
 msgid "Toolbar _relief"
 msgstr ""
 
-#: src/menus.c:74
+#: src/menus.c:79
 msgid "_Show tooltips"
 msgstr ""
 
-#: src/menus.c:75
+#: src/menus.c:80
 msgid "Show toolbar _text"
 msgstr ""
 
-#: src/menus.c:76
+#: src/menus.c:81
 msgid "Show toolbar _icons"
 msgstr ""
 
 #. and this one is the default file name
-#: src/menus.c:78
+#: src/menus.c:83
 msgid "Untitled"
 msgstr "名前無し"
 
-#: src/menus.c:87
+#: src/menus.c:89
 msgid "_New"
 msgstr "新規(_N)"
 
-#: src/menus.c:87
+#: src/menus.c:89
 msgid "Create a new document"
 msgstr "新規文書を作る"
 
-#: src/menus.c:94
+#: src/menus.c:96
 #, fuzzy
 msgid "Save All"
 msgstr "保存するファイル名.."
 
-#: src/menus.c:94
+#: src/menus.c:96
 #, fuzzy
 msgid "Save All Open Files"
 msgstr "現在編集中のファイルを保存"
 
-#: src/menus.c:99
+#: src/menus.c:101
 msgid "Revert"
 msgstr "元に戻す"
 
-#: src/menus.c:109
+#: src/menus.c:111
 #, fuzzy
 msgid "Close All"
 msgstr "閉じる"
 
-#: src/menus.c:109
+#: src/menus.c:111
 #, fuzzy
 msgid "Close All Open Files"
 msgstr "現在編集中のファイルを閉じる"
 
-#: src/menus.c:122
+#: src/menus.c:124
 msgid "_Top"
 msgstr "上(_T)"
 
-#: src/menus.c:123
+#: src/menus.c:125
 msgid "Put the document tabs at the top"
 msgstr "つまみをウインドウの上に"
 
-#: src/menus.c:126
+#: src/menus.c:128
 msgid "_Bottom"
 msgstr "下(_B)"
 
-#: src/menus.c:127
+#: src/menus.c:129
 msgid "Put the document tabs at the bottom"
 msgstr "つまみをウインドウの下へ"
 
-#: src/menus.c:130
+#: src/menus.c:132
 msgid "_Left"
 msgstr "左(_L)"
 
-#: src/menus.c:131
+#: src/menus.c:133
 msgid "Put the document tabs on the left"
 msgstr "つまみをウインドウの左へ"
 
-#: src/menus.c:134
+#: src/menus.c:136
 msgid "_Right"
 msgstr "右(_R)"
 
-#: src/menus.c:135
+#: src/menus.c:137
 msgid "Put the document tabs on the right"
 msgstr "つまみをウインドウの右へ"
 
-#: src/menus.c:174
+#: src/menus.c:176
 msgid "Toggle Readonly"
 msgstr "読出し専用(トグル)"
 
-#: src/menus.c:185
+#: src/menus.c:187
 msgid "_Document Tabs"
 msgstr "つまみの位置(_D)"
 
-#: src/menus.c:186
+#: src/menus.c:188
 msgid "Change the placement of the document tabs"
 msgstr "つまみを表示する位置を変更"
 
-#: src/menus.c:190
+#: src/menus.c:192
 msgid "Sa_ve Settings"
 msgstr "設定を保存(_V)"
 
-#: src/menus.c:191
+#: src/menus.c:193
 msgid "Save the current settings for future sessions"
 msgstr "設定を次回からも有効にする"
 
-#: src/search.c:412
+#: src/search.c:415
 msgid "Find In Files"
 msgstr ""
 
-#: src/search.c:413 src/search.c:862
+#. GtkWidget *radio, *check;
+#: src/search.c:416 src/search.c:836 src/search.c:837
 msgid "Search"
 msgstr "検索"
 
-#: src/search.c:417 src/search.c:867 src/search.c:895
+#: src/search.c:420 src/search.c:841 src/search.c:870
 msgid "Search for:"
 msgstr "検索対象:"
 
-#: src/search.c:768
+#: src/search.c:740
 #, fuzzy, c-format
 msgid ""
 "Filename: %s\n"
@@ -454,66 +463,87 @@ msgstr ""
 "合計: %i 行\n"
 "現在: %i 行"
 
-#: src/search.c:790
+#: src/search.c:762
 msgid "Go to line"
 msgstr "指定行へ移動"
 
-#: src/search.c:800
+#: src/search.c:772
 msgid "Line number"
 msgstr "行番号"
 
-#: src/search.c:823
+#: src/search.c:795
 msgid "Search from cursor"
 msgstr "カーソル位置から検索"
 
-#: src/search.c:830
+#: src/search.c:802
 msgid "Search from beginning of document"
 msgstr "文書の最初から検索"
 
-#: src/search.c:837
+#: src/search.c:809
 msgid "Search from end of document"
 msgstr "文書の最後から検索"
 
-#: src/search.c:844
+#: src/search.c:816
 msgid "Case sensitive"
 msgstr "大文字小文字の区別"
 
-#: src/search.c:850
+#: src/search.c:822
 msgid "Reverse search"
 msgstr "後向き検索"
 
-#: src/search.c:889 src/search.c:890
+#. GtkWidget *radio;
+#: src/search.c:864 src/search.c:865
 msgid "Replace"
 msgstr "置換"
 
-#: src/search.c:891
+#: src/search.c:866
 #, fuzzy
 msgid "Replace all"
 msgstr "置換"
 
-#: src/search.c:905
+#: src/search.c:880
 msgid "Replace with:"
 msgstr "置換対象:"
 
-#: src/search.c:916
+#: src/search.c:891
 msgid "Ask before replacing"
 msgstr "置換前に確認"
 
-#: src/search.c:1115
+#: src/search.c:1096
 msgid "Replace?"
 msgstr "置換しますか？"
 
-#: src/gE_view.c:46
+#: src/gE_view.c:43
 msgid "Save"
 msgstr "保存"
 
-#: src/gE_view.c:47
+#: src/gE_view.c:44
 msgid "Close"
 msgstr "閉じる"
 
-#: src/gE_view.c:51
+#: src/gE_view.c:45
+msgid "Print"
+msgstr "印刷"
+
+#: src/gE_view.c:49
 msgid "Open (swap) .c/.h file"
 msgstr "対応する .c/.h ファイルを開く"
+
+#~ msgid ""
+#~ "Enter print command below\n"
+#~ "Remember to include '%s'"
+#~ msgstr ""
+#~ "印刷に使用するコマンドを入力して下さい\n"
+#~ "コマンド行には忘れずに '%s' を含めて下さい"
+
+#~ msgid "Print Command:"
+#~ msgstr "印刷コマンド"
+
+#~ msgid "Print anyway"
+#~ msgstr "そのまま印刷"
+
+#~ msgid " Save, then print "
+#~ msgstr "保存してから印刷"
 
 #~ msgid "Plugin Selector"
 #~ msgstr "プラグインの選択"
@@ -580,12 +610,6 @@ msgstr "対応する .c/.h ファイルを開く"
 
 #~ msgid "Open a file"
 #~ msgstr "ファイルを開く"
-
-#~ msgid "Save the current file"
-#~ msgstr "現在編集中のファイルを保存"
-
-#~ msgid "Close the current file"
-#~ msgstr "現在編集中のファイルを閉じる"
 
 #~ msgid "Print the current file"
 #~ msgstr "現在編集中のファイルを印刷"

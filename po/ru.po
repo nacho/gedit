@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-03-08 19:59+0000\n"
+"POT-Creation-Date: 2000-04-02 15:42-0400\n"
 "PO-Revision-Date: 2000-01-09 18:55+03:00\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -11,41 +11,61 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:64
+#: plugins/sample/sample.c:51
 msgid "Hello World"
 msgstr ""
 
-#: plugins/sample/sample.c:65
+#: plugins/sample/sample.c:52
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: src/commands.c:91
+#: plugins/time/time.c:96
+msgid "Insert Time"
+msgstr ""
+
+#: plugins/time/time.c:97
+msgid "Inserts the current date and time"
+msgstr ""
+
+#: plugins/email/email.c:101
+msgid "The gEdit Email Plugin"
+msgstr "gEdit дополнение, электронная почта"
+
+#: plugins/email/email.c:202
+msgid "Email"
+msgstr ""
+
+#: plugins/email/email.c:203
+msgid "Email the current document"
+msgstr ""
+
+#: src/commands.c:97
 msgid "Could not save file!"
 msgstr "Невозможно сохранить файл!"
 
-#: src/commands.c:364
+#: src/commands.c:371
 msgid "Open File..."
 msgstr "Открыть файл..."
 
-#: src/commands.c:418 src/commands.c:466
+#: src/commands.c:425 src/commands.c:473
 msgid "Read only file!"
 msgstr "Файл защищен от записи!"
 
-#: src/commands.c:505 src/commands.c:575
+#: src/commands.c:512 src/commands.c:582
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/commands.c:535
+#: src/commands.c:542
 #, c-format
 msgid "Save %s As..."
 msgstr "Сохранить %s как..."
 
-#: src/commands.c:608
+#: src/commands.c:615
 #, c-format
 msgid "Save %s As ..."
 msgstr "Сохранить %s как..."
 
-#: src/commands.c:694
+#: src/commands.c:701
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -54,67 +74,72 @@ msgstr ""
 "Вы уверены, что хотите отказаться ото всех изменений?\n"
 "(%s)"
 
-#: src/commands.c:742
+#: src/commands.c:749
 msgid "Document Unchanged..."
 msgstr "Документ не изменен..."
 
-#: src/commands.c:746
+#: src/commands.c:753
 msgid "Document Unsaved..."
 msgstr "Документ не сохранен..."
 
-#: src/commands.c:928
+#: src/commands.c:937
 msgid "_File/"
 msgstr "Файл/"
 
-#: src/commands.c:937 src/commands.c:938
+#: src/commands.c:946 src/commands.c:947
 msgid "_File"
 msgstr "Файл"
 
-#: src/gE_about.c:36
+#: src/gE_about.c:39
 msgid "With special thanks to:"
 msgstr "С особой признательностью:"
 
-#: src/gE_about.c:47
+#: src/gE_about.c:54
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(С) 1998б 1999 Alex Roberts и Evan Lawrence"
 
-#: src/gE_about.c:49
+#: src/gE_about.c:56
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
-#: src/gE_mdi.c:75
+#: src/gE_files.c:95
+#, fuzzy
+msgid "Can't open file!"
+msgstr "Файл защищен от записи!"
+
+#: src/gE_mdi.c:78
 msgid "Find _Line..."
 msgstr "Найти строку..."
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:79
 msgid "Search for a line"
 msgstr "Поиск строки"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:84
 msgid "Find _In Files..."
 msgstr "Найти в файлах..."
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:85
 msgid "Find text in all open files"
 msgstr "Искать текст во всех открытых файлах"
 
-#: src/gE_mdi.c:97
+#: src/gE_mdi.c:100
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:101
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:102
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:103
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/gE_mdi.c:471
+#: src/gE_mdi.c:411
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
@@ -141,299 +166,281 @@ msgstr ""
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Default"
 msgstr "По умолчанию"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Notebook"
 msgstr "Блокнот"
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Toplevel"
 msgstr "Верхний край"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:106
 msgid "Modal"
 msgstr "Модальный"
 
-#: src/gE_prefs_box.c:332
+#: src/gE_prefs_box.c:337
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: src/gE_prefs_box.c:345
+#: src/gE_prefs_box.c:350
 msgid "Show Statusbar"
 msgstr "Показать строку состояния"
 
-#: src/gE_prefs_box.c:354
+#: src/gE_prefs_box.c:359
 msgid "Show Splitscreen"
 msgstr "Разделенный экран"
 
-#: src/gE_prefs_box.c:364
+#: src/gE_prefs_box.c:369
 msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
-#: src/gE_prefs_box.c:377
+#: src/gE_prefs_box.c:382
 msgid "Enable Autoindent"
 msgstr "Включить Автовыравнивание"
 
-#: src/gE_prefs_box.c:381
+#: src/gE_prefs_box.c:386
 msgid "Enable Wordwrap"
 msgstr "Включить перевод строк"
 
-#: src/gE_prefs_box.c:403
+#: src/gE_prefs_box.c:408
 msgid "Text Background"
 msgstr ""
 
-#: src/gE_prefs_box.c:424
+#: src/gE_prefs_box.c:429
 msgid "Text Foreground"
 msgstr ""
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:487
+#: src/gE_prefs_box.c:498
 msgid "Document Settings"
 msgstr "Настройки документа"
 
-#: src/gE_prefs_box.c:501
+#: src/gE_prefs_box.c:512
 msgid "New Document After Closing Last"
 msgstr "Создавать новый документ при закрытии последнего"
 
-#: src/gE_prefs_box.c:507
+#: src/gE_prefs_box.c:518
 msgid "Close Window After Closing Last"
 msgstr "Закрывать окно при закрытии последнего документа"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:516
+#: src/gE_prefs_box.c:527
 msgid "Current Font"
 msgstr "Текущий шрифт"
 
-#: src/gE_prefs_box.c:533
+#: src/gE_prefs_box.c:544
 msgid "Select..."
 msgstr "Выделить..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:549
+#: src/gE_prefs_box.c:560
 msgid "Print Command"
 msgstr "Команда печати"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:607
+#: src/gE_prefs_box.c:620
 msgid "Window Size"
 msgstr "Размер окна"
 
-#: src/gE_prefs_box.c:620
+#: src/gE_prefs_box.c:633
 msgid "Current Width:"
 msgstr "Текущая ширина"
 
-#: src/gE_prefs_box.c:640
+#: src/gE_prefs_box.c:653
 msgid "Startup Width:"
 msgstr "Ширина при запуске:"
 
-#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
+#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
 msgid "Use Current"
 msgstr "Использовать текущую"
 
-#: src/gE_prefs_box.c:660
+#: src/gE_prefs_box.c:673
 msgid "Current Height:"
 msgstr "Текущая высота:"
 
-#: src/gE_prefs_box.c:680
+#: src/gE_prefs_box.c:693
 msgid "Startup Height:"
 msgstr "Высота при запуске:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:696
+#: src/gE_prefs_box.c:709
 msgid "MDI Mode"
 msgstr "Режим MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:766
+#: src/gE_prefs_box.c:780
 msgid "General"
 msgstr "Общие"
 
 #. Window Settings
-#: src/gE_prefs_box.c:771
+#: src/gE_prefs_box.c:785
 msgid "Window"
 msgstr "Окно"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:776
+#: src/gE_prefs_box.c:790
 msgid "Document"
 msgstr "Документ"
 
-#: src/gE_print.c:73 src/gE_view.c:48
-msgid "Print"
-msgstr "Печать"
-
-#: src/gE_print.c:86
+#: src/gE_print.c:175
 #, c-format
-msgid ""
-"Enter print command below\n"
-"Remember to include '%s'"
-msgstr ""
-"Введите команду печати\n"
-"и не забудте добавить '%s'"
-
-#: src/gE_print.c:94
-msgid "Print Command:"
-msgstr "Команда печати:"
-
-#: src/gE_print.c:235
-msgid "Print anyway"
-msgstr "Печатать не смотря ни на что"
-
-#: src/gE_print.c:235
-msgid " Save, then print "
-msgstr " Сохранить, затем печатать "
-
-#: src/gE_print.c:235
-msgid "Cancel"
-msgstr "Отмена"
-
-#: src/menus.c:66
-msgid "_Autoindent"
-msgstr "Автовыравнивание"
-
-#: src/menus.c:67
-msgid "Status_bar"
-msgstr "Строка состояния"
-
-#: src/menus.c:68
-msgid "_Wordwrap"
-msgstr "Перенос строк"
-
-#: src/menus.c:69
-msgid "_Linewrap"
+msgid "gEdit (%s): Print Preview"
 msgstr ""
 
-#: src/menus.c:70
-msgid "_Readonly"
+#: src/gE_print.c:277
+#, c-format
+msgid "Page: %i/%i"
 msgstr ""
 
 #: src/menus.c:71
-msgid "_Splitscreen"
-msgstr "Разделенный экран"
+msgid "_Autoindent"
+msgstr "Автовыравнивание"
 
 #: src/menus.c:72
-msgid "_Show tabs"
-msgstr " показывать табуляцию"
+msgid "Status_bar"
+msgstr "Строка состояния"
 
 #: src/menus.c:73
-msgid "Toolbar _relief"
-msgstr ""
+msgid "_Wordwrap"
+msgstr "Перенос строк"
 
 #: src/menus.c:74
-msgid "_Show tooltips"
-msgstr "Показать подсказки"
+msgid "_Linewrap"
+msgstr ""
 
 #: src/menus.c:75
-msgid "Show toolbar _text"
+msgid "_Readonly"
 msgstr ""
 
 #: src/menus.c:76
+msgid "_Splitscreen"
+msgstr "Разделенный экран"
+
+#: src/menus.c:77
+msgid "_Show tabs"
+msgstr " показывать табуляцию"
+
+#: src/menus.c:78
+msgid "Toolbar _relief"
+msgstr ""
+
+#: src/menus.c:79
+msgid "_Show tooltips"
+msgstr "Показать подсказки"
+
+#: src/menus.c:80
+msgid "Show toolbar _text"
+msgstr ""
+
+#: src/menus.c:81
 msgid "Show toolbar _icons"
 msgstr ""
 
 #. and this one is the default file name
-#: src/menus.c:78
+#: src/menus.c:83
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: src/menus.c:87
+#: src/menus.c:89
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:87
+#: src/menus.c:89
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
-#: src/menus.c:94
+#: src/menus.c:96
 msgid "Save All"
 msgstr "Сохранить все"
 
-#: src/menus.c:94
+#: src/menus.c:96
 msgid "Save All Open Files"
 msgstr "Сохранить все открытые файлы"
 
-#: src/menus.c:99
+#: src/menus.c:101
 msgid "Revert"
 msgstr ""
 
-#: src/menus.c:109
+#: src/menus.c:111
 msgid "Close All"
 msgstr "Закрыть Все"
 
-#: src/menus.c:109
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Закрыть все открытые файлы"
 
-#: src/menus.c:122
+#: src/menus.c:124
 msgid "_Top"
 msgstr "Сверху"
 
-#: src/menus.c:123
+#: src/menus.c:125
 msgid "Put the document tabs at the top"
 msgstr ""
 
-#: src/menus.c:126
+#: src/menus.c:128
 msgid "_Bottom"
 msgstr "Снизу"
 
-#: src/menus.c:127
+#: src/menus.c:129
 msgid "Put the document tabs at the bottom"
 msgstr ""
 
-#: src/menus.c:130
+#: src/menus.c:132
 msgid "_Left"
 msgstr "Слева"
 
-#: src/menus.c:131
+#: src/menus.c:133
 msgid "Put the document tabs on the left"
 msgstr ""
 
-#: src/menus.c:134
+#: src/menus.c:136
 msgid "_Right"
 msgstr "Справа"
 
-#: src/menus.c:135
+#: src/menus.c:137
 msgid "Put the document tabs on the right"
 msgstr ""
 
-#: src/menus.c:174
+#: src/menus.c:176
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:185
+#: src/menus.c:187
 msgid "_Document Tabs"
 msgstr ""
 
-#: src/menus.c:186
+#: src/menus.c:188
 msgid "Change the placement of the document tabs"
 msgstr ""
 
-#: src/menus.c:190
+#: src/menus.c:192
 msgid "Sa_ve Settings"
 msgstr "Сохранить Настройки"
 
-#: src/menus.c:191
+#: src/menus.c:193
 msgid "Save the current settings for future sessions"
 msgstr "Сохранить текущие настройки"
 
-#: src/search.c:412
+#: src/search.c:415
 msgid "Find In Files"
 msgstr "Поиск в файлах"
 
-#: src/search.c:413 src/search.c:862
+#. GtkWidget *radio, *check;
+#: src/search.c:416 src/search.c:836 src/search.c:837
 msgid "Search"
 msgstr "Поиск"
 
-#: src/search.c:417 src/search.c:867 src/search.c:895
+#: src/search.c:420 src/search.c:841 src/search.c:870
 msgid "Search for:"
 msgstr ""
 
-#: src/search.c:768
+#: src/search.c:740
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -442,68 +449,89 @@ msgid ""
 "Current Line: %i"
 msgstr ""
 
-#: src/search.c:790
+#: src/search.c:762
 msgid "Go to line"
 msgstr "Перейти к строке"
 
-#: src/search.c:800
+#: src/search.c:772
 msgid "Line number"
 msgstr "Номер строки"
 
-#: src/search.c:823
+#: src/search.c:795
 msgid "Search from cursor"
 msgstr "Поиск от позиции курсора"
 
-#: src/search.c:830
+#: src/search.c:802
 msgid "Search from beginning of document"
 msgstr "Поиск от начала документа"
 
-#: src/search.c:837
+#: src/search.c:809
 msgid "Search from end of document"
 msgstr "Поиск с конца документа"
 
-#: src/search.c:844
+#: src/search.c:816
 msgid "Case sensitive"
 msgstr "Чувствительный к регистру"
 
-#: src/search.c:850
+#: src/search.c:822
 msgid "Reverse search"
 msgstr "Обратный поиск"
 
-#: src/search.c:889 src/search.c:890
+#. GtkWidget *radio;
+#: src/search.c:864 src/search.c:865
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/search.c:891
+#: src/search.c:866
 msgid "Replace all"
 msgstr "Заменить все"
 
-#: src/search.c:905
+#: src/search.c:880
 msgid "Replace with:"
 msgstr "Заменить на:"
 
-#: src/search.c:916
+#: src/search.c:891
 msgid "Ask before replacing"
 msgstr "Спрашивать перед заменой"
 
-#: src/search.c:1115
+#: src/search.c:1096
 msgid "Replace?"
 msgstr "Заменить?"
 
-#: src/gE_view.c:46
+#: src/gE_view.c:43
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/gE_view.c:47
+#: src/gE_view.c:44
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/gE_view.c:51
+#: src/gE_view.c:45
+msgid "Print"
+msgstr "Печать"
+
+#: src/gE_view.c:49
 msgid "Open (swap) .c/.h file"
 msgstr ""
 
-#~ msgid "The gEdit Email Plugin"
-#~ msgstr "gEdit дополнение, электронная почта"
+#~ msgid ""
+#~ "Enter print command below\n"
+#~ "Remember to include '%s'"
+#~ msgstr ""
+#~ "Введите команду печати\n"
+#~ "и не забудте добавить '%s'"
+
+#~ msgid "Print Command:"
+#~ msgstr "Команда печати:"
+
+#~ msgid "Print anyway"
+#~ msgstr "Печатать не смотря ни на что"
+
+#~ msgid " Save, then print "
+#~ msgstr " Сохранить, затем печатать "
+
+#~ msgid "Cancel"
+#~ msgstr "Отмена"
 
 #~ msgid "The gEdit Web Browse Plugin"
 #~ msgstr "gEdit дополнение, web-навигатор"
