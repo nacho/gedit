@@ -56,7 +56,7 @@ extern void tab_rgt_cb(GtkWidget *widget, gpointer cbwindow);
 extern void tab_toggle_cb(GtkWidget *widget, gpointer cbwindow);
 
 /* Auto indent */
-extern gint auto_indent_cb(GtkWidget *, GdkEventKey *, gE_window *);
+extern gint auto_indent_cb(GtkWidget *text, char *insertion_text, int length, int *pos, gE_window *window);
 extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);
 extern gint gE_event_button_press(GtkWidget *w, GdkEventButton *, gE_window *);
 

@@ -1,3 +1,11 @@
+1999-01-09  Evan Lawrence <evan@worldpath.net>
+
+	* src/commands.[ch]:
+	  src/gE_document.c: Switched the auto_indent callback to connect to
+	  the insert_text signal instead of key_press_event - problems with
+	  the notebook intercepting the signal vs. the keyboard accelerator's
+	  not working should be fixed.
+
 1999-01-08  Nat Friedman  <nat@nat.org>
 
 	* src/menus.c: Added accelerators to the toggles.

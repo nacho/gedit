@@ -352,7 +352,8 @@ auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 }
 
 gint
-auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
+auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
+	int *pos, gE_window *window)
 {
 	int i, newlines, newline_1 = 0;
 	gchar *buffer, *whitespace;
@@ -363,7 +364,7 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 	data->window = window;
 	line_pos_cb(NULL, data);
 
-	if (event->keyval != GDK_Return)
+	if ((length != 1) || (insertion_text[0] != '\n'))
 		return FALSE;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
 		return FALSE;
@@ -371,7 +372,7 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 		return FALSE;
 
 	newlines = 0;
-	for (i = GTK_EDITABLE (text)->current_pos; i > 0; i--)
+	for (i = *pos; i > 0; i--)
 	{
 		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
 		if (buffer == NULL)
@@ -412,14 +413,14 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 
 	if (strlen(whitespace) > 0)
 	{
-		i = GTK_EDITABLE (text)->current_pos;
+		i = *pos;
 		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);
 	}
 	
 	g_free (whitespace);
 	data->temp2 = text;
 	line_pos_cb(NULL, data); /* <-- this is so the statusbar updates when it auto-indents */
-	return FALSE;
+	return TRUE;
 }
 
 
