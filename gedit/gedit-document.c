@@ -486,7 +486,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 {
 	char* file_contents;
 	GnomeVFSResult res;
-   	int file_size;
+   	gsize file_size;
 	GtkTextIter iter, end;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -507,10 +507,35 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	{
 		if (!g_utf8_validate (file_contents, file_size, NULL))
 		{
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
-				_("Invalid UTF-8 data encountered reading file"));
+			/* The file contains invalid UTF8 data */
+			/* Try to convert it to UTF-8 from currence locale */
+			GError *conv_error = NULL;
+			gchar* converted_file_contents = NULL;
+			gsize bytes_written;
+			
+			converted_file_contents = g_locale_to_utf8 (file_contents, file_size,
+					NULL, &bytes_written, &conv_error); 
+			
 			g_free (file_contents);
-			return FALSE;
+
+			if ((conv_error != NULL) || 
+			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
+			{
+				/* Coversion failed */	
+				if (conv_error != NULL)
+					g_error_free (conv_error);
+
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
+				_("Invalid UTF-8 data encountered reading file"));
+				
+				if (converted_file_contents != NULL)
+					g_free (converted_file_contents);
+				
+				return FALSE;
+			}
+
+			file_contents = converted_file_contents;
+			file_size = bytes_written;
 		}
 
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);

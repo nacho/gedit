@@ -147,7 +147,7 @@ gedit_mdi_child_finalize (GObject *obj)
 {
 	GeditMDIChild *child;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI, "START");
 
 	g_return_if_fail (obj != NULL);
 	
@@ -159,6 +159,8 @@ gedit_mdi_child_finalize (GObject *obj)
 	G_OBJECT_CLASS (parent_class)->finalize (obj);
 
 	g_free (child->priv);
+
+	gedit_debug (DEBUG_MDI, "END");
 }
 
 static void 
@@ -345,10 +347,6 @@ gedit_mdi_child_create_view (BonoboMDIChild *child)
 
 	new_view = gedit_view_new (GEDIT_MDI_CHILD (child)->document);
 
-#if 0   /* FIXME */
-	gedit_view_set_font (new_view, settings->font);
-	gedit_view_set_readonly (new_view, GEDIT_DOCUMENT (child)->readonly);
-#endif
 	gtk_widget_show_all (GTK_WIDGET (new_view));
 
 	return GTK_WIDGET (new_view);

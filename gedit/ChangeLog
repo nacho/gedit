@@ -1,3 +1,34 @@
+2001-12-09  Paolo Maggi  <maggi@athena.polito.it>
+
+	* bonobo-mdi.child.c (bonobo_mdi_child_instance_init): ref and sink mdi_child
+
+	* bonobo-mdi.c (bonobo_mdi_instance_init): ref and sink mdi
+	(book_motion)(book_button_press)(book_button_release): fix a bug related to
+	GtkNotebook being NO_WINDOW
+	(set_active_view): call gtk_widget_grab_focus on the view
+	(bonobo_mdi_set_active_view): removed a call to gtk_widget_grab_focus
+
+	* gedit-document.c (gedit_document_load): try to convert file contents to UTF8
+	from current locale if the file contains invalid UTF8 data
+
+	* gedit-file.c (gedit_file_exit): save prefs before unreffing gedit_mdi
+	(gedit_file_open_uri_list): passes the active child to gedit_file_open_real
+
+	* gedit-mdi-child.c (gedit_mdi_child_create_view): removed unused old code
+
+	* gedit-mdi.c (gedit_mdi_update_ui_according_to_preferences): set selected 
+	text colors
+	(gedit_mdi_init): fix a leak
+	
+	* gedit-prefs.[ch]: added prefs for selected text colors
+
+	* gedit-view.c (gedit_view_grab_focus): yeah, now we have a red blinking cursor
+	(gedit_view_init)(gedit_view_set_colors): set selected text colors
+
+	* dialogs/gedit-dialog-uri.c: ativate Open button when ENTER is pressed
+
+	* dialogs/gedit-preferences-dialog.c: added support for selected text colors
+
 2001-12-08  Abel Cheung  <maddog@linux.org.hk>
 
 	* gedit-file.c: Fixed misspellings.
@@ -175,7 +206,7 @@
 
 	* gedit2.c (gedit_load_file_list): now calls gedit_file_open_from_stdin (NULL)
 
-2001-11-16  Carlos Perelló Marín <carlos@gnome-db.org>
+2001-11-16  Carlos PerellÃ³ MarÃ­n <carlos@gnome-db.org>
 
 	* gedit2.c: Added support to AM_GLIB_GNU_GETTEXT
 	* gedit-recent.c, gedit-utils.c, gedit-document.c, gedit-file.c:
@@ -185,6 +216,6 @@
 
 	* Started the port to GNOME 2.0
 
-2001-11-16  Carlos Perelló Marín <carlos@gnome-db.org>
+2001-11-16  Carlos PerellÃ³ MarÃ­n <carlos@gnome-db.org>
 
 	* ChangeLog: rolled over to ChangeLog-20011116.

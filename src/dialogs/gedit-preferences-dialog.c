@@ -50,6 +50,10 @@
 #define UNDO_SETTINGS		4
 #define WRAP_MODE_SETTINGS	8
 
+/*
+#define DEBUG_MDI_PREFS
+*/
+
 enum
 {
 	CATEGORY_COLUMN = 0,
@@ -80,17 +84,20 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*statusbar_show_radiobutton;
 	GtkWidget	*statusbar_hide_radiobutton;
 
+#ifdef DEBUG_MDI_PREFS	
 	/*MDI page */
 	GtkWidget	*mdi_mode_optionmenu;
 	GtkWidget	*mdi_tab_pos_optionmenu;
 	GtkWidget	*mdi_tab_pos_label;
-
+#endif
 	/* Font & Colors page */
 	GtkWidget	*default_font_checkbutton;
 	GtkWidget	*default_colors_checkbutton;
 	GtkWidget	*fontpicker;
 	GtkWidget	*text_colorpicker;
 	GtkWidget	*background_colorpicker;
+	GtkWidget	*sel_text_colorpicker;
+	GtkWidget	*selection_colorpicker;
 	GtkWidget	*colors_table;
 	GtkWidget	*font_hbox;
 
@@ -138,9 +145,13 @@ static gboolean gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDia
 static void gedit_preferences_dialog_toolbar_show_radiobutton_toggled (GtkToggleButton *show_button,
 							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+
+#ifdef DEBUG_MDI_PREFS
 static gboolean gedit_preferences_dialog_setup_mdi_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static void gedit_preferences_dialog_mdi_mode_selection_done (GtkOptionMenu *option_menu,
 	       						GeditPreferencesDialog *dlg);
+#endif
+
 static gboolean gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg, 
 							GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
@@ -157,9 +168,11 @@ static CategoriesTreeItem user_interface [] =
 {
 	{_("Toolbar"), NULL, TOOLBAR_SETTINGS},
 	{_("Status bar"), NULL, STATUS_BAR_SETTINGS},
-/*
+
+#ifdef DEBUG_MDI_PREFS	
 	{_("MDI"), NULL, MDI_SETTINGS},
-*/
+#endif
+
 	NULL
 };
 
@@ -425,7 +438,8 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
   	column = gtk_tree_view_get_column (GTK_TREE_VIEW (treeview), col_offset - 1);
   	gtk_tree_view_column_set_clickable (GTK_TREE_VIEW_COLUMN (column), FALSE);
 
-	g_signal_connect (selection, "changed", G_CALLBACK (gedit_preferences_dialog_categories_tree_selection_cb), dlg);
+	g_signal_connect (selection, "changed", 
+			G_CALLBACK (gedit_preferences_dialog_categories_tree_selection_cb), dlg);
 
 	gtk_container_add (GTK_CONTAINER (sw), treeview);
 
@@ -464,9 +478,9 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 
 	gedit_preferences_dialog_setup_toolbar_page (dlg, gui);
 	gedit_preferences_dialog_setup_statusbar_page (dlg, gui);
-/* FIXME
+#ifdef DEBUG_MDI_PREFS
 	gedit_preferences_dialog_setup_mdi_page (dlg, gui);
-*/
+#endif
 	gedit_preferences_dialog_setup_font_and_colors_page (dlg, gui);
 	gedit_preferences_dialog_setup_undo_page (dlg, gui);
 	gedit_preferences_dialog_setup_tabs_page (dlg, gui);
@@ -592,6 +606,8 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 	return TRUE;
 }
 
+#ifdef DEBUG_MDI_PREFS
+
 static void
 gedit_preferences_dialog_mdi_mode_changed (GtkOptionMenu *option_menu,
 	       						GeditPreferencesDialog *dlg)
@@ -633,6 +649,8 @@ gedit_preferences_dialog_setup_mdi_page (GeditPreferencesDialog *dlg, GladeXML *
 
 }
 
+#endif
+
 static void
 gedit_preferences_dialog_default_font_colors_checkbutton_toggled (GtkToggleButton *button,
 							 GeditPreferencesDialog *dlg)
@@ -662,7 +680,8 @@ static gboolean
 gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
 	GeditView* active_view = NULL;
-
+	GtkWidget* font_label;
+	
 	gedit_debug (DEBUG_PREFS, "");
 	
 	dlg->priv->default_font_checkbutton = glade_xml_get_widget (gui, "default_font_checkbutton");
@@ -670,9 +689,13 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	
 	dlg->priv->text_colorpicker = glade_xml_get_widget (gui, "text_colorpicker");
 	dlg->priv->background_colorpicker = glade_xml_get_widget (gui, "background_colorpicker");
-	
+	dlg->priv->sel_text_colorpicker = glade_xml_get_widget (gui, "sel_text_colorpicker");
+	dlg->priv->selection_colorpicker = glade_xml_get_widget (gui, "selection_colorpicker");
+
 	dlg->priv->colors_table = glade_xml_get_widget (gui, "colors_table");
 	dlg->priv->font_hbox = glade_xml_get_widget (gui, "font_hbox");	
+
+	font_label = glade_xml_get_widget (gui, "font_label");
 
 	dlg->priv->fontpicker = gnome_font_picker_new ();
 	g_return_val_if_fail (dlg->priv->fontpicker, FALSE);
@@ -687,9 +710,16 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 
 	g_return_val_if_fail (dlg->priv->text_colorpicker, FALSE);
 	g_return_val_if_fail (dlg->priv->background_colorpicker, FALSE);
+	g_return_val_if_fail (dlg->priv->sel_text_colorpicker, FALSE);
+	g_return_val_if_fail (dlg->priv->selection_colorpicker, FALSE);
+
 	g_return_val_if_fail (dlg->priv->colors_table, FALSE);
 	g_return_val_if_fail (dlg->priv->font_hbox, FALSE);
 
+	g_return_val_if_fail (font_label, FALSE);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (font_label), dlg->priv->fontpicker);
+	
 	gtk_box_pack_start (GTK_BOX (dlg->priv->font_hbox), dlg->priv->fontpicker, TRUE, TRUE, 0);
 	
 	/* setup the initial states */ 
@@ -699,18 +729,28 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->priv->text_colorpicker),
 				    settings->fg[0], settings->fg[1], settings->fg[2], 0);
 
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->priv->selection_colorpicker),
+				    settings->sel[0], settings->sel[1], settings->sel[2], 0);
+
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->priv->sel_text_colorpicker),
+				    settings->st[0], settings->st[1], settings->st[2], 0);
+
 	if (settings->font)
 		gnome_font_picker_set_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker),
 						 settings->font);
 
 	g_signal_connect (G_OBJECT (dlg->priv->default_font_checkbutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_default_font_colors_checkbutton_toggled), dlg);
+			G_CALLBACK (gedit_preferences_dialog_default_font_colors_checkbutton_toggled), 
+			dlg);
 
 	g_signal_connect (G_OBJECT (dlg->priv->default_colors_checkbutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_default_font_colors_checkbutton_toggled), dlg);
+			G_CALLBACK (gedit_preferences_dialog_default_font_colors_checkbutton_toggled), 
+			dlg);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton), settings->use_default_font);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton), settings->use_default_colors);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+			(dlg->priv->default_font_checkbutton), settings->use_default_font);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
+			(dlg->priv->default_colors_checkbutton), settings->use_default_colors);
 }
 
 static void
@@ -871,7 +911,8 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 
 		settings->undo_levels = undo_levels;
 	}
-#if 0   /* BONOBO_MDI has to be fixed before MDI mode can be used */
+#ifdef DEBUG_MDI_PREFS
+     	/* BONOBO_MDI has to be fixed before MDI mode can be used */
 	/* Get Data from MDI page */
 	index = gtk_option_menu_get_history (GTK_OPTION_MENU (dlg->priv->mdi_mode_optionmenu));
 	if (index > 2) index = BONOBO_MDI_NOTEBOOK;
@@ -886,29 +927,7 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 #endif		
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton)))
-	{
-		/* FIXME: is it rigth? */
-		
-		GtkStyle *style;
-		GdkColor *bg;
-		GdkColor *fg;
-
 		settings->use_default_colors = TRUE;
-		
-		style = gtk_style_new ();
-
-		bg = &style->base[0];
-		settings->bg[0] = bg->red;
-		settings->bg[1] = bg->green;
-		settings->bg[2] = bg->blue;
-
-		fg = &style->text[0];
-		settings->fg[0] = fg->red;
-		settings->fg[1] = fg->green;
-		settings->fg[2] = fg->blue;
-
-		gtk_style_unref (style);
-	}
 	else
 	{
 		guint16 a;
@@ -920,31 +939,17 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 
 		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->background_colorpicker), 
 				&settings->bg[0], &settings->bg[1], &settings->bg[2], &a);
+
+		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->sel_text_colorpicker), 
+				&settings->st[0], &settings->st[1], &settings->st[2], &a);
+
+		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->selection_colorpicker), 
+				&settings->sel[0], &settings->sel[1], &settings->sel[2], &a);
+
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton)))
-	{
-		/* FIXME: is it rigth? */
-
-		GtkStyle *style;
-		gchar *font;
-
 		settings->use_default_font = TRUE;
-		
-		style = gtk_style_new ();
-
-		font = pango_font_description_to_string (style->font_desc);
-		
-		if (font != NULL)
-		{
-			g_free (settings->font);
-			settings->font = g_strdup (font);
-			g_free (font);
-		}
-
-		gtk_style_unref (style);
-
-	}
 	else
 	{
 		const gchar* font;
@@ -952,7 +957,6 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 		settings->use_default_font = FALSE;
 		
 		font = gnome_font_picker_get_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker));		
-	
 		if (font != NULL)
 		{
 			g_free (settings->font);

@@ -46,7 +46,7 @@
 
 GeditPreferences *settings = NULL;
 
-#define DEFAULT_FONT (const gchar*) "Sans 12"
+#define DEFAULT_FONT (const gchar*) "Courier Medium 12"
 
 void 
 gedit_prefs_save_settings (void)
@@ -84,7 +84,13 @@ gedit_prefs_save_settings (void)
 	gnome_config_set_int ("fgr", settings->fg[0]);
 	gnome_config_set_int ("fgg", settings->fg[1]);
 	gnome_config_set_int ("fgb", settings->fg[2]);
-	
+	gnome_config_set_int ("str", settings->st[0]);
+	gnome_config_set_int ("stg", settings->st[1]);
+	gnome_config_set_int ("stb", settings->st[2]);
+	gnome_config_set_int ("selr", settings->sel[0]);
+	gnome_config_set_int ("selg", settings->sel[1]);
+	gnome_config_set_int ("selb", settings->sel[2]);
+
 	active_window = bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
 	if (active_window) 
 	{
@@ -155,7 +161,7 @@ gedit_prefs_load_settings (void)
 	settings->undo_levels = gnome_config_get_int ("undo_levels=25");
 	settings->tab_size = gnome_config_get_int ("tab_size=8");
 
-	settings->use_default_font = gnome_config_get_bool ("use_default_font=TRUE"); 
+	settings->use_default_font = gnome_config_get_bool ("use_default_font=FALSE"); 
 	settings->use_default_colors = gnome_config_get_bool ("use_default_colors=TRUE"); 
 
 	settings->bg[0] = gnome_config_get_int ("bgr=65535");
@@ -165,6 +171,14 @@ gedit_prefs_load_settings (void)
 	settings->fg[0] = gnome_config_get_int ("fgr=0");
 	settings->fg[1] = gnome_config_get_int ("fgg=0");
 	settings->fg[2] = gnome_config_get_int ("fgb=0");
+
+	settings->sel[0] = gnome_config_get_int ("selr=0");
+	settings->sel[1] = gnome_config_get_int ("selg=0");
+	settings->sel[2] = gnome_config_get_int ("selb=40092");
+	
+	settings->st[0] = gnome_config_get_int ("str=65535");
+	settings->st[1] = gnome_config_get_int ("stg=65535");
+	settings->st[2] = gnome_config_get_int ("stb=65535");
 	
 	settings->width = gnome_config_get_int ("width=600");
 	settings->height = gnome_config_get_int ("height=400");

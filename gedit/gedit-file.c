@@ -748,15 +748,27 @@ gedit_file_exit (void)
 
 	if (!gedit_file_close_all ())
 		return;
+
+	gedit_debug (DEBUG_FILE, "All files closed.");
+	
 	/* We need to disconnect the signal because mdi "destroy" event
 	   is connected to gedit_file_exit ( i.e. this function ). */
 	gtk_signal_disconnect_by_func (GTK_OBJECT (gedit_mdi),
 			    GTK_SIGNAL_FUNC (gedit_file_exit), NULL);
 
+	/*
 	gtk_object_destroy (GTK_OBJECT (gedit_mdi));
+	*/
+	
 	gedit_prefs_save_settings ();
 
 	gedit_recent_history_write_config ();
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
+
+	g_object_unref (G_OBJECT (gedit_mdi));
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_mdi: DONE");
 
 	gtk_main_quit ();
 }
@@ -890,17 +902,22 @@ gedit_file_open_uri_list (GList* uri_list)
 {
 	gchar *full_path;
 	gboolean ret = TRUE;
+	
+	BonoboMDIChild *active_child = NULL;
+	
 	gedit_debug (DEBUG_FILE, "");
 	
 	if (uri_list == NULL) 
 		return FALSE;
-	
+
+	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
+
         /* create a file for each document in the parameter list */
 	for (;uri_list; uri_list = uri_list->next)
 	{
 		full_path = gedit_file_make_canonical_uri_from_shell_arg (uri_list->data);
 		if (full_path != NULL) {
-			ret |= gedit_file_open_real (full_path, NULL);
+			ret |= gedit_file_open_real (full_path, active_child);
 			g_free (full_path);
 		}
 	}

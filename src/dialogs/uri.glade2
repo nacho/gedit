@@ -92,11 +92,12 @@
 
             <child>
               <widget class="GnomeEntry" id="uri_list">
-                <property name="history_id">gedit_open_uri</property>
+                <property name="history_id">gedit2_uri_list</property>
                 <property name="width-request">380</property>
                 <property name="visible">yes</property>
                 <property name="has_focus">yes</property>
-
+	        <property name="case_sensitive">yes</property>
+                <property name="allow_empty">no</property>
                 <child internal-child="entry">
                   <widget class="GtkEntry" id="uri">
                     <property name="activates_default">yes</property>

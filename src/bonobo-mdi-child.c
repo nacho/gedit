@@ -124,6 +124,9 @@ bonobo_mdi_child_instance_init (BonoboMDIChild *mdi_child)
 	mdi_child->priv->name = NULL;
 	mdi_child->priv->parent = NULL;
 	mdi_child->priv->views = NULL;
+
+	g_object_ref (G_OBJECT (mdi_child));
+	gtk_object_sink (GTK_OBJECT (mdi_child));
 }
 
 

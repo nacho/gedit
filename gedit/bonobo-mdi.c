@@ -332,6 +332,9 @@ bonobo_mdi_instance_init (BonoboMDI *mdi)
 	mdi->priv->verbs		= NULL;	
 	
 	mdi->priv->child_list_path 	= NULL;
+
+	g_object_ref (G_OBJECT (mdi));
+	gtk_object_sink (GTK_OBJECT (mdi));
 }
 
 
@@ -590,7 +593,7 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 	if (!drag_cursor)
 		drag_cursor = gdk_cursor_new (GDK_HAND2);
 
-	if (e->window == widget->window) 
+	if (e->window == GTK_NOTEBOOK (widget)->event_window) 
 	{
 		mdi->priv->in_drag = TRUE;
 		gtk_grab_add (widget);
@@ -615,7 +618,7 @@ book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 
 	mdi = BONOBO_MDI (data);
 
-	if (e->button == 1 && e->window == widget->window)
+	if ((e->button == 1) && (e->window == GTK_NOTEBOOK (widget)->event_window))
 		mdi->priv->signal_id = gtk_signal_connect (GTK_OBJECT (widget), 
 				"motion_notify_event",
 				GTK_SIGNAL_FUNC (book_motion), mdi);
@@ -637,13 +640,13 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 		mdi->priv->signal_id = 0;
 	}
 
-	if (e->button == 1 && e->window == widget->window && mdi->priv->in_drag) 
-	{
+	if ((e->button == 1) && mdi->priv->in_drag) 
+	{	
 		GdkWindow *window;
 		GList *child;
 		BonoboWindow *win;
 		GtkWidget *view, *new_book;
-		GtkNotebook *old_book = GTK_NOTEBOOK(widget);
+		GtkNotebook *old_book = GTK_NOTEBOOK (widget);
 
 		mdi->priv->in_drag = FALSE;
 		gdk_pointer_ungrab (GDK_CURRENT_TIME);
@@ -715,9 +718,9 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 
 			width = view->allocation.width;
 			height = view->allocation.height;
-			
+		
 			gtk_container_remove (GTK_CONTAINER (old_book), view);
-				
+			
 			app_clone (mdi, win);
 				
 			new_book = book_create (mdi);
@@ -740,7 +743,7 @@ static GtkWidget *
 book_create (BonoboMDI *mdi)
 {
 	GtkWidget *us;
-	
+
 	us = gtk_notebook_new ();
 
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK (us), mdi->priv->tab_pos);
@@ -860,13 +863,15 @@ app_clone(BonoboMDI *mdi, BonoboWindow *win)
 		{
 			layout = bonobo_dock_get_layout (dock);
 			layout_string = bonobo_dock_layout_create_string (layout);
+			g_print ("/-- Eventually FIXME later -------\\\n");
 			gtk_object_unref (GTK_OBJECT (layout));
+			g_print ("\\---------/\n");
 		}
 	}
 
-	app_create(mdi, layout_string);
+	app_create (mdi, layout_string);
 
-	if(layout_string)
+	if (layout_string)
 		g_free(layout_string);
 }
 
@@ -908,7 +913,7 @@ app_close_top (BonoboWindow *win, GdkEventAny *event, BonoboMDI *mdi)
 		else 
 		{
 			mdi->priv->windows = g_list_remove (mdi->priv->windows, win);
-			gtk_widget_destroy (GTK_WIDGET(win));
+			gtk_widget_destroy (GTK_WIDGET (win));
 		}
 	}
 	
@@ -1220,7 +1225,7 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 	child_list_menu_create (mdi, bw);
 #if 0
 
-	if(layout_string && app->layout)
+	if (layout_string /*&& app->layout*/)
 		bonobo_dock_layout_parse_string(app->layout, layout_string);
 #endif
 }
@@ -1259,6 +1264,9 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
 		mdi->priv->active_child = NULL;
 	}
 
+	if (view)
+		gtk_widget_grab_focus (GTK_WIDGET (view));
+
 	if (view == old_view)
 		return;
 	
@@ -1269,7 +1277,7 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
 	}
 
 	mdi->priv->active_view = view;
-
+	
 	if (mdi->priv->active_child != old_child)
 		gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [CHILD_CHANGED], old_child);
 
@@ -1318,7 +1326,6 @@ bonobo_mdi_set_active_view (BonoboMDI *mdi, GtkWidget *view)
 	/* TODO: hmmm... I dont know how to give focus to the window, so that it
 	   would receive keyboard events */
 	gdk_window_raise (GTK_WIDGET (window)->window);
-	gtk_widget_grab_focus (GTK_WIDGET (window));
 
 	set_active_view (mdi, view);
 }
@@ -1593,6 +1600,7 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 				if (g_list_length (mdi->priv->windows) > 1 || 
 				    mdi->priv->registered) 
 				{
+					g_print ("/ EVENTUALLY FIX ME ---------------\\\n");
 					/* if this is NOT the last toplevel or a registered object
 				   	exists, destroy the toplevel */
 					mdi->priv->windows = g_list_remove (mdi->priv->windows, window);
@@ -1603,6 +1611,8 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 						mdi->priv->active_view = 
 							bonobo_mdi_get_view_from_window (mdi, 
 									mdi->priv->active_window);
+					g_print ("\\---------------/\n");
+
 				}
 				else
 					app_set_view (mdi, window, NULL);

@@ -494,8 +494,13 @@ gedit_undo_manager_insert_text_handler (GtkTextBuffer *buffer, GtkTextIter *pos,
 	undo_action.action.insert.pos    = gtk_text_iter_get_offset (pos);
 	undo_action.action.insert.text   = g_strdup (text);
 	undo_action.action.insert.length = length;
+	
+	/* FIXME: it is broken with non ASCII chars */
+	/*
+	if ((g_utf8_strlen (text, length) > 1) || (g_utf8_get_char (text) == '\n'))
+	*/
+	if ((length > 1) || (g_utf8_get_char (text) == '\n'))
 
-	if ((length > 1) || (*text == '\n'))
 	       	undo_action.mergeable = FALSE;
 	else
 		undo_action.mergeable = TRUE;
@@ -688,6 +693,8 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 static gboolean 
 gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_action)
 {
+	/* FIXME: it is broken with not ASCII chars */
+	
 	GeditUndoAction *last_action;
 	
 	gedit_debug (DEBUG_UNDO, "");

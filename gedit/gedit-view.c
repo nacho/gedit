@@ -88,6 +88,14 @@ gedit_view_grab_focus (GtkWidget *widget)
 	view = GEDIT_VIEW (widget);
 	
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
+	
+	/* Try to have a visible cursor */
+
+	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
+	 * understand why it is not visible */
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
+	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", FALSE, NULL);
+	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
 }
 
 static void
@@ -100,6 +108,7 @@ gedit_view_class_init (GeditViewClass *klass)
   	object_class->finalize = gedit_view_finalize;
 	
 	GTK_WIDGET_CLASS (klass)->grab_focus = gedit_view_grab_focus;
+	
 }
 
 static void 
@@ -107,7 +116,7 @@ gedit_view_init (GeditView  *view)
 {
 	GtkTextView *text_view;
 	GtkWidget *sw; /* the scrolled window */
-	GdkColor background, text;
+	GdkColor background, text, selection, sel_text;
 
 	/* FIXME
 	static GtkWidget *popup_menu = NULL;
@@ -130,10 +139,6 @@ gedit_view_init (GeditView  *view)
 	text_view = GTK_TEXT_VIEW (gtk_text_view_new ());
 	g_return_if_fail (text_view != NULL);
 	view->priv->text_view = text_view;
-	g_print ("Setting cursor visible");
-	g_object_set (G_OBJECT (text_view), "cursor_visible", TRUE, NULL);
-	g_object_set (G_OBJECT (text_view), "editable", TRUE, NULL);
-	g_print ("DONE:Setting cursor visible\n");	
 
 	/*
 	 *  Set tab, fonts, wrap mode, colors, etc. according
@@ -152,7 +157,16 @@ gedit_view_init (GeditView  *view)
 		text.green = settings->fg [1];
 		text.blue = settings->fg [2];
 
-		gedit_view_set_colors (view, &background, &text);
+		selection.red = settings->sel [0];
+		selection.green = settings->sel [1];
+		selection.blue = settings->sel [2];
+
+		sel_text.red = settings->st [0];
+		sel_text.green = settings->st [1];
+		sel_text.blue = settings->st [2];
+
+		gedit_view_set_colors (view, 
+				&background, &text, &selection, &sel_text);
 	}	
 
 	gedit_view_set_wrap_mode (view, settings->wrap_mode);
@@ -160,11 +174,15 @@ gedit_view_init (GeditView  *view)
 	/* FIXME: uncomment when gedit_view_set_tab_size will work
 	gedit_view_set_tab_size (view, 8);
 	*/
+	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
+	
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view->priv->text_view));
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
-
+/*
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
+*/
 #if 0
 	/* FIXME */
 	/* Popup Menu */
@@ -238,6 +256,8 @@ gedit_view_new (GeditDocument *doc)
 	gtk_text_view_scroll_to_mark (view->priv->text_view,
 				      gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
 				      0, TRUE, 0.0, 1.0);
+
+	gtk_widget_show_all (GTK_WIDGET (view));
 
 	gedit_debug (DEBUG_VIEW, "END");
 
@@ -378,7 +398,8 @@ gedit_view_scroll_to_cursor (GeditView *view)
 }
 
 void 
-gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text)
+gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text,
+		GdkColor* selection, GdkColor* sel_text)
 {
 	gedit_debug (DEBUG_VIEW, "");
 
@@ -389,6 +410,18 @@ gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text)
 
 	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
 				GTK_STATE_NORMAL, text);
+	
+	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_SELECTED, selection);
+
+	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_SELECTED, sel_text);		
+
+	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_ACTIVE, selection);
+
+	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_ACTIVE, sel_text);		
 }
 
 void

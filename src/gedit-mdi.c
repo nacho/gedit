@@ -130,10 +130,6 @@ gedit_mdi_init (GeditMDI  *mdi)
 
 	mdi->priv->untitled_number = 0;	
 
-	/* FIXME */
-	gedit_debug (DEBUG_MDI, "------ %s\n", 
-			bonobo_ui_util_get_ui_fname ("", GEDIT_UI_DIR "gedit-ui.xml"));
-	
 	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), GEDIT_UI_DIR "gedit-ui.xml", gedit_verbs);
 	
 	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
@@ -707,6 +703,9 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	GList *children;
 	GdkColor background;
 	GdkColor text;
+	GdkColor selection;
+	GdkColor sel_text;
+	const gchar* font;
 
 	gedit_debug (DEBUG_MDI, "");
 
@@ -733,13 +732,55 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 
 	children = bonobo_mdi_get_children (BONOBO_MDI (mdi));
 
-	background.red = settings->bg [0];
-	background.green = settings->bg [1];
-	background.blue = settings->bg [2];
+	if (settings->use_default_colors)
+	{
+		GtkStyle *style;
+	       
+		style = gtk_style_new ();
 
-	text.red = settings->fg [0];
-	text.green = settings->fg [1];
-	text.blue = settings->fg [2];
+		background = style->base [GTK_STATE_NORMAL];
+		text = style->text [GTK_STATE_NORMAL];
+		sel_text = style->text [GTK_STATE_SELECTED];
+		selection = style->base [GTK_STATE_SELECTED];
+
+		gtk_style_unref (style);
+	}
+	else
+	{
+		background.red = settings->bg [0];
+		background.green = settings->bg [1];
+		background.blue = settings->bg [2];
+
+		text.red = settings->fg [0];
+		text.green = settings->fg [1];
+		text.blue = settings->fg [2];
+
+		selection.red = settings->sel [0];
+		selection.green = settings->sel [1];
+		selection.blue = settings->sel [2];
+
+		sel_text.red = settings->st [0];
+		sel_text.green = settings->st [1];
+		sel_text.blue = settings->st [2];
+	}
+
+	if (settings->use_default_font)
+	{
+		GtkStyle *style;
+		
+		style = gtk_style_new ();
+
+		font = pango_font_description_to_string (style->font_desc);
+		
+		if (font == NULL)
+			/* Fallback */
+			font = settings->font;
+
+		gtk_style_unref (style);
+
+	}
+	else
+		font = settings->font;
 
 	while (children != NULL)
 	{
@@ -749,8 +790,8 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		{
 			GeditView *v =	GEDIT_VIEW (views->data);
 			
-			gedit_view_set_colors (v, &background, &text);
-			gedit_view_set_font (v, settings->font);
+			gedit_view_set_colors (v, &background, &text, &selection, &sel_text);
+			gedit_view_set_font (v, font);
 			gedit_view_set_wrap_mode (v, settings->wrap_mode);
 			views = views->next;
 		}

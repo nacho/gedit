@@ -1,16 +1,18 @@
-TODO (last update: December 3, 2001)
+TODO (last update: December 8, 2001)
 ===================================
 
 - General 
 
 [ ] Implementing Print and print preview
-[ ] Implementing Find (paolo is working on it)
-[ ] Implementing Replace
+[ ] Implementing Find (snorp is working on it)
+[ ] Implementing Replace (snorp is working on it)
 [ ] Adding a MDI Mode page to Preferences dialog (already implemented, to be debugged)
 [ ] Adding a Tabs page to Preferences dialog (already implemented, but gedit_view_set_tab_size is broken) 
 [ ] Debugging About Box
-[ ] Debugging Open from URI (it will be removed when we will use the new file selector)
- 
+[ ] Debugging Open from URI (It will be removed when we will use the new file selector. The Open button is not
+                             activated when the ENTER button is pressed)
+[ ] Fixing bug with UTF8 text in undo actions merge code
+[X] Reading non UTF8 files
 
 - Plugins
 
@@ -19,11 +21,15 @@ TODO (last update: December 3, 2001)
 
 
 - Documentation
+
 [ ] Writing new user docs
 
 
+- Future improvement
 
-
+[ ] Backup file before saving and every x minutes
+[ ] The remote files should be read in an async way
+[ ] Backup files before crashing, like AbiWord (I hope this code will never be used)
 
 
 

@@ -957,7 +957,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="visible">yes</property>
 
                             <child>
-                              <widget class="GtkLabel" id="label23">
+                              <widget class="GtkLabel" id="font_label">
                                 <property name="label" translatable="yes">_Font used by the editor: </property>
                                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                                 <property name="wrap">no</property>
@@ -1026,7 +1026,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="homogeneous">no</property>
                             <property name="row_spacing">5</property>
                             <property name="column_spacing">5</property>
-                            <property name="n-rows">2</property>
+                            <property name="n-rows">4</property>
                             <property name="n-columns">2</property>
                             <property name="visible">yes</property>
 
@@ -1079,13 +1079,63 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options"></property>
                               </packing>
                             </child>
+                            
+                            <child>
+                              <widget class="GtkLabel" id="label24">
+                                <property name="label" translatable="yes">S_elected text color:</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                <property name="wrap">no</property>
+                                <property name="xalign">0</property>
+                                <property name="yalign">0.5</property>
+                                <property name="xpad">0</property>
+                                <property name="ypad">0</property>
+                                <property name="mnemonic_widget">sel_text_colorpicker</property>
+                                <property name="visible">yes</property>
+                                <property name="use_underline">yes</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="right_attach">1</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_padding">0</property>
+                                <property name="y_padding">0</property>
+                                <property name="x_options">fill</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
+
+                            <child>
+                              <widget class="GtkLabel" id="label25">
+                                <property name="label" translatable="yes">Se_lection color:</property>
+                                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                                <property name="wrap">no</property>
+                                <property name="xalign">0</property>
+                                <property name="yalign">0.5</property>
+                                <property name="xpad">0</property>
+                                <property name="ypad">0</property>
+                                <property name="mnemonic_widget">selection_colorpicker</property>
+                                <property name="visible">yes</property>
+                                <property name="use_underline">yes</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="right_attach">1</property>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                                <property name="x_padding">0</property>
+                                <property name="y_padding">0</property>
+                                <property name="x_options">fill</property>
+                                <property name="y_options"></property>
+                              </packing>
+                            </child>
 
                             <child>
                               <widget class="GnomeColorPicker" id="background_colorpicker">
                                 <property name="can_focus">yes</property>
                                 <property name="dither">yes</property>
                                 <property name="use_alpha">no</property>
-                                <property name="title" translatable="yes">Pick a color</property>
+                                <property name="title" translatable="yes">Pick the background color</property>
                                 <property name="visible">yes</property>
                               </widget>
                               <packing>
@@ -1105,7 +1155,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="can_focus">yes</property>
                                 <property name="dither">yes</property>
                                 <property name="use_alpha">no</property>
-                                <property name="title" translatable="yes">Pick a color</property>
+                                <property name="title" translatable="yes">Pick the text color</property>
                                 <property name="visible">yes</property>
                               </widget>
                               <packing>
@@ -1119,6 +1169,47 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options">expand|fill</property>
                               </packing>
                             </child>
+
+                            <child>
+                              <widget class="GnomeColorPicker" id="sel_text_colorpicker">
+                                <property name="can_focus">yes</property>
+                                <property name="dither">yes</property>
+                                <property name="use_alpha">no</property>
+                                <property name="title" translatable="yes">Pick tha selected text color</property>
+                                <property name="visible">yes</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_padding">0</property>
+                                <property name="y_padding">0</property>
+                                <property name="x_options">expand|fill</property>
+                                <property name="y_options">expand|fill</property>
+                              </packing>
+                            </child>
+
+                            <child>
+                              <widget class="GnomeColorPicker" id="selection_colorpicker">
+                                <property name="can_focus">yes</property>
+                                <property name="dither">yes</property>
+                                <property name="use_alpha">no</property>
+                                <property name="title" translatable="yes">Pick the selection color</property>
+                                <property name="visible">yes</property>
+                              </widget>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">3</property>
+                                <property name="bottom_attach">4</property>
+                                <property name="x_padding">0</property>
+                                <property name="y_padding">0</property>
+                                <property name="x_options">expand|fill</property>
+                                <property name="y_options">expand|fill</property>
+                              </packing>
+                            </child>
+
                           </widget>
                           <packing>
                             <property name="padding">0</property>

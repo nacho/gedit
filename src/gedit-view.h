@@ -76,7 +76,8 @@ void		gedit_view_scroll_to_cursor 	(GeditView *view);
 GeditDocument*	gedit_view_get_document		(const GeditView *view);
 
 void 		gedit_view_set_colors 		(GeditView* view, 
-						 GdkColor* backgroud, GdkColor* text);
+						 GdkColor* backgroud, GdkColor* text,
+						 GdkColor* selection, GdkColor* sel_text);
 
 void 		gedit_view_set_font		(GeditView* view,
 						 const gchar* font_name);

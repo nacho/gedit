@@ -68,7 +68,9 @@ struct _GeditPreferences
 	gint  use_default_colors;
 	guint16 bg[3];
 	guint16 fg[3];
-	
+	guint16 st[3];
+	guint16 sel[3];
+
 	gint width, height;
 	
 	gint run;		/* Flag to see if this is the first

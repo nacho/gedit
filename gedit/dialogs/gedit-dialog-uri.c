@@ -46,6 +46,15 @@ struct _GeditDialogOpenUri {
 static void open_button_pressed (GeditDialogOpenUri * dialog);
 static void help_button_pressed (GeditDialogOpenUri * dialog);
 static GeditDialogOpenUri *dialog_open_uri_get_dialog (void);
+static void dialog_open_uri_list_activate (GtkWidget *uri_list, 
+		GeditDialogOpenUri *dlg);
+
+static void
+dialog_open_uri_list_activate (GtkWidget *uri_list, GeditDialogOpenUri *dlg)
+{
+	g_return_if_fail (dlg != NULL);
+	gtk_dialog_response (GTK_DIALOG (dlg->dialog), GTK_RESPONSE_OK);
+}
 
 static GeditDialogOpenUri *
 dialog_open_uri_get_dialog (void)
@@ -96,6 +105,10 @@ dialog_open_uri_get_dialog (void)
 		return NULL;
 	}
 
+	g_signal_connect (G_OBJECT (dialog->uri_list), "activate", 
+			G_CALLBACK (dialog_open_uri_list_activate), dialog);
+
+	
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
 
