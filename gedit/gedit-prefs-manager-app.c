@@ -41,6 +41,7 @@
 #include "gedit-debug.h"
 #include "gedit-view.h"
 #include "gedit-mdi.h"
+#include "gedit-recent.h"
 #include "gedit2.h"
 #include <gtksourceview/gtksourceview.h>
 
@@ -81,6 +82,10 @@ static void 		gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 								      guint cnxn_id, 
 								      GConfEntry *entry, 
 								      gpointer user_data);
+static void 		gedit_prefs_manager_max_recents_changed (GConfClient *client,
+								 guint cnxn_id, 
+								 GConfEntry *entry, 
+								 gpointer user_data);
 
 static gint window_state = -1;
 static gint window_height = -1;
@@ -147,6 +152,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_SYNTAX_HL_ENABLE,
 				gedit_prefs_manager_syntax_hl_enable_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_MAX_RECENTS,
+				gedit_prefs_manager_max_recents_changed,
 				NULL, NULL, NULL);
 	}
 
@@ -860,6 +870,36 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 
 			l = g_list_next (l);
 		}
+	}
+}
+
+static void
+gedit_prefs_manager_max_recents_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_MAX_RECENTS) == 0)
+	{
+		EggRecentModel *model;
+		gint max;
+
+		if (entry->value->type == GCONF_VALUE_INT)
+		{
+			max = gconf_value_get_int (entry->value);
+
+			if (max < 0)
+				max = GPM_DEFAULT_MAX_RECENTS;
+		}
+		else
+			max = GPM_DEFAULT_MAX_RECENTS;
+
+		model = gedit_recent_get_model ();
+
+		egg_recent_model_set_limit (model, max);
 	}
 }
 

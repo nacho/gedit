@@ -86,8 +86,8 @@
 #define GPM_STATUSBAR_DIR		GPM_PREFS_DIR "/ui/statusbar"
 #define GPM_STATUSBAR_VISIBLE		GPM_STATUSBAR_DIR "/statusbar_visible"
 
-#define GRM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
-#define GPM_MAX_RECENTS			GRM_RECENTS_DIR "/max_recents"
+#define GPM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
+#define GPM_MAX_RECENTS			GPM_RECENTS_DIR "/max_recents"
 
 /* Print */
 #define GPM_PRINT_PAGE_DIR		GPM_PREFS_DIR "/print/page"
