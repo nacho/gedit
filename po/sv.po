@@ -8,12 +8,12 @@
 # $Id$
 #
 #. Translator credits
-#: src/gedit-commands.c:450
+#: src/gedit-commands.c:447
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-12-15 15:31+0100\n"
-"PO-Revision-Date: 2001-12-15 15:31+0100\n"
+"POT-Creation-Date: 2001-12-19 21:43+0100\n"
+"PO-Revision-Date: 2001-12-19 21:43+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,18 +24,26 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Gnome-textredigerare"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:458
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivera %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
-msgid "The searched string has not been found."
-msgstr "Söksträngen kunde inte hittas."
+#: src/dialogs/gedit-dialog-replace.c:457
+#: src/dialogs/gedit-dialog-replace.c:526
+#: src/dialogs/gedit-dialog-replace.c:681 src/gedit-commands.c:335
+#, c-format
+msgid "The string \"%s\" has not been found."
+msgstr "Strängen \"%s\" kunde inte hittas."
+
+#: src/dialogs/gedit-dialog-replace.c:690
+#, c-format
+msgid "Found and replaced %d occurences."
+msgstr "Hittade och ersatte %d förekomster."
 
 #: src/gedit2.c:57
 msgid "Show mdi debugging messages."
@@ -93,28 +101,28 @@ msgstr "Gnome-textredigeraren"
 msgid "Not yet implemented."
 msgstr "Inte implementerat än."
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:404
 msgid "Impossible to update gedit settings."
 msgstr "Omöjligt att uppdatera gedit-inställningar."
 
-#: src/gedit-commands.c:464
+#: src/gedit-commands.c:461
 msgid "A small and lightweight text editor for Gnome"
 msgstr "En liten och enkel textredigerare för Gnome"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:453 src/gedit-document.c:464
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:453 src/gedit-document.c:464
 msgid "Untitled"
 msgstr "Namnlös"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
+#: src/gedit-document.c:534 src/gedit-document.c:640
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Ogiltig UTF-8-data påträffades vid läsning av filen"
 
-#: src/gedit-document.c:885
+#: src/gedit-document.c:888
 msgid "It is not possible to revert an Untitled document"
 msgstr "Det går inte att återställa ett namnlöst dokument"
 
@@ -615,9 +623,6 @@ msgstr "Kunde inte öppna nyligen använda filen: %s"
 
 #~ msgid "Search string not found"
 #~ msgstr "Söksträngen kunde inte hittas"
-
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Hittade och ersatte %i förekomster."
 
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr "Kunde inte allokera det minne som krävs för Ersätt alla-begäran."
