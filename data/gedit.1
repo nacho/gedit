@@ -1,4 +1,4 @@
-.TH GEDIT l "05 Jul 2002"
+.TH GEDIT l "05 Jan 2003"
 .SH NAME
 \fBgedit\fP \- simple text editor for GNOME
 
@@ -6,9 +6,12 @@ The gedit application is a simple text editor. You can use gedit to create and e
 
 .SH SYNTAX
 .B gedit
-.RI [ --help ]
-.RI [ --debug [-section]]
-.RI [ filename(s) ... ]
+.RI [--help]
+.RI [--debug [-section]]
+.RI [--new-window]
+.RI [--new-document]
+.RI [--quit]
+.RI [filename(s)...]
 .SH DESCRIPTION
 .B gedit
 is a text editor for the GNOME Desktop.
@@ -23,11 +26,6 @@ Prints the command line options.
 Runs gedit in debug mode. In debug mode function names are dumped to the console when they are invoked. Specific sections for debugging are allowed.  The sections are: window, commands, document, file, plugins, prefs, print, search,
 undo, view and recent. Run `gedit \-\-help' for more information.
 .TP
-\fB\-\-filename\fR
-Specifies the file to open when gedit starts - if this is not specified, gedit will
-load a blank file with an Untitled label. Multiple files can be loaded if they are
-separated by spaces.  Gedit also supports handling of remote files.  For example, you can pass the location of a webpage to gedit, like "http://www.gnome.org".
-.TP
 \fB\-\-new\-window\fR
 Create a new toplevel window in an existing instance of gedit.
 .TP
@@ -36,6 +34,13 @@ Create a new document in an existing instance of gedit.
 .TP
 \fB\-\-quit\fR
 Quit an existing instance of gedit.
+.TP
+\fBfilename(s)...\fR
+Specifies the file to open when gedit starts - if this is not specified, gedit will
+load a blank file with an Untitled label. Multiple files can be loaded if they are
+separated by spaces.  
+gedit also supports handling of remote files.  For example, you can pass the location of a webpage to gedit, like "http://www.gnome.org", or load a file from a FTP server,
+like "ftp://ftp.gnome.org/robots.txt".
 .SH PIPES
 Gedit accepts pipes, so it can be run after another command to load the output into
 gedit. For example :
@@ -43,14 +48,14 @@ gedit. For example :
 ls -l | gedit
 .PB
 .SH BUGS
-If you find a bug, please report it at http://bugzilla.gnome.org, or use a helper application, such as Bug Buddy.
+If you find a bug, please report it at http://bugzilla.gnome.org/enter_bug.cgi?product=gedit.
 
 .SH AUTHORS
 Paolo Maggi (maggi@athena.polito.it)
 .TP
-Chema Celorio (chema@celorio.com)
-.TP
 James Willcox (jwillcox@cs.indiana.edu)
 .TP
 Federico Mena Quintero (federico@ximian.com)
+.TP
+Chema Celorio (chema@celorio.com)
 
