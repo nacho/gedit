@@ -1,7 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 
+/*
  * gedit
- * Copyright (C) 1998 Alex Roberts and Evan Lawrence
+ *
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #include <config.h>
@@ -34,8 +35,7 @@
 #include "recent.h"
 #include "../pixmaps/gE_icon.xpm"
 
-extern GList *plugins;
-extern GtkWidget  *col_label;
+extern GtkWidget *col_label;
 
 GList *window_list = NULL;
 
@@ -150,8 +150,6 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 
 	/* gtk_widget_hide(search_result_window); */
 
-
-	/*g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);*/
 
 	gedit_plugins_window_add (app);
 	

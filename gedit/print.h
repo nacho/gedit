@@ -1,5 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* gE_print.h - Print Functions h file.
+/*
+ * gedit
+ *
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,16 +16,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Printing code by : Chema Celorio <chema@celorio.com>
- */
+ * Authors:
+ *   Chema Celorio <chema@celorio.com>
+ */ 
 
-#ifndef __GEDIT_PRINT_H__
-#define __GEDIT_PRINT_H__
+#ifndef __PRINT_H__
+#define __PRINT_H__
 
 /*void file_print_cb (GtkWidget *widget, gpointer cbdata);*/
 void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
 void file_print_preview_cb (GtkWidget *widget, gpointer data);
  
-#endif /* __GEDIT_PRINT_H__ */
+#endif /* __PRINT_H__ */

@@ -1,7 +1,8 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
- * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, 
- * and Chris Lahey
+ *
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,23 +16,25 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GEDIT_PLUGIN_H__
-#define __GEDIT_PLUGIN_H__
-
-typedef struct _PluginData PluginData;
+#ifndef __PLUGIN_H__
+#define __PLUGIN_H__
 
 #include <gmodule.h>
 
-enum {
+enum
+{
 	PLUGIN_OK,
 	PLUGIN_ERROR,
 	PLUGIN_DEAD
 };
 
-struct _PluginData {
+typedef struct _PluginData PluginData;
+
+struct _PluginData
+{
 	gchar	*file;
 	GModule	*handle;
 	
@@ -58,4 +61,4 @@ void        plugin_unload            (PluginData *pd);
 
 void        gedit_plugins_window_add (GnomeApp *app);
 
-#endif /* __GEDIT_PLUGIN_H__ */
+#endif /* __PLUGIN_H__ */
