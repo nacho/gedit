@@ -254,15 +254,20 @@ gedit_document_get_tab_name (GeditDocument *doc, gboolean star)
 	if (doc->filename != NULL)
 	{
 		gchar * tab_name = NULL;
+		gchar * unescaped_str = gnome_vfs_unescape_string_for_display (doc->filename);
+
+		g_assert (unescaped_str != NULL);
 		
 		if(!doc->changed || !star)
 		{
-			tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(doc->filename));
+			tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(unescaped_str));
 		}
 		else
 		{			
-			tab_name = g_strdup_printf ("%s%s*", doc->readonly?_("RO - "):"", g_basename(doc->filename));
+			tab_name = g_strdup_printf ("%s%s*", doc->readonly?_("RO - "):"", g_basename(unescaped_str));
 		}
+
+		g_free (unescaped_str);
 		
 		return tab_name;
 	}
@@ -664,8 +669,11 @@ gedit_document_load ( GList *file_list)
 			
 			can_be_created = TRUE;
 			
+			/*
 			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
-			
+			*/
+			tmp_str = gnome_vfs_get_local_path_from_uri (file_list->data);
+
 			file_name = gedit_file_convert_to_full_pathname (tmp_str);			
 			g_free(tmp_str);
 
@@ -741,7 +749,7 @@ gedit_document_set_title (GeditDocument *doc)
 #if 0
 		docname = g_strdup (g_basename (doc->filename));
 #endif
-		docname = g_strdup (doc->filename);		
+		docname = gnome_vfs_unescape_string_for_display (doc->filename);		
 	}
 
 #if 0

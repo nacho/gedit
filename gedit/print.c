@@ -25,6 +25,8 @@
 #include <config.h>
 #include <gnome.h>
 
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "print.h"
 #include "file.h"
 #include "view.h"
@@ -702,7 +704,11 @@ print_set_pji (PrintJobInfo * pji, GeditDocument *doc)
 	if (doc->filename == NULL)
 		pji->filename = gedit_document_get_tab_name (doc, FALSE); 
 	else
+		/*
 		pji->filename = g_strdup (doc->filename);
+		*/
+		pji->filename = gnome_vfs_unescape_string_for_display (doc->filename);
+
 
 	pji->orientation = settings->print_orientation;
 	if (pji->orientation == PRINT_ORIENT_LANDSCAPE)

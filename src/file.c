@@ -328,8 +328,11 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		{
 			gchar* tmp_str;
 
+			/*
 			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
-
+			*/
+			tmp_str = gnome_vfs_get_local_path_from_uri (fname);
+				
 			if (tmp_str != NULL)
 			{
 				gedit_document_set_readonly (doc, access (tmp_str, W_OK) ? TRUE : FALSE);
@@ -455,8 +458,16 @@ gedit_file_save_as (GeditDocument *doc)
 	}
 	else
 	{
-		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), 
+		/* FIXME: does not work well with URI */
+		gchar* name = gnome_vfs_unescape_string_for_display (doc->filename);
+		g_return_if_fail (name != NULL);
+
+		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), name);
+		g_free (name);
+/*
+		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), 		
 						 doc->filename);
+*/												
 	}
 
 	gtk_window_set_transient_for (GTK_WINDOW (save_file_selector), gedit_window_active ());
@@ -488,6 +499,8 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	FILE  *file_pointer;
 	gchar *buffer;
 	GeditView  *view;
+	gchar* unescaped_name = NULL; 
+	const gchar* old_name; 
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -496,6 +509,8 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	view  = GEDIT_VIEW ( g_list_nth_data(doc->views, 0) );
 	
 	g_return_val_if_fail (view!=NULL, 1);
+	
+	old_name = fname;
 	
 	if (fname == NULL)
 	{
@@ -511,7 +526,9 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 		}
 		else
 		{
-			fname = doc->filename;
+			unescaped_name = gnome_vfs_unescape_string_for_display (doc->filename);
+			fname = unescaped_name;
+			old_name = doc->filename;
 		}
 	}
 
@@ -544,6 +561,7 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
 		g_free (buffer);
+		g_free (unescaped_name);
 		gedit_close_all_flag_clear();
 		return 1;
 	}
@@ -558,6 +576,7 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 		fclose (file_pointer);
 		g_free (errstr);
 		g_free (buffer);
+		g_free (unescaped_name);
 		gedit_close_all_flag_clear();
 		return 1;
 	}
@@ -573,17 +592,18 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 						   "Problem to submit@bugs.gnome.org"), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
+		g_free (unescaped_name);
 		gedit_close_all_flag_clear();
 		return 1;
 	}
 
-	if (doc->filename != fname)
+	if (doc->filename != old_name)
 	{
 		if (doc->filename != NULL)
 			g_free (doc->filename);
-		doc->filename = g_strdup (fname);
+		doc->filename = g_strdup (old_name);
 	}
-	
+
 	doc->changed = FALSE;
 	doc->untitled_number = 0;
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
@@ -592,6 +612,8 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	gedit_document_text_changed_signal_connect (doc);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
+
+	if (unescaped_name != NULL) g_free (unescaped_name);
 
 	return 0;
 }
@@ -1030,7 +1052,7 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		}
 	}
 	    
-	if (gedit_file_save(doc, file_name) != 0)
+	if (gedit_file_save (doc, file_name) != 0)
 	{
 		gedit_flash (_("Error saving file!"));
 		g_free (file_name);

@@ -22,6 +22,8 @@
 #include <config.h>
 #include <gnome.h>
 
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "document.h"
 #include "view.h"
 #include "prefs.h"
@@ -188,15 +190,18 @@ static void
 gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *path, gint num)
 {
 	GnomeUIInfo *menu;
+	gchar* unescaped_str;
 
 	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (file_name != NULL);
 	g_return_if_fail (path != NULL);
 
+	unescaped_str = gnome_vfs_unescape_string_for_display (file_name);
+	g_return_if_fail (unescaped_str != NULL);
+	
 	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-
-	menu->label = g_strdup_printf ("_%i. %s", num, file_name);
+	menu->label = g_strdup_printf ("_%i. %s", num, unescaped_str);
 	menu->type = GNOME_APP_UI_ITEM;
 	menu->hint = NULL;
 	menu->moreinfo = (gpointer) recent_cb;
@@ -210,6 +215,7 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
 
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
+	g_free (unescaped_str);
 	g_free (menu->label);
 
 	g_free (menu);

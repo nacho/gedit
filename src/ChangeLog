@@ -1,5 +1,15 @@
 2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
 
+	* document.c (gedit_document_get_tab_name)(gedit_document_load)
+	(gedit_document_set_title):
+	* file.c (gedit_file_open)(gedit_file_save_as)(gedit_file_save)
+	(gedit_file_save_as_ok_sel)
+	* print.c (print_set_pji):
+	* recent.c (gedit_recent_add_menu_item) : added support for 
+	escaped file names and URIs
+
+2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
+
 	* file.c (gedit_file_open): now uses g_return_val_if_fail
 	instead of g_assert
 	(gedit_file_open_ok_sel): now uses g_return_if_fail
