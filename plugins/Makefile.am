@@ -1,3 +1,3 @@
-SUBDIRS = browse diff email time
+SUBDIRS = browse diff email time convert
 
-EXTRA_DIST = sample convert ChangeLog
+EXTRA_DIST = sample ChangeLog
