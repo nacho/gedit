@@ -47,7 +47,7 @@
 #include "gedit-recent.h" 
 #include "gedit-file-selector-util.h"
 #include "gedit-plugins-engine.h"
-#include "gnome-recent-model.h"
+#include "recent-files/egg-recent-model.h"
 #include "gedit-prefs-manager.h"
 
 static gchar 	*get_dirname_from_uri 		(const char *uri);
@@ -194,7 +194,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	GError *error = NULL;
 	gchar *uri;
 	
-	GnomeRecentModel *recent;
+	EggRecentModel *recent;
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
 
@@ -247,7 +247,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	}
 	
 	recent = gedit_recent_get_model ();
-	gnome_recent_model_add (recent, uri);
+	egg_recent_model_add (recent, uri);
 
 	g_free (uri);
 
@@ -338,7 +338,7 @@ gedit_file_save (GeditMDIChild* child)
 	}	
 	else
 	{
-		GnomeRecentModel *recent;
+		EggRecentModel *recent;
 		gchar *raw_uri;
 		
 		gedit_debug (DEBUG_FILE, "OK");
@@ -351,7 +351,7 @@ gedit_file_save (GeditMDIChild* child)
 		g_return_val_if_fail (raw_uri != NULL, TRUE);
 		
 		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, raw_uri);
+		egg_recent_model_add (recent, raw_uri);
 
 		g_free (raw_uri);
 		
@@ -496,10 +496,10 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
-		GnomeRecentModel *recent;
+		EggRecentModel *recent;
 
 		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, uri);
+		egg_recent_model_add (recent, uri);
 
 		g_free (uri);
 
@@ -798,28 +798,38 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 }
 
 gboolean 
-gedit_file_open_recent (GnomeRecentView *view, const gchar *uri, gpointer data)
+gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 {
 	gboolean ret = FALSE;
 	GeditView* active_view;
+	gchar *uri_utf8;
 
-	gedit_debug (DEBUG_FILE, "Open : %s", uri);
+	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
+
+	gedit_debug (DEBUG_FILE, "Open : %s", uri_utf8);
 
 	/* Note that gedit_file_open_single_uri takes a possibly mangled "uri", in UTF8 */
 
-	ret = gedit_file_open_single_uri (uri);
+	ret = gedit_file_open_single_uri (uri_utf8);
 	
 	if (!ret) 
 	{
-		GnomeRecentModel *model;
+		EggRecentModel *model;
+		gchar *uri;
+
+		uri = egg_recent_item_get_uri (item);
 
 		model = gedit_recent_get_model ();
-		gnome_recent_model_delete (model, uri);
+		egg_recent_model_delete (model, uri);
+
+		g_free (uri);
 	}
 		
 	active_view = gedit_get_active_view ();
 	if (active_view != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+
+	g_free (uri_utf8);
 
 	gedit_debug (DEBUG_FILE, "END");
 

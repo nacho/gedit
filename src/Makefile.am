@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS= dialogs
+SUBDIRS= dialogs recent-files
 
 bin_PROGRAMS = gedit
 
@@ -10,6 +10,7 @@ INCLUDES =							\
 	-I$(top_srcdir)						\
 	-I$(top_builddir)					\
 	-I$(top_srcdir)/dialogs					\
+	-I$(top_srcdir)/recent-files				\
 	$(GEDIT_CFLAGS)						\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
@@ -27,6 +28,7 @@ gedit_LDFLAGS = -export-dynamic
 
 gedit_LDADD = 				\
 	dialogs/libdialogs.a		\
+	recent-files/librecent.a	\
 	$(GEDIT_LIBS)			
 
 IDL_FILE = GNOME_Gedit.idl
@@ -39,9 +41,7 @@ IDL_SOURCES = \
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
-	gedit-marshal.h			\
-	gnome-recent-marshal.c		\
-	gnome-recent-marshal.h
+	gedit-marshal.h	
 
 gedit_SOURCES = 			\
 	$(IDL_SOURCES)			\
@@ -85,14 +85,6 @@ gedit_SOURCES = 			\
 	gedit-plugin.c			\
 	gedit-prefs-manager.c		\
 	gedit-prefs-manager.h		\
-	gnome-recent-model.c		\
-	gnome-recent-model.h		\
-	gnome-recent-view.c		\
-	gnome-recent-view.h		\
-	gnome-recent-view-bonobo.c	\
-	gnome-recent-view-bonobo.h	\
-	gnome-recent-util.c		\
-	gnome-recent-util.h		\
 	gedit-recent.c			\
 	gedit-recent.h			\
 	gedit-application-server.c	\
@@ -112,13 +104,6 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-gnome-recent-marshal.h: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
-	$(GLIB_GENMARSHAL) $< --header --prefix=gnome_recent > $@
-
-gnome-recent-marshal.c: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
-	echo "#include \"gnome-recent-marshal.h\"" > $@ && \
-	$(GLIB_GENMARSHAL) $< --body --prefix=gnome_recent >> $@
-
 $(IDL_SOURCES): $(IDL_FILE)
 	$(ORBIT_IDL) -I $(LIBBONOBO_IDL) -I $(BONOBO_ACTIVATION_IDL) $(IDL_FILE)
 
@@ -130,7 +115,6 @@ idldir = $(datadir)/idl
 EXTRA_DIST = 				\
 	$(ui_DATA)			\
 	gedit-marshal.list		\
-	gnome-recent-marshal.list	\
 	$(IDL_FILE)
 
 CLEANFILES = $(BUILT_SOURCES) $(IDL_SOURCES)

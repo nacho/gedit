@@ -1,0 +1,1539 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/**
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors:
+ *   James Willcox <jwillcox@cs.indiana.edu>
+ */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/time.h>
+#include <time.h>
+#include <gtk/gtk.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include "egg-recent-model.h"
+#include "egg-recent-item.h"
+
+#define EGG_RECENT_MODEL_FILE_PATH "/.recently-used"
+#define EGG_RECENT_MODEL_BUFFER_SIZE 8192
+
+#define EGG_RECENT_MODEL_MAX_ITEMS 500
+#define EGG_RECENT_MODEL_DEFAULT_LIMIT -1
+#define EGG_RECENT_MODEL_TIMEOUT_LENGTH 200
+
+struct _EggRecentModel {
+	GObject parent_instance;	/* We emit signals */
+
+	GList *mime_filter_values;	/* list of mime types we allow */
+	GList *group_filter_values;	/* list of groups we allow */
+	GList *scheme_filter_values;	/* list of URI schemes we allow */
+
+	EggRecentModelSort sort_type; /* type of sorting to be done */
+
+	int limit;			/* soft limit for length of the list */
+
+	char *path;			/* path to the file we store stuff in */
+
+	GHashTable *monitors;
+
+	GnomeVFSMonitorHandle *monitor;
+
+	guint changed_timeout;
+};
+
+/* signals */
+enum {
+	CHANGED,
+	LAST_SIGNAL
+};
+
+static GType model_signals[LAST_SIGNAL] = { 0 };
+
+/* properties */
+enum {
+	PROP_BOGUS,
+	PROP_MIME_FILTERS,
+	PROP_GROUP_FILTERS,
+	PROP_SCHEME_FILTERS,
+	PROP_SORT_TYPE,
+	PROP_LIMIT
+};
+
+typedef struct {
+	GSList *states;
+	GList *items;
+	EggRecentItem *current_item;
+}ParseInfo;
+
+typedef enum {
+	STATE_START,
+	STATE_RECENT_FILES,
+	STATE_RECENT_ITEM,
+	STATE_URI,
+	STATE_MIME_TYPE,
+	STATE_TIMESTAMP,
+	STATE_PRIVATE,
+	STATE_GROUPS,
+	STATE_GROUP
+} ParseState;
+
+typedef struct _ChangedData {
+	EggRecentModel *model;
+	GList *list;
+}ChangedData;
+
+#define TAG_RECENT_FILES "RecentFiles"
+#define TAG_RECENT_ITEM "RecentItem"
+#define TAG_URI "URI"
+#define TAG_MIME_TYPE "Mime-Type"
+#define TAG_TIMESTAMP "Timestamp"
+#define TAG_PRIVATE "Private"
+#define TAG_GROUPS "Groups"
+#define TAG_GROUP "Group"
+
+static void start_element_handler (GMarkupParseContext *context,
+			      const gchar *element_name,
+			      const gchar **attribute_names,
+			      const gchar **attribute_values,
+			      gpointer user_data,
+			      GError **error);
+
+static void end_element_handler (GMarkupParseContext *context,
+			    const gchar *element_name,
+			    gpointer user_data,
+			    GError **error);
+
+static void text_handler (GMarkupParseContext *context,
+		     const gchar *text,
+		     gsize text_len,
+		     gpointer user_data,
+		     GError **error);
+
+static void error_handler (GMarkupParseContext *context,
+		      GError *error,
+		      gpointer user_data);
+
+static GMarkupParser parser = {start_element_handler, end_element_handler,
+			text_handler,
+			NULL,
+			error_handler};
+
+#if 0
+static void
+print_elapsed (struct timeval before, struct timeval after, const gchar *label)
+{
+	gdouble elapsed;
+
+	elapsed = after.tv_sec - before.tv_sec
+                + (after.tv_usec - before.tv_usec) / 1000000.0;
+
+	g_print ("%s:  %f elapsed.\n", label, elapsed);
+}
+#endif
+
+static gboolean
+egg_recent_model_string_match (const GList *list, const gchar *str)
+{
+	gboolean ret = FALSE;
+	const GList *tmp;
+
+	if (list == NULL || str == NULL)
+		return TRUE;
+
+	tmp = list;
+	
+	while (tmp) {
+		const gchar *tmp_str = (const gchar *)tmp->data;
+		GPatternSpec *tmp_pattern = g_pattern_spec_new (tmp_str);
+
+		if (g_pattern_match_string (tmp_pattern, str)) {
+			ret = TRUE;
+			g_pattern_spec_free (tmp_pattern);
+			break;
+		}
+		
+		g_pattern_spec_free (tmp_pattern);
+		tmp = tmp->next;
+	}
+
+	return ret;
+}
+
+static gboolean
+egg_recent_model_write_raw (EggRecentModel *model, FILE *file,
+			      const gchar *content)
+{
+	int len;
+	int fd;
+	struct stat sbuf;
+
+	rewind (file);
+
+	len = strlen (content);
+	fd = fileno (file);
+
+	if (fstat (fd, &sbuf) < 0)
+		g_warning ("Couldn't stat XML document.");
+
+	if ((off_t)len < sbuf.st_size) {
+		ftruncate (fd, len);
+	}
+
+	if (fputs (content, file) == EOF)
+		return FALSE;
+
+	fsync (fd);
+	rewind (file);
+
+	return TRUE;
+}
+
+static GList *
+egg_recent_model_delete_from_list (GList *list,
+				       const gchar *uri)
+{
+	GList *newlist=NULL;
+	GList *tmp;
+	EggRecentItem *item;
+
+	if (uri == NULL)
+		return list;
+
+	tmp = list;
+
+	while (tmp) {
+		gchar *item_uri;
+		item = (EggRecentItem *)tmp->data;
+
+		item_uri = egg_recent_item_get_uri (item);
+		
+		if (strcmp (item_uri, uri))
+			newlist = g_list_prepend (newlist, item);
+		else {
+			egg_recent_item_unref (item);
+		}
+
+		g_free (item_uri);
+		tmp = tmp->next;
+	}
+	
+	g_list_free (list);
+
+	if (newlist)
+		newlist = g_list_reverse (newlist);
+
+	return newlist;
+}
+
+static gboolean
+egg_recent_model_update_item (GList *items, EggRecentItem *item)
+{
+	GList *tmp;
+	EggRecentItem *tmp_item;
+	gchar *item_uri;
+	gboolean updated = FALSE;
+	time_t t;
+
+	item_uri = egg_recent_item_get_uri (item);
+
+	tmp = items;
+	while (tmp) {
+		const GList *groups;
+		gchar *tmp_item_uri;
+		tmp_item = (EggRecentItem *)tmp->data;
+
+		tmp_item_uri = egg_recent_item_get_uri (tmp_item);
+		
+		if (!strcmp (item_uri, tmp_item_uri)) {
+			/* Found it.  Update the timestamp and append
+			 * any new groups
+			 */
+
+			time (&t);
+			egg_recent_item_set_timestamp (tmp_item, t);
+
+			groups =  egg_recent_item_get_groups (item);
+			while (groups != NULL) {
+				const gchar *group_name = (const gchar *)groups->data;
+				if (!egg_recent_item_in_group (tmp_item,
+								 group_name))
+					egg_recent_item_add_group (tmp_item,
+								     group_name);
+
+				groups = groups->next;
+			}
+
+			updated = TRUE;
+		}
+
+		g_free (tmp_item_uri);
+		tmp = tmp->next;
+
+		if (updated)
+			break;
+	}
+	
+	g_free (item_uri);
+	
+	return updated;
+}
+
+static gchar *
+egg_recent_model_read_raw (EggRecentModel *model, FILE *file)
+{
+	GString *string;
+	char buf[EGG_RECENT_MODEL_BUFFER_SIZE];
+
+	rewind (file);
+
+	string = g_string_new ("");
+	while (fgets (buf, EGG_RECENT_MODEL_BUFFER_SIZE, file)) {
+		string = g_string_append (string, buf);
+	}
+
+	rewind (file);
+
+	return g_string_free (string, FALSE);
+}
+
+
+static void
+parse_info_init (ParseInfo *info)
+{
+	info->states = g_slist_prepend (NULL, STATE_START);
+	info->items = NULL;
+}
+
+static void
+parse_info_free (ParseInfo *info)
+{
+	g_slist_free (info->states);
+}
+
+static void
+push_state (ParseInfo  *info,
+            ParseState  state)
+{
+  info->states = g_slist_prepend (info->states, GINT_TO_POINTER (state));
+}
+
+static void
+pop_state (ParseInfo *info)
+{
+  g_return_if_fail (info->states != NULL);
+
+  info->states = g_slist_remove (info->states, info->states->data);
+}
+
+static ParseState
+peek_state (ParseInfo *info)
+{
+  g_return_val_if_fail (info->states != NULL, STATE_START);
+
+  return GPOINTER_TO_INT (info->states->data);
+}
+
+#define ELEMENT_IS(name) (strcmp (element_name, (name)) == 0)
+
+static void
+start_element_handler (GMarkupParseContext *context,
+			      const gchar *element_name,
+			      const gchar **attribute_names,
+			      const gchar **attribute_values,
+			      gpointer user_data,
+			      GError **error)
+{
+	ParseInfo *info = (ParseInfo *)user_data;
+
+	if (ELEMENT_IS (TAG_RECENT_FILES))
+		push_state (info, STATE_RECENT_FILES);
+	else if (ELEMENT_IS (TAG_RECENT_ITEM)) {
+		info->current_item = egg_recent_item_new ();
+		push_state (info, STATE_RECENT_ITEM);
+	} else if (ELEMENT_IS (TAG_URI))
+		push_state (info, STATE_URI);
+	else if (ELEMENT_IS (TAG_MIME_TYPE))
+		push_state (info, STATE_MIME_TYPE);
+	else if (ELEMENT_IS (TAG_TIMESTAMP))
+		push_state (info, STATE_TIMESTAMP);
+	else if (ELEMENT_IS (TAG_PRIVATE)) {
+		push_state (info, STATE_PRIVATE);
+		egg_recent_item_set_private (info->current_item, TRUE);
+	} else if (ELEMENT_IS (TAG_GROUPS))
+		push_state (info, STATE_GROUPS);
+	else if (ELEMENT_IS (TAG_GROUP)) 
+		push_state (info, STATE_GROUP);
+}
+
+static gint
+list_compare_func_mru (gpointer a, gpointer b)
+{
+	EggRecentItem *item_a = (EggRecentItem *)a;
+	EggRecentItem *item_b = (EggRecentItem *)b;
+
+	return item_a->timestamp < item_b->timestamp;
+}
+
+static gint
+list_compare_func_lru (gpointer a, gpointer b)
+{
+	EggRecentItem *item_a = (EggRecentItem *)a;
+	EggRecentItem *item_b = (EggRecentItem *)b;
+
+	return item_a->timestamp > item_b->timestamp;
+}
+
+
+
+static void
+end_element_handler (GMarkupParseContext *context,
+			    const gchar *element_name,
+			    gpointer user_data,
+			    GError **error)
+{
+	ParseInfo *info = (ParseInfo *)user_data;
+
+	switch (peek_state (info)) {
+		case STATE_RECENT_ITEM:
+			info->items = g_list_append (info->items,
+						    info->current_item);
+			if (info->current_item->uri == NULL ||
+			    strlen (info->current_item->uri) == 0)
+				g_warning ("URI NOT LOADED");
+		break;
+		default:
+		break;
+	}
+
+	pop_state (info);
+}
+
+static void
+text_handler (GMarkupParseContext *context,
+		     const gchar *text,
+		     gsize text_len,
+		     gpointer user_data,
+		     GError **error)
+{
+	ParseInfo *info = (ParseInfo *)user_data;
+	gchar *unescaped;
+
+	switch (peek_state (info)) {
+		case STATE_START:
+		case STATE_RECENT_FILES:
+		case STATE_RECENT_ITEM:
+		case STATE_PRIVATE:
+		case STATE_GROUPS:
+		break;
+		case STATE_URI:
+			unescaped = gnome_vfs_unescape_string_for_display (text);
+			egg_recent_item_set_uri (info->current_item, unescaped);
+
+			g_free (unescaped);
+		break;
+		case STATE_MIME_TYPE:
+			egg_recent_item_set_mime_type (info->current_item,
+							 text);
+		break;
+		case STATE_TIMESTAMP:
+			egg_recent_item_set_timestamp (info->current_item,
+							 (time_t)atoi (text));
+		break;
+		case STATE_GROUP:
+			egg_recent_item_add_group (info->current_item,
+						     text);
+		break;
+	}
+			
+}
+
+static void
+error_handler (GMarkupParseContext *context,
+		      GError *error,
+		      gpointer user_data)
+{
+	g_print ("Error in parse: %s\n", error->message);
+}
+
+static void
+egg_recent_model_enforce_limit (GList *list, int limit)
+{
+	int len;
+	GList *end;
+
+	/* limit < 0 means unlimited */
+	if (limit <= 0)
+		return;
+
+	len = g_list_length (list);
+
+	if (len > limit) {
+		GList *next;
+
+		end = g_list_nth (list, limit-1);
+		next = end->next;
+
+		end->next = NULL;
+
+		EGG_RECENT_ITEM_LIST_UNREF (next);
+	}
+}
+
+static GList *
+egg_recent_model_sort (EggRecentModel *model, GList *list)
+{
+	switch (model->sort_type) {
+		case EGG_RECENT_MODEL_SORT_MRU:
+			list = g_list_sort (list,
+					(GCompareFunc)list_compare_func_mru);	
+		break;
+		case EGG_RECENT_MODEL_SORT_LRU:
+			list = g_list_sort (list,
+					(GCompareFunc)list_compare_func_lru);
+		break;
+		case EGG_RECENT_MODEL_SORT_NONE:
+		break;
+	}
+
+	return list;
+}
+
+static gboolean
+egg_recent_model_group_match (EggRecentItem *item, GList *groups)
+{
+	GList *tmp;
+
+	tmp = groups;
+
+	while (tmp != NULL) {
+		const gchar * group = (const gchar *)tmp->data;
+
+		if (egg_recent_item_in_group (item, group))
+			return TRUE;
+
+		tmp = tmp->next;
+	}
+
+	return FALSE;
+}
+
+static GList *
+egg_recent_model_filter (EggRecentModel *model,
+				GList *list)
+{
+	EggRecentItem *item;
+	GList *newlist = NULL;
+	gchar *mime_type;
+	gchar *uri;
+
+	g_return_val_if_fail (list != NULL, NULL);
+
+	while (list) {
+		gboolean pass_mime_test = FALSE;
+		gboolean pass_group_test = FALSE;
+		gboolean pass_scheme_test = FALSE;
+		item = (EggRecentItem *)list->data;
+		list = list->next;
+
+		uri = egg_recent_item_get_uri (item);
+
+		/* filter by mime type */
+		if (model->mime_filter_values != NULL) {
+			mime_type = egg_recent_item_get_mime_type (item);
+
+			if (egg_recent_model_string_match
+					(model->mime_filter_values,
+					 mime_type))
+				pass_mime_test = TRUE;
+
+			g_free (mime_type);
+		} else
+			pass_mime_test = TRUE;
+
+		/* filter by group */
+		if (pass_mime_test && model->group_filter_values != NULL) {
+			if (egg_recent_model_group_match
+					(item, model->group_filter_values))
+				pass_group_test = TRUE;
+		} else if (egg_recent_item_get_private (item)) {
+			pass_group_test = FALSE;
+		} else
+			pass_group_test = TRUE;
+
+		/* filter by URI scheme */
+		if (pass_mime_test && pass_group_test &&
+		    model->scheme_filter_values != NULL) {
+			gchar **split_uri;
+			
+			split_uri = g_strsplit (uri, ":", 2);
+
+			if (egg_recent_model_string_match
+				(model->scheme_filter_values, split_uri[0]))
+				pass_scheme_test = TRUE;
+
+			g_strfreev (split_uri);
+		} else
+			pass_scheme_test = TRUE;
+
+		if (pass_mime_test && pass_group_test && pass_scheme_test)
+			newlist = g_list_prepend (newlist, item);
+
+		g_free (uri);
+	}
+
+	if (newlist) {
+		newlist = g_list_reverse (newlist);
+		g_list_free (list);
+	}
+
+	
+	return newlist;
+}
+
+
+
+static void
+egg_recent_model_monitor_list_cb (GnomeVFSMonitorHandle *handle,
+			       const gchar *monitor_uri,
+			       const gchar *info_uri,
+			       GnomeVFSMonitorEventType event_type,
+			       gpointer user_data)
+{
+	EggRecentModel *model;
+
+	model = EGG_RECENT_MODEL (user_data);
+
+	if (event_type == GNOME_VFS_MONITOR_EVENT_DELETED) {
+		egg_recent_model_delete (model, monitor_uri);
+		g_hash_table_remove (model->monitors, monitor_uri);
+	}
+}
+
+static void
+egg_recent_model_monitor_list (EggRecentModel *model, GList *list)
+{
+	GList *tmp;
+
+	tmp = list;
+	while (tmp) {
+		EggRecentItem *item = (EggRecentItem *)tmp->data;
+		GnomeVFSMonitorHandle *handle;
+		GnomeVFSResult res;
+		gchar *uri;
+
+		tmp = tmp->next;
+		
+		uri = egg_recent_item_get_uri (item);
+		if (g_hash_table_lookup (model->monitors, uri)) {
+			/* already monitoring this one */
+			g_free (uri);
+			continue;
+		}
+
+		res = gnome_vfs_monitor_add (&handle, uri,
+					     GNOME_VFS_MONITOR_FILE,
+					     egg_recent_model_monitor_list_cb,
+					     model);
+		
+		if (res == GNOME_VFS_OK)
+			g_hash_table_insert (model->monitors, uri, handle);
+		else
+			g_free (uri);
+	}
+}
+
+
+
+static gboolean
+egg_recent_model_changed_timeout (EggRecentModel *model)
+{
+	egg_recent_model_changed (model);
+
+	return FALSE;
+}
+
+static void
+egg_recent_model_monitor_cb (GnomeVFSMonitorHandle *handle,
+			       const gchar *monitor_uri,
+			       const gchar *info_uri,
+			       GnomeVFSMonitorEventType event_type,
+			       gpointer user_data)
+{
+	EggRecentModel *model;
+
+	g_return_if_fail (user_data != NULL);
+	g_return_if_fail (EGG_IS_RECENT_MODEL (user_data));
+	model = EGG_RECENT_MODEL (user_data);
+
+	if (event_type == GNOME_VFS_MONITOR_EVENT_CHANGED) {
+		if (model->changed_timeout > 0) {
+			g_source_remove (model->changed_timeout);
+		}
+
+		model->changed_timeout = g_timeout_add (
+			EGG_RECENT_MODEL_TIMEOUT_LENGTH,
+			(GSourceFunc)egg_recent_model_changed_timeout,
+			model);
+	}
+}
+
+static GList *
+egg_recent_model_read (EggRecentModel *model, FILE *file)
+{
+	GList *list=NULL;
+	gchar *content;
+	GMarkupParseContext *ctx;
+	ParseInfo info;
+	GError *error;
+
+	content = egg_recent_model_read_raw (model, file);
+
+	if (strlen (content) <= 0)
+		return NULL;
+
+	parse_info_init (&info);
+	
+	ctx = g_markup_parse_context_new (&parser, 0, &info, NULL);
+	
+	error = NULL;
+	if (!g_markup_parse_context_parse (ctx, content, strlen (content),
+					   &error)) {
+		g_warning (error->message);
+		g_error_free (error);
+		error = NULL;
+		goto out;
+	}
+
+	error = NULL;
+	if (!g_markup_parse_context_end_parse (ctx, &error))
+		goto out;
+	
+	g_markup_parse_context_free (ctx);
+out:
+	list = info.items;
+
+	parse_info_free (&info);
+
+	g_free (content);
+
+	/*
+	g_print ("Total items: %d\n", g_list_length (list));
+	*/
+
+	return list;
+}
+
+
+static gboolean
+egg_recent_model_write (EggRecentModel *model, FILE *file, GList *list)
+{
+	GString *string;
+	gchar *data;
+	EggRecentItem *item;
+	const GList *groups;
+	int i;
+	int ret;
+	
+	string = g_string_new ("<?xml version=\"1.0\"?>\n");
+	string = g_string_append (string, "<" TAG_RECENT_FILES ">\n");
+
+	i=0;
+	while (list) {
+		gchar *uri;
+		gchar *mime_type;
+		gchar *escaped_uri;
+		time_t timestamp;
+		item = (EggRecentItem *)list->data;
+
+
+		uri = egg_recent_item_get_uri_utf8 (item);
+		escaped_uri = g_markup_escape_text (uri, strlen (uri));
+		g_free (uri);
+
+		mime_type = egg_recent_item_get_mime_type (item);
+		timestamp = egg_recent_item_get_timestamp (item);
+		
+		string = g_string_append (string, "  <" TAG_RECENT_ITEM ">\n");
+
+		g_string_append_printf (string,
+				"    <" TAG_URI ">%s</" TAG_URI ">\n", escaped_uri);
+
+		if (mime_type)
+			g_string_append_printf (string,
+				"    <" TAG_MIME_TYPE ">%s</" TAG_MIME_TYPE ">\n", mime_type);
+		else
+			g_string_append_printf (string,
+				"    <" TAG_MIME_TYPE "></" TAG_MIME_TYPE ">\n");
+
+		
+		g_string_append_printf (string,
+				"    <" TAG_TIMESTAMP ">%d</" TAG_TIMESTAMP ">\n", (int)timestamp);
+
+		if (egg_recent_item_get_private (item))
+			string = g_string_append (string,
+					"    <" TAG_PRIVATE "/>\n");
+
+		/* write the groups */
+		string = g_string_append (string,
+				"    <" TAG_GROUPS ">\n");
+		groups = egg_recent_item_get_groups (item);
+
+		if (groups == NULL && egg_recent_item_get_private (item))
+			g_warning ("Item with URI \"%s\" marked as private, but"
+				   " does not belong to any groups.\n", uri);
+		
+		while (groups) {
+			const gchar *group = (const gchar *)groups->data;
+			gchar *escaped_group;
+
+			escaped_group = g_markup_escape_text (group, strlen(group));
+
+			g_string_append_printf (string,
+					"      <" TAG_GROUP ">%s</" TAG_GROUP ">\n",
+					escaped_group);
+
+			g_free (escaped_group);
+
+			groups = groups->next;
+		}
+		
+		string = g_string_append (string, "    </" TAG_GROUPS ">\n");
+
+		string = g_string_append (string,
+				"  </" TAG_RECENT_ITEM ">\n");
+
+		g_free (mime_type);
+		g_free (escaped_uri);
+
+		list = list->next;
+		i++;
+	}
+
+	string = g_string_append (string, "</" TAG_RECENT_FILES ">");
+
+	data = g_string_free (string, FALSE);
+
+	ret = egg_recent_model_write_raw (model, file, data);
+
+	g_free (data);
+
+	return ret;
+}
+
+static FILE *
+egg_recent_model_open_file (EggRecentModel *model)
+{
+	FILE *file;
+	
+	file = fopen (model->path, "r+");
+	if (file == NULL) {
+		file = fopen (model->path, "w+");
+
+		g_return_val_if_fail (file != NULL, NULL);
+	}
+
+	return file;
+}
+
+static gboolean
+egg_recent_model_lock_file (FILE *file)
+{
+	int fd;
+
+	rewind (file);
+	fd = fileno (file);
+
+	return lockf (fd, F_LOCK, 0) == 0 ? TRUE : FALSE;
+}
+
+static gboolean
+egg_recent_model_unlock_file (FILE *file)
+{
+	int fd;
+
+	rewind (file);
+	fd = fileno (file);
+
+	return lockf (fd, F_ULOCK, 0) < 0 ? FALSE : TRUE;
+}
+
+static void
+egg_recent_model_finalize (GObject *object)
+{
+	EggRecentModel *model = EGG_RECENT_MODEL (object);
+
+	g_free (model->path);
+	
+	g_hash_table_destroy (model->monitors);
+}
+
+static void
+egg_recent_model_set_property (GObject *object,
+			       guint prop_id,
+			       const GValue *value,
+			       GParamSpec *pspec)
+{
+	EggRecentModel *model = EGG_RECENT_MODEL (object);
+
+	switch (prop_id)
+	{
+		case PROP_MIME_FILTERS:
+			model->mime_filter_values =
+				(GList *)g_value_get_pointer (value);
+		break;
+
+		case PROP_GROUP_FILTERS:
+			model->group_filter_values =
+				(GList *)g_value_get_pointer (value);
+		break;
+
+		case PROP_SCHEME_FILTERS:
+			model->scheme_filter_values =
+				(GList *)g_value_get_pointer (value);
+		break;
+
+		case PROP_SORT_TYPE:
+			model->sort_type = g_value_get_int (value);
+		break;
+
+		case PROP_LIMIT:
+			model->limit = g_value_get_int (value);
+		break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+egg_recent_model_get_property (GObject *object,
+			       guint prop_id,
+			       GValue *value,
+			       GParamSpec *pspec)
+{
+	EggRecentModel *model = EGG_RECENT_MODEL (object);
+
+	switch (prop_id)
+	{
+		case PROP_MIME_FILTERS:
+			g_value_set_pointer (value, model->mime_filter_values);
+		break;
+
+		case PROP_GROUP_FILTERS:
+			g_value_set_pointer (value, model->group_filter_values);
+		break;
+
+		case PROP_SCHEME_FILTERS:
+			g_value_set_pointer (value, model->scheme_filter_values);
+		break;
+
+		case PROP_SORT_TYPE:
+			g_value_set_int (value, model->sort_type);
+		break;
+
+		case PROP_LIMIT:
+			g_value_set_int (value, model->limit);
+		break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		break;
+	}
+}
+
+static void
+egg_recent_model_class_init (EggRecentModelClass * klass)
+{
+	GObjectClass *object_class;
+
+	object_class = G_OBJECT_CLASS (klass);
+	object_class->set_property = egg_recent_model_set_property;
+	object_class->get_property = egg_recent_model_get_property;
+	object_class->finalize     = egg_recent_model_finalize;
+
+	model_signals[CHANGED] = g_signal_new ("changed",
+			G_OBJECT_CLASS_TYPE (object_class),
+			G_SIGNAL_RUN_LAST,
+			G_STRUCT_OFFSET (EggRecentModelClass, changed),
+			NULL, NULL,
+			g_cclosure_marshal_VOID__POINTER,
+			G_TYPE_NONE, 1,
+			G_TYPE_POINTER);
+
+	
+	g_object_class_install_property (object_class,
+					 PROP_MIME_FILTERS,
+					 g_param_spec_pointer ("mime-filters",
+					 "Mime Filters",
+					 "List of mime types to be allowed.",
+					 G_PARAM_READWRITE));
+	
+	g_object_class_install_property (object_class,
+					 PROP_GROUP_FILTERS,
+					 g_param_spec_pointer ("group-filters",
+					 "Group Filters",
+					 "List of groups to be allowed.",
+					 G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_SCHEME_FILTERS,
+					 g_param_spec_pointer ("scheme-filters",
+					 "Scheme Filters",
+					 "List of URI schemes to be allowed.",
+					 G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_SORT_TYPE,
+					 g_param_spec_int ("sort-type",
+					 "Sort Type",
+					 "Type of sorting to be done.",
+					 0, EGG_RECENT_MODEL_SORT_NONE,
+					 EGG_RECENT_MODEL_SORT_MRU,
+					 G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_LIMIT,
+					 g_param_spec_int ("limit",
+					 "Limit",
+					 "Max number of items allowed.",
+					 -1, EGG_RECENT_MODEL_MAX_ITEMS,
+					 EGG_RECENT_MODEL_DEFAULT_LIMIT,
+					 G_PARAM_READWRITE));
+
+	klass->changed = NULL;
+}
+
+static void
+egg_recent_model_init (EggRecentModel * model)
+{
+	gchar *path;
+	GnomeVFSResult res;
+
+	if (!gnome_vfs_init ()) {
+		g_warning ("gnome-vfs initialization failed.");
+		return;
+	}
+	
+	path = g_strdup_printf ("%s" EGG_RECENT_MODEL_FILE_PATH,
+				getenv ("HOME"));
+
+	model->path = path;
+	model->mime_filter_values = NULL;
+	model->group_filter_values = NULL;
+	model->scheme_filter_values = NULL;
+	model->limit = EGG_RECENT_MODEL_DEFAULT_LIMIT;
+
+	model->monitors = g_hash_table_new_full (g_str_hash, g_str_equal,
+				(GDestroyNotify)g_free,
+				(GDestroyNotify)gnome_vfs_monitor_cancel);
+
+	res = gnome_vfs_monitor_add (&model->monitor, path,
+				     GNOME_VFS_MONITOR_FILE,
+				     egg_recent_model_monitor_cb,
+				     model);
+
+	if (res != GNOME_VFS_OK)
+		g_warning ("Unable to monitor XML document.  Notification "
+			   "of changes in recent documents list will not be"
+			   "available.");
+}
+
+
+/**
+ * egg_recent_model_new:
+ * @sort:  the type of sorting to use
+ * @limit:  maximum number of items in the list
+ *
+ * This creates a new EggRecentModel object.
+ *
+ * Returns: a EggRecentModel object
+ */
+EggRecentModel *
+egg_recent_model_new (EggRecentModelSort sort, int limit)
+{
+	EggRecentModel *model;
+
+	model = EGG_RECENT_MODEL (g_object_new (egg_recent_model_get_type (),
+				  "sort-type", sort,
+				  "limit", limit, NULL));
+
+	g_return_val_if_fail (model, NULL);
+
+	return model;
+}
+
+/**
+ * egg_recent_model_add_full:
+ * @model:  A EggRecentModel object.
+ * @item:  A EggRecentItem
+ *
+ * This function adds an item to the list of recently used URIs.
+ *
+ * Returns: gboolean
+ */
+gboolean
+egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
+{
+	FILE *file;
+	GList *list = NULL;
+	gboolean ret = FALSE;
+	gboolean updated = FALSE;
+	time_t t;
+	
+	g_return_val_if_fail (model != NULL, FALSE);
+	g_return_val_if_fail (EGG_IS_RECENT_MODEL (model), FALSE);
+
+	file = egg_recent_model_open_file (model);
+	g_return_val_if_fail (file != NULL, FALSE);
+
+	time (&t);
+	egg_recent_item_set_timestamp (item, t);
+
+	if (egg_recent_model_lock_file (file)) {
+
+		/* read existing stuff */
+		list = egg_recent_model_read (model, file);
+
+		/* if it's already there, we just update it */
+		updated = egg_recent_model_update_item (list, item);
+
+		if (!updated) {
+			list = g_list_prepend (list, item);
+
+			egg_recent_model_enforce_limit (list,
+						EGG_RECENT_MODEL_MAX_ITEMS);
+		}
+
+		/* write new stuff */
+		if (!egg_recent_model_write (model, file, list))
+			g_warning ("Write failed: %s", strerror (errno));
+
+		if (!updated)
+			list = g_list_remove (list, item);
+
+		EGG_RECENT_ITEM_LIST_UNREF (list);
+		ret = TRUE;
+	} else {
+		g_warning ("Failed to lock:  %s", strerror (errno));
+		return FALSE;
+	}
+
+	if (!egg_recent_model_unlock_file (file))
+		g_warning ("Failed to unlock: %s", strerror (errno));
+
+	fclose (file);
+
+	return ret;
+}
+
+/**
+ * egg_recent_model_add:
+ * @model:  A EggRecentModel object.
+ * @uri:  A string URI
+ *
+ * This function adds an item to the list of recently used URIs.
+ *
+ * Returns: gboolean
+ */
+gboolean
+egg_recent_model_add (EggRecentModel *model, const gchar *uri)
+{
+	EggRecentItem *item;
+	gboolean ret = FALSE;
+
+	g_return_val_if_fail (model != NULL, FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	item = egg_recent_item_new_from_uri (uri);
+
+	ret = egg_recent_model_add_full (model, item);
+
+	egg_recent_item_unref (item);
+
+	return ret;
+}
+
+
+
+/**
+ * egg_recent_model_delete:
+ * @model:  A EggRecentModel object.
+ * @uri: The URI you want to delete.
+ *
+ * This function deletes a URI from the file of recently used URIs.
+ *
+ * Returns: gboolean
+ */
+gboolean
+egg_recent_model_delete (EggRecentModel * model, const gchar * uri)
+{
+	FILE *file;
+	GList *list;
+	unsigned int length;
+	gboolean ret = FALSE;
+
+	g_return_val_if_fail (model != NULL, FALSE);
+	g_return_val_if_fail (EGG_IS_RECENT_MODEL (model), FALSE);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	file = egg_recent_model_open_file (model);
+	g_return_val_if_fail (file != NULL, FALSE);
+
+	if (egg_recent_model_lock_file (file)) {
+		list = egg_recent_model_read (model, file);
+
+		if (list == NULL)
+			goto out;
+
+		length = g_list_length (list);
+
+		list = egg_recent_model_delete_from_list (list, uri);
+		
+		if (length == g_list_length (list)) {
+			/* nothing was deleted */
+			EGG_RECENT_ITEM_LIST_UNREF (list);
+		} else {
+			egg_recent_model_write (model, file, list);
+			EGG_RECENT_ITEM_LIST_UNREF (list);
+			ret = TRUE;
+
+		}
+	} else {
+		g_warning ("Failed to lock:  %s", strerror (errno));
+		return FALSE;
+	}
+
+out:
+		
+	if (!egg_recent_model_unlock_file (file))
+		g_warning ("Failed to unlock: %s", strerror (errno));
+
+	fclose (file);
+
+	g_hash_table_remove (model->monitors, uri);
+
+	return ret;
+}
+
+
+/**
+ * egg_recent_model_get_list:
+ * @model:  A EggRecentModel object.
+ *
+ * This function gets the current contents of the file
+ *
+ * Returns: a GList
+ */
+GList *
+egg_recent_model_get_list (EggRecentModel *model)
+{
+	FILE *file;
+	GList *list=NULL;
+
+	file = egg_recent_model_open_file (model);
+	g_return_val_if_fail (file != NULL, FALSE);
+	
+	if (egg_recent_model_lock_file (file)) {
+		list = egg_recent_model_read (model, file);
+		
+	} else {
+		g_warning ("Failed to lock:  %s", strerror (errno));
+		return FALSE;
+	}
+
+	if (!egg_recent_model_unlock_file (file))
+		g_warning ("Failed to unlock: %s", strerror (errno));
+
+	if (list != NULL) {
+		list = egg_recent_model_filter (model, list);
+		list = egg_recent_model_sort (model, list);
+
+		egg_recent_model_enforce_limit (list, model->limit);
+	}
+
+	fclose (file);
+
+	return list;
+}
+
+/**
+ * egg_recent_model_set_limit:
+ * @model:  A EggRecentModel object.
+ * @limit:  The maximum length of the list
+ *
+ * This function sets the maximum length of the list.  Note:  This only affects
+ * the length of the list emitted in the "changed" signal, not the list stored
+ * on disk.
+ *
+ * Returns:  void
+ */
+void
+egg_recent_model_set_limit (EggRecentModel *model, int limit)
+{
+	model->limit = limit;
+
+	egg_recent_model_changed (model);
+}
+
+/**
+ * egg_recent_model_get_limit:
+ * @model:  A EggRecentModel object.
+ *
+ * This function gets the maximum length of the list. 
+ *
+ * Returns:  int
+ */
+int
+egg_recent_model_get_limit (EggRecentModel *model)
+{
+	return model->limit;
+}
+
+
+/**
+ * egg_recent_model_clear:
+ * @model:  A EggRecentModel object.
+ *
+ * This function clears the contents of the file
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_clear (EggRecentModel *model)
+{
+	FILE *file;
+	int fd;
+
+	file = egg_recent_model_open_file (model);
+	g_return_if_fail (file != NULL);
+
+	fd = fileno (file);
+
+	if (egg_recent_model_lock_file (file)) {
+		ftruncate (fd, 0);
+	} else {
+		g_warning ("Failed to lock:  %s", strerror (errno));
+		return;
+	}
+
+	if (!egg_recent_model_unlock_file (file))
+		g_warning ("Failed to unlock: %s", strerror (errno));
+
+	fclose (file);
+}
+
+
+/**
+ * egg_recent_model_set_filter_mime_types:
+ * @model:  A EggRecentModel object.
+ *
+ * Sets which mime types are allowed in the list.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_set_filter_mime_types (EggRecentModel *model,
+			       ...)
+{
+	va_list valist;
+	GList *list = NULL;
+	gchar *str;
+
+	g_return_if_fail (model != NULL);
+
+	if (model->mime_filter_values != NULL) {
+		g_list_foreach (model->mime_filter_values, (GFunc)g_free, NULL);
+		g_list_free (model->mime_filter_values);
+		model->mime_filter_values = NULL;
+	}
+
+	va_start (valist, model);
+
+	str = va_arg (valist, gchar*);
+
+	while (str != NULL) {
+		list = g_list_prepend (list, g_strdup (str));
+
+		str = va_arg (valist, gchar*);
+	}
+
+	va_end (valist);
+
+	model->mime_filter_values = list;
+}
+
+/**
+ * egg_recent_model_set_filter_groups:
+ * @model:  A EggRecentModel object.
+ *
+ * Sets which groups are allowed in the list.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_set_filter_groups (EggRecentModel *model,
+			       ...)
+{
+	va_list valist;
+	GList *list = NULL;
+	gchar *str;
+
+	g_return_if_fail (model != NULL);
+
+	if (model->group_filter_values != NULL) {
+		g_list_foreach (model->group_filter_values, (GFunc)g_free, NULL);
+		g_list_free (model->group_filter_values);
+		model->group_filter_values = NULL;
+	}
+
+	va_start (valist, model);
+
+	str = va_arg (valist, gchar*);
+
+	while (str != NULL) {
+		list = g_list_prepend (list, g_strdup (str));
+
+		str = va_arg (valist, gchar*);
+	}
+
+	va_end (valist);
+
+	model->group_filter_values = list;
+}
+
+/**
+ * egg_recent_model_set_filter_uri_schemes:
+ * @model:  A EggRecentModel object.
+ *
+ * Sets which URI schemes (file, http, ftp, etc) are allowed in the list.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_set_filter_uri_schemes (EggRecentModel *model, ...)
+{
+	va_list valist;
+	GList *list = NULL;
+	gchar *str;
+
+	g_return_if_fail (model != NULL);
+
+	if (model->scheme_filter_values != NULL) {
+		g_list_foreach (model->scheme_filter_values, (GFunc)g_free, NULL);
+		g_list_free (model->scheme_filter_values);
+		model->scheme_filter_values = NULL;
+	}
+
+	va_start (valist, model);
+
+	str = va_arg (valist, gchar*);
+
+	while (str != NULL) {
+		list = g_list_prepend (list, g_strdup (str));
+
+		str = va_arg (valist, gchar*);
+	}
+
+	va_end (valist);
+
+	model->scheme_filter_values = list;
+}
+
+/**
+ * egg_recent_model_set_sort:
+ * @model:  A EggRecentModel object.
+ * @sort:  A EggRecentModelSort type
+ *
+ * Sets the type of sorting to be used.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_set_sort (EggRecentModel *model,
+			     EggRecentModelSort sort)
+{
+	g_return_if_fail (model != NULL);
+	
+	model->sort_type = sort;
+}
+
+/**
+ * egg_recent_model_changed:
+ * @model:  A EggRecentModel object.
+ *
+ * This function causes a "changed" signal to be emitted.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_changed (EggRecentModel *model)
+{
+	GList *list = NULL;
+
+	if (model->limit != 0) {
+		list = egg_recent_model_get_list (model);
+		egg_recent_model_monitor_list (model, list);
+	}
+	
+	g_signal_emit (G_OBJECT (model), model_signals[CHANGED], 0, list);
+
+	if (list)
+		EGG_RECENT_ITEM_LIST_UNREF (list);
+}
+
+/**
+ * egg_recent_model_get_type:
+ *
+ * This returns a GType representing a EggRecentModel object.
+ *
+ * Returns: a GType
+ */
+GType
+egg_recent_model_get_type (void)
+{
+	static GType egg_recent_model_type = 0;
+
+	if(!egg_recent_model_type) {
+		static const GTypeInfo egg_recent_model_info = {
+			sizeof (EggRecentModelClass),
+			NULL, /* base init */
+			NULL, /* base finalize */
+			(GClassInitFunc)egg_recent_model_class_init, /* class init */
+			NULL, /* class finalize */
+			NULL, /* class data */
+			sizeof (EggRecentModel),
+			0,
+			(GInstanceInitFunc) egg_recent_model_init
+		};
+
+		egg_recent_model_type = g_type_register_static (G_TYPE_OBJECT,
+							"EggRecentModel",
+							&egg_recent_model_info, 0);
+	}
+
+	return egg_recent_model_type;
+}
+

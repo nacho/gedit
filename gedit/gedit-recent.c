@@ -36,10 +36,10 @@
 #include "gedit-prefs-manager.h"
 
 
-static GnomeRecentModel *model;
+static EggRecentModel *model;
 
 
-GnomeRecentModel *
+EggRecentModel *
 gedit_recent_get_model (void)
 {
 	return model;
@@ -48,5 +48,7 @@ gedit_recent_get_model (void)
 void
 gedit_recent_init (void)
 {
-	model = gnome_recent_model_new ("gedit-2", gedit_prefs_manager_get_max_recents ());
+	model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU,
+				gedit_prefs_manager_get_max_recents ());
+	egg_recent_model_set_filter_mime_types (model, "text/*", NULL);
 }

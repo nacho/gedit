@@ -33,6 +33,7 @@
 
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-help.h>
+#include <libgnome/gnome-i18n.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"

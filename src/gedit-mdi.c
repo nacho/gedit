@@ -50,7 +50,7 @@
 #include "gedit-view.h"
 #include "gedit-utils.h"
 #include "gedit-plugins-engine.h"
-#include "gnome-recent-view-bonobo.h"
+#include "recent-files/egg-recent-view-bonobo.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -263,8 +263,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GtkWidget *widget;
 	BonoboControl *control;
 	BonoboUIComponent *ui_component;
-	GnomeRecentView *view;
-	GnomeRecentModel *model;
+	EggRecentView *view;
+	EggRecentModel *model;
 	GeditWindowPrefs *prefs;
 	GdkWindowState state;
 	
@@ -352,9 +352,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* add a GeditRecentView object */
 	model = gedit_recent_get_model ();
-	view = GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (
+	view = EGG_RECENT_VIEW (egg_recent_view_bonobo_new (
 					ui_component, "/menu/File/Recents"));
-	gnome_recent_view_set_model (view, model);
+	egg_recent_view_set_model (view, model);
 	
 	g_signal_connect (G_OBJECT (view), "activate",
 			  G_CALLBACK (gedit_file_open_recent), NULL);
@@ -1149,7 +1149,7 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
-GnomeRecentView *
+EggRecentView *
 gedit_mdi_get_recent_view_from_window (BonoboWindow* win)
 {
 	gpointer r;
@@ -1157,7 +1157,7 @@ gedit_mdi_get_recent_view_from_window (BonoboWindow* win)
 
 	r = g_object_get_data (G_OBJECT (win), RECENT_KEY);
 	
-	return (r != NULL) ? GNOME_RECENT_VIEW (r) : NULL;
+	return (r != NULL) ? EGG_RECENT_VIEW (r) : NULL;
 }
 
 
