@@ -1,3 +1,78 @@
+Sat Aug 07 18:46:50 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.c: (gE_view_new) Check to see if the gE_docuemnt buffer
+	  contains text, if so, insert this into the view; i need to figure out
+	  how to keep this buffer in sync, so the GnomeMDI add view will work
+	  properly.
+
+Sat Aug 07 18:09:58 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_window.[ch]: Replacements for gE_document.[ch]. Removed old cruft
+	  that isnt needed any more (such as msgbar and popup menu code).
+	
+	* commands.c:
+	  gE_files.c:
+	  gE_mdi.c:
+	  gE_plugin_api.c:
+	  gE_prefs_box.c:
+	  gE_print.c:
+	  gE_view.c:
+	  gedit.c:
+	  menus.c:
+	  search.c: Replaced includes of gE_document.h for gE_window.h (ahh,
+	  the joy's of sed =).
+	
+	* gE_document.[ch] are now depreciated files, i'll keep them for now
+	  for reference purposes.
+
+Sat Aug 07 17:50:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* Makefile.am:
+	  toolbar.[ch]: ok, i've put the actual toolbar GnomeUIInfo into
+	  toolbar.h and commented out toolbar.c from the make list. Nothing
+	  uses toolbar.c any more (we use GnomeMDI, we just need to supply the
+	  GnomeUIInfo).
+	
+	* Makefile.am: Also commented out dialog.[ch], its not used any more
+
+	* gE_document.c:
+	  gE_files.c:
+	  gE_prefs.c:
+	  gE_prefs_box.c:
+	  menu.c: Commented out an include for toolbar.h - only gedit.c needs
+	  it.
+	
+	* gE_prefs.c: Go back to using the regular gnome_config code, instead
+	  of our old gE_prefslib.[ch] code. This should improve config
+	  performance (as we dont open/close the config file each time). 
+	  I've shaved off about 17k from the binary now! wooo! =)
+
+Tue Jul 20 16:26:39 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.[ch]: Made the View widget inherited from a GtkVBox. This
+	  has fixed one of the Gtk-CRITICAL errors and means we dont have to
+	  worry about allocating space for the widget.
+	
+	* gE_document.c: (gE_window_new) Started re-writing this function, 
+	  to try and make GnomeMDI a little more stable.
+
+Mon Jul 19 19:30:14 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: (gE_document) Added buffer and buffer size to the document
+	  struct.
+	
+	* gE_mdi.c: (gE_document_new) Removed references to 
+ 	  gnome_mdi_add_child/view. (gE_document_new_with_file) As above, 
+	  but now load the requested file into the gE_document internal buffer.
+	
+	* gE_files.c:
+	  commands.c:
+	  gE_document.c:
+	  gE_plugin_api.c:
+	  gedit.c: All gE_document_new* functions have the 
+  	  gnome_mdi_add_child/view after them, as they are no longer in the 
+	  gE_document_new* functions.
+
 Mon Jul 19 18:44:31 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* TODO-large: Moved old TODO list into this.
@@ -5,7 +80,12 @@ Mon Jul 19 18:44:31 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 	* TODO: New and more consise TODO list.
 	
 	* KNOWNBUGS: Added Line Counter problem.
-	
+
+Sun Jul 18 21:09:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/search.c: (search_search) Search should work properly now, except
+	  search backwards is a bit dodgy now, erf.. 
+
 1999-07-17  Karsten Weiss  <karsten@addx.au.s.shuttle.de>
 
 	* gE_prefs_box.c: (doc_page_new) Tagged two strings as translatable.
@@ -19,6 +99,32 @@ Fri Jul  2 16:18:27 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 	  in preperation of release.
 	
 	* NEWS: Added Announce message for 0.5.4.
+
+Mon Jun 28 19:37:27 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.[ch]: New files... What i've done is re-implemented the 
+	  viewable area that you enter text into as a widget, called gE_view.
+	  The widget now works the same as the old method, but now the GnomeMDI
+	  system will be able to access the member widgets, unlike before.
+	
+	* main.h: (gE_document) Moved all the view related widgets into the 
+          gE_view class structure.
+	
+	* commands.[ch]: Moved view related functions over to gE_view.[ch]. Also
+	  modified any functions that referred to the old method to refer to the
+	  new gE_view system.
+	
+	* gE_document.c:
+	  gE_prefs_box.c:
+	  gE_plugin_api.c:
+	  gE_print.c:
+	  menus.c:
+	  search.c: Made the functions that used the old view method use the new
+	  method. So all doc->text is now either a view->text or a 
+	  GE_VIEW (mdi->active_view)->text (as gE_view is the MDI view now).
+	
+	* There's still lots of bugs, i know.. but the new system is working 
+          now.
 
 Sat Jun 26 22:22:17 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 

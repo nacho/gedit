@@ -25,7 +25,7 @@
 #include <gnome.h>
 
 #include "main.h"
-#include "gE_document.h"
+#include "gE_window.h"
 
 typedef struct dlg_data {
 	GtkWidget *     dlg;	/* top level dialog widget */

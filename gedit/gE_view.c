@@ -25,7 +25,7 @@
 #include "gE_mdi.h"
 #include "commands.h"
 #include "gE_prefs.h"
-#include "gE_document.h"
+#include "gE_window.h"
 #include "gE_print.h"
 
 #define GE_DATA		1
@@ -60,7 +60,7 @@ void line_pos_cb(GtkWidget *w, gE_data *data);
 
 static gint gE_view_signals[LAST_SIGNAL] = { 0 };
 
-GtkFixedClass *parent_class = NULL;
+GtkVBoxClass *parent_class = NULL;
 
 
 
@@ -116,7 +116,7 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	GtkWidget *text;
 
 	data = g_malloc0 (sizeof (gE_data));
-/*	line_pos_cb(NULL, data);*/
+	line_pos_cb(NULL, data);
 	
 	g_free (data);
 	
@@ -281,10 +281,10 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	sprintf (col, "Column:\t%d",
 	 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/7);
 	
-	label = gnome_dock_item_get_child (gnome_app_get_dock_item_by_name (app, "Column"));
+/*	label = gnome_dock_item_get_child (gnome_app_get_dock_item_by_name (app, "Column"));
 	
 	gtk_label_set (GTK_LABEL(label), col);
-
+*/
 }
 
 
@@ -355,11 +355,11 @@ static void gE_view_size_request (GtkWidget *w, GtkRequisition *req)
 static void gE_view_class_init (gE_view_class *klass)
 {
 	GtkObjectClass *object_class;
-	GtkWidgetClass *widget_class;
-	GtkFixedClass *fixed_class;
+	/*GtkWidgetClass *widget_class;
+	GtkFixedClass *fixed_class;*/
 	
 	object_class = (GtkObjectClass *)klass;
-	widget_class = (GtkWidgetClass *)klass;
+	/*widget_class = (GtkWidgetClass *)klass;*/
 	
 	gE_view_signals[CURSOR_MOVED_SIGNAL] = gtk_signal_new ("cursor_moved",
 														GTK_RUN_FIRST,
@@ -373,13 +373,13 @@ static void gE_view_class_init (gE_view_class *klass)
 	
 	klass->cursor_moved = NULL;
 	
-	widget_class->size_allocate = gE_view_size_allocate;
+	/*widget_class->size_allocate = gE_view_size_allocate;
 	widget_class->size_request = gE_view_size_request;
 	widget_class->expose_event = gE_view_expose;
 	widget_class->realize = gE_view_realize;
 	object_class->finalize = gE_view_finalize;
 	
-	parent_class = gtk_type_class (gtk_fixed_get_type ());
+	parent_class = gtk_type_class (gtk_vbox_get_type ());*/
 }
 
 static void gE_view_init (gE_view *view)
@@ -388,6 +388,8 @@ static void gE_view_init (gE_view *view)
 	GtkStyle *style;
 	
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
+	gtk_container_add (GTK_CONTAINER (view), view->vbox);
+	gtk_widget_show (view->vbox);
 	
 	/* Create the upper split screen */
 	view->scrwindow[0] = gtk_scrolled_window_new (NULL, NULL);
@@ -451,7 +453,7 @@ static void gE_view_init (gE_view *view)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[1]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_AUTOMATIC);
-	gtk_fixed_put (GTK_FIXED(view), view->scrwindow[1], 0, 0);
+	/*gtk_fixed_put (GTK_FIXED(view), view->scrwindow[1], 0, 0);*/
       	gtk_widget_show (view->scrwindow[1]);
 
 	view->split_screen = gtk_text_new(NULL, NULL);
@@ -503,11 +505,11 @@ static void gE_view_init (gE_view *view)
 	if (!view->splitscreen)
 	  gtk_widget_hide (GTK_WIDGET (view->split_screen)->parent);
 
-	gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
-	gtk_widget_show (view->vbox);
+	/*gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
+	gtk_widget_show (view->vbox);*/
 
 	gtk_widget_grab_focus(view->text);
-
+	
 }
 
 guint gE_view_get_type ()
@@ -526,7 +528,7 @@ guint gE_view_get_type ()
 	    		(GtkArgGetFunc) NULL,
 	    };
 	    
-	    gE_view_type = gtk_type_unique (gtk_fixed_get_type (), &gE_view_info);
+	    gE_view_type = gtk_type_unique (gtk_vbox_get_type (), &gE_view_info);
 	   }
 	 
 	 return gE_view_type;
@@ -537,6 +539,25 @@ GtkWidget *gE_view_new (gE_document *doc)
 	gE_view *view = gtk_type_new (gE_view_get_type ());
 	
 	view->document = doc;
+
+	if (view->document->buf_size)
+	{
+	  	g_print ("gE_view_init: inserting buffer..\n");
+	  	
+	  	/*gtk_text_freeze (GTK_TEXT (view->text));*/
+	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
+						 &view->text->style->black,
+						 NULL, view->document->buf,
+						 view->document->buf_size);
+
+	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
+						 &view->split_screen->style->black,
+						 NULL, view->document->buf,
+						 view->document->buf_size);
+		/*gtk_text_thaw (GTK_TEXT (view->text));*/
+		
+		gE_view_set_position (view, 0);
+	}
 	
 	return GTK_WIDGET (view);
 }

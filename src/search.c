@@ -25,7 +25,8 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gE_document.h"
+#include "gE_window.h"
+#include "gE_view.h"
 #include "gE_mdi.h"
 #include "search.h"
 
@@ -77,20 +78,26 @@ void search_again_cb(GtkWidget * w, gpointer cbdata) { }
 gint
 pos_to_line (gE_document *doc, gint pos, gint *numlines)
 {
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 0, i, current_line = 0;
 	gchar *c;
 
 
-	for (i = 0; i < gtk_text_get_length(GTK_TEXT(doc->text)); i++) {
-		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i, i + 1);
-		if (!strcmp(c, "\n")) {
+	for (i = 0; i < gtk_text_get_length(GTK_TEXT(view->text)); i++) 
+	   {
+		c = gtk_editable_get_chars(GTK_EDITABLE(view->text), i, i + 1);
+		if (!strcmp(c, "\n")) 
+		  {
 			lines++;
-		}
-		if (i == pos) {
+		  }
+		  
+		if (i == pos) 
+		  {
 			current_line = lines;
-		}
+		  }
 		g_free (c);
-	}
+	   }
+	   
 	*numlines = lines;
 	return current_line;
 }
@@ -98,23 +105,31 @@ pos_to_line (gE_document *doc, gint pos, gint *numlines)
 gint
 line_to_pos (gE_document *doc, gint line, gint *numlines)
 {
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 1, i, current = 0;
 	gchar *c;
 
 
-	if (gtk_text_get_length(GTK_TEXT (doc->text)) == 0) {
+	if (gtk_text_get_length(GTK_TEXT (view->text)) == 0) 
+	  {
 		return 0;
-	}
-	for (i = 1; i < gtk_text_get_length(GTK_TEXT(doc->text)) - 1; i++) {
-		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i - 1, i);
-		if (!strcmp(c, "\n")) {
+	  }
+	
+	for (i = 1; i < gtk_text_get_length(GTK_TEXT(view->text)) - 1; i++) 
+	   {
+		c = gtk_editable_get_chars(GTK_EDITABLE(view->text), i - 1, i);
+		if (!strcmp(c, "\n")) 
+		  {
 			lines++;
-		}
+		  }
 		g_free (c);
-		if (lines == line) {
+		
+		if (lines == line) 
+		  {
 			current = i;
-		}
-	}
+		  }
+	   }
+	   
 	*numlines = lines;
 	return (current);
 }
@@ -122,69 +137,88 @@ line_to_pos (gE_document *doc, gint line, gint *numlines)
 gint
 get_line_count (gE_document *doc)
 {
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 1, i;
 	gchar *c;
 
 
-	if (gtk_text_get_length(GTK_TEXT(doc->text)) == 0) {
+	if (gtk_text_get_length(GTK_TEXT(view->text)) == 0) 
+	  {
 		return 0;
-	}
-	for (i = 1; i < gtk_text_get_length(GTK_TEXT(doc->text)) - 1; i++) {
-		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i - 1, i);
-		if (!strcmp(c, "\n")) {
+	  }
+	  
+	for (i = 1; i < gtk_text_get_length(GTK_TEXT(view->text)) - 1; i++) 
+	   {
+		c = gtk_editable_get_chars(GTK_EDITABLE(view->text), i - 1, i);
+		if (!strcmp(c, "\n")) 
+		  {
 			lines++;
-		}
+		  }
 		g_free (c);
-	}
+	   }
+	   
 	return lines;
 }
 
 void
 seek_to_line (gE_document *doc, gint line, gint numlines)
 {
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gfloat value, ln, tl;
 	gchar *c;
 	gint i;
 
-	if (numlines < 0) {
+	if (numlines < 0) 
+	  {
 		numlines = get_line_count (doc);
-	}
+	  }
 
 	if (numlines < 3)
 		return;
+		
 	if (line > numlines)
 		return;
+		
 	ln = line;
 	tl = numlines;
-	value = (ln * GTK_ADJUSTMENT(GTK_TEXT(doc->text)->vadj)->upper) /
-		tl - GTK_ADJUSTMENT(GTK_TEXT(doc->text)->vadj)->page_increment;
-	gtk_adjustment_set_value(GTK_ADJUSTMENT(GTK_TEXT(doc->text)->vadj),
+	value = (ln * GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper) /
+		tl - GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_increment;
+	gtk_adjustment_set_value(GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
 			value);
 }
 gint
 gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
 {
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gint i, textlen;
 
-	textlen = gtk_text_get_length(GTK_TEXT(doc->text));
-	if (textlen < num_widechars (str)) {
+	textlen = gtk_text_get_length(GTK_TEXT(view->text));
+	if (textlen < num_widechars (str)) 
+	  {
 		return -1;
-	}
+	  }
 
-	if (options & SEARCH_BACKWARDS) {
+	if (options & SEARCH_BACKWARDS) 
+	  {
 		pos -= num_widechars (str);
-		for (i = pos; i >= 0; i--) {
-			if (search (GTK_EDITABLE (doc->text), str, i, options)) {
-				return i;
-			}
-		}
-	} else {
-		for (i = pos; i <= (textlen - num_widechars (str)); i++) {
-			if (search (GTK_EDITABLE (doc->text), str, i, options)) {
-				return i;
-			}
-		}
-	}
+		for (i = pos; i >= 0; i--) 
+		   {
+			  if (search (GTK_EDITABLE (view->text), str, i, options)) 
+			    {
+				  return i;
+		        }
+		   }
+	  }
+	else
+	  {
+		for (i = pos; i <= (textlen - num_widechars (str)); i++) 
+		   {
+			  if (search (GTK_EDITABLE (view->text), str, i, options)) 
+			    {
+				  return i;
+			    }
+		   }
+	  }
 	return (-1);
 }
 
@@ -197,10 +231,13 @@ gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
 void
 gE_search_replace (gE_document *doc, gint pos, gint len, gchar *replace)
 {
-	gtk_editable_delete_text (GTK_EDITABLE (doc->text),
-			pos, pos + len);
-	gtk_editable_insert_text (GTK_EDITABLE (doc->text),
-			replace, strlen (replace), &pos);
+	gE_view *view = GE_VIEW (mdi->active_view);
+
+	gtk_editable_delete_text (GTK_EDITABLE (view->text),
+							pos, pos + len);
+			
+	gtk_editable_insert_text (GTK_EDITABLE (view->text),
+							replace, strlen (replace), &pos);
 }
 /*
  * public callbacks (for menus, etc)
@@ -243,18 +280,20 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 	gE_document *doc;
 	gfloat val, max;
 	gint linecount;
+	gE_view *view = GE_VIEW (mdi->active_view);
 
 	doc = gE_document_current ();
 
-	if (!line_dialog) {
+	if (!line_dialog) 
+	  {
 		line_dialog = create_line_dialog();
-	}
+	  }
 
 	spin = gtk_object_get_data (GTK_OBJECT (line_dialog), "line");
 
 	adj = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (spin));
 	adj->value = (gfloat) pos_to_line (doc,
-		gtk_editable_get_position (GTK_EDITABLE (doc->text)),
+		gtk_editable_get_position (GTK_EDITABLE (view->text)),
 		&linecount);
 	adj->upper = (gfloat) linecount;
 	gtk_signal_connect (GTK_OBJECT (line_dialog), "clicked",
@@ -279,10 +318,8 @@ void count_lines_cb (GtkWidget *widget, gpointer data)
 	if ((doc = gE_document_current ()))
 	  {
 	
-	    g_assert (doc->text != NULL);
-
 	    line_number = pos_to_line (doc,
-	    gtk_editable_get_position (GTK_EDITABLE (doc->text)),
+	    gtk_editable_get_position (GTK_EDITABLE (GE_VIEW (mdi->active_view)->text)),
 								&total_lines);
 	
 	    msg = g_malloc0 (200);
@@ -453,14 +490,15 @@ line_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 	GtkWidget *spin;
 	gint line, linecount;
 	gint pos;
-
+	gE_view *view = GE_VIEW (mdi->active_view);
+	
 	if (button == 0) {
 		spin = gtk_object_get_data (GTK_OBJECT (widget), "line");
 		line = gtk_spin_button_get_value_as_int
 			(GTK_SPIN_BUTTON (spin));
 		seek_to_line (doc, line, -1);
 		pos = line_to_pos (doc, line, &linecount);
-		gtk_editable_set_position (GTK_EDITABLE (doc->text), pos);
+		gtk_editable_set_position (GTK_EDITABLE (view->text), pos);
 	}
 	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
 			GTK_SIGNAL_FUNC (line_dialog_button_cb),
@@ -557,7 +595,8 @@ get_search_options (gE_document *doc, GtkWidget *widget,
 	GtkRadioButton *pos_but;
 	gint pos_type = 0;
 	GSList *from;
-
+	gE_view *view = GE_VIEW (mdi->active_view);
+	
 	datalink = gtk_object_get_data (GTK_OBJECT (widget), "case");
 	if (GTK_TOGGLE_BUTTON (datalink)->active) {
 		*options |= SEARCH_NOCASE;
@@ -580,13 +619,13 @@ get_search_options (gE_document *doc, GtkWidget *widget,
 	}
 	switch (pos_type) {
 		case 0:
-			*pos = gtk_text_get_length (GTK_TEXT (doc->text));
+			*pos = gtk_text_get_length (GTK_TEXT (view->text));
 			break;
 		case 1:
 			*pos = 0;
 			break;
 		case 2:
-			*pos = gtk_editable_get_position (GTK_EDITABLE (doc->text));
+			*pos = gtk_editable_get_position (GTK_EDITABLE (view->text));
 			break;
 	}
 }
@@ -609,20 +648,21 @@ static void
 search_select (gE_document *doc, gchar *str, gint pos, gulong options)
 {
 	gint line, numlines, numwcs;
-
+	gE_view *view = GE_VIEW (mdi->active_view);
+	
 	numwcs = num_widechars(str);
 	line = pos_to_line (doc, pos, &numlines);
 	seek_to_line (doc, line, numlines);
 	if (options | SEARCH_BACKWARDS) {
-		gtk_editable_set_position (GTK_EDITABLE (doc->text),
-				pos);
-		gtk_editable_select_region (GTK_EDITABLE (doc->text),
-				pos + numwcs, pos);
-	} else {
-		gtk_editable_set_position (GTK_EDITABLE (doc->text),
+		gtk_editable_set_position (GTK_EDITABLE (view->text),
 				pos + numwcs);
-		gtk_editable_select_region (GTK_EDITABLE (doc->text),
-				 pos, pos + numwcs);
+		gtk_editable_select_region (GTK_EDITABLE (view->text),
+				pos , pos + numwcs);
+	} else {
+		gtk_editable_set_position (GTK_EDITABLE (view->text),
+				pos);
+		gtk_editable_select_region (GTK_EDITABLE (view->text),
+				 pos + numwcs, pos);
 	}
 }
 

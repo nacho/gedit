@@ -27,6 +27,7 @@
 
 #include "main.h"
 #include "gE_document.h"
+#include "gE_view.h"
 #include "gE_files.h"
 #include "gE_prefs_box.h"
 #include "gE_plugin_api.h"
@@ -34,7 +35,7 @@
 #include "gE_mdi.h"
 #include "gE_print.h"
 #include "menus.h"
-#include "toolbar.h"
+/*#include "toolbar.h"*/
 #include "gE_prefs.h"
 #include "search.h"
 
@@ -77,11 +78,7 @@ static gint msgbar_timeout_id;
 /*gE_window */
 void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
-        /*GnomeUIInfo * gedit_menu;
-	gE_window *w;*/
-	GtkWidget *tmp, *statusbar, *box;
-	gint *ptr; /* For plugin stuff. */
-	gint statsize;
+	GtkWidget *statusbar;
 	
 	static GtkTargetEntry drag_types[] =
 	{
@@ -89,80 +86,12 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	};
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
-	/* various initializations */
-	/*w = g_malloc0(sizeof(gE_window));*/
-
-/*	settings->auto_indent = TRUE;
-	settings->show_tabs = TRUE;
-	settings->splitscreen = FALSE;
-
-	settings->show_status = TRUE;
-	settings->have_toolbar = TRUE;
-*/
-	ptr = g_new(int, 1);
-	*ptr = ++last_assigned_integer;
-	g_hash_table_insert (win_int_to_pointer, ptr, app);
-	g_hash_table_insert (win_pointer_to_int, app, ptr);
-	
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
-
-	/* statusbar */
-	statsize = (settings->width - 160);
-	
-	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gtk_widget_set_usize (GTK_WIDGET (statusbar), statsize, 0);
-	gnome_app_add_docked (GNOME_APP (app), GTK_WIDGET (statusbar), "Statusbar", 
-						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
-						0, 0, 0);
-	gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
-
-	/* line and column indicators */
-
-	/*tmp = gtk_label_new(_("Column:"));
-	gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
-	gtk_widget_show(tmp);*/
-
-	col_label = gtk_label_new (_("Column:\t0"));
-	/*gtk_box_pack_start(GTK_BOX(statusbar), col_label, FALSE, FALSE, 1);*/
-	gtk_widget_set_usize(col_label, 100, 0);
-	gtk_widget_show(col_label);
-
-	gnome_app_add_docked (GNOME_APP (app), col_label, "Column", 
-						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
-						0, 1, 0);
-
-	
-	/*box = gtk_hbox_new (FALSE, 1);
-	gtk_widget_show (box);*/
-	
-	tmp = gtk_button_new_with_label(_("Line"));
-	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(count_lines_cb), NULL);
-	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	/*gtk_box_pack_start (GTK_BOX (box), tmp, TRUE, TRUE, 5);*/
-	/*gtk_box_pack_start(GTK_BOX(statusbar), tmp, TRUE, TRUE, 0);*/
-	gtk_widget_show(tmp);
-
-	gnome_app_add_docked (GNOME_APP (app), tmp, "Line", 
-						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
-						0, 2, 0);
-
-	/*w->statusbox = statusbar;*/
-
-	/* finish up */
-	/*gtk_widget_show(statusbar);*/
-
 	gE_get_settings ();
 
-	gE_document_new ();
-
-	/* gE_set_menu_toggle_states();*/
-	
-	g_list_foreach(plugins, (GFunc) add_plugins_to_window, GNOME_APP(app));
-	
 	settings->num_recent = 0;
 	recent_update(GNOME_APP(app));
 
@@ -174,6 +103,10 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gtk_signal_connect (GTK_OBJECT (app),
 		"drag_data_received",
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
+
+	/* statusbar */
+	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+	gnome_app_set_statusbar (GNOME_APP(app),GTK_WIDGET (statusbar));
 		
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
 
@@ -194,68 +127,6 @@ void gE_window_set_status_bar (gint show_status)
 	  gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
 }
 
-/* gE_document_new: Relocated to gE_mdi.[ch] */
-
-/* gE_document_new_with_file: Relocated to gE_mdi[ch] */
-
-/* gE_docuemnt_current: Relocated to gE_mdi.[ch] */
-
-void gE_document_set_split_screen (gE_document *doc, gint split_screen)
-{
-	if (!doc->split_parent)
-		return;
-
-	if (split_screen)
-	  {
-	   	gtk_widget_show (doc->split_parent);
-	  }
-	else
-	  {
-		gtk_widget_hide (doc->split_parent);
-	  }
-   	doc->splitscreen = split_screen;
-}
-
-
-void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
-{
-	doc->word_wrap = word_wrap;
-	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
-}
-
-void gE_document_set_line_wrap (gE_document *doc, gint line_wrap)
-{
-	doc->line_wrap = line_wrap;
-	gtk_text_set_line_wrap (GTK_TEXT (doc->text), doc->line_wrap);
-}
-
-void gE_document_set_read_only (gE_document *doc, gint read_only)
-{
-gchar RO_label[255];
-gchar *fname;
-
-	doc->read_only = read_only;
-	gtk_text_set_editable (GTK_TEXT (doc->text), !doc->read_only);
-	
-	if(read_only)
-	{
-	  sprintf(RO_label, "RO - %s", GNOME_MDI_CHILD(doc)->name);
-	  gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), RO_label);
-	}
-	else
-	{
-	 if (doc->filename)
-	   gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
-	   					     g_basename(doc->filename));
-	 else
-	   gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc), _(UNTITLED));
-	}
-	 if (doc->split_screen)
-		gtk_text_set_editable
-			(GTK_TEXT (doc->split_screen), !doc->read_only);
-}
-
-
 
 void
 child_switch (GnomeMDI *mdi, gE_document *doc)
@@ -264,7 +135,7 @@ child_switch (GnomeMDI *mdi, gE_document *doc)
 
 	if (gE_document_current())
 	  {
-	    gtk_widget_grab_focus(gE_document_current()->text);
+	    gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
 	    title = g_malloc0 (strlen (GEDIT_ID) +
 					   strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
 	    sprintf (title, "%s - %s",
@@ -414,6 +285,8 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 	/* hmm maybe whe should check if the file exist before we try
 	 * to open.  this will be fixed later.... */
 	doc = gE_document_new_with_file (newfname);
+	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 } /* doc_swaphc_cb */
 
 /* the end */

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.5.3\n"
-"POT-Creation-Date: 1999-06-26 22:40+0100\n"
+"POT-Creation-Date: 1999-06-09 20:35+0900\n"
 "PO-Revision-Date: 1999-06-09 13:27:10+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -30,46 +30,81 @@ msgstr "Docid는 %ld입니다.\n"
 msgid "Shell"
 msgstr "쉘"
 
-#: src/commands.c:575
+#: src/commands.c:556
 msgid "Open File..."
 msgstr "파일 열기..."
 
-#: src/commands.c:652
+#: src/commands.c:633
 msgid "Read only file!"
 msgstr "읽기 전용 파일!"
 
-#: src/commands.c:678
+#: src/commands.c:659
 msgid "Error saving file!"
 msgstr "파일 저장 에러!"
 
-#: src/commands.c:701
+#: src/commands.c:682
 msgid "Save As..."
 msgstr "다른 이름으로 저장..."
 
-#: src/commands.c:752
+#: src/commands.c:724
 msgid "Are you sure you wish to revert all changes?"
 msgstr "정말로 모든 수정을 취소하고 싶으세요?"
 
-#: src/commands.c:794
+#: src/commands.c:766
 msgid "Document Unchanged..."
 msgstr "문서가 바뀌지 않음..."
 
-#: src/commands.c:796
+#: src/commands.c:768
 msgid "Document Unsaved..."
 msgstr "문서가 저장되지 않음..."
 
-#: src/commands.c:1098
-#, fuzzy
-msgid "_File/"
-msgstr "파일(_F)"
-
-#: src/commands.c:1107 src/commands.c:1108
+#: src/commands.c:1079 src/commands.c:1080
 msgid "_File"
 msgstr "파일(_F)"
+
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr "Alex Roberts"
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr "Evan Lawrence"
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr "http://gedit.pn.org"
 
 #: src/gE_about.c:33
 msgid "With special thanks to:"
 msgstr "With special thanks to:"
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr "       Will LaShell"
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr "       Chris Lahey"
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr "       Andy Kahn"
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr "       Miguel de Icaza"
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr "       Martin Baulig"
+
+#: src/gE_about.c:39
+msgid "       Thomas Holmgren"
+msgstr "       Thomas Holmgren"
+
+#: src/gE_about.c:40
+msgid "       Martijn van Beers"
+msgstr "       Martijn van Beers"
 
 #: src/gE_about.c:52
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
@@ -92,216 +127,175 @@ msgid "Paste"
 msgstr "붙이기"
 
 #. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:66 src/gE_mdi.c:103 src/toolbar.c:42
+#: src/gE_document.c:66 src/gE_mdi.c:102 src/toolbar.c:42
 msgid "Save"
 msgstr "저장"
 
-#: src/gE_document.c:67 src/gE_mdi.c:104 src/toolbar.c:44
+#: src/gE_document.c:67 src/gE_mdi.c:103 src/toolbar.c:44
 msgid "Close"
 msgstr "닫기"
 
-#: src/gE_document.c:68 src/gE_mdi.c:105 src/gE_print.c:71 src/toolbar.c:46
+#. Print Settings
+#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:917
+#: src/gE_print.c:71 src/toolbar.c:46
 msgid "Print"
 msgstr "인쇄"
 
-#: src/gE_document.c:70 src/gE_mdi.c:108
+#: src/gE_document.c:70 src/gE_mdi.c:107
 msgid "Open (swap) .c/.h file"
 msgstr ".c/.h 파일 (스왑) 열기"
 
 #. line and column indicators
-#. tmp = gtk_label_new(_("Column:"));
-#. gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
-#. gtk_widget_show(tmp);
-#: src/gE_document.c:128
-#, fuzzy
-msgid "Column:\t0"
+#: src/gE_document.c:118
+msgid "Column:"
 msgstr "열:"
 
-#. box = gtk_hbox_new (FALSE, 1);
-#. gtk_widget_show (box);
-#: src/gE_document.c:141
+#: src/gE_document.c:127
 msgid "Line"
 msgstr "라인"
 
-#: src/gE_mdi.c:65
+#: src/gE_mdi.c:64
 msgid "Find _Line..."
 msgstr "라인 찾기(_L)..."
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:65
 msgid "Search for a line"
 msgstr "라인 찾기"
 
-#: src/gE_mdi.c:79
+#: src/gE_mdi.c:78
 msgid "_Add View"
 msgstr "보기창 추가(_A)"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:79
 msgid "Add a new view of the document"
 msgstr "문서의 새로운 보기창 추가"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:80
 msgid "_Remove View"
 msgstr "보기창 삭제(_R)"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 msgid "Remove view of the document"
 msgstr "문서의 보기창 삭제"
 
-#: src/gE_mdi.c:502
+#: src/gE_mdi.c:486
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s'가 바뀌었습니다. 저장할까요?"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:557
-#: src/gE_prefs_box.c:558 src/gE_prefs_box.c:608 src/gE_prefs_box.c:609
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:508
+#: src/gE_prefs_box.c:509 src/gE_prefs_box.c:559 src/gE_prefs_box.c:560
 #: src/menus.c:251
 msgid "_Plugins"
 msgstr "플러그인(_P)"
 
-#: src/gE_prefs_box.c:97
+#: src/gE_prefs_box.c:89
 msgid "Default"
 msgstr "기본값"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:90
 msgid "Notebook"
 msgstr "노트북"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:91
 msgid "Toplevel"
 msgstr "최상위레벨"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:92
 msgid "Modal"
 msgstr "형태"
 
-#: src/gE_prefs_box.c:272
+#: src/gE_prefs_box.c:251
 msgid "Appearance"
 msgstr "형상"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:264
 msgid "Show Statusbar"
 msgstr "상태막대 보이기"
 
-#: src/gE_prefs_box.c:294
+#: src/gE_prefs_box.c:273
 msgid "Show Splitscreen"
 msgstr "화면 분할 보이기"
 
-#: src/gE_prefs_box.c:303
+#: src/gE_prefs_box.c:282
 msgid "Editor Behavior"
 msgstr "편집기 동작"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:295
 msgid "Enable Autoindent"
 msgstr "Autoindent 사용"
 
-#: src/gE_prefs_box.c:325
+#: src/gE_prefs_box.c:304
 msgid "Enable Wordwrap"
 msgstr "Wordwrap 사용"
 
-#. Document Closing stuffs
-#: src/gE_prefs_box.c:346
-#, fuzzy
-msgid "Document Settings"
-msgstr "문서 탭(_D)"
-
-#. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:372
+#: src/gE_prefs_box.c:324
 msgid "Print Command"
 msgstr "인쇄 명령"
 
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:414
 msgid "Current Font"
 msgstr "현재 글꼴"
 
-#: src/gE_prefs_box.c:480
+#: src/gE_prefs_box.c:431
 msgid "Select..."
 msgstr "선택..."
 
-#: src/gE_prefs_box.c:530
+#: src/gE_prefs_box.c:481
 msgid "Plugin Selector"
 msgstr "플러그인 선택기"
 
-#: src/gE_prefs_box.c:651
+#: src/gE_prefs_box.c:602
 msgid "Name"
 msgstr "이름"
 
-#: src/gE_prefs_box.c:651
+#: src/gE_prefs_box.c:602
 msgid "Location"
 msgstr "위치"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:658 src/gE_prefs_box.c:976
+#: src/gE_prefs_box.c:609 src/gE_prefs_box.c:927
 msgid "Plugins"
 msgstr "플러그인"
 
-#: src/gE_prefs_box.c:672
+#: src/gE_prefs_box.c:623
 msgid "Use Plugins"
 msgstr "플러그인 사용"
 
-#: src/gE_prefs_box.c:739
+#: src/gE_prefs_box.c:690
 msgid "Add"
 msgstr "추가"
 
-#: src/gE_prefs_box.c:744
+#: src/gE_prefs_box.c:695
 msgid "Remove"
 msgstr "삭제"
 
-#: src/gE_prefs_box.c:767
+#: src/gE_prefs_box.c:718
 msgid "MDI Mode"
 msgstr "MDI 모드"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:773
 msgid "Window Size"
 msgstr "창 크기"
 
-#: src/gE_prefs_box.c:835
-#, fuzzy
-msgid "Current Width:"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:856
-msgid "Startup Width:"
-msgstr ""
-
-#: src/gE_prefs_box.c:864 src/gE_prefs_box.c:904
-#, fuzzy
-msgid "Use Current"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:876
-#, fuzzy
-msgid "Current Height:"
-msgstr "현재 글꼴"
-
-#: src/gE_prefs_box.c:896
-msgid "Startup Height:"
-msgstr ""
-
 #. General Settings
-#: src/gE_prefs_box.c:956
+#: src/gE_prefs_box.c:907
 msgid "General"
 msgstr "일반"
 
 #. Window Settings
-#: src/gE_prefs_box.c:961
+#: src/gE_prefs_box.c:912
 msgid "Window"
 msgstr "창"
 
-#. Print Settings
-#: src/gE_prefs_box.c:966
-#, fuzzy
-msgid "Document"
-msgstr "문서 탭(_D)"
-
 #. Font Settings
-#: src/gE_prefs_box.c:971
+#: src/gE_prefs_box.c:922
 msgid "Font"
 msgstr "글꼴"
 
 #. MDI Settings
-#: src/gE_prefs_box.c:981
+#: src/gE_prefs_box.c:932
 msgid "MDI"
 msgstr "MDI"
 
@@ -326,11 +320,11 @@ msgstr "무조건 인쇄"
 msgid " Save, then print "
 msgstr " 저장 후 인쇄 "
 
-#: src/gedit.c:127
+#: src/gedit.c:126
 msgid "Launch a plugin at startup"
 msgstr "시작시 플러그인 실행"
 
-#: src/gedit.c:127
+#: src/gedit.c:126
 msgid "PLUGIN-NAME"
 msgstr "플러그인-이름"
 
@@ -499,7 +493,7 @@ msgstr "설정 저장(_v)"
 msgid "Save the current settings for future sessions"
 msgstr "내일을 위해 현재 설정을 저장"
 
-#: src/search.c:289
+#: src/search.c:288
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -508,60 +502,55 @@ msgstr ""
 "총 라인: %i\n"
 "현재 라인: %i"
 
-#: src/search.c:311
+#: src/search.c:310
 msgid "Go to line"
 msgstr "라인 찾아가기"
 
-#: src/search.c:321
+#: src/search.c:320
 msgid "Line number"
 msgstr "라인 번호"
 
-#: src/search.c:344
+#: src/search.c:343
 msgid "Search from cursor"
 msgstr "커서 위치부터 찾기"
 
-#: src/search.c:351
+#: src/search.c:350
 msgid "Search from beginning of document"
 msgstr "문서의 처음부터 찾기"
 
-#: src/search.c:358
+#: src/search.c:357
 msgid "Search from end of document"
 msgstr "문서의 마지막부터 찾기"
 
-#: src/search.c:365
+#: src/search.c:364
 msgid "Case sensitive"
 msgstr "대소문자 구별"
 
-#: src/search.c:371
+#: src/search.c:370
 msgid "Reverse search"
 msgstr "뒤로 찾기"
 
-#: src/search.c:383
+#: src/search.c:382
 msgid "Search"
 msgstr "찾기"
 
-#: src/search.c:388 src/search.c:416
+#: src/search.c:387 src/search.c:415
 msgid "Search for:"
 msgstr "찾기:"
 
-#: src/search.c:410 src/search.c:411
+#: src/search.c:409
 msgid "Replace"
 msgstr "바꾸기"
 
-#: src/search.c:412
-#, fuzzy
-msgid "Replace all"
-msgstr "바꾸기"
-
-#: src/search.c:426
+#: src/search.c:425
 msgid "Replace with:"
 msgstr "바꾸기:"
 
-#: src/search.c:437
+#: src/search.c:436
 msgid "Ask before replacing"
 msgstr "바꾸기 전에 묻기"
 
-#: src/search.c:633
+#: src/search.c:629
 msgid "Replace?"
 msgstr "바꿀까요?"
 
@@ -616,33 +605,3 @@ msgstr "종료"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "프로그램 종료"
-
-#~ msgid "Alex Roberts"
-#~ msgstr "Alex Roberts"
-
-#~ msgid "Evan Lawrence"
-#~ msgstr "Evan Lawrence"
-
-#~ msgid "http://gedit.pn.org"
-#~ msgstr "http://gedit.pn.org"
-
-#~ msgid "       Will LaShell"
-#~ msgstr "       Will LaShell"
-
-#~ msgid "       Chris Lahey"
-#~ msgstr "       Chris Lahey"
-
-#~ msgid "       Andy Kahn"
-#~ msgstr "       Andy Kahn"
-
-#~ msgid "       Miguel de Icaza"
-#~ msgstr "       Miguel de Icaza"
-
-#~ msgid "       Martin Baulig"
-#~ msgstr "       Martin Baulig"
-
-#~ msgid "       Thomas Holmgren"
-#~ msgstr "       Thomas Holmgren"
-
-#~ msgid "       Martijn van Beers"
-#~ msgstr "       Martijn van Beers"

@@ -35,9 +35,10 @@
 
 
 #include "main.h"
+#include "gE_view.h"
 #include "commands.h"
 #include "gE_mdi.h"
-#include "gE_document.h"
+#include "gE_window.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "gE_plugin_api.h"
@@ -52,7 +53,6 @@ static void close_window_common(gE_window *w);
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
-static void line_pos_cb(GtkWidget *w, gE_data *data);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb(GtkWidget *w, gE_data *data);
 
@@ -61,35 +61,6 @@ GtkWidget *ssel = NULL;
 GtkWidget *osel = NULL;
 GtkWidget *col_label;
 gchar *oname = NULL;
-
-/* handles changes in the text widget... */
-void
-doc_changed_cb(GtkWidget *w, gpointer cbdata)
-{
-gchar MOD_label[255];
-gchar *str;
-
-	gE_document *doc = (gE_document *) cbdata;
-
-	doc->changed = TRUE;
-	gtk_signal_disconnect (GTK_OBJECT(doc->text), (gint) doc->changed_id);
-	doc->changed_id = FALSE;
-	
-	str = g_malloc (strlen (GNOME_MDI_CHILD(doc)->name) + 2);
-	
-	sprintf(str, "*%s", GNOME_MDI_CHILD(doc)->name);
-	/*gtk_label_set(GTK_LABEL(doc->tab_label), MOD_label);*/
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), str);
-	
-	g_free (str);
-	
-	str = g_malloc0 (strlen (GEDIT_ID) +
-				 strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
-	sprintf (str, "%s - %s", GNOME_MDI_CHILD (gE_document_current())->name, GEDIT_ID);
-	gtk_window_set_title(GTK_WINDOW(mdi->active_window), str);
-	g_free(str);
-}
-
 
 /*
  * file save callback : user selected "No"
@@ -207,7 +178,6 @@ popup_close_verify(gE_document *doc, gE_data *data)
 void
 tab_top_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
 
 	mdi->tab_pos = GTK_POS_TOP;
 	settings->tab_pos = GTK_POS_TOP;
@@ -217,7 +187,6 @@ tab_top_cb(GtkWidget *widget, gpointer cbwindow)
 void
 tab_bot_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
 
 	mdi->tab_pos =  GTK_POS_BOTTOM;
 	settings->tab_pos = GTK_POS_BOTTOM;
@@ -226,7 +195,6 @@ tab_bot_cb(GtkWidget *widget, gpointer cbwindow)
 void
 tab_lef_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
 
 	mdi->tab_pos =  GTK_POS_LEFT;
 	settings->tab_pos = GTK_POS_LEFT;
@@ -235,7 +203,6 @@ tab_lef_cb(GtkWidget *widget, gpointer cbwindow)
 void
 tab_rgt_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
 
 	mdi->tab_pos =  GTK_POS_RIGHT;
 	settings->tab_pos = GTK_POS_RIGHT;
@@ -244,7 +211,6 @@ tab_rgt_cb(GtkWidget *widget, gpointer cbwindow)
 void
 tab_toggle_cb(GtkWidget *widget, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
 
 	w->show_tabs = !w->show_tabs;
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(w->notebook), w->show_tabs);
@@ -260,12 +226,12 @@ int c, w;
 	for (c = 0; c < g_list_length (mdi->children); c++)
   	   {
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_NEVER);
 
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_NEVER);
            }
@@ -280,12 +246,12 @@ int c, w;
 	for (c = 0; c < g_list_length (mdi->children); c++)
   	   {
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_ALWAYS);
 
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_ALWAYS);
            }
@@ -301,12 +267,12 @@ int c, w;
 	for (c = 0; c < g_list_length (mdi->children); c++)
   	   {
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_AUTOMATIC);
 
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
-	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+	        ((gE_view *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_AUTOMATIC);
            }
@@ -323,114 +289,6 @@ auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 	gE_window_set_auto_indent (!settings->auto_indent);
 }
 
-gint
-auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
-	int *pos, gpointer cbdata)
-{
-	int i, newlines, newline_1 = 0;
-	gchar *buffer, *whitespace;
-	gE_data *data;
-	
-	data = g_malloc0 (sizeof (gE_data));
-	data->temp2 = text;
-	/*data->window = window;
-	line_pos_cb(NULL, data);*/
-
-	if ((length != 1) || (insertion_text[0] != '\n'))
-		return FALSE;
-	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
-		return FALSE;
-	if (!settings->auto_indent)
-		return FALSE;
-
-	newlines = 0;
-	for (i = *pos; i > 0; i--)
-	{
-		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
-		if (buffer == NULL)
-			continue;
-		if (buffer[0] == 10)
-		{
-			if (newlines > 0)
-			{
-				g_free (buffer);
-				buffer = NULL;
-				break;
-			}
-			else {
-				newlines++;
-				newline_1 = i;
-				g_free (buffer);
-				buffer = NULL;
-			}
-		}
-		g_free (buffer);
-		buffer = NULL;
-	}
-
-	whitespace = g_malloc0 (newline_1 - i + 2);
-
-	for (i = i; i <= newline_1; i++)
-	{
-		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i, i+1);
-		if ((buffer[0] != 32) & (buffer[0] != 9))
-		{
-			g_free (buffer);
-			buffer = NULL;
-			break;
-		}
-		strncat (whitespace, buffer, 1);
-		g_free (buffer);
-	}
-
-	if (strlen(whitespace) > 0)
-	{
-		i = *pos;
-		gtk_text_set_point (GTK_TEXT (text), i);
-		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
-			whitespace, strlen (whitespace));
-	}
-	
-	g_free (whitespace);
-	data->temp2 = text;
-	/*line_pos_cb(NULL, data);*/
-	return TRUE;
-}
-
-
-static void
-line_pos_cb(GtkWidget *w, gE_data *data)
-{
-	static char col [32];
-	GtkWidget *label;
-	GnomeApp *app;
-	/*GtkWidget *text = data->temp2;*/
-/*	gint x, y;*/
-	
-	app = gnome_mdi_get_active_window  (mdi);
-	
-	sprintf (col, "Column:\t%d",
-	 GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
-	
-	label = gnome_dock_item_get_child (gnome_app_get_dock_item_by_name (app, "Column"));
-	
-	gtk_label_set (GTK_LABEL(label), col);
-
-}
-
-
-gint gE_event_button_press (GtkWidget *w, GdkEventButton *event)
-{
-	gE_data *data;
-	data = g_malloc0 (sizeof (gE_data));
-/*	data->temp2 = w;
-	data->window = window;*/
-	line_pos_cb(NULL, data);
-#ifdef DEBUG
-	g_print ("you pressed a button\n");
-#endif
-	return FALSE;
-}
 
 /* --- Drag and Drop Callback(s) --- */
 
@@ -450,7 +308,11 @@ filenames_dropped (GtkWidget * widget,
 	tmp_list = names;
 
 	while (tmp_list) {
-		doc = gE_document_new_with_file ((gchar *)tmp_list->data);
+		doc = gE_document_new ();
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	        
+	        gE_file_open (doc, (gchar *)tmp_list->data);
 		
 		tmp_list = tmp_list->next;
 	}
@@ -465,6 +327,9 @@ void file_new_cb (GtkWidget *widget, gpointer cbdata)
 
 	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
 	doc = gE_document_new();
+	
+	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
 
 
@@ -497,7 +362,6 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 	struct stat sb;
 	gE_document *doc;
 
-
 	filename = g_malloc (strlen (gtk_file_selection_get_filename (GTK_FILE_SELECTION(osel))) + 1);
 	filename = g_strdup (gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel)));
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel),"");
@@ -520,17 +384,27 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 		   {
 		     doc = gE_document_current();
 		     
-		     if (doc->filename || doc->changed)
-		       doc = gE_document_new_with_file (filename);
-		     else
-		       gE_file_open (GE_DOCUMENT(doc), filename);
+		     if (doc->filename || GE_VIEW(mdi->active_view)->changed)
+		       {
+		         doc = gE_document_new ();
+		         gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        		 gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	        		 
+	        	   }
+		     
+		         gE_file_open (GE_DOCUMENT(doc), filename);
+		      
 		     
 		     gtk_widget_hide (GTK_WIDGET(osel));
 		     return;
 		   }
 		 else
 		   {
-		     doc = gE_document_new_with_file (filename);
+		     doc = gE_document_new ();
+		     gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        	 gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		     
+		     gE_file_open (GE_DOCUMENT (doc), filename);
 		     
 		     gtk_widget_hide (GTK_WIDGET(osel));
 		     return;
@@ -635,11 +509,14 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gchar *fname;
 	gE_document *doc;
+	gE_view *view;
 
 	if (gE_document_current())
 	  {
 	    doc = gE_document_current();
-	    if (doc->changed)
+	    view = GE_VIEW (mdi->active_view);
+	    
+	    if (view->changed)
 	      {
  	        fname = doc->filename;
 
@@ -722,6 +599,7 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 void
 file_close_cb(GtkWidget *widget, gpointer cbdata)
 {
+	gE_document *doc;
 /*	gE_data *data = (gE_data *)cbdata;
 
 	g_assert(data != NULL);
@@ -735,7 +613,11 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 	    if (mdi->active_child == NULL)
 	      {
 	        if (!settings->close_doc)
-	          gE_document_new ();
+	          {
+	            doc = gE_document_new ();
+	            gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	            gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	          }
 	        else
 	          g_print ("hola!\n");
 	      }
@@ -749,7 +631,8 @@ gint file_revert_do (gE_document *doc)
 	gchar msg[80];
 	gint ret;
 
-	sprintf(msg, _("Are you sure you wish to revert all changes?"));
+	sprintf(msg, _("Are you sure you wish to revert all changes?\n(%s)"),
+		doc->filename);
 	
 
 	msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
@@ -785,7 +668,7 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata)
 	    doc = gE_document_current ();
 	    
 	    if (doc->filename)
-	      if (doc->changed)
+	      if (GE_VIEW (mdi->active_view)->changed)
 	        {
 	          if ((file_revert_do (doc)) == 0)
 	            return;
@@ -797,113 +680,6 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata)
 	  }
 	
 }
-
-/*
- * common routine for closing a file.  will prompt for saving if the
- * file was changed.
- *
- * data->flag is set to TRUE if file closed
- *//*
-static void
-close_doc_common(gE_data *data)
-{
-	gE_document *doc;
-
-	g_assert(data != NULL);
-	g_assert(data->window != NULL);
-	doc = gE_document_current();
-	if (doc->changed)
-		popup_close_verify(doc, data);
-	else {
-		close_doc_execute(NULL, data);
-		data->flag = TRUE;	// indicate closed 
-	}
-} *//* close_doc_common */
-
-
-/*
- * actually close the document.
- *//*
-void
-close_doc_execute(gE_document *opt_doc, gpointer cbdata)
-{
-	int num, numdoc;
-	int *ptr;
-	gchar *title;
-	GtkNotebook *nb;
-	gE_window *w;
-	gE_document *doc;
-	gE_data *data = (gE_data *)cbdata;
-
-	g_assert(data != NULL);
-	w = data->window;
-	g_assert(w != NULL);
-	nb = GTK_NOTEBOOK(w->notebook);
-	g_assert(nb != NULL);
-	//
-	// Provide the option to pass the specific document as an argument
-	// instead of always going with the current document - needed for
-	// the plugins api...
-	//
-	doc = (opt_doc == NULL) ? gE_document_current() : opt_doc;
-	g_assert(doc != NULL);
-
-	// if all we have is a blank, Untitled doc, then return immediately 
-	if (!doc->changed && g_list_length(nb->children) == 1 &&
-		doc->filename == NULL)
-		return;
-
-	// Remove document from our hash tables 
-	ptr = g_hash_table_lookup(doc_pointer_to_int, doc);
-	g_hash_table_remove(doc_int_to_pointer, ptr);
-	g_hash_table_remove(doc_pointer_to_int, doc);
-	g_free (ptr);
-
-	// remove notebook entry and item from document list //
-	num = gtk_notebook_current_page(nb);
-	gtk_notebook_remove_page(nb, num);
-	w->documents = g_list_remove(w->documents, doc);
-	if (doc->filename)
-		g_free(doc->filename);
-	if (doc->sb)
-		g_free(doc->sb);
-	g_free(doc);
-
-	// if files list window present, remove corresponding entry 
-	flw_remove_entry(w, num);
-
-	// echo message to user 
-	gE_msgbar_set(w, MSGBAR_FILE_CLOSED);
-
-	num = g_list_length(nb->children);
-	numdoc = g_list_length(w->documents);
-	g_assert(num == numdoc);
-
-	//
-	// we always have at least one document (e.g., "Untitled").
-	// so if we just closed the last document, create "Untitled".
-	//
-	if (num < 1) {
-		g_list_free(w->documents);
-		w->documents = NULL;
-		gE_document_new(w);
-		if (w->files_list_window)
-			flw_append_entry(w, doc,
-				g_list_length(nb->children) - 1, NULL);
-	}
-	// Set the title of the window to Current Document - GEDIT_ID 
-	
-	title = g_malloc0(strlen(GEDIT_ID) +
-		strlen(GTK_LABEL(gE_document_current()->tab_label)->label) + 4);
-	sprintf(title, "%s - %s",
-	 GTK_LABEL(gE_document_current()->tab_label)->label,
-	 GEDIT_ID);
-	gtk_window_set_title(GTK_WINDOW(w->window), title);
-	g_free(title);
-
-} *//* close_doc_execute */
-
-
 
 
 /*
@@ -931,9 +707,8 @@ edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
-		gE_document_current()->text));
+		GE_VIEW (mdi->active_view)->text));
 
-	/*gE_msgbar_set(data->window, MSGBAR_CUT);*/
 	gnome_app_flash (mdi->active_window, MSGBAR_CUT);
 }
 
@@ -943,8 +718,8 @@ edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_copy_clipboard(
-		GTK_EDITABLE(gE_document_current()->text));
-/*	gE_msgbar_set(data->window, MSGBAR_COPY);*/
+		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
+
 	gnome_app_flash (mdi->active_window, MSGBAR_COPY);
 }
 	
@@ -954,9 +729,8 @@ edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_paste_clipboard(
-		GTK_EDITABLE(gE_document_current()->text));
+		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
 
-/*	gE_msgbar_set(data->window, MSGBAR_PASTE);*/
 	gnome_app_flash (mdi->active_window, MSGBAR_PASTE);
 }
 
@@ -966,10 +740,10 @@ edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_select_region(
-		GTK_EDITABLE(gE_document_current()->text), 0,
+		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
 		gtk_text_get_length(
-			GTK_TEXT(gE_document_current()->text)));
-/*	gE_msgbar_set(data->window, MSGBAR_SELECT_ALL);*/
+			GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
+
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
 }
 
@@ -1149,154 +923,54 @@ recent_cb(GtkWidget *w, gE_data *data)
 	
 	if ((doc = gE_document_current ()))
 	  {
-	    if (doc->filename || doc->changed)
-	      doc = gE_document_new_with_file (data->temp1);
-	    else		
-	      gE_file_open (doc, data->temp1);
+	    if (doc->filename || GE_VIEW(mdi->active_view)->changed)
+	      {
+	        doc = gE_document_new ();
+	        gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	      }
+	    
+	        gE_file_open (doc, data->temp1);
+	      
 	  }
 	else
 	  doc = gE_document_new_with_file (data->temp1);
+	  gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	  gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
 
-
-/* 
- * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
- */
-
-void
-doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
-	int *pos, gE_document *doc)
-{
-	GtkWidget *significant_other;
-	gchar *buffer;
-	gint position = *pos;
-	gint n;
-	gE_document *temp;
-	GnomeMDIChild *child;
-	/*GnomeMDIChild *temp = NULL;*/
-	gE_data *data;
-	GtkWidget *text;
-	GList *view;
-
-	data = g_malloc0 (sizeof (gE_data));
-	line_pos_cb(NULL, data);
-	
-	g_free (data);
-	
-	if (!doc->split_screen)
-		return;
-	
-	if (doc->flag == editable)
-	{
-		doc->flag = NULL;
-		return;
-	}
-	
-	
-	if (editable == doc->text)
-		significant_other = doc->split_screen;
-	else if (editable == doc->split_screen)
-		significant_other = doc->text;
-	else
-		return;
-	
-	doc->flag = significant_other;	
-	buffer = g_strdup (insertion_text);
-
-/*	FIXME : This looks correct, but it isn't... I can't figure why it isnt working properly
-		( * - denotes comment, cant have comemts within comments )
-	child = GNOME_MDI_CHILD (doc);
-	view = child->views;
-	
-	while (view)
-	   {
-	     g_print ("doc_insert_text: n = %d views = %d\n",n, g_list_length (GNOME_MDI_CHILD (doc)->views));
-	     temp = (gE_document *)view->data;
-g_warning ("temp* has been set..");
-
-	     
-	     *gtk_text_freeze (GTK_TEXT(GE_DOCUMENT(temp)->text)); *
-	     gtk_text_freeze (GTK_TEXT(temp->text));
-g_warning ("temp->text has been frozen..");	     
-	    * gtk_editable_insert_text (GTK_EDITABLE(GE_DOCUMENT(temp)->text), buffer, length, &position);*
-	    gtk_editable_insert_text (GTK_EDITABLE(temp->text), buffer, length, &position);
-	     
-	    * gtk_text_thaw (GTK_TEXT(GE_DOCUMENT(temp)->text));*
-	    gtk_text_thaw (GTK_TEXT(temp->text));
-	    
-	    view = g_list_next (view);
-	   }
-*/	   
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-	g_free (buffer);
-
-}
-
-void
-doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
-	gE_document *doc)
-{
-	GtkWidget *significant_other;
-	gE_data *data;
-
-	data = g_malloc0 (sizeof (gE_data));
-	line_pos_cb(NULL, data);
-	
-	g_free (data);
-		
-	if (!doc->split_screen)
-		return;
-
-	if (doc->flag == editable)
-	{
-		doc->flag = NULL;
-		return;
-	}
-	
-	if (editable == doc->text)
-		significant_other = doc->split_screen;
-	else if (editable == doc->split_screen)
-		significant_other = doc->text;
-	else
-		return;
-	
-	doc->flag = significant_other;
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-}
 
 void options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
-	gE_document *doc = gE_document_current ();
+	gE_view *view = GE_VIEW (mdi->active_view);
 	gint visible;
 
-	if (!doc->split_parent)
+	if (!view->split_parent)
 		return;
 
-	gE_document_set_split_screen
-		(doc, !GTK_WIDGET_VISIBLE (doc->split_parent));
+	gE_view_set_split_screen
+		(view, !GTK_WIDGET_VISIBLE (view->split_parent));
 }
 
 
 void options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	gE_document *doc = gE_document_current ();
-	gE_document_set_read_only (doc, !doc->read_only);
+	gE_view *view = GE_VIEW (mdi->active_view);
+	
+	gE_view_set_read_only (view, !view->read_only);
 }
 
 void options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gE_document *doc = gE_document_current ();
-	gE_document_set_word_wrap (doc, !doc->word_wrap);
+	gE_view *view = GE_VIEW (mdi->active_view);
+	
+	gE_view_set_word_wrap (view, !view->word_wrap);
 }
 
 void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gE_document *doc = gE_document_current ();
-	gE_document_set_line_wrap (doc, !doc->line_wrap);
+	gE_view *view = GE_VIEW (mdi->active_view);
+	gE_view_set_line_wrap (view, !view->line_wrap);
 }
 
 void options_toggle_status_bar_cb (GtkWidget *w, gpointer data)

@@ -27,23 +27,24 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
-#include "gE_document.h"
+#include "gE_window.h"
+#include "gE_view.h"
 #include "gE_files.h"
 #include "commands.h"
-#include "toolbar.h"
+/*#include "toolbar.h"*/
 #include "gE_mdi.h"
 
-static void clear_text (gE_document *doc);
+static void clear_text (gE_view *view);
 
 
 static void
-clear_text (gE_document *doc)
+clear_text (gE_view *view)
 {
-	int i = gtk_text_get_length (GTK_TEXT(doc->text));
+	gint i = gE_view_get_length (view);
 
 	if (i > 0) {
-		gtk_text_set_point (GTK_TEXT(doc->text), i);
-		gtk_text_backward_delete (GTK_TEXT(doc->text), i);
+		gE_view_set_position (view, i);
+		gtk_text_backward_delete (GTK_TEXT(view->text), i);
 	}
 }
 
@@ -61,6 +62,8 @@ gE_file_open(gE_document *doc, gchar *fname)
 	int fd;
 	gchar *buf, *title, *flash;
 	size_t size, bytesread, num;
+	gE_view *view = GE_VIEW(mdi->active_view);
+	int pos;
 
 	/* get file stats (e.g., file size is used by files list window) */
 	doc->sb = g_malloc(sizeof(struct stat));
@@ -81,8 +84,8 @@ gE_file_open(gE_document *doc, gchar *fname)
 			return 1;
 		}
 
-		gtk_text_freeze(GTK_TEXT(GE_DOCUMENT(doc)->text));
-		clear_text(doc);
+		gtk_text_freeze(GTK_TEXT(view->text));
+		clear_text(view);
 
 		/*
 		 * the more aggressive/intelligent method is to try to allocate
@@ -120,8 +123,8 @@ gE_file_open(gE_document *doc, gchar *fname)
 		while (bytesread < doc->sb->st_size) {
 			num = read(fd, buf, size);
 			if (num > 0) {
-				gtk_text_insert(GTK_TEXT(doc->text), NULL,
-					&doc->text->style->black,
+				gtk_text_insert(GTK_TEXT(view->text), NULL,
+					&view->text->style->black,
 					NULL, buf, num);
 				bytesread += num;
 			} else if (num == -1) {
@@ -136,7 +139,7 @@ gE_file_open(gE_document *doc, gchar *fname)
 		}
 		g_free(buf);
 		close(fd);
-		gtk_text_thaw(GTK_TEXT(doc->text));
+		gtk_text_thaw(GTK_TEXT(view->text));
 	} /* filesize > 0 */
 
 	/* misc settings */
@@ -145,27 +148,27 @@ gE_file_open(gE_document *doc, gchar *fname)
 	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(fname));
 	
-	gtk_text_set_point(GTK_TEXT(doc->text), 0);
+	gE_view_set_position (view, 0);
 
 	/* Copy the buffer if split-screening enabled */
-	if (doc->split_screen) {
-		int pos;
+/*	if (doc->split_screen) {*/
 
-		buf = gtk_editable_get_chars(GTK_EDITABLE(doc->text), 0, -1);
+		buf = gtk_editable_get_chars(GTK_EDITABLE(view->text), 0, -1);
 		pos = 0;
-		doc->flag = doc->split_screen;
-		gtk_text_freeze(GTK_TEXT(doc->split_screen));
-		gtk_editable_insert_text(GTK_EDITABLE(doc->split_screen),
+		view->flag = view->split_screen;
+		gtk_text_freeze(GTK_TEXT(view->split_screen));
+		gtk_editable_insert_text(GTK_EDITABLE(view->split_screen),
 			buf, strlen(buf), &pos);
-		gtk_text_thaw(GTK_TEXT(doc->split_screen));
+		gtk_text_thaw(GTK_TEXT(view->split_screen));
 		g_free (buf);
-	}
+/*	}
+*/
 	
 	/* enable document change detection */
-	doc->changed = FALSE;
-	if (!doc->changed_id)
-	  doc->changed_id =	gtk_signal_connect(GTK_OBJECT(doc->text),"changed", 
-				                       GTK_SIGNAL_FUNC(doc_changed_cb),doc);
+	view->changed = FALSE;
+	if (!view->changed_id)
+	  view->changed_id =	gtk_signal_connect(GTK_OBJECT(view->text),"changed", 
+				                       GTK_SIGNAL_FUNC(view_changed_cb),view);
 
 
 	flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
@@ -176,7 +179,7 @@ gE_file_open(gE_document *doc, gchar *fname)
 	recent_update (GNOME_APP (mdi->active_window));
 
 	/* Make the document readonly if you can't write to the file. */
-	gE_document_set_read_only (doc, access (fname, W_OK) != 0);
+	gE_view_set_read_only (view, access (fname, W_OK) != 0);
 	
 	return 0;
 } /* gE_file_open */
@@ -196,6 +199,7 @@ gE_file_save(gE_document *doc, gchar *fname)
 	FILE *fp;
 	gchar *title;
 	gchar *tmpstr;
+	gE_view *view = GE_VIEW(mdi->active_view);
 
 	/* FIXME: not sure what to do with all the gE_window refs.. 
 	          i'll comment them out for now.. 				    */
@@ -207,10 +211,10 @@ gE_file_save(gE_document *doc, gchar *fname)
 		g_warning ("Can't open file %s for saving", fname);
 		return 1;
 	}
-	gtk_text_thaw (GTK_TEXT(doc->text));
+	gtk_text_thaw (GTK_TEXT(view->text));
 
-	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0,
-		gtk_text_get_length (GTK_TEXT (doc->text)));
+	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (view->text), 0,
+		gtk_text_get_length (GTK_TEXT (view->text)));
 	if (fputs (tmpstr, fp) == EOF)
 	  {
 	   perror("Error saving file");
@@ -230,7 +234,7 @@ gE_file_save(gE_document *doc, gchar *fname)
 	    g_free(doc->filename);
 	    doc->filename = g_strdup(fname);
 	  }
-	doc->changed = FALSE;
+	view->changed = FALSE;
 	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));
 
@@ -242,9 +246,9 @@ gE_file_save(gE_document *doc, gchar *fname)
 	    gtk_window_set_title(GTK_WINDOW(mdi->active_window), tmpstr);
 	    g_free(tmpstr);
 
-	if (!doc->changed_id)
-	  doc->changed_id =	gtk_signal_connect (GTK_OBJECT(doc->text), "changed",
-									    GTK_SIGNAL_FUNC(doc_changed_cb),doc);
+	if (!view->changed_id)
+	  view->changed_id =	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
+									    GTK_SIGNAL_FUNC(view_changed_cb), view);
 
 	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_SAVED));
 	

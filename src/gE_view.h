@@ -32,7 +32,8 @@ extern "C" {
 #define GE_IS_VIEW(obj)			GTK_CHECK_TYPE (obj, gE_view_get_type ())
 
 typedef struct _gE_view {
-	GtkFixed fixed;
+	/*GtkFixed fixed;*/
+	GtkVBox box;
 	
 	gE_document *document;
 	
@@ -64,7 +65,7 @@ typedef struct _gE_view {
 
 typedef struct _gE_view_class {
 	/* dunno */
-	GtkFixedClass parent_class;
+	GtkVBoxClass parent_class;
 	
 	void (*cursor_moved)(gE_view *view);
 	

@@ -62,29 +62,13 @@ typedef struct _gE_document {
 
 	GnomeMDIChild mdi_child;
 	
-	/*gE_window *window;*/
-	
-	GtkWidget *text;
 	GtkWidget *tab_label;
-	GtkWidget *viewport;
-	GtkWidget *scrwindow[2];
-	
 	gchar *filename;
-	gint changed_id;
-	gint changed;
-	gint word_wrap;
-	gint line_wrap;
-	gint read_only;
+
+	guchar *buf;
+	guint buf_size;
+
 	struct stat *sb;
-
-	gchar *font;
-	gint splitscreen;
-
-	gint split;
-	GtkWidget *split_parent;
-	GtkWidget *split_viewport;
-	GtkWidget *split_screen;
-	GtkWidget *flag;
 
 } gE_document;
 

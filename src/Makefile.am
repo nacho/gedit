@@ -42,8 +42,10 @@ gedit_SOURCES = 	\
 	gedit.c		\
 	commands.c	\
 	commands.h	\
-	gE_document.c	\
-	gE_document.h   \
+	gE_window.c	\
+	gE_window.h	\
+	gE_view.c	\
+	gE_view.h	\
 	gE_mdi.c	\
 	gE_mdi.h	\
 	gE_about.c	\
@@ -55,7 +57,6 @@ gedit_SOURCES = 	\
 	gE_prefslib.h	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
-	toolbar.c	\
 	plugin.c        \
 	gE_plugin_api.c	\
 	gE_print.c	\
@@ -68,10 +69,13 @@ gedit_SOURCES = 	\
 	menus.h		\
 	menus.c		\
 	search.h	\
-	search.c	\
-	dialog.h	\
-	dialog.c	\
-	$(GMODULE_PLUGIN_SRCLIST)
+	search.c	
+#	gE_document.c	\
+#	gE_window.h	\
+#	dialog.h	\
+#	dialog.c	\
+#	$(GMODULE_PLUGIN_SRCLIST)
+#	toolbar.c	\
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 

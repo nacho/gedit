@@ -27,8 +27,9 @@
 #include "commands.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
-#include "toolbar.h"
-#include "gE_document.h"
+/*#include "toolbar.h"*/
+#include "gE_window.h"
+#include "gE_view.h"
 #include "gE_about.h"
 #include "gE_print.h"
 #include "gE_prefs.h"
@@ -291,6 +292,7 @@ void
 gE_set_menu_toggle_states()
 {
   gE_document *doc;
+  gE_view *view;
   int i;
 
 #define GE_SET_TOGGLE_STATE(item, l, boolean)                            \
@@ -330,21 +332,23 @@ gE_set_menu_toggle_states()
 
       if ((doc = gE_document_current ()))
         {
+          view = GE_VIEW (mdi->active_view);
+          
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
 			      _(GE_TOGGLE_LABEL_WORDWRAP),
-			      doc->word_wrap);
+			      view->word_wrap);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
 			      _(GE_TOGGLE_LABEL_LINEWRAP),
-			      doc->line_wrap);
+			      view->line_wrap);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
 			      _(GE_TOGGLE_LABEL_READONLY),
-			      doc->read_only);
+			      view->read_only);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
 			      _(GE_TOGGLE_LABEL_SPLITSCREEN),
-			      doc->splitscreen);
+			      view->splitscreen);
 
 	 }
 	}

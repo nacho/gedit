@@ -29,7 +29,8 @@
 #include "gE_plugin.h"
 #endif
 #include "gE_plugin_api.h"
-#include "gE_document.h"
+#include "gE_window.h"
+#include "gE_view.h"
 #include "gE_files.h"
 #include "commands.h"
 #include "gE_mdi.h"
@@ -136,15 +137,16 @@ gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   if (position >= gtk_text_get_length(GTK_TEXT(document->text)))
-      position = gtk_text_get_length(GTK_TEXT(document->text));
+   if (position >= gtk_text_get_length(GTK_TEXT(view->text)))
+      position = gtk_text_get_length(GTK_TEXT(view->text));
       
-   gtk_text_freeze(GTK_TEXT(document->text));
-   gtk_editable_insert_text (GTK_EDITABLE (document->text), buffer, length, &position);
-   gtk_text_thaw(GTK_TEXT(document->text));
+   gtk_text_freeze(GTK_TEXT(view->text));
+   gtk_editable_insert_text (GTK_EDITABLE (view->text), buffer, length, &position);
+   gtk_text_thaw(GTK_TEXT(view->text));
    
-   document->changed = 1;
+   view->changed = 1;
 }
 
 void 
@@ -152,14 +154,15 @@ gE_plugin_text_append(gint docid, gchar * buffer, gint length)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
    gint position;
    
-   position = gtk_text_get_length(GTK_TEXT(document->text));
+   position = gtk_text_get_length(GTK_TEXT(view->text));
    
-   gtk_text_freeze(GTK_TEXT(document->text));
-   gtk_editable_insert_text (GTK_EDITABLE (document->text), buffer, length, &position);
-   gtk_text_thaw(GTK_TEXT(document->text));
-   document->changed = 1;
+   gtk_text_freeze(GTK_TEXT(view->text));
+   gtk_editable_insert_text (GTK_EDITABLE (view->text), buffer, length, &position);
+   gtk_text_thaw(GTK_TEXT(view->text));
+   view->changed = 1;
 }
 
 char *
@@ -167,8 +170,9 @@ gE_plugin_text_get(gint docid)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   return gtk_editable_get_chars(GTK_EDITABLE(document->text), 0, -1);
+   return gtk_editable_get_chars(GTK_EDITABLE(view->text), 0, -1);
 }
 
 gchar *
@@ -176,10 +180,11 @@ gE_plugin_text_get_selected_text (gint docid)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
    
-	return gtk_editable_get_chars (GTK_EDITABLE (document->text),
-		GTK_EDITABLE (document->text)->selection_start_pos,
-		GTK_EDITABLE (document->text)->selection_end_pos);
+	return gtk_editable_get_chars (GTK_EDITABLE (view->text),
+		GTK_EDITABLE (view->text)->selection_start_pos,
+		GTK_EDITABLE (view->text)->selection_end_pos);
 }
 
 
@@ -188,10 +193,12 @@ gE_plugin_text_set_selected_text (gint docid, gchar *text)
 {
 	GtkEditable *editable;
 	selection_range selection;
-/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_document *document = gE_document_current();
+	/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+ 	gE_document *document = gE_document_current();
+	gE_view *view = GE_VIEW (mdi->active_view);
+
 	g_return_if_fail (document != NULL);
-	editable = GTK_EDITABLE (document->text);
+	editable = GTK_EDITABLE (view->text);
 	if (editable->selection_start_pos <= editable->selection_end_pos)
 	{
 		selection.start = editable->selection_start_pos;
@@ -204,7 +211,7 @@ gE_plugin_text_set_selected_text (gint docid, gchar *text)
 	}
 	gtk_editable_delete_selection (editable);
 	selection.end = selection.start;
-	gtk_editable_insert_text (editable, text, strlen (text),&selection.end);
+	gtk_editable_insert_text (editable, text, strlen (text), &selection.end);
 	gtk_editable_select_region (editable, selection.start, selection.end);
 }
 
@@ -215,7 +222,13 @@ int
 gE_plugin_document_create(gint context, gchar * title)
 {
    /*return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new());*/
-   return (int) gE_document_new ();
+   gE_document *doc;
+   
+   doc = gE_document_new ();
+   gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+   gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+    
+   return (int) doc;
 }
 
 void 
@@ -260,24 +273,11 @@ gE_plugin_document_close(gint docid)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
-   gE_data *data = g_new0(gE_data, 1);
-   gboolean flag;
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-/*   data->document = document;
-   data->window = document->window;
-*/
-   if (document->changed)
-      popup_close_verify(document, data);
-   else {
-      /*close_doc_execute(document, data);*/
-      file_close_cb (NULL,data);
-      data->flag = TRUE;
-   }
+   file_close_cb (NULL, NULL);
 
-   flag = data->flag;
-   g_free(data);
-
-   return flag;
+   return TRUE;
 }
 
 gint
@@ -285,8 +285,10 @@ gE_plugin_document_get_position (gint docid)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    	gE_document *document = gE_document_current();
+ 	gE_view *view = GE_VIEW (mdi->active_view);
+   	
 	g_return_val_if_fail (document != NULL, 0);
-	return GTK_EDITABLE(document->text)->current_pos;
+	return gE_view_get_position (view);
 }
 
 selection_range
@@ -296,10 +298,14 @@ gE_plugin_document_get_selection (gint docid)
 	selection_range selection;
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    	gE_document *document = gE_document_current();
+	gE_view *view = GE_VIEW (mdi->active_view);
+   	   	
+   	
 	selection.start = 0;
 	selection.end = 0;
 	g_return_val_if_fail (document != NULL, selection);
-	editable = GTK_EDITABLE (document->text);
+	editable = GTK_EDITABLE (view->text);
+	
 	if (editable->selection_start_pos <= editable->selection_end_pos)
 	{
 		selection.start = editable->selection_start_pos;
@@ -337,36 +343,37 @@ void
 gE_plugin_set_word_wrap(gint docid, gint word_wrap)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   gE_document_set_word_wrap(document, word_wrap);
+
+   gE_view_set_word_wrap(view, word_wrap);
 }
 
 void 
 gE_plugin_set_line_wrap(gint docid, gint line_wrap)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   gE_document_set_line_wrap(document, line_wrap);
+   gE_view_set_line_wrap(view, line_wrap);
 }
 
 void 
 gE_plugin_set_read_only(gint docid, gint read_only)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   gE_document_set_read_only(document, read_only);
+   gE_view_set_read_only(view, read_only);
 }
 
 void 
 gE_plugin_set_split_screen(gint docid, gint split_screen)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_document *document = gE_document_current();
+   gE_view *view = GE_VIEW (mdi->active_view);
 
-   gE_document_set_split_screen(document, split_screen);
+   gE_view_set_split_screen(view, split_screen);
 }
 
 
@@ -393,7 +400,7 @@ gE_plugin_program_register(plugin_info * info)
 {
    plugin_info *temp;
 
-   temp = info;
+  temp = info;
    info = g_malloc0(sizeof(plugin_info));
    info->type = temp->type;
    info->user_data = temp->user_data;

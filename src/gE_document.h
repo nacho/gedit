@@ -40,14 +40,6 @@ extern GtkWidget *col_label;
 extern void gE_window_set_auto_indent (gint auto_indent);
 extern void gE_window_set_status_bar (gint show_status);
 extern void gE_window_new(GnomeMDI *mdi, GnomeApp *app);
-/* gE_document_new : relocated to gE_mdi.[ch] */
-/* gE_document_new_with_file : relocated to gE_mdi.[ch] */
-/* gE_document_current: relocated to gE_mdi.[ch] */
-extern void gE_document_set_word_wrap (gE_document *doc, gint word_wrap);
-extern void gE_document_set_line_wrap (gE_document *doc, gint line_wrap);
-extern void gE_document_set_read_only (gE_document *doc, gint read_only);
-
-extern void gE_document_set_split_screen (gE_document *doc, gint split_screen);
 
 extern void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
 extern void child_switch (GnomeMDI *mdi, gE_document *doc);

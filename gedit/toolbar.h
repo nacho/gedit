@@ -1,9 +1,7 @@
 /* vi:set ts=4 sts=0 sw=4:
  *
  * gEdit
- * Copyright (C) 1998 Alex Roberts and Evan Lawrence
- *
- * Toolbar code by Andy Kahn
+ * Copyright (C) 1998, 1999 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,32 +23,41 @@
 
 #include <gtk/gtk.h>
 #include "main.h"
+#include "gE_print.h"
+#include "search.h"
 
-typedef struct {
-	char *text;
-	char *tooltip_text;
-	char *tooltip_private_text;
-	char *icon;
-	GtkSignalFunc callback;
-} toolbar_data_t;
+GnomeUIInfo toolbar_data[] = {
+	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_NEW },
+	{ GNOME_APP_UI_ITEM, N_("Open"), N_("Open a file"), file_open_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_OPEN },
+	{ GNOME_APP_UI_ITEM, N_("Save"), N_("Save the current file"), file_save_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SAVE },
+	{ GNOME_APP_UI_ITEM, N_("Close"), N_("Close the current file"), file_close_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CLOSE },
+	{ GNOME_APP_UI_ITEM, N_("Print"), N_("Print the current file"), file_print_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT },
 
-extern GnomeUIInfo toolbar_data[];
+	GNOMEUIINFO_SEPARATOR,
 
-extern void gE_create_toolbar(gE_window *gw, gE_data *data);
-extern GtkWidget * gE_create_toolbar_flw(gE_data *data);
-extern void tb_on_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_off_cb(GtkWidget *w, gpointer cbwindow);
-extern gint tb_tooltips_toggle_cb(GtkWidget *w, gpointer cbwindow);
-extern gint tb_relief_toggle_cb(GtkWidget *w, gpointer cbwindow);
-extern gint tb_text_toggle_cb(GtkWidget *w, gpointer cbwindow);
-extern gint tb_pix_toggle_cb(GtkWidget *w, gpointer cbwindow);
+	{ GNOME_APP_UI_ITEM, N_("Cut"), N_("Cut the selection"), edit_cut_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT },
+	{ GNOME_APP_UI_ITEM, N_("Copy"), N_("Copy the selection"), edit_copy_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY },
+	{ GNOME_APP_UI_ITEM, N_("Paste"), N_("Paste the clipboard"), edit_paste_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE },
+	{ GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), search_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH },
 
-/* deprecated: */
-extern void tb_pic_text_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_pic_only_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_text_only_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow);
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, N_("Exit"), N_("Exit the program"), file_quit_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_QUIT },
+
+	GNOMEUIINFO_END
+};
+
+
 
 #endif
 

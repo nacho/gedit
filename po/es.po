@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.4\n"
-"POT-Creation-Date: 1999-06-26 22:40+0100\n"
+"POT-Creation-Date: 1999-05-24 20:17+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -36,45 +36,81 @@ msgstr "Docid es %ld.\n"
 msgid "Shell"
 msgstr "Shell"
 
-#: src/commands.c:575
+#: src/commands.c:556
 msgid "Open File..."
 msgstr "Abrir un Archivo..."
 
-#: src/commands.c:652
+#: src/commands.c:633
 msgid "Read only file!"
 msgstr "¡Archivo en solo lectura!"
 
-#: src/commands.c:678
+#: src/commands.c:659
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
-#: src/commands.c:701
+#: src/commands.c:682
 msgid "Save As..."
 msgstr "Guardar Como..."
 
-#: src/commands.c:752
+#: src/commands.c:724
 msgid "Are you sure you wish to revert all changes?"
 msgstr "¿Está seguro que desea deshacer todos los cambios?"
 
-#: src/commands.c:794
+#: src/commands.c:766
 msgid "Document Unchanged..."
 msgstr "Documento no modificado..."
 
-#: src/commands.c:796
+#: src/commands.c:768
 msgid "Document Unsaved..."
 msgstr "Documento no guardado..."
 
-#: src/commands.c:1098
-msgid "_File/"
-msgstr "_Archivo/"
-
-#: src/commands.c:1107 src/commands.c:1108
+#: src/commands.c:1079 src/commands.c:1080
 msgid "_File"
 msgstr "_Archivo"
+
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr "Alex Roberts"
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr "Evan Lawrence"
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr "http://gedit.pn.org/"
 
 #: src/gE_about.c:33
 msgid "With special thanks to:"
 msgstr "Con agradecimientos especiales a:"
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr "       Will LaShell"
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr "       Chris Lahey"
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr "       Andy Kahn"
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr "       Miguel de Icaza"
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr "       Martin Baulig"
+
+#: src/gE_about.c:39
+msgid "       Thomas Holmgren"
+msgstr "       Thomas Holmgren"
+
+#: src/gE_about.c:40
+msgid "       Martijn van Beers"
+msgstr "       Martijn van Beers"
 
 #: src/gE_about.c:52
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
@@ -97,210 +133,175 @@ msgid "Paste"
 msgstr "Pegar"
 
 #. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:66 src/gE_mdi.c:103 src/toolbar.c:42
+#: src/gE_document.c:66 src/gE_mdi.c:102 src/toolbar.c:42
 msgid "Save"
 msgstr "Guardar"
 
-#: src/gE_document.c:67 src/gE_mdi.c:104 src/toolbar.c:44
+#: src/gE_document.c:67 src/gE_mdi.c:103 src/toolbar.c:44
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/gE_document.c:68 src/gE_mdi.c:105 src/gE_print.c:71 src/toolbar.c:46
+#. Print Settings
+#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:917
+#: src/gE_print.c:71 src/toolbar.c:46
 msgid "Print"
 msgstr "Impresión"
 
-#: src/gE_document.c:70 src/gE_mdi.c:108
+#: src/gE_document.c:70 src/gE_mdi.c:107
 msgid "Open (swap) .c/.h file"
 msgstr "Abrir (alternar) archivo .c/.h"
 
 #. line and column indicators
-#. tmp = gtk_label_new(_("Column:"));
-#. gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
-#. gtk_widget_show(tmp);
-#: src/gE_document.c:128
-msgid "Column:\t0"
-msgstr "Columna:\t0"
+#: src/gE_document.c:118
+msgid "Column:"
+msgstr "Columna:"
 
-#. box = gtk_hbox_new (FALSE, 1);
-#. gtk_widget_show (box);
-#: src/gE_document.c:141
+#: src/gE_document.c:127
 msgid "Line"
 msgstr "Líneas"
 
-#: src/gE_mdi.c:65
+#: src/gE_mdi.c:64
 msgid "Find _Line..."
 msgstr "Buscar _Línea..."
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:65
 msgid "Search for a line"
 msgstr "Buscar una línea"
 
-#: src/gE_mdi.c:79
+#: src/gE_mdi.c:78
 msgid "_Add View"
 msgstr "_Añadir vista"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:79
 msgid "Add a new view of the document"
 msgstr "Añadir una nueva vista del documento"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:80
 msgid "_Remove View"
 msgstr "_Quitar vista"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 msgid "Remove view of the document"
 msgstr "Quitar una vista del documento"
 
-#: src/gE_mdi.c:502
+#: src/gE_mdi.c:486
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' fué modificado. ¿Desea guardarlo?"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:557
-#: src/gE_prefs_box.c:558 src/gE_prefs_box.c:608 src/gE_prefs_box.c:609
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:508
+#: src/gE_prefs_box.c:509 src/gE_prefs_box.c:559 src/gE_prefs_box.c:560
 #: src/menus.c:251
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/gE_prefs_box.c:97
+#: src/gE_prefs_box.c:89
 msgid "Default"
 msgstr "Por omisión"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:90
 msgid "Notebook"
 msgstr "Bloc de notas"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:91
 msgid "Toplevel"
 msgstr "Primer plano"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:92
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:272
+#: src/gE_prefs_box.c:251
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:264
 msgid "Show Statusbar"
 msgstr "Ver barra de estado"
 
-#: src/gE_prefs_box.c:294
+#: src/gE_prefs_box.c:273
 msgid "Show Splitscreen"
 msgstr "División de pantalla"
 
-#: src/gE_prefs_box.c:303
+#: src/gE_prefs_box.c:282
 msgid "Editor Behavior"
 msgstr "Comportamiento del Editor"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:295
 msgid "Enable Autoindent"
 msgstr "Auto-indentación"
 
-#: src/gE_prefs_box.c:325
+#: src/gE_prefs_box.c:304
 msgid "Enable Wordwrap"
 msgstr "Wordwrap"
 
-#. Document Closing stuffs
-#: src/gE_prefs_box.c:346
-msgid "Document Settings"
-msgstr "Configuración del documento"
-
-#. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:372
+#: src/gE_prefs_box.c:324
 msgid "Print Command"
 msgstr "Comando de Impresión"
 
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:414
 msgid "Current Font"
 msgstr "Fuente Actual"
 
-#: src/gE_prefs_box.c:480
+#: src/gE_prefs_box.c:431
 msgid "Select..."
 msgstr "Seleccionar..."
 
-#: src/gE_prefs_box.c:530
+#: src/gE_prefs_box.c:481
 msgid "Plugin Selector"
 msgstr "Selector de extensiones"
 
-#: src/gE_prefs_box.c:651
+#: src/gE_prefs_box.c:602
 msgid "Name"
 msgstr "Nombre"
 
-#: src/gE_prefs_box.c:651
+#: src/gE_prefs_box.c:602
 msgid "Location"
 msgstr "Posición"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:658 src/gE_prefs_box.c:976
+#: src/gE_prefs_box.c:609 src/gE_prefs_box.c:927
 msgid "Plugins"
 msgstr "Extensiones"
 
-#: src/gE_prefs_box.c:672
+#: src/gE_prefs_box.c:623
 msgid "Use Plugins"
 msgstr "Usar Extensiones"
 
-#: src/gE_prefs_box.c:739
+#: src/gE_prefs_box.c:690
 msgid "Add"
 msgstr "Añadir"
 
-#: src/gE_prefs_box.c:744
+#: src/gE_prefs_box.c:695
 msgid "Remove"
 msgstr "Borrar"
 
-#: src/gE_prefs_box.c:767
+#: src/gE_prefs_box.c:718
 msgid "MDI Mode"
 msgstr "Modo MDI"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:773
 msgid "Window Size"
 msgstr "Tamaño de la ventana"
 
-#: src/gE_prefs_box.c:835
-msgid "Current Width:"
-msgstr "Ancho actual:"
-
-#: src/gE_prefs_box.c:856
-msgid "Startup Width:"
-msgstr "Ancho al inicio:"
-
-#: src/gE_prefs_box.c:864 src/gE_prefs_box.c:904
-msgid "Use Current"
-msgstr "Usar actual"
-
-#: src/gE_prefs_box.c:876
-msgid "Current Height:"
-msgstr "Alto actual:"
-
-#: src/gE_prefs_box.c:896
-msgid "Startup Height:"
-msgstr "Alto al inicio:"
-
 #. General Settings
-#: src/gE_prefs_box.c:956
+#: src/gE_prefs_box.c:907
 msgid "General"
 msgstr "General"
 
 #. Window Settings
-#: src/gE_prefs_box.c:961
+#: src/gE_prefs_box.c:912
 msgid "Window"
 msgstr "Ventana"
 
-#. Print Settings
-#: src/gE_prefs_box.c:966
-msgid "Document"
-msgstr "Documento"
-
 #. Font Settings
-#: src/gE_prefs_box.c:971
+#: src/gE_prefs_box.c:922
 msgid "Font"
 msgstr "Fuente"
 
 #. MDI Settings
-#: src/gE_prefs_box.c:981
+#: src/gE_prefs_box.c:932
 msgid "MDI"
 msgstr "MDI"
 
@@ -325,11 +326,11 @@ msgstr "Imprimir igual"
 msgid " Save, then print "
 msgstr " Guardar, luego imprimir "
 
-#: src/gedit.c:127
+#: src/gedit.c:126
 msgid "Launch a plugin at startup"
 msgstr "Lanzar una extensión al inicio"
 
-#: src/gedit.c:127
+#: src/gedit.c:126
 msgid "PLUGIN-NAME"
 msgstr "Nombre de la Extensión"
 
@@ -498,7 +499,7 @@ msgstr "_Guardar la configuración"
 msgid "Save the current settings for future sessions"
 msgstr "Guardar la configuración actual para futuras sesiones"
 
-#: src/search.c:289
+#: src/search.c:288
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -507,59 +508,55 @@ msgstr ""
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
-#: src/search.c:311
+#: src/search.c:310
 msgid "Go to line"
 msgstr "Ir a la línea"
 
-#: src/search.c:321
+#: src/search.c:320
 msgid "Line number"
 msgstr "Número de línea"
 
-#: src/search.c:344
+#: src/search.c:343
 msgid "Search from cursor"
 msgstr "Buscar a partir del cursor"
 
-#: src/search.c:351
+#: src/search.c:350
 msgid "Search from beginning of document"
 msgstr "Buscar a partir del principio del documento"
 
-#: src/search.c:358
+#: src/search.c:357
 msgid "Search from end of document"
 msgstr "Buscar a partir del final del documento"
 
-#: src/search.c:365
+#: src/search.c:364
 msgid "Case sensitive"
 msgstr "Distingir mayúsculas y minúsculas"
 
-#: src/search.c:371
+#: src/search.c:370
 msgid "Reverse search"
 msgstr "Revertir la búsqueda"
 
-#: src/search.c:383
+#: src/search.c:382
 msgid "Search"
 msgstr "Búsqueda"
 
-#: src/search.c:388 src/search.c:416
+#: src/search.c:387 src/search.c:415
 msgid "Search for:"
 msgstr "Buscar:"
 
-#: src/search.c:410 src/search.c:411
+#: src/search.c:409
 msgid "Replace"
 msgstr "Remplazar"
 
-#: src/search.c:412
-msgid "Replace all"
-msgstr "Remplazar todo"
-
-#: src/search.c:426
+#: src/search.c:425
 msgid "Replace with:"
 msgstr "Remplazar con:"
 
-#: src/search.c:437
+#: src/search.c:436
 msgid "Ask before replacing"
 msgstr "Preguntar antes de remplazar"
 
-#: src/search.c:633
+#: src/search.c:629
 msgid "Replace?"
 msgstr "¿Remplazar?"
 

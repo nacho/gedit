@@ -26,7 +26,7 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gE_document.h"
+#include "gE_window.h"
 #include "gE_view.h"
 #include "gE_files.h"
 #include "gE_prefs_box.h"
@@ -37,43 +37,12 @@
 #include "menus.h"
 /*#include "toolbar.h"*/
 #include "gE_prefs.h"
-#include "search.h"
+/*#include "search.h"*/
 
 extern GList *plugins;
 gE_window *window;
 extern GtkWidget  *col_label;
 
-/* local definitions */
-
-/* we could probably use a menu factory here */
-typedef struct {
-	char *name;
-	GtkMenuCallback cb;
-} popup_t;
-
-/*static gint gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);*/
-static void gE_window_create_popupmenu(gE_data *);
-/*static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);*/
-static gboolean gE_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
-static void gE_msgbar_timeout_add(gE_window *window);
-
-static popup_t popup_menu[] =
-{
-	{ N_("Cut"), edit_cut_cb },
-	{ N_("Copy"), edit_copy_cb },
-	{ N_("Paste"), edit_paste_cb },
-	{ "<separator>", NULL },
-/*	{ N_("Open in new window"), file_open_in_new_win_cb },*/
-	{ N_("Save"), file_save_cb },
-	{ N_("Close"), file_close_cb },
-	{ N_("Print"), file_print_cb },
-	{ "<separator>", NULL },
-	{ N_("Open (swap) .c/.h file"), doc_swaphc_cb },
-	{ NULL, NULL }
-};
-
-static char *lastmsg = NULL;
-static gint msgbar_timeout_id;
 
 /*gE_window */
 void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
@@ -155,79 +124,6 @@ gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 	return TRUE;
 }
 */
-
-/*
- * PUBLIC: gE_messagebar_set
- *
- * sets the message/status bar.  remembers the last message set so that
- * a duplicate one won't be set on top of the current one.
- */
-void
-gE_msgbar_set(char *msg)
-{
-/*	if (lastmsg == NULL || strcmp(lastmsg, msg)) {
-		gnome_appbar_set_status (GNOME_APPBAR (window->statusbar), msg);
-		if (lastmsg)
-			g_free(lastmsg);
-		lastmsg = g_strdup(msg);
-		gtk_timeout_remove(msgbar_timeout_id);
-		gE_msgbar_timeout_add(window);
-	}
-*/
-	gnome_app_flash (mdi->active_window, msg);
-}
-
-
-
-/*
- * PRIVATE: gE_window_create_popupmenu
- *
- * Creates the popupmenu for the editor 
- */
-static void
-gE_window_create_popupmenu(gE_data *data)
-{
-	GtkWidget *tmp;
-	popup_t *pp = popup_menu;
-	gE_window *window = data->window;
-
-	window->popup = gtk_menu_new();
-	while (pp && pp->name != NULL) {
-		if (strcmp(pp->name, "<separator>") == 0)
-			tmp = gtk_menu_item_new();
-		else
-			tmp = gtk_menu_item_new_with_label(N_(pp->name));
-
-		gtk_menu_append(GTK_MENU(window->popup), tmp);
-		gtk_widget_show(tmp);
-
-		if (pp->cb)
-			gtk_signal_connect(GTK_OBJECT(tmp), "activate",
-				GTK_SIGNAL_FUNC(pp->cb), data);
-		pp++;
-	}
-} /* gE_window_create_popupmenu */
-
-
-/*
- * PRIVATE: gE_document_popup_cb
- *
- * shows popup when user clicks on 3 button on mouse
- */
-static gboolean
-gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
-{
-	if (ev->type == GDK_BUTTON_PRESS) {
-		GdkEventButton *event = (GdkEventButton *)ev;
-		if (event->button == 3) {
-			gtk_menu_popup(GTK_MENU(widget), NULL, NULL, NULL, NULL,
-				event->button, event->time);
-			return TRUE;
-		}
-	}
-	return FALSE;
-} /* gE_document_popup_cb */
-
 
 /*
  * PRIVATE: doc_swaphc_cb

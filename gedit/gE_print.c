@@ -31,7 +31,8 @@
 #include "main.h"
 #include "gE_print.h"
 #include "gE_files.h"
-#include "gE_document.h"
+#include "gE_window.h"
+#include "gE_view.h"
 #include "gE_mdi.h"
 #include "commands.h"
 #include "dialog.h"
@@ -39,7 +40,7 @@
 
 static void print_destroy(GtkWidget *widget, gpointer data);
 static void file_print_execute(GtkWidget *w, gpointer cbdata);
-static char *generate_temp_file(gE_document *doc);
+static char *generate_temp_file(gE_view *view);
 static char *get_filename(gE_data *data);
 
 /* these should probably go into gE_window */
@@ -223,14 +224,14 @@ get_filename(gE_data *data)
 	g_assert(data->window != NULL);
 	doc = gE_document_current();
 
-	if (!doc->changed && doc->filename) {
+	if (!GE_VIEW(mdi->active_view)->changed && doc->filename) {
 		if (doc->sb == NULL)
 			doc->sb = g_malloc(sizeof(struct stat));
 		if (stat(doc->filename, doc->sb) == -1) {
 			/* print warning */
 			g_free(doc->sb);
 			doc->sb = NULL;
-			fname = generate_temp_file(doc);
+			fname = generate_temp_file(GE_VIEW(mdi->active_child));
 		} else
 			fname = g_strdup(doc->filename);
 	} else { /* doc changed or no filename */
@@ -255,7 +256,7 @@ get_filename(gE_data *data)
 
 		switch (ret) {
 		case 1 :
-			fname = generate_temp_file(doc);
+			fname = generate_temp_file(GE_VIEW(mdi->active_view));
 			break;
 		case 2 :
 			if (doc->filename == NULL) {
@@ -290,7 +291,7 @@ get_filename(gE_data *data)
  * TODO: define and use system wide temp directory (saved in preferences).
  */
 static char *
-generate_temp_file(gE_document *doc)
+generate_temp_file(gE_view *view)
 {
 	FILE *fp;
 	char *fname;
@@ -304,8 +305,8 @@ generate_temp_file(gE_document *doc)
 		return NULL;
 	}
 
-	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(doc->text), 0,
-		gtk_text_get_length(GTK_TEXT(doc->text))), fp) == EOF) {
+	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(view->text), 0,
+		gtk_text_get_length(GTK_TEXT(view->text))), fp) == EOF) {
 
 		perror("generate_temp_file: can't write to tmp file");
 		g_free(fname);

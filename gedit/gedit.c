@@ -26,7 +26,7 @@
 
 #include "main.h"
 #include "commands.h"
-#include "gE_document.h"
+#include "gE_window.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"
@@ -266,17 +266,21 @@ int main (int argc, char **argv)
     /* connect signals -- FIXME -- We'll do the rest later */
     gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "destroy", GTK_SIGNAL_FUNC(file_quit_cb), NULL);
-/*    gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(view_changed_cb), NULL);*/
-    gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
+/*    gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
+/*    gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);*/
     gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gE_window_new), NULL);
-    gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
+/*    gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);		
-
+*/
 	gE_get_settings();
-/*	gnome_mdi_set_mode (mdi, mdiMode);	*/
-	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	
+	gnome_mdi_set_mode (mdi, mdiMode);	
+/*	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	*/
 		
 	gnome_mdi_open_toplevel(mdi);
+
+	doc = gE_document_new ();
+	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
 
 	if (file_list){
 
@@ -289,7 +293,9 @@ int main (int argc, char **argv)
 		{
 			/*data->temp2 = file_list->data;*/
 			/*file_open_wrapper (file_list->data);*/
-			gE_document_new_with_file (file_list->data);
+			doc = gE_document_new_with_file (file_list->data);
+			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		}
 	}
 /*	else

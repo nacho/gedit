@@ -25,7 +25,7 @@
 #include <time.h>
 #include "main.h"
 #include "gE_prefs.h"
-#include "toolbar.h"
+/*#include "toolbar.h"*/
 #include "gE_mdi.h"
 
 
@@ -46,45 +46,50 @@ gE_rc_parse(void)
 void 
 gE_save_settings()
 {
-/*	window = (gE_window *) cbwindow;*/
+	gnome_config_push_prefix ("/gEdit/Global/");
 
 /*	gE_prefs_set_int ("tab pos", (gint) settings->tab_pos);*/
-	gE_prefs_set_int ("auto indent", (gboolean) settings->auto_indent);
-	gE_prefs_set_int ("show statusbar", (gboolean) settings->show_status);
-	gE_prefs_set_int ("toolbar", (gint) settings->have_toolbar);
-	gE_prefs_set_int ("tb text", (gint) settings->have_tb_text);
-	gE_prefs_set_int ("tb pix", (gint) settings->have_tb_pix);
-	gE_prefs_set_int ("tb relief", (gint) settings->use_relief_toolbar);
-	gE_prefs_set_int ("splitscreen", (gint) settings->splitscreen);
-	gE_prefs_set_int ("close doc", (gint) settings->close_doc);
-	gE_prefs_set_int ("mdi mode", settings->mdi_mode);
-	gE_prefs_set_int ("scrollbar", settings->scrollbar);
-	gE_prefs_set_char ("font", settings->font);
-	gE_prefs_set_int ("width", (gint) settings->width);
-	gE_prefs_set_int ("height", (gint) settings->height);
+	gnome_config_set_int ("auto indent", (gboolean) settings->auto_indent);
+	gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
+	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
+	gnome_config_set_int ("tb text", (gint) settings->have_tb_text);
+	gnome_config_set_int ("tb pix", (gint) settings->have_tb_pix);
+	gnome_config_set_int ("tb relief", (gint) settings->use_relief_toolbar);
+	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
+	gnome_config_set_int ("close doc", (gint) settings->close_doc);
+	gnome_config_set_int ("mdi mode", settings->mdi_mode);
+	gnome_config_set_int ("scrollbar", settings->scrollbar);
+	gnome_config_set_string ("font", settings->font);
+	gnome_config_set_int ("width", (gint) settings->width);
+	gnome_config_set_int ("height", (gint) settings->height);
 	if (settings->print_cmd == "")
-		gE_prefs_set_char ("print command", "lpr -rs %s");
+		gnome_config_set_string ("print command", "lpr -rs %s");
 	else
-		gE_prefs_set_char ("print command", settings->print_cmd);
+		gnome_config_set_string ("print command", settings->print_cmd);
 	
 	if (!settings->run)
 	  settings->run = TRUE;
-	gE_prefs_set_int ("run", (gint) settings->run);
+	gnome_config_set_int ("run", (gint) settings->run);
+	
+	gnome_config_pop_prefix ();
+	gnome_config_sync ();
 }
 
 void gE_get_settings()
 {
-	
+	 
+	 gnome_config_push_prefix ("/gEdit/Global/");
+	 
 /*	 settings->tab_pos = gE_prefs_get_int("tab pos");*/
-	 settings->run = gE_prefs_get_int ("run");
-	 settings->show_status = gE_prefs_get_int("show statusbar");
-	 settings->have_toolbar = gE_prefs_get_int("toolbar");
-	 settings->have_tb_text = gE_prefs_get_int("tb text");
-	 settings->have_tb_pix = gE_prefs_get_int("tb pix");
-	 settings->use_relief_toolbar = gE_prefs_get_int("tb relief");
-	 settings->splitscreen = gE_prefs_get_int("splitscreen");
-	 settings->close_doc = gE_prefs_get_int ("close doc");
-	 settings->mdi_mode = gE_prefs_get_int ("mdi mode");
+	 settings->run = gnome_config_get_int ("run");
+	 settings->show_status = gnome_config_get_int ("show statusbar");
+	 settings->have_toolbar = gnome_config_get_int ("toolbar");
+	 settings->have_tb_text = gnome_config_get_int ("tb text");
+	 settings->have_tb_pix = gnome_config_get_int ("tb pix");
+	 settings->use_relief_toolbar = gnome_config_get_int("tb relief");
+	 settings->splitscreen = gnome_config_get_int("splitscreen");
+	 settings->close_doc = gnome_config_get_int ("close doc");
+	 settings->mdi_mode = gnome_config_get_int ("mdi mode");
 	 if (!settings->mdi_mode)
 	   settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];
 	   
@@ -94,26 +99,26 @@ void gE_get_settings()
              gnome_mdi_set_mode (mdi, mdiMode);
            }
 	 
-	 settings->scrollbar = gE_prefs_get_int ("scrollbar");
+	 settings->scrollbar = gnome_config_get_int ("scrollbar");
 	 if (!settings->scrollbar)
 	   settings->scrollbar = GTK_POLICY_AUTOMATIC;
 	 
-	 settings->width = gE_prefs_get_int ("width");
+	 settings->width = gnome_config_get_int ("width");
 	 if (!settings->width)
 	   settings->width = 630;
 
-	 settings->height = gE_prefs_get_int ("height");
+	 settings->height = gnome_config_get_int ("height");
 	 if (!settings->height)
 	   settings->height = 390;
 	 
-	 settings->font = gE_prefs_get_char("font");
+	 settings->font = gnome_config_get_string ("font");
 	 if (settings->font == NULL) {
 	   if (use_fontset)
 	     settings->font = DEFAULT_FONTSET;
 	   else
 	     settings->font = DEFAULT_FONT;
 	 }
-	 settings->print_cmd = gE_prefs_get_char("print command"); 
+	 settings->print_cmd = gnome_config_get_string ("print command"); 
 	 if (settings->print_cmd == NULL)
 	   settings->print_cmd = "lpr %s";
 
@@ -128,7 +133,9 @@ void gE_get_settings()
 	else
 	  {
 	   settings->show_status = TRUE;
-	   gE_prefs_set_int ("show statusbar", (gboolean) settings->show_status);
+	   gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
 	  }
 	
+	gnome_config_pop_prefix ();
+	gnome_config_sync ();
 }

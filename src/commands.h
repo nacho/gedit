@@ -47,7 +47,6 @@ extern void edit_copy_cb(GtkWidget *widget, gpointer cbdata);
 extern void edit_paste_cb(GtkWidget *widget, gpointer cbdata);
 extern void edit_selall_cb(GtkWidget *widget, gpointer cbdata);
 
-extern void doc_changed_cb(GtkWidget *widget, gpointer);
 
 /* Tab positioning */
 extern void tab_top_cb(GtkWidget *widget, gpointer cbwindow);
@@ -62,9 +61,10 @@ extern void scrollbar_always_cb (GtkWidget *widget, gpointer cbwindow);
 extern void scrollbar_auto_cb (GtkWidget *widget, gpointer cbwindow);
 
 /* Auto indent */
-extern gint auto_indent_cb(GtkWidget *text, char *insertion_text, int length, int *pos, gpointer cbdata);
+
 extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);
-extern gint gE_event_button_press(GtkWidget *w, GdkEventButton *);
+
+
 
 /* DND */
 extern void filenames_dropped (GtkWidget * widget,
@@ -78,13 +78,6 @@ extern void filenames_dropped (GtkWidget * widget,
 /* Recent documents */
 extern void recent_add (char *filename);
 extern void recent_update (GnomeApp *app);
-
-/* Insert/delete text callbacks for undo/redo and split screening */
-
-extern void doc_insert_text_cb(GtkWidget *editable,
-	char *insertion_text, int length, int *pos, gE_document *doc);
-extern void doc_delete_text_cb (GtkWidget *editable,
-	int start_pos, int end_pos, gE_document *doc);
 
 extern void options_toggle_split_screen_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_status_bar_cb (GtkWidget *widget, gpointer data);
