@@ -68,7 +68,6 @@
 
 #define GEDIT_PREF_TOOLBAR_VISIBLE	 "/toolbar-visible"
 #define GEDIT_PREF_TOOLBAR_BUTTONS_STYLE "/toolbar-buttons-style"
-#define GEDIT_PREF_TOOLBAR_VIEW_TOOLTIPS "/toolbar-view-tooltips"
 
 #define GEDIT_PREF_STATUSBAR_VISIBLE	"/statusbar-visible"
 #define GEDIT_PREF_STATUSBAR_VIEW_CURSOR_POSITION "/statusbar-view-cursor-position"
@@ -249,11 +248,6 @@ gedit_prefs_save_settings (void)
 				GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_BUTTONS_STYLE,
 				gedit_settings->toolbar_buttons_style,
 			      	NULL);
-
-	gconf_client_set_bool (gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_VIEW_TOOLTIPS,
-				gedit_settings->toolbar_view_tooltips,
-				NULL);
 
 	gconf_client_set_bool (gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VISIBLE,
@@ -459,11 +453,6 @@ gedit_prefs_load_settings (void)
 				gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_BUTTONS_STYLE,
 			      	NULL);
-
-	gedit_settings->toolbar_view_tooltips = gconf_client_get_bool (
-				gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_VIEW_TOOLTIPS,
-				NULL);
 
 	/* User Inferface/Statusbar */
 	gedit_settings->statusbar_visible = gconf_client_get_bool (

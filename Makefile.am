@@ -4,11 +4,13 @@ SUBDIRS = src pixmaps po plugins help omf-install
 
 GEDIT_SCHEMA = gedit.schemas
 
+@INTLTOOL_DESKTOP_RULE@
+
 desktopdir  = $(datadir)/applications
 desktop_in_files = gedit.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-@INTLTOOL_DESKTOP_RULE@
+@INTLTOOL_KEYS_RULE@
 
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	gedit.1 \
@@ -18,8 +20,6 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	intltool-extract.in intltool-merge.in intltool-update.in \
 	$(GEDIT_SCHEMA)
 
-
-@INTLTOOL_KEYS_RULE@
 
 pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = 

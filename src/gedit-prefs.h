@@ -86,7 +86,6 @@ struct _GeditPreferences
 	/* User Interface/Toolbar */
 	gboolean		toolbar_visible;
 	GeditToolbarSetting 	toolbar_buttons_style; 
-	gboolean		toolbar_view_tooltips;
 
 	/* User Interface/Statusbar */
 	gboolean	statusbar_visible;

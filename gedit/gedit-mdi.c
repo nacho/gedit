@@ -304,9 +304,6 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	bonobo_ui_component_add_listener (ui_component, "ToolbarIconText", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "ToolbarTooltips", 
-			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
-			(gpointer)win);
 
 	bonobo_ui_component_add_listener (ui_component, "StatusBarCursorPosition", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
@@ -398,15 +395,6 @@ gedit_mdi_view_menu_item_toggled_handler (
 		return;
 	}
 
-	if ((strcmp (path, "ToolbarTooltips") == 0) &&
-	    (s != gedit_settings->toolbar_view_tooltips))
-	{
-		gedit_settings->toolbar_view_tooltips = s;
-		gedit_mdi_set_app_toolbar_style (win);
-
-		return;
-	}
-
 	if ((strcmp (path, "StatusBarCursorPosition") == 0) &&
 	    (s != gedit_settings->statusbar_view_cursor_position))
 	{
@@ -488,9 +476,6 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	gedit_menus_set_verb_sensitive (ui_component, 
 				        "/commands/ToolbarIconText",
 				        gedit_settings->toolbar_visible);
-	gedit_menus_set_verb_sensitive (ui_component, 
-				        "/commands/ToolbarTooltips",
-				        gedit_settings->toolbar_visible);
 
 	gedit_menus_set_verb_state (ui_component, 
 				    "/commands/ToolbarSystem",
@@ -504,17 +489,6 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 				    "/commands/ToolbarIconText",
 				    gedit_settings->toolbar_buttons_style == GEDIT_TOOLBAR_ICONS_AND_TEXT);
 
-	gedit_menus_set_verb_state (ui_component, 
-				    "/commands/ToolbarTooltips",
-				    gedit_settings->toolbar_view_tooltips);
-
-	
-	/* Actually update toolbar style */
-	bonobo_ui_component_set_prop (
-		ui_component, "/Toolbar",
-		"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0",
-		NULL);
-	
 	switch (gedit_settings->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
