@@ -1,3 +1,12 @@
+2001-09-08  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_switch_view): fix 60209. When in notebook mode you can
+	switch documents with Ctrl+Page_UP & Ctrl+Page_Down
+
+	* recent.c : Fix 59114. Recent file menu entries that contain underscores
+	are displayed properly. This resulted in a ugly hack because this is a limitation
+	in libgnomeui so i had to borrow a lot of code. 
+
 2001-06-04  Vlad Harchev <hvv@hippo.ru>
 
 	* print-util.[ch] (gedit_print_show): Added gedit_print_show - printing

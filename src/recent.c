@@ -185,6 +185,301 @@ gedit_recent_history_write_config (void)
         gedit_recent_history_list = NULL;
 }
 
+#ifndef __DISABLE_UGLY_ULINE_HACK
+/* We had a problem when adding files to the recent menus that contained underscores
+ * because in gtk+ underscores are used to mark the accelerators in labels. The reason
+ * so much code is needed to work arround this bug is because we are using gnome-libs
+ * functions. This is an ugly hack which will go away when we port to GNOME 2.0
+ */
+static GtkWidget *
+create_label (char *label_text, guint *keyval, GtkWidget **box, gint number)
+{
+	guint kv;
+	gchar *number_text;
+	GtkWidget *label;
+	GtkWidget *number_widget;
+	GtkWidget *hbox;
+
+	number_text = g_strdup_printf ("_%i. ", number);
+
+	hbox = gtk_hbox_new (FALSE, 0);
+
+	label = gtk_label_new (label_text);
+	number_widget = gtk_accel_label_new (number_text);
+	
+	gtk_box_pack_start (GTK_BOX (hbox), number_widget, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	
+	kv = gtk_label_parse_uline (GTK_LABEL (number_widget), number_text);
+	if (keyval)
+		*keyval = kv;
+
+	gtk_widget_show_all (hbox);
+
+        *box = hbox;
+	
+	return number_widget;
+}
+
+static void
+setup_uline_accel (GtkMenuShell  *menu_shell,
+		   GtkAccelGroup *accel_group,
+		   GtkWidget     *menu_item,
+		   guint          keyval)
+{
+	if (keyval != GDK_VoidSymbol) {
+		if (GTK_IS_MENU (menu_shell))
+			gtk_widget_add_accelerator (menu_item,
+						    "activate_item",
+						    gtk_menu_ensure_uline_accel_group (GTK_MENU (menu_shell)),
+						    keyval, 0,
+						    0);
+		if (GTK_IS_MENU_BAR (menu_shell) && accel_group)
+			gtk_widget_add_accelerator (menu_item,
+						    "activate_item", 
+						    accel_group,
+						    keyval, GDK_MOD1_MASK,
+						    0);
+	}
+}
+
+static void
+create_menu_item (GtkMenuShell       *menu_shell,
+		  GnomeUIInfo        *uiinfo,
+		  int                 is_radio,
+		  GSList            **radio_group,
+		  GnomeUIBuilderData *uibdata,
+		  GtkAccelGroup      *accel_group,
+		  gboolean	      uline_accels,
+		  gint		      pos,
+		  gint number)
+{
+	GtkWidget *label;
+	GtkWidget *box;
+	guint keyval;
+	int type;
+	
+	/* Translate configurable menu items to normal menu items. */
+
+	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE)
+	        gnome_app_ui_configure_configurable( uiinfo );
+
+	/* Create the menu item */
+
+	switch (uiinfo->type) {
+	case GNOME_APP_UI_ITEM:
+		uiinfo->widget = gtk_menu_item_new ();
+		break;
+	case GNOME_APP_UI_SUBTREE:
+	case GNOME_APP_UI_SUBTREE_STOCK:
+	case GNOME_APP_UI_SEPARATOR:
+	case GNOME_APP_UI_TOGGLEITEM:
+	default:
+		g_assert_not_reached ();
+		break;
+	}
+
+	if (!accel_group)
+		gtk_widget_lock_accelerators (uiinfo->widget);
+
+	gtk_widget_show (uiinfo->widget);
+	gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+
+	/* If it is a separator, set it as insensitive so that it cannot be 
+	 * selected, and return -- there is nothing left to do.
+	 */
+
+	if (uiinfo->type == GNOME_APP_UI_SEPARATOR) {
+		gtk_widget_set_sensitive (uiinfo->widget, FALSE);
+		return;
+	}
+
+	/* Create the contents of the menu item */
+
+	/* Don't use gettext on the empty string since gettext will map
+	 * the empty string to the header at the beginning of the .pot file. */
+
+	label = create_label ( uiinfo->label [0] == '\0'?
+			       "":(uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK ?
+				   D_(uiinfo->label):L_(uiinfo->label)),
+			       &keyval,
+			       &box,
+			       number);
+
+	gtk_container_add (GTK_CONTAINER (uiinfo->widget), box);
+
+	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), 
+					  uiinfo->widget);
+	
+	/* setup underline accelerators
+	 */
+	if (uline_accels)
+		setup_uline_accel (menu_shell,
+				   accel_group,
+				   uiinfo->widget,
+				   keyval);
+
+	/* install global accelerator
+	 */
+	{
+		GString *gstring;
+		GtkWidget *widget;
+		
+		/* build up the menu item path */
+		gstring = g_string_new ("");
+		widget = uiinfo->widget;
+		while (widget) {
+			if (GTK_IS_MENU_ITEM (widget)) {
+				GtkWidget *child = GTK_BIN (widget)->child;
+				
+				if (GTK_IS_LABEL (child)) {
+					g_string_prepend (gstring, GTK_LABEL (child)->label);
+					g_string_prepend_c (gstring, '/');
+				}
+				widget = widget->parent;
+			} else if (GTK_IS_MENU (widget)) {
+				widget = gtk_menu_get_attach_widget (GTK_MENU (widget));
+				if (widget == NULL) {
+					g_string_prepend (gstring, "/-Orphan");
+					widget = NULL;
+				}
+			} else
+				widget = widget->parent;
+		}
+		g_string_prepend_c (gstring, '>');
+		g_string_prepend (gstring, gnome_app_id);
+		g_string_prepend_c (gstring, '<');
+
+		/* g_print ("######## menu item path: %s\n", gstring->str); */
+		
+		/* the item factory cares about installing the correct accelerator */
+		
+		gtk_item_factory_add_foreign (uiinfo->widget,
+					      gstring->str,
+					      accel_group,
+					      uiinfo->accelerator_key,
+					      uiinfo->ac_mods);
+		g_string_free (gstring, TRUE);
+
+	}
+	
+	/* Set toggle information, if appropriate */
+	
+	if ((uiinfo->type == GNOME_APP_UI_TOGGLEITEM) || is_radio) {
+		gtk_check_menu_item_set_show_toggle
+			(GTK_CHECK_MENU_ITEM(uiinfo->widget), TRUE);
+		gtk_check_menu_item_set_active
+			(GTK_CHECK_MENU_ITEM (uiinfo->widget), FALSE);
+	}
+	
+	/* Connect to the signal and set user data */
+	
+	type = uiinfo->type;
+	if (type == GNOME_APP_UI_SUBTREE_STOCK)
+		type = GNOME_APP_UI_SUBTREE;
+	
+	if (type != GNOME_APP_UI_SUBTREE) {
+	        gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+				     GNOMEUIINFO_KEY_UIDATA,
+				     uiinfo->user_data);
+
+		gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+				     GNOMEUIINFO_KEY_UIBDATA,
+				     uibdata->data);
+
+		(* uibdata->connect_func) (uiinfo, "activate", uibdata);
+	}
+}
+
+static void
+gedit_gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
+				  GnomeUIInfo        *uiinfo, 
+				  GnomeUIBuilderData *uibdata,
+				  GtkAccelGroup      *accel_group, 
+				  gboolean            uline_accels,
+				  gint                pos,
+				  gint number)
+{
+	GnomeUIBuilderData *orig_uibdata;
+
+	g_return_if_fail (menu_shell != NULL);
+	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
+	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (uibdata != NULL);
+	g_return_if_fail (pos >= 0);
+
+	/* Store a pointer to the original uibdata so that we can use it for 
+	 * the subtrees */
+
+	orig_uibdata = uibdata;
+
+	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
+		switch (uiinfo->type) {
+		case GNOME_APP_UI_BUILDER_DATA:
+		case GNOME_APP_UI_HELP:
+		case GNOME_APP_UI_RADIOITEMS:
+		case GNOME_APP_UI_SEPARATOR:
+		case GNOME_APP_UI_ITEM_CONFIGURABLE:
+		case GNOME_APP_UI_TOGGLEITEM:
+		case GNOME_APP_UI_SUBTREE:
+		case GNOME_APP_UI_SUBTREE_STOCK:
+			g_assert_not_reached ();
+			break;
+		case GNOME_APP_UI_ITEM:
+			create_menu_item (menu_shell, uiinfo, FALSE, NULL, uibdata, 
+					  accel_group, uline_accels,
+					  pos, number);
+			pos++;
+			break;
+		default:
+			g_warning ("Invalid GnomeUIInfo element type %d\n", 
+					(int) uiinfo->type);
+		}
+
+	/* Make the end item contain a pointer to the parent menu shell */
+	uiinfo->widget = GTK_WIDGET (menu_shell);
+}
+
+static void
+do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
+		GnomeUIBuilderData *uibdata)
+{
+	if (uibdata->is_interp)
+		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), 
+				signal_name, NULL, uibdata->relay_func, 
+				uibdata->data ? 
+				uibdata->data : uiinfo->user_data,
+				uibdata->destroy_func, FALSE, FALSE);
+	
+	else if (uiinfo->moreinfo)
+		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
+				signal_name, uiinfo->moreinfo, uibdata->data ? 
+				uibdata->data : uiinfo->user_data);
+}
+
+static void
+gedit_insert_menus (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo, gint number)
+{
+	GtkWidget *parent;
+	gint pos;
+	GnomeUIBuilderData uidata =
+	{
+		do_ui_signal_connect,
+		NULL, FALSE, NULL, NULL
+	};
+
+	parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+	if(parent == NULL) {
+		g_warning("gnome_app_insert_menus_custom: couldn't find "
+			  "insertion point for menus!");
+		return;
+	}
+
+	/* create menus and insert them */
+	gedit_gnome_app_fill_menu_custom (GTK_MENU_SHELL (parent), menuinfo, &uidata, 
+					  app->accel_group, TRUE, pos, number);
+}
+#endif
 
 static void
 gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *path, gint num)
@@ -201,7 +496,7 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
 	g_return_if_fail (unescaped_str != NULL);
 	
 	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	menu->label = g_strdup_printf ("_%i. %s", num, unescaped_str);
+	menu->label = g_strdup_printf ("%s", unescaped_str);
 	menu->type = GNOME_APP_UI_ITEM;
 	menu->hint = NULL;
 	menu->moreinfo = (gpointer) recent_cb;
@@ -212,12 +507,14 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
 	menu->accelerator_key = 0;
 	
 	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-
+#if 1
+	gedit_insert_menus (GNOME_APP (app), path, menu, num);
+#else	
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
+#endif
 
 	g_free (unescaped_str);
 	g_free (menu->label);
-
 	g_free (menu);
 }
 
@@ -226,7 +523,7 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
  * @app: 
  * @recent_files: 
  * 
- * Update the greaphica part of the recently-used menu
+ * Update the gui part of the recently-used menu
  * 
  **/
 static void

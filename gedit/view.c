@@ -423,6 +423,28 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 	return FALSE;
 }
 
+static void
+gedit_switch_view (gboolean forward)
+{
+        GtkNotebook *nb;
+        GeditView *view;
+        gint page;
+        gint pages;
+        
+        if (settings->mdi_mode != GNOME_MDI_NOTEBOOK)
+                return;
+
+        view = gedit_view_active ();
+        g_return_if_fail (view != NULL);
+        nb = GTK_NOTEBOOK (GTK_WIDGET (view)->parent);
+        g_return_if_fail (GTK_IS_NOTEBOOK (nb));
+
+        if (forward)
+                gtk_notebook_next_page (nb);
+        else
+                gtk_notebook_prev_page (nb);
+}
+
 static gint
 gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
@@ -449,19 +471,29 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
                 gint num;
                 gint i;
 
+                if (event->keyval == GDK_Page_Up) {
+                        gedit_switch_view (TRUE);
+                        goto gedit_view_stop_emision;
+                } else if (event->keyval == GDK_Page_Down) {
+                        gedit_switch_view (FALSE);
+                        goto gedit_view_stop_emision;
+                }
+                
                 num = sizeof (keys_used) / sizeof (gchar);
                 for (i = 0; i < num; i++) {
                         if (event->keyval == keys_used [i])
-                        {
-                                gtk_signal_emit_stop_by_name (GTK_OBJECT (w),
-                                                              "key_press_event");
-                                return FALSE;
-                        }
+                                goto gedit_view_stop_emision;
                 }
 
 	}
 
 	return TRUE;
+
+gedit_view_stop_emision:
+        gtk_signal_emit_stop_by_name (GTK_OBJECT (w),
+                                      "key_press_event");
+
+        return FALSE;
 }
 
 static void
