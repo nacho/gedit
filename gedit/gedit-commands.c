@@ -553,18 +553,6 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	}
 	
 	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-logo.png", NULL);
-	if (pixbuf != NULL)
-	{
-		GdkPixbuf* temp_pixbuf = NULL;
-
-		temp_pixbuf = gdk_pixbuf_scale_simple (pixbuf, 
-					 gdk_pixbuf_get_width (pixbuf),
-					 gdk_pixbuf_get_height (pixbuf),
-					 GDK_INTERP_HYPER);
-		g_object_unref (pixbuf);
-
-		pixbuf = temp_pixbuf;
-	}
 
 	about = gnome_about_new (_("gedit"), VERSION,
 				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
@@ -590,5 +578,4 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	gtk_widget_show (about);
 }
-
 
