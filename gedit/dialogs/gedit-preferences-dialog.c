@@ -45,7 +45,7 @@
 #define	STATUS_BAR_SETTINGS 	1
 #define	FONT_COLORS_SETTINGS 	5
 #define MDI_SETTINGS		2
-#define SAVE_SETTINGS		3
+#define SAVE_SETTINGS		7
 #define TABS_SETTINGS		3
 #define UNDO_SETTINGS		4
 
@@ -93,6 +93,14 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*colors_table;
 	GtkWidget	*font_hbox;
 
+	/* Undo page */
+	GtkWidget	*undo_checkbutton;
+	GtkWidget	*undo_levels_spinbutton;
+	GtkWidget	*undo_levels_label;
+
+	/* Tabs page */
+	GtkWidget	*tabs_width_spinbutton;
+
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -130,7 +138,10 @@ static void gedit_preferences_dialog_mdi_mode_selection_done (GtkOptionMenu *opt
 	       						GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg, 
 							GladeXML *gui);
-
+static gboolean gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static void gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *button,
+	       						GeditPreferencesDialog *dlg);
+static gboolean gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static GtkDialogClass* parent_class = NULL;
 
@@ -138,14 +149,16 @@ static CategoriesTreeItem user_interface [] =
 {
 	{_("Toolbar"), NULL, TOOLBAR_SETTINGS},
 	{_("Status bar"), NULL, STATUS_BAR_SETTINGS},
-	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 	{_("MDI"), NULL, MDI_SETTINGS},
 	NULL
 };
 
 static CategoriesTreeItem editor_behavior [] =
 {
-	{_("Save"), NULL, SAVE_SETTINGS },
+	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
+/*	
+ 	{_("Save"), NULL, SAVE_SETTINGS },
+*/
 	{_("Tabs"), NULL, TABS_SETTINGS},
 	{_("Undo"), NULL, UNDO_SETTINGS},
 	NULL
@@ -153,7 +166,7 @@ static CategoriesTreeItem editor_behavior [] =
 
 static CategoriesTreeItem toplevel [] =
 {
-	{_("Editor behavior"), editor_behavior, LOGO},
+	{_("Editor"), editor_behavior, LOGO},
 	{_("User interface"), user_interface, LOGO},
 	NULL
 };
@@ -427,6 +440,8 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_statusbar_page (dlg, gui);
 	gedit_preferences_dialog_setup_mdi_page (dlg, gui);
 	gedit_preferences_dialog_setup_font_and_colors_page (dlg, gui);
+	gedit_preferences_dialog_setup_undo_page (dlg, gui);
+	gedit_preferences_dialog_setup_tabs_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -616,25 +631,31 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	
 	dlg->priv->default_font_checkbutton = glade_xml_get_widget (gui, "default_font_checkbutton");
 	dlg->priv->default_colors_checkbutton = glade_xml_get_widget (gui, "default_colors_checkbutton");
-/*
-	dlg->priv->fontpicker = glade_xml_get_widget (gui, "fontpicker");
-*/
+	
 	dlg->priv->text_colorpicker = glade_xml_get_widget (gui, "text_colorpicker");
 	dlg->priv->background_colorpicker = glade_xml_get_widget (gui, "background_colorpicker");
 	
 	dlg->priv->colors_table = glade_xml_get_widget (gui, "colors_table");
 	dlg->priv->font_hbox = glade_xml_get_widget (gui, "font_hbox");	
 
+	dlg->priv->fontpicker = gnome_font_picker_new ();
+	g_return_val_if_fail (dlg->priv->fontpicker, FALSE);
+
+	gnome_font_picker_set_mode (GNOME_FONT_PICKER (dlg->priv->fontpicker), GNOME_FONT_PICKER_MODE_FONT_INFO);
+	gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (dlg->priv->fontpicker),
+                                                       TRUE, 14);
+	gnome_font_picker_fi_set_show_size (GNOME_FONT_PICKER (dlg->priv->fontpicker), TRUE);
+
 	g_return_val_if_fail (dlg->priv->default_font_checkbutton, FALSE);
 	g_return_val_if_fail (dlg->priv->default_colors_checkbutton, FALSE);
-/*
-	g_return_val_if_fail (dlg->priv->fontpicker, FALSE);
-*/
+
 	g_return_val_if_fail (dlg->priv->text_colorpicker, FALSE);
 	g_return_val_if_fail (dlg->priv->background_colorpicker, FALSE);
 	g_return_val_if_fail (dlg->priv->colors_table, FALSE);
 	g_return_val_if_fail (dlg->priv->font_hbox, FALSE);
 
+	gtk_box_pack_start (GTK_BOX (dlg->priv->font_hbox), dlg->priv->fontpicker, TRUE, TRUE, 0);
+	
 	/* setup the initial states */
 	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
 	if (active_view)
@@ -651,11 +672,11 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 				    c->red, c->green, c->blue, 0);
 
 	gtk_style_unref (style);
-/*
+
 	if (settings->font)
 		gnome_font_picker_set_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker),
 						 settings->font);
-*/
+
 	g_signal_connect (G_OBJECT (dlg->priv->default_font_checkbutton), "toggled", 
 			G_CALLBACK (gedit_preferences_dialog_default_font_colors_checkbutton_toggled), dlg);
 
@@ -665,5 +686,97 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton), settings->use_default_font);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton), settings->use_default_colors);
 }
+
+/*
+static void
+gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
+{
+	GList *children;
+	GList *l;
+	GtkContainer *container;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_CONTAINER (widget));
+
+	container = GTK_CONTAINER (widget);
+	children = gtk_container_children (container);
+
+	l = children;
+	while (l)
+	{
+		GtkWidget *child = (GtkWidget*)l->data;
+
+		if (GTK_IS_LABEL (child))
+			gtk_widget_set_sensitive (child, sens);
+
+		l = l->next;
+	}
+
+	g_list_free (children);
+}
+*/
+
+static void
+gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton)))
+	{
+		/*
+		gtk_toggle_button_update_label_sensitivity (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), TRUE);
+		*/
+		gtk_widget_set_sensitive (dlg->priv->undo_levels_spinbutton, TRUE);
+		/*
+		gtk_widget_set_sensitive (dlg->priv->undo_levels_label, TRUE);		
+		*/
+		gtk_widget_grab_focus (dlg->priv->undo_levels_spinbutton);
+	}
+	else
+	{
+		/*
+		gtk_toggle_button_update_label_sensitivity (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), FALSE);
+		*/
+		gtk_widget_set_sensitive (dlg->priv->undo_levels_spinbutton, FALSE);
+		/*
+		gtk_widget_set_sensitive (dlg->priv->undo_levels_label, FALSE);
+		*/
+	}
+}
 	
+static gboolean 
+gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->undo_checkbutton = glade_xml_get_widget (gui, "undo_checkbutton");
+	dlg->priv->undo_levels_spinbutton = glade_xml_get_widget (gui, "undo_levels_spinbutton");
+	dlg->priv->undo_levels_label = glade_xml_get_widget (gui, "undo_levels_label");
+		
+	g_return_val_if_fail (dlg->priv->undo_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->undo_levels_spinbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->undo_levels_label, FALSE);
+
+	g_signal_connect (G_OBJECT (dlg->priv->undo_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_undo_checkbutton_toggled), dlg);
+
+	if (settings->undo_levels > 0)
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->undo_levels_spinbutton),
+					   (guint) settings->undo_levels);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), settings->undo_levels > 0);
+}
+
+
+static gboolean 
+gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->tabs_width_spinbutton = glade_xml_get_widget (gui, "tabs_width_spinbutton");
+
+	g_return_val_if_fail (dlg->priv->undo_levels_spinbutton, FALSE);
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton),
+					   (guint) settings->tab_size);
+}
 
