@@ -15,10 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
- 
- #include <gtk/gtk.h>
- #include <stdlib.h>
- #include <stdio.h>
+#include <config.h>
+#include <gnome.h>
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <time.h>	
 #include <string.h>	
 #include <sys/stat.h>	
@@ -171,7 +172,7 @@ gE_prefs *prefs_window;
 			  &prefs->window);
  
  	/*prefs_window = gtk_dialog_new ();*/
-	gtk_window_set_title (GTK_WINDOW (prefs->window), "Font");
+	gtk_window_set_title (GTK_WINDOW (prefs->window), _("Font"));
 	/*gtk_widget_set_usize (GTK_WIDGET (prefs->window), 370, 170);*/
 	gtk_container_border_width (GTK_CONTAINER (prefs->window), 0);
 	
@@ -183,7 +184,7 @@ gE_prefs *prefs_window;
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
 	
-	prefs->label = gtk_label_new("Font:");
+	prefs->label = gtk_label_new(_("Font:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -200,7 +201,7 @@ gE_prefs *prefs_window;
 	gtk_widget_show (prefs->bbox);
 
 
-	prefs->label = gtk_label_new("Size:");
+	prefs->label = gtk_label_new(_("Size:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -214,7 +215,7 @@ gE_prefs *prefs_window;
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
 
-	prefs->label = gtk_label_new("Weight:");
+	prefs->label = gtk_label_new(_("Weight:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -230,7 +231,7 @@ gE_prefs *prefs_window;
 	gtk_widget_show (prefs->bbox);
 
 	
-	prefs->label = gtk_label_new("Slant:");
+	prefs->label = gtk_label_new(_("Slant:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -270,16 +271,25 @@ gE_prefs *prefs_window;
 	gtk_container_border_width (GTK_CONTAINER (prefs->bbox), 10);
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
-	
+
+#ifdef WITHOUT_GNOME
 	prefs->button = gtk_button_new_with_label ("Ok");
+#else
+	prefs->button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
+#endif
+	
    gtk_signal_connect (GTK_OBJECT (prefs->button), "clicked",
 		       GTK_SIGNAL_FUNC (ok_prefs), (gpointer) "button");
    gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->button, TRUE, TRUE, 0);
    GTK_WIDGET_SET_FLAGS (prefs->button, GTK_CAN_DEFAULT);
    gtk_widget_grab_default (prefs->button);
    gtk_widget_show (prefs->button);
-   
+
+#ifdef WITHOUT_GNOME
    prefs->button = gtk_button_new_with_label ("Cancel");
+#else
+   prefs->button = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
+#endif
    gtk_signal_connect (GTK_OBJECT (prefs->button), "clicked",
 		       GTK_SIGNAL_FUNC (cancel_prefs), (gpointer) "button");
    gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->button, TRUE, TRUE, 0);

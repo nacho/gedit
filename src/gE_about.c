@@ -1,9 +1,12 @@
 /*   gEdit About Box */
+#include <config.h>
+#include <gnome.h>
 
 #include <gtk/gtk.h>
 #include "gE_icon.xpm"
 #include "main.h"
 
+#ifdef WITHOUT_GNOME
 GtkWidget *about_window;
 
 void close_about(GtkWidget *widget, gpointer *data)
@@ -85,3 +88,23 @@ void gE_about_box()
    
    gtk_widget_show (about_window);
 }
+#else
+void gE_about_box()
+{
+        GtkWidget *about;
+        gchar *authors[] = {
+		"Alex Roberts",
+		"Evan Lawrence",
+		"http://melt.home.ml.org/gedit",
+		NULL
+	};
+
+        about = gnome_about_new (_("gEdit"), VERSION,
+				 "(C) 1998 Alex Roberts and Evan Lawrence",
+				 authors,
+				 _("gEdit"),
+				 NULL);
+        gtk_widget_show (about);
+}
+#endif
+

@@ -47,6 +47,7 @@ gE_document *gE_document_new(gE_window *window);
 gE_document *gE_document_current(gE_window *window);
 gint gE_file_open (gE_document *document, gchar *filename);
 gint gE_file_save (gE_document *document, gchar *filename);
+gint file_open_wrapper (char *name);
 
 size_t Ctime;
 

@@ -15,7 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
- 
+#include <config.h>
+#include <gnome.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -53,9 +54,23 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)
 
 */
 
+void line_pos_callback(GtkWidget *w, GtkWidget *text)
+{
+static char statustext[32];
 
+if (main_window->documents > 0)
+{
+/*print("%s\n", GTK_TEXT(text)->current_line);*/
+sprintf (statustext,_("Line: %d, Col: %d"), 
+				GTK_TEXT(text)->cursor_pos_y/13,
+				GTK_TEXT(text)->cursor_pos_x/7);
+	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, statustext);
+}
+	
 
+}
 
+#ifdef WITHOUT_GNOME
 int main (int argc, char **argv)
 {
  int x;
@@ -101,4 +116,57 @@ int main (int argc, char **argv)
   
   return 0;
 }
-		      		      
+#else
+static struct argp_option argp_options [] = {
+	{ NULL, 0, NULL, 0, NULL, 0 },
+};
+
+static GList *file_list;
+
+static error_t
+parse_an_arg (int key, char *arg, struct argp_state *state)
+{
+	
+	if (key == ARGP_KEY_ARG)
+		file_list = g_list_append (file_list, arg);
+	return 0;
+}
+
+static struct argp parser =
+{
+	NULL, parse_an_arg, NULL, NULL, NULL, NULL, NULL
+};
+
+int main (int argc, char **argv)
+{
+	argp_program_version = VERSION;
+
+	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+	textdomain(PACKAGE);
+
+	gnome_init ("gEdit", &parser, argc, argv, 0, NULL);
+  
+	gE_get_rc_file();
+	gE_rc_parse();
+
+	main_window = gE_window_new ();
+	if (file_list){
+		gE_document *doc;
+
+		doc = gE_document_current(main_window);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
+					 gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
+		g_list_remove(main_window->documents, doc);
+		if (doc->filename != NULL)
+			g_free (doc->filename);
+		g_free (doc);
+
+		for (;file_list; file_list = file_list->next)
+			gtk_idle_add ((GtkFunction) file_open_wrapper, file_list->data);
+	}
+	gtk_main ();
+	return 0;
+}
+
+#endif
+

@@ -17,12 +17,85 @@
  */
 
 #include <stdio.h>
+#include <config.h>
+#include <gnome.h>
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
 #include "menus.h"
 
 gchar gEdit_ID[] = "gEdit 0.3.2";
+
+#ifndef WITHOUT_GNOME
+GnomeUIInfo gedit_file_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN },
+	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE },
+	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE },
+	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_edit_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT },
+	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY },
+	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Select all"),  NULL, edit_selall_cmd_callback, NULL, NULL },
+	GNOMEUIINFO_END
+};	
+
+GnomeUIInfo gedit_search_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_search_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_tab_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Botton"),  NULL, tab_bot_cback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cback, NULL, NULL },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_options_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("Text font..."),  NULL, prefs_callback, NULL, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_SUBTREE, N_("Tab location"), NULL, &gedit_tab_menu },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_help_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("About"), NULL, gE_about_box, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
+	{ GNOME_APP_UI_SEPARATOR },
+	GNOMEUIINFO_HELP ("gedit"),
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_menu [] = {
+	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu },
+	GNOMEUIINFO_END
+};
+#endif
 
 gE_window *gE_window_new()
 {
@@ -40,9 +113,12 @@ gE_window *gE_window_new()
   window->search = g_malloc (sizeof(gE_search));
   window->search->window = NULL;
 
+#ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window->window, "gedit window");
-     
+#else
+  window->window = gnome_app_new ("gEdit", "gEdit");
+#endif
   gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
   		      GTK_SIGNAL_FUNC(destroy_window),
 		      &window->window);
@@ -51,18 +127,25 @@ gE_window *gE_window_new()
 		      &window->window);
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
+#ifdef WITHOUT_GNOME
   gtk_window_set_title (GTK_WINDOW (window->window), gEdit_ID);
+#endif
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
   gtk_container_border_width (GTK_CONTAINER (window->window), 0);
        
   box1 = gtk_vbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (window->window), box1);
-  gtk_widget_show (box1);
 
+#ifdef WITHOUT_GNOME
+  gtk_container_add (GTK_CONTAINER (window->window), box1);
   get_main_menu(&window->menubar, &window->accel);
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
   gtk_box_pack_start(GTK_BOX(box1), window->menubar, FALSE, TRUE, 0);
-
+  gtk_widget_show(window->menubar);
+#else
+  gnome_app_set_contents (GNOME_APP(window->window), box1);
+  gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
+#endif
+  gtk_widget_show (box1);
 
   gE_document_new(window);
 
@@ -128,7 +211,7 @@ gE_document *gE_document_new(gE_window *window)
 		gtk_notebook_set_scrollable (GTK_NOTEBOOK(window->notebook), TRUE);
 	}
 
-	document->tab_label = gtk_label_new ("Untitled");
+	document->tab_label = gtk_label_new (_("Untitled"));
 	document->filename = NULL;
 	gtk_widget_show (document->tab_label);
 
