@@ -998,10 +998,10 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	converted_search_string = gedit_utils_convert_search_text (search_string);
 
 	if ((selected_text == NULL) ||
-	    (case_sensitive && (strcmp (selected_text, converted_search_string)
-	     !=0)) || (!case_sensitive && !g_utf8_caselessnmatch (selected_text, search_string, 
-						       strlen (selected_text), 
-						       strlen (search_string)) != 0))
+	    (case_sensitive && (strcmp (selected_text, converted_search_string) != 0)) || 
+	    (!case_sensitive && !g_utf8_caselessnmatch (selected_text, search_string, 
+						        strlen (selected_text), 
+						        strlen (search_string)) != 0))
 	{
 		gedit_debug (DEBUG_SEARCH, "selected_text (%s) != search_string (%s)", 
 			     selected_text ? selected_text : "NULL",
@@ -1036,18 +1036,23 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	/* run search */
 	found = gedit_document_find (doc, search_string, flags);
 
+	gedit_debug (DEBUG_SEARCH, "Found 1: %s", found ? "TRUE" : "FALSE");
+
 	/* if we're able to wrap, don't use the cursor position */
 	if (!found && wrap_around)
 	{
 		GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
 		found = gedit_document_find (doc, search_string, flags);
+
+		gedit_debug (DEBUG_SEARCH, "Found 2: %s", found ? "TRUE" : "FALSE");
 	}
 
 	if (found)
 		gedit_view_scroll_to_cursor (active_view);
 	
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
-							GEDIT_RESPONSE_REPLACE, found);	
+					   GEDIT_RESPONSE_REPLACE, 
+					   found);	
 
 	update_menu_items_sensitivity ();
 

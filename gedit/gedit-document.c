@@ -2410,7 +2410,12 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 					gtk_text_iter_ends_word (&match_end);
 
 				if (!found) 
-					iter = match_end;
+				{
+					if (GEDIT_SEARCH_IS_BACKWARDS (flags))
+						iter = match_start;
+					else
+						iter = match_end;
+				}
 			}
 			else
 				break;
