@@ -16,7 +16,7 @@ sys_DATA = gedit.desktop
 mimedir = $(datadir)/mime-info
 mime_DATA = gedit.keys
 
-dist-hook:
+dist-hook: gedit.spec
 	# mkdir $(distdir)/xpm
 	# cp $(srcdir)/xpm/*.xpm $(distdir)/xpm
 	cp gedit.spec $(distdir)
