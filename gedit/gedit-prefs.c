@@ -71,11 +71,9 @@ gedit_prefs_save_settings (void)
 
 	gnome_config_set_int ("toolbar_labels", settings->toolbar_labels);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
-	gnome_config_set_int ("tb_text", (gint) settings->have_tb_text);
-	gnome_config_set_int ("tb_pix", (gint) settings->have_tb_pix);
-	gnome_config_set_int ("tb_relief", (gint) settings->use_relief_toolbar);
+	gnome_config_set_bool ("show_tooltips", settings->show_tooltips);
+
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
-	gnome_config_set_int ("close_doc", (gint) settings->close_doc);
 	gnome_config_set_int ("undo_levels", (gint) settings->undo_levels);
 	gnome_config_set_int ("tab_size", (gint) settings->tab_size);
 
@@ -151,12 +149,10 @@ gedit_prefs_load_settings (void)
 	
 	settings->show_status = gnome_config_get_bool ("show_statusbar=TRUE"); 
 	settings->toolbar_labels = gnome_config_get_int ("toolbar_labels");
-	settings->have_toolbar = gnome_config_get_int ("toolbar");
-	settings->have_tb_text = gnome_config_get_int ("tb text");
-	settings->have_tb_pix = gnome_config_get_int ("tb_pix");
-	settings->use_relief_toolbar = gnome_config_get_int("tb_relief");
+	settings->have_toolbar = gnome_config_get_int ("toolbar=1");
+	settings->show_tooltips = gnome_config_get_bool ("show_tooltips=TRUE"); 
+
 	settings->splitscreen = gnome_config_get_int("splitscreen");
-	settings->close_doc = gnome_config_get_int ("close_doc");
 	settings->undo_levels = gnome_config_get_int ("undo_levels=25");
 	settings->tab_size = gnome_config_get_int ("tab_size=8");
 

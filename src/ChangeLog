@@ -1,3 +1,28 @@
+2001-11-28  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-commands.c (gedit_cmd_settings_preferences): now it really update gedit settings
+	  (gedit_cmd_help_about): cleaned a bit
+
+	* gedit-mdi.c (gedit_mdi_set_app_status_bar): removed
+	  (gedit_mdi_set_app_statusbar_style): new functio
+	  (gedit_mdi_set_app_toolbar_style): almost rewritten
+	  (gedit_mdi_update_ui_according_to_preferences): new function
+
+	* gedit-mdi.h (gedit_mdi_update_ui_according_to_preferences): new prototype
+
+	* gedit-prefs.[ch]: removed some unused prefs
+
+	* gedit-view.c (gedit_view_init): use the preferred colors and font when 
+	  a GeditView is created
+	  (gedit_view_set_colors): new function
+	  (gedit_view_set_font): ditto
+
+	* gedit-view.h (gedit_view_set_colors): new prototype
+	  (gedit_view_set_font): ditto
+
+	* dialogs/gedit-preferences-dialog.c: cleaned
+          (gedit_preferences_dialog_update_settings): new function
+
 2001-11-27  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/gedit-preferences-dialog.c: added Undo and Tabs pages, removed Save page.

@@ -31,6 +31,7 @@
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"
+#include "gedit-prefs.h"
 
 struct _GeditViewPrivate
 {
@@ -105,7 +106,8 @@ static void
 gedit_view_init (GeditView  *view)
 {
 	GtkWidget *sw; /* the scrolled window */
-
+	GdkColor background, text;
+	
 	/* FIXME
 	static GtkWidget *popup_menu = NULL;
 	*/
@@ -131,6 +133,17 @@ gedit_view_init (GeditView  *view)
 	 *  TODO: Set tab, fonts, wrap mode, colors, etc. according
 	 *  to preferences - Paolo 
 	 */
+	gedit_view_set_font (view, settings->font);
+
+	background.red = settings->bg [0];
+	background.green = settings->bg [1];
+	background.blue = settings->bg [2];
+
+	text.red = settings->fg [0];
+	text.green = settings->fg [1];
+	text.blue = settings->fg [2];
+
+	gedit_view_set_colors (view, &background, &text);
 	
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view->priv->text_view));
@@ -348,6 +361,46 @@ gedit_view_scroll_to_cursor (GeditView *view)
 				gtk_text_buffer_get_mark (buffer,
 				"insert"));
 }
+
+void 
+gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text)
+{
+	GtkStyle *style;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->priv->text_view)));
+
+	style->base[0] = *backgroud;
+	style->text[0] = *text;
+
+	gtk_widget_set_style (GTK_WIDGET (view->priv->text_view), style);
+
+	g_object_unref (style);
+}
+
+void
+gedit_view_set_font (GeditView* view, const gchar* font_name)
+{
+	GtkStyle *style;
+	PangoFontDescription *font_desc;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	font_desc = pango_font_description_from_string (font_name);
+	g_return_if_fail (font_desc != NULL);
+	
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->priv->text_view)));
+
+	pango_font_description_merge (style->font_desc, font_desc, TRUE);
+
+	gtk_widget_set_style (GTK_WIDGET (view->priv->text_view), style);
+
+	g_object_unref (style);
+}
+
+
+
 
 	
 

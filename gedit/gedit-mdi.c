@@ -44,6 +44,7 @@
 #include "gedit-prefs.h"
 #include "gedit-recent.h" 
 #include "gedit-file.h"
+#include "gedit-view.h"
 
 #include <bonobo/bonobo-ui-util.h>
 
@@ -58,12 +59,12 @@ static void gedit_mdi_init 		(GeditMDI 	*mdi);
 static void gedit_mdi_finalize 		(GObject 	*object);
 
 static void gedit_mdi_app_created_handler	(BonoboMDI *mdi, BonoboWindow *win);
-static void gedit_mdi_set_app_status_bar 	(BonoboWindow *win);
 static void gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context, 
 		                                  gint x, gint y, 
 						  GtkSelectionData *selection_data, 
 				                  guint info, guint time);
 static void gedit_mdi_set_app_toolbar_style 	(BonoboWindow *win);
+static void gedit_mdi_set_app_statusbar_style 	(BonoboWindow *win);
 
 static gint gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child);
 static gint gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view);
@@ -202,24 +203,6 @@ gedit_mdi_new (void)
 }
 
 static void
-gedit_mdi_set_app_status_bar (BonoboWindow *win)
-{
-	BonoboUIEngine *ui_engine;
-	BonoboUIError ret;
-	
-	gedit_debug (DEBUG_MDI, "");
-	
-	g_return_if_fail (BONOBO_IS_WINDOW (win));
-			
-	ui_engine = bonobo_window_get_ui_engine (win);
-	g_return_if_fail (ui_engine != NULL);
-
-	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
-				"hidden", settings->show_status ? "0" : "1");
-	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);
-}
-
-static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 {
 	static GtkTargetEntry drag_types[] =
@@ -243,7 +226,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			    GTK_SIGNAL_FUNC (gedit_mdi_drag_data_received_handler), 
 			    NULL);
 
-	gedit_mdi_set_app_status_bar (win);
+	gedit_mdi_set_app_statusbar_style (win);
 	
 	/* Set the toolbar style according to prefs */
 	gedit_mdi_set_app_toolbar_style (win);
@@ -311,17 +294,34 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	ui_engine = bonobo_window_get_ui_engine (win);
 	g_return_if_fail (ui_engine != NULL);
 	
+	if (!settings->have_toolbar)
+	{
+		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
+				"hidden", "1");
+		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
+
+		return;
+	}
+	
+	bonobo_ui_engine_freeze (ui_engine);
+
+	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
+				"hidden", "0");
+	if (ret != BONOBO_UI_ERROR_OK) 
+		goto error;
+
 	switch (settings->toolbar_labels)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
-			/*
+			/* FIXME
 			if (gnome_preferences_get_toolbar_labels())
 			{
 			*/
 				gedit_debug (DEBUG_MDI, "SYSTEM: BOTH");
 				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "both");
-				g_return_if_fail (ret == BONOBO_UI_ERROR_OK);
+				if (ret != BONOBO_UI_ERROR_OK) 
+					goto error;
 			/*
 			}
 			else
@@ -336,17 +336,52 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "icons");
-			g_return_if_fail (ret == BONOBO_UI_ERROR_OK);
+			if (ret != BONOBO_UI_ERROR_OK) 
+					goto error;
+
 			break;
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "both");
-			g_return_if_fail (ret == BONOBO_UI_ERROR_OK);
+			if (ret != BONOBO_UI_ERROR_OK) 
+					goto error;
 			break;
 		default:
-			g_return_if_fail (FALSE);
+			goto error;
 		break;
 	}
+
+	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
+					"tips", settings->show_tooltips ? "1" : "0");
+
+	if (ret != BONOBO_UI_ERROR_OK) 
+		goto error;
+
+	bonobo_ui_engine_thaw (ui_engine);
+
+	return;
+	
+error:
+	g_warning ("Impossible to set toolbar style");
+	bonobo_ui_engine_thaw (ui_engine);
+}
+
+static void
+gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
+{
+	BonoboUIEngine *ui_engine;
+	BonoboUIError ret;
+	
+	gedit_debug (DEBUG_MDI, "");
+	
+	g_return_if_fail (BONOBO_IS_WINDOW (win));
+			
+	ui_engine = bonobo_window_get_ui_engine (win);
+	g_return_if_fail (ui_engine != NULL);
+
+	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
+				"hidden", settings->show_status ? "0" : "1");
+	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
 }
 
 static void 
@@ -664,6 +699,72 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 	bonobo_ui_engine_thaw (ui_engine);
 }
 
-	
+void
+gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
+{
+	GList *windows;		
+	GList *children;
+	GdkColor background;
+	GdkColor text;
+
+	gedit_debug (DEBUG_MDI, "");
+
+	windows = bonobo_mdi_get_windows (BONOBO_MDI (mdi));
+
+	while (windows != NULL)
+	{
+		BonoboUIEngine *ui_engine;
+		BonoboWindow *active_window = BONOBO_WINDOW (windows->data);
+		g_return_if_fail (active_window != NULL);
+		
+		ui_engine = bonobo_window_get_ui_engine (active_window);
+		g_return_if_fail (ui_engine != NULL);
+
+		bonobo_ui_engine_freeze (ui_engine);
+
+		gedit_mdi_set_app_statusbar_style (active_window);
+		gedit_mdi_set_app_toolbar_style (active_window);
+
+		bonobo_ui_engine_thaw (ui_engine);
+
+		windows = windows->next;
+	}
+
+	children = bonobo_mdi_get_children (BONOBO_MDI (mdi));
+
+	background.red = settings->bg [0];
+	background.green = settings->bg [1];
+	background.blue = settings->bg [2];
+
+	text.red = settings->fg [0];
+	text.green = settings->fg [1];
+	text.blue = settings->fg [2];
+
+	while (children != NULL)
+	{
+		GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+		while (views != NULL)
+		{
+			GeditView *v =	GEDIT_VIEW (views->data);
+			
+			gedit_view_set_colors (v, &background, &text);
+			gedit_view_set_font (v, settings->font);
+			views = views->next;
+		}
+		
+		children = children->next;
+	}
+
+/*
+	bonobo_mdi_set_mode (BONOBO_MDI (mdi), settings->mdi_mode);
+*/
+}
+
+
+
+
+		
+
 
 		

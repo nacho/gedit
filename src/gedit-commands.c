@@ -300,11 +300,31 @@ void
 gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GtkWidget *dlg;
+	gint ret;
 
 	dlg = gedit_preferences_dialog_new (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
 
-	gtk_dialog_run (GTK_DIALOG (dlg));
+	do
+	{
+		ret = gtk_dialog_run (GTK_DIALOG (dlg));
+
+		switch (ret)
+		{
+			case GTK_RESPONSE_OK:
+				if (gedit_preferences_dialog_update_settings (GEDIT_PREFERENCES_DIALOG (dlg)))
+				{
+					gedit_mdi_update_ui_according_to_preferences (gedit_mdi);
+					gedit_prefs_save_settings ();
+				}
+
+				break;
+			case GTK_RESPONSE_HELP:
+				/* FIXME */
+				break;
+		}	
+		
+	} while (ret == GTK_RESPONSE_HELP);
 
 	gtk_widget_destroy (dlg);
 }
@@ -319,38 +339,26 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	static const char *documentors[] = { "Eric Baudais", NULL };
 	
-	static GtkWidget *about_box = NULL;
+	GtkWidget *about_box = NULL;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 	
-	if (about_box == NULL)
-	{
-		GdkPixbuf *pixbuf = NULL;
+	about_box = gnome_about_new ("gedit",
+				VERSION,
+				"(c) 1998-2000 Alex Robert and Ewan Lawrence\n"
+				"(c) 2000-2001 Chema Celorio and Paolo Maggi",
+				"gedit is a small and lightweight text editor for GNOME",
+				authors,
+				documentors,
+				NULL /*"Translation credits"*/,
+				NULL /* logo pixbuf */);
 
-		/*
-		pixbuf = gdk_pixbuf_new_from_file ("../pixmaps/gedit-logo.png", NULL);
-		*/
-	
-		about_box = gnome_about_new ("gedit",
-					VERSION,
-					"(c) 1998-2000 Alex Robert and Ewan Lawrence\n"
-					"(c) 2000-2001 Chema Celorio and Paolo Maggi",
-					"gedit is a small and lightweight text editor for GNOME",
-					authors,
-					documentors,
-					NULL /*"Translation credits"*/,
-					NULL /* logo pixbuf */);
-
-		/*
-		g_object_unref (G_OBJECT (pixbuf));
-		*/
-	}
 
 	gtk_window_set_transient_for (GTK_WINDOW (about_box),
 			      GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))));
 
-	gtk_dialog_run (about_box);
+	gtk_dialog_run (GTK_DIALOG (about_box));
 
-	gtk_widget_hide (about_box);
+	gtk_widget_destroy (about_box);
 }
 

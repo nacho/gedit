@@ -149,7 +149,9 @@ static CategoriesTreeItem user_interface [] =
 {
 	{_("Toolbar"), NULL, TOOLBAR_SETTINGS},
 	{_("Status bar"), NULL, STATUS_BAR_SETTINGS},
+/*
 	{_("MDI"), NULL, MDI_SETTINGS},
+*/
 	NULL
 };
 
@@ -164,9 +166,15 @@ static CategoriesTreeItem editor_behavior [] =
 	NULL
 };
 
+static CategoriesTreeItem print [] =
+{
+	NULL
+};
+
 static CategoriesTreeItem toplevel [] =
 {
 	{_("Editor"), editor_behavior, LOGO},
+	{_("Print"), print, LOGO},
 	{_("User interface"), user_interface, LOGO},
 	NULL
 };
@@ -277,6 +285,11 @@ gedit_preferences_dialog_add_buttons (GeditPreferencesDialog *dlg)
 	gtk_dialog_add_button (GTK_DIALOG (dlg),
                              	GTK_STOCK_HELP,
                              	GTK_RESPONSE_HELP);
+
+	/* FIXME: Should be GTK_RESPONSE_OK ? */
+	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
+				GTK_RESPONSE_CANCEL);
+
 }
 
 static GtkTreeModel*
@@ -438,7 +451,9 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 
 	gedit_preferences_dialog_setup_toolbar_page (dlg, gui);
 	gedit_preferences_dialog_setup_statusbar_page (dlg, gui);
+/* FIXME
 	gedit_preferences_dialog_setup_mdi_page (dlg, gui);
+*/
 	gedit_preferences_dialog_setup_font_and_colors_page (dlg, gui);
 	gedit_preferences_dialog_setup_undo_page (dlg, gui);
 	gedit_preferences_dialog_setup_tabs_page (dlg, gui);
@@ -499,15 +514,21 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 	else
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_hide_radiobutton), TRUE);
 
-	if (settings->have_tb_pix)
-	
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_radiobutton), TRUE);
-	
-	else 
-		if (settings->have_tb_text)
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton), TRUE);
-		else
+	switch (settings->toolbar_labels)
+	{
+		case GEDIT_TOOLBAR_SYSTEM:
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_system_radiobutton), TRUE);
+			break;
+		case GEDIT_TOOLBAR_ICONS:
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_radiobutton), TRUE);
+			break;
+		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton), TRUE);
+			break;
+
+		dafult:
+			g_return_val_if_fail (FALSE, FALSE);
+	}
 	
 	if (settings->show_tooltips)
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton), TRUE);
@@ -623,9 +644,7 @@ gedit_preferences_dialog_default_font_colors_checkbutton_toggled (GtkToggleButto
 static gboolean 
 gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
-	GtkStyle *style;
 	GeditView* active_view = NULL;
-	GdkColor *c;
 
 	gedit_debug (DEBUG_PREFS, "");
 	
@@ -656,22 +675,12 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 
 	gtk_box_pack_start (GTK_BOX (dlg->priv->font_hbox), dlg->priv->fontpicker, TRUE, TRUE, 0);
 	
-	/* setup the initial states */
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
-	if (active_view)
-		style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (active_view)));
-	else
-		style = gtk_style_new ();
-
-	c = &style->base[0];
+	/* setup the initial states */ 
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->priv->background_colorpicker),
-				    c->red, c->green, c->blue, 0);
+				    settings->bg[0], settings->bg[1], settings->bg[2], 0);
 
-	c = &style->text[0];
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->priv->text_colorpicker),
-				    c->red, c->green, c->blue, 0);
-
-	gtk_style_unref (style);
+				    settings->fg[0], settings->fg[1], settings->fg[2], 0);
 
 	if (settings->font)
 		gnome_font_picker_set_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker),
@@ -687,60 +696,17 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton), settings->use_default_colors);
 }
 
-/*
-static void
-gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
-{
-	GList *children;
-	GList *l;
-	GtkContainer *container;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GTK_IS_CONTAINER (widget));
-
-	container = GTK_CONTAINER (widget);
-	children = gtk_container_children (container);
-
-	l = children;
-	while (l)
-	{
-		GtkWidget *child = (GtkWidget*)l->data;
-
-		if (GTK_IS_LABEL (child))
-			gtk_widget_set_sensitive (child, sens);
-
-		l = l->next;
-	}
-
-	g_list_free (children);
-}
-*/
-
 static void
 gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *button,
 							 GeditPreferencesDialog *dlg)
 {
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton)))
 	{
-		/*
-		gtk_toggle_button_update_label_sensitivity (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), TRUE);
-		*/
 		gtk_widget_set_sensitive (dlg->priv->undo_levels_spinbutton, TRUE);
-		/*
-		gtk_widget_set_sensitive (dlg->priv->undo_levels_label, TRUE);		
-		*/
 		gtk_widget_grab_focus (dlg->priv->undo_levels_spinbutton);
 	}
-	else
-	{
-		/*
-		gtk_toggle_button_update_label_sensitivity (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), FALSE);
-		*/
+	else	
 		gtk_widget_set_sensitive (dlg->priv->undo_levels_spinbutton, FALSE);
-		/*
-		gtk_widget_set_sensitive (dlg->priv->undo_levels_label, FALSE);
-		*/
-	}
 }
 	
 static gboolean 
@@ -780,3 +746,154 @@ gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML 
 					   (guint) settings->tab_size);
 }
 
+gboolean 
+gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
+{
+	GeditPreferences old_prefs;
+	gint index;
+
+	gedit_debug (DEBUG_PREFS, "");
+	
+	old_prefs = *settings;
+	
+	/* Get data from toolbar page */
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_radiobutton)))
+		settings->have_toolbar = FALSE;
+	else
+	{
+		settings->have_toolbar = TRUE;
+		
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_system_radiobutton)))
+			settings->toolbar_labels = GEDIT_TOOLBAR_SYSTEM;
+		else
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_radiobutton)))
+			settings->toolbar_labels = GEDIT_TOOLBAR_ICONS;
+		else
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton)))
+			settings->toolbar_labels = GEDIT_TOOLBAR_ICONS_AND_TEXT;
+		else
+			goto error;
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton)))
+			settings->show_tooltips = TRUE;
+		else
+			settings->show_tooltips = FALSE;
+	}
+
+	/* Get data from status bar page */
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton)))
+		settings->show_status = TRUE;
+	else
+		settings->show_status = FALSE;
+
+	/* Get data from undo page */
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton)))
+		settings->undo_levels = 0;
+	else
+	{
+		gint undo_levels;
+
+		undo_levels = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (dlg->priv->undo_levels_spinbutton));
+	
+		if (undo_levels < 1)
+			undo_levels = 1;
+
+		settings->undo_levels = undo_levels;
+	}
+#if 0   /* BONOBO_MDI has to be fixed before MDI mode can be used */
+	/* Get Data from MDI page */
+	index = gtk_option_menu_get_history (GTK_OPTION_MENU (dlg->priv->mdi_mode_optionmenu));
+	if (index > 2) index = BONOBO_MDI_NOTEBOOK;
+	settings->mdi_mode = index;
+	
+	if (index == BONOBO_MDI_NOTEBOOK)
+	{
+		index = gtk_option_menu_get_history (GTK_OPTION_MENU (dlg->priv->mdi_tab_pos_optionmenu));
+		if (index > 3) index = 2; /* 2 = Top */
+		settings->tab_pos = index;
+	}
+#endif		
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton)))
+	{
+		/* FIXME: is it rigth? */
+		
+		GtkStyle *style;
+		GdkColor *bg;
+		GdkColor *fg;
+
+		settings->use_default_colors = TRUE;
+		
+		style = gtk_style_new ();
+
+		bg = &style->base[0];
+		settings->bg[0] = bg->red;
+		settings->bg[1] = bg->green;
+		settings->bg[2] = bg->blue;
+
+		fg = &style->text[0];
+		settings->fg[0] = fg->red;
+		settings->fg[1] = fg->green;
+		settings->fg[2] = fg->blue;
+
+		gtk_style_unref (style);
+	}
+	else
+	{
+		guint16 a;
+
+		settings->use_default_colors = FALSE;
+
+		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->text_colorpicker), 
+				&settings->fg[0], &settings->fg[1], &settings->fg[2], &a);
+
+		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->background_colorpicker), 
+				&settings->bg[0], &settings->bg[1], &settings->bg[2], &a);
+	}
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton)))
+	{
+		/* FIXME: is it rigth? */
+
+		GtkStyle *style;
+		gchar *font;
+
+		settings->use_default_font = TRUE;
+		
+		style = gtk_style_new ();
+
+		font = pango_font_description_to_string (style->font_desc);
+		
+		if (font != NULL)
+		{
+			g_free (settings->font);
+			settings->font = g_strdup (font);
+			g_free (font);
+		}
+
+		gtk_style_unref (style);
+
+	}
+	else
+	{
+		const gchar* font;
+
+		settings->use_default_font = FALSE;
+		
+		font = gnome_font_picker_get_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker));		
+	
+		if (font != NULL)
+		{
+			g_free (settings->font);
+			settings->font = g_strdup (font);
+		}
+	}
+			
+	return TRUE;
+
+error:
+	*settings = old_prefs;
+	g_return_val_if_fail (FALSE, FALSE);
+}
+
+	

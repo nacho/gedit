@@ -1658,7 +1658,7 @@ bonobo_mdi_add_child (BonoboMDI *mdi, BonoboMDIChild *child)
 	if (ret == FALSE)
 		return FALSE;
 
-	bonobo_mdi_child_set_parent (child, GTK_OBJECT(mdi));
+	bonobo_mdi_child_set_parent (child, GTK_OBJECT (mdi));
 
 	mdi->priv->children = g_list_append (mdi->priv->children, child);
 

@@ -65,6 +65,8 @@ GeditMDI*	gedit_mdi_new		(void);
 
 void		gedit_mdi_set_active_window_title (BonoboMDI *mdi);
 
+void		gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi);
+
 /* FIXME: should be static ??? */
 void 		gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi);
 
