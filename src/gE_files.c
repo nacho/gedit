@@ -208,6 +208,9 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 	gE_msgbar_set(w, MSGBAR_FILE_OPENED);
 	recent_add (doc->filename);
 	recent_update (w);
+
+	/* Make the document readonly if you can't write to the file. */
+	gE_document_set_readonly (doc, access (fname, W_OK) != 0);
 	
 	return 0;
 } /* gE_file_open */

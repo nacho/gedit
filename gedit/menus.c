@@ -90,6 +90,8 @@ static GtkMenuEntry menu_items[] =
 		gE_window_toggle_statusbar, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle Wordwrap", NULL,
 		gE_document_toggle_wordwrap, (gpointer)GE_WINDOW, NULL},
+	{"<Main>/Options/Toggle ReadOnly", NULL,
+		 gE_document_toggle_readonly, (gpointer)GE_WINDOW, NULL},
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	{"<Main>/Options/Toggle Split Screen", NULL,
 		options_toggle_split_screen, (gpointer)GE_WINDOW, NULL},
@@ -314,6 +316,7 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Readonly"),  NULL, gE_document_toggle_readonly, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Split Screen"), NULL, options_toggle_split_screen, (gpointer) GE_WINDOW, NULL },
 #ifndef WITHOUT_GNOME
 	{ GNOME_APP_UI_ITEM, N_("Toggle Scrollball"), NULL, gE_document_toggle_scrollball, (gpointer) GE_WINDOW, NULL },

@@ -39,7 +39,9 @@ extern void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow);
 extern gE_window *gE_window_new();
 extern gE_document *gE_document_new(gE_window *window);
 extern gE_document *gE_document_current(gE_window *window);
+extern void gE_document_set_readonly (gE_document *doc, gint readonly);
 extern void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow);
+extern void gE_document_toggle_readonly (GtkWidget *w, gpointer cbwindow);
 #ifndef WITHOUT_GNOME
 extern void gE_document_toggle_scrollball (GtkWidget *w, gE_window *window);
 #endif

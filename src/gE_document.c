@@ -253,6 +253,7 @@ gE_document
 	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
 	doc->filename = NULL;
 	doc->word_wrap = TRUE;
+	doc->read_only = FALSE;
 	gtk_widget_show(doc->tab_label);
 
 	/* Create the upper split screen */
@@ -263,8 +264,8 @@ gE_document
 	gtk_widget_show(table);
 
 	doc->text = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(doc->text), TRUE);
-	gtk_text_set_word_wrap(GTK_TEXT(doc->text), TRUE);
+	gtk_text_set_editable(GTK_TEXT(doc->text), !doc->read_only);
+	gtk_text_set_word_wrap(GTK_TEXT(doc->text), doc->word_wrap);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
@@ -321,8 +322,8 @@ gE_document
 	gtk_widget_show(table);
 
 	doc->split_screen = gtk_text_new(NULL, NULL);
-	gtk_text_set_editable(GTK_TEXT(doc->split_screen), TRUE);
-	gtk_text_set_word_wrap(GTK_TEXT(doc->split_screen), TRUE);
+	gtk_text_set_editable(GTK_TEXT(doc->split_screen), !doc->read_only);
+	gtk_text_set_word_wrap(GTK_TEXT(doc->split_screen), doc->word_wrap);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
 		"button_press_event",
@@ -414,6 +415,24 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
 	doc = gE_document_current (window);
 	doc->word_wrap = !doc->word_wrap;
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
+}
+
+void gE_document_set_readonly (gE_document *doc, gint read_only)
+{
+	doc->read_only = read_only != 0;
+	gtk_text_set_editable (GTK_TEXT (doc->text), !doc->read_only);
+	if (doc->split_screen)
+		gtk_text_set_editable
+			(GTK_TEXT (doc->split_screen), !doc->read_only);
+}
+
+void gE_document_toggle_readonly (GtkWidget *w, gpointer cbwindow)
+{
+	gE_document *doc;
+	gE_window *window = (gE_window *)cbwindow;
+
+	doc = gE_document_current (window);
+	gE_document_set_readonly (doc, !doc->read_only);
 }
 
 #ifndef WITHOUT_GNOME

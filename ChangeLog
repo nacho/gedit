@@ -1,5 +1,24 @@
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
+	Added functionality to make documents readonly.
+
+	* src/main.h (gE_document): Added `read_only' flag.
+
+	* src/gE_document.c (gE_document_set_readonly): New function.
+	This is the user-level function to make a document readonly; it
+	keeps track of the splitscreen.
+	(gE_document_toggle_readonly): New function. This is used in the
+	menu callbacks and calls gE_document_set_readonly ().
+	(gE_document_new): Initialize the `read_only' flag to FALSE.
+
+	* src/gE_files.c (gE_file_open): Use access () to check whether you
+	have write permission to the file and make the document readonly
+	if not.
+
+	* src/menus.c: Added new `Options/Toggle Readonly' menu item.
+
+1998-10-13  Martin Baulig  <martin@home-of-linux.org>
+
 	* src/gE_plugin_api.c (start_plugin): Don't set
 	`callbacks.document.open' and `callbacks.document.close'
  	to NULL.
