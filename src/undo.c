@@ -28,7 +28,6 @@
 #include "view.h"
 #include "prefs.h"
 
-
 static void gedit_undo_check_size (Document *doc);
        void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
        void gedit_undo_undo (GtkWidget *w, gpointer data);
@@ -105,8 +104,16 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	gedit_debug ("", DEBUG_UNDO);
 
 	g_return_if_fail (end_pos > start_pos);
-	
+
 	gedit_undo_free_list (&doc->redo);
+
+	/* Set the redo sensitivity */
+	if (gedit_toolbar->redo)
+	{
+		gedit_toolbar->redo = FALSE;
+		gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
+	}
+
 
 	if (gedit_undo_merge( doc->undo, start_pos, end_pos, action, text))
 		return;
@@ -129,6 +136,13 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	doc->undo = g_list_prepend (doc->undo, undo);
 
 	gedit_undo_check_size (doc);
+
+	/* Undo add was succesfull, set the toolbar button sensitivity */
+	if (!gedit_toolbar->undo)
+	{
+		gedit_toolbar->undo = TRUE;
+		gtk_widget_set_sensitive (gedit_toolbar->undo_button, TRUE);
+	}
 }
 
 
@@ -344,7 +358,17 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 	{
 		doc->changed = undo->status;
 		gedit_document_set_title (doc);
-		}*/
+	}*/
+	if (!gedit_toolbar->redo)
+	{
+		gedit_toolbar->redo = TRUE;
+		gtk_widget_set_sensitive (gedit_toolbar->redo_button, TRUE);
+	}
+	if (g_list_length (doc->undo) == 0)
+	{
+		gedit_toolbar->undo = FALSE;
+		gtk_widget_set_sensitive (gedit_toolbar->undo_button, FALSE);
+	}
 }
 
 /**
@@ -411,6 +435,17 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		gedit_document_set_title (doc);
 	}
 	*/
+
+	if (!gedit_toolbar->undo)
+	{
+		gedit_toolbar->undo = TRUE;
+		gtk_widget_set_sensitive (gedit_toolbar->undo_button, TRUE);
+	}
+	if (g_list_length (doc->redo) == 0)
+	{
+		gedit_toolbar->redo = FALSE;
+		gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
+	}
 }
 
 

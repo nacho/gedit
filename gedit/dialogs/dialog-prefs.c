@@ -37,7 +37,10 @@ static GtkWidget *propertybox;
 static GtkWidget *statusbar;
 static GtkWidget *splitscreen;
 static GtkWidget *autoindent;
+#if 0
 static GtkWidget *wordwrap;
+#endif
+static GtkWidget *toolbar_labels;
 static GtkWidget *mdimode;
 static GtkWidget *tabpos;
 static GtkWidget *foreground;
@@ -96,13 +99,11 @@ gedit_window_refresh (void)
 
 	gedit_debug("", DEBUG_PREFS);
 
-	/* us "if" to not generate a warning */
-	if (mdi->active_view!=NULL)
-		view = VIEW ( mdi->active_view);
-	else
-		view = NULL;
+	view = gedit_view_current();
 			
 	gedit_window_set_status_bar (settings->show_status);
+
+	gedit_window_set_toolbar_labels ();
 
 	/* the "Default" mode is index 3, but GNOME_MDI_DEFAULT_MODE
            is for some silly reason defined as 42 in gnome-mdi.h */
@@ -179,8 +180,11 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->auto_indent = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (autoindent));
 	settings->show_status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (statusbar));
+	settings->toolbar_labels = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toolbar_labels));
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
+#if 0	
 	settings->word_wrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (wordwrap));
+#endif	
 
 #if 0 /* We are leaking memory here but it is crashing, I will continue tomorrow. */
 	g_print("Font : %s\n:", settings->font);
@@ -287,7 +291,10 @@ prepare_general_page (GladeXML *gui)
 	statusbar = glade_xml_get_widget (gui, "statusbar");
 	splitscreen = glade_xml_get_widget (gui, "splitscreen");
 	autoindent = glade_xml_get_widget (gui, "autoindent");
+	toolbar_labels = glade_xml_get_widget (gui, "toolbar_labels");
+#if 0	
 	wordwrap = glade_xml_get_widget (gui, "wordwrap");
+#endif	
 
 	/* set initial button status */
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (statusbar),
@@ -296,6 +303,8 @@ prepare_general_page (GladeXML *gui)
 				     settings->splitscreen);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (autoindent),
 				     settings->auto_indent);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (toolbar_labels),
+				     settings->toolbar_labels);
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (statusbar), "toggled",
@@ -304,7 +313,11 @@ prepare_general_page (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT (autoindent), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+#if 0	
 	gtk_signal_connect (GTK_OBJECT (wordwrap), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+#endif	
+	gtk_signal_connect (GTK_OBJECT (toolbar_labels), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 
