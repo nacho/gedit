@@ -21,10 +21,6 @@
 #ifndef __GE_PLUGIN_API_H__
 #define __GE_PLUGIN_API_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif				/* __cplusplus */
-
 /*#include "plugin.h"*/
 
    extern GHashTable *doc_int_to_pointer;
@@ -38,8 +34,4 @@ extern "C" {
    extern void gE_plugin_program_register(plugin_info * info);
    extern void add_plugins_to_window(plugin_info * info, GnomeApp *app);
 
-#ifdef __cplusplus
-}
-
-#endif				/* __cplusplus */
 #endif				/* __GE_PLUGIN_API_H__ */

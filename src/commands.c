@@ -18,6 +18,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <config.h>
+
 #include <unistd.h>
 #define __need_sigset_t
 #include <signal.h>
@@ -31,7 +33,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <config.h>
+
 #include <gnome.h>
 #include <libgnome/gnome-history.h>
 
@@ -45,18 +47,21 @@
 #include "gE_files.h"
 #include "search.h"
 
+/*
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
 static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
 static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
 static void close_doc_common(gE_data *data);
 static void close_window_common(gE_window *w);
+*/
+
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb(GtkWidget *w, gE_data *data);
 
-static GtkWidget *open_fs, *save_fs;
+/* static GtkWidget *open_fs, *save_fs; */
 GtkWidget *ssel = NULL;
 GtkWidget *osel = NULL;
 GtkWidget *col_label;
@@ -239,24 +244,24 @@ void file_new_cb (GtkWidget *widget, gpointer cbdata)
 }
 
 
-void window_new_cb(GtkWidget *widget, gpointer cbdata)
+void
+window_new_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	/* I'm not sure about this.. it appears correct */
-	gnome_mdi_open_toplevel(mdi);
-	
+	gnome_mdi_open_toplevel (mdi);
 }
 
 
 /*
  * file open callback : user selects "Ok"
  */
-static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
+static void
+file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 
 	gchar *filename;
 	gchar *nfile;
-	gchar *flash;
+/*	gchar *flash; */
 	struct stat sb;
 	gE_document *doc;
 
@@ -843,13 +848,15 @@ void recent_add (char *filename)
 void recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
-	GList *dirlist = NULL;
 	
 	GList *gnome_recent_list;
 	GnomeHistoryEntry histentry;
 	char *filename;
 	int i, j;
-	gboolean duplicate = FALSE;
+
+/*	GList *dirlist = NULL; */
+/*	gboolean duplicate = FALSE; */
+
 	
 	filelist = NULL;
 	gnome_recent_list = gnome_history_get_recently_used ();
@@ -1005,51 +1012,43 @@ recent_cb(GtkWidget *w, gE_data *data)
 }
 
 
-void options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
+void
+options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
-
 	gE_view *view = GE_VIEW (mdi->active_view);
-	gint visible;
+/*	gint visible; */
 
 	if (!view->split_parent)
 	  return;
 
 	gE_view_set_split_screen
 		(view, !GTK_WIDGET_VISIBLE (view->split_parent));
-		
 }
 
 
-void options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
+void
+options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-
 	gE_view *view = GE_VIEW (mdi->active_view);
 	
 	gE_view_set_read_only (view, !view->read_only);
-	
 }
 
 void options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-
 	gE_view *view = GE_VIEW (mdi->active_view);
 	
 	gE_view_set_word_wrap (view, !view->word_wrap);
-
 }
 
 void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
-
 	gE_view *view = GE_VIEW (mdi->active_view);
 
 	gE_view_set_line_wrap (view, !view->line_wrap);
-
 }
 
 void options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 {
-
 	gE_window_set_status_bar (!settings->show_status);
-
 }

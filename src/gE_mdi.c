@@ -19,15 +19,9 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <string.h>
 #include <config.h>
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-
+#include <sys/stat.h>
 #include "main.h"
 #include "gE_undo.h"
 #include "gE_prefs.h"
@@ -40,11 +34,19 @@
 #include "gE_print.h"
 #include "menus.h"
 
+/*
+#include <stdio.h>
+#include <sys/types.h>
+#include <string.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+*/
+
 static void 	  gE_document_class_init (gE_document_class *);
 static void 	  gE_document_init (gE_document *);
 static GtkWidget *gE_document_create_view (GnomeMDIChild *);
 static void	  gE_document_destroy (GtkObject *);
-static void	  gE_document_real_changed (gE_document *, gpointer);
+/*static void	  gE_document_real_changed (gE_document *, gpointer); */
 static gchar *gE_document_get_config_string (GnomeMDIChild *child);
        gchar *get_untitled_as_string ();
 
@@ -117,29 +119,13 @@ enum {
 	LAST_SIGNAL
 };
 
-static gint gE_document_signals [LAST_SIGNAL];
-
 typedef void (*gE_document_signal) (GtkObject *, gpointer, gpointer);
 
 static GnomeMDIChildClass *parent_class = NULL;
 
-static void gE_document_marshal (GtkObject		*object,
-						 GtkSignalFunc	func,
-						 gpointer		func_data,
-						 GtkArg		*args)
+GtkType
+gE_document_get_type (void)
 {
-
-	gE_document_signal rfunc;
-	
-	rfunc = (gE_document_signal) func;
-	
-	(* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-
-}
-
-GtkType gE_document_get_type ()
-{
-
 	static GtkType doc_type = 0;
 	
 	if (!doc_type) {
@@ -160,10 +146,10 @@ GtkType gE_document_get_type ()
 	}
 	  
 	return doc_type;
-	
 }
 
-static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
+static GtkWidget *
+gE_document_create_view (GnomeMDIChild *child)
 {
 
 	GtkWidget *new_view;
@@ -227,26 +213,24 @@ static void gE_document_class_init (gE_document_class *class)
 	
 }
 
-void gE_document_init (gE_document *doc)
+void
+gE_document_init (gE_document *doc)
 {
-
 	/* FIXME: This prolly needs work.. */
-	gint *ptr;
+/*	gint *ptr; */
 	
 	doc->filename = NULL;
 	doc->changed = FALSE;
 	doc->views = NULL;
 		
 	gnome_mdi_child_set_menu_template (GNOME_MDI_CHILD (doc), doc_menu);
-	
 }
 
-gE_document *gE_document_new ()
+gE_document *
+gE_document_new (void)
 {
-
 	gE_document *doc;
-	
-	int i;
+/*	int i; */
 
 	/* FIXME: Blarg!! */
 	if ((doc = gtk_type_new (gE_document_get_type ()))) {
@@ -261,14 +245,15 @@ gE_document *gE_document_new ()
 	gtk_object_destroy (GTK_OBJECT(doc));
 	
 	return NULL;
-	
 }
 
-gchar* get_untitled_as_string()
+gchar*
+get_untitled_as_string (void)
 {
 
 	gE_document *doc;	
-	int i, counter = 0;
+	int counter = 0;
+	int i;
 	
         for (i = 0; i < g_list_length (mdi->children); i++) {
 
@@ -288,9 +273,9 @@ gchar* get_untitled_as_string()
 
 }
 
-gE_document *gE_document_new_with_title (gchar *title)
+gE_document *
+gE_document_new_with_title (gchar *title)
 {
-
 	gE_document *doc;
 	
 	/* FIXME: Blarg!! */
@@ -309,17 +294,16 @@ gE_document *gE_document_new_with_title (gchar *title)
 	gtk_object_destroy (GTK_OBJECT(doc));
 	
 	return NULL;
-	
 }
 
 
-gE_document *gE_document_new_with_file (gchar *filename)
+gE_document *
+gE_document_new_with_file (gchar *filename)
 {
-
 	gE_document *doc;
-	gchar *tmp_buf;
 	struct stat stats;
-	FILE *fp;
+/*	gchar *tmp_buf; */
+/*	FILE *fp; */
 
 	if (!stat(filename, &stats) && S_ISREG(stats.st_mode)) {
 	
@@ -338,43 +322,29 @@ gE_document *gE_document_new_with_file (gchar *filename)
 	
 	}
 	return NULL;
-
-} /* gE_document_new_with_file */
-
-static void gE_document_real_changed(gE_document *doc, gpointer change_data)
-{
-
-	/* FIXME! */
-	
-	g_print ("blarg\n");
-	
 }
 
-gE_document *gE_document_current()
+gE_document *
+gE_document_current (void)
 {
-
-	gint cur;
+/*	gint cur; */
 	gE_document *current_document = NULL;
 
 	if (mdi->active_child)
 	  current_document = GE_DOCUMENT(mdi->active_child);
  
 	return current_document;
-	
 }
 
 static gchar *gE_document_get_config_string (GnomeMDIChild *child)
 {
-
 	/* FIXME: Is this correct? */
 	/*return g_strdup (GE_DOCUMENT(child)->filename);*/
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
-	
 }
 
 GnomeMDIChild *gE_document_new_from_config (gchar *file)
 {
-
 	gE_document *doc;
 	
 	doc = gE_document_new_with_file (file);
@@ -382,20 +352,17 @@ GnomeMDIChild *gE_document_new_from_config (gchar *file)
         gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));        
         
 	return GNOME_MDI_CHILD (doc);
-	
 }
 
 void gE_add_view (GtkWidget *w, gpointer data)
 {
-
 	GnomeMDIChild *child;
-	gchar *buf;
-	GtkText *text;
-	gE_document *doc = GE_DOCUMENT (data);
 	gE_view *view;
-	gint v;
-	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
-  
+/*	gE_document *doc = GE_DOCUMENT (data); */
+/*	gint v; */
+/*	gchar *buf; */
+/*	GtkText *text; */
+
 	if (mdi->active_view) {
 	
 	  view = GE_VIEW (mdi->active_view);
@@ -409,14 +376,13 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	   
   
 	  gnome_mdi_add_view (mdi, child);
-	   
+   
 	}
 	
 }
 
 void gE_remove_view (GtkWidget *w, gpointer data)
 {
-
 	gE_document *doc = GE_DOCUMENT (data);
 	
 	if (mdi->active_view == NULL)
@@ -427,18 +393,18 @@ void gE_remove_view (GtkWidget *w, gpointer data)
 	  
 	/* Now, we can remove the view proper */
 	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
-	
 }
 
 /* Various MDI Callbacks */
 
-gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
+gint
+remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 {
-
 	GnomeMessageBox *msgbox;
-	int ret, *ptr;
+	int ret;
 	char *fname, *msg;
 	gE_data *data = g_malloc (sizeof(gE_data));
+/*	int *ptr; */
 
 	fname = GNOME_MDI_CHILD (doc)->name;
 	msg =   (char *)g_malloc(strlen(fname) + 52);
@@ -481,15 +447,15 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	
 }
 
-void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
+void
+mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 {
-
 	GnomeApp *app;
-	GnomeUIInfo *uiinfo;
-	gE_document *doc;
-	GtkWidget *shell, *item;
-	gint group_item, pos, i;
-	gchar *p, *label;
+/*	GnomeUIInfo *uiinfo; */
+/*	gE_document *doc; */
+/*	GtkWidget *shell, *item; */
+/*	gint group_item, pos, i; */
+/*	gchar *p, *label; */
 
 	if (mdi->active_view == NULL)
 	  return;
@@ -514,25 +480,47 @@ void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 */	
 }
 
-void add_view_cb (GnomeMDI *mdi, gE_document *doc)
+void
+add_view_cb (GnomeMDI *mdi, gE_document *doc)
 {
-
 /*      if (doc != NULL)
 	gtk_object_set_data (GTK_OBJECT(GE_DOCUMENT(mdi->active_view)),
 	                     "TEST",
 	                     doc);
 	
 	return;*/
-
 }
 
-gint add_child_cb (GnomeMDI *mdi, gE_document *doc)
-
+gint
+add_child_cb (GnomeMDI *mdi, gE_document *doc)
 {
-
 	/* Add child stuff.. we need to make sure that it is safe to add a child,
 	   or something, i'm not quite sure about the syntax for this function */
 	
 	return TRUE;
-
 }
+
+#if 0 /* These are defined but not used */
+static gint gE_document_signals [LAST_SIGNAL];
+
+static void
+gE_document_marshal (GtkObject     *object,
+		     GtkSignalFunc	func,
+		     gpointer	func_data,
+		     GtkArg        *args)
+{
+	gE_document_signal rfunc;
+	
+	rfunc = (gE_document_signal) func;
+	
+	(* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
+}
+
+static void
+gE_document_real_changed (gE_document *doc, gpointer change_data)
+{
+	/* FIXME! */
+	
+	g_print ("blarg\n");
+}
+#endif /* #if 0 */

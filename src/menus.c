@@ -16,26 +16,31 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <gtk/gtk.h>
-#include <strings.h>
-#include <stdio.h>
+
 #include <config.h>
 #include <gnome.h>
 
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
-#include "gE_prefs.h"
-#include "gE_files.h"
-/*#include "toolbar.h"*/
-#include "gE_window.h"
-#include "gE_view.h"
 #include "gE_about.h"
+#include "gE_files.h"
+#include "gE_mdi.h"
 #include "gE_print.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
+#include "gE_view.h"
+#include "gE_window.h"
 #include "search.h"
-#include "gE_mdi.h"
+
+/*
+#include <gtk/gtk.h>
+#include <strings.h>
+#include <stdio.h>
+#include "toolbar.h"
+#include "gE_prefs.h"
+*/
+
 
 #define GE_DATA		1
 #define GE_WINDOW	2
@@ -79,9 +84,6 @@ char *just_a_quick_and_dirty_hack[]={
 };
 
 	
-void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
-void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
-
 GnomeUIInfo gedit_file_menu [] = {
 
         GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), N_("Create a new document"),
@@ -117,7 +119,7 @@ GnomeUIInfo gedit_file_menu [] = {
 
 
 
-GnomeUIInfo gedit_tab_menu []= {
+GnomeUIInfo gedit_tab_menu [] = {
 
 	{ GNOME_APP_UI_ITEM, N_("_Top"),
 	  N_("Put the document tabs at the top"),
@@ -146,7 +148,7 @@ GnomeUIInfo gedit_tab_menu []= {
 };
 
 
-GnomeUIInfo gedit_settings_menu []= {
+GnomeUIInfo gedit_settings_menu [] = {
 /* -- These settings are in the Preferences Box, and only need to be
       there.. Readonly and Splitscreen are on a per-document basis
       
@@ -199,7 +201,7 @@ GnomeUIInfo gedit_settings_menu []= {
 
 };
 
-GnomeUIInfo gedit_window_menu []={
+GnomeUIInfo gedit_window_menu [] = {
 
  	GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(window_new_cb, (gpointer) GE_DATA),
 
@@ -225,16 +227,14 @@ GnomeUIInfo gedit_help_menu []= {
 
 	GNOMEUIINFO_HELP ("gedit"),
 
-	GNOMEUIINFO_MENU_ABOUT_ITEM(gE_about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM (gE_about_box, NULL),
 
 	GNOMEUIINFO_END
-	
 };
 
 
 GnomeUIInfo gedit_plugins_menu []= {
-  { GNOME_APP_UI_ENDOFINFO}
-
+	GNOMEUIINFO_END
 };
 
 
@@ -254,7 +254,8 @@ GnomeUIInfo gedit_menu [] = {
 
 };
 
-GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
+GnomeUIInfo *
+gE_menus_init (gE_window *window, gE_data *data)
 {
 
 	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);

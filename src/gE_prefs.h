@@ -19,27 +19,29 @@
 #ifndef __GE_PREFS_H__
 #define __GE_PREFS_H__
 
-extern void gE_save_settings();
-extern void gE_get_settings();
-extern void gE_rc_parse(void);
+extern void gE_save_settings (void);
+extern void gE_get_settings (void);
 
-typedef struct _gE_preference {
+typedef struct _gE_preference gE_preference;
+
+struct _gE_preference {
 
 	guint auto_indent;
-	gint word_wrap;
-	gint show_tabs;
-	gint tab_pos;
+	gint  word_wrap;
+	gint  show_tabs;
+	gint  tab_pos;
 	guint show_status;
-	gint show_tooltips;
-	gint have_toolbar;
-	gint have_tb_pix;
-	gint have_tb_text;
-	gint use_relief_toolbar;
+	gint  show_tooltips;
+	gint  have_toolbar;
+	gint  have_tb_pix;
+	gint  have_tb_text;
+	gint  use_relief_toolbar;
 	gchar *font;
-	gint splitscreen;
+	gint  splitscreen;
 	gchar *print_cmd;
-	gint num_recent; /* Number of recently accessed documents in the 
-	                   Recent Documents menu */
+	gint  num_recent;	/* Number of recently accessed
+				   documents in the Recent Documents
+				   menu */
 	gint mdi_mode;
 	
 	guint16 bg[3];
@@ -47,10 +49,11 @@ typedef struct _gE_preference {
 	
 	gint width, height;
 	
-	gint run;		/* Flag to see if this is the first time gEdit is run */
+	gint run;		/* Flag to see if this is the first
+				   time gEdit is run */
 	
 	gint close_doc;
-} gE_preference;
+};
 
 extern gE_preference *settings;
 

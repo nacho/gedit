@@ -1,18 +1,43 @@
 2000-04-02  Chema Celorio  <chema@celorio.com>
 
-	* src/gE_mdi.c (gE_document_new_with_file): if can't open the file display
-	an error message vs. crashing.
-	* src/commands.c (file_open_ok_sel): if can't open the file display
-	an error message vs. crashing.
-	* src/gE_files.c (gE_file_open): if can't open the file display
-	an error message vs. crashing.
+	* src/gE_mdi.c (gE_document_new_with_file): if can't open the file
+	display an error message vs. crashing.
+
+	* src/commands.c (file_open_ok_sel): if can't open the file
+	display an error message vs. crashing.
+
+	* src/gE_files.c (gE_file_open): if can't open the file display an
+	error message vs. crashing.
 
 2000-04-01  Chema Celorio  <chema@celorio.com>
 
-	* src/gE_print.c: reworte printing code
-	it now uses gnome-print functions.
+	* src/gE_print.c: reworte printing code it now uses gnome-print
+	functions.
+	
+2000-04-01  Jason Leach  <leach@wam.umd.edu>
+
+	* src/toolbar.c: commented out 4 unnecessary #include's
+
+	* src/menus.c: commented out 4 unnecessary #include's
+
+	* src/menus.c: removed prototypes for non-existant functions
+	add_callback_data() and remove_callback_data()
+
+	* src/gE_about.c: commented out 3 unnecessary #include's
+
+	* src/gE_prefs.c: commented out 5 unnecessary #include's
+
+	* src/gE_prefs.h: removed prototype for the non-existant function
+	gE_rc_parse();
 
 2000-03-31  Jason Leach  <leach@wam.umd.edu>
+
+	* src/*.h: The intended use of `extern "C"' is for header (.h)
+	files which are intended for use by both C and C++ programs. It
+	indicates to a C++ compiler that the functions are C functions.  I
+	don't think this is necessary for any of our header files... We
+	don't, and I don't think any other programs are invoking C++
+	compilers on our C header files.
 
 	* src/gedit.c (main): fixed a compiler warning.
 

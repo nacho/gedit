@@ -17,37 +17,27 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+
 #include <config.h>
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <glib.h>
+#include <sys/stat.h>
 #include "main.h"
 #include "gE_window.h"
 #include "gE_view.h"
 #include "gE_files.h"
 #include "commands.h"
-/*#include "toolbar.h"*/
 #include "gE_mdi.h"
 
-static void clear_text (gE_view *view);
-
-
-static void
-clear_text (gE_view *view)
-{
-	gint i = gE_view_get_length (view);
-
-	if (i > 0) {
-		gE_view_set_position (view, i);
-		gtk_text_backward_delete (GTK_TEXT(view->text), i);
-	}
-}
+/*
+#include <sys/types.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <gtk/gtk.h>
+#include <glib.h>
+#include "toolbar.h"
+*/
 
 
 /*
@@ -60,12 +50,14 @@ clear_text (gE_view *view)
 gint
 gE_file_open (gE_document *doc, gchar *fname)
 {
-	char *nfile, *name;
-	gchar *tmp_buf, *flash, *str;
+	gchar *name;
+	gchar *tmp_buf, *flash;
 	struct stat stats;
 	gint i;
 	gE_view *nth_view;
 	FILE *fp;
+/*	gchar *nfile; */
+/*	gchar *str; */
 
 	name = fname;
 
@@ -106,8 +98,9 @@ gE_file_open (gE_document *doc, gchar *fname)
 			}
 		}
 	}
+
 	return 1;
-} /* gE_file_open */
+}
 
 
 /*
@@ -119,11 +112,10 @@ gE_file_open (gE_document *doc, gchar *fname)
  * TODO - lock/unlock file before/after
  */
 gint
-gE_file_save(gE_document *doc, gchar *fname)
+gE_file_save (gE_document *doc, gchar *fname)
 {
-
 	FILE *fp;
-	gchar *title;
+/*	gchar *title; */
 	gchar *tmpstr;
 	gE_view *view = GE_VIEW(mdi->active_view);
 
@@ -190,4 +182,21 @@ gE_file_save(gE_document *doc, gchar *fname)
 	
 	return 0;
 	
-} /* gE_file_save */
+}
+
+
+/* Defined but not used */
+#if 0 
+static void clear_text (gE_view *view);
+
+static void
+clear_text (gE_view *view)
+{
+	gint i = gE_view_get_length (view);
+
+	if (i > 0) {
+		gE_view_set_position (view, i);
+		gtk_text_backward_delete (GTK_TEXT(view->text), i);
+	}
+}
+#endif /* #if 0 */

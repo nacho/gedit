@@ -23,15 +23,14 @@
 
 #include "main.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 #define GE_VIEW(obj)			GTK_CHECK_CAST (obj, gE_view_get_type (), gE_view)
 #define GE_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gE_view_get_type (), gE_view_class)
 #define GE_IS_VIEW(obj)			GTK_CHECK_TYPE (obj, gE_view_get_type ())
 
-typedef struct _gE_view {
+typedef struct _gE_view gE_view;
+typedef struct _gE_view_class gE_view_class;
+
+struct _gE_view {
 	/*GtkFixed fixed;*/
 	GtkVBox box;
 	
@@ -70,15 +69,16 @@ typedef struct _gE_view {
 	gpointer temp1;
 	gpointer temp2;
 	
-} gE_view;
+};
 
-typedef struct _gE_view_class {
+
+struct _gE_view_class {
 	/* dunno */
 	GtkVBoxClass parent_class;
 	
 	void (*cursor_moved)(gE_view *view);
 	
-} gE_view_class;
+};
 
 
 /* Ok, i thought i might as well make at least ONE header look nice =) */
@@ -130,9 +130,5 @@ void		gE_view_refresh				(gE_view *view);
 void gE_view_undo (gE_view *view);
 void gE_view_redo (gE_view *view);
 */
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __GE_VIEW_H__ */

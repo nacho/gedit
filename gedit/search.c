@@ -16,19 +16,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include <config.h>
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-
 #include "main.h"
 #include "gE_window.h"
 #include "gE_view.h"
 #include "gE_mdi.h"
 #include "search.h"
+
+/*
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+*/
 
 
 /* pointers to the dialogs */
@@ -237,8 +240,8 @@ seek_to_line (gE_document *doc, gint line, gint numlines)
 {
 	gE_view *view = GE_VIEW (mdi->active_view);
 	gfloat value, ln, tl;
-	gchar *c;
-	gint i;
+/*	gchar *c; */
+/*	gint i; */
 
 	if (numlines < 0) 
 	  {
@@ -258,6 +261,7 @@ seek_to_line (gE_document *doc, gint line, gint numlines)
 	gtk_adjustment_set_value(GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
 			value);
 }
+
 gint
 gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
 {
@@ -344,15 +348,16 @@ replace_cb (GtkWidget *widget, gpointer data)
 		GTK_SIGNAL_FUNC (replace_dialog_button_cb), doc);
 	gtk_widget_show (replace_dialog);
 }
+
 void
 goto_line_cb (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *spin;
 	GtkAdjustment *adj;
 	gE_document *doc;
-	gfloat val, max;
 	gint linecount;
 	gE_view *view = GE_VIEW (mdi->active_view);
+/*	gfloat val, max; */
 
 	doc = gE_document_current ();
 
@@ -385,7 +390,6 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 void
 find_in_files_cb (GtkWidget *widget, gpointer data)
 {
-
 	if (!find_in_files_dialog)
 	  find_in_files_dialog = create_find_in_files_dialog();
 
@@ -395,7 +399,6 @@ find_in_files_cb (GtkWidget *widget, gpointer data)
 					NULL);
 
 	gtk_widget_show(find_in_files_dialog);
-
 }
 
 
@@ -403,7 +406,7 @@ find_in_files_cb (GtkWidget *widget, gpointer data)
  *  Create and return a dialog box for finding a text string in all open files.
  */
 static GtkWidget*
-create_find_in_files_dialog()
+create_find_in_files_dialog (void)
 {
 	GtkWidget 	*dialog, 
 			*frame, 
@@ -435,13 +438,10 @@ create_find_in_files_dialog()
 
 
 static int
-get_start_index_of_line
-(
-	gE_view		*view,
-	gint 		pos
-)
+get_start_index_of_line (gE_view *view,
+			 gint pos)
 {
-	gchar		*buffer;
+	gchar *buffer;
 	
 	while ( pos > 0 )
 	{
@@ -459,15 +459,12 @@ get_start_index_of_line
  * Return the line (as text) which view->text[pos] is located on.
  */
 static gchar*
-get_line_as_text 
-(
-	gE_view	*view, 
-	gint 	pos
-)
+get_line_as_text (gE_view *view, 
+		  gint pos)
 {
-	gchar 	*buffer;
-	gint 	start = pos,
-		end = pos;
+	gchar *buffer;
+	gint   start = pos;
+	gint   end = pos;
 	
 	
 	while ( start > 0 )
@@ -497,18 +494,15 @@ get_line_as_text
  * filename, linenumber, line text. Return total number of matches 
  */
 static int
-find_in_file_search 
-(
-	gE_view 		*view,
-	gchar 			*str
-)
+find_in_file_search (gE_view *view,
+		     gchar   *str)
 {
-	gint 	i, 
-		textlen, 
-		counter = 0, 
-		line = 0,
-		index = 0;
-	gchar 	*buffer;
+	gint i;
+	gint textlen;
+	gint counter = 0;
+	gint line = 0;
+	gchar *buffer;
+/*	gint index = 0; */
 	
 	textlen = gtk_text_get_length(GTK_TEXT(view->text));
 
@@ -545,24 +539,19 @@ find_in_file_search
 	return counter;	
 }
 
-
-
 /*
  * Search all files in mdi->children list for specifice text string. Append to end 
  * of the clist the total number matched found in all files.
  */
 static void 
-search_for_text_in_files 
-(
-	gchar *text 
-)
+search_for_text_in_files (gchar *text)
 {
 	gE_document *doc;
 	gE_view 	*view = NULL;
-	gchar 		*fname;
-	int 		i, 
-			j = 0;
-	gint 		textlen;
+	gint i;
+	gint j = 0;
+/*	gint 		textlen; */
+/*	gchar 		*fname; */
 
 	if (strlen(text) == 0)
 	{
@@ -586,16 +575,14 @@ search_for_text_in_files
  *  Find in files dialog button callbacks
  */
 static void
-find_in_files_dialog_button_cb 
-(
-	GtkWidget *widget, 
-	gint button, 
-	gpointer data
-)
+find_in_files_dialog_button_cb (GtkWidget *widget, 
+				gint button, 
+				gpointer data)
 {
 	GtkWidget *entry;
 	gchar *entry_text;
 	gE_view *view; 
+
 	switch(button)
 	{
 	  /* Search button */
@@ -630,35 +617,29 @@ find_in_files_dialog_button_cb
  * Show the search_result_window.
  */
 static void
-show_search_result_window()
+show_search_result_window (void)
 {
 	if (GTK_WIDGET_VISIBLE(search_result_window) == FALSE)
-	  gtk_widget_show ( search_result_window );
+		gtk_widget_show (search_result_window);
 }
 
 /*
  * Hide the search_result_window
  */
 void 
-remove_search_result_cb 
-(
-	GtkWidget 	*widget, 
-	gpointer 	data
-)
+remove_search_result_cb (GtkWidget 	*widget, 
+			 gpointer 	data)
 {
-	gtk_button_set_relief ( GTK_BUTTON(widget), GTK_RELIEF_NONE);
-	gtk_widget_hide(search_result_window);
+	gtk_button_set_relief (GTK_BUTTON(widget), GTK_RELIEF_NONE);
+	gtk_widget_hide (search_result_window);
 } 
 
 
 void
-search_results_clist_insert 
-(
-	gchar 	*fname, 
-	gchar 	*contents,
-	gint 	line, 
-	gint 	index 
-)
+search_results_clist_insert  (gchar 	*fname, 
+			      gchar 	*contents,
+			      gint 	line, 
+			      gint 	index)
 {
 	gchar 			*insert[3];
 	gE_clist_data 	*data;
@@ -684,11 +665,7 @@ search_results_clist_insert
 /*
  * Callback when a user clicks on a item in the search_result_clist 
  */
-void search_result_clist_cb
-(
-	GtkWidget *list, 
-	gpointer func_data
-)
+void search_result_clist_cb (GtkWidget *list, gpointer func_data)
 {
 	
 	gE_view			*view;
@@ -729,16 +706,10 @@ void search_result_clist_cb
 }
 
 void 
-destroy_clist_data
-( 
-	gpointer data
-)
+destroy_clist_data (gpointer data)
 {
-	if (data)
-	  g_free (data);
+	g_free (data);
 }
-
-
 
 
 /* end find in files functions */
@@ -751,7 +722,8 @@ destroy_clist_data
  * document and the current line number, and display the info in a dialog.
  */
 
-void count_lines_cb (GtkWidget *widget, gpointer data)
+void
+count_lines_cb (GtkWidget *widget, gpointer data)
 {
 	gint total_lines, line_number;
 	gchar *msg;
@@ -781,7 +753,7 @@ void count_lines_cb (GtkWidget *widget, gpointer data)
  */
 
 static GtkWidget *
-create_line_dialog ()
+create_line_dialog (void)
 {
 	GtkWidget *dialog;
 	GtkWidget *hbox, *label, *spin;
@@ -853,16 +825,18 @@ add_search_options (GtkWidget *dialog)
 	gtk_object_set_data (GTK_OBJECT (dialog), "direction", check);
 	gtk_widget_show (check);
 }
+
 static GtkWidget *
-create_search_dialog ()
+create_search_dialog (void)
 {
 	GtkWidget *dialog;
-	GtkWidget *frame, *entry, *radio, *check;
+	GtkWidget *frame, *entry;
+/*	GtkWidget *radio, *check; */
 
 	dialog = gnome_dialog_new (_("Search"),
-		"Search",
-		GNOME_STOCK_BUTTON_CLOSE,
-		NULL);
+				   _("Search"),
+				   GNOME_STOCK_BUTTON_CLOSE,
+				   NULL);
 
 	frame = gtk_frame_new (_("Search for:"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame,
@@ -881,16 +855,17 @@ create_search_dialog ()
 }
 
 static GtkWidget *
-create_replace_dialog ()
+create_replace_dialog (void)
 {
 	GtkWidget *dialog;
-	GtkWidget *frame, *entry, *radio, *check;
+	GtkWidget *frame, *entry, *check;
+/*	GtkWidget *radio; */
 
 	dialog = gnome_dialog_new (_("Replace"),
-		_("Replace"),
-		_("Replace all"),
-		GNOME_STOCK_BUTTON_CLOSE,
-		NULL);
+				   _("Replace"),
+				   _("Replace all"),
+				   GNOME_STOCK_BUTTON_CLOSE,
+				   NULL);
 
 	frame = gtk_frame_new (_("Search for:"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame,
@@ -923,6 +898,7 @@ create_replace_dialog ()
 
 	return (dialog);
 }
+
 /*
  * callback for the goto line dialog
  */
@@ -954,10 +930,11 @@ line_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 static void
 search_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 {
-	GtkWidget *datalink;
-	gint pos, line, numlines;
+	gint pos;
 	gulong options;
 	gchar *str;
+/*	GtkWidget *datalink; */
+/*	gint line, numlines; */
 
 	options = 0;
 	if (button == 0) {
@@ -981,10 +958,11 @@ static void
 replace_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 {
 	GtkWidget *datalink;
-	gint pos, line, numlines, dowhat = 0;
+	gint pos, dowhat = 0;
 	gulong options;
 	gchar *str, *replace;
 	gboolean confirm = FALSE;
+/*	gint line, numlines; */
 
 	options = 0;
 	if (button < 2) {
@@ -1071,6 +1049,7 @@ get_search_options (gE_document *doc, GtkWidget *widget,
 			break;
 	}
 }
+
 static gboolean
 search (GtkEditable *text, gchar *str, gint pos, gulong options)
 {
@@ -1086,11 +1065,13 @@ search (GtkEditable *text, gchar *str, gint pos, gulong options)
 	g_free(buffer);
 	return retval;
 }
+
 static void
 search_select (gE_document *doc, gchar *str, gint pos, gulong options)
 {
-	gint line, numlines, numwcs;
+	gint numwcs;
 	gE_view *view = GE_VIEW (mdi->active_view);
+	gint line, numlines;
 	
 	numwcs = num_widechars(str);
 	line = pos_to_line (doc, pos, &numlines);

@@ -19,20 +19,14 @@
 #ifndef __GE_FILES_H__
 #define __GE_FILES_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-typedef enum { FlwFnumColumn = 0, FlwFsizeColumn, FlwFnameColumn } flw_col_t;
+typedef enum {
+	FlwFnumColumn = 0,
+	FlwFsizeColumn,
+	FlwFnameColumn
+} flw_col_t;
 
 
 extern gint gE_file_open (gE_document *doc, gchar *fname);
 extern gint gE_file_save (gE_document *doc, gchar *fname);
-
-/* Files list popup: No need for this bloat! */
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __GE_FILES_H__ */

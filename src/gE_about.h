@@ -19,14 +19,6 @@
 #ifndef __GE_ABOUT_H__
 #define __GE_ABOUT_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-extern void gE_about_box(GtkWidget *w, gpointer cbdata);
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+extern void gE_about_box (GtkWidget *w, gpointer cbdata);
 
 #endif /* __GE_ABOUT_H__ */

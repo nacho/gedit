@@ -91,7 +91,7 @@ static int  print_determine_lines(gE_PrintJobInfo *pji);
 static void print_header(gE_PrintJobInfo *pji, unsigned int page);
 static void start_job(GnomePrintContext *pc);
 static void print_header(gE_PrintJobInfo *pji, unsigned int page);
-static void print_row(gE_PrintJobInfo *pji, unsigned int offset, unsigned int bytes, int row);
+/*static void print_row(gE_PrintJobInfo *pji, unsigned int offset, unsigned int bytes, int row); */
 static void end_page(GnomePrintContext *pc);
 static void end_job(GnomePrintContext *pc);
 static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji);
@@ -312,23 +312,15 @@ static void end_job(GnomePrintContext *pc)
 static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji)
 {
 	gtk_object_unref(GTK_OBJECT(pji->master));
-	g_free(pji);
+	g_free (pji);
 }
 
+/* Defined but not used */
+#if 0
 static void print_preview_cb(GtkWidget *w)
 {
 	if(!gnome_mdi_get_active_view(mdi))
 		return;
 	print_document(gE_document_current(), NULL);
 }
-
-
-
-
-
-
-
-
-
-
-
+#endif /* #if 0 */

@@ -18,20 +18,20 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gnome.h>
 #include <config.h>
+#include <gnome.h>
 #include "main.h"
 #include "gE_undo.h"
 #include "gE_mdi.h"
 #include "gE_view.h"
 
-
 void views_insert (gE_document *doc, gE_undo *undo);
 void views_delete (gE_document *doc, gE_undo *undo);
 
-void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_document *doc)
+void
+gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
+	     gE_document *doc)
 {
-
 	gE_undo *undo;
 	
 	undo = g_new(gE_undo, 1);
@@ -57,9 +57,9 @@ void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_doc
 
 }
 
-void gE_undo_do (GtkWidget *w, gpointer data)
+void
+gE_undo_do (GtkWidget *w, gpointer data)
 {
-
 	gE_document *doc = gE_document_current();
 	gE_undo *undo;
 	
@@ -207,11 +207,13 @@ void gE_undo_redo (GtkWidget *w, gpointer data)
 
 }
 
-void views_insert (gE_document *doc, gE_undo *undo)
+void
+views_insert (gE_document *doc, gE_undo *undo)
 {
 
 	gint i;
-	gint p1, p2;
+	gint p1;
+/*	p2; */
 	gE_view *view;
 	
 	for (i = 0; i < g_list_length (doc->views); i++) {

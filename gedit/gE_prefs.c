@@ -16,21 +16,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <stdio.h>
-#include <string.h>
+
 #include <config.h>
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-#include <time.h>
 #include "main.h"
 #include "gE_prefs.h"
-/*#include "toolbar.h"*/
 #include "gE_mdi.h"
+
+/*
+#include <gtk/gtk.h> 
+#include <stdio.h>
+#include <string.h>
+#include <glib.h>
+#include <time.h>
+#include "toolbar.h"
+*/
 
 
 void 
-gE_save_settings()
+gE_save_settings (void)
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 
@@ -71,7 +75,8 @@ gE_save_settings()
 	gnome_config_sync ();
 }
 
-void gE_get_settings()
+void
+gE_get_settings (void)
 {
 	 
 	gnome_config_push_prefix ("/gEdit/Global/");

@@ -21,10 +21,6 @@
 #ifndef __GE_UNDO_H__
 #define __GE_UNDO_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 /* Actions */
 #define	INSERT	0
 #define	DELETE	1
@@ -56,9 +52,5 @@ extern void gE_undo_redo	(GtkWidget*, gpointer);
 /* let the user see the undo history of the docu,emt */
 extern void gE_undo_history	(GtkWidget*, gpointer*);
 
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __GE_UNDO_H__ */

@@ -16,11 +16,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <assert.h>
-#include <gtk/gtk.h>
+
 #include <config.h>
 #include <gnome.h>
+
+/*
+#include <assert.h>
+#include <gtk/gtk.h>
 #include "main.h"
+*/
 
 void
 gE_about_box (GtkWidget *widget, gpointer cbdata)

@@ -19,16 +19,8 @@
 #ifndef __MENUS_H__
 #define __MENUS_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 extern GnomeUIInfo gedit_menu [];
 
-extern GnomeUIInfo * gE_menus_init(gE_window *window, gE_data *data);
+extern GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data);
    
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
 #endif /* __MENUS_H__ */

@@ -20,10 +20,6 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 #define STRING_LENGTH_MAX	256
 #define GEDIT_ID	"gEdit "VERSION
 
@@ -106,10 +102,6 @@ GList *gE_documents;
 extern GnomeMDI *mdi;
 extern gint mdiMode;
 extern gboolean use_fontset;
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __MAIN_H__ */
 

@@ -1,0 +1,30 @@
+2000-04-02  Jason Leach  <leach@wam.umd.edu>
+
+	* search.c (create_search_dialog): marked a string for i18n that
+	wasn't but should have been.
+	(destroy_clist_data): don't need to do if(b) before g_free(b)
+
+	* search.c: removed 5 unnecessary #include's, killed all
+	warnings.
+
+	* gE_print.c: killed 2 warnings.
+
+	* gE_prefs_box.c: killed all warnings.
+
+	* gE_files.c: removed 8 unnecessary #include's, killed all
+	warnings.
+
+	* gE_undo.c: killed all warnings.
+
+	* gE_mdi.c: removed 5 unnecessary #include's, killed all warnings.
+
+2000-04-01  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_prefs_box.c (cancel_cb): destroy the font selector window
+	when we close the preferences, closes bug #4432.
+	(font_sel): open pop open one font selector at a time, preventing
+	any potential future bugs with this happening.
+	(properties_changed): fix indentation
+
+	* gE_prefs_box.c: commented out 5 unnecessary #include's
+

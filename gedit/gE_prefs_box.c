@@ -16,14 +16,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <stdio.h>
-#include <string.h>
 #include <config.h>
 #include <gnome.h>
-
-#include <gtk/gtk.h>
-#include <glib.h>
-#include <time.h>
 #include "main.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
@@ -31,8 +25,17 @@
 #include "gE_view.h"
 #include "gE_mdi.h"
 
-typedef struct _gE_prefs_data {
+/*
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
+*/
 
+typedef struct _gE_prefs_data gE_prefs_data;
+
+struct _gE_prefs_data {
 	GnomePropertyBox *pbox;
 	
 	/* Font Seleftion */
@@ -75,15 +78,16 @@ typedef struct _gE_prefs_data {
 	
 	/* Tab Settings */
 	/* Hmm, dunno... */
-	
-} gE_prefs_data;
+};
 
+
+static GtkWidget *fs;
 static gE_prefs_data *prefs;
 GList *plugin_list;
 /*plugin_callback_struct pl_callbacks;*/
 extern GList *plugins;
 
-void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox);
+static void properties_changed (GtkWidget *widget, GnomePropertyBox *pbox);
 
 guint mdi_type [NUM_MDI_MODES] = {
 
@@ -103,18 +107,22 @@ gchar *mdi_type_label [NUM_MDI_MODES] = {
 
 };
 
-void cancel()
+static void
+cancel_cb (void)
 {
-
 	gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
 	g_free (prefs->curW);
 	g_free (prefs->curH);
-	g_free(prefs);
+	g_free (prefs);
 	prefs = NULL;
 
+	if (fs)
+		gtk_widget_destroy (fs);
+	fs = NULL;
 }
 
-void gE_window_refresh(gE_window *w)
+void
+gE_window_refresh (gE_window *w)
 {
 	gint i, j;
 	gE_view *nth_view;
@@ -188,14 +196,14 @@ void gE_window_refresh(gE_window *w)
 
 }
 
-void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
+void
+gE_apply (GnomePropertyBox *pbox, gint page, gE_data *data)
 {
-
-	FILE *file;
-	gchar *rc;
 	gint i;
 	GtkStyle *style;
 	GdkColor *c;
+/*	FILE *file; */
+/*	gchar *rc; */
 
 	/* General Settings */
 	settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
@@ -259,11 +267,9 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	gE_save_settings();	
 }
 
-
-
-void get_prefs(gE_data *data)
+void
+get_prefs (gE_data *data)
 {
-
 	gint i;
 	gchar *tmp;
 	GtkStyle *style;
@@ -315,14 +321,13 @@ void get_prefs(gE_data *data)
 	    break;
 	    
 	  }
-
 }
 
 /* General UI Stuff.. */
 
-static GtkWidget *general_page_new()
+static GtkWidget *
+general_page_new (void)
 {
-
 	GtkWidget *main_vbox, *vbox, *hbox2, *frame, *hbox, *label;
 
 	main_vbox = gtk_vbox_new (FALSE, 0);
@@ -398,7 +403,7 @@ static GtkWidget *general_page_new()
   	gtk_box_pack_start (GTK_BOX(hbox2), prefs->bgpick, FALSE, FALSE, 10);
   	
 	gtk_signal_connect (GTK_OBJECT (prefs->bgpick), "color_set",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 	
   	label = gtk_label_new (_("Text Background"));
   	gtk_box_pack_start (GTK_BOX(hbox2), label, FALSE, FALSE, 0);
@@ -415,7 +420,7 @@ static GtkWidget *general_page_new()
   	gtk_box_pack_start (GTK_BOX(hbox2), prefs->fgpick, FALSE, FALSE, 10);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->fgpick), "color_set",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 					
   	gtk_widget_show (prefs->bgpick);
 
@@ -426,7 +431,6 @@ static GtkWidget *general_page_new()
   	gtk_widget_show (label);
   
 	return main_vbox;
-	
 }
 
 /* End of General Stuff.. */
@@ -434,50 +438,57 @@ static GtkWidget *general_page_new()
 
 /* Font Stuff... */
 
-void font_sel_ok (GtkWidget	*w, GtkWidget *fsel)
+void
+font_sel_ok (GtkWidget *w, GtkWidget *fsel)
 {
-	
-	gtk_entry_set_text(GTK_ENTRY(prefs->font),
+	gtk_entry_set_text(GTK_ENTRY (prefs->font),
 	gtk_font_selection_dialog_get_font_name (GTK_FONT_SELECTION_DIALOG(fsel)));
 	
 	gtk_widget_destroy (fsel);
-
+	fs =  NULL;
 }
 
-void font_sel_cancel (GtkWidget *w, GtkWidget *fsel)
+static void
+font_sel_cancel (GtkWidget *w, GtkWidget *fsel)
 {
-
-	gtk_widget_destroy (fsel);
-
+	if (fs)
+		gtk_widget_destroy (fsel);
+	fs =  NULL;
 }
 
-void font_sel()
+void
+font_sel (void)
 {
-	GtkWidget *fs;
-        
-	fs = gtk_font_selection_dialog_new("Font");
+	if (fs)
+	{
+		gdk_window_show (fs->window);
+		gdk_window_raise (fs->window);
+		return;
+	}
+
+	fs = gtk_font_selection_dialog_new ("Font");
 	gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(fs), 
 	gtk_entry_get_text(GTK_ENTRY(prefs->font)));
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fs)->ok_button), "clicked",
-								GTK_SIGNAL_FUNC(font_sel_ok), fs);
+	gtk_signal_connect (GTK_OBJECT(GTK_FONT_SELECTION_DIALOG (fs)->ok_button), "clicked",
+			    GTK_SIGNAL_FUNC(font_sel_ok), fs);
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fs)->cancel_button), "clicked",
-								GTK_SIGNAL_FUNC(font_sel_cancel), fs);
+	gtk_signal_connect (GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fs)->cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC(font_sel_cancel), fs);
 
-	gtk_widget_show(fs);
-
+	gtk_widget_show (fs);
 }
 
 /* End of Fonts Stuff... */
 
 /* Document Stuf.. */
 
-static GtkWidget *doc_page_new()
+static GtkWidget *
+doc_page_new (void)
 {
 	GtkWidget *main_vbox, *vbox, *frame, *hbox;
-	GtkWidget *label;
 	GtkWidget *button;
+/*	GtkWidget *label; */
 
 	main_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
@@ -575,22 +586,24 @@ static GtkWidget *doc_page_new()
 
 /* Window Stuff.. */
 
-void use_current (GtkWidget *w, gpointer size)
+void
+use_current (GtkWidget *w, gpointer size)
 {
 
 	if (size == 0)
-	  gtk_entry_set_text (GTK_ENTRY (prefs->preW), prefs->curW);
+		gtk_entry_set_text (GTK_ENTRY (prefs->preW), prefs->curW);
 	else
-	  gtk_entry_set_text (GTK_ENTRY (prefs->preH), prefs->curH);
+		gtk_entry_set_text (GTK_ENTRY (prefs->preH), prefs->curH);
 
 }
 
-static GtkWidget *window_page_new()
+static GtkWidget *
+window_page_new (void)
 {
 	GtkWidget *main_vbox, *vbox, *vbox2, *frame, *hbox;
 	GtkWidget *label, *button;
 	gint i;
-	gchar *tmp;
+/*	gchar *tmp; */
 
 	prefs->curW = g_malloc (1);
 	prefs->curH = g_malloc (1);
@@ -703,10 +716,11 @@ static GtkWidget *window_page_new()
   
 	prefs->mdi_list = NULL;
   
-	for (i = 0; i < NUM_MDI_MODES; i++) {
-	
+	for (i = 0; i < NUM_MDI_MODES; i++)
+	{
 	  prefs->mdi_type[i] = GTK_RADIO_BUTTON (
-	  			gtk_radio_button_new_with_label(prefs->mdi_list, _(mdi_type_label[i])));
+		  gtk_radio_button_new_with_label (prefs->mdi_list,
+						   _(mdi_type_label[i])));
        
 	  gtk_widget_show (GTK_WIDGET (prefs->mdi_type[i]));
 	  gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(prefs->mdi_type[i]), TRUE, TRUE, 2);
@@ -719,16 +733,16 @@ static GtkWidget *window_page_new()
 
 /* End of Window Stuff */
 
-void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
+static void
+properties_changed (GtkWidget *widget, GnomePropertyBox *pbox)
 {
+	GnomePropertyBox *prop = GNOME_PROPERTY_BOX (prefs->pbox);
   
-  GnomePropertyBox *prop = GNOME_PROPERTY_BOX (prefs->pbox);
-  
-  gnome_property_box_changed (prop);
-
+	gnome_property_box_changed (prop);
 }
 
-void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
+void
+gE_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 {
 	static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
 	GtkWidget *label;
@@ -748,7 +762,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 	prefs->gData = data;
   
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
-					GTK_SIGNAL_FUNC (cancel), prefs);
+					GTK_SIGNAL_FUNC (cancel_cb), prefs);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "delete_event",
 					GTK_SIGNAL_FUNC (gtk_false), NULL);
@@ -782,47 +796,46 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
 
 	gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 	gtk_signal_connect (GTK_OBJECT (prefs->status), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->wordwrap), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->split), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pcmd), "changed",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->preW), "changed",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->preH), "changed",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	for (i = 0; i < NUM_MDI_MODES; i++)
 	  gtk_signal_connect (GTK_OBJECT (prefs->mdi_type[i]), "clicked",
-					  GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					  GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
   
 	gtk_signal_connect (GTK_OBJECT (prefs->DButton1), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->DButton2), "toggled",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
   
 /*
 	gtk_signal_connect (GTK_OBJECT (prefs->bgpick), "color_set",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 	
 	gtk_signal_connect (GTK_OBJECT (prefs->fgpick), "color_set",
-					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 */
 	gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
                                     
 }
-

@@ -86,12 +86,15 @@ corba_exception (CORBA_Environment* ev)
 
 #endif /* HAVE_LIBGNORBA */
 
-int main (int argc, char **argv)
+int
+main (int argc, char **argv)
 {
 
 	gE_document *doc;
+/*
 	gE_window *window;
 	gE_data *data;
+*/
 	char **args;
 	poptContext ctx;
 	int i;
@@ -130,11 +133,11 @@ int main (int argc, char **argv)
 	/* Determine we use fonts or fontsets. If a fontset is supplied
 	   for text widgets, we use fontsets for drawing texts. Otherwise
 	   we use normal fonts instead. */
-	dummy_widget = gtk_text_new(NULL, NULL);
-	gtk_widget_ensure_style(dummy_widget);
+	dummy_widget = gtk_text_new (NULL, NULL);
+	gtk_widget_ensure_style (dummy_widget);
 	if (dummy_widget->style->font->type == GDK_FONT_FONTSET)
 		use_fontset = TRUE;
-	gtk_widget_destroy(dummy_widget);
+	gtk_widget_destroy (dummy_widget);
 
 
 	args = (char**) poptGetArgs(ctx);

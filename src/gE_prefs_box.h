@@ -19,12 +19,10 @@
 #ifndef __GE_PREFS_BOX_H__
 #define __GE_PREFS_BOX_H__
 
-
 void gE_prefs_dialog (GtkWidget *widget, gpointer cbdata);
 
-void gE_property_box_new(gE_data *data);
-void gE_window_refresh(gE_window *w);
-
+void gE_property_box_new (gE_data *data);
+void gE_window_refresh (gE_window *w);
 
 
 #endif

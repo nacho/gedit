@@ -1,4 +1,4 @@
-/* 	- New Document interface  
+/* gEdit - New Document interface  
  *
  * gEdit
  * Copyright (C) 1999 Alex Roberts and Evan Lawrence
@@ -18,8 +18,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gnome.h>
 #include <config.h>
+#include <gnome.h>
 #include "gE_view.h"
 #include "main.h"
 #include "gE_undo.h"
@@ -34,18 +34,16 @@
 GnomeUIInfo popup_menu [] = {
 
 	GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, (gpointer) GE_DATA),
-
         GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, (gpointer) GE_DATA),
-
 	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
-
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, (gpointer) GE_DATA),
 
-
 	GNOMEUIINFO_SEPARATOR,
+
 	GNOMEUIINFO_ITEM_STOCK (N_("Save"),NULL,file_save_cb,GNOME_STOCK_MENU_SAVE),
 	GNOMEUIINFO_ITEM_STOCK (N_("Close"), NULL, file_close_cb, GNOME_STOCK_MENU_CLOSE),
 	GNOMEUIINFO_ITEM_STOCK (N_("Print"), NULL, file_print_cb, GNOME_STOCK_MENU_PRINT),
+
 	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_ITEM_STOCK (N_("Open (swap) .c/.h file"),NULL,doc_swaphc_cb,GNOME_STOCK_MENU_REFRESH),
@@ -79,7 +77,7 @@ void
 view_changed_cb(GtkWidget *w, gpointer cbdata)
 {
 
-	gchar MOD_label[255];
+/*	gchar MOD_label[255]; */
 	gchar *str;
 
 	gE_view *view = (gE_view *) cbdata;
@@ -111,15 +109,15 @@ view_changed_cb(GtkWidget *w, gpointer cbdata)
  * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
  */
 
-void gE_view_list_insert (gE_view *view, gE_data *data)
+void
+gE_view_list_insert (gE_view *view, gE_data *data)
 {
-
-	gE_view *nth_view = NULL;
-	gint n, p1, p2;
+	gint p1;
 	gchar *buffer = (guchar *)data->temp2;
 	gint position = (gint)data->temp1;
 	gint length = strlen (buffer);
-	gE_document *doc;
+/*	gE_view *nth_view = NULL; */
+/*	gE_document *doc; */
 	
 	
 	if (view != GE_VIEW(mdi->active_view)) {
@@ -153,21 +151,56 @@ void gE_view_list_insert (gE_view *view, gE_data *data)
 }
 
 void
-doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length,
-	int *pos, gE_view *view)
+view_list_erase (gE_view *view, gE_data *data)
+{
+	/* FIXME: I'm empty */
+}
+
+gint
+insert_into_buffer (gE_document *doc, gchar *buffer, gint position)
 {
 
+	  		if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
+	
+#ifdef DEBUG
+	  g_message ("g_string_insert");
+#endif
+	  doc->buf = g_string_insert (doc->buf, position, buffer);
+	
+	} else if (position == 0) {
+
+#ifdef DEBUG		  
+	  g_message ("g_string_prepend");
+#endif
+	  doc->buf = g_string_prepend (doc->buf, buffer);
+	  
+	} else {
+	  
+#ifdef DEBUG
+	  g_message ("g_string_append");
+#endif
+	  doc->buf = g_string_append (doc->buf, buffer);
+	
+	}
+	
+	return 0;		
+
+}
+
+void
+doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
+		    int length, int *pos, gE_view *view)
+{
 	GtkWidget *significant_other;
 	guchar *buffer;
-	gchar buf[96];
 	gint position = *pos;
-	gint n, p1, p2;
 	gE_document *doc;
-	GnomeMDIChild *child;
-	/*GnomeMDIChild *temp = NULL;*/
 	gE_data *data;
-	gE_view *nth_view = NULL;
-	GtkWidget *text;
+/*	gchar buf[96]; */
+/*	gE_view *nth_view = NULL; */
+/*	GtkWidget *text; */
+/*	GnomeMDIChild *child; */
+/*	gint n, p1, p2; */
 
 	if (!view->split_screen)
 	  return;
@@ -224,14 +257,12 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 
 	/*if (length > 96)  */
 	  g_free (buffer);
-
 }
 
 void
-doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
-	gE_view *view)
+doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
+		    gE_view *view)
 {
-
 	GtkWidget *significant_other;
 	gE_document *doc;
 	gE_view *nth_view = NULL;
@@ -326,7 +357,7 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	gchar *buffer, *whitespace;
 	gE_view *view = (gE_view *)cbdata;
 	gE_document *doc;
-	gE_data *data;	
+/*	gE_data *data; */
 	
 	
 	if ((length != 1) || (insertion_text[0] != '\n'))
@@ -406,9 +437,8 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 void
 line_pos_cb(GtkWidget *w, gE_data *data)
 {
-
 	static char col [32];
-	GtkWidget *label;
+/*	GtkWidget *label; */
 	GnomeApp *app;
 	
 	app = gnome_mdi_get_active_window  (mdi);
@@ -417,13 +447,12 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/6);
 	
 	gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
-	
+
 }
 
 
 gint gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 {
-
 	gE_data *data;
 	data = g_malloc0 (sizeof (gE_data));
 
@@ -434,7 +463,6 @@ gint gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 #endif
 
 	return FALSE;
-
 }
 
 gint gE_event_key_press (GtkWidget *w, GdkEventKey *event)
@@ -480,7 +508,7 @@ gint gE_event_key_press (GtkWidget *w, GdkEventKey *event)
 	  }
 	
 	}
-	
+
 	
 	return TRUE;
 
@@ -488,65 +516,8 @@ gint gE_event_key_press (GtkWidget *w, GdkEventKey *event)
 
 /* The Widget Stuff */
 
-static void gE_view_realize (GtkWidget *w)
-{
-
-	if (GTK_WIDGET_CLASS (parent_class)->realize)
-				(* GTK_WIDGET_CLASS(parent_class)->realize)(w);  	
-
-}
-
-static void gE_view_finalize (GtkObject *o)
-{
-
-		if (GTK_OBJECT_CLASS(parent_class)->finalize)
-			(* GTK_OBJECT_CLASS(parent_class)->finalize)(o);
-
-}
-
-static gint gE_view_expose (GtkWidget *w, GdkEventExpose *event)
-{
-
-	if (GTK_WIDGET_CLASS (parent_class)->expose_event)
-		(* GTK_WIDGET_CLASS (parent_class)->expose_event)(w,event);
-	
-	return TRUE;
-}
-
-static void gE_view_size_allocate (GtkWidget *w, GtkAllocation *alloc)
-{
-
-	gE_view *view = GE_VIEW (w);
-	GtkAllocation my_alloc;
-	
-	w->allocation = *alloc;
-	
-	if (GTK_WIDGET_REALIZED (w))
-	  gdk_window_move_resize (w->window, alloc->x, alloc->y,
-	  						alloc->width, alloc->height);
-	
-
-	my_alloc.x = 1;
-	my_alloc.y = 1;
-	my_alloc.height = alloc->height - 2;
-	my_alloc.width = alloc->width - 2;
-	gtk_widget_size_allocate (view->vbox, &my_alloc);
-	
-}
-
-static void gE_view_size_request (GtkWidget *w, GtkRequisition *req)
-{
-
-	gE_view *view = GE_VIEW (w);
-	GtkRequisition sb_req;
-	
-	GTK_WIDGET_CLASS(parent_class)->size_request(w, req);
-
-}
-
 static void gE_view_class_init (gE_view_class *klass)
 {
-
 	GtkObjectClass *object_class;
 	/*GtkWidgetClass *widget_class;
 	GtkFixedClass *fixed_class;*/
@@ -577,8 +548,8 @@ static void gE_view_class_init (gE_view_class *klass)
 
 static void gE_view_init (gE_view *view)
 {
-
-	GtkWidget *vpaned, *menu;
+/*	GtkWidget *vpaned; */
+	GtkWidget *menu;
 	GtkStyle *style;
 	GdkColor *bg;
 	GdkColor *fg;
@@ -768,7 +739,7 @@ static void gE_view_init (gE_view *view)
 	
 }
 
-guint gE_view_get_type ()
+guint gE_view_get_type (void)
 {
 
 	static guint gE_view_type = 0;
@@ -882,7 +853,7 @@ void gE_view_set_line_wrap (gE_view *view, gint line_wrap)
 void gE_view_set_read_only (gE_view *view, gint read_only)
 {
 	gchar RO_label[255];
-	gchar *fname;
+/*	gchar *fname; */
 
 	view->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (view->text), !view->read_only);
@@ -1014,3 +985,55 @@ void gE_view_refresh (gE_view *view)
 	
 	}
 }
+
+#if 0 /* These functionis are defined but not used */
+static void gE_view_realize (GtkWidget *w)
+{
+	if (GTK_WIDGET_CLASS (parent_class)->realize)
+				(* GTK_WIDGET_CLASS(parent_class)->realize)(w);  	
+}
+
+static void gE_view_finalize (GtkObject *o)
+{
+		if (GTK_OBJECT_CLASS(parent_class)->finalize)
+			(* GTK_OBJECT_CLASS(parent_class)->finalize)(o);
+}
+
+static gint gE_view_expose (GtkWidget *w, GdkEventExpose *event)
+{
+
+	if (GTK_WIDGET_CLASS (parent_class)->expose_event)
+		(* GTK_WIDGET_CLASS (parent_class)->expose_event)(w,event);
+	
+	return TRUE;
+}
+
+static void gE_view_size_allocate (GtkWidget *w, GtkAllocation *alloc)
+{
+
+	gE_view *view = GE_VIEW (w);
+	GtkAllocation my_alloc;
+	
+	w->allocation = *alloc;
+	
+	if (GTK_WIDGET_REALIZED (w))
+	  gdk_window_move_resize (w->window, alloc->x, alloc->y,
+	  						alloc->width, alloc->height);
+	
+
+	my_alloc.x = 1;
+	my_alloc.y = 1;
+	my_alloc.height = alloc->height - 2;
+	my_alloc.width = alloc->width - 2;
+	gtk_widget_size_allocate (view->vbox, &my_alloc);
+	
+}
+
+static void gE_view_size_request (GtkWidget *w, GtkRequisition *req)
+{
+/*	gE_view *view = GE_VIEW (w); */
+/*	GtkRequisition sb_req; */
+	
+	GTK_WIDGET_CLASS (parent_class)->size_request(w, req);
+}
+#endif /* #if 0 */

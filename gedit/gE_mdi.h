@@ -20,10 +20,6 @@
 #ifndef __GE_MDI_H__
 #define __GE_MDI_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
@@ -60,9 +56,5 @@ void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void add_view_cb (GnomeMDI *mdi, gE_document *doc);
 gint add_child_cb (GnomeMDI *mdi, gE_document *doc);
 END_GNOME_DECLS
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __GE_MDI_H__ */

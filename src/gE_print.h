@@ -20,15 +20,7 @@
 #ifndef __GE_PRINT_H__
 #define __GE_PRINT_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
- 
-extern void file_print_cb(GtkWidget *widget, gpointer cbdata);
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+extern void file_print_cb (GtkWidget *widget, gpointer cbdata);
 
 #endif /* __GE_PRINT_H__ */
 

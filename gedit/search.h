@@ -19,10 +19,6 @@
 #ifndef __SEARCH_H__
 #define __SEARCH_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 #define SEARCH_NOCASE		0x00000001
 #define SEARCH_BACKWARDS	0x00000002
 
@@ -45,9 +41,5 @@ void count_lines_cb (GtkWidget *w, gpointer cbwindow);
 void find_in_files_cb (GtkWidget *widget, gpointer data);
 void remove_search_result_cb (GtkWidget *widget, gpointer data); 
 void search_result_clist_cb (GtkWidget *list, gpointer func_data);
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __SEARCH_H__ */

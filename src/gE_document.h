@@ -19,38 +19,30 @@
 #ifndef __GE_DOCUMENT_H__
 #define __GE_DOCUMENT_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-#define MSGBAR_CLEAR			" "
-#define MSGBAR_FILE_NEW			"New File..."
-#define MSGBAR_FILE_OPENED		"File Opened..."
-#define MSGBAR_FILE_CLOSED		"File Closed..."
+#define MSGBAR_CLEAR		" "
+#define MSGBAR_FILE_NEW		"New File..."
+#define MSGBAR_FILE_OPENED	"File Opened..."
+#define MSGBAR_FILE_CLOSED	"File Closed..."
 #define MSGBAR_FILE_CLOSED_ALL	"All Files Closed..."
-#define MSGBAR_FILE_PRINTED		"Print Command Executed..."
-#define MSGBAR_FILE_SAVED		"File Saved..."
-#define MSGBAR_CUT				"Selection Cut..."
-#define MSGBAR_COPY				"Selection Copied..."
-#define MSGBAR_PASTE			"Selection Pasted..."
-#define MSGBAR_SELECT_ALL		"All Text Selected..."
+#define MSGBAR_FILE_PRINTED	"Print Command Executed..."
+#define MSGBAR_FILE_SAVED	"File Saved..."
+#define MSGBAR_CUT		"Selection Cut..."
+#define MSGBAR_COPY		"Selection Copied..."
+#define MSGBAR_PASTE		"Selection Pasted..."
+#define MSGBAR_SELECT_ALL	"All Text Selected..."
 
 extern GtkWidget *col_label;
 
 extern void gE_window_set_auto_indent (gint auto_indent);
 extern void gE_window_set_status_bar (gint show_status);
-extern void gE_window_new(GnomeMDI *mdi, GnomeApp *app);
+extern void gE_window_new (GnomeMDI *mdi, GnomeApp *app);
 
-extern void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
+extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
 extern void child_switch (GnomeMDI *mdi, gE_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
 extern gE_document *gE_document_new_container (gE_window *w, gchar *title,
 					       gint with_split_screen);
 #endif
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __GE_DOCUMENT_H__ */

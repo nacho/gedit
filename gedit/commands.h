@@ -19,10 +19,6 @@
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
 #endif
@@ -92,9 +88,5 @@ extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 /* Functions needed to be made external for the plugins api */
 extern void close_doc_execute(gE_document *opt_doc, gpointer cbdata);
 
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
 
 #endif /* __COMMANDS_H__ */

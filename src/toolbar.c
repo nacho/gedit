@@ -18,21 +18,24 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <stdio.h>
 #include <config.h>
 #include <gnome.h>
+#include "commands.h"
+#include "gE_files.h"
+#include "gE_prefs.h"
+#include "gE_print.h"
+#include "gE_prefs_box.h"
+#include "search.h"
+#include "toolbar.h"
 
+/*
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <stdio.h>
 #include "main.h"
-#include "commands.h"
-#include "gE_print.h"
-#include "gE_files.h"
-#include "search.h"
-#include "toolbar.h"
-#include "gE_prefs_box.h"
-#include "gE_prefs.h"
+*/
+
 
 GnomeUIInfo toolbar_data[] = {
 	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
@@ -66,19 +69,17 @@ GnomeUIInfo toolbar_data[] = {
 };
 
 
-static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
+static GtkWidget *new_pixmap (char *fname, GtkWidget *w);
+static GtkWidget *toolbar_create_common (toolbar_data_t *tbdata, gE_data *data);
 
 
-static GtkWidget *toolbar_create_common(toolbar_data_t *tbdata, gE_data *data);
-
-
-/*
- * PUBLIC: gE_create_toolbar
+/**
+ * gE_create_toolbar:
  *
  * creates main toolbar that goes below menu bar
  */
 void
-gE_create_toolbar(gE_window *gw, gE_data *data)
+gE_create_toolbar (gE_window *gw, gE_data *data)
 {
 	GtkWidget *toolbar;
 
@@ -101,7 +102,7 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
  * out: GtkWidget *toolbar
  */
 static GtkWidget *
-toolbar_create_common(toolbar_data_t *tbdata, gE_data *data)
+toolbar_create_common (toolbar_data_t *tbdata, gE_data *data)
 {
 	GtkWidget *tb;
 	GtkWidget *parent = data->window->window;
@@ -135,23 +136,11 @@ toolbar_create_common(toolbar_data_t *tbdata, gE_data *data)
 	}
 
 	return tb;
-} /* toolbar_create_common */
+}
 
-
-
-
-/*
- * PRIVATE: new_pixmap
- *
- * taken from testgtk.c
- */
+/* taken from testgtk.c */
 static GtkWidget*
-
-new_pixmap(char *fname, GtkWidget *w)
+new_pixmap (char *fname, GtkWidget *w)
 {
-
 	return gnome_stock_pixmap_widget ((GtkWidget *) w, fname);
-
-} /* new pixmap */
-
-/* the end */
+}
