@@ -338,8 +338,8 @@ gedit_file_save_as (GeditMDIChild *child)
 	GeditDocument *doc;
 	GtkWidget *view;
 	gchar *fname = NULL;
+	gchar *untitled_name = NULL;
 	gchar *path = NULL;
-	gchar *raw_uri = NULL;
 	const GeditEncoding *encoding;
 
 	gedit_debug (DEBUG_FILE, "");
@@ -361,37 +361,42 @@ gedit_file_save_as (GeditMDIChild *child)
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 	}
 	
-	raw_uri = gedit_document_get_raw_uri (doc);
-
 	if (gedit_document_is_untitled (doc))
 	{
-		char *tmpstr;
-		
 		path = (gedit_default_path != NULL) ? 
 			g_strdup (gedit_default_path) : NULL;
 
-		tmpstr = gedit_document_get_uri (doc);
-		fname = g_filename_from_utf8 (tmpstr, -1, NULL, NULL, NULL);
-		if (!fname)
-			/* FIXME: should fname remain NULL in this case? - Paolo */		
-			fname = g_strdup ("Untitled"); /* Use ASCII */
-		g_free (tmpstr);
+		untitled_name = gedit_document_get_uri (doc);
+		if (untitled_name == NULL)
+			untitled_name = g_strdup ("Untitled"); /* Use ASCII */
+
+		g_return_val_if_fail (untitled_name != NULL, FALSE);
 	}
 	else
 	{
+		gchar *raw_uri = gedit_document_get_raw_uri (doc);
+
 		g_return_val_if_fail (raw_uri != NULL, FALSE);
 
-		fname = eel_uri_get_basename (raw_uri);
-
 		if (gedit_utils_uri_has_file_scheme (raw_uri))
+		{
+			fname = eel_uri_get_basename (raw_uri);
+			g_return_val_if_fail (fname != NULL, FALSE);
+
 			path = get_dirname_from_uri (raw_uri);
+		}
 		else
+		{
+			untitled_name = gedit_document_get_short_name (doc);
+			g_return_val_if_fail (untitled_name != NULL, FALSE);
+
 			path = (gedit_default_path != NULL) ? 
 				g_strdup (gedit_default_path) : NULL;
+		}
+
+		g_free (raw_uri);
 	}
-				
-	g_return_val_if_fail (fname != NULL, FALSE);
-	
+
 	encoding = gedit_document_get_encoding (doc);
 
 	file = gedit_file_selector_save (
@@ -400,13 +405,12 @@ gedit_file_save_as (GeditMDIChild *child)
 		        _("Save as..."), 
 			path,
 			fname,
+			untitled_name,
 			&encoding);
 	
-	g_free (raw_uri);
 	g_free (fname);
-	
-	if (path != NULL)
-		g_free (path);
+	g_free (untitled_name);
+	g_free (path);
 
 	if (file != NULL) 
 	{

@@ -69,6 +69,7 @@ char  *gedit_file_selector_save       (GtkWindow  *parent,
 					const char *title,
 					const char *default_path,
 					const char *default_filename,
+					const char *untitled_name,
 					const GeditEncoding **encoding);
 
 G_END_DECLS

@@ -996,7 +996,10 @@ book_add_view (BonoboMDI *mdi, GtkNotebook *book, GtkWidget *view, gboolean set_
 	gtk_notebook_append_page (book, view, title);
 	
 	if (set_page && (g_list_length (book->children) > 1))
+	{
 		set_page_by_widget (book, view);
+		set_active_view (mdi, view);
+	}
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -1478,8 +1481,6 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
 void 
 bonobo_mdi_set_active_view (BonoboMDI *mdi, GtkWidget *view)
 {
-	GtkWindow *window;
-	
 	gedit_debug (DEBUG_MDI, "");
 
 	g_return_if_fail (mdi != NULL);
@@ -1488,8 +1489,6 @@ bonobo_mdi_set_active_view (BonoboMDI *mdi, GtkWidget *view)
 	g_return_if_fail (GTK_IS_WIDGET (view));
 	
 	set_page_by_widget (GTK_NOTEBOOK (view->parent), view);
-	
-	window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
 	
 	set_active_view (mdi, view);
 
@@ -1597,7 +1596,7 @@ bonobo_mdi_add_views (BonoboMDI *mdi, GSList *children)
 
 		if (bonobo_mdi_add_view_real (mdi, 
 					      BONOBO_MDI_CHILD (children->data), 
-					      (i == 0)))
+					      (children->next == NULL)))
 		{
 			++i;
 		}

@@ -852,6 +852,9 @@ get_selected_style (GeditPreferencesDialog *dlg)
 	style = gtk_source_language_get_tag_style (lang, id);
 	def_style = gtk_source_language_get_tag_default_style (lang, id);
 
+	if (style == NULL)
+		return def_style;
+
 	style->is_default = TRUE;
 	def_style->is_default = TRUE;
 
@@ -947,6 +950,10 @@ style_button_toggled (GtkToggleButton        *button,
 	lang = get_selected_language (dlg);
 
 	style = gtk_source_language_get_tag_style (lang, id);
+	if (style == NULL)
+	{
+		style = gtk_source_tag_style_new ();
+	}
 
 	new_style = gtk_source_tag_style_copy (style);
 	

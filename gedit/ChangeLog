@@ -1,3 +1,13 @@
+2004-06-25  Paolo Borelli  <pborelli@katamail.com>
+
+	* dialogs/replace.glade2: fix bug #143410.
+	Patch by <padraig.obriain@sun.com>
+
+2004-06-25  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit-encodings-option-menu.c: include config.h, patch from
+	Takao Fujiwara. Fixes 144525.
+
 2004-06-11  Kaushal Kumar <kaushal.kumar@wipro.com>
  
 	Patch by: Archana Shah <archana.shah@wipro.com>
@@ -10,6 +20,40 @@
 	Set accessible name for dialog.
 
 	Fixes bug #143688.
+
+2004-04-27  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* bonobo-mdi.c (book_add_view): calls set_active_view (fixes 
+	bug #137805: Text area unfocused after opening)
+
+	 (bonobo_mdi_set_active_view): removed unused window variable
+
+	(bonobo_mdi_add_views): sets as active the last added view
+
+2004-04-27  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* dialogs/gedit-preferences-dialog.c (get_selected_style)
+	(style_button_toggled): check if style = NULL
+
+	* gedit-file-selector-util.c (create_gtk_selector)
+	(run_file_selector) (gedit_file_selector_open)
+	(gedit_file_selector_open_multi) (gedit_file_selector_save):
+	really fixes bug #137329: Wrong filename got after Save as
+
+	* gedit-file-selector-util.h (gedit_file_selector_save): added
+	untitled_name parameter
+
+	* gedit-file.c (gedit_file_save_as): use the new gedit_file_selector_save
+	prototype
+
+2004-04-17  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-file-selector-util.c (create_gtk_selector): try to call
+	gtk_file_chooser_set_filename before calling gtk_file_chooser_set_current_name
+	(run_file_selector): Enable vfs file choosing
+
+	* gedit-file.c (gedit_file_save_as): does not convert "Untitled" to 
+	current locale (fixes bug #137329: Wrong filename got after Save as)
 
 2004-04-05  Paolo Borelli  <pborelli@katamail.com>
 

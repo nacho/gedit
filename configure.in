@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(gedit, 2.6.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT(gedit, 2.6.2, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(gedit/gedit2.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -68,9 +68,9 @@ AC_SUBST(PSPELL_LIBS)
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 2.5.0 libglade-2.0 >= 2.0.0
-                         eel-2.0 >= 2.5.0 gtksourceview-1.0 >= 0.9.0
-			 libgnomeprintui-2.2 >= 2.5.0)
+PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 2.6.0 libglade-2.0 >= 2.3.6
+                         eel-2.0 >= 2.6.0 gtksourceview-1.0 >= 1.0.0
+			 libgnomeprintui-2.2 >= 2.6.0)
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
