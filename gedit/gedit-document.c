@@ -642,7 +642,7 @@ gedit_document_get_uri (const GeditDocument* doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	if (doc->priv->uri == NULL)
-		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
+		return g_strdup_printf (_("%s %d"), _("Unsaved Document"), doc->priv->untitled_number);
 	else
 	{
 		gchar *res;
@@ -660,7 +660,7 @@ gedit_document_get_short_name (const GeditDocument* doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	if (doc->priv->uri == NULL)
-		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
+		return g_strdup_printf (_("%s %d"), _("Unsaved Document"), doc->priv->untitled_number);
 	else
 	{
 		gchar *basename;
