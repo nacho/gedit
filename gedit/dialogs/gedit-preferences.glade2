@@ -1301,6 +1301,24 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
+                
+                <child>
+                  <widget class="GtkLabel" id="label791">
+                    <property name="label" translatable="yes">The save settings let you ...FIXME....</property>
+                    <property name="justify">GTK_JUSTIFY_LEFT</property>
+                    <property name="wrap">yes</property>
+                    <property name="xalign">7.45058e-09</property>
+                    <property name="yalign">7.45058e-09</property>
+                    <property name="xpad">0</property>
+                    <property name="ypad">0</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">6</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
 
                 <child>
                   <widget class="GtkHBox" id="hbox10">
@@ -1336,6 +1354,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="homogeneous">no</property>
                     <property name="spacing">3</property>
                     <property name="visible">yes</property>
+                    <property name="sensitive">no</property>
 
                     <child>
                       <widget class="GtkCheckButton" id="checkbutton10">
@@ -1396,6 +1415,81 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
+                
+                <child>
+                          <widget class="GtkFrame" id="save_frame">
+                            <property name="label" translatable="yes">When saving...</property>
+                            <property name="label_xalign">0</property>
+                            <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+                            <property name="visible">yes</property>
+
+                            <child>
+                              <widget class="GtkVBox" id="vbox18">
+                                <property name="border_width">5</property>
+                                <property name="homogeneous">no</property>
+                                <property name="spacing">0</property>
+                                <property name="visible">yes</property>
+
+                                <child>
+                                  <widget class="GtkRadioButton" id="utf8_radiobutton">
+                                    <property name="can_focus">yes</property>
+                                    <property name="label" translatable="yes">Always use _UTF-8 encoding (faster)</property>
+                                    <property name="active">yes</property>
+                                    <property name="draw_indicator">yes</property>
+                                    <property name="visible">yes</property>
+                                    <property name="use_underline">yes</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">0</property>
+                                    <property name="expand">no</property>
+                                    <property name="fill">no</property>
+                                  </packing>
+                                </child>
+
+                                <child>
+                                  <widget class="GtkRadioButton" id="locale_if_possible_radiobutton">
+                                    <property name="can_focus">yes</property>
+                                    <property name="label" translatable="yes">Use current _locale when possible</property>
+                                    <property name="active">no</property>
+                                    <property name="draw_indicator">yes</property>
+                                    <property name="visible">yes</property>
+                                    <property name="group">utf8_radiobutton</property>
+                                    <property name="use_underline">yes</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">0</property>
+                                    <property name="expand">no</property>
+                                    <property name="fill">yes</property>
+                                  </packing>
+                                </child>
+
+                                <child>
+                                  <widget class="GtkRadioButton" id="locale_if_previous_radiobutton">
+                                    <property name="can_focus">yes</property>
+                                    <property name="label" translatable="yes">U_se current locale only if the file already use it</property>
+                                    <property name="active">no</property>
+                                    <property name="draw_indicator">yes</property>
+                                    <property name="visible">yes</property>
+                                    <property name="use_underline">yes</property>
+                                    <property name="group">utf8_radiobutton</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">0</property>
+                                    <property name="expand">no</property>
+                                    <property name="fill">no</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                            </child>
+                          </widget>
+                          <packing>
+                            <property name="padding">6</property>
+                            <property name="expand">no</property>
+                            <property name="fill">yes</property>
+                          </packing>
+                        </child>
+
+
               </widget>
             </child>
             <child>

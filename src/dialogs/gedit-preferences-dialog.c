@@ -179,8 +179,9 @@ static CategoriesTreeItem user_interface [] =
 static CategoriesTreeItem editor_behavior [] =
 {
 	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
-/*	
+	
  	{_("Save"), NULL, SAVE_SETTINGS },
+/*
 	{_("Tabs"), NULL, TABS_SETTINGS},
 */	
 	{_("Undo"), NULL, UNDO_SETTINGS},
