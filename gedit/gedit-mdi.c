@@ -237,12 +237,34 @@ menu_position_under_widget (GtkMenu *menu, int *x, int *y,
 	*y = CLAMP (*y, 0, MAX (0, screen_height - requisition.height));
 }
 
+static void
+tooltip_func (GtkTooltips   *tooltips,
+	      GtkWidget     *menu,
+	      EggRecentItem *item,
+	      gpointer       user_data)
+{
+	gchar *tip;
+	gchar *uri_for_display;
+
+	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	g_return_if_fail (uri_for_display != NULL);
+
+	/* Translators: %s is a URI */
+	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+
+	g_free (uri_for_display);
+
+	gtk_tooltips_set_tip (tooltips, GTK_WIDGET (menu), tip, NULL);
+
+	g_free (tip);
+}
+
 static gboolean
 open_button_pressed_cb (GtkWidget *widget,
-			      GdkEventButton *event,
-			      gpointer *user_data)
+			GdkEventButton *event,
+			gpointer *user_data)
 {
-	GtkWidget *menu;
+	static GtkWidget *menu;
 	GeditMDI *mdi;
 
 	g_return_val_if_fail (GTK_IS_BUTTON (widget), FALSE);
@@ -252,7 +274,25 @@ open_button_pressed_cb (GtkWidget *widget,
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
-	menu = g_object_get_data (G_OBJECT (widget), "recent-menu");
+	if (menu == NULL)
+	{
+		EggRecentViewGtk *view;
+		EggRecentModel *model;
+
+		model = gedit_recent_get_model ();
+
+		menu = gtk_menu_new ();
+		gtk_widget_show (menu);
+		view = egg_recent_view_gtk_new (menu, NULL);
+		g_signal_connect (view, "activate",
+				  G_CALLBACK (gedit_file_open_recent), NULL);
+		egg_recent_view_gtk_show_icons (view, TRUE);
+		egg_recent_view_gtk_show_numbers (view, FALSE);
+		egg_recent_view_gtk_set_tooltip_func (view, tooltip_func, NULL);
+
+		egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
+	}
+
 	gnome_popup_menu_do_popup_modal (menu,
 				menu_position_under_widget, widget,
 				event, widget, widget);
@@ -277,35 +317,10 @@ open_button_key_pressed_cb (GtkWidget *widget,
 	return FALSE;
 }
 
-static void
-tooltip_func (GtkTooltips   *tooltips,
-	      GtkWidget     *menu,
-	      EggRecentItem *item,
-	      gpointer       user_data)
-{
-	gchar *tip;
-	gchar *uri_for_display;
-
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
-	g_return_if_fail (uri_for_display != NULL);
-	
-	/* Translators: %s is a URI */
-	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
-
-	g_free (uri_for_display);
-
-	gtk_tooltips_set_tip (tooltips, GTK_WIDGET (menu), tip, NULL);
-
-	g_free (tip);
-}
-
 static GtkWidget *
 gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 			 const gchar *path, const gchar *tooltip)
 {
-	GtkWidget *menu;
-	EggRecentViewGtk *view;
-	EggRecentModel *model;
 	GtkWidget *button;
 	
 	static GtkTooltips *button_tooltip = NULL;
@@ -323,20 +338,6 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 
 	gtk_widget_show_all (GTK_WIDGET (button));
 
-	model = gedit_recent_get_model ();
-
-	menu = gtk_menu_new ();
-	gtk_widget_show (menu);
-	view = egg_recent_view_gtk_new (menu, NULL);
-	g_signal_connect (view, "activate",
-			  G_CALLBACK (gedit_file_open_recent), NULL);
-	egg_recent_view_gtk_show_icons (view, TRUE);
-	egg_recent_view_gtk_show_numbers (view, FALSE);
-	egg_recent_view_gtk_set_tooltip_func (view, tooltip_func, NULL);
-	
-	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
-	g_object_set_data (G_OBJECT (button), "recent-menu", menu);
-	
 	g_signal_connect_object (button, "key_press_event",
 				 G_CALLBACK (open_button_key_pressed_cb),
 				 mdi, 0);
