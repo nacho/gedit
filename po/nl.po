@@ -4,7 +4,7 @@
 # Jan-Willem Harmanny <jwharmanny@hotmail.com>, 2002.
 # Ronald Hummelink <ronald@hummelink.xs4all.nl>, 2002.
 # Sander Knopper <sander@knopper.dhs.org>, 2002
-# Reinout van Schouwen <reinout@cs.vu.nl>, 2002-2004
+# Reinout van Schouwen <reinout@cs.vu.nl>, 2002-2005
 # Taco Witte <T.C.Witte@phys.uu.nl>, 2002
 # Daniel van Eeden <daniel_e@dds.nl>, 2004
 #
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2005-01-25 17:56+0100\n"
+"POT-Creation-Date: 2005-02-11 14:09+0100\n"
+"PO-Revision-Date: 2005-02-11 16:48+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "gedit automatiseringsfabriek"
 msgid "Edit text files"
 msgstr "Tekstbestanden bewerken"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
 msgid "Text Editor"
 msgstr "Tekst-editor"
 
@@ -1679,7 +1679,6 @@ msgid "Access was denied."
 msgstr "Toegang is geweigerd."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
@@ -1691,7 +1690,6 @@ msgid "\"%s\" is a directory"
 msgstr "\"%s\" is een map"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1762,9 +1760,7 @@ msgid "Could not open the file \"%s\" using the %s character coding"
 msgstr ""
 "Kan het bestand \"%s\" niet openen met gebruikmaking van de %s-tekencodering."
 
-# tryingto => trying to
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
@@ -1774,9 +1770,7 @@ msgstr ""
 "tekencodering heeft geselecteerd in het 'Bestand openen...' (of 'Lokatie "
 "openen')-dialoogvenster en probeer het nogmaals."
 
-# Invalid data format?
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
@@ -1801,20 +1795,18 @@ msgstr ""
 "de tekst-editor kan het niet vinden. Mogelijk is het onlangs verwijderd."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Er zijn teveel geopende bestanden. Sluit een open bestand en probeer het "
-"opnieuw."
+"Er zijn teveel geopende bestanden. Sluit enkele open bestanden en probeer "
+"het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Er is niet genoeg geheugen. Sluit een actieve toepassing en probeer het "
+"Er is niet genoeg geheugen. Sluit enkele actieve toepassingen en probeer het "
 "opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:499
@@ -2411,7 +2403,7 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INV"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2419,19 +2411,19 @@ msgstr ""
 "De karaktercodering voor het openen van bestanden vanaf de opdrachtregel "
 "instellen"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Een bestaande instantie van gedit afsluiten"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Een nieuw venster maken van een bestaande instantie van gedit"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Een nieuw document maken in een bestaande instantie van gedit"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:161
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "De aangegeven codering \"%s\" is ongeldig\n"
@@ -2591,16 +2583,15 @@ msgid "User name"
 msgstr "Gebruikersnaam"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "Kopie o_pslaan"
+msgstr "Kopie o_pslaan..."
 
 #: plugins/savecopy/savecopy.c:52
 msgid "Save a copy of the current document"
 msgstr "Een kopie van het huidige document opslaan"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Kan geen kopie van het bestand naar \"%s\" opslaan"
 
@@ -2609,15 +2600,14 @@ msgid "You are trying to overwrite the original file"
 msgstr "U tracht het originele bestand te overschrijven"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "Kopie opslaan"
+msgstr "Kopie opslaan..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopie)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2801,21 +2791,19 @@ msgstr "Spellingscontrole voltooid"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "Arabisch"
+msgstr "Amharisch"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbeidjaans"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "Bulgaars"
+msgstr "Belarussisch"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2846,9 +2834,8 @@ msgid "Danish"
 msgstr "Deens"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "Duits (Duitsland)"
+msgstr "Duits (Oostenrijk)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2879,14 +2866,12 @@ msgid "Spanish"
 msgstr "Spaans"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "Roemeens"
+msgstr "Ests"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "Afdrukken"
+msgstr "Perzisch"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2905,49 +2890,44 @@ msgid "French (Swiss)"
 msgstr "Frans (Zwitserland)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "Turks"
+msgstr "Iers"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Schots Gaelic"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "Georgisch"
+msgstr "Galicisch"
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Manx Gaelic"
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "Zoeken"
+msgstr "Hindi"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "Catalaans"
+msgstr "Kroatisch"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Opper-Sorbisch"
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "Bulgaars"
+msgstr "Hongaards"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Interlingua (IALA)"
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesisch"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2958,61 +2938,56 @@ msgid "Italian"
 msgstr "Italiaans"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "Turks"
+msgstr "Koerdisch"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "Opsomming"
+msgstr "Latijn"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litouws"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "Lets"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "Malagasy"
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "Media"
+msgstr "Macedonisch"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongools"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "Malay"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "Maltees"
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Noors"
+msgstr "Noors Bokmål"
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Nederlands"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Noors"
+msgstr "Noors Nynorsk"
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -3020,7 +2995,7 @@ msgstr "Noors"
 
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3036,7 +3011,7 @@ msgstr "Portugees (Brazilië)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "Quechua"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3044,12 +3019,11 @@ msgstr "Russisch"
 
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Oekraïens"
+msgstr "Sardinisch"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3065,25 +3039,23 @@ msgstr "Zweeds"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "Thais"
+msgstr "Tamil"
 
 #: plugins/spell/gedit-spell-checker.c:146
-#, fuzzy
 msgid "Tetum"
-msgstr "Tekst"
+msgstr "Tetum"
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "Tagalog"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "Tswana"
 
 #: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3091,19 +3063,19 @@ msgstr "Oekraïens"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "Oezbeeks"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
-msgstr ""
+msgstr "Waals"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Jiddisch"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3304,9 +3276,8 @@ msgid "Base URI"
 msgstr "Basis-URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "Basis-lettergrootte"
+msgstr "Basislettertype"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3360,13 +3331,14 @@ msgstr "Classimplementatie-ID"
 msgid "Class list"
 msgstr "Classlijst"
 
+# Help, wat moet dit zijn?
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "Code inhoudstype"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Color of selected links"
@@ -3389,9 +3361,8 @@ msgid "Computer code fragment"
 msgstr "Fragment computercode"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Inhoud"
+msgstr "Inhoudsschema"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Content type"
@@ -3415,20 +3386,19 @@ msgstr "Datum en tijd van wijziging"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Declaratievlag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "_Beschrijving"
+msgstr "Definitiebeschrijving"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
-msgstr ""
+msgstr "Definitielijst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
-msgstr ""
+msgstr "Definitieterm"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Deleted text"
@@ -3440,20 +3410,20 @@ msgstr "Richting"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
-msgstr ""
+msgstr "Richting"
 
+# Juiste vertaling?!
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directory list"
-msgstr ""
+msgstr "Overzichtslijst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document base"
-msgstr "Basis-URI van document"
+msgstr "Basis van document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document body"
@@ -3472,9 +3442,8 @@ msgid "Document type"
 msgstr "Documenttype"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Element ID"
-msgstr "Elementen"
+msgstr "Elementen-ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
@@ -3602,7 +3571,7 @@ msgstr "HTML topelement"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML version"
-msgstr ""
+msgstr "HTML-versie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
@@ -3610,7 +3579,7 @@ msgstr "HTTP-headernaam"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Header cell ID's"
-msgstr ""
+msgstr "Header cel-ID's"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
@@ -3690,7 +3659,7 @@ msgstr "Ingevoegde tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
-msgstr ""
+msgstr "Instantie-definitie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Italic text"
@@ -3717,9 +3686,8 @@ msgid "Layer"
 msgstr "Laag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link color"
-msgstr "Kies een kleur"
+msgstr "Verwijzingskleur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3738,9 +3706,8 @@ msgid "Listing"
 msgstr "Opsomming"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "Kies het editor-lettertype"
+msgstr "Plaatselijke lettertypewijziging"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Long description link"
@@ -3748,7 +3715,7 @@ msgstr "Lange omschrijving verwijzing"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
-msgstr ""
+msgstr "Lang citaat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
@@ -3776,7 +3743,7 @@ msgstr "Media-onafhankelijke verwijzing"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
-msgstr ""
+msgstr "Menulijst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
@@ -3843,124 +3810,121 @@ msgid "Note"
 msgstr "Notitie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
 msgid "Object applet file"
-msgstr "Bestand openen"
+msgstr "Object-appletbestand"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
-msgstr ""
+msgstr "Object-datareferentie"
 
+# Juiste vertaling?!
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Afstand voor uitlijningsteken"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
-msgstr ""
+msgstr "OnBlur-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "OnChange event"
-msgstr "Lettervorm wijzigen"
+msgstr "OnChange-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
-msgstr ""
+msgstr "OnClick-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
-msgstr ""
+msgstr "OnDblClick-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
-msgstr ""
+msgstr "OnFocus-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
-msgstr ""
+msgstr "OnKeyDown-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
-msgstr ""
+msgstr "OnKeyPress-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
-msgstr ""
+msgstr "OnKeyUp-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
-msgstr ""
+msgstr "OnLoad-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
-msgstr ""
+msgstr "OnMouseDown-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
-msgstr ""
+msgstr "OnMouseMove-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
-msgstr ""
+msgstr "OnMouseOut-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
-msgstr ""
+msgstr "OnMouseOver-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
-msgstr ""
+msgstr "OnMouseUp-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
-msgstr ""
+msgstr "OnReset-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
-msgstr ""
+msgstr "OnSelect-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
-msgstr ""
+msgstr "OnSubmit-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
-msgstr ""
+msgstr "OnUnload-gebeurtenis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
-msgstr ""
+msgstr "Optiegroep"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
 msgid "Option selector"
-msgstr "Lettertype-selectie"
+msgstr "Optieselectie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
-msgstr ""
+msgstr "Geordende lijst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
 msgid "Output media"
-msgstr "Uitvoerregels"
+msgstr "Uitvoermedia"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
-msgstr ""
+msgstr "Alinea"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph class"
-msgstr ""
+msgstr "Alineaklasse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph style"
-msgstr ""
+msgstr "Alineastijl"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Preformatted listing"
-msgstr ""
+msgstr "Vooraf vormgegeven opsomming"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted text"
@@ -3968,11 +3932,11 @@ msgstr "Vooraf opgemaakte tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
-msgstr ""
+msgstr "Profiel-metainfo woordenboek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Prompt message"
-msgstr ""
+msgstr "Vraagbericht"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Push button"
@@ -3988,7 +3952,7 @@ msgstr "Bereik"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
-msgstr ""
+msgstr "AlleenLezen tekst-en-wachtwoord"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
@@ -3998,9 +3962,10 @@ msgstr "Gereduceerde spatiëring"
 msgid "Reverse link"
 msgstr "Omgekeerde verwijzing"
 
+# Betere vertaling?
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
-msgstr ""
+msgstr "Beginpunt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Rows"
@@ -4008,15 +3973,15 @@ msgstr "Rijen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rulings between rows and columns"
-msgstr ""
+msgstr "Regels tussen rijen en kolommen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Sample program output, scripts"
-msgstr ""
+msgstr "Voorbeeld-programmauitvoer, scripts"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Bereik gedekt door header-cellen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Script execution defer"
@@ -4028,7 +3993,7 @@ msgstr "Naam scripttaal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "Script-statements"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
@@ -4052,8 +4017,9 @@ msgstr "Vorm"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Kort tussengevoegd citaat"
 
+# Help?!
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
 msgstr ""
@@ -4080,7 +4046,7 @@ msgstr "Spatie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Spatiegescheiden archieflijst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Spacer"
@@ -4108,9 +4074,8 @@ msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "Rege_lnummers afdrukken"
+msgstr "Begingetal opsomming"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Strike-through text"
@@ -4138,7 +4103,7 @@ msgstr "Superscript"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
-msgstr ""
+msgstr "Tabvolgorde-postitie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Table"
@@ -4153,14 +4118,12 @@ msgid "Table caption"
 msgstr "Tabelbijschrift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-#, fuzzy
 msgid "Table column group properties"
-msgstr "Tabelkolomgroep"
+msgstr "Tabelkolomgroep-eigenschappen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-#, fuzzy
 msgid "Table column properties"
-msgstr "Tabelkolomgroep"
+msgstr "Tabelkolom-eigenschappen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
@@ -4248,15 +4211,15 @@ msgstr "Waarde"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "Waarde-interpretatie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Variabel of programma-argument"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Verticale celuitlijning"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Vertical space"
@@ -4272,39 +4235,39 @@ msgstr "Breedte"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Bibliografie-citaat"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Bibliografie-item"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Bibliografie shortcite"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Bibliografie thebibliography"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "Haakjes &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "Haakjes ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "Haakjes []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "Haakjes {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "Bestandsinvoer"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
 msgid "Footnote"
@@ -4440,29 +4403,29 @@ msgstr "Operator gedeeld door"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr "Operator integraal (weergave)"
+msgstr "Operator integral (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr "Operator integraal (inline)"
+msgstr "Operator integral (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operator sum (weergave)"
 
+# inline?!
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operator sum (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Voorkeuren"
+msgstr "Referentielabel"
 
+# Referentie-referentie?!
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Voorkeuren"
+msgstr "Referentie-ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
@@ -4494,79 +4457,79 @@ msgstr "Symbool d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Symbool d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Symbool d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Symbool dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Symbool equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "Symbool hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "Symbool hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "Symbool infinity"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Symbool mathspace ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Symbool mathspace ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Symbool mathspace _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Symbool mathspace __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "Symbool simeq"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "Symbool star"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Vet lettertype"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Schuingedrukt lettertype"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Scheef lettertype"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Type-lettertype"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Onafbreekbare tekst"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - assen"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
 msgid "XSLT - Elements"
