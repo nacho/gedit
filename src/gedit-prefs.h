@@ -89,6 +89,7 @@ extern GeditPreferences *settings;
 
 void gedit_prefs_save_settings (void);
 void gedit_prefs_load_settings (void);
+void gedit_prefs_init ();
 
 #endif /* __GEDIT_PREFS_H__ */
 

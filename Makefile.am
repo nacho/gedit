@@ -2,6 +2,8 @@
 
 SUBDIRS = src pixmaps po  
 
+GEDIT_SCHEMA = gedit.schemas
+
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	gedit.1 gedit2.desktop.in \
 	TODO gedit.keys.in app-docs.make \
@@ -20,3 +22,5 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = 
 
+install-data-local:
+	gconftool-2 --install-schema-file $(GEDIT_SCHEMA)

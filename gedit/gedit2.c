@@ -149,6 +149,7 @@ main (int argc, char **argv)
 	gedit_set_default_icon ();
 	
 	/* Load user preferences */
+	gedit_prefs_init ();
 	gedit_prefs_load_settings ();
 
 	/* Parse args and build the list of files to be loaded at startup */
