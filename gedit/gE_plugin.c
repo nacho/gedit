@@ -64,8 +64,7 @@ gE_Plugin_Query_All(void)
       if (!suffix || strcmp(suffix, ".plugin"))
 	 continue;
 
-      fprintf(stderr, "Loading plugin description from `%s'.\n",
-	      direntry->d_name);
+      g_message("Loading plugin description from `%s'.\n", direntry->d_name);
 
       plug = gE_Plugin_Query(direntry->d_name);
       if (!plug)
@@ -100,10 +99,10 @@ load_library(gchar * key, gE_Plugin_Object * plug)
    if (!shlib_hash) {
       shlib_hash = g_hash_table_new(NULL, NULL);
    } else if (g_hash_table_lookup(shlib_hash, pathname)) {
-      fprintf(stderr, "Library %s already loaded.\n", pathname);
+      g_message("Library %s already loaded.\n", pathname);
       return;
    }
-   fprintf(stderr, "Loading %s ...\n", pathname);
+   g_message("Loading %s ...\n", pathname);
 
    module = g_module_open(pathname, G_MODULE_BIND_LAZY);
    if (!module) {
@@ -243,10 +242,9 @@ gE_Plugin_Load(gE_Plugin_Object * plugin, gint context)
 			(gpointer) & plugin->info))
       goto module_error;
 
-   fprintf(stderr, "Successfully loaded plugin `%s'.\n",
-	   plugin->name);
+   g_message("Successfully loaded plugin `%s'.\n", plugin->name);
 
-   fprintf(stderr, "Plugin Name: %s\n", plugin->info->plugin_name);
+   g_message("Plugin Name: %s\n", plugin->info->plugin_name);
 
    if (plugin->info->init_func)
       plugin->info->init_func(plugin, context);
