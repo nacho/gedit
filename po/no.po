@@ -5,19 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-06-21 20:59+0200\n"
-"PO-Revision-Date: 2000-06-21 21:00+02:00\n"
+"POT-Creation-Date: 2000-06-22 16:11+0200\n"
+"PO-Revision-Date: 2000-06-22 16:11+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:156
+#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:153 plugins/browse/browse.c:185
+msgid "browse"
+msgstr "bla gjennom"
+
+#: plugins/browse/browse.c:243
 msgid "Browse"
 msgstr "Bla gjennom"
 
-#: plugins/browse/browse.c:157
+#: plugins/browse/browse.c:244
 msgid "Web browse plugin"
 msgstr "Webleser tillegg"
 
@@ -82,27 +88,27 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Diff-tillegg."
 
-#: plugins/email/email.c:54
+#: plugins/email/email.c:51
 #, c-format
 msgid "Executing command : %s"
 msgstr "Kjører kommando : %s"
 
 #. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 #. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:117 plugins/email/email.c:169
+#: plugins/email/email.c:104 plugins/email/email.c:144
 msgid "email"
 msgstr "e-post"
 
-#: plugins/email/email.c:224 plugins/email/email.c:230 src/document.c:261
+#: plugins/email/email.c:205 plugins/email/email.c:211 src/document.c:261
 #: src/print.c:581
 msgid "Untitled"
 msgstr "Navnløs"
 
-#: plugins/email/email.c:268
+#: plugins/email/email.c:249
 msgid "Email"
 msgstr "E-post"
 
-#: plugins/email/email.c:269
+#: plugins/email/email.c:250
 msgid "Email the current document"
 msgstr "Send aktivt dokument"
 
@@ -128,16 +134,24 @@ msgid "Subject:"
 msgstr "Emne:"
 
 #: plugins/email/email.glade.h:11
-msgid "Sendmail found at : "
-msgstr "Sendmail funnet i : "
+msgid "Change..."
+msgstr "Endre..."
 
 #: plugins/email/email.glade.h:12
-msgid "Change"
-msgstr "Endre"
+msgid "label12"
+msgstr "etikett12"
 
 #: plugins/email/email.glade.h:13
 msgid "File to use as body of message : "
 msgstr "Fil som skal brukes som meldingens innhold : "
+
+#: plugins/email/email.glade.h:14
+msgid "Sendmail found at :"
+msgstr "Sendmail funnet i :"
+
+#: plugins/email/email.glade.h:15
+msgid "label13"
+msgstr "etikett13"
 
 #: plugins/reverse/reverse.c:56
 msgid "Reverse"
@@ -155,11 +169,11 @@ msgstr "Hallo verden"
 msgid "Sample 'hello world' plugin."
 msgstr "Eksempel 'hallo verden' tillegg."
 
-#: plugins/shell_output/shell_output.c:172
+#: plugins/shell_output/shell_output.c:175
 msgid "Shell Output"
 msgstr "Skallutskrift"
 
-#: plugins/shell_output/shell_output.c:173
+#: plugins/shell_output/shell_output.c:176
 msgid "Insert the shell output in the document"
 msgstr "Sett inn utskrift fra skallet i dokumentet"
 
@@ -671,7 +685,7 @@ msgstr "Fje_rn visning"
 msgid "Remove view of the document"
 msgstr "Fjern visning for dokumentet"
 
-#: src/menus.c:196 src/plugin.c:125 src/plugin.c:223
+#: src/menus.c:196 src/plugin.c:126 src/plugin.c:224
 msgid "_Plugins"
 msgstr "_Tillegg"
 
@@ -771,24 +785,24 @@ msgstr "Avslutt"
 msgid "Exit the program"
 msgstr "Avslutt programmet"
 
-#: src/plugin.c:69
+#: src/plugin.c:70
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Feil, kunne ikke åpne modulfil, %s"
 
-#: src/plugin.c:80
+#: src/plugin.c:81
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Feil tillegg inneholder ikke init_plugin funksjonen."
 
-#: src/plugin.c:87
+#: src/plugin.c:88
 msgid "Error, init_plugin returned an error"
 msgstr "Feil, init_plugin returnerte en feil"
 
-#: src/plugin.c:115
+#: src/plugin.c:116
 msgid "Error, plugin is still in use"
 msgstr "Feil, tillegg er fremdeles i bruk"
 
-#: src/plugin.c:366
+#: src/plugin.c:361
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -797,7 +811,7 @@ msgstr ""
 "Programmet %s ble ikke funnet.\n"
 "\n"
 
-#: src/plugin.c:383
+#: src/plugin.c:376
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -806,7 +820,7 @@ msgstr ""
 "'%s' ser ikke ut til å eksistere.\n"
 "\n"
 
-#: src/plugin.c:385
+#: src/plugin.c:378
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -817,7 +831,7 @@ msgstr ""
 "men '%s' ble ikke funnet i denne katalogen.\n"
 "\n"
 
-#: src/plugin.c:388
+#: src/plugin.c:381
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -826,7 +840,7 @@ msgstr ""
 "'%s' ser ikke ut til å være et program.\n"
 "\n"
 
-#: src/plugin.c:392
+#: src/plugin.c:385
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -904,51 +918,51 @@ msgstr "Teksten ble ikke funnet."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Kan ikke søke igjen. Ingen tekststreng å søke etter."
 
-#: src/utils.h:94
+#: src/utils.h:87
 msgid "Show window debugging messages."
 msgstr "Vis avlusingsmeldinger for vindu."
 
-#: src/utils.h:97
+#: src/utils.h:90
 msgid "Show commands debugging messages."
 msgstr "Vis avlusingsmeldinger for kommando."
 
-#: src/utils.h:100
+#: src/utils.h:93
 msgid "Show document debugging messages."
 msgstr "Vis avlusingsmeldinger for dokument."
 
-#: src/utils.h:103
+#: src/utils.h:96
 msgid "Show file debugging messages."
 msgstr "Vis avlusingsmeldinger for fil."
 
-#: src/utils.h:106
+#: src/utils.h:99
 msgid "Show plugin debugging messages."
 msgstr "Vis avlusingsmeldinger for tillegg."
 
-#: src/utils.h:109
+#: src/utils.h:102
 msgid "Show prefs debugging messages."
 msgstr "Vis avlusingsmeldinger for brukervalg."
 
-#: src/utils.h:112
+#: src/utils.h:105
 msgid "Show printing debugging messages."
 msgstr "Vis avlusingsmeldinger for utskrift."
 
-#: src/utils.h:115
+#: src/utils.h:108
 msgid "Show search debugging messages."
 msgstr "Vis avlusingsmeldinger for søk."
 
-#: src/utils.h:118
+#: src/utils.h:111
 msgid "Show undo debugging messages."
 msgstr "Vis avlusingsmeldinger for angrefunksjon."
 
-#: src/utils.h:121
+#: src/utils.h:114
 msgid "Show view debugging messages."
 msgstr "Vis avlusingsmeldinger for visning."
 
-#: src/utils.h:124
+#: src/utils.h:117
 msgid "Show recent debugging messages."
 msgstr "Vis avlusingsmeldinger for nylig brukte filer."
 
-#: src/utils.h:127
+#: src/utils.h:120
 msgid "Turn on all debugging messages."
 msgstr "Vis alle avlusingsmeldinger."
 
