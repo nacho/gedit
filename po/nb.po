@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-21 20:01+0100\n"
-"PO-Revision-Date: 2004-11-25 10:17+0100\n"
+"POT-Creation-Date: 2004-12-27 13:11+0100\n"
+"PO-Revision-Date: 2004-12-28 03:55+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -594,12 +594,12 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "Hvis du ikke lagrer vil endringene fra den siste timen gå tapt."
-msgstr[1] "Hvis du ikke lagrer vil endringene fra den siste timen gå tapt."
+msgstr[1] "Hvis du ikke lagrer vil endringene fra de %d siste timene gå tapt."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -776,9 +776,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
-msgstr "<b>Automatisk indentering</b>"
+msgstr "<b>Automatisk innrykk</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
 msgid "<b>Elements</b>"
@@ -802,7 +801,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Høyre marg</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulatorer</b>"
 
@@ -1523,9 +1521,9 @@ msgstr[0] "Laster %d fil..."
 msgstr[1] "Laster %d filer..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Kunne ikke åpne filen «%s»"
+msgstr "Kunne ikke finne filen «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
@@ -1550,38 +1548,34 @@ msgid "Could not open the file \"%s\""
 msgstr "Kunne ikke åpne filen «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Kunne ikke åpne filen «%s» fordi den inneholder korrupte data."
+msgstr "Filen inneholder korrupte data."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
+msgstr "gedit kan ikke håndtere %s: lokasjoner."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
+msgstr "gedit kan ikke håndtere denne lokasjonen."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "Kunne ikke åpne fil «%s» fordi den inneholder data i ugyldig format."
+msgstr "Filen inneholder data i ugyldig format."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Filen har for mange symbolske lenker."
+msgstr "Filen er for stor."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "«%s» er ikke en gyldig lokasjon"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Tilgang ble nektet."
 
 #: gedit/gedit-io-error-dialogs.c:143
 #, fuzzy
@@ -1595,7 +1589,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "«%s» er en katalog"
 
 #: gedit/gedit-io-error-dialogs.c:157
 #, fuzzy
@@ -1752,7 +1746,7 @@ msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Forsøk på å logge inn feilet."
 
 #: gedit/gedit-io-error-dialogs.c:513
 #, fuzzy

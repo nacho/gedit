@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-21 20:01+0100\n"
-"PO-Revision-Date: 2004-09-05 22:53+0200\n"
+"POT-Creation-Date: 2004-12-27 13:11+0100\n"
+"PO-Revision-Date: 2004-12-28 03:55+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -56,9 +56,8 @@ msgstr ""
 "brukes hvis «Bruk forvalgt skrift» er slått av."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "Aktiver %s"
+msgstr "Aktive tillegg"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -182,6 +181,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Liste over aktive tillegg. Denne inneholder «lokasjon» for de aktive "
+"tilleggene. Se filen .gedit-plugin for å finne «lokasjon» for et gitt "
+"tillegg."
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -205,9 +207,8 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:31
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #: data/gedit.schemas.in.h:32
 msgid "Monospace Regular 9"
@@ -242,14 +243,12 @@ msgid "Right Margin Position"
 msgstr "Plassering av høyre marg"
 
 #: data/gedit.schemas.in.h:39
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans vanlig 11"
+msgstr "Sans 11"
 
 #: data/gedit.schemas.in.h:40
-#, fuzzy
 msgid "Sans 8"
-msgstr "Spansk"
+msgstr "Sans 8"
 
 #: data/gedit.schemas.in.h:41
 msgid "Sans Regular 11"
@@ -310,12 +309,13 @@ msgstr ""
 "Spesifiserer skriften som skal brukes for et dokuments kropp ved utskrift."
 
 #: data/gedit.schemas.in.h:49
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"Spesifiserer skriften som skal brukes for et dokuments kropp ved utskrift."
+"Spesifiserer skriften som skal brukes for dokumentkroppen ved utskrift.\n"
+"Dette er et skriftnavn fra gnome-print og det erstattes av "
+"print_font_body_pango."
 
 #: data/gedit.schemas.in.h:50
 msgid ""
@@ -326,14 +326,14 @@ msgstr ""
 "vil kun brukes hvis «Skriv ut linjenummer» er ulik null."
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "Spesifiserer skriften som skal brukes for linjenummer ved utskrift. Denne "
-"vil kun brukes hvis «Skriv ut linjenummer» er ulik null."
+"vil kun brukes hvis «Skriv ut linjenummer» er ulik null. Dette er et "
+"skriftnavn fra gnome-print og det vil erstattes av print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -344,14 +344,15 @@ msgstr ""
 "dokument. Denne vil kun brukes hvis «Skriv ut topptekst» er slått på."
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "Spesifiserer skriften som skal brukes for topptekst ved utskrift av et "
-"dokument. Denne vil kun brukes hvis «Skriv ut topptekst» er slått på."
+"dokument. Denne vil kun brukes hvis «Skriv ut topptekst» er slått på. Dette "
+"er et skriftnavn fra gnome-print og det vil erstattes av "
+"print_font_header_pango."
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -593,12 +594,12 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "Hvis du ikke lagrer vil endringene fra den siste timen gå tapt."
-msgstr[1] "Hvis du ikke lagrer vil endringene fra den siste timen gå tapt."
+msgstr[1] "Hvis du ikke lagrer vil endringene fra de %d siste timene gå tapt."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -775,9 +776,8 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
-msgstr "<b>Automatisk indentering</b>"
+msgstr "<b>Automatisk innrykk</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
 msgid "<b>Elements</b>"
@@ -801,7 +801,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Høyre marg</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulatorer</b>"
 
@@ -1137,9 +1136,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:653 gedit/gedit-document.c:671
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "_Dokumenter"
+msgstr "Ikke-lagret dokument"
 
 #: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
@@ -1350,7 +1348,6 @@ msgid "All Text Files"
 msgstr "Alle tekstfiler"
 
 #: gedit/gedit-file-selector-util.c:382
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "T_egnkoding:"
 
@@ -1507,9 +1504,9 @@ msgstr[0] "Lastet %d fil"
 msgstr[1] "Lastet %d filer"
 
 #: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Lastet fil «%s»"
+msgstr "Opprettet fil «%s»"
 
 #: gedit/gedit-file.c:1284
 #, c-format
@@ -1524,9 +1521,9 @@ msgstr[0] "Laster %d fil..."
 msgstr[1] "Laster %d filer..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Kunne ikke åpne filen «%s»"
+msgstr "Kunne ikke finne filen «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
@@ -1551,38 +1548,34 @@ msgid "Could not open the file \"%s\""
 msgstr "Kunne ikke åpne filen «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Kunne ikke åpne filen «%s» fordi den inneholder korrupte data."
+msgstr "Filen inneholder korrupte data."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
+msgstr "gedit kan ikke håndtere %s: lokasjoner."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
+msgstr "gedit kan ikke håndtere denne lokasjonen."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "Kunne ikke åpne fil «%s» fordi den inneholder data i ugyldig format."
+msgstr "Filen inneholder data i ugyldig format."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Filen har for mange symbolske lenker."
+msgstr "Filen er for stor."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "«%s» er ikke en gyldig lokasjon"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Tilgang ble nektet."
 
 #: gedit/gedit-io-error-dialogs.c:143
 #, fuzzy
@@ -1596,7 +1589,7 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "«%s» er en katalog"
 
 #: gedit/gedit-io-error-dialogs.c:157
 #, fuzzy
@@ -1659,8 +1652,9 @@ msgstr ""
 "Du prøver sannsynligvis å åpne en binærfil."
 
 #: gedit/gedit-io-error-dialogs.c:248
+#, fuzzy
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "Filen du prøver å åpne inneholder ugyldige tegn."
 
 #: gedit/gedit-io-error-dialogs.c:294
 #, fuzzy
@@ -1752,7 +1746,7 @@ msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Forsøk på å logge inn feilet."
 
 #: gedit/gedit-io-error-dialogs.c:513
 #, fuzzy
@@ -1867,9 +1861,8 @@ msgid "Open a recently used file"
 msgstr "Åpne nylig brukt fil"
 
 #: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
-#, fuzzy
 msgid "Read Only"
-msgstr "(skrivebeskyttet)"
+msgstr "Skrivebeskyttet"
 
 #: gedit/gedit-mdi.c:2072
 msgid "Normal"
@@ -2331,7 +2324,7 @@ msgstr "_Vis"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (ugyldig Unicode)"
 
 #.
 #. if (col == chars)
@@ -2380,13 +2373,14 @@ msgstr "Oppgitt koding «%s» er ikke gyldig\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "Filen du prøver å åpne inneholder ugyldige tegn."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"gedit kunne ikke bestemme koding for filen du ønsker å åpne automatisk."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
