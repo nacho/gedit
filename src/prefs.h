@@ -50,9 +50,7 @@ struct _Preferences
 	gchar *font;
 
 	gint  splitscreen;
-	gint  num_recent;	/* Number of recently accessed
-				   documents in the Recent Documents
-				   menu */
+
 	gint mdi_mode;
 	
 	guint16 bg[3];

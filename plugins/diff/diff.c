@@ -64,12 +64,12 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	gint state_2;
 	gchar * file_name_1;
 	gchar * file_name_2;
-	Document *document;
+	GeditDocument *document;
 
 	int pid;
 	char buff[1025];
 	guint length, pos; 
-	Document *doc;
+	GeditDocument *doc;
 	int fdpipe[2];
 	gchar * program_location;
 
@@ -121,7 +121,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	if (!state_1)
 	{
 		g_free (file_name_1);
-		document = (Document *)g_list_nth_data (mdi->children, document_selected_1);
+		document = (GeditDocument *)g_list_nth_data (mdi->children, document_selected_1);
 		if (gedit_document_get_buffer_length (document)<1)
 		{
 			gedit_utils_error_dialog (_("The document contains no text"), widget);
@@ -133,7 +133,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	if (!state_2)
 	{
 		g_free (file_name_2);
-		document = (Document *)g_list_nth_data (mdi->children, document_selected_2);
+		document = (GeditDocument *)g_list_nth_data (mdi->children, document_selected_2);
 		if (gedit_document_get_buffer_length (document)<1)
 		{
 			gedit_utils_error_dialog (_("The document contains no text"), widget);
@@ -250,14 +250,14 @@ gedit_plugin_diff_load_documents (GtkWidget ** options_menu, gint second_menu)
 	GtkWidget *menu;
 	GtkWidget *menu_item;
 	gint n;
-	Document *nth_doc;
+	GeditDocument *nth_doc;
 	gchar * document_name;
 	
 	menu = gtk_menu_new();
      
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
-		nth_doc = (Document *)g_list_nth_data (mdi->children, n);
+		nth_doc = (GeditDocument *)g_list_nth_data (mdi->children, n);
 		if (nth_doc->filename == NULL)
 			document_name = g_strdup_printf ("%s %d", _("Untitled"), nth_doc->untitled_number);
 		else

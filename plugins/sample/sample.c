@@ -33,7 +33,7 @@ destroy_plugin (PluginData *pd)
 static void
 insert_hello (void)
 {
-	View *view = gedit_view_active();
+	GeditView *view = gedit_view_active();
 
 	gedit_debug (DEBUG_PLUGINS, "");
 

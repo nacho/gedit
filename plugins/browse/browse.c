@@ -62,7 +62,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 {
 	int fdpipe[2];
 	gchar *url;
-	Document *doc;
+	GeditDocument *doc;
 	guint length, pos;
 	char buff[1025];
 	int pid;

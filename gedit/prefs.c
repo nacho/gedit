@@ -142,7 +142,6 @@ gedit_prefs_load_settings (void)
 	if (!settings)
 	{
 		settings = g_malloc (sizeof (Preferences));
-		settings->num_recent = 0;
 	}
 
 	gnome_config_push_prefix ("/gedit/Global/");

@@ -43,6 +43,7 @@ static GList *	gedit_recent_history_get_list (void);
 static gchar *	gedit_recent_history_update_list (const gchar *filename);
 void		gedit_recent_history_write_config (void);
 
+/* FIXME: make the list local */
 GList *gedit_recent_history_list = NULL;
 
 static GList *
@@ -159,11 +160,9 @@ gedit_recent_history_write_config (void)
 
 	gedit_debug (DEBUG_RECENT, "");
 
-        if (gedit_recent_history_list == NULL)
-		return;
-
         max_entries = gnome_config_get_int ("/gedit/History/MaxFiles=4");
         gnome_config_clean_section ("/gedit/History");
+	
         gnome_config_push_prefix ("/gedit/History/");
         gnome_config_set_int ("MaxFiles", max_entries);
 
@@ -180,6 +179,36 @@ gedit_recent_history_write_config (void)
         gedit_recent_history_list = NULL;
 }
 
+
+static void
+gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *path, gint num)
+{
+	GnomeUIInfo *menu;
+
+	gedit_debug (DEBUG_RECENT, "");
+
+	g_return_if_fail (file_name != NULL);
+	g_return_if_fail (path != NULL);
+
+	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+
+	menu->label = g_strdup_printf ("_%i. %s", num, file_name);
+	menu->type = GNOME_APP_UI_ITEM;
+	menu->hint = NULL;
+	menu->moreinfo = (gpointer) recent_cb;
+	menu->user_data = (gchar *) file_name;
+	menu->unused_data = NULL;
+	menu->pixmap_type = 0;
+	menu->pixmap_info = NULL;
+	menu->accelerator_key = 0;
+	
+	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
+
+	gnome_app_insert_menus (GNOME_APP(app), path, menu);
+
+	g_free (menu);
+}
+
 /**
  * gedit_recent_update_menus:
  * @app: 
@@ -191,57 +220,27 @@ gedit_recent_history_write_config (void)
 static void
 gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 {
-	GnomeUIInfo *menu;
+	static gint items_in_menu = 0;
+	const gchar *file_name;
 	gchar *path;
 	int i;
-
+	
 	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (app != NULL);
 
-	if (settings->num_recent)
-		gnome_app_remove_menu_range (app, _("_File/"), 6, 1+settings->num_recent);
-
-	if (recent_files == NULL)
-		return;
-
-	/* insert a separator at the beginning */
-	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-
-	path = g_new (gchar, strlen (_("_File")) + strlen ("<Separator>") + 2);
-	sprintf (path, "%s/%s", _("_File"), "<Separator>");
-
-	menu->type = GNOME_APP_UI_SEPARATOR;
-	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus (GNOME_APP(app), path, menu);
-
-	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
-	{
-		gchar *data = g_list_nth_data (recent_files, i);
-		
-		menu->label = g_strdup_printf ("_%i. %s", i+1, data);
-		menu->type = GNOME_APP_UI_ITEM;
-		menu->hint = NULL;
-		menu->moreinfo = (gpointer) recent_cb;
-		menu->user_data = data;
-		menu->unused_data = NULL;
-		menu->pixmap_type = 0;
-		menu->pixmap_info = NULL;
-		menu->accelerator_key = 0;
-
-		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-
-		gnome_app_insert_menus (GNOME_APP(app), path, menu);
-
-		g_free (menu->label);
+	gnome_app_remove_menu_range (app, _("_File/"), 7, items_in_menu);
+	items_in_menu = g_list_length (recent_files);
+	
+	path = g_strdup_printf ("%s/%s", _("_File"), "<Separator>");
+	for (i = items_in_menu; i > 0;  i--) {
+		file_name = g_list_nth_data (recent_files, i-1);
+		gedit_recent_add_menu_item (app, file_name, path, i);
 	}
-
-	g_free (menu);
-
-	settings->num_recent = g_list_length (recent_files);
 	g_free (path);
-}
 
+}
+	
 /* Callback for a click on a file in the recently used menu */
 static void
 recent_cb (GtkWidget *widget, gpointer data)
@@ -320,49 +319,7 @@ gedit_recent_remove (char *file_name)
 		{
 			gedit_recent_history_list = g_list_remove (gedit_recent_history_list, nth_list_item);
 			g_free (nth_list_item);
+			return;
 		}
 	}
-
-#if 0
-	gchar *del_name;
-        GList *list = NULL;
-        gint max_entries, count = 0;
-        gboolean found = FALSE;2
-
-	gedit_debug ("", DEBUG_RECENT);
-
-	g_return_if_fail (file_name != NULL);
-/*
-        gchar *name, *old_name = NULL;
-        GList *new_list = NULL;
-*/
-/*
-  nth_undo = g_list_nth_data (doc->undo, n);
-  doc->undo = g_list_remove (doc->undo, nth_undo);
-*/
-
-        /* Check if this filename already exists in the list */
-        for (list = gedit_recent_history_list;
-	     recent_file_list && (count < max_entries);
-	     list = list->next)
-	{
-                if (!found && (!
-			       || (count == max_entries - 1)))
-		{
-                        /* This is either the last item in the list, or a
-                         * duplicate of the requested entry. */
-                        old_name = (gchar *)l->data;
-                        found = TRUE;
-                }
-                count++;
-        }
-
-        /* Insert the new filename to the new list and free up the old list */
-        name = g_strdup (filename);
-        new_list = g_list_prepend (new_list, name);
-        g_list_free (gedit_recent_history_list);
-        gedit_recent_history_list = new_list;
-
-        return;
-#endif
 }

@@ -74,7 +74,9 @@ GnomeUIInfo gedit_file_menu[] =
 				NULL,
 				file_revert_cb, 
 				GNOME_STOCK_MENU_REFRESH),
-	GNOMEUIINFO_SEPARATOR, 
+	GNOMEUIINFO_SEPARATOR,
+	/* Recent files ... */
+	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
 #if 0	

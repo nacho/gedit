@@ -113,7 +113,6 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 	/* Add the recent files */
-	settings->num_recent = 0;
 	gedit_recent_update (app);
 
 	/* Add the plugins to the menus */

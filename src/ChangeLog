@@ -1,5 +1,19 @@
 2000-10-16  Chema Celorio  <chema@celorio.com>
 
+	* search.c (gedit_replace_all_execute): fix a crash when replacing
+	all. (gmorten found it).
+
+	* recent.c (gedit_recent_update_menus): rewrite, fix recent items
+	bugs.
+	(gedit_recent_add_menu_item): implement
+	(gedit_recent_remove): clean
+
+	* prefs.h (struct _Preferences): remove settings->num_recent, we have
+	recent file list, and we know the size of the list.
+
+	* recent.c (gedit_recent_update_menus): don't return if list == NULL.
+	This was causing a crash.
+
 	* menus.c: clean the file, remove unused stuff
 	add ifndef's for stuff that is disabled
 	* menus.h: ditto

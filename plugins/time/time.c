@@ -63,7 +63,7 @@ get_time (void)
 static void
 insert_time (void)
 {
-	View *view = gedit_view_active();
+	GeditView *view = gedit_view_active();
 	static gchar *the_time;
 
 	if (!view)

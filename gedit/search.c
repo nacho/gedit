@@ -553,7 +553,6 @@ gedit_search_line_to_pos (gint line, gint *lines)
 
 
 #define GEDIT_EXTRA_REPLACEMENTS_ 4
-#define GEDIT_REPLACE_ALL_SIZE_LIMIT 1000000
 gint
 gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *search_text,
 			   const guchar *replace_text, gint case_sensitive,
@@ -590,7 +589,7 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 		/* Allocate something so that g_free doesn't crash */
 		buffer_out = g_malloc (1);
 		buffer_out [0] = '\0';
-		return 0;
+		return -1;
 	}
 
 	delta = replace_text_length - search_text_length;
@@ -607,7 +606,7 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 		/* Allocate something, we __hope__ that 1 byte can be allocated */
 		buffer_out = g_malloc (1);
 		buffer_out [0] = '\0';
-		return 0;
+		return -1;
 	}
 
 	p1 = 0;
@@ -626,6 +625,23 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 	/* Do the actual replace all */
 	while (p1 < buffer_in_length)
 	{
+		if (p2 > buffer_out_length - (delta*2)) /* Allocate for at leas 2 more replacements */
+		{
+			if (delta < 1) {
+				g_warning ("This should not happen.\n");
+				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
+			}
+			buffer_out_length = buffer_in_length + (replacements +
+								(grow_factor <<= 1)) * delta;
+			buffer_out = g_realloc (buffer_out, buffer_out_length);
+			if (buffer_out == NULL)
+			{
+				g_warning ("Unable to realocate buffer");
+				return -1;
+			}
+			
+		}
+		
 		if ((buffer_in [p1]|case_sensitive_mask) == (search_text [p3]|case_sensitive_mask))
 		{
 			p3++;
@@ -645,28 +661,6 @@ gedit_replace_all_execute (GeditView *view, guint start_pos, const guchar *searc
 			p3=0;
 		}
 		
-		if (p2 > buffer_out_length - (delta*2))
-		{
-			if (delta < 1) {
-				g_warning ("This should not happen.\n");
-				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
-			}
-			buffer_out_length = buffer_in_length + (replacements +
-								(grow_factor <<= 1)) * delta;
-			/* g_realloc dies when g_reallocating large buffers, limit the buffer
-			   to x MB's, which is a pretty large buffer. This is ugly but a crash
-			   is even uglier. Chema */
-			if (buffer_out_length > GEDIT_REPLACE_ALL_SIZE_LIMIT) {
-				return -1;
-			}
-			buffer_out = g_realloc (buffer_out, buffer_out_length);
-			if (buffer_out == NULL)
-			{
-				g_warning ("Unable to realocate buffer");
-				return 0;
-			}
-			
-		}
 		buffer_out [p2++] = buffer_in [p1++];
 	}
 

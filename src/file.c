@@ -995,7 +995,7 @@ gedit_file_create_popup (const gchar *title)
 	{
 	case 0 : 
 		doc = gedit_document_new_with_title (title);
-		doc->changed = FALSE;
+		doc->changed = TRUE;
 		return TRUE;
 	case 1 : 
 		return FALSE;

@@ -43,7 +43,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 {
 	const gchar *subject, *from, *to;
 	const gchar *program_location = NULL;
-	Document *doc = gedit_document_current();
+	GeditDocument *doc = gedit_document_current();
 	FILE *sendmail;
 	guchar * buffer;
 	gchar *command;
@@ -140,7 +140,7 @@ gedit_plugin_create_dialog (void)
 	GtkWidget *dialog;
 	GtkWidget *filename_label;
 	GtkWidget *change_location;
-	Document *doc = gedit_document_current ();
+	GeditDocument *doc = gedit_document_current ();
 	gchar *username, *fullname, *hostname;
 	gchar *from;
 	gchar *filename_label_label;

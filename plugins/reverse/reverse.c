@@ -23,8 +23,8 @@ destroy_plugin (PluginData *pd)
 static void
 reverse (void)
 {
-	Document *doc;
-	View *view = gedit_view_active();
+	GeditDocument *doc;
+	GeditView *view = gedit_view_active();
 	gchar *buffer ;
 	gchar tmp ;
 	gint buffer_length ;

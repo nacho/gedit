@@ -38,7 +38,7 @@ static void
 shell_output_scan_text (GtkWidget *w , gpointer data)
 {
 
-	Document *doc              = gedit_document_current ();
+	GeditDocument *doc              = gedit_document_current ();
 	gchar    *buffer_in        = NULL ;
 	GString  *buffer_out       = g_string_new (NULL) ;
 	gchar    *command_string   = NULL ;
