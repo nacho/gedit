@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.4\n"
-"POT-Creation-Date: 2001-03-02 21:56+0100\n"
+"POT-Creation-Date: 2001-03-08 02:15+0100\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -43,12 +43,12 @@ msgstr "Tapez li _hårdeye a loukî:"
 msgid "Lynx found at: "
 msgstr "Lynx a stî trové è: "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "eplaeçmint"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr " _Candjî... "
@@ -90,11 +90,11 @@ msgstr " Decimå viè _Octå "
 msgid " Hex to Decima_l "
 msgstr " Hexa viè _Decimå "
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "Les deus documints tchwezi sont li minme."
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -104,7 +104,7 @@ msgstr ""
 "\n"
 "Dinez on no d' fitchî valåbe s' i vos plait"
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -114,16 +114,16 @@ msgstr ""
 "\n"
 "Dinez on no d' fitchî valåbe s' i vos plait"
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "Li «prumî» documint n' a nou tecse å dvins."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "Li «deuzinme» documint n' a nou tecse å dvins."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -131,21 +131,21 @@ msgstr ""
 "gedit n' a nén savou fé on fitchî temporaire.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Sin tite %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Fwiat on diff (difference des royes di tecse) inte deus fitchîs ou documints"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -192,6 +192,10 @@ msgid "Select the \"second\" file..."
 msgstr "Tchwezixhoz li «deuzinme» fitchî..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Eployî li cogné _unifieye pol rexhowe (tchûze -u)"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "diff a stî trové è: "
 
@@ -389,17 +393,17 @@ msgstr "gedit: Preferinces"
 msgid "Replace"
 msgstr "Mete èl plaece"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Trover"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
-msgstr "Tecse nén trové"
+msgid "Search string not found"
+msgstr "Tchinne cwereye nén trovéye"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
-msgstr "Tecse nén trové."
+msgid "Search string not found."
+msgstr "Tchinne cwereye nén trovéye."
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
@@ -435,46 +439,50 @@ msgstr "Limerô di roye:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Preferinces"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Rivnance"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
-msgstr "Mostrer bår ås messaedjes"
-
 #: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr "Bår ås usteyes apontieye sorlon l' apontiaedje do sistinme"
+msgid "S_how statusbar"
+msgstr "_Mostrer bår ås messaedjes"
 
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Vey seulmint les imådjetes èl bår ås usteyes"
+msgid "Set toolbar according to _system settings"
+msgstr "Bår ås usteyes apontieye sorlon l' apontiaedje do _sistinme"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr "Vey seulmint li tecse èl bår ås usteyes"
+msgid "Set toolbar to _icons only"
+msgstr "Vey seulmint les _imådjetes èl bår ås usteyes"
 
 #: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
+msgstr "Vey seulmint li _tecse èl bår ås usteyes"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Dûjhance di l' aspougneu"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Mete l' indintåcion åtomatike èn alaedje"
-
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
-msgstr "Lårdjeu del tabulåcion: "
+msgid "Enable _Auto-indent"
+msgstr "Mete l' i_ndintåcion åtomatike èn alaedje"
 
 #: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
+msgstr "_Lårdjeu del tabulåcion: "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Djenerå"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Eterface Multi Documints)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -486,7 +494,7 @@ msgstr ""
 "Copete\n"
 "Valeye\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -498,96 +506,100 @@ msgstr ""
 "Modå\n"
 "Prémetou\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
-msgstr "Môde: "
-
 #: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Eplaeçmint del tabulåcion è môde bloc di notes: "
+msgid "_Mode: "
+msgstr "_Môde: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "Eplaeçmint del _tabulåcion è môde bloc di notes: "
+
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Disfé"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
-msgstr "Defini l' limite des liveas di disfijhaedje a:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr "livea(s)"
+msgid "Set limit on _undo levels to:"
+msgstr "Defini l' limite des liveas di _disfijhaedje a:"
 
 #: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
+msgstr "_livea(s)"
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Documints"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Fontes"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Tchwezixhoz ene fonte"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhå!"
 
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Fonte prémetowe: "
-
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "Fonte _prémetowe: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Coleurs"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Tchwezixhoz ene coleur"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
-msgstr "Coleur di fond: "
-
 #: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
-msgstr "Coleur di dvant: "
+msgid "_Background: "
+msgstr "Coleur di _fond: "
 
 #: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
+msgstr "Coleur di _dvant: "
+
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Fontes/Coleurs"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Dj' eprime"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Radjouter _tiestîre"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Mete èn alaedje li _côpaedje di roye"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
-msgstr "Mostrer les _limerôs di roye totes les:"
-
 #: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
-msgstr "roye(s)"
+msgid "Print line _numbers every:"
+msgstr "Mete les _limerôs di roye totes les:"
 
 #: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
+msgstr "ro_ye(s)"
+
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Plaeçmint"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "D' _astampé"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "Di _coutchî"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Papî"
 
@@ -690,7 +702,7 @@ msgstr "Discrijhaedje do plugin"
 msgid "Open as URI"
 msgstr "Drovî come ene hårdéye"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Drovî"
 
@@ -980,21 +992,21 @@ msgstr "Drovî (swap) fitchî .c/.h"
 msgid "_New"
 msgstr "_Novea"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Fé on novea documint"
 
 #: src/menus.c:68
-msgid "Save All"
-msgstr "Schaper tot..."
+msgid "Sav_e All"
+msgstr "Scha_per tot..."
 
 #: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Schaper tos les fitchîs drovîs"
 
 #: src/menus.c:74
-msgid "Revert"
-msgstr "Rimete come divant"
+msgid "_Revert"
+msgstr "_Rimete come divant"
 
 #: src/menus.c:83
 msgid "Open from _URI..."
@@ -1013,145 +1025,141 @@ msgid "Print preview"
 msgstr "Vey divant"
 
 #: src/menus.c:102
-msgid "Print preview..."
-msgstr "Vey divant..."
+msgid "Print pre_view..."
+msgstr "_Vey divant..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Vey divant d' eprimî"
 
 #: src/menus.c:110
-msgid "Close All"
-msgstr "Clôre tot"
+msgid "C_lose All"
+msgstr "C_lôre tot"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Clôre tos les fitchîs drovîs"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Potchî al _roye"
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Potchî å limerô di roye specifyî"
 
-#: src/menus.c:154
+#: src/menus.c:160
 msgid "File _Info"
 msgstr "_Informåcion sol fitchî"
 
-#: src/menus.c:155
+#: src/menus.c:161
 msgid "Get the basic file info"
 msgstr "Mostere les informåcions di båze sol fitchî"
 
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Radjouter vuwe"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Radjouter ene novele vuwe d' on documint"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "_Bodjî vuwe"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Bodjî ene vuwe foû do documint"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "C_werî"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "_Documints"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Novea"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Drovî on fitchî"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Schaper"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Schaper li fitchî do moumint"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Clôre"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Clôre li fitchî do moumint"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Rexhe"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Eprimer li fitchî do moumint"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Disfé li dierinne operåcion"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Rifé"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Rifé li dierinne operåcion"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Côper"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Côper li tchûze"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Copyî"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Copyî li tchûze"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Aclaper"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Aclaper çu k' i gn a è tchapea emacralé"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Cwerî après ene tchinne"
 
-#: src/menus.c:288
-msgid "Exit"
-msgstr "Moussî foû"
-
-#: src/menus.c:288
-msgid "Exit the program"
-msgstr "Moussî foû do programe"
-
 #: src/plugin.c:107
-msgid "Manager ..."
-msgstr "Manaedjeu..."
+msgid "_Manager ..."
+msgstr "_Manaedjeu..."
 
 #: src/plugin.c:108
 msgid "Add/Remove installed plugins"
@@ -1310,6 +1318,12 @@ msgstr ""
 msgid "You can't remove the last view of a document."
 msgstr "C' est nén possibe di bodjî foû li dierinne vuwe d' on documint."
 
+#~ msgid "Exit"
+#~ msgstr "Moussî foû"
+
+#~ msgid "Exit the program"
+#~ msgstr "Moussî foû do programe"
+
 #~ msgid "Sendmail found at :"
 #~ msgstr "Sendmail a stî trové è:"
 
@@ -1410,9 +1424,6 @@ msgstr "C' est nén possibe di bodjî foû li dierinne vuwe d' on documint."
 
 #~ msgid "Ask before replacing"
 #~ msgstr "Dimander divant di mete èl plaece"
-
-#~ msgid "Search"
-#~ msgstr "Cwerî"
 
 #~ msgid "Search from: "
 #~ msgstr "Cwerî a pårti di: "
