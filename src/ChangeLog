@@ -1,3 +1,18 @@
+2002-05-29  Paolo Maggi <maggi@athena.polito.it>
+
+	* bonobo-mdi-session.c: save and restore window role
+
+	* bonobo-mdi.c (book_button_release): use 
+	gtk_window_set_default_size instead of gtk_widget_set_size_request
+
+	* gedit-document.c (gedit_document_replace_selected_text):
+	let replace be long zero chars
+
+	*gedit-mdi.c (gen_role): new function
+	(gedit_mdi_app_created_handler): set unique window role using gen_role
+
+	* dialogs/gedit-dialog-replace.c: fix bug #83401
+
 2002-05-27  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-file.c (gedit_file_open): display formatted uris

@@ -1798,8 +1798,7 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (replace != NULL);
-	g_return_if_fail (*replace != '\0');
+	g_return_if_fail (replace != NULL);	
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,
@@ -1830,10 +1829,10 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
                                     &iter,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "insert"));
-
-	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
-				&iter,
-				replace, strlen (replace));
+	if (*replace != '\0')
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+					&iter,
+					replace, strlen (replace));
 
 	if (doc->priv->last_replace_text != NULL)
 		g_free (doc->priv->last_replace_text);

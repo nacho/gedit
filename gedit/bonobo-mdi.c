@@ -743,8 +743,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 				
 			win = bonobo_mdi_get_window_from_view (view);
 
-			width = view->allocation.width;
-			height = view->allocation.height;
+			gtk_window_get_size (GTK_WINDOW (win), &width, &height);
 		
 			gtk_container_remove (GTK_CONTAINER (old_book), view);
 			
@@ -756,7 +755,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 
 			gtk_window_set_position (GTK_WINDOW (mdi->priv->active_window), GTK_WIN_POS_MOUSE);
 	
-			gtk_widget_set_size_request (view, width, height);
+			gtk_window_set_default_size (GTK_WINDOW (mdi->priv->active_window), width, height);
 
 			if (!GTK_WIDGET_VISIBLE (mdi->priv->active_window))
 				gtk_widget_show (GTK_WIDGET (mdi->priv->active_window));

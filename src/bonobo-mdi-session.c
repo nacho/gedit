@@ -40,7 +40,7 @@ static void		restore_window_child	(BonoboMDI *, GHashTable *,
 						 GHashTable *, GHashTable *,
 						 GHashTable *, GHashTable *,
 						 glong, glong, gboolean *,
-						 gint, gint, gint, gint);
+						 gchar *);
 static void		restore_window		(BonoboMDI *, const gchar *,
 						 GPtrArray *, GHashTable *,
 						 GHashTable *, GHashTable *,
@@ -118,7 +118,7 @@ restore_window_child (BonoboMDI *mdi, GHashTable *child_hash,
 		      GHashTable *child_windows, GHashTable *child_views,
 		      GHashTable *view_hash, GHashTable *window_hash,
 		      glong window, glong child, gboolean *init,
-		      gint x, gint y, gint width, gint height)
+		      gchar *role)
 {
 	GPtrArray *windows, *views;
 	BonoboMDIChild *mdi_child;
@@ -141,15 +141,11 @@ restore_window_child (BonoboMDI *mdi, GHashTable *child_hash,
 			bonobo_mdi_add_view (mdi, mdi_child);
 		else {
 			bonobo_mdi_add_toplevel_view (mdi, mdi_child);
-#if 0
-			/* FIXME: this needs to be done with window roles */
-			gtk_widget_set_usize
-				(GTK_WIDGET (bonobo_mdi_get_active_window (mdi)),
-				 width, height);
 
-			gtk_widget_set_uposition
-				(GTK_WIDGET (bonobo_mdi_get_active_window (mdi)), x, y);
-#endif
+			if (role != NULL)
+				gtk_window_set_role (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)), 
+						     role);
+			
 			*init = TRUE;
 
 			g_hash_table_insert (window_hash,
@@ -170,28 +166,19 @@ restore_window (BonoboMDI *mdi, const gchar *section, GPtrArray *child_list,
 		GHashTable *window_hash, glong window)
 {
 	gboolean init = FALSE;
-	gchar key [BUFSIZ], *string;
-	gint ret, x, y, w, h;
+	gchar key [BUFSIZ], *role;
 	guint j;
 
 	g_snprintf (key, sizeof(key), "%s/mdi_window_%lx", section, window);
-	string = gnome_config_get_string (key);
-	if (!string) return;
-
-	ret = sscanf (string, "%d/%d/%d/%d", &x, &y, &w, &h);
-	g_free (string);
-	if (ret != 4) return;
+	role = gnome_config_get_string (key);
 
 	if(child_list->len == 0) {
 		bonobo_mdi_open_toplevel (mdi);
 	
-#if 0
-		/* FIXME: this needs to be done with window roles */
-		gtk_widget_set_usize (GTK_WIDGET (bonobo_mdi_get_active_window (mdi)), w, h);
-
-		gtk_widget_set_uposition (GTK_WIDGET (bonobo_mdi_get_active_window (mdi)),
-					  x, y);
-#endif
+		if (role != NULL)
+				gtk_window_set_role (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)), 
+						     role);
+		
 		g_hash_table_insert (window_hash, (gpointer) window,
 				     bonobo_mdi_get_active_window (mdi));
  	}
@@ -201,13 +188,14 @@ restore_window (BonoboMDI *mdi, const gchar *section, GPtrArray *child_list,
 					      child_views, view_hash,
 					      window_hash, window,
 					      (glong) child_list->pdata [j],
-					      &init, x, y, w, h);
+					      &init, role);
+
+#if 0
 
 	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section, window);
 	string = gnome_config_get_string (key);
 	if (!string) return;
 
-#if 0
 	{
 		BonoboWindow *app = bonobo_mdi_get_active_window (mdi);
 		BonoboDockLayout *layout;
@@ -223,6 +211,8 @@ restore_window (BonoboMDI *mdi, const gchar *section, GPtrArray *child_list,
 		g_object_unref (G_OBJECT(layout));
 	}
 #endif
+	if (role != NULL)
+		g_free (role);
 }
 
 static void
@@ -422,7 +412,6 @@ bonobo_mdi_save_state (BonoboMDI *mdi, const gchar *section)
 {
 	gchar key [BUFSIZ], value [BUFSIZ];
 	GList *child, *window;
-	gint x, y, w, h;
 
 	gnome_config_clean_section (section);
 
@@ -497,6 +486,7 @@ bonobo_mdi_save_state (BonoboMDI *mdi, const gchar *section)
 	while (window) {
 		BonoboWindow *app;
 		GtkWidget *view;
+		const gchar *role;
 #ifdef SNM
 		gchar *string;
 		BonoboDockLayout *layout;
@@ -504,17 +494,15 @@ bonobo_mdi_save_state (BonoboMDI *mdi, const gchar *section)
 
 		app = BONOBO_WINDOW (window->data);
 
-		gdk_window_get_geometry (GTK_WIDGET (app)->window,
-					 &x, &y, &w, &h, NULL);
+		role = gtk_window_get_role (GTK_WINDOW (app));
 
-		gdk_window_get_origin (GTK_WIDGET (app)->window, &x, &y);
-
-		g_snprintf (key, sizeof(key), "%s/mdi_window_%lx",
-			    section, (long) app);
-		g_snprintf (value, sizeof(value), "%d/%d/%d/%d", x, y, w, h);
-
-		gnome_config_set_string (key, value);
-
+		if (role != NULL)
+		{
+			g_snprintf (key, sizeof(key), "%s/mdi_window_%lx",
+				    section, (long) app);
+			gnome_config_set_string (key, role);
+		}
+		
 		view = bonobo_mdi_get_view_from_window (mdi, app);
 
 		g_snprintf (key, sizeof(key), "%s/mdi_window_view_%lx",
