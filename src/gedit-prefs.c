@@ -55,13 +55,13 @@
 #define GEDIT_PREF_SELECTED_TEXT_COLOR	"/selected-text-color"
 #define GEDIT_PREF_SELECTION_COLOR	"/selection-color"
 
-#define GEDIT_PREFS_CREATE_BACKUP_COPY  "/create-backup-copy"
-#define GEDIT_PREFS_BACKUP_EXTENSION  	"/backup-copy-extension"
+#define GEDIT_PREF_CREATE_BACKUP_COPY   "/create-backup-copy"
+#define GEDIT_PREF_BACKUP_EXTENSION  	"/backup-copy-extension"
 
-#define GEDIT_PREFS_AUTO_SAVE		"/auto-save"
-#define GEDIT_PREFS_AUTO_SAVE_INTERVAL	"/auto-save-interval"
+#define GEDIT_PREF_AUTO_SAVE		"/auto-save"
+#define GEDIT_PREF_AUTO_SAVE_INTERVAL	"/auto-save-interval"
 
-#define GEDIT_PREFS_SAVE_ENCODING	"/save-encoding"
+#define GEDIT_PREF_SAVE_ENCODING	"/save-encoding"
 
 #define GEDIT_PREF_UNDO_LEVELS		"/undo-levels"
 
@@ -78,16 +78,17 @@
 #define GEDIT_PREF_MDI_MODE		"/mdi-mode"
 #define GEDIT_PREF_TABS_POSITION	"/mdi-tabs-position"
 
-#define GEDIT_PREF_WINDOW_WIDTH		"/window_width"
-#define GEDIT_PREF_WINDOW_HEIGHT	"/window_height"
+#define GEDIT_PREF_WINDOW_WIDTH		"/window-width"
+#define GEDIT_PREF_WINDOW_HEIGHT	"/window-height"
 
-#if 0
-#define GEDIT_PREF_PRINTWRAP		"/printwrap"
-#define GEDIT_PREF_PRINTHEADER		"/printheader"
-#define GEDIT_PREF_PRINTLINES		"/printlines"
-#define GEDIT_PREF_PRINTORIENTATION	"/print-orientation"
-#define GEDIT_PREF_PAPERSIZE		"/papersize"
-#endif
+#define GEDIT_PREF_PRINT_HEADER		"/print-header"
+#define GEDIT_PREF_PRINT_WRAP_LINES	"/print-wrap-lines"
+#define GEDIT_PREF_PRINT_LINE_NUMBERS	"/print-line-numbers"
+
+#define GEDIT_PREF_PRINT_FONT_BODY	"/print-font-body"
+#define GEDIT_PREF_PRINT_FONT_HEADER	"/print-font-header"
+#define GEDIT_PREF_PRINT_FONT_NUMBERS	"/print-font-numbers"
+
 
 GeditPreferences 	*gedit_settings 	= NULL;
 static GConfClient 	*gedit_gconf_client 	= NULL;
@@ -95,7 +96,7 @@ static GConfClient 	*gedit_gconf_client 	= NULL;
 #define DEFAULT_EDITOR_FONT 		(const gchar*) "Courier Medium 12"
 
 #define DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 9"
-#define DEFAULT_PRINT_FONT_H_AND_F	(const gchar*) "Helvetica 11"
+#define DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Helvetica 11"
 #define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 9"
 
 static gchar* 
@@ -190,28 +191,28 @@ gedit_prefs_save_settings (void)
 	g_free (str_color);
 
 	gconf_client_set_bool (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREFS_CREATE_BACKUP_COPY,
+			      	GEDIT_BASE_KEY GEDIT_PREF_CREATE_BACKUP_COPY,
 			      	gedit_settings->create_backup_copy,
 			      	NULL);
 
 	g_return_if_fail (gedit_settings->backup_extension != NULL);
 	gconf_client_set_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREFS_BACKUP_EXTENSION,
+			      	GEDIT_BASE_KEY GEDIT_PREF_BACKUP_EXTENSION,
 			      	gedit_settings->backup_extension,
 			      	NULL);
 
 	gconf_client_set_bool (gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_AUTO_SAVE,
+				GEDIT_BASE_KEY GEDIT_PREF_AUTO_SAVE,
 			      	gedit_settings->auto_save,
 			      	NULL);
 
 	gconf_client_set_int (gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_AUTO_SAVE_INTERVAL,
+				GEDIT_BASE_KEY GEDIT_PREF_AUTO_SAVE_INTERVAL,
 			      	gedit_settings->auto_save_interval,
 			      	NULL);
 
 	gconf_client_set_int (gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_SAVE_ENCODING,
+				GEDIT_BASE_KEY GEDIT_PREF_SAVE_ENCODING,
 			      	gedit_settings->save_encoding,
 			      	NULL);
 
@@ -287,6 +288,39 @@ gedit_prefs_save_settings (void)
 				      NULL);
 	}
 #endif	
+	gconf_client_set_bool (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_HEADER,
+			      	gedit_settings->print_header,
+			      	NULL);
+
+	gconf_client_set_bool (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_WRAP_LINES,
+			      	gedit_settings->print_wrap_lines,
+			      	NULL);
+
+	gconf_client_set_int (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_LINE_NUMBERS,
+			      	gedit_settings->print_line_numbers,
+			      	NULL);
+
+	g_return_if_fail (gedit_settings->print_font_body != NULL);
+	gconf_client_set_string (gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_BODY,
+			      	gedit_settings->print_font_body,
+			      	NULL);
+
+	g_return_if_fail (gedit_settings->print_font_header != NULL);
+	gconf_client_set_string (gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_HEADER,
+			      	gedit_settings->print_font_header,
+			      	NULL);
+
+	g_return_if_fail (gedit_settings->print_font_numbers != NULL);
+	gconf_client_set_string (gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_NUMBERS,
+			      	gedit_settings->print_font_numbers,
+			      	NULL);
+
 	gconf_client_suggest_sync (gedit_gconf_client, NULL);
 	
 #if 0 /* FIXME */
@@ -383,7 +417,7 @@ gedit_prefs_load_settings (void)
 	/* Editor/Save */
 	gedit_settings->create_backup_copy = gconf_client_get_bool (
 				gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREFS_CREATE_BACKUP_COPY,
+			      	GEDIT_BASE_KEY GEDIT_PREF_CREATE_BACKUP_COPY,
 			      	NULL);
 
 	if (gedit_settings->backup_extension != NULL)
@@ -391,7 +425,7 @@ gedit_prefs_load_settings (void)
 	
 	gedit_settings->backup_extension = gconf_client_get_string (
 				gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREFS_BACKUP_EXTENSION,
+			      	GEDIT_BASE_KEY GEDIT_PREF_BACKUP_EXTENSION,
 			      	NULL);
 	
 	if (gedit_settings->backup_extension == NULL)
@@ -399,17 +433,17 @@ gedit_prefs_load_settings (void)
 
 	gedit_settings->auto_save = gconf_client_get_bool (
 				gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_AUTO_SAVE,
+				GEDIT_BASE_KEY GEDIT_PREF_AUTO_SAVE,
 			      	NULL);
 
 	gedit_settings->auto_save_interval = gconf_client_get_int (
 				gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_AUTO_SAVE_INTERVAL,
+				GEDIT_BASE_KEY GEDIT_PREF_AUTO_SAVE_INTERVAL,
 			      	NULL);
 
 	gedit_settings->save_encoding = gconf_client_get_int (
 				gedit_gconf_client,
-				GEDIT_BASE_KEY GEDIT_PREFS_SAVE_ENCODING,
+				GEDIT_BASE_KEY GEDIT_PREF_SAVE_ENCODING,
 			      	NULL);
 
 	/* Editor/Undo */
@@ -467,26 +501,57 @@ gedit_prefs_load_settings (void)
 	gedit_settings->window_width = 600;
 	gedit_settings->window_height = 400;
 
-	gedit_settings->print_header = TRUE;
-	gedit_settings->print_footer = FALSE;
+	/* Print */
+	gedit_settings->print_header = gconf_client_get_bool (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_HEADER,
+				NULL);
 
+	gedit_settings->print_wrap_lines = gconf_client_get_bool (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_WRAP_LINES,
+				NULL);
+
+	gedit_settings->print_line_numbers = gconf_client_get_int (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_PRINT_LINE_NUMBERS,
+				NULL);
+
+	/* Print -> font body */
 	if (gedit_settings->print_font_body != NULL)
 		g_free (gedit_settings->print_font_body);
 	
-	gedit_settings->print_font_body = g_strdup (DEFAULT_PRINT_FONT_BODY);
+	gedit_settings->print_font_body = gconf_client_get_string (
+				gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_BODY,
+			      	NULL);
+
+	if (gedit_settings->print_font_body == NULL)
+		gedit_settings->print_font_body = g_strdup (DEFAULT_PRINT_FONT_BODY);
 	
-	if (gedit_settings->print_font_header_and_footer != NULL)
-		g_free (gedit_settings->print_font_header_and_footer);
+	/* Print -> font header */
+	if (gedit_settings->print_font_header != NULL)
+		g_free (gedit_settings->print_font_header);
 	
-	gedit_settings->print_font_header_and_footer =  g_strdup (DEFAULT_PRINT_FONT_H_AND_F);	
+	gedit_settings->print_font_header = gconf_client_get_string (
+				gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_HEADER,
+			      	NULL);
 	
+	if (gedit_settings->print_font_header == NULL)
+		gedit_settings->print_font_header = g_strdup (DEFAULT_PRINT_FONT_HEADER);	
+	
+	/* Print -> font numbers */
 	if (gedit_settings->print_font_numbers != NULL)
 		g_free (gedit_settings->print_font_numbers);
 	
-	gedit_settings->print_font_numbers = g_strdup (DEFAULT_PRINT_FONT_NUMBERS);
-
-	gedit_settings->wrap_line_while_printing = TRUE;
-	gedit_settings->line_numbers = 0;
+	gedit_settings->print_font_numbers = gconf_client_get_string (
+				gedit_gconf_client,
+			      	GEDIT_BASE_KEY GEDIT_PREF_PRINT_FONT_NUMBERS,
+			      	NULL);
+	
+	if (gedit_settings->print_font_numbers == NULL)
+		gedit_settings->print_font_numbers = g_strdup (DEFAULT_PRINT_FONT_NUMBERS);
 
 	gedit_debug (DEBUG_PREFS, "END");
 }

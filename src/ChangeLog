@@ -1,3 +1,18 @@
+2002-01-05  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.h (gedit_document_has_selected_text): return FALSE
+	if doc is not a GeditDocument
+
+	* gedit-file.c (gedit_file_open_uri_list): fixed a compiler warning
+
+	* gedit-prefs.c: load and save preferences for printing support
+	(now they have new names)
+
+	* gedit-print.c: use new preferences names
+
+	* dialogs/gedit-preferences-dialog.c: the Print/Page page now 
+	operates on the preferences
+
 2002-01-04  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-commands.c (gedit_cmd_file_print_preview): uncommented

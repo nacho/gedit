@@ -68,11 +68,10 @@ struct _GeditPrintJobInfo {
 	gdouble			 margin_right;
 	gdouble			 margin_bottom;
 	gdouble			 header_height;
-	gdouble			 footer_height;
 
 	/* Fonts */
 	GnomeFont		*font_body;
-	GnomeFont		*font_header_and_footer;
+	GnomeFont		*font_header;
 	GnomeFont		*font_numbers;	
 };
 
@@ -130,19 +129,18 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	pji->margin_right = CM (1);
 	pji->margin_bottom = CM (1);
 	pji->header_height = CM (0);
-	pji->footer_height = CM (0);	
 
 	pji->font_body = gnome_font_find_closest_from_full_name (
 					gedit_settings->print_font_body);
 
-	pji->font_header_and_footer = gnome_font_find_closest_from_full_name (
-					gedit_settings->print_font_header_and_footer);
+	pji->font_header = gnome_font_find_closest_from_full_name (
+					gedit_settings->print_font_header);
 
 	pji->font_numbers = gnome_font_find_closest_from_full_name (
 					gedit_settings->print_font_numbers);
 
 	if ((pji->font_body == NULL) || 
-	    (pji->font_header_and_footer == NULL) ||
+	    (pji->font_header == NULL) ||
 	    (pji->font_numbers == NULL))
 	{
 		g_set_error (error, GEDIT_PRINT_ERROR, 1,
@@ -155,15 +153,10 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	}
 
 	if (gedit_settings->print_header)
-		pji->header_height = 2.5 * gnome_font_get_size (pji->font_header_and_footer);
+		pji->header_height = 2.5 * gnome_font_get_size (pji->font_header);
 	else
 		pji->header_height = 0;
 
-	if (gedit_settings->print_footer)
-		pji->footer_height = 2.5 * gnome_font_get_size (pji->font_header_and_footer);
-	else
-		pji->footer_height = 0;
-	
 	return pji;
 }	
 
@@ -298,13 +291,13 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 	gedit_debug (DEBUG_PRINT, "");	
 
 	g_return_if_fail (pji != NULL);
-	g_return_if_fail (pji->font_header_and_footer != NULL);
+	g_return_if_fail (pji->font_header != NULL);
 	g_return_if_fail (pji->doc != NULL);
 
-	gnome_print_setfont (pji->print_ctx, pji->font_header_and_footer);
+	gnome_print_setfont (pji->print_ctx, pji->font_header);
 
 	y = pji->page_height - pji->margin_top -
-		gnome_font_get_ascender (pji->font_header_and_footer);
+		gnome_font_get_ascender (pji->font_header);
 
 	/* Print left text */
 	x = pji->margin_right;
@@ -315,7 +308,7 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 
 	/* Print right text */
 	r_text = g_strdup_printf (_("Page: %d"), page_number);
-	len = gnome_font_get_width_utf8 (pji->font_header_and_footer, r_text);
+	len = gnome_font_get_width_utf8 (pji->font_header, r_text);
 
 	x = pji->page_width - pji->margin_right - len;
 
@@ -324,7 +317,7 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 
 	/* Print line */
 	y = pji->page_height - pji->margin_top -
-		(1.5 * gnome_font_get_size (pji->font_header_and_footer));
+		(1.5 * gnome_font_get_size (pji->font_header));
 
 	gnome_print_setlinewidth (pji->print_ctx, 1.0);
 	gnome_print_moveto (pji->print_ctx,  pji->margin_right, y);
@@ -775,7 +768,7 @@ gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *
 				y = pji->page_height - pji->margin_top;
 		}
 
-		if (!gedit_settings->wrap_line_while_printing)
+		if (!gedit_settings->print_wrap_lines)
 			return y;
 
 	}

@@ -1296,7 +1296,7 @@ gedit_document_has_selected_text (GeditDocument *doc)
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,

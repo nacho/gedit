@@ -7,6 +7,8 @@
       <applyto>/apps/gedit2/toolbar-visible</applyto>
       <applyto>/apps/gedit2/toolbar-view-tooltips</applyto>
       <applyto>/apps/gedit2/statusbar-visible</applyto>
+      <applyto>/apps/gedit2/print-header</applyto>
+      <applyto>/apps/gedit2/print-wrap-lines</applyto>
       <owner>gedit2</owner>
       <default>TRUE</default>
       <type>bool</type>
@@ -197,6 +199,54 @@
       <locale name="C">
         <short>MDI tabs position</short>
         <long>MDI tabs position (0: Left, 1: Right, 2: Top, 3: Bottom)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/print-line-numbers</key>
+      <applyto>/apps/gedit2/print-line-numbers</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>Print line numbers every x lines</short>
+        <long>Print line numbers every x lines (x == 0: no numbers)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/print-font-body</key>
+      <applyto>/apps/gedit2/print-font-body</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>Courier 9</default>
+      <locale name="C">
+        <short>Font used to print the body of a document</short>
+        <long>Font used to print the body of a document</long>
+      </locale>
+    </schema>
+    
+    <schema>
+      <key>/schemas/apps/gedit2/print-font-header</key>
+      <applyto>/apps/gedit2/print-font-header</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>Helvetica 11</default>
+      <locale name="C">
+        <short>Font used to print page headers</short>
+        <long>Font used to print page headers</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/print-font-numbers</key>
+      <applyto>/apps/gedit2/print-font-numbers</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>Helvetica 9</default>
+      <locale name="C">
+        <short>Font used to print line numbers</short>
+        <long>Font used to print line numbers</long>
       </locale>
     </schema>
 

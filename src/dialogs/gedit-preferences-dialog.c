@@ -119,6 +119,12 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*utf8_radiobutton;
 	GtkWidget	*locale_if_possible_radiobutton;
 	GtkWidget	*locale_if_previous_radiobutton;
+
+	/* Print/page page */
+	GtkWidget	*add_header_checkbutton;
+	GtkWidget	*wrap_lines_checkbutton;
+	GtkWidget	*line_numbers_checkbutton;
+	GtkWidget	*line_numbers_spinbutton;
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -167,7 +173,9 @@ static gboolean gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog
 static gboolean gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui);
-
+static void gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg);
+static gboolean gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static GtkDialogClass* parent_class = NULL;
 
@@ -494,6 +502,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_logo_page (dlg, gui);
 	gedit_preferences_dialog_setup_wrap_mode_page (dlg, gui);
 	gedit_preferences_dialog_setup_save_page (dlg, gui);
+	gedit_preferences_dialog_setup_page_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -929,6 +938,61 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	return TRUE;
 }
 
+static void
+gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton)))
+	{
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, TRUE);
+		gtk_widget_grab_focus (dlg->priv->line_numbers_spinbutton);
+	}
+	else	
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, FALSE);
+}
+
+static gboolean 
+gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->add_header_checkbutton = glade_xml_get_widget (gui, 
+				"add_header_checkbutton");
+	dlg->priv->wrap_lines_checkbutton= glade_xml_get_widget (gui, 
+				"wrap_lines_checkbutton");
+	dlg->priv->line_numbers_checkbutton = glade_xml_get_widget (gui, 
+				"line_numbers_checkbutton");
+	dlg->priv->line_numbers_spinbutton = glade_xml_get_widget (gui, 
+				"line_numbers_spinbutton");
+
+	g_return_val_if_fail (dlg->priv->add_header_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->wrap_lines_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->line_numbers_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->line_numbers_spinbutton, FALSE);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->add_header_checkbutton),
+				gedit_settings->print_header);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_lines_checkbutton),
+				gedit_settings->print_wrap_lines);
+
+	g_signal_connect (G_OBJECT (dlg->priv->line_numbers_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_line_numbers_checkbutton_toggled), dlg);
+
+	if (gedit_settings->print_line_numbers > 0)
+	{
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton),
+					   (guint) gedit_settings->print_line_numbers);
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, TRUE);
+	}
+	else
+	{
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, FALSE);
+	}
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton),
+				gedit_settings->print_line_numbers > 0);
+}
+
 gboolean 
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
@@ -1064,6 +1128,21 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	else
 		gedit_settings->save_encoding = GEDIT_SAVE_CURRENT_LOCALE_IF_USED;
 	
+	/* Print page / page */
+	gedit_settings->print_header = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->add_header_checkbutton));	
+
+	gedit_settings->print_wrap_lines = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_lines_checkbutton));	
+
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton)))
+		gedit_settings->print_line_numbers = 0;
+	else
+	{
+		gedit_settings->print_line_numbers = MAX (1, gtk_spin_button_get_value_as_int (
+				GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton)));
+	}
+
 	return TRUE;
 	
 error:

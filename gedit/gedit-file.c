@@ -933,7 +933,8 @@ gedit_file_open_uri_list (GList* uri_list)
 	{
 		full_path = gedit_file_make_canonical_uri_from_shell_arg (uri_list->data);
 		if (full_path != NULL) {
-			ret |= gedit_file_open_real (full_path, active_child);
+			ret |= gedit_file_open_real (full_path, 
+					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
 			g_free (full_path);
 		}
 	}
