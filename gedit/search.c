@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <ctype.h>       /* this is for file_info () */
 #include "document.h"
 #include "view.h"
 #include "utils.h"
@@ -158,7 +159,12 @@ dump_search_state (void)
 void
 count_lines_cb (GtkWidget *widget, gpointer data)
 {
-	gint total_lines, line_number;
+	gint total_chars = 0 ;
+	gint total_words = 0 ;
+	gint total_lines = 1 ;
+	gint total_paragraphs = 0 ;
+	gint line_number = 0 ;
+	gint column_number = 0 ;
 	gchar *msg;
 	Document *doc;
 
@@ -176,13 +182,16 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 		return;
 
 	gedit_search_start();
-	line_number = pos_to_line (gedit_view_get_position (gedit_search_info.view),
-				   &total_lines);
+
+	file_info ( gedit_view_get_position (gedit_search_info.view),  &total_chars , &total_words ,
+		   &total_lines ,  &total_paragraphs , &line_number , &column_number ) ;
 
 	gedit_search_end();
 
-	msg = g_strdup_printf (_("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"),
-			       gedit_document_get_tab_name (doc), total_lines, line_number);
+	msg = g_strdup_printf (_("Filename: %s\n\nTotal Character: %i\nTotal Words: %i\nTotal Lines: %i
+				Total Paragraphs: %i\n\nCurrent Line: %i\nCurrent Column: %i"),
+			       gedit_document_get_tab_name (doc), total_chars , total_words ,
+			       total_lines , total_paragraphs , line_number , column_number );
 			
 	gnome_dialog_run_and_close ((GnomeDialog *)
 				    gnome_message_box_new (msg,
@@ -417,6 +426,96 @@ line_to_pos (Document *doc, gint line, gint *lines)
 	
 	*lines = current_line ;
 	return pos;
+}
+
+void
+file_info ( gint pos ,  gint *total_chars , gint *total_words , gint *total_lines ,
+	    gint *total_paragraphs , gint *line_number , gint *column_number )
+
+{
+	gint i=0 ;
+	gint newlines_number ; /* this variable is the number of '\n' that there are
+				  between two words */
+	gint lines = 1 ;
+	gint column = 0 ;
+	
+	gedit_debug (DEBUG_RECENT, "");
+
+	if (gedit_search_info.state !=  SEARCH_IN_PROGRESS_YES)
+		g_warning ("Search not started, watch out dude !\n");
+	
+	for (i = 0; i <= gedit_search_info.buffer_length; i++) 
+	{
+		if ( isalnum (gedit_search_info.buffer[i]) ||
+		     gedit_search_info.buffer[i] == '\'' )
+		{
+			while (( isalnum ( gedit_search_info.buffer[i] ) ||
+				 gedit_search_info.buffer[i] == '\'' ) &&
+				i <= gedit_search_info.buffer_length )
+			{				
+				*total_chars = *total_chars + 1 ;
+				i++;
+			}
+			*total_words = *total_words + 1;
+
+			if ( i > gedit_search_info.buffer_length )
+			{
+				*total_paragraphs = *total_paragraphs + 1 ;
+			}
+			
+		}
+
+		if (!isalnum (gedit_search_info.buffer[i]) &&
+		    i <= gedit_search_info.buffer_length  )
+		{
+			
+			newlines_number = 0 ;
+				
+			while (!isalnum ( gedit_search_info.buffer[i] ) &&
+			       i <= gedit_search_info.buffer_length )
+			{
+				if (gedit_search_info.buffer[i] == '\n')
+				{
+					newlines_number = newlines_number + 1 ;
+				}
+				i++;
+			}
+			
+			*total_lines = *total_lines +  newlines_number ;
+
+			if ((newlines_number > 1 && *total_words >0) ||
+			    (i > gedit_search_info.buffer_length && newlines_number <= 1))
+			{
+				*total_paragraphs = *total_paragraphs + 1 ;
+			}
+
+			
+
+		}
+
+	}
+
+	if ( *total_words == 0 ) *total_paragraphs = 0 ;
+	
+	for (i = 0; i <= pos ; i++) 
+	{
+		column++;
+		if (i == pos)
+		{
+			*line_number = lines;
+			*column_number = column ;
+		}
+		if ( gedit_search_info.buffer[i]=='\n')
+		{
+			lines++;
+			column = 0;
+		}
+		
+	}
+
+	
+	return ;
+		
 }
 
 
