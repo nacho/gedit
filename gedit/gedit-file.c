@@ -1361,7 +1361,6 @@ open_files ()
 	}
 	else
 	{	
-
 		if (utl->first)
 		{
 			first_document = active_document;
@@ -1387,7 +1386,6 @@ open_files ()
 		PROFILE (
 			g_message ("Start loading: %.3f", g_timer_elapsed (timer, NULL));
 		)
-
 	}
 	
 	g_free (uri_to_display);

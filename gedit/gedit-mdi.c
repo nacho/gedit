@@ -1361,7 +1361,7 @@ gedit_mdi_remove_all (GeditMDI *mdi)
 	return ret;
 }
 	
-#define MAX_URI_IN_TITLE_LENGTH 75
+#define MAX_TITLE_LENGTH 100
 
 static gchar *
 get_dirname (const gchar *uri)
@@ -1391,11 +1391,11 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 {
 	BonoboMDIChild *active_child = NULL;
 	GeditDocument *doc = NULL;
-	gchar *str;
+	gchar *short_name;
+	gchar *name;
 	gchar *dirname = NULL;
 	gchar *title = NULL;
-	gchar *uri;
-	gchar *name;
+	gint len;
 
 	GtkWidget *active_window;
 	
@@ -1407,26 +1407,51 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
-	
-	/* Set active window title */
-	uri = gedit_document_get_uri (doc);
-	g_return_if_fail (uri != NULL);
 
-	str = get_dirname (uri);
-	g_free (uri);
+	short_name = gedit_document_get_short_name (doc);
+	g_return_if_fail (short_name != NULL);
 
-	if (str != NULL)
+	len = g_utf8_strlen (short_name, -1);
+
+	/* if the name is awfully long, truncate it and be done with it,
+	 * otherwise also show the directory (ellipsized if needed)
+	 */
+	if (len > MAX_TITLE_LENGTH)
 	{
-		/* Truncate the URI so it doesn't get insanely wide. */
-		dirname = gedit_utils_str_middle_truncate (str, MAX_URI_IN_TITLE_LENGTH);
-		g_free (str);
+		name = gedit_utils_str_middle_truncate (short_name, MAX_TITLE_LENGTH);
+		g_free (short_name);
+
+		dirname = NULL;
 	}
 	else
 	{
-		dirname = NULL;
+		gchar *uri;
+		gchar *str;
+
+		name = short_name;
+
+		uri = gedit_document_get_uri (doc);
+		g_return_if_fail (uri != NULL);
+
+		str = get_dirname (uri);
+		g_free (uri);
+
+		if (str != NULL)
+		{
+			/* use the remaining space for the dir, but use a min of 20 chars
+			 * so that we do not end up with a dirname like "(a...b)".
+			 * This means that in the worst case when the filename is long 99
+			 * we have a title long 99 + 20, but I think it's a rare enough
+			 * case to be acceptable. It's justa darn title afterall :)
+			 */
+			dirname = gedit_utils_str_middle_truncate (str, MAX (20, MAX_TITLE_LENGTH - len));
+			g_free (str);
+		}
+		else
+		{
+			dirname = NULL;
+		}
 	}
-	
-	name = gedit_document_get_short_name (doc);
 
 	if (gedit_document_get_modified (doc))
 	{
@@ -1456,11 +1481,13 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 	active_window = GTK_WIDGET (gedit_get_active_window ());
 
 	gtk_window_set_title (GTK_WINDOW (active_window), title);
-	
+
 	g_free (dirname);
 	g_free (name);
 	g_free (title);
 }
+
+#undef MAX_TITLE_LENGTH
 
 static 
 void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
