@@ -279,7 +279,8 @@ gedit_undo_manager_new (GeditDocument* document)
 	return um;
 }
 
-void gedit_undo_manager_begin_not_undoable_action (GeditUndoManager *um)
+void 
+gedit_undo_manager_begin_not_undoable_action (GeditUndoManager *um)
 {
 	gedit_debug (DEBUG_UNDO, "");
 
@@ -289,18 +290,49 @@ void gedit_undo_manager_begin_not_undoable_action (GeditUndoManager *um)
 	++um->priv->running_not_undoable_actions;
 }
 
-void gedit_undo_manager_end_not_undoable_action (GeditUndoManager *um)
+static void 
+gedit_undo_manager_end_not_undoable_action_internal (GeditUndoManager *um)
 {
 	gedit_debug (DEBUG_UNDO, "");
 
 	g_return_if_fail (GEDIT_IS_UNDO_MANAGER (um));
 	g_return_if_fail (um->priv != NULL);
 
-	if (um->priv->running_not_undoable_actions <= 0)
-		um->priv->running_not_undoable_actions = 0;
-	else
-		--um->priv->running_not_undoable_actions;
+	g_return_if_fail (um->priv->running_not_undoable_actions > 0);
+	
+	--um->priv->running_not_undoable_actions;
 }
+
+void 
+gedit_undo_manager_end_not_undoable_action (GeditUndoManager *um)
+{
+	gedit_debug (DEBUG_UNDO, "");
+
+	g_return_if_fail (GEDIT_IS_UNDO_MANAGER (um));
+	g_return_if_fail (um->priv != NULL);
+
+	gedit_undo_manager_end_not_undoable_action_internal (um);
+
+	if (um->priv->running_not_undoable_actions == 0)
+	{	
+		gedit_undo_manager_free_action_list (um);
+	
+		um->priv->next_redo = -1;	
+
+		if (um->priv->can_undo)
+		{
+			um->priv->can_undo = FALSE;
+			g_signal_emit (G_OBJECT (um), undo_manager_signals [CAN_UNDO], 0, FALSE);
+		}
+
+		if (um->priv->can_redo)
+		{
+			um->priv->can_redo = FALSE;
+			g_signal_emit (G_OBJECT (um), undo_manager_signals [CAN_REDO], 0, FALSE);
+		}
+	}
+}
+
 
 gboolean
 gedit_undo_manager_can_undo (const GeditUndoManager *um)
@@ -368,7 +400,7 @@ gedit_undo_manager_undo (GeditUndoManager *um)
 
 	} while (undo_action->order_in_group > 1);
 
-	gedit_undo_manager_end_not_undoable_action (um);
+	gedit_undo_manager_end_not_undoable_action_internal (um);
 	
 	if (!um->priv->can_redo)
 	{
@@ -433,7 +465,7 @@ gedit_undo_manager_redo (GeditUndoManager *um)
 		
 	} while ((undo_action != NULL) && (undo_action->order_in_group > 1));
 
-	gedit_undo_manager_end_not_undoable_action (um);
+	gedit_undo_manager_end_not_undoable_action_internal (um);
 
 	if (um->priv->next_redo < 0)
 	{
@@ -470,7 +502,7 @@ gedit_undo_manager_free_action_list (GeditUndoManager *um)
 		GeditUndoAction *undo_action = 
 			(GeditUndoAction *)(g_list_nth_data (um->priv->actions, n));
 
-		gedit_debug (DEBUG_UNDO, "Free action (tye %s) %d/%d", 
+		gedit_debug (DEBUG_UNDO, "Free action (type %s) %d/%d", 
 				(undo_action->action_type == GEDIT_UNDO_ACTION_INSERT) ? "insert":
 				"delete", n, len);
 

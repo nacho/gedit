@@ -37,6 +37,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 
 #include <eel/eel-vfs-extensions.h>
+#include <eel/eel-string.h>
 
 #include "gedit2.h"
 #include "gedit-file.h"
@@ -495,25 +496,6 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
-#if 0
-		gchar *temp;
-
-		gedit_debug (DEBUG_FILE, "OK");
-
-		/* uri is not valid utf8 */	
-		temp = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
-
-		if (temp != NULL)
-		{
-			GnomeRecentModel *recent;
-
-			recent = gedit_recent_get_model ();
-			gnome_recent_model_add (recent, temp);
-
-			g_free (temp);
-		}
-
-#endif
 		GnomeRecentModel *recent;
 
 		recent = gedit_recent_get_model ();
@@ -605,6 +587,43 @@ gedit_file_save_all (void)
 	}
 }
 
+/* Displays a confirmation dialog for whether to revert a file. */
+static gboolean
+gedit_file_revert_dialog (const GeditDocument *doc)
+{
+	GtkWidget *msgbox;
+	gint ret;
+	gchar *name;
+
+	name = gedit_document_get_short_name (doc);
+
+	msgbox = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 _("Do you want to revert to saved the document \"%s\" ?\n\n"
+					   "You will not be able to undo this operation."), 
+					 name);
+	g_free (name);
+
+	/* Add Cancel button */
+	gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+
+	/* Add Revert button */
+	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
+			_("_Revert"), GTK_STOCK_REVERT_TO_SAVED, GTK_RESPONSE_YES);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+
+	gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+
+	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
+		
+	gtk_widget_destroy (msgbox);
+
+	return (ret == GTK_RESPONSE_YES);
+}
+
 gboolean
 gedit_file_revert (GeditMDIChild *child)
 {
@@ -619,10 +638,13 @@ gedit_file_revert (GeditMDIChild *child)
 	
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
-
+	
+	if (!gedit_file_revert_dialog (doc))
+		return FALSE;
+	
 	uri = gedit_document_get_uri (doc);
 	g_return_val_if_fail (uri != NULL, FALSE);
-
+	
 	gedit_utils_flash_va (_("Reverting file '%s' ..."), uri);	
 	
 	ret = gedit_document_revert (doc, &error);
