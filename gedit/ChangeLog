@@ -1,3 +1,16 @@
+2004-02-19  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-file-selector-util.c: use gtk_dialog_run instead of the
+	equivalent hand made solution we used till now
+	(create_gtk_selector): mark filters name for translation (fixes 
+	bug #133604)
+
+	* gedit-preferences-dialog.c: now the Syntax Highlight page really
+	works (fixes bug #133269 and #133481)
+
+	* gedit-preferences.glade2: use GtkColorButton instead of
+	GnomeColorButton in the Syntax Highlight page
+
 2004-02-13  Paolo Maggi  <paolo.maggi@polit.it>
 
 	* recent-files/*: Update to latest libegg recent-files code

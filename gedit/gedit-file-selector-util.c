@@ -68,8 +68,6 @@
 #include "gedit-utils.h"
 #include "gedit-encodings-option-menu.h"
 
-static GQuark user_data_id = 0;
-
 #define GET_MODE(w) (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (w), "GnomeFileSelectorMode")))
 #define SET_MODE(w, m) (g_object_set_data (G_OBJECT (w), "GnomeFileSelectorMode", GINT_TO_POINTER (m)))
 
@@ -82,15 +80,6 @@ typedef enum {
 	FILESEL_OPEN_MULTI,
 	FILESEL_SAVE
 } FileselMode;
-
-static gint
-delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
-{
-	gtk_widget_hide (d);
-	gtk_main_quit ();
-
-	return TRUE;
-}
 
 /* Displays a confirmation dialog for whether to replace a file.  The message
  * should contain a %s to include the file name.
@@ -259,28 +248,19 @@ file_exists (gchar *name)
 	return ret;
 }
 
-static void
-response_cb (GtkWidget *widget, gint response, gpointer data)
+static gpointer
+analyze_response (GtkFileChooser *chooser, gint response)
 {
-	GtkFileChooser *chooser;
 	gchar *file_name;
 	gchar *uri;
-	
 	gboolean enable_vfs;
 	
-	chooser = GTK_FILE_CHOOSER (widget);
-
 	if (response == GTK_RESPONSE_CANCEL ||
 	    response == GTK_RESPONSE_DELETE_EVENT) 
 	{
 		gtk_widget_hide (GTK_WIDGET (chooser));
-		gtk_main_quit ();
-
-		g_object_set_qdata (G_OBJECT (chooser),
-	 		    	    user_data_id,
-				    NULL);
-
-		return;
+		
+		return NULL;
 	}
 
 	enable_vfs = GET_ENABLE_VFS (chooser);
@@ -297,7 +277,7 @@ response_cb (GtkWidget *widget, gint response, gpointer data)
 	if ((file_name == NULL) || (strlen (file_name) == 0)) 
 	{
 		g_free (file_name);
-		return;
+		return NULL;
 	}
 
 	if (enable_vfs)
@@ -329,11 +309,9 @@ response_cb (GtkWidget *widget, gint response, gpointer data)
 		else
 			files = gtk_file_chooser_get_filenames (chooser);
 
-		g_object_set_qdata (G_OBJECT (chooser),
-				    user_data_id, 
-				    files);
-		
-		gtk_main_quit ();
+		gtk_widget_hide (GTK_WIDGET (chooser));
+
+		return files;
 	}
 	else	
 	{	
@@ -347,7 +325,8 @@ response_cb (GtkWidget *widget, gint response, gpointer data)
 					{
 						g_free (file_name);
 						g_free (uri);
-						return;
+
+						return NULL;
 					}
 				}
 				else if (!replace_existing_file (GTK_WINDOW (chooser), file_name)) 
@@ -355,21 +334,19 @@ response_cb (GtkWidget *widget, gint response, gpointer data)
 					g_free (file_name);
 					g_free (uri);
 
-					return;
+					return NULL;
 				}
 			}
 		}
 
 		gtk_widget_hide (GTK_WIDGET (chooser));
 
-		g_object_set_qdata (G_OBJECT (chooser),
-			    	    user_data_id,
-				    file_name);
-
 		g_free (uri);
 
-		gtk_main_quit ();
+		return file_name;
 	} 
+
+	return NULL;
 }
 
 static gboolean
@@ -414,12 +391,12 @@ create_gtk_selector (GtkWindow *parent,
 
 	/* Filters */
 	filter = gtk_file_filter_new ();
-	gtk_file_filter_set_name (filter, "All Files");
+	gtk_file_filter_set_name (filter, _("All Files"));
 	gtk_file_filter_add_pattern (filter, "*");
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filesel), filter);
 
 	filter = gtk_file_filter_new ();
-	gtk_file_filter_set_name (filter, "All Text Files");
+	gtk_file_filter_set_name (filter, _("All Text Files"));
 	gtk_file_filter_add_custom (filter, 
 				    GTK_FILE_FILTER_MIME_TYPE,
 				    all_text_files_filter, 
@@ -471,11 +448,7 @@ create_gtk_selector (GtkWindow *parent,
 					encoding);
 
 	}
-
-	g_signal_connect (G_OBJECT (filesel),
-			  "response", G_CALLBACK (response_cb),
-			  filesel);
-
+	
 	/* FIXME: enable the use of URIs - Paolo */
 	if (default_path)
 		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filesel), default_path);
@@ -501,9 +474,7 @@ run_file_selector (GtkWindow  *parent,
 {
 	GtkWindow *dialog = NULL;
 	gpointer   retval;
-
-	if (!user_data_id)
-		user_data_id = g_quark_from_static_string ("GeditUserData");
+	gint res;
 
 	dialog = create_gtk_selector (parent,
 				      mode,
@@ -518,17 +489,17 @@ run_file_selector (GtkWindow  *parent,
 	
 	gtk_window_set_modal (dialog, TRUE);
 
-	g_signal_connect (G_OBJECT (dialog), "delete_event",
-			  G_CALLBACK (delete_file_selector),
-			  dialog);
-
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
-	gtk_main ();
+	do 
+	{
+		res = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	retval = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
+		retval = analyze_response (GTK_FILE_CHOOSER (dialog), res);
+	}
+	while (GTK_WIDGET_VISIBLE (dialog));
 
-	if (encoding != NULL)
+	if ((retval != NULL) && (encoding != NULL))
 	{
 		GeditEncodingsOptionMenu *menu;
 

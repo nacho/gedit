@@ -952,24 +952,40 @@ styles_cb (GtkWidget              *treeview,
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->foreground_checkbutton),
 				      style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND);
 
-	/* FIXME: Set a sane default. Paolo */
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->foreground_colorpicker),
-				    style->foreground.red,
-				    style->foreground.green,
-				    style->foreground.blue,
-				    0);
+	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND) == GTK_SOURCE_TAG_STYLE_USE_FOREGROUND)
+	{
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+					    &style->foreground);
+	}
+	else
+	{
+		GdkColor text_color;
+		
+		text_color = gedit_prefs_manager_get_text_color ();
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+					    &text_color);
+	}
+	
 	gtk_widget_set_sensitive (dlg->foreground_colorpicker, 
 				  style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->background_checkbutton),
 				      style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND);
 	
-	/* FIXME: Set a sane default. Paolo */
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->background_colorpicker_2),
-				    style->background.red,
-				    style->background.green,
-				    style->background.blue,
-				    0);
+	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND) == GTK_SOURCE_TAG_STYLE_USE_BACKGROUND)
+	{
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+					    &style->background);
+	}
+	else
+	{
+		GdkColor background_color;
+		
+		background_color = gedit_prefs_manager_get_background_color ();
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+					    &background_color);
+	}
+
 	gtk_widget_set_sensitive (dlg->background_colorpicker_2, 
 				  style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND);
 
@@ -1011,16 +1027,58 @@ style_button_toggled (GtkToggleButton        *button,
 	new_style->strikethrough = gtk_toggle_button_get_active (
 					GTK_TOGGLE_BUTTON (dlg->strikethrough_togglebutton));
 
+	if (gtk_toggle_button_get_active (
+		GTK_TOGGLE_BUTTON (dlg->foreground_checkbutton)))
+	{
+		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
+		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+					    &new_style->foreground);
+		gtk_widget_set_sensitive (dlg->foreground_colorpicker,
+					  TRUE);
+	}
+	else
+	{
+		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
+		gtk_widget_set_sensitive (dlg->foreground_colorpicker,
+					  FALSE);
+	}
+
+	if (gtk_toggle_button_get_active (
+		GTK_TOGGLE_BUTTON (dlg->background_checkbutton)))
+	{
+		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
+		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+					    &new_style->background);
+		gtk_widget_set_sensitive (dlg->background_colorpicker_2,
+					  TRUE);
+	}
+	else
+	{
+		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
+		gtk_widget_set_sensitive (dlg->background_colorpicker_2,
+					  FALSE);
+	}
+
 	if (memcmp (style, new_style, sizeof (GtkSourceTagStyle)) != 0)
 	{
 		GtkSourceTagStyle *def_style;
 
-		gedit_language_set_tag_style (lang, id, new_style);
-
 		def_style = gtk_source_language_get_tag_default_style (lang, id);
 
+		if (!(new_style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND))
+		{
+			new_style->background = def_style->background;
+		}
+
+		if (!(new_style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND))
+		{
+			new_style->foreground = def_style->foreground;
+		}
+		
 		gtk_widget_set_sensitive (dlg->reset_button, 
 					  memcmp (new_style, def_style, sizeof (GtkSourceTagStyle)) != 0);
+
+		gedit_language_set_tag_style (lang, id, new_style);
 
 		gtk_source_tag_style_free (def_style);
 
@@ -1030,6 +1088,13 @@ style_button_toggled (GtkToggleButton        *button,
 	gtk_source_tag_style_free (new_style);
 
 	g_free (id);
+}
+
+static void
+style_color_set (GtkColorButton         *button,
+		 GeditPreferencesDialog *dlg)
+{
+	style_button_toggled (NULL, dlg);
 }
 
 static void
@@ -1124,6 +1189,14 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 			  G_CALLBACK (style_button_toggled), dlg);
 	g_signal_connect (G_OBJECT (dlg->strikethrough_togglebutton), "toggled",
 			  G_CALLBACK (style_button_toggled), dlg);
+	g_signal_connect (G_OBJECT (dlg->foreground_checkbutton), "toggled",
+			  G_CALLBACK (style_button_toggled), dlg);
+	g_signal_connect (G_OBJECT (dlg->background_checkbutton), "toggled",
+			  G_CALLBACK (style_button_toggled), dlg);
+	g_signal_connect (G_OBJECT (dlg->foreground_colorpicker), "color_set",
+			  G_CALLBACK (style_color_set), dlg);
+	g_signal_connect (G_OBJECT (dlg->background_colorpicker_2), "color_set",
+			  G_CALLBACK (style_color_set), dlg);
 	g_signal_connect (G_OBJECT (dlg->reset_button), "clicked",
 			  G_CALLBACK (reset_button_clicked), dlg);
 }

@@ -11,6 +11,11 @@
   <property name="modal">False</property>
   <property name="resizable">False</property>
   <property name="destroy_with_parent">True</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
@@ -32,6 +37,7 @@
 	      <property name="label">gtk-help</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-11</property>
 	    </widget>
 	  </child>
@@ -44,6 +50,7 @@
 	      <property name="label">gtk-close</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-7</property>
 	    </widget>
 	  </child>
@@ -65,8 +72,6 @@
 	  <property name="show_border">True</property>
 	  <property name="tab_pos">GTK_POS_TOP</property>
 	  <property name="scrollable">False</property>
-	  <property name="tab_hborder">2</property>
-	  <property name="tab_vborder">2</property>
 	  <property name="enable_popup">False</property>
 
 	  <child>
@@ -196,6 +201,7 @@
 			      <property name="label" translatable="yes">Insert _spaces instead of tabs</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -289,6 +295,7 @@
 			  <property name="label" translatable="yes">_Enable auto indentation</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
+			  <property name="focus_on_click">True</property>
 			  <property name="active">False</property>
 			  <property name="inconsistent">False</property>
 			  <property name="draw_indicator">True</property>
@@ -381,6 +388,7 @@
 			      <property name="label" translatable="yes">Create a _backup copy of files before saving</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -404,6 +412,7 @@
 				  <property name="label" translatable="yes">_Autosave files every</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -557,6 +566,7 @@
 				  <property name="label" translatable="yes">_Limit to</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -623,6 +633,7 @@
 			      <property name="label" translatable="yes">_Unlimited undo</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -755,6 +766,7 @@
 			      <property name="label" translatable="yes">Enable text _wrapping</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -773,6 +785,7 @@
 			      <property name="label" translatable="yes">Do not _split words over two lines</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -872,6 +885,7 @@
 			      <property name="label" translatable="yes">_Display line numbers</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -971,6 +985,7 @@
 			      <property name="label" translatable="yes">D_isplay right margin</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -1156,6 +1171,7 @@
 			      <property name="label" translatable="yes">_Use default theme font</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -1204,6 +1220,7 @@
 				  <property name="show_size">True</property>
 				  <property name="use_font_in_label">False</property>
 				  <property name="label_font_size">14</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>
 				  <property name="padding">0</property>
@@ -1307,6 +1324,7 @@
 			      <property name="label" translatable="yes">U_se default theme colors</property>
 			      <property name="use_underline">True</property>
 			      <property name="relief">GTK_RELIEF_NORMAL</property>
+			      <property name="focus_on_click">True</property>
 			      <property name="active">False</property>
 			      <property name="inconsistent">False</property>
 			      <property name="draw_indicator">True</property>
@@ -1409,6 +1427,7 @@
 				  <property name="dither">True</property>
 				  <property name="use_alpha">False</property>
 				  <property name="title" translatable="yes">Pick the background color</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">1</property>
@@ -1425,6 +1444,7 @@
 				  <property name="dither">True</property>
 				  <property name="use_alpha">False</property>
 				  <property name="title" translatable="yes">Pick the normal text color</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">1</property>
@@ -1441,6 +1461,7 @@
 				  <property name="dither">True</property>
 				  <property name="use_alpha">False</property>
 				  <property name="title" translatable="yes">Pick the selected text color</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">1</property>
@@ -1457,6 +1478,7 @@
 				  <property name="dither">True</property>
 				  <property name="use_alpha">False</property>
 				  <property name="title" translatable="yes">Pick the selection color</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>
 				  <property name="left_attach">1</property>
@@ -1559,6 +1581,7 @@
 		  <property name="label" translatable="yes">_Enable syntax highlighting</property>
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
+		  <property name="focus_on_click">True</property>
 		  <property name="active">False</property>
 		  <property name="inconsistent">False</property>
 		  <property name="draw_indicator">True</property>
@@ -1734,6 +1757,7 @@
 					      <property name="visible">True</property>
 					      <property name="tooltip" translatable="yes">Bold</property>
 					      <property name="relief">GTK_RELIEF_NONE</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 					      <accelerator key="B" modifiers="GDK_CONTROL_MASK" signal="activate"/>
@@ -1762,6 +1786,7 @@
 					      <property name="visible">True</property>
 					      <property name="tooltip" translatable="yes">Italic</property>
 					      <property name="relief">GTK_RELIEF_NONE</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 
@@ -1790,6 +1815,7 @@
 					      <property name="tooltip" translatable="yes">Underline</property>
 					      <property name="can_focus">True</property>
 					      <property name="relief">GTK_RELIEF_NONE</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 
@@ -1818,6 +1844,7 @@
 					      <property name="tooltip" translatable="yes">Strikethrough</property>
 					      <property name="can_focus">True</property>
 					      <property name="relief">GTK_RELIEF_NONE</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 
@@ -1848,10 +1875,13 @@
 				      </child>
 
 				      <child>
-					<widget class="GtkHBox" id="hbox157">
+					<widget class="GtkTable" id="table1">
 					  <property name="visible">True</property>
+					  <property name="n_rows">2</property>
+					  <property name="n_columns">2</property>
 					  <property name="homogeneous">False</property>
-					  <property name="spacing">6</property>
+					  <property name="row_spacing">12</property>
+					  <property name="column_spacing">12</property>
 
 					  <child>
 					    <widget class="GtkCheckButton" id="foreground_checkbutton">
@@ -1860,44 +1890,20 @@
 					      <property name="label" translatable="yes">_Foreground:</property>
 					      <property name="use_underline">True</property>
 					      <property name="relief">GTK_RELIEF_NORMAL</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 					      <property name="draw_indicator">True</property>
 					    </widget>
 					    <packing>
-					      <property name="padding">0</property>
-					      <property name="expand">False</property>
-					      <property name="fill">False</property>
+					      <property name="left_attach">0</property>
+					      <property name="right_attach">1</property>
+					      <property name="top_attach">0</property>
+					      <property name="bottom_attach">1</property>
+					      <property name="x_options">fill</property>
+					      <property name="y_options"></property>
 					    </packing>
 					  </child>
-
-					  <child>
-					    <widget class="GnomeColorPicker" id="foreground_colorpicker">
-					      <property name="visible">True</property>
-					      <property name="can_focus">True</property>
-					      <property name="dither">True</property>
-					      <property name="use_alpha">False</property>
-					      <property name="title" translatable="yes">Pick a color</property>
-					    </widget>
-					    <packing>
-					      <property name="padding">0</property>
-					      <property name="expand">False</property>
-					      <property name="fill">False</property>
-					    </packing>
-					  </child>
-					</widget>
-					<packing>
-					  <property name="padding">0</property>
-					  <property name="expand">False</property>
-					  <property name="fill">True</property>
-					</packing>
-				      </child>
-
-				      <child>
-					<widget class="GtkHBox" id="hbox158">
-					  <property name="visible">True</property>
-					  <property name="homogeneous">False</property>
-					  <property name="spacing">6</property>
 
 					  <child>
 					    <widget class="GtkCheckButton" id="background_checkbutton">
@@ -1906,29 +1912,54 @@
 					      <property name="label" translatable="yes">_Background:</property>
 					      <property name="use_underline">True</property>
 					      <property name="relief">GTK_RELIEF_NORMAL</property>
+					      <property name="focus_on_click">True</property>
 					      <property name="active">False</property>
 					      <property name="inconsistent">False</property>
 					      <property name="draw_indicator">True</property>
 					    </widget>
 					    <packing>
-					      <property name="padding">0</property>
-					      <property name="expand">False</property>
-					      <property name="fill">False</property>
+					      <property name="left_attach">0</property>
+					      <property name="right_attach">1</property>
+					      <property name="top_attach">1</property>
+					      <property name="bottom_attach">2</property>
+					      <property name="x_options">fill</property>
+					      <property name="y_options"></property>
 					    </packing>
 					  </child>
 
 					  <child>
-					    <widget class="GnomeColorPicker" id="background_colorpicker_2">
+					    <widget class="GtkColorButton" id="foreground_colorpicker">
 					      <property name="visible">True</property>
 					      <property name="can_focus">True</property>
-					      <property name="dither">True</property>
 					      <property name="use_alpha">False</property>
 					      <property name="title" translatable="yes">Pick a color</property>
+					      <property name="focus_on_click">True</property>
 					    </widget>
 					    <packing>
-					      <property name="padding">0</property>
-					      <property name="expand">False</property>
-					      <property name="fill">False</property>
+					      <property name="left_attach">1</property>
+					      <property name="right_attach">2</property>
+					      <property name="top_attach">0</property>
+					      <property name="bottom_attach">1</property>
+					      <property name="x_options"></property>
+					      <property name="y_options"></property>
+					    </packing>
+					  </child>
+
+					  <child>
+					    <widget class="GtkColorButton" id="background_colorpicker_2">
+					      <property name="visible">True</property>
+					      <property name="can_focus">True</property>
+					      <property name="use_alpha">False</property>
+					      <property name="title" translatable="yes">Pick a color</property>
+					      <property name="focus_on_click">True</property>
+					    </widget>
+					    <packing>
+					      <property name="left_attach">1</property>
+					      <property name="right_attach">2</property>
+					      <property name="top_attach">1</property>
+					      <property name="bottom_attach">2</property>
+					      <property name="x_options"></property>
+					      <property name="y_options"></property>
 					    </packing>
 					  </child>
 					</widget>
@@ -1965,6 +1996,7 @@
 					  <property name="visible">True</property>
 					  <property name="can_focus">True</property>
 					  <property name="relief">GTK_RELIEF_NORMAL</property>
+					  <property name="focus_on_click">True</property>
 
 					  <child>
 					    <widget class="GtkAlignment" id="alignment1">
@@ -1973,6 +2005,10 @@
 					      <property name="yalign">0.5</property>
 					      <property name="xscale">0</property>
 					      <property name="yscale">0</property>
+					      <property name="top_padding">0</property>
+					      <property name="bottom_padding">0</property>
+					      <property name="left_padding">0</property>
+					      <property name="right_padding">0</property>
 
 					      <child>
 						<widget class="GtkHBox" id="hbox159">
