@@ -51,11 +51,14 @@
 #include <gedit/gedit-file.h>
 #include <gedit/gedit-mdi.h>
 #include <gedit/gedit-output-window.h>
+#include <gedit/gedit-metadata-manager.h>
 
 #define MENU_ITEM_LABEL		N_("_Run Command...")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"
 #define MENU_ITEM_NAME		"PluginShellOutput"	
 #define MENU_ITEM_TIP		N_("Run a command")
+
+#define KEY "shell-output-directory"
 
 typedef struct _ShellOutputDialog ShellOutputDialog;
 
@@ -100,6 +103,7 @@ enum
 };
 
 static RunStatus running;
+static gchar *current_dir = NULL;
 
 static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 static ShellOutputDialog *get_dialog ();
@@ -108,18 +112,11 @@ static void	run_command_cb (BonoboUIComponent *uic, gpointer user_data,
 			       const gchar* verbname);
 static gboolean	run_command_real (ShellOutputDialog *dialog);
 
-#if 0
-static void	stop_command (GIOChannel *ioc);
-#endif
-
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
-
-static gchar *current_directory = NULL;
-
 
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
@@ -220,6 +217,89 @@ dialog_response_handler (GtkDialog *dlg, gint res_id, ShellOutputDialog *dialog)
 	}
 }
 
+static gchar *
+get_current_dir (void)
+{
+	if (current_dir == NULL)
+		current_dir = g_get_current_dir ();
+
+	return g_strdup (current_dir);
+}
+
+static void
+save_working_directory (const gchar *dir, GeditDocument *doc)
+{
+	gchar *uri = NULL;
+
+	g_return_if_fail (dir != NULL);
+
+	if (doc != NULL)
+		uri = gedit_document_get_raw_uri (doc);
+	
+	if (g_file_test (dir, G_FILE_TEST_IS_DIR))
+	{
+		if (doc != NULL)
+			g_object_set_data_full (G_OBJECT (doc), 
+						KEY, 
+						g_strdup (dir),
+						(GDestroyNotify)g_free);
+			
+		g_free (current_dir);
+		current_dir = g_strdup (dir);
+
+		if (uri != NULL)
+			gedit_metadata_manager_set (uri, KEY, dir);
+	}
+
+	g_free (uri);
+}
+
+static gchar *
+get_working_directory ()
+{
+	GeditDocument *doc;
+	gchar *uri;
+	gchar *local_path;
+	gchar *dirname;
+
+	doc = gedit_get_active_document ();
+	if (doc == NULL)
+		return get_current_dir ();
+
+	dirname = g_object_get_data (G_OBJECT (doc), KEY);
+	if (dirname != NULL)
+		return g_strdup (dirname);
+	
+	uri = gedit_document_get_raw_uri (doc);
+	if (uri == NULL)
+		return get_current_dir ();
+
+	dirname = gedit_metadata_manager_get (uri, KEY);
+	if ((dirname != NULL) && g_file_test (dirname, G_FILE_TEST_IS_DIR))
+		return dirname;
+	else
+		g_free (dirname);
+
+	if (!gedit_utils_uri_has_file_scheme (uri))
+	{
+		g_free (uri);
+		return get_current_dir ();
+	}
+
+	local_path = gnome_vfs_get_local_path_from_uri (uri);
+	g_free (uri);
+	if (local_path == NULL)
+	{
+		return get_current_dir ();
+	}
+
+	/* Extract dir_name part. */
+	dirname = g_path_get_dirname (local_path);
+	g_free (local_path);
+
+	return dirname;
+}
+
 static ShellOutputDialog*
 get_dialog (void)
 {
@@ -228,6 +308,7 @@ get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
+	gchar *working_directory;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -239,6 +320,10 @@ get_dialog (void)
 				window);
 
 		dialog->toplevel_window = window;
+
+		working_directory = get_working_directory ();
+		gtk_entry_set_text (GTK_ENTRY (dialog->directory), working_directory);
+		g_free (working_directory);
 		
 		gtk_window_present (GTK_WINDOW (dialog->dialog));
 
@@ -312,7 +397,9 @@ get_dialog (void)
 		return NULL;
 	}
 
-	gtk_entry_set_text (GTK_ENTRY (dialog->directory), current_directory);
+	working_directory = get_working_directory ();
+	gtk_entry_set_text (GTK_ENTRY (dialog->directory), working_directory);
+	g_free (working_directory);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
@@ -643,7 +730,7 @@ static gboolean
 run_command_real (ShellOutputDialog *dialog)
 {
 	const gchar *command_string   = NULL ;
-	const gchar *directory_string = NULL ;
+	gchar *directory_string = NULL ;
 	gchar *unescaped_command_string = NULL;
 
 	gboolean retval;
@@ -651,10 +738,13 @@ run_command_real (ShellOutputDialog *dialog)
 	gint standard_output;
 	gint standard_error;
 	gboolean capture_output;
+	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
 	g_return_val_if_fail (dialog != NULL, FALSE);
+
+	doc = gedit_get_active_document ();
 
 	command_string = gtk_entry_get_text (GTK_ENTRY (dialog->command));
 
@@ -666,10 +756,13 @@ run_command_real (ShellOutputDialog *dialog)
 		return FALSE;
 	}
 
-	directory_string = gtk_entry_get_text (GTK_ENTRY (dialog->directory));
+	directory_string = g_strdup (gtk_entry_get_text (GTK_ENTRY (dialog->directory)));
 	
 	if (directory_string == NULL || (strlen (directory_string) == 0)) 
-		directory_string = current_directory;
+	{
+		g_free (directory_string);
+		directory_string = g_get_current_dir ();
+	}
 
 	unescaped_command_string = unescape_command_string (command_string, 
 							    gedit_get_active_document ());
@@ -803,17 +896,14 @@ run_command_real (ShellOutputDialog *dialog)
 		gnome_entry_prepend_history (GNOME_ENTRY (dialog->command_list),
 				TRUE, command_string);
 		
-		if (directory_string != current_directory)
-		{
-			gnome_entry_prepend_history (GNOME_ENTRY (
-					gnome_file_entry_gnome_entry (
-						GNOME_FILE_ENTRY (dialog->directory_fileentry))),
-				TRUE, directory_string);
+		gnome_entry_prepend_history (GNOME_ENTRY (gnome_file_entry_gnome_entry (
+								GNOME_FILE_ENTRY (dialog->directory_fileentry))),
+					     TRUE, 
+					     directory_string);
 
-			g_free (current_directory);
-			current_directory = g_strdup (directory_string);
-		}
+		save_working_directory (directory_string, doc);
 
+		g_free (directory_string);
 		g_free (unescaped_command_string);
 	
 		if (!capture_output)
@@ -840,8 +930,8 @@ destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	g_free (current_directory);
-	current_directory = NULL;
+	g_free (current_dir);
+	current_dir = NULL;
 
 	return PLUGIN_OK;
 }
@@ -903,7 +993,5 @@ init (GeditPlugin *pd)
 
 	pd->private_data = NULL;
 
-	current_directory = g_get_current_dir ();
-		
 	return PLUGIN_OK;
 }

@@ -1,3 +1,13 @@
+2005-02-03  Paolo Maggi  <paolo@gnome.org>
+
+	* shell_output/shell_output.c (get_current_dir)
+	(save_working_directory) (get_working_directory) (get_dialog)
+	(run_command_real) (destroy) (init): fixed bug #141488 (default working 
+	directory of "Run Command"). If the document is not untitled, 
+	the directory of the document is used as default working directory 
+	otherwise the last used working directory is used. Remember the last 
+	used directory on a per-document basis (also in different sessions).
+
 2005-01-25  Paolo Maggi  <paolo@gnome.org>
 
 	* savecopy/savecopy.c (get_buffer_contents) (write_to_file)
