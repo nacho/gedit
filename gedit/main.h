@@ -5,6 +5,9 @@
 extern "C" {
 #endif /* __cplusplus */
 
+/* For size_t */
+#include <stdio.h>
+
 #define STRING_LENGTH_MAX	256
 
 /*#ifdef WITHOUT_GNOME*/
@@ -99,7 +102,7 @@ struct _gE_window {
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;
 	GtkWidget *line_label, *col_label;
-	GtkAcceleratorTable *accel;
+	GtkAccelGroup *accel;
 	GList *documents;
 	gE_search *search;
 	gint auto_indent;

@@ -5,7 +5,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-   void get_main_menu (GtkWidget **menubar, GtkAcceleratorTable **table);
+   void get_main_menu (GtkWidget **menubar, GtkAccelGroup **group);
    void menus_create(GtkMenuEntry *entries, int nmenu_entries);
    
 #ifdef __cplusplus
