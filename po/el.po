@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.6.1\n"
 "POT-Creation-Date: 2000-04-02 15:42-0400\n"
-"PO-Revision-Date: 2000-01-24 20:27-0500\n"
+"PO-Revision-Date: 2000-04-04 18:39-0500\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,19 @@ msgstr ""
 
 #: plugins/sample/sample.c:51
 msgid "Hello World"
-msgstr ""
+msgstr "Καλημέρα Κόσμε"
 
 #: plugins/sample/sample.c:52
 msgid "Sample 'hello world' plugin."
-msgstr ""
+msgstr "Δείγμα αρθρώματος 'καλημέρα κόσμε'"
 
 #: plugins/time/time.c:96
 msgid "Insert Time"
-msgstr ""
+msgstr "Εισαγωγή Ώρας"
 
 #: plugins/time/time.c:97
 msgid "Inserts the current date and time"
-msgstr ""
+msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
 
 #: plugins/email/email.c:101
 msgid "The gEdit Email Plugin"
@@ -36,11 +36,11 @@ msgstr "Το άρθρωμα Email του gEdit"
 
 #: plugins/email/email.c:202
 msgid "Email"
-msgstr ""
+msgstr "Αποστολή Email"
 
 #: plugins/email/email.c:203
 msgid "Email the current document"
-msgstr ""
+msgstr "Αποστολή τρέχοντος εγγράφου μέσω ηλ. ταχυδρομείου"
 
 #: src/commands.c:97
 msgid "Could not save file!"
@@ -151,19 +151,19 @@ msgstr "Το '%s' έχει μετραβληθεί. Επιθυμείτε να το αποθηκεύσετε;"
 #: src/gE_plugin.c:57
 #, c-format
 msgid "Error, unable to open module file, %s"
-msgstr ""
+msgstr "Σφάλμα, άνοιγμα αρθρώματος αδύνατον, %s"
 
 #: src/gE_plugin.c:67
 msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
+msgstr "Σφάλμα, το άρθρωμα δεν περιέχει τη συνάρτηση init_plugin."
 
 #: src/gE_plugin.c:74
 msgid "Error, init_plugin returned an error"
-msgstr ""
+msgstr "Σφάλμα, η init_plugin επέστρεψε σφάλμα"
 
 #: src/gE_plugin.c:98
 msgid "Error, plugin is still in use"
-msgstr ""
+msgstr "Σφάλμα, το άρθρωμα είναι ακόμα σε χρήση"
 
 #: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
 #: src/gE_plugin.c:182 src/menus.c:245
@@ -180,11 +180,11 @@ msgstr "Τετράδιο"
 
 #: src/gE_prefs_box.c:105
 msgid "Toplevel"
-msgstr ""
+msgstr "Παράθυρο"
 
 #: src/gE_prefs_box.c:106
 msgid "Modal"
-msgstr ""
+msgstr "Αποκλειστικό"
 
 #: src/gE_prefs_box.c:337
 msgid "Appearance"
@@ -196,7 +196,7 @@ msgstr "Εμφάνιση Γραμμής Κατάστασης"
 
 #: src/gE_prefs_box.c:359
 msgid "Show Splitscreen"
-msgstr ""
+msgstr "Εμφάνιση Διαχωρισμού Οθόνης"
 
 #: src/gE_prefs_box.c:369
 msgid "Editor Behavior"
@@ -212,11 +212,11 @@ msgstr "Αυτόματη αλλαγή γραμμής"
 
 #: src/gE_prefs_box.c:408
 msgid "Text Background"
-msgstr ""
+msgstr "Φόντος Κειμένου"
 
 #: src/gE_prefs_box.c:429
 msgid "Text Foreground"
-msgstr ""
+msgstr "Χρώμα Κειμένου"
 
 #. Document Closing stuffs
 #: src/gE_prefs_box.c:498
@@ -292,15 +292,18 @@ msgstr "Παράθυρο"
 msgid "Document"
 msgstr "Έγγραφο"
 
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Εκτύπωση"
+
 #: src/gE_print.c:175
-#, c-format
 msgid "gEdit (%s): Print Preview"
-msgstr ""
+msgstr "gEdit (%s): Προεπισκόπιση Εκτύπωσης"
 
 #: src/gE_print.c:277
 #, c-format
 msgid "Page: %i/%i"
-msgstr ""
+msgstr "Σελίδα: %i/%i"
 
 #: src/menus.c:71
 msgid "_Autoindent"
@@ -310,29 +313,34 @@ msgstr "_Αυτόματη στοίχιση"
 msgid "Status_bar"
 msgstr "Γράμμη κατά_στασης"
 
+# NOTE:  Since I was wondering and had to check the sources:
+#   "wordwrap" refers to automatic insertion of newlines
+#   "linewrap" refers to whether displayed lines will be wrapped
+#              or scrolled, if too long to fit in the widget
+
 #: src/menus.c:73
 msgid "_Wordwrap"
-msgstr ""
+msgstr "Αλλαγή γ_ραμμής"
 
 #: src/menus.c:74
 msgid "_Linewrap"
-msgstr ""
+msgstr "Περιτύλι_ξη γραμών"
 
 #: src/menus.c:75
 msgid "_Readonly"
-msgstr ""
+msgstr "Μόνο _ανάγνωση"
 
 #: src/menus.c:76
 msgid "_Splitscreen"
-msgstr ""
+msgstr "Χωρισμός Οθό_νης"
 
 #: src/menus.c:77
 msgid "_Show tabs"
-msgstr ""
+msgstr "Εμ_φάνιση σελιδοδεικτών"
 
 #: src/menus.c:78
 msgid "Toolbar _relief"
-msgstr ""
+msgstr "Ανάγλυφη ε_ργαλειοθήκη"
 
 #: src/menus.c:79
 msgid "_Show tooltips"
@@ -369,7 +377,7 @@ msgstr "Αποθήκευση όλων των ανοιχτών εγγράφων"
 
 #: src/menus.c:101
 msgid "Revert"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: src/menus.c:111
 msgid "Close All"
@@ -385,7 +393,7 @@ msgstr "Ε_πάνω"
 
 #: src/menus.c:125
 msgid "Put the document tabs at the top"
-msgstr "Τοποθέτηση σελιδοδεικτών επάνω"
+msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων επάνω"
 
 #: src/menus.c:128
 msgid "_Bottom"
@@ -393,7 +401,7 @@ msgstr "_Κάτω"
 
 #: src/menus.c:129
 msgid "Put the document tabs at the bottom"
-msgstr "Τοποθέτηση σελιδοδεικτών κάτω"
+msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων κάτω"
 
 #: src/menus.c:132
 msgid "_Left"
@@ -401,7 +409,7 @@ msgstr "Α_ριστερά"
 
 #: src/menus.c:133
 msgid "Put the document tabs on the left"
-msgstr ""
+msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων αριστερά"
 
 #: src/menus.c:136
 msgid "_Right"
@@ -409,7 +417,7 @@ msgstr "_Δεξιά"
 
 #: src/menus.c:137
 msgid "Put the document tabs on the right"
-msgstr ""
+msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων δεξιά"
 
 #: src/menus.c:176
 msgid "Toggle Readonly"
@@ -417,7 +425,7 @@ msgstr "Ανάγνωση μόνο / Εγγραφή"
 
 #: src/menus.c:187
 msgid "_Document Tabs"
-msgstr ""
+msgstr "Σελι_δοδείκτες Εγγράφων"
 
 #: src/menus.c:188
 msgid "Change the placement of the document tabs"
@@ -459,7 +467,7 @@ msgstr ""
 
 #: src/search.c:762
 msgid "Go to line"
-msgstr ""
+msgstr "Επίσκεψη γραμμής"
 
 #: src/search.c:772
 msgid "Line number"
