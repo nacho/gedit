@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-30 15:21-0500\n"
-"PO-Revision-Date: 2004-03-30 15:22-0500\n"
+"POT-Creation-Date: 2004-04-08 10:55-0400\n"
+"PO-Revision-Date: 2004-04-08 10:56-0400\n"
 "Last-Translator: Adam Weinberger <adamw@FreeBSD.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr "gedit automation factory"
 msgid "Edit text files"
 msgstr "Edit text files"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "Text Editor"
 
@@ -192,6 +192,14 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maximum number of actions that gedit will be able to undo or redo."
 
 #: data/gedit.schemas.in.h:28
+msgid "Monospace 12"
+msgstr "Monospace 12"
+
+#: data/gedit.schemas.in.h:29
+msgid "Monospace Regular 9"
+msgstr "Monospace Regular 9"
+
+#: data/gedit.schemas.in.h:30
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -199,120 +207,128 @@ msgstr ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Header"
 msgstr "Print Header"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Line Numbers"
 msgstr "Print Line Numbers"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Syntax Highlighting"
 msgstr "Print Syntax Highlighting"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Printing Line Wrapping Mode"
 msgstr "Printing Line Wrapping Mode"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Right Margin Position"
 msgstr "Right Margin Position"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
+msgid "Sans Regular 11"
+msgstr "Sans Regular 11"
+
+#: data/gedit.schemas.in.h:37
+msgid "Sans Regular 8"
+msgstr "Sans Regular 8"
+
+#: data/gedit.schemas.in.h:38
 msgid "Selected Text Color"
 msgstr "Selected Text Colour"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:39
 msgid "Selection Color"
 msgstr "Selection Colour"
 
-#: data/gedit.schemas.in.h:36
-msgid ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-msgstr ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-
-#: data/gedit.schemas.in.h:37
-msgid ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-msgstr ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-
-#: data/gedit.schemas.in.h:38
-msgid ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-msgstr ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-
-#: data/gedit.schemas.in.h:39
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
-msgstr ""
-"Specifies the font to use for a document's body when printing documents."
-
 #: data/gedit.schemas.in.h:40
 msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
 msgstr ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
 
 #: data/gedit.schemas.in.h:41
 msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 msgstr ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:42
 msgid ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 msgstr ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:43
 msgid ""
-"Specifies the number of spaces that should be displayed instead of Tab "
-"characters."
+"Specifies the font to use for a document's body when printing documents."
 msgstr ""
-"Specifies the number of spaces that should be displayed instead of Tab "
-"characters."
+"Specifies the font to use for a document's body when printing documents."
 
 #: data/gedit.schemas.in.h:44
-msgid "Specifies the position of the right margin."
-msgstr "Specifies the position of the right margin."
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
 
 #: data/gedit.schemas.in.h:45
-msgid "Status Bar is Visible"
-msgstr "Status Bar is Visible"
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
 
 #: data/gedit.schemas.in.h:46
 msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+
+#: data/gedit.schemas.in.h:48
+msgid "Specifies the position of the right margin."
+msgstr "Specifies the position of the right margin."
+
+#: data/gedit.schemas.in.h:49
+msgid "Status Bar is Visible"
+msgstr "Status Bar is Visible"
+
+#: data/gedit.schemas.in.h:50
+msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
 "only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
@@ -327,35 +343,35 @@ msgstr ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Tab Size"
 msgstr "Tab Size"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Text Color"
 msgstr "Text Colour"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Toolbar Buttons Style"
 msgstr "Toolbar Buttons Style"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Toolbar is Visible"
 msgstr "Toolbar is Visible"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Undo Actions Limit"
 msgstr "Undo Actions Limit"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid "Use Default Colors"
 msgstr "Use Default Colours"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid "Use Default Font"
 msgstr "Use Default Font"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -365,7 +381,7 @@ msgstr ""
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -373,47 +389,47 @@ msgstr ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Whether gedit should display line numbers in the editing area."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:61
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Whether gedit should display the right margin in the editing area."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should enable auto indentation."
 msgstr "Whether gedit should enable auto indentation."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Whether gedit should enable syntax highlighting."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Whether gedit should include a document header when printing documents."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Whether gedit should insert spaces instead of tabs."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Whether gedit should print syntax highlighting when printing documents."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Whether the status bar at the bottom of editing windows should be visible."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:68
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Whether the toolbar should be visible in editing windows."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -425,7 +441,7 @@ msgstr ""
 "specified in the \"Background Colour\", \"Text Colour\", \"Selected Text "
 "Colour\", and \"Selection Colour\" options."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -434,6 +450,14 @@ msgstr ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
+
+#: data/gedit.schemas.in.h:71
+msgid "[ISO-8859-15]"
+msgstr "[ISO-8859-15]"
+
+#: data/gedit.schemas.in.h:72
+msgid "[UTF-8,CURRENT,ISO-8859-15]"
+msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
 #: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
 #, c-format
@@ -453,7 +477,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "If you don't save your documents, all your changes will be lost."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:654
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
 msgid "S_elect the documents you want to save:"
 msgstr "S_elect the documents you want to save:"
 
@@ -547,14 +571,14 @@ msgstr ""
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Save the changes to document \"%s\" before closing?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:640
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
 #, c-format
-msgid ""
+msgid "There is %d document with unsaved changes. Save changes before closing?"
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr ""
+msgstr "There is %d document with unsaved changes. Save changes before closing?"
 "There are %d documents with unsaved changes. Save changes before closing?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:671
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "If you don't save, all your changes will be definitively lost."
 
@@ -1177,47 +1201,47 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit is a small and lightweight text editor for the GNOME Desktop"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 msgid "Untitled"
 msgstr "Untitled"
 
-#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
+#: gedit/gedit-document.c:641 gedit/gedit-document.c:688
 msgid "Invalid file name"
 msgstr "Invalid file name"
 
-#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
+#: gedit/gedit-document.c:839 gedit/gedit-document.c:1314
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Invalid UTF-8 data"
 
-#: gedit/gedit-document.c:1643
+#: gedit/gedit-document.c:1641
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Could not read symbolic link information for %s"
 
-#: gedit/gedit-document.c:1689
+#: gedit/gedit-document.c:1687
 msgid "The file has too many symbolic links."
 msgstr "The file has too many symbolic links."
 
-#: gedit/gedit-document.c:1745
+#: gedit/gedit-document.c:1743
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit cannot handle %s: locations in write mode."
 
-#: gedit/gedit-document.c:1752
+#: gedit/gedit-document.c:1750
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit cannot handle this kind of location in write mode."
 
-#: gedit/gedit-document.c:1765
+#: gedit/gedit-document.c:1763
 msgid "Invalid filename."
 msgstr "Invalid filename."
 
-#: gedit/gedit-document.c:1877
+#: gedit/gedit-document.c:1875
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1225,7 +1249,7 @@ msgstr ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 
-#: gedit/gedit-document.c:1882
+#: gedit/gedit-document.c:1880
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1235,7 +1259,7 @@ msgstr ""
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 
-#: gedit/gedit-document.c:1926
+#: gedit/gedit-document.c:1924
 msgid "Could not create a backup file."
 msgstr "Could not create a backup file."
 
@@ -1437,75 +1461,69 @@ msgstr "Revert unsaved changes to document \"%s\"?"
 #: gedit/gedit-file.c:609
 #, c-format
 msgid ""
-"Changes made to the document in the last %ld second will be definitively "
-"lost."
-"Changes made to the document in the last %ld seconds will be definitively "
+"Changes made to the document in the last %ld second will be permanently lost."
+"Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr ""
-"Changes made to the document in the last %ld second will be definitively "
-"lost."
-"Changes made to the document in the last %ld seconds will be definitively "
+"Changes made to the document in the last %ld second will be permanently lost."
+"Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 
 #: gedit/gedit-file.c:618
 msgid ""
-"Changes made to the document in the last minute will be definitively lost."
+"Changes made to the document in the last minute will be permanently lost."
 msgstr ""
-"Changes made to the document in the last minute will be definitively lost."
+"Changes made to the document in the last minute will be permanently lost."
 
 #: gedit/gedit-file.c:624
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
-"definitively lost."
+"permanently lost."
 "Changes made to the document in the last minute and %ld seconds will be "
-"definitively lost."
+"permanently lost."
 msgstr ""
 "Changes made to the document in the last minute and %ld second will be "
-"definitively lost."
+"permanently lost."
 "Changes made to the document in the last minute and %ld seconds will be "
-"definitively lost."
+"permanently lost."
 
 #: gedit/gedit-file.c:634
 #, c-format
 msgid ""
-"Changes made to the document in the last %ld minute will be definitively "
-"lost."
-"Changes made to the document in the last %ld minutes will be definitively "
+"Changes made to the document in the last %ld minute will be permanently lost."
+"Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 msgstr ""
-"Changes made to the document in the last %ld minute will be definitively "
-"lost."
-"Changes made to the document in the last %ld minutes will be definitively "
+"Changes made to the document in the last %ld minute will be permanently lost."
+"Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 
 #: gedit/gedit-file.c:649
-msgid ""
-"Changes made to the document in the last hour will be definitively lost."
-msgstr ""
-"Changes made to the document in the last hour will be definitively lost."
+msgid "Changes made to the document in the last hour will be permanently lost."
+msgstr "Changes made to the document in the last hour will be permanently lost."
 
 #: gedit/gedit-file.c:655
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
-"definitively lost."
+"permanently lost."
 "Changes made to the document in the last hour and %d minutes will be "
-"definitively lost."
+"permanently lost."
 msgstr ""
 "Changes made to the document in the last hour and %d minute will be "
-"definitively lost."
+"permanently lost."
 "Changes made to the document in the last hour and %d minutes will be "
-"definitively lost."
+"permanently lost."
 
 #: gedit/gedit-file.c:670
 #, c-format
 msgid ""
-"Changes made to the document in the last %d hour will be definitively lost."
-"Changes made to the document in the last %d hours will be definitively lost."
+"Changes made to the document in the last %d hour will be permanently lost."
+"Changes made to the document in the last %d hours will be permanently lost."
 msgstr ""
-"Changes made to the document in the last %d hour will be definitively lost."
-"Changes made to the document in the last %d hours will be definitively lost."
+"Changes made to the document in the last %d hour will be permanently lost."
+"Changes made to the document in the last %d hours will be permanently lost."
 
 #: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
@@ -2534,76 +2552,60 @@ msgid "  INS"
 msgstr "  INS"
 
 #: gedit/gedit2.c:82
-msgid "Show utility debugging messages."
-msgstr "Show utility debugging messages."
-
-#: gedit/gedit2.c:85
-msgid "Show metadata debugging messages."
-msgstr "Show metadata debugging messages."
-
-#: gedit/gedit2.c:88
-msgid "Show mdi debugging messages."
-msgstr "Show mdi debugging messages."
-
-#: gedit/gedit2.c:91
-msgid "Show commands debugging messages."
-msgstr "Show commands debugging messages."
-
-#: gedit/gedit2.c:94
-msgid "Show document debugging messages."
-msgstr "Show document debugging messages."
-
-#: gedit/gedit2.c:97
-msgid "Show file debugging messages."
-msgstr "Show file debugging messages."
-
-#: gedit/gedit2.c:100
-msgid "Show plugin debugging messages."
-msgstr "Show plugin debugging messages."
-
-#: gedit/gedit2.c:103
-msgid "Show prefs debugging messages."
-msgstr "Show prefs debugging messages."
-
-#: gedit/gedit2.c:106
-msgid "Show printing debugging messages."
-msgstr "Show printing debugging messages."
-
-#: gedit/gedit2.c:109
-msgid "Show search debugging messages."
-msgstr "Show search debugging messages."
-
-#: gedit/gedit2.c:112
-msgid "Show undo debugging messages."
-msgstr "Show undo debugging messages."
-
-#: gedit/gedit2.c:115
-msgid "Show view debugging messages."
-msgstr "Show view debugging messages."
-
-#: gedit/gedit2.c:118
-msgid "Show recent debugging messages."
-msgstr "Show recent debugging messages."
-
-#: gedit/gedit2.c:121
-msgid "Show session management debugging messages."
-msgstr "Show session management debugging messages."
-
-#: gedit/gedit2.c:124
-msgid "Turn on all debugging messages."
-msgstr "Turn on all debugging messages."
-
-#: gedit/gedit2.c:127
 msgid "Quit an existing instance of gedit"
 msgstr "Quit an existing instance of gedit"
 
-#: gedit/gedit2.c:130
+#: gedit/gedit2.c:85
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Create a new toplevel window in an existing instance of gedit"
 
-#: gedit/gedit2.c:133
+#: gedit/gedit2.c:88
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Create a new document in an existing instance of gedit"
+
+#: plugins/changecase/changecase.c:43
+msgid "C_hange Case"
+msgstr "C_hange Case"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr "All _Upper Case"
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr "All _Lower Case"
+
+#: plugins/changecase/changecase.c:51
+msgid "_Invert Case"
+msgstr "_Invert Case"
+
+#: plugins/changecase/changecase.c:52
+msgid "_Title Case"
+msgstr "_Title Case"
+
+#: plugins/changecase/changecase.c:54
+msgid "Change selected text to upper case"
+msgstr "Change selected text to upper case"
+
+#: plugins/changecase/changecase.c:55
+msgid "Change selected text to lower case"
+msgstr "Change selected text to lower case"
+
+#: plugins/changecase/changecase.c:56
+msgid "Invert the case of selected text"
+msgstr "Invert the case of selected text"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr "Capitalize the first letter of each selected word"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+msgid "Change Case"
+msgstr "Change Case"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+msgid "Changes the case of selected text."
+msgstr "Changes the case of selected text."
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2614,7 +2616,7 @@ msgid "Get statistic info on current document"
 msgstr "Get statistic info on current document"
 
 #: plugins/docinfo/docinfo.c:140
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Document Statistics"
 
@@ -2622,15 +2624,13 @@ msgstr "Document Statistics"
 msgid "_Update"
 msgstr "_Update"
 
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid ""
-"The Document Statistics plugin analyzes the current document and determines "
-"the number of words, lines, characters and non-space characters in it and "
-"displays the result."
+"Analyzes the current document and reports the number of words, lines, "
+"characters and non-space characters in it."
 msgstr ""
-"The Document Statistics plugin analyzes the current document and determines "
-"the number of words, lines, characters and non-space characters in it and "
-"displays the result."
+"Analyzes the current document and reports the number of words, lines, "
+"characters and non-space characters in it."
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2685,8 +2685,8 @@ msgid "Indent lines"
 msgstr "Indent lines"
 
 #: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
-msgstr "Indent or un-indent selected lines."
+msgid "Indents or un-indents selected lines."
+msgstr "Indents or un-indents selected lines."
 
 #: plugins/sample/sample.c:43
 msgid "Insert User Na_me"
@@ -2763,11 +2763,11 @@ msgstr "An error occured while running the selected command."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
 msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
+"Executes an external program and, if required, displays its output in the "
+"output window."
 msgstr ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
+"Executes an external program and, if required, displays its output in the "
+"output window."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 msgid "Shell command"
@@ -3118,16 +3118,16 @@ msgid "Show the tag list window"
 msgstr "Show the tag list window"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "Tag list"
+msgid ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
+msgstr ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
-msgstr ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
+msgid "Tag list"
+msgstr "Tag list"
 
 #: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
