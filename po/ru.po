@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-26 14:07+0000\n"
-"PO-Revision-Date: 2000-06-26 14:09+00:00\n"
+"POT-Creation-Date: 2000-06-27 12:04+0000\n"
+"PO-Revision-Date: 2000-06-27 12:05+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,18 +82,20 @@ msgstr "Документ не содержит текста"
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
-msgstr "gedit не удалось создать временный файл.\n\n"
+msgstr ""
+"gedit не удалось создать временный файл.\n"
+"\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
 #: src/document.c:261 src/print.c:581
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: plugins/diff/diff.c:422
+#: plugins/diff/diff.c:421
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:423
+#: plugins/diff/diff.c:422
 msgid "diff plugin"
 msgstr "Дополнение diff"
 
@@ -683,7 +685,7 @@ msgstr "Удалить окно"
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:196 src/plugin.c:128 src/plugin.c:226
+#: src/menus.c:196 src/plugin.c:82 src/plugin.c:354
 msgid "_Plugins"
 msgstr "Дополнения"
 
@@ -783,24 +785,15 @@ msgstr "Выход"
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
-#: src/plugin.c:70
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "Ошибка, не удалось открыть файл модуля, %s"
+#: src/plugin.c:93
+msgid "Manager ..."
+msgstr "Диспетчер..."
 
-#: src/plugin.c:81
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "Ошибка, дополнение не содержит функции init_plugin."
+#: src/plugin.c:94
+msgid "Add/Remove installed plugins"
+msgstr "Добавить/Удалить установленные дополнения"
 
-#: src/plugin.c:90
-msgid "Error, init_plugin returned an error"
-msgstr "Ошибка, init_plugin вернула ошибку"
-
-#: src/plugin.c:118
-msgid "Error, plugin is still in use"
-msgstr "Ошибка, дополнение еще используется"
-
-#: src/plugin.c:358
+#: src/plugin.c:170
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -809,7 +802,7 @@ msgstr ""
 "Программа %s не найдена.\n"
 "\n"
 
-#: src/plugin.c:373
+#: src/plugin.c:185
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -818,7 +811,7 @@ msgstr ""
 "'%s' видимо не существует.\n"
 "\n"
 
-#: src/plugin.c:375
+#: src/plugin.c:187
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -829,7 +822,7 @@ msgstr ""
 "но '%s' не может быть найдено внутри.\n"
 "\n"
 
-#: src/plugin.c:378
+#: src/plugin.c:190
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -838,7 +831,7 @@ msgstr ""
 "'%s' видимо не является программой.\n"
 "\n"
 
-#: src/plugin.c:382
+#: src/plugin.c:194
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -846,6 +839,23 @@ msgid ""
 msgstr ""
 "%s Вы не сможете использовать дополнение %s без %s. \n"
 "Хотите указать новое расположение для %s?"
+
+#: src/plugin.c:295
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr "Ошибка, не удалось открыть файл модуля, %s"
+
+#: src/plugin.c:305
+msgid "Error, plugin does not contain init_plugin function."
+msgstr "Ошибка, дополнение не содержит функции init_plugin."
+
+#: src/plugin.c:314
+msgid "Error, init_plugin returned an error"
+msgstr "Ошибка, init_plugin вернула ошибку"
+
+#: src/plugin.c:344
+msgid "Error, plugin is still in use"
+msgstr "Ошибка, дополнение еще используется"
 
 #: src/print.c:176
 msgid "Pages"
