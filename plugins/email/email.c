@@ -1,5 +1,6 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* 
- * Sample plugin demo
+ * Email plugin.
  * Alex Roberts <bse@error.fsnet.co.uk>
  *
  * Prints "Hello World" into the current document
@@ -82,7 +83,7 @@ email (void)
 	Document *doc = gedit_document_current ();
 	gchar *username, *fullname, *hostname;
 	gchar *from;
-	gchar *filename_label;
+	gchar *filename_label, *filename_label_temp;
 
 	if (!doc)
 	     return;
@@ -128,13 +129,14 @@ email (void)
 		gtk_entry_set_text (GTK_ENTRY (subject_entry), _("Untitled"));
 
 	/* Set the filename label */
-	filename_label = g_strdup (GTK_LABEL (glade_xml_get_widget (gui, "filename_label"))->label);
+	filename_label_temp = g_strdup (GTK_LABEL (glade_xml_get_widget (gui, "filename_label"))->label);
 	if (doc->filename)
-		filename_label = g_strconcat (filename_label, doc->filename, NULL);
+		filename_label = g_strconcat (filename_label_temp, doc->filename, NULL);
 	else
-		filename_label = g_strconcat (filename_label, _("Untitled"), NULL);
+		filename_label = g_strconcat (filename_label_temp, _("Untitled"), NULL);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "filename_label")),
 			    filename_label);
+	g_free (filename_label_temp);
 	g_free (filename_label);
 	
 	/* Connect the signals */

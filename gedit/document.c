@@ -169,28 +169,27 @@ gedit_get_document_tab_name (void)
 			counter++;
 	}
 	
-        if (counter == 0)
-		return _(UNTITLED);
-        else
-		return _(g_strdup_printf ("%s %d", UNTITLED, counter));
+	return _(g_strdup_printf ("%s %d", UNTITLED, counter + 1));
 	   
-	return NULL;
 }
 
 Document *
 gedit_document_new (void)
 {
 	Document *doc;
+	gchar *doc_name;
 
 	gedit_debug ("f:gedit_document_new\n", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
 	if (doc)
 	{
+		doc_name = gedit_get_document_tab_name();
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
-					  gedit_get_document_tab_name());
+					  doc_name);
 
 		doc->buf = g_string_sized_new (256);
+		g_free (doc_name);
 		return doc;
 	}
 
