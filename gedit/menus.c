@@ -25,7 +25,28 @@ static GHashTable *entry_ht = NULL;
 void gE_menus_init (gE_window *window, gE_data *data)
 {
 
-
+#if 0
+  GnomeInfo info [] = {
+    { "file/new", file_new_cmd_callback, data },
+    { "app/new window", file_newwindow_cmd_callback, data },
+    { "file/open", file_open_cmd_callback, data },
+    { "file/save", file_save_cmd_callback, data },
+    { "file/save as", file_save_as_cmd_callback, data },
+    { "file/print", file_print_cmd_callback, data },
+    { "file/close", file_close_cmd_callback, data },
+    { "app/close window", file_close_window_cmd_callback, data },
+    { "app/quit", file_quit_cmd_callback, data },
+    { "app/about", gE_aboutbox, data },
+    { "doc/cut", edit_cut_cmd_callback, data },
+    { "doc/copy", edit_copy_cmd_callback, data },
+    { "doc/paste", edit_paste_cmd_callback, data },
+    { "doc/select all", edit_selall_cmd_callback, data },
+    { "doc/search", search_search_cmd_callback, data },
+    { "doc/search and replace", search_replace_cmd_callback, data },
+    { "doc/search again", search_again_cmd_callback, data }
+  };
+#endif
+    
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, data, NULL,
@@ -141,7 +162,6 @@ GnomeUIInfo gedit_help_menu []= {
 
 #if PLUGIN_TEST
 GnomeUIInfo gedit_plugins_menu []= {
-  { GNOME_APP_UI_SEPARATOR },
   { GNOME_APP_UI_ENDOFINFO}
 };
 #endif
