@@ -14,7 +14,7 @@ PKG_NAME="gEdit"
     exit 1
 }
 
-perl $srcdir/editor-plugins/plugins.pl
-perl $srcdir/makeconfig.pl
+#perl $srcdir/editor-plugins/plugins.pl
+#perl $srcdir/makeconfig.pl
 
 . $srcdir/macros/autogen.sh

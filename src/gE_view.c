@@ -131,7 +131,7 @@ void gE_view_list_insert (gE_view *view, gE_data *data)
 	  gtk_text_set_point (GTK_TEXT(view->text), position);
 
 	  gtk_text_insert (GTK_TEXT (view->text), NULL,
-					 &view->text->style->black,
+					 NULL,
 					 NULL, buffer, length);
 	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 		
@@ -143,7 +143,7 @@ void gE_view_list_insert (gE_view *view, gE_data *data)
 	  gtk_text_set_point (GTK_TEXT(view->split_screen), (position));
 
 	  gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-					 &view->split_screen->style->black,
+					 NULL,
 					 NULL, buffer, length);
 	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 	  gtk_text_thaw (GTK_TEXT (view->split_screen));
@@ -647,6 +647,8 @@ static void gE_view_init (gE_view *view)
 
 	GtkWidget *vpaned, *menu;
 	GtkStyle *style;
+	GdkColor *bg;
+	GdkColor *fg;
 	
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
@@ -708,13 +710,13 @@ static void gE_view_init (gE_view *view)
 
 	gtk_container_add (GTK_CONTAINER (view->scrwindow[0]), view->text);
 
-	style = gtk_style_new();
+/*	style = gtk_style_new();
 	gtk_widget_set_style(GTK_WIDGET(view->text), style);
 
 	gtk_widget_set_rc_style(GTK_WIDGET(view->text));
 	gtk_widget_ensure_style(GTK_WIDGET(view->text));
 	g_free (style);
-		
+	*/	
 /*	doc->changed = FALSE; */
 	view->changed_id = gtk_signal_connect(GTK_OBJECT(view->text), "changed",
 		GTK_SIGNAL_FUNC(view_changed_cb), view);
@@ -768,6 +770,16 @@ static void gE_view_init (gE_view *view)
 	style = gtk_style_new();
   	gdk_font_unref (style->font);
 
+	bg = &style->base[0];
+	bg->red = settings->bg[0];
+	bg->green = settings->bg[1];
+	bg->blue = settings->bg[2];
+
+	fg = &style->text[0];
+	fg->red = settings->fg[0];
+	fg->green = settings->fg[1];
+	fg->blue = settings->fg[2];
+
 	if (use_fontset) {
 	
 		style->font = view->font ? gdk_fontset_load (view->font) : NULL;
@@ -791,12 +803,12 @@ static void gE_view_init (gE_view *view)
 		} 
 
 	}
+	
 
  	gtk_widget_push_style (style);     
 	gtk_widget_set_style(GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style(GTK_WIDGET(view->text), style);
    	gtk_widget_pop_style ();
-   	
 
 	gtk_widget_show(view->split_screen);
 	gtk_text_set_point(GTK_TEXT(view->split_screen), 0);
@@ -862,18 +874,19 @@ GtkWidget *gE_view_new (gE_document *doc)
 #endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
-						 &view->text->style->black,
+						 NULL,
 						 NULL, view->document->buf->str,
 						 view->document->buf->len);
 
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-						 &view->split_screen->style->black,
+						 NULL,
 						 NULL, view->document->buf->str,
 						 view->document->buf->len);
+
+		gE_view_set_position (view, 0);
+
 		gtk_text_thaw (GTK_TEXT (view->text));
 		
-		gE_view_set_position (view, 0);
-	
 	}
 	
 	view->document->views = g_list_append (doc->views, view);
@@ -907,9 +920,7 @@ void gE_view_set_split_screen (gE_view *view, gint split_screen)
 	
 	} else {
 
-		/*gtk_widget_hide (view->split_parent);*/
-		gtk_widget_hide (view->pane);
-
+		gtk_widget_hide (view->split_parent);
 	}
  
    	view->splitscreen = split_screen;
@@ -968,7 +979,8 @@ void gE_view_set_font (gE_view *view, gchar *font)
 
 	GtkStyle *style;
 	
-	style = gtk_style_new();
+	style = gtk_style_copy(gtk_widget_get_style (
+							GTK_WIDGET((view)->text)));
   	gdk_font_unref (style->font);
   	
   	if (use_fontset)
@@ -1055,12 +1067,12 @@ void gE_view_refresh (gE_view *view)
 #endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
-						 &view->text->style->black,
+						 NULL,
 						 NULL, view->document->buf->str,
 						 view->document->buf->len);
 
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-						 &view->split_screen->style->black,
+						 NULL,
 						 NULL, view->document->buf->str,
 						 view->document->buf->len);
 		gtk_text_thaw (GTK_TEXT (view->text));

@@ -1,146 +1,63 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 3 -*-
- *
- * gE_plugin.h - plugin header files.
- *
- * Copyright (C) 1998 The Free Software Foundation.
- * Contributed by Martin Baulig <martin@home-of-linux.org>
+/*
+ * gEdit
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, 
+ * and Chris Lahey
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
 #ifndef __GE_PLUGIN_H__
 #define __GE_PLUGIN_H__
 
-/* If we are _IN_GEDIT, we include config.h to get WITH_GMODULE_PLUGINS
- * only if we really have them.
- *
- * Declare WITH_GMODULE_PLUGINS if we are included from such a plugin.
- */
+typedef struct _gE_Plugin_Data gE_Plugin_Data;
 
-#ifdef _IN_GEDIT
-#include <config.h>
-#else
-#ifndef WITH_GMODULE_PLUGINS
-#define WITH_GMODULE_PLUGINS 1
-#endif
-#endif
-
-#ifdef WITH_GMODULE_PLUGINS
-
-/*
- * We have gmodule plugins or we are included from such a plugin ...
- */
-
-/* This is also used in gEdit when we set up a handler for this. */
-#define GE_PLUGIN_LOG_DOMAIN	"gEdit-Plugin"
-
-#ifndef _IN_GEDIT
-/* If we are included from a plugin, define G_LOG_DOMAIN here. */
-#ifndef G_LOG_DOMAIN
-#define G_LOG_DOMAIN GE_PLUGIN_LOG_DOMAIN
-#endif
-/* After this is done, include the GNOME header files. */
-#include <gnome.h>
-#endif
-
-#include <glib.h>
 #include <gmodule.h>
 
-#define GEDIT_PLUGIN_INFO_KEY		"gedit_plugin_info"
-
-typedef struct _gE_Plugin_Object gE_Plugin_Object;
-typedef struct _gE_Plugin_Info gE_Plugin_Info;
-
-typedef void (*gE_Plugin_InitFunc) (gE_Plugin_Object *, gint);
-typedef gboolean(*gE_Plugin_StartFunc) (gE_Plugin_Object *, gint);
-
-struct _gE_Plugin_Info {
-   gchar *plugin_name;
-   gE_Plugin_InitFunc init_func;
-   gE_Plugin_StartFunc start_func;
+enum {
+	PLUGIN_OK,
+	PLUGIN_ERROR,
+	PLUGIN_DEAD
 };
 
-struct _gE_Plugin_Object {
-   gchar *name;
-   gchar *plugin_name;
-   gchar *library_name;
-   gchar *config_path;
-   GList *dependency_libs;
-   gE_Plugin_Info *info;
-   GModule *module;
-   int context;
+struct _gE_Plugin_Data {
+	
+	gchar	*file;
+	GModule	*handle;
+	
+	gint	(*init_plugin) 		(gE_Plugin_Data *);
+	gint	(*can_unload)		(gE_Plugin_Data *);
+	void	(*destroy_plugin)	(gE_Plugin_Data *);
+	
+	gchar	*name;
+	gchar	*desc;
+	gchar	*author;
+	
+	/* filled in by plugin */
+	void	*private_data;
+	
 };
 
-#ifdef _IN_GEDIT
+extern GSList	*plugin_list;
 
-/* Only used internally in gEdit. Do not use this in plugins ! */
+/* Plugin MUST have this function */
+extern gint init_plugin (gE_Plugin_Data *pd);
 
-extern GList *gE_Plugin_List;
+void		 gE_plugins_init 	();
+gE_Plugin_Data	*plugin_load 		(const gchar *file);
+void		 plugin_unload		(gE_Plugin_Data *pd);
 
-extern void gE_Plugin_Query_All(void);
-extern gE_Plugin_Object *gE_Plugin_Query(gchar *);
-extern void gE_Plugin_Register(gE_Plugin_Object *);
-extern gboolean gE_Plugin_Load(gE_Plugin_Object *, gint);
-
-#endif /* _IN_GEDIT */
-
-#endif /* WITH_GMODULE_PLUGINS */
-
-/* The following functions can be used in plugins to access the
- * functionality of gEdit.
- *
- * Please do not use other functions than the ones declared here.
- */
-
-extern void gE_plugin_text_append(gint, gchar *, gint);
-extern void gE_plugin_text_insert(gint, gchar *, gint, gint);
-extern char *gE_plugin_text_get(gint);
-extern gchar *gE_plugin_text_get_selected_text (gint);
-extern void gE_plugin_text_set_selected_text (gint, gchar *);
-
-extern int gE_plugin_document_create(gint, gchar *);
-extern void gE_plugin_document_show(gint);
-extern int gE_plugin_document_current(gint);
-extern char *gE_plugin_document_filename(gint);
-extern int gE_plugin_document_open(gint, gchar *);
-extern gboolean gE_plugin_document_close(gint);
-extern gint gE_plugin_document_get_position  (gint);
-extern selection_range gE_plugin_document_get_selection (gint);
-
-extern void gE_plugin_set_auto_indent(gint, gint);
-extern void gE_plugin_set_status_bar(gint, gint);
-extern void gE_plugin_set_word_wrap(gint, gint);
-extern void gE_plugin_set_line_wrap(gint, gint);
-extern void gE_plugin_set_read_only(gint, gint);
-extern void gE_plugin_set_split_screen(gint, gint);
-
-extern gboolean gE_plugin_program_quit(void);
-extern GtkText *gE_plugin_get_widget(gint);
-extern int gE_plugin_create_widget(gint, gchar *,
-				   GtkWidget **, GtkWidget **);
-
-#ifndef _IN_GEDIT
-
-/* Only when included from plugin ... */
-
-#include <libgnorba/gnorba.h>
-
-extern void corba_exception(CORBA_Environment *);
-
-extern CORBA_ORB global_orb;
-extern PortableServer_POA root_poa;
-extern PortableServer_POAManager root_poa_manager;
-extern CORBA_Environment *global_ev;
-extern CORBA_Object name_service;
-
-#endif /* not _IN_GEDIT */
+void		 gE_plugins_window_add (GnomeApp *app);
 
 #endif /* __GE_PLUGIN_H__ */

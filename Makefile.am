@@ -1,8 +1,8 @@
 ## Process this file with automake to produce Makefile.in
 
-plugindir = $(libdir)/go/plugins
+#plugindir = $(libdir)/go/plugins
 
-SUBDIRS = macros po intl src editor-plugins help
+SUBDIRS = macros po intl src plugins help
 
 EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins			\
 	INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop	\

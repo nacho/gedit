@@ -42,6 +42,9 @@ typedef struct _gE_preference {
 	                   Recent Documents menu */
 	gint mdi_mode;
 	
+	guint16 bg[3];
+	guint16 fg[3];
+	
 	gint width, height;
 	
 	gint run;		/* Flag to see if this is the first time gEdit is run */

@@ -26,11 +26,9 @@
 #include <time.h>
 #include "main.h"
 #include "gE_prefs.h"
-/*#include "toolbar.h"*/
 #include "gE_prefs_box.h"
 #include "gE_window.h"
 #include "gE_view.h"
-#include "gE_plugin_api.h"
 #include "gE_mdi.h"
 
 typedef struct _gE_prefs_data {
@@ -49,12 +47,9 @@ typedef struct _gE_prefs_data {
 	GtkWidget *status;
 	GtkWidget *wordwrap;
 	GtkWidget *split;
+	GtkWidget *bgpick;
+	GtkWidget *fgpick;
 	
-	/* Plugins Settings */
-	/* FIXME: Fix it! Damn you! */
-	GtkWidget *plugin_list;
-	GtkWidget *scroll_window;
-	GtkWidget *plugins_toggle;
 	gE_data *gData;
 	
 	/* MDI Settings */
@@ -87,6 +82,8 @@ static gE_prefs_data *prefs;
 GList *plugin_list;
 /*plugin_callback_struct pl_callbacks;*/
 extern GList *plugins;
+
+void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox);
 
 guint mdi_type [NUM_MDI_MODES] = {
 
@@ -122,6 +119,8 @@ void gE_window_refresh(gE_window *w)
 	gint i, j;
 	gE_view *nth_view;
 	gE_document *doc;
+	GtkStyle *style;
+	GdkColor *bg, *fg;
 
 	/* FIXME: This function is basically borked right now... */
 
@@ -153,17 +152,34 @@ void gE_window_refresh(gE_window *w)
           
         }
 */
+	style = gtk_style_copy (gtk_widget_get_style (
+						GE_VIEW (mdi->active_view)->text));
+	bg = &style->base[0];
+	bg->red = settings->bg[0];
+	bg->green = settings->bg[1];
+	bg->blue = settings->bg[2];
+
+	fg = &style->text[0];
+	fg->red = settings->fg[0];
+	fg->green = settings->fg[1];
+	fg->blue = settings->fg[2];
+
 	for (i = 0; i < g_list_length (mdi->children); i++) {
   
-	  doc = GE_DOCUMENT(g_list_nth_data (mdi->children, i));
+		doc = GE_DOCUMENT(g_list_nth_data (mdi->children, i));
   	
- 	  for (j = 0; j < g_list_length (doc->views); j++) {
+		for (j = 0; j < g_list_length (doc->views); j++) {
  	  
-	    g_message ("i = %d, j = %d", i, j);
-	    nth_view = g_list_nth_data (doc->views, j);
+			g_message ("i = %d, j = %d", i, j);
+			nth_view = g_list_nth_data (doc->views, j);
 
-  	    gE_view_set_font (nth_view, settings->font);
-  	    gE_view_set_word_wrap (nth_view, settings->word_wrap);
+			gE_view_set_font (nth_view, settings->font);
+			gE_view_set_word_wrap (nth_view, settings->word_wrap);
+  	    
+			gtk_widget_set_style(GTK_WIDGET(nth_view->split_screen),
+									style);
+			gtk_widget_set_style(GTK_WIDGET(nth_view->text),
+									style);
   	    
   	  }
 
@@ -178,6 +194,8 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	FILE *file;
 	gchar *rc;
 	gint i;
+	GtkStyle *style;
+	GdkColor *c;
 
 	/* General Settings */
 	settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
@@ -216,10 +234,29 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
           }
           
         }
-  
-	gE_window_refresh(data->window);
-	gE_save_settings();
+
 	
+	style = gtk_style_new ();
+	
+	c = &style->base[0];
+	
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (prefs->bgpick),
+							&c->red, &c->green, &c->blue, 0);
+	settings->bg[0] = c->red;
+	settings->bg[1] = c->green;
+	settings->bg[2] = c->blue;
+	
+	
+	c = &style->text[0];
+	
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (prefs->fgpick),
+							&c->red, &c->green, &c->blue, 0);
+	settings->fg[0] = c->red;
+	settings->fg[1] = c->green;
+	settings->fg[2] = c->blue;
+	 
+	gE_window_refresh(data->window);
+	gE_save_settings();	
 }
 
 
@@ -229,6 +266,8 @@ void get_prefs(gE_data *data)
 
 	gint i;
 	gchar *tmp;
+	GtkStyle *style;
+	GdkColor *c;
   
 	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), settings->print_cmd);
 	gtk_entry_set_text (GTK_ENTRY (prefs->font), settings->font);
@@ -249,17 +288,25 @@ void get_prefs(gE_data *data)
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->wordwrap),
 							 settings->word_wrap);
   					   
+
+
+	style = gtk_style_copy (gtk_widget_get_style (
+						GE_VIEW (mdi->active_view)->text));
+	c = &style->base[0];
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (prefs->bgpick),
+							c->red, c->green, c->blue, 0);
 	
+	c = &style->text[0];
+	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (prefs->fgpick),
+							c->red, c->green, c->blue, 0);
+	
+
+
 	if (!settings->close_doc)
 	  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton1), TRUE);
 	else
 	  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton2), TRUE);
-  
-	if (!GTK_TOGGLE_BUTTON(prefs->plugins_toggle)->active)
-	  gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
-	else
-	  gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), TRUE);
-   
+     
 	for (i = 0; i < NUM_MDI_MODES; i++)
 	  if (mdiMode == mdi_type[i]) {
 	  
@@ -276,7 +323,7 @@ void get_prefs(gE_data *data)
 static GtkWidget *general_page_new()
 {
 
-	GtkWidget *main_vbox, *vbox, *frame, *hbox;
+	GtkWidget *main_vbox, *vbox, *hbox2, *frame, *hbox, *label;
 
 	main_vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
@@ -312,32 +359,71 @@ static GtkWidget *general_page_new()
 	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
+ 
   
 	frame = gtk_frame_new (_("Editor Behavior"));
 	gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
 	gtk_widget_show (frame);
   
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_widget_show (vbox);
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), hbox);
+	gtk_widget_show (hbox);
 
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show(hbox);
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_container_border_width(GTK_CONTAINER(vbox), 10);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 0);
+	gtk_widget_show(vbox);
 
 	prefs->autoindent = gtk_check_button_new_with_label (_("Enable Autoindent"));
-	gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), prefs->autoindent, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->autoindent);
   
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show(hbox);
-  
 	prefs->wordwrap = gtk_check_button_new_with_label (_("Enable Wordwrap"));
-	gtk_box_pack_start(GTK_BOX(hbox), prefs->wordwrap, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), prefs->wordwrap, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->wordwrap);
+	
+	
+	vbox = gtk_vbox_new(FALSE, 0);
+	gtk_container_border_width(GTK_CONTAINER(vbox), 10);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 0);
+	gtk_widget_show(vbox);
+	  
+  	
+  	hbox2 = gtk_hbox_new (FALSE, 0);
+  	gtk_container_border_width(GTK_CONTAINER(hbox2), 10);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox2, TRUE, TRUE, 10);
+	gtk_widget_show(hbox2);
+	
+  	prefs->bgpick = gnome_color_picker_new ();
+  	gtk_box_pack_start (GTK_BOX(hbox2), prefs->bgpick, FALSE, FALSE, 10);
+  	
+	gtk_signal_connect (GTK_OBJECT (prefs->bgpick), "color_set",
+					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+	
+  	label = gtk_label_new (_("Text Background"));
+  	gtk_box_pack_start (GTK_BOX(hbox2), label, FALSE, FALSE, 0);
+  	gtk_widget_show (label);
+  	
+  	
+
+  	hbox2 = gtk_hbox_new (FALSE, 0);
+  	gtk_container_border_width(GTK_CONTAINER(hbox2), 10);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox2, TRUE, TRUE, 10);
+	gtk_widget_show(hbox2);
+	
+	prefs->fgpick = gnome_color_picker_new ();
+  	gtk_box_pack_start (GTK_BOX(hbox2), prefs->fgpick, FALSE, FALSE, 10);
+
+	gtk_signal_connect (GTK_OBJECT (prefs->fgpick), "color_set",
+					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+					
+  	gtk_widget_show (prefs->bgpick);
+
+  	gtk_widget_show (prefs->fgpick);
+  	
+  	label = gtk_label_new (_("Text Foreground"));
+  	gtk_box_pack_start (GTK_BOX(hbox2), label, FALSE, FALSE, 0);
+  	gtk_widget_show (label);
   
 	return main_vbox;
 	
@@ -485,249 +571,6 @@ static GtkWidget *doc_page_new()
 /* End of Print Stuff */
 
 
-/* Plugins Stuff... */
-
-static void plugins_fsel_ok (GtkWidget *w, GtkFileSelection *fs)
-{
-
-	gchar *clist_plugin [2];
-
-	plugin_callback_struct callbacks;
-	
-	clist_plugin [0] = g_strdup (g_basename (gtk_file_selection_get_filename (fs)));
-	clist_plugin [1] = g_strdup (g_dirname (gtk_file_selection_get_filename (fs)));
-	
-	custom_plugin_query ( clist_plugin[1], clist_plugin[0], &pl_callbacks);
-
- 	gtk_clist_freeze (GTK_CLIST (prefs->plugin_list));
- 	gtk_clist_append (GTK_CLIST (prefs->plugin_list), clist_plugin);
- 	gtk_clist_thaw (GTK_CLIST (prefs->plugin_list));
-	
-	gtk_widget_destroy (GTK_WIDGET (fs));
-	
-}
-
-static void plugins_clist_add (GtkWidget *w, gpointer data)
-{
-	GtkWidget *fsel;
-	gchar *fname;
- 
- 	fsel = gtk_file_selection_new (_("Plugin Selector"));
- 	gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fsel));
-
- 	fname = g_malloc (strlen (PLUGINDIR) + 3);
- 	sprintf (fname, "%s/*", PLUGINDIR);
- 	gtk_file_selection_set_filename (GTK_FILE_SELECTION (fsel), fname);
- 	g_free (fname);
- 	
- 	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fsel)->ok_button),
-			  "clicked", GTK_SIGNAL_FUNC(plugins_fsel_ok),
-			  fsel);
-      	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fsel)->cancel_button),
-				 "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				 GTK_OBJECT (fsel));
-	
-	gtk_widget_show (fsel);
-	
-}
-
-static void plugins_clist_remove (GtkWidget *w, gpointer data)
-{
-	int i, i2;
-	plugin_list_data *plugins_data;
-	gchar *path;
-
-	/* FIXME: Needs to actually unload the plugin itself.. */
-
-  	/* Try removing plugin from Gnome Menu.. */
-  	path = g_new(gchar, strlen(_("_Plugins")) + 2);
-  	sprintf(path, "%s/", _("_Plugins"));
-  	
-  	i  = (g_list_length (plugin_list)) - (GTK_CLIST(data)->focus_row);
-  	
-  	gnome_app_remove_menu_range (GNOME_APP (mdi->active_window),
-  						path, i, 1);
-
-  	for (i = 0; i < GTK_CLIST(data)->focus_row; i++);
-  	   
-  	   plugins_data = g_list_nth_data (plugin_list, i);
-  	   
-  	   plugin_list = g_list_remove (plugin_list, plugins_data);
-  	
-  	gtk_clist_remove (GTK_CLIST (data), GTK_CLIST (data)->focus_row);
-  	plugin_save_list ();
-  	
-}
-
-static void plugins_clist_click_column (GtkCList *clist, gint column, gpointer data)
-{
-	if (column == 4) {
-	
-	  gtk_clist_set_column_visibility (clist, column, FALSE);
-	  
-	} else if (column == clist->sort_column) {
-	
-	  if (clist->sort_type == GTK_SORT_ASCENDING)
-	    clist->sort_type = GTK_SORT_DESCENDING;
-	  else
-	    clist->sort_type = GTK_SORT_ASCENDING;
-
-	} else {
-	
-    	 gtk_clist_set_sort_column (clist, column);
-    	
-    	}
-
-	gtk_clist_sort (clist);
-	
-}
-
-static void plugins_toggle (GtkWidget *w)
-{
-	gchar *plug[2];	/* Temporary plugins data */
-	gchar *path;
-	gint i;
-	plugin_list_data *plugins_data;
-
-	/* Plugins Settings.. (Use Plugins) */
-	if (!GTK_TOGGLE_BUTTON(prefs->plugins_toggle)->active) {
-	
-	  gnome_config_set_int ("/Editor_Plugins/Use/gEdit", -1);
-	  gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
-     	
-     	  	/* Try removing plugin from Gnome Menu.. */
-	  path = g_new(gchar, strlen(_("_Plugins")) + 2);
-	  sprintf(path, "%s/", _("_Plugins"));
-  	
-	  gnome_app_remove_menu_range (GNOME_APP (mdi->active_window),
-								path, 1, g_list_length (plugin_list));
-     	
-	} else {
-	
-	 gnome_config_set_int ("/Editor_Plugins/Use/gEdit", 1);
-	 gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), TRUE);
-
-	 plugin_list = NULL;
- 	   
-	 plugin_load_list("gEdit");
-  		
-	}
-
-}
-
-static GtkWidget *plugins_page_new()
-{
-	GtkWidget *main_vbox, *vbox, *hbox, *frame, *box;
-	GtkWidget *label;
-	GtkWidget *button;
-	gchar clist_plugins_data [5][80];
-	gchar *clist_plugins [2];
-	plugin_list_data *plugins_data;
-	int i, uP;
-  
-	static char *titles[] = {
-	
-	  N_("Name"), N_("Location")
-	};
-  
-	main_vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
-	gtk_widget_show (main_vbox);
-  
-	frame = gtk_frame_new (_("Plugins"));
-	gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
-	gtk_widget_show (frame);
-  
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_widget_show (vbox);
-  
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-	gtk_widget_show(hbox);
-
-	prefs->plugins_toggle = gtk_check_button_new_with_label (_("Use Plugins"));
-	uP = gnome_config_get_int ("/Editor_Plugins/Use/gEdit");
-	
-	if (uP == -1)
-	  uP = 0;
-    
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->plugins_toggle),
-							 uP);
-
-	gtk_signal_connect (GTK_OBJECT (prefs->plugins_toggle), "clicked",
-					GTK_SIGNAL_FUNC (plugins_toggle), NULL);
-  
-	gtk_box_pack_start (GTK_BOX(hbox), prefs->plugins_toggle, FALSE, TRUE, 0);
-	gtk_widget_show (prefs->plugins_toggle);
-
-#ifdef ENABLE_NLS
-	titles[0]=_(titles[0]);
-	titles[1]=_(titles[1]);
-#endif
-  
-  
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-	gtk_widget_show(hbox);
-  
-	prefs->plugin_list = gtk_clist_new_with_titles (2, titles);
-	gtk_widget_show (prefs->plugin_list);
-
-	prefs->scroll_window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (prefs->scroll_window),
-								GTK_POLICY_AUTOMATIC, 
-								GTK_POLICY_AUTOMATIC);
-
-	gtk_container_add (GTK_CONTAINER (prefs->scroll_window), prefs->plugin_list);
-
-	gtk_signal_connect (GTK_OBJECT (prefs->plugin_list), "click_column",
-				(GtkSignalFunc) plugins_clist_click_column, (gpointer) prefs->plugin_list); 
-
-	box = gtk_vbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(box), 5);
-	gtk_box_pack_start(GTK_BOX(vbox), box, TRUE, TRUE, 0);
-	gtk_widget_show(box);
-  
-	gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 1, TRUE);
-  
-	for (i = 0; i < g_list_length (plugin_list) ; i++) {
-	
-	  plugins_data = g_list_nth_data (plugin_list, i);
-       
-	  clist_plugins[0] = g_strdup (plugins_data->name);
-	  clist_plugins[1] = g_strdup (plugins_data->location);
-       
-	  gtk_clist_append (GTK_CLIST (prefs->plugin_list), clist_plugins);
-	}
-  
-  
-	gtk_container_set_border_width (GTK_CONTAINER (prefs->scroll_window), 5);
-	gtk_box_pack_start (GTK_BOX (box), prefs->scroll_window, TRUE, TRUE, 0);
- 
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_container_border_width (GTK_CONTAINER (hbox), 10);
-	gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
-	gtk_widget_show (hbox);
- 
-	button = gtk_button_new_with_label (_("Add"));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			(GtkSignalFunc) plugins_clist_add, (gpointer) prefs->plugin_list);
-
-	button = gtk_button_new_with_label (_("Remove"));
-	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			(GtkSignalFunc) plugins_clist_remove, (gpointer) prefs->plugin_list);
-  
-	return main_vbox;
-	
-}
-
-/* End of Plugins Stuff... */
 
 
 /* Window Stuff.. */
@@ -844,7 +687,7 @@ static GtkWidget *window_page_new()
 
 	button = gtk_button_new_with_label (_("Use Current"));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-					GTK_SIGNAL_FUNC (use_current), (gint) 1);
+					GTK_SIGNAL_FUNC (use_current), (gpointer) 1);
 	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
 	gtk_widget_show (button);  	
   
@@ -878,8 +721,10 @@ static GtkWidget *window_page_new()
 
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 {
-
-  gnome_property_box_changed (pbox);
+  
+  GnomePropertyBox *prop = GNOME_PROPERTY_BOX (prefs->pbox);
+  
+  gnome_property_box_changed (prop);
 
 }
 
@@ -931,11 +776,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 	label = gtk_label_new (_("Document"));
 	gtk_notebook_append_page (GTK_NOTEBOOK( (prefs->pbox)->notebook),
 							doc_page_new(), label);
-
-	/* Plugins Settings */
-	label = gtk_label_new (_("Plugins"));
-	gtk_notebook_append_page (GTK_NOTEBOOK( (prefs->pbox)->notebook),
-							plugins_page_new(), label);
  
   
 	get_prefs(data);
@@ -975,6 +815,13 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 	gtk_signal_connect (GTK_OBJECT (prefs->DButton2), "toggled",
 					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
   
+/*
+	gtk_signal_connect (GTK_OBJECT (prefs->bgpick), "color_set",
+					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+	
+	gtk_signal_connect (GTK_OBJECT (prefs->fgpick), "color_set",
+					GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+*/
 	gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
                                     
 }

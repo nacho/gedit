@@ -225,7 +225,7 @@ void views_insert (gE_document *doc, gE_undo *undo)
 	  gtk_text_set_point (GTK_TEXT(view->text), undo->start_pos);
 
 	  gtk_text_insert (GTK_TEXT (view->text), NULL,
-					 &view->text->style->black,
+					 NULL,
 					 NULL, undo->text, strlen(undo->text));
 	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 		
@@ -237,7 +237,7 @@ void views_insert (gE_document *doc, gE_undo *undo)
 	  gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
 
 	  gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-					 &view->split_screen->style->black,
+					 NULL,
 					 NULL, undo->text, strlen(undo->text));
 	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 	  gtk_text_thaw (GTK_TEXT (view->split_screen));

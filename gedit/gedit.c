@@ -29,18 +29,16 @@
 #include "gE_window.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
-#include "gE_plugin_api.h"
 #include "gE_files.h"
 #include "menus.h"
 #include "toolbar.h"
+#include "gE_plugin.h"
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
 #endif
 
 GList *window_list;
-extern GList *plugins;
-plugin_callback_struct pl_callbacks;
 GnomeMDI *mdi;
 gE_window *window;
 gE_preference *settings;
@@ -49,71 +47,10 @@ gint mdiMode = GNOME_MDI_DEFAULT_MODE;
 /*gint mdiMode = GNOME_MDI_NOTEBOOK;*/
 gboolean use_fontset = FALSE;
 
-void setup_callbacks( plugin_callback_struct *callbacks )
-{
 
-	callbacks->document.create = gE_plugin_document_create;
-	callbacks->text.append = gE_plugin_text_append;
-	callbacks->text.insert = gE_plugin_text_insert;
-	callbacks->document.show = gE_plugin_document_show;
-	callbacks->document.current = gE_plugin_document_current;
-	callbacks->document.filename = gE_plugin_document_filename;
-	callbacks->text.get = gE_plugin_text_get;
-	callbacks->program.quit = gE_plugin_program_quit;
-	callbacks->program.reg = gE_plugin_program_register;
-
-	callbacks->document.open = NULL;
-	callbacks->document.close = NULL;
-	callbacks->text.get_selected_text = NULL;
-	callbacks->text.set_selected_text = NULL;
-	callbacks->document.get_position = NULL;
-	callbacks->document.get_selection = NULL;
-
-}
-
-GSList *launch_plugins = NULL;
-
-static void
-add_launch_plugin(poptContext ctx,
-		  enum poptCallbackReason reason,
-		  const struct poptOption *opt,
-		  char *arg, void *data)
-{
-
-	if (opt->shortName == 'p') {
-
-	  launch_plugins = g_slist_append(launch_plugins, arg);
-
-	} /* else something's weird :) */
-
-}
-
-static void
-launch_plugin(char *name, gpointer userdata)
-{
-
-	GString *fullname;
-	plugin_callback_struct callbacks;
-	plugin *plug;
-
-	fullname = g_string_new(NULL);
-	g_string_sprintf( fullname, "%s/%s%s", PLUGINDIR, name, "-plugin" );
-	      
-	plug = plugin_new( fullname->str );
-
-	setup_callbacks( &callbacks );
-	      
-	plugin_register( plug, &callbacks, 0 );
-
-	g_string_free( fullname, TRUE );
-
-}
 
 static const struct poptOption options[] = {
-      /* We want to use a callback for this launch-plugin thing so we
-         can get multiple opts */
-    {NULL, '\0', POPT_ARG_CALLBACK, &add_launch_plugin, 0 },
-    {"launch-plugin", 'p', POPT_ARG_STRING, NULL, 0, N_("Launch a plugin at startup"), N_("PLUGIN-NAME")},
+
     {NULL, '\0', 0, NULL, 0}
 };
 
@@ -154,7 +91,6 @@ int main (int argc, char **argv)
 	gE_document *doc;
 	gE_window *window;
 	gE_data *data;
-	plugin_callback_struct callbacks;
 	char **args;
 	poptContext ctx;
 	int i;
@@ -201,8 +137,6 @@ int main (int argc, char **argv)
 		use_fontset = TRUE;
 	gtk_widget_destroy(dummy_widget);
 
-/*	g_slist_foreach(launch_plugins, launch_plugin, NULL);
-*/	g_slist_free(launch_plugins);
 
 	args = poptGetArgs(ctx);
 
@@ -214,11 +148,6 @@ int main (int argc, char **argv)
 	
 	poptFreeContext(ctx);
 	
-	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
-	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
-	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
-	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
-
 	
 	/*data = g_malloc (sizeof (gE_data));*/
 	window_list = NULL;
@@ -238,12 +167,9 @@ int main (int argc, char **argv)
 
 
 	/* Init plugins... */
-	plugins = NULL;
+	gE_plugins_init ();
 	
-	setup_callbacks (&pl_callbacks);
-	
-	plugin_load_list("gEdit");
-
+	/* new plugins system init will be here */
 		
     /* connect signals -- FIXME -- We'll do the rest later */
     gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);

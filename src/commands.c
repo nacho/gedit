@@ -42,8 +42,6 @@
 #include "gE_window.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
-#include "gE_plugin_api.h"
-/*#include "dialog.h"*/
 #include "search.h"
 
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
@@ -760,8 +758,6 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_quit_cb(GtkWidget *widget, gpointer cbdata)
 {
-
-	plugin_save_list();
 
 	gE_save_settings ();
 

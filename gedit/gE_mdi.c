@@ -37,7 +37,6 @@
 #include "search.h"
 #include "gE_mdi.h"
 #include "gE_print.h"
-#include "gE_plugin_api.h"
 #include "menus.h"
 
 static void 	  gE_document_class_init (gE_document_class *);

@@ -45,10 +45,18 @@ gE_save_settings()
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
 	gnome_config_set_int ("close doc", (gint) settings->close_doc);
 	gnome_config_set_int ("mdi mode", mdiMode);
-	gnome_config_set_string ("font", settings->font);
+
+	gnome_config_set_int ("bgr", settings->bg[0]);
+	gnome_config_set_int ("bgg", settings->bg[1]);
+	gnome_config_set_int ("bgb", settings->bg[2]);
+	gnome_config_set_int ("fgr", settings->fg[0]);
+	gnome_config_set_int ("fgg", settings->fg[1]);
+	gnome_config_set_int ("fgb", settings->fg[2]);
+
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
-	
+	gnome_config_set_string ("font", settings->font);
+
 	if (settings->print_cmd == "")
 	  gnome_config_set_string ("print command", "lpr -rs %s");
 	else
@@ -82,14 +90,17 @@ void gE_get_settings()
 	mdiMode = gnome_config_get_int ("mdi mode");
 	/*if (!mdiMode)
 	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];*/
-	   
-	settings->width = gnome_config_get_int ("width");
-	if (!settings->width)
-	  settings->width = 630;
+	settings->bg[0] = gnome_config_get_int( "bgr=65535" );
+	settings->bg[1] = gnome_config_get_int( "bgg=65535" );
+	settings->bg[2] = gnome_config_get_int( "bgb=65535" );
+	
+	settings->fg[0] = gnome_config_get_int( "fgr=0" );
+	settings->fg[1] = gnome_config_get_int( "fgg=0" );
+	settings->fg[2] = gnome_config_get_int( "fgb=0" );
+	
+	settings->width = gnome_config_get_int ("width=630");
+	settings->height = gnome_config_get_int ("height=390");
 
-	settings->height = gnome_config_get_int ("height");
-	if (!settings->height)
-	  settings->height = 390;
 	 
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL) {
@@ -101,9 +112,7 @@ void gE_get_settings()
 	
 	}
 	
-	settings->print_cmd = gnome_config_get_string ("print command"); 
-	if (settings->print_cmd == NULL)
-	  settings->print_cmd = "lpr %s";
+	settings->print_cmd = gnome_config_get_string ("print command=lpr %s"); 
 
 
 	if (settings->run) {

@@ -25,7 +25,7 @@
 extern "C" {
 #endif				/* __cplusplus */
 
-#include "plugin.h"
+/*#include "plugin.h"*/
 
    extern GHashTable *doc_int_to_pointer;
    extern GHashTable *doc_pointer_to_int;
@@ -33,7 +33,7 @@ extern "C" {
    extern GHashTable *win_pointer_to_int;
    extern int last_assigned_integer;
 
-#include "gE_plugin.h"
+/*#include "gE_plugin.h"*/
 
    extern void gE_plugin_program_register(plugin_info * info);
    extern void add_plugins_to_window(plugin_info * info, GnomeApp *app);

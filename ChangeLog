@@ -1,3 +1,47 @@
+2000-03-08  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_plugin.[ch]: Re-wrote. again. Now based upon the Gnumeric
+	  model. with additions/improvements for gEdit.
+	
+	* src/gedit.c: (main) Added call to gE_plugins_init.
+
+	* src/gE_window.c: (gE_window_new) Added call to gE_plugins_window_add.
+	  to add all the plugins to the Plugin menu.
+	
+	* plugins/sample/*: New sample plugin. Prints Hello World into the
+	  current document.
+	
+	* autogen.sh: Removed call to the makeconfig.pl scripts. unneeded.
+
+	* configure.in, Makefile.am: Added the plugins and plugins/sample
+
+2000-02-22  Alex Roberts  <bse@gedit.pn.org>
+
+	* makeconfig.pl: Bumped version to 0.9.0
+	
+2000-02-21  Alex Roberts  <bse@gedit.pn.org>
+	
+	* Some major hacking. =]
+	
+	* src/gE_plugin.[ch]: Beginnings of the brand new plugins system.
+	  GModule based.
+	
+	* src/gedit.c:
+	  src/commands.c:
+	  src/gE_window.c:
+	  src/gE_prefs_box.c: Removed traces of the old plugins system
+	
+	* src/gE_prefs_box.c: Added color picker code to set the text colours.
+	
+	* src/gE_prefs.[ch]: Added arrays to store the foreground and
+	  background text colours. loads witha  default of black on white.
+	  Also added some defaults to some items on loading preferences.
+	
+	* gE_view.c: Implemented the ability to set the background and
+	  foreground colours of the text. Woohoo! 
+	
+	* src/gE_undo.c: Redo was inserting text with a Black foreground. 
+
 2000-02-19  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_view.[ch]: Use a paned window to hold the splitscreens.

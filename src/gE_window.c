@@ -30,14 +30,13 @@
 #include "gE_view.h"
 #include "gE_files.h"
 #include "gE_prefs_box.h"
-#include "gE_plugin_api.h"
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gE_print.h"
 #include "menus.h"
-/*#include "toolbar.h"*/
 #include "gE_prefs.h"
 #include "search.h"
+#include "gE_plugin.h"
 #include "gE_icon.xpm"
 
 extern GList *plugins;
@@ -126,7 +125,6 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
 
 	GtkWidget *statusbar;
-	gint *ptr; /* For Plugin Stuff. */
 	
 	static GtkTargetEntry drag_types[] =
 	{
@@ -146,10 +144,6 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 		"drag_data_received",
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
-	ptr = g_new (int, 1);
-	*ptr = ++last_assigned_integer;
-	g_hash_table_insert (win_int_to_pointer, ptr, app);
-        g_hash_table_insert (win_pointer_to_int, app, ptr);
 
 	gE_window_set_icon(GTK_WIDGET(app), "gE_icon");
 
@@ -166,9 +160,10 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	/* gtk_widget_hide(search_result_window); */
 
 
-	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
+	/*g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);*/
 
-
+	gE_plugins_window_add (app);
+	
 	settings->num_recent = 0;
 	recent_update(GNOME_APP(app));
 

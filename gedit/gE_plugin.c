@@ -1,262 +1,195 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 3 -*-
- *
- * gE_plugin.c - implements plugin features using gmodule
- *
- * Copyright (C) 1998 The Free Software Foundation.
- * Contributed by Martin Baulig <martin@home-of-linux.org>
+/*
+ * gEdit
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, 
+ * and Chris Lahey
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2, or (at your option)
- * any later version.
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#include <stdio.h>
+ 
+/* Plugins system based on that used in Gnumeric */
+ 
+#include <config.h>
 #include <unistd.h>
-#include <string.h>
-#include <errno.h>
-#include <sys/wait.h>
-#include <sys/types.h>
 #include <dirent.h>
-#include <gtk/gtk.h>
+#include <glib.h>
+#include <gmodule.h>
+#include <gnome.h>
+#include <string.h>
 
 #include "main.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_files.h"
+#include "commands.h"
+#include "gE_mdi.h"
+#include "gE_plugin.h"
 
-#include <gE_plugin.h>
-#include <gE_plugin_api.h>
+GSList	*plugin_list = NULL;
 
-#include <gnome.h>
-
-GHashTable *shlib_hash = NULL;
-
-/*
- * gE_Plugin_Init - Get a list of all plugins and add them to the menu.
- *
- */
-
-void
-gE_Plugin_Query_All(void)
+gE_Plugin_Data *plugin_load (const gchar *file)
 {
-   DIR *dir = opendir(PLUGINLIBDIR);
-   struct dirent *direntry;
-   gchar *shortname;
+	gE_Plugin_Data	*pd;
+	guint res;
+	
+	g_return_val_if_fail (file != NULL, NULL);
+	
+	
+	if (!(pd = g_new0 (gE_Plugin_Data, 1))) {
+		g_print ("plugin allocation error");
+		return NULL;
+	}
+	
+	pd->file = g_strdup (file);
+	pd->handle = g_module_open (file, 0);
+	if (!pd->handle) {
+		g_print (_("Error, unable to open module file, %s"),
+					g_module_error ());
+		
+		g_free (pd);
+		return NULL;
+	}
+	
+	if (!g_module_symbol (pd->handle, "init_plugin", 
+					  (gpointer*)&pd->init_plugin)) {
+		
+		g_print (_("Error, plugin does not contain init_plugin function."));
 
-   if (!dir)
-      return;
-
-   while ((direntry = readdir(dir))) {
-      gE_Plugin_Object *plug;
-      gchar *suffix;
-
-      if (strrchr(direntry->d_name, '/'))
-	 shortname = strrchr(direntry->d_name, '/') + 1;
-      else
-	 shortname = direntry->d_name;
-
-      if (!strcmp(shortname, ".") || !strcmp(shortname, ".."))
-	 continue;
-
-      suffix = strrchr(direntry->d_name, '.');
-      if (!suffix || strcmp(suffix, ".plugin"))
-	 continue;
-
-      g_message("Loading plugin description from `%s'.\n", direntry->d_name);
-
-      plug = gE_Plugin_Query(direntry->d_name);
-      if (!plug)
-	 continue;
-
-      gE_Plugin_Register(plug);
-   }
-
-   closedir(dir);
-}
-
-static gint
-compare_func(gconstpointer a, gconstpointer b)
-{
-   return strcmp(a, b);
-}
-
-static void
-load_library(gchar * key, gE_Plugin_Object * plug)
-{
-   gchar *filename = gnome_config_get_string(key);
-   gchar *pathname;
-   GModule *module;
-
-   if (*filename == '/')
-      pathname = filename;
-   else {
-      pathname = g_strconcat(PLUGINLIBDIR, "/", filename, NULL);
-      g_free(filename);
-   }
-
-   if (!shlib_hash) {
-      shlib_hash = g_hash_table_new(NULL, NULL);
-   } else if (g_hash_table_lookup(shlib_hash, pathname)) {
-      g_message("Library %s already loaded.\n", pathname);
-      return;
-   }
-   g_message("Loading %s ...\n", pathname);
-
-   module = g_module_open(pathname, G_MODULE_BIND_LAZY);
-   if (!module) {
-      g_print("error: %s\n", g_module_error());
-      return;
-   }
-   g_module_make_resident(module);
-   g_hash_table_insert(shlib_hash, pathname, module);
-
-   /* Only set this if we are loading the "real" plugin and
-    * no dependency library. */
-
-   if (!strcmp(key, "library_name"))
-      plug->module = module;
-}
-
-/*
- * gE_Plugin_Query - Read description file of a Plugin and add it
- *                   to the plugins menu, but do not load the Plugin.
- */
-
-gE_Plugin_Object *
-gE_Plugin_Query(gchar * plugin_name)
-{
-   gE_Plugin_Object *new_plugin = g_new0(gE_Plugin_Object, 1);
-
-   gchar *key,
-   *value;
-   GString *dummy;
-   gpointer iter;
-
-   /* Set up path names. */
-
-   new_plugin->name = g_strdup(strrchr(plugin_name, '/') ?
-			       strrchr(plugin_name, '/') + 1 :
-			       plugin_name);
-
-   new_plugin->config_path = g_strconcat
-      ("=", PLUGINLIBDIR, "/", plugin_name, "=/", "Plugin/", NULL);
-
-   dummy = g_string_new("");
-
-   /* Get new config iterator. */
-
-   iter = gnome_config_init_iterator(new_plugin->config_path);
-
-   if (!iter) {
-      g_warning("Invalid description file for plugin `%s'.\n",
-		plugin_name);
-      goto load_error;
-   }
-   /* Look up dependency libraries in the description file. */
-
-   while ((iter = gnome_config_iterator_next(iter, &key, &value))) {
-      if (!strncmp(key, "deplib_", 7))
-	 new_plugin->dependency_libs = g_list_insert_sorted
-	    (new_plugin->dependency_libs, key, compare_func);
-   }
-
-   /* Read additional config keys. */
-
-   gnome_config_push_prefix(new_plugin->config_path);
-
-   new_plugin->plugin_name = gnome_config_get_string("name");
-
-   gnome_config_pop_prefix();
-
-   /* Free unused memory and return. */
-
-   g_string_free(dummy, TRUE);
-
-   return new_plugin;
-
- load_error:
-   g_warning("Loading of plugin `%s' failed.\n", plugin_name);
-
+		goto error;
+	}
+	
+	res = pd->init_plugin (pd);
+	if (res != PLUGIN_OK) {
+		g_print (_("Error, init_plugin returned an error"));
+		
+		goto error;
+	}
+	
+	plugin_list = g_slist_append (plugin_list, pd);
+	return pd;
+	
  error:
-   g_free(new_plugin->name);
-   g_free(new_plugin->library_name);
-   g_free(new_plugin->config_path);
-   g_list_free(new_plugin->dependency_libs);
-   g_free(new_plugin);
-
-   return NULL;
+	g_module_close (pd->handle);
+	g_free (pd->file);
+	g_free (pd);
+	return NULL;
 }
 
-/*
- * gE_Plugin_Register - Register Plugin.
- */
-
-void
-gE_Plugin_Register(gE_Plugin_Object * plugin)
+void plugin_unload (gE_Plugin_Data *pd) 
 {
-   plugin_info *info = g_new0(plugin_info, 1);
-
-   info->type = PLUGIN_GMODULE;
-   info->user_data = (gpointer) plugin;
-   info->plugin_name = plugin->plugin_name;
-   info->menu_location = plugin->plugin_name;
-
-   gE_plugin_program_register(info);
+	int w, n;
+	char *path;
+	GnomeApp *app;
+	
+	g_return_if_fail (pd != NULL);
+	
+	if (pd->can_unload && !pd->can_unload (pd)) {
+		g_print (_("Error, plugin is still in use"));
+		return;
+	}
+	
+	if (pd->destroy_plugin)
+		pd->destroy_plugin (pd);
+	
+	n = g_slist_index (plugin_list, pd);
+	plugin_list = g_slist_remove (plugin_list, pd);
+	
+	path = g_new(gchar, strlen(_("_Plugins")) + 2);
+  	sprintf(path, "%s/", _("_Plugins"));
+	
+	for (w = 0; w < g_list_length (mdi->windows); w++) {
+		app = g_list_nth_data (mdi->windows, w);
+		
+		gnome_app_remove_menu_range (app, path, n, 1);
+	
+	}
+	
+	g_module_close (pd->handle);
+	g_free (pd->file);
+	g_free (pd);
 }
 
-/*
- * gE_Plugin_Load - Actually load the Plugin and all its dependency libraries
- *                  and call the Plugin init function.
- */
 
-gboolean
-gE_Plugin_Load(gE_Plugin_Object * plugin, gint context)
+static void plugin_load_plugins_in_dir (char *dir)
 {
-   if (plugin->module)
-      if (plugin->info->start_func)
-	 return plugin->info->start_func(plugin, context);
-      else
-	 return FALSE;
+	DIR *d;
+	struct dirent *e;
+	
+	if ((d = opendir (dir)) == NULL)
+		return;
+	
+	while ((e = readdir (d)) != NULL) {
+		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0) {
+			char *plugin;
+			
+			plugin = g_strconcat (dir, e->d_name, NULL);
+			plugin_load (plugin);
+			g_free (plugin);
+		}
+	}
+	closedir (d);
+}
 
-   /* Push config prefix. */
+static void load_all_plugins ()
+{
+	char *pdir;
+	char const * const home = getenv ("HOME");
+	
+	/* load user plugins */
+	if (home != NULL) {
+		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
+		plugin_load_plugins_in_dir (pdir);
+		g_free (pdir);
+	}
+	
+	/* load system plgins */
+	pdir = gnome_unconditional_libdir_file ("gedit/plugins/");
+	plugin_load_plugins_in_dir (pdir);
+	g_free (pdir);
+}
 
-   gnome_config_push_prefix(plugin->config_path);
+void gE_plugins_init ()
+{
+	if (!g_module_supported ())
+		return;
+	
+	load_all_plugins ();
+}
 
-   /* Load all required libraries. */
 
-   g_list_foreach(plugin->dependency_libs, (GFunc) load_library, plugin);
-
-   load_library("library_name", plugin);
-
-   /* Pop config prefix. */
-
-   gnome_config_pop_prefix();
-
-   /* Test if plugin has been loaded. */
-
-   if (!plugin->module)
-      goto load_error;
-
-   if (!g_module_symbol(plugin->module, GEDIT_PLUGIN_INFO_KEY,
-			(gpointer) & plugin->info))
-      goto module_error;
-
-   g_message("Successfully loaded plugin `%s'.\n", plugin->name);
-
-   g_message("Plugin Name: %s\n", plugin->info->plugin_name);
-
-   if (plugin->info->init_func)
-      plugin->info->init_func(plugin, context);
-
-   return TRUE;
-
- module_error:
-   /* Loading of the plugin failed. */
-   g_print("error: %s\n", g_module_error());
- load_error:
-   g_warning("Loading of plugin `%s' failed.\n", plugin->name);
- error:
-   return FALSE;
+void gE_plugins_window_add (GnomeApp *app)
+{
+	gE_Plugin_Data *pd;
+	gint	n;
+	gchar	*path;
+	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+	
+	for (n = 0; n < g_slist_length (plugin_list); n++) {
+		pd = g_slist_nth_data (plugin_list, n);
+		
+		path = g_new0 (gchar, strlen (_("_Plugins")) + 2);
+		sprintf (path, "%s/", _("_Plugins"));
+		
+		menu->label = g_strdup (pd->name);
+		menu->type = GNOME_APP_UI_ITEM;
+		menu->hint = NULL;
+		menu->moreinfo = pd->private_data;
+		
+		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
+		
+		gnome_app_insert_menus (app, path, menu);
+		
+	}
+	
 }

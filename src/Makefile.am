@@ -60,19 +60,21 @@ gedit_SOURCES = 	\
 	gE_prefs.c	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
-	plugin.c        \
-	gE_plugin_api.c	\
 	gE_print.c	\
 	gE_print.h	\
 	gE_prefs.h	\
+	gE_plugin.h \
+	gE_plugin.c \
 	main.h		\
 	toolbar.h	\
-	plugin.h        \
-	gE_plugin_api.h	\
 	menus.h		\
 	menus.c		\
 	search.h	\
 	search.c	
+#	gE_plugin_api.c	\
+#	gE_plugin_api.h	\
+#	plugin.c        \
+#	plugin.h        \
 #	gE_prefslib.c	\
 #	gE_prefslib.h	\
 #	gE_document.c	\

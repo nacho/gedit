@@ -12,7 +12,7 @@ print MAKEFILE << 'EOF';
 dnl This is a generated file.  Please see makeconfig.pl.
 AC_INIT(src/gedit.c)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gedit, 0.6.1)
+AM_INIT_AUTOMAKE(gedit, 0.9.0)
 
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
