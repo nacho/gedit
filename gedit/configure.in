@@ -1,0 +1,42 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(menus.c)
+AM_INIT_AUTOMAKE(gEdit, 0.3.2)
+
+AC_DEFUN(AC_GEDIT_CHECK,
+[
+	AM_PATH_GTK(0.99.9,,
+ 	  AC_MSG_ERROR(Cannot include/link gtk/gdk/glib--check CFLAGS/LDFLAGS))
+        X_LIBS=$GTK_LIBS
+        X_CFLAGS=$GTK_CFLAGS
+        AC_SUBST(X_LIBS)
+        AC_SUBST(X_CFLAGS)
+])
+
+dnl Checks for programs.
+AC_PROG_CC
+
+dnl Checks for libraries.
+dnl Replace `main' with a function in -lX11:
+AC_CHECK_LIB(X11, main)
+dnl Replace `main' with a function in -lXext:
+AC_CHECK_LIB(Xext, main)
+dnl Replace `main' with a function in -lgdk:
+AC_CHECK_LIB(gdk, main)
+dnl Replace `main' with a function in -lglib:
+AC_CHECK_LIB(glib, main)
+dnl Replace `main' with a function in -lgtk:
+AC_CHECK_LIB(gtk, main)
+dnl Replace `main' with a function in -lm:
+AC_CHECK_LIB(m, main)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS(strings.h unistd.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_STRUCT_TM
+
+dnl Checks for library functions.
+AC_GEDIT_CHECK
+
+AC_OUTPUT(Makefile, echo timestamp > stamp-h)

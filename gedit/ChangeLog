@@ -1,0 +1,104 @@
+1998-04-13   <robo@earthling.net>
+
+	* Changed File Close shortcut to Alt-W...
+
+	* Added support for multiple files from the command line
+	  (Which also fixes the Sigsegv when closing files from the command line)...
+
+1998-04-06   <robo@earthling.net>
+
+	* Added statusbar code
+
+1998-04-04   <robo@earthling.net>
+
+	* Released 0.3.2
+
+	* Added GTK+ version checking to configure
+
+	* Added 2 icons to distribution, one by me, and one by joatman (joatman@base.org)
+
+1998-04-01   <robo@earthling.net>
+
+	* Added man page to distribution
+
+1998-03-28   <robo@earthling.net>
+
+	* Released 0.3.1
+
+	* Words now wrap onto the next line (Thanks to
+	  GTK+-0.99.9)...
+
+	* Converted gEdit to GNU Autoconf and GNU Automake...
+
+	* Hopefully fixed the clipboard bugs, replaced the
+	  GDK_CURRENT_TIME with a size_t thingy...
+
+	* Fixed (mostly) the command line bug, you couldn't
+	  open a file using a command like 'gedit
+	  /etc/resolv.conf' that's fixed...
+
+1998-03-26   <robo@earthling.net>
+
+	* A file opened from the commandline, the tab no longer shows the
+	  './' before the filename...
+
+1998-03-25   <robo@earthling.net>
+	* Released 0.3
+
+	* Fixed the command line opening bug, now it inserts a './' so when
+	  it saves, all it erases from the tab is the './', instead of the
+	  whole filename.
+
+1998-03-24   <evan@worldpath.net>
+
+	* It no longer dies a horrible death when you try to save empty
+	  files (thanks to Taneli) and behaves quite normally when you open
+	  a binary file...
+
+1998-03-23   <evan@worldpath.net>
+
+	* OK, I think I'm done with search and replace, it now
+	  has the option to ask before replacing. Next up: fix the binary
+	  file bug and apply the patch from Taneli...
+
+1998-03-22   <evan@worldpath.net>
+
+	* Just about done with search and replace, just a few niceties to
+	  add..
+
+1998-03-15    <evan@worldpath.net>
+
+	* Close will now ask if you want to save
+	  before closing a modified file...
+
+1998-03-15    <robo@earthling.net>
+
+	* Woohoo! preferences work!! Now it will read and write ~/.gedit!! :)
+ 	  You can change the font of the text box (still need to restart
+	  gEdit tho,and when you put the text font dialog box up, it puts
+	  it back to the default!)
+
+1998-03-13    <evan@worldpath.net>
+
+	* Fixed the save bug... document->filename
+	  was going out of scope...
+
+1998-03-10    <evan@worldpath.net>
+
+	* Fixed those incredibly annoying close bugs
+
+1998-03-07    <robo@earthling.net>
+
+	* Command line options added
+
+1998-03-05    <robo@earthling.net>
+
+	* 0.2 -> 0.2.1
+
+	* Fixed the Save on an Untitled file bug
+
+	* I got Cut/Copy/Paste/Select All working
+
+	* Started Log
+	
+
