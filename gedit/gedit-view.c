@@ -176,6 +176,95 @@ gedit_view_class_init (GeditViewClass *klass)
 			      GTK_TYPE_MENU);
 }
 
+static void
+move_cursor (GtkTextView       *text_view,
+	     const GtkTextIter *new_location,
+	     gboolean           extend_selection)
+{
+	GtkTextBuffer *buffer = text_view->buffer;
+
+	if (extend_selection)
+		gtk_text_buffer_move_mark_by_name (buffer, "insert",
+						   new_location);
+	else
+		gtk_text_buffer_place_cursor (buffer, new_location);
+
+	gtk_text_view_scroll_mark_onscreen (text_view,
+					    gtk_text_buffer_get_insert (buffer));
+}
+
+/*
+ * This feature is implemented in gedit and not in gtksourceview since the latter
+ * has a similar feature called smart home/end that it is non-capatible with this 
+ * one and is more "invasive". May be in the future we will move this feature in 
+ * gtksourceview.
+ */
+static void
+gedit_view_move_cursor (GtkTextView    *text_view,
+			GtkMovementStep step,
+			gint            count,
+			gboolean        extend_selection,
+			gpointer	data)
+{
+	GtkTextBuffer *buffer = text_view->buffer;
+	GtkTextMark *mark;
+	GtkTextIter cur, iter;
+
+	if (step != GTK_MOVEMENT_DISPLAY_LINE_ENDS)
+		return;
+
+	g_return_if_fail (!gtk_source_view_get_smart_home_end (GTK_SOURCE_VIEW (text_view)));	
+			
+	mark = gtk_text_buffer_get_insert (buffer);
+	gtk_text_buffer_get_iter_at_mark (buffer, &cur, mark);
+	iter = cur;
+
+	if ((count == -1) && gtk_text_iter_starts_line (&iter))
+	{
+		/* Find the iter of the first character on the line. */
+		while (!gtk_text_iter_ends_line (&cur))
+		{
+			gunichar c = gtk_text_iter_get_char (&cur);
+			if (g_unichar_isspace (c))
+				gtk_text_iter_forward_char (&cur);
+			else
+				break;
+		}
+
+		if (!gtk_text_iter_equal (&cur, &iter))
+		{
+			move_cursor (text_view, &cur, extend_selection);
+			g_signal_stop_emission_by_name (text_view, "move-cursor");
+		}
+
+		return;
+	}
+
+	if ((count == 1) && gtk_text_iter_ends_line (&iter))
+	{
+		/* Find the iter of the last character on the line. */
+		while (!gtk_text_iter_starts_line (&cur))
+		{
+			gunichar c;
+			gtk_text_iter_backward_char (&cur);
+			c = gtk_text_iter_get_char (&cur);
+			if (!g_unichar_isspace (c))
+			{
+				/* We've gone one character too far. */
+				gtk_text_iter_forward_char (&cur);
+				break;
+			}
+		}
+
+		if (!gtk_text_iter_equal (&cur, &iter))
+		{
+			move_cursor (text_view, &cur, extend_selection);
+			g_signal_stop_emission_by_name (text_view, "move-cursor");
+		}
+	}
+}
+
+
 static void 
 gedit_view_init (GeditView  *view)
 {
@@ -238,7 +327,7 @@ gedit_view_init (GeditView  *view)
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
 		      "margin", gedit_prefs_manager_get_right_margin_position (),
 		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (), 
-		      "smart_home_end", FALSE,
+		      "smart_home_end", FALSE, /* Never changes this */
 		      NULL);
 
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
@@ -248,6 +337,10 @@ gedit_view_init (GeditView  *view)
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
 			  G_CALLBACK (gedit_view_populate_popup), view);
+
+	g_signal_connect (G_OBJECT (view->priv->text_view), "move-cursor",
+			  G_CALLBACK (gedit_view_move_cursor), view);
+
 	
 }
 

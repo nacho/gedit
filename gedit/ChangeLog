@@ -1,3 +1,11 @@
+2005-01-12  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #161612 (Use of "Home" key when text editing)
+
+	* gedit-view.c (move_cursor) (gedit_view_move_cursor): new functions
+	(gedit_view_init): connect the move-cursor signal to 
+	gedit_view_move_cursor
+
 ==== gedit 2.9.4 ====
 
 2005-01-11  Paolo Maggi  <paolo@gnome.org>
