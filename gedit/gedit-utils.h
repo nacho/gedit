@@ -45,10 +45,10 @@ void	gedit_utils_flash_va  (gchar *format, ...);
 gboolean gedit_utils_is_uri_read_only (const gchar* uri);
 gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
 
-GtkWidget* gedit_button_new_with_stock_image (const gchar* text, 
+GtkWidget *gedit_button_new_with_stock_image (const gchar* text, 
 					      const gchar* stock_id);
 
-GtkWidget* gedit_dialog_add_button (GtkDialog *dialog, 
+GtkWidget *gedit_dialog_add_button (GtkDialog *dialog, 
 				    const gchar* text, 
 				    const gchar* stock_id, 
 				    gint response_id);
@@ -81,7 +81,10 @@ void gedit_utils_set_atk_relation (GtkWidget *obj1, GtkWidget *obj2,
 						AtkRelationType rel_type);
 
 gboolean gedit_utils_uri_exists (const gchar* text_uri);
-gchar *  gedit_utils_convert_search_text (const gchar *text);
+
+gchar *gedit_utils_convert_search_text (const gchar *text);
+
+gboolean gedit_utils_create_empty_file (const gchar *uri);
 
 #endif /* __GEDIT_UTILS_H__ */
 

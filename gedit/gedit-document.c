@@ -870,7 +870,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	while (feof (stdin) == 0)
 	{
 		buffer_length = fread (tmp_buf, 1, GEDIT_STDIN_BUFSIZE, stdin);
-		tmp_buf [buffer_length + 1] = '\0';
+		tmp_buf [buffer_length] = '\0';
 		g_string_append (file_contents, tmp_buf);
 
 		if (ferror (stdin) != 0)
@@ -892,10 +892,39 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	{
 		if (!g_utf8_validate (file_contents->str, file_contents->len, NULL))
 		{
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GEDIT_ERROR_INVALID_UTF8_DATA,
-				_("Invalid UTF-8 data"));
+			/* The file contains invalid UTF8 data */
+			/* Try to convert it to UTF-8 from currence locale */
+			GError *conv_error = NULL;
+			gchar* converted_file_contents = NULL;
+			gsize bytes_written;
+			
+			converted_file_contents = g_locale_to_utf8 (file_contents->str, file_contents->len,
+					NULL, &bytes_written, &conv_error); 
+						
+			if ((conv_error != NULL) || 
+			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
+			{
+
+				/* Coversion failed */	
+				if (conv_error != NULL)
+					g_error_free (conv_error);
+
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
+					     GEDIT_ERROR_INVALID_UTF8_DATA,
+				     	     _("Invalid UTF-8 data"));
+				
+				if (converted_file_contents != NULL)
+					g_free (converted_file_contents);
+				
+				g_string_free (file_contents, TRUE);
+				
+				return FALSE;
+			}
+
 			g_string_free (file_contents, TRUE);
-			return FALSE;
+
+			/* FIXME: this could be more efficient */
+			file_contents = g_string_new (converted_file_contents);
 		}
 
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);

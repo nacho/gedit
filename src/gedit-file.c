@@ -667,7 +667,7 @@ gboolean
 gedit_file_open_uri_list (GList* uri_list, gint line)
 {
 	gchar *full_path;
-	gboolean ret = TRUE;
+	gboolean ret = FALSE;
 	gint loaded_files = 0;
 	BonoboMDIChild *active_child = NULL;
 	GeditView* view = NULL;

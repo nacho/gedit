@@ -35,6 +35,9 @@
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-string.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include <string.h>
 
@@ -1381,4 +1384,37 @@ gedit_utils_convert_search_text (const gchar *text)
 	}
 
 	return g_string_free (str, FALSE);
+}
+
+gboolean
+gedit_utils_create_empty_file (const gchar *uri)
+{
+	gchar *temp_filename;
+	gchar *filename;
+	int fd;
+	
+	g_return_val_if_fail (uri != NULL, FALSE);
+	
+	/* Get filename from uri */
+	temp_filename = eel_make_uri_canonical (uri);
+	
+	if ((temp_filename == NULL) || (strlen (temp_filename) <= 7))
+		filename = NULL;
+	else
+		filename = g_strdup (temp_filename + 7);
+
+	if (temp_filename != NULL)
+		g_free (temp_filename);
+	
+	if (!filename)
+		return FALSE;
+	
+	fd = open (filename, O_CREAT | O_EXCL);
+
+	g_free (filename);
+	
+	if (fd == -1)
+		return FALSE;
+	
+	close (fd);
 }

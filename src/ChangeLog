@@ -1,3 +1,18 @@
+2002-07-16  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-utils.[ch] (gedit_utils_create_empty_file): new function
+
+	* gedit-file.c (gedit_file_open_uri_list): return FALSE if no file
+	is loaded
+
+	* gedit2.c (gedit_load_file_list): read stdin even if data == NULL
+	(bug #88213 partially fixed)
+
+	* gedit-document.c (gedit_document_load_from_stdin): convert input
+	from locale encoding to utf8 if needed
+
+	* gedit-commands.c (gedit_cmd_help_about): fix bug #88269
+
 2002-07-15  James Willcox  <jwillcox@cs.indiana.edu>
 
 	* gedit-utils.[ch] (gedit_utils_convert_search_text):  Converts
