@@ -1,5 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 
+appicondir=$(datadir)/pixmaps
+
+appicon_DATA = gnome-gedit.png
+
 INCLUDES = -I$(includedir) -I$(top_srcdir)		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
@@ -76,7 +80,7 @@ gedit_SOURCES = 	\
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(corba_libs) \
 	      $(libgnorba_libs) $(INTLLIBS)
 
-EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm $(gtkrc_DATA)
+EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm $(gtkrc_DATA) $(appicon_DATA)
 
 CPPFLAGS = \
 	-DBINDIR=\""$(bindir)"\" \
