@@ -1,3 +1,7 @@
+#include <signal.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <dirent.h>
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -363,7 +367,29 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 
 }
 
+/* ---- Print Function ---- */
 
+void file_print_cmd_callback (GtkWidget *widget, gpointer data)
+{
+char print[256];
+FILE *temp;
+
+ /*if (gE_document_current(main_window)->filename == NULL)
+  {*/
+     file_save_cmd_callback(NULL,NULL);
+   /*}*/
+
+	strcpy(print, "");
+	strcpy(print, "lpr -cs ");
+ /* gE_file_save(gE_document_current(main_window), "temp001");*/
+                      
+	strcat(print, gE_document_current(main_window)->filename);
+	system (print);   
+	
+   			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Printed..."));
+   /*system("rm -f temp001");*/
+
+}
 
 /* ---- Clipboard Callbacks ---- */
 

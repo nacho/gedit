@@ -26,6 +26,7 @@ void file_open_cmd_callback(GtkWidget *widget, gpointer data);
 void file_save_cmd_callback(GtkWidget *widget, gpointer data);
 void file_save_as_cmd_callback(GtkWidget *widget, gpointer data);
 void file_close_cmd_callback(GtkWidget *widget, gE_window *quitting);
+void file_print_cmd_callback (GtkWidget *widget, gpointer data);
 void prefs_callback(GtkWidget *widget, gpointer data);
 void edit_cut_cmd_callback(GtkWidget *widget, gpointer data);
 void edit_copy_cmd_callback (GtkWidget *widget, gpointer data);
