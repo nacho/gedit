@@ -31,7 +31,7 @@ void dialog_about (void);
 void
 dialog_about (void)
 {
-#if 0
+#if 1
 	GladeXML *gui = glade_xml_new ("/home/elerium/cvs/gedit/src/dialogs/about.glade", NULL);
 
 	if (!gui)

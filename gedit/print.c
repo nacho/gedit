@@ -177,14 +177,14 @@ print_document (Document *doc, GnomePrinter *printer)
 
 	pji = g_new0 (PrintJobInfo, 1);
 	set_pji (pji, doc, printer);
-
+	
 #ifdef PRINT_DEBUG_ON
 	debugmsg = g_strdup_printf("Pages : %i Total Lines : %i Total Lines Real :%i\n", pji->pages, pji->total_lines, pji->total_lines_real);
 	gedit_debug_mess (debugmsg, DEBUG_PRINT);
 	g_free (debugmsg);
 #endif
 	j=0;
-	pji->temp = g_malloc( pji->chars_per_line + 1);
+	pji->temp = g_malloc( pji->chars_per_line + 2);
 	start_job (pji->pc);
 	for(i = 1; i <= pji->pages; i++)
 	{
@@ -192,7 +192,7 @@ print_document (Document *doc, GnomePrinter *printer)
 		debugmsg = g_strdup_printf("Printing page %i\n", i);
 		gedit_debug_mess (debugmsg, DEBUG_PRINT);
 		g_free (debugmsg);
-#endif
+#endif		
 		if (settings->printheader)
 			print_header(pji, i);
 		print_setfont (pji);
@@ -201,7 +201,9 @@ print_document (Document *doc, GnomePrinter *printer)
 		   of the last line in the previous page. Chema */
 		if (pji->buffer[ pji->file_offset -1] != '\n' && i>1 && pji->wrapping)
 		{
-/*			g_print("2.No es N, decrementa j\n");*/
+#ifdef PRINT_DEBUG_ON
+			g_print("decrementing -j- my friend !\n");
+#endif
 			j--;
 		}
 		
@@ -209,7 +211,7 @@ print_document (Document *doc, GnomePrinter *printer)
 		{
 #ifdef PRINT_DEBUG_ON
 			debugmsg = g_strdup_printf("Printing line: %i\n", j);
-/*			gedit_debug_mess (debugmsg, DEBUG_PRINT);*/
+			gedit_debug_mess (debugmsg, DEBUG_PRINT_DEEP);
 			g_free (debugmsg);
 			/* Podemos ver si el apuntador se quedo
 			   en una /n o no */
@@ -221,6 +223,7 @@ print_document (Document *doc, GnomePrinter *printer)
 		end_page (pji);
 	}
 	end_job (pji->pc);
+	g_print("\nAbout to free temp :%s\n", pji->temp);
 	g_free (pji->temp);
 		
 	gnome_print_context_close (pji->pc);
@@ -268,6 +271,8 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 		
 	while( (pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size))
 	{
+		if (i>pji->chars_per_line)
+			g_print("I1:%i\n", i);
 		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
 		if( i == pji->chars_per_line + 1 )
@@ -299,6 +304,8 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 			}
 		}
 	}
+	if (i>pji->chars_per_line)
+		g_print("I2:%i\n", i);
 	pji->temp[i]=(guchar) '\0';
 	pji->file_offset = pji->file_offset + i + 1;
 	if (print_line && i > 0)
@@ -413,7 +420,9 @@ print_determine_lines (PrintJobInfo *pji, int real)
 		{
 			if ((character>0 || !real || !pji->wrapping)||(character==0&&pji->wrapping))
 				lines++;
-/*			g_print("%i:%c\n",lines,pji->buffer[i+1]);*/
+#ifdef PRINT_DEBUG_ON
+			g_print("%i:%c\n",lines,pji->buffer[i+1]);
+#endif
 			character=0;
 		}
 		else
@@ -425,13 +434,17 @@ print_determine_lines (PrintJobInfo *pji, int real)
 				{
 					lines++;
 					character=1;
-/*					g_print("added a line because of Wrapping\n");*/ 
+#ifdef PRINT_DEBUG_ON
+					g_print("added a line because of Wrapping\n");
+#endif					
 				}
 			}
 		}
 	}
 
-/*	g_print("Determine lines found %i lines\n", lines);*/ 
+#ifdef PRINT_DEBUG_ON
+	g_print("Determine lines found %i lines\n", lines);
+#endif
         /* After counting, scan the doc backwards to determine how many
 	   blanks lines there are (at the bottom),substract that from lines */
 	for ( i=pji->buffer_size-1; i>0; i--)
@@ -441,8 +454,9 @@ print_determine_lines (PrintJobInfo *pji, int real)
 			if (pji->buffer[i] == '\n')
 				lines--;
 
-/*      g_print("And after substracting blank lines we have %i\n", lines);*/
-
+#ifdef PRINT_DEBUG_ON
+      g_print("And after substracting blank lines we have %i\n", lines);
+#endif
 	return lines;
 }
 
