@@ -18,8 +18,8 @@
   <class>GnomeDialog</class>
   <name>dialog</name>
   <title>Replace</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_MOUSE</position>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>False</allow_grow>
@@ -296,17 +296,7 @@
 	</widget>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>ask_before_replacing</name>
-	  <can_focus>True</can_focus>
-	  <label>Ask before replacing</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
+	  <class>Placeholder</class>
 	</widget>
 
 	<widget>

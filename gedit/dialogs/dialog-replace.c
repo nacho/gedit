@@ -36,8 +36,6 @@ static void replace_text_destroyed_cb (GtkWidget *widget, gint button);
 static void replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void replace_text_clicked_cb (GtkWidget *widget, gint button);
-static void views_delete (Document *doc, gulong start_pos, gulong end_pos);
-static void views_insert (Document *doc, gulong start_pos, gchar * text_to_insert);
 
        void dialog_replace (gint full);
 
@@ -153,11 +151,15 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			start = pos_found + delta + 1;
 			end   = pos_found + search_text_length + delta + 1;
 
+			/*
 			doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
+			*/
 			views_delete (view->document, start, end);
 
+			/*
 			doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
-			views_insert (view->document, start, text_to_replace_with);
+			*/
+			views_insert (view->document, start, text_to_replace_with, replace_text_length, NULL);
 
 			start_pos = pos_found + search_text_length;
 
@@ -199,11 +201,15 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		
 		/* Diselect the text and set the point after this occurence*/
 
+		/*
 		doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
+		*/
 		views_delete (view->document, start, end);
 
+		/*
 		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
-		views_insert (view->document, start, text_to_replace_with);
+		*/
+		views_insert (view->document, start, text_to_replace_with, replace_text_length, NULL);
 
 
 		/*
@@ -263,84 +269,6 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	}
 }
 
-/* FIXME: This rutine was copied from undo.c, we need not to duplicate
-   it. But the parameters we need are diferent. We can do this when
-   we rewrite view.c ( which is ugly ) Chema */
-static void
-views_delete (Document *doc, gulong start_pos, gulong end_pos)
-{
-	View *nth_view;
-	gint n;
-	gulong p1;
-
-	gedit_debug (" start \n", DEBUG_SEARCH);
-
-	for (n = 0; n < g_list_length (doc->views); n++)
-	{
-		nth_view = g_list_nth_data (doc->views, n);
-
-	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
-		gtk_text_set_point (GTK_TEXT(nth_view->text), end_pos);
-		gtk_text_backward_delete (GTK_TEXT (nth_view->text), (end_pos - start_pos));
-
-#ifdef ENABLE_SPLIT_SCREEN
-		g_print(" 1..");		
-		gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
-		g_print(" 2..");		
-	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
-		g_print(" 3..");		
-		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), start_pos);
-		g_print(" 4..");		
-		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
-		g_print(" 5..");		
-		gtk_text_backward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-		/* I have not tried it but WHY whould you use backward above and forward here ? Chema
-		gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-		*/
-		g_print(" 6..\n");
-#endif /* ENABLE_SPLIT_SCREEN */		
-	}
-
-	gedit_debug (" end \n", DEBUG_SEARCH);
-}
-
-static void
-views_insert (Document *doc, gulong start_pos, gchar * text_to_insert)
-{
-	gint n;
-	gint p1;
-	View *nth_view;
-
-	gedit_debug ("\n", DEBUG_SEARCH);
-	
-	for (n = 0; n < g_list_length (doc->views); n++)
-	{
-		nth_view = g_list_nth_data (doc->views, n);
-		/*
-		gtk_text_freeze (GTK_TEXT (view->text));
-		*/
-		p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
-		gtk_text_set_point (GTK_TEXT(nth_view->text),start_pos);
-		/*
-		gtk_text_thaw (GTK_TEXT (view->text));
-		*/
-		gtk_text_insert (GTK_TEXT (nth_view->text), NULL,
-				 NULL, NULL, text_to_insert,
-				 strlen(text_to_insert));
-#ifdef ENABLE_SPLIT_SCREEN		
-		gtk_text_freeze (GTK_TEXT (view->split_screen));
-		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
-		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
-		gtk_text_thaw (GTK_TEXT (view->split_screen));
-		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-				 NULL, NULL, undo->text,
-				 strlen(undo->text));
-#endif		
-	}  
-}
-
-
-
 void
 dialog_replace (gint full)
 {
@@ -387,7 +315,14 @@ dialog_replace (gint full)
 	hbox_replace_with     = glade_xml_get_widget (gui, "hbox_replace_with");
 	replace_button        = glade_xml_get_widget (gui, "replace_button");
 	replace_all_button    = glade_xml_get_widget (gui, "replace_all_button");
+	/* disabled because it was causing the dialog to pop up twice
 	ask_before_replacing  = glade_xml_get_widget (gui, "ask_before_replacing");
+	*/
+
+	/* FIXME: We hide this feature always because is not
+	   implemented yet. Chema 
+	gtk_widget_hide (ask_before_replacing);
+	*/
 
 	if (!replace_text_dialog ||
 	    !search_entry ||
@@ -396,8 +331,8 @@ dialog_replace (gint full)
 	    !radio_button_1 ||
 	    !hbox_replace_with ||
 	    !replace_button ||
-	    !replace_all_button ||
-	    !ask_before_replacing)
+	    !replace_all_button /*||
+				  !ask_before_replacing*/)
 	{
 		g_warning ("Corrupted search.glade detected, reinstall gedit.");
 		return;
@@ -419,11 +354,14 @@ dialog_replace (gint full)
 	gtk_signal_connect (GTK_OBJECT (replace_entry), "activate",
 			    GTK_SIGNAL_FUNC (search_entry_activate_cb), replace_text_dialog);
 
-	
 	gnome_dialog_set_parent (GNOME_DIALOG (replace_text_dialog),
 				 GTK_WINDOW (mdi->active_window));
 	gtk_window_set_modal (GTK_WINDOW (replace_text_dialog), TRUE);
-	gtk_widget_show_all (replace_text_dialog);
+
+
+	/* NOT needed
+	gtk_widget_show_all (replace_text_dialog); 
+	*/
 
 	if (!full)
 	{
@@ -431,11 +369,10 @@ dialog_replace (gint full)
 		gtk_widget_hide (replace_button);
 		gtk_widget_hide (replace_all_button);
 	}
-	/* FIXME: We hide this feature always because is not
-	   implemented yet. Chema */
-	gtk_widget_hide (ask_before_replacing);
 
-	gtk_object_destroy (GTK_OBJECT (gui));
+	gtk_object_unref (GTK_OBJECT (gui));
+
+	gnome_dialog_run (GNOME_DIALOG(replace_text_dialog));
 }
 
 

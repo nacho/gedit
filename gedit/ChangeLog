@@ -1,3 +1,26 @@
+2000-05-31  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c: use the new function
+
+	* undo.c (gedit_undo_do): use new function
+	(gedit_undo_redo): ditto
+
+	* view.c: added views_insert and view_delete
+	(gedit_view_list_insert): deleted
+	(views_delete): moved here
+	(views_insert): moved here
+	(doc_insert_text_cb): rewrote and. Now uses the new
+	view function
+
+	Starting to clean this ugly file.
+
+	* undo.c: move the views_insert and view_delete to view
+
+	* dialogs/dialog-replace.c (dialog_replace): fix the problem when
+	the dialog pops up in 2 diferent locations.
+
+	moved the views_insert code to view.c
+
 2000-05-30  Chema Celorio  <chema@celorio.com>
 
 	* undo.c (gedit_undo_do): before undoing/redoing

@@ -27,8 +27,6 @@
 #include "document.h"
 #include "view.h"
 
-void views_insert (Document *doc, gedit_undo *undo);
-void views_delete (Document *doc, gedit_undo *undo);
 void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
 void gedit_undo_do (GtkWidget *w, gpointer data);
 void gedit_undo_redo (GtkWidget *w, gpointer data);
@@ -39,7 +37,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 {
 	gedit_undo *undo;
 
-	/*"start:%i end:%i action:%i\n", start_pos, end_pos, action);*/
+	gedit_debug ("\n", DEBUG_UNDO);
 
 	undo = g_new (gedit_undo, 1);
 
@@ -67,6 +65,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	gedit_undo *undo, *redo;
+
+	gedit_debug ("\n", DEBUG_UNDO);
 
 	if (doc==NULL)
 		return;
@@ -97,7 +97,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 		else
 			doc->buf = g_string_append (doc->buf, undo->text);
 
-		views_insert (doc, undo);
+		views_insert (doc, undo->start_pos, undo->text, undo->end_pos - undo->start_pos, NULL);
 	}
 	else if (undo->action == INSERT)
 	{
@@ -108,7 +108,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 		else
 			doc->buf = g_string_truncate (doc->buf, undo->start_pos);
 
-		views_delete (doc, undo);
+		views_delete (doc, undo->start_pos, undo->end_pos);
 		doc->changed = undo->status;
 	}
 	else
@@ -122,8 +122,11 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	Document *doc = gedit_document_current();
 	gedit_undo *redo;
 
+	gedit_debug ("\n", DEBUG_UNDO);
+
 	if (doc==NULL)
 		return;
+
 	if (!doc->redo)
 		return;
 	
@@ -146,7 +149,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 			doc->buf = g_string_append (doc->buf, redo->text);
 
 		/* PRINT THE INFO BEFORE inserting */
-		views_insert (doc, redo);
+		views_insert (doc, redo->start_pos, redo->text, redo->end_pos - redo->start_pos, NULL);
 	}
 	else if (redo->action == DELETE)
 	{
@@ -156,86 +159,10 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		else
 			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
 
-		views_delete (doc, redo);
+		views_delete (doc, redo->start_pos, redo->end_pos);
 		/*doc->changed = undo->status; this line by chema */
 	}
 	else 
 		g_assert_not_reached ();
 }
-
-void
-views_insert (Document *doc, gedit_undo *undo)
-{
-	gint i;
-	gint p1;
-	View *view;
-
-	for (i = 0; i < g_list_length (doc->views); i++)
-	{
-		view = g_list_nth_data (doc->views, i);
-		gtk_text_freeze (GTK_TEXT (view->text));
-		p1 = gtk_text_get_point (GTK_TEXT (view->text));
-		gtk_text_set_point (GTK_TEXT(view->text), undo->start_pos);
-		gtk_text_thaw (GTK_TEXT (view->text));
-		gtk_text_insert (GTK_TEXT (view->text), NULL,
-				 NULL, NULL, undo->text,
-				 strlen(undo->text));
-#ifdef ENABLE_SPLIT_SCREEN		
-		gtk_text_freeze (GTK_TEXT (view->split_screen));
-		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
-		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
-		gtk_text_thaw (GTK_TEXT (view->split_screen));
-		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-				 NULL, NULL, undo->text,
-				 strlen(undo->text));
-#endif	
-	}  
-}
-
-void
-views_delete (Document *doc, gedit_undo *undo)
-{
-	View *nth_view;
-	gint n;
-	gint p1;
-	gint start_pos, end_pos;
-
-	start_pos = undo->start_pos;
-	end_pos = undo->end_pos;
-	
-	/*("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);*/
-
-	for (n = 0; n < g_list_length (doc->views); n++)
-	{
-		nth_view = g_list_nth_data (doc->views, n);
-
-		gtk_text_freeze (GTK_TEXT (nth_view->text));
-	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
-		gtk_text_set_point (GTK_TEXT(nth_view->text), end_pos);
-		gtk_text_thaw (GTK_TEXT (nth_view->text)); /* thaw before deleting so that cursos repositions ok */
-		gtk_text_backward_delete (GTK_TEXT (nth_view->text), (end_pos - start_pos));
-#ifdef ENABLE_SPLIT_SCREEN			
-		gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
-	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
-		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), start_pos);
-		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
-		gtk_text_backward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-		/* I have not tried it but WHY whould you use backward above and forward here ? Chema
-		gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-		*/
-#endif
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
 

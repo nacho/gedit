@@ -13,4 +13,3 @@ gchar *s = N_("Replace with: ");
 gchar *s = N_("beginning of document");
 gchar *s = N_("cursor position");
 gchar *s = N_("Case sensitive");
-gchar *s = N_("Ask before replacing");
