@@ -36,6 +36,7 @@
 
 static GtkWidget *entry1;
 static GtkWidget *entry2;
+static GtkWidget *dialog;
 
 void call_diff (GtkWidget *widget, gpointer data);
 
@@ -69,7 +70,7 @@ open_file_sel (GtkWidget *widget, gpointer data)
 static void
 done (GtkWidget *widget, gpointer data)
 {
-	gtk_widget_destroy (widget);
+	gtk_widget_destroy (dialog);
 }
 
 void
@@ -149,7 +150,6 @@ diff_plugin (PluginData *pd)
 	GtkWidget *label;
 	GtkWidget *hbox;
 	GtkWidget *button;
-	GtkWidget *dialog;
 
 	dialog = gtk_dialog_new ();
 	gtk_window_set_title (GTK_WINDOW (dialog), "Choose files to diff" );
