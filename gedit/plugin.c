@@ -241,11 +241,10 @@ void plugin_send_data_bool( plugin *the_plugin, gboolean bool)
   write( the_plugin->pipe_data, &ch, sizeof( ch ) );
 }
 
-void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
+void plugin_real_get( plugin *the_plugin, gchar *buffer, gint length )
 {
   gint bytes;
   gchar *start = buffer;
-  buffer[ length ] = 0;
   while( length > 0 )
     {
       do
@@ -272,6 +271,17 @@ void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
     }
 }
 
+void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
+{
+  buffer[ length ] = 0;
+  plugin_real_get( the_plugin, buffer, length );
+}
+
+void plugin_get_int( plugin *the_plugin, gint *number )
+{
+  plugin_real_get( the_plugin, (gchar *) number, sizeof( gint ) );
+}
+
 static void *plugin_parse(plugin *plug)
 {
   gchar command;
@@ -291,8 +301,8 @@ static void *plugin_parse(plugin *plug)
       switch(command)
 	{
 	case 'a':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
-	  plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
+	  plugin_get_int( plug, &length );
 	  buffer = g_malloc0( length + 1 );
 	  plugin_get( plug, buffer, length );
 	  {
@@ -304,8 +314,8 @@ static void *plugin_parse(plugin *plug)
 	  g_free( buffer );
 	  break;
 	case 'c':
-	  plugin_get( plug, (gchar *) &contextid, sizeof( gint ) );
 	  {
+	    plugin_get_int( plug, &contextid );
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.current )
 	      plugin_send_data_int( plug, plug->callbacks.document.current( contextid ) );
@@ -323,7 +333,7 @@ static void *plugin_parse(plugin *plug)
 	  switch(command)
 	    {
 	    case 'r':
-	      plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	      plugin_get_int( plug, &docid );
 	      {
 		selection_range selection = { 0, 0 };
 		{
@@ -337,8 +347,8 @@ static void *plugin_parse(plugin *plug)
 	      }
 	      break;
 	    case 's':
-	      plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
-	      plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	      plugin_get_int( plug, &docid );
+	      plugin_get_int( plug, &length );
 	      buffer = g_malloc0( length + 1 );
 	      plugin_get( plug, buffer, length );
 	      {
@@ -350,7 +360,7 @@ static void *plugin_parse(plugin *plug)
 	      g_free( buffer );
 	      break;
 	    case 't':
-	      plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	      plugin_get_int( plug, &docid );
 	      {
 		gdk_threads_enter();
 		if ( plug->callbacks.text.get_selected_text )
@@ -370,7 +380,7 @@ static void *plugin_parse(plugin *plug)
 	    }
 	  break;
 	case 'f':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.filename )
@@ -384,7 +394,7 @@ static void *plugin_parse(plugin *plug)
 	  }
 	  break;
 	case 'g':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.text.get )
@@ -402,7 +412,7 @@ static void *plugin_parse(plugin *plug)
 	    plugin_send_data_with_length( plug, "", 0 );
 	  break;
 	case 'l':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.close )
@@ -415,8 +425,8 @@ static void *plugin_parse(plugin *plug)
 	  }
 	  break;
 	case 'n':
-	  plugin_get( plug, (gchar *) &contextid, sizeof( gint ) );
-	  plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	  plugin_get_int( plug, &contextid );
+	  plugin_get_int( plug, &length );
 	  buffer = g_malloc0( length + 1 );
 	  plugin_get( plug, buffer, length );
 	  {
@@ -430,8 +440,8 @@ static void *plugin_parse(plugin *plug)
 	  g_free( buffer );
 	  break;
 	case 'o':
-	  plugin_get( plug, (gchar *) &contextid, sizeof( gint ) );
-	  plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	  plugin_get_int( plug, &contextid );
+	  plugin_get_int( plug, &length );
 	  buffer = g_malloc0( length + 1 );
 	  plugin_get( plug, buffer, length );
 	  {
@@ -445,7 +455,8 @@ static void *plugin_parse(plugin *plug)
 	  g_free( buffer );
 	  break;
 	case 'p':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
+	  plugin_get_int( plug, &length );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.get_position )
@@ -468,10 +479,10 @@ static void *plugin_parse(plugin *plug)
 	  }
 	  break;
 	case 'r':
-	  plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	  plugin_get_int( plug, &length );
 	  buffer = g_malloc0( length + 1 );
 	  plugin_get( plug, buffer, length );
-	  plugin_get( plug, (gchar *) &length, sizeof( gint ) );
+	  plugin_get_int( plug, &length );
 	  buffer2 = g_malloc0( length + 1 );
 	  plugin_get( plug, buffer2, length );
 	  {
@@ -510,7 +521,7 @@ static void *plugin_parse(plugin *plug)
 	  g_free( buffer2 );
 	  break;
 	case 's':
-	  plugin_get( plug, (gchar *) &docid, sizeof( gint ) );
+	  plugin_get_int( plug, &docid );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.show )

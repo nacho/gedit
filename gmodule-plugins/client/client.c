@@ -159,6 +159,7 @@ static int fddata;
 
 gint client_init( gint *argc, gchar **argv[], client_info *info )
 {
+  int context;
 
   if( *argc < 5 || strcmp( (*argv)[1], "-go" ) )
     {
@@ -169,6 +170,8 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
   fd = atoi( (*argv)[2] );
   fdsend = atoi( (*argv)[3] );
   fddata = atoi( (*argv)[4] );
+
+  context = getnumber( fd );
 
   if( *argc > 5 && ! strcmp( (*argv)[5], "--query" ) )
     {
@@ -191,7 +194,8 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
   *argv += 4;
   *argc -= 4;
 
-  return getnumber( fd );
+  return context;
+
 }
 
 gint client_document_current( gint context )

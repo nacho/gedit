@@ -15,12 +15,38 @@ The rest of this document will be a list of functions and their
 descriptions.  It should be pretty clear what's going on.
 
 
-int client_init( int *argc, char **argv[], char *menu_location);
+int client_init( int *argc, char **argv[], client_info *info_struct);
 
 This function initializes the plugin interface.  It reads some of the
 arguments (discarding them in the process).  It does some initial
 communication with the editor.  It's meant to be called as
-context = client_init( &argc, &argv, "menu_location" );
+context = client_init( &argc, &argv, &info );
+
+The info variable is meant to have been set up to specify some
+information about the plugin.  The type client_info is a typedefed
+structure.  An empty copy of client_info is stored in a global
+variable empty_info.  This is used to initialize your structure
+thusly: client_info info = empty_info;  The main reason for this
+global variable is so that as fields get added to info, your copy of
+it has the default values for those new fields.
+
+The currently defined fields of the client_info structure are
+menu_location and suggested_accelerator.  These are discussed later.
+
+The format of menu_location is going to have a few different
+possibilities.  The only menu_location that's supported right now is
+"[Plugins]Menu label".  "[Plugins]" must be exactly the same and Menu
+label is how you want the menu item for your plugin to read.  You can
+also pass in "" and your plugin won't appear on any menus.
+
+The format of suggested_accelerator may have different versions as
+well.  The format is currently exactly the same as the old
+menu_factory format for accelerators.  Some examples are "<control>P"
+and "<alt>`" (Both from current plugins actually.)  The accelerator is
+ignored by gedit, but used by go.
+
+These values are used only if your plugin is called in query mode.  In
+query mode client_init doesn't return.
 
 The return value of client_init is a context identifier.  Some later
 functions require that you pass them the context identifier.  If they
@@ -28,17 +54,10 @@ accept a paramerter gint context, you should pass them your context
 identifier.  Currently, you can only operate in one context, that is,
 the one given to you by client_init.  This may change in the future.
 
-If the return value of client_init is 0, you're being called from the
-command line by the --launch-plugin argument to the editor.  There are
-some functions that you can't call, but it's currently dependant on
-which editor you're being called from.
-
-Finally, the format of menu_location.  The only menu_location that's
-supported right now is "[Plugins]Menu label", where Menu label is how
-you want the menu item for your plugin to read.  You can also pass in
-"" and your plugin won't appear on any menus.  This is only used if
-your plugin is called in query mode.  In query mode client_init
-doesn't return.
+Finally, if the return value of client_init is 0, you're being called
+from the command line by the --launch-plugin argument to the editor.
+There are some functions that you can't call, but it's currently
+dependant on which editor you're being called from.
 
 
 gint client_document_current( gint context );
@@ -105,8 +124,9 @@ functions are valid.  You cannot call client_init again after calling
 client_finish.
 
 
-The final thing that you have to do is to link with client.c and put
-yourself in PLUGINDIR.  Then you should be done.
+The final thing that you have to do is to link with client.c (or
+libclient.a in gedit) and put yourself in PLUGINDIR.  Then you should
+be done.
 
 (If its a new plugin, please add it to the 'README.plugins' file in
  the top gEdit directory, this way, people can see what plugins are
