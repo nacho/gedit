@@ -8,7 +8,7 @@ libasciitable_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 
 INCLUDES =						\
-	-I$(top_srcdir)/src 				\
+	-I$(top_srcdir)/gedit 				\
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\

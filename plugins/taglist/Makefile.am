@@ -8,7 +8,7 @@ taglist_DATA = \
 	XSLT.tags
 
 INCLUDES = \
-	-I$(top_srcdir)/src 				\
+	-I$(top_srcdir)/gedit 				\
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
