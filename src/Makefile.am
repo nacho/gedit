@@ -49,8 +49,7 @@ gedit_SOURCES = 	\
 	gedit-about.c gedit-about.h \
 	gedit-print.c gedit-print.h \
 	gE_prefs.h	\
-	gE_plugin.h \
-	gE_plugin.c \
+	gedit-plugin.c gedit-plugin.h \
 	main.h		\
 	gedit-menus.c gedit-menus.h \
 	gedit-search.c gedit-search.h
@@ -70,9 +69,4 @@ CPPFLAGS = \
 	-DPLUGINDIR=\""$(plugindir)"\" \
 	-DPLUGINLIBDIR=\""$(pluginlibdir)"\" \
 	-Wall -Wno-unused -ansi -D_IN_GEDIT
-
-
-
-
-
 

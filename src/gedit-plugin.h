@@ -18,10 +18,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GE_PLUGIN_H__
-#define __GE_PLUGIN_H__
+#ifndef __GEDIT_PLUGIN_H__
+#define __GEDIT_PLUGIN_H__
 
-typedef struct _gedit_Plugin_Data gedit_Plugin_Data;
+typedef struct _PluginData PluginData;
 
 #include <gmodule.h>
 
@@ -31,13 +31,13 @@ enum {
 	PLUGIN_DEAD
 };
 
-struct _gedit_Plugin_Data {
+struct _PluginData {
 	gchar	*file;
 	GModule	*handle;
 	
-	gint	(*init_plugin) 		(gedit_Plugin_Data *);
-	gint	(*can_unload)		(gedit_Plugin_Data *);
-	void	(*destroy_plugin)	(gedit_Plugin_Data *);
+	gint	(*init_plugin) 		(PluginData *);
+	gint	(*can_unload)		(PluginData *);
+	void	(*destroy_plugin)	(PluginData *);
 	
 	gchar	*name;
 	gchar	*desc;
@@ -50,12 +50,12 @@ struct _gedit_Plugin_Data {
 extern GSList	*plugin_list;
 
 /* Plugin MUST have this function */
-extern gint init_plugin (gedit_Plugin_Data *pd);
+/*extern gint init_plugin (PluginData *pd); */
 
-gedit_Plugin_Data *plugin_load              (const gchar *file);
-void               gedit_plugins_init       (void);
-void               plugin_unload            (gedit_Plugin_Data *pd);
+PluginData* plugin_load              (const gchar *file);
+void        gedit_plugins_init       (void);
+void        plugin_unload            (PluginData *pd);
 
-void               gedit_plugins_window_add (GnomeApp *app);
+void        gedit_plugins_window_add (GnomeApp *app);
 
-#endif /* __GE_PLUGIN_H__ */
+#endif /* __GEDIT_PLUGIN_H__ */

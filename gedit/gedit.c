@@ -26,7 +26,7 @@
 #include "gE_prefs.h"
 #include "gedit-file-io.h"
 #include "gedit-menus.h"
-#include "gE_plugin.h"
+#include "gedit-plugin.h"
 #include "gE_window.h"
 
 #ifdef HAVE_LIBGNORBA

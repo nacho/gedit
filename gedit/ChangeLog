@@ -1,5 +1,10 @@
 2000-04-03  Jason Leach  <leach@wam.umd.edu>
 
+	* gE_plugin.c (load_all_plugins): replaced a getenv() with a
+	g_get_home_dir()
+
+	* gE_plugin.c: removed 4 unnecessary #include's
+
 	* commands.c (file_open_ok_sel): replaced some stat() stuff with a
 	nice g_file_test() call
 

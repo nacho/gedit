@@ -33,7 +33,7 @@
 #include "gE_prefs.h"
 #include "gedit-search.h"
 #include "gedit-utils.h"
-#include "gE_plugin.h"
+#include "gedit-plugin.h"
 #include "../pixmaps/gE_icon.xpm"
 
 

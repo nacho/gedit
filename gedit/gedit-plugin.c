@@ -23,43 +23,44 @@
 #include <config.h>
 #include <gnome.h>
 #include <gmodule.h>
-#include <dirent.h>
+#include <dirent.h> 
 #include "main.h"
-#include "gE_window.h"
-#include "gE_view.h"
 #include "gedit-file-io.h"
-#include "commands.h"
-#include "gE_mdi.h"
-#include "gE_plugin.h"
+#include "gedit-plugin.h"
+
 
 GSList	*plugin_list = NULL;
 
-gedit_Plugin_Data *
+
+PluginData *
 plugin_load (const gchar *file)
 {
-	gedit_Plugin_Data *pd;
+	PluginData *pd;
 	guint res;
 	
 	g_return_val_if_fail (file != NULL, NULL);
 	
-	
-	if (!(pd = g_new0 (gedit_Plugin_Data, 1))) {
+	if (!(pd = g_new0 (PluginData, 1)))
+	{
 		g_print ("plugin allocation error");
 		return NULL;
 	}
 	
 	pd->file = g_strdup (file);
 	pd->handle = g_module_open (file, 0);
-	if (!pd->handle) {
+
+	if (!pd->handle)
+	{
 		g_print (_("Error, unable to open module file, %s"),
-					g_module_error ());
+			 g_module_error ());
 		
 		g_free (pd);
 		return NULL;
 	}
 	
 	if (!g_module_symbol (pd->handle, "init_plugin", 
-					  (gpointer*)&pd->init_plugin)) {
+			      (gpointer*)&pd->init_plugin))
+	{
 		
 		g_print (_("Error, plugin does not contain init_plugin function."));
 
@@ -67,7 +68,8 @@ plugin_load (const gchar *file)
 	}
 	
 	res = pd->init_plugin (pd);
-	if (res != PLUGIN_OK) {
+	if (res != PLUGIN_OK)
+	{
 		g_print (_("Error, init_plugin returned an error"));
 		
 		goto error;
@@ -76,7 +78,7 @@ plugin_load (const gchar *file)
 	plugin_list = g_slist_append (plugin_list, pd);
 	return pd;
 	
- error:
+error:
 	g_module_close (pd->handle);
 	g_free (pd->file);
 	g_free (pd);
@@ -84,7 +86,7 @@ plugin_load (const gchar *file)
 }
 
 void
-plugin_unload (gedit_Plugin_Data *pd)
+plugin_unload (PluginData *pd)
 {
 	int w, n;
 	char *path;
@@ -92,7 +94,8 @@ plugin_unload (gedit_Plugin_Data *pd)
 	
 	g_return_if_fail (pd != NULL);
 	
-	if (pd->can_unload && !pd->can_unload (pd)) {
+	if (pd->can_unload && !pd->can_unload (pd))
+	{
 		g_print (_("Error, plugin is still in use"));
 		return;
 	}
@@ -103,8 +106,12 @@ plugin_unload (gedit_Plugin_Data *pd)
 	n = g_slist_index (plugin_list, pd);
 	plugin_list = g_slist_remove (plugin_list, pd);
 	
+#if 0
 	path = g_new(gchar, strlen(_("_Plugins")) + 2);
-  	sprintf(path, "%s/", _("_Plugins"));
+  	sprintf (path, "%s/", _("_Plugins"));
+#endif
+
+	path = g_strdup_printf ("%s/", _("_Plugins"));
 	
 	for (w = 0; w < g_list_length (mdi->windows); w++)
 	{
@@ -127,8 +134,10 @@ plugin_load_plugins_in_dir (char *dir)
 	if ((d = opendir (dir)) == NULL)
 		return;
 	
-	while ((e = readdir (d)) != NULL) {
-		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0) {
+	while ((e = readdir (d)) != NULL)
+	{
+		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0)
+		{
 			char *plugin;
 			
 			plugin = g_strconcat (dir, e->d_name, NULL);
@@ -143,10 +152,12 @@ static void
 load_all_plugins (void)
 {
 	char *pdir;
-	char const * const home = getenv ("HOME");
+	char const * const home = g_get_home_dir ();
 	
 	/* load user plugins */
-	if (home != NULL) {
+	if (home != NULL)
+	{
+/*		pdir = gnome_util_prepend_user_home (".gedit/plugins/"); */
 		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
 		plugin_load_plugins_in_dir (pdir);
 		g_free (pdir);
@@ -158,6 +169,9 @@ load_all_plugins (void)
 	g_free (pdir);
 }
 
+/**
+ * gedit_plugins_init:
+ */
 void
 gedit_plugins_init (void)
 {
@@ -167,16 +181,26 @@ gedit_plugins_init (void)
 	load_all_plugins ();
 }
 
-
+/**
+ * gedit_plugisn_window_add:
+ * @app:
+ *
+ *
+ */
 void
 gedit_plugins_window_add (GnomeApp *app)
 {
-	gedit_Plugin_Data *pd;
-	gint	n;
-	gchar	*path;
-	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	
-	for (n = 0; n < g_slist_length (plugin_list); n++) {
+	PluginData  *pd;
+	gint         n;
+	gchar       *path;
+	GnomeUIInfo *menu;
+
+	g_return_if_fail (app != NULL);
+
+	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+
+	for (n = 0; n < g_slist_length (plugin_list); n++)
+	{
 		pd = g_slist_nth_data (plugin_list, n);
 		
 		path = g_new0 (gchar, strlen (_("_Plugins")) + 2);
@@ -190,7 +214,5 @@ gedit_plugins_window_add (GnomeApp *app)
 		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 		
 		gnome_app_insert_menus (app, path, menu);
-		
 	}
-	
 }
