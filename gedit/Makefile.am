@@ -104,6 +104,7 @@ ui_DATA = gedit-ui.xml
 
 EXTRA_DIST = \
 	$(ui_DATA)	\
-	gedit-marshal.list
+	gedit-marshal.list	\
+	gnome-recent-marshal.list
 
 CLEANFILES = $(BUILT_SOURCES)
