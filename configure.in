@@ -62,14 +62,14 @@ AM_PATH_GTK(1.2.7,,
 dnl ******************************
 dnl GnomePrint checking
 dnl ******************************
-AC_MSG_CHECKING(for GnomePrint libraries >= 0.23)
+AC_MSG_CHECKING(for GnomePrint libraries >= 0.24)
 if gnome-config --libs print > /dev/null 2>&1; then 
     vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 23; then
+    if test "$vers" -ge 24; then
         AC_MSG_RESULT(found)
     else
-        AC_MSG_ERROR(You need at least GNOME print 0.23 for this version of gedit)
+        AC_MSG_ERROR(You need at least GNOME print 0.24 for this version of gedit)
     fi
 else
     AC_MSG_ERROR(Did not find GnomePrint installed)

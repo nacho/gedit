@@ -141,7 +141,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
 #endif
 
-#if 1 /* FIXME We are leaking memory here but it is crashing, I will continue tomorrow. */
+#if 1 /* FIXME We are leaking memory here but it is crashing */
 	if (settings->font)
 		g_free (settings->font);
 #endif	
@@ -411,7 +411,8 @@ prepare_fontscolors_page (GladeXML *gui)
 
 	/* setup the initial states */
 	if (mdi->active_view)
-		style = gtk_style_copy (gtk_widget_get_style (GEDIT_VIEW (mdi->active_view)->text));
+		style = gtk_style_copy (gtk_widget_get_style (
+			GTK_WIDGET (GEDIT_VIEW (mdi->active_view)->text)));
 	else
 		style = gtk_style_new ();
 

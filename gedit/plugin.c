@@ -121,7 +121,9 @@ gedit_plugins_menu_add (GnomeApp *app)
 	gnome_app_insert_menus (app, path, menu);
 	gnome_app_install_menu_hints (app, menu);
 
-#if 0	
+#if 0 /* We keep a pointer to the menu item in the plugin strucure
+	 this is broken because with multiple toplevel windows
+	 there are more than 1 widgets for each plugin */
 	menu_pos = 2;
 	for (n = 0; n < g_list_length (plugins_list); n++)
 	{

@@ -25,43 +25,40 @@
 #include "view.h"
 #include "document.h"
 
-typedef struct _SearchInfo {
-	gint state;
-	gint original_readonly_state;
-	guchar * buffer;
-	gulong buffer_length;
-	View *view;
-	Document *doc;
-	guchar* last_text_searched;
-	gint last_text_searched_case_sensitive;
-	guint replace_start;
-	guint replace_end;
-} SearchInfo;
 
-extern SearchInfo gedit_search_info;
+void gedit_search_start  (void);
+void gedit_search_end    (void);
+gint gedit_search_verify (void);
 
-  gint search_verify_document (void);
-  void gedit_search_end (void);
-  void gedit_search_start (void);
-  void dump_search_state (void);
-  void file_info_cb (GtkWidget *widget, gpointer data);
-  void find_cb (GtkWidget *widget, gpointer data);
-  void find_again_cb (GtkWidget *widget, gpointer data);
-  void replace_cb (GtkWidget *widget, gpointer data);
-  void goto_line_cb (GtkWidget *widget, gpointer data);
-  gint pos_to_line (gint pos, gint *numlines);
- guint line_to_pos (gint line, gint *lines);
-  void file_info ( gint pos , gint *total_chars , gint *total_words , gint *total_lines ,
-		   gint *total_paragraphs , gint *line_number , gint *column_number );
-  gint search_text_execute ( gulong starting_position, gint case_sensitive, const guchar *text_to_search_for,
-			     guint * pos_found, gint * line_found, gint * total_lines, gint return_the_line_number);
-  gint gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *search_text,
-					  const guchar *replace_text, gint case_sensitive,
-					  guchar **new_buffer);
- void search_text_not_found_notify (View *view);
+/* Callbacks */
+void gedit_find_cb (GtkWidget *widget, gpointer data);
+void gedit_find_again_cb (GtkWidget *widget, gpointer data);
+void gedit_replace_cb (GtkWidget *widget, gpointer data);
+void gedit_goto_line_cb (GtkWidget *widget, gpointer data);
+void gedit_file_info_cb (GtkWidget *widget, gpointer data);
 
-/* Stopwatch functions */
-void start_time (void);
-double print_time (void);
+
+guint gedit_search_line_to_pos (gint line, gint *lines);
+
+gint gedit_search_execute (guint starting_position,
+			   gint case_sensitive,
+			   const guchar *text_to_search_for,
+			   guint *pos_found,
+			   gint  *line_found,
+			   gint  *total_lines,
+			   gboolean return_the_line_number);
+
+gint gedit_replace_all_execute (GeditView *view,
+				guint start_pos,
+				const guchar *search_text,
+				const guchar *replace_text,
+				gint case_sensitive,
+				guchar **buffer);
+
+
+
+
+
+
 
 #endif /* __GEDIT_SEARCH_H__ */

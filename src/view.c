@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* Clean part of this 10-00, by Chema. divided the ugly code and the nice one */
 /*
  * gedit
  *
@@ -22,6 +23,7 @@
 #include <config.h>
 #include <gnome.h>
 
+#include "auto.h"
 #include "undo.h"
 #include "print.h"
 #include "utils.h"
@@ -33,643 +35,37 @@
 #include "prefs.h"
 #include "window.h"
 
-enum {
-	CURSOR_MOVED_SIGNAL,
-	LAST_SIGNAL
+static GtkVBoxClass * parent_class;
+
+struct _GeditViewClass
+{
+	GtkVBoxClass parent_class;
 };
 
-static GtkObjectClass * parent_class;
-
-static void	gedit_views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
-static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
-
-void	gedit_view_set_readonly (View *view, gint readonly);
-void	gedit_view_set_font (View *view, gchar *fontname);
-void	gedit_view_set_position (View *view, gint pos);
-guint	gedit_view_get_position (View *view);
-void	gedit_view_set_selection (View *view, guint  start, guint  end);
-gint	gedit_view_get_selection (View *view, guint *start, guint *end);
-void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
-void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
-void	gedit_view_load_widgets (View *view);
-void	gedit_view_set_undo (View *view, gint undo_state, gint redo_state);
-
-static void gedit_view_update_line_indicator (void);
-static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
-static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
-static void gedit_view_class_init (ViewClass *klass);
-static void gedit_view_init (View *view);
-
-View *
-gedit_view_active (void)
-{
-	View *current_view = NULL;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	if (mdi->active_view)
-		current_view = GEDIT_VIEW (mdi->active_view);
- 
-	return current_view;
-}
-
-void
-gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
-{
-	View *view = gedit_view_active();
-	Document *doc = view->doc;
-	gint undo_state, redo_state;
-
-	gedit_debug (DEBUG_VIEW, "start");
-
-	g_return_if_fail (view!=NULL);
-		
-	gtk_widget_grab_focus (view->text);
-	gedit_document_set_title (view->doc);
-
-	view->app = gedit_window_active_app();
-	
-	gedit_view_load_widgets (view);
-	
-	if (g_list_length(doc->undo) == 0)
-		undo_state = GEDIT_UNDO_STATE_FALSE;
-	else
-		undo_state = GEDIT_UNDO_STATE_TRUE;
-	if (g_list_length(doc->redo) == 0)
-		redo_state = GEDIT_UNDO_STATE_FALSE;
-	else
-		redo_state = GEDIT_UNDO_STATE_TRUE;
-	gedit_view_set_undo (view, undo_state, redo_state);
-	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
-	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
-
-	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
-
-	gedit_debug (DEBUG_VIEW, "end");
-}
-
-
-void
-gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
-{
-	View *view;
-	
-	gedit_debug (DEBUG_VIEW, "");
-
-	view = (View *) cbdata;
-	g_return_if_fail (view != NULL);
-
-	if (view->doc->changed)
-		return;
-	
-	view->doc->changed = TRUE;
-
-	/* Disconect this signal */
-	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->view_text_changed_signal);
-
-	/* Set the title ( so that we add the "modified" string to it )*/
-	gedit_document_set_title (view->doc);
-	
-}
-
-
-gfloat
-gedit_view_get_window_position (View *view)
-{
-	gedit_debug (DEBUG_VIEW, "");
-	return GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
-}
-
-void
-gedit_view_set_window_position (View *view, gfloat position)
-{
-	gedit_debug (DEBUG_VIEW, "");
-	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
-				  position);
-}
-
-void
-gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
-{
-	gfloat upper;
-	gfloat value;
-	gfloat page_size;
-	gfloat gt;
-	gfloat min;
-	gfloat max;
-	
-	gedit_debug (DEBUG_VIEW, "");
-
-	g_return_if_fail (line <= lines);
-	
-	upper = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper;
-	value = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
-	page_size = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_size;
-
-	min = value;
-	max = value + (0.9 * page_size); /* We don't want to be in the lower 10%*/
-	
-	gt = upper * (float)(line-1) / (float)(lines-1);
-#if 0	
-	g_print ("Goto :%f. Min :%f, Max:%f\n", gt, min, max);
-#endif	
-	/* No need to move*/
-	if (gt > min && gt < max)
-		return;
-
-	gedit_view_set_window_position (view, gt);
-	
-}
-
-static void
-gedit_view_insert (View  *view, guint position, const gchar * text, gint length)
-{
-	GtkText *textw;
-	gint p1;
-	
-	g_return_if_fail (length > 0);
-	g_return_if_fail (text != NULL);
-	
-	gedit_debug (DEBUG_VIEW, "");
-
-	if (!GTK_WIDGET_MAPPED (view->text))
-		g_warning ("Inserting text into an unmapped text widget (%i)", length);
-
-	textw = GTK_TEXT(view->text);
-	p1 = gtk_text_get_point (textw);
-	gtk_text_set_point (textw, position);
-	gtk_text_insert (textw, NULL,
-			 NULL, NULL, text,
-			 length);
-}
-
-static void
-gedit_views_insert (Document *doc, guint position, gchar * text,
-		    gint length, View * view_exclude)
-{
-	gint i;
-	View *nth_view;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	g_return_if_fail (doc!=NULL);
-
-	if (length < 1)
-		return;
-
-	/* Why do we have to call view_text_changed_cb ? why is the "chaged" signal not calling it ?. Chema */
-	if (!doc->changed)
-		if (g_list_length (doc->views))
-			gedit_view_text_changed_cb (NULL,
-						    (gpointer) g_list_nth_data (doc->views, 0));
-	
-	for (i = 0; i < g_list_length (doc->views); i++)
-	{
-		nth_view = g_list_nth_data (doc->views, i);
-
-		if (nth_view == view_exclude)
-			continue;
-
-		gedit_view_insert (nth_view, position, text, length);
-	}  
-}
-
-/* Work arround for a gtktext bug*/
-static gint
-gedit_view_refresh_line_hack (View *view)
-{
-	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
-	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
-
-	return FALSE;
-}
-
-static void
-gedit_view_delete (View *view, guint position, gint length, gboolean exclude_this_view)
-{
-	gfloat upper;
-	gfloat value;
-	gfloat page_size;
-	guint p1;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	if (!exclude_this_view) {
-		p1 = gtk_text_get_point (GTK_TEXT (view->text));
-		gtk_text_set_point (GTK_TEXT(view->text), position);
-		gtk_text_forward_delete (GTK_TEXT (view->text), length);
-	}
-	
-	upper = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper;
-	value = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
-	page_size = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_size;
-
-	/* Only add the hack when we need it, if we add it all the time
-	   the reaplace all is ugly. This problem only happens when we are
-	   at the bottom of the file and there is a scroolbar*/
-	if ((page_size != upper) && (value + page_size >= upper))
-		gtk_idle_add ((GtkFunction) gedit_view_refresh_line_hack, view);
-	
-}
-
-
-static void
-gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
-{
-	View *nth_view;
-	gint n;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	g_return_if_fail (doc!=NULL);
-	g_return_if_fail (end_pos > start_pos);
-
-	for (n = 0; n < g_list_length (doc->views); n++)
-	{
-		nth_view = g_list_nth_data (doc->views, n);
-
-		gedit_view_delete (nth_view, start_pos, end_pos-start_pos, nth_view == view_exclude);
-	}
-}
-
-
-void
-doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int length,
-		    int *pos, View *view, gint exclude_this_view, gint undo)
-{
-	gint position = *pos;
-	Document *doc;
-	guchar *text_to_insert;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	doc = view->doc;
-
-	/* This string might not be terminated with a null cero */
-#if 0
-	text_to_insert = g_new0 (guchar, length+1);
-	strncpy (text_to_insert, insertion_text, length);
-#else	
-	text_to_insert = g_strdup (insertion_text);
-#endif	
-
-	if (undo)
-		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_ACTION_INSERT, doc, view);
-
-	if (!exclude_this_view)
-		gedit_views_insert (doc, position, text_to_insert, length, NULL);
-	else
-		gedit_views_insert (doc, position, text_to_insert, length, view);
-
-	g_free (text_to_insert);
-}
-
-static void
-doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
-		    int *pos, View *view)
-{
-	gedit_debug (DEBUG_VIEW, "");
-
-	doc_insert_text_real_cb (editable, insertion_text, length, pos, view, TRUE, TRUE);
-}
-
-void
-doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
-			 View *view, gint exclude_this_view, gint undo)
-{
-	Document *doc;
-	guchar *text_to_delete;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	g_return_if_fail (view != NULL);
-	doc = view->doc;
-	g_return_if_fail (doc != NULL);
-
-	if (start_pos == end_pos )
-	     return;
-
-	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
-	if (undo)
-		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_ACTION_DELETE, doc, view);
-	g_free (text_to_delete);
-
-	if (!exclude_this_view)
-		gedit_views_delete (doc, start_pos, end_pos, NULL);
-	else
-		gedit_views_delete (doc, start_pos, end_pos, view);
-
-}
-
-
-static void
-doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view)
-{
-	gedit_debug (DEBUG_VIEW, "");
-
-	doc_delete_text_real_cb (editable, start_pos, end_pos, view, TRUE, TRUE);
-}
-
-
-/* FIXME: rewrite this function. It's a bit dirty and it is dependant on the
-   text widget. Chema */
-static gboolean
-auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
-		int *pos, gpointer data)
-{
-	int i, newlines, newline_1;
-	gchar *buffer, *whitespace;
-	View *view; 
-	Document *doc;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	view = (View *)data;
-
-	g_return_val_if_fail (view != NULL, FALSE);
-
-	if (!settings->auto_indent)
-		return FALSE;
-	if ((length != 1) || (insertion_text[0] != '\n'))
-		return FALSE;
-	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
-		return FALSE;
-
-	doc = view->doc;
-
-	newlines = 0;
-	newline_1 = 0;
-	
-	for (i = *pos; i > 0; i--)
-	{
-		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
-		
-		if (buffer == NULL)
-			continue;
-		if (buffer[0] == 10)
-		{
-			if (newlines > 0)
-			{
-				g_free (buffer);
-				buffer = NULL;
-				break;
-			}
-			else
-			{
-				newlines++;
-				newline_1 = i;
-				g_free (buffer);
-				buffer = NULL;
-			}
-		}
-		
-		g_free (buffer);
-		buffer = NULL;
-	}
-
-	whitespace = g_malloc0 (newline_1 - i + 2);
-
-	for (i = i; i <= newline_1; i++)
-	{
-		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i, i+1);
-		
-		if ((buffer[0] != 32) & (buffer[0] != 9))
-		{
-			g_free (buffer);
-			buffer = NULL;
-			break;
-		}
-		
-		strncat (whitespace, buffer, 1);
-		g_free (buffer);
-		
-	}
-
-	if (strlen(whitespace) > 0)
-	{
-		i = *pos;
-		gtk_text_set_point (GTK_TEXT (text), i);
-		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
-				 whitespace, strlen (whitespace));
-	}
-	g_free (whitespace);
-
-	return TRUE;
-}
-
-static void 
-gedit_view_finalize (GtkObject *object)
-{
-	View *view;
-
-	view = GEDIT_VIEW (object);
-
-}
-
-static void
-gedit_view_class_init (ViewClass *klass)
-{
-	GtkObjectClass *object_class;
-	
-	object_class = (GtkObjectClass *)klass;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	object_class->finalize = gedit_view_finalize;
-	
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
-}
-
-static void
-gedit_view_init (View *view)
-{
-	GtkWidget *menu;
-	GtkStyle *style;
-	GdkColor *bg;
-	GdkColor *fg;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	/* Vbox */
-	view->vbox = gtk_vbox_new (TRUE, TRUE);
-	gtk_container_add (GTK_CONTAINER (view), view->vbox);
-	
-	/* create our paned window */
-#if 0	
-	view->pane = gtk_vpaned_new ();
-	gtk_box_pack_start (GTK_BOX (view->vbox), view->pane, TRUE, TRUE, 0);
-	gtk_paned_set_handle_size (GTK_PANED (view->pane), 10);
-	gtk_paned_set_gutter_size (GTK_PANED (view->pane), 10);
-#endif	
-	
-	/* Create the upper split screen */
-	view->window = gtk_scrolled_window_new (NULL, NULL);
-#if 0	
-	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
-#endif	
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
-					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start (GTK_BOX (view->vbox), view->window, TRUE, TRUE, 0);
-	
-
-        /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
-	view->line_wrap = 1;
-
-	/* Create and configure the GtkText Widget */
-	view->text = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable  (GTK_TEXT(view->text), !view->readonly);
-	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
-	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
-	
-	/* Toolbar */
-	view->toolbar = NULL;
-
-        /* Hook the button & key pressed events */
-	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
-			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
-	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
-			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
-
-	/* Handle Auto Indent */
-	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
-				  GTK_SIGNAL_FUNC (auto_indent_cb), view);
-
-	/* Connect the insert & delete text callbacks */
-	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
-			    GTK_SIGNAL_FUNC (doc_insert_text_cb), (gpointer) view);
-	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
-			    GTK_SIGNAL_FUNC (doc_delete_text_cb), (gpointer) view);
-
-	gtk_container_add (GTK_CONTAINER (view->window), view->text);
-	
-	/* View changed signal */
-	view->view_text_changed_signal =
-		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-				    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), view);
-
-
-	gtk_widget_show (view->text);
-	gtk_text_set_point (GTK_TEXT(view->text), 0);
-
-#ifdef ENABLE_SPLIT_SCREEN    
-	/* Create the bottom split screen */
-	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
-	gtk_paned_pack2 (GTK_PANED (view->pane), view->scrwindow[1], TRUE, TRUE);
-	/*gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[1], TRUE, TRUE, 1);*/
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[1]),
-					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
-
-	/*gtk_fixed_put (GTK_FIXED(view), view->scrwindow[1], 0, 0);*/
-      	gtk_widget_show (view->scrwindow[1]);
-
-	view->split_screen = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT (view->split_screen), !view->readonly);
-	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), settings->word_wrap);
-	gtk_text_set_line_wrap (GTK_TEXT (view->split_screen), view->line_wrap);
-	
-	/* - Signals - */
-	gtk_signal_connect (GTK_OBJECT (view->split_screen), "button_press_event",
-			   GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
-	gtk_signal_connect (GTK_OBJECT (view->split_screen), "key_press_event",
-			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
-	
-	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
-					     GTK_SIGNAL_FUNC (doc_insert_text_cb),
-					     (gpointer) view);
-		                             
-	view->s_delete = gtk_signal_connect (GTK_OBJECT (view->split_screen), "delete_text",
-					     GTK_SIGNAL_FUNC (doc_delete_text_cb),
-					     (gpointer) view);
-
-	view->s_indent = gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "insert_text",
-						   GTK_SIGNAL_FUNC (auto_indent_cb),
-						   (gpointer) view);
-	gtk_container_add (GTK_CONTAINER (view->scrwindow[1]), view->split_screen);
-
-	view->split_parent = GTK_WIDGET (view->split_screen)->parent;
-#endif
-
-
-
-	style = gtk_style_copy (gtk_widget_get_style (view->text));
-
-	bg = &style->base[0];
-	bg->red = settings->bg[0];
-	bg->green = settings->bg[1];
-	bg->blue = settings->bg[2];
-
-	fg = &style->text[0];
-	fg->red = settings->fg[0];
-	fg->green = settings->fg[1];
-	fg->blue = settings->fg[2];
-
-   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
-	gtk_style_unref (style);
-
-	/* Set the font */
-  	gdk_font_unref (style->font);
-	if (settings->use_fontset)
-	{
-		style->font = view->font ? gdk_fontset_load (view->font) : NULL;
-		if (style->font == NULL)
-		{
-			style->font = gdk_fontset_load (DEFAULT_FONTSET);
-			view->font = DEFAULT_FONTSET;
-		}
-	}
-	else
-	{
-		style->font = view->font ? gdk_font_load (view->font) : NULL;
-		
-		if (style->font == NULL)
-		{
-			style->font = gdk_font_load (DEFAULT_FONT);
-			view->font = DEFAULT_FONT;
-		} 
-
-	}
-
-	/* Popup Menu */
-	menu = gnome_popup_menu_new (popup_menu);
-	gnome_popup_menu_attach (menu, view->text, view);
-
-#if 0 /* This lines seem useless. Chema */	
-        gnome_config_push_prefix ("/gedit/Global/");
-	gnome_config_pop_prefix ();
-	gnome_config_sync ();
-#endif	
-
-#if 0	
-	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
-#endif	
-	gtk_widget_show_all (view->vbox);
-	gtk_widget_grab_focus (view->text);
-
-#ifdef ENABLE_SPLIT_SCREEN    
-	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
-	gtk_widget_show (view->split_screen);
-	g_print ("view 3-------------------------\n");	
-	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
-	gnome_popup_menu_attach (menu, view->split_screen, view);
-	view->splitscreen = gnome_config_get_int ("splitscreen");
-#endif
-
-}
-
+static void gedit_view_class_init (GeditViewClass *klass);
+static void gedit_view_init (GeditView *view);
+
+/**
+ * gedit_view_get_type:
+ * @void: 
+ * 
+ * Std. get type function
+ * 
+ * Return Value: 
+ **/
+/* ------------------  Cleaned stuff -------------------------*/
 guint
 gedit_view_get_type (void)
 {
-	static guint gedit_view_type = 0;
+	static GtkType gedit_view_type = 0;
 
 	if (!gedit_view_type)
 	{
 		GtkTypeInfo gedit_view_info =
 		{
-	  		"gedit_view",
-	  		sizeof (View),
-	  		sizeof (ViewClass),
+	  		"GeditView",
+	  		sizeof (GeditView),
+	  		sizeof (GeditViewClass),
 	  		(GtkClassInitFunc) gedit_view_class_init,
 	  		(GtkObjectInitFunc) gedit_view_init,
 	  		(GtkArgSetFunc) NULL,
@@ -684,216 +80,196 @@ gedit_view_get_type (void)
 	return gedit_view_type;
 }
 
-GtkWidget *
-gedit_view_new (Document *doc)
+/**
+ * gedit_view_finalize:
+ * @object: 
+ * 
+ * View finalize function.
+ **/
+static void 
+gedit_view_finalize (GtkObject *object)
 {
-	View *view;
-	guchar *document_buffer;
+	GeditView *view;
 
 	gedit_debug (DEBUG_VIEW, "");
 
-	if (doc == NULL)
-		return NULL;
+	view = GEDIT_VIEW (object);
 
-	view = gtk_type_new (gedit_view_get_type ());
-	view->doc = doc;
-	view->doc->views = g_list_append (doc->views, view);
-	view->app = NULL;
+	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	if (g_list_length (doc->views) > 1) {
-		document_buffer = gedit_document_get_buffer (view->doc);
-		gedit_view_insert (view, 0, document_buffer, strlen (document_buffer));
-		g_free (document_buffer);
-	}
-
-	return GTK_WIDGET (view);
-}
-
-#ifdef ENABLE_SPLIT_SCREEN    
-void
-gedit_view_set_split_screen (View *view, gint split_screen)
-{
-	gedit_debug ("", DEBUG_VIEW);
-
-	if (!view->split_parent)
-		return;
-
-	if (split_screen)
-	   	gtk_widget_show (view->split_parent);
-	else
-		gtk_widget_hide (view->split_parent);
- 
-   	view->splitscreen = split_screen;
-}
-#endif
-
-void
-gedit_view_set_word_wrap (View *view, gint word_wrap)
-{
-	gedit_debug (DEBUG_VIEW, "");
-
-	view->word_wrap = word_wrap;
-
-	gtk_text_set_word_wrap (GTK_TEXT (view->text), word_wrap);
-#ifdef ENABLE_SPLIT_SCREEN    
-	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), word_wrap);
-#endif	
-}
-
-void
-gedit_view_set_readonly (View *view, gint readonly)
-{
-	gchar * doc_name;
-
-	gedit_debug (DEBUG_VIEW, "");
-	
-	view->readonly = readonly;
-	gtk_text_set_editable (GTK_TEXT (view->text), !view->readonly);
-#ifdef ENABLE_SPLIT_SCREEN
-	if (view->split_screen)
-		gtk_text_set_editable (GTK_TEXT (view->split_screen),
-				       !view->readonly);
-#endif
-	
-	doc_name = gedit_document_get_tab_name (view->doc);
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
-	gedit_document_set_title(view->doc);
-	g_free (doc_name);
 }
 
 /**
- * gedit_view_set_font:
- * @view: View that we're going to change the font for.
- * @fontname: String name "-b&h-lucida-blah-..." of the font to load
+ * gedit_view_class_init:
+ * @klass: 
+ * 
+ * Std GTk class init
+ **/
+static void
+gedit_view_class_init (GeditViewClass *klass)
+{
+	GtkObjectClass *object_class;
+	
+	gedit_debug (DEBUG_VIEW, "");
+
+	object_class = (GtkObjectClass *)klass;
+
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
+
+	object_class->finalize = gedit_view_finalize;
+}
+
+/**
+ * gedit_view_active:
+ * @void: 
+ * 
+ * Get the active view
+ * 
+ * Return Value: The active view, NULL if thera aren't any views
+ **/
+GeditView *
+gedit_view_active (void)
+{
+	GeditView *current_view = NULL;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (mdi->active_view)
+		current_view = GEDIT_VIEW (mdi->active_view);
+
+	return current_view;
+}
+
+/**
+ * gedit_view_get_window_position:
+ * @view: View to get the position from
+ * 
+ * Get the visible position of a view
  *
- *
+ * Return Value: the current visible position of the view
+ **/
+gfloat
+gedit_view_get_window_position (GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), 0.0);
+	
+	return GTK_ADJUSTMENT(view->text->vadj)->value;
+}
+
+/**
+ * gedit_view_set_window_position:
+ * @view: View to set 
+ * @position: Position.
+ * 
+ * Set the visible view position
  **/
 void
-gedit_view_set_font (View *view, gchar *fontname)
+gedit_view_set_window_position (GeditView *view, gfloat position)
 {
-	GtkStyle *style;
-	GdkFont *font = NULL;
-
 	gedit_debug (DEBUG_VIEW, "");
-	
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
-  	
-  	if (settings->use_fontset)
-		font = gdk_fontset_load (fontname);
-  	else
-		font = gdk_font_load (fontname);
 
-	if (font != NULL)
-	{
-		gdk_font_unref (style->font);
-		style->font = font;
-	}
-	else
-		g_warning ("Unable to load font ``%s''", fontname);
+	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-#ifdef ENABLE_SPLIT_SCREEN
-  	gtk_widget_set_style (GTK_WIDGET((view)->split_screen), style);
-#endif
-  	gtk_widget_set_style (GTK_WIDGET((view)->text), style);
+	gtk_adjustment_set_value (GTK_ADJUSTMENT(view->text->vadj),
+				  position);
 }
 
+/**
+ * gedit_view_set_window_position_from_lines:
+ * @view: 
+ * @line: line to move to 
+ * @lines: total number of line in the view (document)
+ * 
+ * Given a line number and the toltal number of lines, move to visible part of
+ * the view so that line is visible. This is usefull so that the screen does not
+ * scroll and we can move rapidly to a different visible section of the view
+ **/
 void
-gedit_view_set_position (View *view, gint pos)
+gedit_view_set_window_position_from_lines (GeditView *view, guint line, guint lines)
 {
-	gedit_debug (DEBUG_VIEW, "");
-
-	gtk_text_set_point (GTK_TEXT (view->text), pos);
-	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
-	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
-
-#ifdef ENABLE_SPLIT_SCREEN    	
-	gtk_text_set_point (GTK_TEXT (view->split_screen), pos);
-#endif
-}
-
-guint
-gedit_view_get_position (View *view)
-{
-	guint start_pos, end_pos;
+	gfloat upper;
+	gfloat value;
+	gfloat page_size;
+	gfloat gt;
+	gfloat min;
+	gfloat max;
 	
 	gedit_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (view!=NULL, 0);
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+	g_return_if_fail (line <= lines);
+	
+	upper     = GTK_ADJUSTMENT (view->text->vadj)->upper;
+	value     = GTK_ADJUSTMENT (view->text->vadj)->value;
+	page_size = GTK_ADJUSTMENT (view->text->vadj)->page_size;
 
-	if (gedit_view_get_selection (view, &start_pos, &end_pos))
-	{
-		return end_pos;
-	}
+	min = value;
+	max = value + (0.9 * page_size); /* We don't want to be in the lower 10%*/
+	
+	gt = upper * (float)(line-1) / (float)(lines-1);
 
-	gtk_text_freeze (GTK_TEXT(view->text));
-	gtk_text_thaw   (GTK_TEXT(view->text));
+	/* No need to move */
+	if (gt > min && gt < max)
+		return;
 
-#if 1 /* Fix a bug */		 
-	return gtk_editable_get_position (GTK_EDITABLE(view->text));
-#else
-	return gtk_text_get_point (GTK_TEXT (view->text));
-#endif
+	gedit_view_set_window_position (view, gt);
+	
 }
-
-#if 0 /* Commented out by chema to kill warning. We should implement this */
-static void
-gedit_view_set_line_wrap (View *view, gint line_wrap)
-{
-	gedit_debug ("", DEBUG_VIEW);
-
-	view->line_wrap = line_wrap;
-	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
-}
-#endif
 
 /**
  * gedit_view_set_selection:
- * @view: 
- * @start: 
- * @end: 
+ * @view: View to set the selection 
+ * @start: start of selection to be set
+ * @end: end of selection to be set
  * 
- * if start && end = 0 this is a unselect request
+ * Sets the selection from start to end. If start & end are 0, it clears the
+ * selection
  **/
 void
-gedit_view_set_selection (View *view, guint start, guint end)
+gedit_view_set_selection (GeditView *view, guint start, guint end)
 {
 	gedit_debug (DEBUG_VIEW, "");
 
+	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	if (start == 0 && end == 0)
-		gtk_text_set_point (GTK_TEXT(view->text), GTK_EDITABLE(GTK_TEXT(view->text))->selection_end_pos);
+		gtk_text_set_point (view->text, GTK_EDITABLE(view->text)->selection_end_pos);
 
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 
 	if (start == 0 && end == 0)
 	{
-		gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
-		gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+		gtk_text_insert (view->text, NULL, NULL, NULL, " ", 1);
+		gtk_text_backward_delete (view->text, 1);
 	}
 
 }
 
 /**
  * gedit_view_get_selection:
- * @view: 
- * @start: 
- * @end: 
+ * @view: View to get the selection from 
+ * @start: return here the start position of the selection 
+ * @end: return here the end position of the selection
  * 
+ * Gets the current selection for View
  * 
- * 
- * Return Value: TRUE if there is a text slected
+ * Return Value: TRUE if there is a selection active, FALSE if not
  **/
 gint
-gedit_view_get_selection (View *view, guint *start, guint *end)
+gedit_view_get_selection (GeditView *view, guint *start, guint *end)
 {
 	guint start_pos, end_pos;
 
 	gedit_debug (DEBUG_VIEW, "");
 
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), FALSE);
+
 	start_pos = GTK_EDITABLE(view->text)->selection_start_pos;
         end_pos   = GTK_EDITABLE(view->text)->selection_end_pos;
 
-	/* The user can select from end to start also */
+	/* The user can select from end to start too. If so, swap it*/
 	if (end_pos < start_pos)
 	{
 		guint swap_pos;
@@ -908,85 +284,150 @@ gedit_view_get_selection (View *view, guint *start, guint *end)
 		*end = end_pos;
 
 	if ((start_pos > 0 || end_pos > 0) && (start_pos != end_pos))
-	{
 		return TRUE;
-	}
-	else
-	{
-		start_pos = 0;
-		end_pos = 0;
+	else 
 		return FALSE;
-	}
 }
 
 
+/**
+ * gedit_view_set_position:
+ * @view: View to set the cusor
+ * @pos: position to set the curor at
+ * 
+ * set the cursor position position for this view
+ **/
 void
-gedit_view_add_cb (GtkWidget *widget, gpointer data)
+gedit_view_set_position (GeditView *view, gint pos)
 {
-	GnomeMDIChild *child;
-	View *view;
-	guchar * buffer;
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	gtk_text_set_point       (view->text, pos);
+	gtk_text_insert          (view->text, NULL, NULL, NULL, " ", 1);
+	gtk_text_backward_delete (view->text, 1);
+
+}
+
+/**
+ * gedit_view_get_position:
+ * @view: View to get the cursor position
+ * 
+ * get the cursor position in this view
+ * 
+ * Return Value: the current cursor position
+ **/
+guint
+gedit_view_get_position (GeditView *view)
+{
+	guint start_pos, end_pos;
+	
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), 0);
+
+	if (gedit_view_get_selection (view, &start_pos, &end_pos))
+	{
+		return end_pos;
+	}
+
+#if 0 /* I don't think we need this, but I am going to leave it here
+	 just in case it is to work around yet another gtktext bug*/
+	gtk_text_freeze (view->text);
+	gtk_text_thaw   (view->text);
+#endif	
+
+	return gtk_editable_get_position (GTK_EDITABLE(view->text));
+}
+
+
+
+
+
+/**
+ * gedit_view_set_readonly:
+ * @view: View to set/unset readonly
+ * @readonly: TRUE to turn on the readonly flag, FALSE otherwise
+ * 
+ * Change the Readonly atribute of a view. Update the title accordingly
+ **/
+void
+gedit_view_set_readonly (GeditView *view, gint readonly)
+{
+	gchar * doc_name;
 
 	gedit_debug (DEBUG_VIEW, "");
 
-	view = gedit_view_active();
-
-	if (view)
-	{
-		view = gedit_view_active();
-		buffer = gedit_document_get_buffer (view->doc);
-		child = gnome_mdi_get_child_from_view (GTK_WIDGET(view));
-		gnome_mdi_add_view (mdi, child);
-		view = gedit_view_active();
-		gedit_view_insert ( view, 0, buffer, strlen (buffer));
-		/* Move the window to the top after inserting */
-		gedit_view_set_window_position (view, 0);
-		g_free (buffer);
-		gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
-	}
-
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+		
+	view->readonly = readonly;
+	gtk_text_set_editable (view->text, !view->readonly);
+	
+	doc_name = gedit_document_get_tab_name (view->doc);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
+	gedit_document_set_title (view->doc);
+	g_free (doc_name);
 }
 
-void
-gedit_view_remove (View *view)
-{
-	Document *doc;
-	
-	doc = view->doc;
-	
-	g_return_if_fail (doc != NULL);
 
-	if (g_list_length (doc->views) < 2)
-	{
-		gnome_app_error (gedit_window_active_app(), _("You can't remove the last view of a document."));
-		return;
-	}
 
-	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, view);
 
-	/* Now, we can remove the view proper */
-	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
-	
-	gedit_document_set_title (doc);
 
-	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
-}
 
-void
-gedit_view_remove_cb (GtkWidget *widget, gpointer data)
-{
-	View *view;
 
-	gedit_debug (DEBUG_VIEW, "");
 
-	view = gedit_view_active();
-	
-	if (view == NULL)
-		return;
 
-	gedit_view_remove (view);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 static void
@@ -994,16 +435,13 @@ gedit_view_update_line_indicator (void)
 {
 	static char col [32];
 
-	
-return;
-	/*
-	*/
+	return;
 	
 	/* FIXME: Disable by chema for 0.7.0 . this hack is not working correctly */
 	gedit_debug (DEBUG_VIEW, "");
 
 	sprintf (col, "Column: %d",
-		 GTK_TEXT(GEDIT_VIEW(gedit_view_active())->text)->cursor_pos_x/7);
+		 GEDIT_VIEW(gedit_view_active())->text->cursor_pos_x/7);
 
 	if (settings->show_status)
 	{
@@ -1040,6 +478,8 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	{
 		switch (event->keyval)
 		{
+			/* This is nasty, NASTY NASTY !!!!!!!
+			   since it is dependent on the current languaje */
 		case 's':
 			file_save_cb (w, NULL);
 	    		break;
@@ -1056,7 +496,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 			return TRUE;
 		case 'z':
 			/* Undo is getting called twice, 1 thru this function
-			   and 1 time thru the aceleratior (I guess). Chema 
+			   and 1 time thru the aceleratior. Chema 
 	    		gedit_undo_do (w, NULL);
 			*/
 	    		break;
@@ -1077,9 +517,475 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	return TRUE;
 }
 
+static void
+gedit_view_insert (GeditView *view, guint position, const gchar * text, gint length)
+{
+	gint p1;
+	
+	g_return_if_fail (length > 0);
+	g_return_if_fail (text != NULL);
+	
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (!GTK_WIDGET_MAPPED (GTK_WIDGET (view->text)))
+		g_warning ("Inserting text into an unmapped text widget (%i)", length);
+
+	p1 = gtk_text_get_point (view->text);
+	gtk_text_set_point (view->text, position);
+	gtk_text_insert    (view->text, NULL,
+			    NULL, NULL, text,
+			    length);
+}
+
+static void
+gedit_views_insert (GeditDocument *doc, guint position, gchar * text,
+		    gint length, GeditView * view_exclude)
+{
+	gint i;
+	GeditView *nth_view;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (doc!=NULL);
+
+	if (length < 1)
+		return;
+
+	/* Why do we have to call view_text_changed_cb ? why is the "chaged" signal not calling it ?. Chema */
+	if (!doc->changed)
+		if (g_list_length (doc->views))
+			gedit_view_text_changed_cb (NULL,
+						    (gpointer) g_list_nth_data (doc->views, 0));
+	
+	for (i = 0; i < g_list_length (doc->views); i++)
+	{
+		nth_view = g_list_nth_data (doc->views, i);
+
+		if (nth_view == view_exclude)
+			continue;
+
+		gedit_view_insert (nth_view, position, text, length);
+	}  
+}
 
 void
-gedit_view_load_widgets (View *view)
+doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int length,
+			 int *pos, GeditView *view, gint exclude_this_view, gint undo)
+{
+	gint position = *pos;
+	GeditDocument *doc;
+	guchar *text_to_insert;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	doc = view->doc;
+
+	/* This strings are not be terminated with a null cero */
+	text_to_insert = g_strndup (insertion_text, length);
+
+	if (undo)
+		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_ACTION_INSERT, doc, view);
+
+	if (!exclude_this_view)
+		gedit_views_insert (doc, position, text_to_insert, length, NULL);
+	else
+		gedit_views_insert (doc, position, text_to_insert, length, view);
+
+	g_free (text_to_insert);
+}
+
+static void
+doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
+		    int *pos, GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	doc_insert_text_real_cb (editable, insertion_text, length, pos, view, TRUE, TRUE);
+}
+
+/* Work arround for a gtktext bug*/
+static gint
+gedit_view_refresh_line_hack (GeditView *view)
+{
+	gtk_text_insert          (view->text, NULL, NULL, NULL, " ", 1);
+	gtk_text_backward_delete (view->text, 1);
+
+	return FALSE;
+}
+
+static void
+gedit_view_delete (GeditView *view, guint position, gint length, gboolean exclude_this_view)
+{
+	gfloat upper;
+	gfloat value;
+	gfloat page_size;
+	guint p1;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (!exclude_this_view) {
+		p1 = gtk_text_get_point (view->text);
+		gtk_text_set_point      (view->text, position);
+		gtk_text_forward_delete (view->text, length);
+	}
+	
+	upper     = GTK_ADJUSTMENT (view->text->vadj)->upper;
+	value     = GTK_ADJUSTMENT (view->text->vadj)->value;
+	page_size = GTK_ADJUSTMENT (view->text->vadj)->page_size;
+
+	/* Only add the hack when we need it, if we add it all the time
+	   the reaplace all is ugly. This problem only happens when we are
+	   at the bottom of the file and there is a scroolbar*/
+	if ((page_size != upper) && (value + page_size >= upper))
+		gtk_idle_add ((GtkFunction) gedit_view_refresh_line_hack, view);
+	
+}
+
+
+static void
+gedit_views_delete (GeditDocument *doc, guint start_pos, guint end_pos, GeditView *view_exclude)
+{
+	GeditView *nth_view;
+	gint n;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (doc!=NULL);
+	g_return_if_fail (end_pos > start_pos);
+
+	for (n = 0; n < g_list_length (doc->views); n++)
+	{
+		nth_view = g_list_nth_data (doc->views, n);
+
+		gedit_view_delete (nth_view, start_pos, end_pos-start_pos, nth_view == view_exclude);
+	}
+}
+
+void
+doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
+			 GeditView *view, gint exclude_this_view, gint undo)
+{
+	GeditDocument *doc;
+	guchar *text_to_delete;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (view != NULL);
+	doc = view->doc;
+	g_return_if_fail (doc != NULL);
+
+	if (start_pos == end_pos )
+	     return;
+
+	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
+	if (undo)
+		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_ACTION_DELETE, doc, view);
+	g_free (text_to_delete);
+
+	if (!exclude_this_view)
+		gedit_views_delete (doc, start_pos, end_pos, NULL);
+	else
+		gedit_views_delete (doc, start_pos, end_pos, view);
+
+}
+
+
+static void
+doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	doc_delete_text_real_cb (editable, start_pos, end_pos, view, TRUE, TRUE);
+}
+
+
+static void
+gedit_view_init (GeditView *view)
+{
+	GtkWidget *window;
+	GtkWidget *menu;
+	GtkStyle *style;
+	GdkColor *bg;
+	GdkColor *fg;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	/* Vbox */
+	/*
+	view->vbox = gtk_vbox_new (TRUE, TRUE);
+	gtk_container_add (GTK_CONTAINER (view), view->vbox);
+	*/
+	
+	/* Create the upper split screen */
+	window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (window),
+					GTK_POLICY_NEVER,
+					GTK_POLICY_AUTOMATIC);
+	gtk_box_pack_start (GTK_BOX (view), window, TRUE, TRUE, 0);
+	
+	/* Create and configure the GtkText Widget */
+	view->text = GTK_TEXT (gtk_text_new (NULL, NULL));
+	gtk_text_set_editable  (view->text, !view->readonly);
+	gtk_text_set_word_wrap (view->text, settings->word_wrap);
+	
+	/* Toolbar */
+	view->toolbar = NULL;
+
+        /* Hook the button & key pressed events */
+	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
+			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
+	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
+			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
+
+	/* Handle Auto Indent */
+	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
+				  GTK_SIGNAL_FUNC (auto_indent_cb), view);
+
+	/* Connect the insert & delete text callbacks */
+	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
+			    GTK_SIGNAL_FUNC (doc_insert_text_cb), (gpointer) view);
+	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
+			    GTK_SIGNAL_FUNC (doc_delete_text_cb), (gpointer) view);
+	gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET (view->text));
+	
+	/* View changed signal */
+	view->view_text_changed_signal =
+		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
+				    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), view);
+
+	gtk_text_set_point (view->text, 0);
+
+	/* Set colors */
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->text)));
+
+	bg = &style->base[0];
+	bg->red   = settings->bg[0];
+	bg->green = settings->bg[1];
+	bg->blue  = settings->bg[2];
+
+	fg = &style->text[0];
+	fg->red   = settings->fg[0];
+	fg->green = settings->fg[1];
+	fg->blue  = settings->fg[2];
+	
+   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
+	
+	gtk_style_unref (style);
+
+	/* Popup Menu */
+	menu = gnome_popup_menu_new (popup_menu);
+	gnome_popup_menu_attach (menu, GTK_WIDGET (view->text), view);
+
+	gtk_widget_show_all   (GTK_WIDGET (view));
+	gtk_widget_grab_focus (GTK_WIDGET (view->text));
+}
+
+
+void
+gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
+{
+	GeditView *view = gedit_view_active();
+	GeditDocument *doc = view->doc;
+	gint undo_state, redo_state;
+
+	gedit_debug (DEBUG_VIEW, "start");
+
+	g_return_if_fail (view!=NULL);
+		
+	gtk_widget_grab_focus (GTK_WIDGET (view->text));
+	gedit_document_set_title (view->doc);
+
+	view->app = gedit_window_active_app();
+	
+	gedit_view_load_widgets (view);
+	
+	if (g_list_length(doc->undo) == 0)
+		undo_state = GEDIT_UNDO_STATE_FALSE;
+	else
+		undo_state = GEDIT_UNDO_STATE_TRUE;
+	if (g_list_length(doc->redo) == 0)
+		redo_state = GEDIT_UNDO_STATE_FALSE;
+	else
+		redo_state = GEDIT_UNDO_STATE_TRUE;
+	gedit_view_set_undo (view, undo_state, redo_state);
+	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
+	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
+
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+
+	gedit_debug (DEBUG_VIEW, "end");
+}
+
+void
+gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
+{
+	GeditView *view;
+	
+	gedit_debug (DEBUG_VIEW, "");
+
+	view = GEDIT_VIEW (cbdata);
+	g_return_if_fail (view != NULL);
+
+	if (view->doc->changed)
+		return;
+	
+	view->doc->changed = TRUE;
+
+	/* Disconect this signal */
+	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->view_text_changed_signal);
+
+	/* Set the title ( so that we add the "modified" string to it )*/
+	gedit_document_set_title (view->doc);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GtkWidget *
+gedit_view_new (GeditDocument *doc)
+{
+	GeditView *view;
+	guchar *document_buffer;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (doc == NULL)
+		return NULL;
+
+	view = gtk_type_new (gedit_view_get_type ());
+	view->doc = doc;
+	view->doc->views = g_list_append (doc->views, view);
+	view->app = NULL;
+
+	if (g_list_length (doc->views) > 1) {
+		document_buffer = gedit_document_get_buffer (view->doc);
+		gedit_view_insert (view, 0, document_buffer, strlen (document_buffer));
+		g_free (document_buffer);
+	}
+
+	return GTK_WIDGET (view);
+}
+
+
+
+/**
+ * gedit_view_set_font:
+ * @view: View that we're going to change the font for.
+ * @fontname: String name "-b&h-lucida-blah-..." of the font to load
+ *
+ *
+ **/
+void
+gedit_view_set_font (GeditView *view, gchar *fontname)
+{
+	GtkStyle *style;
+	GdkFont *font = NULL;
+
+	gedit_debug (DEBUG_VIEW, "");
+	
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
+  	
+  	if (settings->use_fontset)
+		font = gdk_fontset_load (fontname);
+  	else
+		font = gdk_font_load (fontname);
+
+	if (font != NULL)
+	{
+		gdk_font_unref (style->font);
+		style->font = font;
+	}
+	else
+		g_warning ("Unable to load font ``%s''", fontname);
+
+  	gtk_widget_set_style (GTK_WIDGET((view)->text), style);
+}
+
+
+
+void
+gedit_view_add_cb (GtkWidget *widget, gpointer data)
+{
+	GnomeMDIChild *child;
+	GeditView *view;
+	guchar * buffer;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	view = gedit_view_active();
+
+	if (view)
+	{
+		view = gedit_view_active();
+		buffer = gedit_document_get_buffer (view->doc);
+		child = gnome_mdi_get_child_from_view (GTK_WIDGET(view));
+		gnome_mdi_add_view (mdi, child);
+		view = gedit_view_active();
+		gedit_view_insert ( view, 0, buffer, strlen (buffer));
+		/* Move the window to the top after inserting */
+		gedit_view_set_window_position (view, 0);
+		g_free (buffer);
+		gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+	}
+
+}
+
+void
+gedit_view_remove (GeditView *view)
+{
+	GeditDocument *doc;
+	
+	doc = view->doc;
+	
+	g_return_if_fail (doc != NULL);
+
+	if (g_list_length (doc->views) < 2)
+	{
+		gnome_app_error (gedit_window_active_app(), _("You can't remove the last view of a document."));
+		return;
+	}
+
+	/* First, we remove the view from the document's list */
+	doc->views = g_list_remove (doc->views, view);
+
+	/* Now, we can remove the view proper */
+	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
+	
+	gedit_document_set_title (doc);
+
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+}
+
+void
+gedit_view_remove_cb (GtkWidget *widget, gpointer data)
+{
+	GeditView *view;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	view = gedit_view_active();
+	
+	if (view == NULL)
+		return;
+
+	gedit_view_remove (view);
+}
+
+
+
+void
+gedit_view_load_widgets (GeditView *view)
 {
 	GnomeUIInfo *toolbar_ui_info = NULL;
 	GnomeUIInfo *menu_ui_info = NULL;
@@ -1186,7 +1092,7 @@ gedit_view_load_widgets (View *view)
 }
 
 void
-gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
+gedit_view_set_undo (GeditView *view, gint undo_state, gint redo_state)
 {
 	gedit_debug (DEBUG_VIEW, "");
 

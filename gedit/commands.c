@@ -146,7 +146,7 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 void
 edit_copy_cb (GtkWidget *widget, gpointer data)
 {
-	View *view;
+	GeditView *view;
 	GtkEditable *editable;
 
 	if (!gedit_document_current())
@@ -176,7 +176,7 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 void
 edit_paste_cb (GtkWidget *widget, gpointer data)
 {
-	View *view;
+	GeditView *view;
 	GtkEditable *editable;
 
 	if (!gedit_document_current())
@@ -206,7 +206,7 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 void
 edit_select_all_cb (GtkWidget *widget, gpointer data)
 {
-	Document *doc = gedit_document_current();
+	GeditDocument *doc = gedit_document_current();
 	
 	if (doc == NULL)
 		return;
@@ -221,23 +221,12 @@ edit_select_all_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	View *view = gedit_view_active();
+	GeditView *view = gedit_view_active();
 
 	if (!gedit_document_current())
 		return;
 
 	gedit_view_set_readonly (view, !view->readonly);
-}
-
-void
-options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
-{
-	View *view = gedit_view_active();
-	
-	if (!gedit_document_current())
-		return;
-
-	gedit_view_set_word_wrap (view, !view->word_wrap);
 }
 
 void

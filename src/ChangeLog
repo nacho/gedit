@@ -1,5 +1,28 @@
 2000-10-15  Chema Celorio  <chema@celorio.com>
 
+	* menus.c: renamed some public functions prepending gedit_
+	to their names
+
+	* search.h: clean and leave only the functions that are called.	
+
+	* search.c: make this struct private, move from .h to .c
+	start cleaning this file too.
+
+	* document.h (struct _GeditDocument): ditto. Rename from Document
+	to GeditDocument
+
+	* view.h (struct _GeditView): start to clean this mess. This struct
+	is much smaller now. Rename from View to GeditView
+
+	* view.c (gedit_view_get_type): start cleaning this file. Adding function
+	descriptions and removing the nonsense code.
+
+	* file.c (file_revert_cb): kill a memleak when reverting documents.
+	(gedit_file_open): do not allow doc->filename & fname to point at the
+	same location. We might free doc->filename inside.
+
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
 	* undo.c (gedit_undo_add): allow adding 0 size undo elements. The user
 	might replace "foo" with "".
 

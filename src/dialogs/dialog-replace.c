@@ -44,7 +44,7 @@
 
 typedef struct
 {
-	View *view;
+	GeditView *view;
 	GladeXML *gui;
 	GnomeDialog *dialog;
 	gboolean done;
@@ -59,6 +59,8 @@ typedef struct
 	GtkWidget *case_sensitive;
 	GtkWidget *position;
 }GeditReplaceDialog;
+
+
 
 static GeditReplaceDialog *
 get_dialog (void)
@@ -171,8 +173,8 @@ action_find (GeditReplaceDialog *dialog,
 	guint pos_found;
 	gint line_found, total_lines;
 
-	found = search_text_execute (start_pos, case_sensitive, search_text,
-				     &pos_found, &line_found, &total_lines, TRUE);
+	found = gedit_search_execute (start_pos, case_sensitive, search_text,
+				      &pos_found, &line_found, &total_lines, TRUE);
 
 	if (!found) {
 		dialog->not_found = TRUE;
@@ -223,12 +225,12 @@ action_replace_all (GeditReplaceDialog *dialog,
 {
 	guchar *new_buffer = NULL;
 
-	dialog->replacements = gedit_search_replace_all_execute (dialog->view,
-								 start_pos,
-								 search_text,
-								 replace_text,
-								 case_sensitive,
-								 &new_buffer);
+	dialog->replacements = gedit_replace_all_execute (dialog->view,
+							  start_pos,
+							  search_text,
+							  replace_text,
+							  case_sensitive,
+							  &new_buffer);
 	if (dialog->replacements > 0)
 	{
 		gedit_document_delete_text (dialog->view->doc, 0,
@@ -258,7 +260,7 @@ dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
-	g_return_if_fail (search_verify_document ());
+	g_return_if_fail (gedit_search_verify ());
 
 	search_text  = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
 	replace_text = gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));
@@ -305,6 +307,28 @@ dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
 	}
 }
 
+static void
+search_not_found_notify (GeditView * view)
+{
+	GtkWidget *gnome_dialog;
+	gchar * msg;
+	
+	gedit_flash_va (_("Text not found"));
+
+	if (gedit_view_get_selection (view, NULL, NULL))
+		gedit_view_set_selection (view, 0, 0);
+
+	msg = g_strdup (_("Text not found."));
+	gnome_dialog = gnome_message_box_new (msg,
+					      GNOME_MESSAGE_BOX_INFO,
+					      GNOME_STOCK_BUTTON_OK,
+					      NULL);
+	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
+				 GTK_WINDOW (mdi->active_window));
+	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
+
+	g_free (msg);
+}
 
 static void
 dialog_display_messages (GeditReplaceDialog *dialog)
@@ -313,7 +337,7 @@ dialog_display_messages (GeditReplaceDialog *dialog)
 	/* This is done like this, since we need to close the other
 	   dialog before poping this dialogs*/
 	if (dialog->not_found || dialog->replacements == 0)
-		search_text_not_found_notify (dialog->view);
+		search_not_found_notify (dialog->view);
 
 	if (dialog->replacements > 0) {
 		msg = g_strdup_printf (_("found and replaced %i occurrences."),

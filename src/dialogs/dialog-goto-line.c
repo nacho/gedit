@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* Cleaned 10-00 by Chema */
 /*
  * gedit
  *
@@ -39,7 +40,7 @@ gedit_goto_line (gint line)
 {
 	gint lines = 0;
 	gulong pos;
-	View *view;
+	GeditView *view;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -52,7 +53,7 @@ gedit_goto_line (gint line)
 		return;
 	
 	gedit_search_start();
-	pos = line_to_pos (line, &lines);
+	pos = gedit_search_line_to_pos (line, &lines);
 	gedit_search_end();
 
 	if (line > lines)

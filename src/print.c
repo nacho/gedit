@@ -49,9 +49,9 @@ typedef struct _PrintJobInfo {
 	const GnomePaper *paper;
 
 	/* document stuff */
-	Document *doc;
+	GeditDocument *doc;
 	guchar *buffer;
-	View *view;
+	GeditView *view;
 	guint buffer_size;
 	guchar *filename;
 	
@@ -92,7 +92,7 @@ typedef struct _PrintJobInfo {
 
         void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
         void file_print_preview_cb (GtkWidget *widget, gpointer data);
-static  void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
+static  void print_document (GeditDocument *doc, PrintJobInfo *pji, GnomePrinter *printer);
 static  void print_line (PrintJobInfo *pji, int line);
 static  void print_ps_line(PrintJobInfo * pji, gint line, gint first_line);
 static guint print_determine_lines (PrintJobInfo *pji, int real);
@@ -105,7 +105,7 @@ static  void print_end_page (PrintJobInfo *pji);
 static  void print_end_job (GnomePrintContext *pc);
 static  void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
 static  void print_pji_destroy (PrintJobInfo *pji);
-static  gint print_set_pji ( PrintJobInfo * pji, Document *doc);
+static  gint print_set_pji (PrintJobInfo * pji, GeditDocument *doc);
 static  gint gedit_print_verify_fonts (void);
 
 
@@ -128,7 +128,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	GtkWidget *dialog;
 	GnomePrinter *printer;
 	PrintJobInfo *pji;
-	Document * doc = gedit_document_current();
+	GeditDocument * doc = gedit_document_current();
 
 	gedit_debug (DEBUG_PRINT, "");
 	
@@ -288,7 +288,7 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
  *
  **/
 static void
-print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
+print_document (GeditDocument *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
 	int current_page, current_line;
 	
@@ -565,7 +565,7 @@ gedit_print_verify_fonts (void)
  * Return Value: TRUE on success and FALSE on error
  **/
 static gint
-print_set_pji (PrintJobInfo * pji, Document *doc)
+print_set_pji (PrintJobInfo * pji, GeditDocument *doc)
 {
 	gedit_debug (DEBUG_PRINT, "");
 

@@ -50,7 +50,7 @@ GtkWidget *open_file_selector = NULL;
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
-gint file_save_document (Document * doc);
+gint file_save_document (GeditDocument *doc);
 void file_save_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
@@ -77,8 +77,8 @@ gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
 
 
 typedef struct {
-	Document *doc;
-	View *view;
+	GeditDocument *doc;
+	GeditView *view;
 	gchar *tmp_buf;
 } HackyStruct;
 
@@ -104,7 +104,7 @@ gedit_view_insert_if_mapped (HackyStruct *hack)
 }
 
 static void
-gedit_document_insert_text_when_mapped (Document *doc, const gchar * tmp_buf,
+gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_buf,
 					gint pos, gboolean something)
 {
 	HackyStruct *hack;
@@ -140,18 +140,21 @@ gedit_document_insert_text_when_mapped (Document *doc, const gchar * tmp_buf,
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_open (Document *doc, const gchar *fname)
+gedit_file_open (GeditDocument *doc, const gchar *fname)
 {
 	gchar *tmp_buf;
 	struct stat stats;
 	FILE *fp;
-	View *view;
+	GeditView *view;
 	
 	gint _debug;
 	
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (fname != NULL, 1);
+	if (doc != NULL) {
+		g_return_val_if_fail (doc->filename != fname, -1);
+	}
 
 	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
@@ -201,7 +204,8 @@ gedit_file_open (Document *doc, const gchar *fname)
 		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 		g_free (tmp_buf);
 	} else {
-		/* Vefify that doc->filenam == NULL ??? */
+		if (doc->filename != NULL)
+			g_free (doc->filename);
 		doc->filename = g_strdup (fname);
 		doc->untitled_number = 0;
 		gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
@@ -246,7 +250,7 @@ gedit_file_selector_key_event (GtkFileSelection *fsel, GdkEventKey *event)
  * the button
  **/
 static void
-gedit_file_save_as (Document *doc)
+gedit_file_save_as (GeditDocument *doc)
 {
 
 	gedit_debug (DEBUG_FILE, "");
@@ -320,11 +324,11 @@ gedit_file_save_as (Document *doc)
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_save (Document *doc, const gchar *fname)
+gedit_file_save (GeditDocument *doc, const gchar *fname)
 {
 	FILE  *file_pointer;
 	gchar *buffer;
-	View  *view;
+	GeditView  *view;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -439,13 +443,13 @@ gedit_file_save (Document *doc, const gchar *fname)
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_stdin (Document *doc)
+gedit_file_stdin (GeditDocument *doc)
 {
 	gchar *tmp_buf;
 	struct stat stats;
 	guint buffer_length;
 	guint pos = 0;
-	View *view;
+	GeditView *view;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -502,7 +506,7 @@ gedit_file_stdin (Document *doc)
 void
 file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
-	Document *doc;
+	GeditDocument *doc;
 
 	gedit_debug (DEBUG_FILE, "");
 	
@@ -597,7 +601,6 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 		for (; list != NULL; list = list->next) {
 			file_name = list->data;
 			full_path = g_concat_dir_and_file (directory, file_name);
-			g_print ("Full path %s\n", full_path);
 			if (gedit_document_new_with_file (full_path))
 				gedit_flash_va (_("Loaded file %s"), full_path);
 			g_free (full_path);
@@ -677,7 +680,7 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
-	Document *doc;
+	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_FILE, "");
 
@@ -711,7 +714,7 @@ cancel_cb (GtkWidget *w, gpointer data)
 }
 
 gint
-file_save_document (Document * doc)
+file_save_document (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_FILE, "");
 
@@ -733,7 +736,7 @@ file_save_document (Document * doc)
 void
 file_save_cb (GtkWidget *widget, gpointer cbdata)
 {
-	Document *doc;
+	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_FILE, "");
 
@@ -752,13 +755,13 @@ void
 file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	int i;
-	Document *doc;
+	GeditDocument *doc;
 
 	gedit_debug (DEBUG_FILE, "");
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
-		doc = (Document *)g_list_nth_data (mdi->children, i);
+		doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
 		gedit_file_save (doc, NULL);
 	}
 }
@@ -767,10 +770,10 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 static void
 gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 {
-	Document *doc;
+	GeditDocument *doc;
+	GeditView *nth_view;
 	gchar *file_name;
 	gint i;
-	View *nth_view;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -921,8 +924,9 @@ void
 file_revert_cb (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *msgbox;
+	GeditDocument *doc = gedit_document_current ();
 	gchar * msg;
-	Document *doc = gedit_document_current ();
+	gchar * file_name;
 
 	gedit_debug(DEBUG_FILE, "");
 
@@ -957,7 +961,9 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	{
 	case 0:
 		gedit_document_delete_text (doc, 0, gedit_document_get_buffer_length(doc), FALSE);
-		gedit_file_open (doc, doc->filename);
+		file_name = g_strdup (doc->filename);
+		gedit_file_open (doc, file_name);
+		g_free (file_name);
 		break;
 	default:
 		break;
@@ -970,7 +976,7 @@ gint
 gedit_file_create_popup (const gchar *title)
 {
 	GtkWidget *msgbox;
-	Document *doc;
+	GeditDocument *doc;
 	int ret;
 	char *msg;
 

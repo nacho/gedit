@@ -25,32 +25,34 @@ endif
 
 bin_PROGRAMS = gedit
 
-gedit_SOURCES = 		\
-	commands.c		\
-	commands.h		\
-	document.c		\
-	document.h		\
-	file.c 			\
-	file.h		 	\
-	gedit.c			\
+gedit_SOURCES = 	\
+	auto.c		\
+	auto.h		\
+	commands.c	\
+	commands.h	\
+	document.c	\
+	document.h	\
+	file.c 		\
+	file.h		\
+	gedit.c		\
 	menus.c 		\
 	menus.h 		\
 	plugin.c 		\
 	plugin.h 		\
-	prefs.c			\
-	prefs.h			\
+	prefs.c		\
+	prefs.h		\
 	print.c 		\
 	print.h 		\
 	recent.c		\
 	recent.h		\
 	search.c 		\
 	search.h		\
-	undo.c 			\
-	undo.h	 		\
+	undo.c 		\
+	undo.h		\
 	utils.c 		\
 	utils.h 		\
-	view.c			\
-	view.h			\
+	view.c		\
+	view.h		\
 	window.c 		\
 	window.h
 

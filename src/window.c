@@ -20,7 +20,12 @@
  */
 
 #include <config.h>
+#if 0
 #include <gnome.h>
+#endif
+
+#include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-preferences.h>
 
 #include "window.h"
 #include "view.h"
@@ -272,7 +277,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 				{
 					/* We need to check if there are more than 2 views opened */
 					/* The only info we have is *app, and we can't use view_active. */
-					Document *doc;
+					GeditDocument *doc;
 					doc = gedit_document_current();
 					if (doc!=NULL)
 						if (g_list_length(doc->views)<2)
@@ -285,7 +290,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 				{
 					/* We need to check if there are more than 2 views opened */
 					/* The only info we have is *app, and we can't use view_active. */
-					Document *doc;
+					GeditDocument *doc;
 					doc = gedit_document_current();
 
 					widget =  sub_ui_info [sub_count].widget;
@@ -305,9 +310,9 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 {
 	gint n, m;
 
-	Document *nth_doc;
+	GeditDocument *nth_doc;
 	GnomeApp *nth_app;
-	View     *mth_view;
+	GeditView     *mth_view;
 
 	GtkStyle *style;
 	GdkColor *bg, *fg;
@@ -340,7 +345,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	if (gedit_document_current()==NULL)
 		return;
 		
-	style = gtk_style_copy (gtk_widget_get_style (GEDIT_VIEW (mdi->active_view)->text));
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (GEDIT_VIEW(mdi->active_view)->text)));
 
 	bg = &style->base[0];
 	bg->red = settings->bg[0];
@@ -354,24 +359,20 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
-		nth_doc = DOCUMENT (g_list_nth_data (mdi->children, n));
+		nth_doc = GEDIT_DOCUMENT (g_list_nth_data (mdi->children, n));
 		for (m = 0; m < g_list_length (nth_doc->views); m++)
 		{
 			mth_view = GEDIT_VIEW (g_list_nth_data (nth_doc->views, m));
 			if (mdi_mode_changed)
 			{
-				gtk_widget_grab_focus (mth_view->text);
+				gtk_widget_grab_focus (GTK_WIDGET (mth_view->text));
 				mth_view->app = gedit_window_active_app();
 				gedit_view_load_widgets (mth_view);
 			}
 			gedit_view_set_undo (mth_view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
-			gedit_view_set_word_wrap (mth_view, settings->word_wrap);
 			gtk_widget_set_style (GTK_WIDGET (mth_view->text),
 					      style);
 			gedit_view_set_font (mth_view, settings->font);
-#ifdef ENABLE_SPLIT_SCREEN
-			gedit_view_set_split_screen ( mth_view, (gint) settings->splitscreen);
-#endif	
 		}
 	}
 	
@@ -398,7 +399,9 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	GnomeUIInfo *ui_info;
 	GnomeUIInfo *sub_ui_info;
 	GtkWidget *widget;
+#if 0 /* See below */
 	PluginData  *pd;
+#endif	
 	gint count = 0, sub_count = 0;
 	
 	gedit_debug (DEBUG_WINDOW, "");
@@ -429,11 +432,11 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 		    ui_info [count].moreinfo == edit_cut_cb     ||
 		    ui_info [count].moreinfo == edit_copy_cb    ||
 		    ui_info [count].moreinfo == edit_paste_cb   ||
-		    ui_info [count].moreinfo == find_cb         ||
-		    ui_info [count].moreinfo == file_info_cb  )
+		    ui_info [count].moreinfo == gedit_find_cb   ||
+		    ui_info [count].moreinfo == gedit_file_info_cb  )
 		{
 			widget =  ui_info [count].widget;
-			if (widget)
+			if (GTK_IS_WIDGET (widget))
 				gtk_widget_set_sensitive (widget, sensitive);
 		}
 		count++;
@@ -468,17 +471,17 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||
 				    sub_ui_info [sub_count].moreinfo == edit_copy_cb    ||
 				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||
-				    sub_ui_info [sub_count].moreinfo == find_cb         ||
+				    sub_ui_info [sub_count].moreinfo == gedit_find_cb    ||
 				    sub_ui_info [sub_count].moreinfo == edit_select_all_cb ||
-				    sub_ui_info [sub_count].moreinfo == find_again_cb ||
-				    sub_ui_info [sub_count].moreinfo == replace_cb ||
-				    sub_ui_info [sub_count].moreinfo == goto_line_cb ||
+				    sub_ui_info [sub_count].moreinfo == gedit_find_again_cb ||
+				    sub_ui_info [sub_count].moreinfo == gedit_replace_cb ||
+				    sub_ui_info [sub_count].moreinfo == gedit_goto_line_cb ||
 				    sub_ui_info [sub_count].moreinfo == gedit_view_add_cb||
 				    sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb ||
-				    sub_ui_info [sub_count].moreinfo == file_info_cb  )
+				    sub_ui_info [sub_count].moreinfo == gedit_file_info_cb  )
 				{
 					widget =  sub_ui_info [sub_count].widget;
-					if (widget)
+					if (GTK_IS_WIDGET (widget))
 						gtk_widget_set_sensitive (widget, sensitive);
 				}
 				sub_count++;
@@ -490,16 +493,27 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	if (sensitive)
 		gedit_window_set_view_menu_sensitivity (app);
 
+#if 0
+	/* This is broken, since the widget pointer is stored in pd->menu_item.
+	   It is broken because with multiple windows, there are more than one
+	   widgets that need updating */
+	g_print ("Setting plugins sensitivity ...\n");
 	/* plugin menus */
 	for (count = 0; count < g_list_length (plugins_list); count++)
 	{
+		g_print ("count %i\n", count);
 		pd = g_list_nth_data (plugins_list, count);
-		if (!pd->needs_a_document)
+		if (!pd->needs_a_document) {
+			g_print ("This plugin does not need a document\n");
 			continue;
+		}
 		widget = pd->menu_item;
 		if (widget)
 			gtk_widget_set_sensitive (widget, sensitive);
+		else
+			g_print ("The widget is not laoded\n" );
 	}
+#endif	
 
 	return;
 

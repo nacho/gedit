@@ -32,13 +32,14 @@ typedef struct _GeditUndoInfo  GeditUndoInfo;
 
 struct _GeditUndoInfo
 {
-	gchar *text;	/* The text data */
-	gint start_pos;	/* The position in the document */
+	GeditUndoAction action;
+	gchar *text;
+	gint start_pos;
 	gint end_pos;
-	gint action;	/* whether the user has inserted or deleted */
-	gint status;	/* the changed status of the document used with this node */
 	gfloat window_position;
 	gint mergeable;
+
+	gint status;	/* the changed status of the doc. (disabled) */
 };
 
 /**
@@ -50,7 +51,7 @@ struct _GeditUndoInfo
  *
  **/
 static void
-gedit_undo_check_size (Document *doc)
+gedit_undo_check_size (GeditDocument *doc)
 {
 	gint n;
 	GeditUndoInfo *nth_undo;
@@ -60,8 +61,8 @@ gedit_undo_check_size (Document *doc)
 	if (settings->undo_levels < 1)
 		return;
 	
-	/* No need to check for the redo list size, at least for now
-	   since the undo list gets freed on any call to gedit_undo_add */
+	/* No need to check for the redo list size since the undo
+	   list gets freed on any call to gedit_undo_add */
 	if (g_list_length (doc->undo) > settings->undo_levels && settings->undo_levels > 0)
 	{
 		gint start;
@@ -72,8 +73,8 @@ gedit_undo_check_size (Document *doc)
 		for (n = start; n >= end;  n--)
 		{
 			nth_undo = g_list_nth_data (doc->undo, n - 1);
-			/* We don't want to remove a REPLACE level, since they are loaded in
-			   pairs */
+			/* We don't want to remove a G_U_ACTION_REPLACE_DELETE level,
+			   since they are loaded in pairs with a G_U_A_R_INSERT */
 			if (n == end) {
 				if ((nth_undo->action == GEDIT_UNDO_ACTION_REPLACE_DELETE))
 				continue;
@@ -215,7 +216,7 @@ gedit_undo_do_not_merge:
  **/
 void
 gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
-		GeditUndoAction action, Document *doc, View *view)
+		GeditUndoAction action, GeditDocument *doc, GeditView *view)
 {
 	GeditUndoInfo *undo;
 
@@ -256,8 +257,6 @@ gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
 }
 
 
-
-
 /**
  * gedit_undo_undo:
  * @w: not used
@@ -268,7 +267,7 @@ gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
 void
 gedit_undo_undo (GtkWidget *w, gpointer data)
 {
-	Document *doc = gedit_document_current();
+	GeditDocument *doc = gedit_document_current();
 	GeditUndoInfo *undo;
 
 	gedit_debug (DEBUG_UNDO, "");
@@ -279,7 +278,7 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 	g_return_if_fail (doc!=NULL);
 
 	/* The undo data we need is always at the top op the
-	   stack. So, therefore, the first one =) */
+	   stack. So, therefore, the first one */
 	undo = g_list_nth_data (doc->undo, 0);
 	g_return_if_fail (undo!=NULL);
 	undo->mergeable = FALSE;
@@ -317,12 +316,14 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 		g_assert_not_reached ();
 	}
 
-	/* FIXME: There are some problems with this. Chema 
+	/* FIXME: There are some problems with this. Chema */
+#if 0
 	if (doc->changed != undo->status)
 	{
 		doc->changed = undo->status;
 		gedit_document_set_title (doc);
-	}*/
+	}
+#endif
 	
 	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_TRUE);
 	if (g_list_length (doc->undo) == 0)
@@ -339,7 +340,7 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 void
 gedit_undo_redo (GtkWidget *w, gpointer data)
 {
-	Document *doc = gedit_document_current();
+	GeditDocument *doc = gedit_document_current();
 	GeditUndoInfo *redo;
 
 	gedit_debug (DEBUG_UNDO, "");
@@ -386,13 +387,14 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		g_assert_not_reached ();
 	}
 
-	/* There are some problems with this. Chema 
+	/* There are some problems with this. Chema */
+#if 0	
 	if (doc->changed != redo->status)
 	{
 		doc->changed = redo->status;
 		gedit_document_set_title (doc);
 	}
-	*/
+#endif	
 
 	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_TRUE, GEDIT_UNDO_STATE_UNCHANGED);
 	if (g_list_length (doc->redo) == 0)

@@ -263,7 +263,7 @@ gedit_utils_temp_file_name_new (gint number)
  * Return Value: a pointer to a string containing the filename, NULL on error.
  **/
 gchar *
-gedit_utils_create_temp_from_doc (Document *doc, gint number)
+gedit_utils_create_temp_from_doc (GeditDocument *doc, gint number)
 {
 	gchar *file_name = NULL;
 	FILE  *file_pointer;

@@ -311,6 +311,8 @@ gedit_recent_remove (char *file_name)
 	gint n;
 	guchar * nth_list_item;
 
+	gedit_debug (DEBUG_RECENT, "");
+
 	for (n=0; n < g_list_length (gedit_recent_history_list); n++)
 	{
 		nth_list_item = g_list_nth_data (gedit_recent_history_list, n);

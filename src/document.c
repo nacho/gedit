@@ -36,21 +36,21 @@ typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 static GnomeMDIChildClass *parent_class = NULL;
 
 static gchar*		gedit_document_get_config_string (GnomeMDIChild *child);
-static gint		remove_child_cb (GnomeMDI *mdi, Document *doc);
+static gint		remove_child_cb (GnomeMDI *mdi, GeditDocument *doc);
 
 static	GtkWidget*	gedit_document_create_view (GnomeMDIChild *child);
 static	void		gedit_document_destroy (GtkObject *obj);
-static	void		gedit_document_class_init (DocumentClass *class);
-static	void		gedit_document_init (Document *doc);
+static	void		gedit_document_class_init (GeditDocumentClass *class);
+static	void		gedit_document_init (GeditDocument *doc);
 	GtkType		gedit_document_get_type (void);
 
 /* ----- Local structs ------------ */
 
-struct _DocumentClass
+struct _GeditDocumentClass
 {
 	GnomeMDIChildClass parent_class;
 
-	void (*document_changed)(Document *, gpointer);
+	void (*document_changed)(GeditDocument *, gpointer);
 	
 };
 
@@ -76,9 +76,9 @@ struct _DocumentClass
  *
  **/
 void
-gedit_document_insert_text (Document *doc, const guchar *text, guint position, gint undoable)
+gedit_document_insert_text (GeditDocument *doc, const guchar *text, guint position, gint undoable)
 {
-	View *view;
+	GeditView *view;
 	GtkText *text_widget;
 	GtkWidget *editable;
 	gint length;
@@ -111,9 +111,9 @@ gedit_document_insert_text (Document *doc, const guchar *text, guint position, g
  *
  **/
 void
-gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable)
+gedit_document_delete_text (GeditDocument *doc, guint position, gint length, gint undoable)
 {
-	View *view;
+	GeditView *view;
 	GtkText *text_widget;
 	GtkWidget *editable;
 	gint exclude_this_view;
@@ -143,7 +143,7 @@ gedit_document_delete_text (Document *doc, guint position, gint length, gint und
  * is equivalent to delete_text + insert_text
  **/
 void
-gedit_document_replace_text (Document *doc, const guchar * text_to_insert,
+gedit_document_replace_text (GeditDocument *doc, const guchar * text_to_insert,
 			     gint length, guint position, gint undoable)
 {
 	gchar *text_to_delete;
@@ -182,12 +182,14 @@ gedit_document_replace_text (Document *doc, const guchar * text_to_insert,
 				doc,
 				NULL);
 	}
+
+	g_free (text_to_delete);
 }
 
 void
-gedit_document_set_readonly (Document *doc, gint readonly)
+gedit_document_set_readonly (GeditDocument *doc, gint readonly)
 {
-	View * nth_view;
+	GeditView * nth_view;
 	gint n;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -203,9 +205,9 @@ gedit_document_set_readonly (Document *doc, gint readonly)
 }
 
 void
-gedit_document_text_changed_signal_connect (Document *doc)
+gedit_document_text_changed_signal_connect (GeditDocument *doc)
 {
-	View *nth_view;
+	GeditView *nth_view;
 	gint n;
 	
 	for (n = 0; n < g_list_length (doc->views); n++)
@@ -233,9 +235,9 @@ gedit_document_text_changed_signal_connect (Document *doc)
  * Return Value: a potiner to a newly allocated string 
  **/
 gchar*
-gedit_document_get_tab_name (Document *doc)
+gedit_document_get_tab_name (GeditDocument *doc)
 {
-	Document *nth_doc;
+	GeditDocument *nth_doc;
 	int max_number = 0;
 	int i;
 
@@ -253,7 +255,7 @@ gedit_document_get_tab_name (Document *doc)
 		{
 			for (i = 0; i < g_list_length (mdi->children); i++)
 			{
-				nth_doc = (Document *)g_list_nth_data (mdi->children, i);
+				nth_doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
 				
 				if ( nth_doc->untitled_number > max_number)
 				{
@@ -267,11 +269,11 @@ gedit_document_get_tab_name (Document *doc)
 }
 
 guchar *
-gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos)
+gedit_document_get_chars (GeditDocument *doc, guint start_pos, guint end_pos)
 {
 	guchar * buffer;
 	GtkText * text;
-	View * view;
+	GeditView * view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -297,12 +299,12 @@ gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos)
  * Return Value: 
  **/
 guchar *
-gedit_document_get_buffer (Document * doc)
+gedit_document_get_buffer (GeditDocument *doc)
 {
 	guchar * buffer;
 	guint length;
 	GtkText * text;
-	View * view;
+	GeditView * view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -320,10 +322,10 @@ gedit_document_get_buffer (Document * doc)
 }
 
 guint
-gedit_document_get_buffer_length (Document * doc)
+gedit_document_get_buffer_length (GeditDocument *doc)
 {
 	guint length;
-	View * view;
+	GeditView * view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -336,10 +338,10 @@ gedit_document_get_buffer_length (Document * doc)
 }
 
 
-Document *
+GeditDocument *
 gedit_document_new (void)
 {
-	Document *doc;
+	GeditDocument *doc;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -349,16 +351,17 @@ gedit_document_new (void)
 
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	
+
 	gedit_window_set_widgets_sensitivity (TRUE);
+	gedit_window_set_toolbar_labels (GEDIT_VIEW(doc->views->data)->app);
 
 	return doc;
 }
 
-Document *
+GeditDocument *
 gedit_document_new_with_title (const gchar *title)
 {
-	Document *doc;
+	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -379,7 +382,7 @@ gedit_document_new_with_title (const gchar *title)
 gint
 gedit_document_new_with_file (const gchar *file_name)
 {
-	Document *doc;
+	GeditDocument *doc;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -398,13 +401,13 @@ gedit_document_new_with_file (const gchar *file_name)
 
 }
 
-Document *
+GeditDocument *
 gedit_document_current (void)
 {
-	Document *current_document = NULL;
+	GeditDocument *current_document = NULL;
 
 	if (mdi->active_child)
-		current_document = DOCUMENT (mdi->active_child);
+		current_document = GEDIT_DOCUMENT (mdi->active_child);
  
 	return current_document;
 }
@@ -417,7 +420,7 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 }
 
 static gint
-remove_child_cb (GnomeMDI *mdi, Document *doc)
+remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 {
 	GtkWidget *msgbox;
 	gint ret;
@@ -464,17 +467,17 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 static GtkWidget *
 gedit_document_create_view (GnomeMDIChild *child)
 {
-	View  *new_view;
+	GeditView  *new_view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
 
-	new_view = GEDIT_VIEW (gedit_view_new (DOCUMENT (child)));
+	new_view = GEDIT_VIEW (gedit_view_new (GEDIT_DOCUMENT (child)));
 
 	gedit_view_set_font (new_view, settings->font);
-	gedit_view_set_readonly (new_view, DOCUMENT (child)->readonly); 
+	gedit_view_set_readonly (new_view, GEDIT_DOCUMENT (child)->readonly);
 
 	return GTK_WIDGET (new_view);
 }
@@ -482,7 +485,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 static void
 gedit_document_destroy (GtkObject *obj)
 {
-	Document *doc = DOCUMENT (obj);
+	GeditDocument *doc = GEDIT_DOCUMENT (obj);
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 	
@@ -496,7 +499,7 @@ gedit_document_destroy (GtkObject *obj)
 }
 
 static void
-gedit_document_class_init (DocumentClass *class)
+gedit_document_class_init (GeditDocumentClass *class)
 {
 	GtkObjectClass  	*object_class;
 	GnomeMDIChildClass	*child_class;
@@ -516,7 +519,7 @@ gedit_document_class_init (DocumentClass *class)
 }
 
 static void
-gedit_document_init (Document *doc)
+gedit_document_init (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -539,8 +542,8 @@ gedit_document_get_type (void)
 		static const GtkTypeInfo doc_info =
 		{
 			"Document",
-			sizeof (Document),
-			sizeof (DocumentClass),
+			sizeof (GeditDocument),
+			sizeof (GeditDocumentClass),
 			(GtkClassInitFunc) gedit_document_class_init,
 			(GtkObjectInitFunc) gedit_document_init,
 			(GtkArgSetFunc) NULL,
@@ -629,7 +632,7 @@ gedit_document_load ( GList *file_list)
  * changed, lets show that it has. 
  **/
 void
-gedit_document_set_title (Document *doc)
+gedit_document_set_title (GeditDocument *doc)
 {
 	gchar *title;
 	gchar *docname;
@@ -678,7 +681,7 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 {
 	size_t len;
 	gchar *new_file_name;
-	Document *doc, *nth_doc;
+	GeditDocument *doc, *nth_doc;
 	gint n;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -756,11 +759,11 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 	/* Scan the documents to see if the file we are looking for is allready open */
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
-		nth_doc = (Document *)g_list_nth_data (mdi->children, n);
+		nth_doc = (GeditDocument *)g_list_nth_data (mdi->children, n);
 		
 		if (strcmp(nth_doc->filename, new_file_name) == 0)
 		{
-			View *view;
+			GeditView *view;
 			view = g_list_nth_data (nth_doc->views, 0);
 			g_return_if_fail (view != NULL);
 			gnome_mdi_set_active_view (mdi, GTK_WIDGET (view));
@@ -773,9 +776,9 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 }
 
 void
-gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
+gedit_document_set_undo (GeditDocument *doc, gint undo_state, gint redo_state)
 {
-	View *nth_view;
+	GeditView *nth_view;
 	gint n;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");

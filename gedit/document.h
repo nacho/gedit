@@ -22,34 +22,34 @@
 #ifndef __DOCUMENT_H__
 #define __DOCUMENT_H__
 
-#define DOCUMENT(obj)		GTK_CHECK_CAST (obj, gedit_document_get_type (), Document)
-#define DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_document_get_type (), DocumentClass)
-#define IS_GE_DOCUMENT(obj)	GTK_CHECK_TYPE (obj, gedit_document_get_type ())
+#define GEDIT_DOCUMENT(obj)		GTK_CHECK_CAST (obj, gedit_document_get_type (), GeditDocument)
+#define GEDIT_DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_document_get_type (), GeditDocumentClass)
+#define IS_GE_DOCUMENT(obj)		GTK_CHECK_TYPE (obj, gedit_document_get_type ())
 
-typedef struct _Document Document;
-typedef struct _DocumentClass DocumentClass;
+typedef struct _GeditDocument      GeditDocument;
+typedef struct _GeditDocumentClass GeditDocumentClass;
 
 #include <libgnomeui/gnome-mdi.h>
 #include <libgnomeui/gnome-mdi-child.h>
 
-struct _Document
+struct _GeditDocument
 {
 	GnomeMDIChild mdi_child;
-	GList *views;
 
-	gchar *filename;
 	GtkWidget *tab_label;
+	gchar *filename;
 
-	/* flags. FIXME: use only one bit of the flags
-	   with <<. Chema */
-	gint changed;
-	gint readonly;
 	gint untitled_number;
+	
+	gboolean changed : 1;
+	gboolean readonly : 1;
+
+	/* Views */
+	GList *views;
 
 	/* Undo/Redo Lists */
 	GList *undo;
 	GList *redo;
-
 };
 
 typedef enum {
@@ -64,29 +64,29 @@ extern GnomeMDI *mdi;
 gint gedit_close_all_flag;
 gint gedit_mdi_destroy_signal;
 
-void gedit_document_insert_text  (Document *doc, const guchar *text,               guint position,              gint undoable);
-void gedit_document_delete_text  (Document *doc,                                   guint position, gint length, gint undoable);
-void gedit_document_replace_text (Document *doc, const guchar *text, gint  length, guint position, gint undoable);
+void gedit_document_insert_text  (GeditDocument *doc, const guchar *text,               guint position,              gint undoable);
+void gedit_document_delete_text  (GeditDocument *doc,                                   guint position, gint length, gint undoable);
+void gedit_document_replace_text (GeditDocument *doc, const guchar *text, gint  length, guint position, gint undoable);
 
-void gedit_document_set_readonly (Document *doc, gint readonly);
-void gedit_document_text_changed_signal_connect (Document *doc);
+void gedit_document_set_readonly (GeditDocument *doc, gint readonly);
+void gedit_document_text_changed_signal_connect (GeditDocument *doc);
 
-gchar*	gedit_document_get_tab_name (Document *doc);
-guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
-guchar*	gedit_document_get_buffer (Document * doc);
-guint	gedit_document_get_buffer_length (Document * doc);
+gchar*	gedit_document_get_tab_name (GeditDocument *doc);
+guchar* gedit_document_get_chars (GeditDocument *doc, guint start_pos, guint end_pos);
+guchar*	gedit_document_get_buffer (GeditDocument *doc);
+guint	gedit_document_get_buffer_length (GeditDocument *doc);
 
-Document * gedit_document_new (void);
-Document * gedit_document_new_with_title (const gchar *title);
+GeditDocument * gedit_document_new (void);
+GeditDocument * gedit_document_new_with_title (const gchar *title);
 gint       gedit_document_new_with_file (const gchar *file_name);
-Document * gedit_document_current (void);
+GeditDocument * gedit_document_current (void);
 
 GtkType gedit_document_get_type (void);
 
 void gedit_mdi_init (void);
 gboolean gedit_document_load ( GList *file_list);
-void gedit_document_set_title (Document *doc);
+void gedit_document_set_title (GeditDocument *doc);
 void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
-void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
+void gedit_document_set_undo (GeditDocument *doc, gint undo_state, gint redo_state);
 
 #endif /* __DOCUMENT_H__ */

@@ -19,17 +19,17 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __VIEW_H__
-#define __VIEW_H__
+#ifndef __GEDIT_VIEW_H__
+#define __GEDIT_VIEW_H__
 
 #include "document.h"
 
-#define GEDIT_VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), View)
-#define GEDIT_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), ViewClass)
+#define GEDIT_VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), GeditView)
+#define GEDIT_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), GeditViewClass)
 #define GEDIT_IS_VIEW(obj)	GTK_CHECK_TYPE (obj, gedit_view_get_type ())
 
-typedef struct _View	  View;
-typedef struct _ViewClass ViewClass;
+typedef struct _GeditView	  GeditView;
+typedef struct _GeditViewClass    GeditViewClass;
 
 typedef struct _GeditToolbar GeditToolbar;
 
@@ -45,35 +45,18 @@ struct _GeditToolbar
 	gint redo;
 };
 
-struct _View
+struct _GeditView
 {
 	GtkVBox box;
-	
-	GnomeApp *app;
 
-	Document *doc;
-	
-	gchar *font;
-	
-	GtkWidget *vbox;
-	GtkWidget *text;
-	GtkWidget *viewport;
-	GtkWidget *pane;
-	GtkWidget *window;
+	GtkText *text;
+	GnomeApp *app;
+	GeditDocument *doc;
 
 	gint view_text_changed_signal;
 	
-#ifdef ENABLE_SPLIT_SCREEN	
-	gint split;
-	gint splitscreen;
-	GtkWidget *split_parent;
-	GtkWidget *split_viewport;
-	GtkWidget *split_screen;
-#endif	
-	guint changed : 1;
-	guint word_wrap : 1;
-	guint line_wrap : 1;
-	guint readonly : 1;
+	gboolean changed : 1;
+	gboolean readonly : 1;
 
 	/* We need to have different toolbars
 	   since mdi_mode =TOP_LEVEL will have multiple
@@ -82,52 +65,46 @@ struct _View
 	GeditToolbar *toolbar;
 };
 
-struct _ViewClass
-{
-	GtkVBoxClass parent_class;
-	void (*cursor_moved)(View *view);
-};
-
 /* callback */
 void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
 void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
 void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 
-void	gedit_view_remove (View *view);
+void	gedit_view_remove (GeditView *view);
 
 /* General utils */
 guint	   	gedit_view_get_type	(void);
-GtkWidget*	gedit_view_new		(Document *doc);
-View *		gedit_view_active	(void);
+GtkWidget*	gedit_view_new		(GeditDocument *doc);
+GeditView *	gedit_view_active	(void);
 
 /* View settings */
-void	gedit_view_set_font		(View *view, gchar *font);
-void	gedit_view_set_word_wrap	(View *view, gint word_wrap);
-void	gedit_view_set_readonly		(View *view, gint readonly);
-void	gedit_view_set_split_screen	(View *view, gint split_screen);
+void	gedit_view_set_font		(GeditView *view, gchar *font);
+void	gedit_view_set_word_wrap	(GeditView *view, gint word_wrap);
+void	gedit_view_set_readonly		(GeditView *view, gint readonly);
+void	gedit_view_set_split_screen	(GeditView *view, gint split_screen);
 
 /* Scrolled window */
-gfloat	gedit_view_get_window_position	(View *view);
-void	gedit_view_set_window_position	(View *view, gfloat position);
-void	gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
+gfloat	gedit_view_get_window_position	(GeditView *view);
+void	gedit_view_set_window_position	(GeditView *view, gfloat position);
+void	gedit_view_set_window_position_from_lines (GeditView *view, guint line, guint lines);
 
 /* Insert/delete text */
-void	doc_delete_text_real_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+void	doc_delete_text_real_cb		(GtkWidget *editable, int start_pos, int end_pos, GeditView *view, gint exclude_this_view, gint undo);
 /*void	doc_delete_text_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view);*/
-void	doc_insert_text_real_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+void	doc_insert_text_real_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, GeditView *view, gint exclude_this_view, gint undo);
 /*void	doc_insert_text_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);*/
 
 
 /* selection and position */
-void	gedit_view_set_selection	(View *view, guint start, guint end);
-gint	gedit_view_get_selection	(View *view, guint *start, guint *end);
-void	gedit_view_set_position		(View *view, gint pos);
-guint	gedit_view_get_position		(View *view);
+void	gedit_view_set_selection	(GeditView *view, guint start, guint end);
+gint	gedit_view_get_selection	(GeditView *view, guint *start, guint *end);
+void	gedit_view_set_position		(GeditView *view, gint pos);
+guint	gedit_view_get_position		(GeditView *view);
 
 /* toolbar */
-void	gedit_view_load_widgets (View *view);
-void	gedit_view_set_undo (View *view, gint undo_state, gint redo_state);
+void	gedit_view_load_widgets (GeditView *view);
+void	gedit_view_set_undo (GeditView *view, gint undo_state, gint redo_state);
 
 
-#endif /* __VIEW_H__ */
+#endif /* __GEDIT_VIEW_H__ */

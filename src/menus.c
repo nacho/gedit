@@ -120,9 +120,9 @@ GnomeUIInfo gedit_edit_menu[] =
 
 	GNOMEUIINFO_SEPARATOR,
 
-	GNOMEUIINFO_MENU_FIND_ITEM ( find_cb, NULL),
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM ( find_again_cb, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM ( replace_cb, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM       (gedit_find_cb, NULL),
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM (gedit_find_again_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM    (gedit_replace_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 
@@ -130,7 +130,7 @@ GnomeUIInfo gedit_edit_menu[] =
 		GNOME_APP_UI_ITEM,
 		N_("Goto _Line..."),
 		N_("Go to a specific line number"),
-		goto_line_cb, NULL, NULL,
+		gedit_goto_line_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
 
@@ -261,11 +261,11 @@ GnomeUIInfo toolbar_data[] =
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), find_cb,
+		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), gedit_find_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("Line"), N_("Get file info like characters, lines, words & paragraphs count."), file_info_cb,
+		GNOME_APP_UI_ITEM, N_("Line"), N_("Get the basic file info."), gedit_file_info_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_INDEX
 	},
 	GNOMEUIINFO_SEPARATOR,

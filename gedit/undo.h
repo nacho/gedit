@@ -40,7 +40,7 @@ typedef enum {
 	GEDIT_UNDO_STATE_REFRESH,
 } GeditUndoState;
 
-void gedit_undo_add       (const gchar *text, gint start_pos, gint end_pos, GeditUndoAction action, Document *doc, View *view);
+void gedit_undo_add       (const gchar *text, gint start_pos, gint end_pos, GeditUndoAction action, GeditDocument *doc, GeditView *view);
 void gedit_undo_undo	  (GtkWidget*, gpointer);
 void gedit_undo_redo	  (GtkWidget*, gpointer);
 void gedit_undo_free_list (GList **list_pointer);
