@@ -40,6 +40,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/param.h>
 #include <fcntl.h>
 
 #include "gedit-prefs.h"
@@ -52,6 +53,14 @@
 #include "gedit-marshal.h"
 
 #define NOT_EDITABLE_TAG_NAME "not_editable_tag"
+
+#ifdef MAXPATHLEN
+#define GEDIT_MAX_PATH_LEN  MAXPATHLEN
+#elif defined (PATH_MAX)
+#define GEDIT_MAX_PATH_LEN  PATH_MAX
+#else
+#define GEDIT_MAX_PATH_LEN  2048
+#endif
 
 struct _GeditDocumentPrivate
 {
@@ -917,21 +926,114 @@ gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **er
 	return ret;
 }
 
+#define MAX_LINK_LEVEL 256
+
+/* Does readlink() recursively until we find a real filename. */
+static char *
+follow_symlinks (const gchar *filename, GError **error)
+{
+	gchar *followed_filename;
+	gint link_count;
+
+	g_return_val_if_fail (strlen (filename) + 1 <= GEDIT_MAX_PATH_LEN, NULL);
+
+	followed_filename = g_strdup (filename);
+	link_count = 0;
+
+	while (link_count < MAX_LINK_LEVEL)
+	{
+		struct stat st;
+
+		if (lstat (followed_filename, &st) != 0)
+			/* We could not access the file, so perhaps it does not
+			 * exist.  Return this as a real name so that we can
+			 * attempt to create the file.
+			 */
+			return followed_filename;
+
+		if (S_ISLNK (st.st_mode))
+		{
+			gint len;
+			gchar linkname[GEDIT_MAX_PATH_LEN];
+
+			link_count++;
+
+			len = readlink (followed_filename, linkname, GEDIT_MAX_PATH_LEN - 1);
+
+			if (len == -1)
+			{
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+					     _("Could not read symbolic link information "
+					       "for %s"), followed_filename);
+				g_free (followed_filename);
+				return NULL;
+			}
+
+			linkname[len] = '\0';
+
+			/* If the linkname is not an absolute path name, append
+			 * it to the directory name of the followed filename.  E.g.
+			 * we may have /foo/bar/baz.lnk -> eek.txt, which really
+			 * is /foo/bar/eek.txt.
+			 */
+
+			if (linkname[0] != G_DIR_SEPARATOR)
+			{
+				gchar *slashpos;
+				gchar *tmp;
+
+				slashpos = strrchr (followed_filename, G_DIR_SEPARATOR);
+
+				if (slashpos)
+					*slashpos = '\0';
+				else
+				{
+					tmp = g_strconcat ("./", followed_filename, NULL);
+					g_free (followed_filename);
+					followed_filename = tmp;
+				}
+
+				tmp = g_build_filename (followed_filename, linkname, NULL);
+				g_free (followed_filename);
+				followed_filename = tmp;
+			}
+			else
+			{
+				g_free (followed_filename);
+				followed_filename = g_strdup (linkname);
+			}
+		} else
+			return followed_filename;
+	}
+
+	/* Too many symlinks */
+
+	g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, ELOOP,
+		     _("The file has too many symbolic links."));
+
+	return NULL;
+}
+
 /* FIXME: define new ERROR_CODE and remove the error 
  * strings from here -- Paolo
  */
-#define BAK_EXTENSION_PLUS "~00~"
 
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 			     gboolean create_backup_copy, GError **error)
 {
-	char *filename;
+	gchar *filename; /* Filename without URI scheme */
+	gchar *real_filename; /* Final filename with no symlinks */
+	gchar *backup_filename; /* Backup filename, like real_filename.bak */
+	gchar *temp_filename; /* Filename for saving */
+	gchar *slashpos;
+	gchar *dirname;
+	mode_t saved_umask;
 	struct stat st;
 	char *chars;
-	int chars_len;
-	int fd;
-	int retval;
+	gint chars_len;
+	gint fd;
+	gint retval;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -940,6 +1042,13 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	retval = FALSE;
+
+	filename = NULL;
+	real_filename = NULL;
+	backup_filename = NULL;
+	temp_filename = NULL;
+
+	/* We don't support non-file:/// stuff */
 
 	if (!gedit_utils_uri_has_file_scheme (uri))
 	{
@@ -959,6 +1068,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 				_("gedit cannot handle this kind of location in write mode."));
 
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, EROFS, error_message);
+		g_free (error_message);
 		return FALSE;
 	}
 
@@ -968,105 +1078,51 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 0,
 			     _("Invalid filename."));
-		return FALSE;
+		goto out;
 	}
 
-	if (stat (filename, &st) != 0)
+	/* Get the real filename and file permissions */
+
+	real_filename = follow_symlinks (filename, error);
+
+	if (!real_filename)
+		goto out;
+
+	if (stat (real_filename, &st) != 0)
 	{
 		/* File does not exist? */
 		create_backup_copy = FALSE;
 
 		/* Use default permissions */
 		st.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+		st.st_uid = getuid ();
+		st.st_gid = getgid ();
 	}
 
-	/* Copy to a temporary file if needed */
+	/* Save to a temporary file.  We set the umask because some (buggy)
+	 * implementations of mkstemp() use permissions 0666 and we want 0600.
+	 */
 
-	if (create_backup_copy)
+	slashpos = strrchr (real_filename, G_DIR_SEPARATOR);
+
+	if (slashpos)
 	{
-		char *backup_filename;
-		int read_fd, write_fd;
-
-		backup_filename = g_strconcat (filename,
-					       gedit_settings->backup_extension,
-					       BAK_EXTENSION_PLUS,
-					       NULL);
-		write_fd = open (backup_filename, O_CREAT | O_WRONLY | O_TRUNC, st.st_mode);
-		if (write_fd == -1)
-		{
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-				     _("Could not open backup file %s."),
-				     backup_filename);
-			g_free (backup_filename);
-			goto out;
-		}
-
-		read_fd = open (filename, O_RDONLY);
-		if (read_fd == -1)
-		{
-			close (write_fd);
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-				     _("Could not open file %s."),
-				     filename);
-			g_free (backup_filename);
-			goto out;
-		}
-
-		g_free (backup_filename);
-
-		while (1)
-		{
-#define COPY_BUF_SIZE 65536
-			char buf[COPY_BUF_SIZE];
-			int len;
-
-			len = read (read_fd, buf, COPY_BUF_SIZE);
-			if (len == -1 && errno != EINTR)
-			{
-				close (read_fd);
-				close (write_fd);
-				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-					     _("Could not create backup file."));
-				goto out;
-			}
-			else if (len == -1)
-				continue;
-			else if (len == 0)
-				break;
-
-			if (write (write_fd, buf, len) != len)
-			{
-				close (read_fd);
-				close (write_fd);
-				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-					     _("Could not write backup file."));
-				goto out;
-			}
-		}
-
-		if (close (read_fd) != 0)
-		{
-			close (write_fd);
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-				     _("Error when creating backup file."));
-			goto out;
-		}
-
-		if (close (write_fd) != 0)
-		{
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-				     _("Could not create backup file."));
-			goto out;
-		}
+		dirname = g_strdup (real_filename);
+		dirname[slashpos - real_filename + 1] = '\0';
 	}
+	else
+		dirname = g_strdup (".");
 
-	/* Save! */
+	temp_filename = g_build_filename (dirname, ".gedit-save-XXXXXX", NULL);
+	g_free (dirname);
 
-	if ((fd = open (filename,
-			O_CREAT | O_WRONLY | O_TRUNC, st.st_mode)) == -1)
+	saved_umask = umask (0077);
+	fd = g_mkstemp (temp_filename); /* this modifies temp_filename to the used name */
+	umask (saved_umask);
+
+	if (fd == -1)
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-			     _("Could not save the file."));
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, " ");
 		goto out;
 	}
 
@@ -1094,7 +1150,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	chars_len = strlen (chars);
 	if (write (fd, chars, chars_len) != chars_len)
 	{
-		char *msg;
+		gchar *msg;
 
 		switch (errno)
 		{
@@ -1104,26 +1160,73 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 				break;
 
 			case EFBIG:
-				msg = _("The file is too big.\n"
-					"Please try saving a smaller file.");
+				msg = _("The disk where you are trying to save the file has "
+					"a limitation on file sizes.  Please try saving "
+					"a smaller file or saving it to a disk that does not "
+					"have this limitation.");
 				break;
 
 			default:
-				msg = _("Could not save the file.");
+				msg = " ";
 				break;
 		}
-		
+
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, msg);
 		close (fd);
+		unlink (temp_filename);
 		goto out;
 	}
 
 	if (close (fd) != 0)
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-			     _("Could not save the file."));
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, " ");
+		unlink (temp_filename);
 		goto out;
 	}
+
+	/* Move the original file to a backup */
+
+	if (create_backup_copy)
+	{
+		gint result;
+
+		backup_filename = g_strconcat (real_filename, gedit_settings->backup_extension, NULL);
+
+		result = rename (real_filename, backup_filename);
+
+		if (result != 0)
+		{
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+				     _("Could not create a backup file."));
+			unlink (temp_filename);
+			goto out;
+		}
+	}
+
+	/* Move the temp file to the original file */
+
+	if (rename (temp_filename, real_filename) != 0)
+	{
+		gint saved_errno;
+
+		saved_errno = errno;
+
+		if (create_backup_copy && rename (backup_filename, real_filename) != 0)
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, saved_errno,
+				     " ");
+		else
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, saved_errno,
+				     " ");
+
+		goto out;
+	}
+
+	/* Restore permissions.  There is not much error checking we can do
+	 * here, I'm afraid.  The final data is saved anyways.
+	 */
+
+	chmod (real_filename, st.st_mode);
+	chown (real_filename, st.st_uid, st.st_gid);
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
@@ -1134,6 +1237,10 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
  out:
 
 	g_free (filename);
+	g_free (real_filename);
+	g_free (backup_filename);
+	g_free (temp_filename);
+
 	return retval;
 }
 
