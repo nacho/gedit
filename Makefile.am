@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = src pixmaps po plugins
+SUBDIRS = src pixmaps po plugins help omf-install
 
 GEDIT_SCHEMA = gedit.schemas
 

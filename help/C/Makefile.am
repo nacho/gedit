@@ -1,9 +1,8 @@
-## Process this file with automake to produce Makefile.in.
-
 figs = 
-app = gedit
+docname = gedit
 lang = C
-## Removed by chema
-include $(top_srcdir)/app-docs.make
-## end: removed by chema
+omffile = gedit-C.omf
+entities = legal.xml
+include $(top_srcdir)/xmldocs.make
 dist-hook: app-dist-hook
+
