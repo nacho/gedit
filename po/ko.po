@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-11-26 14:35+0000\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "PO-Revision-Date: 1999-06-09 13:27:10+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -13,61 +13,61 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "gEdit 전자우편 플러그인"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit 웹 브라우즈 플러그인"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: src/commands.c:93
+#: src/commands.c:91
 msgid "Could not save file!"
 msgstr ""
 
-#: src/commands.c:366
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "파일 열기..."
 
-#: src/commands.c:420 src/commands.c:468
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "읽기 전용 파일!"
 
-#: src/commands.c:507 src/commands.c:577
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "파일 저장 에러!"
 
-#: src/commands.c:537
+#: src/commands.c:535
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr "다른 이름으로 저장..."
 
-#: src/commands.c:610
+#: src/commands.c:608
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr "다른 이름으로 저장..."
 
-#: src/commands.c:696
+#: src/commands.c:694
 #, fuzzy, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr "정말로 모든 수정을 취소하고 싶으세요?"
 
-#: src/commands.c:744
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "문서가 바뀌지 않음..."
 
-#: src/commands.c:748
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "문서가 저장되지 않음..."
 
-#: src/commands.c:932
+#: src/commands.c:928
 #, fuzzy
 msgid "_File/"
 msgstr "파일(_F)"
 
-#: src/commands.c:941 src/commands.c:942
+#: src/commands.c:937 src/commands.c:938
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -83,196 +83,189 @@ msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "라인 찾기(_L)..."
 
-#: src/gE_mdi.c:77
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "라인 찾기"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 #, fuzzy
 msgid "Find _In Files..."
 msgstr "라인 찾기(_L)..."
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:82
 msgid "Find text in all open files"
 msgstr ""
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "보기창 추가(_A)"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "문서의 새로운 보기창 추가"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "보기창 삭제(_R)"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "문서의 보기창 삭제"
 
-#: src/gE_mdi.c:472
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s'가 바뀌었습니다. 저장할까요?"
 
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:543
-#: src/gE_prefs_box.c:544 src/gE_prefs_box.c:599 src/gE_prefs_box.c:600
-#: src/menus.c:245
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "플러그인(_P)"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "기본값"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "노트북"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "최상위레벨"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "형태"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "형상"
 
-#: src/gE_prefs_box.c:298
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "상태막대 보이기"
 
-#: src/gE_prefs_box.c:307
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "화면 분할 보이기"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "편집기 동작"
 
-#: src/gE_prefs_box.c:329
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "Autoindent 사용"
 
-#: src/gE_prefs_box.c:338
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "Wordwrap 사용"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:487
 #, fuzzy
 msgid "Document Settings"
 msgstr "문서 탭(_D)"
 
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:501
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:421
+#: src/gE_prefs_box.c:507
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "현재 글꼴"
 
-#: src/gE_prefs_box.c:447
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "선택..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:549
 msgid "Print Command"
 msgstr "인쇄 명령"
 
-#: src/gE_prefs_box.c:515
-msgid "Plugin Selector"
-msgstr "플러그인 선택기"
-
-#: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "이름"
-
-#: src/gE_prefs_box.c:630
-msgid "Location"
-msgstr "위치"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
-msgid "Plugins"
-msgstr "플러그인"
-
-#: src/gE_prefs_box.c:650
-msgid "Use Plugins"
-msgstr "플러그인 사용"
-
-#: src/gE_prefs_box.c:716
-msgid "Add"
-msgstr "추가"
-
-#: src/gE_prefs_box.c:721
-msgid "Remove"
-msgstr "삭제"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:764
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "창 크기"
 
-#: src/gE_prefs_box.c:777
+#: src/gE_prefs_box.c:620
 #, fuzzy
 msgid "Current Width:"
 msgstr "현재 글꼴"
 
-#: src/gE_prefs_box.c:797
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:805 src/gE_prefs_box.c:845
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 #, fuzzy
 msgid "Use Current"
 msgstr "현재 글꼴"
 
-#: src/gE_prefs_box.c:817
+#: src/gE_prefs_box.c:660
 #, fuzzy
 msgid "Current Height:"
 msgstr "현재 글꼴"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr ""
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:853
+#: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "MDI 모드"
 
 #. General Settings
-#: src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "일반"
 
 #. Window Settings
-#: src/gE_prefs_box.c:926
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "창"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:931
+#: src/gE_prefs_box.c:776
 #, fuzzy
 msgid "Document"
 msgstr "문서 탭(_D)"
@@ -305,14 +298,6 @@ msgstr " 저장 후 인쇄 "
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr ""
-
-#: src/gedit.c:116
-msgid "Launch a plugin at startup"
-msgstr "시작시 플러그인 실행"
-
-#: src/gedit.c:116
-msgid "PLUGIN-NAME"
-msgstr "플러그인-이름"
 
 #: src/menus.c:66
 msgid "_Autoindent"
@@ -431,10 +416,6 @@ msgstr "문서 탭을 오른쪽에 위치"
 msgid "Toggle Readonly"
 msgstr "읽기전용 토글"
 
-#: src/menus.c:179
-msgid "Toggle Split Screen"
-msgstr "화면 분할 토글"
-
 #: src/menus.c:185
 msgid "_Document Tabs"
 msgstr "문서 탭(_D)"
@@ -534,6 +515,42 @@ msgstr "닫기"
 #: src/gE_view.c:51
 msgid "Open (swap) .c/.h file"
 msgstr ".c/.h 파일 (스왑) 열기"
+
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit 전자우편 플러그인"
+
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "gEdit 웹 브라우즈 플러그인"
+
+#~ msgid "Plugin Selector"
+#~ msgstr "플러그인 선택기"
+
+#~ msgid "Name"
+#~ msgstr "이름"
+
+#~ msgid "Location"
+#~ msgstr "위치"
+
+#~ msgid "Plugins"
+#~ msgstr "플러그인"
+
+#~ msgid "Use Plugins"
+#~ msgstr "플러그인 사용"
+
+#~ msgid "Add"
+#~ msgstr "추가"
+
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "시작시 플러그인 실행"
+
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "플러그인-이름"
+
+#~ msgid "Toggle Split Screen"
+#~ msgstr "화면 분할 토글"
 
 #~ msgid "_None"
 #~ msgstr "없음(_N)"

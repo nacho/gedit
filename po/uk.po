@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.5.6\n"
-"POT-Creation-Date: 1999-11-16 16:42+0000\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "PO-Revision-Date: 1999-09-20 17:36+0300\n"
 "Last-Translator: Yuri Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -13,41 +13,41 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-u\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "Доповненя gEdit - електронна пошта"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "Доповненя gEdit - нав╕гатор Web"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: src/commands.c:93
+#: src/commands.c:91
 msgid "Could not save file!"
 msgstr "Неможливо зберегти файл!"
 
-#: src/commands.c:359
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "В╕дкрити файл..."
 
-#: src/commands.c:413 src/commands.c:461
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "Файл лише для зчитування!"
 
-#: src/commands.c:500 src/commands.c:570
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "Помилка при збереженн╕ файла!"
 
-#: src/commands.c:530
+#: src/commands.c:535
 #, c-format
 msgid "Save %s As..."
 msgstr "Записати %s як..."
 
-#: src/commands.c:603
+#: src/commands.c:608
 #, c-format
 msgid "Save %s As ..."
 msgstr "Записати %s як..."
 
-#: src/commands.c:689
+#: src/commands.c:694
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -56,19 +56,19 @@ msgstr ""
 "Ви впевнен╕, що хочете в╕дм╕нити ус╕ зм╕ни?\n"
 "(%s)"
 
-#: src/commands.c:737
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "Документ не зм╕нено..."
 
-#: src/commands.c:741
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "Документ не збережено..."
 
-#: src/commands.c:924
+#: src/commands.c:928
 msgid "_File/"
 msgstr "_Файл/"
 
-#: src/commands.c:933 src/commands.c:934
+#: src/commands.c:937 src/commands.c:938
 msgid "_File"
 msgstr "_Файл"
 
@@ -84,191 +84,184 @@ msgstr "© 1998, 1999 Alex Roberts та Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit - малий та легкий текстовий редактор для GNOME/Gtk+"
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "Знайти _рядок..."
 
-#: src/gE_mdi.c:77
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "Позиц╕онування на рядок"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 msgid "Find _In Files..."
 msgstr "Знайти _у файлах..."
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:82
 msgid "Find text in all open files"
 msgstr "Пошук тексту у вс╕х в╕дкритих файлах"
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "_Додати вигляд"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "Додавання нового вигляду документа"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "_Видалити вигляд"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "Видалення вигляду документа"
 
-#: src/gE_mdi.c:472
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' було модиф╕ковано. Зберегти його?"
 
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:543
-#: src/gE_prefs_box.c:544 src/gE_prefs_box.c:599 src/gE_prefs_box.c:600
-#: src/menus.c:245
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "До_повненя"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "Типовий"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "Записник"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "Зверху"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "Модально"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: src/gE_prefs_box.c:298
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "Рядок статусу"
 
-#: src/gE_prefs_box.c:307
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "Розд╕лений екран"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "Режим роботи редактора"
 
-#: src/gE_prefs_box.c:329
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "Автоматичний в╕дступ"
 
-#: src/gE_prefs_box.c:338
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "Перенос сл╕в"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:487
 msgid "Document Settings"
 msgstr "Настройки документ╕в"
 
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:501
 msgid "New Document After Closing Last"
 msgstr "Новий документ п╕сля закриття останнього"
 
-#: src/gE_prefs_box.c:421
+#: src/gE_prefs_box.c:507
 msgid "Close Window After Closing Last"
 msgstr "Закривати в╕кно п╕сля закриття останнього"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "Поточний шрифт"
 
-#: src/gE_prefs_box.c:447
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "Вибрати..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:549
 msgid "Print Command"
 msgstr "Команда друку"
 
-#: src/gE_prefs_box.c:515
-msgid "Plugin Selector"
-msgstr "Виб╕р доповненя"
-
-#: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "Назва"
-
-#: src/gE_prefs_box.c:630
-msgid "Location"
-msgstr "Розм╕щеня"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
-msgid "Plugins"
-msgstr "Доповненя"
-
-#: src/gE_prefs_box.c:650
-msgid "Use Plugins"
-msgstr "Використовувати доповненя"
-
-#: src/gE_prefs_box.c:716
-msgid "Add"
-msgstr "Додати"
-
-#: src/gE_prefs_box.c:721
-msgid "Remove"
-msgstr "Видалити"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:764
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "Розм╕р в╕кна"
 
-#: src/gE_prefs_box.c:777
+#: src/gE_prefs_box.c:620
 msgid "Current Width:"
 msgstr "Поточна ширина:"
 
-#: src/gE_prefs_box.c:797
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr "Початкова ширина:"
 
-#: src/gE_prefs_box.c:805 src/gE_prefs_box.c:845
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 msgid "Use Current"
 msgstr "Використовувати поточну"
 
-#: src/gE_prefs_box.c:817
+#: src/gE_prefs_box.c:660
 msgid "Current Height:"
 msgstr "Поточна висота"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr "Початкова висота:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:853
+#: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "Режим MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "Загальне"
 
 #. Window Settings
-#: src/gE_prefs_box.c:926
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "В╕кно"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:931
+#: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "Документ"
 
@@ -300,14 +293,6 @@ msgstr " Зберегти, та друкувати "
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr "В╕дм╕на"
-
-#: src/gedit.c:116
-msgid "Launch a plugin at startup"
-msgstr "Запуск доповненя на старт╕"
-
-#: src/gedit.c:116
-msgid "PLUGIN-NAME"
-msgstr "Назва доповненя"
 
 #: src/menus.c:66
 msgid "_Autoindent"
@@ -422,10 +407,6 @@ msgstr "Розм╕щення закладок зправа"
 msgid "Toggle Readonly"
 msgstr "Ативувати/Дезактивувати лише читання"
 
-#: src/menus.c:179
-msgid "Toggle Split Screen"
-msgstr "Ативувати/Дезактивувати розд╕лення екрану"
-
 #: src/menus.c:185
 msgid "_Document Tabs"
 msgstr "_Закладки документ╕в"
@@ -526,6 +507,42 @@ msgstr "Закрити"
 #: src/gE_view.c:51
 msgid "Open (swap) .c/.h file"
 msgstr "В╕дкрити (обм╕няти) .c/.h файл"
+
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "Доповненя gEdit - електронна пошта"
+
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "Доповненя gEdit - нав╕гатор Web"
+
+#~ msgid "Plugin Selector"
+#~ msgstr "Виб╕р доповненя"
+
+#~ msgid "Name"
+#~ msgstr "Назва"
+
+#~ msgid "Location"
+#~ msgstr "Розм╕щеня"
+
+#~ msgid "Plugins"
+#~ msgstr "Доповненя"
+
+#~ msgid "Use Plugins"
+#~ msgstr "Використовувати доповненя"
+
+#~ msgid "Add"
+#~ msgstr "Додати"
+
+#~ msgid "Remove"
+#~ msgstr "Видалити"
+
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "Запуск доповненя на старт╕"
+
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "Назва доповненя"
+
+#~ msgid "Toggle Split Screen"
+#~ msgstr "Ативувати/Дезактивувати розд╕лення екрану"
 
 #~ msgid "_None"
 #~ msgstr "_Нема╓"

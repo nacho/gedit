@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.0\n"
-"POT-Creation-Date: 1998-11-14 02:05+0100\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "PO-Revision-Date: 1999-11-11 05:04+0800\n"
 "Last-Translator: Dillion Chen <dillon.chen@turbolinux.com.cn>\n"
 "Language-Team: TLDN\n"
@@ -9,611 +9,640 @@ msgstr ""
 "Content-Type: text/plain; charset=gb2312\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "gEdit邮件插件"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit浏览器插件"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "文件序号 %ld.\n"
+#: src/commands.c:91
+msgid "Could not save file!"
+msgstr ""
 
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "外壳"
-
-#: src/commands.c:575
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "开启一个文件"
 
-#: src/commands.c:652
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "只读文件"
 
-#: src/commands.c:678
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "保存文件错误"
 
-#: src/commands.c:701
-msgid "Save As..."
+#: src/commands.c:535
+#, fuzzy, c-format
+msgid "Save %s As..."
 msgstr " 储存 "
 
-#: src/commands.c:752
-msgid "Are you sure you wish to revert all changes?"
+#: src/commands.c:608
+#, fuzzy, c-format
+msgid "Save %s As ..."
+msgstr " 储存 "
+
+#: src/commands.c:694
+#, fuzzy, c-format
+msgid ""
+"Are you sure you wish to revert all changes?\n"
+"(%s)"
 msgstr "你确信你要还原所有的改变吗?"
 
-#: src/commands.c:794
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "文档没有改变..."
 
-#: src/commands.c:796
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "文件定位(_D)"
 
-#: src/commands.c:1098
+#: src/commands.c:928
 msgid "_File/"
 msgstr "文件(_F)"
 
-#: src/commands.c:1107 src/commands.c:1108
+#: src/commands.c:937 src/commands.c:938
 msgid "_File"
 msgstr "文件(_F)"
 
-#: src/gE_about.c:33
+#: src/gE_about.c:36
 msgid "With special thanks to:"
 msgstr "特别感谢"
 
-#: src/gE_about.c:52
+#: src/gE_about.c:47
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 
-#: src/gE_about.c:54
+#: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdiit 是一个 GNOME/Gtk+ 的小型轻量级的文字编辑器"
 
-#: src/gE_document.c:61 src/toolbar.c:51
-msgid "Cut"
-msgstr "剪下"
-
-#: src/gE_document.c:62 src/toolbar.c:53
-msgid "Copy"
-msgstr "拷贝"
-
-#: src/gE_document.c:63 src/toolbar.c:55
-msgid "Paste"
-msgstr "贴上"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:66 src/gE_mdi.c:103 src/toolbar.c:42
-msgid "Save"
-msgstr "储存"
-
-#: src/gE_document.c:67 src/gE_mdi.c:104 src/toolbar.c:44
-msgid "Close"
-msgstr "关闭"
-
-#: src/gE_document.c:68 src/gE_mdi.c:105 src/gE_print.c:71 src/toolbar.c:46
-msgid "Print"
-msgstr "打印"
-
-#: src/gE_document.c:70 src/gE_mdi.c:108
-msgid "Open (swap) .c/.h file"
-msgstr "开启 (切换) .c/.h 文件"
-
-#. line and column indicators
-#. tmp = gtk_label_new(_("Column:"));
-#. gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
-#. gtk_widget_show(tmp);
-#: src/gE_document.c:128
-msgid "Column:\t0"
-msgstr "列:"
-
-#. box = gtk_hbox_new (FALSE, 1);
-#. gtk_widget_show (box);
-#: src/gE_document.c:141
-msgid "Line"
-msgstr "行"
-
-#: src/gE_mdi.c:65
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "找寻行数 (_L)..."
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "搜寻某一行"
 
-#: src/gE_mdi.c:79
+#: src/gE_mdi.c:81
+#, fuzzy
+msgid "Find _In Files..."
+msgstr "找寻行数 (_L)..."
+
+#: src/gE_mdi.c:82
+#, fuzzy
+msgid "Find text in all open files"
+msgstr "关闭所有开启的文件"
+
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "添加视图"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "增加一个新窗口"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "移去视图"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "移去文档视图"
 
-#: src/gE_mdi.c:502
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr "'%s'已经改变. 你是否需要保存它?"
 
-#. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:557
-#: src/gE_prefs_box.c:558 src/gE_prefs_box.c:608 src/gE_prefs_box.c:609
-#: src/menus.c:251
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "Plugins(_P)"
 
-#: src/gE_prefs_box.c:97
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "缺省"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "笔记本"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "顶级"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "样式"
 
-#: src/gE_prefs_box.c:272
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "外观"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "显示状态栏"
 
-#: src/gE_prefs_box.c:294
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "显示分割窗口"
 
-#: src/gE_prefs_box.c:303
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "编辑器特性"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "启用自动编排"
 
-#: src/gE_prefs_box.c:325
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "启用文字换行"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:346
+#: src/gE_prefs_box.c:487
 msgid "Document Settings"
 msgstr "文件列表(_D)"
 
-#. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:372
-msgid "Print Command"
-msgstr "打印命令"
+#: src/gE_prefs_box.c:501
+msgid "New Document After Closing Last"
+msgstr ""
 
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:507
+msgid "Close Window After Closing Last"
+msgstr ""
+
+#. End of docyment closing stuffs
+#. Font Settings (within Document Settings frame)
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "正在使用的字体"
 
-#: src/gE_prefs_box.c:480
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "请选择..."
 
-#: src/gE_prefs_box.c:530
-msgid "Plugin Selector"
-msgstr "插件选择器"
+#. End of Font Setttings
+#. Print COmmand
+#: src/gE_prefs_box.c:549
+msgid "Print Command"
+msgstr "打印命令"
 
-#: src/gE_prefs_box.c:651
-msgid "Name"
-msgstr "名字"
-
-#: src/gE_prefs_box.c:651
-msgid "Location"
-msgstr "定位"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:658 src/gE_prefs_box.c:976
-msgid "Plugins"
-msgstr "Plugins(_P)"
-
-#: src/gE_prefs_box.c:672
-msgid "Use Plugins"
-msgstr "Plugins(_P)"
-
-#: src/gE_prefs_box.c:739
-msgid "Add"
-msgstr "添加"
-
-#: src/gE_prefs_box.c:744
-msgid "Remove"
-msgstr "删除"
-
-#: src/gE_prefs_box.c:767
-msgid "MDI Mode"
-msgstr "MDI模式"
-
-#: src/gE_prefs_box.c:822
+#. Window Size Settings
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "窗口大小"
 
-#: src/gE_prefs_box.c:835
+#: src/gE_prefs_box.c:620
 msgid "Current Width:"
 msgstr "正在使用的字体"
 
-#: src/gE_prefs_box.c:856
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr "起始宽度"
 
-#: src/gE_prefs_box.c:864 src/gE_prefs_box.c:904
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 msgid "Use Current"
 msgstr "正在使用的字体"
 
-#: src/gE_prefs_box.c:876
+#: src/gE_prefs_box.c:660
 msgid "Current Height:"
 msgstr "正在使用的字体"
 
-#: src/gE_prefs_box.c:896
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr "起始高度"
 
+#. MDI Mode settnigs
+#: src/gE_prefs_box.c:696
+msgid "MDI Mode"
+msgstr "MDI模式"
+
 #. General Settings
-#: src/gE_prefs_box.c:956
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "一般的"
 
 #. Window Settings
-#: src/gE_prefs_box.c:961
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "搜寻"
 
-#. Print Settings
-#: src/gE_prefs_box.c:966
+#. Docuemnt Settings
+#: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "文件定位(_D)"
 
-#. Font Settings
-#: src/gE_prefs_box.c:971
-msgid "Font"
-msgstr "字体"
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "打印"
 
-#. MDI Settings
-#: src/gE_prefs_box.c:981
-msgid "MDI"
-msgstr "MDI"
-
-#: src/gE_print.c:84
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr "记住包含%s"
 
-#: src/gE_print.c:92
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "打印的指令:"
 
-#: src/gE_print.c:219
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "直接打印"
 
-#: src/gE_print.c:219
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr "先储存，然后打印 "
 
-#: src/gedit.c:127
-msgid "Launch a plugin at startup"
-msgstr "启动时执行一个 plugin"
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr ""
 
-#: src/gedit.c:127
-msgid "PLUGIN-NAME"
-msgstr "插件名字"
-
-#: src/menus.c:65
+#: src/menus.c:66
 msgid "_Autoindent"
 msgstr "启用自动编排"
 
-#: src/menus.c:66
+#: src/menus.c:67
 msgid "Status_bar"
 msgstr "显示状态栏"
 
-#: src/menus.c:67
+#: src/menus.c:68
 msgid "_Wordwrap"
 msgstr "启用文字换行"
 
-#: src/menus.c:68
+#: src/menus.c:69
 msgid "_Linewrap"
 msgstr "切换行列绕回功能"
 
-#: src/menus.c:69
+#: src/menus.c:70
 msgid "_Readonly"
 msgstr "切换只读状态"
 
-#: src/menus.c:70
+#: src/menus.c:71
 msgid "_Splitscreen"
 msgstr "显示分割窗口"
 
-#: src/menus.c:71
+#: src/menus.c:72
 msgid "_Show tabs"
 msgstr "显示状态栏"
 
-#: src/menus.c:72
+#: src/menus.c:73
 msgid "Toolbar _relief"
 msgstr "工具棒_relief"
 
-#: src/menus.c:73
+#: src/menus.c:74
 msgid "_Show tooltips"
 msgstr "显示工具提示"
 
-#: src/menus.c:74
+#: src/menus.c:75
 msgid "Show toolbar _text"
 msgstr "显示工具棒_text"
 
-#: src/menus.c:75
+#: src/menus.c:76
 msgid "Show toolbar _icons"
 msgstr "显示工具棒_icons"
 
 #. and this one is the default file name
-#: src/menus.c:77
+#: src/menus.c:78
 msgid "Untitled"
 msgstr "无标题"
 
-#: src/menus.c:85
+#: src/menus.c:87
 msgid "_New"
 msgstr "新建(_N)"
 
-#: src/menus.c:85 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "建立一个新的文件"
 
 #: src/menus.c:94
+#, fuzzy
+msgid "Save All"
+msgstr " 储存 "
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "现在开启的文件"
+
+#: src/menus.c:99
 msgid "Revert"
 msgstr "还原"
 
-#: src/menus.c:116
+#: src/menus.c:109
+msgid "Close All"
+msgstr "关闭所有的文件"
+
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "关闭所有开启的文件"
+
+#: src/menus.c:122
 msgid "_Top"
 msgstr "上对齐(_T)"
 
-#: src/menus.c:117
+#: src/menus.c:123
 msgid "Put the document tabs at the top"
 msgstr "将文件定位为上对齐"
 
-#: src/menus.c:120
+#: src/menus.c:126
 msgid "_Bottom"
 msgstr "下对齐(_B)"
 
-#: src/menus.c:121
+#: src/menus.c:127
 msgid "Put the document tabs at the bottom"
 msgstr "将文件定位为下对齐"
 
-#: src/menus.c:124
+#: src/menus.c:130
 msgid "_Left"
 msgstr "左对齐(_L)"
 
-#: src/menus.c:125
+#: src/menus.c:131
 msgid "Put the document tabs on the left"
 msgstr "将文件定位为左对齐"
 
-#: src/menus.c:128
+#: src/menus.c:134
 msgid "_Right"
 msgstr "右对齐(_R)"
 
-#: src/menus.c:129
+#: src/menus.c:135
 msgid "Put the document tabs on the right"
 msgstr "将文件定位为右对齐"
 
-#: src/menus.c:142
-msgid "_None"
-msgstr "新建(_N)"
-
-#: src/menus.c:143
-msgid "Don't have a scrollbar"
-msgstr "没有滚动条"
-
-#: src/menus.c:146
-msgid "_Always"
-msgstr "总是"
-
-#: src/menus.c:147
-msgid "Always have the scrollbar"
-msgstr "总是有滚动条"
-
-#: src/menus.c:150
-msgid "_Automatic"
-msgstr "自动"
-
-#: src/menus.c:151
-msgid "Only have scrollbar when it's needed"
-msgstr "仅当需要时有滚动条"
-
-#: src/menus.c:160
-msgid "Toggle autoindent"
-msgstr "切换自动编排功能"
-
-#: src/menus.c:165
-msgid "Toggle statusbar"
-msgstr "切换状态栏"
-
-#: src/menus.c:170
-msgid "Toggle Wordwrap"
-msgstr "切换字词绕回功能"
-
-#: src/menus.c:175
-msgid "Toggle Linewrap"
-msgstr "切换行列绕回功能"
-
-#: src/menus.c:180
+#: src/menus.c:174
 msgid "Toggle Readonly"
 msgstr "切换只读状态"
 
 #: src/menus.c:185
-msgid "Toggle Split Screen"
-msgstr "切换分割窗口"
-
-#: src/menus.c:191
 msgid "_Document Tabs"
 msgstr "文件定位(_D)"
 
-#: src/menus.c:192
+#: src/menus.c:186
 msgid "Change the placement of the document tabs"
 msgstr "改变文件定位的位置"
 
-#: src/menus.c:194
-msgid "_Scrollbar"
-msgstr "滚动条"
-
-#: src/menus.c:195
-msgid "Change visibility options of the scrollbar"
-msgstr "改变滚动条可视性选项"
-
-#: src/menus.c:199
+#: src/menus.c:190
 msgid "Sa_ve Settings"
 msgstr "储存设定(_v)"
 
-#: src/menus.c:200
+#: src/menus.c:191
 msgid "Save the current settings for future sessions"
 msgstr "储存现在的设定值，以供未来使用"
 
-#: src/search.c:289
-#, c-format
+#: src/search.c:412
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:413 src/search.c:862
+msgid "Search"
+msgstr "搜寻"
+
+#: src/search.c:417 src/search.c:867 src/search.c:895
+msgid "Search for:"
+msgstr "搜寻:"
+
+#: src/search.c:768
+#, fuzzy, c-format
 msgid ""
+"Filename: %s\n"
+"\n"
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
 "总行数: %i\n"
 "现在的行数: %i"
 
-#: src/search.c:311
+#: src/search.c:790
 msgid "Go to line"
 msgstr "跳到行"
 
-#: src/search.c:321
+#: src/search.c:800
 msgid "Line number"
 msgstr "行号"
 
-#: src/search.c:344
+#: src/search.c:823
 msgid "Search from cursor"
 msgstr "寻找一个字串"
 
-#: src/search.c:351
+#: src/search.c:830
 msgid "Search from beginning of document"
 msgstr "由文件的开头开始搜寻"
 
-#: src/search.c:358
+#: src/search.c:837
 msgid "Search from end of document"
 msgstr "由文件的开头开始搜寻"
 
-#: src/search.c:365
+#: src/search.c:844
 msgid "Case sensitive"
 msgstr "判断大小写"
 
-#: src/search.c:371
+#: src/search.c:850
 msgid "Reverse search"
 msgstr "反向搜寻"
 
-#: src/search.c:383
-msgid "Search"
-msgstr "搜寻"
-
-#: src/search.c:388 src/search.c:416
-msgid "Search for:"
-msgstr "搜寻:"
-
-#: src/search.c:410 src/search.c:411
+#: src/search.c:889 src/search.c:890
 msgid "Replace"
 msgstr "取代:"
 
-#: src/search.c:412
+#: src/search.c:891
 msgid "Replace all"
 msgstr "取代所有:"
 
-#: src/search.c:426
+#: src/search.c:905
 msgid "Replace with:"
 msgstr "用...取代:"
 
-#: src/search.c:437
+#: src/search.c:916
 msgid "Ask before replacing"
 msgstr "取代前询问"
 
-#: src/search.c:633
+#: src/search.c:1115
 msgid "Replace?"
 msgstr "取代:"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "新建"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "储存"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "开启"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "关闭"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "开启一个文件"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "开启 (切换) .c/.h 文件"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "储存现在的文件"
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit邮件插件"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "关闭现在的文件"
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "gEdit浏览器插件"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "显示现在的文件"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "文件序号 %ld.\n"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "剪下所选中的范围"
+#~ msgid "Shell"
+#~ msgstr "外壳"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "拷贝所选中的范围"
+#~ msgid "Cut"
+#~ msgstr "剪下"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "贴到剪贴簿去"
+#~ msgid "Copy"
+#~ msgstr "拷贝"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "搜寻"
+#~ msgid "Paste"
+#~ msgstr "贴上"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "寻找一个字串"
+#~ msgid "Column:\t0"
+#~ msgstr "列:"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "离开"
+#~ msgid "Line"
+#~ msgstr "行"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "离开本程序"
+#~ msgid "Plugin Selector"
+#~ msgstr "插件选择器"
+
+#~ msgid "Name"
+#~ msgstr "名字"
+
+#~ msgid "Location"
+#~ msgstr "定位"
+
+#~ msgid "Plugins"
+#~ msgstr "Plugins(_P)"
+
+#~ msgid "Use Plugins"
+#~ msgstr "Plugins(_P)"
+
+#~ msgid "Add"
+#~ msgstr "添加"
+
+#~ msgid "Remove"
+#~ msgstr "删除"
+
+#~ msgid "Font"
+#~ msgstr "字体"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "启动时执行一个 plugin"
+
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "插件名字"
+
+#~ msgid "_None"
+#~ msgstr "新建(_N)"
+
+#~ msgid "Don't have a scrollbar"
+#~ msgstr "没有滚动条"
+
+#~ msgid "_Always"
+#~ msgstr "总是"
+
+#~ msgid "Always have the scrollbar"
+#~ msgstr "总是有滚动条"
+
+#~ msgid "_Automatic"
+#~ msgstr "自动"
+
+#~ msgid "Only have scrollbar when it's needed"
+#~ msgstr "仅当需要时有滚动条"
+
+#~ msgid "Toggle autoindent"
+#~ msgstr "切换自动编排功能"
+
+#~ msgid "Toggle statusbar"
+#~ msgstr "切换状态栏"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "切换字词绕回功能"
+
+#~ msgid "Toggle Linewrap"
+#~ msgstr "切换行列绕回功能"
+
+#~ msgid "Toggle Split Screen"
+#~ msgstr "切换分割窗口"
+
+#~ msgid "_Scrollbar"
+#~ msgstr "滚动条"
+
+#~ msgid "Change visibility options of the scrollbar"
+#~ msgstr "改变滚动条可视性选项"
+
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Open"
+#~ msgstr "开启"
+
+#~ msgid "Open a file"
+#~ msgstr "开启一个文件"
+
+#~ msgid "Save the current file"
+#~ msgstr "储存现在的文件"
+
+#~ msgid "Close the current file"
+#~ msgstr "关闭现在的文件"
+
+#~ msgid "Print the current file"
+#~ msgstr "显示现在的文件"
+
+#~ msgid "Cut the selection"
+#~ msgstr "剪下所选中的范围"
+
+#~ msgid "Copy the selection"
+#~ msgstr "拷贝所选中的范围"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "贴到剪贴簿去"
+
+#~ msgid "Find"
+#~ msgstr "搜寻"
+
+#~ msgid "Search for a string"
+#~ msgstr "寻找一个字串"
+
+#~ msgid "Exit"
+#~ msgstr "离开"
+
+#~ msgid "Exit the program"
+#~ msgstr "离开本程序"
 
 #~ msgid "Open in new window"
 #~ msgstr "开启於新的窗口"
-
-#~ msgid "Currently Open Files"
-#~ msgstr "现在开启的文件"
-
-#~ msgid "Close All"
-#~ msgstr "关闭所有的文件"
-
-#~ msgid "Close all open files"
-#~ msgstr "关闭所有开启的文件"
 
 #~ msgid "Toggle the presence of the document tabs"
 #~ msgstr "切换先前的文件定位"

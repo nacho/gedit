@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-11-16 16:42+0000\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "PO-Revision-Date: 1999-11-18 16:15+02:00\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish Gnome Tranlation Team <gnotrap@gmx.net>\n"
@@ -13,41 +13,41 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "gEdit eposta eklemi"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit web gezgini eklemi"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: src/commands.c:93
+#: src/commands.c:91
 msgid "Could not save file!"
 msgstr "Dosyayý kaydedemedim !"
 
-#: src/commands.c:359
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "Dosyayý aç ...."
 
-#: src/commands.c:413 src/commands.c:461
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "Sýrf yazýlabilir bir dosya !"
 
-#: src/commands.c:500 src/commands.c:570
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "Kaydederken bir hata oluþtu !"
 
-#: src/commands.c:530
+#: src/commands.c:535
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr "%s'yi farklý Kaydet... "
 
-#: src/commands.c:603
+#: src/commands.c:608
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr "%s'yi farklý Kaydet ..."
 
-#: src/commands.c:689
+#: src/commands.c:694
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -56,19 +56,19 @@ msgstr ""
 "Yekin deðiþiklikleri yoksaymayý kabul ediyor musunuz ?\n"
 "(%s)"
 
-#: src/commands.c:737
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "Dosya deðiþtirilmedi ..."
 
-#: src/commands.c:741
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "Dosya kaydedilmedi ..."
 
-#: src/commands.c:924
+#: src/commands.c:928
 msgid "_File/"
 msgstr "_Dosya/"
 
-#: src/commands.c:933 src/commands.c:934
+#: src/commands.c:937 src/commands.c:938
 msgid "_File"
 msgstr "_Dosya"
 
@@ -84,192 +84,185 @@ msgstr "(C) 1998, 1999 Alex Roberts ve Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit GNOME/Gtk+ için ufak ve kolay kullanýlabilen bir editörldür"
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "Satýrý ara ..."
 
-#: src/gE_mdi.c:77
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "Belli bir satýrý ara"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 #, fuzzy
 msgid "Find _In Files..."
 msgstr "Dosyalarda bul ..."
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:82
 msgid "Find text in all open files"
 msgstr "Yekin açýk dosyalarda bul"
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "Yeni b_akýþ ekle"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "Dosyaya yeni bir bakýþ aç"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "Bakýþý çýka_rt"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "Bakýþý sil"
 
-#: src/gE_mdi.c:472
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " `%s' dosyasý deðiþtirildi . Kaydetmek istiyormusunuz ?"
 
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:543
-#: src/gE_prefs_box.c:544 src/gE_prefs_box.c:599 src/gE_prefs_box.c:600
-#: src/menus.c:245
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "Eklemler"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "Önayarlar"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "Yafta"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "Ana pencere"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "modal"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: src/gE_prefs_box.c:298
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "Durum çizgisini aç/kapat"
 
-#: src/gE_prefs_box.c:307
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "Ekran bölüþünü aç/kapat"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "Editör heybeti"
 
-#: src/gE_prefs_box.c:329
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "Otomatik aralamayý ac"
 
-#: src/gE_prefs_box.c:338
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "Satýr kýrmasýný aç"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:487
 msgid "Document Settings"
 msgstr "Dosya ayarlarý"
 
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:501
 msgid "New Document After Closing Last"
 msgstr "Son dosyayý kapattýktan sonra yeni bir tane ekle"
 
-#: src/gE_prefs_box.c:421
+#: src/gE_prefs_box.c:507
 msgid "Close Window After Closing Last"
 msgstr "Son dosyayý kapattýktan sonra pencereyi kapat"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "Yazý tipi"
 
-#: src/gE_prefs_box.c:447
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "Seç ..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:549
 msgid "Print Command"
 msgstr "Yazdýrma komutasi"
 
-#: src/gE_prefs_box.c:515
-msgid "Plugin Selector"
-msgstr "Eklem seçimi"
-
-#: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "Isim"
-
-#: src/gE_prefs_box.c:630
-msgid "Location"
-msgstr "Yer"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
-msgid "Plugins"
-msgstr "Eklemler"
-
-#: src/gE_prefs_box.c:650
-msgid "Use Plugins"
-msgstr "Eklemleri kullan"
-
-#: src/gE_prefs_box.c:716
-msgid "Add"
-msgstr "Ekle"
-
-#: src/gE_prefs_box.c:721
-msgid "Remove"
-msgstr "Sil"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:764
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "Pencere boyutlarý"
 
-#: src/gE_prefs_box.c:777
+#: src/gE_prefs_box.c:620
 msgid "Current Width:"
 msgstr "Þu anki en :"
 
-#: src/gE_prefs_box.c:797
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr "Baþlangýç boytularý :"
 
-#: src/gE_prefs_box.c:805 src/gE_prefs_box.c:845
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 msgid "Use Current"
 msgstr "Þu ankileri kullan"
 
-#: src/gE_prefs_box.c:817
+#: src/gE_prefs_box.c:660
 msgid "Current Height:"
 msgstr "Þu anki yükseklik :"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr "Baþlangýçtaký yükseklik :"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:853
+#: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "MDI halinde calýþ"
 
 #. General Settings
-#: src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "Genel"
 
 #. Window Settings
-#: src/gE_prefs_box.c:926
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "Pencere"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:931
+#: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "Dosya"
 
@@ -301,14 +294,6 @@ msgstr " Kaydettikten sonra yazdýr "
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr "Kapat"
-
-#: src/gedit.c:116
-msgid "Launch a plugin at startup"
-msgstr "Bir eklemi baþlangýcta baþlat"
-
-#: src/gedit.c:116
-msgid "PLUGIN-NAME"
-msgstr "Eklem ismi"
 
 #: src/menus.c:66
 msgid "_Autoindent"
@@ -427,10 +412,6 @@ msgstr "Yaftalarý saðda göster"
 msgid "Toggle Readonly"
 msgstr "Sýrf okunabilirliði aç/kapat"
 
-#: src/menus.c:179
-msgid "Toggle Split Screen"
-msgstr "Ekran bölmesini aç/kapat"
-
 #: src/menus.c:185
 msgid "_Document Tabs"
 msgstr "_Dosya yaftalarý"
@@ -532,98 +513,134 @@ msgstr "Kapat"
 msgid "Open (swap) .c/.h file"
 msgstr ".c/.h dosyalarý aç (deðiþtir)"
 
-msgid "_None"
-msgstr "Hiç biri"
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit eposta eklemi"
 
-msgid "Don't have a scrollbar"
-msgstr "Kaydýrma çubuðunu gösterme"
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "gEdit web gezgini eklemi"
 
-msgid "A_lways"
-msgstr "Her zaman"
+#~ msgid "Plugin Selector"
+#~ msgstr "Eklem seçimi"
 
-msgid "Always have the scrollbar"
-msgstr "Her zaman kaydýrma çubuðunu göster"
+#~ msgid "Name"
+#~ msgstr "Isim"
 
-msgid "_Automatic"
-msgstr "Otomatik"
+#~ msgid "Location"
+#~ msgstr "Yer"
 
-msgid "Only have scrollbar when it's needed"
-msgstr "Sadece gerekli olduðu zaman kaydýrma çubuðunu göster"
+#~ msgid "Plugins"
+#~ msgstr "Eklemler"
 
-msgid "_Scrollbar"
-msgstr "Kaydýrma çubuðu"
+#~ msgid "Use Plugins"
+#~ msgstr "Eklemleri kullan"
 
-msgid "Change visibility options of the scrollbar"
-msgstr "Kaydýrma çubuðu ayarlarýný deðiþtir"
+#~ msgid "Add"
+#~ msgstr "Ekle"
 
-msgid "Docid is %ld.\n"
-msgstr "Dosya IS'si %ld idir.\n"
+#~ msgid "Remove"
+#~ msgstr "Sil"
 
-msgid "Shell"
-msgstr "Komuta"
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "Bir eklemi baþlangýcta baþlat"
 
-msgid "Cut"
-msgstr "Kes"
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "Eklem ismi"
 
-msgid "Copy"
-msgstr "Kopyala"
+#~ msgid "Toggle Split Screen"
+#~ msgstr "Ekran bölmesini aç/kapat"
 
-msgid "Paste"
-msgstr "Yapýþtýr"
+#~ msgid "_None"
+#~ msgstr "Hiç biri"
 
-msgid "New"
-msgstr "Yeni"
+#~ msgid "Don't have a scrollbar"
+#~ msgstr "Kaydýrma çubuðunu gösterme"
 
-msgid "Open"
-msgstr "Aç"
+#~ msgid "A_lways"
+#~ msgstr "Her zaman"
 
-msgid "Open a file"
-msgstr "Bir dosyayý aç"
+#~ msgid "Always have the scrollbar"
+#~ msgstr "Her zaman kaydýrma çubuðunu göster"
 
-msgid "Save the current file"
-msgstr "Þu anki dosyayý kaydet"
+#~ msgid "_Automatic"
+#~ msgstr "Otomatik"
 
-msgid "Close the current file"
-msgstr "Þu anki dosyayý kapat"
+#~ msgid "Only have scrollbar when it's needed"
+#~ msgstr "Sadece gerekli olduðu zaman kaydýrma çubuðunu göster"
 
-msgid "Print the current file"
-msgstr "Þu anki dosyayý yazdýr"
+#~ msgid "_Scrollbar"
+#~ msgstr "Kaydýrma çubuðu"
 
-msgid "Cut the selection"
-msgstr "Iþaretlenmiþ kesimi kes"
+#~ msgid "Change visibility options of the scrollbar"
+#~ msgstr "Kaydýrma çubuðu ayarlarýný deðiþtir"
 
-msgid "Copy the selection"
-msgstr "Iþaretlenmiþ kesimi kopyala"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Dosya IS'si %ld idir.\n"
 
-msgid "Paste the clipboard"
-msgstr "Arahýfzdan yapýþtýr"
+#~ msgid "Shell"
+#~ msgstr "Komuta"
 
-msgid "Find"
-msgstr "Bul"
+#~ msgid "Cut"
+#~ msgstr "Kes"
 
-msgid "Search for a string"
-msgstr "Bir kelamý ara"
+#~ msgid "Copy"
+#~ msgstr "Kopyala"
 
-msgid "Exit"
-msgstr "Çýk"
+#~ msgid "Paste"
+#~ msgstr "Yapýþtýr"
 
-msgid "Exit the program"
-msgstr "Uygulamaladan çýk"
+#~ msgid "New"
+#~ msgstr "Yeni"
 
-msgid "Font"
-msgstr "Yazý tipi"
+#~ msgid "Open"
+#~ msgstr "Aç"
 
-msgid "MDI"
-msgstr "MDI"
+#~ msgid "Open a file"
+#~ msgstr "Bir dosyayý aç"
 
-msgid "Toggle autoindent"
-msgstr "Otomatik aralamayý aç/kapat"
+#~ msgid "Save the current file"
+#~ msgstr "Þu anki dosyayý kaydet"
 
-msgid "Toggle statusbar"
-msgstr "Durum çubuðunu aç/kapat"
+#~ msgid "Close the current file"
+#~ msgstr "Þu anki dosyayý kapat"
 
-msgid "Toggle Wordwrap"
-msgstr "Otomatik kelime kýrmasýný aç/kapat"
+#~ msgid "Print the current file"
+#~ msgstr "Þu anki dosyayý yazdýr"
 
-msgid "Toggle Linewrap"
-msgstr "Otomatik satýr kýrmasýný aç/kapat"
+#~ msgid "Cut the selection"
+#~ msgstr "Iþaretlenmiþ kesimi kes"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Iþaretlenmiþ kesimi kopyala"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Arahýfzdan yapýþtýr"
+
+#~ msgid "Find"
+#~ msgstr "Bul"
+
+#~ msgid "Search for a string"
+#~ msgstr "Bir kelamý ara"
+
+#~ msgid "Exit"
+#~ msgstr "Çýk"
+
+#~ msgid "Exit the program"
+#~ msgstr "Uygulamaladan çýk"
+
+#~ msgid "Font"
+#~ msgstr "Yazý tipi"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Toggle autoindent"
+#~ msgstr "Otomatik aralamayý aç/kapat"
+
+#~ msgid "Toggle statusbar"
+#~ msgstr "Durum çubuðunu aç/kapat"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "Otomatik kelime kýrmasýný aç/kapat"
+
+#~ msgid "Toggle Linewrap"
+#~ msgstr "Otomatik satýr kýrmasýný aç/kapat"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-01-10 18:42-0500\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "PO-Revision-Date: 2000-01-09 18:55+03:00\n"
 "Last-Translator: Sergey Panov <sipan@mit.edu>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -11,41 +11,41 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "gEdit дополнение, электронная почта"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit дополнение, web-навигатор"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: src/commands.c:93
+#: src/commands.c:91
 msgid "Could not save file!"
 msgstr "Невозможно сохранить файл!"
 
-#: src/commands.c:366
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "Открыть файл..."
 
-#: src/commands.c:420 src/commands.c:468
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "Файл защищен от записи!"
 
-#: src/commands.c:507 src/commands.c:577
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/commands.c:537
+#: src/commands.c:535
 #, c-format
 msgid "Save %s As..."
 msgstr "Сохранить %s как..."
 
-#: src/commands.c:610
+#: src/commands.c:608
 #, c-format
 msgid "Save %s As ..."
 msgstr "Сохранить %s как..."
 
-#: src/commands.c:696
+#: src/commands.c:694
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -54,19 +54,19 @@ msgstr ""
 "Вы уверены, что хотите отказаться ото всех изменений?\n"
 "(%s)"
 
-#: src/commands.c:744
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "Документ не изменен..."
 
-#: src/commands.c:748
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "Документ не сохранен..."
 
-#: src/commands.c:932
+#: src/commands.c:928
 msgid "_File/"
 msgstr "Файл/"
 
-#: src/commands.c:941 src/commands.c:942
+#: src/commands.c:937 src/commands.c:938
 msgid "_File"
 msgstr "Файл"
 
@@ -82,191 +82,184 @@ msgstr "(С) 1998б 1999 Alex Roberts и Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "Найти строку..."
 
-#: src/gE_mdi.c:77
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "Поиск строки"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 msgid "Find _In Files..."
 msgstr "Найти в файлах..."
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:82
 msgid "Find text in all open files"
 msgstr "Искать текст во всех открытых файлах"
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/gE_mdi.c:472
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:543
-#: src/gE_prefs_box.c:544 src/gE_prefs_box.c:599 src/gE_prefs_box.c:600
-#: src/menus.c:245
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "По умолчанию"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "Блокнот"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "Верхний край"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "Модальный"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: src/gE_prefs_box.c:298
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "Показать строку состояния"
 
-#: src/gE_prefs_box.c:307
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "Разделенный экран"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
-#: src/gE_prefs_box.c:329
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "Включить Автовыравнивание"
 
-#: src/gE_prefs_box.c:338
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "Включить перевод строк"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:487
 msgid "Document Settings"
 msgstr "Настройки документа"
 
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:501
 msgid "New Document After Closing Last"
 msgstr "Создавать новый документ при закрытии последнего"
 
-#: src/gE_prefs_box.c:421
+#: src/gE_prefs_box.c:507
 msgid "Close Window After Closing Last"
 msgstr "Закрывать окно при закрытии последнего документа"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "Текущий шрифт"
 
-#: src/gE_prefs_box.c:447
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "Выделить..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:549
 msgid "Print Command"
 msgstr "Команда печати"
 
-#: src/gE_prefs_box.c:515
-msgid "Plugin Selector"
-msgstr "Переключатель дополнений"
-
-#: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "Название"
-
-#: src/gE_prefs_box.c:630
-msgid "Location"
-msgstr "Расположение"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
-msgid "Plugins"
-msgstr "Дополнения"
-
-#: src/gE_prefs_box.c:650
-msgid "Use Plugins"
-msgstr "Использовать дополнение"
-
-#: src/gE_prefs_box.c:716
-msgid "Add"
-msgstr "Добавить"
-
-#: src/gE_prefs_box.c:721
-msgid "Remove"
-msgstr "Удалить"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:764
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "Размер окна"
 
-#: src/gE_prefs_box.c:777
+#: src/gE_prefs_box.c:620
 msgid "Current Width:"
 msgstr "Текущая ширина"
 
-#: src/gE_prefs_box.c:797
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr "Ширина при запуске:"
 
-#: src/gE_prefs_box.c:805 src/gE_prefs_box.c:845
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 msgid "Use Current"
 msgstr "Использовать текущую"
 
-#: src/gE_prefs_box.c:817
+#: src/gE_prefs_box.c:660
 msgid "Current Height:"
 msgstr "Текущая высота:"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr "Высота при запуске:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:853
+#: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "Режим MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "Общие"
 
 #. Window Settings
-#: src/gE_prefs_box.c:926
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "Окно"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:931
+#: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "Документ"
 
@@ -298,14 +291,6 @@ msgstr " Сохранить, затем печатать "
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr "Отмена"
-
-#: src/gedit.c:116
-msgid "Launch a plugin at startup"
-msgstr "Запустить модуль при запуске"
-
-#: src/gedit.c:116
-msgid "PLUGIN-NAME"
-msgstr "Имя Модуля"
 
 #: src/menus.c:66
 msgid "_Autoindent"
@@ -420,10 +405,6 @@ msgstr ""
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:179
-msgid "Toggle Split Screen"
-msgstr "Переключить Разделение Экрана"
-
 #: src/menus.c:185
 msgid "_Document Tabs"
 msgstr ""
@@ -520,3 +501,39 @@ msgstr "Закрыть"
 #: src/gE_view.c:51
 msgid "Open (swap) .c/.h file"
 msgstr ""
+
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit дополнение, электронная почта"
+
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "gEdit дополнение, web-навигатор"
+
+#~ msgid "Plugin Selector"
+#~ msgstr "Переключатель дополнений"
+
+#~ msgid "Name"
+#~ msgstr "Название"
+
+#~ msgid "Location"
+#~ msgstr "Расположение"
+
+#~ msgid "Plugins"
+#~ msgstr "Дополнения"
+
+#~ msgid "Use Plugins"
+#~ msgstr "Использовать дополнение"
+
+#~ msgid "Add"
+#~ msgstr "Добавить"
+
+#~ msgid "Remove"
+#~ msgstr "Удалить"
+
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "Запустить модуль при запуске"
+
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "Имя Модуля"
+
+#~ msgid "Toggle Split Screen"
+#~ msgstr "Переключить Разделение Экрана"

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-11-30 02:39+0100\n"
+"POT-Creation-Date: 2000-03-08 19:59+0000\n"
 "Content-Type: text/plain; charset=\n"
 "Date: 1998-10-13 14:49:47+0200\n"
 "From: Giuseppe <quiquoqua@pn.itnet.it>\n"
@@ -13,61 +13,61 @@ msgstr ""
 "src/gE_init.csrc/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c "
 "src/msgbox.c src/search.c\n"
 
-#: editor-plugins/email.c:89
-msgid "The gEdit Email Plugin"
-msgstr "Plugin Email per gEdit"
+#: plugins/sample/sample.c:64
+msgid "Hello World"
+msgstr ""
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "Plugin Browser Web per gEdit"
+#: plugins/sample/sample.c:65
+msgid "Sample 'hello world' plugin."
+msgstr ""
 
-#: src/commands.c:93
+#: src/commands.c:91
 msgid "Could not save file!"
 msgstr ""
 
-#: src/commands.c:366
+#: src/commands.c:364
 msgid "Open File..."
 msgstr "Apri file..."
 
-#: src/commands.c:420 src/commands.c:468
+#: src/commands.c:418 src/commands.c:466
 msgid "Read only file!"
 msgstr "File a sola lettura!"
 
-#: src/commands.c:507 src/commands.c:577
+#: src/commands.c:505 src/commands.c:575
 msgid "Error saving file!"
 msgstr "Errore salvataggio file!"
 
-#: src/commands.c:537
+#: src/commands.c:535
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr "Salva con nome..."
 
-#: src/commands.c:610
+#: src/commands.c:608
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr "Salva con nome..."
 
-#: src/commands.c:696
+#: src/commands.c:694
 #, fuzzy, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr "Sicuro di voler eliminare tutte le modifiche fatte?"
 
-#: src/commands.c:744
+#: src/commands.c:742
 msgid "Document Unchanged..."
 msgstr "Documento non modificato..."
 
-#: src/commands.c:748
+#: src/commands.c:746
 msgid "Document Unsaved..."
 msgstr "Documento non salvato..."
 
-#: src/commands.c:932
+#: src/commands.c:928
 #, fuzzy
 msgid "_File/"
 msgstr "Archivio"
 
-#: src/commands.c:941 src/commands.c:942
+#: src/commands.c:937 src/commands.c:938
 #, fuzzy
 msgid "_File"
 msgstr "Archivio"
@@ -84,192 +84,185 @@ msgstr "(C) 1998, 1999 Alex Roberts e Evan Lawrence"
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit è un editor di testo piccolo e leggero per GNOME/Gtk+"
 
-#: src/gE_mdi.c:76
+#: src/gE_mdi.c:75
 msgid "Find _Line..."
 msgstr "Trova _Linea"
 
-#: src/gE_mdi.c:77
+#: src/gE_mdi.c:76
 msgid "Search for a line"
 msgstr "Ricerca una linea"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:81
 #, fuzzy
 msgid "Find _In Files..."
 msgstr "Trova _Linea"
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:82
 msgid "Find text in all open files"
 msgstr ""
 
-#: src/gE_mdi.c:98
+#: src/gE_mdi.c:97
 msgid "_Add View"
 msgstr "_Aggiungi vista"
 
-#: src/gE_mdi.c:99
+#: src/gE_mdi.c:98
 msgid "Add a new view of the document"
 msgstr "Aggiungi nuova vista documento"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:99
 msgid "_Remove View"
 msgstr "_Rimuovi vista"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:100
 msgid "Remove view of the document"
 msgstr "Rimuovi vista documento"
 
-#: src/gE_mdi.c:472
+#: src/gE_mdi.c:471
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' è stato modificato. Vuoi salvarlo?"
 
-#. FIXME: Needs to actually unload the plugin itself..
-#. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:543
-#: src/gE_prefs_box.c:544 src/gE_prefs_box.c:599 src/gE_prefs_box.c:600
-#: src/menus.c:245
+#: src/gE_plugin.c:57
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/gE_plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/gE_plugin.c:74
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/gE_plugin.c:98
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
+#: src/gE_plugin.c:182 src/menus.c:245
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: src/gE_prefs_box.c:102
+#: src/gE_prefs_box.c:99
 msgid "Default"
 msgstr "Predefinito"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:100
 msgid "Notebook"
 msgstr "Notebook"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:101
 msgid "Toplevel"
 msgstr "Toplevel"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:102
 msgid "Modal"
 msgstr "Modale"
 
-#: src/gE_prefs_box.c:285
+#: src/gE_prefs_box.c:332
 msgid "Appearance"
 msgstr "Apparenza"
 
-#: src/gE_prefs_box.c:298
+#: src/gE_prefs_box.c:345
 msgid "Show Statusbar"
 msgstr "Mostra barra di stato"
 
-#: src/gE_prefs_box.c:307
+#: src/gE_prefs_box.c:354
 msgid "Show Splitscreen"
 msgstr "Mostra divisione schermo"
 
-#: src/gE_prefs_box.c:316
+#: src/gE_prefs_box.c:364
 msgid "Editor Behavior"
 msgstr "Comportamento editor"
 
-#: src/gE_prefs_box.c:329
+#: src/gE_prefs_box.c:377
 msgid "Enable Autoindent"
 msgstr "Abilita autoindentazione"
 
-#: src/gE_prefs_box.c:338
+#: src/gE_prefs_box.c:381
 msgid "Enable Wordwrap"
 msgstr "Abilita sillabazione automatica"
 
+#: src/gE_prefs_box.c:403
+msgid "Text Background"
+msgstr ""
+
+#: src/gE_prefs_box.c:424
+msgid "Text Foreground"
+msgstr ""
+
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:487
 msgid "Document Settings"
 msgstr "Impostazioni documento"
 
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:501
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:421
+#: src/gE_prefs_box.c:507
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:516
 msgid "Current Font"
 msgstr "Font attuale"
 
-#: src/gE_prefs_box.c:447
+#: src/gE_prefs_box.c:533
 msgid "Select..."
 msgstr "Seleziona..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:463
+#: src/gE_prefs_box.c:549
 msgid "Print Command"
 msgstr "Comando di stampa"
 
-#: src/gE_prefs_box.c:515
-msgid "Plugin Selector"
-msgstr "Selettore plugin"
-
-#: src/gE_prefs_box.c:630
-msgid "Name"
-msgstr "Nome"
-
-#: src/gE_prefs_box.c:630
-msgid "Location"
-msgstr "Posizione"
-
-#. Plugins Settings
-#: src/gE_prefs_box.c:637 src/gE_prefs_box.c:936
-msgid "Plugins"
-msgstr ""
-
-#: src/gE_prefs_box.c:650
-msgid "Use Plugins"
-msgstr "Usa Plugins"
-
-#: src/gE_prefs_box.c:716
-msgid "Add"
-msgstr "Aggiungi"
-
-#: src/gE_prefs_box.c:721
-msgid "Remove"
-msgstr "Elimina"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:764
+#: src/gE_prefs_box.c:607
 msgid "Window Size"
 msgstr "Dimensione finestra"
 
-#: src/gE_prefs_box.c:777
+#: src/gE_prefs_box.c:620
 msgid "Current Width:"
 msgstr "Larghezza attuale"
 
-#: src/gE_prefs_box.c:797
+#: src/gE_prefs_box.c:640
 msgid "Startup Width:"
 msgstr "Larghezza iniziale"
 
-#: src/gE_prefs_box.c:805 src/gE_prefs_box.c:845
+#: src/gE_prefs_box.c:648 src/gE_prefs_box.c:688
 msgid "Use Current"
 msgstr "Usa attuale"
 
-#: src/gE_prefs_box.c:817
+#: src/gE_prefs_box.c:660
 msgid "Current Height:"
 msgstr "Altezza attuale"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:680
 msgid "Startup Height:"
 msgstr "Altezza iniziale"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:853
+#: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "Modalità MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:766
 msgid "General"
 msgstr "Generale"
 
 #. Window Settings
-#: src/gE_prefs_box.c:926
+#: src/gE_prefs_box.c:771
 msgid "Window"
 msgstr "Finestra"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:931
+#: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "Documento"
 
@@ -301,14 +294,6 @@ msgstr " Salva, poi stampa"
 #: src/gE_print.c:235
 msgid "Cancel"
 msgstr ""
-
-#: src/gedit.c:116
-msgid "Launch a plugin at startup"
-msgstr "Esegui un plugin all'avvio"
-
-#: src/gedit.c:116
-msgid "PLUGIN-NAME"
-msgstr "NOME PLUGIN"
 
 #: src/menus.c:66
 msgid "_Autoindent"
@@ -428,10 +413,6 @@ msgstr "Linguette documento a destra"
 msgid "Toggle Readonly"
 msgstr "(Dis)Attiva Sola Lettura"
 
-#: src/menus.c:179
-msgid "Toggle Split Screen"
-msgstr "(Dis)Attiva divisione schermo"
-
 #: src/menus.c:185
 msgid "_Document Tabs"
 msgstr "Linguette _Documenti"
@@ -530,6 +511,39 @@ msgstr "Chiudi"
 #: src/gE_view.c:51
 msgid "Open (swap) .c/.h file"
 msgstr "Apri (swap) file .c/.h"
+
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "Plugin Email per gEdit"
+
+#~ msgid "The gEdit Web Browse Plugin"
+#~ msgstr "Plugin Browser Web per gEdit"
+
+#~ msgid "Plugin Selector"
+#~ msgstr "Selettore plugin"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#~ msgid "Location"
+#~ msgstr "Posizione"
+
+#~ msgid "Use Plugins"
+#~ msgstr "Usa Plugins"
+
+#~ msgid "Add"
+#~ msgstr "Aggiungi"
+
+#~ msgid "Remove"
+#~ msgstr "Elimina"
+
+#~ msgid "Launch a plugin at startup"
+#~ msgstr "Esegui un plugin all'avvio"
+
+#~ msgid "PLUGIN-NAME"
+#~ msgstr "NOME PLUGIN"
+
+#~ msgid "Toggle Split Screen"
+#~ msgstr "(Dis)Attiva divisione schermo"
 
 #~ msgid "Docid is %ld.\n"
 #~ msgstr "ID Documento: %ld.\n"
