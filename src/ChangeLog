@@ -1,5 +1,18 @@
 2002-02-06  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit_mdi.c (gedit_mdi_update_ui_according_to_preferences):
+	fix mem leak
+
+	* gedit-plugins-engine.c (gedit_plugins_engine_save_settings):
+	ditto
+
+	* dialogs/gedit-dialog-plugin-manager.c 
+	(dialog_plugin_manager_get_selected_plugin):ditto
+
+	* dialogs/gedit-preferences-dialog.c: warning cleans.
+
+2002-02-06  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-view.c (gedit_view_set_tab_size): 
 	now it works
 	(gedit_view_calculate_real_tab_width): new static 

@@ -348,6 +348,8 @@ dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog)
 
 	gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
 
+	gtk_tree_path_free (path);
+
 	return info;
 }
 

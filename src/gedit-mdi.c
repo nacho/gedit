@@ -829,7 +829,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	GdkColor text;
 	GdkColor selection;
 	GdkColor sel_text;
-	const gchar* font;
+	gchar* font;
 
 	gedit_debug (DEBUG_MDI, "");
 
@@ -887,13 +887,13 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		
 		if (font == NULL)
 			/* Fallback */
-			font = gedit_settings->editor_font;
+			font = g_strdup (gedit_settings->editor_font);
 
 		g_object_unref (G_OBJECT (style));
 
 	}
 	else
-		font = gedit_settings->editor_font;
+		font = g_strdup (gedit_settings->editor_font);
 
 	while (children != NULL)
 	{
@@ -913,6 +913,8 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		
 		children = children->next;
 	}
+
+	g_free (font);
 
 /*
 	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);

@@ -179,7 +179,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 		else
 			gedit_menus_set_verb_sensitive (uic,
 							"/commands/" MENU_ITEM_NAME, FALSE);
-
+		g_free (buf);
 	}
 	else {
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);

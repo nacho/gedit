@@ -353,6 +353,8 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 	gedit_document_insert_text_at_cursor (doc, the_time, -1);
 
 	gedit_document_end_user_action (doc);
+
+	g_free (the_time);
 }
 
 static void

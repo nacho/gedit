@@ -817,6 +817,8 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 			(dlg->priv->default_font_checkbutton), gedit_settings->use_default_font);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
 			(dlg->priv->default_colors_checkbutton), gedit_settings->use_default_colors);
+
+	return TRUE;
 }
 
 static void
@@ -1045,6 +1047,8 @@ gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML 
 	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton),
 				gedit_settings->print_line_numbers > 0);
+
+	return TRUE;
 }
 
 static gboolean 
@@ -1059,6 +1063,8 @@ gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, G
 	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->display_line_numbers_checkbutton),
 				gedit_settings->show_line_numbers);
+
+	return TRUE;
 }
 
 gboolean 

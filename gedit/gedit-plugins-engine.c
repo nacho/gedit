@@ -315,7 +315,9 @@ gedit_plugins_engine_save_settings (void)
 		key = g_strdup_printf ("%s%s", 
 			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
 			basename);
-			
+
+		g_free (basename);
+
 		gconf_client_set_bool (
 				gedit_plugins_engine_gconf_client,
 				key,
@@ -323,7 +325,7 @@ gedit_plugins_engine_save_settings (void)
 				NULL);
 	
 		g_free (key);
-	
+
 		pl = g_list_next (pl);
 	}
 }
