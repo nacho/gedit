@@ -508,8 +508,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 	
-	gtk_signal_connect (GTK_OBJECT (about), "destroy",
-			   GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
+	g_signal_connect (G_OBJECT (about), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed), &about);
 	
 	gtk_widget_show (about);
 }

@@ -744,9 +744,10 @@ gedit_view_show_line_numbers (GeditView* view, gboolean visible)
                                         GTK_TEXT_WINDOW_LEFT,
         				MIN_NUMBER_WINDOW_WIDTH);
 
-			gtk_signal_connect (GTK_OBJECT (view->priv->text_view),
+			g_signal_connect (
+				G_OBJECT (view->priv->text_view),
                       		"expose_event",
-                      		GTK_SIGNAL_FUNC (gedit_view_line_numbers_expose),
+                      		G_CALLBACK (gedit_view_line_numbers_expose),
                       		view->priv->document);
 
 			view->priv->line_numbers_visible = visible;
@@ -762,8 +763,9 @@ gedit_view_show_line_numbers (GeditView* view, gboolean visible)
                                         GTK_TEXT_WINDOW_LEFT,
         				0);
 
-			gtk_signal_disconnect_by_func (GTK_OBJECT (view->priv->text_view),
-				GTK_SIGNAL_FUNC (gedit_view_line_numbers_expose),
+			g_signal_handlers_disconnect_by_func (
+				G_OBJECT (view->priv->text_view),
+				G_CALLBACK (gedit_view_line_numbers_expose),
                       		view->priv->document);
 
 			view->priv->line_numbers_visible = visible;

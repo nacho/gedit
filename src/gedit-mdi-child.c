@@ -31,6 +31,7 @@
 #include "gedit-mdi-child.h"
 #include "gedit-debug.h"
 #include "gedit-view.h"
+#include "gedit-marshal.h"
 
 struct _GeditMDIChildPrivate
 {
@@ -106,23 +107,27 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 
 	klass->state_changed 		= gedit_mdi_child_real_state_changed;
 	klass->undo_redo_state_changed  = NULL;
-  	
+  		
 	mdi_child_signals [STATE_CHANGED] =
-		gtk_signal_new ("state_changed",
-                    GTK_RUN_LAST | GTK_RUN_ACTION,
-                    GTK_CLASS_TYPE (object_class),
-                    GTK_SIGNAL_OFFSET (GeditMDIChildClass, state_changed),
-                    gtk_marshal_VOID__VOID,
-                    GTK_TYPE_NONE, 0);
+		g_signal_new ("state_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditMDIChildClass, state_changed),
+			      NULL, NULL,
+			      gedit_marshal_VOID__VOID,
+			      G_TYPE_NONE, 
+			      0);
 
 	mdi_child_signals [UNDO_REDO_STATE_CHANGED] =
-		gtk_signal_new ("undo_redo_state_changed",
-                    GTK_RUN_LAST | GTK_RUN_ACTION,
-                    GTK_CLASS_TYPE (object_class),
-                    GTK_SIGNAL_OFFSET (GeditMDIChildClass, undo_redo_state_changed),
-                    gtk_marshal_VOID__VOID,
-                    GTK_TYPE_NONE, 0);
-
+		g_signal_new ("undo_redo_state_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditMDIChildClass, undo_redo_state_changed),
+			      NULL, NULL,
+			      gedit_marshal_VOID__VOID,
+			      G_TYPE_NONE, 
+			      0);
+                    
 	BONOBO_MDI_CHILD_CLASS (klass)->create_view = 
 		(BonoboMDIChildViewCreator)(gedit_mdi_child_create_view);
 }
@@ -228,7 +233,7 @@ gedit_mdi_child_document_state_changed_handler (GeditDocument *document, GeditMD
 	gedit_debug (DEBUG_MDI, "");
 	g_return_if_fail (child->document == document);
 
-	gtk_signal_emit (GTK_OBJECT (child), mdi_child_signals [STATE_CHANGED], 0);
+	g_signal_emit (G_OBJECT (child), mdi_child_signals [STATE_CHANGED], 0);
 }
 
 static void 
@@ -238,7 +243,7 @@ gedit_mdi_child_document_readonly_changed_handler (GeditDocument *document, gboo
 	gedit_debug (DEBUG_MDI, "");
 	g_return_if_fail (child->document == document);
 
-	gtk_signal_emit (GTK_OBJECT (child), mdi_child_signals [STATE_CHANGED], 0);
+	g_signal_emit (G_OBJECT (child), mdi_child_signals [STATE_CHANGED], 0);
 }
 
 static void 
@@ -248,7 +253,7 @@ gedit_mdi_child_document_can_undo_redo_handler (GeditDocument *document, gboolea
 	gedit_debug (DEBUG_MDI, "");
 	g_return_if_fail (child->document == document);
 
-	gtk_signal_emit (GTK_OBJECT (child), mdi_child_signals [UNDO_REDO_STATE_CHANGED], 0);
+	g_signal_emit (G_OBJECT (child), mdi_child_signals [UNDO_REDO_STATE_CHANGED], 0);
 }
 
 

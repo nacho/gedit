@@ -70,6 +70,7 @@
 #include "gnome-vfs-helpers.h"
 #include "gedit-utils.h"
 
+#define RETURN_DATA "return_data"
 
 static gint
 delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
@@ -154,8 +155,9 @@ listener_cb (BonoboListener *listener,
 			
 	gnome_vfs_uri_unref (uri);
 
-	gtk_object_set_user_data (GTK_OBJECT (dialog),
-				  g_strdup (seq->_buffer[0]));
+	g_object_set_data (G_OBJECT (dialog), 
+			   RETURN_DATA,
+			   g_strdup (seq->_buffer[0]));
 
  cancel_clicked:
 	gtk_widget_hide (dialog);
@@ -203,7 +205,7 @@ create_bonobo_selector (gboolean    enable_vfs,
 
 	dialog = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET (control));
-	gtk_widget_set_usize (dialog, 560, 450);
+	gtk_widget_set_size_request (dialog, 560, 450);
 
 	bonobo_event_source_client_add_listener (
 		bonobo_widget_get_objref (control), 
@@ -276,8 +278,9 @@ ok_clicked_cb (GtkWidget *widget, gpointer data)
 
 		gtk_widget_hide (GTK_WIDGET (fsel));
 
-		gtk_object_set_user_data (GTK_OBJECT (fsel),
-					  g_strdup (file_name));
+		g_object_set_data (G_OBJECT (fsel),
+			    	   RETURN_DATA,
+				   g_strdup (file_name));
 		gtk_main_quit ();
 	} 
 }
@@ -300,13 +303,13 @@ create_gtk_selector (const char *default_path,
 
 	filesel = gtk_file_selection_new (NULL);
 
-	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-			    "clicked", GTK_SIGNAL_FUNC (ok_clicked_cb),
-			    filesel);
+	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
+			  "clicked", G_CALLBACK (ok_clicked_cb),
+			  filesel);
 
-	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
-			    "clicked", GTK_SIGNAL_FUNC (cancel_clicked_cb),
-			    filesel);
+	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
+			  "clicked", G_CALLBACK (cancel_clicked_cb),
+			  filesel);
 
 	if (default_path)
 		path = g_strconcat (default_path, 
@@ -358,15 +361,15 @@ run_file_selector (GtkWindow  *parent,
 	if (parent)
 		gtk_window_set_transient_for (dialog, parent);
 	
-	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event",
-			    GTK_SIGNAL_FUNC (delete_file_selector),
-			    dialog);
+	g_signal_connect (G_OBJECT (dialog), "delete_event",
+			  G_CALLBACK (delete_file_selector),
+			  dialog);
 
 	gtk_widget_show_all (GTK_WIDGET (dialog));
 
 	gtk_main ();
 
-	retval = gtk_object_get_user_data (GTK_OBJECT (dialog));
+	retval = g_object_get_data (G_OBJECT (dialog), RETURN_DATA);
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 

@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. * *
+ * Boston, MA 02111-1307, USA. 
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
 
+#include <libgnomeui/libgnomeui.h>
+#include <glib/gunicode.h>
+
+#include <string.h>
+
 #include "gedit-utils.h"
 #include "gedit2.h"
-
 #include "bonobo-mdi.h"
-#include <libgnomeui/libgnomeui.h>
 #include "gnome-vfs-helpers.h"
 
-#include <glib/gunicode.h>
 
 /* =================================================== */
 /* Flash */
@@ -66,7 +68,7 @@ remove_message_timeout (MessageInfo * mi)
 
 	bonobo_ui_component_set_status (ui_component, " ", NULL);
 
-	gtk_signal_disconnect (GTK_OBJECT (mi->win), mi->handlerid);
+	g_signal_handler_disconnect (G_OBJECT (mi->win), mi->handlerid);
 
 	g_free (mi);
 	current_mi = NULL;
@@ -128,10 +130,10 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 				mi);
     
     		mi->handlerid = 
-      			gtk_signal_connect (GTK_OBJECT (win),
+      			g_signal_connect (GTK_OBJECT (win),
 				"destroy",
-			   	GTK_SIGNAL_FUNC (remove_timeout_cb),
-			   	mi );
+			   	G_CALLBACK (remove_timeout_cb),
+			   	mi);
 
     		mi->win       = win;
 

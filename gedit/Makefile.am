@@ -15,7 +15,12 @@ INCLUDES = \
 	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" 	\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit2/plugins"\"\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\" 
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\" \
+	-DG_DISABLE_DEPRECATED				\
+	-DGDK_DISABLE_DEPRECATED			\
+	-DGTK_DISABLE_DEPRECATED			\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-DGNOME_DISABLE_DEPRECATED			
 
 gedit2_LDFLAGS = -export-dynamic
 

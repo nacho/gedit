@@ -185,7 +185,7 @@ main (int argc, char **argv)
 	if (args)	
 		for (i = 0; args[i]; i++) 
 		{
-			if (strstr (args[i], "+")) 
+			if (*args[i] == '+') 
 				data->line_pos = atoi (args[i] + 1);		
 			else
 				data->file_list = g_list_append (data->file_list, args[i]);

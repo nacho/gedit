@@ -45,6 +45,7 @@
 #include "gedit-file.h"
 #include "gedit-utils.h"
 
+#include <string.h>
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4

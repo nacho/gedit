@@ -105,13 +105,15 @@ bonobo_mdi_child_class_init (BonoboMDIChildClass *klass)
 	klass->name_changed = bonobo_mdi_child_real_name_changed;
 
   	mdi_child_signals[NAME_CHANGED] =
-		gtk_signal_new ("name_changed",
-                    GTK_RUN_LAST | GTK_RUN_ACTION,
-                    GTK_CLASS_TYPE (object_class),
-                    GTK_SIGNAL_OFFSET (BonoboMDIChildClass, name_changed),
-                    gtk_marshal_VOID__STRING,
-                    GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
-
+		g_signal_new ("name_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+                    	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+                    	      G_STRUCT_OFFSET (BonoboMDIChildClass, name_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 
+			      1, 
+			      G_TYPE_STRING);
 }
 
 static void
@@ -219,7 +221,7 @@ bonobo_mdi_child_add_view (BonoboMDIChild *mdi_child)
 	if(view) {
 		mdi_child->priv->views = g_list_append (mdi_child->priv->views, view);
 
-		gtk_object_set_data (GTK_OBJECT(view), "BonoboMDIChild", mdi_child);
+		g_object_set_data (G_OBJECT(view), "BonoboMDIChild", mdi_child);
 	}
 
 	return view;

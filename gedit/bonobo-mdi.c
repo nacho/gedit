@@ -177,48 +177,82 @@ bonobo_mdi_class_init (BonoboMDIClass *class)
 	object_class->destroy = bonobo_mdi_destroy;
 	gobject_class->finalize = bonobo_mdi_finalize;
 
-	mdi_signals[ADD_CHILD] = gtk_signal_new ("add_child",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, add_child),
-					gedit_marshal_BOOLEAN__OBJECT,
-					GTK_TYPE_BOOL, 1, BONOBO_TYPE_MDI_CHILD);
-	mdi_signals[REMOVE_CHILD] = gtk_signal_new ("remove_child",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, remove_child),
-					gedit_marshal_BOOLEAN__OBJECT,
-					GTK_TYPE_BOOL, 1, BONOBO_TYPE_MDI_CHILD);
-	mdi_signals[ADD_VIEW] = gtk_signal_new ("add_view",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, add_view),
-					gedit_marshal_BOOLEAN__OBJECT,
-					GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
-	mdi_signals[REMOVE_VIEW] = gtk_signal_new ("remove_view",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, remove_view),
-					gedit_marshal_BOOLEAN__OBJECT,
-					GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
-	mdi_signals[CHILD_CHANGED] = gtk_signal_new ("child_changed",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, child_changed),
-					gtk_marshal_VOID__OBJECT,
-					GTK_TYPE_NONE, 1, BONOBO_TYPE_MDI_CHILD);
-	mdi_signals[VIEW_CHANGED] = gtk_signal_new ("view_changed",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET(BonoboMDIClass, view_changed),
-					gtk_marshal_VOID__OBJECT,
-					GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	mdi_signals[TOP_WINDOW_CREATED] = gtk_signal_new ("top_window_created",
-					GTK_RUN_LAST,
-					GTK_CLASS_TYPE (object_class),
-					GTK_SIGNAL_OFFSET (BonoboMDIClass, top_window_created),
-					gtk_marshal_VOID__OBJECT,
-					GTK_TYPE_NONE, 1, BONOBO_TYPE_WINDOW);
+	mdi_signals[ADD_CHILD] = 
+		g_signal_new ("add_child",
+ 			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, add_child),
+			      NULL, NULL,
+			      gedit_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 
+			      1, 
+			      BONOBO_TYPE_MDI_CHILD);
+	
+	mdi_signals[REMOVE_CHILD] = 
+		g_signal_new ("remove_child",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, remove_child),
+			      NULL, NULL,
+			      gedit_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 
+			      1, 
+			      BONOBO_TYPE_MDI_CHILD);
+	
+	mdi_signals[ADD_VIEW] = 
+		g_signal_new ("add_view",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, add_view),
+			      NULL, NULL,			     
+			      gedit_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 
+			      1, 
+			      GTK_TYPE_WIDGET);
+	
+	mdi_signals[REMOVE_VIEW] = 
+		g_signal_new ("remove_view",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, remove_view),
+			      NULL, NULL,
+			      gedit_marshal_BOOLEAN__OBJECT,
+			      G_TYPE_BOOLEAN, 
+			      1, 
+			      GTK_TYPE_WIDGET);
+
+	mdi_signals[CHILD_CHANGED] = 
+		g_signal_new ("child_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, child_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 
+			      1, 
+			      BONOBO_TYPE_MDI_CHILD);
+
+	mdi_signals[VIEW_CHANGED] = 
+		g_signal_new ("view_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET(BonoboMDIClass, view_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 
+			      1, 
+			      GTK_TYPE_WIDGET);
+
+	mdi_signals[TOP_WINDOW_CREATED] = 
+		g_signal_new ("top_window_created",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (BonoboMDIClass, top_window_created),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE, 
+			      1, 
+			      BONOBO_TYPE_WINDOW);
 	
 	class->add_child 		= NULL;
 	class->remove_child 		= NULL;
@@ -356,7 +390,7 @@ bonobo_mdi_new (const gchar *mdi_name, const gchar *title)
 {
 	BonoboMDI *mdi;
 	
-	mdi = gtk_type_new (BONOBO_TYPE_MDI);
+	mdi = g_object_new (BONOBO_TYPE_MDI, NULL);
   
 	mdi->priv->mdi_name = g_strdup (mdi_name);
 	mdi->priv->title    = g_strdup (title);
@@ -403,7 +437,7 @@ child_list_activated_cb (BonoboUIComponent *uic, gpointer user_data, const gchar
 	BonoboMDIChild *child = BONOBO_MDI_CHILD (user_data);
 	g_return_if_fail (child != NULL);
 
-	mdi = BONOBO_MDI (gtk_object_get_data (GTK_OBJECT (child), BONOBO_MDI_KEY));
+	mdi = BONOBO_MDI (g_object_get_data (G_OBJECT (child), BONOBO_MDI_KEY));
 	g_return_if_fail (mdi != NULL);
 		
 	if (child && (child != mdi->priv->active_child)) 
@@ -465,7 +499,7 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 		return;
 	
 	ui_component = BONOBO_UI_COMPONENT (
-			gtk_object_get_data (GTK_OBJECT (win), UI_COMPONENT_KEY));
+			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
 			
 	child = mdi->priv->children;
 	
@@ -528,7 +562,7 @@ child_list_menu_remove_item (BonoboMDI *mdi, BonoboMDIChild *child)
 		BonoboUIComponent *ui_component;
 		
 		ui_component = BONOBO_UI_COMPONENT (
-			gtk_object_get_data (GTK_OBJECT (win_node->data), UI_COMPONENT_KEY));
+			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
 		
 		bonobo_ui_component_remove_verb (ui_component, verb_name);
 		bonobo_ui_component_rm (ui_component, path, NULL);
@@ -569,7 +603,7 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 		BonoboUIComponent *ui_component;
 		
 		ui_component = BONOBO_UI_COMPONENT (
-			gtk_object_get_data (GTK_OBJECT (win_node->data), UI_COMPONENT_KEY));
+			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
 		
 
 		bonobo_ui_component_set_translate (ui_component, mdi->priv->child_list_path, xml, NULL);
@@ -607,7 +641,8 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 						 drag_cursor, GDK_CURRENT_TIME);
 		if (mdi->priv->signal_id) 
 		{
-			gtk_signal_disconnect (GTK_OBJECT (widget), mdi->priv->signal_id);
+			g_signal_handler_disconnect (G_OBJECT (widget), 
+						     mdi->priv->signal_id);
 			mdi->priv->signal_id = 0;
 		}
 	}
@@ -623,9 +658,11 @@ book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 	mdi = BONOBO_MDI (data);
 
 	if ((e->button == 1) && (e->window == GTK_NOTEBOOK (widget)->event_window))
-		mdi->priv->signal_id = gtk_signal_connect (GTK_OBJECT (widget), 
+		mdi->priv->signal_id = g_signal_connect (
+				G_OBJECT (widget), 
 				"motion_notify_event",
-				GTK_SIGNAL_FUNC (book_motion), mdi);
+				G_CALLBACK (book_motion), 
+				mdi);
 
 	return FALSE;
 }
@@ -640,7 +677,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 	
 	if (mdi->priv->signal_id) 
 	{
-		gtk_signal_disconnect (GTK_OBJECT (widget), mdi->priv->signal_id);
+		g_signal_handler_disconnect (G_OBJECT (widget), mdi->priv->signal_id);
 		mdi->priv->signal_id = 0;
 	}
 
@@ -702,11 +739,15 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 						gtk_widget_destroy (GTK_WIDGET(win));
 					}					
 										
-					gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [CHILD_CHANGED], 
-							 NULL);
+					g_signal_emit (G_OBJECT (mdi), 
+						       mdi_signals [CHILD_CHANGED], 
+						       0,
+						       NULL);
 
-					gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [VIEW_CHANGED], 
-							 view);
+					g_signal_emit (G_OBJECT (mdi), 
+						       mdi_signals [VIEW_CHANGED], 
+						       0,
+						       view);
 				}
 
 				return FALSE;
@@ -741,7 +782,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 
 			gtk_window_set_position (GTK_WINDOW (mdi->priv->active_window), GTK_WIN_POS_MOUSE);
 	
-			gtk_widget_set_usize (view, width, height);
+			gtk_widget_set_size_request (view, width, height);
 
 			if (!GTK_WIDGET_VISIBLE (mdi->priv->active_window))
 				gtk_widget_show (GTK_WIDGET (mdi->priv->active_window));
@@ -766,13 +807,13 @@ book_create (BonoboMDI *mdi)
 	
 	gtk_widget_add_events (us, GDK_BUTTON1_MOTION_MASK);
 
-	gtk_signal_connect (GTK_OBJECT (us), "switch_page",
-			    GTK_SIGNAL_FUNC (book_switch_page), mdi);
+	g_signal_connect (G_OBJECT (us), "switch_page",
+			  G_CALLBACK (book_switch_page), mdi);
 
-	gtk_signal_connect (GTK_OBJECT (us), "button_press_event",
-			    GTK_SIGNAL_FUNC (book_button_press), mdi);
-	gtk_signal_connect (GTK_OBJECT (us), "button_release_event",
-			    GTK_SIGNAL_FUNC (book_button_release), mdi);
+	g_signal_connect (G_OBJECT (us), "button_press_event",
+			  G_CALLBACK (book_button_press), mdi);
+	g_signal_connect (G_OBJECT (us), "button_release_event",
+			  G_CALLBACK (book_button_release), mdi);
 
 	gtk_notebook_set_scrollable (GTK_NOTEBOOK (us), TRUE);
 	
@@ -985,8 +1026,12 @@ app_close_book (BonoboWindow *win, GdkEventAny *event, BonoboMDI *mdi)
 			if (node == NULL) 
 			{   
 				/* all the views reside in this BonoboWindow */
-				gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals [REMOVE_CHILD],
-						child, &handler_ret);
+				g_signal_emit(G_OBJECT(mdi), 
+					      mdi_signals [REMOVE_CHILD],
+					      0,
+					      child, 
+					      &handler_ret);
+
 				if (handler_ret == FALSE) 
 				{
 					g_list_free (children);
@@ -1176,8 +1221,6 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 	gtk_window_set_wmclass (GTK_WINDOW (window), 
 			mdi->priv->mdi_name, mdi->priv->mdi_name);
   
-	gtk_window_set_policy (GTK_WINDOW (window), TRUE, TRUE, FALSE);
-  
 	mdi->priv->windows = g_list_append (mdi->priv->windows, window);
 
 	if ((mdi->priv->mode == BONOBO_MDI_TOPLEVEL) || (mdi->priv->mode == BONOBO_MDI_MODAL))
@@ -1186,12 +1229,12 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 		if (mdi->priv->mode == BONOBO_MDI_NOTEBOOK)
 			func = GTK_SIGNAL_FUNC (app_close_book);
 	
-	gtk_signal_connect (GTK_OBJECT (window), "delete_event", 
-			func, mdi);
-	gtk_signal_connect (GTK_OBJECT (window), "focus_in_event",
-			GTK_SIGNAL_FUNC(toplevel_focus), mdi);
-	gtk_signal_connect (GTK_OBJECT (window), "destroy",
-			GTK_SIGNAL_FUNC(app_destroy), mdi);
+	g_signal_connect (G_OBJECT (window), "delete_event", 
+			  func, mdi);
+	g_signal_connect (G_OBJECT (window), "focus_in_event",
+			  G_CALLBACK (toplevel_focus), mdi);
+	g_signal_connect (G_OBJECT (window), "destroy",
+			  G_CALLBACK (app_destroy), mdi);
 
 	/* Create Container: */
  	ui_container = bonobo_window_get_ui_container (bw);
@@ -1229,9 +1272,9 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 	mdi->priv->active_child = NULL;
 	mdi->priv->active_view = NULL;
 
-	gtk_object_set_data (GTK_OBJECT (bw), UI_COMPONENT_KEY, ui_component);
+	g_object_set_data (G_OBJECT (bw), UI_COMPONENT_KEY, ui_component);
 
-	gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [TOP_WINDOW_CREATED], window);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [TOP_WINDOW_CREATED], 0, window);
 
 	child_list_menu_create (mdi, bw);
 #if 0
@@ -1290,9 +1333,9 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
 	mdi->priv->active_view = view;
 	
 	if (mdi->priv->active_child != old_child)
-		gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [CHILD_CHANGED], old_child);
+		g_signal_emit (G_OBJECT (mdi), mdi_signals [CHILD_CHANGED], 0, old_child);
 
-	gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [VIEW_CHANGED], old_view);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [VIEW_CHANGED], 0, old_view);
 }
 
 /**
@@ -1383,7 +1426,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 			return TRUE;
 	}
 
-	gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [ADD_VIEW], view, &ret);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_VIEW], 0, view, &ret);
 
 	if (ret == FALSE) 
 	{
@@ -1436,7 +1479,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 				app_set_view (mdi, mdi->priv->active_window, view);
 			}
 
-	gtk_object_set_data (GTK_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
+	g_object_set_data (G_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
 	
 	return TRUE;
 }
@@ -1482,7 +1525,7 @@ bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child)
 	if (!view)
 		return FALSE;
 
-	gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [ADD_VIEW], view, &ret);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_VIEW], 0, view, &ret);
 
 	if (ret == FALSE) 
 	{
@@ -1529,7 +1572,7 @@ bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child)
 				app_set_view (mdi, mdi->priv->active_window, view);
 			}
 
-	gtk_object_set_data (GTK_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
+	g_object_set_data (G_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
 	
 	return TRUE;
 }
@@ -1563,7 +1606,7 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 	g_return_val_if_fail (GTK_IS_WIDGET (view), FALSE);
 
 	if (!force)
-		gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [REMOVE_VIEW], view, &ret);
+		g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_VIEW], 0, view, &ret);
 
 	if (ret == FALSE)
 		return FALSE;
@@ -1671,7 +1714,7 @@ bonobo_mdi_add_child (BonoboMDI *mdi, BonoboMDIChild *child)
 	g_return_val_if_fail (child != NULL, FALSE);
 	g_return_val_if_fail (BONOBO_IS_MDI_CHILD (child), FALSE);
 
-	gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [ADD_CHILD], child, &ret);
+	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_CHILD], 0, child, &ret);
 
 	if (ret == FALSE)
 		return FALSE;
@@ -1680,12 +1723,12 @@ bonobo_mdi_add_child (BonoboMDI *mdi, BonoboMDIChild *child)
 
 	mdi->priv->children = g_list_append (mdi->priv->children, child);
 
-	gtk_signal_connect (GTK_OBJECT (child), "name_changed",
-			GTK_SIGNAL_FUNC (child_name_changed), mdi);
+	g_signal_connect (G_OBJECT (child), "name_changed",
+			  G_CALLBACK (child_name_changed), mdi);
 
 	child_list_menu_add_item (mdi, child);
 
-	gtk_object_set_data (GTK_OBJECT (child), BONOBO_MDI_KEY, mdi);
+	g_object_set_data (G_OBJECT (child), BONOBO_MDI_KEY, mdi);
 
 	return TRUE;
 }
@@ -1720,7 +1763,7 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 	/* if force is set to TRUE, don't call the remove_child handler (ie there is no way for the
 	   user to stop removal of the child) */
 	if (!force)
-		gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [REMOVE_CHILD], child, &ret);
+		g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0, child, &ret);
 
 	if (ret == FALSE)
 		return FALSE;
@@ -1743,10 +1786,10 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 
 	bonobo_mdi_child_set_parent (child, NULL);
 
-	gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
+	g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
 			GTK_SIGNAL_FUNC (child_name_changed), mdi);
 
-	gtk_object_unref (GTK_OBJECT (child));
+	g_object_unref (G_OBJECT (child));
 
 	if (mdi->priv->mode == BONOBO_MDI_MODAL && mdi->priv->children) 
 	{
@@ -1797,8 +1840,11 @@ bonobo_mdi_remove_all (BonoboMDI *mdi, gint force)
 		child_node = mdi->priv->children;
 		while (child_node) 
 		{
-			gtk_signal_emit (GTK_OBJECT(mdi), mdi_signals [REMOVE_CHILD],
-				child_node->data, &handler_ret);
+			g_signal_emit (G_OBJECT(mdi), 
+				       mdi_signals [REMOVE_CHILD],
+				       0,
+				       child_node->data, 
+				       &handler_ret);
 
 			/* if any of the children may not be removed, none will be */
 			if (handler_ret == FALSE)
@@ -1931,7 +1977,7 @@ bonobo_mdi_update_child (BonoboMDI *mdi, BonoboMDIChild *child)
 		BonoboUIComponent *ui_component;
 		
 		ui_component = BONOBO_UI_COMPONENT (
-			gtk_object_get_data (GTK_OBJECT (win_node->data), UI_COMPONENT_KEY));
+			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
 
 		bonobo_ui_component_set_prop (ui_component, path, "label", escaped_name, NULL);
 		bonobo_ui_component_set_prop (ui_component, path, "tip", tip, NULL);
@@ -2076,20 +2122,27 @@ bonobo_mdi_set_mode (BonoboMDI *mdi, BonoboMDIMode mode)
 		*/
 		if ((mdi->priv->mode == BONOBO_MDI_TOPLEVEL) || 
 		    (mdi->priv->mode == BONOBO_MDI_MODAL))
-			gtk_signal_disconnect_by_func (GTK_OBJECT (mdi->priv->active_window),
-						GTK_SIGNAL_FUNC(app_close_top), mdi);
+			g_signal_handlers_disconnect_by_func (
+					G_OBJECT (mdi->priv->active_window),
+					G_CALLBACK (app_close_top), mdi);
 		else 
 			if(mdi->priv->mode == BONOBO_MDI_NOTEBOOK)
-				gtk_signal_disconnect_by_func (GTK_OBJECT (mdi->priv->active_window),
-							GTK_SIGNAL_FUNC (app_close_book), mdi);
+				g_signal_handlers_disconnect_by_func (
+						G_OBJECT (mdi->priv->active_window),
+						G_CALLBACK (app_close_book), mdi);
 
 		if ((mode == BONOBO_MDI_TOPLEVEL) || (mode == BONOBO_MDI_MODAL))
-			gtk_signal_connect (GTK_OBJECT (mdi->priv->active_window), "delete_event",
-					GTK_SIGNAL_FUNC (app_close_top), mdi);
+			g_signal_connect (G_OBJECT (mdi->priv->active_window), 
+					  "delete_event",
+					  G_CALLBACK (app_close_top), 
+					  mdi);
 		else 
 			if(mode == BONOBO_MDI_NOTEBOOK)
-				gtk_signal_connect (GTK_OBJECT (mdi->priv->active_window), "delete_event",
-							   GTK_SIGNAL_FUNC (app_close_book), mdi);
+				g_signal_connect (
+					G_OBJECT (mdi->priv->active_window), 
+					"delete_event",
+					G_CALLBACK (app_close_book), 
+					mdi);
 
 		mdi->priv->windows = g_list_append (NULL, mdi->priv->active_window);
 
@@ -2111,7 +2164,7 @@ bonobo_mdi_set_mode (BonoboMDI *mdi, BonoboMDIMode mode)
 			view = GTK_WIDGET(view_node->data);
 
 			if(width != 0)
-				gtk_widget_set_usize (view, width, height);
+				gtk_widget_set_size_request (view, width, height);
 
 			if(mdi->priv->mode == BONOBO_MDI_NOTEBOOK)
 				book_add_view (GTK_NOTEBOOK (
@@ -2320,7 +2373,7 @@ bonobo_mdi_unregister (BonoboMDI *mdi, GtkObject *object)
 BonoboMDIChild *
 bonobo_mdi_get_child_from_view (GtkWidget *view)
 {
-	return BONOBO_MDI_CHILD (gtk_object_get_data (GTK_OBJECT(view), BONOBO_MDI_CHILD_KEY));
+	return BONOBO_MDI_CHILD (g_object_get_data (G_OBJECT(view), BONOBO_MDI_CHILD_KEY));
 }
 
 /**
@@ -2424,5 +2477,5 @@ BonoboUIComponent*
 bonobo_mdi_get_ui_component_from_window (BonoboWindow* win)
 {
 	return BONOBO_UI_COMPONENT (
-			gtk_object_get_data (GTK_OBJECT (win), UI_COMPONENT_KEY));
+			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
 }

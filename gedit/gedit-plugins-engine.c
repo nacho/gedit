@@ -131,7 +131,8 @@ gedit_plugins_engine_load (const gchar *file)
 	GeditPlugin *plugin;
 	guint res;
 	gboolean to_be_activated;
-	gchar* key;
+	gchar *key;
+	gchar *basename;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -229,10 +230,14 @@ gedit_plugins_engine_load (const gchar *file)
 
 		goto error;
 	}
-		
+
+	basename = g_path_get_basename (plugin->file);
+	
 	key = g_strdup_printf ("%s%s", 
 			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
-			g_basename (plugin->file));
+			basename);
+
+	g_free (basename);
 			
 	to_be_activated = gconf_client_get_bool (
 				gedit_plugins_engine_gconf_client,
@@ -287,7 +292,8 @@ gedit_plugins_engine_save_settings (void)
 	
 	while (pl)
 	{
-		gchar* key;
+		gchar *key;
+		gchar *basename;
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 		
 		if (info->plugin->save_settings != NULL)
@@ -303,10 +309,12 @@ gedit_plugins_engine_save_settings (void)
 			   		info->plugin->name);
 			}
 		}
-
+		
+		basename = g_path_get_basename (info->plugin->file);
+		
 		key = g_strdup_printf ("%s%s", 
 			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
-			g_basename (info->plugin->file));
+			basename);
 			
 		gconf_client_set_bool (
 				gedit_plugins_engine_gconf_client,

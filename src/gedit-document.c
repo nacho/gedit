@@ -41,7 +41,8 @@
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-undo-manager.h"
-  
+
+#include "gedit-marshal.h"
 
 #define NOT_EDITABLE_TAG_NAME "not_editable_tag"
 
@@ -173,7 +174,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, name_changed),
 			      NULL, NULL,
-			      gtk_marshal_VOID__VOID,
+			      gedit_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 	
@@ -183,7 +184,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
 			      NULL, NULL,
-			      gtk_marshal_VOID__VOID,
+			      gedit_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 	
@@ -193,7 +194,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, saved),
 			      NULL, NULL,
-			      gtk_marshal_VOID__VOID,
+			      gedit_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 
@@ -203,7 +204,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, readonly_changed),
 			      NULL, NULL,
-			      gtk_marshal_VOID__BOOLEAN,
+			      gedit_marshal_VOID__BOOLEAN,
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
@@ -214,7 +215,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, can_undo),
 			      NULL, NULL,
-			      gtk_marshal_VOID__BOOLEAN,
+			      gedit_marshal_VOID__BOOLEAN,
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
@@ -225,7 +226,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, can_redo),
 			      NULL, NULL,
-			      gtk_marshal_VOID__BOOLEAN,
+			      gedit_marshal_VOID__BOOLEAN,
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);

@@ -142,24 +142,26 @@ gedit_mdi_init (GeditMDI  *mdi)
 	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 
 	/* Connect signals */
-	gtk_signal_connect (GTK_OBJECT (mdi), "top_window_created",
-			    GTK_SIGNAL_FUNC (gedit_mdi_app_created_handler), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "add_child",
-			    GTK_SIGNAL_FUNC (gedit_mdi_add_child_handler), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "add_view",
-			    GTK_SIGNAL_FUNC (gedit_mdi_add_view_handler), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
-			    GTK_SIGNAL_FUNC (gedit_mdi_remove_child_handler), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "remove_view",
-			    GTK_SIGNAL_FUNC (gedit_mdi_remove_view_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "top_window_created",
+			  G_CALLBACK (gedit_mdi_app_created_handler), NULL);
+	
+	g_signal_connect (G_OBJECT (mdi), "add_child",
+			  G_CALLBACK (gedit_mdi_add_child_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "add_view",
+			  G_CALLBACK (gedit_mdi_add_view_handler), NULL);
+	
+	g_signal_connect (G_OBJECT (mdi), "remove_child",
+			  G_CALLBACK (gedit_mdi_remove_child_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "remove_view",
+			  G_CALLBACK (gedit_mdi_remove_view_handler), NULL);
 
-	gtk_signal_connect (GTK_OBJECT (mdi), "child_changed",
-			    GTK_SIGNAL_FUNC (gedit_mdi_child_changed_handler), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "view_changed",
-			    GTK_SIGNAL_FUNC (gedit_mdi_view_changed_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "child_changed",
+			  G_CALLBACK (gedit_mdi_child_changed_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "view_changed",
+			  G_CALLBACK (gedit_mdi_view_changed_handler), NULL);
 
-	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
-			    GTK_SIGNAL_FUNC (gedit_file_exit), NULL);
+	g_signal_connect (G_OBJECT (mdi), "destroy",
+			  G_CALLBACK (gedit_file_exit), NULL);
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -227,9 +229,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			   drag_types, n_drag_types,
 			   GDK_ACTION_COPY);
 		
-	gtk_signal_connect (GTK_OBJECT (win), "drag_data_received",
-			    GTK_SIGNAL_FUNC (gedit_mdi_drag_data_received_handler), 
-			    NULL);
+	g_signal_connect (G_OBJECT (win), "drag_data_received",
+			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
+			  NULL);
 	
 	/* Add cursor position status bar */
 	widget = gtk_statusbar_new ();
@@ -272,10 +274,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	gtk_window_set_default_size (GTK_WINDOW (win), 
 			gedit_settings->window_width, 
 			gedit_settings->window_height);
-	gtk_window_set_policy (GTK_WINDOW (win), TRUE, TRUE, FALSE);
 
-	g_signal_connect (GTK_WIDGET (win), "configure_event",
-	                  GTK_SIGNAL_FUNC (gedit_prefs_configure_event_handler), 
+	g_signal_connect (G_OBJECT (win), "configure_event",
+	                  G_CALLBACK (gedit_prefs_configure_event_handler), 
 			  NULL);
 	
 	/* Add the recent files */
@@ -476,12 +477,12 @@ gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
 	gedit_debug (DEBUG_MDI, "");
 
-	gtk_signal_connect (GTK_OBJECT (child), "state_changed",
-			    GTK_SIGNAL_FUNC (gedit_mdi_child_state_changed_handler), 
-			    NULL);
-	gtk_signal_connect (GTK_OBJECT (child), "undo_redo_state_changed",
-			    GTK_SIGNAL_FUNC (gedit_mdi_child_undo_redo_state_changed_handler), 
-			    NULL);
+	g_signal_connect (G_OBJECT (child), "state_changed",
+			  G_CALLBACK (gedit_mdi_child_state_changed_handler), 
+			  NULL);
+	g_signal_connect (G_OBJECT (child), "undo_redo_state_changed",
+			  G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler), 
+			  NULL);
 
 	return TRUE;
 }
@@ -507,9 +508,9 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 			   drag_types, n_drag_types,
 			   GDK_ACTION_COPY);
 		
-	gtk_signal_connect (GTK_OBJECT (view), "drag_data_received",
-			    GTK_SIGNAL_FUNC (gedit_mdi_drag_data_received_handler), 
-			    NULL);
+	g_signal_connect (GTK_OBJECT (view), "drag_data_received",
+			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
+			  NULL);
 
 	return TRUE;
 }
@@ -613,10 +614,10 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 	if (close)
 	{
 		gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
-				       GTK_SIGNAL_FUNC (gedit_mdi_child_state_changed_handler),
+				       G_CALLBACK (gedit_mdi_child_state_changed_handler),
 				       NULL);
 		gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
-				       GTK_SIGNAL_FUNC (gedit_mdi_child_undo_redo_state_changed_handler),
+				       G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler),
 				       NULL);
 	}
 	*/
@@ -866,7 +867,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		sel_text = style->text [GTK_STATE_SELECTED];
 		selection = style->base [GTK_STATE_SELECTED];
 
-		gtk_style_unref (style);
+		g_object_unref (G_OBJECT (style));
 	}
 	else
 	{
@@ -888,7 +889,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 			/* Fallback */
 			font = gedit_settings->editor_font;
 
-		gtk_style_unref (style);
+		g_object_unref (G_OBJECT (style));
 
 	}
 	else

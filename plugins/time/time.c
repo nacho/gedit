@@ -321,8 +321,8 @@ get_configure_dialog (GtkWindow* parent)
 					 GTK_RESPONSE_OK);
 
 	
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
-			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
+			  G_CALLBACK (dialog_destroyed), &dialog);
 	
 	g_object_unref (gui);
 

@@ -35,6 +35,7 @@
 #include "gedit-undo-manager.h"
 #include "gedit-debug.h"
 #include "gedit-prefs.h"
+#include "gedit-marshal.h"
 
 typedef struct _GeditUndoAction  		GeditUndoAction;
 typedef struct _GeditUndoInsertAction		GeditUndoInsertAction;
@@ -172,7 +173,7 @@ gedit_undo_manager_class_init (GeditUndoManagerClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditUndoManagerClass, can_undo),
 			      NULL, NULL,
-			      gtk_marshal_VOID__BOOLEAN,
+			      gedit_marshal_VOID__BOOLEAN,
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
@@ -183,7 +184,7 @@ gedit_undo_manager_class_init (GeditUndoManagerClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditUndoManagerClass, can_redo),
 			      NULL, NULL,
-			      gtk_marshal_VOID__BOOLEAN,
+			      gedit_marshal_VOID__BOOLEAN,
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
