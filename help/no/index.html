@@ -1,0 +1,231 @@
+<html>
+<head><title>gEdit - Tekstredigeringsprogram for  GNOME</title></head>
+
+<body>
+<h1>gEdit</h1>
+<h3>Copyright (c) 1998, 1999 Alex Roberts and Evan Lawrence</h3>
+
+<P>This program and the documentation are free software; you can redistribute
+it and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the License,
+or (at your option) any later version. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&nbsp;
+See the GNU General Public License for more details.
+
+<P>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+59 Temple Place, Suite 330, Boston, MA&nbsp; 02111-1307&nbsp; USA
+
+<P>For more details see the file COPYING.
+
+<H2>
+<A NAME="toc"></A>1. Innholdsfortegnelse</H2>
+
+<OL>
+<LI>
+<A HREF="#toc">Innholdsfortegnelse</A></LI>
+
+<LI>
+<A HREF="#introduction">Innledning</A></LI>
+
+<LI>
+<A HREF="#use">Bruk</A></LI>
+
+<LI>
+<A HREF="#feedback">Feedback</A></LI>
+</OL>
+&nbsp;
+<H2>
+<A NAME="introduction"></A>2. Innledning</H2>
+<p>
+gEdit er et enkelt tekstredigeringsprogram som også lar deg utføre de fleste funksjoner som forbindes med tekstredigering slik som kopiering, klipp og lim, og søking i ettter tekst i et dokument. gEdit har også funksjoner som Reverser, som reverserer all tekst i et dokument, og Email, som lar deg sende det aktive dokumentet direkte fra gEdit. gEdit lar deg, ulikt Microsofts Notepad, åpne flere dokumenter samtidig, og har et hendig grensesnitt med arkfaner for bytting mellom dokumenter. gEdit jobber, som Notepad og mange andre tekstredigeringsprogrammer, med ASCII-filer, og tilbyr ingen kommandoer for formatering av tekst.
+<p>
+
+<H2>
+<A NAME="use"></A>3. Use</H2>
+Interface Elements:
+<br>
+Top level menus:
+<ul>
+<li>File
+	<ul>
+	<li>Ny
+	 - Oppretter en ny fil.
+	<li>Åpne
+	 - Åpner en eksisterende fil.
+	<li>Lagre
+	 - Lagrer den aktive filen. Hvis filen allerede har fått navn, lagres den med det eksitrerend navnet, hvis ikke fungerer dette som Lagre som.
+	<li>Lagre som
+	 - Lagrer den aktive filen og spør etter navn og plassering for den lagrede filen.
+	<li>Liste over nylig åpnede filer.
+	 - Viser de siste tre filene som har vært åpnet.
+	<li>Skriv ut
+	 - Skriver ut aktiv fil.
+	<li>Lukk
+	 - Lukker aktiv fil. Hvis filen er endret, spør om filen skal lagres.
+	<li>Lukk alle
+	 - Lukker alle åpne filer. Spør om lagring for endrede filer.
+	<li>Avslutt
+	 - Avslutter gEdit, og lukker alle åpne filer. Spør om lagring for endrede filer.
+	</ul>
+
+<li>Rediger
+	<ul>
+	<li>Klipp ut
+	 - Klipp flytter valgt tekst til en midlertidig plassering fra hvor den kan plasseres et eller flere andre steder.
+	<li>Kopier
+	 - Kopierer valgt tekst til en midlertidig plassering fra hvor den kan plasseres et eller flere andre steder.
+	<li>Lim inn
+	 - Plasserer utklipt eller kopiert tekst i aktiv posisjon.
+	<li>Marker alt
+	 - Markerer all tekst i aktivt dokument.
+	<li>Finn linje
+	 - Søker etter et linjenummer.
+	<li>Finn
+	 - Søker etter tekst.
+	<li>Finn igjen
+	 - Kjører forrige søk en gang til.
+	<li>Erstatt
+	 - Erstatter tekst med en annen tekst.
+	</ul>
+
+<li>Tillegg (Se filen README.plugins for mer informasjon om Tillegg)
+	<ul>
+	<li>Test Selection
+	<li>Stavekontroll
+	<li>Reverser
+	<li>Project Manager
+	<li>Open Header|Code
+	<li>View In Browser
+	<li>Hello
+	<li>Email
+	<li>Diff
+	<li>Encryption
+	<li>CVS Diff
+	<li>Convert
+	<li>Browse
+	</ul>
+
+<li>Innstillinger
+        <ul>
+	<li>Autoindenter
+	 - Autoindenter indenterer de nye linjene likt de forrige linjene.
+	<li>Statuslinje
+	 - Viser en statuslinje nederst på skjermen. Statuslinjen viser hvilken kolonne du er på, og gir deg linjeknappen som, når trykket på, viser hvor linjer dokumentet inneholder totalt og hvilken linje du står på nå.
+	<li>Ordbryting
+	 - Deler ikke et ord ved enden av linjen, men begynner å skrive ordet på neste linje.
+	<li>Linjebryting
+	 - Beholder all tekst i vinduet ved å bryte aktiv linje ved vinduets kant.
+	<li>Skrivebeskyttet
+	 - Gjør filen skrivebeskyttet.
+	<li>Delt skjerm
+	 - Lar deg se på forskjellige deler av det akrive dokumentet samtidig.
+	<li>Dokumentfaner
+	 - Lar deg endre plasseringen av fanene som viser hvilket dokument som er aktivt.
+	 <ul>
+		<li>Øverst
+		<li>Nederst
+		<li>Venstre
+		<li>Høyre
+		<li>Vis faner
+	 </ul>
+	<li>Lagre instillinger
+	 - Lagrer instillingene.
+	<li>Brukervalg
+	 - Viser brukervalg.
+	</ul>
+
+<li>Vinduer
+	<ul>
+	<li>Opprett nytt vindu
+	 - Åpner et nytt gEdit-vindu med et tomt dokument.
+	<li>Lukk dette vinduet
+	 - Lukker det aktive gEdit vinduet.
+	<li>Dokumentliste
+	 - Viser en liste over åpne dokumenter.
+	</ul>
+
+<li>Hjelp
+	<ul>
+	<li>Om
+	 Gir enkel informasjon om gEdit.
+	</ul>
+</ul>
+<p>
+Høyre-klikk på kontekstmenyer gir deg også følgende kommandoer:
+<ul>
+<li>Klipp ut
+ - Se over.
+<li>Kopier
+ - Se over.
+<li>Lim inn
+ - Se over.
+<li>Åpne i nytt vindu
+ - Åpner aktiv fil i et nytt vindu.
+<li>Lagre
+ - Se over.
+<li>Lukk
+ - Se over.
+<li>Skriv ut
+ - Se over.
+<li>Åpne (bytt) .c/.h fil
+ - Bytter mellom to åpne filer med filtypene h eller c.
+</ul>
+</ul>
+<br>
+Det finnes også tastatursnarveier tilgjengelig.
+<ul>
+<li>Ctrl+Venstre pil/Høyre pil
+ - Flytter markøren ett ord til venstre eller høyre.
+<li>Ctrl+Delete
+ - Sletter ordet til høyre for markøren.
+<li>Ctrl+Backspace
+ - Sletter ordet til venstre for markøren.
+<li>Ctrl+C
+ - Kopierer merket tekst.
+<li>Ctrl+X
+ - Klipper ut markert tekst.
+<li>Ctrl+V
+ - Limer inn tekst.
+<li>Ctrl+Q
+ - Avslutt. Gjør det samme som avslutt fra Fil-menyen.
+<li>Ctrl+S
+ - Lagrer filen.
+<li>Ctrl+A
+ - Går til begynnelsen av linjen.
+<li>Ctrl+B
+ - Flytter markøren tilbake ett tegn.
+<li>Ctrl+D
+ - Sletter tegnet til høyre for markøren.
+<li>Ctrl+F
+ - Flytter markøren ett tegn til høyre.
+<li>Ctrl+K
+ - Sletter alt til høyre for markøren på aktiv linje.
+<li>Ctrl+L
+ - Lister opp åpne filer.
+<li>Ctrl+W
+ - Sletter ordet til venstre for markøren.
+<li>Ctrl+E
+ - Flytter markøren til slutten av aktiv linje.
+<li>Ctrl+U
+ - Sletter aktiv linje.
+</ul>
+
+
+<H2>
+<A NAME="feedback"></A>4. Feedback</H2>
+gEdit vedlikeholdes av <A HREF="mailto:bse@gedit.pn.org">Alex Roberts &lt;bse@gedit.pn.org></A>. Hvis du har problemer
+med å installere og/eller kjøre gEdit, ikke nøl med å sende e-post til meg.
+
+<P>Du kan sjekke status og/eller hente den siste stabile utgaven av
+gEdit via WWW på 
+<A HREF="http://gedit.pn.org">http://gedit.pn.org.</A>
+&nbsp; Den nyeste versjonen er også tilgjengelig i Gnome CVS repository'et
+i modulen <i>gedit</I>.
+
+<P>Kommentarer, ideer og (det viktigste) feilrapporter (og spesielt patcher)
+er meget velkommen til den nevnte e-post-addressen.
+<BR>&nbsp;
+</BODY>
+</HTML>
