@@ -153,7 +153,7 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		NULL
 	};
 
-	about = gnome_about_new ("gEdit", "0.4.8",
+	about = gnome_about_new ("gEdit", "0.4.9",
 			"(C) 1998 Alex Roberts and Evan Lawrence",
 			authors,
 			_("gEdit is a small and lightweight text editor for GNOME/Gtk+"),

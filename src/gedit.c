@@ -318,8 +318,8 @@ int main (int argc, char **argv)
 	
 	poptFreeContext(ctx);
 	
-	/*gE_rc_parse();
-*/
+	gE_rc_parse();
+
 	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
 	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
 	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
