@@ -27,7 +27,7 @@ module GNOME {
 						 in string enc_charset,
 						 in long line_pos);
 			oneway void grabFocus ();
-			Document newDocument ();
+			Document newDocument (in boolean force);
 		};
 
 		interface Application : Bonobo::Unknown {

@@ -206,9 +206,6 @@ gedit_handle_automation (GnomeProgram *program)
 		window = GNOME_Gedit_Application_getWindowInWorkspace (server, ws, &env);
 	}
 
-	if (new_document_option)
-		GNOME_Gedit_Window_newDocument (window, &env);
-
 	data = gedit_get_command_line_data (program);
 	if (data) 
 	{
@@ -271,10 +268,10 @@ gedit_handle_automation (GnomeProgram *program)
 								&encoding,
 								&conv_error);
 		}	
-		
+
 		if (converted_text != NULL)
 		{
-			document = GNOME_Gedit_Window_newDocument (window, &env);
+			document = GNOME_Gedit_Window_newDocument (window, FALSE, &env);
 
 			GNOME_Gedit_Document_insert (document, 0, converted_text,
 						     strlen (converted_text), &env);
@@ -283,8 +280,14 @@ gedit_handle_automation (GnomeProgram *program)
 		}
 	}
 
-	if (stdin_data != NULL)
-		g_free (stdin_data);
+	if (new_document_option ||
+	    (data == NULL && stdin_data == NULL) ||
+	    (data != NULL && data->file_list == NULL && stdin_data == NULL))
+	{
+		GNOME_Gedit_Window_newDocument (window, new_document_option, &env);
+	}
+
+	g_free (stdin_data);
 
 	/* at the very least, we focus the active window */
 	GNOME_Gedit_Window_grabFocus (window, &env);

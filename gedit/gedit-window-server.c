@@ -92,14 +92,19 @@ impl_gedit_window_server_openURIList (PortableServer_Servant _servant,
 
 static GNOME_Gedit_Document
 impl_gedit_window_server_newDocument (PortableServer_Servant _servant,
-                                CORBA_Environment * ev)
+				      CORBA_boolean force,
+				      CORBA_Environment *ev)
 {
 	GeditDocument *doc;
 	BonoboObject *doc_server;
 
-	gedit_file_new ();
-
 	doc = gedit_get_active_document ();
+
+	if (force || doc == NULL || !gedit_document_is_untouched (doc))
+	{
+		gedit_file_new ();
+		doc = gedit_get_active_document ();
+	}
 
 	doc_server = gedit_document_server_new (doc);
 
