@@ -77,6 +77,31 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogGotoLine *dial
 	}
 }
 
+static void
+entry_insert_text (GtkEditable *editable, const char *text, gint length, gint *position)
+{
+	gunichar c;
+	const gchar *p;
+ 	const gchar *end;
+
+	p = text;
+	end = text + length;
+
+	while (p != end) {
+		const gchar *next;
+		next = g_utf8_next_char (p);
+
+		c = g_utf8_get_char (p);
+
+		if (!g_unichar_isdigit (c)) {
+			g_signal_stop_emission_by_name (editable, "insert_text");
+			break;
+		}
+
+		p = next;
+	}
+}
+
 static GeditDialogGotoLine *
 dialog_goto_line_get_dialog (void)
 {
@@ -147,6 +172,9 @@ dialog_goto_line_get_dialog (void)
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);
+
+	g_signal_connect (G_OBJECT (dialog->entry), "insert_text",
+			  G_CALLBACK (entry_insert_text), dialog);
 
 	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
 			 G_CALLBACK (dialog_destroyed), &dialog);
