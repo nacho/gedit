@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-21 20:01+0100\n"
-"PO-Revision-Date: 2004-12-01 19:31+0100\n"
+"PO-Revision-Date: 2004-12-25 14:55+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -621,16 +621,16 @@ msgstr[2] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
 msgstr[1] ""
-"Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+"Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy ztraceny."
 msgstr[2] ""
-"Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+"Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy ztraceny."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -806,7 +806,6 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatické odsazování</b>"
 
@@ -832,7 +831,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Pravý okraj</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabelátory</b>"
 
@@ -976,7 +974,6 @@ msgid "_Display line numbers"
 msgstr "Zobrazovat čísla řá_dků"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Povolit _automatické odsazování"
 
@@ -1478,16 +1475,16 @@ msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] ""
 "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 msgstr[1] ""
-"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+"Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
 msgstr[2] ""
-"Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+"Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1580,18 +1577,14 @@ msgstr[1] "Načítám %d soubory ..."
 msgstr[2] "Načítám %d souborů ..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Nemohu otevřít soubor \"%s\"."
+msgstr "Nemohu najít soubor \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" je adresář.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+msgstr "Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1607,162 +1600,112 @@ msgid "Could not open the file \"%s\""
 msgstr "Nemohu otevřít soubor \"%s\"."
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Nemohu otevřít soubor \"%s\", protože obsahuje poškozená data."
+msgstr "Soubor obsahuje poškozená data."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
+msgstr "gedit nemůže zpracovat umístění %s:."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
+msgstr "gedit nemůže zpracovat toto umístění."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože obsahuje data v nesprávném formátu."
+msgstr "Soubor obsahuje data v nesprávném formátu."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Soubor má příliš mnoho symbolických odkazů."
+msgstr "Soubor je příliš velký."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" není platné umístění"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Přístup byl odepřen."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open file and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
-"\n"
-"Zavřete prosím některé otevřené soubory a zkuste to znovu."
+msgstr "je otevřeno příliš mnoho souborů. Zavřete prosím některé otevřené soubory a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" je adresář"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "application and try again."
-msgstr ""
-"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím některé běžící "
-"aplikace a zkuste to znovu."
+msgstr "Nedostatek paměti pro otevření souboru. Zavřete prosím některé běžící aplikace a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože počítač \"%s\" nebyl "
-"nalezen.\n"
-"\n"
-"Zkontrolujte prosím, že je vaše nastavení proxy správné, a zkuste to znovu."
+msgstr "Počítač \"%s\" nebyl nalezen. Zkontrolujte prosím, že je vaše nastavení proxy správné, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
-msgstr ""
-"\"%s\" není platné umístění.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+msgstr "Název počítače nebyl platný. Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože název počítače je prázdný.\n"
-"\n"
-"Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
+msgstr "Název počítače byl prázdný. Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"Nemohu nalézt soubor \"%s\".\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+msgstr "Pokus přihlásit se selhal. Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože obsahuje neplatná data.\n"
-"\n"
-"Pravděpodobně se pokoušíte otevřít binární soubor."
+msgstr "Soubor obsahuje neplatná data. Pravděpodobně se pokoušíte otevřít binární soubor."
 
 #: gedit/gedit-io-error-dialogs.c:248
-#, fuzzy
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
-"Soubor, který se pokoušíte otevřít, obsahuje neplatnou posloupnost bajtů."
+msgstr "Soubor, který se pokoušíte otevřít, není obyčejný soubor."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože gedit nemohl automaticky detekovat "
-"kódování znaků.\n"
-"\n"
-"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a zkuste znovu "
-"vybrat kódování znaků v dialogu 'Otevřít soubor...' (nebo 'Otevřít "
-"umístění')."
+msgstr "gedit nemohl automaticky detekovat kódování znaků. Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor, a zkuste znovu vybrat kódování znaků v dialogu 'Otevřít soubor...' (nebo 'Otevřít umístění')."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Nemohu otevřít soubor \"%s\", protože je příliš velký."
+msgstr "Nemohu otevřít soubor \"%s\" s kódováním znaků %s"
 
+# FIXME: s/tryingto/trying to/
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not tryingto open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\" v kódování znaků %s.\n"
-"\n"
-"Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a že jste v "
-"dialogu 'Otevřít soubor...' (nebo 'Otevřít umístění') vybrali správné "
-"kódování znaků, a zkuste to znovu."
+msgstr "Zkontrolujte prosím, že se nepokoušíte otevřít binární soubor a že jste v dialogu 'Otevřít soubor...' (nebo 'Otevřít umístění') vybrali správné kódování znaků, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid data. Probably, you are trying to open "
 "a binary file."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože obsahuje neplatná data.\n"
-"\n"
-"Pravděpodobně se pokoušíte otevřít binární soubor."
+msgstr "Soubor obsahuje neplatná data. Pravděpodobně se pokoušíte otevřít binární soubor."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1771,127 +1714,85 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Nemohu vrátit soubor \"%s\" do původního stavu."
+msgstr "Nemohu vrátit soubor \"%s\" do původního stavu"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože nebyl nalezen "
-"původní soubor.\n"
-"\n"
-"Původní soubor byl asi nedávno smazán."
+msgstr "gedit jej nemůže najít. Původní soubor byl možná nedávno smazán."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open file and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
-"\n"
-"Zavřete prosím některé otevřené soubory a zkuste to znovu."
+msgstr "Je otevřeno příliš mnoho souborů. Zavřete prosím některé otevřené soubory a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running application and try "
 "again."
-msgstr ""
-"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím některé běžící "
-"aplikace a zkuste to znovu."
+msgstr "Nedostatek paměti. Zavřete prosím některé běžící aplikace a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
-msgstr ""
-"Nemohu otevřít soubor \"%s\", protože název počítače je prázdný.\n"
-"\n"
-"Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
+msgstr "Název počítače byl prázdný. Zkontrolujte prosím, že je nastavení vaší proxy správné, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Pokus přihlásit se selhal."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr ""
-"Nemohu vrátit soubor \"%s\" do původního stavu, protože původní soubor "
-"obsahuje neplatné data v kódování UTF-8.\n"
-"\n"
-"Pravděpodobně se pokoušíte o návrat do původního stavu z binárního souboru."
+msgstr "Soubor obsahuje neplatná data UTF-8. Pravděpodobně se pokoušíte o návrat do původního stavu binární soubor."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Není možné vrátit do původního stavu Nepojmenovaný dokument."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Nemohu uložit soubor \"%s\"."
+msgstr "Nemohu uložit soubor \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Soubor \"%s\" již existuje."
+msgstr "Soubor \"%s\" již existuje"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" je adresář.\n"
-"\n"
-"Zkontrolujte prosím, že jste umístění napsali správně."
+msgstr "Zkontrolujte prosím, že jste umístění napsali správně."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Nemohu vytvořit soubor \"%s\"."
+msgstr "Nemohu vytvořit soubor \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Zkontrolujte prosím, že máte odpovídající práva zápisu."
+msgstr "Zkontrolujte prosím, že máte odpovídající práva zápisu."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Název souboru je příliš dlouhý."
+msgstr "Název souboru je příliš dlouhý."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"Nemohu vytvořit soubor \"%s\".\n"
-"\n"
-"Adresářová část názvu souboru neexistuje nebo to je porušený symbolický "
-"odkaz."
+msgstr "Adresářová část názvu souboru neexistuje nebo to je porušený symbolický odkaz."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
-msgstr ""
-"Na disku není dostatek místa pro vytvoření souboru \"%s\".\n"
-"\n"
-"Uvolněte prosím nějaké místo a zkuste to znova."
+msgstr "Na disku není dostatek místa pro vytvoření souboru. Uvolněte prosím nějaké místo a zkuste to znova."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -2991,14 +2892,12 @@ msgid "The document is empty."
 msgstr "Dokument je prázdný."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
-msgstr "Vybraný text neobsahuje chybně napsaná slova."
+msgstr "Vybraný text neobsahuje slova s překlepy."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
-msgstr "Dokument neobsahuje chybně napsaná slova."
+msgstr "Dokument neobsahuje slova s překlepy."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
