@@ -79,7 +79,9 @@ struct _GeditDocumentPrivate
 
 	guint		 auto_save_timeout;
 	gboolean	 last_save_was_manually; 
-	
+
+	GTimeVal 	 time_of_last_save_or_load;
+
 	gboolean 	 readonly;
 };
 
@@ -275,6 +277,8 @@ gedit_document_init (GeditDocument *document)
 	document->priv->readonly = FALSE;
 
 	document->priv->last_save_was_manually = TRUE;
+
+	g_get_current_time (&document->priv->time_of_last_save_or_load);
 
 	enc = gedit_encoding_get_utf8 ();
 		
@@ -705,7 +709,10 @@ gedit_document_auto_save (GeditDocument* doc, GError **error)
 		
 	if (gedit_document_save_as_real (doc, doc->priv->uri, encoding,
 					 doc->priv->last_save_was_manually, NULL))
+	{
 		doc->priv->last_save_was_manually = FALSE;
+		g_get_current_time (&doc->priv->time_of_last_save_or_load);
+	}
 
 	return TRUE;
 }
@@ -865,6 +872,8 @@ gedit_document_load (GeditDocument        *doc,
 
 	gedit_document_set_encoding (doc, encoding);
 
+	g_get_current_time (&doc->priv->time_of_last_save_or_load);
+
 	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
 
 	return TRUE;
@@ -952,6 +961,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 
 	gedit_document_set_readonly (doc, FALSE);
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
+	g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
 	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0);
 
@@ -1077,7 +1087,10 @@ gedit_document_save (GeditDocument *doc, GError **error)
 					   error);
 
 	if (ret)
+	{
 		doc->priv->last_save_was_manually = TRUE;
+		g_get_current_time (&doc->priv->time_of_last_save_or_load);
+	}
 
 	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
@@ -1126,7 +1139,10 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);
+		
+		g_get_current_time (&doc->priv->time_of_last_save_or_load);
 		doc->priv->last_save_was_manually = TRUE;
+		
 		gedit_document_set_encoding (doc, encoding);
 			
 		ret = TRUE;
@@ -2335,5 +2351,17 @@ gedit_document_set_encoding (GeditDocument *doc, const GeditEncoding *encoding)
 	/* FIXME: do we need a encoding changed signal ? - Paolo */
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
 
+}
+
+glong
+gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
+{
+	GTimeVal current_time;
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), -1);
+
+	g_get_current_time(&current_time);
+
+	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
 }
 

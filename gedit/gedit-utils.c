@@ -1317,5 +1317,3 @@ gedit_warning (gchar *str, GtkWindow *parent)
 
 	gtk_widget_destroy (dialog);
 }
-
-

@@ -219,6 +219,9 @@ GtkSourceLanguage *gedit_document_get_language 	(GeditDocument *doc);
 
 const GeditEncoding *gedit_document_get_encoding (GeditDocument *doc);
 
+glong		gedit_document_get_seconds_since_last_save_or_load 
+						(GeditDocument *doc);
+
 #endif /* __GEDIT_DOCUMENT_H__ */
 
 
