@@ -22,7 +22,7 @@
 #include <gnome.h>
 #include "gE_view.h"
 #include "main.h"
-#include "gE_undo.h"
+#include "gedit-undo.h"
 #include "gE_mdi.h"
 #include "commands.h"
 #include "gE_prefs.h"

@@ -23,7 +23,7 @@
 #include <gnome.h>
 #include <sys/stat.h>
 #include "main.h"
-#include "gE_undo.h"
+#include "gedit-undo.h"
 #include "gE_prefs.h"
 #include "gE_window.h"
 #include "gE_view.h"

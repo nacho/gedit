@@ -25,7 +25,7 @@
 #include "main.h"
 #include "gedit-print.h"
 #include "search.h"
-#include "gE_undo.h"
+#include "gedit-undo.h"
 
 GnomeUIInfo toolbar_data[] = {
 	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
@@ -71,3 +71,6 @@ GnomeUIInfo toolbar_data[] = {
 #endif
 
 /* the end */
+
+
+
