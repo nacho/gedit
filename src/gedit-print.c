@@ -33,6 +33,8 @@
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-master-preview.h>
 
+#include <string.h>	/* For strlen */
+
 #include "gedit2.h"
 #include "gedit-print.h"
 #include "gedit-debug.h"
@@ -571,7 +573,7 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 	p = start;
 
 	/* Find space advance */
-	space = gnome_font_face_lookup_default (gnome_font_get_face (pji->font_body), ' ');
+	space = gnome_font_lookup_default (pji->font_body, ' ');
 	gnome_font_get_glyph_stdadvance (pji->font_body, space, &space_advance);
 
 	if (!first_line_of_par)
@@ -598,8 +600,6 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 			/* FIXME: use a tabs array */
 			gint num_of_equivalent_spaces;
 			
-			glyph = gnome_font_lookup_default (pji->font_body, ' ');
-			
 			num_of_equivalent_spaces = tab_size - ((chars_in_this_line - 1) % tab_size); 
 			chars_in_this_line += num_of_equivalent_spaces - 1;
 			
@@ -609,9 +609,22 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 		{
 			glyph = gnome_font_lookup_default (pji->font_body, ch);
 
-			if (ch == ' ')
+			/* FIXME */
+			if (glyph == space)
 				line_width += space_advance.x;
-			else	
+			else
+			if ((glyph < 0) || (glyph >= 256))
+			{
+				ArtPoint adv;
+				gnome_font_get_glyph_stdadvance (pji->font_body, glyph, &adv);
+				if (adv.x > 0)
+					line_width += adv.x;
+				else
+					/* To be as conservative as possible */
+					line_width += (2 * space_advance.x);
+
+			}
+			else
 				line_width += gnome_font_get_glyph_width (pji->font_body, glyph);
 		}
 
