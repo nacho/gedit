@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2002-02-05 18:42+0100\n"
+"POT-Creation-Date: 2002-02-10 23:22+0100\n"
 "PO-Revision-Date: 2002-01-25 17:51+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -43,6 +43,101 @@ msgstr ""
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Авторські права © 2002 - Джеймс Віллкокс"
 
+#: plugins/diff/diff.c:57
+#, fuzzy
+msgid "_Compare files..."
+msgstr "Відкрити файл..."
+
+#: plugins/diff/diff.c:60
+msgid "Makes a diff file from two documents or files"
+msgstr ""
+
+#: plugins/diff/diff.c:62
+#, fuzzy
+msgid "Compare files"
+msgstr "Завантажено файл %s"
+
+#. Create the dialog
+#: plugins/diff/diff.c:263
+msgid "Compare two files..."
+msgstr ""
+
+#: plugins/diff/diff.c:277
+msgid "C_ompare"
+msgstr ""
+
+#: plugins/diff/diff.c:487
+#, fuzzy
+msgid "The two documents you selected are the same."
+msgstr "Документ не було збережено."
+
+#: plugins/diff/diff.c:495
+msgid ""
+"The \"first\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+
+#: plugins/diff/diff.c:504
+msgid ""
+"The \"second\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+
+#: plugins/diff/diff.c:512
+msgid "The two files you selected are the same."
+msgstr ""
+
+#: plugins/diff/diff.c:529
+#, fuzzy
+msgid "The \"first\" document contains no text."
+msgstr "Документ не було відновлено."
+
+#: plugins/diff/diff.c:558
+msgid "The \"second\" document contains no text."
+msgstr ""
+
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:579
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"gedit could not create a temporary file."
+msgstr ""
+
+#: plugins/diff/diff.c:597 plugins/diff/diff.c:610
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"Error executing the diff command."
+msgstr ""
+
+#: plugins/diff/diff.c:632
+msgid "No differences were found between the selected documents."
+msgstr ""
+
+#: plugins/diff/diff.c:673
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"The result contains invalid UTF-8 data."
+msgstr ""
+
+#: plugins/diff/diff.c:897
+msgid ""
+"Makes a diff file from two documents or files on disk.\n"
+"\n"
+"For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
+msgstr ""
+
+#: plugins/diff/diff.c:900
+#, fuzzy
+msgid ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
+msgstr "Авторські права © 2002 - Паоло Маґґі"
+
 #: plugins/docinfo/docinfo.c:42
 #, fuzzy
 msgid "_Word Count"
@@ -53,15 +148,16 @@ msgstr "Підрахунок слів"
 msgid "Get info on current document."
 msgstr "Створити новий документ"
 
-#: plugins/docinfo/docinfo.c:143 plugins/docinfo/docinfo.c:363
+#: plugins/docinfo/docinfo.c:141 plugins/docinfo/docinfo.c:361
 msgid "Word count"
 msgstr "Підрахунок слів"
 
-#: plugins/docinfo/docinfo.c:154
-msgid "Update"
+#: plugins/docinfo/docinfo.c:152
+#, fuzzy
+msgid "_Update"
 msgstr "Поновити"
 
-#: plugins/docinfo/docinfo.c:364
+#: plugins/docinfo/docinfo.c:362
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
@@ -71,8 +167,9 @@ msgstr ""
 "кількість слів, рядків, символів і непорожніх символів у ньому та показує "
 "результат."
 
-#: plugins/docinfo/docinfo.c:368 plugins/sample/sample.c:140
-#: plugins/shell_output/shell_output.c:420 plugins/time/time.c:531
+#: plugins/docinfo/docinfo.c:366 plugins/sample/sample.c:140
+#: plugins/shell_output/shell_output.c:420
+#: plugins/taglist/gedit-taglist-plugin.c:139 plugins/time/time.c:533
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Авторські права © 2002 - Паоло Маґґі"
 
@@ -141,11 +238,46 @@ msgid "An error occurs while running the selected command."
 msgstr "Сталася помилка під час виконання вибраної команди."
 
 #: plugins/shell_output/shell_output.c:417
+#, fuzzy
 msgid ""
-"Exucute a program and insert its output in the current document at the "
+"Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
 "Виконати програму, і вставити її вивід у поточний документ у позицію курсора"
+
+#: plugins/taglist/gedit-taglist-plugin.c:40
+msgid "_Show tag list"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:43
+msgid "Show the tag list window."
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:135
+msgid "Tag list"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:136
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tabs/strings without having to type them."
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:113
+msgid "Tag list plugin"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:131
+msgid "Select the group of tab you want to use."
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:155
+msgid "Double-click on a tag to insert it in the current document."
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:166
+msgid "Tags"
+msgstr ""
 
 #: plugins/time/time.c:40
 #, fuzzy
@@ -165,15 +297,15 @@ msgstr "Доступні формати"
 msgid "Configure insert date/time plugin"
 msgstr "Налаштувати доповнення дати й часу"
 
-#: plugins/time/time.c:528
+#: plugins/time/time.c:530
 msgid "Insert Date/Time"
 msgstr "Вставити дату й час"
 
-#: plugins/time/time.c:529
+#: plugins/time/time.c:531
 msgid "Inserts the current date and time at the cursor position."
 msgstr "Вставити поточну дату й час в позицію курсора"
 
-#: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
+#: src/bonobo-mdi.c:519 src/bonobo-mdi.c:595 src/bonobo-mdi.c:1973
 #, c-format
 msgid "Activate %s"
 msgstr "Активувати %s"
@@ -208,20 +340,20 @@ msgstr "Назва файлу модуля"
 msgid "Author(s)"
 msgstr "Автори"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:445
+#: src/dialogs/gedit-dialog-plugin-manager.c:447
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Не вдалося знайти plugin-manager.glade2, перевстановіть gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:453
+#: src/dialogs/gedit-dialog-plugin-manager.c:455
 msgid "Plugin Manager"
 msgstr "Керування доповненнями"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:480
+#: src/dialogs/gedit-dialog-plugin-manager.c:482
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Невірний файл glade для керування доповненнями -- не всі віджети знайдено.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:568
+#: src/dialogs/gedit-dialog-plugin-manager.c:572
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Не вдалося створити діалог керування доповненнями"
 
@@ -234,8 +366,8 @@ msgid "Replace _All"
 msgstr "Замінити _все"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:106
-#: src/gedit-file.c:823 src/gedit-ui.xml.h:85
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:107
+#: src/gedit-ui.xml.h:85
 msgid "_Replace"
 msgstr "Замінити"
 
@@ -255,6 +387,29 @@ msgstr "Тексту \"%s\" не знайдено."
 msgid "Found and replaced %d occurences."
 msgstr "Знайдено і замінено %d входжень."
 
+#: src/dialogs/gedit-plugin-program-location-dialog.c:73
+msgid "Set program location ..."
+msgstr ""
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:95
+#, fuzzy
+msgid ""
+"Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr "Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#, c-format
+msgid ""
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
+"\n"
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr ""
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+msgid "The selected file is not executable."
+msgstr ""
+
 #: src/dialogs/gedit-preferences-dialog.c:197
 msgid "Toolbar"
 msgstr "Пенал"
@@ -271,24 +426,25 @@ msgstr "MDI"
 msgid "Font & Colors"
 msgstr "Шрифти й кольори"
 
-#: src/dialogs/gedit-preferences-dialog.c:211 src/gedit-ui.xml.h:54
-msgid "Save"
-msgstr "Зберегти"
+#: src/dialogs/gedit-preferences-dialog.c:211
+msgid "Tabs"
+msgstr ""
 
-#.
-#. {_("Tabs"), NULL, TABS_SETTINGS},
-#.
-#: src/dialogs/gedit-preferences-dialog.c:215 src/gedit-ui.xml.h:67
-msgid "Undo"
-msgstr "Відмінити"
-
-#: src/dialogs/gedit-preferences-dialog.c:216
+#: src/dialogs/gedit-preferences-dialog.c:212
 msgid "Wrap mode"
 msgstr "Режим загортання"
 
-#: src/dialogs/gedit-preferences-dialog.c:217
+#: src/dialogs/gedit-preferences-dialog.c:213
 msgid "Line numbers"
 msgstr "Номери рядків"
+
+#: src/dialogs/gedit-preferences-dialog.c:215 src/gedit-ui.xml.h:54
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/dialogs/gedit-preferences-dialog.c:216 src/gedit-ui.xml.h:67
+msgid "Undo"
+msgstr "Відмінити"
 
 #: src/dialogs/gedit-preferences-dialog.c:224
 msgid "Page"
@@ -331,24 +487,24 @@ msgstr "Неможливо поновити параметри gedit."
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit -- це малий і легкий текстовий редактор для GNOME"
 
-#: src/gedit-document.c:471 src/gedit-document.c:482
+#: src/gedit-document.c:472 src/gedit-document.c:483
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:471 src/gedit-document.c:482
+#: src/gedit-document.c:472 src/gedit-document.c:483
 msgid "Untitled"
 msgstr "Неназваний"
 
-#: src/gedit-document.c:597 src/gedit-document.c:703
+#: src/gedit-document.c:598 src/gedit-document.c:704
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Зустрілися невірні дані UTF-8 під час зчитування файлу"
 
-#: src/gedit-document.c:1056
+#: src/gedit-document.c:1078
 msgid "It is not possible to revert an Untitled document"
 msgstr "Неможливо відновити документ Неназваний"
 
-#: src/gedit-file-selector-util.c:94
+#: src/gedit-file-selector-util.c:95
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -357,34 +513,24 @@ msgstr ""
 "Файл \"%s\" вже існує.\n"
 "Чи хочете ви замінити його тим, що записуєте?"
 
-#: src/gedit-file-selector-util.c:102
+#: src/gedit-file-selector-util.c:103
 msgid "Do_n't replace"
 msgstr "Не _заміняти"
 
-#: src/gedit-file-selector-util.c:454
+#: src/gedit-file-selector-util.c:457
 msgid "Select a filename to save"
 msgstr "Оберіть назву файлу"
 
-#: src/gedit-file.c:237 src/gedit-file.c:367 src/gedit-file.c:1148
+#: src/gedit-file.c:112
+msgid "Open File ..."
+msgstr "Відкрити файл..."
+
+#: src/gedit-file.c:122 src/gedit-file.c:762
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Завантажено файл \"%s\""
 
-#: src/gedit-file.c:248 src/gedit-file.c:1046
-#, c-format
-msgid "Loading %d file..."
-msgstr "Завантаження файлу \"%s\""
-
-#: src/gedit-file.c:265 src/gedit-file.c:1082
-#, c-format
-msgid "Loaded %i files"
-msgstr "Завантажено %i файлів"
-
-#: src/gedit-file.c:335 src/gedit-file.c:357
-msgid "Open File ..."
-msgstr "Відкрити файл..."
-
-#: src/gedit-file.c:404 src/gedit-file.c:452
+#: src/gedit-file.c:158 src/gedit-file.c:206
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -395,16 +541,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:522 src/gedit-file.c:692 src/gedit-file.c:840
+#: src/gedit-file.c:275 src/gedit-file.c:374
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Збереження файлу як \"%s\"..."
 
-#: src/gedit-file.c:537 src/gedit-file.c:739 src/gedit-file.c:958
+#: src/gedit-file.c:290 src/gedit-file.c:420 src/gedit-file.c:572
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: src/gedit-file.c:544 src/gedit-file.c:746
+#: src/gedit-file.c:297 src/gedit-file.c:427
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -415,38 +561,25 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:572 src/gedit-file.c:699 src/gedit-file.c:847
+#: src/gedit-file.c:325 src/gedit-file.c:381
 msgid "The document has not been saved."
 msgstr "Документ не було збережено."
 
-#: src/gedit-file.c:582 src/gedit-file.c:697 src/gedit-file.c:845
+#: src/gedit-file.c:335 src/gedit-file.c:379
 #, c-format
 msgid "File '%s' saved."
 msgstr "Файл \"%s\" збережено."
 
-#: src/gedit-file.c:651
-msgid "Save As..."
-msgstr "Зберегти як..."
-
-#: src/gedit-file.c:684
+#: src/gedit-file.c:366
 msgid "Save as ..."
 msgstr "Зберегти як..."
 
-#: src/gedit-file.c:818
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-"Файл \"%s\" вже існує у цьому каталозі. Чи хочете ви замінити його тим, що "
-"записуєте?"
-
-#: src/gedit-file.c:944
+#: src/gedit-file.c:558
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Відновлення файлу \"%s\"..."
 
-#: src/gedit-file.c:965
+#: src/gedit-file.c:579
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -457,21 +590,31 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:993
+#: src/gedit-file.c:607
 msgid "The document has not been reverted."
 msgstr "Документ не було відновлено."
 
-#: src/gedit-file.c:1003
+#: src/gedit-file.c:617
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Файл \"%s\" відновлено."
 
-#: src/gedit-file.c:1103
+#: src/gedit-file.c:660
+#, c-format
+msgid "Loading %d file..."
+msgstr "Завантаження файлу \"%s\""
+
+#: src/gedit-file.c:696
+#, c-format
+msgid "Loaded %i files"
+msgstr "Завантажено %i файлів"
+
+#: src/gedit-file.c:717
 #, c-format
 msgid "Loaded file %s"
 msgstr "Завантажено файл %s"
 
-#: src/gedit-file.c:1202
+#: src/gedit-file.c:816
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -482,7 +625,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:548
+#: src/gedit-mdi.c:549
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -493,72 +636,72 @@ msgstr ""
 "\n"
 "Ваші зміни буде втрачено, якщо ви їх не збережете."
 
-#: src/gedit-mdi.c:553
+#: src/gedit-mdi.c:554
 msgid "Do_n't save"
 msgstr "Не _зберігати"
 
-#: src/gedit-mdi.c:571
+#: src/gedit-mdi.c:572
 msgid "_Don't quit"
 msgstr "_Не виходити"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:576
 msgid "_Don't close"
 msgstr "_Не закривати"
 
-#: src/gedit-mdi.c:659
+#: src/gedit-mdi.c:660
 msgid "(modified)"
 msgstr "(модифіковано)"
 
-#: src/gedit-mdi.c:665
+#: src/gedit-mdi.c:666
 msgid "(readonly)"
 msgstr "(лише зчитуваня)"
 
-#: src/gedit-plugins-engine.c:154
+#: src/gedit-plugins-engine.c:155
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Помилка, неможливо відкрити файл модуля \"%s\"\n"
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:170
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Помилка, доповнення \"%s\" не містить функції ініціалізації."
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:180
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Помилка, доповнення \"%s\" не містить функції активації."
 
-#: src/gedit-plugins-engine.c:189
+#: src/gedit-plugins-engine.c:190
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Помилка, доповнення \"%s\" не містить функції деактивації."
 
-#: src/gedit-plugins-engine.c:219
+#: src/gedit-plugins-engine.c:220
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Помилка, неможливо ініціалізувати доповнення \"%s\""
 
-#: src/gedit-plugins-engine.c:227
+#: src/gedit-plugins-engine.c:228
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr "Помилка, доповнення \"%s\" не вказало назви"
 
-#: src/gedit-plugins-engine.c:302
+#: src/gedit-plugins-engine.c:308
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
 msgstr "Помилка, неможливо зберегти параметри доповнення \"%s\""
 
-#: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
+#: src/gedit-plugins-engine.c:380 src/gedit-plugins-engine.c:438
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Помилка, неможливо активувати доповнення \"%s\""
 
-#: src/gedit-plugins-engine.c:397
+#: src/gedit-plugins-engine.c:407
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Помилка, неможливо деактивувати доповнення \"%s\""
 
-#: src/gedit-plugins-engine.c:469
+#: src/gedit-plugins-engine.c:479
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Помилка, неможливо поновити інтерфейс користувача доповнення \"%s\""
@@ -605,12 +748,12 @@ msgstr ""
 "\n"
 "%s,"
 
-#: src/gedit-recent.c:252
+#: src/gedit-recent.c:253
 #, c-format
 msgid "Open file %s"
 msgstr "Відкрити файл %s"
 
-#: src/gedit-recent.c:320
+#: src/gedit-recent.c:321
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Неможливо відкрити недавній файл: %s"
@@ -951,16 +1094,16 @@ msgstr "_Інструменти"
 msgid "_Undo"
 msgstr "Від_мінити"
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:882
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "Ряд. %d, Ст. %d"
 
-#: src/gedit-view.c:862
+#: src/gedit-view.c:920
 msgid "  OVR"
 msgstr "ЗАМ"
 
-#: src/gedit-view.c:864
+#: src/gedit-view.c:922
 msgid "  INS"
 msgstr "ВСТ"
 
@@ -1012,6 +1155,16 @@ msgstr "Показати останні повідомлення налагод�
 msgid "Turn on all debugging messages."
 msgstr "Увімкнути всі повідомлення налагодження."
 
-#: src/gedit2.c:162
+#: src/gedit2.c:161
 msgid "The gnome text editor"
 msgstr "Текстовий редактор GNOME"
+
+#~ msgid "Save As..."
+#~ msgstr "Зберегти як..."
+
+#~ msgid ""
+#~ "A file named ``%s'' already exists in this location. Do you want to "
+#~ "replace it with the one you are saving?"
+#~ msgstr ""
+#~ "Файл \"%s\" вже існує у цьому каталозі. Чи хочете ви замінити його тим, "
+#~ "що записуєте?"
