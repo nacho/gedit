@@ -53,18 +53,18 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)
 
 */
 
-gint linepos()
+void line_pos_callback(GtkWidget *w, GtkWidget *text)
 {
 static char statustext[32];
 int timer = 0;
 
 if(main_window->documents > 0)
 {
-/*print("%s\n", GTK_TEXT(gE_document_current(main_window)->text)->current_line);*/
+/*print("%s\n", GTK_TEXT(text)->current_line);*/
 
 sprintf (statustext,"Line: %d, Col: %d", 
-				GTK_TEXT(gE_document_current(main_window)->text)->cursor_pos_y/13,
-				GTK_TEXT(gE_document_current(main_window)->text)->cursor_pos_x/7);
+				GTK_TEXT(text)->cursor_pos_y/13,
+				GTK_TEXT(text)->cursor_pos_x/7);
 
 	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, statustext);
 }
@@ -105,7 +105,7 @@ int main (int argc, char **argv)
  prog_init(argc,argv);
   
 		
-  		  gtk_idle_add ((GtkFunction) linepos, NULL);
+  		//  gtk_idle_add ((GtkFunction) linepos, NULL);
 		//	gtk_timeout_add (5, (GtkFunction) linepos, NULL);
   gtk_main ();
   

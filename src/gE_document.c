@@ -121,6 +121,10 @@ gE_document *gE_document_new(gE_window *window)
 	document->text = gtk_text_new (NULL, NULL);
 	gtk_text_set_editable (GTK_TEXT (document->text), TRUE);
 	gtk_text_set_word_wrap (GTK_TEXT (document->text), TRUE);
+
+	gtk_signal_connect_after (GTK_OBJECT (document->text), "button_press_event",
+	                    GTK_SIGNAL_FUNC (gE_event_button_press), document->text);
+
 	gtk_signal_connect_after (GTK_OBJECT(document->text), "key_press_event",
 	                                                  GTK_SIGNAL_FUNC(auto_indent_callback), document->text);
 
@@ -159,6 +163,8 @@ gE_document *gE_document_new(gE_window *window)
 
 	gtk_notebook_set_page (GTK_NOTEBOOK(window->notebook), 
 	                       g_list_length(((GtkNotebook *)(window->notebook))->first_tab) -1);
+
+	gtk_widget_grab_focus (document->text);
 	return document;
 }
 

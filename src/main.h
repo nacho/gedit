@@ -33,6 +33,8 @@ void tab_bot_cback (GtkWidget *widget, gpointer data);
 void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
+void line_pos_callback (GtkWidget *w, GtkWidget *text);
+void gE_event_button_press (GtkWidget *w, GdkEventButton *event);
 
 gE_prefs *gE_prefs_window();
 void gE_get_rc_file();

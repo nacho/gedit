@@ -80,8 +80,9 @@ void file_open_ok_sel (GtkWidget *w, GtkFileSelection *fs)
 {
   char *filename;
   char *nfile;
-
-    gE_document_new(main_window);
+  if ((gE_document_current (main_window)->filename) || 
+      (gE_document_current (main_window)->changed))
+  	gE_document_new(main_window);
    
    filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
    
@@ -128,6 +129,8 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 	int i, newlines, newline_1;
 	gchar *buffer, *whitespace;
 
+	line_pos_callback (NULL, text);
+
 	if (event->keyval != GDK_Return)
 		return;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
@@ -170,8 +173,14 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 		i = GTK_EDITABLE (text)->current_pos;
 		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);
 	}
+	
+	line_pos_callback (NULL, text); /* <-- this is so the statusbar updates when it auto-indents */
 }
 
+void gE_event_button_press (GtkWidget *w, GdkEventButton *event)
+{
+	line_pos_callback (NULL, w);
+}
 
 
 /* ---- File Menu Callbacks ---- */
