@@ -603,11 +603,10 @@ gedit_menus_remove_submenu (BonoboWindow *window, const gchar *path,  const gcha
 	g_return_if_fail (path != NULL);
 	g_return_if_fail (name != NULL);
 
-	escaped_name = g_strconcat (path, name, NULL);
+	escaped_name = escape_slashes (name);
 
-	item_path = escape_slashes (escaped_name);
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
-
 	if (bonobo_ui_component_path_exists (ui_component, item_path, NULL)) 
 		bonobo_ui_component_rm (ui_component, item_path, NULL);
 
