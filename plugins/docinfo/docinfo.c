@@ -121,8 +121,6 @@ get_dialog ()
 		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 				window);
 	
-		gtk_widget_grab_focus (dialog->dialog);
-
 		if (!GTK_WIDGET_VISIBLE (dialog->dialog))
 			gtk_widget_show (dialog->dialog);
 

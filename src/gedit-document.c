@@ -1535,3 +1535,32 @@ gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset)
 	return gtk_text_iter_get_line (&iter);
 }
 
+gint gedit_document_get_cursor (GeditDocument *doc)
+{
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "insert"));
+
+	return gtk_text_iter_get_offset (&iter); 
+}
+
+void
+gedit_document_set_cursor (GeditDocument *doc, gint cursor)
+{
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	
+	/* Place the cursor at the requested position */
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, cursor);
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+}
