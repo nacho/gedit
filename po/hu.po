@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.0\n"
-"POT-Creation-Date: 2000-10-05 17:37+0200\n"
-"PO-Revision-Date: 2000-10-05 13:16+0200\n"
+"POT-Creation-Date: 2000-10-31 16:08+0100\n"
+"PO-Revision-Date: 2000-10-31 13:16+0200\n"
 "Last-Translator: Emese KOVACS <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,15 +15,15 @@ msgstr ""
 
 #. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 #. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:191
+#: plugins/browse/browse.c:189
 msgid "browse"
 msgstr "tallóz"
 
-#: plugins/browse/browse.c:249
+#: plugins/browse/browse.c:246
 msgid "Browse"
 msgstr "Tallóz"
 
-#: plugins/browse/browse.c:250 plugins/browse/browse.c:251
+#: plugins/browse/browse.c:247 plugins/browse/browse.c:248
 msgid "Web browse plugin"
 msgstr "Webböngészõ plug-in"
 
@@ -113,20 +113,20 @@ msgstr ""
 "A gedit nem tudott temp fájlt létrehozni\n"
 "\n"
 
-#: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
-#: src/document.c:259 src/print.c:581
+#: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
+#: src/document.c:269 src/print.c:703
 msgid "Untitled"
 msgstr "Névtelen"
 
-#: plugins/diff/diff.c:421
+#: plugins/diff/diff.c:423
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:422
+#: plugins/diff/diff.c:424
 msgid "Makes a diff file from 2 documents or files"
 msgstr "diff (különbség) fájlt készít 2 dokumentumból vagy fájlból"
 
-#: plugins/diff/diff.c:423
+#: plugins/diff/diff.c:425
 msgid ""
 "Makes a diff file from 2 documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -146,7 +146,7 @@ msgstr "Válaszd ki az összehasonlítandó fájlokat"
 
 #: plugins/diff/diff.glade.h:8 plugins/diff/diff.glade.h:9
 msgid "From document"
-msgstr "Dokumentum-ból"
+msgstr "Dokumentumból"
 
 #: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:11
 msgid "From a file on disk"
@@ -154,31 +154,31 @@ msgstr "Fájlból"
 
 #: plugins/diff/diff.glade.h:12 plugins/diff/diff.glade.h:14
 msgid "don't translate this\n"
-msgstr ""
+msgstr "don't translate this\n"
 
 #: plugins/diff/diff.glade.h:16
 msgid "diff found at : "
 msgstr "A diff itt található: "
 
-#: plugins/email/email.c:60
+#: plugins/email/email.c:64
 #, c-format
 msgid "Executing command : %s"
 msgstr "%s parancs végrehajtása"
 
-#: plugins/email/email.c:262
+#: plugins/email/email.c:267
 msgid "Email"
 msgstr "Email"
 
-#: plugins/email/email.c:263
+#: plugins/email/email.c:268
 msgid "Email the current document"
 msgstr "Küldd el az aktuális dokumentumot"
 
-#: plugins/email/email.c:264
+#: plugins/email/email.c:269
 msgid ""
 "Email the current document to a specified email address\n"
 "gedit searches for sendmail to use this plugin."
 msgstr ""
-"Elkõldi e-mailben az aktuális dokumentumot a megadott címre.\n"
+"Elküldi e-mailben az aktuális dokumentumot a megadott címre.\n"
 "A geditnek szüksége van a sendmail-re ehhez a pluginhoz."
 
 #.
@@ -186,19 +186,19 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/email/email.glade.h:7
+#: plugins/email/email.glade.h:7 src/dialogs/program.glade.h:7
 msgid "gedit: e-mail plugin"
 msgstr "gedit: e-mail plugin"
 
-#: plugins/email/email.glade.h:8
+#: plugins/email/email.glade.h:8 src/dialogs/program.glade.h:8
 msgid "From:"
 msgstr "Feladó:"
 
-#: plugins/email/email.glade.h:9
+#: plugins/email/email.glade.h:9 src/dialogs/program.glade.h:9
 msgid "To:"
 msgstr "Címzett:"
 
-#: plugins/email/email.glade.h:10
+#: plugins/email/email.glade.h:10 src/dialogs/program.glade.h:10
 msgid "Subject:"
 msgstr "Tárgy:"
 
@@ -238,12 +238,12 @@ msgstr "Szia Világ"
 msgid "Sample 'hello world' plugin."
 msgstr "'Szia Világ' példa plugin."
 
-#: plugins/shell_output/shell_output.c:182
+#: plugins/shell_output/shell_output.c:189
 msgid "Shell Output"
 msgstr "Shell kimenete"
 
-#: plugins/shell_output/shell_output.c:183
-#: plugins/shell_output/shell_output.c:184
+#: plugins/shell_output/shell_output.c:190
+#: plugins/shell_output/shell_output.c:191
 msgid "Insert the shell output in the document"
 msgstr "Shell kimenet beszúrása a dokumentumba"
 
@@ -285,28 +285,52 @@ msgstr "(C) 1998, 1999, 2000 Alex Roberts és Evan Lawrence"
 msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit egy kicsi és könnyû szövegszerkesztõ a GNOME-hoz"
 
-#: src/dialogs/dialog-plugins.c:436
+#: src/dialogs/dialog-plugins.c:441
 #, c-format
 msgid ""
 "Plugin Name : %s\n"
 "Author : %s\n"
 "Description : %s\n"
 msgstr ""
+"Plugin neve: %s\n"
+"Szerzõ: %s\n"
+"Leírás: %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:555
+#: src/dialogs/dialog-prefs.c:559
 msgid "gedit: Preferences"
 msgstr "gedit: Beállítások"
 
-#: src/dialogs/dialog-replace.c:176
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/dialog-replace.c:129 src/dialogs/replace.glade.h:7
+#: src/dialogs/replace.glade.h:9
+msgid "Replace"
+msgstr "Cserél"
+
+#: src/dialogs/dialog-replace.c:134 src/menus.c:254
+msgid "Find"
+msgstr "Keres"
+
+#: src/dialogs/dialog-replace.c:331
+msgid "Text not found"
+msgstr "Nincs találat"
+
+#: src/dialogs/dialog-replace.c:336
+msgid "Text not found."
+msgstr "Nincs találat."
+
+#: src/dialogs/dialog-replace.c:361
 #, c-format
 msgid "found and replaced %i occurrences."
 msgstr "%i találat és csere"
 
-#: src/dialogs/dialog-replace.c:246 src/search.c:282
-#, c-format
-msgid "Text found at line :%i"
-msgstr "Szöveg helye: %i. sor"
+#: src/dialogs/dialog-replace.c:371
+msgid "Could not allocate the memory for the Replace all request."
+msgstr "Nem tudtam a szükséges memóriát allokálni a \"Mindent cserél\" parancshoz."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -320,10 +344,6 @@ msgstr "Sorra ugrás"
 #: src/dialogs/goto-line.glade.h:8
 msgid "Line number:"
 msgstr "Sor száma:"
-
-#: src/dialogs/goto-line.glade.h:9
-msgid "Enter the line number you wish to go to."
-msgstr "Írd be annak a sornak a számát, amire ugrani szeretnél."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -398,7 +418,7 @@ msgstr "Mód:  "
 msgid "Notebook Tab Position: "
 msgstr "Regiszterfül pozíciója: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:239
+#: src/dialogs/prefs.glade.h:28 src/menus.c:234
 msgid "Undo"
 msgstr "Visszanon"
 
@@ -482,18 +502,17 @@ msgstr "F_ekvõ"
 msgid "Paper"
 msgstr "Papír"
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:9
-msgid "Replace"
-msgstr "Cserél"
+#: src/dialogs/program.glade.h:11
+msgid "File to use as body of message: "
+msgstr "Ez a fájl legyen a levél törzse: "
 
-#: src/dialogs/replace.glade.h:8 src/menus.c:259
-msgid "Find"
-msgstr "Keres"
+#: src/dialogs/program.glade.h:12
+msgid "Location of sendmail to search for :"
+msgstr "Sendmail helye:"
+
+#: src/dialogs/replace.glade.h:8
+msgid "Find Next"
+msgstr "Következõ találat"
 
 #: src/dialogs/replace.glade.h:10
 msgid "Replace All"
@@ -560,38 +579,38 @@ msgstr "Telepített plugin-ok"
 msgid "Plugin description"
 msgstr "Plugin leírása"
 
-#: src/document.c:241
+#: src/document.c:251
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:432
+#: src/document.c:443
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' módosult. El akarod menteni?"
 
-#: src/document.c:638
+#: src/document.c:652
 #, c-format
 msgid "Untitled %i"
 msgstr "Névtelen %i"
 
-#: src/document.c:644
+#: src/document.c:658
 msgid "(modified)"
 msgstr "(változott)"
 
-#: src/document.c:646
+#: src/document.c:660
 msgid "(readonly)"
 msgstr "(csak olvasható)"
 
-#: src/document.c:696 src/document.c:736
+#: src/document.c:710 src/document.c:750
 msgid "This file does not end with a valid extension\n"
 msgstr "Ennek a fájlnak nem érvényes a kiterjesztése\n"
 
-#: src/document.c:744
+#: src/document.c:758
 #, c-format
 msgid "The file %s was not found."
 msgstr "A %s fájl nem található"
 
-#: src/file.c:152
+#: src/file.c:161
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -600,7 +619,7 @@ msgstr ""
 "Hiba történt a \"%s\" fájl megnyitásakor.\n"
 "Gyõzõdj meg róla, hogy a fájl létezik."
 
-#: src/file.c:161
+#: src/file.c:172
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -619,11 +638,11 @@ msgstr ""
 "Gyõzõdj meg róla, hogy a fájlt nem használja más alkalmazás\n"
 "és hogy a fájl nem üres."
 
-#: src/file.c:171 src/file.c:435
+#: src/file.c:183 src/file.c:467
 msgid "Could not allocate the required memory."
 msgstr "Nem tudtam a szükséges memóriát allokálni."
 
-#: src/file.c:177
+#: src/file.c:189
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -638,15 +657,15 @@ msgstr ""
 "\n"
 "Gyõzõdj meg róla, hogy jogosult vagy a fájl megnyitására."
 
-#: src/file.c:277
+#: src/file.c:306
 msgid "Save As..."
 msgstr "Mentés másként.."
 
-#: src/file.c:334
+#: src/file.c:365
 msgid "The document contains no data."
 msgstr "A dokumentum üres (nem tartalmaz adatot)."
 
-#: src/file.c:344
+#: src/file.c:376
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -663,7 +682,7 @@ msgstr ""
 "Gyõzõdj meg róla, hogy a megadott elérési út létezik és hogy rendelkezel a "
 "szükséges jogosultságokkal."
 
-#: src/file.c:357
+#: src/file.c:389
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -680,7 +699,7 @@ msgstr ""
 "Ismeretlen hiba történt (1). Kérlek jelentsd a hibát a submit@bugs.gnome.org "
 "címen"
 
-#: src/file.c:374
+#: src/file.c:406
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -697,37 +716,42 @@ msgstr ""
 "Ismeretlen hiba történt (2). Kérlek jelentsd a hibát a submit@bugs.gnome.org "
 "címen"
 
-#: src/file.c:455
+#: src/file.c:487
 msgid "Error in the pipe ."
 msgstr "Hiba a csõben (|)."
 
-#: src/file.c:510
-msgid "Open File ..."
-msgstr "Fájl megnyitás..."
-
-#: src/file.c:568
+#: src/file.c:598 src/file.c:605
 #, c-format
 msgid "Loaded file %s"
 msgstr "%s fájl betöltve"
 
-#: src/file.c:659
+#: src/file.c:612
+#, c-format
+msgid "Loaded %i files"
+msgstr "%i fájl betöltve"
+
+#: src/file.c:668
+msgid "Open File ..."
+msgstr "Fájl megnyitás..."
+
+#: src/file.c:799
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "A ``%s'' fájl felülírás elõtt áll. Biztos, hogy folytassam ?"
 
-#: src/file.c:671
+#: src/file.c:811
 msgid "Document has not been saved."
 msgstr "A dokumentum nincs elmentve."
 
-#: src/file.c:681
+#: src/file.c:821
 msgid "Error saving file!"
 msgstr "Hiba a fájl mentése közben!"
 
-#: src/file.c:800
+#: src/file.c:941
 msgid "You can't revert an Untitled document\n"
 msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot\n"
 
-#: src/file.c:813
+#: src/file.c:954
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -736,192 +760,192 @@ msgstr ""
 "Biztos, hogy minden változtatást el akarsz vetni?\n"
 "(%s)"
 
-#: src/file.c:842
+#: src/file.c:985
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "A ``%s'' fájl nem létezik. Hozzam létre?"
 
-#: src/menus.c:51
+#: src/menus.c:54
 msgid "Open (swap) .c/.h file"
 msgstr ".c/.h fájl betöltése (cseréje)"
 
-#: src/menus.c:59
+#: src/menus.c:62
 msgid "_New"
 msgstr "Ú_j"
 
-#: src/menus.c:60 src/menus.c:218
+#: src/menus.c:63 src/menus.c:213
 msgid "Create a new document"
 msgstr "Egy új dokumentum készítése"
 
-#: src/menus.c:65
+#: src/menus.c:68
 msgid "Save All"
 msgstr "Mindent ment"
 
-#: src/menus.c:66
+#: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Minden megnyitott fájl mentése"
 
-#: src/menus.c:72 src/menus.c:77
+#: src/menus.c:74
 msgid "Revert"
 msgstr "Visszaállít"
 
-#: src/menus.c:88
+#: src/menus.c:85
 msgid "Print pre_view"
 msgstr "Nomtatási _kép"
 
-#: src/menus.c:88
+#: src/menus.c:85
 msgid "Print preview"
 msgstr "Nomtatási kép"
 
-#: src/menus.c:92
+#: src/menus.c:89
 msgid "Print preview..."
 msgstr "Nomtatási kép..."
 
-#: src/menus.c:93
+#: src/menus.c:90
 msgid "Preview data to be printed"
 msgstr "Elõnézet a nyomtatásra szánt adatokról"
 
-#: src/menus.c:100
+#: src/menus.c:97
 msgid "Close All"
 msgstr "Mindent bezár"
 
-#: src/menus.c:101
+#: src/menus.c:98
 msgid "Close All Open Files"
 msgstr "Minden nyitott fájl bezárása"
 
-#: src/menus.c:131
+#: src/menus.c:128
 msgid "Goto _Line..."
 msgstr "_Sorra ugrás..."
 
-#: src/menus.c:132
+#: src/menus.c:129
 msgid "Go to a specific line number"
 msgstr "Megadott számú sorra ugrik"
 
-#: src/menus.c:142
+#: src/menus.c:140
 msgid "_Add View"
 msgstr "_Nézet hozzáadása"
 
-#: src/menus.c:143
+#: src/menus.c:141
 msgid "Add a new view of the document"
 msgstr "Új nézet hozzáadása a dokumentumhoz"
 
-#: src/menus.c:145
+#: src/menus.c:143
 msgid "_Remove View"
 msgstr "Né_zet törlése"
 
-#: src/menus.c:146
+#: src/menus.c:144
 msgid "Remove view of the document"
 msgstr "A dokumentum nézetének eltávolítása"
 
-#: src/menus.c:194 src/plugin.c:82 src/plugin.c:390
+#: src/menus.c:187 src/plugin.c:84 src/plugin.c:402
 msgid "_Plugins"
 msgstr "_Plugin-ek"
 
-#: src/menus.c:204
+#: src/menus.c:199
 msgid "_Documents"
 msgstr "_Dokumentumok"
 
-#: src/menus.c:218
+#: src/menus.c:213
 msgid "New"
 msgstr "Új"
 
-#: src/menus.c:222
+#: src/menus.c:217
 msgid "Open"
 msgstr "Megnyit"
 
-#: src/menus.c:222
+#: src/menus.c:217
 msgid "Open a file"
 msgstr "Fájl megnyitása"
 
-#: src/menus.c:226
+#: src/menus.c:221
 msgid "Save"
 msgstr "Ment"
 
-#: src/menus.c:226
+#: src/menus.c:221
 msgid "Save the current file"
 msgstr "Aktuális fájl mentése"
 
-#: src/menus.c:230
+#: src/menus.c:225
 msgid "Close"
 msgstr "Bezár"
 
-#: src/menus.c:230
+#: src/menus.c:225
 msgid "Close the current file"
 msgstr "Az aktuális fájl bezárása"
 
-#: src/menus.c:234
+#: src/menus.c:229
 msgid "Print"
 msgstr "Nyomtat"
 
-#: src/menus.c:234
+#: src/menus.c:229
 msgid "Print the current file"
 msgstr "Az aktuális fájl nyomtatása"
 
-#: src/menus.c:239
+#: src/menus.c:234
 msgid "Undo last operation"
 msgstr "Utolsó mûveletet visszavonja"
 
-#: src/menus.c:243
+#: src/menus.c:238
 msgid "Redo"
 msgstr "Újra"
 
-#: src/menus.c:243
+#: src/menus.c:238
 msgid "Redo last operation"
 msgstr "Utolsó visszavonást semlegesíti"
 
-#: src/menus.c:247
+#: src/menus.c:242
 msgid "Cut"
 msgstr "Kivág"
 
-#: src/menus.c:247
+#: src/menus.c:242
 msgid "Cut the selection"
 msgstr "Kivágja a kijelölt részt"
 
-#: src/menus.c:251
+#: src/menus.c:246
 msgid "Copy"
 msgstr "Másol"
 
-#: src/menus.c:251
+#: src/menus.c:246
 msgid "Copy the selection"
 msgstr "Másolja a kijelölt részt"
 
-#: src/menus.c:255
+#: src/menus.c:250
 msgid "Paste"
 msgstr "Beszúr"
 
-#: src/menus.c:255
+#: src/menus.c:250
 msgid "Paste the clipboard"
 msgstr "Beszúrja a vágólap tartalmát"
 
-#: src/menus.c:259
+#: src/menus.c:254
 msgid "Search for a string"
 msgstr "Karakterlánc keresése"
 
-#: src/menus.c:263
+#: src/menus.c:258
 msgid "Line"
 msgstr "Sor"
 
-#: src/menus.c:263
-msgid "Get file info like characters, lines, words & paragraphs count."
-msgstr "Statisztika a fájlról, karakterek, sorok, szavak, bekezdések száma."
+#: src/menus.c:258
+msgid "Get the basic file info."
+msgstr "Alapvetõ fájlinformációk"
 
-#: src/menus.c:268
+#: src/menus.c:263
 msgid "Exit"
 msgstr "Kilép"
 
-#: src/menus.c:268
+#: src/menus.c:263
 msgid "Exit the program"
 msgstr "Kilép a programból"
 
-#: src/plugin.c:93
+#: src/plugin.c:95
 msgid "Manager ..."
 msgstr "Plugin kezelõ"
 
-#: src/plugin.c:94
+#: src/plugin.c:96
 msgid "Add/Remove installed plugins"
 msgstr "Telepített plugin-okat hozzáad/eltávolít"
 
-#: src/plugin.c:189
+#: src/plugin.c:196
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -930,7 +954,7 @@ msgstr ""
 "A(z) %s program nem található\n"
 "\n"
 
-#: src/plugin.c:204
+#: src/plugin.c:212
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -939,7 +963,7 @@ msgstr ""
 "Úgy tünik, hogy '%s' nem létezik\n"
 "\n"
 
-#: src/plugin.c:206
+#: src/plugin.c:214
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -950,7 +974,7 @@ msgstr ""
 "de '%s' nem található benne.\n"
 "\n"
 
-#: src/plugin.c:209
+#: src/plugin.c:217
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -959,7 +983,7 @@ msgstr ""
 "'%s' valószínüleg nem program.\n"
 "\n"
 
-#: src/plugin.c:213
+#: src/plugin.c:221
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -968,33 +992,33 @@ msgstr ""
 "%sNem használhatod a(z) %s plugint %s nélkül. \n"
 "Megadsz új helyet %s-nek/-nak."
 
-#: src/plugin.c:311
+#: src/plugin.c:323
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "hiba, nem tudom a %s modul fájlt megnyitni"
 
-#: src/plugin.c:321
+#: src/plugin.c:333
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "hiba, a plugin nem tartalmazza az init_plugin fügvényt."
 
-#: src/plugin.c:333
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr "Hiba, az init_plugin hibával tért vissza"
 
-#: src/plugin.c:380
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "Hiba, a plugint még mindíg használja valami"
 
-#: src/print.c:179
+#: src/print.c:295
 msgid "Pages"
 msgstr "Oldalak"
 
-#: src/print.c:240
+#: src/print.c:353
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Nyomtatási kép"
 
-#: src/print.c:530 src/print.c:545
+#: src/print.c:652 src/print.c:667
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1003,25 +1027,25 @@ msgstr ""
 "A gedit nem találja a(z) \"%s\" betûkészletet.\n"
 "A gedit ne tud nyomtatni ezen betûkészlet nélkül."
 
-#: src/print.c:838
+#: src/print.c:960
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Oldal: %i/%i"
 
-#: src/recent.c:204
+#: src/recent.c:234
 msgid "_File/"
 msgstr "_Fájl/"
 
-#: src/recent.c:212 src/recent.c:213
+#: src/recent.c:237
 msgid "_File"
 msgstr "_Fájl"
 
-#: src/recent.c:258
+#: src/recent.c:256
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Nem tudom az elõzõ fájlt megnyitni: %s"
 
-#: src/search.c:175
+#: src/search.c:393
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -1029,7 +1053,7 @@ msgstr ""
 "Nem tudom a sorokat megszámolni, ha közben keresés is aktív. Kérlek zárd be "
 "a keresés párbeszédablakot."
 
-#: src/search.c:191
+#: src/search.c:410
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -1054,69 +1078,57 @@ msgstr ""
 "Aktuális sor: %i\n"
 "Aktuális oszlop: %i"
 
-#: src/search.c:224
-msgid "Text not found"
-msgstr "Nincs találat"
-
-#: src/search.c:229
-msgid "Text not found."
-msgstr "Nincs találat."
-
-#: src/search.c:260
-msgid "Can't find again. There is not a text string to search for."
-msgstr "Nem tudok újra keresni, nem adtad meg a keresendõ szöveget."
-
-#: src/utils.h:76
-msgid "Show window debugging messages."
-msgstr "Mutatsd az ablak hibakeresõ üzeneteit."
-
-#: src/utils.h:79
-msgid "Show commands debugging messages."
-msgstr "Mutasd a parancsok hibakeresõ üzeneteit."
-
-#: src/utils.h:82
-msgid "Show document debugging messages."
-msgstr "Mutasd a dokumetumok hibakeresõ üzeneteit."
-
-#: src/utils.h:85
-msgid "Show file debugging messages."
-msgstr "Mutasd a fájl hibakeresõ õzeneteit."
-
-#: src/utils.h:88
-msgid "Show plugin debugging messages."
-msgstr "Mutasd a plugin-ok hibakeresõ üzeneteit."
-
-#: src/utils.h:91
-msgid "Show prefs debugging messages."
-msgstr "Mutasd a beállítások hibekeresõ üzeneteit."
-
-#: src/utils.h:94
-msgid "Show printing debugging messages."
-msgstr "Mutasd a nyomtatás hibekeresõ üzeneteit."
-
-#: src/utils.h:97
-msgid "Show search debugging messages."
-msgstr "Mutasd a keresés hibekeresõ üzeneteit."
-
-#: src/utils.h:100
-msgid "Show undo debugging messages."
-msgstr "Mutasd a visszavonás hibekeresõ üzeneteit."
-
-#: src/utils.h:103
-msgid "Show view debugging messages."
-msgstr "Mutasd a nézet hibekeresõ üzeneteit."
-
-#: src/utils.h:106
-msgid "Show recent debugging messages."
-msgstr "Mutasd a beállítások hibekeresõ üzeneteit."
-
-#: src/utils.h:109
-msgid "Turn on all debugging messages."
-msgstr "Mutass minden hibakeresõ üzenetet"
-
-#: src/view.c:961
+#: src/view.c:963
 msgid "You can't remove the last view of a document."
 msgstr "Nem tavolíthatod el a dokumentum utolsó nézetét."
+
+#~ msgid "Text found at line :%i"
+#~ msgstr "Szöveg helye: %i. sor"
+
+#~ msgid "Enter the line number you wish to go to."
+#~ msgstr "Írd be annak a sornak a számát, amire ugrani szeretnél."
+
+#~ msgid "Get file info like characters, lines, words & paragraphs count."
+#~ msgstr "Statisztika a fájlról, karakterek, sorok, szavak, bekezdések száma."
+
+#~ msgid "Can't find again. There is not a text string to search for."
+#~ msgstr "Nem tudok újra keresni, nem adtad meg a keresendõ szöveget."
+
+#~ msgid "Show window debugging messages."
+#~ msgstr "Mutatsd az ablak hibakeresõ üzeneteit."
+
+#~ msgid "Show commands debugging messages."
+#~ msgstr "Mutasd a parancsok hibakeresõ üzeneteit."
+
+#~ msgid "Show document debugging messages."
+#~ msgstr "Mutasd a dokumetumok hibakeresõ üzeneteit."
+
+#~ msgid "Show file debugging messages."
+#~ msgstr "Mutasd a fájl hibakeresõ õzeneteit."
+
+#~ msgid "Show plugin debugging messages."
+#~ msgstr "Mutasd a plugin-ok hibakeresõ üzeneteit."
+
+#~ msgid "Show prefs debugging messages."
+#~ msgstr "Mutasd a beállítások hibekeresõ üzeneteit."
+
+#~ msgid "Show printing debugging messages."
+#~ msgstr "Mutasd a nyomtatás hibekeresõ üzeneteit."
+
+#~ msgid "Show search debugging messages."
+#~ msgstr "Mutasd a keresés hibekeresõ üzeneteit."
+
+#~ msgid "Show undo debugging messages."
+#~ msgstr "Mutasd a visszavonás hibekeresõ üzeneteit."
+
+#~ msgid "Show view debugging messages."
+#~ msgstr "Mutasd a nézet hibekeresõ üzeneteit."
+
+#~ msgid "Show recent debugging messages."
+#~ msgstr "Mutasd a beállítások hibekeresõ üzeneteit."
+
+#~ msgid "Turn on all debugging messages."
+#~ msgstr "Mutass minden hibakeresõ üzenetet"
 
 #~ msgid "Diff plugin."
 #~ msgstr "Diff plugin."
@@ -1135,10 +1147,6 @@ msgstr "Nem tavolíthatod el a dokumentum utolsó nézetét."
 
 #~ msgid "Enable Wordwrap"
 #~ msgstr "Sortörés"
-
-#, fuzzy
-#~ msgid "Find Next"
-#~ msgstr "Keresés"
 
 #, fuzzy
 #~ msgid "Find _In Files..."
