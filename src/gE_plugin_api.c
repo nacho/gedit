@@ -53,7 +53,7 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	entry->path = g_malloc0 (strlen (info->menu_location) + strlen ("Plugins/") + 1);
 	sprintf (entry->path, "Plugins/%s", info->menu_location);
 	entry->accelerator = NULL;
-	entry->callback = start_plugin;
+	entry->callback = GTK_SIGNAL_FUNC (start_plugin);
 	data->temp1 = g_strdup (info->plugin_name);
 	data->window = window;
 	entry->callback_data = data;

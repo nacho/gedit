@@ -102,7 +102,6 @@ main (int argc, char **argv)
 	signal(SIGTERM, SIG_DFL);
 #endif
 
-	window_list = NULL;
 	gE_get_rc_file();
 	gE_rc_parse();
 

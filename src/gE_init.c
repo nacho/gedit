@@ -49,23 +49,9 @@ void prog_init(char **file)
 	g_print("%s\n",*file);
 #endif
 
-	/* Init plugins... */
-	plugins = NULL;
-	
-	callbacks.document.create = gE_plugin_document_create;
-	callbacks.text.append = gE_plugin_text_append;
-	callbacks.document.show = gE_plugin_document_show;
-	callbacks.document.current = gE_plugin_document_current;
-	callbacks.document.filename = gE_plugin_document_filename;
-	callbacks.text.get = gE_plugin_text_get;
-	callbacks.program.quit = NULL;
-	callbacks.program.reg = gE_plugin_program_register;
-	
-	plugin_query_all (&callbacks);
-	
-	window_list = g_list_alloc ();
+
+	window_list = NULL;
 	window = gE_window_new();
-	g_list_append (window_list, window);
 	data->window = window;
 	if (*file != NULL) {
 		g_print("Opening files...\n");
@@ -84,6 +70,21 @@ void prog_init(char **file)
 			file++;
 		}
 	}
+	
+	/* Init plugins... */
+	plugins = NULL;
+	
+	callbacks.document.create = gE_plugin_document_create;
+	callbacks.text.append = gE_plugin_text_append;
+	callbacks.document.show = gE_plugin_document_show;
+	callbacks.document.current = gE_plugin_document_current;
+	callbacks.document.filename = gE_plugin_document_filename;
+	callbacks.text.get = gE_plugin_text_get;
+	callbacks.program.quit = NULL;
+	callbacks.program.reg = gE_plugin_program_register;
+	
+	plugin_query_all (&callbacks);
+	
 }
 
 /* the end */

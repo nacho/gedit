@@ -92,6 +92,7 @@ gE_window *gE_window_new();
 gE_document *gE_document_new(gE_window *window);
 gE_document *gE_document_current(gE_window *window);
 void gE_document_toggle_wordwrap (GtkWidget *w, gE_window *window);
+void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_window *window);
 
 gint gE_file_open (gE_window *window, gE_document *document, gchar *filename);
 gint gE_file_save (gE_window *window, gE_document *document, gchar *filename);

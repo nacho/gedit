@@ -127,6 +127,7 @@ gE_window *gE_window_new()
       line_button = gtk_button_new_with_label ("Line");
       gtk_signal_connect (GTK_OBJECT (line_button), "clicked",
                                    GTK_SIGNAL_FUNC (search_goto_line_callback), window);
+      GTK_WIDGET_UNSET_FLAGS (line_button, GTK_CAN_FOCUS);
       window->line_label = gtk_label_new ("1");
       col_button = gtk_label_new ("Column");
       window->col_label = gtk_label_new ("0");
@@ -146,14 +147,12 @@ gE_window *gE_window_new()
 /*  gtk_widget_show(window->menubar); 
 */
   gtk_widget_show (window->notebook);
-
-  window_list = g_list_append (window_list, window);
+  gtk_widget_show (window->window);
 
   g_list_foreach (plugins, add_plugins_to_window, window);
   
-  gtk_widget_show (window->window);
-
-
+  window_list = g_list_append (window_list, (gpointer) window);
+ 
   return window;
 }
 
@@ -186,7 +185,6 @@ gE_document *gE_document_new(gE_window *window)
 	GtkWidget *table, *hscrollbar, *vscrollbar;
 	GtkStyle *style;
 
-
 	document = g_malloc0(sizeof(gE_document));
 
 	document->window = window;
@@ -194,10 +192,14 @@ gE_document *gE_document_new(gE_window *window)
 	if (window->notebook == NULL) {
 		window->notebook = gtk_notebook_new ();
 		gtk_notebook_set_scrollable (GTK_NOTEBOOK(window->notebook), TRUE);
+		gtk_signal_connect_after (GTK_OBJECT (window->notebook), "switch_page",
+		                                     GTK_SIGNAL_FUNC (notebook_switch_page), window);
+		GTK_WIDGET_UNSET_FLAGS (window->notebook, GTK_CAN_FOCUS);
 		/* gtk_notebook_popup_enable (GTK_NOTEBOOK(window->notebook)); */
 	}
 
 	document->tab_label = gtk_label_new (("Untitled"));
+	GTK_WIDGET_UNSET_FLAGS (document->tab_label, GTK_CAN_FOCUS);
 	document->filename = NULL;
 	document->word_wrap = 1;
 	gtk_widget_show (document->tab_label);
@@ -242,6 +244,8 @@ gE_document *gE_document_new(gE_window *window)
 	vscrollbar = gtk_vscrollbar_new (GTK_TEXT (document->text)->vadj);
 	gtk_table_attach (GTK_TABLE (table), vscrollbar, 1, 2, 0, 1,
      			GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+     	
+     	GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
 	gtk_widget_show (vscrollbar);
 
 	gtk_notebook_append_page (GTK_NOTEBOOK(window->notebook), table, document->tab_label);
@@ -294,6 +298,21 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gE_window *window)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
+void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_window *window)
+{
+	gE_document *doc;
+	gchar *title;
+	
+	if (GTK_WIDGET_REALIZED (window->window)) {
+	doc = (g_list_nth (window->documents, num+1))->data;
+	gtk_widget_grab_focus (doc->text);
+	title = g_malloc0 (strlen (GEDIT_ID) + strlen (GTK_LABEL(doc->tab_label)->label) + 4);
+	
+	sprintf (title, "%s - %s", GEDIT_ID, GTK_LABEL (doc->tab_label)->label);
+	gtk_window_set_title (GTK_WINDOW (window->window), title);
+	g_free (title);
+	}
+}
 		
 void gE_show_version()
 {

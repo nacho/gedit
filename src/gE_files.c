@@ -52,7 +52,8 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 {
 	char str[10];
 	FILE *file_handle;
-
+	gchar *title;
+	
 	if ((file_handle = fopen(filename, "rt")) == NULL)
 	{
 		document->filename = filename;
@@ -85,7 +86,11 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 	if (!document->changed_id)
 		document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", 
 		                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
-	
+
+	title = g_malloc0 (strlen (GEDIT_ID) + strlen (GTK_LABEL(document->tab_label)->label) + 4);
+	sprintf (title, "%s - %s", GEDIT_ID, GTK_LABEL (document->tab_label)->label);
+	gtk_window_set_title (GTK_WINDOW (window->window), title);
+	g_free (title);
 
 	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Opened..."));
 	return 0;
@@ -95,6 +100,8 @@ gint gE_file_save(gE_window *window, gE_document *document, gchar *filename)
 {
 	int i;
 	FILE *file_handle;
+	gchar *title;
+	
 	if ((file_handle = fopen(filename, "w")) == NULL)
 	{
 		g_warning ("Unable to save file %s.", filename);
@@ -122,6 +129,11 @@ gint gE_file_save(gE_window *window, gE_document *document, gchar *filename)
 	if (!document->changed_id)
 		document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", GTK_SIGNAL_FUNC(document_changed_callback), document);
 
+	title = g_malloc0 (strlen (GEDIT_ID) + strlen (GTK_LABEL(document->tab_label)->label) + 4);
+	sprintf (title, "%s - %s", GEDIT_ID, GTK_LABEL (document->tab_label)->label);
+	gtk_window_set_title (GTK_WINDOW (window->window), title);
+	g_free (title);
+	
 	gtk_statusbar_push (GTK_STATUSBAR(window->statusbar), 1, ("File Saved..."));
 	return 0;
 }

@@ -244,12 +244,7 @@ GtkMenuEntry menu_items[] =
 	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Toolbar/Tooltips On", NULL, tb_tooltips_on_cb, window},
 	{"<Main>/Options/Toolbar/Tooltips Off", NULL, tb_tooltips_off_cb, window},
-	#if PLUGINS_TEST
-	{"<Main>/Plugins/Diff", NULL, start_diff, data},
-	{"<Main>/Plugins/CVS Diff", NULL, start_cvsdiff, data},
-	{"<Main>/Plugins/Reverse", NULL, start_reverse, data},
-	{"<Main>/Plugins/Email", NULL, start_email, data},
-	#endif
+	{"<Main>/Plugins/<separator>", NULL, NULL, NULL},
 	{"<Main>/Help/About", "<control>H", gE_about_box, NULL}
 };
 
