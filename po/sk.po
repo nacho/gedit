@@ -3,12 +3,12 @@
 # Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>, 2000-2001.
 #
 #. Translator credits
-#: src/gedit-commands.c:450
+#: src/gedit-commands.c:441
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2001-12-13 14:15+0100\n"
-"PO-Revision-Date: 2001-12-13 14:15CET\n"
+"POT-Creation-Date: 2002-01-04 15:47+0100\n"
+"PO-Revision-Date: 2002-01-04 15:48CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -20,18 +20,26 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Textový editor GNOME"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:452
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivovať %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
-msgid "The searched string has not been found."
-msgstr "Hľadaný reťazec nenájdený."
+#: src/dialogs/gedit-dialog-replace.c:457
+#: src/dialogs/gedit-dialog-replace.c:526
+#: src/dialogs/gedit-dialog-replace.c:681 src/gedit-commands.c:327
+#, c-format
+msgid "The string \"%s\" has not been found."
+msgstr "Hľadaný reťazec \"%s\" nenájdený."
+
+#: src/dialogs/gedit-dialog-replace.c:690
+#, c-format
+msgid "Found and replaced %d occurences."
+msgstr "Nájdených a nahradených %d výskytov."
 
 #: src/gedit2.c:57
 msgid "Show mdi debugging messages."
@@ -89,28 +97,28 @@ msgstr "Textový editor GNOME"
 msgid "Not yet implemented."
 msgstr "Ešte neimplementované."
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:397
 msgid "Impossible to update gedit settings."
 msgstr "Nepodarilo sa aktualizovať nastavenie gedit."
 
-#: src/gedit-commands.c:464
+#: src/gedit-commands.c:455
 msgid "A small and lightweight text editor for Gnome"
 msgstr "Malý a jednoduchý textový editor pre Gnome"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 msgid "Untitled"
 msgstr "Bez mena"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
+#: src/gedit-document.c:535 src/gedit-document.c:641
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Pri čítaní súboru nájdený neplatný znak UTF-8"
 
-#: src/gedit-document.c:885
+#: src/gedit-document.c:931
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nemôžete sa vrátiť v dokumente bez mena."
 
@@ -219,7 +227,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:482
+#: src/gedit-mdi.c:485
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -230,15 +238,15 @@ msgstr ""
 "\n"
 "Vaše zmeny budú stratené, ak ich neuložíte."
 
-#: src/gedit-mdi.c:487
+#: src/gedit-mdi.c:490
 msgid "_Don't save"
 msgstr "_Neukladať"
 
-#: src/gedit-mdi.c:567
+#: src/gedit-mdi.c:570
 msgid "(modified)"
 msgstr "(zmenené)"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:576
 msgid "(readonly)"
 msgstr "(len pre čítanie)"
 
