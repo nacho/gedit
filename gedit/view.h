@@ -102,6 +102,7 @@ void	gedit_view_set_selection	(GeditView *view, guint start, guint end);
 gint	gedit_view_get_selection	(GeditView *view, guint *start, guint *end);
 void	gedit_view_set_position		(GeditView *view, gint pos);
 guint	gedit_view_get_position		(GeditView *view);
+GeditDocument * gedit_view_get_document (GeditView *view);
 
 /* toolbar */
 void	gedit_view_load_widgets (GeditView *view);

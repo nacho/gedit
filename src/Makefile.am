@@ -1,4 +1,4 @@
-## Process this file with automake to produce Makefile.in
+# Process this file with automake to produce Makefile.in
 
 SUBDIRS = dialogs
 
@@ -43,6 +43,10 @@ gedit_SOURCES = 	\
 	prefs.h		\
 	print.c 		\
 	print.h 		\
+	print-doc.c	\
+	print-doc.h	\
+	print-util.c	\
+	print-util.h	\
 	recent.c		\
 	recent.h		\
 	search.c 		\

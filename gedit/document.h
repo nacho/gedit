@@ -24,7 +24,7 @@
 
 #define GEDIT_DOCUMENT(obj)		GTK_CHECK_CAST (obj, gedit_document_get_type (), GeditDocument)
 #define GEDIT_DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_document_get_type (), GeditDocumentClass)
-#define IS_GE_DOCUMENT(obj)		GTK_CHECK_TYPE (obj, gedit_document_get_type ())
+#define GEDIT_IS_DOCUMENT(obj)		GTK_CHECK_TYPE (obj, gedit_document_get_type ())
 
 typedef struct _GeditDocument      GeditDocument;
 typedef struct _GeditDocumentClass GeditDocumentClass;

@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* Clean part of this 10-00, by Chema. divided the ugly code and the nice one */
 /*
  * gedit
@@ -374,6 +374,22 @@ gedit_view_set_readonly (GeditView *view, gint readonly)
 	g_free (doc_name);
 }
 
+/**
+ * gedit_view_get_document:
+ * @view: 
+ * 
+ * get the document from a view
+ * 
+ * Return Value: document for the @view, NULL on error
+ **/
+GeditDocument *
+gedit_view_get_document (GeditView *view)
+{
+        if (view == NULL)
+                return NULL;
+
+        return view->doc;
+}
 
 
 
@@ -488,7 +504,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 			file_save_cb (w, NULL);
 	    		break;
 		case 'p':
-	    		file_print_cb (w, NULL, FALSE);
+	    		gedit_print_cb (w, NULL);
 	    		break;
 		case 'n':
 			return FALSE;
@@ -1231,8 +1247,11 @@ gedit_view_set_tab_size (GeditView *view, gint tab_size)
 	g_list_free (l);
 		
 	l = NULL;
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < 50; i++)
 		l = g_list_prepend (l, GINT_TO_POINTER (tab_size));
 	GTK_TEXT (view->text)->tab_stops = l;
 
 }
+
+
+

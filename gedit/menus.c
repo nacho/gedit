@@ -47,7 +47,7 @@ GnomeUIInfo popup_menu[] =
 
 	GNOMEUIINFO_MENU_SAVE_ITEM  (file_save_cb, NULL),
 	GNOMEUIINFO_MENU_CLOSE_ITEM (file_close_cb, NULL),
-	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
+	GNOMEUIINFO_MENU_PRINT_ITEM (gedit_print_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 
@@ -92,16 +92,16 @@ GnomeUIInfo gedit_file_menu[] =
 */	
 	GNOMEUIINFO_SEPARATOR,
 
-	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
+	GNOMEUIINFO_MENU_PRINT_ITEM (gedit_print_cb, NULL),
 #if 0	
 	GNOMEUIINFO_ITEM_DATA (
 		N_("Print pre_view"), N_("Print preview"),
-		file_print_preview_cb, NULL, NULL),
+		gedit_print_preview_cb, NULL, NULL),
 /*		file_print_preview_cb, NULL, preview_xpm),*/
 #else	
 	GNOMEUIINFO_ITEM (N_("Print preview..."),
 			  N_("Preview data to be printed"),
-			  file_print_preview_cb, NULL),
+			  gedit_print_preview_cb, NULL),
 #endif	
 
 	GNOMEUIINFO_SEPARATOR, 
@@ -253,7 +253,7 @@ GnomeUIInfo toolbar_data[] =
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CLOSE
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("Print"), N_("Print the current file"), file_print_cb,
+		GNOME_APP_UI_ITEM, N_("Print"), N_("Print the current file"), gedit_print_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT
 	},
 	GNOMEUIINFO_SEPARATOR,

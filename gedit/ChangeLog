@@ -1,3 +1,27 @@
+2001-02-24  Chema Celorio  <chema@celorio.com>
+
+	* print-doc.c: move all the actual printing code here. print.c
+	is the glue between gedit & gnome-print. This code is butt ugly.
+	It has my name, but I didn't write it ;-)!
+
+	* print-util.c: new file
+	* print-doc.h: ditto
+	* print-util.h: ditto
+
+	* print.c: full rewrite.
+	I need no longer to hide the fact that i wrote this code.
+
+	* Makefile.am: add print-doc.[ch] & print-util.[ch]
+
+	* menus.c (popup_menu): the priting functions where renamed. update.
+	* window.c (gedit_window_set_widgets_sensitivity): ditto
+
+	* document.h (GEDIT_IS_DOCUMENT): the macro should be GEDIT_IS_DOCUMENT
+
+	* view.c (gedit_view_get_document): Implement
+
+	* document.c (gedit_document_set_undo): use new macro GEDIT_IS_DOCUMENT
+
 2001-02-20  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/dialogs.h: modified gedit_plugin_program_location_dialog

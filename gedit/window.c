@@ -568,7 +568,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	{
 		if (ui_info [count].moreinfo == file_save_as_cb ||
 		    ui_info [count].moreinfo == file_close_cb   ||
-		    ui_info [count].moreinfo == file_print_cb   ||
+		    ui_info [count].moreinfo == gedit_print_cb   ||
 		    ui_info [count].moreinfo == file_save_cb    ||
 		    (ui_info [count].moreinfo == gedit_undo_undo && !sensitive)||
 		    (ui_info [count].moreinfo == gedit_undo_redo && !sensitive) ||
@@ -607,8 +607,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 				    sub_ui_info [sub_count].moreinfo == file_close_cb   ||
 				    sub_ui_info [sub_count].moreinfo == file_close_all_cb   ||
 				    sub_ui_info [sub_count].moreinfo == file_revert_cb  ||
-				    sub_ui_info [sub_count].moreinfo == file_print_cb   ||
-				    sub_ui_info [sub_count].moreinfo == file_print_preview_cb   ||
+				    sub_ui_info [sub_count].moreinfo == gedit_print_cb   ||
+				    sub_ui_info [sub_count].moreinfo == gedit_print_preview_cb   ||
 				    (sub_ui_info [sub_count].moreinfo == gedit_undo_undo && !sensitive)||
 				    (sub_ui_info [sub_count].moreinfo == gedit_undo_redo && !sensitive)||
 				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||

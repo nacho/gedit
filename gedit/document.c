@@ -902,7 +902,7 @@ gedit_document_set_undo (GeditDocument *doc, gint undo_state, gint redo_state)
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 	
-	g_return_if_fail (IS_GE_DOCUMENT(doc));
+	g_return_if_fail (GEDIT_IS_DOCUMENT(doc));
 
 	for ( n=0; n < g_list_length (doc->views); n++)
 	{
