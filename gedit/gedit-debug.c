@@ -33,7 +33,7 @@
 #endif
 
 #include <glib.h>
-
+#include <stdio.h>
 #include "gedit-debug.h"
 
 /* External debug options, used here and in gedit.c */
@@ -70,7 +70,7 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	    (debug_session  && section == GEDIT_DEBUG_SESSION)  ||
 	    (debug_mdi      && section == GEDIT_DEBUG_MDI)	||
 	    (debug_utils    && section == GEDIT_DEBUG_UTILS)	||
-	    (debug_utils    && section == GEDIT_DEBUG_METADATA))
+	    (debug_metadata && section == GEDIT_DEBUG_METADATA))
 
 	{
 		va_list args;
@@ -84,5 +84,7 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	
 		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
 		g_free (msg);
+
+		fflush (stdout);
 	}
 }

@@ -105,6 +105,7 @@ impl_load (BonoboPersistStream       *ps,
 		} else {
 			converted_text = gedit_convert_to_utf8 (text_buf->str,
 								text_buf->len,
+								NULL,
 								NULL);
 			len = strlen (converted_text);
 			g_free (text_buf->str);

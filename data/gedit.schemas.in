@@ -403,16 +403,30 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit-2/preferences/editor/load/encodings</key>
-      <applyto>/apps/gedit-2/preferences/editor/load/encodings</applyto>
+      <key>/schemas/apps/gedit-2/preferences/encodings/auto_detected</key>
+      <applyto>/apps/gedit-2/preferences/encodings/auto_detected</applyto>
+      <owner>gedit</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[UTF-8,CURRENT,ISO-8859-15]</default>
+      <locale name="C">
+	<short>Auto Detected Encodings</short>
+	<long>Sorted list of encodings used by gedit for auto-detecting the encoding of
+	a file. "CURRENT" is the current locale encoding. Only recognized encodings are used.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/encodings/shown_in_menu</key>
+      <applyto>/apps/gedit-2/preferences/encodings/shown_in_menu</applyto>
       <owner>gedit</owner>
       <type>list</type>
       <list_type>string</list_type>
       <default>[ISO-8859-15]</default>
       <locale name="C">
-	<short>Encodings</short>
-	<long>List of encodings used by gedit for reading files not encoded
-	in UTF-8 or in the current locale encoding.</long>
+	<short>Encodings shown in menu</short>
+	<long>List of encodings shown in Character Coding menu in open/save file selector.
+	Only recognized encodings are used.</long>
       </locale>
     </schema>
 

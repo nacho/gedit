@@ -220,7 +220,8 @@ mdi_child_create_cb (const gchar *str)
 	{
 		gedit_debug (DEBUG_SESSION, "URI: %s", str);
 
-		child = gedit_mdi_child_new_with_uri (str, &error);
+		/* FIXME */
+		child = gedit_mdi_child_new_with_uri (str, NULL, &error);
 	}
 	else
 		child = gedit_mdi_child_new ();

@@ -46,7 +46,9 @@
 #include "gedit2.h"
 #include "gedit-plugin-manager.h"
 
+#if 0
 #include "gedit-encodings-dialog.h"
+#endif 
 
 #include "gnome-print-font-picker.h"
 
@@ -61,7 +63,9 @@
 #define LINE_NUMBERS_SETTINGS	7
 #define PRINT_FONTS_SETTINGS	8
 #define PLUGIN_MANAGER_SETTINGS 9
+#if 0
 #define LOAD_SETTINGS		10
+#endif
 #define AUTO_INDENT_SETTINGS	11
 
 
@@ -145,13 +149,14 @@ struct _GeditPreferencesDialogPrivate
 	/* Plugin/Manager */
 	GtkWidget	*plugin_manager;
 
+#if 0
 	/* Open page */
 	GtkWidget	*encodings_treeview;
 	GtkWidget	*add_enc_button;
 	GtkWidget	*remove_enc_button;
 	GtkWidget	*up_enc_button;
 	GtkWidget	*down_enc_button;
-	
+#endif	
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -223,7 +228,9 @@ static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (G
 									       GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, 
 								    GladeXML *gui);
+#if 0
 static gboolean gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+#endif
 static gboolean gedit_preferences_dialog_setup_auto_indent_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static gint get_desktop_default_font_size (void);
@@ -239,8 +246,9 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Wrap Mode"), NULL, WRAP_MODE_SETTINGS},
 	{N_("Auto Indent"), NULL, AUTO_INDENT_SETTINGS},
 	{N_("Line Numbers"), NULL , LINE_NUMBERS_SETTINGS},
-	
+#if 0	
 	{N_("Open"), NULL, LOAD_SETTINGS },
+#endif
  	{N_("Save"), NULL, SAVE_SETTINGS },
 	{N_("Undo"), NULL, UNDO_SETTINGS},
 
@@ -660,7 +668,9 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
 	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
 	gedit_preferences_dialog_setup_plugin_manager_page (dlg, gui);
+#if 0
 	gedit_preferences_dialog_setup_load_page (dlg, gui);
+#endif
 	gedit_preferences_dialog_setup_auto_indent_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
@@ -1329,6 +1339,7 @@ gedit_preferences_dialog_auto_save_spinbutton_value_changed (GtkSpinButton *spin
 			MAX (1, gtk_spin_button_get_value_as_int (spin_button)));
 }
 
+#if 0
 static void
 gedit_preferences_dialog_save_radiobutton_toggled (GtkToggleButton *button,
 		GeditPreferencesDialog *dlg)
@@ -1410,6 +1421,7 @@ gedit_preferences_dialog_save_radiobutton_toggled (GtkToggleButton *button,
 		}
 	}
 }
+#endif
 
 static gboolean 
 gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui)
@@ -1417,8 +1429,9 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	GtkWidget *autosave_hbox;
 	GtkWidget *save_frame;
 	gboolean auto_save;
+#if 0
 	GeditSaveEncodingSetting encoding;
-	
+#endif	
 	gedit_debug (DEBUG_PREFS, "");
 	
 	autosave_hbox = glade_xml_get_widget (gui, 
@@ -1476,7 +1489,8 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 				      auto_save );
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton),
 				   gedit_prefs_manager_get_auto_save_interval ());
-	
+
+#if 0	
 	encoding = gedit_prefs_manager_get_save_encoding ();
 
 	switch (encoding)
@@ -1511,14 +1525,14 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 			/* Not possible */
 			g_return_val_if_fail (FALSE, FALSE);
 	}
-	
+#endif	
 	/* Set sensitivity */
 	gtk_widget_set_sensitive (dlg->priv->backup_copy_checkbutton,
 				  gedit_prefs_manager_create_backup_copy_can_set ());
 
 	gtk_widget_set_sensitive (autosave_hbox, 
 				  gedit_prefs_manager_auto_save_can_set ()); 
-
+#if 0
 	gtk_widget_set_sensitive (save_frame,
 				  gedit_prefs_manager_save_encoding_can_set ());
 	
@@ -1526,7 +1540,10 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 				  gedit_prefs_manager_save_encoding_can_set () && 
 				  ((encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE) ||
 				   (encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)));
-
+#else
+	gtk_widget_set_sensitive (save_frame, FALSE);
+	gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
+#endif
 	gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, 
 			          auto_save &&
 				  gedit_prefs_manager_auto_save_interval_can_set ());
@@ -1543,7 +1560,7 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_signal_connect (G_OBJECT (dlg->priv->auto_save_spinbutton), "value_changed",
 			  G_CALLBACK (gedit_preferences_dialog_auto_save_spinbutton_value_changed),
 			  dlg);
-
+#if 0
 	g_signal_connect (G_OBJECT (dlg->priv->utf8_radiobutton), "toggled", 
 			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
 			  dlg);
@@ -1563,7 +1580,7 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_signal_connect (G_OBJECT (dlg->priv->create_locale_if_possible_radiobutton), "toggled", 
 			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
 			  dlg);
-
+#endif
 	return TRUE;
 }
 
@@ -1990,6 +2007,7 @@ gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg,
 	return TRUE;
 }
 
+#if 0
 static gboolean
 add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
@@ -2258,7 +2276,6 @@ gedit_preferences_dialog_down_enc_button_clicked (GtkButton *button, GeditPrefer
 	update_encodings_list (dlg);
 }
 
-
 static gboolean 
 gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -2408,6 +2425,7 @@ gedit_preferences_dialog_add_encodings (GeditPreferencesDialog *dlg, const GSLis
 
 	return changed;
 }
+#endif
 
 #define DEFAULT_FONT_SIZE 10
 

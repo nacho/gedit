@@ -296,7 +296,7 @@ init_shown_in_menu_tree_model (GtkListStore * store)
 	gedit_debug (DEBUG_PREFS, "");
 
 	/* add data to the list store */
-	list = gedit_prefs_manager_get_encodings ();
+	list = gedit_prefs_manager_get_shown_in_menu_encodings ();
 	
 	tmp = list;
 	
@@ -497,7 +497,9 @@ gedit_encoding_dialog_new (GtkWindow *transient_parent)
 static void
 update_list ()
 {
-	gedit_prefs_manager_set_encodings (show_in_menu_list);
+	g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
+	
+	gedit_prefs_manager_set_shown_in_menu_encodings (show_in_menu_list);
 }
 
 gboolean

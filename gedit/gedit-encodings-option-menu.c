@@ -193,7 +193,7 @@ update_menu (GeditEncodingsOptionMenu *option_menu)
 
 	menu = gtk_menu_new ();
 	
-	encodings = list = gedit_prefs_manager_get_encodings ();
+	encodings = list = gedit_prefs_manager_get_shown_in_menu_encodings ();
 
 	utf8_encoding = gedit_encoding_get_utf8 ();
 	current_encoding = gedit_encoding_get_current ();
@@ -296,19 +296,22 @@ update_menu (GeditEncodingsOptionMenu *option_menu)
 
 	g_slist_free (encodings);
 
-	menu_item = gtk_separator_menu_item_new ();
-      	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	gtk_widget_show (menu_item);
+	if (gedit_prefs_manager_shown_in_menu_encodings_can_set ())
+	{
+		menu_item = gtk_separator_menu_item_new ();
+	      	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+		gtk_widget_show (menu_item);
 
-	menu_item = gtk_menu_item_new_with_mnemonic (_("Add or _Remove..."));
+		menu_item = gtk_menu_item_new_with_mnemonic (_("Add or _Remove..."));
 
-	g_signal_connect (menu_item,
-			  "activate",
-			  G_CALLBACK (add_or_remove),
-			  option_menu);
+		g_signal_connect (menu_item,
+				  "activate",
+				  G_CALLBACK (add_or_remove),
+				  option_menu);
 	
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	gtk_widget_show (menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+		gtk_widget_show (menu_item);
+	}
 
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 }

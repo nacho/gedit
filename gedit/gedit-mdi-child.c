@@ -320,14 +320,14 @@ gedit_mdi_child_new (void)
 }
 
 GeditMDIChild*
-gedit_mdi_child_new_with_uri (const gchar *uri, GError **error)
+gedit_mdi_child_new_with_uri (const gchar *uri, const GeditEncoding *encoding, GError **error)
 {
 	GeditMDIChild *child;
 	GeditDocument* doc;
 	
 	gedit_debug (DEBUG_MDI, "");
 
-	doc = gedit_document_new_with_uri (uri, error);
+	doc = gedit_document_new_with_uri (uri, encoding, error);
 
 	if (doc == NULL)
 	{

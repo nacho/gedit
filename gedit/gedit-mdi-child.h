@@ -71,7 +71,9 @@ struct _GeditMDIChildClass
 GtkType        	gedit_mdi_child_get_type 	(void) G_GNUC_CONST;
 
 GeditMDIChild*	gedit_mdi_child_new		(void);
-GeditMDIChild*  gedit_mdi_child_new_with_uri 	(const gchar *uri, GError **error);
+GeditMDIChild*  gedit_mdi_child_new_with_uri 	(const gchar          *uri, 
+						 const GeditEncoding  *encoding,
+						 GError              **error);
 
 #endif /* __GEDIT_MDI_CHILD_H__ */
 

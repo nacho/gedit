@@ -53,8 +53,10 @@
 
 static gchar 	*get_dirname_from_uri 		(const char *uri);
 static gboolean  gedit_file_open_real 		(const gchar* file_name, 
+						 const GeditEncoding *encoding,
 						 GeditMDIChild* child);
 static gboolean  gedit_file_save_as_real 	(const gchar* file_name, 
+						 const GeditEncoding *encoding,
 						 GeditMDIChild *child);
 
 static gchar* gedit_default_path = NULL;
@@ -147,7 +149,6 @@ gedit_file_open (GeditMDIChild *active_child)
 	
 	gedit_debug (DEBUG_FILE, "");
 
-	encoding = gedit_encoding_get_current ();
 	files = gedit_file_selector_open_multi (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			TRUE,
@@ -163,7 +164,7 @@ gedit_file_open (GeditMDIChild *active_child)
 		{
 			gedit_debug (DEBUG_FILE, "[%d]: %s", i, files[i]);
 
-			if (gedit_file_open_real (files[i], active_child))
+			if (gedit_file_open_real (files[i], encoding, active_child))
 			{
 				gchar *uri_utf8;
 				
@@ -195,7 +196,7 @@ gedit_file_open (GeditMDIChild *active_child)
 }
 
 static gboolean
-gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
+gedit_file_open_real (const gchar* file_name, const GeditEncoding *encoding, GeditMDIChild* active_child)
 {
 	EggRecentItem *item;
 	GError *error = NULL;
@@ -215,11 +216,11 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 		gint ret;
 		GeditMDIChild* new_child = NULL;
 
-		new_child = gedit_mdi_child_new_with_uri (uri, &error);
+		new_child = gedit_mdi_child_new_with_uri (uri, encoding, &error);
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri, error,
+			gedit_utils_error_reporting_loading_file (uri, encoding, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -240,11 +241,11 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	}
 	else
 	{		
-		gedit_document_load (active_child->document, uri, &error);
+		gedit_document_load (active_child->document, uri, encoding, &error);
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri, error,
+			gedit_utils_error_reporting_loading_file (uri, encoding, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -464,7 +465,7 @@ gedit_file_save_as (GeditMDIChild *child)
 		if (file_utf8 != NULL)
 			gedit_utils_flash_va (_("Saving file '%s'..."), file_utf8);
 		
-		ret = gedit_file_save_as_real (uri, child);
+		ret = gedit_file_save_as_real (uri, encoding, child);
 		
 		if (ret)
 		{			
@@ -492,7 +493,7 @@ gedit_file_save_as (GeditMDIChild *child)
 }
 
 static gboolean
-gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
+gedit_file_save_as_real (const gchar* file_name, const GeditEncoding *encoding, GeditMDIChild *child)
 {
 	gchar *uri;
 	gboolean ret;
@@ -509,7 +510,7 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	uri = eel_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
-	ret = gedit_document_save_as (doc, uri, &error);
+	ret = gedit_document_save_as (doc, uri, encoding, &error);
 
 	if (!ret)
 	{
@@ -741,7 +742,7 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 		{
 			if (!gedit_utils_uri_has_file_scheme (full_path) || gedit_utils_uri_exists (full_path))
 			{
-				if (gedit_file_open_real (full_path, 
+				if (gedit_file_open_real (full_path,  NULL,
 					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
 				{
 					++loaded_files;
@@ -785,7 +786,7 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 
 					if (created)
 					{
-						if (gedit_file_open_real (full_path, 
+						if (gedit_file_open_real (full_path, NULL /*FIXME */, 
 							(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
 						{
 							++loaded_files;
@@ -837,7 +838,8 @@ gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 
 	/* Note that gedit_file_open_single_uri takes a possibly mangled "uri", in UTF8 */
 
-	ret = gedit_file_open_single_uri (uri_utf8);
+	/* FIXME */
+	ret = gedit_file_open_single_uri (uri_utf8, NULL);
 	
 	if (!ret) 
 	{
@@ -867,7 +869,7 @@ gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
  *  uri: a possibly mangled "uri", in UTF8
  */
 gboolean 
-gedit_file_open_single_uri (const gchar* uri)
+gedit_file_open_single_uri (const gchar* uri, const GeditEncoding *encoding)
 {
 	gchar *full_path;
 	gboolean ret = TRUE;
@@ -884,7 +886,7 @@ gedit_file_open_single_uri (const gchar* uri)
 
 		active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 		
-		ret = gedit_file_open_real (full_path, 
+		ret = gedit_file_open_real (full_path, encoding,
 					    (active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
 		if (ret)
 		{

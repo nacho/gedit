@@ -18,7 +18,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. * *
+ * Boston, MA 02111-1307, USA.
  */
  
 /*
@@ -31,11 +31,28 @@
 #define __GEDIT_CONVERT_H__
 
 #include <glib.h>
+#include <gedit/gedit-encodings.h>
 
-gchar *gedit_convert_to_utf8 (const gchar  *content,
-			      gsize         len,
-			      gchar       **encoding);
+typedef enum 
+{
+	GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED = 1100,
+	GEDIT_CONVERT_ERROR_BINARY_FILE,
+	GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE
+} GeditConvertError;
 
+#define GEDIT_CONVERT_ERROR gedit_convert_error_quark()
+GQuark gedit_convert_error_quark (void);
+
+
+gchar *gedit_convert_to_utf8   (const gchar          *content, 
+				gsize                 len,
+				const GeditEncoding **encoding,
+				GError              **error);
+
+gchar *gedit_convert_from_utf8 (const gchar          *content, 
+				gsize                 len,
+				const GeditEncoding  *encoding,
+				GError              **error);
 
 #endif /* __GEDIT_CONVERT_H__ */
 

@@ -36,7 +36,7 @@
 #include <gtk/gtkdialog.h>
 #include <gtk/gtktextiter.h>
 #include <atk/atk.h>
-
+#include <gedit/gedit-encodings.h>
 
 void	gedit_utils_flash     (gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
@@ -56,6 +56,7 @@ gchar *gedit_utils_str_middle_truncate (const gchar *string,
 					guint truncate_length);
 
 void gedit_utils_error_reporting_loading_file (const gchar *uri, 
+					       const GeditEncoding *encoding,
 					       GError *error,
 					       GtkWindow *parent);
 void gedit_utils_error_reporting_saving_file  (const gchar *uri, 

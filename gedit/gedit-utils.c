@@ -52,6 +52,7 @@
 #include "gedit-document.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
+#include "gedit-convert.h"
 
 #define STDIN_DELAY_MICROSECONDS 100000
 
@@ -370,13 +371,15 @@ finally_2:
 void
 gedit_utils_error_reporting_loading_file (
 		const gchar *uri,
+		const GeditEncoding *encoding,
 		GError *error,
 		GtkWindow *parent)
 {
 	gchar *scheme_string;
-	gchar *error_message;
+	gchar *error_message = NULL;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
+	gchar *encoding_name = NULL;
 	
 	GnomeVFSURI *vfs_uri;
 	
@@ -395,194 +398,278 @@ gedit_utils_error_reporting_loading_file (
 			MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
 
-	switch (error->code)
+	if (encoding != NULL)
+		encoding_name = gedit_encoding_to_string (encoding);
+	else
+		encoding_name = g_strdup ("UTF-8");
+	
+	if (error->domain == GEDIT_DOCUMENT_IO_ERROR)
 	{
-		case GNOME_VFS_ERROR_NOT_FOUND:
-			error_message = g_strdup_printf (
-                        	_("Could not find the file \"%s\".\n\n"
-			   	  "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-			break;
-
-		case GNOME_VFS_ERROR_CORRUPTED_DATA:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\" because "
-			   	   "it contains corrupted data."),
-			 	uri_for_display);
-			break;			 
-
-		case GNOME_VFS_ERROR_NOT_SUPPORTED:
-			scheme_string = eel_uri_get_scheme (uri);
+		switch (error->code)
+		{
+			case GNOME_VFS_ERROR_NOT_FOUND:
+				error_message = g_strdup_printf (
+       	                 		_("Could not find the file \"%s\".\n\n"
+					  "Please, check that you typed the location correctly "
+					  "and try again."),
+       		                 	uri_for_display);
+				break;
+	
+			case GNOME_VFS_ERROR_CORRUPTED_DATA:
+				error_message = g_strdup_printf (
+       	                 		_("Could not open the file \"%s\" because "
+				   	   "it contains corrupted data."),
+				 	uri_for_display);
+				break;			 
+	
+			case GNOME_VFS_ERROR_NOT_SUPPORTED:
+				scheme_string = eel_uri_get_scheme (uri);
                 
-			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
-			{
+				if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
+				{
+					error_message = g_strdup_printf (
+						_("Could not open the file \"%s\" because "
+						  "gedit cannot handle %s: locations."),
+       	                        	 	uri_for_display, scheme_string);
+				}
+				else
+					error_message = g_strdup_printf (
+						_("Could not open the file \"%s\""),
+       	                         		uri_for_display);
+			
+				if (scheme_string != NULL)
+					g_free (scheme_string);
+	
+       		 	        break;
+					
+			case GNOME_VFS_ERROR_WRONG_FORMAT:
+				error_message = g_strdup_printf (
+       		                 	_("Could not open the file \"%s\" because "
+				   	  "it contains data in an invalid format."),
+				 	uri_for_display);
+				break;	
+
+			case GNOME_VFS_ERROR_TOO_BIG:
+				error_message = g_strdup_printf (
+                        		_("Could not open the file \"%s\" because "
+			   		  "it is too big."),
+			 		uri_for_display);
+				break;	
+
+			case GNOME_VFS_ERROR_INVALID_URI:
+				error_message = g_strdup_printf (
+                	        	_("\"%s\" is not a valid location.\n\n"
+					  "Please, check that you typed the location "
+					  "correctly and try again."),
+                         		uri_for_display);
+	                	break;
+	
+			case GNOME_VFS_ERROR_ACCESS_DENIED:
 				error_message = g_strdup_printf (
 					_("Could not open the file \"%s\" because "
-					  "gedit cannot handle %s: locations."),
-                                	uri_for_display, scheme_string);
-			}
-			else
+					  "access was denied."),
+	                         	uri_for_display);
+        	        	break;
+
+			case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
 				error_message = g_strdup_printf (
-					_("Could not open the file \"%s\""),
-                                	uri_for_display);
-	
-			if (scheme_string != NULL)
-				g_free (scheme_string);
+					_("Could not open the file \"%s\" because "
+					  "there are too many open files.\n\n"
+					  "Please, close some open file and try again."),
+                	         	uri_for_display);
+                		break;
 
-        	        break;
-				
-		case GNOME_VFS_ERROR_WRONG_FORMAT:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\" because "
-			   	  "it contains data in an invalid format."),
-			 	uri_for_display);
-			break;	
+			case GNOME_VFS_ERROR_IS_DIRECTORY:
+				error_message = g_strdup_printf (
+					_("\"%s\" is a directory.\n\n"
+					  "Please, check that you typed the location "
+					  "correctly and try again."),
+                         		uri_for_display);
+	                	break;
 
-		case GNOME_VFS_ERROR_TOO_BIG:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\" because "
-			   	   "it is too big."),
-			 	uri_for_display);
-			break;	
+			case GNOME_VFS_ERROR_NO_MEMORY:
+				error_message = g_strdup_printf (
+					_("Not enough available memory to open the file \"%s\". "
+					  "Please, close some running application and try again."),
+	                         	uri_for_display);
+        	        	break;
 
-		case GNOME_VFS_ERROR_INVALID_URI:
-			error_message = g_strdup_printf (
-                        	_("\"%s\" is not a valid location.\n\n"
-				   "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
-	
-		case GNOME_VFS_ERROR_ACCESS_DENIED:
-			error_message = g_strdup_printf (
-				_("Could not open the file \"%s\" because "
-				  "access was denied."),
-                         	uri_for_display);
-                	break;
-
-		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-			error_message = g_strdup_printf (
-				_("Could not open the file \"%s\" because "
-				  "there are too many open files.\n\n"
-				  "Please, close some open file and try again."),
-                         	uri_for_display);
-                	break;
-
-		case GNOME_VFS_ERROR_IS_DIRECTORY:
-			error_message = g_strdup_printf (
-				_("\"%s\" is a directory.\n\n"
-				  "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
-
-		case GNOME_VFS_ERROR_NO_MEMORY:
-			error_message = g_strdup_printf (
-				_("Not enough available memory to open the file \"%s\". "
-				  "Please, close some running application and try again."),
-                         	uri_for_display);
-                	break;
-
-		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
-			/* This case can be hit for user-typed strings like "foo" due to
-		 	* the code that guesses web addresses when there's no initial "/".
-		 	* But this case is also hit for legitimate web addresses when
-		 	* the proxy is set up wrong.
-		 	*/
-			{
-				gchar *host_name;
-				vfs_uri = gnome_vfs_uri_new (uri);
-				
-				if (vfs_uri == NULL)
-					host_name = g_strdup ("XXX");
-				else
+			case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+				/* This case can be hit for user-typed strings like "foo" due to
+			 	* the code that guesses web addresses when there's no initial "/".
+			 	* But this case is also hit for legitimate web addresses when
+			 	* the proxy is set up wrong.
+		 		*/
 				{
-					host_name = eel_make_valid_utf8 (
+					gchar *host_name;
+					vfs_uri = gnome_vfs_uri_new (uri);
+				
+					if (vfs_uri == NULL)
+						host_name = g_strdup ("XXX");
+					else
+					{
+						host_name = eel_make_valid_utf8 (
 							gnome_vfs_uri_get_host_name (vfs_uri));
 
-					gnome_vfs_uri_unref (vfs_uri);		
-				}
+						gnome_vfs_uri_unref (vfs_uri);		
+					}
 				
-                		error_message = g_strdup_printf (
-					_("Could not open the file \"%s\" because no host \"%s\" " 
-				  	  "could be found.\n\n"
-                		  	  "Please, check that you typed the location correctly "
-				  	  "and that your proxy settings are correct and then "
-				  	  "try again."),
-					  uri_for_display,
-					  host_name);
+	                		error_message = g_strdup_printf (
+						_("Could not open the file \"%s\" because no host \"%s\" " 
+					  	  "could be found.\n\n"
+                			  	  "Please, check that you typed the location correctly "
+					  	  "and that your proxy settings are correct and then "
+				  		  "try again."),
+						  uri_for_display,
+						  host_name);
 
-				g_free (host_name);
-			}
+					g_free (host_name);
+				}
 
-			break;
+				break;
 
-		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\" because the host name was invalid.\n\n"
-				   "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
+			case GNOME_VFS_ERROR_INVALID_HOST_NAME:
+				error_message = g_strdup_printf (
+                        		_("Could not open the file \"%s\" because the host name "
+					  "was invalid.\n\n"
+				   	  "Please, check that you typed the location correctly "
+					  "and try again."),
+	                         	uri_for_display);
+                		break;
 
-		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
-			error_message = g_strdup_printf (
-				_("Could not open the file \"%s\" because the host name was empty.\n\n"
-				  "Please, check that your proxy settings are correct and try again."),
-				uri_for_display);
-			break;
+			case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
+				error_message = g_strdup_printf (
+					_("Could not open the file \"%s\" because the host name "
+					  "was empty.\n\n"
+					  "Please, check that your proxy settings are correct "
+					  "and try again."),
+					uri_for_display);
+				break;
 		
-		case GNOME_VFS_ERROR_LOGIN_FAILED:
-			error_message = g_strdup_printf (
-				_("Could not open the file \"%s\" because the attempt to "
-				  "log in failed.\n\n"
-				  "Please, check that you typed the location correctly and try again."),
-				uri_for_display);		
-			break;
+			case GNOME_VFS_ERROR_LOGIN_FAILED:
+				error_message = g_strdup_printf (
+					_("Could not open the file \"%s\" because the attempt to "
+					  "log in failed.\n\n"
+					  "Please, check that you typed the location correctly "
+					  "and try again."),
+					uri_for_display);		
+				break;
 
-		case GEDIT_ERROR_INVALID_UTF8_DATA:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\" because "
-			   	  "it contains invalid UTF-8 data.\n\n"
-				  "Probably, you are trying to open a binary file."),
-			 	uri_for_display);
+			case GEDIT_ERROR_INVALID_UTF8_DATA:
+				error_message = g_strdup_printf (
+                	        	_("Could not open the file \"%s\" because "
+				   	  "it contains invalid data.\n\n"
+				  	  "Probably, you are trying to open a binary file."),
+				 	uri_for_display);
 
-			break;
+				break;
 
-		/*
-		case GNOME_VFS_ERROR_GENERIC:
-		case GNOME_VFS_ERROR_INTERNAL:
-		case GNOME_VFS_ERROR_BAD_PARAMETERS:
-		case GNOME_VFS_ERROR_IO:
-		case GNOME_VFS_ERROR_BAD_FILE:
-		case GNOME_VFS_ERROR_NO_SPACE:
-		case GNOME_VFS_ERROR_READ_ONLY:
-		case GNOME_VFS_ERROR_NOT_OPEN:
-		case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
-		case GNOME_VFS_ERROR_EOF:
-		case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
-		case GNOME_VFS_ERROR_IN_PROGRESS:
-		case GNOME_VFS_ERROR_INTERRUPTED:
-		case GNOME_VFS_ERROR_FILE_EXISTS:
-		case GNOME_VFS_ERROR_LOOP:
-		case GNOME_VFS_ERROR_NOT_PERMITTED:
-		case GNOME_VFS_ERROR_CANCELLED:
-		case GNOME_VFS_ERROR_DIRECTORY_BUSY:
-		case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
-		case GNOME_VFS_ERROR_TOO_MANY_LINKS:
-		case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
-		case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
-		case GNOME_VFS_ERROR_NAME_TOO_LONG:
-		case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
-		case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
-		case GNOME_VFS_ERROR_PROTOCOL_ERROR,
-		case GNOME_VFS_NUM_ERRORS:
-		*/
-		default:
-			error_message = g_strdup_printf (
-                        	_("Could not open the file \"%s\"."),
-			 	uri_for_display);
+			/*
+			case GNOME_VFS_ERROR_GENERIC:
+			case GNOME_VFS_ERROR_INTERNAL:
+			case GNOME_VFS_ERROR_BAD_PARAMETERS:
+			case GNOME_VFS_ERROR_IO:
+			case GNOME_VFS_ERROR_BAD_FILE:
+			case GNOME_VFS_ERROR_NO_SPACE:
+			case GNOME_VFS_ERROR_READ_ONLY:
+			case GNOME_VFS_ERROR_NOT_OPEN:
+			case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
+			case GNOME_VFS_ERROR_EOF:
+			case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
+			case GNOME_VFS_ERROR_IN_PROGRESS:
+			case GNOME_VFS_ERROR_INTERRUPTED:
+			case GNOME_VFS_ERROR_FILE_EXISTS:
+			case GNOME_VFS_ERROR_LOOP:
+			case GNOME_VFS_ERROR_NOT_PERMITTED:
+			case GNOME_VFS_ERROR_CANCELLED:
+			case GNOME_VFS_ERROR_DIRECTORY_BUSY:
+			case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
+			case GNOME_VFS_ERROR_TOO_MANY_LINKS:
+			case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
+			case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
+			case GNOME_VFS_ERROR_NAME_TOO_LONG:
+			case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
+			case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
+			case GNOME_VFS_ERROR_PROTOCOL_ERROR,
+			case GNOME_VFS_NUM_ERRORS:
+			*/
+		}
+	}
+	else if (error->domain == GEDIT_CONVERT_ERROR)
+	{
+		switch (error->code)
+		{
+			case GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED:
+				error_message = g_strdup_printf (
+                	        	_("Could not open the file \"%s\" because "
+				   	  "gedit has not been able to automatically detect "
+					  "the character coding.\n\n"
+					  "Please, check that you are not trying to open a binary file "
+					  "and try again selecting a character coding in the 'Open File...' "
+					  "(or 'Open Location') dialog."),
+				 	uri_for_display);
 
-			break;
+				break;
+
+			case GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE:
+				error_message = g_strdup_printf (
+                	        	_("Could not open the file \"%s\" using "
+					  "the %s character coding.\n\n"
+					  "Please, check that you are not trying to open a binary file "
+					  "and that you selected the right "
+					  "character coding in the 'Open File...' (or 'Open Location') "
+					  "dialog and try again."),
+					uri_for_display, encoding_name);
+
+				break;
+			
+			case GEDIT_CONVERT_ERROR_BINARY_FILE:
+				error_message = g_strdup_printf (
+                	        	_("Could not open the file \"%s\" because "
+				   	  "it contains invalid data.\n\n"
+				  	  "Probably, you are trying to open a binary file."),
+				 	uri_for_display);
+
+				break;
+	  
+		}
+	}
+	else if (error->domain == G_CONVERT_ERROR)
+	{
+		switch (error->code)
+		{
+			case G_CONVERT_ERROR_NO_CONVERSION:
+			case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
+			case G_CONVERT_ERROR_FAILED:
+			case G_CONVERT_ERROR_PARTIAL_INPUT:
+				error_message = g_strdup_printf (
+					_("Could not open the file \"%s\" using "
+					  "the %s character coding.\n\n"
+					  "Please, check that you are not trying to open a binary file "
+					  "and that you selected the right "
+					  "character coding in the 'Open File...' (or 'Open Location') "
+					  "dialog and try again."),
+					uri_for_display, encoding_name);
+				break;
+
+		}
 	}
 	
+	if (error_message == NULL)
+	{
+		if (error->message == NULL)
+			error_message = g_strdup_printf (
+                        			_("Could not open the file \"%s\"."),
+					 	uri_for_display);
+		else
+			error_message = g_strdup_printf (
+                        			_("Could not open the file \"%s\".\n\n%s"),
+					 	uri_for_display, error->message);
+
+	}
+
+	g_free (encoding_name);
+
 	dialog = gtk_message_dialog_new (
 			parent,
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,

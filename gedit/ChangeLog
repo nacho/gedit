@@ -1,3 +1,33 @@
+2003-06-06  Paolo Maggi <paolo.maggi@polito.it> 
+
+	New way for managing encodings.
+
+	Modified files:
+
+	* gedit-convert.[ch]: rewritten
+
+	* gedit-document.[ch]: load and save need an encoding parameter
+
+	* gedit-encodings-option-menu.c: uses new gconf keys
+
+	* gedit-file.[ch]: uses modified gedit-document functions
+
+	* gedit-mdi-child.[ch]: ditto
+
+	* gedit2.c: ditto
+
+	* gedit-prefs-manager.[ch]: supports new gconf keys
+
+	* gedit-utils.c: new error messages
+
+	* dialogs/gedit-dialog-uri.c:
+	*  dialogs/uri.glade2: add new Character coding option menu
+
+	* dialogs/gedit-encodings-dialog.c:  uses new gconf keys
+
+	* dialogs/gedit-preferences-dialog.c: removed Load page and commented out
+	part of the Save dialog
+
 2003-06-03  Paolo Maggi <paolo.maggi@polito.it> 
 
 	* dialogs/gedit-plugin-manager.c:

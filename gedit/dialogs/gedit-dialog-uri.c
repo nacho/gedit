@@ -41,6 +41,7 @@
 #include "gedit-utils.h"
 #include "gedit-file.h"
 #include "gedit-dialogs.h"
+#include "gedit-encodings-option-menu.h"
 
 typedef struct _GeditDialogOpenUri GeditDialogOpenUri;
 
@@ -49,6 +50,7 @@ struct _GeditDialogOpenUri {
 
 	GtkWidget *uri;
 	GtkWidget *uri_list;
+	GtkWidget *encoding_menu;
 };
 
 static void open_button_pressed (GeditDialogOpenUri * dialog);
@@ -62,7 +64,9 @@ dialog_open_uri_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-
+	GtkWidget *encoding_label;
+	GtkWidget *encoding_hbox;
+	
 	if (dialog != NULL)
 		return dialog;
 
@@ -97,12 +101,27 @@ dialog_open_uri_get_dialog (void)
 
 	dialog->uri = glade_xml_get_widget (gui, "uri");
 	dialog->uri_list = glade_xml_get_widget (gui, "uri_list");
-
-	if (!dialog->uri || !dialog->uri_list) {
-		g_print
-		    ("Could not find the required widgets inside uri.glade.\n");
+	encoding_label = glade_xml_get_widget (gui, "encoding_label");
+	encoding_hbox = glade_xml_get_widget (gui, "encoding_hbox");
+	
+	if (!dialog->uri || !dialog->uri_list || !encoding_label || !encoding_hbox) 
+	{
+		g_print ("Could not find the required widgets inside uri.glade.\n");
 		return NULL;
 	}
+
+	dialog->encoding_menu = gedit_encodings_option_menu_new (FALSE);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (encoding_label),
+				       dialog->encoding_menu);
+
+	gtk_box_pack_end (GTK_BOX (encoding_hbox), 
+			  dialog->encoding_menu,
+			  TRUE,
+			  TRUE,
+			  0);
+
+	gtk_widget_show (dialog->encoding_menu);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
@@ -129,6 +148,10 @@ gedit_dialog_open_uri (void)
 		g_warning ("Could not create the Open URI dialog");
 		return;
 	}
+
+	gedit_encodings_option_menu_set_selected_encoding (
+		GEDIT_ENCODINGS_OPTION_MENU (dialog->encoding_menu),
+		NULL);	
 
 	gtk_widget_grab_focus (dialog->uri);
 
@@ -162,7 +185,8 @@ static void
 open_button_pressed (GeditDialogOpenUri * dialog)
 {
 	gchar *file_name = NULL;
-
+	const GeditEncoding *encoding;
+	
 	g_return_if_fail (dialog != NULL);
 
 	file_name =
@@ -174,7 +198,10 @@ open_button_pressed (GeditDialogOpenUri * dialog)
 
 	gtk_widget_hide (dialog->dialog);
 
-	gedit_file_open_single_uri (file_name);
+	encoding = gedit_encodings_option_menu_get_selected_encoding (
+			GEDIT_ENCODINGS_OPTION_MENU (dialog->encoding_menu));
+	
+	gedit_file_open_single_uri (file_name, encoding);
 
 	g_free (file_name);
 }

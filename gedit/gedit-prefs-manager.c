@@ -548,76 +548,6 @@ DEFINE_INT_PREF (auto_save_interval,
 		 GPM_DEFAULT_AUTO_SAVE_INTERVAL);
 
 
-/* Save encoding */
-GeditSaveEncodingSetting 
-gedit_prefs_manager_get_save_encoding (void)
-{
-	gchar *str;
-	GeditSaveEncodingSetting res;
-	
-	gedit_debug (DEBUG_PREFS, "");
-	
-	str = gedit_prefs_manager_get_string (GPM_SAVE_ENCODING,
-					      GPM_DEFAULT_SAVE_ENCODING);
-
-	if (strcmp (str, "GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE") == 0)
-		res = GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE;
-	else
-	{
-		if (strcmp (str, "GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE") == 0)
-			res = GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE;
-		else
-		{
-			if (strcmp (str, "GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL") == 0)
-				res = GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL;
-			else	
-				res = GEDIT_SAVE_ALWAYS_UTF8;
-		}
-	}
-
-	g_free (str);
-
-	return res;
-}
-
-
-void
-gedit_prefs_manager_set_save_encoding (GeditSaveEncodingSetting se)
-{
-	const gchar * str;
-	
-	gedit_debug (DEBUG_PREFS, "");
-
-	switch (se)
-	{
-		case GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE:
-			str = "GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE";
-			break;
-
-		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE:
-			str = "GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE";
-			break;
-
-		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL:
-			str = "GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL";
-			break;
-
-		default: /* GEDIT_SAVE_ALWAYS_UTF8 */
-			str = "GEDIT_SAVE_ALWAYS_UTF8";
-	}
-
-	gedit_prefs_manager_set_string (GPM_SAVE_ENCODING,
-					str);
-}
-
-gboolean
-gedit_prefs_manager_save_encoding_can_set (void)
-{
-	gedit_debug (DEBUG_PREFS, "");
-	
-	return gedit_prefs_manager_key_is_writable (GPM_SAVE_ENCODING);
-}
-
 /* Undo actions limit: if < 1 then no limits */
 DEFINE_INT_PREF (undo_actions_limit,
 		 GPM_UNDO_ACTIONS_LIMIT,
@@ -920,8 +850,24 @@ gedit_prefs_manager_get_max_recents (void)
 }
 
 /* Encodings */
+
+static gboolean
+data_exists (GSList         *list,
+	    const gpointer  data)
+{
+	while (list != NULL)
+	{
+      		if (list->data == data)
+			return TRUE;
+
+		list = g_slist_next (list);
+    	}
+
+  	return FALSE;
+}
+
 GSList *
-gedit_prefs_manager_get_encodings (void)
+gedit_prefs_manager_get_auto_detected_encodings (void)
 {
 	GSList *strings;
 	GSList *res = NULL;
@@ -931,7 +877,78 @@ gedit_prefs_manager_get_encodings (void)
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
 
 	strings = gconf_client_get_list (gedit_prefs_manager->gconf_client,
-				GPM_ENCODINGS,
+				GPM_AUTO_DETECTED_ENCODINGS,
+				GCONF_VALUE_STRING, 
+				NULL);
+
+	if (strings == NULL)
+	{
+		gint i = 0;
+		const gchar* s[] = GPM_DEFAULT_AUTO_DETECTED_ENCODINGS;
+
+		while (s[i] != NULL)
+		{
+			strings = g_slist_prepend (strings, g_strdup (s[i]));
+
+			++i;
+		}
+
+
+		strings = g_slist_reverse (strings);
+	}
+
+	if (strings != NULL)
+	{	
+		GSList *tmp;
+		const GeditEncoding *enc;
+
+		tmp = strings;
+		
+		while (tmp)
+		{
+		      const char *charset = tmp->data;
+      
+		      if (strcmp (charset, "CURRENT") == 0)
+			      g_get_charset (&charset);
+
+		      g_return_val_if_fail (charset != NULL, NULL);
+		      enc = gedit_encoding_get_from_charset (charset);
+		      
+		      if (enc != NULL)
+		      {
+			      if (!data_exists (res, (const gpointer)enc))
+				      res = g_slist_prepend (res, (gpointer)enc);
+
+		      }
+
+		      tmp = g_slist_next (tmp);
+		}
+
+		g_slist_foreach (strings, (GFunc) g_free, NULL);
+		g_slist_free (strings);    
+
+	 	res = g_slist_reverse (res);
+	}
+
+	gedit_debug (DEBUG_PREFS, "Done");
+
+	return res;
+}
+
+
+
+GSList *
+gedit_prefs_manager_get_shown_in_menu_encodings (void)
+{
+	GSList *strings;
+	GSList *res = NULL;
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
+	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
+
+	strings = gconf_client_get_list (gedit_prefs_manager->gconf_client,
+				GPM_SHOWN_IN_MENU_ENCODINGS,
 				GCONF_VALUE_STRING, 
 				NULL);
 
@@ -946,14 +963,17 @@ gedit_prefs_manager_get_encodings (void)
 		{
 		      const char *charset = tmp->data;
 
-		      if (strcmp (charset, "current") == 0)
+		      if (strcmp (charset, "CURRENT") == 0)
 			      g_get_charset (&charset);
       
 		      g_return_val_if_fail (charset != NULL, NULL);
 		      enc = gedit_encoding_get_from_charset (charset);
 		      
 		      if (enc != NULL)
-				res = g_slist_prepend (res, (gpointer)enc);
+		      {
+			      if (!data_exists (res, (const gpointer)enc))
+				      res = g_slist_prepend (res, (gpointer)enc);
+		      }
 
 		      tmp = g_slist_next (tmp);
 		}
@@ -968,13 +988,13 @@ gedit_prefs_manager_get_encodings (void)
 }
 
 void
-gedit_prefs_manager_set_encodings (const GSList *encs)
+gedit_prefs_manager_set_shown_in_menu_encodings (const GSList *encs)
 {	
 	GSList *list = NULL;
 	
 	g_return_if_fail (gedit_prefs_manager != NULL);
 	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
-	g_return_if_fail (gedit_prefs_manager_encodings_can_set ());
+	g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
 
 	while (encs != NULL)
 	{
@@ -994,7 +1014,7 @@ gedit_prefs_manager_set_encodings (const GSList *encs)
 	list = g_slist_reverse (list);
 		
 	gconf_client_set_list (gedit_prefs_manager->gconf_client,
-			GPM_ENCODINGS,
+			GPM_SHOWN_IN_MENU_ENCODINGS,
 			GCONF_VALUE_STRING,
 		       	list,
 			NULL);	
@@ -1003,11 +1023,11 @@ gedit_prefs_manager_set_encodings (const GSList *encs)
 }
 
 gboolean
-gedit_prefs_manager_encodings_can_set (void)
+gedit_prefs_manager_shown_in_menu_encodings_can_set (void)
 {
 	gedit_debug (DEBUG_PREFS, "");
 	
-	return gedit_prefs_manager_key_is_writable (GPM_ENCODINGS);
+	return gedit_prefs_manager_key_is_writable (GPM_SHOWN_IN_MENU_ENCODINGS);
 
 }
 

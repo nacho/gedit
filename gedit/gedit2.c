@@ -285,18 +285,34 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 
 	if (stdin_data != NULL && strlen (stdin_data) > 0)
 	{
+		GError *conv_error = NULL;
+		const GeditEncoding *encoding;
 		gchar *converted_text;
 
-		if (g_utf8_validate (stdin_data, -1, NULL))
+		if (gedit_encoding_get_current () != gedit_encoding_get_utf8 ())
 		{
-			converted_text = stdin_data;
-			stdin_data = NULL;
+			if (g_utf8_validate (stdin_data, -1, NULL))
+			{
+				converted_text = stdin_data;
+				stdin_data = NULL;
+
+				encoding = gedit_encoding_get_utf8 ();
+			}
+			else
+			{
+				converted_text = NULL;
+			}
 		}
 		else
+		{	
+			encoding = gedit_encoding_get_current ();
+				
 			converted_text = gedit_convert_to_utf8 (stdin_data,
-							-1,
-							NULL);
-
+								-1,
+								&encoding,
+								&conv_error);
+		}	
+		
 		if (converted_text != NULL)
 		{
 			window = GNOME_Gedit_Application_getActiveWindow (server, &env);

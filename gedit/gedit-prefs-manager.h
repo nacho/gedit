@@ -57,8 +57,6 @@
 #define GPM_AUTO_SAVE			GPM_SAVE_DIR "/auto_save"
 #define GPM_AUTO_SAVE_INTERVAL		GPM_SAVE_DIR "/auto_save_interval"
 
-#define GPM_SAVE_ENCODING		GPM_SAVE_DIR "/save_encoding"
-
 #define GPM_UNDO_DIR			GPM_PREFS_DIR  "/editor/undo"
 #define GPM_UNDO_ACTIONS_LIMIT		GPM_UNDO_DIR "/undo_actions_limit"
 
@@ -75,9 +73,6 @@
 #define GPM_LINE_NUMBERS_DIR		GPM_PREFS_DIR "/editor/line_numbers"
 #define GPM_DISPLAY_LINE_NUMBERS 	GPM_LINE_NUMBERS_DIR "/display_line_numbers"
 
-#define GPM_LOAD_DIR			GPM_PREFS_DIR "/editor/load"
-#define GPM_ENCODINGS			GPM_LOAD_DIR "/encodings"
-
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
 #define GPM_TOOLBAR_VISIBLE	 	GPM_TOOLBAR_DIR "/toolbar_visible"
@@ -89,7 +84,7 @@
 #define GRM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
 #define GPM_MAX_RECENTS			GRM_RECENTS_DIR "/max_recents"
 
-/* Print*/
+/* Print */
 #define GPM_PRINT_PAGE_DIR		GPM_PREFS_DIR "/print/page"
 #define GPM_PRINT_HEADER		GPM_PRINT_PAGE_DIR "/print_header"
 #define GPM_PRINT_WRAP_MODE		GPM_PRINT_PAGE_DIR "/print_wrap_mode"
@@ -104,6 +99,11 @@
 #define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
 #define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
 #define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
+
+/* Encodings */
+#define GPM_ENCODINGS_DIR		GPM_PREFS_DIR "/encodings"
+#define GPM_AUTO_DETECTED_ENCODINGS	GPM_ENCODINGS_DIR "/auto_detected"
+#define GPM_SHOWN_IN_MENU_ENCODINGS	GPM_ENCODINGS_DIR "/shown_in_menu"
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -135,7 +135,7 @@
 
 #define GPM_DEFAULT_DISPLAY_LINE_NUMBERS 0 /* FALSE */
 
-#define GPM_DEFAULT_ENCODINGS		{"ISO-8859-15", NULL}
+#define GPM_DEFAULT_AUTO_DETECTED_ENCODINGS {"UTF-8", "CURRENT", "ISO-8859-15", NULL}
        	
 #define GPM_DEFAULT_TOOLBAR_VISIBLE	1 /* TRUE */
 #define GPM_DEFAULT_TOOLBAR_BUTTONS_STYLE "GEDIT_TOOLBAR_SYSTEM"
@@ -168,13 +168,6 @@ typedef enum {
 	GEDIT_TOOLBAR_ICONS_AND_TEXT,
 	GEDIT_TOOLBAR_ICONS_BOTH_HORIZ
 } GeditToolbarSetting;
-
-typedef enum {
-	GEDIT_SAVE_ALWAYS_UTF8 = 0,
-	GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE,
-	GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE,
-	GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL
-} GeditSaveEncodingSetting;
 
 /** LIFE CYCLE MANAGEMENT FUNCTIONS **/
 
@@ -238,11 +231,6 @@ gboolean		 gedit_prefs_manager_auto_save_can_set		(void);
 gint			 gedit_prefs_manager_get_auto_save_interval	(void);
 void			 gedit_prefs_manager_set_auto_save_interval	(gint asi);
 gboolean		 gedit_prefs_manager_auto_save_interval_can_set	(void);
-
-/* Save encoding */
-GeditSaveEncodingSetting gedit_prefs_manager_get_save_encoding		(void);
-void			 gedit_prefs_manager_set_save_encoding		(GeditSaveEncodingSetting se);
-gboolean 		 gedit_prefs_manager_save_encoding_can_set	(void);
 
 /* Undo actions limit: if < 1 then no limits */
 gint 			 gedit_prefs_manager_get_undo_actions_limit	(void);
@@ -329,9 +317,11 @@ const gchar		*gedit_prefs_manager_get_default_print_font_numbers (void);
 gint		 	 gedit_prefs_manager_get_max_recents		(void);
 
 /* Encodings */
-GSList 			*gedit_prefs_manager_get_encodings		(void);
-void			 gedit_prefs_manager_set_encodings		(const GSList *encs);
-gboolean 		 gedit_prefs_manager_encodings_can_set		(void);
+GSList 			*gedit_prefs_manager_get_auto_detected_encodings (void);
+
+GSList			*gedit_prefs_manager_get_shown_in_menu_encodings (void);
+void			 gedit_prefs_manager_set_shown_in_menu_encodings (const GSList *encs);
+gboolean 		 gedit_prefs_manager_shown_in_menu_encodings_can_set (void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

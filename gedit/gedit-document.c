@@ -101,7 +101,8 @@ static void gedit_document_real_saved			(GeditDocument *document);
 static void gedit_document_real_readonly_changed	(GeditDocument *document,
 							 gboolean readonly);
 
-static gboolean	gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, 
+static gboolean	gedit_document_save_as_real (GeditDocument *doc, const gchar *uri,
+	       				     const GeditEncoding *encoding,	
 					     gboolean create_backup_copy, GError **error);
 static void gedit_document_set_uri (GeditDocument* doc, const gchar* uri);
 
@@ -115,6 +116,8 @@ static GHashTable* allocated_untitled_numbers = NULL;
 
 static gint gedit_document_get_untitled_number (void);
 static void gedit_document_release_untitled_number (gint n);
+
+static void gedit_document_set_encoding (GeditDocument *doc, const GeditEncoding *encoding);
 
 static gint
 gedit_document_get_untitled_number (void)
@@ -247,6 +250,8 @@ gedit_document_class_init (GeditDocumentClass *klass)
 static void
 gedit_document_init (GeditDocument *document)
 {
+	const GeditEncoding *enc;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	document->priv = g_new0 (GeditDocumentPrivate, 1);
@@ -258,21 +263,10 @@ gedit_document_init (GeditDocument *document)
 
 	document->priv->last_save_was_manually = TRUE;
 
-	if (gedit_prefs_manager_get_save_encoding () == 
-			GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)
-	{
-		const gchar *encoding = NULL;
-		g_get_charset(&encoding);
-				
-		document->priv->encoding = g_strdup (encoding);
-	}
-	else
-	{
-		const GeditEncoding *enc = gedit_encoding_get_utf8 ();
+	enc = gedit_encoding_get_utf8 ();
 		
-		document->priv->encoding = g_strdup (
-				gedit_encoding_get_charset (enc));
-	}			
+	document->priv->encoding = g_strdup (
+				gedit_encoding_get_charset (enc));			
 }
 
 static void
@@ -381,20 +375,22 @@ gedit_document_new (void)
  * Return value: a new document
  **/
 GeditDocument*
-gedit_document_new_with_uri (const gchar *uri, GError **error)
+gedit_document_new_with_uri (const gchar          *uri,  
+			     const GeditEncoding  *encoding, 
+			     GError              **error)
 {
  	GeditDocument *document;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (uri != NULL, NULL);
-
+	
 	document = GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 
 	g_return_val_if_fail (document->priv != NULL, NULL);
 	document->priv->uri = g_strdup (uri);
 
-	if (!gedit_document_load (document, uri, error))
+	if (!gedit_document_load (document, uri, encoding, error))
 	{
 		gedit_debug (DEBUG_DOCUMENT, "ERROR");
 
@@ -671,11 +667,16 @@ gedit_document_auto_save_timeout (GeditDocument *doc)
 static gboolean
 gedit_document_auto_save (GeditDocument* doc, GError **error)
 {
+	const GeditEncoding *encoding;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 	
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	if (gedit_document_save_as_real (doc, doc->priv->uri, doc->priv->last_save_was_manually, NULL))
+	encoding = gedit_document_get_encoding (doc);
+		
+	if (gedit_document_save_as_real (doc, doc->priv->uri, encoding,
+					 doc->priv->last_save_was_manually, NULL))
 		doc->priv->last_save_was_manually = FALSE;
 
 	return TRUE;
@@ -692,7 +693,10 @@ gedit_document_auto_save (GeditDocument* doc, GError **error)
  * Return value: TRUE if the file is correctly loaded
  **/
 gboolean
-gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
+gedit_document_load (GeditDocument        *doc, 
+		     const gchar          *uri, 
+		     const GeditEncoding  *encoding,
+		     GError              **error)
 {
 	char* file_contents;
 	GnomeVFSResult res;
@@ -710,41 +714,86 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	
 	if (res != GNOME_VFS_OK)
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, res,
-			gnome_vfs_result_to_string (res));
+		g_set_error (error, 
+			     GEDIT_DOCUMENT_IO_ERROR, 
+			     res,
+			     gnome_vfs_result_to_string (res));
 		return FALSE;
 	}
 
 	if (file_size > 0)
 	{
+		GError *conv_error = NULL;
 		gchar *converted_text;
 		gint len = -1;
 
-		if (g_utf8_validate (file_contents, file_size, NULL))
+		if (encoding == gedit_encoding_get_utf8 ())
 		{
-			converted_text = file_contents;
-			len = file_size;
-			file_contents = NULL;
+			if (g_utf8_validate (file_contents, file_size, NULL))
+			{
+				converted_text = file_contents;
+				len = file_size;
+				file_contents = NULL;
+			}
+			else
+			{
+				converted_text = NULL;
+				g_set_error (&conv_error, GEDIT_CONVERT_ERROR, 
+					GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE,
+					"The file you are trying to open contain an invalid byte sequence.");
+			}
 		}
 		else
-			converted_text = gedit_convert_to_utf8 (file_contents,
-							file_size,
-							&doc->priv->encoding);
+		{
+			converted_text = NULL;
+			
+			if (encoding == NULL)
+			{
+				const GeditEncoding *enc;
+				gchar *charset;
 
+				charset = gedit_metadata_manager_get (uri, "encoding");
+
+				if (charset != NULL)
+				{
+					enc = gedit_encoding_get_from_charset (charset);
+
+					if (enc != NULL)
+					{	
+						converted_text = gedit_convert_to_utf8 (file_contents,
+										file_size,
+										&enc,
+										NULL);
+
+						if (converted_text != NULL)
+							encoding = enc;
+					}
+
+					g_free (charset);
+				}
+			}
+
+			if (converted_text == NULL)				
+				converted_text = gedit_convert_to_utf8 (file_contents,
+								file_size,
+								&encoding,
+								&conv_error);
+		}
+		
 		if (converted_text == NULL)
 		{
 			/* bail out */
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
-				     GEDIT_ERROR_INVALID_UTF8_DATA,
-				     _("Invalid UTF-8 data"));
+			if (conv_error == NULL)
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
+					     GEDIT_ERROR_INVALID_UTF8_DATA,
+					     _("Invalid UTF-8 data"));
+			else
+				g_propagate_error (error, conv_error);
 
 			g_free (file_contents);
 
 			return FALSE;
 		}
-
-		gedit_debug (DEBUG_DOCUMENT, "Document encoding: %s", 
-			     doc->priv->encoding == NULL ? "UTF-8 (Null)" : doc->priv->encoding);
 
 		gedit_document_begin_not_undoable_action (doc);
 		/* Insert text in the buffer */
@@ -763,6 +812,8 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 
 		gedit_document_end_not_undoable_action (doc);
 	}
+	else
+		encoding = gedit_encoding_get_utf8 ();
 
 	if (file_contents != NULL)
 		g_free (file_contents);
@@ -783,7 +834,9 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
 	gedit_document_set_uri (doc, uri);
-		
+
+	gedit_document_set_encoding (doc, encoding);
+
 	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
 
 	return TRUE;
@@ -803,24 +856,43 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 
 	if (stdin_data != NULL && strlen (stdin_data) > 0)
 	{
+		GError *conv_error = NULL;
+		const GeditEncoding *encoding;
 		gchar *converted_text;
 
-		if (g_utf8_validate (stdin_data, -1, NULL))
+		if (gedit_encoding_get_current () != gedit_encoding_get_utf8 ())
 		{
-			converted_text = stdin_data;
-			stdin_data = NULL;
+			if (g_utf8_validate (stdin_data, -1, NULL))
+			{
+				converted_text = stdin_data;
+				stdin_data = NULL;
+
+				encoding = gedit_encoding_get_utf8 ();
+			}
+			else
+			{
+				converted_text = NULL;
+			}
 		}
 		else
+		{	
+			encoding = gedit_encoding_get_current ();
+				
 			converted_text = gedit_convert_to_utf8 (stdin_data,
-							-1,
-							&doc->priv->encoding);
-
+								-1,
+								&encoding,
+								&conv_error);
+		}	
+		
 		if (converted_text == NULL)
 		{
 			/* bail out */
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
-				     GEDIT_ERROR_INVALID_UTF8_DATA,
-				     _("Invalid UTF-8 data"));
+			if (conv_error == NULL)
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
+					     GEDIT_ERROR_INVALID_UTF8_DATA,
+					     _("Invalid UTF-8 data"));
+			else
+				g_propagate_error (error, conv_error);
 
 			g_free (stdin_data);
 
@@ -938,11 +1010,12 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 }
 	
 gboolean 
-gedit_document_save (GeditDocument* doc, GError **error)
+gedit_document_save (GeditDocument *doc, GError **error)
 {	
 	gboolean auto_save;
 	gboolean create_backup_copy;
-
+	const GeditEncoding *encoding;
+	
 	gboolean ret;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -951,6 +1024,9 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 	g_return_val_if_fail (doc->priv->uri != NULL, FALSE);
+	
+	encoding = gedit_document_get_encoding (doc);
+	g_return_val_if_fail (encoding != NULL, FALSE);
 	
 	auto_save = gedit_prefs_manager_get_auto_save ();
 	create_backup_copy = gedit_prefs_manager_get_create_backup_copy ();
@@ -966,6 +1042,7 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	
 	ret = gedit_document_save_as_real (doc, 
 					   doc->priv->uri, 
+					   encoding,
 					   create_backup_copy, 
 					   error);
 
@@ -987,7 +1064,8 @@ gedit_document_save (GeditDocument* doc, GError **error)
 }
 
 gboolean	
-gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
+gedit_document_save_as (GeditDocument* doc, const gchar *uri, 
+			const GeditEncoding *encoding, GError **error)
 {	
 	gboolean auto_save;
 	
@@ -998,6 +1076,9 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
+
+	if (encoding == NULL)
+		encoding = gedit_document_get_encoding (doc);
 
 	auto_save = gedit_prefs_manager_get_auto_save ();
 
@@ -1011,12 +1092,13 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 		}
 	}
 
-	if (gedit_document_save_as_real (doc, uri, TRUE, error))
+	if (gedit_document_save_as_real (doc, uri, encoding, TRUE, error))
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);
 		doc->priv->last_save_was_manually = TRUE;
-
+		gedit_document_set_encoding (doc, encoding);
+			
 		ret = TRUE;
 	}		
 
@@ -1034,7 +1116,8 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 }
 
 gboolean	
-gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **error)
+gedit_document_save_a_copy_as (GeditDocument *doc, const gchar *uri, 
+			       const GeditEncoding *encoding, GError **error)
 {
 	gboolean m;
 	gboolean ret;
@@ -1044,10 +1127,13 @@ gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **er
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
+
+	if (encoding == NULL)
+		encoding = gedit_document_get_encoding (doc);
 	
 	m = gedit_document_get_modified (doc);
 
-	ret = gedit_document_save_as_real (doc, uri, FALSE, error);
+	ret = gedit_document_save_as_real (doc, uri, encoding, FALSE, error);
 	
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), m);	 
 
@@ -1150,7 +1236,7 @@ follow_symlinks (const gchar *filename, GError **error)
  */
 
 static gboolean	
-gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
+gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEncoding *encoding,
 			     gboolean create_backup_copy, GError **error)
 {
 	gchar *filename; /* Filename without URI scheme */
@@ -1165,7 +1251,6 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	gint chars_len;
 	gint fd;
 	gint retval;
-	GeditSaveEncodingSetting encoding_setting;
 	gboolean res;
 	gboolean add_cr;
 	
@@ -1174,6 +1259,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
+	g_return_val_if_fail (encoding != NULL, FALSE);
 
 	retval = FALSE;
 
@@ -1283,22 +1369,25 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	}
 
 	chars = gedit_document_get_chars (doc, 0, -1);
-
-	encoding_setting = gedit_prefs_manager_get_save_encoding ();
-
-	if (encoding_setting == GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE)
+	
+	if (encoding != gedit_encoding_get_utf8 ())
 	{
 		GError *conv_error = NULL;
 		gchar* converted_file_contents = NULL;
 
-		gedit_debug (DEBUG_DOCUMENT, "Using current locale's encoding");
-
-		converted_file_contents = g_locale_from_utf8 (chars, -1, NULL, NULL, &conv_error);
+		converted_file_contents = gedit_convert_from_utf8 (chars, 
+								   -1, 
+								   encoding,
+								   &conv_error);
 
 		if (conv_error != NULL)
 		{
 			/* Conversion error */
-			g_error_free (conv_error);
+			g_propagate_error (error, conv_error);
+
+			close (fd);
+			unlink (temp_filename);
+			goto out;
 		}
 		else
 		{
@@ -1306,37 +1395,6 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 			chars = converted_file_contents;
 		}
 	}
-	else
-	{
-		if ((doc->priv->encoding != NULL) &&
-		    ((encoding_setting == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE) ||
-		     (encoding_setting == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)))
-		{
-			GError *conv_error = NULL;
-			gchar* converted_file_contents = NULL;
-
-			gedit_debug (DEBUG_DOCUMENT, "Using encoding %s", doc->priv->encoding);
-
-			/* Try to convert it from UTF-8 to original encoding */
-			converted_file_contents = g_convert (chars, -1, 
-							     doc->priv->encoding, "UTF-8", 
-							     NULL, NULL, &conv_error); 
-
-			if (conv_error != NULL)
-			{
-				/* Conversion error */
-				g_error_free (conv_error);
-			}
-			else
-			{
-				g_free (chars);
-				chars = converted_file_contents;
-			}
-		}
-		else
-			gedit_debug (DEBUG_DOCUMENT, "Using UTF-8 (Null)");
-
-	}	    
 
 	chars_len = strlen (chars);
 
@@ -1535,7 +1593,7 @@ gedit_document_revert (GeditDocument *doc,  GError **error)
 
 	gedit_document_delete_text (doc, 0, -1);
 
-	if (!gedit_document_load (doc, doc->priv->uri, error))
+	if (!gedit_document_load (doc, doc->priv->uri, gedit_document_get_encoding (doc), error))
 	{
 		GtkTextIter iter;
 		
@@ -2137,11 +2195,30 @@ gedit_document_get_language (GeditDocument *doc)
 	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
 }
 
-const GeditEncoding  *
+const GeditEncoding *
 gedit_document_get_encoding (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
 	return gedit_encoding_get_from_charset (doc->priv->encoding);
+}
+
+static void
+gedit_document_set_encoding (GeditDocument *doc, const GeditEncoding *encoding)
+{
+	g_return_if_fail (encoding != NULL);
+
+	if (doc->priv->encoding != NULL)
+		g_free (doc->priv->encoding);
+
+	doc->priv->encoding = g_strdup (gedit_encoding_get_charset (encoding));
+
+	gedit_metadata_manager_set (doc->priv->uri,
+				    "encoding",
+				    doc->priv->encoding);
+
+	/* FIXME: do we need a encoding changed signal ? - Paolo */
+	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
+
 }
 

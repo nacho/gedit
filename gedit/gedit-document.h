@@ -84,27 +84,39 @@ GQuark 		gedit_document_io_error_quark (void);
 GType        	gedit_document_get_type      	(void) G_GNUC_CONST;
 
 GeditDocument*	gedit_document_new 		(void);
-GeditDocument* 	gedit_document_new_with_uri 	(const gchar *uri, GError **error);
+GeditDocument* 	gedit_document_new_with_uri 	(const gchar          *uri, 
+						 const GeditEncoding  *encoding,
+						 GError              **error);
 
-void 		gedit_document_set_readonly 	(GeditDocument *doc, gboolean readonly);
-gboolean	gedit_document_is_readonly 	(GeditDocument *doc);
+void 		gedit_document_set_readonly 	(GeditDocument        *doc, 
+						 gboolean              readonly);
+gboolean	gedit_document_is_readonly 	(GeditDocument        *doc);
 
-gchar*		gedit_document_get_raw_uri 	(const GeditDocument* doc);
-gchar*		gedit_document_get_uri 		(const GeditDocument* doc);
-gchar*		gedit_document_get_short_name 	(const GeditDocument* doc);
+gchar*		gedit_document_get_raw_uri 	(const GeditDocument *doc);
+gchar*		gedit_document_get_uri 		(const GeditDocument *doc);
+gchar*		gedit_document_get_short_name 	(const GeditDocument *doc);
 
-gboolean	gedit_document_load 		(GeditDocument* doc, 
-						 const gchar *uri, GError **error);
-gboolean	gedit_document_load_from_stdin 	(GeditDocument* doc, GError **error);
+gboolean	gedit_document_load 		(GeditDocument        *doc, 
+						 const gchar          *uri, 
+						 const GeditEncoding  *encoding,
+						 GError              **error);
+
+gboolean	gedit_document_load_from_stdin 	(GeditDocument        *doc, 
+						 GError              **error);
 
 gboolean 	gedit_document_is_untouched 	(const GeditDocument *doc);
 
-gboolean	gedit_document_save 		(GeditDocument* doc, GError **error);
-gboolean	gedit_document_save_as 		(GeditDocument* doc, 
-						 const gchar *uri, GError **error);
+gboolean	gedit_document_save 		(GeditDocument        *doc, 
+						 GError              **error);
+gboolean	gedit_document_save_as 		(GeditDocument        *doc,	
+						 const gchar          *uri, 
+						 const GeditEncoding  *encoding,
+						 GError              **error);
 
-gboolean	gedit_document_save_a_copy_as 	(GeditDocument* doc, 
-						 const gchar *uri, GError **error);
+gboolean	gedit_document_save_a_copy_as 	(GeditDocument        *doc,
+						 const gchar          *uri, 
+						 const GeditEncoding  *encoding,
+						 GError              **error);
 
 gboolean 	gedit_document_revert 		(GeditDocument *doc,  GError **error);
 
