@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2002-01-24 20:36+0100\n"
-"PO-Revision-Date: 2002-01-22 14:46CET\n"
-"Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
+"POT-Creation-Date: 2002-01-30 15:23+0100\n"
+"PO-Revision-Date: 2002-01-30 15:29CET\n"
+"Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,18 +22,25 @@ msgstr "Textový editor GNOME"
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/cvschangelog/cvschangelog.c:219
+#: plugins/cvschangelog/cvschangelog.c:35
+msgid "Open _CVS ChangeLogs"
+msgstr "Otvoriť _CVS ChangLog"
+
+#: plugins/cvschangelog/cvschangelog.c:38
+msgid "Searches for ChangeLogs in the current document and opens them."
+msgstr "Hľadá súbory ChangeLog v aktuálnom dokumente a otvorí ich."
+
+#: plugins/cvschangelog/cvschangelog.c:224
 msgid "CVS ChangeLog"
-msgstr ""
+msgstr "CVS ChangeLog"
 
-#: plugins/cvschangelog/cvschangelog.c:220
+#: plugins/cvschangelog/cvschangelog.c:225
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr ""
+msgstr "Modul, ktorý otvorí súbory ChangeLog nájdené v správach z príkazu CVS commit."
 
-#: plugins/cvschangelog/cvschangelog.c:222
-#, fuzzy
+#: plugins/cvschangelog/cvschangelog.c:227
 msgid "Copyright (C) 2002 - James Willcox"
-msgstr "Copyright (C) 2002 - Paolo Maggi"
+msgstr "Copyright (C) 2002 - James Willcox"
 
 #: plugins/docinfo/docinfo.c:40
 msgid "_Word Count"
@@ -43,7 +50,7 @@ msgstr "_Počet slov"
 msgid "Get info on current document."
 msgstr "Získanie informácií o aktuálnom dokumente."
 
-#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:403
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:354
 msgid "Word count"
 msgstr "Počet slov"
 
@@ -51,7 +58,7 @@ msgstr "Počet slov"
 msgid "Update"
 msgstr "Obnoviť"
 
-#: plugins/docinfo/docinfo.c:404
+#: plugins/docinfo/docinfo.c:355
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
@@ -60,40 +67,47 @@ msgstr ""
 "Modul Počet slov alalyzuje aktuálny dokument a určí počet slov, riadkov, "
 "znakov a tlačiteľných znakov a výsledok zobrazí."
 
-#: plugins/docinfo/docinfo.c:408 plugins/sample/sample.c:173
-#: plugins/shell_output/shell_output.c:456 plugins/time/time.c:554
+#: plugins/docinfo/docinfo.c:359 plugins/sample/sample.c:129
+#: plugins/shell_output/shell_output.c:407 plugins/time/time.c:503
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:36
+msgid "_Hello World"
+msgstr "_Hello World"
+
+#: plugins/sample/sample.c:39
+msgid "Prints Hello World."
+msgstr "Vytlačí Hello World."
+
+#: plugins/sample/sample.c:57
 msgid "Hello World "
 msgstr "Hello World "
 
-#: plugins/sample/sample.c:170
+#: plugins/sample/sample.c:126
 msgid "Hello World"
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:171
+#: plugins/sample/sample.c:127
 msgid "Sample 'hello world' plugin."
 msgstr "Ukážkový modul 'Hello world'."
 
 #: plugins/shell_output/shell_output.c:36
 msgid "Insert shell _output"
-msgstr ""
+msgstr "Vložiť _výstup shellu"
 
 #: plugins/shell_output/shell_output.c:39
-#, fuzzy
 msgid "Insert the shell output in the current document."
-msgstr "Získanie informácií o aktuálnom dokumente."
+msgstr "Vloží výstup shellu do aktuálneho dokumentu."
 
 #: plugins/shell_output/shell_output.c:138
-#: plugins/shell_output/shell_output.c:452
+#: plugins/shell_output/shell_output.c:403
 msgid "Shell output"
-msgstr ""
+msgstr "Výstup shellu"
 
 #: plugins/shell_output/shell_output.c:151
 msgid "_Run"
-msgstr ""
+msgstr "_Spustiť"
 
 #: plugins/shell_output/shell_output.c:240
 msgid ""
@@ -101,6 +115,9 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Príkaz shellu je prázdny.\n"
+"\n"
+"Prosím, zadajte platný príkaz."
 
 #: plugins/shell_output/shell_output.c:269
 msgid ""
@@ -108,44 +125,45 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Chyba pri spracovaní príkazu shellu.\n"
+"\n"
+"Prosím, zadajte platný príkaz."
 
 #: plugins/shell_output/shell_output.c:322
-#, fuzzy
 msgid "An error occurs while running the selected command."
-msgstr ""
-"Nastala chyba pri otváraní súboru \"%s\".\n"
-"\n"
-"%s"
+msgstr "Nastala chyba pri spustení vybraného príkazu."
 
-#: plugins/shell_output/shell_output.c:453
+#: plugins/shell_output/shell_output.c:404
 msgid ""
 "Exucute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
+"Spustí program a vloží jeho výstup do aktuálneho dokumentu na miesto "
+"kurzoru."
 
 #: plugins/time/time.c:39
 msgid "_Insert Date/Time"
-msgstr ""
+msgstr "V_ložiť dátum/čas"
 
 #: plugins/time/time.c:42
 msgid "Insert current date and time at the cursor position."
-msgstr ""
+msgstr "Vloží aktuálny dátum a čas na aktuálnu pozíciu kurzoru."
 
 #: plugins/time/time.c:227
 msgid "Available formats"
-msgstr ""
+msgstr "Dostupné formáty"
 
 #: plugins/time/time.c:268
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "Nastaviť modul pre vkladanie dátumu/času"
 
-#: plugins/time/time.c:551
+#: plugins/time/time.c:500
 msgid "Insert Date/Time"
-msgstr ""
+msgstr "Vložiť dátum/čas"
 
-#: plugins/time/time.c:552
+#: plugins/time/time.c:501
 msgid "Inserts the current date and time at the cursor position."
-msgstr ""
+msgstr "Vloží aktuálny dátum a čas na aktuálnu pozíciu kurzoru."
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, c-format
@@ -163,67 +181,68 @@ msgstr "_Prejsť na riadok"
 
 #: src/dialogs/gedit-dialog-goto-line.c:140
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Nepodarilo sa nájsť požadované prvky v goto-line.glade2.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:45
 msgid "Plugin"
-msgstr ""
+msgstr "Modul"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:46
 msgid "Load"
-msgstr ""
+msgstr "Načítať"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:316
+#: src/dialogs/gedit-dialog-plugin-manager.c:312
 msgid "Module file name"
-msgstr ""
+msgstr "Súbor modulu"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:317
+#: src/dialogs/gedit-dialog-plugin-manager.c:313
 msgid "Author(s)"
-msgstr ""
+msgstr "Autori"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
+#: src/dialogs/gedit-dialog-plugin-manager.c:443
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
+"Nepodarilo sa nájsť súbor plugin-manager.glade2, znovu nainštalujte "
+"gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
-#, fuzzy
+#: src/dialogs/gedit-dialog-plugin-manager.c:451
 msgid "Plugin Manager"
-msgstr "Správca _modulov"
+msgstr "Správca modulov"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
+#: src/dialogs/gedit-dialog-plugin-manager.c:478
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
+msgstr "Neplatný súbor glade pre správu modulov-nenájdené všetky prvky.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:574
+#: src/dialogs/gedit-dialog-plugin-manager.c:566
 msgid "Could not create the Plugin Manager dialog"
-msgstr ""
+msgstr "Nepodarilo sa vytvoriť dialóg pre správcu modulov."
 
-#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
+#: src/dialogs/gedit-dialog-replace.c:167 src/gedit-ui.xml.h:49
 msgid "Replace"
 msgstr "Nahradiť"
 
-#: src/dialogs/gedit-dialog-replace.c:176
+#: src/dialogs/gedit-dialog-replace.c:178
 msgid "Replace _All"
 msgstr "Nahradiť _všetko"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:116
 #: src/gedit-file.c:823 src/gedit-ui.xml.h:85
 msgid "_Replace"
 msgstr "Na_hradiť"
 
-#: src/dialogs/gedit-dialog-replace.c:268 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Nájsť"
 
 #: src/dialogs/gedit-dialog-replace.c:469
 #: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:697
+#: src/dialogs/gedit-dialog-replace.c:695
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Reťazec \"%s\" nenájdený."
 
-#: src/dialogs/gedit-dialog-replace.c:706
+#: src/dialogs/gedit-dialog-replace.c:704
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Nájdených a nahradených %d výskytov."
@@ -438,9 +457,9 @@ msgid "File '%s' reverted."
 msgstr "Súbor '%s' vrátený."
 
 #: src/gedit-file.c:1103
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file %s"
-msgstr "Načítaný súbor '%s'"
+msgstr "Načítaný súbor %s"
 
 #: src/gedit-file.c:1202
 #, c-format
@@ -453,7 +472,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:548
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -464,23 +483,23 @@ msgstr ""
 "\n"
 "Vaše zmeny budú stratené, ak ich neuložíte."
 
-#: src/gedit-mdi.c:578
+#: src/gedit-mdi.c:553
 msgid "Do_n't save"
 msgstr "_Neukladať"
 
-#: src/gedit-mdi.c:596
+#: src/gedit-mdi.c:571
 msgid "_Don't quit"
 msgstr "_Nekončiť"
 
-#: src/gedit-mdi.c:600
+#: src/gedit-mdi.c:575
 msgid "_Don't close"
 msgstr "_Nezatvárať"
 
-#: src/gedit-mdi.c:684
+#: src/gedit-mdi.c:659
 msgid "(modified)"
 msgstr "(zmenené)"
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:665
 msgid "(readonly)"
 msgstr "(len pre čítanie)"
 
@@ -515,9 +534,9 @@ msgid "Error, the plugin '%s' did not specified a name"
 msgstr "Chyba, modul '%s' nedefinuje meno"
 
 #: src/gedit-plugins-engine.c:302
-#, fuzzy, c-format
+#, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr "Chyba, nepodarilo sa aktualizovať rozhranie modulu '%s'"
+msgstr "Chyba, nepodarilo sa uložiť nastavenie modulu '%s'"
 
 #: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
 #, c-format
@@ -922,16 +941,16 @@ msgstr "_Nástroje"
 msgid "_Undo"
 msgstr "Vrátiť _späť"
 
-#: src/gedit-view.c:825
+#: src/gedit-view.c:824
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  R. %d, S. %d"
 
-#: src/gedit-view.c:863
+#: src/gedit-view.c:862
 msgid "  OVR"
 msgstr "  CEZ"
 
-#: src/gedit-view.c:865
+#: src/gedit-view.c:864
 msgid "  INS"
 msgstr "  VKL"
 
@@ -986,3 +1005,4 @@ msgstr "Zapnúť všetky ladiace správy."
 #: src/gedit2.c:164
 msgid "The gnome text editor"
 msgstr "Textový editor GNOME"
+
