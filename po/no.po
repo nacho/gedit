@@ -1,17 +1,17 @@
-# Norwegian translation of gEdit (bokmÃ¥l dialect).
-# Copyright (C) 1998 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@online.no>, 1998,1999.
+# Norwegian translation of gEdit (bokmål).
+# Copyright (C) 1998-2001 Free Software Foundation, Inc.
+# Kjartan Maraas <kmaraas@gnome.org>, 1998-2001.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2001-02-25 14:48-0600\n"
-"PO-Revision-Date: 2000-11-30 11:44+01:00\n"
-"Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
+"POT-Creation-Date: 2001-02-28 10:14+0100\n"
+"PO-Revision-Date: 2001-02-28 10:38+01:00\n"
+"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: plugins/browse/browse.c:251
 msgid "Browse"
@@ -27,19 +27,16 @@ msgstr "Webleser tillegg"
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/browse/browse.glade.h:7
-#, fuzzy
 msgid "gedit: Web Browse plugin"
-msgstr "gedit webleser-tillegg"
+msgstr "gedit Nettleser-tillegg"
 
 #: plugins/browse/browse.glade.h:8
-#, fuzzy
 msgid "Enter the _URL to browse for:"
 msgstr "Skriv inn URL som skal vises:"
 
 #: plugins/browse/browse.glade.h:9
-#, fuzzy
 msgid "Lynx found at: "
-msgstr "lynx ble funnet i:"
+msgstr "Lynx ble funnet i: "
 
 #: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
 #: plugins/email/email.glade.h:22
@@ -48,9 +45,8 @@ msgstr "plassering"
 
 #: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:24
-#, fuzzy
 msgid " _Change... "
-msgstr "Endre..."
+msgstr " _Endre... "
 
 #: plugins/convert/convert.c:180
 msgid "Convert"
@@ -66,71 +62,60 @@ msgstr "Tallkonverterer"
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/convert/convert.glade.h:7
-#, fuzzy
 msgid "gedit: Number Converter plugin"
-msgstr "Tallkonverterer"
+msgstr "gedit: Tallkonverterer-tillegg"
 
 #: plugins/convert/convert.glade.h:8
-#, fuzzy
 msgid "_Value to be converted:"
-msgstr "Verdi som skal konverteres:"
+msgstr "_Verdi som skal konverteres:"
 
 #: plugins/convert/convert.glade.h:9
-#, fuzzy
 msgid "_Converted value:"
-msgstr "Konvertert verdi:"
+msgstr "_Konvertert verdi:"
 
 #: plugins/convert/convert.glade.h:10
-#, fuzzy
 msgid " Decimal to _Hex "
-msgstr "Desimal til heksadesimal"
+msgstr " Desimal til _heksadesimal "
 
 #: plugins/convert/convert.glade.h:11
-#, fuzzy
 msgid " Decimal to _Octal "
-msgstr "Desimal til oktal"
+msgstr " Desimal til _oktal "
 
 #: plugins/convert/convert.glade.h:12
-#, fuzzy
 msgid " Hex to Decima_l "
-msgstr "Heksadesimal til desimal"
+msgstr " Heksadesimal til desima_l "
 
 #: plugins/diff/diff.c:121
-#, fuzzy
 msgid "The two documents you selected are the same."
-msgstr "De to valgte dokumentene er de samme"
+msgstr "De to valgte dokumentene du valgte er like."
 
 #: plugins/diff/diff.c:127
-#, fuzzy
 msgid ""
 "The \"first\" file you selected does not exists.\n"
 "\n"
 "Please, provide a valid file."
 msgstr ""
-"Den valgte filen eksisterer ikke\n"
+"Den \"første\" filen du valgte eksisterer ikke.\n"
 "\n"
-"Vennligst oppgi en gyldig fil"
+"Vennligst oppgi en gyldig fil."
 
 #: plugins/diff/diff.c:134
-#, fuzzy
 msgid ""
 "The \"second\" file you selected does not exists.\n"
 "\n"
 "Please, provide a valid file."
 msgstr ""
-"Den valgte filen eksisterer ikke\n"
+"Den andre filen du valgte eksisterer ikke.\n"
 "\n"
-"Vennligst oppgi en gyldig fil"
+"Vennligst oppgi en gyldig fil."
 
 #: plugins/diff/diff.c:145
-#, fuzzy
 msgid "The \"first\" document contains no text."
-msgstr "Dokumentet inneholder ikke noe tekst"
+msgstr "Det \"første\" dokumentet inneholder ingen tekst."
 
 #: plugins/diff/diff.c:157
-#, fuzzy
 msgid "The \"second\" document contains no text."
-msgstr "Dokumentet inneholder ikke noe tekst"
+msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
 
 #. FIXME: do better error reporting ... . Chema
 #: plugins/diff/diff.c:166
@@ -141,29 +126,26 @@ msgstr ""
 "gedit kunne ikke opprette en midlertidig til.\n"
 "\n"
 
-#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
-msgstr "NavnlÃ¸s %i"
+msgstr "Navnløs %i"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:474
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:477
-#, fuzzy
+#: plugins/diff/diff.c:475
 msgid "Makes a diff file from two documents or files"
-msgstr ""
-"Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
+msgstr "Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
 
-#: plugins/diff/diff.c:478
-#, fuzzy
+#: plugins/diff/diff.c:476
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
 msgstr ""
-"Lager en fil med forskjellene mellom to dokumenter eller filer pÃ¥ disk\n"
-"For mer informasjon om diff, skriv \"man diff\" pÃ¥ kommandolinjen\n"
+"Lager en fil med forskjellene mellom to dokumenter eller filer på disk\n"
+"For mer informasjon om diff, skriv \"man diff\" på kommandolinjen\n"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -171,18 +153,16 @@ msgstr ""
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/diff/diff.glade.h:7
-#, fuzzy
 msgid "gedit: Diff plugin"
-msgstr "gedit: e-post tillegg"
+msgstr "gedit: Diff-tillegg"
 
 #: plugins/diff/diff.glade.h:8
-#, fuzzy
 msgid "Choose the files to compare"
-msgstr "Velg filer diff skal kjÃ¸res pÃ¥"
+msgstr "Velg filer som skal sammenlignes"
 
 #: plugins/diff/diff.glade.h:9
 msgid "First"
-msgstr ""
+msgstr "Første"
 
 #: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:14
 msgid "From document"
@@ -190,30 +170,28 @@ msgstr "Fra dokument"
 
 #: plugins/diff/diff.glade.h:11 plugins/diff/diff.glade.h:15
 msgid "From a file on disk"
-msgstr "Fra en fil pÃ¥ disk"
+msgstr "Fra en fil på disk"
 
 #: plugins/diff/diff.glade.h:12
-#, fuzzy
 msgid "Select the \"first\" file..."
-msgstr "Velg tillegg som skal installeres"
+msgstr "Velg den \"første\" filen..."
 
 #: plugins/diff/diff.glade.h:13
 msgid "Second"
-msgstr ""
+msgstr "Andre"
 
 #: plugins/diff/diff.glade.h:16
 msgid "Select the \"second\" file..."
-msgstr ""
+msgstr "Velg den \"andre\" filen..."
 
 #: plugins/diff/diff.glade.h:17
-#, fuzzy
 msgid "Diff found at : "
-msgstr "diff funnet i :"
+msgstr "Diff funnet i : "
 
 #: plugins/email/email.c:76
 #, c-format
 msgid "Executing command : %s"
-msgstr "KjÃ¸rer kommando : %s"
+msgstr "Kjører kommando : %s"
 
 #: plugins/email/email.c:276
 msgid "Email"
@@ -229,7 +207,7 @@ msgid ""
 "gedit searches for sendmail to use this plugin."
 msgstr ""
 "Send aktivt dokument til en spesifisert e-post adresse\n"
-"gedit sÃ¸ker etter sendmail for Ã¥ bruke dette tillegget."
+"gedit søker etter sendmail for å bruke dette tillegget."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -273,37 +251,32 @@ msgid "label13"
 msgstr "etikett13"
 
 #: plugins/email/email.glade.h:16
-#, fuzzy
 msgid "gedit: E-mail plugin"
-msgstr "gedit: e-post tillegg"
+msgstr "gedit: E-post tillegg"
 
 #: plugins/email/email.glade.h:17
-#, fuzzy
 msgid "F_rom:"
-msgstr "Fra:"
+msgstr "F_ra:"
 
 #: plugins/email/email.glade.h:18
-#, fuzzy
 msgid "_Subject:"
-msgstr "Emne:"
+msgstr "E_mne:"
 
 #: plugins/email/email.glade.h:19
-#, fuzzy
 msgid "_To:"
-msgstr "Til:"
+msgstr "_Til:"
 
 #: plugins/email/email.glade.h:20
 msgid "File to use as body of message: "
 msgstr "Fil som skal brukes som meldingskropp: "
 
 #: plugins/email/email.glade.h:21
-#, fuzzy
 msgid "Sendmail found at:"
-msgstr "Sendmail funnet i :"
+msgstr "Sendmail funnet i:"
 
 #: plugins/email/email.glade.h:23
 msgid "filename"
-msgstr ""
+msgstr "filnavn"
 
 #: plugins/reverse/reverse.c:70
 msgid "Reverse"
@@ -327,6 +300,9 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Skallkommandooppføringen er tom.\n"
+"\n"
+"Vennligst sett inn en gyldig skallkommando."
 
 #: plugins/shell_output/shell_output.c:214
 msgid "Shell Output"
@@ -343,26 +319,24 @@ msgstr "Sett inn utskrift fra skallet i dokumentet"
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/shell_output/shell_output.glade.h:7
-#, fuzzy
 msgid "gedit: Shell Output plugin"
-msgstr "Tillegg for skallutskrift"
+msgstr "gedit: Tillegg for skallutskrift"
 
 #: plugins/shell_output/shell_output.glade.h:8
 msgid "Specify the working directory and the command you want to run."
-msgstr ""
+msgstr "Spesifisér arbeidskatalogen og kommandoen du vil kjøre."
 
 #: plugins/shell_output/shell_output.glade.h:9
 msgid "_Working directory:"
-msgstr ""
+msgstr "_Arbeidskatalog:"
 
 #: plugins/shell_output/shell_output.glade.h:10
-#, fuzzy
 msgid "Shell _command:"
-msgstr "Skriv inn skall-kommando"
+msgstr "Skall_kommando:"
 
 #: plugins/shell_output/shell_output.glade.h:11
 msgid "Select the working directory..."
-msgstr ""
+msgstr "Velg arbeidskatalog..."
 
 #: plugins/time/time.c:84
 msgid "Insert Time"
@@ -386,11 +360,9 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit er en liten lettvekt tekst editor for GNOME."
 
 #: src/dialogs/dialog-plugins.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
-msgstr ""
-"%sDu vil ikke kunne bruke %s tillegget uten %s.\n"
-"Ã˜nsker du Ã¥ spesifisere en ny plassering for %s?"
+msgstr "For å bruke %s-tillegget må du spesifisere en plassering for \"%s\"."
 
 #: src/dialogs/dialog-plugins.c:455
 #, c-format
@@ -399,7 +371,7 @@ msgid ""
 "Author : %s\n"
 "Description : %s\n"
 msgstr ""
-"Navn pÃ¥ tillegg: %s\n"
+"Navn på tillegg: %s\n"
 "Forfatter: %s\n"
 "Beskrivelse: %s\n"
 
@@ -431,14 +403,13 @@ msgid "Text not found."
 msgstr "Teksten ble ikke funnet."
 
 #: src/dialogs/dialog-replace.c:362
-#, fuzzy, c-format
+#, c-format
 msgid "Found and replaced %i occurrences."
-msgstr "fant og erstattet %i oppfÃ¸ringer."
+msgstr "fant og erstattet %i oppføringer."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
 msgid "Could not allocate the memory for the Replace all request."
-msgstr ""
-"Kunne ikke allokere nÃ¸dvendig minne for \"Erstatt alle\" forespÃ¸rselen."
+msgstr "Kunne ikke allokere minne for \"Erstatt alle\" forespørselen."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -447,7 +418,7 @@ msgstr ""
 #.
 #: src/dialogs/goto-line.glade.h:7
 msgid "Goto Line"
-msgstr "GÃ¥ til linje"
+msgstr "Gå til linje"
 
 #: src/dialogs/goto-line.glade.h:8
 msgid "Line number:"
@@ -468,27 +439,27 @@ msgstr "Vis statuslinje"
 
 #: src/dialogs/prefs.glade.h:9
 msgid "Set toolbar according to system settings"
-msgstr "Sett verktÃ¸ylinjen i henhold til systeminnstillingene"
+msgstr "Sett verktøylinjen i henhold til systeminnstillingene"
 
 #: src/dialogs/prefs.glade.h:10
 msgid "Set toolbar to Icons only"
-msgstr "Sett verktÃ¸ylinjen til kun ikoner"
+msgstr "Sett verktøylinjen til kun ikoner"
 
 #: src/dialogs/prefs.glade.h:11
 msgid "Set toolbar to Icons with text"
-msgstr "Sett verktÃ¸ylinjen til ikoner med tekst"
+msgstr "Sett verktøylinjen til ikoner med tekst"
 
 #: src/dialogs/prefs.glade.h:12
 msgid "Editor Behavior"
-msgstr "Editorens oppfÃ¸rsel"
+msgstr "Editorens oppførsel"
 
 #: src/dialogs/prefs.glade.h:13
 msgid "Enable Auto-indent"
-msgstr "SlÃ¥ pÃ¥ autoindentering"
+msgstr "Slå på autoindentering"
 
 #: src/dialogs/prefs.glade.h:14
 msgid "Tab width : "
-msgstr ""
+msgstr "Tab bredde : "
 
 #: src/dialogs/prefs.glade.h:15
 msgid "General"
@@ -506,7 +477,7 @@ msgid ""
 "Bottom\n"
 msgstr ""
 "Venstre\n"
-"HÃ¸yre\n"
+"Høyre\n"
 "Topp\n"
 "Bunn\n"
 
@@ -518,7 +489,7 @@ msgid ""
 "Default\n"
 msgstr ""
 "Notisbok\n"
-"ToppnivÃ¥\n"
+"Toppnivå\n"
 "Modal\n"
 "Standard\n"
 
@@ -536,11 +507,11 @@ msgstr "Angre"
 
 #: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
-msgstr "Sett grense for angrenivÃ¥er til:"
+msgstr "Sett grense for angrenivåer til:"
 
 #: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
-msgstr "nivÃ¥(er)"
+msgstr "nivå(er)"
 
 #: src/dialogs/prefs.glade.h:32
 msgid "Documents"
@@ -592,7 +563,7 @@ msgstr "Legg til _header"
 
 #: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
-msgstr "SlÃ¥ pÃ¥ ordbr_yting"
+msgstr "Slå på ordbr_yting"
 
 #: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
@@ -621,21 +592,19 @@ msgstr "Papir"
 #.
 #: src/dialogs/program.glade.h:7
 msgid "gedit: Set program location..."
-msgstr ""
+msgstr "gedit: Sett programlokasjon..."
 
 #: src/dialogs/program.glade.h:8
-#, fuzzy
 msgid "label"
-msgstr "etikett12"
+msgstr "etikett"
 
 #: src/dialogs/program.glade.h:9
-#, fuzzy
 msgid "_Location to search for :"
-msgstr "Plassering for sÃ¸k etter sendmail:"
+msgstr "_Lokasjon det skal søkes etter :"
 
 #: src/dialogs/program.glade.h:10
 msgid "gedit: Browse for program location..."
-msgstr ""
+msgstr "gedit: Se etter programlokasjon..."
 
 #: src/dialogs/replace.glade.h:8
 msgid "Find Next"
@@ -647,7 +616,7 @@ msgstr "Erstatt alt"
 
 #: src/dialogs/replace.glade.h:11
 msgid "_Search for: "
-msgstr "_SÃ¸k etter: "
+msgstr "_Søk etter: "
 
 #: src/dialogs/replace.glade.h:12
 msgid "_Replace with: "
@@ -655,15 +624,15 @@ msgstr "E_rstatt med: "
 
 #: src/dialogs/replace.glade.h:13
 msgid "Search from the _beginning of the document"
-msgstr "SÃ¸k fra _begynnelsen av dokumentet"
+msgstr "Søk fra _begynnelsen av dokumentet"
 
 #: src/dialogs/replace.glade.h:14
 msgid "Search from the _cursor position"
-msgstr "SÃ¸k fra mark_Ã¸rposisjonen"
+msgstr "Søk fra mark_ørposisjonen"
 
 #: src/dialogs/replace.glade.h:15
 msgid "Case _sensitive"
-msgstr "_Skill mellom store/smÃ¥ bokstaver"
+msgstr "_Skill mellom store/små bokstaver"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -672,7 +641,7 @@ msgstr "_Skill mellom store/smÃ¥ bokstaver"
 #.
 #: src/dialogs/plugin-manager.glade.h:7
 msgid "gedit Plugin Manager"
-msgstr "gedit tilleggshÃ¥ndterer"
+msgstr "gedit tilleggshåndterer"
 
 #: src/dialogs/plugin-manager.glade.h:8
 msgid "Select the plugins to install"
@@ -712,7 +681,7 @@ msgstr "RO - "
 
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
-msgstr "NavnlÃ¸s"
+msgstr "Navnløs"
 
 #: src/document.c:479
 #, c-format
@@ -721,7 +690,7 @@ msgstr "``%s'' er endret. Vil du lagre den?"
 
 #. If you try to open a non existant remote file
 #: src/document.c:710
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
 "\n"
@@ -729,8 +698,11 @@ msgid ""
 "\n"
 "Please make sure the file exists."
 msgstr ""
-"En feil oppstod under Ã¥pning av filen \"%s\".\n"
-"Vennligst underÃ¸k om filen eksisterer."
+"En feil oppstod under åpning av filen:\n"
+"\n"
+"%s\n"
+"\n"
+"Vennligst undersøk om filen eksisterer."
 
 #: src/document.c:763 src/document.c:771
 msgid "(modified)"
@@ -755,20 +727,20 @@ msgid ""
 "An error was encountered while opening the file \"%s\".\n"
 "Please make sure the file exists."
 msgstr ""
-"En feil oppstod under Ã¥pning av filen \"%s\".\n"
-"Vennligst underÃ¸k om filen eksisterer."
+"En feil oppstod under åpning av filen \"%s\".\n"
+"Vennligst undersøk om filen eksisterer."
 
 #: src/file.c:219
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
 "Could not allocate the required memory."
 msgstr ""
-"En feil oppstod under Ã¥pning av filen \"%s\".\n"
-"Vennligst underÃ¸k om filen eksisterer."
+"En feil oppstod under åpning av filen \"%s\".\n"
+"Vennligst undersøk om filen eksisterer."
 
 #: src/file.c:232
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
 "\n"
@@ -776,24 +748,25 @@ msgid ""
 "\n"
 "Make sure that you have permissions for opening the file. "
 msgstr ""
-"gedit kunne ikke Ã¥pne filen: \n"
+"En feil oppsto under åpning av filen:\n"
 "\n"
 "%s\n"
 "\n"
-"Forsikre deg om at du har rettigheter til Ã¥ Ã¥pne filen."
+"Forsikre deg om at du har rettigheter til å åpne filen."
 
 #: src/file.c:252
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
 "\n"
 "%s"
 msgstr ""
-"En feil oppstod under Ã¥pning av filen \"%s\".\n"
-"Vennligst underÃ¸k om filen eksisterer."
+"En feil oppsto under åpning av filen:\n"
+"\n"
+"%s"
 
 #: src/file.c:273
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Internal error reading the file: \n"
 "\n"
@@ -801,22 +774,22 @@ msgid ""
 "\n"
 "Please, report this error to submit@bugs.gnome.org."
 msgstr ""
-"gedit kunne ikke lagre filen :\n"
+"Intern feil under lesing av filen:\n"
 "\n"
-" %s \n"
+"%s \n"
 "\n"
-"PÃ¥ grunn av en ukjent feil (1). Vennligst rapportÃ©r problemet til "
-"submit@bugs.gnome.org"
+"Vennligst rapportér problemet til submit@bugs.gnome.org."
 
 #: src/file.c:290
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
 "\n"
 "%s"
 msgstr ""
-"En feil oppstod under Ã¥pning av filen \"%s\".\n"
-"Vennligst underÃ¸k om filen eksisterer."
+"En feil oppsto under lukking av filen:\n"
+"\n"
+"%s"
 
 #: src/file.c:482
 msgid "Save As..."
@@ -857,8 +830,7 @@ msgstr ""
 "\n"
 " %s \n"
 "\n"
-"PÃ¥ grunn av en ukjent feil (1). Vennligst rapportÃ©r problemet til "
-"submit@bugs.gnome.org"
+"På grunn av en ukjent feil (1). Vennligst rapportér problemet til submit@bugs.gnome.org"
 
 #: src/file.c:595
 #, c-format
@@ -874,16 +846,15 @@ msgstr ""
 "\n"
 " %s \n"
 "\n"
-"PÃ¥ grunn av en ukjent feil (2). Vennligst rapportÃ©r problemet til "
-"submit@bugs.gnome.org"
+"På grunn av en ukjent feil (2). Vennligst rapportér problemet til submit@bugs.gnome.org"
 
 #: src/file.c:697
 msgid "Could not allocate the required memory."
-msgstr "Kunne ikke hente nÃ¸dvendig minne."
+msgstr "Kunne ikke hente nødvendig minne."
 
 #: src/file.c:717
 msgid "Error in the pipe ."
-msgstr "Feil i rÃ¸ret."
+msgstr "Feil i røret."
 
 #: src/file.c:828 src/file.c:835
 #, c-format
@@ -897,12 +868,12 @@ msgstr "Lastet %i filer"
 
 #: src/file.c:908
 msgid "Open File ..."
-msgstr "Ã…pne fil ..."
+msgstr "Åpne fil ..."
 
 #: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-msgstr "``%s'' er i ferd med Ã¥ bli overskrevet. Vil du fortsette ?"
+msgstr "``%s'' er i ferd med å bli overskrevet. Vil du fortsette ?"
 
 #: src/file.c:1053
 msgid "Document has not been saved."
@@ -922,7 +893,7 @@ msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr ""
-"Er du sikker pÃ¥ at du vil forkaste alle endringer?\n"
+"Er du sikker på at du vil forkaste alle endringer?\n"
 "(%s)"
 
 #: src/file.c:1236
@@ -932,7 +903,7 @@ msgstr "Filen ``%s'' eksisterer ikke. Vil du opprette den?"
 
 #: src/menus.c:54
 msgid "Open (swap) .c/.h file"
-msgstr "Ã…pne (bytt) .c/.h fil"
+msgstr "Åpne (bytt) .c/.h fil"
 
 #: src/menus.c:62
 msgid "_New"
@@ -948,36 +919,35 @@ msgstr "Lagre alt"
 
 #: src/menus.c:69
 msgid "Save All Open Files"
-msgstr "Lagre alle Ã¥pne filer"
+msgstr "Lagre alle åpne filer"
 
 #: src/menus.c:74
 msgid "Revert"
 msgstr "Forkast"
 
 #: src/menus.c:83
-#, fuzzy
 msgid "Open from _URI..."
-msgstr "Ã…pne fil ..."
+msgstr "Åpne fra _URI..."
 
 #: src/menus.c:84
 msgid "Open a file from a specified URI"
-msgstr ""
+msgstr "Åpne en fil fra en spesifisert URI"
 
 #: src/menus.c:98
 msgid "Print pre_view"
-msgstr "UtskriftsforhÃ¥nds_visning"
+msgstr "Forhånds_visning"
 
 #: src/menus.c:98
 msgid "Print preview"
-msgstr "UtskriftsforhÃ¥ndsvisning"
+msgstr "Forhåndsvisning"
 
 #: src/menus.c:102
 msgid "Print preview..."
-msgstr "UtskriftsforhÃ¥ndsvisning..."
+msgstr "Forhåndsvisning..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
-msgstr "ForhÃ¥ndsvis data som skal skrives ut"
+msgstr "Forhåndsvis data som skal skrives ut"
 
 #: src/menus.c:110
 msgid "Close All"
@@ -985,15 +955,15 @@ msgstr "Lukk alt"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
-msgstr "Lukk alle Ã¥pne filer"
+msgstr "Lukk alle åpne filer"
 
 #: src/menus.c:138
 msgid "Goto _Line..."
-msgstr "GÃ¥ til _linje..."
+msgstr "Gå til _linje..."
 
 #: src/menus.c:139
 msgid "Go to a specific line number"
-msgstr "GÃ¥ til en spesifikk linje"
+msgstr "Gå til en spesifikk linje"
 
 #: src/menus.c:154
 msgid "File _Info"
@@ -1033,11 +1003,11 @@ msgstr "Ny"
 
 #: src/menus.c:244
 msgid "Open"
-msgstr "Ã…pne"
+msgstr "Åpne"
 
 #: src/menus.c:244
 msgid "Open a file"
-msgstr "Ã…pne en fil"
+msgstr "Åpne en fil"
 
 #: src/menus.c:248
 msgid "Save"
@@ -1085,11 +1055,11 @@ msgstr "Klipp ut utvalget"
 
 #: src/menus.c:274
 msgid "Copy"
-msgstr "KopiÃ©r"
+msgstr "Kopiér"
 
 #: src/menus.c:274
 msgid "Copy the selection"
-msgstr "KopiÃ©r utvalget"
+msgstr "Kopiér utvalget"
 
 #: src/menus.c:278
 msgid "Paste"
@@ -1101,7 +1071,7 @@ msgstr "Lim inn utklippstavlen"
 
 #: src/menus.c:283
 msgid "Search for a string"
-msgstr "SÃ¸k etter en streng"
+msgstr "Søk etter en streng"
 
 #: src/menus.c:288
 msgid "Exit"
@@ -1133,9 +1103,7 @@ msgstr ""
 msgid ""
 "'%s' doesn't seem to exist.\n"
 "\n"
-msgstr ""
-"'%s' ser ikke ut til Ã¥ eksistere.\n"
-"\n"
+msgstr "'%s' ser ikke ut til å eksistere.\n\n"
 
 #: src/plugin.c:213
 #, c-format
@@ -1144,7 +1112,7 @@ msgid ""
 "but '%s' could not be found inside it.\n"
 "\n"
 msgstr ""
-"'%s' ser ut til Ã¥ vÃ¦re en katalog.\n"
+"'%s' ser ut til å være en katalog.\n"
 "men '%s' ble ikke funnet i denne katalogen.\n"
 "\n"
 
@@ -1153,9 +1121,7 @@ msgstr ""
 msgid ""
 "'%s' doesn't seem to be a program.\n"
 "\n"
-msgstr ""
-"'%s' ser ikke ut til Ã¥ vÃ¦re et program.\n"
-"\n"
+msgstr "'%s' ser ikke ut til å være et program.\n\n"
 
 #: src/plugin.c:220
 #, c-format
@@ -1164,12 +1130,12 @@ msgid ""
 " Do you want to specify a new location for %s?"
 msgstr ""
 "%sDu vil ikke kunne bruke %s tillegget uten %s.\n"
-"Ã˜nsker du Ã¥ spesifisere en ny plassering for %s?"
+"Ønsker du å spesifisere en ny lokasjon for %s?"
 
 #: src/plugin.c:322
 #, c-format
 msgid "Error, unable to open module file, %s"
-msgstr "Feil, kunne ikke Ã¥pne modulfil, %s"
+msgstr "Feil, kunne ikke åpne modulfil, %s"
 
 #: src/plugin.c:332
 msgid "Error, plugin does not contain init_plugin function."
@@ -1184,18 +1150,16 @@ msgid "Error, plugin is still in use"
 msgstr "Feil, tillegg er fremdeles i bruk"
 
 #: src/print.c:229
-#, fuzzy
 msgid "Print Document"
-msgstr "Dokumenter"
+msgstr "Skriv ut dokument"
 
 #: src/print.c:237
 msgid "Pages"
 msgstr "Sider"
 
-#: src/print.c:283
-#, fuzzy
+#: src/print.c:285
 msgid "gedit : Print Preview\n"
-msgstr "gedit (%s): UtskriftsforhÃ¥ndsvisning"
+msgstr "gedit: Forhåndsvisning\n"
 
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
@@ -1213,15 +1177,13 @@ msgstr "_Fil"
 #: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
-msgstr "Kunne ikke Ã¥pne nylig brukt fil: %s"
+msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #: src/search.c:393
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
-msgstr ""
-"Kan ikke telle linjer hvis et annet sÃ¸k er aktivt. Vennligst lukk den andre "
-"sÃ¸kedialogen."
+msgstr "Kan ikke telle linjer hvis et annet søk er aktivt. Vennligst lukk den andre søkedialogen."
 
 #: src/search.c:410
 #, c-format
@@ -1251,57 +1213,3 @@ msgstr ""
 #: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Du kan ikke fjerne forrige visning av et dokument."
-
-#~ msgid "browse"
-#~ msgstr "bla gjennom"
-
-#~ msgid "Change"
-#~ msgstr "Endre"
-
-#~ msgid "don't translate this\n"
-#~ msgstr "ikke oversett dette\n"
-
-#~ msgid "Directory  "
-#~ msgstr "Katalog"
-
-#~ msgid ""
-#~ "gedit could not find the font \"%s\".\n"
-#~ "gedit is unable to print without this font installed."
-#~ msgstr ""
-#~ "gedit kunne ikke finne skrifttypen \"%s\".\n"
-#~ "gedit kan ikke skrive ut hvis ikke denne skrifttypen er installert."
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Side: %i %i"
-
-#~ msgid ""
-#~ "Hello Dear Translator :\n"
-#~ "This is the unstable branch of gedit. \n"
-#~ "I think you should be translating the gedit-1-0 branch. To get it from cvs "
-#~ "type : \n"
-#~ "cvs -z3 co -r gedit-1-0 gedit\n"
-#~ "Thank you. Chema"
-#~ msgstr ""
-#~ "Hallo kjÃ¦re oversetter:\n"
-#~ "Dette er den ustabile grenen av gedit.\n"
-#~ "Du bÃ¸r heller oversette gedit-1-0 grenen. For Ã¥ hente den fra CVS skriver "
-#~ "du:\n"
-#~ "cvs -z3 co -r gedit-1-0 gedit\n"
-#~ "Takk. Chema"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "Please make sure the file is not being used by another application\n"
-#~ "and that the file is not empty."
-#~ msgstr ""
-#~ "En feil oppstod under Ã¥pning av filen:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "Vennligst underÃ¸k om filen er i bruk av en annen applikasjon og\n"
-#~ "at filen ikke er tom."
