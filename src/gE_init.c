@@ -24,7 +24,7 @@ gint file_open_wrapper (gE_data *data)
 {
 	char *nfile, *name;
 
-	name = data->temp1;
+	name = data->temp2;
 	gE_document_new(data->window);
 	nfile = g_malloc(strlen(name)+1);
 	strcpy(nfile, name);
@@ -60,7 +60,7 @@ void prog_init(char **file)
 		g_free (doc);
 
 		while (*file) {
-			data->temp1 = *file;
+			data->temp2 = *file;
 			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
 			file++;
 		}
