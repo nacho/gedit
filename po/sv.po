@@ -7,10 +7,12 @@
 #
 # $Id$
 #
+#. Translator credits
+#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-12-08 17:53+0100\n"
+"POT-Creation-Date: 2001-12-12 11:48+0100\n"
 "PO-Revision-Date: 2001-12-08 17:53+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -22,16 +24,16 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Gnome-textredigerare"
 
-#: gedit2.desktop.in.h:2
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivera %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
 msgid "The searched string has not been found."
 msgstr "Söksträngen kunde inte hittas."
 
@@ -87,9 +89,18 @@ msgstr "Aktivera alla felsökningsmeddelanden."
 msgid "The gnome text editor"
 msgstr "Gnome-textredigeraren"
 
-#: src/gedit-commands.c:55
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr "Inte implementerat än."
+
+#: src/gedit-commands.c:407
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:464
+#, fuzzy
+msgid "A small and lightweight text editor for Gnome"
+msgstr "gedit är en liten och enkel textredigerare för GNOME."
 
 #: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
@@ -100,11 +111,11 @@ msgstr "%s %d"
 msgid "Untitled"
 msgstr "Namnlös"
 
-#: src/gedit-document.c:511 src/gedit-document.c:610
+#: src/gedit-document.c:529 src/gedit-document.c:635
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Ogiltig UTF-8-data påträffades vid läsning av filen"
 
-#: src/gedit-document.c:860
+#: src/gedit-document.c:885
 msgid "It is not possible to revert an Untitled document"
 msgstr "Det går inte att återställa ett namnlöst dokument"
 
@@ -122,7 +133,7 @@ msgstr "Läste in %i filer"
 msgid "Open File ..."
 msgstr "Öppna fil..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:411
+#: src/gedit-file.c:367 src/gedit-file.c:413
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -133,16 +144,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:479 src/gedit-file.c:676
+#: src/gedit-file.c:483 src/gedit-file.c:682
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Sparar filen \"%s\"..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
+#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+msgid "Unknown error"
 msgstr "Okänt fel"
 
-#: src/gedit-file.c:501 src/gedit-file.c:697
+#: src/gedit-file.c:505 src/gedit-file.c:703
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -153,20 +164,20 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:525 src/gedit-file.c:716
+#: src/gedit-file.c:531 src/gedit-file.c:724
 msgid "The document has not been saved."
 msgstr "Dokumentet har inte sparats."
 
-#: src/gedit-file.c:535 src/gedit-file.c:723
+#: src/gedit-file.c:541 src/gedit-file.c:731
 #, c-format
 msgid "File '%s' saved."
 msgstr "Filen \"%s\" sparades."
 
-#: src/gedit-file.c:602
+#: src/gedit-file.c:608
 msgid "Save As..."
 msgstr "Spara som..."
 
-#: src/gedit-file.c:653
+#: src/gedit-file.c:659
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
@@ -175,16 +186,16 @@ msgstr ""
 "En fil med namnet \"%s\" finns redan på denna plats. Vill du ersätta den med "
 "den fil som du vill spara?"
 
-#: src/gedit-file.c:658
+#: src/gedit-file.c:664
 msgid "_Replace"
 msgstr "_Ersätt"
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:834
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Återställer filen \"%s\"..."
 
-#: src/gedit-file.c:829
+#: src/gedit-file.c:855
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -195,16 +206,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:853
+#: src/gedit-file.c:881
 msgid "The document has not been reverted."
 msgstr "Dokumentet har inte återställts."
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:891
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Filen \"%s\" återställdes."
 
-#: src/gedit-file.c:1008
+#: src/gedit-file.c:1041
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -215,7 +226,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:484
+#: src/gedit-mdi.c:482
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -226,15 +237,15 @@ msgstr ""
 "\n"
 "Dina ändringar kommer att gå förlorade om du inte sparar dem."
 
-#: src/gedit-mdi.c:489
+#: src/gedit-mdi.c:487
 msgid "_Don't save"
 msgstr "Spara i_nte"
 
-#: src/gedit-mdi.c:569
+#: src/gedit-mdi.c:567
 msgid "(modified)"
 msgstr "(ändrad)"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:573
 msgid "(readonly)"
 msgstr "(skrivskyddad)"
 
@@ -248,7 +259,7 @@ msgstr "Öppna filen %s"
 msgid "Unable to open recent file: %s"
 msgstr "Kunde inte öppna nyligen använda filen: %s"
 
-#~ msgid "Unknown error"
+#~ msgid "Unknow error"
 #~ msgstr "Okänt fel"
 
 #~ msgid "ASCII table"
@@ -592,9 +603,6 @@ msgstr "Kunde inte öppna nyligen använda filen: %s"
 
 #~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 #~ msgstr "© 1998, 1999, 2000 Alex Roberts och Evan Lawrence"
-
-#~ msgid "gedit is a small and lightweight text editor for GNOME."
-#~ msgstr "gedit är en liten och enkel textredigerare för GNOME."
 
 #~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 #~ msgstr ""

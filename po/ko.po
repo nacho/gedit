@@ -3,10 +3,12 @@
 # Sung-Hyun Nam <namsh@lgic.co.kr>, 1998
 # Updated by Chideok Hwang <hwang@mizi.co.kr>, 2000, 2001
 # Updated by Young-Ho, Cha <ganadist@chollian.net>, 2000
+#. Translator credits
+#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.5POT-Creation-Date: 2001-02-25 14:48-0600\n"
-"POT-Creation-Date: 2001-12-05 01:33-0600\n"
+"POT-Creation-Date: 2001-12-12 11:48+0100\n"
 "PO-Revision-Date: 2001-03-01 11:15+0900\n"
 "Last-Translator: Chideok Hwang <hwang@mizi.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -18,16 +20,16 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit2.desktop.in.h:2
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
 msgid "gedit"
 msgstr ""
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
 #, c-format
 msgid "Activate %s"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
 #, fuzzy
 msgid "The searched string has not been found."
 msgstr "문자열이 발견되지않음"
@@ -84,9 +86,18 @@ msgstr ""
 msgid "The gnome text editor"
 msgstr ""
 
-#: src/gedit-commands.c:55
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr ""
+
+#: src/gedit-commands.c:407
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:464
+#, fuzzy
+msgid "A small and lightweight text editor for Gnome"
+msgstr "gedit은 그놈을 위한 작고 가벼운 텍스트 에디터입니다."
 
 #: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
@@ -97,14 +108,14 @@ msgstr ""
 msgid "Untitled"
 msgstr "이름없음"
 
-#: src/gedit-document.c:511 src/gedit-document.c:610
+#: src/gedit-document.c:529 src/gedit-document.c:635
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
 "파일\"%s\" 을 여는 도중 에러가 발생했습니다.\n"
 "파일이 존재하는지를 확인해주십시요."
 
-#: src/gedit-document.c:860
+#: src/gedit-document.c:885
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "'제목 없음' 문서를 되돌릴 수는 없습니다\n"
@@ -123,7 +134,7 @@ msgstr "%i개의 파일을 읽어드림"
 msgid "Open File ..."
 msgstr "파일 열기..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:411
+#: src/gedit-file.c:367 src/gedit-file.c:413
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -133,16 +144,16 @@ msgstr ""
 "파일\"%s\" 을 여는 도중 에러가 발생했습니다.\n"
 "파일이 존재하는지를 확인해주십시요."
 
-#: src/gedit-file.c:479 src/gedit-file.c:676
+#: src/gedit-file.c:483 src/gedit-file.c:682
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "다른 이름으로 저장..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
+#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:501 src/gedit-file.c:697
+#: src/gedit-file.c:505 src/gedit-file.c:703
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -153,38 +164,38 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:525 src/gedit-file.c:716
+#: src/gedit-file.c:531 src/gedit-file.c:724
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "문서가 저장되지 않음"
 
-#: src/gedit-file.c:535 src/gedit-file.c:723
+#: src/gedit-file.c:541 src/gedit-file.c:731
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:602
+#: src/gedit-file.c:608
 msgid "Save As..."
 msgstr "다른 이름으로 저장..."
 
-#: src/gedit-file.c:653
+#: src/gedit-file.c:659
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:658
+#: src/gedit-file.c:664
 #, fuzzy
 msgid "_Replace"
 msgstr "바꾸기"
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:834
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:829
+#: src/gedit-file.c:855
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -194,17 +205,17 @@ msgstr ""
 "파일\"%s\" 을 여는 도중 에러가 발생했습니다.\n"
 "파일이 존재하는지를 확인해주십시요."
 
-#: src/gedit-file.c:853
+#: src/gedit-file.c:881
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "문서가 저장되지 않음"
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:891
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1008
+#: src/gedit-file.c:1041
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -214,7 +225,7 @@ msgstr ""
 "파일\"%s\" 을 여는 도중 에러가 발생했습니다.\n"
 "파일이 존재하는지를 확인해주십시요."
 
-#: src/gedit-mdi.c:484
+#: src/gedit-mdi.c:482
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -222,15 +233,15 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:489
+#: src/gedit-mdi.c:487
 msgid "_Don't save"
 msgstr ""
 
-#: src/gedit-mdi.c:569
+#: src/gedit-mdi.c:567
 msgid "(modified)"
 msgstr "(변경됨)"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:573
 msgid "(readonly)"
 msgstr "(읽기 전용)"
 
@@ -521,9 +532,6 @@ msgstr "최근 문서를 열수 없습니다 : %s"
 
 #~ msgid "Inserts the current date and time"
 #~ msgstr "현재의 날짜와 시간을 끼워넣습니다"
-
-#~ msgid "gedit is a small and lightweight text editor for GNOME."
-#~ msgstr "gedit은 그놈을 위한 작고 가벼운 텍스트 에디터입니다."
 
 #, fuzzy
 #~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."

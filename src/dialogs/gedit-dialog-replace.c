@@ -384,7 +384,9 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
 				_("The searched string has not been found."));
-			
+		
+		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+	
 		gtk_dialog_run (GTK_DIALOG (message_dlg));
   		gtk_widget_destroy (message_dlg);
 

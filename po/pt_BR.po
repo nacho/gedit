@@ -2,10 +2,12 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Frederic L.W.Meunier <linux@urbi.com.br>, 1999.
 #
+#. Translator credits
+#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2001-12-05 01:33-0600\n"
+"POT-Creation-Date: 2001-12-12 11:48+0100\n"
 "PO-Revision-Date: 2001-10-11 17:50-0300\n"
 "Last-Translator: Francisco Petrucio <fpcj@impa.br>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -18,16 +20,16 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Editor de texto"
 
-#: gedit2.desktop.in.h:2
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
 #, fuzzy, c-format
 msgid "Activate %s"
 msgstr "_Ativar todos"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
 #, fuzzy
 msgid "The searched string has not been found."
 msgstr "Texto não encontrado."
@@ -86,9 +88,18 @@ msgstr "Ativar todas as mensagens de depuração."
 msgid "The gnome text editor"
 msgstr "Editor de texto"
 
-#: src/gedit-commands.c:55
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr ""
+
+#: src/gedit-commands.c:407
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:464
+#, fuzzy
+msgid "A small and lightweight text editor for Gnome"
+msgstr "gedit é um editor de texto pequeno e leve para o GNOME."
 
 #: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
@@ -99,7 +110,7 @@ msgstr ""
 msgid "Untitled"
 msgstr "Sem título"
 
-#: src/gedit-document.c:511 src/gedit-document.c:610
+#: src/gedit-document.c:529 src/gedit-document.c:635
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
@@ -107,7 +118,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-document.c:860
+#: src/gedit-document.c:885
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "Impossível reverter um documento sem título\n"
@@ -126,7 +137,7 @@ msgstr "Carregou %i arquivos"
 msgid "Open File ..."
 msgstr "Abrir arquivo..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:411
+#: src/gedit-file.c:367 src/gedit-file.c:413
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -137,16 +148,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:479 src/gedit-file.c:676
+#: src/gedit-file.c:483 src/gedit-file.c:682
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "Salvar como..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
+#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:501 src/gedit-file.c:697
+#: src/gedit-file.c:505 src/gedit-file.c:703
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -157,38 +168,38 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:525 src/gedit-file.c:716
+#: src/gedit-file.c:531 src/gedit-file.c:724
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "O documento não foi salvo."
 
-#: src/gedit-file.c:535 src/gedit-file.c:723
+#: src/gedit-file.c:541 src/gedit-file.c:731
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:602
+#: src/gedit-file.c:608
 msgid "Save As..."
 msgstr "Salvar como..."
 
-#: src/gedit-file.c:653
+#: src/gedit-file.c:659
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:658
+#: src/gedit-file.c:664
 #, fuzzy
 msgid "_Replace"
 msgstr "Substituir"
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:834
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:829
+#: src/gedit-file.c:855
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -199,17 +210,17 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:853
+#: src/gedit-file.c:881
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "O documento não foi salvo."
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:891
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1008
+#: src/gedit-file.c:1041
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -220,7 +231,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:484
+#: src/gedit-mdi.c:482
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -228,15 +239,15 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:489
+#: src/gedit-mdi.c:487
 msgid "_Don't save"
 msgstr ""
 
-#: src/gedit-mdi.c:569
+#: src/gedit-mdi.c:567
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:573
 msgid "(readonly)"
 msgstr "(somente leitura)"
 
@@ -593,9 +604,6 @@ msgstr "Impossível abrir arquivo recente: %s"
 
 #~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 #~ msgstr "(c) 1998, 1999, 2000 Alex Roberts e Evan Lawrence"
-
-#~ msgid "gedit is a small and lightweight text editor for GNOME."
-#~ msgstr "gedit é um editor de texto pequeno e leve para o GNOME."
 
 #~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 #~ msgstr "Para usar o plugin %s é necessário indicar a localização de \"%s\"."

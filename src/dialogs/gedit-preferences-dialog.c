@@ -863,6 +863,8 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
 	GeditPreferences old_prefs;
 	gint index;
+	const gchar* font;
+	guint16 dummy;
 
 	gedit_debug (DEBUG_PREFS, "");
 	
@@ -930,39 +932,31 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_colors_checkbutton)))
 		settings->use_default_colors = TRUE;
 	else
-	{
-		guint16 a;
-
 		settings->use_default_colors = FALSE;
 
-		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->text_colorpicker), 
-				&settings->fg[0], &settings->fg[1], &settings->fg[2], &a);
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->text_colorpicker), 
+				&settings->fg[0], &settings->fg[1], &settings->fg[2], &dummy);
 
-		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->background_colorpicker), 
-				&settings->bg[0], &settings->bg[1], &settings->bg[2], &a);
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->background_colorpicker), 
+				&settings->bg[0], &settings->bg[1], &settings->bg[2], &dummy);
 
-		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->sel_text_colorpicker), 
-				&settings->st[0], &settings->st[1], &settings->st[2], &a);
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->sel_text_colorpicker), 
+				&settings->st[0], &settings->st[1], &settings->st[2], &dummy);
 
-		gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->selection_colorpicker), 
-				&settings->sel[0], &settings->sel[1], &settings->sel[2], &a);
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (dlg->priv->selection_colorpicker), 
+				&settings->sel[0], &settings->sel[1], &settings->sel[2], &dummy);
 
-	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->default_font_checkbutton)))
 		settings->use_default_font = TRUE;
 	else
-	{
-		const gchar* font;
-
 		settings->use_default_font = FALSE;
 		
-		font = gnome_font_picker_get_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker));		
-		if (font != NULL)
-		{
-			g_free (settings->font);
-			settings->font = g_strdup (font);
-		}
+	font = gnome_font_picker_get_font_name (GNOME_FONT_PICKER (dlg->priv->fontpicker));		
+	if (font != NULL)
+	{
+		g_free (settings->font);
+		settings->font = g_strdup (font);
 	}
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_word_radiobutton)))

@@ -1,10 +1,12 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Valek Filippov <frob@df.ru>
 # Sergey Panov <sipan@mit.edu>
+#. Translator credits
+#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.*\n"
-"POT-Creation-Date: 2001-12-05 01:33-0600\n"
+"POT-Creation-Date: 2001-12-12 11:48+0100\n"
 "PO-Revision-Date: 2001-11-18 00:21+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,16 +18,16 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Текстовый редактор для GNOME"
 
-#: gedit2.desktop.in.h:2
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
 #, c-format
 msgid "Activate %s"
 msgstr "Активировать %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
 #, fuzzy
 msgid "The searched string has not been found."
 msgstr "Документ не был сохранен."
@@ -82,8 +84,16 @@ msgstr "Включить все отладочные сообщения."
 msgid "The gnome text editor"
 msgstr "Текстовый редактор для GNOME"
 
-#: src/gedit-commands.c:55
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
+msgstr ""
+
+#: src/gedit-commands.c:407
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:464
+msgid "A small and lightweight text editor for Gnome"
 msgstr ""
 
 #: src/gedit-document.c:448 src/gedit-document.c:459
@@ -95,11 +105,11 @@ msgstr "%s %d"
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: src/gedit-document.c:511 src/gedit-document.c:610
+#: src/gedit-document.c:529 src/gedit-document.c:635
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "При чтении файла были обнаружены неправильные данные UTF-8"
 
-#: src/gedit-document.c:860
+#: src/gedit-document.c:885
 msgid "It is not possible to revert an Untitled document"
 msgstr "Вы не можете восстановить неозаглавленный документ"
 
@@ -117,7 +127,7 @@ msgstr "Загружено %i файлов"
 msgid "Open File ..."
 msgstr "Открыть файл..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:411
+#: src/gedit-file.c:367 src/gedit-file.c:413
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -128,16 +138,17 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:479 src/gedit-file.c:676
+#: src/gedit-file.c:483 src/gedit-file.c:682
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Сохранение файла \"%s\"..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
+#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+#, fuzzy
+msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
-#: src/gedit-file.c:501 src/gedit-file.c:697
+#: src/gedit-file.c:505 src/gedit-file.c:703
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -148,20 +159,20 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:525 src/gedit-file.c:716
+#: src/gedit-file.c:531 src/gedit-file.c:724
 msgid "The document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/gedit-file.c:535 src/gedit-file.c:723
+#: src/gedit-file.c:541 src/gedit-file.c:731
 #, c-format
 msgid "File '%s' saved."
 msgstr "Файл \"%s\" сохранён."
 
-#: src/gedit-file.c:602
+#: src/gedit-file.c:608
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/gedit-file.c:653
+#: src/gedit-file.c:659
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
@@ -170,17 +181,17 @@ msgstr ""
 "Файл с именем \"%s\" уже есть в указанном месте. Хотите заменить его тем, "
 "который вы сохраняете?"
 
-#: src/gedit-file.c:658
+#: src/gedit-file.c:664
 #, fuzzy
 msgid "_Replace"
 msgstr "Заменить"
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:834
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Восстановление файла \"%s\"..."
 
-#: src/gedit-file.c:829
+#: src/gedit-file.c:855
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -191,16 +202,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:853
+#: src/gedit-file.c:881
 msgid "The document has not been reverted."
 msgstr "Документ не был восстановлен."
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:891
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Файл \"%s\" восстановлен."
 
-#: src/gedit-file.c:1008
+#: src/gedit-file.c:1041
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -211,7 +222,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:484
+#: src/gedit-mdi.c:482
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -222,15 +233,15 @@ msgstr ""
 "\n"
 "Если изменения не сохранить, то они будут потеряны."
 
-#: src/gedit-mdi.c:489
+#: src/gedit-mdi.c:487
 msgid "_Don't save"
 msgstr "Не сохранять"
 
-#: src/gedit-mdi.c:569
+#: src/gedit-mdi.c:567
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:573
 msgid "(readonly)"
 msgstr "(только чтение)"
 

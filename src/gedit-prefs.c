@@ -115,7 +115,7 @@ gedit_prefs_save_settings (void)
 			      settings->auto_indent,
 			      NULL);
 
-	gconf_client_set_bool (gconf_client,
+	gconf_client_set_int  (gconf_client,
 			      GEDIT_BASE_KEY GEDIT_PREF_WRAP_MODE,
 			      settings->wrap_mode,
 			      NULL);
@@ -125,7 +125,7 @@ gedit_prefs_save_settings (void)
 			      settings->show_status,
 			      NULL);
 
-	gconf_client_set_bool (gconf_client,
+	gconf_client_set_int  (gconf_client,
 			      GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_LABELS,
 			      settings->toolbar_labels,
 			      NULL);
@@ -314,7 +314,7 @@ gedit_prefs_load_settings (void)
 						  GEDIT_BASE_KEY GEDIT_PREF_AUTO_INDENT,
 						  NULL);
 	
-	settings->wrap_mode = gconf_client_get_bool (gconf_client,
+	settings->wrap_mode = gconf_client_get_int (gconf_client,
 						  GEDIT_BASE_KEY GEDIT_PREF_WRAP_MODE,
 						  NULL);
 
@@ -326,7 +326,7 @@ gedit_prefs_load_settings (void)
 					      GEDIT_BASE_KEY GEDIT_PREF_SHOW_STATUSBAR,
 					      NULL);
 
-	settings->toolbar_labels = gconf_client_get_bool (gconf_client,
+	settings->toolbar_labels = gconf_client_get_int (gconf_client,
 					      GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_LABELS,
 					      NULL);
 

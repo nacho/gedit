@@ -1,3 +1,21 @@
+2001-12-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-commands.c (TO_BE_IMPLEMENTED: set OK button as default 
+	(gedit_cmd_search_find_again): set OK button as default in the GtkMessageDialog 
+	(gedit_cmd_settings_preferences): added alert dialog
+
+	* gedit-file.c: set OK button as default in all the alert dialogs
+	(gedit_file_close_all): update UI items sensitivity
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity): behave
+	gently when active_window == NULL
+
+	* gedit-prefs.c: write and read GEDIT_BASE_KEY GEDIT_PREF_WRAP_MODE and
+        GEDIT_BASE_KEY GEDIT_PREF_TOOLBAR_LABELS as int
+
+	* dialogs/gedit-preferences-dialog.c (gedit_preferences_dialog_update_settings):
+	update font and colors settings even if the default ones are selected
+
 2001-12-11  Paolo Maggi  <maggi@athena.polito.it>
 
         * gedit-commands.c (gedit_cmd_help_about): fixed

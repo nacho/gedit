@@ -54,8 +54,9 @@
 			                          GTK_MESSAGE_INFO,	\
 			                          GTK_BUTTONS_OK,	\
                                    		  _("Not yet implemented."));	\
-	                         gtk_dialog_run (GTK_DIALOG (message_dlg));	\
-  	                         gtk_widget_destroy (message_dlg); }
+				  gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK); \
+	                          gtk_dialog_run (GTK_DIALOG (message_dlg));	\
+  	                          gtk_widget_destroy (message_dlg); }
 
 void 
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -332,7 +333,9 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
 				_("The searched string has not been found."));
-			
+
+			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+
 			gtk_dialog_run (GTK_DIALOG (message_dlg));
   			gtk_widget_destroy (message_dlg);
 		}
@@ -389,15 +392,37 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 				{
 					gedit_mdi_update_ui_according_to_preferences (gedit_mdi);
 					gedit_prefs_save_settings ();
+
+					gtk_widget_hide (dlg);
+				}
+				else
+				{
+					GtkWidget *message_dlg;
+
+					message_dlg = gtk_message_dialog_new (
+						GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						GTK_MESSAGE_ERROR,
+						GTK_BUTTONS_OK,
+						_("Impossible to update gedit settings."));
+
+					gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+
+					gtk_dialog_run (GTK_DIALOG (message_dlg));
+  					gtk_widget_destroy (message_dlg);
 				}
 
 				break;
+								
 			case GTK_RESPONSE_HELP:
 				/* FIXME */
 				break;
+
+			default:
+				gtk_widget_hide (dlg);
 		}	
 		
-	} while (ret == GTK_RESPONSE_HELP);
+	} while (GTK_WIDGET_VISIBLE (dlg));
 
 	gtk_widget_destroy (dlg);
 }
@@ -405,7 +430,8 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 void 
 gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	/* TODO: add logo */
+	/* TODO: add logo -- Paolo */
+	/* FIXME: set window position at the center of the active window -- Paolo */
 
 	static GtkWidget *about = NULL;
 

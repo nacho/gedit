@@ -375,6 +375,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 				   	GTK_BUTTONS_OK,
 					errstr);
 			
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
   			gtk_widget_destroy (dialog);
 			
@@ -419,6 +421,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 				   	GTK_BUTTONS_OK,
 					errstr);
 			
+			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
   			gtk_widget_destroy (dialog);
 
@@ -514,6 +518,8 @@ gedit_file_save (GeditMDIChild* child)
 				GTK_BUTTONS_OK,
 				errstr);
 			
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
 
@@ -704,7 +710,9 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 				   	GTK_MESSAGE_ERROR,
 				   	GTK_BUTTONS_OK,
 					errstr);
-			
+
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
 
@@ -736,9 +744,15 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 gboolean
 gedit_file_close_all (void)
 {
+	gboolean ret;
 	gedit_debug (DEBUG_FILE, "");
 
-	return bonobo_mdi_remove_all (BONOBO_MDI (gedit_mdi), FALSE);
+	ret = bonobo_mdi_remove_all (BONOBO_MDI (gedit_mdi), FALSE);
+
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+
+	return ret;
 }
 
 void
@@ -853,7 +867,9 @@ gedit_file_revert (GeditMDIChild *child)
 				   	GTK_MESSAGE_ERROR,
 				   	GTK_BUTTONS_OK,
 					errstr);
-			
+		
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
 
@@ -1032,7 +1048,9 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 			   	GTK_MESSAGE_ERROR,
 			   	GTK_BUTTONS_OK,
 				errstr);
-			
+
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 

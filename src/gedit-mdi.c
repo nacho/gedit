@@ -614,7 +614,9 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	gedit_debug (DEBUG_MDI, "");
 	
 	active_window = bonobo_mdi_get_active_window (mdi);
-	g_return_if_fail (active_window != NULL);
+
+	if (active_window == NULL)
+		return;
 	
 	ui_engine = bonobo_window_get_ui_engine (active_window);
 	
