@@ -132,6 +132,7 @@ static GeditEncoding utf8_encoding =
 	  N_("Unicode") 
 	};
 
+/* initialized in gedit_encoding_lazy_init() */
 static GeditEncoding unknown_encoding = 
 	{ GEDIT_ENCODING_UNKNOWN,
 	  NULL, 
@@ -314,12 +315,6 @@ gedit_encoding_get_from_charset (const gchar *charset)
 	if (g_ascii_strcasecmp (charset, "UTF-8") == 0)
 		return gedit_encoding_get_utf8 ();
 
-	if (unknown_encoding.charset != NULL)
-	{
-		if (g_ascii_strcasecmp (charset, unknown_encoding.charset) == 0)
-			return &unknown_encoding;
-	}
-
 	i = 0; 
 	while (i < GEDIT_ENCODING_LAST)
 	{
@@ -327,6 +322,12 @@ gedit_encoding_get_from_charset (const gchar *charset)
 			return &encodings[i];
       
 		++i;
+	}
+
+	if (unknown_encoding.charset != NULL)
+	{
+		if (g_ascii_strcasecmp (charset, unknown_encoding.charset) == 0)
+			return &unknown_encoding;
 	}
 
 	return NULL;
@@ -428,7 +429,7 @@ gedit_encoding_get_name (const GeditEncoding* enc)
 
 	gedit_encoding_lazy_init ();
 
-	return enc->name;
+	return (enc->name == NULL) ? _("Unknown") : enc->name;
 }
 
 
