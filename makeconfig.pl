@@ -1,3 +1,15 @@
+#! /usr/bin/perl
+
+die unless chdir( "$ENV{srcdir}/" );
+open DIRLIST, "editor-plugins/plugins.dir.list";
+while ( <DIRLIST> )
+{
+    s/#.*\n?$//; next if /^\s*$/; s/\s*$//; s/^\s*//; push @direntry, $_ if length;    
+}
+
+open MAKEFILE, "> configure.in";
+print MAKEFILE << 'EOF';
+dnl This is a generated file.  Please see makeconfig.pl.
 AC_INIT(src/gedit.c)
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gedit, 0.4.8)
@@ -110,22 +122,25 @@ intl/Makefile
 po/Makefile.in
 macros/Makefile
 src/Makefile
-plugins/Makefile
-plugins/idl/Makefile
-plugins/goad/Makefile
-plugins/diff/Makefile
-plugins/cvsdiff/Makefile
-plugins/email/Makefile
-plugins/encrypt/Makefile
-plugins/reverse/Makefile
-plugins/spell/Makefile
-plugins/prm/Makefile
-plugins/convert/Makefile
-plugins/testselect/Makefile
-plugins/client/Makefile
-plugins/hello/Makefile
-plugins/shell/Makefile
-plugins/launcher/Makefile
-plugins/ctag/Makefile
-plugins/browse/Makefile
+gmodule-plugins/Makefile
+gmodule-plugins/idl/Makefile
+gmodule-plugins/goad/Makefile
+gmodule-plugins/client/Makefile
+gmodule-plugins/hello/Makefile
+gmodule-plugins/shell/Makefile
+gmodule-plugins/launcher/Makefile
+gmodule-plugins/ctag/Makefile
+editor-plugins/Makefile
+EOF
+
+if ( $#direntry + 1 > 0 )
+{
+    foreach $i (@direntry)
+    {
+	print MAKEFILE "editor-plugins/$i/Makefile\n";
+    }
+}
+
+print MAKEFILE << "EOF";
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+EOF

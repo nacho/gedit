@@ -2,9 +2,11 @@
 
 plugindir = $(libdir)/go/plugins
 
-SUBDIRS = macros po intl src plugins
+SUBDIRS = macros po intl src editor-plugins gmodule-plugins
 
-EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop ABOUT-NLS TODO gedit.spec gedit.keys
+EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins			\
+	INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop	\
+	ABOUT-NLS TODO gedit.spec gedit.keys
 
 man_MANS = gedit.1
 

@@ -3,6 +3,7 @@
 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
+export srcdir
 
 PKG_NAME="gEdit"
 
@@ -12,5 +13,8 @@ PKG_NAME="gEdit"
     echo " top-level $PKG_NAME directory"
     exit 1
 }
+
+perl $srcdir/editor-plugins/plugins.pl
+perl $srcdir/makeconfig.pl
 
 . $srcdir/macros/autogen.sh

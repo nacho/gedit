@@ -5,8 +5,6 @@ extra_dirs = hello reverse testselect
 endif
 
 if HAVE_GNOME
-spell = spell
-prm = prm
 ctag = ctag
 endif
 
@@ -23,7 +21,6 @@ endif
 gmodule_plugins = $(shell) $(corba)
 endif
 
-SUBDIRS = client $(ctag) cvsdiff diff email browse encrypt $(spell) \
-	  $(prm) convert $(gmodule_plugins) $(extra_dirs)
+SUBDIRS = client $(ctag) $(gmodule_plugins) $(extra_dirs)
 
 EXTRA_DIST = plugin_howto gmodule_plugin_howto ChangeLog

@@ -5,7 +5,7 @@ plugindir = $(libexecdir)/go/plugins
 plugin_PROGRAMS = hello-plugin
 
 hello_plugin_SOURCES = \
-	$(top_srcdir)/plugins/client/client.h \
+	$(top_srcdir)/gmodule-plugins/client/client.h \
 	hello.c
 
 INCLUDES = -I$(includedir) 				\
@@ -13,14 +13,14 @@ INCLUDES = -I$(includedir) 				\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
 	-I..						\
 	$(GNOME_INCLUDEDIR)				\
-	-I$(top_srcdir)/plugins/client
+	-I$(top_srcdir)/gmodule-plugins/client
 
 LDADD = \
-	$(top_builddir)/plugins/client/libclient.a	\
+	$(top_builddir)/gmodule-plugins/client/libclient.a	\
 	$(GTK_LIBS)
 
 DEPS = \
-	$(top_builddir)/plugins/client/libclient.a
+	$(top_builddir)/gmodule-plugins/client/libclient.a
 
 plugin_PROGRAMS = hello-plugin
 

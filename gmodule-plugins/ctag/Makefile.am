@@ -5,7 +5,7 @@ plugindir = $(libexecdir)/go/plugins
 plugin_PROGRAMS = ctag-plugin
 
 ctag_plugin_SOURCES = \
-	$(top_srcdir)/plugins/client/client.h	\
+	$(top_srcdir)/gmodule-plugins/client/client.h	\
 	ctag.h					\
 	ctag.c
 
@@ -14,14 +14,14 @@ INCLUDES = -I$(includedir) 				\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
 	-I..						\
 	$(GNOME_INCLUDEDIR)				\
-	-I$(top_srcdir)/plugins/client
+	-I$(top_srcdir)/gmodule-plugins/client
 
 LDADD = \
-	$(top_builddir)/plugins/client/libclient.a	\
+	$(top_builddir)/gmodule-plugins/client/libclient.a	\
 	$(GTK_LIBS)
 
 DEPS = \
-	$(top_builddir)/plugins/client/libclient.a
+	$(top_builddir)/gmodule-plugins/client/libclient.a
 
 plugin_PROGRAMS = ctag-plugin
 

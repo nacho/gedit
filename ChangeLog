@@ -1,3 +1,24 @@
+1999-02-02  Chris Lahey  <clahey@umich.edu>
+
+	* editor-plugins: A copy of the plugins directly from go.  This
+	updates automatically.
+
+	* gmodule-plugins: plugins is renamed gmodule-plugins.
+
+	* plugins: Directory renamed gmodule-plugins.
+
+	* .cvsignore: Added configure.in.
+
+	* configure.in, makeconfig.pl: configure.in is now generate by
+	makeconfig.pl.  So configure.in is removed and makeconfig.pl is
+	added.
+
+	* autogen.sh: Now calls makeconfig.pl and
+	editor-plugins/plugins.pl.
+
+	* Makefile.am: Switched from just plugins to editor-plugins and
+	gmodule-plugins.
+
 1999-01-30  Evan Lawrence <evan@worldpath.net>
 
 	* src/commands.[ch]:
