@@ -41,7 +41,8 @@
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-convert.h>
 #include <gedit/gedit-encodings.h>
-#include <gedit/gedit-file-selector-utils.h>
+#include <gedit/gedit-file-selector-util.h>
+#include <gedit/gedit-io-error-dialogs.h>
 #include <gedit/gedit-menus.h>
 
 
