@@ -34,9 +34,9 @@
 
 #include <libgnome/libgnome.h>
 #include <libgnomeprint/gnome-print.h>
-#include <libgnomeprint/gnome-print-master.h>
+#include <libgnomeprint/gnome-print-job.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
-#include <libgnomeprintui/gnome-print-master-preview.h>
+#include <libgnomeprintui/gnome-print-job-preview.h>
 #include <eel/eel-string.h>
 
 #include <string.h>	/* For strlen */
@@ -65,7 +65,7 @@ struct _GeditPrintJobInfo {
 	GnomePrintConfig 	*config;
 	gint			 range_type;
 
-	GnomePrintMaster	*print_master;
+	GnomePrintJob		*print_job;
 	GnomePrintContext	*print_ctx;
 
 	gint			 page_num;
@@ -230,8 +230,8 @@ gedit_print_job_info_destroy (GeditPrintJobInfo *pji)
 	if (pji->print_ctx != NULL)
 		g_object_unref (pji->print_ctx);
 
-	if (pji->print_master != NULL)
-		g_object_unref (pji->print_master);
+	if (pji->print_job != NULL)
+		g_object_unref (pji->print_job);
 
 	g_free (pji);
 }
@@ -243,7 +243,7 @@ gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
 		
 	gedit_debug (DEBUG_PRINT, "");
 
-	gnome_print_master_get_page_size_from_config (pji->config, 
+	gnome_print_job_get_page_size_from_config (pji->config, 
 			&pji->page_width, &pji->page_height);
 
 	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_LEFT, 
@@ -520,10 +520,10 @@ gedit_print_preview_real (GeditPrintJobInfo *pji)
 	gedit_debug (DEBUG_PRINT, "");
 
 	g_return_if_fail (pji != NULL);
-	g_return_if_fail (pji->print_master != NULL);
+	g_return_if_fail (pji->print_job != NULL);
 
 	title = g_strdup_printf (_("gedit - Print Preview"));
-	gpmp = gnome_print_master_preview_new (pji->print_master, title);
+	gpmp = gnome_print_job_preview_new (pji->print_job, title);
 	g_free (title);
 
 	gtk_widget_show (gpmp);
@@ -565,10 +565,10 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 
 	g_return_if_fail (pji->config != NULL);
 
-	pji->print_master = gnome_print_master_new_from_config (pji->config);
-	g_return_if_fail (pji->print_master != NULL);
+	pji->print_job = gnome_print_job_new (pji->config);
+	g_return_if_fail (pji->print_job != NULL);
 
-	pji->print_ctx = gnome_print_master_get_context (pji->print_master);
+	pji->print_ctx = gnome_print_job_get_context (pji->print_job);
 	g_return_if_fail (pji->print_ctx != NULL);
 
 	gedit_print_update_page_size_and_margins (pji);
@@ -580,12 +580,12 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 		return;
 	}
 #endif	
-	gnome_print_master_close (pji->print_master);
+	gnome_print_job_close (pji->print_job);
 
 	if (pji->preview)
 		gedit_print_preview_real (pji);
 	else
-		gnome_print_master_print (pji->print_master);
+		gnome_print_job_print (pji->print_job);
 	
 	gedit_print_job_info_destroy (pji);
 }
