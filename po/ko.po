@@ -5,15 +5,15 @@
 # Changwoo Ryu <cwryu@debian.org>, 2004
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 2.5.0\n"
-"POT-Creation-Date: 2004-01-15 18:27+0100\n"
-"PO-Revision-Date: 2004-01-10 20:16+0900\n"
+"Project-Id-Version: gedit 2.5.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-21 20:31+0900\n"
+"PO-Revision-Date: 2004-01-21 21:43+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
-"Language-Team: GTP Korean <gnome-kr-translation@lists.sourceforge.net>\n"
+"Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
@@ -456,30 +456,28 @@ msgstr "%s 활성"
 msgid ""
 "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
 "changes. </span>"
-msgstr ""
+msgstr "<span weight=\"bold\" size=\"larger\">바뀐 사항을 저장하지 않은 문서가 있습니다. </span>"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:2
 msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
+msgstr "문서를 저장하지 않으면, 바뀐 사항을 모두 잃게 됩니다."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:653
-#, fuzzy
 msgid "S_elect the documents you want to save:"
-msgstr "쓸려는 태그 묶음을 선택하십시오"
+msgstr "저장하려는 문서를 선택하십시오(_E):"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:4
 msgid "Save _None"
-msgstr ""
+msgstr "저장하지 않기(_N)"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:5
-#, fuzzy
 msgid "_Save Selected"
-msgstr "모두 저장(_S)"
+msgstr "선택한 문서 저장(_S)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:141
 msgid "Do_n't save"
-msgstr "저장하지 않음(_N)"
+msgstr "저장하지 않기(_N)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:360
 #, c-format
@@ -489,13 +487,12 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "저장하지 않으면, 최근 %ld초동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:369
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
-msgstr ""
+msgstr "저장하지 않으면, 최근 1분동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:375
 #, c-format
@@ -505,8 +502,7 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "저장하지 않으면, 최근 1분 %ld초동안 편집한 사항을 모두 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:385
 #, c-format
@@ -516,13 +512,12 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "저장하지 않으면, %ld분동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:400
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
-msgstr ""
+msgstr "저장하지 않으면, 최근 1시간동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:406
 #, c-format
@@ -532,8 +527,7 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "저장하지 않으면, 최근 1시간 %d분동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:421
 #, c-format
@@ -541,24 +535,23 @@ msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "문서를 저장하지 않으면, 최근 %d시간동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:465
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "닫기 전에 문서 \"%s\"의 바뀐 사항을 저장하시겠습니까?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:639
 #, c-format
 msgid ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr ""
+msgstr "바뀌었는데 저장하지 않은 문서가 %d개 있습니다. 닫기 전에 바뀐 사항을 저장하시겠습니까?"
 
 #. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:670
 msgid "If you don't save, all your changes will be definitively lost."
-msgstr ""
+msgstr "저장하지 않으면, 바뀐 사항을 모두 잃게 됩니다."
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -954,19 +947,19 @@ msgstr "동작(_I)"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
-msgstr "미리보기에 쓸 문장 입력(_I)"
+msgstr "미리 보기에 쓸 문장 입력(_I)"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:117
 msgid "Modify preview phrase..."
-msgstr "미리보기 문장 수정..."
+msgstr "미리 보기 문장 수정..."
 
 #: gedit/dialogs/gnome-print-font-dialog.c:171
 msgid "Preview"
-msgstr "미리보기"
+msgstr "미리 보기"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:184
 msgid "_Modify preview phrase..."
-msgstr "미리보기 문장 수정(_M)..."
+msgstr "미리 보기 문장 수정(_M)..."
 
 #: gedit/dialogs/gnome-print-font-dialog.c:245
 msgid "Font Selection"
@@ -1002,11 +995,11 @@ msgstr "선택한 글꼴 이름"
 
 #: gedit/dialogs/gnome-print-font-picker.c:209
 msgid "Preview text"
-msgstr "글자 미리보기"
+msgstr "글자 미리 보기"
 
 #: gedit/dialogs/gnome-print-font-picker.c:210
 msgid "Preview text shown in the dialog"
-msgstr "대화창에 보일 글자 미리보기"
+msgstr "대화창에 보일 글자 미리 보기"
 
 #: gedit/dialogs/gnome-print-font-picker.c:218
 msgid "Use font in label"
@@ -1119,7 +1112,7 @@ msgstr "찾을 위치(_L):"
 
 #: gedit/dialogs/program-location-dialog.glade2.h:4
 msgid "label"
-msgstr "label"
+msgstr "레이블"
 
 #: gedit/dialogs/replace.glade2.h:1 gedit/dialogs/uri.glade2.h:1
 #: plugins/shell_output/shell_output.glade2.h:1
@@ -1411,28 +1404,28 @@ msgid "Open File..."
 msgstr "파일 열기..."
 
 #: gedit/gedit-file.c:264 gedit/gedit-file.c:413
-#, fuzzy, c-format
+#, c-format
 msgid "Saving document \"%s\"..."
-msgstr "파일 '%s' 저장..."
+msgstr "\"%s\" 문서를 저장하는 중입니다..."
 
 #: gedit/gedit-file.c:292 gedit/gedit-file.c:434
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been saved."
-msgstr "문서가 저장되지 않음"
+msgstr "\"%s\" 문서를 저장하지 않았습니다."
 
 #: gedit/gedit-file.c:306 gedit/gedit-file.c:426
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been saved."
-msgstr "문서가 저장되지 않음"
+msgstr "\"%s\" 문서를 저장했습니다."
 
 #: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "다른 이름으로 저장..."
 
 #: gedit/gedit-file.c:592
-#, fuzzy, c-format
+#, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr "문서 \"%s\"의 바뀐 점을 저장 하시겠습니까?"
+msgstr "문서 \"%s\"의 저장하지 않은 바뀐 점을 되돌리시겠습니까?"
 
 #: gedit/gedit-file.c:601
 #, c-format
@@ -1442,13 +1435,12 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "최근 %ld초동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:610
 msgid ""
 "Changes made to the document in the last minute will be definitively lost."
-msgstr ""
+msgstr "최근 1분동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:616
 #, c-format
@@ -1458,8 +1450,7 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "최근 %ld초동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:626
 #, c-format
@@ -1469,13 +1460,12 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "최근 %ld분동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:641
 msgid ""
 "Changes made to the document in the last hour will be definitively lost."
-msgstr ""
+msgstr "최근 1시간동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:647
 #, c-format
@@ -1485,8 +1475,7 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "최근 1시간 %d분동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:662
 #, c-format
@@ -1494,32 +1483,31 @@ msgid ""
 "Changes made to the document in the last %d hour will be definitively lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "최근 %d시간동안 문서에 편집한 사항을 잃을 것입니다."
 
 #: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "되돌리기(_R)"
 
 #: gedit/gedit-file.c:730
-#, fuzzy, c-format
+#, c-format
 msgid "Error reverting the document \"%s\"."
-msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
+msgstr "\"%s\" 문서를 되돌리는 데 오류가 발생했습니다."
 
 #: gedit/gedit-file.c:737
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been reverted."
-msgstr "문서를 되돌리지 못함"
+msgstr "\"%s\" 문서를 되돌리지 못했습니다."
 
 #: gedit/gedit-file.c:741
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been reverted."
-msgstr "문서를 되돌리지 못함"
+msgstr "\"%s\" 문서를 되돌렸습니다."
 
 #: gedit/gedit-file.c:769
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting the document \"%s\"..."
-msgstr "파일 '%s' 되돌리는 중..."
+msgstr "\"%s\" 문서를 되돌리는 중입니다..."
 
 #: gedit/gedit-file.c:904
 msgid "Could not read data from stdin."
@@ -1531,35 +1519,33 @@ msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "\"%s\" 파일이 없습니다. 새로 만드시겠습니까?"
 
 #: gedit/gedit-file.c:1077
-#, fuzzy
 msgid "Reverting file:"
-msgstr "파일 '%s' 되돌리는 중..."
+msgstr "파일을 되돌리는 중입니다:"
 
 #: gedit/gedit-file.c:1081
-#, fuzzy
 msgid "Loading file:"
-msgstr "%d개 파일을 읽어들이는 중입니다..."
+msgstr "파일을 읽어들이는 중입니다:"
 
 #: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
 #, c-format
 msgid "Error loading file \"%s\""
-msgstr ""
+msgstr "파일 \"%s\"을(를) 읽어들이는 데 오류가 발생했습니다"
 
 #: gedit/gedit-file.c:1271
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file \"%s\""
-msgstr "파일 '%s' 읽음"
+msgstr "\"%s\" 파일을 읽어들이는 중입니다"
 
 #: gedit/gedit-file.c:1348
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
-msgstr[0] "%i개의 파일을 읽어들였습니다"
+msgstr[0] "%d개 파일을 읽어들였습니다"
 
 #: gedit/gedit-file.c:1382
-#, fuzzy, c-format
+#, c-format
 msgid "Loading file \"%s\"..."
-msgstr "%d개 파일을 읽어들이는 중입니다..."
+msgstr "\"%s\" 파일을 읽어들이는 중입니다..."
 
 #: gedit/gedit-file.c:1529
 #, c-format
@@ -1723,7 +1709,7 @@ msgstr "페이지 %d/%d 인쇄 중..."
 
 #: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
-msgstr "인쇄 미리보기"
+msgstr "인쇄 미리 보기"
 
 #: gedit/gedit-print.c:550
 #, c-format
@@ -1872,11 +1858,11 @@ msgstr "기본 설정(_E)"
 
 #: gedit/gedit-ui.xml.h:38
 msgid "Print Previe_w..."
-msgstr "인쇄 미리보기(_W)..."
+msgstr "인쇄 미리 보기(_W)..."
 
 #: gedit/gedit-ui.xml.h:39
 msgid "Print Preview"
-msgstr "인쇄 미리보기"
+msgstr "인쇄 미리 보기"
 
 #: gedit/gedit-ui.xml.h:41
 msgid "Print the current file"
@@ -1884,19 +1870,19 @@ msgstr "파일을 인쇄합니다"
 
 #: gedit/gedit-ui.xml.h:42
 msgid "Quit"
-msgstr "마침"
+msgstr "끝내기"
 
 #: gedit/gedit-ui.xml.h:43
 msgid "Quit the program"
-msgstr "프로그램을 마칩니다"
+msgstr "프로그램을 끝냅니다"
 
 #: gedit/gedit-ui.xml.h:44
 msgid "Redo"
-msgstr "재실행"
+msgstr "다시 실행"
 
 #: gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
-msgstr "마지막에했던 작업을 다시 합니다"
+msgstr "실행 취소했던 작업을 다시 합니다"
 
 #: gedit/gedit-ui.xml.h:47
 msgid "Revert"
@@ -2059,7 +2045,7 @@ msgstr "아이콘만(_I)"
 
 #: gedit/gedit-ui.xml.h:87
 msgid "_New"
-msgstr "새 문서(_N)"
+msgstr "새로 만들기(_N)"
 
 #: gedit/gedit-ui.xml.h:88
 msgid "_Open..."
@@ -2079,7 +2065,7 @@ msgstr "인쇄(_P)..."
 
 #: gedit/gedit-ui.xml.h:92
 msgid "_Quit"
-msgstr "마침(_Q)"
+msgstr "끝내기(_Q)"
 
 #: gedit/gedit-ui.xml.h:93
 msgid "_Redo"
@@ -2302,7 +2288,7 @@ msgstr ""
 "바른 문자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
@@ -2310,7 +2296,7 @@ msgid ""
 msgstr ""
 "파일 \"%s\"을(를) 열 수 없습니다.\n"
 "\n"
-"%s"
+"%s."
 
 #: gedit/gedit-utils.c:718
 #, c-format
@@ -2612,7 +2598,7 @@ msgstr "문서 통계"
 
 #: plugins/docinfo/docinfo.c:154
 msgid "_Update"
-msgstr "고치기(_U)"
+msgstr "업데이트(_U)"
 
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid ""
@@ -2782,7 +2768,6 @@ msgstr "작업 디렉토리(_W):"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: 쉘 출력 플러그인"
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "정렬(_O)..."
@@ -2985,7 +2970,7 @@ msgstr "<b>단어</b>"
 
 #: plugins/spell/spell-checker.glade2.h:4
 msgid "Add w_ord"
-msgstr "단어 더함(_O)"
+msgstr "단어 더하기(_O)"
 
 #: plugins/spell/spell-checker.glade2.h:5
 msgid "Cha_nge"
@@ -3169,11 +3154,11 @@ msgstr "넣기(_I)"
 
 #: plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
-msgstr "입력할 형식 기다림(_P)"
+msgstr "입력할 형식 기다리기(_P)"
 
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
-msgstr "사용자 형식 씀(_U)"
+msgstr "사용자 형식 쓰기(_U)"
 
 #: viewer/gedit-persist-stream.c:44
 msgid "Save method not implemented for gedit viewer"
@@ -3186,30 +3171,3 @@ msgstr "선택한 텍스트를 클립보드로 복사합니다"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "텍스트 복사(_C)"
-
-#~ msgid "It is not possible to revert an Untitled document"
-#~ msgstr "제목 없음 문서를 되돌릴 수는 없습니다"
-
-#~ msgid "File '%s' saved."
-#~ msgstr "파일 '%s' 저장됨."
-
-#~ msgid ""
-#~ "Do you want to revert to saved the document '%s'?\n"
-#~ "\n"
-#~ "You will not be able to undo this operation."
-#~ msgstr ""
-#~ "저장된 문서 '%s'(을)를 되돌리겠습니까?\n"
-#~ "\n"
-#~ "되돌린 문서는 다시 복구할 수 없습니다."
-
-#~ msgid "File '%s' has been reverted."
-#~ msgstr "'%s' 파일을 되돌렸습니다."
-
-#~ msgid "Your changes will be lost if you don't save them."
-#~ msgstr "저장하지 않으면 바뀐 점을 잃어버리게 됩니다."
-
-#~ msgid "_Don't quit"
-#~ msgstr "마치지 않음(_D)"
-
-#~ msgid "_Don't close"
-#~ msgstr "닫지 않음(_D)"
