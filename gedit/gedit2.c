@@ -295,6 +295,7 @@ int
 main (int argc, char **argv)
 {
     	GnomeProgram *program;
+	gchar *display_name;
 	gboolean restored = FALSE;
 	CORBA_Object factory;
 
@@ -317,10 +318,10 @@ main (int argc, char **argv)
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	/* Need to set this to the canonical DISPLAY value, since
-	   that's where we're registering per-display components */
-	bonobo_activation_set_activation_env_value
-		("DISPLAY",
-		 gdk_screen_make_display_name (gdk_screen_get_default ()));
+	 * that's where we're registering per-display components */
+	display_name = gdk_screen_make_display_name (gdk_screen_get_default ());
+	bonobo_activation_set_activation_env_value ("DISPLAY", display_name);
+	g_free (display_name);
 
 	/* check whether we are running already */
         factory = bonobo_activation_activate_from_id
