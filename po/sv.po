@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-14 20:54-0400\n"
+"POT-Creation-Date: 2000-04-17 00:13+0200\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Andreas Hyden <a.hyden@cyberpoint.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -30,7 +30,7 @@ msgid "Inserts the current date and time"
 msgstr "Infogar dagens datum och tid"
 
 #: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:281
+#: src/print.c:354
 msgid "Untitled"
 msgstr "Namnlös"
 
@@ -63,19 +63,28 @@ msgstr ""
 "Var god och se till om filen finns."
 
 #: src/file.c:94
-#, fuzzy
 msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file is not beeing used by another aplication."
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
 msgstr ""
-"Ett fel uppstod vid öppning av filen.\n"
-"Var god och se till om filen finns."
+"Ett fel uppstod vid öppning av filen:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Var god och se till att filen inte används av något annat program\n"
+"och att filen inte är tom."
 
-#: src/file.c:103
+#: src/file.c:106
 msgid "Could not allocate the requrired memory."
 msgstr "Kunde inte allokera tillräckligt med minne."
 
-#: src/file.c:109
+#: src/file.c:112
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -90,7 +99,7 @@ msgstr ""
 "\n"
 "Se till att du har rättigheter för att öppna filen."
 
-#: src/file.c:177
+#: src/file.c:180
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -107,7 +116,7 @@ msgstr ""
 "Se till att sökvägen du angav existerar, och att du har de rätta "
 "skrivrättigheterna."
 
-#: src/file.c:191 src/file.c:205
+#: src/file.c:194 src/file.c:208
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -124,38 +133,38 @@ msgstr ""
 "På grund av en okänd orsak (1). Var god och rapportera detta problemet till "
 "submit@bugs.gnome.org"
 
-#: src/file.c:271
+#: src/file.c:274
 msgid "Open File ..."
 msgstr "Öppna fil ..."
 
-#: src/file.c:313
+#: src/file.c:316
 msgid "Save As..."
 msgstr "Spara som..."
 
-#: src/file.c:351
+#: src/file.c:354
 #, c-format
 msgid "Loaded file %s"
 msgstr "Laddade filen %s"
 
-#: src/file.c:417
+#: src/file.c:420
 #, c-format
 msgid "``%s'' is about to be overwriten. Do you want to continue ?"
 msgstr "\"%s\" kommer att skrivas över. Vill du fortsätta ?"
 
-#: src/file.c:428
+#: src/file.c:431
 msgid "Document has not been saved."
 msgstr "Dokument har inte sparats."
 
-#: src/file.c:436
+#: src/file.c:439
 msgid "Error saving file!"
 msgstr "Fel vid sparning av fil!"
 
-#: src/file.c:518
+#: src/file.c:521
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
 
-#: src/document.c:340
+#: src/document.c:341
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " \"%s\" har blivit ändrad. Vill du spara den?"
@@ -181,12 +190,12 @@ msgstr "Fel, insticksprogrammet används fortfarande"
 msgid "_Plugins"
 msgstr "_Insticksprogram"
 
-#: src/print.c:211
+#: src/print.c:240
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Förhandsgranskning"
 
-#: src/print.c:361
+#: src/print.c:458
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Sida: %i/%i"
@@ -455,7 +464,6 @@ msgid "Appearance"
 msgstr "Utseende"
 
 #: src/dialogs/prefs.glade.h:9
-#, fuzzy
 msgid "Show splitscreen"
 msgstr "Visa skärmdelning"
 
@@ -464,7 +472,6 @@ msgid "Editor Behavior"
 msgstr "Editor-uppförande"
 
 #: src/dialogs/prefs.glade.h:11
-#, fuzzy
 msgid "Enable Auto-indent"
 msgstr "Använd autoindrag"
 
@@ -487,6 +494,10 @@ msgid ""
 "Top\n"
 "Bottom\n"
 msgstr ""
+"Vänster\n"
+"Höger\n"
+"Toppen\n"
+"Botten\n"
 
 #: src/dialogs/prefs.glade.h:20
 msgid ""
@@ -498,81 +509,77 @@ msgstr ""
 
 #: src/dialogs/prefs.glade.h:25
 msgid "Mode: "
-msgstr ""
+msgstr "Läge: "
 
 #: src/dialogs/prefs.glade.h:26
 msgid "Notebook Tab Position: "
 msgstr ""
 
 #: src/dialogs/prefs.glade.h:27
-#, fuzzy
 msgid "Documents"
 msgstr "Dokument"
 
 #: src/dialogs/prefs.glade.h:28
-#, fuzzy
 msgid "Fonts"
 msgstr "Typsnitt"
 
 #: src/dialogs/prefs.glade.h:29
 msgid "Pick a Font"
-msgstr ""
+msgstr "Välj ett typsnitt"
 
 #: src/dialogs/prefs.glade.h:30
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: src/dialogs/prefs.glade.h:31
-#, fuzzy
 msgid "Default Font: "
-msgstr "Standard"
+msgstr "Standard typsnitt: "
 
 #: src/dialogs/prefs.glade.h:32
-#, fuzzy
 msgid "Colors"
-msgstr "Stäng"
+msgstr "Färger"
 
 #: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
 msgid "Pick a color"
-msgstr ""
+msgstr "Välj en färg"
 
 #: src/dialogs/prefs.glade.h:35
-#, fuzzy
 msgid "Background: "
-msgstr "Textbakgrund"
+msgstr "Bakgrund: "
 
 #: src/dialogs/prefs.glade.h:36
-#, fuzzy
 msgid "Foreground: "
-msgstr "Textfärg"
+msgstr "Förgrun: "
 
 #: src/dialogs/prefs.glade.h:37
 msgid "Fonts/Colors"
-msgstr ""
+msgstr "Typsnitt/färger"
 
 #: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
-#, fuzzy
 msgid "Printing"
-msgstr "Skriv ut"
+msgstr "Utskrift"
 
 #: src/dialogs/prefs.glade.h:39
 msgid "Add header"
-msgstr ""
+msgstr "Lägg till rubrik"
 
 #: src/dialogs/prefs.glade.h:40
 msgid "Wrap long lines at the page width"
-msgstr ""
+msgstr "Radbryt långa linjer vid radbredden"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
-msgstr ""
+msgstr "Skriv ut linjenummerna varje:"
 
 #: src/dialogs/prefs.glade.h:42
 msgid "line(s)"
-msgstr ""
+msgstr "linje(r)"
+
+#: src/dialogs/prefs.glade.h:44
+msgid "Paper"
+msgstr "Papper"
 
 #: src/dialogs/search.glade.h:9
-#, fuzzy
 msgid ""
 "Cursor\n"
 "Beginning of Document\n"
