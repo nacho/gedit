@@ -27,25 +27,26 @@
 #include "prefs.h"
 #include "file.h"
 #include "utils.h"
+#include "window.h"
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
 #endif
 
-       void recent_update (GnomeApp *app);
-static void recent_update_menus (GnomeApp *app, GList *recent_files);
+       void gedit_recent_update (GnomeApp *app);
+static void gedit_recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gpointer data);
-       void recent_add (char *filename);
+       void gedit_recent_add (char *filename);
+       void gedit_recent_remove (char *filename);
 
-static GList *	history_get_list (void);
-gchar *		history_update_list (gchar *filename);
-void		history_write_config (void);
+static GList *	gedit_recent_history_get_list (void);
+gchar *		gedit_recent_history_update_list (gchar *filename);
+void		gedit_recent_history_write_config (void);
 
-
-GList *history_list = NULL;
+GList *gedit_recent_history_list = NULL;
 
 static GList *
-history_get_list (void)
+gedit_recent_history_get_list (void)
 {
         gchar *filename, *key;
         gint max_entries, i;
@@ -53,8 +54,8 @@ history_get_list (void)
 
 	gedit_debug ("", DEBUG_RECENT);
 	
-	if (history_list)
-		return history_list;
+	if (gedit_recent_history_list)
+		return gedit_recent_history_list;
 
 	gnome_config_push_prefix ("/gedit/History/");
 
@@ -75,16 +76,17 @@ history_get_list (void)
 			g_free (key);
 			break;
                 }
-                history_list = g_list_append (history_list, filename);
+                gedit_recent_history_list = g_list_append (gedit_recent_history_list, filename);
                 g_free (key);
         }
+
         gnome_config_pop_prefix ();
 
-        return history_list;
+        return gedit_recent_history_list;
 }
 
 /**
- * history_update_list:
+ * gedit_recent_history_update_list:
  * @filename: 
  * 
  * This function updates the history list.  The return value is a 
@@ -94,7 +96,7 @@ history_get_list (void)
  * Return value: 
  **/
 gchar *
-history_update_list (gchar *filename)
+gedit_recent_history_update_list (gchar *filename)
 {
         gchar *name, *old_name = NULL;
         GList *l = NULL;
@@ -115,7 +117,7 @@ history_update_list (gchar *filename)
         gnome_config_pop_prefix ();
 
         /* Check if this filename already exists in the list */
-        for (l = history_list; l && (count < max_entries); l = l->next)
+        for (l = gedit_recent_history_list; l && (count < max_entries); l = l->next)
 	{
                 if (!found && (!strcmp ((gchar *)l->data, filename)
 			       || (count == max_entries - 1)))
@@ -134,15 +136,22 @@ history_update_list (gchar *filename)
         /* Insert the new filename to the new list and free up the old list */
         name = g_strdup (filename);
         new_list = g_list_prepend (new_list, name);
-        g_list_free (history_list);
-        history_list = new_list;
+        g_list_free (gedit_recent_history_list);
+        gedit_recent_history_list = new_list;
 
         return old_name;
 }
 
-/* Write contents of the history list to the configuration file. */
+/**
+ * gedit_recent_history_write_config:
+ * @void: 
+ * 
+ * Write contents of the history list to the configuration file.
+ * 
+ * Return Value: 
+ **/
 void
-history_write_config (void)
+gedit_recent_history_write_config (void)
 {
         gchar *key; 
         GList *l;
@@ -150,7 +159,7 @@ history_write_config (void)
 
 	gedit_debug ("", DEBUG_RECENT);
 
-        if (history_list == NULL)
+        if (gedit_recent_history_list == NULL)
 		return;
 
         max_entries = gnome_config_get_int ("/gedit/History/MaxFiles=4");
@@ -158,7 +167,7 @@ history_write_config (void)
         gnome_config_push_prefix ("/gedit/History/");
         gnome_config_set_int ("MaxFiles", max_entries);
 
-        for (l = history_list; l; l = l->next) {
+        for (l = gedit_recent_history_list; l; l = l->next) {
                 key = g_strdup_printf ("File%d", i++);
                 gnome_config_set_string (key, (gchar *)l->data);
                 g_free (l->data);
@@ -167,13 +176,20 @@ history_write_config (void)
 	gnome_config_sync ();
         gnome_config_pop_prefix ();
 
-        g_list_free (history_list);
-        history_list = NULL;
+        g_list_free (gedit_recent_history_list);
+        gedit_recent_history_list = NULL;
 }
 
-/* Update the graphical part of the recently-used menu */
+/**
+ * gedit_recent_update_menus:
+ * @app: 
+ * @recent_files: 
+ * 
+ * Update the greaphica part of the recently-used menu
+ * 
+ **/
 static void
-recent_update_menus (GnomeApp *app, GList *recent_files)
+gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 {
 	GnomeUIInfo *menu;
 	gchar *filename;
@@ -221,12 +237,6 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 		gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
 		g_free (menu->label);
-		/*
-		  OK. here is a memleak, BUT if we free filename
-		  the recent stuff will not work. FIXME :
-		  chema .
-		  g_free (filename);
-		*/
 	}
 
 	g_free (menu);
@@ -239,19 +249,16 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 static void
 recent_cb (GtkWidget *widget, gpointer data)
 {
-	Document *doc;
-	
 	gedit_debug ("", DEBUG_RECENT);
 
 	g_return_if_fail (data != NULL);
 
-	doc = gedit_document_new_with_file (data);
-
-	if (!doc)
+	if (!gedit_document_new_with_file (data))
+	{
 		gedit_flash_va (_("Unable to open recent file : %s"), (gchar *) data);
-
-	/*FIXME: If an error was encountered the delete the
-	  entry from the menu. Chema */
+		gedit_recent_remove ((gchar *) data);
+		gedit_recent_update_menus (gedit_window_active_app (), gedit_recent_history_list);
+	}
 }
 
 /**
@@ -263,15 +270,15 @@ recent_cb (GtkWidget *widget, gpointer data)
  * to the recent documents list.
  **/
 void
-recent_update (GnomeApp *app)
+gedit_recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
 
 	gedit_debug ("", DEBUG_RECENT);
 
-	filelist = history_get_list ();
+	filelist = gedit_recent_history_get_list ();
 
-	recent_update_menus (app, filelist);
+	gedit_recent_update_menus (app, filelist);
 }
 
 /**
@@ -281,35 +288,82 @@ recent_update (GnomeApp *app)
  * Record a file in GNOME's recent documents database 
  **/
 void
-recent_add (char *filename)
+gedit_recent_add (char *file_name)
 {
 	gchar *del_name;
 
 	gedit_debug ("", DEBUG_RECENT);
 
-	g_return_if_fail (filename != NULL);
+	g_return_if_fail (file_name != NULL);
 
-	del_name = history_update_list (filename);
+	del_name = gedit_recent_history_update_list (file_name);
+
 	g_free (del_name);
 }
 
 
+/**
+ * recent_remove:
+ * @filename: Filename of document to remove from the recently accessed list
+ *
+ * Record a file in GNOME's recent documents database 
+ **/
+void
+gedit_recent_remove (char *file_name)
+{
+	gint n;
+	guchar * nth_list_item;
 
+	for (n=0; n < g_list_length (gedit_recent_history_list); n++)
+	{
+		nth_list_item = g_list_nth_data (gedit_recent_history_list, n);
+		if (strcmp (nth_list_item, file_name) == 0)
+		{
+			gedit_recent_history_list = g_list_remove (gedit_recent_history_list, nth_list_item);
+			g_free (nth_list_item);
+		}
+	}
 
+#if 0
+	gchar *del_name;
+        GList *list = NULL;
+        gint max_entries, count = 0;
+        gboolean found = FALSE;2
 
+	gedit_debug ("", DEBUG_RECENT);
 
+	g_return_if_fail (file_name != NULL);
+/*
+        gchar *name, *old_name = NULL;
+        GList *new_list = NULL;
+*/
+/*
+  nth_undo = g_list_nth_data (doc->undo, n);
+  doc->undo = g_list_remove (doc->undo, nth_undo);
+*/
 
+        /* Check if this filename already exists in the list */
+        for (list = gedit_recent_history_list;
+	     recent_file_list && (count < max_entries);
+	     list = list->next)
+	{
+                if (!found && (!
+			       || (count == max_entries - 1)))
+		{
+                        /* This is either the last item in the list, or a
+                         * duplicate of the requested entry. */
+                        old_name = (gchar *)l->data;
+                        found = TRUE;
+                }
+                count++;
+        }
 
+        /* Insert the new filename to the new list and free up the old list */
+        name = g_strdup (filename);
+        new_list = g_list_prepend (new_list, name);
+        g_list_free (gedit_recent_history_list);
+        gedit_recent_history_list = new_list;
 
-
-
-
-
-
-
-
-
-
-
-
-
+        return;
+#endif
+}

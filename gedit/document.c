@@ -443,10 +443,6 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 		switch (ret)
 		{
 		case 0:
-			/* FIXME : If the user selects YES
-			   treat as if he had selected CANCEL
-			   because we don't want him to loose his
-			   data. This is anoying, I know. Chema*/
 			return file_save_document (doc);
 		case 1:
 			return TRUE;
@@ -455,7 +451,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 			return FALSE;
 		}
 	}
-	
+
 	return TRUE;
 }
 
@@ -558,8 +554,11 @@ void
 gedit_mdi_init (void)
 {
 	gedit_debug ("", DEBUG_DOCUMENT);
-	
-	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VERSION));
+
+	/*
+	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VESION));
+	*/
+	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "));
 
 	mdi->tab_pos = settings->tab_pos;
 
@@ -586,7 +585,7 @@ gedit_mdi_init (void)
 void
 gedit_document_load ( GList *file_list)
 {
-	Document *doc;
+	gchar *file_name;
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
@@ -595,15 +594,14 @@ gedit_document_load ( GList *file_list)
         /* create a file for each document in the parameter list */
 	for (;file_list; file_list = file_list->next)
 	{
-		if (g_file_exists (file_list->data))
-		{
-			doc = gedit_document_new_with_title (file_list->data);
-			gedit_file_open (doc, file_list->data);
-		}
+		file_name = gedit_file_convert_to_full_pathname (file_list->data);
+
+		if (g_file_exists (file_name))
+			gedit_document_new_with_file ((gchar *) file_name);
 		else
-		{
-			gedit_file_create_popup ((guchar *) file_list->data);
-		}
+			gedit_file_create_popup ((guchar *) file_name);
+
+		g_free (file_name);
 	}
 
 	if (gedit_document_current()==NULL)
@@ -623,14 +621,11 @@ gedit_document_set_title (Document *doc)
 {
 	gchar *title;
 	gchar *docname;
-	/*
-	gint i;
-	View *nth_view;
-	*/
 
 	gedit_debug ("", DEBUG_DOCUMENT);
-	
-	g_return_if_fail (doc != NULL);
+
+	if (doc == NULL)
+		return;
 
 	docname = GNOME_MDI_CHILD (doc)->name;
 
@@ -639,18 +634,9 @@ gedit_document_set_title (Document *doc)
 	else
 		title = g_strdup_printf ("gedit: %s", docname);
 
-	/* 
-	for (i = 0; i < g_list_length (doc->views); i++)
-	{
-		nth_view = g_list_nth_data (doc->views, i);
-		if (nth_view == view_exclude)
-			continue;
-		
-		gedit_view_insert (nth_view, position, text, length);
-	}
-	*/
 	gtk_window_set_title (gedit_window_active(), title);
 
 	g_free (title);
 }
+
 

@@ -263,23 +263,6 @@ GnomeUIInfo gedit_settings_menu[] =
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo gedit_window_menu[] =
-{
- 	GNOMEUIINFO_MENU_NEW_WINDOW_ITEM (window_new_cb, NULL),
-
-/*FIXME        GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(window_close_cb,
-					   NULL),*/
-	
-/*	GNOMEUIINFO_SEPARATOR,
-
-	{ GNOME_APP_UI_ITEM, N_("_Document List"),
-	  N_("Display the document list"),
-	  files_list_popup, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL, 'L', GDK_CONTROL_MASK, NULL },*/
-
-	GNOMEUIINFO_END
-};
-
 GnomeUIInfo gedit_docs_menu[] =
 {
 	GNOMEUIINFO_END
@@ -311,7 +294,6 @@ GnomeUIInfo gedit_menu[] =
 		0, 0, NULL
 	},
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
-/*	GNOMEUIINFO_MENU_WINDOWS_TREE (gedit_window_menu), disabled by Chema */
 	GNOMEUIINFO_MENU_FILES_TREE (gedit_docs_menu),
 	GNOMEUIINFO_MENU_HELP_TREE (gedit_help_menu),
 

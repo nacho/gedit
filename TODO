@@ -1,4 +1,4 @@
-   - Design questions ?
+Design questions ?
 
 - Should we enable the split window ?
 - is document.c the place to have mdi_ini ?
@@ -16,34 +16,46 @@
     open, gedit will not exit
 [X] Add undo data "replace" and gedit_document_replace() function
 [X] You should only be able to open 1 prefrences window
-[ ] Update README, HACKING, gedit.spec.in, AUTHORS etc..
-[ ] Add an Untitled file saved to the Recent file list
+[X] Add an Untitled file saved to the Recent file list
+[X] After view_remove the main window title does not get updated
+[X] After closing a doc the main window title does not get updated
+[X] Fix the recent files feature, there are still some loose ends.
+    [X] use full path so that we can locate the files when gedit is
+	executed from another directory
+    [X] When saving and Untitled Document or "Saving as" add the doc
+        to the list
+    [Xs] If a document can't be loaded from the recent list because
+	of whatever reason, remove it.
+[ ] When swapping .c & .h files display error dialogs to the user
+    If the file is allready open, do not open it again, just set it's
+    view as active
 [ ] Try to fix the line & column pos
+    *** maybe the next text widget will fix this.***
 [ ] Fix the problem with the Main window title when switching
-    between different views of the same document
-[ ] After view_remove the main window title does not get updated
+    between different views or docs, it flashes.
+    *** mailed jaka ***
+[ ] Update README, HACKING, gedit.spec.in, AUTHORS etc..
+    ***  yak! ****
+[ ] The word wrapping preference in the prefs. dialog box does not
+    modify the editor behaivor 
+    *** new text widget ??? ****
+
 
 ** Eric **
 [ ] New Documentation
 
 ** Roberto **
-[ ] Insert Shell Output plugin
+[~] Insert Shell Output plugin
 [ ] Add to the diff plugin the ability to make the diff from
     an open document in gedit.
+[ ] Shade & Unshade the Undo & Redo buttons.
 
 ** Unclaimed **
 [ ] check for the existence of sendmail and of diff. If they are
     no found ask the user for the location and set it in settings->sendmail
     & settings->diff. Same thing for the browse plugin
-[ ] Fix the recent files feature, there are still some loose ends.
-    [ ] use full path so that we can locate the files when gedit is executed from another directory
-    [ ] When savin and Untitled Document or "Saving as" add the doc to the list
-    [ ] If a document can't be loaded from the recent list because of whatever reason, remove it.
 [ ] Split screen ???
 	Should we re-enable it ? Maybe.
-[ ] If you close a doc, the title of the window is set to gedit $version
-    and not gedit $ Document. When switching docs the Title is set twice
-    and flashes.
 
 ----------------------------------------------------------------------
   gedit 0.7.9

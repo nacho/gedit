@@ -33,7 +33,7 @@
 #include "commands.h"
 #include "document.h"
 #include "utils.h"
-
+#include "window.h"
 
 Preferences *settings = NULL;
 
@@ -66,8 +66,8 @@ gedit_save_settings (void)
 	gnome_config_set_int ("fgg", settings->fg[1]);
 	gnome_config_set_int ("fgb", settings->fg[2]);
 
-	if (GTK_IS_WIDGET (mdi->active_window))
-		gdk_window_get_size (GTK_WIDGET (mdi->active_window)->window,
+	if (GTK_IS_WIDGET (gedit_window_active()))
+		gdk_window_get_size (GTK_WIDGET (gedit_window_active())->window,
 				     &settings->width, &settings->height);
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
@@ -114,6 +114,7 @@ prefs_determine_use_fontset (void)
 void
 gedit_load_settings (void)
 {
+	gchar * mdi_mode_string;
 	gedit_debug ("Loading preferencesn", DEBUG_PREFS);
 
 	if (!settings)
@@ -125,7 +126,9 @@ gedit_load_settings (void)
 	gnome_config_push_prefix ("/gedit/Global/");
 
 	settings->tab_pos = gnome_config_get_int ("tab_pos=2");
-	settings->mdi_mode = gnome_config_get_int ("mdi_mode=42");
+	mdi_mode_string = g_strdup_printf ("mdi_mode=%i", GNOME_MDI_NOTEBOOK);
+	settings->mdi_mode = gnome_config_get_int (mdi_mode_string);
+	g_free (mdi_mode_string);
 
 	settings->auto_indent = gnome_config_get_bool ("auto_indent");
 	settings->word_wrap = gnome_config_get_bool ("word_wrap");

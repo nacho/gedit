@@ -188,7 +188,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gedit_plugins_window_add (app);
 	
 	settings->num_recent = 0;
-	recent_update (GNOME_APP (app));
+	gedit_recent_update (GNOME_APP (app));
 
 	/* statusbar */
 	if (settings->show_status)
@@ -277,8 +277,9 @@ void
 doc_swaphc_cb (GtkWidget *widget, gpointer data)
 {
 	size_t len;
-	char *newfname;
-	Document *doc;
+	gchar *new_file_name;
+	Document *doc, *nth_doc;
+	gint n;
 
 	gedit_debug ("", DEBUG_FILE);
 	
@@ -286,7 +287,7 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 	if (!doc || !doc->filename)
 		return;
 
-	newfname = NULL;
+	new_file_name = NULL;
 	len = strlen (doc->filename);
 	
 	while (len)
@@ -299,48 +300,72 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 	len++;
 	if (doc->filename[len] == 'h')
 	{
-		newfname = g_strdup (doc->filename);
-		newfname[len] = 'c';
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'c';
 	}
 	else if (doc->filename[len] == 'H')
 	{
-		newfname = g_strdup (doc->filename);
-		newfname[len] = 'C';
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'C';
 	}
 	else if (doc->filename[len] == 'c')
 	{
-		newfname = g_strdup (doc->filename);
-		newfname[len] = 'h';
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'h';
 
 		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "cpp") == 0)
-			newfname[len+1] = '\0';
+			new_file_name[len+1] = '\0';
 	}
 	else if (doc->filename[len] == 'C')
 	{
-		newfname = g_strdup (doc->filename);
+		new_file_name = g_strdup (doc->filename);
 
 		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0)
 		{
-			newfname[len] = 'H';
-			newfname[len+1] = '\0';
+			new_file_name[len] = 'H';
+			new_file_name[len+1] = '\0';
 		}
 		else
-			newfname[len] = 'H';
+			new_file_name[len] = 'H';
 	}
 
-	if (!newfname)
+	if (!new_file_name)
+	{
+		gchar *errstr = g_strdup (_("This file does not end with a valid extension\n"));
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
 		return;
+	}
 
-	/* FIXME: Give a warning dialog that says the file doesn't
-	 *        exist */
-	if (!g_file_exists (newfname))
+	if (!g_file_exists (new_file_name))
+	{
+		gchar *errstr = g_strdup_printf (_("The file %s was not found."), new_file_name);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
 		return;
+	}
 
-	/* hmm maybe whe should check if the file exist before we try
-	 * to open.  this will be fixed later....  */
-	/* This function will return FALSE/TRUE on ERROR/SUCCES.
-	   So you can add any dialog and stuff if you want. Chema */
-	gedit_document_new_with_file (newfname);
+	g_print ("NewFileName: %s\n", new_file_name);
+
+	
+	/* Scan the documents to see if the file we are looking for is allready
+	   open */
+	for (n = 0; n < g_list_length (mdi->children); n++)
+	{
+		nth_doc = (Document *)g_list_nth_data (mdi->children, n);
+		
+		if (strcmp(nth_doc->filename, new_file_name) == 0)
+		{
+			View *view;
+			view = g_list_nth_data (nth_doc->views, 0);
+			g_return_if_fail (view != NULL);
+			gnome_mdi_set_active_view (mdi, GTK_WIDGET (view));
+			return;
+		}
+		
+	}
+	
+	gedit_document_new_with_file (new_file_name);
 }
 
 

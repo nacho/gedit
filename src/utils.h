@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,6 +51,7 @@ extern gint debug_file;
 extern gint debug_document;
 extern gint debug_commands;
 extern gint debug_recent;
+extern gint debug_window;
 
 #define gedit_debug(str, section) \
     if (debug) \
@@ -76,7 +77,7 @@ extern gint debug_recent;
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_recent && section == DEBUG_RECENT) \
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_recent && section == DEBUG_WINDOW) \
+    if (debug_window && section == DEBUG_WINDOW) \
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 
@@ -123,10 +124,12 @@ static const struct poptOption options[] =
 
 #define gedit_editable_current() GTK_EDITABLE(VIEW (gedit_view_current())->text)
 
-void gedit_flash     (gchar *msg);
-void gedit_flash_va  (gchar *format, ...);
-int  gtk_radio_group_get_selected (GSList *radio_group);
-void gtk_radio_button_select (GSList *group, int n);
-void gedit_debug_mess (gchar *message, DebugSection type);
+void	gedit_flash     (gchar *msg);
+void	gedit_flash_va  (gchar *format, ...);
+void	gedit_debug_mess (gchar *message, DebugSection type);
+
+/* Radio buttons utility functions */
+gint	gtk_radio_group_get_selected (GSList *radio_group);
+void	gtk_radio_button_select (GSList *group, int n);
 
 #endif /* __UTILS_H__ */

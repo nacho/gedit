@@ -1,3 +1,46 @@
+2000-06-14  Chema Celorio  <chema@celorio.com>
+
+	* print.c (gedit_print_verify_fonts): new function. It verifies
+	that the user has the fonts required.	
+	(print_set_pji): fix a stupid bug, close 13922.
+
+	* window.c (doc_swaphc_cb): add error dialogs.
+	if the file is allready open, don't open it again
+	set it's view active.
+
+	* search.c (dump_search_state): remove unused enums
+	SEARCH_IN_PROGRESS_COUNT_LINES & _REPLACE
+
+2000-06-13  Chema Celorio  <chema@celorio.com>
+
+	* utils.h (gedit_debug): add debug_window macro
+
+	* gedit.c: add "gint debug_window"
+
+	* document.c (gedit_document_load): convert the file_list->data
+	to a full_pathname.
+
+	* file.c (gedit_file_convert_to_full_pathname): new function to convert
+	the file_name passed as argument to a full path name.
+	* file.h: add prototype
+
+	* recent.c: rename functions for consistency with the rest
+	of the code.
+	
+	* prefs.c (gedit_load_settings): compose mdi string from
+	enum and not use a number.
+
+	* file.c (file_close_cb): after closing a doc, set the
+	title.
+
+	* document.c (gedit_mdi_init): don't display "gedit "VERSION
+	in the title window, since gedit_document_set_title is not.
+	If you want to add the version number to the title window
+	pleas also add it to the function gedit_docuemnt_set_title.
+
+	* view.c (gedit_view_remove_cb): after removing a view, set
+	the title again.
+
 2000-06-13  Chema Celorio  <chema@celorio.com>
 
 	* file.c: finish fixing the BUG in which gedit will not

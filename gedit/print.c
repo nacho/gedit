@@ -33,6 +33,7 @@
 #include "commands.h"
 #include "prefs.h"
 #include "utils.h"
+#include "window.h"
 
 #include <libgnomeprint/gnome-printer.h>
 #include <libgnomeprint/gnome-print.h>
@@ -105,8 +106,12 @@ static  void print_end_page (PrintJobInfo *pji);
 static  void print_end_job (GnomePrintContext *pc);
 static  void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
 static  void print_pji_destroy (PrintJobInfo *pji);
-static  void print_set_pji ( PrintJobInfo * pji, Document *doc);
+static  gint print_set_pji ( PrintJobInfo * pji, Document *doc);
+static  gint gedit_print_verify_fonts (void);
 
+
+#define GEDIT_PRINT_BODY_FONT "Courier"
+#define GEDIT_PRINT_HEADER_FONT "Helvetica"
 
 /**
  * file_print_cb:
@@ -143,7 +148,10 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	
 	/* We need to calculate the number of pages before running
 	   the dialog, so load pji with info now */
-	print_set_pji (pji, doc);
+	if (!print_set_pji (pji, doc))
+	{
+		return;
+	}
 
 	/* file_print preview is a false when preview is requested */ 
 	if (file_printpreview)
@@ -451,20 +459,83 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 	{
 		char * number_text = g_strdup_printf ("%i",line);
 		GnomeFont *temp_font = gnome_font_new (pji->font_name, 6);
-		g_assert (pji->font_name!=NULL);
+
+		g_return_if_fail (temp_font != NULL);
 		
 		gnome_print_setfont (pji->pc, temp_font);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
 		gnome_print_show   (pji->pc, number_text);
 		g_free (number_text);
+		gtk_object_unref (GTK_OBJECT(temp_font));
 		print_setfont (pji);
 	}
 }
 
-static void
+/**
+ * gedit_print_verify_fonts:
+ * @void: 
+ * 
+ * verify that the fonts that we are going to use are available
+ * 
+ * Return Value: 
+ **/
+static gint
+gedit_print_verify_fonts (void)
+{
+	GnomeFont *test_font;
+	guchar * test_font_name;
+
+	gedit_debug ("", DEBUG_PRINT);
+
+	/* Courier */
+	test_font_name = g_strdup (GEDIT_PRINT_BODY_FONT);
+	test_font = gnome_font_new (test_font_name, 10);
+	if (test_font==NULL)
+	{
+		gchar *errstr = g_strdup_printf (_("gedit could not find the font \"%s\".\n"
+						   "gedit is unable to print without this font installed."),
+						 test_font_name);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		return FALSE;
+	}
+	gtk_object_unref (GTK_OBJECT (test_font));
+	g_free (test_font_name);
+	
+	/* Helvetica  */
+	test_font_name = g_strdup (GEDIT_PRINT_HEADER_FONT);
+	test_font = gnome_font_new (test_font_name, 10);
+	if (test_font==NULL)
+	{
+		gchar *errstr = g_strdup_printf (_("gedit could not find the font \"%s\".\n"
+						   "gedit is unable to print without this font installed."),
+						 test_font_name);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		return FALSE;
+	}
+	gtk_object_unref (GTK_OBJECT (test_font));
+	g_free (test_font_name);	
+
+	return TRUE;
+}
+
+/**
+ * print_set_pji:
+ * @pji: 
+ * @doc: 
+ * 
+ * 
+ * 
+ * Return Value: TRUE on success and FALSE on error
+ **/
+static gint
 print_set_pji (PrintJobInfo * pji, Document *doc)
 {
 	gedit_debug ("", DEBUG_PRINT);
+
+	if (!gedit_print_verify_fonts())
+		return FALSE;
 
 	pji->view = gedit_view_current();
 	pji->doc = doc;
@@ -503,7 +574,7 @@ print_set_pji (PrintJobInfo * pji, Document *doc)
 	pji->printable_height = pji->page_height -
 		                pji->margin_top -
 		                pji->margin_bottom;
-	pji->font_name = "Courier"; /* FIXME: Use courier 10 for now but set to actual font */
+	pji->font_name = g_strdup (GEDIT_PRINT_BODY_FONT);
 	pji->font_size = 10;
 	pji->font_char_width = 0.0808 * 72;
 	pji->font_char_height = .14 * 72;
@@ -517,6 +588,8 @@ print_set_pji (PrintJobInfo * pji, Document *doc)
 	pji->pages = ((int) (pji->total_lines_real-1)/pji->lines_per_page)+1;
 	pji->file_offset = 0;
 	pji->current_line = 0;
+
+	return TRUE;
 }
 
 /**
@@ -728,13 +801,13 @@ static void
 print_header (PrintJobInfo *pji, unsigned int page)
 {
 	guchar* text1 = g_strdup (pji->filename);
-	guchar* text2 = g_strdup_printf (_("Page: %i/%i"),page,pji->pages);
+	guchar* text2 = g_strdup_printf (_("Page: %i/%i"), page, pji->pages);
 	GnomeFont *font;
 	float x,y,len;
 	
 	gedit_debug ("", DEBUG_PRINT);
 
-	font = gnome_font_new ("Helvetica", 12);
+	font = gnome_font_new (GEDIT_PRINT_HEADER_FONT, 12);
 	gnome_print_setfont (pji->pc, font);
 
 	/* Print the file name */
@@ -795,6 +868,7 @@ print_pji_destroy (PrintJobInfo *pji)
 	gtk_object_unref (GTK_OBJECT (pji->master));
 	g_free (pji->buffer);
 	g_free (pji->filename);
+	g_free (pji->font_name);
 	g_free (pji);
 }
 

@@ -69,6 +69,10 @@ static void cancel_cb (GtkWidget *w, gpointer cbdata);
 static void gedit_close_all_flag_status (guchar *function);
 static void gedit_close_all_flag_verify (guchar *function);
 
+
+gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
+
+
 /* TODO : add flash on all operations ....Chema*/
 /*        what happens when you open the same doc
 	  twice. I think we should add another view
@@ -100,8 +104,10 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
-		gnome_app_error (gedit_window_active_app(), _("An error was encountered while opening the file."
-							      "\nPlease make sure the file exists."));
+		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
+							      "\nPlease make sure the file exists."), fname);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
 		return 1;
 	}
 
@@ -154,8 +160,8 @@ gedit_file_open (Document *doc, gchar *fname)
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
-	recent_add (fname);
-	recent_update (gedit_window_active_app());
+	gedit_recent_add (fname);
+	gedit_recent_update (gedit_window_active_app());
 
 	gedit_debug ("end", DEBUG_FILE);
 
@@ -348,18 +354,20 @@ gedit_file_stdin (Document *doc)
 	guint pos = 0;
 	View *view;
 
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug ("start", DEBUG_FILE);
 
 	fstat(STDIN_FILENO, &stats);
 	
 	if (stats.st_size  == 0)
 	{
+		gedit_debug ("size = 0. end", DEBUG_FILE);
 		return 1;
 	}
 	
 	if ((tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE+1)) == NULL)
 	{
 		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
+		gedit_debug ("mem alloc error. end", DEBUG_FILE);
 		return 1;
 	}
 
@@ -558,7 +566,7 @@ static void
 gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 {
 	Document *doc;
-	gchar *filename;
+	gchar *file_name;
 	gint i;
 	View *nth_view;
 
@@ -573,17 +581,17 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	if (!doc)
 		return;
 	
-	filename = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
+	file_name = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 	
 	gtk_widget_hide (GTK_WIDGET (save_file_selector));
 	save_file_selector = NULL;
 	
-        if (g_file_exists (filename))
+        if (g_file_exists (file_name))
 	{
 		guchar * msg;
 		GtkWidget *msgbox;
 		gint ret;
-		msg = g_strdup_printf (_("``%s'' is about to be overwritten. Do you want to continue ?"), filename);
+		msg = g_strdup_printf (_("``%s'' is about to be overwritten. Do you want to continue ?"), file_name);
 		msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
 						GNOME_STOCK_BUTTON_NO, GNOME_STOCK_BUTTON_CANCEL, NULL);
 		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
@@ -603,15 +611,13 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		}
 	}
 	    
-	if (gedit_file_save(doc, filename) != 0)
+	if (gedit_file_save(doc, file_name) != 0)
 	{
 		gedit_flash (_("Error saving file!"));
-		g_free (filename);
+		g_free (file_name);
 		gedit_close_all_flag_clear();
 		return;
 	}
-
-	g_free (filename);
 
         /* If file save was succesfull, then we should turn the readonly flag off */
 	for (i = 0; i < g_list_length (doc->views); i++)
@@ -619,6 +625,14 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		nth_view = g_list_nth_data (doc->views, i);
 		gedit_view_set_readonly (nth_view, FALSE);
 	}
+
+	/* Add the saved as file to the recent files ( history ) menu */
+	gedit_recent_add (file_name);
+	gedit_recent_update (gedit_window_active_app());
+
+	gedit_flash_va ("%s %s", _(MSGBAR_FILE_SAVED), file_name);
+
+	g_free (file_name);
 
 	gedit_close_all_flag_status ("gedit_file_save_ok_sel");
 	switch (gedit_close_all_flag){
@@ -645,6 +659,9 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 	if (mdi->active_child == NULL)
 		return;
 	gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+
+	gedit_document_set_title (gedit_document_current());
+
 }
 
 void
@@ -683,7 +700,7 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 	
 	gtk_object_destroy (GTK_OBJECT (mdi));
 	gedit_save_settings ();
-	history_write_config ();
+	gedit_recent_history_write_config ();
 
 	gtk_main_quit ();
 }
@@ -812,3 +829,80 @@ gedit_close_all_flag_verify (guchar *function)
 		g_warning ("The close all flag was set !!!!! Func: %s", function);
 }
 
+
+/**
+ * gedit_file_convert_to_full_pathname: convert a file_name to a full path
+ * @file_name_to_convert: the file name to convert
+ * 
+ *
+  Test strings
+   1. /home/user/./dir/././././file.txt			/home/user/dir/file.txt
+   2. /home/user/cvs/gedit/../../docs/file.txt		/home/user/docs/file.txt
+   3. File name in: /home/chema/cvs/gedit/../../cvs/../docs/././././././temp_32avo.txt
+   File name out: /home/chema/docs/temp_32avo.txt
+ *
+ * 
+ * Return Value: a pointer to a allocated string. The calling function is responsible
+ *               o freeing the string
+ **/
+gchar *
+gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
+{
+	gint file_name_in_length;
+	
+	gchar *file_name_in;
+	gchar *file_name_out;
+
+	gint i, j=0;
+
+	g_return_val_if_fail (file_name_to_convert != NULL, NULL);
+
+	if (g_path_is_absolute(file_name_to_convert))
+	{
+		file_name_in = g_strdup (file_name_to_convert);
+	}
+	else
+	{
+		file_name_in = g_strdup_printf ("%s/%s",
+						g_get_current_dir(),
+						file_name_to_convert);
+	}
+
+	file_name_in_length = strlen (file_name_in);
+	file_name_out = g_malloc (file_name_in_length + 1);
+
+	g_return_val_if_fail (file_name_in[0] == '/', NULL);
+
+	for (i = 0; i < file_name_in_length - 1; i++)
+	{
+		/* remove all the "../" from file_name */
+		if (file_name_in[i] == '.' && file_name_in[i+1] == '.')
+		{
+			if (i < file_name_in_length-1)
+				if (file_name_in[i+2] == '/')
+				{
+					i+=2;
+					/* Remove the last directory in file_name_out */
+					j--;
+					while (file_name_out [j-1] != '/')
+						j--;
+					j--;
+				}
+		}
+		
+		/* remove all the "./"'s from file_name */
+		if (file_name_in[i] == '.' && file_name_in[i+1] == '/')
+		{
+			i++;
+			continue;
+		}
+
+		file_name_out [j++] = file_name_in [i];
+	}
+	
+	file_name_out [j++] = file_name_in [i];
+	file_name_out [j] = '\0';
+
+	return file_name_out;
+
+} 

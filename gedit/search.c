@@ -57,8 +57,6 @@ typedef enum {
 	SEARCH_IN_PROGRESS_NO,
 	SEARCH_IN_PROGRESS_YES,
 	SEARCH_IN_PROGRESS_RELOAD,
-	SEARCH_IN_PROGRESS_REPLACE,
-	SEARCH_IN_PROGRESS_COUNT_LINES,
 } gedit_search_states;
 
 SearchInfo gedit_search_info;
@@ -107,15 +105,6 @@ gedit_search_start (void)
 		break;
 	case SEARCH_IN_PROGRESS_RELOAD:
 		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* FIXME */
-		break;
-	case SEARCH_IN_PROGRESS_REPLACE:
-		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* Dunno what do I have to do ... */
-		break;
-	case SEARCH_IN_PROGRESS_COUNT_LINES:
-		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* Dunno what do I have to do ... */
 		break;
 	}
 	
@@ -142,14 +131,6 @@ gedit_search_end (void)
 		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		gedit_search_info.state = SEARCH_IN_PROGRESS_NO;
 		break;
-	case SEARCH_IN_PROGRESS_REPLACE:
-		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* Dunno what to do ... */
-		break;
-	case SEARCH_IN_PROGRESS_COUNT_LINES:
-		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* Dunno what to do ... */
-		break;
 	}
 	
 }
@@ -168,9 +149,6 @@ dump_search_state (void)
 		break;
 	case SEARCH_IN_PROGRESS_RELOAD:
 		g_print("Search needs to reload buffer\n");
-		break;
-	case SEARCH_IN_PROGRESS_REPLACE:
-		g_print("Replace in Progress \n");
 		break;
 	}
 		

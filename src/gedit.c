@@ -47,6 +47,7 @@ gint debug_file = 0;
 gint debug_document = 0;
 gint debug_commands = 0;
 gint debug_recent = 0;
+gint debug_window = 0;
 
 #ifdef HAVE_LIBGNORBA
 

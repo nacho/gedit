@@ -102,13 +102,8 @@ tab_rgt_cb (GtkWidget *widget, gpointer cbwindow)
 }
 
 void
-filenames_dropped (GtkWidget        *widget,
-                   GdkDragContext   *context,
-                   gint              x,
-                   gint              y,
-                   GtkSelectionData *selection_data,
-                   guint             info,
-                   guint             time)
+filenames_dropped (GtkWidget        *widget, GdkDragContext   *context, gint x, gint y,
+                   GtkSelectionData *selection_data, guint info, guint time)
 {
 	GList *names, *tmp_list;
 

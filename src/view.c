@@ -832,10 +832,13 @@ void
 gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc = DOCUMENT (data);
+	View *view;
 
 	gedit_debug ("", DEBUG_DOCUMENT);
+
+	view = gedit_view_current();
 	
-	if (gedit_view_current() == NULL)
+	if (view == NULL)
 		return;
 
 	if (g_list_length (doc->views) < 2)
@@ -845,10 +848,12 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 	}
 	 
 	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, gedit_view_current());
+	doc->views = g_list_remove (doc->views, view);
 	  
 	/* Now, we can remove the view proper */
-	gnome_mdi_remove_view (mdi, GTK_WIDGET(gedit_view_current()), FALSE);
+	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
+
+	gedit_document_set_title (doc);
 }
 
 static void
