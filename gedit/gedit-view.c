@@ -170,6 +170,7 @@ gedit_view_class_init (GeditViewClass *klass)
 /* when the user right-clicks on a word, we move the cursor to the 
  * location of the clicked-upon word.
  */
+
 static gboolean
 button_press_event (GtkTextView *view, GdkEventButton *event, gpointer data) 
 {
@@ -269,9 +270,10 @@ gedit_view_init (GeditView  *view)
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
 			  G_CALLBACK (gedit_view_populate_popup), view);
-
+	
 	g_signal_connect (G_OBJECT (view->priv->text_view), "button-press-event",
 			  G_CALLBACK (button_press_event), NULL);
+
 }
 
 static void 

@@ -244,7 +244,27 @@ open_button_key_pressed_cb (GtkWidget *widget,
 	return FALSE;
 }
 
+static void
+tooltip_func (GtkTooltips   *tooltips,
+	      GtkWidget     *menu,
+	      EggRecentItem *item,
+	      gpointer       user_data)
+{
+	gchar *tip;
+	gchar *uri_for_display;
 
+	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	g_return_if_fail (uri_for_display != NULL);
+	
+	/* Translators: %s is a URI */
+	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+
+	g_free (uri_for_display);
+
+	gtk_tooltips_set_tip (tooltips, GTK_WIDGET (menu), tip, NULL);
+
+	g_free (tip);
+}
 
 static void
 gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
@@ -279,6 +299,8 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 			  G_CALLBACK (gedit_file_open_recent), NULL);
 	egg_recent_view_gtk_show_icons (view, TRUE);
 	egg_recent_view_gtk_show_numbers (view, FALSE);
+	egg_recent_view_gtk_set_tooltip_func (view, tooltip_func, NULL);
+	
 	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
 	g_object_set_data (G_OBJECT (button), "recent-menu", menu);
 	
@@ -379,6 +401,22 @@ gedit_mdi_new (void)
 	return mdi;
 }
 
+static gchar* 
+tip_func (EggRecentItem *item, gpointer user_data)
+{
+	gchar *tip;
+	gchar *uri_for_display;
+
+	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	g_return_val_if_fail (uri_for_display != NULL, NULL);
+	
+	/* Translators: %s is a URI */
+	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
+
+	g_free (uri_for_display);
+
+	return tip;
+}
 
 static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
@@ -491,8 +529,10 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	view = EGG_RECENT_VIEW (egg_recent_view_bonobo_new (
 					ui_component, "/menu/File/Recents"));
 	egg_recent_view_bonobo_show_icons (EGG_RECENT_VIEW_BONOBO (view), FALSE);
-	egg_recent_view_set_model (view, model);
+	egg_recent_view_bonobo_set_tooltip_func (EGG_RECENT_VIEW_BONOBO (view), tip_func, NULL);
 	
+	egg_recent_view_set_model (view, model);
+
 	g_signal_connect (G_OBJECT (view), "activate",
 			  G_CALLBACK (gedit_file_open_recent), NULL);
 	
