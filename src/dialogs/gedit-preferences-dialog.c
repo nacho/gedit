@@ -933,8 +933,9 @@ gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *button,
 		
 		gtk_widget_set_sensitive (dlg->priv->undo_levels_spinbutton, 
 					  gedit_prefs_manager_undo_actions_limit_can_set());
+		/*
 		gtk_widget_grab_focus (dlg->priv->undo_levels_spinbutton);
-		
+		*/
 		undo_levels = gtk_spin_button_get_value_as_int (
 				GTK_SPIN_BUTTON (dlg->priv->undo_levels_spinbutton));
 		g_return_if_fail (undo_levels >= 1);
@@ -1002,8 +1003,10 @@ gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog *dlg, GladeXML 
 	/* Connect signals */
 	if (can_set)
 	{
+		/*
 		if (undo_levels > 0)
 			gtk_widget_grab_focus (dlg->priv->undo_levels_spinbutton);
+		*/
 	
 		g_signal_connect (G_OBJECT (dlg->priv->undo_checkbutton), "toggled", 
 			  	  G_CALLBACK (gedit_preferences_dialog_undo_checkbutton_toggled), 
@@ -1174,7 +1177,9 @@ gedit_preferences_dialog_auto_save_checkbutton_toggled (GtkToggleButton *button,
 	{
 		gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, 
 					  gedit_prefs_manager_auto_save_interval_can_set());
+		/*
 		gtk_widget_grab_focus (dlg->priv->auto_save_spinbutton);
+		*/
 		gedit_prefs_manager_set_auto_save (TRUE);
 	}
 	else	
@@ -1455,7 +1460,9 @@ gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *butt
 	{
 		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, 
 					  gedit_prefs_manager_print_line_numbers_can_set ());
+		/*
 		gtk_widget_grab_focus (dlg->priv->line_numbers_spinbutton);
+		*/
 
 		gedit_prefs_manager_set_print_line_numbers (
 			MAX (1, gtk_spin_button_get_value_as_int (
