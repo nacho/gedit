@@ -25,6 +25,7 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gnome.h>
+#include <ctype.h>
 #include "client.h"
 
 /* Should be broken down into more structs one for doc and one for GUI stuff*/
@@ -144,7 +145,8 @@ SpellPlugin *spell_dialog_new()
 
 void spell_start_check()
 {
-        char *word, *result;
+        char *word;
+	int result;
 
         if(!GTK_IS_SPELL(plugin->spell))
                 return;
@@ -194,7 +196,8 @@ int main(int argc, char *argv[]){
   	info.menu_location = "[Plugins]Spell Check...";
 
 	context = client_init( &argc, &argv, &info );
-	gnome_init("spellcheck-plugin",NULL, argc, argv, 0, NULL);
+	/*gnome_init("spellcheck-plugin",NULL, argc, argv, 0, NULL);*/
+	gnome_init("spellcheck-plugin", /*VERSION*/ "0.1", argc, argv);
 	plugin = spell_dialog_new();
 	gtk_signal_connect (GTK_OBJECT (plugin->spell),
         	"handled_word",
