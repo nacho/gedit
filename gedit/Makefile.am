@@ -21,7 +21,7 @@ INCLUDES =							\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED
 
-noinst_LIBRARIES = libgedit.a
+noinst_LTLIBRARIES = libgedit.la
 
 gedit_LDFLAGS = -export-dynamic
 
@@ -111,7 +111,7 @@ gedit_SOURCES = 			\
 	$(APP_H_FILES)			\
 	$(BUILT_SOURCES)
 
-libgedit_a_SOURCES = 			\
+libgedit_la_SOURCES = 			\
 	gedit-debug.c			\
 	gedit-convert.c			\
 	gedit-encodings.c		\

@@ -1,3 +1,24 @@
+2003-04-14  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
+
+	* Makefile.am:
+	* configure.in:
+	* data/GNOME_Gedit.server.in:
+	* viewer/.cvsignore:
+	* viewer/Makefile.am:
+	* viewer/gedit-factory.c: (gedit_factory):
+	* viewer/gedit-persist-stream.c: (impl_save), (impl_load),
+	(impl_get_content_types), (gedit_persist_stream_new):
+	* viewer/gedit-persist-stream.h:
+	* viewer/gedit-viewer-ui.xml:
+	* viewer/gedit-viewer.c: (copy_cb), (activate_cb),
+	(gedit_viewer_new):
+	* viewer/gedit-viewer.h:
+
+	Added new viewer control for nautilus with syntax highlighting thanks
+	to gtksourceview. Gedit now depends on gtksourceview 
+	(toward-gedit-integration branch). This viewer will eventually replace
+	the standard text viewer in nautilus.
+
 2003-04-14  Mike Lei <mike.lei@sun.com>
 
 	* configure.in: Added Makefile support for de es fr it sv
@@ -747,7 +768,7 @@
 
 	* Makefile.am: removed unused code
 
-2002-02-14  Tıivo Leedj‰rv  <leedjarv@interest.ee>
+2002-02-14  T√µivo Leedj√§rv  <leedjarv@interest.ee>
 
 	* configure.in: Added et to ALL_LINGUAS.
 
@@ -962,7 +983,7 @@
 
 	* configure.in: bump version to 1.107.0
 
-2001-12-03  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-12-03  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
         * configure.in: Reverted my change about GETTEXT_PACKAGE. We should
 	use the "standar" name (gedit-2.0 instead of gedit-2).
@@ -976,11 +997,11 @@
 	* configure.in: cleaned following the suggestions of the gnome2
 	  porting foc. Now libgnomeprintui-2.0 is required 
 
-2001-11-21  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-11-21  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
         * configure.in: Changed GETTEXT_PACKAGE from gedit-2.0 to gedit-2
 	
-2001-11-16  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-11-16  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* Makefile.am, configure.in: Migrated from xml-i18n-tools to intltool
 	and added support to AM_GLIB_GNU_GETTEXT
@@ -990,6 +1011,6 @@
 
 	* Started the port to GNOME 2.0
 
-2001-11-16  Carlos PerellÛ MarÌn <carlos@gnome-db.org>
+2001-11-16  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
 
 	* ChangeLog: rolled over to ChangeLog-20011116
