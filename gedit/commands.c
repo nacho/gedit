@@ -382,7 +382,7 @@ static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 		   {
 		     doc = gE_document_current();
 		     
-		     if (doc->filename || GE_VIEW(mdi->active_view)->changed)
+		     if (doc->filename || doc->changed)
 		       {
 		         doc = gE_document_new_with_file (filename);
 		         gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));

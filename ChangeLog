@@ -1,3 +1,12 @@
+Wed Aug 18 17:12:50 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gedit.c: (main) Uncommented the signal connection for child_changed,
+	  so the title bar can keep updated with the current document.
+	
+	* commands.c: (file_open_ok_sel) Check doc->changed instead of the
+	  gE_view->changed.. doh! now we dont bork up on changed untitled
+	  doc's.. =)
+
 Tue Aug 17 23:56:17 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_view.c: (gE_view_init) Moved the Popup menu intiialisaer to after

@@ -221,7 +221,7 @@ gE_document *gE_document_new ()
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
 	    
-	    doc->buf = g_string_sized_new (2);
+	    doc->buf = g_string_sized_new (64);
 	    
 	    /* gE_documents = g_list_append(gE_documents, doc); */
 
@@ -267,7 +267,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
    	                    g_free (tmp_buf);
    	                	gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc),
    	                	                          g_basename(filename));
-   	                	
+
    	                	fclose (fp);
 
 	        /*gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
