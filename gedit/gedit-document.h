@@ -97,6 +97,8 @@ gchar*		gedit_document_get_short_name 	(const GeditDocument* doc);
 
 gboolean	gedit_document_load 		(GeditDocument* doc, 
 						 const gchar *uri, GError **error);
+gboolean	gedit_document_load_from_stdin 	(GeditDocument* doc, GError **error);
+
 gboolean 	gedit_document_is_untouched 	(const GeditDocument *doc);
 
 gboolean	gedit_document_save 		(GeditDocument* doc, GError **error);
@@ -132,6 +134,8 @@ gboolean	gedit_document_can_redo 	(const GeditDocument *doc);
 void		gedit_document_undo 		(GeditDocument *doc);
 void		gedit_document_redo 		(GeditDocument *doc);
 
+void		gedit_document_begin_not_undoable_action 	(GeditDocument *doc);
+void		gedit_document_end_not_undoable_action		(GeditDocument *doc);
 
 void		gedit_document_goto_line 	(GeditDocument* doc, guint line);
 

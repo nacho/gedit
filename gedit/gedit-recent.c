@@ -331,7 +331,7 @@ gedit_recent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbna
 	uri = g_list_nth_data (gedit_recent_history_list, i - 1);
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 
-	if (!gedit_file_open_recent (GEDIT_MDI_CHILD (active_child), uri))
+	if (!gedit_file_open_recent (active_child != NULL ? GEDIT_MDI_CHILD (active_child) : NULL, uri))
 	{
 		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
 		gedit_utils_flash_va (_("Unable to open recent file: %s"), t);

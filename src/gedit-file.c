@@ -892,7 +892,8 @@ gedit_file_open_uri_list (GList* uri_list)
 	gboolean ret = TRUE;
 	gedit_debug (DEBUG_FILE, "");
 	
-	if (uri_list == NULL) return FALSE;
+	if (uri_list == NULL) 
+		return FALSE;
 	
         /* create a file for each document in the parameter list */
 	for (;uri_list; uri_list = uri_list->next)
@@ -943,6 +944,7 @@ gedit_file_open_single_uri (const gchar* uri)
 {
 	gchar *full_path;
 	gboolean ret = TRUE;
+	
 	gedit_debug (DEBUG_FILE, "");
 	
 	if (uri == NULL) return FALSE;
@@ -955,6 +957,81 @@ gedit_file_open_single_uri (const gchar* uri)
 		g_free (full_path);
 	}
 
+	return ret;
+}
+
+gboolean
+gedit_file_open_from_stdin (GeditMDIChild *active_child)
+{
+	struct stat stats;
+	gboolean ret = TRUE;
+	GeditDocument *doc = NULL;
+	GError *error = NULL;
+	GeditMDIChild *child;
+	GeditMDIChild* new_child = NULL;
+
+	gedit_debug (DEBUG_FILE, "");
+	
+	fstat(STDIN_FILENO, &stats);
+	
+	if (stats.st_size  == 0)
+		return FALSE;
+
+	child = active_child;
+	
+	if (active_child == NULL ||
+	    !gedit_document_is_untouched (active_child->document))	     
+	{
+		new_child = gedit_mdi_child_new ();
+
+		g_return_val_if_fail (new_child != NULL, FALSE);
+		g_return_val_if_fail (gedit_mdi != NULL, FALSE);
+
+		ret = bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+		g_return_val_if_fail (ret != FALSE, FALSE);
+		gedit_debug (DEBUG_FILE, "Child added.");
+
+		child= new_child;
+	}
+
+	doc = child->document;
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	ret = gedit_document_load_from_stdin (doc, &error);
+
+	if (error)
+	{
+		GtkWidget *dialog;
+		/* FIXME: do a more user friendly error reporting */
+		gchar *errstr;
+	       	
+		errstr = g_strdup_printf (_("An error occurred while "
+						   "reading data from stdin.\n\n%s."),
+						   error->message);
+		
+		dialog = gtk_message_dialog_new (
+				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			   	GTK_MESSAGE_ERROR,
+			   	GTK_BUTTONS_OK,
+				errstr);
+			
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		g_free (errstr);
+		g_error_free (error);
+
+		ret = FALSE;
+	}
+	
+	if (new_child != NULL)
+	{
+		ret = bonobo_mdi_add_view (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+		g_return_val_if_fail (ret != FALSE, FALSE);
+		gedit_debug (DEBUG_FILE, "View added.");
+	}
+	
 	return ret;
 }
 

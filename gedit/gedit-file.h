@@ -47,6 +47,7 @@ gboolean 	gedit_file_open_uri_list (GList* uri_list);
 gboolean 	gedit_file_open_recent   (GeditMDIChild *child, gchar* uri);
 gboolean 	gedit_file_open_single_uri (const gchar* uri);
 
+gboolean	gedit_file_open_from_stdin (GeditMDIChild *active_child);
 
 #endif /* __GEDIT_FILE_H__ */
 

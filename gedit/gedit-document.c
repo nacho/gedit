@@ -31,11 +31,15 @@
 #include <libgnome/libgnome.h>
 #include <libgnomevfs/gnome-vfs.h>
 
+#include <unistd.h>  
+#include <stdio.h>
+
 #include "gnome-vfs-helpers.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-undo-manager.h"
+  
 
 #define NOT_EDITABLE_TAG_NAME "not_editable_tag"
 
@@ -545,6 +549,92 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	return TRUE;
 }
 
+#define GEDIT_STDIN_BUFSIZE 1024
+
+gboolean
+gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
+{
+	GString * file_contents;
+	gchar *tmp_buf = NULL;
+	struct stat stats;
+	guint buffer_length;
+
+	GtkTextIter iter, end;
+	GnomeVFSResult	res;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	
+	fstat (STDIN_FILENO, &stats);
+	
+	if (stats.st_size  == 0)
+		return FALSE;
+
+	tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE + 1);
+	g_return_val_if_fail (tmp_buf != NULL, FALSE);
+
+	file_contents = g_string_new (NULL);
+	
+	while (feof (stdin) == 0)
+	{
+		buffer_length = fread (tmp_buf, 1, GEDIT_STDIN_BUFSIZE, stdin);
+		tmp_buf [buffer_length + 1] = '\0';
+		g_string_append (file_contents, tmp_buf);
+
+		if (ferror (stdin) != 0)
+		{
+			res = gnome_vfs_result_from_errno (); 
+		
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, res,
+				gnome_vfs_result_to_string (res));
+
+			g_free (tmp_buf);
+			g_string_free (file_contents, TRUE);
+			return FALSE;
+		}
+	}
+
+	fclose (stdin);
+
+	if (file_contents->len > 0)
+	{
+		if (!g_utf8_validate (file_contents->str, file_contents->len, NULL))
+		{
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
+				_("Invalid UTF-8 data encountered reading file"));
+			g_string_free (file_contents, TRUE);
+			return FALSE;
+		}
+
+		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+		/* Insert text in the buffer */
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, file_contents->str, file_contents->len);
+
+		/* We had a newline in the buffer to begin with. (The buffer always contains
+   		 * a newline, so we delete to the end of the buffer to clean up. */
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+ 		gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &end);
+
+		/* Place the cursor at the start of the document */
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+
+		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+	}
+
+	g_string_free (file_contents, TRUE);
+
+	gedit_document_set_readonly (doc, FALSE);
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
+
+	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0);
+
+	return TRUE;
+}
+
+
 gboolean 
 gedit_document_is_untouched (const GeditDocument *doc)
 {
@@ -870,7 +960,8 @@ gedit_document_can_redo (const GeditDocument *doc)
 	return gedit_undo_manager_can_redo (doc->priv->undo_manager);	
 }
 
-void gedit_document_undo (GeditDocument *doc)
+void 
+gedit_document_undo (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -881,7 +972,8 @@ void gedit_document_undo (GeditDocument *doc)
 	gedit_undo_manager_undo (doc->priv->undo_manager);
 }
 
-void gedit_document_redo (GeditDocument *doc)
+void 
+gedit_document_redo (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -891,6 +983,30 @@ void gedit_document_redo (GeditDocument *doc)
 
 	gedit_undo_manager_redo (doc->priv->undo_manager);
 }
+
+void
+gedit_document_begin_not_undoable_action (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+
+	gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+}
+
+void	
+gedit_document_end_not_undoable_action	(GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (doc->priv != NULL);
+
+	gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+}
+
+
 
 static void
 gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, GeditDocument* doc)

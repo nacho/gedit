@@ -1,3 +1,18 @@
+2001-11-19  Paolo Maggi   <maggi@athena.polito.it>
+
+	* bonobo-mdi.c: (bonobo_mdi_destroy) doesn't use GTK_OBJECT_DESTROYED anymore
+	
+	* gedit-document.[ch] (gedit_document_load_from_stdin): new function
+	(gedit_document_begin_not_undoable_action): ditto
+	(gedit_document_end_not_undoable_action): ditto
+
+	* gedit-file.[ch] (gedit_file_open_from_stdin): new function
+	
+	* gedit-recent.c (gedit_recent_cb): check if active_child != NULL before
+	casting to GEDIT_MDI_CHILD
+
+	* gedit2.c (gedit_load_file_list): now calls gedit_file_open_from_stdin (NULL)
+
 2001-11-16  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* gedit2.c: Added support to AM_GLIB_GNU_GETTEXT

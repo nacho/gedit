@@ -112,7 +112,7 @@ static void
 gedit_load_file_list (GList *file_list)
 {
 	/* Load files */
-	if (!gedit_file_open_uri_list (file_list))
+	if (!gedit_file_open_uri_list (file_list) && !gedit_file_open_from_stdin (NULL))
 		/* If no file is opened that create a new empty untitled document */
 		gedit_file_new ();
 
