@@ -396,7 +396,7 @@ GnomeUIInfo gedit_menu [] = {
 	GNOMEUIINFO_END
 };
 
-void gE_menus_init (gE_window *window, gE_data *data)
+GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 {
 	add_callback_data (gedit_file_menu, window, data);
 	add_callback_data (gedit_edit_menu, window, data);
@@ -421,6 +421,8 @@ void gE_menus_init (gE_window *window, gE_data *data)
 	/* Decrease the padding along the menubar */
 	/*gtk_container_border_width (GTK_CONTAINER (
 		GTK_WIDGET (GTK_WIDGET (GNOME_APP (window->window)->menubar)->parent)->parent), 0);*/
+
+	return (GnomeUIInfo *) gedit_menu;
 }
 
 

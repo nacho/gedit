@@ -29,6 +29,7 @@
 #include "main.h"
 #include "gE_document.h"
 #include "gE_files.h"
+#include "gE_prefs_box.h"
 #include "gE_plugin_api.h"
 #include "commands.h"
 #include "gE_print.h"
@@ -78,6 +79,7 @@ static gint msgbar_timeout_id;
 gE_window *
 gE_window_new(void)
 {
+        GnomeUIInfo * gedit_menu;
 	gE_window *w;
 	gE_data *data;
 	GtkWidget *box1, *box2, *tmp;
@@ -132,7 +134,7 @@ gE_window_new(void)
 	gE_window_create_popupmenu(data);
 
 	/* main menu */
-	gE_menus_init(w, data);
+	gedit_menu = gE_menus_init(w, data);
 #ifdef WITHOUT_GNOME
 	w->menubar_handle = gtk_handle_box_new();
 	gtk_container_add(GTK_CONTAINER(w->menubar_handle), w->menubar);
@@ -156,6 +158,8 @@ gE_window_new(void)
 	gnome_app_set_statusbar (GNOME_APP (w->window),
 		GTK_WIDGET (w->statusbar));
 	gE_msgbar_timeout_add(w);
+
+	gnome_app_install_menu_hints(GNOME_APP (w->window), gedit_menu);
 /*	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);*/
 
 	/* line and column indicators */

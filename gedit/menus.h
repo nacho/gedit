@@ -23,7 +23,7 @@
 extern "C" {
 #endif /* __cplusplus */
 
-extern void gE_menus_init(gE_window *window, gE_data *data);
+extern GnomeUIInfo * gE_menus_init(gE_window *window, gE_data *data);
    
 #ifdef __cplusplus
 }
