@@ -69,7 +69,8 @@ gedit_document_get_type (void)
 			(GtkArgGetFunc) NULL,
 		};
 	  
-		doc_type = gtk_type_unique (gnome_mdi_child_get_type (), &doc_info);
+		doc_type = gtk_type_unique (gnome_mdi_child_get_type (),
+					    &doc_info);
 	}
 	  
 	return doc_type;
@@ -79,16 +80,18 @@ static GtkWidget *
 gedit_document_create_view (GnomeMDIChild *child)
 {
 	View  *new_view;
-	
+
+	g_return_val_if_fail (child != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
+
 	new_view = VIEW (gedit_view_new (DOCUMENT (child)));
 
 	gedit_debug_mess ("f:gedit_document_create_view\n", DEBUG_FILE);
 	
 	gedit_view_set_font (new_view, settings->font);
-	gedit_view_set_read_only ( new_view, DOCUMENT (child)->readonly);
-	gtk_widget_queue_resize (GTK_WIDGET (new_view));
-	
-	return GTK_WIDGET(new_view);
+/*	gedit_view_set_read_only (new_view, DOCUMENT (child)->readonly); */
+
+	return GTK_WIDGET (new_view);
 }
 
 static void
@@ -139,7 +142,7 @@ gedit_document_init (Document *doc)
 {
 	/* FIXME: This prolly needs work.. */
 	gedit_debug_mess ("f:gedit_document_init\n", DEBUG_DOCUMENT);
-	
+
 	doc->filename = NULL;
 	doc->changed = FALSE;
 	doc->views = NULL;
@@ -208,7 +211,7 @@ gedit_document_new_with_title (gchar *title)
 	doc = gtk_type_new (gedit_document_get_type ());
 	if (doc)
 	{
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 					  title);
 
 		doc->buf = g_string_sized_new (256);
@@ -217,7 +220,7 @@ gedit_document_new_with_title (gchar *title)
         }
 
 	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT(doc));
+	gtk_object_destroy (GTK_OBJECT (doc));
 	
 	return NULL;
 }
@@ -265,8 +268,9 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
+/* Called from the View menu */
 void
-gedit_add_view (GtkWidget *w, gpointer data)
+gedit_add_view (GtkWidget *widget, gpointer data)
 {
 	GnomeMDIChild *child;
 	View *view;
@@ -287,8 +291,9 @@ gedit_add_view (GtkWidget *w, gpointer data)
 	}
 }
 
+/* Called from the View menu */
 void
-gedit_remove_view (GtkWidget *w, gpointer data)
+gedit_remove_view (GtkWidget *widget, gpointer data)
 {
 	Document *doc = DOCUMENT (data);
 

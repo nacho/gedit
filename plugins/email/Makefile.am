@@ -8,7 +8,7 @@ libemail_la_SOURCES = email.c
 
 
 INCLUDES =						\
-	-I../../src 					\
+	-I$(top_srcdir)/src				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
 	-I$(includedir)					\

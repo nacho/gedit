@@ -65,7 +65,6 @@ static void cancel_cb (GtkWidget *w, gpointer data);
  *
  * Return value: 0 on success, 1 on error.
  */
-
 gint
 gedit_file_open (Document *doc, gchar *fname)
 {
@@ -82,14 +81,14 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	currentdoc = gedit_document_current();
 
-	if ( stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
+	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
 		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
 						       "\nPlease make sure the file exists."));
 		return 1;
 	}
 
-	if ( stats.st_size  == 0)
+	if (stats.st_size  == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
 						    "\nPlease make sure the file is not beeing used by another aplication\n"
@@ -124,20 +123,19 @@ gedit_file_open (Document *doc, gchar *fname)
 	doc->buf_size = fread (tmp_buf, 1, doc->buf_size, fp);
 	doc->buf = g_string_new (tmp_buf);
 	g_free (tmp_buf);
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 				  g_basename (fname));
 	fclose (fp);
 	
 	doc->filename = g_strdup (fname);
-	doc->readonly = access(fname, W_OK)?TRUE:FALSE;
+	doc->readonly = access (fname, W_OK) ? TRUE : FALSE;
 
-	/* This gets executed when we do a revert ....Chema */
 	for (i = 0; i < g_list_length (doc->views); i++) 
 	{
-		nth_view = g_list_nth_data (doc->views, 0);
+		nth_view = g_list_nth_data (doc->views, i);
 		gedit_view_refresh (nth_view);
 		gedit_set_title (nth_view->document);
-		gedit_view_set_read_only (nth_view, access(fname, W_OK)  != 0);
+		gedit_view_set_read_only (nth_view, access (fname, W_OK)  != 0);
 		if (!nth_view->changed_id)
 			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
 								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);

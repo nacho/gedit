@@ -772,11 +772,11 @@ gedit_view_set_read_only (View *view, gint read_only)
 	else
 	{
 		if (view->document->filename)
-			gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
-						  g_basename(view->document->filename));
+			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
+						  g_basename (view->document->filename));
 		else
-			gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
-						  gedit_get_document_tab_name());
+			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
+						  gedit_get_document_tab_name ());
 	}
 	 
 	if (view->split_screen)
@@ -851,8 +851,8 @@ gedit_view_buffer_sync (View *view)
 
 	gedit_debug_mess ("F:gedit_view_buffer_sync\n", DEBUG_VIEW);
 	
-	buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
-						0, gedit_view_get_length (view)));
+	buf = gtk_editable_get_chars (GTK_EDITABLE (view->text),
+				      0, gedit_view_get_length (view));
 
 	doc->buf = g_string_new (buf);
 	

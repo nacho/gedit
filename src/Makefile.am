@@ -5,7 +5,7 @@ SUBDIRS = dialogs
 INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\" 		\
-	-DGEDIT_LIBDIR=\""$(libdir)/gedit/"\"		\
+	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit/plugins"\"	\
 	-I$(includedir) 				\
 	-I$(top_srcdir) 				\
 	-I$(srcdir)/dialogs				\

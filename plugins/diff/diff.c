@@ -22,17 +22,21 @@
 /*
  * TODO:
  * [ ] libglade-ify me.
- * [ ] pretty the output a bit.
+ * [ ] pretty the output a bit, maybe something like coloring the
+ * lines for pluses and minuses
+ * [ ] make this plugin useful for people who might not have diff
+ * installed in /usr/bin
+ *
  */
 
 #include <config.h>
 #include <gnome.h>
 
-#include "../../src/window.h"
-#include "../../src/document.h"
-#include "../../src/plugin.h"
-#include "../../src/view.h"
-#include "../../src/utils.h"
+#include "window.h"
+#include "document.h"
+#include "plugin.h"
+#include "view.h"
+#include "utils.h"
 
 static GtkWidget *entry1;
 static GtkWidget *entry2;
@@ -135,7 +139,6 @@ call_diff (GtkWidget *widget, gpointer data)
 		gedit_view_refresh (nth_view);
 		gedit_set_title (nth_view->document);
 	}
-
 }
 
 static void
@@ -179,7 +182,7 @@ diff_plugin (PluginData *pd)
 			    GTK_SIGNAL_FUNC (open_file_sel), entry2);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label( "Calculate Diff" );
+	button = gtk_button_new_with_label ("Calculate Diff");
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    GTK_SIGNAL_FUNC (call_diff), NULL);
 

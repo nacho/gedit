@@ -160,9 +160,7 @@ load_all_plugins (void)
 	}
 	
 	/* load system plgins */
-	pdir = g_strdup (GEDIT_LIBDIR "/plugins/");
-	plugin_load_plugins_in_dir (pdir);
-	g_free (pdir);
+	plugin_load_plugins_in_dir (GEDIT_PLUGINDIR "/");
 }
 
 /**
@@ -212,15 +210,3 @@ gedit_plugins_window_add (GnomeApp *app)
 		gnome_app_insert_menus (app, path, menu);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -18,8 +18,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GEDIT_DOCUMENT_H__
-#define __GEDIT_DOCUMENT_H__
+#ifndef __DOCUMENT_H__
+#define __DOCUMENT_H__
 
 #define DOCUMENT(obj)		GTK_CHECK_CAST (obj, gedit_document_get_type (), Document)
 #define DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_document_get_type (), DocumentClass)
@@ -84,4 +84,4 @@ gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 gchar* gedit_get_document_tab_name (void);
 void gedit_mdi_init (void);
 
-#endif /* __GEDIT_DOCUMENT_H__ */
+#endif /* __DOCUMENT_H__ */

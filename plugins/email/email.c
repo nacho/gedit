@@ -9,8 +9,8 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "../../src/document.h"
-#include "../../src/plugin.h"
+#include "document.h"
+#include "plugin.h"
 
 #ifndef MAILER
 #define MAILER "/usr/lib/sendmail"
