@@ -15,8 +15,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 #include <stdio.h>
