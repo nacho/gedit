@@ -1,5 +1,30 @@
 2001-12-03  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-commands.c (TO_BE_IMPLEMENTED): new macro
+	(gedit_cmd_file_print): marked as TO_BE_IMPLEMENTED
+	(gedit_cmd_file_print_preview): marked as TO_BE_IMPLEMENTED
+	(gedit_cmd_help_about): added a caveat
+	(gedit_cmd_search_find_again): new function
+	(gedit_cmd_search_replace): marked as TO_BE_IMPLEMENTED
+
+	* gedit-commands.h (gedit_cmd_search_find_again): new prototype
+
+	* gedit-document.c (gedit_document_get_last_searched_text): new function
+	(gedit_document_find_again): new function
+
+	* gedit-document.h (gedit_document_get_last_searched_text): new prototype
+	(gedit_document_find_again): ditto
+
+	* gedit-menus.c: added SearchFindAgain to gedit_verbs []
+
+	* gedit-prefs.c: added #include "gedit2.h".
+	(gedit_prefs_save_settings): save the active top level window size
+
+	* dialogs/gedit-dialog-replace.c (gedit_dialog_find): remember the last
+	searched text per document
+
+2001-12-03  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-document.c (gedit_document_find): when some text is selected and you
 	want to search beginning from the cursor position, start searching
 	from the end of the selection 
@@ -102,7 +127,7 @@
 	gedit-ui.xml in the rigth location
 
 	* gedit-menus.c: added FilePrint, FilePrintPreview and SettingsPreferences to
-	igedit_verbs []
+	gedit_verbs []
 
 	* gedit-prefs.[ch]: added two new preferences, i.e. use_default_font and use_default_colors
 

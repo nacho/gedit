@@ -1060,6 +1060,16 @@ gedit_document_goto_line (GeditDocument* doc, guint line)
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 }
 
+gchar* 
+gedit_document_get_last_searched_text (GeditDocument* doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	return doc->priv->last_searched_text != NULL ? 
+		g_strdup (doc->priv->last_searched_text) : NULL;	
+}	
+
 gboolean
 gedit_document_find (GeditDocument* doc, const gchar* str, 
 		gboolean from_cursor, gboolean case_sensitive)
@@ -1117,6 +1127,28 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 		doc->priv->last_searched_text = g_strdup (str);
 	}
+
+	return found;
+}
+
+gboolean
+gedit_document_find_again (GeditDocument* doc)
+{
+	gchar* last_searched_text;
+	gboolean found;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+	
+	if (last_searched_text == NULL)
+		return FALSE;
+	
+	found = gedit_document_find (doc, last_searched_text, TRUE, /* FIXME */FALSE);
+	g_free (last_searched_text);
 
 	return found;
 }

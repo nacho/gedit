@@ -243,6 +243,9 @@ gedit_dialog_find (void)
 {
 	GeditDialogFind *dialog;
 	gint response;
+	GeditMDIChild *active_child;
+	GeditDocument *doc;
+	gchar* last_searched_text;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -257,9 +260,22 @@ gedit_dialog_find (void)
 				      (bonobo_mdi_get_active_window
 				       (BONOBO_MDI (gedit_mdi))));
 
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+	if (last_searched_text != NULL)
+	{
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
+		g_free (last_searched_text);	
+	}
+
 	gtk_widget_grab_focus (dialog->search_entry);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);	
-	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);
+		
 	do
 	{
 		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));

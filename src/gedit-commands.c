@@ -46,6 +46,16 @@
 #include "dialogs/gedit-dialogs.h"
 #include "dialogs/gedit-preferences-dialog.h"
 
+#define TO_BE_IMPLEMENTED	{ GtkWidget *message_dlg; \
+				  message_dlg = gtk_message_dialog_new (	\
+			                          GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),	\
+			                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,	\
+			                          GTK_MESSAGE_INFO,	\
+			                          GTK_BUTTONS_OK,	\
+                                   		  _("Not yet implemented."));	\
+	                         gtk_dialog_run (GTK_DIALOG (message_dlg));	\
+  	                         gtk_widget_destroy (message_dlg); }
+
 void 
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
@@ -127,6 +137,8 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	TO_BE_IMPLEMENTED
+/*		
 	GeditMDIChild *active_child;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
@@ -135,12 +147,16 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	if (active_child == NULL)
 		return;
 	
+	g_print ("***** Printing in gedit2 is completely broken. Please don't report bugs about it.\n");
 	gedit_print (active_child);
+*/
 }
 
 void
 gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	TO_BE_IMPLEMENTED
+/*
 	GeditMDIChild *active_child;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
@@ -149,7 +165,9 @@ gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const 
 	if (active_child == NULL)
 		return;
 	
+	g_print ("***** Printing in gedit2 is completely broken. Please don't report bugs about it.\n");
 	gedit_print_preview (active_child);
+*/
 }
 
 void 
@@ -281,11 +299,62 @@ gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* 
 }
 
 void 
+gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditMDIChild *active_child;
+	GeditDocument *doc;
+	GeditView *active_view;
+	gchar* last_searched_text;
+	
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child);
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view != NULL);
+
+	doc = GEDIT_DOCUMENT (active_child->document);
+	g_return_if_fail (doc);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+	if (last_searched_text != NULL)
+	{
+		if (!gedit_document_find_again (doc))
+		{	
+			GtkWidget *message_dlg;
+
+			message_dlg = gtk_message_dialog_new (
+				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_INFO,
+				GTK_BUTTONS_OK,
+				_("The searched string has not been found."));
+			
+			gtk_dialog_run (GTK_DIALOG (message_dlg));
+  			gtk_widget_destroy (message_dlg);
+		}
+		else
+			gedit_view_scroll_to_cursor (active_view);
+
+	}
+	else
+	{
+		g_free (last_searched_text);
+		gedit_dialog_find ();
+	}
+}
+
+
+void 
 gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	gedit_debug (DEBUG_COMMANDS, "");
 
+	TO_BE_IMPLEMENTED
+/*
 	gedit_dialog_replace ();
+*/
 }
 
 void 
@@ -343,6 +412,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 	
+	g_print ("****** About box in gedit2 is completely broken. Please don't report bugs about it.\n");
+
 	about_box = gnome_about_new ("gedit",
 				VERSION,
 				"(c) 1998-2000 Alex Robert and Ewan Lawrence\n"
