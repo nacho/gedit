@@ -25,10 +25,6 @@ module GNOME {
 
 			void delete (in long offset, in long length)
 				raises (DocumentReadOnly);
-
-			string getChars (in long offset, in long length);
-
-			long getCharCount ();
 		};
 
 		interface Window : Bonobo::Unknown {
@@ -36,7 +32,6 @@ module GNOME {
 			oneway void grabFocus ();
 			Document newDocument ();
 		};
-
 
 		interface Application : Bonobo::Unknown {
 			Window newWindow ();
@@ -46,7 +41,5 @@ module GNOME {
 
 			oneway void quit ();
 		};
-
-
 	};
 };

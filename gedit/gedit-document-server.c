@@ -119,45 +119,6 @@ impl_gedit_document_server_delete (PortableServer_Servant _servant,
 	gedit_document_delete_text (doc_server->doc, (gint)offset, (gint)len);
 }
 
-static CORBA_char *
-impl_gedit_document_server_getChars (PortableServer_Servant _servant,
-				     const CORBA_long offset,
-				     const CORBA_long len,
-				     CORBA_Environment *ev)
-{
-	CORBA_char *ret;
-	gchar *chars;
-	GeditDocumentServer *doc_server;
-	
-	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
-
-	chars = gedit_document_get_chars (doc_server->doc, (gint)offset,
-					  (gint)offset+(gint)len);
-
-	if (chars == NULL)
-		return NULL;
-
-	ret = CORBA_string_dup (chars);
-
-	g_free (chars);
-
-	return ret;
-}
-
-static CORBA_long
-impl_gedit_document_server_getCharCount (PortableServer_Servant _servant,
-					 CORBA_Environment *ev)
-{
-	GeditDocumentServer *doc_server;
-	CORBA_long len;
-
-	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
-
-	len = gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc_server->doc));
-
-	return len;
-}
-
 static void
 gedit_document_server_class_init (GeditDocumentServerClass *klass)
 {
@@ -172,8 +133,6 @@ gedit_document_server_class_init (GeditDocumentServerClass *klass)
 	epv->setLinePosition = impl_gedit_document_server_setLinePosition;
 	epv->insert          = impl_gedit_document_server_insert;
 	epv->delete          = impl_gedit_document_server_delete;
-	epv->getChars        = impl_gedit_document_server_getChars;
-	epv->getCharCount    = impl_gedit_document_server_getCharCount;
 }
 
 static void
