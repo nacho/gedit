@@ -29,28 +29,36 @@ gchar gEdit_ID[] = "gEdit 0.3.2";
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+          'N', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+	  'O', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+	  'S', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE },
 	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+	  'W', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
+	  'Q', GDK_CONTROL_MASK, NULL },
 	GNOMEUIINFO_END
 };
 
 GnomeUIInfo gedit_edit_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+	  'X', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+	  'C', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
+	  'V', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Select all"),  NULL, edit_selall_cmd_callback, NULL, NULL },
 	GNOMEUIINFO_END
@@ -88,19 +96,36 @@ GnomeUIInfo gedit_options_menu []= {
 };
 
 GnomeUIInfo gedit_help_menu []= {
+	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
+	
+	{GNOME_APP_UI_ITEM, N_("About..."), NULL, gE_about_box, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL},
+	
+	{GNOME_APP_UI_ENDOFINFO}
+	
+	/*
+	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
+		
 	{ GNOME_APP_UI_ITEM, N_("About"), NULL, gE_about_box, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
 	{ GNOME_APP_UI_SEPARATOR },
 	GNOMEUIINFO_HELP ("gedit"),
-	GNOMEUIINFO_END
+	GNOMEUIINFO_END */
 };
 
 GnomeUIInfo gedit_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 	GNOMEUIINFO_END
 };
 #endif
@@ -220,7 +245,7 @@ gE_document *gE_document_new(gE_window *window)
 {
 	gE_document *document;
 	GtkWidget *table, *hscrollbar, *vscrollbar;
-	/*GtkStyle *style;*/
+	GtkStyle *style;
 
 	document = g_malloc0(sizeof(gE_document));
 
@@ -254,11 +279,11 @@ gE_document *gE_document_new(gE_window *window)
 
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
-	/*style = gtk_style_new ();
-	style->bg[GTK_STATE_NORMAL] = style->white;*/
-	/*style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";*/
-	/*gtk_widget_set_style (document->text, style);
-	gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
+	style = gtk_style_new ();
+	style->bg[GTK_STATE_NORMAL] = style->white;
+	style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
+	gtk_widget_set_style (GTK_TEXT(document->text), style);
+	gtk_widget_set_rc_style(GTK_TEXT(document->text));
 
 
 	document->changed = FALSE;

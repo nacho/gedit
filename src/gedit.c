@@ -130,10 +130,11 @@ int main (int argc, char **argv)
 
 	gnome_init ("gEdit", &parser, argc, argv, 0, NULL);
   
-	gE_get_rc_file();
-	gE_rc_parse();
+	/*gE_get_rc_file();
+	gE_rc_parse();*/
 
 	main_window = gE_window_new ();
+	auto_indent_toggle_callback (NULL,NULL);
 	if (file_list){
 		gE_document *doc;
 
