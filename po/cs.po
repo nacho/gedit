@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-13 04:03+0100\n"
-"PO-Revision-Date: 2004-01-13 14:38+0100\n"
+"POT-Creation-Date: 2004-01-14 03:38+0100\n"
+"PO-Revision-Date: 2004-01-14 09:19+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -188,7 +188,9 @@ msgstr "Zalamování řádků"
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
-msgstr "Seznam kódování zobrazovaných v menu Kódování znaků v dialogu výběru otvíraných/ukládaných souborů. Používají se jen rozpoznaná kódování."
+msgstr ""
+"Seznam kódování zobrazovaných v menu Kódování znaků v dialogu výběru "
+"otvíraných/ukládaných souborů. Používají se jen rozpoznaná kódování."
 
 #: data/gedit.schemas.in.h:27
 msgid "Maximum Recent Files"
@@ -202,7 +204,10 @@ msgstr "Maximální počet akcí, které bude možné vzít zpět nebo udělat z
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
-msgstr "Čas v minutách, po kterém gedit automaticky uloží změněné soubory. Toto nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Automatické ukládání\"."
+msgstr ""
+"Čas v minutách, po kterém gedit automaticky uloží změněné soubory. Toto "
+"nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Automatické "
+"ukládání\"."
 
 #: data/gedit.schemas.in.h:30
 msgid "Print Header"
@@ -249,7 +254,12 @@ msgid ""
 "\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
-msgstr "Udává, jak při tisku zalamovat řádky. Hodnota \"GTK_WRAP_NONE\" řádky zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na hranicích slov, a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích znaků. Tyto hodnoty jsou citlivé na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde popsány."
+msgstr ""
+"Udává, jak při tisku zalamovat řádky. Hodnota \"GTK_WRAP_NONE\" řádky "
+"zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na "
+"hranicích slov, a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích "
+"znaků. Tyto hodnoty jsou citlivé na malá a velká písmena, takže dejte pozor, "
+"aby odpovídaly přesně hodnotám, které jsou zde popsány."
 
 #: data/gedit.schemas.in.h:39
 msgid ""
@@ -258,7 +268,12 @@ msgid ""
 "\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
-msgstr "Udává, jak zalamovat řádky v editační oblasti. Hodnota \"GTK_WRAP_NONE\" řádky zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na hranicích slov, a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích znaků. Tyto hodnoty jsou citlivé na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde popsány."
+msgstr ""
+"Udává, jak zalamovat řádky v editační oblasti. Hodnota \"GTK_WRAP_NONE\" "
+"řádky zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na "
+"hranicích slov, a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích "
+"znaků. Tyto hodnoty jsou citlivé na malá a velká písmena, takže dejte pozor, "
+"aby odpovídaly přesně hodnotám, které jsou zde popsány."
 
 #: data/gedit.schemas.in.h:40
 msgid ""
@@ -458,6 +473,137 @@ msgstr ""
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivovat %s"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr "<span weight=\"bold\" size=\"larger\">Máte X dokumentů s neuloženými změnami.</span>"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr "Pokud neuložíte vaše dokumenty, všechny změny budou ztraceny."
+
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:653
+msgid "S_elect the documents you want to save:"
+msgstr "_Vyberte dokumenty, které chcete uložit:"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr "_Neukládat nic"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+msgid "_Save Selected"
+msgstr "_Uložit vybrané"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+msgid "Do_n't save"
+msgstr "_Neukládat"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:360
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %ld sekundu navždy ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %ld sekundy navždy ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za posledních %ld sekund navždy ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:369
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
+msgstr "Pokud je neuložíte, budou změny provedené v dokumentu za poslední minutu navždy ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:375
+#, c-format
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední minutu a %ld sekundu navždy "
+"ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední minutu a %ld sekundy navždy "
+"ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední minutu a %ld sekund navždy "
+"ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:385
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %ld minutu navždy ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %ld minuty navždy ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za posledních %ld minut navždy ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:400
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
+msgstr "Pokud je neuložíte, budou změny provedené v dokumentu za poslední hodinu navždy ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:406
+#, c-format
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední hodinu a %d minutu navždy "
+"ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední hodinu a %d minuty navždy "
+"ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední hodinu a %d minut navždy "
+"ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:421
+#, c-format
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
+msgstr[0] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %d hodinu navždy ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za poslední %d hodiny navždy ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené v dokumentu za posledních %d hodin navždy ztraceny."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:465
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr "Uložit před zavřením změny v dokumentu \"%s\"?"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:639
+#, c-format
+msgid ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr "V %d dokumentech jsou neuložené změny. Uložit změny před zavřením?"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:670
+msgid "If you don't save, all your changes will be definitively lost."
+msgstr "Pokud je neuložíte, budou všechny vaše změny navždy ztraceny."
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -1306,35 +1452,35 @@ msgstr "Vyberte soubory, které otevřít"
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
-#: gedit/gedit-file.c:211
+#: gedit/gedit-file.c:208
 msgid "Open File..."
 msgstr "Otevřít soubor..."
 
-#: gedit/gedit-file.c:267 gedit/gedit-file.c:416
+#: gedit/gedit-file.c:264 gedit/gedit-file.c:413
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Ukládám dokument \"%s\"..."
 
-#: gedit/gedit-file.c:295 gedit/gedit-file.c:437
+#: gedit/gedit-file.c:292 gedit/gedit-file.c:434
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nebyl uložen."
 
-#: gedit/gedit-file.c:309 gedit/gedit-file.c:429
+#: gedit/gedit-file.c:306 gedit/gedit-file.c:426
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" byl uložen."
 
-#: gedit/gedit-file.c:395
+#: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: gedit/gedit-file.c:595
+#: gedit/gedit-file.c:592
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Vrátit neuložené změny v dokumentu \"%s\"?"
 
-#: gedit/gedit-file.c:604
+#: gedit/gedit-file.c:601
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be definitively "
@@ -1342,16 +1488,19 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be definitively "
 "lost."
-msgstr[0] "Změny provedené v dokumentu za poslední %ld sekundu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední %ld sekundy budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za posledních %ld sekund budou navždy ztraceny."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední %ld sekundu budou navždy ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední %ld sekundy budou navždy ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za posledních %ld sekund budou navždy ztraceny."
 
-#: gedit/gedit-file.c:613
+#: gedit/gedit-file.c:610
 msgid ""
 "Changes made to the document in the last minute will be definitively lost."
 msgstr "Změny provedené v dokumentu za poslední minutu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:619
+#: gedit/gedit-file.c:616
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1359,11 +1508,17 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] "Změny provedené v dokumentu za poslední minutu a %ld sekundu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední minutu a %ld sekundy budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za poslední minutu a %ld sekund budou navždy ztraceny."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední minutu a %ld sekundu budou navždy "
+"ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední minutu a %ld sekundy budou navždy "
+"ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za poslední minutu a %ld sekund budou navždy "
+"ztraceny."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:626
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be definitively "
@@ -1371,16 +1526,19 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be definitively "
 "lost."
-msgstr[0] "Změny provedené v dokumentu za poslední %ld minutu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední %ld minuty budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední %ld minutu budou navždy ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední %ld minuty budou navždy ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
-#: gedit/gedit-file.c:644
+#: gedit/gedit-file.c:641
 msgid ""
 "Changes made to the document in the last hour will be definitively lost."
 msgstr "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:650
+#: gedit/gedit-file.c:647
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1388,40 +1546,49 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] "Změny provedené v dokumentu za poslední hodinu a %d minutu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední hodinu a %d minuty budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za poslední hodinu a %d minut budou navždy ztraceny."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední hodinu a %d minutu budou navždy "
+"ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední hodinu a %d minuty budou navždy "
+"ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za poslední hodinu a %d minut budou navždy "
+"ztraceny."
 
-#: gedit/gedit-file.c:665
+#: gedit/gedit-file.c:662
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be definitively lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be definitively lost."
-msgstr[0] "Změny provedené v dokumentu za poslední %d hodinu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
+msgstr[0] ""
+"Změny provedené v dokumentu za poslední %d hodinu budou navždy ztraceny."
+msgstr[1] ""
+"Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
+msgstr[2] ""
+"Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
 
-#: gedit/gedit-file.c:688 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: gedit/gedit-file.c:735
+#: gedit/gedit-file.c:730
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Chyba při vracení dokumentu \"%s\" do původního stavu."
 
-#: gedit/gedit-file.c:742
+#: gedit/gedit-file.c:737
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nebyl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:746
+#: gedit/gedit-file.c:741
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" byl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:772
+#: gedit/gedit-file.c:769
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vracím dokument \"%s\"..."
@@ -1430,30 +1597,30 @@ msgstr "Vracím dokument \"%s\"..."
 msgid "Could not read data from stdin."
 msgstr "Nemohu číst data ze standardního vstupu."
 
-#: gedit/gedit-file.c:1018
+#: gedit/gedit-file.c:954
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
 
-#: gedit/gedit-file.c:1141
+#: gedit/gedit-file.c:1077
 msgid "Reverting file:"
 msgstr "Vracím soubor:"
 
-#: gedit/gedit-file.c:1145
+#: gedit/gedit-file.c:1081
 msgid "Loading file:"
 msgstr "Načítám soubor:"
 
-#: gedit/gedit-file.c:1314 gedit/gedit-file.c:1482
+#: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba při načítání souboru \"%s\""
 
-#: gedit/gedit-file.c:1339
+#: gedit/gedit-file.c:1271
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načten soubor \"%s\""
 
-#: gedit/gedit-file.c:1418
+#: gedit/gedit-file.c:1348
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1461,12 +1628,12 @@ msgstr[0] "Načten %i soubor."
 msgstr[1] "Načteny %i soubory."
 msgstr[2] "Načteno %i souborů."
 
-#: gedit/gedit-file.c:1451
+#: gedit/gedit-file.c:1382
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítám soubor \"%s\"..."
 
-#: gedit/gedit-file.c:1602
+#: gedit/gedit-file.c:1529
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1480,57 +1647,57 @@ msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:601 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "Přes_unout do nového okna"
 
-#: gedit/gedit-mdi-child.c:691
+#: gedit/gedit-mdi-child.c:726
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: gedit/gedit-mdi-child.c:699
+#: gedit/gedit-mdi-child.c:734
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:706
+#: gedit/gedit-mdi-child.c:741
 msgid "Name:"
 msgstr "Název:"
 
-#: gedit/gedit-mdi-child.c:707
+#: gedit/gedit-mdi-child.c:742
 msgid "MIME Type:"
 msgstr "Typ MIME:"
 
-#: gedit/gedit-mdi-child.c:708
+#: gedit/gedit-mdi-child.c:743
 msgid "Encoding:"
 msgstr "Kódování:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:266 gedit/gedit-mdi.c:422
+#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
 #, c-format
 msgid "Open '%s'"
 msgstr "Otevřít '%s'"
 
-#: gedit/gedit-mdi.c:496
+#: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: gedit/gedit-mdi.c:1264
+#: gedit/gedit-mdi.c:1291
 msgid "(modified)"
 msgstr "(změněný)"
 
-#: gedit/gedit-mdi.c:1270
+#: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
 msgstr "(pouze pro čtení)"
 
-#: gedit/gedit-mdi.c:1876
+#: gedit/gedit-mdi.c:1927
 msgid "Normal"
 msgstr "Normální"
 
-#: gedit/gedit-mdi.c:1877
+#: gedit/gedit-mdi.c:1928
 msgid "Use Normal highlight mode"
 msgstr "Použít režim zvýrazňování Normální"
 
-#: gedit/gedit-mdi.c:1953
+#: gedit/gedit-mdi.c:2004
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použít režim zvýzazňování %s"
@@ -2437,16 +2604,16 @@ msgstr "Nemohu vytvořit soubor \"%s\"."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:686
+#: gedit/gedit-view.c:697
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ř %d, Slo %d"
 
-#: gedit/gedit-view.c:724
+#: gedit/gedit-view.c:735
 msgid "  OVR"
 msgstr "  PŘE"
 
-#: gedit/gedit-view.c:726
+#: gedit/gedit-view.c:737
 msgid "  INS"
 msgstr "  VLO"
 
@@ -3134,9 +3301,6 @@ msgstr "_Kopírovat text"
 #~ msgid "_Don't close"
 #~ msgstr "Ne_zavírat"
 
-#~ msgid "Do_n't save"
-#~ msgstr "_Neukládat"
-
 #~ msgid "Tabs"
 #~ msgstr "Tabelátory"
 
@@ -3164,9 +3328,6 @@ msgstr "_Kopírovat text"
 
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Čísla řádků</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Správce</span>"
 
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Ukládání</span>"
