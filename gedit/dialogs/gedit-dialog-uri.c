@@ -27,6 +27,10 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-help.h>
 
@@ -83,7 +87,7 @@ dialog_open_uri_get_dialog (void)
 
 	dialog = g_new0 (GeditDialogOpenUri, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons ("Open from URI",
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Open from URI"),
 						      window,
 						      GTK_DIALOG_MODAL,
 						      GTK_STOCK_CANCEL,

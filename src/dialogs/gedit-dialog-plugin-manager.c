@@ -27,6 +27,10 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <glade/glade-xml.h>
