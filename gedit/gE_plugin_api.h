@@ -1,5 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*-
- * vi:set ts=4 sts=0 sw=4:
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 3 -*-
+ * vi:set ts=3 sts=0 sw=3:
  *
  * gEdit
  * Copyright (C) 1998 Alex Roberts, Evan Lawrence, and Chris Lahey
@@ -23,23 +23,23 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif /* __cplusplus */
-  
+#endif				/* __cplusplus */
+
 #include "plugin.h"
 
-extern GHashTable *doc_int_to_pointer;
-extern GHashTable *doc_pointer_to_int;
-extern GHashTable *win_int_to_pointer;
-extern GHashTable *win_pointer_to_int;
-extern int last_assigned_integer;
+   extern GHashTable *doc_int_to_pointer;
+   extern GHashTable *doc_pointer_to_int;
+   extern GHashTable *win_int_to_pointer;
+   extern GHashTable *win_pointer_to_int;
+   extern int last_assigned_integer;
 
 #include "gE_plugin.h"
 
-extern void gE_plugin_program_register (plugin_info *info);
-extern void add_plugins_to_window (plugin_info *info, gE_window *window);
+   extern void gE_plugin_program_register(plugin_info * info);
+   extern void add_plugins_to_window(plugin_info * info, gE_window * window);
 
 #ifdef __cplusplus
 }
-#endif /* __cplusplus */
 
-#endif /* __GE_PLUGIN_API_H__ */
+#endif				/* __cplusplus */
+#endif				/* __GE_PLUGIN_API_H__ */
