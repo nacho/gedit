@@ -17,12 +17,13 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "client.h"
 #include <glib.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
+#include "client.h"
 
 static gchar *
 get_physical_block( gint length, gint fd )
