@@ -931,6 +931,9 @@ toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 	/* updates active_view and active_child when a new toplevel receives focus */
 	g_return_val_if_fail (BONOBO_IS_WINDOW (win), FALSE);
 	
+	if (mdi->priv->active_window == win)
+		return FALSE;
+
 	mdi->priv->active_window = win;
 	
 	contents = get_book_from_window (win);
@@ -1029,6 +1032,11 @@ app_close_book (BonoboWindow *win, GdkEventAny *event, BonoboMDI *mdi)
 	gint handler_ret = TRUE;
 	
 	gedit_debug (DEBUG_MDI, "");
+
+	g_return_val_if_fail (win != NULL, FALSE);
+	g_return_val_if_fail (mdi != NULL, FALSE);
+
+	toplevel_focus (win, NULL, mdi);
 
 	if (g_list_length (mdi->priv->windows) == 1) 
 	{		
