@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-04-23 12:31+0200\n"
-"PO-Revision-Date: 2002-04-23 12:44+0200\n"
+"POT-Creation-Date: 2002-04-29 13:28+0200\n"
+"PO-Revision-Date: 2002-04-29 13:29+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -670,7 +670,9 @@ msgstr "Kategorier"
 
 #: src/dialogs/gedit-preferences-dialog.c:906
 msgid "Push this button to select the font to be used by the editor"
-msgstr "Trykk på denne knappen for å velge skriften som skal brukes av redigeringsprogrammet"
+msgstr ""
+"Trykk på denne knappen for å velge skriften som skal brukes av "
+"redigeringsprogrammet"
 
 #: src/dialogs/gedit-preferences-dialog.c:909
 msgid "Push this button to configure text color"
@@ -688,19 +690,26 @@ msgstr "Trykk på denne knappen for å konfigurere farge for markert tekst"
 #: src/dialogs/gedit-preferences-dialog.c:915
 msgid ""
 "Push this button to configure color in which selected text should be marked"
-msgstr "Trykk på denne knappen for å konfigurere farge for markering av valgt tekst"
+msgstr ""
+"Trykk på denne knappen for å konfigurere farge for markering av valgt tekst"
 
 #: src/dialogs/gedit-preferences-dialog.c:1313
 msgid "Push this button to select the font to be used to print the body"
-msgstr "Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av dokumentkroppen"
+msgstr ""
+"Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av "
+"dokumentkroppen"
 
 #: src/dialogs/gedit-preferences-dialog.c:1315
 msgid "Push this button to select the font to be used to print the headers"
-msgstr "Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av toppteksten."
+msgstr ""
+"Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av "
+"toppteksten."
 
 #: src/dialogs/gedit-preferences-dialog.c:1317
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr "Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av linjenummer."
+msgstr ""
+"Trykk på denne knappen for å velge skriften som skal brukes ved utskrift av "
+"linjenummer."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -1194,52 +1203,76 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit er en liten lettvekt tekst editor for GNOME"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:524 src/gedit-document.c:535
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:524 src/gedit-document.c:535
 msgid "Untitled"
 msgstr "Navnløs"
 
-#: src/gedit-document.c:648 src/gedit-document.c:754
+#: src/gedit-document.c:651 src/gedit-document.c:757
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: src/gedit-document.c:948
+#: src/gedit-document.c:952
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
 
-#: src/gedit-document.c:955
+#: src/gedit-document.c:959
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikke håndtere denne typen lokasjon i skrivemodus."
 
-#: src/gedit-document.c:972
-msgid "Could not create the backup copy of the file."
-msgstr "Kunne ikke opprette sikkerhetskopi av filen."
+#: src/gedit-document.c:970
+msgid "Invalid filename."
+msgstr "Ugyldig filnavn."
 
-#: src/gedit-document.c:991
-msgid ""
-"Make sure that the path you provided exists, and that you have the "
-"appropriate write permissions."
-msgstr ""
-"Forsikre deg om at stien du oppga eksisterer, og at du har skriverettigheter."
+#: src/gedit-document.c:998
+#, c-format
+msgid "Could not open backup file %s."
+msgstr "Kunne ikke åpne sikkerhetskopi %s."
 
-#: src/gedit-document.c:1029
+#: src/gedit-document.c:1009
+#, c-format
+msgid "Could not open file %s."
+msgstr "Kunne ikke åpne fil %s."
+
+#: src/gedit-document.c:1029 src/gedit-document.c:1058
+msgid "Could not create backup file."
+msgstr "Kunne ikke opprette sikkerhetskopi."
+
+#: src/gedit-document.c:1042
+msgid "Could not write backup file."
+msgstr "Kunne ikke skrive sikkerhetskopi."
+
+#: src/gedit-document.c:1051
+msgid "Error when creating backup file."
+msgstr "Feil under oppretting av sikkerhetskopi."
+
+#: src/gedit-document.c:1069 src/gedit-document.c:1112
+#: src/gedit-document.c:1124
+msgid "Could not save the file."
+msgstr "Kunne ikke lagre filen."
+
+#: src/gedit-document.c:1102
 msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
 msgstr ""
 "Det er ikke nok plass på disken til å lagre filen.\n"
-"Vennligst frigjør plass på disken og prøv igjen."
+"Vennligst frigjør plass og prøv igjen."
 
-#: src/gedit-document.c:1034
-msgid "The file is too big."
-msgstr "Filen er for stor."
+#: src/gedit-document.c:1107
+msgid ""
+"The file is too big.\n"
+"Please try saving a smaller file."
+msgstr ""
+"Filen er for stor.\n"
+"Vennnligst prøv å lagre en mindre fil."
 
-#: src/gedit-document.c:1184
+#: src/gedit-document.c:1241
 msgid "It is not possible to revert an Untitled document"
 msgstr "Du kan ikke forkaste et dokument uten tittel"
 
