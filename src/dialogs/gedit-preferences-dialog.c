@@ -46,6 +46,8 @@
 #include "gedit-plugin-manager.h"
 #include "gedit-encodings.h"
 
+#include "gedit-encodings-dialog.h"
+
 #include "gnome-print-font-picker.h"
 
 /* To be syncronized with gedit-preferences.glade2 */
@@ -1916,6 +1918,15 @@ create_encodings_treeview_model (void)
 	return GTK_TREE_MODEL (store);
 }
 
+static void
+gedit_preferences_dialog_add_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	gedit_encodings_dialog_run (dlg);
+}
+
+
 static gboolean 
 gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -1937,11 +1948,14 @@ gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_return_val_if_fail (dlg->priv->up_enc_button != NULL, FALSE);
 	g_return_val_if_fail (dlg->priv->down_enc_button != NULL, FALSE);
 
-	gtk_widget_set_sensitive (dlg->priv->add_enc_button, FALSE);
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, FALSE);
 	gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
 	gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
 
+	g_signal_connect (G_OBJECT (dlg->priv->add_enc_button), "clicked", 
+			  G_CALLBACK (gedit_preferences_dialog_add_enc_button_clicked), 
+			  dlg);
+	
 	model = create_encodings_treeview_model ();
 	g_return_val_if_fail (model != NULL, FALSE);
 

@@ -45,104 +45,7 @@ struct _GeditEncoding
  * Copyright (C) 2002 Red Hat, Inc.
  */
 
-typedef enum
-{
-  GEDIT_ENCODING_CURRENT_LOCALE,
-
-  GEDIT_ENCODING_ISO_8859_1,
-  GEDIT_ENCODING_ISO_8859_3,
-  GEDIT_ENCODING_ISO_8859_4,
-  GEDIT_ENCODING_ISO_8859_5,
-  GEDIT_ENCODING_ISO_8859_6,
-  GEDIT_ENCODING_ISO_8859_7,
-  GEDIT_ENCODING_ISO_8859_8,
-  GEDIT_ENCODING_ISO_8859_8_I,
-  GEDIT_ENCODING_ISO_8859_9,
-  GEDIT_ENCODING_ISO_8859_10,
-  GEDIT_ENCODING_ISO_8859_13,
-  GEDIT_ENCODING_ISO_8859_14,
-  GEDIT_ENCODING_ISO_8859_15,
-  GEDIT_ENCODING_ISO_8859_16,
-
-  GEDIT_ENCODING_UTF_7,
-  GEDIT_ENCODING_UTF_8,
-  GEDIT_ENCODING_UTF_16,
-  GEDIT_ENCODING_UCS_2,
-  GEDIT_ENCODING_UCS_4,
-
-  GEDIT_ENCODING_ARMSCII_8,
-  GEDIT_ENCODING_BIG5,
-  GEDIT_ENCODING_BIG5_HKSCS,
-  GEDIT_ENCODING_CP_866,
-
-  GEDIT_ENCODING_EUC_JP,
-  GEDIT_ENCODING_EUC_KR,
-  GEDIT_ENCODING_EUC_TW,
-
-  GEDIT_ENCODING_GB18030,
-  GEDIT_ENCODING_GB2312,
-  GEDIT_ENCODING_GBK,
-  GEDIT_ENCODING_GEOSTD8,
-  GEDIT_ENCODING_HZ,
-
-  GEDIT_ENCODING_IBM_850,
-  GEDIT_ENCODING_IBM_852,
-  GEDIT_ENCODING_IBM_855,
-  GEDIT_ENCODING_IBM_857,
-  GEDIT_ENCODING_IBM_862,
-  GEDIT_ENCODING_IBM_864,
-
-  GEDIT_ENCODING_ISO_2022_JP,
-  GEDIT_ENCODING_ISO_2022_KR,
-  GEDIT_ENCODING_ISO_IR_111,
-  GEDIT_ENCODING_JOHAB,
-  GEDIT_ENCODING_KOI8_R,
-  GEDIT_ENCODING_KOI8_U,
-
-#if 0
-  /* GLIBC iconv doesn't seem to have these mac things */
-  GEDIT_ENCODING_MAC_ARABIC,
-  GEDIT_ENCODING_MAC_CE,
-  GEDIT_ENCODING_MAC_CROATIAN,
-  GEDIT_ENCODING_MAC_CYRILLIC,
-  GEDIT_ENCODING_MAC_DEVANAGARI,
-  GEDIT_ENCODING_MAC_FARSI,
-  GEDIT_ENCODING_MAC_GREEK,
-  GEDIT_ENCODING_MAC_GUJARATI,
-  GEDIT_ENCODING_MAC_GURMUKHI,
-  GEDIT_ENCODING_MAC_HEBREW,
-  GEDIT_ENCODING_MAC_ICELANDIC,
-  GEDIT_ENCODING_MAC_ROMAN,
-  GEDIT_ENCODING_MAC_ROMANIAN,
-  GEDIT_ENCODING_MAC_TURKISH,
-  GEDIT_ENCODING_MAC_UKRAINIAN,
-#endif
-  
-  GEDIT_ENCODING_SHIFT_JIS,
-  GEDIT_ENCODING_TCVN,
-  GEDIT_ENCODING_TIS_620,
-  GEDIT_ENCODING_UHC,
-  GEDIT_ENCODING_VISCII,
-
-  GEDIT_ENCODING_WINDOWS_1250,
-  GEDIT_ENCODING_WINDOWS_1251,
-  GEDIT_ENCODING_WINDOWS_1252,
-  GEDIT_ENCODING_WINDOWS_1253,
-  GEDIT_ENCODING_WINDOWS_1254,
-  GEDIT_ENCODING_WINDOWS_1255,
-  GEDIT_ENCODING_WINDOWS_1256,
-  GEDIT_ENCODING_WINDOWS_1257,
-  GEDIT_ENCODING_WINDOWS_1258,
-
-  GEDIT_ENCODING_LAST
-  
-} GeditEncodingIndex;
-
-
 static GeditEncoding encodings [] = {
-
-  { GEDIT_ENCODING_CURRENT_LOCALE,
-    NULL, N_("Current Locale") },
 
   { GEDIT_ENCODING_ISO_8859_1,
     "ISO-8859-1", N_("Western") },
@@ -175,8 +78,6 @@ static GeditEncoding encodings [] = {
 
   { GEDIT_ENCODING_UTF_7,
     "UTF-7", N_("Unicode") },
-  { GEDIT_ENCODING_UTF_8,
-    "UTF-8", N_("Unicode") },
   { GEDIT_ENCODING_UTF_16,
     "UTF-16", N_("Unicode") },
   { GEDIT_ENCODING_UCS_2,
@@ -312,9 +213,6 @@ gedit_encoding_lazy_init (void)
 	if (initialized)
 		return;
 
-	g_get_charset ((const char**)
-			&encodings [GEDIT_ENCODING_CURRENT_LOCALE].charset);
-
 	g_return_if_fail (G_N_ELEMENTS (encodings) == GEDIT_ENCODING_LAST);
   
 	i = 0;
@@ -338,27 +236,29 @@ gedit_encoding_get_from_charset (const gchar *charset)
 
 	gedit_encoding_lazy_init ();
 
-	i = 1; /* skip current locale */
+	i = 0; 
 	while (i < GEDIT_ENCODING_LAST)
 	{
-		/* Note that the "current locale" encoding entry
-		 * may have the same charset as other entries
-		 */
-      
 		if (strcmp (charset, encodings[i].charset) == 0)
 			return &encodings[i];
       
 		++i;
 	}
-
-	/* Fall back to current locale if the current locale charset
-	* wasn't known.
-	*/
-	if (strcmp (charset, encodings[GEDIT_ENCODING_CURRENT_LOCALE].charset) == 0)
-		return &encodings[GEDIT_ENCODING_CURRENT_LOCALE];
-  
+ 
 	return NULL;
 }
+
+const GeditEncoding *
+gedit_encoding_get_from_index (gint index)
+{
+	g_return_val_if_fail (index >= 0, NULL);
+	g_return_val_if_fail (index < GEDIT_ENCODING_LAST, NULL);
+
+	gedit_encoding_lazy_init ();
+
+	return &encodings [index];
+}
+
 
 gchar *
 gedit_encoding_to_string (const GeditEncoding* enc)
@@ -370,14 +270,6 @@ gedit_encoding_to_string (const GeditEncoding* enc)
 	gedit_encoding_lazy_init ();
 
     	return g_strdup_printf ("%s (%s)", enc->name, enc->charset);
-}
-
-const GeditEncoding*  
-get_list_of_known_encodings ()
-{
-	gedit_encoding_lazy_init ();
-
-	return encodings;
 }
 
 const gchar *
