@@ -1215,7 +1215,8 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
 	
-	if (!gedit_document_can_find_again (doc)) {
+	if (!gedit_document_can_find_again (doc))
+	{
 		gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindNext", FALSE);
 		gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindPrev", FALSE);
 	}

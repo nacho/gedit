@@ -392,6 +392,8 @@ main (int argc, char **argv)
 	/* Init plugins engine */
 	gedit_plugins_engine_init ();
 
+	gnome_authentication_manager_init ();
+
 	/* Initialize session management */
 	gedit_session_init (argv[0]);
 

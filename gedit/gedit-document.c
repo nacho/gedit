@@ -873,7 +873,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	
 	stdin_data = gedit_utils_get_stdin ();
 
@@ -957,6 +957,8 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 gboolean 
 gedit_document_is_untouched (const GeditDocument *doc)
 {
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), TRUE);
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	return (doc->priv->uri == NULL) && 
@@ -1899,6 +1901,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 	gboolean found = FALSE;
 	GtkSourceSearchFlags search_flags;
 	gchar *converted_str;
+	gboolean is_first_find = FALSE;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1995,12 +1998,23 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 					"selection_bound", &match_end);
 		}
 
-		if (doc->priv->last_searched_text)
+		if (gedit_document_can_find_again (doc))
+		{
 			g_free (doc->priv->last_searched_text);
+		}
+		else
+		{
+			is_first_find = TRUE;
+		}
 
 		doc->priv->last_searched_text = g_strdup (str);
 		doc->priv->last_search_was_case_sensitive = GEDIT_SEARCH_IS_CASE_SENSITIVE (flags);
 		doc->priv->last_search_was_entire_word = GEDIT_SEARCH_IS_ENTIRE_WORD (flags);
+
+		if (is_first_find)
+		{
+			g_signal_emit (G_OBJECT (doc), document_signals[CAN_FIND_AGAIN], 0);
+		}
 	}
 
 	g_free (converted_str);
