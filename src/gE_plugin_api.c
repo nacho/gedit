@@ -308,8 +308,27 @@ void gE_plugin_program_register (plugin_info *info)
   g_list_foreach( window_list, (GFunc)add_plugin_to_menu, info );
 }
 
-GtkText *gE_plugin_get_widget( gint docid )
+#ifdef WITH_GMODULE_PLUGINS
+
+GtkText *
+gE_plugin_get_widget (gint docid)
 {
-  return ((gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid))->text;
+	gE_document *document = g_hash_table_lookup (doc_int_to_pointer, &docid);
+	return GTK_TEXT (document->text);
 }
 
+GtkWidget *
+gE_plugin_create_widget (gint docid, gchar *title, GtkWidget **split_screen)
+{
+	gE_window *window = g_hash_table_lookup (win_int_to_pointer, &docid);
+	gE_document *doc;
+
+	g_return_val_if_fail (window != NULL, NULL);
+
+	doc = gE_document_new_container (window, title, split_screen != NULL);
+	if (split_screen) *split_screen = doc->split_viewport;
+
+	return doc->viewport;
+}
+
+#endif /* WITH_GMODULE_PLUGINS */

@@ -97,7 +97,7 @@ gE_window_new(void)
 	w->tab_pos = GTK_POS_TOP;
 	w->files_list_window = NULL;
 	w->files_list_window_data = NULL;
-	w->toolbar = TRUE;
+	w->toolbar = NULL;
 
 	w->show_status = TRUE;
 	w->have_toolbar = TRUE;
@@ -342,6 +342,8 @@ gE_document
 	gtk_table_attach_defaults(GTK_TABLE(table),
 		doc->split_screen, 0, 1, 0, 1);
 
+	doc->split_parent = GTK_WIDGET (doc->split_screen)->parent;
+
 	style = gtk_style_new();
   	gdk_font_unref (style->font);
  	 style->font = gdk_font_load (w->font);
@@ -379,7 +381,7 @@ gE_document
 		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "delete_text",
 		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
-gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
+	gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
 	
@@ -431,10 +433,13 @@ gE_document *gE_document_current(gE_window *window)
 
 void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 {
+	if (!doc->split_parent)
+		return;
+
 	if (split_screen)
-		gtk_widget_show (GTK_WIDGET (doc->split_screen)->parent);
+		gtk_widget_show (doc->split_parent);
 	else
-		gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
+		gtk_widget_hide (doc->split_parent);
 }
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
@@ -677,3 +682,120 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 } /* doc_swaphc_cb */
 
 /* the end */
+
+#ifdef WITH_GMODULE_PLUGINS
+
+gE_document
+*gE_document_new_container(gE_window *w, gchar *title, gint with_split_screen)
+{
+	gE_document *doc;
+	GtkWidget *table, *vscrollbar, *vpaned, *vbox;
+#ifndef WITHOUT_GNOME
+	GtkWidget *scrollball;
+#endif
+	GtkStyle *style;
+	gint *ptr; /* For plugin stuff. */
+
+	doc = g_malloc0(sizeof(gE_document));
+
+	ptr = g_new(int, 1);
+	*ptr = ++last_assigned_integer;
+	g_hash_table_insert (doc_int_to_pointer, ptr, doc);
+	g_hash_table_insert (doc_pointer_to_int, doc, ptr);
+
+	doc->window = w;
+
+	if (w->notebook == NULL) {
+		w->notebook = gtk_notebook_new ();
+		gtk_notebook_set_scrollable (GTK_NOTEBOOK (w->notebook), TRUE);
+	}
+	
+	vpaned = gtk_vbox_new (TRUE, TRUE);
+	
+	doc->tab_label = gtk_label_new (title);
+	GTK_WIDGET_UNSET_FLAGS (doc->tab_label, GTK_CAN_FOCUS);
+	doc->filename = NULL;
+	doc->word_wrap = TRUE;
+	doc->line_wrap = TRUE;
+	doc->read_only = FALSE;
+	gtk_widget_show (doc->tab_label);
+
+	/* Create the upper split screen */
+	table = gtk_table_new (2, 2, FALSE);
+	gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
+	gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
+	gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
+	gtk_widget_show (table);
+
+	/* Create it, but never gtk_widget_show () it. */
+	doc->text = gtk_text_new (NULL, NULL);
+
+	doc->viewport = gtk_viewport_new (NULL, NULL);
+	gtk_table_attach_defaults (GTK_TABLE (table), doc->viewport, 0, 1, 0, 1);
+
+	vbox = gtk_vbox_new (FALSE, FALSE);
+#ifndef WITHOUT_GNOME
+	scrollball = gtk_scrollball_new 
+		(NULL, GTK_VIEWPORT (doc->viewport)->vadjustment);
+	gtk_box_pack_start (GTK_BOX (vbox), scrollball, FALSE, FALSE, 1);
+	gtk_widget_show (scrollball);
+	doc->scrollball = scrollball;
+#endif
+
+	vscrollbar = gtk_vscrollbar_new
+		(GTK_VIEWPORT (doc->viewport)->vadjustment);
+	gtk_box_pack_start (GTK_BOX (vbox), vscrollbar, TRUE, TRUE, 0);
+	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 0, 1,
+			 GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+
+	GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
+	gtk_widget_show (vscrollbar);
+	gtk_widget_show (vbox);
+
+#ifdef GTK_HAVE_FEATURES_1_1_0
+	doc->split_screen = gtk_text_new (NULL, NULL);
+
+	if (with_split_screen) {
+		/* Create the bottom split screen */
+		table = gtk_table_new (2, 2, FALSE);
+		gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
+		gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
+		
+		gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
+		gtk_widget_show (table);
+
+		doc->split_viewport = gtk_viewport_new (NULL, NULL);
+		gtk_table_attach_defaults (GTK_TABLE (table),
+					   doc->split_viewport,
+					   0, 1, 0, 1);
+		doc->split_parent = GTK_WIDGET (doc->split_viewport)->parent;
+
+		vscrollbar = gtk_vscrollbar_new
+			(GTK_VIEWPORT (doc->split_viewport)->vadjustment);
+
+		gtk_table_attach (GTK_TABLE (table), vscrollbar, 1, 2, 0, 1,
+				  GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+
+		GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
+		gtk_widget_show (vscrollbar);
+		gtk_widget_hide (GTK_WIDGET (doc->split_viewport)->parent);
+	}
+
+#endif	/* GTK_HAVE_FEATURES_1_1_0 */
+	
+	gtk_widget_show (vpaned);
+	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), vpaned,
+				 doc->tab_label);
+
+	w->documents = g_list_append(w->documents, doc);
+
+	gtk_notebook_set_page(GTK_NOTEBOOK(w->notebook),
+		g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1);
+
+	gtk_widget_grab_focus(doc->text);
+
+	return doc;
+}
+
+#endif /* WITH_GMODULE_PLUGINS */
+

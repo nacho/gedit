@@ -1124,9 +1124,13 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 void options_toggle_split_screen_cb (GtkWidget *widget, gE_window *window)
 {
 	gE_document *doc = gE_document_current (window);
-	gint visible = GTK_WIDGET_VISIBLE
-		(GTK_WIDGET (doc->split_screen)->parent);
-	gE_document_set_split_screen (doc, !visible);
+	gint visible;
+
+	if (!doc->split_parent)
+		return;
+
+	gE_document_set_split_screen
+		(doc, !GTK_WIDGET_VISIBLE (doc->split_parent));
 }
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */

@@ -1,3 +1,29 @@
+1998-10-22  Martin Baulig  <martin@home-of-linux.org>
+
+	Plugins can now use the new gE_plugin_create_widget () function
+	to create a document not having a GtkText but a GtkContainer widget
+	so they can add an arbitrary child to it.
+
+	* src/main.h (gE_document): Added `viewport', `split_viewport' and
+	`split_parent'.
+
+	* src/gE_document.c (gE_document_new): Set `doc->split_parent'.
+	(gE_document_set_split_screen): Use `doc->split_parent', if this
+	is NULL then we don't have a split screen.
+	* command.c (options_toggle_split_screen_cb): Likewise.
+
+	* src/gE_document.c (gE_document_new_container): New function.
+	Since larger parts of gEdit rely upon the fact that `doc->text' and
+	`doc->split_screen' are GtkText widgets, we need to create them here;
+	we just add a newly created GtkViewport to the GtkTable instead of
+	the GtkTexts ...
+
+	* src/gE_plugin_api.c (gE_plugin_create_widget): This is a wrapper
+	function for gE_document_new_container () that should be used in
+	plugins.
+
+	* src/gE_plugin.h (gE_plugin_create_widget): Added prototype.
+
 1998-10-22  Alex Roberts  <bse@dial.pipex.com>
 
 	* Makefile.am: Few file additions so the RPM would build...

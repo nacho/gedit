@@ -101,6 +101,7 @@ extern void	gE_plugin_set_scroll_ball	(gint, gint);
 extern char *	gE_plugin_text_get		(gint);
 extern gboolean	gE_plugin_program_quit		(void);
 extern GtkText *gE_plugin_get_widget		(gint);
+GtkWidget *	gE_plugin_create_widget		(gint, gchar *, GtkWidget **);
 
 #ifndef _IN_GEDIT
 

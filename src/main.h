@@ -97,6 +97,7 @@ typedef struct _gE_document {
 	gE_window *window;
 	GtkWidget *text;
 	GtkWidget *tab_label;
+	GtkWidget *viewport;
 	gchar *filename;
 	gint changed_id;
 	gint changed;
@@ -109,6 +110,8 @@ typedef struct _gE_document {
 #endif
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	gint split;
+	GtkWidget *split_parent;
+	GtkWidget *split_viewport;
 	GtkWidget *split_screen;
 	GtkWidget *flag;
 #endif
