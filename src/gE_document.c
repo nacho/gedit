@@ -230,8 +230,8 @@ gE_window *gE_window_new()
       gtk_widget_show (box2);
       window->statusbox = box2;
 
-  gtk_widget_show(window->menubar); 
-
+/*  gtk_widget_show(window->menubar); 
+*/
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
 
@@ -353,6 +353,7 @@ gE_document *gE_document_current(gE_window *window)
 	gE_document *current_document;
 	current_document = NULL;
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)) +1;
+	g_print("%d\n",cur);
 	current_document = (g_list_nth(window->documents, cur))->data;
 	if (current_document == NULL)
 		g_print ("Current Document == NULL\n");
