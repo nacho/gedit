@@ -799,16 +799,6 @@ DEFINE_BOOL_PREF (statusbar_visible,
 		  GPM_STATUSBAR_VISIBLE,
 		  GPM_DEFAULT_STATUSBAR_VISIBLE)
 
-/* Show cursor position in statusbar */
-DEFINE_BOOL_PREF (statusbar_show_cursor_position,
-		  GPM_STATUSBAR_SHOW_CURSOR_POSITION,
-		  GPM_DEFAULT_STATUSBAR_SHOW_CURSOR_POSITION)
-
-/* Show overwrite mode in statusbar */
-DEFINE_BOOL_PREF (statusbar_show_overwrite_mode,
-		  GPM_STATUSBAR_SHOW_OVERWRITE_MODE,
-		  GPM_DEFAULT_STATUSBAR_SHOW_OVERWRITE_MODE)
-
 /* Print header */
 DEFINE_BOOL_PREF (print_header,
 		  GPM_PRINT_HEADER,

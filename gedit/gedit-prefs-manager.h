@@ -85,8 +85,6 @@
 
 #define GPM_STATUSBAR_DIR		GPM_PREFS_DIR "/ui/statusbar"
 #define GPM_STATUSBAR_VISIBLE		GPM_STATUSBAR_DIR "/statusbar_visible"
-#define GPM_STATUSBAR_SHOW_CURSOR_POSITION GPM_STATUSBAR_DIR "/statusbar_show_cursor_position"
-#define GPM_STATUSBAR_SHOW_OVERWRITE_MODE  GPM_STATUSBAR_DIR "/statusbar_show_overwrite_mode"
 
 #define GRM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
 #define GPM_MAX_RECENTS			GRM_RECENTS_DIR "/max_recents"
@@ -144,8 +142,6 @@
 #define GPM_DEFAULT_TOOLBAR_SHOW_TOOLTIPS 1 /* TRUE */
 
 #define GPM_DEFAULT_STATUSBAR_VISIBLE	1 /* TRUE */
-#define GPM_DEFAULT_STATUSBAR_SHOW_CURSOR_POSITION 1 /* TRUE */
-#define GPM_DEFAULT_STATUSBAR_SHOW_OVERWRITE_MODE 1 /* TRUE */
 
 #define GPM_DEFAULT_PRINT_HEADER	1 /* TRUE */
 #define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_CHAR"
@@ -293,16 +289,6 @@ gboolean		 gedit_prefs_manager_toolbar_buttons_style_can_set (void);
 gboolean		 gedit_prefs_manager_get_statusbar_visible	(void);
 void			 gedit_prefs_manager_set_statusbar_visible	(gboolean sv);
 gboolean		 gedit_prefs_manager_statusbar_visible_can_set	(void);
-
-/* Show cursor position in statusbar */
-gboolean		 gedit_prefs_manager_get_statusbar_show_cursor_position	(void);
-void			 gedit_prefs_manager_set_statusbar_show_cursor_position	(gboolean scp);
-gboolean		 gedit_prefs_manager_statusbar_show_cursor_position_can_set (void);
-									
-/* Show overwrite mode in statusbar */
-gboolean		 gedit_prefs_manager_get_statusbar_show_overwrite_mode (void);
-void			 gedit_prefs_manager_set_statusbar_show_overwrite_mode (gboolean som);
-gboolean		 gedit_prefs_manager_statusbar_show_overwrite_mode_can_set (void);
 
 /* Print header */
 gboolean		 gedit_prefs_manager_get_print_header		(void);

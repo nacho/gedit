@@ -76,8 +76,6 @@ struct _GeditWindowPrefs
 	GeditToolbarSetting toolbar_buttons_style;
 
 	gboolean statusbar_visible;
-	gboolean statusbar_show_cursor_position;
-	gboolean statusbar_show_overwrite_mode;
 
 	gboolean output_window_visible;
 };
@@ -416,6 +414,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 					BONOBO_OBJREF (control),
 					NULL);
 
+	gtk_widget_show (widget);
+
 	bonobo_object_unref (BONOBO_OBJECT (control));
 
 	g_object_set_data (G_OBJECT (win), "CursorPosition", widget);
@@ -430,6 +430,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 		       			"/status/OverwriteMode",
 					BONOBO_OBJREF (control),
 					NULL);
+
+	gtk_widget_show (widget);
 
 	bonobo_object_unref (BONOBO_OBJECT (control));
 
@@ -474,13 +476,6 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 	bonobo_ui_component_add_listener (ui_component, "ToolbarIconBothHoriz", 
-			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
-			(gpointer)win);
-
-	bonobo_ui_component_add_listener (ui_component, "StatusBarCursorPosition", 
-			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
-			(gpointer)win);
-	bonobo_ui_component_add_listener (ui_component, "StatusBarOverwriteMode", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 	
@@ -646,28 +641,6 @@ gedit_mdi_view_menu_item_toggled_handler (
 		goto save_prefs;
 	}
 
-	if (strcmp (path, "StatusBarCursorPosition") == 0)
-	{
-		if (s != prefs->statusbar_show_cursor_position)
-		{
-			prefs->statusbar_show_cursor_position = s;
-			gedit_mdi_set_app_statusbar_style (win);
-		}
-
-		goto save_prefs;
-	}
-
-	if (strcmp (path, "StatusBarOverwriteMode") == 0)
-	{
-		if (s != prefs->statusbar_show_overwrite_mode)
-		{
-			prefs->statusbar_show_overwrite_mode = s;
-			gedit_mdi_set_app_statusbar_style (win);
-		}
-
-		goto save_prefs;
-	}
-
 save_prefs:
 	gedit_window_prefs_save (prefs);
 }
@@ -813,7 +786,6 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 {
 	GeditWindowPrefs *prefs = NULL;
 	BonoboUIComponent *ui_component;
-	GtkWidget *cp, *om;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -831,22 +803,6 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	gedit_menus_set_verb_state (ui_component, 
 				    "/commands/ViewStatusbar",
 				    prefs->statusbar_visible);
-
-	gedit_menus_set_verb_sensitive (ui_component, 
-				    "/commands/StatusBarCursorPosition",
-				    prefs->statusbar_visible);
-
-	gedit_menus_set_verb_sensitive (ui_component, 
-				    "/commands/StatusBarOverwriteMode",
-				    prefs->statusbar_visible);
-
-	gedit_menus_set_verb_state (ui_component, 
-				    "/commands/StatusBarCursorPosition",
-				    prefs->statusbar_show_cursor_position);
-
-	gedit_menus_set_verb_state (ui_component, 
-				    "/commands/StatusBarOverwriteMode",
-				    prefs->statusbar_show_overwrite_mode);
 	
 	/* Actually update status bar style */
 	bonobo_ui_component_set_prop (
@@ -854,60 +810,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 		"hidden", prefs->statusbar_visible ? "0" : "1",
 		NULL);
 
-	cp = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "CursorPosition"));
-	if (cp == NULL)
-		goto error;
-
-	if (prefs->statusbar_show_cursor_position)
-	{
-		bonobo_ui_component_set_prop (
-			ui_component, "/status/CursorPosition", "hidden", "0", NULL);
-
-		gtk_widget_show (cp);
-	}
-	else
-	{
-		bonobo_ui_component_set_prop (
-			ui_component, "/status/CursorPosition", "hidden", "1", NULL);
-
-		gtk_widget_hide (cp);
-	}
-	
-	om = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "OverwriteMode"));
-	if (om == NULL)
-		goto error;
-
-	if (prefs->statusbar_show_overwrite_mode)
-	{
-		gtk_widget_show (om);
-		
-		bonobo_ui_component_set_prop (
-			ui_component, "/status/OverwriteMode", "hidden", "0", NULL);
-	}
-	else
-	{
-		bonobo_ui_component_set_prop (
-			ui_component, "/status/OverwriteMode", "hidden", "1", NULL);
-		
-		gtk_widget_hide (om);
-	}
-
-	if (!prefs->statusbar_show_overwrite_mode)
-		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (cp), TRUE);
-	else
-		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (cp), FALSE);
-
-	if (!prefs->statusbar_show_cursor_position &&
-	    !prefs->statusbar_show_overwrite_mode)
-		bonobo_ui_component_set_prop (
-			ui_component, "/status", "resize_grip", "1", NULL);
-	else
-		bonobo_ui_component_set_prop (
-			ui_component, "/status", "resize_grip", "0", NULL);
-
-error:
 	bonobo_ui_component_thaw (ui_component, NULL);
-	
 }
 
 static void 
@@ -1461,8 +1364,6 @@ gedit_window_prefs_new (void)
 	prefs->toolbar_buttons_style = gedit_prefs_manager_get_toolbar_buttons_style ();
 
 	prefs->statusbar_visible = gedit_prefs_manager_get_statusbar_visible ();
-	prefs->statusbar_show_cursor_position = gedit_prefs_manager_get_statusbar_show_cursor_position ();
-	prefs->statusbar_show_overwrite_mode = gedit_prefs_manager_get_statusbar_show_overwrite_mode ();
 
 	prefs->output_window_visible = FALSE;
 
@@ -1518,15 +1419,4 @@ gedit_window_prefs_save (GeditWindowPrefs *prefs)
 	    gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (prefs->statusbar_visible);
 
-	if ((prefs->statusbar_show_cursor_position != 
-			gedit_prefs_manager_get_statusbar_show_cursor_position ()) &&
-	    gedit_prefs_manager_statusbar_show_cursor_position_can_set ())
-		gedit_prefs_manager_set_statusbar_show_cursor_position (
-				prefs->statusbar_show_cursor_position);
-
-	if ((prefs->statusbar_show_overwrite_mode != 
-			gedit_prefs_manager_get_statusbar_show_overwrite_mode ()) &&
-	    gedit_prefs_manager_statusbar_show_overwrite_mode_can_set ())
-		gedit_prefs_manager_set_statusbar_show_overwrite_mode (
-				prefs->statusbar_show_overwrite_mode);
 }
