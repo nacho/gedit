@@ -51,7 +51,6 @@ struct _Window
 	GtkWidget *files_list_window_data;
 	GtkWidget *files_list_window_toolbar;
 
-/*	GList *documents;	Pah.. i dunno.. */
 	GtkWidget *popup;
 
 	GtkPositionType tab_pos;
@@ -62,11 +61,14 @@ extern GList *window_list;
 
 extern GtkWidget *col_label;
 
-extern void gedit_window_set_auto_indent (gint auto_indent);
-extern void gedit_window_set_status_bar (gint show_status);
-extern void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
+void gedit_window_set_auto_indent (gint auto_indent);
+void gedit_window_set_status_bar (gint show_status);
+void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 
-extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
+void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
+
+GtkWindow * gedit_window_active (void);
+GnomeApp  * gedit_window_active_app (void);
 
 
 #endif /* __WINDOW_H__ */
