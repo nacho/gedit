@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-31 15:07-0500\n"
+"POT-Creation-Date: 2004-11-01 13:22+0100\n"
 "PO-Revision-Date: 2004-10-31 21:40-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
@@ -58,26 +58,31 @@ msgstr ""
 "effect if the \"Use Default Font\" option is turned off."
 
 #: data/gedit.schemas.in.h:2
+#, fuzzy
+msgid "Active plugins"
+msgstr "Activate %s"
+
+#: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
 msgstr "Auto Detected Encodings"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save"
 msgstr "Auto Save"
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5
 msgid "Auto Save Interval"
 msgstr "Auto Save Interval"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:6
 msgid "Auto indent"
 msgstr "Auto indent"
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:7
 msgid "Background Color"
 msgstr "Background Colour"
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -85,7 +90,7 @@ msgstr ""
 "Background colour for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colours\" option is turned off."
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:9
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -93,39 +98,39 @@ msgstr ""
 "Background colour for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colours\" option is turned off."
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
 msgstr "Backup Copy Extension"
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
 msgstr "Body Font for Printing"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:12
 msgid "Create Backup Copies"
 msgstr "Create Backup Copies"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:13
 msgid "Display Line Numbers"
 msgstr "Display Line Numbers"
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:14
 msgid "Display Right Margin"
 msgstr "Display Right Margin"
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:15
 msgid "Editor Font"
 msgstr "Editor Font"
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:16
 msgid "Enable Syntax Highlighting"
 msgstr "Enable Syntax Highlighting"
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
 msgstr "Encodings shown in menu"
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -133,7 +138,7 @@ msgstr ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -141,7 +146,7 @@ msgstr ""
 "Foreground colour for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colours\" option is turned off."
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -149,11 +154,11 @@ msgstr ""
 "Foreground colour for the unselected text in the editing area. This will "
 "only take effect if the \"Use Default Colours\" option is turned off."
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
 msgstr "Header Font for Printing"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:22
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -163,19 +168,25 @@ msgstr ""
 "document. Otherwise, gedit will print line numbers every such number of "
 "lines."
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
 msgstr "Insert spaces"
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
 msgstr "Line Number Font for Printing"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
 msgstr "Line Wrapping Mode"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:26
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
+msgstr ""
+
+#: data/gedit.schemas.in.h:27
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -183,23 +194,23 @@ msgstr ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid "Maximum Recent Files"
 msgstr "Maximum Recent Files"
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maximum number of actions that gedit will be able to undo or redo."
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -207,127 +218,127 @@ msgstr ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Header"
 msgstr "Print Header"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Print Line Numbers"
 msgstr "Print Line Numbers"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Print Syntax Highlighting"
 msgstr "Print Syntax Highlighting"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
 msgid "Printing Line Wrapping Mode"
 msgstr "Printing Line Wrapping Mode"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:37
 msgid "Right Margin Position"
 msgstr "Right Margin Position"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:38
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:39
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:40
 msgid "Selected Text Color"
 msgstr "Selected Text Colour"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:41
 msgid "Selection Color"
 msgstr "Selection Colour"
 
-#: data/gedit.schemas.in.h:40
-msgid ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-msgstr ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-
-#: data/gedit.schemas.in.h:41
-msgid ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-msgstr ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-
 #: data/gedit.schemas.in.h:42
 msgid ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
 msgstr ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
 
 #: data/gedit.schemas.in.h:43
 msgid ""
-"Specifies the font to use for a document's body when printing documents."
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 msgstr ""
-"Specifies the font to use for a document's body when printing documents."
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:44
 msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 msgstr ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:45
 msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
+"Specifies the font to use for a document's body when printing documents."
 msgstr ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
+"Specifies the font to use for a document's body when printing documents."
 
 #: data/gedit.schemas.in.h:46
 msgid ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
 
 #: data/gedit.schemas.in.h:47
 msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+
+#: data/gedit.schemas.in.h:49
+msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:50
 msgid "Specifies the position of the right margin."
 msgstr "Specifies the position of the right margin."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:51
 msgid "Status Bar is Visible"
 msgstr "Status Bar is Visible"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -343,93 +354,93 @@ msgstr ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:53
 msgid "Tab Size"
 msgstr "Tab Size"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:54
 msgid "Text Color"
 msgstr "Text Colour"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:55
 msgid "Toolbar Buttons Style"
 msgstr "Toolbar Buttons Style"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:56
 msgid "Toolbar is Visible"
 msgstr "Toolbar is Visible"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:57
 msgid "Undo Actions Limit"
 msgstr "Undo Actions Limit"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:58
 msgid "Use Default Colors"
 msgstr "Use Default Colours"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:59
 msgid "Use Default Font"
 msgstr "Use Default Font"
 
-#: data/gedit.schemas.in.h:58
-msgid ""
-"Whether gedit should automatically save modified files after a time "
-"interval. You can set the time interval with the \"Auto Save Interval\" "
-"option."
-msgstr ""
-"Whether gedit should automatically save modified files after a time "
-"interval. You can set the time interval with the \"Auto Save Interval\" "
-"option."
-
-#: data/gedit.schemas.in.h:59
-msgid ""
-"Whether gedit should create backup copies for the files it saves. You can "
-"set the backup file extension with the \"Backup Copy Extension\" option."
-msgstr ""
-"Whether gedit should create backup copies for the files it saves. You can "
-"set the backup file extension with the \"Backup Copy Extension\" option."
-
 #: data/gedit.schemas.in.h:60
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+
+#: data/gedit.schemas.in.h:61
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Whether gedit should display line numbers in the editing area."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Whether gedit should display the right margin in the editing area."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should enable auto indentation."
 msgstr "Whether gedit should enable auto indentation."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Whether gedit should enable syntax highlighting."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Whether gedit should include a document header when printing documents."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:67
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Whether gedit should insert spaces instead of tabs."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Whether gedit should print syntax highlighting when printing documents."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Whether the status bar at the bottom of editing windows should be visible."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:70
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Whether the toolbar should be visible in editing windows."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -441,7 +452,7 @@ msgstr ""
 "specified in the \"Background Colour\", \"Text Colour\", \"Selected Text "
 "Colour\", and \"Selection Colour\" options."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -451,11 +462,11 @@ msgstr ""
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:73
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:74
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -591,6 +602,7 @@ msgstr[0] ""
 msgstr[1] ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 
+#. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "If you don't save, all your changes will be permanently lost."
@@ -1222,8 +1234,9 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
-msgid "Untitled"
-msgstr "Untitled"
+#, fuzzy
+msgid "Unsaved Document"
+msgstr "_Documents"
 
 #: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
@@ -1430,7 +1443,8 @@ msgid "All Text Files"
 msgstr "All Text Files"
 
 #: gedit/gedit-file-selector-util.c:396
-msgid "Ch_aracter Coding:"
+#, fuzzy
+msgid "_Character Coding:"
 msgstr "Ch_aracter Coding:"
 
 #: gedit/gedit-file-selector-util.c:541
@@ -1692,51 +1706,6 @@ msgstr "Clear the output window"
 #: gedit/gedit-output-window.c:476
 msgid "Output Lines"
 msgstr "Output Lines"
-
-#: gedit/gedit-plugins-engine.c:323
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Error, impossible to destroy plugin '%s'"
-
-#: gedit/gedit-plugins-engine.c:399
-#, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "Error, unable to open module file '%s'\n"
-
-#: gedit/gedit-plugins-engine.c:409
-#, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "Error, plugin '%s' does not contain init function."
-
-#: gedit/gedit-plugins-engine.c:419
-#, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Error, plugin '%s' does not contain activate function."
-
-#: gedit/gedit-plugins-engine.c:429
-#, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Error, plugin '%s' does not contain deactivate function."
-
-#: gedit/gedit-plugins-engine.c:454
-#, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "Error, impossible to initialize plugin '%s'"
-
-#: gedit/gedit-plugins-engine.c:492 gedit/gedit-plugins-engine.c:713
-#, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "Error, impossible to activate plugin '%s'"
-
-#: gedit/gedit-plugins-engine.c:545 gedit/gedit-plugins-engine.c:731
-#, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "Error, impossible to deactivate plugin '%s'"
-
-#: gedit/gedit-plugins-engine.c:637
-#, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "Error, impossible to update ui of the plugin '%s'"
 
 #: gedit/gedit-prefs-manager.c:177
 msgid "Cannot initialize preferences manager."
@@ -3210,3 +3179,33 @@ msgstr "_Prompt for a format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Use custom format"
+
+#~ msgid "Untitled"
+#~ msgstr "Untitled"
+
+#~ msgid "Error, impossible to destroy plugin '%s'"
+#~ msgstr "Error, impossible to destroy plugin '%s'"
+
+#~ msgid "Error, unable to open module file '%s'\n"
+#~ msgstr "Error, unable to open module file '%s'\n"
+
+#~ msgid "Error, plugin '%s' does not contain init function."
+#~ msgstr "Error, plugin '%s' does not contain init function."
+
+#~ msgid "Error, plugin '%s' does not contain activate function."
+#~ msgstr "Error, plugin '%s' does not contain activate function."
+
+#~ msgid "Error, plugin '%s' does not contain deactivate function."
+#~ msgstr "Error, plugin '%s' does not contain deactivate function."
+
+#~ msgid "Error, impossible to initialize plugin '%s'"
+#~ msgstr "Error, impossible to initialize plugin '%s'"
+
+#~ msgid "Error, impossible to activate plugin '%s'"
+#~ msgstr "Error, impossible to activate plugin '%s'"
+
+#~ msgid "Error, impossible to deactivate plugin '%s'"
+#~ msgstr "Error, impossible to deactivate plugin '%s'"
+
+#~ msgid "Error, impossible to update ui of the plugin '%s'"
+#~ msgstr "Error, impossible to update ui of the plugin '%s'"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-10 13:49+0200\n"
+"POT-Creation-Date: 2004-11-01 13:22+0100\n"
 "PO-Revision-Date: 2004-09-05 01:32+0300\n"
 "Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -24,7 +24,7 @@ msgstr "Vizualizare Gedit"
 msgid "Gedit View."
 msgstr "Vizualizare Gedit."
 
-#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+#: data/GNOME_Gedit.server.in.in.h:3
 msgid "Gedit viewer factory"
 msgstr "Fabrica de vizualizare Gedit"
 
@@ -57,26 +57,31 @@ msgstr ""
 "efect doar dacă opţiunea „Utilizează fontul implicit“ este nebifată."
 
 #: data/gedit.schemas.in.h:2
+#, fuzzy
+msgid "Active plugins"
+msgstr "Activează %s"
+
+#: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
 msgstr "Codări auto-detectate"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save"
 msgstr "Salvare automată"
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5
 msgid "Auto Save Interval"
 msgstr "Interval pentru salvare automată"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:6
 msgid "Auto indent"
 msgstr "Auto indentare"
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:7
 msgid "Background Color"
 msgstr "Culoare fundal"
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -85,7 +90,7 @@ msgstr ""
 "setare va avea efect doar dacă opţiunea „Utilizează culorile implicite“ este "
 "nebifată."
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:9
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -94,39 +99,39 @@ msgstr ""
 "setare va avea efect doar dacă opţiunea „Utilizează culorile implicite“ este "
 "nebifată."
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
 msgstr "Extensia copiei de siguranţă"
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
 msgstr "Font utilizat la tipărirea corpului"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:12
 msgid "Create Backup Copies"
 msgstr "Creează cópii de siguranţă"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:13
 msgid "Display Line Numbers"
 msgstr "Numerotează liniile"
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:14
 msgid "Display Right Margin"
 msgstr "Afişează marginea dreaptă"
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:15
 msgid "Editor Font"
 msgstr "Font de editare"
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:16
 msgid "Enable Syntax Highlighting"
 msgstr "Activează sintaxa evidenţiată"
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
 msgstr "Codări afişate în meniu"
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -135,7 +140,7 @@ msgstr ""
 "setare va avea efect doar dacă opţiunea „Creează copii de siguranţă“ este "
 "bifată."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -144,7 +149,7 @@ msgstr ""
 "setare va avea efect doar dacă opţiunea „Utilizează culorile standard“ este "
 "nebifată."
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -153,11 +158,11 @@ msgstr ""
 "setare va avea efect doar dacă opţiunea „Utilizează culorile standard“ este "
 "nebifată."
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
 msgstr "Font utilizat la tipărirea antetului"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:22
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -167,19 +172,25 @@ msgstr ""
 "la tipărirea documentului. Pentru o valoare „n“, gedit va tipări numărul "
 "liniei la fiecare „n“ număr de linii."
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
 msgstr "Inserează spaţii"
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
 msgstr "Font pentru numerotarea liniilor la tipărire"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
 msgstr "Mod de rupere al liniilor"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:26
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
+msgstr ""
+
+#: data/gedit.schemas.in.h:27
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -187,23 +198,23 @@ msgstr ""
 "Lista codărilor afişate în meniul „Codare Caractere“ în selectorul de "
 "deschidere/salvare fişiere. Doar codările recunoscute sunt utilizate."
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid "Maximum Recent Files"
 msgstr "Număr maxim de fişiere recente"
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Număr maxim de acţiuni pe care Gedit le va putea anula şi reface."
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 12"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -212,43 +223,43 @@ msgstr ""
 "Această setare va avea efect doar dacă opţiunea „Salvare automată“ este "
 "bifată."
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Header"
 msgstr "Tipăreşte antetul"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Print Line Numbers"
 msgstr "Numerotează liniile la tipărire"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Print Syntax Highlighting"
 msgstr "Tipăreşte sintaxa evidenţiată"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
 msgid "Printing Line Wrapping Mode"
 msgstr "Mod de rupere al liniilor la tipărire"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:37
 msgid "Right Margin Position"
 msgstr "Poziţia marginii din dreapta"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:38
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:39
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:40
 msgid "Selected Text Color"
 msgstr "Culoare text selectat"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:41
 msgid "Selection Color"
 msgstr "Culoare selecţie"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -258,7 +269,7 @@ msgstr ""
 "„CURRENT“ este codarea locală curentă. Doar codările recunoscute sunt "
 "utilizate."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -272,7 +283,7 @@ msgstr ""
 "Valorile sunt sensibile la majuscule, aşa că vă rugăm să vă asiguraţi că "
 "apat exact aşa cum sunt menţionate aici."
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -286,12 +297,12 @@ msgstr ""
 "Majusculele sunt semnificate, aşa că vă rugăm să vă asiguraţi apat exact aşa "
 "cum sunt menţionate aici."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Specifică fontul utilizat pentru corpul documentului la tipărire."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -300,7 +311,7 @@ msgstr ""
 "setare are efect doar dacă opţiunea „Numerotează liniile la tipărire“ este "
 "diferită de zero."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -309,7 +320,7 @@ msgstr ""
 "documentului. Această setare are efect doar dacă opţiunea „Tipăreşte "
 "antetul“ este bifată."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -317,22 +328,22 @@ msgstr ""
 "Specifică numărul maxim de fişiere deschise recent care vor fi afişate în "
 "submeniul „Fişiere recente“."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:49
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Specifică numărul de spaţii care vor fi afişate în locul caracterelor Tab."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:50
 msgid "Specifies the position of the right margin."
 msgstr "Specifică poziţia marginii din dreapta."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:51
 msgid "Status Bar is Visible"
 msgstr "Bara de status este vizibilă"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -349,35 +360,35 @@ msgstr ""
 "Majusculele sunt semnificative, aşa că este recomandat să fie utilizate "
 "exact aşa cum au fost menţionate aici. "
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:53
 msgid "Tab Size"
 msgstr "Lungime tab"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:54
 msgid "Text Color"
 msgstr "Culoare text"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:55
 msgid "Toolbar Buttons Style"
 msgstr "Stil bară cu unelte"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:56
 msgid "Toolbar is Visible"
 msgstr "Bara cu unelte este vizibilă"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:57
 msgid "Undo Actions Limit"
 msgstr "Număr maxim al acţiunilor de anulare"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:58
 msgid "Use Default Colors"
 msgstr "Utilizează culorile implicite"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:59
 msgid "Use Default Font"
 msgstr "Utilizează fontul implicit"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:60
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -387,7 +398,7 @@ msgstr ""
 "timp. Intervalul de timp poate fi setat cu opţiunea „Interval pentru salvare "
 "automată“."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:61
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -396,47 +407,47 @@ msgstr ""
 "le salvează. Puteţi seta extensia pentru fişierele de siguranţă create cu "
 "opţiunea „Extensia copiei de siguranţă“."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Dacă Gedit ar trebui să numeroteze liniile în zona de editare."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Dacă gedit ar trebui să afişeze marginea dreaptă în zona de editare."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should enable auto indentation."
 msgstr "Dacă Gedit ar trebui să activeze indentarea automată."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Dacă gedit ar trebui să activeze sintaxa evidenţiată."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Dacă Gedit ar trebui să includă antetul la tipărirea documentelor."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:67
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Dacă Gedit ar trebui să insereze spaţii în loc de Tab-uri."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Dacă Gedit ar trebui să tipărească sintaxa evidenţiată pentru documente."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Dacă bara de stare de la baza ferestrei de editare ar trebui să fie vizibilă."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:70
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr ""
 "Dacă bara cu unelte ar trebui să fie vizibilă în ferestrele de editare."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -448,7 +459,7 @@ msgstr ""
 "editare vor fi cele specificate în opţiunile „Culoare fundal“, „Culoare "
 "text“, „Culoare text selectat“ şi „Culoare selecţie“."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -459,11 +470,11 @@ msgstr ""
 "atunci fontul specificat în opţiunea „Font editare“ va fi utilizat în locul "
 "fontului de sistem."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:73
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:74
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -503,7 +514,7 @@ msgid "Do_n't save"
 msgstr "_Nu salva"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:139 gedit/gedit-file.c:704
+#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 msgid "Question"
 msgstr "Întrebare"
 
@@ -620,7 +631,7 @@ msgid "Replace _All"
 msgstr "Înlocuieşte t_ot"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:127
 msgid "_Replace"
 msgstr "Î_nlocuieşte"
 
@@ -1217,47 +1228,47 @@ msgstr "Gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit este un editor de text mic şi rapid pentru Gnome"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
-msgid "Untitled"
-msgstr "Fără titlu"
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#, fuzzy
+msgid "Unsaved Document"
+msgstr "_Documente"
 
-#: gedit/gedit-document.c:640 gedit/gedit-document.c:687
+#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
 msgstr "Nume de fişier invalid"
 
-#: gedit/gedit-document.c:838 gedit/gedit-document.c:1399
-#: viewer/gedit-persist-stream.c:120
+#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
 msgid "Invalid UTF-8 data"
 msgstr "Date UTF-8 invalide"
 
-#: gedit/gedit-document.c:1725
+#: gedit/gedit-document.c:1696
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nu am putut citi datele legăturii simbolice pentru %s"
 
-#: gedit/gedit-document.c:1771
+#: gedit/gedit-document.c:1742
 msgid "The file has too many symbolic links."
 msgstr "Acest fişier are prea multe legături simbolice."
 
-#: gedit/gedit-document.c:1827
+#: gedit/gedit-document.c:1800
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
 
-#: gedit/gedit-document.c:1834
+#: gedit/gedit-document.c:1807
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "Gedit nu poate gestiona această locaţie în modul scriere."
 
-#: gedit/gedit-document.c:1847
+#: gedit/gedit-document.c:1820
 msgid "Invalid filename."
 msgstr "Nume de fişier invalid."
 
-#: gedit/gedit-document.c:1959
+#: gedit/gedit-document.c:1934
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1265,7 +1276,7 @@ msgstr ""
 "Nu este destul spaţiu pe disc pentru a salva fişierul.\n"
 "Eliberaţi vă rugăm puţin spaţiu pe disc şi încercaţi din nou."
 
-#: gedit/gedit-document.c:1964
+#: gedit/gedit-document.c:1939
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1275,7 +1286,7 @@ msgstr ""
 "maximă a fişierului. Încercaţi vă rugăm să salvaţi un fişier mai mic sau să "
 "salvaţi pe un disc ce nu are această limitare."
 
-#: gedit/gedit-document.c:2008
+#: gedit/gedit-document.c:1983
 msgid "Could not create a backup file."
 msgstr "Nu am putut crea un cópie de siguranţă."
 
@@ -1405,77 +1416,78 @@ msgstr "Vietnameză"
 msgid "Thai"
 msgstr "Thailandeză"
 
-#: gedit/gedit-file-selector-util.c:152
+#: gedit/gedit-file-selector-util.c:146
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Un fişier cu numele „%s“ există deja.\n"
 
-#: gedit/gedit-file-selector-util.c:153
+#: gedit/gedit-file-selector-util.c:147
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Doriţi să-l înlocuiţi cu cel pe care îl salvaţi?"
 
-#: gedit/gedit-file-selector-util.c:162
+#: gedit/gedit-file-selector-util.c:156
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Fişierul „%s“ poate fi doar citit.\n"
 
-#: gedit/gedit-file-selector-util.c:163
+#: gedit/gedit-file-selector-util.c:157
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Doriţi să încercaţi să-l înlocuiţi cu cel pe care îl salvaţi?"
 
-#: gedit/gedit-file-selector-util.c:361
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Files"
 msgstr "Toate fişierele"
 
-#: gedit/gedit-file-selector-util.c:369
+#: gedit/gedit-file-selector-util.c:378
 msgid "All Text Files"
 msgstr "Toate fişierele text"
 
-#: gedit/gedit-file-selector-util.c:387
-msgid "Ch_aracter Coding:"
+#: gedit/gedit-file-selector-util.c:396
+#, fuzzy
+msgid "_Character Coding:"
 msgstr "Codare c_aracter:"
 
-#: gedit/gedit-file-selector-util.c:533
+#: gedit/gedit-file-selector-util.c:541
 msgid "Select a file to open"
 msgstr "Selectaţi un fişier pentru deschidere"
 
-#: gedit/gedit-file-selector-util.c:559
+#: gedit/gedit-file-selector-util.c:566
 msgid "Select files to open"
 msgstr "Selectaţi un fişier pentru deschidere"
 
-#: gedit/gedit-file-selector-util.c:591
+#: gedit/gedit-file-selector-util.c:598
 msgid "Select a filename to save"
 msgstr "Selectaţi un nume de fişier pentru salvare"
 
-#: gedit/gedit-file.c:215
+#: gedit/gedit-file.c:187
 msgid "Open File..."
 msgstr "Deschide fişierul..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:424
+#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Salvez documentul „%s“..."
 
-#: gedit/gedit-file.c:299 gedit/gedit-file.c:445
+#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Documentul „%s” nu a fost salvat."
 
-#: gedit/gedit-file.c:313 gedit/gedit-file.c:437
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Documentul „%s” a fost salvat."
 
-#: gedit/gedit-file.c:404
+#: gedit/gedit-file.c:366
 msgid "Save as..."
 msgstr "Salvează ca..."
 
-#: gedit/gedit-file.c:605
+#: gedit/gedit-file.c:520
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Doriţi să reveniţi la ultima salvare a documentului „%s”?"
 
-#: gedit/gedit-file.c:614
+#: gedit/gedit-file.c:529
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1485,12 +1497,12 @@ msgid_plural ""
 msgstr[0] "Modificările aduse documentului în ultima secundă vor fi pierdute."
 msgstr[1] "Modificările aduse documentului în ultimele %ld vor fi pierdute."
 
-#: gedit/gedit-file.c:623
+#: gedit/gedit-file.c:538
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:544
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1505,7 +1517,7 @@ msgstr[1] ""
 "Modificările aduse documentului în ultimul minut şi %ld secunde vor fi "
 "pierdute."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:554
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1516,11 +1528,11 @@ msgstr[0] "Modificările aduse documentului în ultimul minut vor fi pierdute."
 msgstr[1] ""
 "Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
 
-#: gedit/gedit-file.c:654
+#: gedit/gedit-file.c:569
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Modificările aduse documentului în ultima oră vor fi pierdute."
 
-#: gedit/gedit-file.c:660
+#: gedit/gedit-file.c:575
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1533,7 +1545,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Modificările aduse documentului în ultima oră şi %d minute vor fi pierdute."
 
-#: gedit/gedit-file.c:675
+#: gedit/gedit-file.c:590
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1542,65 +1554,65 @@ msgid_plural ""
 msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
 msgstr[1] "Modificările aduse documentului în ultimele %d ore vor fi pierdute."
 
-#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Restaurea_ză"
 
-#: gedit/gedit-file.c:747
+#: gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Nu am putut restaura documentul „%s“."
 
-#: gedit/gedit-file.c:754
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Documentul „%s” nu a fost restaurat."
 
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Documentul „%s” a fost restaurat."
 
-#: gedit/gedit-file.c:786
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Restaurez documentul „%s“..."
 
-#: gedit/gedit-file.c:913
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Nu am putut citi date de la stdin."
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Reverting file:"
 msgstr "Restaurez fişierul:"
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Loading file:"
 msgstr "Încarc fişierul:"
 
-#: gedit/gedit-file.c:1233 gedit/gedit-file.c:1392
+#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Eroare la încărcarea fişierului „%s”"
 
-#: gedit/gedit-file.c:1254
+#: gedit/gedit-file.c:1120
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Am încărcat fişierul „%s“"
 
-#: gedit/gedit-file.c:1331
+#: gedit/gedit-file.c:1197
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Am încărcat %d fişier"
 msgstr[1] "Am încărcat %d fişier"
 
-#: gedit/gedit-file.c:1365
+#: gedit/gedit-file.c:1231
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Încarc fişierul „%s”..."
 
-#: gedit/gedit-file.c:1512
+#: gedit/gedit-file.c:1378
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1668,67 +1680,21 @@ msgstr "Utilizează evidenţiere standard"
 msgid "Use %s highlight mode"
 msgstr "Utilizează modul %s de evidenţiere"
 
-#: gedit/gedit-output-window.c:333
+#: gedit/gedit-output-window.c:378
 msgid "Close the output window"
 msgstr "Închide fereastra de ieşire"
 
-#: gedit/gedit-output-window.c:371
+#: gedit/gedit-output-window.c:416
 msgid "Copy selected lines"
 msgstr "Copiază liniile selectate"
 
-#: gedit/gedit-output-window.c:391
+#: gedit/gedit-output-window.c:436
 msgid "Clear the output window"
 msgstr "Şterge conţinutul ferestrei de ieşire"
 
-#: gedit/gedit-output-window.c:431
+#: gedit/gedit-output-window.c:476
 msgid "Output Lines"
 msgstr "Linii de ieşire"
-
-#: gedit/gedit-plugins-engine.c:363
-#, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "Eroare, nu am putut deschide fişierul modul „%s“\n"
-
-#: gedit/gedit-plugins-engine.c:373
-#, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "Eroare, modulul „%s“ nu conţine funcţia „init“."
-
-#: gedit/gedit-plugins-engine.c:383
-#, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Eroare, modulul „%s“ nu conţine funcţia „activate“."
-
-#: gedit/gedit-plugins-engine.c:393
-#, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Eroare, modulul „%s“ nu conţine funcţia „deactivate“."
-
-#: gedit/gedit-plugins-engine.c:418
-#, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "Eroare, nu pot iniţializa modulul „%s“"
-
-#: gedit/gedit-plugins-engine.c:469
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Eroare, nu pot distruge modulul „%s“"
-
-#: gedit/gedit-plugins-engine.c:552 gedit/gedit-plugins-engine.c:640
-#: gedit/gedit-plugins-engine.c:765
-#, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "Eroare, nu pot activa modulul „%s“"
-
-#: gedit/gedit-plugins-engine.c:591 gedit/gedit-plugins-engine.c:783
-#, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "Eroare, nu pot dezactiva modulul „%s“"
-
-#: gedit/gedit-plugins-engine.c:684
-#, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "Eroare, nu pot actualiza interfaţa modulului „%s“"
 
 #: gedit/gedit-prefs-manager.c:177
 msgid "Cannot initialize preferences manager."
@@ -2161,7 +2127,7 @@ msgstr "_Anulează"
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: gedit/gedit-utils.c:425
+#: gedit/gedit-utils.c:422
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2172,12 +2138,12 @@ msgstr ""
 "\n"
 "Va rugăm verificaţi locaţia introdusă şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:433
+#: gedit/gedit-utils.c:430
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Nu am putut deschide fişierul „%s“ deoarece conţine date corupte."
 
-#: gedit/gedit-utils.c:444
+#: gedit/gedit-utils.c:441
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -2185,12 +2151,12 @@ msgstr ""
 "Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut gestiona %s: "
 "locaţii."
 
-#: gedit/gedit-utils.c:450
+#: gedit/gedit-utils.c:447
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Nu am putut deschide fişierul „%s“"
 
-#: gedit/gedit-utils.c:460
+#: gedit/gedit-utils.c:457
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2198,12 +2164,12 @@ msgstr ""
 "Nu am putut deschide fişierul „%s“ deoarece conţine date într-un format "
 "invalid."
 
-#: gedit/gedit-utils.c:467
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Nu am putut deschide fişierul „%s“ deoarece este prea mare."
 
-#: gedit/gedit-utils.c:474
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2214,12 +2180,12 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:482
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Nu am putut deschide fişierul „%s“ deoarece accesul a fost refuzat."
 
-#: gedit/gedit-utils.c:489
+#: gedit/gedit-utils.c:486
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2231,7 +2197,7 @@ msgstr ""
 "\n"
 "Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:497
+#: gedit/gedit-utils.c:494
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2242,7 +2208,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:505
+#: gedit/gedit-utils.c:502
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2251,7 +2217,7 @@ msgstr ""
 "Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
 "închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:525 gedit/gedit-utils.c:539 gedit/gedit-utils.c:566
+#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2262,7 +2228,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:550
+#: gedit/gedit-utils.c:547
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2276,7 +2242,7 @@ msgstr ""
 "Vă rugăm verificaţi locaţia introdusă şi corectitudinea setărilor Proxy şi "
 "încercaţi din nou."
 
-#: gedit/gedit-utils.c:575
+#: gedit/gedit-utils.c:572
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2287,7 +2253,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:584
+#: gedit/gedit-utils.c:581
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2298,7 +2264,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:593 gedit/gedit-utils.c:666
+#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2309,12 +2275,12 @@ msgstr ""
 "\n"
 "Probabil încercaţi să deschideţi un fişier binar."
 
-#: gedit/gedit-utils.c:602 gedit/gedit-utils.c:700
+#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Nu am putut deschide fişierul „%s“."
 
-#: gedit/gedit-utils.c:642
+#: gedit/gedit-utils.c:639
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2331,7 +2297,7 @@ msgstr ""
 "încercaţi din nou selectând o codare în dialogul „Deschide...“ (sau "
 "„Deschide locaţia...“)"
 
-#: gedit/gedit-utils.c:654 gedit/gedit-utils.c:684
+#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2346,7 +2312,7 @@ msgstr ""
 "că aţi selectat codarea corectă a caracterelor în dialogul „Deschide "
 "fişierul...“ (sau „Deschide locaţia“) apoi încercaţi din nou."
 
-#: gedit/gedit-utils.c:704
+#: gedit/gedit-utils.c:701
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2357,12 +2323,12 @@ msgstr ""
 "\n"
 "%s."
 
-#: gedit/gedit-utils.c:756
+#: gedit/gedit-utils.c:753
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Nu am putut salva fişierul „%s“."
 
-#: gedit/gedit-utils.c:760
+#: gedit/gedit-utils.c:757
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2373,7 +2339,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:810
+#: gedit/gedit-utils.c:807
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2384,12 +2350,12 @@ msgstr ""
 "\n"
 "Probabil a fost şters de curând."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:814
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Nu am putut restaura fişierul „%s“ deoarece conţine date corupte."
 
-#: gedit/gedit-utils.c:828
+#: gedit/gedit-utils.c:825
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2397,13 +2363,13 @@ msgstr ""
 "Nu am putut restaura fişierul „%s” deoarece gedit nu a putut gestiona %s: "
 "locaţii."
 
-#: gedit/gedit-utils.c:834 gedit/gedit-utils.c:893 gedit/gedit-utils.c:904
-#: gedit/gedit-utils.c:988
+#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
+#: gedit/gedit-utils.c:985
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Nu am putut restaura fişierul „%s“."
 
-#: gedit/gedit-utils.c:844
+#: gedit/gedit-utils.c:841
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2412,17 +2378,17 @@ msgstr ""
 "Nu am putut restaura fişierul „%s“ deoarece conţine date într-un format "
 "invalid."
 
-#: gedit/gedit-utils.c:851
+#: gedit/gedit-utils.c:848
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Nu am putut restaura fişierul „%s“ deoarece este prea mare."
 
-#: gedit/gedit-utils.c:858
+#: gedit/gedit-utils.c:855
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Nu am putut restaura fişierul „%s“ deoarece accesul a fost refuzat."
 
-#: gedit/gedit-utils.c:865
+#: gedit/gedit-utils.c:862
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2434,7 +2400,7 @@ msgstr ""
 "\n"
 "Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:873
+#: gedit/gedit-utils.c:870
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2443,7 +2409,7 @@ msgstr ""
 "Nu este destulă memorie disponibilă pentru a restaura fişierul „%s“. Vă "
 "rugăm închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:912
+#: gedit/gedit-utils.c:909
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2455,7 +2421,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:927
+#: gedit/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2466,12 +2432,12 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:934
+#: gedit/gedit-utils.c:931
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "Nu am putut restaura fişierul „%s“ deoarece logarea a eşuat."
 
-#: gedit/gedit-utils.c:941
+#: gedit/gedit-utils.c:938
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2482,16 +2448,16 @@ msgstr ""
 "\n"
 "Probabil încercaţi să restauraţi un fişier binar."
 
-#: gedit/gedit-utils.c:950
+#: gedit/gedit-utils.c:947
 msgid "It is not possible to revert an Untitled document."
 msgstr "Nu este posibilă restaurarea unui document fără titlu."
 
-#: gedit/gedit-utils.c:1039
+#: gedit/gedit-utils.c:1036
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Fişierul „%s“ există deja."
 
-#: gedit/gedit-utils.c:1045
+#: gedit/gedit-utils.c:1042
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2502,7 +2468,7 @@ msgstr ""
 "\n"
 "Vă rugăm verificaţi corectitudinea datelor furnizate şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:1054
+#: gedit/gedit-utils.c:1051
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2513,7 +2479,7 @@ msgstr ""
 "\n"
 "Verificaţi dacă aveţi permisiile necesare pentru scriere."
 
-#: gedit/gedit-utils.c:1061
+#: gedit/gedit-utils.c:1058
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2524,7 +2490,7 @@ msgstr ""
 "\n"
 "Numele fişierului este prea lung."
 
-#: gedit/gedit-utils.c:1068
+#: gedit/gedit-utils.c:1065
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2537,7 +2503,7 @@ msgstr ""
 "Un director din numele fişierului nu există sau este o legătură simbolică "
 "greşită."
 
-#: gedit/gedit-utils.c:1077
+#: gedit/gedit-utils.c:1074
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2548,10 +2514,14 @@ msgstr ""
 "\n"
 "Eliberaţi spaţiu pe disc şi încercaţi din nou."
 
-#: gedit/gedit-utils.c:1083
+#: gedit/gedit-utils.c:1080
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Nu am putut crea fişierul „%s“."
+
+#: gedit/gedit-utils.c:1417
+msgid " (invalid Unicode)"
+msgstr ""
 
 #.
 #. if (col == chars)
@@ -2595,50 +2565,6 @@ msgstr "Crează un nou document într-o instanţă Gedit deja existentă"
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Codarea „%s” specificată nu este validă\n"
-
-#: plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "In_versează mărimile"
-
-#: plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "Toate _majuscule"
-
-#: plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "Toate _normale"
-
-#: plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "_Inversează mărimile"
-
-#: plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "Mărimi _titlu"
-
-#: plugins/changecase/changecase.c:54
-msgid "Change selected text to upper case"
-msgstr "Schimbă textul selectat în majuscule"
-
-#: plugins/changecase/changecase.c:55
-msgid "Change selected text to lower case"
-msgstr "Elimină majusculele în textul selectat"
-
-#: plugins/changecase/changecase.c:56
-msgid "Invert the case of selected text"
-msgstr "Inversează mărimile în textul selectat"
-
-#: plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
-msgstr "Transformă în majusculă prima literă a fiecărui cuvânt selectat"
-
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
-msgid "Change Case"
-msgstr "Inversează mărimea"
-
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-msgid "Changes the case of selected text."
-msgstr "Schimbă mărimile literelor în textul selectat"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2737,36 +2663,36 @@ msgstr "Inserează numele utilizatorului la poziţia curentă a cursorului"
 msgid "User name"
 msgstr "Nume utilizator"
 
-#: plugins/shell_output/shell_output.c:56
+#: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
 msgstr "_Execută comanda..."
 
-#: plugins/shell_output/shell_output.c:59
+#: plugins/shell_output/shell_output.c:58
 msgid "Run a command"
 msgstr "Execută o comandă"
 
-#: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:502
+#: plugins/shell_output/shell_output.c:159
+#: plugins/shell_output/shell_output.c:489
 msgid "Stopped"
 msgstr "Oprit"
 
-#: plugins/shell_output/shell_output.c:282
+#: plugins/shell_output/shell_output.c:270
 msgid "Run Command"
 msgstr "Execută comanda"
 
-#: plugins/shell_output/shell_output.c:301
+#: plugins/shell_output/shell_output.c:289
 msgid "_Run"
 msgstr "_Execută"
 
-#: plugins/shell_output/shell_output.c:508
+#: plugins/shell_output/shell_output.c:495
 msgid "Done"
 msgstr "Gata"
 
-#: plugins/shell_output/shell_output.c:510
+#: plugins/shell_output/shell_output.c:497
 msgid "Failed"
 msgstr "Eşec"
 
-#: plugins/shell_output/shell_output.c:676
+#: plugins/shell_output/shell_output.c:664
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2776,7 +2702,7 @@ msgstr ""
 "\n"
 "Vă rugăm să introduceţi o comandă validă."
 
-#: plugins/shell_output/shell_output.c:695
+#: plugins/shell_output/shell_output.c:683
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2786,11 +2712,11 @@ msgstr ""
 "\n"
 "Vă rugăm să introduceţi o comandă validă."
 
-#: plugins/shell_output/shell_output.c:773
+#: plugins/shell_output/shell_output.c:761
 msgid "Executing command"
 msgstr "Execut comanda"
 
-#: plugins/shell_output/shell_output.c:841
+#: plugins/shell_output/shell_output.c:829
 msgid "An error occurred while running the selected command."
 msgstr "A intervenit o eroare la executarea comenzii selectate."
 
@@ -3250,15 +3176,75 @@ msgstr "_Solicită un format"
 msgid "_Use custom format"
 msgstr "_Utilizează un format personalizat"
 
-#: viewer/gedit-persist-stream.c:44
-msgid "Save method not implemented for gedit viewer"
-msgstr ""
-"Metoda de salvare nu a fost încă implementată pentru vizualizatorul Gedit"
+#~ msgid "Untitled"
+#~ msgstr "Fără titlu"
 
-#: viewer/gedit-viewer-ui.xml.h:1
-msgid "Copy the selected text to the clipboard"
-msgstr "Copiază textul selectat în clipboard"
+#~ msgid "Error, unable to open module file '%s'\n"
+#~ msgstr "Eroare, nu am putut deschide fişierul modul „%s“\n"
 
-#: viewer/gedit-viewer-ui.xml.h:2
-msgid "_Copy Text"
-msgstr "_Copiază textul"
+#~ msgid "Error, plugin '%s' does not contain init function."
+#~ msgstr "Eroare, modulul „%s“ nu conţine funcţia „init“."
+
+#~ msgid "Error, plugin '%s' does not contain activate function."
+#~ msgstr "Eroare, modulul „%s“ nu conţine funcţia „activate“."
+
+#~ msgid "Error, plugin '%s' does not contain deactivate function."
+#~ msgstr "Eroare, modulul „%s“ nu conţine funcţia „deactivate“."
+
+#~ msgid "Error, impossible to initialize plugin '%s'"
+#~ msgstr "Eroare, nu pot iniţializa modulul „%s“"
+
+#~ msgid "Error, impossible to destroy plugin '%s'"
+#~ msgstr "Eroare, nu pot distruge modulul „%s“"
+
+#~ msgid "Error, impossible to activate plugin '%s'"
+#~ msgstr "Eroare, nu pot activa modulul „%s“"
+
+#~ msgid "Error, impossible to deactivate plugin '%s'"
+#~ msgstr "Eroare, nu pot dezactiva modulul „%s“"
+
+#~ msgid "Error, impossible to update ui of the plugin '%s'"
+#~ msgstr "Eroare, nu pot actualiza interfaţa modulului „%s“"
+
+#~ msgid "C_hange Case"
+#~ msgstr "In_versează mărimile"
+
+#~ msgid "All _Upper Case"
+#~ msgstr "Toate _majuscule"
+
+#~ msgid "All _Lower Case"
+#~ msgstr "Toate _normale"
+
+#~ msgid "_Invert Case"
+#~ msgstr "_Inversează mărimile"
+
+#~ msgid "_Title Case"
+#~ msgstr "Mărimi _titlu"
+
+#~ msgid "Change selected text to upper case"
+#~ msgstr "Schimbă textul selectat în majuscule"
+
+#~ msgid "Change selected text to lower case"
+#~ msgstr "Elimină majusculele în textul selectat"
+
+#~ msgid "Invert the case of selected text"
+#~ msgstr "Inversează mărimile în textul selectat"
+
+#~ msgid "Capitalize the first letter of each selected word"
+#~ msgstr "Transformă în majusculă prima literă a fiecărui cuvânt selectat"
+
+#~ msgid "Change Case"
+#~ msgstr "Inversează mărimea"
+
+#~ msgid "Changes the case of selected text."
+#~ msgstr "Schimbă mărimile literelor în textul selectat"
+
+#~ msgid "Save method not implemented for gedit viewer"
+#~ msgstr ""
+#~ "Metoda de salvare nu a fost încă implementată pentru vizualizatorul Gedit"
+
+#~ msgid "Copy the selected text to the clipboard"
+#~ msgstr "Copiază textul selectat în clipboard"
+
+#~ msgid "_Copy Text"
+#~ msgstr "_Copiază textul"

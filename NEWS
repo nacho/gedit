@@ -1,4 +1,32 @@
 ===========
+gedit 2.9.1
+===========
+
+Fixes
+=====
+- Remove obsolete nautilus view (Paolo Borelli)
+- Fix compile with picky compilers (Marco Pesenti Gritti)
+-  avoid duplicate key accel in the file chooser (Paolo Borelli)
+- s/Untitled/Unsaved Document to be HIG v.2 compliant (Paolo Maggi)
+- enable some of plugins by default. The way active plugins are stored in
+  gconf changed, you may have to re-select some of the plugins (Paolo Maggi)
+- new methods and signals for the output window (Paolo Maggi)
+- remove some obsolete gedit_document_* functions, external plugins may
+  need to be updated to use GtkTextView api (Paolo Borelli);
+- misc cleanups (Paolo Borelli)
+- fix linking issues (Chris Kelso)
+
+
+New and updated translations
+============================
+- Adam Weinberger (en_CA)
+- Miloslav Trmac (cs
+- Jordi Mallach (ca)
+- Mohammad DAMT (id
+- Christophe Merlet (fr)
+
+
+===========
 gedit 2.8.1
 ===========
 
@@ -254,219 +282,4 @@ New and updated translations
 - Swapnil Hajare (mr)
 - Funda Wang (zh_CN)
 
-
-============
-gedit 2.5.92
-============
-
-Fixes
-=====
-
-- Bug #136920 (Preferences dialog type hint) (Rob Adams)
-- Fix maintainer builds (Thomas Vander Stichele)
-
-New and updated translations
-============================
-
-- Dinesh Nadarajah (ta)
-- Theppitak Karoonboonyanan (th)
-- Ales Nyakhaychyk (be)
-- Maxim Dziumanenko (uk)
-- Arafat Medini (ar)
-- Roberto Rosselli Del Turco (it)
-- Rhys Jones (cy)
-- Miloslav Trmac (cs)
-- Raphael Higino, Gustavo Maciel Dias Vieira (pt_BR)
-- Vincent van Adrighem (nl)
-- Duarte Loreto (pt)
-- Sanlig Badral (mn)
-
-
-============
-gedit 2.5.91
-============
-
-Enhancements
-============
-
-- Updated On-Line Manual (Breda McColgan)
-- Added Paolo Borelli to the list of authors (Paolo Maggi)
-- Uses PANGO_UNDERLINE_ERROR in the automatic spell checker (Thomas Voß)
-
-Fixes
-=====
-
-- Bug #135824 (Solaris build with pixmap SOURCES) (Glynn Foster)
-- Bug #104950 (Right-click unselects text if you click outside the 
-  selection) (based on patch by Nathan Fredrickson <nathan@silverorange.com> 
-  backported from gtkspell 2.5.0)
-- Bug #135565 (.cgi files no longer highlight) (Paolo M.)
-- Bug #135628 ("Enable Syntax Highlighting" checkbox not synched with 
-  GConf key) (Paolo Borelli)
-- Bug #136231 (Should not run the file chooser in a loop to 
-  enter folders) (Paolo M.)
-- Bug #135987 (crash when opening the choosing file window after successfully 
-  opening a first file in a folder with spaces) (Paolo M.)
-- Various portability problems (Albert Chin-A-Young)
-
-New and updated translations
-============================
-
-- Alastair McKinstry (ga)
-- Amanpreet Singh Alam (pa)
-- Arafat Medini (ar)
-- Changwoo Ryu (ko)
- -Christophe Merlet (RedFox) (fr)
-- Duarte Loreto (pt)
-- Funda Wang (zh_CN)
-- Mətin Əmirov (az)
-- Mugurel Tudor (ro)
-- Ole Laursen (da)
-- Pablo G. del Campo (es)
-- Priit Laes (et)
-- Reinout van Schouwen (nl)
-- Roberto Rosselli Del Turco (it)
-- Takeshi AIHANA (ja)
-- Žygimantas Beručka (lt)
-
-
-=============
-gedit 2.5.90"
-=============
-
-New features
-============
-
-- added a --enable-deprecations flag to configure.in
-  to switch on the DISABLE_DEPRECATED cflags (Mark McLoughlin)
-
-Fixes
-=====
-
-- Bug #133178 (Underquoted definitions in acinclude.m4) (Alexander Winston)
-- Removed unused gconf key 
-  schemas/apps/gedit-2/preferences/editor/save/save_encoding (Paolo Maggi)
-- Removed AC_SUBST(CFLAGS), AC_SUBST(CPPFLAGS) and AC_SUBST(LDFLAGS) 
-  from configure.in (Tomasz Kłoczko)
-- Bug #135000 ("Save the changes to document before closing" 
-  dialog should have Accessible Role "ALERT") (Padraig O'Briain)
-- Uses the new file chooser in the shell_output plugin (Paolo Borelli)
-- Disables the menu items when the gedit state is not NORMAL (Paolo M.)
-- Bug #133851 (Saves the file on pressing ESC from the 
-  "Save As" dialog) (Paolo B.)
-- Don't highlight single column lists (Jeroen Zwartepoorte)
-- Uses latest libegg recent-files code (Paolo M.)
-- Bug #133604 (The name of filters are not marked for translation) (Paolo M.)
-- Bug #133269 (check box check or uncheck is not having any bearing) (Paolo M.)
-- Bug #133481 (check box selection is not habing any bearing) (Paolo M.)
-- Fixed a lot of bugs in the preferences dialog (Paolo B. and Paolo M.)
-- Fixed a lot of bugs in the Open/Save As dialog (Paolo M.)
-
-New and updated translations
-============================
-
-- Adam Weinberger (en_CA)
-- Alastair McKinstry (ga)
-- Åsmund Skjæveland (nn)
-- Chanchai Junlouchai (th)
-- Changwoo Ryu (ko)
-- Christian Neumair (de)
-- Christian Rose (sv)
-- Christophe Merlet (RedFox) (fr)
-- Duarte Loreto (pt)
-- GNOME PL Team (pl)
-- Hasbullah Bin Pit (ms)
-- Jarkko Ranta (fi)
-- Joao Emanuel (pt_BR)
-- John C Barstow (mi)
-- Kjartan Maraas (no)
-- Kostas Papadimas (el)
-- Laurent Dhima (sq)
-- Miloslav Trmac (cs)
-- Mətin Əmirov (az)
-- Ole Laursen (da)
-- Pablo G. del Campo (es)
-- Reinout van Schouwen (nl)
-- Sanlig Badral (mn)
-- Takeshi AIHANA (ja)
-- Данило Шеган (sr)
-
-
-=============================
-gedit 2.5.[0123] - "I'm lazy"
-=============================
-
-New Features
-============
-- New preferences dialog (now you can also configure
-  syntax highlighting) (Paolo Maggi)
-- Uses ngettext where appropriate (Danilo Segan, Paolo)
-- Uses the new gtk+ 2.3 GtkFileChooser (Jan Arne Petersen, Paolo)
-- New close all dialog (Paolo, Paolo Borelli)
-- Don't use EelInputEventBox, use gtk+ instead (Anders Carlsson)
-- Async loading of remote files (Paolo)
-
-Fixes
-=====
-- Bug #117365 - Alternate path for diff command is not 
-  configurable (Balamurali Viswanathan, Paolo)
-- Bug #117443 - Help from "Compare Files" plugin page 
-  opens Gedit "Copyright" page (Leena Gunda, Paolo)
-- Bug #122790 - Compilation error in gedit-2.4.0 (Mariano Suarez-Alvarez,
-  Ettore Perazzoli)
-- Bug #117056 - Preferences/Plugins/Manager has mystery button (Paolo)
-- s/Gnome/the GNOME Desktop in the about dialog
-- Bug #124769 - Crash in gedit print/printpreview code (Alexander Nedotsukov)
-- Bug #117360 - Troublesome strings in gedit (Dafydd Harries)
-- Partially fixed bug #115633 - Don't split sentences in gedit (Dafydd)
-- Partially fixed bug #124238 - Compilation fails on Darwin (Jerry Talkington)
-- Bug #117518 - Shouldn't say "string" in "search for string" tooltip (Paolo)
-- Bug #102543 - Add statusbar hints to the recent files menu (Paolo)
-- Bug #118935 - Can't find and replace \ (backslash) (Eric Ritezel)
-- Added icon to the Edit->Delete menu entry (Paolo)
-- Bug #128379 - highlighting sometimes fails (Paolo)
-- Bug #128810 - HIGgify close confirmation dialog (Paolo B.)
-- Bug #130226 - HIGify replace confirmation dialog (Paolo B.)
-- Bug #127638 - Window tabs should truncate filenames if its to long (Paolo)
-- Bug #87172 - Should never disable (unsensitive) the Revert functions (Paolo)
-- Bug #120727 - Unnecessary calls to gtk_window_set_title (Padraig O'Briain)
-- Removed separator from dialog (Paolo B.)
-- Bug #129994 - gedit can't deal with double clicks on a tabs (Paolo B.)
-- Bug #127693 - Bug in gedit.1 manual page (Eric S. Raymond)
-- Bug #123007 - Help from date/time plugin points to Gedit copyright page (Leena)
-- Bug #122611 - gedit spell plugin lacks Ukrainian support (Maxim Dzumanenko)
-- Bug #124052 - shell_output problems with 'pos' return value (Owen Taylor)
-- Bug #121377 - shell_output: G_IO_HUP is not enough to detect broken pipe 
-  (Laurent Vivier)
-
-New and updated translations
-============================
-
-- Alastair McKinstry (ga)
-- Arafat Medini (ar)
-- Åsmund Skjæveland (nn)
-- Changwoo Ryu (ko)
-- Christian Neumair (de)
-- Christian Rose (sv)
-- Dafydd Harries (cy)
-- Duarte Loreto (pt)
-- Gabor Sari (hu)
-- GNOME PL Team (pl)
-- Jarkko Ranta (fi)
-- KAMAGASASAKO Masatoshi (ja)
-- Kjartan Maraas (no)
-- Kostas Papadimas (el)
-- Laurent Dhima (sq)
-- Miloslav Trmac (cs)
-- Mətin Əmirov (az)
-- Ole Laursen (da)
-- Pablo G. del Campo (es)
-- Pawan (ne)
-- Pramod (kn)
-- Reinout van Schouwen (nl)
-- Robert Sedak (hr)
-- Sanlig Badral (mn)
-- Sébastien Bacher (fr)
-- Žygimantas Beručka (lt)
-- Данило Шеган (sr)
 

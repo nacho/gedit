@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-10 13:49+0200\n"
+"POT-Creation-Date: 2004-11-01 13:22+0100\n"
 "PO-Revision-Date: 2004-08-23 23:52+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Gedit-vy"
 msgid "Gedit View."
 msgstr "Gedit-vy."
 
-#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+#: data/GNOME_Gedit.server.in.in.h:3
 msgid "Gedit viewer factory"
 msgstr "Gedit-visarfabrik"
 
@@ -61,26 +61,31 @@ msgstr ""
 "att ha effekt om alternativet \"Använd standardtypsnitt\" är frånslaget."
 
 #: data/gedit.schemas.in.h:2
+#, fuzzy
+msgid "Active plugins"
+msgstr "Lägg till/ta bort insticksmoduler"
+
+#: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
 msgstr "Automatiskt detekterade kodningar"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save"
 msgstr "Spara automatiskt"
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5
 msgid "Auto Save Interval"
 msgstr "Intervall för automatiskt sparande"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:6
 msgid "Auto indent"
 msgstr "Automatiskt indrag"
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:7
 msgid "Background Color"
 msgstr "Bakgrundsfärg"
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -88,7 +93,7 @@ msgstr ""
 "Bakgrundsfärg för markerad text i redigeringsytan. Detta kommer endast att "
 "ha effekt om alternativet \"Använd standardfärger\" är frånslaget."
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:9
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -96,39 +101,39 @@ msgstr ""
 "Bakgrundsfärg för omarkerad text i redigeringsytan. Detta kommer endast att "
 "ha effekt om alternativet \"Använd standardfärger\" är frånslaget."
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
 msgstr "Ändelse på säkerhetskopior"
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
 msgstr "Texttypsnitt för utskrift"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:12
 msgid "Create Backup Copies"
 msgstr "Skapa säkerhetskopior"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:13
 msgid "Display Line Numbers"
 msgstr "Visa radnummer"
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:14
 msgid "Display Right Margin"
 msgstr "Visa högermarginal"
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:15
 msgid "Editor Font"
 msgstr "Redigerartypsnitt"
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:16
 msgid "Enable Syntax Highlighting"
 msgstr "Aktivera syntaxmarkering"
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
 msgstr "Kodningar som visas i menyn"
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -136,7 +141,7 @@ msgstr ""
 "Ändelse eller suffix att använda i filnamnen på säkerhetskopior. Detta har "
 "endast effekt om alternativet \"Skapa säkerhetskopior\" är påslaget."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -144,7 +149,7 @@ msgstr ""
 "Förgrundsfärg för markerad text i redigeringsytan. Detta har endast effekt "
 "om alternativet \"Använd standardfärger\" är frånslaget."
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -152,11 +157,11 @@ msgstr ""
 "Förgrundsfärg för den omarkerade texten i redigeringsytan. Detta har endast "
 "effekt om alternativet \"Använd standardfärger\" är frånslaget."
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
 msgstr "Sidhuvudstypsnitt för utskrift"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:22
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -165,19 +170,25 @@ msgstr ""
 "Om detta värde är 0 kommer inga radnummer att infogas vid utskrift av ett "
 "dokument. Annars kommer gedit att skriva ut radnummer med detta radintervall."
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
 msgstr "Infoga blanksteg"
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
 msgstr "Radnummerstypsnitt för utskrift"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
 msgstr "Radbrytningsläge"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:26
+msgid ""
+"List of active plugins. It contains the \"Location\" of the active plugins. "
+"See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
+msgstr ""
+
+#: data/gedit.schemas.in.h:27
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -185,23 +196,23 @@ msgstr ""
 "Lista med kodningar som visas i teckenkodningsmenyn i filväljaren för "
 "öppnande/sparande av filer. Endast kända kodningar används."
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid "Maximum Recent Files"
 msgstr "Maximalt antal senaste filer"
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maximalt antal åtgärder som gedit kan ångra eller göra om."
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -209,43 +220,43 @@ msgstr ""
 "Antal minuter efter vilket gedit kommer att automatiskt spara ändrade filer. "
 "Detta har endast effekt då alternativet \"Spara automatiskt\" är påslaget."
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Header"
 msgstr "Skriv ut sidhuvud"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Print Line Numbers"
 msgstr "Skriv ut radnummer"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Print Syntax Highlighting"
 msgstr "Skriv ut syntaxmarkering"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
 msgid "Printing Line Wrapping Mode"
 msgstr "Radbrytningsläge för utskrift"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:37
 msgid "Right Margin Position"
 msgstr "Position för högermarginalen"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:38
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:39
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:40
 msgid "Selected Text Color"
 msgstr "Färg på markerad text"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:41
 msgid "Selection Color"
 msgstr "Markeringsfärg"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -255,7 +266,7 @@ msgstr ""
 "av kodningen för en fil. \"CURRENT\" är kodningen för den aktuella lokalen. "
 "Endast kända kodningar används."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -269,7 +280,7 @@ msgstr ""
 "det görs skillnad på versaler och gemener i värdena, så försäkra dig om att "
 "de visas exakt som de visas här."
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -283,14 +294,14 @@ msgstr ""
 "att det görs skillnad på versaler och gemener i värdena, så försäkra dig om "
 "att de visas exakt som de visas här."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Anger det typsnitt som ska användas för dokumentets text vid utskrift av "
 "dokument."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -298,7 +309,7 @@ msgstr ""
 "Anger det typsnitt som ska användas för radnummer vid utskrift. Detta kommer "
 "endast att ha effekt om alternativet \"Skriv ut radnummer\" inte är noll."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -307,7 +318,7 @@ msgstr ""
 "dokument. Detta kommer endast att ha effekt om alternativet \"Skriv ut huvud"
 "\" är påslaget."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -315,21 +326,21 @@ msgstr ""
 "Anger det maximala antalet senast öppnade filer som kommer att visas i "
 "undermenyn \"Senaste filer\"."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:49
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Anger antalet blanksteg som ska visas istället för tabulatortecken."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:50
 msgid "Specifies the position of the right margin."
 msgstr "Anger positionen för högermarginalen."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:51
 msgid "Status Bar is Visible"
 msgstr "Statusrad är synlig"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -346,35 +357,35 @@ msgstr ""
 "och gemener i värdena, så försäkra dig om att de visas exakt som de visas "
 "här."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:53
 msgid "Tab Size"
 msgstr "Tabulatorstorlek"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:54
 msgid "Text Color"
 msgstr "Textfärg"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:55
 msgid "Toolbar Buttons Style"
 msgstr "Stil på verktygsradsknappar"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:56
 msgid "Toolbar is Visible"
 msgstr "Verktygsraden är synlig"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:57
 msgid "Undo Actions Limit"
 msgstr "Gräns för ångraåtgärder"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:58
 msgid "Use Default Colors"
 msgstr "Använd standardfärger"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:59
 msgid "Use Default Font"
 msgstr "Använd standardtypsnitt"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:60
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -384,7 +395,7 @@ msgstr ""
 "Du kan ange tidsintervallet med alternativet \"Intervall för automatiskt "
 "sparande\"."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:61
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -393,46 +404,46 @@ msgstr ""
 "ange filändelsen för säkerhetskopior med alternativet \"Ändelse på "
 "säkerhetskopior\"."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Huruvida gedit ska visa radnummer i redigeringsytan."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Huruvida gedit ska visa högermarginalen i redigeringsytan."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should enable auto indentation."
 msgstr "Huruvida gedit ska aktivera automatiskt indrag."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Huruvida gedit ska aktivera syntaxmarkering."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Huruvida gedit ska inkludera ett dokumenthuvud vid utskrift av dokument."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:67
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Huruvida gedit ska infoga blanksteg istället för tabulatortecken."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Huruvida gedit ska skriva ut syntaxmarkering vid utskrift av dokument."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Huruvida statusraden i nederkanten på redigeringsfönster ska vara synlig."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:70
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Huruvida verktygsraden ska vara synlig i redigeringsfönster."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -444,7 +455,7 @@ msgstr ""
 "är angivna i alternativen \"Bakgrundsfärg\", \"Textfärg\", \"Färg på "
 "markerad text\" och \"Markeringsfärg\"."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -456,11 +467,11 @@ msgstr ""
 "\"Redigerartypsnitt\" att användas istället för systemtypsnittet."
 
 # Att ha med UTF-8 här också skadar nog inte.
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:73
 msgid "[ISO-8859-15]"
 msgstr "[UTF-8,ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:74
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -500,7 +511,7 @@ msgid "Do_n't save"
 msgstr "Spara i_nte"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:139 gedit/gedit-file.c:704
+#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 msgid "Question"
 msgstr "Fråga"
 
@@ -635,7 +646,7 @@ msgid "Replace _All"
 msgstr "Ersätt _alla"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:127
 msgid "_Replace"
 msgstr "_Ersätt"
 
@@ -1242,47 +1253,47 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit är en liten och enkel textredigerare för GNOME-skrivbordet"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
-msgid "Untitled"
-msgstr "Namnlös"
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
+#, fuzzy
+msgid "Unsaved Document"
+msgstr "_Dokument"
 
-#: gedit/gedit-document.c:640 gedit/gedit-document.c:687
+#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
 msgstr "Ogiltigt filnamn"
 
-#: gedit/gedit-document.c:838 gedit/gedit-document.c:1399
-#: viewer/gedit-persist-stream.c:120
+#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
 msgid "Invalid UTF-8 data"
 msgstr "Ogiltig UTF-8-data"
 
-#: gedit/gedit-document.c:1725
+#: gedit/gedit-document.c:1696
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kunde inte läsa information om symbolisk länken %s"
 
-#: gedit/gedit-document.c:1771
+#: gedit/gedit-document.c:1742
 msgid "The file has too many symbolic links."
 msgstr "Filen har för många symboliska länkar."
 
-#: gedit/gedit-document.c:1827
+#: gedit/gedit-document.c:1800
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan inte hantera %s:-platser i skrivläge."
 
-#: gedit/gedit-document.c:1834
+#: gedit/gedit-document.c:1807
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan inte hantera denna typ av plats i skrivlägre."
 
-#: gedit/gedit-document.c:1847
+#: gedit/gedit-document.c:1820
 msgid "Invalid filename."
 msgstr "Ogiltigt filnamn."
 
-#: gedit/gedit-document.c:1959
+#: gedit/gedit-document.c:1934
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1290,7 +1301,7 @@ msgstr ""
 "Det finns inte tillräckligt med diskutrymme för att spara filen.\n"
 "Frigör en del utrymme på disken och försök igen."
 
-#: gedit/gedit-document.c:1964
+#: gedit/gedit-document.c:1939
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1300,7 +1311,7 @@ msgstr ""
 "Försök att spara en mindre fil eller spara den på en disk som inte har denna "
 "begränsning."
 
-#: gedit/gedit-document.c:2008
+#: gedit/gedit-document.c:1983
 msgid "Could not create a backup file."
 msgstr "Kunde inte skapa en säkerhetskopia."
 
@@ -1430,77 +1441,78 @@ msgstr "Vietnamesisk"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-file-selector-util.c:152
+#: gedit/gedit-file-selector-util.c:146
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "En fil med namnet \"%s\" finns redan.\n"
 
-#: gedit/gedit-file-selector-util.c:153
+#: gedit/gedit-file-selector-util.c:147
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Vill du ersätta den med den fil som du vill spara?"
 
-#: gedit/gedit-file-selector-util.c:162
+#: gedit/gedit-file-selector-util.c:156
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Filen \"%s\" är skrivskyddad.\n"
 
-#: gedit/gedit-file-selector-util.c:163
+#: gedit/gedit-file-selector-util.c:157
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vill du försöka ersätta den med den fil som du vill spara?"
 
-#: gedit/gedit-file-selector-util.c:361
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Files"
 msgstr "Alla filer"
 
-#: gedit/gedit-file-selector-util.c:369
+#: gedit/gedit-file-selector-util.c:378
 msgid "All Text Files"
 msgstr "Alla textfiler"
 
-#: gedit/gedit-file-selector-util.c:387
-msgid "Ch_aracter Coding:"
-msgstr "T_eckenkodning:"
+#: gedit/gedit-file-selector-util.c:396
+#, fuzzy
+msgid "_Character Coding:"
+msgstr "Teckenkodning:"
 
-#: gedit/gedit-file-selector-util.c:533
+#: gedit/gedit-file-selector-util.c:541
 msgid "Select a file to open"
 msgstr "Välj en fil att öppna"
 
-#: gedit/gedit-file-selector-util.c:559
+#: gedit/gedit-file-selector-util.c:566
 msgid "Select files to open"
 msgstr "Välj filer att öppna"
 
-#: gedit/gedit-file-selector-util.c:591
+#: gedit/gedit-file-selector-util.c:598
 msgid "Select a filename to save"
 msgstr "Välj ett filnamn att spara"
 
-#: gedit/gedit-file.c:215
+#: gedit/gedit-file.c:187
 msgid "Open File..."
 msgstr "Öppna fil..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:424
+#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Sparar dokumentet \"%s\"..."
 
-#: gedit/gedit-file.c:299 gedit/gedit-file.c:445
+#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumentet \"%s\" har inte sparats."
 
-#: gedit/gedit-file.c:313 gedit/gedit-file.c:437
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumentet \"%s\" har sparats."
 
-#: gedit/gedit-file.c:404
+#: gedit/gedit-file.c:366
 msgid "Save as..."
 msgstr "Spara som..."
 
-#: gedit/gedit-file.c:605
+#: gedit/gedit-file.c:520
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Återställ osparade ändringar i dokumentet \"%s\"?"
 
-#: gedit/gedit-file.c:614
+#: gedit/gedit-file.c:529
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1514,14 +1526,14 @@ msgstr[1] ""
 "Ändringar i dokumentet gjorda under de senaste %ld sekunderna kommer att "
 "vara borta för alltid."
 
-#: gedit/gedit-file.c:623
+#: gedit/gedit-file.c:538
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ändringar i dokumentet gjorda under den senaste minuten kommer att vara "
 "borta för alltid."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:544
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1536,7 +1548,7 @@ msgstr[1] ""
 "Ändringar i dokumentet gjorda under den senaste minuten och %ld sekunderna "
 "kommer att vara borta för alltid."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:554
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1550,13 +1562,13 @@ msgstr[1] ""
 "Ändringar i dokumentet gjorda under de senaste %ld minuterna kommer att vara "
 "borta för alltid."
 
-#: gedit/gedit-file.c:654
+#: gedit/gedit-file.c:569
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Ändringar i dokumentet gjorda under den senaste timmen kommer att vara borta "
 "för alltid."
 
-#: gedit/gedit-file.c:660
+#: gedit/gedit-file.c:575
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1571,7 +1583,7 @@ msgstr[1] ""
 "Ändringar i dokumentet gjorda under den senaste timmen och %d minuterna "
 "kommer att vara borta för alltid."
 
-#: gedit/gedit-file.c:675
+#: gedit/gedit-file.c:590
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1584,65 +1596,65 @@ msgstr[1] ""
 "Ändringar i dokumentet gjorda under de senaste %d timmarna kommer att vara "
 "borta för alltid."
 
-#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Återställ"
 
-#: gedit/gedit-file.c:747
+#: gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Fel vid återställning av dokumentet \"%s\"."
 
-#: gedit/gedit-file.c:754
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumentet \"%s\" har inte återställts."
 
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumentet \"%s\" har återställts."
 
-#: gedit/gedit-file.c:786
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Återställer dokumentet \"%s\"..."
 
-#: gedit/gedit-file.c:913
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "Kunde inte läsa data från standard in."
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Reverting file:"
 msgstr "Återställer fil:"
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Loading file:"
 msgstr "Läser in fil:"
 
-#: gedit/gedit-file.c:1233 gedit/gedit-file.c:1392
+#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Fel vid inläsning av filen \"%s\""
 
-#: gedit/gedit-file.c:1254
+#: gedit/gedit-file.c:1120
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Läste in filen \"%s\""
 
-#: gedit/gedit-file.c:1331
+#: gedit/gedit-file.c:1197
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Läste in %d fil"
 msgstr[1] "Läste in %d filer"
 
-#: gedit/gedit-file.c:1365
+#: gedit/gedit-file.c:1231
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Läser in filen \"%s\"..."
 
-#: gedit/gedit-file.c:1512
+#: gedit/gedit-file.c:1378
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1710,68 +1722,21 @@ msgstr "Använd normalt färgmarkeringsläge"
 msgid "Use %s highlight mode"
 msgstr "Använd färgmarkeringsläge för %s"
 
-#: gedit/gedit-output-window.c:333
+#: gedit/gedit-output-window.c:378
 msgid "Close the output window"
 msgstr "Stäng utdatafönstret"
 
-#: gedit/gedit-output-window.c:371
+#: gedit/gedit-output-window.c:416
 msgid "Copy selected lines"
 msgstr "Kopiera markerade rader"
 
-#: gedit/gedit-output-window.c:391
+#: gedit/gedit-output-window.c:436
 msgid "Clear the output window"
 msgstr "Töm utdatafönstret"
 
-#: gedit/gedit-output-window.c:431
+#: gedit/gedit-output-window.c:476
 msgid "Output Lines"
 msgstr "Utdatarader"
-
-#: gedit/gedit-plugins-engine.c:363
-#, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "Fel, kan inte öppna modulfilen \"%s\"\n"
-
-#: gedit/gedit-plugins-engine.c:373
-#, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "Fel, insticksmodulen \"%s\" innehåller inte initieringsfunktion."
-
-#: gedit/gedit-plugins-engine.c:383
-#, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Fel, insticksmodulen \"%s\" innehåller inte aktiveringsfunktion."
-
-#: gedit/gedit-plugins-engine.c:393
-#, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Fel, insticksmodulen \"%s\" innehåller inte inaktiveringsfunktion."
-
-#: gedit/gedit-plugins-engine.c:418
-#, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "Fel, omöjligt att initiera insticksmodulen \"%s\""
-
-#: gedit/gedit-plugins-engine.c:469
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Fel, omöjligt att förstöra insticksmodulen \"%s\""
-
-#: gedit/gedit-plugins-engine.c:552 gedit/gedit-plugins-engine.c:640
-#: gedit/gedit-plugins-engine.c:765
-#, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "Fel, omöjligt att aktivera insticksmodulen \"%s\""
-
-#: gedit/gedit-plugins-engine.c:591 gedit/gedit-plugins-engine.c:783
-#, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "Fel, omöjligt att inaktivera insticksmodulen \"%s\""
-
-#: gedit/gedit-plugins-engine.c:684
-#, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
-"Fel, omöjligt att aktivera användargränssnitt för insticksmodulen \"%s\""
 
 #: gedit/gedit-prefs-manager.c:177
 msgid "Cannot initialize preferences manager."
@@ -2204,7 +2169,7 @@ msgstr "_Ångra"
 msgid "_View"
 msgstr "_Visa"
 
-#: gedit/gedit-utils.c:425
+#: gedit/gedit-utils.c:422
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2215,24 +2180,24 @@ msgstr ""
 "\n"
 "Kontrollera att du har angivit platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:433
+#: gedit/gedit-utils.c:430
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Kunde inte öppna filen \"%s\" eftersom den innehåller trasig data."
 
-#: gedit/gedit-utils.c:444
+#: gedit/gedit-utils.c:441
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Kunde inte öppna filen \"%s\" eftersom gedit inte kan hantera %s:-platser."
 
-#: gedit/gedit-utils.c:450
+#: gedit/gedit-utils.c:447
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Kunde inte öppna filen \"%s\""
 
-#: gedit/gedit-utils.c:460
+#: gedit/gedit-utils.c:457
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2240,12 +2205,12 @@ msgstr ""
 "Kunde inte öppna filen \"%s\" eftersom den innehåller data i ett ogiltigt "
 "format."
 
-#: gedit/gedit-utils.c:467
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Kunde inte öppna filen \"%s\" eftersom den är för stor."
 
-#: gedit/gedit-utils.c:474
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2256,12 +2221,12 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:482
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Kunde inte öppna filen \"%s\" eftersom åtkomst nekades."
 
-#: gedit/gedit-utils.c:489
+#: gedit/gedit-utils.c:486
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2272,7 +2237,7 @@ msgstr ""
 "\n"
 "Stäng några öppna filer och försök igen."
 
-#: gedit/gedit-utils.c:497
+#: gedit/gedit-utils.c:494
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2283,7 +2248,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:505
+#: gedit/gedit-utils.c:502
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2292,7 +2257,7 @@ msgstr ""
 "Det finns inte tillräckligt med minne för att öppna filen \"%s\". Stäng "
 "några körande program och försök igen."
 
-#: gedit/gedit-utils.c:525 gedit/gedit-utils.c:539 gedit/gedit-utils.c:566
+#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2303,7 +2268,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:550
+#: gedit/gedit-utils.c:547
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2316,7 +2281,7 @@ msgstr ""
 "Kontrollera att du angav platsen korrekt och att dina "
 "proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:575
+#: gedit/gedit-utils.c:572
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2327,7 +2292,7 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:584
+#: gedit/gedit-utils.c:581
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2338,7 +2303,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:593 gedit/gedit-utils.c:666
+#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2349,12 +2314,12 @@ msgstr ""
 "\n"
 "Du försöker troligtvis öppna en binär fil."
 
-#: gedit/gedit-utils.c:602 gedit/gedit-utils.c:700
+#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Kunde inte öppna filen \"%s\"."
 
-#: gedit/gedit-utils.c:642
+#: gedit/gedit-utils.c:639
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2370,7 +2335,7 @@ msgstr ""
 "Kontrollera att du inte försöker öppna en binär fil och försök att välja en "
 "teckenkodning igen i dialogen \"Öppna fil...\" (eller \"Öppna plats\").igen."
 
-#: gedit/gedit-utils.c:654 gedit/gedit-utils.c:684
+#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2385,7 +2350,7 @@ msgstr ""
 "teckenkodning i dialogen \"Öppna fil...\" (eller \"Öppna plats\") och försök "
 "igen."
 
-#: gedit/gedit-utils.c:704
+#: gedit/gedit-utils.c:701
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2396,12 +2361,12 @@ msgstr ""
 "\n"
 "%s."
 
-#: gedit/gedit-utils.c:756
+#: gedit/gedit-utils.c:753
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Kunde inte spara filen \"%s\"."
 
-#: gedit/gedit-utils.c:760
+#: gedit/gedit-utils.c:757
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2412,7 +2377,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:810
+#: gedit/gedit-utils.c:807
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2423,13 +2388,13 @@ msgstr ""
 "\n"
 "Den kanske har tagits bort nyligen."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:814
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom den innehåller trasig data."
 
-#: gedit/gedit-utils.c:828
+#: gedit/gedit-utils.c:825
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2437,13 +2402,13 @@ msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom gedit inte kan hantera %s:-"
 "platser."
 
-#: gedit/gedit-utils.c:834 gedit/gedit-utils.c:893 gedit/gedit-utils.c:904
-#: gedit/gedit-utils.c:988
+#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
+#: gedit/gedit-utils.c:985
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Kunde inte återställa filen \"%s\"."
 
-#: gedit/gedit-utils.c:844
+#: gedit/gedit-utils.c:841
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2452,17 +2417,17 @@ msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom den innehåller data i ett "
 "ogiltigt format."
 
-#: gedit/gedit-utils.c:851
+#: gedit/gedit-utils.c:848
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Kunde inte återställa filen \"%s\" eftersom den är för stor."
 
-#: gedit/gedit-utils.c:858
+#: gedit/gedit-utils.c:855
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Kunde inte återställa filen \"%s\" eftersom åtkomst nekades."
 
-#: gedit/gedit-utils.c:865
+#: gedit/gedit-utils.c:862
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2474,7 +2439,7 @@ msgstr ""
 "\n"
 "Stäng några öppna filer och försök igen."
 
-#: gedit/gedit-utils.c:873
+#: gedit/gedit-utils.c:870
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2483,7 +2448,7 @@ msgstr ""
 "Inte tillräckligt med minne för att återställa filen \"%s\". Stäng några "
 "körande program och försök igen."
 
-#: gedit/gedit-utils.c:912
+#: gedit/gedit-utils.c:909
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2495,7 +2460,7 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:927
+#: gedit/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2506,14 +2471,14 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:934
+#: gedit/gedit-utils.c:931
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom försöket att logga in "
 "misslyckades."
 
-#: gedit/gedit-utils.c:941
+#: gedit/gedit-utils.c:938
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2525,16 +2490,16 @@ msgstr ""
 "\n"
 "Du försöker troligtvis återställa en binär fil."
 
-#: gedit/gedit-utils.c:950
+#: gedit/gedit-utils.c:947
 msgid "It is not possible to revert an Untitled document."
 msgstr "Det går inte att återställa ett namnlöst dokument."
 
-#: gedit/gedit-utils.c:1039
+#: gedit/gedit-utils.c:1036
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Filen \"%s\" finns redan."
 
-#: gedit/gedit-utils.c:1045
+#: gedit/gedit-utils.c:1042
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2545,7 +2510,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt."
 
-#: gedit/gedit-utils.c:1054
+#: gedit/gedit-utils.c:1051
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2556,7 +2521,7 @@ msgstr ""
 "\n"
 "Se till att du har de rätta skrivrättigheterna."
 
-#: gedit/gedit-utils.c:1061
+#: gedit/gedit-utils.c:1058
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2567,7 +2532,7 @@ msgstr ""
 "\n"
 "Filnamnet är för långt."
 
-#: gedit/gedit-utils.c:1068
+#: gedit/gedit-utils.c:1065
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2579,7 +2544,7 @@ msgstr ""
 "\n"
 "En katalogkomponent i filnamnet finns inte eller är en lös symbolisk länk."
 
-#: gedit/gedit-utils.c:1077
+#: gedit/gedit-utils.c:1074
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2590,10 +2555,14 @@ msgstr ""
 "\n"
 "Frigör en del utrymme på disken och försök igen."
 
-#: gedit/gedit-utils.c:1083
+#: gedit/gedit-utils.c:1080
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Kunde inte skapa filen \"%s\"."
+
+#: gedit/gedit-utils.c:1417
+msgid " (invalid Unicode)"
+msgstr " (ogiltig Unicode)"
 
 #.
 #. if (col == chars)
@@ -2638,54 +2607,6 @@ msgstr "Skapa ett nytt dokument i en befintlig instans av gedit"
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Den angivna kodningen \"%s\" är inte giltig\n"
-
-#: plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "Ä_ndra skiftläge"
-
-#: plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "Gör allt till _versaler"
-
-#: plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "Gör allt till _gemener"
-
-#: plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "_Invertera skiftläge"
-
-# Title Case Har Ingen Motsvarighet i Svenskan Vad Jag Vet, och Inte Heller
-# Något Svenskt Namn Antar Jag.
-# Från susning.nu (http://susning.nu/Versalisering) kom inspirationen till
-# uttrycket "Engelsk rubriksversalisering".
-#: plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "_Engelsk rubriksversalisering"
-
-#: plugins/changecase/changecase.c:54
-msgid "Change selected text to upper case"
-msgstr "Ändra den markerade texten till versaler"
-
-#: plugins/changecase/changecase.c:55
-msgid "Change selected text to lower case"
-msgstr "Ändra den markerade texten till gemener"
-
-#: plugins/changecase/changecase.c:56
-msgid "Invert the case of selected text"
-msgstr "Invertera skiftläget på den markerade texten"
-
-#: plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
-msgstr "Gör den första bokstaven i varje markerat ord versal"
-
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
-msgid "Change Case"
-msgstr "Ändra skiftläge"
-
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-msgid "Changes the case of selected text."
-msgstr "Ändrar skiftläget på den markerade texten."
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2784,36 +2705,36 @@ msgstr "Infogar användarnamnet vid markörpositionen."
 msgid "User name"
 msgstr "Användarnamn"
 
-#: plugins/shell_output/shell_output.c:56
+#: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
 msgstr "_Kör kommando..."
 
-#: plugins/shell_output/shell_output.c:59
+#: plugins/shell_output/shell_output.c:58
 msgid "Run a command"
 msgstr "Kör ett kommando"
 
-#: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:502
+#: plugins/shell_output/shell_output.c:159
+#: plugins/shell_output/shell_output.c:489
 msgid "Stopped"
 msgstr "Stoppad"
 
-#: plugins/shell_output/shell_output.c:282
+#: plugins/shell_output/shell_output.c:270
 msgid "Run Command"
 msgstr "Kör kommando"
 
-#: plugins/shell_output/shell_output.c:301
+#: plugins/shell_output/shell_output.c:289
 msgid "_Run"
 msgstr "_Kör"
 
-#: plugins/shell_output/shell_output.c:508
+#: plugins/shell_output/shell_output.c:495
 msgid "Done"
 msgstr "Klar"
 
-#: plugins/shell_output/shell_output.c:510
+#: plugins/shell_output/shell_output.c:497
 msgid "Failed"
 msgstr "Misslyckades"
 
-#: plugins/shell_output/shell_output.c:676
+#: plugins/shell_output/shell_output.c:664
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2823,7 +2744,7 @@ msgstr ""
 "\n"
 "Var vänlig och ange ett giltigt skalkommando."
 
-#: plugins/shell_output/shell_output.c:695
+#: plugins/shell_output/shell_output.c:683
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2833,11 +2754,11 @@ msgstr ""
 "\n"
 "Ange ett giltigt skalkommando."
 
-#: plugins/shell_output/shell_output.c:773
+#: plugins/shell_output/shell_output.c:761
 msgid "Executing command"
 msgstr "Kör kommando"
 
-#: plugins/shell_output/shell_output.c:841
+#: plugins/shell_output/shell_output.c:829
 msgid "An error occurred while running the selected command."
 msgstr "Ett fel uppstod vid körning av det valda kommandot."
 
@@ -3297,17 +3218,85 @@ msgstr "_Fråga efter ett format"
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
 
-#: viewer/gedit-persist-stream.c:44
-msgid "Save method not implemented for gedit viewer"
-msgstr "Sparandemetod inte implementerad för gedit-visare"
+#~ msgid "Untitled"
+#~ msgstr "Namnlös"
 
-#: viewer/gedit-viewer-ui.xml.h:1
-msgid "Copy the selected text to the clipboard"
-msgstr "Kopiera den markerade texten till urklipp"
+#~ msgid "Ch_aracter Coding:"
+#~ msgstr "T_eckenkodning:"
 
-#: viewer/gedit-viewer-ui.xml.h:2
-msgid "_Copy Text"
-msgstr "_Kopiera text"
+#~ msgid "Error, unable to open module file '%s'\n"
+#~ msgstr "Fel, kan inte öppna modulfilen \"%s\"\n"
+
+#~ msgid "Error, plugin '%s' does not contain init function."
+#~ msgstr "Fel, insticksmodulen \"%s\" innehåller inte initieringsfunktion."
+
+#~ msgid "Error, plugin '%s' does not contain activate function."
+#~ msgstr "Fel, insticksmodulen \"%s\" innehåller inte aktiveringsfunktion."
+
+#~ msgid "Error, plugin '%s' does not contain deactivate function."
+#~ msgstr "Fel, insticksmodulen \"%s\" innehåller inte inaktiveringsfunktion."
+
+#~ msgid "Error, impossible to initialize plugin '%s'"
+#~ msgstr "Fel, omöjligt att initiera insticksmodulen \"%s\""
+
+#~ msgid "Error, impossible to destroy plugin '%s'"
+#~ msgstr "Fel, omöjligt att förstöra insticksmodulen \"%s\""
+
+#~ msgid "Error, impossible to activate plugin '%s'"
+#~ msgstr "Fel, omöjligt att aktivera insticksmodulen \"%s\""
+
+#~ msgid "Error, impossible to deactivate plugin '%s'"
+#~ msgstr "Fel, omöjligt att inaktivera insticksmodulen \"%s\""
+
+#~ msgid "Error, impossible to update ui of the plugin '%s'"
+#~ msgstr ""
+#~ "Fel, omöjligt att aktivera användargränssnitt för insticksmodulen \"%s\""
+
+#~ msgid "C_hange Case"
+#~ msgstr "Ä_ndra skiftläge"
+
+#~ msgid "All _Upper Case"
+#~ msgstr "Gör allt till _versaler"
+
+#~ msgid "All _Lower Case"
+#~ msgstr "Gör allt till _gemener"
+
+#~ msgid "_Invert Case"
+#~ msgstr "_Invertera skiftläge"
+
+# Title Case Har Ingen Motsvarighet i Svenskan Vad Jag Vet, och Inte Heller
+# Något Svenskt Namn Antar Jag.
+# Från susning.nu (http://susning.nu/Versalisering) kom inspirationen till
+# uttrycket "Engelsk rubriksversalisering".
+#~ msgid "_Title Case"
+#~ msgstr "_Engelsk rubriksversalisering"
+
+#~ msgid "Change selected text to upper case"
+#~ msgstr "Ändra den markerade texten till versaler"
+
+#~ msgid "Change selected text to lower case"
+#~ msgstr "Ändra den markerade texten till gemener"
+
+#~ msgid "Invert the case of selected text"
+#~ msgstr "Invertera skiftläget på den markerade texten"
+
+#~ msgid "Capitalize the first letter of each selected word"
+#~ msgstr "Gör den första bokstaven i varje markerat ord versal"
+
+#~ msgid "Change Case"
+#~ msgstr "Ändra skiftläge"
+
+#~ msgid "Changes the case of selected text."
+#~ msgstr "Ändrar skiftläget på den markerade texten."
+
+#~ msgid "Save method not implemented for gedit viewer"
+#~ msgstr "Sparandemetod inte implementerad för gedit-visare"
+
+#~ msgid "Copy the selected text to the clipboard"
+#~ msgstr "Kopiera den markerade texten till urklipp"
+
+#~ msgid "_Copy Text"
+#~ msgstr "_Kopiera text"
 
 #~ msgid ""
 #~ "If you don't save, changes from the last second will be permanently lost."
@@ -3409,9 +3398,6 @@ msgstr "_Kopiera text"
 
 #~ msgid "Turn on all debugging messages."
 #~ msgstr "Aktivera alla felsökningsmeddelanden."
-
-#~ msgid " (invalid Unicode)"
-#~ msgstr " (ogiltig Unicode)"
 
 #~ msgid "You have X documents with unsaved changes."
 #~ msgstr "Du har X dokument med osparade ändringar."
@@ -3780,9 +3766,6 @@ msgstr "_Kopiera text"
 
 #~ msgid "  %s"
 #~ msgstr "  %s"
-
-#~ msgid "Character Coding:"
-#~ msgstr "Teckenkodning:"
 
 #~ msgid "Character Coding"
 #~ msgstr "Teckenkodning"
@@ -4602,9 +4585,6 @@ msgstr "_Kopiera text"
 #~ "Detta är insticksmodulhanteraren. Insticksmoduler är extraprogram som "
 #~ "utökar gedits funktionalitet. Härifrån kan du välja vilka insticksmoduler "
 #~ "du vill ska läsas in."
-
-#~ msgid "Add/Remove plugins"
-#~ msgstr "Lägg till/ta bort insticksmoduler"
 
 #~ msgid "Plugin _Manager"
 #~ msgstr "Insticksmodul_hanterare"
