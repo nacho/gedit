@@ -15,9 +15,71 @@ KNOWN BUGS :
 	this is most likely the reason. If you have this crash it will be 
 	a great help for gedit if you find a way of reproducing it.
 
-	
+
+	From the bug Tracking System
+        ----------------------------
+
+	Gtk Editable bug :
+
+       #5260:  [0.5.4] crash while copy/pasting (gtk_editable)
+       #12325: [0.7.0] crash while copy/pasting (gtk_editable)
+       #13576: [0.7.0] crash while copy/pasting (gtk_editable)
+       #14104: [0.7.0] crash while selecting text (gtk_editable)
+       #14204: [0.5.4] crash while pasting from Netscape (gtk_editable)
+       #14756: [0.7.0] crash while copy/pasting (gtk_editable)
+       #15528: [0.7.9] crash while selecting text (gtk_editable)
+       #15669: [0.7.9] crash while copy/pasting (gtk_editable)
+       #15746: [0.7.9] crash while selcting all (gtk_editable)
+       #16197: [0.7.9] crash while pasting text (gtk_editable)
+       #18635: crash when copy and paste
+
+       #16169: gedit-0.9.0pre2 static compile mistakenly links in libgnomeprint.so.6
+	- Asked michael to take a look.
+	- Requested more info 	
+
+       #18440: opening two files
+	- Closed
+
+       #19044: program crashed
+	- A problem with the widgets sensitivity
+
+       Subject: gedit; Reported by: jon <jon@linux.chickenstock.org>; 30 days old. 
+       #19540: Save crashes
+
+       Subject: gedit; Reported by: Anthony DeRobertis <anthony.derobertis@crossmedia.net>; 25 days old. 
+       #19862: Deleting entire lines fails to update screen
+       Subject: gedit; Reported by: Marcus Urban <pup@houston.rr.com>; 23 days old. 
+       #20097: gedit DnD crash
+       Subject: gedit; Reported by: Peter Weilbacher <weilbach@uni-sw.gwdg.de>; 20 days old. 
+       #20325: GEdit crshed with Cut and Past between two open docs
+       Subject: gedit; Reported by: Herbert U.Huebner <herbert-u-.huebner@webave.com>; 18 days old. 
+       #20365: copy/paste does not work
+       Subject: gedit; Reported by: Thomas Koeller <tkoeller@gmx.net>; 18 days old. 
+       #20659: would not automatically start file for edit.
+       Subject: gedit; Reported by: Yong Chiew Ning <cnyong@attglobal.net>; 16 days old. 
+       #20985: 
+       Subject: gedit; Reported by: Haight Ashbury <ulrich@mavnet.dynip.com>; 13 days old. 
+       #20989: "gedit" caused fatal bus error
+       Subject: gedit; Reported by: Dana Kowalski <Dana.Kowalski@rl.af.mil>; 13 days old. 
+       #21750: Word wrapping
+       Subject: gedit; Reported by: Luke Worth <luke_worth@mail.com>. 
+       #21816: Crash while dbl-clicking text (selecting 1 word)
+       Subject: gedit; Reported by: Mike Esler <mike.esler@nrlssc.navy.mil>. 
+       #22287: crash during mime
+       Subject: gedit; Reported by: bryce weiner <cogburn@fuse.net>. 
+       #22290: optionally display the full filepath in the titlebar and/or filelist
+       Subject: gedit; Reported by: Ulrich Eckhardt <uli@DoomMachine>. 
 
 
-	
 
-	
+ 
+Reproducible gmc bug
+
+???    #20743: crashes when opening DOS file
+       Subject: gedit; Reported by: Wayne Dyer <dwdyer@austin.rr.com>; 15 days old. 
+
+
+FIXED :
+	open gedit with a filename that does not exist, when the popup dialog appears
+        click esc. g_assert is reached
+

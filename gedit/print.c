@@ -489,9 +489,6 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 	
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gnome_print_show (pji->pc, pji->temp);
-	/* Why is this here ??? Chema. */
-	if ( pji->temp!='\0')
-		gnome_print_stroke (pji->pc);
 
 	if (settings->print_lines>0 && line%settings->print_lines==0 && first_line)
 	{
@@ -853,7 +850,6 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	x = pji->page_width/2 - len/2;
 	gnome_print_moveto(pji->pc, x, y);
 	gnome_print_show(pji->pc, text1);
-	gnome_print_stroke(pji->pc);
 
 	/* Print the page/pages  */
 	y = pji->page_height - pji->margin_top - pji->header_height/4;
@@ -861,8 +857,6 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	x = pji->page_width - len - 36;
 	gnome_print_moveto (pji->pc, x, y);
 	gnome_print_show (pji->pc, text2);
-	gnome_print_stroke (pji->pc); 
-
 
 	gtk_object_unref (GTK_OBJECT(font));
 	g_free (text1);

@@ -47,8 +47,6 @@ guchar*	gedit_document_get_buffer (Document * doc);
 guint	gedit_document_get_buffer_length (Document * doc);
 
 Document * gedit_document_new (void);
-Document * gedit_document_new_with_title (gchar *title);
-gint       gedit_document_new_with_file (gchar *file_name);
 Document * gedit_document_current (void);
 
 static gchar*		gedit_document_get_config_string (GnomeMDIChild *child);
@@ -61,7 +59,7 @@ static	void		gedit_document_init (Document *doc);
 	GtkType		gedit_document_get_type (void);
 
 void gedit_mdi_init (void);
-void gedit_document_load ( GList *file_list);
+gboolean gedit_document_load ( GList *file_list);
 void gedit_document_set_title (Document *doc);
 void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
 void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
@@ -352,7 +350,7 @@ gedit_document_new (void)
 }
 
 Document *
-gedit_document_new_with_title (gchar *title)
+gedit_document_new_with_title (const gchar *title)
 {
 	Document *doc;
 	
@@ -369,12 +367,11 @@ gedit_document_new_with_title (gchar *title)
 
 	gedit_window_set_widgets_sensitivity (TRUE);
 
-
 	return doc;
 }
 
 gint
-gedit_document_new_with_file (gchar *file_name)
+gedit_document_new_with_file (const gchar *file_name)
 {
 	Document *doc;
 
@@ -382,14 +379,15 @@ gedit_document_new_with_file (gchar *file_name)
 
 	doc = gedit_document_current();
 
-	if (doc!=NULL)
+	if (doc!=NULL) 
 		if (doc->changed || doc->filename)
 			doc = NULL;
 
 	if (gedit_file_open (doc, file_name) == 1)
 		return FALSE;
-
+	
 	gedit_window_set_widgets_sensitivity (TRUE);
+	
 	return TRUE;
 
 }
@@ -467,7 +465,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
 
-	new_view = VIEW (gedit_view_new (DOCUMENT (child)));
+	new_view = GEDIT_VIEW (gedit_view_new (DOCUMENT (child)));
 
 	gedit_view_set_font (new_view, settings->font);
 	gedit_view_set_readonly (new_view, DOCUMENT (child)->readonly); 
@@ -590,7 +588,8 @@ gedit_mdi_init (void)
 	gedit_debug (DEBUG_DOCUMENT, "end");
 }
 
-void
+
+gboolean
 gedit_document_load ( GList *file_list)
 {
 	gchar *file_name;
@@ -603,17 +602,16 @@ gedit_document_load ( GList *file_list)
 	for (;file_list; file_list = file_list->next)
 	{
 		file_name = gedit_file_convert_to_full_pathname (file_list->data);
-
 		if (g_file_exists (file_name))
 			gedit_document_new_with_file ((gchar *) file_name);
 		else
 			gedit_file_create_popup ((guchar *) file_name);
-
-		g_free (file_name);
 	}
 
-	if (gedit_document_current()==NULL)
+	if (gedit_document_current() == NULL)
 		gedit_document_new ();
+
+	return FALSE;
 }
 
 
@@ -632,25 +630,31 @@ gedit_document_set_title (Document *doc)
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
+	
 	if (doc == NULL)
 		return;
-
-	if (doc->filename == NULL)
+	
+	if (doc->filename == NULL) {
 		docname = g_strdup_printf (_("Untitled %i"), doc->untitled_number);
-	else
+	} else {
 		docname = g_strdup (g_basename (doc->filename));
-		
-	if (doc->changed)
+	}
+
+	if (doc->changed) {
 		title = g_strdup_printf ("gedit: %s %s", docname, _("(modified)"));
-	else if (doc->readonly)
+	} else if (doc->readonly) {
 		title = g_strdup_printf ("gedit: %s %s", docname, _("(readonly)"));
-	else
+	} else {
 		title = g_strdup_printf ("gedit: %s", docname);
+	}
 
 	gtk_window_set_title (gedit_window_active(), title);
-
+	
 	g_free (docname);
+	
 	g_free (title);
+
+	gedit_debug (DEBUG_DOCUMENT, "end");
 }
 
 
@@ -743,8 +747,6 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 		return;
 	}
 
-	g_print ("NewFileName: %s\n", new_file_name);
-
 	/* Scan the documents to see if the file we are looking for is allready open */
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
@@ -776,7 +778,7 @@ gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
 
 	for ( n=0; n < g_list_length (doc->views); n++)
 	{
-		nth_view = VIEW (g_list_nth_data (doc->views, n));
+		nth_view = GEDIT_VIEW (g_list_nth_data (doc->views, n));
 		gedit_view_set_undo (nth_view, undo_state, redo_state);
 	}
 	

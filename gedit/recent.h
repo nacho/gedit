@@ -23,7 +23,7 @@
 #define __RECENT_H__
 
 void	gedit_recent_update (GnomeApp *app);
-void	gedit_recent_add (char *filename);
+void	gedit_recent_add (const char *filename);
 
 void	gedit_recent_history_write_config (void);
 

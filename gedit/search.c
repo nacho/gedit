@@ -343,7 +343,6 @@ search_text_execute ( gulong starting_position,
 
 	g_return_val_if_fail (gedit_search_info.state ==  SEARCH_IN_PROGRESS_YES, FALSE);
 	g_return_val_if_fail (starting_position < gedit_search_info.buffer_length, FALSE);
-
 	
 	case_sensitive_mask = case_sensitive?0:32;
 	text_length = strlen (text_to_search_for);

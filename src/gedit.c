@@ -123,9 +123,11 @@ main (int argc, char **argv)
 	gedit_prefs_load_settings ();
 	gedit_plugins_init ();
 	gedit_mdi_init ();
-	gedit_document_load (file_list);
 	gedit_close_all_flag_clear ();
 
+	gedit_document_load (file_list);
+	
+	
 	gtk_main();
 
 	return 0;

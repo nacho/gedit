@@ -1,3 +1,15 @@
+2000-08-30  Chema Celorio  <chema@celorio.com>
+
+	Fixed small bugs/issues here & there
+
+	* file.c (gedit_view_insert_if_mapped): after more than 10 hrs. finaly
+	fixed the crash reported in
+       #19044: program crashed
+       #20097: gedit DnD crash
+       #20743: crashes when opening DOS file
+       #22287: (crash during mime) loaded a temp file from gftp. bryce weiner <cogburn@fuse.net>.
+	It is based on a semi-hacky soltuion, but users want a stable editor.
+
 2000-07-09  Chema Celorio  <chema@celorio.com>
 
 	* file.c (gedit_file_save): fix 16143

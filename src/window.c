@@ -342,7 +342,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	if (gedit_document_current()==NULL)
 		return;
 		
-	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
+	style = gtk_style_copy (gtk_widget_get_style (GEDIT_VIEW (mdi->active_view)->text));
 
 	bg = &style->base[0];
 	bg->red = settings->bg[0];
@@ -359,7 +359,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		nth_doc = DOCUMENT (g_list_nth_data (mdi->children, n));
 		for (m = 0; m < g_list_length (nth_doc->views); m++)
 		{
-			mth_view = VIEW (g_list_nth_data (nth_doc->views, m));
+			mth_view = GEDIT_VIEW (g_list_nth_data (nth_doc->views, m));
 			if (mdi_mode_changed)
 			{
 				gtk_widget_grab_focus (mth_view->text);

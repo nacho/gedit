@@ -49,13 +49,18 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 	gint     buffer_length ;
 	gint     position ;
 	
-	
-	if ((command_string = gtk_entry_get_text (GTK_ENTRY (command)))==NULL)
+
+	command_string = gtk_entry_get_text (GTK_ENTRY (command));
+
+	if (command_string == NULL || (strlen (command_string) == 0))
 	{
+		gnome_dialog_close (GNOME_DIALOG (dialog));
 		return ;
 	}
 
-	if ( (directory_string = gtk_entry_get_text (GTK_ENTRY (directory))) == NULL ) 
+	directory_string = gtk_entry_get_text (GTK_ENTRY (directory));
+	
+	if (directory_string == NULL || (strlen (directory_string) == 0)) 
 	{
 		directory_string =  gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
 	}

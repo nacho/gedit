@@ -39,10 +39,10 @@ struct _gedit_data
 	gboolean flag;	general purpose flag to indicate if action completed 
 };*/
 
-gint gedit_file_open (Document *doc, gchar *fname);
+gint gedit_file_open  (Document *doc, const gchar *fname);
 gint gedit_file_stdin (Document *doc);
-gint gedit_file_save (Document *doc, gchar *fname);
-gint gedit_file_create_popup (guchar *title);
+gint gedit_file_save  (Document *doc, const gchar *fname);
+gint gedit_file_create_popup (const gchar *title);
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);

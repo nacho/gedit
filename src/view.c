@@ -52,7 +52,7 @@ void	gedit_view_set_window_position_from_lines (View *view, guint line, guint li
 static void	gedit_views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
 static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
 
-void		gedit_view_insert (View  *view, guint position, gchar * text, gint length);
+void		gedit_view_insert (View  *view, guint position, const gchar * text, gint length);
 void		gedit_view_delete (View *view, guint position, gint length);
 
 void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
@@ -90,7 +90,7 @@ gedit_view_active (void)
 	gedit_debug (DEBUG_VIEW, "");
 
 	if (mdi->active_view)
-		current_view = VIEW (mdi->active_view);
+		current_view = GEDIT_VIEW (mdi->active_view);
  
 	return current_view;
 }
@@ -190,7 +190,8 @@ gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
 }
 
 void
-gedit_views_insert (Document *doc, guint position, gchar * text, gint length, View * view_exclude)
+gedit_views_insert (Document *doc, guint position, gchar * text,
+		    gint length, View * view_exclude)
 {
 	gint i;
 	View *nth_view;
@@ -202,12 +203,13 @@ gedit_views_insert (Document *doc, guint position, gchar * text, gint length, Vi
 	/* Why do we have to call view_text_changed_cb ? why is the "chaged" signal not calling it ?. Chema */
 	if (!doc->changed)
 		if (g_list_length (doc->views))
-			gedit_view_text_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
+			gedit_view_text_changed_cb (NULL,
+						    (gpointer) g_list_nth_data (doc->views, 0));
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
 		nth_view = g_list_nth_data (doc->views, i);
-		
+
 		if (nth_view == view_exclude)
 			continue;
 
@@ -216,10 +218,15 @@ gedit_views_insert (Document *doc, guint position, gchar * text, gint length, Vi
 }
 
 void
-gedit_view_insert (View  *view, guint position, gchar * text, gint length)
+gedit_view_insert (View  *view, guint position, const gchar * text, gint length)
 {
+	g_return_if_fail (length > 0);
+	
 	gedit_debug (DEBUG_VIEW, "");
 
+	if (!GTK_WIDGET_MAPPED (view->text))
+		g_warning ("Inserting text into an unmapped text widget (%i)", length);
+	
 	gtk_text_set_point (GTK_TEXT(view->text), position);
 	gtk_text_insert (GTK_TEXT (view->text), NULL,
 			 NULL, NULL, text,
@@ -275,12 +282,16 @@ doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int l
 	doc = view->doc;
 
 	/* This string might not be terminated with a null cero */
+#if 0
 	text_to_insert = g_new0 (guchar, length+1);
 	strncpy (text_to_insert, insertion_text, length);
+#else	
+	text_to_insert = g_strdup (insertion_text);
+#endif	
 
 	if (undo)
 		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_ACTION_INSERT, doc, view);
-	
+
 	if (!exclude_this_view)
 		gedit_views_insert (doc, position, text_to_insert, length, NULL);
 	else
@@ -626,6 +637,7 @@ gedit_view_init (View *view)
 #ifdef ENABLE_SPLIT_SCREEN    
 	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
 	gtk_widget_show (view->split_screen);
+	g_print ("view 3-------------------------\n");	
 	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
 	gnome_popup_menu_attach (menu, view->split_screen, view);
 	view->splitscreen = gnome_config_get_int ("splitscreen");
@@ -675,9 +687,11 @@ gedit_view_new (Document *doc)
 	view->doc->views = g_list_append (doc->views, view);
 	view->app = NULL;
 
-	document_buffer = gedit_document_get_buffer (view->doc);
-	gedit_view_insert (view, 0, document_buffer, FALSE);
-	g_free (document_buffer);
+	if (g_list_length (doc->views) > 1) {
+		document_buffer = gedit_document_get_buffer (view->doc);
+		gedit_view_insert (view, 0, document_buffer, strlen (document_buffer));
+		g_free (document_buffer);
+	}
 
 	return GTK_WIDGET (view);
 }
@@ -832,6 +846,7 @@ gedit_view_set_selection (View *view, guint start, guint end)
 {
 	gedit_debug (DEBUG_VIEW, "");
 
+
 	if (start == 0 && end == 0)
 		gtk_text_set_point (GTK_TEXT(view->text), GTK_EDITABLE(GTK_TEXT(view->text))->selection_end_pos);
 
@@ -975,7 +990,7 @@ return;
 	gedit_debug (DEBUG_VIEW, "");
 
 	sprintf (col, "Column: %d",
-		 GTK_TEXT(VIEW(gedit_view_active())->text)->cursor_pos_x/7);
+		 GTK_TEXT(GEDIT_VIEW(gedit_view_active())->text)->cursor_pos_x/7);
 
 	if (settings->show_status)
 	{
@@ -1142,7 +1157,7 @@ gedit_view_load_widgets (View *view)
 		}
 		else
 		{
-			g_print ("BORK !\n");
+			g_warning ("BORK !\n");
 			if (menu_ui_info [count].moreinfo == gedit_undo_undo)
 				view->toolbar->undo_menu_item = menu_ui_info[count].widget;
 			if (menu_ui_info [count].moreinfo == gedit_undo_redo)

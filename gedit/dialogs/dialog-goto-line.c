@@ -41,7 +41,7 @@ goto_line_clicked_cb (GtkWidget *widget, gint button)
 {
 	gint line, lines = 0;
 	gulong pos;
-	View *view = VIEW (mdi->active_view);
+	View *view = GEDIT_VIEW (mdi->active_view);
 	Document *doc = gedit_document_current();
 	GtkText *text = GTK_TEXT (view->text);
 	GtkWidget *entry;

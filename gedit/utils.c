@@ -246,7 +246,8 @@ print_time (void)
 static gchar *
 gedit_utils_temp_file_name_new (gint number)
 {
-	return g_strdup_printf ("%s/gedit-%d-%d-%d", GEDIT_TEMP_DIR, (gint) time(NULL), (gint) getpid(), number);
+	return g_strdup_printf ("%s/gedit-%d-%d-%d", GEDIT_TEMP_DIR, (gint) time(NULL),
+				(gint) getpid(), number);
 }
 
 /**

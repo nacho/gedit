@@ -105,18 +105,24 @@ void
 filenames_dropped (GtkWidget        *widget, GdkDragContext   *context, gint x, gint y,
                    GtkSelectionData *selection_data, guint info, guint time)
 {
-	GList *names, *tmp_list;
+	GList *names, *list;
 
 	gedit_debug (DEBUG_SEARCH, "");
-	
-	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
-	tmp_list = names;
 
-	while (tmp_list)
+	list = gnome_uri_list_extract_filenames (selection_data->data);
+	names = list;
+
+	while (names != NULL)
 	{
-		gedit_document_new_with_file ((gchar *)tmp_list->data);
-		tmp_list = tmp_list->next;
+		gchar *filename;
+		filename = g_strdup ((gchar *)names->data);
+		gedit_document_new_with_file (filename);
+		g_free (filename);
+		names = names->next;
 	}
+
+	gnome_uri_list_free_strings (list);
+
 }
 
 void

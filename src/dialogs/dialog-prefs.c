@@ -404,7 +404,7 @@ prepare_fontscolors_page (GladeXML *gui)
 
 	/* setup the initial states */
 	if (mdi->active_view)
-		style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
+		style = gtk_style_copy (gtk_widget_get_style (GEDIT_VIEW (mdi->active_view)->text));
 	else
 		style = gtk_style_new ();
 

@@ -45,11 +45,6 @@
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
-gint gedit_file_open (Document *doc, gchar *fname);
-gint gedit_file_save (Document *doc, gchar *fname);
-void gedit_file_save_as (Document *doc);
-gint gedit_file_stdin (Document *doc);
-
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
 gint file_save_document (Document * doc);
@@ -61,7 +56,7 @@ void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
-       gint gedit_file_create_popup (guchar *title);
+       gint gedit_file_create_popup (const gchar *title);
 static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
 static void gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
@@ -73,6 +68,55 @@ static void gedit_close_all_flag_status (guchar *function);
 static void gedit_close_all_flag_verify (guchar *function);
 
 gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
+
+
+typedef struct {
+	Document *doc;
+	View *view;
+	gchar *tmp_buf;
+} HackyStruct;
+
+static gboolean 
+gedit_view_insert_if_mapped (HackyStruct *hack)
+{
+	g_return_val_if_fail (GEDIT_IS_VIEW (hack->view), FALSE);
+
+	if (!GTK_WIDGET_REALIZED (hack->view->text)) {
+		g_print ("not mapped, returning\n");
+		return TRUE;
+	}
+	
+	gtk_text_insert (GTK_TEXT (hack->view->text), NULL,
+			 NULL, NULL, hack->tmp_buf, strlen (hack->tmp_buf));
+
+	gedit_view_set_position (hack->view, 0);
+	
+	g_free (hack->tmp_buf);
+	g_free (hack);
+
+	return FALSE;
+}
+
+static void
+gedit_document_insert_text_when_mapped (Document *doc, const gchar * tmp_buf,
+					gint pos, gboolean something)
+{
+	HackyStruct *hack;
+
+	gedit_debug (DEBUG_FILE, "");
+
+	hack = g_new (HackyStruct, 1);
+	hack->doc = doc;
+	hack->view = g_list_nth_data (doc->views, 0);
+	hack->tmp_buf = g_strdup (tmp_buf);
+
+	gtk_idle_add ((GtkFunction) gedit_view_insert_if_mapped,
+		      hack);
+		
+
+}
+
+	
 
 
 /* TODO : add flash on all operations ....Chema*/
@@ -90,19 +134,18 @@ gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_open (Document *doc, gchar *fname)
+gedit_file_open (Document *doc, const gchar *fname)
 {
 	gchar *tmp_buf;
 	struct stat stats;
 	FILE *fp;
-	Document *currentdoc;
 	View *view;
 	
-	gedit_debug (DEBUG_FILE, "");
+	gint _debug;
 	
-	g_return_val_if_fail (fname != NULL, 1);
+	gedit_debug (DEBUG_FILE, "");
 
-	currentdoc = gedit_document_current();
+	g_return_val_if_fail (fname != NULL, 1);
 
 	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
@@ -122,7 +165,7 @@ gedit_file_open (Document *doc, gchar *fname)
 		g_free (errstr);
 		return 1;
 	}
-	
+
 	if ((tmp_buf = g_new0 (gchar, stats.st_size + 1)) == NULL)
 	{
 		gnome_app_error (gedit_window_active_app(), _("Could not allocate the required memory."));
@@ -138,34 +181,107 @@ gedit_file_open (Document *doc, gchar *fname)
 		return 1;
 	}
 
-	fread (tmp_buf, 1, stats.st_size, fp);
+	_debug = fread (tmp_buf, 1, stats.st_size, fp);
 	fclose (fp);
 
-	if (doc==NULL)
+	if (doc==NULL) {
 		doc = gedit_document_new ();
+		doc->filename = g_strdup (fname);
+		doc->untitled_number = 0;
+		gedit_document_insert_text_when_mapped (doc, tmp_buf, 0, FALSE);
+		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+	} else {
+		/* Vefify that doc->filenam == NULL ??? */
+		doc->filename = g_strdup (fname);
+		doc->untitled_number = 0;
+		gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
+		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 
-	doc->filename = g_strdup (fname);
-	doc->untitled_number = 0;
-
-	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
-	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+		/* Set the cursor position to the start */
+		view = g_list_nth_data (doc->views, 0);
+		g_return_val_if_fail (view!=NULL, 1);
+		gedit_view_set_position (view, 0);
+		g_free (tmp_buf);
+	}
 	
-	/* Set the cursor position to the start */
-	view = g_list_nth_data (doc->views, 0);
-	g_return_val_if_fail (view!=NULL, 1);
-	gedit_view_set_position (view, 0);
-
 	doc->changed = FALSE;
 	gedit_document_set_title (doc);
 	gedit_document_text_changed_signal_connect (doc);
 
-	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	gedit_recent_add (fname);
 	gedit_recent_update (gedit_window_active_app());
 
 	return 0;
+}
+
+
+/**
+ * gedit_file_save_as:
+ * @doc: 
+ * 
+ * creates the save as dialog and connects the signals to
+ * the button
+ **/
+static void
+gedit_file_save_as (Document *doc)
+{
+
+	gedit_debug (DEBUG_FILE, "");
+
+	if (doc == NULL)
+		doc = gedit_document_current();
+
+	if (doc == NULL)
+		return;
+			
+	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
+		return;
+
+	if (save_file_selector == NULL)
+	{
+		save_file_selector = gtk_file_selection_new (NULL);
+		
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(delete_event_cb),
+				   save_file_selector);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC(cancel_cb),
+				    save_file_selector);
+
+		/* If this save as was the result of a close all, and the user cancels the
+		   save, clear the flag */
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
+				   NULL);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
+				    NULL);
+
+		/*
+		g_print ("1. Doc->filename %s untitled #%i\n", doc->filename, doc->untitled_number);
+		*/
+		/* OK clicked */
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
+				    doc);
+
+	}
+
+	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
+
+	if (!GTK_WIDGET_VISIBLE (save_file_selector))
+	{
+		gtk_window_position (GTK_WINDOW (save_file_selector), GTK_WIN_POS_MOUSE);
+		gtk_widget_show(save_file_selector);
+	}
+	return;
 }
 
 /**
@@ -179,7 +295,7 @@ gedit_file_open (Document *doc, gchar *fname)
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_save (Document *doc, gchar *fname)
+gedit_file_save (Document *doc, const gchar *fname)
 {
 	FILE  *file_pointer;
 	gchar *buffer;
@@ -189,7 +305,7 @@ gedit_file_save (Document *doc, gchar *fname)
 
 	g_return_val_if_fail (doc!=NULL, 1);
 	
-	view  = VIEW ( g_list_nth_data(doc->views, 0) );
+	view  = GEDIT_VIEW ( g_list_nth_data(doc->views, 0) );
 	
 	g_return_val_if_fail (view!=NULL, 1);
 	
@@ -283,72 +399,6 @@ gedit_file_save (Document *doc, gchar *fname)
 }
 
 
-/**
- * gedit_file_save_as:
- * @doc: 
- * 
- * creates the save as dialog and connects the signals to
- * the button
- **/
-void
-gedit_file_save_as (Document *doc)
-{
-
-	gedit_debug (DEBUG_FILE, "");
-
-	if (doc == NULL)
-		doc = gedit_document_current();
-
-	if (doc == NULL)
-		return;
-			
-	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
-		return;
-
-	if (save_file_selector == NULL)
-	{
-		save_file_selector = gtk_file_selection_new (NULL);
-		
-		gtk_signal_connect(GTK_OBJECT(save_file_selector),
-				   "delete_event",
-				   GTK_SIGNAL_FUNC(delete_event_cb),
-				   save_file_selector);
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
-				    "clicked",
-				    GTK_SIGNAL_FUNC(cancel_cb),
-				    save_file_selector);
-
-		/* If this save as was the result of a close all, and the user cancels the
-		   save, clear the flag */
-		gtk_signal_connect(GTK_OBJECT(save_file_selector),
-				   "delete_event",
-				   GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
-				   NULL);
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
-				    "clicked",
-				    GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
-				    NULL);
-
-		/*
-		g_print ("1. Doc->filename %s untitled #%i\n", doc->filename, doc->untitled_number);
-		*/
-		/* OK clicked */
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
-				    "clicked",
-				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
-				    doc);
-
-	}
-
-	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
-
-	if (!GTK_WIDGET_VISIBLE (save_file_selector))
-	{
-		gtk_window_position (GTK_WINDOW (save_file_selector), GTK_WIN_POS_MOUSE);
-		gtk_widget_show(save_file_selector);
-	}
-	return;
-}
 
 /**
  * gedit_file_stdin:
@@ -778,7 +828,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 
 
 gint 
-gedit_file_create_popup (guchar *title)
+gedit_file_create_popup (const gchar *title)
 {
 	GtkWidget *msgbox;
 	Document *doc;
@@ -804,9 +854,10 @@ gedit_file_create_popup (guchar *title)
 		return TRUE;
 	case 1 : 
 		return FALSE;
+	default:
+		return FALSE;
 	}
 
-	g_assert_not_reached ();
 	return FALSE;
 }
 

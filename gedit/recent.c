@@ -28,6 +28,7 @@
 #include "file.h"
 #include "utils.h"
 #include "window.h"
+#include "recent.h"
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
@@ -36,11 +37,10 @@
        void gedit_recent_update (GnomeApp *app);
 static void gedit_recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gpointer data);
-       void gedit_recent_add (char *filename);
        void gedit_recent_remove (char *filename);
 
 static GList *	gedit_recent_history_get_list (void);
-gchar *		gedit_recent_history_update_list (gchar *filename);
+static gchar *	gedit_recent_history_update_list (const gchar *filename);
 void		gedit_recent_history_write_config (void);
 
 GList *gedit_recent_history_list = NULL;
@@ -95,8 +95,8 @@ gedit_recent_history_get_list (void)
  * 
  * Return value: 
  **/
-gchar *
-gedit_recent_history_update_list (gchar *filename)
+static gchar *
+gedit_recent_history_update_list (const gchar *filename)
 {
         gchar *name, *old_name = NULL;
         GList *l = NULL;
@@ -288,7 +288,7 @@ gedit_recent_update (GnomeApp *app)
  * Record a file in GNOME's recent documents database 
  **/
 void
-gedit_recent_add (char *file_name)
+gedit_recent_add (const char *file_name)
 {
 	gchar *del_name;
 

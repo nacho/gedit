@@ -82,14 +82,14 @@ guchar*	gedit_document_get_buffer (Document * doc);
 guint	gedit_document_get_buffer_length (Document * doc);
 
 Document * gedit_document_new (void);
-Document * gedit_document_new_with_title (gchar *title);
-gint       gedit_document_new_with_file (gchar *file_name);
+Document * gedit_document_new_with_title (const gchar *title);
+gint       gedit_document_new_with_file (const gchar *file_name);
 Document * gedit_document_current (void);
 
 GtkType gedit_document_get_type (void);
 
 void gedit_mdi_init (void);
-void gedit_document_load ( GList *file_list);
+gboolean gedit_document_load ( GList *file_list);
 void gedit_document_set_title (Document *doc);
 void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
 void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);

@@ -24,9 +24,9 @@
 
 #include "document.h"
 
-#define VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), View)
-#define VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), ViewClass)
-#define IS_VIEW(obj)		GTK_CHECK_TYPE (obj, gedit_view_get_type ())
+#define GEDIT_VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), View)
+#define GEDIT_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), ViewClass)
+#define GEDIT_IS_VIEW(obj)	GTK_CHECK_TYPE (obj, gedit_view_get_type ())
 
 typedef struct _View	  View;
 typedef struct _ViewClass ViewClass;
