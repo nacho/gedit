@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-04-13 01:19+0200\n"
-"PO-Revision-Date: 2002-04-13 01:22+0200\n"
+"POT-Creation-Date: 2002-04-28 22:09+0200\n"
+"PO-Revision-Date: 2002-05-07 09:04+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -71,10 +71,13 @@ msgid ""
 "document, select the character and click the \"Insert Char\" \n"
 "button or double click the character in the table."
 msgstr ""
+"Jeśli jakieś znaki mają zostać wstawione do aktywnego dokumentu,\n"
+"należy wybrać znak a następnie kliknąć przycisk \"Wstaw znak\"\n"
+"lub też podwójnie kliknąć znak z tabeli."
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid "Insert char"
-msgstr ""
+msgstr "Wstaw znak"
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid "gedit: ASCII table"
@@ -110,7 +113,7 @@ msgstr "Tworzy opis różnic (diff) pomiędzy dwoma dokumentami lub plikami"
 
 #: plugins/diff/diff.c:1
 msgid "Compare files"
-msgstr ""
+msgstr "Porównanie plików"
 
 #. Create the dialog
 #: plugins/diff/diff.c:1
@@ -405,12 +408,20 @@ msgid "Tag list plugin"
 msgstr "Wtyczka listy znaczników"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:1
-msgid "Select the group of tab you want to use."
+msgid "Select the group of tab you want to use"
 msgstr ""
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:1
-msgid "Double-click on a tag to insert it in the current document."
-msgstr "Kliknij dwukrotnie znacznik, aby go wstawić do dokumentu."
+msgid "Tag Groups Combo"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:1
+msgid "Tags Name List"
+msgstr "Lista nazw znaczników"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:1
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Kliknij dwukrotnie znacznik, aby wstawić go do dokumentu."
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:1
 msgid "Tags"
@@ -420,6 +431,9 @@ msgstr "Znaczniki"
 msgid "Tag _List"
 msgstr "_Lista znaczników"
 
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
 #: plugins/taglist/gedit-taglist-plugin.c:1
 msgid "Show the tag list window"
 msgstr "Wyświetla okno z listą znaczników"
@@ -509,6 +523,8 @@ msgstr "Menedżer wtyczek"
 #: src/dialogs/gedit-dialog-plugin-manager.c:1
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
+"Niepoprawny plik glade związany z menedżerem wtyczek -\n"
+" - nie zostały znalezione wszystkie widgety.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:1
 msgid "Could not create the Plugin Manager dialog"
@@ -544,6 +560,10 @@ msgstr "Nie odnaleziono tekstu \"%s\"."
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Znaleziono i zmieniono %d wystąpień."
+
+#: src/dialogs/gedit-dialog-uri.c:1 src/dialogs/uri.glade2.h:1
+msgid "Open from URI"
+msgstr "Otwórz z URI"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:1
 msgid "Set program location ..."
@@ -639,7 +659,7 @@ msgstr "Interfejs użytkownika"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Cat_egories:"
-msgstr ""
+msgstr "Kat_egorie:"
 
 #: src/dialogs/gedit-preferences-dialog.c:1 src/gedit-ui.xml.h:1
 msgid "Preferences"
@@ -648,6 +668,40 @@ msgstr "Preferencje"
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Categories"
 msgstr "Kategorie"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to select the font to be used by the editor"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to configure text color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to configure background color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid ""
+"Push this button to configure color in which selected text should appear"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid ""
+"Push this button to configure color in which selected text should be marked"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to select the font to be used to print the body"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to select the font to be used to print the headers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -943,6 +997,10 @@ msgid "minutes"
 msgstr ""
 
 #: src/dialogs/gnome-print-font-dialog.c:1
+msgid "_Insert a new preview phrase."
+msgstr ""
+
+#: src/dialogs/gnome-print-font-dialog.c:1
 msgid "Modify preview phrase..."
 msgstr ""
 
@@ -1045,6 +1103,9 @@ msgid ""
 "gedit capabilities. From here, you can choose which plugins you want to have "
 "loaded."
 msgstr ""
+"To jest Menedżer Wtyczek. Wtyczki to dodatkowe elementy oprogramowania "
+"rozszerzające funkcjonalność gedita. Z tego miejsca można wybrać, które z "
+"wtyczkek mają być wczytywane."
 
 #: src/dialogs/plugin-manager.glade2.h:1
 msgid "_Description"
@@ -1090,10 +1151,6 @@ msgstr "_Wyszukiwany tekst: "
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "Wprowadź lokalizację (URI) pliku, który chcesz otworzyć:"
 
-#: src/dialogs/uri.glade2.h:1
-msgid "Open from URI"
-msgstr "Otwórz z URI"
-
 #: src/gedit-commands.c:1
 msgid "Not yet implemented."
 msgstr "Jeszcze nie zaimplementowane."
@@ -1106,6 +1163,10 @@ msgstr "Nie odnaleziono tekstu \"%s\"."
 #: src/gedit-commands.c:1
 msgid "Impossible to update gedit settings."
 msgstr "Nie można zaktualizować ustawień gedita."
+
+#: src/gedit-commands.c:1
+msgid "translator_credits"
+msgstr ""
 
 #: src/gedit-commands.c:1
 msgid "gedit"
@@ -1126,7 +1187,7 @@ msgstr "BezNazwy"
 
 #: src/gedit-document.c:1 src/gedit-document.c:1
 msgid "Invalid UTF-8 data"
-msgstr ""
+msgstr "Niepoprawne dane UTF-8"
 
 #: src/gedit-document.c:1
 #, c-format
@@ -1138,26 +1199,51 @@ msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 
 #: src/gedit-document.c:1
-msgid "Could not create the backup copy of the file."
+msgid "Invalid filename."
+msgstr "Niepoprawna nazwa pliku"
+
+#: src/gedit-document.c:1
+#,, c-format
+msgid "Could not open backup file %s."
+msgstr "Nie można otworzyć pliku zapasowego \"%s\"."
+
+#: src/gedit-document.c:1
+#, c-format
+msgid "Could not open file %s."
+msgstr "Nie można otworzyć pliku \"%s\"."
+
+#: src/gedit-document.c:1 src/gedit-document.c:1
+msgid "Could not create backup file."
 msgstr "Nie można stworzyć kopii zapasowej pliku."
 
 #: src/gedit-document.c:1
-msgid ""
-"Make sure that the path you provided exists, and that you have the "
-"appropriate write permissions."
-msgstr ""
-"Upewnij się, że określona ścieżka istnieje, oraz że masz odpowiednie prawa "
-"do zapisu."
+msgid "Could not write backup file."
+msgstr "Nie można zapisać kopii zapasowej pliku."
+
+#: src/gedit-document.c:1
+msgid "Error when creating backup file."
+msgstr "Błąd przy tworzeniu kopii zapasowej pliku."
+
+#: src/gedit-document.c:1 src/gedit-document.c:1
+#: src/gedit-document.c:1
+msgid "Could not save the file."
+msgstr "Nie można zapisać pliku."
 
 #: src/gedit-document.c:1
 msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
 msgstr ""
+"Brak miejsca na dysku, aby zapisać plik.\n"
+"Zwolnij trochę miejsca i spróbuj ponownie."
 
 #: src/gedit-document.c:1
-msgid "The file is too big."
-msgstr "Plik jest zbyt duży."
+msgid ""
+"The file is too big.\n"
+"Please try saving a smaller file."
+msgstr ""
+"Plik jest zbyt duży.\n"
+"Spróbuj zapisać mniejszy plik."
 
 #: src/gedit-document.c:1
 msgid "It is not possible to revert an Untitled document"
@@ -1205,7 +1291,7 @@ msgstr "Plik \"%s\" został zapisany."
 
 #: src/gedit-file.c:1
 msgid "Save as ..."
-msgstr ""
+msgstr "Zapisz jako ..."
 
 #: src/gedit-file.c:1
 #, c-format
@@ -1456,7 +1542,7 @@ msgstr ""
 
 #: src/gedit-ui.xml.h:1
 msgid "Find Again"
-msgstr ""
+msgstr "Znajdź ponownie"
 
 #: src/gedit-ui.xml.h:1
 msgid "Find Ne_xt"
@@ -1484,7 +1570,7 @@ msgstr "Nowy"
 
 #: src/gedit-ui.xml.h:1
 msgid "Only show icons in the toolbar"
-msgstr ""
+msgstr "Wyświetla na pasku narzędziowym tylko ikony"
 
 #: src/gedit-ui.xml.h:1
 msgid "Open"
@@ -1517,6 +1603,14 @@ msgstr "Wklej"
 #: src/gedit-ui.xml.h:1
 msgid "Paste the clipboard"
 msgstr "Wkleja zawartość schowka"
+
+#: src/gedit-ui.xml.h:1
+msgid "Plugin _Manager"
+msgstr "_Menedżer wtyczek"
+
+#: src/gedit-ui.xml.h:1
+msgid "Plugin _Manager..."
+msgstr "_Menedżer wtyczek..."
 
 #: src/gedit-ui.xml.h:1
 msgid "Pr_eferences..."
@@ -1552,7 +1646,7 @@ msgstr "Kończy działanie programu"
 
 #: src/gedit-ui.xml.h:1
 msgid "Recent _Files"
-msgstr ""
+msgstr "Ostatni_e pliki"
 
 #: src/gedit-ui.xml.h:1
 msgid "Redo"
@@ -1628,7 +1722,7 @@ msgstr "Ustawia styl paska narzędziowego, korzystając z ustawień systemowych.
 
 #: src/gedit-ui.xml.h:1
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "Zmienia ustawienia drukowania dla bieżącej drukarki"
 
 #: src/gedit-ui.xml.h:1
 msgid "Show _Cursor Position"
@@ -1723,14 +1817,6 @@ msgid "_Paste"
 msgstr "Wk_lej"
 
 #: src/gedit-ui.xml.h:1
-msgid "_Plugin Manager"
-msgstr "_Menedżer wtyczek"
-
-#: src/gedit-ui.xml.h:1
-msgid "_Plugin Manager..."
-msgstr "_Menedżer wtyczek..."
-
-#: src/gedit-ui.xml.h:1
 msgid "_Print..."
 msgstr "Wy_drukuj..."
 
@@ -1781,6 +1867,9 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nie można odnaleźć pliku \"%s\".\n"
+"\n"
+"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1804,6 +1893,8 @@ msgstr "Nie można otworzyć pliku \"%s\""
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
+"Nie można otworzyć pliku \"%s\", ponieważ zawiera on dane w niepoprawnym "
+"formacie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1817,6 +1908,9 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" nie jest poprawnym położeniem.\n"
+"\n"
+"Upewnij się, że wprowadzone położenie jest poprawne i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1852,6 +1946,8 @@ msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Brak pamięci na otwarcie pliku \"%s\". Zakończ część działających aplikacji "
+"i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1927,6 +2023,7 @@ msgstr ""
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
+"Nie można przywrócić pliku \"%s\", ponieważ zawiera on uszkodzone dane."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1954,7 +2051,7 @@ msgstr "Nie można przywrócić pliku \"%s\" ponieważ jest on zbyt duży."
 #: src/gedit-utils.c:1
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Nie można przywrócić pliku \"%s\" z powodu braku dostępu."
 
 #: src/gedit-utils.c:1
 #, c-format
@@ -1963,6 +2060,9 @@ msgid ""
 "\n"
 "Please, close some open file and try again."
 msgstr ""
+"Nie można przywrócić pliku \"%s\" ponieważ otwartych jest za dużo plików.\n"
+"\n"
+"Zamknij kilka z nich i spróbuj ponownie."
 
 #: src/gedit-utils.c:1
 #, c-format
