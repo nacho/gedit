@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.pt_BR\n"
-"POT-Creation-Date: 2003-08-26 23:48+0200\n"
-"PO-Revision-Date: 2003-05-29 15:12+1000\n"
-"Last-Translator: David Barzilay <barzilay@redhat.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-07 20:01+0200\n"
+"PO-Revision-Date: 2003-09-08 00:15-0300\n"
+"Last-Translator: Gustavo Noronha Silva <kov@debian.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "BR <debian-l10n-portuguese@lists.debian.org>\n"
-"X-Generator: KBabel 1.0\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -58,9 +58,8 @@ msgstr ""
 "efeito se a opção \"Usar Fonte Padrão\" estiver desligada."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Auto Detected Encodings"
-msgstr "Auto-detectado"
+msgstr "Codificações Auto-detectadas"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save"
@@ -119,9 +118,8 @@ msgid "Encoding for Saving"
 msgstr "Codificação ao Salvar"
 
 #: data/gedit.schemas.in.h:15
-#, fuzzy
 msgid "Encodings shown in menu"
-msgstr "_Codificações exibidas no menu:"
+msgstr "Codificações exibidas no menu"
 
 #: data/gedit.schemas.in.h:16
 msgid ""
@@ -177,7 +175,7 @@ msgstr "Modo de Quebra de Linhas"
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
-msgstr ""
+msgstr "Lista de codificações exibidas no menu de Codificação de Caracteres no seletor de arquivos abrir/salvar. Somente codificações reconhecidas serão usadas."
 
 #: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
@@ -206,7 +204,7 @@ msgstr "Imprimir Números de Linhas"
 
 #: data/gedit.schemas.in.h:30
 msgid "Print Syntax Highlighting"
-msgstr ""
+msgstr "Imprimir Destaque de Sintaxe"
 
 #: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
@@ -221,14 +219,11 @@ msgid "Selection Color"
 msgstr "Cor da Seleção"
 
 #: data/gedit.schemas.in.h:34
-#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
-msgstr ""
-"Lista de codificações usadas pelo gedit para ler arquivos que não estejam "
-"codificados em UTF-8 ou na codificação da localização atual."
+msgstr "Lista ordenada de codificações usadas pelo gedit auto-detectar a codificação de um arquivo. \"CURRENT\" é a codificação do locale atual. Só codificações reconhecidas são usadas."
 
 #: data/gedit.schemas.in.h:35
 msgid ""
@@ -409,10 +404,8 @@ msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Se o gedit deve inserir espaços ao invés de tabs."
 
 #: data/gedit.schemas.in.h:58
-#, fuzzy
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr ""
-"Se o gedit deve incluir um cabeçalho de documento ao imprimir documentos."
+msgstr "Se o gedit deve imprimir o destaque de sintaxe ao imprimir documentos."
 
 #: data/gedit.schemas.in.h:59
 msgid ""
@@ -531,34 +524,26 @@ msgstr "_Codificações exibidas no menu:"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:490
 msgid "Body font picker"
-msgstr ""
+msgstr "Seletor de fonte para o corpo"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:491
-#, fuzzy
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
-msgstr ""
-"Pressione esse botão para selecionar a fonte a ser usada para imprimir o "
-"corpo"
+msgstr "Pressione esse botão para selecionar a fonte a ser usada para imprimir o corpo do documento"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:492
-#, fuzzy
 msgid "Page headers font picker"
-msgstr "C_abeçalhos da _página:"
+msgstr "Seletor de fontes dos cabeçalhos de página"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:493
-#, fuzzy
 msgid ""
 "Push this button to select the font to be used to print the page headers"
-msgstr ""
-"Pressione esse botão para selecionar a fonte a ser usada para imprimir os "
-"cabeçalhos"
+msgstr "Pressione esse botão para selecionar a fonte a ser usada para imprimir os cabeçalhos de página"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:494
-#, fuzzy
 msgid "Line numbers font picker"
-msgstr "Números de Linhas"
+msgstr "Seletor de fonte dos números de linhas"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
 msgid "Push this button to select the font to be used to print line numbers"
@@ -568,7 +553,7 @@ msgstr ""
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 msgid "Could not find '"
-msgstr ""
+msgstr "Não foi possível encontrar '"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 #: gedit/dialogs/gedit-page-setup-dialog.c:629
@@ -577,20 +562,21 @@ msgid ""
 "\n"
 "Reinstall gedit."
 msgstr ""
+"page-setup-dialog.glade2.'\n"
+"\n"
+"Reinstale o gedit."
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:628
-#, fuzzy
 msgid "Could not find the required widgets inside '"
-msgstr "Não foi possível encontrar os widgets necessários dentro de %s."
+msgstr "Não foi possível encontrar os widgets necessários dentro de '"
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
 msgstr "Plugin"
 
 #: gedit/dialogs/gedit-plugin-manager.c:54
-#, fuzzy
 msgid "Enabled"
-msgstr "Falhou"
+msgstr "Habilitado"
 
 #: gedit/dialogs/gedit-plugin-manager.c:507
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
@@ -961,13 +947,12 @@ msgid "_Line number:"
 msgstr "_Linha número:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:2
-#, fuzzy
 msgid "<b>Line Numbers</b>"
-msgstr "Números de Linhas"
+msgstr "<b>Números de Linhas</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
-msgstr ""
+msgstr "<b>Quebra de Texto</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:6
 msgid "Fonts"
@@ -975,39 +960,35 @@ msgstr "Fontes"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:8
 msgid "He_aders and footers:"
-msgstr ""
+msgstr "C_abeçalhos e rodapés:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:9
-#, fuzzy
 msgid "Page Setup"
-msgstr "Configurar Impressão"
+msgstr "Configuração de Página"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:10
-#, fuzzy
 msgid "Print _line numbers"
-msgstr "Imprimir Números de Linhas"
+msgstr "Imprimir números de _linhas"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:11
 msgid "Print s_yntax highlighting"
-msgstr ""
+msgstr "Imprimir destaque de s_intaxe"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:12
 msgid "_Body:"
 msgstr "_Corpo:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
-#, fuzzy
 msgid "_Line numbers:"
-msgstr "_Linha número:"
+msgstr "Números de _linha:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
-#, fuzzy
 msgid "_Number every"
-msgstr "Imprimir _número de linhas a cada"
+msgstr "_Numerar cada"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:15
 msgid "_Print page headers"
@@ -1018,19 +999,16 @@ msgid "_Restore Default Fonts"
 msgstr "_Restaurar fontes padrão"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
-#, fuzzy
 msgid "lines"
-msgstr "Linhas"
+msgstr "linhas"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
 msgid "About selected plugin"
-msgstr "Configurar o plugin selecionado"
+msgstr "Sobre o plugin selecionado"
 
 #: gedit/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "C_onfigure Plugin"
-msgstr "C_onfigurar plugin"
+msgstr "C_onfigurar Plugin"
 
 #: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "Configure the selected plugin"
@@ -1038,7 +1016,7 @@ msgstr "Configurar o plugin selecionado"
 
 #: gedit/dialogs/plugin-manager.glade2.h:4
 msgid "button1"
-msgstr ""
+msgstr "botão1"
 
 #: gedit/dialogs/plugin-manager.glade2.h:5
 msgid "dialog1"
@@ -1080,7 +1058,7 @@ msgstr "_Substituir por: "
 
 #: gedit/dialogs/replace.glade2.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "Procurar para _trás"
 
 #: gedit/dialogs/replace.glade2.h:8
 msgid "_Match case"
@@ -1095,9 +1073,8 @@ msgid "_Wrap around"
 msgstr "A_justar aproximadamente"
 
 #: gedit/dialogs/uri.glade2.h:2
-#, fuzzy
 msgid "Ch_aracter coding:"
-msgstr "Codificação de Ca_racteres:"
+msgstr "Codificação de ca_racteres:"
 
 #: gedit/dialogs/uri.glade2.h:3
 msgid "Enter the _location (URI) of the file you would like to open:"
@@ -1571,17 +1548,17 @@ msgstr "Linhas"
 
 #: gedit/gedit-print.c:331
 msgid "Preparing pages..."
-msgstr ""
+msgstr "Preparando páginas..."
 
 #: gedit/gedit-print.c:358
 #, c-format
 msgid "Rendering page %d of %d..."
-msgstr ""
+msgstr "Renderizando página %d de %d..."
 
 #: gedit/gedit-print.c:360
 #, c-format
 msgid "Printing page %d of %d..."
-msgstr ""
+msgstr "Imprimindo página %d de %d..."
 
 #: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
@@ -1594,7 +1571,7 @@ msgstr "Arquivo: %s"
 
 #: gedit/gedit-print.c:556
 msgid "Page %N of %Q"
-msgstr ""
+msgstr "Página %N de %Q"
 
 #: gedit/gedit-ui.xml.h:1
 msgid "About this application"
@@ -1666,12 +1643,11 @@ msgstr "Encontrar Pró_xima"
 
 #: gedit/gedit-ui.xml.h:20
 msgid "Find Pre_vious"
-msgstr ""
+msgstr "Procurar _Anterior"
 
 #: gedit/gedit-ui.xml.h:21
-#, fuzzy
 msgid "Find Previous"
-msgstr "Visualizar Impressão"
+msgstr "Econtrar Anterior"
 
 #: gedit/gedit-ui.xml.h:22
 msgid "Go to _Line..."
@@ -1718,9 +1694,8 @@ msgid "Open the gedit manual"
 msgstr "Abrir o manual do gedit"
 
 #: gedit/gedit-ui.xml.h:33
-#, fuzzy
 msgid "Page Set_up"
-msgstr "Configurar Impressão"
+msgstr "Config_uração de Página"
 
 #: gedit/gedit-ui.xml.h:34
 msgid "Paste"
@@ -1799,9 +1774,8 @@ msgid "Search again for the same string"
 msgstr "Procurar novamente pela mesma seqüência de texto"
 
 #: gedit/gedit-ui.xml.h:57
-#, fuzzy
 msgid "Search backwards for the same string"
-msgstr "Procurar novamente pela mesma seqüência de texto"
+msgstr "Procurar, para trás, novamente pela mesma seqüência de texto"
 
 #: gedit/gedit-ui.xml.h:58
 msgid "Search for a string"
@@ -1827,23 +1801,20 @@ msgstr ""
 "Área de Trabalho e Barra de Preferências"
 
 #: gedit/gedit-ui.xml.h:63
-#, fuzzy
 msgid "Setup the page settings"
-msgstr "Definir as configurações de página para sua impressora atual"
+msgstr "Definir as configurações de página"
 
 #: gedit/gedit-ui.xml.h:64
 msgid "Show only icons in the toolbar"
 msgstr "Exibir apenas ícones na barra de ferramentas"
 
 #: gedit/gedit-ui.xml.h:65
-#, fuzzy
 msgid "Show text below every icon in the toolbar"
-msgstr "Exibir apenas ícones na barra de ferramentas"
+msgstr "Exibir texto abaixo de todo ícone da barra de ferramentas"
 
 #: gedit/gedit-ui.xml.h:66
-#, fuzzy
 msgid "Show text only beside important icons in the toolbar"
-msgstr "Exibir apenas ícones na barra de ferramentas"
+msgstr "Exibir texto apenas ao lado de ícones importantes na barra de ferramentas"
 
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
@@ -2129,14 +2100,13 @@ msgstr ""
 "novamente."
 
 #: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
-"Não foi possível abrir o arquivo \"%s\" porque ele contém dados UTF-8 "
-"inválidos.\n"
+"Não foi possível abrir o arquivo \"%s\" porque ele contém dados inválidos.\n"
 "\n"
 "Provavelmente, você está tentando abrir um arquivo binário."
 
@@ -2150,9 +2120,12 @@ msgid ""
 "selecting a character coding in the 'Open File...' (or 'Open Location') "
 "dialog."
 msgstr ""
+"Não foi possível abrir o arquivo \"%s\" porque o gedit não foi capaz de detectar automaticamente a codificação de caracteres.\n"
+"\n"
+"Por favor, verifique que você não está tentando abrir um arquivo binário e tente novamente selecionando uma codificação de caractere no diálogo 'Abrir Arquivo...' (ou 'Abrir Localização')"
 
 #: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
 "\n"
@@ -2160,11 +2133,9 @@ msgid ""
 "selected the right character coding in the 'Open File...' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Não foi possível abrir o arquivo \"%s\" porque o host \"%s\" não pôde ser "
-"encontrado.\n"
+"Não foi possível abrir o arquivo \"%s\" usando a codificação de caracteres %s.\n"
 "\n"
-"Por favor verifique que você digitou a localização corretamente e que suas "
-"configurações de proxy estão corretas e tente novamente"
+"Por favor verifique que você não está tentando abrir um arquivo binário e que você selecionou a codificação de caracteres correta no diálogo 'Abrir Arquivo...' (ou 'Abrir Localização') e tente novamente."
 
 #: gedit/gedit-utils.c:662
 #, c-format
@@ -2172,12 +2143,15 @@ msgid "Could not open the file \"%s\"."
 msgstr "Impossível abrir o arquivo \"%s\"."
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
 "%s"
-msgstr "Impossível abrir o arquivo \"%s\"."
+msgstr ""
+"Não foi possível abrir o arquivo \"%s\".\n"
+"\n"
+"%s"
 
 #: gedit/gedit-utils.c:718
 #, c-format
@@ -2510,9 +2484,8 @@ msgid "0"
 msgstr "0"
 
 #: plugins/docinfo/docinfo.glade2.h:3
-#, fuzzy
 msgid "<span weight=\"bold\">File Name</span>"
-msgstr "<span weight=\"bold\">Cores</span>"
+msgstr "<span weight=\"bold\">Nome do Arquivo</span>"
 
 #: plugins/docinfo/docinfo.glade2.h:4
 msgid "Bytes"
@@ -2675,9 +2648,8 @@ msgid "Sort the current document or selection."
 msgstr "Ordenar o documento ou trecho selecionado."
 
 #: plugins/sort/sort.gedit-plugin.desktop.in.h:1 plugins/sort/sort.glade2.h:3
-#, fuzzy
 msgid "Sort"
-msgstr "_Ordenar"
+msgstr "Ordenar"
 
 #: plugins/sort/sort.gedit-plugin.desktop.in.h:2
 msgid "Sorts a document or selected text."
