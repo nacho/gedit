@@ -382,6 +382,8 @@ gedit_recent_monitor_cb (GnomeVFSMonitorHandle *handle,
 {
 	GeditRecent *recent= GEDIT_RECENT (data);
 
+	gedit_debug (DEBUG_RECENT, "Something happened to %s", monitor_uri);
+
 	g_return_if_fail (recent);
 
 	/* if a file was deleted, we just remove it from our list */
@@ -408,6 +410,9 @@ gedit_recent_monitor_uri (GeditRecent *recent, const gchar *uri)
 
 	handle = g_hash_table_lookup (recent->monitors, uri);
 	if (handle == NULL) {
+
+		gedit_debug (DEBUG_RECENT, "Monitoring: %s\n", uri);
+		
 		/* this is a new uri, so we need to monitor it */
 		result = gnome_vfs_monitor_add (&handle,
 				       g_strdup (uri),
@@ -552,6 +557,8 @@ gedit_recent_add (GeditRecent * recent, const gchar * uri)
 	g_return_val_if_fail (recent->gconf_client, FALSE);
 	g_return_val_if_fail (uri, FALSE);
 
+	gedit_debug (DEBUG_RECENT, "Adding: %s", uri);
+
 	gconf_key = gedit_recent_gconf_key (recent);
 
 
@@ -606,13 +613,16 @@ gedit_recent_delete (GeditRecent * recent, const gchar * uri)
 	GSList *uri_lst;
 	GSList *new_uri_lst;
 	gboolean ret = FALSE;
-	gchar *gconf_key = gedit_recent_gconf_key (recent);
+	gchar *gconf_key;
+
+	gedit_debug (DEBUG_RECENT, "Deleting: %s", uri);
 
 	g_return_val_if_fail (recent, FALSE);
 	g_return_val_if_fail (GEDIT_IS_RECENT (recent), FALSE);
 	g_return_val_if_fail (recent->gconf_client, FALSE);
 	g_return_val_if_fail (uri, FALSE);
 
+	gconf_key = gedit_recent_gconf_key (recent);
 	uri_lst = gconf_client_get_list (recent->gconf_client,
 				       gconf_key,
 				       GCONF_VALUE_STRING, NULL);
@@ -816,7 +826,9 @@ gedit_recent_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 	g_return_if_fail (md->recent);
 	g_return_if_fail (GEDIT_IS_RECENT (md->recent));
 
+	/* rethinking this....leave it up to the app?
 	gedit_recent_add (md->recent, md->uri);
+	*/
 	
 	g_signal_emit_by_name (G_OBJECT(md->recent),
 			      "activate",
