@@ -89,8 +89,8 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	}
 
 	gedit_document_begin_user_action (doc);
-	
-	gedit_document_insert_text_at_cursor (doc, user_name_utf8, -1);
+
+	gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (doc), user_name_utf8, -1);
 
 	gedit_document_end_user_action (doc);
 
