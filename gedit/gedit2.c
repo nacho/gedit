@@ -291,7 +291,7 @@ main (int argc, char **argv)
 			    LIBGNOMEUI_MODULE, argc, argv,
 			    GNOME_PARAM_POPT_TABLE, options,			    
 			    GNOME_PARAM_HUMAN_READABLE_NAME,
-		            _("The GNOME text editor"),
+		            _("Text Editor"),
 			    GNOME_PARAM_APP_DATADIR, DATADIR,
 			    NULL);
 

@@ -132,3 +132,8 @@ EXTRA_DIST = 				\
 	$(IDL_FILE)
 
 CLEANFILES = $(BUILT_SOURCES) $(IDL_SOURCES)
+
+install-exec-local:
+	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
+	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
+
