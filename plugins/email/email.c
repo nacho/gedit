@@ -33,6 +33,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-file-entry.h>
