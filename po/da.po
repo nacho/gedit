@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
 "POT-Creation-Date: 2000-06-15 11:24+0200\n"
-"PO-Revision-Date: 2000-06-29 03:04+02:00\n"
+"PO-Revision-Date: 2000-06-30 03:04+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Dansk/Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -99,8 +99,12 @@ msgid "Diff"
 msgstr "Diff"
 
 #: plugins/diff/diff.c:422
-msgid "diff plugin"
-msgstr "Diff indstik"
+msgid ""
+"Makes a diff file from 2 documents or files on disk\n"
+"For more info on diff, type \"man diff\" in a shell prompt\n"
+msgstr ""
+"Laver en 'diff' på 2 dokumenter eller filer på disk\n"
+"For mere information om 'diff', skriv 'man diff' i en kommandoskal\n"
 
 #: plugins/email/email.c:60
 #, c-format
@@ -172,11 +176,11 @@ msgstr "Hallo verden"
 msgid "Sample 'hello world' plugin."
 msgstr "'Hallo verden' eksempelindstik."
 
-#: plugins/shell_output/shell_output.c:175
+#: plugins/shell_output/shell_output.c:177
 msgid "Shell Output"
 msgstr "Uddata fra skallen"
 
-#: plugins/shell_output/shell_output.c:176
+#: plugins/shell_output/shell_output.c:178
 msgid "Insert the shell output in the document"
 msgstr "Indsæt uddata fra skallen i dokumentet"
 
@@ -219,7 +223,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit er en lille og hurtig teksteditor til Gnome"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:576
+#: src/dialogs/dialog-prefs.c:559
 msgid "gedit: Preferences"
 msgstr "gedit: Brugervalg"
 
@@ -461,11 +465,11 @@ msgstr "(ændret)"
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
-#: src/document.c:691 src/document.c:731
+#: src/document.c:692 src/document.c:732
 msgid "This file does not end with a valid extension\n"
 msgstr "Denne fil har ikke gyldig filtype\n"
 
-#: src/document.c:739
+#: src/document.c:740
 #, c-format
 msgid "The file %s was not found."
 msgstr "Filen %s blev ikke fundet."
@@ -688,7 +692,7 @@ msgstr "_Fjern visning"
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/menus.c:194 src/plugin.c:82 src/plugin.c:372
+#: src/menus.c:194 src/plugin.c:82 src/plugin.c:377
 msgid "_Plugins"
 msgstr "_Indstik"
 
@@ -843,20 +847,20 @@ msgstr ""
 "%sDu vil ikke kunne bruge %s indstikket uden %s.\n"
 "Ønsker du at angive en ny placering for %s?"
 
-#: src/plugin.c:313
+#: src/plugin.c:310
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Fejl, kunne ikke åbne modulfil, %s"
 
-#: src/plugin.c:323
+#: src/plugin.c:320
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Fejl, indstik indeholder ikke init_plugin-funktion."
 
-#: src/plugin.c:332
+#: src/plugin.c:330
 msgid "Error, init_plugin returned an error"
 msgstr "Fejl, init_plugin returnerede fejl"
 
-#: src/plugin.c:362
+#: src/plugin.c:367
 msgid "Error, plugin is still in use"
 msgstr "Fejl, indstik er stadig i brug"
 
@@ -977,6 +981,6 @@ msgstr "Vis aflusingsbeskeder for nylig brugte filer."
 msgid "Turn on all debugging messages."
 msgstr "Vis alle aflusingsbeskeder."
 
-#: src/view.c:897
+#: src/view.c:903
 msgid "You can't remove the last view of a document."
 msgstr "Du kan ikke fjerne forrige visning af et dokument."
