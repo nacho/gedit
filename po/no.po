@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-10-15 21:56+0200\n"
-"PO-Revision-Date: 2002-10-15 22:12+0200\n"
+"POT-Creation-Date: 2002-11-15 23:45+0100\n"
+"PO-Revision-Date: 2002-11-15 23:50+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -266,10 +266,12 @@ msgid "Status Bar is Visible"
 msgstr "Statuslinjen er synlig"
 
 #: data/gedit.schemas.in.h:42
+#, fuzzy
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
-"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
+"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
@@ -425,55 +427,41 @@ msgstr "_ASCII-tabell"
 msgid "Pop-up a dialog containing an ASCII Table"
 msgstr "Vis en dialog som inneholder en ASCII-tabell."
 
-#: plugins/ASCII/ascii.c:336
+#: plugins/ASCII/ascii.c:303
 msgid "Char"
 msgstr "Tegn"
 
-#: plugins/ASCII/ascii.c:343
+#: plugins/ASCII/ascii.c:310
 msgid "Dec#"
 msgstr "Dec#"
 
-#: plugins/ASCII/ascii.c:350
+#: plugins/ASCII/ascii.c:317
 msgid "Hex#"
 msgstr "Hex#"
 
-#: plugins/ASCII/ascii.c:357
+#: plugins/ASCII/ascii.c:324
 msgid "Name"
 msgstr "Navn"
 
-#: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
-msgid "ASCII table"
+#: plugins/ASCII/ascii.c:369
+msgid "ASCII Table"
 msgstr "ASCII-tabell"
 
-#: plugins/ASCII/ascii.c:415
+#: plugins/ASCII/ascii.c:382 plugins/ASCII/asciitable.glade2.h:2
 msgid "_Insert char"
 msgstr "Sett _inn tegn"
 
-#: plugins/ASCII/ascii.c:524
+#: plugins/ASCII/ascii.c:490 plugins/ASCII/asciitable.glade2.h:1
+msgid "ASCII table"
+msgstr "ASCII-tabell"
+
+#: plugins/ASCII/ascii.c:491
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 msgstr "Dette tillegget viser en pop-up dialog som inneholder en ASCII-tabell."
 
-#: plugins/ASCII/ascii.c:526
+#: plugins/ASCII/ascii.c:493
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
 msgstr "Opphavsrett © 2001-2002 Paolo Maggi"
-
-#: plugins/ASCII/asciitable.glade2.h:1
-msgid ""
-"If you wish to insert any of the characters in to the active \n"
-"document, select the character and click the \"Insert Char\" \n"
-"button or double click the character in the table."
-msgstr ""
-"Hvis du ønsker å sette inn noen av tegnene i det aktive\n"
-"dokumentet velger du tegnet og klikker «Sett inn tegn»-\n"
-"knappen eller dobbeltklikker på tegnet i tabellen."
-
-#: plugins/ASCII/asciitable.glade2.h:4
-msgid "Insert char"
-msgstr "Sett inn tegn"
-
-#: plugins/ASCII/asciitable.glade2.h:5
-msgid "gedit: ASCII table"
-msgstr "gedit: ASCII-tabell"
 
 #. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:49
@@ -498,33 +486,37 @@ msgstr ""
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Opphavsrett © 2002 - James Willcox"
 
-#: plugins/diff/diff.c:62
+#: plugins/diff/diff.c:65
 msgid "Co_mpare Files..."
 msgstr "Sa_mmenlign filer..."
 
-#: plugins/diff/diff.c:65
+#: plugins/diff/diff.c:68
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
 
-#: plugins/diff/diff.c:67
+#: plugins/diff/diff.c:70
 msgid "Compare files"
 msgstr "Sammenlign filer"
 
 #. Create the dialog
-#: plugins/diff/diff.c:268
+#: plugins/diff/diff.c:271
 msgid "Compare two files..."
 msgstr "Sammenlign to filer..."
 
-#: plugins/diff/diff.c:282
+#: plugins/diff/diff.c:285
 msgid "C_ompare"
 msgstr "S_ammenlign"
 
-#: plugins/diff/diff.c:503
+#: plugins/diff/diff.c:513
+msgid "Executed command"
+msgstr "Kjørt kommando"
+
+#: plugins/diff/diff.c:638
 msgid "The two documents you selected are the same."
 msgstr "De to valgte dokumentene du valgte er like."
 
-#: plugins/diff/diff.c:511
+#: plugins/diff/diff.c:646
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -534,7 +526,7 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:520
+#: plugins/diff/diff.c:655
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -544,20 +536,20 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:528
+#: plugins/diff/diff.c:663
 msgid "The two files you selected are the same."
 msgstr "De to filene du valgte er like."
 
-#: plugins/diff/diff.c:546
+#: plugins/diff/diff.c:681
 msgid "The \"first\" document contains no text."
 msgstr "Det \"første\" dokumentet inneholder ingen tekst."
 
-#: plugins/diff/diff.c:581
+#: plugins/diff/diff.c:716
 msgid "The \"second\" document contains no text."
 msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:607
+#: plugins/diff/diff.c:742
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -567,7 +559,7 @@ msgstr ""
 "\n"
 "gedit kunne ikke opprette en midlertidig file."
 
-#: plugins/diff/diff.c:625 plugins/diff/diff.c:638
+#: plugins/diff/diff.c:762 plugins/diff/diff.c:775
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -577,11 +569,11 @@ msgstr ""
 "\n"
 "Feil under kjøring av diff-kommandoen."
 
-#: plugins/diff/diff.c:660
+#: plugins/diff/diff.c:797
 msgid "No differences were found between the selected documents."
 msgstr "Ingen forskjeller mellom de valgte dokumentene funnet."
 
-#: plugins/diff/diff.c:701
+#: plugins/diff/diff.c:838
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -591,7 +583,7 @@ msgstr ""
 "\n"
 "Resultatet inneholder ugyldige UTF-8 data."
 
-#: plugins/diff/diff.c:925
+#: plugins/diff/diff.c:1066
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
@@ -601,7 +593,7 @@ msgstr ""
 "\n"
 "For mer informasjon om diff, skriv «man diff» på kommandolinjen\n"
 
-#: plugins/diff/diff.c:928
+#: plugins/diff/diff.c:1069
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
@@ -610,8 +602,9 @@ msgstr ""
 "Opphavsrett © 2002 Paolo Maggi"
 
 #: plugins/diff/diff.glade2.h:1 plugins/email/email.glade2.h:1
-#: plugins/spell/spell-checker.glade2.h:1 src/dialogs/replace.glade2.h:2
-#: src/dialogs/uri.glade2.h:1
+#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:4
+#: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
 msgid "*"
 msgstr "*"
 
@@ -725,8 +718,9 @@ msgstr ""
 "linjer, tegn og tegn som ikke er tomme områder og viser resultatet."
 
 #: plugins/docinfo/docinfo.c:367 plugins/indent/indent.c:258
-#: plugins/sample/sample.c:175 plugins/shell_output/shell_output.c:553
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
+#: plugins/sample/sample.c:175 plugins/shell_output/shell_output.c:963
+#: plugins/spell/spell.c:823 plugins/taglist/gedit-taglist-plugin.c:164
+#: plugins/time/time.c:1036
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Opphavsrett © 2002 - Paolo Maggi"
 
@@ -782,28 +776,40 @@ msgstr "Brukernavn"
 msgid "Inserts the user name at the cursor position."
 msgstr "Setter inn brukernavn i markørposisjonen."
 
-#: plugins/shell_output/shell_output.c:49
-msgid "Insert Shell _Output"
-msgstr "Sett inn _utskrift fra skallet"
+#: plugins/shell_output/shell_output.c:56
+msgid "_Execute Shell Command..."
+msgstr "Kjør _skallkommando..."
 
-#: plugins/shell_output/shell_output.c:52
-msgid "Insert the shell output in the current document"
-msgstr "Sett inn utskrift fra skallet i aktivt dokument"
+#: plugins/shell_output/shell_output.c:59
+msgid "Execute a shell command"
+msgstr "Kjør en skallkommando"
 
-#: plugins/shell_output/shell_output.c:137
+#: plugins/shell_output/shell_output.c:160
+#: plugins/shell_output/shell_output.c:519
+msgid "Stopped"
+msgstr "Stoppet"
+
+#: plugins/shell_output/shell_output.c:243
 msgid "An error occurs while running the selected command."
 msgstr "En feil oppsto under kjøring av valgt kommando."
 
-#: plugins/shell_output/shell_output.c:187
-#: plugins/shell_output/shell_output.c:550
+#: plugins/shell_output/shell_output.c:299
 msgid "Shell output"
 msgstr "Skallutskrift"
 
-#: plugins/shell_output/shell_output.c:200
+#: plugins/shell_output/shell_output.c:315
 msgid "_Run"
 msgstr "Kjø_r"
 
-#: plugins/shell_output/shell_output.c:360
+#: plugins/shell_output/shell_output.c:525
+msgid "Done"
+msgstr "Ferdig"
+
+#: plugins/shell_output/shell_output.c:527
+msgid "Failed"
+msgstr "Feilet"
+
+#: plugins/shell_output/shell_output.c:699
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -813,7 +819,7 @@ msgstr ""
 "\n"
 "Vennligst sett inn en gyldig skallkommando."
 
-#: plugins/shell_output/shell_output.c:389
+#: plugins/shell_output/shell_output.c:732
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -823,27 +829,42 @@ msgstr ""
 "\n"
 "Vennligst sett inn en gyldig skallkommando."
 
-#: plugins/shell_output/shell_output.c:551
-msgid "Execute an external program and insert its output in a new document."
+#: plugins/shell_output/shell_output.c:816
+msgid "Executing command"
+msgstr "Kjører kommando"
+
+#: plugins/shell_output/shell_output.c:960
+msgid "Shell command"
+msgstr "Skallkommando"
+
+#: plugins/shell_output/shell_output.c:961
+#, fuzzy
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
 msgstr "Kjør et eksternt program og sett inn utdata i et nytt dokument."
 
-#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/shell_output/shell_output.glade2.h:2
 msgid "Capture the command _output"
 msgstr "Fang opp utdata fra k_ommando"
 
-#: plugins/shell_output/shell_output.glade2.h:2
+#: plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "Velg arbeidskatalog..."
+
+#: plugins/shell_output/shell_output.glade2.h:4
 msgid "Specify the working directory and the command you want to run."
 msgstr "Spesifiser arbeidskatalogen og kommandoen du ønsker å kjøre."
 
-#: plugins/shell_output/shell_output.glade2.h:3
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "_Shell command:"
 msgstr "_Skallkommando:"
 
-#: plugins/shell_output/shell_output.glade2.h:4
+#: plugins/shell_output/shell_output.glade2.h:6
 msgid "_Working directory:"
 msgstr "Ar_beidskatalog:"
 
-#: plugins/shell_output/shell_output.glade2.h:5
+#: plugins/shell_output/shell_output.glade2.h:7
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Tillegg for utskrift fra skallet"
 
@@ -894,33 +915,73 @@ msgstr ""
 "Tag-listen gir deg en lett metode for å sette inn ofte brukte faner eller "
 "strenger uten å måtte skrive dem."
 
-#: plugins/time/time.c:45
+#: plugins/time/time.c:47
 msgid "In_sert Date/Time"
 msgstr "_Sett inn dato/klokkeslett"
 
-#: plugins/time/time.c:48
+#: plugins/time/time.c:50
 msgid "Insert current date and time at the cursor position"
 msgstr "Sett inn dagens dato og klokkeslett i markørposisjonen"
 
-#: plugins/time/time.c:274
+#: plugins/time/time.c:440
 msgid "Available formats"
 msgstr "Tilgjengelige formater"
 
-#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
-msgid "Configure insert date/time plugin"
+#: plugins/time/time.c:540
+#, fuzzy
+msgid "Configure insert date/time plugin..."
 msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett"
 
-#: plugins/time/time.c:568
+#: plugins/time/time.c:1033
 msgid "Insert Date/Time"
 msgstr "Sett inn dato/klokkeslett"
 
-#: plugins/time/time.c:569
+#: plugins/time/time.c:1034
 msgid "Inserts current date and time at the cursor position."
 msgstr "Setter inn dagens dato og klokkeslett i markørposisjonen."
 
-#: plugins/time/time.glade2.h:2
-msgid "Select the format to use when inserting date/time."
-msgstr "Velg format som skal brukes når du setter inn dato/klokkeslett."
+#: plugins/sort/sort.glade2.h:1 plugins/time/time.glade2.h:1
+#: src/dialogs/gedit-preferences.glade2.h:1 src/dialogs/replace.glade2.h:1
+msgid "    "
+msgstr "    "
+
+#: plugins/time/time.glade2.h:3
+#, no-c-format
+msgid "%d/%m/%Y %H:%M:%S"
+msgstr "%d.%m.%Y %H:%M%:%S"
+
+#: plugins/time/time.glade2.h:5
+msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
+msgstr ""
+
+#: plugins/time/time.glade2.h:6
+msgid "<span weight=\"bold\"> When inserting date/time...</span>"
+msgstr "<span weight=\"bold\">Når dato/tid settes inn...</span>"
+
+#: plugins/time/time.glade2.h:7
+#, fuzzy
+msgid "Configure date/time plugin"
+msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett"
+
+#: plugins/time/time.glade2.h:8
+msgid "Select a format"
+msgstr "Velg et format"
+
+#: plugins/time/time.glade2.h:9
+msgid "Use the _selected format"
+msgstr "Bruk _valgt format"
+
+#: plugins/time/time.glade2.h:10
+msgid "_Insert"
+msgstr "Sett _inn"
+
+#: plugins/time/time.glade2.h:11
+msgid "_Prompt for a format"
+msgstr "S_pør etter et format"
+
+#: plugins/time/time.glade2.h:12
+msgid "_Use custom format"
+msgstr "Br_uk egendefinert format"
 
 #: plugins/indent/indent.c:45
 msgid "_Indent"
@@ -946,11 +1007,6 @@ msgstr "Indenter linjer"
 msgid "Indent or un-indent selected lines."
 msgstr ""
 
-#: plugins/sort/sort.glade2.h:1 src/dialogs/gedit-preferences.glade2.h:1
-#: src/dialogs/replace.glade2.h:1
-msgid "    "
-msgstr "    "
-
 #: plugins/sort/sort.glade2.h:2
 msgid "<i>You will not be able to undo the sort operation.</i>"
 msgstr ""
@@ -967,7 +1023,7 @@ msgstr "Skiller mellom _store/små bokstaver"
 msgid "S_tart ordering at column"
 msgstr "S_tart plassering ved kolonne"
 
-#: plugins/sort/sort.glade2.h:6
+#: plugins/sort/sort.c:493 plugins/sort/sort.glade2.h:6
 msgid "Sort"
 msgstr "Sorter"
 
@@ -1202,7 +1258,148 @@ msgstr "_Emne:"
 msgid "_To:"
 msgstr "_Til:"
 
-#: src/bonobo-mdi.c:545 src/bonobo-mdi.c:635 src/bonobo-mdi.c:1879
+#: plugins/email/email.c:55
+msgid "E_mail..."
+msgstr "E-_post..."
+
+#: plugins/email/email.c:58
+msgid "Email a file."
+msgstr "Send en fil."
+
+#: plugins/email/email.c:60
+msgid "Email"
+msgstr "E-post"
+
+#. Create the dialog
+#: plugins/email/email.c:138
+msgid "Email current document..."
+msgstr "Send dette dokumentet..."
+
+#: plugins/email/email.c:151
+msgid "Se_nd"
+msgstr "Se_nd"
+
+#: plugins/email/email.c:265
+msgid ""
+"Error sending email.\n"
+"\n"
+"Please provide a recipient."
+msgstr ""
+
+#: plugins/email/email.c:271
+msgid ""
+"Error sending email.\n"
+"\n"
+"Please provide a from address."
+msgstr ""
+
+#: plugins/email/email.c:277
+msgid ""
+"Error sending email.\n"
+"\n"
+"Please provide a subject."
+msgstr ""
+
+#: plugins/email/email.c:294
+#, fuzzy
+msgid ""
+"Error sending email.\n"
+"\n"
+"Error executing the sendmail command."
+msgstr ""
+"Umulig å sammenligne valgte dokumenter.\n"
+"\n"
+"Feil under kjøring av diff-kommandoen."
+
+#: plugins/email/email.c:467
+msgid ""
+"Sends the current document via email.  You must have sendmail installed for "
+"this to work."
+msgstr ""
+
+#: plugins/email/email.c:469
+#, fuzzy
+msgid ""
+"Copyright (C) 2000 - 2002 Alex Roberts,Chema Celorio\n"
+"James Willcox"
+msgstr "Opphavsrett © 2002 - James Willcox"
+
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:26
+msgid "Sor_t..."
+msgstr "Sor_ter..."
+
+#: plugins/sort/sort.c:29
+msgid "Sort the current document or selection."
+msgstr "Sorter aktivt dokument eller utvalg."
+
+#: plugins/sort/sort.c:494
+msgid "Sort a document or selected text."
+msgstr "Sorter et dokument eller valgte tekst."
+
+#: plugins/sort/sort.c:499
+#, fuzzy
+msgid ""
+"Copyright (C) 2001 Carlo Borreo\n"
+"Copyright (C) 2002 Lee Mallabone and Paolo Maggi"
+msgstr ""
+"Opphavsrett © 2000 - 2001 Chema Celorio \n"
+"Opphavsrett © 2002 Paolo Maggi"
+
+#: plugins/spell/spell.c:51
+msgid "_Spelling..."
+msgstr "_Staving..."
+
+#: plugins/spell/spell.c:55
+msgid "_Check Spelling..."
+msgstr "_Sjekk staving..."
+
+#: plugins/spell/spell.c:58
+msgid "Check the current document for incorrect spelling"
+msgstr ""
+
+#: plugins/spell/spell.c:60
+msgid "_Auto Spellcheck"
+msgstr "_Automatisk stavekontroll"
+
+#: plugins/spell/spell.c:63
+#, fuzzy
+msgid "Automatically spell-check the current document"
+msgstr "Sett inn utskrift fra skallet i aktivt dokument"
+
+#: plugins/spell/spell.c:65
+msgid "Set _Language"
+msgstr "Sett _språk"
+
+#: plugins/spell/spell.c:68
+#, fuzzy
+msgid "Set the language of the current document"
+msgstr "Velg _språk for aktivt dokument."
+
+#: plugins/spell/spell.c:554
+msgid "The document is empty."
+msgstr "Dokumentet er tomt."
+
+#: plugins/spell/spell.c:572
+#, fuzzy
+msgid "The selected text does not contain mispelled words."
+msgstr "Valgt fil er ikke kjørbar."
+
+#: plugins/spell/spell.c:573
+#, fuzzy
+msgid "The document does not contain mispelled words."
+msgstr "Endringer i dokumentet ble ikke forkastet."
+
+#: plugins/spell/spell.c:820
+msgid "Spell checker"
+msgstr "Stavekontroll"
+
+#: plugins/spell/spell.c:821
+#, fuzzy
+msgid "Checks the spelling of the current document."
+msgstr "Velg _språk for aktivt dokument."
+
+#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1886
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiver %s"
@@ -1221,7 +1418,7 @@ msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "Kunne ikke finne nødvendige widgeter i goto-line.glade2.\n"
 
 #: src/dialogs/gedit-dialog-replace.c:178 src/dialogs/replace.glade2.h:8
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:52
 msgid "Replace"
 msgstr "Erstatt"
 
@@ -1231,11 +1428,11 @@ msgstr "Erstatt _alle"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:192 src/gedit-file-selector-util.c:129
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:99
 msgid "_Replace"
 msgstr "E_rstatt"
 
-#: src/dialogs/gedit-dialog-replace.c:291 src/gedit-ui.xml.h:22
+#: src/dialogs/gedit-dialog-replace.c:291 src/gedit-ui.xml.h:23
 msgid "Find"
 msgstr "Finn"
 
@@ -1330,12 +1527,12 @@ msgid "Line Numbers"
 msgstr "Linjenummer"
 
 #: src/dialogs/gedit-preferences-dialog.c:240
-#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:55
+#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:56
 msgid "Save"
 msgstr "Lagre"
 
 #: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:73
+#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:74
 msgid "Undo"
 msgstr "Angre"
 
@@ -1357,7 +1554,7 @@ msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:267
 #: src/dialogs/gedit-preferences.glade2.h:36 src/gedit-print.c:309
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:42
 msgid "Print"
 msgstr "Skriv ut"
 
@@ -1369,7 +1566,7 @@ msgstr "Tillegg"
 msgid "Cat_egories:"
 msgstr "Kat_egorier"
 
-#: src/dialogs/gedit-preferences-dialog.c:363 src/gedit-ui.xml.h:40
+#: src/dialogs/gedit-preferences-dialog.c:363 src/gedit-ui.xml.h:41
 msgid "Preferences"
 msgstr "Brukervalg"
 
@@ -1939,30 +2136,30 @@ msgstr "Velg et filnavn for lagring"
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/gedit-file.c:177 src/gedit-file.c:874
+#: src/gedit-file.c:177 src/gedit-file.c:887
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Lastet fil «%s»"
 
-#: src/gedit-file.c:309 src/gedit-file.c:442
+#: src/gedit-file.c:309 src/gedit-file.c:455
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Lagrer fil «%s»..."
 
-#: src/gedit-file.c:337 src/gedit-file.c:457
+#: src/gedit-file.c:337 src/gedit-file.c:470
 msgid "The document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/gedit-file.c:351 src/gedit-file.c:454
+#: src/gedit-file.c:351 src/gedit-file.c:467
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fil «%s» lagret."
 
-#: src/gedit-file.c:421
+#: src/gedit-file.c:434
 msgid "Save as ..."
 msgstr "Lagre som..."
 
-#: src/gedit-file.c:615
+#: src/gedit-file.c:628
 #, c-format
 msgid ""
 "Do you want to revert to saved the document \"%s\" ?\n"
@@ -1973,48 +2170,48 @@ msgstr ""
 "\n"
 "Du vil ikke kunne gjøre om denne operasjonen."
 
-#: src/gedit-file.c:625 src/gedit-ui.xml.h:97
+#: src/gedit-file.c:638 src/gedit-ui.xml.h:100
 msgid "_Revert"
 msgstr "Fo_rkast"
 
-#: src/gedit-file.c:659
+#: src/gedit-file.c:672
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Forkaster endringer i fil «%s»..."
 
-#: src/gedit-file.c:672
+#: src/gedit-file.c:685
 msgid "The document has not been reverted."
 msgstr "Endringer i dokumentet ble ikke forkastet."
 
-#: src/gedit-file.c:682
+#: src/gedit-file.c:695
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Forkastet endringer i fil «%s»."
 
-#: src/gedit-file.c:708
+#: src/gedit-file.c:721
 #, c-format
 msgid "Loading %d files..."
 msgstr "Laster %d filer..."
 
-#: src/gedit-file.c:744
+#: src/gedit-file.c:757
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Filen «%s» eksisterer ikke. Ønsker du å opprette den?"
 
-#: src/gedit-file.c:799
+#: src/gedit-file.c:812
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/gedit-file.c:932
+#: src/gedit-file.c:945
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
-#: src/gedit-mdi.c:441
+#: src/gedit-mdi.c:446
 msgid "Open a file."
 msgstr "Åpne en fil."
 
-#: src/gedit-mdi.c:970
+#: src/gedit-mdi.c:1032
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -2025,23 +2222,23 @@ msgstr ""
 "\n"
 "Endringene vil gå tapt hvis du ikke lagrer dem."
 
-#: src/gedit-mdi.c:975
+#: src/gedit-mdi.c:1037
 msgid "Do_n't save"
 msgstr "I_kke lagre"
 
-#: src/gedit-mdi.c:994
+#: src/gedit-mdi.c:1056
 msgid "_Don't quit"
 msgstr "_Ikke avslutt"
 
-#: src/gedit-mdi.c:998
+#: src/gedit-mdi.c:1060
 msgid "_Don't close"
 msgstr "_Ikke lukk"
 
-#: src/gedit-mdi.c:1088
+#: src/gedit-mdi.c:1150
 msgid "(modified)"
 msgstr "(endret)"
 
-#: src/gedit-mdi.c:1094
+#: src/gedit-mdi.c:1156
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
@@ -2099,7 +2296,7 @@ msgstr "Feil. Umulig å oppdatere ui for tillegg «%s»"
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke initiere håndtering av brukervalg."
 
-#: src/gedit-prefs-manager.c:1744
+#: src/gedit-prefs-manager.c:1752
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Ventet «%s»; fikk «%s» for nøkkel %s"
@@ -2147,382 +2344,395 @@ msgid "C_ustomize Statusbar"
 msgstr "Tilpass stat_uslinjen"
 
 #: src/gedit-ui.xml.h:3
+#, fuzzy
+msgid "Change the visibility of the output window in the current window"
+msgstr "Endre synlighet for verktøylinen i aktivt vindu"
+
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Endre synlighet for statuslinjen i aktivt vindu"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Endre synlighet for verktøylinen i aktivt vindu"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:6
 msgid "Close"
 msgstr "Lukk"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:7
 msgid "Close All"
 msgstr "Lukk alle"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
 msgstr "Lukk alle åpne filer"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:9
 msgid "Close the current file"
 msgstr "Lukk aktiv fil"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:10
 msgid "Configure the application"
 msgstr "Konfigurer applikasjonen"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:11
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
 msgstr "Kopier utvalget"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:13
 msgid "Create a new document"
 msgstr "Opprett et nytt dokument"
 
-#: src/gedit-ui.xml.h:13
+#: src/gedit-ui.xml.h:14
 msgid "Cu_t"
 msgstr "Klipp u_t"
 
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:15
 msgid "Customize"
 msgstr "Tilpass"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:16
 msgid "Customize toolbars"
 msgstr "Tilpass verktøylinjer"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:17
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
 msgstr "Klipp ut utvalget"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:19
 msgid "Delete"
 msgstr "Slett"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:20
 msgid "Delete the selected text"
 msgstr "Slett valgt tekst"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:21
 msgid "Dump XML"
 msgstr "Dump XML"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:22
 msgid "Dump the UI Xml description"
 msgstr "Dump UI-beskrivelse i XML"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:24
 msgid "Find Again"
 msgstr "Finn igjen"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:25
 msgid "Find Ne_xt"
 msgstr "Finn ne_ste"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:26
 msgid "Go to a specific line number"
 msgstr "Gå til en spesifikk linje"
 
-#: src/gedit-ui.xml.h:26
+#: src/gedit-ui.xml.h:27
 msgid "Goto _Line"
 msgstr "Gå til _linje"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
 msgstr "Ikon og _tekst"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:29
 msgid "Main toolbar"
 msgstr "Hovedverktøylinje"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:30
 msgid "New"
 msgstr "Ny"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:31
 msgid "Only show icons in the toolbar"
 msgstr "Vis kun ikoner i verktøylinjen"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:32
 msgid "Open"
 msgstr "Åpne"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:33
 msgid "Open Location..."
 msgstr "Åpne lokasjon ..."
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:34
 msgid "Open _Location..."
 msgstr "Åpne _lokasjon ..."
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:35
 msgid "Open a file"
 msgstr "Åpne en fil"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:36
 msgid "Open a file from a specified location"
 msgstr "Åpne en fil fra en spesifisert lokasjon"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:37
 msgid "Open the gedit manual"
 msgstr "Åpne gedit-håndbok"
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:38
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
 msgstr "Lim inn utklippstavlen"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
 msgstr "Bruk_ervalg..."
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:43
 msgid "Print Previe_w..."
 msgstr "Forhånds_visning av utskrift..."
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:44
 msgid "Print Preview"
 msgstr "Forhåndsvisning av utskrift"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:45
 msgid "Print Setup"
 msgstr "Skriveroppsett"
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:46
 msgid "Print preview"
 msgstr "Forhåndsvisning"
 
-#: src/gedit-ui.xml.h:46
+#: src/gedit-ui.xml.h:47
 msgid "Print the current file"
 msgstr "Skriv ut aktiv fil"
 
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:48
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:49
 msgid "Quit the program"
 msgstr "Avslutt programmet"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:50
 msgid "Redo"
 msgstr "Gjenopprett"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:51
 msgid "Redo the undone action"
 msgstr "Gjenopprett forrige angrede handling"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:53
 msgid "Replace a string"
 msgstr "Erstatt en streng"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:54
 msgid "Revert"
 msgstr "Forkast"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:55
 msgid "Revert to a saved version of the file"
 msgstr "Gå tilbake til lagret versjon av filen"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:57
 msgid "Save All"
 msgstr "Lagre alle"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:58
 msgid "Save As"
 msgstr "Lagre som"
 
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:59
 msgid "Save _As..."
 msgstr "L_agre som..."
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:60
 msgid "Save all open files"
 msgstr "Lagre alle åpne filer"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:61
 msgid "Save the current file"
 msgstr "Lagre aktiv fil"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:62
 msgid "Save the current file with a different name"
 msgstr "Lagre aktiv fil med et nytt navn"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:63
 msgid "Search again for the same string"
 msgstr "Søk på nytt etter samme streng"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:64
 msgid "Search for a string"
 msgstr "Søk etter en streng"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:65
 msgid "Select All"
 msgstr "Velg alt"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:66
 msgid "Select _All"
 msgstr "Velg _alt"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:67
 msgid "Select the entire document"
 msgstr "Velg hele dokumentet"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:68
 msgid "Set toolbar button style according to desktop default"
 msgstr "Sett verktøylinjen i henhold til forvalgt verdi for skrivebordet"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:69
 msgid "Setup the page settings for your current printer"
 msgstr "Sideoppsett for aktiv skriver"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:70
 msgid "Show _Cursor Position"
 msgstr "Vis mar_kørposisjonen"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:71
 msgid "Show _Overwrite Mode"
 msgstr "Vis _overskrivingsmodus"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:72
 msgid "Show cursor position in the statusbar"
 msgstr "Vis markørposisjon i statuslinjen"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:73
 msgid "Show overwrite mode in the statusbar"
 msgstr "Vis overskrivingsmodus i statuslinjen"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:75
 msgid "Undo the last action"
 msgstr "Angre forrige handling"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:76
 msgid "_About"
 msgstr "_Om"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:77
 msgid "_Close"
 msgstr "_Lukk"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:78
 msgid "_Close All"
 msgstr "_Lukk alle"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:79
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:80
 msgid "_Copy"
 msgstr "_Kopier"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:81
 msgid "_Customize Toolbar"
 msgstr "_Tilpass verktøylinjen"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:82
 msgid "_Debug"
 msgstr "_Feilsøk"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:83
 msgid "_Delete"
 msgstr "_Slett"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:84
 msgid "_Desktop Default"
 msgstr "_Forvalgt verdi for skrivebord"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:85
 msgid "_Documents"
 msgstr "_Dokumenter"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:86
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:87
 msgid "_File"
 msgstr "_Fil"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:88
 msgid "_Find"
 msgstr "F_inn"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:89
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:90
 msgid "_Icon"
 msgstr "_Ikon"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:91
 msgid "_New"
 msgstr "_Ny"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:92
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:93
+msgid "_Output Window"
+msgstr ""
+
+#: src/gedit-ui.xml.h:94
 msgid "_Paste"
 msgstr "Li_m inn"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:95
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:96
+msgid "_Priority Text beside Icons"
+msgstr ""
+
+#: src/gedit-ui.xml.h:97
 msgid "_Quit"
 msgstr "_Avslutt"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:98
 msgid "_Redo"
 msgstr "_Gjenopprett"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:101
 msgid "_Save"
 msgstr "_Lagre"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:102
 msgid "_Save All"
 msgstr "L_agre alle"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:103
 msgid "_Search"
 msgstr "_Søk"
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:104
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:105
 msgid "_Toolbar"
 msgstr "Verk_tøylinje"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:106
 msgid "_Tools"
 msgstr "_Verktøy"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:107
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:108
 msgid "_View"
 msgstr "_Vis"
 
@@ -2864,16 +3074,16 @@ msgstr ""
 msgid "Could not create the file \"%s\"."
 msgstr "Kunne ikke opprette filen «%s»."
 
-#: src/gedit-view.c:979
+#: src/gedit-view.c:991
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Kol. %d"
 
-#: src/gedit-view.c:1017
+#: src/gedit-view.c:1029
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:1019
+#: src/gedit-view.c:1031
 msgid "  INS"
 msgstr "  SET"
 
@@ -2945,15 +3155,28 @@ msgstr "Opprett et nytt toppvindu i en eksisterende instans av gedit"
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opprett et nytt dokument i en eksisterende instans av gedit"
 
-#: src/recent-files/egg-recent-view-bonobo.c:193
-#, c-format
-msgid "Open %s"
-msgstr "Åpne %s"
+#: src/gedit-output-window.c:278
+#, fuzzy
+msgid "Close the output window"
+msgstr "Vis vindu for tag-liste"
+
+#: src/gedit-output-window.c:316
+msgid "Copy selected lines"
+msgstr "Kopier valgte linjer"
+
+#: src/gedit-output-window.c:336
+msgid "Clear the output window"
+msgstr ""
+
+#: src/gedit-output-window.c:374
+msgid "Output Lines"
+msgstr ""
 
 #: src/dialogs/gedit-encodings-dialog.c:238
 msgid ""
 "Could not find the required widgets inside gedit-encodings-dialog.glade2.\n"
-msgstr "Kunne ikke finne nødvendige widgeter i gedit-encodings-dialog.glade2.\n"
+msgstr ""
+"Kunne ikke finne nødvendige widgeter i gedit-encodings-dialog.glade2.\n"
 
 #: src/dialogs/gedit-encodings-dialog.glade2.h:1
 msgid "Choose one or more e_ncodings:"
@@ -2991,9 +3214,8 @@ msgid "Greek"
 msgstr "Gresk"
 
 #: src/gedit-encodings.c:154
-#, fuzzy
 msgid "Hebrew Visual"
-msgstr "Hebraisk synlig"
+msgstr "Hebraisk visual"
 
 #: src/gedit-encodings.c:156 src/gedit-encodings.c:215
 #: src/gedit-encodings.c:253 src/gedit-encodings.c:288
@@ -3099,6 +3321,30 @@ msgstr "Thai"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (ugyldig Unicode)"
+
+#~ msgid ""
+#~ "If you wish to insert any of the characters in to the active \n"
+#~ "document, select the character and click the \"Insert Char\" \n"
+#~ "button or double click the character in the table."
+#~ msgstr ""
+#~ "Hvis du ønsker å sette inn noen av tegnene i det aktive\n"
+#~ "dokumentet velger du tegnet og klikker «Sett inn tegn»-\n"
+#~ "knappen eller dobbeltklikker på tegnet i tabellen."
+
+#~ msgid "Insert char"
+#~ msgstr "Sett inn tegn"
+
+#~ msgid "gedit: ASCII table"
+#~ msgstr "gedit: ASCII-tabell"
+
+#~ msgid "Insert Shell _Output"
+#~ msgstr "Sett inn _utskrift fra skallet"
+
+#~ msgid "Select the format to use when inserting date/time."
+#~ msgstr "Velg format som skal brukes når du setter inn dato/klokkeslett."
+
+#~ msgid "Open %s"
+#~ msgstr "Åpne %s"
 
 #~ msgid "_Insert Date/Time"
 #~ msgstr "Sett _inn dato/klokkeslett"
