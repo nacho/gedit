@@ -25,8 +25,8 @@ libgedit_control_la_SOURCES = 					\
 	gedit-persist-stream.c
 
 libgedit_control_la_LIBADD =					\
-	../gedit/libgedit.la 					\
-	$(GEDIT_LIBS)
+	$(GEDIT_LIBS)						\
+	../gedit/libgedit.la
 
 libgedit_control_la_LDFLAGS = -module -avoid-version
 

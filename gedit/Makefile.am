@@ -21,10 +21,10 @@ noinst_LTLIBRARIES = libgedit.la
 gedit_LDFLAGS = -export-dynamic
 
 gedit_LDADD =				\
+	$(GEDIT_LIBS)			\
 	libgedit.la			\
 	dialogs/libdialogs.la		\
-	recent-files/librecent.la	\
-	$(GEDIT_LIBS)
+	recent-files/librecent.la
 
 IDL_FILE = GNOME_Gedit.idl
 
