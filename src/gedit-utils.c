@@ -899,7 +899,7 @@ gedit_utils_error_reporting_loading_file (
 		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
 			error_message = g_strdup_printf (
 				_("Could not open the file \"%s\" because "
-				  "there are too many open files\n\n."
+				  "there are too many open files.\n\n"
 				  "Please, close some open file and try again."),
                          	uri_for_display);
                 	break;
