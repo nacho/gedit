@@ -601,10 +601,6 @@ static void gE_view_init (gE_view *view)
 	gtk_widget_show(view->text);
 	gtk_text_set_point(GTK_TEXT(view->text), 0);
 
-/* FIXME: Need to implement the Context Menu for the view */
-	menu = gnome_popup_menu_new (popup_menu);
-	gnome_popup_menu_attach (menu, view->text, view);
-
 	
 	/* Create the bottom split screen */
 	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
@@ -665,6 +661,11 @@ static void gE_view_init (gE_view *view)
 
 	gtk_widget_show(view->split_screen);
 	gtk_text_set_point(GTK_TEXT(view->split_screen), 0);
+
+	/* Popup Menu */
+	menu = gnome_popup_menu_new (popup_menu);
+	gnome_popup_menu_attach (menu, view->text, view);
+	gnome_popup_menu_attach (menu, view->split_screen, view);
 		
 	view->splitscreen = gE_prefs_get_int("splitscreen");
 	if (!view->splitscreen)
