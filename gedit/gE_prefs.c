@@ -80,6 +80,8 @@ gE_prefs *prefs_window;
  {
 GList *toplevels;
 /*	gE_get_rc_file();*/
+
+#ifdef HAVE_GTK_RC_REPARSE_ALL
 		home2 = getenv("HOME");
 	#ifdef DEBUG
 	g_print("Home Dir: %s\n", home2);
@@ -108,7 +110,7 @@ GList *toplevels;
     }
 
   g_list_free (toplevels);
-
+#endif
  }
  
  void ok_prefs(GtkWidget *widget, gpointer *data)
