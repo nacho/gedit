@@ -147,7 +147,6 @@ gedit_file_new (void)
 void 
 gedit_file_close (GtkWidget *view)
 {
-	gint ret;
 	BonoboMDIChild* child;
 
 	gedit_debug (DEBUG_FILE, "");
@@ -159,18 +158,19 @@ gedit_file_close (GtkWidget *view)
 
 	if (g_list_length (bonobo_mdi_child_get_views (child)) > 1)
 	{		
-		ret = bonobo_mdi_remove_view (BONOBO_MDI (gedit_mdi), view, FALSE);
+		bonobo_mdi_remove_view (BONOBO_MDI (gedit_mdi), view, FALSE);
 		gedit_debug (DEBUG_COMMANDS, "View removed.");
 	}
 	else
 	{
-		ret = bonobo_mdi_remove_child (BONOBO_MDI (gedit_mdi), child, FALSE);
+		bonobo_mdi_remove_child (BONOBO_MDI (gedit_mdi), child, FALSE);
 		gedit_debug (DEBUG_COMMANDS, "Child removed.");
 	}
 
+	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 	{
-		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 		gedit_mdi_clear_active_window_statusbar (gedit_mdi);
 	}
 
@@ -519,9 +519,10 @@ gedit_file_close_all (void)
 
 	ret = gedit_mdi_remove_all (gedit_mdi);
 
+	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 	{
-		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 		gedit_mdi_clear_active_window_statusbar (gedit_mdi); 
 	}
 

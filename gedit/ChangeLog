@@ -1,3 +1,17 @@
+2004-07-14  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* bonobo-mdi.c (bonobo_mdi_n_views_for_window):
+	* bonobo-mdi.h (bonobo_mdi_n_views_for_window): rename
+	bonobo_mdi_n_children_for_window to bonobo_mdi_n_views_for_window
+
+	* gedit-file.c (gedit_file_close) (gedit_file_close_all):
+	always call gedit_mdi_set_active_window_verbs_sensitivity (fix 
+	bug #142091). Based on a patch by Madhan Raj M <raj_madan@rediffmail.com>
+
+	* gedit-mdi-child.c (menu_show): 
+	s/bonobo_mdi_n_children_for_window/bonobo_mdi_n_views_for_window
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity): ditto
+
 2004-07-13  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit2.[ch]:

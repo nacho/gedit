@@ -875,7 +875,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 }
 
 gint 
-bonobo_mdi_n_children_for_window (BonoboWindow *win)
+bonobo_mdi_n_views_for_window (BonoboWindow *win)
 {
 	GtkNotebook *book;
 

@@ -551,7 +551,7 @@ menu_show (GtkWidget *widget, GtkWidget *view)
 				       (GtkCallback)gtk_widget_set_sensitive,
 				       GINT_TO_POINTER (TRUE));
 
-		if (bonobo_mdi_n_children_for_window (
+		if (bonobo_mdi_n_views_for_window (
 					bonobo_mdi_get_window_from_view (view)) <= 1)
 		{
 			GtkWidget *menu_item;

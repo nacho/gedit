@@ -1437,10 +1437,7 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	else
 		bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
 					      "sensitive", "0", NULL);
-
-	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
-				(bonobo_mdi_n_children_for_window (active_window) > 1) ? TRUE : FALSE);
-
+	
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
 	
@@ -1476,7 +1473,6 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	}
 
 end:
-
 	switch (gedit_mdi_get_state (GEDIT_MDI (mdi)))
 	{
 		case GEDIT_STATE_LOADING:
@@ -1502,6 +1498,9 @@ end:
 			/* Do nothing */
 			break;
 	}
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
+				(bonobo_mdi_n_views_for_window (active_window) > 1) ? TRUE : FALSE);
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
