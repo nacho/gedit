@@ -83,7 +83,6 @@ check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *
 		g_print ("Apply tag: [%d - %d]\n", gtk_text_iter_get_offset (start),
 						gtk_text_iter_get_offset (end));
 		*/
-
 		gtk_text_buffer_apply_tag (GTK_TEXT_BUFFER (spell->doc), 
 					   spell->tag_highlight, 
 					   start, 
@@ -580,6 +579,18 @@ popup_menu_event (GtkTextView *view, GeditAutomaticSpellChecker *spell)
 	return FALSE;
 }
 
+static void
+tag_table_changed (GtkSourceTagTable          *table,
+		   GeditAutomaticSpellChecker *spell)
+{
+	g_return_if_fail (spell->tag_highlight !=  NULL);
+	g_return_if_fail (GTK_TEXT_BUFFER (spell->doc)->tag_table != NULL);
+	g_return_if_fail (GTK_IS_SOURCE_TAG_TABLE (GTK_TEXT_BUFFER (spell->doc)->tag_table));
+
+	gtk_text_tag_set_priority (spell->tag_highlight, 
+				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (spell->doc)->tag_table) - 1);
+}
+
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checker)
 {
@@ -651,7 +662,16 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 				"underline", PANGO_UNDERLINE_ERROR,
 				NULL);
 
-	gtk_text_tag_set_priority (spell->tag_highlight, 0);
+	g_return_val_if_fail (GTK_TEXT_BUFFER (doc)->tag_table != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_SOURCE_TAG_TABLE (GTK_TEXT_BUFFER (doc)->tag_table), NULL);
+
+	gtk_text_tag_set_priority (spell->tag_highlight, 
+				   gtk_text_tag_table_get_size (GTK_TEXT_BUFFER (doc)->tag_table) - 1);
+
+	g_signal_connect (G_OBJECT (GTK_TEXT_BUFFER (doc)->tag_table),
+			  "changed",
+                          G_CALLBACK (tag_table_changed),
+			  spell);
 
 	/* we create the mark here, but we don't use it until text is
 	 * inserted, so we don't really care where iter points.  */

@@ -1,3 +1,12 @@
+2005-01-18  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #144894 (Ortographic corrector doesn't work in commented 
+	lines): the problem was that the highlight tag had a too low priority
+
+	* spell/gedit-automatic-spell-checker.c (tag_table_changed): new method
+	(gedit_automatic_spell_checker_new): set the priority and connect the
+	"changed" signal. 
+
 2005-01-12  Paolo Borelli  <pborelli@katamail.com>
 
 	* savecopy/savecopy.c: enable remote bookmarks in the chooser and
