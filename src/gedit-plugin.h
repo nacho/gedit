@@ -55,15 +55,15 @@ struct _GeditPlugin
 	gchar   *copyright;
 	
 	/* The following fields are compulsory */
-	GeditPluginState	(*init) 	(GeditPlugin *);
-	GeditPluginState	(*activate)	(GeditPlugin *);
-	GeditPluginState	(*deactivate)	(GeditPlugin *);
+	GeditPluginState	(*init) 	(GeditPlugin *p);
+	GeditPluginState	(*activate)	(GeditPlugin *p);
+	GeditPluginState	(*deactivate)	(GeditPlugin *p);
 
 	/* The following fields are optional */
-	GeditPluginState	(*configure)	(GeditPlugin *, GtkWidget *parent);
-	GeditPluginState	(*save_settings)(GeditPlugin *);
-	GeditPluginState	(*update_ui)	(GeditPlugin *);
-	GeditPluginState	(*destroy)	(GeditPlugin *);
+	GeditPluginState	(*configure)	(GeditPlugin *p, GtkWidget *parent);
+	GeditPluginState	(*save_settings)(GeditPlugin *p);
+	GeditPluginState	(*update_ui)	(GeditPlugin *p, BonoboWindow *w);
+	GeditPluginState	(*destroy)	(GeditPlugin *p);
 
 	/* Eventually filled in by the plugin */
 	gpointer	private_data;

@@ -46,6 +46,7 @@
 #include "gedit-file.h"
 #include "gedit-view.h"
 #include "gedit-utils.h"
+#include "gedit-plugins-engine.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -280,15 +281,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	/* Add the recent files */
 	gedit_recent_init (win);
 
-	
-#if 0 
-	/* FIXME */
-
-	/* Add the plugins to the menus */
-	gedit_plugins_menu_add (app);
-	
-#endif
-
+	/* Add the plugins menus */
+	gedit_plugins_engine_update_plugins_ui (win, TRUE);
 }
 
 static void 
@@ -770,6 +764,8 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	
 	bonobo_ui_engine_freeze (ui_engine);
 	
+	gedit_plugins_engine_update_plugins_ui (active_window, FALSE);
+
 	if (active_child == NULL)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_engine, 

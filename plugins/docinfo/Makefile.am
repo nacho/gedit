@@ -1,21 +1,17 @@
 # Document Info plugin
+plugindir = $(libdir)/gedit2/plugins
 
-plugindir = $(libdir)/gedit/plugins
+INCLUDES = \
+	-I$(top_srcdir)/src \
+	$(GEDIT_CFLAGS) \
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" \
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"
 
 plugin_LTLIBRARIES = libdocinfo.la
 
 libdocinfo_la_SOURCES = docinfo.c
 
-
-INCLUDES =						\
-	-I$(top_srcdir)/src				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
-	-I$(includedir)					\
-	$(GNOME_INCLUDEDIR) \
-	$(EXTRA_GNOME_CFLAGS)
-
-gladedir = $(datadir)/gedit/glade
+gladedir = $(datadir)/gedit2/glade
 glade_DATA = docinfo.glade
 
 EXTRA_DIST = $(glade_DATA)

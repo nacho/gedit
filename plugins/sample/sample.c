@@ -49,9 +49,31 @@ hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbnam
 
 	gedit_document_begin_user_action (doc);
 	
-	gedit_document_insert_text_at_cursor (doc, _("Hello World"), -1);
+	gedit_document_insert_text_at_cursor (doc, _("Hello World "), -1);
 
 	gedit_document_end_user_action (doc);
+}
+
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
+{
+	BonoboUIEngine *ui_engine;
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	ui_engine = bonobo_window_get_ui_engine (window);
+
+	doc = gedit_get_active_document ();
+
+	if ((doc == NULL) || (gedit_document_is_readonly (doc)))		
+		gedit_menus_set_verb_sensitive (ui_engine, "/commands/HelloWorld", FALSE);
+	else
+		gedit_menus_set_verb_sensitive (ui_engine, "/commands/HelloWorld", TRUE);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState
@@ -68,7 +90,7 @@ activate (GeditPlugin *pd)
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	top_windows = gedit_get_top_windows ();
-	g_return_if_fail (top_windows != NULL);
+	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
        
 	while (top_windows)
 	{
@@ -114,7 +136,7 @@ deactivate (GeditPlugin *pd)
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	top_windows = gedit_get_top_windows ();
-	g_return_if_fail (top_windows != NULL);
+	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
        
 	while (top_windows)
 	{
@@ -143,6 +165,7 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
+	pd->update_ui = update_ui;
 	pd->destroy = destroy;
 	
 	pd->name = _("Hello World");
@@ -151,9 +174,7 @@ init (GeditPlugin *pd)
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
 	pd->private_data = NULL;
-	
-	gedit_get_active_window ();
-	
+		
 	return PLUGIN_OK;
 }
 

@@ -171,6 +171,9 @@ main (int argc, char **argv)
 	gedit_prefs_init ();
 	gedit_prefs_load_settings ();
 
+	/* Init plugins engine */
+	gedit_plugins_engine_init ();
+
 	/* Parse args and build the list of files to be loaded at startup */
 	g_value_init (&value, G_TYPE_POINTER);
     	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
@@ -192,11 +195,7 @@ main (int argc, char **argv)
 	/* Create gedit_mdi and open the first top level window */
 	gedit_mdi = gedit_mdi_new ();
 	bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
-
-	/*
-	 * gedit_plugins_engine_init ();
-	 */
-
+	
 	gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
 
 	gtk_main();

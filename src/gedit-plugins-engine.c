@@ -42,6 +42,9 @@ static void		 gedit_plugins_engine_load_all 	();
 static void		 gedit_plugins_engine_load_dir	();
 static GeditPlugin 	*gedit_plugins_engine_load 	(const gchar *file);
 
+static GeditPluginInfo  *gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin);
+static void		 gedit_plugins_engine_reactivate_all ();
+
 static GList *gedit_plugins_list = NULL;
 
 gboolean
@@ -127,7 +130,7 @@ gedit_plugins_engine_load (const gchar *file)
 	info->plugin 	= plugin;
 
 	plugin->file 	= g_strdup (file);
-	plugin->handle 	= g_module_open (file, 0);
+	plugin->handle 	= g_module_open (file, G_MODULE_BIND_LAZY);
 
 	if (plugin->handle == NULL)
 	{
@@ -180,7 +183,7 @@ gedit_plugins_engine_load (const gchar *file)
 			   file);
 		
 		goto error;
-	}	
+	}		
 
 	if (plugin->name == NULL)
 	{
@@ -231,49 +234,152 @@ gedit_plugins_engine_get_plugins_list ()
 	return gedit_plugins_list;
 }
 
+static GeditPluginInfo *
+gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin)
+{
+	GList *pl;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	pl = gedit_plugins_list;
+	
+	while (pl)
+	{
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		if (info->plugin == plugin)
+			return info;
+
+		pl = g_list_next (pl);
+	}
+
+	return NULL;
+}
+
+
 gboolean 	 
 gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 {
 	gboolean res;
-
+	GeditPluginInfo *info;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	info = gedit_plugins_engine_find_plugin_info (plugin);
+	g_return_val_if_fail (info != NULL, FALSE);
+	
+	/* Activate plugin */
 	res = plugin->activate (plugin);
 	if (res != PLUGIN_OK)
 	{
 		g_warning (_("Error, impossible to activate plugin '%s'"),
-			   plugin->file);
+			   plugin->name);
 		
 		return FALSE;
 	}
 
-	/* TODO: Update plugin list */
-	
-	return FALSE;
+	/* Update plugin state */
+	info->state = GEDIT_PLUGIN_ACTIVATED;
+
+	return TRUE;
 }
 
 gboolean
 gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 {
+	gboolean res;
+	GeditPluginInfo *info;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	/* TODO */
-	return FALSE;
-}
+	info = gedit_plugins_engine_find_plugin_info (plugin);
+	g_return_val_if_fail (info != NULL, FALSE);
 	
+	/* Activate plugin */
+	res = plugin->deactivate (plugin);
+	if (res != PLUGIN_OK)
+	{
+		g_warning (_("Error, impossible to deactivate plugin '%s'"),
+			   plugin->name);
+		
+		return FALSE;
+	}
 
-gboolean	 
-gedit_plugins_engine_update_plugins_ui (gboolean new_window)
+	/* Update plugin state */
+	info->state = GEDIT_PLUGIN_DEACTIVATED;
+
+	return TRUE;
+}
+
+static void
+gedit_plugins_engine_reactivate_all ()
 {
-	/*
+	GList *pl;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	pl = gedit_plugins_list;
+	
+	while (pl)
+	{
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		/* FIXME: uncomment when we will have a Plugin Manager - Paolo
+		if (info->state == GEDIT_PLUGIN_ACTIVATED)
+		*/
+		{
+			gint r = info->plugin->activate (info->plugin);
+			
+			if (r != PLUGIN_OK)
+			{
+				g_warning (_("Error, impossible to activate plugin '%s'"),
+			   		info->plugin->name);
+			}
+			/* FIXME: remove when we will have a Plugin Manager - Paolo */
+			else
+				info->state = GEDIT_PLUGIN_ACTIVATED;
+		}
+	
+		pl = g_list_next (pl);
+	}
+	
+}
+
+void
+gedit_plugins_engine_update_plugins_ui (BonoboWindow* window, gboolean new_window)
+{
+	GList *pl;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
 	if (new_window)
 		gedit_plugins_engine_reactivate_all ();
 
-*/
-	/* TODO: updated ui di tutti i plugin che hanno
-	 * la funzione update_ui
+	/* updated ui of all the plugins that implement thae
+	 * update_ui function
 	 */
+	pl = gedit_plugins_list;
+	
+	while (pl)
+	{
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+		
+		if ((info->state == GEDIT_PLUGIN_ACTIVATED) &&
+		    (info->plugin->update_ui != NULL))
+		{
+			gint r;
+		       	gedit_debug (DEBUG_PLUGINS, "Updating UI of %s", info->plugin->name);
 
-	return FALSE;
+			r = info->plugin->update_ui (info->plugin, window);
+			
+			if (r != PLUGIN_OK)
+			{
+				g_warning (_("Error, impossible to update ui of the plugin '%s'"),
+			   		info->plugin->name);
+			}
+		}
+	
+		pl = g_list_next (pl);
+	}
 }
 
