@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-11-27 18:11+0100\n"
-"PO-Revision-Date: 2002-11-27 18:12+0100\n"
+"POT-Creation-Date: 2002-12-04 16:20+0100\n"
+"PO-Revision-Date: 2002-12-04 16:23+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -574,7 +574,7 @@ msgstr ""
 
 #: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
 #: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
-#: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
+#: src/dialogs/replace.glade2.h:1 src/dialogs/uri.glade2.h:1
 msgid "*"
 msgstr "*"
 
@@ -867,7 +867,7 @@ msgid "Configure insert date/time plugin..."
 msgstr "Konfigurera insticksmodulen för infogande av datum/tid..."
 
 #: plugins/time/time.glade2.h:1 plugins/sort/sort.glade2.h:1
-#: src/dialogs/gedit-preferences.glade2.h:1 src/dialogs/replace.glade2.h:1
+#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1207,7 +1207,7 @@ msgstr "Den markerade texten innehåller inte felstavade ord."
 msgid "The document does not contain mispelled words."
 msgstr "Dokumentet innehåller inte felstavade ord."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1939
+#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1962
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivera %s"
@@ -1225,33 +1225,32 @@ msgstr "_Gå till rad"
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "Kunde inte hitta de nödvändiga widgetarna i goto-line.glade2.\n"
 
-#: src/dialogs/gedit-dialog-replace.c:178 src/dialogs/replace.glade2.h:8
-#: src/gedit-ui.xml.h:52
-msgid "Replace"
-msgstr "Ersätt"
-
-#: src/dialogs/gedit-dialog-replace.c:189
-msgid "Replace _All"
-msgstr "Ersätt _alla"
-
-#. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:192 src/gedit-file-selector-util.c:129
-#: src/gedit-ui.xml.h:99
-msgid "_Replace"
-msgstr "_Ersätt"
-
-#: src/dialogs/gedit-dialog-replace.c:291 src/gedit-ui.xml.h:23
-msgid "Find"
-msgstr "Sök"
-
-#: src/dialogs/gedit-dialog-replace.c:511
-#: src/dialogs/gedit-dialog-replace.c:590
-#: src/dialogs/gedit-dialog-replace.c:795
+#: src/dialogs/gedit-dialog-replace.c:130
+#: src/dialogs/gedit-dialog-replace.c:900 src/gedit-commands.c:343
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Texten \"%s\" hittades inte."
 
-#: src/dialogs/gedit-dialog-replace.c:804
+#: src/dialogs/gedit-dialog-replace.c:238 src/dialogs/replace.glade2.h:4
+#: src/gedit-ui.xml.h:52
+msgid "Replace"
+msgstr "Ersätt"
+
+#: src/dialogs/gedit-dialog-replace.c:249
+msgid "Replace _All"
+msgstr "Ersätt _alla"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:252 src/gedit-file-selector-util.c:129
+#: src/gedit-ui.xml.h:99
+msgid "_Replace"
+msgstr "_Ersätt"
+
+#: src/dialogs/gedit-dialog-replace.c:368 src/gedit-ui.xml.h:22
+msgid "Find"
+msgstr "Sök"
+
+#: src/dialogs/gedit-dialog-replace.c:909
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Hittade och ersatte %d förekomster."
@@ -1342,7 +1341,7 @@ msgid "Save"
 msgstr "Spara"
 
 #: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:74
+#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:73
 msgid "Undo"
 msgstr "Ångra"
 
@@ -1785,56 +1784,39 @@ msgstr "_Plats att leta i:"
 msgid "label"
 msgstr "etikett"
 
-#: src/dialogs/replace.glade2.h:3
-msgid "<span weight=\"bold\">Search from</span>"
-msgstr "<span weight=\"bold\">Sök från</span>"
-
-#: src/dialogs/replace.glade2.h:4
-msgid "C_ursor position"
-msgstr "_Markörposition"
-
-#: src/dialogs/replace.glade2.h:5
-msgid "Case sensi_tive"
-msgstr "Gör skillnad på geme_ner/VERSALER"
-
-#: src/dialogs/replace.glade2.h:6
+#: src/dialogs/replace.glade2.h:2
 msgid "Find Next"
 msgstr "Sök nästa"
 
-#: src/dialogs/replace.glade2.h:7
+#: src/dialogs/replace.glade2.h:3
 msgid "Match _entire word only"
 msgstr "Sök endast _hela ord"
 
-#: src/dialogs/replace.glade2.h:9
+#: src/dialogs/replace.glade2.h:5
 msgid "Replace All"
 msgstr "Ersätt alla"
 
-#: src/dialogs/replace.glade2.h:10
+#: src/dialogs/replace.glade2.h:6
 msgid "Replace _with: "
 msgstr "Ersätt _med: "
 
-#: src/dialogs/replace.glade2.h:11
-msgid "_Beginning of the document"
-msgstr "_Början av dokumentet"
+#: src/dialogs/replace.glade2.h:7
+msgid "_Match case"
+msgstr "_Gör skillnad på gemener/VERSALER"
 
-#: src/dialogs/replace.glade2.h:12
+#: src/dialogs/replace.glade2.h:8
 msgid "_Search for: "
 msgstr "_Sök efter: "
+
+#: src/dialogs/replace.glade2.h:9
+msgid "_Wrap around"
+msgstr "_Börja om från början"
 
 #: src/dialogs/uri.glade2.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "Ange _platsen (URI:n) för den fil som du vill öppna:"
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr "Inte implementerat än."
-
-#: src/gedit-commands.c:338
-#, c-format
-msgid "The string \"%s\" has not been found."
-msgstr "Strängen \"%s\" kunde inte hittas."
-
-#: src/gedit-commands.c:436
+#: src/gedit-commands.c:452
 msgid "translator_credits"
 msgstr ""
 "Christian Rose\n"
@@ -1843,11 +1825,11 @@ msgstr ""
 "Martin Wahlén\n"
 "Skicka synpunkter på översättningen till sv@li.org"
 
-#: src/gedit-commands.c:461
+#: src/gedit-commands.c:477
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:462
+#: src/gedit-commands.c:478
 msgid ""
 "(C) 1998-2000 Evan Lawrence and Alex Robert\n"
 "(C) 2000-2002 Chema Celorio and Paolo Maggi"
@@ -1855,7 +1837,7 @@ msgstr ""
 "© 1998-2000 Evan Lawrence och Alex Robert\n"
 "© 2000-2002 Chema Celorio och Paolo Maggi"
 
-#: src/gedit-commands.c:464
+#: src/gedit-commands.c:480
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit är en liten och enkel textredigerare för Gnome"
 
@@ -2022,7 +2004,7 @@ msgid "Could not read data from stdin."
 msgstr "Kunde inte läsa data från standard in."
 
 #. Add the detach tab button
-#: src/gedit-mdi-child.c:538
+#: src/gedit-mdi-child.c:538 src/gedit-ui.xml.h:90
 msgid "_Move to New Window"
 msgstr "_Flytta till nytt fönster"
 
@@ -2061,47 +2043,47 @@ msgstr "(ändrad)"
 msgid "(readonly)"
 msgstr "(skrivskyddad)"
 
-#: src/gedit-plugins-engine.c:349
+#: src/gedit-plugins-engine.c:352
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Fel, kan inte öppna modulfilen \"%s\"\n"
 
-#: src/gedit-plugins-engine.c:359
+#: src/gedit-plugins-engine.c:362
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte initieringsfunktion."
 
-#: src/gedit-plugins-engine.c:369
+#: src/gedit-plugins-engine.c:372
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte aktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:379
+#: src/gedit-plugins-engine.c:382
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Fel, insticksmodulen \"%s\" innehåller inte inaktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:404
+#: src/gedit-plugins-engine.c:407
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Fel, omöjligt att initiera insticksmodulen \"%s\""
 
-#: src/gedit-plugins-engine.c:455
+#: src/gedit-plugins-engine.c:458
 #, c-format
 msgid "Error, impossible to destroy plugin '%s'"
 msgstr "Fel, omöjligt att förstöra insticksmodulen \"%s\""
 
-#: src/gedit-plugins-engine.c:538 src/gedit-plugins-engine.c:626
+#: src/gedit-plugins-engine.c:541 src/gedit-plugins-engine.c:629
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Fel, omöjligt att aktivera insticksmodulen \"%s\""
 
-#: src/gedit-plugins-engine.c:577
+#: src/gedit-plugins-engine.c:580
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Fel, omöjligt att inaktivera insticksmodulen \"%s\""
 
-#: src/gedit-plugins-engine.c:670
+#: src/gedit-plugins-engine.c:673
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
@@ -2175,92 +2157,92 @@ msgid "Close"
 msgstr "Stäng"
 
 #: src/gedit-ui.xml.h:7
-msgid "Close All"
-msgstr "Stäng alla"
-
-#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
 msgstr "Stäng alla öppna filer"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close the current file"
 msgstr "Stäng den aktiva filen"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Configure the application"
 msgstr "Konfigurera programmet"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Copy"
 msgstr "Kopiera"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Copy the selection"
 msgstr "Kopiera markeringen"
 
-#: src/gedit-ui.xml.h:13
+#: src/gedit-ui.xml.h:12
 msgid "Create a new document"
 msgstr "Skapa nytt dokument"
 
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:13
 msgid "Cu_t"
 msgstr "Klipp _ut"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:14
 msgid "Customize"
 msgstr "Anpassa"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:15
 msgid "Customize toolbars"
 msgstr "Anpassa verktygsrader"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:16
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:17
 msgid "Cut the selection"
 msgstr "Klipp ut markeringen"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:18
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:19
 msgid "Delete the selected text"
 msgstr "Ta bort den markerade texten"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:20
 msgid "Dump XML"
 msgstr "Dumpa XML"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:21
 msgid "Dump the UI Xml description"
 msgstr "Dumpa Xml-användargränssnittsbeskrivningen"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:23
 msgid "Find Again"
 msgstr "Sök igen"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:24
 msgid "Find Ne_xt"
 msgstr "Sök n_ästa"
 
-#: src/gedit-ui.xml.h:26
+#: src/gedit-ui.xml.h:25
 msgid "Go to a specific line number"
 msgstr "Gå till en specifik rad"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:26
 msgid "Goto _Line"
 msgstr "Gå till _rad"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:27
 msgid "Icon and _Text"
 msgstr "Ikon och _text"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:28
 msgid "Main toolbar"
 msgstr "Huvudverktygsrad"
+
+#: src/gedit-ui.xml.h:29
+msgid "Move the current document to a new window"
+msgstr "Flytta det aktuella dokument till ett nytt fönster"
 
 #: src/gedit-ui.xml.h:30
 msgid "New"
@@ -2355,134 +2337,130 @@ msgid "Revert to a saved version of the file"
 msgstr "Återgå till en sparad version av filen"
 
 #: src/gedit-ui.xml.h:57
-msgid "Save All"
-msgstr "Spara alla"
-
-#: src/gedit-ui.xml.h:58
 msgid "Save As"
 msgstr "Spara som"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:58
 msgid "Save _As..."
 msgstr "Spara so_m..."
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:59
 msgid "Save all open files"
 msgstr "Spara alla öppna filer"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:60
 msgid "Save the current file"
 msgstr "Spara den aktiva filen"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:61
 msgid "Save the current file with a different name"
 msgstr "Spara den aktuella filen med ett annat namn"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:62
 msgid "Search again for the same string"
 msgstr "Sök igen efter samma sträng"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:63
 msgid "Search for a string"
 msgstr "Sök efter en sträng"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:64
 msgid "Select All"
 msgstr "Markera allt"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:65
 msgid "Select _All"
 msgstr "Markera _allt"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:66
 msgid "Select the entire document"
 msgstr "Markera hela dokumentet"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:67
 msgid "Set toolbar button style according to desktop default"
 msgstr "Ställ in stilen på verktygsradsknappar enligt systeminställningarna"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:68
 msgid "Setup the page settings for your current printer"
 msgstr "Konfigurera sidinställningarna för din aktuella skrivare"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:69
 msgid "Show _Cursor Position"
 msgstr "Visa _markörposition"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:70
 msgid "Show _Overwrite Mode"
 msgstr "Visa _överskrivningsläge"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:71
 msgid "Show cursor position in the statusbar"
 msgstr "Visa markörposition i statusraden"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:72
 msgid "Show overwrite mode in the statusbar"
 msgstr "Visa översrivningsläge i statusraden"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:74
 msgid "Undo the last action"
 msgstr "Ångra den senaste åtgärden"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:75
 msgid "_About"
 msgstr "_Om"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:76
 msgid "_Close"
 msgstr "S_täng"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:77
 msgid "_Close All"
 msgstr "S_täng alla"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:78
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:79
 msgid "_Copy"
 msgstr "_Kopiera"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:80
 msgid "_Customize Toolbar"
 msgstr "_Anpassa verktygsrad"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:81
 msgid "_Debug"
 msgstr "_Felsök"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:82
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:83
 msgid "_Desktop Default"
 msgstr "_Systemstandard"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:84
 msgid "_Documents"
 msgstr "_Dokument"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:85
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:86
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:87
 msgid "_Find"
 msgstr "_Sök"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Icon"
 msgstr "_Ikon"
 
@@ -3009,7 +2987,7 @@ msgstr "Välj en eller flera _kodningar:"
 #: src/gedit-encodings.c:207 src/gedit-encodings.c:257
 #: src/gedit-encodings.c:282
 msgid "Western"
-msgstr "Västlig"
+msgstr "Västerländsk"
 
 #: src/gedit-encodings.c:144
 msgid "South European"
@@ -3144,6 +3122,30 @@ msgstr "Thai"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (ogiltig Unicode)"
+
+#~ msgid "<span weight=\"bold\">Search from</span>"
+#~ msgstr "<span weight=\"bold\">Sök från</span>"
+
+#~ msgid "C_ursor position"
+#~ msgstr "_Markörposition"
+
+#~ msgid "Case sensi_tive"
+#~ msgstr "Gör skillnad på geme_ner/VERSALER"
+
+#~ msgid "_Beginning of the document"
+#~ msgstr "_Början av dokumentet"
+
+#~ msgid "Not yet implemented."
+#~ msgstr "Inte implementerat än."
+
+#~ msgid "The string \"%s\" has not been found."
+#~ msgstr "Strängen \"%s\" kunde inte hittas."
+
+#~ msgid "Close All"
+#~ msgstr "Stäng alla"
+
+#~ msgid "Save All"
+#~ msgstr "Spara alla"
 
 #~ msgid "%d/%m/%Y %H:%M:%S"
 #~ msgstr "%Y-%m-%d %H:%M:%S"
