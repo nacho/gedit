@@ -798,6 +798,9 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 
 		gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
 
+		gtk_widget_show (msgbox);
+		gtk_window_present (GTK_WINDOW (msgbox));
+
 		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 		
 		gtk_widget_destroy (msgbox);
