@@ -447,9 +447,8 @@ void window_new_cb(GtkWidget *widget, gpointer cbdata)
 	window->show_status = data->window->show_status;
 	window->tab_pos = data->window->tab_pos;
 	window->have_toolbar = data->window->have_toolbar;
-#ifndef WITHOUT_GNOME
+
 	gE_get_settings (window);
-#endif
 }
 
 
@@ -763,11 +762,18 @@ close_window_common(gE_window *w)
 	if (w->files_list_window)
 		gtk_widget_destroy(w->files_list_window);
 	gtk_widget_destroy(w->window);
+	gE_save_settings (w, w);
+
 	g_free(w->search);
 	g_free(w);
 
 	if (window_list == NULL)
+	{
+		#ifdef WITHOUT_GNOME
+		gE_prefs_close ();
+		#endif
 		gtk_exit(0);
+	}
 }
 
 

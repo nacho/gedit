@@ -399,7 +399,7 @@ void gE_prefs_set_int(char *name, int value)
 
 #else
 
-	gnome_config_push_prefix ("/gEdit/Global");
+	gnome_config_push_prefix ("/gEdit/Global/");
 	gnome_config_set_int (name, value);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
