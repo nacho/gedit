@@ -43,7 +43,8 @@ gchar 			*gedit_encoding_to_string	 (const GeditEncoding *enc);
 const gchar		*gedit_encoding_get_name	 (const GeditEncoding *enc);
 const gchar		*gedit_encoding_get_charset	 (const GeditEncoding *enc);
 
-
+const GeditEncoding 	*gedit_encoding_get_utf8	 (void);
+const GeditEncoding 	*gedit_encoding_get_current	 (void);
 
 #endif  /* __GEDIT_ENCODINGS_H__ */
 

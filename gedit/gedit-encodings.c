@@ -119,10 +119,18 @@ typedef enum
   GEDIT_ENCODING_WINDOWS_1257,
   GEDIT_ENCODING_WINDOWS_1258,
 
-  GEDIT_ENCODING_LAST
+  GEDIT_ENCODING_LAST,
+
+  GEDIT_ENCODING_UTF_8
   
 } GeditEncodingIndex;
 
+static GeditEncoding utf8_encoding = 
+	{ GEDIT_ENCODING_UTF_8,
+	  "UTF-8", 
+	  N_("Unicode") 
+	};
+	
 static GeditEncoding encodings [] = {
 
   { GEDIT_ENCODING_ISO_8859_1,
@@ -274,6 +282,8 @@ gedit_encoding_lazy_init (void)
 		++i;
     	}
 
+	utf8_encoding.name = _(utf8_encoding.name);
+
 	initialized = TRUE;
 }
 
@@ -287,10 +297,13 @@ gedit_encoding_get_from_charset (const gchar *charset)
 	if (charset == NULL)
 		return NULL;
 
+	if (g_ascii_strcasecmp (charset, "UTF-8") == 0)
+		return gedit_encoding_get_utf8 ();
+
 	i = 0; 
 	while (i < GEDIT_ENCODING_LAST)
 	{
-		if (strcmp (charset, encodings[i].charset) == 0)
+		if (g_ascii_strcasecmp (charset, encodings[i].charset) == 0)
 			return &encodings[i];
       
 		++i;
@@ -312,6 +325,44 @@ gedit_encoding_get_from_index (gint index)
 	return &encodings [index];
 }
 
+const GeditEncoding *
+gedit_encoding_get_utf8 (void)
+{
+	gedit_encoding_lazy_init ();
+
+	return &utf8_encoding;
+}
+
+const GeditEncoding *
+gedit_encoding_get_current (void)
+{
+	static gboolean initialized = FALSE;
+	static const GeditEncoding *locale_encoding = NULL;
+
+	const gchar *locale_charset;
+
+	gedit_encoding_lazy_init ();
+
+	if (initialized != FALSE)
+		return locale_encoding;
+
+	if (g_get_charset (&locale_charset) == FALSE) 
+	{
+		if (locale_charset != NULL)
+			locale_encoding = gedit_encoding_get_from_charset (locale_charset);
+	
+	}
+	else
+	{
+		locale_encoding = &utf8_encoding;
+	}
+	
+	initialized = TRUE;
+
+	return locale_encoding;
+
+}
+	
 
 gchar *
 gedit_encoding_to_string (const GeditEncoding* enc)

@@ -281,16 +281,9 @@ create_gtk_selector (FileselMode mode,
 		hbox = gtk_hbox_new (FALSE, 6);
 
 		label = gtk_label_new_with_mnemonic (_("Ch_aracter Coding:"));
-		menu = gedit_encodings_option_menu_new ();
+		menu = gedit_encodings_option_menu_new (mode == FILESEL_SAVE);
 		
-		gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);
-
-		if (encoding != NULL)
-			gedit_encodings_option_menu_set_selected_encoding (
-					GEDIT_ENCODINGS_OPTION_MENU (menu),
-					encoding);
-				       	
-			
+		gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);				       		
 		gtk_box_pack_start (GTK_BOX (hbox), 
 				    label,
 				    FALSE,
@@ -308,6 +301,16 @@ create_gtk_selector (FileselMode mode,
 				  TRUE,
 				  TRUE,
 				  6);
+
+		g_object_set_data (G_OBJECT (filesel), 
+				   "encodings-option_menu",
+				   menu);
+
+		if (encoding != NULL)
+			gedit_encodings_option_menu_set_selected_encoding (
+					GEDIT_ENCODINGS_OPTION_MENU (menu),
+					encoding);
+
 	}
 
 	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
@@ -415,6 +418,16 @@ run_file_selector (GtkWindow  *parent,
 	} else
 		retval = NULL;
 
+	if (encoding != NULL)
+	{
+		GeditEncodingsOptionMenu *menu;
+
+		menu = GEDIT_ENCODINGS_OPTION_MENU (g_object_get_data (G_OBJECT (dialog), 
+								       "encodings-option_menu"));
+
+		*encoding = gedit_encodings_option_menu_get_selected_encoding (menu);
+	}
+
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
 	return retval;
@@ -440,11 +453,12 @@ gedit_file_selector_open (GtkWindow  *parent,
 			   gboolean    enable_vfs,
 			   const char *title,
 			   const char *mime_types,
-			   const char *default_path)
+			   const char *default_path,
+			   const GeditEncoding **encoding)
 {
 	return run_file_selector (parent, enable_vfs, FILESEL_OPEN, 
 				  title ? title : _("Select a file to open"),
-				  mime_types, default_path, NULL, NULL);
+				  mime_types, default_path, NULL, encoding);
 }
 
 /**
@@ -468,13 +482,12 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
 				gboolean    enable_vfs,
 				const char *title,
 				const char *mime_types,
-				const char *default_path)
+				const char *default_path,
+				const GeditEncoding **encoding)
 {
-	const GeditEncoding *encoding = NULL;
-
 	return run_file_selector (parent, enable_vfs, FILESEL_OPEN_MULTI,
 				  title ? title : _("Select files to open"),
-				  mime_types, default_path, NULL, &encoding);
+				  mime_types, default_path, NULL, encoding);
 }
 
 /**
@@ -499,11 +512,10 @@ gedit_file_selector_save (GtkWindow  *parent,
 			   const char *title,
 			   const char *mime_types,
 			   const char *default_path, 
-			   const char *default_filename)
+			   const char *default_filename,
+			   const GeditEncoding **encoding)
 {
-	const GeditEncoding *encoding = NULL;
-
 	return run_file_selector (parent, enable_vfs, FILESEL_SAVE,
 				  title ? title : _("Select a filename to save"),
-				  mime_types, default_path, default_filename, &encoding);
+				  mime_types, default_path, default_filename, encoding);
 }

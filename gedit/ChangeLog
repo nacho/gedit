@@ -1,3 +1,35 @@
+2003-05-26 Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-tooltips.[ch]: new files (from gtk+)
+
+	* Makefile.am: compile new files
+
+	* gedit-document.c (gedit_document_init): eventually set 
+	to UTF-8 the encoding of the document
+
+	* gedit-encodings-option-menu.c: add save_mode property,
+	(update_menu): re-written
+	(gedit_encodings_option_menu_get_selected_encoding):
+	(gedit_encodings_option_menu_set_selected_encoding): implemented
+
+	* gedit-encodings.[ch] (gedit_encoding_get_utf8):
+	(gedit_encoding_get_current): new methods
+
+	* gedit-file-selector-util.c (run_file_selector): get the selected
+	encoding from the menu
+	(gedit_file_selector_open_multi): add encoding parameter
+	(gedit_file_selector_open): ditto
+	(gedit_file_selector_save): ditto
+
+	* gedit-file.c (gedit_file_open): use new gedit_file_selector_open_multi
+	signature
+	(gedit_file_save_as): use new gedit_file_selector_save signature
+
+	* gedit-mdi-child.c: show MIME type and Encoding in the tooltip
+
+	* gedit-mdi.c:
+	* gedit-ui.xml: remove the encoding status bar
+
 2003-05-21  Eric Ritezel  <eisenwulf@inductiveart.net>
  
          * gedit-mdi-child.c (gedit_mdi_child_set_label): switch to
@@ -16,7 +48,7 @@
 	for encodings
 
 	* dialogs/gedit-encodings-dialog.c: rewritten (part of the code taken
-	from gnome-terminal
+	from gnome-terminal)
 	* dialogs/gedit-encodings-dialog.glade2: ditto
 	* dialogs/gedit-encodings-dialog.h: ditto
 

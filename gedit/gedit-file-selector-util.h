@@ -48,26 +48,31 @@
 #include <glib/gmacros.h>
 #include <gtk/gtkwindow.h>
 
+#include <gedit/gedit-encodings.h>
+
 G_BEGIN_DECLS
 
 char  *gedit_file_selector_open       (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
 					const char *mime_types,
-					const char *default_path);
+					const char *default_path,
+					const GeditEncoding **encoding);
 
 char **gedit_file_selector_open_multi (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
 					const char *mime_types,
-					const char *default_path);
+					const char *default_path,
+					const GeditEncoding **encoding);
 
 char  *gedit_file_selector_save       (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
 					const char *mime_types,
 					const char *default_path,
-					const char *default_filename);
+					const char *default_filename,
+					const GeditEncoding **encoding);
 
 G_END_DECLS
 

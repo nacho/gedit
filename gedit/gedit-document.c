@@ -265,7 +265,12 @@ gedit_document_init (GeditDocument *document)
 		document->priv->encoding = g_strdup (encoding);
 	}
 	else
-		document->priv->encoding = NULL;
+	{
+		const GeditEncoding *enc = gedit_encoding_get_utf8 ();
+		
+		document->priv->encoding = g_strdup (
+				gedit_encoding_get_charset (enc));
+	}			
 }
 
 static void

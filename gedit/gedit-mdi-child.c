@@ -36,6 +36,7 @@
 #include <libgnomeui/gnome-icon-theme.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <eel/eel-input-event-box.h>
 
 #include <bonobo/bonobo-i18n.h>
@@ -48,6 +49,8 @@
 #include "gedit2.h"
 #include "gedit-print.h"
 #include "recent-files/egg-recent-util.h"
+#include "gedit-encodings.h"
+#include "gedit-tooltips.h"
 
 struct _GeditMDIChildPrivate
 {
@@ -568,6 +571,8 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	gchar *mime_type = NULL;
 	int icon_size;
 
+	gedit_debug (DEBUG_MDI, "");
+
 	g_return_val_if_fail (GTK_IS_IMAGE (image), NULL);
 	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
 
@@ -578,7 +583,7 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 
 	g_return_val_if_fail (theme != NULL, NULL);
 
-	raw_uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);	
+	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
 	
 	if (raw_uri != NULL)
 		mime_type = gnome_vfs_get_mime_type (raw_uri);
@@ -602,7 +607,60 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 
 	return image;	
 }
+
+static void
+set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
+{
+	gchar *tip;
+	gchar *uri;
+	gchar *raw_uri;
+	gchar *mime_type = NULL;
+	const gchar *mime_description = NULL;
+	gchar *mime_full_description; 
+	gchar *encoding;
+	const GeditEncoding *enc;
 	
+	gedit_debug (DEBUG_MDI, "");
+
+	uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);
+	g_return_if_fail (uri != NULL);
+
+	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
+	
+	if (raw_uri != NULL)
+		mime_type = gnome_vfs_get_mime_type (raw_uri);
+
+	if (mime_type != NULL)
+		mime_description = gnome_vfs_mime_get_description (mime_type);
+
+	if (mime_description == NULL)
+		mime_full_description = g_strdup (_("Unknown"));
+	else
+		mime_full_description = g_strdup_printf ("%s (%s)", 
+				mime_description, mime_type);
+		
+	enc = gedit_document_get_encoding (GEDIT_MDI_CHILD (child)->document);
+
+	if (enc == NULL)
+		encoding = g_strdup (_("Unicode (UTF-8)"));
+	else
+		encoding = gedit_encoding_to_string (enc);
+		
+	tip = g_strdup_printf ("<b>Name:</b> %s\n\n"
+			       "<b>MIME Type:</b> %s\n"
+			       "<b>Encoding:</b> %s", 
+			       uri, mime_full_description, encoding);
+
+	gedit_tooltips_set_tip (tooltips, widget, tip, NULL);
+	g_free (tip);
+
+	g_free (uri);
+	g_free (raw_uri);
+	g_free (mime_type);
+	g_free (encoding);
+	g_free (mime_full_description);
+}
+
 /**
  * gedit_mdi_child_set_label:
  * 
@@ -616,9 +674,9 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
                            gpointer data)
 {
 	GtkWidget *ret;
-	gchar *name, *uri;
+	gchar *name;
 
-	static GtkTooltips *tooltips = NULL;
+	static GeditTooltips *tooltips = NULL;
 	
 	gedit_debug (DEBUG_MDI, "");
 
@@ -627,14 +685,12 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	g_return_val_if_fail (GEDIT_IS_VIEW (view), NULL);
 		
 	if (tooltips == NULL)
-		tooltips = gtk_tooltips_new ();
+	{
+		tooltips = gedit_tooltips_new ();
+	}
 	
 	/* setup the name for the tab title */
 	name = bonobo_mdi_child_get_name (child);
-
-	/* setup the location for the tooltip and title */
- 	uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);
-	g_return_val_if_fail (uri != NULL, NULL);
 		
 	if (old_hbox != NULL) 
 	{
@@ -648,8 +704,9 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		/* update the label/image/tooltip */
 		gtk_label_set_text (GTK_LABEL (label), name);
 		set_tab_icon (image, child);
-		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
 
+		set_tooltip (tooltips, event_box, child);
+		
 		ret = old_hbox;
 	} 
 	else 
@@ -659,7 +716,7 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		GtkWidget *popup_menu;
 		GtkSettings *settings;
 		gint w, h;
-
+	
 		/* fetch the size of an icon */
 		settings = gtk_widget_get_settings (view);
 		gtk_icon_size_lookup_for_settings (settings,
@@ -719,8 +776,8 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		GTK_WIDGET_SET_FLAGS (event_box, GTK_NO_WINDOW);
 
 		/* setup the tooltip */
-		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
-
+		set_tooltip (tooltips, event_box, child);
+		
 		/* show all children of our newly-created tab pane */
 		gtk_widget_show_all (hbox);
 
@@ -728,7 +785,6 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	}
 
 	g_free (name);
-	g_free (uri);
 
 	return ret;
 }

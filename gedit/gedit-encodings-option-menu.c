@@ -39,15 +39,24 @@
 
 #define ENCODING_KEY "Enconding"
 
-static void	 	  gedit_encodings_option_menu_class_init 	(GeditEncodingsOptionMenuClass 	*klass);
-static void		  gedit_encodings_option_menu_init		(GeditEncodingsOptionMenu 	*menu);
-static void		  gedit_encodings_option_menu_finalize 		(GObject 			*object);
+static void 	  gedit_encodings_option_menu_class_init 	(GeditEncodingsOptionMenuClass 	*klass);
+static void	  gedit_encodings_option_menu_init		(GeditEncodingsOptionMenu 	*menu);
+static void	  gedit_encodings_option_menu_finalize 		(GObject 			*object);
 
-static void		  update_menu 					(GeditEncodingsOptionMenu       *option_menu);
+static void	  update_menu 					(GeditEncodingsOptionMenu       *option_menu);
+
+
+/* Properties */
+enum {
+	PROP_0,
+	PROP_SAVE_MODE
+};
 
 struct _GeditEncodingsOptionMenuPrivate
 {
 	gint activated_item;
+
+	gboolean save_mode;
 };
 
 static GObjectClass 	 *parent_class  = NULL;
@@ -79,12 +88,72 @@ gedit_encodings_option_menu_get_type (void)
 }
 
 static void
+gedit_encodings_option_menu_set_property (GObject 	*object, 
+					  guint 	 prop_id,
+			    		  const GValue *value, 
+					  GParamSpec	*pspec)
+{
+	GeditEncodingsOptionMenu *om;
+
+	g_return_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (object));
+
+    	om = GEDIT_ENCODINGS_OPTION_MENU (object);
+	
+	switch (prop_id) {	
+	    case PROP_SAVE_MODE:
+		    om->priv->save_mode = g_value_get_boolean (value);
+		    
+		    update_menu (om);		
+		    break;
+
+	    default:
+		    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		    break;
+	}
+}
+
+static void
+gedit_encodings_option_menu_get_property (GObject 	*object, 
+					  guint 	 prop_id,
+			    		  GValue 	*value, 
+					  GParamSpec	*pspec)
+{
+	GeditEncodingsOptionMenu *om;
+
+	g_return_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (object));
+	
+	om = GEDIT_ENCODINGS_OPTION_MENU (object);
+
+	switch (prop_id) {	
+	    case PROP_SAVE_MODE:
+		    g_value_set_boolean (value, om->priv->save_mode);
+		    break;
+		    
+	    default:
+		    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+		    break;
+	}
+}
+
+static void
 gedit_encodings_option_menu_class_init (GeditEncodingsOptionMenuClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	parent_class		= g_type_class_peek_parent (klass);
 	object_class->finalize	= gedit_encodings_option_menu_finalize;
+
+	object_class->set_property = gedit_encodings_option_menu_set_property;
+	object_class->get_property = gedit_encodings_option_menu_get_property;
+
+	g_object_class_install_property (object_class,
+					 PROP_SAVE_MODE,
+					 g_param_spec_boolean ("save_mode",
+							       ("Save Mode"),
+							       ("Save Mode"),
+							       FALSE,
+					 		       (G_PARAM_READWRITE | 
+							        G_PARAM_CONSTRUCT_ONLY)));
 }
 
 static void
@@ -117,34 +186,63 @@ update_menu (GeditEncodingsOptionMenu *option_menu)
 	GtkWidget *menu_item;
 	GSList    *group = NULL;
 	GSList	  *encodings, *list;
+	gchar     *str;
+
+	const GeditEncoding *utf8_encoding;
+	const GeditEncoding *current_encoding;
 
 	menu = gtk_menu_new ();
+	
+	encodings = list = gedit_prefs_manager_get_encodings ();
 
-	menu_item = gtk_radio_menu_item_new_with_label (group, _("Auto Detected"));
-	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
+	utf8_encoding = gedit_encoding_get_utf8 ();
+	current_encoding = gedit_encoding_get_current ();
+	
+	if (!option_menu->priv->save_mode)
+	{
+		menu_item = gtk_radio_menu_item_new_with_label (group, _("Auto Detected"));
+		group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
 
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-	gtk_widget_show (menu_item);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+		gtk_widget_show (menu_item);
 
-	menu_item = gtk_separator_menu_item_new ();
+		g_signal_connect (menu_item,
+				  "activate",
+				  G_CALLBACK (add_or_remove),
+				  option_menu);
+	
+		menu_item = gtk_separator_menu_item_new ();
+
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+		gtk_widget_show (menu_item);
+	}
+	
+	if (current_encoding != utf8_encoding)
+		str = gedit_encoding_to_string (utf8_encoding);
+	else
+		str = g_strdup_printf (_("Current Locale (%s)"), 
+				       gedit_encoding_get_charset (utf8_encoding));
+
+	menu_item = gtk_radio_menu_item_new_with_label (group, str);
 
 	g_signal_connect (menu_item,
 			  "activate",
 			  G_CALLBACK (add_or_remove),
 			  option_menu);
 
-      	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
+
+	g_object_set_data (G_OBJECT (menu_item), ENCODING_KEY, (gpointer)utf8_encoding);
+
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 	gtk_widget_show (menu_item);
 
-	encodings = list = gedit_prefs_manager_get_encodings ();
+	g_free (str);
 
-	while (list != NULL)
+	if (utf8_encoding != current_encoding)
 	{
-		const GeditEncoding *enc;
-		gchar *str;
-
-		enc = (const GeditEncoding *)list->data;
-		str = gedit_encoding_to_string (enc);
+		str = g_strdup_printf (_("Current Locale (%s)"), 
+				       gedit_encoding_get_charset (current_encoding));
 
 		menu_item = gtk_radio_menu_item_new_with_label (group, str);
 
@@ -155,13 +253,44 @@ update_menu (GeditEncodingsOptionMenu *option_menu)
 
 		group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
 
-		g_object_set_data (G_OBJECT (menu_item), ENCODING_KEY, (gpointer)enc);
+		g_object_set_data (G_OBJECT (menu_item), 
+				   ENCODING_KEY, (gpointer)current_encoding);
 
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 		gtk_widget_show (menu_item);
 
 		g_free (str);
+	}
 
+	while (list != NULL)
+	{
+		const GeditEncoding *enc;
+		
+		enc = (const GeditEncoding *)list->data;
+
+		if ((enc != current_encoding) && 
+		    (enc != utf8_encoding) && 
+		    (enc != NULL))
+		{
+			str = gedit_encoding_to_string (enc);
+
+			menu_item = gtk_radio_menu_item_new_with_label (group, str);
+
+			g_signal_connect (menu_item,
+					  "activate",
+					  G_CALLBACK (add_or_remove),
+					  option_menu);
+
+			group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (menu_item));
+
+			g_object_set_data (G_OBJECT (menu_item), ENCODING_KEY, (gpointer)enc);
+
+			gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+			gtk_widget_show (menu_item);
+
+			g_free (str);
+		}
+		
 		list = g_slist_next (list);
 	}
 
@@ -188,8 +317,6 @@ static void
 gedit_encodings_option_menu_init (GeditEncodingsOptionMenu *menu)
 {
 	menu->priv = g_new0 (GeditEncodingsOptionMenuPrivate, 1);
-
-	update_menu (menu);
 }
 
 static void
@@ -208,16 +335,40 @@ gedit_encodings_option_menu_finalize (GObject *object)
 }
 
 GtkWidget *
-gedit_encodings_option_menu_new (void)
+gedit_encodings_option_menu_new (gboolean save_mode)
 {
-	return g_object_new (GEDIT_TYPE_ENCODINGS_OPTION_MENU, NULL);
+	return g_object_new (GEDIT_TYPE_ENCODINGS_OPTION_MENU, 
+			     "save_mode", save_mode,
+			     NULL);
 }
 
 const GeditEncoding *
 gedit_encodings_option_menu_get_selected_encoding (GeditEncodingsOptionMenu *menu)
 {
+	GtkWidget *active_widget;
+
+	GtkOptionMenu *option_menu;
+
 	g_return_val_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (menu), NULL);
 	
+	option_menu = GTK_OPTION_MENU (menu);
+	g_return_val_if_fail (option_menu != NULL, NULL);
+	
+	if (option_menu->menu)
+    	{
+      		active_widget = gtk_menu_get_active (GTK_MENU (option_menu->menu));
+
+	      	if (active_widget != NULL)
+		{
+			const GeditEncoding *ret;
+
+			ret = (const GeditEncoding *)g_object_get_data (G_OBJECT (active_widget), 
+									ENCODING_KEY);
+
+			return ret;
+		}
+	}
+
 	return NULL;
 }
 
@@ -225,6 +376,39 @@ void
 gedit_encodings_option_menu_set_selected_encoding (GeditEncodingsOptionMenu *menu,
 						   const GeditEncoding      *encoding)
 {
+	GtkOptionMenu *option_menu;
+	GList *list;
+	gint i;
+
 	g_return_if_fail (GEDIT_IS_ENCODINGS_OPTION_MENU (menu));
+	
+	option_menu = GTK_OPTION_MENU (menu);
+	g_return_if_fail (option_menu != NULL);
+
+	list = GTK_MENU_SHELL (option_menu->menu)->children;
+	i = 0;
+	while (list != NULL)
+	{
+		GtkWidget *menu_item;
+		const GeditEncoding *enc;
+		
+		menu_item = GTK_WIDGET (list->data);
+
+		enc = (const GeditEncoding *)g_object_get_data (G_OBJECT (menu_item), 
+								ENCODING_KEY);
+
+		if (enc == encoding)
+		{
+			gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (menu_item), TRUE);
+
+			gtk_option_menu_set_history (GTK_OPTION_MENU (menu), i);
+			
+			return;
+		}
+
+		++i;
+
+		list = g_list_next (list);
+	}
 }
 

@@ -142,16 +142,19 @@ gedit_file_close (GtkWidget *view)
 void
 gedit_file_open (GeditMDIChild *active_child)
 {
+	const GeditEncoding *encoding = NULL;
 	gchar** files;
 	
 	gedit_debug (DEBUG_FILE, "");
 
+	encoding = gedit_encoding_get_current ();
 	files = gedit_file_selector_open_multi (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			TRUE,
 		        _("Open File..."), 
 			NULL, 
-			gedit_default_path);
+			gedit_default_path,
+			&encoding);
 	
 	if (files) 
 	{
@@ -380,7 +383,8 @@ gedit_file_save_as (GeditMDIChild *child)
 	gchar *fname = NULL;
 	gchar *path = NULL;
 	gchar *raw_uri = NULL;
-	
+	const GeditEncoding *encoding;
+
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (child != NULL, FALSE);
@@ -431,13 +435,16 @@ gedit_file_save_as (GeditMDIChild *child)
 				
 	g_return_val_if_fail (fname != NULL, FALSE);
 	
+	encoding = gedit_document_get_encoding (doc);
+
 	file = gedit_file_selector_save (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			FALSE,
 		        _("Save as..."), 
 			NULL, 
 			path,
-			fname);
+			fname,
+			&encoding);
 	
 	g_free (raw_uri);
 	g_free (fname);

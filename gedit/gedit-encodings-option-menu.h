@@ -63,7 +63,7 @@ struct _GeditEncodingsOptionMenuClass
 GType		     gedit_encodings_option_menu_get_type		(void) G_GNUC_CONST;
 
 /* Constructor */
-GtkWidget 	    *gedit_encodings_option_menu_new 			(void);
+GtkWidget 	    *gedit_encodings_option_menu_new 			(gboolean save_mode);
 
 const GeditEncoding *gedit_encodings_option_menu_get_selected_encoding	(GeditEncodingsOptionMenu *menu);
 void		     gedit_encodings_option_menu_set_selected_encoding	(GeditEncodingsOptionMenu *menu,
