@@ -43,7 +43,7 @@
 
 static const struct poptOption options[] =
 {
-	{ "debug-window", '\0', 0, &debug_commands, 0,
+	{ "debug-window", '\0', 0, &debug_window, 0,
 	  N_("Show window debugging messages."), NULL },
 
 	{ "debug-commands", '\0', 0, &debug_commands, 0,
