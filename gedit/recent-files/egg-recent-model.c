@@ -875,11 +875,27 @@ static gboolean
 egg_recent_model_lock_file (FILE *file)
 {
 	int fd;
+	gboolean locked = FALSE;
+	gint	try = 4;
 
 	rewind (file);
 	fd = fileno (file);
 
-	return lockf (fd, F_LOCK, 0) == 0 ? TRUE : FALSE;
+	/* Attempt to lock the file 4 times,
+	 * waiting 1 second in between attempts.
+	 * We should really be doing asynchronous
+	 * locking, but requires substantially larger
+	 * changes.
+	 */
+	
+	while (try-- > 0)
+	{
+		if ((locked = lockf (fd, F_TLOCK, 0) < 0 ? FALSE : TRUE));
+			break;
+		sleep (1);
+	}
+
+	return locked;
 }
 
 static gboolean
