@@ -1,3 +1,11 @@
+1999-01-05 Nat Friedman <nat@nat.org>
+
+	* src/gE_document.c (gE_msgbar_clear): Return FALSE instead of
+ 	destroying the timeout from within its own callback.
+
+	* src/gE_document.h: Change the return type of gE_msgbar_clear to
+ 	gboolean.
+
 1998-12-30  Evan Lawrence <evan@worldpath.net>
 
 	* src/gE_prefslib.c: Copy temporary file, instead of renaming, to

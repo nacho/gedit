@@ -52,7 +52,7 @@ extern void gE_document_set_scroll_ball (gE_document *doc, gint scroll_ball);
 extern void gE_document_set_split_screen (gE_document *doc, gint split_screen);
 #endif
 extern void gE_msgbar_set(gE_window *window, char *msg);
-extern void gE_msgbar_clear(gpointer data);
+extern gboolean gE_msgbar_clear(gpointer data);
 
 #ifdef WITH_GMODULE_PLUGINS
 extern gE_document *gE_document_new_container (gE_window *w, gchar *title,

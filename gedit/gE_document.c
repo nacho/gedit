@@ -597,13 +597,14 @@ gE_msgbar_timeout_add(gE_window *window)
  * clears the text by using a space (" ").  apparently, Gtk has no
  * provision for clearing a label widget.
  */
-void
+gboolean
 gE_msgbar_clear(gpointer data)
 {
 	gE_window *window = (gE_window *)data;
 
 	gE_msgbar_set(window, MSGBAR_CLEAR);
-	gtk_timeout_remove(msgbar_timeout_id);
+
+	return FALSE;
 }
 
 
