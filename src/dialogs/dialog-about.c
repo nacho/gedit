@@ -24,7 +24,7 @@
 void dialog_about (void);
 
 /**
- * gedit_about:
+ * dialog_about:
  *
  * Show the user the information about the program and its authors.
  */

@@ -67,16 +67,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS TODO-road_to_1.0.0 FAQ
 %{prefix}/bin/gedit
 %{prefix}/share/*
-#%{prefix}/share/locale/*/*/*
-#%{prefix}/share/gnome/apps/*/*
-#%{prefix}/share/pixmaps/*
-#%{prefix}/share/mime-info/*
-#%{prefix}/share/geditrc
 %{prefix}/man/*/*
-%{prefix}/libexec/*/*/*
-
+%{prefix}/lib/gedit/plugins/*
 
 %changelog
+* Wed Apr 19 2000 Jason Leach <leach@wam.umd.edu>
+- Removed the prefix/libexec/* from files, we don't build plugins here
+anymore
+
 * Wed Nov 17 1999 Alex Roberts <bse@gedit.pn.org>
 - Updated doc's to be included in RPM
 

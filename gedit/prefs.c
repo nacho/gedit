@@ -134,13 +134,13 @@ gedit_load_settings (void)
 	settings->splitscreen = gnome_config_get_int("splitscreen");
 	settings->close_doc = gnome_config_get_int ("close_doc");
 
-	settings->bg[0] = gnome_config_get_int( "bgr=65535" );
-	settings->bg[1] = gnome_config_get_int( "bgg=65535" );
-	settings->bg[2] = gnome_config_get_int( "bgb=65535" );
+	settings->bg[0] = gnome_config_get_int ("bgr=65535");
+	settings->bg[1] = gnome_config_get_int ("bgg=65535");
+	settings->bg[2] = gnome_config_get_int ("bgb=65535");
 	
-	settings->fg[0] = gnome_config_get_int( "fgr=0" );
-	settings->fg[1] = gnome_config_get_int( "fgg=0" );
-	settings->fg[2] = gnome_config_get_int( "fgb=0" );
+	settings->fg[0] = gnome_config_get_int ("fgr=0");
+	settings->fg[1] = gnome_config_get_int ("fgg=0");
+	settings->fg[2] = gnome_config_get_int ("fgb=0");
 	
 	settings->width = gnome_config_get_int ("width=600");
 	settings->height = gnome_config_get_int ("height=400");
@@ -185,6 +185,3 @@ gedit_load_settings (void)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }
-
-
-
