@@ -58,6 +58,8 @@ struct _GeditViewPrivate
 	GtkWidget *overwrite_mode_statusbar;
 
 	gboolean overwrite_mode;
+
+	gint tab_size;
 };
 
 
@@ -525,6 +527,18 @@ gedit_view_finalize (GObject *object)
 	gedit_debug (DEBUG_VIEW, "END");
 }
 
+static void
+gedit_view_realize_cb (GtkWidget *widget, GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+			
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+			
+	/* Set tab size: this function must be called after the widget is
+	 * realized */
+	gedit_view_set_tab_size (view, 
+				 gedit_prefs_manager_get_tabs_size ());
+}
 
 /**
  * gedit_view_new:
@@ -565,10 +579,6 @@ gedit_view_new (GeditDocument *doc)
 			
 	gtk_widget_show_all (GTK_WIDGET (view));
 
-	/* Set tab size: this function must be called after show */
-	gedit_view_set_tab_size (view, gedit_prefs_manager_get_tabs_size ());
-
-
 	tl = gtk_drag_dest_get_target_list (GTK_WIDGET (view->priv->text_view));
 	g_return_val_if_fail (tl != NULL, view);
 
@@ -604,9 +614,13 @@ gedit_view_new (GeditDocument *doc)
 			  G_CALLBACK (gedit_view_key_press_cb),
 			  view);
 
+	g_signal_connect (G_OBJECT (view->priv->text_view),
+			  "realize",
+			  G_CALLBACK (gedit_view_realize_cb),
+			  view);
 
-	gtk_text_view_set_editable (view->priv->text_view, !gedit_document_is_readonly (doc));	
-
+	gtk_text_view_set_editable (view->priv->text_view, 
+				    !gedit_document_is_readonly (doc));	
 	
 	gedit_debug (DEBUG_VIEW, "END: %d", G_OBJECT (view)->ref_count);
 
@@ -866,6 +880,9 @@ gedit_view_calculate_real_tab_width (GeditView *view, gint tab_size)
 	return tab_width;
 }
 
+/* This function must be called after the widget is
+ * realized 
+ */
 void
 gedit_view_set_tab_size (GeditView* view, gint tab_size)
 {
@@ -875,6 +892,9 @@ gedit_view_set_tab_size (GeditView* view, gint tab_size)
 	gedit_debug (DEBUG_VIEW, "Tab size: %d", tab_size);
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	if (view->priv->tab_size == tab_size)
+		return;
 
 	real_tab_width = gedit_view_calculate_real_tab_width (
 					 GEDIT_VIEW (view),
@@ -889,8 +909,12 @@ gedit_view_set_tab_size (GeditView* view, gint tab_size)
 	tab_array = pango_tab_array_new (1, TRUE);
 	pango_tab_array_set_tab (tab_array, 0, PANGO_TAB_LEFT, real_tab_width);
 
-	gtk_text_view_set_tabs (GTK_TEXT_VIEW (view->priv->text_view), tab_array);
+	gtk_text_view_set_tabs (GTK_TEXT_VIEW (view->priv->text_view), 
+				tab_array);
+
 	pango_tab_array_free (tab_array);
+
+	view->priv->tab_size = tab_size;
 }
 
 void
