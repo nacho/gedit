@@ -75,7 +75,7 @@ static char *lastmsg = NULL;
 static gint msgbar_timeout_id;
 
 /*gE_window */
-void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
+void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 {
         /*GnomeUIInfo * gedit_menu;
 	gE_window *w;*/
@@ -104,13 +104,13 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	g_hash_table_insert (win_pointer_to_int, app, ptr);
 	
 
-	gtk_widget_set_usize (GTK_WIDGET(app), 630, 390);
+	gtk_widget_set_usize (GTK_WIDGET(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 
 	/* statusbar */
 	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gnome_app_set_statusbar (app, GTK_WIDGET (statusbar));
+	gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
 
 
 	/* line and column indicators */
@@ -140,10 +140,10 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	gE_set_menu_toggle_states();
 
-	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
+	g_list_foreach(plugins, (GFunc) add_plugins_to_window, GNOME_APP(app));
 	
 	settings->num_recent = 0;
-	recent_update(app);
+	recent_update(GNOME_APP(app));
 
 	gtk_drag_dest_set (GTK_WIDGET(app),
 		GTK_DEST_DEFAULT_ALL,

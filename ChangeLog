@@ -1,4 +1,44 @@
-1999-05-20 23:32:57 BST Alex Roberts  <bse@gedit.pn.org>
+1999-05-21 16:55:57  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_prefs_box.c: (window_page_new) get the allocation.width and height
+	  of the window to set the current width/height entries.
+	  Connected the "Use Current" buttons to set the corresponding Startup entry
+	  to the current width/height.
+	  (gE_prefs_dialog) Moved the Window tab next to the General tab.
+	
+	* User configurable width/height really is finished now! :)
+
+1999-05-21 16:18:32  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_plugin_api.c: (gE_plugin_text_insert), (gE_plugin_text_append) 
+	  Replaced calls to gtk_text_insert with gtk_editable_insert_text so that 
+	  the doc_insert_text_cb can pickup the changes and duplicate into the
+	  split-screen. No more get_point warnings!
+	
+	* src/gE_prefs_box.c: (plugins_clist_add) Make the file selection box start
+	  in the $PLUGINDIR, instead of the current directory.
+	  Added Translation _() tags around the file selector tilebar string.
+
+1999-05-21 13:39:23 BST  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_document.[ch]: (gE_window_new) Changed the GnomeApp arg to a GtkWidget.
+	  Now resizing smaller really does work properly now!! Honest! :)
+
+1999-05-21 01:29:18 BST  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_document.c: (gE_window_new) Use the settings->width/height values to set
+	  the usize of the window.
+	
+	* gedit.c: (main) Call gE_get_settings, for initial startup.
+	
+	* gE_prefs_box.c: (gE_apply) Ok! Now we set the width/height settings by
+	  gettign the values ofthe entry.
+	  (gE_prefs_dialog) Connect a modified signal when we change the width/height
+	  entries.
+	  
+	* Ok, now it's time to sleep... User configurable width/height is finished!! :)
+
+1999-05-20 23:32:57 BST  Alex Roberts  <bse@gedit.pn.org>
 	* src/gE_prefs.h: Added width/height gints.
 	
 	* src/gE_prefs.c: Load and Set Width and Height settings. If Width/Height

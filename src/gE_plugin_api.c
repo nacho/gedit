@@ -136,14 +136,14 @@ gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
-   GtkText *text = GTK_TEXT(document->text);
 
-   if (position >= gtk_text_get_length(text))
-      position = gtk_text_get_length(text);
-   gtk_text_freeze(text);
-   gtk_text_set_point(text, position);
-   gtk_text_insert(text, NULL, NULL, NULL, buffer, length);
-   gtk_text_thaw(text);
+   if (position >= gtk_text_get_length(GTK_TEXT(document->text)))
+      position = gtk_text_get_length(GTK_TEXT(document->text));
+      
+   gtk_text_freeze(GTK_TEXT(document->text));
+   gtk_editable_insert_text (GTK_EDITABLE (document->text), buffer, length, &position);
+   gtk_text_thaw(GTK_TEXT(document->text));
+   
    document->changed = 1;
 }
 
@@ -152,12 +152,13 @@ gE_plugin_text_append(gint docid, gchar * buffer, gint length)
 {
 /*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
    gE_document *document = gE_document_current();
-   GtkText *text = GTK_TEXT(document->text);
-
-   gtk_text_freeze(text);
-   gtk_text_set_point(text, gtk_text_get_length(text));
-   gtk_text_insert(text, NULL, NULL, NULL, buffer, length);
-   gtk_text_thaw(text);
+   gint position;
+   
+   position = gtk_text_get_length(GTK_TEXT(document->text));
+   
+   gtk_text_freeze(GTK_TEXT(document->text));
+   gtk_editable_insert_text (GTK_EDITABLE (document->text), buffer, length, &position);
+   gtk_text_thaw(GTK_TEXT(document->text));
    document->changed = 1;
 }
 

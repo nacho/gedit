@@ -63,6 +63,8 @@ typedef struct _gE_prefs_data {
 	GtkWidget *cur;
 	GtkWidget *preW;
 	GtkWidget *preH;
+	gchar *curW;
+	gchar *curH;
 	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
@@ -93,6 +95,8 @@ gchar *mdi_type_label [NUM_MDI_MODES] = {
 void cancel()
 {
   gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
+  g_free (prefs->curW);
+  g_free (prefs->curH);
   g_free(prefs);
   prefs = NULL;
 }
@@ -187,6 +191,9 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
          settings->mdi_mode = i;
        }
   
+  /* Window Settings */
+  settings->width = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preW)));
+  settings->height = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preH)));  
   
   gE_window_refresh(data->window);
   gE_save_settings();
@@ -469,9 +476,15 @@ static void plugins_fsel_ok (GtkWidget *w, GtkFileSelection *fs)
 static void plugins_clist_add (GtkWidget *w, gpointer data)
 {
  GtkWidget *fsel;
+ gchar *fname;
  
- 	fsel = gtk_file_selection_new ("Plugin Selector");
+ 	fsel = gtk_file_selection_new (_("Plugin Selector"));
  	gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fsel));
+
+ 	fname = g_malloc (strlen (PLUGINDIR) + 3);
+ 	sprintf (fname, "%s/*", PLUGINDIR);
+ 	gtk_file_selection_set_filename (GTK_FILE_SELECTION (fsel), fname);
+ 	g_free (fname);
  	
  	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fsel)->ok_button),
 			  "clicked", GTK_SIGNAL_FUNC(plugins_fsel_ok),
@@ -729,11 +742,29 @@ static GtkWidget *mdi_page_new()
 
 /* Window Stuff.. */
 
+void use_current (GtkWidget *w, gpointer size)
+{
+
+	if (size == 0)
+	  gtk_entry_set_text (GTK_ENTRY (prefs->preW), prefs->curW);
+	else
+	  gtk_entry_set_text (GTK_ENTRY (prefs->preH), prefs->curH);
+
+}
+
 static GtkWidget *window_page_new()
 {
   GtkWidget *main_vbox, *vbox, *vbox2, *frame, *hbox;
   GtkWidget *label, *button;
   gint i;
+  gchar *tmp;
+
+
+  prefs->curW = g_malloc (1);
+  prefs->curH = g_malloc (1);
+  sprintf (prefs->curW, "%d", GTK_WIDGET(mdi->active_window)->allocation.width);
+  sprintf (prefs->curH, "%d", GTK_WIDGET(mdi->active_window)->allocation.height);
+
 
   main_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
@@ -757,7 +788,8 @@ static GtkWidget *window_page_new()
   	gtk_widget_show (label);
   	
   	prefs->cur = gtk_entry_new ();
-  	gtk_widget_set_sensitive (prefs->cur, FALSE);
+  	gtk_entry_set_text (GTK_ENTRY (prefs->cur), prefs->curW);
+ 	gtk_widget_set_sensitive (prefs->cur, FALSE);
   	gtk_box_pack_start (GTK_BOX (hbox), prefs->cur, FALSE, FALSE, 3);
   	gtk_widget_show (prefs->cur);
 
@@ -781,6 +813,8 @@ static GtkWidget *window_page_new()
   	gtk_widget_show (prefs->preW);
   	
   	button = gtk_button_new_with_label ("Use Current");
+  	gtk_signal_connect (GTK_OBJECT (button), "clicked",
+  					GTK_SIGNAL_FUNC (use_current), (gint) 0);
   	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
   	gtk_widget_show (button);
 
@@ -795,6 +829,7 @@ static GtkWidget *window_page_new()
   	gtk_widget_show (label);
   	
   	prefs->cur = gtk_entry_new ();
+	gtk_entry_set_text (GTK_ENTRY (prefs->cur), prefs->curH);
  	gtk_widget_set_sensitive (prefs->cur, FALSE);
   	gtk_box_pack_start (GTK_BOX (hbox), prefs->cur, FALSE, FALSE, 3);
   	gtk_widget_show (prefs->cur);
@@ -818,6 +853,8 @@ static GtkWidget *window_page_new()
   	gtk_widget_show (prefs->preH);
 
   	button = gtk_button_new_with_label ("Use Current");
+  	gtk_signal_connect (GTK_OBJECT (button), "clicked",
+  					GTK_SIGNAL_FUNC (use_current), (gint) 1);
   	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
   	gtk_widget_show (button);  	
   
@@ -851,7 +888,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
    prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
    prefs->gData = data;
   
-
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
 		      GTK_SIGNAL_FUNC (cancel), prefs);
 
@@ -871,6 +907,11 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   label = gtk_label_new (_("General"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            general_page_new(), label);
+
+  /* Window Settings */
+  label = gtk_label_new (_("Window"));
+  gtk_notebook_append_page (GTK_NOTEBOOK ( (prefs->pbox)->notebook),
+  									window_page_new(), label);
 
   /* Print Settings */
   label = gtk_label_new (_("Print"));
@@ -892,11 +933,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_notebook_append_page (GTK_NOTEBOOK ( (prefs->pbox)->notebook),
   										mdi_page_new(), label);
   
-  /* Window Settings */
-  label = gtk_label_new (_("Window"));
-  gtk_notebook_append_page (GTK_NOTEBOOK ( (prefs->pbox)->notebook),
-  									window_page_new(), label);
-    
   get_prefs(data);
 
 
@@ -915,6 +951,12 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
+		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+
+  gtk_signal_connect (GTK_OBJECT (prefs->preW), "changed",
+		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+
+  gtk_signal_connect (GTK_OBJECT (prefs->preH), "changed",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   for (i = 0; i < NUM_MDI_MODES; i++)

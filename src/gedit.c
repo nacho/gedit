@@ -262,6 +262,8 @@ int main (int argc, char **argv)
     gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);		
 
+	gE_get_settings();
+	
 	gnome_mdi_open_toplevel(mdi);
 
 	if (file_list){
