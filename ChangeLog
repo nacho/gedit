@@ -1,5 +1,22 @@
 1999-01-07  Nat Friedman  <nat@nat.org>
 
+	* src/menus.c: Use the SETTINGS menu instead of OPTIONS.  Moved
+ 	Preference to SETTINGS, as dictated by the standard change.
+
+1999-01-07  Nat Friedman  <nat@nat.org>
+
+	* src/menus.c (gE_menus_init): Return a pointer to the menus.
+
+	* src/menus.h: Make gE_menus_init return a GnomeUIInfo *
+
+	* src/gE_document.c: #include "ge_prefs_box.h"
+	(gE_window_new): Install the menu hints.
+
+	* src/gE_prefs_box.h (gE_window_refresh): Added prototype to fix
+ 	warning.
+
+1999-01-07  Nat Friedman  <nat@nat.org>
+
 	* src/menus.c: Removed a spurious separator.  Moved Preferences to
  	the File menu where it belongs.  Use the
  	GNOMEUIINFO_MENU_ABOUT_ITEM macro.
