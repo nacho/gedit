@@ -1,6 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = src pixmaps po plugins help data
+SUBDIRS = gedit pixmaps po plugins help data
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gedit-@GEDIT_MAJOR@.pc
 
 EXTRA_DIST = BUGS		\
 	ChangeLog  		\
@@ -10,4 +13,5 @@ EXTRA_DIST = BUGS		\
 	xmldocs.make 		\
 	intltool-extract.in 	\
 	intltool-merge.in 	\
-	intltool-update.in 
+	intltool-update.in 	\
+	gedit-@GEDIT_MAJOR@.pc.in

@@ -2,9 +2,12 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(gedit, 2.2.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
-AC_CONFIG_SRCDIR(src/gedit2.c)
+AC_INIT(gedit, 2.3.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_CONFIG_SRCDIR(gedit/gedit2.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+
+GEDIT_MAJOR=2.3
+AC_SUBST(GEDIT_MAJOR)
 
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
@@ -191,11 +194,12 @@ AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
 AC_OUTPUT([
 Makefile
+gedit-2.3.pc
 data/Makefile
 po/Makefile.in
-src/Makefile
-src/dialogs/Makefile
-src/recent-files/Makefile
+gedit/Makefile
+gedit/dialogs/Makefile
+gedit/recent-files/Makefile
 pixmaps/Makefile
 plugins/Makefile
 plugins/ASCII/Makefile
