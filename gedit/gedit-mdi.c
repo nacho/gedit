@@ -1077,34 +1077,21 @@ gedit_mdi_can_remove_views (GList *views, BonoboWindow *window)
 	{
 		GeditView *view;
 		GeditDocument *doc;
-		gchar *raw_uri;
-		gboolean deleted;
-		
+
 		view = GEDIT_VIEW (l->data);
 		
 		doc = gedit_view_get_document (view);
 		g_return_val_if_fail (doc != NULL, FALSE);
-		
-		deleted = FALSE;
-		
-		raw_uri = gedit_document_get_raw_uri (doc); 
-		if (raw_uri != NULL)
-		{
-			if (gedit_document_is_readonly (doc))
-				deleted = FALSE;
-			else
-				deleted = !gedit_utils_uri_exists (raw_uri);
-		}
-		g_free (raw_uri);
 
-		if (gedit_document_get_modified (doc) || deleted)
+		if (gedit_document_get_modified (doc) ||
+		    gedit_document_get_deleted (doc))
 		{
 			unsaved_docs = g_slist_prepend (unsaved_docs, doc);
 		}
 
 		l = g_list_next (l);
 	}
-	
+
 	if (unsaved_docs == NULL)
 	{
 		l = views;
@@ -1123,7 +1110,7 @@ gedit_mdi_can_remove_views (GList *views, BonoboWindow *window)
 						     
 			l = g_list_next (l);
 		}
-		
+
 		return TRUE;
 	}
 
