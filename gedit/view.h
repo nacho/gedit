@@ -118,6 +118,7 @@ void	doc_delete_text_real_cb		(GtkWidget *editable, int start_pos, int end_pos, 
 void	doc_insert_text_real_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
 /*void	doc_insert_text_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);*/
 
+
 /* selection and position */
 void	gedit_view_set_selection	(View *view, guint start, guint end);
 gint	gedit_view_get_selection	(View *view, guint *start, guint *end);

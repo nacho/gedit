@@ -53,7 +53,6 @@ static void	gedit_views_insert (Document *doc, guint position, gchar * text, gin
 static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
 
 void		gedit_view_insert (View  *view, guint position, const gchar * text, gint length);
-void		gedit_view_delete (View *view, guint position, gint length);
 
 void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
 void		doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
@@ -236,6 +235,33 @@ gedit_view_insert (View  *view, guint position, const gchar * text, gint length)
 			 length);
 }
 
+/* Work arround for a gtktext bug*/
+static gint
+gedit_view_refresh_line_hack (View *view)
+{
+	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
+	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+
+	return FALSE;
+}
+
+static void
+gedit_view_delete (View *view, guint position, gint length, gboolean exclude_this_view)
+{
+	guint p1;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (!exclude_this_view) {
+		p1 = gtk_text_get_point (GTK_TEXT (view->text));
+		gtk_text_set_point (GTK_TEXT(view->text), position);
+		gtk_text_forward_delete (GTK_TEXT (view->text), length);
+	}
+
+	gtk_idle_add ((GtkFunction) gedit_view_refresh_line_hack, view);
+}
+
+
 static void
 gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
 {
@@ -251,26 +277,10 @@ gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View *view_ex
 	{
 		nth_view = g_list_nth_data (doc->views, n);
 
-		if (nth_view == view_exclude)
-			continue;
-		
-		g_return_if_fail (nth_view!=NULL);
-
-		gedit_view_delete (nth_view, start_pos, end_pos-start_pos);
+		gedit_view_delete (nth_view, start_pos, end_pos-start_pos, nth_view == view_exclude);
 	}
 }
 
-void
-gedit_view_delete (View *view, guint position, gint length)
-{
-	guint p1;
-
-	gedit_debug (DEBUG_VIEW, "");
-
-	p1 = gtk_text_get_point (GTK_TEXT (view->text));
-	gtk_text_set_point (GTK_TEXT(view->text), position);
-	gtk_text_forward_delete (GTK_TEXT (view->text), length);
-}
 
 void
 doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int length,
@@ -332,7 +342,8 @@ doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
 	if (undo)
 		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_ACTION_DELETE, doc, view);
 	g_free (text_to_delete);
-	
+
+	g_print ("delete text\n");
 	if (!exclude_this_view)
 		gedit_views_delete (doc, start_pos, end_pos, NULL);
 	else

@@ -6,7 +6,7 @@ applogodir = $(datadir)/pixmaps
 applogo_DATA = gedit-logo.png
 
 SOURCES = \
-	gedit-icon.xpm \
+	gedit-icon.png \
 	gedit-logo.png
 
 
