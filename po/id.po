@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-01 13:22+0100\n"
+"POT-Creation-Date: 2004-11-29 15:40+0100\n"
 "PO-Revision-Date: 2004-10-25 09:39+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <l10n@gnome.linux.or.id>\n"
@@ -40,11 +40,11 @@ msgstr "aplikasi gedit"
 msgid "gedit automation factory"
 msgstr "pabrikan pengotomatisan gedit"
 
-#: data/gedit.desktop.in.h:1
+#: data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Edit file teks"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
 msgid "Text Editor"
 msgstr "Pengedit teks"
 
@@ -206,10 +206,15 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:31
+#, fuzzy
+msgid "Monospace 9"
+msgstr "Monospace 12"
+
+#: data/gedit.schemas.in.h:32
 msgid "Monospace Regular 9"
 msgstr "Monospace Biasa 9"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:33
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -218,43 +223,53 @@ msgstr ""
 "dimodifikasi. Hal ini hanya akan berakibat jika pilihan \"Simpan Auto\" "
 "dimatikan."
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:34
 msgid "Print Header"
 msgstr "Kepala Cetak"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:35
 msgid "Print Line Numbers"
 msgstr "Cetak Nomor Baris"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:36
 msgid "Print Syntax Highlighting"
 msgstr "Cetak Pewarnaan Sintaksis"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:37
 msgid "Printing Line Wrapping Mode"
 msgstr "Pencetakan dengan Model Baris Wraping"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:38
 msgid "Right Margin Position"
 msgstr "Posis Batas Kanan"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:39
+#, fuzzy
+msgid "Sans 11"
+msgstr "Sans Biasa 11"
+
+#: data/gedit.schemas.in.h:40
+#, fuzzy
+msgid "Sans 8"
+msgstr "Spanyol"
+
+#: data/gedit.schemas.in.h:41
 msgid "Sans Regular 11"
 msgstr "Sans Biasa 11"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:42
 msgid "Sans Regular 8"
 msgstr "Sans Biasa 8"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:43
 msgid "Selected Text Color"
 msgstr "Warna Teks Terpilih"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:44
 msgid "Selection Color"
 msgstr "Pilihan Warna"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -264,7 +279,7 @@ msgstr ""
 "mendeteksi encoding file secara otomatis. \"SAAT INI\" adalah lokal encoding "
 "yang terpakai. Hanya encoding yang dikenali yang akan dipergunakan."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -278,7 +293,7 @@ msgstr ""
 "bahwa nilai ini case sensitive, jadi pastikan mereka kelihatan pas seperti "
 "yang disebutkan di sini."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -292,14 +307,23 @@ msgstr ""
 "bahwa nilai ini case sensitive, jadi pastikan mereka kelihatan pas seperti "
 "yang disebutkan di sini."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Tentukan huruf yang akan digunakan untuk tubuh dokumen ketika mencetak "
 "dokumen."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:49
+#, fuzzy
+msgid ""
+"Specifies the font to use for a document's body when printing documents. "
+"This is a gnome-print font name and replaced by print_font_body_pango."
+msgstr ""
+"Tentukan huruf yang akan digunakan untuk tubuh dokumen ketika mencetak "
+"dokumen."
+
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -307,7 +331,17 @@ msgstr ""
 "Tentukan huruf yang digunakan untuk nomor baris ketika mencetak. Hal ini "
 "hanya akan berakibat jika pilihan \"Cetak Nomor Baris\" tidak nol."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
+#, fuzzy
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+"gnome-print font name and replaced by print_font_numbers_pango."
+msgstr ""
+"Tentukan huruf yang digunakan untuk nomor baris ketika mencetak. Hal ini "
+"hanya akan berakibat jika pilihan \"Cetak Nomor Baris\" tidak nol."
+
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -316,7 +350,18 @@ msgstr ""
 "dokumen. Hal ini hanya akan berakibat jika pilihan \"Cetak Kepala\" "
 "dihidupkan."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:53
+#, fuzzy
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on. This is a "
+"gnome-print font name and replaced by print_font_header_pango."
+msgstr ""
+"Tentukan huruf yang digunakan untuk kepala halaman ketika mencetak sebuah "
+"dokumen. Hal ini hanya akan berakibat jika pilihan \"Cetak Kepala\" "
+"dihidupkan."
+
+#: data/gedit.schemas.in.h:54
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -324,21 +369,21 @@ msgstr ""
 "Tentukan jumlah maksimal dari file yang pernah terbuka yang akan ditampilkan "
 "pada menu \"File Sekarang\"."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:55
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Tentukan jumlah spasi yang harus ditampilkan dari pada karakter tab."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:56
 msgid "Specifies the position of the right margin."
 msgstr "Tentukan posisi dari batas kanan."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:57
 msgid "Status Bar is Visible"
 msgstr "Batang status terlihat"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -354,35 +399,35 @@ msgstr ""
 "lebih dahulu daripada icon. Catat bahwa nilai ini adalah case sensitive, "
 "jadi pastikan mereka terlihat sama persis dengan yang di sebutkan di sini."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:59
 msgid "Tab Size"
 msgstr "Ukuran Tab"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:60
 msgid "Text Color"
 msgstr "Warna Teks"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:61
 msgid "Toolbar Buttons Style"
 msgstr "Gaya Tombol Toolbar"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:62
 msgid "Toolbar is Visible"
 msgstr "Toolbar Terlihat"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:63
 msgid "Undo Actions Limit"
 msgstr "Batas Undo"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:64
 msgid "Use Default Colors"
 msgstr "Gunakan Warna Default"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:65
 msgid "Use Default Font"
 msgstr "Gunakan Huruf Default"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -392,7 +437,7 @@ msgstr ""
 "setelah waktu tertentu. Anda dapat menentukan jarak waktu dengan pilihan "
 "\"Interval Penyimpanan otomatis\"."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -401,46 +446,46 @@ msgstr ""
 "dapat menentukan ekstensi file cadangan dengan pilihan \"Ekstensi Salinan "
 "Cadangan\"."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Apakah gedit harus menampilkan nomor baris di dalam daerah pengeditan."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:69
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Apakah gedit harus menampilkan batas kanan dalam daerah pengeditan."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:70
 msgid "Whether gedit should enable auto indentation."
 msgstr "Apakah gedit harus mengaktifkan indentasi otomatis."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:71
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Apakah gedit harus mengaktifkan penandaan syntax."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:72
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Apakah gedit harus memasukkan sebuah kepala dokumen ketika mencetak dokumen."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:73
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Apakah gedit harus memasukkan spasi daripada tab."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:74
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Apakah gedit harus mencetak penandaan syntax ketika mencetak dokumen."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:75
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Apakah batang status pada bagian bawah jendela pengeditan harus terlihat."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:76
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Apakah toolbar harus terlihat di dalam jendela pengeditan."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -452,7 +497,7 @@ msgstr ""
 "yang telah ditentukan pada \"Warna Latar\", \"Warna Teks\", \"Warna Teks "
 "Terpilih\", dan pilihan \"Warna Pilihan\"."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:78
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -463,11 +508,11 @@ msgstr ""
 "dinamai dalam pilihan \"Huruf Pengedit\", akan digunakan daripada huruf "
 "system."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:79
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:80
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,SEKARANG,ISO-8859-15]"
 
@@ -491,7 +536,7 @@ msgstr ""
 "akan hilang."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:663
 msgid "S_elect the documents you want to save:"
 msgstr "Pilih dokum_en yang ingin anda simpan:"
 
@@ -508,12 +553,11 @@ msgid "Do_n't save"
 msgstr "Ja_ngan disimpan"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 #, fuzzy
 msgid "Question"
 msgstr "Saran"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -523,13 +567,13 @@ msgid_plural ""
 msgstr[0] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 msgstr[1] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 #, fuzzy
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:382
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -542,7 +586,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -554,12 +598,12 @@ msgstr[0] ""
 msgstr[1] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -572,7 +616,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Jika tidak disimpan, perubahan dari menit-menit terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
@@ -581,12 +625,12 @@ msgid_plural ""
 msgstr[0] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 msgstr[1] "Jika tidak disimpan, perubahan dari jam terakhir akan hilang."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Simpan perubahan ke dokumen \"%s\" sebelum menutup?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:646
 #, fuzzy, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -601,20 +645,20 @@ msgstr[1] ""
 "sebelum menutupnya?"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Jika tidak disimpan, seluruh perubahan yang Anda buat akan hilang."
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:160
+#: gedit/dialogs/gedit-dialog-goto-line.c:184
 msgid "Go to Line"
 msgstr "Lihat Baris ke"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:173
+#: gedit/dialogs/gedit-dialog-goto-line.c:197
 msgid "_Go to Line"
 msgstr "_Lihat"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:379
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:383
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teks \"%s\" tidak ditemukan."
@@ -629,7 +673,7 @@ msgid "Replace _All"
 msgstr "G_anti Semua"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:127
+#: gedit/gedit-file-selector-util.c:114
 msgid "_Replace"
 msgstr "_Ganti"
 
@@ -637,7 +681,7 @@ msgstr "_Ganti"
 msgid "Find"
 msgstr "Cari"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1134
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, fuzzy, c-format
 msgid "Found and replaced %d occurrence."
 msgid_plural "Found and replaced %d occurrences."
@@ -648,18 +692,18 @@ msgstr[1] "Gedit telah menemukan dan mengganti %d kejadian."
 msgid "Open Location"
 msgstr "Buka Lokasi"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:76
+#: gedit/dialogs/gedit-encodings-dialog.c:72
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Terjadi error ketika menampilkan help: %s"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:381
-#: gedit/dialogs/gedit-encodings-dialog.c:449
+#: gedit/dialogs/gedit-encodings-dialog.c:356
+#: gedit/dialogs/gedit-encodings-dialog.c:424
 msgid "_Description"
 msgstr "Ke_terangan"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:390
-#: gedit/dialogs/gedit-encodings-dialog.c:458
+#: gedit/dialogs/gedit-encodings-dialog.c:365
+#: gedit/dialogs/gedit-encodings-dialog.c:433
 msgid "_Encoding"
 msgstr "_Enkoding"
 
@@ -675,11 +719,11 @@ msgstr "Pengkodean karakter"
 msgid "E_ncodings shown in menu:"
 msgstr "E_nkoding yang ditampilkan pada menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:496
+#: gedit/dialogs/gedit-page-setup-dialog.c:428
 msgid "Body font picker"
 msgstr "Pemilih huruf tubuh"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:497
+#: gedit/dialogs/gedit-page-setup-dialog.c:429
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -687,44 +731,34 @@ msgstr ""
 "Tekan tombol ini untuk memilih huruf yang dipergunakan untuk mencetak tubuh "
 "dokumen"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:498
+#: gedit/dialogs/gedit-page-setup-dialog.c:430
 msgid "Page headers font picker"
 msgstr "Pemilih huruf untuk kepala halaman"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:499
+#: gedit/dialogs/gedit-page-setup-dialog.c:431
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Tekan tombol ini untuk memilih huruf yang akan dipergunakan untuk mencetak "
 "kepala halaman."
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:500
+#: gedit/dialogs/gedit-page-setup-dialog.c:432
 msgid "Line numbers font picker"
 msgstr "Pemilih jenis huruf untuk nomor baris"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:501
+#: gedit/dialogs/gedit-page-setup-dialog.c:433
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Tekan tombol ini untuk memilih jenis huruf yang akan dipergunakan untuk "
 "mencetak nomor baris"
 
-#: gedit/dialogs/gedit-plugin-manager.c:53
+#: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Plugin"
 
-#: gedit/dialogs/gedit-plugin-manager.c:54
+#: gedit/dialogs/gedit-plugin-manager.c:56
 msgid "Enabled"
 msgstr "aktif"
-
-#: gedit/dialogs/gedit-plugin-manager.c:499
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "Tidak menemukan tambahan-manager.glade2, pasang ulang gedit.\n"
-
-#: gedit/dialogs/gedit-plugin-manager.c:517
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"File glade yang salah untuk manager plugin -- tidak seluruh widget "
-"ditemukan.\n"
 
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
@@ -748,32 +782,32 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "File yang terpilih tidak dapat dijalankan."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:673
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Tekan tombol ini untuk memilih huruf yang akan digunakan oleh editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:681
 msgid "Push this button to configure text color"
 msgstr "Tekan tombol ini untuk mengkonfigurasi warna teks"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:677
+#: gedit/dialogs/gedit-preferences-dialog.c:683
 msgid "Push this button to configure background color"
 msgstr "Tekan tombol ini untuk menentukan warna latar"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Tekan tombol ini untuk menseting warna yang akan mewarnar teks yang muncul"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:682
+#: gedit/dialogs/gedit-preferences-dialog.c:688
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Tekan tombol ini untuk mengkonfigurasi warna teks yang ditandai"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1132
+#: gedit/dialogs/gedit-preferences-dialog.c:1138
 msgid "Elements"
 msgstr "Bagian"
 
@@ -995,91 +1029,6 @@ msgstr "_menit"
 msgid "act_ions"
 msgstr "kal_i"
 
-#: gedit/dialogs/gnome-print-font-dialog.c:111
-msgid "_Insert a new preview phrase."
-msgstr "Masukkan frasa yang baru ditampilkan"
-
-#: gedit/dialogs/gnome-print-font-dialog.c:117
-msgid "Modify preview phrase..."
-msgstr "Modifikasi frasa yang ditampilkan..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:171
-msgid "Preview"
-msgstr "Lihat Contoh Jadi"
-
-#: gedit/dialogs/gnome-print-font-dialog.c:184
-msgid "_Modify preview phrase..."
-msgstr "_Modifikasi Frasa yang ditampilkan..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:245
-msgid "Font Selection"
-msgstr "Pilih Font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:92
-msgid "Sans Regular 12"
-msgstr "Sans Regular 12"
-
-#: gedit/dialogs/gnome-print-font-picker.c:93
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
-#: gedit/dialogs/gnome-print-font-picker.c:94
-msgid "Pick a Font"
-msgstr "Pilih Font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:179
-msgid "Title"
-msgstr "Judul"
-
-#: gedit/dialogs/gnome-print-font-picker.c:180
-msgid "The title of the selection dialog box"
-msgstr "Judul kotak pemilih"
-
-#: gedit/dialogs/gnome-print-font-picker.c:200
-msgid "Font name"
-msgstr "Nama font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:201
-msgid "Name of the selected font"
-msgstr "Nama font yang dipilih"
-
-#: gedit/dialogs/gnome-print-font-picker.c:209
-msgid "Preview text"
-msgstr "Contoh teks"
-
-#: gedit/dialogs/gnome-print-font-picker.c:210
-msgid "Preview text shown in the dialog"
-msgstr "Lihat contoh teks dalam dialog"
-
-#: gedit/dialogs/gnome-print-font-picker.c:218
-msgid "Use font in label"
-msgstr "Gunakan font dalam label"
-
-#: gedit/dialogs/gnome-print-font-picker.c:219
-msgid "Use font in the label in font info mode"
-msgstr "Gunakan font dalam label pada mode info font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:227
-msgid "Font size for label"
-msgstr "Ukuran font untuk label"
-
-#: gedit/dialogs/gnome-print-font-picker.c:228
-msgid "Font size for label in font info mode"
-msgstr "Ukuran font untuk label pada mode info font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:238
-msgid "Show size"
-msgstr "Tampilkan ukuran"
-
-#: gedit/dialogs/gnome-print-font-picker.c:239
-msgid "Show size in font info mode"
-msgstr "Tampilkan ukuran pada mode info font"
-
-#: gedit/dialogs/gnome-print-font-picker.c:1018
-msgid "Font"
-msgstr "Font"
-
-#. gnome_print_font_picker_update_font_info
 #: gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "Pergi ke baris"
@@ -1214,19 +1163,19 @@ msgstr "Masukkan lokasi (URI) file yang ingin dibuka:"
 msgid "Open from URI"
 msgstr "Buka dari URI"
 
-#: gedit/gedit-commands.c:536
+#: gedit/gedit-commands.c:551
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
+msgstr "gedit adalah teks editor kelas ringan untuk desktop GNOME"
+
+#: gedit/gedit-commands.c:570
+msgid "gedit"
+msgstr "gedit"
+
+#: gedit/gedit-commands.c:577
 msgid "translator_credits"
 msgstr ""
 "Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Ahmad Riza H Nst <ari@160c.afraid.org>"
-
-#: gedit/gedit-commands.c:549
-msgid "gedit"
-msgstr "gedit"
-
-#: gedit/gedit-commands.c:553
-msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr "gedit adalah teks editor kelas ringan untuk desktop GNOME"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
@@ -1290,204 +1239,208 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "Tidak dapat membuat file backup."
 
-#: gedit/gedit-encodings-option-menu.c:207
+#: gedit/gedit-encodings-option-menu.c:204
 msgid "Auto Detected"
 msgstr "Deteksi Otomatis"
 
-#: gedit/gedit-encodings-option-menu.c:227
-#: gedit/gedit-encodings-option-menu.c:249
+#: gedit/gedit-encodings-option-menu.c:224
+#: gedit/gedit-encodings-option-menu.c:246
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Lokal sekarang (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:310
+#: gedit/gedit-encodings-option-menu.c:307
 msgid "Add or _Remove..."
 msgstr "Tambah atau _Buang..."
 
-#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
-#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
-#: gedit/gedit-encodings.c:182
+#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:179
+#: gedit/gedit-encodings.c:181 gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:185
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
-#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:148 gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:258
 msgid "Western"
 msgstr "Barat"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:254
 msgid "Central European"
 msgstr "Eropa Tengah"
 
-#: gedit/gedit-encodings.c:149
+#: gedit/gedit-encodings.c:152
 msgid "South European"
 msgstr "Eropa Selatan"
 
-#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
-#: gedit/gedit-encodings.c:265
+#: gedit/gedit-encodings.c:154 gedit/gedit-encodings.c:170
+#: gedit/gedit-encodings.c:268
 msgid "Baltic"
 msgstr "Balkan"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
-#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
-#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:219
+#: gedit/gedit-encodings.c:232 gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:238 gedit/gedit-encodings.c:256
 msgid "Cyrillic"
 msgstr "Cyrillic"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
-#: gedit/gedit-encodings.c:263
+#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:266
 msgid "Arabic"
 msgstr "Arab"
 
-#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
 #: plugins/spell/gedit-spell-checker.c:89
 msgid "Greek"
 msgstr "Yunani"
 
-#: gedit/gedit-encodings.c:159
+#: gedit/gedit-encodings.c:162
 msgid "Hebrew Visual"
 msgstr "Visual Ibrani"
 
-#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
-#: gedit/gedit-encodings.c:261
+#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
+#: gedit/gedit-encodings.c:264
 msgid "Hebrew"
 msgstr "Ibrani"
 
-#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
+#: gedit/gedit-encodings.c:262
 msgid "Turkish"
 msgstr "Turki"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:168
 msgid "Nordic"
 msgstr "Nordic"
 
-#: gedit/gedit-encodings.c:169
+#: gedit/gedit-encodings.c:172
 msgid "Celtic"
 msgstr "Celtic"
 
-#: gedit/gedit-encodings.c:173
+#: gedit/gedit-encodings.c:176
 msgid "Romanian"
 msgstr "Romania"
 
-#: gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:188
 msgid "Armenian"
 msgstr "Armenia"
 
-#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
-#: gedit/gedit-encodings.c:198
+#: gedit/gedit-encodings.c:190 gedit/gedit-encodings.c:192
+#: gedit/gedit-encodings.c:201
 msgid "Chinese Traditional"
 msgstr "China Tradisional"
 
-#: gedit/gedit-encodings.c:191
+#: gedit/gedit-encodings.c:194
 msgid "Cyrillic/Russian"
 msgstr "Cyrillic/Russia"
 
-#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:228
+#: gedit/gedit-encodings.c:243
 msgid "Japanese"
 msgstr "Jepang"
 
-#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
-#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
+#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:230
+#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:249
 msgid "Korean"
 msgstr "Korea"
 
-#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
-#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
+#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:208 gedit/gedit-encodings.c:212
 msgid "Chinese Simplified"
 msgstr "China Sederhana"
 
-#: gedit/gedit-encodings.c:207
+#: gedit/gedit-encodings.c:210
 msgid "Georgian"
 msgstr "Georgia"
 
-#: gedit/gedit-encodings.c:237
+#: gedit/gedit-encodings.c:240
 msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillic/Ukrainia"
 
-#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
-#: gedit/gedit-encodings.c:267
+#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:270
 msgid "Vietnamese"
 msgstr "Vietnam"
 
-#: gedit/gedit-encodings.c:244
+#: gedit/gedit-encodings.c:247
 msgid "Thai"
 msgstr "Thailand"
 
-#: gedit/gedit-file-selector-util.c:146
+#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+msgid "Unknown"
+msgstr "Tidak dikenal"
+
+#: gedit/gedit-file-selector-util.c:132
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "File yang bernama \"%s\" sudah ada.\n"
 
-#: gedit/gedit-file-selector-util.c:147
+#: gedit/gedit-file-selector-util.c:133
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Apakah anda ingin menimpa dengan ini?"
 
-#: gedit/gedit-file-selector-util.c:156
+#: gedit/gedit-file-selector-util.c:142
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "File \"%s\" hanya bisa dibaca.\n"
 
-#: gedit/gedit-file-selector-util.c:157
+#: gedit/gedit-file-selector-util.c:143
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Apakah anda ingin menimpa dengan ini?"
 
-#: gedit/gedit-file-selector-util.c:370
+#: gedit/gedit-file-selector-util.c:356
 msgid "All Files"
 msgstr "Seluruh File"
 
-#: gedit/gedit-file-selector-util.c:378
+#: gedit/gedit-file-selector-util.c:364
 msgid "All Text Files"
 msgstr "Seluruh File Teks"
 
-#: gedit/gedit-file-selector-util.c:396
+#: gedit/gedit-file-selector-util.c:382
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "Pengkodean K_arakter:"
 
-#: gedit/gedit-file-selector-util.c:541
+#: gedit/gedit-file-selector-util.c:527
 msgid "Select a file to open"
 msgstr "Pilih file yang hendak dibuka"
 
-#: gedit/gedit-file-selector-util.c:566
+#: gedit/gedit-file-selector-util.c:552
 msgid "Select files to open"
 msgstr "Pilih file-file yang hendak dibuka"
 
-#: gedit/gedit-file-selector-util.c:598
+#: gedit/gedit-file-selector-util.c:584
 msgid "Select a filename to save"
 msgstr "Berikan nama file untuk menyimpan file ini"
 
-#: gedit/gedit-file.c:187
+#: gedit/gedit-file.c:190
 msgid "Open File..."
 msgstr "Buka File..."
 
-#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
+#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Simpan dokument \"%s\"..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
+#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumen \"%s\" belun disimpan."
 
-#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
+#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumen \"%s\" telah disimpan."
 
-#: gedit/gedit-file.c:366
+#: gedit/gedit-file.c:369
 msgid "Save as..."
 msgstr "Simpan sebagai..."
 
-#: gedit/gedit-file.c:520
+#: gedit/gedit-file.c:522
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Ulangi dokumen yang belun tersimpan ke dokumen \"%s\"?"
 
-#: gedit/gedit-file.c:529
+#: gedit/gedit-file.c:531
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1497,12 +1450,12 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada jam terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
 
-#: gedit/gedit-file.c:538
+#: gedit/gedit-file.c:540
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:544
+#: gedit/gedit-file.c:546
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1513,7 +1466,7 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:554
+#: gedit/gedit-file.c:556
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1523,11 +1476,11 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:569
+#: gedit/gedit-file.c:571
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Perubahan di dokumen pada jam terakhir akan hilang."
 
-#: gedit/gedit-file.c:575
+#: gedit/gedit-file.c:577
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1538,7 +1491,7 @@ msgid_plural ""
 msgstr[0] "Perubahan di dokumen pada menit terakhir akan hilang."
 msgstr[1] "Perubahan di dokumen pada menit terakhir akan hilang."
 
-#: gedit/gedit-file.c:590
+#: gedit/gedit-file.c:592
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1551,61 +1504,66 @@ msgstr[1] "Perubahan di dokumen pada jam terakhir akan hilang."
 msgid "_Revert"
 msgstr "_Kembali ke asal"
 
-#: gedit/gedit-file.c:662
+#: gedit/gedit-file.c:658
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Kesalahan mengembalikan dokumen \"%s\"."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:665
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumen \"%s\" tidak terkembalikan."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumen \"%s\" telah dikembalikan."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:697
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Mengembalikan dokumen \"%s\"..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:820
 msgid "Could not read data from stdin."
 msgstr "Tidak bisa membaca data dari stdin."
 
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 msgid "Reverting file:"
 msgstr "Mengembalikan file:"
 
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 msgid "Loading file:"
 msgstr "Meload file:"
 
-#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
+#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Kesalahan saat meload file \"%s\""
 
-#: gedit/gedit-file.c:1120
+#: gedit/gedit-file.c:1108
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Telah meload file \"%s\""
 
-#: gedit/gedit-file.c:1197
+#: gedit/gedit-file.c:1203
 #, fuzzy, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Sejumlah %d berkas telah dibuka"
 msgstr[1] "Sejumlah %d berkas telah dibuka"
 
-#: gedit/gedit-file.c:1231
+#: gedit/gedit-file.c:1262
+#, fuzzy, c-format
+msgid "Created file \"%s\""
+msgstr "Telah meload file \"%s\""
+
+#: gedit/gedit-file.c:1280
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Meload file \"%s\"..."
 
-#: gedit/gedit-file.c:1378
+#: gedit/gedit-file.c:1431
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1622,53 +1580,46 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "Pi_ndah ke Jendela Baru"
 
-#: gedit/gedit-mdi-child.c:768
-msgid "Unknown"
-msgstr "Tidak dikenal"
-
-#: gedit/gedit-mdi-child.c:779
+#: gedit/gedit-mdi-child.c:780
 msgid "Unicode (UTF-8)"
 msgstr "Unikode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:786
+#: gedit/gedit-mdi-child.c:790
 msgid "Name:"
 msgstr "Nama:"
 
-#: gedit/gedit-mdi-child.c:787
+#: gedit/gedit-mdi-child.c:791
 msgid "MIME Type:"
 msgstr "Tipe MIME:"
 
-#: gedit/gedit-mdi-child.c:788
+#: gedit/gedit-mdi-child.c:792
 msgid "Encoding:"
 msgstr "Encoding:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:291 gedit/gedit-mdi.c:451
+#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "Buka '%s'"
 
-#: gedit/gedit-mdi.c:526
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "Buka file yang sedang digunakan"
 
-#: gedit/gedit-mdi.c:1394
-msgid "(modified)"
-msgstr "(termodifikasi)"
-
-#: gedit/gedit-mdi.c:1400
-msgid "(readonly)"
+#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#, fuzzy
+msgid "Read Only"
 msgstr "(baca saja)"
 
-#: gedit/gedit-mdi.c:2028
+#: gedit/gedit-mdi.c:2071
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2029
+#: gedit/gedit-mdi.c:2072
 msgid "Use Normal highlight mode"
 msgstr "Gunakan model penandaan normal"
 
-#: gedit/gedit-mdi.c:2105
+#: gedit/gedit-mdi.c:2148
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Gunakan mode penandaan %s"
@@ -1689,11 +1640,11 @@ msgstr "Bersihkan Jendela keluaran"
 msgid "Output Lines"
 msgstr "Baris keluaran"
 
-#: gedit/gedit-prefs-manager.c:177
+#: gedit/gedit-prefs-manager.c:175
 msgid "Cannot initialize preferences manager."
 msgstr "Tidak dapat mengenali pengatur setingan."
 
-#: gedit/gedit-prefs-manager.c:1151
+#: gedit/gedit-prefs-manager.c:1316
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Seharusnya: `%s', Ditemukan: %s pada key %s "
@@ -1706,30 +1657,30 @@ msgstr "Cetak"
 msgid "Lines"
 msgstr "Baris"
 
-#: gedit/gedit-print.c:330
+#: gedit/gedit-print.c:328
 msgid "Preparing pages..."
 msgstr "Memersiapkan halaman..."
 
-#: gedit/gedit-print.c:357
+#: gedit/gedit-print.c:355
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Merender halaman %d dari %d"
 
-#: gedit/gedit-print.c:359
+#: gedit/gedit-print.c:357
 #, c-format
 msgid "Printing page %d of %d..."
 msgstr "Mencetak halaman %d dari %d..."
 
-#: gedit/gedit-print.c:381 gedit/gedit-ui.xml.h:40
+#: gedit/gedit-print.c:379 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
 msgstr "Tampilan cetak"
 
-#: gedit/gedit-print.c:547
+#: gedit/gedit-print.c:549
 #, c-format
 msgid "File: %s"
 msgstr "File: %s"
 
-#: gedit/gedit-print.c:553
+#: gedit/gedit-print.c:555
 msgid "Page %N of %Q"
 msgstr "Halaman %N dari %Q"
 
@@ -2120,7 +2071,7 @@ msgstr "_Batalkan"
 msgid "_View"
 msgstr "_Tampilan"
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:421
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2131,24 +2082,24 @@ msgstr ""
 "\n"
 "Silahkan, periksa anda telah mengetikkan lokasi dengan benar dan coba lagi."
 
-#: gedit/gedit-utils.c:430
+#: gedit/gedit-utils.c:429
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Tidak dapat membuka file \"%s\" karena berisi data yang rusak."
 
-#: gedit/gedit-utils.c:441
+#: gedit/gedit-utils.c:440
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Berkas \"%s\" tidak dapat dibuka karena gedit tidak dapat membuka lokasi %s."
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:446
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Berkas \"%s\" tidak dapat dibuka"
 
-#: gedit/gedit-utils.c:457
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2156,12 +2107,12 @@ msgstr ""
 "Berkas \"%s\" tidak dapat dibuka karena berisi data dengan bentuk/format "
 "yang salah."
 
-#: gedit/gedit-utils.c:464
+#: gedit/gedit-utils.c:463
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Berkas \"%s\" tidak dapat dibuka karena terlalu besar."
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:470
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2173,12 +2124,12 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda ketikkan itu benar atau tidak, "
 "kemudian coba kembali."
 
-#: gedit/gedit-utils.c:479
+#: gedit/gedit-utils.c:478
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Berkas \"%s\" tidak dapat dibuka karena aksesnya ditolak."
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:485
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2190,7 +2141,7 @@ msgstr ""
 "\n"
 "Cobalah untuk menutup beberapa berkas dan coba lagi."
 
-#: gedit/gedit-utils.c:494
+#: gedit/gedit-utils.c:493
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2202,7 +2153,7 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak kemudian "
 "coba lagi."
 
-#: gedit/gedit-utils.c:502
+#: gedit/gedit-utils.c:501
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2211,7 +2162,7 @@ msgstr ""
 "Memori yang tersedia kurang mencukupi untuk membuka berkas \"%s\". Silakan "
 "tutup dulu beberapa aplikasi dan coba lagi."
 
-#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
+#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
 #, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2223,7 +2174,7 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
 "baru Anda dapat mencobanya kembali."
 
-#: gedit/gedit-utils.c:547
+#: gedit/gedit-utils.c:546
 #, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2237,7 +2188,7 @@ msgstr ""
 "konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru Anda dapat "
 "mencobanya kembali."
 
-#: gedit/gedit-utils.c:572
+#: gedit/gedit-utils.c:571
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2249,7 +2200,7 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
 "baru Anda dapat mencobanya kembali."
 
-#: gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:580
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2261,7 +2212,7 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
 "baru Anda dapat mencobanya kembali."
 
-#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
+#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2273,12 +2224,12 @@ msgstr ""
 "\n"
 "Mungkin berkas ini adalah berkas biner."
 
-#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
+#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Berkas \"%s\" tidak dapat dibuka."
 
-#: gedit/gedit-utils.c:639
+#: gedit/gedit-utils.c:638
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2295,7 +2246,7 @@ msgstr ""
 "lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
 "'Buka Lokasi')."
 
-#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
+#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2310,7 +2261,7 @@ msgstr ""
 "lagi dengan memilih pengkodean karakter pada dialog 'Buka File...' (atau "
 "'Buka Lokasi')."
 
-#: gedit/gedit-utils.c:701
+#: gedit/gedit-utils.c:700
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2321,12 +2272,12 @@ msgstr ""
 "\n"
 "%s."
 
-#: gedit/gedit-utils.c:753
+#: gedit/gedit-utils.c:752
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Berkas \"%s\" tidak dapat disimpan."
 
-#: gedit/gedit-utils.c:757
+#: gedit/gedit-utils.c:756
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2337,7 +2288,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:807
+#: gedit/gedit-utils.c:806
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2349,13 +2300,13 @@ msgstr ""
 "\n"
 "Mungkin sudah dihapus ya?"
 
-#: gedit/gedit-utils.c:814
+#: gedit/gedit-utils.c:813
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena datanya rusak."
 
-#: gedit/gedit-utils.c:825
+#: gedit/gedit-utils.c:824
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2363,13 +2314,13 @@ msgstr ""
 "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena gedit tidak "
 "dapat mengakses lokasi %s."
 
-#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
-#: gedit/gedit-utils.c:985
+#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
+#: gedit/gedit-utils.c:984
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula."
 
-#: gedit/gedit-utils.c:841
+#: gedit/gedit-utils.c:840
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2378,19 +2329,19 @@ msgstr ""
 "Berkas \"%s\" tidak dapat dikembalikan ke bentuk semula karena berisi data "
 "dengan isi yang tidak benar."
 
-#: gedit/gedit-utils.c:848
+#: gedit/gedit-utils.c:847
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr ""
 "Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena ukurannya "
 "terlalu besar."
 
-#: gedit/gedit-utils.c:855
+#: gedit/gedit-utils.c:854
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Berkas \"%s\" tidak dapat dikembalikan ke aksesnya ditolak."
 
-#: gedit/gedit-utils.c:862
+#: gedit/gedit-utils.c:861
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2402,7 +2353,7 @@ msgstr ""
 "\n"
 "Silakan tutup beberapa berkas dan coba lagi."
 
-#: gedit/gedit-utils.c:870
+#: gedit/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2411,7 +2362,7 @@ msgstr ""
 "Memori yang tersedia kurang mencukupi untuk mengembalikan berkas \"%s\" ke "
 "bentuk semula. Silakan tutup dulu beberapa aplikasi dan coba lagi."
 
-#: gedit/gedit-utils.c:909
+#: gedit/gedit-utils.c:908
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2425,7 +2376,7 @@ msgstr ""
 "konfigurasi proksi yang Anda masukkan sudah benar. Kemudian baru Anda dapat "
 "mencobanya kembali."
 
-#: gedit/gedit-utils.c:924
+#: gedit/gedit-utils.c:923
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2438,14 +2389,14 @@ msgstr ""
 "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. Kemudian "
 "baru Anda dapat mencobanya kembali."
 
-#: gedit/gedit-utils.c:931
+#: gedit/gedit-utils.c:930
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Berkas \"%s\" tidak dapat dikembalikan ke bentuknya semula karena gagal saat "
 "login."
 
-#: gedit/gedit-utils.c:938
+#: gedit/gedit-utils.c:937
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2457,16 +2408,16 @@ msgstr ""
 "\n"
 "Mungkin Anda sedang mengembalikan berkas biner."
 
-#: gedit/gedit-utils.c:947
+#: gedit/gedit-utils.c:946
 msgid "It is not possible to revert an Untitled document."
 msgstr "Dokumen belum berjudul tidak dapat dikembalikan ke bentuk semula."
 
-#: gedit/gedit-utils.c:1036
+#: gedit/gedit-utils.c:1035
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Berkas \"%s\" sudah ada."
 
-#: gedit/gedit-utils.c:1042
+#: gedit/gedit-utils.c:1041
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2477,7 +2428,7 @@ msgstr ""
 "\n"
 "Silakan periksa apakah Anda menuliskan lokasi yang benar."
 
-#: gedit/gedit-utils.c:1051
+#: gedit/gedit-utils.c:1050
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2488,7 +2439,7 @@ msgstr ""
 "\n"
 "Pastikan Anda memiliki hak akses untuk menulis."
 
-#: gedit/gedit-utils.c:1058
+#: gedit/gedit-utils.c:1057
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2499,7 +2450,7 @@ msgstr ""
 "\n"
 "Nama berkas terlalu panjang."
 
-#: gedit/gedit-utils.c:1065
+#: gedit/gedit-utils.c:1064
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2512,7 +2463,7 @@ msgstr ""
 "Komponen direktori pada nama berkas tidak ada atau merupakan link simbolis "
 "yang salah."
 
-#: gedit/gedit-utils.c:1074
+#: gedit/gedit-utils.c:1073
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2523,12 +2474,12 @@ msgstr ""
 "\n"
 "Silakan kosongkan dulu dan coba lagi."
 
-#: gedit/gedit-utils.c:1080
+#: gedit/gedit-utils.c:1079
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Berkas \"%s\" tidak dapat dibuat."
 
-#: gedit/gedit-utils.c:1417
+#: gedit/gedit-utils.c:1416
 msgid " (invalid Unicode)"
 msgstr ""
 
@@ -2538,20 +2489,20 @@ msgstr ""
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:665
+#: gedit/gedit-view.c:663
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Baris %d, Kolom %d"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:701
 msgid "  OVR"
 msgstr "  TIMPA"
 
-#: gedit/gedit-view.c:705
+#: gedit/gedit-view.c:703
 msgid "  INS"
 msgstr "  SISIP"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:87
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2559,37 +2510,92 @@ msgstr ""
 "Pilih pengkodean karakter yang digunakan untuk membuka file yang terdapat "
 "pada baris perintah"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:90
 msgid "Quit an existing instance of gedit"
 msgstr "Keluar dari gedit ini"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:93
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Buat jendela utama pada gedit yang sedang jalan ini"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:96
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Buat dokumen baru pada gedit ini"
 
-#: gedit/gedit2.c:182
+#: gedit/gedit2.c:183
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Pengkodean karakter \"%s\" tidak benar\n"
 
-#: plugins/docinfo/docinfo.c:46
+#: gedit/gedit-convert.c:91
+msgid "The file you are trying to open contains an invalid byte sequence."
+msgstr ""
+
+#: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
+msgid ""
+"gedit was not able to automatically determine the encoding of the file you "
+"want to open."
+msgstr ""
+
+#: plugins/changecase/changecase.c:43
+msgid "C_hange Case"
+msgstr "Uba_h Kapitalisasi"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr "Sem_uanya Huruf Besar"
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr "Semuanya Huruf Keci_l"
+
+#: plugins/changecase/changecase.c:51
+msgid "_Invert Case"
+msgstr "Bal_ik Kapitalisasi"
+
+#: plugins/changecase/changecase.c:52
+msgid "_Title Case"
+msgstr "Besar pada Awal Ka_ta"
+
+#: plugins/changecase/changecase.c:54
+msgid "Change selected text to upper case"
+msgstr "Ganti teks terpilih ke huruf besar semua"
+
+#: plugins/changecase/changecase.c:55
+msgid "Change selected text to lower case"
+msgstr "Ganti teks terpilih ke huruf kecil semua"
+
+#: plugins/changecase/changecase.c:56
+msgid "Invert the case of selected text"
+msgstr "Balikkan kapitalisasi teks yang terpilih"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr ""
+"Buat tiap huruf pertama pada tiap-tiap kata terpilih menjadi huruf besar"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+msgid "Change Case"
+msgstr "Ubah Kapitalisasi"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+msgid "Changes the case of selected text."
+msgstr "Ubah kapitalisasi teks yang dipilih"
+
+#: plugins/docinfo/docinfo.c:45
 msgid "_Document Statistics"
 msgstr "Statistik _Dokumen"
 
-#: plugins/docinfo/docinfo.c:49
+#: plugins/docinfo/docinfo.c:48
 msgid "Get statistic info on current document"
 msgstr "Peroleh informasi statistik dokumen yang aktif"
 
-#: plugins/docinfo/docinfo.c:140
+#: plugins/docinfo/docinfo.c:139
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Statistik Dokumen"
 
-#: plugins/docinfo/docinfo.c:154
+#: plugins/docinfo/docinfo.c:153
 msgid "_Update"
 msgstr "Perbar_ui"
 
@@ -2763,11 +2769,11 @@ msgstr "Direktori _Aktif:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: plugin Keluaran Shell"
 
-#: plugins/sort/sort.c:27
+#: plugins/sort/sort.c:29
 msgid "S_ort..."
 msgstr "_Urutkan..."
 
-#: plugins/sort/sort.c:30
+#: plugins/sort/sort.c:32
 msgid "Sort the current document or selection."
 msgstr "Urutkan dokumen aktif atau teks yang terpilih"
 
@@ -2803,26 +2809,26 @@ msgstr "Balik u_rutan"
 msgid "_Sort"
 msgstr "_Urutkan"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:351
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(tidak ada kata yang disarankan)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:375
 msgid "_More..."
 msgstr "_Lebih Lanjut..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:428
 msgid "_Ignore All"
 msgstr "Aba_ikan Semua"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:441
 msgid "_Add"
 msgstr "T_ambah"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:478
 msgid "_Spelling Suggestions..."
 msgstr "_Saran Ejaan..."
 
@@ -2966,16 +2972,16 @@ msgstr "Swedia"
 msgid "Ukrainian"
 msgstr "Ukrania"
 
-#: plugins/spell/gedit-spell-checker.c:744
+#: plugins/spell/gedit-spell-checker.c:784
 msgid "Default"
 msgstr "Default"
 
-#: plugins/spell/gedit-spell-language-dialog.c:241
+#: plugins/spell/gedit-spell-language-dialog.c:239
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Widget yang diperlukan tidak diemukan dalam %s."
 
-#: plugins/spell/gedit-spell-language-dialog.c:261
+#: plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "Bahasa"
 
@@ -3043,39 +3049,39 @@ msgstr "Aba_ikan"
 msgid "_Suggestions:"
 msgstr "_Saran:"
 
-#: plugins/spell/spell.c:51
+#: plugins/spell/spell.c:52
 msgid "_Check Spelling"
 msgstr "P_eriksa Ejaan"
 
-#: plugins/spell/spell.c:54
+#: plugins/spell/spell.c:55
 msgid "Check the current document for incorrect spelling"
 msgstr "Periksa ejaan yang salah pada dokumen aktif"
 
-#: plugins/spell/spell.c:56
+#: plugins/spell/spell.c:57
 msgid "_Autocheck Spelling"
 msgstr "Pemeriks_aan Ejaan Otomatis"
 
-#: plugins/spell/spell.c:59
+#: plugins/spell/spell.c:60
 msgid "Automatically spell-check the current document"
 msgstr "Memeriksa ejaan pada dokumen aktif secara otomatis"
 
-#: plugins/spell/spell.c:61
+#: plugins/spell/spell.c:62
 msgid "Set _Language"
 msgstr "Pi_lih Bahasa"
 
-#: plugins/spell/spell.c:64
+#: plugins/spell/spell.c:65
 msgid "Set the language of the current document"
 msgstr "Pilih bahasa dokumen yang aktif"
 
-#: plugins/spell/spell.c:557
+#: plugins/spell/spell.c:625
 msgid "The document is empty."
 msgstr "Dokumen masih kosong"
 
-#: plugins/spell/spell.c:575
+#: plugins/spell/spell.c:643
 msgid "The selected text does not contain mispelled words."
 msgstr "Tidak ada kata yang salah eja pada teks yang terpilih."
 
-#: plugins/spell/spell.c:576
+#: plugins/spell/spell.c:644
 msgid "The document does not contain mispelled words."
 msgstr "Tidak ada kata yang salah eja pada dokumen ini."
 
@@ -3087,24 +3093,24 @@ msgstr "Periksa ejaan dokumen yang aktif."
 msgid "Spell checker"
 msgstr "Pemeriksa ejaan"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:139
+#: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
 msgstr "Plugin daftar tag"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:157
+#: plugins/taglist/gedit-taglist-plugin-window.c:167
 msgid "Select the group of tags you want to use"
 msgstr "Pilih kelompok tag yang ingin digunakan"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:179
+#: plugins/taglist/gedit-taglist-plugin-window.c:189
 msgid "Available Tag Lists"
 msgstr "Daftar Tag Tersedia"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:181
-#: plugins/taglist/gedit-taglist-plugin-window.c:202
+#: plugins/taglist/gedit-taglist-plugin-window.c:191
+#: plugins/taglist/gedit-taglist-plugin-window.c:212
 msgid "Tags"
 msgstr "Tag"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:191
+#: plugins/taglist/gedit-taglist-plugin-window.c:201
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Klik ganda pada tag untuk memasukkannya ke dalam dokumen aktif"
 
@@ -3131,19 +3137,19 @@ msgstr ""
 msgid "Tag list"
 msgstr "Daftar tag"
 
-#: plugins/time/time.c:50
+#: plugins/time/time.c:49
 msgid "In_sert Date and Time..."
 msgstr "Ma_sukkan Tanggal dan Jam..."
 
-#: plugins/time/time.c:53
+#: plugins/time/time.c:52
 msgid "Insert current date and time at the cursor position"
 msgstr "Masukkan tanggal dan jam saat ini pada posisi kursor"
 
-#: plugins/time/time.c:449
+#: plugins/time/time.c:445
 msgid "Available formats"
 msgstr "Bentuk tersedia"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:553
 msgid "Configure insert date/time plugin..."
 msgstr "Atur plugin tanggal/jam..."
 
@@ -3186,6 +3192,80 @@ msgstr "_Masukkan format sendiri"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "G_unakan format ini"
+
+#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+#~ msgstr "Tidak menemukan tambahan-manager.glade2, pasang ulang gedit.\n"
+
+#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+#~ msgstr ""
+#~ "File glade yang salah untuk manager plugin -- tidak seluruh widget "
+#~ "ditemukan.\n"
+
+#~ msgid "_Insert a new preview phrase."
+#~ msgstr "Masukkan frasa yang baru ditampilkan"
+
+#~ msgid "Modify preview phrase..."
+#~ msgstr "Modifikasi frasa yang ditampilkan..."
+
+#~ msgid "Preview"
+#~ msgstr "Lihat Contoh Jadi"
+
+#~ msgid "_Modify preview phrase..."
+#~ msgstr "_Modifikasi Frasa yang ditampilkan..."
+
+#~ msgid "Font Selection"
+#~ msgstr "Pilih Font"
+
+#~ msgid "Sans Regular 12"
+#~ msgstr "Sans Regular 12"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Pilih Font"
+
+#~ msgid "Title"
+#~ msgstr "Judul"
+
+#~ msgid "The title of the selection dialog box"
+#~ msgstr "Judul kotak pemilih"
+
+#~ msgid "Font name"
+#~ msgstr "Nama font"
+
+#~ msgid "Name of the selected font"
+#~ msgstr "Nama font yang dipilih"
+
+#~ msgid "Preview text"
+#~ msgstr "Contoh teks"
+
+#~ msgid "Preview text shown in the dialog"
+#~ msgstr "Lihat contoh teks dalam dialog"
+
+#~ msgid "Use font in label"
+#~ msgstr "Gunakan font dalam label"
+
+#~ msgid "Use font in the label in font info mode"
+#~ msgstr "Gunakan font dalam label pada mode info font"
+
+#~ msgid "Font size for label"
+#~ msgstr "Ukuran font untuk label"
+
+#~ msgid "Font size for label in font info mode"
+#~ msgstr "Ukuran font untuk label pada mode info font"
+
+#~ msgid "Show size"
+#~ msgstr "Tampilkan ukuran"
+
+#~ msgid "Show size in font info mode"
+#~ msgstr "Tampilkan ukuran pada mode info font"
+
+#~ msgid "Font"
+#~ msgstr "Font"
+
+#~ msgid "(modified)"
+#~ msgstr "(termodifikasi)"
 
 #~ msgid ""
 #~ "If you don't save, changes from the last %ld second will be definitively "
@@ -3307,40 +3387,6 @@ msgstr "G_unakan format ini"
 #~ "\n"
 #~ "Silakan periksa apakah lokasi yang Anda masukkan benar atau tidak. "
 #~ "Kemudian baru Anda dapat mencobanya kembali."
-
-#~ msgid "C_hange Case"
-#~ msgstr "Uba_h Kapitalisasi"
-
-#~ msgid "All _Upper Case"
-#~ msgstr "Sem_uanya Huruf Besar"
-
-#~ msgid "All _Lower Case"
-#~ msgstr "Semuanya Huruf Keci_l"
-
-#~ msgid "_Invert Case"
-#~ msgstr "Bal_ik Kapitalisasi"
-
-#~ msgid "_Title Case"
-#~ msgstr "Besar pada Awal Ka_ta"
-
-#~ msgid "Change selected text to upper case"
-#~ msgstr "Ganti teks terpilih ke huruf besar semua"
-
-#~ msgid "Change selected text to lower case"
-#~ msgstr "Ganti teks terpilih ke huruf kecil semua"
-
-#~ msgid "Invert the case of selected text"
-#~ msgstr "Balikkan kapitalisasi teks yang terpilih"
-
-#~ msgid "Capitalize the first letter of each selected word"
-#~ msgstr ""
-#~ "Buat tiap huruf pertama pada tiap-tiap kata terpilih menjadi huruf besar"
-
-#~ msgid "Change Case"
-#~ msgstr "Ubah Kapitalisasi"
-
-#~ msgid "Changes the case of selected text."
-#~ msgstr "Ubah kapitalisasi teks yang dipilih"
 
 #~ msgid "Save method not implemented for gedit viewer"
 #~ msgstr "Pembuka gedit tidak dapat menyimpan"

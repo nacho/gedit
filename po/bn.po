@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-01 13:22+0100\n"
+"POT-Creation-Date: 2004-11-29 15:40+0100\n"
 "PO-Revision-Date: 2003-09-05 00:44-0400\n"
 "Last-Translator: Santanu Chatterjee\n"
 "Language-Team: Bengali <gnome-translation@bengalinux.org>\n"
@@ -39,11 +39,11 @@ msgstr "জিএডিট আপ্লিকেশন"
 msgid "gedit automation factory"
 msgstr "জিএডিট অটোমেশন ফ্যাক্টরি"
 
-#: data/gedit.desktop.in.h:1
+#: data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "টেক্স্ট ফাইল এডিট করুন"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:337
 msgid "Text Editor"
 msgstr "টেক্স্ট এডিটর"
 
@@ -202,10 +202,14 @@ msgid "Monospace 12"
 msgstr ""
 
 #: data/gedit.schemas.in.h:31
-msgid "Monospace Regular 9"
+msgid "Monospace 9"
 msgstr ""
 
 #: data/gedit.schemas.in.h:32
+msgid "Monospace Regular 9"
+msgstr ""
+
+#: data/gedit.schemas.in.h:33
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -213,43 +217,52 @@ msgstr ""
 "যত মিনিট পরে জিএডিট স্বয়ংক্রীয় ভাবে পরিবর্তিত ফাইলগুলিকে সেভ করবে।\"Auto Save\" "
 "অপশন অন থাকলে তবেই এটি কাজ করবে।"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:34
 msgid "Print Header"
 msgstr "হেডার ছাপাও"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:35
 msgid "Print Line Numbers"
 msgstr "লাইন নম্বর ছাপাও"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:36
 msgid "Print Syntax Highlighting"
 msgstr ""
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:37
 msgid "Printing Line Wrapping Mode"
 msgstr "লাইন মুড়িয়ে নেওয়া মোডে ছাপানো হচ্ছে"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:38
 msgid "Right Margin Position"
 msgstr ""
 
-#: data/gedit.schemas.in.h:38
-msgid "Sans Regular 11"
-msgstr ""
-
 #: data/gedit.schemas.in.h:39
-msgid "Sans Regular 8"
+msgid "Sans 11"
 msgstr ""
 
 #: data/gedit.schemas.in.h:40
+#, fuzzy
+msgid "Sans 8"
+msgstr "স্প্যানিশ"
+
+#: data/gedit.schemas.in.h:41
+msgid "Sans Regular 11"
+msgstr ""
+
+#: data/gedit.schemas.in.h:42
+msgid "Sans Regular 8"
+msgstr ""
+
+#: data/gedit.schemas.in.h:43
 msgid "Selected Text Color"
 msgstr "বাছাই করা টেক্সটের রং"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:44
 msgid "Selection Color"
 msgstr "বাছাইয়ের রং"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:45
 #, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
@@ -259,7 +272,7 @@ msgstr ""
 "যে সমস্ত ফাইল ইউটিএফ-৮ বা বর্তমান লোকালের এনকোডিং-এ এনকোড করা নেই,সে সব ফাইল "
 "পড়তে জিএডিট যে সব এনকোডিং ব্যাবহার করবে তার তালিকা।"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -273,7 +286,7 @@ msgstr ""
 "রাখবেন, উপরোক্ত মানগুলি `কেস-সেন্সিটিভ'। তাই, যেভাবে দেখানো হয়েছেসেভাবেই যেনো "
 "ব্যাবহ্রিত হয়।"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -287,12 +300,19 @@ msgstr ""
 "ব্যাবহার করুন। মনে রাখবেন, উপরোক্ত মানগুলি `কেস-সেন্সিটিভ'। তাই, যেভাবে দেখানো "
 "হয়েছেসেভাবেই যেনো ব্যাবহ্রিত হয়।"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "ছাপানোর সময় ডকুমেন্টের মূল অংশ যে ফন্টে ছাপানো হবে তা উল্লেখ করে।"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:49
+#, fuzzy
+msgid ""
+"Specifies the font to use for a document's body when printing documents. "
+"This is a gnome-print font name and replaced by print_font_body_pango."
+msgstr "ছাপানোর সময় ডকুমেন্টের মূল অংশ যে ফন্টে ছাপানো হবে তা উল্লেখ করে।"
+
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -300,7 +320,17 @@ msgstr ""
 "লাইন নম্বর ছাপানোর সময় যে ফন্ট ব্যাবহ্রিত হবে, তা উল্লেখ করে। \"Print Line Numbers"
 "\"অপশন যদি শূন্য না হয়, তবেই এটি কাজ করবে।"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
+#, fuzzy
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+"gnome-print font name and replaced by print_font_numbers_pango."
+msgstr ""
+"লাইন নম্বর ছাপানোর সময় যে ফন্ট ব্যাবহ্রিত হবে, তা উল্লেখ করে। \"Print Line Numbers"
+"\"অপশন যদি শূন্য না হয়, তবেই এটি কাজ করবে।"
+
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -308,7 +338,17 @@ msgstr ""
 "ডকুমেন্ট ছাপানোর সময় যে ফন্টে কাগজের হেডার ছাপা হবে তা উল্লেখ করে।\"Print Header"
 "\" অপশন অন থাকলে তবেই এতি কাজ করবে।"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:53
+#, fuzzy
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on. This is a "
+"gnome-print font name and replaced by print_font_header_pango."
+msgstr ""
+"ডকুমেন্ট ছাপানোর সময় যে ফন্টে কাগজের হেডার ছাপা হবে তা উল্লেখ করে।\"Print Header"
+"\" অপশন অন থাকলে তবেই এতি কাজ করবে।"
+
+#: data/gedit.schemas.in.h:54
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -316,21 +356,21 @@ msgstr ""
 "\"Recent Files\" সাব-মেনুতে যে সর্বাধীক সংখ্যক সম্প্রতিক কালে খোলা ফাইল দেখানো "
 "হবেতা উল্লেখ করে।"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:55
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "ট্যাবের পরিবর্তে যতগুলি স্পেস দেখানো হবে তা উল্লেখ করে।"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:56
 msgid "Specifies the position of the right margin."
 msgstr ""
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:57
 msgid "Status Bar is Visible"
 msgstr "স্ট্যাটাস বার দেখা যাচ্ছে"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -346,35 +386,35 @@ msgstr ""
 "রাখবেন, মানগুলি কেস-সেনসিটিভ। তাই, এখানে যেভাবে দেখানো হয়েছে, ঠিক সেভাবেই যেন "
 "ব্যাবহ্রিত হয়।"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:59
 msgid "Tab Size"
 msgstr "ট্যাবের দৈর্ঘ্য"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:60
 msgid "Text Color"
 msgstr "টেক্সটের রং"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:61
 msgid "Toolbar Buttons Style"
 msgstr "টুলবারের বোতামের স্টাইল"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:62
 msgid "Toolbar is Visible"
 msgstr "টুলবার দেখা যাচ্ছে"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:63
 msgid "Undo Actions Limit"
 msgstr "আন-ডু করবার সীমা"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:64
 msgid "Use Default Colors"
 msgstr "ডিফল্ট রং ব্যাবহার কর"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:65
 msgid "Use Default Font"
 msgstr "ডিফল্ট ফন্ট ব্যাবহার কর"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -383,7 +423,7 @@ msgstr ""
 "নির্দিষ্ট সময় পরে পরে জিএডিট স্বয়ংক্রিয় ভাবে পরিবর্তন করা ফাইল সেভ করবে কিনা।এই "
 "সময় সীমা আপনি \"Auto Save Interval\" অপশন দ্বারা নিয়ন্ত্রিত করতে পারবেন।"
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -392,46 +432,46 @@ msgstr ""
 "ফাইলের এক্সটেনশন আপনি \"Backup Copy Extension\" অপশন দ্বারা নিয়ন্ত্রিত করতে "
 "পারবেন।"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "এডিট করবার এলাকায় জিএডিট লাইন নম্বর দেখাবে কিনা।"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:69
 #, fuzzy
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "এডিট করবার এলাকায় জিএডিট লাইন নম্বর দেখাবে কিনা।"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:70
 msgid "Whether gedit should enable auto indentation."
 msgstr "জিএডিট স্বয়ংক্রিয় ইনডেন্টেশন চালু করবে কিনা।"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:71
 #, fuzzy
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "জিএডিট স্বয়ংক্রিয় ইনডেন্টেশন চালু করবে কিনা।"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:72
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "ডকুমেন্ট ছাপানোর সময় জিএডিট ডকুমেন্টের হেডারও ছাপাবে কিনা।"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:73
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "জিএডিট ট্যাবের পরিবর্তে স্পেস ব্যাবহার করবে কিনা।"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:74
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "ডকুমেন্ট ছাপানোর সময় জিএডিট সিন্টেক্স হাইলাইট করে ছাপাবে কিনা।"
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:75
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "এডিট করবার জানালাগুলির তলায় স্ট্যাটাস বার দেখানো হবে কিনা।"
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:76
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "এডিট করবার জানালাগুলিতে টুলবার দেখানো হবে কিনা।"
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -442,7 +482,7 @@ msgstr ""
 "থাকে,তাহলে \"Background Color\", \"Text Color\", \"Selected Text Color\", "
 "এবং \"Selection Color\" অপশনে বলা রং এডিট করবার এলাকায় ব্যাবহ্রিত হবে।"
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:78
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -452,11 +492,11 @@ msgstr ""
 "করতেব্যাবহ্রিত হবে কিনা। এই অপশন যদি অফ করা থাকে, তাহলে \"Editor Font\" "
 "অপশনেবলা ফন্ট সিস্টেম ফন্টের পরিবর্তে ব্যাবহ্র্ত হবে।"
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:79
 msgid "[ISO-8859-15]"
 msgstr ""
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:80
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr ""
 
@@ -477,7 +517,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr ""
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:663
 #, fuzzy
 msgid "S_elect the documents you want to save:"
 msgstr "যে ট্যাগ সমূহ আপনি ব্যবহার করতে চান সেগুলি সিলেক্ট করুন"
@@ -496,12 +536,11 @@ msgid "Do_n't save"
 msgstr "সেভ কোরো _না"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 #, fuzzy
 msgid "Question"
 msgstr "প্রস্তাবনা"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -511,12 +550,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:382
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -527,7 +566,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -537,11 +576,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -552,7 +591,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
@@ -561,12 +600,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:646
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -575,21 +614,21 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr ""
 
 # Or maybe I should keep it as it was ?
-#: gedit/dialogs/gedit-dialog-goto-line.c:160
+#: gedit/dialogs/gedit-dialog-goto-line.c:184
 msgid "Go to Line"
 msgstr "এই লাইনে যাও"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:173
+#: gedit/dialogs/gedit-dialog-goto-line.c:197
 msgid "_Go to Line"
 msgstr "এই লাইনে _যাও"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:379
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:383
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "টেক্স্ট \"%s\" পাওয়া গেল না।"
@@ -605,7 +644,7 @@ msgid "Replace _All"
 msgstr "_সব রিপ্লেস করুন"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:127
+#: gedit/gedit-file-selector-util.c:114
 msgid "_Replace"
 msgstr "_রিপ্লেস"
 
@@ -613,7 +652,7 @@ msgstr "_রিপ্লেস"
 msgid "Find"
 msgstr "খোজ করুন"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1134
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, fuzzy, c-format
 msgid "Found and replaced %d occurrence."
 msgid_plural "Found and replaced %d occurrences."
@@ -624,18 +663,18 @@ msgstr[1] "%d বার পাওয়া গেল এবং রিপ্লে�
 msgid "Open Location"
 msgstr "এই জায়গা খুলুন"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:76
+#: gedit/dialogs/gedit-encodings-dialog.c:72
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr ""
 
-#: gedit/dialogs/gedit-encodings-dialog.c:381
-#: gedit/dialogs/gedit-encodings-dialog.c:449
+#: gedit/dialogs/gedit-encodings-dialog.c:356
+#: gedit/dialogs/gedit-encodings-dialog.c:424
 msgid "_Description"
 msgstr "_বর্ণনা"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:390
-#: gedit/dialogs/gedit-encodings-dialog.c:458
+#: gedit/dialogs/gedit-encodings-dialog.c:365
+#: gedit/dialogs/gedit-encodings-dialog.c:433
 msgid "_Encoding"
 msgstr "এনকোডিং সমূহ (_এ)"
 
@@ -651,49 +690,41 @@ msgstr "অক্ষর কোডিং সমূহ"
 msgid "E_ncodings shown in menu:"
 msgstr "মেনূতে দেখানো এনকোডিং:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:496
+#: gedit/dialogs/gedit-page-setup-dialog.c:428
 msgid "Body font picker"
 msgstr ""
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:497
+#: gedit/dialogs/gedit-page-setup-dialog.c:429
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr "যে ফন্টে বডি ছাপানো হবে তা এই বোতাম টিপে বেছে নিন"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:498
+#: gedit/dialogs/gedit-page-setup-dialog.c:430
 msgid "Page headers font picker"
 msgstr "এটি দিয়ে পৄষ্ঠার হেডার ফন্ট পছন্দ করুন"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:499
+#: gedit/dialogs/gedit-page-setup-dialog.c:431
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr "পৄষ্ঠার হেডার ছাপাতে যে ফন্ট ব্যাবহ্রিত হবে তা এই বোতাম টিপে বেছে নিন"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:500
+#: gedit/dialogs/gedit-page-setup-dialog.c:432
 msgid "Line numbers font picker"
 msgstr "এটি দিয়ে লাইন নম্বর এর ফন্ট পছন্দ করুন"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:501
+#: gedit/dialogs/gedit-page-setup-dialog.c:433
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "লাইন নম্বর যে ফন্টে ছাপানো হবে তা এই বোতাম টিপে বেছে নিন"
 
 # seems weird
-#: gedit/dialogs/gedit-plugin-manager.c:53
+#: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "প্লাগ্-ইন"
 
-#: gedit/dialogs/gedit-plugin-manager.c:54
+#: gedit/dialogs/gedit-plugin-manager.c:56
 msgid "Enabled"
 msgstr "সক্রিয়"
-
-#: gedit/dialogs/gedit-plugin-manager.c:499
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "প্লাগ্-ইন ম্যানেজার পাওয়া গেল না।  জিএডিট আবার ইন্স্টল করুন, glade2.\n"
-
-#: gedit/dialogs/gedit-plugin-manager.c:517
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr "প্লাগ্-ইন ম্যানেজারের গ্লেড ফাইল অবৈধ -- সব উইজেট পাওয়া গেল না।\n"
 
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
@@ -716,31 +747,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "বেছে নেওয়া ফাইল এক্সেকিউটেবল নয়।"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:673
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid "Push this button to select the font to be used by the editor"
 msgstr "এডিটর যে ফন্ট ব্যাবহার করবে তা এই বোতাম টিপে বেছে নিন"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:681
 msgid "Push this button to configure text color"
 msgstr "এই বোতাম টিপে এডিটর কনফিগার করুন"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:677
+#: gedit/dialogs/gedit-preferences-dialog.c:683
 msgid "Push this button to configure background color"
 msgstr "এই বোতাম টিপে ব্যাক্গ্রাউন্ডের রং বেছে নিন"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:685
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "বেছে নেওয়া টেক্স্ট যে রংএ দেখা যাবে তা এই বোতাম টিপে কনফিগার করুন"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:682
+#: gedit/dialogs/gedit-preferences-dialog.c:688
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "বেছে নেওয়া টেক্স্ট যে রংএ মার্ক করা হবে তা এই বোতাম টিপে কনফিগার করুন"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1132
+#: gedit/dialogs/gedit-preferences-dialog.c:1138
 msgid "Elements"
 msgstr ""
 
@@ -986,94 +1017,6 @@ msgstr "_মিনিট"
 msgid "act_ions"
 msgstr "_কাজ(সমূহ)"
 
-# Correct me on these plurals if I am wrong
-#: gedit/dialogs/gnome-print-font-dialog.c:111
-msgid "_Insert a new preview phrase."
-msgstr "নতুন কোনো প্রিভিউ ফ্রেজ্ _ইনসার্ট করুন।"
-
-#: gedit/dialogs/gnome-print-font-dialog.c:117
-msgid "Modify preview phrase..."
-msgstr "প্রিভিউ ফ্রেজ্ পরিবর্তন করুন..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:171
-msgid "Preview"
-msgstr "প্রিভিউ"
-
-# Any translation for this?
-#: gedit/dialogs/gnome-print-font-dialog.c:184
-msgid "_Modify preview phrase..."
-msgstr "প্রিভিউ ফ্রেজ্ _পরিবর্তন করুন..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:245
-msgid "Font Selection"
-msgstr "বাছাই করা ফন্ট"
-
-#: gedit/dialogs/gnome-print-font-picker.c:92
-msgid "Sans Regular 12"
-msgstr ""
-
-#: gedit/dialogs/gnome-print-font-picker.c:93
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "অআইঈউঊৠএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভময়রলবশষসহড়ঢ়ংঃ ঁ"
-
-#: gedit/dialogs/gnome-print-font-picker.c:94
-msgid "Pick a Font"
-msgstr "একটি ফন্ট বেছে নিন"
-
-#: gedit/dialogs/gnome-print-font-picker.c:179
-msgid "Title"
-msgstr "টাইটেল"
-
-#: gedit/dialogs/gnome-print-font-picker.c:180
-msgid "The title of the selection dialog box"
-msgstr "সিলেক্শন ডায়লগ বাক্সের টাইটেল"
-
-#: gedit/dialogs/gnome-print-font-picker.c:200
-msgid "Font name"
-msgstr "ফন্টের নাম"
-
-#: gedit/dialogs/gnome-print-font-picker.c:201
-msgid "Name of the selected font"
-msgstr "বেছে নেওয়া ফন্টের নাম"
-
-#: gedit/dialogs/gnome-print-font-picker.c:209
-msgid "Preview text"
-msgstr "টেক্সট প্রিভিউ করুন"
-
-#: gedit/dialogs/gnome-print-font-picker.c:210
-msgid "Preview text shown in the dialog"
-msgstr "ডায়লোগে দেখানো টেক্সট প্রিভিউ করুন"
-
-#: gedit/dialogs/gnome-print-font-picker.c:218
-msgid "Use font in label"
-msgstr "লেবেলে ফন্ট ব্যাবহার করুন"
-
-#: gedit/dialogs/gnome-print-font-picker.c:219
-msgid "Use font in the label in font info mode"
-msgstr "ফন্ট ইনফো মোডে লেবেলে ফন্ট ব্যাবহার করুন"
-
-#: gedit/dialogs/gnome-print-font-picker.c:227
-msgid "Font size for label"
-msgstr "লেবেলের ফন্টের সাইজ"
-
-# I thought it is better to use 'size' instead of 'ayoton'
-#: gedit/dialogs/gnome-print-font-picker.c:228
-msgid "Font size for label in font info mode"
-msgstr "ফন্ট ইনফো মোডে লেবেলের ফন্টের সাইজ"
-
-#: gedit/dialogs/gnome-print-font-picker.c:238
-msgid "Show size"
-msgstr "সাইজ দেখাও"
-
-#: gedit/dialogs/gnome-print-font-picker.c:239
-msgid "Show size in font info mode"
-msgstr "ফন্ট ইনফো মোডে সাইজ দেখাও"
-
-#: gedit/dialogs/gnome-print-font-picker.c:1018
-msgid "Font"
-msgstr "ফন্ট"
-
-#. gnome_print_font_picker_update_font_info
 #: gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "এই লাইনে যাও"
@@ -1209,18 +1152,18 @@ msgstr "যে ফাইলটি আপনি খুঁজতে চান ত�
 msgid "Open from URI"
 msgstr "ইউআরআই থেকে খুলুন"
 
-#: gedit/gedit-commands.c:536
-msgid "translator_credits"
-msgstr "অনুবাদকবৃন্দ"
-
-#: gedit/gedit-commands.c:549
-msgid "gedit"
-msgstr "জিএডিট"
-
-#: gedit/gedit-commands.c:553
+#: gedit/gedit-commands.c:551
 #, fuzzy
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "জিএডিট হলো গ্নোমের একটি ছোটো এবং হাল্কা টেক্স্ট এডিটর"
+
+#: gedit/gedit-commands.c:570
+msgid "gedit"
+msgstr "জিএডিট"
+
+#: gedit/gedit-commands.c:577
+msgid "translator_credits"
+msgstr "অনুবাদকবৃন্দ"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
@@ -1285,212 +1228,216 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "ব্যাকআপ ফাইল তৈরী করতে পারলাম না।"
 
-#: gedit/gedit-encodings-option-menu.c:207
+#: gedit/gedit-encodings-option-menu.c:204
 msgid "Auto Detected"
 msgstr ""
 
-#: gedit/gedit-encodings-option-menu.c:227
-#: gedit/gedit-encodings-option-menu.c:249
+#: gedit/gedit-encodings-option-menu.c:224
+#: gedit/gedit-encodings-option-menu.c:246
 #, c-format
 msgid "Current Locale (%s)"
 msgstr ""
 
-#: gedit/gedit-encodings-option-menu.c:310
+#: gedit/gedit-encodings-option-menu.c:307
 msgid "Add or _Remove..."
 msgstr ""
 
-#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
-#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
-#: gedit/gedit-encodings.c:182
+#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:179
+#: gedit/gedit-encodings.c:181 gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:185
 msgid "Unicode"
 msgstr "ইউনিকোড"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
-#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:148 gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:258
 msgid "Western"
 msgstr "পশ্চিমী"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:254
 msgid "Central European"
 msgstr "মধ্য ইউরোপীয়"
 
-#: gedit/gedit-encodings.c:149
+#: gedit/gedit-encodings.c:152
 msgid "South European"
 msgstr "দক্খিণ ইউরোপীয়"
 
-#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
-#: gedit/gedit-encodings.c:265
+#: gedit/gedit-encodings.c:154 gedit/gedit-encodings.c:170
+#: gedit/gedit-encodings.c:268
 msgid "Baltic"
 msgstr "বাল্টিক"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
-#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
-#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:219
+#: gedit/gedit-encodings.c:232 gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:238 gedit/gedit-encodings.c:256
 msgid "Cyrillic"
 msgstr "সিরিলীক"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
-#: gedit/gedit-encodings.c:263
+#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:266
 msgid "Arabic"
 msgstr "আরবী"
 
-#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
 #: plugins/spell/gedit-spell-checker.c:89
 msgid "Greek"
 msgstr "গ্রীক"
 
-#: gedit/gedit-encodings.c:159
+#: gedit/gedit-encodings.c:162
 msgid "Hebrew Visual"
 msgstr ""
 
-#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
-#: gedit/gedit-encodings.c:261
+#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
+#: gedit/gedit-encodings.c:264
 msgid "Hebrew"
 msgstr "হীব্রু"
 
-#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
+#: gedit/gedit-encodings.c:262
 msgid "Turkish"
 msgstr "টার্কিশ"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:168
 msgid "Nordic"
 msgstr "নর্ডিক"
 
-#: gedit/gedit-encodings.c:169
+#: gedit/gedit-encodings.c:172
 msgid "Celtic"
 msgstr "সেল্টিক"
 
-#: gedit/gedit-encodings.c:173
+#: gedit/gedit-encodings.c:176
 msgid "Romanian"
 msgstr "রোমানিয়ান"
 
-#: gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:188
 msgid "Armenian"
 msgstr "আরমেনিয়"
 
-#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
-#: gedit/gedit-encodings.c:198
+#: gedit/gedit-encodings.c:190 gedit/gedit-encodings.c:192
+#: gedit/gedit-encodings.c:201
 msgid "Chinese Traditional"
 msgstr "পরম্পরাগত চাইনীজ"
 
 # Weird, very weird !!
-#: gedit/gedit-encodings.c:191
+#: gedit/gedit-encodings.c:194
 msgid "Cyrillic/Russian"
 msgstr "সিরিলীক/রাসিয়ান"
 
-#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:228
+#: gedit/gedit-encodings.c:243
 msgid "Japanese"
 msgstr "জাপানী"
 
-#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
-#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
+#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:230
+#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:249
 msgid "Korean"
 msgstr "কোরীয়ান"
 
-#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
-#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
+#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:208 gedit/gedit-encodings.c:212
 msgid "Chinese Simplified"
 msgstr "সরলিকৄত চাইনীজ"
 
-#: gedit/gedit-encodings.c:207
+#: gedit/gedit-encodings.c:210
 msgid "Georgian"
 msgstr "জর্জীয়ান"
 
-#: gedit/gedit-encodings.c:237
+#: gedit/gedit-encodings.c:240
 msgid "Cyrillic/Ukrainian"
 msgstr "সিরিলীক/ইউক্রেনিআন"
 
-#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
-#: gedit/gedit-encodings.c:267
+#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:270
 msgid "Vietnamese"
 msgstr "ভিয়েতনামি"
 
-#: gedit/gedit-encodings.c:244
+#: gedit/gedit-encodings.c:247
 msgid "Thai"
 msgstr "থাই"
 
-#: gedit/gedit-file-selector-util.c:146
+#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+msgid "Unknown"
+msgstr "অজানা"
+
+#: gedit/gedit-file-selector-util.c:132
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:147
+#: gedit/gedit-file-selector-util.c:133
 #, fuzzy
 msgid "Do you want to replace it with the one you are saving?"
 msgstr ""
 "\"%s\" -এই নামের ফাইল আগে থেকে আছে।\n"
 "আপনি কী এই ফাইলটির পরিবর্তে বর্তমান ফাইলটি সেভ করতে চান?"
 
-#: gedit/gedit-file-selector-util.c:156
+#: gedit/gedit-file-selector-util.c:142
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:157
+#: gedit/gedit-file-selector-util.c:143
 #, fuzzy
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr ""
 "\"%s\" -এই ফাইলটি শুধুমাত্র পড়া যাবে।\n"
 "আপনি কী এই ফাইলটির পরিবর্তে বর্তমান ফাইলটি সেভ করতে চান?"
 
-#: gedit/gedit-file-selector-util.c:370
+#: gedit/gedit-file-selector-util.c:356
 msgid "All Files"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:378
+#: gedit/gedit-file-selector-util.c:364
 #, fuzzy
 msgid "All Text Files"
 msgstr "টেক্স্ট ফাইল এডিট করুন"
 
-#: gedit/gedit-file-selector-util.c:396
+#: gedit/gedit-file-selector-util.c:382
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "অক্ষর এনকোডিং:"
 
-#: gedit/gedit-file-selector-util.c:541
+#: gedit/gedit-file-selector-util.c:527
 msgid "Select a file to open"
 msgstr "খোলার জন্য একটি ফাইল বাছাই করুন"
 
-#: gedit/gedit-file-selector-util.c:566
+#: gedit/gedit-file-selector-util.c:552
 msgid "Select files to open"
 msgstr "খোলার জন্য ফাইল সমুহ বাছাই করুন"
 
-#: gedit/gedit-file-selector-util.c:598
+#: gedit/gedit-file-selector-util.c:584
 msgid "Select a filename to save"
 msgstr "ফাইল সেভ করবার জন্যে ফাইলের কোনো নাম সিলেক্ট করুন"
 
-#: gedit/gedit-file.c:187
+#: gedit/gedit-file.c:190
 msgid "Open File..."
 msgstr "ফাইল খুলুন..."
 
-#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
+#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
 #, fuzzy, c-format
 msgid "Saving document \"%s\"..."
 msgstr "'%s' ফাইলটি সেভ করছি..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
+#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
 #, fuzzy, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "ডকুমেন্ট সেভ করা হয়নি।"
 
-#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
+#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
 #, fuzzy, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "ডকুমেন্ট সেভ করা হয়নি।"
 
-#: gedit/gedit-file.c:366
+#: gedit/gedit-file.c:369
 msgid "Save as..."
 msgstr "এই নামে সেভ করুন..."
 
-#: gedit/gedit-file.c:520
+#: gedit/gedit-file.c:522
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 
-#: gedit/gedit-file.c:529
+#: gedit/gedit-file.c:531
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1500,12 +1447,12 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/gedit-file.c:538
+#: gedit/gedit-file.c:540
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 
-#: gedit/gedit-file.c:544
+#: gedit/gedit-file.c:546
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1516,7 +1463,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/gedit-file.c:554
+#: gedit/gedit-file.c:556
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1526,11 +1473,11 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/gedit-file.c:569
+#: gedit/gedit-file.c:571
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 
-#: gedit/gedit-file.c:575
+#: gedit/gedit-file.c:577
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1541,7 +1488,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/gedit-file.c:590
+#: gedit/gedit-file.c:592
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1554,65 +1501,70 @@ msgstr[1] ""
 msgid "_Revert"
 msgstr "_পূর্বাবস্থায় ফিরিয়ে আনা হোক"
 
-#: gedit/gedit-file.c:662
+#: gedit/gedit-file.c:658
 #, fuzzy, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:665
 #, fuzzy, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "ডকুমেন্ট-কে পূর্বাবস্থায় ফিরিয়ে আনা হল না।"
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:669
 #, fuzzy, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "ডকুমেন্ট-কে পূর্বাবস্থায় ফিরিয়ে আনা হল না।"
 
 # definitely wrong
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:697
 #, fuzzy, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "ফাইল '%s' কে পূর্বাবস্থায় ফিরিয়ে আনা হচ্ছে..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:820
 msgid "Could not read data from stdin."
 msgstr "স্ট্যান্ডার্ড ইনপুট থেকে ডেটা পড়া গেল না।"
 
 # definitely wrong
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 #, fuzzy
 msgid "Reverting file:"
 msgstr "ফাইল '%s' কে পূর্বাবস্থায় ফিরিয়ে আনা হচ্ছে..."
 
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 #, fuzzy
 msgid "Loading file:"
 msgstr "%d সংখ্যক ফাইল লোড করা হচ্ছে..."
 
-#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
+#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr ""
 
-#: gedit/gedit-file.c:1120
+#: gedit/gedit-file.c:1108
 #, fuzzy, c-format
 msgid "Loaded file \"%s\""
 msgstr "'%s' -এই ফাইলটি লোড করা হল"
 
-#: gedit/gedit-file.c:1197
+#: gedit/gedit-file.c:1203
 #, fuzzy, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%i সংখ্যক ফাইল লোড করা হয়েছে"
 msgstr[1] "%i সংখ্যক ফাইল লোড করা হয়েছে"
 
-#: gedit/gedit-file.c:1231
+#: gedit/gedit-file.c:1262
+#, fuzzy, c-format
+msgid "Created file \"%s\""
+msgstr "'%s' -এই ফাইলটি লোড করা হল"
+
+#: gedit/gedit-file.c:1280
 #, fuzzy, c-format
 msgid "Loading file \"%s\"..."
 msgstr "%d সংখ্যক ফাইল লোড করা হচ্ছে..."
 
-#: gedit/gedit-file.c:1378
+#: gedit/gedit-file.c:1431
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1629,56 +1581,49 @@ msgstr "RO"
 msgid "_Move to New Window"
 msgstr "নতুন জানালায় _চলো"
 
-#: gedit/gedit-mdi-child.c:768
-msgid "Unknown"
-msgstr "অজানা"
-
-#: gedit/gedit-mdi-child.c:779
+#: gedit/gedit-mdi-child.c:780
 msgid "Unicode (UTF-8)"
 msgstr "ইউনিকোড (ইউটিএফ-৮)"
 
-#: gedit/gedit-mdi-child.c:786
+#: gedit/gedit-mdi-child.c:790
 #, fuzzy
 msgid "Name:"
 msgstr "নাম"
 
-#: gedit/gedit-mdi-child.c:787
+#: gedit/gedit-mdi-child.c:791
 msgid "MIME Type:"
 msgstr ""
 
-#: gedit/gedit-mdi-child.c:788
+#: gedit/gedit-mdi-child.c:792
 #, fuzzy
 msgid "Encoding:"
 msgstr "এনকোডিং সমূহ (_এ)"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:291 gedit/gedit-mdi.c:451
+#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
 #, fuzzy, c-format
 msgid "Open '%s'"
 msgstr "খোলো"
 
-#: gedit/gedit-mdi.c:526
+#: gedit/gedit-mdi.c:528
 #, fuzzy
 msgid "Open a recently used file"
 msgstr "কোনো ফাইল খোলো"
 
-#: gedit/gedit-mdi.c:1394
-msgid "(modified)"
-msgstr "(পরিবর্তিত)"
-
-#: gedit/gedit-mdi.c:1400
-msgid "(readonly)"
+#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+#, fuzzy
+msgid "Read Only"
 msgstr "(শুধুমাত্র পড়বার জন্যে)"
 
-#: gedit/gedit-mdi.c:2028
+#: gedit/gedit-mdi.c:2071
 msgid "Normal"
 msgstr ""
 
-#: gedit/gedit-mdi.c:2029
+#: gedit/gedit-mdi.c:2072
 msgid "Use Normal highlight mode"
 msgstr ""
 
-#: gedit/gedit-mdi.c:2105
+#: gedit/gedit-mdi.c:2148
 #, c-format
 msgid "Use %s highlight mode"
 msgstr ""
@@ -1699,11 +1644,11 @@ msgstr "আউটপুট উইন্ডো ফাঁকা করুন"
 msgid "Output Lines"
 msgstr "আউটপুট লাইন"
 
-#: gedit/gedit-prefs-manager.c:177
+#: gedit/gedit-prefs-manager.c:175
 msgid "Cannot initialize preferences manager."
 msgstr "প্রেফারেন্স ম্যানেজারের প্রাথমিক প্রস্তুতি সম্পন্ন করা গেল না।"
 
-#: gedit/gedit-prefs-manager.c:1151
+#: gedit/gedit-prefs-manager.c:1316
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr ""
@@ -1716,30 +1661,30 @@ msgstr "ছাপাও"
 msgid "Lines"
 msgstr "লাইন"
 
-#: gedit/gedit-print.c:330
+#: gedit/gedit-print.c:328
 msgid "Preparing pages..."
 msgstr ""
 
-#: gedit/gedit-print.c:357
+#: gedit/gedit-print.c:355
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr ""
 
-#: gedit/gedit-print.c:359
+#: gedit/gedit-print.c:357
 #, c-format
 msgid "Printing page %d of %d..."
 msgstr ""
 
-#: gedit/gedit-print.c:381 gedit/gedit-ui.xml.h:40
+#: gedit/gedit-print.c:379 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
 msgstr "প্রিন্ট প্রিভিউ"
 
-#: gedit/gedit-print.c:547
+#: gedit/gedit-print.c:549
 #, c-format
 msgid "File: %s"
 msgstr "ফাইল: %s"
 
-#: gedit/gedit-print.c:553
+#: gedit/gedit-print.c:555
 msgid "Page %N of %Q"
 msgstr ""
 
@@ -2137,7 +2082,7 @@ msgstr "_আন-ডু"
 msgid "_View"
 msgstr "_দেখাও"
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:421
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2149,36 +2094,36 @@ msgstr ""
 "অনুগ্রহ করে চেক করে নিন আপনি ফাইলের স্থান সঠিকভাবে টাইপ করেছেন কিনা।\n"
 "তারপর আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:430
+#: gedit/gedit-utils.c:429
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "ফাইল \"%s\" খোলা গেলো না কারণ এতে খতিগ্রস্থ ডেটা আছে।"
 
 # I could not write 'juktakkha' using yudit
 # Please fix the spelling for me
-#: gedit/gedit-utils.c:441
+#: gedit/gedit-utils.c:440
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:446
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "ফাইল \"%s\" খোলা গেলো না"
 
-#: gedit/gedit-utils.c:457
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "বেঠিক ফরম্যাটে ডেটা থাকার ফলে ফাইল \"%s\" খোলা গেলো না।"
 
-#: gedit/gedit-utils.c:464
+#: gedit/gedit-utils.c:463
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "ফাইল  \"%s\" অতিরিক্ত বড় হবার ফলে খোলা গেল না।"
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:470
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2189,12 +2134,12 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে আপনার দেওয়া অবস্থান সঠিক কিনা চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:479
+#: gedit/gedit-utils.c:478
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "যথেষ্ট অধিকার না থাকায় ফাইল \"%s\" খোলা গেল।"
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:485
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2205,7 +2150,7 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে কিছু ফাইল বন্ধ করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:494
+#: gedit/gedit-utils.c:493
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2216,7 +2161,7 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে সঠিক অবস্থান টাইপ করেছেন কিনা চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:502
+#: gedit/gedit-utils.c:501
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2225,7 +2170,7 @@ msgstr ""
 "ফাইল \"%s\" খোলার পক্খে যথেষ্ট মেমারী নেই। অনুগ্রহ করে কিছু খোলা প্রোগ্রাম বন্ধ করে "
 "আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
+#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2236,7 +2181,7 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে সঠিক অবস্থান টাইপ করেছেন কিনা চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:547
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2249,7 +2194,7 @@ msgstr ""
 "অনুগ্রহ করে সঠিক অবস্থান টাইপ করেছেন কিনা এবং আপনার প্রক্সি সেটিং ঠিক আছে কিনা "
 "চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:572
+#: gedit/gedit-utils.c:571
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2260,7 +2205,7 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে আপনার প্রক্সি সেটিং ঠিক আছে কিনা চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:580
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2271,7 +2216,7 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে সঠিক অবস্থান টাইপ করেছেন কিনা চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
+#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2282,12 +2227,12 @@ msgstr ""
 "\n"
 "সম্ভবত আপনি কোনো বাইনারি ফাইল খোলার চেষ্টা করছেন।"
 
-#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
+#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "ফাইল \"%s\" খোলা গেল না।"
 
-#: gedit/gedit-utils.c:639
+#: gedit/gedit-utils.c:638
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2298,7 +2243,7 @@ msgid ""
 "dialog."
 msgstr ""
 
-#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
+#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
 #, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2312,7 +2257,7 @@ msgstr ""
 "অনুগ্রহ করে সঠিক অবস্থান টাইপ করেছেন কিনা এবং আপনার প্রক্সি সেটিং ঠিক আছে কিনা "
 "চেক করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:701
+#: gedit/gedit-utils.c:700
 #, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2323,12 +2268,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:753
+#: gedit/gedit-utils.c:752
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "ফাইল \"%s\" সেভ করা গেল না।"
 
-#: gedit/gedit-utils.c:757
+#: gedit/gedit-utils.c:756
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2339,7 +2284,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:807
+#: gedit/gedit-utils.c:806
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2350,24 +2295,24 @@ msgstr ""
 "\n"
 "হয়তো সম্প্রতি ফাইলটিকে মুছে ফেলা হয়েছে।"
 
-#: gedit/gedit-utils.c:814
+#: gedit/gedit-utils.c:813
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "ক্খতিগ্রস্থ ডেটা থাকায় ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-utils.c:825
+#: gedit/gedit-utils.c:824
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
-#: gedit/gedit-utils.c:985
+#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
+#: gedit/gedit-utils.c:984
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-utils.c:841
+#: gedit/gedit-utils.c:840
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2375,17 +2320,17 @@ msgid ""
 msgstr ""
 "বেঠিক ফর্ম্যাটে ডেটা থাকার ফলে ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-utils.c:848
+#: gedit/gedit-utils.c:847
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "অতিরিক্ত বড় হবার ফলে ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-utils.c:855
+#: gedit/gedit-utils.c:854
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "প্রবেশাধিকার না পাওয়ায় ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।"
 
-#: gedit/gedit-utils.c:862
+#: gedit/gedit-utils.c:861
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2395,14 +2340,14 @@ msgstr ""
 "অতিরিক্ত সংখ্যক খোলা ফাইল থাকায় ফাইল \"%s\" কে পূর্বাবস্থায় ফিরিয়ে আনা গেল না।\n"
 "অনুগ্রহ করে কিছু খোলা ফাইল বন্ধ করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:870
+#: gedit/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
 
-#: gedit/gedit-utils.c:909
+#: gedit/gedit-utils.c:908
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2410,7 +2355,7 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: gedit/gedit-utils.c:924
+#: gedit/gedit-utils.c:923
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2418,12 +2363,12 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: gedit/gedit-utils.c:931
+#: gedit/gedit-utils.c:930
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 
-#: gedit/gedit-utils.c:938
+#: gedit/gedit-utils.c:937
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2434,16 +2379,16 @@ msgstr ""
 "\n"
 "সম্ভবত আপনি কোনো বাইনারি ফাইলকে  পূর্বাবস্থায় ফিরিয়ে আনার চেষ্টা করছেন।"
 
-#: gedit/gedit-utils.c:947
+#: gedit/gedit-utils.c:946
 msgid "It is not possible to revert an Untitled document."
 msgstr ""
 
-#: gedit/gedit-utils.c:1036
+#: gedit/gedit-utils.c:1035
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr ""
 
-#: gedit/gedit-utils.c:1042
+#: gedit/gedit-utils.c:1041
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2451,7 +2396,7 @@ msgid ""
 "Please, check that you typed the location correctly."
 msgstr ""
 
-#: gedit/gedit-utils.c:1051
+#: gedit/gedit-utils.c:1050
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2459,7 +2404,7 @@ msgid ""
 "Make sure you have the appropriate write permissions."
 msgstr ""
 
-#: gedit/gedit-utils.c:1058
+#: gedit/gedit-utils.c:1057
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2467,7 +2412,7 @@ msgid ""
 "The file name is too long."
 msgstr ""
 
-#: gedit/gedit-utils.c:1065
+#: gedit/gedit-utils.c:1064
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2480,7 +2425,7 @@ msgstr ""
 "ফাইলের নামে যে ডিরেক্টরীর উল্লেখ আছে, সেটি আদপে নেই, অথবা সেটি একটি "
 "ঝুলন্তসিম্বলিক লিন্ক।"
 
-#: gedit/gedit-utils.c:1074
+#: gedit/gedit-utils.c:1073
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2491,12 +2436,12 @@ msgstr ""
 "\n"
 "অনুগ্রহ করে ডিস্কের কিছু যায়গা ফাঁকা করে আবার চেষ্টা করুন।"
 
-#: gedit/gedit-utils.c:1080
+#: gedit/gedit-utils.c:1079
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "ফাইল \"%s\" তৈরী করা গেল না।"
 
-#: gedit/gedit-utils.c:1417
+#: gedit/gedit-utils.c:1416
 msgid " (invalid Unicode)"
 msgstr "(বেঠিক ইউনিকোড)"
 
@@ -2506,57 +2451,119 @@ msgstr "(বেঠিক ইউনিকোড)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:665
+#: gedit/gedit-view.c:663
 #, fuzzy, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  লাইন %d, কলম %d"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:701
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:705
+#: gedit/gedit-view.c:703
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:87
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:90
 msgid "Quit an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:93
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:96
 msgid "Create a new document in an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:182
+#: gedit/gedit2.c:183
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:46
+#: gedit/gedit-convert.c:91
+msgid "The file you are trying to open contains an invalid byte sequence."
+msgstr ""
+
+#: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
+msgid ""
+"gedit was not able to automatically determine the encoding of the file you "
+"want to open."
+msgstr ""
+
+#: plugins/changecase/changecase.c:43
+#, fuzzy
+msgid "C_hange Case"
+msgstr "_পরিবর্তন করুন"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:51
+#, fuzzy
+msgid "_Invert Case"
+msgstr "_Insert ক্যার"
+
+#: plugins/changecase/changecase.c:52
+#, fuzzy
+msgid "_Title Case"
+msgstr "টাইটেল"
+
+#: plugins/changecase/changecase.c:54
+#, fuzzy
+msgid "Change selected text to upper case"
+msgstr "বেছে নেওয়া টেক্সটে ক্লিপবোর্ডে কপি করুন"
+
+#: plugins/changecase/changecase.c:55
+#, fuzzy
+msgid "Change selected text to lower case"
+msgstr "বেছে নেওয়া টেক্সটে ক্লিপবোর্ডে কপি করুন"
+
+#: plugins/changecase/changecase.c:56
+#, fuzzy
+msgid "Invert the case of selected text"
+msgstr "বাছাই করা টেক্স্ট মুছে ফেলুন"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr ""
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Change Case"
+msgstr "_পরিবর্তন করুন"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Changes the case of selected text."
+msgstr "বাছাই করা টেক্স্ট মুছে ফেলুন"
+
+#: plugins/docinfo/docinfo.c:45
 msgid "_Document Statistics"
 msgstr "_ডকুমেন্ট সন্ক্রান্ত পরিসংখ্যান"
 
-#: plugins/docinfo/docinfo.c:49
+#: plugins/docinfo/docinfo.c:48
 msgid "Get statistic info on current document"
 msgstr "বর্তমান ডকুমেন্টের পরিসংখ্যানমূলক ইনফরমেশান লাভ করুন"
 
 # Not sure if the above translation is correct
-#: plugins/docinfo/docinfo.c:140
+#: plugins/docinfo/docinfo.c:139
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "ডকুমেন্ট সন্ক্রান্ত পরিসংখ্যান"
 
-#: plugins/docinfo/docinfo.c:154
+#: plugins/docinfo/docinfo.c:153
 msgid "_Update"
 msgstr "_আপডেট"
 
@@ -2732,11 +2739,11 @@ msgstr "_কাজ করবার ডিরেক্টরি:"
 msgid "gedit: Shell Output plugin"
 msgstr "জিএডিট: শেল আউটপুট প্লাগ্-ইন"
 
-#: plugins/sort/sort.c:27
+#: plugins/sort/sort.c:29
 msgid "S_ort..."
 msgstr "_সাজাও..."
 
-#: plugins/sort/sort.c:30
+#: plugins/sort/sort.c:32
 msgid "Sort the current document or selection."
 msgstr "বর্তমান ডকুমেন্ট বা সিলেক্শন সাজিয়ে নিন।"
 
@@ -2773,26 +2780,26 @@ msgstr "বিন্ন্যাস _উল্টে দিন"
 msgid "_Sort"
 msgstr "_সাজান"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:351
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(প্রস্তাব করবার মতো কোনো শব্দ আমার জানা নেই)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:375
 msgid "_More..."
 msgstr "_আরো..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:428
 msgid "_Ignore All"
 msgstr "সব _অগ্রাহ্য করুন"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:441
 msgid "_Add"
 msgstr "_যোগ করুন"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:478
 msgid "_Spelling Suggestions..."
 msgstr "_বানান প্রস্তাবনা..."
 
@@ -2941,16 +2948,16 @@ msgstr "সুইডিশ"
 msgid "Ukrainian"
 msgstr "সিরিলীক/ইউক্রেনিআন"
 
-#: plugins/spell/gedit-spell-checker.c:744
+#: plugins/spell/gedit-spell-checker.c:784
 msgid "Default"
 msgstr "ডিফল্ট"
 
-#: plugins/spell/gedit-spell-language-dialog.c:241
+#: plugins/spell/gedit-spell-language-dialog.c:239
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "%s - এর মধ্যে দরকারি উইজেটগুলো পাওয়া গেল না।"
 
-#: plugins/spell/gedit-spell-language-dialog.c:261
+#: plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "ভাষা"
 
@@ -3018,39 +3025,39 @@ msgstr "_অগ্রাহ্য করুন"
 msgid "_Suggestions:"
 msgstr "_প্রস্তাবনা:"
 
-#: plugins/spell/spell.c:51
+#: plugins/spell/spell.c:52
 msgid "_Check Spelling"
 msgstr "বানান _চেক করুন"
 
-#: plugins/spell/spell.c:54
+#: plugins/spell/spell.c:55
 msgid "Check the current document for incorrect spelling"
 msgstr "বর্তমান ডকুমেন্টে ভুল বানান আছে কিনা চেক করুন"
 
-#: plugins/spell/spell.c:56
+#: plugins/spell/spell.c:57
 msgid "_Autocheck Spelling"
 msgstr "_স্বয়ন্ক্রিয়ভাবে বানান চেক করা হোক"
 
-#: plugins/spell/spell.c:59
+#: plugins/spell/spell.c:60
 msgid "Automatically spell-check the current document"
 msgstr "বর্তমান ডকুমেন্টের বানান  _স্বয়ন্ক্রিয়ভাবে চেক করা হোক"
 
-#: plugins/spell/spell.c:61
+#: plugins/spell/spell.c:62
 msgid "Set _Language"
 msgstr "_ভাষা সেট করুন"
 
-#: plugins/spell/spell.c:64
+#: plugins/spell/spell.c:65
 msgid "Set the language of the current document"
 msgstr "বর্তমান ডকুমেন্টের ভাষা সেট করুন"
 
-#: plugins/spell/spell.c:557
+#: plugins/spell/spell.c:625
 msgid "The document is empty."
 msgstr "ডকুমেন্ট ফাকা।"
 
-#: plugins/spell/spell.c:575
+#: plugins/spell/spell.c:643
 msgid "The selected text does not contain mispelled words."
 msgstr "বাছাই করা টেক্সটে কোনো ভুল বানান নেই।"
 
-#: plugins/spell/spell.c:576
+#: plugins/spell/spell.c:644
 msgid "The document does not contain mispelled words."
 msgstr "ডকুমেন্টে কোনো ভুল বানান নেই।"
 
@@ -3062,25 +3069,25 @@ msgstr "বর্তমান ডকুমেন্টের মধ্যেক�
 msgid "Spell checker"
 msgstr "বানান সংশোধক"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:139
+#: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
 msgstr "ট্যাগ তালিকা প্লাগ্-ইন"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:157
+#: plugins/taglist/gedit-taglist-plugin-window.c:167
 msgid "Select the group of tags you want to use"
 msgstr "যে ট্যাগ সমূহ আপনি ব্যবহার করতে চান সেগুলি সিলেক্ট করুন"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:179
+#: plugins/taglist/gedit-taglist-plugin-window.c:189
 #, fuzzy
 msgid "Available Tag Lists"
 msgstr "প্রাপ্য ফরম্যাট"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:181
-#: plugins/taglist/gedit-taglist-plugin-window.c:202
+#: plugins/taglist/gedit-taglist-plugin-window.c:191
+#: plugins/taglist/gedit-taglist-plugin-window.c:212
 msgid "Tags"
 msgstr "ট্যাগ সমূহ"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:191
+#: plugins/taglist/gedit-taglist-plugin-window.c:201
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "কোনো ট্যাগ-কে বর্তমান ডকুমেন্টে ইনসার্ট করতে হলে তার ওপর ডাবল-ক্লিক্ করুন"
 
@@ -3108,19 +3115,19 @@ msgstr ""
 msgid "Tag list"
 msgstr "ট্যাগ তালিকা"
 
-#: plugins/time/time.c:50
+#: plugins/time/time.c:49
 msgid "In_sert Date and Time..."
 msgstr "তারিখ এবং সময় _ইনসার্ট করুন ..."
 
-#: plugins/time/time.c:53
+#: plugins/time/time.c:52
 msgid "Insert current date and time at the cursor position"
 msgstr "কার্সারের অবস্থানে বর্তমান তারিখ এবং সময় _ইনসার্ট করুন"
 
-#: plugins/time/time.c:449
+#: plugins/time/time.c:445
 msgid "Available formats"
 msgstr "প্রাপ্য ফরম্যাট"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:553
 msgid "Configure insert date/time plugin..."
 msgstr "ইনসার্ট ডেট/টাইম প্লাগ্-ইন কনফিগার করুন..."
 
@@ -3164,6 +3171,78 @@ msgstr "ফরম্যাটের জন্যে _প্রম্পট ক�
 msgid "_Use custom format"
 msgstr "_আপনার পছন্দসই ফরম্যাট ব্যাবহার করুন"
 
+#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+#~ msgstr "প্লাগ্-ইন ম্যানেজার পাওয়া গেল না।  জিএডিট আবার ইন্স্টল করুন, glade2.\n"
+
+#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+#~ msgstr "প্লাগ্-ইন ম্যানেজারের গ্লেড ফাইল অবৈধ -- সব উইজেট পাওয়া গেল না।\n"
+
+# Correct me on these plurals if I am wrong
+#~ msgid "_Insert a new preview phrase."
+#~ msgstr "নতুন কোনো প্রিভিউ ফ্রেজ্ _ইনসার্ট করুন।"
+
+#~ msgid "Modify preview phrase..."
+#~ msgstr "প্রিভিউ ফ্রেজ্ পরিবর্তন করুন..."
+
+#~ msgid "Preview"
+#~ msgstr "প্রিভিউ"
+
+# Any translation for this?
+#~ msgid "_Modify preview phrase..."
+#~ msgstr "প্রিভিউ ফ্রেজ্ _পরিবর্তন করুন..."
+
+#~ msgid "Font Selection"
+#~ msgstr "বাছাই করা ফন্ট"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "অআইঈউঊৠএঐওঔকখগঘঙচছজঝঞটঠডঢণতথদধনপফবভময়রলবশষসহড়ঢ়ংঃ ঁ"
+
+#~ msgid "Pick a Font"
+#~ msgstr "একটি ফন্ট বেছে নিন"
+
+#~ msgid "Title"
+#~ msgstr "টাইটেল"
+
+#~ msgid "The title of the selection dialog box"
+#~ msgstr "সিলেক্শন ডায়লগ বাক্সের টাইটেল"
+
+#~ msgid "Font name"
+#~ msgstr "ফন্টের নাম"
+
+#~ msgid "Name of the selected font"
+#~ msgstr "বেছে নেওয়া ফন্টের নাম"
+
+#~ msgid "Preview text"
+#~ msgstr "টেক্সট প্রিভিউ করুন"
+
+#~ msgid "Preview text shown in the dialog"
+#~ msgstr "ডায়লোগে দেখানো টেক্সট প্রিভিউ করুন"
+
+#~ msgid "Use font in label"
+#~ msgstr "লেবেলে ফন্ট ব্যাবহার করুন"
+
+#~ msgid "Use font in the label in font info mode"
+#~ msgstr "ফন্ট ইনফো মোডে লেবেলে ফন্ট ব্যাবহার করুন"
+
+#~ msgid "Font size for label"
+#~ msgstr "লেবেলের ফন্টের সাইজ"
+
+# I thought it is better to use 'size' instead of 'ayoton'
+#~ msgid "Font size for label in font info mode"
+#~ msgstr "ফন্ট ইনফো মোডে লেবেলের ফন্টের সাইজ"
+
+#~ msgid "Show size"
+#~ msgstr "সাইজ দেখাও"
+
+#~ msgid "Show size in font info mode"
+#~ msgstr "ফন্ট ইনফো মোডে সাইজ দেখাও"
+
+#~ msgid "Font"
+#~ msgstr "ফন্ট"
+
+#~ msgid "(modified)"
+#~ msgstr "(পরিবর্তিত)"
+
 #~ msgid "Untitled"
 #~ msgstr "টাইটেলবিহীন"
 
@@ -3194,38 +3273,6 @@ msgstr "_আপনার পছন্দসই ফরম্যাট ব্য�
 
 #~ msgid "Error, impossible to update ui of the plugin '%s'"
 #~ msgstr "প্লাগ্-ইন '%s' -র ইউআই আপডেট করা সম্ভব না হওয়ার দ্বরুন ত্রুটি"
-
-#, fuzzy
-#~ msgid "C_hange Case"
-#~ msgstr "_পরিবর্তন করুন"
-
-#, fuzzy
-#~ msgid "_Invert Case"
-#~ msgstr "_Insert ক্যার"
-
-#, fuzzy
-#~ msgid "_Title Case"
-#~ msgstr "টাইটেল"
-
-#, fuzzy
-#~ msgid "Change selected text to upper case"
-#~ msgstr "বেছে নেওয়া টেক্সটে ক্লিপবোর্ডে কপি করুন"
-
-#, fuzzy
-#~ msgid "Change selected text to lower case"
-#~ msgstr "বেছে নেওয়া টেক্সটে ক্লিপবোর্ডে কপি করুন"
-
-#, fuzzy
-#~ msgid "Invert the case of selected text"
-#~ msgstr "বাছাই করা টেক্স্ট মুছে ফেলুন"
-
-#, fuzzy
-#~ msgid "Change Case"
-#~ msgstr "_পরিবর্তন করুন"
-
-#, fuzzy
-#~ msgid "Changes the case of selected text."
-#~ msgstr "বাছাই করা টেক্স্ট মুছে ফেলুন"
 
 #~ msgid "Copy the selected text to the clipboard"
 #~ msgstr "বেছে নেওয়া টেক্সটে ক্লিপবোর্ডে কপি করুন"
