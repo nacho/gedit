@@ -372,8 +372,9 @@ void gE_save_settings(gE_window *window, gchar *cmd)
   gnome_config_set_int ("tb text", (gint) window->have_tb_text);
   gnome_config_set_int ("tb pix", (gint) window->have_tb_pix);
 
+
   if (window->print_cmd == "")
-    gnome_config_set_string ("print command", "lpr -rs ");
+    gnome_config_set_string ("print command", "lpr -rs %s");
   else
     gnome_config_set_string ("print command", window->print_cmd);
     /*gnome_config_set_string ("print command", cmd);*/

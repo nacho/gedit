@@ -57,11 +57,11 @@ void _file_print(GtkWidget *w, gpointer cbdata)
     FILE *file;
     gE_document *current;
     long length,i;
-    char filename[STRING_LENGTH_MAX];
-    char tmpstring[STRING_LENGTH_MAX];
-    char _tmpstring[STRING_LENGTH_MAX];
-    char *ptr;
-    char *var_ptr;
+    gchar filename[STRING_LENGTH_MAX];
+    gchar tmpstring[STRING_LENGTH_MAX];
+    gchar _tmpstring[STRING_LENGTH_MAX];
+    gchar *ptr;
+    gchar *var_ptr;
     
     gE_data *data = (gE_data *)cbdata;
     gE_window *window = data->window;
@@ -121,9 +121,11 @@ void _file_print(GtkWidget *w, gpointer cbdata)
         strcat( tmpstring, _tmpstring );
 
         /* execute */
+        g_print("%s\n",tmpstring);
         system( tmpstring );
-	gtk_widget_destroy (print_dialog);
-	print_dialog = NULL;
+/*	gtk_widget_destroy (print_dialog);
+	print_dialog = NULL;*/
+	print_destroy(NULL,NULL);
 }
 
 
@@ -171,7 +173,8 @@ gE_data *data = (gE_data *)cbdata;
     gtk_box_pack_start( GTK_BOX( vbox ), hbox, FALSE, TRUE, 10 );
     gtk_widget_show( hbox );
 
-    label = gtk_label_new( "Print Using: " );
+    label = gtk_label_new( "Enter print command below\n
+    					Remember to include '%s'" );
     gtk_box_pack_start( GTK_BOX( hbox ), label, FALSE, TRUE, 5 );
     gtk_widget_show( label );
 
@@ -183,13 +186,11 @@ gE_data *data = (gE_data *)cbdata;
     gtk_box_pack_start( GTK_BOX( hbox ), print_command, FALSE, TRUE, 5 );
    gtk_widget_show( print_command);
 
-    print_cmd_entry = gtk_entry_new();
+    print_cmd_entry = gtk_entry_new_with_max_length(255);
     gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), data->window->print_cmd);
     gtk_box_pack_start( GTK_BOX( hbox ), print_cmd_entry, FALSE, TRUE, 10 );
-    gtk_entry_set_editable(GTK_ENTRY(print_cmd_entry),TRUE);
-    
     gtk_widget_show( print_cmd_entry );
-    gtk_widget_set_sensitive( print_cmd_entry, FALSE );
+
 
     hsep = gtk_hseparator_new();
     gtk_box_pack_start( GTK_BOX( vbox ), hsep, FALSE, TRUE, 10 );
