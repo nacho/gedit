@@ -1,3 +1,15 @@
+2002-01-17  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* gedit-document.c:  Added support for auto-save.
+	(gedit_document_auto_save_timeout): New function
+	(gedit_document_auto_save): ditto
+	(gedit_document_save): reset auto save timer (if needed)
+	(gedit_document_load): start auto save timer (if needed)
+	(gedit_document_finalize): remove auto save timer
+
+	* dialogs/gedit-preferences.glade2: made the auto save widgets
+	sensitive.
+
 2002-01-17  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-document.[ch] (gedit_document_insert_text_at_cursor):

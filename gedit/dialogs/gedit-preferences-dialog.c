@@ -120,6 +120,8 @@ struct _GeditPreferencesDialogPrivate
 
 	/* Save page */
 	GtkWidget	*backup_copy_checkbutton;
+	GtkWidget	*auto_save_checkbutton;
+	GtkWidget	*auto_save_spinbutton;
 	GtkWidget	*utf8_radiobutton;
 	GtkWidget	*locale_if_possible_radiobutton;
 	GtkWidget	*locale_if_previous_radiobutton;
@@ -925,6 +927,12 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	
 	dlg->priv->backup_copy_checkbutton = glade_xml_get_widget (gui, 
 			"backup_copy_checkbutton");
+	
+	dlg->priv->auto_save_checkbutton = glade_xml_get_widget (gui, 
+			"auto_save_checkbutton");
+
+	dlg->priv->auto_save_spinbutton = glade_xml_get_widget (gui, 
+			"auto_save_spinbutton");
 
 	dlg->priv->utf8_radiobutton= glade_xml_get_widget (gui, 
 			"utf8_radiobutton"); 
@@ -944,6 +952,12 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
 				      gedit_settings->create_backup_copy);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->auto_save_checkbutton),
+				      gedit_settings->auto_save);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton),
+				    gedit_settings->auto_save_interval);
+
 
 	switch (gedit_settings->save_encoding)
 	{
@@ -1172,6 +1186,13 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	/* Save page */
 	gedit_settings->create_backup_copy = 
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton));
+
+	gedit_settings->auto_save = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->auto_save_checkbutton));
+	gedit_settings->auto_save_interval =
+		gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton));
+
+	
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton)))
 		gedit_settings->save_encoding = GEDIT_SAVE_ALWAYS_UTF8;

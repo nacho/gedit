@@ -53,6 +53,7 @@ struct _GeditDocumentPrivate
 	gchar*  last_searched_text;
 	gchar*  last_replace_text;
 	gboolean  last_search_was_case_sensitive;
+	guint	auto_save_timeout;
 	
 	gboolean readonly;
 
@@ -92,6 +93,8 @@ static void gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_
 
 static void gedit_document_can_redo_handler (GeditUndoManager* um, gboolean can_redo, 
 					     GeditDocument* doc);
+static gboolean gedit_document_auto_save (GeditDocument *doc, GError **error);
+static gboolean gedit_document_auto_save_timeout (GeditDocument *doc);
 
 static GtkTextBufferClass *parent_class 	= NULL;
 static guint document_signals[LAST_SIGNAL] 	= { 0 };
@@ -268,6 +271,9 @@ gedit_document_finalize (GObject *object)
 
 	g_return_if_fail (document->priv != NULL);
 
+	if (document->priv->auto_save_timeout > 0)
+		g_source_remove (document->priv->auto_save_timeout);
+
 	if (document->priv->uri)
     	{
 		g_free (document->priv->uri);
@@ -287,6 +293,7 @@ gedit_document_finalize (GObject *object)
 
 	if (document->priv->last_replace_text)
 		g_free (document->priv->last_replace_text);
+
 
 	g_object_unref (G_OBJECT (document->priv->undo_manager));
 	
@@ -477,6 +484,31 @@ gedit_document_io_error_quark()
   return quark;
 }
 
+static gboolean
+gedit_document_auto_save_timeout (GeditDocument *doc)
+{
+	GError *error = NULL;
+	gedit_document_auto_save (doc, &error);
+
+	if (error) {
+		/* Should we actually tell the user there was an error? */
+		g_error_free (error);
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+gedit_document_auto_save (GeditDocument* doc, GError **error)
+{
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	gedit_document_save_as_real (doc, doc->priv->uri, FALSE, NULL);
+
+	return TRUE;
+}
+
 /**
  * gedit_document_load:
  * @doc: a GeditDocument
@@ -581,6 +613,11 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
 	gedit_document_set_uri (doc, uri);
+
+	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0))
+		doc->priv->auto_save_timeout = g_timeout_add(gedit_settings->auto_save_interval*1000*60,
+							     (GSourceFunc)gedit_document_auto_save_timeout,
+							     doc);
 	
 	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
 
@@ -667,6 +704,11 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	gedit_document_set_readonly (doc, FALSE);
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
 
+	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0))
+		doc->priv->auto_save_timeout =
+			g_timeout_add(gedit_settings->auto_save_interval*1000*60,
+				      (GSourceFunc)gedit_document_auto_save, doc);
+
 	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0);
 
 	return TRUE;
@@ -710,6 +752,15 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
+
+	if (gedit_settings->auto_save) {
+
+		if (doc->priv->auto_save_timeout > 0)
+			g_source_remove (doc->priv->auto_save_timeout);
+
+		doc->priv->auto_save_timeout =
+			g_timeout_add(gedit_settings->auto_save_interval*1000*60,(GSourceFunc)gedit_document_auto_save, doc);
+	}
 
 	return gedit_document_save_as_real (doc, doc->priv->uri, 
 			gedit_settings->create_backup_copy, error);
@@ -1410,4 +1461,3 @@ gedit_document_replace_all (GeditDocument *doc,
 
 	return cont;
 }
-

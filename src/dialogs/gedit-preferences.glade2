@@ -1388,10 +1388,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="homogeneous">no</property>
                     <property name="spacing">3</property>
                     <property name="visible">no</property>
-                    <property name="sensitive">no</property>
+                    <property name="sensitive">yes</property>
 
                     <child>
-                      <widget class="GtkCheckButton" id="checkbutton10">
+                      <widget class="GtkCheckButton" id="auto_save_checkbutton">
                         <property name="can_focus">yes</property>
                         <property name="label" translatable="yes">_Auto save current file every</property>
                         <property name="active">no</property>
@@ -1407,7 +1407,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     </child>
 
                     <child>
-                      <widget class="GtkSpinButton" id="spinbutton7">
+                      <widget class="GtkSpinButton" id="auto_save_spinbutton">
                         <property name="can_focus">yes</property>
                         <property name="climb_rate">1</property>
                         <property name="digits">0</property>

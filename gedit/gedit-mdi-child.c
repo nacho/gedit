@@ -313,7 +313,7 @@ gedit_mdi_child_new_with_uri (const gchar *uri, GError **error)
 	gedit_debug (DEBUG_MDI, "");
 
 	doc = gedit_document_new_with_uri (uri, error);
-	
+
 	if (doc == NULL)
 	{
 		gedit_debug (DEBUG_MDI, "ERROR: %s", (*error)->message);
