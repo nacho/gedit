@@ -62,3 +62,8 @@ CPPFLAGS = \
 	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
 	-Wall -ansi -pedantic  \
 	#-DDEBUG
+
+dist-hook:
+	mkdir $(distdir)/xpm
+	cp $(srcdir)/xpm/*.xpm $(destdir)/xpm
+
