@@ -375,7 +375,8 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	pji->header_height = settings->printheader * 72;
 	pji->printable_width  = pji->page_width -
 		                pji->margin_left -
-		                pji->margin_right;
+		                pji->margin_right -
+		                ((settings->printlines>0)?pji->margin_numbers:0);
 	pji->printable_height = pji->page_height -
 		                pji->margin_top -
 		                pji->margin_bottom;
