@@ -71,6 +71,7 @@ struct _GeditPreferencesDialogPrivate
 
 	GtkTreeModel *categories_tree_model;
 
+#if 0
 	/* Toolbar page */
 	GtkWidget	*toolbar_show_checkbutton;
 	
@@ -85,6 +86,7 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*statusbar_show_checkbutton;
 	GtkWidget	*statusbar_cursor_position_checkbutton;
 	GtkWidget	*statusbar_overwrite_mode_checkbutton;
+#endif
 
 #ifdef DEBUG_MDI_PREFS	
 	/*MDI page */
@@ -160,13 +162,14 @@ static GtkTreeModel* gedit_preferences_dialog_create_categories_tree_model ();
 
 static void gedit_preferences_dialog_categories_tree_selection_cb (GtkTreeSelection *selection, 
 							GeditPreferencesDialog *dlg);
-
+#if 0
 static gboolean gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static void gedit_preferences_dialog_toolbar_show_checkbutton_toggled (GtkToggleButton *show_button,
 							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static void gedit_preferences_dialog_statusbar_show_checkbutton_toggled (GtkToggleButton *show_button,
 							 GeditPreferencesDialog *dlg);
+#endif
 
 #ifdef DEBUG_MDI_PREFS
 static gboolean gedit_preferences_dialog_setup_mdi_page (GeditPreferencesDialog *dlg, GladeXML *gui);
@@ -191,7 +194,7 @@ static gboolean gedit_preferences_dialog_setup_line_numbers_page (GeditPreferenc
 
 
 static GtkDialogClass* parent_class = NULL;
-
+#if 0
 static CategoriesTreeItem user_interface [] =
 {
 	{_("Toolbar"), NULL, TOOLBAR_SETTINGS},
@@ -203,6 +206,7 @@ static CategoriesTreeItem user_interface [] =
 
 	{ NULL }
 };
+#endif
 
 static CategoriesTreeItem editor_behavior [] =
 {
@@ -230,7 +234,9 @@ static CategoriesTreeItem toplevel [] =
 {
 	{_("Editor"), editor_behavior, LOGO},
 	{_("Print"), print, LOGO},
+#if 0
 	{_("User interface"), user_interface, LOGO},
+#endif
 	{ NULL }
 };
 
@@ -533,9 +539,10 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 		    ("Could not find the required widgets inside gedit-preferences.glade2.\n");
 		return NULL;
 	}
-
+#if 0
 	gedit_preferences_dialog_setup_toolbar_page (dlg, gui);
 	gedit_preferences_dialog_setup_statusbar_page (dlg, gui);
+#endif
 #ifdef DEBUG_MDI_PREFS
 	gedit_preferences_dialog_setup_mdi_page (dlg, gui);
 #endif
@@ -569,7 +576,7 @@ gedit_preferences_dialog_new (GtkWindow *parent)
 	
 	return dlg;
 }
-
+#if 0
 static gboolean 
 gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -703,7 +710,7 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 
 	return TRUE;
 }
-
+#endif
 #ifdef DEBUG_MDI_PREFS
 
 static void
@@ -1110,14 +1117,15 @@ gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, G
 gboolean 
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
+#if 0
 	GeditPreferences old_prefs;
+#endif
 	const gchar* font;
 	guint16 dummy;
 
 	gedit_debug (DEBUG_PREFS, "");
-	
+#if 0		
 	old_prefs = *gedit_settings;
-	
 	/* Get data from toolbar page */
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_checkbutton)))
 		gedit_settings->toolbar_visible = FALSE;
@@ -1154,7 +1162,7 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	gedit_settings->statusbar_view_overwrite_mode = 
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
 					dlg->priv->statusbar_overwrite_mode_checkbutton));
-		
+#endif		
 	/* Get data from undo page */
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton)))
 		gedit_settings->undo_levels = 0;
@@ -1279,10 +1287,11 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 		gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton));
 
 	return TRUE;
-	
+#if 0	
 error:
 	*gedit_settings = old_prefs;
 	g_return_val_if_fail (FALSE, FALSE);
+#endif
 }
 
 	

@@ -49,6 +49,9 @@ void gedit_menus_set_verb_sensitive 		(BonoboUIComponent *ui_component,
 void gedit_menus_set_verb_list_sensitive 	(BonoboUIComponent *ui_component, 
 						 gchar            **vlist,
 						 gboolean           sensitive);
+void gedit_menus_set_verb_state 		(BonoboUIComponent *ui_component, 
+						 gchar* cname, 
+						 gboolean state);
 
 /* convenience functions for plugins */
 

@@ -141,6 +141,15 @@ gedit_menus_set_verb_list_sensitive (BonoboUIComponent *ui_component, gchar** vl
 	}
 }
 
+void
+gedit_menus_set_verb_state (BonoboUIComponent *ui_component, gchar* cname, gboolean state)
+{
+	g_return_if_fail (cname != NULL);
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
+
+	bonobo_ui_component_set_prop (
+		ui_component, cname, "state", state ? "1" : "0", NULL);
+}
 
 void
 gedit_menus_add_menu_item (BonoboWindow *window, const gchar *path,
