@@ -1,7 +1,7 @@
 General Information
 ===================
 
-This is version 2.2.0 of gedit. gedit is a small and lightweight UTF-8 text 
+This is version 2.3.1 of gedit. gedit is a small and lightweight UTF-8 text 
 editor for the GNOME environment.
 
 Designed for the X Window System, it uses the GTK+ 2.0 and GNOME 2.0 libraries. 
@@ -29,6 +29,7 @@ features:
     * Accepts input from command line pipes ( i.e. "ls | gedit" )
     * Printing and Print Previewing Support
     * Configurable levels of Undo/Redo
+    * Syntax highlighting
 
 Some of the plugins, packaged and installed with gedit include, among others:
 
@@ -59,12 +60,12 @@ Information about gedit mailing lists can be found at
 Installation
 ============
 
-gedit requires GTK+-2.2.x and the GNOME 2.2.x libraries.
+gedit requires GTK+-2.2.x, GtkSourceView 0.2.0 and GNOME 2.3.x libraries.
 
 Simple install procedure:
 
-  % gzip -cd gedit-2.2.0.tar.gz | tar xvf -    # unpack the sources
-  % cd gedit-2.2.0			   # change to the toplevel directory
+  % gzip -cd gedit-2.3.1.tar.gz | tar xvf -    # unpack the sources
+  % cd gedit-2.3.1			   # change to the toplevel directory
   % ./configure				   # run the `configure' script
   % make				   # build gedit
   [ Become root if necessary ]
@@ -96,7 +97,7 @@ In the bug report please include:
 * How to reproduce the bug. 
 
 * If the bug was a crash, the exact text that was printed out when the
-  crash occured.
+  crash occurred.
 
 * Further information such as stack traces may be useful, but is not
   necessary. If you do send a stack trace, and the error is an X error,
