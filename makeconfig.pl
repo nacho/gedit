@@ -89,6 +89,7 @@ po/Makefile.in
 macros/Makefile
 help/Makefile
 help/C/Makefile
+help/no/Makefile
 src/Makefile
 gmodule-plugins/Makefile
 gmodule-plugins/idl/Makefile
