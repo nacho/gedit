@@ -110,6 +110,8 @@ gedit_print_document (PrintJobInfo *pji)
 			print_end_page (pji);
 
 		gedit_print_progress_tick (pji, current_page);
+		if (pji->canceled)
+			break;
 	}
 	print_end_job (pji->pc);
 	g_free (pji->temp);
@@ -119,6 +121,14 @@ gedit_print_document (PrintJobInfo *pji)
 	gedit_print_progress_end (pji);
 }
 
+
+/**
+ * print_line:
+ * @pji: 
+ * @line: 
+ * 
+ * 
+ **/
 static void
 print_line (PrintJobInfo *pji, int line)
 {
@@ -127,106 +137,110 @@ print_line (PrintJobInfo *pji, int line)
 	gint i, temp;
 	gint first_line = TRUE;
 
-	while( pji->buffer [pji->file_offset ] != '\n' && pji->file_offset < pji->buffer_size)
+	while ( pji->buffer [pji->file_offset ] != '\n' && pji->file_offset < pji->buffer_size)
 	{
 		chars_in_this_line++;
 
-		if (pji->buffer [pji->file_offset] == '\t')
-		{
+		/* Take care of tabs */
+		if (pji->buffer [pji->file_offset] != '\t') {
+			/* Copy one character */
+			pji->temp  [chars_in_this_line-1] = pji->buffer [pji->file_offset];
+		} else {
+
 			temp = chars_in_this_line;
 
+			/* chars in this line is added tab size, but if the spaces are going to
+			 * end up in the next line, we don't insert them. This means tabs are not
+			 * carried over to the next line */			   
 			chars_in_this_line += pji->tab_size - ( (chars_in_this_line-1) % pji->tab_size) - 1;
 
 			if (chars_in_this_line > pji->chars_per_line + 1)
 			    chars_in_this_line = pji->chars_per_line + 1;
 
-			for (i=temp;i<chars_in_this_line+1;i++)
+			for (i=temp; i<chars_in_this_line+1; i++)
 			{
 				pji->temp [i-1] = ' ';
 			}
 		}
-		else
-		{
-			pji->temp  [chars_in_this_line-1] = pji->buffer [pji->file_offset];
+
+
+		/* Is this line "full" ? If not, continue */
+		if (chars_in_this_line < pji->chars_per_line + 1) {
+			/* next char please */
+			pji->file_offset++;
+			continue;
 		}
 
+		/* if we are not doing word wrapping, this is easy */
+		if (!pji->wrapping)
+		{
+			/* We need to advance pji->file_offset until the next NL char */
+			while( pji->buffer [pji->file_offset ] != '\n')
+				pji->file_offset++;
+			pji->file_offset--;
+
+			pji->temp [chars_in_this_line] = (guchar) '\0';
+			print_ps_line (pji, line, TRUE);
+			pji->current_line++;
+			chars_in_this_line = 0;
+
+			/* Ok, next char please */
+			pji->file_offset++;
+			
+			continue;
+		}
 		
-		if (chars_in_this_line == pji->chars_per_line + 1)
+		if (dump_info)
+			g_print ("\nThis lines needs breaking\n");
+			
+		temp = pji->file_offset; /* We need to save the value of file_offset in case we have to break the line */
+			
+		/* We back up till we find a space that we can break the line at */
+		while (pji->buffer [pji->file_offset] != ' '  &&
+		       pji->buffer [pji->file_offset] != '\t' &&
+		       pji->file_offset > temp - pji->chars_per_line - 1 )
 		{
-			if (!pji->wrapping)
-			{
-				/* We need to advance pji->file_offset until the next NL char */
-				while( pji->buffer [pji->file_offset ] != '\n')
-					pji->file_offset++;
-				pji->file_offset--;
-
-				pji->temp [chars_in_this_line] = (guchar) '\0';
-				print_ps_line (pji, line, TRUE);
-				pji->current_line++;
-				chars_in_this_line = 0;
-			}
-			else
-			{
-				if (dump_info)
-					g_print ("\nThis lines needs breaking\n");
-
-				temp = pji->file_offset; /* We need to save the value of i in case we have to break the line */
-
-				/* We back i till we find a space that we can break the line at */
-				while (pji->buffer [pji->file_offset] != ' '  &&
-				       pji->buffer [pji->file_offset] != '\t' &&
-				       pji->file_offset > temp - pji->chars_per_line - 1 )
-				{
-					pji->file_offset--;
-				}
-
-				if (dump_info)
-					g_print("file offset got backed up [%i] times\n", temp - pji->file_offset);
-
-				/* If this line was "unbreakable" break it at chars_per_line width */
-				if (pji->file_offset == temp - pji->chars_per_line - 1)
-				{
-					pji->file_offset = temp;
-					if (dump_info)
-						g_print ("We are breaking the line\n");
-				}
-
-				if (dump_info)
-				{
-					g_print ("Breaking temp at : %i\n", chars_in_this_line + pji->file_offset - temp - 1);
-					g_print ("Chars_in_this_line %i File Offset %i Temp %i\n",
-						 chars_in_this_line,
-						 pji->file_offset,
-						 temp);
-				}
-				pji->temp [ chars_in_this_line + pji->file_offset - temp - 1] = (guchar) '\0';
-				print_ps_line (pji, line, first_line);
-				first_line = FALSE;
-				pji->current_line++;
-				chars_in_this_line = 0;
-
-				/* We need to remove the trailing blanks so that the next line does not start with
-				   a space or a tab char */
-				while (pji->buffer [pji->file_offset] == ' ' || pji->buffer [pji->file_offset] == '\t')
-					pji->file_offset++;
-
-				/* We need to back i 1 time because this is a for loop and we did not processed the
-				   last character */
-				pji->file_offset--;
-
-				/* If this is the last line of the page return */
-				if (pji->current_line%pji->lines_per_page == 0)
-				{
-					pji->file_offset++;
-					return;
-				}
-			}
+			pji->file_offset--;
 		}
-	
-		pji->file_offset++;
+		
+		if (dump_info)
+			g_print("file offset got backed up [%i] times\n", temp - pji->file_offset);
+		
+		/* If this line was "unbreakable" beacuse it contained a word longer than
+		 * chars per line, we need to break it at chars_per_line */
+		if (pji->file_offset == temp - pji->chars_per_line - 1)
+		{
+			pji->file_offset = temp;
+			if (dump_info)
+				g_print ("We are breaking the line\n");
+		}
+		
+		if (dump_info)
+		{
+			g_print ("Breaking temp at : %i\n", chars_in_this_line + pji->file_offset - temp - 1);
+			g_print ("Chars_in_this_line %i File Offset %i Temp %i\n",
+				 chars_in_this_line,
+				 pji->file_offset,
+				 temp);
+		}
+		pji->temp [ chars_in_this_line + pji->file_offset - temp - 1] = (guchar) '\0';
+		print_ps_line (pji, line, first_line);
+		first_line = FALSE;
+		pji->current_line++;
+		chars_in_this_line = 0;
+		
+		/* We need to remove the trailing blanks so that the next line does not start with
+		 *  a space or a tab char
+		 */
+		while (pji->buffer [pji->file_offset] == ' ' || pji->buffer [pji->file_offset] == '\t')
+			pji->file_offset++;
+		
+		/* If this is the last line of the page return */
+		if (pji->current_line%pji->lines_per_page == 0)
+			return;
 	}
 
-	/* We need to terminate the string and print it */ 
+	/* We need to terminate the string and send it to gnome-print */ 
 	pji->temp [chars_in_this_line] = (guchar) '\0';
 	print_ps_line (pji, line, first_line);
 	pji->current_line++;
@@ -236,6 +250,15 @@ print_line (PrintJobInfo *pji, int line)
 
 }
 
+/**
+ * print_ps_line:
+ * @pji: 
+ * @line: 
+ * @first_line: 
+ * 
+ * print line leaves the chars to be printed in pji->temp.
+ * this function performs the actual printing of that line.
+ **/
 static void
 print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 {
@@ -243,8 +266,9 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 
 	gedit_debug (DEBUG_PRINT, "");
 
+	/* Calculate the y position */
 	y = pji->page_height -  pji->margin_top - pji->header_height -
-	(pji->font_char_height*( (pji->current_line % pji->lines_per_page)+1 ));
+		(pji->font_char_height*( (pji->current_line % pji->lines_per_page)+1 ));
 
 	if (!pji->print_this_page)
 		return;
@@ -252,6 +276,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gedit_print_show_iso8859_1 (pji->pc, pji->temp);
 
+	/* Print the line number */
 	if (pji->print_line_numbers >0 &&
 	    line % pji->print_line_numbers == 0 &&
 	    first_line)
@@ -299,7 +324,7 @@ gedit_print_document_determine_lines (PrintJobInfo *pji, gboolean real)
 
 	int dump_info = FALSE;
 	int dump_info_basic = FALSE;
-	int dump_text = FALSE;
+	int dump_text = TRUE;
 
 	gedit_debug (DEBUG_PRINT, "");
 

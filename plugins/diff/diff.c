@@ -178,7 +178,7 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 	if (pid == 0)
 	{
 		/* New process. */
-		char *argv[5];
+		char *argv[4];
 
 		close (1);
 		dup (fdpipe[1]);
@@ -186,10 +186,12 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 		close (fdpipe[1]);
       
 		argv[0] = "diff";
+#ifdef WHEN_WILL_SOLARIS_UPGRADE_THEIR_OS_TO_GNU_SOLARIS_I_ASK_MYSELF_CONSTANTLY
 		argv[1] = "-u";
-		argv[2] = file_name_1;
-		argv[3] = file_name_2;
-		argv[4] = NULL;
+#endif	
+		argv[1] = file_name_1;
+		argv[2] = file_name_2;
+		argv[3] = NULL;
 		execv (program_location, argv);
 		/* This is only reached if something goes wrong. */
 		_exit (1);

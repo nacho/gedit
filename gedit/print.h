@@ -99,6 +99,7 @@ typedef struct _PrintJobInfo {
 	/* Progress */
 	GtkWidget   *progress_bar;
 	GnomeDialog *progress_dialog;
+	gboolean canceled;
 } PrintJobInfo;
 
 

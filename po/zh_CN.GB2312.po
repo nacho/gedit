@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.4\n"
-"POT-Creation-Date: 2001-02-22 11:51+0800\n"
+"POT-Creation-Date: 2001-02-25 14:48-0600\n"
 "PO-Revision-Date: 2001-02-10 21:06+0800\n"
 "Last-Translator: Mai Haohui < mhh@126.com >\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -37,12 +37,12 @@ msgstr "要浏览的_URL地址："
 msgid "Lynx found at: "
 msgstr "lynx的位置："
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:22
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "位置"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:23
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr "更改(_C)..."
@@ -125,20 +125,20 @@ msgstr ""
 "gedit 无法创建一个临时文件。\n"
 "\n"
 
-#: plugins/diff/diff.c:280 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "未命名 %i"
 
-#: plugins/diff/diff.c:472
+#: plugins/diff/diff.c:476
 msgid "Diff"
 msgstr "差异比较"
 
-#: plugins/diff/diff.c:473
+#: plugins/diff/diff.c:477
 msgid "Makes a diff file from two documents or files"
 msgstr "比较两个文档或者是两个文件，生成一个 diff 文件"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:478
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -163,31 +163,27 @@ msgstr "选择要进行比较的文件"
 msgid "First"
 msgstr "第一个"
 
-#: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:16
+#: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:14
 msgid "From document"
 msgstr "来自文档"
 
-#: plugins/diff/diff.glade.h:11 plugins/diff/diff.glade.h:17
-msgid "don't translate this\n"
-msgstr ""
-
-#: plugins/diff/diff.glade.h:13 plugins/diff/diff.glade.h:19
+#: plugins/diff/diff.glade.h:11 plugins/diff/diff.glade.h:15
 msgid "From a file on disk"
 msgstr "来自磁盘文件"
 
-#: plugins/diff/diff.glade.h:14
+#: plugins/diff/diff.glade.h:12
 msgid "Select the \"first\" file..."
 msgstr "选择第一个文件..."
 
-#: plugins/diff/diff.glade.h:15
+#: plugins/diff/diff.glade.h:13
 msgid "Second"
 msgstr "第二个"
 
-#: plugins/diff/diff.glade.h:20
+#: plugins/diff/diff.glade.h:16
 msgid "Select the \"second\" file..."
 msgstr "选择第二个文件..."
 
-#: plugins/diff/diff.glade.h:21
+#: plugins/diff/diff.glade.h:17
 msgid "Diff found at : "
 msgstr "Diff的位置："
 
@@ -1150,28 +1146,19 @@ msgstr "错误：init_plugin函数返回一个错误。"
 msgid "Error, plugin is still in use"
 msgstr "错误：插件正在使用。"
 
-#: src/print.c:297
+#: src/print.c:229
+#, fuzzy
+msgid "Print Document"
+msgstr "文档"
+
+#: src/print.c:237
 msgid "Pages"
 msgstr "页："
 
-#: src/print.c:355
-#, fuzzy, c-format
-msgid "gedit - [%s]: Print Preview"
+#: src/print.c:283
+#, fuzzy
+msgid "gedit : Print Preview\n"
 msgstr "gedit (%s): 打印预览"
-
-#: src/print.c:654 src/print.c:669
-#, c-format
-msgid ""
-"gedit could not find the font \"%s\".\n"
-"gedit is unable to print without this font installed."
-msgstr ""
-"gedit 不能找到字体 \"%s\"。\n"
-"缺少了这种字体，gedit 不能打印。"
-
-#: src/print.c:966
-#, c-format
-msgid "Page: %i/%i"
-msgstr "页 ： %i/%i"
 
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
@@ -1222,6 +1209,16 @@ msgstr ""
 "当前行： %i\n"
 "当前列： %i"
 
-#: src/view.c:978
+#: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "您不能删除文档的最后一个视图。"
+
+#~ msgid ""
+#~ "gedit could not find the font \"%s\".\n"
+#~ "gedit is unable to print without this font installed."
+#~ msgstr ""
+#~ "gedit 不能找到字体 \"%s\"。\n"
+#~ "缺少了这种字体，gedit 不能打印。"
+
+#~ msgid "Page: %i/%i"
+#~ msgstr "页 ： %i/%i"

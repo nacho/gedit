@@ -1,3 +1,10 @@
+2001-02-25  Chema Celorio  <chema@celorio.com>
+
+	* diff/diff.c (gedit_plugin_execute): remove the -u since
+	solaris diff does not support it. #ifdef out the code with :
+	
+	#ifdef WHEN_WILL_SOLARIS_UPGRADE_THEIR_OS_TO_GNU_SOLARIS_I_ASK_MYSELF_CONSTANTLY	
+
 2001-02-21  Paolo Maggi <maggi@athena.polito.it>
 
 	* convert/convert.glade:

@@ -184,11 +184,24 @@ gedit_print_verify_fonts (void)
 	}
 	gnome_font_unref (test_font);
 	g_free (test_font_name);	
-
+ 
 	return TRUE;
 }
 
 
+static void
+gedit_print_progress_clicked (GtkWidget *button, gpointer data)
+{
+	PrintJobInfo *pji = (PrintJobInfo *) data;
+
+	/* Now, i dunno how you could click a button inside a dialog
+	 * that does not exits, but I could not resist to add this
+	 * lines */
+	if (pji->progress_dialog == NULL)
+		return;
+	
+	pji->canceled = TRUE;
+}
 
 void
 gedit_print_progress_start (PrintJobInfo *pji)
@@ -197,15 +210,25 @@ gedit_print_progress_start (PrintJobInfo *pji)
 	GtkWidget *label;
 	GtkWidget *progress_bar;
 
+	/* For small docs, the dialog looks lame */
+	if (pji->page_last - pji->page_first < 31)
+		return;
+
 	progress_bar = gtk_progress_bar_new ();
 	
 	dialog = GNOME_DIALOG (gnome_dialog_new (_("Printing .."),
 						 GNOME_STOCK_BUTTON_CANCEL,
 						 NULL));
+
+	gnome_dialog_button_connect (dialog, 0,
+				     GTK_SIGNAL_FUNC (gedit_print_progress_clicked),
+				     pji);
+
 	pji->progress_dialog = dialog;
 	pji->progress_bar    = progress_bar;
 	
 	label = gtk_label_new (_("Printing ..."));
+	
 	gtk_box_pack_start (GTK_BOX (dialog->vbox),
 			    label,
 			    FALSE, FALSE, 0);
@@ -225,6 +248,9 @@ gedit_print_progress_tick (PrintJobInfo *pji, gint page)
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
+	if (pji->progress_dialog == NULL)
+		return;
+	
 	percentage = (gfloat ) (page - pji->page_first) /
 		(gfloat) (pji->page_last - pji->page_first);
 
@@ -237,6 +263,12 @@ gedit_print_progress_tick (PrintJobInfo *pji, gint page)
 void
 gedit_print_progress_end (PrintJobInfo *pji)
 {
+	if (pji->progress_dialog == NULL)
+		return;
+		       
 	gnome_dialog_close (pji->progress_dialog);
+
+	pji->progress_dialog = NULL;
+	pji->progress_bar = NULL;
 }
 

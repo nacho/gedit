@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.0\n"
-"POT-Creation-Date: 2001-02-24 13:33+0100\n"
+"POT-Creation-Date: 2001-02-25 14:48-0600\n"
 "PO-Revision-Date: 2001-02-24 13:45CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
@@ -39,12 +39,12 @@ msgstr "Zadajte _URL, ktoré chcete zobraziť:"
 msgid "Lynx found at: "
 msgstr "Lynx nájdený na : "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:22
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "umiestnenie"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:23
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr "_Zmeniť..."
@@ -127,20 +127,20 @@ msgstr ""
 "gedit nemohol vytvoriť dočasný súbor.\n"
 "\n"
 
-#: plugins/diff/diff.c:280 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:284 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Bez mena %i"
 
-#: plugins/diff/diff.c:472
+#: plugins/diff/diff.c:476
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:473
+#: plugins/diff/diff.c:477
 msgid "Makes a diff file from two documents or files"
 msgstr "Vytvorí diff súbor z dvoch dokumentov alebo súborov"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:478
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -166,31 +166,27 @@ msgstr "Vyberte, ktoré súbory porovnať"
 msgid "First"
 msgstr "Prvý"
 
-#: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:16
+#: plugins/diff/diff.glade.h:10 plugins/diff/diff.glade.h:14
 msgid "From document"
 msgstr "Z dokumentu"
 
-#: plugins/diff/diff.glade.h:11 plugins/diff/diff.glade.h:17
-msgid "don't translate this\n"
-msgstr "don't translate this\n"
-
-#: plugins/diff/diff.glade.h:13 plugins/diff/diff.glade.h:19
+#: plugins/diff/diff.glade.h:11 plugins/diff/diff.glade.h:15
 msgid "From a file on disk"
 msgstr "Zo súboru na disku"
 
-#: plugins/diff/diff.glade.h:14
+#: plugins/diff/diff.glade.h:12
 msgid "Select the \"first\" file..."
 msgstr "Vyberte \"prvý\" súbor..."
 
-#: plugins/diff/diff.glade.h:15
+#: plugins/diff/diff.glade.h:13
 msgid "Second"
 msgstr "Druhý"
 
-#: plugins/diff/diff.glade.h:20
+#: plugins/diff/diff.glade.h:16
 msgid "Select the \"second\" file..."
 msgstr "Vyberte \"Druhý\" súbor..."
 
-#: plugins/diff/diff.glade.h:21
+#: plugins/diff/diff.glade.h:17
 msgid "Diff found at : "
 msgstr "Diff nájdený na : "
 
@@ -533,7 +529,8 @@ msgstr "Vyberte písmo"
 
 #: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaÁáÄäBbCcČčDdĎďEeÉéFfGgHhIiÍíJjKkLlĹĺMmNnŇňOoÓóÔôPpQqRr"
+msgstr ""
+"AaÁáÄäBbCcČčDdĎďEeÉéFfGgHhIiÍíJjKkLlĹĺMmNnŇňOoÓóÔôPpQqRr"
 
 #: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
@@ -1160,28 +1157,19 @@ msgstr "Chyba, init_plugin vrátil chybu"
 msgid "Error, plugin is still in use"
 msgstr "Chyba, modul sa ešte používa"
 
-#: src/print.c:297
+#: src/print.c:229
+#, fuzzy
+msgid "Print Document"
+msgstr "Dokumenty"
+
+#: src/print.c:237
 msgid "Pages"
 msgstr "Strany"
 
-#: src/print.c:355
-#, c-format
-msgid "gedit - [%s]: Print Preview"
+#: src/print.c:283
+#, fuzzy
+msgid "gedit : Print Preview\n"
 msgstr "gedit - [%s]: Ukážka pred tlačou"
-
-#: src/print.c:654 src/print.c:669
-#, c-format
-msgid ""
-"gedit could not find the font \"%s\".\n"
-"gedit is unable to print without this font installed."
-msgstr ""
-"gedit nenašiel písmo \"%s\".\n"
-"gedit nie je schopný tlačiť, ak toto písmo nie je nainštalované."
-
-#: src/print.c:966
-#, c-format
-msgid "Page: %i/%i"
-msgstr "Strana: %i/%i"
 
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
@@ -1234,7 +1222,19 @@ msgstr ""
 "Aktuálny riadok: %i\n"
 "Aktuálny stĺpec: %i"
 
-#: src/view.c:978
+#: src/view.c:994
 msgid "You can't remove the last view of a document."
 msgstr "Nemô6ete odstrániť posledný pohľad dokumentu."
 
+#~ msgid "don't translate this\n"
+#~ msgstr "don't translate this\n"
+
+#~ msgid ""
+#~ "gedit could not find the font \"%s\".\n"
+#~ "gedit is unable to print without this font installed."
+#~ msgstr ""
+#~ "gedit nenašiel písmo \"%s\".\n"
+#~ "gedit nie je schopný tlačiť, ak toto písmo nie je nainštalované."
+
+#~ msgid "Page: %i/%i"
+#~ msgstr "Strana: %i/%i"

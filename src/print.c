@@ -156,6 +156,8 @@ gedit_print_job_info_new (void)
 	
 	gedit_print_calculate_pages (pji);
 
+	pji->canceled = FALSE;
+	
 	return pji;
 }
 
@@ -299,6 +301,9 @@ gedit_print (gboolean preview)
 
 	gedit_debug (DEBUG_PRINT, "");
 
+	if (!gedit_print_verify_fonts ())
+		return;
+
 	pji = gedit_print_job_info_new ();
 	pji->preview = preview;
 
@@ -308,8 +313,15 @@ gedit_print (gboolean preview)
 	if (!cancel)
 		gedit_print_document (pji);
 
+	if (pji->canceled) {
+		gedit_print_job_info_destroy (pji);
+		return;
+	}
+		
 	if (pji->preview)
 		gedit_print_preview_real (pji);
+	else
+		gnome_print_master_print (pji->master);
 	
 	gedit_print_job_info_destroy (pji);
 }

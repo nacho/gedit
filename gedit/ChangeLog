@@ -1,5 +1,16 @@
 2001-02-25  Chema Celorio  <chema@celorio.com>
 
+	* print-doc.c (gedit_print_document): clean the code a bit.
+	But it really need a rewrite
+
+	* print-util.c (gedit_print_progress_clicked): implement.
+	Printing can now be canceled
+
+	* print.c (gedit_print): run verify fonts
+	(gedit_print): actually print
+
+2001-02-25  Chema Celorio  <chema@celorio.com>
+
 	* print.h: add progress_bar * progress_dialog
 
 	* print-util.c (gedit_print_progress_start): implement.
