@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-09-09 21:28+0100\n"
+"POT-Creation-Date: 1999-09-11 14:22+0100\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -34,29 +34,29 @@ msgstr "Skal"
 msgid "Could not save file!"
 msgstr ""
 
-#: src/commands.c:520
+#: src/commands.c:550
 msgid "Open File..."
 msgstr "Öppna fil..."
 
-#: src/commands.c:570 src/commands.c:610
+#: src/commands.c:603 src/commands.c:645
 msgid "Read only file!"
 msgstr "Skrivskyddad fil!"
 
-#: src/commands.c:642 src/commands.c:707
+#: src/commands.c:677 src/commands.c:742
 msgid "Error saving file!"
 msgstr "Fel vid sparning av fil!"
 
-#: src/commands.c:671
+#: src/commands.c:706
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr "Spara som..."
 
-#: src/commands.c:739
+#: src/commands.c:774
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr "Spara som..."
 
-#: src/commands.c:819
+#: src/commands.c:859
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -65,19 +65,19 @@ msgstr ""
 "Är du säker att du vill ångra alla förändringar?\n"
 "(%s)"
 
-#: src/commands.c:867
+#: src/commands.c:907
 msgid "Document Unchanged..."
 msgstr "Dokument oförändrat..."
 
-#: src/commands.c:871
+#: src/commands.c:911
 msgid "Document Unsaved..."
 msgstr "Dokument ej sparat..."
 
-#: src/commands.c:1060
+#: src/commands.c:1102
 msgid "_File/"
 msgstr "_Arkiv/"
 
-#: src/commands.c:1069 src/commands.c:1070
+#: src/commands.c:1111 src/commands.c:1112
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -130,32 +130,41 @@ msgstr "Hitta _rad..."
 msgid "Search for a line"
 msgstr "Sök efter en rad"
 
-#: src/gE_mdi.c:85
+#: src/gE_mdi.c:75
+#, fuzzy
+msgid "Find _In Files..."
+msgstr "Hitta _rad..."
+
+#: src/gE_mdi.c:76
+msgid "Find text in all open files"
+msgstr ""
+
+#: src/gE_mdi.c:91
 msgid "_Add View"
 msgstr "_Lägg till vy"
 
-#: src/gE_mdi.c:86
+#: src/gE_mdi.c:92
 msgid "Add a new view of the document"
 msgstr "Lägg till en ny vy av dokumentet"
 
-#: src/gE_mdi.c:87
+#: src/gE_mdi.c:93
 msgid "_Remove View"
 msgstr "_Ta bort vy"
 
-#: src/gE_mdi.c:88
+#: src/gE_mdi.c:94
 msgid "Remove view of the document"
 msgstr "Tar bort en vy av dokumentet"
 
-#: src/gE_mdi.c:461
+#: src/gE_mdi.c:468
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' har ändrats. Vill du spara den?"
 
 #. FIXME: Needs to actually unload the plugin itself..
 #. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
-#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
-#: src/menus.c:265
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:539
+#: src/gE_prefs_box.c:540 src/gE_prefs_box.c:595 src/gE_prefs_box.c:596
+#: src/menus.c:266
 msgid "_Plugins"
 msgstr "_Insticksprogram"
 
@@ -175,130 +184,130 @@ msgstr "Toppnivå"
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:270
+#: src/gE_prefs_box.c:281
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/gE_prefs_box.c:283
+#: src/gE_prefs_box.c:294
 msgid "Show Statusbar"
 msgstr "Visa statusrad"
 
-#: src/gE_prefs_box.c:292
+#: src/gE_prefs_box.c:303
 msgid "Show Splitscreen"
 msgstr "Visa skärmdelning"
 
-#: src/gE_prefs_box.c:301
+#: src/gE_prefs_box.c:312
 msgid "Editor Behavior"
 msgstr "Editor-uppförande"
 
-#: src/gE_prefs_box.c:314
+#: src/gE_prefs_box.c:325
 msgid "Enable Autoindent"
 msgstr "Använd autoindrag"
 
-#: src/gE_prefs_box.c:323
+#: src/gE_prefs_box.c:334
 msgid "Enable Wordwrap"
 msgstr "Använd ordbryting"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:397
 msgid "Document Settings"
 msgstr "Dokumentinställningar"
 
-#: src/gE_prefs_box.c:400
+#: src/gE_prefs_box.c:411
 msgid "New Document After Closing Last"
 msgstr "Nytt dokument efter sista stängs"
 
-#: src/gE_prefs_box.c:406
+#: src/gE_prefs_box.c:417
 msgid "Close Window After Closing Last"
 msgstr "Stäng fönstret efter sista stängs"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:426
 msgid "Current Font"
 msgstr "Nuvarande typsnitt"
 
-#: src/gE_prefs_box.c:432
+#: src/gE_prefs_box.c:443
 msgid "Select..."
 msgstr "Välj..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:448
+#: src/gE_prefs_box.c:459
 msgid "Print Command"
 msgstr "Utskriftskommando"
 
-#: src/gE_prefs_box.c:500
+#: src/gE_prefs_box.c:511
 msgid "Plugin Selector"
 msgstr "Insticksnamn-namn"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Name"
 msgstr "Namn"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr "Placering"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
 msgid "Plugins"
 msgstr "Insticksprogram"
 
-#: src/gE_prefs_box.c:635
+#: src/gE_prefs_box.c:646
 msgid "Use Plugins"
 msgstr "Använd insticksprogram"
 
-#: src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:712
 msgid "Add"
 msgstr "Lägg till"
 
-#: src/gE_prefs_box.c:706
+#: src/gE_prefs_box.c:717
 msgid "Remove"
 msgstr "Ta bort"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:749
+#: src/gE_prefs_box.c:760
 msgid "Window Size"
 msgstr "Fönsterstorlek"
 
-#: src/gE_prefs_box.c:762
+#: src/gE_prefs_box.c:773
 msgid "Current Width:"
 msgstr "Nuvarande bredd:"
 
-#: src/gE_prefs_box.c:782
+#: src/gE_prefs_box.c:793
 msgid "Startup Width:"
 msgstr "Start-bredd:"
 
-#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
+#: src/gE_prefs_box.c:801 src/gE_prefs_box.c:841
 msgid "Use Current"
 msgstr "Använd nuvarande"
 
-#: src/gE_prefs_box.c:802
+#: src/gE_prefs_box.c:813
 msgid "Current Height:"
 msgstr "Nuvarande höjd:"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:833
 msgid "Startup Height:"
 msgstr "Start-höjd:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:838
+#: src/gE_prefs_box.c:849
 msgid "MDI Mode"
 msgstr "MDI-läge"
 
 #. General Settings
-#: src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:917
 msgid "General"
 msgstr "Generellt"
 
 #. Window Settings
-#: src/gE_prefs_box.c:911
+#: src/gE_prefs_box.c:922
 msgid "Window"
 msgstr "Fönster"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:916
+#: src/gE_prefs_box.c:927
 msgid "Document"
 msgstr "Dokument"
 
@@ -500,7 +509,19 @@ msgstr "Sp_ara inställningar"
 msgid "Save the current settings for future sessions"
 msgstr "Spara nuvarande inställningar för framtida sessioner"
 
-#: src/search.c:326
+#: src/search.c:381
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:382 src/search.c:716
+msgid "Search"
+msgstr "Sök"
+
+#: src/search.c:386 src/search.c:721 src/search.c:749
+msgid "Search for:"
+msgstr "Sök efter:"
+
+#: src/search.c:622
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -509,59 +530,51 @@ msgstr ""
 "Totalt antal rader: %i\n"
 "Nuvarande rad: %i"
 
-#: src/search.c:348
+#: src/search.c:644
 msgid "Go to line"
 msgstr "Gå till rad"
 
-#: src/search.c:358
+#: src/search.c:654
 msgid "Line number"
 msgstr "Radnummer"
 
-#: src/search.c:381
+#: src/search.c:677
 msgid "Search from cursor"
 msgstr "Sök från markören"
 
-#: src/search.c:388
+#: src/search.c:684
 msgid "Search from beginning of document"
 msgstr "Sök från början av dokumentet"
 
-#: src/search.c:395
+#: src/search.c:691
 msgid "Search from end of document"
 msgstr "Sök från slutet av dokumentet"
 
-#: src/search.c:402
+#: src/search.c:698
 msgid "Case sensitive"
 msgstr "Matcha gemener/versaler"
 
-#: src/search.c:408
+#: src/search.c:704
 msgid "Reverse search"
 msgstr "Omvänd sökning"
 
-#: src/search.c:420
-msgid "Search"
-msgstr "Sök"
-
-#: src/search.c:425 src/search.c:453
-msgid "Search for:"
-msgstr "Sök efter:"
-
-#: src/search.c:447 src/search.c:448
+#: src/search.c:743 src/search.c:744
 msgid "Replace"
 msgstr "Byt ut"
 
-#: src/search.c:449
+#: src/search.c:745
 msgid "Replace all"
 msgstr "Byt ut alla"
 
-#: src/search.c:463
+#: src/search.c:759
 msgid "Replace with:"
 msgstr "Byt ut mot:"
 
-#: src/search.c:474
+#: src/search.c:770
 msgid "Ask before replacing"
 msgstr "Fråga före ersättning"
 
-#: src/search.c:673
+#: src/search.c:969
 msgid "Replace?"
 msgstr "Ersätt?"
 

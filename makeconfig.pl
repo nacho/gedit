@@ -33,43 +33,43 @@ AM_CONDITIONAL(FALSE, test foo = bar)
 
 	    
 dnl Let the user enable the new GModule Plugins
-AC_ARG_WITH(gmodule-plugins,
-	    [  --with-gmodule-plugins  Enable GModule Plugins [default=no]],
-	    enable_gmodule_plugins="$withval", enable_gmodule_plugins=no)
+dnl AC_ARG_WITH(gmodule-plugins,
+dnl	    [  --with-gmodule-plugins  Enable GModule Plugins [default=no]],
+dnl	    enable_gmodule_plugins="$withval", enable_gmodule_plugins=no)
 
 dnl We need to have GNOME to use them
-have_gmodule_plugins=no
-  if test x$enable_gmodule_plugins = xyes ; then
-    AC_DEFINE(WITH_GMODULE_PLUGINS)
-    have_gmodule_plugins=yes
-  fi
+dnl have_gmodule_plugins=no
+dnl  if test x$enable_gmodule_plugins = xyes ; then
+dnl    AC_DEFINE(WITH_GMODULE_PLUGINS)
+dnl    have_gmodule_plugins=yes
+dnl  fi
 
 AM_CONDITIONAL(WITH_GMODULE_PLUGINS, test x$have_gmodule_plugins = xyes)
-
+dnl
 dnl Let the user disable ORBit even if it can be found
-AC_ARG_ENABLE(orbit,
-	      [  --enable-orbit          Try to use ORBit [default=no] ],
-	      enable_orbit="$enableval", enable_orbit=no)
+dnl AC_ARG_ENABLE(orbit,
+dnl	      [  --enable-orbit          Try to use ORBit [default=no] ],
+dnl	      enable_orbit="$enableval", enable_orbit=no)
 dnl We only need CORBA for plugins
-if test x$have_gmodule_plugins = xyes ; then
-  if test x$enable_orbit = xyes ; then
-    GNOME_ORBIT_HOOK([have_orbit=yes])
-  fi
-fi
+dnl if test x$have_gmodule_plugins = xyes ; then
+dnl  if test x$enable_orbit = xyes ; then
+dnl    GNOME_ORBIT_HOOK([have_orbit=yes])
+dnl  fi
+dnl fi
 AM_CONDITIONAL(HAVE_ORBIT, test x$have_orbit = xyes)
 
 dnl Check if we also have LibGnorba
-if test x$have_orbit = xyes; then
-  AC_CHECK_LIB(gnorba, gnome_CORBA_init, have_libgnorba=yes, have_libgnorba=no,
-               $ORBIT_LIBS $GNOMEUI_LIBS)
-fi
-if test x$have_libgnorba = xyes ; then
-  AC_DEFINE(HAVE_LIBGNORBA)
-fi
+dnl if test x$have_orbit = xyes; then
+dnl  AC_CHECK_LIB(gnorba, gnome_CORBA_init, have_libgnorba=yes, have_libgnorba=no,
+dnl               $ORBIT_LIBS $GNOMEUI_LIBS)
+dnl fi
+dnl if test x$have_libgnorba = xyes ; then
+dnl  AC_DEFINE(HAVE_LIBGNORBA)
+dnl fi
 AM_CONDITIONAL(HAVE_LIBGNORBA, test x$have_libgnorba = xyes)
 
 dnl Check for libzvt from gnome-libs/zvt
-AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
+dnl AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
 
@@ -91,12 +91,12 @@ help/Makefile
 help/C/Makefile
 help/no/Makefile
 src/Makefile
-gmodule-plugins/Makefile
-gmodule-plugins/idl/Makefile
-gmodule-plugins/goad/Makefile
-gmodule-plugins/client/Makefile
-gmodule-plugins/shell/Makefile
-gmodule-plugins/launcher/Makefile
+dnl gmodule-plugins/Makefile
+dnl gmodule-plugins/idl/Makefile
+dnl gmodule-plugins/goad/Makefile
+dnl gmodule-plugins/client/Makefile
+dnl gmodule-plugins/shell/Makefile
+dnl gmodule-plugins/launcher/Makefile
 editor-plugins/Makefile
 EOF
 

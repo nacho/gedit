@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-09-09 21:28+0100\n"
+"POT-Creation-Date: 1999-09-11 14:22+0100\n"
 "PO-Revision-Date: 1999-02-12 20:21+0800\n"
 "Last-Translator: Cd Chen <cdchen@mail.about.net.tw>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -33,51 +33,51 @@ msgstr ""
 msgid "Could not save file!"
 msgstr ""
 
-#: src/commands.c:520
+#: src/commands.c:550
 #, fuzzy
 msgid "Open File..."
 msgstr "開啟一個檔案"
 
-#: src/commands.c:570 src/commands.c:610
+#: src/commands.c:603 src/commands.c:645
 msgid "Read only file!"
 msgstr ""
 
-#: src/commands.c:642 src/commands.c:707
+#: src/commands.c:677 src/commands.c:742
 msgid "Error saving file!"
 msgstr ""
 
-#: src/commands.c:671
+#: src/commands.c:706
 #, fuzzy, c-format
 msgid "Save %s As..."
 msgstr " 儲存 "
 
-#: src/commands.c:739
+#: src/commands.c:774
 #, fuzzy, c-format
 msgid "Save %s As ..."
 msgstr " 儲存 "
 
-#: src/commands.c:819
+#: src/commands.c:859
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr ""
 
-#: src/commands.c:867
+#: src/commands.c:907
 msgid "Document Unchanged..."
 msgstr ""
 
-#: src/commands.c:871
+#: src/commands.c:911
 #, fuzzy
 msgid "Document Unsaved..."
 msgstr "文件定位(_D)"
 
-#: src/commands.c:1060
+#: src/commands.c:1102
 #, fuzzy
 msgid "_File/"
 msgstr "檔案(_F)"
 
-#: src/commands.c:1069 src/commands.c:1070
+#: src/commands.c:1111 src/commands.c:1112
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -130,32 +130,41 @@ msgstr "找尋行數 (_L)..."
 msgid "Search for a line"
 msgstr "搜尋某一行"
 
-#: src/gE_mdi.c:85
+#: src/gE_mdi.c:75
+#, fuzzy
+msgid "Find _In Files..."
+msgstr "找尋行數 (_L)..."
+
+#: src/gE_mdi.c:76
+msgid "Find text in all open files"
+msgstr ""
+
+#: src/gE_mdi.c:91
 msgid "_Add View"
 msgstr ""
 
-#: src/gE_mdi.c:86
+#: src/gE_mdi.c:92
 msgid "Add a new view of the document"
 msgstr ""
 
-#: src/gE_mdi.c:87
+#: src/gE_mdi.c:93
 msgid "_Remove View"
 msgstr ""
 
-#: src/gE_mdi.c:88
+#: src/gE_mdi.c:94
 msgid "Remove view of the document"
 msgstr ""
 
-#: src/gE_mdi.c:461
+#: src/gE_mdi.c:468
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr ""
 
 #. FIXME: Needs to actually unload the plugin itself..
 #. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
-#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
-#: src/menus.c:265
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:539
+#: src/gE_prefs_box.c:540 src/gE_prefs_box.c:595 src/gE_prefs_box.c:596
+#: src/menus.c:266
 msgid "_Plugins"
 msgstr "Plugins(_P)"
 
@@ -175,137 +184,137 @@ msgstr ""
 msgid "Modal"
 msgstr ""
 
-#: src/gE_prefs_box.c:270
+#: src/gE_prefs_box.c:281
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:283
+#: src/gE_prefs_box.c:294
 msgid "Show Statusbar"
 msgstr "顯示狀態欄"
 
-#: src/gE_prefs_box.c:292
+#: src/gE_prefs_box.c:303
 msgid "Show Splitscreen"
 msgstr "顯示分割視窗"
 
-#: src/gE_prefs_box.c:301
+#: src/gE_prefs_box.c:312
 msgid "Editor Behavior"
 msgstr "編輯器特性"
 
-#: src/gE_prefs_box.c:314
+#: src/gE_prefs_box.c:325
 msgid "Enable Autoindent"
 msgstr "啟用自動編排"
 
-#: src/gE_prefs_box.c:323
+#: src/gE_prefs_box.c:334
 msgid "Enable Wordwrap"
 msgstr "啟用文字換行"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:397
 #, fuzzy
 msgid "Document Settings"
 msgstr "文件列表(_D)"
 
-#: src/gE_prefs_box.c:400
+#: src/gE_prefs_box.c:411
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:406
+#: src/gE_prefs_box.c:417
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:426
 msgid "Current Font"
 msgstr "正在使用的字體"
 
-#: src/gE_prefs_box.c:432
+#: src/gE_prefs_box.c:443
 msgid "Select..."
 msgstr "請選擇..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:448
+#: src/gE_prefs_box.c:459
 msgid "Print Command"
 msgstr "列印命令"
 
-#: src/gE_prefs_box.c:500
+#: src/gE_prefs_box.c:511
 msgid "Plugin Selector"
 msgstr ""
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Name"
 msgstr ""
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr ""
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
 #, fuzzy
 msgid "Plugins"
 msgstr "Plugins(_P)"
 
-#: src/gE_prefs_box.c:635
+#: src/gE_prefs_box.c:646
 #, fuzzy
 msgid "Use Plugins"
 msgstr "Plugins(_P)"
 
-#: src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:712
 msgid "Add"
 msgstr ""
 
-#: src/gE_prefs_box.c:706
+#: src/gE_prefs_box.c:717
 msgid "Remove"
 msgstr ""
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:749
+#: src/gE_prefs_box.c:760
 msgid "Window Size"
 msgstr ""
 
-#: src/gE_prefs_box.c:762
+#: src/gE_prefs_box.c:773
 #, fuzzy
 msgid "Current Width:"
 msgstr "正在使用的字體"
 
-#: src/gE_prefs_box.c:782
+#: src/gE_prefs_box.c:793
 msgid "Startup Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
+#: src/gE_prefs_box.c:801 src/gE_prefs_box.c:841
 #, fuzzy
 msgid "Use Current"
 msgstr "正在使用的字體"
 
-#: src/gE_prefs_box.c:802
+#: src/gE_prefs_box.c:813
 #, fuzzy
 msgid "Current Height:"
 msgstr "正在使用的字體"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:833
 msgid "Startup Height:"
 msgstr ""
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:838
+#: src/gE_prefs_box.c:849
 msgid "MDI Mode"
 msgstr ""
 
 #. General Settings
-#: src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:917
 msgid "General"
 msgstr "一般的"
 
 #. Window Settings
-#: src/gE_prefs_box.c:911
+#: src/gE_prefs_box.c:922
 #, fuzzy
 msgid "Window"
 msgstr "搜尋"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:916
+#: src/gE_prefs_box.c:927
 #, fuzzy
 msgid "Document"
 msgstr "文件定位(_D)"
@@ -513,7 +522,20 @@ msgstr "儲存設定(_v)"
 msgid "Save the current settings for future sessions"
 msgstr "儲存現在的設定值，以供未來使用"
 
-#: src/search.c:326
+#: src/search.c:381
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:382 src/search.c:716
+msgid "Search"
+msgstr "搜尋"
+
+#: src/search.c:386 src/search.c:721 src/search.c:749
+#, fuzzy
+msgid "Search for:"
+msgstr "搜尋:"
+
+#: src/search.c:622
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -522,68 +544,59 @@ msgstr ""
 "總行數: %i\n"
 "現在的行數: %i"
 
-#: src/search.c:348
+#: src/search.c:644
 msgid "Go to line"
 msgstr ""
 
-#: src/search.c:358
+#: src/search.c:654
 #, fuzzy
 msgid "Line number"
 msgstr "行號"
 
-#: src/search.c:381
+#: src/search.c:677
 #, fuzzy
 msgid "Search from cursor"
 msgstr "尋找一個字串"
 
-#: src/search.c:388
+#: src/search.c:684
 #, fuzzy
 msgid "Search from beginning of document"
 msgstr "由文件的開頭開始搜尋"
 
-#: src/search.c:395
+#: src/search.c:691
 #, fuzzy
 msgid "Search from end of document"
 msgstr "由文件的開頭開始搜尋"
 
-#: src/search.c:402
+#: src/search.c:698
 msgid "Case sensitive"
 msgstr "判斷大小寫"
 
-#: src/search.c:408
+#: src/search.c:704
 msgid "Reverse search"
 msgstr ""
 
-#: src/search.c:420
-msgid "Search"
-msgstr "搜尋"
-
-#: src/search.c:425 src/search.c:453
-#, fuzzy
-msgid "Search for:"
-msgstr "搜尋:"
-
-#: src/search.c:447 src/search.c:448
+#: src/search.c:743 src/search.c:744
 #, fuzzy
 msgid "Replace"
 msgstr "取代:"
 
-#: src/search.c:449
+#: src/search.c:745
 #, fuzzy
 msgid "Replace all"
 msgstr "取代:"
 
-#: src/search.c:463
+#: src/search.c:759
 #, fuzzy
 msgid "Replace with:"
 msgstr "取代:"
 
-#: src/search.c:474
+#: src/search.c:770
 #, fuzzy
 msgid "Ask before replacing"
 msgstr "取代前詢問"
 
-#: src/search.c:673
+#: src/search.c:969
 #, fuzzy
 msgid "Replace?"
 msgstr "取代:"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-09-09 21:28+0100\n"
+"POT-Creation-Date: 1999-09-11 14:22+0100\n"
 "PO-Revision-Date: 1998-02-28 19:57+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -34,29 +34,29 @@ msgstr "Shell"
 msgid "Could not save file!"
 msgstr "Impossible d'enregistrer le fichier!"
 
-#: src/commands.c:520
+#: src/commands.c:550
 msgid "Open File..."
 msgstr "Ouvrir Fichier..."
 
-#: src/commands.c:570 src/commands.c:610
+#: src/commands.c:603 src/commands.c:645
 msgid "Read only file!"
 msgstr "Fichier en lecture seule!"
 
-#: src/commands.c:642 src/commands.c:707
+#: src/commands.c:677 src/commands.c:742
 msgid "Error saving file!"
 msgstr "Erreur lors de la sauvegarde du fichier!"
 
-#: src/commands.c:671
+#: src/commands.c:706
 #, c-format
 msgid "Save %s As..."
 msgstr "Enregistrer %s sous..."
 
-#: src/commands.c:739
+#: src/commands.c:774
 #, c-format
 msgid "Save %s As ..."
 msgstr "Enregistrer %s sous..."
 
-#: src/commands.c:819
+#: src/commands.c:859
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -65,19 +65,19 @@ msgstr ""
 "Voulez-vous vraiment annuler tous les changements?\n"
 "(%s)"
 
-#: src/commands.c:867
+#: src/commands.c:907
 msgid "Document Unchanged..."
 msgstr "Document non changé..."
 
-#: src/commands.c:871
+#: src/commands.c:911
 msgid "Document Unsaved..."
 msgstr "Document non sauvé..."
 
-#: src/commands.c:1060
+#: src/commands.c:1102
 msgid "_File/"
 msgstr "_Fichier/"
 
-#: src/commands.c:1069 src/commands.c:1070
+#: src/commands.c:1111 src/commands.c:1112
 msgid "_File"
 msgstr "_Fichier"
 
@@ -130,32 +130,41 @@ msgstr "Trouver _Ligne..."
 msgid "Search for a line"
 msgstr "Rechercher une ligne"
 
-#: src/gE_mdi.c:85
+#: src/gE_mdi.c:75
+#, fuzzy
+msgid "Find _In Files..."
+msgstr "Trouver _Ligne..."
+
+#: src/gE_mdi.c:76
+msgid "Find text in all open files"
+msgstr ""
+
+#: src/gE_mdi.c:91
 msgid "_Add View"
 msgstr "_Ajouter Vue"
 
-#: src/gE_mdi.c:86
+#: src/gE_mdi.c:92
 msgid "Add a new view of the document"
 msgstr "Ajouter une nouvelle vue au document"
 
-#: src/gE_mdi.c:87
+#: src/gE_mdi.c:93
 msgid "_Remove View"
 msgstr "Enleve_r vue"
 
-#: src/gE_mdi.c:88
+#: src/gE_mdi.c:94
 msgid "Remove view of the document"
 msgstr "Enlever la vue du document"
 
-#: src/gE_mdi.c:461
+#: src/gE_mdi.c:468
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' a été modifié. Voulez-vous l'enregistrer?"
 
 #. FIXME: Needs to actually unload the plugin itself..
 #. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
-#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
-#: src/menus.c:265
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:539
+#: src/gE_prefs_box.c:540 src/gE_prefs_box.c:595 src/gE_prefs_box.c:596
+#: src/menus.c:266
 msgid "_Plugins"
 msgstr "_Plugins"
 
@@ -175,130 +184,130 @@ msgstr "1er Niveau"
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:270
+#: src/gE_prefs_box.c:281
 msgid "Appearance"
 msgstr "Apparence"
 
-#: src/gE_prefs_box.c:283
+#: src/gE_prefs_box.c:294
 msgid "Show Statusbar"
 msgstr "Afficher la barre d'état"
 
-#: src/gE_prefs_box.c:292
+#: src/gE_prefs_box.c:303
 msgid "Show Splitscreen"
 msgstr "Afficher DoubleVue"
 
-#: src/gE_prefs_box.c:301
+#: src/gE_prefs_box.c:312
 msgid "Editor Behavior"
 msgstr "Comportement de l'éditeur"
 
-#: src/gE_prefs_box.c:314
+#: src/gE_prefs_box.c:325
 msgid "Enable Autoindent"
 msgstr "Activer l'auto-indentation"
 
-#: src/gE_prefs_box.c:323
+#: src/gE_prefs_box.c:334
 msgid "Enable Wordwrap"
 msgstr "Activer le retour à la ligne automatique"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:397
 msgid "Document Settings"
 msgstr "Paramétres des documents"
 
-#: src/gE_prefs_box.c:400
+#: src/gE_prefs_box.c:411
 msgid "New Document After Closing Last"
 msgstr "Ouvrir une fenêtre vierge après fermeture de la dernière fenêtre"
 
-#: src/gE_prefs_box.c:406
+#: src/gE_prefs_box.c:417
 msgid "Close Window After Closing Last"
 msgstr "Arrét de gEdit après fermeture de la dernière fenêtre"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:426
 msgid "Current Font"
 msgstr "Police courante"
 
-#: src/gE_prefs_box.c:432
+#: src/gE_prefs_box.c:443
 msgid "Select..."
 msgstr "Sélectionner..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:448
+#: src/gE_prefs_box.c:459
 msgid "Print Command"
 msgstr "Commande d'impression"
 
-#: src/gE_prefs_box.c:500
+#: src/gE_prefs_box.c:511
 msgid "Plugin Selector"
 msgstr "Sélecteur de Plugin"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Name"
 msgstr "Nom"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr "Emplacement"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
 msgid "Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:635
+#: src/gE_prefs_box.c:646
 msgid "Use Plugins"
 msgstr "Utiliser Plugins"
 
-#: src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:712
 msgid "Add"
 msgstr "Ajouter"
 
-#: src/gE_prefs_box.c:706
+#: src/gE_prefs_box.c:717
 msgid "Remove"
 msgstr "Enlever"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:749
+#: src/gE_prefs_box.c:760
 msgid "Window Size"
 msgstr "Taille Fenêtre"
 
-#: src/gE_prefs_box.c:762
+#: src/gE_prefs_box.c:773
 msgid "Current Width:"
 msgstr "Largeur actuelle :"
 
-#: src/gE_prefs_box.c:782
+#: src/gE_prefs_box.c:793
 msgid "Startup Width:"
 msgstr "Largeur au démarrage :"
 
-#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
+#: src/gE_prefs_box.c:801 src/gE_prefs_box.c:841
 msgid "Use Current"
 msgstr "Utiliser la valeur actuelle"
 
-#: src/gE_prefs_box.c:802
+#: src/gE_prefs_box.c:813
 msgid "Current Height:"
 msgstr "Hauteur actuelle :"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:833
 msgid "Startup Height:"
 msgstr "Hauteur de départ :"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:838
+#: src/gE_prefs_box.c:849
 msgid "MDI Mode"
 msgstr "Mode MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:917
 msgid "General"
 msgstr "Général"
 
 #. Window Settings
-#: src/gE_prefs_box.c:911
+#: src/gE_prefs_box.c:922
 msgid "Window"
 msgstr "Fenêtre"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:916
+#: src/gE_prefs_box.c:927
 msgid "Document"
 msgstr "Document"
 
@@ -496,7 +505,19 @@ msgstr "Enregis_trer la configuration"
 msgid "Save the current settings for future sessions"
 msgstr "Enregistre les paramétres actuels pour une utilisation ultérieure"
 
-#: src/search.c:326
+#: src/search.c:381
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:382 src/search.c:716
+msgid "Search"
+msgstr "Rechercher"
+
+#: src/search.c:386 src/search.c:721 src/search.c:749
+msgid "Search for:"
+msgstr "Rechercher:"
+
+#: src/search.c:622
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -505,59 +526,51 @@ msgstr ""
 "Nombre de lignes: %i\n"
 "Ligne courante: %i"
 
-#: src/search.c:348
+#: src/search.c:644
 msgid "Go to line"
 msgstr "Aller à la ligne"
 
-#: src/search.c:358
+#: src/search.c:654
 msgid "Line number"
 msgstr "Numéro de ligne"
 
-#: src/search.c:381
+#: src/search.c:677
 msgid "Search from cursor"
 msgstr "Rechercher à partir du curseur"
 
-#: src/search.c:388
+#: src/search.c:684
 msgid "Search from beginning of document"
 msgstr "Rechercher à partir du début du document"
 
-#: src/search.c:395
+#: src/search.c:691
 msgid "Search from end of document"
 msgstr "Rechercher à partir de la fin du document"
 
-#: src/search.c:402
+#: src/search.c:698
 msgid "Case sensitive"
 msgstr "Sensible à la case"
 
-#: src/search.c:408
+#: src/search.c:704
 msgid "Reverse search"
 msgstr "Recherche inverse"
 
-#: src/search.c:420
-msgid "Search"
-msgstr "Rechercher"
-
-#: src/search.c:425 src/search.c:453
-msgid "Search for:"
-msgstr "Rechercher:"
-
-#: src/search.c:447 src/search.c:448
+#: src/search.c:743 src/search.c:744
 msgid "Replace"
 msgstr "Remplacer"
 
-#: src/search.c:449
+#: src/search.c:745
 msgid "Replace all"
 msgstr "Tout Remplacer"
 
-#: src/search.c:463
+#: src/search.c:759
 msgid "Replace with:"
 msgstr "Remplacer par:"
 
-#: src/search.c:474
+#: src/search.c:770
 msgid "Ask before replacing"
 msgstr "Demander confirmation avant le remplacement"
 
-#: src/search.c:673
+#: src/search.c:969
 msgid "Replace?"
 msgstr "Remplacer?"
 

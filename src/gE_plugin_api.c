@@ -136,11 +136,13 @@ gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 
 	if (position >= gtk_text_get_length(GTK_TEXT(view->text)))
 	  position = gtk_text_get_length(GTK_TEXT(view->text));
+	
+	position = gE_view_get_position (view);
       
 	gtk_text_freeze(GTK_TEXT(view->text));
 	gtk_editable_insert_text (GTK_EDITABLE (view->text), buffer, length, &position);
 	gtk_text_thaw(GTK_TEXT(view->text));
-   
+	
 	view->changed = 1;
 	
 }

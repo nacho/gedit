@@ -1,3 +1,38 @@
+Sat Sep 11 14:12:16 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (auto_indent_cb) Use a gtk_editable_insert_text instead of
+	  using gtk_text_insert. Now the buffer is updated properly..
+	
+	* makeconfig.pl: Commented out all Gmodule, ORBit, Gnorba and Zvt stuff. Which
+	  was for the GModule plugins, which no longer work.. 
+	  Commented out all the gmodule-plugins Makefiles
+	
+	* Makefile.am: Removed gmodule-plugins subdir.
+	  Removed the xpm's from the dist-hook.
+	  
+Sat Sep 11 13:50:59 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_plugin_api.c: (gE_plugin_text_insert) For some reason the position
+	  arg isnt correct, so we have to change it to the correct one.
+
+Sat Sep 11 13:42:42 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (auto_indent_cb) insert the auto indent whitespace into the
+	  mini-buffer too.. 
+	 (gE_view_init) Send the gE_view struct to the auto_indent_cb signal connection.
+
+Sat Sep 11 13:23:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* MAINTAINERS: Removed Evan from the list, as he is no-longer with the
+	  project.
+	
+	* src/gE_view.c: (gE_event_key_press) Removed tjhe handlers for cut/copy/paste.
+	  They're built into the widget aren't they...
+	
+	* src/gE_prefs.c: (gE_save_settings) Save the value of mdi->tab_pos, not
+	  settings->tab_pos, as the settings one is no longer loaded on startup,
+	  so would reset the position back to 0 each time we quit.
+	
 Fri Sep  10 1999 	Kosta Arvanitis <kosta@uvic.ca>
 
 	* src/command.c:  (file_save_cb and file_save_all_cb) Re-added code to get
