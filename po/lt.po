@@ -1,139 +1,104 @@
-# Lithuanian translation for GNOME applets
+# Lithuanian translation of gEdit
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-applets 1.1.6\n"
-"POT-Creation-Date: 2000-04-07 11:51+0200\n"
-"PO-Revision-Date: 2000-03-28 03:44+0100\n"
+"Project-Id-Version: gedit 0.7.1\n"
+"POT-Creation-Date: 2000-04-11 01:26+0300\n"
+"PO-Revision-Date: 2000-04-06 18:27+0100\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/email/email.c:125 plugins/email/email.c:132 src/document.c:160
-#: src/print.c:237
-msgid "Untitled"
-msgstr ""
-
-#: plugins/email/email.c:161
-msgid "The gEdit Email Plugin"
-msgstr ""
-
-#: plugins/email/email.c:267
-#, fuzzy
-msgid "Email"
-msgstr "Paðtas"
-
-#: plugins/email/email.c:268
-#, fuzzy
-msgid "Email the current document"
-msgstr "Negaliu analizuoti dokumento\n"
-
 #: plugins/sample/sample.c:47
 msgid "Hello World"
-msgstr ""
+msgstr "Sveikas, Pasauli"
 
 #: plugins/sample/sample.c:48
 msgid "Sample 'hello world' plugin."
-msgstr ""
+msgstr "Pavyzdinis ¥sveikas, pasauli´ priedas."
 
 #: plugins/time/time.c:93
 msgid "Insert Time"
-msgstr ""
+msgstr "Áterpti laikà"
 
 #: plugins/time/time.c:94
 msgid "Inserts the current date and time"
-msgstr ""
+msgstr "Áterpia dabartinæ datà ir laikà"
 
-#: src/about.c:50
-msgid "With special thanks to:"
-msgstr ""
+#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:152
+#: src/print.c:274
+msgid "Untitled"
+msgstr "Bevardis"
 
-#: src/about.c:65
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr ""
+#: plugins/email/email.c:152
+msgid "Email"
+msgstr "El. paðtas"
 
-#: src/about.c:67
-msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr ""
+#: plugins/email/email.c:153
+msgid "Email the current document"
+msgstr "Iðsiøsti esamàjá dokumentà"
 
-#: src/commands.c:63
-#, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr ""
+#: src/window.c:63
+msgid "Filename"
+msgstr "Bylos vardas"
 
-#: src/commands.c:84
-msgid "Could not save file!"
-msgstr ""
+#: src/menus.c:374 src/window.c:64
+msgid "Line"
+msgstr "Eilutë"
 
-#: src/commands.c:224 src/commands.c:291 src/file.c:394
-msgid "Error saving file!"
-msgstr ""
+#: src/window.c:65
+msgid "Contents"
+msgstr "Turinys"
 
-#: src/commands.c:249
-#, c-format
-msgid "Save %s As..."
-msgstr ""
-
-#: src/commands.c:316
-#, c-format
-msgid "Save %s As ..."
-msgstr ""
-
-#: src/commands.c:392
-#, c-format
+#: src/file.c:92
 msgid ""
-"Are you sure you wish to revert all changes?\n"
-"(%s)"
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
 msgstr ""
+"Ávyko klaida, bandant atidaryti bylà.\n"
+"Praðau, ásitikink, ar tokia byla yra."
 
-#: src/commands.c:436
-#, fuzzy
-msgid "Document Unchanged..."
-msgstr "kryptis pakito"
+#: src/file.c:101
+msgid "Could not allocate the requrired memory."
+msgstr "Negalëjau paskirti reikalingo atminties kiekio."
 
-#: src/commands.c:440
-msgid "Document Unsaved..."
-msgstr ""
-
-#: src/commands.c:588
-msgid "_File/"
-msgstr ""
-
-#: src/commands.c:597 src/commands.c:598
-msgid "_File"
-msgstr ""
-
-#: src/document.c:339
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr ""
-
-#: src/file.c:125
+#: src/file.c:107
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have read access permissions for the file."
+"Make sure that you have permissions for opening the file."
 msgstr ""
+"gedit negalëjo atidaryti bylos: \n"
+"\n"
+"%s\n"
+"\n"
+"Ásitikink, kad turi skaitymo privilegijas tai bylai."
 
-#: src/file.c:173
+#: src/file.c:175
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
 "\n"
 " %s \n"
 "\n"
-"Make sure that the path you provided exits,and that you have the appropiate "
+"Make sure that the path you provided exists,and that you have the appropiate "
 "write permissions."
 msgstr ""
+"gedit negalëjo iðsaugoti bylos: \n"
+"\n"
+" %s \n"
+"\n"
+"Ásitikink, ar yra toks kelias, koká tu pateikei, ir ar turi reikalingas "
+"privilegijas ðiai bylai áraðyti."
 
-#: src/file.c:187 src/file.c:201
+#: src/file.c:189 src/file.c:203
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -143,461 +108,362 @@ msgid ""
 "Because of an unknown reason (1). Please report this Problem to "
 "submit@bugs.gnome.org"
 msgstr ""
+"gedit negalëjo iðsaugoti bylos:\n"
+"\n"
+" %s \n"
+"\n"
+"Dël neþinomos prieþasties (1). Praðau praneðti ðià problemà á "
+"submit@bugs.gnome.org"
 
-#: src/file.c:265
+#: src/file.c:267
 msgid "Open File ..."
-msgstr ""
+msgstr "Atidaryti bylà ..."
 
-#: src/file.c:302
+#: src/file.c:304
 msgid "Save As..."
-msgstr ""
+msgstr "Iðsaugoti kaip..."
 
-#: src/file.c:338
+#: src/file.c:337
 #, c-format
 msgid "Loaded file %s"
-msgstr ""
+msgstr "Ákelta byla %s"
 
-#: src/file.c:341
-#, fuzzy
-msgid "Can not open file!"
-msgstr "Negaliu sukurti priedo!\n"
+#: src/file.c:396
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr "¥%s´ bus uþraðyta ant virðaus. Ar nori tæsti?"
 
-#: src/menus.c:53
-msgid "Open (swap) .c/.h file"
-msgstr ""
+#: src/file.c:407
+msgid "Document has not been saved."
+msgstr "Dokumentas nebuvo iðsaugotas."
 
-#: src/menus.c:62
-msgid "_New"
-msgstr ""
+#: src/file.c:415
+msgid "Error saving file!"
+msgstr "Klaida iðsaugant bylà!"
 
-#: src/menus.c:63 src/menus.c:315
-#, fuzzy
-msgid "Create a new document"
-msgstr "Negaliu analizuoti dokumento\n"
+#: src/file.c:484
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr "Byla ¥%s´ neegzistuoja. Ar norëtum jà sukurti?"
 
-#: src/menus.c:68
-msgid "Save All"
-msgstr ""
-
-#: src/menus.c:69
-msgid "Save All Open Files"
-msgstr ""
-
-#: src/menus.c:86
-#, fuzzy
-msgid "Print preview..."
-msgstr "Savybës..."
-
-#: src/menus.c:87
-msgid "Preview data to be printed"
-msgstr ""
-
-#: src/menus.c:94
-msgid "Close All"
-msgstr ""
-
-#: src/menus.c:95
-msgid "Close All Open Files"
-msgstr ""
-
-#: src/menus.c:116
-msgid "Find _In Files..."
-msgstr ""
-
-#: src/menus.c:117
-msgid "Find text in all open files"
-msgstr ""
-
-#: src/menus.c:126
-msgid "Goto _Line..."
-msgstr ""
-
-#: src/menus.c:127
-msgid "Go to a specific line number"
-msgstr ""
-
-#: src/menus.c:136
-msgid "_Add View"
-msgstr ""
-
-#: src/menus.c:137
-msgid "Add a new view of the document"
-msgstr ""
-
-#: src/menus.c:139
-msgid "_Remove View"
-msgstr ""
-
-#: src/menus.c:140
-msgid "Remove view of the document"
-msgstr ""
-
-#: src/menus.c:157
-msgid "_Top"
-msgstr ""
-
-#: src/menus.c:158
-msgid "Put the document tabs at the top"
-msgstr ""
-
-#: src/menus.c:163
-msgid "_Bottom"
-msgstr ""
-
-#: src/menus.c:164
-msgid "Put the document tabs at the bottom"
-msgstr ""
-
-#: src/menus.c:169
-msgid "_Left"
-msgstr ""
-
-#: src/menus.c:170
-msgid "Put the document tabs on the left"
-msgstr ""
-
-#: src/menus.c:175
-msgid "_Right"
-msgstr ""
-
-#: src/menus.c:176
-msgid "Put the document tabs on the right"
-msgstr ""
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, (gpointer) GE_DATA,
-#. NULL),
-#.
-#: src/menus.c:203 src/prefs.c:290
-#, fuzzy
-msgid "Show Statusbar"
-msgstr "Rodyti datà"
-
-#: src/menus.c:204
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr ""
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
-#. N_("Toggle Wordwrap"),
-#. options_toggle_word_wrap_cb,
-#. NULL, NULL),
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_LINEWRAP,
-#. N_("Toggle Linewrap"),
-#. options_toggle_line_wrap_cb,
-#. NULL, NULL),
-#.
-#: src/menus.c:218
-#, fuzzy
-msgid "_Readonly"
-msgstr "Skaitymas"
-
-#: src/menus.c:219
-msgid "Toggle Readonly"
-msgstr ""
-
-#: src/menus.c:233
-msgid "_Document Tabs"
-msgstr ""
-
-#: src/menus.c:234
-msgid "Change the placement of the document tabs"
-msgstr ""
-
-#: src/menus.c:242
-#, fuzzy
-msgid "Sa_ve Settings"
-msgstr "gEyes nustatymai"
-
-#: src/menus.c:243
-msgid "Save the current settings for future sessions"
-msgstr ""
-
-#: src/menus.c:297 src/plugin.c:113 src/plugin.c:205
-msgid "_Plugins"
-msgstr ""
-
-#: src/menus.c:315
-#, fuzzy
-msgid "New"
-msgstr "Tinklas"
-
-#: src/menus.c:319
-msgid "Open"
-msgstr ""
-
-#: src/menus.c:319
-msgid "Open a file"
-msgstr ""
-
-#: src/menus.c:323
-#, fuzzy
-msgid "Save"
-msgstr "veiklus"
-
-#: src/menus.c:323
-msgid "Save the current file"
-msgstr ""
-
-#: src/menus.c:327
-#, fuzzy
-msgid "Close"
-msgstr "Spalvos"
-
-#: src/menus.c:327
-msgid "Close the current file"
-msgstr ""
-
-#: src/menus.c:331
-msgid "Print"
-msgstr ""
-
-#: src/menus.c:331
-msgid "Print the current file"
-msgstr ""
-
-#: src/menus.c:336
-msgid "Undo"
-msgstr ""
-
-#: src/menus.c:336
-msgid "Undo last operation"
-msgstr ""
-
-#: src/menus.c:340
-#, fuzzy
-msgid "Redo"
-msgstr "Skaitymas"
-
-#: src/menus.c:340
-msgid "Redo last operation"
-msgstr ""
-
-#: src/menus.c:344
-#, fuzzy
-msgid "Cut"
-msgstr "Kitokia"
-
-#: src/menus.c:344
-msgid "Cut the selection"
-msgstr ""
-
-#: src/menus.c:348
-#, fuzzy
-msgid "Copy"
-msgstr "Diskelis"
-
-#: src/menus.c:348
-msgid "Copy the selection"
-msgstr ""
-
-#: src/menus.c:352
-#, fuzzy
-msgid "Paste"
-msgstr "Rytø"
-
-#: src/menus.c:352
-msgid "Paste the clipboard"
-msgstr ""
-
-#: src/menus.c:356
-#, fuzzy
-msgid "Find"
-msgstr "Vëjas:"
-
-#: src/menus.c:356
-msgid "Search for a string"
-msgstr ""
-
-#: src/menus.c:360
-msgid "Get the current and total lines"
-msgstr ""
-
-#: src/menus.c:360 src/window.c:63
-msgid "Line"
-msgstr ""
-
-#: src/menus.c:365
-msgid "Exit"
-msgstr ""
-
-#: src/menus.c:365
-#, fuzzy
-msgid "Exit the program"
-msgstr "Paleisti programà"
+#: src/document.c:339
+#, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr "¥%s´ buvo pakeista. Ar nori jà iðsaugoti?"
 
 #: src/plugin.c:58
 #, c-format
 msgid "Error, unable to open module file, %s"
-msgstr ""
+msgstr "Klaida: negaliu atidaryti modulio bylos, %s"
 
 #: src/plugin.c:69
 msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
+msgstr "Klaida: priedas neturi init_plugin funkcijos savyje."
 
 #: src/plugin.c:77
 msgid "Error, init_plugin returned an error"
-msgstr ""
+msgstr "Klaida: init_plugin gràþino klaidà"
 
 #: src/plugin.c:103
 msgid "Error, plugin is still in use"
-msgstr ""
+msgstr "Klaida: priedas vis dar naudojamas"
 
-#: src/prefs.c:51
-#, fuzzy
-msgid "Default"
-msgstr "Simboliø sàraðas"
-
-#: src/prefs.c:52
-msgid "Notebook"
-msgstr ""
+#: src/menus.c:311 src/plugin.c:113 src/plugin.c:205
+msgid "_Plugins"
+msgstr "_Priedai"
 
 #: src/prefs.c:53
-msgid "Toplevel"
-msgstr ""
+msgid "Default"
+msgstr "Áprastas"
 
 #: src/prefs.c:54
-#, fuzzy
-msgid "Modal"
-msgstr "Paðtas"
+msgid "Notebook"
+msgstr "Uþraðø knygelë"
 
-#: src/prefs.c:277
+#: src/prefs.c:55
+msgid "Toplevel"
+msgstr "Vienas lange"
+
+#: src/prefs.c:56
+msgid "Modal"
+msgstr "Modalinis"
+
+#: src/prefs.c:289
 msgid "Appearance"
 msgstr "Iðvaizda"
 
-#: src/prefs.c:299
+#: src/prefs.c:302
+msgid "Show Statusbar"
+msgstr "Rodyti bûsenos juostà"
+
+#: src/prefs.c:311
 msgid "Show Splitscreen"
-msgstr ""
+msgstr "Rodyti vaizdo skyriklá"
 
-#: src/prefs.c:309
+#: src/prefs.c:321
 msgid "Editor Behavior"
-msgstr ""
+msgstr "Redaktoriaus elgesys"
 
-#: src/prefs.c:322
+#: src/prefs.c:334
 msgid "Enable Autoindent"
-msgstr ""
+msgstr "Leisti auto átraukà"
 
-#: src/prefs.c:326
-#, fuzzy
+#: src/prefs.c:338
 msgid "Enable Wordwrap"
-msgstr "Leisti radarinius þemëlapius"
+msgstr "Leisti þodþiø këlimà"
 
-#: src/prefs.c:348
-#, fuzzy
+#: src/prefs.c:360
 msgid "Text Background"
-msgstr "Fono spalva:"
+msgstr "Fono spalva"
 
-#: src/prefs.c:367
+#: src/prefs.c:379
 msgid "Text Foreground"
-msgstr ""
+msgstr "Raidþiø spalva"
 
 #. Document Closing stuffs
-#: src/prefs.c:432
-#, fuzzy
+#: src/prefs.c:444
 msgid "Document Settings"
-msgstr "Laikrodþio nustatymai"
+msgstr "Dokumento nustatymai"
 
-#: src/prefs.c:446
+#: src/prefs.c:458
 msgid "New Document After Closing Last"
-msgstr ""
+msgstr "Uþdarius visas bylas, sukurti naujà"
 
-#: src/prefs.c:452
+#: src/prefs.c:464
 msgid "Close Window After Closing Last"
-msgstr ""
+msgstr "Uþdarius visas bylas, uþdaryti langà"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/prefs.c:461
-#, fuzzy
+#: src/prefs.c:473
 msgid "Current Font"
-msgstr "Esamos sàlygos"
+msgstr "Naudojamas ðriftas"
 
-#: src/prefs.c:478
-#, fuzzy
+#: src/prefs.c:490
 msgid "Select..."
-msgstr "Pagalba..."
-
-#. End of Font Setttings
-#. Print Command
-#: src/prefs.c:494
-#, fuzzy
-msgid "Print Command"
-msgstr "Atsijungimo komanda:"
+msgstr "Pasirinkti..."
 
 #. Window Size Settings
-#: src/prefs.c:548
-#, fuzzy
+#: src/prefs.c:540
 msgid "Window Size"
-msgstr "Sumaiðyti"
+msgstr "Lango dydis"
 
-#: src/prefs.c:561
-#, fuzzy
+#: src/prefs.c:553
 msgid "Current Width:"
-msgstr "Priedo plotis:"
+msgstr "Esamas plotis:"
 
-#: src/prefs.c:581
+#: src/prefs.c:573
 msgid "Startup Width:"
-msgstr ""
+msgstr "Plotis pradþioje:"
 
-#: src/prefs.c:589 src/prefs.c:629
+#: src/prefs.c:581 src/prefs.c:621
 msgid "Use Current"
-msgstr ""
+msgstr "Naudoti esamà"
 
-#: src/prefs.c:601
-#, fuzzy
+#: src/prefs.c:593
 msgid "Current Height:"
-msgstr "Priedo aukðtis:"
+msgstr "Esamas aukðtis:"
 
-#: src/prefs.c:621
-#, fuzzy
+#: src/prefs.c:613
 msgid "Startup Height:"
-msgstr "Priedo aukðtis:"
+msgstr "Aukðtis pradþioje:"
 
 #. MDI Mode settnigs
-#: src/prefs.c:637
+#: src/prefs.c:629
 msgid "MDI Mode"
-msgstr ""
+msgstr "MDI bûdas"
 
-#: src/prefs.c:705
+#: src/prefs.c:694
 msgid "General"
-msgstr "Bendrai"
+msgstr "Pagrindai"
 
-#: src/prefs.c:710
-#, fuzzy
+#: src/prefs.c:699
 msgid "Window"
-msgstr "Vëjas:"
+msgstr "Langas"
 
-#: src/prefs.c:715
+#: src/prefs.c:704
 msgid "Document"
-msgstr ""
+msgstr "Dokumentas"
 
-#: src/print.c:179
+#: src/print.c:204
 #, c-format
 msgid "gedit (%s): Print Preview"
-msgstr ""
+msgstr "gEdit (%s): Spaudinio perþiûra"
 
-#: src/print.c:289
+#: src/print.c:355
 #, c-format
 msgid "Page: %i/%i"
-msgstr ""
+msgstr "Puslapis: %i/%i"
 
-#: src/search.c:308
+#: src/menus.c:52
+msgid "Open (swap) .c/.h file"
+msgstr "Atidaryti atitinkanèià .c/.h bylà"
+
+#: src/menus.c:61
+msgid "_New"
+msgstr "_Naujas"
+
+#: src/menus.c:62 src/menus.c:329
+msgid "Create a new document"
+msgstr "Sukurti naujà dokumentà"
+
+#: src/menus.c:67
+msgid "Save All"
+msgstr "Iðsaugoti visas"
+
+#: src/menus.c:68
+msgid "Save All Open Files"
+msgstr "Iðsaugoti visas atidarytas bylas"
+
+#: src/menus.c:83
+msgid "Print preview..."
+msgstr "Spaudinio perþiûra..."
+
+#: src/menus.c:84
+msgid "Preview data to be printed"
+msgstr "Perþiûrëti, kaip atrodys atspausdintas"
+
+#: src/menus.c:90
+msgid "Close All"
+msgstr "Uþdaryti visas"
+
+#: src/menus.c:91
+msgid "Close All Open Files"
+msgstr "Uþdaryti visas atidarytas bylas"
+
+#: src/menus.c:126
+msgid "Goto _Line..."
+msgstr "_Eiti á eilutæ..."
+
+#: src/menus.c:127
+msgid "Go to a specific line number"
+msgstr "Eiti á nurodytà eilutës numerá"
+
+#: src/menus.c:136
+msgid "_Add View"
+msgstr "_Pridëti vaizdà"
+
+#: src/menus.c:137
+msgid "Add a new view of the document"
+msgstr "Pridëti naujà dokumento vaizdà"
+
+#: src/menus.c:139
+msgid "_Remove View"
+msgstr "_Panaikinti vaizdà"
+
+#: src/menus.c:140
+msgid "Remove view of the document"
+msgstr "Panaikinti dokumento vaizdà"
+
+#: src/menus.c:329
+msgid "New"
+msgstr "Naujas"
+
+#: src/menus.c:333
+msgid "Open"
+msgstr "Atidaryti"
+
+#: src/menus.c:333
+msgid "Open a file"
+msgstr "Atidaryti bylà"
+
+#: src/menus.c:337
+msgid "Save"
+msgstr "Iðsaugoti"
+
+#: src/menus.c:337
+msgid "Save the current file"
+msgstr "Iðsaugoti esamàjà bylà"
+
+#: src/menus.c:341
+msgid "Close"
+msgstr "Uþdaryti"
+
+#: src/menus.c:341
+msgid "Close the current file"
+msgstr "Uþdaryti esamàjà bylà"
+
+#: src/menus.c:345
+msgid "Print"
+msgstr "Spausdinti"
+
+#: src/menus.c:345
+msgid "Print the current file"
+msgstr "Spausdinti esamàjà bylà"
+
+#: src/menus.c:350
+msgid "Undo"
+msgstr "Atðaukti"
+
+#: src/menus.c:350
+msgid "Undo last operation"
+msgstr "Atðaukti paskutiná veiksmà"
+
+#: src/menus.c:354
+msgid "Redo"
+msgstr "Pakartoti"
+
+#: src/menus.c:354
+msgid "Redo last operation"
+msgstr "Pakartoti atðauktà veiksmà"
+
+#: src/menus.c:358
+msgid "Cut"
+msgstr "Iðkirpti"
+
+#: src/menus.c:358
+msgid "Cut the selection"
+msgstr "Iðkirpti parinkimà"
+
+#: src/menus.c:362
+msgid "Copy"
+msgstr "Kopijuoti"
+
+#: src/menus.c:362
+msgid "Copy the selection"
+msgstr "Kopijuoti parinkimà"
+
+#: src/menus.c:366
+msgid "Paste"
+msgstr "Ádëti"
+
+#: src/menus.c:366
+msgid "Paste the clipboard"
+msgstr "Ádëti krepðio turiná"
+
+#: src/menus.c:370
+msgid "Find"
+msgstr "Rasti"
+
+#: src/menus.c:370
+msgid "Search for a string"
+msgstr "Ieðkoti eilutës"
+
+#: src/menus.c:374
+msgid "Get the current and total lines"
+msgstr "Gauti esamà eilutæ ir jø skaièiø"
+
+#: src/menus.c:379
+msgid "Exit"
+msgstr "Iðeiti"
+
+#: src/menus.c:379
+msgid "Exit the program"
+msgstr "Iðeiti ið programos"
+
+#: src/search.c:285
 msgid "Find In Files"
-msgstr ""
+msgstr "Rasti bylose"
 
-#: src/search.c:309 src/search.c:677 src/search.c:678
+#: src/search.c:286
 msgid "Search"
-msgstr ""
+msgstr "Paieðka"
 
-#: src/search.c:313 src/search.c:682
+#: src/search.c:290
 msgid "Search for:"
-msgstr ""
+msgstr "Ieðkoti ko:"
 
-#: src/search.c:619
+#: src/search.c:617
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -605,1400 +471,171 @@ msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
+"Bylos vardas: %s\n"
+"\n"
+"Ið viso eiluèiø: %i\n"
+"Esama eilutë: %i"
 
 #: src/search.c:637
 msgid "Search from cursor"
-msgstr ""
+msgstr "Ieðkoti nuo þymeklio"
 
 #: src/search.c:644
 msgid "Search from beginning of document"
-msgstr ""
+msgstr "Ieðkoti nuo dokumento pradþios"
 
-#: src/search.c:651
-msgid "Search from end of document"
-msgstr ""
-
-#: src/search.c:658
+#: src/dialogs/replace.glade.h:17 src/search.c:660
 msgid "Case sensitive"
-msgstr ""
+msgstr "Skirti raidþiø dydá"
 
-#: src/search.c:664
+#: src/dialogs/dialog-about.c:52
+msgid "With special thanks to:"
+msgstr "Su ypatinga padëka jiems:"
+
+#: src/dialogs/dialog-about.c:67
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+
+#: src/dialogs/dialog-about.c:69
+msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEdit yra maþas ir nesudëtingas tekstø redaktorius, skirtas GNOME/Gtk+"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/find-line.glade.h:7
+msgid "Goto Line"
+msgstr "Eiti á eilutæ"
+
+#: src/dialogs/find-line.glade.h:8
+msgid "Line number:"
+msgstr "Eilutës numeris:"
+
+#: src/dialogs/find-line.glade.h:9
+msgid "Enter the line number you wish to go to."
+msgstr "Ávesk eilutës numerá, á kurá nori nueiti."
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
+msgid "Replace"
+msgstr "Pakeisti"
+
+#: src/dialogs/replace.glade.h:9
+msgid "Replace All"
+msgstr "Pakeisti visus"
+
+#: src/dialogs/replace.glade.h:10
+msgid "Search for: "
+msgstr "Ieðkoti ko: "
+
+#: src/dialogs/replace.glade.h:11
+msgid "Replace with: "
+msgstr "Pakeisti kuo: "
+
+#: src/dialogs/replace.glade.h:12
+msgid "Search from: "
+msgstr "Ieðkoti ko: "
+
+#: src/dialogs/replace.glade.h:13
+msgid ""
+"Cursor\n"
+"Beginning of document\n"
+"End of document\n"
+msgstr ""
+"Þymeklio\n"
+"Dokumento pradþios\n"
+"Dokumento pabaigos\n"
+
+#: src/dialogs/replace.glade.h:18
 msgid "Reverse search"
-msgstr ""
+msgstr "Atvirkðèia paieðka"
 
-#: src/window.c:62
-msgid "Filename"
-msgstr ""
+#: src/dialogs/replace.glade.h:19
+msgid "Ask before replacing"
+msgstr "Paklausti prieð pakeièiant"
 
-#: src/window.c:64
-#, fuzzy
-msgid "Contents"
-msgstr "Þemynas/Miestas"
+#~ msgid "Find _In Files..."
+#~ msgstr "Rasti _bylose..."
 
-#~ msgid "Clock color"
-#~ msgstr "Laikrodþio spalva"
+#~ msgid "Find text in all open files"
+#~ msgstr "Rasti tekstà atidarytose bylose"
 
-#~ msgid "Hour needle color"
-#~ msgstr "Valandø rodyklës spalva"
+#~ msgid "_Top"
+#~ msgstr "_Virðuje"
 
-#~ msgid "Minute needle color"
-#~ msgstr "Minuèiø rodyklës spalva"
+#~ msgid "Put the document tabs at the top"
+#~ msgstr "Laikyti dokumentø skleistes virðuje"
 
-#~ msgid "Second needle color"
-#~ msgstr "Sekundþiø rodyklës spalva"
+#~ msgid "_Bottom"
+#~ msgstr "_Apaèioje"
 
-#~ msgid "Show seconds needle"
-#~ msgstr "Rodyti sekundþiø rodyklæ"
+#~ msgid "Put the document tabs at the bottom"
+#~ msgstr "Laikyti dokumentø skleistes apaèioje"
 
-#~ msgid "Iñigo Serna <inigo@gaztelan.bi.ehu.es>"
-#~ msgstr "Iñigo Serna <inigo@gaztelan.bi.ehu.es>"
+#~ msgid "_Left"
+#~ msgstr "_Kairëje"
 
-#~ msgid "Another Clock Applet"
-#~ msgstr "Kitoks Laikrodis"
+#~ msgid "Put the document tabs on the left"
+#~ msgstr "Laikyti dokumentø skleistes kairëje"
 
-#~ msgid "(C) 1999 the Free Software Foundation"
-#~ msgstr "(C) 1999 the Free Software Foundation"
+#~ msgid "_Right"
+#~ msgstr "_Deðinëje"
 
-#~ msgid "An analog clock similar to that in CDE panel."
-#~ msgstr "Rodyklinis laikrodis, panaðus á esantá CDE."
-
-#~ msgid "Help"
-#~ msgstr "Pagalba"
-
-#~ msgid "About..."
-#~ msgstr "Apie..."
-
-#~ msgid "ASClock"
-#~ msgstr "ASClock"
-
-#~ msgid "(C) 1998 the Free Software Foundation"
-#~ msgstr "(C) 1998 the Free Software Foundation"
-
-#~ msgid "Who said NeXT is dead?"
-#~ msgstr "Kas sakë kad NeXT miræs?"
+#~ msgid "Put the document tabs on the right"
+#~ msgstr "Laikyti dokumentø skleistes deðinëje"
 
 #~ msgid ""
-#~ "Since you are root, would you like to set the system's default timezone?"
-#~ msgstr ""
-#~ "Bûdamas root'as, ar norëtum nustatyti sistemos standartinæ laiko juostà?"
+#~ "Enable or disable the statusbar at the bottom of this application window."
+#~ msgstr "Perjungti bûsenos juostos lango apaèioje rodymà."
 
-#~ msgid "My Title"
-#~ msgstr "Mano pavadinimas"
+#~ msgid "_Readonly"
+#~ msgstr "_Nekeièiama"
 
-#~ msgid "Clock Theme"
-#~ msgstr "Laikrodþio tema"
+#~ msgid "Toggle Readonly"
+#~ msgstr "Perjungti nekeièiamumà"
 
-#~ msgid "ASClock Settings"
-#~ msgstr "ASClock nustatymai"
+#~ msgid "_Document Tabs"
+#~ msgstr "_Dokumentø skleistës"
 
-#~ msgid "Display time in 12 hour format (AM/PM)"
-#~ msgstr "Rodyti laikà 12 valandø formatu (AM/PM)"
+#~ msgid "Change the placement of the document tabs"
+#~ msgstr "Pakeisti dokumentø skleisèiø laikymo vietà"
 
-#~ msgid "Blinking elements in clock"
-#~ msgstr "Blyksintys elementai laikrodyje"
+#~ msgid "Sa_ve Settings"
+#~ msgstr "_Saugoti nustatymus"
 
-#~ msgid "Timezone"
-#~ msgstr "Laiko juosta"
+#~ msgid "Save the current settings for future sessions"
+#~ msgstr "Saugoti esamus nustatymus ateities sesijoms"
 
-#~ msgid "The battery is low."
-#~ msgstr "Baterijos nusilpusios."
+#~ msgid "Search from end of document"
+#~ msgstr "Ieðkoti nuo dokumento pabaigos"
 
-#~ msgid "The battery is fully charged."
-#~ msgstr "Baterijos yra pilnai pakrautos."
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "gEdit el. paðto priedas"
 
-#~ msgid "Internal error: invalid mode in battery_set_mode"
-#~ msgstr "Vidinë klaida: invalid mode in battery_set_mode"
-
-#~ msgid "Can't create applet!\n"
-#~ msgstr "Neina sukurti priedo!\n"
+#~ msgid "Could not save file!"
+#~ msgstr "Negaliu iðsaugoti bylos!"
 
 #~ msgid ""
-#~ "Error querying battery charge.\n"
-#~ "\n"
-#~ "Make sure that your kernel was built with APM support."
+#~ "Are you sure you wish to revert all changes?\n"
+#~ "(%s)"
 #~ msgstr ""
-#~ "Klaida bandant suþinoti baterijø krûvá.\n"
-#~ "\n"
-#~ "Ásitikink, ar á kernelá ákompiliuotas APM palaikymas."
+#~ "Ar esi tikras kad nori atstatyti visus pakeitimus?\n"
+#~ "(%s)"
 
-#~ msgid "The GNOME Battery Monitor Applet"
-#~ msgstr "GNOME Baterijas stebintis priedas"
+#~ msgid "Document Unchanged..."
+#~ msgstr "Dokumentas nepakeistas..."
 
-#~ msgid " (C) 1997-1998 The Free Software Foundation"
-#~ msgstr " (C) 1997-1998 The Free Software Foundation"
+#~ msgid "Can not open file!"
+#~ msgstr "Negaliu atidaryti bylos!"
 
-#~ msgid ""
-#~ "This applet monitors the charge of your laptop's battery.  Click on it to "
-#~ "change display modes."
-#~ msgstr ""
-#~ "Ðis priedas þiûri, kaip pakrautos neðiojamo kompiuterio baterijos. Spragtelk "
-#~ "ant jo, kad pakeistum vaizdavimo bûdà."
+#~ msgid "Replace?"
+#~ msgstr "Pakeisti?"
 
-#~ msgid "Could not allocate space for graph values"
-#~ msgstr "Nepavyko paskirti vietos grafiko reikðmëms"
-
-#~ msgid "Battery Monitor Settings"
-#~ msgstr "Baterijø Stebëtuvo nustatymai"
-
-#~ msgid "Follow panel size"
-#~ msgstr "Sekti skydelio dydþiu"
-
-#~ msgid "Update Interval (seconds):"
-#~ msgstr "Atnaujinimo intervalas (sekundëmis):"
-
-#~ msgid "Low Charge Threshold:"
-#~ msgstr "Þemo krûvio rëþis:"
-
-#~ msgid "Applet Mode:"
-#~ msgstr "Priedo bûdas:"
-
-#~ msgid "Graph"
-#~ msgstr "Grafikas"
-
-#~ msgid "AC-On Battery Color:"
-#~ msgstr "Ájungtø baterijø spalva:"
-
-#~ msgid "AC-Off Battery Color:"
-#~ msgstr "Iðjungtø baterijø spalva:"
-
-#~ msgid "Low Battery Color:"
-#~ msgstr "Silpnø baterijø spalva:"
-
-#~ msgid "Graph Battery Low Color:"
-#~ msgstr "Grafike - silpnø baterijø spalva:"
-
-#~ msgid "Graph Tick Color:"
-#~ msgstr "Grafiko þymø spalva:"
-
-#~ msgid "Graph Direction:"
-#~ msgstr "Grafiko kryptis:"
-
-#~ msgid "Left to Right"
-#~ msgstr "Ið kairës á deðinæ"
-
-#~ msgid "Right to Left"
-#~ msgstr "Ið deðinës á kairæ"
-
-#~ msgid "Battery Charge Messages"
-#~ msgstr "Baterijø krûvio þinutës"
-
-#~ msgid "Enable Low Battery Warning"
-#~ msgstr "Leisti praneðti apie nusilpusias baterijas"
-
-#~ msgid "Warn if the battery charge dips below:"
-#~ msgstr "Atkreipti dëmesá, jei baterijø krûvis krenta þemiau:"
-
-#~ msgid "Enable Full-Charge Notification"
-#~ msgstr "Praneðti, kai baterijos pilnai pasikrauna"
-
-#~ msgid ""
-#~ "Cannot open /proc/apm!  Make sure that you built APM support into your "
-#~ "kernel.\n"
-#~ msgstr ""
-#~ "Negaliu atidaryti /proc/apm! Ásitikink, ar á kernelá ákompiliuotas APM "
-#~ "palaikymas.\n"
-
-#~ msgid "Could not dup() APM file descriptor: %s\n"
-#~ msgstr "Negaliu dup() APM bylos apraðo: %s\n"
-
-#~ msgid "Cannot open /dev/apm; can't get data."
-#~ msgstr "Negaliu atidaryti /dev/apm; negaliu gauti duomenø."
-
-#~ msgid "ioctl failed on /dev/apm."
-#~ msgstr "ioctl nepavyko ant /dev/apm. "
-
-#~ msgid "APM is disabled!  Cannot read battery charge information."
-#~ msgstr "APM yra iðjungtas! Negaliu perskaityti baterijø krûvio."
-
-#~ msgid "CD Player Applet"
-#~ msgstr "CD Grotuvo priedas"
-
-#~ msgid "(c) 1997 The Free Software Foundation"
-#~ msgstr "(c) 1997 The Free Software Foundation"
-
-#~ msgid "The CD Player applet is a simple audio CD player for your panel"
-#~ msgstr "CD Grotuvo priedas yra paprastas CD grotuvas tavo skydeliui"
-
-#~ msgid "Run CD Player..."
-#~ msgstr "Paleisti CD Grotuvà..."
-
-#~ msgid "Character Picker"
-#~ msgstr "Simboliø rinkiklis"
-
-#~ msgid "Copyright (C) 1998"
-#~ msgstr "Copyright (C) 1998"
-
-#~ msgid ""
-#~ "Gnome Panel applet for selecting strange characters that are not on my "
-#~ "keyboard. Released under GNU General Public Licence."
-#~ msgstr ""
-#~ "GNOME skydelio priedas, padedantis áterpti keistus simbolius, kuriø nëra "
-#~ "klaviatûroje. Iðleistas GPL sàlygomis"
-
-#~ msgid "Character Picker Settings"
-#~ msgstr "Simboliø rinkiklio nustatymai"
-
-#~ msgid "Minimum number of cells: (for autosize)"
-#~ msgstr "Maþiausias làsteliø skaièius: "
-
-#~ msgid "Size of button: (pixels)"
-#~ msgstr "Làstelës dydis: (taðkais)"
-
-#~ msgid "Number of rows of buttons:"
-#~ msgstr "Làsteliø eiluèiø skaièius:"
-
-#~ msgid "Number of columns of buttons:"
-#~ msgstr "Làsteliø stulpeliø skaièius:"
-
-#~ msgid "Size"
-#~ msgstr "Dydþiai"
-
-#~ msgid "Default character list:"
-#~ msgstr "Rodomø simboliø sàraðas:"
-
-#~ msgid "Clipboard Applet"
-#~ msgstr "Krepðio priedas"
-
-#~ msgid "Copyright (C) 1999"
-#~ msgstr "Copyright (C) 1999"
-
-#~ msgid ""
-#~ "Gnome panel applet for copying and retrieving selections with a history "
-#~ "list. Released under GNU General Public Licence."
-#~ msgstr ""
-#~ "GNOME skydelio priedas, skirtas kopijuoti ir atgauti pasirinkimus, ádëtus á "
-#~ "krepðá, su þurnalu. Iðleistas GNU General Public Licence sàlygomis."
-
-#~ msgid "John Ellis <johne@bellatlantic.net>"
-#~ msgstr "John Ellis <johne@bellatlantic.net>"
-
-#~ msgid "Clock and Mail Notify Applet"
-#~ msgstr "Laikrodis ir Paðto tikrintuvas"
-
-#~ msgid "(C) 1999"
-#~ msgstr "© 1999"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Basic digital clock with date in a tooltip. Optional 12/24 time display. "
-#~ "Mail blinking can be for any unread mail, or only briefly when new mail "
-#~ "arrives."
-#~ msgstr ""
-#~ "Priedas, rodantis laikà, datà, taip pat stebintis paðto dëþutæ ir "
-#~ "praneðantis, kai yra laiðkø ar ateina naujø.\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "%a, %b %d"
-#~ msgstr "%a, %b %d"
-
-#~ msgid " (GMT)"
-#~ msgstr " (GMT)"
-
-#~ msgid " (GMT %+d)"
-#~ msgstr " (GMT %+d)"
-
-#~ msgid "None (default)"
-#~ msgstr "Jokios (áprasta)"
-
-#~ msgid "Themes:"
-#~ msgstr "Temos:"
-
-#~ msgid "ClockMail Settings"
-#~ msgstr "Laikrodþio/Laiðkininko Nustatymai"
-
-#~ msgid "Clock"
-#~ msgstr "Laikrodis"
-
-#~ msgid "Display time relative to GMT (Greenwich Mean Time):"
-#~ msgstr "Rodyti laikà santykinai GMT (Pasauliniam laikui):"
-
-#~ msgid "Mail file:"
-#~ msgstr "Paðto byla:"
-
-#~ msgid "When new mail is received run:"
-#~ msgstr "Kai ateina nauji laiðkai, paleisti:"
-
-#~ msgid "Always blink when any mail is waiting."
-#~ msgstr "Visada mirksëti, jei tik yra laiðkø."
-
-#~ msgid "Number of messages to consider mailbox full:"
-#~ msgstr "Laiðkø skaièius, reiðkiantis, kad paðto dëþë pilna:"
-
-#~ msgid "When clicked, run:"
-#~ msgstr "Kai spragteltas, paleisti:"
-
-#~ msgid "Theme file (directory):"
-#~ msgstr "Temø byla (katalogas):"
-
-#~ msgid "Theme"
-#~ msgstr "Tema"
-
-#~ msgid "File Systems"
-#~ msgstr "Bylø sistemos"
-
-#~ msgid "File System Changed!\n"
-#~ msgstr "Bylø sistema pakeista!\n"
-
-#~ msgid "Disk Usage Applet"
-#~ msgstr "Diskø uþimtumo priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Monitors the amount of space in use and available on your disk drives."
-#~ msgstr ""
-#~ "Rodo laisvos ir uþimtos vietos diskuose kieká.\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "Browse..."
-#~ msgstr "Narðyti..."
-
-#~ msgid "Update..."
-#~ msgstr "Atnaujinti..."
-
-#~ msgid "Used Diskspace:"
-#~ msgstr "Uþimta disko vieta:"
-
-#~ msgid "Text:"
-#~ msgstr "Tekstas:"
-
-#~ msgid "Free Diskspace:"
-#~ msgstr "Laisva disko vieta:"
-
-#~ msgid "Automatically pick best applet size"
-#~ msgstr "Automatiðkai parinkti geriausià priedo dydá"
-
-#~ msgid "Update Frequency (seconds):"
-#~ msgstr "Atnaujinti daþnis (sekundëmis):"
-
-#~ msgid "Fonts"
-#~ msgstr "Ðriftai"
-
-#~ msgid "Font:"
-#~ msgstr "Ðriftas:"
-
-#~ msgid "Diskusage Settings"
-#~ msgstr "Diskø uþimtumo nustatymai"
-
-#~ msgid "Drive Mount Applet"
-#~ msgstr "Diskø montavimo priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Mounts and Unmounts drives."
-#~ msgstr ""
-#~ "Iðleistas GNU General Public License sàlygomis.\n"
-#~ "Uþmontuoja ir numontuoja kaupiklius."
-
-#~ msgid " mounted"
-#~ msgstr " uþmontuotas"
-
-#~ msgid " not mounted"
-#~ msgstr " numontuotas"
-
-#~ msgid "\" reported:\n"
-#~ msgstr "´ praneðë:\n"
-
-#~ msgid ""
-#~ "Drivemount command failed.\n"
-#~ "\""
-#~ msgstr ""
-#~ "Disko montavimo komanda nepavyko.\n"
-#~ "¥"
-
-#~ msgid "Eject"
-#~ msgstr "Iðmesti"
-
-#~ msgid "Drive Mount Applet Properties"
-#~ msgstr "Diskø montavimo priedo savybës"
-
-#~ msgid "Mount point:"
-#~ msgstr "Montavimo taðkas:"
-
-#~ msgid "Update in seconds:"
-#~ msgstr "Atnaujinti kas [sek]:"
-
-#~ msgid "Icon:"
-#~ msgstr "Ikona:"
-
-#~ msgid "Cdrom"
-#~ msgstr "Kompaktas"
-
-#~ msgid "Zip Drive"
-#~ msgstr "Zip kaupiklis"
-
-#~ msgid "Hard Disk"
-#~ msgstr "Kietas diskas"
-
-#~ msgid "Jaz Drive"
-#~ msgstr "Jaz kaupiklis"
-
-#~ msgid "Select icon for mounted"
-#~ msgstr "Pasirink ikonà primontuotiems"
-
-#~ msgid "Custom icon for mounted:"
-#~ msgstr "Ikona, kai primontuotas:"
-
-#~ msgid "Select icon for unmounted"
-#~ msgstr "Pasirink ikonà primontuotiems"
-
-#~ msgid "Custom icon for not mounted:"
-#~ msgstr "Ikona, kai numontuotas:"
-
-#~ msgid "Scale size to panel"
-#~ msgstr "Pritaikyti dydá prie skydelio"
-
-#~ msgid "Use automount friendly status test"
-#~ msgstr "Naudoti automount'ui draugiðkà bûsenos patikrinimà"
-
-#~ msgid "You win!"
-#~ msgstr "Tu laimëjai!"
-
-#~ msgid "Fifteen sliding pieces"
-#~ msgstr "Penkiolika slankiojanèiø daleliø"
-
-#~ msgid "Copyright (C) The Free Software Foundation"
-#~ msgstr "Copyright (C) The Free Software Foundation"
-
-#~ msgid ""
-#~ "Sam Lloyd's all-time favorite game, now for your delight in the Gnome Panel. "
-#~ "Guaranteed to be a productivity buster."
-#~ msgstr ""
-#~ "Sam'o Lloyd'o visø laikø mëgstamiausias þaidimas, dabar tavo malonumui GNOME "
-#~ "skydelyje. Uþtikrintai sumaþina naðumà."
-
-#~ msgid "Can't create fifteen applet!"
-#~ msgstr "Negaliu sukurti penkiolikos priedo!"
-
-#~ msgid "Scramble pieces"
-#~ msgstr "Sumaiðyti daleles"
-
-#~ msgid "Dave Camp <campd@oit.edu>"
-#~ msgstr "Dave Camp <campd@oit.edu>"
-
-#~ msgid "gEyes"
-#~ msgstr "gEyes"
-
-#~ msgid "Copyright (C) 1999 Dave Camp"
-#~ msgstr "Copyright (C) 1999 Dave Camp"
-
-#~ msgid "A goofy little xeyes clone for the GNOME panel."
-#~ msgstr "Persekiojanèios akys GNOME skydelyje. xeyes klonas."
-
-#~ msgid "Theme Name"
-#~ msgstr "Temos vardas"
-
-#~ msgid "Themes"
-#~ msgstr "Temos"
-
-#~ msgid "Browse"
-#~ msgstr "Narðyti"
-
-#~ msgid "GKB Properties"
-#~ msgstr "GKB Savybës"
-
-#~ msgid "Flag One"
-#~ msgstr "Pirma vëliava"
-
-#~ msgid "Flag Two"
-#~ msgstr "Antra vëliava"
-
-#~ msgid "Program"
-#~ msgstr "Programa"
-
-#~ msgid "Xkb"
-#~ msgstr "Xkb"
-
-#~ msgid "Xmodmap"
-#~ msgstr "Xmodmap"
-
-#~ msgid "Menu"
-#~ msgstr "Meniu"
-
-#~ msgid "The GNOME KeyBoard Applet"
-#~ msgstr "GNOME klaviatûros priedas"
-
-#~ msgid "(C) 1998-99 LSC - Linux Supporting Center"
-#~ msgstr "(C) 1998-99 LSC - Linux Supporting Center"
-
-#~ msgid ""
-#~ "This applet switches between keyboard maps. Not more. It uses setxkbmap, or "
-#~ "xmodmap. The main site of this app moved temporarily to URL "
-#~ "http://lsc.kva.hu/gkb.Mail me your flag, please (60x40 size),I will put it "
-#~ "to CVS.So long, and thanks for all the fish.\n"
-#~ "Thanks for Balazs Nagy (Kevin)<julian7@kva.hu> for minor help."
-#~ msgstr ""
-#~ "Ðis priedas perjungia klaviatûros iðdëstymus. Nieko daugiau. Jis Naudoja "
-#~ "setxkbmap arba xmodmap. Pagrindinë ðio priedo svetainë yra "
-#~ "http://lsc.kva.hu/gkb. Atsiøskite man trûkstamas vëliavas (60x40 dydþio), ir "
-#~ "að jas ádësiu á CVS. Iki pasimatymo, ir aèiû uþ visà reikalà.\n"
-#~ "Dëkoju Balazs Nagy (Kevin)<julian7@kva.hu> uþ smulkià pagalbà."
-
-#~ msgid "Raise Note"
-#~ msgstr "Nuleisti lapelá"
-
-#~ msgid "Lower Note"
-#~ msgstr "Pakelti lapelá"
-
-#~ msgid "Hide Note"
-#~ msgstr "Paslëpti lapelá"
-
-#~ msgid "Delete Note"
-#~ msgstr "Panaikinti lapelá"
-
-#~ msgid "GNotes!"
-#~ msgstr "GNotes!"
-
-#~ msgid ""
-#~ "Copyright (C) 1998-1999 spoon <spoon@ix.netcom.com> \n"
-#~ "Copyright (C) 1999 dres <dres@debian.org>"
-#~ msgstr ""
-#~ "Copyright (C) 1998-1999 spoon <spoon@ix.netcom.com> \n"
-#~ "Copyright (C) 1999 dres <dres@debian.org>"
-
-#~ msgid "Create sticky notes on your screen."
-#~ msgstr "Sukurti limpanèius lapelius."
-
-#~ msgid "Can't create GNotes applet!"
-#~ msgstr "Negaliu sukurti GNotes priedo!"
-
-#~ msgid "Raise Notes"
-#~ msgstr "Pakelti lapelius"
-
-#~ msgid "Lower Notes"
-#~ msgstr "Nuleisti lapelius"
-
-#~ msgid "Hide Notes"
-#~ msgstr "Paslëpti lapelius"
-
-#~ msgid "Show Notes"
-#~ msgstr "Parodyti lapelius"
-
-#~ msgid "Copyright (c)1999 by S. Papadimitriou"
-#~ msgstr "Copyright © S. Papadimitriou, 1999"
-
-#~ msgid ""
-#~ "GNOME weather monitor applet.\n"
-#~ "Web: http://gweather.dhs.org/"
-#~ msgstr ""
-#~ "GNOME oro stebëjimo priedas.\n"
-#~ "http://gweather.dhs.org/"
-
-#~ msgid "Update"
-#~ msgstr "Atnaujinti"
-
-#~ msgid "GNOME Weather"
-#~ msgstr "GNOME Oras"
-
-#~ msgid "Location:"
-#~ msgstr "Vietovë:"
-
-#~ msgid "Update:"
-#~ msgstr "Atnaujinti:"
-
-#~ msgid "Conditions:"
-#~ msgstr "Sàlygos:"
-
-#~ msgid "Sky:"
-#~ msgstr "Dangus:"
-
-#~ msgid "Temperature:"
-#~ msgstr "Temperatûra:"
-
-#~ msgid "Dew point:"
-#~ msgstr "Rasos taðkas:"
-
-#~ msgid "Humidity:"
-#~ msgstr "Drëgnumas:"
-
-#~ msgid "Pressure:"
-#~ msgstr "Slëgis:"
-
-#~ msgid "Visibility:"
-#~ msgstr "Matomumas:"
-
-#~ msgid "Forecast"
-#~ msgstr "Prognozë"
-
-#~ msgid "Visit Weather.com"
-#~ msgstr "Aplankyk Weather.com"
-
-#~ msgid "Radar map"
-#~ msgstr "Radarinis þemëlapis"
-
-#~ msgid ""
-#~ "Detailed forecast not available for this location.\n"
-#~ "Please try the state forecast; note that IWIN forecasts are available only "
-#~ "for US cities."
-#~ msgstr ""
-#~ "Detali prognozë ðiai vietovei neprieinama.\n"
-#~ "Bandyk valstijos prognozæ; prisimink, kad IWIN prognozë prieinama tik JAV "
-#~ "miestams."
-
-#~ msgid ""
-#~ "State forecast not available for this location.\n"
-#~ "Please try the detailed forecast; note that IWIN forecasts are available "
-#~ "only for US cities."
-#~ msgstr ""
-#~ "Valstijos prognozë ðiai vietovei neprieinama.\n"
-#~ "Bandyk detalià prognozæ; prisimink, kad IWIN prognozë prieinama tik JAV "
-#~ "miestams."
-
-#~ msgid ""
-#~ "Invalid location chosen!\n"
-#~ "Properties remain unchanged."
-#~ msgstr ""
-#~ "Pasirinkta netinkama vietovë!\n"
-#~ "Savybës paliktos nepakeistos."
-
-#~ msgid ""
-#~ "Proxy URL is not of the form http://host:port/\n"
-#~ "Properties remain unchanged."
-#~ msgstr ""
-#~ "Proxy URL nëra pavidalo http://host:port/\n"
-#~ "Savybës paliktos nepakeistos."
-
-#~ msgid "Regions"
-#~ msgstr "Regionai"
-
-#~ msgid "Gweather Properties"
-#~ msgstr "Gweather savybës"
-
-#~ msgid "Update enabled"
-#~ msgstr "Leisti atsinaujinti"
-
-#~ msgid "Use metric"
-#~ msgstr "Naudoti metrinæ"
-
-#~ msgid "Detailed forecast"
-#~ msgstr "Detali prognozë"
-
-#~ msgid "(sec)"
-#~ msgstr "(sek)"
-
-#~ msgid "Basic"
-#~ msgstr "Pagrindai"
-
-#~ msgid "Use proxy"
-#~ msgstr "Naudoti proxy"
-
-#~ msgid "Proxy host:"
-#~ msgstr "Proxy host:"
-
-#~ msgid "Username:"
-#~ msgstr "Prisijungimo vardas:"
-
-#~ msgid "Password:"
-#~ msgstr "Slaptaþodis:"
-
-#~ msgid ""
-#~ "Caveat warning: Even though your password will\n"
-#~ "be saved in the private configuration file, it will\n"
-#~ "be unencrypted!"
-#~ msgstr ""
-#~ "Pavojus: Nors ðis slaptaþodis bus iðsaugotas\n"
-#~ "Privaèioje nustatymø byloje, jis bus\n"
-#~ "Neuþðifruotas!"
-
-#~ msgid "Location"
-#~ msgstr "Vietovë"
-
-#~ msgid "Variable"
-#~ msgstr "Nepastovus"
-
-#~ msgid "East - NorthEast"
-#~ msgstr "Rytø - Ðiaurës Rytø"
-
-#~ msgid "North"
-#~ msgstr "Ðiaurës"
-
-#~ msgid "North - NorthEast"
-#~ msgstr "Ðiaurës - Ðiaurës Rytø"
-
-#~ msgid "Northeast"
-#~ msgstr "Ðiaurës Rytø"
-
-#~ msgid "East - Southeast"
-#~ msgstr "Rytø - Pietryèiø"
-
-#~ msgid "South - Southeast"
-#~ msgstr "Pietø - Pietryèiø"
-
-#~ msgid "Southeast"
-#~ msgstr "Pietryèiø"
-
-#~ msgid "South"
-#~ msgstr "Pietø"
-
-#~ msgid "South - Southwest"
-#~ msgstr "Pietø - Pietvakariø"
-
-#~ msgid "Southwest"
-#~ msgstr "Pietvakariø"
-
-#~ msgid "West - Southwest"
-#~ msgstr "Vakarø - Pietvakariø"
-
-#~ msgid "North - Northwest"
-#~ msgstr "Ðiaurës - Ðiaurës Vakarø"
-
-#~ msgid "Northwest"
-#~ msgstr "Ðiaurës Vakarø"
-
-#~ msgid "West"
-#~ msgstr "Vakarø"
-
-#~ msgid "West - Northwest"
-#~ msgstr "Vakarø - Ðiaurës Vakarø"
-
-#~ msgid "Clear Sky"
-#~ msgstr "Giedras dangus"
-
-#~ msgid "Broken clouds"
-#~ msgstr "Su pragiedruliais"
-
-#~ msgid "Scattered clouds"
-#~ msgstr "Iðsisklaidæ debesys"
-
-#~ msgid "Few clouds"
-#~ msgstr "Maþai debesuotas"
-
-#~ msgid "Overcast"
-#~ msgstr "Debesuotas"
-
-#~ msgid "Jon's Binary Clock"
-#~ msgstr "Jono skaitmeninis laikrodis"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "Displays time in Binary Coded Decimal\n"
-#~ "http://snoopy.net/~jon/jbc/."
-#~ msgstr ""
-#~ "Rodo laikà BCD formatu: deðimtainiai skaièiai uþkoduoti dvejetainiais "
-#~ "skaitmenimis\n"
-#~ "http://snoopy.net/~jon/jbc/.Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "The Game of Life"
-#~ msgstr "Gyvenimo þaidimas"
-
-#~ msgid "A complete waste of perfectly good CPU cycles."
-#~ msgstr "Visiðkas nuostabiai gerø CPU ciklø ðvaistymas."
-
-#~ msgid "Can't create life applet!"
-#~ msgstr "Negaliu sukurti Gyvenimo priedo!"
-
-#~ msgid "Mini-Commander Applet"
-#~ msgstr "Komandinës eilutës priedas"
-
-#~ msgid ""
-#~ "This GNOME applet adds a command line to the panel. It features command "
-#~ "completion, command history, changeable macros and an optional built-in "
-#~ "clock.\n"
-#~ "\n"
-#~ "This program is free software; you can redistribute it and/or modify it "
-#~ "under the terms of the GNU General Public License as published by the Free "
-#~ "Software Foundation; either version 2 of the License, or (at your option) "
-#~ "any later version."
-#~ msgstr ""
-#~ "Ðis priedas prideda komandinæ eilutæ á skydelá. Jo privalumai: komandø "
-#~ "papildymas, komandø þurnalas, keièiami macro'sai ir nebûtinas ástatytas "
-#~ "laikrodis.\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "not unique"
-#~ msgstr "nevienareikðmiðka"
-
-#~ msgid "completing..."
-#~ msgstr "papildoma..."
-
-#~ msgid "completed"
-#~ msgstr "papildyta"
-
-#~ msgid "not found"
-#~ msgstr "nerasta"
-
-#~ msgid "no /bin/sh"
-#~ msgstr "nëra /bin/sh"
-
-#~ msgid "end of history list"
-#~ msgstr "þurnalo sàraðo pabaiga"
-
-#~ msgid "starting..."
-#~ msgstr "paleidþiama..."
-
-#~ msgid "autocompleted"
-#~ msgstr "auto-papildyta"
-
-#~ msgid "history list empty"
-#~ msgstr "þurnalo sàraðas tuðèias"
-
-#~ msgid "Command history"
-#~ msgstr "Komandø þurnalas"
-
-#~ msgid "child exited"
-#~ msgstr "baigë darbà"
-
-#~ msgid "%H:%M - %d. %b"
-#~ msgstr "%H:%M - %d. %b"
-
-#~ msgid "%H:%M"
-#~ msgstr "%H:%M"
-
-#~ msgid "%d. %b"
-#~ msgstr "%d. %b"
-
-#~ msgid "size changed"
-#~ msgstr "dydis pakito"
-
-#~ msgid "Browser"
-#~ msgstr "Narðyklë"
-
-#~ msgid "History"
-#~ msgstr "Þurnalas"
-
-#~ msgid "ready..."
-#~ msgstr "pasiruoðæs..."
-
-#~ msgid "time & date on"
-#~ msgstr "laikas ir data ájungti"
-
-#~ msgid "time on"
-#~ msgstr "laikas ájungtas"
-
-#~ msgid "date on"
-#~ msgstr "data ájungta"
-
-#~ msgid "clock off"
-#~ msgstr "laikrodis ájungtas"
-
-#~ msgid "saving prefs..."
-#~ msgstr "saugau nustatymus..."
-
-#~ msgid "Mini-Commander Properties"
-#~ msgstr "Mini-Commander savybës"
-
-#~ msgid "Show time"
-#~ msgstr "Rodyti laikà"
-
-#~ msgid "Show handle"
-#~ msgstr "Rodyti rodyklæ"
-
-#~ msgid "Show frame"
-#~ msgstr "Rodyti rëmelá"
-
-#~ msgid "Auto Completion"
-#~ msgstr "Auto-papildymas"
-
-#~ msgid "Enable history based auto completion"
-#~ msgstr "Leisti þurnalu paremtà auto-papildymà"
-
-#~ msgid "Applet width:"
-#~ msgstr "Priedo plotis:"
-
-#~ msgid "Applet height:"
-#~ msgstr "Priedo aukðtis:"
-
-#~ msgid "Command line height:"
-#~ msgstr "Komandinës eilutës aukðtis:"
-
-#~ msgid "Command line foreground:"
-#~ msgstr "Komandinës eilutës tekstas:"
-
-#~ msgid "Command line background:"
-#~ msgstr "Komandinës eilutës fonas:"
-
-#~ msgid "Regex %.2d:"
-#~ msgstr "Regex %.2d:"
-
-#~ msgid "   Macro %.2d:"
-#~ msgstr "   Macro %.2d:"
-
-#~ msgid "Macros"
-#~ msgstr "Macrosai"
-
-#~ msgid "Couldn't open mixer device %s\n"
-#~ msgstr "Negaliu atidaryti mikserio árenginio %s\n"
-
-#~ msgid ""
-#~ "warning: this version of gmix was compiled with a different version of\n"
-#~ "soundcard.h.\n"
-#~ msgstr ""
-#~ "pavojus: ði gmix versija buvo sukompiliuota su kita bylos soundcard.h "
-#~ "versija.\n"
-
-#~ msgid "Main Volume and Mute"
-#~ msgstr "Pagrindinis garsumas ir uþtildymas"
-
-#~ msgid "Mixer Applet"
-#~ msgstr "Mikðerio priedas"
-
-#~ msgid "(c) 1998 The Free Software Foundation"
-#~ msgstr "(c) 1998 The Free Software Foundation"
-
-#~ msgid ""
-#~ "The mixer applet gives you instant access to setting the master volume level "
-#~ "on your soundcard device"
-#~ msgstr ""
-#~ "Mikðerio priedas leidþia tau tiesiogiai keisti pagrindiná garsumo lygá tavo "
-#~ "garso árenginyje"
-
-#~ msgid "Run Audio Mixer..."
-#~ msgstr "Paleisti Garso mikðerá..."
-
-#~ msgid "Modem Lights Applet"
-#~ msgstr "Modemo lempuèiø priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "A modem status indicator and dialer.\n"
-#~ "Lights in order from the top or left are Send data and Receive data."
-#~ msgstr ""
-#~ "Modemo bûsenos indikatorius ir skambintuvas.\n"
-#~ "Lemputës ið virðaus arba kairës yra Siunèiami bei gaunami duomenys.\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid ""
-#~ "You are currently connected.\n"
-#~ "Do you want to disconnect?"
-#~ msgstr ""
-#~ "Tu dabar esi prisijungæs.\n"
-#~ "Ar nori atsijungti?"
-
-#~ msgid "Do you want to connect?"
-#~ msgstr "Ar nori prisijungti?"
-
-#~ msgid "not connected"
-#~ msgstr "nesujungta"
-
-#~ msgid "Modem Lights Settings"
-#~ msgstr "Modemo lempuèiø savybës"
-
-#~ msgid "Connecting"
-#~ msgstr "Jungimasis"
-
-#~ msgid "Connect command:"
-#~ msgstr "Prisijungimo komanda:"
-
-#~ msgid "Confirm connection"
-#~ msgstr "Patvirtinti jungimàsi"
-
-#~ msgid "Display"
-#~ msgstr "Rodymas"
-
-#~ msgid "Updates per second"
-#~ msgstr "Atnaujinimai per sekundæ"
-
-#~ msgid "Show connect time and throughput"
-#~ msgstr "Rodyti prisijungimo laikà ir pralaidumà"
-
-#~ msgid "Modem options"
-#~ msgstr "Modemo pasirinktys"
-
-#~ msgid "Modem lock file:"
-#~ msgstr "Modemo lock byla:"
-
-#~ msgid "Verify owner of lock file"
-#~ msgstr "Tikrinti lock bylos savininkà"
-
-#~ msgid "Device:"
-#~ msgstr "Árenginys:"
-
-#~ msgid "Use ISDN"
-#~ msgstr "Naudoti ISDN"
-
-#~ msgid "Advanced"
-#~ msgstr "Papildomai"
-
-#~ msgid "CPU Load Applet"
-#~ msgstr "CPU apkrovimo priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "\n"
-#~ "CPU Load Meter Applet."
-#~ msgstr ""
-#~ "Priedas, rodantis procesoriaus apkrovimà\n"
-#~ "\n"
-#~ "Released under the GNU general public Licence."
-
-#~ msgid "CPU Load"
-#~ msgstr "CPU apkrovimas"
-
-#~ msgid "Default Properties..."
-#~ msgstr "Savybës..."
-
-#~ msgid "Run gtop..."
-#~ msgstr "Paleisti gtop..."
-
-#~ msgid "Load Graph"
-#~ msgstr "Apkrovimo grafikas"
-
-#~ msgid "Maximum:"
-#~ msgstr "Maksimumas:"
-
-#~ msgid "Size:"
-#~ msgstr "Dydis:"
-
-#~ msgid "Speed:"
-#~ msgstr "Greitis:"
-
-#~ msgid "Use default properties"
-#~ msgstr "Naudoti standartines savybes"
-
-#~ msgid "System"
-#~ msgstr "Sistema"
-
-#~ msgid "User"
-#~ msgstr "Vartotojas"
-
-#~ msgid "Free"
-#~ msgstr "Laisva"
-
-#~ msgid "Other"
-#~ msgstr "Kiti"
-
-#~ msgid "Used"
-#~ msgstr "Uþimta"
-
-#~ msgid "ETH"
-#~ msgstr "ETH"
-
-#~ msgid "PPP"
-#~ msgstr "PPP"
-
-#~ msgid "SLIP"
-#~ msgstr "SLIP"
-
-#~ msgid "Memory Load"
-#~ msgstr "Atminties apkrovimas"
-
-#~ msgid "Swap Load"
-#~ msgstr "Swap apkrovimas"
-
-#~ msgid "Net Load"
-#~ msgstr "Tinklo apkrovimas"
-
-#~ msgid "Load Average"
-#~ msgstr "Apkrovimo vidurkis"
-
-#~ msgid "Memory Load Applet"
-#~ msgstr "Atminties apkrovimo priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "\n"
-#~ "Memory Load Applet."
-#~ msgstr ""
-#~ "Atminties apkrovimo priedas.\n"
-#~ "\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "Swap Load Applet"
-#~ msgstr "Swap apkrovimo priedas"
-
-#~ msgid ""
-#~ "Released under the GNU general public license.\n"
-#~ "\n"
-#~ "Swap Load Meter Applet."
-#~ msgstr ""
-#~ "Swap apkrovimo priedas.\n"
-#~ "\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "Odometer"
-#~ msgstr "Odometras"
-
-#~ msgid "(C) 1999 The Free Software Foundation"
-#~ msgstr "© 1999 The Free Software Foundation"
-
-#~ msgid ""
-#~ "a GNOME applet that tracks and measures the movements of your mouse pointer "
-#~ "across the desktop."
-#~ msgstr ""
-#~ "GNOME priedas, kuris seka ir matuoja tavo pelës judëjimà skersai iðilgai "
-#~ "darbalaukio."
-
-#~ msgid "Can't create odometer applet!"
-#~ msgstr "Negaliu sukurti odometro priedo!"
-
-#~ msgid "Reset"
-#~ msgstr "Ið naujo"
-
-#~ msgid "Odometer setting"
-#~ msgstr "Odometro savybës"
-
-#~ msgid "Use Metric"
-#~ msgstr "Naudoti metrus"
-
-#~ msgid "auto_reset"
-#~ msgstr "auto_reset"
-
-#~ msgid "enabled"
-#~ msgstr "ájungtas"
-
-#~ msgid "Digits number"
-#~ msgstr "Skaitmenø kiekis"
-
-#~ msgid "Theme file :"
-#~ msgstr "Temos byla:"
-
-#~ msgid "The QuickLaunch Applet"
-#~ msgstr "Greito Paleidimo priedas"
-
-#~ msgid ""
-#~ "This applet adds some pretty small icons for your launchers to your panel, "
-#~ "like the windowish QuickLaunch toolbar, avoiding that annoying huge GNOME "
-#~ "launchers."
-#~ msgstr ""
-#~ "Ðis priedas ádeda á skydelá keletà maþyèiø ikonø tavo leistukams, panaðiai "
-#~ "kaip windows'ø QuickLaunch árankiø juosta, leidþiantis iðvengti didþiuliø "
-#~ "GNOME leistukø."
-
-#~ msgid "Launcher Properties"
-#~ msgstr "Leistuko savybës"
-
-#~ msgid ""
-#~ "drop launchers from\n"
-#~ "the menu here"
-#~ msgstr ""
-#~ "Atvilk leistukus\n"
-#~ "ið meniu á èia"
-
-#~ msgid "Launcher properties..."
-#~ msgstr "Leistuko savybës..."
-
-#~ msgid "Delete launcher"
-#~ msgstr "Iðmesti leistukà"
-
-#~ msgid "File '%s' does not exist"
-#~ msgstr "Nëra tokios bylos ¥%s´"
-
-#~ msgid "Don't know how to make a launcher out of: '%s'"
-#~ msgstr "Neþinau kaip padaryti leistukà ið ¥%s´"
-
-#~ msgid ""
-#~ "Cannot create directory:\n"
-#~ "~/.gnome/quicklaunch.\n"
-#~ "Aborting"
-#~ msgstr ""
-#~ "Negaliu sukurti katalogo:\n"
-#~ "~/.gnome/quicklaunch.\n"
-#~ "Nutraukiama"
-
-#~ msgid "Copyright (C) 1999 Tom Gilbert"
-#~ msgstr "Copyright (C) 1999 Tom Gilbert"
-
-#~ msgid "Visit the author's Website"
-#~ msgstr "Aplankyk autoriaus svetainæ"
-
-#~ msgid "Articles"
-#~ msgstr "Straipsniai"
-
-#~ msgid "Show topic images"
-#~ msgstr "Rodyti dalyko paveikslëlius"
-
-#~ msgid "Show department"
-#~ msgstr "Rodyti departamentà"
-
-#~ msgid "Show extra information (Time, Author, Comments)"
-#~ msgstr "Rodyti papildomà info (laikà, autoriø, komentarus)"
-
-#~ msgid "Delay between articles (10 = 1 sec):"
-#~ msgstr "Delsa tarp straipsniø (10 == 1 sek.):"
-
-#~ msgid "(These settings do not take effect until a refresh)"
-#~ msgstr "(Ðie nustatymai nieko nekeièia kol neatnaujinta)"
-
-#~ msgid "Open new window"
-#~ msgstr "Atidaryti naujà langà"
-
-#~ msgid "Scrolling"
-#~ msgstr "Slinkimas"
-
-#~ msgid "Smooth scroll"
-#~ msgstr "Glodi slinktis"
-
-#~ msgid "Smooth type"
-#~ msgstr "Glodus raðymas"
-
-#~ msgid "Speed"
-#~ msgstr "Greitis"
-
-#~ msgid "Delay when wrapping text:"
-#~ msgstr "Delsa kai lauþomas tekstas:"
-
-#~ msgid "Scroll speed between lines (Smooth scroll):"
-#~ msgstr "Slinkties greitis tarp eiluèiø (glodi slinktis):"
-
-#~ msgid "Refresh"
-#~ msgstr "Atnaujinti"
-
-#~ msgid "Loading headlines..."
-#~ msgstr "Ákeliamos antraðtës..."
-
-#~ msgid "Creating user directory: %s\n"
-#~ msgstr "Kuriamas vartotojo katalogas: %s\n"
-
-#~ msgid "Unable to create user directory: %s\n"
-#~ msgstr "Negaliu sukurti vartotojo katalogo: %s\n"
-
-#~ msgid "%d.%d.%d"
-#~ msgstr "%d.%d.%d"
-
-#~ msgid "Justin Maurer <justin@slashdot.org>"
-#~ msgstr "Justin Maurer <justin@slashdot.org>"
-
-#~ msgid "Craig Small <csmall@eye-net.com.au>"
-#~ msgstr "Craig Small <csmall@eye-net.com.au>"
-
-#~ msgid "Frederic Devernay <devernay@istar.fr>"
-#~ msgstr "Frederic Devernay <devernay@istar.fr>"
-
-#~ msgid "SlashApp"
-#~ msgstr "SlashApp"
-
-#~ msgid "(C) 1998-1999"
-#~ msgstr "(C) 1998-1999"
-
-#~ msgid "SlashApp Article List"
-#~ msgstr "SlashApp straipsniø sàraðas"
-
-#~ msgid "No articles"
-#~ msgstr "Nëra straipsniø"
-
-#~ msgid "Unable to initialize request. Shouldn't happen\n"
-#~ msgstr "Negaliu pradëti uþklausos. To neturëtø atsitikti\n"
-
-#~ msgid "Unable to prepare request.\n"
-#~ msgstr "Negaliu paruoðti uþklausos.\n"
-
-#~ msgid "Unable to process request.\n"
-#~ msgstr "Negaliu nagrinëti uþklausos.\n"
-
-#~ msgid "Sound Monitor Applet"
-#~ msgstr "Garso stebëjimo priedas"
-
-#~ msgid "(C) 1999 John Ellis"
-#~ msgstr "(C) 1999 John Ellis"
-
-#~ msgid ""
-#~ "Sound monitor interface to Esound\n"
-#~ "\n"
-#~ "Released under the GNU general public license."
-#~ msgstr ""
-#~ "Garso stebëjimo ryðys su Esound.\n"
-#~ "\n"
-#~ "Iðleistas GNU General Public License sàlygomis."
-
-#~ msgid "Place Esound in standby"
-#~ msgstr "Uþmigdyti Esound (stanby)"
-
-#~ msgid "Resume Esound"
-#~ msgstr "Tæsti Esound"
-
-#~ msgid "Start Esound"
-#~ msgstr "Paleisti Esound"
-
-#~ msgid "Manager..."
-#~ msgstr "Vadybininkas..."
-
-#~ msgid "Volume"
-#~ msgstr "Garsumas"
-
-#~ msgid "Balance"
-#~ msgstr "Balansas"
-
-#~ msgid ""
-#~ "You have enabled the \"Monitor sound input\" option.\n"
-#~ "\n"
-#~ "If your sound card is not fully 100% FULL DUPLEX (can do input and output "
-#~ "simultaneously),\n"
-#~ "then this may touch bugs in sound drivers/esound that may hang the system.\n"
-#~ "\n"
-#~ "You have been warned!"
-#~ msgstr ""
-#~ "Tu ájungei ¥Garso áeities stebëjimo´ pasirinktá.\n"
-#~ "\n"
-#~ "Jei tavo garso korta nepalaiko FULL DUPLEX 100% (galimybë ávesti ir iðvesti "
-#~ "vienu metu), ðis þingsnis gali prieiti iki klaidø, esanèiø "
-#~ "tvarkyklëse/Esound'e, todël gali pakabinti sistemà.\n"
-#~ "\n"
-#~ "Að tave áspëjau!"
-
-#~ msgid "Peak indicator"
-#~ msgstr "Piko rodiklis"
-
-#~ msgid "off"
-#~ msgstr "iðjungtas"
-
-#~ msgid "smooth"
-#~ msgstr "glodus"
-
-#~ msgid "Peak indicator falloff speed"
-#~ msgstr "Piko rodiklio atkritimo greitis"
-
-#~ msgid "Scope (scale 1:X, where X = ? )"
-#~ msgstr "Akiratis (mastelis 1:X, kur X = ?)"
-
-#~ msgid "Connect points in scope"
-#~ msgstr "Sujungti taðkus akiratyje"
-
-#~ msgid "Screen refresh (frames per second)"
-#~ msgstr "Vaizdo atnaujinimas (kadrais per sekundæ)"
-
-#~ msgid "ESD host to monitor:"
-#~ msgstr "ESD host'as, kurá stebëti:"
-
-#~ msgid "Monitor sound input (only use if sound card is FULL DUPLEX)"
-#~ msgstr "Stebëti garso áëjimà (naudok tik jei garso korta yra FULL DUPLEX)"
-
-#~ msgid "%Y%m%d-%H-%M-%S"
-#~ msgstr "%Y%m%d-%H-%M-%S"
-
-#~ msgid "%m-%d-%Y %H:%M:%S"
-#~ msgstr "%m-%d-%Y %H:%M:%S"
-
-#~ msgid "The Web Browser Controller"
-#~ msgstr "Narðyklës valdiklis"
-
-#~ msgid ""
-#~ "This applet currently sends getURL commands to netscape throught the -remote "
-#~ "interface.  Hopefully later more webrowsers will be supported."
-#~ msgstr ""
-#~ "Ðis priedas siunèia getURL komandas Netscape narðyklei per -remote sàsajà. "
-#~ "Tikëkimës, vëliau ir daugiau narðykliø bus palaikoma."
-
-#~ msgid "Url:"
-#~ msgstr "URL:"
-
-#~ msgid "Clear"
-#~ msgstr "Iðvalyti"
-
-#~ msgid "Launch new window"
-#~ msgstr "Naujame lange"
-
-#~ msgid "WebControl Properties"
-#~ msgstr "NarðIklio savybës"
-
-#~ msgid "Display URL label"
-#~ msgstr "Rodyti URL þymæ"
-
-#~ msgid "Display \"launch new window\" option"
-#~ msgstr "Rodyti ¥naujame lange´ pasirinktá"
-
-#~ msgid "Look"
-#~ msgstr "Iðvaizda"
-
-#~ msgid "Where Am I?"
-#~ msgstr "Kur að esu?"
-
-#~ msgid ""
-#~ "A cursor position reporting applet.\n"
-#~ "= Clicking mouse button 1 grabs the cursor.\n"
-#~ "= Dragging with mouse button 1 held down shows the size of the region."
-#~ msgstr ""
-#~ "Priedas, praneðanti þymeklio pozicijà.\n"
-#~ "= Pelës #1 mygtuko paspaudimas pagriebia þymeklá.\n"
-#~ "= Vilkimas nuspaudus #1 pelës mygtukà parodo srities dydá."
-
-#~ msgid "whereami_applet"
-#~ msgstr "kuraðesu_priedas"
+#~ msgid "Read only file!"
+#~ msgstr "Nekeièiamoji byla!"

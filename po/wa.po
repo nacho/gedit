@@ -9,8 +9,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 0.6.1\n"
-"POT-Creation-Date: 2000-04-02 15:42-0400\n"
+"Project-Id-Version: gedit 0.7.0\n"
+"POT-Creation-Date: 2000-04-11 14:15+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -18,436 +18,437 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:51
+#: plugins/sample/sample.c:47
 msgid "Hello World"
 msgstr ""
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:48
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: plugins/time/time.c:96
+#: plugins/time/time.c:93
 msgid "Insert Time"
 msgstr ""
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:94
 msgid "Inserts the current date and time"
 msgstr ""
 
-#: plugins/email/email.c:101
-msgid "The gEdit Email Plugin"
-msgstr "Plugin lijheu d' emiles po gEdit"
+#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:152
+#: src/print.c:274
+msgid "Untitled"
+msgstr "Sins no"
 
-#: plugins/email/email.c:202
+#: plugins/email/email.c:152
 msgid "Email"
 msgstr ""
 
-#: plugins/email/email.c:203
+#: plugins/email/email.c:153
 msgid "Email the current document"
 msgstr ""
 
-#: src/commands.c:97
-msgid "Could not save file!"
-msgstr "Dji n' pout schaper l' fitchî!"
+#: src/window.c:63
+msgid "Filename"
+msgstr "No do fitchî"
 
-#: src/commands.c:371
-msgid "Open File..."
+#: src/menus.c:374 src/window.c:64
+msgid "Line"
+msgstr ""
+
+#: src/window.c:65
+msgid "Contents"
+msgstr ""
+
+#: src/file.c:92
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+
+#: src/file.c:101
+msgid "Could not allocate the requrired memory."
+msgstr ""
+
+#: src/file.c:107
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+
+#: src/file.c:175
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+
+#: src/file.c:189 src/file.c:203
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+
+#: src/file.c:267
+msgid "Open File ..."
 msgstr "Drovî on fitchî..."
 
-#: src/commands.c:425 src/commands.c:473
-msgid "Read only file!"
-msgstr "Li fitchî ni pout esse ki lejhu!"
+#: src/file.c:304
+msgid "Save As..."
+msgstr "Schaper èt rlomer..."
 
-#: src/commands.c:512 src/commands.c:582
+#: src/file.c:337
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/file.c:396
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr ""
+
+#: src/file.c:407
+msgid "Document has not been saved."
+msgstr "Li Documint n' a nén stî schapé..."
+
+#: src/file.c:415
 msgid "Error saving file!"
 msgstr "Yåk n' a nén sti tot schapant l' fitchî!"
 
-#: src/commands.c:542
+#: src/file.c:484
 #, c-format
-msgid "Save %s As..."
-msgstr "Schaper èt rlomer %s..."
-
-#: src/commands.c:615
-#, c-format
-msgid "Save %s As ..."
-msgstr "Schaper èt rlomer %s..."
-
-#: src/commands.c:701
-#, c-format
-msgid ""
-"Are you sure you wish to revert all changes?\n"
-"(%s)"
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr ""
-"Estoz-ve shûr ki vos voloz rimete les candjmints come divant?\n"
-"(%s)"
 
-#: src/commands.c:749
-msgid "Document Unchanged..."
-msgstr "Documint nén candji..."
+#: src/document.c:339
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr "«%s» a stî candjî. Voloz-ve li schaper ?"
 
-#: src/commands.c:753
-msgid "Document Unsaved..."
-msgstr "Documint nén schapé..."
-
-#: src/commands.c:937
-msgid "_File/"
-msgstr "_Fitchî/"
-
-#: src/commands.c:946 src/commands.c:947
-msgid "_File"
-msgstr "_Fitchî"
-
-#: src/gE_about.c:39
-msgid "With special thanks to:"
-msgstr "Gråces tot speciålmint a:"
-
-#: src/gE_about.c:54
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "© 1998, 1999 Alex Roberts eyèt Evan Lawrence"
-
-#: src/gE_about.c:56
-msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr "gEdit est on pitit èt ahessåve aspougneu di tekse po GNOME/Gtk+"
-
-#: src/gE_files.c:95
-#, fuzzy
-msgid "Can't open file!"
-msgstr "Li fitchî ni pout esse ki lejhu!"
-
-#: src/gE_mdi.c:78
-msgid "Find _Line..."
-msgstr "Trover ro_ye..."
-
-#: src/gE_mdi.c:79
-msgid "Search for a line"
-msgstr "Cwerî ene roye"
-
-#: src/gE_mdi.c:84
-msgid "Find _In Files..."
-msgstr "Trover è _fitchîs..."
-
-#: src/gE_mdi.c:85
-msgid "Find text in all open files"
-msgstr "Cwerî on tecse dvins tos les fitchîs drovis"
-
-#: src/gE_mdi.c:100
-msgid "_Add View"
-msgstr "_Radjouter vuwe"
-
-#: src/gE_mdi.c:101
-msgid "Add a new view of the document"
-msgstr "Radjouter ene novele vuwe d' on documint"
-
-#: src/gE_mdi.c:102
-msgid "_Remove View"
-msgstr "_Bodjî vuwe"
-
-#: src/gE_mdi.c:103
-msgid "Remove view of the document"
-msgstr "Bodjî ene vuwe foû do documint"
-
-#: src/gE_mdi.c:411
-#, c-format
-msgid " '%s' has been modified. Do you wish to save it?"
-msgstr " '%s' a sti candji. Voloz-ve li schaper ?"
-
-#: src/gE_plugin.c:57
+#: src/plugin.c:58
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr ""
 
-#: src/gE_plugin.c:67
+#: src/plugin.c:69
 msgid "Error, plugin does not contain init_plugin function."
 msgstr ""
 
-#: src/gE_plugin.c:74
+#: src/plugin.c:77
 msgid "Error, init_plugin returned an error"
 msgstr ""
 
-#: src/gE_plugin.c:98
+#: src/plugin.c:103
 msgid "Error, plugin is still in use"
 msgstr ""
 
-#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
-#: src/gE_plugin.c:182 src/menus.c:245
+#: src/menus.c:311 src/plugin.c:113 src/plugin.c:205
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: src/gE_prefs_box.c:103
+#: src/prefs.c:53
 msgid "Default"
 msgstr "Prémetu"
 
-#: src/gE_prefs_box.c:104
+#: src/prefs.c:54
 msgid "Notebook"
 msgstr "Bloc di notes"
 
-#: src/gE_prefs_box.c:105
+#: src/prefs.c:55
 msgid "Toplevel"
 msgstr ""
 
-#: src/gE_prefs_box.c:106
+#: src/prefs.c:56
 msgid "Modal"
 msgstr "Modå"
 
-#: src/gE_prefs_box.c:337
+#: src/prefs.c:289
 msgid "Appearance"
 msgstr "Rivnance"
 
-#: src/gE_prefs_box.c:350
+#: src/prefs.c:302
 msgid "Show Statusbar"
 msgstr "Mostrer bår ås messaedjes"
 
-#: src/gE_prefs_box.c:359
+#: src/prefs.c:311
 msgid "Show Splitscreen"
 msgstr ""
 
-#: src/gE_prefs_box.c:369
+#: src/prefs.c:321
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:382
+#: src/prefs.c:334
 msgid "Enable Autoindent"
 msgstr ""
 
-#: src/gE_prefs_box.c:386
+#: src/prefs.c:338
 msgid "Enable Wordwrap"
 msgstr ""
 
-#: src/gE_prefs_box.c:408
+#: src/prefs.c:360
 msgid "Text Background"
 msgstr ""
 
-#: src/gE_prefs_box.c:429
+#: src/prefs.c:379
 msgid "Text Foreground"
 msgstr ""
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:498
+#: src/prefs.c:444
 msgid "Document Settings"
 msgstr "Apontiaedje do documint"
 
-#: src/gE_prefs_box.c:512
+#: src/prefs.c:458
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:518
+#: src/prefs.c:464
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:527
+#: src/prefs.c:473
 msgid "Current Font"
 msgstr "Fonte a eployî"
 
-#: src/gE_prefs_box.c:544
+#: src/prefs.c:490
 msgid "Select..."
 msgstr "Tchwezi..."
 
-#. End of Font Setttings
-#. Print COmmand
-#: src/gE_prefs_box.c:560
-msgid "Print Command"
-msgstr "Comande po rexhe"
-
 #. Window Size Settings
-#: src/gE_prefs_box.c:620
+#: src/prefs.c:540
 msgid "Window Size"
 msgstr "Grandeu do purnea"
 
-#: src/gE_prefs_box.c:633
+#: src/prefs.c:553
 msgid "Current Width:"
 msgstr "Lårdjeu do moumint:"
 
-#: src/gE_prefs_box.c:653
+#: src/prefs.c:573
 msgid "Startup Width:"
 msgstr "Lårdjeu d' enondaedje:"
 
-#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
+#: src/prefs.c:581 src/prefs.c:621
 msgid "Use Current"
 msgstr "Eployi li ci do moumint"
 
-#: src/gE_prefs_box.c:673
+#: src/prefs.c:593
 msgid "Current Height:"
 msgstr "Hôteu do moumint:"
 
-#: src/gE_prefs_box.c:693
+#: src/prefs.c:613
 msgid "Startup Height:"
 msgstr "Hôteu d' enondaedje:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:709
+#: src/prefs.c:629
 msgid "MDI Mode"
 msgstr "Môde MDI"
 
-#. General Settings
-#: src/gE_prefs_box.c:780
+#: src/prefs.c:694
 msgid "General"
 msgstr "Djenerå"
 
-#. Window Settings
-#: src/gE_prefs_box.c:785
+#: src/prefs.c:699
 msgid "Window"
 msgstr "Purnea"
 
-#. Docuemnt Settings
-#: src/gE_prefs_box.c:790
+#: src/prefs.c:704
 msgid "Document"
 msgstr "Documint"
 
-#: src/gE_print.c:175
+#: src/print.c:204
 #, c-format
-msgid "gEdit (%s): Print Preview"
+msgid "gedit (%s): Print Preview"
 msgstr ""
 
-#: src/gE_print.c:277
+#: src/print.c:355
 #, c-format
 msgid "Page: %i/%i"
 msgstr ""
 
-#: src/menus.c:71
-msgid "_Autoindent"
-msgstr ""
+#: src/menus.c:52
+msgid "Open (swap) .c/.h file"
+msgstr "Drovî (swap) fitchî .c/.h"
 
-#: src/menus.c:72
-msgid "Status_bar"
-msgstr "_Bår ås messaedjes"
-
-#: src/menus.c:73
-msgid "_Wordwrap"
-msgstr ""
-
-#: src/menus.c:74
-msgid "_Linewrap"
-msgstr ""
-
-#: src/menus.c:75
-msgid "_Readonly"
-msgstr "Seulmint _lere"
-
-#: src/menus.c:76
-msgid "_Splitscreen"
-msgstr ""
-
-#: src/menus.c:77
-msgid "_Show tabs"
-msgstr "_Mostrer etiketes"
-
-#: src/menus.c:78
-msgid "Toolbar _relief"
-msgstr ""
-
-#: src/menus.c:79
-msgid "_Show tooltips"
-msgstr "Vey _racsegnes"
-
-#: src/menus.c:80
-msgid "Show toolbar _text"
-msgstr "Vey _tekse del bår ås usteyes"
-
-#: src/menus.c:81
-msgid "Show toolbar _icons"
-msgstr "Vey _imådjetes del bår ås usteyes"
-
-#. and this one is the default file name
-#: src/menus.c:83
-msgid "Untitled"
-msgstr "Sins no"
-
-#: src/menus.c:89
+#: src/menus.c:61
 msgid "_New"
 msgstr "_Novea"
 
-#: src/menus.c:89
+#: src/menus.c:62 src/menus.c:329
 msgid "Create a new document"
 msgstr "Fé on novea documint"
 
-#: src/menus.c:96
+#: src/menus.c:67
 msgid "Save All"
 msgstr "Schaper tot..."
 
-#: src/menus.c:96
+#: src/menus.c:68
 msgid "Save All Open Files"
 msgstr "Schaper tos les fitchîs drovis"
 
-#: src/menus.c:101
-msgid "Revert"
-msgstr "Rivni come divant"
+#: src/menus.c:83
+msgid "Print preview..."
+msgstr ""
 
-#: src/menus.c:111
+#: src/menus.c:84
+msgid "Preview data to be printed"
+msgstr ""
+
+#: src/menus.c:90
 msgid "Close All"
 msgstr "Cloyu tot"
 
-#: src/menus.c:111
+#: src/menus.c:91
 msgid "Close All Open Files"
 msgstr "Cloyu tos les fitchîs drovis"
 
-#: src/menus.c:124
-msgid "_Top"
-msgstr "Al _Copete"
+#: src/menus.c:126
+msgid "Goto _Line..."
+msgstr "Potchî al _roye"
 
-#: src/menus.c:125
-msgid "Put the document tabs at the top"
-msgstr "Mete les etiketes al copete"
-
-#: src/menus.c:128
-msgid "_Bottom"
-msgstr "Al _Valeye"
-
-#: src/menus.c:129
-msgid "Put the document tabs at the bottom"
-msgstr "Mete les etiketes al valeye"
-
-#: src/menus.c:132
-msgid "_Left"
-msgstr "_Hintche"
-
-#: src/menus.c:133
-msgid "Put the document tabs on the left"
-msgstr "Mete les etiketes a hintche"
+#: src/menus.c:127
+msgid "Go to a specific line number"
+msgstr ""
 
 #: src/menus.c:136
-msgid "_Right"
-msgstr "_Droete"
+msgid "_Add View"
+msgstr "_Radjouter vuwe"
 
 #: src/menus.c:137
-msgid "Put the document tabs on the right"
-msgstr "Mete les etiketes a droete"
+msgid "Add a new view of the document"
+msgstr "Radjouter ene novele vuwe d' on documint"
 
-#: src/menus.c:176
-msgid "Toggle Readonly"
-msgstr "Candjî l' môde seulmint lere"
+#: src/menus.c:139
+msgid "_Remove View"
+msgstr "_Bodjî vuwe"
 
-#: src/menus.c:187
-msgid "_Document Tabs"
-msgstr "_Etiketes des documints"
+#: src/menus.c:140
+msgid "Remove view of the document"
+msgstr "Bodjî ene vuwe foû do documint"
 
-#: src/menus.c:188
-msgid "Change the placement of the document tabs"
-msgstr "Candjî l' eplaeçmint des etiketes des documints"
+#: src/menus.c:329
+msgid "New"
+msgstr "Novea"
 
-#: src/menus.c:192
-msgid "Sa_ve Settings"
-msgstr "_Schaper les tchûzes"
+#: src/menus.c:333
+msgid "Open"
+msgstr ""
 
-#: src/menus.c:193
-msgid "Save the current settings for future sessions"
-msgstr "Schaper les apontiaedjes do mounmint po ene session a vni"
+#: src/menus.c:333
+msgid "Open a file"
+msgstr "Drovî on fitchî"
 
-#: src/search.c:415
+#: src/menus.c:337
+msgid "Save"
+msgstr "Schaper"
+
+#: src/menus.c:337
+msgid "Save the current file"
+msgstr "Schaper li fitchî do moumint"
+
+#: src/menus.c:341
+msgid "Close"
+msgstr "Cloyu"
+
+#: src/menus.c:341
+msgid "Close the current file"
+msgstr "Cloyu li fitchî do moumint"
+
+#: src/menus.c:345
+msgid "Print"
+msgstr "Rexhe"
+
+#: src/menus.c:345
+msgid "Print the current file"
+msgstr ""
+
+#: src/menus.c:350
+msgid "Undo"
+msgstr "Disfé"
+
+#: src/menus.c:350
+msgid "Undo last operation"
+msgstr ""
+
+#: src/menus.c:354
+msgid "Redo"
+msgstr "Rifé"
+
+#: src/menus.c:354
+msgid "Redo last operation"
+msgstr ""
+
+#: src/menus.c:358
+msgid "Cut"
+msgstr ""
+
+#: src/menus.c:358
+msgid "Cut the selection"
+msgstr ""
+
+#: src/menus.c:362
+msgid "Copy"
+msgstr ""
+
+#: src/menus.c:362
+msgid "Copy the selection"
+msgstr ""
+
+#: src/menus.c:366
+msgid "Paste"
+msgstr ""
+
+#: src/menus.c:366
+msgid "Paste the clipboard"
+msgstr ""
+
+#: src/menus.c:370
+msgid "Find"
+msgstr "Trover"
+
+#: src/menus.c:370
+msgid "Search for a string"
+msgstr "Cwerî après ene tchinne"
+
+#: src/menus.c:374
+msgid "Get the current and total lines"
+msgstr ""
+
+#: src/menus.c:379
+msgid "Exit"
+msgstr "Moussî foû"
+
+#: src/menus.c:379
+msgid "Exit the program"
+msgstr "Moussî foû do programe"
+
+#: src/search.c:285
 msgid "Find In Files"
 msgstr ""
 
-#. GtkWidget *radio, *check;
-#: src/search.c:416 src/search.c:836 src/search.c:837
+#: src/search.c:286
 msgid "Search"
 msgstr "Cwerî"
 
-#: src/search.c:420 src/search.c:841 src/search.c:870
+#: src/search.c:290
 msgid "Search for:"
 msgstr "Cwerî on:"
 
-#: src/search.c:740
+#: src/search.c:617
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -460,70 +461,183 @@ msgstr ""
 "Royes å totå: %i\n"
 "Ci roye chal: %i"
 
-#: src/search.c:762
-msgid "Go to line"
-msgstr "Potchî al roye"
-
-#: src/search.c:772
-msgid "Line number"
-msgstr "Limerô di roye"
-
-#: src/search.c:795
+#: src/search.c:637
 msgid "Search from cursor"
 msgstr "Cmincer a cwerî d' èl plaece do curseu"
 
-#: src/search.c:802
+#: src/search.c:644
 msgid "Search from beginning of document"
 msgstr "Cmincer a cwerî al copete do documint"
 
-#: src/search.c:809
-msgid "Search from end of document"
-msgstr "Cmincer a cwerî al valeye do documint"
-
-#: src/search.c:816
+#: src/dialogs/replace.glade.h:17 src/search.c:660
 msgid "Case sensitive"
 msgstr "Grandès <> ptitès letes"
 
-#: src/search.c:822
-msgid "Reverse search"
+#: src/dialogs/dialog-about.c:52
+msgid "With special thanks to:"
+msgstr "Gråces tot speciålmint a:"
+
+#: src/dialogs/dialog-about.c:67
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr "© 1998, 1999 Alex Roberts eyèt Evan Lawrence"
+
+#: src/dialogs/dialog-about.c:69
+msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gedit est on pitit èt ahessåve aspougneu di tekse po GNOME/Gtk+"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/find-line.glade.h:7
+msgid "Goto Line"
+msgstr "Potchî al roye"
+
+#: src/dialogs/find-line.glade.h:8
+msgid "Line number:"
+msgstr "Limerô di roye:"
+
+#: src/dialogs/find-line.glade.h:9
+msgid "Enter the line number you wish to go to."
 msgstr ""
 
-#. GtkWidget *radio;
-#: src/search.c:864 src/search.c:865
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
 msgid "Replace"
 msgstr "Mete el plaece"
 
-#: src/search.c:866
-msgid "Replace all"
+#: src/dialogs/replace.glade.h:9
+msgid "Replace All"
 msgstr "Mete el plaece di tot"
 
-#: src/search.c:880
-msgid "Replace with:"
+#: src/dialogs/replace.glade.h:10
+msgid "Search for: "
+msgstr "Cwerî on: "
+
+#: src/dialogs/replace.glade.h:11
+msgid "Replace with: "
+msgstr "Mete el plaece: "
+
+#: src/dialogs/replace.glade.h:12
+msgid "Search from: "
+msgstr "Cwerî a pårti di: "
+
+#: src/dialogs/replace.glade.h:13
+msgid ""
+"Cursor\n"
+"Beginning of document\n"
+"End of document\n"
 msgstr ""
 
-#: src/search.c:891
+#: src/dialogs/replace.glade.h:18
+msgid "Reverse search"
+msgstr ""
+
+#: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "Dimander divant di mete èl plaece"
 
-#: src/search.c:1096
-msgid "Replace?"
-msgstr "Mete el plaece?"
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "Plugin lijheu d' emiles po gEdit"
 
-#: src/gE_view.c:43
-msgid "Save"
-msgstr "Schaper"
+#~ msgid "Could not save file!"
+#~ msgstr "Dji n' pout schaper l' fitchî!"
 
-#: src/gE_view.c:44
-msgid "Close"
-msgstr "Cloyu"
+#~ msgid "Read only file!"
+#~ msgstr "Li fitchî ni pout esse ki lejhu!"
 
-#: src/gE_view.c:45
-msgid "Print"
-msgstr "Rexhe"
+#~ msgid "Save %s As ..."
+#~ msgstr "Schaper èt rlomer %s..."
 
-#: src/gE_view.c:49
-msgid "Open (swap) .c/.h file"
-msgstr "Drovî (swap) fitchî .c/.h"
+#~ msgid ""
+#~ "Are you sure you wish to revert all changes?\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Estoz-ve shûr ki vos voloz rimete les candjmints come divant?\n"
+#~ "(%s)"
+
+#~ msgid "Document Unchanged..."
+#~ msgstr "Documint nén candji..."
+
+#~ msgid "Find _Line..."
+#~ msgstr "Trover ro_ye..."
+
+#~ msgid "Find _In Files..."
+#~ msgstr "Trover è _fitchîs..."
+
+#~ msgid "Find text in all open files"
+#~ msgstr "Cwerî on tecse dvins tos les fitchîs drovis"
+
+#~ msgid "Print Command"
+#~ msgstr "Comande po rexhe"
+
+#~ msgid "Status_bar"
+#~ msgstr "_Bår ås messaedjes"
+
+#~ msgid "_Show tabs"
+#~ msgstr "_Mostrer etiketes"
+
+#~ msgid "_Show tooltips"
+#~ msgstr "Vey _racsegnes"
+
+#~ msgid "Show toolbar _text"
+#~ msgstr "Vey _tekse del bår ås usteyes"
+
+#~ msgid "Show toolbar _icons"
+#~ msgstr "Vey _imådjetes del bår ås usteyes"
+
+#~ msgid "Revert"
+#~ msgstr "Rivni come divant"
+
+#~ msgid "_Top"
+#~ msgstr "Al _Copete"
+
+#~ msgid "Put the document tabs at the top"
+#~ msgstr "Mete les etiketes al copete"
+
+#~ msgid "_Bottom"
+#~ msgstr "Al _Valeye"
+
+#~ msgid "Put the document tabs at the bottom"
+#~ msgstr "Mete les etiketes al valeye"
+
+#~ msgid "_Left"
+#~ msgstr "_Hintche"
+
+#~ msgid "Put the document tabs on the left"
+#~ msgstr "Mete les etiketes a hintche"
+
+#~ msgid "_Right"
+#~ msgstr "_Droete"
+
+#~ msgid "Put the document tabs on the right"
+#~ msgstr "Mete les etiketes a droete"
+
+#~ msgid "Toggle Readonly"
+#~ msgstr "Candjî l' môde seulmint lere"
+
+#~ msgid "_Document Tabs"
+#~ msgstr "_Etiketes des documints"
+
+#~ msgid "Change the placement of the document tabs"
+#~ msgstr "Candjî l' eplaeçmint des etiketes des documints"
+
+#~ msgid "Sa_ve Settings"
+#~ msgstr "_Schaper les tchûzes"
+
+#~ msgid "Save the current settings for future sessions"
+#~ msgstr "Schaper les apontiaedjes do mounmint po ene session a vni"
+
+#~ msgid "Search from end of document"
+#~ msgstr "Cmincer a cwerî al valeye do documint"
+
+#~ msgid "Replace?"
+#~ msgstr "Mete el plaece?"
 
 #~ msgid ""
 #~ "Enter print command below\n"
@@ -537,9 +651,6 @@ msgstr "Drovî (swap) fitchî .c/.h"
 
 #~ msgid "Print anyway"
 #~ msgstr "Rexhe cwand minme"
-
-#~ msgid " Save, then print "
-#~ msgstr "Schaper, puis rexhe"
 
 #~ msgid "Cancel"
 #~ msgstr "Rinoncî"
