@@ -512,6 +512,11 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 		{
 			buffer_out_length = buffer_in_length + (replacements + GEDIT_EXTRA_REPLACEMENTS) * delta;
 			buffer_out = g_realloc (buffer_out, buffer_out_length);
+			if (buffer_out == NULL)
+			{
+				g_warning ("Unable to realocate buffer");
+				return 0;
+			}
 		}
 		buffer_out [p2++] = buffer_in [p1++];
 	}
