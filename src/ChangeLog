@@ -1,3 +1,18 @@
+2002-09-22  James Willcox  <jwillcox@gnome.org>
+
+	* gedit-debug.c: (gedit_debug):
+	* gedit-debug.h: Added DEBUG_UTILS
+
+	* gedit-document.c: (gedit_document_load),
+	(gedit_document_load_from_stdin): Use the functions in gedit-utils.c
+
+	* gedit-utils.c: (gedit_utils_get_stdin),
+	(gedit_utils_convert_to_utf8), (gedit_utils_convert_to_utf8_blah):
+	* gedit-utils.h:  New functions
+
+	* gedit2.c: (gedit_handle_automation_cmdline):  Insert data from
+	stdin into an existing instance.
+
 2002-09-20  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-plugins-engine.c (gedit_plugins_engine_load_dir): 

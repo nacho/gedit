@@ -62,8 +62,6 @@
 #define GEDIT_MAX_PATH_LEN  2048
 #endif
 
-#define DEFAULT_ENCODING "ISO-8859-15"
-
 struct _GeditDocumentPrivate
 {
 	gchar		*uri;
@@ -716,84 +714,21 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 
 	if (file_size > 0)
 	{
-		if (!g_utf8_validate (file_contents, file_size, NULL))
+		gchar *converted_text;
+
+		converted_text = gedit_utils_convert_to_utf8 (file_contents,
+							&doc->priv->encoding);
+
+		if (converted_text == NULL)
 		{
-			/* The file contains invalid UTF8 data */
-			/* Try to convert it to UTF-8 from currence locale */
-			GError *conv_error = NULL;
-			gchar* converted_file_contents = NULL;
-			gsize bytes_written;
-			
-			converted_file_contents = g_locale_to_utf8 (file_contents, file_size,
-					NULL, &bytes_written, &conv_error); 
-						
-			if ((conv_error != NULL) || 
-			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
-			{
-				/* Coversion failed */	
-				if (conv_error != NULL) {
-					g_error_free (conv_error);
-					conv_error = NULL;
-				}
+			/* bail out */
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
+				     GEDIT_ERROR_INVALID_UTF8_DATA,
+				     _("Invalid UTF-8 data"));
 
-				if (converted_file_contents != NULL)
-					g_free (converted_file_contents);
-				
-				/* Try to convert it to UTF-8 from default encoding */
-				converted_file_contents = g_convert (file_contents, file_size, 
-						"UTF-8", DEFAULT_ENCODING,
-						NULL, &bytes_written, &conv_error); 
-							
-				if ((conv_error != NULL) || 
-			    		!g_utf8_validate (converted_file_contents, bytes_written, NULL))		
-				{
-					/* Coversion failed */	
-					if (conv_error != NULL)
-						g_error_free (conv_error);
-
-					g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
-						     GEDIT_ERROR_INVALID_UTF8_DATA,
-					     	     _("Invalid UTF-8 data"));
-				
-					if (converted_file_contents != NULL)
-						g_free (converted_file_contents);
-				
-					g_free (file_contents);
-
-					return FALSE;
-				}
-				else
-				{
-					if (doc->priv->encoding != NULL)
-						g_free (doc->priv->encoding);	
-				
-					doc->priv->encoding = g_strdup (DEFAULT_ENCODING);
-				}
-					
-			}
-			else
-			{
-				const gchar *encoding = NULL;
-				g_get_charset(&encoding);
-				
-				if (doc->priv->encoding != NULL)
-					g_free (doc->priv->encoding);	
-				
-				doc->priv->encoding = g_strdup (encoding);
-			}
-			
 			g_free (file_contents);
 
-			file_contents = converted_file_contents;
-			file_size = bytes_written;
-		}
-		else
-		{
-			if (doc->priv->encoding != NULL)
-			{
-				g_free (doc->priv->encoding);	
-				doc->priv->encoding = NULL;
-			}
+			return FALSE;
 		}
 
 		gedit_debug (DEBUG_DOCUMENT, "Document encoding: %s", 
@@ -802,7 +737,8 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, file_contents, file_size);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, file_size);
+		g_free (converted_text);
 
 		/* We had a newline in the buffer to begin with. (The buffer always contains
    		 * a newline, so we delete to the end of the buffer to clean up. */
@@ -840,97 +776,41 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	return TRUE;
 }
 
-#define GEDIT_STDIN_BUFSIZE 1024
-
 gboolean
 gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 {
-	GString * file_contents;
-	gchar *tmp_buf = NULL;
-	struct stat stats;
-	guint buffer_length;
-
+	gchar *stdin_data;
 	GtkTextIter iter, end;
-	GnomeVFSResult	res;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	
-	fstat (STDIN_FILENO, &stats);
-	
-	if (stats.st_size  == 0)
-		return FALSE;
+	stdin_data = gedit_utils_get_stdin ();
 
-	tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE + 1);
-	g_return_val_if_fail (tmp_buf != NULL, FALSE);
-
-	file_contents = g_string_new (NULL);
-	
-	while (feof (stdin) == 0)
+	if (stdin_data != NULL && strlen (stdin_data) > 0)
 	{
-		buffer_length = fread (tmp_buf, 1, GEDIT_STDIN_BUFSIZE, stdin);
-		tmp_buf [buffer_length] = '\0';
-		g_string_append (file_contents, tmp_buf);
+		gchar *converted_text;
 
-		if (ferror (stdin) != 0)
+		converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+							&doc->priv->encoding);
+
+		if (converted_text == NULL)
 		{
-			res = gnome_vfs_result_from_errno (); 
-		
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, res,
-				gnome_vfs_result_to_string (res));
+			/* bail out */
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR,
+				     GEDIT_ERROR_INVALID_UTF8_DATA,
+				     _("Invalid UTF-8 data"));
 
-			g_free (tmp_buf);
-			g_string_free (file_contents, TRUE);
+			g_free (stdin_data);
+
 			return FALSE;
-		}
-	}
-
-	fclose (stdin);
-
-	if (file_contents->len > 0)
-	{
-		if (!g_utf8_validate (file_contents->str, file_contents->len, NULL))
-		{
-			/* The file contains invalid UTF8 data */
-			/* Try to convert it to UTF-8 from currence locale */
-			GError *conv_error = NULL;
-			gchar* converted_file_contents = NULL;
-			gsize bytes_written;
-			
-			converted_file_contents = g_locale_to_utf8 (file_contents->str, file_contents->len,
-					NULL, &bytes_written, &conv_error); 
-						
-			if ((conv_error != NULL) || 
-			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
-			{
-
-				/* Coversion failed */	
-				if (conv_error != NULL)
-					g_error_free (conv_error);
-
-				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
-					     GEDIT_ERROR_INVALID_UTF8_DATA,
-				     	     _("Invalid UTF-8 data"));
-				
-				if (converted_file_contents != NULL)
-					g_free (converted_file_contents);
-				
-				g_string_free (file_contents, TRUE);
-				
-				return FALSE;
-			}
-
-			g_string_free (file_contents, TRUE);
-
-			/* FIXME: this could be more efficient */
-			file_contents = g_string_new (converted_file_contents);
 		}
 
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, file_contents->str, file_contents->len);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, -1);
 
 		/* We had a newline in the buffer to begin with. (The buffer always contains
    		 * a newline, so we delete to the end of the buffer to clean up. */
@@ -942,9 +822,8 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 
 		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+		g_free (converted_text);
 	}
-
-	g_string_free (file_contents, TRUE);
 
 	gedit_document_set_readonly (doc, FALSE);
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);

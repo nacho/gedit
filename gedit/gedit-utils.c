@@ -47,6 +47,8 @@
 #include "gedit-document.h"
 #include "gedit-debug.h"
 
+#define DEFAULT_ENCODING "ISO-8859-15"
+
 /* =================================================== */
 /* Flash */
 
@@ -1534,4 +1536,148 @@ gedit_utils_create_empty_file (const gchar *uri)
 		return FALSE;
 	
 	return (close (fd) == 0);
+}
+
+
+
+
+#define GEDIT_STDIN_BUFSIZE 1024
+
+gchar *
+gedit_utils_get_stdin (void)
+{
+	GString * file_contents;
+	gchar *tmp_buf = NULL;
+	struct stat stats;
+	guint buffer_length;
+	GnomeVFSResult	res;
+	
+	fstat (STDIN_FILENO, &stats);
+	
+	if (stats.st_size  == 0)
+		return NULL;
+
+	tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE + 1);
+	g_return_val_if_fail (tmp_buf != NULL, FALSE);
+
+	file_contents = g_string_new (NULL);
+	
+	while (feof (stdin) == 0)
+	{
+		buffer_length = fread (tmp_buf, 1, GEDIT_STDIN_BUFSIZE, stdin);
+		tmp_buf [buffer_length] = '\0';
+		g_string_append (file_contents, tmp_buf);
+
+		if (ferror (stdin) != 0)
+		{
+			res = gnome_vfs_result_from_errno (); 
+		
+			g_free (tmp_buf);
+			g_string_free (file_contents, TRUE);
+			return NULL;
+		}
+	}
+
+	fclose (stdin);
+
+	return g_string_free (file_contents, FALSE);
+}
+
+
+
+gchar *
+gedit_utils_convert_to_utf8 (const gchar *content, gchar **encoding)
+{
+	gchar *utf8_content = NULL;
+
+	g_return_val_if_fail (content != NULL, NULL);
+
+	if (strlen (content) > 0)
+	{
+		gedit_debug (DEBUG_UTILS, "Checking to see if input is valid UTF-8");
+
+		if (!g_utf8_validate (content, -1, NULL))
+		{
+			/* The file contains invalid UTF8 data */
+			/* Try to convert it to UTF-8 from currence locale */
+			GError *conv_error = NULL;
+			gchar* converted_contents = NULL;
+			gsize bytes_written;
+
+			gedit_debug (DEBUG_UTILS, "Trying to convert from locale to UTF-8");
+			
+			converted_contents = g_locale_to_utf8 (content, -1,
+					NULL, &bytes_written, &conv_error); 
+						
+			if ((conv_error != NULL) || 
+			    !g_utf8_validate (converted_contents, bytes_written, NULL))		
+			{
+				gedit_debug (DEBUG_UTILS,
+				    "Couldn't convert from locale to UTF-8.");
+				
+				if (converted_contents != NULL)
+					g_free (converted_contents);
+
+				if (conv_error != NULL)
+				{
+					g_error_free (conv_error);
+					conv_error = NULL;
+				}
+				
+				/* try to convert from the default encoding */
+				converted_contents =
+					g_convert (content, strlen (content), 
+						"UTF-8", DEFAULT_ENCODING,
+						NULL, &bytes_written,
+						&conv_error); 
+
+				if ((conv_error != NULL) ||
+				    !g_utf8_validate (converted_contents,
+					    	      bytes_written, NULL))
+				{
+					gedit_debug (DEBUG_UTILS,
+					    "Couldn't convert from %s to UTF-8.", DEFAULT_ENCODING);
+					/* Coversion failed */	
+					if (conv_error != NULL)
+						g_error_free (conv_error);
+
+					if (converted_contents != NULL)
+						g_free (converted_contents);
+				
+					return NULL;
+				}
+				else
+				{
+					gedit_debug (DEBUG_UTILS,
+						"Converted from %s to UTF-8.", DEFAULT_ENCODING);
+					if (encoding != NULL)
+						*encoding = g_strdup (DEFAULT_ENCODING);
+				}
+			}
+			else
+			{
+				/* successfully converted from their locale
+				 * to utf8
+				 */
+				const gchar *charset;
+
+				g_get_charset (&charset);
+
+				if (encoding != NULL)
+					*encoding = g_strdup (charset);
+
+				gedit_debug (DEBUG_UTILS,
+					"Converted from locale to UTF-8.");
+			}
+
+			utf8_content = converted_contents;
+		}
+		else
+		{
+			/* they gave us valid UTF-8 */
+			utf8_content = g_strdup (content);
+		}
+	}
+
+	return utf8_content;
 }

@@ -30,6 +30,8 @@
 
 #include <config.h>
 
+#include <string.h>
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
@@ -71,6 +73,9 @@ static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
 {
+	{ "debug-utils", '\0', POPT_ARG_NONE, &debug_utils, 0,
+	  N_("Show utility debugging messages."), NULL },
+
 	{ "debug-mdi", '\0', POPT_ARG_NONE, &debug_mdi, 0,
 	  N_("Show mdi debugging messages."), NULL },
 
@@ -211,6 +216,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 	CommandLineData *data;
 	GNOME_Gedit_URIList *uri_list;
 	GList *list;
+	gchar *stdin_data;
 	int i;
 	
         CORBA_exception_init (&env);
@@ -218,6 +224,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
         server = bonobo_activation_activate_from_id ("OAFIID:GNOME_Gedit_Application",
                                                      0, NULL, &env);
 	g_return_if_fail (server != NULL);
+
 
 	if (quit_option)
 		GNOME_Gedit_Application_quit (server, &env);
@@ -264,6 +271,24 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 		g_list_foreach (data->file_list, (GFunc)g_free, NULL);
 		g_list_free (data->file_list);
 		g_free (data);
+	}
+
+
+	stdin_data = gedit_utils_get_stdin ();
+	if (stdin_data != NULL)
+	{
+		gchar *converted;
+
+		converted = gedit_utils_convert_to_utf8 (stdin_data, NULL);
+
+		if (converted != NULL)
+		{
+			window = GNOME_Gedit_Application_getActiveWindow (server, &env);
+			document = GNOME_Gedit_Window_newDocument (window, &env);
+
+			GNOME_Gedit_Document_insert (document, 0, converted,
+						     strlen (converted), &env);
+		}
 	}
 
 	if (!quit_option)
