@@ -1210,13 +1210,10 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 	
-	/* FIXME: enable support for case sensitive -- Paolo */
-	/*
 	if (!case_sensitive)
 	{
 		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
 	}
-	*/
 
 	if (from_cursor)
 	{
@@ -1241,7 +1238,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
     	{
       		GtkTextIter match_start, match_end;
 
-          	found = gtk_text_iter_forward_search (&iter, str, search_flags,
+          	found = gedit_text_iter_forward_search (&iter, str, search_flags,
                                         	&match_start, &match_end,
                                                	NULL);
 		if (found)

@@ -211,9 +211,6 @@ dialog_replace_get_dialog (void)
 		return NULL;
 	}
 
-	/* FIXME: remove when we will support case sensitive search */
-	gtk_widget_set_sensitive (dialog->case_sensitive, FALSE);
-
 	gtk_widget_show (dialog->replace_hbox);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
@@ -300,9 +297,6 @@ dialog_find_get_dialog (void)
 		    ("Could not find the required widgets inside replace.glade2.\n");
 		return NULL;
 	}
-	
-	/* FIXME: remove when we will support case sensitive search */
-	gtk_widget_set_sensitive (dialog->case_sensitive, FALSE);
 	
 	gtk_widget_hide (replace_hbox);
 

@@ -1,3 +1,22 @@
+2002-01-15  Paolo Maggi  <maggi@athena.polito.it>
+	
+	* gedit-utils.h (gedit_text_iter_forward_search): new prototype
+
+	* gedit-utils.c (gedit_text_iter_forward_search): new experimental
+	function to perform case insensitice search (beside normal case
+	sensiticv search)
+	(g_utf8_strcasestr): new private function
+	(g_uft8_caselessnmatch): ditto
+	(forward_chars_with_skipping): ditto
+	(lines_match): ditto
+	(strbreakup): ditto
+
+	* gedit-document.c (gedit_document_find): enabled support for
+	case insensitive search. Use the new gedit_text_iter_forward_search
+
+	* dialogs/gedit-dialog-replace.c: enabled support for case insensitive
+	search
+
 2002-01-14  James Willcox <jwillcox@cs.indiana.edu>
 	* dialogs/gedit-dialog-replace.c:  Made one small change
 	in the wording of the search error message.  (The consensus is

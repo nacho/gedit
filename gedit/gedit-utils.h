@@ -34,6 +34,9 @@
 #include <glib.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkdialog.h>
+#include <gtk/gtktextiter.h>
+
+#define GTK_TEXT_SEARCH_CASE_INSENSITIVE (1 << 7)
 
 void	gedit_utils_flash     (gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
@@ -44,6 +47,13 @@ gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
 GtkWidget* gedit_button_new_with_stock_image (const gchar* text, const gchar* stock_id);
 GtkWidget* gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, 
 		const gchar* stock_id, gint response_id);
+
+gboolean gedit_text_iter_forward_search  (const GtkTextIter *iter,
+                                        const gchar       *str,
+                                        GtkTextSearchFlags flags,
+                                        GtkTextIter       *match_start,
+                                        GtkTextIter       *match_end,
+                                        const GtkTextIter *limit);
 
 #endif /* __GEDIT_UTILS_H__ */
 
