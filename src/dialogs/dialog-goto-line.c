@@ -58,9 +58,9 @@ goto_line_clicked_cb (GtkWidget *widget, gint button)
 
 		line = atoi (gtk_entry_get_text (GTK_ENTRY(entry)));
 
-		search_start();
+		gedit_search_start();
 		pos = line_to_pos (doc, line, &lines);
-		search_end();
+		gedit_search_end();
 
 		if (line > lines)
 			line = lines;

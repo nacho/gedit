@@ -78,17 +78,6 @@ corba_exception (CORBA_Environment* ev)
 
 #endif /* HAVE_LIBGNORBA */
 
-void gedit_shutdown (void);
-
-void
-gedit_shutdown (void)
-{
-	gedit_save_settings ();
-	history_write_config ();
-
-	gtk_main_quit ();
-}
-
 int
 main (int argc, char **argv)
 {

@@ -1,3 +1,25 @@
+2000-06-06  Chema Celorio  <chema@celorio.com>
+
+	* search.h: add last_text_searched to the structure and start_pos parameter
+	to find again.
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): save the last text
+	searched for find again.
+
+	* menus.c (gedit_edit_menu): add FIND_AGAIN menu entry
+
+	* file.c (gedit_shutdown): move this function here.
+
+	* gedit.h (gedit_shutdown): delete and remove from repository
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* gedit.h (gedit_shutdown): remove structure from here.
+
+	* search.h: added new prototype
+	* search.c (search_text_not_found_notify): move here
+	(find_again_execute): implement
+
 2000-06-05  Chema Celorio  <chema@celorio.com>
 
 	* search.c (gedit_search_replace_all_execute): done.

@@ -31,7 +31,6 @@
 #include "document.h"
 #include "commands.h"
 #include "prefs.h"
-#include "gedit.h"
 
 enum {
 	CURSOR_MOVED_SIGNAL,
@@ -70,7 +69,7 @@ GtkWidget * gedit_view_new (Document *doc);
        void gedit_view_add_cb (GtkWidget *widget, gpointer data);
        void gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 
-static void line_pos_cb (GtkWidget *widget, gedit_data *data);
+static void line_pos_cb (GtkWidget *widget, gpointer data);
 static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
 static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
 static void gedit_view_class_init (ViewClass *klass);
@@ -686,7 +685,12 @@ gedit_view_set_position (View *view, gint pos)
 guint
 gedit_view_get_position (View *view)
 {
+	guint start_pos, end_pos;
+	
 	gedit_debug ("", DEBUG_VIEW);
+
+	if (gedit_view_get_selection (view, &start_pos, &end_pos))
+		return end_pos;
 	return gtk_text_get_point (GTK_TEXT (view->text));
 }
 
@@ -804,7 +808,7 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 }
 
 static void
-line_pos_cb (GtkWidget *widget, gedit_data *data)
+line_pos_cb (GtkWidget *widget, gpointer data)
 {
 	static char col [32];
 

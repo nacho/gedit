@@ -27,7 +27,18 @@
 
 #include "document.h"
 
-/* we should be able to not expose this functions ...*/
+/*
+typedef struct _gedit_data gedit_data;
+
+struct _gedit_data
+{
+	Window *window;
+	Document *document;
+	gpointer temp1;
+	gpointer temp2;
+	gboolean flag;	general purpose flag to indicate if action completed 
+};*/
+
 gint gedit_file_open (Document *doc, gchar *fname);
 gint gedit_file_stdin (Document *doc);
 gint gedit_file_save (Document *doc, gchar *fname);

@@ -101,23 +101,6 @@ tab_rgt_cb (GtkWidget *widget, gpointer cbwindow)
 	tab_pos (GTK_POS_RIGHT);
 }
 
-/* FIXME: implement it. Chema *
-void
-tab_none_cb(GtkWidget *widget, gpointer cbwindow)
-{
-	w->show_tabs = !w->show_tabs;
-	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(w->notebook), w->show_tabs);
-}*/ 
-
-
-#if 0
-void
-auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata)
-{
-	gedit_window_set_auto_indent (!settings->auto_indent);
-}
-#endif
-
 void
 filenames_dropped (GtkWidget        *widget,
                    GdkDragContext   *context,
@@ -194,24 +177,6 @@ edit_selall_cb (GtkWidget *widget, gpointer data)
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
 }
 
-
-
-#ifdef ENABLE_SPLIT_SCREEN
-void
-options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
-{
-	View *view = VIEW (mdi->active_view);
-
-	if (!gedit_document_current())
-		return;
-
-	if (!view->split_parent)
-		return;
-
-	gedit_view_set_split_screen (view,
-				     !GTK_WIDGET_VISIBLE (view->split_parent));
-}
-#endif
 
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)

@@ -28,7 +28,6 @@
 #include <unistd.h>  /* for gedit_stdin_open () */
 #include <stdio.h>   /* for gedit_stdin_open () */
 
-#include "gedit.h"
 #include "commands.h"
 #include "document.h"
 #include "view.h" 
@@ -36,6 +35,7 @@
 #include "file.h"
 #include "utils.h"
 #include "recent.h"
+#include "window.h"
 
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
@@ -56,9 +56,9 @@ void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
        gint gedit_file_create_popup (guchar *title);
 static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
-static void gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data);
+static void gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
-static void cancel_cb (GtkWidget *w, gpointer data);
+static void cancel_cb (GtkWidget *w, gpointer cbdata);
 
 /* TODO : add flash on all operations ....Chema*/
 /*        what happens when you open the same doc
@@ -431,9 +431,8 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 
 
 static void
-gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
+gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 {
-
 	Document *doc;
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 	gint i;
@@ -524,7 +523,11 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 	else
 		return;
 
-	gedit_shutdown ();
+	gedit_save_settings ();
+	history_write_config ();
+
+	gtk_main_quit ();
+
 }
 
 void

@@ -39,8 +39,6 @@ static void replace_text_destroyed_cb (GtkWidget *widget, gint button);
 static void replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void replace_text_clicked_cb (GtkWidget *widget, gint button);
-static void search_text_not_found_notify (View *view);
-
        void dialog_replace (gint full);
 
 
@@ -48,7 +46,7 @@ static void
 replace_text_destroyed_cb (GtkWidget *widget, gint button)
 {
 	gedit_debug("", DEBUG_SEARCH);
-	search_end();
+	gedit_search_end();
 	widget = NULL;
 }
 
@@ -108,6 +106,28 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	search_text_length   = strlen (text_to_search_for);
 	replace_text_length  = strlen (text_to_replace_with);
 
+	if (gedit_search_info.last_text_searched != NULL)
+		g_free (gedit_search_info.last_text_searched);
+	gedit_search_info.last_text_searched = g_strdup (text_to_search_for);
+	gedit_search_info.last_text_searched_case_sensitive = GTK_TOGGLE_BUTTON (case_sensitive)->active;
+	start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
+
+	switch (start_search_from){
+	case 0:
+		start_pos = 0;
+		break;
+	case 1:
+		if (gedit_view_get_selection (view, &start_pos, &end_pos))
+			start_pos = end_pos;
+		else
+			start_pos = gedit_view_get_position (view);
+		break;
+	default:
+		g_warning ("Invalid start search from value");
+		button = 3; /* Act as if close was clicked */
+		break;
+	}
+		
 	if (button == 3) /* Close */
 		gnome_dialog_close (GNOME_DIALOG (widget));
 	
@@ -125,21 +145,23 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		guchar *msg;
 		guchar *new_buffer = NULL;
 
+		start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
 		replacements = gedit_search_replace_all_execute ( view,
-								text_to_search_for,
-								text_to_replace_with,
-								GTK_TOGGLE_BUTTON (case_sensitive)->active,
-								&new_buffer);
+								  start_pos,
+								  text_to_search_for,
+								  text_to_replace_with,
+								  GTK_TOGGLE_BUTTON (case_sensitive)->active,
+								  &new_buffer);
 
 		if (replacements > 0)
 		{
 			gedit_document_delete_text (view->document, 0, gedit_document_get_buffer_length(view->document), FALSE);
 			gedit_document_insert_text (view->document, new_buffer, 0, FALSE);
-			search_end();
-			search_start();
+			gedit_search_end();
+			gedit_search_start();
 		}
 		g_free (new_buffer);
-
+			
 		gnome_dialog_close (GNOME_DIALOG (widget));
 			
 		msg = g_strdup_printf (_("found and replaced %i ocurrences."),
@@ -169,13 +191,12 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   a selection is not the way to do it !!!. Chema */
 
 		/* Diselect the text and set the point after this occurence*/
-		gedit_view_set_selection (view, 0, 0);
 		gedit_document_delete_text (view->document, start, search_text_length, TRUE);
 		gedit_document_insert_text (view->document, text_to_replace_with, start, TRUE);
 
 		/* We need to reload the buffer since we changed it */
-		search_end();
-		search_start();
+		gedit_search_end();
+		gedit_search_start();
 
 		/* After replacing this occurrence, act as is a Find Next was pressed */
 		button = 0;
@@ -183,24 +204,6 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	
 	if (button == 0) /* Find Next */
 	{
-		start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
-
-		switch (start_search_from){
-		case 0:
-			start_pos = 0;
-			break;
-		case 1:
-			
-			if (gedit_view_get_selection (view, &start_pos, &end_pos))
-				start_pos = end_pos;
-			else
-				start_pos = gedit_view_get_position (view);
-			break;
-		default:
-			g_print("other ...\n");
-			break;
-		}
-
 		eureka = search_text_execute ( start_pos,
 					       GTK_TOGGLE_BUTTON (case_sensitive)->active,
 					       text_to_search_for,
@@ -208,7 +211,6 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 					       &line_found,
 					       &total_lines,
 					       TRUE);
-
 
 		if (!eureka)
 		{
@@ -227,29 +229,6 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		gtk_radio_button_select (GTK_RADIO_BUTTON(radio_button_1)->group, 1);
 	}
-}
-
-static void
-search_text_not_found_notify (View * view)
-{
-	GtkWidget *gnome_dialog;
-	gchar * msg;
-	
-	gedit_flash_va (_("Text not found"));
-
-	if (gedit_view_get_selection (view, NULL, NULL))
-		gedit_view_set_selection (view, 0, 0);
-
-	msg = g_strdup (_("Text not found."));
-	gnome_dialog = gnome_message_box_new (msg,
-					      GNOME_MESSAGE_BOX_INFO,
-					      GNOME_STOCK_BUTTON_OK,
-					      NULL);
-	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
-				 GTK_WINDOW (mdi->active_window));
-	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
-
-	g_free (msg);
 }
 
 void
@@ -328,7 +307,7 @@ dialog_replace (gint full)
 	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "case_sensitive", case_sensitive);
 	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "radio_button_1", radio_button_1);
 
-	search_start();
+	gedit_search_start();
 	
 	gtk_signal_connect (GTK_OBJECT (replace_text_dialog), "clicked",
 			    GTK_SIGNAL_FUNC (replace_text_clicked_cb), replace_text_dialog);

@@ -22,21 +22,36 @@
 #ifndef __SEARCH_H__
 #define __SEARCH_H__
 
+typedef struct _SearchInfo {
+	gint state;
+	gint original_readonly_state;
+	guchar * buffer;
+	gulong buffer_length;
+	View *view;
+	Document *doc;
+	guchar* last_text_searched;
+	gint last_text_searched_case_sensitive;
+} SearchInfo;
+extern SearchInfo gedit_search_info;
+
+
   gint search_verify_document (void);
-  void search_end (void);
-  void search_start (void);
+  void gedit_search_end (void);
+  void gedit_search_start (void);
   void dump_search_state (void);
   void count_lines_cb (GtkWidget *widget, gpointer data);
   void find_cb (GtkWidget *widget, gpointer data);
+  void find_again_cb (GtkWidget *widget, gpointer data);
   void replace_cb (GtkWidget *widget, gpointer data);
   void goto_line_cb (GtkWidget *widget, gpointer data);
   gint pos_to_line (gint pos, gint *numlines);
-gulong line_to_pos (Document *doc, gint line, gint *lines);
+ guint line_to_pos (Document *doc, gint line, gint *lines);
   gint search_text_execute ( gulong starting_position, gint case_sensitive, guchar *text_to_search_for,
 			     guint * pos_found, gint * line_found, gint * total_lines, gint return_the_line_number);
-  gint gedit_search_replace_all_execute ( View *view, guchar *search_text,
+  gint gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_text,
 					  guchar *replace_text, gint case_sensitive,
 					  guchar **new_buffer);
+ void search_text_not_found_notify (View *view);
 
 /* Stopwatch functions */
 void start_time (void);

@@ -22,7 +22,6 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "gedit.h"
 #include "document.h"
 #include "view.h"
 #include "prefs.h"

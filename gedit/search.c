@@ -68,15 +68,6 @@ typedef enum {
 	SEARCH_IN_PROGRESS_COUNT_LINES,
 } gedit_search_states;
 
-typedef struct _SearchInfo {
-	gint state;
-	gint original_readonly_state;
-	guchar * buffer;
-	gulong buffer_length;
-	View *view;
-	Document *doc;
-} SearchInfo;
-
 SearchInfo gedit_search_info;
 
 gint
@@ -93,24 +84,21 @@ search_verify_document (void)
 		return FALSE;
 
 	/* Reload the doc */
-	search_end();
-	search_start();
+	gedit_search_end();
+	gedit_search_start();
 
 	return TRUE;
 	
 }
 
 void
-search_start (void)
+gedit_search_start (void)
 {
 	gedit_debug("", DEBUG_SEARCH);
 
 	gedit_search_info.view = gedit_view_current();
 	gedit_search_info.doc = gedit_document_current();
 	gedit_search_info.original_readonly_state = gedit_search_info.view->readonly;
-#if 0 /* Speed problems when using large files. Chema */
-	gedit_view_set_read_only (gedit_search_info.view, TRUE);
-#endif
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -137,15 +125,9 @@ search_start (void)
 }
 
 void
-search_end (void)
+gedit_search_end (void)
 {
 	gedit_debug("", DEBUG_SEARCH);
-
-#if 0 /* Speed problems when using large files. Chema */
-	if (gedit_view_current() != NULL)
-		gedit_view_set_read_only (gedit_search_info.view,
-					  gedit_search_info.original_readonly_state);
-#endif	
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -213,11 +195,11 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	if (!doc)
 		return;
 
-	search_start();
+	gedit_search_start();
 	line_number = pos_to_line (gedit_view_get_position (gedit_search_info.view),
 				   &total_lines);
 
-	search_end();
+	gedit_search_end();
 
 	msg = g_strdup_printf (_("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"),
 			       doc->filename, total_lines, line_number);
@@ -236,6 +218,85 @@ find_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug ("", DEBUG_SEARCH);
 	dialog_replace (FALSE);
+}
+
+void
+search_text_not_found_notify (View * view)
+{
+	GtkWidget *gnome_dialog;
+	gchar * msg;
+	
+	gedit_flash_va (_("Text not found"));
+
+	if (gedit_view_get_selection (view, NULL, NULL))
+		gedit_view_set_selection (view, 0, 0);
+
+	msg = g_strdup (_("Text not found."));
+	gnome_dialog = gnome_message_box_new (msg,
+					      GNOME_MESSAGE_BOX_INFO,
+					      GNOME_STOCK_BUTTON_OK,
+					      NULL);
+	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
+				 GTK_WINDOW (mdi->active_window));
+	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
+
+	g_free (msg);
+}
+
+
+static void
+find_again_execute (void)
+{
+	guint start_pos, pos_found, line_found, total_lines;
+	gint eureka;
+	guchar *text;
+	gint search_text_length;
+	View *view;
+	gint case_sensitive;
+
+
+	view = gedit_view_current();
+	if (view == NULL)
+		return;
+	text = gedit_search_info.last_text_searched;
+	if (text == NULL)
+	{
+		gedit_flash_va (_("Can't find again. There is not a text string to search for."),line_found);
+		return;
+	}
+	case_sensitive = gedit_search_info.last_text_searched_case_sensitive;
+
+	start_pos = gedit_view_get_position (view);
+	search_text_length = strlen (text);
+	gedit_search_start();
+	eureka = search_text_execute ( start_pos,
+				       case_sensitive,
+				       text,
+				       &pos_found,
+				       &line_found,
+				       &total_lines,
+				       TRUE);
+	gedit_search_end();
+	if (!eureka)
+	{
+		search_text_not_found_notify (view);
+		return;
+	}
+
+	gedit_flash_va (_("Text found at line :%i"),line_found);
+	gedit_view_set_window_position_from_lines (view, line_found, total_lines);
+		
+	gtk_text_set_point (GTK_TEXT(view->text), pos_found+1);
+	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
+	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+	gtk_editable_select_region (GTK_EDITABLE(view->text), pos_found+1, pos_found+1+search_text_length);
+}
+
+void
+find_again_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug ("", DEBUG_SEARCH);
+	find_again_execute ();
 }
 
 void
@@ -330,11 +391,11 @@ pos_to_line (gint pos, gint *numlines)
 	return current_line;
 }
 
-gulong
+guint
 line_to_pos (Document *doc, gint line, gint *lines)
 {
 	gint current_line = 0, i;
-	gulong pos;
+	guint pos;
 	
 	gedit_debug ("", DEBUG_SEARCH);
 
@@ -363,12 +424,12 @@ line_to_pos (Document *doc, gint line, gint *lines)
 #define GEDIT_EXTRA_REPLACEMENTS 20
 
 gint
-gedit_search_replace_all_execute ( View *view, guchar *search_text,
+gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_text,
 				   guchar *replace_text, gint case_sensitive,
 				   guchar **buffer)
 {
 	guchar * buffer_in;
-	guchar * buffer_out = *buffer;
+	guchar * buffer_out;
 	guint buffer_in_length;
 	guint buffer_out_length;
 	gint search_text_length;
@@ -381,7 +442,6 @@ gedit_search_replace_all_execute ( View *view, guchar *search_text,
 	   p3 = pointer to the index in search_text
 	   p4 = pointer to the index in replace_text */
 	gint case_sensitive_mask;
-	gint dump_info = TRUE;
 
 	gedit_debug ("", DEBUG_SEARCH);
 
@@ -422,6 +482,11 @@ gedit_search_replace_all_execute ( View *view, guchar *search_text,
 
 	case_sensitive_mask = case_sensitive?0:32;
 
+	while (p1 < start_pos)
+	{
+		buffer_out [p2++] = buffer_in [p1++];
+	}
+
 	/* Do the actual replace all */
 	while (p1 < buffer_in_length)
 	{
@@ -457,3 +522,5 @@ gedit_search_replace_all_execute ( View *view, guchar *search_text,
 
 	return replacements;
 }
+
+

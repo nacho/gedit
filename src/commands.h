@@ -45,7 +45,6 @@ void tab_toggle_cb (GtkWidget *widget, gpointer cbwindow);
 void auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata);
 #endif
 
-
 /* DND */
 void filenames_dropped (GtkWidget * widget,
 			       GdkDragContext   *context,

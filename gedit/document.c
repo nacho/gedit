@@ -25,16 +25,11 @@
 #include "window.h"
 #include "undo.h"
 #include "file.h"
-#include "search.h"
-#include "print.h"
-#include "menus.h"
 #include "utils.h"
-
-#include "prefs.h"
-#include "view.h"
-#include "commands.h"
 #include "document.h"
-
+#include "prefs.h"
+#include "menus.h"
+#include "commands.h"
 
 GnomeMDI *mdi;
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
