@@ -638,7 +638,7 @@ gedit_document_set_title (Document *doc)
 	if (doc->filename == NULL)
 		docname = g_strdup_printf ("Untitled %i", doc->untitled_number);
 	else
-		docname = g_basename (doc->filename);
+		docname = g_strdup (g_basename (doc->filename));
 		
 	if (doc->changed)
 		title = g_strdup_printf ("gedit: %s %s", docname, _("(modified)"));
@@ -649,6 +649,7 @@ gedit_document_set_title (Document *doc)
 
 	gtk_window_set_title (gedit_window_active(), title);
 
+	g_free (docname);
 	g_free (title);
 }
 

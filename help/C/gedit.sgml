@@ -1,25 +1,15 @@
 <!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
-        <!-- if not using PNG graphic, replace reference above with
-             .....PUBLIC "-//OASIS//DTD DocBook V3.1//EN"[
-         -->
-<!ENTITY version "0.7.9">
-        <!-- replace with actual application version number-->
+<!ENTITY version "0.8.0">
 ]>
 
-<!-- =============Document Header ============================= -->
+<article id="index">
 
-<article id="index"> <!-- please do not change the id -->
-
- <artheader>
+  <artheader>
   <title>gedit</title>
+
   <copyright>
-   <year>1998</year>
-   <year>1999</year>
    <year>2000</year>
-   <holder>Jason Leach, </holder>
-   <holder>Chema Celorio, </holder>
-   <holder>Alex Roberts and </holder>
-   <holder>Evan Lawrence </holder>
+   <holder>Eric Baudais</holder>
   </copyright>
 
   <!-- translators: uncomment this:
@@ -30,9 +20,6 @@
   </copyright>
 
    -->
-
-  <!-- do not put authorname in the header except in copyright - use
-  section "authors" below -->
 
   <legalnotice>
    <para>
@@ -47,950 +34,1536 @@
     Free Software Foundation, Inc., 59 Temple Place - Suite 330,
     Boston, MA 02111-1307, USA.
    </para>
-
-   <!-- please remove any of the trademarks below which you are -->
-   <!-- not using, and add new ones if necessary -->
-
-<!--   <para>
-    UNIX is a trademark of X/Open Group.
-   </para> -->
    <para>
-    Linux is a trademark of Linus Torvalds.
-   </para>
-<!--
-   <para>
-    X Window System is a trademark of X Consortium, Inc.
-   </para> -->
-<!--   <para>
-    Red Hat and RPM are  trademarks of Red Hat, Inc.
-   </para> -->
-<!--
-   <para>
-    Windows is a trademark of Microsoft Corp.
-   </para> -->
-<!--   <para>
-    Macintosh and Apple are trademarks of Apple Computer, Inc.
-   </para> -->
-   <para>
-    All other trademarks are property of their respective owners.
+    Many of the names used by companies to distinguish their products and
+    services are claimed as trademarks. Where those names appear in any
+    GNOME documentation, and those trademarks are made aware to the members
+    of the GNOME Documentation Project, the names have been printed in caps
+    or initial caps.
    </para>
   </legalnotice>
 
   <!-- this is version of manual, not application --> 
-<!--
   <releaseinfo>
-  This is version 1.0 of MY-GNOME-APP manual.
+  This is version 0.1 of the gedit manual.
   </releaseinfo>
--->
- </artheader>
 
- <!-- ============= Document Body ============================= -->
+  </artheader>
 
- <!-- ============= Introduction ============================== -->
- <sect1 id="intro">
-  <title>Introduction</title>
+  <sect1 id="intro">
+    <title>Introduction</title>
 
-  <para>
-   <application>gedit</application> is a basic text editor that also
-   allows you to perform most functions associated with text editing
-   such as copying, pasting, and searching through a document. gedit
-   also supports a <link linkend="sect.plugins">plugin</link> architecture.
-   gedit allows you to open multiple documents at a time and has a
-   handy tabbed interface for switching between documents. gedit,
-   like many other text editors, works with ASCII files and offers no
-   text formatting commands.
-  </para>
-
-  <para>
-   To find more information about <application>gedit</application>,
-   please visit the <ulink url="http://gedit.sourceforge.net"
-   type="http">gedit web page</ulink>.  
-  </para>
-    
-  <para>
-   To run <application>gedit</application>, select
-   <guimenuitem>gedit</guimenuitem> from the <guimenu>Applications
-   </guimenu> menu, or type <command>gedit</command> on the command
-    line. 
-  </para>
-
-  <para>
-   <application>gedit</application> is included in the
-   <filename>gedit</filename> package, which is part of the
-   GNOME desktop environment. This document describes version
-   &version; of <application>gedit</application>.
-  </para>
-
- </sect1>
-
-
- <!-- ================ Usage ================================ -->
- <!-- This section should describe basic usage of the application. -->
-
- <sect1 id="usage">
-  <title>Using gedit</title>
-  <para>
-   <application>gedit</application> is a text editor for the GNOME
-   desktop environment. It currently supports creation, opening,
-   closing, and saving of multiple files,  search  and replace,  an
-   options  interface, loading of files via the command line among
-   other uses.
-
-  </para>
-
-  <!-- ========= Basic Usage =========================== -->
-  <sect2 id="mainwin">
-   <title>Basic usage</title>
-   <para>
-    Starting <application>gedit</application> opens 
-    the <interface>Main window</interface>, shown in <xref
-    linkend="mainwindow-fig">.
-
-    <!-- ==== Figure ==== -->
-    <figure id="mainwindow-fig">
-     <title>gedit Main Window</title>
-     <screenshot>
-      <screeninfo>gedit Main Window</screeninfo>
-      <graphic fileref="figures/mainwin" format="png"
-       srccredit="dkw">
-      </graphic>
-     </screenshot>
-    </figure>
-    <!-- ==== End of Figure ==== -->
-   </para>
-
-   <!-- You might want to include a note, warning, or tip, e.g. -->
-<!-- 
-   <warning>
-    <title>WARNING</title>
     <para>
-     MY-GNOME-APP cannot prove incorrect theorems.
+      <application>Gedit</application> is a light-weight text editor.  It has 
+      all the basic features you come to expect from a simple text editor, but 
+      <application>gedit</application> has a native graphic user interface (GUI).  
+      <application>Gedit</application> also has commandline arguments available to 
+      users to quickly and easily view and edit files from a <systemitem>terminal</systemitem>.  
+      Overall, <application>gedit</application> is an easy to use text editor while 
+      utilizing the powerful capabilities the <systemitem>GNOME desktop</systemitem> 
+      provides.
     </para>
-   </warning>
--->
-  </sect2>
 
+    <para>
+      <application>Gedit</application> has a verastile plug-in architecture to extend its
+      capablilties.  This allows you to perform functions, you don't normally except from a text 
+      editor, like outputing a shell command to the screen.  The plug-in architecture also lets you email people, 
+      browse the internet, or produce a <command>diff</command> from <application>gedit</application>.
+    </para>
 
-  <!-- This section should also describe main elements of graphic user
-       interface, such as menus and buttons, unless this description
-       is too long - in that case, it should be moved to a separate
-       section. For example -->
+    <para>
+      <application>Gedit</application> provides a variety of ways to accomplish all your 
+      text editing needs.  <application>Gedit</application> has the traditional menu, 
+      with all the commands, tools, and options.  It also has a toolbar, where the commands 
+      you use most often will be found.  You can also place the menu and the toolbar anywhere on 
+      the desktop you choose, for quick access.  <application>Gedit</application> also has 
+      a menu in the <interface>text window</interface>.  You need to click the right mouse button 
+      to access the menu.  Inside you'll see the common editing commands you use the most.  
+      <application>Gedit</application> provides a <interface>menu</interface>, 
+      <interface>toolbar</interface>, and <interface>right click menu</interface> in order to 
+      give you the quickest and easiest access to <application>gedit's</application> commands.
+    </para>
+    
+    <para>
+      To run <application>gedit</application>, select 
+      <guimenuitem>gedit</guimenuitem> from the
+      <guisubmenu>Applications</guisubmenu> submenu of the <guimenu>Main
+      Menu</guimenu>, or type <command>gedit</command> on the
+      command line. 
+    </para>
+    
+    <para>
+      <application>Gedit</application> is a basic application of the
+      GNOME desktop environment. This document describes version
+      &version; of <application>gedit</application>.
+    </para>
+  </sect1>
 
+  <sect1 id="usage">
+    <title>Using gedit</title>
 
-  <!-- ========= Menus =========================== -->
-  <sect2 id="menubar">
-   <title>Menus</title>
-   <para>
-    The menu bar, located at the top of the <interface>Main
-    Window</interface>, contains the following menus:
-   </para>
+    <para>
+      A text editor is essential to everything you want to accomplish 
+      in your Linux environment.  Whether it's looking at logs to find 
+      a problem with a program or editing a configuration file like 
+      <filename>.bash_profile</filename> to writing a script in perl or 
+      composing a webpage, <application>gedit</application> will fill your 
+      need.  Another useful feature is <application>gedit's</application> 
+      <link linkend="plugins">plug-ins</link>.  They extend the functionality 
+      of the basic text editor.
+    </para>
 
-   <variablelist>
+    <para>
+      Starting <application>gedit</application> opens 
+      the <interface>Main window</interface>.
 
-    <varlistentry>
-     <term><guimenu><accel>F</accel>ile</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
+      <figure id="mainwindow-fig">
+	<title>gedit Main Window</title>
+	<screenshot>
+	  <screeninfo>gedit Main Window</screeninfo>
+	  <graphic fileref="figures/gedit" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
 
-        <listitem>
-         <anchor id="menu.new">
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>N</accel>ew</guimenuitem>
-          </menuchoice>
-          &mdash; Creates a new file.
-         </para>
-        </listitem>
+      From here you see the <link linkend="menubar">menu bar</link> 
+      which has all the options and tools for <application>gedit</application>.  
+      You also see the toolbar with all 
+      the basic commands you will probably use the most in 
+      <application>gedit</application>.  If you right-click on the text window, 
+      under the toolbar, a <link linkend="pop-up-menu">pop-up menu</link> 
+      will appear displaying some common editing and file commands.
+    </para>
 
-        <listitem>
-         <anchor id="menu.open">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>F3</keysym></shortcut>
-           <guimenuitem><accel>O</accel>pen</guimenuitem>
-          </menuchoice>
-          &mdash; Opens an existing file.
-         </para>
-        </listitem>
+    <para>
+      The <link linkend="plugins">plug-ins</link> for 
+      <application>gedit</application> are still developing,
+      so except to see more in future versions.  <application>Gedit</application> 
+      has plug-ins so you can send a quick email to a friend, lookup a 
+      webpage if you need help with your work, or produce a file that tells 
+      the difference between two other files, using the <command>diff</command> command.  
+      The shell output plugin inserts the output of any shell command into 
+      <application>gedit</application>.  <application>Gedit's</application> 
+      plug-ins will let you insert the current time in your document, as it 
+      appears in <command>date</command>, insert the phrase <quote>Hello World</quote>
+      in your current document, reverse the letters in the current document 
+      you're editing, or convert a decimal number to either a hexidecimal 
+      or octal number
+      <footnote>
+	<para>
+	  Decimal, hexidecimal, and octal numbers are number with a different base.  
+	  A decimal number has a base of 10, these are numbers you see everyday, 
+	  hexidecimal number has a base of 16, and octal numbers have a base of 8.  
+	  So, a decimal number of 45 would be 2D in hexidecimal, and 55 in octal.
+	</para>
+      </footnote>
+      and back again.
+    </para>
 
-        <listitem>
-         <anchor id="menu.save">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-s</keysym></shortcut>
-           <guimenuitem><accel>S</accel>ave</guimenuitem>
-          </menuchoice>
-          &mdash; Saves the current file. If the file has already
-          been named, saves with the existing name. If not, acts
-          as Save As.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Save All</guimenuitem>
-          </menuchoice>
-          &mdash; Saves all open documents.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Save <accel>A</accel>s...</guimenuitem>
-          </menuchoice>
-          &mdash; Saves the current file and prompts for the name
-          and location to save the file in.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>R</accel>evert</guimenuitem>
-          </menuchoice>
-          &mdash; Reverts the current document back to its last
-          saved state.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Recent file list</guimenuitem>
-          </menuchoice>
-          &mdash; Shows the last three files opened.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.print">
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>P</accel>rint</guimenuitem>
-          </menuchoice>
-          &mdash; Prints the current file.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Print preview...</guimenuitem>
-          </menuchoice>
-          &mdash; Displays a preview of the printed document.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.close">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-w</keysym></shortcut>
-           <guimenuitem><accel>C</accel>lose</guimenuitem>
-          </menuchoice>
-          &mdash; Closes the current file. If the file has been
-          changed, promts to save the file.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Close All</guimenuitem>
-          </menuchoice>
-          &mdash; Closes all open files. Promts to save changed
-          files.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.exit">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-q</keysym></shortcut>
-           <guimenuitem>E<accel>x</accel>it</guimenuitem>
-          </menuchoice>
-          &mdash; Exits gedit, and closes all open files. Promts
-          to save changed files.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu><accel>E</accel>dit</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
-
-        <listitem>
-         <anchor id="menu.undo">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-z</keysym></shortcut>
-           <guimenuitem><accel>U</accel>ndo</guimenuitem>
-          </menuchoice>
-          &mdash; Undoes the last change made.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.redo">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-r</keysym></shortcut>
-           <guimenuitem><accel>R</accel>edo</guimenuitem>
-          </menuchoice>
-          &mdash; Reapplies the last <guimenuitem>Undo</guimenuitem>.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.cut">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-x</keysym></shortcut>
-           <guimenuitem>C<accel>u</accel>t</guimenuitem>
-          </menuchoice>
-          &mdash; Cut moves the selected text to a temporary
-          location where it can then be place in another location
-          or locations.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.copy">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-c</keysym></shortcut>
-           <guimenuitem><accel>C</accel>opy</guimenuitem>
-          </menuchoice>
-          &mdash; Copies the selected text to a temporary
-          location where it can then be placed in another
-          location or locations.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.paste">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>Ctrl-v</keysym></shortcut>
-           <guimenuitem><accel>P</accel>aste</guimenuitem>
-          </menuchoice>
-          &mdash; Places cut or copied text at the current
-          location.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>S</accel>elect All</guimenuitem>
-          </menuchoice>
-          &mdash; Selects all text in the current document.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.find">
-         <para>
-          <menuchoice>
-           <shortcut><keysym>F6</keysym></shortcut>
-           <guimenuitem><accel>F</accel>ind...</guimenuitem>
-          </menuchoice>
-          &mdash; Searches for text.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <shortcut><keysym>F7</keysym></shortcut>
-           <guimenuitem><accel>R</accel>eplace...</guimenuitem>
-          </menuchoice>
-          &mdash; Replaces text with alternate text.
-         </para>
-        </listitem>
-
-        <listitem>
-         <anchor id="menu.gotoline">
-         <para>
-          <menuchoice>
-           <guimenuitem>Goto <accel>L</accel>ine</guimenuitem>
-          </menuchoice>
-          &mdash; Moves to the specified line.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu><accel>V</accel>iew</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>A</accel>dd View</guimenuitem>
-          </menuchoice>
-          &mdash; Unknown.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>R</accel>emove View</guimenuitem>
-          </menuchoice>
-          &mdash; Unknown.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu><accel>P</accel>lugins</guimenu></term>
-     <listitem>
-      <para>
-       See the <link linkend="sect.plugins">plugins</link> page.
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu><accel>S</accel>ettings</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Show Statusbar</guimenuitem>
-          </menuchoice>
-          &mdash; When selected, enables the status bar at the
-          bottom of the window.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>P</accel>references</guimenuitem>
-          </menuchoice>
-          &mdash; Displays the <link linkend="preferences">
-          preferences</link> window.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu>Fi<accel>l</accel>es</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Document list</guimenuitem>
-          </menuchoice>
-          &mdash; Displays a list of the currently open
-          documents.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry>
-     <term><guimenu><accel>H</accel>elp</guimenu></term>
-     <listitem>
-      <para>
-       This menu contains:
-       <itemizedlist>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem>Help</guimenuitem>
-          </menuchoice>
-          &mdash; Displays this documentation within a browser.
-         </para>
-        </listitem>
-
-        <listitem>
-         <para>
-          <menuchoice>
-           <guimenuitem><accel>A</accel>bout</guimenuitem>
-          </menuchoice>
-          &mdash; Display basic information about gedit.
-         </para>
-        </listitem>
-
-       </itemizedlist>
-      </para>
-     </listitem>
-    </varlistentry>
-
-   </variablelist>
-  </sect2>
-
- <!-- ============= Toolbar ============================= -->
-  <sect2 id="toolbar">
-   <title>Toolbar</title>
-   <para>
-    The toolbar, located at the top of the <interface>Main
-    Window</interface>, contains the following items:
-   </para>
-
-    <!-- ==== Figure ==== -->
-    <figure id="toolbar-fig">
-     <title>gedit Toolbar</title>
-     <screenshot>
-      <screeninfo>gedit Toolbar</screeninfo>
-      <graphic fileref="figures/toolbar" format="png"
-       srccredit="dkw">
-      </graphic>
-     </screenshot>
-    </figure>
-    <!-- ==== End of Figure ==== -->
-
-   <para>
-    The toolbar provides a convenient way to access common
-    functions. Except where specified below, each operation
-    is identical to its corresponding menu item.
-    <itemizedlist>
-     <listitem>
-      <para>
-       <link linkend="menu.new">New</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.open">Open</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.save">Save</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.close">Close</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.print">Print</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.undo">Undo</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.redo">Redo</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.cut">Cut</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.copy">Copy</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.paste">Paste</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.find">Find</link>.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       Displays the total number of lines and the current line
-       number of the active document.
-      </para>
-     </listitem>
-     <listitem>
-      <para>
-       <link linkend="menu.exit">Exit</link>.
-      </para>
-     </listitem>
-    </itemizedlist>
-   </para>
+    <sect2 id="usage-commandline">
+      <title>Using gedit from the Commandline</title>
       
-  </sect2>
- </sect1>
+      <para>
+	<application>Gedit</application> can also be started from the commandline, 
+	by typing <command>gedit</command> with the name of the file you want to 
+	edit.  This will open a new <interface>Main Window</interface> of 
+	<application>gedit</application> with the file you typed in the commandline.
+	You can also open multiple files in <application>gedit</application> from 
+	the commandline.  You type <command>gedit</command> with each file's 
+	name, separated by a space, after the command <command>gedit</command>.  
+	So, to open the three files <filename>file1.txt</filename>, 
+	<filename>file2.txt</filename>, and <filename>file3.txt</filename>, you 
+	need to type <command>gedit</command> <filename>file1.txt</filename>, 
+	<filename>file2.txt</filename> <filename>file3.txt</filename> in a terminal 
+	and <application>gedit</application> will open the three file listed above.  
+	This feature is very handy to quickly edit a configuration file or script 
+	while you are using your favorite shell.
+	<note>
+	  <para>
+	    If you open a file using <application>gedit</application> from a 
+	    <systemitem>X terminal</systemitem> and then kill the 
+	    <systemitem>X terminal</systemitem>, the <application>gedit</application> 
+	    you opened will also be killed.  This happens because 
+	    <application>gedit</application> is a child process of the 
+	    <systemitem>X terminal</systemitem>, the parent process.  In the 
+	    Unix environment if you kill the parent process, all the child processes 
+	    that are spawned by the parent process are killed.  Killing all the 
+	    <quote>children</quote> of the parent process is very useful in 
+	    a Unix environment.  It's really okay if you don't understand the above 
+	    explanation.  Just remember if you open gedit in a 
+	    <systemitem>X terminal</systemitem> and kill the <systemitem>X terminal</systemitem>, 
+	    <application>gedit</application> will also be killed.
+	  </para>
+	</note>
+      </para>
 
- <!-- ============= Customization ============================= -->
- <sect1 id="prefs">
-  <title>Customization</title>
-  <anchor id="preferences">
-  <para>
-   To change the application settings, select
-   <guimenuitem>Preferences&hellip;</guimenuitem> from the
-   <guimenu>Settings</guimenu> menu. This opens the
-   <interface>Preferences</interface> dialog, shown in <xref
-   linkend="preferences-fig">.
-  </para>
+      <para>
+	<application>Gedit</application> also has support for pipes when you use it 
+	in a <systemitem>console</systemitem> or <systemitem>X terminal</systemitem>.  
+	When you use a pipe with <application>gedit</application>, on the commandline, 
+	<application>Gedit</application> is opened and the output of the other 
+	command that is piped to <application>gedit</application> is displayed as 
+	a text file in <application>gedit's</application> <interface>Main Window</interface>.
+	For example if you want to display a listing of what files are in a specific 
+	directory using the <command>ls</command> command, you will type <command>ls</command> 
+	<command>|</command> <command>gedit</command>.  The output of <command>ls</command>, 
+	that is normally displayed on the <systemitem>console</systemitem> or 
+	<systemitem>X terminal</systemitem> will be displayed in 
+	<application>gedit</application> as a new text file.  This option is very useful 
+	for commands that display their output too fast or if you want to use the output 
+	in a text file.
+      </para>
+    </sect2>
+<!--  ***FIXME: Need to write something about the toolbar?***  -->
+<!--    <sect2 id="toolbar">
+      <title>Toolbar</title>
+      <para>
+      <figure id="toolbar-fig">
+	<title>gedit Toolbar</title>
+	<screenshot>
+	  <screeninfo>gedit toolbar</screeninfo>
+	  <graphic fileref="figures/toolbar" format="png"
+		   srccredit="dkw">
+	  </graphic>
+	</screenshot>
+      </figure>
+      </para>
+    </sect2>
+-->
+  </sect1>
 
-  <figure id="preferences-fig">
-   <title>Preferences Dialog</title>
-   <screenshot>
-    <screeninfo>Preferences dialog</screeninfo>
-    <graphic fileref="figures/preferences" format="png"
-     srccredit="dkw">
-    </graphic>
-   </screenshot>
-  </figure>
+  <sect1 id="plugins">
+    <title>Plug-ins</title>
 
-  <para>
-   The properties in the <guilabel>General</guilabel> tab are:
-   <itemizedlist>
+    <para>
+      There are many plugins that come with <application>gedit</application>.  They are meant 
+      to extend and enhance the abilities of <application>gedit</application>.  The plugins are 
+      separate from the main program and thus supplement <application>gedit</application> while 
+      only adding the capabilities and size to <application>gedit</application> that you want.
+    </para>
 
-    <listitem>
-     <para>
-      Show Statusbar &mdash; If this button is
-      checked, then a status bar is displayed at the
-      bottom of the window.
-     </para>
-    </listitem>
+    <para>
+      The plugins provide a variety of extended capabilities to <application>gedit</application> which are:
+    </para>
 
-    <listitem>
-     <para>
-      Show splitscreen &mdash; Selecting this allows you to split
-      the active document into two parts. Drag the tab button up to
-      see the 2nd splitscreen.
-     </para>
-    </listitem>
+    <sect2 id="browse">
+      <title>The Browse Plugin</title>
 
-    <listitem>
-     <anchor id="selection.wrap">    
-     <para>
-      Enable Wordwrap &mdash; If this option is active and the end
-      of line is reached while typing a word, the word will be moved
-      to the next line.
-     </para>
-    </listitem>
+      <figure id="browse-fig">
+	<title>Browse Plugin</title>
+	<screenshot>
+	  <screeninfo>browse plugin</screeninfo>
+	  <graphic fileref="figures/browse" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
 
-   </itemizedlist>
-  </para>
+      <para>
+	The <guimenuitem>browse</guimenuitem> plugin has a text window to enter the url of the webpage 
+	you want to visit.  When you enter the url, <application>gedit</application> displays the 
+	webpage in the <systemitem>main window</systemitem>.
+      </para>
+    </sect2>
 
-  <para>
-   The properties in the <guilabel>Documents</guilabel> tab are:
-   <itemizedlist>
+    <sect2 id="diff">
+      <title>The Diff Plugin</title>
 
-    <listitem>
-     <para>
-      Mode &mdash; Selecting <option>Notebook</option> will display
-      a tap for each open document. The location of the tap is
-      determined by the <option>Notebook Tap Position</option>
-      selection below. Selecting <option>Top Level</option> will
-      diplay a separate window for each open document. Selecting
-      <option>Modal</option> or <option>Default</option> will
-      do neither. Access to each document is available through the
-      <guimenu>Files</guimenu> menu.
-     </para>
-    </listitem>
+      <figure id="diff-fig">
+	<title>Diff Plugin</title>
+	<screenshot>
+	  <screeninfo>diff plugin</screeninfo>
+	  <graphic fileref="figures/diff" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
 
-    <listitem>
-     <para>
-      Notebook Tab Position &mdash; Selecting one of <option>
-      Left</option>, <option>Right</option>, <option>Top</option>
-      or <option>Bottom</option> will place the notebook tab on
-      the specified side of the window, if Mode <option>Notebook
-      </option> is selected above.
-     </para>
-    </listitem>
+      <para>
+	The <guimenuitem>diff</guimenuitem> plugin has two text windows.  You enter the original file in 
+	the first text window (the one on the left).  You then enter the revised file in the second text 
+	window (the one on the right).  The difference of the files will then be seen in the 
+	<systemitem>Main Window</systemitem>.
 
-   </itemizedlist>
-  </para>
+	<note>
+	  <para>
+	    <application>Gedit</application> runs the <command>diff</command> command on the two files 
+	    you enter in the dialog.  The output is then displayed in <application>gedit's</application> 
+	    <systemitem>Main Window</systemitem>.  If the first file entered is <filename>file1.txt</filename> 
+	    and the second file entered is <filename>file2.txt</filename>, then the gedit will display the 
+	    output of the command <prompt>$</prompt><command>diff</command> <filename>file1.txt</filename> 
+	    <filename>file2.txt</filename>.
+	  </para>
+	</note>
+      </para>
+    </sect2>
 
-  <para>
-   The properties in the <guilabel>Fonts/Colors</guilabel> tab are:
-   <itemizedlist>
+    <sect2 id="email">
+      <title>The Email Plugin</title>
 
-    <listitem>
-     <para>
-      Default Font &mdash; Clicking the <guibutton>Default Font
-      </guibutton> button displays a font selection dialog which
-      allows you to select the default font for <application>
-      gedit</application>. Please note that individual characters
-      or lines cannot have a different font. This select applies
-      to all documents.
-     </para>
-    </listitem>
+      <figure id="email-fig">
+	<title>Email Plugin</title>
+	<screenshot>
+	  <screeninfo>email plugin</screeninfo>
+	  <graphic fileref="figures/email" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
 
-    <listitem>
-     <para>
-      Background &mdash; Clicking the <guibutton>Background
-      </guibutton> button displays a color selection dialog which
-      allows you to select the default background color.
-     </para>
-    </listitem>
+      <para>
+	The <guimenuitem>email</guimenuitem> plugin lets you send the text file you are editing as the body of 
+	the email.  The subject will automatically be the filename, but can be changed in the dialog.  
+	The <guilabel>From:</guilabel> text window will automatically have the email address provided by 
+	your system.  You can also change it, if you wish the receiving party to send a reply to a different 
+	email address.  You need to enter the receiver's email address in the <guilabel>To:</guilabel> 
+	text window.  If your typical Mail Transfer Agent (MTA) is not the one displayed at the bottom 
+	of the dialog, you can change it by clicking the <guibutton>Change</guibutton> button.
+	<figure id="mta-fig">
+	  <title>Change MTA</title>
+	  <screenshot>
+	    <screeninfo>change mta</screeninfo>
+	    <graphic fileref="figures/mta" format="png"
+		   srccredit="Eric Baudais">
+	    </graphic>
+	  </screenshot>
+	</figure>
+	You then need to enter the correct MTA for your system in the text window or click the 
+	<guibutton>Browse</guibutton> button to find the MTA on your system.
+	After you have all the correct fields filled in, press the <guibutton>OK</guibutton> to send 
+	the email or press the <guibutton>Cancel</guibutton> to not send the email.
+      </para>
+    </sect2>
 
-    <listitem>
-     <para>
-      Foreground &mdash; Clicking the <guibutton>Foreground
-      </guibutton> button displays a color selection dialog which
-      allows you to select the default foreground color.
-     </para>
-    </listitem>
+    <sect2 id="time">
+      <title>The Insert Time Plugin</title>
 
-   </itemizedlist>
-  </para>
+      <para>
+	The <guimenuitem>insert time</guimenuitem> plugin puts the date and time into the document.  It 
+	uses the <command>date</command> command and inserts the output into the text.
+      </para>
+    </sect2>
 
-  <para>
-   The properties in the <guilabel>Printing</guilabel> tab are:
-   <itemizedlist>
+    <sect2 id="hello">
+      <title>The Hello World Plugin</title>
 
-    <listitem>
-     <para>
-      Add header &mdash; If this button is checked, a header is
-      included with the printed document.
-     </para>
-    </listitem>
+      <para>
+	The <guimenuitem>hello world</guimenuitem> plugin puts the text <quote>Hello World</quote> into 
+	the document.  It is meant to be a template for all the other plugins.  If you are interested in 
+	writing a plugin for <application>gedit</application>, take a look at the source code for the 
+	<guimenuitem>hello world</guimenuitem> plugin and contact the <link linkend="authors">maintainers</link>
+	, so your work isn't duplicated.
+      </para>
+    </sect2>
+<!--
+    <sect2 id="reverse">
+      <title>The Reverse Plugin</title>
 
-    <listitem>
-     <para>
-      Enable word wrapping &mdash; If this button is checked,
-      <link linkend="selection.wrap">word wrapping</link> is
-      enabled in the printed document
-     </para>
-    </listitem>
+      <para>
+	This plugin is still in development.  Write about it when it is done.
+      </para>
+    </sect2>-->
 
-    <listitem>
-     <para>
-      Print line numbers every N line(s) &mdash; Prints line
-      numbers in the printed document at the specified interval.
-     </para>
-    </listitem>
+    <sect2 id="shell">
+      <title>The Shell Output Plugin</title>
 
-   </itemizedlist>
-  </para>
+      <figure id="shell-fig">
+	<title>Shell Output Plugin</title>
+	<screenshot>
+	  <screeninfo>shell output plugin</screeninfo>
+	  <graphic fileref="figures/shell" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
 
-  <para>
-   The properties in the <guilabel>Paper</guilabel> tab are:
-   <itemizedlist>
-
-    <listitem>
-     <para>
-      Paper &mdash; Displays a list of common paper formats.
-     </para>
-    </listitem>
-
-    <listitem>
-     <para>
-      Width &mdash; Selects the width of the printed document.
-      Selecting the <option>Paper</option> and <option>
-      Measurement</option> options will suggest the proper width.
-     </para>
-    </listitem>
-
-    <listitem>
-     <para>
-      Measurement &mdash; Displays a list of measurement scales
-      such as <option>Inch</option> or <option>Centimeter</option>
-      to be used in the <option>Width</option> and <option>Height
-      </option> selections.
-     </para>
-    </listitem>
-
-    <listitem>
-     <para>
-      Height &mdash; Selects the height of the printed document.
-      Selecting the <option>Paper</option> and <option>
-      Measurement</option> options will suggest the proper height.
-     </para>
-    </listitem>
-
-    <listitem>
-     <para>
-      Set System Paper Size &mdash; Selecting this option will
-      configure the above printing options to the ssytem default.
-     </para>
-    </listitem>
-
-   </itemizedlist>
-  </para>
-
-  <para>
-    After you have made all the changes you want, click on
-    <guibutton>Apply</guibutton> to apply the changes.Click on the
-    <guibutton>Ok</guibutton> or <guibutton>Close</guibutton>
-    button to close the <interface>Properties</interface> dialog.
-  </para>
+      <para>
+	The <guimenuitem>shell output</guimenuitem> plugin executes the command in the directory that is 
+	displayed and puts the output in the <systemitem>Main Window</systemitem>. The shell you are using 
+	will stay the same.  So, if you use <application>bash</application> as your shell, 
+	<application>gedit</application> will execute the command in <application>bash</application>.  This lets 
+	you put output you would normally see in a console or terminal in the middle of the text file 
+	you are editing.
+      </para>
+    </sect2>
 
   </sect1>
 
+  <sect1 id="prefs">
+    <title>Customization</title>
 
- <!-- ============= Various Sections ============================= -->
- <!-- Here you should add, if necessary, several more sect1's,
- describing other windows (besides the main one), file formats,
- preferences dialogs,  etc. as appropriate. Try not to make any of
- these sections too long. -->
+    <para>
+      To change the application settings, select
+      <guimenuitem>Preferences&hellip;</guimenuitem> from the
+      <guimenu>Settings</guimenu> menu. This opens the
+      <interface>Preferences</interface> dialog.
+    </para>
 
-<!-- ============== Plugins ====================================== -->
- <sect1 id="plugins">
-  <title>Plugins</title>
-  <anchor id="sect.plugins">
-  <para>
-    <application>gedit</application> supports a plugin archictecture.
-    The following plugins are supported in version &version;.
-    <itemizedlist>
+    <para>
+      You can make gedit your default editor.  The default editor will start when a 
+      document opens, you need to edit, by another application.  To make 
+      <application>gedit</application> your default editor, enter <command>export</command> 
+      EDITOR='gedit' in the terminal.  This will only change your 
+      system settings until you reboot again.  To make the change permanent, edit your 
+      <filename>.bash_profile</filename>, if you are using <application>bash</application>.  
+      Add the line <quote><command>export</command> EDITOR='gedit'</quote> 
+      to <filename>.bash_profile</filename>.  If you are using another shell, you need to find 
+      out what file to change and change the environment variable $EDITOR to gedit.
+    </para>
 
-     <listitem>
+    <sect2 id="general">
+      <title>General</title>
+      
+    <figure id="preferences-fig">
+      <title>The Preferences Dialog with the General Tab Highlighted</title>
+      <screenshot>
+	<screeninfo>Preferences dialog with General tab</screeninfo>
+	<graphic fileref="figures/prefs-general" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Appearance</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guibutton>Show Statusbar</guibutton> &mdash;
+		    This option determines whether the status bar at the bottom of the 
+		    <interface>Main Window</interface> is shown or hidden.  The status bar 
+		    gives you a brief description of the various menu items or messages about 
+		    what <application>gedit</application> is currently doing.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Set toolbar according to system settings</guibutton> &mdash;
+		    This option displays the toolbar with the system settings for GNOME.  You can 
+		    change the system settings for the toolbar in the 
+		    <application>Control Center</application>. To change the system settings for 
+		    GNOME, start the <application>Control Center</application>by selecting 
+		    <guimenuitem>GNOME Control Center</guimenuitem> from the
+		    <guisubmenu>Settings</guisubmenu> submenu of the <guimenu>Main
+		    Menu</guimenu>.  Then select the <guisubmenu>Applications</guisubmenu> submenu 
+		    from the <guimenu>User Interface</guimenu> menu.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Set toolbar to Icons only</guibutton> &mdash;
+		    This option displays the toolbar with just the icons.  There is no text under 
+		    each icon to tell you what it does.  The option overrides whatever you have 
+		    selected for the toolbar behavior in the <application>Control Center</application>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Set toolbar to Icons with text</guibutton> &mdash;
+		    This option displays the toolbar with the explanatory text under each icon.
+		    The option overrides whatever you have selected for the toolbar behavior 
+		    in the <application>Control Center</application>.
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guilabel>Editor Behavior</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+
+		<listitem>
+		  <para>
+		    <guibutton>Enable Auto-indent</guibutton> &mdash;
+		    This option turns on the auto-indent ability in <application>gedit</application>.  
+		    Auto-indent automatically indents the text at the same place in the line as the 
+		    text in the previous line.  Auto-indent is very useful when you are writing 
+		    configuration files, scripts, code, etc&hellip;  If you want to write paragraphs 
+		    of text, the auto-indent function can be a hassle.
+		  </para>
+		</listitem>
+<!--            ***This option is deprecated or just not around.***
+		<listitem>
+		  <para>
+		    <guibutton>Enable Wordwrap</guibutton> &mdash;
+		    This option turns on wordwrap.  Wordwrap automatically puts the text you type on the next 
+		    line, if your text exceeds the visible area in the <interface>text window</interface>.
+		  </para>
+		</listitem>-->
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+      </variablelist>
+    </sect2>
+
+    <sect2 id="documents">
+      <title>Documents</title>
+      
+    <figure id="documents-fig">
+      <title>The Preferences Dialog with the Documents Tab Highlighted</title>
+      <screenshot>
+	<screeninfo>Preferences dialog with Documents tab</screeninfo>
+	<graphic fileref="figures/prefs-documents" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>MDI (Multiple Document Interface)</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Mode:</guilabel> &mdash;
+		    This option specifies the way <application>gedit</application> displays the 
+		    <interface>Main Window</interface> and how it opens new documents.  The option 
+		    determines the user interface you like to use for the <interface>Main Window</interface>
+		    There are 4 types of modes <application>gedit</application> can use.  They 
+		    are the notebook, toplevel, modal, and default modes.
+		  </para>
+
+		  <para>
+		    The notebook style looks strikingly similar to the 
+		    <guimenuitem>Preferences&hellip;</guimenuitem> dialog.  The most notable thing about 
+		    this style is the tabs at the top of the <interface>Main Window</interface>.  The 
+		    highlighted tab is the document you are currently viewing.  To change the document 
+		    to another open document, just click on the cooresponding tab.  In the notebook 
+		    style you cannot view multiple documents at the same time.  Only the current 
+		    document can be seen.
+		  </para>
+
+		  <para>
+		    The toplevel style opens a new occurance of <application>gedit</application> for 
+		    each document opened.  The windows are stacked one on top of another, so they 
+		    completely overlap.  From this position, you can move the multiple 
+		    <application>gedit</application> windows around to your liking.  This lets you 
+		    see more than one document, or different positions in the same document.
+		  </para>
+
+		  <para>
+		    The modal style will only open one occurance of gedit, no matter how many documents 
+		    you open.  You have to use the <guimenu>Documents</guimenu> menu to change between 
+		    different documents.  The default style is the same style as the modal style.  This 
+		    is a change from previous versions of <application>gedit</application>.  The modal 
+		    style is a very plain style for <application>gedit</application>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guilabel>Notebook Tab Position:</guilabel> &mdash;
+		    This option changes the place the tabs for the notebook style are located.  
+		    It does not currently work as of <application>gedit</application> version 0.8.0.
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guilabel>Undo</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Set limit on undo levels to:</guilabel> &mdash;
+		    This option sets the number of times you can undo a mistake.  So, if 
+		    you set the limit to 5 undo levels, then you can only use the undo button 
+		    five times.  If you make a lot of mistakes, like me, you might want to set 
+		    this level higher than the default of 5 undo levels.
+		    <note>
+		      <para>
+			Users with low memory, under 16 MB, should set this level at or below 
+			5 undo levels because <application>gedit</application> stores each 
+			command into memory to the undo level limit.  So, if you set the undo 
+			level limit to 50, then <application>gedit</application> will store 
+			up to 50 commands in your main memory.
+		      </para>
+		    </note>
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="fonts">
+      <title>Fonts/Colors</title>
+      
+    <figure id="fonts-fig">
+      <title>The Preferences Dialog with the Fonts/Colors Tab Highlighted</title>
+      <screenshot>
+	<screeninfo>Preferences dialog with Fonts/Colors tab</screeninfo>
+	<graphic fileref="figures/prefs-font" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Fonts</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Default Font</guilabel> &mdash;
+		    This option changes the font used in <application>gedit</application>.
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term><guilabel>Colors</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Background:</guilabel> &mdash;
+		    This option lets you choose the background color in <application>gedit</application>.  
+		    This is the background color of the <interface>Main Window</interface>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guilabel>Foreground:</guilabel> &mdash;
+		    This option lets you choose the foreground color in <application>gedit</application>. 
+		    This is the background color of the <interface>Main Window</interface>.
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="printing">
+      <title>Printing</title>
+
+    <figure id="printing-fig">
+      <title>The Preferences Dialog with the Printing Tab Highlighted</title>
+      <screenshot>
+	<screeninfo>Fonts/Colors dialog with Printing tab</screeninfo>
+	<graphic fileref="figures/prefs-printing" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Printing</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      This section contains:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guibutton>Add header</guibutton> &mdash;
+		    This option adds a header to each page you print in <application>gedit</application>.  
+		    As of <application>gedit</application> version 0.8.0, you cannot configure 
+		    the header.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Enable word wrapping</guibutton> &mdash;
+		    This option turns on wordwrap.  Wordwrap automatically puts the text you typed on the next 
+		    line, if you exceed the page's width you select in the <link linkend="paper">Paper tab 
+		    of the Preferences dialog</link>.  So, you do not have to explicitly press the 
+		    <keysym>return</keysym> key for each line you wanted printed.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Print line numbers every:</guibutton> &mdash;
+		    This option prints the line number of the file.  You also have to select how often 
+		    you want to line numbers printed.  The default is to print the line number every five 
+		    lines.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Portrait</guibutton> &mdash;
+		    This option selects to print the page using the portrait style.  The portrait style 
+		    has the text printed across the smallest side of the paper.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Landscape</guibutton> &mdash;
+		    This option selects to print the page using the portrait style.  The portrait style 
+		    has the text printed across the largest side of the paper.
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="paper">
+      <title>Paper</title>
+
+    <figure id="paper-fig">
+      <title>The Preferences Dialog with the Paper Tab Highlighted</title>
+      <screenshot>
+	<screeninfo>Fonts/Colors dialog with Paper tab</screeninfo>
+	<graphic fileref="figures/prefs-paper" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+      
       <para>
-       <menuchoice>
-        <guimenuitem>Convert</guimenuitem>
-       </menuchoice>
-       &mdash; Coverts decimal to hexadecimal, decimal to
-       octal, or hexadecimal to decimal.
-      </para>
-     </listitem>
+	This section contains:
+	
+	<itemizedlist mark="opencircle">
+	  <listitem>
+	    <para>
+	      <guilabel>Paper:</guilabel> &mdash;
+	      This option selects the type of paper you will use to print the document.  
+	      The <guilabel>width</guilabel> and <guilabel>height</guilabel> boxes will 
+	      change automatically for the correct paper size.
+	    </para>
+	  </listitem>
 
-     <listitem>
+	  <listitem>
+	    <para>
+	      <guilabel>Width:</guilabel> &mdash;
+	      This option selects the width of the paper you will use to print the document.
+	      To the right of the <guilabel>width</guilabel> box is another box you can use 
+	      to change the units the paper is measured in for the <guilabel>width</guilabel> 
+	      and <guilabel>height</guilabel> boxes.
+	    </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+	      <guilabel>Height:</guilabel> &mdash;
+	      This option selects the height of the paper you will use to print the document.
+	      To the right of the <guilabel>height</guilabel> box is the units the height 
+	      of the paper is measured in.
+	    </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+	      <guibutton>Set System Paper Size</guibutton> &mdash;
+	      This option sets the paper size in the <guilabel>width</guilabel> and 
+	      <guilabel>height</guilabel> boxes to the system paper size.  The system 
+	      paper size is determined by the number in the environment variable $PAPERCONF 
+	      or in the file <filename>paperconf</filename>.
+	    </para>
+	  </listitem>
+	</itemizedlist>
+
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="menus">
+    <title>Menus</title>
+
+    <para>
+      In <application>gedit</application> there are three different type of menus: the 
+      <interface>menu bar</interface>, containing all the commands, options, and plug-ins, 
+      the <interface>toolbar</interface>, containing selected commands the user uses the 
+      most, and the <interface>right click menu</interface> in the <interface>text window</interface>, 
+      containing commands that are useful while editing a file.  Only the <interface>menu bar</interface> 
+      is described in this section because it is so large.  The
+      <interface>toolbar</interface> and <link linkend="pop-up-menu"><interface>
+      right click menu</interface></link> are talked about in other sections of <application>
+      gedit's</application> manual.
+    </para>
+
+    <sect2 id="menubar">
+      <title>Menu Bar</title>
       <para>
-       <menuchoice>
-        <guimenuitem>Insert Time</guimenuitem>
-       </menuchoice>
-       &mdash; Inserts a timestamp at the current location.
+	The <interface>menu bar</interface> can be moved around the 
+	<interface>desktop</interface>.  When you click on the far left side 
+	of the <interface>menu bar</interface>, on the raised dotted portion, you 
+	can drag it any place on the desktop you wish with your mouse.  The 
+	<interface>menu bar</interface> can also snap into place on all four sides 
+	of the <interface>Main Window</interface>, if you place your mouse close 
+	to the edge of the <interface>Main Window</interface>.  The menu bar's 
+	default position is located at the top of the <interface>Main Window</interface> 
+	and contains the following menus:
       </para>
-     </listitem>
 
-     <listitem>
+      <variablelist>
+	
+	<varlistentry>
+	  <term><guimenu>File</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      The menu contains:
+
+	      <itemizedlist mark="opencircle">
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>New</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item opens a new file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F3</keysym>
+		      </shortcut>
+		      <guimenuitem>Open&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item brings up the <interface>Open File &hellip;</interface> dialog.  From there 
+		    you can open an existing file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-S</keysym>
+		      </shortcut>
+		      <guimenuitem>Save</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item saves a file, if it is an existing file, or brings up the 
+		    <interface>Save As&hellip;</interface> dialog to save the new file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Save All</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item saves all the files that are open in <application>gedit</application>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Save As&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item brings up the <interface>Save As&hellip</interface> dialog to save the selected file 
+		    in <application>gedit</application>.  You should use this command if you want to specify 
+		    the file's name, for a new file, or want to save the file under a different name, 
+		    for an existing file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Revert</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item discards all changes you made to your unsaved file and opens the 
+		    original file in the <interface>Main Window</interface>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>1.</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This part of the <guimenu>File</guimenu> menu shows the four most recent 
+		    files you opened with <application>gedit</application>.  When you click on 
+		    one of the files displayed, that specific file is opened.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Print</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="print-dialog-fig">
+		      <title>Print Document Dialog</title>
+		      <screenshot>
+			<screeninfo>Print Document dialog</screeninfo>
+			<graphic fileref="figures/print" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+
+		      This item brings up the <interface>Print Document</interface> dialog.  
+		      The <interface>Print Document</interface> dialog is divided into two 
+		      parts: the <guilabel>Select printer</guilabel> section and the 
+		      <guilabel>Print Range</guilabel> section.
+		    </para>
+
+		    <para>
+		      The <guilabel>Select printer</guilabel> section lets you specify whether 
+		      the file will be printed to a printer or printed to a pre-press file format.  
+		      The button for the <guibutton>Printer</guibutton> and <guibutton>File</guibutton> 
+		      options are on the left side of the dialog.  If you choose to print the file 
+		      to a printer, you need to verify the printing command is correct, in the text 
+		      window to the right of the <guibutton>Printer</guibutton> button.  If you 
+		      choose to print the file to a pre-press file, you need to enter the name of 
+		      the file, in the text window to the right of the <guibutton>File</guibutton> 
+		      button.  The default file name is <filename>output.ps</filename>.
+		      You also can choose the type of pre-press file format from the pull down 
+		      menu <guilabel>Name:</guilabel>.
+		    </para>
+
+		    <para>
+		      The <guilabel>Print Range</guilabel> section lets you specify what parts of the 
+		      file you wish to print.  When the <guibutton>All</guibutton> button is pressed the 
+		      whole file will be printed.  If you want to specify only a portion of the file 
+		      to be printed, you need to press the <guibutton>Pages</guibutton> button and enter the 
+		      starting and ending page number.
+		    </para>
+
+		    <para>
+		      There are three buttons at the bottom of the <interface>Print Document</interface> 
+		      dialog.  The <guibutton>Print</guibutton> button will print the document using the 
+		      options in the <interface>Print Document</interface> dialog.  The 
+		      <guibutton>Preview</guibutton> button exits the <interface>Print Document</interface> 
+		      dialog and brings up the <interface>Print Preview</interface> dialog.  The 
+		      <interface>Print Preview</interface> dialog lets you preview the document before 
+		      you print it.
+		    </para>
+
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Print Preview</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="print-preview-fig">
+		      <title>Print Preview Document Dialog</title>
+		      <screenshot>
+			<screeninfo>Print Preview Document dialog</screeninfo>
+			<graphic fileref="figures/print-preview" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+
+		    The <interface>Print Preview</interface> dialog lets you preview the document before 
+		    you print it.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-W</keysym>
+		      </shortcut>
+		      <guimenuitem>Close</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item closes the current document in <application>gedit</application>.  If 
+		    the item isn't saved, <application>gedit</application> will ask you if you 
+		    want to save the file or discard the changes you made to the file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Close All</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item closes all the documents in <application>gedit</application>.  If 
+		    any files aren't saved, <application>gedit</application> will ask you if you 
+		    want to save the file or discard the changes you made to the file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-Q</keysym>
+		      </shortcut>
+		      <guimenuitem>Exit</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item exits <application>gedit</application>.  If 
+		    any files aren't saved, <application>gedit</application> will ask you if you 
+		    want to save the file or discard the changes you made to it.  
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Edit</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      The menu contains:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-Z</keysym>
+		      </shortcut>
+		      <guimenuitem>Undo</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item returns the document to its previous state before each command is 
+		    executed; it essentially takes back each command in the order they were preformed.  
+		    You can only take back a certain number of commands.  The option is configured in 
+		    the <link linkend="prefs"><interface>Preferences&hellip;</interface></link> dialog.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-R</keysym>
+		      </shortcut>
+		      <guimenuitem>Redo</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item returns the document to its state before the 
+		    <guimenuitem>Undo</guimenuitem> command  was executed.  It's the opposite of 
+		    <guimenuitem>Undo</guimenuitem>.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-X</keysym>
+		      </shortcut>
+		      <guimenuitem>Cut</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item puts the highlighted text, in the <interface>text window</interface>, 
+		    in a buffer and then deletes the text that is highlighted from the file.  
+		    The <guimenuitem>Paste</guimenuitem> command takes the text 
+		    out of the buffer and inserts it in the file you are editing.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-C</keysym>
+		      </shortcut>
+		      <guimenuitem>Copy</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item puts the highlighted text, in the <interface>text window</interface>, 
+		    in a buffer, but does not delete the text that is highlighted.  
+		    The <guimenuitem>Paste</guimenuitem> command takes the text 
+		    out of the buffer and inserts it in the file you are editing.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-V</keysym>
+		      </shortcut>
+		      <guimenuitem>Paste</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item takes any text in the buffer and inserts it into the document.  The 
+		    <guimenuitem>Cut</guimenuitem> and <guimenuitem>Copy</guimenuitem> commands 
+		    are the only way to put text into the buffer.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Select All</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item highlights all the text in the current file you are editing.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F6</keysym>
+		      </shortcut>
+		      <guimenuitem>Find</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="find-dialog-fig">
+		      <title>Find Dialog</title>
+		      <screenshot>
+			<screeninfo>Find dialog</screeninfo>
+			<graphic fileref="figures/find" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+
+		    This item brings up the <interface>Find</interface> dialog.  You enter the 
+		    string you want to search for in the <guilabel>Search For:</guilabel> 
+		    <interface>text window</interface>.  You can either start your search at the beginning of 
+		    you file, pressing the <guibutton>beginning of the document</guibutton> button, 
+		    or start it where the cursor is located in the <interface>Main Window</interface>, 
+		    using the <guibutton>cursor position</guibutton> button.  You can also specify if 
+		    you want <application>gedit</application> to search for the string with the case 
+		    how you entered it or have <application>gedit</application> ignore the case of the 
+		    search string.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Shift-F6</keysym>
+		      </shortcut>
+		      <guimenuitem>Find Again</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item searches for the string you previously entered in the 
+		    <interface>Find</interface> dialog.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F7</keysym>
+		      </shortcut>
+		      <guimenuitem>Replace</guimenuitem>
+		    </menuchoice> &mdash; 
+		    </para>
+
+		    <figure id="replace-dialog-fig">
+		      <title>Replace Dialog</title>
+		      <screenshot>
+			<screeninfo>Replace dialog</screeninfo>
+			<graphic fileref="figures/replace" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+		  <para>
+		      This item brings up the <interface>Replace</interface> dialog.  This allows 
+		      you to search for a string and replace it with another string.  You enter 
+		      the string you want to search for in the <guilabel>Search For:</guilabel> 
+		      <interface>text window</interface>.  You then enter the string, you want 
+		      to replace the string you searched for, in the <guilabel>Replace with:</guilabel> 
+		      <interface>text window</interface>.  You can either start your search at the beginning of 
+		      your file, pressing the <guibutton>beginning of the document</guibutton> button, 
+		      or start it where the cursor is located in the <interface>Main Window</interface>, 
+		      using the <guibutton>cursor position</guibutton> button.  You can also specify if 
+		      you want <application>gedit</application> to search for the string with the case 
+		      how you entered it or have <application>gedit</application> ignore the case of the 
+		      search string.
+		  </para>
+		  <para>
+		      When you have the string you want to search for and the string you want to replace 
+		      it with entered, click on the <guibutton>Find</guibutton> button, at the bottom 
+		      of the <interface>Replace</interface> dialog, to find the correct string you are 
+		      wanting to replace.  Then, click the <guibutton>Replace</guibutton> button to 
+		      replace the highlighted string with the string in the <guilabel>Replace with:</guilabel> 
+		      <interface>text window</interface>. If, instead, you want to replace all 
+		      occurances of the string in the <guilabel>Search for:</guilabel> 
+		      <interface>text window</interface>, click the <guibutton>Replace All</guibutton> 
+		      button.
+		    </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Goto Line</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="goto-dialog-fig">
+		      <title>Goto Line Dialog</title>
+		      <screenshot>
+			<screeninfo>Goto Line dialog</screeninfo>
+			<graphic fileref="figures/goto-line" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+
+		    This item brings up the <interface>Goto Line</interface> dialog.  You enter 
+		    the line number you want to move the cursor, in the <interface>Main Window</interface>, 
+		    to.  Click the <guibutton>Okay</guibutton> button and your cursor is put at 
+		    the line number you specified, starting at the beginning of the file.  If the 
+		    line number you specified exceeded the maximum number of lines in the file, your 
+		    cursor will be placed on the last line of the file.
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>View</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      The menu contains:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Add View</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item opens another window to the current file you are editing.  If 
+		    you edit the file in one view, the other views of the same file are 
+		    updated and your changes are seen across all views of the same file.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Remove View</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item closes a window to the file you are editing.
+		    <note>
+		      <para>
+			You cannot remove a view, if there is only one view open.  You need 
+			to have more than one view open to close a view.
+		      </para>
+		    </note>
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Settings</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      The menu contains:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Show Status Bar</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item controls whether you see the status bar or not.  The status bar 
+		    gives you a brief description of the various menu items or messages about 
+		    what <application>gedit</application> is currently doing.
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Preferences&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    This item brings up the <link linkend="prefs"><interface>Preferences&hellip;
+		    </interface></link> dialog.
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Files</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      The menu contains all the files currently opened in <application>gedit</application>.  If 
+	      you click on one of the files, the <interface>Main Window</interface> shows the file 
+	      you clicked on so you can edit it.
+	    </para>
+	  </listitem>
+
+	</varlistentry>
+	<varlistentry>
+	  <term><guimenu>Help</guimenu></term>
+	
+	  <listitem>
+	    <para>
+	      This menu contains:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guimenuitem>Help</guimenuitem> &mdash;
+		    shows this manual.
+		  </para>
+		</listitem>
+		
+		<listitem>
+		  <para>
+		    <guimenuitem>About</guimenuitem> &mdash; shows
+		    basic information about
+		    <application>gedit</application>, such as
+		    the author's name, current developers,  and the application version number.
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+      </variablelist>
+    </sect2>
+
+    <sect2 id="pop-up-menu">
+      <title>Right Click Menu</title>
       <para>
-       <menuchoice>
-        <guimenuitem>Email</guimenuitem>
-       </menuchoice>
-       &mdash; Sends the current document to the given email
-       address. Allows you to specify your address.
+	The <interface>right click</interface> menu is accessed by clicking 
+	the right mouse button in the <interface>Main Window</interface> of 
+	<application>gedit</application>.
       </para>
-     </listitem>
 
-     <listitem>
       <para>
-       <menuchoice>
-        <guimenuitem>Diff</guimenuitem>
-       </menuchoice>
-       &mdash; Calculates the difference between the two
-       specified files, using the <command>diff</command> command,
-       and opens a new document containing the output.
+	This menu contains:
+	
+	<itemizedlist mark="opencircle">
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-X</keysym>
+		</shortcut>
+		<guimenuitem>Cut</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item puts the highlighted text, in the <interface>text window</interface>, 
+	      in a buffer and then deletes the text that is highlighted from the file.  
+	      The <guimenuitem>Paste</guimenuitem> command takes the text 
+	      out of the buffer and inserts it in the file you are editing.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-C</keysym>
+		</shortcut>
+		<guimenuitem>Copy</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item puts the highlighted text, in the <interface>text window</interface>, 
+	      in a buffer, but does not delete the text that is highlighted.  
+	      The <guimenuitem>Paste</guimenuitem> command takes the text 
+	      out of the buffer and inserts it in the file you are editing.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-V</keysym>
+		</shortcut>
+		<guimenuitem>Paste</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item takes any text in the buffer and inserts it into the document.  The 
+	      <guimenuitem>Cut</guimenuitem> and <guimenuitem>Copy</guimenuitem> commands 
+	      are the only way to put text into the buffer.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<guimenuitem>Select All</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item highlights all the text in the current file you are editing.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-S</keysym>
+		</shortcut>
+		<guimenuitem>Save</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item saves a file, if it is an existing file, or brings up the 
+	      <interface>Save As&hellip;</interface> dialog to save the new file.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-W</keysym>
+		</shortcut>
+		<guimenuitem>Close</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item closes the current document in <application>gedit</application>.  If 
+	      the item isn't saved, <application>gedit</application> will ask you if you 
+	      want to save the file or discard the changes you made to the file.
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<guimenuitem>Print</guimenuitem>
+	      </menuchoice> &mdash; 
+	      This item brings up the <interface>Print Document</interface> dialog.  
+	      See the <link linkend="print-dialog-fig"><interface>Print Document</interface> 
+	      dialog</link> to find out more about the <guimenuitem>Print</guimenuitem> command 
+	      in <application>gedit</application>.
+	    </para>
+	  </listitem>
+	</itemizedlist>
       </para>
-     </listitem>
-
-     <listitem>
-      <para>
-       <menuchoice>
-        <guimenuitem>Browse</guimenuitem>
-       </menuchoice>
-       &mdash; Displays the specified URL.
-      </para>
-     </listitem>
-
-     <listitem>
-      <para>
-       <menuchoice>
-        <guimenuitem>Reverse</guimenuitem>
-       </menuchoice>
-       &mdash; Reverse the text. Where the first character becomes the last
-       character and the last character is the first one.
-      </para>
-     </listitem>
-
-    </itemizedlist>
-   </para>
- </sect1>
-
-
- <!-- ============= Bugs ================================== -->
- <!-- This section should describe known bugs and limitations of
-      the program if there are any - please be frank and list all
-      problems you know of -->
+    </sect2>
+  </sect1>
+  
  <sect1 id="bugs">
   <title>Known Bugs and Limitations</title>
-  <para>
-   To view the list of known bugs, please visit the <ulink 
-   url="http://bugs.gnome.org" type="http">GNOME bug tracking
-   database</ulink>
-  </para>
-  <para>
-   <application>gedit</application> requires the latest
-   <application>gnome-print</application>, either version
-   0.20 or <ulink url="http://cvs.gnome.org" type="http">cvs</ulink>,
-   to print properly.
-  </para>
 
-  <para>
-   If <guimenuitem>Exit</guimenuitem> is selected with a document
-   modified, <application>gedit</application> will ask to save the
-   changes. After saving the changes <application>gedit</application>
-   will not exit as expected.
-  </para>
+    <para>
+      <itemizedlist mark="opencircle">
+	<listitem>
+	  <para>
+	    <application>gedit</application> requires the latest gnome-print, either version 
+	    0.20 or the version from CVS, to print properly. 
+	  </para>
+	</listitem>
 
-  <para>
-    At this point gedit does not have syntax higthlightning. The current
-    text widget that we are using is not suitable for this feature.
-  </para>
- </sect1>
+	<listitem>
+	  <para>
+	    At this point <application>gedit</application> does not have syntax highlighting. 
+	    The current text widget that <application>gedit</application> uses is not 
+	    suitable for this feature. 
+	  </para>
+	</listitem>
+
+	<listitem>
+	  <para>
+	    You cannot run another graphical application using <application>gedit's</application> 
+	    <link linkend="shell">shell output plugin</link>.
+	  </para>
+	</listitem>
+      </itemizedlist>
+    </para>
+
+  </sect1>
 
 
 <!-- ============= Authors ================================ -->
 
  <sect1 id="authors">
   <title>Authors</title>
-
   <para>
-   <application>gedit</application> was written by
-   <ulink url="mailto:bse@error.fsnet.co.uk" type="mailto">
-   Alex Roberts</ulink> and Evan Lawrence. As of April 2000, 
-   <ulink url="mailto:leach@wam.umd.edu" type="mailto">Jason Leach
-   </ulink> and <ulink url="mailto:chema@celorio.com" type="mailto">
-   Chema Celorio</ulink> have taken over development responsibilities
-   and have rewritten major parts of the code.
+   <application>gedit</application> was written by Alex Roberts 
+   (<email>bse@error.fsnet.co.uk</email>) and Evan Lawrence.
+   <application>gedit</application> is currently being maintained by 
+   Chema Celorio (<email>chema@celorio.com</email>) and Jason Leach
+   (<email>jleach@???</email>).  To find more information about
+   <application>gedit</application>, please visit the <ulink
+   url="http://gedit.sourceforge.net" type="http">gedit web
+   page</ulink>.  Please send all comments and suggestions to 
+   the <application>gedit</application> mailing list 
+   (<email>gedit-list@sourceforge.org</email>).  Send all bug
+   reports to the <ulink url="http://bugs.gnome.org" type="http">GNOME
+   bug tracking database</ulink>. (Instructions for submitting bug
+   reports can be found <ulink
+   url="http://bugs.gnome.org/Reporting.html" type="http">
+   on-line</ulink>.) If you are using
+   GNOME 1.1 or later, you can also use <application>Bug Report
+   Tool</application> (<command>bug-buddy</command>), available in the
+   <guisubmenu>Utilities</guisubmenu> submenu of <guimenu>Main
+   Menu</guimenu>, for submitting bug reports.
   </para>
 
   <para>
-   Please send all comment about this manual to the author,
-   <ulink url="mailto:whitehse@odo.alterworld.net" type="mailto">
-   Dan White </ulink> 
+   This manual was written by Eric Baudais
+   (<email>baudais@okstate.edu</email>). Please send all comments and
+   suggestions regarding this manual to the <ulink type="http"
+   url="http://www.gnome.org/gdp">GNOME Documentation Project</ulink> 
+   by sending an email to <email>docs@gnome.org</email>. You can also
+   add your comments online by using the <ulink type="http"
+   url="http://www.gnome.org/gdp/doctable/">GNOME Documentation Status
+   Table</ulink>.
   </para>
 
   <!-- For translations: uncomment this:
@@ -1037,5 +1610,9 @@
     <country>USA</country>
    </address>
   </para>
- </sect1>
+ </sect1>  
 </article>
+
+
+
+

@@ -170,6 +170,8 @@ shell_output (void){
 gint
 init_plugin (PluginData *pd)
 {
+	gchar *current_directory;
+	
 	/* initialise */
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Shell Output");
@@ -179,7 +181,9 @@ init_plugin (PluginData *pd)
 	pd->private_data = (gpointer)shell_output;
 	pd->installed_by_default = TRUE;
 
-	gnome_config_set_string ("/Editor_Plugins/shell_output/directory", g_get_current_dir () );
+	current_directory = g_get_current_dir ();
+	gnome_config_set_string ("/Editor_Plugins/shell_output/directory", current_directory);
+	g_free (current_directory);
 	
 	return PLUGIN_OK;
 }

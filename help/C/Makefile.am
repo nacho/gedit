@@ -1,10 +1,6 @@
 ## Process this file with automake to produce Makefile.in.
 
-figs = \
-	gedit/figures/mainwin.png \
-	gedit/figures/toolbar.png \
-	gedit/figures/preferences.png
-
+figs = 
 app = gedit
 lang = C
 ## Removed by chema

@@ -1,3 +1,42 @@
+gedit Plugins - Verision 0.7.9 and above.
+
+The best way to learn how the plugins work, is to look at the 
+code for other plugins. The plugin architecture has been
+rewriten, so the docs described below are obsolete.
+
+Please let us know if you are writing a new plugin.
+
+You should use gedit convenience functions for interaction with gedit :
+The only functions you should use to interact with gedit are : 
+
+gedit_window_active();
+
+gedit_view_active();
+gedit_view_get_selection();
+gedit_view_set_position();
+gedit_view_get_position();
+
+gedit_docuemnt_current();
+gedit_document_get_buffer();
+gedit_document_get_buffer_length();
+
+gedit_document_insert_text();
+gedit_document_delete_text();
+gedit_document_replace_text();
+
+gedit_plugin_program_location_get();
+gedit_plugin_program_location_change();
+
+gedit_flash_va ();
+
+
+Please use the naming convention as the email plugin. 
+
+
+Chema
+
+
+
 gEdit Plugins - v0.6.1
 
 For information on developing plugins, read plugins/plugin_howto.
