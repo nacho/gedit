@@ -1,15 +1,15 @@
-Known bugs in the current version of gEdit ( as of April/2000):
+Known bugs in the current version of gEdit (as of April/2000):
 
 	* You can't pull a menu by using the Alt+{menu key}
 	  alt+keys are doing different actions. We should disable
           the use of alt keys to modify the file, this is a simple
 	  text editor.
-	  (Bug report#1478)
+	  (Bug #1478)
 
 	* We need to be able to deal with a broken config file after
           launching gedit. It seems to crash with some problems with
 	  the config file.
-	  (Bug report# many ...)
+	  (Many bug reports...)
 
 	* Deleting a line will sometimes make the next line down dissappear,
 	  until you highlight it.
@@ -18,6 +18,13 @@ Known bugs in the current version of gEdit ( as of April/2000):
 	* There are issues with auto indent and multiple views of a document
 	  ( we need to confirm if this is still a problem )
 
+	* "Replace All" bug (Bug #6140, #4105)
+
+	* The "recent files" listing will include files that no longer
+	  exist, and when you go to select them from the list, there
+	  is no error message or any visual clue that the file is not
+	  going to be loaded because it no longer exists.
+
 PLUG-INS :
 	Plug-ins seem are a bit unstable at the moment :
 
@@ -25,3 +32,5 @@ PLUG-INS :
 	  the document while it's still writing to it, it will seg fault
 	  with a broken pipe error..
 	  
+	* Get gmodules to build
+
