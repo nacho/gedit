@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: besar\n"
-"POT-Creation-Date: 2002-05-07 01:59+0800\n"
+"POT-Creation-Date: 2002-06-09 03:18+0800\n"
 "PO-Revision-Date: 2002-04-06 00:36+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -80,23 +80,24 @@ msgstr "Selit aksara"
 msgid "gedit: ASCII table"
 msgstr "gedir: Jadual ASCII"
 
-#: plugins/cvschangelog/cvschangelog.c:44
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:48
 msgid "Open CVS Chan_geLogs"
 msgstr "Buka Chan_geLog CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:47
+#: plugins/cvschangelog/cvschangelog.c:51
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Cari ChangeLog pada dokumen semasa dan buka."
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/cvschangelog/cvschangelog.c:263
 msgid "CVS ChangeLog"
 msgstr "ChangeLog CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:264
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr "Plugin yang membuka ChangeLog yang dijumpai  pada mesej commit CVS."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:266
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Hakcipta (C) 2002 - James Willcox"
 
@@ -281,7 +282,7 @@ msgstr ""
 "nombor, baris, aksara dan aksara bukan space padanya dan memaparkan "
 "keputusan."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
 #: plugins/shell_output/shell_output.c:436
 #: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
@@ -307,7 +308,7 @@ msgstr "Aksara (dengan ruang)"
 msgid "File Name"
 msgstr "Nama Fail"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
 msgid "Lines"
 msgstr "Baris"
 
@@ -323,19 +324,19 @@ msgstr "Perkataan"
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Plugin Maklumat Dokumen"
 
-#: plugins/sample/sample.c:41
+#: plugins/sample/sample.c:43
 msgid "Insert User _Name"
 msgstr "Selit Nama Pengguna"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
 msgstr "Selitkan nama pengguna pada posisi kursor"
 
-#: plugins/sample/sample.c:148
+#: plugins/sample/sample.c:160
 msgid "User name"
 msgstr "Nama pengguna"
 
-#: plugins/sample/sample.c:149
+#: plugins/sample/sample.c:161
 msgid "Inserts the user name at the cursor position."
 msgstr "Selitkan nama pengguna pada posisi kursor."
 
@@ -531,7 +532,7 @@ msgid "Could not create the Plugin Manager dialog"
 msgstr "Tak dapat mencipta dialog Pengutus Plugin"
 
 #: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Ganti"
 
@@ -540,23 +541,23 @@ msgid "Replace _All"
 msgstr "Gantikan Semu_a"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:104
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:101
 msgid "_Replace"
 msgstr "_Ganti"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Cari"
 
 #: src/dialogs/gedit-dialog-replace.c:473
 #: src/dialogs/gedit-dialog-replace.c:544
-#: src/dialogs/gedit-dialog-replace.c:715
+#: src/dialogs/gedit-dialog-replace.c:718
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teks \"%s\" tidak dijumpai"
 
-#: src/dialogs/gedit-dialog-replace.c:724
+#: src/dialogs/gedit-dialog-replace.c:727
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Jumpa dan gantikan %d kali"
@@ -627,12 +628,12 @@ msgid "Line numbers"
 msgstr "Baris ke"
 
 #: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:63
+#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Simpan"
 
 #: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:83
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
 msgid "Undo"
 msgstr "Nyahcara"
 
@@ -649,7 +650,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:47
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Cetak"
 
@@ -661,7 +663,7 @@ msgstr "Antaramuka pengguna"
 msgid "Cat_egories:"
 msgstr "Kat_egori:"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:46
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Keutamaan"
 
@@ -981,7 +983,7 @@ msgstr "_Font digunakan oleh editor: "
 msgid "_Font used to print headers:"
 msgstr "_Font digunakan untuk mencetak pengepala: "
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
 msgid "_Icon"
 msgstr "_Ikon"
 
@@ -1202,42 +1204,46 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit adalah editor teks untuk Gnome yang kecil dan ringan"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 msgid "Untitled"
 msgstr "Tiadatajuk"
 
-#: src/gedit-document.c:660 src/gedit-document.c:766
+#: src/gedit-document.c:556 src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Nama fail tidak sah"
+
+#: src/gedit-document.c:700 src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Data UTF-8 tidak sah"
 
-#: src/gedit-document.c:966
+#: src/gedit-document.c:1006
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Tak dapat baca maklumat pautan simbolik bagi %s"
 
-#: src/gedit-document.c:1012
+#: src/gedit-document.c:1052
 msgid "The file has too many symbolic links."
 msgstr "Fail terlalu banyak pautan simbolik."
 
-#: src/gedit-document.c:1061
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit tak dapat mengendali lokasi %s: dalam mod tulis."
 
-#: src/gedit-document.c:1068
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit tak dapat mengendali jenis lokasi ini pada mod tulis."
 
-#: src/gedit-document.c:1080
+#: src/gedit-document.c:1120
 msgid "Invalid filename."
 msgstr "Nama fail tidak sah."
 
-#: src/gedit-document.c:1158
+#: src/gedit-document.c:1198
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1245,7 +1251,7 @@ msgstr ""
 "Tak cukup ruang cakera untuk menyimpan fail.\n"
 "Sila, bebaskan sedikit ruang pada cakera dan cuba lagi."
 
-#: src/gedit-document.c:1163
+#: src/gedit-document.c:1203
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1254,15 +1260,15 @@ msgstr ""
 "Cakera dimana anda cuba simpankan fail mempunyai had saiz fail. Sila cuba "
 "simpan fail lebih kecil atau simpan ke cakera yang tidak mempunyai had ini."
 
-#: src/gedit-document.c:1200
+#: src/gedit-document.c:1240
 msgid "Could not create a backup file."
 msgstr "Tak dapat mencipta fail backup."
 
-#: src/gedit-document.c:1348
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "Mustahil untuk berbalik ke dokuken tiadatajuk"
 
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1271,70 +1277,70 @@ msgstr ""
 "Nama fail ''%s'' sudah wujud.\n"
 "Adakah anda ingin menggantikannya dengan apa yang anda hendak simpan?"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "Ja_ngan ganti"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:484
 msgid "Select a filename to save"
 msgstr "Pilih satu nama fail untuk disimpan"
 
-#: src/gedit-file.c:124
+#: src/gedit-file.c:128
 msgid "Open File ..."
 msgstr "Buka fail ..."
 
-#: src/gedit-file.c:134 src/gedit-file.c:636
+#: src/gedit-file.c:148 src/gedit-file.c:763
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Fail '%s' dimuatkan"
 
-#: src/gedit-file.c:242 src/gedit-file.c:314
+#: src/gedit-file.c:279 src/gedit-file.c:401
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Simpan fail '%s' ..."
 
-#: src/gedit-file.c:263 src/gedit-file.c:321
+#: src/gedit-file.c:300 src/gedit-file.c:416
 msgid "The document has not been saved."
 msgstr "Dokumen tidak akan disimpan."
 
-#: src/gedit-file.c:275 src/gedit-file.c:319
+#: src/gedit-file.c:315 src/gedit-file.c:408
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fail '%s' disimpan."
 
-#: src/gedit-file.c:306
+#: src/gedit-file.c:383
 msgid "Save as ..."
 msgstr "Simpan sebagai..."
 
-#: src/gedit-file.c:464
+#: src/gedit-file.c:574
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Berbalik ke fail '%s' ..."
 
-#: src/gedit-file.c:477
+#: src/gedit-file.c:587
 msgid "The document has not been reverted."
 msgstr "Dokumen tidak boleh diberbalikkan."
 
-#: src/gedit-file.c:487
+#: src/gedit-file.c:597
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Fail '%s' diberbalikkan."
 
-#: src/gedit-file.c:530
+#: src/gedit-file.c:644
 #, c-format
 msgid "Loading %d file..."
 msgstr "Memuatkan %d fail"
 
-#: src/gedit-file.c:566
+#: src/gedit-file.c:680
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i fail dimuatkan"
 
-#: src/gedit-file.c:690
+#: src/gedit-file.c:821
 msgid "Could not read data from stdin."
 msgstr "Tak dapat membaca data dari stdin."
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:759
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1345,23 +1351,23 @@ msgstr ""
 "\n"
 "Perubahan itu akan hilang jika anda tidak menyimpannya."
 
-#: src/gedit-mdi.c:768
+#: src/gedit-mdi.c:764
 msgid "Do_n't save"
 msgstr "Ja_ngan simpan"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:783
 msgid "_Don't quit"
 msgstr "_Jangan keluar"
 
-#: src/gedit-mdi.c:791
+#: src/gedit-mdi.c:787
 msgid "_Don't close"
 msgstr "_Jangan tutup"
 
-#: src/gedit-mdi.c:878
+#: src/gedit-mdi.c:874
 msgid "(modified)"
 msgstr "(diubah)"
 
-#: src/gedit-mdi.c:884
+#: src/gedit-mdi.c:880
 msgid "(readonly)"
 msgstr "(bacasahaja)"
 
@@ -1415,7 +1421,7 @@ msgstr "Ralat, mustahil untuk mengenyahaktifkan plugin '%s'"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Ralat, mustahil untuk mengemaskini UI bagi plugin '%s'"
 
-#: src/gedit-print.c:166
+#: src/gedit-print.c:178
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1423,26 +1429,22 @@ msgstr ""
 "gedit tak dapat mencetak kerana ia tidak menjumpai\n"
 "salah satu daripada font yang diperlukan."
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit - Cetak Dokumen"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "Fail: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "Halaman: %d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit - Prebiu Cetakan"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1458,418 +1460,406 @@ msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "Perihal..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Tambah/Buang plugin"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "Pers_onalisasi Bar Status"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Tukar ketampakan bar status pada tetingkap semasa"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Tukar ketampakan bagi toolbar pada tetingkap semasa"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Tutup S_emua"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Tutup"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Tutup Semua"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Tutup semua fail yang dibuka"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Tutup fail semasa"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Konfigurasikan aplikasi"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Kandungan"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Salin"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Salin pilihan"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Cipta dokumen baru"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "_Potong"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Personalisasi"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Susun toolbar"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Potong"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Potong pilihan"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
 msgid "Delete"
 msgstr "Padam"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Padam teks yang dipilih"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
 msgstr "Dump XML"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
 msgstr "Dump huraian UI XML"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:25
 msgid "Find Again"
 msgstr "Cari Lagi"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "Cari _Lagi"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Pergi ke baris tertentu"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "Pergi ke _baris"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Ikon dan _Teks"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Toolbar utama"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Baru"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Hanya papar ikon pada toolbar"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Buka"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 msgid "Open Location..."
 msgstr "Buka Lokasi ..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 msgid "Open _Location..."
 msgstr "Buka _Lokasi ..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Buka fail"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
 msgstr "Buka fail daripada lokasi yang dinyatakan"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Buka Manual Gedit"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Tepek"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Tepek Papanklip"
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:41
 msgid "Plugin _Manager"
 msgstr "_Pengurus Plugin"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:42
 msgid "Plugin _Manager..."
 msgstr "_Pengurus Plugin..."
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
 msgstr "Ke_Utamaan..."
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:46
 msgid "Print Previe_w"
 msgstr "_Prebiu Cetakan"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:47
 msgid "Print Preview"
 msgstr "Prebiu Cetakan"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:48
 msgid "Print Setup"
 msgstr "Tetapan Cetakan"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:49
 msgid "Print preview"
 msgstr "Prebiu Cetakan"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:50
 msgid "Print the current file"
 msgstr "Cetak fail semasa"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:51
 msgid "Quit"
 msgstr "Keluar"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:52
 msgid "Quit the program"
 msgstr "Keluar program"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:53
 msgid "Recent _Files"
 msgstr "Fail baru-baru ini"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:54
 msgid "Redo"
 msgstr "Ulangcara"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:55
 msgid "Redo the undone action"
 msgstr "Ulangcara aksi nyahcara"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:57
 msgid "Replace a string"
 msgstr "Ganti rentetan"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:58
 msgid "Revert"
 msgstr "Berbalik"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:59
 msgid "Revert to a saved version of the file"
 msgstr "Berbalik ke versi fail yang tersimpan"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:60
 msgid "Sa_ve All"
 msgstr "Si_mpan Semua"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:62
 msgid "Save All"
 msgstr "Simpan Semua"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:63
 msgid "Save As"
 msgstr "Simpan Sebagai"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:64
 msgid "Save _As..."
 msgstr "Simpan Seb_agai..."
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:65
 msgid "Save all open files"
 msgstr "Simpan semua fail yang dibuka"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:66
 msgid "Save the current file"
 msgstr "Simpan fail semasa"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:67
 msgid "Save the current file with a different name"
 msgstr "Simpan fail semasa dengan nama lain"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:68
 msgid "Search again for the same string"
 msgstr "Cari rentetan yang sama lagi"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:69
 msgid "Search for a string"
 msgstr "Cari rentetan"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:70
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:71
 msgid "Select _All"
 msgstr "Pilih Semu_a"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:72
 msgid "Select the entire document"
 msgstr "Pilih seluruh dokumen"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:73
 msgid "Set toolbar button style according to desktop default"
 msgstr "Tetapkan gaya butang toolbar berdasarkan default desktop"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:74
 msgid "Setup the page settings for your current printer"
 msgstr "Tetapan halaman bagi pencetak semasa"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:75
 msgid "Show _Cursor Position"
 msgstr "Papar Posisi _Kursor"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:76
 msgid "Show _Overwrite Mode"
 msgstr "Papar Mod _Tindihan"
 
-#: src/gedit-ui.xml.h:79
-msgid "Show _Tooltips"
-msgstr "Papar _Tooltip"
-
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:77
 msgid "Show cursor position in the statusbar"
 msgstr "Papar posisi kursor pada bar status"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:78
 msgid "Show overwrite mode in the statusbar"
 msgstr "Papar mod tindihan pada bar status"
 
-#: src/gedit-ui.xml.h:82
-msgid "Show tooltips in the toolbar"
-msgstr "Papar tooltip pada toolbar"
-
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:80
 msgid "Undo the last action"
 msgstr "Nyahcara aksi terkhir"
 
-#: src/gedit-ui.xml.h:85
-msgid "_About..."
-msgstr "Perih_al..."
+#: src/gedit-ui.xml.h:81
+msgid "_About"
+msgstr "_Perihal"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:82
 msgid "_Close"
 msgstr "_Tutup"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:83
+msgid "_Contents"
+msgstr "_Kandungan"
+
+#: src/gedit-ui.xml.h:84
 msgid "_Copy"
 msgstr "_Salin"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:85
 msgid "_Customize Toolbar"
 msgstr "Per_sonalisasi Toolbar"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:86
 msgid "_Debug"
 msgstr "_Nyahpepijat"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:87
 msgid "_Delete"
 msgstr "Pa_dam"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:88
 msgid "_Desktop Default"
 msgstr "_Default Desktop"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:89
 msgid "_Documents"
 msgstr "_Dokumen"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:90
 msgid "_Edit"
 msgstr "_Edit"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:91
 msgid "_File"
 msgstr "_Fail"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:92
 msgid "_Find"
 msgstr "_Cari"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:93
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:95
 msgid "_New"
 msgstr "_Baru"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:96
 msgid "_Open..."
 msgstr "_Buka..."
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:97
 msgid "_Paste"
 msgstr "_Tepek"
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:98
 msgid "_Print..."
 msgstr "_Cetak..."
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:99
 msgid "_Quit"
 msgstr "_Keluar"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:100
 msgid "_Redo"
 msgstr "_Ulangcara"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:102
 msgid "_Revert"
 msgstr "Be_rbalik"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:103
 msgid "_Save"
 msgstr "_Simpan"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:104
 msgid "_Search"
 msgstr "_Cari"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:105
 msgid "_Statusbar"
 msgstr "Bar _status"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:106
 msgid "_Toolbar"
 msgstr "_Toolbar"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:107
 msgid "_Tools"
 msgstr "_Radas"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:108
 msgid "_Undo"
 msgstr "_Nyahcara"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:109
 msgid "_View"
 msgstr "_Lihat"
 
-#: src/gedit-utils.c:839
+#: src/gedit-utils.c:842
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1880,24 +1870,24 @@ msgstr ""
 "\n"
 "Sila pastikan anda menaip lokasi dengan betul dan cuba lagi."
 
-#: src/gedit-utils.c:846
+#: src/gedit-utils.c:849
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Tak dapat membuka fail \"%s\" kerana ia mengandungi data yang rosak."
 
-#: src/gedit-utils.c:857
+#: src/gedit-utils.c:860
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Tak dapat membuka fail \"%s\" kerana gedit tak boleh kendali lokasi %s: ."
 
-#: src/gedit-utils.c:865
+#: src/gedit-utils.c:868
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Tak dapat membuka fail \"%s\""
 
-#: src/gedit-utils.c:872
+#: src/gedit-utils.c:875
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -1905,12 +1895,12 @@ msgstr ""
 "Tak dapat membuka fail  \"%s\" kerana ia mengandungi data dalam format yang "
 "tidak sah."
 
-#: src/gedit-utils.c:879
+#: src/gedit-utils.c:882
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Tak dapat membukafail \"%s\" kerana ianya terlalu besar."
 
-#: src/gedit-utils.c:886
+#: src/gedit-utils.c:889
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1921,12 +1911,12 @@ msgstr ""
 "\n"
 "Sila pastikan anda menaip lokasi dengan betul dan cuba lagi."
 
-#: src/gedit-utils.c:893
+#: src/gedit-utils.c:896
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Tak dapat membukafail \"%s\" keran akses dinafikan."
 
-#: src/gedit-utils.c:900
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1937,7 +1927,7 @@ msgstr ""
 "\n"
 "Sila tutup sedikit fail dan cuba lagi."
 
-#: src/gedit-utils.c:908
+#: src/gedit-utils.c:911
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1948,7 +1938,7 @@ msgstr ""
 "\n"
 "Sila semak lokasi yang anda taip itu betul dan cuba lagi."
 
-#: src/gedit-utils.c:915
+#: src/gedit-utils.c:918
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -1957,7 +1947,7 @@ msgstr ""
 "Tidak cukup memori untuk membuka fail \"%s\". Sila tutup sedikit aplikasi "
 "terlaksana dan cuba lagi."
 
-#: src/gedit-utils.c:928
+#: src/gedit-utils.c:931
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1970,7 +1960,7 @@ msgstr ""
 "Sila semak samada lokasi yang ditaip adalah betul dan tetapan proksi adalah "
 "betul dan cuba lagi."
 
-#: src/gedit-utils.c:941
+#: src/gedit-utils.c:944
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1981,7 +1971,7 @@ msgstr ""
 "\n"
 "Sila semak lokasi yang anda taip adalah betul dan cuba lagi."
 
-#: src/gedit-utils.c:948
+#: src/gedit-utils.c:951
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1992,7 +1982,7 @@ msgstr ""
 "\n"
 "Sila semak samada tetapan proksi adlaah betul dan cuba lagi."
 
-#: src/gedit-utils.c:955
+#: src/gedit-utils.c:958
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2003,7 +1993,7 @@ msgstr ""
 "\n"
 "Sila semak samada lokasi yang anda taip adalah betul dan cuba lagi."
 
-#: src/gedit-utils.c:963
+#: src/gedit-utils.c:966
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2015,17 +2005,17 @@ msgstr ""
 "\n"
 "Mungkin anda cuma membuka fail binari."
 
-#: src/gedit-utils.c:1001
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Tak dapat membukafail \"%s\"."
 
-#: src/gedit-utils.c:1052
+#: src/gedit-utils.c:1055
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Tak dapat menyimpan fail \"%s\"."
 
-#: src/gedit-utils.c:1056
+#: src/gedit-utils.c:1059
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2036,7 +2026,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1109
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2047,24 +2037,24 @@ msgstr ""
 "\n"
 "Mungkin dianya baru sahaja dipadam."
 
-#: src/gedit-utils.c:1116
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Tak dapat memberbalikkan fail \"%s\" kerana ia mengandungi fail rosak"
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1130
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Tak dapat memberbalik fail \"%s\" kerana gedit tak boleh kendali lokasi %s: ."
 
-#: src/gedit-utils.c:1135 src/gedit-utils.c:1257
+#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Tak dapat memberbalikkan fail \"%s\"."
 
-#: src/gedit-utils.c:1142
+#: src/gedit-utils.c:1145
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2073,17 +2063,17 @@ msgstr ""
 "Tak dapat memberbalik fail \"%s\" kerana ia mengandungi data dalam format "
 "yang tidak sah."
 
-#: src/gedit-utils.c:1149
+#: src/gedit-utils.c:1152
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Tak dapat memberbalikkan fail \"%s\"i kerana ianya terlalu besar"
 
-#: src/gedit-utils.c:1156
+#: src/gedit-utils.c:1159
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Tak dapat memberbalikkan fail \"%s\" kerana akses dinafikan."
 
-#: src/gedit-utils.c:1163
+#: src/gedit-utils.c:1166
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2094,7 +2084,7 @@ msgstr ""
 "\n"
 "Sila tutup sedikit fail dan cuba lagi."
 
-#: src/gedit-utils.c:1171
+#: src/gedit-utils.c:1174
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2103,7 +2093,7 @@ msgstr ""
 "Tak cukup memori untuk memberbalikkan fail \"%s\". SIla tutup sedikit "
 "aplikasi terlaksana dan cuba lago."
 
-#: src/gedit-utils.c:1184
+#: src/gedit-utils.c:1187
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2114,7 +2104,7 @@ msgstr ""
 "\n"
 "Sila pastikan tetapan proksi adalah betul dan cuba lagi."
 
-#: src/gedit-utils.c:1196
+#: src/gedit-utils.c:1199
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2125,12 +2115,12 @@ msgstr ""
 "\n"
 "Sila semak samada tetapan proksi adalah betul dan cuba lagi."
 
-#: src/gedit-utils.c:1203
+#: src/gedit-utils.c:1206
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "Tak dapat memberbalikkan fail \"%s\" kerana cubaan logmasuk gagal."
 
-#: src/gedit-utils.c:1210
+#: src/gedit-utils.c:1213
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2142,74 +2132,98 @@ msgstr ""
 "\n"
 "Mungkin anda cuba memberbalik fail binari."
 
-#: src/gedit-utils.c:1219
+#: src/gedit-utils.c:1222
 msgid "It is not possible to revert an Untitled document."
 msgstr "Mustahil untuk berbalik ke dokumen Tiadatajuk."
 
-#: src/gedit-view.c:928
+#: src/gedit-view.c:896
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr " brs %d, Kol. %d"
 
-#: src/gedit-view.c:966
+#: src/gedit-view.c:934
 msgid "  OVR"
 msgstr " OVR"
 
-#: src/gedit-view.c:968
+#: src/gedit-view.c:936
 msgid "  INS"
 msgstr " INS"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:69
 msgid "Show mdi debugging messages."
 msgstr "Papar mesej peyahpepijatan mdi"
 
-#: src/gedit2.c:71
+#: src/gedit2.c:72
 msgid "Show commands debugging messages."
 msgstr "Papar mesej nyahpepijat arahan."
 
-#: src/gedit2.c:74
+#: src/gedit2.c:75
 msgid "Show document debugging messages."
 msgstr "Papar mesej nyahpepijat dokumen."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:78
 msgid "Show file debugging messages."
 msgstr "Papar mesej nyahpepijat fail"
 
-#: src/gedit2.c:80
+#: src/gedit2.c:81
 msgid "Show plugin debugging messages."
 msgstr "Papar mesej nyahpepijat plugin."
 
-#: src/gedit2.c:83
+#: src/gedit2.c:84
 msgid "Show prefs debugging messages."
 msgstr "Papar mesej nyahpepijat pref."
 
-#: src/gedit2.c:86
+#: src/gedit2.c:87
 msgid "Show printing debugging messages."
 msgstr "Papar mesej nyahpepijat cetakan."
 
-#: src/gedit2.c:89
+#: src/gedit2.c:90
 msgid "Show search debugging messages."
 msgstr "Papar mesej nyahpepijat carian."
 
-#: src/gedit2.c:92
+#: src/gedit2.c:93
 msgid "Show undo debugging messages."
 msgstr "Papar mesej nyahpepijat nyahcara."
 
-#: src/gedit2.c:95
+#: src/gedit2.c:96
 msgid "Show view debugging messages."
 msgstr "Papar mesej nyahpepijat lihat."
 
-#: src/gedit2.c:98
+#: src/gedit2.c:99
 msgid "Show recent debugging messages."
 msgstr "Papar mesej nyahpepijat terkini"
 
-#: src/gedit2.c:101
+#: src/gedit2.c:102
+msgid "Show session management debugging messages."
+msgstr "Papar mesej nyahpepijat pengurusan sessi."
+
+#: src/gedit2.c:105
 msgid "Turn on all debugging messages."
 msgstr "Hidupkan semua mesej nyahpepijat"
 
-#: src/gedit2.c:159
+#: src/gedit2.c:164
 msgid "The GNOME text editor"
 msgstr "Editor teks GNOME"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Buka %s"
+
+#~ msgid "gedit - Print Document"
+#~ msgstr "gedit - Cetak Dokumen"
+
+#~ msgid "About..."
+#~ msgstr "Perihal..."
+
+#~ msgid "Contents"
+#~ msgstr "Kandungan"
+
+#~ msgid "Show _Tooltips"
+#~ msgstr "Papar _Tooltip"
+
+#~ msgid "Show tooltips in the toolbar"
+#~ msgstr "Papar tooltip pada toolbar"
 
 #~ msgid ""
 #~ "Make sure that the path you provided exists, and that you have the "
@@ -2217,12 +2231,6 @@ msgstr "Editor teks GNOME"
 #~ msgstr ""
 #~ "Pastikan path yang anda bekalkan itu wujud, dan yang anda mempunyai "
 #~ "keizinan menulis."
-
-#~ msgid "Open %s"
-#~ msgstr "Buka %s"
-
-#~ msgid "_Contents"
-#~ msgstr "_Kandungan"
 
 #~ msgid "_Plugin Manager"
 #~ msgstr "_Pengurus Plugin"
