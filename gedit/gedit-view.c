@@ -58,8 +58,6 @@ struct _GeditViewPrivate
 	GtkWidget *overwrite_mode_statusbar;
 
 	gboolean overwrite_mode;
-
-	gint old_lines;
 };
 
 enum
@@ -80,7 +78,7 @@ static void gedit_view_update_cursor_position_statusbar
 static void gedit_view_cursor_moved 	(GtkTextBuffer     *buffer,
 					 const GtkTextIter *new_location,
 					 GtkTextMark       *mark,
-					 gpointer           data);
+					 GeditView         *view);
 static void gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditView* view);
 static void gedit_view_doc_readonly_changed_handler (GeditDocument *document, 
 						     gboolean readonly, 
@@ -852,14 +850,12 @@ static void
 gedit_view_cursor_moved (GtkTextBuffer     *buffer,
 			 const GtkTextIter *new_location,
 			 GtkTextMark       *mark,
-			 gpointer           data)
+			 GeditView         *view)
 {
-	GeditView* view;
-
 	gedit_debug (DEBUG_VIEW, "");
 
-	view = GEDIT_VIEW (data);
-	gedit_view_update_cursor_position_statusbar (buffer, view);
+	if (mark == gtk_text_buffer_get_insert (buffer))
+		gedit_view_update_cursor_position_statusbar (buffer, view);
 }
 
 static void
