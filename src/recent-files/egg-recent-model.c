@@ -58,6 +58,7 @@ struct _EggRecentModel {
 	EggRecentModelSort sort_type; /* type of sorting to be done */
 
 	int limit;			/* soft limit for length of the list */
+	int expire_days;		/* number of days to hold an item */
 
 	char *path;			/* path to the file we store stuff in */
 
@@ -1151,6 +1152,9 @@ egg_recent_model_init (EggRecentModel * model)
 					EGG_RECENT_MODEL_EXPIRE_KEY,
 					egg_recent_model_expiration_changed,
 					model, NULL, NULL);
+	model->expire_days = gconf_client_get_int (model->client,
+						   EGG_RECENT_MODEL_EXPIRE_KEY,
+						   NULL);
 					
 #if 0
 	/* keep this out, for now */
@@ -1619,6 +1623,72 @@ egg_recent_model_changed (EggRecentModel *model)
 
 	if (list)
 		EGG_RECENT_ITEM_LIST_UNREF (list);
+}
+
+static void
+egg_recent_model_remove_expired_list (EggRecentModel *model, GList *list)
+{
+	time_t current_time;
+	time_t day_seconds;
+
+	time (&current_time);
+	day_seconds = model->expire_days*24*60*60;
+
+	while (list != NULL) {
+		EggRecentItem *item = list->data;
+		time_t timestamp;
+
+		timestamp = egg_recent_item_get_timestamp (item);
+
+		if ((timestamp+day_seconds) < current_time) {
+			gchar *uri = egg_recent_item_get_uri (item);
+			egg_recent_model_delete (model, uri);
+
+			g_strdup (uri);
+		}
+
+		list = list->next;
+	}
+}
+
+
+/**
+ * egg_recent_model_remove_expired:
+ * @model:  A EggRecentModel object.
+ *
+ * Goes through the entire list, and removes any items that are older than
+ * the user-specified expiration period.
+ *
+ * Returns: void
+ */
+void
+egg_recent_model_remove_expired (EggRecentModel *model)
+{
+	FILE *file;
+	GList *list=NULL;
+
+	g_return_if_fail (model != NULL);
+
+	file = egg_recent_model_open_file (model);
+	g_return_if_fail (file != NULL);
+	
+	if (egg_recent_model_lock_file (file)) {
+		list = egg_recent_model_read (model, file);
+		
+	} else {
+		g_warning ("Failed to lock:  %s", strerror (errno));
+		return;
+	}
+
+	if (!egg_recent_model_unlock_file (file))
+		g_warning ("Failed to unlock: %s", strerror (errno));
+
+	if (list != NULL) {
+		egg_recent_model_remove_expired_list (model, list);
+		EGG_RECENT_ITEM_LIST_UNREF (list);
+	}
+
+	fclose (file);
 }
 
 /**

@@ -29,6 +29,7 @@
 #include <libbonoboui.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/gnome-icon-theme.h>
+#include <gconf/gconf-client.h>
 #include "egg-recent-model.h"
 #include "egg-recent-view.h"
 #include "egg-recent-view-bonobo.h"
@@ -53,6 +54,7 @@ struct _EggRecentViewBonobo {
 	GnomeIconTheme *theme;
 
 	EggRecentModel *model;
+	GConfClient *client;
 };
 
 
@@ -203,10 +205,15 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 							   uri, mime_type);
 
 
-			/* Riiiiight.... */
-			pixbuf_xml = bonobo_ui_util_pixbuf_to_xml (pixbuf);
-			
-			cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"pixbuf\" pixname=\"%s\"/>", verb_name, pixbuf_xml);
+			if (pixbuf != NULL) {
+				/* Riiiiight.... */
+				pixbuf_xml = bonobo_ui_util_pixbuf_to_xml (pixbuf);
+				
+				cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"pixbuf\" pixname=\"%s\"/>", verb_name, pixbuf_xml);
+			} else {
+				cmd = g_strdup_printf ("<cmd name=\"%s\"/> ",
+					       	       verb_name);
+			}
 
 			g_free (mime_type);
 			g_free (uri);
@@ -333,10 +340,12 @@ egg_recent_view_bonobo_set_property (GObject *object,
 			view->path = g_strdup (g_value_get_string (value));
 		break;
 		case PROP_SHOW_ICONS:
-			view->show_icons = g_value_get_boolean (value);
+			egg_recent_view_bonobo_show_icons (view,
+						g_value_get_boolean (value));
 		default:
 		case PROP_SHOW_NUMBERS:
-			view->show_numbers = g_value_get_boolean (value);
+			egg_recent_view_bonobo_show_numbers (view,
+						g_value_get_boolean (value));
 		break;
 		break;
 	}
@@ -380,6 +389,7 @@ egg_recent_view_bonobo_finalize (GObject *object)
 	g_object_unref (view->model);
 	g_object_unref (view->uic);
 	g_object_unref (view->theme);
+	g_object_unref (view->client);
 }
 
 static void
@@ -447,12 +457,42 @@ egg_recent_view_init (EggRecentViewClass *iface)
 	iface->do_set_model = egg_recent_view_bonobo_set_model;
 }
 
+static void
+show_menus_changed_cb (GConfClient *client,
+                       guint cnxn_id,
+                       GConfEntry *entry,
+                       EggRecentViewBonobo *view)
+{
+        GConfValue *value;
+
+        value = gconf_entry_get_value (entry);
+
+        g_return_if_fail (value->type == GCONF_VALUE_BOOL);
+
+        egg_recent_view_bonobo_show_icons (view,
+                                gconf_value_get_bool (value));
+
+}
 
 static void
 egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 {
 	view->uid = egg_recent_util_get_unique_id ();
 	view->theme = gnome_icon_theme_new ();
+
+	view->client = gconf_client_get_default ();
+	view->show_icons =
+		gconf_client_get_bool (view->client,
+			"/desktop/gnome/interface/menus_have_icons",
+			NULL);
+
+	gconf_client_add_dir (view->client, "/desktop/gnome/interface",
+			      GCONF_CLIENT_PRELOAD_NONE,
+			      NULL);
+	gconf_client_notify_add (view->client,
+			"/desktop/gnome/interface/menus_have_icons",
+			(GConfClientNotifyFunc)show_menus_changed_cb,
+			view, NULL, NULL);
 }
 
 void
