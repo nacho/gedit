@@ -33,7 +33,6 @@
 
 #include <string.h>
 
-
 #include <glib/gslist.h>
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
@@ -57,33 +56,31 @@ GSList *show_in_menu_list = NULL;
 static void
 show_help (GtkWidget *window)
 {
-
 	GError *err;
 	err = NULL;
-		
-	gnome_help_display ("gedit", NULL,
-			    &err);
-      
+
+	gnome_help_display ("gedit", NULL, &err);
+
 	if (err)
 	{
 		GtkWidget *dialog;
-         
+
 		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
 						 GTK_DIALOG_DESTROY_WITH_PARENT,
 						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
 						 _("There was an error displaying help: %s"),
 						 err->message);
-         
+ 
 		g_signal_connect (G_OBJECT (dialog), 
 				  "response", 
 				  G_CALLBACK (gtk_widget_destroy), 
 				  NULL);
-         
+
 		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-         
+
 		gtk_widget_show (dialog);
-         
+
 		g_error_free (err);
 	}
 }
@@ -141,11 +138,10 @@ displayed_selection_changed_callback (GtkTreeSelection * selection,
 	gtk_widget_set_sensitive (remove_button, count > 0);
 }
 
-
 static void
-get_selected_encodings_func (GtkTreeModel * model,
-			     GtkTreePath * path,
-			     GtkTreeIter * iter, gpointer data)
+get_selected_encodings_func (GtkTreeModel *model,
+			     GtkTreePath *path,
+			     GtkTreeIter *iter, gpointer data)
 {
 	GSList **list = data;
 	gchar *charset;
@@ -156,23 +152,8 @@ get_selected_encodings_func (GtkTreeModel * model,
 
 	enc = gedit_encoding_get_from_charset (charset);
 	g_free (charset);
-	
+
 	*list = g_slist_prepend (*list, (gpointer)enc);
-}
-
-
-static gboolean
-slist_find (GSList *list, const gpointer data)
-{
-	while (list != NULL)
-	{
-      		if (list->data == data)
-			return TRUE;
-
-		list = g_slist_next (list);
-    	}
-
-  	return FALSE;
 }
 
 static void
@@ -224,10 +205,8 @@ add_button_clicked_callback (GtkWidget * button, void *data)
 	tmp = encodings;
 	while (tmp != NULL)
 	{
-		if (!slist_find (show_in_menu_list, tmp->data))
-		{
+		if (g_slist_find (show_in_menu_list, tmp->data) == NULL)
 			show_in_menu_list = g_slist_prepend (show_in_menu_list, tmp->data);
-		}
 
 		tmp = g_slist_next (tmp);
 	}
@@ -285,13 +264,12 @@ dialog_destroyed (void *data, GObject * where_object_was)
 	show_in_menu_list = NULL;
 }
 
-
 static void
 init_shown_in_menu_tree_model (GtkListStore * store)
 {
 	GtkTreeIter iter;
 	GSList *list, *tmp;
-	
+
 	gedit_debug (DEBUG_PREFS, "");
 
 	/* add data to the list store */
@@ -318,7 +296,6 @@ init_shown_in_menu_tree_model (GtkListStore * store)
 	}
 
 	g_slist_free (list);
-	
 }
 
 static GtkWidget *
@@ -344,7 +321,6 @@ gedit_encoding_dialog_new (GtkWindow *transient_parent)
 		g_warning ("Could not find gedit-encodings-dialog.glade2, reinstall gedit.\n");
 		return NULL;
 	}
-
 
 	/* The dialog itself */
 	dialog = glade_xml_get_widget (xml, "encodings-dialog");
