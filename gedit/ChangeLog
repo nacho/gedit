@@ -1,3 +1,23 @@
+2003-05-21 Paolo Maggi  <paolo.maggi@polito.it>
+
+        * gedit-encodings-option-menu.[ch]: new files
+
+	* Makefile.am: compile new files
+
+	* gedit-encodings.[c] (gedit_encoding_get_name): new public method
+
+	* gedit-file-selector-util.c: don't use bonobo-file-selector-util
+	anymore, remove the unused bonobo file selector stuff, added support
+	for encodings
+
+	* dialogs/gedit-encodings-dialog.c: rewritten (part of the code taken
+	from gnome-terminal
+	* dialogs/gedit-encodings-dialog.glade2: ditto
+	* dialogs/gedit-encodings-dialog.h: ditto
+
+	* dialogs/gedit-preferences-dialog.c: temporarily disabled buttons in the 
+	Open page
+
 2003-05-20  Paolo Maggi  <paolo.maggi@polito.it>
 
         * gedit-document.[ch] (gedit_document_get_encoding): new function

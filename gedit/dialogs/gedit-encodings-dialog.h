@@ -30,9 +30,9 @@
 #ifndef __GEDIT_ENCODINGS_DIALOG_H__
 #define __GEDIT_ENCODINGS_DIALOG_H__
 
-#include "gedit-preferences-dialog.h"
+#include <gtk/gtkwindow.h>
 
-void gedit_encodings_dialog_run (GeditPreferencesDialog *dlg);
+gboolean gedit_encodings_dialog_run (GtkWindow *parent);
 
 #endif /* __GEDIT_ENCODINGS_DIALOG_H__ */
 

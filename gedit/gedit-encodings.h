@@ -39,6 +39,8 @@ const GeditEncoding	*gedit_encoding_get_from_charset (const gchar         *chars
 const GeditEncoding	*gedit_encoding_get_from_index	 (gint                 index);
 
 gchar 			*gedit_encoding_to_string	 (const GeditEncoding *enc);
+
+const gchar		*gedit_encoding_get_name	 (const GeditEncoding *enc);
 const gchar		*gedit_encoding_get_charset	 (const GeditEncoding *enc);
 
 

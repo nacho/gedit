@@ -48,8 +48,6 @@
 
 #include "gedit-file-selector-util.h"
 
-#include <bonobo/bonobo-file-selector-util.h>
-
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -58,13 +56,7 @@
 #include <bonobo/bonobo-exception.h>
 #include <bonobo/bonobo-widget.h>
 
-#include <gtk/gtkmain.h>
-#include <gtk/gtkclist.h>
-#include <gtk/gtkfilesel.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkeditable.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 
 #include <bonobo/bonobo-i18n.h>
 
@@ -73,8 +65,18 @@
 #include <eel/eel-string.h>
 
 #include "gedit-utils.h"
+#include "gedit-encodings-option-menu.h"
 
 static GQuark user_data_id = 0;
+
+#define GET_MODE(w) (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (w), "GnomeFileSelectorMode")))
+#define SET_MODE(w, m) (g_object_set_data (G_OBJECT (w), "GnomeFileSelectorMode", GINT_TO_POINTER (m)))
+
+typedef enum {
+	FILESEL_OPEN,
+	FILESEL_OPEN_MULTI,
+	FILESEL_SAVE
+} FileselMode;
 
 static gint
 delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
@@ -161,124 +163,6 @@ replace_read_only_file (GtkWindow *parent, const gchar* file_name)
 			       file_name);
 }
 
-static void
-listener_cb (BonoboListener *listener, 
-	     const gchar *event_name,
-	     const CORBA_any *any,
-	     CORBA_Environment *ev,
-	     gpointer data)
-{
-	GtkWidget *dialog;
-	CORBA_sequence_CORBA_string *seq;
-	char *subtype;
-	GnomeVFSURI *uri;
-
-	dialog = data;
-	
-	subtype = bonobo_event_subtype (event_name);
-	if (!strcmp (subtype, "Cancel"))
-		goto cancel_clicked;
-
-	seq = any->_value;
-	if (seq->_length < 1)
-		goto cancel_clicked;
-
-	
-	/* FIXME: does seq->_buffer[0] represent a canonical URI ?*/
-	uri = gnome_vfs_uri_new (seq->_buffer[0]);
-
-	if (gnome_vfs_uri_exists (uri)) 
-	{
-		if (!replace_existing_file (GTK_WINDOW (dialog), seq->_buffer[0])) 
-		{
-			gnome_vfs_uri_unref (uri);
-			g_free (subtype);
-			return;
-		}
-	}
-			
-	gnome_vfs_uri_unref (uri);
-
-	g_object_set_qdata (G_OBJECT (dialog), 
-			   user_data_id,
-			   g_strdup (seq->_buffer[0]));
-
- cancel_clicked:
-	gtk_widget_hide (dialog);
-
-	g_free (subtype);
-	gtk_main_quit ();
-}
-
-static BonoboWidget *
-create_control (gboolean enable_vfs)
-{
-	CORBA_Environment ev;
-	BonoboWidget *bw;
-	char *moniker;
-
-	moniker = g_strdup_printf (
-		"OAFIID:GNOME_FileSelector_Control!"
-		"Application=%s;"
-		"EnableVFS=%d;"
-		"MultipleSelection=%d;"
-		"SaveMode=%d",
-		g_get_prgname (),
-		enable_vfs,
-		FALSE, 
-		TRUE);
-
-	bw = g_object_new (BONOBO_TYPE_WIDGET, NULL);
-	CORBA_exception_init (&ev);
-
-	bw = bonobo_widget_construct_control (
-		bw, moniker, CORBA_OBJECT_NIL, &ev);
-
-	CORBA_exception_free (&ev);
-	g_free (moniker);
-
-	return bw;
-}
-
-static GtkWindow *
-create_bonobo_selector (gboolean    enable_vfs,
-			const char *mime_types,
-			const char *default_path, 
-			const char *default_filename)
-
-{
-	GtkWidget    *dialog;
-	BonoboWidget *control;
-
-	control = create_control (enable_vfs);
-	if (!control)
-		return NULL;
-
-	dialog = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_container_add (GTK_CONTAINER (dialog), GTK_WIDGET (control));
-	gtk_widget_set_size_request (dialog, 560, 450);
-
-	bonobo_event_source_client_add_listener (
-		bonobo_widget_get_objref (control), 
-		listener_cb, 
-		"GNOME/FileSelector/Control:ButtonClicked",
-		NULL, dialog);
-
-	if (mime_types)
-		bonobo_widget_set_property (
-			control, "MimeTypes", mime_types, NULL);
-
-	if (default_path)
-		bonobo_widget_set_property (
-			control, "DefaultLocation", default_path, NULL);
-
-	if (default_filename)
-		bonobo_widget_set_property (
-			control, "DefaultFileName", default_filename, NULL);
-	
-	return GTK_WINDOW (dialog);
-}
-
 static char *
 concat_dir_and_file (const char *dir, const char *file)
 {
@@ -331,17 +215,28 @@ ok_clicked_cb (GtkWidget *widget, gpointer data)
 		gtk_file_selection_set_filename (fsel, dir_name);
 		g_free (dir_name);
 	} 
-	else
+	else if (GET_MODE (fsel) == FILESEL_OPEN_MULTI) 
+	{
+		gchar **strv = gtk_file_selection_get_selections (fsel);
+		
+		g_object_set_qdata (G_OBJECT (fsel),
+				    user_data_id, strv);
+		gtk_main_quit ();
+	}
+	else	
 	{	
-		if (g_file_test (file_name, G_FILE_TEST_EXISTS))
+		if (GET_MODE (fsel) == FILESEL_SAVE)
 		{
-			if (is_read_only (file_name))
+			if (g_file_test (file_name, G_FILE_TEST_EXISTS))
 			{
-				if (!replace_read_only_file (GTK_WINDOW (fsel), file_name))
+				if (is_read_only (file_name))
+				{
+					if (!replace_read_only_file (GTK_WINDOW (fsel), file_name))
+						return;
+				}
+				else if (!replace_existing_file (GTK_WINDOW (fsel), file_name))
 					return;
 			}
-			else if (!replace_existing_file (GTK_WINDOW (fsel), file_name))
-				return;
 		}
 
 		gtk_widget_hide (GTK_WIDGET (fsel));
@@ -366,14 +261,54 @@ cancel_clicked_cb (GtkWidget *widget, gpointer data)
 
 
 static GtkWindow *
-create_gtk_selector (const char *default_path,
-		     const char *default_filename)
+create_gtk_selector (FileselMode mode,
+		     const char *default_path,
+		     const char *default_filename,
+		     gboolean use_encoding,
+		     const GeditEncoding *encoding)
 {
 	GtkWidget *filesel;
-	
 	gchar* path;
-
+		
 	filesel = gtk_file_selection_new (NULL);
+
+	if (use_encoding)
+	{
+		GtkWidget *hbox;
+		GtkWidget *label;
+		GtkWidget *menu;
+
+		hbox = gtk_hbox_new (FALSE, 6);
+
+		label = gtk_label_new_with_mnemonic (_("Ch_aracter Coding:"));
+		menu = gedit_encodings_option_menu_new ();
+		
+		gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);
+
+		if (encoding != NULL)
+			gedit_encodings_option_menu_set_selected_encoding (
+					GEDIT_ENCODINGS_OPTION_MENU (menu),
+					encoding);
+				       	
+			
+		gtk_box_pack_start (GTK_BOX (hbox), 
+				    label,
+				    FALSE,
+				    FALSE,
+				    0);
+
+		gtk_box_pack_end (GTK_BOX (hbox), 
+				  menu,
+				  TRUE,
+				  TRUE,
+				  0);
+
+		gtk_box_pack_end (GTK_BOX (GTK_FILE_SELECTION (filesel)->main_vbox), 
+				  hbox,
+				  TRUE,
+				  TRUE,
+				  6);
+	}
 
 	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
 			  "clicked", G_CALLBACK (ok_clicked_cb),
@@ -390,7 +325,8 @@ create_gtk_selector (const char *default_path,
 	else
 		path = g_strdup ("./");
 
-	if (default_filename) {
+	if (default_filename) 
+	{
 		gchar* file_name = concat_dir_and_file (path, default_filename);
 		gtk_file_selection_set_filename (GTK_FILE_SELECTION (filesel), file_name);
 		g_free (file_name);
@@ -406,34 +342,37 @@ create_gtk_selector (const char *default_path,
 
 	g_free (path);
 
+	if (mode == FILESEL_OPEN_MULTI) 
+		gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (filesel), TRUE);
+
 	return GTK_WINDOW (filesel);
 }
 
 static gpointer
 run_file_selector (GtkWindow  *parent,
 		   gboolean    enable_vfs,
+		   FileselMode mode, 
 		   const char *title,
 		   const char *mime_types,
 		   const char *default_path, 
-		   const char *default_filename)
+		   const char *default_filename,
+		   const GeditEncoding **encoding)
 
 {
 	GtkWindow *dialog = NULL;
 	gpointer   retval;
 	gpointer   data;
-	gboolean   using_bonobo_filesel = FALSE;
 
 	if (!user_data_id)
 		user_data_id = g_quark_from_static_string ("GeditUserData");
 
-	if (!g_getenv ("GNOME_FILESEL_DISABLE_BONOBO"))
-		dialog = create_bonobo_selector (enable_vfs, mime_types, 
-						 default_path, default_filename);
-	
-	if (!dialog)
-		dialog = create_gtk_selector (default_path, default_filename);
-	else
-		using_bonobo_filesel = TRUE;
+	dialog = create_gtk_selector (mode,
+				      default_path, 
+				      default_filename, 
+				      (encoding != NULL),
+				      (encoding != NULL) ? *encoding : NULL);
+
+	SET_MODE (dialog, mode);
 
 	gtk_window_set_title (dialog, title);
 	gtk_window_set_modal (dialog, TRUE);
@@ -450,14 +389,31 @@ run_file_selector (GtkWindow  *parent,
 	gtk_main ();
 
 	data = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
-
-	if ((data != NULL) && enable_vfs && !using_bonobo_filesel)
+	
+	if (data != NULL) 
 	{
-		retval = gnome_vfs_get_uri_from_local_path (data);
- 		g_free (data);
-	}
-	else
-		retval = data;
+		if (enable_vfs && (mode != FILESEL_OPEN_MULTI)) 
+		{
+	 		retval = gnome_vfs_get_uri_from_local_path (data);
+ 			g_free (data);
+		}
+		else if (enable_vfs && (mode == FILESEL_OPEN_MULTI)) 
+		{
+			gint i;
+			gchar **files = data;
+
+			for (i = 0; files[i]; ++i) 
+			{
+				gchar *tmp = files [i];
+				files [i] = gnome_vfs_get_uri_from_local_path (tmp);
+				g_free (tmp);
+			}
+
+			retval = files;
+	 	} else
+ 			retval = data;
+	} else
+		retval = NULL;
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
@@ -486,8 +442,9 @@ gedit_file_selector_open (GtkWindow  *parent,
 			   const char *mime_types,
 			   const char *default_path)
 {
-	return bonobo_file_selector_open (parent, enable_vfs, 
-			title, mime_types, default_path);
+	return run_file_selector (parent, enable_vfs, FILESEL_OPEN, 
+				  title ? title : _("Select a file to open"),
+				  mime_types, default_path, NULL, NULL);
 }
 
 /**
@@ -513,8 +470,11 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
 				const char *mime_types,
 				const char *default_path)
 {
-	return bonobo_file_selector_open_multi (parent, enable_vfs, 
-			title, mime_types, default_path);
+	const GeditEncoding *encoding = NULL;
+
+	return run_file_selector (parent, enable_vfs, FILESEL_OPEN_MULTI,
+				  title ? title : _("Select files to open"),
+				  mime_types, default_path, NULL, &encoding);
 }
 
 /**
@@ -541,7 +501,9 @@ gedit_file_selector_save (GtkWindow  *parent,
 			   const char *default_path, 
 			   const char *default_filename)
 {
-	return run_file_selector (parent, enable_vfs,
+	const GeditEncoding *encoding = NULL;
+
+	return run_file_selector (parent, enable_vfs, FILESEL_SAVE,
 				  title ? title : _("Select a filename to save"),
-				  mime_types, default_path, default_filename);
+				  mime_types, default_path, default_filename, &encoding);
 }

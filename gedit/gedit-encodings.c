@@ -336,3 +336,15 @@ gedit_encoding_get_charset (const GeditEncoding* enc)
 	return enc->charset;
 }
 
+const gchar *
+gedit_encoding_get_name (const GeditEncoding* enc)
+{
+	g_return_val_if_fail (enc != NULL, NULL);
+	g_return_val_if_fail (enc->name != NULL, NULL);
+
+	gedit_encoding_lazy_init ();
+
+	return enc->name;
+}
+
+

@@ -2095,7 +2095,7 @@ gedit_preferences_dialog_add_enc_button_clicked (GtkButton *button, GeditPrefere
 
 	g_return_if_fail (dlg != NULL);
 	
-	gedit_encodings_dialog_run (dlg);
+	gedit_encodings_dialog_run (GTK_WINDOW (dlg));
 }
 
 static void
@@ -2152,8 +2152,13 @@ gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection 
 	g_return_if_fail (dlg != NULL);
 	g_return_if_fail (selection != NULL);
 
-	selected = gtk_tree_selection_get_selected (selection, NULL, NULL) &&
+	/* FIXME: disabled - Paolo */
+
+	selected = FALSE;
+		/*
+		gtk_tree_selection_get_selected (selection, NULL, NULL) &&
 		gedit_prefs_manager_encodings_can_set ();
+		*/
 	
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, selected);
 
@@ -2276,7 +2281,8 @@ gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_return_val_if_fail (dlg->priv->up_enc_button != NULL, FALSE);
 	g_return_val_if_fail (dlg->priv->down_enc_button != NULL, FALSE);
 
-	gtk_widget_set_sensitive (dlg->priv->add_enc_button, gedit_prefs_manager_encodings_can_set ());
+	/* FIXME: disabled - Paolo */
+	gtk_widget_set_sensitive (dlg->priv->add_enc_button, FALSE /*gedit_prefs_manager_encodings_can_set ()*/);
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, FALSE);
 	gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
 	gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
