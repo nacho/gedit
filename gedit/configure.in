@@ -39,4 +39,8 @@ AC_STRUCT_TM
 dnl Checks for library functions.
 AC_GEDIT_CHECK
 
+
+CPPFLAGS="$GTK_CFLAGS $CPPFLAGS"
+LIBS="$LIBS $GTK_LIBS"
+
 AC_OUTPUT(Makefile, echo timestamp > stamp-h)
