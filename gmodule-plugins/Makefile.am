@@ -8,4 +8,8 @@ INCLUDES = -I$(includedir) 				\
 
 plugindir = $(prefix)/share/go/plugins
 
-SUBDIRS = cvsdiff diff email encrypt reverse spell prm
+if HAVE_GNOME
+spell = spell
+endif
+
+SUBDIRS = cvsdiff diff email encrypt reverse $(spell) prm
