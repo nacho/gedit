@@ -246,6 +246,10 @@ GnomeUIInfo gedit_file_menu [] = {
 	
 	GNOMEUIINFO_SEPARATOR, 
 
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gE_prefs_dialog, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_SEPARATOR, 
+
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
@@ -264,9 +268,11 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
 
-	{ GNOME_APP_UI_SEPARATOR },
+	GNOMEUIINFO_SEPARATOR,
+
 	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
+
 	GNOMEUIINFO_END
 };	
 
@@ -288,7 +294,9 @@ GnomeUIInfo gedit_tab_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
+
+	GNOMEUIINFO_SEPARATOR,
+
 	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cb, (gpointer) GE_WINDOW, NULL },
 	GNOMEUIINFO_END
 };
@@ -313,8 +321,6 @@ GnomeUIInfo gedit_toolbar_menu []= {
 };
 
 GnomeUIInfo gedit_options_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Preferences..."),  NULL, gE_prefs_dialog, (gpointer) GE_DATA, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, options_toggle_status_bar_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, options_toggle_word_wrap_cb, (gpointer) GE_WINDOW, NULL },
@@ -334,28 +340,30 @@ GnomeUIInfo gedit_options_menu []= {
 
 GnomeUIInfo gedit_window_menu []={
         { GNOME_APP_UI_ITEM, N_("New Window"), NULL, window_new_cb, (gpointer) GE_DATA, NULL,
+
           GNOME_APP_PIXMAP_NONE, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Close Window"), NULL, window_close_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
+
+	GNOMEUIINFO_SEPARATOR,
+
 	{ GNOME_APP_UI_ITEM, N_("Document List"), NULL, files_list_popup, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL,
 	  'L', GDK_CONTROL_MASK, NULL },
+
 	{ GNOME_APP_UI_ITEM, N_("Message Box"), NULL, msgbox_show, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
-	{ GNOME_APP_UI_ENDOFINFO }
+
+	GNOMEUIINFO_END
 };
 
 GnomeUIInfo gedit_help_menu []= {
-#if 0 /* We don't have any real documentation yet, so this isn't needed */
-	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
-#endif
-	
-	{GNOME_APP_UI_ITEM, N_("About..."), NULL, gE_about_box, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL},
-	
-	{GNOME_APP_UI_ENDOFINFO}
+
+	GNOMEUIINFO_HELP ("gedit"),
+
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gE_about_box, NULL),
+
+	GNOMEUIINFO_END
 	
 };
 
@@ -367,22 +375,24 @@ GnomeUIInfo gedit_plugins_menu []= {
 #endif
 
 GnomeUIInfo gedit_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, &gedit_file_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, &gedit_edit_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+        GNOMEUIINFO_MENU_FILE_TREE(gedit_file_menu),
+
+	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
+
 	{ GNOME_APP_UI_SUBTREE, N_("_Search"), NULL, &gedit_search_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("_Options"), NULL, &gedit_options_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+
+	GNOMEUIINFO_MENU_OPTIONS_TREE(gedit_options_menu),
+
 #if PLUGIN_TEST
 	{ GNOME_APP_UI_SUBTREE, N_("_Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 #endif
-	{ GNOME_APP_UI_SUBTREE, N_("_Window"), NULL, &gedit_window_menu, NULL, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, &gedit_help_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+
+	GNOMEUIINFO_MENU_WINDOWS_TREE(gedit_window_menu),
+
+	GNOMEUIINFO_MENU_HELP_TREE(gedit_help_menu),
+
 	GNOMEUIINFO_END
 };
 
