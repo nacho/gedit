@@ -491,7 +491,7 @@ gedit_file_save (GeditMDIChild* child)
 	       	
 		if (error == NULL)
 		{
-			error_message = _("Unknow error");
+			error_message = _("Unknown error");
 		}
 		else
 		{
@@ -687,7 +687,7 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 	       	
 		if (error == NULL)
 		{
-			error_message = _("Unknow error");
+			error_message = _("Unknown error");
 		}
 		else
 		{
@@ -819,7 +819,7 @@ gedit_file_revert (GeditMDIChild *child)
 	       	
 		if (error == NULL)
 		{
-			error_message = _("Unknow error");
+			error_message = _("Unknown error");
 		}
 		else
 		{
