@@ -5,7 +5,12 @@ AM_INIT_AUTOMAKE(gEdit, 0.4.5)
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
 
-GNOME_INIT
+dnl If GNOME is found, run the script in square brackets.
+GNOME_INIT_HOOK([have_gnome=yes])
+
+if test x$have_gnome != xyes ; then
+  AC_DEFINE(WITHOUT_GNOME)
+fi
 
 AC_ISC_POSIX
 AC_PROG_CC
