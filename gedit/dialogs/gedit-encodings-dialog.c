@@ -51,7 +51,7 @@ enum {
 	N_COLUMNS
 };
 
-GSList *show_in_menu_list = NULL;
+static GSList *show_in_menu_list = NULL;
 
 static void
 show_help (GtkWidget *window)
@@ -131,9 +131,8 @@ displayed_selection_changed_callback (GtkTreeSelection * selection,
 					     count_selected_items_func,
 					     &count);
 
-	remove_button =
-	    g_object_get_data (G_OBJECT (dialog),
-			       "encoding-dialog-remove");
+	remove_button = g_object_get_data (G_OBJECT (dialog),
+					   "encoding-dialog-remove");
 
 	gtk_widget_set_sensitive (remove_button, count > 0);
 }
