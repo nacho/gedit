@@ -110,25 +110,18 @@ gedit_view_list_insert (gedit_view *view, gedit_data *data)
 	if (view != GE_VIEW(mdi->active_view))
 	{
 		gtk_text_freeze (GTK_TEXT (view->text));
-		
 		p1 = gtk_text_get_point (GTK_TEXT (view->text));
-		
 		gtk_text_set_point (GTK_TEXT(view->text), position);
-
 		gtk_text_insert (GTK_TEXT (view->text), NULL,
-				 NULL,
-				 NULL, buffer, length);
+				 NULL, NULL, buffer, length);
 		gtk_text_set_point (GTK_TEXT (view->text), p1);
-		
 		gtk_text_thaw (GTK_TEXT (view->text));
 		
 		gtk_text_freeze (GTK_TEXT (view->split_screen));
 		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
 		gtk_text_set_point (GTK_TEXT(view->split_screen), (position));
-
 		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-				 NULL,
-				 NULL, buffer, length);
+				 NULL, NULL, buffer, length);
 		gtk_text_set_point (GTK_TEXT (view->text), p1);
 		gtk_text_thaw (GTK_TEXT (view->split_screen));
 	}	

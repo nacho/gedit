@@ -30,10 +30,12 @@ void gedit_flash_va  (gchar *format, ...);
 
 /* DEBUGING tools */ 
 typedef enum {
-  DEBUG_UNDOREDO,
-  DEBUG_PLUGINS,
+  DEBUG_UNDO,
+  DEBUG_UNDO_DEEP,
   DEBUG_VIEW,
-  DEBUG_VIEW_DEEP
+  DEBUG_VIEW_DEEP,
+  DEBUG_PLUGINS,
+  DEBUG_PLUGINS_DEEP
 } gedit_debug_modes;
 
 void gedit_debug_mess( gchar * message, gint type );

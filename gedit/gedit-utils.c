@@ -85,7 +85,8 @@ gedit_flash_va (gchar *format, ...)
 
 /**
  * gedit_debug_mess:
- * @msg: Message to flash on the statusbar
+ * @message: Message to display on the console
+ * @type : Group type of message
  *
  * Flash a temporary message on the statusbar of gedit.
  */

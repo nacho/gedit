@@ -23,10 +23,11 @@
 #include <gnome.h>
 #include "main.h"
 #include "gedit-undo.h"
+#include "gedit-utils.h"
+
 #include "gE_mdi.h"
 #include "gE_view.h"
 
-int debug_ = FALSE;
 void views_insert (gedit_document *doc, gedit_undo *undo);
 void views_delete (gedit_document *doc, gedit_undo *undo);
 void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc);
@@ -39,8 +40,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 {
 	gedit_undo *undo;
 
-	if (debug_)
-		g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
+	gedit_debug_mess ("F:      undo-gedit_undo_add\n", DEBUG_UNDO);
+	/*"start:%i end:%i action:%i\n", start_pos, end_pos, action);*/
 
 	undo = g_new (gedit_undo, 1);
 
@@ -50,14 +51,10 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	undo->action = action;
 	undo->status = doc->changed;
 	
-	if (debug_)
-		g_print("the text is :%s\n", undo->text);
-
 	/* nuke the redo list, if its available */
 	if (doc->redo)
 	{
-		if(debug_)
-			g_print("About to free doc->redo...\n");
+		gedit_debug_mess ("F:      undo-gedit_undo_add - Kill redo list\n", DEBUG_UNDO_DEEP);
 		g_list_free (doc->redo);
 		doc->redo = NULL;
 	}
@@ -71,6 +68,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	gedit_document *doc = gedit_document_current();
 	gedit_undo *undo, *redo;
 
+	gedit_debug_mess ("F:      undo-gedit_undo_do\n", DEBUG_UNDO);
+	
 	redo = g_new (gedit_undo, 1);
 	
 	if(doc->undo==NULL)
@@ -82,13 +81,11 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
 
-	if(debug_)
-		g_print("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+        /*("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);*/ 
 	
 	if (undo->action == DELETE)
 	{
-		if(debug_)
-			g_print("undo do action DELETE ");
+		gedit_debug_mess ("F:      undo-gedit_undo_do - DELETE \n", DEBUG_UNDO_DEEP);
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos))
 			doc->buf = g_string_insert (doc->buf, undo->start_pos, undo->text);
@@ -101,8 +98,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	}
 	else if (undo->action == INSERT)
 	{
-		if(debug_)
-			g_print("undo do action INSERT ");
+		gedit_debug_mess ("F:      undo-gedit_undo_do - INSERT\n", DEBUG_UNDO_DEEP);
+		
 		/* We're deleteing somthing that had been inserted */
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
 			doc->buf = g_string_erase (doc->buf, undo->start_pos, (undo->end_pos - undo->start_pos));
@@ -123,8 +120,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	gedit_document *doc = gedit_document_current();
 	gedit_undo *redo;
 
-	if(debug_)
-		g_print("Entering undo_redo..\n");
+	gedit_debug_mess ("F:      undo-gedit_undo_redo\n", DEBUG_UNDO);
 	
 	if (!doc->redo)
 	  return;
@@ -136,8 +132,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	/* Now we can do the undo proper.. */
 	if (redo->action == INSERT)
 	{
-		if(debug_)
-			g_print("INSERT buggy ....  ...\n");
+		gedit_debug_mess ("F:      undo-gedit_undo_redo - INSERT \n", DEBUG_UNDO_DEEP);
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
 			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
@@ -151,8 +146,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	}
 	else if (redo->action == DELETE)
 	{
-		if(debug_)
-			g_print("DELETE ...\n");
+		gedit_debug_mess ("F:      undo-gedit_undo_redo - DELETE \n", DEBUG_UNDO_DEEP);
 		/* We're deleteing somthing that had been inserted */
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len)
 			doc->buf = g_string_erase (doc->buf, redo->start_pos, (redo->end_pos - redo->start_pos));
@@ -174,8 +168,7 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 	gint p1;
 	gedit_view *view;
 
-	if(debug_)
-		g_print("Entering views insert..\n");
+	gedit_debug_mess ("F:      undo-views_insert\n", DEBUG_UNDO);
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
@@ -185,18 +178,14 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 		gtk_text_set_point (GTK_TEXT(view->text), undo->start_pos);
 		gtk_text_thaw (GTK_TEXT (view->text));
 		gtk_text_insert (GTK_TEXT (view->text), NULL,
-				 NULL,
-				 NULL,
-				 undo->text,
+				 NULL, NULL, undo->text,
 				 strlen(undo->text));
 		gtk_text_freeze (GTK_TEXT (view->split_screen));
 		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
 		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
 		gtk_text_thaw (GTK_TEXT (view->split_screen));
 		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-				 NULL,
-				 NULL,
-				 undo->text,
+				 NULL, NULL, undo->text,
 				 strlen(undo->text));
 	}  
 }
@@ -209,13 +198,12 @@ views_delete (gedit_document *doc, gedit_undo *undo)
 	gint p1;
 	gint start_pos, end_pos;
 
-	gint chema1, chema2, chema3;
-
 	start_pos = undo->start_pos;
 	end_pos = undo->end_pos;
 
-	if(debug_)
-		g_print("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+	gedit_debug_mess ("F:      undo-views_insert\n", DEBUG_UNDO);
+	
+	/*("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);*/
 
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
