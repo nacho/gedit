@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.2.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-08 19:56+0200\n"
-"PO-Revision-Date: 2003-08-08 21:34+0200\n"
+"POT-Creation-Date: 2003-08-23 16:10+0200\n"
+"PO-Revision-Date: 2003-08-23 16:09+0200\n"
 "Last-Translator: Goran Rakić <gox@devbase.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -45,7 +45,7 @@ msgstr "proizvodnja gedit automatizacije"
 msgid "Edit text files"
 msgstr "Izmeni tekstualne datoteke"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:363
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "Uređivač teksta"
 
@@ -69,7 +69,7 @@ msgstr "Automatsko snimanje"
 msgid "Auto Save Interval"
 msgstr "Interval automatskog snimanja"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "Auto indent"
 msgstr "Automatsko uvlačenje"
 
@@ -442,7 +442,7 @@ msgstr ""
 "font naveden u opciji \"Font editora\" će biti korišćen umesto sistemskog "
 "fonta."
 
-#: gedit/bonobo-mdi.c:549 gedit/bonobo-mdi.c:1962
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiviraj %s"
@@ -464,7 +464,7 @@ msgid "Could not find the required widgets inside %s."
 msgstr "Nisam mogu da pronađem neophodne kontrole u %s."
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:400
+#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:402
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Tekst \"%s\" nije pronađen."
@@ -553,7 +553,6 @@ msgid "Line numbers font picker"
 msgstr "Izbor fonta za brojeve linija"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
-#: gedit/dialogs/gedit-preferences-dialog.c:1888
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Pritisnite ovo dugme kako biste da odabrali font koji će biti korišćen za "
@@ -617,94 +616,75 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Odabrana datoteka nije izvršna."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:243
+#: gedit/dialogs/gedit-preferences-dialog.c:197
 msgid "Font & Colors"
 msgstr "Font i boje"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Tabs"
 msgstr "Tabulatori"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:246
-msgid "Wrap Mode"
-msgstr "Način preloma"
+#: gedit/dialogs/gedit-preferences-dialog.c:200
+msgid "Text Wrapping"
+msgstr "Prelom teksta"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:247
+#: gedit/dialogs/gedit-preferences-dialog.c:201
 msgid "Auto Indent"
 msgstr "Automatsko uvlačenje"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:248
+#: gedit/dialogs/gedit-preferences-dialog.c:202
 msgid "Line Numbers"
 msgstr "Brojevi linija"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:250 gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Otvori"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:252
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Snimi"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:253
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:68
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
 msgid "Undo"
 msgstr "Poništi"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:262
-msgid "Page"
-msgstr "Strana"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:264
-#: gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Fontovi"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:272
+#: gedit/dialogs/gedit-preferences-dialog.c:213
 msgid "Manager"
 msgstr "Menadžer"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:280
+#: gedit/dialogs/gedit-preferences-dialog.c:221
 msgid "Editor"
 msgstr "Editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:282
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:217
-#: gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "Štampaj"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:284
+#: gedit/dialogs/gedit-preferences-dialog.c:223
 msgid "Plugins"
 msgstr "Dodaci"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:356
+#: gedit/dialogs/gedit-preferences-dialog.c:295
 msgid "Cat_egories:"
 msgstr "Kat_egorije:"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:378
+#: gedit/dialogs/gedit-preferences-dialog.c:317
 msgid "Preferences"
 msgstr "Podešavanja"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:618
+#: gedit/dialogs/gedit-preferences-dialog.c:557
 msgid "Categories"
 msgstr "Kategorije"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:853
+#: gedit/dialogs/gedit-preferences-dialog.c:787
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Pritisnite ovo dugme kako biste odabrali font koji će biti korišćen u editoru"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:856
+#: gedit/dialogs/gedit-preferences-dialog.c:790
 msgid "Push this button to configure text color"
 msgstr "Pritisnite ovo dugme kako biste podesili boju teksta"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:858
+#: gedit/dialogs/gedit-preferences-dialog.c:792
 msgid "Push this button to configure background color"
 msgstr "Pritisnite ovo dugme kako biste podesili boju pozadine"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:860
+#: gedit/dialogs/gedit-preferences-dialog.c:794
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -712,29 +692,13 @@ msgstr ""
 "Pritisnite ovo dugme kako biste podesili boju u kojoj će se označeni tekst  "
 "pojaviti"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:863
+#: gedit/dialogs/gedit-preferences-dialog.c:797
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Pritisnite ovo dugme kako biste podesili boju kojom označeni tekst treba da "
 "bude označen"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1884
-msgid "Push this button to select the font to be used to print the body"
-msgstr ""
-"Pritisnite ovo dugme kako biste odabrali font koji će biti korišćen za "
-"štampanje tela teksta"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1886
-msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
-"Pritisnite ovo dugme kako biste odabrali font koji će biti korišćen za "
-"štampanje zaglavlja"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:2335
-msgid "Encodings"
-msgstr "Kodni rasporedi"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -755,241 +719,146 @@ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Fontovi &amp; boje</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Fontovi</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Brojevi linija</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:7
+#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Menadžer</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Otvori</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Strana</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:10
+#: gedit/dialogs/gedit-preferences.glade2.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Snimi</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:11
+#: gedit/dialogs/gedit-preferences.glade2.h:8
 msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Tabulatori</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:12
+#: gedit/dialogs/gedit-preferences.glade2.h:9
 msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Poništi</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:13
+#: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Način preloma</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Boje</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Prilikom snimanja nove datoteke...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Prilikom snimanja postojeće datoteke...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Dodaj novi kodni raspored"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Uvek koristi U_TF-8 kodni raspored (brže)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Uvek koristi _UTF-8 kodni raspored (brže)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "Napravi _rezervnu kopiju datoteka pre snimanja"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:14
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Ne deli re_č u dve linije"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 msgid "Editor _font: "
 msgstr "Font _editora:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "Enable _auto indentation"
 msgstr "Omogući _automatko uvlačenje"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Omogući _prelom teksta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Fonts & Colors"
 msgstr "Fontovi & boje"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Umetni razmake ume_sto tabulatora"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "LOGO"
 msgstr "LOGO"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "Brojevi li_nija"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Line numbers"
 msgstr "Brojevi linija"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Premesti niže"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Premesti više"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "Z_aglavlje stranice"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Pick the background color"
 msgstr "Odaberite boju pozadine"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Pick the selected text color"
 msgstr "Odaberite boju odabranog teksta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick the selection color"
 msgstr "Odaberite boju označenog prostora"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the text color"
 msgstr "Odaberite boju teksta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Plugin manager"
 msgstr "Menadžer dodataka"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "Štampaj broj _linije svakih"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Fontovi za štampanje"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Ukloni kodni raspored"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Se_lection color:"
 msgstr "Bo_ja označenog prostora:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Selecte_d text color:"
 msgstr "Boja označeno_g teksta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Set _tabs width equivalent to"
 msgstr "Podesi širinu _tabulatora na"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Set limit on _undo actions to"
 msgstr "Podesi limit poni_štavanja akcija"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "U_se default theme colors"
 msgstr "Koristi predefini_sane boje teme"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "Kori_sti originalan kodni raspored ukoliko je moguće"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Koristi trenutni kodni raspored lokalnih podešavanja ako je moguće"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Koristi trenutni kodni raspored lokalnih podešavanja ako je moguće"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Wrap mode"
 msgstr "Način preloma"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:54
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "_Autosave current file every"
 msgstr "_Automatski snimi datoteku svakih"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:55
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "_Background color:"
 msgstr "_Boja pozadine"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:56
-#: gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "Te_lo:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:57
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "_Display line numbers"
 msgstr "Prika_ži brojeve linije"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:58
-#: gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "Štam_paj zaglavlje stranice"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:59
-#: gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "Pov_rati predefinisane fontove"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "Podržani kodni ra_sporedi:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:61
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "_Text color:"
 msgstr "Boja _teksta:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:62
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Use default theme font"
 msgstr "Koristi predefinisani _font teme:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:63
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_action(s)"
 msgstr "_akcija(e)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:64
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_minutes"
 msgstr "_minuta"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:65
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "character(s)"
 msgstr "karakter(a)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr "li_nija"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -1092,6 +961,10 @@ msgstr "<b>Brojevi linija</b>"
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Prelom teksta</b>"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Fontovi"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
 msgstr "Opšte"
@@ -1112,6 +985,10 @@ msgstr "Štampaj brojeve _linija"
 msgid "Print s_yntax highlighting"
 msgstr "Štampaj isticanje sinta_kse"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "Te_lo:"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
 msgid "_Line numbers:"
 msgstr "Brojevi _linija:"
@@ -1119,6 +996,14 @@ msgstr "Brojevi _linija:"
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
 msgid "_Number every"
 msgstr "Ispiši _broj svakih"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "Štam_paj zaglavlje stranice"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "Pov_rati predefinisane fontove"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
 msgid "lines"
@@ -1206,7 +1091,7 @@ msgstr "Unesite lokaciju (URI) datoteke koju želite da otvorite: "
 msgid "Open from URI"
 msgstr "Otvori URI"
 
-#: gedit/gedit-commands.c:562
+#: gedit/gedit-commands.c:564
 msgid "translator_credits"
 msgstr ""
 "Goran Rakić <gox@devbase.net>\n"
@@ -1214,55 +1099,55 @@ msgstr ""
 "\n"
 "http://Prevod.org/"
 
-#: gedit/gedit-commands.c:587
+#: gedit/gedit-commands.c:589
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:591
+#: gedit/gedit-commands.c:593
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit je mali i lagan uređivač teksta za Gnom"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 msgid "Untitled"
 msgstr "Bez imena"
 
-#: gedit/gedit-document.c:599 gedit/gedit-document.c:646
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
 msgid "Invalid file name"
 msgstr "Neispravno ime datoteke"
 
-#: gedit/gedit-document.c:812 gedit/gedit-document.c:916
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Neispravni UTF-8 podaci"
 
-#: gedit/gedit-document.c:1208
+#: gedit/gedit-document.c:1210
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Ne mogu da pročitam informacije o simbolički link za %s"
 
-#: gedit/gedit-document.c:1254
+#: gedit/gedit-document.c:1256
 msgid "The file has too many symbolic links."
 msgstr "Datoteka ima previše simboličkih linkova."
 
-#: gedit/gedit-document.c:1310
+#: gedit/gedit-document.c:1312
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ne može da koristi %s: adrese za pisanje."
 
-#: gedit/gedit-document.c:1317
+#: gedit/gedit-document.c:1319
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ne može da podrži ovaj tip lokacije za pisanje"
 
-#: gedit/gedit-document.c:1330
+#: gedit/gedit-document.c:1332
 msgid "Invalid filename."
 msgstr "Neispravno ime datoteke."
 
-#: gedit/gedit-document.c:1442
+#: gedit/gedit-document.c:1444
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1270,7 +1155,7 @@ msgstr ""
 "Nema dovoljno prostora na disku da snimite datoteku.\n"
 "Molimo vas da oslobodite prostor na disku i pokušate ponovo."
 
-#: gedit/gedit-document.c:1447
+#: gedit/gedit-document.c:1449
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1280,11 +1165,11 @@ msgstr ""
 "datoteke. Molimo vas da snimite manju datoteku ili da je snimite na disk koji "
 "nema ovo ograničenje."
 
-#: gedit/gedit-document.c:1491
+#: gedit/gedit-document.c:1493
 msgid "Could not create a backup file."
 msgstr "Ne mogu da napravim rezervnu kopiju datoteke."
 
-#: gedit/gedit-document.c:1611
+#: gedit/gedit-document.c:1613
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nije moguće povratiti dokument Bez imena"
 
@@ -1660,6 +1545,10 @@ msgstr "Ne mogu da inicijalitujem menadžer podešavanja."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Očekivan '%s' je dobio '%s' za ključ '%s'"
 
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "Štampaj"
+
 #: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
 msgstr "Linija"
@@ -1786,6 +1675,10 @@ msgstr "Premesti trenutni dokument u novi prozor"
 #: gedit/gedit-ui.xml.h:26
 msgid "New"
 msgstr "Novi"
+
+#: gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Otvori"
 
 #: gedit/gedit-ui.xml.h:28
 msgid "Open Location..."
@@ -1974,11 +1867,11 @@ msgstr "Predefinisano u okruženju"
 
 #: gedit/gedit-ui.xml.h:79
 msgid "_Documents"
-msgstr "_Dokumenti"
+msgstr "Do_kumenti"
 
 #: gedit/gedit-ui.xml.h:80
 msgid "_Edit"
-msgstr "_Uredi"
+msgstr "_Uređivanje"
 
 #: gedit/gedit-ui.xml.h:81
 msgid "_File"
@@ -3133,6 +3026,85 @@ msgstr "Ubacite izabrani tekst u spisak isečaka"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Kopiraj tekst"
+
+#~ msgid "Wrap Mode"
+#~ msgstr "Način preloma"
+
+#~ msgid "Page"
+#~ msgstr "Strana"
+
+#~ msgid "Push this button to select the font to be used to print the body"
+#~ msgstr ""
+#~ "Pritisnite ovo dugme kako biste odabrali font koji će biti korišćen za "
+#~ "štampanje tela teksta"
+
+#~ msgid "Push this button to select the font to be used to print the headers"
+#~ msgstr ""
+#~ "Pritisnite ovo dugme kako biste odabrali font koji će biti korišćen za "
+#~ "štampanje zaglavlja"
+
+#~ msgid "Encodings"
+#~ msgstr "Kodni rasporedi"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Fontovi</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Otvori</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Strana</span>"
+
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">Prilikom snimanja nove datoteke...</span>"
+
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr "<span weight=\"bold\">Prilikom snimanja postojeće datoteke...</span>"
+
+#~ msgid "Add new encodings"
+#~ msgstr "Dodaj novi kodni raspored"
+
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "Uvek koristi U_TF-8 kodni raspored (brže)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Uvek koristi _UTF-8 kodni raspored (brže)"
+
+#~ msgid "Line _numbers:"
+#~ msgstr "Brojevi li_nija"
+
+#~ msgid "Move down"
+#~ msgstr "Premesti niže"
+
+#~ msgid "Move up"
+#~ msgstr "Premesti više"
+
+#~ msgid "Page he_aders:"
+#~ msgstr "Z_aglavlje stranice"
+
+#~ msgid "Print _line numbers every"
+#~ msgstr "Štampaj broj _linije svakih"
+
+#~ msgid "Print fonts"
+#~ msgstr "Fontovi za štampanje"
+
+#~ msgid "Remove an encoding"
+#~ msgstr "Ukloni kodni raspored"
+
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "Kori_sti originalan kodni raspored ukoliko je moguće"
+
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Koristi trenutni kodni raspored lokalnih podešavanja ako je moguće"
+
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Koristi trenutni kodni raspored lokalnih podešavanja ako je moguće"
+
+#~ msgid "_Supported encodings:"
+#~ msgstr "Podržani kodni ra_sporedi:"
+
+#~ msgid "li_ne(s)"
+#~ msgstr "li_nija"
 
 #~ msgid "Show Cursor Position"
 #~ msgstr "Prikaži poziciju kursora"
