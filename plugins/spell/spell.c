@@ -171,7 +171,7 @@ get_spell_checker_from_document (GeditDocument *doc)
 	return spell;
 }
 
-static CheckRange*
+static CheckRange *
 get_check_range (GeditDocument *doc)
 {
 	CheckRange *range;
@@ -310,8 +310,8 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 	update_current (doc, start);
 }
 
-static gboolean
-get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
+static gchar *
+get_current_word (GeditDocument *doc, gint *start, gint *end)
 {
 	const CheckRange *range;
 	
@@ -322,12 +322,12 @@ get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	g_return_val_if_fail (doc != NULL, FALSE);
-	g_return_val_if_fail (start != NULL, FALSE);
-	g_return_val_if_fail (end != NULL, FALSE);
-	
+	g_return_val_if_fail (doc != NULL, NULL);
+	g_return_val_if_fail (start != NULL, NULL);
+	g_return_val_if_fail (end != NULL, NULL);
+
 	range = get_check_range (doc);
-	g_return_val_if_fail (range != NULL, FALSE);
+	g_return_val_if_fail (range != NULL, NULL);
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), 
 			&end_iter, range->end_mark);
@@ -342,7 +342,7 @@ get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
 	if (!gtk_text_iter_is_end (&end_iter))
 	{
 		gedit_debug (DEBUG_PLUGINS, "Current is not end");
-		
+
 		gtk_text_iter_forward_word_end (&end_iter);
 	}
 
@@ -351,7 +351,11 @@ get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
 
 	gedit_debug (DEBUG_PLUGINS, "Current word extends [%d, %d]", *start, *end);
 
-	return (*start < *end);
+	if (!(*start < *end))
+		return NULL;
+
+	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
+			&current_iter, &end_iter, TRUE);
 }
 
 static gboolean
@@ -391,7 +395,7 @@ goto_next_word (GeditDocument *doc)
 		return FALSE;
 }
 
-static gchar*
+static gchar *
 get_next_mispelled_word (GeditDocument *doc)
 {
 	CheckRange *range;
@@ -407,27 +411,20 @@ get_next_mispelled_word (GeditDocument *doc)
 	spell = get_spell_checker_from_document (doc);
 	g_return_val_if_fail (spell != NULL, NULL);
 
-	if (!get_current_word_extents (doc, &start, &end))
+	word = get_current_word (doc, &start, &end);
+	if (word == NULL)
 		return NULL;
-
-	word = gedit_document_get_chars (doc, start, end);
-	g_return_val_if_fail (word != NULL, NULL);
 
 	gedit_debug (DEBUG_PLUGINS, "Word to check: %s", word);
 
 	while (gedit_spell_checker_check_word (spell, word, -1, NULL))
 	{
-		gboolean res;
-
 		g_free (word);
 
 		if (!goto_next_word (doc))
 			return NULL;
 
-		res = get_current_word_extents (doc, &start, &end);
-		g_return_val_if_fail (res, NULL);
-
-		word = gedit_document_get_chars (doc, start, end);
+		word = get_current_word (doc, &start, &end);
 		g_return_val_if_fail (word != NULL, NULL);
 
 		gedit_debug (DEBUG_PLUGINS, "Word to check: %s", word);
@@ -465,7 +462,9 @@ get_next_mispelled_word (GeditDocument *doc)
 }
 
 static void
-ignore_cb (GeditSpellCheckerDialog *dlg, const gchar *w, GeditDocument *doc)
+ignore_cb (GeditSpellCheckerDialog *dlg,
+	   const gchar *w,
+	   GeditDocument *doc)
 {
 	gchar *word = NULL;
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -488,11 +487,15 @@ ignore_cb (GeditSpellCheckerDialog *dlg, const gchar *w, GeditDocument *doc)
 }
 
 static void
-change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change, GeditDocument *doc)
+change_cb (GeditSpellCheckerDialog *dlg,
+	   const gchar *word,
+	   const gchar *change,
+	   GeditDocument *doc)
 {
 	CheckRange *range;
 	gchar *w = NULL;
-	
+	GtkTextIter start, end;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 	
 	g_return_if_fail (doc != NULL);
@@ -502,7 +505,13 @@ change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change,
 	range = get_check_range (doc);
 	g_return_if_fail (range != NULL);
 
-	w = gedit_document_get_chars (doc, range->mw_start, range->mw_end);
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, range->mw_start);
+	if (range->mw_end < 0)
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+	else
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end, range->mw_end);
+
+	w = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start, &end, TRUE);
 	g_return_if_fail (w != NULL);
 
 	if (strcmp (w, word) != 0)
@@ -515,8 +524,8 @@ change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change,
        	
 	gedit_document_begin_user_action (doc);
 
-	gedit_document_delete_text (doc, range->mw_start, range->mw_end);
-	gedit_document_insert_text (doc, range->mw_start, change, -1);
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start, &end);
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &start, change, -1);
 
 	gedit_document_end_user_action (doc);
 
@@ -527,17 +536,20 @@ change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change,
 }
 
 static void
-change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change, GeditDocument *doc)
+change_all_cb (GeditSpellCheckerDialog *dlg,
+	       const gchar *word,
+	       const gchar *change,
+	       GeditDocument *doc)
 {
 	CheckRange *range;
 	gchar *w = NULL;
-
+	GtkTextIter start, end;
 	gchar *last_searched_text;
 	gchar *last_replaced_text;
 	gint flags = 0;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
-	
+
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (word != NULL);
 	g_return_if_fail (change != NULL);
@@ -545,7 +557,13 @@ change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *cha
 	range = get_check_range (doc);
 	g_return_if_fail (range != NULL);
 
-	w = gedit_document_get_chars (doc, range->mw_start, range->mw_end);
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, range->mw_start);
+	if (range->mw_end < 0)
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
+	else
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end, range->mw_end);
+
+	w = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start, &end, TRUE);
 	g_return_if_fail (w != NULL);
 
 	if (strcmp (w, word) != 0)
@@ -583,7 +601,6 @@ change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *cha
 	/* go to next mispelled word */
 	ignore_cb (dlg, word, doc);
 }
-
 
 static void
 add_word_cb (GeditSpellCheckerDialog *dlg, const gchar *word, GeditDocument *doc)
@@ -632,7 +649,6 @@ show_no_mispelled_words_dialog (gboolean sel)
 	 
 	 gtk_widget_destroy (message_dlg);
 }
-
 
 static void
 set_language_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -713,7 +729,6 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	g_free (word);
 
 	gtk_widget_show (dlg);
-	
 }	
 
 static void
@@ -877,7 +892,4 @@ init (GeditPlugin *pd)
 	
 	return PLUGIN_OK;
 }
-
-
-
 
