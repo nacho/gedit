@@ -257,6 +257,7 @@ void menus_set_sensitive(char *path, int sensitive)
 #else	/* USING GNOME */
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
+void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, (gpointer) GE_DATA, NULL,
@@ -406,6 +407,14 @@ void gE_menus_init (gE_window *window, gE_data *data)
 	add_callback_data (gedit_help_menu, window, data);
 
 	gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
+
+	remove_callback_data (gedit_file_menu, window, data);
+	remove_callback_data (gedit_edit_menu, window, data);
+	remove_callback_data (gedit_search_menu, window, data);
+	remove_callback_data (gedit_tab_menu, window, data);
+	remove_callback_data (gedit_toolbar_menu, window, data);
+	remove_callback_data (gedit_options_menu, window, data);
+	remove_callback_data (gedit_help_menu, window, data);
 }
 
 
@@ -421,6 +430,22 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 				menu[i].user_data = data;
 			if (menu[i].user_data == (gpointer)GE_WINDOW)
 				menu[i].user_data = window;
+		}
+		i++;
+	}
+}
+
+void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
+{
+	int i = 0;
+	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (menu[i].type == GNOME_APP_UI_ITEM)
+		{
+			if (menu[i].user_data == data)
+				menu[i].user_data = (gpointer) GE_DATA;
+			if (menu[i].user_data == window)
+				menu[i].user_data = (gpointer) GE_WINDOW;
 		}
 		i++;
 	}
