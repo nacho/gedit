@@ -1,26 +1,34 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = -I$(includedir) 				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	-I../	\
-	$(GNOME_INCLUDEDIR)				\
-	$(top_srcdir)/plugins/
-
-plugindir = $(libdir)/go/plugins
+plugindir = $(libexecdir)/go/plugins
 
 plugin_PROGRAMS = email-plugin
 
-email_plugin_SOURCES =	\
-	email.c		\
-	$(top_srcdir)/plugins/client.c	\
-	$(top_srcdir)/plugins/client.h
+email_plugin_SOURCES = \
+	$(top_srcdir)/plugins/client/client.h \
+	email.c
 
-email_plugin_LDFLAGS = `gtk-config --libs`
+INCLUDES = -I$(includedir) 				\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DLOCALEDIR=\"$(datadir)/locale\"		\
+	-I..						\
+	$(GNOME_INCLUDEDIR)				\
+	-I$(top_srcdir)/plugins/client
+
+LDADD = \
+	$(top_builddir)/plugins/client/libclient.a	\
+	$(GTK_LIBS)
+
+DEPS = \
+	$(top_builddir)/plugins/client/libclient.a
+
+plugin_PROGRAMS = email-plugin
+
+email_plugin_DEPENDENCIES = $(DEPS)
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(plugindir)"\" \
-	-Wall -ansi -pedantic
+	-Wall -ansi -pedantic 
 #	-DDEBUG

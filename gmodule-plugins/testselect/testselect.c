@@ -13,17 +13,20 @@ int main (int argc, char *argv[])
 	contextid = client_init (&argc, &argv, &info);
 	docid = client_document_current (contextid);
 
-	text = client_text_get_selection_text (docid);
-	range = client_document_get_selection_range (docid);
 	pos = client_document_get_position (docid);
+	printf ("Cursor is at position %i\n", pos);
 
+	range = client_document_get_selection_range (docid);
+	printf ("Selection starts at point %i, and ends at point %i\n", range.start, range.end);
+
+	text = client_text_get_selection_text (docid);
 	if (text == NULL)
 		printf ("No text selected.\n");
 	else
 		printf ("\"%s\" selected\n", text);
-	printf ("Cursor is at position %i\n", pos);
-	printf ("Selection starts at point %i, and ends at point %i\n", start, end);
-	free (text);
+
+	client_finish( contextid );
+
 	exit (0);
 }
 

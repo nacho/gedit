@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-plugindir = $(libdir)/go/plugins
+plugindir = $(libexecdir)/go/plugins
 
 plugin_PROGRAMS = cvsdiff-plugin
 
@@ -21,6 +21,8 @@ LDADD = \
 
 DEPS = \
 	$(top_builddir)/plugins/client/libclient.a
+
+plugin_PROGRAMS = cvsdiff-plugin
 
 cvsdiff_plugin_DEPENDENCIES = $(DEPS)
 

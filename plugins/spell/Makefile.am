@@ -1,27 +1,36 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = -I$(includedir) 				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	-I../	\
-	$(GNOME_INCLUDEDIR)				\
-	$(top_srcdir)/plugins/
-
-plugindir = $(libdir)/go/plugins
+plugindir = $(libexecdir)/go/plugins
 
 plugin_PROGRAMS = spell-plugin
 
-spell_plugin_SOURCES =	\
-	spell.c		\
-	$(top_srcdir)/plugins/client.c	\
-	$(top_srcdir)/plugins/client.h
+spell_plugin_SOURCES = \
+	$(top_srcdir)/plugins/client/client.h \
+	spell.c
 
-spell_plugin_LDFLAGS = `gtk-config --libs`
-spell_plugin_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
+INCLUDES = -I$(includedir) 				\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DLOCALEDIR=\"$(datadir)/locale\"		\
+	-I..						\
+	$(GNOME_INCLUDEDIR)				\
+	-I$(top_srcdir)/plugins/client
+
+LDADD = \
+	$(top_builddir)/plugins/client/libclient.a	\
+	$(GTK_LIBS)					\
+	$(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
+
+
+DEPS = \
+	$(top_builddir)/plugins/client/libclient.a
+
+plugin_PROGRAMS = spell-plugin
+
+spell_plugin_DEPENDENCIES = $(DEPS)
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(plugindir)"\" \
-	-Wall -ansi -pedantic
+	-Wall -ansi -pedantic 
 #	-DDEBUG

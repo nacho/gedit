@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) -I$(top_srcdir)		\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(libdir)/go/plugins
+plugindir = $(libexecdir)/go/plugins
 
 bin_PROGRAMS = gedit
 
