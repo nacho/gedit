@@ -163,8 +163,7 @@ int gE_prefs_open ()
 	while (fgets(line, 256, fp))
 	{
 		new = g_malloc0(sizeof(gE_pref));
-		(char *)ptr = strdup(line);
-		(char *)ptr2 = strdup(line);
+		ptr = ptr2 = g_strdup (line);
 
 		while (*ptr2 != '\0' && *ptr2 != '=')
 			ptr2++;
@@ -209,7 +208,7 @@ void gE_prefs_close ()
 	for (i = 0; i < g_list_length (gE_prefs); i++)
 	{
 		pref = g_list_nth_data (gE_prefs, i);
-		fprintf(temp_fp, "%s=%s", pref->name, pref->value);
+		fprintf(temp_fp, "%s=%s\n", pref->name, pref->value);
 	}
 
 	for (i = g_list_length (gE_prefs) - 1; i >= 0; i--)
@@ -345,7 +344,6 @@ char *gE_prefs_get_default (char *name)
 	{
 		if (strcmp (name, gE_prefs_defaults[i].name) == 0)
 		{
-			value = malloc (sizeof(gE_prefs_defaults[i].name));
 			value = g_strdup (gE_prefs_defaults[i].value);
 			return value;
 		}
@@ -408,8 +406,8 @@ void gE_prefs_set_int(char *name, int value)
 
 	char *buf;
 
-	buf = g_malloc(sizeof(value));
-	sprintf(buf, "%d\n", value);
+	buf = g_malloc0(sizeof(value));
+	sprintf(buf, "%d", value);
 	gE_prefs_set_data (name, buf);
 	g_free (buf);
 
