@@ -11,7 +11,7 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
-  <property name="has_separator">True</property>
+  <property name="has_separator">False</property>
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox2">
@@ -73,7 +73,7 @@
 	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
-	  <property name="spacing">5</property>
+	  <property name="spacing">6</property>
 
 	  <child>
 	    <widget class="GtkTable" id="table2">
@@ -81,7 +81,7 @@
 	      <property name="n_rows">2</property>
 	      <property name="n_columns">2</property>
 	      <property name="homogeneous">False</property>
-	      <property name="row_spacing">4</property>
+	      <property name="row_spacing">6</property>
 	      <property name="column_spacing">8</property>
 
 	      <child>
@@ -142,6 +142,7 @@
 		  <property name="browse_dialog_title" translatable="yes">Select the working directory...</property>
 		  <property name="directory_entry">True</property>
 		  <property name="modal">True</property>
+		  <property name="use_filechooser">True</property>
 
 		  <child internal-child="entry">
 		    <widget class="GtkEntry" id="directory_entry">

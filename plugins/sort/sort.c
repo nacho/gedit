@@ -460,16 +460,20 @@ update_ui (GeditPlugin * plugin, BonoboWindow * window)
 {
 	BonoboUIComponent *uic;
 	GeditDocument *doc;
+	GeditMDI *mdi;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	mdi = gedit_get_mdi ();
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
 	uic = gedit_get_ui_component_from_window (window);
 
 	doc = gedit_get_active_document ();
 
-	if ((doc == NULL) || (gedit_document_is_readonly (doc)))
+	if ((doc == NULL) || (gedit_document_is_readonly (doc)) || (gedit_mdi_get_state (mdi) != GEDIT_STATE_NORMAL))
 		gedit_menus_set_verb_sensitive (uic,
 						"/commands/"
 						MENU_ITEM_NAME, FALSE);

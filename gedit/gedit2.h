@@ -48,12 +48,13 @@ extern BonoboObject *gedit_app_server;
 #define GBOOLEAN_TO_POINTER(i) ((gpointer)  ((i) ? 2 : 1))
 #define GPOINTER_TO_BOOLEAN(i) ((gboolean)  ((((gint)(i)) == 2) ? TRUE : FALSE))
 
-BonoboWindow* 		gedit_get_active_window 		(void);
-GeditDocument* 		gedit_get_active_document 		(void);
-GeditView* 		gedit_get_active_view 			(void);
-GList* 			gedit_get_top_windows 			(void);
-BonoboUIComponent*	gedit_get_ui_component_from_window 	(BonoboWindow* win);
-GList*			gedit_get_open_documents 		(void);
+BonoboWindow		*gedit_get_active_window 		(void);
+GeditDocument		*gedit_get_active_document 		(void);
+GeditView		*gedit_get_active_view 			(void);
+GList			*gedit_get_top_windows 			(void);
+BonoboUIComponent	*gedit_get_ui_component_from_window 	(BonoboWindow* win);
+GList			*gedit_get_open_documents 		(void);
+GeditMDI 		*gedit_get_mdi 				(void);
 
 
 #endif /* __GEDIT2_H__ */

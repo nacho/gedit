@@ -356,7 +356,11 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 	if (filter_info->mime_type == NULL)
 		return TRUE;
 	
-	if (strncmp (filter_info->mime_type, "text/", 5) == 0)
+	if ((strncmp (filter_info->mime_type, "text/", 5) == 0) ||
+            (strcmp (filter_info->mime_type, "application/x-desktop") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-perl") == 0) ||
+            (strcmp (filter_info->mime_type, "application/x-python") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-php") == 0))
 	{
 	    return TRUE;
 	}
@@ -395,6 +399,9 @@ create_gtk_selector (GtkWindow *parent,
 	gtk_file_filter_add_pattern (filter, "*");
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filesel), filter);
 
+	/* Make this filter the default */
+	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filesel), filter);
+
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_set_name (filter, _("All Text Files"));
 	gtk_file_filter_add_custom (filter, 
@@ -404,10 +411,7 @@ create_gtk_selector (GtkWindow *parent,
 				    NULL);
 	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filesel), filter);
 
-	/* TODO: Add filters for all supported languages - Paolo */
-
-	/* Make this filter the default */
-	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filesel), filter);
+	/* TODO: Add filters for all supported languages - Paolo - Feb 21, 2004 */
 
 	if (use_encoding)
 	{

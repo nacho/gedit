@@ -2142,6 +2142,8 @@ update_ui_according_to_state (GeditMDI *mdi)
 		gdk_cursor_unref (cursor);
 
 
+	/* FIXME: Disable the recent items in the file menu - Paolo (Feb 24, 2004) */
+
 	/* TODO: Update/Add state icon - Paolo (Jan 13, 2004) */
 }
 

@@ -434,7 +434,7 @@ main (int argc, char **argv)
 }
 
 
-BonoboWindow*
+BonoboWindow *
 gedit_get_active_window (void)
 {
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
@@ -442,7 +442,7 @@ gedit_get_active_window (void)
 	return	bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
 }
 
-GeditDocument*
+GeditDocument *
 gedit_get_active_document (void)
 {
 	BonoboMDIChild *active_child;
@@ -457,7 +457,7 @@ gedit_get_active_document (void)
 	return GEDIT_MDI_CHILD (active_child)->document;
 }
 
-GeditView*
+GeditView *
 gedit_get_active_view (void)
 {
 	GtkWidget *active_view;
@@ -472,7 +472,7 @@ gedit_get_active_view (void)
 	return GEDIT_VIEW (active_view);
 }
 
-GList* 
+GList * 
 gedit_get_top_windows (void)
 {
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
@@ -480,7 +480,7 @@ gedit_get_top_windows (void)
 	return	bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
 }
 
-BonoboUIComponent*
+BonoboUIComponent *
 gedit_get_ui_component_from_window (BonoboWindow* win)
 {
 	g_return_val_if_fail (win != NULL, NULL);
@@ -489,7 +489,7 @@ gedit_get_ui_component_from_window (BonoboWindow* win)
 }
 
 /* Return a newly allocated list */
-GList*
+GList *
 gedit_get_open_documents (void)
 {
 	GList* children;
@@ -509,4 +509,12 @@ gedit_get_open_documents (void)
 	}
 	
 	return docs;
+}
+
+GeditMDI *
+gedit_get_mdi (void)
+{
+	g_return_val_if_fail (GEDIT_IS_MDI (gedit_mdi), NULL);
+
+	return gedit_mdi;
 }
