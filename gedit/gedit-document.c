@@ -758,8 +758,6 @@ update_document_contents (GeditDocument        *doc,
 			  const GeditEncoding  *encoding,
 			  GError              **error)
 {
-	GtkTextIter iter, end;
-
 	PROFILE (
 		g_message ("Delete previous text %s: %.3f", uri, g_timer_elapsed (timer, NULL));
 	)
@@ -2631,20 +2629,6 @@ gedit_document_replace_all (GeditDocument *doc,
 	gedit_document_end_user_action (doc);
 
 	return cont;
-}
-
-guint
-gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset)
-{
-	GtkTextIter iter;
-	
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, offset);
-	
-	return gtk_text_iter_get_line (&iter);
 }
 
 gint 

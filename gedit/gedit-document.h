@@ -212,8 +212,6 @@ gboolean	gedit_document_replace_all 	(GeditDocument *doc,
 				            	 const gchar *find, 
 						 const gchar *replace, 
 					    	 gint flags);
-guint		gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset);
-
 void		gedit_document_set_selection 	(GeditDocument *doc, 
 						 gint start, 
 						 gint end);
