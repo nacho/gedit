@@ -37,7 +37,7 @@
 #include <libgnome/gnome-i18n.h>
 #include <gdk/gdkkeysyms.h>
 
-#include <gtksourceview.h>
+#include <gtksourceview/gtksourceview.h>
 
 #include "gedit-view.h"
 #include "gedit-debug.h"

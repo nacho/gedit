@@ -45,7 +45,7 @@
 #include <eel/eel-vfs-extensions.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 
-#include <gtksourcelanguagesmanager.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
 
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"

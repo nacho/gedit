@@ -27,8 +27,10 @@
 
 #include <string.h>
 #include <libbonobo.h>
-#include <gtksourceview.h>
-#include <gtksourcelanguagesmanager.h>
+
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
+
 #include "gedit-persist-stream.h"
 #include "gedit-convert.h"
 

@@ -33,7 +33,7 @@
 
 
 #include <gtk/gtk.h>
-#include <gtksourcebuffer.h>
+#include <gtksourceview/gtksourcebuffer.h>
 
 #define GEDIT_TYPE_DOCUMENT             (gedit_document_get_type ())
 #define GEDIT_DOCUMENT(obj)		(GTK_CHECK_CAST ((obj), GEDIT_TYPE_DOCUMENT, GeditDocument))

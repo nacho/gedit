@@ -27,8 +27,10 @@
 
 #include <bonobo/bonobo-ui-util.h>
 #include <gconf/gconf-client.h>
-#include <gtksourceview.h>
-#include <gtksourcelanguagesmanager.h>
+
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
+
 #include "gedit-persist-stream.h"
 #include "gedit-viewer.h"
 #include "gedit-prefs-manager.h"

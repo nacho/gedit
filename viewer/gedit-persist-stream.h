@@ -25,7 +25,7 @@
 #define __GEDIT_PERSIST_STREAM_H__
 
 #include <bonobo/bonobo-persist-stream.h>
-#include <gtksourceview.h>
+#include <gtksourceview/gtksourceview.h>
 
 G_BEGIN_DECLS
 
