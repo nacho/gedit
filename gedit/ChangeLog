@@ -1,3 +1,24 @@
+2002-08-13  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes #90231.
+
+	* gedit-file-selector-util.c (ok_clicked_cb): Test whether the
+	file is read-only and present a confirmation dialog in that case.
+	(replace_read_only_file): New function.
+	(replace_existing_file): Use the replace_dialog() core.
+	(replace_dialog): Moved the replace_existing_file() code to here
+	and made it more generic.
+
+	* gedit-document.c (gedit_document_save_as): Tell
+	gedit_document_save_as_real() to create a backup file.
+
+	* gedit-file.c (gedit_file_open_uri_list):
+	gtk_message_dialog_new() takes a printf() format, so don't compose
+	the string first - it may contain percent signs which will screw
+	us here.
+
+	* gedit-print.c (gedit_print_error_dialog): Likewise.
+
 2002-07-25  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gnome-recent-model.c (gnome_recent_model_add): free canonical_uri

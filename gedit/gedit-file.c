@@ -677,24 +677,21 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 				if (create)
 				{
 					GtkWidget *dialog;
-					gchar *str;
 					gboolean created = FALSE;
 					gchar *formatted_path;
 
 					formatted_path = eel_format_uri_for_display (full_path);
 					g_return_val_if_fail (formatted_path != NULL, FALSE);
 					
-					str = g_strdup_printf (_("The file \"%s\" does not exist. Would you like to create it?"),
-							       formatted_path);
-		
-					g_free (formatted_path);
-
 					dialog = gtk_message_dialog_new (
 						GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					   	GTK_MESSAGE_QUESTION,
 					   	GTK_BUTTONS_YES_NO,
-						str);
+						_("The file \"%s\" does not exist. Would you like to create it?"),
+						formatted_path);
+
+					g_free (formatted_path);
 
 					gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
 
@@ -710,8 +707,6 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 									
 					gtk_widget_destroy (dialog);
 
-					g_free (str);
-					
 					if (created)
 					{
 						if (gedit_file_open_real (full_path, 

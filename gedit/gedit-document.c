@@ -1063,7 +1063,7 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 		}
 	}
 
-	if (gedit_document_save_as_real (doc, uri, FALSE, error))
+	if (gedit_document_save_as_real (doc, uri, TRUE, error))
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);

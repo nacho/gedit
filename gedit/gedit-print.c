@@ -586,17 +586,15 @@ static void
 gedit_print_error_dialog (GError *error)
 {
 	GtkWidget *dialog;
-	gchar *errstr;
-		       	
-	errstr = g_strdup_printf (_("An error occurred while printing.\n\n%s,"), error->message);
-		
+
 	dialog = gtk_message_dialog_new (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		   	GTK_MESSAGE_ERROR,
 		   	GTK_BUTTONS_OK,
-			errstr);
-			
+			_("An error occurred while printing.\n\n%s,"),
+			error->message);
+
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
@@ -604,8 +602,6 @@ gedit_print_error_dialog (GError *error)
 	gtk_dialog_run (GTK_DIALOG (dialog));
 
 	gtk_widget_destroy (dialog);
-			
-	g_free (errstr);
 }
 
 

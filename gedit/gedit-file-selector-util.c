@@ -51,6 +51,8 @@
 #include <bonobo/bonobo-file-selector-util.h>
 
 #include <string.h>
+#include <unistd.h>
+#include <errno.h>
 
 #include <bonobo/bonobo-event-source.h>
 #include <bonobo/bonobo-exception.h>
@@ -82,8 +84,11 @@ delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
 	return TRUE;
 }
 
+/* Displays a confirmation dialog for whether to replace a file.  The message
+ * should contain a %s to include the file name.
+ */
 static gboolean
-replace_existing_file (GtkWindow *parent, const gchar* file_name)
+replace_dialog (GtkWindow *parent, const gchar *message, const gchar *file_name)
 {
 	GtkWidget *msgbox;
 	gint ret;
@@ -108,13 +113,11 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 	g_free (full_formatted_uri);
 
 	msgbox = gtk_message_dialog_new (parent,
-			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_QUESTION,
-			GTK_BUTTONS_NONE,
-			_("A file named ''%s'' already exists.\n"
-			  "Do you want to replace it with the "
-			  "one you are saving?"), 
-			uri_for_display);
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 message, 
+					 uri_for_display);
 	g_free (uri_for_display);
 
 	/* Add Don't Replace button */
@@ -134,6 +137,28 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 	gtk_widget_destroy (msgbox);
 
 	return (ret == GTK_RESPONSE_YES);
+}
+
+/* Presents a confirmation dialog for whether to replace an existing file */
+static gboolean
+replace_existing_file (GtkWindow *parent, const gchar* file_name)
+{
+	return replace_dialog (parent,
+			       _("A file named \"%s\" already exists.\n"
+				 "Do you want to replace it with the "
+				 "one you are saving?"),
+			       file_name);
+}
+
+/* Presents a confirmation dialog for whether to replace a read-only file */
+static gboolean
+replace_read_only_file (GtkWindow *parent, const gchar* file_name)
+{
+	return replace_dialog (parent,
+			       _("The file \"%s\" is read-only.\n"
+				 "Do you want to try to replace it with the "
+				 "one you are saving?"),
+			       file_name);
 }
 
 static void
@@ -268,6 +293,16 @@ concat_dir_and_file (const char *dir, const char *file)
 		return g_strconcat (dir, file, NULL);
 }
 
+/* Tests whether we have write permissions for a file */
+static gboolean
+is_read_only (const gchar *filename)
+{
+	if (access (filename, W_OK) == -1)
+		return (errno == EACCES);
+	else
+		return FALSE;
+}
+
 static void
 ok_clicked_cb (GtkWidget *widget, gpointer data)
 {
@@ -298,9 +333,16 @@ ok_clicked_cb (GtkWidget *widget, gpointer data)
 	} 
 	else
 	{	
-		if (g_file_test (file_name, G_FILE_TEST_EXISTS)) 
-			if (!replace_existing_file (GTK_WINDOW (fsel), file_name))
+		if (g_file_test (file_name, G_FILE_TEST_EXISTS))
+		{
+			if (is_read_only (file_name))
+			{
+				if (!replace_read_only_file (GTK_WINDOW (fsel), file_name))
+					return;
+			}
+			else if (!replace_existing_file (GTK_WINDOW (fsel), file_name))
 				return;
+		}
 
 		gtk_widget_hide (GTK_WIDGET (fsel));
 
