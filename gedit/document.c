@@ -336,24 +336,15 @@ guchar *
 gedit_document_get_buffer (GeditDocument *doc)
 {
 	guchar * buffer;
-/*	guint length;
-	GtkText * text;
-*/
 	GeditView * view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc!=NULL, NULL);
+
 	view = g_list_nth_data (doc->views, 0);
 	g_return_val_if_fail (view!=NULL, NULL);
-/*
-	text = GTK_TEXT (view->text);
-
-	length = gtk_text_get_length (text);
-	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( text ),
-					  0,
-					  length);
-*/
+	
 	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( view->text ),
 					  0,
 					  -1);
