@@ -219,10 +219,14 @@ word_count_real ()
 	}
 
 	doc = gedit_get_active_document ();
-	g_return_if_fail (doc != NULL);
+
+	if (doc == NULL)
+	{
+		gtk_widget_destroy (dialog->dialog);
+		return;
+	}
 
 	text = gedit_document_get_buffer (doc);
-
 	g_return_if_fail (g_utf8_validate (text, -1, NULL));
 
 	lines = gedit_document_get_line_count (doc);

@@ -102,6 +102,12 @@ static GConfClient 	*gedit_gconf_client 	= NULL;
 #define DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Helvetica 11"
 #define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 8"
 
+
+static gchar	*gedit_prefs_gdk_color_to_string 	(GdkColor color);
+static void	 gedit_prefs_save_color 		(GdkColor color, const gchar *key);
+static GdkColor  gedit_prefs_load_color 		(const gchar *key);
+
+
 static gchar* 
 gedit_prefs_gdk_color_to_string (GdkColor color)
 {
@@ -113,11 +119,45 @@ gedit_prefs_gdk_color_to_string (GdkColor color)
 				color.blue);
 }
 
+/* Converts GdkColor to string format and save. */
+static void
+gedit_prefs_save_color (GdkColor color, const gchar *key)
+{
+	gchar *str_color = NULL;
+
+	str_color = gedit_prefs_gdk_color_to_string (color);
+	g_return_if_fail (str_color != NULL);
+
+	gconf_client_set_string (gedit_gconf_client,
+				 key,
+				 str_color,
+				 NULL);
+
+	g_free (str_color);
+}
+
+/* Parses color from string format and loads GdkColor. */
+static GdkColor
+gedit_prefs_load_color (const gchar *key)
+{
+	gchar *str_color = NULL;
+	GdkColor color;
+	
+	str_color = gconf_client_get_string (gedit_gconf_client, key, NULL);
+
+	if (str_color != NULL)
+	{
+		gdk_color_parse (str_color, &color);
+		g_free (str_color);
+	}
+
+	return color;
+}
+
 void 
 gedit_prefs_save_settings (void)
 {
 	BonoboWindow* active_window = NULL;		
-	gchar *str_color = NULL;
 
 	gedit_debug (DEBUG_PREFS, "START");
 	
@@ -141,52 +181,20 @@ gedit_prefs_save_settings (void)
 				NULL);
 
 	/* Backgroung color */
-	str_color = gedit_prefs_gdk_color_to_string (
-				gedit_settings->background_color);
-	g_return_if_fail (str_color != NULL);
-
-	gconf_client_set_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_BACKGROUND_COLOR,
-			      	str_color,
-			      	NULL);
-
-	g_free (str_color);
+	gedit_prefs_save_color (gedit_settings->background_color,
+				GEDIT_BASE_KEY GEDIT_PREF_BACKGROUND_COLOR);
 	
 	/* Text color */
-	str_color = gedit_prefs_gdk_color_to_string (
-				gedit_settings->text_color);
-	g_return_if_fail (str_color != NULL);
-
-	gconf_client_set_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_TEXT_COLOR,
-			      	str_color,
-			      	NULL);
-
-	g_free (str_color);
+	gedit_prefs_save_color (gedit_settings->text_color,
+			      	GEDIT_BASE_KEY GEDIT_PREF_TEXT_COLOR);
 
 	/* Selection color */
-	str_color = gedit_prefs_gdk_color_to_string (
-				gedit_settings->selection_color);
-	g_return_if_fail (str_color != NULL);
-
-	gconf_client_set_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_SELECTION_COLOR,
-			      	str_color,
-			      NULL);
-
-	g_free (str_color);
+	gedit_prefs_save_color (gedit_settings->selection_color,
+				GEDIT_BASE_KEY GEDIT_PREF_SELECTION_COLOR);
 
 	/* Selected text color */
-	str_color = gedit_prefs_gdk_color_to_string (
-				gedit_settings->selected_text_color);
-	g_return_if_fail (str_color != NULL);
-
-	gconf_client_set_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_SELECTED_TEXT_COLOR,
-			      	str_color,
-			      NULL);
-
-	g_free (str_color);
+	gedit_prefs_save_color (gedit_settings->selected_text_color,
+				GEDIT_BASE_KEY GEDIT_PREF_SELECTED_TEXT_COLOR);
 
 	gconf_client_set_bool (gedit_gconf_client,
 			      	GEDIT_BASE_KEY GEDIT_PREF_CREATE_BACKUP_COPY,
@@ -339,8 +347,6 @@ gedit_prefs_save_settings (void)
 void
 gedit_prefs_load_settings (void)
 {
-	gchar *str_color = NULL;
-
 	gedit_debug (DEBUG_PREFS, "START");
 	
 	if (gedit_settings == NULL)
@@ -374,56 +380,20 @@ gedit_prefs_load_settings (void)
 				NULL);
 
 	/* Backgroung color */	
-	str_color = gconf_client_get_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_BACKGROUND_COLOR,
-			      	NULL);
-	
-	if (str_color != NULL)
-	{
-		gdk_color_parse (str_color, &gedit_settings->background_color);
-		
-		g_free (str_color);
-		str_color = NULL;
-	}
+	gedit_settings->background_color = gedit_prefs_load_color (
+				GEDIT_BASE_KEY GEDIT_PREF_BACKGROUND_COLOR);
 	
 	/* Text color */	
-	str_color = gconf_client_get_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_TEXT_COLOR,
-			      	NULL);
-	
-	if (str_color != NULL)
-	{
-		gdk_color_parse (str_color, &gedit_settings->text_color);
-		
-		g_free (str_color);
-		str_color = NULL;
-	}
+	gedit_settings->text_color = gedit_prefs_load_color (
+				GEDIT_BASE_KEY GEDIT_PREF_TEXT_COLOR);
 
 	/* Selection color */	
-	str_color = gconf_client_get_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_SELECTION_COLOR,
-			      	NULL);
-	
-	if (str_color != NULL)
-	{
-		gdk_color_parse (str_color, &gedit_settings->selection_color);
-		
-		g_free (str_color);
-		str_color = NULL;
-	}
+	gedit_settings->selection_color = gedit_prefs_load_color (
+				GEDIT_BASE_KEY GEDIT_PREF_SELECTION_COLOR);
 
 	/* Selected text color */	
-	str_color = gconf_client_get_string (gedit_gconf_client,
-			      	GEDIT_BASE_KEY GEDIT_PREF_SELECTED_TEXT_COLOR,
-			      	NULL);
-	
-	if (str_color != NULL)
-	{
-		gdk_color_parse (str_color, &gedit_settings->selected_text_color);
-		
-		g_free (str_color);
-		str_color = NULL;
-	}
+	gedit_settings->selected_text_color = gedit_prefs_load_color (
+				GEDIT_BASE_KEY GEDIT_PREF_SELECTED_TEXT_COLOR);
 	
 	/* Editor/Save */
 	gedit_settings->create_backup_copy = gconf_client_get_bool (

@@ -66,40 +66,40 @@ static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
 {
-	{ "debug-mdi", '\0', 0, &debug_mdi, 0,
+	{ "debug-mdi", '\0', POPT_ARG_NONE, &debug_mdi, 0,
 	  N_("Show mdi debugging messages."), NULL },
 
-	{ "debug-commands", '\0', 0, &debug_commands, 0,
+	{ "debug-commands", '\0', POPT_ARG_NONE, &debug_commands, 0,
 	  N_("Show commands debugging messages."), NULL },
 
-	{ "debug-document", '\0', 0, &debug_document, 0,
+	{ "debug-document", '\0', POPT_ARG_NONE, &debug_document, 0,
 	  N_("Show document debugging messages."), NULL },
 
-	{ "debug-file", '\0', 0, &debug_file, 0,
+	{ "debug-file", '\0', POPT_ARG_NONE, &debug_file, 0,
 	  N_("Show file debugging messages."), NULL },
 
-	{ "debug-plugins", '\0', 0, &debug_plugins, 0,
+	{ "debug-plugins", '\0', POPT_ARG_NONE, &debug_plugins, 0,
 	  N_("Show plugin debugging messages."), NULL },
 
-	{ "debug-prefs", '\0', 0, &debug_prefs, 0,
+	{ "debug-prefs", '\0', POPT_ARG_NONE, &debug_prefs, 0,
 	  N_("Show prefs debugging messages."), NULL },
 
-	{ "debug-print", '\0', 0, &debug_print, 0,
+	{ "debug-print", '\0', POPT_ARG_NONE, &debug_print, 0,
 	  N_("Show printing debugging messages."), NULL },
 
-	{ "debug-search", '\0', 0, &debug_search, 0,
+	{ "debug-search", '\0', POPT_ARG_NONE, &debug_search, 0,
 	  N_("Show search debugging messages."), NULL },
 
-	{ "debug-undo", '\0', 0, &debug_undo, 0,
+	{ "debug-undo", '\0', POPT_ARG_NONE, &debug_undo, 0,
 	  N_("Show undo debugging messages."), NULL },
 
-	{ "debug-view", '\0', 0, &debug_view, 0,
+	{ "debug-view", '\0', POPT_ARG_NONE, &debug_view, 0,
 	  N_("Show view debugging messages."), NULL },
 
-	{ "debug-recent", '\0', 0, &debug_recent, 0,
+	{ "debug-recent", '\0', POPT_ARG_NONE, &debug_recent, 0,
 	  N_("Show recent debugging messages."), NULL },
 
-	{ "debug", '\0', 0, &debug, 0,
+	{ "debug", '\0', POPT_ARG_NONE, &debug, 0,
 	  N_("Turn on all debugging messages."), NULL },
 
 	{NULL, '\0', 0, NULL, 0}
@@ -183,14 +183,15 @@ main (int argc, char **argv)
 	args = (char**) poptGetArgs(ctx);
 	
 	data = g_new0 (CommandLineData, 1);
-	
-	for (i = 0; args && args[i]; i++) 
-	{
-		if (strstr (args[i], "+")) 
-			data->line_pos = atoi (args[i] + 1);		
-		else
-			data->file_list = g_list_append (data->file_list, args[i]);
-	}
+
+	if (args)	
+		for (i = 0; args[i]; i++) 
+		{
+			if (strstr (args[i], "+")) 
+				data->line_pos = atoi (args[i] + 1);		
+			else
+				data->file_list = g_list_append (data->file_list, args[i]);
+		}
 
 	/* Create gedit_mdi and open the first top level window */
 	gedit_mdi = gedit_mdi_new ();
