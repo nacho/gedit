@@ -13,7 +13,6 @@
 #include "../../src/view.h"
 #include "../../src/plugin.h"
 
-
 static void
 destroy_plugin (PluginData *pd)
 {
@@ -25,21 +24,13 @@ destroy_plugin (PluginData *pd)
 static void
 insert_hello (void)
 {
-	gint i;
-	View *view;
-	Document *doc = gedit_document_current();
+	View *view = gedit_view_current();
 
-	if (!doc)
+	if (!view)
 	     return;
-	
-	view = VIEW (mdi->active_view);
-	i = gedit_view_get_position (view);
 
-	gtk_text_freeze (GTK_TEXT (view->text));
-	gtk_editable_insert_text (GTK_EDITABLE (view->text), "Hello World", 11, &i);
+	gedit_document_insert_text (view->doc, "Hello World", gedit_view_get_position (view), TRUE);
 	
-		
-	gtk_text_thaw (GTK_TEXT (view->text));
 }
 	
 

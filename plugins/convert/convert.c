@@ -30,7 +30,6 @@
 
 static GtkWidget *from, *to;
 
-
 static void
 destroy_plugin (PluginData *pd)
 {

@@ -35,7 +35,7 @@ struct _View
 {
 	GtkVBox box;
 	
-	Document *document;
+	Document *doc;
 	
 	gchar *font;
 	

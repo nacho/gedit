@@ -1,3 +1,13 @@
+2000-06-08  Chema Celorio  <chema@celorio.com>
+
+	* time/time.c (get_time): use new functions to get
+	and instert text to the documents. Do not call mdi
+	functions here, they are called by gedit_document_new_*
+	* diff/diff.c: ditto
+	* browse/browse.c (goLynx): ditto & fix
+	* sample/sample.c (insert_hello): ditto
+	* email/email.c (email_clicked): ditto
+
 2000-06-01  Chema Celorio  <chema@celorio.com>
 
 	* diff/diff.c (call_diff): do not depend on the

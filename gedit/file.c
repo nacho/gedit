@@ -177,7 +177,7 @@ gedit_file_save (Document *doc, gchar *fname)
 		return 1;
 	}
 	
-	tmpstr = gedit_document_get_buffer (view->document);
+	tmpstr = gedit_document_get_buffer (view->doc);
 
 	if (fputs (tmpstr, fp) == EOF)
 	{
@@ -282,7 +282,7 @@ gedit_file_stdin (Document *doc)
 	gedit_set_title (doc);
 
 	/* Move the window to the top after inserting */
-	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj), 0);
+	gedit_view_set_window_position (view, 0);
 
 	g_free (tmp_buf);
        

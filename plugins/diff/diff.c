@@ -84,9 +84,8 @@ call_diff (GtkWidget *widget, gpointer data)
 	int fdpipe[2];
 	int pid;
 	char *filenames[2] = { NULL, NULL };
-	int length;
+	guint length, pos; 
 	Document *doc;
-	gint i;
 
 	filenames[0] = gtk_entry_get_text (GTK_ENTRY (entry1));
 	filenames[1] = gtk_entry_get_text (GTK_ENTRY (entry2));
@@ -119,30 +118,19 @@ call_diff (GtkWidget *widget, gpointer data)
 	close (fdpipe[1]);
 
 	doc = gedit_document_new_with_title ("diff");
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));  
 
 	length = 1;
+	pos = 0;
 	while (length > 0)
 	{
-		buff[ length = read (fdpipe[0], buff, 1024) ] = 0;
+		buff [ length = read (fdpipe[0], buff, 1024) ] = 0;
 		if (length > 0)
 		{
-			/* FIXME: We are insterting in the begining of the
-			   file but we need to insert where the cursor is. Chema */
-			views_insert (doc, 0, buff, length, NULL);
+		     	gedit_document_insert_text (doc, buff, pos, FALSE);
+			pos += length;
 		}
 	}
 
-	for (i = 0; i < g_list_length (doc->views); i++)
-	{
-		View *nth_view;
-		nth_view = g_list_nth_data (doc->views, i);
-		/* Disabled by chema
-		gedit_view_refresh (nth_view);
-		*/
-		gedit_set_title (nth_view->document);
-	}
 }
 
 static void

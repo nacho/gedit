@@ -158,8 +158,8 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (replacements > 0)
 		{
-			gedit_document_delete_text (view->document, 0, gedit_document_get_buffer_length(view->document), FALSE);
-			gedit_document_insert_text (view->document, new_buffer, 0, FALSE);
+			gedit_document_delete_text (view->doc, 0, gedit_document_get_buffer_length(view->doc), FALSE);
+			gedit_document_insert_text (view->doc, new_buffer, 0, FALSE);
 			gedit_search_end();
 			gedit_search_start();
 		}
@@ -196,8 +196,8 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   a selection is not the way to do it !!!. Chema */
 
 		/* Diselect the text and set the point after this occurence*/
-		gedit_document_delete_text (view->document, start, search_text_length, TRUE);
-		gedit_document_insert_text (view->document, text_to_replace_with, start, TRUE);
+		gedit_document_delete_text (view->doc, start, search_text_length, TRUE);
+		gedit_document_insert_text (view->doc, text_to_replace_with, start, TRUE);
 
 		/* We need to reload the buffer since we changed it */
 		gedit_search_end();

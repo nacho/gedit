@@ -45,8 +45,8 @@ GtkVBoxClass *parent_class = NULL;
        void gedit_view_set_window_position (View *view, gfloat position);
        void gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
 
-       void views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
-       void views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
+static void views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
+static void views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
        void gedit_view_insert (View  *view, guint position, gchar * text, gint length);
        void gedit_view_delete (View *view, guint position, gint length);
 
@@ -97,16 +97,16 @@ gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
 	g_return_if_fail (cbdata != NULL);
 	view = (View *) cbdata;
 
-	if (view->document->changed)
+	if (view->doc->changed)
 		return;
 	
-	view->document->changed = TRUE;
+	view->doc->changed = TRUE;
 
 	/* We are not connecting this singnal anymore ...  Chema 
 	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);*/
 
 	/* Set the title */
-	gedit_set_title (view->document);
+	gedit_set_title (view->doc);
 	
 }
 
@@ -176,7 +176,7 @@ gedit_view_insert (View  *view, guint position, gchar * text, gint length)
 			 length);
 }
 
-void
+static void
 views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
 {
 	View *nth_view;
@@ -215,7 +215,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 
 	gedit_debug ("start", DEBUG_VIEW);
 
-	doc = view->document;
+	doc = view->doc;
 
 	/* This string might not be terminated with a null cero */
 	text_to_insert = g_new0 (guchar, length+1);
@@ -244,7 +244,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 
 	gedit_debug ("start", DEBUG_VIEW);
 
-	doc = view->document;
+	doc = view->doc;
 
 	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	if (undo)
@@ -285,7 +285,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	if (!settings->auto_indent)
 		return FALSE;
 
-	doc = view->document;
+	doc = view->doc;
 
 	newlines = 0;
 	for (i = *pos; i > 0; i--)
@@ -572,10 +572,10 @@ gedit_view_new (Document *doc)
 		return NULL;
 
 	view = gtk_type_new (gedit_view_get_type ());
-	view->document = doc;
-	view->document->views = g_list_append (doc->views, view);
+	view->doc = doc;
+	view->doc->views = g_list_append (doc->views, view);
 
-	document_buffer = gedit_document_get_buffer (view->document);
+	document_buffer = gedit_document_get_buffer (view->doc);
 	gedit_view_insert (view, 0, document_buffer, FALSE);
 	g_free (document_buffer);
 
@@ -630,8 +630,8 @@ gedit_view_set_readonly (View *view, gint readonly)
 				       !view->readonly);
 #endif
 	
-	doc_name = gedit_document_get_tab_name (view->document);
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), doc_name);
+	doc_name = gedit_document_get_tab_name (view->doc);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
 	g_free (doc_name);
 }
 
@@ -777,7 +777,7 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 	if (view)
 	{
 		view = gedit_view_current();
-		buffer = gedit_document_get_buffer (view->document);
+		buffer = gedit_document_get_buffer (view->doc);
 		child = gnome_mdi_get_child_from_view (mdi->active_view);
 		gnome_mdi_add_view (mdi, child);
 		view = gedit_view_current();

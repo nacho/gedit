@@ -55,10 +55,10 @@ extern GSList	*plugin_list;
 /* Plugin MUST have this function */
 /*extern gint init_plugin (PluginData *pd); */
 
-PluginData* plugin_load              (const gchar *file);
-void        gedit_plugins_init       (void);
-void        plugin_unload            (PluginData *pd);
-
-void        gedit_plugins_window_add (GnomeApp *app);
+PluginData*	plugin_load              (const gchar *file);
+void		gedit_plugins_init       (void);
+void		plugin_unload            (PluginData *pd);
+gint		init_plugin (PluginData *pd);
+void		gedit_plugins_window_add (GnomeApp *app);
 
 #endif /* __PLUGIN_H__ */

@@ -14,8 +14,6 @@
 #include "../../src/plugin.h"
 
 
-/* first the gE_plugin centric code */
-
 static void destroy_plugin (PluginData *pd)
 {
 	g_free (pd->name);
@@ -23,7 +21,7 @@ static void destroy_plugin (PluginData *pd)
 
 
 /* Gratiously ripped out of GIMP (app/general.c), with a fiew minor changes */
-char *
+static char *
 get_time (void)
 {
 	static char static_buf[21];
@@ -62,30 +60,19 @@ get_time (void)
   	return out;
 }
 
-/* the function that actually does the wrok */
 static void
 insert_time (void)
 {
-	gint i;
-	View *view;
-	Document *doc = gedit_document_current();
+	View *view = gedit_view_current();
 	static gchar *the_time;
 
-	if (!doc)
+	if (!view)
 	     return;
 
-  	view = VIEW (mdi->active_view);
   	the_time = get_time();
 
-	i = gedit_view_get_position (view);
+	gedit_document_insert_text (view->doc, the_time, gedit_view_get_position (view), TRUE);
 
-	gtk_text_freeze (GTK_TEXT (view->text));
-	gtk_editable_insert_text (GTK_EDITABLE (view->text), the_time,
-				  strlen(the_time), &i);
-	
-		
-	gtk_text_thaw (GTK_TEXT (view->text));
-		
 	g_free (the_time);
 }
 
