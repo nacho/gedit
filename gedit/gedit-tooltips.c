@@ -189,7 +189,7 @@ gedit_tooltips_destroy (GtkObject * object)
 	g_return_if_fail (tooltips != NULL);
 
 	if (tooltips->timer_tag) {
-		gtk_timeout_remove (tooltips->timer_tag);
+		g_source_remove (tooltips->timer_tag);
 		tooltips->timer_tag = 0;
 	}
 
@@ -478,7 +478,7 @@ gedit_tooltips_set_active_widget (GeditTooltips * tooltips,
 		gtk_widget_hide (tooltips->tip_window);
 	}
 	if (tooltips->timer_tag) {
-		gtk_timeout_remove (tooltips->timer_tag);
+		g_source_remove (tooltips->timer_tag);
 		tooltips->timer_tag = 0;
 	}
 
@@ -607,10 +607,10 @@ gedit_tooltips_start_delay (GeditTooltips * tooltips, GtkWidget * widget)
 			delay = STICKY_DELAY;
 		else
 			delay = tooltips->delay;
-		tooltips->timer_tag = gtk_timeout_add (delay,
-						       gedit_tooltips_timeout,
-						       (gpointer)
-						       tooltips);
+		tooltips->timer_tag = g_timeout_add (delay,
+						     gedit_tooltips_timeout,
+						     (gpointer)
+						     tooltips);
 	}
 }
 
