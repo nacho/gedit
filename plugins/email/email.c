@@ -1,286 +1,493 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 
- * Email plugin.
- * Alex Roberts <bse@error.fsnet.co.uk>
- * Chema Celorio <chema@celorio.com>
+/*
+ * email.c
+ * This file is part of gedit
  *
+ * Copyright (C) 2001 Alex Roberts  <bse@error.fsnet.co.uk>
+ * 		      Chema Celorio <chema@celorio.com>
+ * Copyright (C) 2002 James Willcox <jwillcox@cs.indiana.edu>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA. 
  */
  
+/*
+ * Modified by the gedit Team, 2000-2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
+
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
+
+#include <glade/glade-xml.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-file-entry.h>
+#include <gconf/gconf-client.h>
 #include <gnome.h>
-#include <glade/glade.h>
-#include <libgnomevfs/gnome-vfs.h>
 
-#include "document.h"
-#include "plugin.h"
-#include "window.h"
-#include "utils.h"
+#include <gedit-menus.h>
+#include <gedit-plugin.h>
+#include <gedit-utils.h>
+#include <gedit-debug.h>
+#include <gedit-file.h>
+#include <dialogs/gedit-dialogs.h>
 
-#define GEDIT_PLUGIN_PROGRAM "sendmail"
-/* xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-   it is used to display "you can not use the [name] plugin without this program... */
-#define GEDIT_PLUGIN_NAME  _("email")
-#define GEDIT_PLUGIN_GLADE_FILE "/email.glade"
+#define EMAIL_BASE_KEY 		"/apps/gedit-2/plugins/email"
+#define EMAIL_LOCATION_KEY	"/sendmail-program-location"
+#define EMAIL_PROGRAM_NAME      "sendmail"
 
-static GtkWidget *from_entry = NULL;
-static GtkWidget *subject_entry = NULL;
-static GtkWidget *to_entry = NULL;
-static GtkWidget *location_label = NULL;
+#define MENU_ITEM_LABEL		N_("E_mail...")
+#define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
+#define MENU_ITEM_NAME		"Email"	
+#define MENU_ITEM_TIP		N_("Email a file.")
+
+#define PLUGIN_NAME 		_("Email")
+
+typedef struct _EmailDialog EmailDialog;
+
+struct _EmailDialog {
+	GtkWidget *dialog;
+
+	GtkWidget *to_entry;
+	GtkWidget *from_entry;
+	GtkWidget *subject_entry;
+};
+
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState configure (GeditPlugin *p, GtkWidget *parent);
+G_MODULE_EXPORT GeditPluginState save_settings (GeditPlugin *pd);
+
+static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
+static void email_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
+static void error_dialog (const gchar* str, GtkWindow *parent);
+static gboolean email_execute (EmailDialog *dialog);
+static gboolean configure_real (GtkWindow *parent);
+static void email_real (void);
+
+static gchar* email_program_location = NULL;
+
+static GConfClient 	*email_gconf_client 	= NULL;	
 
 static void
-gedit_plugin_destroy (PluginData *pd)
+dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 {
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	if (dialog_pointer != NULL)
+	{
+		g_free (*dialog_pointer);
+		*dialog_pointer = NULL;
+	}
+
+	gedit_debug (DEBUG_PLUGINS, "END");	
 }
 
-static void
-gedit_plugin_finish (GtkWidget *widget, gpointer data)
+static EmailDialog *
+get_email_dialog (GtkWindow* parent)
 {
-	gnome_dialog_close (GNOME_DIALOG (widget));
-}
+	static EmailDialog *dialog = NULL;
 
-static void
-cancel_button_pressed (GtkWidget *widget, GtkWidget* data)
-{
-	gnome_dialog_close (GNOME_DIALOG (data));
-}
+	GladeXML *gui;
+	GtkWidget *content;
 
-static void
-help_button_pressed (GtkWidget *widget, gpointer data)
-{
-	/* FIXME: Paolo - change to point to the right help page */
+	gedit_debug (DEBUG_PLUGINS, "");
 
-	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
-
-	gnome_help_display (NULL, &help_entry);
-}
-
-static void
-gedit_plugin_execute (GtkWidget *widget, /*gint button,*/ GtkWidget* data)
-{
-	const gchar *subject, *from, *to;
-	const gchar *program_location = NULL;
-	GeditDocument *doc = gedit_document_current();
-	FILE *sendmail;
-	guchar * buffer;
-	gchar *command;
+	if (dialog != NULL)
+	{
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
 		
-	to = gtk_entry_get_text (GTK_ENTRY (to_entry));
-	from = gtk_entry_get_text (GTK_ENTRY (from_entry));
-	subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
-	program_location = GTK_LABEL(location_label)->label;
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+				parent);
+		
+		return dialog;
+	}
+
+	gui = glade_xml_new (GEDIT_GLADEDIR "email.glade",
+			     "dialog_content", NULL);
+
+	if (!gui) {
+		g_warning
+		    ("Could not find email.glade, reinstall gedit.\n");
+		return NULL;
+	}
+
+	dialog = g_new0 (EmailDialog, 1);
+
+	/* Create the dialog */
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Email current document..."),
+						      parent,
+						      GTK_DIALOG_DESTROY_WITH_PARENT |
+						      GTK_DIALOG_MODAL,
+						      GTK_STOCK_CANCEL,
+						      GTK_RESPONSE_CANCEL,
+						      GTK_STOCK_HELP,
+						      GTK_RESPONSE_HELP,
+						      NULL);
+
+	g_return_val_if_fail (dialog->dialog != NULL, NULL);
+
+	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog), 
+				 _("Se_nd"), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK);
+
+	/* Load widgets */
+	content	= glade_xml_get_widget (gui, "dialog_content");
+	dialog->from_entry = glade_xml_get_widget (gui, "from_entry");
+	dialog->subject_entry = glade_xml_get_widget (gui, "subject_entry");
+	dialog->to_entry = glade_xml_get_widget (gui, "to_entry");
+
 	
-	g_return_if_fail (program_location != NULL);
-	command = g_strdup_printf ("%s %s", program_location, to);
+	g_return_val_if_fail (content != NULL, NULL);
+	
 
-	gedit_flash_va (_("Executing command: %s"), command);
-		
-	if (!from || strlen (from) == 0 || !to || strlen (to)==0)
+	g_return_val_if_fail (dialog->from_entry            != NULL, NULL);
+	g_return_val_if_fail (dialog->to_entry              != NULL, NULL);
+	g_return_val_if_fail (dialog->subject_entry         != NULL, NULL);
+
+	/* Insert the content in the dialog */
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
+			    content, FALSE, FALSE, 0);
+
+	/* Set default response */
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
+					 GTK_RESPONSE_OK);
+
+	/* Connect destroy signal */
+	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
+			  G_CALLBACK (dialog_destroyed), &dialog);
+	
+	g_object_unref (gui);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+
+	return dialog;
+
+}
+
+static void
+email_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	email_real ();	
+}
+
+static void
+email_real (void)
+{
+	GError *error = NULL;
+	GtkWindow *parent;
+	EmailDialog *dialog = NULL;
+	gint ret;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	parent = GTK_WINDOW (gedit_get_active_window ());
+	
+	if (email_program_location  == NULL)
+		if (!configure_real (parent))
+			return;	
+
+	dialog = get_email_dialog (parent);
+	if (dialog == NULL) 
 	{
-		GnomeDialog *error_dialog;
-		error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid email address.",
-									  gedit_window_active()));
-		gnome_dialog_run_and_close (error_dialog);
-		gdk_window_raise (data->window);
-		g_free (command);
+		g_warning ("Could not create the Email dialog");
 		return;
 	}
 
-	if ((sendmail = popen (command, "w")) == NULL)
+	do 
 	{
-		g_warning ("Couldn't open stream to %s\n", program_location);
-		g_free (command);
-		return;
+		ret = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+
+		switch (ret) {
+			case GTK_RESPONSE_OK:
+
+				if (email_execute (dialog))
+					gtk_widget_hide (dialog->dialog);
+
+			break;
+
+			case GTK_RESPONSE_HELP:
+				gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+				if (error != NULL) {
+					g_warning (error->message);
+					g_error_free (error);
+				}
+			break;
+
+			default:
+				gtk_widget_hide (dialog->dialog);
+			break;
+		}
+	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
+}
+
+static gboolean
+email_execute (EmailDialog *dialog)
+{
+	GeditView *view;
+	GeditDocument *doc;
+	gchar *command_line = NULL;
+	FILE *sendmail;
+
+	const gchar *to;
+	const gchar *from;
+	const gchar *subject;
+	const gchar *body;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	to = gtk_entry_get_text (GTK_ENTRY (dialog->to_entry));
+	from = gtk_entry_get_text (GTK_ENTRY (dialog->from_entry));
+	subject = gtk_entry_get_text (GTK_ENTRY (dialog->subject_entry));
+
+	if (!strcmp (to, "")) {
+		error_dialog (_("Error sending email.\n\n"
+				"Please provide a recipient."),
+				GTK_WINDOW (dialog->dialog));
+		return FALSE;
 	}
-	    
+	if (!strcmp (from, "")) {
+		error_dialog (_("Error sending email.\n\n"
+				"Please provide a from address."),
+				GTK_WINDOW (dialog->dialog));
+		return FALSE;
+	}
+	if (!strcmp (subject, "")) {
+		error_dialog (_("Error sending email.\n\n"
+				"Please provide a subject."),
+				GTK_WINDOW (dialog->dialog));
+		return FALSE;
+	}
+
+	view = gedit_get_active_view ();
+	g_return_val_if_fail (view != NULL, FALSE);
+	
+	doc = gedit_view_get_document (view);
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	body = gedit_document_get_buffer (doc);
+
+	command_line = g_strdup_printf ("%s -x -t", email_program_location);
+
+	if ((sendmail = popen (command_line, "w")) == NULL) {
+		error_dialog (_("Error sending email.\n\n"
+				"Error executing the sendmail command."),
+			      GTK_WINDOW (dialog->dialog));
+	
+		g_free (command_line);
+		return FALSE;
+	}
+
 	fprintf (sendmail, "To: %s\n", to);
 	fprintf (sendmail, "From: %s\n", from);
 	fprintf (sendmail, "Subject: %s\n", subject);
-	fprintf (sendmail, "X-Mailer: gedit email plugin v 0.2\n");
+	fprintf (sendmail, "X-Mailer: gedit email plugin %s\n", VERSION);
 	fflush (sendmail);
-		
-	buffer = gedit_document_get_buffer (doc);
-	fprintf (sendmail, "%s\n", buffer);
-	g_free (buffer);
-	
+
+	fprintf (sendmail, "%s", body);
 	fflush (sendmail);
 	pclose (sendmail);
-	    
-	gnome_config_set_string ("/gedit/email_plugin/From", from);
-	gnome_config_sync ();
-		
-	g_free (command);
-
-	gnome_dialog_close (GNOME_DIALOG (data));
+	
+	
+	g_free (command_line);
+	return TRUE;
 }
 
-static void
-gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
+static void 
+error_dialog (const gchar* str, GtkWindow *parent)
 {
-	GtkWidget *dialog;
-	GtkWidget *label;
-	gchar * new_location;
+	GtkWidget *message_dlg;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-	dialog = userdata;
 
-	new_location = gedit_plugin_program_location_change (GEDIT_PLUGIN_PROGRAM,
-							     GEDIT_PLUGIN_NAME);
+	message_dlg = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_WARNING,
+			GTK_BUTTONS_OK, 
+			str);
+		
+	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
-	if ( new_location == NULL)
-	{
-		gdk_window_raise (dialog->window);
-		return;
-	}
-
-	/* We need to update the label */
-	label  = gtk_object_get_data (GTK_OBJECT (dialog), "location_label");
-	g_return_if_fail (label!=NULL);
-	gtk_label_set_text (GTK_LABEL (label),
-			    new_location);
-	g_free (new_location);
-
-	gdk_window_raise (dialog->window);	
-
+	gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+	
+	gtk_dialog_run (GTK_DIALOG (message_dlg));
+  	gtk_widget_destroy (message_dlg);
 }
 
-
-static void
-gedit_plugin_create_dialog (void)
+static gboolean
+configure_real (GtkWindow *parent)
 {
-	GladeXML *gui = NULL;
-	GtkWidget *dialog = NULL;
-	GtkWidget *filename_label = NULL;
-	GtkWidget *change_location = NULL;
-	GtkWidget *send_button = NULL;
-	GtkWidget *cancel_button = NULL;
-	GtkWidget *help_button = NULL;
+	gchar *temp;
 	
-	gchar *username, *fullname, *hostname;
-	gchar *from;
-	gchar *program_location;
-	gchar *config_string;
-	gchar *docname;
-
-	GeditDocument *doc = gedit_document_current ();
-
-	g_return_if_fail (doc != NULL);
+	gedit_debug (DEBUG_PLUGINS, "");
 	
-	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
-							     GEDIT_PLUGIN_NAME,
-							     FALSE);
-	
-	g_return_if_fail(program_location != NULL);
-	
-	gui = glade_xml_new (GEDIT_GLADEDIR
-			     GEDIT_PLUGIN_GLADE_FILE,
-			     "dialog");
+	temp = gedit_plugin_program_location_dialog (EMAIL_PROGRAM_NAME, 
+					      	     PLUGIN_NAME, 
+					      	     parent);
 
-	if (!gui) {
-		g_warning ("Could not find %s, reinstall gedit.\n",
-			   GEDIT_GLADEDIR
-			   GEDIT_PLUGIN_GLADE_FILE);
-		return;
-	}
-
-	dialog          = glade_xml_get_widget (gui, "dialog");
-	to_entry        = glade_xml_get_widget (gui, "to_entry");
-	from_entry      = glade_xml_get_widget (gui, "from_entry");
-	subject_entry   = glade_xml_get_widget (gui, "subject_entry");
-	filename_label  = glade_xml_get_widget (gui, "filename_label");
-	location_label  = glade_xml_get_widget (gui, "location_label");
-	change_location = glade_xml_get_widget (gui, "change_button");
-	send_button     = glade_xml_get_widget (gui, "button0");
-	cancel_button   = glade_xml_get_widget (gui, "button1");
-	help_button     = glade_xml_get_widget (gui, "button2");
-
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (to_entry != NULL);
-	g_return_if_fail (from_entry  != NULL);
-	g_return_if_fail (subject_entry != NULL);
-	g_return_if_fail (filename_label != NULL);
-	g_return_if_fail (location_label != NULL);
-	g_return_if_fail (change_location != NULL);
-	g_return_if_fail (send_button != NULL);
-	g_return_if_fail (cancel_button != NULL);
-	g_return_if_fail (help_button != NULL);
-
-	username = g_get_user_name ();
-	fullname = g_get_real_name ();
-	hostname = getenv ("HOSTNAME");
-
-	config_string = gnome_config_get_string ("/gedit/email_plugin/From");
-	if (config_string)
+	if (temp != NULL)
 	{
-		gtk_entry_set_text (GTK_ENTRY (from_entry), config_string);
-		g_free (config_string);
+		if (email_program_location != NULL)
+			g_free (email_program_location);
+		
+		email_program_location = temp;
 	}
-	else if (fullname && hostname)
-	{
-		from = g_strdup_printf ("%s <%s@%s>",
-					fullname,
-					username,
-					hostname);
-
-		gtk_entry_set_text (GTK_ENTRY (from_entry), from);
-		g_free (from);
-	}
-
-	if (doc->filename == NULL) {
-		docname = g_strdup_printf (_("Untitled %i"), doc->untitled_number);
-	} else {
-		docname = gnome_vfs_unescape_string_for_display (doc->filename);		
-	}
-
-	/* Set the subject entry box */
-	gtk_entry_set_text (GTK_ENTRY (subject_entry), g_basename(docname));
-
-	/* Set the filename label */
-	gtk_label_set_text (GTK_LABEL (filename_label), docname);
 	
-        /* Set the sendmail location label */
-	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
-	gtk_label_set_text (GTK_LABEL (location_label), program_location);
-	g_free (program_location);
-	
-
-	/* Connect the signals */
-	gtk_signal_connect (GTK_OBJECT (send_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_execute), dialog);
-	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
-			    GTK_SIGNAL_FUNC (cancel_button_pressed), dialog);
-	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
-			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
-	
-
-	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
-	gtk_signal_connect (GTK_OBJECT (change_location), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_change_location), dialog);
-
-	/* Set the dialog parent and modal type */ 
-	gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
-	gtk_window_set_modal         (GTK_WINDOW (dialog), TRUE);
-	gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
-
-	/* Show everything then free the GladeXML memmory */
-	gtk_widget_show_all (dialog);
-	gtk_object_unref (GTK_OBJECT (gui));
+	return (email_program_location != NULL);
 }
 
-gint
-init_plugin (PluginData *pd)
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
-	/* initialise */
-	pd->destroy_plugin = gedit_plugin_destroy;
-	pd->name = _("Email");
-	pd->desc = _("Email the current document");
-	pd->long_desc = _("Email the current document to a specified email address\n"
-			  "gedit searches for sendmail to use this plugin.");
-	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
-	pd->needs_a_document = TRUE;
-	pd->modifies_an_existing_doc = FALSE;
-	pd->private_data = (gpointer)gedit_plugin_create_dialog;
-	pd->installed_by_default = TRUE;
+	BonoboUIComponent *uic;
+	GeditDocument *doc;
+	gchar *buf;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	uic = gedit_get_ui_component_from_window (window);
+	
+	doc = gedit_get_active_document ();
+	
+	if (doc) {
+		buf = gedit_document_get_buffer (doc);
+		
+		if (strlen (buf) > 0)
+			gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
+		else
+			gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
+		
+		g_free (buf);
+	}
+	else
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
 
 	return PLUGIN_OK;
 }
+
+G_MODULE_EXPORT GeditPluginState
+configure (GeditPlugin *p, GtkWidget *parent)
+{
+	if (configure_real (GTK_WINDOW (parent)))
+		return PLUGIN_OK;
+	else
+		return PLUGIN_ERROR;	
+}
+
+G_MODULE_EXPORT GeditPluginState
+destroy (GeditPlugin *plugin)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	plugin->deactivate (plugin);
+
+	g_object_unref (G_OBJECT (email_gconf_client));
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+save_settings (GeditPlugin *pd)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (email_gconf_client != NULL, PLUGIN_ERROR);
+
+	if (email_program_location != NULL)
+		gconf_client_set_string (
+				email_gconf_client,
+				EMAIL_BASE_KEY EMAIL_LOCATION_KEY,
+				email_program_location,
+		      		NULL);
+
+	gconf_client_suggest_sync (email_gconf_client, NULL);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList *top_windows;
+        gedit_debug (DEBUG_PLUGINS, "");
+
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME,
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
+				     email_cb);
+
+                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
+                top_windows = g_list_next (top_windows);
+        }
+
+        return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
+{
+	/* initialize */
+	gedit_debug (DEBUG_PLUGINS, "");
+     
+	pd->name = PLUGIN_NAME;
+	pd->desc = _("Sends the current document via email.  You must have sendmail installed for this to work.");
+	pd->author = "James Willcox <jwillcox@cs.indiana.edu>";
+	pd->copyright = _("Copyright (C) 2000 - 2002 Alex Roberts,Chema Celorio\nJames Willcox");
+	
+	pd->private_data = NULL;
+
+	email_gconf_client = gconf_client_get_default ();
+	g_return_val_if_fail (email_gconf_client != NULL, PLUGIN_ERROR);
+
+	gconf_client_add_dir (email_gconf_client,
+			      EMAIL_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
+	
+	email_program_location = gconf_client_get_string (
+				email_gconf_client,
+				EMAIL_BASE_KEY EMAIL_LOCATION_KEY,
+			      	NULL);
+
+	return PLUGIN_OK;
+}
+
+
+
+
