@@ -159,8 +159,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			gchar *errstr;
 			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
 		       	
-			errstr = g_strdup_printf (_("An error occurred while "
-						    "opening the file \"%s\".\n\n%s."),
+			errstr = g_strdup_printf (_("Could not open the file \"%s\":\n\n%s."),
 						  formatted_uri, error->message);
 		
 			dialog = gtk_message_dialog_new (
@@ -207,8 +206,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			gchar *errstr;
 			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
 		       	
-			errstr = g_strdup_printf (_("An error occurred while "
-						    "opening the file \"%s\".\n\n%s."),
+			errstr = g_strdup_printf (_("Could not open the file \"%s\":\n\n%s."),
 						  formatted_uri, error->message);
 		
 			dialog = gtk_message_dialog_new (
@@ -298,8 +296,7 @@ gedit_file_save (GeditMDIChild* child)
 			error_message = error->message;
 		}
 		
-		errstr = g_strdup_printf (_("An error occurred while "
-					    "saving the file \"%s\".\n\n%s."),
+		errstr = g_strdup_printf (_("Could not save the file \"%s\":\n\n%s."),
 					    uri, error_message);
 		
 		view = GTK_WIDGET (g_list_nth_data (
@@ -428,8 +425,7 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 			error_message = error->message;
 		}
 		
-		errstr = g_strdup_printf (_("An error occurred while "
-					    "saving the file \"%s\".\n\n%s."),
+		errstr = g_strdup_printf (_("Could not save the file \"%s\":\n\n%s."),
 					    file_name, error_message);
 		
 		dialog = gtk_message_dialog_new (
@@ -580,8 +576,7 @@ gedit_file_revert (GeditMDIChild *child)
 			error_message = error->message;
 		}
 		
-		errstr = g_strdup_printf (_("An error occurred while "
-					    "reverting the file \"%s\".\n\n%s."),
+		errstr = g_strdup_printf (_("Could not revert the file \"%s\".\n\n%s."),
 					    uri, error_message);
 		
 		view = GTK_WIDGET (g_list_nth_data (
@@ -817,8 +812,7 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 		/* FIXME: do a more user friendly error reporting */
 		gchar *errstr;
 	       	
-		errstr = g_strdup_printf (_("An error occurred while "
-						   "reading data from stdin.\n\n%s."),
+		errstr = g_strdup_printf (_("Could not read data from stdin.\n\n%s."),
 						   error->message);
 		
 		dialog = gtk_message_dialog_new (

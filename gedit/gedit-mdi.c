@@ -566,7 +566,8 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			else
 				exiting = FALSE;
 		}
-			
+
+#if 0		
 		if (exiting)
 			gedit_dialog_add_button (GTK_DIALOG (msgbox),
 					_("_Don't quit"), GTK_STOCK_CANCEL,
@@ -575,6 +576,9 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			gedit_dialog_add_button (GTK_DIALOG (msgbox),
 					_("_Don't close"), GTK_STOCK_CANCEL,
                 	             	GTK_RESPONSE_CANCEL);
+#endif
+		
+		gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
 		gtk_dialog_add_button (GTK_DIALOG (msgbox),
 			       	GTK_STOCK_SAVE,
