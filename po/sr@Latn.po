@@ -1,5 +1,5 @@
 # Serbian translation of gedit
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004, 2005.
 #
 # This file is distributed under the same license as the gedit package.
 #
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2004-08-21 14:27+0200\n"
+"POT-Creation-Date: 2005-03-02 14:28+0100\n"
+"PO-Revision-Date: 2005-03-02 14:36+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "proizvodnja gedit automatizacije"
 msgid "Edit text files"
 msgstr "Izmeni tekstualne datoteke"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Uređivač teksta"
 
@@ -60,9 +60,8 @@ msgstr ""
 "jedino imati efekta ako je isključena opcija „Koristi predefinisani font“."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "Aktiviraj %s"
+msgstr "Pokrenuti dodaci"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -213,20 +212,26 @@ msgstr "Maksimum skoro otvaranih datoteka"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maksimalan broj akcija koje će gedit moći da poništi ili povrati."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
-#, fuzzy
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -234,53 +239,61 @@ msgstr ""
 "Broj minuta nakon kojih će gedit automatski snimiti izmenjenu datoteku. Ovo "
 "će jedino imati efekta ukoliko je opcija „Automatsko snimanje“ uključena."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Štampaj zaglavlje"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Štampaj brojeve linija"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Štampaj isticanje sintakse"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Štampaj način preloma linije"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Položaj desne margine"
 
-#: data/gedit.schemas.in.h:41
-#, fuzzy
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
-#, fuzzy
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
-msgstr "Španski"
+msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Boja označenog teksta"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Boja označenog prostora"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -290,7 +303,7 @@ msgstr ""
 "kodnog rasporeda datoteke. „CURRENT“ označava tekući kodni raspored "
 "lokaliteta. Koriste se jedino prepoznati kodni rasporedi."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -304,7 +317,7 @@ msgstr ""
 "da su vrednosti osetljive na velika ili mala slova, pa se uverite da ih "
 "koristitie na isti način kao što su ovde navedene."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -318,41 +331,34 @@ msgstr ""
 "da su vrednosti osetljive na velika ili mala slova, pa se uverite da ih "
 "koristitie na isti način kao što su ovde navedene."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Podešava koji će font biti korišćen za telo dokumenta prilikom štampanja."
 
-#: data/gedit.schemas.in.h:51
-#, fuzzy
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"Podešava koji će font biti korišćen za telo dokumenta prilikom štampanja."
+msgstr "Podešava koji će font biti korišćen za telo dokumenta prilikom štampanja. Ovo je ime fonta za Gnom štampu i zamenjuje se sa print_font_body_pango."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"Podešava koji će font biti korišćen za štampanje brojeva liija. Ovo će "
-"jedino imati efekta ukoliko opcija „Štampaj brojeve linija“ nije podešena na "
-"0."
+"Podešava koji će font biti korišćen za štampanje brojeva liija. Ovo će jedino "
+"imati efekta ukoliko opcija „Štampaj brojeve linija“ nije podešena na 0."
 
-#: data/gedit.schemas.in.h:53
-#, fuzzy
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"Podešava koji će font biti korišćen za štampanje brojeva liija. Ovo će "
-"jedino imati efekta ukoliko opcija „Štampaj brojeve linija“ nije podešena na "
-"0."
+msgstr "Podešava koji će font biti korišćen za štampanje brojeva redova. Ovo će jedino imati efekta ukoliko opcija „Štampaj brojeve linija“ nije podešena na 0. Ovo je ime fonta za Gnom štampu i zamenjuje se sa print_font_numbers_pango."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -360,17 +366,14 @@ msgstr ""
 "Podešava koji će font biti korišćen za štampanje zaglavlja stranice. Ovo će "
 "jedino imati efekta ako je uključena opcija „Štampaj zaglavlje“."
 
-#: data/gedit.schemas.in.h:55
-#, fuzzy
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"Podešava koji će font biti korišćen za štampanje zaglavlja stranice. Ovo će "
-"jedino imati efekta ako je uključena opcija „Štampaj zaglavlje“."
+msgstr "Podešava koji će font biti korišćen za štampanje zaglavlja stranice. Ovo će jedino imati efekta ako je uključena opcija „Štampaj zaglavlje“. Ovo je ime fonta za Gnom štampu i zamenjuje se sa print_font_header_pango."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -378,21 +381,21 @@ msgstr ""
 "Podešava maksimalan broj skoro otvorenih datoteka koje će biti prikazane u "
 "„Skoro otvorene datoteke“ podmeniju."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Podešava broj razmaka koji će biti prikazani umesto znaka tabulatora."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "Određuje položaj desne margine."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
-msgstr "Prikaži statusnu liniju"
+msgstr "Prikaži liniju sa stanjem"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -408,35 +411,35 @@ msgstr ""
 "Obratite pažnju da su vrednosti osetljive na velika i mala slova, pa se "
 "uverite da ih koristite kao što su ovde navedene."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "Veličina tabulatora"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "Boja teksta"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "Stil dugmića na paleti sa alatima"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "Paleta sa alatima je vidljiva?"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "Limit poništavanja akcije"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "Koristi predefinisane boje"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "Koristi predefinisani font"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -446,7 +449,7 @@ msgstr ""
 "intervala. Možete postaviti vremenski interval pomoću „Interval automatskog "
 "snimanja“ opcije."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -455,57 +458,55 @@ msgstr ""
 "postaviti ekstenziju datoteke sa rezervnom kopijom pomoću opcije „Ekstenzija "
 "rezervne kopije“."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr ""
 "Da li gedit treba da prikaže brojeve linija u prostoru za izmenu teksta."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr ""
 "Da li gedit treba da prikaže desnu marginu u prostoru za izmenu teksta."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "Da li gedit treba da omogući automatsko uvlačenje."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Da li gedit treba da omogući isticanje sintakse."
 
-#: data/gedit.schemas.in.h:74
-#, fuzzy
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Da li gedit treba da omogući isticanje sintakse."
+msgstr "Da li gedit treba da ističe drugu zagradu."
 
-#: data/gedit.schemas.in.h:75
-#, fuzzy
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
-msgstr "Da li gedit treba da ističe sintaksu prilikom štampanja dokumenata."
+msgstr "Da li gedit treba da ističe tekući red."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Da li gedit treba da uključi zaglavlje dokumenta prilikom štampanja."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Da li gedit treba da umetne razmake umesto tabulatora."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Da li gedit treba da ističe sintaksu prilikom štampanja dokumenata."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Da li statusna linija u dnu prostora za izmenu teksta treba da bude vidljiva."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Da li linija sa alatima treba da bude vidljiva."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -513,24 +514,24 @@ msgid ""
 "\", and \"Selection Color\" options."
 msgstr ""
 "Da li treba koristiti predefinisane sistemske boje za prostor za izmenu "
-"teksta. Ako je ova opcija uključena, onda će boje u prostoru za izmenu "
-"teksta biti one navedene u podešavanjima za „Boja pozadina“, „Boja teksta“, "
-"„Boja označenog teksta“, i „Boja oznake“."
+"teksta. Ako je ova opcija uključena, onda će boje u prostoru za izmenu teksta "
+"biti one navedene u podešavanjima za „Boja pozadina“, „Boja teksta“, „Boja "
+"označenog teksta“, i „Boja oznake“."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
 msgstr ""
 "Da li treba koristiti predefinisani sistemski font za prikaz teksta umesto "
-"fonta navedenog u podešavanjima gedit programa. Ako je ova opcija "
-"isključena, font naveden u opciji „Font uređivača“ će biti korišćen umesto "
-"sistemskog fonta."
+"fonta navedenog u podešavanjima gedit programa. Ako je ova opcija isključena, "
+"font naveden u opciji „Font uređivača“ će biti korišćen umesto sistemskog "
+"fonta."
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-5,ISO-8859-2]"
 
@@ -538,7 +539,7 @@ msgstr "[ISO-8859-5,ISO-8859-2]"
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-5]"
 
@@ -548,9 +549,8 @@ msgid "Activate %s"
 msgstr "Aktiviraj %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Zatvori prozor sa izlazom"
+msgstr "Zatvori _bez snimanja"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -585,14 +585,14 @@ msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
 msgstr[0] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekunde će biti "
-"trajno odbačene."
+"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekunde će biti trajno "
+"odbačene."
 msgstr[1] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekunde će biti "
-"trajno odbačene."
+"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekunde će biti trajno "
+"odbačene."
 msgstr[2] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekundi će biti "
-"trajno odbačene."
+"Ukoliko ne sačuvate, izmene iz poslednjeg minuta i %ld sekundi će biti trajno "
+"odbačene."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
@@ -610,16 +610,13 @@ msgstr[2] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg časa će biti trajno odbačene."
-msgstr[1] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg časa će biti trajno odbačene."
-msgstr[2] ""
-"Ukoliko ne sačuvate, izmene iz poslednjeg časa će biti trajno odbačene."
+msgstr[0] "Ukoliko ne sačuvate, izmene iz poslednjeg %d časa će biti trajno odbačene."
+msgstr[1] "Ukoliko ne sačuvate, izmene iz poslednja %d časa će biti trajno odbačene."
+msgstr[2] "Ukoliko ne sačuvate, izmene iz poslednjih %d časova će biti trajno odbačene."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -654,11 +651,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Postoji %d dokumenta sa nesačuvanim izmenama. Sačuvati izmene pre zatvaranja?"
 msgstr[2] ""
-"Postoji %d dokumenata sa nesačuvanim izmenama. Sačuvati izmene pre "
-"zatvaranja?"
+"Postoji %d dokumenata sa nesačuvanim izmenama. Sačuvati izmene pre zatvaranja?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "Izaberite _dokumente koje želite da sačuvate:"
 
@@ -808,19 +803,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatsko uvlačenje</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Prelom teksta</b>"
+msgstr "<b>Uparivanje zagrada</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Prelom teksta</b>"
+msgstr "<b>Tekući red</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -845,9 +837,8 @@ msgstr "<b>Desna margina</b>"
 
 # nesigurno: da li su ovo jezicci ili tabulatori?
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>Listovi</b>"
+msgstr "<b>Tabulatori</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -998,7 +989,6 @@ msgid "_Display line numbers"
 msgstr "Prika_ži brojeve linije"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Omogući _automatsko uvlačenje"
 
@@ -1023,7 +1013,6 @@ msgid "_Right margin at column:"
 msgstr "_Desna margina u koloni:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "Širina _tabulatora:"
 
@@ -1177,26 +1166,6 @@ msgstr "Unesite lokaciju (URI) datoteke koju želite da otvorite: "
 msgid "Open from URI"
 msgstr "Otvori URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Imate X dokumenata sa nesačuvanim "
-"izmenama. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "Ukoliko ne sačuvate vaše dokumente, sve izmene će biti izgubljene."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_Ne čuvaj ništa"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "_Sačuvaj izabrane"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit je mali i lagan uređivač teksta za okruženje Gnom"
@@ -1209,59 +1178,57 @@ msgstr "gedit je mali i lagan uređivač teksta za okruženje Gnom"
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Goran Rakić <gox@devbase.net>\n"
 "Danilo Šegan <danilo@prevod.org>\n"
 "\n"
-"http://Prevod.org/"
+"Prevod.org — prevod na srpski jezik."
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
-msgstr "Do_kumenti"
+msgstr "Nesačuvan dokument"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Neispravno ime datoteke"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "Neispravni UTF-8 podaci"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Ne mogu da pročitam informacije o simboličkoj vezi za %s"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "Datoteka ima previše simboličkih veza."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ne može da koristi %s: adrese za pisanje."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ne može da podrži ovaj tip lokacije za pisanje"
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "Neispravno ime datoteke."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1269,17 +1236,17 @@ msgstr ""
 "Nema dovoljno prostora na disku da snimite datoteku.\n"
 "Molimo vas da oslobodite prostor na disku i pokušate ponovo."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
 "Disk na koji pokušavate da snimite datoteku ima ograničenje veličine "
-"datoteke. Molimo vas da snimite manju datoteku ili da je snimite na disk "
-"koji nema ovo ograničenje."
+"datoteke. Molimo vas da snimite manju datoteku ili da je snimite na disk koji "
+"nema ovo ograničenje."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "Ne mogu da napravim rezervnu kopiju datoteke."
 
@@ -1334,7 +1301,7 @@ msgid "Arabic"
 msgstr "Arabski"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:128
 msgid "Greek"
 msgstr "Grčki"
 
@@ -1343,12 +1310,12 @@ msgid "Hebrew Visual"
 msgstr "Hebrejski Visual"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:144
 msgid "Hebrew"
 msgstr "Hebrejski"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:184
 msgid "Turkish"
 msgstr "Turski"
 
@@ -1360,7 +1327,7 @@ msgstr "Nordijski"
 msgid "Celtic"
 msgstr "Keltski"
 
-#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:172
 msgid "Romanian"
 msgstr "Rumunski"
 
@@ -1401,7 +1368,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Ćirilični/Ukrajinski"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:187
 msgid "Vietnamese"
 msgstr "Vijetnamski"
 
@@ -1409,7 +1376,7 @@ msgstr "Vijetnamski"
 msgid "Thai"
 msgstr "Tajlandski"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "Nepoznato"
 
@@ -1440,7 +1407,6 @@ msgid "All Text Files"
 msgstr "Sve tekstualne datoteke"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "Kodiranje zn_akova:"
 
@@ -1456,35 +1422,35 @@ msgstr "Izaberite datoteke da otvorite"
 msgid "Select a filename to save"
 msgstr "Izaberite ime datoteke za snimanje"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Otvori datoteku..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Čuvam datoteku „%s“..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument „%s“ nije sačuvan."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument „%s“ je sačuvan."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Sačuvaj kao..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Povratiti nesačuvane izmene u dokumentu „%s“?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1498,14 +1464,13 @@ msgstr[1] ""
 msgstr[2] ""
 "Izmene učinjene u dokumentu u poslednjih %ld sekundi će biti trajno odbačene."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
-msgstr ""
-"Izmene učinjene u dokumentu u poslednjem minutu će biti trajno odbačene."
+msgstr "Izmene učinjene u dokumentu u poslednjem minutu će biti trajno odbačene."
 
 # možda „za poslednji minut i %ld sekunde“?
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1523,7 +1488,7 @@ msgstr[2] ""
 "Izmene učinjene u dokumentu u poslednjem minutu i %ld sekundi će biti trajno "
 "odbačene."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1537,19 +1502,16 @@ msgstr[1] ""
 msgstr[2] ""
 "Izmene učinjene u dokumentu u poslednjih %ld minuta će biti trajno odbačene."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Izmene učinjene u dokumentu u poslednjem času će biti trajno odbačene."
-msgstr[1] ""
-"Izmene učinjene u dokumentu u poslednjem času će biti trajno odbačene."
-msgstr[2] ""
-"Izmene učinjene u dokumentu u poslednjem času će biti trajno odbačene."
+msgstr[0] "Izmene učinjene u dokumentu u poslednjem %d času će biti trajno odbačene."
+msgstr[1] "Izmene učinjene u dokumentu u poslednja %d časa će biti trajno odbačene."
+msgstr[2] "Izmene učinjene u dokumentu u poslednjih %d časova će biti trajno odbačene."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1567,53 +1529,53 @@ msgstr[2] ""
 "Izmene učinjene u dokumentu u poslednjem času i %d minuta će biti trajno "
 "odbačene."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Pov_rati"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Ne mogu da povratim dokument „%s“."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument „%s“ nije povraćen."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument „%s“ je povraćen."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vršim povraćaj dokumenta „%s“..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "Ne mogu da pročitam podatke sa standardnog ulaza."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Vraćam datoteku:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Učitavam datoteku:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Greška pri učitavanju datoteke „%s“"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Datoteka „%s“ je učitana"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1621,17 +1583,17 @@ msgstr[0] "%d datoteka učitana"
 msgstr[1] "%d datoteke učitane"
 msgstr[2] "%d datoteka učitano"
 
-#: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1288
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Datoteka „%s“ je učitana"
+msgstr "Napravih datoteku „%s“"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Učitavam datoteku „%s“..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1640,18 +1602,14 @@ msgstr[1] "Učitavam %d datoteke..."
 msgstr[2] "Učitavam %d datoteka..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Ne mogu da otvorim datoteku „%s“"
+msgstr "Ne mogu da nađem datoteku „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"„%s“ je direktorijum.\n"
-"\n"
-"Molimo vas, proverite da li ste uneli tačnu lokaciju i pokušajte ponovo."
+msgstr "Proverite da li ste tačno uneli putanju i pokušajte ponovo."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1667,54 +1625,45 @@ msgid "Could not open the file \"%s\""
 msgstr "Ne mogu da otvorim datoteku „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Ne mogu da otvorim datoteku „%s“ jer ona sadrži oštećene podatke."
+msgstr "Datoteka sadrži oštećene podatke."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit ne može da koristi %s: adrese za pisanje."
+msgstr "gedit ne može da koristi %s: putanje."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit ne može da koristi %s: adrese za pisanje."
+msgstr "gedit ne može da koristi ovu putanju."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Ne mogu da otvorim datoteku „%s“ jer sadrži podatke u neodgovarajućem "
-"formatu."
+msgstr "Datoteka sadrži podatke u neodgovarajućem obliku."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Datoteka ima previše simboličkih veza."
+msgstr "Datoteka je prevelika."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "„%s“ ne predstavlja ispravnu putanju"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Pristup je odbijen."
 
+# bug: capitalise "there"
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
-msgstr ""
-"Ne mogu da otvorim datoteku „%s“ jer ima previše otvorenih datoteka.\n"
-"\n"
-"Molimo vas, zatvorite neke otvorene datoteke i pokušajte ponovo."
+msgstr "Ima previše otvorenih datoteka. Zatvorite neke otvorene datoteke i pokušajte ponovo."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "„%s“ je direktorijum"
 
 #: gedit/gedit-io-error-dialogs.c:157
 #, fuzzy
@@ -1787,8 +1736,8 @@ msgid ""
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Ne može da otvori datoteku „%s“ pošto gedit ne može da sam prepozna "
-"kodiranje znakova.\n"
+"Ne može da otvori datoteku „%s“ pošto gedit ne može da sam prepozna kodiranje "
+"znakova.\n"
 "\n"
 "Molim proverite da ne pokušavate da otvorite binarnu datoteku i da li ste "
 "izabrali ispravno kodiranje znakova u prozorčetu za otvaranje datoteka, pa "
@@ -1984,20 +1933,20 @@ msgstr "Otvori „%s“"
 msgid "Open a recently used file"
 msgstr "Otvori skoro korišćenu datoteku"
 
-#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 #, fuzzy
 msgid "Read Only"
 msgstr "(samo za čitanje)"
 
-#: gedit/gedit-mdi.c:2068
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "Obično"
 
-#: gedit/gedit-mdi.c:2069
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "Koristi običan režim isticanja"
 
-#: gedit/gedit-mdi.c:2145
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Koristi %s režim isticanja"
@@ -2459,20 +2408,20 @@ msgstr " (neispravan Unikod)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  lin %d, kol %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  Prepiši"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  Umetni"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2480,19 +2429,19 @@ msgstr ""
 "Postavi kodiranje znakova koje se koristi pri otvaranju datoteka datih u "
 "naredbi"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Ugasi postojeću instancu gedita"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Napravi novi prozor najvišeg nivoa u postojećoj instanci gedita"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Napravi novi dokument u postojećoj instanci gedita"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Navedeno kodiranje „%s“ nije ispravno\n"
@@ -2855,312 +2804,312 @@ msgstr "(ispravno pisanje)"
 msgid "Completed spell checking"
 msgstr "Završena provera pisanja"
 
-#: plugins/spell/gedit-spell-checker.c:79
+#: plugins/spell/gedit-spell-checker.c:114
 msgid "Afrikaans"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:80
+#: plugins/spell/gedit-spell-checker.c:115
 #, fuzzy
 msgid "Amharic"
 msgstr "Arabski"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Azerbaijani"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:117
 #, fuzzy
 msgid "Belarusian"
 msgstr "Bugarski"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:118
 msgid "Bulgarian"
 msgstr "Bugarski"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:119
 msgid "Bengali"
 msgstr "Bengali"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:120
 msgid "Breton"
 msgstr "Bretanjski"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:121
 msgid "Catalan"
 msgstr "Katalonski"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:122
 msgid "Czech"
 msgstr "Češki"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:123
 msgid "Welsh"
 msgstr "Velški"
 
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:124
 msgid "Danish"
 msgstr "Danski"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:125
 #, fuzzy
 msgid "German (Austria)"
 msgstr "Nemački (Nemačka)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:126
 msgid "German (Germany)"
 msgstr "Nemački (Nemačka)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:127
 msgid "German (Swiss)"
 msgstr "Nemački (Švajcarska)"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "English (American)"
 msgstr "Engleski (Američki)"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:130
 msgid "English (British)"
 msgstr "Engleski (Britanski)"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "English (Canadian)"
 msgstr "Engleski (Kanadski)"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:132
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Spanish"
 msgstr "Španski"
 
-#: plugins/spell/gedit-spell-checker.c:99
+#: plugins/spell/gedit-spell-checker.c:134
 #, fuzzy
 msgid "Estonian"
 msgstr "Rumunski"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:135
 #, fuzzy
 msgid "Persian"
 msgstr "Štampaj"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:136
 msgid "Finnish"
 msgstr "Finski"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:137
 msgid "Faroese"
 msgstr "Farski"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "French (France)"
 msgstr "Francuski (Franuska)"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:139
 msgid "French (Swiss)"
 msgstr "Francuski (Švajcarska)"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:140
 #, fuzzy
 msgid "Irish"
 msgstr "Turski"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Scottish Gaelic"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:142
 #, fuzzy
 msgid "Gallegan"
 msgstr "Gruzijski"
 
-#: plugins/spell/gedit-spell-checker.c:108
-msgid "Manx Gaelic"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
-msgid "Hindi"
-msgstr "Pronađi"
-
-#: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
-msgid "Croatian"
-msgstr "Katalonski"
-
-#: plugins/spell/gedit-spell-checker.c:112
-msgid "Upper Sorbian"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
-msgid "Hungarian"
-msgstr "Bugarski"
-
-#: plugins/spell/gedit-spell-checker.c:114
-msgid "Interlingua (IALA)"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:115
-msgid "Indonesian"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:116
-msgid "Icelandic"
-msgstr "Islandski"
-
-#: plugins/spell/gedit-spell-checker.c:117
-msgid "Italian"
-msgstr "Italijanski"
-
-#: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
-msgid "Kurdish"
-msgstr "Turski"
-
-#: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
-msgid "Latin"
-msgstr "Linija"
-
-#: plugins/spell/gedit-spell-checker.c:120
-msgid "Lithuanian"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:121
-msgid "Latvian"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:122
-msgid "Malagasy"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:123
-msgid "Maori"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
-msgid "Macedonian"
-msgstr "gedit"
-
-#: plugins/spell/gedit-spell-checker.c:125
-msgid "Mongolian"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:126
-msgid "Malay"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:127
-msgid "Maltese"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
-msgid "Norwegian Bokmal"
-msgstr "Norveški"
-
-#: plugins/spell/gedit-spell-checker.c:129
-msgid "Dutch"
-msgstr "Holandski"
-
-#: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
-msgid "Norwegian Nynorsk"
-msgstr "Norveški"
-
-#: plugins/spell/gedit-spell-checker.c:131
-msgid "Norwegian"
-msgstr "Norveški"
-
-#: plugins/spell/gedit-spell-checker.c:132
-msgid "Nyanja"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:133
-msgid "Polish"
-msgstr "Poljski"
-
-#: plugins/spell/gedit-spell-checker.c:134
-msgid "Portuguese (Portugal)"
-msgstr "Portugalski (Portugal)"
-
-#: plugins/spell/gedit-spell-checker.c:135
-msgid "Portuguese (Brazilian)"
-msgstr "Portugalski (Brazil)"
-
-#: plugins/spell/gedit-spell-checker.c:136
-msgid "Quechua"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:138
-msgid "Russian"
-msgstr "Ruski"
-
-#: plugins/spell/gedit-spell-checker.c:139
-msgid "Kinyarwanda"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
-msgid "Sardinian"
-msgstr "Ukrajinski"
-
-#: plugins/spell/gedit-spell-checker.c:141
-msgid "Slovak"
-msgstr "Slovački"
-
-#: plugins/spell/gedit-spell-checker.c:142
-msgid "Slovenian"
-msgstr "Slovenački"
-
 #: plugins/spell/gedit-spell-checker.c:143
-msgid "Swedish"
-msgstr "Švedski"
-
-#: plugins/spell/gedit-spell-checker.c:144
-msgid "Swahili"
+msgid "Manx Gaelic"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:145
 #, fuzzy
-msgid "Tamil"
-msgstr "Tajlandski"
+msgid "Hindi"
+msgstr "Pronađi"
 
 #: plugins/spell/gedit-spell-checker.c:146
-msgid "Tetum"
-msgstr ""
+#, fuzzy
+msgid "Croatian"
+msgstr "Katalonski"
 
 #: plugins/spell/gedit-spell-checker.c:147
-msgid "Tagalog"
+msgid "Upper Sorbian"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:148
-msgid "Tswana"
+#, fuzzy
+msgid "Hungarian"
+msgstr "Bugarski"
+
+#: plugins/spell/gedit-spell-checker.c:149
+msgid "Interlingua (IALA)"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:150
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Icelandic"
+msgstr "Islandski"
+
+#: plugins/spell/gedit-spell-checker.c:152
+msgid "Italian"
+msgstr "Italijanski"
+
+#: plugins/spell/gedit-spell-checker.c:153
+#, fuzzy
+msgid "Kurdish"
+msgstr "Turski"
+
+#: plugins/spell/gedit-spell-checker.c:154
+#, fuzzy
+msgid "Latin"
+msgstr "Linija"
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:156
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:157
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:158
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:159
+#, fuzzy
+msgid "Macedonian"
+msgstr "gedit"
+
+#: plugins/spell/gedit-spell-checker.c:160
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:161
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:162
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:163
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "Norveški"
+
+#: plugins/spell/gedit-spell-checker.c:164
+msgid "Dutch"
+msgstr "Holandski"
+
+#: plugins/spell/gedit-spell-checker.c:165
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "Norveški"
+
+#: plugins/spell/gedit-spell-checker.c:166
+msgid "Norwegian"
+msgstr "Norveški"
+
+#: plugins/spell/gedit-spell-checker.c:167
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:168
+msgid "Polish"
+msgstr "Poljski"
+
+#: plugins/spell/gedit-spell-checker.c:169
+msgid "Portuguese (Portugal)"
+msgstr "Portugalski (Portugal)"
+
+#: plugins/spell/gedit-spell-checker.c:170
+msgid "Portuguese (Brazilian)"
+msgstr "Portugalski (Brazil)"
+
+#: plugins/spell/gedit-spell-checker.c:171
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:173
+msgid "Russian"
+msgstr "Ruski"
+
+#: plugins/spell/gedit-spell-checker.c:174
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:175
+#, fuzzy
+msgid "Sardinian"
+msgstr "Ukrajinski"
+
+#: plugins/spell/gedit-spell-checker.c:176
+msgid "Slovak"
+msgstr "Slovački"
+
+#: plugins/spell/gedit-spell-checker.c:177
+msgid "Slovenian"
+msgstr "Slovenački"
+
+#: plugins/spell/gedit-spell-checker.c:178
+msgid "Swedish"
+msgstr "Švedski"
+
+#: plugins/spell/gedit-spell-checker.c:179
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:180
+#, fuzzy
+msgid "Tamil"
+msgstr "Tajlandski"
+
+#: plugins/spell/gedit-spell-checker.c:181
+msgid "Tetum"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:182
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:183
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:185
 msgid "Ukrainian"
 msgstr "Ukrajinski"
 
-#: plugins/spell/gedit-spell-checker.c:151
+#: plugins/spell/gedit-spell-checker.c:186
 msgid "Uzbek"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:153
+#: plugins/spell/gedit-spell-checker.c:188
 msgid "Walloon"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:154
+#: plugins/spell/gedit-spell-checker.c:189
 msgid "Yiddish"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:155
+#: plugins/spell/gedit-spell-checker.c:190
 msgid "Zulu"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:828
+#: plugins/spell/gedit-spell-checker.c:864
 msgid "Default"
 msgstr "Predefinisan"
 
@@ -3406,8 +3355,9 @@ msgid "Center"
 msgstr "Opšte"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+#, fuzzy
+msgid "Character encoding of linked resource"
+msgstr "Kodiranja znakova"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3493,637 +3443,637 @@ msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+msgid "Defer attribute"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 #, fuzzy
 msgid "Definition description"
 msgstr "O_pis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 #, fuzzy
 msgid "Deleted text"
 msgstr "Obriši označen tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 #, fuzzy
 msgid "Direction"
 msgstr "Bretanjski"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 #, fuzzy
 msgid "Disabled"
 msgstr "Uključeno"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 #, fuzzy
 msgid "Document base"
 msgstr "Do_kumenti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 #, fuzzy
 msgid "Document body"
 msgstr "Do_kumenti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 #, fuzzy
 msgid "Document head"
 msgstr "Do_kumenti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 #, fuzzy
 msgid "Document title"
 msgstr "Statistika dokumenta"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 #, fuzzy
 msgid "Document type"
 msgstr "Do_kumenti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 #, fuzzy
 msgid "Element ID"
 msgstr "Elementi"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 #, fuzzy
 msgid "Font face"
 msgstr "Ime fonta"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 #, fuzzy
 msgid "For label"
 msgstr "polje"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 #, fuzzy
 msgid "Form"
 msgstr "Obično"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 #, fuzzy
 msgid "Frame"
 msgstr "Ime:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 #, fuzzy
 msgid "Frameborder"
 msgstr "Način preloma"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 #, fuzzy
 msgid "Frameset"
 msgstr "Farski"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 #, fuzzy
 msgid "Frameset columns"
 msgstr "Počni sa kolonom:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 #, fuzzy
 msgid "Generic span"
 msgstr "Opšte"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 #, fuzzy
 msgid "Image"
 msgstr "Strana"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 #, fuzzy
 msgid "Inline frame"
 msgstr "Neispravno ime datoteke"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 #, fuzzy
 msgid "Inserted text"
 msgstr "Umetni datum/vreme"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 #, fuzzy
 msgid "Italic text"
 msgstr "Kurziv"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 #, fuzzy
 msgid "Label"
 msgstr "polje"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 #, fuzzy
 msgid "Language code"
 msgstr "Jezici"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 #, fuzzy
 msgid "Link color"
 msgstr "Izaberite boju"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 #, fuzzy
 msgid "Local change to font"
 msgstr "Izaberite boju teksta"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 #, fuzzy
 msgid "Long description link"
 msgstr "O_pis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media-independent link"
+msgid "Maximum length of text field"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
-msgid "Menu list"
+msgid "Media-independent link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
-msgid "Multi-line text field"
+msgid "Menu list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
-msgid "Multicolumn"
+msgid "Multi-line text field"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
-msgid "Multiple"
+msgid "Multicolumn"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
+msgid "Multiple"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:142
 #, fuzzy
 msgid "Name"
 msgstr "Ime:"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 #, fuzzy
 msgid "No resize"
 msgstr "Prikaži veličinu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 #, fuzzy
 msgid "Object applet file"
 msgstr "Otvori datoteku"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 #, fuzzy
 msgid "OnChange event"
 msgstr "Izmeni veličinu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 #, fuzzy
 msgid "Option selector"
 msgstr "Izbor fonta"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 #, fuzzy
 msgid "Output media"
 msgstr "Linije izlaza"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 #, fuzzy
 msgid "Preformatted text"
 msgstr "Prikaz teksta"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 #, fuzzy
 msgid "Push button"
 msgstr "dugme1"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 #, fuzzy
 msgid "Quote"
 msgstr "Izađi"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 #, fuzzy
 msgid "Range"
 msgstr "Strana"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 #, fuzzy
 msgid "Reverse link"
 msgstr "O_brnuti redosled"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
+msgid "Scope covered by header cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
@@ -4814,11 +4764,11 @@ msgstr "Umetni datum i _vreme..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Umetni trenutni datum i vreme na poziciju kursora"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Dostupni formati"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Podesi dodatak za ubacivanje datuma/vremena"
 
@@ -4861,6 +4811,22 @@ msgstr "U_pitaj za format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Kori_sti poseban format"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Imate X dokumenata sa nesačuvanim "
+#~ "izmenama. </span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr "Ukoliko ne sačuvate vaše dokumente, sve izmene će biti izgubljene."
+
+#~ msgid "Save _None"
+#~ msgstr "_Ne čuvaj ništa"
+
+#~ msgid "_Save Selected"
+#~ msgstr "_Sačuvaj izabrane"
 
 #~ msgid "Irish (Gaeilge)"
 #~ msgstr "Irski (galski)"
@@ -4926,8 +4892,7 @@ msgstr "Kori_sti poseban format"
 #~ msgstr[1] ""
 #~ "Izmene učinjene u dokumentu u poslednja %d časa će biti trajno odbačene."
 #~ msgstr[2] ""
-#~ "Izmene učinjene u dokumentu u poslednjih %d časova će biti trajno "
-#~ "odbačene."
+#~ "Izmene učinjene u dokumentu u poslednjih %d časova će biti trajno odbačene."
 
 #~ msgid ""
 #~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -5200,8 +5165,8 @@ msgstr "Kori_sti poseban format"
 #~ "„GEDIT_SAVE_ALWAYS_UTF8“ za obavezno snimanje u UTF-8 kodnom rasporedu, "
 #~ "„GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE“ ako želite da gedit proba da "
 #~ "pretvori dokument u trenutno podešenu kodnu stranu izabranih lokalnih "
-#~ "podešavanja, „GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE“ ako želite "
-#~ "da gedit proba da koristi originalnu kodnu stranu datoteke (nove datoteke "
+#~ "podešavanja, „GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE“ ako želite da "
+#~ "gedit proba da koristi originalnu kodnu stranu datoteke (nove datoteke "
 #~ "koriste UTF8) i „GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL“ ako "
 #~ "želite da gedit proba da koristi originalnu kodnu stranu datoteke (nove "
 #~ "datoteke u kodnoj strani trenutno izabranih lokalnih podešavanja). Ako je "
@@ -5379,8 +5344,7 @@ msgstr "Kori_sti poseban format"
 #~ msgstr "<span weight=\"bold\">Prilikom snimanja nove datoteke...</span>"
 
 #~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\">Prilikom snimanja postojeće datoteke...</span>"
+#~ msgstr "<span weight=\"bold\">Prilikom snimanja postojeće datoteke...</span>"
 
 #~ msgid "Add new encodings"
 #~ msgstr "Dodaj novi kodni raspored"
