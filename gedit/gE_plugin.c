@@ -58,7 +58,7 @@ gE_Plugin_Query_All (void)
 			continue;
 
 		suffix = strrchr (direntry->d_name, '.');
-		if (suffix && strcmp (suffix, ".plugin"))
+		if (!suffix || strcmp (suffix, ".plugin"))
 			continue;
 
 		fprintf (stderr, "Loading plugin description from `%s'.\n",
