@@ -111,7 +111,7 @@ view_changed_cb(GtkWidget *w, gpointer cbdata)
  * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
  */
 
-void view_list_insert (gE_view *view, gE_data *data)
+void gE_view_list_insert (gE_view *view, gE_data *data)
 {
 
 	gE_view *nth_view = NULL;
@@ -230,12 +230,14 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	
 	}
 
+	gE_undo_add (buffer, position, (position + length), INSERT, doc);
+
 	data = g_malloc0 (sizeof (gE_data));
 	
 	data->temp1 = (gint) position;
 	data->temp2 = (guchar*) buffer;
 	
-	g_list_foreach (doc->views, (GFunc) view_list_insert, data);
+	g_list_foreach (doc->views, (GFunc) gE_view_list_insert, data);
  
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
@@ -247,8 +249,6 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	g_free (data);
 
 
-	gE_undo_add (buffer, position, (pos + length), INSERT, doc);
-	
 	if (length > 96)  
 	  g_free (buffer);
 

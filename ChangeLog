@@ -1,3 +1,21 @@
+Sun Sep 12 19:03:50 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_undo.c: (gE_undo_do) New function. Gets the last done item, copies
+	  the data and puts the item onto the Redo stack. Then it checks whether
+	  text had been inserted or deleted. We insert or delete the text as 
+	  required.
+	  (views_insert) New function, to insert deleted text from an undo (will also
+	  work with the redo when its done).
+	  (views_delete) New function, to delete inserted text done by an undo (again,
+	  will work with redo too).
+	  Small glitch, it seems, after an undo, when you type more than 2 characters
+	  gEdit will lock up!
+	
+	* src/gE_undo.h: Removed pointer to the gpointer on the undo_do and redo
+	  functions.. (doh!)
+	
+	* gE_mdi.c: Added Undo and Redo menu items to the Edit menu.
+
 Sun Sep 12 17:28:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_undo.c: (gE_undo_add) New fucntion. Add's undo item to the stack.
@@ -6,7 +24,7 @@ Sun Sep 12 17:28:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 	  call to insert the inserted or deleted text into the undo stack.
 	
 	* src/Makefile.am: Added gE_undo.[ch] to the source list.
-
+	
 Sun Sep 12 16:18:18 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_undo.[ch]: Added stubs for the new undo/redo system.

@@ -28,6 +28,7 @@
 #include <glib.h>
 
 #include "main.h"
+#include "gE_undo.h"
 #include "gE_prefs.h"
 #include "gE_window.h"
 #include "gE_view.h"
@@ -54,6 +55,12 @@ static gchar *gE_document_get_config_string (GnomeMDIChild *child);
 #define GE_WINDOW	2
 
 GnomeUIInfo gedit_edit_menu [] = {
+
+
+	GNOMEUIINFO_MENU_UNDO_ITEM (gE_undo_do, NULL),
+	GNOMEUIINFO_MENU_REDO_ITEM (gE_undo_redo, NULL),
+
+	GNOMEUIINFO_SEPARATOR,
 
         GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, (gpointer) GE_DATA),
 

@@ -99,6 +99,10 @@ void 		gE_view_set_split_screen 	(gE_view *view, gint split_screen);
  * needs of gEdit.. so.. any util functions that could be used
  * should be implemented.. or atleast prototyped in case.. we can
  * always remove them later.. */
+
+/* This is a function to insert text into the buffer, used for the GList of views 
+   in a gE_document */
+void		gE_view_list_insert			(gE_view *view, gE_data *data);
  
 void 		gE_view_insert_text 		(gE_view *view, const gchar *text,
 									 gint length, gint pos);

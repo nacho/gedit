@@ -50,8 +50,8 @@ extern void gE_undo_add		(gchar*, gint, gint, gint, gE_document*);
 extern void gE_undo_reset	(GList*);
 
 /* callbacks to do the undo or the redo */
-extern void gE_undo_do		(GtkWidget*, gpointer*);
-extern void gE_undo_redo	(GtkWidget*, gpointer*);
+extern void gE_undo_do		(GtkWidget*, gpointer);
+extern void gE_undo_redo	(GtkWidget*, gpointer);
 
 /* let the user see the undo history of the docu,emt */
 extern void gE_undo_history	(GtkWidget*, gpointer*);
