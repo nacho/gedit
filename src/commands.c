@@ -514,7 +514,7 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 	g_assert(w != NULL);
 
 	if (w->open_fileselector == NULL) {
-		w->open_fileselector = gtk_file_selection_new("Open File...");
+		w->open_fileselector = gtk_file_selection_new(_("Open File..."));
 		gtk_file_selection_hide_fileop_buttons(
 			GTK_FILE_SELECTION(w->open_fileselector));
 		gtk_signal_connect(GTK_OBJECT(w->open_fileselector), "destroy",
@@ -585,7 +585,7 @@ file_save_cb(GtkWidget *widget, gpointer cbdata)
 	 if ((gE_file_save(data->window, gE_document_current(data->window),
 	               gE_document_current(data->window)->filename)) != 0)
 	   {
-	gE_msgbar_set(data->window, "Read only file!");
+	gE_msgbar_set(data->window, _("Read only file!"));
 	file_save_as_cb(NULL, data);
         }
 
@@ -599,7 +599,7 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 
 	g_assert(data != NULL);
 
-	safs = gtk_file_selection_new("Save As...");
+	safs = gtk_file_selection_new(_("Save As..."));
 
 	data->temp1 = safs;
 	gtk_signal_connect(GTK_OBJECT(safs), "destroy",

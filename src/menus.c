@@ -57,6 +57,25 @@
 #define GE_TOGGLE_LABEL_TOOLBAR_TEXT    N_("Show toolbar _text")
 #define GE_TOGGLE_LABEL_TOOLBAR_PIX     N_("Show toolbar _icons")
 
+/* xgettext doesn't find the strings to translate behind a #define, so
+   here are they again, in a useless and unused structure.
+   a quick and dirty hack, I know -- Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+ */
+char *just_a_quick_and_dirty_hack[]={
+	N_("_Autoindent"),
+        N_("Status_bar"),
+        N_("_Wordwrap"),
+        N_("_Linewrap"),
+        N_("_Readonly"),
+        N_("_Splitscreen"),
+        N_("_Show tabs"),
+        N_("Toolbar _relief"),
+        N_("_Show tooltips"),
+        N_("Show toolbar _text"),
+        N_("Show toolbar _icons"),
+/* and this one is the default file name */
+	N_("Untitled")
+};
 
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
@@ -304,27 +323,27 @@ gE_set_menu_toggle_states(gE_window *w)
       if (gedit_settings_menu[i].label)
 	{
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_AUTOINDENT,
+			      _(GE_TOGGLE_LABEL_AUTOINDENT),
 			      w->auto_indent);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_STATUSBAR,
+			      _(GE_TOGGLE_LABEL_STATUSBAR),
 			      w->show_status);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_WORDWRAP,
+			      _(GE_TOGGLE_LABEL_WORDWRAP),
 			      doc->word_wrap);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_LINEWRAP,
+			      _(GE_TOGGLE_LABEL_LINEWRAP),
 			      doc->line_wrap);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_READONLY,
+			      _(GE_TOGGLE_LABEL_READONLY),
 			      doc->read_only);
 
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_SPLITSCREEN,
+			      _(GE_TOGGLE_LABEL_SPLITSCREEN),
 			      doc->window->splitscreen);
 
 	}

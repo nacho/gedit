@@ -79,7 +79,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 10);
 	gtk_widget_show(hbox);
 
-	tmp = gtk_label_new(("Enter print command below\nRemember to include '%s'"));
+	tmp = gtk_label_new(_("Enter print command below\nRemember to include '%s'"));
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, FALSE, TRUE, 5);
 	gtk_widget_show(tmp);
 

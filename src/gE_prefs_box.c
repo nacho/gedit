@@ -454,7 +454,7 @@ static GtkWidget *plugins_page_new()
   
   static char *titles[] =
   {
-    "Name", "Location"
+    N_("Name"), N_("Location")
   };
   
   main_vbox = gtk_vbox_new (FALSE, 0);
@@ -474,6 +474,10 @@ static GtkWidget *plugins_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show(hbox);
   
+#ifdef ENABLE_NLS
+  titles[0]=_(titles[0]);
+  titles[1]=_(titles[1]);
+#endif
   
   prefs->plugin_list = gtk_clist_new_with_titles (2, titles);
   gtk_widget_show (prefs->plugin_list);
@@ -519,12 +523,12 @@ static GtkWidget *plugins_page_new()
   gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
   gtk_widget_show (hbox);
   
-  button = gtk_button_new_with_label ("Add");
+  button = gtk_button_new_with_label (_("Add"));
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
   gtk_signal_connect (GTK_OBJECT (button), "clicked",
                       (GtkSignalFunc) plugins_clist_add, (gpointer) prefs->plugin_list);
 
-  button = gtk_button_new_with_label ("Remove");
+  button = gtk_button_new_with_label (_("Remove"));
   gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
   gtk_signal_connect (GTK_OBJECT (button), "clicked",
                       (GtkSignalFunc) plugins_clist_remove, (gpointer) prefs->plugin_list);
