@@ -21,7 +21,7 @@ endif
 gmodule_plugins = $(shell) $(corba)
 endif
 
-SUBDIRS = client ctag cvsdiff diff email encrypt reverse $(spell) \
+SUBDIRS = client ctag cvsdiff diff email browse encrypt reverse $(spell) \
 	  $(prm) convert testselect $(gmodule_plugins)
 
 EXTRA_DIST = plugin_howto gmodule_plugin_howto ChangeLog
