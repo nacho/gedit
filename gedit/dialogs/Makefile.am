@@ -20,10 +20,6 @@ libdialogs_la_SOURCES = 			\
 	gedit-plugin-manager.c		\
 	gedit-plugin-manager.h	\
 	gedit-plugin-program-location-dialog.c \
-	gnome-print-font-picker.c	\
-	gnome-print-font-picker.h	\
-	gnome-print-font-dialog.c	\
-	gnome-print-font-dialog.h	\
 	gedit-encodings-dialog.c	\
 	gedit-encodings-dialog.h	\
 	gedit-page-setup-dialog.c	\

@@ -43,7 +43,6 @@
 #include "gedit2.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
-#include "gnome-print-font-picker.h"
 
 typedef struct _GeditPageSetupDialog GeditPageSetupDialog;
 
@@ -67,9 +66,9 @@ struct _GeditPageSetupDialog {
 	GtkWidget *headers_font_label;
 	GtkWidget *numbers_font_label;
 
-	GtkWidget *body_fontpicker;
-	GtkWidget *headers_fontpicker;
-	GtkWidget *numbers_fontpicker;
+	GtkWidget *body_fontbutton;
+	GtkWidget *headers_fontbutton;
+	GtkWidget *numbers_fontbutton;
 
 	GtkWidget *restore_button;
 };
@@ -302,64 +301,19 @@ setup_general_page (GeditPageSetupDialog *dialog)
 	
 }
 
-#define DEFAULT_FONT_SIZE 10
-
-/* TODO: monitor changes of the font size - Paolo */
-
-static gint 
-get_desktop_default_font_size ()
-{
-	GConfClient *gconf_client = NULL;
-	gint res;
-	gchar *font;
-	
-	PangoFontDescription *desc;
-
-	gedit_debug (DEBUG_PRINT, "");
-
-	gconf_client = gconf_client_get_default ();
-	if (gconf_client == NULL)
-	{
-		return DEFAULT_FONT_SIZE;
-	}
-
-	font = gconf_client_get_string (gconf_client,
-				   	"/desktop/gnome/interface/font_name",
-				   	NULL);
-	if (font == NULL)
-		return DEFAULT_FONT_SIZE;
-	
-	gedit_debug (DEBUG_PRINT, "Font: %s", font);
-
-	desc = pango_font_description_from_string (font);
-
-	g_free (font);
-	g_return_val_if_fail (desc != NULL, DEFAULT_FONT_SIZE);
-
-	res = pango_font_description_get_size (desc) / PANGO_SCALE;
-
-	pango_font_description_free (desc);
-
-	g_object_unref (gconf_client);
-
-	gedit_debug (DEBUG_PRINT, "Size: %d", res);
-
-	return res;
-}
-
 static void
 restore_button_clicked (GtkButton *button, GeditPageSetupDialog *dlg)
 {
-	g_return_if_fail (dlg->body_fontpicker != NULL);
-	g_return_if_fail (dlg->headers_fontpicker != NULL);
-	g_return_if_fail (dlg->numbers_fontpicker != NULL);
+	g_return_if_fail (dlg->body_fontbutton != NULL);
+	g_return_if_fail (dlg->headers_fontbutton != NULL);
+	g_return_if_fail (dlg->numbers_fontbutton != NULL);
 
 	if (gedit_prefs_manager_print_font_body_can_set ())
 	{
 		const gchar* font = gedit_prefs_manager_get_default_print_font_body ();
 
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker),
+		gtk_font_button_set_font_name (
+				GTK_FONT_BUTTON (dlg->body_fontbutton),
 				font);
 		
 		gedit_prefs_manager_set_print_font_body (font);
@@ -369,8 +323,8 @@ restore_button_clicked (GtkButton *button, GeditPageSetupDialog *dlg)
 	{
 		const gchar* font = gedit_prefs_manager_get_default_print_font_header ();
 
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker),
+		gtk_font_button_set_font_name (
+				GTK_FONT_BUTTON (dlg->headers_fontbutton),
 				font);
 		
 		gedit_prefs_manager_set_print_font_header (font);
@@ -380,8 +334,8 @@ restore_button_clicked (GtkButton *button, GeditPageSetupDialog *dlg)
 	{
 		const gchar* font = gedit_prefs_manager_get_default_print_font_numbers ();
 		
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker),
+		gtk_font_button_set_font_name (
+				GTK_FONT_BUTTON (dlg->numbers_fontbutton),
 				font);
 		
 		gedit_prefs_manager_set_print_font_numbers (font);
@@ -389,39 +343,50 @@ restore_button_clicked (GtkButton *button, GeditPageSetupDialog *dlg)
 }
 
 static void
-body_font_picker_font_set (GnomePrintFontPicker *gfp, const gchar *font_name, 
-		GeditPageSetupDialog *dlg)
+body_font_button_font_set (GtkFontButton *fb, 
+			   GeditPageSetupDialog *dlg)
 {
 	gedit_debug (DEBUG_PRINT, "");
 
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker));
-	g_return_if_fail (font_name != NULL);
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->body_fontbutton));
 
-	gedit_prefs_manager_set_print_font_body (font_name);
+	gedit_prefs_manager_set_print_font_body (gtk_font_button_get_font_name (fb));
 }
 
 static void
-headers_font_picker_font_set (GnomePrintFontPicker *gfp, const gchar *font_name, 
-		GeditPageSetupDialog *dlg)
+headers_font_button_font_set (GtkFontButton *fb, 
+			      GeditPageSetupDialog *dlg)
 {
 	gedit_debug (DEBUG_PRINT, "");
 
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker));
-	g_return_if_fail (font_name != NULL);
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->headers_fontbutton));
 
-	gedit_prefs_manager_set_print_font_header (font_name);
+	gedit_prefs_manager_set_print_font_header (gtk_font_button_get_font_name (fb));
 }
 
 static void
-numbers_font_picker_font_set (GnomePrintFontPicker *gfp, const gchar *font_name, 
-		GeditPageSetupDialog *dlg)
+numbers_font_button_font_set (GtkFontButton *fb,
+			      GeditPageSetupDialog *dlg)
 {
 	gedit_debug (DEBUG_PRINT, "");
 
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker));
-	g_return_if_fail (font_name != NULL);
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->numbers_fontbutton));
 
-	gedit_prefs_manager_set_print_font_numbers (font_name);
+	gedit_prefs_manager_set_print_font_numbers (gtk_font_button_get_font_name (fb));
+}
+
+static GtkWidget *
+font_button_new (void)
+{
+	GtkWidget *button;
+
+	button = gtk_font_button_new ();
+
+	gtk_font_button_set_use_font (GTK_FONT_BUTTON (button), TRUE);
+	gtk_font_button_set_show_style (GTK_FONT_BUTTON (button), FALSE);
+	gtk_font_button_set_show_size (GTK_FONT_BUTTON (button), TRUE);
+
+	return button;
 }
 
 static void
@@ -432,87 +397,53 @@ setup_font_page (GeditPageSetupDialog *dlg)
 
 	gedit_debug (DEBUG_PRINT, "");
 
-	/* Body font picker */
-	dlg->body_fontpicker = gnome_print_font_picker_new ();
-
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker), TRUE);
-
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
+	/* Body font button */
+	dlg->body_fontbutton = font_button_new ();
 
 	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->body_fontpicker, 1, 2, 0, 1);
+			dlg->body_fontbutton, 1, 2, 0, 1);
 	
-	/* Headers font picker */
-	dlg->headers_fontpicker = gnome_print_font_picker_new ();
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker), TRUE);
-	
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
+	/* Headers font button */
+	dlg->headers_fontbutton = font_button_new ();
 
 	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->headers_fontpicker, 1, 2, 2, 3);
+			dlg->headers_fontbutton, 1, 2, 2, 3);
 
-	/* Numbers font picker */
-	dlg->numbers_fontpicker = gnome_print_font_picker_new ();
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker), TRUE);
-	
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
+	/* Numbers font button */
+	dlg->numbers_fontbutton = font_button_new ();
 
 	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->numbers_fontpicker, 1, 2, 1, 2);
+			dlg->numbers_fontbutton, 1, 2, 1, 2);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->body_font_label), 
-				       dlg->body_fontpicker);
+				       dlg->body_fontbutton);
 	
 	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->headers_font_label), 
-				       dlg->headers_fontpicker);
+				       dlg->headers_fontbutton);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->numbers_font_label), 
-				       dlg->numbers_fontpicker);
+				       dlg->numbers_fontbutton);
 
-	gedit_utils_set_atk_name_description (dlg->body_fontpicker, _("Body font picker"),
+	gedit_utils_set_atk_name_description (dlg->body_fontbutton, _("Body font picker"),
 		_("Push this button to select the font to be used to print the body of the document"));
-	gedit_utils_set_atk_name_description (dlg->headers_fontpicker, _("Page headers font picker"),
+	gedit_utils_set_atk_name_description (dlg->headers_fontbutton, _("Page headers font picker"),
 		_("Push this button to select the font to be used to print the page headers"));
-	gedit_utils_set_atk_name_description (dlg->numbers_fontpicker, _("Line numbers font picker"),
+	gedit_utils_set_atk_name_description (dlg->numbers_fontbutton, _("Line numbers font picker"),
 		_("Push this button to select the font to be used to print line numbers"));
 
-	gedit_utils_set_atk_relation (dlg->body_fontpicker, dlg->body_font_label, 
+	gedit_utils_set_atk_relation (dlg->body_fontbutton, dlg->body_font_label, 
 							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->headers_fontpicker, dlg->headers_font_label, 
+	gedit_utils_set_atk_relation (dlg->headers_fontbutton, dlg->headers_font_label, 
 							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->numbers_fontpicker, dlg->numbers_font_label, 
+	gedit_utils_set_atk_relation (dlg->numbers_fontbutton, dlg->numbers_font_label, 
 							ATK_RELATION_LABELLED_BY);
 
 	/* Set initial values */
 	font = gedit_prefs_manager_get_print_font_body ();
-	g_return_if_fail (font);;
+	g_return_if_fail (font);
 
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->body_fontpicker),
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (dlg->body_fontbutton),
 			font);
 	
 	g_free (font);
@@ -520,8 +451,8 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	font = gedit_prefs_manager_get_print_font_header ();
 	g_return_if_fail (font);
 
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->headers_fontpicker),
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (dlg->headers_fontbutton),
 			font);
 
 	g_free (font);
@@ -529,23 +460,23 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	font = gedit_prefs_manager_get_print_font_numbers ();
 	g_return_if_fail (font);
 	
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->numbers_fontpicker),
+	gtk_font_button_set_font_name (
+			GTK_FONT_BUTTON (dlg->numbers_fontbutton),
 			font);
 
 	g_free (font);
 
 	/* Set widgets sensitivity */
 	can_set = gedit_prefs_manager_print_font_body_can_set ();
-	gtk_widget_set_sensitive (dlg->body_fontpicker, can_set);
+	gtk_widget_set_sensitive (dlg->body_fontbutton, can_set);
 	gtk_widget_set_sensitive (dlg->body_font_label, can_set);
 		  
 	can_set = gedit_prefs_manager_print_font_header_can_set ();
-	gtk_widget_set_sensitive (dlg->headers_fontpicker, can_set);
+	gtk_widget_set_sensitive (dlg->headers_fontbutton, can_set);
 	gtk_widget_set_sensitive (dlg->headers_font_label, can_set);
 
 	can_set = gedit_prefs_manager_print_font_numbers_can_set ();
-	gtk_widget_set_sensitive (dlg->numbers_fontpicker, can_set);
+	gtk_widget_set_sensitive (dlg->numbers_fontbutton, can_set);
 	gtk_widget_set_sensitive (dlg->numbers_font_label, can_set);
 	
 	/* Connect signals */
@@ -553,16 +484,16 @@ setup_font_page (GeditPageSetupDialog *dlg)
 			  G_CALLBACK (restore_button_clicked),
 			  dlg);
 
-	g_signal_connect (G_OBJECT (dlg->body_fontpicker), "font_set", 
-			  G_CALLBACK (body_font_picker_font_set), 
+	g_signal_connect (G_OBJECT (dlg->body_fontbutton), "font_set", 
+			  G_CALLBACK (body_font_button_font_set), 
 			  dlg);
 
-	g_signal_connect (G_OBJECT (dlg->headers_fontpicker), "font_set", 
-			  G_CALLBACK (headers_font_picker_font_set), 
+	g_signal_connect (G_OBJECT (dlg->headers_fontbutton), "font_set", 
+			  G_CALLBACK (headers_font_button_font_set), 
 			  dlg);
 
-	g_signal_connect (G_OBJECT (dlg->numbers_fontpicker), "font_set", 
-			  G_CALLBACK (numbers_font_picker_font_set), 
+	g_signal_connect (G_OBJECT (dlg->numbers_fontbutton), "font_set", 
+			  G_CALLBACK (numbers_font_button_font_set), 
 			  dlg);
 }
 

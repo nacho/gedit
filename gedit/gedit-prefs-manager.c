@@ -36,6 +36,7 @@
 #include <gconf/gconf-value.h>
 
 #include <libgnome/gnome-i18n.h>
+#include <libgnomeprint/gnome-font.h>
 
 #include "gedit-prefs-manager.h"
 #include "gedit-prefs-manager-private.h"
@@ -807,39 +808,210 @@ DEFINE_INT_PREF (print_line_numbers,
 		 GPM_DEFAULT_PRINT_LINE_NUMBERS)
 		 
 
-/* Font used to print the body of documents */
-DEFINE_STRING_PREF (print_font_body,
-		    GPM_PRINT_FONT_BODY,
-		    GPM_DEFAULT_PRINT_FONT_BODY);
+/* The printing font entries are done in custom code because we
+ * need to implement transitioning between old gnome-print font
+ * names and new Pango fontnames
+ */
+
+/*
+ * The following routines are duplicated in gtksourceview/gtksourceview/gtksourceprintjob.c
+ */
+
+/* Do this ourselves since gnome_font_find_closest() doesn't call
+ * gnome_font_face_find_closest() (probably a gnome-print bug)
+ */
+static void
+face_and_size_from_full_name (const guchar   *name,
+			      GnomeFontFace **face,
+			      gdouble        *size)
+{
+	char *copy;
+	char *str_size;
+
+	copy = g_strdup (name);
+	str_size = strrchr (copy, ' ');
+	if (str_size) {
+		*str_size = 0;
+		str_size ++;
+		*size = atof (str_size);
+	} else {
+		*size = 12;
+	}
+
+	*face = gnome_font_face_find_closest (copy);
+	g_free (copy);
+}
+
+static PangoFontDescription *
+font_description_from_gnome_font_name (const char *font_name)
+{
+	GnomeFontFace *face;
+	PangoFontDescription *desc;
+	PangoStyle style;
+	PangoWeight weight;
+	gdouble size;
+
+	face_and_size_from_full_name (font_name, &face, &size);
+
+	/* Pango and GnomePrint have basically the same numeric weight values */
+	weight = (PangoWeight) gnome_font_face_get_weight_code (face);
+	style = gnome_font_face_is_italic (face) ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+
+	desc = pango_font_description_new ();
+	pango_font_description_set_family (desc, gnome_font_face_get_family_name (face));
+	pango_font_description_set_weight (desc, weight);
+	pango_font_description_set_style (desc, style);
+	pango_font_description_set_size (desc, size * PANGO_SCALE);
+
+	g_object_unref (face);
+
+	return desc;
+}
+
+static char *
+font_name_from_gnome_font_name (const char *gnome_name)
+{
+	PangoFontDescription *desc;
+	gchar *pango_name;
+
+	desc = font_description_from_gnome_font_name (gnome_name);
+	pango_name = pango_font_description_to_string (desc);
+	pango_font_description_free (desc);
+
+	return pango_name;
+}
+
+static gchar *
+get_string_without_default (GConfClient *gconf_client,
+			    const char  *key,
+			    GError     **error)
+{
+	GConfValue *value;
+	gchar *result = NULL;
+	
+	value = gconf_client_get_without_default (gconf_client, key, error);
+	if (value && value->type == GCONF_VALUE_STRING)
+	{
+		result = g_strdup (gconf_value_get_string (value));
+		gconf_value_free (value);
+	}
+
+	return result;
+}
+
+static gchar *
+gedit_prefs_manager_get_font (const gchar *pango_key,
+			      const gchar *gnome_print_key,
+			      const gchar *def)
+{
+	gchar *pango_value;
+	gchar *gnome_print_value;
+	
+	/* if the new pango key isn't writable, we don't want an old value to
+	 * overwrite it. Otherwise, we first look whether the pango key has
+	 * been set explicitely. If the pango key hasn't been set, but the
+	 * gnome-print key has, we use that and convert it into a pango font name.
+	 */
+	if (gedit_prefs_manager_key_is_writable (pango_key))
+	{
+		pango_value = get_string_without_default (gedit_prefs_manager->gconf_client,
+							  pango_key,
+							  NULL);
+		if (pango_value)
+			return pango_value;
+		
+		gnome_print_value = get_string_without_default (gedit_prefs_manager->gconf_client,
+								gnome_print_key,
+								NULL);
+
+		if (gnome_print_value) {
+			pango_value = font_name_from_gnome_font_name (gnome_print_value);
+			g_free (gnome_print_value);
+			
+			return pango_value;
+		}
+	}
+
+	return gedit_prefs_manager_get_string (pango_key, def);
+}
+
+gchar *
+gedit_prefs_manager_get_print_font_body (void)
+{
+	return gedit_prefs_manager_get_font (GPM_PRINT_FONT_BODY_PANGO,
+					     GPM_PRINT_FONT_BODY,
+					     GPM_DEFAULT_PRINT_FONT_BODY_PANGO);
+}
+
+void
+gedit_prefs_manager_set_print_font_body (const gchar* v)
+{
+	gedit_prefs_manager_set_string (GPM_PRINT_FONT_BODY_PANGO, v);
+}
+
+gboolean
+gedit_prefs_manager_print_font_body_can_set (void)
+{
+	return gedit_prefs_manager_key_is_writable (GPM_PRINT_FONT_BODY_PANGO);
+}		
 
 const gchar *
 gedit_prefs_manager_get_default_print_font_body (void)
 {
-	return GPM_DEFAULT_PRINT_FONT_BODY;
+	return GPM_DEFAULT_PRINT_FONT_BODY_PANGO;
 }
 
-/* Font used to print headers */
-DEFINE_STRING_PREF (print_font_header,
-		    GPM_PRINT_FONT_HEADER,
-		    GPM_DEFAULT_PRINT_FONT_HEADER);
+gchar *
+gedit_prefs_manager_get_print_font_header (void)
+{
+	return gedit_prefs_manager_get_font (GPM_PRINT_FONT_HEADER_PANGO,
+					     GPM_PRINT_FONT_HEADER,
+					     GPM_DEFAULT_PRINT_FONT_HEADER_PANGO);
+}
+
+void
+gedit_prefs_manager_set_print_font_header (const gchar* v)
+{
+	gedit_prefs_manager_set_string (GPM_PRINT_FONT_HEADER_PANGO, v);
+}
+
+gboolean
+gedit_prefs_manager_print_font_header_can_set (void)
+{
+	return gedit_prefs_manager_key_is_writable (GPM_PRINT_FONT_HEADER_PANGO);
+}		
 
 const gchar *
 gedit_prefs_manager_get_default_print_font_header (void)
 {
-	return GPM_DEFAULT_PRINT_FONT_HEADER;
+	return GPM_DEFAULT_PRINT_FONT_HEADER_PANGO;
 }
 
-/* Font used to print line numbers */
-DEFINE_STRING_PREF (print_font_numbers,
-		    GPM_PRINT_FONT_NUMBERS,
-		    GPM_DEFAULT_PRINT_FONT_NUMBERS);
+gchar *
+gedit_prefs_manager_get_print_font_numbers (void)
+{
+	return gedit_prefs_manager_get_font (GPM_PRINT_FONT_NUMBERS_PANGO,
+					     GPM_PRINT_FONT_NUMBERS,
+					     GPM_DEFAULT_PRINT_FONT_NUMBERS_PANGO);
+}
+
+void
+gedit_prefs_manager_set_print_font_numbers (const gchar* v)
+{
+	gedit_prefs_manager_set_string (GPM_PRINT_FONT_NUMBERS_PANGO, v);
+}
+
+gboolean
+gedit_prefs_manager_print_font_numbers_can_set (void)
+{
+	return gedit_prefs_manager_key_is_writable (GPM_PRINT_FONT_NUMBERS_PANGO);
+}		
 
 const gchar *
 gedit_prefs_manager_get_default_print_font_numbers (void)
 {
-	return GPM_DEFAULT_PRINT_FONT_NUMBERS;
+	return GPM_DEFAULT_PRINT_FONT_NUMBERS_PANGO;
 }
-
 
 /* Max number of files in "Recent Files" menu. 
  * This is configurable only using gconftool or gconf-editor 

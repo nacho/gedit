@@ -507,6 +507,10 @@ gedit_print_job_info_new (GeditDocument* doc)
 	gchar *print_font_header;
 	gchar *print_font_numbers;
 	
+	PangoFontDescription *print_font_body_desc;
+	PangoFontDescription *print_font_header_desc;
+	PangoFontDescription *print_font_numbers_desc;
+	
 	gedit_debug (DEBUG_PRINT, "");
 	
 	g_return_val_if_fail (doc != NULL, NULL);
@@ -571,9 +575,21 @@ gedit_print_job_info_new (GeditDocument* doc)
 	gtk_source_print_job_set_numbers_font (pjob, print_font_numbers);
 	gtk_source_print_job_set_header_footer_font (pjob, print_font_header);
 
+	print_font_body_desc = pango_font_description_from_string (print_font_body);
+	print_font_header_desc = pango_font_description_from_string (print_font_header);
+	print_font_numbers_desc = pango_font_description_from_string (print_font_numbers);
+
+	gtk_source_print_job_set_font_desc (pjob, print_font_body_desc);
+	gtk_source_print_job_set_numbers_font_desc (pjob, print_font_numbers_desc);
+	gtk_source_print_job_set_header_footer_font_desc (pjob, print_font_header_desc);
+
 	g_free (print_font_body);
 	g_free (print_font_header);
 	g_free (print_font_numbers);
+
+	pango_font_description_free (print_font_body_desc);
+	pango_font_description_free (print_font_header_desc);
+	pango_font_description_free (print_font_numbers_desc);
 
 	pji = g_new0 (GeditPrintJobInfo, 1);
 

@@ -1,3 +1,49 @@
+2004-11-09  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/dialogs/gedit-page-setup-dialog.c (restore_button_clicked)
+	(body_font_button_font_set) (headers_font_button_font_set)
+	(numbers_font_button_font_set) (font_button_new) (setup_font_page):
+	* gedit/gedit-prefs-manager.c (face_and_size_from_full_name)
+	(font_description_from_gnome_font_name)
+	(font_name_from_gnome_font_name) (get_string_without_default)
+	(gedit_prefs_manager_get_font)
+	(gedit_prefs_manager_get_print_font_body)
+	(gedit_prefs_manager_set_print_font_body)
+	(gedit_prefs_manager_print_font_body_can_set)
+	(gedit_prefs_manager_get_default_print_font_body)
+	(gedit_prefs_manager_get_print_font_header)
+	(gedit_prefs_manager_set_print_font_header)
+	(gedit_prefs_manager_print_font_header_can_set)
+	(gedit_prefs_manager_get_default_print_font_header)
+	(gedit_prefs_manager_get_print_font_numbers)
+	(gedit_prefs_manager_set_print_font_numbers)
+	(gedit_prefs_manager_print_font_numbers_can_set)
+	(gedit_prefs_manager_get_default_print_font_numbers):
+	* gedit/gedit-prefs-manager.h:
+	* gedit/gedit-print.c (gedit_print_job_info_new):
+	* gedit/gedit-utils.c (gedit_utils_replace_home_dir_with_tilde): applied patch by
+	Owen Taylor <otaylor@redhat.com> for bug #143877 (Use Pango fonts when printing)
+
+	With the changes from bug #143874, GtkSourceView natively uses Pango
+	fonts for printing and GnomePrint font names are only supported
+	for backwards compatibility.
+	This patch switches gedit over to using GtkFontButton and using
+	Pango font names.
+	The main complexity in the patch is backwards compatibility with 
+	the GConf keys - a new set of GConf keys suffixed with _pango
+	keys are added, and when looking up a font preference, the
+	algorithm:
+	  - If the new key is set explicitely, use that
+	  - If the old key is set explicitely, use that and convert to a 
+	    Pango font name
+	  - Otherwise, use the default value for the new key
+	Setting the key sets the new key only. This system should allow
+	new and old versions of gedit to be used with the same GConf database.
+
+	* dialogs/gnome-print-font-picker.[ch]: removed
+
+	* dialogs/gnome-print-font-dialog.[ch]: ditto
+
 2004-11-08  Marco Pesenti Gritti  <marco@gnome.org>
 
 	* gedit-metadata-manager.c: (load_values):

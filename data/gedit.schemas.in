@@ -371,6 +371,20 @@
         <default>Monospace Regular 9</default>
 	<short>Body Font for Printing</short>
 	<long>Specifies the font to use for a document's body when
+	printing documents. This is a gnome-print font name and replaced by
+        print_font_body_pango.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_body_pango</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_body_pango</applyto>
+      <owner>gedit</owner>
+      <type>string</type>
+      <locale name="C">
+        <default>Monospace 9</default>
+	<short>Body Font for Printing</short>
+	<long>Specifies the font to use for a document's body when
 	printing documents.</long>
       </locale>
     </schema>
@@ -385,6 +399,21 @@
 	<short>Header Font for Printing</short>
 	<long>Specifies the font to use for page headers when printing
 	a document.  This will only take effect if the "Print Header"
+	option is turned on. This is a gnome-print font name and replaced by
+        print_font_header_pango.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_header_pango</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_header_pango</applyto>
+      <owner>gedit</owner>
+      <type>string</type>
+      <locale name="C">
+        <default>Sans 11</default>
+	<short>Header Font for Printing</short>
+	<long>Specifies the font to use for page headers when printing
+	a document. This will only take effect if the "Print Header"
 	option is turned on.</long>
       </locale>
     </schema>
@@ -396,6 +425,21 @@
       <type>string</type>
       <locale name="C">
         <default>Sans Regular 8</default>
+	<short>Line Number Font for Printing</short>
+	<long>Specifies the font to use for line numbers when
+	printing.  This will only take effect if the "Print Line
+	Numbers" option is non-zero. This is a gnome-print font name
+	and replaced by print_font_numbers_pango.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/fonts/print_font_numbers_pango</key>
+      <applyto>/apps/gedit-2/preferences/print/fonts/print_font_numbers_pango</applyto>
+      <owner>gedit</owner>
+      <type>string</type>
+      <locale name="C">
+        <default>Sans 8</default>
 	<short>Line Number Font for Printing</short>
 	<long>Specifies the font to use for line numbers when
 	printing.  This will only take effect if the "Print Line

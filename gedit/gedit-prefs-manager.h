@@ -98,8 +98,11 @@
 
 #define GPM_PRINT_FONT_DIR		GPM_PREFS_DIR "/print/fonts"
 #define GPM_PRINT_FONT_BODY		GPM_PRINT_FONT_DIR "/print_font_body"
+#define GPM_PRINT_FONT_BODY_PANGO	GPM_PRINT_FONT_DIR "/print_font_body_pango"
 #define GPM_PRINT_FONT_HEADER		GPM_PRINT_FONT_DIR "/print_font_header"
+#define GPM_PRINT_FONT_HEADER_PANGO	GPM_PRINT_FONT_DIR "/print_font_header_pango"
 #define GPM_PRINT_FONT_NUMBERS		GPM_PRINT_FONT_DIR "/print_font_numbers"
+#define GPM_PRINT_FONT_NUMBERS_PANGO	GPM_PRINT_FONT_DIR "/print_font_numbers_pango"
 
 #define GPM_WINDOW_DIR			"/gedit-2/window"
 #define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
@@ -156,9 +159,9 @@
 #define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_WORD"
 #define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
 
-#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace Regular 9"
-#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans Regular 11"
-#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans Regular 8"
+#define GPM_DEFAULT_PRINT_FONT_BODY_PANGO 	(const gchar*) "Monospace 9"
+#define GPM_DEFAULT_PRINT_FONT_HEADER_PANGO	(const gchar*) "Sans 11"
+#define GPM_DEFAULT_PRINT_FONT_NUMBERS_PANGO	(const gchar*) "Sans 8"
 
 #define GPM_DEFAULT_MAX_RECENTS		5
 
