@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <stdlib.h>
 #include <string.h>
 
 #include <glib/gi18n.h>
@@ -52,9 +53,6 @@ struct _GeditDialogGotoLine {
 	GtkWidget *entry;
 };
 
-static void goto_button_pressed (GeditDialogGotoLine * dialog);
-static GeditDialogGotoLine *dialog_goto_line_get_dialog (void);
-static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
@@ -66,6 +64,32 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 		g_free (*dialog_pointer);
 		*dialog_pointer = NULL;
 	}	
+}
+
+static void
+goto_button_pressed (GeditDialogGotoLine *dialog)
+{
+	const gchar *text;
+	GeditView *active_view;
+	GeditDocument *active_document;
+
+	gedit_debug (DEBUG_SEARCH, "");
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view);
+
+	active_document = gedit_view_get_document (active_view);
+	g_return_if_fail (active_document);
+
+	text = gtk_entry_get_text (GTK_ENTRY (dialog->entry));
+
+	if (text != NULL && text[0] != 0)
+	{
+		guint line = MAX (atoi (text) - 1, 0);		
+		gedit_document_goto_line (active_document, line);
+		gedit_view_scroll_to_cursor (active_view);
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	}
 }
 
 static void
@@ -228,31 +252,5 @@ gedit_dialog_goto_line (void)
 
 	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
 		gtk_widget_show (dialog->dialog);
-}
-
-static void
-goto_button_pressed (GeditDialogGotoLine *dialog)
-{
-	const gchar* text;
-	GeditView* active_view;
-	GeditDocument* active_document;
-
-	gedit_debug (DEBUG_SEARCH, "");
-
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
-	g_return_if_fail (active_view);
-
-	active_document = gedit_view_get_document (active_view);
-	g_return_if_fail (active_document);
-
-	text = gtk_entry_get_text (GTK_ENTRY (dialog->entry));
-	
-	if (text != NULL && text [0] != 0)
-	{
-		guint line = MAX (atoi (text)- 1, 0);		
-		gedit_document_goto_line (active_document, line);
-		gedit_view_scroll_to_cursor (active_view);
-		gtk_widget_grab_focus (GTK_WIDGET (active_view));
-	}
 }
 
