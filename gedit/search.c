@@ -360,24 +360,100 @@ line_to_pos (Document *doc, gint line, gint *lines)
 
 
 
-gint gedit_search_replace_all_execute ( View *view, guchar *text_to_search_for,
-					guchar *text_to_replace_with, gint case_sensitive)
+#define GEDIT_EXTRA_REPLACEMENTS 20
+
+gint
+gedit_search_replace_all_execute ( View *view, guchar *search_text,
+				   guchar *replace_text, gint case_sensitive,
+				   guchar **buffer)
 {
 	guchar * buffer_in;
-	guchar * buffer_out;
+	guchar * buffer_out = *buffer;
 	guint buffer_in_length;
 	guint buffer_out_length;
-	
+	gint search_text_length;
+	gint replace_text_length;
+	gint delta;
+	gint replacements = 0;
+	guint p1, p2, p3, p4;
+	/* p1 = points to the index on buffer_in
+	   p2 = pointer to the index on buffer_out
+	   p3 = pointer to the index in search_text
+	   p4 = pointer to the index in replace_text */
+	gint case_sensitive_mask;
+	gint dump_info = TRUE;
+
 	gedit_debug ("", DEBUG_SEARCH);
 
 	g_return_val_if_fail (gedit_search_info.state == SEARCH_IN_PROGRESS_YES, 0);
 
+	search_text_length = strlen (search_text);
+	replace_text_length = strlen (replace_text);
+
 	buffer_in = gedit_search_info.buffer;
 	buffer_in_length = gedit_search_info.buffer_length;
 
-	/* Where's the Beef ????? */
-	
-	gedit_debug ("end", DEBUG_SEARCH);
+	if (buffer_in_length == 0)
+	{
+		/* Allocate something so that g_free doesn't crash */
+		buffer_out = g_malloc (1);
+		buffer_out [0] = '\0';
+		return 0;
+	}
 
-	return 0;
+	delta = replace_text_length - search_text_length;
+	if (delta > 0)
+		buffer_out_length = buffer_in_length + (GEDIT_EXTRA_REPLACEMENTS) * delta;
+	else
+		buffer_out_length = buffer_in_length;
+	
+	buffer_out = g_malloc (buffer_out_length);
+
+	if (buffer_out==NULL)
+	{
+		g_warning ("Could not allocate the memory needed for search & replace\n");
+		return 0;
+	}
+
+	p1 = 0;
+	p2 = 0;
+	p3 = 0;
+	p4 = 0;
+
+	case_sensitive_mask = case_sensitive?0:32;
+
+	/* Do the actual replace all */
+	while (p1 < buffer_in_length)
+	{
+		if ((buffer_in [p1]|case_sensitive_mask) == (search_text [p3]|case_sensitive_mask))
+		{
+			p3++;
+			if (p3 == search_text_length)
+			{
+				p2 = p2 - search_text_length + 1;
+				for (p4 = 0; p4 < replace_text_length; p4++)
+					buffer_out [p2++] = replace_text [p4];
+				replacements++;
+				p3=0;
+				p1++;
+				continue;
+			}
+		}
+		else
+		{
+			p3=0;
+		}
+		if (p2+2+delta > buffer_out_length)
+		{
+			buffer_out_length = buffer_in_length + (replacements + GEDIT_EXTRA_REPLACEMENTS) * delta;
+			buffer_out = g_realloc (buffer_out, buffer_out_length);
+		}
+		buffer_out [p2++] = buffer_in [p1++];
+	}
+
+	buffer_out [p2++] = '\0';
+
+	*buffer = buffer_out;
+
+	return replacements;
 }

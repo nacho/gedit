@@ -121,27 +121,35 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   chage signals. Chema [ This might not be true anymore since
 		   we are "freezing gedit before doing the search/replace */
 
-		gint ocurrences = 0;
+		gint replacements = 0;
 		guchar *msg;
+		guchar *new_buffer = NULL;
 
-		ocurrences = gedit_search_replace_all_execute ( view,
+		replacements = gedit_search_replace_all_execute ( view,
 								text_to_search_for,
 								text_to_replace_with,
-								GTK_TOGGLE_BUTTON (case_sensitive)->active);
-		search_end();
-		search_start();
+								GTK_TOGGLE_BUTTON (case_sensitive)->active,
+								&new_buffer);
+
+		if (replacements > 0)
+		{
+			gedit_document_delete_text (view->document, 0, gedit_document_get_buffer_length(view->document), FALSE);
+			gedit_document_insert_text (view->document, new_buffer, 0, FALSE);
+			search_end();
+			search_start();
+		}
+		g_free (new_buffer);
 
 		gnome_dialog_close (GNOME_DIALOG (widget));
-
+			
 		msg = g_strdup_printf (_("found and replaced %i ocurrences."),
-				       ocurrences);
+				       replacements);
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,
 								   GNOME_MESSAGE_BOX_INFO,
 								   GNOME_STOCK_BUTTON_OK,
 								   NULL));
 		g_free (msg);
-
 	}
 	 
 	if (button == 1) /* Replace */

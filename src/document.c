@@ -87,6 +87,7 @@ gedit_document_insert_text (Document *doc, guchar *text, guint position, gint un
 	gint length;
 	gint exclude_this_view;
 
+	g_return_if_fail (text!=NULL);
 	view = g_list_nth_data (doc->views, 0);
 	g_return_if_fail (view!=NULL);
 	text_widget = GTK_TEXT (view->text);
