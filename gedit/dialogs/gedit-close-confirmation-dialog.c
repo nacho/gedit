@@ -185,6 +185,9 @@ gedit_close_confirmation_dialog_finalize (GObject *object)
 	if (priv->unsaved_documents != NULL)
 		g_slist_free (priv->unsaved_documents);
 
+	if (priv->unsaved_documents != NULL)
+		g_slist_free (priv->selected_documents);
+
 	/* Call the parent's destructor */
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -312,7 +315,7 @@ gedit_close_confirmation_dialog_get_selected_documents (GeditCloseConfirmationDi
 
 	priv = GEDIT_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE (dlg);
 
-	return priv->selected_documents;
+	return g_slist_copy (priv->selected_documents);
 }
 
 GtkWidget *
@@ -707,5 +710,4 @@ set_unsaved_document (GeditCloseConfirmationDialog *dlg,
 		build_multiple_docs_dialog (dlg);
 	}	
 }
-
 

@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/time.h>
@@ -41,7 +42,6 @@
 #include <glib/gunicode.h>
 #include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <libgnomeui/libgnomeui.h>
 
 #include "gedit-utils.h"
 #include "gedit2.h"
