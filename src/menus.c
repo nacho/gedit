@@ -42,6 +42,25 @@
 #define GE_DATA		1
 #define GE_WINDOW	2
 
+/*
+ * The labels for the togglable menu items.  After the settings are
+ * loaded, we need to set the states of these items, and so we need a
+ * reliable way to reference them when we traverse the menu tree.  And
+ * that's what these macros are for.
+ */
+#define GE_TOGGLE_LABEL_AUTOINDENT      N_("Autoindent")
+#define GE_TOGGLE_LABEL_STATUSBAR       N_("Statusbar")
+#define GE_TOGGLE_LABEL_WORDWRAP        N_("Wordwrap")
+#define GE_TOGGLE_LABEL_LINEWRAP        N_("Linewrap")
+#define GE_TOGGLE_LABEL_READONLY        N_("Readonly")
+#define GE_TOGGLE_LABEL_SPLITSCREEN     N_("Splitscreen")
+#define GE_TOGGLE_LABEL_SCROLLBALL      N_("Scrollball")
+#define GE_TOGGLE_LABEL_SHOWTABS        N_("Show tabs")
+#define GE_TOGGLE_LABEL_TOOLBAR_RELIEF  N_("Toolbar relief")
+#define GE_TOGGLE_LABEL_TOOLTIPS        N_("Show tooltips")
+#define GE_TOGGLE_LABEL_TOOLBAR_TEXT    N_("Show toolbar text")
+#define GE_TOGGLE_LABEL_TOOLBAR_PIX     N_("Show toolbar icons")
+
 #ifdef WITHOUT_GNOME
 
 static GtkMenuEntry menu_items[] =
@@ -248,7 +267,8 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
-	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Close All"), N_("Close all open files"),
+	  file_close_all_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
 
 	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, (gpointer) GE_DATA),
@@ -264,36 +284,43 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
 
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, (gpointer) GE_DATA),
+
+
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL },
+	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, (gpointer) GE_DATA),
 
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(search_again_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_REPLACE_ITEM(search_replace_cb, (gpointer) GE_DATA),
+	
 	GNOMEUIINFO_END
 };	
 
-GnomeUIInfo gedit_search_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Search for Text..."),  NULL, search_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_ITEM, N_("Search for Line..."), NULL, goto_line_cb, (gpointer) GE_WINDOW, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_ITEM, N_("Search and Replace..."),  NULL, search_replace_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SRCHRPL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
-	GNOMEUIINFO_END
-};
-
 GnomeUIInfo gedit_tab_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Top"),
+	  N_("Put the document tabs at the top"),
+	  tab_top_cb, (gpointer) GE_WINDOW, NULL },
+
+	{ GNOME_APP_UI_ITEM, N_("Bottom"),
+	  N_("Put the document tabs at the bottom"),
+	  tab_bot_cb, (gpointer) GE_WINDOW, NULL },
+
+	{ GNOME_APP_UI_ITEM, N_("Left"),
+	  N_("Put the document tabs on the left"),
+	  tab_lef_cb, (gpointer) GE_WINDOW, NULL },
+
+	{ GNOME_APP_UI_ITEM, N_("Right"),
+	  N_("Put the document tabs on the right"),
+	  tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cb, (gpointer) GE_WINDOW, NULL },
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SHOWTABS,
+			    N_("Toggle the presence of the document tabs"),
+				    tab_toggle_cb, (gpointer) GE_WINDOW, NULL),
+	
 	GNOMEUIINFO_END
 };
 
@@ -302,38 +329,82 @@ GnomeUIInfo gedit_toolbar_menu []= {
 	{GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_SEPARATOR},
 */
-	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, (gpointer) GE_WINDOW, NULL },
-	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, (gpointer) GE_WINDOW, NULL },
-	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, (gpointer) GE_WINDOW, NULL },
+        GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_TOOLBAR_TEXT,
+				    N_("Toggle display of toolbar text"),
+				    tb_text_toggle_cb, (gpointer) GE_WINDOW,
+				    NULL),
+
+        GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_TOOLBAR_PIX,
+				    N_("Toggle display of toolbar icons"),
+				    tb_pix_toggle_cb, (gpointer) GE_WINDOW,
+				    NULL),
 #ifdef GTK_HAVE_FEATURES_1_1_0
-	{GNOME_APP_UI_SEPARATOR},
-	{GNOME_APP_UI_ITEM, N_("Toolbar Relief On"), NULL, tb_relief_on, (gpointer) GE_WINDOW, NULL },
-	{GNOME_APP_UI_ITEM, N_("Toolbar Relief Off"), NULL, tb_relief_off, (gpointer) GE_WINDOW, NULL },
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_TOOLBAR_RELIEF,
+					 N_("Toggle toolbar relief"),
+					 tb_relief_toggle_cb,
+					 (gpointer) GE_DATA, NULL),
 #endif
-	{GNOME_APP_UI_SEPARATOR},
-	{GNOME_APP_UI_ITEM, N_("Tooltips On"), NULL, tb_tooltips_on_cb, (gpointer) GE_WINDOW, NULL },
-	{GNOME_APP_UI_ITEM, N_("Tooltips Off"), NULL, tb_tooltips_off_cb, (gpointer) GE_WINDOW, NULL },
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_TOOLTIPS,
+					 N_("Toggle tooltips"),
+					 tb_tooltips_toggle_cb,
+					 (gpointer) GE_WINDOW, NULL),
 	GNOMEUIINFO_END
 };
 
+
 GnomeUIInfo gedit_settings_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, options_toggle_status_bar_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, options_toggle_word_wrap_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Linewrap"),  NULL, options_toggle_line_wrap_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Readonly"),  NULL, options_toggle_read_only_cb, (gpointer) GE_WINDOW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Split Screen"), NULL, options_toggle_split_screen_cb, (gpointer) GE_WINDOW, NULL },
-#ifndef WITHOUT_GNOME
-	{ GNOME_APP_UI_ITEM, N_("Toggle Scrollball"), NULL, options_toggle_scroll_ball_cb, (gpointer) GE_WINDOW, NULL },
-#endif
+        GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+				    N_("Toggle autoindent"),
+				    auto_indent_toggle_cb, (gpointer) GE_DATA,
+				    NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_STATUSBAR,
+				    N_("Toggle statusbar"),
+				    options_toggle_status_bar_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
+				    N_("Toggle Wordwrap"),
+				    options_toggle_word_wrap_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_LINEWRAP,
+				    N_("Toggle Linewrap"),
+				    options_toggle_line_wrap_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_READONLY,
+				    N_("Toggle Readonly"),
+				    options_toggle_read_only_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
+				    N_("Toggle Split Screen"),
+				    options_toggle_split_screen_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
+	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SCROLLBALL,
+				    N_("Toggle scrollball"),
+				    options_toggle_scroll_ball_cb,
+				    (gpointer) GE_WINDOW, NULL),
+
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"),
+	  N_("Change the placement of the document tabs"), &gedit_tab_menu },
+
+	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"),
+	  N_("Customize the toolbar"), &gedit_toolbar_menu },
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Save Settings"),
+	  N_("Save the current settings for future sessions"),
+	  gE_save_settings, (gpointer) GE_WINDOW, NULL },
 
 	GNOMEUIINFO_SEPARATOR, 
 
@@ -343,20 +414,20 @@ GnomeUIInfo gedit_settings_menu []= {
 };
 
 GnomeUIInfo gedit_window_menu []={
-        { GNOME_APP_UI_ITEM, N_("New Window"), NULL, window_new_cb, (gpointer) GE_DATA, NULL,
+        GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(window_new_cb, (gpointer) GE_DATA),
 
-          GNOME_APP_PIXMAP_NONE, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Close Window"), NULL, window_close_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL },
-
+        GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(window_close_cb,
+					   (gpointer) GE_DATA),
+	
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Document List"), NULL, files_list_popup, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL,
-	  'L', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Document List"),
+	  N_("Display the document list"),
+	  files_list_popup, (gpointer) GE_DATA, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 'L', GDK_CONTROL_MASK, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("Message Box"), NULL, msgbox_show, NULL, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Message Box"), N_("Display the message box"),
+	  msgbox_show, NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL },
 
 	GNOMEUIINFO_END
 };
@@ -383,15 +454,13 @@ GnomeUIInfo gedit_menu [] = {
 
 	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
 
-	{ GNOME_APP_UI_SUBTREE, N_("_Search"), NULL, &gedit_search_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-
-	GNOMEUIINFO_MENU_SETTINGS_TREE(gedit_settings_menu),
 
 #if PLUGIN_TEST
 	{ GNOME_APP_UI_SUBTREE, N_("_Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 #endif
+
+	GNOMEUIINFO_MENU_SETTINGS_TREE(gedit_settings_menu),
 
 	GNOMEUIINFO_MENU_WINDOWS_TREE(gedit_window_menu),
 
@@ -404,7 +473,6 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 {
 	add_callback_data (gedit_file_menu, window, data);
 	add_callback_data (gedit_edit_menu, window, data);
-	add_callback_data (gedit_search_menu, window, data);
 	add_callback_data (gedit_tab_menu, window, data);
 	add_callback_data (gedit_toolbar_menu, window, data);
 	add_callback_data (gedit_settings_menu, window, data);
@@ -415,7 +483,6 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 
 	remove_callback_data (gedit_file_menu, window, data);
 	remove_callback_data (gedit_edit_menu, window, data);
-	remove_callback_data (gedit_search_menu, window, data);
 	remove_callback_data (gedit_tab_menu, window, data);
 	remove_callback_data (gedit_toolbar_menu, window, data);
 	remove_callback_data (gedit_settings_menu, window, data);
@@ -429,6 +496,95 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 	return (GnomeUIInfo *) gedit_menu;
 }
 
+/*
+ * This function initializes the toggle menu items to the proper states.
+ * It is called from gE_window_nwe after the settings have been loaded.
+ */
+void
+gE_set_menu_toggle_states(gE_window *w)
+{
+  gE_document *doc = gE_document_current (w);
+  int i;
+
+#define GE_SET_TOGGLE_STATE(item, l, boolean)                            \
+  if (!strcmp(item.label, l))                                            \
+    GTK_CHECK_MENU_ITEM (item.widget)->active = boolean
+
+  /*
+   * Initialize the states of the document tabs menu...
+   */
+  for (i = 0; gedit_tab_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+    {
+      if (gedit_tab_menu[i].label)
+	{
+	  GE_SET_TOGGLE_STATE(gedit_tab_menu[i], GE_TOGGLE_LABEL_SHOWTABS,
+			      w->show_tabs);
+	  
+	}
+    }
+
+  /*
+   * The toolbar menu..
+   */
+  for (i = 0; gedit_toolbar_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+    {
+      if (gedit_toolbar_menu[i].label)
+	{
+	  GE_SET_TOGGLE_STATE(gedit_toolbar_menu[i],
+			      GE_TOGGLE_LABEL_TOOLBAR_RELIEF,
+			      w->use_relief_toolbar);
+
+	  GE_SET_TOGGLE_STATE(gedit_toolbar_menu[i], GE_TOGGLE_LABEL_TOOLTIPS,
+			      w->show_tooltips);
+
+	  GE_SET_TOGGLE_STATE(gedit_toolbar_menu[i],
+			      GE_TOGGLE_LABEL_TOOLBAR_TEXT,
+			      w->have_tb_text);
+
+	  GE_SET_TOGGLE_STATE(gedit_toolbar_menu[i],
+			      GE_TOGGLE_LABEL_TOOLBAR_PIX,
+			      w->have_tb_pix);
+	}
+    }
+
+  /*
+   * The settings menu...
+   */
+  for (i = 0; gedit_settings_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+    {
+      if (gedit_settings_menu[i].label)
+	{
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_AUTOINDENT,
+			      w->auto_indent);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_STATUSBAR,
+			      w->show_status);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_WORDWRAP,
+			      doc->word_wrap);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_LINEWRAP,
+			      doc->line_wrap);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_READONLY,
+			      doc->read_only);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_SPLITSCREEN,
+			      doc->window->splitscreen);
+
+	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
+			      GE_TOGGLE_LABEL_SCROLLBALL,
+			      doc->window->scrollball);
+
+	}
+    }
+}
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 {
@@ -436,7 +592,8 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 
 	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
 	{
-		if (menu[i].type == GNOME_APP_UI_ITEM)
+		if (menu[i].type == GNOME_APP_UI_ITEM
+		    || menu[i].type == GNOME_APP_UI_TOGGLEITEM)
 		{
 			if (menu[i].user_data == (gpointer)GE_DATA)
 				menu[i].user_data = data;

@@ -325,12 +325,56 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 	window->have_toolbar = FALSE;
 }
 
+static void
+tb_toolbar_set_style(gE_window *window)
+{
+	if (window->have_tb_text)
+	  {
+	    if (window->have_tb_pix)
+	      gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar),
+				    GTK_TOOLBAR_BOTH);
+	    else
+	      gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar),
+				    GTK_TOOLBAR_TEXT);
+	  }
+	else if (window->have_tb_pix)
+	  gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar),
+				GTK_TOOLBAR_ICONS);
+	else
+	  gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar),
+				GTK_TOOLBAR_TEXT);
+}
+
+gint
+tb_text_toggle_cb(GtkWidget *w, gpointer cbwindow)
+{
+	gE_window *window = (gE_window *)cbwindow;
+
+	window->have_tb_text = ! window->have_tb_text;
+
+	tb_toolbar_set_style(window);
+
+	return TRUE;
+}	  
+
+gint
+tb_pix_toggle_cb(GtkWidget *w, gpointer cbwindow)
+{
+	gE_window *window = (gE_window *)cbwindow;
+
+	window->have_tb_text = ! window->have_tb_text;
+
+	tb_toolbar_set_style(window);
+
+	return TRUE;
+}	  
 
 /*
  * PUBLIC: tb_pic_text_cb
  *
  * updates toolbar to show buttons with icons and text
  */
+/* this is deprecated */
 void
 tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 {
@@ -360,6 +404,7 @@ tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
  *
  * updates toolbar to show buttons with icons only
  */
+/* This is deprecated */
 void
 tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 {
@@ -399,6 +444,7 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
  *
  * updates toolbar to show buttons with text only
  */
+/* this is deprecated */
 void
 tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 {
@@ -428,11 +474,28 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 }
 
 
+gint
+tb_tooltips_toggle_cb(GtkWidget *w, gpointer cbwindow)
+{
+	gE_window *window = (gE_window *)cbwindow;
+
+	window->show_tooltips = ! window->show_tooltips;
+
+	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar),
+				 window->show_tooltips);
+/*	if (window->files_list_window_toolbar)
+		gtk_toolbar_set_tooltips(
+			GTK_TOOLBAR(window->files_list_window_toolbar), TRUE);*/
+	return TRUE;
+}
+
+
 /*
  * PUBLIC: tb_tooltips_on_cb
  *
  * turns ON tooltips
  */
+/* this is deprecated */
 void
 tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow)
 {
@@ -445,12 +508,12 @@ tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow)
 	window->show_tooltips = TRUE;
 }
 
-
 /*
  * PUBLIC: tb_tooltips_off_cb
  *
  * turns OFF tooltips
  */
+/* this is deprecated */
 void
 tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
 {
@@ -463,47 +526,38 @@ tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
 	window->show_tooltips = FALSE;
 }
 
-
-/* Make Toolbar buttons reliefed... */
-void tb_relief_on (GtkWidget *w, gpointer cbwindow)
+gint
+tb_relief_toggle_cb (GtkWidget *w, gpointer cbwindow)
 {
 
    gE_window *gw = (gE_window *)cbwindow;
+
 #ifdef GTK_HAVE_FEATURES_1_1_0
- if (gw->use_relief_toolbar == FALSE)
- {
+   gw->use_relief_toolbar = ! gw->use_relief_toolbar;
+
+   if (gw->use_relief_toolbar)
+     {
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
 					      GTK_RELIEF_NONE);
-	#ifdef WITHOUT_GNOME
+#ifdef WITHOUT_GNOME
 	gtk_container_border_width (GTK_CONTAINER (gw->toolbar), 2);
-	#endif
-	gw->use_relief_toolbar = TRUE;
- }
-#else
-	mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
-#endif /* GTK_HAVE_FEATURES_1_1_0 */
-}
-
-/* Turn toolbar relief off... */
-void tb_relief_off (GtkWidget *w, gpointer cbwindow)
-{
-
-   gE_window *gw = (gE_window *)cbwindow;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-if (gw->use_relief_toolbar == TRUE)
- {
-
+#endif /* WITHOUT_GNOME */
+     }
+   else
+     {
 	gtk_toolbar_set_button_relief(GTK_TOOLBAR(gw->toolbar), 
 					      GTK_RELIEF_NORMAL);
-	#ifdef WITHOUT_GNOME
+#ifdef WITHOUT_GNOME
 	gtk_container_border_width (GTK_CONTAINER (gw->toolbar), 0);
-	#endif
-	gw->use_relief_toolbar = FALSE;
- }
-#else
-	mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
+#endif /* WITHOUT_GNOME */
+     }
+#else /* GTK_HAVE_FEATURES_1_1_0 */
+   mbprintf("Doh! You need Gtk+ 1.1.x for Reliefed toolbars..");
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
+
+   return TRUE;
 }
+
 
 /*
  * PRIVATE: new_pixmap

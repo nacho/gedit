@@ -196,6 +196,8 @@ gE_window_new(void)
 
 	gE_get_settings (w);
 
+	gE_set_menu_toggle_states(w);
+
 	g_list_foreach(plugins, (GFunc) add_plugins_to_window, w);
 
 	recent_update(w);

@@ -42,13 +42,17 @@ extern void gE_create_toolbar(gE_window *gw, gE_data *data);
 extern GtkWidget * gE_create_toolbar_flw(gE_data *data);
 extern void tb_on_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_off_cb(GtkWidget *w, gpointer cbwindow);
+extern gint tb_tooltips_toggle_cb(GtkWidget *w, gpointer cbwindow);
+extern gint tb_relief_toggle_cb(GtkWidget *w, gpointer cbwindow);
+extern gint tb_text_toggle_cb(GtkWidget *w, gpointer cbwindow);
+extern gint tb_pix_toggle_cb(GtkWidget *w, gpointer cbwindow);
+
+/* deprecated: */
 extern void tb_pic_text_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_pic_only_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_text_only_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow);
 extern void tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow);
-extern void tb_relief_on (GtkWidget *w, gpointer cbwindow);
-extern void tb_relief_off (GtkWidget *w, gpointer cbwindow);
 
 #endif
 

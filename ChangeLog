@@ -1,3 +1,27 @@
+1999-01-08  Nat Friedman  <nat@nat.org>
+
+	* src/toolbar.c (tb_text_toggle_cb): New function for the new menu
+ 	toggle.
+	(tb_pix_toggle_cb): Likewise.
+	(tb_tooltips_toggle_cb): Likewise.
+	(tb_relief_toggle_cb): Likewise.
+
+	* src/menus.c: Add the search items to the Edit menu.
+	Made "Show tabs" into a toggle item.
+	(gE_set_menu_toggle_states): New function.
+
+	Added hints to the tab menu.
+
+	Changed all the items in the Settings menu to toggle items.  Moved
+ 	the Settings menu.
+
+	* src/gE_document.c (gE_window_new): Call
+ 	gE_set_menu_toggle_states after we have got the settings.
+
+	* src/menus.c: Removed the search menu.
+	(add_callback_data): Change GE_DATA and GE_WINDOW for toggleitems
+ 	too.
+
 1999-01-07  Nat Friedman  <nat@nat.org>
 
 	* src/commands.c: Changed the signatures of the
