@@ -43,6 +43,7 @@ typedef struct _gE_view {
 	
 	GtkWidget *text;
 	GtkWidget *viewport;
+	GtkWidget *pane;
 	GtkWidget *scrwindow[2];
 	
 	gint split, splitscreen;

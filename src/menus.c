@@ -175,11 +175,11 @@ GnomeUIInfo gedit_settings_menu []= {
 				    options_toggle_read_only_cb,
 				    NULL, NULL),
 
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
+/*	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
 				    N_("Toggle Split Screen"),
 				    options_toggle_split_screen_cb,
 				    NULL, NULL),
-
+*/
 	GNOMEUIINFO_SEPARATOR,
 
 	{ GNOME_APP_UI_SUBTREE, N_("_Document Tabs"),

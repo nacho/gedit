@@ -652,10 +652,18 @@ static void gE_view_init (gE_view *view)
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
 	gtk_widget_show (view->vbox);
 	
+	/* create our paned window */
+	view->pane = gtk_vpaned_new ();
+	gtk_box_pack_start (GTK_BOX (view->vbox), view->pane, TRUE, TRUE, 0);
+	gtk_paned_set_handle_size (GTK_PANED (view->pane), 10);
+	gtk_paned_set_gutter_size (GTK_PANED (view->pane), 10);
+	gtk_widget_show (view->pane);
+	
 	/* Create the upper split screen */
 	view->scrwindow[0] = gtk_scrolled_window_new (NULL, NULL);
+	gtk_paned_pack1 (GTK_PANED (view->pane), view->scrwindow[0], TRUE, TRUE);
 	
-	gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[0], TRUE, TRUE, 0);
+	/*gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[0], TRUE, TRUE, 0);*/
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[0]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_AUTOMATIC);
@@ -718,7 +726,8 @@ static void gE_view_init (gE_view *view)
 	
 	/* Create the bottom split screen */
 	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[1], TRUE, TRUE, 1);
+	gtk_paned_pack2 (GTK_PANED (view->pane), view->scrwindow[1], TRUE, TRUE);
+	/*gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[1], TRUE, TRUE, 1);*/
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[1]),
 				      GTK_POLICY_NEVER,
 				      GTK_POLICY_AUTOMATIC);
@@ -782,7 +791,7 @@ static void gE_view_init (gE_view *view)
 		} 
 
 	}
-  	 
+
  	gtk_widget_push_style (style);     
 	gtk_widget_set_style(GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style(GTK_WIDGET(view->text), style);
@@ -803,8 +812,9 @@ static void gE_view_init (gE_view *view)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 	
-	if (!view->splitscreen)
-	  gtk_widget_hide (GTK_WIDGET (view->split_screen)->parent);
+	/*if (!view->splitscreen)
+	  gtk_widget_hide (GTK_WIDGET (view->split_screen)->parent);*/
+	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
 
 	/*gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
 	gtk_widget_show (view->vbox);*/
@@ -896,9 +906,10 @@ void gE_view_set_split_screen (gE_view *view, gint split_screen)
 	   	gtk_widget_show (view->split_parent);
 	
 	} else {
-	
-		gtk_widget_hide (view->split_parent);
-	
+
+		/*gtk_widget_hide (view->split_parent);*/
+		gtk_widget_hide (view->pane);
+
 	}
  
    	view->splitscreen = split_screen;
