@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-14 20:54-0400\n"
-"PO-Revision-Date: 2000-04-10 12:26+04:00\n"
+"POT-Creation-Date: 2000-04-16 21:23+0400\n"
+"PO-Revision-Date: 2000-04-16 21:31+04:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid "Inserts the current date and time"
 msgstr "Вставить текущую дату и время"
 
 #: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:281
+#: src/print.c:354
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -62,19 +62,29 @@ msgstr ""
 "Убедитесь, что файл существует."
 
 #: src/file.c:94
-#, fuzzy
+#, c-format
 msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file is not beeing used by another aplication."
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
 msgstr ""
-"При открытии файла была обнаружена ошибка.\n"
-"Убедитесь, что файл существует."
+"При открытии файла была обнаружена ошибка:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Убедитесь, что файл не используется другим приложением\n"
+"и что файл не пуст."
 
-#: src/file.c:103
+#: src/file.c:106
 msgid "Could not allocate the requrired memory."
 msgstr "Не удалось получить необходимую память."
 
-#: src/file.c:109
+#: src/file.c:112
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -89,7 +99,7 @@ msgstr ""
 "\n"
 "Убедитесь, что у вас есть права на чтение этого файла."
 
-#: src/file.c:177
+#: src/file.c:180
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -106,7 +116,7 @@ msgstr ""
 "Убедитесь, что указанный путь существует и что у вас есть соответствующие "
 "права на запись."
 
-#: src/file.c:191 src/file.c:205
+#: src/file.c:194 src/file.c:208
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -123,38 +133,38 @@ msgstr ""
 "По неизвестной причине (1). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:271
+#: src/file.c:274
 msgid "Open File ..."
 msgstr "Открыть файл..."
 
-#: src/file.c:313
+#: src/file.c:316
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/file.c:351
+#: src/file.c:354
 #, c-format
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
 
-#: src/file.c:417
+#: src/file.c:420
 #, c-format
 msgid "``%s'' is about to be overwriten. Do you want to continue ?"
 msgstr "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:428
+#: src/file.c:431
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:436
+#: src/file.c:439
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:518
+#: src/file.c:521
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
 
-#: src/document.c:340
+#: src/document.c:341
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
@@ -180,12 +190,12 @@ msgstr "Ошибка, дополнение еще используется"
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/print.c:211
+#: src/print.c:240
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:361
+#: src/print.c:458
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -263,7 +273,7 @@ msgstr "Показать строку состояния"
 #: src/menus.c:210
 msgid ""
 "Enable or disable the statusbar at the bottom of this application window."
-msgstr ""
+msgstr "Включение/Отключение строки состояния внизу этого окна приложения."
 
 #: src/menus.c:323
 msgid "New"
@@ -400,9 +410,8 @@ msgid "Search from beginning of document"
 msgstr "Поиск от начала документа"
 
 #: src/search.c:648
-#, fuzzy
 msgid "Search from end of document"
-msgstr "Поиск от начала документа"
+msgstr "Поиск с конца документа"
 
 #: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
 #: src/search.c:655
@@ -453,7 +462,6 @@ msgid "Appearance"
 msgstr "Внешний вид"
 
 #: src/dialogs/prefs.glade.h:9
-#, fuzzy
 msgid "Show splitscreen"
 msgstr "Разделенный экран"
 
@@ -462,7 +470,6 @@ msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
 #: src/dialogs/prefs.glade.h:11
-#, fuzzy
 msgid "Enable Auto-indent"
 msgstr "Включить Автовыравнивание"
 
@@ -476,7 +483,7 @@ msgstr "Общие"
 
 #: src/dialogs/prefs.glade.h:14
 msgid "MDI (Multiple Document Interface)"
-msgstr ""
+msgstr "MDI (Многодокументный интерфейс)"
 
 #: src/dialogs/prefs.glade.h:15
 msgid ""
@@ -485,6 +492,10 @@ msgid ""
 "Top\n"
 "Bottom\n"
 msgstr ""
+"Слева\n"
+"Справа\n"
+"Сверху\n"
+"Снизу\n"
 
 #: src/dialogs/prefs.glade.h:20
 msgid ""
@@ -493,84 +504,84 @@ msgid ""
 "Modal\n"
 "Default\n"
 msgstr ""
+"Блокнот\n"
+"Верхний уровень\n"
+"Модальный\n"
+"По умолчанию\n"
 
 #: src/dialogs/prefs.glade.h:25
 msgid "Mode: "
-msgstr ""
+msgstr "Режим:"
 
 #: src/dialogs/prefs.glade.h:26
 msgid "Notebook Tab Position: "
-msgstr ""
+msgstr "Положение ярлыков блокнота:"
 
 #: src/dialogs/prefs.glade.h:27
-#, fuzzy
 msgid "Documents"
-msgstr "Документ"
+msgstr "Документы"
 
 #: src/dialogs/prefs.glade.h:28
-#, fuzzy
 msgid "Fonts"
-msgstr "Содержание"
+msgstr "Шрифты"
 
 #: src/dialogs/prefs.glade.h:29
 msgid "Pick a Font"
-msgstr ""
+msgstr "Выбрать шрифт"
 
 #: src/dialogs/prefs.glade.h:30
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМм"
 
 #: src/dialogs/prefs.glade.h:31
-#, fuzzy
 msgid "Default Font: "
-msgstr "По умолчанию"
+msgstr "Шрифт по умолчанию:"
 
 #: src/dialogs/prefs.glade.h:32
-#, fuzzy
 msgid "Colors"
-msgstr "Закрыть"
+msgstr "Цвета"
 
 #: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
 msgid "Pick a color"
-msgstr ""
+msgstr "Выбрать цвет"
 
 #: src/dialogs/prefs.glade.h:35
-#, fuzzy
 msgid "Background: "
-msgstr "Цвет фона текста"
+msgstr "Цвет фона:"
 
 #: src/dialogs/prefs.glade.h:36
-#, fuzzy
 msgid "Foreground: "
-msgstr "Цвет текста"
+msgstr "Цвет текста:"
 
 #: src/dialogs/prefs.glade.h:37
 msgid "Fonts/Colors"
-msgstr ""
+msgstr "Шрифты/Цвета"
 
 #: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
-#, fuzzy
 msgid "Printing"
 msgstr "Печать"
 
 #: src/dialogs/prefs.glade.h:39
 msgid "Add header"
-msgstr ""
+msgstr "Добавить заголовок"
 
 #: src/dialogs/prefs.glade.h:40
 msgid "Wrap long lines at the page width"
-msgstr ""
+msgstr "Переносить длинные строки по ширине странице"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
-msgstr ""
+msgstr "Печатать номера строк каждые:"
 
 #: src/dialogs/prefs.glade.h:42
 msgid "line(s)"
-msgstr ""
+msgstr "строк(и)"
+
+#: src/dialogs/prefs.glade.h:44
+msgid "Paper"
+msgstr "Бумага"
 
 #: src/dialogs/search.glade.h:9
-#, fuzzy
 msgid ""
 "Cursor\n"
 "Beginning of Document\n"
@@ -618,51 +629,3 @@ msgstr ""
 #: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "Спрашивать перед заменой"
-
-#~ msgid "Notebook"
-#~ msgstr "Блокнот"
-
-#~ msgid "Toplevel"
-#~ msgstr "Верхний край"
-
-#~ msgid "Modal"
-#~ msgstr "Модальный"
-
-#~ msgid "Document Settings"
-#~ msgstr "Настройки документа"
-
-#~ msgid "New Document After Closing Last"
-#~ msgstr "Создавать новый документ при закрытии последнего"
-
-#~ msgid "Close Window After Closing Last"
-#~ msgstr "Закрывать окно при закрытии последнего документа"
-
-#~ msgid "Current Font"
-#~ msgstr "Текущий шрифт"
-
-#~ msgid "Select..."
-#~ msgstr "Выделить..."
-
-#~ msgid "Window Size"
-#~ msgstr "Размер окна"
-
-#~ msgid "Current Width:"
-#~ msgstr "Текущая ширина"
-
-#~ msgid "Startup Width:"
-#~ msgstr "Ширина при запуске:"
-
-#~ msgid "Use Current"
-#~ msgstr "Использовать текущую"
-
-#~ msgid "Current Height:"
-#~ msgstr "Текущая высота:"
-
-#~ msgid "Startup Height:"
-#~ msgstr "Высота при запуске:"
-
-#~ msgid "MDI Mode"
-#~ msgstr "Режим MDI"
-
-#~ msgid "Window"
-#~ msgstr "Окно"
