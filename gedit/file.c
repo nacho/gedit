@@ -96,7 +96,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	if (stats.st_size  == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
-						    "\nPlease make sure the file is not beeing used by another aplication\n"
+						    "\nPlease make sure the file is not being used by another application\n"
 						    "and that the file is not empty."), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
@@ -107,7 +107,7 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) == NULL)
 	{
-		gnome_app_error (mdi->active_window, _("Could not allocate the requrired memory."));
+		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
 		return 1;
 	}
 
@@ -139,11 +139,13 @@ gedit_file_open (Document *doc, gchar *fname)
 	{
 		nth_view = g_list_nth_data (doc->views, i);
 		gedit_view_refresh (nth_view);
-		gedit_set_title (nth_view->document);
 		gedit_view_set_read_only (nth_view, access (fname, W_OK)  != 0);
 		if (!nth_view->changed_id)
 			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
 								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
+		gedit_set_title (nth_view->document);
+
+
 	}
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
@@ -183,7 +185,7 @@ gedit_file_save (Document *doc, gchar *fname)
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file: "
 						   "\n\n %s \n\n"
 						   "Make sure that the path you provided exists,"
-						   "and that you have the appropiate write permissions."), fname);
+						   "and that you have the appropriate write permissions."), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
 		return 1;
@@ -420,7 +422,7 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 		guchar * msg;
 		GtkWidget *msgbox;
 		gint ret;
-		msg = g_strdup_printf (_("``%s'' is about to be overwriten. Do you want to continue ?"), fname);
+		msg = g_strdup_printf (_("``%s'' is about to be overwritten. Do you want to continue ?"), fname);
 		msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
 						GNOME_STOCK_BUTTON_NO, GNOME_STOCK_BUTTON_CANCEL, NULL);
 		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
@@ -493,7 +495,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	if (!doc)
 		return;
 	
-	msg = g_strdup_printf ("Are you sure you wish to revert all changes?\n(%s)",
+	msg = g_strdup_printf (_("Are you sure you wish to revert all changes?\n(%s)"),
 			       doc->filename);
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
 					GNOME_STOCK_BUTTON_NO, NULL);
