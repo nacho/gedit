@@ -201,7 +201,7 @@ gedit_plugins_window_add (GnomeApp *app)
 	GnomeUIInfo *menu;
 
 	gedit_debug ("start", DEBUG_PLUGINS);
-	
+
 	g_return_if_fail (app != NULL);
 
 	n = g_slist_length (plugin_list) + 1 ;

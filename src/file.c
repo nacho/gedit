@@ -495,7 +495,7 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	
 	gedit_debug("", DEBUG_FILE);
 
-	file_name = gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector));
+	file_name = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(open_file_selector)));
 
 	if (gedit_document_new_with_file (file_name))
 	{
@@ -503,7 +503,6 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	}
 
 	g_free (file_name);
-	
 	gtk_widget_hide (GTK_WIDGET(open_file_selector));
 	return;
 }
