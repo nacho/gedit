@@ -636,7 +636,7 @@ gedit_document_set_title (Document *doc)
 		return;
 
 	if (doc->filename == NULL)
-		docname = g_strdup_printf ("Untitled %i", doc->untitled_number);
+		docname = g_strdup_printf (_("Untitled %i"), doc->untitled_number);
 	else
 		docname = g_strdup (g_basename (doc->filename));
 		
