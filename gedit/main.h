@@ -44,6 +44,8 @@ void document_changed_callback (GtkWidget *widget, gpointer);
 void search_search_cmd_callback (GtkWidget *w, gpointer);
 void search_replace_cmd_callback (GtkWidget *w, gpointer);
 void search_again_cmd_callback (GtkWidget *w, gpointer);
+void search_goto_line_callback (GtkWidget *w, gpointer data);
+void search_create (gE_search *options, gint replace);
 
 /* Tab positioning */
 void tab_top_cback (GtkWidget *widget, gpointer data);
@@ -138,10 +140,12 @@ struct _gE_search {
 	GtkWidget *start_at_beginning;
 	GtkWidget *case_sensitive;
 	GtkWidget *search_entry;
-	gint replace, again;
+	gint replace, again, line;
 	GtkWidget *replace_box;
 	GtkWidget *replace_entry;
 	GtkWidget *prompt_before_replacing;
+	GtkWidget *search_for;
+	GtkWidget *line_item, *text_item;
 	
 };
 

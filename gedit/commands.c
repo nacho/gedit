@@ -439,7 +439,7 @@ void search_start (GtkWidget *w, gE_search *options)
 	gE_document *doc;
 	gchar *search_for, *buffer, *replace_with;
 	gchar bla[] = " ";
-	gint len, start_pos, text_len, match, i, replace_diff = 0;
+	gint len, start_pos, text_len, match, i, search_for_line, cur_line, end_line, replace_diff = 0;
 	doc = gE_document_current (main_window);
 	search_for = gtk_entry_get_text (GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text (GTK_ENTRY(options->replace_entry));
@@ -454,9 +454,40 @@ void search_start (GtkWidget *w, gE_search *options)
 		start_pos = GTK_EDITABLE(doc->text)->current_pos;
 	else
 		start_pos = 0;
+		
 
 	if ((text_len = gtk_text_get_length(GTK_TEXT(doc->text))) < len)
 		return;
+		
+
+
+	if (GTK_CHECK_MENU_ITEM (options->line_item)->active || options->line)
+	{
+		start_pos = 0;
+		cur_line = 1;
+		sscanf (search_for, "%i", &search_for_line);
+		for (i = start_pos; i < text_len; i++)
+		{
+			if (cur_line == search_for_line)
+				break;
+			buffer = gtk_editable_get_chars (GTK_EDITABLE (doc->text), i, i+1);
+			if (strcmp (buffer, "\n") ==0)
+				cur_line++;
+		}
+		if (i >= text_len)
+			return;
+		for (end_line = i; end_line < text_len; end_line++)
+		{
+			buffer = gtk_editable_get_chars (GTK_EDITABLE (doc->text), end_line, end_line+1);
+			if (strcmp (buffer, "\n") == 0)
+				break;
+		}
+		gtk_editable_insert_text (GTK_EDITABLE(doc->text), bla, strlen(bla), &i);
+		gtk_editable_delete_text (GTK_EDITABLE(doc->text), i-1, i);
+		gtk_editable_select_region (GTK_EDITABLE (doc->text), i-1, end_line);
+		return;
+	}
+
 	gtk_text_freeze (GTK_TEXT(doc->text));
 
 /*	for (i = start_pos; i <= (text_len - start_pos - len - replace_diff); i++)
@@ -509,11 +540,50 @@ void search_start (GtkWidget *w, gE_search *options)
 }
 
 
-
-
-void search_popup (gE_search *options, gint replace)
+void search_for_text (GtkWidget *w, gE_search *options)
 {
-	GtkWidget *search_label, *replace_label, *ok, *cancel, *search_hbox, *replace_hbox;
+	gtk_widget_show (options->start_at_cursor);
+	gtk_widget_show (options->start_at_beginning);
+	gtk_widget_show (options->case_sensitive);
+	options->line = 0;
+	if (options->replace)
+		gtk_widget_show (options->replace_box);
+	/*gtk_menu_item_select (GTK_MENU_ITEM (options->text_item));	*/
+	gtk_option_menu_set_history (GTK_OPTION_MENU (options->search_for), 0);
+	gtk_check_menu_item_set_state (GTK_CHECK_MENU_ITEM (options->text_item), 1);
+	gtk_editable_delete_text (GTK_EDITABLE (options->search_entry), 0, -1);
+}
+
+void search_for_line (GtkWidget *w, gE_search *options)
+{
+	gtk_widget_hide (options->start_at_cursor);
+	gtk_widget_hide (options->start_at_beginning);
+	gtk_widget_hide (options->case_sensitive);
+	options->line = 1;
+	if (options->replace) {
+		gtk_widget_hide (options->replace_box);
+	}
+	gtk_option_menu_set_history (GTK_OPTION_MENU (options->search_for), 1);
+	gtk_editable_delete_text (GTK_EDITABLE (options->search_entry), 0, -1);
+
+}
+
+void search_goto_line_callback (GtkWidget *w, gpointer data)
+{
+	if (!main_window->search->window)
+		search_create (main_window->search, 0);
+	gtk_check_menu_item_set_state (GTK_CHECK_MENU_ITEM (main_window->search->line_item), 1);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (main_window->search->search_for), 1);
+	search_for_line (NULL, main_window->search);
+	gtk_widget_show (main_window->search->window);
+
+}
+
+
+void search_create (gE_search *options, gint replace)
+{
+	GtkWidget *search_label, *replace_label, *ok, *cancel, *search_hbox, *replace_hbox, *hbox;
+	GtkWidget *search_for_menu_items, *search_for_label;
 	options->window = gtk_dialog_new();
 	gtk_window_set_policy (GTK_WINDOW(options->window), TRUE, TRUE, TRUE);
 
@@ -526,6 +596,31 @@ void search_popup (gE_search *options, gint replace)
 		gtk_window_set_title (GTK_WINDOW (options->window), ("Search and Replace"));
 	}
 
+	hbox = gtk_hbox_new (FALSE, 1);
+	search_for_label = gtk_label_new ("Search For:");
+	gtk_widget_show (search_for_label);
+	
+	search_for_menu_items = gtk_menu_new ();
+	options->text_item = gtk_radio_menu_item_new_with_label (NULL, "Text");
+	gtk_menu_append (GTK_MENU (search_for_menu_items), options->text_item);
+	gtk_widget_show (options->text_item);
+	options->line_item = gtk_radio_menu_item_new_with_label (
+		gtk_radio_menu_item_group (GTK_RADIO_MENU_ITEM (options->text_item)),
+		"Line Number");
+	gtk_menu_append (GTK_MENU (search_for_menu_items), options->line_item);
+	gtk_widget_show (options->line_item);
+	
+	options->search_for = gtk_option_menu_new ();
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (options->search_for), search_for_menu_items);
+	gtk_widget_show (options->search_for);
+	
+	gtk_widget_show (hbox);
+	
+	gtk_signal_connect (GTK_OBJECT (options->text_item), "activate", 
+	                             GTK_SIGNAL_FUNC (search_for_text), options);
+	gtk_signal_connect (GTK_OBJECT (options->line_item), "activate",
+	                             GTK_SIGNAL_FUNC (search_for_line), options);
+	 
 	search_hbox = gtk_hbox_new(FALSE, 1);
 	options->search_entry = gtk_entry_new();
 	search_label = gtk_label_new (("Search:"));
@@ -548,6 +643,11 @@ void search_popup (gE_search *options, gint replace)
 	ok = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
 	cancel = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
 #endif
+	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(options->window)->vbox), hbox, TRUE, TRUE, 0);
+	
+	gtk_box_pack_start (GTK_BOX(hbox), search_for_label, FALSE, FALSE, 2);
+	gtk_box_pack_start (GTK_BOX(hbox), options->search_for, TRUE, TRUE, 0);
+	
 	gtk_box_pack_start (GTK_BOX(GTK_DIALOG(options->window)->vbox), search_hbox, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX(search_hbox), search_label, FALSE, FALSE, 2);
 	gtk_box_pack_start (GTK_BOX(search_hbox), options->search_entry, TRUE, TRUE, 2);
@@ -580,7 +680,7 @@ void search_popup (gE_search *options, gint replace)
 	gtk_widget_show (options->prompt_before_replacing);
 	gtk_widget_show (ok);
 	gtk_widget_show (cancel);
-	gtk_widget_show (options->window);
+	/*gtk_widget_show (options->window);*/
 	gtk_signal_connect (GTK_OBJECT(ok), "clicked", GTK_SIGNAL_FUNC(search_start), options);
 	gtk_signal_connect_object (GTK_OBJECT(ok), "clicked", 
 	                                       GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
@@ -595,27 +695,30 @@ void search_popup (gE_search *options, gint replace)
 void search_search_cmd_callback (GtkWidget *w, gpointer data)
 {
 	if (!main_window->search->window)
-		search_popup (main_window->search, 0);
-	else {
-		gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search"));
-		gtk_widget_hide (main_window->search->replace_box);
-		gtk_widget_show (main_window->search->window);
-		main_window->search->replace = 0;
-		main_window->search->again = 0;
-	}
+		search_create (main_window->search, 0);
+
+	main_window->search->replace = 0;
+	main_window->search->again = 0;
+	search_for_text (NULL, main_window->search);
+	gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search"));
+	gtk_widget_hide (main_window->search->replace_box);
+	gtk_widget_show (main_window->search->window);
+
 }
 
 void search_replace_cmd_callback (GtkWidget *w, gpointer data)
 {
 	if (!main_window->search->window)
-		search_popup (main_window->search, 1);
-	else {
-		gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search and Replace"));
-		gtk_widget_show (main_window->search->replace_box);
-		gtk_widget_show (main_window->search->window);
-		main_window->search->replace = 1;
-		main_window->search->again = 0;
-	}
+		search_create (main_window->search, 1);
+
+	main_window->search->replace = 1;
+	main_window->search->again = 0;
+	search_for_text (NULL, main_window->search);
+	gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search and Replace"));
+	gtk_widget_show (main_window->search->replace_box);
+	gtk_widget_show (main_window->search->window);
+
+	
 }
 
 void search_again_cmd_callback (GtkWidget *w, gpointer data)

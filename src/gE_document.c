@@ -216,8 +216,10 @@ gE_window *gE_window_new()
       gtk_widget_show (window->statusbar);
       
       line_button = gtk_button_new_with_label ("Line");
+      gtk_signal_connect (GTK_OBJECT (line_button), "clicked",
+                                   GTK_SIGNAL_FUNC (search_goto_line_callback), NULL);
       window->line_label = gtk_label_new ("1");
-      col_button = gtk_button_new_with_label ("Column");
+      col_button = gtk_label_new ("Column");
       window->col_label = gtk_label_new ("0");
       gtk_box_pack_start (GTK_BOX (box2), line_button, FALSE, FALSE, 1);
       gtk_box_pack_start (GTK_BOX (box2), window->line_label, FALSE, FALSE, 1);
@@ -306,10 +308,10 @@ gE_document *gE_document_new(gE_window *window)
 	style = gtk_style_new ();
 	/*style->bg[GTK_STATE_NORMAL] = style->white;
         document->text->style->font = "-adobe-helvetica-medium-r-normal--12-*-*-*-*-*-*-*";*/
-	gtk_widget_set_style (GTK_TEXT(document->text), style);
+	gtk_widget_set_style (GTK_WIDGET(document->text), style);
         /*style = gtk_style_attach (style, document->window);*/
-	gtk_widget_set_rc_style(GTK_TEXT(document->text));
-	gtk_widget_ensure_style(GTK_TEXT(document->text));
+	gtk_widget_set_rc_style(GTK_WIDGET(document->text));
+	gtk_widget_ensure_style(GTK_WIDGET(document->text));
 
 
 	document->changed = FALSE;
