@@ -666,6 +666,7 @@ gnome_recent_model_delete_from_list (GnomeRecentModel *recent, GSList *list,
 		
 		if (!strcmp (text, uri)) {
 			list = g_slist_remove (list, text);
+			g_free (text);
 		}
 	}
 
