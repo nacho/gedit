@@ -1,3 +1,39 @@
+============
+gedit 2.7.90
+============
+
+New Features
+============
+- Add a command line option to specify the encoding (Paolo Borelli)
+
+Fixes
+=====
+- Adapt to the new Mime system (Ray Strode)
+- Always update the sensitivity of "Move to new window" (Madhan Raj M/Paolo Maggi)
+- Remove annoying alert when creating a non-existent file (Vinay)
+- Hopefully fix for good the recent files locking (Paolo M.)
+- fix accessibility issue in Open Location dialog (Padraig O'Briain)
+- avoid multiple about dialogs for the plugins (Paolo B.)
+
+New and updated translations
+============================
+- Kjartan Maraas (no)
+- Nikos Charonitakis (el)
+- Christophe Merlet (fr)
+- Laurent Dhima (sq)
+- Laszlo Dvornik (hu)
+- Duarte Loreto (pt)
+- Guntupalli Karunakar (hi)
+- Gareth Owen (en_GB)
+- Miloslav Trmac (cs)
+- Francisco Javier F. Serrador (es)
+- Christian Rose (sv)
+- Vincent van Adrighem (nl)
+- Gil Osher (he)
+- Takeshi AIHANA (ja)
+- Alexander Shopov (bg)
+
+
 =============================================
 gedit 2.7.1 - "FUTURE PROGRAMMING TECHNOLOGY"
 =============================================
@@ -311,309 +347,3 @@ New and updated translations
 - Žygimantas Beručka (lt)
 - Данило Шеган (sr)
 
-
-===================
-gedit 2.4.1 - "Eue"
-===================
-
-This is a bug fixing release.
-
-Thanks to all translators for their very
-important work.
-
-====================
-gedit 2.4.0 - "Sara"
-====================
-
-Updates
-=======
-
-- Updated the On-line Manual (Irene Ryan)
-
-Fixes
-=====
-
-- Don't distribute generated files (Michael Meeks)
-- Updated to latest libegg recent-files code (Paolo Maggi)
-
-
-New and updated translations
-============================
-
-- Brazilian Portuguese (Gustavo Noronha Silva)
-- Vietnamese (Pablo Saratxaga)
-- Romanian (Mişu Moldovan)
-- Malay (Hasbullah Bin Pit)
-- Albanian (Laurent Dhima)
-- Bangla (Santanu of Ankur group)
-- Japanese (Takeshi Aihana)
-- Finnish (Jarkko Ranta)  
-- Hindi (Guntupalli Karunakar)
-- Czech (Miloslav Trmac)
-- Welsh (Dafydd Harries)
-- Traditional Chinese (Abel Cheung)
-- Italian (Roberto Rosselli Del Turco)
-- Slovak (Stanislav Visnovsky)
-- Spanish (Francisco Javier F. Serrador)
-- Korean (Changwoo Ryu)
-
-
-=============================
-gedit 2.3.5 - "/me is stupid"
-=============================
-
-Fixes
-=====
-
-- Requires libgnomeprintui 2.3.1 instead of the still
-  to be released 2.3.2 (Paolo Maggi)
-
-
-Updated translations
-====================
-
-- Dutch (Kees van den Broek)
-
-
-===========================
-gedit 2.3.4 - "She is here"
-===========================
-
-Fixes
-=====
-
-- Fixed the --help messages translation problem (Paolo Maggi)
-- Used the new docs build system (John Fleck)
-- Managed unknown current locale encodings (Paolo)
-- Other minor bugs (Paolo and Eric Ritezel)
-
-
-New and updated translations
-============================
-
-- Azerbaijani (Metin Amiroff)
-- Belarusian (Ales Nyakhaychyk)
-- Bulgarian (Evgeni Boevski)
-- Catalan (Jordi Mallach)
-- Czech (Miloslav Trmac)
-- Danish (Ole Laursen)
-- Dutch (Kees van den Broek)
-- Finnish (Jarkko Ranta)
-- French (Christophe Merlet)
-- Greek (Nikos Charonitakis)
-- Hebrew (Gil "Dolfin" Osher)
-- Hungarian (Andras Timar)
-- Irish (Paul Duffy)
-- Korean (Changwoo Ryu)
-- Malay (Hasbullah Bin Pit)
-- Nepali (Pawan)
-- Norwegian (Kjartan Maraas)
-- Polish (Artur Flinta)
-- Portuguese (Duarte Loreto)
-- Russian (Valek Filippov)
-- Serbian (Danilo Šegan)
-- Simplified Chinese (Funda Wang)
-- Vietnamese (Pablo Saratxaga)
-- Welsh (Dafydd Harries)
-
-
-=============================
-gedit 2.3.3 - "Still waiting"
-=============================
-
-A lot of stuff (see ChangeLog files for more details). 
-Special thanks goes to Eric Ritezel <eisenwulf@inductiveart.net> for
-his great help with this release.
-
-
-=======================
-gedit 2.3.2 - "Waiting"
-=======================
-
-Enhancements
-============
-
-- Metadata manager (Paolo Maggi)
-- Highlight Mode submenu (Paolo)
-- Encoding status bar (Paolo)
-- Always show Cursor Position and Overwrite Mode (Paolo)
-
-
-Fixes
-=====
-
-- Fixed "Requires" in gedit.pc.in (Paolo)
-- Removed statusbar_show_cursor_position and statusbar_show_overwrite_mode keys
-  from the .schema file (Paolo) 
-- Bug #105378 - View > Customize Toolbar options should be changed (Paolo)
-- Added a KOI8-R encoding (alexhack AT inbox DOT ru)
-- Replaced deprecated calls gtk_timeout_remove and gtk_timeout_add (Yogeesh MB)
-
-
-New and updated translations
-============================
-
-- Czech (Miloslav Trmac)
-- Swedish (Christian Rose)
-- Danish (Ole Laursen)
-- Portuguese (Duarte Loreto)
-- Spanish (Pablo Gonzalo del Campo)
-- Japanese (Kamagasako Masatoshi) 
-- Irish (Paul Duffy)
-- traditional Chinese (Abel Cheung)
-- French (Christophe Merlet)
-- Catalan (Jordi Mas)
-
-
-
-======================
-gedit 2.3.1 - "Colors"
-======================
-
-This is the first version of gedit supporting syntax highlighting.
-
-Starting from this release gedit depends on GtkSourceView.
-I'd like to thank Gustavo and Jeroen that greatly helped me in re-factoring
-GtkSourceView
-
-
-Enhancements
-============
-
-- Syntax highlighting (Paolo Maggi)
-- New help files for for de es fr it sv ja ko zh_CN zh_TW (Mike Lei)
-- New viewer control for nautilus with syntax highlighting (Jeroen Zwartepoorte)
-
-
-Fixes
-=====
-
-- Bug #105563 - gedit (2.2.0.1) fail to compile with new Aspell/Pspell 0.50.3 (Paolo)
-- Bug #106129 - Package should use the AM_GCONF_SOURCE_2 macro (Julio Merino)
-- Set accelerator for the Go to Line verb (Paolo)
-- Find Next is now grayed out if no previous find action has been performed (Paolo) 
-- The toolbar will not grab the focus when a button is pressed (Paolo)
-- Bug #108708 - Automatic spell checker highlights unknown words already
-  ignored in manual spell check (Paolo)
-
-
-New and updated translations
-============================
-
-- Irish (Paul Duffy)
-- Czech (Miloslav Trmac)
-- Serbian (Danilo Šegan)
-
-
-
-======================================
-gedit 2.3.0 - "Weren't you listening?"
-======================================
-
-This is the first development snapshot of the 2.4 series.
-
-- Install header files which make it possible to build plugins externally (Me)
-- Split many of the plugins into a separate package, gedit-plugins (Me)
-- Nifty new docs from Sun (Breda McColgan)
-- Updated translations
-
-=====================
-gedit 2.2.0 - "Peace"
-=====================
-
-Fixes
-=====
-
-- Make sure to include <config.h> in all *.c files (Paolo Maggi)
-- Allow svg icons in tabs and recent files list (James Willcox)
-- Code cleanup in the Open page of the preferences dialog (Paolo)
-- Updated gedit guide (Breda McColgan)
-
-
-New and updated translations
-============================
-
-- Estonian (Tõivo Leedjärv)
-- French (Yann Laviolette)
-- Korean (Kang Jeong-Hee)
-- Italian (Roberto Rosselli Del Turco)
-- Swedish (Christian Rose )
-- Polish (GNOME PL Team)
-- Simplified Chinese (He Qiangqiang )
-- Catalan (Jordi Mallach)
-- Turkish (Barbaros)
-- Russian (Russian team)
-- Brazilian Portuguese (Evandro Fernandes Giovanini)
-- Mongolian (Sanlig Badral)
-
-
-
-============
-gedit 2.1.91
-============
-
-Fixes
-=====
-
-- Updated to latest recent-files code (James Willcox)
-- Updated about box (Paolo Mggi)
-- Fixed mem leaks (Paolo)
-- Fixed several bugs in the diff plugin (Paolo)
-
-New and updated translations
-============================
-
-- Amharic (Daniel Yacob)
-- Norwegian (Kjartan Maraas)
-- Korean (Young-Ho Cha)
-- Slovak (Stanislav Visnovsky)
-- Simplified Chinese (He Qiangqiang)
-- Turkish (Fatih Demir)
-- German (Christian Neumair)
-- Vietnamese (Pablo Saratxaga)
-- Brazilian Portuguese (Evandro Fernandes Giovanini)
-
-
-===========
-gedit 2.1.6
-===========
-
-Fixes
-=====
-
-- Fixed default fonts for printing (Paolo Maggi) 
-- Updating docs to newest build template (John Fleck)
-- Updated gedit man file (James Willcox, Paolo)
-- Requires libgnomeprintui-2.2 >= 2.1.7 (Paolo)
-- Revamped about dialog (Christian Neumair)
-- Added ISO-8859-2 to the list of supported 
-  encodings (Marcin Malinowski)
-- Fixed problems with line numbers (Paolo)
-- Improved key navigability of output window (Paolo)
-- Remember printer configuration/settings (Paolo)
-- Fixed various little problems in the plugin 
-  engine (Paolo)
-- Enabled startup notification (James)
-- Fixed icon sizes for recent-files menus and 
-  document tabs (James).
-- Fixed a crash bug related to recent files (James)
-
-New and updated translations
-============================
-
-- Bulgarian (Evgeni Boevski)
-- Chinese (traditional) (Abel Cheung)
-- Czech (Miloslav Trmac)
-- Danish (Ole Laursen)
-- Dutch (Reinout van Schouwen)
-- German (Christian Neumair, Benjamin Greiner)
-- Greek (Kostas Papadimas)
-- Hebrew ( Gil 'Dolfin' Osher)
-- Hungarian (Andras Timar)
-- Italian (Paolo)
-- Latvian (Artis Trops)
-- Malay (Hasbullah Bin Pit)
-- Norwegian (Kjartan Maraas)
-- Spanish (Pablo Gonzalo del Campo)
-- Swedish (Christian Rose)
-- Vietnamese
