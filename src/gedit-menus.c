@@ -25,7 +25,7 @@
 #include "main.h"
 #include "commands.h"
 #include "gedit-about.h"
-#include "gE_files.h"
+#include "gedit-file-io.h"
 #include "gE_mdi.h"
 #include "gedit-print.h"
 #include "gedit-undo.h"

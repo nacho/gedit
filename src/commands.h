@@ -19,22 +19,24 @@
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
 
+#include "main.h"
+
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
 #endif
 
 /* File Ops */
-extern void file_quit_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_new_cb(GtkWidget *widget, gpointer cbdata);
-extern void window_new_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_open_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_open_in_new_win_cb(GtkWidget *widget, gpointer data);
-extern void file_save_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_save_all_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_save_all_as_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_save_as_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_close_cb(GtkWidget *widget, gpointer cbdata);
-extern void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_quit_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_new_cb (GtkWidget *widget, gpointer cbdata);
+extern void window_new_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_open_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_open_in_new_win_cb (GtkWidget *widget, gpointer data);
+extern void file_save_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_as_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_close_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
 extern void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 extern int popup_create_new_file (GtkWidget *w, gchar *title);
 /*FIXME extern void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
@@ -42,18 +44,18 @@ extern void window_close_cb(GtkWidget *widget, gpointer cbdata);*/
 
 
 /* Edit functions */
-extern void edit_cut_cb(GtkWidget *widget, gpointer cbdata);
-extern void edit_copy_cb(GtkWidget *widget, gpointer cbdata);
-extern void edit_paste_cb(GtkWidget *widget, gpointer cbdata);
-extern void edit_selall_cb(GtkWidget *widget, gpointer cbdata);
+extern void edit_cut_cb (GtkWidget *widget, gpointer cbdata);
+extern void edit_copy_cb (GtkWidget *widget, gpointer cbdata);
+extern void edit_paste_cb (GtkWidget *widget, gpointer cbdata);
+extern void edit_selall_cb (GtkWidget *widget, gpointer cbdata);
 
 
 /* Tab positioning */
-extern void tab_top_cb(GtkWidget *widget, gpointer cbwindow);
-extern void tab_bot_cb(GtkWidget *widget, gpointer cbwindow);
-extern void tab_lef_cb(GtkWidget *widget, gpointer cbwindow);
-extern void tab_rgt_cb(GtkWidget *widget, gpointer cbwindow);
-extern void tab_toggle_cb(GtkWidget *widget, gpointer cbwindow);
+extern void tab_top_cb (GtkWidget *widget, gpointer cbwindow);
+extern void tab_bot_cb (GtkWidget *widget, gpointer cbwindow);
+extern void tab_lef_cb (GtkWidget *widget, gpointer cbwindow);
+extern void tab_rgt_cb (GtkWidget *widget, gpointer cbwindow);
+extern void tab_toggle_cb (GtkWidget *widget, gpointer cbwindow);
 
 /* Scrollbar options */
 extern void scrollbar_none_cb (GtkWidget *widget, gpointer cbwindow);
@@ -86,7 +88,7 @@ extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 
 /* Functions needed to be made external for the plugins api */
-extern void close_doc_execute(gedit_document *opt_doc, gpointer cbdata);
+extern void close_doc_execute (gedit_document *opt_doc, gpointer cbdata);
 
 
 #endif /* __COMMANDS_H__ */

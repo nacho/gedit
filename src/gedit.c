@@ -32,7 +32,7 @@
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
-#include "gE_files.h"
+#include "gedit-file-io.h"
 #include "gedit-menus.h"
 #include "gE_plugin.h"
 #include "gE_window.h"
@@ -171,8 +171,10 @@ main (int argc, char **argv)
 	
 	/* new plugins system init will be here */
 	/* connect signals -- FIXME -- We'll do the rest later */
-	gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
-	gtk_signal_connect(GTK_OBJECT(mdi), "destroy", GTK_SIGNAL_FUNC(file_quit_cb), NULL);
+	gtk_signal_connect (GTK_OBJECT(mdi), "remove_child",
+			    GTK_SIGNAL_FUNC (remove_doc_cb), NULL);
+	gtk_signal_connect (GTK_OBJECT(mdi), "destroy",
+			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
 	gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
         gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gedit_window_new), NULL);

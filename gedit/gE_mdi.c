@@ -27,7 +27,7 @@
 #include "gE_prefs.h"
 #include "gE_window.h"
 #include "gE_view.h"
-#include "gE_files.h"
+#include "gedit-file-io.h"
 #include "commands.h"
 #include "gedit-search.h"
 #include "gE_mdi.h"

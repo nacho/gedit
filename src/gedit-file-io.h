@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=4 sts=0 sw=4:
  *
  * gEdit
@@ -16,17 +17,13 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_FILES_H__
-#define __GE_FILES_H__
 
-typedef enum {
-	FlwFnumColumn = 0,
-	FlwFsizeColumn,
-	FlwFnameColumn
-} flw_col_t;
+#ifndef __GEDIT_FILE_IO_H__
+#define __GEDIT_FILE_IO_H__
 
 
 extern gint gedit_file_open (gedit_document *doc, gchar *fname);
 extern gint gedit_file_save (gedit_document *doc, gchar *fname);
 
-#endif /* __GE_FILES_H__ */
+
+#endif /* __GEDIT_FILE_IO_H__ */

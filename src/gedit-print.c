@@ -34,7 +34,7 @@
 #include <time.h>
 #include "main.h"
 #include "gedit-print.h"
-#include "gE_files.h"
+#include "gedit-file-io.h"
 #include "gE_window.h"
 #include "gE_view.h"
 #include "gE_mdi.h"

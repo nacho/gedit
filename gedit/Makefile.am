@@ -44,8 +44,7 @@ gedit_SOURCES = 	\
 	gE_mdi.h	\
 	gedit-undo.c	\
 	gedit-undo.h	\
-	gE_files.c	\
-	gE_files.h      \
+	gedit-file-io.c gedit-file-io.h \
 	gE_prefs.c	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\

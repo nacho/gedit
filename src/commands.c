@@ -19,6 +19,8 @@
  */
 
 #include <config.h>
+#include <gnome.h>
+#include <libgnome/gnome-history.h>
 
 #include <unistd.h>
 #define __need_sigset_t
@@ -28,14 +30,12 @@
 /*#include <signal.h>*/
 #include <sys/types.h>
 #include <sys/stat.h>
+
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-
-#include <gnome.h>
-#include <libgnome/gnome-history.h>
 
 
 #include "main.h"
@@ -44,7 +44,7 @@
 #include "gE_mdi.h"
 #include "gE_window.h"
 #include "gE_prefs.h"
-#include "gE_files.h"
+#include "gedit-file-io.h"
 #include "gedit-search.h"
 
 /*
@@ -725,32 +725,30 @@ gint file_revert_do (gedit_document *doc)
 }
 
 /* File revertion callback */
-void file_revert_cb (GtkWidget *widget, gpointer cbdata)
+void
+file_revert_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_document *doc;
 	
-	if (gedit_document_current ()) {
-	
-	  doc = gedit_document_current ();
+	if (gedit_document_current ())
+	{
+		doc = gedit_document_current ();
 	    
-	  if (doc->filename) {
+		if (doc->filename)
+		{
+			if (doc->changed)
+			{
+				if ((file_revert_do (doc)) == 0)
+					return;
+	    
+			}
+			else
+				gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
 	  
-	    if (doc->changed) {
-	    
-	      if ((file_revert_do (doc)) == 0)
-	        return;
-	    
-	    } else
-	     gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
-	  
-	  } else {
-	      
-	   gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
-	    
-	  }
-	  
+		}
+		else
+			gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
 	}
-	
 }
 
 
@@ -758,23 +756,16 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata)
  * quits gEdit by closing all windows.  only quits if all windows closed.
  */
 void
-file_quit_cb(GtkWidget *widget, gpointer cbdata)
+file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	gedit_save_settings ();
 
-	if (gnome_mdi_remove_all (mdi, FALSE)) {
+	if (gnome_mdi_remove_all (mdi, FALSE))
+		gtk_object_destroy (GTK_OBJECT (mdi));
+	else
+		return;
 	
-	  gtk_object_destroy (GTK_OBJECT (mdi));
-	  
-	} else {
-	
-	  return;
-	
-	}
-	
-	gtk_exit(0);	/* should not reach here */
-	
+	gtk_exit (0);	/* should not reach here */
 }
 
 
