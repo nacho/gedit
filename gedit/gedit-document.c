@@ -1848,6 +1848,10 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	g_return_val_if_fail (str != NULL, FALSE);
 
 	converted_str = gedit_utils_convert_search_text (str);
+	g_return_val_if_fail (converted_str != NULL, FALSE);
+	
+	gedit_debug (DEBUG_DOCUMENT, "str: %s", str);
+	gedit_debug (DEBUG_DOCUMENT, "converted_str: %s", converted_str);
 
 	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 	

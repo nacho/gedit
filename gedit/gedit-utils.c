@@ -1464,7 +1464,7 @@ gedit_utils_convert_search_text (const gchar *text)
 				break;
 			}
 		} else if (*cur != '\\') {
-			str = g_string_append_len (str, cur, 1);
+			str = g_string_append_len (str, cur, next - cur);
 		}
 
 		if (!drop_prev)
