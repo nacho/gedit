@@ -46,6 +46,9 @@
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 
+#define SOEXT 		("." G_MODULE_SUFFIX)
+#define SOEXT_LEN 	(strlen (SOEXT))
+
 static void		 gedit_plugins_engine_load_all 	(void);
 static void		 gedit_plugins_engine_load_dir	(const gchar *dir);
 static GeditPlugin 	*gedit_plugins_engine_load 	(const gchar *file);
@@ -117,7 +120,7 @@ gedit_plugins_engine_load_dir (const gchar *dir)
 	
 	while ((e = readdir (d)) != NULL)
 	{
-		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0)
+		if (strncmp (e->d_name + strlen (e->d_name) - SOEXT_LEN, SOEXT, SOEXT_LEN) == 0)
 		{
 			gchar *plugin = g_strconcat (dir, e->d_name, NULL);
 			gedit_plugins_engine_load (plugin);
