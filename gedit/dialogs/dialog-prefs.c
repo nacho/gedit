@@ -31,6 +31,9 @@
 #include "prefs.h"
 #include "view.h"
 #include "dialogs.h"
+#include "utils.h"
+#include "commands.h"
+#include "window.h"
 
 static GtkWidget *propertybox;
 
@@ -46,6 +49,9 @@ static GtkWidget *foreground;
 static GtkWidget *background;
 static GtkWidget *defaultfont;
 
+static GtkWidget *printwrap;
+static GtkWidget *printheader;
+static GtkWidget *printlines;
 
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
@@ -56,6 +62,7 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 	GList *children;
 	gint i = 0;
 
+	gedit_debug_mess("F:gtk_option_menu_get_active_index\n", DEBUG_PREFS);
 
 	menu = GTK_MENU (gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu)));
 	active = gtk_menu_get_active (menu);
@@ -76,7 +83,7 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 	return 0;
 }
 
-static void
+void
 gedit_window_refresh (void)
 {
 	gint i, j;
@@ -84,9 +91,19 @@ gedit_window_refresh (void)
 	Document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
+	View *view;
 
-	gedit_view_set_split_screen (VIEW (mdi->active_view),
-				     (gint) VIEW (mdi->active_view)->splitscreen);
+	gedit_debug_mess("F:gedit_window_refresh\n", DEBUG_PREFS);
+
+	/* I did this hack so as to not generate a
+	   warning, dunno if there is a better way. Chema*/
+	if (mdi->active_view!=NULL)
+		view = VIEW ( mdi->active_view);
+	else
+		view = NULL;
+			
+	if (view!=NULL)
+		gedit_view_set_split_screen ( view, (gint) view->splitscreen);
 
 	gedit_window_set_status_bar (settings->show_status);
 
@@ -98,6 +115,9 @@ gedit_window_refresh (void)
 		gnome_mdi_set_mode (mdi, GNOME_MDI_DEFAULT_MODE);
 
 	tab_pos (settings->tab_pos);
+
+	if (view==NULL)
+		return;
 
 	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 
@@ -132,6 +152,7 @@ gedit_window_refresh (void)
 static void
 destroy_cb (void)
 {
+	gedit_debug_mess("F:destroy_cb\n", DEBUG_PREFS);
 	gtk_widget_destroy (GTK_WIDGET (propertybox));
 }
 
@@ -139,6 +160,8 @@ static void
 help_cb (void)
 {
 	GnomeHelpMenuEntry help_entry = { NULL, "properties.html" };
+
+	gedit_debug_mess("F:help_cb\n", DEBUG_PREFS);
 
 	help_entry.name = gnome_app_id;
 	gnome_help_display (NULL, &help_entry);
@@ -149,7 +172,9 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 {
 	GtkStyle *style;
 	GdkColor *c;
-
+	
+	gedit_debug_mess("F:apply_cb\n", DEBUG_PREFS);
+	
 	if (page == -1)
 		return;
 
@@ -165,6 +190,15 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
+
+	settings->printheader = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printheader));
+	if (gtk_radio_group_get_selected ( gtk_radio_button_group (GTK_RADIO_BUTTON (printwrap )))==0)
+		settings->printwrap = TRUE;
+	else
+		settings->printwrap = FALSE;
+	/* Add print lines */
+/*	settings->printlines  = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines));*/
+	
         style = gtk_style_new ();
         
         c = &style->base[0];
@@ -190,12 +224,15 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 static void
 prefs_changed (GtkWidget *widget, gpointer data)
 {
+	gedit_debug_mess("F:prefs_changed\n", DEBUG_PREFS);
 	gnome_property_box_changed (GNOME_PROPERTY_BOX (propertybox));
 }
 
 static void
 prepare_general_page (GladeXML *gui)
 {
+	gedit_debug_mess("F:prepare_general_page\n", DEBUG_PREFS);
+
 	statusbar = glade_xml_get_widget (gui, "statusbar");
 	splitscreen = glade_xml_get_widget (gui, "splitscreen");
 	autoindent = glade_xml_get_widget (gui, "autoindent");
@@ -208,8 +245,6 @@ prepare_general_page (GladeXML *gui)
 				     settings->splitscreen);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (autoindent),
 				     settings->auto_indent);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (wordwrap),
-				     settings->word_wrap);
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (statusbar), "toggled",
@@ -225,6 +260,8 @@ prepare_general_page (GladeXML *gui)
 static void
 prepare_documents_page (GladeXML *gui)
 {
+	gedit_debug_mess("F:prepare_documenst_page\n", DEBUG_PREFS);
+	
 	mdimode = glade_xml_get_widget (gui, "mdimode");
 	tabpos = glade_xml_get_widget (gui, "tabpos");
 
@@ -249,6 +286,8 @@ prepare_fontscolors_page (GladeXML *gui)
 	GtkStyle *style;
 	GdkColor *c;
 
+	gedit_debug_mess("F:prepare_fontscolors_page\n", DEBUG_PREFS);
+	
 	foreground = glade_xml_get_widget (gui, "foreground");
 	background = glade_xml_get_widget (gui, "background");
 	defaultfont = glade_xml_get_widget (gui, "defaultfont");
@@ -281,8 +320,36 @@ prepare_fontscolors_page (GladeXML *gui)
 }
 
 static void
+prepare_printing_page (GladeXML *gui)
+{
+	gedit_debug_mess("F:prepare_priting_page\n", DEBUG_PREFS);
+
+	printheader = glade_xml_get_widget (gui, "printheader");
+	printlines  = glade_xml_get_widget (gui, "printlines");
+	printwrap   = glade_xml_get_widget (gui, "printwrap");
+
+	g_return_if_fail( printheader != NULL);
+	g_return_if_fail( printlines != NULL);
+	g_return_if_fail( printwrap != NULL);
+	
+	/* set initial button status */
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printheader),
+				     settings->printheader);
+	gtk_radio_button_select ( gtk_radio_button_group (GTK_RADIO_BUTTON (printwrap )),
+				  !settings->printwrap);
+
+	/* connect signals */
+	gtk_signal_connect (GTK_OBJECT (printheader), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT (printwrap), "toggled",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+}
+
+static void
 dialog_prefs_impl (GladeXML *gui)
 {
+	gedit_debug_mess("F:dialogs_prefs_impl\n", DEBUG_PREFS);
+	
 	propertybox = glade_xml_get_widget (gui, "propertybox");
 
 	/* glade won't let me set the title of the propertybox */
@@ -291,6 +358,7 @@ dialog_prefs_impl (GladeXML *gui)
 	prepare_general_page (gui);
 	prepare_documents_page (gui);
 	prepare_fontscolors_page (gui);
+	prepare_printing_page (gui);
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (propertybox),
@@ -318,6 +386,8 @@ dialog_prefs (void)
 {
 	GladeXML *gui;
 
+	gedit_debug_mess("F:dialog_prefs\n", DEBUG_PREFS);
+
 	gui = glade_xml_new (GEDIT_GLADEDIR "/prefs.glade", NULL);
 
 	if (!gui)
@@ -329,3 +399,14 @@ dialog_prefs (void)
 	dialog_prefs_impl (gui);
 	gtk_object_unref (GTK_OBJECT (gui));
 }
+
+
+
+
+
+
+
+
+
+
+

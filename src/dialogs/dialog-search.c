@@ -4,7 +4,7 @@
 
 #include "document.h"
 #include "search.h"
-
+#include "utils.h"
 
 static GtkWidget *search_dialog;
 static GtkWidget* create_search_dialog (void);
@@ -22,6 +22,14 @@ search_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 	gulong options = 0;
 	gchar *str;
 
+	gedit_debug_mess ("F:search_dialog_button_cb\n", DEBUG_SEARCH);
+
+	if (!gedit_document_current ())
+	{
+		gnome_dialog_close(GNOME_DIALOG(widget));
+		return;
+	}
+	
 	if (button == 0)
 	{
 		get_search_options (doc, widget, &str, &options, &pos);
@@ -43,6 +51,8 @@ create_search_dialog (void)
 {
 	GtkWidget *dialog;
 	GtkWidget *frame, *entry;
+
+	gedit_debug_mess ("F:create_search_dialog\n", DEBUG_SEARCH);
 
 	dialog = gnome_dialog_new (_("Search"),
 				   _("Search"),
@@ -70,7 +80,12 @@ search_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 
+	gedit_debug_mess ("F:search_cb\n", DEBUG_SEARCH);
+
 	doc = gedit_document_current ();
+
+	if (!doc)
+	     return;
 
 	if (!search_dialog)
 		search_dialog = create_search_dialog ();
@@ -79,3 +94,11 @@ search_cb (GtkWidget *widget, gpointer data)
 			    GTK_SIGNAL_FUNC (search_dialog_button_cb), doc);
 	gtk_widget_show (search_dialog);
 }
+
+
+
+
+
+
+
+

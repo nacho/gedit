@@ -26,9 +26,13 @@ static void
 insert_hello (void)
 {
 	gint i;
-	View *view = VIEW (mdi->active_view);
+	View *view;
 	Document *doc = gedit_document_current();
-		
+
+	if (!doc)
+	     return;
+	
+	view = VIEW (mdi->active_view);
 	i = gedit_view_get_position (view);
 
 	gtk_text_freeze (GTK_TEXT (view->text));
@@ -43,6 +47,7 @@ gint
 init_plugin (PluginData *pd)
 {
 	/* initialize */
+     
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");
@@ -52,3 +57,14 @@ init_plugin (PluginData *pd)
 	
 	return PLUGIN_OK;
 }
+
+
+
+
+
+
+
+
+
+
+

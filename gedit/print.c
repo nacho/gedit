@@ -44,6 +44,7 @@
 #include "document.h"
 #include "commands.h"
 #include "prefs.h"
+#include "utils.h"
 
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-printer.h>
@@ -122,20 +123,25 @@ file_print_cb (GtkWidget *widget, gpointer data)
 {
 	Document  *doc;
 	GtkWidget *dialog;
+
+	gedit_debug_mess ("F:file_print_cb\n", DEBUG_PRINT);
 	
 	doc = gedit_document_current ();
+	if (doc==NULL)
+		return;
+
 	dialog = gnome_printer_dialog_new ();
 
-	gnome_dialog_set_parent (GNOME_DIALOG(dialog),
-				 GTK_WINDOW(mdi->active_window));
-	gtk_signal_connect (GTK_OBJECT(dialog), "clicked",
-			    GTK_SIGNAL_FUNC (print_dialog_clicked_cb), doc);
+	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window));
+	gtk_signal_connect (GTK_OBJECT(dialog), "clicked", GTK_SIGNAL_FUNC (print_dialog_clicked_cb), doc);
 	gtk_widget_show_all (dialog);
 }
 
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
+	gedit_debug_mess ("F:file_print_preview_cb\n", DEBUG_PRINT);
+
 	if (!gnome_mdi_get_active_view (mdi))
 		return;
 	print_document (gedit_document_current(), NULL);
@@ -145,6 +151,14 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
 static void
 print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data)
 {
+	gedit_debug_mess ("F:file_dialog_clicked_cb\n", DEBUG_PRINT);
+
+	if (!gedit_document_current ())
+	{
+		gnome_dialog_close(GNOME_DIALOG(widget));
+		return;
+	}
+
 	if (button == 0)
 	{
 		GnomePrinter *printer;
@@ -164,6 +178,8 @@ print_document (Document *doc, GnomePrinter *printer)
 {
 	PrintJobInfo *pji;
 	int i,j;
+
+	gedit_debug_mess ("F:print_document\n", DEBUG_PRINT);
 
 	pji = g_new0 (PrintJobInfo, 1);
 	set_pji (pji, doc, printer);
@@ -396,6 +412,8 @@ end_job (GnomePrintContext *pc)
 static void
 preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
+	gedit_debug_mess ("F:preview_destroy_cb\n", DEBUG_PRINT);
+
 	gtk_object_unref (GTK_OBJECT (pji->master));
 	g_free (pji);
 }

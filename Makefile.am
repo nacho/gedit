@@ -1,7 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-#plugindir = $(libdir)/go/plugins
-
 SUBDIRS = macros po intl pixmaps plugins src help
 
 EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins \

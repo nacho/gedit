@@ -54,6 +54,10 @@ struct _Preferences
 				   time gedit is run */
 	
 	gint close_doc;
+
+	gint printwrap;        /* Printing stuf ...*/
+	gint printlines;
+	gint printheader;
 };
 
 extern Preferences *settings;
@@ -69,3 +73,21 @@ extern void gedit_window_refresh (void);
 
 
 #endif /* __PREFS_H__ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

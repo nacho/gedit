@@ -376,9 +376,7 @@ GnomeUIInfo toolbar_data[] =
 	GNOMEUIINFO_END
 };
 
-void find_line_cb (GtkWidget *widget, gpointer data);
-void replace_cb (GtkWidget *widget, gpointer data);
-void about_cb (GtkWidget *widget, gpointer data);
+
 
 #if 0
 /**
@@ -398,21 +396,3 @@ gedit_menus_init (Window *window)
 	return (GnomeUIInfo *) gedit_menu;
 }
 #endif
-
-void
-find_line_cb (GtkWidget *widget, gpointer data)
-{
-	dialog_find_line ();
-}
-
-void
-replace_cb (GtkWidget *widget, gpointer data)
-{
-	dialog_replace ();
-}
-
-void
-about_cb (GtkWidget *widget, gpointer data)
-{
-	dialog_about ();
-}

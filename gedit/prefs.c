@@ -26,7 +26,7 @@
 #include "view.h"
 #include "commands.h"
 #include "document.h"
-
+#include "utils.h"
 /*#include "gedit.h" */
 
 gboolean use_fontset = FALSE;
@@ -36,6 +36,8 @@ Preferences *settings = NULL;
 void 
 gedit_save_settings (void)
 {
+	gedit_debug_mess ("F:gedit_save_settings\n", DEBUG_PREFS);
+	
 	gnome_config_push_prefix ("/gedit/Global/");
 
 	gnome_config_set_int ("tab_pos", (gint) settings->tab_pos);
@@ -63,6 +65,12 @@ gedit_save_settings (void)
 				     &settings->width, &settings->height);
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
+
+
+	gnome_config_set_bool ("printwrap", settings->printwrap);
+	gnome_config_set_bool ("printheader", settings->printheader);
+	gnome_config_set_int  ("printlines", settings->printlines);
+
 	gnome_config_set_string ("font", settings->font);
 
 	if (!settings->run)
@@ -77,6 +85,8 @@ gedit_save_settings (void)
 void
 gedit_load_settings (void)
 {
+	gedit_debug_mess ("F:gedit_load_settings\n", DEBUG_PREFS);
+
 	if (!settings)
 	{
 		settings = g_malloc (sizeof (Preferences));
@@ -109,6 +119,10 @@ gedit_load_settings (void)
 	
 	settings->width = gnome_config_get_int ("width=600");
 	settings->height = gnome_config_get_int ("height=400");
+	 
+	settings->printwrap = gnome_config_get_bool ("printwrap");
+	settings->printheader = gnome_config_get_bool ("printheader");
+	settings->printlines = gnome_config_get_int ("printlines=0");
 	 
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)

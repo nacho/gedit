@@ -26,6 +26,37 @@
 #include "utils.h"
 
 
+int
+gtk_radio_group_get_selected (GSList *radio_group)
+{
+	GSList *l;
+	int i, c;
+
+	g_return_val_if_fail (radio_group != NULL, 0);
+
+	c = g_slist_length (radio_group);
+
+	for (i = 0, l = radio_group; l; l = l->next, i++){
+		GtkRadioButton *button = l->data;
+
+		if (GTK_TOGGLE_BUTTON (button)->active)
+			return c - i - 1;
+	}
+
+	return 0;
+}
+
+void
+gtk_radio_button_select (GSList *group, int n)
+{
+	GSList *l;
+	int len = g_slist_length (group);
+
+	l = g_slist_nth (group, len - n - 1);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (l->data), 1);
+}
+
+
 /**
  * gedit_set_title:
  * @docname : Document name in a string, the new title
@@ -97,9 +128,10 @@ gedit_flash_va (gchar *format, ...)
 void
 gedit_debug_mess (gchar *message, DebugSection type)
 {
-/* FIXME: I know how evil this hack is. Chema. */
-/* right now I am to tired to think of something better ..*/
-#if 1
+#if 0
+	g_print(message);
+	return; 
+	
 	switch (type)
 	{
 	case DEBUG_UNDO:
@@ -119,9 +151,18 @@ gedit_debug_mess (gchar *message, DebugSection type)
 	case DEBUG_FILE_DEEP:
 		break;
 	case DEBUG_SEARCH:
-		g_print(message);
 		break;
 	case DEBUG_SEARCH_DEEP:
+		break;
+	case DEBUG_PRINT:
+		break;
+	case DEBUG_PRINT_DEEP:
+		break;
+	case DEBUG_COMMANDS:
+		break;
+	case DEBUG_PREFS:
+		break;
+	case DEBUG_PREFS_DEEP:
 		break;
 	}
 #endif

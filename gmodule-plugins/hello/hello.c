@@ -32,8 +32,8 @@ static gint context;
 
 int main( int argc, char *argv[] )
 {
-  client_info info = empty_info;
-  
+  client_info info = empty_info; 
+  *() ) )( )( 
   /* Location of the plugin in the 'Plugin's' menu in gEdit */
   info.menu_location = "[Plugins]Hello";
   

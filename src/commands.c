@@ -37,6 +37,7 @@
 #include "search.h"
 #include "utils.h"
 
+#include "dialogs/dialogs.h"
 
 GtkWidget *col_label;
 gchar *oname = NULL;
@@ -125,7 +126,7 @@ filenames_dropped (GtkWidget        *widget,
 	GList *names, *tmp_list;
 	Document *doc;
 
-	gedit_debug_mess("commands.c : filenames_dropped", DEBUG_FILE);
+	gedit_debug_mess("F:filenames_dropped\n", DEBUG_FILE);
 	
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
@@ -152,6 +153,9 @@ window_new_cb (GtkWidget *widget, gpointer cbdata)
 void
 edit_cut_cb (GtkWidget *widget, gpointer data)
 {
+	if (!gedit_document_current())
+		return;
+	
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
 		VIEW (mdi->active_view)->text));
 
@@ -161,6 +165,9 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 void
 edit_copy_cb (GtkWidget *widget, gpointer data)
 {
+	if (!gedit_document_current())
+		return;
+		
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
@@ -170,6 +177,9 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 void
 edit_paste_cb (GtkWidget *widget, gpointer data)
 {
+	if (!gedit_document_current())
+		return;
+
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
@@ -179,6 +189,9 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 void
 edit_selall_cb (GtkWidget *widget, gpointer data)
 {
+	if (!gedit_document_current())
+		return;
+	
 	gtk_editable_select_region(GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
 				   gtk_text_get_length (GTK_TEXT(VIEW (mdi->active_view)->text)));
 
@@ -192,6 +205,9 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
 	View *view = VIEW (mdi->active_view);
 
+	if (!gedit_document_current())
+		return;
+
 	if (!view->split_parent)
 		return;
 
@@ -203,7 +219,10 @@ void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
 	View *view = VIEW (mdi->active_view);
-	
+
+	if (!gedit_document_current())
+		return;
+
 	gedit_view_set_read_only (view, !view->read_only);
 }
 
@@ -212,6 +231,9 @@ options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
 	View *view = VIEW (mdi->active_view);
 	
+	if (!gedit_document_current())
+		return;
+
 	gedit_view_set_word_wrap (view, !view->word_wrap);
 }
 
@@ -220,13 +242,45 @@ options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
 	View *view = VIEW (mdi->active_view);
 
+	if (!gedit_document_current())
+		return;
+
 	gedit_view_set_line_wrap (view, !view->line_wrap);
 }
 
 void
 options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 {
+	if (!gedit_document_current())
+		return;
+
 	gedit_window_set_status_bar (!settings->show_status);
 }
+
+void
+find_line_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug_mess ("F:find_line_cb\n", DEBUG_UNDO);
+
+	if (!gedit_document_current())
+		return;
+	dialog_find_line ();
+}
+
+void
+replace_cb (GtkWidget *widget, gpointer data)
+{
+	dialog_replace ();
+}
+
+void
+about_cb (GtkWidget *widget, gpointer data)
+{
+	dialog_about ();
+}
+
+
+
+
 
 

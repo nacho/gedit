@@ -67,10 +67,14 @@ static void
 insert_time (void)
 {
 	gint i;
-	View *view = VIEW (mdi->active_view);
+	View *view;
 	Document *doc = gedit_document_current();
 	static gchar *the_time;
-  	
+
+	if (!doc)
+	     return;
+
+  	view = VIEW (mdi->active_view);
   	the_time = get_time();
 
 	i = gedit_view_get_position (view);

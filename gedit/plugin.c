@@ -43,7 +43,7 @@ plugin_load (const gchar *file)
 	guint res;
 	
 	g_return_val_if_fail (file != NULL, NULL);
-	
+
 	if (!(pd = g_new0 (PluginData, 1)))
 	{
 		g_print ("plugin allocation error");
@@ -214,3 +214,15 @@ gedit_plugins_window_add (GnomeApp *app)
 		gnome_app_insert_menus (app, path, menu);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

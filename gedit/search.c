@@ -31,21 +31,8 @@
 #include "search.h"
 #include "utils.h"
 
-void add_search_options (GtkWidget *dialog);
-static void find_line_clicked_cb    (GtkWidget   *widget,
-				     gint         button,
-				     Document *doc);
-
-static void replace_dialog_button_cb (GtkWidget   *widget,
-                                      gint         button,
-                                      Document *doc);
-static gboolean search               (GtkEditable *text,
-                                      gchar       *str,
-                                      gint         pos,
-                                      gulong       options);
-
 /* 
- * find in files variable declarations  
+ * variable declarations  
  */
 GtkWidget *find_in_files_dialog;
 
@@ -58,30 +45,32 @@ typedef struct _gedit_clist_data
 } gedit_clist_data;
 
 /* 
- * find in files function declerations
+ * yfunction declerations
  */
+gint pos_to_line (Document *doc, gint pos, gint *numlines);
+gint line_to_pos (Document *doc, gint line, gint *numlines);
+gint get_line_count (Document *doc);
+void seek_to_line (Document *doc, gint line, gint numlines);
+gint gedit_search_search (Document *doc, gchar *str, gint pos, gulong options);
+void gedit_search_replace (Document *doc, gint pos, gint len, gchar *replace);
+void find_in_files_cb (GtkWidget *widget, gpointer data);
 static GtkWidget* create_find_in_files_dialog (void);
-static void show_search_result_window (void);
-void search_results_clist_insert (gchar *fname, 
-				  gchar *contents,
-				  gint 	 line, 
-				  gint 	 index);
-static void find_in_files_dialog_button_cb (GtkWidget *widget, 
-					    gint button, 
-					    gpointer data);
-static void search_for_text_in_files (gchar *text);
-static GtkWidget* create_find_in_files_dialog (void);
-
+static int get_start_index_of_line (View *view, gint pos);
 static gchar* get_line_as_text (View *view, gint pos);
 static int find_in_file_search (View *view, gchar *str);
 static void search_for_text_in_files (gchar *text);
-
-static void find_in_files_dialog_button_cb (GtkWidget *widget, 
-					    gint button, 
-					    gpointer data);
-
+static void find_in_files_dialog_button_cb (GtkWidget *widget, gint button, gpointer data);
 static void show_search_result_window (void);
-static void destroy_clist_data (gpointer data);
+void remove_search_result_cb (GtkWidget *widget, gpointer data);
+void search_results_clist_insert (gchar *fname, gchar *contents, gint line, gint index);
+void search_result_clist_cb (GtkWidget *list, gpointer func_data);
+void destroy_clist_data (gpointer data);
+void count_lines_cb (GtkWidget *widget, gpointer data);
+void add_search_options (GtkWidget *dialog);
+void get_search_options (Document *doc, GtkWidget *widget, gchar **txt, gulong *options, gint *pos);
+static gboolean search (GtkEditable *text, gchar *str, gint pos, gulong options);
+void search_select (Document *doc, gchar *str, gint pos, gulong options);
+gint num_widechars (const gchar *str);
 
 
 gint
@@ -91,7 +80,7 @@ pos_to_line (Document *doc, gint pos, gint *numlines)
 	gulong lines = 0, i, current_line = 0;
 	gchar *c;
 
-	gedit_debug_mess ("F:pos 2 line.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:pos_to_line.\n", DEBUG_SEARCH);
 
 	for (i = 0; i < gtk_text_get_length (GTK_TEXT(view->text)); i++) 
 	{
@@ -116,7 +105,7 @@ line_to_pos (Document *doc, gint line, gint *numlines)
 	gulong lines = 1, i, current = 0;
 	gchar *c;
 
-	gedit_debug_mess ("F:line 2 pos.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:line_to_pos.\n", DEBUG_SEARCH);
 
 	if (gtk_text_get_length (GTK_TEXT (view->text)) == 0) 
 		return 0;
@@ -143,7 +132,7 @@ get_line_count (Document *doc)
 	gulong lines = 1, i;
 	gchar *c;
 
-	gedit_debug_mess ("F:get line count.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:get_line_count.\n", DEBUG_SEARCH);
 	
 	if (gtk_text_get_length (GTK_TEXT(view->text)) == 0) 
 		return 0;
@@ -173,7 +162,7 @@ seek_to_line (Document *doc, gint line, gint numlines)
 	int linenum = line;
 	int numlines2 = 1;
 	
-	gedit_debug_mess ("F:seek to line.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:seek_to_line.\n", DEBUG_SEARCH);
 
 	len = gtk_text_get_length (GTK_TEXT (view->text));
 	buf = gtk_editable_get_chars (GTK_EDITABLE (view->text), 1, len);
@@ -223,8 +212,7 @@ gedit_search_search (Document *doc, gchar *str, gint pos, gulong options)
 	View *view = VIEW (mdi->active_view);
 	gint i, textlen;
 
-
-	gedit_debug_mess ("F:gedit search_search.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:gedit_search_search.\n", DEBUG_SEARCH);
 	
 	textlen = gtk_text_get_length(GTK_TEXT(view->text));
 	if (textlen < num_widechars (str)) 
@@ -301,7 +289,7 @@ create_find_in_files_dialog (void)
 	GtkWidget *frame;
 	GtkWidget *entry;
 	
-	gedit_debug_mess ("F:create find in files dialog.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:create_find_in_files_dialog.\n", DEBUG_SEARCH);
 
 	dialog = gnome_dialog_new (_("Find In Files"),
 				   _("Search"),
@@ -332,7 +320,7 @@ get_start_index_of_line (View *view, gint pos)
 {
 	gchar *buffer;
 
-	gedit_debug_mess ("F:get start index of line.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:get_start_index_of_line.\n", DEBUG_SEARCH);
 	
 	g_return_val_if_fail (view != NULL, -1);
 	
@@ -482,18 +470,12 @@ find_in_files_dialog_button_cb (GtkWidget *widget,
 	{
 		/* Search button */
 	case 0:
-		entry = gtk_object_get_data (GTK_OBJECT (widget), 
-					     "find_in_files_text");
+		entry = gtk_object_get_data (GTK_OBJECT (widget), "find_in_files_text");
 		entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
-	    
 		gtk_clist_clear (GTK_CLIST (search_result_clist));
-
 		search_for_text_in_files (entry_text);
-	    
 		show_search_result_window ();
-    
 		break;
-	  
 		/* Canel Button */
 	case 1:
 		gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
@@ -501,8 +483,7 @@ find_in_files_dialog_button_cb (GtkWidget *widget,
 					       NULL);
 		gnome_dialog_close (GNOME_DIALOG (find_in_files_dialog));
 		view = VIEW (mdi->active_view);
-		gtk_window_set_focus (GTK_WINDOW(mdi->active_window),
-				      view->text);
+		gtk_window_set_focus (GTK_WINDOW(mdi->active_window), view->text);
 		break;
 	}	  
 }
@@ -513,7 +494,7 @@ find_in_files_dialog_button_cb (GtkWidget *widget,
 static void
 show_search_result_window (void)
 {
-	gedit_debug_mess ("F:show search result window.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:show_search_result_window\n", DEBUG_SEARCH);
 	
 	if (!GTK_WIDGET_VISIBLE (search_result_window))
 		gtk_widget_show (search_result_window);
@@ -525,7 +506,7 @@ show_search_result_window (void)
 void 
 remove_search_result_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug_mess ("F:remove search result cb.\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:remove_search_result_cb.\n", DEBUG_SEARCH);
 
 	gtk_button_set_relief (GTK_BUTTON(widget), GTK_RELIEF_NONE);
 	gtk_widget_hide (search_result_window);
@@ -540,7 +521,7 @@ search_results_clist_insert (gchar *fname,
 	gchar 			*insert[3];
 	gedit_clist_data 	*data;
 
-	gedit_debug_mess ("F:search results clist insert\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:search_results_clist_insert\n", DEBUG_SEARCH);
 
 	data = g_malloc0 (sizeof (gedit_clist_data));
 	
@@ -571,7 +552,7 @@ search_result_clist_cb (GtkWidget *list, gpointer func_data)
 	gchar			*title;
 	gint row = -1, i;
 
-	gedit_debug_mess ("F:search results clist cb\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:search_results_clist_cb\n", DEBUG_SEARCH);
 	
 	sel = GTK_CLIST(list)->selection;
 	
@@ -605,7 +586,7 @@ search_result_clist_cb (GtkWidget *list, gpointer func_data)
 void 
 destroy_clist_data (gpointer data)
 {
-	gedit_debug_mess ("F:destroy clist data\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:destroy_clist_data\n", DEBUG_SEARCH);
 
 	g_free (data);
 }
@@ -624,7 +605,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	gchar *msg;
 	Document *doc;
 
-	gedit_debug_mess ("F:count lines cb\n", DEBUG_SEARCH);
+	gedit_debug_mess ("F:count_lines_cb\n", DEBUG_SEARCH);
 	
 	doc = gedit_document_current ();
 
@@ -652,7 +633,10 @@ add_search_options (GtkWidget *dialog)
 	GtkWidget *radio, *check;
 	GSList *radiolist;
 
-	gedit_debug_mess ("F:add search options\n", DEBUG_SEARCH); 
+	gedit_debug_mess ("F:add_search_options\n", DEBUG_SEARCH);
+
+	if (!gedit_document_current())
+		return;
 	
 	radio = gtk_radio_button_new_with_label (NULL,
 						 _("Search from cursor"));
@@ -700,7 +684,7 @@ get_search_options (Document *doc, GtkWidget *widget,
 	GSList *from;
 	View *view = VIEW (mdi->active_view);
 	
-	gedit_debug_mess ("F:get search options\n", DEBUG_SEARCH); 
+	gedit_debug_mess ("F:get_search_options\n", DEBUG_SEARCH); 
 
 	datalink = gtk_object_get_data (GTK_OBJECT (widget), "case");
 	if (GTK_TOGGLE_BUTTON (datalink)->active)

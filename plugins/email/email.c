@@ -38,7 +38,7 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
 	gchar *subject, *from, *to, *buffer, *command;
-	
+
 	if (button == 0)
 	{
 		to = gtk_entry_get_text (GTK_ENTRY (to_entry));
@@ -86,6 +86,9 @@ email (void)
 	gchar *username, *fullname, *hostname;
 	gchar *from;
 	gchar *filename_label;
+
+	if (!doc)
+	     return;
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "/email.glade", NULL);
 

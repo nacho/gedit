@@ -85,4 +85,8 @@ extern void close_doc_execute (Document *opt_doc, gpointer cbdata);
 
 void tab_pos (GtkPositionType pos);
 
+void find_line_cb (GtkWidget *widget, gpointer data);
+void replace_cb (GtkWidget *widget, gpointer data);
+void about_cb (GtkWidget *widget, gpointer data);
+
 #endif /* __COMMANDS_H__ */

@@ -77,7 +77,6 @@ gedit_file_open (Document *doc, gchar *fname)
 	struct stat stats;
 	FILE *fp;
 	Document *currentdoc;
-	/* FIXME: this variables never get used. See below ... Chema */
 	gint i;
 	View *nth_view;
 	
@@ -278,6 +277,8 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
+	if (!gedit_document_current())
+		return;
 
 	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
 		return;
@@ -385,6 +386,9 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 
 	doc = gedit_document_current();
+	if (!doc)
+		return;
+	
 	gtk_widget_hide (GTK_WIDGET (save_file_selector));
 	save_file_selector = NULL;
 	
@@ -454,6 +458,9 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	gchar * msg;
 	Document *doc = gedit_document_current ();
 
+	if (!doc)
+		return;
+	
 	msg = g_strdup_printf ("Are you sure you wish to revert all changes?\n(%s)",
 			       doc->filename);
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
