@@ -122,7 +122,7 @@ gedit_view_list_insert (View *view, gedit_data *data)
 	}	
 }
 
-#if 0 /* Disabled by chema to kill compile warning abuto not beeing used */
+#if 0 /* Disabled by chema to kill compile warning about not beeing used */
 static void
 view_list_erase (View *view, gedit_data *data)
 {
@@ -764,8 +764,10 @@ gedit_view_set_read_only (View *view, gint read_only)
 	else
 	{
 		if (view->document->filename)
+		{
 			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
 						  g_basename (view->document->filename));
+		}
 		else
 		{
 			gchar * doc_name = gedit_get_document_tab_name();

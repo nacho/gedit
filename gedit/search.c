@@ -65,12 +65,15 @@ typedef enum {
 	SEARCH_IN_PROGRESS_YES,
 	SEARCH_IN_PROGRESS_RELOAD,
 	SEARCH_IN_PROGRESS_REPLACE,
+	SEARCH_IN_PROGRESS_COUNT_LINES,
 } gedit_search_states;
 
 typedef struct _SearchInfo {
 	gint state;
+	gint original_readonly_state;
 	guchar * buffer;
 	gulong buffer_length;
+	View *view;
 } SearchInfo;
 
 SearchInfo gedit_search_info;
@@ -83,7 +86,11 @@ search_start (void)
 	gedit_debug("\n", DEBUG_SEARCH);
 	
 	text_buffer = GTK_TEXT ( VIEW (mdi->active_view)->text );
-	
+
+	gedit_search_info.view = VIEW (mdi->active_view);
+	gedit_search_info.original_readonly_state = gedit_search_info.view->read_only;
+	gedit_view_set_read_only (gedit_search_info.view, TRUE);
+
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
 		gedit_search_info.buffer_length = gtk_text_get_length (text_buffer);
@@ -95,6 +102,7 @@ search_start (void)
 		gedit_search_info.state = SEARCH_IN_PROGRESS_YES;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
+		g_warning("This should not happen, gedit called start_search and search in progress = YES \n");
 		/* Do nothing */
 		break;
 	case SEARCH_IN_PROGRESS_RELOAD:
@@ -102,6 +110,9 @@ search_start (void)
 		/* FIXME */
 		break;
 	case SEARCH_IN_PROGRESS_REPLACE:
+		/* Dunno what do I have to do ... */
+		break;
+	case SEARCH_IN_PROGRESS_COUNT_LINES:
 		/* Dunno what do I have to do ... */
 		break;
 	}
@@ -112,6 +123,9 @@ void
 search_end (void)
 {
 	gedit_debug("\n", DEBUG_SEARCH);
+
+	gedit_view_set_read_only (gedit_search_info.view,
+				  gedit_search_info.original_readonly_state);
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -128,6 +142,9 @@ search_end (void)
 		gedit_search_info.state = SEARCH_IN_PROGRESS_NO;
 		break;
 	case SEARCH_IN_PROGRESS_REPLACE:
+		/* Dunno what to do ... */
+		break;
+	case SEARCH_IN_PROGRESS_COUNT_LINES:
 		/* Dunno what to do ... */
 		break;
 	}
@@ -164,7 +181,13 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	Document *doc;
 
 	gedit_debug ("\n", DEBUG_SEARCH);
-	
+
+	if (gedit_search_info.state != SEARCH_IN_PROGRESS_NO)
+	{
+		gedit_flash_va (_("Can't count lines if another search operation is active, please close the search dialog."));
+		return;
+	}
+	    
 	doc = gedit_document_current ();
 
 	if (!doc)
@@ -273,6 +296,7 @@ search_text_execute ( gulong starting_position,
 		}
 	}
 		
+		
 
 	if (p2 == gedit_search_info.buffer_length)
 		return FALSE;
@@ -281,7 +305,10 @@ search_text_execute ( gulong starting_position,
 		*line_found = pos_to_line ( p2, total_lines);
 
 	*pos_found = p2 - text_length;
-	
+
+	if (VIEW (mdi->active_view) != gedit_search_info.view)
+		g_warning("View is not the same !!!!!!!!!!!!");
+
 	return TRUE;
 }
 

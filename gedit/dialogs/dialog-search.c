@@ -31,6 +31,8 @@
 
 GtkWidget *search_text_dialog;
 
+static void search_text_clicked_cb (GtkWidget *widget, gint button);
+
 static void
 search_text_destroyed_cb (GtkWidget *widget, gint button)
 {
@@ -43,38 +45,9 @@ search_text_destroyed_cb (GtkWidget *widget, gint button)
 static void
 search_text_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
-	/*
-	  GtkSpinButton *spinb;
-	gint line, lines = 0;
-	gulong pos;
-	*/
-	/*
-	View *view = VIEW (mdi->active_view);
-	*/
-	Document *doc = gedit_document_current();
-	/*
-	GtkText *text = GTK_TEXT (view->text);
-	*/
-
+	/* behave as if the user clicked Find/Find next button */
 	gedit_debug("\n", DEBUG_SEARCH);
-	g_return_if_fail (doc != NULL);
-
-	/*
-	spinb = GTK_SPIN_BUTTON (widget);
-
-	gtk_spin_button_update (GTK_SPIN_BUTTON (spinb));
-	line = (gint) gtk_spin_button_get_value_as_float (spinb);
-	pos = line_to_pos (doc, line, &lines);
-	update_text(text, lines, line);
-
-	gtk_text_set_point(text, pos);
-
-	gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
-	gtk_text_backward_delete (text, 1);
-	
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-	*/
-
+	search_text_clicked_cb (dialog, 0);
 }
 
 static void
@@ -147,7 +120,7 @@ search_text_clicked_cb (GtkWidget *widget, gint button)
 		}
 
 		gedit_flash_va (_("Text found at line :%i"),line_found);
-		
+
 		update_text (text, line_found, total_lines);
 		gtk_text_set_point (text, pos_found+1);
 		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
