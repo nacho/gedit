@@ -87,5 +87,9 @@ void		gedit_view_set_tab_size  	(GeditView* view, gint tab_size);
 
 void		gedit_view_show_line_numbers 	(GeditView* view, gboolean visible);
 
+void		gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status);
+void		gedit_view_set_overwrite_mode_statusbar  (GeditView *view, GtkWidget* status);
+
+
 #endif /* __GEDIT_VIEW_H__ */
 

@@ -2,12 +2,10 @@
 # Copyright (C) 1999-2000 Free Software Foundation, Inc.
 # Vasif Ismailoglu MD <azerb_linux@hotmail.com>,2000-2001 .
 # ---------------------------------------------------------------------
-#. Translator credits
-#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2001-12-12 11:48+0100\n"
+"POT-Creation-Date: 2002-01-11 16:58+0100\n"
 "PO-Revision-Date: 2001-12-19 19:26GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -20,68 +18,104 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Gnome Mətn Editoru"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, c-format
 msgid "Activate %s"
 msgstr "%s-i fəallaşdır"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
-msgid "The searched string has not been found."
+#: src/dialogs/gedit-dialog-goto-line.c:114
+msgid "Goto line..."
+msgstr ""
+
+#. Add Goto Line button
+#: src/dialogs/gedit-dialog-goto-line.c:124
+msgid "_Goto line"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-replace.c:165
+#, fuzzy
+msgid "Replace"
+msgstr "Ə_vəz Et"
+
+#: src/dialogs/gedit-dialog-replace.c:176
+#, fuzzy
+msgid "Replace _All"
+msgstr "Ə_vəz Et"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+msgid "_Replace"
+msgstr "Ə_vəz Et"
+
+#: src/dialogs/gedit-dialog-replace.c:269
+msgid "Find"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-replace.c:471
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#, fuzzy, c-format
+msgid "The string \"%s\" has not been found."
 msgstr "Axtarılan söz tapılmadı."
 
-#: src/gedit2.c:57
+#: src/dialogs/gedit-dialog-replace.c:704
+#, c-format
+msgid "Found and replaced %d occurences."
+msgstr ""
+
+#: src/gedit2.c:59
 msgid "Show mdi debugging messages."
 msgstr "MDİ xəta ayıqlaması ismarışlarını göstər."
 
-#: src/gedit2.c:60
+#: src/gedit2.c:62
 msgid "Show commands debugging messages."
 msgstr "Əmr xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:63
+#: src/gedit2.c:65
 msgid "Show document debugging messages."
 msgstr "Sənəd xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:66
+#: src/gedit2.c:68
 msgid "Show file debugging messages."
 msgstr "Fayl xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:69
+#: src/gedit2.c:71
 msgid "Show plugin debugging messages."
 msgstr "Əlavə xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:74
 msgid "Show prefs debugging messages."
 msgstr "Qurğular xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:77
 msgid "Show printing debugging messages."
 msgstr "Çap etmə xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:80
 msgid "Show search debugging messages."
 msgstr "Axtarma xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:83
 msgid "Show undo debugging messages."
 msgstr "Arxaya gediş xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:84
+#: src/gedit2.c:86
 msgid "Show view debugging messages."
 msgstr "Xəta ayıqlaması nümayişi ismarıclarını göstər ."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:89
 msgid "Show recent debugging messages."
 msgstr "Son xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:92
 msgid "Turn on all debugging messages."
 msgstr "Bütün xəta ayıqlaması ismarıclarını göstər ."
 
-#: src/gedit2.c:145
+#: src/gedit2.c:147
 msgid "The gnome text editor"
 msgstr "Gnome mətn editoru"
 
@@ -89,46 +123,47 @@ msgstr "Gnome mətn editoru"
 msgid "Not yet implemented."
 msgstr "Hələ dəstəklənmir."
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:409
 msgid "Impossible to update gedit settings."
 msgstr "Gedit qurğuları güncəllənməsi qeyri-mümkündür."
 
-#: src/gedit-commands.c:464
-msgid "A small and lightweight text editor for Gnome"
+#: src/gedit-commands.c:471
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "Gnome üçün kiçik və istifadəsi asand bir editordur"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 msgid "Untitled"
 msgstr "Adsız"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
+#: src/gedit-document.c:535 src/gedit-document.c:641
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Fayl oxunurkən hökmsüz UTF-8 veriləni görüldü"
 
-#: src/gedit-document.c:885
+#: src/gedit-document.c:951
 msgid "It is not possible to revert an Untitled document"
 msgstr "Adsız bir sənəddə çevriliş apara bilməzsiniz"
 
-#: src/gedit-file.c:227 src/gedit-file.c:238
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
 #, c-format
 msgid "Loaded file %s"
 msgstr "%s yükləndi"
 
-#: src/gedit-file.c:248
+#: src/gedit-file.c:256
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i Fayl yükləndi"
 
-#: src/gedit-file.c:324
+#: src/gedit-file.c:326 src/gedit-file.c:348
 msgid "Open File ..."
 msgstr "Faylyi Aç ...."
 
-#: src/gedit-file.c:367 src/gedit-file.c:413
+#: src/gedit-file.c:395 src/gedit-file.c:441
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -139,16 +174,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:483 src/gedit-file.c:682
+#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "'%s' faylı qeyd edilir..."
 
-#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
 msgid "Unknown error"
 msgstr "Namə'lum xəta"
 
-#: src/gedit-file.c:505 src/gedit-file.c:703
+#: src/gedit-file.c:530 src/gedit-file.c:730
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -159,38 +194,39 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:531 src/gedit-file.c:724
+#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
 msgid "The document has not been saved."
 msgstr "Sənəd qeyd edilmədi."
 
-#: src/gedit-file.c:541 src/gedit-file.c:731
+#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
 #, c-format
 msgid "File '%s' saved."
 msgstr "'%s' faylı qeyd edildi."
 
-#: src/gedit-file.c:608
+#: src/gedit-file.c:635
 msgid "Save As..."
 msgstr "Fərqli Qeyd Et... "
 
-#: src/gedit-file.c:659
+#: src/gedit-file.c:668
+#, fuzzy
+msgid "Save as ..."
+msgstr "Fərqli Qeyd Et... "
+
+#: src/gedit-file.c:800
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
-"Bu yerdə ``%s'' adlı sənəd onsuz da vardır. Bunu qeyd etdiyinizlə "
-"əvəz etmək istəyirsiniz?"
+"Bu yerdə ``%s'' adlı sənəd onsuz da vardır. Bunu qeyd etdiyinizlə əvəz etmək "
+"istəyirsiniz?"
 
-#: src/gedit-file.c:664
-msgid "_Replace"
-msgstr "Ə_vəz Et"
-
-#: src/gedit-file.c:834
+#: src/gedit-file.c:926
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "'%s' faylı çevrilir..."
 
-#: src/gedit-file.c:855
+#: src/gedit-file.c:947
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -201,16 +237,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:881
+#: src/gedit-file.c:973
 msgid "The document has not been reverted."
 msgstr "Sənəd çevrilmədi."
 
-#: src/gedit-file.c:891
+#: src/gedit-file.c:983
 #, c-format
 msgid "File '%s' reverted."
 msgstr "'%s' faylı çevrildi."
 
-#: src/gedit-file.c:1041
+#: src/gedit-file.c:1135
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -221,7 +257,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:482
+#: src/gedit-mdi.c:524
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -232,25 +268,35 @@ msgstr ""
 "\n"
 "Qeyd etməsəniz dəyişiklikləriniz itəcəkdir."
 
-#: src/gedit-mdi.c:487
-msgid "_Don't save"
+#: src/gedit-mdi.c:529
+#, fuzzy
+msgid "Do_n't save"
 msgstr "Qeyd Et_mə"
 
-#: src/gedit-mdi.c:567
+#: src/gedit-mdi.c:547
+#, fuzzy
+msgid "_Don't quit"
+msgstr "Qeyd Et_mə"
+
+#: src/gedit-mdi.c:551
+#, fuzzy
+msgid "_Don't close"
+msgstr "Qeyd Et_mə"
+
+#: src/gedit-mdi.c:633
 msgid "(modified)"
 msgstr "( dəyişdirildi )"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:639
 msgid "(readonly)"
 msgstr "( sırf-oxunan )"
 
-#: src/gedit-recent.c:269
+#: src/gedit-recent.c:252
 #, c-format
 msgid "Open file %s"
 msgstr "%s faylını aç"
 
-#: src/gedit-recent.c:337
+#: src/gedit-recent.c:320
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Axırıncı fayl açıla bilmǝdi: %s"
-

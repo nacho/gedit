@@ -203,7 +203,7 @@
 
 </submenu>
 
-<submenu name="Debug" _label="_Debug" hidden="1">
+<submenu name="Debug" _label="_Debug" hidden="0">
 
 	<menuitem name="BonoboUIDump" verb=""/>
 
@@ -242,8 +242,10 @@
 </dockitem>
 
 <status>
-	<item name="main"/>
-	<control name="Position"/>
+	<item name="main" resize_grip="1" />
+	<control name="dummy"/>
+	<control name="OverwriteMode"/>
+	<control name="CursorPosition"/>
 </status>
 
 </Root>

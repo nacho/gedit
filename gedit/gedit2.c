@@ -175,3 +175,44 @@ main (int argc, char **argv)
 	
 	return 0;
 }
+
+
+BonoboWindow*
+gedit_get_active_window ()
+{
+	g_return_val_if_fail (gedit_mdi != NULL, NULL);
+
+	return	bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
+}
+
+GeditDocument*
+gedit_get_active_document ()
+{
+	BonoboMDIChild *active_child;
+
+	g_return_val_if_fail (gedit_mdi != NULL, NULL);
+
+	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
+
+	if (active_child == NULL)
+		return NULL;
+
+	return GEDIT_MDI_CHILD (active_child)->document;
+}
+
+GeditView*
+gedit_get_active_view ()
+{
+	GtkWidget *active_view;
+
+	g_return_val_if_fail (gedit_mdi != NULL, NULL);
+
+	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
+	
+	if (active_view == NULL)
+		return NULL;
+
+	return GEDIT_VIEW (active_view);
+}
+
+

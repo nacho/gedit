@@ -3,12 +3,10 @@
 # Ruben Lopez Gomez <ryu@mundivia.es>, 1999.
 # Manuel A. Fernández Montecelo <manuel@sindominio.net>, 2001.
 #
-#. Translator credits
-#: src/gedit-commands.c:447
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-12-19 07:29-0500\n"
+"POT-Creation-Date: 2002-01-11 16:58+0100\n"
 "PO-Revision-Date: 2001-12-19 20:47+0100\n"
 "Last-Translator: Manuel A. Fernández Montecelo <manuel@sindominio.net>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -20,76 +18,104 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Editor de Texto de GNOME"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:458
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
 
-#: src/dialogs/gedit-dialog-replace.c:457
-#: src/dialogs/gedit-dialog-replace.c:526
-#: src/dialogs/gedit-dialog-replace.c:681 src/gedit-commands.c:335
+#: src/dialogs/gedit-dialog-goto-line.c:114
+msgid "Goto line..."
+msgstr ""
+
+#. Add Goto Line button
+#: src/dialogs/gedit-dialog-goto-line.c:124
+msgid "_Goto line"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-replace.c:165
+#, fuzzy
+msgid "Replace"
+msgstr "_Remprazar"
+
+#: src/dialogs/gedit-dialog-replace.c:176
+#, fuzzy
+msgid "Replace _All"
+msgstr "_Remprazar"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+msgid "_Replace"
+msgstr "_Remprazar"
+
+#: src/dialogs/gedit-dialog-replace.c:269
+msgid "Find"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-replace.c:471
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Non se atopou a cadea \"%s\"."
 
-#: src/dialogs/gedit-dialog-replace.c:690
+#: src/dialogs/gedit-dialog-replace.c:704
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Atopadas e remprazadas %d ocurrencias."
 
-#: src/gedit2.c:57
+#: src/gedit2.c:59
 msgid "Show mdi debugging messages."
 msgstr "Amosar mensaxes de depuración de MDI."
 
-#: src/gedit2.c:60
+#: src/gedit2.c:62
 msgid "Show commands debugging messages."
 msgstr "Amosar mensaxes de depuración de comandos."
 
-#: src/gedit2.c:63
+#: src/gedit2.c:65
 msgid "Show document debugging messages."
 msgstr "Amosar mensaxes de depuración de documentos."
 
-#: src/gedit2.c:66
+#: src/gedit2.c:68
 msgid "Show file debugging messages."
 msgstr "Amosar mensaxes de depuración de ficheiros."
 
-#: src/gedit2.c:69
+#: src/gedit2.c:71
 msgid "Show plugin debugging messages."
 msgstr "Amosar mensaxes de depuración de conectores (plugins)."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:74
 msgid "Show prefs debugging messages."
 msgstr "Amosar mensaxes de depuración de preferencias."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:77
 msgid "Show printing debugging messages."
 msgstr "Amosar mensaxes de depuración de impresión."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:80
 msgid "Show search debugging messages."
 msgstr "Amosar mensaxes de depuración de busca."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:83
 msgid "Show undo debugging messages."
 msgstr "Amosar mensaxes de depuración de desfacer."
 
-#: src/gedit2.c:84
+#: src/gedit2.c:86
 msgid "Show view debugging messages."
 msgstr "Amosar mensaxes de depuración de vista."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:89
 msgid "Show recent debugging messages."
 msgstr "Amosar mensaxes de depuración de recentes."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:92
 msgid "Turn on all debugging messages."
 msgstr "Activar todas as mensaxes de depuración."
 
-#: src/gedit2.c:145
+#: src/gedit2.c:147
 msgid "The gnome text editor"
 msgstr "O editor de texto de GNOME"
 
@@ -97,12 +123,13 @@ msgstr "O editor de texto de GNOME"
 msgid "Not yet implemented."
 msgstr "Aínda non implementado."
 
-#: src/gedit-commands.c:404
+#: src/gedit-commands.c:409
 msgid "Impossible to update gedit settings."
 msgstr "Non se pode actualizar a configuración de gedit."
 
-#: src/gedit-commands.c:461
-msgid "A small and lightweight text editor for Gnome"
+#: src/gedit-commands.c:471
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "Un pequeno e lixeiro editor de textos para GNOME"
 
 #: src/gedit-document.c:454 src/gedit-document.c:465
@@ -118,25 +145,25 @@ msgstr "Sen título"
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Atopáronse datos UTF-8 non válidos lendo o ficheiro"
 
-#: src/gedit-document.c:891
+#: src/gedit-document.c:951
 msgid "It is not possible to revert an Untitled document"
 msgstr "Non se pode recuperar un documento Sen Título"
 
-#: src/gedit-file.c:227 src/gedit-file.c:238
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
 #, c-format
 msgid "Loaded file %s"
 msgstr "Cargado o ficheiro %s"
 
-#: src/gedit-file.c:248
+#: src/gedit-file.c:256
 #, c-format
 msgid "Loaded %i files"
 msgstr "Cargados %i ficheiros"
 
-#: src/gedit-file.c:324
+#: src/gedit-file.c:326 src/gedit-file.c:348
 msgid "Open File ..."
 msgstr "Abrir ficheiro ..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:413
+#: src/gedit-file.c:395 src/gedit-file.c:441
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -147,16 +174,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:483 src/gedit-file.c:682
+#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Gardando ficheiro '%s' ..."
 
-#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: src/gedit-file.c:505 src/gedit-file.c:703
+#: src/gedit-file.c:530 src/gedit-file.c:730
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -167,36 +194,39 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:531 src/gedit-file.c:724
+#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
 msgid "The document has not been saved."
 msgstr "O documento non foi gardado."
 
-#: src/gedit-file.c:541 src/gedit-file.c:731
+#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
 #, c-format
 msgid "File '%s' saved."
 msgstr "Ficheiro '%s' gardado."
 
-#: src/gedit-file.c:608
+#: src/gedit-file.c:635
 msgid "Save As..."
 msgstr "Gardar Como..."
 
-#: src/gedit-file.c:659
+#: src/gedit-file.c:668
+#, fuzzy
+msgid "Save as ..."
+msgstr "Gardar Como..."
+
+#: src/gedit-file.c:800
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
-msgstr "Xa existe un ficheiro chamado \"%s\" neste lugar. ¿Queres remprazalo con este que estás gardando?"
+msgstr ""
+"Xa existe un ficheiro chamado \"%s\" neste lugar. ¿Queres remprazalo con "
+"este que estás gardando?"
 
-#: src/gedit-file.c:664
-msgid "_Replace"
-msgstr "_Remprazar"
-
-#: src/gedit-file.c:834
+#: src/gedit-file.c:926
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Recuperando ficheiro '%s' ..."
 
-#: src/gedit-file.c:855
+#: src/gedit-file.c:947
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -207,16 +237,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:881
+#: src/gedit-file.c:973
 msgid "The document has not been reverted."
 msgstr "O documento non foi recuperado."
 
-#: src/gedit-file.c:891
+#: src/gedit-file.c:983
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Ficheiro '%s' recuperado."
 
-#: src/gedit-file.c:1041
+#: src/gedit-file.c:1135
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -227,7 +257,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:482
+#: src/gedit-mdi.c:524
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -238,24 +268,35 @@ msgstr ""
 "\n"
 "Os cambios perderanse se non se gardan."
 
-#: src/gedit-mdi.c:487
-msgid "_Don't save"
+#: src/gedit-mdi.c:529
+#, fuzzy
+msgid "Do_n't save"
 msgstr "_Non gardar"
 
-#: src/gedit-mdi.c:567
+#: src/gedit-mdi.c:547
+#, fuzzy
+msgid "_Don't quit"
+msgstr "_Non gardar"
+
+#: src/gedit-mdi.c:551
+#, fuzzy
+msgid "_Don't close"
+msgstr "_Non gardar"
+
+#: src/gedit-mdi.c:633
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:639
 msgid "(readonly)"
 msgstr "(só lectura)"
 
-#: src/gedit-recent.c:269
+#: src/gedit-recent.c:252
 #, c-format
 msgid "Open file %s"
 msgstr "Abrir ficheiro %s"
 
-#: src/gedit-recent.c:337
+#: src/gedit-recent.c:320
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Non se puido abrir o ficheiro recente: %s"

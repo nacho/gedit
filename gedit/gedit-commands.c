@@ -340,6 +340,8 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 
 			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
+			gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+
 			gtk_dialog_run (GTK_DIALOG (message_dlg));
   			gtk_widget_destroy (message_dlg);
 		}
@@ -411,6 +413,8 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 					gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), 
 							GTK_RESPONSE_OK);
 
+					gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+
 					gtk_dialog_run (GTK_DIALOG (message_dlg));
   					gtk_widget_destroy (message_dlg);
 				}
@@ -441,6 +445,13 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	
 	gchar *authors[] = {
 		"", "", 
+		/*
+		"", "", "", "",
+		"James Willcox <jwillcox@cs.indiana.edu>",
+		"Jason Leach <jasonleach@usa.net>",
+		N_("Thanks to:"),
+		"",
+		*/
 		"Paolo Maggi <maggi@athena.polito.it>",
 		"Chema Celorio <chema@celorio.com>", 
 		NULL

@@ -30,6 +30,7 @@
 
 #include <glib.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "gedit-undo-manager.h"
 #include "gedit-debug.h"

@@ -154,7 +154,9 @@ dialog_goto_line_get_dialog (void)
 			   GTK_SIGNAL_FUNC (dialog_response_handler), dialog);
 
 	g_object_unref (gui);
-	
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+
 	return dialog;
 }
 

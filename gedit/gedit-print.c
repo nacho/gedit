@@ -548,6 +548,8 @@ gedit_print_error_dialog (GError *error)
 			
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
 	gtk_dialog_run (GTK_DIALOG (dialog));
 
 	gtk_widget_destroy (dialog);

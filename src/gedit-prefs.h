@@ -89,6 +89,8 @@ struct _GeditPreferences
 
 	/* User Interface/Statusbar */
 	gboolean	statusbar_visible;
+	gboolean	statusbar_view_cursor_position;
+	gboolean	statusbar_view_overwrite_mode;
 
 	/* User Interface/MDI Mode */
 	gint		mdi_mode;

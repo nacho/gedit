@@ -117,6 +117,8 @@ dialog_open_uri_get_dialog (void)
 
 	g_object_unref (gui);
 
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+
 	return dialog;
 }
 

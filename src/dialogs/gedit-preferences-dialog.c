@@ -85,6 +85,8 @@ struct _GeditPreferencesDialogPrivate
 	/* Statusbar page */
 	GtkWidget	*statusbar_show_radiobutton;
 	GtkWidget	*statusbar_hide_radiobutton;
+	GtkWidget	*statusbar_cursor_position_checkbutton;
+	GtkWidget	*statusbar_overwrite_mode_checkbutton;
 
 #ifdef DEBUG_MDI_PREFS	
 	/*MDI page */
@@ -297,6 +299,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
 	gtk_window_set_title (GTK_WINDOW (dlg), _("Preferences"));
+
+	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 }
 
 static void 
@@ -627,10 +631,16 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 
 	dlg->priv->statusbar_show_radiobutton = glade_xml_get_widget (gui, "statusbar_show_radiobutton");
 	dlg->priv->statusbar_hide_radiobutton = glade_xml_get_widget (gui, "statusbar_hide_radiobutton");
+	dlg->priv->statusbar_cursor_position_checkbutton = glade_xml_get_widget (gui, 
+								"statusbar_cursor_position_checkbutton");
+	dlg->priv->statusbar_overwrite_mode_checkbutton = glade_xml_get_widget (gui, 
+								"statusbar_overwrite_mode_checkbutton");
 
 	g_return_val_if_fail (dlg->priv->statusbar_show_radiobutton, FALSE);
 	g_return_val_if_fail (dlg->priv->statusbar_hide_radiobutton, FALSE);
-
+	g_return_val_if_fail (dlg->priv->statusbar_cursor_position_checkbutton, FALSE);
+	g_return_val_if_fail (dlg->priv->statusbar_overwrite_mode_checkbutton, FALSE);
+	
 	if (gedit_settings->statusbar_visible)
 		gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton), TRUE);
@@ -638,6 +648,13 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 		gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_hide_radiobutton), TRUE);
 
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
+				      dlg->priv->statusbar_cursor_position_checkbutton),	
+				      gedit_settings->statusbar_view_cursor_position);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
+				      dlg->priv->statusbar_overwrite_mode_checkbutton),
+				      gedit_settings->statusbar_view_overwrite_mode);
 	return TRUE;
 }
 
@@ -1063,6 +1080,14 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	else
 		gedit_settings->statusbar_visible = FALSE;
 
+	gedit_settings->statusbar_view_cursor_position = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
+					dlg->priv->statusbar_cursor_position_checkbutton));
+
+	gedit_settings->statusbar_view_overwrite_mode = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
+					dlg->priv->statusbar_overwrite_mode_checkbutton));
+		
 	/* Get data from undo page */
 	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton)))
 		gedit_settings->undo_levels = 0;

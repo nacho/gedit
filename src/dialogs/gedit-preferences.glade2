@@ -299,8 +299,8 @@
 
                 <child>
                   <widget class="GtkLabel" id="label91">
-                    <property name="label" translatable="yes">The statubar settings let you show or hide statusbar.</property>
-                    <property name="justify">GTK_JUSTIFY_CENTER</property>
+                    <property name="label" translatable="yes">The statubar settings let you show or hide statusbar and customize its appearance.</property>
+                    <property name="justify">GTK_JUSTIFY_LEFT</property>
                     <property name="wrap">yes</property>
                     <property name="xalign">7.45058e-09</property>
                     <property name="yalign">7.45058e-09</property>
@@ -370,6 +370,40 @@
                     <property name="fill">no</property>
                   </packing>
                 </child>
+
+                <child>
+                          <widget class="GtkCheckButton" id="statusbar_cursor_position_checkbutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">_View current cursor position</property>
+                            <property name="active">yes</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">yes</property>
+                            <property name="use_underline">yes</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
+                          </packing>
+                </child>
+
+                <child>
+                          <widget class="GtkCheckButton" id="statusbar_overwrite_mode_checkbutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">View current overwrite _mode</property>
+                            <property name="active">yes</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">yes</property>
+                            <property name="use_underline">yes</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
+                          </packing>
+                </child>
+
+
               </widget>
             </child>
 

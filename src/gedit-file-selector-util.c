@@ -117,6 +117,8 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
 
+	gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+
 	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 		
 	gtk_widget_destroy (msgbox);

@@ -405,6 +405,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			
 			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
+			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
 			gtk_dialog_run (GTK_DIALOG (dialog));
   			gtk_widget_destroy (dialog);
 			
@@ -450,6 +452,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 					errstr);
 			
 			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
 			gtk_dialog_run (GTK_DIALOG (dialog));
   			gtk_widget_destroy (dialog);
@@ -544,6 +548,8 @@ gedit_file_save (GeditMDIChild* child)
 				errstr);
 			
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
@@ -740,6 +746,8 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
 
@@ -807,6 +815,8 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
 
+		gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+
 		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 		
 		gtk_widget_destroy (msgbox);
@@ -861,11 +871,7 @@ gedit_file_exit (void)
 	   is connected to gedit_file_exit ( i.e. this function ). */
 	gtk_signal_disconnect_by_func (GTK_OBJECT (gedit_mdi),
 			    GTK_SIGNAL_FUNC (gedit_file_exit), NULL);
-
-	/*
-	gtk_object_destroy (GTK_OBJECT (gedit_mdi));
-	*/
-	
+		
 	gedit_prefs_save_settings ();
 
 	gedit_recent_history_save ();
@@ -961,7 +967,9 @@ gedit_file_revert (GeditMDIChild *child)
 					errstr);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-	
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
 		gtk_dialog_run (GTK_DIALOG (dialog));
   		gtk_widget_destroy (dialog);
 
@@ -1144,6 +1152,8 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 				errstr);
 
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);

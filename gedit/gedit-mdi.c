@@ -206,6 +206,9 @@ gedit_mdi_new (void)
 static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 {
+	GtkWidget *widget;
+	BonoboControl *control;
+	
 	static GtkTargetEntry drag_types[] =
 	{
 		{ "text/uri-list", 0, 0 },
@@ -226,7 +229,39 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	gtk_signal_connect (GTK_OBJECT (win), "drag_data_received",
 			    GTK_SIGNAL_FUNC (gedit_mdi_drag_data_received_handler), 
 			    NULL);
+	
+	/* Add cursor position status bar */
+	widget = gtk_statusbar_new ();
+	control = bonobo_control_new (widget);
+	
+	gtk_widget_set_size_request (widget, 150, 10);	
+	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
+	
+	bonobo_ui_component_object_set (bonobo_mdi_get_ui_component_from_window (win),
+		       			"/status/CursorPosition",
+					BONOBO_OBJREF (control),
+					NULL);
 
+	bonobo_object_unref (BONOBO_OBJECT (control));
+
+	g_object_set_data (G_OBJECT (win), "CursorPosition", widget);
+
+	/* Add overwrite mode status bar */
+	widget = gtk_statusbar_new ();
+	control = bonobo_control_new (widget);
+	
+	gtk_widget_set_size_request (widget, 80, 10);
+	
+	bonobo_ui_component_object_set (bonobo_mdi_get_ui_component_from_window (win),
+		       			"/status/OverwriteMode",
+					BONOBO_OBJREF (control),
+					NULL);
+
+	bonobo_object_unref (BONOBO_OBJECT (control));
+
+	g_object_set_data (G_OBJECT (win), "OverwriteMode", widget);
+
+	/* Set the statusbar style according to prefs */
 	gedit_mdi_set_app_statusbar_style (win);
 	
 	/* Set the toolbar style according to prefs */
@@ -241,35 +276,16 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* Add the recent files */
 	gedit_recent_init (win);
-#if 0 /* FIXME */
+
+	
+#if 0 
+	/* FIXME */
 
 	/* Add the plugins to the menus */
 	gedit_plugins_menu_add (app);
+	
 #endif
 
-#if 0 /* Here you can see how to add a control to the status bar */
-	{
-		guint id;
-		GtkWidget *widget = gtk_statusbar_new ();
-		BonoboControl *control = bonobo_control_new (widget);
-		
-		gtk_widget_set_size_request (widget, 150, 10);
-
-		id = gtk_statusbar_get_context_id (GTK_STATUSBAR (widget), "Prova");
-		gtk_statusbar_push (GTK_STATUSBAR (widget), id, " Line: 1 - Col: 2");
-		
-		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
-		
-		gtk_widget_show (widget);
-
-		bonobo_ui_component_object_set (bonobo_mdi_get_ui_component_from_window (win),
-			       			"/status/Position",
-						BONOBO_OBJREF (control),
-						NULL);
-
-		bonobo_object_unref (BONOBO_OBJECT (control));
-	}
-#endif 
 }
 
 static void 
@@ -411,6 +427,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 {
 	BonoboUIEngine *ui_engine;
 	BonoboUIError ret;
+	GtkWidget *cp, *om;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -422,6 +439,41 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
 				"hidden", gedit_settings->statusbar_visible ? "0" : "1");
 	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
+
+	cp = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "CursorPosition"));
+	g_return_if_fail (cp != NULL);
+
+	if (gedit_settings->statusbar_view_cursor_position)
+		gtk_widget_show (cp);
+	else
+		gtk_widget_hide (cp);
+
+	om = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "OverwriteMode"));
+	g_return_if_fail (om != NULL);
+
+	if (gedit_settings->statusbar_view_overwrite_mode)
+		gtk_widget_show (om);
+	else
+		gtk_widget_hide (om);
+
+	if (!gedit_settings->statusbar_view_overwrite_mode)
+		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (cp), TRUE);
+	else
+		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (cp), FALSE);
+
+	if (!gedit_settings->statusbar_view_cursor_position &&
+	    !gedit_settings->statusbar_view_overwrite_mode)
+	{
+		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
+				"resize_grip", "1");
+		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
+	}
+	else
+	{
+		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
+				"resize_grip", "0");
+		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);	
+	}	
 }
 
 static void 
@@ -557,6 +609,8 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
 
+		gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
+
 		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 		
 		gtk_widget_destroy (msgbox);
@@ -660,11 +714,32 @@ void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
 static 
 void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 {
+	BonoboWindow *win;
+	GtkWidget* status;
+	GeditView *active_view;
+	
 	gedit_debug (DEBUG_MDI, "");
 
 	gedit_mdi_set_active_window_verbs_sensitivity (mdi);
 
-	gtk_widget_grab_focus (bonobo_mdi_get_active_view (mdi));
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (mdi));
+	
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	
+	win = bonobo_mdi_get_active_window (mdi);
+	g_return_if_fail (win != NULL);
+
+	if (old_view != NULL)
+	{
+		gedit_view_set_cursor_position_statusbar (GEDIT_VIEW (old_view), NULL);
+		gedit_view_set_overwrite_mode_statusbar (GEDIT_VIEW (old_view), NULL);
+	}
+
+	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
+	gedit_view_set_cursor_position_statusbar (active_view, status);
+
+	status = g_object_get_data (G_OBJECT (win), "OverwriteMode");	
+	gedit_view_set_overwrite_mode_statusbar (active_view, status);
 }
 
 void 

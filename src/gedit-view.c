@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,10 +23,12 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
+
+#include <libgnome/gnome-i18n.h>
 
 #include "gedit-view.h"
 #include "gedit-debug.h"
@@ -42,6 +44,11 @@ struct _GeditViewPrivate
 	GeditDocument *document;
 
 	gboolean line_numbers_visible;
+
+	GtkWidget *cursor_position_statusbar;
+	GtkWidget *overwrite_mode_statusbar;
+
+	gboolean overwrite_mode;
 };
 
 
@@ -49,6 +56,14 @@ static void gedit_view_class_init 	(GeditViewClass	*klass);
 static void gedit_view_init 		(GeditView 	*view);
 static void gedit_view_finalize 	(GObject 	*object);
 
+static void gedit_view_update_cursor_position_statusbar 
+					(GtkTextBuffer *buffer, 
+					 GeditView* view);
+static void gedit_view_cursor_moved 	(GtkTextBuffer     *buffer,
+					 const GtkTextIter *new_location,
+					 GtkTextMark       *mark,
+					 gpointer           data);
+static void gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditView* view);
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -393,6 +408,14 @@ gedit_view_finalize (GObject *object)
 	g_object_unref (view->priv->document);
 	view->priv->document = NULL;
 
+	if (view->priv->cursor_position_statusbar != NULL)
+		gtk_statusbar_pop (GTK_STATUSBAR (
+				   view->priv->cursor_position_statusbar), 0); 
+
+	if (view->priv->overwrite_mode_statusbar != NULL)
+		gtk_statusbar_pop (GTK_STATUSBAR (
+				   view->priv->overwrite_mode_statusbar), 0); 
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	g_free (view->priv);
@@ -436,6 +459,21 @@ gedit_view_new (GeditDocument *doc)
 		gedit_view_show_line_numbers (view, TRUE);
 			
 	gtk_widget_show_all (GTK_WIDGET (view));
+
+	g_signal_connect (GTK_TEXT_BUFFER (doc),
+			  "changed",
+			  G_CALLBACK (gedit_view_update_cursor_position_statusbar),
+			  view);
+
+	g_signal_connect (GTK_TEXT_BUFFER (doc),
+			  "mark_set",/* cursor moved */
+			  G_CALLBACK (gedit_view_cursor_moved),
+			  view);
+
+	g_signal_connect (GTK_TEXT_VIEW (view->priv->text_view),
+			  "toggle_overwrite",/* cursor moved */
+			  G_CALLBACK (gedit_view_update_overwrite_mode_statusbar),
+			  view);
 	
 	gedit_debug (DEBUG_VIEW, "END");
 
@@ -691,3 +729,105 @@ gedit_view_show_line_numbers (GeditView* view, gboolean visible)
 		}
 }
 
+void
+gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+	g_return_if_fail ((status == NULL) || (GTK_IS_STATUSBAR (status)));
+	
+	view->priv->cursor_position_statusbar = status;
+
+	if ((status != NULL) && (view->priv->document != NULL))
+	{
+		gedit_view_update_cursor_position_statusbar
+			(GTK_TEXT_BUFFER (view->priv->document),		
+			 view);
+	}
+}
+
+void
+gedit_view_set_overwrite_mode_statusbar (GeditView *view, GtkWidget* status)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+	g_return_if_fail ((status == NULL) || (GTK_IS_STATUSBAR (status)));
+	
+	view->priv->overwrite_mode_statusbar = status;
+
+	view->priv->overwrite_mode = !GTK_TEXT_VIEW (view->priv->text_view)->overwrite_mode;
+
+	if (status != NULL)
+		gedit_view_update_overwrite_mode_statusbar (view->priv->text_view, view);
+}
+
+static void
+gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* view)
+{
+	gchar *msg;
+	gint row, col;
+	GtkTextIter iter;
+
+	gedit_debug (DEBUG_VIEW, "");
+  
+	if (view->priv->cursor_position_statusbar == NULL)
+		return;
+	
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (view->priv->cursor_position_statusbar), 0); 
+	
+	gtk_text_buffer_get_iter_at_mark (buffer,
+					  &iter,
+					  gtk_text_buffer_get_insert (buffer));
+	
+	row = gtk_text_iter_get_line (&iter);
+	col = gtk_text_iter_get_line_offset (&iter);
+	msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+
+	gtk_statusbar_push (GTK_STATUSBAR (view->priv->cursor_position_statusbar), 
+			    0, msg);
+
+      	g_free (msg);
+}
+
+static void
+gedit_view_cursor_moved (GtkTextBuffer     *buffer,
+			 const GtkTextIter *new_location,
+			 GtkTextMark       *mark,
+			 gpointer           data)
+{
+	GeditView* view;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	view = GEDIT_VIEW (data);
+	gedit_view_update_cursor_position_statusbar (buffer, view);
+}
+
+static void
+gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditView* view)
+{
+	gchar *msg;
+	
+	gedit_debug (DEBUG_VIEW, "");
+  
+	view->priv->overwrite_mode = !view->priv->overwrite_mode;
+	
+	if (view->priv->overwrite_mode_statusbar == NULL)
+		return;
+	
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (view->priv->overwrite_mode_statusbar), 0); 
+	
+	if (view->priv->overwrite_mode)
+		msg = g_strdup (_("  OVR"));
+	else
+		msg = g_strdup (_("  INS"));
+
+	gtk_statusbar_push (GTK_STATUSBAR (view->priv->overwrite_mode_statusbar), 
+			    0, msg);
+
+      	g_free (msg);
+}

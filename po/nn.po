@@ -2,12 +2,10 @@
 # Copyright (C) 2000 Gaute Hvoslef Kvalnes.
 # Gaute Hvoslef Kvalnes <ai98ghk@stud.hib.no>, 2000
 # Kjartan Maraas  <kmaraas@gnome.org>, 2001.
-#. Translator credits
-#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.0\n"
-"POT-Creation-Date: 2001-12-12 11:48+0100\n"
+"POT-Creation-Date: 2002-01-11 16:58+0100\n"
 "PO-Revision-Date: 2001-06-25 18:55+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian (Nynorsk)\n"
@@ -19,81 +17,119 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
 msgid "gedit"
 msgstr ""
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, fuzzy, c-format
 msgid "Activate %s"
 msgstr "Aktiver"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
+#: src/dialogs/gedit-dialog-goto-line.c:114
 #, fuzzy
-msgid "The searched string has not been found."
+msgid "Goto line..."
+msgstr "&Gå til linje ..."
+
+#. Add Goto Line button
+#: src/dialogs/gedit-dialog-goto-line.c:124
+#, fuzzy
+msgid "_Goto line"
+msgstr "Gå til linje"
+
+#: src/dialogs/gedit-dialog-replace.c:165
+#, fuzzy
+msgid "Replace"
+msgstr "Byt ut"
+
+#: src/dialogs/gedit-dialog-replace.c:176
+#, fuzzy
+msgid "Replace _All"
+msgstr "E&rstatt alle"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#, fuzzy
+msgid "_Replace"
+msgstr "Byt ut"
+
+#: src/dialogs/gedit-dialog-replace.c:269
+msgid "Find"
+msgstr "Finn"
+
+#: src/dialogs/gedit-dialog-replace.c:471
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#, fuzzy, c-format
+msgid "The string \"%s\" has not been found."
 msgstr "Fann ikkje søketekst."
 
-#: src/gedit2.c:57
+#: src/dialogs/gedit-dialog-replace.c:704
+#, fuzzy, c-format
+msgid "Found and replaced %d occurences."
+msgstr "Byt ut denne førekomsten?"
+
+#: src/gedit2.c:59
 #, fuzzy
 msgid "Show mdi debugging messages."
 msgstr "Signer melding"
 
-#: src/gedit2.c:60
+#: src/gedit2.c:62
 #, fuzzy
 msgid "Show commands debugging messages."
 msgstr "Sen&d ventande meldingar"
 
-#: src/gedit2.c:63
+#: src/gedit2.c:65
 #, fuzzy
 msgid "Show document debugging messages."
 msgstr "Signer melding"
 
-#: src/gedit2.c:66
+#: src/gedit2.c:68
 #, fuzzy
 msgid "Show file debugging messages."
 msgstr "Signer melding"
 
-#: src/gedit2.c:69
+#: src/gedit2.c:71
 #, fuzzy
 msgid "Show plugin debugging messages."
 msgstr "Sen&d ventande meldingar"
 
-#: src/gedit2.c:72
+#: src/gedit2.c:74
 #, fuzzy
 msgid "Show prefs debugging messages."
 msgstr "Sen&d ventande meldingar"
 
-#: src/gedit2.c:75
+#: src/gedit2.c:77
 #, fuzzy
 msgid "Show printing debugging messages."
 msgstr "Sen&d ventande meldingar"
 
-#: src/gedit2.c:78
+#: src/gedit2.c:80
 #, fuzzy
 msgid "Show search debugging messages."
 msgstr "Søk i &meldingar ..."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:83
 #, fuzzy
 msgid "Show undo debugging messages."
 msgstr "Sen&d ventande meldingar"
 
-#: src/gedit2.c:84
+#: src/gedit2.c:86
 #, fuzzy
 msgid "Show view debugging messages."
 msgstr "Signer melding"
 
-#: src/gedit2.c:87
+#: src/gedit2.c:89
 #, fuzzy
 msgid "Show recent debugging messages."
 msgstr "Lag ny adresse"
 
-#: src/gedit2.c:90
+#: src/gedit2.c:92
 #, fuzzy
 msgid "Turn on all debugging messages."
 msgstr "Signer melding"
 
-#: src/gedit2.c:145
+#: src/gedit2.c:147
 msgid "The gnome text editor"
 msgstr ""
 
@@ -101,49 +137,49 @@ msgstr ""
 msgid "Not yet implemented."
 msgstr ""
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:409
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:464
-msgid "A small and lightweight text editor for Gnome"
+#: src/gedit-commands.c:471
+msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 #, fuzzy, c-format
 msgid "%s %d"
 msgstr "%1 %2"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 msgid "Untitled"
 msgstr "Utan tittel"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
+#: src/gedit-document.c:535 src/gedit-document.c:641
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Feil ved opning av fil."
 
-#: src/gedit-document.c:885
+#: src/gedit-document.c:951
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "Kunne ikkje laga nytt dokument"
 
-#: src/gedit-file.c:227 src/gedit-file.c:238
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
 #, fuzzy, c-format
 msgid "Loaded file %s"
 msgstr "lastar fil"
 
-#: src/gedit-file.c:248
+#: src/gedit-file.c:256
 #, fuzzy, c-format
 msgid "Loaded %i files"
 msgstr "lastar fil"
 
-#: src/gedit-file.c:324
+#: src/gedit-file.c:326 src/gedit-file.c:348
 #, fuzzy
 msgid "Open File ..."
 msgstr "Opna fil ..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:413
+#: src/gedit-file.c:395 src/gedit-file.c:441
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -151,16 +187,16 @@ msgid ""
 "%s."
 msgstr "Feil ved opning av fil."
 
-#: src/gedit-file.c:483 src/gedit-file.c:682
+#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "Lagra &som ..."
 
-#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
 msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:505 src/gedit-file.c:703
+#: src/gedit-file.c:530 src/gedit-file.c:730
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -168,39 +204,39 @@ msgid ""
 "%s."
 msgstr "Ein feil oppsto ved lasting av brikkesett-fila\n"
 
-#: src/gedit-file.c:531 src/gedit-file.c:724
+#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "Opna dokument."
 
-#: src/gedit-file.c:541 src/gedit-file.c:731
+#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:608
+#: src/gedit-file.c:635
 #, fuzzy
 msgid "Save As..."
 msgstr "Lagra &som ..."
 
-#: src/gedit-file.c:659
+#: src/gedit-file.c:668
+#, fuzzy
+msgid "Save as ..."
+msgstr "Lagra &som ..."
+
+#: src/gedit-file.c:800
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:664
-#, fuzzy
-msgid "_Replace"
-msgstr "Byt ut"
-
-#: src/gedit-file.c:834
+#: src/gedit-file.c:926
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:855
+#: src/gedit-file.c:947
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -208,17 +244,17 @@ msgid ""
 "%s."
 msgstr "Feil ved opning av fil."
 
-#: src/gedit-file.c:881
+#: src/gedit-file.c:973
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "Opna dokument."
 
-#: src/gedit-file.c:891
+#: src/gedit-file.c:983
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1041
+#: src/gedit-file.c:1135
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -226,7 +262,7 @@ msgid ""
 "%s."
 msgstr "Feil ved opning av fil."
 
-#: src/gedit-mdi.c:482
+#: src/gedit-mdi.c:524
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -234,26 +270,34 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:487
-msgid "_Don't save"
+#: src/gedit-mdi.c:529
+msgid "Do_n't save"
 msgstr ""
 
-#: src/gedit-mdi.c:567
+#: src/gedit-mdi.c:547
+msgid "_Don't quit"
+msgstr ""
+
+#: src/gedit-mdi.c:551
+msgid "_Don't close"
+msgstr ""
+
+#: src/gedit-mdi.c:633
 #, fuzzy
 msgid "(modified)"
 msgstr "endra"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:639
 #, fuzzy
 msgid "(readonly)"
 msgstr "berre lesing"
 
-#: src/gedit-recent.c:269
+#: src/gedit-recent.c:252
 #, fuzzy, c-format
 msgid "Open file %s"
 msgstr "Opna ei fil"
 
-#: src/gedit-recent.c:337
+#: src/gedit-recent.c:320
 #, fuzzy, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Kan ikkje opna fila."
@@ -502,19 +546,9 @@ msgstr "Kan ikkje opna fila."
 #~ msgid "gedit: Preferences"
 #~ msgstr "Innstillingar for KMedia"
 
-#~ msgid "Find"
-#~ msgstr "Finn"
-
 #, fuzzy
 #~ msgid "Search string not found"
 #~ msgstr "Fann ikkje søketekst."
-
-#, fuzzy
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Byt ut denne førekomsten?"
-
-#~ msgid "Goto Line"
-#~ msgstr "Gå til linje"
 
 #, fuzzy
 #~ msgid "Line number:"
@@ -681,10 +715,6 @@ msgstr "Kan ikkje opna fila."
 #~ msgstr "Finn neste"
 
 #, fuzzy
-#~ msgid "Replace All"
-#~ msgstr "E&rstatt alle"
-
-#, fuzzy
 #~ msgid "Search from the _beginning of the document"
 #~ msgstr "Søker etter valt tekst i hjelpetekstane"
 
@@ -840,10 +870,6 @@ msgstr "Kan ikkje opna fila."
 #, fuzzy
 #~ msgid "Close All Open Files"
 #~ msgstr "Lukkar alle filer"
-
-#, fuzzy
-#~ msgid "Goto _Line..."
-#~ msgstr "&Gå til linje ..."
 
 #, fuzzy
 #~ msgid "Go to a specific line number"

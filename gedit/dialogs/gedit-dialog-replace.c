@@ -229,6 +229,8 @@ dialog_replace_get_dialog (void)
 			   GTK_SIGNAL_FUNC (dialog_replace_response_handler), dialog);
 
 	g_object_unref (G_OBJECT (gui));
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
 	
 	return dialog;
 }
@@ -317,6 +319,8 @@ dialog_find_get_dialog (void)
 			   GTK_SIGNAL_FUNC (dialog_find_response_handler), dialog);
 
 	g_object_unref (G_OBJECT (gui));
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
 	
 	return dialog;
 }
@@ -471,6 +475,8 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 				_("The string \"%s\" has not been found."), search_string);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
 	
 		gtk_dialog_run (GTK_DIALOG (message_dlg));
   		gtk_widget_destroy (message_dlg);
@@ -540,7 +546,9 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 				_("The string \"%s\" has not been found."), search_string);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
-	
+
+		gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+
 		gtk_dialog_run (GTK_DIALOG (message_dlg));
   		gtk_widget_destroy (message_dlg);
 
@@ -705,7 +713,9 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	}
 	
 	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
-	
+
+	gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+
 	gtk_dialog_run (GTK_DIALOG (message_dlg));
   	gtk_widget_destroy (message_dlg);
 }

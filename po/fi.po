@@ -4,12 +4,10 @@
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2001.
 #
 #
-#. Translator credits
-#: src/gedit-commands.c:450
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-12-12 11:48+0100\n"
+"POT-Creation-Date: 2002-01-11 16:58+0100\n"
 "PO-Revision-Date: 2001-10-17 14:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -22,70 +20,108 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Tekstieditori"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
 #, fuzzy, c-format
 msgid "Activate %s"
 msgstr "Käynnistä k_aikki"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
+#: src/dialogs/gedit-dialog-goto-line.c:114
 #, fuzzy
-msgid "The searched string has not been found."
+msgid "Goto line..."
+msgstr "Siirry _riville..."
+
+#. Add Goto Line button
+#: src/dialogs/gedit-dialog-goto-line.c:124
+#, fuzzy
+msgid "_Goto line"
+msgstr "Siirry riville"
+
+#: src/dialogs/gedit-dialog-replace.c:165
+#, fuzzy
+msgid "Replace"
+msgstr "Korvaa"
+
+#: src/dialogs/gedit-dialog-replace.c:176
+#, fuzzy
+msgid "Replace _All"
+msgstr "Korvaa kaikki"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#, fuzzy
+msgid "_Replace"
+msgstr "Korvaa"
+
+#: src/dialogs/gedit-dialog-replace.c:269
+msgid "Find"
+msgstr "Etsi"
+
+#: src/dialogs/gedit-dialog-replace.c:471
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#, fuzzy, c-format
+msgid "The string \"%s\" has not been found."
 msgstr "Merkkijonoa ei löytynyt."
 
-#: src/gedit2.c:57
+#: src/dialogs/gedit-dialog-replace.c:704
+#, fuzzy, c-format
+msgid "Found and replaced %d occurences."
+msgstr "Löydetty ja korvattu %i tapausta."
+
+#: src/gedit2.c:59
 #, fuzzy
 msgid "Show mdi debugging messages."
 msgstr "Näytä näkymien debug-tekstit."
 
-#: src/gedit2.c:60
+#: src/gedit2.c:62
 msgid "Show commands debugging messages."
 msgstr "Näytä komentojen debug-tekstit."
 
-#: src/gedit2.c:63
+#: src/gedit2.c:65
 msgid "Show document debugging messages."
 msgstr "Näytä asiakirjojen debug-tekstit."
 
-#: src/gedit2.c:66
+#: src/gedit2.c:68
 msgid "Show file debugging messages."
 msgstr "Näytä tiedostojen debug-tekstit."
 
-#: src/gedit2.c:69
+#: src/gedit2.c:71
 msgid "Show plugin debugging messages."
 msgstr "Näytä liitännäisten debug-tekstit."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:74
 msgid "Show prefs debugging messages."
 msgstr "Näytä asetusten debug-tekstit."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:77
 msgid "Show printing debugging messages."
 msgstr "Näytä tulostuksen debug-tekstit."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:80
 msgid "Show search debugging messages."
 msgstr "Näytä etsimisen debug-tekstit."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:83
 msgid "Show undo debugging messages."
 msgstr "Näytä kumoamisten debug-tekstit."
 
-#: src/gedit2.c:84
+#: src/gedit2.c:86
 msgid "Show view debugging messages."
 msgstr "Näytä näkymien debug-tekstit."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:89
 msgid "Show recent debugging messages."
 msgstr "Näytä pikavalintojen debug-tekstit."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:92
 msgid "Turn on all debugging messages."
 msgstr "Näytä kaikki debug-tekstit."
 
-#: src/gedit2.c:145
+#: src/gedit2.c:147
 #, fuzzy
 msgid "The gnome text editor"
 msgstr "Tekstieditori"
@@ -94,27 +130,27 @@ msgstr "Tekstieditori"
 msgid "Not yet implemented."
 msgstr ""
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:409
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:464
+#: src/gedit-commands.c:471
 #, fuzzy
-msgid "A small and lightweight text editor for Gnome"
+msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 "gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: http://gnome-fi."
 "sourceforge.net/"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:454 src/gedit-document.c:465
 msgid "Untitled"
 msgstr "Nimetön"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
+#: src/gedit-document.c:535 src/gedit-document.c:641
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
@@ -122,26 +158,26 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-document.c:885
+#: src/gedit-document.c:951
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "Et voi palauttaa Nimettömään asiakirjaan\n"
 
-#: src/gedit-file.c:227 src/gedit-file.c:238
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
 #, c-format
 msgid "Loaded file %s"
 msgstr "Ladattu tiedosto %s"
 
-#: src/gedit-file.c:248
+#: src/gedit-file.c:256
 #, c-format
 msgid "Loaded %i files"
 msgstr "Ladattu %i tiedostoa"
 
-#: src/gedit-file.c:324
+#: src/gedit-file.c:326 src/gedit-file.c:348
 msgid "Open File ..."
 msgstr "Avaa tiedosto ..."
 
-#: src/gedit-file.c:367 src/gedit-file.c:413
+#: src/gedit-file.c:395 src/gedit-file.c:441
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -152,16 +188,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:483 src/gedit-file.c:682
+#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "Tallenna nimellä..."
 
-#: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
+#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
 msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:505 src/gedit-file.c:703
+#: src/gedit-file.c:530 src/gedit-file.c:730
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -172,38 +208,38 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:531 src/gedit-file.c:724
+#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "Asiakirjaa ei tallennettu."
 
-#: src/gedit-file.c:541 src/gedit-file.c:731
+#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:608
+#: src/gedit-file.c:635
 msgid "Save As..."
 msgstr "Tallenna nimellä..."
 
-#: src/gedit-file.c:659
+#: src/gedit-file.c:668
+#, fuzzy
+msgid "Save as ..."
+msgstr "Tallenna nimellä..."
+
+#: src/gedit-file.c:800
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:664
-#, fuzzy
-msgid "_Replace"
-msgstr "Korvaa"
-
-#: src/gedit-file.c:834
+#: src/gedit-file.c:926
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:855
+#: src/gedit-file.c:947
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -214,17 +250,17 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:881
+#: src/gedit-file.c:973
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "Asiakirjaa ei tallennettu."
 
-#: src/gedit-file.c:891
+#: src/gedit-file.c:983
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1041
+#: src/gedit-file.c:1135
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -235,7 +271,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:482
+#: src/gedit-mdi.c:524
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -243,24 +279,32 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: src/gedit-mdi.c:487
-msgid "_Don't save"
+#: src/gedit-mdi.c:529
+msgid "Do_n't save"
 msgstr ""
 
-#: src/gedit-mdi.c:567
+#: src/gedit-mdi.c:547
+msgid "_Don't quit"
+msgstr ""
+
+#: src/gedit-mdi.c:551
+msgid "_Don't close"
+msgstr ""
+
+#: src/gedit-mdi.c:633
 msgid "(modified)"
 msgstr "(muutettu)"
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:639
 msgid "(readonly)"
 msgstr "(vain luku)"
 
-#: src/gedit-recent.c:269
+#: src/gedit-recent.c:252
 #, fuzzy, c-format
 msgid "Open file %s"
 msgstr "Avaa tiedosto"
 
-#: src/gedit-recent.c:337
+#: src/gedit-recent.c:320
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Virhe avattaessa pikavalintaa: %s"
@@ -613,22 +657,13 @@ msgstr "Virhe avattaessa pikavalintaa: %s"
 #~ msgid "gedit: Preferences"
 #~ msgstr "gedit: Asetukset"
 
-#~ msgid "Find"
-#~ msgstr "Etsi"
-
 #~ msgid "Search string not found"
 #~ msgstr "Merkkijonoa ei löytynyt"
-
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Löydetty ja korvattu %i tapausta."
 
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr ""
 #~ "\"Korvaa kaikki\"-operaatiolle  ei voitu varata tarvittavaa määrää "
 #~ "muistia."
-
-#~ msgid "Goto Line"
-#~ msgstr "Siirry riville"
 
 #~ msgid "Line number:"
 #~ msgstr "Rivinumero:"
@@ -797,9 +832,6 @@ msgstr "Virhe avattaessa pikavalintaa: %s"
 
 #~ msgid "Find Next"
 #~ msgstr "Etsi seuraava"
-
-#~ msgid "Replace All"
-#~ msgstr "Korvaa kaikki"
 
 #~ msgid "Search from the _beginning of the document"
 #~ msgstr "Etsi asiakirjan _alusta alkaen"
@@ -994,9 +1026,6 @@ msgstr "Virhe avattaessa pikavalintaa: %s"
 
 #~ msgid "Close All Open Files"
 #~ msgstr "Sulje kaikki avoimet tiedostot"
-
-#~ msgid "Goto _Line..."
-#~ msgstr "Siirry _riville..."
 
 #~ msgid "Go to a specific line number"
 #~ msgstr "Siirry tietylle rivinumerolle"

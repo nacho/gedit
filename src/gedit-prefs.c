@@ -75,6 +75,8 @@
 #define GEDIT_PREF_TOOLBAR_VIEW_TOOLTIPS "/toolbar-view-tooltips"
 
 #define GEDIT_PREF_STATUSBAR_VISIBLE	"/statusbar-visible"
+#define GEDIT_PREF_STATUSBAR_VIEW_CURSOR_POSITION "/statusbar-view-cursor-position"
+#define GEDIT_PREF_STATUSBAR_VIEW_OVERWRITE_MODE  "/statusbar-view-overwrite-mode"
 
 #define GEDIT_PREF_MDI_MODE		"/mdi-mode"
 #define GEDIT_PREF_TABS_POSITION	"/mdi-tabs-position"
@@ -256,6 +258,17 @@ gedit_prefs_save_settings (void)
 				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VISIBLE,
 				gedit_settings->statusbar_visible,
 				NULL);
+	
+	gconf_client_set_bool (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VIEW_CURSOR_POSITION,
+				gedit_settings->statusbar_view_cursor_position,
+				NULL);
+	
+	gconf_client_set_bool (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VIEW_OVERWRITE_MODE,
+				gedit_settings->statusbar_view_overwrite_mode,
+				NULL);
+
 	
 	gconf_client_set_int (gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_MDI_MODE,
@@ -500,6 +513,16 @@ gedit_prefs_load_settings (void)
 	gedit_settings->statusbar_visible = gconf_client_get_bool (
 				gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VISIBLE,
+				NULL);
+
+	gedit_settings->statusbar_view_cursor_position = gconf_client_get_bool (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VIEW_CURSOR_POSITION,
+				NULL);
+
+	gedit_settings->statusbar_view_overwrite_mode = gconf_client_get_bool (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_STATUSBAR_VIEW_OVERWRITE_MODE,
 				NULL);
 
 	/* User Inferface/MDI */
