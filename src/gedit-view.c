@@ -60,6 +60,8 @@ struct _GeditViewPrivate
 	gboolean overwrite_mode;
 
 	gint tab_size;
+
+	gint old_lines;
 };
 
 
@@ -371,7 +373,7 @@ gedit_view_line_numbers_expose (GtkWidget      *widget,
 						       &pos);
 
 		str = g_strdup_printf ("%d", g_array_index (numbers, gint, i) + 1);
-
+		
 		pango_layout_set_text (layout, str, -1);
 
 		gtk_paint_layout (widget->style,
@@ -516,6 +518,10 @@ gedit_view_finalize (GObject *object)
 	g_return_if_fail (view->priv != NULL);
 
 	g_return_if_fail (view->priv->document != NULL);
+
+	g_signal_handlers_disconnect_matched (G_OBJECT (view->priv->document),
+			(GSignalMatchType)G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+
 	g_object_unref (view->priv->document);
 	view->priv->document = NULL;
 
@@ -538,6 +544,22 @@ gedit_view_realize_cb (GtkWidget *widget, GeditView *view)
 	gedit_view_set_tab_size (view, 
 				 gedit_prefs_manager_get_tabs_size ());
 }
+
+static void
+gedit_view_doc_changed_handler (GtkTextBuffer *buffer, GeditView* view)
+{
+	gint lines;
+
+	lines = gtk_text_buffer_get_line_count (buffer);
+
+	if (view->priv->old_lines != lines)
+	{
+		view->priv->old_lines = lines;
+		gdk_window_invalidate_rect (gtk_text_view_get_window (view->priv->text_view,
+					GTK_TEXT_WINDOW_LEFT), NULL, FALSE);
+	}
+}
+
 
 /**
  * gedit_view_new:
@@ -591,6 +613,11 @@ gedit_view_new (GeditDocument *doc)
 	g_signal_connect (GTK_TEXT_BUFFER (doc), 
 			  "changed",
 			  G_CALLBACK (gedit_view_update_cursor_position_statusbar),
+			  view);
+
+	g_signal_connect (GTK_TEXT_BUFFER (doc), 
+			  "changed",
+			  G_CALLBACK (gedit_view_doc_changed_handler),
 			  view);
 
 	g_signal_connect (GTK_TEXT_BUFFER (doc),
