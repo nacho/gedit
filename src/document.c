@@ -351,8 +351,12 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 		switch (ret)
 		{
 		case 0:
+			/* FIXME : If the user selects YES
+			   treat as if he had selected CANCEL
+			   because we don't want him to loose his
+			   data */
 			file_save_cb (NULL);
-			/* FIXME: why is this NULL ?? chema */
+			return FALSE;
 		case 1:
 			return TRUE;
 		default:
