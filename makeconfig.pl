@@ -72,8 +72,7 @@ dnl Check for libzvt from gnome-libs/zvt
 dnl AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
-
-ALL_LINGUAS="cs da de es fr ga hu it ja ko nl no pt pt_BR ru sv uk wa zh_TW.Big5 pl gl tr zh_CN.GB2312"
+ALL_LINGUAS="cs da de el es fr ga gl hu it ja ko lt nl no pl pt pt_BR ru sv tr uk wa zh_TW.Big5 zh_CN.GB2312"
 AM_GNU_GETTEXT
 
 
