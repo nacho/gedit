@@ -5,21 +5,160 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-05-23 14:25+0200\n"
-"PO-Revision-Date: 2002-05-23 14:25+0200\n"
+"POT-Creation-Date: 2002-05-27 20:19+0200\n"
+"PO-Revision-Date: 2002-05-27 14:07+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: gedit.desktop.in.h:1
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
 msgstr "Rediger tekstfiler"
 
-#: gedit.desktop.in.h:2
+#: data/gedit.desktop.in.h:2
 msgid "Text Editor"
 msgstr "Tekstredigering"
+
+#: data/gedit.schemas.in.h:1
+msgid "Auto save interval in minutes"
+msgstr ""
+
+#: data/gedit.schemas.in.h:2
+msgid "Default FALSE booleans"
+msgstr ""
+
+#: data/gedit.schemas.in.h:3
+msgid "Default TRUE booleans"
+msgstr ""
+
+#: data/gedit.schemas.in.h:4
+msgid "Default background color"
+msgstr "Forvalgt bakgrunnsfarge"
+
+#: data/gedit.schemas.in.h:5
+msgid "Default font"
+msgstr "Forvalgt skrift"
+
+#: data/gedit.schemas.in.h:6
+msgid "Default font used by the editor"
+msgstr "Forvalgt skrift som brukes ved redigering"
+
+#: data/gedit.schemas.in.h:7
+msgid "Default selected text color"
+msgstr "Forvalgt farge på markert tekst"
+
+#: data/gedit.schemas.in.h:8
+msgid "Default selection color"
+msgstr "Forvalgt farge for utvalg"
+
+#: data/gedit.schemas.in.h:9
+msgid "Default text color"
+msgstr "Forvalgt tekstfarge"
+
+#: data/gedit.schemas.in.h:10
+msgid "Default window eight"
+msgstr "Forvalgt høyde på vindu"
+
+#: data/gedit.schemas.in.h:11
+msgid "Default window width"
+msgstr "Forvalgt bredde på vindu"
+
+#: data/gedit.schemas.in.h:12
+msgid "Extension of the backup files"
+msgstr "Filtype for sikkerhetskopier"
+
+#: data/gedit.schemas.in.h:13
+msgid "Extension of the backup files (it is added to the actual file name)"
+msgstr ""
+
+#: data/gedit.schemas.in.h:14
+msgid "Font used to print line numbers"
+msgstr "Skrift som brukes til å skrive linjenummer"
+
+#: data/gedit.schemas.in.h:15
+msgid "Font used to print page headers"
+msgstr "Skrift som brukes ved utskrift av topptekst"
+
+#: data/gedit.schemas.in.h:16
+msgid "Font used to print the body of a document"
+msgstr "Skrift som brukes til å skrive kroppen av dokumentet"
+
+#: data/gedit.schemas.in.h:17
+msgid "MDI Mode"
+msgstr "MDI-modus"
+
+#: data/gedit.schemas.in.h:18
+msgid "MDI Mode (0: Notebook, 1: Toplevel, 2: Modal)"
+msgstr ""
+
+#: data/gedit.schemas.in.h:19
+msgid "MDI tabs position"
+msgstr "Plassering av MDI-fane"
+
+#: data/gedit.schemas.in.h:20
+msgid "MDI tabs position (0: Left, 1: Right, 2: Top, 3: Bottom)"
+msgstr ""
+
+#: data/gedit.schemas.in.h:21
+msgid "Max number of files in the Recent Files menu"
+msgstr ""
+
+#: data/gedit.schemas.in.h:22
+msgid "Max number of recent file"
+msgstr ""
+
+#: data/gedit.schemas.in.h:23
+msgid "Print line numbers every x lines"
+msgstr "Skriv ut linjenummer for hver x linje"
+
+#: data/gedit.schemas.in.h:24
+msgid "Print line numbers every x lines (x == 0: no numbers)"
+msgstr "Skriv ut linjenummer hver x linje (x == 0: ingen tall)"
+
+#: data/gedit.schemas.in.h:25
+msgid "Save encoding"
+msgstr "Lagre koding"
+
+#: data/gedit.schemas.in.h:26
+msgid ""
+"Save encoding (0: Always use UTF-8, 1: Use current locale if possible, 2: "
+"Use current locale if the file already used it)"
+msgstr ""
+
+#: data/gedit.schemas.in.h:27
+msgid "Tab size"
+msgstr "Fanestørrelse"
+
+#: data/gedit.schemas.in.h:28
+msgid "Toolbar buttons style"
+msgstr "Knappestil for verktøylinje"
+
+#: data/gedit.schemas.in.h:29
+msgid ""
+"Toolbar buttons style (0: According to system preferences, 1: icons, 2: "
+"icons and text)"
+msgstr ""
+
+#: data/gedit.schemas.in.h:30
+msgid "Undo levels"
+msgstr "Angrenivå"
+
+#: data/gedit.schemas.in.h:31
+msgid "Undo levels (-1: no limits)"
+msgstr "Angrenivå (-1: ingen grense)"
+
+#: data/gedit.schemas.in.h:32 src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences.glade2.h:62
+msgid "Wrap mode"
+msgstr "Brytningsmodus"
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Wrap mode (0: no wrap, 1: wrap lines at word boundaries, 2: wrap lines at "
+"char boundaries)"
+msgstr ""
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -79,25 +218,26 @@ msgstr "Sett inn tegn"
 msgid "gedit: ASCII table"
 msgstr "gedit: ASCII-tabell"
 
-#: plugins/cvschangelog/cvschangelog.c:44
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:48
 msgid "Open CVS Chan_geLogs"
 msgstr "Åpne CVS-endrin_gslogg"
 
-#: plugins/cvschangelog/cvschangelog.c:47
+#: plugins/cvschangelog/cvschangelog.c:51
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Søker etter ChangeLog i aktivt dokument og åpner dem"
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/cvschangelog/cvschangelog.c:263
 msgid "CVS ChangeLog"
 msgstr "CVS endringslogg"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:264
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
 "Et tillegg som åpner endringslogger (ChangeLog) som finnes i CVS-"
 "loggmeldinger."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:266
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Opphavsrett © 2002 - James Willcox"
 
@@ -281,7 +421,7 @@ msgstr ""
 "Ordteller-tillegget analyserer aktivt dokument og bestemmer antall ord, "
 "linjer, tegn og tegn som ikke er tomme områder og viser resultatet."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
 #: plugins/shell_output/shell_output.c:436
 #: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
@@ -323,19 +463,19 @@ msgstr "Ord"
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Tillegg for dokumentinfo"
 
-#: plugins/sample/sample.c:41
+#: plugins/sample/sample.c:43
 msgid "Insert User _Name"
 msgstr "Sett inn bruker_navn"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
 msgstr "Set inn brukernavn i markørposisjonen"
 
-#: plugins/sample/sample.c:148
+#: plugins/sample/sample.c:160
 msgid "User name"
 msgstr "Brukernavn"
 
-#: plugins/sample/sample.c:149
+#: plugins/sample/sample.c:161
 msgid "Inserts the user name at the cursor position."
 msgstr "Setter inn brukernavn i markørposisjonen."
 
@@ -614,11 +754,6 @@ msgstr "Skrifter og farger"
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr "Faner"
-
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:62
-msgid "Wrap mode"
-msgstr "Brytningsmodus"
 
 #: src/dialogs/gedit-preferences-dialog.c:243
 #: src/dialogs/gedit-preferences.glade2.h:16
@@ -1282,7 +1417,7 @@ msgstr ""
 msgid "Do_n't replace"
 msgstr "I_kke erstatt"
 
-#: src/gedit-file-selector-util.c:480
+#: src/gedit-file-selector-util.c:484
 msgid "Select a filename to save"
 msgstr "Velg et filnavn for lagring"
 
@@ -1290,58 +1425,58 @@ msgstr "Velg et filnavn for lagring"
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/gedit-file.c:145 src/gedit-file.c:760
+#: src/gedit-file.c:148 src/gedit-file.c:763
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Lastet fil «%s»"
 
-#: src/gedit-file.c:276 src/gedit-file.c:398
+#: src/gedit-file.c:279 src/gedit-file.c:401
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Lagrer fil «%s»..."
 
-#: src/gedit-file.c:297 src/gedit-file.c:413
+#: src/gedit-file.c:300 src/gedit-file.c:416
 msgid "The document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/gedit-file.c:312 src/gedit-file.c:405
+#: src/gedit-file.c:315 src/gedit-file.c:408
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fil «%s» lagret."
 
-#: src/gedit-file.c:380
+#: src/gedit-file.c:383
 msgid "Save as ..."
 msgstr "Lagre som..."
 
-#: src/gedit-file.c:571
+#: src/gedit-file.c:574
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Forkaster endringer i fil «%s»..."
 
-#: src/gedit-file.c:584
+#: src/gedit-file.c:587
 msgid "The document has not been reverted."
 msgstr "Endringer i dokumentet ble ikke forkastet."
 
-#: src/gedit-file.c:594
+#: src/gedit-file.c:597
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Forkastet endringer i fil «%s»."
 
-#: src/gedit-file.c:641
+#: src/gedit-file.c:644
 #, c-format
 msgid "Loading %d file..."
 msgstr "Laster %d fil..."
 
-#: src/gedit-file.c:677
+#: src/gedit-file.c:680
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/gedit-file.c:818
+#: src/gedit-file.c:821
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
-#: src/gedit-mdi.c:737
+#: src/gedit-mdi.c:722
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1352,23 +1487,23 @@ msgstr ""
 "\n"
 "Endringene vil gå tapt hvis du ikke lagrer dem."
 
-#: src/gedit-mdi.c:742
+#: src/gedit-mdi.c:727
 msgid "Do_n't save"
 msgstr "I_kke lagre"
 
-#: src/gedit-mdi.c:761
+#: src/gedit-mdi.c:746
 msgid "_Don't quit"
 msgstr "_Ikke avslutt"
 
-#: src/gedit-mdi.c:765
+#: src/gedit-mdi.c:750
 msgid "_Don't close"
 msgstr "_Ikke lukk"
 
-#: src/gedit-mdi.c:852
+#: src/gedit-mdi.c:837
 msgid "(modified)"
 msgstr "(endret)"
 
-#: src/gedit-mdi.c:858
+#: src/gedit-mdi.c:843
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
@@ -2131,16 +2266,16 @@ msgstr ""
 msgid "It is not possible to revert an Untitled document."
 msgstr "Du kan ikke forkaste et dokument uten tittel."
 
-#: src/gedit-view.c:909
+#: src/gedit-view.c:896
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Kol. %d"
 
-#: src/gedit-view.c:947
+#: src/gedit-view.c:934
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:949
+#: src/gedit-view.c:936
 msgid "  INS"
 msgstr "  SET"
 
