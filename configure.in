@@ -50,6 +50,16 @@ ALL_LINGUAS="ca cs da de el es fr ga gl hu it ja ko lt nl no pl pt pt_BR ru sv t
 AM_GNOME_GETTEXT
 
 dnl ******************************
+dnl gtk+ checking
+dnl ******************************
+AM_PATH_GTK(1.2.7,,
+  AC_MSG_ERROR([
+*** GTK+ 1.2.7 or better is required. The latest version of GTK+
+*** is always available from ftp://ftp.gtk.org/.]),
+    )
+
+
+dnl ******************************
 dnl GnomePrint checking
 dnl ******************************
 AC_MSG_CHECKING(for GnomePrint libraries >= 0.18)
@@ -64,6 +74,7 @@ if gnome-config --libs print > /dev/null 2>&1; then
 else
     AC_MSG_ERROR(Did not find GnomePrint installed)
 fi
+
 
 dnl ******************************
 dnl LibGlade checking
@@ -82,26 +93,9 @@ fi
 
 
 dnl ******************************
-dnl gtk+ checking
-dnl ******************************
-AC_MSG_CHECKING(for GTK >= 1.2.7)
-if gtk-config --version > /dev/null 2>&1; then 
-    dnl We need the "%d" in order not to get e-notation on hpux.
-    vers=`gtk-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-    if test "$vers" -ge 1002007; then
-        AC_MSG_RESULT(found)
-    else
-        AC_MSG_ERROR(You need at least GTK+ 1.2.7 for this version of gedit)
-    fi
-else
-    AC_MSG_ERROR(Did not find GTK+ installed)
-fi
-
-
-dnl ******************************
 dnl gnome-libs checking
 dnl ******************************
-AC_MSG_CHECKING(for gnome-libs > 1.0.55)
+AC_MSG_CHECKING(for gnome-libs >= 1.0.55)
 if gnome-config --version > /dev/null 2>&1; then
    vers=`gnome-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
    if test "$vers" -ge 55; then
@@ -121,6 +115,11 @@ AC_SUBST(EXTRA_GNOME_CFLAGS)
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
+
+
+dnl ******************************
+dnl Makefiles
+dnl ******************************
 
 AC_OUTPUT([
 gedit.spec
