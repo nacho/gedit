@@ -414,7 +414,7 @@ gedit_recent_monitor_uri (GeditRecent *recent, const gchar *uri)
 		
 		/* this is a new uri, so we need to monitor it */
 		result = gnome_vfs_monitor_add (&handle,
-				       g_strdup (uri),
+				       uri,
 				       GNOME_VFS_MONITOR_FILE,
 				       gedit_recent_monitor_cb,
 				       recent);
@@ -581,6 +581,7 @@ gedit_recent_add (GeditRecent * recent, const gchar * uri)
 		gchar *tmp_uri;
 		tmp_uri = g_slist_nth_data (uri_lst, g_slist_length (uri_lst)-1);
 		uri_lst = g_slist_remove (uri_lst, tmp_uri);
+		g_free (tmp_uri);
 	}
 	
 	gconf_client_set_list (recent->gconf_client,
