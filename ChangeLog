@@ -3,6 +3,10 @@
 	* msgbox.c: Fixed sigsegv... something wrong with:
 	  gtk_adjustment_set_value(GTK_ADJUSTMENT(text->vadj), value);
 	  Does anyone actually use the MessageBox?!
+	
+	* Fixed so anyone using gtk+ >1.0.5 will pass the configure script
+	  (but it won't fully compile, someone has left all glib 1.1.x stuff in
+	  which is incompatible with 1.0.x!! ack...)
 
 1998-09-17  Alex Roberts  <bse@dial.pipex.com>
 
