@@ -660,6 +660,7 @@ gedit_view_init (View *view)
 	gtk_widget_show (view->vbox);*/
 
 	gtk_widget_grab_focus (view->text);
+
 }
 
 guint

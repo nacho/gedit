@@ -212,4 +212,5 @@ gedit_plugins_window_add (GnomeApp *app)
 		g_free (menu->label);
 		g_free (path);
 	}
+	g_free (menu);
 }

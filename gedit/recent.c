@@ -206,8 +206,9 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 		menu->accelerator_key = 0;
 
 		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-	
+
 		gnome_app_insert_menus (GNOME_APP(app), path, menu);
+		g_free (menu->label);
 
 	}
 	
