@@ -325,7 +325,6 @@ gedit_spell_checker_class_init (GeditSpellCheckerClass * klass)
 			  0); 
 }
 
-
 static void
 gedit_spell_checker_init (GeditSpellChecker *spell_checker)
 {
@@ -346,7 +345,6 @@ gedit_spell_checker_new	(void)
 	return spell;
 }
 
-
 static void 
 gedit_spell_checker_finalize (GObject *object)
 {
@@ -360,12 +358,13 @@ gedit_spell_checker_finalize (GObject *object)
 		delete_pspell_manager (spell_checker->manager);
 }
 
-static const GeditLanguage*
+static const GeditLanguage *
 get_language_from_abrev (const gchar *abrev)
 {
+	const GSList *langs;
+
 	g_return_val_if_fail (abrev != NULL, NULL);
 
-	const GSList *langs;
 	langs = gedit_spell_checker_get_available_languages ();
 
 	while (langs != NULL)
@@ -379,7 +378,6 @@ get_language_from_abrev (const gchar *abrev)
 	}
 
 	return NULL;
-	
 }
 
 gchar *

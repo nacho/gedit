@@ -276,12 +276,14 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 		else
 		{
 			const char * const *langs_pointer;
+			gchar *lang;
+			gint cur_lanking;
 			gint i;
 
 			langs_pointer = g_get_language_names ();
 
-			gchar* lang= (gchar*)xmlGetProp (cur, (const xmlChar*) "lang");
-			gint cur_lanking = 1;
+			lang = (gchar*) xmlGetProp (cur, (const xmlChar*) "lang");
+			cur_lanking = 1;
 
 			/* 
 			 * When found a new TagGroup, append the best 
