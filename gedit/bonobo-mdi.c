@@ -510,11 +510,16 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 		gchar *verb_name = NULL;
 		gchar *tip;
 		gchar *escaped_name;
+		gchar *safe_name;
 		gchar *child_name = bonobo_mdi_child_get_name (BONOBO_MDI_CHILD (child->data));
 
-		escaped_name = escape_underscores (child_name);
-		
-		tip =  g_strdup_printf (_("Activate %s"), child_name);
+		safe_name = g_markup_escape_text (child_name, strlen (child_name));
+		g_return_if_fail (safe_name != NULL);
+
+		escaped_name = escape_underscores (safe_name);
+		g_return_if_fail (escaped_name != NULL);
+
+		tip =  g_strdup_printf (_("Activate %s"), safe_name);
 		verb_name = g_strdup_printf ("Child_%p", child->data);
 		xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
 				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
@@ -523,6 +528,7 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 
 		g_free (tip);
 		g_free (child_name);
+		g_free (safe_name);
 		g_free (escaped_name);
 
 		bonobo_ui_component_set_translate (ui_component, mdi->priv->child_list_path, xml, NULL);
@@ -582,7 +588,7 @@ void
 child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 {
 	GList *win_node;
-	gchar *child_name, *escaped_name;
+	gchar *child_name, *escaped_name, *safe_name;
 	gchar* xml, *cmd, *verb_name, *tip;
 	int accel_num;
 	
@@ -594,10 +600,16 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 	win_node = mdi->priv->windows;
 
 	child_name = bonobo_mdi_child_get_name (child);
-	escaped_name = escape_underscores (child_name);
+
+	safe_name = g_markup_escape_text (child_name, strlen (child_name));
+	g_return_if_fail (safe_name != NULL);
+
+	escaped_name = escape_underscores (safe_name);
+	g_return_if_fail (escaped_name != NULL);
+
 	verb_name = g_strdup_printf ("Child_%p", child);
 	
-	tip = g_strdup_printf (_("Activate %s"), child_name);
+	tip = g_strdup_printf (_("Activate %s"), safe_name);
 	xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
 				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
 
@@ -631,6 +643,7 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 	g_free (xml);
 	g_free (cmd);
 	g_free (verb_name);
+	g_free (safe_name);
 }
 
 static gboolean 

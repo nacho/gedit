@@ -89,9 +89,14 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 	gint ret;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
-	
-	full_formatted_uri = eel_format_uri_for_display (file_name);
+	gchar *uri;
+
+	uri = eel_make_uri_from_shell_arg (file_name);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	full_formatted_uri = eel_format_uri_for_display (uri);
 	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
+	g_free (uri);
 	
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain

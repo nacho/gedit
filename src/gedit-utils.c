@@ -45,6 +45,7 @@
 #include "gedit2.h"
 #include "bonobo-mdi.h"
 #include "gedit-document.h"
+#include "gedit-debug.h"
 
 /* =================================================== */
 /* Flash */
@@ -215,15 +216,28 @@ gedit_utils_is_uri_read_only (const gchar* uri)
 
 	gint res;
 
+	g_return_val_if_fail (uri != NULL, TRUE);
+	
+	gedit_debug (DEBUG_FILE, "URI: %s", uri);
+
 	/* FIXME: all remote files are marked as readonly */
 	if (!gedit_utils_uri_has_file_scheme (uri))
 		return TRUE;
 			
 	canonical_uri = eel_make_uri_canonical (uri);
-	file_uri = gnome_vfs_unescape_string_for_display (canonical_uri);
+	g_return_val_if_fail (canonical_uri != NULL, TRUE);
 	
-	/* Note that: strlen ("file://") == 7 */	
-	res = access (file_uri + 7, W_OK);
+	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
+
+	file_uri = gnome_vfs_get_local_path_from_uri (canonical_uri);
+	if (file_uri == NULL)
+	{
+		gedit_debug (DEBUG_FILE, "FILE URI: NULL");
+
+		return TRUE;
+	}
+	
+	res = access (file_uri, W_OK);
 
 	g_free (canonical_uri);
 	g_free (file_uri);
@@ -1407,15 +1421,19 @@ gedit_utils_uri_exists (const gchar* text_uri)
 {
 	GnomeVFSURI *uri;
 	gboolean res;
-	
+		
 	g_return_val_if_fail (text_uri != NULL, FALSE);
 	
+	gedit_debug (DEBUG_FILE, "text_uri: %s", text_uri);
+
 	uri = gnome_vfs_uri_new (text_uri);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	res = gnome_vfs_uri_exists (uri);
 
 	gnome_vfs_uri_unref (uri);
+
+	gedit_debug (DEBUG_FILE, res ? "TRUE" : "FALSE");
 
 	return res;
 }
@@ -1483,25 +1501,30 @@ gedit_utils_convert_search_text (const gchar *text)
 gboolean
 gedit_utils_create_empty_file (const gchar *uri)
 {
-	gchar *temp_filename;
+	gchar *canonical_uri;
 	gchar *filename;
 	int fd;
 	
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
 	/* Get filename from uri */
-	temp_filename = eel_make_uri_canonical (uri);
-	
-	if ((temp_filename == NULL) || (strlen (temp_filename) <= 7))
-		filename = NULL;
-	else
-		filename = g_strdup (temp_filename + 7);
-
-	if (temp_filename != NULL)
-		g_free (temp_filename);
-	
-	if (!filename)
+	if (!gedit_utils_uri_has_file_scheme (uri))
 		return FALSE;
+			
+	canonical_uri = eel_make_uri_canonical (uri);
+	g_return_val_if_fail (canonical_uri != NULL, FALSE);
+	
+	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
+
+	filename = gnome_vfs_get_local_path_from_uri (canonical_uri);
+	g_free (canonical_uri);
+	
+	if (filename == NULL)
+	{
+		gedit_debug (DEBUG_FILE, "FILENAME: NULL");
+
+		return FALSE;
+	}
 	
 	fd = open (filename, O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 

@@ -34,6 +34,7 @@
 #include "gnome-recent-view-bonobo.h"
 #include "gnome-recent-util.h"
 #include "gnome-recent-marshal.h"
+#include <eel/eel-vfs-extensions.h>
 
 #define GNOME_RECENT_VERB_NAME "-uri-"
 
@@ -148,7 +149,8 @@ static void
 gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 {
 	BonoboUIComponent* ui_component;
-	unsigned int i;
+	guint i;
+	guint num;
 	gchar *label = NULL;
 	gchar *verb_name = NULL;
 	gchar *tip = NULL;
@@ -157,7 +159,6 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 	gchar *uri;
 	gchar *utf8_uri;
 	gchar *escaped_uri;
-	GError *error = NULL;
 	gchar *cmd;
 	gchar *appname;
 	GnomeRecentViewBonoboMenuData *md;
@@ -176,30 +177,45 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 	
 	bonobo_ui_component_freeze (ui_component, NULL);
 
+	num = 1;
+
 	for (i = 1; i <= g_slist_length (list); ++i)
 	{
+		gchar *temp;
+		gchar *uri_for_display;
+		gchar *escaped_uri_for_display;
 		
 		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
-		utf8_uri = g_filename_to_utf8 (uri, -1, NULL,
-					       NULL, &error);
-		if (error) {
-			g_warning ("Could not display: %s", error->message);
-			g_error_free (error);
+		temp = gnome_vfs_unescape_string_for_display (uri);		
+
+		utf8_uri = g_filename_to_utf8 (temp, -1, NULL, NULL, NULL);
+		g_free (temp);
+
+		if (utf8_uri == NULL) {
+			g_warning ("Could not display: %s", uri);
 			g_free (uri);
 			continue;
 		}
 
-		escaped_uri = g_markup_escape_text (utf8_uri, strlen (utf8_uri));
+		uri_for_display = eel_format_uri_for_display (g_slist_nth_data (list, i - 1));
+		g_return_if_fail (uri_for_display != NULL);
+
+		escaped_uri_for_display = g_markup_escape_text (uri_for_display, strlen (uri_for_display));
+		g_return_if_fail (escaped_uri_for_display != NULL);
+
+		g_free (uri_for_display);
 			
 		/* this is what gets passed to our private "activate" callback */
 		md = (GnomeRecentViewBonoboMenuData *)g_malloc (sizeof (GnomeRecentViewBonoboMenuData));
 		md->view = view;
 		md->uri = g_strdup (g_slist_nth_data (list, i-1));
 		
-		
+		escaped_uri = g_markup_escape_text (utf8_uri, strlen (utf8_uri));
+		g_return_if_fail (escaped_uri != NULL);
 		escaped_name = gnome_recent_util_escape_underlines (escaped_uri);
+		g_return_if_fail (escaped_name != NULL);
 
-		tip =  g_strdup_printf (_("Open %s"), escaped_uri);
+		tip =  g_strdup_printf (_("Open %s"), escaped_uri_for_display);
 
 		verb_name = g_strdup_printf ("%s%s%d", appname,GNOME_RECENT_VERB_NAME, i);
 		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
@@ -211,10 +227,10 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 		bonobo_ui_component_add_verb_full (ui_component, verb_name,
 						   closure); 
 	        
-		if (i < 10)
-			label = g_strdup_printf ("_%d. %s", i, escaped_name);
+		if (num < 10)
+			label = g_strdup_printf ("_%d. %s", num, escaped_name);
 		else
-			label = g_strdup_printf ("%d. %s", i, escaped_name);
+			label = g_strdup_printf ("%d. %s", num, escaped_name);
 			
 		
 		
@@ -252,7 +268,10 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 		g_free (uri);
 		g_free (utf8_uri);
 		g_free (escaped_uri);
+		g_free (escaped_uri_for_display);
 		g_free (cmd);
+
+		++num;
 	}
 
 

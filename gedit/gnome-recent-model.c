@@ -31,6 +31,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include "gnome-recent-model.h"
 #include "gnome-recent-view.h"
+#include <eel/eel-vfs-extensions.h>
 
 #define GNOME_RECENT_MODEL_BASE_KEY "/desktop/gnome/recent_files"
 #define GNOME_RECENT_MODEL_GLOBAL_LIMIT_KEY "global_limit"
@@ -95,6 +96,20 @@ enum {
 
 static GType model_signals[LAST_SIGNAL] = { 0 };
 static GObjectClass *parent_class = NULL;
+
+
+#if 0
+static void
+print_list (GSList *list)
+{
+	while (list) {
+		g_print ("%s, ", (char *)list->data);
+
+		list = list->next;
+	}
+	g_print ("\n\n");
+}
+#endif
 
 /**
  * gnome_recent_model_get_type:
@@ -375,7 +390,7 @@ gnome_recent_model_monitor_uri_list (GnomeRecentModel *recent,
 {
 	GSList *p;
 	const gchar *uri;
-
+	
 	p = list;
 	while (p != NULL) {
 		uri = (const gchar *)p->data;
@@ -413,17 +428,19 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 	GSList *uri_lst;
 	gchar *gconf_key;
 	gchar *utf8_uri;
-	GError *error = NULL;
+	gchar *canonical_uri;
 
 	g_return_val_if_fail (recent, FALSE);
 	g_return_val_if_fail (GNOME_IS_RECENT_MODEL (recent), FALSE);
 	g_return_val_if_fail (recent->gconf_client, FALSE);
 	g_return_val_if_fail (uri, FALSE);
 
-	utf8_uri = g_filename_to_utf8 (uri, -1, NULL, NULL, &error);
-	if (error) {
-		g_warning ("Couldn't add: %s", error->message);
-		g_error_free (error);
+	canonical_uri = eel_make_uri_canonical (uri);
+	g_return_val_if_fail (canonical_uri != NULL, FALSE);
+
+	utf8_uri = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
+	if (utf8_uri == NULL) {
+		g_warning ("Couldn't add %s to recent file list", uri);
 		return FALSE;
 	}
 	
@@ -464,6 +481,8 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 	g_free (gconf_key);
 	gnome_recent_model_g_slist_deep_free (uri_lst);
 
+	g_free (utf8_uri);
+
 	return TRUE;
 }
 
@@ -484,19 +503,30 @@ gnome_recent_model_delete (GnomeRecentModel * recent, const gchar * uri)
 	GSList *new_uri_lst;
 	gboolean ret = FALSE;
 	gchar *gconf_key;
+	gchar *utf8_uri;
+	gchar *canonical_uri;
 
 	g_return_val_if_fail (recent, FALSE);
 	g_return_val_if_fail (GNOME_IS_RECENT_MODEL (recent), FALSE);
 	g_return_val_if_fail (recent->gconf_client, FALSE);
 	g_return_val_if_fail (uri, FALSE);
 
+	canonical_uri = eel_make_uri_canonical (uri);
+	g_return_val_if_fail (canonical_uri != NULL, FALSE);
+
+	utf8_uri = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
+	if (utf8_uri == NULL) {
+		g_warning ("Couldn't remove %s from recent file list", uri);
+		return FALSE;
+	}
+	
 	gconf_key = gnome_recent_model_gconf_key (recent);
 	uri_lst = gconf_client_get_list (recent->gconf_client,
 				       gconf_key,
 				       GCONF_VALUE_STRING, NULL);
 
 	new_uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst,
-							   uri);
+							   utf8_uri);
 
 	/* if it wasn't deleted, no need to cause unneeded updates */
 	/*
@@ -523,9 +553,12 @@ gnome_recent_model_delete (GnomeRecentModel * recent, const gchar * uri)
 	g_free (gconf_key);
 	gnome_recent_model_g_slist_deep_free (new_uri_lst);
 
+	g_free (utf8_uri);
+
 	return ret;
 }
 
+#if 0
 static GSList *
 gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
 {
@@ -541,20 +574,24 @@ gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
 	while (tmp) {
 		uri = (gchar *)tmp->data;
 
-		unescaped_uri = gnome_vfs_unescape_string_for_display (uri);
-
-		ascii_uri = g_filename_from_utf8 (unescaped_uri, -1,
+		ascii_uri = g_filename_from_utf8 (uri, -1,
 						  NULL, NULL, &error);
-		g_free (unescaped_uri);
-		if (error) {
+
+		if (error) 
+		{
 			g_warning ("Couldn't convert: %s", error->message);
 			g_error_free (error);
 			error = NULL;
 
-		} else
-			newlist = g_slist_prepend (newlist, ascii_uri);
+		} 
+		else
+		{
+			unescaped_uri = gnome_vfs_unescape_string_for_display (ascii_uri);
+			newlist = g_slist_prepend (newlist, unescaped_uri);
+			g_free (unescaped_uri);
+			g_free (ascii_uri);
 
-		tmp = tmp->next;
+		}
 	}
 
 	newlist = g_slist_reverse (newlist);
@@ -563,36 +600,55 @@ gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
 
 	return newlist;
 }
-
+#endif
 
 /**
  * gnome_recent_model_get_list:
  * @recent: A GnomeRecentModel object.
  *
  * This returns a linked list of strings (URIs) currently held
- * by this object.
+ * by this object (in UTF8).
  *
  * Returns: A GSList *
  */
 GSList *
 gnome_recent_model_get_list (GnomeRecentModel * recent)
 {
-	GSList *uri_lst;
+	GSList *uri_utf8_lst;
+	GSList *uri_lst = NULL;
+	GSList *iter;
+	
 	gchar *gconf_key = gnome_recent_model_gconf_key (recent);
 
 	g_return_val_if_fail (recent, NULL);
 	g_return_val_if_fail (recent->gconf_client, NULL);
 	g_return_val_if_fail (GNOME_IS_RECENT_MODEL (recent), NULL);
 
-	uri_lst = gconf_client_get_list (recent->gconf_client,
+	uri_utf8_lst = gconf_client_get_list (recent->gconf_client,
 				       gconf_key,
 				       GCONF_VALUE_STRING, NULL);
 	g_free (gconf_key);
 
+	iter = uri_utf8_lst;
+	
+	while (iter != NULL)
+	{
+		gchar *uri;
+		const gchar *uri_utf8 = (const gchar*) iter->data;
+
+		uri = g_filename_from_utf8 (uri_utf8, -1, NULL, NULL, NULL);
+		if (uri != NULL)
+			uri_lst = g_slist_prepend (uri_lst, uri);
+			
+		iter = g_slist_next(iter);
+	}
+
+	uri_lst = g_slist_reverse (uri_lst);
 
 	/* FIXME:  This sucks. */
 	gnome_recent_model_monitor_uri_list (recent, uri_lst);
-	uri_lst = gnome_recent_model_unescape_list (recent, uri_lst);
+
+	gnome_recent_model_g_slist_deep_free (uri_utf8_lst);
 
 	return uri_lst;
 }
@@ -733,15 +789,18 @@ gnome_recent_model_gconf_to_list (GConfValue* value)
 
 	g_return_val_if_fail (value, NULL);
 
-	iter = gconf_value_get_list(value);
+	iter = gconf_value_get_list (value);
 
 	while (iter != NULL)
 	{
+		gchar *uri;
 		GConfValue* element = iter->data;
-		gchar *uri = g_strdup (gconf_value_get_string (element));
+		const gchar *uri_utf8 = gconf_value_get_string (element);
 
-		list = g_slist_prepend (list, uri);
-
+		uri = g_filename_from_utf8 (uri_utf8, -1, NULL, NULL, NULL);
+		if (uri != NULL)
+			list = g_slist_prepend (list, uri);
+			
 		iter = g_slist_next(iter);
 	}
 
@@ -779,19 +838,6 @@ gnome_recent_model_gconf_key (GnomeRecentModel * model)
 	return key;
 }
 
-/*
-static void
-print_list (GSList *list)
-{
-	while (list) {
-		g_print ("%s, ", (char *)list->data);
-
-		list = list->next;
-	}
-	g_print ("\n\n");
-}
-*/
-
 /* this is the gconf notification callback. */
 static void
 gnome_recent_model_notify_cb (GConfClient *client, guint cnxn_id,
@@ -809,7 +855,9 @@ gnome_recent_model_notify_cb (GConfClient *client, guint cnxn_id,
 
 	gnome_recent_model_monitor_uri_list (recent, list);
 
+	/*
 	list = gnome_recent_model_unescape_list (recent, list);
+	*/
 
 	g_signal_emit (G_OBJECT(recent), model_signals[CHANGED], 0, list);
 

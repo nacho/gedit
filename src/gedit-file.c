@@ -192,7 +192,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 {
 	GError *error = NULL;
 	gchar *uri;
-	gchar *uri_utf8;
+	
 	GnomeRecentModel *recent;
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
@@ -200,17 +200,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	uri = eel_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	gedit_debug (DEBUG_FILE, "Canonical uri: %s", uri);
-
-	uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
-	if (uri_utf8 == NULL)
-	{
-		g_free (uri);
-
-		return FALSE;
-	}
 	
-	gedit_debug (DEBUG_FILE, "URI: %s", uri);
-
 	if (active_child == NULL ||
 	    !gedit_document_is_untouched (active_child->document))	     
 	{
@@ -256,9 +246,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	}
 	
 	recent = gedit_recent_get_model ();
-	gnome_recent_model_add (recent, uri_utf8);
+	gnome_recent_model_add (recent, uri);
 
-	g_free (uri_utf8);
 	g_free (uri);
 
 	gedit_debug (DEBUG_FILE, "END: %s\n", file_name);
@@ -343,9 +332,7 @@ gedit_file_save (GeditMDIChild* child)
 	{
 		GnomeRecentModel *recent;
 		gchar *raw_uri;
-		gchar *canonical_uri;
-		gchar *canonical_uri_utf8;
-
+		
 		gedit_debug (DEBUG_FILE, "OK");
 
 		gedit_utils_flash_va (_("File '%s' saved."), uri);
@@ -355,20 +342,11 @@ gedit_file_save (GeditMDIChild* child)
 		raw_uri = gedit_document_get_raw_uri (doc);
 		g_return_val_if_fail (raw_uri != NULL, TRUE);
 		
-		canonical_uri = eel_make_uri_canonical (raw_uri);
-		g_return_val_if_fail (canonical_uri != NULL, TRUE);
-
-		/* canonical_uri is not valid utf8 */
-		canonical_uri_utf8 = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
-		g_return_val_if_fail (canonical_uri_utf8 != NULL, TRUE);
-
 		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, canonical_uri_utf8);
+		gnome_recent_model_add (recent, raw_uri);
 
 		g_free (raw_uri);
-		g_free (canonical_uri);
-		g_free (canonical_uri_utf8);
-
+		
 		return TRUE;
 	}
 }
@@ -381,7 +359,7 @@ gedit_file_save_as (GeditMDIChild *child)
 	GeditDocument *doc;
 	gchar *fname = NULL;
 	gchar *path = NULL;
-	gchar *uri = NULL;
+	gchar *raw_uri = NULL;
 	
 	gedit_debug (DEBUG_FILE, "");
 
@@ -390,21 +368,24 @@ gedit_file_save_as (GeditMDIChild *child)
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	uri = gedit_document_get_uri (doc);
-	g_return_val_if_fail (uri != NULL, FALSE);
+	raw_uri = gedit_document_get_raw_uri (doc);
 
 	if (gedit_document_is_untitled (doc))
 	{
 		path = (gedit_default_path != NULL) ? 
 			g_strdup (gedit_default_path) : NULL;
-		fname = g_strdup (uri);
+
+		/* FIXME: check the case in which "Untitled n" is a non-ascii string */
+		fname = gedit_document_get_uri (doc);		
 	}
 	else
 	{
-		fname = eel_uri_get_basename (uri);
+		g_return_val_if_fail (raw_uri != NULL, FALSE);
 
-		if (gedit_utils_uri_has_file_scheme (uri))
-			path = get_dirname_from_uri (uri);
+		fname = eel_uri_get_basename (raw_uri);
+
+		if (gedit_utils_uri_has_file_scheme (raw_uri))
+			path = get_dirname_from_uri (raw_uri);
 		else
 			path = (gedit_default_path != NULL) ? 
 				g_strdup (gedit_default_path) : NULL;
@@ -420,7 +401,7 @@ gedit_file_save_as (GeditMDIChild *child)
 			path,
 			fname);
 	
-	g_free (uri);
+	g_free (raw_uri);
 	g_free (fname);
 	
 	if (path != NULL)
@@ -428,14 +409,17 @@ gedit_file_save_as (GeditMDIChild *child)
 
 	if (file != NULL) 
 	{
+		gchar *uri;
 		gchar *file_utf8;
 
-		file_utf8 = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
+		uri = eel_make_uri_from_shell_arg (file);
+		g_return_val_if_fail (uri != NULL, FALSE);
 
+		file_utf8 = eel_format_uri_for_display (uri);
 		if (file_utf8 != NULL)
 			gedit_utils_flash_va (_("Saving file '%s' ..."), file_utf8);
 		
-		ret = gedit_file_save_as_real (file, child);
+		ret = gedit_file_save_as_real (uri, child);
 		
 		if (ret)
 		{			
@@ -451,10 +435,12 @@ gedit_file_save_as (GeditMDIChild *child)
 			gedit_utils_flash_va (_("The document has not been saved."));
 
 		gedit_debug (DEBUG_FILE, "File: %s", file);
+		g_free (uri);
 		g_free (file);
 
 		if (file_utf8 != NULL)
 			g_free (file_utf8);
+		
 	}
 
 	return ret;
@@ -484,7 +470,7 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	{
 		g_return_val_if_fail (error != NULL, FALSE);
 
-		gedit_utils_error_reporting_saving_file (uri, error,
+		gedit_utils_error_reporting_saving_file (file_name, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 
 		g_error_free (error);
@@ -496,12 +482,12 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
+#if 0
 		gchar *temp;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
-		/* uri is not valid utf8 */
-		
+		/* uri is not valid utf8 */	
 		temp = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 
 		if (temp != NULL)
@@ -514,7 +500,12 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 			g_free (temp);
 		}
 
-		
+#endif
+		GnomeRecentModel *recent;
+
+		recent = gedit_recent_get_model ();
+		gnome_recent_model_add (recent, uri);
+
 		g_free (uri);
 
 		return TRUE;
@@ -643,27 +634,6 @@ gedit_file_revert (GeditMDIChild *child)
 	}
 }
 
-static gchar *
-gedit_file_make_uri_from_shell_arg (const char *location)
-{
-	gchar* uri;
-	gchar* canonical_uri;
-	
-	gedit_debug (DEBUG_FILE, "LOCATION: %s", location);
-	
-	uri = eel_make_uri_from_shell_arg (location);
-
-	gedit_debug (DEBUG_FILE, "URI: %s", uri);
-
-	canonical_uri = gnome_vfs_unescape_string_for_display (uri);
-
-	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
-
-	g_free (uri);
-
-	return canonical_uri;
-}
-
 gboolean 
 gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 {
@@ -689,8 +659,8 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
         /* create a file for each document in the parameter list */
 	for ( ; uri_list; uri_list = g_list_next (uri_list))
 	{
-		full_path = gedit_file_make_uri_from_shell_arg (uri_list->data);
-		
+		full_path = eel_make_uri_from_shell_arg (uri_list->data);
+	
 		if (full_path != NULL) 
 		{
 			if (!gedit_utils_uri_has_file_scheme (full_path) || gedit_utils_uri_exists (full_path))
@@ -783,22 +753,19 @@ gedit_file_open_recent (GnomeRecentView *view, const gchar *uri, gpointer data)
 {
 	gboolean ret = FALSE;
 	GeditView* active_view;
-	gchar *temp;
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 
-	temp = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+	/* Note that gedit_file_open_single_uri takes a possibly mangled "uri", in UTF8 */
 
-	if (temp != NULL)
-	{
-		ret = gedit_file_open_single_uri (temp);
+	ret = gedit_file_open_single_uri (uri);
 	
-		if (ret) {
-			GnomeRecentModel *model;
+	if (!ret) 
+	{
+		GnomeRecentModel *model;
 
-			model = gedit_recent_get_model ();
-			gnome_recent_model_add (model, uri);
-		}
+		model = gedit_recent_get_model ();
+		gnome_recent_model_delete (model, uri);
 	}
 		
 	active_view = gedit_get_active_view ();
@@ -810,24 +777,9 @@ gedit_file_open_recent (GnomeRecentView *view, const gchar *uri, gpointer data)
 	return ret;
 }
 
-
-static gchar *
-gedit_file_make_canonical_uri_from_input (const char *location)
-{
-	gchar* uri;
-	gchar* canonical_uri;
-	
-	gedit_debug (DEBUG_FILE, "");
-	
-	uri = eel_make_uri_from_input (location);
-
-	canonical_uri = eel_make_uri_canonical (uri);
-
-	g_free (uri);
-
-	return canonical_uri;
-}
-
+/*
+ *  uri: a possibly mangled "uri", in UTF8
+ */
 gboolean 
 gedit_file_open_single_uri (const gchar* uri)
 {
@@ -838,7 +790,7 @@ gedit_file_open_single_uri (const gchar* uri)
 	
 	if (uri == NULL) return FALSE;
 	
-	full_path = gedit_file_make_canonical_uri_from_input (uri);
+	full_path = eel_make_uri_from_input (uri);
 
 	if (full_path != NULL) 
 	{
@@ -852,8 +804,8 @@ gedit_file_open_single_uri (const gchar* uri)
 		{
 			gchar *uri_utf8;
 
-			uri_utf8 = g_filename_to_utf8 (full_path, -1, NULL, NULL, NULL);
-
+			uri_utf8 = eel_format_uri_for_display (full_path);
+			
 			if (uri_utf8 != NULL)
 			{
 				gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);

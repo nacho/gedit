@@ -1115,6 +1115,9 @@ follow_symlinks (const gchar *filename, GError **error)
 	gchar *followed_filename;
 	gint link_count;
 
+	g_return_val_if_fail (filename != NULL, NULL);
+	
+	gedit_debug (DEBUG_DOCUMENT, "Filename: %s", filename); 
 	g_return_val_if_fail (strlen (filename) + 1 <= GEDIT_MAX_PATH_LEN, NULL);
 
 	followed_filename = g_strdup (filename);
@@ -1258,16 +1261,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	}
 
 	/* Get filename from uri */
-	temp_filename = eel_make_uri_canonical (uri);
-	
-	if ((temp_filename == NULL) || (strlen (temp_filename) <= 7))
-		filename = NULL;
-	else
-		filename = g_strdup (temp_filename + 7);
+	filename = gnome_vfs_get_local_path_from_uri (uri);
 
-	if (temp_filename != NULL)
-		g_free (temp_filename);
-	
 	if (!filename)
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 0,
