@@ -18,11 +18,16 @@ bin_PROGRAMS = gedit
 gedit_SOURCES = 	\
 	gedit.c		\
 	commands.c	\
+	commands.h	\
 	gE_document.c	\
+	gE_document.h   \
 	gE_about.c	\
+	gE_about.h      \
 	gE_files.c	\
+	gE_files.h      \
 	gE_prefs.c	\
 	gE_init.c	\
+	gE_init.h	\
 	toolbar.c	\
 	plugin.c        \
 	gE_plugin_api.c	\
