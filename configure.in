@@ -1,0 +1,40 @@
+AC_INIT(src/gedit.c)
+AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(gEdit, 0.4.5)
+
+AM_MAINTAINER_MODE
+AM_ACLOCAL_INCLUDE(macros)
+
+GNOME_INIT
+
+AC_ISC_POSIX
+AC_PROG_CC
+AC_STDC_HEADERS
+AC_ARG_PROGRAM
+AM_PROG_LIBTOOL
+
+GNOME_X_CHECKS
+
+ALL_LINGUAS="de es cs fr ga it ko no pt"
+AM_GNU_GETTEXT
+
+
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+
+AC_OUTPUT([
+Makefile
+intl/Makefile
+po/Makefile.in
+macros/Makefile
+src/Makefile
+plugins/Makefile
+plugins/diff/Makefile
+plugins/cvsdiff/Makefile
+plugins/email/Makefile
+plugins/encrypt/Makefile
+plugins/reverse/Makefile
+plugins/spell/Makefile
+plugins/prm/Makefile
+stamp.h],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
