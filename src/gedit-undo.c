@@ -26,7 +26,7 @@
 #include "gE_mdi.h"
 #include "gE_view.h"
 
-int debug_ = 0;
+int debug_ = FALSE;
 void views_insert (gedit_document *doc, gedit_undo *undo);
 void views_delete (gedit_document *doc, gedit_undo *undo);
 void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc);
@@ -37,17 +37,23 @@ void
 gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc)
 {
 	gedit_undo *undo;
+	gchar *text_item;
 
 	if(debug_)
 		g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
 
 	undo = g_new(gedit_undo, 1);
-	
-	undo->text = text;
+
+	text_item = g_malloc(strlen(text));
+	strcpy( text_item, text);
+	undo->text = text_item;
 	undo->start_pos = start_pos;
 	undo->end_pos = end_pos;
 	undo->action = action;
 	undo->status = doc->changed;
+
+	if(debug_)
+		g_print("the text is :%s\n", undo->text);
 
 	/* nuke the redo list, if its available */
 	if (doc->redo)
@@ -65,9 +71,12 @@ void
 gedit_undo_do (GtkWidget *w, gpointer data)
 {
 	gedit_document *doc = gedit_document_current();
-	gedit_undo *undo;
+	gedit_undo *undo, *redo;
 
-	g_return_if_fail(doc->undo!=NULL);
+	redo = g_new (gedit_undo, 1);
+	
+	if(doc->undo==NULL)
+		return;
 	
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */
@@ -99,6 +108,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	}
 	else if (undo->action == INSERT )
 	{
+		if(debug_)
+			g_print("undo do action INSERT ");
 		/* We're deleteing somthing that had been inserted */
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
 		{
@@ -139,8 +150,6 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	{
 		if(debug_)
 			g_print("INSERT buggy ....  ...\n");
-		if(debug_)
-			g_print("%s", redo->text);
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
 		{
@@ -154,6 +163,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		{
 			doc->buf = g_string_append (doc->buf, redo->text);
 		}
+		/* PRINT THE INFO BEFORE inserting */
 		views_insert (doc, redo);
 	}
 	else if ( redo->action == DELETE )
