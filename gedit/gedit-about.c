@@ -1,6 +1,7 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=4 sts=0 sw=4:
  *
- * gEdit About Box
+ * gEdit - About dialog
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,14 +21,13 @@
 #include <config.h>
 #include <gnome.h>
 
-/*
-#include <assert.h>
-#include <gtk/gtk.h>
-#include "main.h"
-*/
-
+/**
+ * gedit_about:
+ *
+ * Show the user the information about the program and its authors.
+ */
 void
-gedit_about_box (GtkWidget *widget, gpointer cbdata)
+gedit_about (GtkWidget *widget, gpointer cbdata)
 {
 	static GtkWidget *about;
 	

@@ -54,13 +54,12 @@ gedit_SOURCES = 	\
 	gE_mdi.h	\
 	gE_undo.c	\
 	gE_undo.h	\
-	gE_about.c	\
-	gE_about.h      \
 	gE_files.c	\
 	gE_files.h      \
 	gE_prefs.c	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
+	gedit-about.c gedit-about.h \
 	gedit-print.c	\
 	gedit-print.h	\
 	gE_prefs.h	\

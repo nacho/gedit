@@ -24,7 +24,7 @@
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
-#include "gE_about.h"
+#include "gedit-about.h"
 #include "gE_files.h"
 #include "gE_mdi.h"
 #include "gE_print.h"
@@ -229,7 +229,7 @@ GnomeUIInfo gedit_help_menu []= {
 
 	GNOMEUIINFO_HELP ("gedit"),
 
-	GNOMEUIINFO_MENU_ABOUT_ITEM (gedit_about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM (gedit_about, NULL),
 
 	GNOMEUIINFO_END
 };

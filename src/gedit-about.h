@@ -1,6 +1,7 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=4 sts=0 sw=4:
  *
- * gEdit
+ * gEdit - About dialog
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,9 +17,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_ABOUT_H__
-#define __GE_ABOUT_H__
 
-extern void gedit_about_box (GtkWidget *w, gpointer cbdata);
+#ifndef __GEDIT_ABOUT_H__
+#define __GEDIT_ABOUT_H__
 
-#endif /* __GE_ABOUT_H__ */
+extern void gedit_about (GtkWidget *w, gpointer cbdata);
+
+#endif /* __GEDIT_ABOUT_H__ */
