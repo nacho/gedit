@@ -4,6 +4,6 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Open as URI");
+gchar *s = N_("Open from URI");
 gchar *s = N_("Open");
 gchar *s = N_("Enter the location (URI) of the file you would like to open:");

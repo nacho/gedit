@@ -19,11 +19,11 @@
 
 #include <config.h>
 
-#include <glib.h>
-#include <gtk/gtkwidget.h>
+#include <gnome.h>
 #include <glade/glade.h>
 
 #include "dialogs/dialogs.h"
+#include "window.h"
 
 /**
  * dialog_about:
@@ -44,7 +44,9 @@ gedit_dialog_about (void)
 
 	about = glade_xml_get_widget (gui, "about");
 
+	gnome_dialog_set_parent      (GNOME_DIALOG (about), gedit_window_active());
+
 	gtk_widget_show (about);
-	
+
 	gtk_object_unref (GTK_OBJECT (gui));
 }
