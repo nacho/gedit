@@ -169,7 +169,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		
 		gnome_dialog_close (GNOME_DIALOG (widget));
 			
-		msg = g_strdup_printf (_("found and replaced %i ocurrences."),
+		msg = g_strdup_printf (_("found and replaced %i occurrences."),
 				       replacements);
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,
