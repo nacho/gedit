@@ -1,3 +1,15 @@
+2000-04-29  Jason Leach  <leach@wam.umd.edu>
+
+	* all files: renamed gedit_debug_mess -> gedit_debug
+	
+	* gedit.c (options): new command-line option --debug to turn on
+	debug messages in gedit, default to disable.
+
+	* utils.h (gedit_debug): new debug stdout thingy.
+
+	* utils.c (gedit_debug_mess): #if'd out this, it's getting
+	replaced with a #define'd gedit_debug in utils.h
+
 2000-04-29  Chema Celorio  <chema@celorio.com>
 
 	* print.c: typo.

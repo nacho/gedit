@@ -30,14 +30,19 @@
 #include "menus.h"
 #include "plugin.h"
 #include "recent.h"
-
+#include "utils.h"
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
 #endif
 
+gint debug = 0;
+
 static const struct poptOption options[] =
 {
+	{ "debug", '\0', 0, &debug, 0,
+	  N_("Turn on debugging messages."), NULL },
+
 	{NULL, '\0', 0, NULL, 0}
 };
 
@@ -134,7 +139,7 @@ main (int argc, char **argv)
 
 	if (file_list)
 	{
-		g_return_val_if_fail( mdi->active_child != NULL, -1);
+		g_return_val_if_fail (mdi->active_child != NULL, -1);
 
 		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 		for (;file_list; file_list = file_list->next)

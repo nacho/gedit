@@ -115,7 +115,6 @@ auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata)
 	gedit_window_set_auto_indent (!settings->auto_indent);
 }
 
-
 void
 filenames_dropped (GtkWidget        *widget,
                    GdkDragContext   *context,
@@ -128,7 +127,7 @@ filenames_dropped (GtkWidget        *widget,
 	GList *names, *tmp_list;
 	Document *doc;
 
-	gedit_debug_mess("F:filenames_dropped\n", DEBUG_FILE);
+	gedit_debug("F:filenames_dropped\n", DEBUG_FILE);
 	
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
@@ -246,7 +245,7 @@ options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 void
 find_line_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug_mess ("F:find_line_cb\n", DEBUG_UNDO);
+	gedit_debug ("F:find_line_cb\n", DEBUG_UNDO);
 
 	if (!gedit_document_current())
 		return;

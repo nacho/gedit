@@ -41,7 +41,7 @@ Preferences *settings = NULL;
 void 
 gedit_save_settings (void)
 {
-	gedit_debug_mess ("F:gedit_save_settings\n", DEBUG_PREFS);
+	gedit_debug ("F:gedit_save_settings\n", DEBUG_PREFS);
 	
 	gnome_config_push_prefix ("/gedit/Global/");
 
@@ -112,7 +112,7 @@ prefs_determine_use_fontset (void)
 void
 gedit_load_settings (void)
 {
-	gedit_debug_mess ("F:gedit_load_settings\n", DEBUG_PREFS);
+	gedit_debug ("F:gedit_load_settings\n", DEBUG_PREFS);
 
 	if (!settings)
 	{

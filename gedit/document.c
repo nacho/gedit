@@ -87,7 +87,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 
 	new_view = VIEW (gedit_view_new (DOCUMENT (child)));
 
-	gedit_debug_mess ("f:gedit_document_create_view\n", DEBUG_FILE);
+	gedit_debug ("f:gedit_document_create_view\n", DEBUG_FILE);
 	
 	gedit_view_set_font (new_view, settings->font);
 /*	gedit_view_set_read_only (new_view, DOCUMENT (child)->readonly); */
@@ -100,7 +100,7 @@ gedit_document_destroy (GtkObject *obj)
 {
 	Document *doc = DOCUMENT (obj);
 
-	gedit_debug_mess ("f:gedit_document_destroy\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_destroy\n", DEBUG_DOCUMENT);
 	
 	g_free (doc->filename);
 	g_string_free (doc->buf, TRUE);
@@ -121,7 +121,7 @@ gedit_document_class_init (DocumentClass *class)
 	object_class = (GtkObjectClass*)class;
 	child_class = GNOME_MDI_CHILD_CLASS (class);
 
-	gedit_debug_mess ("f:gedit_document_class_init\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_class_init\n", DEBUG_DOCUMENT);
 	
 	/* blarg.. signals stuff.. doc_changed? FIXME 
 	
@@ -142,7 +142,7 @@ void
 gedit_document_init (Document *doc)
 {
 	/* FIXME: This prolly needs work.. */
-	gedit_debug_mess ("f:gedit_document_init\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_init\n", DEBUG_DOCUMENT);
 
 	doc->filename = NULL;
 	doc->changed = FALSE;
@@ -159,7 +159,7 @@ gedit_get_document_tab_name (void)
 	int i;
 	const char *UNTITLED = N_("Untitled");
 
-	gedit_debug_mess ("f:gedit_document_tab_name\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_tab_name\n", DEBUG_DOCUMENT);
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
@@ -182,7 +182,7 @@ gedit_document_new (void)
 {
 	Document *doc;
 
-	gedit_debug_mess ("f:gedit_document_new\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_new\n", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
 	if (doc)
@@ -205,7 +205,7 @@ gedit_document_new_with_title (gchar *title)
 {
 	Document *doc;
 	
-	gedit_debug_mess ("f:gedit_document_new_with_title\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_new_with_title\n", DEBUG_DOCUMENT);
 
 	g_return_val_if_fail (title != NULL, NULL);
 
@@ -231,7 +231,7 @@ gedit_document_new_with_file (gchar *filename)
 {
 	Document *doc;
 
-	gedit_debug_mess ("f:gedit_document_new_with_file\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_new_with_file\n", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
 
@@ -263,7 +263,7 @@ gedit_document_current (void)
 static gchar *
 gedit_document_get_config_string (GnomeMDIChild *child)
 {
-	gedit_debug_mess ("f:gedit_document_get_config_string\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_get_config_string\n", DEBUG_DOCUMENT);
 	/* FIXME: Is this correct? */
 	/*return g_strdup (GE_DOCUMENT(child)->filename);*/
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
@@ -276,7 +276,7 @@ gedit_add_view (GtkWidget *widget, gpointer data)
 	GnomeMDIChild *child;
 	View *view;
 
-	gedit_debug_mess ("f:gedit_add_view\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_add_view\n", DEBUG_DOCUMENT);
 
 	if (mdi->active_view)
 	{
@@ -298,7 +298,7 @@ gedit_remove_view (GtkWidget *widget, gpointer data)
 {
 	Document *doc = DOCUMENT (data);
 
-	gedit_debug_mess ("f:gedti_remove_view\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedti_remove_view\n", DEBUG_DOCUMENT);
 	
 	if (mdi->active_view == NULL)
 		return;
@@ -316,7 +316,7 @@ child_changed_cb (GnomeMDI *mdi, Document *doc)
 {
 	Document *doc2 = gedit_document_current();
 
-	gedit_debug_mess ("f:child_changed_cb\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:child_changed_cb\n", DEBUG_DOCUMENT);
 
 	if (doc2)
 	{
@@ -333,7 +333,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	char *fname, *msg;
 	/*gedit_data *data = g_malloc (sizeof(gedit_data));*/
 
-	gedit_debug_mess ("f:remove_child_cb\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:remove_child_cb\n", DEBUG_DOCUMENT);
 	
 	fname = GNOME_MDI_CHILD(doc)->name;
 
@@ -381,7 +381,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 void
 gedit_mdi_init (void)
 {
-	gedit_debug_mess ("f:gedit_mdi_init\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_mdi_init\n", DEBUG_DOCUMENT);
 	
 	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VERSION));
 
@@ -419,7 +419,7 @@ mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 /*	gint group_item, pos, i; */
 /*	gchar *p, *label; */
 
-	gedit_debug_mess ("f:mdi_view_changed_cb\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:mdi_view_changed_cb\n", DEBUG_DOCUMENT);
 
 	if (mdi->active_view == NULL)
 	  return;
@@ -448,7 +448,7 @@ mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 void
 add_view_cb (GnomeMDI *mdi, Document *doc)
 {
-	gedit_debug_mess ("f:add_view\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:add_view\n", DEBUG_DOCUMENT);
 /*      if (doc != NULL)
 	gtk_object_set_data (GTK_OBJECT(GE_DOCUMENT(mdi->active_view)),
 	                     "TEST",
@@ -463,7 +463,7 @@ add_child_cb (GnomeMDI *mdi, Document *doc)
 	/* Add child stuff.. we need to make sure that it is safe to
 	   add a child, or something, i'm not quite sure about the
 	   syntax for this function */
-	gedit_debug_mess ("f:gedit_add_child\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_add_child\n", DEBUG_DOCUMENT);
 
 	return TRUE;
 }
@@ -476,7 +476,7 @@ gedit_document_new_from_config (gchar *file)
 {
 	Document *doc;
 
-	gedit_debug_mess ("f:gedit_document_new_from_config\n", DEBUG_DOCUMENT);
+	gedit_debug ("f:gedit_document_new_from_config\n", DEBUG_DOCUMENT);
 	
 	doc = gedit_document_new_with_file (file);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));

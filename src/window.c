@@ -94,7 +94,7 @@ create_find_in_files_result_window (void)
 	frame = gtk_vbox_new (FALSE, 0);
 	top = gtk_hbox_new (FALSE, 0);	
 	
-	label = gtk_label_new (" Search Results ");
+	label = gtk_label_new ("Search Results");
 
 	gtk_label_set_justify (GTK_LABEL(label), GTK_JUSTIFY_LEFT);
 	hsep = gtk_hseparator_new ();
@@ -181,8 +181,8 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	gtk_widget_realize (window);
 	
 	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
-                                		&window->style->bg[GTK_STATE_NORMAL],
-                                		(char **)gE_icon);
+					       &window->style->bg[GTK_STATE_NORMAL],
+					       (char **)gE_icon);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
@@ -239,7 +239,7 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 	char *newfname;
 	Document *doc;
 
-	gedit_debug_mess ("NO MAMES !", DEBUG_FILE);
+	gedit_debug ("NO MAMES !", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc || !doc->filename)

@@ -46,6 +46,11 @@ typedef enum {
 	DEBUG_COMMANDS
 } DebugSection;
 
+extern gint debug;
+
+#define gedit_debug(str, num) \
+    if (debug) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str)
 
 void gedit_set_title (Document *doc);
 void gedit_flash     (gchar *msg);

@@ -125,7 +125,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	PrintJobInfo *pji;
 	Document * doc = gedit_document_current();
 
-	gedit_debug_mess ("F:file_print_cb\n", DEBUG_PRINT);
+	gedit_debug ("F:file_print_cb\n", DEBUG_PRINT);
 	
 	if ( doc == NULL)
 		return;
@@ -226,7 +226,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug_mess ("F:file_print_preview_cb\n", DEBUG_PRINT);
+	gedit_debug ("F:file_print_preview_cb\n", DEBUG_PRINT);
 
 	if (!gnome_mdi_get_active_view (mdi))
 		return;
@@ -248,7 +248,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
 	int current_page, current_line;
 	
-	gedit_debug_mess ("F:print_document\n", DEBUG_PRINT);
+	gedit_debug ("F:print_document\n", DEBUG_PRINT);
 	
 	current_line=0;
 	pji->temp = g_malloc( pji->chars_per_line + 2);
@@ -591,7 +591,7 @@ print_pji_destroy (PrintJobInfo *pji)
 static void
 preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
-	gedit_debug_mess ("F:preview_destroy_cb\n", DEBUG_PRINT);
+	gedit_debug ("F:preview_destroy_cb\n", DEBUG_PRINT);
 }
 
 

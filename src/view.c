@@ -73,7 +73,7 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	View *view;
 	
-	gedit_debug_mess ("F:view_changed_cb\n", DEBUG_VIEW);
+	gedit_debug ("F:view_changed_cb\n", DEBUG_VIEW);
 	g_return_if_fail (cbdata != NULL);
 	view = (View *) cbdata;
 
@@ -86,13 +86,12 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 
 	/* Set the title */
 	gedit_set_title (view->document);
-	gedit_view_set_read_only ( view, view->document->readonly);
-	
+	gedit_view_set_read_only (view, view->document->readonly);
 }
 
 /* 
- * Text insertion and deletion callbacks - used for Undo/Redo (not yet
- * implemented) and split screening
+ * Text insertion and deletion callbacks - used for Undo/Redo and
+ * split screening
  */
 static void
 gedit_view_list_insert (View *view, gedit_data *data)
@@ -102,7 +101,7 @@ gedit_view_list_insert (View *view, gedit_data *data)
 	gint position = (gint)data->temp1;
 	gint length = strlen (buffer);
 
-	gedit_debug_mess ("F:gedit_view_list_insert\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_list_insert\n", DEBUG_VIEW);
 	
 	if (view != VIEW(mdi->active_view))
 	{
@@ -127,13 +126,13 @@ gedit_view_list_insert (View *view, gedit_data *data)
 static void
 view_list_erase (View *view, gedit_data *data)
 {
-	gedit_debug_mess ("F:gedit_view_list_erase. FIXME: I am empty \n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_list_erase. FIXME: I am empty \n", DEBUG_VIEW);
 }
 
 gint
 insert_into_buffer (Document *doc, gchar *buffer, gint position)
 {
-	gedit_debug_mess ("F:insert_into_buffer\n", DEBUG_VIEW);
+	gedit_debug ("F:insert_into_buffer\n", DEBUG_VIEW);
 
 	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position))
 	{
@@ -141,12 +140,12 @@ insert_into_buffer (Document *doc, gchar *buffer, gint position)
 	}
 	else if (position == 0)
 	{
-		gedit_debug_mess ("  pos==0, prepend\n", DEBUG_VIEW_DEEP);
+		gedit_debug ("  pos==0, prepend\n", DEBUG_VIEW_DEEP);
 		doc->buf = g_string_prepend (doc->buf, buffer);
 	}
 	else
 	{
-		gedit_debug_mess ("  pos!=0, append\n", DEBUG_VIEW_DEEP);
+		gedit_debug ("  pos!=0, append\n", DEBUG_VIEW_DEEP);
 		doc->buf = g_string_append (doc->buf, buffer);
 	}
 	return 0;		
@@ -162,7 +161,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	Document *doc;
 	gedit_data *data;
 
-	gedit_debug_mess ("F:doc_insert_text_cb\n", DEBUG_VIEW);
+	gedit_debug ("F:doc_insert_text_cb\n", DEBUG_VIEW);
 	
 	if (!view->split_screen)
 		return;
@@ -208,7 +207,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	gchar *buffer;
 	gint n;
 
-	gedit_debug_mess ("F:doc_delete_text_cb\n", DEBUG_VIEW);
+	gedit_debug ("F:doc_delete_text_cb\n", DEBUG_VIEW);
 
 	if (!view->split_screen)
 		return;
@@ -285,7 +284,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	if (!settings->auto_indent)
 		return FALSE;
 
-	gedit_debug_mess ("F:auto_indent_cb\n", DEBUG_VIEW);
+	gedit_debug ("F:auto_indent_cb\n", DEBUG_VIEW);
 
 	doc = view->document;
 
@@ -354,7 +353,7 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 
 	return;
 	/* Disable by chema for 0.7.0 . this hack is not working */
-	gedit_debug_mess ("F:line_pos_cb\n", DEBUG_VIEW);
+	gedit_debug ("F:line_pos_cb\n", DEBUG_VIEW);
 
 	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
 
@@ -371,7 +370,7 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 	gedit_data *data;
 	data = g_malloc0 (sizeof (gedit_data));
 
-	gedit_debug_mess ("F:gedit_event_button_press\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_event_button_press\n", DEBUG_VIEW);
 	
 	line_pos_cb (NULL, data);
 
@@ -383,7 +382,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
 	gint mask;
 
-	gedit_debug_mess ("F:gedit_event_key_press\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_event_key_press\n", DEBUG_VIEW);
 
 	line_pos_cb (NULL, NULL);
 
@@ -396,12 +395,12 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		return FALSE;
 	}
 
-	gedit_debug_mess ("F:     entering if..\n", DEBUG_VIEW_DEEP);
+	gedit_debug ("F:     entering if..\n", DEBUG_VIEW_DEEP);
 
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
-		gedit_debug_mess ("F:If successfull \n", DEBUG_VIEW_DEEP);
+		gedit_debug ("F:If successfull \n", DEBUG_VIEW_DEEP);
 		switch (event->keyval)
 		{
 		case 's':
@@ -435,7 +434,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		}
 	}
 
-	gedit_debug_mess ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW_DEEP);
+	gedit_debug ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW_DEEP);
 
 	return TRUE;
 }
@@ -450,7 +449,7 @@ gedit_view_class_init (ViewClass *klass)
 	object_class = (GtkObjectClass *)klass;
 	/*widget_class = (GtkWidgetClass *)klass;*/
 
-	gedit_debug_mess ("F:gedit_view_class_init.\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_class_init.\n", DEBUG_VIEW);
 	
 	gedit_view_signals[CURSOR_MOVED_SIGNAL] =
 		gtk_signal_new ("cursor_moved",
@@ -480,7 +479,7 @@ gedit_view_init (View *view)
 	GdkColor *bg;
 	GdkColor *fg;
 
-	gedit_debug_mess ("F:gedit_view_init\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_init\n", DEBUG_VIEW);
 
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
@@ -697,7 +696,7 @@ gedit_view_new (Document *doc)
 	view = gtk_type_new (gedit_view_get_type ());
 	view->document = doc;
 
-	gedit_debug_mess ("F:gedit_view_new\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_new\n", DEBUG_VIEW);
 	
 	if (view->document->buf)
 	{
@@ -722,7 +721,7 @@ gedit_view_new (Document *doc)
 void
 gedit_view_set_group_type (View *view, guint type)
 {
-	gedit_debug_mess ("F:gedit_view_set_group_type\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_group_type\n", DEBUG_VIEW);
 
 	view->group_type = type;
 	gtk_widget_queue_resize (GTK_WIDGET (view));
@@ -731,7 +730,7 @@ gedit_view_set_group_type (View *view, guint type)
 void
 gedit_view_set_split_screen (View *view, gint split_screen)
 {
-	gedit_debug_mess ("F:gedit_view_set_split_screen\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_split_screen\n", DEBUG_VIEW);
 
 	if (!view->split_parent)
 		return;
@@ -747,7 +746,7 @@ gedit_view_set_split_screen (View *view, gint split_screen)
 void
 gedit_view_set_word_wrap (View *view, gint word_wrap)
 {
-	gedit_debug_mess ("F:gedit_view_set_word_wrap\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_word_wrap\n", DEBUG_VIEW);
 
 	view->word_wrap = word_wrap;
 
@@ -760,7 +759,7 @@ gedit_view_set_read_only (View *view, gint read_only)
 {
 	gchar RO_label[255];
 
-	gedit_debug_mess ("F:gedit_view_set_read_only\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_read_only\n", DEBUG_VIEW);
 	
 	view->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (view->text), !view->read_only);
@@ -799,7 +798,7 @@ gedit_view_set_font (View *view, gchar *fontname)
 	GtkStyle *style;
 	GdkFont *font = NULL;
 
-	gedit_debug_mess ("F:gedit_view_set_font\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_font\n", DEBUG_VIEW);
 	
 	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
   	
@@ -823,7 +822,7 @@ gedit_view_set_font (View *view, gchar *fontname)
 void
 gedit_view_set_position (View *view, gint pos)
 {
-	gedit_debug_mess ("F:gedit_view_set_position\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_position\n", DEBUG_VIEW);
 
 	gtk_text_set_point (GTK_TEXT (view->text), pos);
 	gtk_text_set_point (GTK_TEXT (view->split_screen), pos);
@@ -832,14 +831,14 @@ gedit_view_set_position (View *view, gint pos)
 guint
 gedit_view_get_position (View *view)
 {
-	gedit_debug_mess ("F:gedit_view_get_position\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_get_position\n", DEBUG_VIEW);
 	return gtk_text_get_point (GTK_TEXT (view->text));
 }
 
 guint
 gedit_view_get_length (View *view)
 {
-	gedit_debug_mess ("F:gedit_view_get_length\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_get_length\n", DEBUG_VIEW);
 	return gtk_text_get_length (GTK_TEXT (view->text));
 }
 
@@ -850,7 +849,7 @@ gedit_view_buffer_sync (View *view)
 	gchar *buf;
 	Document *doc = view->document;
 
-	gedit_debug_mess ("F:gedit_view_buffer_sync\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_buffer_sync\n", DEBUG_VIEW);
 	
 	buf = gtk_editable_get_chars (GTK_EDITABLE (view->text),
 				      0, gedit_view_get_length (view));
@@ -865,7 +864,7 @@ gedit_view_refresh (View *view)
 {
 	gint i = gedit_view_get_length (view);
 
-	gedit_debug_mess ("F:gedit_view_refresh\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_refresh\n", DEBUG_VIEW);
 
 	if (i > 0)
 	{
@@ -876,7 +875,7 @@ gedit_view_refresh (View *view)
 
 	if (view->document->buf)
 	{
-		gedit_debug_mess ("F:gedit_view_refresh - Insering buffer \n", DEBUG_VIEW_DEEP);
+		gedit_debug ("F:gedit_view_refresh - Insering buffer \n", DEBUG_VIEW_DEEP);
 
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
@@ -897,7 +896,7 @@ gedit_view_refresh (View *view)
 static void
 gedit_view_set_line_wrap (View *view, gint line_wrap)
 {
-	gedit_debug_mess ("F:gedit_view_set_line_wrap\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_line_wrap\n", DEBUG_VIEW);
 
 	view->line_wrap = line_wrap;
 	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
@@ -920,7 +919,7 @@ options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 void
 gedit_view_set_selection (View *view, gint start, gint end)
 {
-	gedit_debug_mess ("F:gedit_view_set_seletion\n", DEBUG_VIEW);
+	gedit_debug ("F:gedit_view_set_seletion\n", DEBUG_VIEW);
 	
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);

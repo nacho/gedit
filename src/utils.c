@@ -123,16 +123,16 @@ gedit_flash_va (gchar *format, ...)
 }
 
 /**
- * gedit_debug_mess:
+ * gedit_debug:
  * @message: Message to display on the console
  * @type : Group type of message
  *
  * Print a debug message out to the console
  **/
-void
-gedit_debug_mess (gchar *message, DebugSection type)
-{
 #if 0
+void
+gedit_debug (gchar *message, DebugSection type)
+{
 /*	return;*/
 	switch (type)
 	{
@@ -172,5 +172,5 @@ gedit_debug_mess (gchar *message, DebugSection type)
 	case DEBUG_DOCUMENT_DEEP:
 		break;
 	}
-#endif
 }
+#endif

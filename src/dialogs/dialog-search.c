@@ -22,7 +22,7 @@ search_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 	gulong options = 0;
 	gchar *str;
 
-	gedit_debug_mess ("F:search_dialog_button_cb\n", DEBUG_SEARCH);
+	gedit_debug ("F:search_dialog_button_cb\n", DEBUG_SEARCH);
 
 	if (!gedit_document_current ())
 	{
@@ -52,7 +52,7 @@ create_search_dialog (void)
 	GtkWidget *dialog;
 	GtkWidget *frame, *entry;
 
-	gedit_debug_mess ("F:create_search_dialog\n", DEBUG_SEARCH);
+	gedit_debug ("F:create_search_dialog\n", DEBUG_SEARCH);
 
 	dialog = gnome_dialog_new (_("Search"),
 				   _("Search"),
@@ -80,7 +80,7 @@ search_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 
-	gedit_debug_mess ("F:search_cb\n", DEBUG_SEARCH);
+	gedit_debug ("F:search_cb\n", DEBUG_SEARCH);
 
 	doc = gedit_document_current ();
 

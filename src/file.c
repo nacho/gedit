@@ -80,7 +80,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	gint i;
 	View *nth_view;
 	
-	gedit_debug_mess ("F:gedit_file_open.\n", DEBUG_FILE);
+	gedit_debug ("F:gedit_file_open.\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
 	g_return_val_if_fail (doc != NULL, 1);
 
@@ -172,7 +172,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	gchar *tmpstr;
 	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
 
-	gedit_debug_mess ("F:gedit_file_save.\n", DEBUG_FILE);
+	gedit_debug ("F:gedit_file_save.\n", DEBUG_FILE);
 
 	if (fname == NULL)
 		fname = doc->filename;
@@ -247,7 +247,7 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 
-	gedit_debug_mess("F:file_new_cb\n", DEBUG_FILE);
+	gedit_debug("F:file_new_cb\n", DEBUG_FILE);
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
 	doc = gedit_document_new ();
@@ -260,7 +260,7 @@ void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug_mess("F:file_open_cb\n", DEBUG_FILE);
+	gedit_debug("F:file_open_cb\n", DEBUG_FILE);
 	
 	if (open_file_selector && GTK_WIDGET_VISIBLE (open_file_selector))
 		return;
@@ -291,7 +291,7 @@ void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug_mess("F:file_save_as_cb\n", DEBUG_FILE);
+	gedit_debug("F:file_save_as_cb\n", DEBUG_FILE);
 	
 	if (!gedit_document_current())
 		return;
@@ -331,7 +331,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
-	gedit_debug_mess("F:(file) delete event cb\n", DEBUG_FILE);
+	gedit_debug("F:(file) delete event cb\n", DEBUG_FILE);
 	
 	gtk_widget_hide (widget);
 	return TRUE;
@@ -340,7 +340,7 @@ delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
-	gedit_debug_mess("F:(file) cance_cb\n", DEBUG_FILE);
+	gedit_debug("F:(file) cance_cb\n", DEBUG_FILE);
 	
 	gtk_widget_hide (data);
 }
@@ -350,7 +350,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	Document *doc;
 
-	gedit_debug_mess("f:file_open_ok_sel\n", DEBUG_FILE);
+	gedit_debug("f:file_open_ok_sel\n", DEBUG_FILE);
 
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
@@ -368,7 +368,7 @@ file_save_cb (GtkWidget *widget)
 {
 	Document *doc;
 
-	gedit_debug_mess("f:file_save_cb\n", DEBUG_FILE);
+	gedit_debug("f:file_save_cb\n", DEBUG_FILE);
 
 	if (gnome_mdi_get_active_child(mdi) == NULL)
 		return;
@@ -391,7 +391,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	int i;
 	Document *doc;
 
-	gedit_debug_mess ("F:file_save_all_cb.\n", DEBUG_FILE);
+	gedit_debug ("F:file_save_all_cb.\n", DEBUG_FILE);
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
@@ -408,7 +408,7 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 	Document *doc;
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 
-	gedit_debug_mess("f:file_saveas_ok_sel\n", DEBUG_FILE);
+	gedit_debug("f:file_saveas_ok_sel\n", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc)
@@ -451,7 +451,7 @@ void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug_mess("f:file_close_cb\n", DEBUG_FILE);
+	gedit_debug("f:file_close_cb\n", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -461,7 +461,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug_mess("f:file_close_all\n", DEBUG_FILE);
+	gedit_debug("f:file_close_all\n", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -471,7 +471,7 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug_mess("f:file_quit_cb\n", DEBUG_FILE);
+	gedit_debug("f:file_quit_cb\n", DEBUG_FILE);
 	
 	gedit_save_settings ();
 
@@ -490,7 +490,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	gchar * msg;
 	Document *doc = gedit_document_current ();
 
-	gedit_debug_mess("f:file_revert_cb\n", DEBUG_FILE);
+	gedit_debug("f:file_revert_cb\n", DEBUG_FILE);
 	
 	if (!doc)
 		return;
@@ -521,7 +521,7 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	int ret;
 	char *msg;
 
-	gedit_debug_mess("f:popup_create_new_file\n", DEBUG_FILE);
+	gedit_debug("f:popup_create_new_file\n", DEBUG_FILE);
 	
 	msg = g_strdup_printf (_("The file ``%s'' does not exist.  Would you like to create it?"),
 			       title);
