@@ -115,7 +115,7 @@ parse_text (gchar* text, guint *old_index ) {
 SpellPlugin *spell_dialog_new()
 {
 	plugin = (SpellPlugin *) g_malloc(sizeof(SpellPlugin));
-	plugin->spell = gtk_spell_new();
+	plugin->spell = gnome_spell_new();
 	plugin->hbox = gtk_hbox_new(TRUE,0);
 	plugin->done = gnome_stock_button ("Button_Close");
 	/* plugin->done = gtk_button_new_with_label ("Done"); */
@@ -148,12 +148,12 @@ void spell_start_check()
         char *word;
 	int result;
 
-        if(!GTK_IS_SPELL(plugin->spell))
+        if(!GNOME_IS_SPELL(plugin->spell))
                 return;
 	
         while(plugin->handling && ((word=parse_text(plugin->buffer, &(plugin->index))) != NULL))
         {
-        	result = gtk_spell_check(GTK_SPELL(plugin->spell), 
+        	result = gnome_spell_check(GNOME_SPELL(plugin->spell), 
 				(gchar *) word);
                 plugin->handling = !result;
         }
@@ -164,9 +164,9 @@ void handled_word_callback(GtkWidget *spell, gpointer data)
         gchar *r;
         guint start, len;
         gint i;
-	GtkSpellInfo *si = (GtkSpellInfo *) GTK_SPELL(spell)->spellinfo->data;
+	GnomeSpellInfo *si = (GnomeSpellInfo *) GNOME_SPELL(spell)->spellinfo->data;
 
-	g_return_if_fail(GTK_IS_SPELL(spell));
+	g_return_if_fail(GNOME_IS_SPELL(spell));
 
 	len = strlen(si->word);
         start = plugin->index - len;
