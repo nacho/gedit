@@ -173,7 +173,27 @@ gedit_plugins_engine_load (const gchar *file)
 			   file);
 		
 		goto error;
-	}	
+	}
+
+	/* Load "configure" symbol */
+	if (!g_module_symbol (plugin->handle, "configure", 
+			      (gpointer*)&plugin->configure))
+		plugin->configure = NULL;
+
+	/* Load "save_settings" symbol */
+	if (!g_module_symbol (plugin->handle, "save_settings", 
+			      (gpointer*)&plugin->save_settings))
+		plugin->save_settings = NULL;
+
+	/* Load "update_ui" symbol */
+	if (!g_module_symbol (plugin->handle, "update_ui", 
+			      (gpointer*)&plugin->update_ui))
+		plugin->update_ui = NULL;
+
+	/* Load "destroy" symbol */
+	if (!g_module_symbol (plugin->handle, "destroy", 
+			      (gpointer*)&plugin->destroy))
+		plugin->destroy = NULL;
 	
 	/* Initialize plugin */
 	res = plugin->init (plugin);

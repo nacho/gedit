@@ -165,9 +165,6 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->update_ui = update_ui;
-	pd->destroy = destroy;
-	
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
