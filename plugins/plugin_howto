@@ -123,6 +123,12 @@ required to call this function, and after you have, none of the other
 functions are valid.  You cannot call client_init again after calling
 client_finish.
 
+	// Gnome Additions
+As the plugins now use the features of Gnome, it means they can also 
+access the Config settings of Gnome.
+The standard prefix for plugins is /Editor_Plugins/<Plugin Name>/
+If all the Plugins use this, we'll be able to keep everything neat and
+tidy. (This feature, in a pratical use, can been seen in the Browse plugin)
 
 The final thing that you have to do is to link with client.c (or
 libclient.a in gedit) and put yourself in PLUGINDIR.  Then you should

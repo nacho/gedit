@@ -20,7 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <gtk/gtk.h>
+#include <config.h>
+#include <gnome.h>
 #include "client.h"
 
 static GtkWidget *entry1;
@@ -67,7 +68,11 @@ int main( int argc, char *argv[] )
 
   context = client_init( &argc, &argv, &info );
   
-  gtk_init( &argc, &argv );
+  /* gtk_init( &argc, &argv ); */
+  bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+  textdomain(PACKAGE);
+
+  gnome_init("diff-plugin", VERSION, argc, argv);
 
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "Choose files to diff" );
@@ -98,7 +103,7 @@ int main( int argc, char *argv[] )
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( call_diff ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
-  button = gtk_button_new_with_label( "Cancel" );
+  button = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( done ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 

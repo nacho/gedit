@@ -20,7 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <gtk/gtk.h>
+#include <config.h>
+#include <gnome.h>
 #include "client.h"
 
 static GtkWidget *entry1;
@@ -79,6 +80,12 @@ void goLynx( GtkWidget *widget, gpointer data )
     }
   client_document_show( docid );
   client_finish( context );
+  
+  gnome_config_push_prefix ("/Editor_Plugins/Browse/");
+  gnome_config_set_string ("Url", url[0]);
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
+  
   gtk_main_quit();
 }
 
@@ -100,7 +107,11 @@ int main( int argc, char *argv[] )
 
   context = client_init( &argc, &argv, &info );
   
-  gtk_init( &argc, &argv );
+  /* gtk_init( &argc, &argv ); */
+  bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+  textdomain(PACKAGE);
+
+  gnome_init("browse-plugin", VERSION, argc, argv);
 
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "The gEdit Web Browse Plugin" );
@@ -117,12 +128,20 @@ int main( int argc, char *argv[] )
   entry1 = gtk_entry_new();
   gtk_box_pack_start( GTK_BOX( hbox ), entry1, TRUE, TRUE, 0 );
 
+  gnome_config_push_prefix ("/Editor_Plugins/Browse/");
+  gtk_entry_set_text (entry1, gnome_config_get_string ("Url"));
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
 
-  button = gtk_button_new_with_label( "Go!" );
+
+
+/*  button = gtk_button_new_with_label( "Go!" );*/
+  button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( goLynx ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
-  button = gtk_button_new_with_label( "Cancel" );
+/*  button = gtk_button_new_with_label( "Cancel" );*/
+  button = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( done ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
