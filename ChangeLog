@@ -1,3 +1,24 @@
+Mon Aug  9 18:09:49 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: (gE_document_new) Create the GString buffer here.. using a
+	  g_string_sized_new! This initialises the GString, without needing to
+	  initialise it with contents!
+	
+	* gE_view.c: (doc_insert_text_cb) Check wheter the length of the GString
+	  is higher than 0 and whether the insert position is lower than the 
+	  length.. if so, append the text, otherwise we just insert! Buffer insertion
+	  is now fully working!!! =) hrm, there is still a minor problem with
+	  GnomeMDI Add View.. so it needs work, but otherwise it works fine!
+
+Mon Aug  9 17:39:46 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.c: (doc_insert_text_cb) WOOHOO!!! its working!! yay! I looked
+	  at the gtk_editable_insert_text code and decided to try if the way
+	  it uses works.. and it does! Now text goes into the GString properly..
+	  it doesnt like newline characters much, but i'm sure that can be fixed.
+	  I'm not sure how it will cope with inserts >64 characters, and there is
+	  a minor problem if the document is new and the GSring buffer is created..
+
 Sun Aug  8 19:26:18 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_mdi.c: (gE_document_new) Don't initialise the GString here.
