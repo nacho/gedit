@@ -16,7 +16,7 @@
 static GtkWidget *from_entry, *subject_entry, *to_entry;
 static int docid, context;
 
-void send_mail (GnomeDialog *window)
+void send_mail (void)
 {
 	FILE *sendmail;
 	gchar *subject, *from, *to, *buffer, *command;
@@ -31,8 +31,8 @@ void send_mail (GnomeDialog *window)
 	
 	if ((sendmail = popen (command, "w")) == NULL)
 	{
-		printf ("Couldn't open stream to /usr/bin/sendmail\n");
-		exit (1);
+		printf ("Couldn't open stream to %s\n", MAILER);
+		return;
 	}
 	
 	g_free (command);
@@ -46,8 +46,7 @@ void send_mail (GnomeDialog *window)
 	fflush (sendmail);
 	
 	pclose (sendmail);
-	client_finish (context);
-	gnome_dialog_close (GNOME_DIALOG (window));
+
 }
 
 
@@ -83,13 +82,15 @@ int main (int argc, char *argv[])
 		GNOME_DIALOG (window)->vbox),
 		vbox, FALSE, TRUE, 2);
 
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
+	/*gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);*/
 	
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_box_pack_start_defaults (GTK_BOX (vbox), table);
 
-	from_label = gtk_label_new ("From:     ");
-	gtk_table_attach_defaults (GTK_TABLE (table), from_label, 0, 1, 0, 1);
+	from_label = gtk_label_new ("From:");
+	gtk_table_attach (GTK_TABLE (table), from_label,
+		0, 1, 0, 1,
+		0, GTK_EXPAND, 0, 0);
 	gtk_widget_show (from_label);
 	
 	from_entry = gtk_entry_new ();
@@ -118,16 +119,20 @@ int main (int argc, char *argv[])
 		/*g_free (user);*/
 	}
 
-	to_label = gtk_label_new ("To:        ");
-	gtk_table_attach_defaults (GTK_TABLE (table), to_label, 0, 1, 1, 2);
+	to_label = gtk_label_new ("To:");
+	gtk_table_attach (GTK_TABLE (table), to_label,
+		0, 1, 1, 2,
+		0, GTK_EXPAND, 0, 0);
 	gtk_widget_show (to_label);
 	
 	to_entry = gtk_entry_new ();
 	gtk_table_attach_defaults (GTK_TABLE (table), to_entry, 1, 2, 1, 2);
 	gtk_widget_show (to_entry);
 	
-	subject_label = gtk_label_new ("Subject: ");
-	gtk_table_attach_defaults (GTK_TABLE (table), subject_label, 0, 1, 2, 3);
+	subject_label = gtk_label_new ("Subject:");
+	gtk_table_attach (GTK_TABLE (table), subject_label,
+		0, 1, 2, 3,
+		0, GTK_EXPAND, 0, 0);
 	gtk_widget_show (subject_label);
 	
 	subject_entry = gtk_entry_new ();
@@ -142,7 +147,7 @@ int main (int argc, char *argv[])
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 	
 	file_label = gtk_label_new ("File to use as body of message: ");
-	gtk_box_pack_start (GTK_BOX (hbox), file_label, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), file_label, FALSE, FALSE, 1);
 	gtk_widget_show (file_label);
 	
 	if (strlen (filename) < 1)
@@ -150,16 +155,19 @@ int main (int argc, char *argv[])
 	else
 		file = gtk_label_new (filename);
 
-	gtk_box_pack_start (GTK_BOX (hbox), file, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), file, TRUE, TRUE, 1);
 	gtk_widget_show (file);
+	gtk_widget_show (table);
 	gtk_widget_show (hbox);
 	gtk_widget_show (vbox);
 	
 	butnnum = gnome_dialog_run (GNOME_DIALOG (window));
 	
 	if (butnnum == 0)
-		send_mail (window);
-	
-	return 0;
-}
+		send_mail ();
 
+	client_finish (context);
+	gnome_dialog_close (GNOME_DIALOG (window));	
+
+	exit (0);
+}
