@@ -8,12 +8,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.1\n"
-"POT-Creation-Date: 2000-09-25 09:33+0200\n"
+"POT-Creation-Date: 2000-10-10 16:30+0200\n"
 "PO-Revision-Date: 2000-09-25 09:43+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
@@ -117,7 +117,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
-#: src/document.c:259 src/print.c:581
+#: src/document.c:259 src/print.c:580
 msgid "Untitled"
 msgstr "SansTitre"
 
@@ -190,7 +190,7 @@ msgstr ""
 #.
 #: plugins/email/email.glade.h:7
 msgid "gedit: e-mail plugin"
-msgstr "gedit : plugin e-mail"
+msgstr "gedit : greffon e-mail"
 
 #: plugins/email/email.glade.h:8
 msgid "From:"
@@ -596,7 +596,7 @@ msgstr "Ce fichier ne finit pas avec une extension valide\n"
 msgid "The file %s was not found."
 msgstr "Le fichier %s n'a pas été trouvé."
 
-#: src/file.c:152
+#: src/file.c:158
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -605,7 +605,7 @@ msgstr ""
 "Une erreur a été rencontrée lors de l'ouverture du fichier \"%s\".\n"
 "Veuillez vérifier que le fichier existe."
 
-#: src/file.c:161
+#: src/file.c:170
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -613,7 +613,7 @@ msgid ""
 "%s\n"
 "\n"
 "\n"
-"Please make sure the file is not being used by another application\n"
+"Please make sure the file is not being used by another 0pplication\n"
 "and that the file is not empty."
 msgstr ""
 "Une erreur a été rencontrée lors de l'ouverture du fichier :\n"
@@ -621,14 +621,15 @@ msgstr ""
 "%s\n"
 "\n"
 "\n"
-"Vérifier que le fichier n'est pas utilisé par une autre application\n"
+"Veuillez vérifier que le fichier n'est pas utilisé par une autre "
+"application\n"
 "et qu'il n'est pas vide."
 
-#: src/file.c:171 src/file.c:435
+#: src/file.c:181 src/file.c:449
 msgid "Could not allocate the required memory."
 msgstr "Ne peut allouer la mémoire nécessaire."
 
-#: src/file.c:177
+#: src/file.c:187
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -643,15 +644,15 @@ msgstr ""
 "\n"
 "Vérifier que vous avez les permissions d'ouvrir le fichier."
 
-#: src/file.c:277
+#: src/file.c:288
 msgid "Save As..."
 msgstr "Enregistrer sous..."
 
-#: src/file.c:334
+#: src/file.c:347
 msgid "The document contains no data."
 msgstr "Le document ne contient aucune données."
 
-#: src/file.c:344
+#: src/file.c:358
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -668,7 +669,7 @@ msgstr ""
 "Vérifier que le chemin que vous avez fournit existe, et que vous avez les "
 "permissions en écriture appropriées."
 
-#: src/file.c:357
+#: src/file.c:371
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -685,7 +686,7 @@ msgstr ""
 "A cause d'une raison inconnue (1). Rapportez ce problème à "
 "submit@bugs.gnome.org"
 
-#: src/file.c:374
+#: src/file.c:388
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -702,37 +703,42 @@ msgstr ""
 "A cause d'une raison inconnue (2). Rapportez ce problème à "
 "submit@bugs.gnome.org"
 
-#: src/file.c:455
+#: src/file.c:469
 msgid "Error in the pipe ."
 msgstr "Erreur sur le conduit."
 
-#: src/file.c:510
-msgid "Open File ..."
-msgstr "Ouvrir le fichier..."
-
-#: src/file.c:568
+#: src/file.c:582
 #, c-format
 msgid "Loaded file %s"
 msgstr "Chargement du fichier %s"
 
-#: src/file.c:659
+#: src/file.c:588
+#, c-format
+msgid "Loaded %i files"
+msgstr "Chargement de %i fichiers"
+
+#: src/file.c:641
+msgid "Open File ..."
+msgstr "Ouvrir le fichier..."
+
+#: src/file.c:771
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' est sur le point d'être écrasé. Voulez-vous continuer ?"
 
-#: src/file.c:671
+#: src/file.c:783
 msgid "Document has not been saved."
 msgstr "Le document n'a pas été enregistré."
 
-#: src/file.c:681
+#: src/file.c:793
 msgid "Error saving file!"
 msgstr "Erreur lors de l'enregistrement du fichier !"
 
-#: src/file.c:800
+#: src/file.c:912
 msgid "You can't revert an Untitled document\n"
 msgstr "Vous ne pouvez annuler un document SansTitre\n"
 
-#: src/file.c:813
+#: src/file.c:925
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -741,7 +747,7 @@ msgstr ""
 "Voulez-vous vraiment annuler tous les changements?\n"
 "(%s)"
 
-#: src/file.c:842
+#: src/file.c:954
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Le fichier ``%s'' n'existe pas. Voulez-vous le créer ?"
@@ -818,7 +824,7 @@ msgstr "Enleve_r la vue"
 msgid "Remove view of the document"
 msgstr "Enleve la vue du document"
 
-#: src/menus.c:194 src/plugin.c:82 src/plugin.c:390
+#: src/menus.c:194 src/plugin.c:82 src/plugin.c:392
 msgid "_Plugins"
 msgstr "_Greffons"
 
@@ -928,7 +934,7 @@ msgstr "Gestionnaire..."
 msgid "Add/Remove installed plugins"
 msgstr "Ajoute/Enleve les greffons installés"
 
-#: src/plugin.c:189
+#: src/plugin.c:191
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -937,7 +943,7 @@ msgstr ""
 "Le programme %s ne peut être trouvé.\n"
 "\n"
 
-#: src/plugin.c:204
+#: src/plugin.c:206
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -946,7 +952,7 @@ msgstr ""
 "'%s' semble ne pas exister.\n"
 "\n"
 
-#: src/plugin.c:206
+#: src/plugin.c:208
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -957,7 +963,7 @@ msgstr ""
 "mais '%s' ne peut être trouvé à l'intéroeur.\n"
 "\n"
 
-#: src/plugin.c:209
+#: src/plugin.c:211
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -966,7 +972,7 @@ msgstr ""
 "'%s' ne semble pas être un programme.\n"
 "\n"
 
-#: src/plugin.c:213
+#: src/plugin.c:215
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -975,33 +981,33 @@ msgstr ""
 "%sVous ne serez pas capable d'utiliser le greffon %s sans %s.\n"
 "Voulez vous spécifier un nouvel emplacement pour %s ?"
 
-#: src/plugin.c:311
+#: src/plugin.c:313
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Erreur, incapable d'ouvrir le fichier de module, %s"
 
-#: src/plugin.c:321
+#: src/plugin.c:323
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Erreur, le greffon ne contient pas de fonction init_plugin"
 
-#: src/plugin.c:333
+#: src/plugin.c:335
 msgid "Error, init_plugin returned an error"
 msgstr "Erreur, init_plugin a retourné une erreur"
 
-#: src/plugin.c:380
+#: src/plugin.c:382
 msgid "Error, plugin is still in use"
 msgstr "Erreur, le greffon est toujours en cours d'utilisation"
 
-#: src/print.c:179
+#: src/print.c:172
 msgid "Pages"
 msgstr "Pages"
 
-#: src/print.c:240
+#: src/print.c:230
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s) : Aperçu avant impression"
 
-#: src/print.c:530 src/print.c:545
+#: src/print.c:529 src/print.c:544
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1010,7 +1016,7 @@ msgstr ""
 "gedit ne peut trouver la police \"%s\".\n"
 "gedit est incapable d'imprimer sans que cette police ne soit installée."
 
-#: src/print.c:838
+#: src/print.c:837
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Page %i/%i"
@@ -1023,7 +1029,7 @@ msgstr "_Fichier/"
 msgid "_File"
 msgstr "_Fichier"
 
-#: src/recent.c:258
+#: src/recent.c:256
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Incapable d'ouvrir le fichier récent : %s"
@@ -1121,7 +1127,7 @@ msgstr "Afficher les messages de débogage récents"
 msgid "Turn on all debugging messages."
 msgstr "Activer tous les messages de débogages."
 
-#: src/view.c:961
+#: src/view.c:973
 msgid "You can't remove the last view of a document."
 msgstr "Vous ne pouvez supprimer la dernière vue d'un document"
 
