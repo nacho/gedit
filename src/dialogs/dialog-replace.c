@@ -56,7 +56,7 @@ replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
 	/* behave as if the user clicked Find/Find next button */
 	gedit_debug("", DEBUG_SEARCH);
-	replace_text_clicked_cb (dialog, 0);
+	replace_text_clicked_cb (dialog, 1);
 }
 
 static void
@@ -158,8 +158,8 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (replacements > 0)
 		{
-			gedit_document_delete_text (view->doc, 0, gedit_document_get_buffer_length(view->doc), FALSE);
-			gedit_document_insert_text (view->doc, new_buffer, 0, FALSE);
+			gedit_document_delete_text (view->doc, 0, gedit_document_get_buffer_length(view->doc), TRUE);
+			gedit_document_insert_text (view->doc, new_buffer, 0, TRUE);
 			gedit_search_end();
 			gedit_search_start();
 		}
@@ -190,21 +190,28 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		guint start, end;
 
-		if (!gedit_view_get_selection (view, &start, &end))
-			g_warning("This should not happen !!!!. There should be some text selected");
-		/* FIXME !!!!!!!!!! this is a big problem testing for
-		   a selection is not the way to do it !!!. Chema */
 
-		/* Diselect the text and set the point after this occurence*/
-		gedit_document_delete_text (view->doc, start, search_text_length, TRUE);
-		gedit_document_insert_text (view->doc, text_to_replace_with, start, TRUE);
+		if ( gedit_search_info.replace_start == 0 && gedit_search_info.replace_end == 0 )
+		{
+			/* since there is nothing to replace, act as if FIND NEXT was clicked */
+			button = 0;
+		}
+		else
+		{
+			start = gedit_search_info.replace_start;
+			end = gedit_search_info.replace_end;
+			
+			/* Diselect the text and set the point after this occurence*/
+			gedit_document_delete_text (view->doc, start, search_text_length, TRUE);
+			gedit_document_insert_text (view->doc, text_to_replace_with, start, TRUE);
 
-		/* We need to reload the buffer since we changed it */
-		gedit_search_end();
-		gedit_search_start();
+			/* We need to reload the buffer since we changed it */
+			gedit_search_end();
+			gedit_search_start();
 
-		/* After replacing this occurrence, act as is a Find Next was pressed */
-		button = 0;
+			/* After replacing this occurrence, act as is a Find Next was pressed */
+			button = 0;
+		}
 	}
 	
 	if (button == 0) /* Find Next */
@@ -233,6 +240,10 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		gtk_editable_select_region (GTK_EDITABLE(view->text), pos_found+1, pos_found+1+search_text_length);
 
 		gtk_radio_button_select (GTK_RADIO_BUTTON(radio_button_1)->group, 1);
+		
+		gedit_search_info.replace_start = pos_found + 1;
+		gedit_search_info.replace_end   = pos_found + 1 + search_text_length;
+
 	}
 }
 
@@ -319,9 +330,9 @@ dialog_replace (gint full)
 	gtk_signal_connect (GTK_OBJECT (replace_text_dialog), "destroy",
 			    GTK_SIGNAL_FUNC (replace_text_destroyed_cb), replace_text_dialog);
 	gtk_signal_connect (GTK_OBJECT (search_entry), "activate",
-			    GTK_SIGNAL_FUNC (replace_entry_activate_cb), replace_text_dialog);
-	gtk_signal_connect (GTK_OBJECT (replace_entry), "activate",
 			    GTK_SIGNAL_FUNC (search_entry_activate_cb), replace_text_dialog);
+	gtk_signal_connect (GTK_OBJECT (replace_entry), "activate",
+			    GTK_SIGNAL_FUNC (replace_entry_activate_cb), replace_text_dialog);
 
 	gnome_dialog_set_parent (GNOME_DIALOG (replace_text_dialog),
 				 gedit_window_active());

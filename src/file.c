@@ -240,8 +240,6 @@ gedit_file_stdin (Document *doc)
 	guint pos = 0;
 	View *view;
 
-	return 1;
-	
 	gedit_debug ("", DEBUG_FILE);
 
 	fstat(STDIN_FILENO, &stats);
@@ -612,7 +610,6 @@ gedit_file_create_popup (guchar *title)
 	{
 	case 0 : 
 		doc = gedit_document_new_with_title (title);
-		doc->filename = g_strdup (title);
 		doc->changed = FALSE;
 		return TRUE;
 	case 1 : 

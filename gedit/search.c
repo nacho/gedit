@@ -36,7 +36,7 @@
    search.
 
    NOTE :
-   Here is how, I think the search, replace and count lines should work :
+   Here is how the search functions work :
 
    1. We have a function called search_start() that we call if
    seach_in_progress  = SEARCH_IN_PROGRESS_NO ;
@@ -49,13 +49,6 @@
    free the buffer.
    Search in progress = SEARCH_IN_PROGRESS_NO
 
-   3. We need to track changes in the document. For example if a search dialog
-   is open and the user modifies the document itself or moves the cursor. We
-   can hook a function to view edit to change the state of search_in_progress
-   to SEARCH_IN_PROGRESS_RELOAD_BUFFER
-
-   4. We also need to have a search in progress state called
-   SEARCH_IN_PROGRESS_REPLACE
 */
 
 /* DO WE NEED TO SET SEARCH_IN_PROGESS UPON STARTUP ????
@@ -103,23 +96,25 @@ gedit_search_start (void)
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
 		gedit_search_info.buffer_length = gedit_document_get_buffer_length (gedit_search_info.doc);
-		gedit_debug("getting buffer - start \n", DEBUG_SEARCH);
 		gedit_search_info.buffer = gedit_document_get_buffer (gedit_search_info.doc);
-		gedit_debug("getting buffer - done \n", DEBUG_SEARCH);
 		gedit_search_info.state = SEARCH_IN_PROGRESS_YES;
+		gedit_search_info.replace_start = 0;
+		gedit_search_info.replace_end = 0;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
 		g_warning("This should not happen, gedit called start_search and search in progress = YES \n");
 		/* Do nothing */
 		break;
 	case SEARCH_IN_PROGRESS_RELOAD:
-		/* free the buffer and reload it */
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		/* FIXME */
 		break;
 	case SEARCH_IN_PROGRESS_REPLACE:
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		/* Dunno what do I have to do ... */
 		break;
 	case SEARCH_IN_PROGRESS_COUNT_LINES:
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		/* Dunno what do I have to do ... */
 		break;
 	}
@@ -134,7 +129,8 @@ gedit_search_end (void)
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
 		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
-		/* free the buffer */
+		g_free (gedit_search_info.buffer);
+		gedit_search_info.state = SEARCH_IN_PROGRESS_NO;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
 		/* free the buffer */
@@ -143,12 +139,15 @@ gedit_search_end (void)
 		break;
 	case SEARCH_IN_PROGRESS_RELOAD:
 		/* free the buffer */
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		gedit_search_info.state = SEARCH_IN_PROGRESS_NO;
 		break;
 	case SEARCH_IN_PROGRESS_REPLACE:
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		/* Dunno what to do ... */
 		break;
 	case SEARCH_IN_PROGRESS_COUNT_LINES:
+		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
 		/* Dunno what to do ... */
 		break;
 	}

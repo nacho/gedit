@@ -1,5 +1,24 @@
 2000-06-09  Chema Celorio  <chema@celorio.com>
 
+	* file.c (gedit_file_create_popup): dont str_dup the filename
+	gedit_docuement_new_with_title will.
+
+	* dialogs/dialog-replace.c (dialog_replace): call the correct callback
+	for "activate" in replace_entry and search_entry they where switched
+	(replace_entry_activate_cb): act as if the replace button has been clicked
+	(replace_text_clicked_cb): use gedit_search_info.replace_start & replace_end
+	when replacing, not the active selection.
+	(replace_text_clicked_cb): save search_start & end values for replace
+	when find next gets clicked
+
+	* search.h: add replace_start & replace_end to gedit_search_info
+
+	* search.c (gedit_search_start): clear .replace_start and .replace_end 
+
+	* file.c (gedit_file_stdin): fix
+
+2000-06-09  Chema Celorio  <chema@celorio.com>
+
 	* window.c (gedit_window_set_status_bar): fix status bar bug
 
 	* utils.h (options): add DEBUG_WINDOW

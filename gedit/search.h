@@ -31,6 +31,8 @@ typedef struct _SearchInfo {
 	Document *doc;
 	guchar* last_text_searched;
 	gint last_text_searched_case_sensitive;
+	guint replace_start;
+	guint replace_end;
 } SearchInfo;
 extern SearchInfo gedit_search_info;
 
