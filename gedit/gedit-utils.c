@@ -240,18 +240,17 @@ gedit_utils_set_status_va (gchar *format, ...)
 	g_free (msg);
 }
 
-
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
 {
-	gchar* canonical_uri = NULL;
+	gchar *canonical_uri = NULL;
 	gboolean res;
-	
-	canonical_uri = eel_make_uri_canonical (uri);
+
+	canonical_uri = gnome_vfs_make_uri_canonical (uri);
 	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
 	res = eel_istr_has_prefix (canonical_uri, "file:");
-	
+
 	g_free (canonical_uri);
 
 	return res;
@@ -272,10 +271,10 @@ gedit_utils_is_uri_read_only (const gchar* uri)
 	/* FIXME: all remote files are marked as readonly */
 	if (!gedit_utils_uri_has_file_scheme (uri))
 		return TRUE;
-			
-	canonical_uri = eel_make_uri_canonical (uri);
+		
+	canonical_uri = gnome_vfs_make_uri_canonical (uri);
 	g_return_val_if_fail (canonical_uri != NULL, TRUE);
-	
+
 	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
 
 	file_uri = gnome_vfs_get_local_path_from_uri (canonical_uri);

@@ -458,7 +458,9 @@ gedit_file_save_as (GeditMDIChild *child)
 }
 
 static gboolean
-gedit_file_save_as_real (const gchar* file_name, const GeditEncoding *encoding, GeditMDIChild *child)
+gedit_file_save_as_real (const gchar *file_name,
+			 const GeditEncoding *encoding,
+			 GeditMDIChild *child)
 {
 	gchar *uri;
 	gboolean ret;
@@ -472,7 +474,7 @@ gedit_file_save_as_real (const gchar* file_name, const GeditEncoding *encoding, 
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	uri = eel_make_uri_canonical (file_name);
+	uri = gnome_vfs_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
 	ret = gedit_document_save_as (doc, uri, encoding, &error);
@@ -485,11 +487,9 @@ gedit_file_save_as_real (const gchar* file_name, const GeditEncoding *encoding, 
 					GTK_WINDOW (gedit_get_active_window ()));
 
 		g_error_free (error);
-		
 		g_free (uri);
 
 		return FALSE;
-		
 	}	
 	else
 	{
@@ -788,7 +788,6 @@ gedit_file_revert (GeditMDIChild *child)
 			  "loading",
 			  G_CALLBACK (document_loading_cb),
 			  (gpointer)TRUE);
-			  
 	g_signal_connect (G_OBJECT (doc),
 			  "loaded",
 			  G_CALLBACK (document_reverted_cb),
