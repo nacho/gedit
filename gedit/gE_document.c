@@ -147,7 +147,7 @@ gE_window *gE_window_new()
 */
   gtk_widget_show (window->notebook);
 
-  g_list_append (window_list, window);
+  window_list = g_list_append (window_list, window);
 
   g_list_foreach (plugins, add_plugins_to_window, window);
   

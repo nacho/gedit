@@ -19,6 +19,9 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include "main.h"
+#include "gE_plugin_api.h"
+
+extern GList *plugins;
 
 gint file_open_wrapper (gE_data *data)
 {
@@ -38,12 +41,28 @@ void prog_init(char **file)
 	gE_window *window;
 	gE_document *doc;
 	gE_data *data;
+	plugin_callback_struct callbacks;
 	data = g_malloc0 (sizeof (gE_data));
 #ifdef DEBUG
 	g_print("Initialising gEdit...\n");
 
 	g_print("%s\n",*file);
 #endif
+
+	/* Init plugins... */
+	plugins = NULL;
+	
+	callbacks.document.create = gE_plugin_document_create;
+	callbacks.text.append = gE_plugin_text_append;
+	callbacks.document.show = gE_plugin_document_show;
+	callbacks.document.current = gE_plugin_document_current;
+	callbacks.document.filename = gE_plugin_document_filename;
+	callbacks.text.get = gE_plugin_text_get;
+	callbacks.program.quit = NULL;
+	callbacks.program.reg = gE_plugin_program_register;
+	
+	plugin_query_all (&callbacks);
+	
 	window_list = g_list_alloc ();
 	window = gE_window_new();
 	g_list_append (window_list, window);

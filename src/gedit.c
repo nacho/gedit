@@ -188,6 +188,7 @@ int main (int argc, char **argv)
 	
 	plugin_query_all (&callbacks);
 	
+
 	gtk_main ();
 	return 0;
 }

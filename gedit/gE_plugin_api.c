@@ -48,7 +48,7 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 {
 	gE_data *data = g_malloc0 (sizeof (gE_data));
 #ifdef WITHOUT_GNOME
-	GtkMenuENtry *entry = g_malloc0 (sizeof (GtkMenuEntry));
+	GtkMenuEntry *entry = g_malloc0 (sizeof (GtkMenuEntry));
 	
 	entry->path = g_malloc0 (strlen (info->menu_location) + strlen ("Plugins/") + 1);
 	sprintf (entry->path, "Plugins/%s", info->menu_location);
@@ -65,15 +65,15 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	
 	data->temp1 = g_strdup (info->plugin_name);
 	data->window = window;
-	path = g_malloc0 (strlen (info->menu_location) + strlen ("Plugins/") + 1);
-	sprintf (path, "Plugins/%s", info->menu_location);
+	path = g_malloc0 (strlen ("Plugins/") + 1);
+	sprintf (path, "Plugins/");
 	menu->label = g_strdup (info->plugin_name);
-	menu->type = GNOME_APP_UI_ITEM;
+	menu->type = 1;
 	menu->hint = NULL;
 	menu->moreinfo = start_plugin;
 	menu->user_data = data;
 	menu->unused_data = NULL;
-	menu->pixmap_type = GNOME_APP_PIXMAP_NONE;
+	menu->pixmap_type = 0;
 	menu->pixmap_info = NULL;
 	menu->accelerator_key = 0;
 	
