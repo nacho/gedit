@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.2\n"
-"POT-Creation-Date: 1999-04-16 21:24+0200\n"
+"POT-Creation-Date: 1999-05-08 21:05+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -28,23 +28,23 @@ msgstr "Docid es %ld.\n"
 msgid "Shell"
 msgstr "Shell"
 
-#: src/commands.c:487
+#: src/commands.c:501
 msgid "Open File..."
 msgstr "Abrir un Archivo..."
 
-#: src/commands.c:560
+#: src/commands.c:577
 msgid "Read only file!"
 msgstr "¡Archivo en solo lectura!"
 
-#: src/commands.c:586
+#: src/commands.c:603
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
-#: src/commands.c:609
+#: src/commands.c:626
 msgid "Save As..."
 msgstr "Guardar Como..."
 
-#: src/commands.c:961 src/commands.c:962
+#: src/commands.c:968 src/commands.c:969
 msgid "_File"
 msgstr "_Archivo"
 
@@ -124,11 +124,11 @@ msgid "Open (swap) .c/.h file"
 msgstr "Abrir (alternar) archivo .c/.h"
 
 #. line and column indicators
-#: src/gE_document.c:118
+#: src/gE_document.c:117
 msgid "Column:"
 msgstr "Columna:"
 
-#: src/gE_document.c:127
+#: src/gE_document.c:126
 msgid "Line"
 msgstr "Líneas"
 
@@ -202,6 +202,11 @@ msgstr "Posición"
 #. Plugins Settings
 #: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
 msgid "Plugins"
+msgstr "Extensiones"
+
+#: src/gE_prefs_box.c:596
+#, fuzzy
+msgid "Use Plugins"
 msgstr "Extensiones"
 
 #: src/gE_prefs_box.c:663
@@ -389,7 +394,7 @@ msgstr "_Guardar la configuración"
 msgid "Save the current settings for future sessions"
 msgstr "Guardar la configuración actual para futuras sesiones"
 
-#: src/search.c:149
+#: src/search.c:282
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -398,49 +403,66 @@ msgstr ""
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
-#: src/search.c:364 src/search.c:585
-msgid "Search and Replace"
-msgstr "Búsqueda y Reemplazo"
+#: src/search.c:303
+msgid "Go to line"
+msgstr ""
 
-#: src/search.c:364 src/search.c:585
-msgid "Search"
-msgstr "Búsqueda"
-
-#: src/search.c:367
-msgid "Search For:"
-msgstr "Buscar por:"
-
-#: src/search.c:371
-msgid "Text"
-msgstr "Texto"
-
-#: src/search.c:378
-msgid "Line Number"
+#: src/search.c:313
+#, fuzzy
+msgid "Line number"
 msgstr "Número de Línea"
 
-#: src/search.c:397
-msgid "Search:"
-msgstr "Buscar:"
+#: src/search.c:336
+#, fuzzy
+msgid "Search from cursor"
+msgstr "Buscar una cadena de texto"
 
-#: src/search.c:400
-msgid "Start searching at cursor position"
-msgstr "Iniciar la búsqueda a la posición del cursor"
-
-#: src/search.c:405
-msgid "Start searching at beginning of the document"
+#: src/search.c:343
+#, fuzzy
+msgid "Search from beginning of document"
 msgstr "Iniciar la búsqueda al principio del documento"
 
-#: src/search.c:407
+#: src/search.c:350
+#, fuzzy
+msgid "Search from end of document"
+msgstr "Iniciar la búsqueda al principio del documento"
+
+#: src/search.c:357
 msgid "Case sensitive"
 msgstr "Distingir mayúsculas y minúsculas"
 
-#: src/search.c:411
-msgid "Replace:"
+#: src/search.c:363
+msgid "Reverse search"
+msgstr ""
+
+#: src/search.c:375
+msgid "Search"
+msgstr "Búsqueda"
+
+#: src/search.c:380 src/search.c:408
+#, fuzzy
+msgid "Search for:"
+msgstr "Buscar por:"
+
+#: src/search.c:402
+#, fuzzy
+msgid "Replace"
 msgstr "Reemplazar con:"
 
-#: src/search.c:414
-msgid "Prompt before replacing"
+#: src/search.c:418
+#, fuzzy
+msgid "Replace with:"
+msgstr "Reemplazar con:"
+
+#: src/search.c:429
+#, fuzzy
+msgid "Ask before replacing"
 msgstr "Preguntar antes de reemplazar"
+
+#: src/search.c:624
+#, fuzzy
+msgid "Replace?"
+msgstr "Reemplazar con:"
 
 #: src/toolbar.c:38
 msgid "New"
@@ -494,3 +516,14 @@ msgstr "Salir"
 msgid "Exit the program"
 msgstr "Salir del programa"
 
+#~ msgid "Search and Replace"
+#~ msgstr "Búsqueda y Reemplazo"
+
+#~ msgid "Text"
+#~ msgstr "Texto"
+
+#~ msgid "Search:"
+#~ msgstr "Buscar:"
+
+#~ msgid "Start searching at cursor position"
+#~ msgstr "Iniciar la búsqueda a la posición del cursor"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.8\n"
-"POT-Creation-Date: 1999-04-08 22:55+0100\n"
+"POT-Creation-Date: 1999-05-08 21:05+0100\n"
 "PO-Revision-Date: 1998-11-07 20:10+0100\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -22,24 +22,24 @@ msgstr ""
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:487
+#: src/commands.c:501
 msgid "Open File..."
 msgstr ""
 
-#: src/commands.c:560
+#: src/commands.c:577
 msgid "Read only file!"
 msgstr ""
 
-#: src/commands.c:586
+#: src/commands.c:603
 msgid "Error saving file!"
 msgstr ""
 
-#: src/commands.c:609
+#: src/commands.c:626
 #, fuzzy
 msgid "Save As..."
 msgstr "Spara som"
 
-#: src/commands.c:961 src/commands.c:962
+#: src/commands.c:968 src/commands.c:969
 #, fuzzy
 msgid "_File"
 msgstr "Dokument"
@@ -121,75 +121,75 @@ msgid "Open (swap) .c/.h file"
 msgstr ""
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:117
 msgid "Column:"
 msgstr ""
 
-#: src/gE_document.c:157
+#: src/gE_document.c:126
 msgid "Line"
 msgstr ""
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:480
-#: src/gE_prefs_box.c:481 src/gE_prefs_box.c:531 src/gE_prefs_box.c:532
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:481
+#: src/gE_prefs_box.c:482 src/gE_prefs_box.c:532 src/gE_prefs_box.c:533
 #: src/menus.c:232
 #, fuzzy
 msgid "_Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:81
+#: src/gE_prefs_box.c:82
 msgid "Default"
 msgstr ""
 
-#: src/gE_prefs_box.c:82
+#: src/gE_prefs_box.c:83
 msgid "Notebook"
 msgstr ""
 
-#: src/gE_prefs_box.c:83
+#: src/gE_prefs_box.c:84
 msgid "Toplevel"
 msgstr ""
 
-#: src/gE_prefs_box.c:84
+#: src/gE_prefs_box.c:85
 msgid "Modal"
 msgstr ""
 
-#: src/gE_prefs_box.c:229
+#: src/gE_prefs_box.c:230
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:242
+#: src/gE_prefs_box.c:243
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "Sätt på/av statusrad"
 
-#: src/gE_prefs_box.c:251
+#: src/gE_prefs_box.c:252
 #, fuzzy
 msgid "Show Splitscreen"
 msgstr "Sätt på/av skärmdelning"
 
-#: src/gE_prefs_box.c:260
+#: src/gE_prefs_box.c:261
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:273
+#: src/gE_prefs_box.c:274
 #, fuzzy
 msgid "Enable Autoindent"
 msgstr "Sätt på/av autoindrag"
 
-#: src/gE_prefs_box.c:282
+#: src/gE_prefs_box.c:283
 #, fuzzy
 msgid "Enable Wordwrap"
 msgstr "Sätt på/av ordbryting"
 
-#: src/gE_prefs_box.c:302
+#: src/gE_prefs_box.c:303
 msgid "Print Command"
 msgstr ""
 
-#: src/gE_prefs_box.c:392
+#: src/gE_prefs_box.c:393
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:409
+#: src/gE_prefs_box.c:410
 #, fuzzy
 msgid "Select..."
 msgstr "Markera allt"
@@ -206,6 +206,11 @@ msgstr ""
 #: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
 #, fuzzy
 msgid "Plugins"
+msgstr "Plugins"
+
+#: src/gE_prefs_box.c:596
+#, fuzzy
+msgid "Use Plugins"
 msgstr "Plugins"
 
 #: src/gE_prefs_box.c:663
@@ -411,60 +416,66 @@ msgstr "Spara inställningar"
 msgid "Save the current settings for future sessions"
 msgstr ""
 
-#: src/search.c:150
+#: src/search.c:282
 #, c-format
 msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
 
-#: src/search.c:365 src/search.c:586
-#, fuzzy
-msgid "Search and Replace"
-msgstr "Sök och ersätt"
+#: src/search.c:303
+msgid "Go to line"
+msgstr ""
 
-#: src/search.c:365 src/search.c:586
+#: src/search.c:313
+msgid "Line number"
+msgstr ""
+
+#: src/search.c:336
+#, fuzzy
+msgid "Search from cursor"
+msgstr "Sök igen"
+
+#: src/search.c:343
+msgid "Search from beginning of document"
+msgstr ""
+
+#: src/search.c:350
+msgid "Search from end of document"
+msgstr ""
+
+#: src/search.c:357
+msgid "Case sensitive"
+msgstr ""
+
+#: src/search.c:363
+msgid "Reverse search"
+msgstr ""
+
+#: src/search.c:375
 #, fuzzy
 msgid "Search"
 msgstr "Sök"
 
-#: src/search.c:368
+#: src/search.c:380 src/search.c:408
 #, fuzzy
-msgid "Search For:"
+msgid "Search for:"
 msgstr "Sök"
 
-#: src/search.c:372
-#, fuzzy
-msgid "Text"
-msgstr "Bara text"
-
-#: src/search.c:379
-msgid "Line Number"
+#: src/search.c:402
+msgid "Replace"
 msgstr ""
 
-#: src/search.c:398
-#, fuzzy
-msgid "Search:"
-msgstr "Sök"
-
-#: src/search.c:401
-msgid "Start searching at cursor position"
+#: src/search.c:418
+msgid "Replace with:"
 msgstr ""
 
-#: src/search.c:406
-msgid "Start searching at beginning of the document"
+#: src/search.c:429
+msgid "Ask before replacing"
 msgstr ""
 
-#: src/search.c:408
-msgid "Case sensitive"
-msgstr ""
-
-#: src/search.c:412
-msgid "Replace:"
-msgstr ""
-
-#: src/search.c:415
-msgid "Prompt before replacing"
+#: src/search.c:624
+msgid "Replace?"
 msgstr ""
 
 #: src/toolbar.c:38
@@ -521,6 +532,18 @@ msgstr "Redigera"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Search and Replace"
+#~ msgstr "Sök och ersätt"
+
+#, fuzzy
+#~ msgid "Text"
+#~ msgstr "Bara text"
+
+#, fuzzy
+#~ msgid "Search:"
+#~ msgstr "Sök"
 
 #~ msgid "Close All"
 #~ msgstr "Stäng alla"

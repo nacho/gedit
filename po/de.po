@@ -5,16 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit-0.5.0\n"
+"POT-Creation-Date: 1999-05-08 21:05+0100\n"
 "PO-Revision-Date: 1999-02-20 14:46+01:00\n"
 "Last-Translator: Matthias Warkus <mawa@iname.com>\n"
 "Language-Team: Matthias Warkus <mawa@iname.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: editor-plugins/email.c:86
-msgid "The gEdit Email Plugin"
-msgstr "Das gEdit-E-Mail-Plugin"
 
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
@@ -25,11 +22,69 @@ msgstr "Dokument-ID ist %ld.\n"
 msgid "Shell"
 msgstr "Shell"
 
-#: src/commands.c:1048 src/commands.c:1049
+#: src/commands.c:501
+#, fuzzy
+msgid "Open File..."
+msgstr "Eine Datei öffnen"
+
+#: src/commands.c:577
+msgid "Read only file!"
+msgstr ""
+
+#: src/commands.c:603
+msgid "Error saving file!"
+msgstr ""
+
+#: src/commands.c:626
+#, fuzzy
+msgid "Save As..."
+msgstr " Speichern "
+
+#: src/commands.c:968 src/commands.c:969
 msgid "_File"
 msgstr "_Datei"
 
-#: src/gE_about.c:45
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr ""
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr ""
+
+#: src/gE_about.c:33
+msgid "With special thanks to:"
+msgstr ""
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr ""
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr ""
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr ""
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr ""
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr ""
+
+#: src/gE_about.c:50
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:52
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit ist ein kleiner und handlicher Texteditor für GNOME/Gtk+"
 
@@ -45,10 +100,7 @@ msgstr "Kopieren"
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/gE_document.c:65
-msgid "Open in new window"
-msgstr "In neuem Fenster öffnen"
-
+#. { N_("Open in new window"), file_open_in_new_win_cb },
 #: src/gE_document.c:66 src/toolbar.c:42
 msgid "Save"
 msgstr "Speichern"
@@ -58,7 +110,7 @@ msgid "Close"
 msgstr "Schließen"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:406 src/gE_print.c:69
+#: src/gE_document.c:68 src/gE_prefs_box.c:763 src/gE_print.c:70
 #: src/toolbar.c:46
 msgid "Print"
 msgstr "Drucken"
@@ -68,197 +120,283 @@ msgid "Open (swap) .c/.h file"
 msgstr ".c/.h-Datei öffnen (austauschen)"
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:117
 msgid "Column:"
 msgstr "Spalte:"
 
-#: src/gE_document.c:157
+#: src/gE_document.c:126
 msgid "Line"
 msgstr "Zeile"
 
-#: src/gE_files.c:305
-msgid "Currently Open Files"
-msgstr "Momentan offene Dateien"
-
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/menus.c:237
+#. data->window = app;
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:481
+#: src/gE_prefs_box.c:482 src/gE_prefs_box.c:532 src/gE_prefs_box.c:533
+#: src/menus.c:232
 msgid "_Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:163
+#: src/gE_prefs_box.c:82
+msgid "Default"
+msgstr ""
+
+#: src/gE_prefs_box.c:83
+msgid "Notebook"
+msgstr ""
+
+#: src/gE_prefs_box.c:84
+msgid "Toplevel"
+msgstr ""
+
+#: src/gE_prefs_box.c:85
+msgid "Modal"
+msgstr ""
+
+#: src/gE_prefs_box.c:230
 msgid "Appearance"
 msgstr "Aussehen"
 
-#: src/gE_prefs_box.c:176
+#: src/gE_prefs_box.c:243
 msgid "Show Statusbar"
 msgstr "Statuszeile an/aus"
 
-#: src/gE_prefs_box.c:185
+#: src/gE_prefs_box.c:252
 msgid "Show Splitscreen"
 msgstr "Bildschirm teilen an/aus"
 
-#: src/gE_prefs_box.c:194
+#: src/gE_prefs_box.c:261
 msgid "Editor Behavior"
 msgstr "Editorverhalten"
 
-#: src/gE_prefs_box.c:207
+#: src/gE_prefs_box.c:274
 msgid "Enable Autoindent"
 msgstr "Automatisches Einrücken an/aus"
 
-#: src/gE_prefs_box.c:216
+#: src/gE_prefs_box.c:283
 msgid "Enable Wordwrap"
 msgstr "Automatischer Wortumbruch an/aus"
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:303
 msgid "Print Command"
 msgstr "Druckbefehl"
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:393
 msgid "Current Font"
 msgstr "Aktuelle Schriftart"
 
-#: src/gE_prefs_box.c:335
+#: src/gE_prefs_box.c:410
 msgid "Select..."
 msgstr "Auswählen..."
 
+#: src/gE_prefs_box.c:575
+msgid "Name"
+msgstr ""
+
+#: src/gE_prefs_box.c:575
+msgid "Location"
+msgstr ""
+
+#. Plugins Settings
+#: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
+#, fuzzy
+msgid "Plugins"
+msgstr "Plugins"
+
+#: src/gE_prefs_box.c:596
+#, fuzzy
+msgid "Use Plugins"
+msgstr "Plugins"
+
+#: src/gE_prefs_box.c:663
+msgid "Add"
+msgstr ""
+
+#: src/gE_prefs_box.c:668
+msgid "Remove"
+msgstr ""
+
+#: src/gE_prefs_box.c:691
+msgid "MDI Mode"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:758
 msgid "General"
 msgstr "Allgemein"
 
 #. Font Settings
-#: src/gE_prefs_box.c:411
+#: src/gE_prefs_box.c:768
 msgid "Font"
 msgstr "Schriftart"
 
-#: src/gE_print.c:90
+#. MDI Settings
+#: src/gE_prefs_box.c:778
+msgid "MDI"
+msgstr ""
+
+#: src/gE_print.c:83
+#, c-format
+msgid ""
+"Enter print command below\n"
+"Remember to include '%s'"
+msgstr ""
+
+#: src/gE_print.c:91
 msgid "Print Command:"
 msgstr "Druckbefehl:"
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid "Print anyway"
 msgstr "Trotzdem drucken"
 
-#: src/gE_print.c:216
+#: src/gE_print.c:218
 msgid " Save, then print "
 msgstr " Speichern, dann drucken "
 
-#: src/gedit.c:116
+#: src/gedit.c:125
 msgid "Launch a plugin at startup"
 msgstr "Automatisch Plugin starten"
 
-#: src/gedit.c:116
+#: src/gedit.c:125
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
+#: src/menus.c:65
+#, fuzzy
+msgid "_Autoindent"
+msgstr "Automatisches Einrücken an/aus"
+
 #: src/menus.c:66
+#, fuzzy
+msgid "Status_bar"
+msgstr "Statuszeile an/aus"
+
+#: src/menus.c:67
+#, fuzzy
+msgid "_Wordwrap"
+msgstr "Automatischer Wortumbruch an/aus"
+
+#: src/menus.c:68
+#, fuzzy
+msgid "_Linewrap"
+msgstr "Automatischer Zeilenumbruch an/aus"
+
+#: src/menus.c:69
+#, fuzzy
+msgid "_Readonly"
+msgstr "Schreibschutz an/aus"
+
+#: src/menus.c:70
+#, fuzzy
+msgid "_Splitscreen"
+msgstr "Bildschirm teilen an/aus"
+
+#: src/menus.c:71
+#, fuzzy
+msgid "_Show tabs"
+msgstr "Statuszeile an/aus"
+
+#: src/menus.c:72
+msgid "Toolbar _relief"
+msgstr ""
+
+#: src/menus.c:73
+msgid "_Show tooltips"
+msgstr ""
+
+#: src/menus.c:74
+msgid "Show toolbar _text"
+msgstr ""
+
+#: src/menus.c:75
+msgid "Show toolbar _icons"
+msgstr ""
+
+#. and this one is the default file name
+#: src/menus.c:77
+msgid "Untitled"
+msgstr ""
+
+#: src/menus.c:85
 msgid "_New"
 msgstr "Neu"
 
-#: src/menus.c:66 src/toolbar.c:38
+#: src/menus.c:85 src/toolbar.c:38
 msgid "Create a new document"
 msgstr "Neues Dokument erzeugen"
 
-#: src/menus.c:83
-msgid "Close All"
-msgstr "Alles schließen"
-
-#: src/menus.c:83
-msgid "Close all open files"
-msgstr "Alle offenen Dateien schließen"
-
-#: src/menus.c:105
-msgid "Find _Line..."
-msgstr "Zeile suchen..."
-
-#: src/menus.c:106
-msgid "Search for a line"
-msgstr "Nach einer Zeile suchen"
-
-#: src/menus.c:120
+#: src/menus.c:114
 msgid "_Top"
 msgstr "Oben"
 
-#: src/menus.c:121
+#: src/menus.c:115
 msgid "Put the document tabs at the top"
 msgstr "Dokumentreiter oben anbringen"
 
-#: src/menus.c:124
+#: src/menus.c:118
 msgid "_Bottom"
 msgstr "_Unten"
 
-#: src/menus.c:125
+#: src/menus.c:119
 msgid "Put the document tabs at the bottom"
 msgstr "Dokumentreiter unten anbringen"
 
-#: src/menus.c:128
+#: src/menus.c:122
 msgid "_Left"
 msgstr "_Links"
 
-#: src/menus.c:129
+#: src/menus.c:123
 msgid "Put the document tabs on the left"
 msgstr "Dokumentreiter links anbringen"
 
-#: src/menus.c:132
+#: src/menus.c:126
 msgid "_Right"
 msgstr "Rechts"
 
-#: src/menus.c:133
+#: src/menus.c:127
 msgid "Put the document tabs on the right"
 msgstr "Dokumentreiter rechts anbringen"
 
-#: src/menus.c:139
-msgid "Toggle the presence of the document tabs"
-msgstr "Dokumentreiter an/aus"
-
-#: src/menus.c:150
+#: src/menus.c:144
 msgid "Toggle autoindent"
 msgstr "Automatisches Einrücken an/aus"
 
-#: src/menus.c:155
+#: src/menus.c:149
 msgid "Toggle statusbar"
 msgstr "Statuszeile an/aus"
 
-#: src/menus.c:160
+#: src/menus.c:154
 msgid "Toggle Wordwrap"
 msgstr "Automatischer Wortumbruch an/aus"
 
-#: src/menus.c:165
+#: src/menus.c:159
 msgid "Toggle Linewrap"
 msgstr "Automatischer Zeilenumbruch an/aus"
 
-#: src/menus.c:170
+#: src/menus.c:164
 msgid "Toggle Readonly"
 msgstr "Schreibschutz an/aus"
 
-#: src/menus.c:175
+#: src/menus.c:169
 msgid "Toggle Split Screen"
 msgstr "Bildschirm teilen an/aus"
 
-#: src/menus.c:181
+#: src/menus.c:175
 msgid "_Document Tabs"
 msgstr "_Dokumentreiter"
 
-#: src/menus.c:182
+#: src/menus.c:176
 msgid "Change the placement of the document tabs"
 msgstr "Anbringung der Dokumentreiter ändern"
 
-#: src/menus.c:186
+#: src/menus.c:180
 msgid "Sa_ve Settings"
 msgstr "Einstellungen speichern"
 
-#: src/menus.c:187
+#: src/menus.c:181
 msgid "Save the current settings for future sessions"
 msgstr "Aktuelle Einstellungen für spätere Sitzungen speichern"
 
-#: src/menus.c:205
-msgid "_Document List"
-msgstr "Dokumentliste"
-
-#: src/menus.c:206
-msgid "Display the document list"
-msgstr "Dokumentliste darstellen"
-
-#: src/search.c:149
+#: src/search.c:282
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -267,49 +405,66 @@ msgstr ""
 "Zeilenanzahl: %i\n"
 "Aktuelle Zeile: %i"
 
-#: src/search.c:363 src/search.c:581
-msgid "Search and Replace"
-msgstr "Suchen und Ersetzen"
+#: src/search.c:303
+msgid "Go to line"
+msgstr ""
 
-#: src/search.c:363 src/search.c:581
-msgid "Search"
-msgstr "Suchen"
-
-#: src/search.c:366
-msgid "Search For:"
-msgstr "Suchen nach:"
-
-#: src/search.c:370
-msgid "Text"
-msgstr "Nur Text"
-
-#: src/search.c:377
-msgid "Line Number"
+#: src/search.c:313
+#, fuzzy
+msgid "Line number"
 msgstr "Zeilennummer"
 
-#: src/search.c:396
-msgid "Search:"
-msgstr "Suchen:"
+#: src/search.c:336
+#, fuzzy
+msgid "Search from cursor"
+msgstr "Eine Zeichenkette suchen"
 
-#: src/search.c:399
-msgid "Start searching at cursor position"
-msgstr "Suche an der Cursorposition starten"
-
-#: src/search.c:404
-msgid "Start searching at beginning of the document"
+#: src/search.c:343
+#, fuzzy
+msgid "Search from beginning of document"
 msgstr "Suche am Dokumentanfang starten"
 
-#: src/search.c:406
+#: src/search.c:350
+#, fuzzy
+msgid "Search from end of document"
+msgstr "Suche am Dokumentanfang starten"
+
+#: src/search.c:357
 msgid "Case sensitive"
 msgstr "Groß-/Kleinschreibung beachten"
 
-#: src/search.c:410
-msgid "Replace:"
+#: src/search.c:363
+msgid "Reverse search"
+msgstr ""
+
+#: src/search.c:375
+msgid "Search"
+msgstr "Suchen"
+
+#: src/search.c:380 src/search.c:408
+#, fuzzy
+msgid "Search for:"
+msgstr "Suchen nach:"
+
+#: src/search.c:402
+#, fuzzy
+msgid "Replace"
 msgstr "Ersetzen:"
 
-#: src/search.c:413
-msgid "Prompt before replacing"
+#: src/search.c:418
+#, fuzzy
+msgid "Replace with:"
+msgstr "Ersetzen:"
+
+#: src/search.c:429
+#, fuzzy
+msgid "Ask before replacing"
 msgstr "Nachfragen vor dem Ersetzen"
+
+#: src/search.c:624
+#, fuzzy
+msgid "Replace?"
+msgstr "Ersetzen:"
 
 #: src/toolbar.c:38
 msgid "New"
@@ -363,18 +518,53 @@ msgstr "Beenden"
 msgid "Exit the program"
 msgstr "Das Programm beenden"
 
-#: src/toolbar.c:70
-msgid " Save "
-msgstr " Speichern "
+#~ msgid "The gEdit Email Plugin"
+#~ msgstr "Das gEdit-E-Mail-Plugin"
 
-#: src/toolbar.c:72
-msgid " Close "
-msgstr " Schließen "
+#~ msgid "Open in new window"
+#~ msgstr "In neuem Fenster öffnen"
 
-#: src/toolbar.c:74
-msgid " Print "
-msgstr " Drucken "
+#~ msgid "Currently Open Files"
+#~ msgstr "Momentan offene Dateien"
 
-#: src/toolbar.c:77
-msgid " OK "
-msgstr " OK "
+#~ msgid "Close All"
+#~ msgstr "Alles schließen"
+
+#~ msgid "Close all open files"
+#~ msgstr "Alle offenen Dateien schließen"
+
+#~ msgid "Find _Line..."
+#~ msgstr "Zeile suchen..."
+
+#~ msgid "Search for a line"
+#~ msgstr "Nach einer Zeile suchen"
+
+#~ msgid "Toggle the presence of the document tabs"
+#~ msgstr "Dokumentreiter an/aus"
+
+#~ msgid "_Document List"
+#~ msgstr "Dokumentliste"
+
+#~ msgid "Display the document list"
+#~ msgstr "Dokumentliste darstellen"
+
+#~ msgid "Search and Replace"
+#~ msgstr "Suchen und Ersetzen"
+
+#~ msgid "Text"
+#~ msgstr "Nur Text"
+
+#~ msgid "Search:"
+#~ msgstr "Suchen:"
+
+#~ msgid "Start searching at cursor position"
+#~ msgstr "Suche an der Cursorposition starten"
+
+#~ msgid " Close "
+#~ msgstr " Schließen "
+
+#~ msgid " Print "
+#~ msgstr " Drucken "
+
+#~ msgid " OK "
+#~ msgstr " OK "
