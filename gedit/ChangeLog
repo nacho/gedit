@@ -1,5 +1,10 @@
 2004-02-19  Paolo Maggi  <paolo.maggi@polito.it>
 
+	* gedit-mdi-child.c (set_tooltip): does not display "MIME-Type: Unknown"
+	in the case mime_type != NULL and mime_description == NULL 
+
+2004-02-19  Paolo Maggi  <paolo.maggi@polito.it>
+
 	* gedit-file-selector-util.c: use gtk_dialog_run instead of the
 	equivalent hand made solution we used till now
 	(create_gtk_selector): mark filters name for translation (fixes 

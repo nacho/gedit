@@ -723,10 +723,17 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 		mime_description = gnome_vfs_mime_get_description (mime_type);
 
 	if (mime_description == NULL)
-		mime_full_description = g_strdup (_("Unknown"));
+	{
+		if (mime_type != NULL)
+			mime_full_description = g_strdup (mime_type);
+		else
+			mime_full_description = g_strdup (_("Unknown"));
+	}	
 	else
+	{
 		mime_full_description = g_strdup_printf ("%s (%s)", 
 				mime_description, mime_type);
+	}
 		
 	enc = gedit_document_get_encoding (GEDIT_MDI_CHILD (child)->document);
 

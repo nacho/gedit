@@ -1393,10 +1393,12 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		doc->priv->untitled_number = 0;
 	}
 
-	data = gedit_metadata_manager_get (uri,
-					   "language");
+	data = gedit_metadata_manager_get (uri, "language");
+
 	if (data != NULL)
 	{
+		gedit_debug (DEBUG_DOCUMENT, "Language: %s", data);
+
 		if (strcmp (data, "_NORMAL_") == 0)
 			language = NULL;
 		else
@@ -1418,6 +1420,8 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		{
 			GtkSourceLanguage *language;
 			
+			gedit_debug (DEBUG_DOCUMENT, "MIME-TYPE: %s", mime_type);
+
 			language = gtk_source_languages_manager_get_language_from_mime_type (
 						gedit_get_languages_manager (),
 						mime_type);
@@ -1430,6 +1434,8 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		{
 			g_warning ("Couldn't get mime type for file `%s'", uri);
 		}
+
+		
 	}
 
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
