@@ -17,7 +17,8 @@ INCLUDES =							\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED
 
-lib_LTLIBRARIES = libgedit-control.la
+bonobodir = $(libdir)/bonobo
+bonobo_LTLIBRARIES = libgedit-control.la
 
 libgedit_control_la_SOURCES = 					\
 	gedit-viewer.h						\
@@ -29,6 +30,8 @@ libgedit_control_la_SOURCES = 					\
 libgedit_control_la_LIBADD =					\
 	../gedit/libgedit.la 					\
 	$(GEDIT_LIBS)
+
+libgedit_control_la_LDFLAGS = -module -avoid-version
 
 uidir = $(datadir)/gnome-2.0/ui
 ui_DATA = gedit-viewer-ui.xml
