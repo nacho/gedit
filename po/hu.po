@@ -1,24 +1,26 @@
 # Hungarian translation of gedit.
-# Copyright (C) 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
 # Szabolcs Ban <shooby@gnome.hu>, 2000.
 # Emese Kovacs <emese@gnome.hu>, 2000, 2001.
 # Peter Doma <zelin@pointernet.hu>, 2002.
 # Andras Timar <timar@gnome.hu>, 2001, 2002, 2003.
 # Gabor Sari <saga@gnome.hu>, 2003.
 # Laszlo Dvornik <dvornik@gnome.hu>, 2004.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit\n"
+"Project-Id-Version: gedit.HEAD.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-26 17:52+0100\n"
-"PO-Revision-Date: 2004-08-18 18:10+0200\n"
-"Last-Translator: Laszlo Dvornik <dvornik@gnome.hu>\n"
+"POT-Creation-Date: 2005-02-28 14:41+0100\n"
+"PO-Revision-Date: 2005-03-04 13:48+0100\n"
+"Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms:  nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -48,7 +50,7 @@ msgstr "gedit automation factory"
 msgid "Edit text files"
 msgstr "Szövegfájlok szerkesztése"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:322
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Szövegszerkesztő"
 
@@ -61,9 +63,8 @@ msgstr ""
 "érvénybe, ha az \"Alapértelmezett betűtípus használata\" ki van kapcsolva."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "%s aktiválása"
+msgstr "Aktív bővítmények"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -166,11 +167,11 @@ msgstr "Fejléc betűtípusa nyomtatáskor"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Jelenlegi sor kiemelése"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Zárójel párjának kiemelése"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -197,7 +198,7 @@ msgstr "Sortörési mód"
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
-msgstr ""
+msgstr "Az aktív bővítmények listája. Az aktív bővítmények helyét (\"Location\") tartalmazza. Lásd a .gedit-plugin fájlt az adott bővítményhez tartozó \"Location\" értékért."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -224,9 +225,8 @@ msgstr "Monospace 12"
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:37
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and replaced by
@@ -266,16 +266,14 @@ msgstr "Jobb oldali margó pozíciója"
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:50
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid "Sans 8"
-msgstr "Spanyol"
+msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
@@ -338,16 +336,14 @@ msgstr ""
 "úgy használja őket, ahogy itt vannak."
 
 #: data/gedit.schemas.in.h:67
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
+msgid "Specifies the font to use for a document's body when printing documents."
 msgstr "Meghatározza nyomtatáskor a dokumentum törzséhez használt betűtípust."
 
 #: data/gedit.schemas.in.h:68
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "Meghatározza nyomtatáskor a dokumentum törzséhez használt betűtípust."
+msgstr "Meghatározza nyomtatáskor a dokumentum törzséhez használt betűtípust. Ez egy gnome-print betűkészletnév és a print_font_body_pango lecseréli."
 
 #: data/gedit.schemas.in.h:69
 msgid ""
@@ -358,14 +354,13 @@ msgstr ""
 "lép érvénybe, ha a \"Sorok számának kiírása\" be van állítva."
 
 #: data/gedit.schemas.in.h:70
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "Meghatározza nyomtatáskor a sorok számához használt betűtípust. Csak akkor "
-"lép érvénybe, ha a \"Sorok számának kiírása\" be van állítva."
+"lép érvénybe, ha a \"Sorok számának kiírása\" be van állítva. Ez egy gnome-print betűkészletnév és a print_font_body_pango lecseréli."
 
 #: data/gedit.schemas.in.h:71
 msgid ""
@@ -376,21 +371,19 @@ msgstr ""
 "akkor lép érvénybe, ha a \"Nyomtatási fejléc\" be van kapcsolva."
 
 #: data/gedit.schemas.in.h:72
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "Meghatározza nyomtatáskor az oldal fejlécéhez használt betűtípust. Csak "
-"akkor lép érvénybe, ha a \"Nyomtatási fejléc\" be van kapcsolva."
+"akkor lép érvénybe, ha a \"Nyomtatási fejléc\" be van kapcsolva. Ez egy gnome-print betűkészletnév és a print_font_body_pango lecseréli."
 
 #: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
-msgstr ""
-"Meghatározza a \"Legutóbbi fájlok\" almenüben megjelenített fájlok számát."
+msgstr "Meghatározza a \"Legutóbbi fájlok\" almenüben megjelenített fájlok számát."
 
 #: data/gedit.schemas.in.h:74
 msgid ""
@@ -485,14 +478,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "Szintaxiskiemelés engedélyezésének ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:91
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Szintaxiskiemelés engedélyezésének ki/bekapcsolása."
+msgstr "A Gedit kiemelje-e a zárójel párját?"
 
 #: data/gedit.schemas.in.h:92
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "Nyomtatáskor a szintaxiskiemelés ki/bekapcsolása."
+msgstr "A Gedit kiemelje-e a jelenlegi sort?"
 
 #: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
@@ -507,8 +498,7 @@ msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Nyomtatáskor a szintaxiskiemelés ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:96
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
+msgid "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "A szerkesztőablak alján található állapotsor ki/bekapcsolása."
 
 #: data/gedit.schemas.in.h:97
@@ -550,15 +540,14 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2124
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "%s aktiválása"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Kimeneti ablak bezárása"
+msgstr "Bezárás mentés _nélkül"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -566,8 +555,7 @@ msgstr "Kérdés"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld second will be permanently lost."
+msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
@@ -579,8 +567,7 @@ msgstr[1] ""
 "elvesznek."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
-msgid ""
-"If you don't save, changes from the last minute will be permanently lost."
+msgid "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
 "Ha nem menti, akkor az elmúlt percben történt változások véglegesen "
 "elvesznek."
@@ -602,8 +589,7 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld minute will be permanently lost."
+msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
@@ -616,12 +602,11 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Ha nem menti, akkor az elmúlt órában történt változások véglegesen elvesznek."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Ha nem menti, akkor az elmúlt órában történt változások véglegesen elvesznek."
+msgstr[1] "Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen elvesznek."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -646,8 +631,7 @@ msgstr "Menti a változásokat a(z) \"%s\" dokumentumba mielőtt bezárja?"
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "%d mentetlen dokumentum van. Menti a változásokat mielőtt bezárja?"
 msgstr[1] "%d mentetlen dokumentum van. Menti a változásokat mielőtt bezárja?"
 
@@ -761,8 +745,7 @@ msgstr "A kiválasztott fájl nem futtatható."
 
 #: gedit/dialogs/gedit-preferences-dialog.c:730
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
-"Nyomja meg ezt a gombot a szerkesztőben használt betűkészlet kiválasztásához"
+msgstr "Nyomja meg ezt a gombot a szerkesztőben használt betűkészlet kiválasztásához"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:732
 msgid "Push this button to configure text color"
@@ -782,8 +765,7 @@ msgstr "Nyomja meg ezt a gombot a kiválasztott szöveg színének kiválasztás
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
-msgstr ""
-"Nyomja meg ezt a gombot a kiválasztott szöveg háttérszínének kiválasztásához"
+msgstr "Nyomja meg ezt a gombot a kiválasztott szöveg háttérszínének kiválasztásához"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:1189
 msgid "Elements"
@@ -796,19 +778,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatikus behúzás</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Szöveg tördelése</b>"
+msgstr "<b>Zárójelek párosítása</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Szöveg tördelése</b>"
+msgstr "<b>Jelenlegi sor</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -832,7 +811,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Jobb oldali margó</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabulátorok</b>"
 
@@ -860,7 +838,7 @@ msgstr "_Biztonsági másolatok létrehozása mentés előtt"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "D_isplay right margin"
-msgstr "Jobb oldal_i margó megjelenítése"
+msgstr "Jobb oldali mar_gó megjelenítése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
@@ -873,7 +851,7 @@ msgstr "Szerkesztő"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Editor _font: "
-msgstr "Szerkesztő _betűkészlete: "
+msgstr "S_zerkesztő betűkészlete: "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:20
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
@@ -886,15 +864,15 @@ msgstr "Betűk és színek"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "_Jelenlegi sor kiemelése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
-msgstr "_Kiemelési üzemmód:"
+msgstr "Ki_emelési üzemmód:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "A zárójel párjának kiemelése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -958,7 +936,7 @@ msgstr "Szintaxiskiemelés"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "U_se default theme colors"
-msgstr "Téma alapértelmezett színeinek _használata"
+msgstr "Téma alapértelmezett színeinek h_asználata"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "Underline"
@@ -970,7 +948,7 @@ msgstr "Nézet"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Autosave files every"
-msgstr "Fájlok _automatikus mentése"
+msgstr "Fájlok a_utomatikus mentése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background color:"
@@ -985,9 +963,8 @@ msgid "_Display line numbers"
 msgstr "Sorok számának _megjelenítése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
-msgstr "_Automatikus bekezdések engedélyezése"
+msgstr "_Automatikus behúzás engedélyezése"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Enable syntax highlighting"
@@ -1010,7 +987,6 @@ msgid "_Right margin at column:"
 msgstr "_Jobb oldali margó ennél az oszlopnál:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "_Tabulátorok szélessége:"
 
@@ -1088,7 +1064,7 @@ msgstr "soronként"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
 msgid "C_onfigure Plugin"
-msgstr "Bővítmény _beállítása"
+msgstr "Bővítmény b_eállítása"
 
 #: gedit/dialogs/plugin-manager.glade2.h:2
 msgid "_About Plugin"
@@ -1134,7 +1110,7 @@ msgstr "Mindet cseréli"
 
 #: gedit/dialogs/replace.glade2.h:6
 msgid "Replace _with: "
-msgstr "_Csere ezzel: "
+msgstr "C_sere ezzel: "
 
 #: gedit/dialogs/replace.glade2.h:7
 msgid "Search _backwards"
@@ -1142,15 +1118,15 @@ msgstr "Keresés _visszafelé"
 
 #: gedit/dialogs/replace.glade2.h:8
 msgid "_Match case"
-msgstr "_Kis- és nagybetű"
+msgstr "Kis- és _nagybetű"
 
 #: gedit/dialogs/replace.glade2.h:9
 msgid "_Search for: "
-msgstr "_Keresés erre: "
+msgstr "Keresés _erre: "
 
 #: gedit/dialogs/replace.glade2.h:10
 msgid "_Wrap around"
-msgstr "_Körbe"
+msgstr "Kö_rbe"
 
 #: gedit/dialogs/uri.glade2.h:2
 msgid "Ch_aracter coding:"
@@ -1176,12 +1152,12 @@ msgstr "A gedit egy kicsi és könnyű szövegszerkesztő a GNOME munkaasztalhoz
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Bán Szabolcs <shooby@gnome.hu>\n"
 "Doma Péter <zelin@pointernet.hu>\n"
 "Dvornik László <dvornik@gnome.hu>\n"
+"Kelemen Gábor <kelemeng@gnome.hu>\n"
 "Kovács Emese <emese@gnome.hu>\n"
 "Sári Gábor <saga@gnome.hu>\n"
 "Tímár András <timar@gnome.hu>"
@@ -1196,9 +1172,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:666 gedit/gedit-document.c:684
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "_Dokumentumok"
+msgstr "Mentetlen dokumentum"
 
 #: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
@@ -1409,7 +1384,6 @@ msgid "All Text Files"
 msgstr "Minden szövegfájl"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "K_arakterkódolás:"
 
@@ -1455,19 +1429,15 @@ msgstr "Visszaállítja a(z) \"%s\" dokumentum nem mentett változásait?"
 
 #: gedit/gedit-file.c:537
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld second will be permanently lost."
+msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] ""
-"A dokumentum elmúlt %ld másodpercben történt változásai véglegesen elvesznek."
-msgstr[1] ""
-"A dokumentum elmúlt %ld másodpercben történt változásai véglegesen elvesznek."
+msgstr[0] "A dokumentum elmúlt %ld másodpercben történt változásai véglegesen elvesznek."
+msgstr[1] "A dokumentum elmúlt %ld másodpercben történt változásai véglegesen elvesznek."
 
 #: gedit/gedit-file.c:546
-msgid ""
-"Changes made to the document in the last minute will be permanently lost."
+msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr "A dokumentum elmúlt percben történt változásai véglegesen elvesznek."
 
 #: gedit/gedit-file.c:552
@@ -1487,22 +1457,19 @@ msgstr[1] ""
 
 #: gedit/gedit-file.c:562
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld minute will be permanently lost."
+msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] ""
-"A dokumentum elmúlt %ld percben történt változásai véglegesen elvesznek."
-msgstr[1] ""
-"A dokumentum elmúlt %ld percben történt változásai véglegesen elvesznek."
+msgstr[0] "A dokumentum elmúlt %ld percben történt változásai véglegesen elvesznek."
+msgstr[1] "A dokumentum elmúlt %ld percben történt változásai véglegesen elvesznek."
 
 #: gedit/gedit-file.c:577 gedit/gedit-file.c:598
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "A dokumentum elmúlt órában történt változásai véglegesen elvesznek."
+msgstr[1] "A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
 
 #: gedit/gedit-file.c:583
 #, c-format
@@ -1573,9 +1540,9 @@ msgstr[0] "%d fájl betöltve"
 msgstr[1] "%d fájl betöltve"
 
 #: gedit/gedit-file.c:1288
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "\"%s\" fájl betöltve"
+msgstr "\"%s\" fájl létrehozva"
 
 #: gedit/gedit-file.c:1306
 #, c-format
@@ -1590,18 +1557,14 @@ msgstr[0] "%d fájl betöltése..."
 msgstr[1] "%d fájl betöltése..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt"
+msgstr "Nem található a(z) \"%s\" fájl"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" egy könyvtár.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+msgstr "Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1617,163 +1580,117 @@ msgid "Could not open the file \"%s\""
 msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert sérült adatokat tartalmaz."
+msgstr "A fájl sérült adatokat tartalmaz."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "A gedit nem tudja a(z) %s: típusú helyeket írásra használni."
+msgstr "A gedit nem tudja a(z) %s: típusú helyeket kezelni."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "A gedit nem tudja a(z) %s: típusú helyeket írásra használni."
+msgstr "A gedit nem tudja ezt a helyet kezelni."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen formátumú adatokat "
-"tartalmaz."
+msgstr "A fájl érvénytelen formátumú adatokat tartalmaz."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "A fájl túl sok szimbolikus linkkel rendelkezik."
+msgstr "A fájl túl nagy."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" érvénytelen hely"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "A hozzáférés meg lett tagadva."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
-msgid ""
-"there are too many open files. Please, close some open files and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
-"\n"
-"Zárjon be néhány nyitott fájlt és próbálja meg újra."
+msgid "there are too many open files. Please, close some open files and try again."
+msgstr "túl sok fájl van megnyitva. Zárjon be néhány nyitott fájlt és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" egy könyvtár"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
-msgstr ""
-"Nincs elég memória a(z) \"%s\" fájl megnyitásához. Zárjon be néhány futó "
-"alkalmazást és próbálja meg újra."
+msgstr "Nincs elég memória a fájl megnyitásához. Zárjon be néhány futó alkalmazást és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
-"található.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
+msgstr "A(z) \"%s\" nevű gép nem található. Ellenőrizze a proxy beállításait és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
-msgstr ""
-"\"%s\" nem létező hely.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+msgstr "A gépnév érvénytelen. Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
+msgstr "A gépnév üres. Ellenőrizze a proxy beállításait és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"Nem található a(z) \"%s\" fájl.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
+msgstr "A bejelentkezési kísérlet sikertelen. Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatokat "
-"tartalmaz.\n"
-"\n"
-"Valószínűleg egy bináris fájlt próbál megnyitni."
+msgstr "A fájl érvénytelen adatokat tartalmaz. Valószínűleg egy bináris fájlt próbál megnyitni."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "A megnyitni próbált fájl nem szabályos fájl."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert nem sikerült meghatározni "
-"automatikusan a fájl karakterkódolását.\n"
-"\n"
+"A gedit nem tudta meghatározni automatikusan a fájl karakterkódolását."
 "Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és próbáljon a "
-"'Fájl megnyitása...' (vagy 'Hely megnyitása') párbeszédablakban másik "
+"\"Fájl megnyitása...\" (vagy \"Hely megnyitása\") párbeszédablakban másik "
 "karakterkódolást kiválasztani."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl nagy."
+msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt a(z) %s karakterkódolás használatával"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt %s karakterkódolással.\n"
-"\n"
 "Ellenőrizze, hogy nem egy bináris fájlt próbál-e megnyitni és hogy jó "
-"karakterkódolást választott ki a 'Fájl megnyitása...' (vagy 'Hely "
-"megnyitása') párbeszédablakban és próbálja meg újra."
+"karakterkódolást választott ki a \"Fájl megnyitása...\" (vagy \"Hely "
+"megnyitása\") párbeszédablakban és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatokat "
-"tartalmaz.\n"
-"\n"
-"Valószínűleg egy bináris fájlt próbál megnyitni."
+msgstr "A fájl érvénytelen formátumban tartalmaz adatokat. Valószínűleg egy bináris fájlt próbál megnyitni."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1782,125 +1699,84 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt."
+msgstr "Nem sikerült visszaállítani a(z) \"%s\" fájlt"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem találja.\n"
-"\n"
-"Valószínűleg mostanában le lett törölve."
+msgstr "a gedit nem találja. Valószínűleg nemrég le lett törölve."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
-msgid ""
-"There are too many open files. Please, close some open files and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
-"\n"
-"Zárjon be néhány nyitott fájlt és próbálja meg újra."
+msgid "There are too many open files. Please, close some open files and try again."
+msgstr "Túl sok a nyitott fájl. Zárjon be néhány nyitott fájlt és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
-msgstr ""
-"Nincs elég memória a(z) \"%s\" fájl megnyitásához. Zárjon be néhány futó "
-"alkalmazást és próbálja meg újra."
+msgstr "Nincs elég memória. Zárjon be néhány futó alkalmazást és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
-msgstr ""
-"Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
-"\n"
-"Ellenőrizze a proxy beállításait és próbálja meg újra."
+msgstr "A megadott gépnév üres. Ellenőrizze a proxy beállításait és próbálja meg újra."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "A bejelentkezési kísérlet sikertelen."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr ""
-"Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen UTF-8 adatot "
-"tartalmaz.\n"
-"\n"
-"Lehetséges, hogy egy bináris fájlt próbál visszaállítani."
+msgstr "A fájl érvénytelen UTF-8 adatot tartalmaz. Valószínűleg egy bináris fájlt próbál visszaállítani."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Nem lehet visszaállítani egy Névtelen dokumentumot."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Nem lehet elmenteni a(z) \"%s\" fájlt."
+msgstr "Nem sikerült elmenteni a(z) \"%s\" fájlt"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "A(z) \"%s\" nevű fájl már létezik."
+msgstr "A(z) \"%s\" nevű fájl már létezik"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" egy könyvtár.\n"
-"\n"
-"Ellenőrizze, hogy pontosan írta-e be a helyet."
+msgstr "Ellenőrizze, hogy pontosan írta-e be a helyet."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Nem lehet létrehozni a(z) \"%s\" fájlt."
+msgstr "Nem sikerült létrehozni a(z) \"%s\" fájlt"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"Győződjön meg róla, hogy rendelkezik-e a szükséges jogosultságokkal."
+msgstr "Győződjön meg róla, hogy rendelkezik-e a szükséges írási jogosultságokkal."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"A fájlnév túl hosszú."
+msgstr "A fájlnév túl hosszú."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"Nem lehet létrehozni a(z) \"%s\" fájlt.\n"
-"\n"
-"A fájlnévhez tartozó könyvtár nem létezik vagy hibás szimbolikus link."
+msgstr "A fájlnévhez tartozó könyvtár nem létezik vagy hibás szimbolikus link."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
-msgstr ""
-"Nincs elég hely a lemezen a(z) \"%s\" fájl létrehozásához.\n"
-"\n"
-"Szabadítson fel egy kis helyet a lemezen és próbálja meg újra."
+msgstr "Nincs elég hely a lemezen a fájl létrehozásához. Szabadítson fel egy kis helyet a lemezen és próbálja meg újra."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1910,7 +1786,7 @@ msgstr "RO"
 #. Add the detach tab button
 #: gedit/gedit-mdi-child.c:649 gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
-msgstr "_Áthelyezés új ablakba"
+msgstr "Át_helyezés új ablakba"
 
 #: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
@@ -1939,9 +1815,8 @@ msgid "Open a recently used file"
 msgstr "Nemrég használt fájl megnyitása"
 
 #: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
-#, fuzzy
 msgid "Read Only"
-msgstr "(csak olvasható)"
+msgstr "Csak olvasható"
 
 #: gedit/gedit-mdi.c:2095
 msgid "Normal"
@@ -2234,15 +2109,14 @@ msgstr "Mindent kijelöl"
 
 #: gedit/gedit-ui.xml.h:60
 msgid "Select _All"
-msgstr "_Mindent kijelöl"
+msgstr "Mind_ent kijelöl"
 
 #: gedit/gedit-ui.xml.h:61
 msgid "Select the entire document"
 msgstr "Teljes dokumentum kijelölése"
 
 #: gedit/gedit-ui.xml.h:62
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr ""
 "Eszköztár stílusának beállítása a munkaasztal Menük és eszköztárak "
 "beállításai alapján"
@@ -2285,7 +2159,7 @@ msgstr "_Bezárás"
 
 #: gedit/gedit-ui.xml.h:72
 msgid "_Close All"
-msgstr "_Mindent bezár"
+msgstr "Mindent _bezár"
 
 #: gedit/gedit-ui.xml.h:73
 msgid "_Contents"
@@ -2403,9 +2277,9 @@ msgstr "_Visszavonás"
 msgid "_View"
 msgstr "_Nézet"
 
-#: gedit/gedit-utils.c:695
+#: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (érvénytelen Unicode)"
 
 #.
 #. if (col == chars)
@@ -2455,13 +2329,13 @@ msgstr "A megadott \"%s\" kódolás érvénytelen\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "A megnyitni próbált fájl érvénytelen bájtsorozatot tartalmaz."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
-msgstr ""
+msgstr "A gedit nem tudta automatikusan megállapítani a megnyitni kívánt fájl kódolását."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2566,7 +2440,7 @@ msgstr "gedit: Dokumentum információs bővítmény"
 
 #: plugins/indent/indent.c:45
 msgid "_Indent"
-msgstr "_Behúzás"
+msgstr "Be_húzás"
 
 #: plugins/indent/indent.c:47
 msgid "Indent selected lines"
@@ -2605,44 +2479,39 @@ msgid "User name"
 msgstr "Felhasználónév"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "_Másolás"
+msgstr "Másol_at mentése..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "A jelenlegi dokumentum nyelvének megadása"
+msgstr "A jelenlegi dokumentum egy másolatának mentése"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Nem lehet elmenteni a(z) \"%s\" fájlt."
+msgstr "Nem sikerült elmenteni a fájl másolatát ide: \"%s\""
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "Az eredeti fájlt próbálja felülírni"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "Egyiket _sem menti"
+msgstr "Másolat mentése..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (másolat)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Minden megnyitott fájl mentése"
+msgstr "Másolat mentése"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "A jelenlegi dokumentum vagy kijelölés rendezése."
+msgstr "Másolatot ment a jelenlegi dokumentumról egy helyi vagy távoli helyre."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -2814,21 +2683,19 @@ msgstr "Helyesírás-ellenőrzés kész"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "Arab"
+msgstr "Amhari"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbajdzsáni"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "Bolgár"
+msgstr "Fehérorosz"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2852,16 +2719,15 @@ msgstr "Cseh"
 
 #: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
-msgstr "Velszi"
+msgstr "Walesi"
 
 #: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "Dán"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "Német (Németország)"
+msgstr "Német (Ausztria)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2892,14 +2758,12 @@ msgid "Spanish"
 msgstr "Spanyol"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "Román"
+msgstr "Észt"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "Nyomtatás"
+msgstr "Perzsa"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2918,49 +2782,44 @@ msgid "French (Swiss)"
 msgstr "Francia (Svájc)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "Török"
+msgstr "Ír"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Skót kelta"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "Grúz"
+msgstr "Gallegan"
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Manx kelta"
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "Keresés"
+msgstr "Hindi"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "Katalán"
+msgstr "Horvát"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Felső szorb"
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "Bolgár"
+msgstr "Magyar"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Interlingva (IALA)"
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonéz"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2971,61 +2830,56 @@ msgid "Italian"
 msgstr "Olasz"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "Török"
+msgstr "Kurd"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "Sor"
+msgstr "Latin"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "Litván"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "Lett"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "Malagasi"
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "gedit"
+msgstr "Macedón"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongol"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "Maláj"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "Máltai"
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Norvég"
+msgstr "Norvég Bokmal"
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Holland"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Norvég"
+msgstr "Norvég (Nynorsk)"
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -3033,7 +2887,7 @@ msgstr "Norvég"
 
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3049,7 +2903,7 @@ msgstr "Portugál (Brazília)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "Kecsua"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3057,12 +2911,11 @@ msgstr "Orosz"
 
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Ukrán"
+msgstr "Szárd"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3078,24 +2931,23 @@ msgstr "Svéd"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "Szuahéli"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "Thai"
+msgstr "Tamil"
 
 #: plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
-msgstr ""
+msgstr "Tetum"
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "Tagalog"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "Tswana"
 
 #: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3103,19 +2955,19 @@ msgstr "Ukrán"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "Üzbég"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
-msgstr ""
+msgstr "Vallon"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Jiddis"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3204,7 +3056,7 @@ msgstr "A jelenlegi dokumentum helyesírásának ellenőrzése"
 
 #: plugins/spell/spell.c:57
 msgid "_Autocheck Spelling"
-msgstr "_Helyesírás automatikus ellenőrzése"
+msgstr "Helyesírás a_utomatikus ellenőrzése"
 
 #: plugins/spell/spell.c:60
 msgid "Automatically spell-check the current document"
@@ -3223,12 +3075,10 @@ msgid "The document is empty."
 msgstr "A dokumentum üres."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "A kijelölt szöveg nem tartalmaz rosszul írt szavakat."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "A dokumentum nem tartalmaz rosszul írt szavakat."
 
@@ -3243,137 +3093,147 @@ msgstr "Helyesírás-ellenőrző"
 #: plugins/taglist/HTML.tags.xml.in.h:1
 #, fuzzy
 msgid "Abbreviated form"
-msgstr "Elérhető formátumok"
+msgstr "Rövidített forma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
 #, fuzzy
 msgid "Abbreviation"
-msgstr "Örmény"
+msgstr "Rövidítés"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
+#, fuzzy
 msgid "Above"
-msgstr ""
+msgstr "Above"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
+#, fuzzy
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Hozzáférhetőségi karakter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
+#, fuzzy
 msgid "Acronym"
-msgstr ""
+msgstr "Acronym"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
 #, fuzzy
 msgid "Align"
-msgstr "soronként"
+msgstr "Igazítás"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
+#, fuzzy
 msgid "Alignment character"
-msgstr ""
+msgstr "Igazító karakter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
+#, fuzzy
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatíva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
+#, fuzzy
 msgid "Anchor"
-msgstr ""
+msgstr "Horgony"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
+#, fuzzy
 msgid "Anchor URI"
-msgstr ""
+msgstr "Horgony URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
 #, fuzzy
 msgid "Applet class file code"
-msgstr "A megnyitandó fájl kiválasztása"
+msgstr "Applet osztály fájl kódja"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
+#, fuzzy
 msgid "Array"
-msgstr ""
+msgstr "Tömb"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
+#, fuzzy
 msgid "Associated information"
-msgstr ""
+msgstr "Kapcsolódó információ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
 #, fuzzy
 msgid "Author info"
-msgstr "Automatikus bekezdések"
+msgstr "Szerzőinformáció"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
 #, fuzzy
 msgid "Axis related headers"
-msgstr "_Oldal fejlécének nyomtatása"
+msgstr "Tengellyel kapcsolatos fejlécek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
+#, fuzzy
 msgid "BGSound"
-msgstr ""
+msgstr "Háttérzene"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
 #, fuzzy
 msgid "Background color"
-msgstr "_Háttérszín:"
+msgstr "Háttérszín"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
 #, fuzzy
 msgid "Background texture tile"
-msgstr "Háttérszín"
+msgstr "Háttértapéta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
+#, fuzzy
 msgid "Base URI"
-msgstr ""
+msgstr "Alap URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 #, fuzzy
 msgid "Base font"
-msgstr "Címke betűkészlete"
+msgstr "Alap betűkészlet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
+#, fuzzy
 msgid "Behavior"
-msgstr ""
+msgstr "Viselkedés"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
+#, fuzzy
 msgid "Blinking text"
-msgstr ""
+msgstr "Villogó szöveg"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
 #, fuzzy
 msgid "Border"
-msgstr "Félkövér"
+msgstr "Szegély"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
 #, fuzzy
 msgid "Border color"
-msgstr "_Háttérszín:"
+msgstr "Szegélyszín"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
+#, fuzzy
 msgid "Box"
-msgstr ""
+msgstr "Doboz"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Közép-európai"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Általános"
+msgstr "Középre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-#, fuzzy
 msgid "Character encoding of linked resource"
-msgstr "Karakterkódolások"
+msgstr "A hivatkozott erőforrás karakterkódolása"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "Checked(állapot)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "_művelet"
+msgstr "Idézet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3381,12 +3241,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "Osztály implementációs azonosítója"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Elemlista"
+msgstr "Osztálylista"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3406,13 +3265,14 @@ msgid "Column span"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
+#, fuzzy
 msgid "Columns"
-msgstr ""
+msgstr "Oszlopok"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
 #, fuzzy
 msgid "Comment"
-msgstr "_Tartalom"
+msgstr "Megjegyzés"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
@@ -3426,12 +3286,12 @@ msgstr "_Tartalom"
 #: plugins/taglist/HTML.tags.xml.in.h:43
 #, fuzzy
 msgid "Content type"
-msgstr "_Tartalom"
+msgstr "Tartalomtípus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
 #, fuzzy
 msgid "Coordinates"
-msgstr "_Tartalom"
+msgstr "Koordináták"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3474,7 +3334,7 @@ msgstr "A kijelölt szöveg törlése"
 #: plugins/taglist/HTML.tags.xml.in.h:54
 #, fuzzy
 msgid "Direction"
-msgstr "Breton"
+msgstr "Irány"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
@@ -3487,7 +3347,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:57
 #, fuzzy
 msgid "Disabled"
-msgstr "Engedélyezve"
+msgstr "Tiltva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 #, fuzzy
@@ -3507,7 +3367,7 @@ msgstr "_Dokumentumok"
 #: plugins/taglist/HTML.tags.xml.in.h:61
 #, fuzzy
 msgid "Document title"
-msgstr "Statisztika a dokumentumról"
+msgstr "Dokumentum címe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
 #, fuzzy
@@ -3524,16 +3384,18 @@ msgid "Embedded object"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#, fuzzy
 msgid "Emphasis"
-msgstr ""
+msgstr "Hangsúly"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
+#, fuzzy
 msgid "Figure"
-msgstr ""
+msgstr "Ábra"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
 #, fuzzy
@@ -3552,7 +3414,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:71
 #, fuzzy
 msgid "Form"
-msgstr "Normál"
+msgstr "Űrlap"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
@@ -3585,7 +3447,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:79
 #, fuzzy
 msgid "Frame"
-msgstr "Név:"
+msgstr "Keret"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
@@ -3640,11 +3502,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
-msgstr ""
+msgstr "HTML - Különleges karakterek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
-msgstr ""
+msgstr "HTML - Címkék"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
@@ -3663,36 +3525,44 @@ msgid "Header cell ID's"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
+#, fuzzy
 msgid "Heading"
-msgstr ""
+msgstr "Címsor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
+#, fuzzy
 msgid "Heading 1"
-msgstr ""
+msgstr "Címsor 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
+#, fuzzy
 msgid "Heading 2"
-msgstr ""
+msgstr "Címsor 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
+#, fuzzy
 msgid "Heading 3"
-msgstr ""
+msgstr "Címsor 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
+#, fuzzy
 msgid "Heading 4"
-msgstr ""
+msgstr "Címsor 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
+#, fuzzy
 msgid "Heading 5"
-msgstr ""
+msgstr "Címsor 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
+#, fuzzy
 msgid "Heading 6"
-msgstr ""
+msgstr "Címsor 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
+#, fuzzy
 msgid "Height"
-msgstr ""
+msgstr "Magasság"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
@@ -3707,12 +3577,14 @@ msgid "I18N BiDi over-ride"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
+#, fuzzy
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
+#, fuzzy
 msgid "Image map"
-msgstr ""
+msgstr "Interaktív kép"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
@@ -3756,7 +3628,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:120
 #, fuzzy
 msgid "Label"
-msgstr "címke"
+msgstr "Címke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 #, fuzzy
@@ -3768,13 +3640,14 @@ msgid "Large text style"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
+#, fuzzy
 msgid "Layer"
-msgstr ""
+msgstr "Réteg"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 #, fuzzy
 msgid "Link color"
-msgstr "Szín kiválasztása"
+msgstr "Hivatkozás színe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
@@ -3843,13 +3716,14 @@ msgid "Multicolumn"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
+#, fuzzy
 msgid "Multiple"
-msgstr ""
+msgstr "Több"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
 #, fuzzy
 msgid "Name"
-msgstr "Név:"
+msgstr "Név"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
@@ -3897,8 +3771,9 @@ msgid "No word wrap"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
+#, fuzzy
 msgid "Note"
-msgstr ""
+msgstr "Megjegyzés"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
 #, fuzzy
@@ -4005,8 +3880,9 @@ msgid "Output media"
 msgstr "Kimenet sorai"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
+#, fuzzy
 msgid "Paragraph"
-msgstr ""
+msgstr "Bekezdés"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
@@ -4046,7 +3922,7 @@ msgstr "Kilépés"
 #: plugins/taglist/HTML.tags.xml.in.h:189
 #, fuzzy
 msgid "Range"
-msgstr "Mó_dosítás"
+msgstr "Tartomány"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
@@ -4062,12 +3938,14 @@ msgid "Reverse link"
 msgstr "_Fordított sorrend"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
+#, fuzzy
 msgid "Root"
-msgstr ""
+msgstr "Gyökér"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
+#, fuzzy
 msgid "Rows"
-msgstr ""
+msgstr "Sorok"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
@@ -4091,8 +3969,9 @@ msgid "Script statments"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
+#, fuzzy
 msgid "Scrollbar"
-msgstr ""
+msgstr "Görgetősáv"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
 #, fuzzy
@@ -4102,7 +3981,7 @@ msgstr "A megnyitandó fájl kiválasztása"
 #: plugins/taglist/HTML.tags.xml.in.h:202
 #, fuzzy
 msgid "Selected"
-msgstr "_Kijelöltek mentése"
+msgstr "Kijelölt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
@@ -4111,7 +3990,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:204
 #, fuzzy
 msgid "Shape"
-msgstr "Mentés"
+msgstr "Forma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -4124,7 +4003,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:207
 #, fuzzy
 msgid "Size"
-msgstr "Tabulátor mérete"
+msgstr "Méret"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
 #, fuzzy
@@ -4136,13 +4015,14 @@ msgid "Soft line break"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
+#, fuzzy
 msgid "Sound"
-msgstr ""
+msgstr "Hang"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
 #, fuzzy
 msgid "Space"
-msgstr "Mentés"
+msgstr "Szóköz"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
@@ -4151,7 +4031,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:214
 #, fuzzy
 msgid "Spacer"
-msgstr "Csere"
+msgstr "Távtartó"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
@@ -4164,11 +4044,12 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:217
 #, fuzzy
 msgid "Span"
-msgstr "Spanyol"
+msgstr "Span"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
+#, fuzzy
 msgid "Square root"
-msgstr ""
+msgstr "Négyzetgyök"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
@@ -4198,13 +4079,14 @@ msgid "Style info"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
+#, fuzzy
 msgid "Subscript"
-msgstr ""
+msgstr "Alsó index"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
 #, fuzzy
 msgid "Superscript"
-msgstr "_Leírás"
+msgstr "Felső index"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
@@ -4213,7 +4095,7 @@ msgstr ""
 #: plugins/taglist/HTML.tags.xml.in.h:228
 #, fuzzy
 msgid "Table"
-msgstr "Engedélyezve"
+msgstr "Táblázat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
@@ -4249,8 +4131,9 @@ msgid "Table header cell"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
+#, fuzzy
 msgid "Table row"
-msgstr ""
+msgstr "Táblázat sora"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
@@ -4277,8 +4160,9 @@ msgid "Teletype or monospace text style"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
+#, fuzzy
 msgid "Text"
-msgstr ""
+msgstr "Szöveg"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
 #, fuzzy
@@ -4298,8 +4182,9 @@ msgid "Topmargin in pixels"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
+#, fuzzy
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
 #, fuzzy
@@ -4316,8 +4201,9 @@ msgid "Use image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
+#, fuzzy
 msgid "Value"
-msgstr ""
+msgstr "Érték"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
@@ -4342,377 +4228,365 @@ msgid "Visited link color"
 msgstr "Kijelölés színének kiválasztása"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
+#, fuzzy
 msgid "Width"
-msgstr ""
+msgstr "Szélesség"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Irodalomjegyzék idézet"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Irodalomjegyzék elem"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Irodalomjegyzék rövid idézet"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Irodalomjegyzék \"thebibliography\""
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "&lt;&gt; zárójelek"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "() zárójelek"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "[] zárójelek"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "{} zárójelek"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "Bemenet fájlból"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "Betűkészlet"
+msgstr "Lábjegyzet"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "Koszinusz függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "e^ függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "exp függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "log függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "log10 függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "Szinusz függvény"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "Görög"
+msgstr "Görög alfa"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "Görög"
+msgstr "Görög béta"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "Görög epszilon"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "Görög"
+msgstr "Görög gamma"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "Görög lambda"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "Görög"
+msgstr "Görög ró"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "Görög"
+msgstr "Görög tau"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Fejléc 0 (fejezet)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Fejléc 0 (fejezet*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Fejléc 1 (szakasz)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Fejléc 1 (szakasz*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Fejléc 2 (alszakasz)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Fejléc 2 (alszakasz*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Fejléc 3 (alalszakasz)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Fejléc 3 (alalszakasz*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Fejléc 4 (bekezdés)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "Fejléc függelék"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Elem"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Elem címkével"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - Címkék"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Leírás"
+msgstr "Listaleírás"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "Lista - felsorolásos"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "Lista - elemenkénti"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Matematikai (megjelenítés)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Matematikai (beágyazott)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Hely megnyitása"
+msgstr "Tört operátor"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Integrál operátor (megjelenítés)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Integrál operátor (beágyazott)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Összeg operátor (megjelenítés)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Összeg operátor (beágyazott)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Beállítások"
+msgstr "Hivatkozás - címke"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Beállítások"
+msgstr "Hivatkozás - ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "Szimbólum: &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "Szimbólum: &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "Szimbólum: &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "Szimbólum: &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "Szimbólum: and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "Szimbólum: const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "Szimbólum: d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Szimbólum: d-by-dt-részleges"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Szimbólum: d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Szimbólum: dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Szimbólum: equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "Szimbólum: kötőjel --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "Szimbólum: kötőjel ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "Szimbólum: végtelen"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Szimbólum: matematikai ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Szimbólum: matematikai ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Szimbólum: matematikai _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Szimbólum: matematikai __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "Szimbólum: ≃"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "Szimbólum: csillag"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Betű: félkövér"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Betű: dőlt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Betű: döntött"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Betű: rögzített szélességű"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Nem törhető szöveg"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - Tengelyek"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "Elemek"
+msgstr "XSLT - Elemek"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - Függvények"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Szóközök beszúrása"
+msgstr "namespace"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "Megnyitás"
+msgstr "parent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4737,7 +4611,7 @@ msgstr "Shell kimenet beszúrása a dokumentumba"
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr "Elem_lista"
+msgstr "Ele_mlista"
 
 #.
 #. #define MENU_ITEM_NAME		"TagList"
@@ -4814,289 +4688,3 @@ msgstr "_Formátum bekérése"
 msgid "_Use custom format"
 msgstr "_Egyéni formátum használata"
 
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-#~ "changes. </span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">X mentetlen dokumentuma van.</span>"
-
-#~ msgid "If you don't save your documents, all your changes will be lost."
-#~ msgstr "Ha nem menti a dokumentumait, akkor a változások elvesznek."
-
-#~ msgid "Save _None"
-#~ msgstr "Egyiket _sem menti"
-
-#~ msgid "_Save Selected"
-#~ msgstr "_Kijelöltek mentése"
-
-#~ msgid "Irish (Gaeilge)"
-#~ msgstr "Ír (gaél)"
-
-#, fuzzy
-#~ msgid "Document ID"
-#~ msgstr "_Dokumentumok"
-
-#, fuzzy
-#~ msgid "Document version"
-#~ msgstr "_Dokumentumok"
-
-#~ msgid "Do_n't save"
-#~ msgstr "N_e mentse"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] ""
-#~ "Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
-#~ "elvesznek."
-#~ msgstr[1] ""
-#~ "Ha nem menti, akkor az elmúlt %d órában történt változások véglegesen "
-#~ "elvesznek."
-
-#~ msgid "Body font picker"
-#~ msgstr "Szövegtest betűkészletének kijelölése"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr ""
-#~ "Nyomja meg ezt a gombot a törzs nyomtatásakor használt betűkészlet "
-#~ "kiválasztásához"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "Oldal fejléc"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr ""
-#~ "Nyomja meg ezt a gombot a fejléc nyomtatásakor használt betűkészlet "
-#~ "kiválasztásához"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "Sorok számozása"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr ""
-#~ "Nyomja meg ezt a gombot a sorok számának nyomtatáskor használt "
-#~ "betűkészlet kiválasztásához"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] ""
-#~ "A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
-#~ msgstr[1] ""
-#~ "A dokumentum elmúlt %d órában történt változásai véglegesen elvesznek."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr ""
-#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a gedit nem támogatja a(z) %"
-#~ "s: típusú helyeket."
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt jogosultsági problémák miatt."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a megadott gépnév "
-#~ "érvénytelen.\n"
-#~ "\n"
-#~ "Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a(z) \"%s\" nevű gép nem "
-#~ "található.\n"
-#~ "\n"
-#~ "Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "Nem lehet megnyitni a(z) \"%s\" fájlt, mert a belépés nem sikerült.\n"
-#~ "\n"
-#~ "Ellenőrizze, hogy pontosan írta-e be a helyet, és próbálja meg újra."
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "Nem lehet megnyitni a(z) \"%s\" fájlt."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "Nem lehet megnyitni a(z) \"%s\" fájlt.\n"
-#~ "\n"
-#~ "%s."
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nem lehet elmenteni a(z) \"%s\" fájlt.\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert sérült adatokat "
-#~ "tartalmaz."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a gedit nem támogatja a"
-#~ "(z) \"%s:\" típusú helyeket."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert érvénytelen formátumú "
-#~ "adatokat tartalmaz."
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl nagy."
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt jogosultsági problémák miatt."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert túl sok a nyitott fájl.\n"
-#~ "\n"
-#~ "Zárjon be néhány nyitott fájlt és próbálja meg újra."
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "Nincs elég memória a(z) \"%s\" fájl visszaállításához. Zárjon be néhány "
-#~ "futó alkalmazást és próbálja meg újra."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a megadott gépnév üres.\n"
-#~ "\n"
-#~ "Ellenőrizze a proxy beállításait és próbálja meg újra."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr ""
-#~ "Nem lehet visszaállítani a(z) \"%s\" fájlt, mert a belépés nem sikerült."
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr "Nem található a plugin-manager.glade2, telepítse újra a gedit-et.\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr ""
-#~ "Érvénytelen glade fájl a bővítménykezelőhöz -- nincs meg minden elem.\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "Új előnézeti szöveg _beillesztése."
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "Előnézeti szöveg módosítása..."
-
-#~ msgid "Preview"
-#~ msgstr "Előnézet"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "Előnézeti szöveg _módosítása..."
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "Sans Regular 12"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaÁáBbCcDdEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúÜüŰűVvWwXxYyZz"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Betűkészlet kiválasztása"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "A kiválasztó párbeszédablak címsora"
-
-#~ msgid "Name of the selected font"
-#~ msgstr "A kiválasztott betűkészlet neve"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "A párbeszédablakban megjelenített mintaszöveg"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr ""
-#~ "Betűkészlet-információs módban ezt a betűkészletet használja a címkéken"
-
-#~ msgid "Font size for label"
-#~ msgstr "Címke betűmérete"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr ""
-#~ "Betűkészlet-információs módban ezt a betűméretet használja a címkéken"
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "Méret megjelenítése a betűkészlet-információs módban"
-
-#~ msgid "(modified)"
-#~ msgstr "(módosítva)"
-
-#~ msgid "Untitled"
-#~ msgstr "Névtelen"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "Hiba, nem lehet megnyitni a(z) '%s' modulfájlt\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "Hiba, a(z) '%s' bővítmény nem tartalmazza az init függvényt."
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "Hiba, a(z) '%s' bővítmény nem tartalmazza az activate függvényt."
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "Hiba, a(z) '%s' bővítmény nem tartalmazza a deactivate függvényt."
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "Hiba, lehetetlen a(z) '%s' bővítmény indítása"
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "Hiba, lehetetlen a(z) '%s' bővítményt kilőni"
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "Hiba, lehetetlen a(z) '%s' bővítményt bekapcsolni"
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "Hiba, lehetetlen a(z) '%s' bővítményt kikapcsolni"
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "Hiba, lehetetlen a(z) '%s' bővítmény ui-ját frissíteni"
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "A mentés eljárás nincs megvalósítva a gedit megjelenítőben"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "A kijelölt szöveg másolása a vágólapra"
-
-#~ msgid "_Copy Text"
-#~ msgstr "Szöveg _másolása"
