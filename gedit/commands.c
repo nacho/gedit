@@ -35,6 +35,7 @@
 #include "gE_document.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
+#include "gE_plugin_api.h"
 #include "msgbox.h"
 #include "dialog.h"
 
@@ -629,6 +630,10 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 		doc->filename == NULL)
 		return;
 
+	/* Remove document from our hash tables */
+	g_hash_table_remove(doc_int_to_pointer, g_hash_table_lookup(doc_pointer_to_int, doc));
+	g_hash_table_remove(doc_pointer_to_int, doc);
+
 	/* remove notebook entry and item from document list */
 	num = gtk_notebook_current_page(nb);
 	gtk_notebook_remove_page(nb, num);
@@ -744,6 +749,9 @@ close_window_common(gE_window *w)
 {
 	g_assert(w != NULL);
 	window_list = g_list_remove(window_list, (gpointer)w);
+
+	g_hash_table_remove(win_int_to_pointer, g_hash_table_lookup(win_pointer_to_int, w));
+	g_hash_table_remove(win_pointer_to_int, w);
 
 	if (w->files_list_window)
 		gtk_widget_destroy(w->files_list_window);

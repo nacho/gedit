@@ -26,6 +26,12 @@ extern "C" {
   
 #include "plugin.h"
 
+extern GHashTable *doc_int_to_pointer;
+extern GHashTable *doc_pointer_to_int;
+extern GHashTable *win_int_to_pointer;
+extern GHashTable *win_pointer_to_int;
+extern int last_assigned_integer;
+
 extern int gE_plugin_document_create( gint context, gchar *title );
 extern void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
 extern void gE_plugin_document_show( gint docid );

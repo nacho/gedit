@@ -96,6 +96,10 @@ gE_window_new(void)
 	w->files_list_window = NULL;
 	w->files_list_window_data = NULL;
 	w->toolbar = NULL;
+
+	g_hash_table_insert(win_int_to_pointer, GINT_TO_POINTER(++last_assigned_integer), w);
+	g_hash_table_insert(win_pointer_to_int, w, GINT_TO_POINTER (last_assigned_integer));
+	
 	data = g_malloc0(sizeof(gE_data));
 #ifdef WITHOUT_GNOME
 	w->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -219,6 +223,9 @@ gE_document
 	GtkStyle *style;
 
 	doc = g_malloc0(sizeof(gE_document));
+
+	g_hash_table_insert(doc_int_to_pointer, GINT_TO_POINTER(++last_assigned_integer), doc);
+	g_hash_table_insert(doc_pointer_to_int, doc, GINT_TO_POINTER (last_assigned_integer));
 
 	doc->window = w;
 
