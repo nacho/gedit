@@ -1,3 +1,3 @@
-SUBDIRS = ASCII diff docinfo sample cvschangelog taglist time shell_output
+SUBDIRS = ASCII diff docinfo sample cvschangelog indent taglist time shell_output
 
 EXTRA_DIST = ChangeLog

@@ -42,7 +42,7 @@
 #include <gedit-debug.h>
 #include <gedit-menus.h>
 
-#define MENU_ITEM_LABEL		N_("_Insert Date/Time")
+#define MENU_ITEM_LABEL		N_("In_sert Date/Time")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
 #define MENU_ITEM_NAME		"PluginInsertDateAndTime"	
 #define MENU_ITEM_TIP		N_("Insert current date and time at the cursor position")

@@ -40,7 +40,7 @@
 #include <gedit-plugin.h>
 #include <gedit-debug.h>
 
-#define MENU_ITEM_LABEL		N_("Insert User _Name")
+#define MENU_ITEM_LABEL		N_("Insert User Na_me")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
 #define MENU_ITEM_NAME		"UserName"	
 #define MENU_ITEM_TIP		N_("Insert the user name at the cursor position")
