@@ -2,13 +2,14 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Birger Langkjer <birger.langkjer@image.dk>, 1999.
 # Kenneth Christiansen <kenneth@ripen.dk>, 1999.
+# Keld Simonsen <keld@dkuug.dk>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.6.1\n"
-"POT-Creation-Date: 2000-04-10 18:38+0200\n"
-"PO-Revision-Date: 2000-04-10 18:44+02:00\n"
-"Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
+"POT-Creation-Date: 2000-04-12 18:47+0200\n"
+"PO-Revision-Date: 2000-04-12 20:04+02:00\n"
+"Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Dansk/Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -30,32 +31,32 @@ msgstr "Indsæt tidspunkt"
 msgid "Inserts the current date and time"
 msgstr "Indsætter nuværende dato og tidspunkt"
 
-#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:151
-#: src/print.c:237
+#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:150
+#: src/print.c:274
 msgid "Untitled"
 msgstr "Unavngivet"
 
 #: plugins/email/email.c:152
 msgid "Email"
-msgstr "Epost"
+msgstr "E-post"
 
 #: plugins/email/email.c:153
 msgid "Email the current document"
 msgstr "Send nuværende dokument som epost"
 
-#: src/window.c:62
+#: src/window.c:63
 msgid "Filename"
 msgstr "Filnavn"
 
-#: src/menus.c:355 src/window.c:63
+#: src/menus.c:371 src/window.c:64
 msgid "Line"
 msgstr "Linie"
 
-#: src/window.c:64
+#: src/window.c:65
 msgid "Contents"
 msgstr "Indhold"
 
-#: src/file.c:98
+#: src/file.c:92
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -63,11 +64,11 @@ msgstr ""
 "En fejl opstod ved åbning af filen.\n"
 "Sørg venligst for at filen eksisterer."
 
-#: src/file.c:107
+#: src/file.c:101
 msgid "Could not allocate the requrired memory."
 msgstr "Kunne ikke tildele den krævede hukommelse."
 
-#: src/file.c:113
+#: src/file.c:107
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -89,14 +90,14 @@ msgid ""
 "\n"
 " %s \n"
 "\n"
-"Make sure that the path you provided exits,and that you have the appropiate "
+"Make sure that the path you provided exists,and that you have the appropiate "
 "write permissions."
 msgstr ""
 "gedit kunne ikke gemme filen: \n"
 "\n"
 " %s \n"
 "\n"
-"Sørg for at placeringen, du angav, eksisterer og at du har de nødvendige "
+"Sørg for at stien, du angav, eksisterer og at du har de nødvendige "
 "skriverettigheder."
 
 #: src/file.c:189 src/file.c:203
@@ -142,12 +143,12 @@ msgstr "Dokument er ikke blevet gemt."
 msgid "Error saving file!"
 msgstr "Gemning mislykkedes!"
 
-#: src/file.c:484
+#: src/file.c:483
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen `%s' eksisterer ikke. Vil du gerne oprette den?"
 
-#: src/document.c:340
+#: src/document.c:321
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "'%s' er blevet ændret. Ønsker du at gemme det?"
@@ -169,135 +170,16 @@ msgstr "Fejl, init_plugin returnerede fejl"
 msgid "Error, plugin is still in use"
 msgstr "Fejl, indstik er stadig i brug"
 
-#: src/menus.c:292 src/plugin.c:113 src/plugin.c:205
+#: src/menus.c:309 src/plugin.c:113 src/plugin.c:205
 msgid "_Plugins"
 msgstr "_Indstik"
 
-#: src/prefs.c:51
-msgid "Default"
-msgstr "Standard"
-
-#: src/prefs.c:52
-msgid "Notebook"
-msgstr "Notesbog"
-
-#: src/prefs.c:53
-msgid "Toplevel"
-msgstr "Toplag"
-
-#: src/prefs.c:54
-msgid "Modal"
-msgstr "Modal"
-
-#: src/prefs.c:272
-msgid "Appearance"
-msgstr "Udseende"
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, (gpointer) GE_DATA,
-#. NULL),
-#.
-#: src/menus.c:198 src/prefs.c:285
-msgid "Show Statusbar"
-msgstr "Vis statuslinie"
-
-#: src/prefs.c:294
-msgid "Show Splitscreen"
-msgstr "Vis opdelt skærm"
-
-#: src/prefs.c:304
-msgid "Editor Behavior"
-msgstr "Tekstbehandleradfærd"
-
-#: src/prefs.c:317
-msgid "Enable Autoindent"
-msgstr "Brug autoindryk"
-
-#: src/prefs.c:321
-msgid "Enable Wordwrap"
-msgstr "Brug tekstombrydning"
-
-#: src/prefs.c:343
-msgid "Text Background"
-msgstr "Tekstbaggrund"
-
-#: src/prefs.c:362
-msgid "Text Foreground"
-msgstr "Tekstforgrund"
-
-#. Document Closing stuffs
-#: src/prefs.c:427
-msgid "Document Settings"
-msgstr "Dokumentindstillinger"
-
-#: src/prefs.c:441
-msgid "New Document After Closing Last"
-msgstr "Nyt dokument når du har lukket det sidste"
-
-#: src/prefs.c:447
-msgid "Close Window After Closing Last"
-msgstr "Luk vindue når du har lukket det sidste"
-
-#. End of docyment closing stuffs
-#. Font Settings (within Document Settings frame)
-#: src/prefs.c:456
-msgid "Current Font"
-msgstr "Nuværende skrifttype"
-
-#: src/prefs.c:473
-msgid "Select..."
-msgstr "Vælg..."
-
-#. Window Size Settings
-#: src/prefs.c:523
-msgid "Window Size"
-msgstr "Vinduesstørrelse"
-
-#: src/prefs.c:536
-msgid "Current Width:"
-msgstr "Nuværende bredde:"
-
-#: src/prefs.c:556
-msgid "Startup Width:"
-msgstr "Startbredde:"
-
-#: src/prefs.c:564 src/prefs.c:604
-msgid "Use Current"
-msgstr "Brug nuværende"
-
-#: src/prefs.c:576
-msgid "Current Height:"
-msgstr "Nuværende højde:"
-
-#: src/prefs.c:596
-msgid "Startup Height:"
-msgstr "Starthøjde:"
-
-#. MDI Mode settnigs
-#: src/prefs.c:612
-msgid "MDI Mode"
-msgstr "MDI-tilstand"
-
-#: src/prefs.c:677
-msgid "General"
-msgstr "Generelt"
-
-#: src/prefs.c:682
-msgid "Window"
-msgstr "Vindue"
-
-#: src/prefs.c:687
-msgid "Document"
-msgstr "Dokument"
-
-#: src/print.c:179
+#: src/print.c:204
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Vis udskrift"
 
-#: src/print.c:289
+#: src/print.c:355
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Side: %i/%i"
@@ -310,7 +192,7 @@ msgstr "Åbn (ombyt) .c/.h fil"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:62 src/menus.c:310
+#: src/menus.c:62 src/menus.c:326
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
@@ -338,220 +220,155 @@ msgstr "Luk alle"
 msgid "Close All Open Files"
 msgstr "Luk alle åbne filer"
 
-#: src/menus.c:111
-msgid "Find _In Files..."
-msgstr "Find i fi_ler..."
-
-#: src/menus.c:112
-msgid "Find text in all open files"
-msgstr "Find tekst i alle åbne filer"
-
-#: src/menus.c:121
+#: src/menus.c:126
 msgid "Goto _Line..."
 msgstr "Gå til _linie..."
 
-#: src/menus.c:122
+#: src/menus.c:127
 msgid "Go to a specific line number"
 msgstr "Gå til et specifikt linienummer"
 
-#: src/menus.c:131
+#: src/menus.c:136
 msgid "_Add View"
 msgstr "_Tilføj visning"
 
-#: src/menus.c:132
+#: src/menus.c:137
 msgid "Add a new view of the document"
 msgstr "Tilføj ny visning af dokumentet"
 
-#: src/menus.c:134
+#: src/menus.c:139
 msgid "_Remove View"
 msgstr "_Fjern visning"
 
-#: src/menus.c:135
+#: src/menus.c:140
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/menus.c:152
-msgid "_Top"
-msgstr "_Top"
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, (gpointer) GE_DATA,
+#. NULL),
+#.
+#: src/menus.c:212
+msgid "Show Statusbar"
+msgstr "Vis statuslinie"
 
-#: src/menus.c:153
-msgid "Put the document tabs at the top"
-msgstr "Placér dokumentfanebladene øverst"
-
-#: src/menus.c:158
-msgid "_Bottom"
-msgstr "_Bund"
-
-#: src/menus.c:159
-msgid "Put the document tabs at the bottom"
-msgstr "Placér dokumentfanebladene nederst"
-
-#: src/menus.c:164
-msgid "_Left"
-msgstr "_Venstre"
-
-#: src/menus.c:165
-msgid "Put the document tabs on the left"
-msgstr "Placér fanebladene til venstre"
-
-#: src/menus.c:170
-msgid "_Right"
-msgstr "_Højre"
-
-#: src/menus.c:171
-msgid "Put the document tabs on the right"
-msgstr "Placér dokumentfanebladene til højre"
-
-#: src/menus.c:199
+#: src/menus.c:213
 msgid ""
 "Enable or disable the statusbar at the bottom of this application window."
 msgstr ""
 "Aktiverer eller deaktiverer statuslinien i bunden af dette programvindue."
 
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
-#. N_("Toggle Wordwrap"),
-#. options_toggle_word_wrap_cb,
-#. NULL, NULL),
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_LINEWRAP,
-#. N_("Toggle Linewrap"),
-#. options_toggle_line_wrap_cb,
-#. NULL, NULL),
-#.
-#: src/menus.c:213
-msgid "_Readonly"
-msgstr "_Skrivebeskyttet"
-
-#: src/menus.c:214
-msgid "Toggle Readonly"
-msgstr "Skrivebeskyttet til/fra"
-
-#: src/menus.c:228
-msgid "_Document Tabs"
-msgstr "_Dokumentfaner"
-
-#: src/menus.c:229
-msgid "Change the placement of the document tabs"
-msgstr "Ny placering af dokumentfaneblade"
-
-#: src/menus.c:237
-msgid "Sa_ve Settings"
-msgstr "_Gem indstillinger"
-
-#: src/menus.c:238
-msgid "Save the current settings for future sessions"
-msgstr "Gem nuværende indstillinger for fremtidigt brug"
-
-#: src/menus.c:310
+#: src/menus.c:326
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:314
+#: src/menus.c:330
 msgid "Open"
 msgstr "Åbn"
 
-#: src/menus.c:314
+#: src/menus.c:330
 msgid "Open a file"
 msgstr "Åbn en fil"
 
-#: src/menus.c:318
+#: src/menus.c:334
 msgid "Save"
 msgstr "Gem"
 
-#: src/menus.c:318
+#: src/menus.c:334
 msgid "Save the current file"
 msgstr "Gem den nuværende fil"
 
-#: src/menus.c:322
+#: src/menus.c:338
 msgid "Close"
 msgstr "Luk"
 
-#: src/menus.c:322
+#: src/menus.c:338
 msgid "Close the current file"
 msgstr "Luk den nuværende fil"
 
-#: src/menus.c:326
+#: src/menus.c:342
 msgid "Print"
 msgstr "Udskriv"
 
-#: src/menus.c:326
+#: src/menus.c:342
 msgid "Print the current file"
 msgstr "Udskriv den nuværende fil"
 
-#: src/menus.c:331
+#: src/menus.c:347
 msgid "Undo"
 msgstr "Fortryd"
 
-#: src/menus.c:331
+#: src/menus.c:347
 msgid "Undo last operation"
 msgstr "Fortryd sidste handling"
 
-#: src/menus.c:335
+#: src/menus.c:351
 msgid "Redo"
 msgstr "Gentag"
 
-#: src/menus.c:335
+#: src/menus.c:351
 msgid "Redo last operation"
 msgstr "Gentag sidste handling"
 
-#: src/menus.c:339
+#: src/menus.c:355
 msgid "Cut"
 msgstr "Klip"
 
-#: src/menus.c:339
+#: src/menus.c:355
 msgid "Cut the selection"
 msgstr "Udklip det markerede"
 
-#: src/menus.c:343
+#: src/menus.c:359
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:343
+#: src/menus.c:359
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
-#: src/menus.c:347
+#: src/menus.c:363
 msgid "Paste"
 msgstr "Indsæt"
 
-#: src/menus.c:347
+#: src/menus.c:363
 msgid "Paste the clipboard"
 msgstr "Indsæt indhold af klipbord"
 
-#: src/menus.c:351
+#: src/menus.c:367
 msgid "Find"
 msgstr "Find"
 
-#: src/menus.c:351
+#: src/menus.c:367
 msgid "Search for a string"
 msgstr "Søg efter en tekst"
 
-#: src/menus.c:355
+#: src/menus.c:371
 msgid "Get the current and total lines"
 msgstr "Få nuværende og alle linier"
 
-#: src/menus.c:360
+#: src/menus.c:376
 msgid "Exit"
 msgstr "Afslut"
 
-#: src/menus.c:360
+#: src/menus.c:376
 msgid "Exit the program"
 msgstr "Afslut programmet"
 
-#: src/search.c:284
+#: src/search.c:306
 msgid "Find In Files"
 msgstr "Find i filer"
 
-#: src/search.c:285
+#: src/search.c:307
 msgid "Search"
 msgstr "Søg"
 
-#: src/search.c:289
+#: src/search.c:311
 msgid "Search for:"
 msgstr "Søg efter:"
 
-#: src/search.c:595
+#: src/search.c:638
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -564,35 +381,35 @@ msgstr ""
 "Linier ialt: %i\n"
 "Nuværende linie: %i"
 
-#: src/search.c:613
+#: src/search.c:658
 msgid "Search from cursor"
 msgstr "Søg fra markøren"
 
-#: src/search.c:620
+#: src/search.c:665
 msgid "Search from beginning of document"
 msgstr "Søg fra begyndelsen af dokumentet"
 
-#: src/search.c:627
+#: src/search.c:672
 msgid "Search from end of document"
 msgstr "Søg fra slutningen af dokumentet"
 
-#: src/dialogs/replace.glade.h:17 src/search.c:634
+#: src/dialogs/replace.glade.h:17 src/search.c:679
 msgid "Case sensitive"
 msgstr "Forskel på små og store bogstaver"
 
-#: src/dialogs/replace.glade.h:18 src/search.c:640
+#: src/dialogs/replace.glade.h:18 src/search.c:685
 msgid "Reverse search"
 msgstr "Baglæns søgning"
 
-#: src/dialogs/dialog-about.c:50
+#: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
 msgstr "Med særlig tak til:"
 
-#: src/dialogs/dialog-about.c:65
+#: src/dialogs/dialog-about.c:67
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(C) 1998, 1999 Alex Roberts og Evan Lawrence"
 
-#: src/dialogs/dialog-about.c:67
+#: src/dialogs/dialog-about.c:69
 msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gedit er en lille og hurtig tekstbehandler for GNOME/Gtk+"
 
@@ -651,6 +468,132 @@ msgstr ""
 #: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "Spørg før erstatning"
+
+#~ msgid "Default"
+#~ msgstr "Standard"
+
+#~ msgid "Notebook"
+#~ msgstr "Notesbog"
+
+#~ msgid "Toplevel"
+#~ msgstr "Toplag"
+
+#~ msgid "Modal"
+#~ msgstr "Modal"
+
+#~ msgid "Appearance"
+#~ msgstr "Udseende"
+
+#~ msgid "Show Splitscreen"
+#~ msgstr "Vis opdelt skærm"
+
+#~ msgid "Editor Behavior"
+#~ msgstr "Tekstbehandleradfærd"
+
+#~ msgid "Enable Autoindent"
+#~ msgstr "Brug autoindryk"
+
+#~ msgid "Enable Wordwrap"
+#~ msgstr "Brug tekstombrydning"
+
+#~ msgid "Text Background"
+#~ msgstr "Tekstbaggrund"
+
+#~ msgid "Text Foreground"
+#~ msgstr "Tekstforgrund"
+
+#~ msgid "Document Settings"
+#~ msgstr "Dokumentindstillinger"
+
+#~ msgid "New Document After Closing Last"
+#~ msgstr "Nyt dokument når du har lukket det sidste"
+
+#~ msgid "Close Window After Closing Last"
+#~ msgstr "Luk vindue når du har lukket det sidste"
+
+#~ msgid "Current Font"
+#~ msgstr "Nuværende skrifttype"
+
+#~ msgid "Select..."
+#~ msgstr "Vælg..."
+
+#~ msgid "Window Size"
+#~ msgstr "Vinduesstørrelse"
+
+#~ msgid "Current Width:"
+#~ msgstr "Nuværende bredde:"
+
+#~ msgid "Startup Width:"
+#~ msgstr "Startbredde:"
+
+#~ msgid "Use Current"
+#~ msgstr "Brug nuværende"
+
+#~ msgid "Current Height:"
+#~ msgstr "Nuværende højde:"
+
+#~ msgid "Startup Height:"
+#~ msgstr "Starthøjde:"
+
+#~ msgid "MDI Mode"
+#~ msgstr "MDI-tilstand"
+
+#~ msgid "General"
+#~ msgstr "Generelt"
+
+#~ msgid "Window"
+#~ msgstr "Vindue"
+
+#~ msgid "Document"
+#~ msgstr "Dokument"
+
+#~ msgid "Find _In Files..."
+#~ msgstr "Find i fi_ler..."
+
+#~ msgid "Find text in all open files"
+#~ msgstr "Find tekst i alle åbne filer"
+
+#~ msgid "_Top"
+#~ msgstr "_Top"
+
+#~ msgid "Put the document tabs at the top"
+#~ msgstr "Placér dokumentfanebladene øverst"
+
+#~ msgid "_Bottom"
+#~ msgstr "_Bund"
+
+#~ msgid "Put the document tabs at the bottom"
+#~ msgstr "Placér dokumentfanebladene nederst"
+
+#~ msgid "_Left"
+#~ msgstr "_Venstre"
+
+#~ msgid "Put the document tabs on the left"
+#~ msgstr "Placér fanebladene til venstre"
+
+#~ msgid "_Right"
+#~ msgstr "_Højre"
+
+#~ msgid "Put the document tabs on the right"
+#~ msgstr "Placér dokumentfanebladene til højre"
+
+#~ msgid "_Readonly"
+#~ msgstr "_Skrivebeskyttet"
+
+#~ msgid "Toggle Readonly"
+#~ msgstr "Skrivebeskyttet til/fra"
+
+#~ msgid "_Document Tabs"
+#~ msgstr "_Dokumentfaner"
+
+#~ msgid "Change the placement of the document tabs"
+#~ msgstr "Ny placering af dokumentfaneblade"
+
+#~ msgid "Sa_ve Settings"
+#~ msgstr "_Gem indstillinger"
+
+#~ msgid "Save the current settings for future sessions"
+#~ msgstr "Gem nuværende indstillinger for fremtidigt brug"
 
 #~ msgid "The gEdit Email Plugin"
 #~ msgstr "gEdit epost-indstik"

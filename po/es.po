@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.0\n"
-"POT-Creation-Date: 2000-04-11 14:11+0200\n"
+"POT-Creation-Date: 2000-04-13 00:44+0200\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -29,7 +29,7 @@ msgstr "Insertar hora"
 msgid "Inserts the current date and time"
 msgstr "Insertar la fecha y hora actual"
 
-#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:152
+#: plugins/email/email.c:123 plugins/email/email.c:130 src/document.c:150
 #: src/print.c:274
 msgid "Untitled"
 msgstr "SinNombre"
@@ -46,7 +46,7 @@ msgstr "Enviar el documento actual por correo"
 msgid "Filename"
 msgstr "Archivo"
 
-#: src/menus.c:374 src/window.c:64
+#: src/menus.c:371 src/window.c:64
 msgid "Line"
 msgstr "Línea"
 
@@ -64,7 +64,7 @@ msgstr ""
 
 #: src/file.c:101
 msgid "Could not allocate the requrired memory."
-msgstr ""
+msgstr "No se pudo alocar la memoria necesaria."
 
 #: src/file.c:107
 #, c-format
@@ -75,6 +75,11 @@ msgid ""
 "\n"
 "Make sure that you have permissions for opening the file."
 msgstr ""
+"gedit no fue capaz de abrir el archivo:\n"
+"\n"
+" %s \n"
+"\n"
+"Asegúrese que tiene los derechos de acceso necesarios para abrirlo."
 
 #: src/file.c:175
 #, c-format
@@ -86,6 +91,12 @@ msgid ""
 "Make sure that the path you provided exists,and that you have the appropiate "
 "write permissions."
 msgstr ""
+"gedit no fue capaz de guardar el archivo:\n"
+"\n"
+" %s \n"
+"\n"
+"Asegúrese que el camino que indicó existe, y que Vd. tiene los derechos de "
+"acceso adecuados."
 
 #: src/file.c:189 src/file.c:203
 #, c-format
@@ -97,6 +108,12 @@ msgid ""
 "Because of an unknown reason (1). Please report this Problem to "
 "submit@bugs.gnome.org"
 msgstr ""
+"gedit no fue capaz de guardar el archivo:\n"
+"\n"
+" %s \n"
+"\n"
+"Por una razón desconocida (1). Por favor reporte este problema a "
+"submit@bugs.gnome.org"
 
 #: src/file.c:267
 msgid "Open File ..."
@@ -109,12 +126,12 @@ msgstr "Guardar como..."
 #: src/file.c:337
 #, c-format
 msgid "Loaded file %s"
-msgstr ""
+msgstr "Archivo %s cargado"
 
 #: src/file.c:396
 #, c-format
 msgid "``%s'' is about to be overwriten. Do you want to continue ?"
-msgstr ""
+msgstr "«%s» va a ser aplastado. ¿Desea continuar?"
 
 #: src/file.c:407
 msgid "Document has not been saved."
@@ -124,12 +141,12 @@ msgstr "El documento no fué guardado..."
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
-#: src/file.c:484
+#: src/file.c:483
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr ""
+msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
 
-#: src/document.c:339
+#: src/document.c:321
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "«%s» fue modificado. ¿Desea guardarlo?"
@@ -151,124 +168,12 @@ msgstr "Error, init_plugin devolvió un error"
 msgid "Error, plugin is still in use"
 msgstr "Error, el plugin aún está en uso"
 
-#: src/menus.c:311 src/plugin.c:113 src/plugin.c:205
+#: src/menus.c:309 src/plugin.c:113 src/plugin.c:205
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/prefs.c:53
-msgid "Default"
-msgstr "Por omisión"
-
-#: src/prefs.c:54
-msgid "Notebook"
-msgstr "Bloc de notas"
-
-#: src/prefs.c:55
-msgid "Toplevel"
-msgstr "Primer plano"
-
-#: src/prefs.c:56
-msgid "Modal"
-msgstr "Modal"
-
-#: src/prefs.c:289
-msgid "Appearance"
-msgstr "Apariencia"
-
-#: src/prefs.c:302
-msgid "Show Statusbar"
-msgstr "Ver barra de estado"
-
-#: src/prefs.c:311
-msgid "Show Splitscreen"
-msgstr "División de pantalla"
-
-#: src/prefs.c:321
-msgid "Editor Behavior"
-msgstr "Comportamiento del Editor"
-
-#: src/prefs.c:334
-msgid "Enable Autoindent"
-msgstr "Auto-indentación"
-
-#: src/prefs.c:338
-msgid "Enable Wordwrap"
-msgstr "Wordwrap"
-
-#: src/prefs.c:360
-msgid "Text Background"
-msgstr "Color del fondo"
-
-#: src/prefs.c:379
-msgid "Text Foreground"
-msgstr "Color del texto"
-
-#. Document Closing stuffs
-#: src/prefs.c:444
-msgid "Document Settings"
-msgstr "Configuración del documento"
-
-#: src/prefs.c:458
-msgid "New Document After Closing Last"
-msgstr "Nuevo documento al cerrar el último"
-
-#: src/prefs.c:464
-msgid "Close Window After Closing Last"
-msgstr "Cerrar la ventana al cerrar el último"
-
-#. End of docyment closing stuffs
-#. Font Settings (within Document Settings frame)
-#: src/prefs.c:473
-msgid "Current Font"
-msgstr "Fuente Actual"
-
-#: src/prefs.c:490
-msgid "Select..."
-msgstr "Seleccionar..."
-
-#. Window Size Settings
-#: src/prefs.c:540
-msgid "Window Size"
-msgstr "Tamaño de la ventana"
-
-#: src/prefs.c:553
-msgid "Current Width:"
-msgstr "Ancho actual:"
-
-#: src/prefs.c:573
-msgid "Startup Width:"
-msgstr "Ancho al inicio:"
-
-#: src/prefs.c:581 src/prefs.c:621
-msgid "Use Current"
-msgstr "Usar actual"
-
-#: src/prefs.c:593
-msgid "Current Height:"
-msgstr "Alto actual"
-
-#: src/prefs.c:613
-msgid "Startup Height:"
-msgstr "Alto al inicio:"
-
-#. MDI Mode settnigs
-#: src/prefs.c:629
-msgid "MDI Mode"
-msgstr "Modo MDI"
-
-#: src/prefs.c:694
-msgid "General"
-msgstr "General"
-
-#: src/prefs.c:699
-msgid "Window"
-msgstr "Ventana"
-
-#: src/prefs.c:704
-msgid "Document"
-msgstr "Documento"
-
 #: src/print.c:204
+#, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Ver antes de imprimir"
 
@@ -285,7 +190,7 @@ msgstr "Abrir (alternar) archivo .c/.h"
 msgid "_New"
 msgstr "_Nuevo"
 
-#: src/menus.c:62 src/menus.c:329
+#: src/menus.c:62 src/menus.c:326
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
 
@@ -299,11 +204,11 @@ msgstr "Guardar todos los archivos abiertos"
 
 #: src/menus.c:83
 msgid "Print preview..."
-msgstr ""
+msgstr "Previsualización..."
 
 #: src/menus.c:84
 msgid "Preview data to be printed"
-msgstr ""
+msgstr "Ver el resultado antes de imprimir"
 
 #: src/menus.c:90
 msgid "Close All"
@@ -337,115 +242,131 @@ msgstr "_Quitar vista"
 msgid "Remove view of the document"
 msgstr "Quitar una vista del documento"
 
-#: src/menus.c:329
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, (gpointer) GE_DATA,
+#. NULL),
+#.
+#: src/menus.c:212
+msgid "Show Statusbar"
+msgstr "Ver barra de estado"
+
+#: src/menus.c:213
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
+"Activa o desactiva la barra de estado al borde inferior de esta ventana."
+
+#: src/menus.c:326
 msgid "New"
 msgstr "Nuevo"
 
-#: src/menus.c:333
+#: src/menus.c:330
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
-#: src/menus.c:333
+#: src/menus.c:330
 msgid "Open a file"
 msgstr "Abrir un Archivo"
 
-#: src/menus.c:337
+#: src/menus.c:334
 msgid "Save"
 msgstr "Guardar"
 
-#: src/menus.c:337
+#: src/menus.c:334
 msgid "Save the current file"
 msgstr "Guardar el archivo actual"
 
-#: src/menus.c:341
+#: src/menus.c:338
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/menus.c:341
+#: src/menus.c:338
 msgid "Close the current file"
 msgstr "Cerrar el archivo actual"
 
-#: src/menus.c:345
+#: src/menus.c:342
 msgid "Print"
 msgstr "Impresión"
 
-#: src/menus.c:345
+#: src/menus.c:342
 msgid "Print the current file"
 msgstr "Imprimir el archivo actual"
 
-#: src/menus.c:350
+#: src/menus.c:347
 msgid "Undo"
 msgstr "Deshacer"
 
-#: src/menus.c:350
+#: src/menus.c:347
 msgid "Undo last operation"
 msgstr "Deshacer la última operación"
 
-#: src/menus.c:354
+#: src/menus.c:351
 msgid "Redo"
 msgstr "Rehacer"
 
-#: src/menus.c:354
+#: src/menus.c:351
 msgid "Redo last operation"
 msgstr "Rehacer la última opéración que fué deshecha"
 
-#: src/menus.c:358
+#: src/menus.c:355
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/menus.c:358
+#: src/menus.c:355
 msgid "Cut the selection"
-msgstr ""
+msgstr "Cortar la selección"
 
-#: src/menus.c:362
+#: src/menus.c:359
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/menus.c:362
+#: src/menus.c:359
 msgid "Copy the selection"
-msgstr ""
+msgstr "Copiar la selección"
 
-#: src/menus.c:366
+#: src/menus.c:363
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/menus.c:366
+#: src/menus.c:363
 msgid "Paste the clipboard"
-msgstr ""
+msgstr "Pegar el contenido del portapapeles"
 
-#: src/menus.c:370
+#: src/menus.c:367
 msgid "Find"
 msgstr "Buscar"
 
-#: src/menus.c:370
+#: src/menus.c:367
 msgid "Search for a string"
 msgstr "Buscar una cadena de texto"
 
-#: src/menus.c:374
+#: src/menus.c:371
 msgid "Get the current and total lines"
-msgstr ""
+msgstr "Obtener las líneas corrientes y totales"
 
-#: src/menus.c:379
+#: src/menus.c:376
 msgid "Exit"
 msgstr "Salir"
 
-#: src/menus.c:379
+#: src/menus.c:376
 msgid "Exit the program"
 msgstr "Salir del programa"
 
-#: src/search.c:285
+#: src/search.c:306
 msgid "Find In Files"
 msgstr "Buscar en archivos"
 
-#: src/search.c:286
+#: src/search.c:307
 msgid "Search"
 msgstr "Búsqueda"
 
-#: src/search.c:290
+#: src/search.c:311
 msgid "Search for:"
 msgstr "Buscar:"
 
-#: src/search.c:617
+#: src/search.c:638
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -458,17 +379,25 @@ msgstr ""
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
-#: src/search.c:637
+#: src/search.c:658
 msgid "Search from cursor"
 msgstr "Buscar a partir del cursor"
 
-#: src/search.c:644
+#: src/search.c:665
 msgid "Search from beginning of document"
 msgstr "Buscar a partir del principio del documento"
 
-#: src/dialogs/replace.glade.h:17 src/search.c:660
+#: src/search.c:672
+msgid "Search from end of document"
+msgstr "Buscar a partir del final del documento"
+
+#: src/dialogs/replace.glade.h:17 src/search.c:679
 msgid "Case sensitive"
 msgstr "Distinguir mayúsculas y minúsculas"
+
+#: src/dialogs/replace.glade.h:18 src/search.c:685
+msgid "Reverse search"
+msgstr "Revertir la búsqueda"
 
 #: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
@@ -497,7 +426,7 @@ msgstr "Número de línea:"
 
 #: src/dialogs/find-line.glade.h:9
 msgid "Enter the line number you wish to go to."
-msgstr ""
+msgstr "Entre el número de línea a la cual desea ir."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -530,14 +459,91 @@ msgid ""
 "Beginning of document\n"
 "End of document\n"
 msgstr ""
-
-#: src/dialogs/replace.glade.h:18
-msgid "Reverse search"
-msgstr "Revertir la búsqueda"
+"la posición del cursor\n"
+"el inicio del documento\n"
+"el fin del documento\n"
 
 #: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "Preguntar antes de remplazar"
+
+#~ msgid "Default"
+#~ msgstr "Por omisión"
+
+#~ msgid "Notebook"
+#~ msgstr "Bloc de notas"
+
+#~ msgid "Toplevel"
+#~ msgstr "Primer plano"
+
+#~ msgid "Modal"
+#~ msgstr "Modal"
+
+#~ msgid "Appearance"
+#~ msgstr "Apariencia"
+
+#~ msgid "Show Splitscreen"
+#~ msgstr "División de pantalla"
+
+#~ msgid "Editor Behavior"
+#~ msgstr "Comportamiento del Editor"
+
+#~ msgid "Enable Autoindent"
+#~ msgstr "Auto-indentación"
+
+#~ msgid "Enable Wordwrap"
+#~ msgstr "Wordwrap"
+
+#~ msgid "Text Background"
+#~ msgstr "Color del fondo"
+
+#~ msgid "Text Foreground"
+#~ msgstr "Color del texto"
+
+#~ msgid "Document Settings"
+#~ msgstr "Configuración del documento"
+
+#~ msgid "New Document After Closing Last"
+#~ msgstr "Nuevo documento al cerrar el último"
+
+#~ msgid "Close Window After Closing Last"
+#~ msgstr "Cerrar la ventana al cerrar el último"
+
+#~ msgid "Current Font"
+#~ msgstr "Fuente Actual"
+
+#~ msgid "Select..."
+#~ msgstr "Seleccionar..."
+
+#~ msgid "Window Size"
+#~ msgstr "Tamaño de la ventana"
+
+#~ msgid "Current Width:"
+#~ msgstr "Ancho actual:"
+
+#~ msgid "Startup Width:"
+#~ msgstr "Ancho al inicio:"
+
+#~ msgid "Use Current"
+#~ msgstr "Usar actual"
+
+#~ msgid "Current Height:"
+#~ msgstr "Alto actual"
+
+#~ msgid "Startup Height:"
+#~ msgstr "Alto al inicio:"
+
+#~ msgid "MDI Mode"
+#~ msgstr "Modo MDI"
+
+#~ msgid "General"
+#~ msgstr "General"
+
+#~ msgid "Window"
+#~ msgstr "Ventana"
+
+#~ msgid "Document"
+#~ msgstr "Documento"
 
 #~ msgid "The gEdit Email Plugin"
 #~ msgstr "La extensión de correo electrónico de gEdit"
@@ -647,9 +653,6 @@ msgstr "Preguntar antes de remplazar"
 
 #~ msgid "Save the current settings for future sessions"
 #~ msgstr "Guardar la configuración actual para futuras sesiones"
-
-#~ msgid "Search from end of document"
-#~ msgstr "Buscar a partir del final del documento"
 
 #~ msgid "Replace?"
 #~ msgstr "¿Remplazar?"
