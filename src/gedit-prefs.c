@@ -457,7 +457,7 @@ static void gedit_prefs_notify_cb (GConfClient *client,
 				   GConfEntry *entry,
 				   gpointer user_data)
 {
-	g_print ("Key was changed: %s\n", entry->key);
+	gedit_debug (DEBUG_PREFS, "Key was changed: %s", entry->key);
 }
 
 void gedit_prefs_init ()
