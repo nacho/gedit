@@ -49,8 +49,6 @@ static void
 destroy_plugin (PluginData *pd)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_free (pd->name);
 }
 
 static void

@@ -30,7 +30,6 @@ static GtkWidget *location_label = NULL;
 static void
 gedit_plugin_destroy (PluginData *pd)
 {
-	g_free (pd->name);
 }
 
 static void

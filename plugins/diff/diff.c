@@ -54,7 +54,6 @@ static gint document_selected_2;
 static void
 gedit_plugin_destroy (PluginData *pd)
 {
-	g_free (pd->name);
 }
 
 static void

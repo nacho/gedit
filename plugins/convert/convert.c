@@ -35,7 +35,6 @@ void convert_plugin (void);
 static void
 destroy_plugin (PluginData *pd)
 {
-	g_free (pd->name);
 }
 
 static void

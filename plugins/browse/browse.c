@@ -43,7 +43,6 @@ static GtkWidget *url_entry;
 static void
 gedit_plugin_destroy (PluginData *pd)
 {
-	g_free (pd->name);
 }
 
 static void

@@ -16,7 +16,6 @@
 
 static void destroy_plugin (PluginData *pd)
 {
-	g_free (pd->name);
 }
 
 

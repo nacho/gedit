@@ -1,3 +1,17 @@
+2001-05-15  Paolo Maggi  <maggi@athena.polito.it>
+
+	* ascii/ascii.c (destroy_plugin): don't free pd->name
+	* browse/browse.c (gedit_plugin_destroy): ditto
+	* convert/convert.c (destroy_plugin): ditto
+	* diff/diff.c (gedit_plugin_destroy): ditto
+	* docinfo/docinfo.c (destroy_plugin): ditto
+	* email/email.c (gedit_plugin_destroy): ditto
+	* shell_output/shell_output.c (destroy_plugin): ditto
+	* spell/spell.c (destroy_plugin): ditto
+	* time/time.c (destroy_plugin): ditto
+
+	Thanks to Carlo Borreo for reporting this bug.
+
 2001-05-12  Chema Celorio  <chema@celorio.com>
 
 	* sample/sample.c (destroy_plugin): don't free pd->name
