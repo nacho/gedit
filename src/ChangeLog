@@ -1,5 +1,18 @@
 2002-08-30  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-encodings.[ch]: new files
+
+	* Makefile.am: compile gedit-encodings.[ch]
+
+	* gedit-prefs-manager.[ch] (gedit_prefs_manager_get_encodings)
+	(gedit_prefs_manager_set_encodings)(gedit_prefs_manager_encodings_can_set):
+	new functions
+
+	* dialogs/gedit-preferences-dialog.c (create_encodings_treeview_model)
+	(gedit_preferences_dialog_setup_load_page): new functions
+
+2002-08-30  Paolo Maggi  <maggi@athena.polito.it>
+
 	* bonobo-mdi-child.[ch]: added a view parameter to 
 	bonobo_mdi_child_set_label 
 

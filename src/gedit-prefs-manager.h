@@ -32,6 +32,7 @@
 
 #include <gdk/gdkcolor.h>
 #include <gtk/gtkenums.h>
+#include <glib/gslist.h>
 
 #define GEDIT_BASE_KEY	"/apps/gedit-2"
 
@@ -213,6 +214,10 @@ gint		 	 gedit_prefs_manager_get_default_window_width	(void);
 void 			 gedit_prefs_manager_set_window_width		(gint ww);
 gboolean		 gedit_prefs_manager_window_width_can_set	(void);
 
+/* Encodings */
+GSList const		*gedit_prefs_manager_get_encodings		(void);
+void			 gedit_prefs_manager_set_encodings		(const GSList *encs);
+gboolean 		 gedit_prefs_manager_encodings_can_set		(void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

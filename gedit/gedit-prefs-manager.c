@@ -41,7 +41,7 @@
 #include "gedit-view.h"
 #include "gedit-mdi.h"
 #include "gedit2.h"
-
+#include "gedit-encodings.h"
 
 #define GPM_PREFS_DIR			GEDIT_BASE_KEY "/preferences"
 
@@ -77,6 +77,9 @@
 
 #define GPM_LINE_NUMBERS_DIR		GPM_PREFS_DIR "/editor/line_numbers"
 #define GPM_DISPLAY_LINE_NUMBERS 	GPM_LINE_NUMBERS_DIR "/display_line_numbers"
+
+#define GPM_LOAD_DIR			GPM_PREFS_DIR "/editor/load"
+#define GPM_ENCODINGS			GPM_LOAD_DIR "/encodings"
 
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
@@ -134,6 +137,8 @@
 
 #define GPM_DEFAULT_DISPLAY_LINE_NUMBERS 0 /* FALSE */
 
+#define GPM_DEFAULT_ENCODINGS		{"ISO-8859-15", NULL}
+       	
 #define GPM_DEFAULT_TOOLBAR_VISIBLE	1 /* TRUE */
 #define GPM_DEFAULT_TOOLBAR_BUTTONS_STYLE "GEDIT_TOOLBAR_SYSTEM"
 #define GPM_DEFAULT_TOOLBAR_SHOW_TOOLTIPS 1 /* TRUE */
@@ -1486,6 +1491,90 @@ gboolean
 gedit_prefs_manager_window_width_can_set (void)
 {
 	return TRUE;
+}
+
+
+/* Encodings */
+GSList const *
+gedit_prefs_manager_get_encodings (void)
+{
+	GSList *strings;
+	GSList *res = NULL;
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
+	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
+
+	strings = gconf_client_get_list (gedit_prefs_manager->gconf_client,
+				GPM_ENCODINGS,
+				GCONF_VALUE_STRING, 
+				NULL);
+
+	if (strings == NULL)
+	{
+		gint i;
+		gchar* def [] = GPM_DEFAULT_ENCODINGS;
+
+		for (i = 0; def [i] != NULL; i++)
+		{
+			const GeditEncoding *enc;
+
+			enc = gedit_encoding_get_from_charset (def [i]);
+			
+			if (enc != NULL)
+				res = g_slist_prepend (res, (gpointer)enc);
+		}
+	}
+	else
+	{	
+		GSList *tmp;
+		const GeditEncoding *enc;
+
+		tmp = strings;
+		
+		while (tmp)
+		{
+		      const char *charset = tmp->data;
+
+		      if (strcmp (charset, "current") == 0)
+			      g_get_charset (&charset);
+      
+		      g_return_val_if_fail (charset != NULL, NULL);
+		      enc = gedit_encoding_get_from_charset (charset);
+		      
+		      if (enc != NULL)
+				res = g_slist_prepend (res, (gpointer)enc);
+
+		      tmp = g_slist_next (tmp);
+		}
+
+		g_slist_foreach (strings, (GFunc) g_free, NULL);
+		g_slist_free (strings);           
+	}
+
+	return res;
+}
+
+void
+gedit_prefs_manager_set_encodings (const GSList *encs)
+{	
+	g_return_if_fail (encs != NULL);
+	
+	g_return_if_fail (gedit_prefs_manager != NULL);
+	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
+	g_return_if_fail (gedit_prefs_manager_encodings_can_set ());
+
+	/* TODO */
+
+}
+
+gboolean
+gedit_prefs_manager_encodings_can_set (void)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	return gedit_prefs_manager_key_is_writable (GPM_ENCODINGS);
+
 }
 
 

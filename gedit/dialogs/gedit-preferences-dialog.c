@@ -44,6 +44,7 @@
 #include "gedit-utils.h"
 #include "gedit2.h"
 #include "gedit-plugin-manager.h"
+#include "gedit-encodings.h"
 
 #include "gnome-print-font-picker.h"
 
@@ -65,6 +66,13 @@ enum
 	CATEGORY_COLUMN = 0,
 	PAGE_NUM_COLUMN,
 	NUM_COLUMNS
+};
+
+enum
+{
+	COLUMN_ENCODING_NAME = 0,
+	COLUMN_ENCODING_POINTER,
+	ENCODING_NUM_COLS
 };
 
 struct _GeditPreferencesDialogPrivate
@@ -127,6 +135,13 @@ struct _GeditPreferencesDialogPrivate
 
 	/* Plugin/Manager */
 	GtkWidget	*plugin_manager;
+
+	/* Load page */
+	GtkWidget	*encodings_treeview;
+	GtkWidget	*add_enc_button;
+	GtkWidget	*remove_enc_button;
+	GtkWidget	*up_enc_button;
+	GtkWidget	*down_enc_button;
 	
 };
 
@@ -199,6 +214,7 @@ static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (G
 									       GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, 
 								    GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static gint last_selected_page_num = FONT_COLORS_SETTINGS;
 static GtkDialogClass* parent_class = NULL;
@@ -626,6 +642,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
 	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
 	gedit_preferences_dialog_setup_plugin_manager_page (dlg, gui);
+	gedit_preferences_dialog_setup_load_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -1862,3 +1879,86 @@ gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg,
 	
 	return TRUE;
 }
+
+static GtkTreeModel*
+create_encodings_treeview_model (void)
+{
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GSList const *list;
+	
+	gedit_debug (DEBUG_PREFS, "");
+
+	/* create list store */
+	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+
+	/* add data to the list store */
+	list = gedit_prefs_manager_get_encodings ();
+	
+	while (list != NULL)
+	{
+		const GeditEncoding* enc;
+		gchar *name;
+
+		enc = (const GeditEncoding*) list->data;
+		name = gedit_encoding_to_string (enc);
+		
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter,
+				    COLUMN_ENCODING_NAME, name,
+				    COLUMN_ENCODING_POINTER, enc,
+				    -1);
+
+		g_free (name);
+		list = g_slist_next (list);
+	}
+	
+	return GTK_TREE_MODEL (store);
+}
+
+static gboolean 
+gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	GtkTreeModel *model;
+	GtkTreeViewColumn *column;
+	GtkCellRenderer *cell;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	dlg->priv->encodings_treeview = glade_xml_get_widget (gui, "encodings_treeview");
+	dlg->priv->add_enc_button = glade_xml_get_widget (gui, "add_enc_button");
+	dlg->priv->remove_enc_button = glade_xml_get_widget (gui, "remove_enc_button") ;
+	dlg->priv->up_enc_button = glade_xml_get_widget (gui, "up_enc_button");
+	dlg->priv->down_enc_button = glade_xml_get_widget (gui, "down_enc_button");
+
+	g_return_val_if_fail (dlg->priv->encodings_treeview != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->add_enc_button != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->remove_enc_button != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->up_enc_button != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->down_enc_button != NULL, FALSE);
+
+	gtk_widget_set_sensitive (dlg->priv->add_enc_button, FALSE);
+	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, FALSE);
+	gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
+	gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
+
+	model = create_encodings_treeview_model ();
+	g_return_val_if_fail (model != NULL, FALSE);
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview), model);
+
+	/* Add the encoding column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Encodings"), cell, 
+			"text", COLUMN_ENCODING_NAME, NULL);
+	
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->encodings_treeview), column);
+
+	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dlg->priv->encodings_treeview),
+			COLUMN_ENCODING_NAME);
+
+	return TRUE;
+}
+
+
+
