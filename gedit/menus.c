@@ -231,7 +231,8 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
-        GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), file_new_cb, (gpointer) GE_DATA),
+        GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), N_("Create a new document"),
+				  file_new_cb, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_MENU_OPEN_ITEM(file_open_cb, (gpointer) GE_DATA),
 
@@ -239,8 +240,8 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, (gpointer) GE_DATA),
 
-	{ GNOME_APP_UI_ITEM, N_("_Print..."),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },
+	GNOMEUIINFO_MENU_PRINT_ITEM(file_print_cb, (gpointer) GE_DATA),
+	
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
