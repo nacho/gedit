@@ -27,6 +27,9 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-main.h>

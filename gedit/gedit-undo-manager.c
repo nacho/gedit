@@ -28,6 +28,10 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <glib.h>
 #include <stdlib.h>
 #include <string.h>

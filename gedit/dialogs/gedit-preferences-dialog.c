@@ -75,7 +75,6 @@ enum
 {
 	COLUMN_ENCODING_NAME = 0,
 	COLUMN_ENCODING_POINTER,
-	COLUMN_INDEX,
 	ENCODING_NUM_COLS
 };
 
@@ -1996,14 +1995,17 @@ add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpoi
 	enc = (const GeditEncoding *) g_value_get_pointer (&value);
 	g_return_val_if_fail (enc != NULL, TRUE);
 	
+
+#if 0
 	{
 		gchar *name;
 		name = gedit_encoding_to_string (enc);
-		/*
+		
 		g_print ("Add %s to list\n", name);
-		*/
+		
 		g_free (name);
 	}
+#endif
 
 	*list = g_slist_prepend (*list, (gpointer) enc);
 
@@ -2040,13 +2042,12 @@ create_encodings_treeview_model (void)
 {
 	GtkListStore *store;
 	GtkTreeIter iter;
-	GSList const *list;
-	gint i = 0;
+	GSList *list;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
 	/* create list store */
-	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_INT);
+	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER);
 
 	/* add data to the list store */
 	list = gedit_prefs_manager_get_encodings ();
@@ -2063,14 +2064,14 @@ create_encodings_treeview_model (void)
 		gtk_list_store_set (store, &iter,
 				    COLUMN_ENCODING_NAME, name,
 				    COLUMN_ENCODING_POINTER, enc,
-				    COLUMN_INDEX, i,
 				    -1);
 
 		g_free (name);
 		
 		list = g_slist_next (list);
-		++i;
 	}
+
+	g_slist_free (list);
 	
 	return GTK_TREE_MODEL (store);
 }
@@ -2144,6 +2145,14 @@ gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection 
 	
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, selected);
 
+	if (!selected)
+	{
+		gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
+		gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
+
+		return;
+	}
+
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
 	g_return_if_fail (model != NULL);
 
@@ -2160,8 +2169,8 @@ gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection 
 		disable_down = gtk_tree_selection_iter_is_selected (selection, &iter);
 	}
 	
-	gtk_widget_set_sensitive (dlg->priv->up_enc_button, selected && !disable_up);
-	gtk_widget_set_sensitive (dlg->priv->down_enc_button, selected && !disable_down);
+	gtk_widget_set_sensitive (dlg->priv->up_enc_button, !disable_up);
+	gtk_widget_set_sensitive (dlg->priv->down_enc_button, !disable_down);
 }
 
 static void
@@ -2191,16 +2200,13 @@ gedit_preferences_dialog_up_enc_button_clicked (GtkButton *button, GeditPreferen
 	g_return_if_fail (res);
 
 	gtk_tree_model_get_iter (model, &prev_iter, path);
-	
 	gtk_tree_path_free (path);
-
-	gtk_tree_selection_unselect_iter (selection, &iter);
-
+	
 	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev_iter);
 
-	update_encodings_list (dlg);
+	gedit_preferences_dialog_encodings_treeview_selection_changed (selection, dlg);
 
-	gtk_tree_selection_select_iter (selection, &iter);
+	update_encodings_list (dlg);	
 }
 
 static void
@@ -2228,13 +2234,11 @@ gedit_preferences_dialog_down_enc_button_clicked (GtkButton *button, GeditPrefer
 	res = gtk_tree_model_iter_next (model, &next_iter);
 	g_return_if_fail (res);
 
-	gtk_tree_selection_unselect_iter (selection, &iter);
-
 	gtk_list_store_swap (GTK_LIST_STORE (model), &next_iter, &iter);
 
-	update_encodings_list (dlg);
+	gedit_preferences_dialog_encodings_treeview_selection_changed (selection, dlg);
 
-	gtk_tree_selection_select_iter (selection, &iter);
+	update_encodings_list (dlg);
 }
 
 
@@ -2340,7 +2344,7 @@ gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditE
 			if (enc == g_value_get_pointer (&value))
 				found = TRUE;
 			
-				g_value_unset (&value);
+			g_value_unset (&value);
 		}
 	}
 
@@ -2354,7 +2358,6 @@ gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditE
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 				    COLUMN_ENCODING_NAME, name,
 				    COLUMN_ENCODING_POINTER, enc,
-				    COLUMN_INDEX, gtk_tree_model_iter_n_children (model, NULL),
 				    -1);
 	g_free (name);
 
@@ -2364,7 +2367,14 @@ gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditE
 gboolean
 gedit_preferences_dialog_add_encodings (GeditPreferencesDialog *dlg, const GSList* encs)
 {
+	GtkTreeSelection *selection;
+
 	gboolean changed = FALSE;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
+	g_return_val_if_fail (selection != NULL, FALSE);
+
+	gtk_tree_selection_unselect_all (selection);
 
 	while (encs != NULL)
 	{

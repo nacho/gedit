@@ -1,3 +1,18 @@
+2003-01-27  Paolo Maggi <paolo.maggi@polito.it>
+
+	* *.c:
+	* dialogs/*.c: make sure to include <config.h>
+
+	* dialogs/gedit-preferences-dialog.c: remove COLUMN_INDEX
+	(add_enc_to_list): comment unused code
+	(create_encodings_treeview_model): mem leak
+	(gedit_preferences_dialog_encodings_treeview_selection_changed):
+	manage the case in which selected == FALSE
+	(gedit_preferences_dialog_up_enc_button_clicked): code cleanup
+	(gedit_preferences_dialog_down_enc_button_clicked): ditto
+	(gedit_preferences_dialog_add_encoding): remove COLUMN_INDEX column
+	(gedit_preferences_dialog_add_encodings): unselect all items
+
 2003-01-21  James Willcox  <jwillcox@gnome.org>
 
 	* gedit-mdi-child.c: (set_tab_icon): Allow svg icons

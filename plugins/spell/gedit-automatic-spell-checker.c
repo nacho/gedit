@@ -32,6 +32,10 @@
  * Copyright (c) 2002 Evan Martin.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <string.h>
 #include <libgnome/gnome-i18n.h>
 
