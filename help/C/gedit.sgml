@@ -1,5 +1,5 @@
 <!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
-<!ENTITY version "0.8.0">
+<!ENTITY version "0.9.0">
 ]>
 
 <article id="index">
@@ -8,8 +8,12 @@
   <title>gedit</title>
 
   <copyright>
+    <year>1998, 1999, 2000</year>
+    <holder>Alex Roberts and Evan Lawrence</holder>
+  </copyright>
+  <copyright>
    <year>2000</year>
-   <holder>Eric Baudais</holder>
+   <holder>Eric Baudais (Documentation Author)</holder>
   </copyright>
 
   <!-- translators: uncomment this:
@@ -57,7 +61,7 @@
       <application>Gedit</application> is a light-weight text editor.  It has 
       all the basic features you come to expect from a simple text editor, but 
       <application>gedit</application> has a native graphic user interface (GUI).  
-      <application>Gedit</application> also has commandline arguments available to 
+      <application>Gedit</application> also has command line arguments available to 
       users to quickly and easily view and edit files from a <systemitem>terminal</systemitem>.  
       Overall, <application>gedit</application> is an easy to use text editor with 
       utilizing the powerful capabilities of the <systemitem>GNOME desktop</systemitem>.
@@ -103,11 +107,9 @@
     <title>Using gedit</title>
 
     <para>
-      A text editor is essential to everything you want to accomplish 
-      in your Linux environment.  From looking at logs to find 
-      a problem with a program or editing a configuration file like 
-      <filename>.bash_profile</filename> to writing a script in perl or 
-      composing a webpage, <application>gedit</application> will fill your 
+      A text editor is an essential tool for your GNOME desktop.  From 
+      writing a small document, editing a configuration file, or composing 
+      a webpage, <application>gedit</application> will fill your 
       need.  <!--Another useful feature is <application>gedit's</application> 
       <link linkend="plugins">plug-ins</link>.  They extend the functionality 
       of the basic text editor.-->
@@ -121,7 +123,7 @@
 	<title>gedit Main Window</title>
 	<screenshot>
 	  <screeninfo>gedit Main Window</screeninfo>
-	  <graphic fileref="figures/gedit" format="png"
+	  <graphic fileref="images/gedit" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
@@ -160,15 +162,15 @@
     </para>
 
     <sect2 id="usage-commandline">
-      <title>Using gedit from the Commandline</title>
+      <title>Using gedit from the Command line</title>
       
       <para>
-	<application>Gedit</application> can also be started from the commandline, 
+	<application>Gedit</application> can also be started from the command line, 
 	by typing <command>gedit</command> with the name of the file you want to 
 	edit.  This will open a new <interface>Main Window</interface> of 
-	<application>gedit</application> with the file you typed in the commandline.
+	<application>gedit</application> with the file you typed in the command line.
 	You can also open multiple files in <application>gedit</application> from 
-	the commandline.  You type <command>gedit</command> with each file's 
+	the command line.  You type <command>gedit</command> with each file's 
 	name, separated by a space, after the command <command>gedit</command>.  
 	So, to open the three files <filename>file1.txt</filename>, 
 	<filename>file2.txt</filename>, and <filename>file3.txt</filename>, you 
@@ -199,13 +201,23 @@
       <para>
 	<application>Gedit</application> also has support for pipes when you use it 
 	in a <systemitem>console</systemitem> or <systemitem>X terminal</systemitem>.  
-	When you use a pipe with <application>gedit</application>, on the commandline, 
+	When you use a pipe with <application>gedit</application>, on the command line, 
 	<application>Gedit</application> is opened and the output of the other 
 	command that is piped to <application>gedit</application> is displayed as 
 	a text file in <application>gedit's</application> <interface>Main Window</interface>.
 	For example if you want to display a listing of what files are in a specific 
 	directory using the <command>ls</command> command, you will type <command>ls</command> 
-	<command>|</command> <command>gedit</command>.  The output of <command>ls</command>, 
+	<command>|</command> <command>gedit</command>.  
+	<footnote>
+	  <para>
+	    The | (pipe) character varies from keyboard to keyboard, but it will, most often, be 
+	    underneath the \ (backslash)character.  Some common places to look for the pipe 
+	    character is: to the right on the shift key on the right side of the keyboard, to 
+	    the right of the ] (square bracket) key or above the enter key on the right side 
+	    of the keyboard, or to the left of the backspace key on the right side of the keyboard.
+	  </para>
+	</footnote>
+	The output of <command>ls</command>, 
 	that is normally displayed on the <systemitem>console</systemitem> or 
 	<systemitem>X terminal</systemitem>, will be displayed in 
 	<application>gedit</application> as a new text file.  This option is very useful 
@@ -221,7 +233,7 @@
 	<title>gedit Toolbar</title>
 	<screenshot>
 	  <screeninfo>gedit toolbar</screeninfo>
-	  <graphic fileref="figures/toolbar" format="png"
+	  <graphic fileref="images/toolbar" format="png"
 		   srccredit="dkw">
 	  </graphic>
 	</screenshot>
@@ -245,15 +257,16 @@
 	<title>Plugin Manager</title>
 	<screenshot>
 	  <screeninfo>plugin manager</screeninfo>
-	  <graphic fileref="figures/manager" format="png"
+	  <graphic fileref="images/manager" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
       </figure>
 
     <para>
-      When <application>gedit</application> starts, there are no plugins in the <guimenu>Plugins</guimenu> 
-      menu.  You need to open the <guimenuitem>Manager&hellip;</guimenuitem> to choose which plugins 
+      When <application>gedit</application> starts, you will see in the <guimenu>Plugins</guimenu> 
+      menu a menu item for each of the installed plugins.  You need to open the 
+      <guimenuitem>Manager&hellip;</guimenuitem> to choose which plugins 
       you want to enable in <application>gedit</application>.  The plugin manager lets you choose 
       only the plugins you want to use.  You will notice only the plugins you install will be shown 
       in the <guimenu>Plugin</guimenu> menu.  Click on which plugin you want to install, 
@@ -273,7 +286,7 @@
 	<title>Browse Plugin</title>
 	<screenshot>
 	  <screeninfo>browse plugin</screeninfo>
-	  <graphic fileref="figures/browse" format="png"
+	  <graphic fileref="images/browse" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
@@ -289,7 +302,7 @@
 	  <title>Change Lynx Path</title>
 	  <screenshot>
 	    <screeninfo>change lynx path</screeninfo>
-	    <graphic fileref="figures/lynx" format="png"
+	    <graphic fileref="images/lynx" format="png"
 		   srccredit="Eric Baudais">
 	    </graphic>
 	  </screenshot>
@@ -308,7 +321,7 @@
 	<title>Diff Plugin</title>
 	<screenshot>
 	  <screeninfo>diff plugin</screeninfo>
-	  <graphic fileref="figures/diff" format="png"
+	  <graphic fileref="images/diff" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
@@ -343,7 +356,7 @@
 	<title>Email Plugin</title>
 	<screenshot>
 	  <screeninfo>email plugin</screeninfo>
-	  <graphic fileref="figures/email" format="png"
+	  <graphic fileref="images/email" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
@@ -355,19 +368,33 @@
 	The <guilabel>From:</guilabel> text window will automatically have the email address provided by 
 	your system.  You can also change it, if you wish the receiving party to send a reply to a different 
 	email address.  You need to enter the receiver's email address in the <guilabel>To:</guilabel> 
-	text window.  If your typical Mail Transfer Agent (MTA) is not the one displayed at the bottom 
+	text window.  If the path to your sendmail compatible mailer
+	<footnote>
+	  <para>
+	    A sendmail compatible mailer is a program that delivers your email to the correct server on the 
+	    internet, so your email will reach its destination.  The program uses SMTP 
+	    (Simple Mail Transfer Protocol) to send your email.  The distinction between a sendmail 
+	    compatible mailer and a non-sendmail compatible mailer is the command line arguments.  
+	    A sendmail compatible mailer will have the same command line arguments as 
+	    <application>sendmail</application>, even if the way it handles everything else is completely 
+	    different.
+	  </para>
+	</footnote>
+	is not displayed at the bottom 
 	of the dialog, you can change it by clicking the <guibutton>Change</guibutton> button.
 	<figure id="mta-fig">
-	  <title>Change MTA</title>
+	  <title>Change sendmail directory</title>
 	  <screenshot>
-	    <screeninfo>change mta</screeninfo>
-	    <graphic fileref="figures/mta" format="png"
+	    <screeninfo>change sendmail</screeninfo>
+	    <graphic fileref="images/mta" format="png"
 		   srccredit="Eric Baudais">
 	    </graphic>
 	  </screenshot>
 	</figure>
-	You then need to enter the correct MTA for your system in the text window or click the 
-	<guibutton>Browse</guibutton> button to find the MTA on your system.
+	You then need to enter the correct path of your sendmail compatible mailer, for your system, 
+	in the text window or click the 
+	<guibutton>Browse</guibutton> button to find the sendmail compatible mailer on your system.  
+	If you do not have a sendmail compatible mailer, you need one to use the email plugin.  
 	After you have all the correct fields filled in, press the <guibutton>OK</guibutton> to send 
 	the email or press the <guibutton>Cancel</guibutton> to not send the email.
       </para>
@@ -409,7 +436,7 @@
 	<title>Shell Output Plugin</title>
 	<screenshot>
 	  <screeninfo>shell output plugin</screeninfo>
-	  <graphic fileref="figures/shell" format="png"
+	  <graphic fileref="images/shell" format="png"
 		   srccredit="Eric Baudais">
 	  </graphic>
 	</screenshot>
@@ -417,8 +444,15 @@
 
       <para>
 	The <guimenuitem>shell output</guimenuitem> plugin executes the command in the directory that is 
-	displayed and puts the output in the <systemitem>Main Window</systemitem>. The shell you are using 
-	will stay the same.  So, if you use <application>bash</application> as your shell, 
+	displayed and puts the output in the <systemitem>Main Window</systemitem>.The shell output 
+	plugin is designed for inserting text resulting from the execution of a console based command.  
+	However, <application>gedit</application> will not stop you if you try to launch another 
+	application, such as <application>gnumeric</application>.  So, should only execute commands 
+	displaying text on the console and commands which are not interactive.
+      </para>
+      <para>
+	The shell you are using 
+	will stay the same for the shell output plugin.  So, if you use <application>bash</application> as your shell, 
 	<application>gedit</application> will execute the command in <application>bash</application>.  This lets 
 	you put output you would normally see in a console or terminal in the middle of the text file 
 	you are editing.
@@ -456,7 +490,7 @@
       <title>The Preferences Dialog with the General Tab Highlighted</title>
       <screenshot>
 	<screeninfo>Preferences dialog with General tab</screeninfo>
-	<graphic fileref="figures/prefs-general" format="png"
+	<graphic fileref="images/prefs-general" format="png"
 		 srccredit="Eric Baudais">
 	</graphic>
       </screenshot>
@@ -562,7 +596,7 @@
       <title>The Preferences Dialog with the Documents Tab Highlighted</title>
       <screenshot>
 	<screeninfo>Preferences dialog with Documents tab</screeninfo>
-	<graphic fileref="figures/prefs-documents" format="png"
+	<graphic fileref="images/prefs-documents" format="png"
 		 srccredit="Eric Baudais">
 	</graphic>
       </screenshot>
@@ -618,7 +652,6 @@
 		  <para>
 		    <guilabel>Notebook Tab Position:</guilabel> &mdash;
 		    This option changes the place the tabs for the notebook style are located.  
-		    It does not currently work as of <application>gedit</application> version 0.8.0.
 		  </para>
 		</listitem>
 	      </itemizedlist>
@@ -644,8 +677,8 @@
 		    this level higher than the default of 5 undo levels.
 		    <note>
 		      <para>
-			Users with low memory, under 16 MB, should set this level at or below 
-			5 undo levels because <application>gedit</application> stores each 
+			Users with low memory, under 16 MB, should set the number of undo levels 
+			lower because <application>gedit</application> stores each 
 			command into memory to the undo level limit.  So, if you set the undo 
 			level limit to 50, then <application>gedit</application> will store 
 			up to 50 commands in your main memory.
@@ -668,7 +701,7 @@
       <title>The Preferences Dialog with the Fonts/Colors Tab Highlighted</title>
       <screenshot>
 	<screeninfo>Preferences dialog with Fonts/Colors tab</screeninfo>
-	<graphic fileref="figures/prefs-font" format="png"
+	<graphic fileref="images/prefs-font" format="png"
 		 srccredit="Eric Baudais">
 	</graphic>
       </screenshot>
@@ -733,7 +766,7 @@
       <title>The Preferences Dialog with the Printing Tab Highlighted</title>
       <screenshot>
 	<screeninfo>Fonts/Colors dialog with Printing tab</screeninfo>
-	<graphic fileref="figures/prefs-printing" format="png"
+	<graphic fileref="images/prefs-printing" format="png"
 		 srccredit="Eric Baudais">
 	</graphic>
       </screenshot>
@@ -806,7 +839,7 @@
       <title>The Preferences Dialog with the Paper Tab Highlighted</title>
       <screenshot>
 	<screeninfo>Fonts/Colors dialog with Paper tab</screeninfo>
-	<graphic fileref="figures/prefs-paper" format="png"
+	<graphic fileref="images/prefs-paper" format="png"
 		 srccredit="Eric Baudais">
 	</graphic>
       </screenshot>
@@ -863,11 +896,11 @@
     <title>Menus</title>
 
     <para>
-      In <application>gedit</application> there are three different type of menus: the 
-      <interface>menu bar</interface>, containing all the commands, options, and plug-ins, 
-      the <interface>toolbar</interface>, containing selected commands the user uses the 
-      most, and the <interface>right click menu</interface> in the <interface>text window</interface>, 
-      containing commands that are useful while editing a file.  Only the <interface>menu bar</interface> 
+      In <application>gedit</application> there are three different type of menus. The 
+      <interface>menu bar</interface> contains all the commands, options, and plug-ins. 
+      The <interface>toolbar</interface> contains selected commands the user uses the 
+      most.  The <interface>right click menu</interface> in the <interface>text window</interface>, 
+      contains the commands that are useful while editing a file.  Only the <interface>menu bar</interface> 
       is described in this section because it is so large.  The
       <interface>toolbar</interface> and <link linkend="pop-up-menu"><interface>
       right click menu</interface></link> are talked about in other sections of <application>
@@ -880,7 +913,17 @@
 	The <interface>menu bar</interface> can be moved around the 
 	<interface>desktop</interface>.  When you click on the far left side 
 	of the <interface>menu bar</interface>, on the raised dotted portion, you 
-	can drag it any place on the desktop you wish with your mouse.  The 
+	can drag
+	<footnote>
+	  <para>
+	    Dragging refers to the action in which you click on an object, with your mouse, 
+	    and move the mouse pointer without releasing the previously clicked button.  
+	    You can then release the mouse button and the object you were moving with the 
+	    mouse will stay on the desktop where you released the mouse button.  This 
+	    action is generally called <quote>drag and drop.</quote>
+	  </para>
+	</footnote>
+	the menu bar with your mouse and move it anywhere on your desktop.  The 
 	<interface>menu bar</interface> can also snap into place on all four sides 
 	of the <interface>Main Window</interface>, if you place your mouse close 
 	to the edge of the <interface>Main Window</interface>.  The menu bar's 
@@ -916,7 +959,7 @@
 		      </shortcut>
 		      <guimenuitem>Open&hellip;</guimenuitem>
 		    </menuchoice> &mdash; 
-		    This item brings up the <interface>Open File &hellip;</interface> dialog.  From there 
+		    This item brings up the <interface>Open File&hellip;</interface> dialog.  From there 
 		    you can open an existing file.
 		  </para>
 		</listitem>
@@ -929,8 +972,8 @@
 		      </shortcut>
 		      <guimenuitem>Save</guimenuitem>
 		    </menuchoice> &mdash; 
-		    This item saves a file, if it is an existing file, or brings up the 
-		    <interface>Save As&hellip;</interface> dialog to save the new file.
+		    This item saves the current file, if the file was previously saved, or brings 
+		    up the <interface>Save As&hellip</interface> dialog to save the file.
 		  </para>
 		</listitem>
 
@@ -949,9 +992,8 @@
 		      <guimenuitem>Save As&hellip;</guimenuitem>
 		    </menuchoice> &mdash; 
 		    This item brings up the <interface>Save As&hellip</interface> dialog to save the selected file 
-		    in <application>gedit</application>.  You should use this command if you want to specify 
-		    the file's name, for a new file, or want to save the file under a different name, 
-		    for an existing file.
+		    in <application>gedit</application>.  You should use this command if you want to save the 
+		    file under a different name.
 		  </para>
 		</listitem>
 
@@ -986,7 +1028,7 @@
 		      <title>Print Document Dialog</title>
 		      <screenshot>
 			<screeninfo>Print Document dialog</screeninfo>
-			<graphic fileref="figures/print" format="png"
+			<graphic fileref="images/print" format="png"
 				 srccredit="Eric Baudais">
 			</graphic>
 		      </screenshot>
@@ -1000,7 +1042,16 @@
 
 		    <para>
 		      The <guilabel>Select printer</guilabel> section lets you specify whether 
-		      the file will be printed to a printer or printed to a pre-press file format.  
+		      the file will be printed to a printer or printed to a pre-press 
+		      <footnote>
+		        <para>
+			  A pre-press file is one that a professional printing company can take 
+			  and produce brochures, flyers, letterheads, etc.  The file formats which 
+			  are referred to are PS (Postscript) and PDF 
+			  (Portable Document Format).
+		        </para>
+		      </footnote>
+		      file format.  
 		      The button for the <guibutton>Printer</guibutton> and <guibutton>File</guibutton> 
 		      options are on the left side of the dialog.  If you choose to print the file 
 		      to a printer, you need to verify the printing command is correct, in the text 
@@ -1015,9 +1066,11 @@
 		    <para>
 		      The <guilabel>Print Range</guilabel> section lets you specify what parts of the 
 		      file you wish to print.  When the <guibutton>All</guibutton> button is pressed the 
-		      whole file will be printed.  If you want to specify only a portion of the file 
+		      whole file will be printed.  If you want to specify certain pages, of the file, 
 		      to be printed, you need to press the <guibutton>Pages</guibutton> button and enter the 
-		      starting and ending page number.
+		      starting and ending page number.  If you only want a certain selection of the file, 
+		      which you have highlighted, to be printed, you need to press the 
+		      <guibutton>Selection</guibutton> button.
 		    </para>
 
 		    <para>
@@ -1042,7 +1095,7 @@
 		      <title>Print Preview Document Dialog</title>
 		      <screenshot>
 			<screeninfo>Print Preview Document dialog</screeninfo>
-			<graphic fileref="figures/print-preview" format="png"
+			<graphic fileref="images/print-preview" format="png"
 				 srccredit="Eric Baudais">
 			</graphic>
 		      </screenshot>
@@ -1113,10 +1166,11 @@
 		      </shortcut>
 		      <guimenuitem>Undo</guimenuitem>
 		    </menuchoice> &mdash; 
-		    This item returns the document to its previous state before each command is 
-		    executed; it essentially takes back each command in the order they were preformed.  
-		    You can only take back a certain number of commands.  The option is configured in 
-		    the <link linkend="prefs"><interface>Preferences&hellip;</interface></link> dialog.
+		    This item returns the document to its previous state before each command is executed
+		    or word is typed; it essentially takes back each command or typed word in the order 
+		    they were performed.  You can only take back a certain number of commands.  The 
+		    option is configured in the <link linkend="documents-fig"><interface>Preferences&hellip;</interface>
+		    </link> dialog.
 		  </para>
 		</listitem>
 
@@ -1200,7 +1254,7 @@
 		      <title>Find Dialog</title>
 		      <screenshot>
 			<screeninfo>Find dialog</screeninfo>
-			<graphic fileref="figures/find" format="png"
+			<graphic fileref="images/find" format="png"
 				 srccredit="Eric Baudais">
 			</graphic>
 		      </screenshot>
@@ -1245,7 +1299,7 @@
 		      <title>Replace Dialog</title>
 		      <screenshot>
 			<screeninfo>Replace dialog</screeninfo>
-			<graphic fileref="figures/replace" format="png"
+			<graphic fileref="images/replace" format="png"
 				 srccredit="Eric Baudais">
 			</graphic>
 		      </screenshot>
@@ -1287,7 +1341,7 @@
 		      <title>Goto Line Dialog</title>
 		      <screenshot>
 			<screeninfo>Goto Line dialog</screeninfo>
-			<graphic fileref="figures/goto-line" format="png"
+			<graphic fileref="images/goto-line" format="png"
 				 srccredit="Eric Baudais">
 			</graphic>
 		      </screenshot>
@@ -1541,28 +1595,60 @@
       <itemizedlist mark="opencircle">
 	<listitem>
 	  <para>
-	    <application>gedit</application> requires the latest gnome-print, either version 
-	    0.20 or the version from CVS, to print properly. 
-	  </para>
-	</listitem>
-
-	<listitem>
-	  <para>
 	    At this point <application>gedit</application> does not have syntax highlighting. 
 	    The current text widget that <application>gedit</application> uses is not 
 	    suitable for this feature. 
 	  </para>
 	</listitem>
-
-	<listitem>
-	  <para>
-	    You cannot run another graphical application using <application>gedit's</application> 
-	    <link linkend="shell">shell output plugin</link>.
-	  </para>
-	</listitem>
       </itemizedlist>
     </para>
 
+  </sect1>
+
+  <sect1 id="faq">
+    <title>Frequently Asked Questions</title>
+
+    <qandaset defaultlabel="qanda">
+
+      <qandaentry id="highlighting">
+	<question>
+	  <para>
+	    I want syntax highlighting.  When will it be included?
+	  </para>
+	</question>
+	
+	<answer>
+	  <para>
+	    Currently, the GTK+ Text widget isn't suitable for syntax highlighting to be implemented 
+	    reliably.  We might add syntax highlighting when we migrate to the new text widget.
+	  </para>
+	  <para>
+	    On the other hand, <application>gedit</application> intends to be a simple text editor.  
+	    If you are looking for syntax highlighting, we strongly recommend you use a full featured 
+	    text editor like <application>VIM</application>, <application>emacs</application>, or 
+	    <application>elvis</application>.
+	  </para>
+	</answer>
+      </qandaentry>
+
+      <qandaentry id="slow-screen">
+	<question>
+	  <para>
+	    <application>Gedit</application> seems very slow when I type.  After I start typing, 
+	    I can see the text appearing slowly, one character at a time.  What is wrong?
+	  </para>
+	</question>
+	<answer>
+	  <para>
+	    This behavior occurs when the active theme is poorly written.  Change your theme to 
+	    a nicely written one.  Having this kind of theme is not only affecting the speed 
+	    the <application>gedit</application> window is being redrawn, but all the gtk windows.  
+	    In <application>gedit</application> it is just more evident.
+	  </para>
+	</answer>
+      </qandaentry>
+
+    </qandaset>
   </sect1>
 
 
@@ -1575,10 +1661,12 @@
    (<email>bse@error.fsnet.co.uk</email>) and Evan Lawrence.
    <application>gedit</application> is currently being maintained by 
    Chema Celorio (<email>chema@celorio.com</email>) and Jason Leach
-   (<email>jleach@???</email>).  To find more information about
+   (<email>leach@wam.umd.edu</email>).  The artwork for 
+   <application>gedit</application> was done by Steve Hall 
+   (<email>steve_hall@mindspring.com</email>).  To find more information about
    <application>gedit</application>, please visit the <ulink
    url="http://gedit.sourceforge.net" type="http">gedit web
-   page</ulink>.  Please send all comments and suggestions to 
+   page</ulink> at http://gedit.sourceforge.net.  Please send all comments and suggestions to 
    the <application>gedit</application> mailing list 
    (<email>gedit-list@sourceforge.org</email>).  Send all bug
    reports to the <ulink url="http://bugs.gnome.org" type="http">GNOME

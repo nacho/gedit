@@ -19,25 +19,25 @@ $(app)/index.html: $(srcdir)/$(app).sgml
 
 app-dist-hook: index.html
 	-$(mkinstalldirs) $(distdir)/$(app)/stylesheet-images
-	-$(mkinstalldirs) $(distdir)/figures
+	-$(mkinstalldirs) $(distdir)/images
 	-cp $(srcdir)/$(app)/*.html $(distdir)/$(app)
 	-cp $(srcdir)/$(app)/*.css $(distdir)/$(app)
 	-cp $(srcdir)/$(app)/stylesheet-images/*.png \
 		$(distdir)/$(app)/stylesheet-images
-	-cp $(srcdir)/figures/*.png \
-		$(distdir)/figures
+	-cp $(srcdir)/images/*.png \
+		$(distdir)/images
 
 install-data-am: index.html
 	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/stylesheet-images
-	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/figures
+	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/images
 	-cp $(srcdir)/topic.dat $(DESTDIR)$(helpdir)
 	-for file in $(srcdir)/$(app)/*.html $(srcdir)/$(app)/*.css $(srcdir)/*.png; do \
 	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/$$basefile; \
 	done
-	-for file in $(srcdir)/figures/*.png; do \
+	-for file in $(srcdir)/images/*.png; do \
 	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
-	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/figures/$$basefile; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/images/$$basefile; \
 	done
 	-for file in $(srcdir)/$(app)/stylesheet-images/*.png; do \
 	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
