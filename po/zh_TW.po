@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.107.0\n"
-"POT-Creation-Date: 2002-01-11 16:58+0100\n"
+"POT-Creation-Date: 2002-01-14 16:58+0100\n"
 "PO-Revision-Date: 2001-12-08 20:15+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Gnome 文字編輯器"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
 msgid "gedit"
 msgstr "gedit"
 
@@ -38,7 +38,7 @@ msgstr "跳到行數(_L)..."
 msgid "_Goto line"
 msgstr "跳到某行"
 
-#: src/dialogs/gedit-dialog-replace.c:165
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
 #, fuzzy
 msgid "Replace"
 msgstr "取代(_R)"
@@ -49,25 +49,716 @@ msgid "Replace _All"
 msgstr "全部取代"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
 msgid "_Replace"
 msgstr "取代(_R)"
 
-#: src/dialogs/gedit-dialog-replace.c:269
+#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "搜尋"
 
-#: src/dialogs/gedit-dialog-replace.c:471
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#: src/dialogs/gedit-dialog-replace.c:475
+#: src/dialogs/gedit-dialog-replace.c:546
+#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
 #, fuzzy, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "找不到要搜尋的文字。"
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:712
 #, fuzzy, c-format
 msgid "Found and replaced %d occurences."
 msgstr "找到並取代了 %i 個字串。"
+
+#: src/dialogs/gedit-preferences-dialog.c:195
+msgid "Toolbar"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:196
+#, fuzzy
+msgid "Status bar"
+msgstr "顯示狀態欄(_h)"
+
+#: src/dialogs/gedit-preferences-dialog.c:199
+msgid "MDI"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:207
+#, fuzzy
+msgid "Font & Colors"
+msgstr "字型/顏色"
+
+#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+msgid "Save"
+msgstr "儲存"
+
+#.
+#. {_("Tabs"), NULL, TABS_SETTINGS},
+#.
+#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "復原"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+msgid "Wrap mode"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+#, fuzzy
+msgid "Line numbers"
+msgstr "行號："
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+#, fuzzy
+msgid "Page"
+msgstr "頁"
+
+#: src/dialogs/gedit-preferences-dialog.c:229
+#, fuzzy
+msgid "Editor"
+msgstr "離開"
+
+#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "列印"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "User interface"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+msgid "Preferences"
+msgstr "偏好設定"
+
+#: src/dialogs/gedit-preferences-dialog.c:462
+msgid "Categories"
+msgstr ""
+
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr "此功能未完成。"
+
+#: src/gedit-commands.c:411
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:482
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gedit 是一個 GNOME 的小型輕量級的文字編輯器"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+msgid "Untitled"
+msgstr "未命名"
+
+#: src/gedit-document.c:537 src/gedit-document.c:643
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr "讀入檔案時遇到無效的 UTF-8 資料"
+
+#: src/gedit-document.c:953
+msgid "It is not possible to revert an Untitled document"
+msgstr "不可能復原未命名的文件"
+
+#: src/gedit-file-selector-util.c:104
+#, fuzzy, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr "另一個名稱為「%s」的檔案已經在此位置了。是否要覆寫它？"
+
+#: src/gedit-file-selector-util.c:112
+#, fuzzy
+msgid "Do_n't replace"
+msgstr "不要儲存(_D)"
+
+#: src/gedit-file-selector-util.c:544
+msgid "Select a filename to save"
+msgstr ""
+
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
+#, c-format
+msgid "Loaded file %s"
+msgstr "載入檔案 %s"
+
+#: src/gedit-file.c:256
+#, c-format
+msgid "Loaded %i files"
+msgstr "已載入 %i 個檔案"
+
+#: src/gedit-file.c:326 src/gedit-file.c:348
+msgid "Open File ..."
+msgstr "開啟檔案..."
+
+#: src/gedit-file.c:395 src/gedit-file.c:443
+#, c-format
+msgid ""
+"An error occurred while opening the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"開啟檔案「%s」時發生錯誤。\n"
+"\n"
+"%s。"
+
+#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "正在儲存檔案「%s」..."
+
+#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+msgid "Unknown error"
+msgstr "不明的錯誤"
+
+#: src/gedit-file.c:534 src/gedit-file.c:736
+#, c-format
+msgid ""
+"An error occurred while saving the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"儲存檔案「%s」時發生錯誤。\n"
+"\n"
+"%s。"
+
+#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+msgid "The document has not been saved."
+msgstr "此文件並未儲存。"
+
+#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#, c-format
+msgid "File '%s' saved."
+msgstr "檔案「%s」已儲存。"
+
+#: src/gedit-file.c:641
+msgid "Save As..."
+msgstr "另存新檔..."
+
+#: src/gedit-file.c:674
+#, fuzzy
+msgid "Save as ..."
+msgstr "另存新檔..."
+
+#: src/gedit-file.c:808
+#, c-format
+msgid ""
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
+msgstr "另一個名稱為「%s」的檔案已經在此位置了。是否要覆寫它？"
+
+#: src/gedit-file.c:932
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "正在還原檔案「%s」..."
+
+#: src/gedit-file.c:953
+#, c-format
+msgid ""
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"還原檔案「%s」時發生錯誤。\n"
+"\n"
+"%s。"
+
+#: src/gedit-file.c:981
+msgid "The document has not been reverted."
+msgstr "此文件並未還原。"
+
+#: src/gedit-file.c:991
+#, c-format
+msgid "File '%s' reverted."
+msgstr "檔案「%s」已還原。"
+
+#: src/gedit-file.c:1143
+#, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"由標準輸入讀入資料時發生錯誤。\n"
+"\n"
+"%s。"
+
+#: src/gedit-mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"是否要儲存對文字「%s」所作的修改？\n"
+"\n"
+"如果不儲存，將會失去已修改的資料。"
+
+#: src/gedit-mdi.c:584
+#, fuzzy
+msgid "Do_n't save"
+msgstr "不要儲存(_D)"
+
+#: src/gedit-mdi.c:602
+#, fuzzy
+msgid "_Don't quit"
+msgstr "不要儲存(_D)"
+
+#: src/gedit-mdi.c:606
+#, fuzzy
+msgid "_Don't close"
+msgstr "不要儲存(_D)"
+
+#: src/gedit-mdi.c:690
+msgid "(modified)"
+msgstr "（已變更）"
+
+#: src/gedit-mdi.c:696
+msgid "(readonly)"
+msgstr "（唯讀）"
+
+#: src/gedit-print.c:158
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+
+#: src/gedit-print.c:265
+#, fuzzy
+msgid "gedit - Print Document"
+msgstr "列印文件"
+
+#: src/gedit-print.c:274
+#, fuzzy
+msgid "Lines"
+msgstr "行(_i)"
+
+#: src/gedit-print.c:330
+#, fuzzy, c-format
+msgid "File: %s"
+msgstr "檔案(_F)"
+
+#. Print right text
+#: src/gedit-print.c:335
+#, fuzzy, c-format
+msgid "Page: %d"
+msgstr "頁"
+
+#: src/gedit-print.c:464
+#, fuzzy
+msgid "gedit - Print Preview"
+msgstr "gedit：預覽列印\n"
+
+#: src/gedit-print.c:540
+#, fuzzy, c-format
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+"由標準輸入讀入資料時發生錯誤。\n"
+"\n"
+"%s。"
+
+#: src/gedit-recent.c:252
+#, c-format
+msgid "Open file %s"
+msgstr "開啟檔案 %s"
+
+#: src/gedit-recent.c:320
+#, c-format
+msgid "Unable to open recent file: %s"
+msgstr "無法開啟最近開啟的檔案：%s"
+
+#: src/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:3
+msgid "Add/Remove installed plugins"
+msgstr ""
+
+#: src/gedit-ui.xml.h:4
+msgid "C_lear"
+msgstr ""
+
+#: src/gedit-ui.xml.h:5
+msgid "C_lose All"
+msgstr "關閉所有文件(_l)"
+
+#: src/gedit-ui.xml.h:6
+#, fuzzy
+msgid "C_ut"
+msgstr "剪下"
+
+#: src/gedit-ui.xml.h:7
+#, fuzzy
+msgid "Clear"
+msgstr "關閉"
+
+#: src/gedit-ui.xml.h:8
+msgid "Clear the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:9
+msgid "Close"
+msgstr "關閉"
+
+#: src/gedit-ui.xml.h:10
+#, fuzzy
+msgid "Close All"
+msgstr "關閉所有文件(_l)"
+
+#: src/gedit-ui.xml.h:11
+#, fuzzy
+msgid "Close all open files"
+msgstr "關閉所有開啟的檔案"
+
+#: src/gedit-ui.xml.h:12
+msgid "Close the current file"
+msgstr "關閉現在的檔案"
+
+#: src/gedit-ui.xml.h:13
+msgid "Configure the application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr "建立一個新的文件"
+
+#: src/gedit-ui.xml.h:17
+msgid "Customize"
+msgstr ""
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize toolbars"
+msgstr ""
+
+#: src/gedit-ui.xml.h:19
+msgid "Cut"
+msgstr "剪下"
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr ""
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr ""
+
+#: src/gedit-ui.xml.h:23
+#, fuzzy
+msgid "E_xit"
+msgstr "離開"
+
+#: src/gedit-ui.xml.h:24
+msgid "Exit"
+msgstr "離開"
+
+#: src/gedit-ui.xml.h:25
+msgid "Exit the program"
+msgstr "離開本程式"
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:28
+msgid "Find _Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr "跳到指定的行號"
+
+#: src/gedit-ui.xml.h:30
+#, fuzzy
+msgid "Goto _Line"
+msgstr "跳到某行"
+
+#: src/gedit-ui.xml.h:31
+msgid "Main toolbar"
+msgstr ""
+
+#: src/gedit-ui.xml.h:32
+#, fuzzy
+msgid "Manager"
+msgstr "管理程式(_M)..."
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr "新建"
+
+#: src/gedit-ui.xml.h:34
+msgid "Open"
+msgstr "開啟"
+
+#: src/gedit-ui.xml.h:35
+#, fuzzy
+msgid "Open a file"
+msgstr "開啟檔案 %s"
+
+#: src/gedit-ui.xml.h:36
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/gedit-ui.xml.h:37
+msgid "Open from URI"
+msgstr "由 URI 開啟"
+
+#: src/gedit-ui.xml.h:38
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "由 URI 開啟"
+
+#: src/gedit-ui.xml.h:39
+msgid "Paste"
+msgstr "貼上"
+
+#: src/gedit-ui.xml.h:40
+msgid "Paste the clipboard"
+msgstr "貼上剪貼簿內容"
+
+#: src/gedit-ui.xml.h:43
+#, fuzzy
+msgid "Print Pre_view"
+msgstr "預覽列印(_V)"
+
+#: src/gedit-ui.xml.h:44
+#, fuzzy
+msgid "Print Preview"
+msgstr "預覽列印"
+
+#: src/gedit-ui.xml.h:45
+#, fuzzy
+msgid "Print Setup"
+msgstr "列印文件"
+
+#: src/gedit-ui.xml.h:46
+msgid "Print preview"
+msgstr "預覽列印"
+
+#: src/gedit-ui.xml.h:47
+msgid "Print the current file"
+msgstr "列印現在的檔案"
+
+#: src/gedit-ui.xml.h:48
+msgid "Redo"
+msgstr "取消復原"
+
+#: src/gedit-ui.xml.h:49
+msgid "Redo the undone action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:51
+#, fuzzy
+msgid "Replace a string"
+msgstr "尋找一個字串"
+
+#: src/gedit-ui.xml.h:52
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:53
+#, fuzzy
+msgid "Revert to saved"
+msgstr "復原"
+
+#: src/gedit-ui.xml.h:54
+msgid "Sav_e All"
+msgstr "全部儲存(_E)"
+
+#: src/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Save All"
+msgstr "全部儲存(_E)"
+
+#: src/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Save As"
+msgstr "另存新檔..."
+
+#: src/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Save _As..."
+msgstr "另存新檔..."
+
+#: src/gedit-ui.xml.h:59
+#, fuzzy
+msgid "Save all open files"
+msgstr "儲存所有開啟的檔案"
+
+#: src/gedit-ui.xml.h:60
+msgid "Save the current file"
+msgstr "儲存現在的檔案"
+
+#: src/gedit-ui.xml.h:61
+#, fuzzy
+msgid "Save the current file with a different name"
+msgstr "儲存現在的檔案"
+
+#: src/gedit-ui.xml.h:62
+#, fuzzy
+msgid "Se_arch"
+msgstr "搜尋目標(_S)："
+
+#: src/gedit-ui.xml.h:63
+#, fuzzy
+msgid "Search again for the same string"
+msgstr "尋找一個字串"
+
+#: src/gedit-ui.xml.h:64
+msgid "Search for a string"
+msgstr "尋找一個字串"
+
+#: src/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Select All"
+msgstr "全部取代"
+
+#: src/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Select the entire document"
+msgstr "郵寄目前的文件"
+
+#: src/gedit-ui.xml.h:67
+msgid "Setup the page settings for your current printer"
+msgstr ""
+
+#: src/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:70
+msgid "_About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:71
+#, fuzzy
+msgid "_Close"
+msgstr "關閉"
+
+#: src/gedit-ui.xml.h:72
+msgid "_Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:73
+msgid "_Debug"
+msgstr ""
+
+#: src/gedit-ui.xml.h:74
+msgid "_Documents"
+msgstr "文件(_D)"
+
+#: src/gedit-ui.xml.h:75
+#, fuzzy
+msgid "_Edit"
+msgstr "離開"
+
+#: src/gedit-ui.xml.h:76
+msgid "_File"
+msgstr "檔案(_F)"
+
+#: src/gedit-ui.xml.h:77
+#, fuzzy
+msgid "_Find"
+msgstr "搜尋"
+
+#: src/gedit-ui.xml.h:78
+msgid "_Help"
+msgstr ""
+
+#: src/gedit-ui.xml.h:79
+#, fuzzy
+msgid "_Manager"
+msgstr "管理程式(_M)..."
+
+#: src/gedit-ui.xml.h:80
+msgid "_New"
+msgstr "新增(_N)"
+
+#: src/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_Open..."
+msgstr "開啟"
+
+#: src/gedit-ui.xml.h:82
+#, fuzzy
+msgid "_Paste"
+msgstr "貼上"
+
+#: src/gedit-ui.xml.h:83
+msgid "_Plugins"
+msgstr ""
+
+#: src/gedit-ui.xml.h:84
+#, fuzzy
+msgid "_Preferences"
+msgstr "偏好設定"
+
+#: src/gedit-ui.xml.h:85
+#, fuzzy
+msgid "_Print"
+msgstr "列印"
+
+#: src/gedit-ui.xml.h:86
+#, fuzzy
+msgid "_Redo"
+msgstr "取消復原"
+
+#: src/gedit-ui.xml.h:88
+msgid "_Revert"
+msgstr "還原(_R)"
+
+#: src/gedit-ui.xml.h:89
+#, fuzzy
+msgid "_Save"
+msgstr "儲存"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Select all"
+msgstr ""
+
+#: src/gedit-ui.xml.h:91
+msgid "_Settings"
+msgstr ""
+
+#: src/gedit-ui.xml.h:92
+#, fuzzy
+msgid "_Undo"
+msgstr "復原"
+
+#: src/gedit-view.c:787
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr ""
+
+#: src/gedit-view.c:825
+msgid "  OVR"
+msgstr ""
+
+#: src/gedit-view.c:827
+msgid "  INS"
+msgstr ""
 
 #: src/gedit2.c:59
 msgid "Show mdi debugging messages."
@@ -121,195 +812,21 @@ msgstr "顯示所有的偵錯訊息。"
 msgid "The gnome text editor"
 msgstr "Gnome 文字編輯器"
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr "此功能未完成。"
-
-#: src/gedit-commands.c:409
-msgid "Impossible to update gedit settings."
-msgstr ""
-
-#: src/gedit-commands.c:471
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit 是一個 GNOME 的小型輕量級的文字編輯器"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-msgid "Untitled"
-msgstr "未命名"
-
-#: src/gedit-document.c:535 src/gedit-document.c:641
-msgid "Invalid UTF-8 data encountered reading file"
-msgstr "讀入檔案時遇到無效的 UTF-8 資料"
-
-#: src/gedit-document.c:951
-msgid "It is not possible to revert an Untitled document"
-msgstr "不可能復原未命名的文件"
-
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
-msgstr "載入檔案 %s"
-
-#: src/gedit-file.c:256
-#, c-format
-msgid "Loaded %i files"
-msgstr "已載入 %i 個檔案"
-
-#: src/gedit-file.c:326 src/gedit-file.c:348
-msgid "Open File ..."
-msgstr "開啟檔案..."
-
-#: src/gedit-file.c:395 src/gedit-file.c:441
-#, c-format
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"開啟檔案「%s」時發生錯誤。\n"
-"\n"
-"%s。"
-
-#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
-#, c-format
-msgid "Saving file '%s' ..."
-msgstr "正在儲存檔案「%s」..."
-
-#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
-msgid "Unknown error"
-msgstr "不明的錯誤"
-
-#: src/gedit-file.c:530 src/gedit-file.c:730
-#, c-format
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"儲存檔案「%s」時發生錯誤。\n"
-"\n"
-"%s。"
-
-#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
-msgid "The document has not been saved."
-msgstr "此文件並未儲存。"
-
-#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
-#, c-format
-msgid "File '%s' saved."
-msgstr "檔案「%s」已儲存。"
-
-#: src/gedit-file.c:635
-msgid "Save As..."
-msgstr "另存新檔..."
-
-#: src/gedit-file.c:668
-#, fuzzy
-msgid "Save as ..."
-msgstr "另存新檔..."
-
-#: src/gedit-file.c:800
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr "另一個名稱為「%s」的檔案已經在此位置了。是否要覆寫它？"
-
-#: src/gedit-file.c:926
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr "正在還原檔案「%s」..."
-
-#: src/gedit-file.c:947
-#, c-format
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"還原檔案「%s」時發生錯誤。\n"
-"\n"
-"%s。"
-
-#: src/gedit-file.c:973
-msgid "The document has not been reverted."
-msgstr "此文件並未還原。"
-
-#: src/gedit-file.c:983
-#, c-format
-msgid "File '%s' reverted."
-msgstr "檔案「%s」已還原。"
-
-#: src/gedit-file.c:1135
-#, c-format
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-"由標準輸入讀入資料時發生錯誤。\n"
-"\n"
-"%s。"
-
-#: src/gedit-mdi.c:524
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"是否要儲存對文字「%s」所作的修改？\n"
-"\n"
-"如果不儲存，將會失去已修改的資料。"
-
-#: src/gedit-mdi.c:529
-#, fuzzy
-msgid "Do_n't save"
-msgstr "不要儲存(_D)"
-
-#: src/gedit-mdi.c:547
-#, fuzzy
-msgid "_Don't quit"
-msgstr "不要儲存(_D)"
-
-#: src/gedit-mdi.c:551
-#, fuzzy
-msgid "_Don't close"
-msgstr "不要儲存(_D)"
-
-#: src/gedit-mdi.c:633
-msgid "(modified)"
-msgstr "（已變更）"
-
-#: src/gedit-mdi.c:639
-msgid "(readonly)"
-msgstr "（唯讀）"
-
-#: src/gedit-recent.c:252
-#, c-format
-msgid "Open file %s"
-msgstr "開啟檔案 %s"
-
-#: src/gedit-recent.c:320
-#, c-format
-msgid "Unable to open recent file: %s"
-msgstr "無法開啟最近開啟的檔案：%s"
-
 # plugins/browse/browse.c:246
 #~ msgid "Browse"
 #~ msgstr "瀏覽"
 
-#~ msgid "Enter the _URL to browse for:"
-#~ msgstr "輸入要瀏覽的 URL(_U)："
+#, fuzzy
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "此文件並未儲存。"
 
-#~ msgid "location"
-#~ msgstr "位址"
+#, fuzzy
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "文件沒有資料。"
+
+#, fuzzy
+#~ msgid "The \"second\" document contains no text."
+#~ msgstr "文件沒有資料。"
 
 #~ msgid ""
 #~ "gedit could not create a temp file.\n"
@@ -317,6 +834,18 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgstr ""
 #~ "gedit 無法建立暫存檔案。\n"
 #~ "\n"
+
+#, fuzzy
+#~ msgid "Untitled %i"
+#~ msgstr "未命名"
+
+#, fuzzy
+#~ msgid "Document info"
+#~ msgstr "文件"
+
+#, fuzzy
+#~ msgid "Get info on current document."
+#~ msgstr "郵寄目前的文件"
 
 #~ msgid "email"
 #~ msgstr "電子郵件"
@@ -329,6 +858,43 @@ msgstr "無法開啟最近開啟的檔案：%s"
 
 #~ msgid "Email the current document"
 #~ msgstr "郵寄目前的文件"
+
+#~ msgid "Reverse"
+#~ msgstr "復原"
+
+#~ msgid "Reverse text"
+#~ msgstr "復原文字"
+
+#~ msgid ""
+#~ "The shell command entry is empty.\n"
+#~ "\n"
+#~ "Please, insert a valid shell command."
+#~ msgstr ""
+#~ "命令殼指令一欄是空的。\n"
+#~ "\n"
+#~ "請加入正確的命令殼指令。"
+
+#~ msgid "Shell Output"
+#~ msgstr "命令殼輸出"
+
+#~ msgid "Insert the shell output in the document"
+#~ msgstr "將命令殼輸出插入到檔案中"
+
+#, fuzzy
+#~ msgid "Sort a document."
+#~ msgstr "建立一個新的文件"
+
+#~ msgid "Insert Time"
+#~ msgstr "插入時間"
+
+#~ msgid "Inserts the current date and time"
+#~ msgstr "插入目前的日期與時間"
+
+#~ msgid "Enter the _URL to browse for:"
+#~ msgstr "輸入要瀏覽的 URL(_U)："
+
+#~ msgid "location"
+#~ msgstr "位址"
 
 #~ msgid "Change..."
 #~ msgstr "改變..."
@@ -366,27 +932,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "gedit: e-mail plugin"
 #~ msgstr "gedit：電子郵件 Plugin"
 
-#~ msgid "Reverse"
-#~ msgstr "復原"
-
-#~ msgid "Reverse text"
-#~ msgstr "復原文字"
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "命令殼指令一欄是空的。\n"
-#~ "\n"
-#~ "請加入正確的命令殼指令。"
-
-#~ msgid "Shell Output"
-#~ msgstr "命令殼輸出"
-
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "將命令殼輸出插入到檔案中"
-
 #~ msgid "Select the working directory..."
 #~ msgstr "選擇執行指令的目錄..."
 
@@ -399,12 +944,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "_Working directory:"
 #~ msgstr "執行指令的目錄(_W)："
 
-#~ msgid "Insert Time"
-#~ msgstr "插入時間"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "插入目前的日期與時間"
-
 #~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 #~ msgstr "要使用 %s plugin，您需要指定 \"%s\" 的位置。"
 
@@ -416,9 +955,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr "無法配置記憶體給「全部取代」這個動作。"
-
-#~ msgid "Line number:"
-#~ msgstr "行號："
 
 #~ msgid "Author(s):"
 #~ msgstr "作者："
@@ -441,9 +977,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "Colors"
 #~ msgstr "顏色"
 
-#~ msgid "Documents"
-#~ msgstr "文件"
-
 #~ msgid "Editor Behavior"
 #~ msgstr "編輯器特性"
 
@@ -455,9 +988,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 
 #~ msgid "Fonts"
 #~ msgstr "字型"
-
-#~ msgid "Fonts/Colors"
-#~ msgstr "字型/顏色"
 
 #~ msgid "General"
 #~ msgstr "一般"
@@ -480,14 +1010,8 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "Pick a color"
 #~ msgstr "選擇顏色"
 
-#~ msgid "Preferences"
-#~ msgstr "偏好設定"
-
 #~ msgid "Printing"
 #~ msgstr "列印中"
-
-#~ msgid "S_how statusbar"
-#~ msgstr "顯示狀態欄(_h)"
 
 #~ msgid "Set toolbar according to _system settings"
 #~ msgstr "依據系統設定設置工具列(_s)"
@@ -497,9 +1021,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 
 #~ msgid "Tab _width: "
 #~ msgstr "Tab 寬度(_w)："
-
-#~ msgid "Undo"
-#~ msgstr "復原"
 
 #~ msgid "_Background: "
 #~ msgstr "背景(_B)："
@@ -522,9 +1043,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "_level(s)"
 #~ msgstr "次數(_l)"
 
-#~ msgid "l_ine(s)"
-#~ msgstr "行(_i)"
-
 #~ msgid "_Location to search for:"
 #~ msgstr "搜尋的位置(_L)："
 
@@ -546,17 +1064,8 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "Search from the _cursor position"
 #~ msgstr "由游標所在的位置開始搜尋(_c)"
 
-#~ msgid "_Search for: "
-#~ msgstr "搜尋目標(_S)："
-
 #~ msgid "Enter the location (URI) of the file you would like to open:"
 #~ msgstr "輸入要開啟的檔案位置或 URI："
-
-#~ msgid "Open"
-#~ msgstr "開啟"
-
-#~ msgid "Open from URI"
-#~ msgstr "由 URI 開啟"
 
 #~ msgid "This file does not end with a valid extension\n"
 #~ msgstr "這個檔案沒有有效的延伸檔名\n"
@@ -604,9 +1113,6 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ "\n"
 #~ "請回報這個問題給 submit@bugs.gnome.org。"
 
-#~ msgid "The document contains no data."
-#~ msgstr "文件沒有資料。"
-
 #~ msgid ""
 #~ "gedit was unable to save the file: \n"
 #~ "\n"
@@ -633,107 +1139,17 @@ msgstr "無法開啟最近開啟的檔案：%s"
 #~ msgid "Cannot initialize gnome-vfs."
 #~ msgstr "無法初始化 gnome-vfs。"
 
-#~ msgid "_New"
-#~ msgstr "新增(_N)"
-
-#~ msgid "Create a new document"
-#~ msgstr "建立一個新的文件"
-
-#~ msgid "Sav_e All"
-#~ msgstr "全部儲存(_E)"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "儲存所有開啟的檔案"
-
-#~ msgid "_Revert"
-#~ msgstr "還原(_R)"
-
-#~ msgid "Print pre_view"
-#~ msgstr "預覽列印(_V)"
-
-#~ msgid "Print preview"
-#~ msgstr "預覽列印"
-
 #~ msgid "Print pre_view..."
 #~ msgstr "預覽列印(_V)..."
 
 #~ msgid "Preview data to be printed"
 #~ msgstr "預覽要列印的資料"
 
-#~ msgid "C_lose All"
-#~ msgstr "關閉所有文件(_l)"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "關閉所有開啟的檔案"
-
-#~ msgid "Go to a specific line number"
-#~ msgstr "跳到指定的行號"
-
-#~ msgid "_Documents"
-#~ msgstr "文件(_D)"
-
-#~ msgid "New"
-#~ msgstr "新建"
-
-#~ msgid "Save"
-#~ msgstr "儲存"
-
-#~ msgid "Save the current file"
-#~ msgstr "儲存現在的檔案"
-
-#~ msgid "Close"
-#~ msgstr "關閉"
-
-#~ msgid "Close the current file"
-#~ msgstr "關閉現在的檔案"
-
-#~ msgid "Print"
-#~ msgstr "列印"
-
-#~ msgid "Print the current file"
-#~ msgstr "列印現在的檔案"
-
-#~ msgid "Redo"
-#~ msgstr "取消復原"
-
-#~ msgid "Cut"
-#~ msgstr "剪下"
-
-#~ msgid "Paste"
-#~ msgstr "貼上"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "貼上剪貼簿內容"
-
-#~ msgid "Search for a string"
-#~ msgstr "尋找一個字串"
-
-#~ msgid "Exit"
-#~ msgstr "離開"
-
-#~ msgid "Exit the program"
-#~ msgstr "離開本程式"
-
-#~ msgid "_Manager ..."
-#~ msgstr "管理程式(_M)..."
-
 #~ msgid "Error, unable to open module file, %s"
 #~ msgstr "發生錯誤，無法開啟模組檔案，%s"
 
-#~ msgid "Print Document"
-#~ msgstr "列印文件"
-
-#~ msgid "Pages"
-#~ msgstr "頁"
-
-#~ msgid "gedit: Print Preview\n"
-#~ msgstr "gedit：預覽列印\n"
-
 #~ msgid "Printing ..."
 #~ msgstr "列印中 ..."
-
-#~ msgid "_File"
-#~ msgstr "檔案(_F)"
 
 #~ msgid "Get the basic file info"
 #~ msgstr "取得基本的檔案資訊。"

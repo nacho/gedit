@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2002-01-11 16:58+0100\n"
+"POT-Creation-Date: 2002-01-14 16:58+0100\n"
 "PO-Revision-Date: 1999-08-09 20:17+0100\n"
 "Last-Translator: Unknown :-(\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
 msgid "gedit"
 msgstr ""
 
@@ -36,7 +36,7 @@ msgstr "Jít na linku"
 msgid "_Goto line"
 msgstr "Jít na linku"
 
-#: src/dialogs/gedit-dialog-replace.c:165
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
 #, fuzzy
 msgid "Replace"
 msgstr "Vymìnit"
@@ -47,26 +47,709 @@ msgid "Replace _All"
 msgstr "Vymìnit v¹e"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
 #, fuzzy
 msgid "_Replace"
 msgstr "Vymìnit"
 
-#: src/dialogs/gedit-dialog-replace.c:269
+#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
 #, fuzzy
 msgid "Find"
 msgstr "Okno"
 
-#: src/dialogs/gedit-dialog-replace.c:471
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#: src/dialogs/gedit-dialog-replace.c:475
+#: src/dialogs/gedit-dialog-replace.c:546
+#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
 #, fuzzy, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Hledat specifickou linku"
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:712
 #, c-format
 msgid "Found and replaced %d occurences."
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:195
+msgid "Toolbar"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:196
+#, fuzzy
+msgid "Status bar"
+msgstr "Ukázat linku stavu"
+
+#: src/dialogs/gedit-preferences-dialog.c:199
+msgid "MDI"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:207
+#, fuzzy
+msgid "Font & Colors"
+msgstr "Zavøít"
+
+#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+msgid "Save"
+msgstr "Ulo¾it"
+
+#.
+#. {_("Tabs"), NULL, TABS_SETTINGS},
+#.
+#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+#, fuzzy
+msgid "Undo"
+msgstr "Okno"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+msgid "Wrap mode"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+#, fuzzy
+msgid "Line numbers"
+msgstr "Èíslo linky"
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+msgid "Page"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:229
+msgid "Editor"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "Tisk"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "User interface"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+msgid "Preferences"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:462
+msgid "Categories"
+msgstr ""
+
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr ""
+
+#: src/gedit-commands.c:411
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:482
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gEdit je jednoduchý a malý textový editor pro GNOME/Gtk+"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+#, c-format
+msgid "%s %d"
+msgstr ""
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+msgid "Untitled"
+msgstr "Nenazvaný"
+
+#: src/gedit-document.c:537 src/gedit-document.c:643
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr ""
+
+#: src/gedit-document.c:953
+msgid "It is not possible to revert an Untitled document"
+msgstr ""
+
+#: src/gedit-file-selector-util.c:104
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+
+#: src/gedit-file-selector-util.c:112
+#, fuzzy
+msgid "Do_n't replace"
+msgstr "Vymìnit"
+
+#: src/gedit-file-selector-util.c:544
+msgid "Select a filename to save"
+msgstr ""
+
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/gedit-file.c:256
+#, c-format
+msgid "Loaded %i files"
+msgstr ""
+
+#: src/gedit-file.c:326 src/gedit-file.c:348
+#, fuzzy
+msgid "Open File ..."
+msgstr "Otevøít soubor..."
+
+#: src/gedit-file.c:395 src/gedit-file.c:443
+#, c-format
+msgid ""
+"An error occurred while opening the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+
+#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#, fuzzy, c-format
+msgid "Saving file '%s' ..."
+msgstr "Ulo¾it %s jako ..."
+
+#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+msgid "Unknown error"
+msgstr ""
+
+#: src/gedit-file.c:534 src/gedit-file.c:736
+#, c-format
+msgid ""
+"An error occurred while saving the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+
+#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+#, fuzzy
+msgid "The document has not been saved."
+msgstr "Dokument nezapsán..."
+
+#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#, c-format
+msgid "File '%s' saved."
+msgstr ""
+
+#: src/gedit-file.c:641
+#, fuzzy
+msgid "Save As..."
+msgstr "Ulo¾it %s jako..."
+
+#: src/gedit-file.c:674
+#, fuzzy
+msgid "Save as ..."
+msgstr "Ulo¾it %s jako..."
+
+#: src/gedit-file.c:808
+#, c-format
+msgid ""
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
+msgstr ""
+
+#: src/gedit-file.c:932
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr ""
+
+#: src/gedit-file.c:953
+#, c-format
+msgid ""
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+
+#: src/gedit-file.c:981
+#, fuzzy
+msgid "The document has not been reverted."
+msgstr "Dokument nezapsán..."
+
+#: src/gedit-file.c:991
+#, c-format
+msgid "File '%s' reverted."
+msgstr ""
+
+#: src/gedit-file.c:1143
+#, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+
+#: src/gedit-mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+
+#: src/gedit-mdi.c:584
+msgid "Do_n't save"
+msgstr ""
+
+#: src/gedit-mdi.c:602
+msgid "_Don't quit"
+msgstr ""
+
+#: src/gedit-mdi.c:606
+msgid "_Don't close"
+msgstr ""
+
+#: src/gedit-mdi.c:690
+msgid "(modified)"
+msgstr ""
+
+#: src/gedit-mdi.c:696
+msgid "(readonly)"
+msgstr ""
+
+#: src/gedit-print.c:158
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+
+#: src/gedit-print.c:265
+#, fuzzy
+msgid "gedit - Print Document"
+msgstr "Dokument"
+
+#: src/gedit-print.c:274
+msgid "Lines"
+msgstr ""
+
+#: src/gedit-print.c:330
+#, fuzzy, c-format
+msgid "File: %s"
+msgstr "_Soubor"
+
+#. Print right text
+#: src/gedit-print.c:335
+#, c-format
+msgid "Page: %d"
+msgstr ""
+
+#: src/gedit-print.c:464
+#, fuzzy
+msgid "gedit - Print Preview"
+msgstr "Najít _linku..."
+
+#: src/gedit-print.c:540
+#, c-format
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+
+#: src/gedit-recent.c:252
+#, fuzzy, c-format
+msgid "Open file %s"
+msgstr "Otevøít soubor..."
+
+#: src/gedit-recent.c:320
+#, c-format
+msgid "Unable to open recent file: %s"
+msgstr ""
+
+#: src/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr "O programu ..."
+
+#: src/gedit-ui.xml.h:3
+#, fuzzy
+msgid "Add/Remove installed plugins"
+msgstr "Pou¾ít pluginy"
+
+#: src/gedit-ui.xml.h:4
+msgid "C_lear"
+msgstr ""
+
+#: src/gedit-ui.xml.h:5
+#, fuzzy
+msgid "C_lose All"
+msgstr "Zavøít"
+
+#: src/gedit-ui.xml.h:6
+msgid "C_ut"
+msgstr ""
+
+#: src/gedit-ui.xml.h:7
+#, fuzzy
+msgid "Clear"
+msgstr "Zavøít"
+
+#: src/gedit-ui.xml.h:8
+msgid "Clear the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:9
+msgid "Close"
+msgstr "Zavøít"
+
+#: src/gedit-ui.xml.h:10
+#, fuzzy
+msgid "Close All"
+msgstr "Zavøít"
+
+#: src/gedit-ui.xml.h:11
+#, fuzzy
+msgid "Close all open files"
+msgstr "Zavøít v¹echny otevøené soubory"
+
+#: src/gedit-ui.xml.h:12
+#, fuzzy
+msgid "Close the current file"
+msgstr "Zavøít v¹echny otevøené soubory"
+
+#: src/gedit-ui.xml.h:13
+msgid "Configure the application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr "Vytvoøit nový dokument"
+
+#: src/gedit-ui.xml.h:17
+msgid "Customize"
+msgstr ""
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize toolbars"
+msgstr ""
+
+#: src/gedit-ui.xml.h:19
+msgid "Cut"
+msgstr ""
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr ""
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr ""
+
+#: src/gedit-ui.xml.h:23
+msgid "E_xit"
+msgstr ""
+
+#: src/gedit-ui.xml.h:24
+msgid "Exit"
+msgstr ""
+
+#: src/gedit-ui.xml.h:25
+msgid "Exit the program"
+msgstr ""
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:28
+msgid "Find _Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr ""
+
+#: src/gedit-ui.xml.h:30
+#, fuzzy
+msgid "Goto _Line"
+msgstr "Jít na linku"
+
+#: src/gedit-ui.xml.h:31
+msgid "Main toolbar"
+msgstr ""
+
+#: src/gedit-ui.xml.h:32
+#, fuzzy
+msgid "Manager"
+msgstr "Zru¹it"
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr "Nový"
+
+#: src/gedit-ui.xml.h:34
+msgid "Open"
+msgstr ""
+
+#: src/gedit-ui.xml.h:35
+#, fuzzy
+msgid "Open a file"
+msgstr "Otevøít soubor..."
+
+#: src/gedit-ui.xml.h:36
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/gedit-ui.xml.h:37
+#, fuzzy
+msgid "Open from URI"
+msgstr "Otevøít soubor..."
+
+#: src/gedit-ui.xml.h:38
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Otevøít soubor..."
+
+#: src/gedit-ui.xml.h:39
+msgid "Paste"
+msgstr ""
+
+#: src/gedit-ui.xml.h:40
+msgid "Paste the clipboard"
+msgstr ""
+
+#: src/gedit-ui.xml.h:43
+#, fuzzy
+msgid "Print Pre_view"
+msgstr "Najít _linku..."
+
+#: src/gedit-ui.xml.h:44
+#, fuzzy
+msgid "Print Preview"
+msgstr "Najít _linku..."
+
+#: src/gedit-ui.xml.h:45
+#, fuzzy
+msgid "Print Setup"
+msgstr "Dokument"
+
+#: src/gedit-ui.xml.h:46
+#, fuzzy
+msgid "Print preview"
+msgstr "Najít _linku..."
+
+#: src/gedit-ui.xml.h:47
+#, fuzzy
+msgid "Print the current file"
+msgstr " Ulo¾it, pak tisknout "
+
+#: src/gedit-ui.xml.h:48
+#, fuzzy
+msgid "Redo"
+msgstr "Zru¹it"
+
+#: src/gedit-ui.xml.h:49
+msgid "Redo the undone action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:51
+#, fuzzy
+msgid "Replace a string"
+msgstr "Hledat specifickou linku"
+
+#: src/gedit-ui.xml.h:52
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:53
+#, fuzzy
+msgid "Revert to saved"
+msgstr "Vrátit"
+
+#: src/gedit-ui.xml.h:54
+#, fuzzy
+msgid "Sav_e All"
+msgstr "Ulo¾it v¹e"
+
+#: src/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Save All"
+msgstr "Ulo¾it v¹e"
+
+#: src/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Save As"
+msgstr "Ulo¾it %s jako..."
+
+#: src/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Save _As..."
+msgstr "Ulo¾it %s jako..."
+
+#: src/gedit-ui.xml.h:59
+#, fuzzy
+msgid "Save all open files"
+msgstr "Ulo¾it v¹echny otevøené soubory"
+
+#: src/gedit-ui.xml.h:60
+#, fuzzy
+msgid "Save the current file"
+msgstr " Ulo¾it, pak tisknout "
+
+#: src/gedit-ui.xml.h:61
+#, fuzzy
+msgid "Save the current file with a different name"
+msgstr " Ulo¾it, pak tisknout "
+
+#: src/gedit-ui.xml.h:62
+#, fuzzy
+msgid "Se_arch"
+msgstr "Hledat"
+
+#: src/gedit-ui.xml.h:63
+#, fuzzy
+msgid "Search again for the same string"
+msgstr "Hledat specifickou linku"
+
+#: src/gedit-ui.xml.h:64
+#, fuzzy
+msgid "Search for a string"
+msgstr "Hledat specifickou linku"
+
+#: src/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Select All"
+msgstr "Vymìnit v¹e"
+
+#: src/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Select the entire document"
+msgstr "Vytvoøit nový dokument"
+
+#: src/gedit-ui.xml.h:67
+#, fuzzy
+msgid "Setup the page settings for your current printer"
+msgstr "Ulo¾it nastavení pro pøí¹í sezení"
+
+#: src/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:70
+#, fuzzy
+msgid "_About..."
+msgstr "O programu ..."
+
+#: src/gedit-ui.xml.h:71
+#, fuzzy
+msgid "_Close"
+msgstr "Zavøít"
+
+#: src/gedit-ui.xml.h:72
+msgid "_Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:73
+msgid "_Debug"
+msgstr ""
+
+#: src/gedit-ui.xml.h:74
+#, fuzzy
+msgid "_Documents"
+msgstr "Dokument"
+
+#: src/gedit-ui.xml.h:75
+msgid "_Edit"
+msgstr ""
+
+#: src/gedit-ui.xml.h:76
+msgid "_File"
+msgstr "_Soubor"
+
+#: src/gedit-ui.xml.h:77
+#, fuzzy
+msgid "_Find"
+msgstr "Okno"
+
+#: src/gedit-ui.xml.h:78
+#, fuzzy
+msgid "_Help"
+msgstr "Nápovìda"
+
+#: src/gedit-ui.xml.h:79
+#, fuzzy
+msgid "_Manager"
+msgstr "Zru¹it"
+
+#: src/gedit-ui.xml.h:80
+msgid "_New"
+msgstr "_Nový"
+
+#: src/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_Open..."
+msgstr "Otevøít soubor..."
+
+#: src/gedit-ui.xml.h:82
+msgid "_Paste"
+msgstr ""
+
+#: src/gedit-ui.xml.h:83
+msgid "_Plugins"
+msgstr "_Pluginy"
+
+#: src/gedit-ui.xml.h:84
+msgid "_Preferences"
+msgstr ""
+
+#: src/gedit-ui.xml.h:85
+#, fuzzy
+msgid "_Print"
+msgstr "Tisk"
+
+#: src/gedit-ui.xml.h:86
+#, fuzzy
+msgid "_Redo"
+msgstr "Zru¹it"
+
+#: src/gedit-ui.xml.h:88
+#, fuzzy
+msgid "_Revert"
+msgstr "Vrátit"
+
+#: src/gedit-ui.xml.h:89
+#, fuzzy
+msgid "_Save"
+msgstr "Ulo¾it"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Select all"
+msgstr ""
+
+#: src/gedit-ui.xml.h:91
+#, fuzzy
+msgid "_Settings"
+msgstr "_Ulo¾it nastavení"
+
+#: src/gedit-ui.xml.h:92
+#, fuzzy
+msgid "_Undo"
+msgstr "Okno"
+
+#: src/gedit-view.c:787
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr ""
+
+#: src/gedit-view.c:825
+msgid "  OVR"
+msgstr ""
+
+#: src/gedit-view.c:827
+msgid "  INS"
 msgstr ""
 
 #: src/gedit2.c:59
@@ -121,178 +804,68 @@ msgstr ""
 msgid "The gnome text editor"
 msgstr ""
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr ""
-
-#: src/gedit-commands.c:409
-msgid "Impossible to update gedit settings."
-msgstr ""
-
-#: src/gedit-commands.c:471
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gEdit je jednoduchý a malý textový editor pro GNOME/Gtk+"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-#, c-format
-msgid "%s %d"
-msgstr ""
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-msgid "Untitled"
-msgstr "Nenazvaný"
-
-#: src/gedit-document.c:535 src/gedit-document.c:641
-msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-
-#: src/gedit-document.c:951
-msgid "It is not possible to revert an Untitled document"
-msgstr ""
-
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
-msgstr ""
-
-#: src/gedit-file.c:256
-#, c-format
-msgid "Loaded %i files"
-msgstr ""
-
-#: src/gedit-file.c:326 src/gedit-file.c:348
-#, fuzzy
-msgid "Open File ..."
-msgstr "Otevøít soubor..."
-
-#: src/gedit-file.c:395 src/gedit-file.c:441
-#, c-format
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-
-#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
-#, fuzzy, c-format
-msgid "Saving file '%s' ..."
-msgstr "Ulo¾it %s jako ..."
-
-#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
-msgid "Unknown error"
-msgstr ""
-
-#: src/gedit-file.c:530 src/gedit-file.c:730
-#, c-format
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-
-#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
-#, fuzzy
-msgid "The document has not been saved."
-msgstr "Dokument nezapsán..."
-
-#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
-#, c-format
-msgid "File '%s' saved."
-msgstr ""
-
-#: src/gedit-file.c:635
-#, fuzzy
-msgid "Save As..."
-msgstr "Ulo¾it %s jako..."
-
-#: src/gedit-file.c:668
-#, fuzzy
-msgid "Save as ..."
-msgstr "Ulo¾it %s jako..."
-
-#: src/gedit-file.c:800
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-
-#: src/gedit-file.c:926
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr ""
-
-#: src/gedit-file.c:947
-#, c-format
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-
-#: src/gedit-file.c:973
-#, fuzzy
-msgid "The document has not been reverted."
-msgstr "Dokument nezapsán..."
-
-#: src/gedit-file.c:983
-#, c-format
-msgid "File '%s' reverted."
-msgstr ""
-
-#: src/gedit-file.c:1135
-#, c-format
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-
-#: src/gedit-mdi.c:524
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-
-#: src/gedit-mdi.c:529
-msgid "Do_n't save"
-msgstr ""
-
-#: src/gedit-mdi.c:547
-msgid "_Don't quit"
-msgstr ""
-
-#: src/gedit-mdi.c:551
-msgid "_Don't close"
-msgstr ""
-
-#: src/gedit-mdi.c:633
-msgid "(modified)"
-msgstr ""
-
-#: src/gedit-mdi.c:639
-msgid "(readonly)"
-msgstr ""
-
-#: src/gedit-recent.c:252
-#, fuzzy, c-format
-msgid "Open file %s"
-msgstr "Otevøít soubor..."
-
-#: src/gedit-recent.c:320
-#, c-format
-msgid "Unable to open recent file: %s"
-msgstr ""
-
-#~ msgid "Name"
-#~ msgstr "Jméno"
-
 #, fuzzy
 #~ msgid "Web browse plugin"
 #~ msgstr "gEdit plugin na prohlí¾ení webu"
+
+#, fuzzy
+#~ msgid "Convert"
+#~ msgstr "Vrátit"
+
+#, fuzzy
+#~ msgid "Number Converter"
+#~ msgstr "gEdit plugin na prohlí¾ení webu"
+
+#, fuzzy
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "Dokument nezapsán..."
+
+#, fuzzy
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "Dokument nezapsán..."
+
+#, fuzzy
+#~ msgid "Untitled %i"
+#~ msgstr "Nenazvaný"
+
+#, fuzzy
+#~ msgid "Document info"
+#~ msgstr "Nastavení dokumentu"
+
+#, fuzzy
+#~ msgid "Get info on current document."
+#~ msgstr "Vytvoøit nový dokument"
+
+#, fuzzy
+#~ msgid "Email the current document"
+#~ msgstr "Vytvoøit nový dokument"
+
+#, fuzzy
+#~ msgid "Reverse"
+#~ msgstr "Vrátit"
+
+#, fuzzy
+#~ msgid "Reverse text"
+#~ msgstr "Vrátit"
+
+#, fuzzy
+#~ msgid "Shell Output"
+#~ msgstr "Email plugin gEditu"
+
+#, fuzzy
+#~ msgid "Sort a document."
+#~ msgstr "Vytvoøit nový dokument"
+
+#, fuzzy
+#~ msgid "Sort a document or selected text."
+#~ msgstr "Vytvoøit nový dokument"
+
+#, fuzzy
+#~ msgid "Inserts the current date and time"
+#~ msgstr "Zavøít v¹echny otevøené soubory"
+
+#~ msgid "Name"
+#~ msgstr "Jméno"
 
 #, fuzzy
 #~ msgid " _Change... "
@@ -307,20 +880,8 @@ msgstr ""
 #~ msgstr "Místo"
 
 #, fuzzy
-#~ msgid "Convert"
-#~ msgstr "Vrátit"
-
-#, fuzzy
 #~ msgid "_Converted value:"
 #~ msgstr "Vrátit"
-
-#, fuzzy
-#~ msgid "gedit: Number Converter plugin"
-#~ msgstr "gEdit plugin na prohlí¾ení webu"
-
-#, fuzzy
-#~ msgid "Untitled %i"
-#~ msgstr "Nenazvaný"
 
 #, fuzzy
 #~ msgid "From document"
@@ -329,14 +890,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "gedit: Diff plugin"
 #~ msgstr "Email plugin gEditu"
-
-#, fuzzy
-#~ msgid "Document info"
-#~ msgstr "Nastavení dokumentu"
-
-#, fuzzy
-#~ msgid "Get info on current document."
-#~ msgstr "Vytvoøit nový dokument"
 
 #, fuzzy
 #~ msgid "Current column"
@@ -367,22 +920,6 @@ msgstr ""
 #~ msgstr "Email plugin gEditu"
 
 #, fuzzy
-#~ msgid "Reverse"
-#~ msgstr "Vrátit"
-
-#, fuzzy
-#~ msgid "Reverse text"
-#~ msgstr "Vrátit"
-
-#, fuzzy
-#~ msgid "gedit: Shell Output plugin"
-#~ msgstr "Email plugin gEditu"
-
-#, fuzzy
-#~ msgid "Sort a document."
-#~ msgstr "Vytvoøit nový dokument"
-
-#, fuzzy
 #~ msgid "Sort starting at column:"
 #~ msgstr "Hledat specifickou linku"
 
@@ -399,14 +936,6 @@ msgstr ""
 #~ msgstr "Hledat specifickou linku"
 
 #, fuzzy
-#~ msgid "Goto Line"
-#~ msgstr "Jít na linku"
-
-#, fuzzy
-#~ msgid "Line number:"
-#~ msgstr "Èíslo linky"
-
-#, fuzzy
 #~ msgid "De_scription"
 #~ msgstr "Vybíraè pluginù"
 
@@ -416,10 +945,6 @@ msgstr ""
 
 #~ msgid "Appearance"
 #~ msgstr "Vzhled"
-
-#, fuzzy
-#~ msgid "Colors"
-#~ msgstr "Zavøít"
 
 #, fuzzy
 #~ msgid "Default"
@@ -447,16 +972,8 @@ msgstr ""
 #~ msgstr "Tisk"
 
 #, fuzzy
-#~ msgid "S_how statusbar"
-#~ msgstr "Ukázat linku stavu"
-
-#, fuzzy
 #~ msgid "Tab _width: "
 #~ msgstr "Vymìnit za:"
-
-#, fuzzy
-#~ msgid "Undo"
-#~ msgstr "Okno"
 
 #, fuzzy
 #~ msgid "_Default font: "
@@ -483,10 +1000,6 @@ msgstr ""
 #~ msgstr "Hledat:"
 
 #, fuzzy
-#~ msgid "Open from URI"
-#~ msgstr "Otevøít soubor..."
-
-#, fuzzy
 #~ msgid "``%s'' has been modified.  Do you want to save the changes?"
 #~ msgstr " '%s' byl zmìnìn.  Chcete jej ulo¾it?"
 
@@ -505,38 +1018,6 @@ msgstr ""
 #~ "Jste si jist(a) ¾e chcete zru¹it v¹echny zmìny?\n"
 #~ "(%s)"
 
-#~ msgid "_New"
-#~ msgstr "_Nový"
-
-#~ msgid "Create a new document"
-#~ msgstr "Vytvoøit nový dokument"
-
-#, fuzzy
-#~ msgid "Sav_e All"
-#~ msgstr "Ulo¾it v¹e"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "Ulo¾it v¹echny otevøené soubory"
-
-#, fuzzy
-#~ msgid "_Revert"
-#~ msgstr "Vrátit"
-
-#, fuzzy
-#~ msgid "Open from _URI..."
-#~ msgstr "Otevøít soubor..."
-
-#, fuzzy
-#~ msgid "Print pre_view..."
-#~ msgstr "Najít _linku..."
-
-#, fuzzy
-#~ msgid "C_lose All"
-#~ msgstr "Zavøít"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "Zavøít v¹echny otevøené soubory"
-
 #~ msgid "_Add View"
 #~ msgstr "_Pøidat pohled"
 
@@ -550,55 +1031,8 @@ msgstr ""
 #~ msgstr "Zru¹it pohled tohoto dokumentu"
 
 #, fuzzy
-#~ msgid "Se_arch"
-#~ msgstr "Hledat"
-
-#~ msgid "_Plugins"
-#~ msgstr "_Pluginy"
-
-#, fuzzy
-#~ msgid "_Documents"
-#~ msgstr "Dokument"
-
-#~ msgid "New"
-#~ msgstr "Nový"
-
-#~ msgid "Save"
-#~ msgstr "Ulo¾it"
-
-#, fuzzy
-#~ msgid "Save the current file"
-#~ msgstr " Ulo¾it, pak tisknout "
-
-#~ msgid "Close"
-#~ msgstr "Zavøít"
-
-#, fuzzy
-#~ msgid "Close the current file"
-#~ msgstr "Zavøít v¹echny otevøené soubory"
-
-#~ msgid "Print"
-#~ msgstr "Tisk"
-
-#, fuzzy
-#~ msgid "Redo"
-#~ msgstr "Zru¹it"
-
-#, fuzzy
-#~ msgid "Search for a string"
-#~ msgstr "Hledat specifickou linku"
-
-#, fuzzy
-#~ msgid "_Manager ..."
-#~ msgstr "Zru¹it"
-
-#, fuzzy
 #~ msgid "Manage available plugin modules"
 #~ msgstr "Pou¾ít pluginy"
-
-#, fuzzy
-#~ msgid "Print Document"
-#~ msgstr "Dokument"
 
 #, fuzzy
 #~ msgid "Printing .."
@@ -611,9 +1045,6 @@ msgstr ""
 #~ msgid "_File/"
 #~ msgstr "_Soubor/"
 
-#~ msgid "_File"
-#~ msgstr "_Soubor"
-
 #, fuzzy
 #~ msgid "You can't remove the last view of a document."
 #~ msgstr "Zru¹it pohled tohoto dokumentu"
@@ -625,10 +1056,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "< Remove"
 #~ msgstr "_Zru¹it pohled"
-
-#, fuzzy
-#~ msgid "Installed Plugins"
-#~ msgstr "Pou¾ít pluginy"
 
 #~ msgid "With special thanks to:"
 #~ msgstr "Speciání díky:"
@@ -726,12 +1153,6 @@ msgstr ""
 #~ msgid "MDI Mode"
 #~ msgstr "Mód MDI"
 
-#~ msgid "Sa_ve Settings"
-#~ msgstr "_Ulo¾it nastavení"
-
-#~ msgid "Save the current settings for future sessions"
-#~ msgstr "Ulo¾it nastavení pro pøí¹í sezení"
-
 #~ msgid ""
 #~ "Enter print command below\n"
 #~ "Remember to include '%s'"
@@ -748,10 +1169,3 @@ msgstr ""
 #, fuzzy
 #~ msgid "_None"
 #~ msgstr "Nový"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Nápovìda"
-
-#~ msgid "About..."
-#~ msgstr "O programu ..."

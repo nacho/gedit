@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2002-01-11 16:58+0100\n"
+"POT-Creation-Date: 2002-01-14 16:58+0100\n"
 "PO-Revision-Date: 2002-01-11 14:58CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Textový editor GNOME"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
 msgid "gedit"
 msgstr "gedit"
 
@@ -36,7 +36,7 @@ msgstr "Prejsť na riadok..."
 msgid "_Goto line"
 msgstr "_Prejsť na riadok"
 
-#: src/dialogs/gedit-dialog-replace.c:165
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
 msgid "Replace"
 msgstr "Nahradiť"
 
@@ -45,25 +45,681 @@ msgid "Replace _All"
 msgstr "Nahradiť _všetko"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
 msgid "_Replace"
 msgstr "Na_hradiť"
 
-#: src/dialogs/gedit-dialog-replace.c:269
+#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Nájsť"
 
-#: src/dialogs/gedit-dialog-replace.c:471
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#: src/dialogs/gedit-dialog-replace.c:475
+#: src/dialogs/gedit-dialog-replace.c:546
+#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Hľadaný reťazec \"%s\" nenájdený."
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:712
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Nájdených a nahradených %d výskytov."
+
+#: src/dialogs/gedit-preferences-dialog.c:195
+msgid "Toolbar"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:196
+msgid "Status bar"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:199
+msgid "MDI"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:207
+msgid "Font & Colors"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+msgid "Save"
+msgstr ""
+
+#.
+#. {_("Tabs"), NULL, TABS_SETTINGS},
+#.
+#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+msgid "Wrap mode"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+msgid "Line numbers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+msgid "Page"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:229
+msgid "Editor"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "User interface"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+msgid "Preferences"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:462
+msgid "Categories"
+msgstr ""
+
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr "Ešte neimplementované."
+
+#: src/gedit-commands.c:411
+msgid "Impossible to update gedit settings."
+msgstr "Nepodarilo sa aktualizovať nastavenie gedit."
+
+#: src/gedit-commands.c:482
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "geditr je malý a jednoduchý textový editor pre Gnome"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+msgid "Untitled"
+msgstr "Bez mena"
+
+#: src/gedit-document.c:537 src/gedit-document.c:643
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr "Pri čítaní súboru nájdený neplatný znak UTF-8"
+
+#: src/gedit-document.c:953
+msgid "It is not possible to revert an Untitled document"
+msgstr "Nemôžete sa vrátiť v dokumente bez mena."
+
+#: src/gedit-file-selector-util.c:104
+#, fuzzy, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr "Súbor '%s' už na tomto mieste existuje. Chcete ho nahradiť?"
+
+#: src/gedit-file-selector-util.c:112
+#, fuzzy
+msgid "Do_n't replace"
+msgstr "_Neukladať"
+
+#: src/gedit-file-selector-util.c:544
+msgid "Select a filename to save"
+msgstr ""
+
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
+#, c-format
+msgid "Loaded file %s"
+msgstr "Načítaný súbor %s"
+
+#: src/gedit-file.c:256
+#, c-format
+msgid "Loaded %i files"
+msgstr "Načítaných %i súborov"
+
+#: src/gedit-file.c:326 src/gedit-file.c:348
+msgid "Open File ..."
+msgstr "Otvoriť súbor..."
+
+#: src/gedit-file.c:395 src/gedit-file.c:443
+#, c-format
+msgid ""
+"An error occurred while opening the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Nastala chyba pri otváraní súboru \"%s\".\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "Ukladám súbor '%s'..."
+
+#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+msgid "Unknown error"
+msgstr "Neznáma chyba"
+
+#: src/gedit-file.c:534 src/gedit-file.c:736
+#, c-format
+msgid ""
+"An error occurred while saving the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Nastala chyba pri íkladaní súboru \"%s\".\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+msgid "The document has not been saved."
+msgstr "Dokument nebol uložený."
+
+#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#, c-format
+msgid "File '%s' saved."
+msgstr "Súbor '%s' uložený."
+
+#: src/gedit-file.c:641
+msgid "Save As..."
+msgstr "Uložiť ako..."
+
+#: src/gedit-file.c:674
+msgid "Save as ..."
+msgstr "Uložiť ako..."
+
+#: src/gedit-file.c:808
+#, c-format
+msgid ""
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
+msgstr "Súbor '%s' už na tomto mieste existuje. Chcete ho nahradiť?"
+
+#: src/gedit-file.c:932
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "Vraciam obsah súboru '%s'..."
+
+#: src/gedit-file.c:953
+#, c-format
+msgid ""
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Nastala chyba pri vracaní obsahu súboru \"%s\".\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:981
+msgid "The document has not been reverted."
+msgstr "Dokument nebol vrátený."
+
+#: src/gedit-file.c:991
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Súbor '%s' vrátený."
+
+#: src/gedit-file.c:1143
+#, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"Nastala chyba pri čítaní súboru zo štandardného vstupu.\n"
+"\n"
+"%s"
+
+#: src/gedit-mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"Chcete uložiť zmeny v dokumente '%s'?\n"
+"\n"
+"Vaše zmeny budú stratené, ak ich neuložíte."
+
+#: src/gedit-mdi.c:584
+msgid "Do_n't save"
+msgstr "_Neukladať"
+
+#: src/gedit-mdi.c:602
+msgid "_Don't quit"
+msgstr "_Nekončiť"
+
+#: src/gedit-mdi.c:606
+msgid "_Don't close"
+msgstr "_Nezatvárať"
+
+#: src/gedit-mdi.c:690
+msgid "(modified)"
+msgstr "(zmenené)"
+
+#: src/gedit-mdi.c:696
+msgid "(readonly)"
+msgstr "(len pre čítanie)"
+
+#: src/gedit-print.c:158
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+
+#: src/gedit-print.c:265
+msgid "gedit - Print Document"
+msgstr ""
+
+#: src/gedit-print.c:274
+msgid "Lines"
+msgstr ""
+
+#: src/gedit-print.c:330
+#, fuzzy, c-format
+msgid "File: %s"
+msgstr "Otvoriť súbor %s"
+
+#. Print right text
+#: src/gedit-print.c:335
+#, c-format
+msgid "Page: %d"
+msgstr ""
+
+#: src/gedit-print.c:464
+msgid "gedit - Print Preview"
+msgstr ""
+
+#: src/gedit-print.c:540
+#, fuzzy, c-format
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+"Nastala chyba pri čítaní súboru zo štandardného vstupu.\n"
+"\n"
+"%s"
+
+#: src/gedit-recent.c:252
+#, c-format
+msgid "Open file %s"
+msgstr "Otvoriť súbor %s"
+
+#: src/gedit-recent.c:320
+#, c-format
+msgid "Unable to open recent file: %s"
+msgstr "Nepodarilo sa otvoriť nedávny súbor: %s"
+
+#: src/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:3
+msgid "Add/Remove installed plugins"
+msgstr ""
+
+#: src/gedit-ui.xml.h:4
+msgid "C_lear"
+msgstr ""
+
+#: src/gedit-ui.xml.h:5
+msgid "C_lose All"
+msgstr ""
+
+#: src/gedit-ui.xml.h:6
+msgid "C_ut"
+msgstr ""
+
+#: src/gedit-ui.xml.h:7
+msgid "Clear"
+msgstr ""
+
+#: src/gedit-ui.xml.h:8
+msgid "Clear the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:9
+msgid "Close"
+msgstr ""
+
+#: src/gedit-ui.xml.h:10
+msgid "Close All"
+msgstr ""
+
+#: src/gedit-ui.xml.h:11
+msgid "Close all open files"
+msgstr ""
+
+#: src/gedit-ui.xml.h:12
+msgid "Close the current file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:13
+msgid "Configure the application"
+msgstr ""
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr ""
+
+#: src/gedit-ui.xml.h:17
+msgid "Customize"
+msgstr ""
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize toolbars"
+msgstr ""
+
+#: src/gedit-ui.xml.h:19
+msgid "Cut"
+msgstr ""
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut the selection"
+msgstr ""
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr ""
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr ""
+
+#: src/gedit-ui.xml.h:23
+msgid "E_xit"
+msgstr ""
+
+#: src/gedit-ui.xml.h:24
+msgid "Exit"
+msgstr ""
+
+#: src/gedit-ui.xml.h:25
+msgid "Exit the program"
+msgstr ""
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:28
+msgid "Find _Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr ""
+
+#: src/gedit-ui.xml.h:30
+#, fuzzy
+msgid "Goto _Line"
+msgstr "_Prejsť na riadok"
+
+#: src/gedit-ui.xml.h:31
+msgid "Main toolbar"
+msgstr ""
+
+#: src/gedit-ui.xml.h:32
+msgid "Manager"
+msgstr ""
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr ""
+
+#: src/gedit-ui.xml.h:34
+msgid "Open"
+msgstr ""
+
+#: src/gedit-ui.xml.h:35
+#, fuzzy
+msgid "Open a file"
+msgstr "Otvoriť súbor %s"
+
+#: src/gedit-ui.xml.h:36
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/gedit-ui.xml.h:37
+msgid "Open from URI"
+msgstr ""
+
+#: src/gedit-ui.xml.h:38
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Otvoriť súbor..."
+
+#: src/gedit-ui.xml.h:39
+msgid "Paste"
+msgstr ""
+
+#: src/gedit-ui.xml.h:40
+msgid "Paste the clipboard"
+msgstr ""
+
+#: src/gedit-ui.xml.h:43
+msgid "Print Pre_view"
+msgstr ""
+
+#: src/gedit-ui.xml.h:44
+msgid "Print Preview"
+msgstr ""
+
+#: src/gedit-ui.xml.h:45
+msgid "Print Setup"
+msgstr ""
+
+#: src/gedit-ui.xml.h:46
+msgid "Print preview"
+msgstr ""
+
+#: src/gedit-ui.xml.h:47
+msgid "Print the current file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:48
+msgid "Redo"
+msgstr ""
+
+#: src/gedit-ui.xml.h:49
+msgid "Redo the undone action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:51
+#, fuzzy
+msgid "Replace a string"
+msgstr "Nahradiť"
+
+#: src/gedit-ui.xml.h:52
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:53
+msgid "Revert to saved"
+msgstr ""
+
+#: src/gedit-ui.xml.h:54
+#, fuzzy
+msgid "Sav_e All"
+msgstr "Uložiť ako..."
+
+#: src/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Save All"
+msgstr "Uložiť ako..."
+
+#: src/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Save As"
+msgstr "Uložiť ako..."
+
+#: src/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Save _As..."
+msgstr "Uložiť ako..."
+
+#: src/gedit-ui.xml.h:59
+msgid "Save all open files"
+msgstr ""
+
+#: src/gedit-ui.xml.h:60
+msgid "Save the current file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:61
+msgid "Save the current file with a different name"
+msgstr ""
+
+#: src/gedit-ui.xml.h:62
+msgid "Se_arch"
+msgstr ""
+
+#: src/gedit-ui.xml.h:63
+msgid "Search again for the same string"
+msgstr ""
+
+#: src/gedit-ui.xml.h:64
+msgid "Search for a string"
+msgstr ""
+
+#: src/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Select All"
+msgstr "Nahradiť _všetko"
+
+#: src/gedit-ui.xml.h:66
+msgid "Select the entire document"
+msgstr ""
+
+#: src/gedit-ui.xml.h:67
+msgid "Setup the page settings for your current printer"
+msgstr ""
+
+#: src/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr ""
+
+#: src/gedit-ui.xml.h:70
+msgid "_About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:71
+msgid "_Close"
+msgstr ""
+
+#: src/gedit-ui.xml.h:72
+msgid "_Copy"
+msgstr ""
+
+#: src/gedit-ui.xml.h:73
+msgid "_Debug"
+msgstr ""
+
+#: src/gedit-ui.xml.h:74
+msgid "_Documents"
+msgstr ""
+
+#: src/gedit-ui.xml.h:75
+#, fuzzy
+msgid "_Edit"
+msgstr "gedit"
+
+#: src/gedit-ui.xml.h:76
+msgid "_File"
+msgstr ""
+
+#: src/gedit-ui.xml.h:77
+#, fuzzy
+msgid "_Find"
+msgstr "Nájsť"
+
+#: src/gedit-ui.xml.h:78
+msgid "_Help"
+msgstr ""
+
+#: src/gedit-ui.xml.h:79
+msgid "_Manager"
+msgstr ""
+
+#: src/gedit-ui.xml.h:80
+msgid "_New"
+msgstr ""
+
+#: src/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_Open..."
+msgstr "Otvoriť súbor..."
+
+#: src/gedit-ui.xml.h:82
+msgid "_Paste"
+msgstr ""
+
+#: src/gedit-ui.xml.h:83
+msgid "_Plugins"
+msgstr ""
+
+#: src/gedit-ui.xml.h:84
+msgid "_Preferences"
+msgstr ""
+
+#: src/gedit-ui.xml.h:85
+msgid "_Print"
+msgstr ""
+
+#: src/gedit-ui.xml.h:86
+msgid "_Redo"
+msgstr ""
+
+#: src/gedit-ui.xml.h:88
+msgid "_Revert"
+msgstr ""
+
+#: src/gedit-ui.xml.h:89
+msgid "_Save"
+msgstr ""
+
+#: src/gedit-ui.xml.h:90
+msgid "_Select all"
+msgstr ""
+
+#: src/gedit-ui.xml.h:91
+msgid "_Settings"
+msgstr ""
+
+#: src/gedit-ui.xml.h:92
+msgid "_Undo"
+msgstr ""
+
+#: src/gedit-view.c:787
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr ""
+
+#: src/gedit-view.c:825
+msgid "  OVR"
+msgstr ""
+
+#: src/gedit-view.c:827
+msgid "  INS"
+msgstr ""
 
 #: src/gedit2.c:59
 msgid "Show mdi debugging messages."
@@ -117,177 +773,14 @@ msgstr "Zapnúť všetky ladiace správy."
 msgid "The gnome text editor"
 msgstr "Textový editor GNOME"
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr "Ešte neimplementované."
+#, fuzzy
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "Dokument nebol uložený."
 
-#: src/gedit-commands.c:409
-msgid "Impossible to update gedit settings."
-msgstr "Nepodarilo sa aktualizovať nastavenie gedit."
+#, fuzzy
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "Dokument nebol vrátený."
 
-#: src/gedit-commands.c:471
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "geditr je malý a jednoduchý textový editor pre Gnome"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-msgid "Untitled"
-msgstr "Bez mena"
-
-#: src/gedit-document.c:535 src/gedit-document.c:641
-msgid "Invalid UTF-8 data encountered reading file"
-msgstr "Pri čítaní súboru nájdený neplatný znak UTF-8"
-
-#: src/gedit-document.c:951
-msgid "It is not possible to revert an Untitled document"
-msgstr "Nemôžete sa vrátiť v dokumente bez mena."
-
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
-msgstr "Načítaný súbor %s"
-
-#: src/gedit-file.c:256
-#, c-format
-msgid "Loaded %i files"
-msgstr "Načítaných %i súborov"
-
-#: src/gedit-file.c:326 src/gedit-file.c:348
-msgid "Open File ..."
-msgstr "Otvoriť súbor..."
-
-#: src/gedit-file.c:395 src/gedit-file.c:441
-#, c-format
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nastala chyba pri otváraní súboru \"%s\".\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
-#, c-format
-msgid "Saving file '%s' ..."
-msgstr "Ukladám súbor '%s'..."
-
-#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
-msgid "Unknown error"
-msgstr "Neznáma chyba"
-
-#: src/gedit-file.c:530 src/gedit-file.c:730
-#, c-format
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nastala chyba pri íkladaní súboru \"%s\".\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
-msgid "The document has not been saved."
-msgstr "Dokument nebol uložený."
-
-#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
-#, c-format
-msgid "File '%s' saved."
-msgstr "Súbor '%s' uložený."
-
-#: src/gedit-file.c:635
-msgid "Save As..."
-msgstr "Uložiť ako..."
-
-#: src/gedit-file.c:668
-msgid "Save as ..."
-msgstr "Uložiť ako..."
-
-#: src/gedit-file.c:800
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr "Súbor '%s' už na tomto mieste existuje. Chcete ho nahradiť?"
-
-#: src/gedit-file.c:926
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr "Vraciam obsah súboru '%s'..."
-
-#: src/gedit-file.c:947
-#, c-format
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Nastala chyba pri vracaní obsahu súboru \"%s\".\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:973
-msgid "The document has not been reverted."
-msgstr "Dokument nebol vrátený."
-
-#: src/gedit-file.c:983
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Súbor '%s' vrátený."
-
-#: src/gedit-file.c:1135
-#, c-format
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-"Nastala chyba pri čítaní súboru zo štandardného vstupu.\n"
-"\n"
-"%s"
-
-#: src/gedit-mdi.c:524
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Chcete uložiť zmeny v dokumente '%s'?\n"
-"\n"
-"Vaše zmeny budú stratené, ak ich neuložíte."
-
-#: src/gedit-mdi.c:529
-msgid "Do_n't save"
-msgstr "_Neukladať"
-
-#: src/gedit-mdi.c:547
-msgid "_Don't quit"
-msgstr "_Nekončiť"
-
-#: src/gedit-mdi.c:551
-msgid "_Don't close"
-msgstr "_Nezatvárať"
-
-#: src/gedit-mdi.c:633
-msgid "(modified)"
-msgstr "(zmenené)"
-
-#: src/gedit-mdi.c:639
-msgid "(readonly)"
-msgstr "(len pre čítanie)"
-
-#: src/gedit-recent.c:252
-#, c-format
-msgid "Open file %s"
-msgstr "Otvoriť súbor %s"
-
-#: src/gedit-recent.c:320
-#, c-format
-msgid "Unable to open recent file: %s"
-msgstr "Nepodarilo sa otvoriť nedávny súbor: %s"
+#, fuzzy
+#~ msgid "Untitled %i"
+#~ msgstr "Bez mena"

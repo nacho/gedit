@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.1\n"
-"POT-Creation-Date: 2002-01-11 16:58+0100\n"
+"POT-Creation-Date: 2002-01-14 16:58+0100\n"
 "PO-Revision-Date: 2000-10-10 21:22+0300\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konf.lt>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Tekstų redaktorius"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
 msgid "gedit"
 msgstr "gedit"
 
@@ -38,7 +38,7 @@ msgstr "_Eiti į eilutę..."
 msgid "_Goto line"
 msgstr "Eiti į eilutę"
 
-#: src/dialogs/gedit-dialog-replace.c:165
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
 #, fuzzy
 msgid "Replace"
 msgstr "Pakeisti"
@@ -49,26 +49,725 @@ msgid "Replace _All"
 msgstr "Pakeisti visus"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
 #, fuzzy
 msgid "_Replace"
 msgstr "Pakeisti"
 
-#: src/dialogs/gedit-dialog-replace.c:269
+#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Rasti"
 
-#: src/dialogs/gedit-dialog-replace.c:471
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
+#: src/dialogs/gedit-dialog-replace.c:475
+#: src/dialogs/gedit-dialog-replace.c:546
+#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
 #, fuzzy, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Tekstas nerastas."
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:712
 #, fuzzy, c-format
 msgid "Found and replaced %d occurences."
 msgstr "radau ir pakeičiau %i vietose."
+
+#: src/dialogs/gedit-preferences-dialog.c:195
+msgid "Toolbar"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:196
+#, fuzzy
+msgid "Status bar"
+msgstr "Rodyti būsenos juostą"
+
+#: src/dialogs/gedit-preferences-dialog.c:199
+msgid "MDI"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:207
+#, fuzzy
+msgid "Font & Colors"
+msgstr "Šriftai/Spalvos"
+
+#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+msgid "Save"
+msgstr "Išsaugoti"
+
+#.
+#. {_("Tabs"), NULL, TABS_SETTINGS},
+#.
+#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "Atšaukimas"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+msgid "Wrap mode"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+#, fuzzy
+msgid "Line numbers"
+msgstr "Eilutės numeris:"
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+#, fuzzy
+msgid "Page"
+msgstr "Puslapiai"
+
+#: src/dialogs/gedit-preferences-dialog.c:229
+#, fuzzy
+msgid "Editor"
+msgstr "Išeiti"
+
+#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "Spausdinti"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "User interface"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+#, fuzzy
+msgid "Preferences"
+msgstr "gedit: Nuostatos"
+
+#: src/dialogs/gedit-preferences-dialog.c:462
+msgid "Categories"
+msgstr ""
+
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr ""
+
+#: src/gedit-commands.c:411
+msgid "Impossible to update gedit settings."
+msgstr ""
+
+#: src/gedit-commands.c:482
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gedit yra mažas ir nesudėtingas tekstų redaktorius, skirtas GNOME."
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+#, c-format
+msgid "%s %d"
+msgstr ""
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+msgid "Untitled"
+msgstr "Bevardis"
+
+#: src/gedit-document.c:537 src/gedit-document.c:643
+#, fuzzy
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-document.c:953
+#, fuzzy
+msgid "It is not possible to revert an Untitled document"
+msgstr "Tu negali atkurti Bevardžio dokumento\n"
+
+#: src/gedit-file-selector-util.c:104
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+
+#: src/gedit-file-selector-util.c:112
+#, fuzzy
+msgid "Do_n't replace"
+msgstr "Pakeisti"
+
+#: src/gedit-file-selector-util.c:544
+#, fuzzy
+msgid "Select a filename to save"
+msgstr "Pasirink, kuriuos priedus įdiegti"
+
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
+#, c-format
+msgid "Loaded file %s"
+msgstr "Įkelta byla %s"
+
+#: src/gedit-file.c:256
+#, c-format
+msgid "Loaded %i files"
+msgstr "Įkeltos %i bylos"
+
+#: src/gedit-file.c:326 src/gedit-file.c:348
+msgid "Open File ..."
+msgstr "Atidaryti bylą..."
+
+#: src/gedit-file.c:395 src/gedit-file.c:443
+#, fuzzy, c-format
+msgid ""
+"An error occurred while opening the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#, fuzzy, c-format
+msgid "Saving file '%s' ..."
+msgstr "Išsaugoti kaip..."
+
+#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+msgid "Unknown error"
+msgstr ""
+
+#: src/gedit-file.c:534 src/gedit-file.c:736
+#, fuzzy, c-format
+msgid ""
+"An error occurred while saving the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+#, fuzzy
+msgid "The document has not been saved."
+msgstr "Dokumentas nebuvo išsaugotas."
+
+#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#, c-format
+msgid "File '%s' saved."
+msgstr ""
+
+#: src/gedit-file.c:641
+msgid "Save As..."
+msgstr "Išsaugoti kaip..."
+
+#: src/gedit-file.c:674
+#, fuzzy
+msgid "Save as ..."
+msgstr "Išsaugoti kaip..."
+
+#: src/gedit-file.c:808
+#, c-format
+msgid ""
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
+msgstr ""
+
+#: src/gedit-file.c:932
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr ""
+
+#: src/gedit-file.c:953
+#, fuzzy, c-format
+msgid ""
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-file.c:981
+#, fuzzy
+msgid "The document has not been reverted."
+msgstr "Dokumentas nebuvo išsaugotas."
+
+#: src/gedit-file.c:991
+#, c-format
+msgid "File '%s' reverted."
+msgstr ""
+
+#: src/gedit-file.c:1143
+#, fuzzy, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-mdi.c:579
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+
+#: src/gedit-mdi.c:584
+msgid "Do_n't save"
+msgstr ""
+
+#: src/gedit-mdi.c:602
+msgid "_Don't quit"
+msgstr ""
+
+#: src/gedit-mdi.c:606
+msgid "_Don't close"
+msgstr ""
+
+#: src/gedit-mdi.c:690
+msgid "(modified)"
+msgstr "(pakeistas)"
+
+#: src/gedit-mdi.c:696
+msgid "(readonly)"
+msgstr "(tik skaitomas)"
+
+#: src/gedit-print.c:158
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+
+#: src/gedit-print.c:265
+#, fuzzy
+msgid "gedit - Print Document"
+msgstr "Dokumentai"
+
+#: src/gedit-print.c:274
+#, fuzzy
+msgid "Lines"
+msgstr "Eilutė"
+
+#: src/gedit-print.c:330
+#, fuzzy, c-format
+msgid "File: %s"
+msgstr "_Byla"
+
+#. Print right text
+#: src/gedit-print.c:335
+#, fuzzy, c-format
+msgid "Page: %d"
+msgstr "Puslapis: %i/%i"
+
+#: src/gedit-print.c:464
+#, fuzzy
+msgid "gedit - Print Preview"
+msgstr "gedit (%s): Spaudinio peržiūra"
+
+#: src/gedit-print.c:540
+#, fuzzy, c-format
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/gedit-recent.c:252
+#, fuzzy, c-format
+msgid "Open file %s"
+msgstr "Atidaryti bylą"
+
+#: src/gedit-recent.c:320
+#, fuzzy, c-format
+msgid "Unable to open recent file: %s"
+msgstr "Negaliu atidaryti ankstesnės bylos: %s"
+
+#: src/gedit-ui.xml.h:1
+#, fuzzy
+msgid "About this application"
+msgstr "Iškirpti pažymėjimą"
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:3
+msgid "Add/Remove installed plugins"
+msgstr "Pridėti/Pašalinti įdiegtus pluginus"
+
+#: src/gedit-ui.xml.h:4
+#, fuzzy
+msgid "C_lear"
+msgstr "Keisti"
+
+#: src/gedit-ui.xml.h:5
+#, fuzzy
+msgid "C_lose All"
+msgstr "Uždaryti visas"
+
+#: src/gedit-ui.xml.h:6
+#, fuzzy
+msgid "C_ut"
+msgstr "Iškirpti"
+
+#: src/gedit-ui.xml.h:7
+#, fuzzy
+msgid "Clear"
+msgstr "Keisti"
+
+#: src/gedit-ui.xml.h:8
+#, fuzzy
+msgid "Clear the selection"
+msgstr "Iškirpti pažymėjimą"
+
+#: src/gedit-ui.xml.h:9
+msgid "Close"
+msgstr "Uždaryti"
+
+#: src/gedit-ui.xml.h:10
+#, fuzzy
+msgid "Close All"
+msgstr "Uždaryti visas"
+
+#: src/gedit-ui.xml.h:11
+#, fuzzy
+msgid "Close all open files"
+msgstr "Uždaryti visas atidarytas bylas"
+
+#: src/gedit-ui.xml.h:12
+msgid "Close the current file"
+msgstr "Uždaryti esamąją bylą"
+
+#: src/gedit-ui.xml.h:13
+#, fuzzy
+msgid "Configure the application"
+msgstr "Iškirpti pažymėjimą"
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr "Kopijuoti"
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr "Kopijuoti pažymėjimą"
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr "Sukurti naują dokumentą"
+
+#: src/gedit-ui.xml.h:17
+msgid "Customize"
+msgstr ""
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize toolbars"
+msgstr ""
+
+#: src/gedit-ui.xml.h:19
+msgid "Cut"
+msgstr "Iškirpti"
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut the selection"
+msgstr "Iškirpti pažymėjimą"
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr ""
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr ""
+
+#: src/gedit-ui.xml.h:23
+#, fuzzy
+msgid "E_xit"
+msgstr "Išeiti"
+
+#: src/gedit-ui.xml.h:24
+msgid "Exit"
+msgstr "Išeiti"
+
+#: src/gedit-ui.xml.h:25
+msgid "Exit the program"
+msgstr "Išeiti iš programos"
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:28
+msgid "Find _Again"
+msgstr ""
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr "Eiti į nurodytą eilutės numerį"
+
+#: src/gedit-ui.xml.h:30
+#, fuzzy
+msgid "Goto _Line"
+msgstr "Eiti į eilutę"
+
+#: src/gedit-ui.xml.h:31
+msgid "Main toolbar"
+msgstr ""
+
+#: src/gedit-ui.xml.h:32
+#, fuzzy
+msgid "Manager"
+msgstr "Tvarkyklė..."
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr "Naujas"
+
+#: src/gedit-ui.xml.h:34
+msgid "Open"
+msgstr "Atidaryti"
+
+#: src/gedit-ui.xml.h:35
+#, fuzzy
+msgid "Open a file"
+msgstr "Atidaryti bylą"
+
+#: src/gedit-ui.xml.h:36
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/gedit-ui.xml.h:37
+#, fuzzy
+msgid "Open from URI"
+msgstr "Atidaryti bylą..."
+
+#: src/gedit-ui.xml.h:38
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Atidaryti bylą..."
+
+#: src/gedit-ui.xml.h:39
+msgid "Paste"
+msgstr "Įdėti"
+
+#: src/gedit-ui.xml.h:40
+msgid "Paste the clipboard"
+msgstr "Įdėti krepšio turinį"
+
+#: src/gedit-ui.xml.h:43
+#, fuzzy
+msgid "Print Pre_view"
+msgstr "Spaudinio per_žiūra"
+
+#: src/gedit-ui.xml.h:44
+#, fuzzy
+msgid "Print Preview"
+msgstr "Spaudinio peržiūra"
+
+#: src/gedit-ui.xml.h:45
+#, fuzzy
+msgid "Print Setup"
+msgstr "Dokumentai"
+
+#: src/gedit-ui.xml.h:46
+msgid "Print preview"
+msgstr "Spaudinio peržiūra"
+
+#: src/gedit-ui.xml.h:47
+msgid "Print the current file"
+msgstr "Spausdinti esamąją bylą"
+
+#: src/gedit-ui.xml.h:48
+msgid "Redo"
+msgstr "Pakartoti"
+
+#: src/gedit-ui.xml.h:49
+#, fuzzy
+msgid "Redo the undone action"
+msgstr "Pakartoti atšauktą veiksmą"
+
+#: src/gedit-ui.xml.h:51
+#, fuzzy
+msgid "Replace a string"
+msgstr "Ieškoti eilutės"
+
+#: src/gedit-ui.xml.h:52
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#: src/gedit-ui.xml.h:53
+#, fuzzy
+msgid "Revert to saved"
+msgstr "Apversti"
+
+#: src/gedit-ui.xml.h:54
+#, fuzzy
+msgid "Sav_e All"
+msgstr "Išsaugoti visas"
+
+#: src/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Save All"
+msgstr "Išsaugoti visas"
+
+#: src/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Save As"
+msgstr "Išsaugoti kaip..."
+
+#: src/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Save _As..."
+msgstr "Išsaugoti kaip..."
+
+#: src/gedit-ui.xml.h:59
+#, fuzzy
+msgid "Save all open files"
+msgstr "Išsaugoti visas atidarytas bylas"
+
+#: src/gedit-ui.xml.h:60
+msgid "Save the current file"
+msgstr "Išsaugoti esamąją bylą"
+
+#: src/gedit-ui.xml.h:61
+#, fuzzy
+msgid "Save the current file with a different name"
+msgstr "Išsaugoti esamąją bylą"
+
+#: src/gedit-ui.xml.h:62
+#, fuzzy
+msgid "Se_arch"
+msgstr "_Ieškoti ko: "
+
+#: src/gedit-ui.xml.h:63
+#, fuzzy
+msgid "Search again for the same string"
+msgstr "Ieškoti eilutės"
+
+#: src/gedit-ui.xml.h:64
+msgid "Search for a string"
+msgstr "Ieškoti eilutės"
+
+#: src/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Select All"
+msgstr "Pakeisti visus"
+
+#: src/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Select the entire document"
+msgstr "Išsiųsti esamąjį dokumentą el. paštu"
+
+#: src/gedit-ui.xml.h:67
+msgid "Setup the page settings for your current printer"
+msgstr ""
+
+#: src/gedit-ui.xml.h:69
+#, fuzzy
+msgid "Undo the last action"
+msgstr "Atšaukti paskutinį veiksmą"
+
+#: src/gedit-ui.xml.h:70
+msgid "_About..."
+msgstr ""
+
+#: src/gedit-ui.xml.h:71
+#, fuzzy
+msgid "_Close"
+msgstr "Uždaryti"
+
+#: src/gedit-ui.xml.h:72
+#, fuzzy
+msgid "_Copy"
+msgstr "Kopijuoti"
+
+#: src/gedit-ui.xml.h:73
+msgid "_Debug"
+msgstr ""
+
+#: src/gedit-ui.xml.h:74
+msgid "_Documents"
+msgstr "_Dokumentai"
+
+#: src/gedit-ui.xml.h:75
+#, fuzzy
+msgid "_Edit"
+msgstr "Išeiti"
+
+#: src/gedit-ui.xml.h:76
+msgid "_File"
+msgstr "_Byla"
+
+#: src/gedit-ui.xml.h:77
+#, fuzzy
+msgid "_Find"
+msgstr "Rasti"
+
+#: src/gedit-ui.xml.h:78
+msgid "_Help"
+msgstr ""
+
+#: src/gedit-ui.xml.h:79
+#, fuzzy
+msgid "_Manager"
+msgstr "Tvarkyklė..."
+
+#: src/gedit-ui.xml.h:80
+msgid "_New"
+msgstr "_Naujas"
+
+#: src/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_Open..."
+msgstr "Atidaryti"
+
+#: src/gedit-ui.xml.h:82
+#, fuzzy
+msgid "_Paste"
+msgstr "Įdėti"
+
+#: src/gedit-ui.xml.h:83
+msgid "_Plugins"
+msgstr "_Priedai"
+
+#: src/gedit-ui.xml.h:84
+#, fuzzy
+msgid "_Preferences"
+msgstr "gedit: Nuostatos"
+
+#: src/gedit-ui.xml.h:85
+#, fuzzy
+msgid "_Print"
+msgstr "Spausdinti"
+
+#: src/gedit-ui.xml.h:86
+#, fuzzy
+msgid "_Redo"
+msgstr "Pakartoti"
+
+#: src/gedit-ui.xml.h:88
+#, fuzzy
+msgid "_Revert"
+msgstr "Atkurti"
+
+#: src/gedit-ui.xml.h:89
+#, fuzzy
+msgid "_Save"
+msgstr "Išsaugoti"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Select all"
+msgstr ""
+
+#: src/gedit-ui.xml.h:91
+msgid "_Settings"
+msgstr ""
+
+#: src/gedit-ui.xml.h:92
+#, fuzzy
+msgid "_Undo"
+msgstr "Atšaukimas"
+
+#: src/gedit-view.c:787
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr ""
+
+#: src/gedit-view.c:825
+msgid "  OVR"
+msgstr ""
+
+#: src/gedit-view.c:827
+msgid "  INS"
+msgstr ""
 
 #: src/gedit2.c:59
 msgid "Show mdi debugging messages."
@@ -123,243 +822,16 @@ msgstr ""
 msgid "The gnome text editor"
 msgstr "Tekstų redaktorius"
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr ""
-
-#: src/gedit-commands.c:409
-msgid "Impossible to update gedit settings."
-msgstr ""
-
-#: src/gedit-commands.c:471
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit yra mažas ir nesudėtingas tekstų redaktorius, skirtas GNOME."
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-#, c-format
-msgid "%s %d"
-msgstr ""
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-msgid "Untitled"
-msgstr "Bevardis"
-
-#: src/gedit-document.c:535 src/gedit-document.c:641
-#, fuzzy
-msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
-"Prašau, įsitikink, ar tokia byla yra."
-
-#: src/gedit-document.c:951
-#, fuzzy
-msgid "It is not possible to revert an Untitled document"
-msgstr "Tu negali atkurti Bevardžio dokumento\n"
-
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
-msgstr "Įkelta byla %s"
-
-#: src/gedit-file.c:256
-#, c-format
-msgid "Loaded %i files"
-msgstr "Įkeltos %i bylos"
-
-#: src/gedit-file.c:326 src/gedit-file.c:348
-msgid "Open File ..."
-msgstr "Atidaryti bylą..."
-
-#: src/gedit-file.c:395 src/gedit-file.c:441
-#, fuzzy, c-format
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
-"Prašau, įsitikink, ar tokia byla yra."
-
-#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
-#, fuzzy, c-format
-msgid "Saving file '%s' ..."
-msgstr "Išsaugoti kaip..."
-
-#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
-msgid "Unknown error"
-msgstr ""
-
-#: src/gedit-file.c:530 src/gedit-file.c:730
-#, fuzzy, c-format
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
-"Prašau, įsitikink, ar tokia byla yra."
-
-#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
-#, fuzzy
-msgid "The document has not been saved."
-msgstr "Dokumentas nebuvo išsaugotas."
-
-#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
-#, c-format
-msgid "File '%s' saved."
-msgstr ""
-
-#: src/gedit-file.c:635
-msgid "Save As..."
-msgstr "Išsaugoti kaip..."
-
-#: src/gedit-file.c:668
-#, fuzzy
-msgid "Save as ..."
-msgstr "Išsaugoti kaip..."
-
-#: src/gedit-file.c:800
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-
-#: src/gedit-file.c:926
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr ""
-
-#: src/gedit-file.c:947
-#, fuzzy, c-format
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
-"Prašau, įsitikink, ar tokia byla yra."
-
-#: src/gedit-file.c:973
-#, fuzzy
-msgid "The document has not been reverted."
-msgstr "Dokumentas nebuvo išsaugotas."
-
-#: src/gedit-file.c:983
-#, c-format
-msgid "File '%s' reverted."
-msgstr ""
-
-#: src/gedit-file.c:1135
-#, fuzzy, c-format
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
-"Prašau, įsitikink, ar tokia byla yra."
-
-#: src/gedit-mdi.c:524
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-
-#: src/gedit-mdi.c:529
-msgid "Do_n't save"
-msgstr ""
-
-#: src/gedit-mdi.c:547
-msgid "_Don't quit"
-msgstr ""
-
-#: src/gedit-mdi.c:551
-msgid "_Don't close"
-msgstr ""
-
-#: src/gedit-mdi.c:633
-msgid "(modified)"
-msgstr "(pakeistas)"
-
-#: src/gedit-mdi.c:639
-msgid "(readonly)"
-msgstr "(tik skaitomas)"
-
-#: src/gedit-recent.c:252
-#, fuzzy, c-format
-msgid "Open file %s"
-msgstr "Atidaryti bylą"
-
-#: src/gedit-recent.c:320
-#, fuzzy, c-format
-msgid "Unable to open recent file: %s"
-msgstr "Negaliu atidaryti ankstesnės bylos: %s"
-
-#, fuzzy
-#~ msgid "Char"
-#~ msgstr "Keisti"
-
-#, fuzzy
-#~ msgid "Insert char"
-#~ msgstr "Įterpti laiką"
-
 #~ msgid "Browse"
 #~ msgstr "Naršyti"
 
 #~ msgid "Web browse plugin"
 #~ msgstr "Priedas voratinkliui naršyti"
 
-#, fuzzy
-#~ msgid " _Change... "
-#~ msgstr "Keisti..."
-
-#, fuzzy
-#~ msgid "Enter the _URL to browse for:"
-#~ msgstr "Įvesk URL, ką naršyti:"
-
-#, fuzzy
-#~ msgid "Lynx found at: "
-#~ msgstr "lynx buvo rastas čia:"
-
-#, fuzzy
-#~ msgid "gedit: Web Browse plugin"
-#~ msgstr "gedit priedas voratinkliui naršyti"
-
-#~ msgid "location"
-#~ msgstr "vieta"
-
 #~ msgid "Convert"
 #~ msgstr "Versti"
 
 #~ msgid "Number Converter"
-#~ msgstr "Skaičių vertiklis"
-
-#, fuzzy
-#~ msgid " Decimal to _Hex "
-#~ msgstr "Dešimtainį į šešioliktainį"
-
-#, fuzzy
-#~ msgid " Decimal to _Octal "
-#~ msgstr "Dešimtainį į aštuntainį"
-
-#, fuzzy
-#~ msgid " Hex to Decima_l "
-#~ msgstr "Šešioliktainį į dešimtainį"
-
-#, fuzzy
-#~ msgid "_Converted value:"
-#~ msgstr "Paversta reikšmė:"
-
-#, fuzzy
-#~ msgid "_Value to be converted:"
-#~ msgstr "Verčiama reikšmė:"
-
-#, fuzzy
-#~ msgid "gedit: Number Converter plugin"
 #~ msgstr "Skaičių vertiklis"
 
 #, fuzzy
@@ -422,6 +894,114 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ "Daugiau info apie diff rasi, įvykdęs =A5man diff“.\n"
 
 #, fuzzy
+#~ msgid "Document info"
+#~ msgstr "Dokumentai"
+
+#, fuzzy
+#~ msgid "Get info on current document."
+#~ msgstr "Išsiųsti esamąjį dokumentą el. paštu"
+
+#, fuzzy
+#~ msgid "email"
+#~ msgstr "El. paštas"
+
+#, fuzzy
+#~ msgid "Executing command: %s"
+#~ msgstr "Vykdoma komanda : %s"
+
+#~ msgid "Email"
+#~ msgstr "El. paštas"
+
+#~ msgid "Email the current document"
+#~ msgstr "Išsiųsti esamąjį dokumentą el. paštu"
+
+#~ msgid ""
+#~ "Email the current document to a specified email address\n"
+#~ "gedit searches for sendmail to use this plugin."
+#~ msgstr ""
+#~ "Išsiųsti esamąjį dokumentą el. paštu nurodytu adresu.\n"
+#~ "gedit susiranda sendmail, kad galėtum naudoti šį priedą."
+
+#~ msgid "Reverse"
+#~ msgstr "Apversti"
+
+#~ msgid "Reverse text"
+#~ msgstr "Apversti tekstą"
+
+#~ msgid "Hello World"
+#~ msgstr "Sveikas, Pasauli"
+
+#~ msgid "Sample 'hello world' plugin."
+#~ msgstr "Pavyzdinis =A5sveikas, pasauli“ priedas."
+
+#~ msgid "Shell Output"
+#~ msgstr "Shell išvestis"
+
+#~ msgid "Insert the shell output in the document"
+#~ msgstr "Įterpti įvykdytos komandos išvestį į dokumentą"
+
+#, fuzzy
+#~ msgid "Sort a document."
+#~ msgstr "Sukurti naują dokumentą"
+
+#, fuzzy
+#~ msgid "Sort a document or selected text."
+#~ msgstr "Du pasirinkti dokumentai yra vienodi"
+
+#~ msgid "Insert Time"
+#~ msgstr "Įterpti laiką"
+
+#~ msgid "Inserts the current date and time"
+#~ msgstr "Įterpti dabartinę datą ir laiką"
+
+#, fuzzy
+#~ msgid "Insert char"
+#~ msgstr "Įterpti laiką"
+
+#, fuzzy
+#~ msgid " _Change... "
+#~ msgstr "Keisti..."
+
+#, fuzzy
+#~ msgid "Enter the _URL to browse for:"
+#~ msgstr "Įvesk URL, ką naršyti:"
+
+#, fuzzy
+#~ msgid "Lynx found at: "
+#~ msgstr "lynx buvo rastas čia:"
+
+#, fuzzy
+#~ msgid "gedit: Web Browse plugin"
+#~ msgstr "gedit priedas voratinkliui naršyti"
+
+#~ msgid "location"
+#~ msgstr "vieta"
+
+#, fuzzy
+#~ msgid " Decimal to _Hex "
+#~ msgstr "Dešimtainį į šešioliktainį"
+
+#, fuzzy
+#~ msgid " Decimal to _Octal "
+#~ msgstr "Dešimtainį į aštuntainį"
+
+#, fuzzy
+#~ msgid " Hex to Decima_l "
+#~ msgstr "Šešioliktainį į dešimtainį"
+
+#, fuzzy
+#~ msgid "_Converted value:"
+#~ msgstr "Paversta reikšmė:"
+
+#, fuzzy
+#~ msgid "_Value to be converted:"
+#~ msgstr "Verčiama reikšmė:"
+
+#, fuzzy
+#~ msgid "gedit: Number Converter plugin"
+#~ msgstr "Skaičių vertiklis"
+
+#, fuzzy
 #~ msgid "Choose the files to compare"
 #~ msgstr "Pasirink, kurias bylas diff'inti"
 
@@ -444,45 +1024,12 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgstr "gedit: el. pašto priedas"
 
 #, fuzzy
-#~ msgid "Document info"
-#~ msgstr "Dokumentai"
-
-#, fuzzy
-#~ msgid "Get info on current document."
-#~ msgstr "Išsiųsti esamąjį dokumentą el. paštu"
-
-#, fuzzy
 #~ msgid "File Name"
 #~ msgstr "Eilutės numeris:"
 
 #, fuzzy
-#~ msgid "Lines"
-#~ msgstr "Eilutė"
-
-#, fuzzy
 #~ msgid "gedit: Document Info plugin"
 #~ msgstr "gedit: el. pašto priedas"
-
-#, fuzzy
-#~ msgid "email"
-#~ msgstr "El. paštas"
-
-#, fuzzy
-#~ msgid "Executing command: %s"
-#~ msgstr "Vykdoma komanda : %s"
-
-#~ msgid "Email"
-#~ msgstr "El. paštas"
-
-#~ msgid "Email the current document"
-#~ msgstr "Išsiųsti esamąjį dokumentą el. paštu"
-
-#~ msgid ""
-#~ "Email the current document to a specified email address\n"
-#~ "gedit searches for sendmail to use this plugin."
-#~ msgstr ""
-#~ "Išsiųsti esamąjį dokumentą el. paštu nurodytu adresu.\n"
-#~ "gedit susiranda sendmail, kad galėtum naudoti šį priedą."
 
 #~ msgid "Change..."
 #~ msgstr "Keisti..."
@@ -523,24 +1070,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgid "gedit: e-mail plugin"
 #~ msgstr "gedit: el. pašto priedas"
 
-#~ msgid "Reverse"
-#~ msgstr "Apversti"
-
-#~ msgid "Reverse text"
-#~ msgstr "Apversti tekstą"
-
-#~ msgid "Hello World"
-#~ msgstr "Sveikas, Pasauli"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Pavyzdinis =A5sveikas, pasauli“ priedas."
-
-#~ msgid "Shell Output"
-#~ msgstr "Shell išvestis"
-
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "Įterpti įvykdytos komandos išvestį į dokumentą"
-
 #, fuzzy
 #~ msgid "Shell _command:"
 #~ msgstr "Įvesk shell komandą"
@@ -548,14 +1077,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #, fuzzy
 #~ msgid "gedit: Shell Output plugin"
 #~ msgstr "Shell išvesties priedas"
-
-#, fuzzy
-#~ msgid "Sort a document."
-#~ msgstr "Sukurti naują dokumentą"
-
-#, fuzzy
-#~ msgid "Sort a document or selected text."
-#~ msgstr "Du pasirinkti dokumentai yra vienodi"
 
 #, fuzzy
 #~ msgid "Case Sensitive"
@@ -568,12 +1089,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #, fuzzy
 #~ msgid "gedit: Sort plugin"
 #~ msgstr "gedit: el. pašto priedas"
-
-#~ msgid "Insert Time"
-#~ msgstr "Įterpti laiką"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Įterpti dabartinę datą ir laiką"
 
 #~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 #~ msgstr "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
@@ -595,9 +1110,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr "Nepavyko paskirti reikalingo atminties kiekio."
 
-#~ msgid "Line number:"
-#~ msgstr "Eilutės numeris:"
-
 #, fuzzy
 #~ msgid "De_scription"
 #~ msgstr "Priedo aprašymas"
@@ -609,10 +1121,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #, fuzzy
 #~ msgid "Plugins manager..."
 #~ msgstr "gedit priedų tvarkyklė"
-
-#, fuzzy
-#~ msgid "Select the plugins to activate:"
-#~ msgstr "Pasirink, kuriuos priedus įdiegti"
 
 #~ msgid "Add _header"
 #~ msgstr "Pridėti _antraštę"
@@ -643,9 +1151,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgid "Fonts"
 #~ msgstr "Šriftai"
 
-#~ msgid "Fonts/Colors"
-#~ msgstr "Šriftai/Spalvos"
-
 #~ msgid "General"
 #~ msgstr "Pagrindas"
 
@@ -670,19 +1175,11 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgstr "Pasirink spalvą"
 
 #, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "gedit: Nuostatos"
-
-#, fuzzy
 #~ msgid "Print line _numbers every:"
 #~ msgstr "Spausdinti eilučių _numerius kas:"
 
 #~ msgid "Printing"
 #~ msgstr "Spausdinimas"
-
-#, fuzzy
-#~ msgid "S_how statusbar"
-#~ msgstr "Rodyti būsenos juostą"
 
 #, fuzzy
 #~ msgid "Set limit on _undo levels to:"
@@ -707,9 +1204,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #, fuzzy
 #~ msgid "Top"
 #~ msgstr "Kam:"
-
-#~ msgid "Undo"
-#~ msgstr "Atšaukimas"
 
 #, fuzzy
 #~ msgid "_Background: "
@@ -766,13 +1260,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 
 #~ msgid "_Search for: "
 #~ msgstr "_Ieškoti ko: "
-
-#~ msgid "Open"
-#~ msgstr "Atidaryti"
-
-#, fuzzy
-#~ msgid "Open from URI"
-#~ msgstr "Atidaryti bylą..."
 
 #~ msgid "RO - "
 #~ msgstr "RO - "
@@ -908,49 +1395,12 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgid "Open (swap) .c/.h file"
 #~ msgstr "Atidaryti atitinkančią .c/.h bylą"
 
-#~ msgid "_New"
-#~ msgstr "_Naujas"
-
-#~ msgid "Create a new document"
-#~ msgstr "Sukurti naują dokumentą"
-
-#, fuzzy
-#~ msgid "Sav_e All"
-#~ msgstr "Išsaugoti visas"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "Išsaugoti visas atidarytas bylas"
-
-#, fuzzy
-#~ msgid "_Revert"
-#~ msgstr "Atkurti"
-
-#, fuzzy
-#~ msgid "Open from _URI..."
-#~ msgstr "Atidaryti bylą..."
-
-#~ msgid "Print pre_view"
-#~ msgstr "Spaudinio per_žiūra"
-
-#~ msgid "Print preview"
-#~ msgstr "Spaudinio peržiūra"
-
 #, fuzzy
 #~ msgid "Print pre_view..."
 #~ msgstr "Spaudinio peržiūra..."
 
 #~ msgid "Preview data to be printed"
 #~ msgstr "Peržiūrėti, kaip atrodys išspausdintas"
-
-#, fuzzy
-#~ msgid "C_lose All"
-#~ msgstr "Uždaryti visas"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "Uždaryti visas atidarytas bylas"
-
-#~ msgid "Go to a specific line number"
-#~ msgstr "Eiti į nurodytą eilutės numerį"
 
 #~ msgid "_Add View"
 #~ msgstr "_Pridėti vaizdą"
@@ -963,77 +1413,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 
 #~ msgid "Remove view of the document"
 #~ msgstr "Panaikinti dokumento vaizdą"
-
-#, fuzzy
-#~ msgid "Se_arch"
-#~ msgstr "_Ieškoti ko: "
-
-#~ msgid "_Plugins"
-#~ msgstr "_Priedai"
-
-#~ msgid "_Documents"
-#~ msgstr "_Dokumentai"
-
-#~ msgid "New"
-#~ msgstr "Naujas"
-
-#~ msgid "Save"
-#~ msgstr "Išsaugoti"
-
-#~ msgid "Save the current file"
-#~ msgstr "Išsaugoti esamąją bylą"
-
-#~ msgid "Close"
-#~ msgstr "Uždaryti"
-
-#~ msgid "Close the current file"
-#~ msgstr "Uždaryti esamąją bylą"
-
-#~ msgid "Print"
-#~ msgstr "Spausdinti"
-
-#~ msgid "Print the current file"
-#~ msgstr "Spausdinti esamąją bylą"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Atšaukti paskutinį veiksmą"
-
-#~ msgid "Redo"
-#~ msgstr "Pakartoti"
-
-#~ msgid "Redo last operation"
-#~ msgstr "Pakartoti atšauktą veiksmą"
-
-#~ msgid "Cut"
-#~ msgstr "Iškirpti"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Iškirpti pažymėjimą"
-
-#~ msgid "Copy"
-#~ msgstr "Kopijuoti"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Kopijuoti pažymėjimą"
-
-#~ msgid "Paste"
-#~ msgstr "Įdėti"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Įdėti krepšio turinį"
-
-#~ msgid "Search for a string"
-#~ msgstr "Ieškoti eilutės"
-
-#~ msgid "Exit"
-#~ msgstr "Išeiti"
-
-#~ msgid "Exit the program"
-#~ msgstr "Išeiti iš programos"
-
-#, fuzzy
-#~ msgid "_Manager ..."
-#~ msgstr "Tvarkyklė..."
 
 #, fuzzy
 #~ msgid "Manage available plugin modules"
@@ -1081,20 +1460,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgid "Error, plugin is still in use"
 #~ msgstr "Klaida: priedas vis dar naudojamas"
 
-#, fuzzy
-#~ msgid "Print Document"
-#~ msgstr "Dokumentai"
-
-#~ msgid "Pages"
-#~ msgstr "Puslapiai"
-
-#, fuzzy
-#~ msgid "gedit: Print Preview\n"
-#~ msgstr "gedit (%s): Spaudinio peržiūra"
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Puslapis: %i/%i"
-
 #~ msgid ""
 #~ "gedit could not find the font \"%s\".\n"
 #~ "gedit is unable to print without this font installed."
@@ -1112,9 +1477,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 
 #~ msgid "_File/"
 #~ msgstr "_Byla/"
-
-#~ msgid "_File"
-#~ msgstr "_Byla"
 
 #~ msgid ""
 #~ "Can't count lines if another search operation is active, please close the "
@@ -1215,9 +1577,6 @@ msgstr "Negaliu atidaryti ankstesnės bylos: %s"
 #~ msgstr ""
 #~ "Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
 #~ "Prašau, įsitikink, ar tokia byla yra."
-
-#~ msgid "Add/Remove installed plugins"
-#~ msgstr "Pridėti/Pašalinti įdiegtus pluginus"
 
 #~ msgid "File to use as body of message : "
 #~ msgstr "Byla, kurią naudoti laiško tekstui: "
