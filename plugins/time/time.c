@@ -499,7 +499,7 @@ init (GeditPlugin *pd)
      
 	pd->name = _("Insert Date/Time");
 	pd->desc = _("Inserts the current date and time at the cursor position.");
-	pd->author = "Paolo Maggi <maggi@athena.politol.it>";
+	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
 	pd->private_data = NULL;

@@ -53,14 +53,14 @@ MessageInfo *current_mi = NULL;
 static gint
 remove_message_timeout (MessageInfo * mi) 
 {
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *ui_component;
 
 	GDK_THREADS_ENTER ();	
 	
-  	ui_engine = bonobo_window_get_ui_engine (mi->win);
-	g_return_val_if_fail (ui_engine != NULL, FALSE);
+  	ui_component = bonobo_mdi_get_ui_component_from_window (mi->win);
+	g_return_val_if_fail (ui_component != NULL, FALSE);
 
-	bonobo_ui_engine_remove_hint (ui_engine);
+	bonobo_ui_component_set_status (ui_component, " ", NULL);
 
 	gtk_signal_disconnect (GTK_OBJECT (mi->win), mi->handlerid);
 
@@ -96,13 +96,13 @@ static const guint32 flash_length = 3000; /* 3 seconds, I hope */
 void 
 bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 {
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *ui_component;
   	g_return_if_fail (win != NULL);
   	g_return_if_fail (BONOBO_IS_WINDOW (win));
   	g_return_if_fail (flash != NULL);
   	
-	ui_engine = bonobo_window_get_ui_engine (win);
-	g_return_if_fail (ui_engine != NULL);
+	ui_component = bonobo_mdi_get_ui_component_from_window (win);
+	g_return_if_fail (ui_component != NULL);
 	
 	if (current_mi != NULL)
 	{
@@ -110,12 +110,11 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 		remove_message_timeout (current_mi);
 	}
 	
-	if (bonobo_ui_engine_xml_node_exists (ui_engine, "/status"))
+	if (bonobo_ui_component_path_exists (ui_component, "/status", NULL))
 	{
     		MessageInfo * mi;
 
-		bonobo_ui_engine_remove_hint (ui_engine);
-		bonobo_ui_engine_add_hint (ui_engine, flash);
+		bonobo_ui_component_set_status (ui_component, flash, NULL);
     		
 		mi = g_new(MessageInfo, 1);
 
