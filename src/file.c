@@ -158,7 +158,7 @@ gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_bu
 gint
 gedit_file_open (GeditDocument *doc, const gchar *fname)
 {
-	GnomeVFSFileInfo info;
+	GnomeVFSFileInfo *info;
 	GnomeVFSHandle *from_handle;
 	GnomeVFSResult  result;
 
@@ -184,15 +184,15 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	while (gtk_events_pending ())
 		  gtk_main_iteration ();
 
-	gnome_vfs_file_info_init (&info);
+	info = gnome_vfs_file_info_new ();
 	result = gnome_vfs_get_file_info (fname, 
-				 &info,
-				 (GNOME_VFS_FILE_INFO_GET_MIME_TYPE
-				 | GNOME_VFS_FILE_INFO_FOLLOW_LINKS));
+					  info,
+					  (GNOME_VFS_FILE_INFO_GET_MIME_TYPE
+					   | GNOME_VFS_FILE_INFO_FOLLOW_LINKS));
 
 	if ((result != GNOME_VFS_OK) || 
-	    !(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) ||
-	    (info.type != GNOME_VFS_FILE_TYPE_REGULAR))
+	    !(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) ||
+	    (info->type != GNOME_VFS_FILE_TYPE_REGULAR))
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
 					"\nPlease make sure the file exists."), fname);
@@ -200,14 +200,14 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		g_free (errstr);
 
 		if(result == GNOME_VFS_OK)
-			gnome_vfs_file_info_clear (&info);
+			gnome_vfs_file_info_clear (info);
 
 		return 1;
 	}
 
-	if(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
+	if(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
 	{
-		tmp_buf = g_string_sized_new (info.size + 1);
+		tmp_buf = g_string_sized_new (info->size + 1);
 	}
 	else
 	{
@@ -220,7 +220,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 						   "\nCould not allocate the required memory."), fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
-		gnome_vfs_file_info_clear (&info);
+		gnome_vfs_file_info_clear (info);
 
 		return 1;	
 	}
@@ -235,7 +235,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
 		g_string_free(tmp_buf, TRUE);
-		gnome_vfs_file_info_clear (&info);
+		gnome_vfs_file_info_clear (info);
 
 		return 1;
 	}
@@ -254,7 +254,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 			gnome_app_error (gedit_window_active_app(), errstr);
 			g_free (errstr);
 			g_string_free(tmp_buf, TRUE);
-			gnome_vfs_file_info_clear (&info);
+			gnome_vfs_file_info_clear (info);
 
 			return 1;
 		}
@@ -275,7 +275,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 			gnome_app_error (gedit_window_active_app(), errstr);
 			g_free (errstr);
 			g_string_free(tmp_buf, TRUE);
-			gnome_vfs_file_info_clear (&info);
+			gnome_vfs_file_info_clear (info);
 
 			return 1;
 		}
@@ -292,7 +292,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
 		g_string_free(tmp_buf, TRUE);
-		gnome_vfs_file_info_clear (&info);
+		gnome_vfs_file_info_clear (info);
 
 		return 1;
 	}
@@ -330,7 +330,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		scheme = gnome_vfs_uri_get_scheme(uri);
 		
 		/* FIXME: all remote files are marked as readonly */
-		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (&info))
+		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (info))
 		{
 			gchar* tmp_str;
 
@@ -351,7 +351,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	}
 	
 	g_string_free (tmp_buf, TRUE);
-	gnome_vfs_file_info_clear (&info);
+	gnome_vfs_file_info_clear (info);
 
 	doc->changed = FALSE;
 	gedit_document_set_title (doc);
