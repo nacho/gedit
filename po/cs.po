@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
-"POT-Creation-Date: 2003-05-21 04:46+0200\n"
-"PO-Revision-Date: 2003-05-21 10:32+0200\n"
+"POT-Creation-Date: 2003-05-23 12:06+0200\n"
+"PO-Revision-Date: 2003-05-23 14:00+0200\n"
 "Last-Translator: Miloslav trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -113,9 +113,7 @@ msgstr "Písmo editoru"
 msgid "Encoding for Saving"
 msgstr "Kódování uloženého souboru"
 
-#: data/gedit.schemas.in.h:14 gedit/dialogs/gedit-preferences-dialog.c:2308
-#: gedit/dialogs/gedit-encodings-dialog.c:261
-#: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+#: data/gedit.schemas.in.h:14 gedit/dialogs/gedit-preferences-dialog.c:2314
 msgid "Encodings"
 msgstr "Kódování"
 
@@ -700,7 +698,6 @@ msgstr "Výchozí"
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #: gedit/dialogs/gedit-dialog-goto-line.c:187
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
-#: gedit/dialogs/gedit-encodings-dialog.c:242
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Nemohu najít v %s požadované widgety."
@@ -848,7 +845,7 @@ msgstr "Nahradit vš_e"
 
 #. Add Replace button
 #: gedit/dialogs/gedit-dialog-replace.c:280
-#: gedit/gedit-file-selector-util.c:129
+#: gedit/gedit-file-selector-util.c:131
 msgid "_Replace"
 msgstr "Nah_radit"
 
@@ -1512,7 +1509,7 @@ msgstr "Nelze vytvořit záložní soubor."
 msgid "It is not possible to revert an Untitled document"
 msgstr "Není možné vrátit Nepojmenovaný dokument."
 
-#: gedit/gedit-file-selector-util.c:147
+#: gedit/gedit-file-selector-util.c:149
 #, c-format
 msgid ""
 "A file named \"%s\" already exists.\n"
@@ -1521,7 +1518,7 @@ msgstr ""
 "Soubor zvaný \"%s\" již existuje.\n"
 "Přejete si jej nahradit souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:160
 #, c-format
 msgid ""
 "The file \"%s\" is read-only.\n"
@@ -1530,7 +1527,19 @@ msgstr ""
 "Soubor \"%s\" je určen pouze pro čtení.\n"
 "Chcete se pokusit nahradit jej souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:545
+#: gedit/gedit-file-selector-util.c:283
+msgid "Ch_aracter Coding:"
+msgstr "_Kódování znaků:"
+
+#: gedit/gedit-file-selector-util.c:446
+msgid "Select a file to open"
+msgstr "Vyberte soubor, který otevřít"
+
+#: gedit/gedit-file-selector-util.c:476
+msgid "Select files to open"
+msgstr "Vyberte soubory, které otevřít"
+
+#: gedit/gedit-file-selector-util.c:507
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
@@ -1538,30 +1547,30 @@ msgstr "Vyberte název souboru pro uložení"
 msgid "Open File..."
 msgstr "Otevřít soubor..."
 
-#: gedit/gedit-file.c:178 gedit/gedit-file.c:888
+#: gedit/gedit-file.c:178 gedit/gedit-file.c:890
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Soubor '%s' načten"
 
-#: gedit/gedit-file.c:310 gedit/gedit-file.c:456
+#: gedit/gedit-file.c:312 gedit/gedit-file.c:458
 #, c-format
 msgid "Saving file '%s'..."
 msgstr "Ukládá se soubor '%s'..."
 
-#: gedit/gedit-file.c:338 gedit/gedit-file.c:471
+#: gedit/gedit-file.c:340 gedit/gedit-file.c:473
 msgid "The document has not been saved."
 msgstr "Dokument nebyl uložen."
 
-#: gedit/gedit-file.c:352 gedit/gedit-file.c:468
+#: gedit/gedit-file.c:354 gedit/gedit-file.c:470
 #, c-format
 msgid "File '%s' saved."
 msgstr "Soubor '%s' byl uložen."
 
-#: gedit/gedit-file.c:435
+#: gedit/gedit-file.c:437
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:631
 #, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
@@ -1572,50 +1581,50 @@ msgstr ""
 "\n"
 "Tuto operaci nebude možné vrátit zpět."
 
-#: gedit/gedit-file.c:639 gedit/gedit-ui.xml.h:90
+#: gedit/gedit-file.c:641 gedit/gedit-ui.xml.h:90
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:675
 #, c-format
 msgid "Reverting file '%s'..."
 msgstr "Vrací se soubor '%s'..."
 
-#: gedit/gedit-file.c:686
+#: gedit/gedit-file.c:688
 msgid "The document has not been reverted."
 msgstr "Dokument nebyl vrácen do původní podoby."
 
-#: gedit/gedit-file.c:696
+#: gedit/gedit-file.c:698
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Soubor '%s' byl vrácen do původní podoby."
 
-#: gedit/gedit-file.c:722
+#: gedit/gedit-file.c:724
 #, c-format
 msgid "Loading %d files..."
 msgstr "Načítám %d souborů ..."
 
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:760
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
 
-#: gedit/gedit-file.c:813
+#: gedit/gedit-file.c:815
 #, c-format
 msgid "Loaded %i files"
 msgstr "Načteno %i souborů."
 
-#: gedit/gedit-file.c:946
+#: gedit/gedit-file.c:948
 msgid "Could not read data from stdin."
 msgstr "Nebylo možné načíst data ze standardního vstupu."
 
 #. Read only
-#: gedit/gedit-mdi-child.c:219
+#: gedit/gedit-mdi-child.c:220
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:543 gedit/gedit-ui.xml.h:81
+#: gedit/gedit-mdi-child.c:544 gedit/gedit-ui.xml.h:81
 msgid "_Move to New Window"
 msgstr "Přes_unout do nového okna"
 
@@ -2596,9 +2605,32 @@ msgstr "Vymazat okno s výstupem"
 msgid "Output Lines"
 msgstr "Řádky výstupu"
 
+#: gedit/dialogs/gedit-encodings-dialog.c:76
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Při zobrazování nápovědy došlo k chybě: %s"
+
+#: gedit/dialogs/gedit-encodings-dialog.c:381
+#: gedit/dialogs/gedit-encodings-dialog.c:449
+msgid "_Description"
+msgstr "_Popis"
+
+#: gedit/dialogs/gedit-encodings-dialog.c:390
+#: gedit/dialogs/gedit-encodings-dialog.c:458
+msgid "_Encoding"
+msgstr "_Kódování"
+
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
-msgid "Choose one or more e_ncodings:"
-msgstr "Vyberte jed_no nebo více kódování:"
+msgid "A_vailable encodings:"
+msgstr "_Dostupná kódování:"
+
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+msgid "Character codings"
+msgstr "Kódování znaků"
+
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+msgid "E_ncodings shown in menu:"
+msgstr "Kó_dování zobrazovaná v menu:"
 
 #: gedit/gedit-encodings.c:129 gedit/gedit-encodings.c:155
 #: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:239
