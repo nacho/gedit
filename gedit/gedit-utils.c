@@ -913,7 +913,7 @@ gedit_utils_error_reporting_loading_file (
 
 		case GNOME_VFS_ERROR_NO_MEMORY:
 			error_message = g_strdup_printf (
-				_("Not enough available memory to open the file \"%s\"."
+				_("Not enough available memory to open the file \"%s\". "
 				  "Please, close some running application and try again."),
                          	uri_for_display);
                 	break;
@@ -927,10 +927,10 @@ gedit_utils_error_reporting_loading_file (
 			vfs_uri = gnome_vfs_uri_new (uri);
                 	error_message = g_strdup_printf (
 				_("Could not open the file \"%s\" because no host \"%s\" " 
-				  "could be found. \n\n"
+				  "could be found.\n\n"
                 		  "Please, check that you typed the location correctly "
 				  "and that your proxy settings are correct and then "
-				  "try again"),
+				  "try again."),
 				uri_for_display,
 				gnome_vfs_uri_get_host_name (vfs_uri));
 
@@ -1133,7 +1133,7 @@ gedit_utils_error_reporting_reverting_file (
 			}
 			else
 				error_message = g_strdup_printf (
-					_("Could not revert the file \"%s\""),
+					_("Could not revert the file \"%s\"."),
                                 	uri_for_display);
 	
         	        break;
@@ -1162,14 +1162,14 @@ gedit_utils_error_reporting_reverting_file (
 		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
 			error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because "
-				  "there are too many open files\n\n."
+				  "there are too many open files.\n\n"
 				  "Please, close some open file and try again."),
                          	uri_for_display);
                 	break;
 	
 		case GNOME_VFS_ERROR_NO_MEMORY:
 			error_message = g_strdup_printf (
-				_("Not enough available memory to revert the file \"%s\"."
+				_("Not enough available memory to revert the file \"%s\". "
 				  "Please, close some running application and try again."),
                          	uri_for_display);
                 	break;
@@ -1183,9 +1183,9 @@ gedit_utils_error_reporting_reverting_file (
 			vfs_uri = gnome_vfs_uri_new (uri);
                 	error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because no host \"%s\" " 
-				  "could be found. \n\n"
+				  "could be found.\n\n"
                 		  "Please, check that your proxy settings are correct and "
-				  "try again"),
+				  "try again."),
 				uri_for_display,
 				gnome_vfs_uri_get_host_name (vfs_uri));
 
