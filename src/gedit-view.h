@@ -85,5 +85,7 @@ void 		gedit_view_set_font		(GeditView* view,
 void		gedit_view_set_wrap_mode 	(GeditView* view, GtkWrapMode wrap_mode);
 void		gedit_view_set_tab_size  	(GeditView* view, gint tab_size);
 
+void		gedit_view_show_line_numbers 	(GeditView* view, gboolean visible);
+
 #endif /* __GEDIT_VIEW_H__ */
 

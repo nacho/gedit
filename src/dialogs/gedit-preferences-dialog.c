@@ -50,6 +50,8 @@
 #define UNDO_SETTINGS		4
 #define WRAP_MODE_SETTINGS	8
 #define PRINT_SETTINGS		9
+#define LINE_NUMBERS_SETTINGS	10
+
 /*
 #define DEBUG_MDI_PREFS
 */
@@ -125,6 +127,10 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*wrap_lines_checkbutton;
 	GtkWidget	*line_numbers_checkbutton;
 	GtkWidget	*line_numbers_spinbutton;
+
+	/* Line numbers page */
+	GtkWidget	*display_line_numbers_checkbutton;
+
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -176,6 +182,9 @@ static gboolean gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog
 static void gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
 							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, 
+							          GladeXML *gui);
+
 
 static GtkDialogClass* parent_class = NULL;
 
@@ -201,6 +210,7 @@ static CategoriesTreeItem editor_behavior [] =
 */	
 	{_("Undo"), NULL, UNDO_SETTINGS},
 	{_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
+	{_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
 
 	NULL
 };
@@ -503,6 +513,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_wrap_mode_page (dlg, gui);
 	gedit_preferences_dialog_setup_save_page (dlg, gui);
 	gedit_preferences_dialog_setup_page_page (dlg, gui);
+	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -996,6 +1007,20 @@ gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML 
 				gedit_settings->print_line_numbers > 0);
 }
 
+static gboolean 
+gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->display_line_numbers_checkbutton = glade_xml_get_widget (gui, 
+				"display_line_numbers_checkbutton");
+
+	g_return_val_if_fail (dlg->priv->display_line_numbers_checkbutton != NULL, FALSE);
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->display_line_numbers_checkbutton),
+				gedit_settings->show_line_numbers);
+}
+
 gboolean 
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
@@ -1145,6 +1170,10 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 		gedit_settings->print_line_numbers = MAX (1, gtk_spin_button_get_value_as_int (
 				GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton)));
 	}
+
+	gedit_settings->show_line_numbers = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
+					      dlg->priv->display_line_numbers_checkbutton));	
 
 	return TRUE;
 	

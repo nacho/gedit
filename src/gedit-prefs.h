@@ -79,6 +79,9 @@ struct _GeditPreferences
 	/* Editor/Tabs */
 	gint		tab_size;
 
+	/* Editor/Line numbers */
+	gboolean	show_line_numbers;
+
 	/* User Interface/Toolbar */
 	gboolean		toolbar_visible;
 	GeditToolbarSetting 	toolbar_buttons_style; 

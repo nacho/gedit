@@ -203,7 +203,7 @@ goto_button_pressed (GeditDialogGotoLine *dialog)
 	
 	if (text != NULL && text [0] != 0)
 	{
-		guint line = MAX (atoi (text), 0);		
+		guint line = MAX (atoi (text)- 1, 0);		
 		gedit_document_goto_line (active_document, line);
 		gedit_view_scroll_to_cursor (active_view);
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));

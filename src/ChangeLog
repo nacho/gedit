@@ -1,5 +1,26 @@
 2002-01-11  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-view.c: now it can display line numbers
+	(gedit_view_show_line_numbers): new function
+	(gedit_view_get_lines): ditto
+	(gedit_view_line_numbers_expose): ditto
+
+	* gedit-view.h (gedit_view_show_line_numbers): new prototype
+	
+	* gedit-mdi.c (gedit_mdi_update_ui_according_to_preferences): call 
+	gedit_view_show_line_numbers
+
+	* gedit-prefs.[ch]: added the show_line_numbers setting
+
+	* dialogs/gedit-preferences-dialog.c : added a line numbers page
+
+	* dialogs/gedit-preferences-dialog.glade2: ditto
+
+	* dialogs/gedit-dialog-goto-line.c (goto_button_pressed): go to the 
+	right line number
+
+2002-01-11  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit2.[ch]: added flags gedit_close_x_button_pressed and
 	gedit_exit_button_pressed 
 
@@ -204,7 +225,7 @@
 
 2001-12-11  Paolo Maggi  <maggi@athena.polito.it>
 
-        * gedit-commands.c (gedit_cmd_help_about): fixed
+	* gedit-commands.c (gedit_cmd_help_about): fixed
 
 	* dialogs/gedit-preferences-dialog.c : Save page added (it still
         does nothing)
@@ -433,7 +454,7 @@
 
 	* gedit2.c (gedit_load_file_list): now calls gedit_file_open_from_stdin (NULL)
 
-2001-11-16  Carlos PerellÃ³ MarÃ­n <carlos@gnome-db.org>
+2001-11-16  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* gedit2.c: Added support to AM_GLIB_GNU_GETTEXT
 	* gedit-recent.c, gedit-utils.c, gedit-document.c, gedit-file.c:
@@ -443,6 +464,6 @@
 
 	* Started the port to GNOME 2.0
 
-2001-11-16  Carlos PerellÃ³ MarÃ­n <carlos@gnome-db.org>
+2001-11-16  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* ChangeLog: rolled over to ChangeLog-20011116.

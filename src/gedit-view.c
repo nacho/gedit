@@ -33,11 +33,15 @@
 #include "gedit-menus.h"
 #include "gedit-prefs.h"
 
+#define MIN_NUMBER_WINDOW_WIDTH 20
+
 struct _GeditViewPrivate
 {
 	GtkTextView *text_view;	
 
 	GeditDocument *document;
+
+	gboolean line_numbers_visible;
 };
 
 
@@ -47,7 +51,6 @@ static void gedit_view_finalize 	(GObject 	*object);
 
 
 static GtkVBoxClass *parent_class = NULL;
-
 
 GType
 gedit_view_get_type (void)
@@ -111,6 +114,183 @@ gedit_view_class_init (GeditViewClass *klass)
 	
 }
 
+/* This function is taken from gtk+/tests/testtext.c */
+static void
+gedit_view_get_lines (GtkTextView  *text_view,
+		      gint          first_y,
+		      gint          last_y,
+		      GArray       *buffer_coords,
+		      GArray       *numbers,
+		      gint         *countp)
+{
+	GtkTextIter iter;
+	gint count;
+	gint size;  
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_array_set_size (buffer_coords, 0);
+	g_array_set_size (numbers, 0);
+  
+	/* Get iter at first y */
+	gtk_text_view_get_line_at_y (text_view, &iter, first_y, NULL);
+
+	/* For each iter, get its location and add it to the arrays.
+	 * Stop when we pass last_y
+	*/
+	count = 0;
+  	size = 0;
+
+  	while (!gtk_text_iter_is_end (&iter))
+    	{
+		gint y, height;
+		gint line_num;
+      
+		gtk_text_view_get_line_yrange (text_view, &iter, &y, &height);
+
+		g_array_append_val (buffer_coords, y);
+		line_num = gtk_text_iter_get_line (&iter);
+		g_array_append_val (numbers, line_num);
+      	
+		++count;
+
+		if ((y + height) > last_y)
+			break;
+      
+		gtk_text_iter_forward_line (&iter);
+	}
+
+	*countp = count;
+}
+
+/* The original version of this function 
+ * is taken from gtk+/tests/testtext.c 
+ */
+static gint
+gedit_view_line_numbers_expose (GtkWidget      *widget,
+			        GdkEventExpose *event,
+			        GeditDocument  *doc)
+{
+	gint count;
+	GArray *numbers;
+	GArray *pixels;
+	gint first_y;
+	gint last_y;
+	gint i;
+	GdkWindow *left_win;
+	GdkWindow *right_win;
+	PangoLayout *layout;
+	GtkTextView *text_view;
+	GtkTextWindowType type;
+	GdkDrawable *target;
+  	gint layout_width;
+	gchar *str;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	text_view = GTK_TEXT_VIEW (widget);
+  
+	/* See if this expose is on the line numbers window */
+	left_win = gtk_text_view_get_window (text_view,
+        				     GTK_TEXT_WINDOW_LEFT);
+	right_win = gtk_text_view_get_window (text_view,
+					      GTK_TEXT_WINDOW_RIGHT);
+
+	if (event->window == left_win)
+	{
+		type = GTK_TEXT_WINDOW_LEFT;
+		target = left_win;
+  	}
+  	else if (event->window == right_win)
+    	{
+      		type = GTK_TEXT_WINDOW_RIGHT;
+      		target = right_win;
+    	}
+  	else
+		return FALSE;
+  
+	first_y = event->area.y;
+	last_y = first_y + event->area.height;
+
+	gtk_text_view_window_to_buffer_coords (text_view,
+					       type,
+					       0,
+					       first_y,
+					       NULL,
+					       &first_y);
+
+	gtk_text_view_window_to_buffer_coords (text_view,
+					       type,
+					       0,
+					       last_y,
+					       NULL,
+					       &last_y);
+
+	numbers = g_array_new (FALSE, FALSE, sizeof (gint));
+	pixels = g_array_new (FALSE, FALSE, sizeof (gint));
+  
+	gedit_view_get_lines (text_view,
+			      first_y,
+			      last_y,
+			      pixels,
+			      numbers,
+			      &count);
+  
+	layout = gtk_widget_create_pango_layout (widget, "");
+  
+	/* Set size */
+	str = g_strdup_printf ("%d", MAX (99, gedit_document_get_line_count (doc)));
+	pango_layout_set_text (layout, str, -1);
+	g_free (str);
+
+	pango_layout_get_pixel_size (layout, &layout_width, NULL);
+
+	gtk_text_view_set_border_window_size (GTK_TEXT_VIEW (text_view),
+                                        GTK_TEXT_WINDOW_LEFT,
+        				layout_width + 4);
+	
+	/* Draw fully internationalized numbers! */	
+
+	i = 0;
+	while (i < count)
+	{
+		gint pos;
+      
+		gtk_text_view_buffer_to_window_coords (text_view,
+						       type,
+						       0,
+						       g_array_index (pixels, gint, i),
+						       NULL,
+						       &pos);
+
+		str = g_strdup_printf ("%d", g_array_index (numbers, gint, i) + 1);
+
+		pango_layout_set_text (layout, str, -1);
+
+		gtk_paint_layout (widget->style,
+				  target,
+				  GTK_WIDGET_STATE (widget),
+				  FALSE,
+				  NULL,
+				  widget,
+				  NULL,
+				  2, pos,
+				  layout);
+
+		g_free (str);
+      
+		++i;
+	}
+
+	g_array_free (pixels, TRUE);
+	g_array_free (numbers, TRUE);
+  
+	g_object_unref (G_OBJECT (layout));
+
+	return TRUE;
+}
+
+
 static void 
 gedit_view_init (GeditView  *view)
 {
@@ -127,6 +307,7 @@ gedit_view_init (GeditView  *view)
 	view->priv = g_new0 (GeditViewPrivate, 1);
 
 	view->priv->document = NULL;	
+	view->priv->line_numbers_visible = FALSE;
 
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -169,6 +350,10 @@ gedit_view_init (GeditView  *view)
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view->priv->text_view));
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
                                              GTK_SHADOW_IN);
+
+	gtk_text_view_set_left_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
+	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
+
 /*
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
 */
@@ -187,6 +372,7 @@ gedit_view_init (GeditView  *view)
 	/* The same popup menu is attached to all views */
 	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);
 #endif 
+	
 }
 
 static void 
@@ -246,8 +432,11 @@ gedit_view_new (GeditDocument *doc)
 				      gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
 				      0, TRUE, 0.0, 1.0);
 
+	if (gedit_settings->show_line_numbers)
+		gedit_view_show_line_numbers (view, TRUE);
+			
 	gtk_widget_show_all (GTK_WIDGET (view));
-
+	
 	gedit_debug (DEBUG_VIEW, "END");
 
 	return view;
@@ -459,3 +648,46 @@ gedit_view_set_tab_size (GeditView* view, gint tab_size)
 	pango_tab_array_free (tab_array);
 
 }
+
+void
+gedit_view_show_line_numbers (GeditView* view, gboolean visible)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (visible)
+	{
+		if (!view->priv->line_numbers_visible)
+		{
+			gedit_debug (DEBUG_VIEW, "Show line numbers");
+
+			gtk_text_view_set_border_window_size (
+					GTK_TEXT_VIEW (view->priv->text_view),
+                                        GTK_TEXT_WINDOW_LEFT,
+        				MIN_NUMBER_WINDOW_WIDTH);
+
+			gtk_signal_connect (GTK_OBJECT (view->priv->text_view),
+                      		"expose_event",
+                      		GTK_SIGNAL_FUNC (gedit_view_line_numbers_expose),
+                      		view->priv->document);
+
+			view->priv->line_numbers_visible = visible;
+		}
+	}
+	else
+		if (view->priv->line_numbers_visible)
+		{
+			gedit_debug (DEBUG_VIEW, "Hide line numbers");
+
+			gtk_text_view_set_border_window_size (
+					GTK_TEXT_VIEW (view->priv->text_view),
+                                        GTK_TEXT_WINDOW_LEFT,
+        				0);
+
+			gtk_signal_disconnect_by_func (GTK_OBJECT (view->priv->text_view),
+				GTK_SIGNAL_FUNC (gedit_view_line_numbers_expose),
+                      		view->priv->document);
+
+			view->priv->line_numbers_visible = visible;
+		}
+}
+

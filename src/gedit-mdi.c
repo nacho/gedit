@@ -852,6 +852,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 			gedit_view_set_colors (v, &background, &text, &selection, &sel_text);
 			gedit_view_set_font (v, font);
 			gedit_view_set_wrap_mode (v, gedit_settings->wrap_mode);
+			gedit_view_show_line_numbers (v, gedit_settings->show_line_numbers);
 			views = views->next;
 		}
 		

@@ -68,6 +68,8 @@
 
 #define GEDIT_PREF_TAB_SIZE		"/tab-size"
 
+#define GEDIT_PREF_SHOW_LINE_NUMBERS	"/show-line-numbers"
+
 #define GEDIT_PREF_TOOLBAR_VISIBLE	 "/toolbar-visible"
 #define GEDIT_PREF_TOOLBAR_BUTTONS_STYLE "/toolbar-buttons-style"
 #define GEDIT_PREF_TOOLBAR_VIEW_TOOLTIPS "/toolbar-view-tooltips"
@@ -228,6 +230,11 @@ gedit_prefs_save_settings (void)
 	gconf_client_set_int (gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_TAB_SIZE,
 				gedit_settings->tab_size,
+			      	NULL);
+
+	gconf_client_set_bool (gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_SHOW_LINE_NUMBERS,
+			      	gedit_settings->show_line_numbers,
 			      	NULL);
 
 	gconf_client_set_bool (gedit_gconf_client,
@@ -466,6 +473,12 @@ gedit_prefs_load_settings (void)
 				gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_TAB_SIZE,
 			      	NULL);
+
+	/* Editor/Line numbers */
+	gedit_settings->show_line_numbers = gconf_client_get_bool (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_SHOW_LINE_NUMBERS,
+				NULL);
 
 	/* User Inferface/Toolbar */
 	gedit_settings->toolbar_visible = gconf_client_get_bool (
