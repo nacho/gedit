@@ -5,7 +5,8 @@ plugindir = $(libexecdir)/go/plugins
 plugin_PROGRAMS = ctag-plugin
 
 ctag_plugin_SOURCES = \
-	$(top_srcdir)/plugins/client/client.h \
+	$(top_srcdir)/plugins/client/client.h	\
+	ctag.h					\
 	ctag.c
 
 INCLUDES = -I$(includedir) 				\
