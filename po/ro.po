@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-01 06:46+0100\n"
+"POT-Creation-Date: 2005-03-03 12:21+0100\n"
 "PO-Revision-Date: 2005-03-02 21:03+0200\n"
 "Last-Translator: Dan Damian <dand@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -197,8 +197,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"Lista modulelor active. Conţine \"Locaţia\" modulelor active. "
-"Pentru a obţine \"Locaţia\" unui anumit modul, vezi fişierul de module gedit."
+"Lista modulelor active. Conţine \"Locaţia\" modulelor active. Pentru a "
+"obţine \"Locaţia\" unui anumit modul, vezi fişierul de module gedit."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -346,8 +346,8 @@ msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"Specifică fontul utilizat pentru corpul documentului la tipărire."
-"Acesta este un nume de font gnome-print şi va fi înlocuit de print_font_body_pango."
+"Specifică fontul utilizat pentru corpul documentului la tipărire.Acesta este "
+"un nume de font gnome-print şi va fi înlocuit de print_font_body_pango."
 
 #: data/gedit.schemas.in.h:69
 msgid ""
@@ -366,7 +366,8 @@ msgid ""
 msgstr ""
 "Specifică fontul utilizat pentru numerotarea liniilor la tipărire. Această "
 "setare are efect doar dacă opţiunea „Numerotează liniile la tipărire“ este "
-"diferită de zero. Numele de font este un nume de font gnome-print şi va fi înlocuit de print_font_numbers_pango."
+"diferită de zero. Numele de font este un nume de font gnome-print şi va fi "
+"înlocuit de print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:71
 msgid ""
@@ -383,9 +384,10 @@ msgid ""
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
-"Specifică fontul utilizat pentru antetele paginilor la tipărirea unui document. "
-"Această setare va avea efect doar dacă opţiunea „Tipăreşte antetul“ este activată."
-"Acesta este un nume de font gnome-print şi va fi înlocuit de print_font_header_pango."
+"Specifică fontul utilizat pentru antetele paginilor la tipărirea unui "
+"document. Această setare va avea efect doar dacă opţiunea „Tipăreşte "
+"antetul“ este activată.Acesta este un nume de font gnome-print şi va fi "
+"înlocuit de print_font_header_pango."
 
 #: data/gedit.schemas.in.h:73
 msgid ""
@@ -572,13 +574,13 @@ msgid "Question"
 msgstr "Întrebare"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:367
-#, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
+msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr "Dacă nu salvaţi, modificările din ultima secundă vor fi pierdute."
-"Dacă nu salvaţi, modificările din ultimele %ld secunde vor fi pierdute."
+msgstr[0] "Dacă nu salvaţi, modificările din ultima %ld secundă vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultimele %d secunde vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
@@ -586,44 +588,41 @@ msgid ""
 msgstr "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:382
-#, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
 "permanently lost."
+msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
-msgstr ""
-"Dacă nu salvaţi, modificările din ultimul minut şi o secundă vor fi pierdute."
-"Dacă nu salvaţi, modificările din ultimul minut şi %ld secunde vor fi "
-"pierdute."
+msgstr[0] "Dacă nu salvaţi, modificările din ultimul minut şi %ld secundă vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultimul minut şi %ld secunde vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
-#, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
+msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute."
-"Dacă nu salvaţi, modificările din ultimele %ld minute vor fi pierdute."
+msgstr[0] "Dacă nu salvaţi, modificările din ultimul %ld minut vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultimele %ld minute vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
+msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute definitiv."
-"Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute definitiv."
+msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
-#, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
 "permanently lost."
+msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
-msgstr ""
-"Dacă nu salvaţi, modificările din ultimul oră şi un minut vor fi pierdute."
-"Dacă nu salvaţi, modificările din ultima oră şi %d minute vor fi pierdute."
+msgstr[0] "Dacă nu salvaţi, modificările din ultima oră şi %d minut vor fi pierdute."
+msgstr[1] "Dacă nu salvaţi, modificările din ultima oră şi %d minute vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -631,14 +630,15 @@ msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Salvaţi modificările aduse documentului „%s” înainte de închidere?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
-#, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr ""
-"Există un document cu modificări nesalvate. Salvaţi modificările înainte de "
+msgstr[0] ""
+"Există %d document cu modificări nesalvate. Salvaţi modificările înainte de "
 "închidere?"
-"Există %d documente cu modificări nesalvate. Salvaţi modificările înainte de "
-"închidere?"
+msgstr[1] ""
+"Există %d documente cu modificări nesalvate. Salvaţi modificările "
+"înainte de închidere?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
@@ -1432,12 +1432,13 @@ msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Doriţi să reveniţi la ultima salvare a documentului „%s”?"
 
 #: gedit/gedit-file.c:537
-#, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
+msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr "Modificările aduse documentului în ultima secundă vor fi pierdute."
+msgstr[0] "Modificările aduse documentului în ultima %ld secundă vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultimele %d secunde vor fi pierdute."
 
 #: gedit/gedit-file.c:546
 msgid ""
@@ -1445,44 +1446,40 @@ msgid ""
 msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
 
 #: gedit/gedit-file.c:552
-#, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
 "permanently lost."
+msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
-msgstr ""
-"Modificările aduse documentului în ultimul minut şi o secundă vor fi "
-"pierdute."
-"Modificările aduse documentului în ultimul minut şi %ld secunde vor fi "
-"pierdute."
+msgstr[0] "Modificările aduse documentului în ultimul minut şi %ld secundă vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultimul minut şi %ld secunde vor fi pierdute."
 
 #: gedit/gedit-file.c:562
-#, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
+msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
-"Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
+msgstr[0] "Modificările aduse documentului în ultimul %ld minut vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
 
 #: gedit/gedit-file.c:577 gedit/gedit-file.c:598
-#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
+msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr "Modificările aduse documentului în ultima oră vor fi pierdute definitiv."
-"Modificările aduse documentului în ultimele %d ore vor fi pierdute definitiv."
+msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultimele %d ore vor fi pierdute."
 
 #: gedit/gedit-file.c:583
-#, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
 "permanently lost."
+msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr ""
-"Modificările aduse documentului în ultima oră şi un minut vor fi pierdute."
-"Modificările aduse documentului în ultima oră şi %d minute vor fi pierdute."
+msgstr[0] "Modificările aduse documentului în ultima oră şi %d minut vor fi pierdute."
+msgstr[1] "Modificările aduse documentului în ultima oră şi %d minute vor fi pierdute."
 
 #: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
@@ -1562,7 +1559,8 @@ msgstr "Nu am putut găsi fişierul „%s“"
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
 msgid "Please, check that you typed the location correctly and try again."
-msgstr "Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
+msgstr ""
+"Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1611,7 +1609,8 @@ msgstr "Accesul a fost interzis."
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
-"sunt prea multe fişiere deschise. Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+"sunt prea multe fişiere deschise. Vă rugăm închideţi o parte din fişierele "
+"deschise şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
@@ -1657,8 +1656,8 @@ msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Încercarea de autentificare a eşuat. Vă rugăm verificaţi corectitudinea locaţiei"
-"şi încercaţi din nou."
+"Încercarea de autentificare a eşuat. Vă rugăm verificaţi corectitudinea "
+"locaţieişi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:241
 msgid ""
@@ -1678,9 +1677,9 @@ msgid ""
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"gedit nu a putut detecta automat codarea caracterelor. Verificaţi ca nu cumva să "
-"încercaţi să deschideţi un fişier binar şi încercaţi din nou selectând o codare în "
-"dialogul „Deschide...“ (sau „Deschide locaţia...“)"
+"gedit nu a putut detecta automat codarea caracterelor. Verificaţi ca nu "
+"cumva să încercaţi să deschideţi un fişier binar şi încercaţi din nou "
+"selectând o codare în dialogul „Deschide...“ (sau „Deschide locaţia...“)"
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
 #, c-format
@@ -1702,8 +1701,8 @@ msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"Fişierul conţine date într-un format invalid. Probabil încercaţi să deschideţi "
-"un fişier binar."
+"Fişierul conţine date într-un format invalid. Probabil încercaţi să "
+"deschideţi un fişier binar."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1718,8 +1717,7 @@ msgstr "Nu am putut restaura fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:399
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"gedit nu poate găsi fişierul. Probabil a fost şters de curând."
+msgstr "gedit nu poate găsi fişierul. Probabil a fost şters de curând."
 
 #: gedit/gedit-io-error-dialogs.c:449
 msgid ""
@@ -1733,15 +1731,16 @@ msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Nu este suficientă memorie liberă. Vă rugăm închideţi o parte din aplicaţiile pornite "
-"şi încercaţi din nou."
+"Nu este suficientă memorie liberă. Vă rugăm închideţi o parte din "
+"aplicaţiile pornite şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Numele gazdei este gol. Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
+"Numele gazdei este gol. Vă rugăm verificaţi dacă setările proxy sunt corecte "
+"şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
@@ -1752,7 +1751,8 @@ msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"Fişierul conţine date invalide UTF-8. Probabil încercaţi să restauraţi un fişier binar."
+"Fişierul conţine date invalide UTF-8. Probabil încercaţi să restauraţi un "
+"fişier binar."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
@@ -1800,8 +1800,7 @@ msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Nu este destul spaţiu pe disc. Eliberaţi spaţiu pe disc şi încercaţi "
-"din nou."
+"Nu este destul spaţiu pe disc. Eliberaţi spaţiu pe disc şi încercaţi din nou."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -2354,15 +2353,17 @@ msgstr "Codarea „%s” specificată nu este validă\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr "Fişierul pe care doriţi să îl deschideţi conţine o secvenţă de octeţi invalidă."
+msgstr ""
+"Fişierul pe care doriţi să îl deschideţi conţine o secvenţă de octeţi "
+"invalidă."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
-"gedit nu a putut să determine automat codarea fişierului pe care doriţi "
-"să îl deschideţi."
+"gedit nu a putut să determine automat codarea fişierului pe care doriţi să "
+"îl deschideţi."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2538,7 +2539,8 @@ msgstr "Salvează o copie"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Salvează o copie a documentului curent la o locaţie locală sau la distanţă."
+msgstr ""
+"Salvează o copie a documentului curent la o locaţie locală sau la distanţă."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -4602,6 +4604,88 @@ msgid "_Use custom format"
 msgstr "_Utilizează un format personalizat"
 
 #~ msgid ""
+#~ "If you don't save, changes from the last %ld second will be permanently "
+#~ "lost.If you don't save, changes from the last %ld seconds will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Dacă nu salvaţi, modificările din ultima secundă vor fi pierdute.Dacă nu "
+#~ "salvaţi, modificările din ultimele %ld secunde vor fi pierdute."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last minute and %ld second will be "
+#~ "permanently lost.If you don't save, changes from the last minute and %ld "
+#~ "seconds will be permanently lost."
+#~ msgstr ""
+#~ "Dacă nu salvaţi, modificările din ultimul minut şi o secundă vor fi "
+#~ "pierdute.Dacă nu salvaţi, modificările din ultimul minut şi %ld secunde "
+#~ "vor fi pierdute."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %ld minute will be permanently "
+#~ "lost.If you don't save, changes from the last %ld minutes will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute.Dacă nu "
+#~ "salvaţi, modificările din ultimele %ld minute vor fi pierdute."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last hour will be permanently lost.If "
+#~ "you don't save, changes from the last %d hours will be permanently lost."
+#~ msgstr ""
+#~ "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute definitiv."
+#~ "Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute "
+#~ "definitiv."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last hour and %d minute will be "
+#~ "permanently lost.If you don't save, changes from the last hour and %d "
+#~ "minutes will be permanently lost."
+#~ msgstr ""
+#~ "Dacă nu salvaţi, modificările din ultimul oră şi un minut vor fi pierdute."
+#~ "Dacă nu salvaţi, modificările din ultima oră şi %d minute vor fi pierdute."
+
+#~ msgid ""
+#~ "Changes made to the document in the last %ld second will be permanently "
+#~ "lost.Changes made to the document in the last %ld seconds will be "
+#~ "permanently lost."
+#~ msgstr "Modificările aduse documentului în ultima secundă vor fi pierdute."
+
+#~ msgid ""
+#~ "Changes made to the document in the last minute and %ld second will be "
+#~ "permanently lost.Changes made to the document in the last minute and %ld "
+#~ "seconds will be permanently lost."
+#~ msgstr ""
+#~ "Modificările aduse documentului în ultimul minut şi o secundă vor fi "
+#~ "pierdute.Modificările aduse documentului în ultimul minut şi %ld secunde "
+#~ "vor fi pierdute."
+
+#~ msgid ""
+#~ "Changes made to the document in the last %ld minute will be permanently "
+#~ "lost.Changes made to the document in the last %ld minutes will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Modificările aduse documentului în ultimul minut vor fi pierdute."
+#~ "Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
+
+#~ msgid ""
+#~ "Changes made to the document in the last hour will be permanently lost."
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr ""
+#~ "Modificările aduse documentului în ultima oră vor fi pierdute definitiv."
+#~ "Modificările aduse documentului în ultimele %d ore vor fi pierdute "
+#~ "definitiv."
+
+#~ msgid ""
+#~ "Changes made to the document in the last hour and %d minute will be "
+#~ "permanently lost.Changes made to the document in the last hour and %d "
+#~ "minutes will be permanently lost."
+#~ msgstr ""
+#~ "Modificările aduse documentului în ultima oră şi un minut vor fi pierdute."
+#~ "Modificările aduse documentului în ultima oră şi %d minute vor fi "
+#~ "pierdute."
+
+#~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
 #~ "changes. </span>"
 #~ msgstr ""
@@ -4633,15 +4717,6 @@ msgstr "_Utilizează un format personalizat"
 #~ msgid "Do_n't save"
 #~ msgstr "_Nu salva"
 
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
-#~ msgstr[1] ""
-#~ "Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute."
-
 #~ msgid "Body font picker"
 #~ msgstr "Font text"
 
@@ -4666,15 +4741,6 @@ msgstr "_Utilizează un format personalizat"
 #~ msgid "Push this button to select the font to be used to print line numbers"
 #~ msgstr ""
 #~ "Apasă acest buton pentru a selecta fontul utilizat la numerotarea liniilor"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
-#~ msgstr[1] ""
-#~ "Modificările aduse documentului în ultimele %d ore vor fi pierdute."
 
 #~ msgid ""
 #~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
