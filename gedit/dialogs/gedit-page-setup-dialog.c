@@ -489,7 +489,7 @@ setup_font_page (GeditPageSetupDialog *dlg)
 
 	gedit_utils_set_atk_name_description (dlg->body_fontpicker, _("Body font picker"),
 		_("Push this button to select the font to be used to print the body of the document"));
-	gedit_utils_set_atk_name_description (dlg->headers_fontpicker, _("Page heagers font picker"),
+	gedit_utils_set_atk_name_description (dlg->headers_fontpicker, _("Page headers font picker"),
 		_("Push this button to select the font to be used to print the page headers"));
 	gedit_utils_set_atk_name_description (dlg->numbers_fontpicker, _("Line numbers font picker"),
 		_("Push this button to select the font to be used to print line numbers"));
