@@ -1,4 +1,3 @@
-20920-49-1204910249-=21349-1203941-2=3049-21=30
 ----------------------------------------------------------------------
   gedit 0.7.1 ( We should bump the version to 0.7.9. Chema )
 ----------------------------------------------------------------------
@@ -16,12 +15,15 @@
     [X] pop a message or find a better way of letting the user know
 	that the text was not found
     [X] some windows are going under the main window. Very annoying.
-    [ ] replace is not setting the file as modified=TRUE
+    [ ] replace is not setting the file as modified=TRUE (neither the pluggins)    
     [X] rewrote count lines
     [X] rewrote goto lines
+[ ] use gedit_document_get_buffer in all the functions that are getting
+    the buffer by themselves. This will add an abstraction layer and will help
+    with the migration to the new text widget.
 [X] Fix the "Untitled" mess
 [X] Move the scrollbars before undo operations to speed up undo/redo
-[ ] Add todo levels and free the memory used by deep levels
+[X] Add todo levels and free the memory used by deep levels
 [X] Fix the speed problems !!!
 [X] There is still some problems with the "Untitled" docs when opening
     multiple views.
