@@ -3,12 +3,13 @@
 # Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999
 # Yuusuke Tahara <tahara@gnome.gr.jp>
 # Yukihiro Nakai <nakai@gnome.gr.jp>
+# Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit CVS20020615\n"
-"POT-Creation-Date: 2002-06-15 23:24+0900\n"
-"PO-Revision-Date: 2002-06-16 01:36+0900\n"
+"Project-Id-Version: gedit CVS20020709\n"
+"POT-Creation-Date: 2002-07-09 15:43+0900\n"
+"PO-Revision-Date: 2002-07-09 15:58+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +20,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "テキストファイルの編集"
 
-#: gedit.desktop.in.h:2
+#: gedit.desktop.in.h:2 src/gedit2.c:294
 msgid "Text Editor"
 msgstr "テキストエディタ"
 
@@ -283,9 +284,9 @@ msgstr ""
 "ワードカウントプラグインは現在のドキュメントを解析し単語，行，文字とスペース"
 "を含まない文字の数を測定してその結果を表示します．"
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
 #: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:568
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -309,7 +310,7 @@ msgstr "文字(スペース含む)"
 msgid "File Name"
 msgstr "ファイル名"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
 msgstr "行"
 
@@ -333,11 +334,11 @@ msgstr "ユーザ名を挿入(_N)"
 msgid "Insert the user name at the cursor position"
 msgstr "現在の位置にユーザ名を挿入します"
 
-#: plugins/sample/sample.c:160
+#: plugins/sample/sample.c:172
 msgid "User name"
 msgstr "ユーザ名"
 
-#: plugins/sample/sample.c:161
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
 msgstr "現在の位置にユーザ名を挿入します"
 
@@ -460,19 +461,19 @@ msgstr "日付/時間を挿入(_I)"
 msgid "Insert current date and time at the cursor position"
 msgstr "現在の位置に現在の日付と時間を挿入します"
 
-#: plugins/time/time.c:259
+#: plugins/time/time.c:271
 msgid "Available formats"
 msgstr "利用可能なフォーマット"
 
-#: plugins/time/time.c:300 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:312 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "日付/時間挿入プラグインの設定"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:565
 msgid "Insert Date/Time"
 msgstr "日付/時間を挿入"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:566
 msgid "Inserts current date and time at the cursor position."
 msgstr "現在の位置に現在の日付と時間を挿入します"
 
@@ -480,21 +481,21 @@ msgstr "現在の位置に現在の日付と時間を挿入します"
 msgid "Select the format to use when inserting date/time."
 msgstr "日付/時間を挿入する時に使うフォーマットを選択します"
 
-#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
+#: src/bonobo-mdi.c:517 src/bonobo-mdi.c:600 src/bonobo-mdi.c:1837
 #, c-format
 msgid "Activate %s"
-msgstr "%s を起動"
+msgstr "%s をアクティブにします"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
 msgstr "指定行へ移動..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
 msgstr "指定行へ移動(_G)"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "要求されたウィジェットはgoto-line.glade2内に見つかりませんでした\n"
 
@@ -544,7 +545,7 @@ msgid "Replace _All"
 msgstr "すべて置換(_A)"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:121
 #: src/gedit-ui.xml.h:101
 msgid "_Replace"
 msgstr "置換(_R)"
@@ -598,115 +599,117 @@ msgid "The selected file is not executable."
 msgstr "選択されたファイルは実行可能ではありません"
 
 #: src/dialogs/gedit-preferences-dialog.c:226
-msgid "Toolbar"
-msgstr "ツールバー"
-
-#: src/dialogs/gedit-preferences-dialog.c:227
-#: src/dialogs/gedit-preferences.glade2.h:38
-msgid "Status bar"
-msgstr "ステータスバー"
-
-#: src/dialogs/gedit-preferences-dialog.c:230
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "MDI"
-msgstr "MDI"
-
-#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Font & Colors"
 msgstr "フォントと色"
 
-#: src/dialogs/gedit-preferences-dialog.c:241
+#: src/dialogs/gedit-preferences-dialog.c:228
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr "タブ"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences-dialog.c:229
 #: src/dialogs/gedit-preferences.glade2.h:62
 msgid "Wrap mode"
 msgstr "折返しモード"
 
-#: src/dialogs/gedit-preferences-dialog.c:243
+#: src/dialogs/gedit-preferences-dialog.c:230
 #: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Line numbers"
 msgstr "行番号"
 
-#: src/dialogs/gedit-preferences-dialog.c:245
+#: src/dialogs/gedit-preferences-dialog.c:232
 #: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "保存"
 
-#: src/dialogs/gedit-preferences-dialog.c:246
+#: src/dialogs/gedit-preferences-dialog.c:233
 #: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
 msgid "Undo"
 msgstr "元に戻す"
 
-#: src/dialogs/gedit-preferences-dialog.c:254
+#: src/dialogs/gedit-preferences-dialog.c:241
 msgid "Page"
 msgstr "ページ"
 
-#: src/dialogs/gedit-preferences-dialog.c:256
+#: src/dialogs/gedit-preferences-dialog.c:243
 msgid "Fonts"
 msgstr "フォント"
 
-#: src/dialogs/gedit-preferences-dialog.c:263
+#: src/dialogs/gedit-preferences-dialog.c:250
 msgid "Editor"
 msgstr "エディタ"
 
-#: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/dialogs/gedit-preferences-dialog.c:251
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:309
 #: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "印刷"
 
-#: src/dialogs/gedit-preferences-dialog.c:266
-msgid "User interface"
-msgstr "ユーザインターフェース"
-
-#: src/dialogs/gedit-preferences-dialog.c:333
+#: src/dialogs/gedit-preferences-dialog.c:318
 msgid "Cat_egories:"
 msgstr "カテゴリ(_e):"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:340 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "設定"
 
-#: src/dialogs/gedit-preferences-dialog.c:574
+#: src/dialogs/gedit-preferences-dialog.c:579
 msgid "Categories"
 msgstr "カテゴリ"
 
-#: src/dialogs/gedit-preferences-dialog.c:906
+#: src/dialogs/gedit-preferences-dialog.c:809
 msgid "Push this button to select the font to be used by the editor"
 msgstr "エディタで使用するフォントを選択するにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:909
+#: src/dialogs/gedit-preferences-dialog.c:812
 msgid "Push this button to configure text color"
 msgstr "テキスト色の設定をするためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:911
+#: src/dialogs/gedit-preferences-dialog.c:814
 msgid "Push this button to configure background color"
 msgstr "背景色を設定するためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:913
+#: src/dialogs/gedit-preferences-dialog.c:816
 msgid ""
-"Push this button to configure color in which selected text should appear"
+"Push this button to configure the color in which the selected text should "
+"appear"
 msgstr "選択したテキスト色の設定をするためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:915
+#: src/dialogs/gedit-preferences-dialog.c:819
 msgid ""
-"Push this button to configure color in which selected text should be marked"
+"Push this button to configure the color in which the selected text should be "
+"marked"
 msgstr "マークしたテキスト色の設定をするためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:1313
+#: src/dialogs/gedit-preferences-dialog.c:1507
+#: src/dialogs/gedit-preferences-dialog.c:1509
+msgid "Courier 9"
+msgstr "Kochi Gothic 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1516
+#: src/dialogs/gedit-preferences-dialog.c:1518
+msgid "Helvetica 11"
+msgstr "Kochi Gothic 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1525
+#: src/dialogs/gedit-preferences-dialog.c:1527
+msgid "Helvetica 8"
+msgstr "Kochi Gothic 8"
+
+#: src/dialogs/gedit-preferences-dialog.c:1648
 msgid "Push this button to select the font to be used to print the body"
-msgstr "本文を印刷する時に使用するフォントを選択するためにはこのボタンを押します"
+msgstr ""
+"本文を印刷する時に使用するフォントを選択するためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:1315
+#: src/dialogs/gedit-preferences-dialog.c:1650
 msgid "Push this button to select the font to be used to print the headers"
-msgstr "ヘッダを印刷する時に使用するフォントを選択するためにはこのボタンを押します"
+msgstr ""
+"ヘッダを印刷する時に使用するフォントを選択するためにはこのボタンを押します"
 
-#: src/dialogs/gedit-preferences-dialog.c:1317
+#: src/dialogs/gedit-preferences-dialog.c:1652
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr "行番号を印刷する時に使用するフォントを選択するためにはこのボタンを押します"
+msgstr ""
+"行番号を印刷する時に使用するフォントを選択するためにはこのボタンを押します"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -768,6 +771,10 @@ msgstr "LOGO"
 #: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Left"
 msgstr "左"
+
+#: src/dialogs/gedit-preferences.glade2.h:17
+msgid "MDI"
+msgstr "MDI"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Modal"
@@ -841,6 +848,10 @@ msgstr "カーソル位置を表示(_p)"
 msgid "Show overwrite _mode"
 msgstr "上書きモードを表示(_m)"
 
+#: src/dialogs/gedit-preferences.glade2.h:38
+msgid "Status bar"
+msgstr "ステータスバー"
+
 #: src/dialogs/gedit-preferences.glade2.h:40
 msgid ""
 "The MDI (Multiple Document Interface) mode refers to the way more than one "
@@ -848,30 +859,39 @@ msgid ""
 "If you choose the Notebook mode, you may then decide where you want the tabs "
 "to appear in the gedit window."
 msgstr ""
-"MDI(複合ドキュメントインターフェース)モードはgedit内に複数のテキストドキュメントを表示させる方法のことです\n"
-"ノートモードを選択した場合，geditウィンドウのどこにタブを表示させるかを指定することができます"
+"MDI(複合ドキュメントインターフェース)モードはgedit内に複数のテキストドキュメ"
+"ントを表示させる方法のことです\n"
+"ノートモードを選択した場合，geditウィンドウのどこにタブを表示させるかを指定す"
+"ることができます"
 
 #: src/dialogs/gedit-preferences.glade2.h:42
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
-msgstr "フォントと色の設定ではエディタウィンドウ内で使用するフォントと色を選択できます"
+msgstr ""
+"フォントと色の設定ではエディタウィンドウ内で使用するフォントと色を選択できま"
+"す"
 
 #: src/dialogs/gedit-preferences.glade2.h:43
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
-msgstr "行番号の設定ではウィンドウの左側に行番号を表示させるかどうかを選択できます"
+msgstr ""
+"行番号の設定ではウィンドウの左側に行番号を表示させるかどうかを選択できます"
 
 #: src/dialogs/gedit-preferences.glade2.h:44
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
-msgstr "印刷フォントの設定ではドキュメントを印刷する時に使われるフォントを選択できます"
+msgstr ""
+"印刷フォントの設定ではドキュメントを印刷する時に使われるフォントを選択できま"
+"す"
 
 #: src/dialogs/gedit-preferences.glade2.h:45
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr "印刷ページの設定ではgeditがドキュメントを印刷する方法をカスタマイズすることができます"
+msgstr ""
+"印刷ページの設定ではgeditがドキュメントを印刷する方法をカスタマイズすることが"
+"できます"
 
 #: src/dialogs/gedit-preferences.glade2.h:46
 msgid "The save settings let you customize how gedit saves files."
@@ -881,7 +901,9 @@ msgstr "保存の設定ではgeditがファイルを保存する方法をカス�
 msgid ""
 "The status bar settings let you show or hide status bar and customize its "
 "appearance."
-msgstr "ステータスバーの設定ではステータスバーを表示するかどうかを決定したり外観をカスタマイズしたりできます"
+msgstr ""
+"ステータスバーの設定ではステータスバーを表示するかどうかを決定したり外観をカ"
+"スタマイズしたりできます"
 
 #: src/dialogs/gedit-preferences.glade2.h:48
 msgid "The tabs settings let you customize the tabs width."
@@ -891,7 +913,9 @@ msgstr "タブの設定ではタブの幅をカスタマイズできます"
 msgid ""
 "The toolbar settings let you show or hide toolbar and customize its "
 "appearance."
-msgstr "ツールバーの設定ではツールバーを表示するかどうかを決定したり外観をカスタマイズしたりできます"
+msgstr ""
+"ツールバーの設定ではツールバーを表示するかどうかを決定したり外観をカスタマイ"
+"ズしたりできます"
 
 #: src/dialogs/gedit-preferences.glade2.h:50
 msgid ""
@@ -1109,7 +1133,7 @@ msgid ""
 "This is the Plugin Manager. Plugins are extra pieces of software that extend "
 "gedit capabilities. From here, you can choose which plugins you want to have "
 "loaded."
-msgstr "これはプラグインマネージャです．プラグインとはgeditの機能を各町する追加ソフトウェアのことです．ここからどのプラグインを読み込むかを選択できます"
+msgstr "これはプラグインマネージャです．プラグインとはgeditの機能を拡張する追加ソフトウェアのことです．ここからどのプラグインを読み込むかを選択できます"
 
 #: src/dialogs/plugin-manager.glade2.h:5
 msgid "_Description"
@@ -1155,20 +1179,16 @@ msgstr "検索(_S): "
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "開きたいファイルの場所(URI)を入力して下さい:"
 
-#: src/gedit-commands.c:57
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr "まだ実装されていません"
 
-#: src/gedit-commands.c:340
+#: src/gedit-commands.c:339
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "文字列 \"%s\" は見つかりませんでした"
 
-#: src/gedit-commands.c:422
-msgid "Impossible to update gedit settings."
-msgstr "geditの設定を更新することは不可能です"
-
-#: src/gedit-commands.c:491
+#: src/gedit-commands.c:445
 msgid "translator_credits"
 msgstr ""
 "Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
@@ -1176,54 +1196,54 @@ msgstr ""
 "Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Akira TAGOH <tagoh@gnome.gr.jp>"
 
-#: src/gedit-commands.c:516
+#: src/gedit-commands.c:470
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:519
+#: src/gedit-commands.c:473
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "geditはGNOME用に作られた小型軽量のテキストエディタです"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:563 src/gedit-document.c:581
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:563 src/gedit-document.c:581
 msgid "Untitled"
 msgstr "名前無し"
 
-#: src/gedit-document.c:556 src/gedit-document.c:579
+#: src/gedit-document.c:569 src/gedit-document.c:616
 msgid "Invalid file name"
 msgstr "無効なファイル名です"
 
-#: src/gedit-document.c:700 src/gedit-document.c:806
+#: src/gedit-document.c:746 src/gedit-document.c:883
 msgid "Invalid UTF-8 data"
 msgstr "無効なUTF-8データです"
 
-#: src/gedit-document.c:1006
+#: src/gedit-document.c:1102
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%sからシンボリックリンクの情報を読み込むことができませんでした"
 
-#: src/gedit-document.c:1052
+#: src/gedit-document.c:1148
 msgid "The file has too many symbolic links."
 msgstr "ファイルはシンボリックリンクが多すぎます"
 
-#: src/gedit-document.c:1101
+#: src/gedit-document.c:1201
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "geditは書き込みモードで場所 %s を処理できません"
 
-#: src/gedit-document.c:1108
+#: src/gedit-document.c:1208
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "geditはこの種類の場所を書き込みモードで処理できません"
 
-#: src/gedit-document.c:1120
+#: src/gedit-document.c:1229
 msgid "Invalid filename."
 msgstr "無効なファイル名です"
 
-#: src/gedit-document.c:1198
+#: src/gedit-document.c:1307
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1231,22 +1251,24 @@ msgstr ""
 "ファイルを保存するための十分な空きディスクがありません\n"
 "ディスクスペースを空けてやり直してください"
 
-#: src/gedit-document.c:1203
+#: src/gedit-document.c:1312
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
-msgstr "ファイルを保存しようとしたディスクはファイルサイズの制限があります．小さいファイルを保存するかこの制限を取り除いて保存してください"
+msgstr ""
+"ファイルを保存しようとしたディスクはファイルサイズの制限があります．小さい"
+"ファイルを保存するかこの制限を取り除いて保存してください"
 
-#: src/gedit-document.c:1240
+#: src/gedit-document.c:1351
 msgid "Could not create a backup file."
 msgstr "バックアップファイルを作成できませんでした"
 
-#: src/gedit-document.c:1388
+#: src/gedit-document.c:1499
 msgid "It is not possible to revert an Untitled document"
 msgstr "無題のドキュメントを元には戻せません"
 
-#: src/gedit-file-selector-util.c:96
+#: src/gedit-file-selector-util.c:109
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1255,70 +1277,70 @@ msgstr ""
 "''%s''という名前のファイルはすでに存在しています\n"
 "保存しようとしているファイルで上書きしてもよろしいですか?"
 
-#: src/gedit-file-selector-util.c:104
+#: src/gedit-file-selector-util.c:117
 msgid "Do_n't replace"
 msgstr "置換しない(_n)"
 
-#: src/gedit-file-selector-util.c:484
+#: src/gedit-file-selector-util.c:497
 msgid "Select a filename to save"
 msgstr "保存するためのファイル名を選択"
 
-#: src/gedit-file.c:128
+#: src/gedit-file.c:150
 msgid "Open File ..."
 msgstr "ファイルを開く..."
 
-#: src/gedit-file.c:148 src/gedit-file.c:763
+#: src/gedit-file.c:168 src/gedit-file.c:789
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "ファイル '%s' を読み込みました"
 
-#: src/gedit-file.c:279 src/gedit-file.c:401
+#: src/gedit-file.c:300 src/gedit-file.c:421
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "ファイル '%s' を保存しています..."
 
-#: src/gedit-file.c:300 src/gedit-file.c:416
+#: src/gedit-file.c:321 src/gedit-file.c:436
 msgid "The document has not been saved."
 msgstr "ドキュメントは保存されていません"
 
-#: src/gedit-file.c:315 src/gedit-file.c:408
+#: src/gedit-file.c:336 src/gedit-file.c:428
 #, c-format
 msgid "File '%s' saved."
 msgstr "ファイル '%s' は保存されました"
 
-#: src/gedit-file.c:383
+#: src/gedit-file.c:403
 msgid "Save as ..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:574
+#: src/gedit-file.c:600
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "ファイル '%s' を戻しています..."
 
-#: src/gedit-file.c:587
+#: src/gedit-file.c:613
 msgid "The document has not been reverted."
 msgstr "ドキュメントは戻されません"
 
-#: src/gedit-file.c:597
+#: src/gedit-file.c:623
 #, c-format
 msgid "File '%s' reverted."
 msgstr "ファイル '%s' は戻されました"
 
-#: src/gedit-file.c:644
+#: src/gedit-file.c:670
 #, c-format
 msgid "Loading %d file..."
 msgstr "%d ファイルを読み込んでいます..."
 
-#: src/gedit-file.c:680
+#: src/gedit-file.c:706
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i ファイルを読み込みました"
 
-#: src/gedit-file.c:821
+#: src/gedit-file.c:847
 msgid "Could not read data from stdin."
 msgstr "標準入力からデータを読み込むことができませんでした"
 
-#: src/gedit-mdi.c:759
+#: src/gedit-mdi.c:828
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1328,23 +1350,23 @@ msgstr ""
 "ドキュメント \"%s\"の変更を保存してもよろしいですか? \n"
 "保存しない場合は変更が失われてしまいます"
 
-#: src/gedit-mdi.c:764
+#: src/gedit-mdi.c:833
 msgid "Do_n't save"
 msgstr "保存しない(_n)"
 
-#: src/gedit-mdi.c:783
+#: src/gedit-mdi.c:852
 msgid "_Don't quit"
 msgstr "終了しない(_D)"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:856
 msgid "_Don't close"
 msgstr "閉じない(_D)"
 
-#: src/gedit-mdi.c:877
+#: src/gedit-mdi.c:946
 msgid "(modified)"
 msgstr "(修正されました)"
 
-#: src/gedit-mdi.c:883
+#: src/gedit-mdi.c:952
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
 
@@ -1398,7 +1420,16 @@ msgstr "エラー: プラグイン '%s' を停止できません"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "エラー: プラグイン '%s' のUIを更新できません"
 
-#: src/gedit-print.c:178
+#: src/gedit-prefs-manager.c:319
+msgid "Cannot initialize preferences manager."
+msgstr "設定マネージャを初期化できません"
+
+#: src/gedit-prefs-manager.c:1511
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr ""
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1406,22 +1437,22 @@ msgstr ""
 "要求されたフォントの1つが見つからないので\n"
 "geditは印刷できません"
 
-#: src/gedit-print.c:354
+#: src/gedit-print.c:377
 #, c-format
 msgid "File: %s"
 msgstr "ファイル: %s"
 
 #. Print right text
-#: src/gedit-print.c:359
+#: src/gedit-print.c:384
 #, c-format
 msgid "Page: %d"
 msgstr "ページ: %d"
 
-#: src/gedit-print.c:492
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
 msgstr "gedit - 印刷プレビュー"
 
-#: src/gedit-print.c:566
+#: src/gedit-print.c:591
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1434,11 +1465,11 @@ msgstr ""
 
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
-msgstr "このアプリケーションについて"
+msgstr "このアプリケーションについての情報を表示します"
 
 #: src/gedit-ui.xml.h:2
 msgid "Add/Remove plugins"
-msgstr "プラグインの追加/削除"
+msgstr "プラグインの追加/削除を行います"
 
 #: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
@@ -1474,7 +1505,7 @@ msgstr "現在のファイルを閉じます"
 
 #: src/gedit-ui.xml.h:11
 msgid "Configure the application"
-msgstr "アプリケーションの設定"
+msgstr "アプリケーションの設定をします"
 
 #: src/gedit-ui.xml.h:12
 msgid "Copy"
@@ -1482,11 +1513,11 @@ msgstr "コピー"
 
 #: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
-msgstr "選択領域をコピー"
+msgstr "選択領域をコピーします"
 
 #: src/gedit-ui.xml.h:14
 msgid "Create a new document"
-msgstr "新規文書を作る"
+msgstr "新しいドキュメントを作成します"
 
 #: src/gedit-ui.xml.h:15
 msgid "Cu_t"
@@ -1506,7 +1537,7 @@ msgstr "切り取り"
 
 #: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
-msgstr "選択領域を切り取り"
+msgstr "選択領域を切り取ります"
 
 #: src/gedit-ui.xml.h:20
 msgid "Delete"
@@ -1514,7 +1545,7 @@ msgstr "削除"
 
 #: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
-msgstr "選択領域を切り取り"
+msgstr "選択されたテキストを削除します"
 
 #: src/gedit-ui.xml.h:22
 msgid "Dump XML"
@@ -1534,7 +1565,7 @@ msgstr "次を検索(_x)"
 
 #: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
-msgstr "指定した行にカーソルを移動"
+msgstr "指定した行にカーソルを移動します"
 
 #: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
@@ -1554,7 +1585,7 @@ msgstr "新規"
 
 #: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
-msgstr "ツールバーにアイコンだけを表示"
+msgstr "ツールバーにアイコンだけを表示します"
 
 #: src/gedit-ui.xml.h:33
 msgid "Open"
@@ -1570,7 +1601,7 @@ msgstr "場所を開く(_L)..."
 
 #: src/gedit-ui.xml.h:36
 msgid "Open a file"
-msgstr "ファイルを開く"
+msgstr "ファイルを開きます"
 
 #: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
@@ -1578,7 +1609,7 @@ msgstr "指定した場所からファイルを開きます"
 
 #: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
-msgstr "geditマニュアルを開く"
+msgstr "geditマニュアルを開きます"
 
 #: src/gedit-ui.xml.h:39
 msgid "Paste"
@@ -1586,7 +1617,7 @@ msgstr "貼り付け"
 
 #: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
-msgstr "クリップボードを貼り付け"
+msgstr "クリップボードを貼り付けます"
 
 #: src/gedit-ui.xml.h:41
 msgid "Plugin _Manager"
@@ -1618,7 +1649,7 @@ msgstr "印刷プレビュー"
 
 #: src/gedit-ui.xml.h:50
 msgid "Print the current file"
-msgstr "現在のファイルを印刷"
+msgstr "現在のファイルを印刷します"
 
 #: src/gedit-ui.xml.h:51
 msgid "Quit"
@@ -1726,7 +1757,7 @@ msgstr "ステータスバーに上書きモードを表示します"
 
 #: src/gedit-ui.xml.h:80
 msgid "Undo the last action"
-msgstr "最後にやったことを元に戻す"
+msgstr "最後にやったことを元に戻します"
 
 #: src/gedit-ui.xml.h:81
 msgid "_About"
@@ -1836,7 +1867,7 @@ msgstr "元に戻す(_U)"
 msgid "_View"
 msgstr "表示(_V)"
 
-#: src/gedit-utils.c:842
+#: src/gedit-utils.c:775
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1847,34 +1878,37 @@ msgstr ""
 "\n"
 "入力した場所が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:849
+#: src/gedit-utils.c:782
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "不正なデータを含んでいたためファイル \"%s\" を開くことができませんでした"
+msgstr ""
+"不正なデータを含んでいたためファイル \"%s\" を開くことができませんでした"
 
-#: src/gedit-utils.c:860
+#: src/gedit-utils.c:793
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "geditは場所 %s を扱うことができないのでファイル \"%s\" を開くことができませんでした"
+msgstr ""
+"geditは場所 %s を扱うことができないのでファイル \"%s\" を開くことができません"
+"でした"
 
-#: src/gedit-utils.c:868
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "ファイル \"%s\" を開くことができませんでした"
 
-#: src/gedit-utils.c:875
+#: src/gedit-utils.c:809
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "データ型式が無効なためファイル \"%s\" を開くことができませんでした"
 
-#: src/gedit-utils.c:882
+#: src/gedit-utils.c:816
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "ファイルが大きすぎるため \"%s\" を開くことができませんでした"
 
-#: src/gedit-utils.c:889
+#: src/gedit-utils.c:823
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1885,12 +1919,12 @@ msgstr ""
 "\n"
 "入力した場所が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:830
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "アクセスが拒否されたためファイル \"%s\" は開くことができませんでした"
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:837
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1901,7 +1935,7 @@ msgstr ""
 "\n"
 "開いたファイルを閉じてやり直してください"
 
-#: src/gedit-utils.c:911
+#: src/gedit-utils.c:845
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1912,14 +1946,16 @@ msgstr ""
 "\n"
 "入力した場所が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:852
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
-msgstr "ファイル \"%s\" を開くために利用できる十分なメモリがありません．動作中のアプリケーションを閉じてやり直してください"
+msgstr ""
+"ファイル \"%s\" を開くために利用できる十分なメモリがありません．動作中のアプ"
+"リケーションを閉じてやり直してください"
 
-#: src/gedit-utils.c:931
+#: src/gedit-utils.c:878
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1927,11 +1963,12 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
-"ファイル \"%s\" を開くことができませんでした．ホスト \"%s\" が見つからなかったのが原因です\n"
+"ファイル \"%s\" を開くことができませんでした．ホスト \"%s\" が見つからなかっ"
+"たのが原因です\n"
 "\n"
 "入力した場所とプロクシの設定が正しいかをチェックしてやり直してください"
 
-#: src/gedit-utils.c:944
+#: src/gedit-utils.c:893
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1942,7 +1979,7 @@ msgstr ""
 "\n"
 "入力した場所が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:951
+#: src/gedit-utils.c:900
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1953,7 +1990,7 @@ msgstr ""
 "\n"
 "プロクシの設定が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:958
+#: src/gedit-utils.c:907
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -1964,28 +2001,29 @@ msgstr ""
 "\n"
 "入力した場所が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:966
+#: src/gedit-utils.c:915
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
-"無効なUTF-8データを含んでいるためファイル \"%s\" は開くことができませんでした\n"
+"無効なUTF-8データを含んでいるためファイル \"%s\" は開くことができませんでし"
+"た\n"
 "\n"
 "バイナリファイルを開こうとしたのかもしれません"
 
-#: src/gedit-utils.c:1004
+#: src/gedit-utils.c:953
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "ファイル \"%s\" を開くことができませんでした"
 
-#: src/gedit-utils.c:1055
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "ファイル \"%s\" を保存することができませんでした"
 
-#: src/gedit-utils.c:1059
+#: src/gedit-utils.c:1008
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1996,7 +2034,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1061
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2007,40 +2045,41 @@ msgstr ""
 "\n"
 "それは最近削除されたのかもしれません"
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1068
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "データが破壊されていたためファイル \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1130
+#: src/gedit-utils.c:1079
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "geditは場所 %s を扱うことができないためファイル \"%s\" を元に戻せませんでした"
+msgstr ""
+"geditは場所 %s を扱うことができないためファイル \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
+#: src/gedit-utils.c:1085 src/gedit-utils.c:1225
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "ファイル \"%s\" を戻すことができませんでした"
 
-#: src/gedit-utils.c:1145
+#: src/gedit-utils.c:1095
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr "データ型式が無効なためファイル \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1152
+#: src/gedit-utils.c:1102
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "ファイルが大きすぎるため \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1159
+#: src/gedit-utils.c:1109
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "アクセスが拒否されたためファイル \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1166
+#: src/gedit-utils.c:1116
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2051,25 +2090,28 @@ msgstr ""
 "\n"
 "開いたファイルを閉じてやり直してください"
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1124
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
-msgstr "ファイル \"%s\" を戻すための利用できる十分なメモリがありません．動作中のアプリケーションを閉じてやり直してください"
+msgstr ""
+"ファイル \"%s\" を戻すための利用できる十分なメモリがありません．動作中のアプ"
+"リケーションを閉じてやり直してください"
 
-#: src/gedit-utils.c:1187
+#: src/gedit-utils.c:1150
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
-"ファイル \"%s\" を元に戻せませんでした．ホスト \"%s\" を発見できなかったのが原因です\n"
+"ファイル \"%s\" を元に戻せませんでした．ホスト \"%s\" を発見できなかったのが"
+"原因です\n"
 "\n"
 "プロクシの設定が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:1199
+#: src/gedit-utils.c:1164
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2080,12 +2122,12 @@ msgstr ""
 "\n"
 "プロクシの設定が正しいかチェックしてやり直してください"
 
-#: src/gedit-utils.c:1206
+#: src/gedit-utils.c:1171
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "ログインに失敗したためファイル \"%s\" を元に戻せませんでした"
 
-#: src/gedit-utils.c:1213
+#: src/gedit-utils.c:1178
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2096,78 +2138,86 @@ msgstr ""
 "\n"
 "バイナリファイルを元に戻そうとしたのかもしれません"
 
-#: src/gedit-utils.c:1222
+#: src/gedit-utils.c:1187
 msgid "It is not possible to revert an Untitled document."
 msgstr "無題のドキュメントを元には戻せません"
 
-#: src/gedit-view.c:896
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "%d 行, %d 列"
 
-#: src/gedit-view.c:934
+#: src/gedit-view.c:942
 msgid "  OVR"
 msgstr " 上書"
 
-#: src/gedit-view.c:936
+#: src/gedit-view.c:944
 msgid "  INS"
 msgstr " 挿入"
 
-#: src/gedit2.c:69
+#: src/gedit2.c:75
 msgid "Show mdi debugging messages."
 msgstr "MDIデバッグメッセージを表示"
 
-#: src/gedit2.c:72
+#: src/gedit2.c:78
 msgid "Show commands debugging messages."
 msgstr "コマンドのデバッグメッセージの表示"
 
-#: src/gedit2.c:75
+#: src/gedit2.c:81
 msgid "Show document debugging messages."
 msgstr "ドキュメントのデバッグメッセージの表示"
 
-#: src/gedit2.c:78
+#: src/gedit2.c:84
 msgid "Show file debugging messages."
 msgstr "ファイルのデバッグメッセージの表示"
 
-#: src/gedit2.c:81
+#: src/gedit2.c:87
 msgid "Show plugin debugging messages."
 msgstr "プラグインのデバッグメッセージの表示"
 
-#: src/gedit2.c:84
+#: src/gedit2.c:90
 msgid "Show prefs debugging messages."
 msgstr "設定のデバッグメッセージを表示"
 
-#: src/gedit2.c:87
+#: src/gedit2.c:93
 msgid "Show printing debugging messages."
 msgstr "印刷のデバッグメッセージの表示"
 
-#: src/gedit2.c:90
+#: src/gedit2.c:96
 msgid "Show search debugging messages."
 msgstr "検索のデバッグメッセージの表示"
 
-#: src/gedit2.c:93
+#: src/gedit2.c:99
 msgid "Show undo debugging messages."
 msgstr "元に戻すときのデバッグメッセージの表示"
 
-#: src/gedit2.c:96
+#: src/gedit2.c:102
 msgid "Show view debugging messages."
 msgstr "表示のデバッグメッセージの表示"
 
-#: src/gedit2.c:99
+#: src/gedit2.c:105
 msgid "Show recent debugging messages."
 msgstr "最近使ったファイルのデバッグメッセージの表示"
 
-#: src/gedit2.c:102
+#: src/gedit2.c:108
 msgid "Show session management debugging messages."
 msgstr "セッション管理のデバッグメッセージの表示"
 
-#: src/gedit2.c:105
+#: src/gedit2.c:111
 msgid "Turn on all debugging messages."
 msgstr "すべてのデバッグメッセージを表示"
 
-#: src/gedit2.c:164
-msgid "The GNOME text editor"
-msgstr "GNOMEテキストエディタ"
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr "既存のgeditを終了させる"
+
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "既存のgeditに新しいトップレベルウィンドウを作成する"
+
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr "既存のgeditに新しいドキュメントを作成する"
 
 #: src/gnome-recent-view-bonobo.c:189
 #, c-format
