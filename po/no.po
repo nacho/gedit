@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-01-26 14:15+0100\n"
-"PO-Revision-Date: 2002-01-26 14:15+0100\n"
+"POT-Creation-Date: 2002-01-28 23:40+0100\n"
+"PO-Revision-Date: 2002-01-28 23:46+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,17 +21,25 @@ msgstr "GNOME tekstredigering"
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/cvschangelog/cvschangelog.c:219
+#: plugins/cvschangelog/cvschangelog.c:35
+msgid "Open _CVS ChangeLogs"
+msgstr "Åpne _CVS-endringslogg"
+
+#: plugins/cvschangelog/cvschangelog.c:38
+msgid "Searches for ChangeLogs in the current document and opens them."
+msgstr "Søker etter ChangeLog i aktivt dokument og åpner dem."
+
+#: plugins/cvschangelog/cvschangelog.c:224
 msgid "CVS ChangeLog"
 msgstr "CVS endringslogg"
 
-#: plugins/cvschangelog/cvschangelog.c:220
+#: plugins/cvschangelog/cvschangelog.c:225
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
 "Et tillegg som åpner endringslogger (ChangeLog) som finnes i CVS-"
 "loggmeldinger."
 
-#: plugins/cvschangelog/cvschangelog.c:222
+#: plugins/cvschangelog/cvschangelog.c:227
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Opphavsrett © 2002 - James Willcox"
 
@@ -43,7 +51,7 @@ msgstr "_Ordteller"
 msgid "Get info on current document."
 msgstr "Hent informasjon om aktivt dokument."
 
-#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:403
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:354
 msgid "Word count"
 msgstr "Ordteller"
 
@@ -51,27 +59,35 @@ msgstr "Ordteller"
 msgid "Update"
 msgstr "Oppdatering"
 
-#: plugins/docinfo/docinfo.c:404
+#: plugins/docinfo/docinfo.c:355
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
-msgstr ""
+msgstr "Ordteller-tillegget analyserer aktivt dokument og bestemmer antall ord, linjer, tegn og tegn som ikke er tomme områder og viser resultatet."
 
-#: plugins/docinfo/docinfo.c:408 plugins/sample/sample.c:173
-#: plugins/shell_output/shell_output.c:456 plugins/time/time.c:554
+#: plugins/docinfo/docinfo.c:359 plugins/sample/sample.c:129
+#: plugins/shell_output/shell_output.c:407 plugins/time/time.c:503
 msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr ""
+msgstr "Opphavsrett © 2002 - Paolo Maggi"
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:36
+msgid "_Hello World"
+msgstr "_Hallo verden"
+
+#: plugins/sample/sample.c:39
+msgid "Prints Hello World."
+msgstr "Skriver Hallo verden."
+
+#: plugins/sample/sample.c:57
 msgid "Hello World "
 msgstr "Hallo verden "
 
-#: plugins/sample/sample.c:170
+#: plugins/sample/sample.c:126
 msgid "Hello World"
 msgstr "Hallo verden"
 
-#: plugins/sample/sample.c:171
+#: plugins/sample/sample.c:127
 msgid "Sample 'hello world' plugin."
 msgstr "Eksempel 'hallo verden' tillegg."
 
@@ -84,7 +100,7 @@ msgid "Insert the shell output in the current document."
 msgstr "Sett inn utskrift fra skallet i aktivt dokument."
 
 #: plugins/shell_output/shell_output.c:138
-#: plugins/shell_output/shell_output.c:452
+#: plugins/shell_output/shell_output.c:403
 msgid "Shell output"
 msgstr "Skallutskrift"
 
@@ -103,13 +119,12 @@ msgstr ""
 "Vennligst sett inn en gyldig skallkommando."
 
 #: plugins/shell_output/shell_output.c:269
-#, fuzzy
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"Skallkommandooppføringen er tom.\n"
+"Feil under lesing av skallkommando.\n"
 "\n"
 "Vennligst sett inn en gyldig skallkommando."
 
@@ -117,11 +132,11 @@ msgstr ""
 msgid "An error occurs while running the selected command."
 msgstr "En feil oppsto under kjøring av valgt kommando."
 
-#: plugins/shell_output/shell_output.c:453
+#: plugins/shell_output/shell_output.c:404
 msgid ""
 "Exucute a program and insert its output in the current document at the "
 "current cursor position"
-msgstr ""
+msgstr "Kjør et program og sett inn utdata i aktivt dokument ved nåværende markørposisjon."
 
 #: plugins/time/time.c:39
 msgid "_Insert Date/Time"
@@ -137,16 +152,15 @@ msgstr "Tilgjengelige formater"
 
 #: plugins/time/time.c:268
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett"
 
-#: plugins/time/time.c:551
+#: plugins/time/time.c:500
 msgid "Insert Date/Time"
 msgstr "Sett inn dato/klokkeslett"
 
-#: plugins/time/time.c:552
-#, fuzzy
+#: plugins/time/time.c:501
 msgid "Inserts the current date and time at the cursor position."
-msgstr "Setter inn dagens dato og tid"
+msgstr "Setter inn dagens dato og klokkeslett i markørposisjonen."
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, c-format
@@ -164,7 +178,7 @@ msgstr "_Gå til linje"
 
 #: src/dialogs/gedit-dialog-goto-line.c:140
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Kunne ikke finne nødvendige widgeter i goto-line.glade2.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:45
 msgid "Plugin"
@@ -184,7 +198,7 @@ msgstr "Forfatter(e)"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:450
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
+msgstr "Kunne ikke finne plugin-manager.glade2, reinstaller gedit.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:458
 msgid "Plugin Manager"
@@ -192,11 +206,11 @@ msgstr "Tilleggshåndterer"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:485
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
+msgstr "Ugyldig glade-fil for tilleggshåndterer -- ikke alle widgeter funnet.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:574
 msgid "Could not create the Plugin Manager dialog"
-msgstr ""
+msgstr "Kunne ikke opprette dialog for tilleggshåndterer"
 
 #: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 msgid "Replace"
@@ -497,44 +511,44 @@ msgid "Error, plugin '%s' does not contain init function."
 msgstr "Feil, tillegg «%s» inneholder ikke init-funksjonen."
 
 #: src/gedit-plugins-engine.c:179
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Feil tillegg inneholder ikke init_plugin funksjonen."
+msgstr "Feil. Tillegg «%s» inneholder ikke aktiveringsfunksjonen."
 
 #: src/gedit-plugins-engine.c:189
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Feil tillegg inneholder ikke init_plugin funksjonen."
+msgstr "Feil. Tillegg «%s» inneholder ikke deaktiveringsfunksjonen."
 
 #: src/gedit-plugins-engine.c:219
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Feil. Kunne ikke initiere tillegg «%s»"
 
 #: src/gedit-plugins-engine.c:227
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Feil. Tillegg «%s» spesifiserte ikke et navn"
 
 #: src/gedit-plugins-engine.c:302
-#, fuzzy, c-format
+#, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr "Ikke mulig å oppdatere innstillinger for gedit."
+msgstr "Feil. Uulig å lagre innstillinger for tillegg «%s»"
 
 #: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Feil. Umulig å aktivere tillegg «%s»"
 
 #: src/gedit-plugins-engine.c:397
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Feil. Umulig å deaktivere tillegg «%s»"
 
 #: src/gedit-plugins-engine.c:469
-#, fuzzy, c-format
+#, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "Ikke mulig å oppdatere innstillinger for gedit."
+msgstr "Feil. Umulig å oppdatere ui for tillegg «%s»"
 
 #: src/gedit-print.c:158
 msgid ""
@@ -924,16 +938,16 @@ msgstr "_Verktøy"
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/gedit-view.c:825
+#: src/gedit-view.c:824
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Kol. %d"
 
-#: src/gedit-view.c:863
+#: src/gedit-view.c:862
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:865
+#: src/gedit-view.c:864
 msgid "  INS"
 msgstr "  SET"
 
