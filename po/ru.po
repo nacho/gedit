@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-14 21:59+0000\n"
-"PO-Revision-Date: 2000-06-14 22:05+00:00\n"
+"POT-Creation-Date: 2000-06-15 14:24+0000\n"
+"PO-Revision-Date: 2000-06-15 14:25+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -61,8 +61,8 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:237
-#: src/print.c:546
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:238
+#: src/print.c:551
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -141,7 +141,7 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:536
+#: src/dialogs/dialog-prefs.c:549
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -181,13 +181,7 @@ msgstr "Введите номер строки, к которой вы хотите перейти."
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, NULL,
-#. NULL),
-#.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:210
+#: src/dialogs/prefs.glade.h:8
 msgid "Show Statusbar"
 msgstr "Показать строку состояния"
 
@@ -196,16 +190,16 @@ msgid "Show splitscreen"
 msgstr "Разделенный экран"
 
 #: src/dialogs/prefs.glade.h:10
+msgid "Display text on toolbar buttons"
+msgstr "Показывать текст на кнопках панели инструментов"
+
+#: src/dialogs/prefs.glade.h:11
 msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
-#: src/dialogs/prefs.glade.h:11
+#: src/dialogs/prefs.glade.h:12
 msgid "Enable Auto-indent"
 msgstr "Включить Автовыравнивание"
-
-#: src/dialogs/prefs.glade.h:12
-msgid "Enable Wordwrap"
-msgstr "Включить перевод строк"
 
 #: src/dialogs/prefs.glade.h:13
 msgid "General"
@@ -247,7 +241,7 @@ msgstr "Режим:"
 msgid "Notebook Tab Position: "
 msgstr "Положение ярлыков блокнота:"
 
-#: src/dialogs/prefs.glade.h:27 src/menus.c:327
+#: src/dialogs/prefs.glade.h:27 src/menus.c:228
 msgid "Undo"
 msgstr "Откат"
 
@@ -340,7 +334,7 @@ msgstr "Бумага"
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs/replace.glade.h:8 src/menus.c:347
+#: src/dialogs/replace.glade.h:8 src/menus.c:248
 msgid "Find"
 msgstr "Найти"
 
@@ -370,14 +364,23 @@ msgstr "Чувствительный к регистру"
 
 #. xgettext translators : RO = Read Only, it apears before
 #. the document "tab" in the mdi window like "R0 - file.txt"
-#: src/document.c:240
+#: src/document.c:241
 msgid "RO - "
 msgstr "Только чтение - "
 
-#: src/document.c:433
+#: src/document.c:434
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
+
+#: src/document.c:718
+msgid "This file does not end with a valid extension\n"
+msgstr "Этот файл заканчивается недопустимым расширением\n"
+
+#: src/document.c:726
+#, c-format
+msgid "The file %s was not found."
+msgstr "Файл %s не был найден."
 
 #: src/file.c:107
 #, c-format
@@ -533,7 +536,7 @@ msgstr "Открыть (переключить) .c/.h файл"
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:60 src/menus.c:306
+#: src/menus.c:60 src/menus.c:207
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
@@ -565,189 +568,144 @@ msgstr "Закрыть Все"
 msgid "Close All Open Files"
 msgstr "Закрыть все открытые файлы"
 
-#: src/menus.c:112
-msgid "Find _In Files..."
-msgstr "Поиск в файлах..."
-
-#: src/menus.c:113
-msgid "Find text in all open files"
-msgstr "Поиск текста во всех открытых файлах"
-
-#: src/menus.c:126
+#: src/menus.c:118
 msgid "Goto _Line..."
 msgstr "Перейти к строке..."
 
-#: src/menus.c:127
+#: src/menus.c:119
 msgid "Go to a specific line number"
 msgstr "Перейти к строке с указанным номером"
 
-#: src/menus.c:136
+#: src/menus.c:129
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/menus.c:137
+#: src/menus.c:130
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/menus.c:139
+#: src/menus.c:132
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/menus.c:140
+#: src/menus.c:133
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:162
-msgid "_Top"
-msgstr "Сверху"
-
-#: src/menus.c:163
-msgid "Put the document tabs at the top"
-msgstr "Поместить закладки документов сверху"
-
-#: src/menus.c:168
-msgid "_Bottom"
-msgstr "Снизу"
-
-#: src/menus.c:169
-msgid "Put the document tabs at the bottom"
-msgstr "Поместить закладки документов снизу"
-
-#: src/menus.c:174
-msgid "_Left"
-msgstr "Слева"
-
-#: src/menus.c:175
-msgid "Put the document tabs on the left"
-msgstr "Поместить закладки документов слева"
-
-#: src/menus.c:180
-msgid "_Right"
-msgstr "Справа"
-
-#: src/menus.c:181
-msgid "Put the document tabs on the right"
-msgstr "Поместить закладки документов справа"
-
-#: src/menus.c:189
-msgid "Toggle the presence of the document tabs"
-msgstr "Переключить закладки документа"
-
-#: src/menus.c:211
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr "Включение/Отключение строки состояния внизу этого окна приложения."
-
-#: src/menus.c:290 src/plugin.c:111 src/plugin.c:201
+#: src/menus.c:183 src/plugin.c:114 src/plugin.c:210
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/menus.c:306
+#: src/menus.c:193
+msgid "_Documents"
+msgstr "Документы"
+
+#: src/menus.c:207
 msgid "New"
 msgstr "Новый"
 
-#: src/menus.c:310
+#: src/menus.c:211
 msgid "Open"
 msgstr "Открыть"
 
-#: src/menus.c:310
+#: src/menus.c:211
 msgid "Open a file"
 msgstr "Открыть файл"
 
-#: src/menus.c:314
+#: src/menus.c:215
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/menus.c:314
+#: src/menus.c:215
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: src/menus.c:318
+#: src/menus.c:219
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/menus.c:318
+#: src/menus.c:219
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: src/menus.c:322
+#: src/menus.c:223
 msgid "Print"
 msgstr "Печать"
 
-#: src/menus.c:322
+#: src/menus.c:223
 msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
-#: src/menus.c:327
+#: src/menus.c:228
 msgid "Undo last operation"
 msgstr "Отмена последнего действия"
 
-#: src/menus.c:331
+#: src/menus.c:232
 msgid "Redo"
 msgstr "Возврат"
 
-#: src/menus.c:331
+#: src/menus.c:232
 msgid "Redo last operation"
 msgstr "Повтор отмененного действия"
 
-#: src/menus.c:335
+#: src/menus.c:236
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/menus.c:335
+#: src/menus.c:236
 msgid "Cut the selection"
 msgstr "Вырезать выделение"
 
-#: src/menus.c:339
+#: src/menus.c:240
 msgid "Copy"
 msgstr "Скопировать"
 
-#: src/menus.c:339
+#: src/menus.c:240
 msgid "Copy the selection"
 msgstr "Скопировать выделение"
 
-#: src/menus.c:343
+#: src/menus.c:244
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/menus.c:343
+#: src/menus.c:244
 msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
-#: src/menus.c:347
+#: src/menus.c:248
 msgid "Search for a string"
 msgstr "Поиск строки"
 
-#: src/menus.c:351 src/window.c:80
+#: src/menus.c:252
 msgid "Line"
 msgstr "Строка"
 
-#: src/menus.c:351
+#: src/menus.c:252
 msgid "Get the current and total lines"
 msgstr "Указать текущую строку и общее количество строк"
 
-#: src/menus.c:356
+#: src/menus.c:257
 msgid "Exit"
 msgstr "Выход"
 
-#: src/menus.c:356
+#: src/menus.c:257
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
-#: src/plugin.c:56
+#: src/plugin.c:59
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Ошибка, не удалось открыть файл модуля, %s"
 
-#: src/plugin.c:67
+#: src/plugin.c:70
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Ошибка, дополнение не содержит функции init_plugin."
 
-#: src/plugin.c:75
+#: src/plugin.c:77
 msgid "Error, init_plugin returned an error"
 msgstr "Ошибка, init_plugin вернула ошибку"
 
-#: src/plugin.c:101
+#: src/plugin.c:104
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
 
@@ -755,12 +713,12 @@ msgstr "Ошибка, дополнение еще используется"
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:202
+#: src/print.c:207
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:495 src/print.c:510
+#: src/print.c:500 src/print.c:515
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -769,7 +727,7 @@ msgstr ""
 "gedit: невозможно найти шрифт \"%s\".\n"
 "gedit: невозможно напечатать без установленного шрифта."
 
-#: src/print.c:803
+#: src/print.c:808
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -819,20 +777,3 @@ msgstr "Текст не найден."
 #: src/search.c:244
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Повторный поиск невозможен. Нет текстовой строки для поиска."
-
-#: src/window.c:79
-msgid "Filename"
-msgstr "Имя файла"
-
-#: src/window.c:81
-msgid "Contents"
-msgstr "Содержание"
-
-#: src/window.c:334
-msgid "This file does not end with a valid extension\n"
-msgstr "Этот файл заканчивается недопустимым расширением\n"
-
-#: src/window.c:342
-#, c-format
-msgid "The file %s was not found."
-msgstr "Файл %s не был найден."
