@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <locale.h>
 #include <string.h>
 
 #include <libgnome/libgnome.h>
