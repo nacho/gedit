@@ -1,3 +1,11 @@
+Mon Sep 13 19:51:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_mdi.c: (gE_document_destroy) Added code to free the undo/redo
+	  GLists and to free up the buffer string.
+	  
+	* I've also patched in code from Kosta Arvanitis, for his excellent 
+	  Find In Files feature. See his changelog entries below..
+
 Sun Sep 12 21:17:22 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/toolbar.h: Added Undo and Redo buttons.
@@ -89,7 +97,37 @@ Sat Sep 11 13:23:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 	* src/gE_prefs.c: (gE_save_settings) Save the value of mdi->tab_pos, not
 	  settings->tab_pos, as the settings one is no longer loaded on startup,
 	  so would reset the position back to 0 each time we quit.
+
+Fri Sep  12 1999 	Kosta Arvanitis <kosta@uvic.ca>
+
+	* src/gE_window.c (create_find_in_files_result_window)
+	Changed the look of the window. Added a diffrent button a slight change
+	to the layout. I think this looks better than what I had before. 	
 	
+	
+	*  src/gE_window.c 
+Fri Sep  11 1999 	Kosta Arvanitis <kosta@uvic.ca>
+
+	*  src/command.c Fixed a small bug in file_save_as_cb. 
+	
+	*  src/gE_window.c (create_find_in_files_result_window) Connected signal
+	"select row" to search_result_clist.
+	
+	*  src/search.c:  (gE_clist_data) New Struct.
+	Struct to hold data about each row in the clist. Used by clist callback.
+	
+	*  src/search.c:  (search_results_clist_insert) New Function.
+	Add items too the search_result_clist. Each row stores a gE_clist_data
+	struct containing its correspondin information.
+	
+	*  src/search/c:  (void search_result_clist_cb) New Function.
+	New callback for clist . Called when a user click on a row 
+	in the clist. Activates the file which was clicked and highlights line of 
+	text where contents are located.
+	
+	*  src/search.c:  (destroy_clist_data)  New Function.
+	Callback for when clist items are destoryed. Clears up memory.	
+
 Fri Sep  10 1999 	Kosta Arvanitis <kosta@uvic.ca>
 
 	* src/command.c:  (file_save_cb and file_save_all_cb) Re-added code to get

@@ -44,7 +44,7 @@ void count_lines_cb (GtkWidget *w, gpointer cbwindow);
 /* find in files functions */
 void find_in_files_cb (GtkWidget *widget, gpointer data);
 void remove_search_result_cb (GtkWidget *widget, gpointer data); 
-
+void search_result_clist_cb (GtkWidget *list, gpointer func_data);
 
 #ifdef __cplusplus
 }

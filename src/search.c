@@ -67,10 +67,33 @@ static void search_select            (gE_document *doc,
 static gint ask_replace ();
 static gint num_widechars	     (const gchar *str);
 
-/* find in files stuff */
+/* 
+ * find in files variable declarations  
+ */
 GtkWidget *find_in_files_dialog;
+
+typedef struct _gE_clist_data
+{
+  gchar 	*fname;
+  gchar		*contents;
+  gint 		line;
+  gint		index;
+  
+  
+} gE_clist_data;
+
+/* 
+ * find in files function declerations
+ */
 static GtkWidget* create_find_in_files_dialog();
 static void show_search_result_window();
+void search_results_clist_insert 
+	(
+	gchar 	*fname, 
+	gchar 	*contents,
+	gint 	line, 
+	gint 	index 
+	);
 static void find_in_files_dialog_button_cb 
 	(
 	GtkWidget 	*widget, 
@@ -82,6 +105,7 @@ static void search_for_text_in_files
 	gchar 		*text
 	);
 static GtkWidget* create_find_in_files_dialog();
+
 static gchar* get_line_as_text 
 	(
 	gE_view		*view, 
@@ -105,6 +129,13 @@ static void find_in_files_dialog_button_cb
 	);
 
 static void show_search_result_window();
+
+static void 
+destroy_clist_data
+( 
+	gpointer data
+);
+
 
 /* END. find in files stuff */
 
@@ -354,7 +385,7 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 void
 find_in_files_cb (GtkWidget *widget, gpointer data)
 {
-	
+
 	if (!find_in_files_dialog)
 	  find_in_files_dialog = create_find_in_files_dialog();
 
@@ -400,6 +431,27 @@ create_find_in_files_dialog()
 	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
 	
 	return dialog;
+}
+
+
+static int
+get_start_index_of_line
+(
+	gE_view		*view,
+	gint 		pos
+)
+{
+	gchar		*buffer;
+	
+	while ( pos > 0 )
+	{
+  	  buffer = gtk_editable_get_chars(GTK_EDITABLE(view->text), pos-1, pos);
+  	  pos--;
+	  if ( !strcmp(buffer, "\n") )
+	    return pos;
+	}
+	
+	return pos;
 }
 
 
@@ -454,9 +506,9 @@ find_in_file_search
 	gint 	i, 
 		textlen, 
 		counter = 0, 
-		line = 0;
+		line = 0,
+		index = 0;
 	gchar 	*buffer;
-	gchar 	*insert[3];
 	
 	textlen = gtk_text_get_length(GTK_TEXT(view->text));
 
@@ -476,11 +528,14 @@ find_in_file_search
 
 	  if ( search (GTK_EDITABLE(view->text), str, i, FALSE) ) 
 	  {
-	    insert[0] = g_strdup_printf ("%s", GNOME_MDI_CHILD(view->document)->name);
-	    insert[1] = g_strdup_printf ("%d", line); 
-	    insert[2] = get_line_as_text(view, i);
-	    gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
 
+	    search_results_clist_insert 
+	    	(
+	    		g_strdup_printf ("%s", GNOME_MDI_CHILD(view->document)->name), 
+	    		get_line_as_text(view, i),
+	    		line, 
+	    		get_start_index_of_line (view, i)
+	    	);
 	    counter++;
 	  }	 
 	  g_free (buffer);
@@ -500,9 +555,8 @@ search_for_text_in_files
 	gchar *text 
 )
 {
-	gchar 		*insert[3];
 	gE_document *doc;
-	gE_view 	*view;
+	gE_view 	*view = NULL;
 	gchar 		*fname;
 	int 		i, 
 			j = 0;
@@ -510,10 +564,7 @@ search_for_text_in_files
 
 	if (strlen(text) == 0)
 	{
-	  insert[0] = "Search Results";
-	  insert[1] = "0";
-	  insert[2] = "";
-	  gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
+	  search_results_clist_insert ("Total Matches", "", 0, -1);
 	  return;
 	}	
 
@@ -524,11 +575,8 @@ search_for_text_in_files
 	  j += find_in_file_search (view, text);
         }
 
-	  insert[0] = "Search Results";
-	  insert[1] = g_strdup_printf ("%d", j); 
-	  insert[2] = "";
-	  gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
-
+	
+	search_results_clist_insert ("Total Matches", "", j, -1);
 }
 
 
@@ -545,7 +593,7 @@ find_in_files_dialog_button_cb
 {
 	GtkWidget *entry;
 	gchar *entry_text;
-	
+	gE_view *view; 
 	switch(button)
 	{
 	  /* Search button */
@@ -568,8 +616,12 @@ find_in_files_dialog_button_cb
 				GTK_SIGNAL_FUNC (find_in_files_dialog_button_cb),
 				NULL);
 	    gnome_dialog_close (GNOME_DIALOG (find_in_files_dialog));
+	    view = GE_VIEW (mdi->active_view);
+	    gtk_window_set_focus (GTK_WINDOW(mdi->active_window),
+	    					view->text);
 	    break;
 	}	  
+
 }
 
 /*
@@ -588,12 +640,104 @@ show_search_result_window()
 void 
 remove_search_result_cb 
 (
-	GtkWidget *widget, 
+	GtkWidget 	*widget, 
+	gpointer 	data
+)
+{
+	gtk_button_set_relief ( GTK_BUTTON(widget), GTK_RELIEF_NONE);
+	gtk_widget_hide(search_result_window);
+} 
+
+
+void
+search_results_clist_insert 
+(
+	gchar 	*fname, 
+	gchar 	*contents,
+	gint 	line, 
+	gint 	index 
+)
+{
+	gchar 			*insert[3];
+	gE_clist_data 	*data;
+	
+	data = g_malloc0( sizeof( gE_clist_data ) );
+	
+	data->line = line;
+	data->index = index;
+	data->fname = insert[0] = fname;
+	insert[1] = g_strdup_printf ("%d", line); 
+	data->contents = insert[2] = contents;
+	
+	gtk_clist_append( (GtkCList *)search_result_clist, insert);	   	
+
+	line = GTK_CLIST (search_result_clist)->rows - 1;
+
+	gtk_clist_set_row_data_full ( GTK_CLIST(search_result_clist), line, data, 
+				destroy_clist_data ); 
+}	
+
+
+
+/*
+ * Callback when a user clicks on a item in the search_result_clist 
+ */
+void search_result_clist_cb
+(
+	GtkWidget *list, 
+	gpointer func_data
+)
+{
+	
+	gE_view			*view;
+	gE_document		*doc;
+	gE_clist_data	*data;
+	GList			*sel;
+	gchar			*title;
+	gint row = -1, i;
+
+	sel = GTK_CLIST(list)->selection;
+	
+        if (!sel)
+          return;
+          
+        row = (gint)sel->data;
+	
+        data = gtk_clist_get_row_data( GTK_CLIST(search_result_clist), row);
+        
+	if (data->index == -1)
+	  return;
+
+	for (i = 0; i < g_list_length (mdi->children); i++) 
+        {
+          doc = GE_DOCUMENT ( g_list_nth_data (mdi->children, i) );
+	  view = GE_VIEW ( g_list_nth_data(doc->views, 0) );
+            
+	  title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
+	  
+	  if ( !strcmp(title, data->fname) ||
+	  	!strcmp(title, g_strdup_printf("*%s",data->fname) ) ) 
+	  {
+	    gnome_mdi_set_active_view (mdi, (GtkWidget *)view);	    
+	    search_select (doc, data->contents, data->index, FALSE);
+	    break;
+	  }
+ 
+	}
+}
+
+void 
+destroy_clist_data
+( 
 	gpointer data
 )
 {
-	gtk_widget_hide(search_result_window);
-} 
+	if (data)
+	  g_free (data);
+}
+
+
+
 
 /* end find in files functions */
 

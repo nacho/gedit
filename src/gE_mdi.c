@@ -188,6 +188,15 @@ static void gE_document_destroy (GtkObject *obj)
 	if (doc->filename)
 	  g_free (doc->filename);
 	
+	g_free (doc->buf->str);
+	doc->buf = NULL;
+	
+	if (doc->undo)
+	  g_list_free (doc->undo);
+	
+	if (doc->redo)
+	  g_list_free (doc->redo);
+	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 	  (* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
 

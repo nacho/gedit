@@ -50,54 +50,73 @@ GtkWidget *search_result_clist;
 /* Prototype for setting the window icon */
 void gE_window_set_icon(GtkWidget *window, char *icon);
 
+
 /*
  *  Create the find in all files search result window
  *  but dont show it. packer is the widget to which it attaches too.
+ *
+ *  I know the code is a little ugly but its the idea that Im trying to get 
+ *  acrross. Cleaning up the code would be nice.
  */
 static GtkWidget*
 create_find_in_files_result_window ()
 {
-	GtkWidget *wnd, *btn, *hbox;
+	GtkWidget *wnd, *btn, *top, *frame, *image, *label, *hsep;
 	gchar *titles[] = {"Filename", "Line", "Contents"};
 	int i;
-
-	search_result_clist = gtk_clist_new_with_titles(3, titles);
 	
-	for (i = 0; i < 3; i++) {
-
+	search_result_clist = gtk_clist_new_with_titles(3, titles);
+	gtk_signal_connect(GTK_OBJECT(search_result_clist), 
+					"select_row",
+					GTK_SIGNAL_FUNC(search_result_clist_cb),
+					NULL);
+	for (i = 0; i < 3; i++) 
 	  gtk_clist_set_column_auto_resize ((GtkCList *)search_result_clist, i, TRUE);
-
-	}
 
 	wnd = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy ((GtkScrolledWindow *)wnd,
 								GTK_POLICY_NEVER,
 								GTK_POLICY_AUTOMATIC);
-
-
-	gtk_scrolled_window_add_with_viewport ( (GtkScrolledWindow *)wnd, 
-	search_result_clist);
-
+	gtk_scrolled_window_add_with_viewport ( GTK_SCROLLED_WINDOW(wnd),
+										search_result_clist); 
 	gtk_widget_show(search_result_clist);
 	gtk_widget_show(wnd);
 
+	btn = gtk_button_new();
 
-	hbox = gtk_hbox_new (FALSE, 0);
+	image = gnome_pixmap_new_from_file_at_size ("../xpm/tb_cancel.xpm", 15, 15);
+	
+	gtk_container_add (GTK_CONTAINER (btn), image);
 
-	btn = gtk_button_new_with_label ("x");
-
-	gtk_signal_connect (GTK_OBJECT(btn), "button_release_event",
+	gtk_button_set_relief ( GTK_BUTTON(btn), GTK_RELIEF_NONE);
+	
+	gtk_signal_connect (GTK_OBJECT(btn), "clicked",
 					GTK_SIGNAL_FUNC(remove_search_result_cb),
 					NULL);
 
-	gtk_box_pack_start (GTK_BOX (hbox), btn, FALSE, FALSE, 0);	
-
+	gtk_widget_show (image);
 	gtk_widget_show (btn);
+	
+			
+	frame = gtk_vbox_new (FALSE, 0);
+	top = gtk_hbox_new (FALSE, 0);	
+	label = gtk_label_new ( " Search Results " );
 
-	gtk_box_pack_start (GTK_BOX (hbox), wnd, TRUE, TRUE, 0);
+	gtk_label_set_justify ( GTK_LABEL(label), GTK_JUSTIFY_LEFT );
+	hsep = gtk_hseparator_new();
 
-	return hbox;
+	gtk_box_pack_start (GTK_BOX (top), label, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (top), hsep, TRUE, TRUE, 0);		 	
+	gtk_box_pack_start (GTK_BOX (top), btn, FALSE, TRUE, 0);	 	
+	
+	gtk_box_pack_start (GTK_BOX (frame), top, FALSE, FALSE, 0);	 	
+	gtk_box_pack_start (GTK_BOX (frame), wnd, TRUE, TRUE, 0);	 		
 
+	gtk_widget_show (hsep);
+	gtk_widget_show (label);
+	gtk_widget_show (top);
+
+	return frame;
 }
 
 
@@ -139,9 +158,9 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	/* find in files result window  dont show it.*/
 	search_result_window = create_find_in_files_result_window();
 
-	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window, TRUE, TRUE, 0); 
 
-	gtk_widget_hide(search_result_window);
+	/* gtk_widget_hide(search_result_window); */
 
 
 	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
