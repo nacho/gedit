@@ -78,6 +78,10 @@ static void 		gedit_prefs_manager_right_margin_changed (GConfClient *client,
 								  guint cnxn_id, 
 								  GConfEntry *entry, 
 								  gpointer user_data);
+static void 		gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
+								  guint cnxn_id, 
+								  GConfEntry *entry, 
+								  gpointer user_data);
 static void 		gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 								      guint cnxn_id, 
 								      GConfEntry *entry, 
@@ -150,6 +154,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_RIGHT_MARGIN_DIR,
 				gedit_prefs_manager_right_margin_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_CURRENT_LINE_DIR,
+				gedit_prefs_manager_hl_current_line_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -670,6 +679,50 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 		}
 	}
 }
+
+static void 
+gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	g_print ("Pippo");
+	if (strcmp (entry->key, GPM_HIGHLIGHT_CURRENT_LINE) == 0)
+	{
+		gboolean hl;
+			
+		GList *children;
+		g_print ("Pluto");
+
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			hl = gconf_value_get_bool (entry->value);	
+		else
+			hl = GPM_DEFAULT_HIGHLIGHT_CURRENT_LINE;
+	
+		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+		while (children != NULL)
+		{
+			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+			while (views != NULL)
+			{
+				GtkSourceView *v = GTK_SOURCE_VIEW (
+						gedit_view_get_gtk_text_view (GEDIT_VIEW (views->data)));
+			
+				gtk_source_view_set_highlight_current_line (v, hl);
+			
+				views = views->next;
+			}
+		
+			children = children->next;
+		}
+	}
+}
+
 
 static void 
 gedit_prefs_manager_auto_indent_changed (GConfClient *client,

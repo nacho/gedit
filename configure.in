@@ -68,12 +68,12 @@ AC_SUBST(PSPELL_LIBS)
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(GEDIT, glib-2.0 >= 2.6.0          \
-                         gtk+-2.0 >= 2.6.0          \
-                         gtksourceview-1.0 >= 1.1.1 \
-                         libgnomeui-2.0 >= 2.6.0    \
-                         libglade-2.0 >= 2.4.0      \
-                         eel-2.0 >= 2.6.0           \
+PKG_CHECK_MODULES(GEDIT, glib-2.0 >= 2.6.0           \
+                         gtk+-2.0 >= 2.6.0           \
+                         gtksourceview-1.0 >= 1.1.90 \
+                         libgnomeui-2.0 >= 2.6.0     \
+                         libglade-2.0 >= 2.4.0       \
+                         eel-2.0 >= 2.6.0            \
 			 libgnomeprintui-2.2 >= 2.6.0)
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)

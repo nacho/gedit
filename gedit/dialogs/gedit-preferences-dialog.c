@@ -102,6 +102,9 @@ struct _GeditPreferencesDialog
 	
 	/* Line numbers */
 	GtkWidget	*display_line_numbers_checkbutton;
+
+	/* Highlight current line */
+	GtkWidget	*highlight_current_line_checkbutton;
 	
 	/* Right margin */
 	GtkWidget	*right_margin_checkbutton;
@@ -411,6 +414,16 @@ display_line_numbers_checkbutton_toggled (GtkToggleButton        *button,
 	gedit_prefs_manager_set_display_line_numbers (gtk_toggle_button_get_active (button));
 }
 
+static void
+highlight_current_line_checkbutton_toggled (GtkToggleButton        *button,
+					  GeditPreferencesDialog *dlg)
+{
+	g_return_if_fail (button == 
+			GTK_TOGGLE_BUTTON (dlg->highlight_current_line_checkbutton));
+
+	gedit_prefs_manager_set_highlight_current_line (gtk_toggle_button_get_active (button));
+}
+
 static gboolean split_button_state = TRUE;
 
 static void
@@ -494,6 +507,9 @@ setup_view_page (GeditPreferencesDialog *dlg)
 	/* Set initial state */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->display_line_numbers_checkbutton),
 				gedit_prefs_manager_get_display_line_numbers ());
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->highlight_current_line_checkbutton),
+				gedit_prefs_manager_get_highlight_current_line ());
 
 	wrap_mode = gedit_prefs_manager_get_wrap_mode ();
 	switch (wrap_mode )
@@ -534,6 +550,9 @@ setup_view_page (GeditPreferencesDialog *dlg)
 	gtk_widget_set_sensitive (dlg->display_line_numbers_checkbutton,
 				  gedit_prefs_manager_display_line_numbers_can_set ());
 
+	gtk_widget_set_sensitive (dlg->highlight_current_line_checkbutton,
+				  gedit_prefs_manager_highlight_current_line_can_set ());
+
 	wrap_mode_can_set = gedit_prefs_manager_wrap_mode_can_set ();
 
 	gtk_widget_set_sensitive (dlg->wrap_text_checkbutton, 
@@ -553,6 +572,9 @@ setup_view_page (GeditPreferencesDialog *dlg)
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (dlg->display_line_numbers_checkbutton), "toggled", 
 			  G_CALLBACK (display_line_numbers_checkbutton_toggled), 
+			  dlg);
+	g_signal_connect (G_OBJECT (dlg->highlight_current_line_checkbutton), "toggled", 
+			  G_CALLBACK (highlight_current_line_checkbutton_toggled), 
 			  dlg);
 	g_signal_connect (G_OBJECT (dlg->wrap_text_checkbutton), "toggled", 
 			  G_CALLBACK (wrap_mode_checkbutton_toggled), 
@@ -1249,6 +1271,8 @@ get_preferences_dialog (GtkWindow *parent)
 
 	dialog->dialog = glade_xml_get_widget (gui, "preferences_dialog");
 	dialog->display_line_numbers_checkbutton = glade_xml_get_widget (gui, "display_line_numbers_checkbutton");
+	dialog->highlight_current_line_checkbutton = glade_xml_get_widget (gui, "highlight_current_line_checkbutton");
+
 	dialog->wrap_text_checkbutton = glade_xml_get_widget (gui, "wrap_text_checkbutton");
 	dialog->split_checkbutton = glade_xml_get_widget (gui, "split_checkbutton");
 
@@ -1303,6 +1327,7 @@ get_preferences_dialog (GtkWindow *parent)
 
 	if (!dialog->dialog ||
 	    !dialog->display_line_numbers_checkbutton ||
+	    !dialog->highlight_current_line_checkbutton ||
 	    !dialog->wrap_text_checkbutton ||
 	    !dialog->split_checkbutton ||
 	    !dialog->default_font_checkbutton ||

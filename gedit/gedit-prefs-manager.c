@@ -1201,6 +1201,11 @@ gedit_prefs_manager_shown_in_menu_encodings_can_set (void)
 
 }
 
+/* Highlight current line */
+DEFINE_BOOL_PREF (highlight_current_line,
+		  GPM_HIGHLIGHT_CURRENT_LINE,
+		  GPM_DEFAULT_HIGHLIGHT_CURRENT_LINE)
+
 /* Display Right Margin */
 DEFINE_BOOL_PREF (display_right_margin,
 		  GPM_DISPLAY_RIGHT_MARGIN,

@@ -236,11 +236,9 @@ gedit_view_init (GeditView  *view)
 	
 	g_object_set (G_OBJECT (view->priv->text_view), 
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
-		      "margin", gedit_prefs_manager_get_right_margin_position (), 
-		      NULL);
-	
-	g_object_set (G_OBJECT (view->priv->text_view),
-		      "smart-home-end", FALSE,
+		      "margin", gedit_prefs_manager_get_right_margin_position (),
+		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (), 
+		      "smart_home_end", FALSE,
 		      NULL);
 
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
