@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-07-16 11:06+0200\n"
-"PO-Revision-Date: 2002-07-16 11:07+0200\n"
+"POT-Creation-Date: 2002-07-21 10:48+0200\n"
+"PO-Revision-Date: 2002-07-21 10:54+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "gedit automatiseringsfabrikk"
 msgid "Edit text files"
 msgstr "Rediger tekstfiler"
 
-#: data/gedit.desktop.in.h:2 src/gedit2.c:294
+#: data/gedit.desktop.in.h:2 src/gedit2.c:297
 msgid "Text Editor"
 msgstr "Tekstredigering"
 
@@ -1472,6 +1472,14 @@ msgstr "Kjartan Maraas"
 msgid "gedit"
 msgstr "gedit"
 
+#: src/gedit-commands.c:463
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
+msgstr ""
+"© 1998-2000 Evan Lawrence og Alex Robert\n"
+"© 2000-2002 Chema Celorio og Paolo Maggi"
+
 #: src/gedit-commands.c:465
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit er en liten lettvekt tekst editor for GNOME"
@@ -1489,33 +1497,33 @@ msgstr "Navnløs"
 msgid "Invalid file name"
 msgstr "Ugyldig filnavn"
 
-#: src/gedit-document.c:756 src/gedit-document.c:896
+#: src/gedit-document.c:756 src/gedit-document.c:914
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: src/gedit-document.c:1117
+#: src/gedit-document.c:1146
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kunne ikke lese informasjon om symbolsk lenke %s"
 
-#: src/gedit-document.c:1163
+#: src/gedit-document.c:1192
 msgid "The file has too many symbolic links."
 msgstr "Filen har for mange symbolske lenker."
 
-#: src/gedit-document.c:1217
+#: src/gedit-document.c:1246
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
 
-#: src/gedit-document.c:1224
+#: src/gedit-document.c:1253
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikke håndtere denne typen lokasjon i skrivemodus."
 
-#: src/gedit-document.c:1245
+#: src/gedit-document.c:1274
 msgid "Invalid filename."
 msgstr "Ugyldig filnavn."
 
-#: src/gedit-document.c:1358
+#: src/gedit-document.c:1387
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1523,7 +1531,7 @@ msgstr ""
 "Det er ikke nok plass på disken til å lagre filen.\n"
 "Vennligst frigjør plass og prøv igjen."
 
-#: src/gedit-document.c:1363
+#: src/gedit-document.c:1392
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1533,11 +1541,11 @@ msgstr ""
 "Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
 "denne begrensningen."
 
-#: src/gedit-document.c:1402
+#: src/gedit-document.c:1431
 msgid "Could not create a backup file."
 msgstr "Kunne ikke opprette sikkerhetskopi."
 
-#: src/gedit-document.c:1550
+#: src/gedit-document.c:1579
 msgid "It is not possible to revert an Untitled document"
 msgstr "Du kan ikke forkaste et dokument uten tittel"
 
@@ -1562,7 +1570,7 @@ msgstr "Velg et filnavn for lagring"
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/gedit-file.c:168 src/gedit-file.c:803
+#: src/gedit-file.c:168 src/gedit-file.c:858
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Lastet fil «%s»"
@@ -1604,12 +1612,17 @@ msgstr "Forkastet endringer i fil «%s»."
 msgid "Loading %d file..."
 msgstr "Laster %d fil..."
 
-#: src/gedit-file.c:720
+#: src/gedit-file.c:716
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Filen «%s» eksisterer ikke. Ønsker du å opprette den?"
+
+#: src/gedit-file.c:775
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/gedit-file.c:861
+#: src/gedit-file.c:916
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
@@ -1694,11 +1707,11 @@ msgstr "Feil. Umulig å deaktivere tillegg «%s»"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Feil. Umulig å oppdatere ui for tillegg «%s»"
 
-#: src/gedit-prefs-manager.c:319
+#: src/gedit-prefs-manager.c:323
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke initiere håndtering av brukervalg."
 
-#: src/gedit-prefs-manager.c:1520
+#: src/gedit-prefs-manager.c:1589
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Ventet «%s»; fikk «%s» for nøkkel %s"
@@ -2133,7 +2146,7 @@ msgstr "_Angre"
 msgid "_View"
 msgstr "_Vis"
 
-#: src/gedit-utils.c:775
+#: src/gedit-utils.c:778
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2144,34 +2157,34 @@ msgstr ""
 "\n"
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: src/gedit-utils.c:782
+#: src/gedit-utils.c:785
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Kunne ikke åpne filen «%s» fordi den inneholder korrupte data."
 
-#: src/gedit-utils.c:793
+#: src/gedit-utils.c:796
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr "Kunne ikke åpne fil «%s» fordi gedit ikke kan håndtere %s:-lokasjoner."
 
-#: src/gedit-utils.c:799
+#: src/gedit-utils.c:802
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Kunne ikke åpne filen «%s»"
 
-#: src/gedit-utils.c:809
+#: src/gedit-utils.c:812
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "Kunne ikke åpne fil «%s» fordi den inneholder data i ugyldig format."
 
-#: src/gedit-utils.c:816
+#: src/gedit-utils.c:819
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Kunne ikke åpne filen «%s» fordi den er for stor."
 
-#: src/gedit-utils.c:823
+#: src/gedit-utils.c:826
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2182,12 +2195,12 @@ msgstr ""
 "\n"
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: src/gedit-utils.c:830
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Kunne ikke åpne filen «%s» fordi tilgang ble nektet."
 
-#: src/gedit-utils.c:837
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2198,7 +2211,7 @@ msgstr ""
 "\n"
 "Vennligst lukk noen filer og prøv igjen."
 
-#: src/gedit-utils.c:845
+#: src/gedit-utils.c:848
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2209,7 +2222,7 @@ msgstr ""
 "\n"
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: src/gedit-utils.c:852
+#: src/gedit-utils.c:855
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2218,7 +2231,7 @@ msgstr ""
 "Ikke nok tilgjengelig minne til å åpne fil «%s». Vennligst lukk noen "
 "applikasjoner og prøv igjen."
 
-#: src/gedit-utils.c:878
+#: src/gedit-utils.c:881
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2231,7 +2244,7 @@ msgstr ""
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og at dine proxy-"
 "innstillinger er riktige før du prøver igjen."
 
-#: src/gedit-utils.c:893
+#: src/gedit-utils.c:896
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2242,7 +2255,7 @@ msgstr ""
 "\n"
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: src/gedit-utils.c:900
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2253,7 +2266,7 @@ msgstr ""
 "\n"
 "Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
-#: src/gedit-utils.c:907
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2264,7 +2277,7 @@ msgstr ""
 "\n"
 "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: src/gedit-utils.c:915
+#: src/gedit-utils.c:918
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2275,17 +2288,17 @@ msgstr ""
 "\n"
 "Du prøver sannsynligvis å åpne en binærfil."
 
-#: src/gedit-utils.c:953
+#: src/gedit-utils.c:956
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Kunne ikke åpne fil «%s»."
 
-#: src/gedit-utils.c:1004
+#: src/gedit-utils.c:1007
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Kunne ikke lagre fil «%s»."
 
-#: src/gedit-utils.c:1008
+#: src/gedit-utils.c:1011
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2296,7 +2309,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1061
+#: src/gedit-utils.c:1064
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2307,24 +2320,24 @@ msgstr ""
 "\n"
 "Kanskje den ble slettet nylig."
 
-#: src/gedit-utils.c:1068
+#: src/gedit-utils.c:1071
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Kunne ikke forkaste fil «%s» fordi den inneholder korrupte data."
 
-#: src/gedit-utils.c:1079
+#: src/gedit-utils.c:1082
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Kunne ikke forkaste fil «%s» fordi gedit ikke håndterer %s: lokasjoner."
 
-#: src/gedit-utils.c:1085 src/gedit-utils.c:1225
+#: src/gedit-utils.c:1088 src/gedit-utils.c:1228
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Kunne ikke forkaste fil «%s»."
 
-#: src/gedit-utils.c:1095
+#: src/gedit-utils.c:1098
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2332,17 +2345,17 @@ msgid ""
 msgstr ""
 "Kunne ikke forkaste fil «%s» fordi den inneholder data i et ugyldig format."
 
-#: src/gedit-utils.c:1102
+#: src/gedit-utils.c:1105
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Kunne ikke forkaste fil «%s» fordi den er for stor."
 
-#: src/gedit-utils.c:1109
+#: src/gedit-utils.c:1112
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Kunne ikke forkaste fil «%s» fordi tilgang ble nektet."
 
-#: src/gedit-utils.c:1116
+#: src/gedit-utils.c:1119
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2353,7 +2366,7 @@ msgstr ""
 "\n"
 "Vennligst lukk noen filer og prøv igjen."
 
-#: src/gedit-utils.c:1124
+#: src/gedit-utils.c:1127
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2362,7 +2375,7 @@ msgstr ""
 "Ikke nok tilgjengelig minne til å forkaste fil «%s». Vennligst lukk noen "
 "applikasjoner og prøv igjen."
 
-#: src/gedit-utils.c:1150
+#: src/gedit-utils.c:1153
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2373,7 +2386,7 @@ msgstr ""
 "\n"
 "Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
-#: src/gedit-utils.c:1164
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2384,12 +2397,12 @@ msgstr ""
 "\n"
 "Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
-#: src/gedit-utils.c:1171
+#: src/gedit-utils.c:1174
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "Kunne ikke forkaste fil «%s» fordi forsøk på å logge inn feilet."
 
-#: src/gedit-utils.c:1178
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2400,9 +2413,75 @@ msgstr ""
 "\n"
 "Du prøver sannsynligvis å forkaste en binærfil."
 
-#: src/gedit-utils.c:1187
+#: src/gedit-utils.c:1190
 msgid "It is not possible to revert an Untitled document."
 msgstr "Du kan ikke forkaste et dokument uten tittel."
+
+#: src/gedit-utils.c:1279
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Filen «%s» eksisterer allerede."
+
+#: src/gedit-utils.c:1285
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"«%s» er en katalog.\n"
+"\n"
+"Vennligst sjekk at plasseringen er korrekt oppgitt."
+
+#: src/gedit-utils.c:1294
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Kan ikke opprette filen «%s».\n"
+"\n"
+"Sjekk at du har nødvendige skriverettigheter."
+
+#: src/gedit-utils.c:1301
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Kunne ikke opprette filen «%s».\n"
+"\n"
+"Filnavnet er for langt."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Kan ikke opprette filen «%s».\n"
+"\n"
+"En katalogdel i filnavnet eksisterer ikke eller er en symbolsk lenke som ikke peker til noe."
+
+#: src/gedit-utils.c:1317
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Det er ikke nok plass på disken til å opprette filen «%s».\n"
+"\n"
+"Vennligst frigjør plass og prøv igjen."
+
+#: src/gedit-utils.c:1323
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Kunne ikke opprette filen «%s»."
 
 #: src/gedit-view.c:904
 #, c-format
