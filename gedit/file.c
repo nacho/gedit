@@ -65,10 +65,7 @@ static void cancel_cb (GtkWidget *w, gpointer data);
  *
  * Return value: 0 on success, 1 on error.
  */
-/* TODO: lock/unlock file before/after. */
-/* ...  why would you want to lock it, lets say you
-   open /etc/lilo.conf and want to run lilo without
-   closing gedit ? maybe I am missing something. Chema */
+
 gint
 gedit_file_open (Document *doc, gchar *fname)
 {
@@ -84,11 +81,18 @@ gedit_file_open (Document *doc, gchar *fname)
 	g_return_val_if_fail (doc != NULL, 1);
 
 	currentdoc = gedit_document_current();
-		
+
 	if ( stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
 	{
 		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
 						       "\nPlease make sure the file exists."));
+		return 1;
+	}
+
+	if ( stats.st_size  == 0)
+	{
+		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
+						       "\nPlease make sure the file is not beeing used by another aplication."));
 		return 1;
 	}
 
