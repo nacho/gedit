@@ -1,87 +1,12 @@
-Features to add, bugs to fix:
 
-	* Add more functions to the plugins api and in general fix it up...
-
-	* Add concept of "sets" of documents - I want to write the code for
-	  this one, so back off! ;-)
-
-	^^ I'll probably end up doing this as a plugin, now that we can have
-	   preferences in plugins (due to the gnome requirement)
-
-	* Add regular expression searching...
-
-	* Should really find some way of fixing the problems with the line
-	  and column indicators...
-
-	^^ The Line number indicator is fixed (it's a hack, but at least it's
-	   not broken), but the column indicator is still slightly innaccurate
-	   when dealing with tabs. We should probably count the number of chars
-	   since the last newline, but that could be slowish to do in realtime.
-
-
-						-Evan
-
-
-Added by andy:
-
-	* Fix plugin code to handle errors (e.g., error from read() or
-	  write()).  currently, the code is totally sloppy, and has next
-	  to no error handling.
-
-	* Add file locking/unlocking before/after opening/saving a file.
-	  i will probably end up doing this because no one else cares.
-
-	* Add more search features: replace all, and search (and replace)
-	  across all open documents.
+	* Complete GnomeMDI functionality
 	
-	* Add preferences setting for location of temp directory.
-
-	* Add print file preferences.  allow user to specify choice of
-	  commands: lpr, lp, or custom.  for lpr and lp, allow user to
-	  specify default print options to use.  store everything in the
-	  preferences file.
-
-	* Add interface/plugin for calling "ctags -x" on the current
-	  document (maybe all open documents?).  build a tree of the output,
-	  and when clicked on, will go to the selected location.  i'm not
-	  sure if this should be code in gedit that simply does fork and
-	  exec, or if it should be its own plugin.  one i know for certain
-	  is that gedit shouldn't contain any C parsing code.  this is how
-	  gIDE does it, and this is unnecessary.
-
-	* Add auto-save options.  timeout configurable via preferences.
-
-	* Add file info option for line count, word count, and byte count.
-	  don't be a bonehead like GXedit and do "system(wc)".
-	  
-	^^ Could be cool for a plugin, don't yah think?
-
-	* Add plugin to allow posting a document to a newsgroup.
-
-
-Added by Alex:
-
-	* Add more options to Preferences box (i'm working on this one..)
+	* Syntax Highlighting
 	
-Added by Ola Sundell (m95ola@student.tdb.uu.se) - IRC: Slimer
+	* Improved Print
 	
-	* Block Indent...
-
-	^^ Hate to sound like a moron, but what is block indent?
+	* GNOME Session Management complience
 	
-Added by Fred Leeflang <fredl@dutchie.org>
-
-	* Add a plugin to read ctags generated tags at startup. When 
-	  gtkrichtext is done, this should be used to colorise the
-	  tags read at startup, and turn them in some sort of hyperlinks.
-
-More TODO's added by Evan.
-
-	* Improve the existing plugins to take advantage of preferences.
-
-Some more TODO's from Alex:
-
-	* Implement GNOME Session Management.
+	* Better Line counting
 	
-	* Improve print facility.
-	
+	* Make the full path to files available to the user.
