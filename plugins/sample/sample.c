@@ -1,7 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit
- * Copyright (C) 1999-2001 Alex Roberts, Evan Lawrence, Jason Leach & Jose M Celorio
+ * gedit-document.h
+ * This file is part of gedit
+ *
+ * Copyright (C) 2002 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,65 +17,53 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *
- * AUTHORS: 
- *   Alex Roberts <bse@error.fsnet.co.uk>
- *
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA. 
+ */
+ 
+/*
+ * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
  */
 
-#include <config.h>
-#include <gnome.h>
+#include <libgnome/gnome-i18n.h>
 
-#include "window.h"
-#include "document.h"
-#include "utils.h"
-#include "view.h"
-#include "plugin.h"
+#include "gedit-plugin.h"
+#include "gedit-debug.h"
 
-static void
-destroy_plugin (PluginData *pd)
+GeditPluginState
+destroy (GeditPlugin *plugin)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
-}
-
-
-/**
- * insert_hello:
- * @void: 
- * 
- * The function that actualy does the work.
- **/
-static void
-insert_hello (void)
-{
-	GeditView *view = gedit_view_active();
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (!view)
-	     return;
-
-	gedit_document_insert_text (view->doc, "Hello World", gedit_view_get_position (view), TRUE);
-	
 }
 	
+GeditPluginState
+activate (GeditPlugin *pd)
+{
+	/* activate */
+}
 
-gint
-init_plugin (PluginData *pd)
+GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	/* deactivate */
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
 {
 	/* initialize */
-	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->destroy_plugin = destroy_plugin;
+	pd->destroy = destroy;
+	
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");
-	pd->long_desc = _("Sample 'hello world' plugin.");
-	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
-	pd->needs_a_document = TRUE;
-	pd->modifies_an_existing_doc = TRUE;
-
-	pd->private_data = (gpointer)insert_hello;
+	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
+	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
+	
+	pd->private_data = NULL;
+	
+	gedit_get_active_window ();
 	
 	return PLUGIN_OK;
 }

@@ -315,7 +315,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 	
 	gnome_vfs_uri_list_free (list);
 
-	gedit_file_open_uri_list (file_list);	
+	gedit_file_open_uri_list (file_list, 0);	
 	
 	if (file_list == NULL)
 		return;
@@ -711,6 +711,8 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 static 
 void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
 {
+	gedit_debug (DEBUG_MDI, "");
+
 	gedit_mdi_set_active_window_title (mdi);	
 }
 
@@ -726,9 +728,7 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 	gedit_mdi_set_active_window_verbs_sensitivity (mdi);
 
 	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (mdi));
-	
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
-	
+		
 	win = bonobo_mdi_get_active_window (mdi);
 	g_return_if_fail (win != NULL);
 
@@ -737,6 +737,8 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 		gedit_view_set_cursor_position_statusbar (GEDIT_VIEW (old_view), NULL);
 		gedit_view_set_overwrite_mode_statusbar (GEDIT_VIEW (old_view), NULL);
 	}
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
 	gedit_view_set_cursor_position_statusbar (active_view, status);

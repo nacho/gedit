@@ -215,7 +215,8 @@ gedit_file_open_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *act
 	gchar * full_path;
 	gchar * directory;
 	GSList *files;
-	
+	gint loaded_file = 0;
+
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_if_fail (GTK_IS_FILE_SELECTION (open_file_selector));
@@ -232,18 +233,25 @@ gedit_file_open_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *act
 	if (files == NULL) 
 	{
 		if (gedit_file_open_real (file_name, active_child))
-			gedit_utils_flash_va (_("Loaded file %s"), file_name);
+			gedit_utils_flash_va (_("Loaded file '%s'"), file_name);
 		
 		gedit_debug (DEBUG_FILE, "File: %s", file_name);
 	} 
-	else 
-	{		
+	else	     	
+	{
+		gint l;
+
+		l = g_slist_length (files);
+		
+		if (l > 1)
+			gedit_utils_flash_va (_("Loading %d file..."), l);
+
 		for (; files != NULL; files = files->next) 
 		{
 			full_path = g_concat_dir_and_file (directory, files->data);
 			
 			if (gedit_file_open_real (full_path, active_child))
-				gedit_utils_flash_va (_("Loaded file %s"), full_path);
+				++loaded_files;
 			
 			gedit_debug (DEBUG_FILE, "File: %s", full_path);
 
@@ -252,8 +260,8 @@ gedit_file_open_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *act
 		}
 	}
 
-	if (g_slist_length (files) > 1)
-		gedit_utils_flash_va (_("Loaded %i files"), g_slist_length (files));
+	if (loaded_files > 1)
+		gedit_utils_flash_va (_("Loaded %i files"), loaded_files);
 
 	g_free (directory);
 	g_slist_free (files);
@@ -355,7 +363,7 @@ gedit_file_open (GeditMDIChild *active_child)
 		for (i = 0; files[i]; ++i)
 		{
 			if (gedit_file_open_real (files[i], active_child))
-				gedit_utils_flash_va (_("Loaded file %s"), files[i]);
+				gedit_utils_flash_va (_("Loaded file '%s'"), files[i]);
 			
 			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
 		}
@@ -1014,30 +1022,60 @@ gedit_file_make_canonical_uri_from_shell_arg (const char *location)
 }
 
 gboolean 
-gedit_file_open_uri_list (GList* uri_list)
+gedit_file_open_uri_list (GList* uri_list, gint line)
 {
 	gchar *full_path;
 	gboolean ret = TRUE;
-	
+	gint loaded_files = 0;
 	BonoboMDIChild *active_child = NULL;
+	GeditView* view = NULL;
+	gint l;
 	
 	gedit_debug (DEBUG_FILE, "");
 	
 	if (uri_list == NULL) 
 		return FALSE;
 
+	l = g_list_length (uri_list);
+	
+	if (l > 1)
+		gedit_utils_flash_va (_("Loading %d file..."), l);
+
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 
         /* create a file for each document in the parameter list */
-	for (;uri_list; uri_list = uri_list->next)
+	for ( ; uri_list; uri_list = g_list_next (uri_list))
 	{
 		full_path = gedit_file_make_canonical_uri_from_shell_arg (uri_list->data);
-		if (full_path != NULL) {
-			ret |= gedit_file_open_real (full_path, 
-					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
+		if (full_path != NULL) 
+		{
+			if (gedit_file_open_real (full_path, 
+					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
+			{
+				++loaded_files;
+				ret |= TRUE;
+			}
+			
 			g_free (full_path);
 		}
+
+		if (view == NULL)
+			view = gedit_get_active_view ();
 	}
+
+	if (view != NULL)
+	{
+		GeditDocument *doc;
+
+		doc = gedit_view_get_document (view);
+		g_return_val_if_fail (doc, FALSE);
+		
+		gedit_document_goto_line (doc, MAX (0, line - 1));
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), GTK_WIDGET (view));		
+	}
+
+	if (loaded_files > 1)
+		gedit_utils_flash_va (_("Loaded %i files"), loaded_files);
 
 	return ret;
 }
@@ -1049,6 +1087,8 @@ gedit_file_open_recent (GeditMDIChild *child, gchar* uri)
 	gedit_debug (DEBUG_FILE, "");
 	
 	ret = gedit_file_open_real (uri, child);	
+	if (ret)
+		gedit_utils_flash_va (_("Loaded file '%s'"), uri);
 
 	gedit_debug (DEBUG_FILE, "END");
 
@@ -1088,6 +1128,9 @@ gedit_file_open_single_uri (const gchar* uri)
 	if (full_path != NULL) 
 	{
 		ret = gedit_file_open_real (full_path, NULL);
+		if (ret)
+			gedit_utils_flash_va (_("Loaded file '%s'"), full_path);
+
 		g_free (full_path);
 	}
 

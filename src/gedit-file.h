@@ -43,7 +43,7 @@ gboolean	gedit_file_close_all 	(void);
 void		gedit_file_exit 	(void);
 gboolean	gedit_file_revert 	(GeditMDIChild *child);
 
-gboolean 	gedit_file_open_uri_list (GList* uri_list);
+gboolean 	gedit_file_open_uri_list (GList* uri_list, gint line);
 gboolean 	gedit_file_open_recent   (GeditMDIChild *child, gchar* uri);
 gboolean 	gedit_file_open_single_uri (const gchar* uri);
 

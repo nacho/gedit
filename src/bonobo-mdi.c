@@ -378,7 +378,10 @@ child_create_menus (BonoboMDIChild *child, GtkWidget *view)
 static GtkWidget *
 child_set_label (BonoboMDIChild *child, GtkWidget *label)
 {
-	return BONOBO_MDI_CHILD_GET_CLASS (child)->set_label (child, label, NULL);
+	GtkWidget *w;
+	w = BONOBO_MDI_CHILD_GET_CLASS (child)->set_label (child, label, NULL);
+	
+	return w;
 }
 
 static void 
@@ -686,6 +689,8 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 					win = bonobo_mdi_get_window_from_view (view);
 					gdk_window_raise (GTK_WIDGET(win)->window);
 
+					mdi->priv->active_window = win;
+
 					cur_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (old_book));
 
 					if (cur_page < 0) 
@@ -695,7 +700,13 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 									GTK_WIDGET (old_book)));
 						mdi->priv->windows = g_list_remove(mdi->priv->windows, win);
 						gtk_widget_destroy (GTK_WIDGET(win));
-					}
+					}					
+										
+					gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [CHILD_CHANGED], 
+							 NULL);
+
+					gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals [VIEW_CHANGED], 
+							 view);
 				}
 
 				return FALSE;
@@ -1885,12 +1896,19 @@ bonobo_mdi_update_child (BonoboMDI *mdi, BonoboMDIChild *child)
 		else 
 			if(mdi->priv->mode == BONOBO_MDI_NOTEBOOK) 
 			{
+				/*
 				GtkWidget *tab_label;
 
 				tab_label = gtk_notebook_get_tab_label
 					(GTK_NOTEBOOK (view->parent), view);
+					
 				if (tab_label != NULL)
-					title = child_set_label (child, tab_label);
+				{*/
+					title = child_set_label (child, NULL);
+					gtk_notebook_set_tab_label (GTK_NOTEBOOK (view->parent), 
+							view, title);
+				
+				/*}*/
 			}
 		
 		view_node = g_list_next (view_node);

@@ -31,6 +31,8 @@
 #ifndef __GEDIT2_H__
 #define __GEDIT2_H__
 
+#include <gmodule.h>
+
 #include "gedit-mdi.h"
 #include "gedit-document.h"
 #include "gedit-view.h" 

@@ -48,6 +48,8 @@ struct _MessageInfo {
 
 typedef struct _MessageInfo MessageInfo;
 
+MessageInfo *current_mi = NULL;
+
 static gint
 remove_message_timeout (MessageInfo * mi) 
 {
@@ -60,7 +62,10 @@ remove_message_timeout (MessageInfo * mi)
 
 	bonobo_ui_engine_remove_hint (ui_engine);
 
+	gtk_signal_disconnect (GTK_OBJECT (mi->win), mi->handlerid);
+
 	g_free (mi);
+	current_mi = NULL;
 
   	GDK_THREADS_LEAVE ();
 
@@ -99,6 +104,12 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 	ui_engine = bonobo_window_get_ui_engine (win);
 	g_return_if_fail (ui_engine != NULL);
 	
+	if (current_mi != NULL)
+	{
+		gtk_timeout_remove (current_mi->timeoutid);
+		remove_message_timeout (current_mi);
+	}
+	
 	if (bonobo_ui_engine_xml_node_exists (ui_engine, "/status"))
 	{
     		MessageInfo * mi;
@@ -114,12 +125,14 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 				mi);
     
     		mi->handlerid = 
-      			gtk_signal_connect (GTK_OBJECT(win),
+      			gtk_signal_connect (GTK_OBJECT (win),
 				"destroy",
 			   	GTK_SIGNAL_FUNC (remove_timeout_cb),
 			   	mi );
 
     		mi->win       = win;
+
+		current_mi = mi;
   	}   
 }
 

@@ -41,6 +41,9 @@
 #include "gedit-prefs.h"
 #include "gedit-debug.h"
 #include "gedit-file.h"
+#include "gedit-utils.h"
+
+#include "gedit-plugins-engine.h"
 
 #ifndef GNOME_ICONDIR
 #define GNOME_ICONDIR "" 
@@ -50,8 +53,16 @@ GeditMDI *gedit_mdi = NULL;
 gboolean gedit_close_x_button_pressed = FALSE;
 gboolean gedit_exit_button_pressed = FALSE; 
 
+typedef struct _CommandLineData CommandLineData;
+
+struct _CommandLineData
+{
+	GList* file_list;
+	gint line_pos;
+};
+
 static void gedit_set_default_icon ();
-static void gedit_load_file_list (GList *file_list);
+static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
 {
@@ -99,10 +110,10 @@ gedit_set_default_icon ()
 {
 	if (!g_file_test (GNOME_ICONDIR "/gedit-icon.png", G_FILE_TEST_EXISTS))
 	{
-	    g_warning ("Could not find %s", GNOME_ICONDIR "/gedit-icon.png");
+		g_warning ("Could not find %s", GNOME_ICONDIR "/gedit-icon.png");
 	    
-	    /* In case we haven't yet been installed */
-	    gnome_window_icon_set_default_from_file ("../pixmaps/gedit-icon.png");
+		/* In case we haven't yet been installed */
+		gnome_window_icon_set_default_from_file ("../pixmaps/gedit-icon.png");
 	}
 	else
 	{
@@ -111,14 +122,20 @@ gedit_set_default_icon ()
 }
 
 static void 
-gedit_load_file_list (GList *file_list)
-{
+gedit_load_file_list (CommandLineData *data)
+{	
+	/* Update UI */
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
 	/* Load files */
-	if (!gedit_file_open_uri_list (file_list) && !gedit_file_open_from_stdin (NULL))
-		/* If no file is opened that create a new empty untitled document */
+	if (!gedit_file_open_uri_list (data->file_list, data->line_pos) && 
+	    !gedit_file_open_from_stdin (NULL))
+		/* If no file is opened then create a new empty untitled document */
 		gedit_file_new ();
 
-	g_list_free (file_list);
+	g_list_free (data->file_list);
+	g_free (data);
 }
 
 int
@@ -129,7 +146,7 @@ main (int argc, char **argv)
 	poptContext ctx;
 	char **args;
 
-	GList *file_list = NULL;
+	CommandLineData *data = NULL;
 	gint i;
 
 #ifdef ENABLE_NLS
@@ -162,17 +179,26 @@ main (int argc, char **argv)
 
 	args = (char**) poptGetArgs(ctx);
 	
-	for (i = 0; args && args[i]; i++)
-		file_list = g_list_append (file_list, args[i]);
+	data = g_new0 (CommandLineData, 1);
+	
+	for (i = 0; args && args[i]; i++) 
+	{
+		if (strstr (args[i], "+")) 
+			data->line_pos = atoi (args[i] + 1);		
+		else
+			data->file_list = g_list_append (data->file_list, args[i]);
+	}
 
 	/* Create gedit_mdi and open the first top level window */
 	gedit_mdi = gedit_mdi_new ();
 	bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
 
-	gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)file_list);
+	gedit_plugins_engine_init ();
+
+	gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
 
 	gtk_main();
-	
+		
 	return 0;
 }
 

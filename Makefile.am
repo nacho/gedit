@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = src pixmaps po  
+SUBDIRS = src pixmaps po plugins
 
 GEDIT_SCHEMA = gedit.schemas
 

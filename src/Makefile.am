@@ -6,23 +6,24 @@ bin_PROGRAMS = gedit2
 uidir = $(datadir)/gedit2/ui/
 
 INCLUDES = \
-	-I$(top_srcdir) \
-	-I$(top_builddir) \
-	-I$(top_srcdir)/dialogs	\
-	$(GEDIT_CFLAGS) \
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" \
-	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" \
-	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" \
+	-I$(top_srcdir) 				\
+	-I$(top_builddir) 				\
+	-I$(top_srcdir)/dialogs				\
+	$(GEDIT_CFLAGS) 				\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" 	\
+	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit2/plugins"\"\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"
 
-CFLAGS = -g -O2 -Wall 
-
-gedit2_LDADD = \
-	dialogs/libdialogs.a	\
+CFLAGS = -g -O2 -Wall -export-dynamic
+ 
+gedit2_LDADD = 				\
+	dialogs/libdialogs.a		\
 	$(GEDIT_LIBS)
 
-BUILT_SOURCES = \
-	gedit-marshal.c	\
+BUILT_SOURCES = 			\
+	gedit-marshal.c			\
 	gedit-marshal.h
 
 gedit2_SOURCES = 			\
@@ -62,6 +63,9 @@ gedit2_SOURCES = 			\
 	gnome-vfs-helpers.h		\
 	gedit-file-selector-util.h 	\
 	gedit-file-selector-util.c 	\
+	gedit-plugins-engine.h		\
+	gedit-plugins-engine.c		\
+	gedit-plugin.h			\
 	$(BUILT_SOURCES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)

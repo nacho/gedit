@@ -1168,7 +1168,6 @@ gedit_document_goto_line (GeditDocument* doc, guint line)
 		line = line_count;
 
 	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, line);
-
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 }
 

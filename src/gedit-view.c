@@ -111,9 +111,11 @@ gedit_view_grab_focus (GtkWidget *widget)
 
 	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
 	 * understand why it is not visible */
+	
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", FALSE, NULL);
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
+	
 }
 
 static void
@@ -201,8 +203,9 @@ gedit_view_line_numbers_expose (GtkWidget      *widget,
   	gint layout_width;
 	gchar *str;
 
-	gedit_debug (DEBUG_VIEW, "");
-
+	/* It is annoying -- Paolo
+	 * gedit_debug (DEBUG_VIEW, "");
+	 */
 	text_view = GTK_TEXT_VIEW (widget);
   
 	/* See if this expose is on the line numbers window */
@@ -735,16 +738,13 @@ gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status)
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
-	g_return_if_fail ((status == NULL) || (GTK_IS_STATUSBAR (status)));
 	
 	view->priv->cursor_position_statusbar = status;
 
 	if ((status != NULL) && (view->priv->document != NULL))
-	{
 		gedit_view_update_cursor_position_statusbar
 			(GTK_TEXT_BUFFER (view->priv->document),		
 			 view);
-	}
 }
 
 void
@@ -753,7 +753,6 @@ gedit_view_set_overwrite_mode_statusbar (GeditView *view, GtkWidget* status)
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
-	g_return_if_fail ((status == NULL) || (GTK_IS_STATUSBAR (status)));
 	
 	view->priv->overwrite_mode_statusbar = status;
 
