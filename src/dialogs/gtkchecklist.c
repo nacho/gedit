@@ -137,9 +137,16 @@ gtk_check_list_init (GtkCheckList *check_list)
 static void
 gtk_check_list_finalize (GtkObject *object)
 {
-  (* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
+  gint i;
+  GtkCheckListTuple *tuple;
 
-  /* FIXME:  Free all list_data */
+  for (i = 0; i < GTK_CHECK_LIST (object)->n_rows; i++)
+  {
+    tuple = gtk_clist_get_row_data (GTK_CLIST (object), i);
+    g_free (tuple);
+  }
+  
+  (* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 static void
@@ -241,10 +248,19 @@ gtk_check_list_key_press (GtkWidget   *widget,
 
 static void
 gtk_check_list_clear (GtkCList *clist)
-{
-  (* parent_class->clear) (clist);
+{ 
+  gint i;
+  GtkCheckListTuple *tuple;
+
+  for (i = 0; i < GTK_CHECK_LIST (clist)->n_rows; i++)
+  {
+    tuple = gtk_clist_get_row_data (clist, i);
+    g_free (tuple);
+  }
 
   GTK_CHECK_LIST (clist)->n_rows = 0;
+
+  (* parent_class->clear) (clist);
 }
 
 static void
