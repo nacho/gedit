@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit2\n"
-"POT-Creation-Date: 2002-08-03 18:51+0300\n"
-"PO-Revision-Date: 2002-08-03 19:18+0300\n"
+"POT-Creation-Date: 2002-08-18 21:01+0300\n"
+"PO-Revision-Date: 2002-08-18 21:13+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #: data/GNOME_Gedit.server.in.h:1
 msgid "gedit application"
-msgstr ""
+msgstr "gedit rakendus"
 
 #: data/GNOME_Gedit.server.in.h:2
 msgid "gedit automation factory"
-msgstr ""
+msgstr "gedit automation factory"
 
 #: data/gedit.desktop.in.h:1
 msgid "Edit text files"
@@ -35,6 +35,8 @@ msgid ""
 "A custom font that will be used for the editing area. This will only take "
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
+"Kohandatud kirjatüüp, mida kasutatakse redaktoris. See väärtus kehtib vaid siis, "
+"kui \"Kasuta teema vaikimisi kirjatüüpi\" on välja lülitatud."
 
 #: data/gedit.schemas.in.h:2
 msgid "Auto Save"
@@ -53,24 +55,28 @@ msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
+"Tekstivaliku värv redaktoris. See väärtus kehtib vaid siis, "
+"kui \"Kasuta teema vaikimisi värve\" on välja lülitatud."
 
 #: data/gedit.schemas.in.h:6
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
+"Teksti taustavärv redaktoris. See väärtus kehtib vaid siis, "
+"kui \"Kasuta teema vaikimisi värve\" on välja lülitatud."
 
 #: data/gedit.schemas.in.h:7
 msgid "Backup Copy Extension"
-msgstr ""
+msgstr "Varukoopia laiend"
 
 #: data/gedit.schemas.in.h:8
 msgid "Body Font for Printing"
-msgstr ""
+msgstr "Sisu kirjatüüp printimisel"
 
 #: data/gedit.schemas.in.h:9
 msgid "Create Backup Copies"
-msgstr ""
+msgstr "Tee varukoopiaid"
 
 #: data/gedit.schemas.in.h:10
 msgid "Display Line Numbers"
@@ -82,7 +88,7 @@ msgstr "Redaktori kirjatüüp"
 
 #: data/gedit.schemas.in.h:12
 msgid "Encoding for Saving"
-msgstr ""
+msgstr "Salvestuse kodeering"
 
 #: data/gedit.schemas.in.h:13
 msgid ""
@@ -104,7 +110,7 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:16
 msgid "Header Font for Printing"
-msgstr ""
+msgstr "Päise kirjatüüp printimisel"
 
 #: data/gedit.schemas.in.h:17
 msgid ""
@@ -115,7 +121,7 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:18
 msgid "Line Number Font for Printing"
-msgstr ""
+msgstr "Reanumbrite kirjatüüp printimisel"
 
 #: data/gedit.schemas.in.h:19
 msgid "Line Wrapping Mode"
@@ -518,46 +524,90 @@ msgstr ""
 "Copyright © 2002 Paolo Maggi"
 
 #: plugins/diff/diff.glade2.h:1
+msgid "*"
+msgstr "*"
+
+#: plugins/diff/diff.glade2.h:2
 msgid "Choose the files to compare."
 msgstr "Vali võrreldavad failid."
 
-#: plugins/diff/diff.glade2.h:2
+#: plugins/diff/diff.glade2.h:3
 msgid "Compare files..."
 msgstr "Võrdle faile..."
 
-#: plugins/diff/diff.glade2.h:3
+#: plugins/diff/diff.glade2.h:4
 msgid "F_rom document"
 msgstr "_Dokument"
 
-#: plugins/diff/diff.glade2.h:4
+#: plugins/diff/diff.glade2.h:5
 msgid "First"
 msgstr "Esimene"
 
-#: plugins/diff/diff.glade2.h:5
+#: plugins/diff/diff.glade2.h:6
+msgid "First file from disk"
+msgstr "Esimene fail kettal"
+
+#: plugins/diff/diff.glade2.h:7
+msgid "First file from open document"
+msgstr "Esimene fail avatud dokumentide hulgast"
+
+#: plugins/diff/diff.glade2.h:8
 msgid "From _document"
 msgstr "D_okument"
 
-#: plugins/diff/diff.glade2.h:6
+#: plugins/diff/diff.glade2.h:9
 msgid "From a _file on disk"
 msgstr "_Fail kettal"
 
-#: plugins/diff/diff.glade2.h:7
+#: plugins/diff/diff.glade2.h:10
 msgid "From a file o_n disk"
 msgstr "F_ail kettal"
 
-#: plugins/diff/diff.glade2.h:8
+#: plugins/diff/diff.glade2.h:11
 msgid "Ignore _blanks (-b option)"
 msgstr "Ignoreeri _tühikuid (-b parameeter)"
 
-#: plugins/diff/diff.glade2.h:9
+#: plugins/diff/diff.glade2.h:12
 msgid "Note that this option is only supported by GNU diff"
 msgstr "Pane tähele, et see parameeter on ainult GNU diffi poolt toetatud"
 
-#: plugins/diff/diff.glade2.h:10
+#: plugins/diff/diff.glade2.h:13
 msgid "Second"
 msgstr "Teine"
 
-#: plugins/diff/diff.glade2.h:11
+#: plugins/diff/diff.glade2.h:14
+msgid "Second file from disk"
+msgstr "Teine fail kettal"
+
+#: plugins/diff/diff.glade2.h:15
+msgid "Second file from open document"
+msgstr "Teine fail avatud dokumentide hulgast"
+
+#: plugins/diff/diff.glade2.h:16
+msgid "Select the \"first\" file..."
+msgstr "Vali \"esimene\" fail..."
+
+#: plugins/diff/diff.glade2.h:17
+msgid "Select the \"second\" file..."
+msgstr "Vali \"teine\" fail..."
+
+#: plugins/diff/diff.glade2.h:18
+msgid "Select the first file to compare"
+msgstr "Vali esimene võrreldav fail."
+
+#: plugins/diff/diff.glade2.h:19
+msgid "Select the first open document to compare"
+msgstr "Vali esimene võrreldav avatud dokument"
+
+#: plugins/diff/diff.glade2.h:20
+msgid "Select the second file to compare"
+msgstr "Vali teine võrreldav fail."
+
+#: plugins/diff/diff.glade2.h:21
+msgid "Select the second open document to compare"
+msgstr "Vali teine võrreldav avatud dokuent"
+
+#: plugins/diff/diff.glade2.h:22
 msgid "Use the _unified output format (-u option)"
 msgstr "Kasuta _ühtlustatud väljundvormingut (-u parameeter)"
 
@@ -782,7 +832,7 @@ msgstr "Lisa praegune kuupäev ja kellaaeg kursori asukohta."
 msgid "Select the format to use when inserting date/time."
 msgstr "Vali kuupäeva/kella lisamisel kasutatav vorming."
 
-#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
+#: src/bonobo-mdi.c:532 src/bonobo-mdi.c:622 src/bonobo-mdi.c:1858
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiveeri %s"
@@ -810,7 +860,7 @@ msgid "Replace _All"
 msgstr "Asenda _kõik"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:126
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
 #: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "_Asenda"
@@ -851,11 +901,11 @@ msgstr "Mooduli failinimi"
 msgid "Author(s)"
 msgstr "Autor(id)"
 
-#: src/dialogs/gedit-plugin-manager.c:443
+#: src/dialogs/gedit-plugin-manager.c:488
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Ei leia faili plugin-manager.glade2, palun installi gedit uuesti.\n"
 
-#: src/dialogs/gedit-plugin-manager.c:466
+#: src/dialogs/gedit-plugin-manager.c:511
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr "Vigane pluginahalduri glade fail -- ei leia kõik vidinaid.\n"
 
@@ -890,27 +940,27 @@ msgid "Font & Colors"
 msgstr "Kirjatüübid & värvid"
 
 #: src/dialogs/gedit-preferences-dialog.c:209
-#: src/dialogs/gedit-preferences.glade2.h:28
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid "Tabs"
 msgstr "Tabulaatorid"
 
 #: src/dialogs/gedit-preferences-dialog.c:210
-#: src/dialogs/gedit-preferences.glade2.h:47
+#: src/dialogs/gedit-preferences.glade2.h:51
 msgid "Wrap mode"
 msgstr "Reamurdmine"
 
 #: src/dialogs/gedit-preferences-dialog.c:211
-#: src/dialogs/gedit-preferences.glade2.h:13
+#: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Line numbers"
 msgstr "Reanumbrid"
 
 #: src/dialogs/gedit-preferences-dialog.c:213
-#: src/dialogs/gedit-preferences.glade2.h:23 src/gedit-ui.xml.h:58
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:58
 msgid "Save"
 msgstr "Salvesta"
 
 #: src/dialogs/gedit-preferences-dialog.c:214
-#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:76
+#: src/dialogs/gedit-preferences.glade2.h:42 src/gedit-ui.xml.h:76
 msgid "Undo"
 msgstr "Unusta"
 
@@ -931,7 +981,7 @@ msgid "Editor"
 msgstr "Redaktor"
 
 #: src/dialogs/gedit-preferences-dialog.c:240
-#: src/dialogs/gedit-preferences.glade2.h:19 src/gedit-print.c:309
+#: src/dialogs/gedit-preferences.glade2.h:21 src/gedit-print.c:309
 #: src/gedit-ui.xml.h:42
 msgid "Print"
 msgstr "Prindi"
@@ -1019,91 +1069,99 @@ msgid " line(s)"
 msgstr " rea"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
+msgid "Always use UTF-8 encoding (faster) when creating a new file"
+msgstr "Uue faili loomisel kasuta alati UTF-8 kodeeringut (kiirem)"
+
+#: src/dialogs/gedit-preferences.glade2.h:5
+msgid "Always use UTF-8 encoding (faster) when saving"
+msgstr "Salvestamisel kasuta alati UTF-8 kodeeringut (kiirem)"
+
+#: src/dialogs/gedit-preferences.glade2.h:6
 msgid "Always use U_TF-8 encoding (faster)"
 msgstr "Kasuta alati U_TF-8 kodeeringut (kiirem)"
 
-#: src/dialogs/gedit-preferences.glade2.h:5
+#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Always use _UTF-8 encoding (faster)"
 msgstr "Kasuta alati _UTF-8 kodeeringut (kiirem)"
 
-#: src/dialogs/gedit-preferences.glade2.h:6
+#: src/dialogs/gedit-preferences.glade2.h:8
 msgid "Colors"
 msgstr "Värvid"
 
-#: src/dialogs/gedit-preferences.glade2.h:7
+#: src/dialogs/gedit-preferences.glade2.h:9
 msgid "Create a _backup copy of files before saving"
 msgstr "Enne salvestamist tee failidest _varukoopia"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
+#: src/dialogs/gedit-preferences.glade2.h:10
 #: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "Kirjatüüp"
 
-#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gedit-preferences.glade2.h:11
 msgid "Font used to print line _numbers:"
 msgstr "Rea_numbrite printimiseks kasutatav kirjatüüp:"
 
-#: src/dialogs/gedit-preferences.glade2.h:10
+#: src/dialogs/gedit-preferences.glade2.h:12
 msgid "Font used to print the _body:"
 msgstr "Dokumendi _sisu printimiseks kasutatav kirjatüüp:"
 
-#: src/dialogs/gedit-preferences.glade2.h:11
+#: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Fonts & Colors"
 msgstr "Kirjatüübid & värvid"
 
-#: src/dialogs/gedit-preferences.glade2.h:12
+#: src/dialogs/gedit-preferences.glade2.h:14
 msgid "LOGO"
 msgstr "LOGO"
 
-#: src/dialogs/gedit-preferences.glade2.h:14
+#: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Pick the background color"
 msgstr "Vali taustavärv"
 
-#: src/dialogs/gedit-preferences.glade2.h:15
+#: src/dialogs/gedit-preferences.glade2.h:17
 msgid "Pick the selected text color"
 msgstr "Vali valitud teksti värv"
 
-#: src/dialogs/gedit-preferences.glade2.h:16
+#: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Pick the selection color"
 msgstr "Vali valiku värv"
 
-#: src/dialogs/gedit-preferences.glade2.h:17
+#: src/dialogs/gedit-preferences.glade2.h:19
 msgid "Pick the text color"
 msgstr "Vali teksti värv"
 
-#: src/dialogs/gedit-preferences.glade2.h:18
+#: src/dialogs/gedit-preferences.glade2.h:20
 msgid "Plugin manager"
 msgstr "Pluginahaldur"
 
-#: src/dialogs/gedit-preferences.glade2.h:20
+#: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Print _line numbers every"
 msgstr "Prindi _reanumbrid üle iga"
 
-#: src/dialogs/gedit-preferences.glade2.h:21
+#: src/dialogs/gedit-preferences.glade2.h:23
 msgid "Print _page headers"
 msgstr "Prindi _lehe päised"
 
-#: src/dialogs/gedit-preferences.glade2.h:22
+#: src/dialogs/gedit-preferences.glade2.h:24
 msgid "Print fonts"
 msgstr "Printimise kirjatüübid"
 
-#: src/dialogs/gedit-preferences.glade2.h:24
+#: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Se_lection color:"
 msgstr "V_aliku värv:"
 
-#: src/dialogs/gedit-preferences.glade2.h:25
+#: src/dialogs/gedit-preferences.glade2.h:27
 msgid "Selecte_d text color:"
 msgstr "_Valitud teksti värv:"
 
-#: src/dialogs/gedit-preferences.glade2.h:26
+#: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Set _tabs width equivalent to  "
 msgstr "_Tabulaatori laius on "
 
-#: src/dialogs/gedit-preferences.glade2.h:27
+#: src/dialogs/gedit-preferences.glade2.h:29
 msgid "Set limit on _undo actions to"
 msgstr "_Unustatavate tegevuste limiit on"
 
-#: src/dialogs/gedit-preferences.glade2.h:29
+#: src/dialogs/gedit-preferences.glade2.h:31
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
@@ -1111,20 +1169,20 @@ msgstr ""
 "Kirjatüübi ja värvi sätted lasevad sul redaktoriaknas kasutatavaid "
 "kirjatüüpe ja värve valida."
 
-#: src/dialogs/gedit-preferences.glade2.h:30
+#: src/dialogs/gedit-preferences.glade2.h:32
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
 "Reanumbrite säte laseb sul valida, kas akna vasakus ääres näidata reanumbreid"
 
-#: src/dialogs/gedit-preferences.glade2.h:31
+#: src/dialogs/gedit-preferences.glade2.h:33
 msgid ""
 "The plugin manager settings let you choose which plugins you want to have "
 "loaded."
 msgstr "Pluginahaldur laseb sul valida, milliseid pluginaid tahad laadida."
 
-#: src/dialogs/gedit-preferences.glade2.h:32
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
@@ -1132,20 +1190,20 @@ msgstr ""
 "Printimise kirjatüüpide sätted lasevad sul dokumentide printimisel "
 "kasutatavaid kirjatüüpe valida."
 
-#: src/dialogs/gedit-preferences.glade2.h:33
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The print page settings let you customize how gedit prints documents."
 msgstr "Prinditava lehe sätted lasevad sul dokumentide printimist kohandada."
 
-#: src/dialogs/gedit-preferences.glade2.h:34
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
 "Salvestamise sätted lasevad sul kohandada, kuidas gedit faile salvestab."
 
-#: src/dialogs/gedit-preferences.glade2.h:35
+#: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The tabs settings let you customize the tabs width."
 msgstr "Tabulaatori sätted lasevad sul tabulaatori laiust kohandada."
 
-#: src/dialogs/gedit-preferences.glade2.h:36
+#: src/dialogs/gedit-preferences.glade2.h:38
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
@@ -1153,83 +1211,91 @@ msgstr ""
 "Unustamise sätted lasevad sul määrata maksimaalse tegevuste arvu, mida gedit "
 "saab unustada."
 
-#: src/dialogs/gedit-preferences.glade2.h:37
+#: src/dialogs/gedit-preferences.glade2.h:39
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr "Murdmise sätted lasevad sul kohandada, kuidas gedit ridu murrab."
 
-#: src/dialogs/gedit-preferences.glade2.h:38
+#: src/dialogs/gedit-preferences.glade2.h:40
 msgid "U_se default theme colors"
 msgstr "Kas_uta teema vaikimisi värve"
 
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences.glade2.h:41
 msgid "U_se original file encoding if possible"
 msgstr "Võimaluse korral kasuta faili _originaalkodeeringut"
 
-#: src/dialogs/gedit-preferences.glade2.h:41
+#: src/dialogs/gedit-preferences.glade2.h:43
 msgid "Use cu_rrent locale's encoding if possible"
 msgstr "Võimaluse korral kasuta a_ktiivse lokaadi kodeeringut"
 
-#: src/dialogs/gedit-preferences.glade2.h:42
+#: src/dialogs/gedit-preferences.glade2.h:44
 msgid "Use current _locale's encoding if possible"
 msgstr "Võimaluse korral kasuta aktiivse _lokaadi kodeeringut"
 
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "Use current locale's encoding if possible when creating a new file"
+msgstr "Uue faili loomisel kasuta võimaluse korral aktiivse lokaadi kodeeringut"
+
+#: src/dialogs/gedit-preferences.glade2.h:46
+msgid "Use current locale's encoding if possible when saving"
+msgstr "Salvestamisel kasuta võimaluse korral aktiivse lokaadi kodeeringut"
+
+#: src/dialogs/gedit-preferences.glade2.h:47
 msgid "When creating a new file..."
 msgstr "Uue faili loomisel..."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
+#: src/dialogs/gedit-preferences.glade2.h:48
 msgid "When saving..."
 msgstr "Salvestamisel..."
 
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:49
 msgid "Wrap lines at _word boundaries"
 msgstr "Murra read _sõna piirides"
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:50
 msgid "Wrap lines at ch_aracter boundaries"
 msgstr "Murra read _märgi piirides"
 
-#: src/dialogs/gedit-preferences.glade2.h:48
+#: src/dialogs/gedit-preferences.glade2.h:52
 msgid "_Autosave current file every"
 msgstr "Salvesta aktiivne fail _automaatselt iga"
 
-#: src/dialogs/gedit-preferences.glade2.h:49
+#: src/dialogs/gedit-preferences.glade2.h:53
 msgid "_Background color:"
 msgstr "Tau_stavärv:"
 
-#: src/dialogs/gedit-preferences.glade2.h:50
+#: src/dialogs/gedit-preferences.glade2.h:54
 msgid "_Display line numbers"
 msgstr "_Näita reanumbreid"
 
-#: src/dialogs/gedit-preferences.glade2.h:51
+#: src/dialogs/gedit-preferences.glade2.h:55
 msgid "_Font used by the editor: "
 msgstr "Redaktoris kasutatav _kirjatüüp: "
 
-#: src/dialogs/gedit-preferences.glade2.h:52
+#: src/dialogs/gedit-preferences.glade2.h:56
 msgid "_Font used to print headers:"
 msgstr "_Päiste printimisel kasutatav kirjatüüp: "
 
-#: src/dialogs/gedit-preferences.glade2.h:53
+#: src/dialogs/gedit-preferences.glade2.h:57
 msgid "_Never wrap lines"
 msgstr "_Ära murra ridu"
 
-#: src/dialogs/gedit-preferences.glade2.h:54
+#: src/dialogs/gedit-preferences.glade2.h:58
 msgid "_Restore default fonts"
 msgstr "_Taasta vaikimisi kirjatüübid"
 
-#: src/dialogs/gedit-preferences.glade2.h:55
+#: src/dialogs/gedit-preferences.glade2.h:59
 msgid "_Text color:"
 msgstr "_Teksti värv:"
 
-#: src/dialogs/gedit-preferences.glade2.h:56
+#: src/dialogs/gedit-preferences.glade2.h:60
 msgid "_Use default theme font"
 msgstr "_Kasuta teema vaikimisi kirjatüüpi"
 
-#: src/dialogs/gedit-preferences.glade2.h:57
+#: src/dialogs/gedit-preferences.glade2.h:61
 msgid "action(s)"
 msgstr "tegevus(t)"
 
-#: src/dialogs/gedit-preferences.glade2.h:58
+#: src/dialogs/gedit-preferences.glade2.h:62
 msgid "minutes"
 msgstr "minuti järel"
 
@@ -1475,20 +1541,29 @@ msgstr "Ei saa faili tagavarakoopiat luua."
 msgid "It is not possible to revert an Untitled document"
 msgstr "Pealkirjata dokumendi taastamine on võimatu"
 
-#: src/gedit-file-selector-util.c:114
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Fail nimega ''%s'' on juba olemas.\n"
-"Kas tahad seda asendada salvestatava failiga?"
-
-#: src/gedit-file-selector-util.c:122
+#: src/gedit-file-selector-util.c:125
 msgid "Do_n't replace"
 msgstr "Ä_ra asenda"
 
-#: src/gedit-file-selector-util.c:502
+#: src/gedit-file-selector-util.c:147
+#, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Fail nimega \"%s\" on juba olemas.\n"
+"Kas tahad seda asendada salvestatava failiga?"
+
+#: src/gedit-file-selector-util.c:158
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"Fail nimega \"%s\" on ainult loetav.\n"
+"Kas tahad üritada seda salvestatava failiga asendada?"
+
+#: src/gedit-file-selector-util.c:544
 msgid "Select a filename to save"
 msgstr "Vali failinimi salvestamiseks"
 
@@ -1496,63 +1571,63 @@ msgstr "Vali failinimi salvestamiseks"
 msgid "Open File ..."
 msgstr "Ava fail ..."
 
-#: src/gedit-file.c:176 src/gedit-file.c:811
+#: src/gedit-file.c:176 src/gedit-file.c:831
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Laetud fail '%s'"
 
-#: src/gedit-file.c:304 src/gedit-file.c:420
+#: src/gedit-file.c:304 src/gedit-file.c:433
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Faili '%s' salvestamine ..."
 
-#: src/gedit-file.c:325 src/gedit-file.c:435
+#: src/gedit-file.c:332 src/gedit-file.c:448
 msgid "The document has not been saved."
 msgstr "Dokumenti ei ole veel salvestatud."
 
-#: src/gedit-file.c:338 src/gedit-file.c:432
+#: src/gedit-file.c:345 src/gedit-file.c:445
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fail '%s' salvestatud."
 
-#: src/gedit-file.c:399
+#: src/gedit-file.c:412
 msgid "Save as ..."
 msgstr "Salvesta kui..."
 
-#: src/gedit-file.c:606
+#: src/gedit-file.c:626
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Faili '%s' taastamine ..."
 
-#: src/gedit-file.c:619
+#: src/gedit-file.c:639
 msgid "The document has not been reverted."
 msgstr "Dokumenti ei taastatud."
 
-#: src/gedit-file.c:629
+#: src/gedit-file.c:649
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Fail '%s' on taastatud."
 
-#: src/gedit-file.c:655
+#: src/gedit-file.c:675
 #, c-format
 msgid "Loading %d files..."
 msgstr "%d faili laadimine..."
 
-#: src/gedit-file.c:687
+#: src/gedit-file.c:711
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Faili \"%s\" pole olemas. Kas tahad seda luua?"
 
-#: src/gedit-file.c:746
+#: src/gedit-file.c:766
 #, c-format
 msgid "Loaded %i files"
 msgstr "Laetud %i faili"
 
-#: src/gedit-file.c:869
+#: src/gedit-file.c:889
 msgid "Could not read data from stdin."
 msgstr "Standardsisendist (stdin) andmete lugemine ebaõnnestus."
 
-#: src/gedit-mdi.c:840
+#: src/gedit-mdi.c:850
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1563,23 +1638,23 @@ msgstr ""
 "\n"
 "Kui sa muudatusi ei salvesta, siis lähevad need kaduma."
 
-#: src/gedit-mdi.c:845
+#: src/gedit-mdi.c:855
 msgid "Do_n't save"
 msgstr "Ä_ra salvesta"
 
-#: src/gedit-mdi.c:864
+#: src/gedit-mdi.c:874
 msgid "_Don't quit"
 msgstr "Ära _välju"
 
-#: src/gedit-mdi.c:868
+#: src/gedit-mdi.c:878
 msgid "_Don't close"
 msgstr "Ära _sulge"
 
-#: src/gedit-mdi.c:958
+#: src/gedit-mdi.c:968
 msgid "(modified)"
 msgstr "(muudetud)"
 
-#: src/gedit-mdi.c:964
+#: src/gedit-mdi.c:974
 msgid "(readonly)"
 msgstr "(kirjutuskaitsega)"
 
@@ -1665,7 +1740,7 @@ msgstr "Lehekülg: %d"
 msgid "gedit - Print Preview"
 msgstr "gedit - Prindivaade"
 
-#: src/gedit-print.c:591
+#: src/gedit-print.c:595
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -2377,7 +2452,8 @@ msgid ""
 "Cannot create the file \"%s\".\n"
 "\n"
 "The file name is too long."
-msgstr "Ei saa faili \"%s\" luua.\n"
+msgstr ""
+"Ei saa faili \"%s\" luua.\n"
 "\n"
 "Failinimi on liiga pikk."
 
