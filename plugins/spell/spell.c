@@ -390,6 +390,7 @@ get_next_mispelled_word (GeditDocument *doc)
 		gedit_debug (DEBUG_PLUGINS, "Select [%d, %d]", start, end);
 
 		gedit_document_set_selection (doc, start, end);
+
 		gedit_view_scroll_to_cursor (gedit_get_active_view ());
 	}
 	else	
@@ -617,7 +618,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	}
 	else	
 		set_check_range (doc, 0, -1);
-	
+
 	word = get_next_mispelled_word (doc);
 	if (word == NULL)
 	{

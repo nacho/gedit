@@ -1,3 +1,8 @@
+2002-09-17  Matt Brubeck <mbrubeck@cs.hmc.edu>
+	
+	* gedit-document.c (gedit_document_save_as_real): Use umask(2) 
+	to calculate permissions for new files (fixes bug #93303)
+
 2002-09-16  James Willcox  <jwillcox@gnome.org>
 
 	Converted to recent-files stuff from libegg

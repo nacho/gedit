@@ -1302,7 +1302,9 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		create_backup_copy = FALSE;
 
 		/* Use default permissions */
-		st.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+		saved_umask = umask(0);
+		st.st_mode = 0666 & ~saved_umask;
+		umask(saved_umask);
 		st.st_uid = getuid ();
 
 		result = stat (dirname, &dir_st);
@@ -1330,7 +1332,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		goto out;
 	}
 
-      	chars = gedit_document_get_chars (doc, 0, -1);
+	chars = gedit_document_get_chars (doc, 0, -1);
 
 	encoding_setting = gedit_prefs_manager_get_save_encoding ();
 
@@ -2110,7 +2112,7 @@ gedit_document_set_cursor (GeditDocument *doc, gint cursor)
 void
 gedit_document_set_selection (GeditDocument *doc, gint start, gint end)
 {
-  	GtkTextIter start_iter;
+ 	GtkTextIter start_iter;
 	GtkTextIter end_iter;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -2128,8 +2130,6 @@ gedit_document_set_selection (GeditDocument *doc, gint start, gint end)
 
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &end_iter);
 
-	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
-                               gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "selection_bound"),
-                               &start_iter);
+	gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
+					"selection_bound", &start_iter);
 }
-

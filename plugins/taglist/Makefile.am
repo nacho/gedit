@@ -4,7 +4,8 @@ plugindir = $(libdir)/gedit-2/plugins
 taglistdir = $(datadir)/gedit-2/taglist
 taglist_DATA = \
 	HTML.tags	\
-	Latex.tags
+	Latex.tags	\
+	XSLT.tags
 
 INCLUDES = \
 	-I$(top_srcdir)/src 				\
