@@ -16,8 +16,6 @@ module GNOME {
 
 		interface Document : Bonobo::Unknown {
 			exception DocumentReadOnly {};
-		
-			oneway void setLinePosition (in long line);
 
 			void insert (in long offset, in string str,
 					    in long length)
@@ -26,6 +24,7 @@ module GNOME {
 
 		interface Window : Bonobo::Unknown {
 			oneway void openURIList (in URIList locations,
+						 in string enc_charset,
 						 in long line_pos);
 			oneway void grabFocus ();
 			Document newDocument ();

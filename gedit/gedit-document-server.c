@@ -63,18 +63,6 @@ gedit_document_server_new (GeditDocument *doc)
 }
 
 static void
-impl_gedit_document_server_setLinePosition (PortableServer_Servant _servant,
-					    CORBA_long position,
-					    CORBA_Environment * ev)
-{
-	GeditDocumentServer *doc_server;
-
-	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
-
-	gedit_document_goto_line (doc_server->doc, MAX (0, position - 1));
-}
-
-static void
 impl_gedit_document_server_insert (PortableServer_Servant _servant,
 				   const CORBA_long offset,
 				   const CORBA_char *str,
@@ -107,9 +95,7 @@ gedit_document_server_class_init (GeditDocumentServerClass *klass)
 
         object_class->finalize = gedit_document_server_object_finalize;
 
-        /* connect implementation callbacks */
-	epv->setLinePosition = impl_gedit_document_server_setLinePosition;
-	epv->insert          = impl_gedit_document_server_insert;
+	epv->insert = impl_gedit_document_server_insert;
 }
 
 static void

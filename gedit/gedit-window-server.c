@@ -38,6 +38,7 @@
 #include "gedit-window-server.h"
 #include "gedit-document-server.h"
 #include "GNOME_Gedit.h"
+#include "gedit-encodings.h"
 #include "gedit-file.h"
 #include "gedit-mdi.h"
 #include "gedit2.h"
@@ -61,10 +62,12 @@ gedit_window_server_new (BonoboWindow *win)
 static void
 impl_gedit_window_server_openURIList (PortableServer_Servant _servant,
 				      const GNOME_Gedit_URIList *uris,
+				      const char *enc_charset,
 				      int line_pos,
 				      CORBA_Environment *ev)
 {
 	GSList *list = NULL;
+	const GeditEncoding *encoding = NULL;
 	guint i;
 
 	/* convert from CORBA_sequence into GList */
@@ -75,9 +78,12 @@ impl_gedit_window_server_openURIList (PortableServer_Servant _servant,
 
 	list = g_slist_reverse (list);
 
+	if (enc_charset != NULL)
+		encoding = gedit_encoding_get_from_charset (enc_charset);
+
 	if (list != NULL) 
 	{
-		gedit_file_open_uri_list (list, NULL, line_pos, TRUE);
+		gedit_file_open_uri_list (list, encoding, line_pos, TRUE);
 
 		g_slist_foreach (list, (GFunc)g_free, NULL);
 		g_slist_free (list);

@@ -223,7 +223,11 @@ gedit_handle_automation (GnomeProgram *program)
 		}
 
 		CORBA_sequence_set_release (uri_list, CORBA_TRUE);
-		GNOME_Gedit_Window_openURIList (window, uri_list, data->line_pos, &env);
+		GNOME_Gedit_Window_openURIList (window,
+						uri_list,
+						data->encoding ? encoding_charset : "",
+						data->line_pos,
+						&env);
 
 		g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
 		g_slist_free (data->file_list);
