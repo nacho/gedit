@@ -12,6 +12,7 @@
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
+#include "gE_prefs.h"
 #include "toolbar.h"
 #include "gE_document.h"
 #include "gE_about.h"

@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 #define STRING_LENGTH_MAX	256
-#define GEDIT_ID	"gEdit 0.4.0"
+#define GEDIT_ID	"gEdit 0.4.5"
 
 typedef struct _gE_search {
 	GtkWidget *window;
@@ -74,9 +74,12 @@ typedef struct _gE_window {
 	gint show_tabs;
 	gint show_status;
 	gint have_toolbar;
+		gint have_tb_pix;
+		gint have_tb_text;
 #endif
 	gchar *print_cmd;
 	GtkPositionType tab_pos;
+
 #if PLUGIN_TEST
 	plugin *hello;
 #endif

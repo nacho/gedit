@@ -369,12 +369,14 @@ void gE_save_settings(gE_window *window, gchar *cmd)
   gnome_config_set_int ("auto indent", (gint) window->auto_indent);
   gnome_config_set_int ("show statusbar", (gint) window->show_status);
   gnome_config_set_int ("toolbar", (gint) window->have_toolbar);
+  gnome_config_set_int ("tb text", (gint) window->have_tb_text);
+  gnome_config_set_int ("tb pix", (gint) window->have_tb_pix);
 
   if (window->print_cmd == "")
     gnome_config_set_string ("print command", "lpr -rs ");
   else
-    /*gnome_config_set_string ("print command", window->print_cmd);*/
-    gnome_config_set_string ("print command", cmd);
+    gnome_config_set_string ("print command", window->print_cmd);
+    /*gnome_config_set_string ("print command", cmd);*/
 
 
   gnome_config_pop_prefix ();
@@ -389,6 +391,8 @@ void gE_get_settings(gE_window *window)
   window->tab_pos = gnome_config_get_int ("tab pos");
   window->show_status = gnome_config_get_int ("show statusbar");
   window->have_toolbar = gnome_config_get_int ("toolbar");
+  window->have_tb_text = gnome_config_get_int ("tb text");
+  window->have_tb_pix = gnome_config_get_int ("tb pix");
   
  window->print_cmd = gnome_config_get_string("print command");
 
@@ -407,8 +411,19 @@ void gE_get_settings(gE_window *window)
  
   if (window->have_toolbar == TRUE)
     {
+
      tb_on_cb(NULL,window);
-     window->have_toolbar = TRUE;
+     window->have_toolbar = 1;
+     
+    if(window->have_tb_text == 0 && window->have_tb_pix == 1)
+      tb_pic_only_cb(NULL,window);
+    
+    if(window->have_tb_text == 1 && window->have_tb_pix == 0)
+      tb_text_only_cb(NULL,window);
+    
+    if(window->have_tb_text == 0 && window->have_tb_pix == 0)
+      tb_pic_text_cb(NULL,window);
+
     }
   if (window->have_toolbar == FALSE)
     {

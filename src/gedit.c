@@ -29,6 +29,7 @@
 #include "gE_init.h"
 #include "gE_document.h"
 #include "gE_prefs.h"
+#include "gE_plugin_api.h"
 #include "menus.h"
 
 GList *window_list;

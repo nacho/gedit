@@ -489,27 +489,6 @@ void file_quit_cmd_callback (GtkWidget *widget, gpointer cbdata)
 }
 
 
-/* ---- Print Function ---- */
-
-void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata)
-{
-char print[256];
-	gE_data *data = (gE_data *)cbdata;
-
-     file_save_cmd_callback(NULL,NULL);
-
-	strcpy(print, "");
-	strcpy(print, data->window->print_cmd);
-
-                      
-	strcat(print, gE_document_current(data->window)->filename);
-	system (print);   
-	
-	gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);
-   /*system("rm -f temp001");*/
-
-}
-
 /* ---- Clipboard Callbacks ---- */
 
 void edit_cut_cmd_callback (GtkWidget *widget, gpointer cbdata)

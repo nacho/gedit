@@ -96,6 +96,7 @@ gE_about_box(GtkWidget *w, gpointer cbdata)
 	gtk_container_add (GTK_CONTAINER (hbox), vbox);
 	gtk_container_border_width (GTK_CONTAINER (vbox), 5);
 	
+
 	tmp = gtk_label_new (GEDIT_ID);
 	gtk_misc_set_alignment(GTK_MISC(tmp), 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (vbox), tmp, TRUE, TRUE, 1);
@@ -106,10 +107,11 @@ gE_about_box(GtkWidget *w, gpointer cbdata)
 	gtk_misc_set_alignment(GTK_MISC(tmp), 0.0, 0.5);
 	gtk_widget_show (tmp);
 
-	tmp = gtk_label_new ("http://melt.home.ml.org/gedit");
+	tmp = gtk_label_new ("http://nuklear.home.ml.org/gedit");
 	gtk_box_pack_start (GTK_BOX (vbox), tmp, TRUE, TRUE, 1);
 	gtk_misc_set_alignment(GTK_MISC(tmp), 0.0, 0.5);
 	gtk_widget_show (tmp);
+
 
 	gtk_widget_show (vbox);
 	gtk_widget_show (hbox);
@@ -145,7 +147,7 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 	gchar *authors[] = {
 		"Alex Roberts",
 		"Evan Lawrence",
-		"http://melt.home.ml.org/gedit",
+		"http://nuklear.home.ml.org/gedit",
 		NULL
 	};
 
