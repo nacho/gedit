@@ -1,14 +1,14 @@
 # gedit Finnish Translation
 # Suomennos: http://gnome-fi.sourceforge.net/
-# Copyright (C) 1999-2001 Free Software Foundation, Inc.
-# Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2001.
+# Copyright (C) 1999-2002 Free Software Foundation, Inc.
+# Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2002.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-03-06 21:31+0200\n"
-"PO-Revision-Date: 2002-03-06 21:28+0200\n"
+"POT-Creation-Date: 2002-03-10 05:57-0500\n"
+"PO-Revision-Date: 2002-03-13 16:22+0200\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,45 +23,60 @@ msgstr "Muokkaa tekstitiedostoja"
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
-#: plugins/ASCII/ascii.c:42
+#: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
 msgstr "_ASCII-taulu"
 
-#: plugins/ASCII/ascii.c:45
+#: plugins/ASCII/ascii.c:46
 msgid "Pop-up a dialog containing an ASCII Table"
 msgstr "Näytä ASCII-taulun sisältävä valintaikkuna"
 
-#: plugins/ASCII/ascii.c:325
+#: plugins/ASCII/ascii.c:336
 msgid "Char"
 msgstr "Merkki"
 
-#: plugins/ASCII/ascii.c:332
+#: plugins/ASCII/ascii.c:343
 msgid "Dec#"
 msgstr "Desim#"
 
-#: plugins/ASCII/ascii.c:339
+#: plugins/ASCII/ascii.c:350
 msgid "Hex#"
 msgstr "Heks#"
 
-#: plugins/ASCII/ascii.c:346
+#: plugins/ASCII/ascii.c:357
 msgid "Name"
 msgstr "Nimi"
 
-#: plugins/ASCII/ascii.c:391 plugins/ASCII/ascii.c:512
+#: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
 msgid "ASCII table"
 msgstr "ASCII-taulu"
 
-#: plugins/ASCII/ascii.c:404
+#: plugins/ASCII/ascii.c:415
 msgid "_Insert char"
 msgstr "L_isää merkki"
 
-#: plugins/ASCII/ascii.c:513
+#: plugins/ASCII/ascii.c:524
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 msgstr "Tämä liitännäinen näyttää ASCII-taulun valintaikkunana"
 
-#: plugins/ASCII/ascii.c:515
+#: plugins/ASCII/ascii.c:526
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
 msgstr "Copyright (C) 2001-2002 Paolo Maggi"
+
+#: plugins/ASCII/asciitable.glade2.h:1
+msgid ""
+"If you wish to insert any of the characters in to the active \n"
+"document, select the character and click the \"Insert Char\" \n"
+"button or double click the character in the table."
+msgstr ""
+
+#: plugins/ASCII/asciitable.glade2.h:4
+msgid "Insert char"
+msgstr "Lisää merkki"
+
+#: plugins/ASCII/asciitable.glade2.h:5
+msgid "gedit: ASCII table"
+msgstr "gedit: ASCII-taulu"
 
 #: plugins/cvschangelog/cvschangelog.c:44
 msgid "Open CVS Chan_geLogs"
@@ -104,11 +119,11 @@ msgstr "Vertaile kahta tiedostoa toisiinsa..."
 msgid "C_ompare"
 msgstr "_Vertaile"
 
-#: plugins/diff/diff.c:491
+#: plugins/diff/diff.c:502
 msgid "The two documents you selected are the same."
 msgstr "Valitut asiakirjat ovat samoja"
 
-#: plugins/diff/diff.c:499
+#: plugins/diff/diff.c:510
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -118,7 +133,7 @@ msgstr ""
 "\n"
 "Anna kelvollinen tiedosto."
 
-#: plugins/diff/diff.c:508
+#: plugins/diff/diff.c:519
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -128,20 +143,20 @@ msgstr ""
 "\n"
 "Anna kelvollinen tiedosto."
 
-#: plugins/diff/diff.c:516
+#: plugins/diff/diff.c:527
 msgid "The two files you selected are the same."
 msgstr "Valitsemasi kaksi tiedostoa ovat samoja."
 
-#: plugins/diff/diff.c:533
+#: plugins/diff/diff.c:544
 msgid "The \"first\" document contains no text."
 msgstr "Asiakirjoista ensimmäinen ei sisällä tekstiä."
 
-#: plugins/diff/diff.c:562
+#: plugins/diff/diff.c:573
 msgid "The \"second\" document contains no text."
 msgstr "Asiakirjoista jälkimmäinen ei sisällä tekstiä"
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:583
+#: plugins/diff/diff.c:594
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -151,7 +166,7 @@ msgstr ""
 "\n"
 "gedit ei onnistunut luomaan väliaikaistiedostoa."
 
-#: plugins/diff/diff.c:601 plugins/diff/diff.c:614
+#: plugins/diff/diff.c:612 plugins/diff/diff.c:625
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -161,11 +176,11 @@ msgstr ""
 "\n"
 "Virhe suoritettaessa diff-komentoa."
 
-#: plugins/diff/diff.c:636
+#: plugins/diff/diff.c:647
 msgid "No differences were found between the selected documents."
 msgstr "Valittujen asiakirjojen välillä ei huomattu eroja."
 
-#: plugins/diff/diff.c:677
+#: plugins/diff/diff.c:688
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -175,7 +190,7 @@ msgstr ""
 "\n"
 "Tulos sisältää viallista UTF-8 dataa."
 
-#: plugins/diff/diff.c:901
+#: plugins/diff/diff.c:912
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
@@ -185,13 +200,76 @@ msgstr ""
 "\n"
 "Halutessasi enemmän tietoa diffistä, kirjoita \"man diff\" komentotulkissa.\n"
 
-#: plugins/diff/diff.c:904
+#: plugins/diff/diff.c:915
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
 msgstr ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
+
+#: plugins/diff/diff.glade2.h:1
+msgid "Choose the files to compare."
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:2
+msgid "Compare files..."
+msgstr "Vertaile tiedostoja..."
+
+#: plugins/diff/diff.glade2.h:3
+msgid "F_rom document"
+msgstr "_Asiakirjasta"
+
+#: plugins/diff/diff.glade2.h:4
+msgid "First"
+msgstr "Ensimmäinen"
+
+#: plugins/diff/diff.glade2.h:5
+msgid "From _document"
+msgstr "Asia_kirjasta"
+
+#: plugins/diff/diff.glade2.h:6
+msgid "From a _file on disk"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:7
+msgid "From a file o_n disk"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:8
+msgid "Ignore _blanks (-b option)"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:9
+msgid "Note that this option is only supported by GNU diff"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:10
+msgid "Second"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:11
+msgid "Use the _unified output format (-u option)"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
+#: src/dialogs/gedit-preferences.glade2.h:70 src/dialogs/goto-line.glade2.h:3
+#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
+msgid "gtk-cancel"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
+#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:71
+#: src/dialogs/uri.glade2.h:4
+msgid "gtk-help"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
+#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:72
+#: src/dialogs/goto-line.glade2.h:4
+#: src/dialogs/program-location-dialog.glade2.h:4
+msgid "gtk-ok"
+msgstr ""
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
@@ -211,18 +289,59 @@ msgstr "_Päivitä"
 
 #: plugins/docinfo/docinfo.c:366
 msgid ""
-"The word count plugin analyzes the current document and determines the "
-"number of words, lines, characters and non-space characters in it and "
-"display the result."
+"The word count plugin analyzes the current document and determines the number "
+"of words, lines, characters and non-space characters in it and display the "
+"result."
 msgstr ""
 "Analysoi avoimena olevan asiakirjan ja päättelee siinä olevien sanojen, "
 "rivien, merkkien ja ei-tyhjien merkkien määrät ja tulostaa ne."
 
 #: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
-#: plugins/shell_output/shell_output.c:424
-#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:540
+#: plugins/shell_output/shell_output.c:436
+#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
+
+#: plugins/docinfo/docinfo.glade2.h:1
+msgid "0"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:2
+msgid "Bytes"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:3
+msgid "Characters (no spaces)"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:4
+msgid "Characters (with spaces)"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:5
+msgid "File Name"
+msgstr "Tiedostonimi"
+
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+msgid "Lines"
+msgstr "Rivejä"
+
+#: plugins/docinfo/docinfo.glade2.h:7
+msgid "Update"
+msgstr "Päivitä"
+
+#: plugins/docinfo/docinfo.glade2.h:8
+msgid "Words"
+msgstr "Sanoja"
+
+#: plugins/docinfo/docinfo.glade2.h:9
+msgid "gedit: Document Info plugin"
+msgstr "gedit: Asiakirjan tietoliitännäinen"
+
+#: plugins/docinfo/docinfo.glade2.h:10
+#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
+msgid "gtk-close"
+msgstr "gtk-sulje"
 
 #: plugins/sample/sample.c:41
 msgid "Insert User _Name"
@@ -240,24 +359,24 @@ msgstr "Käyttäjänimi"
 msgid "Inserts the user name at the cursor position."
 msgstr "Lisää käyttäjänimen kohdistimen kohdalle."
 
-#: plugins/shell_output/shell_output.c:44
+#: plugins/shell_output/shell_output.c:45
 msgid "Insert Shell _Output"
 msgstr "Lisää k_omentotulkkituloste"
 
-#: plugins/shell_output/shell_output.c:47
+#: plugins/shell_output/shell_output.c:48
 msgid "Insert the shell output in the current document"
 msgstr "Lisää asiakirjaan tuloste komentotulkista"
 
-#: plugins/shell_output/shell_output.c:151
-#: plugins/shell_output/shell_output.c:420
+#: plugins/shell_output/shell_output.c:163
+#: plugins/shell_output/shell_output.c:432
 msgid "Shell output"
 msgstr "Komentotulkin tuloste"
 
-#: plugins/shell_output/shell_output.c:164
+#: plugins/shell_output/shell_output.c:176
 msgid "_Run"
 msgstr "_Suorita"
 
-#: plugins/shell_output/shell_output.c:252
+#: plugins/shell_output/shell_output.c:264
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -267,7 +386,7 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: plugins/shell_output/shell_output.c:281
+#: plugins/shell_output/shell_output.c:293
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -277,17 +396,33 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: plugins/shell_output/shell_output.c:334
+#: plugins/shell_output/shell_output.c:346
 msgid "An error occurs while running the selected command."
 msgstr "Antamaasi komentoa suoritettaessa tapahtui virhe."
 
-#: plugins/shell_output/shell_output.c:421
+#: plugins/shell_output/shell_output.c:433
 msgid ""
 "Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
 "Suorittaa komennon ja liittää sen tulosteen valittuna olevaan asiakirjaan "
 "osoittimen kohdalle"
+
+#: plugins/shell_output/shell_output.glade2.h:1
+msgid "Specify the working directory and the command you want to run."
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:2
+msgid "_Shell command:"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:3
+msgid "_Working directory:"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:4
+msgid "gedit: Shell Output plugin"
+msgstr "gedit: Komentotulkin tulosteliitännäinen"
 
 #: plugins/taglist/gedit-taglist-plugin.c:44
 msgid "Tag _List"
@@ -307,45 +442,49 @@ msgid ""
 "commonly used tabs/strings without having to type them."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:116
+#: plugins/taglist/gedit-taglist-plugin-window.c:117
 msgid "Tag list plugin"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:134
+#: plugins/taglist/gedit-taglist-plugin-window.c:135
 msgid "Select the group of tab you want to use."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:158
+#: plugins/taglist/gedit-taglist-plugin-window.c:159
 msgid "Double-click on a tag to insert it in the current document."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:169
+#: plugins/taglist/gedit-taglist-plugin-window.c:170
 msgid "Tags"
 msgstr ""
 
-#: plugins/time/time.c:44
+#: plugins/time/time.c:45
 msgid "_Insert Date/Time"
 msgstr "L_isää päiväys/aika"
 
-#: plugins/time/time.c:47
+#: plugins/time/time.c:48
 msgid "Insert current date and time at the cursor position"
 msgstr "Lisää päiväys ja aika kohdistimen kohdalle"
 
-#: plugins/time/time.c:256
+#: plugins/time/time.c:259
 msgid "Available formats"
 msgstr "Käytettävissä olevat muodot"
 
-#: plugins/time/time.c:297
+#: plugins/time/time.c:300 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia"
 
-#: plugins/time/time.c:537
+#: plugins/time/time.c:553
 msgid "Insert Date/Time"
 msgstr "Lisää päiväys/aika"
 
-#: plugins/time/time.c:538
+#: plugins/time/time.c:554
 msgid "Inserts current date and time at the cursor position."
 msgstr "Lisää päiväys ja aika kohdistimen kohdalle."
+
+#: plugins/time/time.glade2.h:2
+msgid "Select the format to use when inserting date/time."
+msgstr ""
 
 #: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
 #, c-format
@@ -395,11 +534,12 @@ msgstr ""
 "Epäkelpo glade-tiedosto liitännäistenhallinnalle -- kaikkia tarpeellisia "
 "laajennuksia ei löytynyt.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:571
+#: src/dialogs/gedit-dialog-plugin-manager.c:578
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Liitännäisten hallintaikkunan luominen epäonnistui"
 
-#: src/dialogs/gedit-dialog-replace.c:167 src/gedit-ui.xml.h:56
+#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
+#: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Korvaa"
 
@@ -429,18 +569,18 @@ msgstr "Tekstiä \"%s\" ei löytynyt."
 msgid "Found and replaced %d occurences."
 msgstr "Löydetty ja korvattu %d tapausta."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:73
+#: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
 msgstr "Aseta ohjelman sijainti ..."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:95
+#: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid ""
 "Could not find the required widgets inside program-location-dialog.glade2.\n"
 msgstr ""
 "Tarvittavia vitkuttimia program-location-dialog.glade2:n sisältä ei "
 "löytynyt.\n"
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
 msgid ""
 "The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
@@ -453,7 +593,7 @@ msgstr ""
 "\n"
 "Määritä ohjelman <tt>%s</tt> sijainti."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+#: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
 msgstr "Valittu tiedosto ei ole suorituskelpoinen."
 
@@ -462,10 +602,12 @@ msgid "Toolbar"
 msgstr "Työkalupalkki"
 
 #: src/dialogs/gedit-preferences-dialog.c:203
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "Status bar"
 msgstr "Tilarivi"
 
 #: src/dialogs/gedit-preferences-dialog.c:206
+#: src/dialogs/gedit-preferences.glade2.h:14
 msgid "MDI"
 msgstr "UAK"
 
@@ -474,22 +616,27 @@ msgid "Font & Colors"
 msgstr "Kirjasimet & Värit"
 
 #: src/dialogs/gedit-preferences-dialog.c:217
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "Tabs"
 msgstr "Välilehdet"
 
 #: src/dialogs/gedit-preferences-dialog.c:218
+#: src/dialogs/gedit-preferences.glade2.h:57
 msgid "Wrap mode"
 msgstr "Rivitys"
 
 #: src/dialogs/gedit-preferences-dialog.c:219
+#: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Line numbers"
 msgstr "Rivinumerot"
 
-#: src/dialogs/gedit-preferences-dialog.c:221 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:221
+#: src/dialogs/gedit-preferences.glade2.h:27 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/dialogs/gedit-preferences-dialog.c:222 src/gedit-ui.xml.h:81
+#: src/dialogs/gedit-preferences-dialog.c:222
+#: src/dialogs/gedit-preferences.glade2.h:52 src/gedit-ui.xml.h:81
 msgid "Undo"
 msgstr "Kumoa"
 
@@ -501,7 +648,8 @@ msgstr "Sivu"
 msgid "Editor"
 msgstr "Muokkain"
 
-#: src/dialogs/gedit-preferences-dialog.c:238 src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:238
+#: src/dialogs/gedit-preferences.glade2.h:22 src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Tulosta"
 
@@ -520,6 +668,359 @@ msgstr "Asetukset"
 #: src/dialogs/gedit-preferences-dialog.c:498
 msgid "Categories"
 msgstr "Kategoriat"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid " _Wrap lines (at character boundaries)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:2
+msgid " character(s)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:3
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:4
+msgid "Bottom"
+msgstr "Alhaalla"
+
+#: src/dialogs/gedit-preferences.glade2.h:5
+msgid "Button style"
+msgstr "Painikkeiden tyyli"
+
+#: src/dialogs/gedit-preferences.glade2.h:6
+msgid "Colors"
+msgstr "Värit"
+
+#: src/dialogs/gedit-preferences.glade2.h:7
+msgid "Create a _backup copy of files before saving"
+msgstr "Luo tiedostoista _varmuuskopiot ennen tallentamista"
+
+#: src/dialogs/gedit-preferences.glade2.h:8
+msgid "Font"
+msgstr "Kirjasin"
+
+#: src/dialogs/gedit-preferences.glade2.h:9
+msgid "Fonts & Colors"
+msgstr "Kirjasimet & Värit"
+
+#: src/dialogs/gedit-preferences.glade2.h:10
+msgid "Icon and _text"
+msgstr "Kuvake ja _teksti"
+
+#: src/dialogs/gedit-preferences.glade2.h:11
+msgid "LOGO"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:12
+msgid "Left"
+msgstr "Vasemmalla"
+
+#: src/dialogs/gedit-preferences.glade2.h:15
+msgid "Modal"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:16
+msgid "Notebook"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:17
+msgid "Notebook _tab position:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:18
+msgid "Pick the background color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:19
+msgid "Pick the selected text color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:20
+msgid "Pick the selection color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:21
+msgid "Pick the text color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:23
+msgid "Print _line numbers every"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:24
+msgid "Print _page headers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:25
+msgid "Right"
+msgstr "Oikealla"
+
+#: src/dialogs/gedit-preferences.glade2.h:26
+msgid "S_elected text color:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:28
+msgid "Se_lection color:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:29
+msgid "Set _tabs width equivalent to  "
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:30
+msgid "Set limit on _undo levels to"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:31
+msgid "Sho_w tooltips"
+msgstr "Näytä _vihjeet"
+
+#: src/dialogs/gedit-preferences.glade2.h:32
+msgid "Show cursor _position"
+msgstr "Näytä _kohdistimen sijainti"
+
+#: src/dialogs/gedit-preferences.glade2.h:33
+msgid "Show overwrite _mode"
+msgstr "Näytä _ylikirjoitustila"
+
+#: src/dialogs/gedit-preferences.glade2.h:36
+msgid ""
+"The Font & Colors settings let you choose the font and the colors to be used "
+"in the editor windows."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:37
+msgid ""
+"The MDI (Multiple Document Interface) mode refers to the way more than one "
+"text document is displayed in gedit. \n"
+"If you choose the Notebook mode, you may then decide where you want the tabs "
+"to appear in the gedit window."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid ""
+"The line numbers setting lets you choose to display the line numbers on the "
+"left hand side of the window."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:40
+msgid "The print settings let you customize how gedit prints documents."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+msgid "The save settings let you customize how gedit saves files."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid ""
+"The status bar settings let you show or hide status bar and customize its "
+"appearance."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "The tabs settings let you customize the tabs width."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid ""
+"The toolbar settings let you show or hide toolbar and customize its "
+"appearance."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid ""
+"The undo settings let you set the maximum number of actions that gedit can "
+"undo."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:46
+msgid "The wrap mode settings let you customize how lines have to be wrapped."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:47
+msgid "Toolbars"
+msgstr "Työkalupalkit"
+
+#: src/dialogs/gedit-preferences.glade2.h:48
+msgid "Top"
+msgstr "Ylhäällä"
+
+#: src/dialogs/gedit-preferences.glade2.h:49
+msgid "Toplevel"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:50
+msgid "U_se current locale only if the file already use it"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:51
+msgid "U_se default theme colors"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:53
+msgid "Use current _locale when possible"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:54
+msgid "When saving..."
+msgstr "Tallennettaessa..."
+
+#: src/dialogs/gedit-preferences.glade2.h:55
+msgid "Wrap lines at _word boundaries"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:56
+msgid "Wrap lines at ch_aracter boundaries"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:58
+msgid "_According to system settings"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:59
+msgid "_Auto save current file every"
+msgstr "Tallenna nykyinen tiedosto _automaattisesti joka"
+
+#: src/dialogs/gedit-preferences.glade2.h:60
+msgid "_Background color:"
+msgstr "_Taustaväri:"
+
+#: src/dialogs/gedit-preferences.glade2.h:61
+msgid "_Display line numbers"
+msgstr "Näytä _rivinumerot"
+
+#: src/dialogs/gedit-preferences.glade2.h:62
+msgid "_Font used by the editor: "
+msgstr "Muokkaimen käyttämä _kirjasin:"
+
+#: src/dialogs/gedit-preferences.glade2.h:63 src/gedit-ui.xml.h:96
+msgid "_Icon"
+msgstr "_Kuvake"
+
+#: src/dialogs/gedit-preferences.glade2.h:64
+msgid "_MDI Mode:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:65
+msgid "_Never wrap lines"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:66
+msgid "_Show status bar"
+msgstr "_Näytä tilarivi"
+
+#: src/dialogs/gedit-preferences.glade2.h:67
+msgid "_Show toolbar"
+msgstr "_Näytä Työkalupalkki"
+
+#: src/dialogs/gedit-preferences.glade2.h:68
+msgid "_Text color:"
+msgstr "_Edustaväri:"
+
+#: src/dialogs/gedit-preferences.glade2.h:69
+msgid "_Use default theme font"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:73
+msgid "level(s)"
+msgstr "taso(a)"
+
+#: src/dialogs/gedit-preferences.glade2.h:74
+msgid "line(s)"
+msgstr "rivi(ä)"
+
+#: src/dialogs/gedit-preferences.glade2.h:75
+msgid "minutes"
+msgstr ":s minuutti"
+
+#: src/dialogs/goto-line.glade2.h:1
+msgid "Goto Line"
+msgstr "Siirry riville"
+
+#: src/dialogs/goto-line.glade2.h:2
+msgid "_Line number:"
+msgstr "_Rivinumero:"
+
+#: src/dialogs/plugin-manager.glade2.h:1
+msgid "C_onfigure plugin"
+msgstr "Muokkaa _liitännäisen asetuksia"
+
+#: src/dialogs/plugin-manager.glade2.h:2
+msgid "Configure the selected plugin"
+msgstr "Muokkaa valitun liitännäisen asetuksia"
+
+#: src/dialogs/plugin-manager.glade2.h:3
+msgid "D_etails"
+msgstr "_Yksityiskohdat"
+
+#: src/dialogs/plugin-manager.glade2.h:4
+msgid ""
+"This is the Plugin Manager. Plugins are extra pieces of software that extend "
+"gedit capabilities. From here, you can choose which plugins you want to have "
+"loaded."
+msgstr ""
+
+#: src/dialogs/plugin-manager.glade2.h:5
+msgid "_Description"
+msgstr "_Kuvaus"
+
+#: src/dialogs/plugin-manager.glade2.h:6
+msgid "dialog1"
+msgstr "ikkuna1"
+
+#: src/dialogs/program-location-dialog.glade2.h:1
+msgid "Set program location..."
+msgstr "Aseta ohjelman sijainti"
+
+#: src/dialogs/program-location-dialog.glade2.h:2
+msgid "_Location to search for:"
+msgstr "_Sijainti josta etsitään:"
+
+#: src/dialogs/program-location-dialog.glade2.h:5
+msgid "label"
+msgstr "otsikko"
+
+#: src/dialogs/replace.glade2.h:1
+msgid "Case sensi_tive"
+msgstr ""
+
+#: src/dialogs/replace.glade2.h:2
+msgid "Find Next"
+msgstr "Etsi seuraava"
+
+#: src/dialogs/replace.glade2.h:4
+msgid "Replace All"
+msgstr "Korvaa kaikki"
+
+#: src/dialogs/replace.glade2.h:5
+msgid "Replace _with: "
+msgstr "Korvaa _merkkijonolla:"
+
+#: src/dialogs/replace.glade2.h:6
+msgid "Search fro_m the beginning of the document"
+msgstr "Etsi asiakirjan _alusta lähtien"
+
+#: src/dialogs/replace.glade2.h:7
+msgid "Search from the c_ursor position"
+msgstr "Etsi _kohdistimen kohdalta lähtien"
+
+#: src/dialogs/replace.glade2.h:8
+msgid "_Search for: "
+msgstr "_Etsi:"
+
+#: src/dialogs/uri.glade2.h:1
+msgid "Enter the location (URI) of the file you would like to open:"
+msgstr ""
+
+#: src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr ""
+
+#: src/dialogs/uri.glade2.h:5
+msgid "gtk-open"
+msgstr ""
 
 #: src/gedit2.c:68
 msgid "Show mdi debugging messages."
@@ -582,19 +1083,19 @@ msgstr "Ei vielä toteutettu."
 msgid "The string \"%s\" has not been found."
 msgstr "Merkkijonoa \"%s\" ei löytynyt."
 
-#: src/gedit-commands.c:419
+#: src/gedit-commands.c:421
 msgid "Impossible to update gedit settings."
 msgstr "geditin asetusten päivittäminen epäonnistui."
 
-#: src/gedit-commands.c:508
+#: src/gedit-commands.c:518
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:511
+#: src/gedit-commands.c:521
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
-"gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: http://gnome-fi."
-"sourceforge.net/"
+"gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: "
+"http://gnome-fi.sourceforge.net/"
 
 #: src/gedit-document.c:521 src/gedit-document.c:532
 #, c-format
@@ -811,10 +1312,6 @@ msgstr ""
 #: src/gedit-print.c:273
 msgid "gedit - Print Document"
 msgstr "gedit - Tulosta asiakirja"
-
-#: src/gedit-print.c:282
-msgid "Lines"
-msgstr "Rivejä"
 
 #: src/gedit-print.c:338
 #, c-format
@@ -1204,10 +1701,6 @@ msgstr "_Etsi"
 msgid "_Help"
 msgstr "_Ohje"
 
-#: src/gedit-ui.xml.h:96
-msgid "_Icon"
-msgstr "_Kuvake"
-
 #: src/gedit-ui.xml.h:97
 msgid "_New"
 msgstr "_Uusi"
@@ -1360,22 +1853,21 @@ msgid ""
 "Not enough available memory to open the file \"%s\".Please, close some "
 "running application and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
-"oleva ohjelma ja yritä uudelleen."
+"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä oleva "
+"ohjelma ja yritä uudelleen."
 
 #: src/gedit-utils.c:929
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found. \n"
-"\n"
+"Could not open the file \"%s\" because no host \"%s\" could be found. "
+"\n\n"
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again"
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelinta \"%s\" ei "
-"löytynyt. \n"
+"Tiedoston \"%s\" avaaminen epäonnistui koska palvelinta \"%s\" ei löytynyt. \n"
 "\n"
-"Tarkista että kirjoitit osoitteen oikein ja että välityspalvelimesi "
-"asetukset ovat oikein ja yritä uudelleen."
+"Tarkista että kirjoitit osoitteen oikein ja että välityspalvelimesi asetukset "
+"ovat oikein ja yritä uudelleen."
 
 #: src/gedit-utils.c:942
 #, c-format
@@ -1395,8 +1887,8 @@ msgid ""
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
-"\n"
+"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on "
+"tyhjä.\n\n"
 "Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
 
 #: src/gedit-utils.c:956
@@ -1413,8 +1905,8 @@ msgstr ""
 #: src/gedit-utils.c:964
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
+"Could not open the file \"%s\" because it contains invalid UTF-8 "
+"data.\n\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
 "Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa UTF-8 "
@@ -1451,8 +1943,7 @@ msgid ""
 "Perhaps, it has recently been deleted."
 msgstr ""
 "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei löydä "
-"sitä.\n"
-"\n"
+"sitä.\n\n"
 "Tämä voi johtua siitä että se on poistettu."
 
 #: src/gedit-utils.c:1117
@@ -1500,8 +1991,8 @@ msgstr ""
 #: src/gedit-utils.c:1164
 #, c-format
 msgid ""
-"Could not revert the file \"%s\" because there are too many open files\n"
-"\n"
+"Could not revert the file \"%s\" because there are too many open "
+"files\n\n"
 ".Please, close some open file and try again."
 msgstr ""
 "Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska liian monta "
@@ -1526,8 +2017,8 @@ msgid ""
 "\n"
 "Please, check that your proxy settings are correct and try again"
 msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelinta \"%s\" "
-"ei löytynyt. \n"
+"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelinta \"%s\" ei "
+"löytynyt. \n"
 "\n"
 "Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
 
@@ -1582,3 +2073,4 @@ msgstr "  PÄÄLLE"
 #: src/gedit-view.c:918
 msgid "  INS"
 msgstr "  LISÄÄ"
+
