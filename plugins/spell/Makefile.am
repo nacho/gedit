@@ -1,21 +1,25 @@
 # Spell checker plugin
 plugindir = $(libdir)/gedit-2/plugins
 
-BUILT_SOURCES = \
-	gedit-spell-checker-dialog-marshal.c		\
+BUILT_SOURCES = 						\
+	gedit-spell-checker-dialog-marshal.c			\
 	gedit-spell-checker-dialog-marshal.h
 
 	
-INCLUDES = \
-	-I$(top_srcdir)					\
-	$(GEDIT_CFLAGS) 				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
-	-DG_DISABLE_DEPRECATED				\
-	-DGDK_DISABLE_DEPRECATED			\
-	-DGTK_DISABLE_DEPRECATED			\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+INCLUDES = 							\
+	-I$(top_srcdir)						\
+	$(GEDIT_CFLAGS) 					\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+
+if MAINTAINER_MODE
+INCLUDES +=
+	-DG_DISABLE_DEPRECATED					\
+	-DGDK_DISABLE_DEPRECATED				\
+	-DGTK_DISABLE_DEPRECATED				\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
+endif
 
 plugin_LTLIBRARIES = libspell.la
 

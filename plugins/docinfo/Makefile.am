@@ -5,12 +5,16 @@ INCLUDES = \
 	-I$(top_srcdir) 				\
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+
+if MAINTAINER_MODE
+INCLUDES += \
 	-DG_DISABLE_DEPRECATED				\
 	-DGDK_DISABLE_DEPRECATED			\
 	-DGTK_DISABLE_DEPRECATED			\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
 	-DGNOME_DISABLE_DEPRECATED			
+endif
 
 plugin_LTLIBRARIES = libdocinfo.la
 

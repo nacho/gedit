@@ -10,12 +10,17 @@ INCLUDES =							\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
-	-DG_DISABLE_DEPRECATED					\
-	-DGDK_DISABLE_DEPRECATED				\
-	-DGTK_DISABLE_DEPRECATED				\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
-	-DGNOME_DISABLE_DEPRECATED
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+
+if MAINTAINER_MODE
+INCLUDES +=						\
+	-DG_DISABLE_DEPRECATED				\
+	-DGDK_DISABLE_DEPRECATED			\
+	-DGTK_DISABLE_DEPRECATED			\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-DGNOME_DISABLE_DEPRECATED			
+endif
+
 
 bonobodir = $(libdir)/bonobo
 bonobo_LTLIBRARIES = libgedit-control.la

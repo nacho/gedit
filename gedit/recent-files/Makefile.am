@@ -1,10 +1,13 @@
-INCLUDES = \
-	$(GEDIT_CFLAGS) 					\
+INCLUDES = $(GEDIT_CFLAGS)
+
+if MAINTAINER_MODE
+INCLUDES +=
 	-DG_DISABLE_DEPRECATED					\
 	-DGDK_DISABLE_DEPRECATED				\
 	-DGTK_DISABLE_DEPRECATED				\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
+endif
 
 headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit/recent-files
 header_DATA =				\
