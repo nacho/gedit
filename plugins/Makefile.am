@@ -9,7 +9,7 @@ INCLUDES = -I$(includedir) 				\
 plugindir = $(prefix)/share/go/plugins
 
 
-plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin hello_plugin encrypt_plugin decrypt_plugin  #email-plugin
+plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin hello_plugin encrypt_plugin #email-plugin
 
 diff_plugin_SOURCES =	\
 	diff.c		\
