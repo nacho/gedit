@@ -42,16 +42,18 @@
 
 struct _GeditOutputWindowPrivate
 {
-	GtkWidget *close_button;
-	GtkWidget *copy_button;
-	GtkWidget *clear_button;
+	GtkTooltips 	*tooltips;
+	
+	GtkWidget 	*close_button;
+	GtkWidget 	*copy_button;
+	GtkWidget 	*clear_button;
 
-	GtkWidget *close_menu_item;
-	GtkWidget *copy_menu_item;
-	GtkWidget *clear_menu_item;
+	GtkWidget 	*close_menu_item;
+	GtkWidget 	*copy_menu_item;
+	GtkWidget 	*clear_menu_item;
 
-	GtkWidget *treeview;
-	GtkTreeModel *model;
+	GtkWidget 	*treeview;
+	GtkTreeModel 	*model;
 };
 
 enum {
@@ -288,7 +290,6 @@ gedit_output_window_treeview_selection_changed (GtkTreeSelection *selection,
 static void 
 gedit_output_window_init (GeditOutputWindow  *output_window)
 {
-	GtkTooltips 		*tooltips;
 	GtkSettings 		*settings;
 	gint 			 w, h;
 	GtkWidget 		*vbox1;
@@ -308,7 +309,10 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 
 	output_window->priv = g_new0 (GeditOutputWindowPrivate, 1);
 
-	tooltips = gtk_tooltips_new ();
+	output_window->priv->tooltips = gtk_tooltips_new ();
+
+	g_object_ref (G_OBJECT (output_window->priv->tooltips ));
+	gtk_object_sink (GTK_OBJECT (output_window->priv->tooltips ));
 
 	settings = gtk_widget_get_settings (GTK_WIDGET (output_window));
 
@@ -324,7 +328,7 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	gtk_box_pack_start (GTK_BOX (vbox1), output_window->priv->close_button, FALSE, FALSE, 0);
 	gtk_widget_set_size_request (output_window->priv->close_button, w + 2, h + 2);
 
-	gtk_tooltips_set_tip (tooltips, 
+	gtk_tooltips_set_tip (output_window->priv->tooltips, 
 			      output_window->priv->close_button, 
 			      _("Close the output window"), 
 			      NULL);
@@ -362,7 +366,7 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	gtk_box_pack_start (GTK_BOX (vbox2), output_window->priv->copy_button, FALSE, FALSE, 0);
   	gtk_widget_set_size_request (output_window->priv->copy_button, w + 2, h + 2);
 
-	gtk_tooltips_set_tip (tooltips, 
+	gtk_tooltips_set_tip (output_window->priv->tooltips, 
 			      output_window->priv->copy_button, 
 			      _("Copy selected lines"), 
 			      NULL);
@@ -382,7 +386,7 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	gtk_box_pack_start (GTK_BOX (vbox2), output_window->priv->clear_button, FALSE, FALSE, 0);
 	gtk_widget_set_size_request (output_window->priv->clear_button, w + 2, h + 2);
 	
-	gtk_tooltips_set_tip (tooltips, 
+	gtk_tooltips_set_tip (output_window->priv->tooltips, 
 			      output_window->priv->clear_button, 
 			      _("Clear the output window"), 
 			      NULL);
@@ -470,6 +474,8 @@ gedit_output_window_finalize (GObject *object)
 
 	ow = GEDIT_OUTPUT_WINDOW (object);
 
+	g_object_unref (ow->priv->tooltips);
+	
 	if (ow->priv != NULL)
 	{
 		g_free (ow->priv);

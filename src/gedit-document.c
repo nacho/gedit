@@ -333,18 +333,10 @@ gedit_document_finalize (GObject *object)
 				document->priv->untitled_number);
 	}
 
-	if (document->priv->uri)
-    	{
-		g_free (document->priv->uri);
-      		document->priv->uri = NULL;
-	}		
-	
-	if (document->priv->last_searched_text)
-		g_free (document->priv->last_searched_text);
-
-	if (document->priv->last_replace_text)
-		g_free (document->priv->last_replace_text);
-
+	g_free (document->priv->uri);
+	g_free (document->priv->last_searched_text);
+	g_free (document->priv->last_replace_text);
+	g_free (document->priv->encoding);
 
 	g_object_unref (G_OBJECT (document->priv->undo_manager));
 	
@@ -1088,7 +1080,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	gchar *dirname;
 	mode_t saved_umask;
 	struct stat st;
-	char *chars;
+	gchar *chars = NULL;
 	gint chars_len;
 	gint fd;
 	gint retval;
@@ -1316,12 +1308,17 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 
 	if (create_backup_copy)
 	{
+		gchar *bak_ext;
 		gint result;
 
+		bak_ext = gedit_prefs_manager_get_backup_extension ();
+		
 		backup_filename = g_strconcat (real_filename, 
-				               gedit_prefs_manager_get_backup_extension (), 
+					       bak_ext,
 					       NULL);
 
+		g_free (bak_ext);
+		
 		result = rename (real_filename, backup_filename);
 
 		if (result != 0)
@@ -1365,6 +1362,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	/* Done */
 
  out:
+
+	g_free (chars);
 
 	g_free (filename);
 	g_free (real_filename);

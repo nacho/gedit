@@ -1304,11 +1304,6 @@ gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view)
 	GtkTextIter cur;
 	GtkTextMark *mark;
 	gint key;
-	gboolean auto_indent;
-	gboolean insert_spaces;
-
-	auto_indent = gedit_prefs_manager_get_auto_indent();
-	insert_spaces = gedit_prefs_manager_get_insert_spaces ();
 
 	buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (widget));
 
@@ -1317,7 +1312,8 @@ gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view)
 	mark = gtk_text_buffer_get_mark (buf, "insert");
 	gtk_text_buffer_get_iter_at_mark (buf, &cur, mark);
 	
-	if ((key == GDK_Return) && auto_indent && gtk_text_iter_ends_line (&cur)) 
+	if ((key == GDK_Return) && gtk_text_iter_ends_line (&cur) && 
+			gedit_prefs_manager_get_auto_indent ()) 
 	{
 		/* Auto-indent means that when you press ENTER at the end of a
 		 * line, the new line is automatically indented at the same
@@ -1342,7 +1338,7 @@ gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view)
 		}
 	}
 
-	if ((key == GDK_Tab) && insert_spaces)
+	if ((key == GDK_Tab) && gedit_prefs_manager_get_insert_spaces ())
 	{
 		gint cur_pos;
 		gint num_of_equivalent_spaces;
@@ -1375,7 +1371,7 @@ gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view)
 		return TRUE;
 	}
 		
-	return GTK_WIDGET_CLASS (parent_class)->key_press_event (widget, event);
+	return FALSE;
 }
 
 

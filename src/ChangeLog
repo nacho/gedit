@@ -1,3 +1,20 @@
+2003-01-14  Paolo Maggi <paolo.maggi@polito.it>
+
+	* gedit-document.c (gedit_document_finalize):
+	free document->priv->encoding
+	(gedit_document_save_as_real): don't leak chars and
+	bak_ext
+
+	* gedit-output-window.c: don't leak tooltips
+
+2003-01-09  Paolo Maggi <paolo.maggi@polito.it>
+
+	* gedit-view.c (gedit_view_key_press_cb): call 
+	gedit_prefs_manager_get_auto_indent and
+	gedit_prefs_manager_get_insert_spaces only when needed.
+	Return FALSE if the event is not managed 
+	(this fixes bug #102619).
+
 2003-01-10  James Willcox  <jwillcox@gnome.org>
 
 	Updated to latest recent-files code (fixes memory leak)
