@@ -7,6 +7,9 @@ extern "C" {
 
 /* For size_t */
 #include <stdio.h>
+#if PLUGIN_TEST
+#include "plugin.h"
+#endif
 
 #define STRING_LENGTH_MAX	256
 

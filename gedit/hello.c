@@ -12,15 +12,29 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 int main( int argc, char *argv[] )
 {
   int fd = atoi( argv[2] );
   int undone = 1;
   char buff[1025];
-  while( undone > 0 )
+
+  if( strcmp( argv[1], "-go" ) )
     {
-      buff[ undone = read( fd, buff, 1024 ) ] = 0;
-      printf( buff );
+      printf( "Must be run as a plugin.\n" );
+      _exit(1);
     }
-  _exit();
+  else
+    {
+      while( undone > 0 )
+	{
+	  buff[ undone = read( fd, buff, 1024 ) ] = 0;
+      printf( buff );
+	}
+    }
+  _exit(0);
 }
