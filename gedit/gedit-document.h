@@ -179,7 +179,7 @@ void		gedit_document_set_selection 	(GeditDocument *doc,
 						 gint start, 
 						 gint end);
 
-void 		gedit_document_set_language 	(GeditDocument *doc, 
+void 		gedit_document_set_language 	(GeditDocument *doc,
 						 GtkSourceLanguage *lang);
 GtkSourceLanguage *gedit_document_get_language 	(GeditDocument *doc);
 
