@@ -18,17 +18,18 @@
  */
 
 /* TODO: 
- * [ ] libglade-ify me
+ * [X] libglade-ify me
  */
 
 #include <config.h>
 #include <gnome.h>
+#include <glade/glade.h>
+
 
 #include "../../src/plugin.h"
 
+static GtkWidget *from, *to;
 
-static GtkWidget *entry1;
-static GtkWidget *entry2;
 
 static void
 destroy_plugin (PluginData *pd)
@@ -42,10 +43,10 @@ conv_hex (GtkWidget *widget, gpointer data)
 	int start;
 	char value[255];
 
-	start = atoi (gtk_entry_get_text (GTK_ENTRY (entry1)));
+	start = atoi (gtk_entry_get_text (GTK_ENTRY (from)));
   
 	sprintf (value,"%X",start);
-	gtk_entry_set_text (GTK_ENTRY(entry2), value);
+	gtk_entry_set_text (GTK_ENTRY(to), value);
 }
 
 static void
@@ -54,10 +55,10 @@ conv_oct (GtkWidget *widget, gpointer data)
 	int start;
 	char value[255];
 
-	start = atoi (gtk_entry_get_text( GTK_ENTRY( entry1 ) ));
+	start = atoi (gtk_entry_get_text( GTK_ENTRY( from ) ));
   
 	sprintf(value,"%o",start);
-	gtk_entry_set_text(GTK_ENTRY(entry2), value);
+	gtk_entry_set_text(GTK_ENTRY(to), value);
 }
 
 static void
@@ -66,10 +67,10 @@ conv_dec (GtkWidget *widget, gpointer data)
 	long start;
 	char value[255];
 
-	start = strtol (gtk_entry_get_text (GTK_ENTRY (entry1)), NULL, 16);
+	start = strtol (gtk_entry_get_text (GTK_ENTRY (from)), NULL, 16);
 
 	sprintf (value,"%d",start);
-	gtk_entry_set_text (GTK_ENTRY(entry2), value);
+	gtk_entry_set_text (GTK_ENTRY(to), value);
 }
 
 static void
@@ -81,50 +82,43 @@ close_plugin (GtkWidget *widget, gpointer data)
 void
 convert_plugin (void)
 {
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-	GtkWidget *button;
+	GladeXML *gui;
 	GtkWidget *dialog;
-	GtkWidget *label;
+	GtkWidget *dectohex;
+	GtkWidget *dectooct;
+	GtkWidget *hextodec;
+	GtkWidget *button;
 
-	dialog = gtk_dialog_new ();
-	gtk_window_set_title (GTK_WINDOW( dialog ), "Number Converter");
-	gtk_container_set_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10);
+	gui = glade_xml_new (GEDIT_GLADEDIR "/convert.glade", NULL);
+
+	if (!gui)
+	{
+		g_warning ("Could not find convert.glade");
+		return;
+	}
+
+	
+	dialog		= glade_xml_get_widget (gui, "dialog1");
+	to 		= glade_xml_get_widget (gui, "to");
+	from 		= glade_xml_get_widget (gui, "from");
+	dectohex 	= glade_xml_get_widget (gui, "dectohex");
+	dectooct 	= glade_xml_get_widget (gui, "dectooct");
+	hextodec 	= glade_xml_get_widget (gui, "hextodec");
+	button		= glade_xml_get_widget (gui, "button6");
 
 
-	hbox = gtk_hbox_new (FALSE, 5);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
 
-	label = gtk_label_new ("Value to be converted:");
-	gtk_box_pack_start( GTK_BOX( hbox ), label, TRUE, TRUE, 0 );
-	entry1 = gtk_entry_new();
-	gtk_box_pack_start( GTK_BOX( hbox ), entry1, TRUE, TRUE, 0 );
-
-  
-	entry2 = gtk_entry_new();
-	gtk_box_pack_start( GTK_BOX( hbox ), entry2, TRUE, TRUE, 0 );
-
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	button = gtk_button_new_with_label ("Convert Decimal to Hex");
-	gtk_signal_connect (GTK_OBJECT (button),
+	gtk_signal_connect (GTK_OBJECT (dectohex),
 			    "clicked",
 			    GTK_SIGNAL_FUNC (conv_hex), NULL);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox ), button, FALSE, TRUE, 0 );
 
-	button = gtk_button_new_with_label ("Convert Decimal to Octal");
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC( conv_oct ), NULL );
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), button, FALSE, TRUE, 0 );
+	gtk_signal_connect (GTK_OBJECT (dectooct), "clicked", GTK_SIGNAL_FUNC( conv_oct ), NULL );
 
-	button = gtk_button_new_with_label( "Convert Hex to Decimal" );
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC( conv_dec ), NULL );
-	gtk_box_pack_start (GTK_BOX( GTK_DIALOG( dialog )->vbox ), button, FALSE, TRUE, 0 );
+	gtk_signal_connect (GTK_OBJECT (hextodec), "clicked", GTK_SIGNAL_FUNC( conv_dec ), NULL );
 
-	button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
 	gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
 				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
 				   GTK_OBJECT (dialog));
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), button, FALSE, TRUE, 0);
 
 	gtk_widget_show_all (dialog);
 }
