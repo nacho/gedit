@@ -34,6 +34,7 @@ extern int last_assigned_integer;
 
 extern int gE_plugin_document_create( gint context, gchar *title );
 extern void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
+extern void gE_plugin_text_insert( gint docid, gchar *buffer, gint length, gint position );
 extern void gE_plugin_document_show( gint docid );
 extern int gE_plugin_document_current( gint context );
 extern char *gE_plugin_document_filename( gint docid );

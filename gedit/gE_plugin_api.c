@@ -42,6 +42,7 @@ void start_plugin( GtkWidget *widget, gE_data *data )
 
   callbacks.document.create = gE_plugin_document_create;
   callbacks.text.append = gE_plugin_text_append;
+  callbacks.text.insert = gE_plugin_text_insert;
   callbacks.document.show = gE_plugin_document_show;
   callbacks.document.current = gE_plugin_document_current;
   callbacks.document.filename = gE_plugin_document_filename;
@@ -49,6 +50,13 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.close = gE_plugin_document_close;
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
+
+  callbacks.document.open = NULL;
+  callbacks.document.close = NULL;
+  callbacks.text.get_selected_text = NULL;
+  callbacks.text.set_selected_text = NULL;
+  callbacks.document.get_position = NULL;
+  callbacks.document.get_selection = NULL;
   
   plugin_register( plug, &callbacks, *(int *)g_hash_table_lookup (win_pointer_to_int, data->window ) );
 }
@@ -105,6 +113,19 @@ void add_plugins_to_window (plugin_info *info, gE_window *window)
 int gE_plugin_document_create( gint context, gchar *title )
 {
   return *(int *)g_hash_table_lookup( doc_pointer_to_int, gE_document_new( (gE_window *) g_hash_table_lookup( win_int_to_pointer, &context )));
+}
+
+void gE_plugin_text_insert( gint docid, gchar *buffer, gint length, gint position )
+{
+  gE_document *document = (gE_document *) g_hash_table_lookup( doc_int_to_pointer, &docid );
+  GtkText *text = GTK_TEXT( document->text );
+  if( position >= gtk_text_get_length( text ) )
+    position = gtk_text_get_length( text );
+  gtk_text_freeze( text );
+  gtk_text_set_point( text, position );
+  gtk_text_insert( text, NULL, NULL, NULL, buffer, length );
+  gtk_text_thaw( text );
+  document->changed = 1;
 }
 
 void gE_plugin_text_append( gint docid, gchar *buffer, gint length )

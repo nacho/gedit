@@ -245,6 +245,14 @@ void client_text_append( gint docid, gchar *buff, gint length )
   sendblock( fdsend, buff, length );
 }
 
+void client_text_insert( gint docid, gchar *buff, gint length, gint position )
+{
+  sendcommand( 'i', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, position );
+  sendblock( fdsend, buff, length );
+}
+
 gchar *client_text_get( gint docid )
 {
   sendcommand( 'g', fdsend );

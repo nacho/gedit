@@ -48,6 +48,7 @@ extern "C"
   gint client_document_open( gint context, gchar *title );
   gboolean client_document_close( gint docid );
   void client_text_append( gint docid, gchar *buff, gint length );
+  void client_text_insert( gint docid, gchar *buff, gint length, gint position );
   void client_document_show( gint docid );
   void client_finish( gint context );
   gchar *client_text_get( gint docid );

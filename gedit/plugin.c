@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <dirent.h>
@@ -22,9 +23,20 @@
 #include "plugin.h"
 
 /* static void process_command( plugin *plug, gchar *buffer, int length, gpointer data ); */
-static void *plugin_parse(plugin *plug);
+/* static void *plugin_parse(plugin *plug); */
+static void
+process_command( plugin *plug, gchar *buffer, int length, gpointer data );
 
-static pthread_mutex_t fork_mutex = PTHREAD_MUTEX_INITIALIZER;
+typedef struct
+{
+  plugin *plug;
+  gchar *buff;
+  int length;
+  int sofar;
+  int incall;
+  plugin_callback *finished;
+  gpointer data;
+} partly_read;
 
 plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
 {
@@ -42,7 +54,6 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
   new_plugin->pipe_from = fromline[0];
   new_plugin->pipe_data = dataline[1];
   new_plugin->name = g_strdup( strrchr( plugin_name, '/' ) ? strrchr( plugin_name, '/' ) + 1 : plugin_name );
-  pthread_mutex_lock(&fork_mutex);
   new_plugin->pid = fork();
   if ( new_plugin->pid == 0 )
     {
@@ -86,7 +97,6 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
     }
   /* Success. */
 
-  pthread_mutex_unlock(&fork_mutex);
   close( toline[0] );
   close( fromline[1] );
   close( dataline[0] );
@@ -186,8 +196,13 @@ void plugin_query_all( plugin_callback_struct *callbacks )
 	    {
 	      plug = plugin_query( direntry->d_name );
 	      plug->callbacks = *callbacks;
+#if 0 		
 	      plug->context = 0;
 	      pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
+#else
+	      plugin_get_all( plug, 1, process_command, NULL ); 
+	      plugin_send_int( plug, 0 );
+#endif
 	    }
 	}
       closedir( dir );
@@ -282,12 +297,14 @@ void plugin_get_int( plugin *the_plugin, gint *number )
   plugin_real_get( the_plugin, (gchar *) number, sizeof( gint ) );
 }
 
+#if 0
 static void *plugin_parse(plugin *plug)
 {
   gchar command;
   gint docid;
   gint contextid;
   gint length;
+  gint position;
   gchar *buffer;
   gchar *buffer2;
   plugin_info *info;
@@ -411,6 +428,20 @@ static void *plugin_parse(plugin *plug)
 	  else
 	    plugin_send_data_with_length( plug, "", 0 );
 	  break;
+	case 'i':
+	  plugin_get_int( plug, &docid );
+	  plugin_get_int( plug, &position );
+	  plugin_get_int( plug, &length );
+	  buffer = g_malloc0( length + 1 );
+	  plugin_get( plug, buffer, length );
+	  {
+	    gdk_threads_enter();
+	    if ( plug->callbacks.text.insert )
+	      plug->callbacks.text.insert( docid, buffer, length, position );
+	    gdk_threads_leave();
+	  }
+	  g_free( buffer );
+	  break;
 	case 'l':
 	  plugin_get_int( plug, &docid );
 	  {
@@ -456,7 +487,6 @@ static void *plugin_parse(plugin *plug)
 	  break;
 	case 'p':
 	  plugin_get_int( plug, &docid );
-	  plugin_get_int( plug, &length );
 	  {
 	    gdk_threads_enter();
 	    if ( plug->callbacks.document.get_position )
@@ -547,25 +577,14 @@ void plugin_register( plugin *plug, plugin_callback_struct *callbacks, gint cont
   plug->context = context;
   pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
 }
+#endif
 
-#if 0
 void plugin_register( plugin *plug, plugin_callback_struct *callbacks, gint context )
 {
   plug->callbacks = *callbacks;
-  plugin_get_all( plug, 1, process_command, NULL ); */
-  plugin_send_int( plug, context ); */
+  plugin_get_all( plug, 1, process_command, NULL ); 
+  plugin_send_int( plug, context ); 
 }
-
-typedef struct
-{
-  plugin *plug;
-  gchar *buff;
-  int length;
-  int sofar;
-  int incall;
-  plugin_callback *finished;
-  gpointer data;
-} partly_read;
 
 static void plugin_get_more( gpointer data, gint source, GdkInputCondition condition )
 {
@@ -608,7 +627,7 @@ plugin_send_more( gpointer data, gint source, GdkInputCondition condition )
 {
   partly_read *partly = (partly_read *) data;
   int count;
-
+  
   partly->sofar += (count = write( source, partly->buff + partly->sofar, partly->length - partly->sofar ) );
   if( partly->length - partly->sofar == 0 )
     {
@@ -651,161 +670,303 @@ plugin_get_command( plugin *plug, gchar *buffer, int length, gpointer data )
 static void
 process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 {
-  gint next = GPOINTER_TO_INT( data );
-  plugin_info *info;
-  switch( next )
+  plugin_parse_state *state = data;
+
+  if( state->command_current_count < state->command_count )
     {
-    case 1:
-      plug->docid = *( (int *) buffer );
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 2 ) );
-      break;
-    case 2:
-      plugin_get_all( plug, *( (int *) buffer ), process_next, GINT_TO_POINTER( 3 ) );
-      break;
-    case 3:
-      if ( plug->callbacks.text.append )
-	plug->callbacks.text.append( plug->docid, buffer, length );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 4:
-      if ( plug->callbacks.document.show )
-	plug->callbacks.document.show( *( (int *) buffer ) );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 5:
-      if ( plug->callbacks.document.filename )
+      state->command[state->command_current_count ++] = *buffer;
+      switch( state->command[0] )
 	{
-	  char *filename = plug->callbacks.document.filename( *( (int *) buffer ) );
-	  plugin_send_data_with_length( plug, filename, strlen( filename ) );
-	}
-      else
-	plugin_send_data_with_length( plug, "", 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 6:
-     if ( plug->callbacks.document.current )
-	plugin_send_data_int( plug, plug->callbacks.document.current( *( (int *) buffer ) ) );
-      else
-	plugin_send_data_int( plug, 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 7:
-    case 11:
-      plug->docid = *( (int *) buffer );
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( next + 2 ) );
-      break;
-    case 8:
-      if ( plug->callbacks.text.get )
-	{
-	  char *data = plug->callbacks.text.get( *( (int *) buffer ) );
-	  plugin_send_data_all_with_length( plug, data, strlen( data ), plugin_get_command, NULL );
-	}
-      else
-	plugin_send_data_all_with_length( plug, "", 0, plugin_get_command, NULL );
-      break;
-    case 9:
-    case 13:
-    case 15:
-      plugin_get_all( plug, *( (int *) buffer ), process_next, GINT_TO_POINTER( next + 1 ) );
-      break;
-    case 10:
-      if ( plug->callbacks.document.create )
-	plugin_send_data_int( plug, plug->callbacks.document.create( plug->docid, buffer ) );
-      else
-	plugin_send_data_int( plug, 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 14:
-      if ( plug->callbacks.document.open )
-	plugin_send_data_int( plug, plug->callbacks.document.open( plug->docid, buffer ) );
-      else
-	plugin_send_data_int( plug, 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 16:
-      if ( plug->callbacks.program.reg )
-	{
-	  if( buffer[0] != '[' )
+	case 'e':
+	  switch( state->command[1] )
 	    {
-	      plugin_get_all( plug, 1, process_command, NULL );
+	    case 'r': /* Fall through. */
+	    case 't':
+	      state->int_count = 1;
+	      state->char_count = 0;
+	      break;
+	    case 's':
+	      state->int_count = 1;
+	      state->char_count = 1;
 	      break;
 	    }
-	  buffer ++;
-	  if ( strchr( buffer, ']' ) == 0 )
-	    {
-	      plugin_get_all( plug, 1, process_command, NULL );
-	      break;
-	    }
-	  *strchr( buffer, ']' ) = 0;
-	  if ( strcmp( buffer, "Plugins" ) )
-	    {
-	      plugin_get_all( plug, 1, process_command, NULL );
-	      break;
-	    }
-	  info = g_malloc0( sizeof( plugin_info ) );
-	  info->type = PLUGIN_STANDARD;
-	  info->menu_location = buffer + strlen( buffer ) + 1;
-	  info->plugin_name = plug->name;
-	  plug->callbacks.program.reg( info );
-	  g_free( info );
+	  break;
+	case 0:
+	  g_warning("Go: Bad read.  Plugin died?");
+	  plugin_finish( plug );
+	  g_free( plug );
+	  return;                            /* Exit point. */	  
+	  break;
 	}
-      plugin_get_all( plug, 1, process_command, NULL );
-      break;
-    case 17:
-      if ( plug->callbacks.document.close )
-	{	
-	  plugin_send_data_bool( plug, plug->callbacks.document.close( *( (int *) buffer ) ) );
+    }
+  else if ( state->int_current_count < state->int_count )
+    {
+      state->ints[state->int_current_count ++] = *( (int *) buffer );
+    }
+  else if ( state->char_current_count < state->char_count )
+    {
+      if ( state->getting_int )
+	{
+	  state->getting_int = FALSE;
+	  plugin_get_all( plug, *( (int *) buffer ), process_next, state );
+	  return;   /* Exit point. */
 	}
       else
-	plugin_send_data_bool( plug, FALSE );
+	{
+	  state->chars[state->char_current_count ++] = g_strdup( buffer );
+	}
+    }
+
+  if( state->command_current_count < state->command_count )
+    {
+      plugin_get_all( plug, 1, process_next, state );
+    }
+  else if ( state->int_current_count < state->int_count )
+    {
+      plugin_get_all( plug, sizeof( gint ), process_next, state );
+    }
+  else if ( state->char_current_count < state->char_count )
+    {
+      state->getting_int = TRUE;
+      plugin_get_all( plug, sizeof( gint ), process_next, state );
+    }
+  else
+    {
+      switch( state->command[0] )
+	{
+	case 'a':
+	  if ( plug->callbacks.text.append )
+	    plug->callbacks.text.append( state->ints[0], state->chars[0], strlen( state->chars[0] ) );
+	  break;
+	case 'c':
+	  if ( plug->callbacks.document.current )
+	    plugin_send_data_int( plug, plug->callbacks.document.current( state->ints[0] ) );
+	  else
+	    plugin_send_data_int( plug, 0 );
+	  break;
+	case 'e':
+	  switch(state->command[1])
+	    {
+	    case 'r':
+	      {
+		selection_range selection = { 0, 0 };
+		if ( plug->callbacks.document.get_selection )
+		  selection = plug->callbacks.document.get_selection( state->ints[0] );
+		plugin_send_data_int( plug, selection.start );
+		plugin_send_data_int( plug, selection.end );
+	      }
+	      break;
+	    case 's':
+	      if ( plug->callbacks.text.set_selected_text )
+		plug->callbacks.text.set_selected_text( state->ints[0], state->chars[0], strlen( state->chars[0] ) );
+	      break;
+	    case 't':
+	      {
+		char *buffer;
+		if ( plug->callbacks.text.get_selected_text )
+		  {
+		    buffer = plug->callbacks.text.get_selected_text( state->ints[0] );
+		  }
+		else
+		 buffer = NULL;
+		if( buffer != NULL )
+		  plugin_send_data_with_length( plug, buffer, strlen( buffer ) );
+		else
+		  plugin_send_data_with_length( plug, "", 0 );
+		break;
+	      }
+	    }
+	  break;
+	case 'f':
+	  if ( plug->callbacks.document.filename )
+	    {
+	      char *filename = plug->callbacks.document.filename( state->ints[0] );
+	      plugin_send_data_with_length( plug, filename, strlen( filename ) );
+	    }
+	  else
+	    plugin_send_data_with_length( plug, "", 0 );
+	  break;
+	case 'g':
+	  {
+	    char *buffer;
+	    if ( plug->callbacks.text.get )
+	      buffer = plug->callbacks.text.get( state->ints[0] );
+	    else
+	      buffer = NULL;
+	    if( buffer != NULL )
+	      plugin_send_data_with_length( plug, buffer, strlen( buffer ) );
+	    else
+	      plugin_send_data_with_length( plug, "", 0 );
+	  }
+	  break;
+	case 'i':
+	  if ( plug->callbacks.text.insert )
+	    plug->callbacks.text.insert( state->ints[0], state->chars[0], strlen( state->chars[0] ), state->ints[1] );
+	  break;
+	case 'l':
+	  if ( plug->callbacks.document.close )
+	    plugin_send_data_bool( plug, plug->callbacks.document.close( state->ints[0] ) );
+	  else
+	    plugin_send_data_bool( plug, FALSE );
+	  break;
+	case 'n':
+	  if ( plug->callbacks.document.create )
+	    plugin_send_data_int( plug, plug->callbacks.document.create( state->ints[0], state->chars[0] ) );
+	  else
+	    plugin_send_data_int( plug, 0 );
+	  break;
+	case 'o':
+	  if ( plug->callbacks.document.open )
+	    plugin_send_data_int( plug, plug->callbacks.document.open( state->ints[0], state->chars[0] ) );
+	  else
+	    plugin_send_data_int( plug, 0 );
+	  break;
+	case 'p':
+	  if ( plug->callbacks.document.get_position )
+	    plugin_send_data_int( plug, plug->callbacks.document.get_position( state->ints[0] ) );
+	  else
+	    plugin_send_data_int( plug, 0 );
+	  break;
+	case 'r':
+	  {
+	    char *buffer = state->chars[0];
+	    char *buffer2 = state->chars[1];
+	    plugin_info *info;
+	    if ( plug->callbacks.program.reg )
+	      {
+		if( buffer[0] != '[' )
+		  break;
+		buffer ++;
+		if ( strchr( buffer, ']' ) == 0 )
+		  break;
+		*strchr( buffer, ']' ) = 0;
+		if ( strcmp( buffer, "Plugins" ) )
+		  break;
+		info = g_malloc0( sizeof( plugin_info ) );
+		info->type = PLUGIN_STANDARD;
+		info->menu_location = buffer + strlen( buffer ) + 1;
+		info->suggested_accelerator = buffer2;
+		info->plugin_name = plug->name;
+		plug->callbacks.program.reg( info );
+		g_free( info );
+	      }
+	  }
+	  break;
+	case 's':
+	  if ( plug->callbacks.document.show )
+	    plug->callbacks.document.show( state->ints[0] );
+	  break;
+	case 0:
+	  g_warning("Go: Bad read.  Plugin died?");
+	  plugin_finish( plug );
+	  g_free( plug );
+	  return;                            /* Exit point. */	  
+	default:
+	  break;
+	}
+      {
+	int i;
+	for ( i = 0; i < state->char_count; i++ )
+	  {
+	    g_free( state->chars[ i ] );
+	  }
+      }
+      g_free( state );
       plugin_get_all( plug, 1, process_command, NULL );
-      break;  
     }
 }
 
 static void
 process_command( plugin *plug, gchar *buffer, int length, gpointer data )
 {
-  switch ( *buffer )
+  plugin_parse_state *state = g_new( plugin_parse_state, 1 );
+  int command_count = 1, int_count = 0, char_count = 0;
+  state->command_current_count = 1;
+  state->int_current_count = 0;
+  state->char_current_count = 0;
+  state->command[0] = *buffer;
+  switch( *buffer )
     {
-    case 'a': /* append */  /* Get docid */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 1 ) );
+    case 'a': /* Fall through. */
+    case 'n': /* Fall through. */
+    case 'o':
+      command_count = 1;
+      int_count = 1;
+      char_count = 1;
       break;
-    case 's': /* show */ /* Get docid */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 4 ) );
-      break;
-    case 'f': /* filename */ /* Get docid */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 5 ) );
-      break;
-    case 'c': /* current */ /* Get context */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 6 ) );
-      break;
-    case 'n': /* create */ /* Get context */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 7 ) );
-      break;
-    case 'o': /* open */ /* Get context */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 11 ) );
-      break;
-    case 'g': /* get */ /* Get docid */
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 8 ) );
-      break;
-    case 'l':
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 17 ) );
-      break;
-    case 'd': /* done */
-      plugin_finish( plug );
-      g_free( plug );
-      break;
-    case 'q':
-      if ( plug->callbacks.program.quit )
-	plugin_send_data_bool( plug, plug->callbacks.program.quit() );
-      else
-	plugin_send_data_bool( plug, FALSE );
-      plugin_get_all( plug, 1, process_command, NULL );
+    case 'c': /* Fall through. */
+    case 'f': /* Fall through. */
+    case 'g': /* Fall through. */
+    case 'l': /* Fall through. */
+    case 'p': /* Fall through. */
+    case 's':
+      command_count = 1;
+      int_count = 1;
+      char_count = 0;
       break;
     case 'r':
-      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 15 ) );
+      command_count = 1;
+      int_count = 0;
+      char_count = 2;
       break;
+    case 'i':
+      command_count = 1;
+      int_count = 2;
+      char_count = 1;
+      break;
+    case 'd': /* Fall through. */
+    case 'q':
+      command_count = 1;
+      int_count = 0;
+      char_count = 0;
+      break;
+    case 'e':
+      command_count = 2;
+      break;
+    case 0:
+      g_warning("Go: Bad read.  Plugin died?");
+      plugin_finish( plug );
+      g_free( plug );
+      return;                            /* Exit point. */
+    default:
+      g_warning("Go: Bad command.  Plugin malfunction?");
+      plugin_finish( plug );
+      g_free( plug );
+      return;                            /* Exit point. */
+    }
+  state->command_count = command_count;
+  state->int_count = int_count;
+  state->char_count = char_count;
+  if( state->command_current_count < state->command_count )
+    {
+      plugin_get_all( plug, 1, process_next, state );
+    }
+  else if ( state->int_current_count < state->int_count )
+    {
+      plugin_get_all( plug, sizeof( gint ), process_next, state );
+    }
+  else if ( state->char_current_count < state->char_count )
+    {
+      state->getting_int = TRUE;
+      plugin_get_all( plug, sizeof( gint ), process_next, state );
+    }
+  else
+    {
+      switch( state->command[0] )
+	{
+	case 'd':
+	  plugin_finish( plug );
+	  g_free( plug );
+	  return;
+	  break;
+	case 'q':
+	  if ( plug->callbacks.program.quit )
+	    plugin_send_data_bool( plug, plug->callbacks.program.quit() );
+	  else
+	    plugin_send_data_bool( plug, FALSE );
+	  break;
+	}
+      g_free( state );
+      plugin_get_all( plug, 1, process_command, NULL );
     }
 }
-#endif

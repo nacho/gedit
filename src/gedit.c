@@ -17,11 +17,7 @@
  */
 
 #include <unistd.h>
-#define __need_sigset_t
 #include <signal.h>
-#define __need_timespec
-#include <time.h>
-/*#include <signal.h>*/
 #include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
@@ -47,6 +43,7 @@ void setup_callbacks( plugin_callback_struct *callbacks )
 {
 	callbacks->document.create = gE_plugin_document_create;
 	callbacks->text.append = gE_plugin_text_append;
+	callbacks->text.insert = gE_plugin_text_insert;
 	callbacks->document.show = gE_plugin_document_show;
 	callbacks->document.current = gE_plugin_document_current;
 	callbacks->document.filename = gE_plugin_document_filename;
@@ -142,16 +139,6 @@ main (int argc, char **argv)
 
 	gtk_init (&argc, &argv);
 
-
-	if (!gdk_threads_init())
- 	{
-	        fprintf(stderr, "Could not initialize threads\n");
-	        exit(1);
-	}
-	
-	gdk_threads_enter();
-	
-
 	for (x = 1; x < argc; x++)
 	{
 		if (strcmp (argv[x], "--help") == 0)
@@ -196,7 +183,6 @@ main (int argc, char **argv)
 	gtk_main ();
 
 	gE_prefs_close ();
-	gdk_threads_leave();
 	return 0;
 
 } /* main */

@@ -1,8 +1,15 @@
+1998-10-03  Chris Lahey  <clahey@jennifer.reshall.umich.edu>
+
+	* src/gE_plugin_api.c: Added functionality for insert.
+	
+	* src/plugin.c, src/plugin.h: Rewrote plugin.c to not use
+	threads and still be robust and expandable.
+
 1998-09-23  Chris Lahey  <clahey@umich.edu>
 
 	* src/plugin.c (plugin_parse): Set up plugin_parse to better
 	handle plugin crashes.  Fixed an overwrite bug that probably
-	wouldn't have manifested but diserved to be fixed.
+	wouldn't have manifested but deserved to be fixed.
 
 	* src/gedit.c: Added some bizarre includes to get rid of some
 	warnings.  Called gdk_threads_leave after gtk_main returned, but

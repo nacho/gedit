@@ -16,7 +16,9 @@
 #ifndef __PLUGIN_H__
 #define __PLUGIN_H__
 
+#if 0
 #include <pthread.h>
+#endif
 #include <unistd.h>
 #include <glib.h>
 
@@ -56,6 +58,7 @@ typedef struct
 typedef struct
 {
   void (*append) ( gint id, gchar *data, gint length );
+  void (*insert) ( gint id, gchar *data, gint length, gint position );
   gchar* (*get) ( gint id );
   gchar* (*get_selected_text) ( gint id );
   gchar* (*set_selected_text) ( gint id, gchar *data, gint length );
@@ -87,8 +90,27 @@ typedef struct
   int in_call;
   plugin_callback_struct callbacks;
   int context;
+#if 0
   pthread_t thread;
+#endif
 } plugin;
+
+typedef struct
+{
+  int command[2];
+  int command_count;
+  int command_current_count;
+
+  int ints[10];
+  int int_count;
+  int int_current_count;
+
+  gchar *chars[10];
+  int char_count;
+  int char_current_count;
+  gboolean getting_int;
+  
+} plugin_parse_state;
 
 typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );
 
