@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = gedit pixmaps po help data plugins viewer
+SUBDIRS = gedit pixmaps po help data plugins
 
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
