@@ -535,7 +535,7 @@ create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
 	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
 
 	/* Add the detach tab button */
-	menu_item = gtk_menu_item_new_with_mnemonic (_("_Move to a new window"));
+	menu_item = gtk_menu_item_new_with_mnemonic (_("_Move to New Window"));
 	gtk_widget_show (menu_item);
 	g_signal_connect (G_OBJECT (menu_item), "activate",
 		      	  G_CALLBACK (gedit_mdi_child_tab_move_window_clicked), view);
