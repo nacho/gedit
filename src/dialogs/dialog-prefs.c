@@ -51,6 +51,9 @@ static GtkWidget *printlines;
 static GtkWidget *printlinesspin;
 static GtkWidget *lineslabel;
 static GtkWidget *paperselector;
+static GtkWidget *undo_levels;
+static GtkWidget *undo_levels_spin_button;
+static GtkWidget *undo_levels_label;
 
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
@@ -192,6 +195,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->printheader = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printheader));
 	settings->printwrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printwrap));
+
 	
 	g_free (settings->papersize);
 	if (strcmp( "custom", gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)))==0)
@@ -206,6 +210,11 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		settings->printlines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (printlinesspin));
 	else
 		settings->printlines = 0;
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (undo_levels)))
+		settings->undo_levels = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (undo_levels_spin_button));
+	else
+		settings->undo_levels = 0;
 	
         style = gtk_style_new ();
         
@@ -229,6 +238,34 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	gedit_window_refresh ();
 	gedit_save_settings ();
 }
+
+static void
+gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
+{
+	GList *children;
+	GList *l;
+	GtkContainer *container;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_CONTAINER (widget));
+
+	container = GTK_CONTAINER (widget);
+	children = gtk_container_children (container);
+
+	l = children;
+	while (l)
+	{
+		GtkWidget *child = (GtkWidget*)l->data;
+
+		if (GTK_IS_LABEL (child))
+			gtk_widget_set_sensitive (child, sens);
+
+		l = l->next;
+	}
+
+	g_list_free (children);
+}
+
 
 static void
 prefs_changed (GtkWidget *widget, gpointer data)
@@ -267,12 +304,60 @@ prepare_general_page (GladeXML *gui)
 }
 
 static void
+undo_levels_toggled (GtkWidget *widget, gpointer data)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (undo_levels)))
+	{
+		gtk_toggle_button_update_label_sensitivity (undo_levels, TRUE);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_spin_button), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_label), TRUE);
+	}
+	else
+	{
+		gtk_toggle_button_update_label_sensitivity (undo_levels, FALSE);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_spin_button), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_label), FALSE);
+	}
+
+	gnome_property_box_changed (GNOME_PROPERTY_BOX (propertybox));
+}
+
+static void
 prepare_documents_page (GladeXML *gui)
 {
 	gedit_debug("F:prepare_documenst_page\n", DEBUG_PREFS);
 	
 	mdimode = glade_xml_get_widget (gui, "mdimode");
 	tabpos = glade_xml_get_widget (gui, "tabpos");
+	undo_levels = glade_xml_get_widget (gui, "undo_levels");
+	undo_levels_label = glade_xml_get_widget (gui, "undo_levels_label");
+	undo_levels_spin_button  = glade_xml_get_widget (gui, "undo_levels_spin_button");
+
+	if ( !mdimode ||
+	     !tabpos  ||
+	     !undo_levels ||
+	     !undo_levels_label ||
+	     !undo_levels_spin_button)
+	{
+		g_warning ("Could not load widgets from prefs.glade correctly\n");
+	}
+	     
+
+	/* set initial button states */
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (undo_levels),
+				     settings->undo_levels>0);
+
+	if (settings->undo_levels < 1)
+	{
+		gtk_toggle_button_update_label_sensitivity (undo_levels, FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_spin_button), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (undo_levels_label), FALSE);
+	}
+	else
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (undo_levels_spin_button),
+					   (guint) settings->undo_levels);
 
 	/* set initial states */
 	gtk_option_menu_set_history (GTK_OPTION_MENU (mdimode),
@@ -286,6 +371,11 @@ prepare_documents_page (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT (GTK_MENU_SHELL (gtk_option_menu_get_menu(GTK_OPTION_MENU (tabpos)))),
 			    "selection-done",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT (undo_levels), "toggled",
+			    GTK_SIGNAL_FUNC (undo_levels_toggled), NULL);
+	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (undo_levels_spin_button)->adjustment),
+			    "value_changed",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 
@@ -330,32 +420,6 @@ prepare_fontscolors_page (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 
-static void
-gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
-{
-	GList *children;
-	GList *l;
-	GtkContainer *container;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GTK_IS_CONTAINER (widget));
-
-	container = GTK_CONTAINER (widget);
-	children = gtk_container_children (container);
-
-	l = children;
-	while (l)
-	{
-		GtkWidget *child = (GtkWidget*)l->data;
-
-		if (GTK_IS_LABEL (child))
-			gtk_widget_set_sensitive (child, sens);
-
-		l = l->next;
-	}
-
-	g_list_free (children);
-}
 
 static void
 printlines_toggled (GtkWidget *widget, gpointer data)

@@ -57,6 +57,7 @@ gedit_save_settings (void)
 	gnome_config_set_int ("tb_relief", (gint) settings->use_relief_toolbar);
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
 	gnome_config_set_int ("close_doc", (gint) settings->close_doc);
+	gnome_config_set_int ("undo_levels", (gint) settings->undo_levels);
 
 	gnome_config_set_int ("bgr", settings->bg[0]);
 	gnome_config_set_int ("bgg", settings->bg[1]);
@@ -135,6 +136,7 @@ gedit_load_settings (void)
 	settings->use_relief_toolbar = gnome_config_get_int("tb_relief");
 	settings->splitscreen = gnome_config_get_int("splitscreen");
 	settings->close_doc = gnome_config_get_int ("close_doc");
+	settings->undo_levels = gnome_config_get_int ("undo_levels=25");
 
 	settings->bg[0] = gnome_config_get_int ("bgr=65535");
 	settings->bg[1] = gnome_config_get_int ("bgg=65535");

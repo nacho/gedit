@@ -26,30 +26,27 @@
 #include "utils.h"
 #include "document.h"
 #include "view.h"
+#include "prefs.h"
 
        void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
        void gedit_undo_do (GtkWidget *w, gpointer data);
        void gedit_undo_redo (GtkWidget *w, gpointer data);
-static void gedit_undo_free_list (GList ** list_pointer);
-static gint gedit_undo_merge (gedit_undo * last_undo, guint start_pos, guint end_pos, gint action, guchar * text);
+static void gedit_undo_free_list (GList **list_pointer);
+static gint gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar * text);
 
 
 void
 gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 		gint action, Document *doc, View *view)
 {
-	gedit_undo *undo, *last_undo;
+	gedit_undo *undo;
 
 	gedit_debug ("", DEBUG_UNDO);
 
 	gedit_undo_free_list (&doc->redo);
 
-	if (doc->undo)
-	{
-		last_undo = g_list_nth_data (doc->undo, 0);
-		if (gedit_undo_merge( last_undo, start_pos, end_pos, action, text))
-			return;
-	}
+	if (gedit_undo_merge( doc->undo, start_pos, end_pos, action, text))
+		return;
 
 	undo = g_new (gedit_undo, 1);
 
@@ -66,11 +63,10 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	doc->undo = g_list_prepend (doc->undo, undo);
 
 
-	/*
-	g_print("The undo list size is : %i taking %i bytes \n\n",
+	g_print("The undo list size is : %i taking %i bytes. Levels are set at :%i \n\n",
 		g_list_length (doc->undo),
-		g_list_length (doc->undo) * sizeof (gedit_undo));
-	*/
+		g_list_length (doc->undo) * sizeof (gedit_undo),
+		settings->undo_levels);
 }
 
 
@@ -86,15 +82,17 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
  * Return Value: TRUE is merge was sucessful, FALSE otherwise
  **/
 static gint
-gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint action, guchar* text)
+gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar* text)
 {
-	guchar *temp_string;
+	guchar * temp_string;
+	gedit_undo * last_undo;
 	
 	gedit_debug ("", DEBUG_UNDO);
 	/* This are the cases in which we will not merge :
 	   1. if (last_undo->mergeable == FALSE)
 	   [mergeable = FALSE when the size of the undo data was not 1.
-	   or if the data was size = 1 but = '\n']
+	   or if the data was size = 1 but = '\n' or if the undo object
+	   has been "undone" ]
 	   2. The size of text is not 1
 	   3. If the new merging data is a '\n'
 	   4. If the last char of the undo_last data is a space/tab
@@ -102,6 +100,12 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 	   words and not chars )
 	   5. If the type (action) of undo is different
 	Chema */
+
+
+	if (list==NULL)
+		return FALSE;
+	
+	last_undo = g_list_nth_data (list, 0);
 
 	if (!last_undo->mergeable)
 	{
@@ -112,12 +116,14 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 	if (end_pos-start_pos != 1)
 	{
 		gedit_debug ("The size of the new data is not 1...", DEBUG_UNDO);
+		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
 
 	if (text[0]=='\n')
 	{
 		gedit_debug ("The data is a new line...", DEBUG_UNDO);
+		last_undo->mergeable = FALSE;		
 		return FALSE;
 	}
 
@@ -125,6 +131,7 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 	if (action != last_undo->action)
 	{
 		gedit_debug ("The action is different...", DEBUG_UNDO);
+		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
 
@@ -133,6 +140,7 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		if (last_undo->start_pos != end_pos)
 		{
 			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
+			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
 		
@@ -141,6 +149,7 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		      || last_undo->text [0] == '\t'))
 		{
 			gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
+			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
 
@@ -154,6 +163,7 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		if (last_undo->end_pos != start_pos)
 		{
 			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
+			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
 
@@ -162,6 +172,7 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
 		{
 			gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
+			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
 
@@ -194,6 +205,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	undo = g_list_nth_data (doc->undo, 0);
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
+	undo->mergeable = FALSE;
 
 	/* Move the view (scrollbars) to the correct position */
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT( gedit_view_current()->text)->vadj),

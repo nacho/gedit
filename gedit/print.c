@@ -206,7 +206,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	print_pji_destroy (pji);
 	
 /*	FIXME : we need to set the parent of the dialog to be the active window,
-	because of some window manager issues, tha clahey told me about Chema*/
+	because of some window manager issues, that clahey told me about Chema*/
 	/* see dialogs/dialog-replace.c for the solution. Chema */ 
 #if 0	
         gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 

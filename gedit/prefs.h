@@ -40,6 +40,7 @@ struct _Preferences
 	gint  have_tb_pix;
 	gint  have_tb_text;
 	gint  use_relief_toolbar;
+	gint  undo_levels;
 
 	gboolean use_fontset;
 	gchar *font;

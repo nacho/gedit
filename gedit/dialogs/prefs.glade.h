@@ -24,6 +24,9 @@ gchar *s = N_("Notebook\n"
               "");
 gchar *s = N_("Mode: ");
 gchar *s = N_("Notebook Tab Position: ");
+gchar *s = N_("Undo");
+gchar *s = N_("Set limit on undo levels to :");
+gchar *s = N_("level(s)");
 gchar *s = N_("Documents");
 gchar *s = N_("Fonts");
 gchar *s = N_("Pick a Font");
