@@ -36,6 +36,7 @@
 #include "toolbar.h"
 #include "gtkscrollball.h"
 #include "search.h"
+#include "gE_prefs.h"
 
 extern GList *plugins;
 
@@ -97,6 +98,9 @@ gE_window_new(void)
 	w->files_list_window = NULL;
 	w->files_list_window_data = NULL;
 	w->toolbar = NULL;
+
+	w->show_status = TRUE;
+	w->have_toolbar = TRUE;
 
 	ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;
@@ -235,6 +239,8 @@ gE_document
 
 	doc->window = w;
 
+	w->font = gE_prefs_get_char("font");
+
 	if (w->notebook == NULL) {
 		w->notebook = gtk_notebook_new();
 		gtk_notebook_set_scrollable(GTK_NOTEBOOK(w->notebook), TRUE);
@@ -334,11 +340,23 @@ gE_document
 		doc->split_screen, 0, 1, 0, 1);
 
 	style = gtk_style_new();
+  	gdk_font_unref (style->font);
+ 	 style->font = gdk_font_load (w->font);
+  	if (style->font == NULL)
+  	 {
+  	 style->font = gdk_font_load ("-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1");
+  	 	w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
+  	 }
+  	 
+ 	 gtk_widget_push_style (style);     
+   	 gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);
+   	 gtk_widget_set_style(GTK_WIDGET(doc->text), style);
+   	 gtk_widget_pop_style ();
 
-	gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);
 
-	gtk_widget_set_rc_style(GTK_WIDGET(doc->split_screen));
-	gtk_widget_ensure_style(GTK_WIDGET(doc->split_screen));
+
+	/*gtk_widget_set_rc_style(GTK_WIDGET(doc->split_screen));
+	gtk_widget_ensure_style(GTK_WIDGET(doc->split_screen));*/
 
 	gtk_signal_connect_object(GTK_OBJECT(doc->split_screen), "event",
 		GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT(w->popup));

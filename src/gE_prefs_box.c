@@ -95,11 +95,22 @@ void cancel()
 
 void gE_window_refresh(gE_window *w)
 {
+GtkStyle *style;
+
      if (w->show_status == FALSE)
        gtk_widget_hide (w->statusbox);
      else
        gtk_widget_show (w->statusbox);
      
+  style = gtk_style_new();
+  gdk_font_unref (style->font);
+  style->font = gdk_font_load (w->font);
+  
+  gtk_widget_push_style (style);     
+     gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->split_screen), style);
+     gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->text), style);
+  gtk_widget_pop_style ();
+
 }
 
 #ifndef WITHOUT_GNOME
@@ -387,7 +398,8 @@ static GtkWidget *font_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  label = gtk_label_new (N_("(Remember to Restart gEdit for font changes to take effect)"));
+  /* label = gtk_label_new (N_("(Remember to Restart gEdit for font changes to take effect)")); As i've got fonts loading dynamically now, this label is uneeded, but it may come in useful sometime 		-- Alex */
+  
   gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
   gtk_widget_show (label);
 
@@ -564,8 +576,8 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            font_page_new(), label);
    
-  /*get_prefs(data);
-*/
+  get_prefs(data);
+
 
   gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);

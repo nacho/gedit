@@ -1,3 +1,24 @@
+1998-10-14  Alex Roberts  <bse@dial.pipex.com>
+
+	* gE_prefs_box.c: Removed Font 'restart gEdit' label...
+	
+	* gE_prefs_box.c: (gE_prefs_dialog): Hmm, put get_prefs(data); 
+	back in...
+	
+	* gE_prefs_box.c: (gE_window_refresh): Modified, so that it sets the
+	font of the current document to the font set in the Preferences, 
+	using this Function means it should also change the font in non-Gnome
+	versions of gEdit, this doesn't change the font of ALL the docs open...
+	
+	* gE_document.c: (gE_document_new): Removed all 'rc' stuff, and
+	added some style->font stuff, so it checks what the (gchar *)w->font
+	is, and sets the document font to that (w->font is set in the
+	Preferences dialog), if that value is NULL it sets to a default font
+	of 12pt Courier (and also sets w->font to that)...
+	
+	* TODO: Some slight modifications, and i checked off the 'Immediate
+	Font Changes'
+
 1998-10-14  Martin Baulig  <martin@home-of-linux.org>
 
 	Added GModule Plugins which are dynamically loaded into the

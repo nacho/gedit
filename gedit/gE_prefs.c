@@ -60,11 +60,12 @@ prefs_cb (GtkWidget *widget, gpointer cbwindow)
 void 
 gE_rc_parse(void)
 {
-	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
+	/*if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
 	{
 		printf ("gE_rc_parse: Couldn't open gtk rc file for parsing.\n");
 		return;
-	}
+	}*/
+	rc = gE_prefs_open_file ("gtkrc", "r");
 	gtk_rc_parse(rc);
 }
 
@@ -309,15 +310,16 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 
 void gE_get_settings(gE_window *w)
 {
-
-	w->tab_pos = gE_prefs_get_int("tab pos");
-	w->show_status = gE_prefs_get_int("show statusbar");
-	w->have_toolbar = gE_prefs_get_int("toolbar");
-	w->have_tb_text = gE_prefs_get_int("tb text");
-	w->have_tb_pix = gE_prefs_get_int("tb pix");
-	w->font = gE_prefs_get_char("font");
-	w->print_cmd = gE_prefs_get_char("print command");
-
+	
+	 w->tab_pos = gE_prefs_get_int("tab pos");
+	 w->show_status = gE_prefs_get_int("show statusbar");
+	 w->have_toolbar = gE_prefs_get_int("toolbar");
+	 w->have_tb_text = gE_prefs_get_int("tb text");
+	 w->have_tb_pix = gE_prefs_get_int("tb pix");
+	 w->font = gE_prefs_get_char("font");
+	 w->print_cmd = gE_prefs_get_char("print command"); 
+	
+	
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
 
 	if (w->show_status == FALSE)
