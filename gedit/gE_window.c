@@ -84,7 +84,8 @@ create_find_in_files_result_window ()
 
 	btn = gtk_button_new();
 
-	image = gnome_pixmap_new_from_file_at_size ("../xpm/tb_cancel.xpm", 15, 15);
+	/*image = gnome_pixmap_new_from_file_at_size ("../xpm/tb_cancel.xpm", 15, 15);*/
+	image = gnome_stock_new_with_icon (GNOME_STOCK_PIXMAP_CLOSE);
 	
 	gtk_container_add (GTK_CONTAINER (btn), image);
 
@@ -97,9 +98,9 @@ create_find_in_files_result_window ()
 	gtk_widget_show (image);
 	gtk_widget_show (btn);
 	
-			
 	frame = gtk_vbox_new (FALSE, 0);
 	top = gtk_hbox_new (FALSE, 0);	
+	
 	label = gtk_label_new ( " Search Results " );
 
 	gtk_label_set_justify ( GTK_LABEL(label), GTK_JUSTIFY_LEFT );
@@ -150,6 +151,8 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	g_hash_table_insert (win_int_to_pointer, ptr, app);
         g_hash_table_insert (win_pointer_to_int, app, ptr);
 
+	gE_window_set_icon(GTK_WIDGET(app), "gE_icon");
+
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
@@ -175,8 +178,6 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 		
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
 	
-	gE_window_set_icon(GTK_WIDGET(app), "gE_icon");
-	
 } /* gE_window_new */
 
 void gE_window_set_auto_indent (gint auto_indent)
@@ -201,8 +202,8 @@ void gE_window_set_icon(GtkWidget *window, char *icon)
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
-	/* Not sure about this.. need to test in E */
-	gtk_widget_unrealize (window);
+	/* Not sure about this.. need to test in E 
+	gtk_widget_unrealize (window);*/
 
 }
 

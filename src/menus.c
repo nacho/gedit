@@ -104,12 +104,12 @@ GnomeUIInfo gedit_file_menu [] = {
 	
 	GNOMEUIINFO_SEPARATOR, 
 
-	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, NULL),
 
 	GNOMEUIINFO_ITEM_STOCK (N_("Close All"),N_("Close All Open Files"),
 						file_close_all_cb, GNOME_STOCK_MENU_CLOSE),
 
-	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, NULL),
 
 	GNOMEUIINFO_END
 
@@ -121,19 +121,19 @@ GnomeUIInfo gedit_tab_menu []= {
 
 	{ GNOME_APP_UI_ITEM, N_("_Top"),
 	  N_("Put the document tabs at the top"),
-	  tab_top_cb, (gpointer) GE_WINDOW, NULL },
+	  tab_top_cb, NULL },
 
 	{ GNOME_APP_UI_ITEM, N_("_Bottom"),
 	  N_("Put the document tabs at the bottom"),
-	  tab_bot_cb, (gpointer) GE_WINDOW, NULL },
+	  tab_bot_cb, NULL },
 
 	{ GNOME_APP_UI_ITEM, N_("_Left"),
 	  N_("Put the document tabs on the left"),
-	  tab_lef_cb, (gpointer) GE_WINDOW, NULL },
+	  tab_lef_cb, NULL },
 
 	{ GNOME_APP_UI_ITEM, N_("_Right"),
 	  N_("Put the document tabs on the right"),
-	  tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
+	  tab_rgt_cb, NULL },
 
 /*	GNOMEUIINFO_SEPARATOR,
 
@@ -149,15 +149,15 @@ GnomeUIInfo gedit_scrbar_menu []= {
 
 	{ GNOME_APP_UI_ITEM, N_("_None"),
 	  N_("Don't have a scrollbar"),
-	  scrollbar_none_cb, (gpointer) GE_DATA, NULL },
+	  scrollbar_none_cb, NULL },
 
 	{ GNOME_APP_UI_ITEM, N_("_Always"),
 	  N_("Always have the scrollbar"),
-	  scrollbar_always_cb, (gpointer) GE_DATA, NULL },
+	  scrollbar_always_cb, NULL },
 
 	{ GNOME_APP_UI_ITEM, N_("_Automatic"),
 	  N_("Only have scrollbar when it's needed"),
-	  scrollbar_auto_cb, (gpointer) GE_DATA, NULL },
+	  scrollbar_auto_cb, NULL },
 
 	GNOMEUIINFO_END
 

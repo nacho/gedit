@@ -50,8 +50,9 @@ void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_doc
 	
 	}
 
+#ifdef DEBUG
 	g_message ("gE_undo_add: Adding to Undo list..");
-	
+#endif	
 	doc->undo = g_list_prepend (doc->undo, undo);
 
 }
@@ -81,21 +82,26 @@ void gE_undo_do (GtkWidget *w, gpointer data)
 		
 		/* We're inserting something that was deleted */
 		
+#ifdef DEBUG
 		g_message ("gE_undo_do: Inserting..");
+#endif
 		
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos)) {
-	
+#ifdef DEBUG	
 			g_message ("g_string_insert");
+#endif
 			doc->buf = g_string_insert (doc->buf, undo->start_pos, undo->text);
 	
 		} else if (undo->end_pos == 0) {
-	  
+#ifdef DEBUG
 			g_message ("g_string_prepend");
+#endif
 			doc->buf = g_string_prepend (doc->buf, undo->text);
 	  
 		} else {
-	  
+#ifdef DEBUG	  
 			g_message ("g_string_append");
+#endif
 			doc->buf = g_string_append (doc->buf, undo->text);
 	
 		}
@@ -107,18 +113,21 @@ void gE_undo_do (GtkWidget *w, gpointer data)
 		/* We're deleteing somthing that had been inserted */
 		
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len) {
-	
+#ifdef DEBUG
 			g_message ("g_string_erase");
+#endif
 			doc->buf = g_string_erase (doc->buf, undo->start_pos, (undo->end_pos - undo->start_pos));
 	  
 		} else {
-	  
+#ifdef DEBUG
 			g_message ("g_string_truncate");
+#endif
 			doc->buf = g_string_truncate (doc->buf, undo->start_pos);
 	
 		}
 		
 		views_delete (doc, undo);
+		doc->changed = undo->status;		
 		
 	}
 
@@ -148,22 +157,25 @@ void gE_undo_redo (GtkWidget *w, gpointer data)
 	if (!redo->action) {
 		
 		/* We're inserting something that was deleted */
-		
+#ifdef DEBUG		
 		g_message ("gE_undo_redo: Deleting..");
-		
+#endif		
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos)) {
-	
+#ifdef DEBUG
 			g_message ("g_string_insert");
+#endif
 			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
 	
 		} else if (redo->end_pos == 0) {
-	  
+#ifdef DEBUG
 			g_message ("g_string_prepend");
+#endif
 			doc->buf = g_string_prepend (doc->buf, redo->text);
 	  
 		} else {
-	  
+#ifdef DEBUG
 			g_message ("g_string_append");
+#endif
 			doc->buf = g_string_append (doc->buf, redo->text);
 	
 		}
@@ -175,13 +187,15 @@ void gE_undo_redo (GtkWidget *w, gpointer data)
 		/* We're deleteing somthing that had been inserted */
 		
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len) {
-	
+#ifdef DEBUG
 			g_message ("g_string_erase");
+#endif
 			doc->buf = g_string_erase (doc->buf, redo->start_pos, (redo->end_pos - redo->start_pos));
 	  
 		} else {
-	  
+#ifdef DEBUG
 			g_message ("g_string_truncate");
+#endif
 			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
 	
 		}
@@ -241,9 +255,9 @@ void views_delete (gE_document *doc, gE_undo *undo)
 	
 	start_pos = undo->start_pos;
 	end_pos = undo->end_pos;
-
+#ifdef DEBUG
 	g_message ("views_delete: start_pos %d, end_pos %d, text %s", start_pos, end_pos, undo->text);
-	
+#endif
 	for (n = 0; n < g_list_length (doc->views); n++) {
 
 	  nth_view = g_list_nth_data (doc->views, n);

@@ -90,7 +90,6 @@ extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 
 /* Functions needed to be made external for the plugins api */
-extern void popup_close_verify (gE_document *doc, gE_data *data);
 extern void close_doc_execute(gE_document *opt_doc, gpointer cbdata);
 
 

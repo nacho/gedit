@@ -1,3 +1,38 @@
+Fri Sep 24 19:47:50 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* KNOWNBUGS: Removed Fixed items
+
+Fri Sep 17 16:56:02 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.[ch]: (popup_close_verify) (close_file_save_yes_sel)
+	  (close_file_save_no_sel) (close_file_save_cancel_sel) Removed fucntions,
+	  now depreciated. (Replaced with remove_doc_cb in gE_mdi.c)
+	
+	* commands.c: Freed all gchar's which were just left before. Also, removed
+	  all gE_data's from the cut/copy/paste callbacks.
+	
+	* menus.c: Removed all unused gpointers from menu items.		  			  	  	  
+
+Fri Sep 17 16:46:48 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c:
+	  src/gE_undo.c: Put all the debug g_messages into #ifdef's..
+	
+	* src/gE_view.c: (doc_insert_text_cb) The position marker should be a
+	  pointer (as its going into a temp gpointer position).
+	
+	* Update: No, bug#2173 is still there.. strange..		  			  	
+
+Fri Sep 17 16:31:46 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_window.c: (gE_window_new) Moved the gE_window_set_icon call
+	  to the top of the function. this seems to fix the problem with 
+	  the toolbar not being drawn (Bug#2173)
+	
+	* src/gE_window.c: (create_find_in_files_result_window) Use a GnomeStock
+	  pixmap on the Close button. I've removed the old gEdit pixmaps, that it
+	  used before, so it wasnt working..
+
 Mon Sep 13 19:51:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_mdi.c: (gE_document_destroy) Added code to free the undo/redo

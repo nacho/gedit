@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit\n"
-"POT-Creation-Date: 1999-09-09 21:17+0200\n"
+"POT-Creation-Date: 1999-09-13 19:55+0100\n"
 "PO-Revision-Date: 1999-07-20 09:45+CET\n"
 "Last-Translator: GNOME PL Team\n"
 "Language-Team: Polish <gnomepl@pandora.info.bielsko.pl>\n"
@@ -30,29 +30,29 @@ msgstr "Wiersz poleceñ"
 msgid "Could not save file!"
 msgstr "Nie mo¿na zapisaæ pliku!"
 
-#: src/commands.c:520
+#: src/commands.c:550
 msgid "Open File..."
 msgstr "Otwórz plik..."
 
-#: src/commands.c:604 src/commands.c:644
+#: src/commands.c:603 src/commands.c:645
 msgid "Read only file!"
 msgstr "Plik tylko do odczytu!"
 
-#: src/commands.c:676 src/commands.c:741
+#: src/commands.c:677 src/commands.c:742
 msgid "Error saving file!"
 msgstr "B³±d przy zapisie pliku!"
 
-#: src/commands.c:705
+#: src/commands.c:706
 #, c-format
 msgid "Save %s As..."
 msgstr "Zapisz %s jako..."
 
-#: src/commands.c:773
+#: src/commands.c:774
 #, c-format
 msgid "Save %s As ..."
 msgstr "Zapisz %s jako..."
 
-#: src/commands.c:853
+#: src/commands.c:859
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -61,19 +61,19 @@ msgstr ""
 "Na pewno chcesz wycofaæ wszystkie zmiany?\n"
 "(%s)"
 
-#: src/commands.c:901
+#: src/commands.c:907
 msgid "Document Unchanged..."
 msgstr "Dokument nie zosta³ zmieniony..."
 
-#: src/commands.c:905
+#: src/commands.c:911
 msgid "Document Unsaved..."
 msgstr "Dokument nie zosta³ zapisany..."
 
-#: src/commands.c:1094
+#: src/commands.c:1102
 msgid "_File/"
 msgstr "_Plik/"
 
-#: src/commands.c:1103 src/commands.c:1104
+#: src/commands.c:1111 src/commands.c:1112
 msgid "_File"
 msgstr "_Plik"
 
@@ -118,40 +118,49 @@ msgstr "Drukuj"
 msgid "Open (swap) .c/.h file"
 msgstr "Otwórz (zamieñ) plik .c/.h"
 
-#: src/gE_mdi.c:69
+#: src/gE_mdi.c:76
 msgid "Find _Line..."
 msgstr "Znajd¼ _wiersz..."
 
-#: src/gE_mdi.c:70
+#: src/gE_mdi.c:77
 msgid "Search for a line"
 msgstr "Poszukuje wiersza"
 
-#: src/gE_mdi.c:85
+#: src/gE_mdi.c:82
+#, fuzzy
+msgid "Find _In Files..."
+msgstr "Znajd¼ _wiersz..."
+
+#: src/gE_mdi.c:83
+msgid "Find text in all open files"
+msgstr ""
+
+#: src/gE_mdi.c:98
 msgid "_Add View"
 msgstr "Dodaj widok"
 
-#: src/gE_mdi.c:86
+#: src/gE_mdi.c:99
 msgid "Add a new view of the document"
 msgstr "Dodaje kolejny widok dokumentu"
 
-#: src/gE_mdi.c:87
+#: src/gE_mdi.c:100
 msgid "_Remove View"
 msgstr "Usuñ widok"
 
-#: src/gE_mdi.c:88
+#: src/gE_mdi.c:101
 msgid "Remove view of the document"
 msgstr "Usuñ widok dokumentu"
 
-#: src/gE_mdi.c:461
+#: src/gE_mdi.c:484
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' zosta³ zmieniony. Czy chcesz go zapisaæ?"
 
 #. FIXME: Needs to actually unload the plugin itself..
 #. Try removing plugin from Gnome Menu..
-#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
-#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
-#: src/menus.c:265
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:539
+#: src/gE_prefs_box.c:540 src/gE_prefs_box.c:595 src/gE_prefs_box.c:596
+#: src/menus.c:266
 msgid "_Plugins"
 msgstr "W_tyczki"
 
@@ -171,130 +180,130 @@ msgstr "Okna nadrzêdne"
 msgid "Modal"
 msgstr "Modalne"
 
-#: src/gE_prefs_box.c:270
+#: src/gE_prefs_box.c:281
 msgid "Appearance"
 msgstr "Wygl±d"
 
-#: src/gE_prefs_box.c:283
+#: src/gE_prefs_box.c:294
 msgid "Show Statusbar"
 msgstr "Wy¶wietlanie paska stanu"
 
-#: src/gE_prefs_box.c:292
+#: src/gE_prefs_box.c:303
 msgid "Show Splitscreen"
 msgstr "Wy¶wietlanie podzia³u ekranu"
 
-#: src/gE_prefs_box.c:301
+#: src/gE_prefs_box.c:312
 msgid "Editor Behavior"
 msgstr "Zachowanie edytora"
 
-#: src/gE_prefs_box.c:314
+#: src/gE_prefs_box.c:325
 msgid "Enable Autoindent"
 msgstr "Automatyczne wciêcia"
 
-#: src/gE_prefs_box.c:323
+#: src/gE_prefs_box.c:334
 msgid "Enable Wordwrap"
 msgstr "Zawijanie wierszy"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:397
 msgid "Document Settings"
 msgstr "Ustawienia dokumentów"
 
-#: src/gE_prefs_box.c:400
+#: src/gE_prefs_box.c:411
 msgid "New Document After Closing Last"
 msgstr "Nowy dokument po zamkniêciu ostatniego"
 
-#: src/gE_prefs_box.c:406
+#: src/gE_prefs_box.c:417
 msgid "Close Window After Closing Last"
 msgstr "Zamkniêcie okna po zamkniêciu ostatniego"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:415
+#: src/gE_prefs_box.c:426
 msgid "Current Font"
 msgstr "Aktualny font"
 
-#: src/gE_prefs_box.c:432
+#: src/gE_prefs_box.c:443
 msgid "Select..."
 msgstr "Wybierz..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:448
+#: src/gE_prefs_box.c:459
 msgid "Print Command"
 msgstr "Polecenie wydruku"
 
-#: src/gE_prefs_box.c:500
+#: src/gE_prefs_box.c:511
 msgid "Plugin Selector"
 msgstr "Wybór wtyczki"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Name"
 msgstr "Nazwa"
 
-#: src/gE_prefs_box.c:615
+#: src/gE_prefs_box.c:626
 msgid "Location"
 msgstr "Po³o¿enie"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
+#: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
 msgid "Plugins"
 msgstr "Wtyczki"
 
-#: src/gE_prefs_box.c:635
+#: src/gE_prefs_box.c:646
 msgid "Use Plugins"
 msgstr "Wykorzystywanie wtyczek"
 
-#: src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:712
 msgid "Add"
 msgstr "Dodaj"
 
-#: src/gE_prefs_box.c:706
+#: src/gE_prefs_box.c:717
 msgid "Remove"
 msgstr "Usuñ"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:749
+#: src/gE_prefs_box.c:760
 msgid "Window Size"
 msgstr "Rozmiar okna"
 
-#: src/gE_prefs_box.c:762
+#: src/gE_prefs_box.c:773
 msgid "Current Width:"
 msgstr "Aktualna szeroko¶æ"
 
-#: src/gE_prefs_box.c:782
+#: src/gE_prefs_box.c:793
 msgid "Startup Width:"
 msgstr "Szeroko¶æ pocz±tkowa"
 
-#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
+#: src/gE_prefs_box.c:801 src/gE_prefs_box.c:841
 msgid "Use Current"
 msgstr "U¿yj aktualnej"
 
-#: src/gE_prefs_box.c:802
+#: src/gE_prefs_box.c:813
 msgid "Current Height:"
 msgstr "Aktualna wysoko¶æ"
 
-#: src/gE_prefs_box.c:822
+#: src/gE_prefs_box.c:833
 msgid "Startup Height:"
 msgstr "Wysoko¶æ pocz±tkowa"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:838
+#: src/gE_prefs_box.c:849
 msgid "MDI Mode"
 msgstr "Tryb MDI"
 
 #. General Settings
-#: src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:917
 msgid "General"
 msgstr "Ogólne"
 
 #. Window Settings
-#: src/gE_prefs_box.c:911
+#: src/gE_prefs_box.c:922
 msgid "Window"
 msgstr "Okno"
 
 #. Docuemnt Settings
-#: src/gE_prefs_box.c:916
+#: src/gE_prefs_box.c:927
 msgid "Document"
 msgstr "Dokument"
 
@@ -492,7 +501,19 @@ msgstr "Zapi_sz ustawienia"
 msgid "Save the current settings for future sessions"
 msgstr "Zapisuje aktualne ustawienia dla przysz³ych sesji"
 
-#: src/search.c:326
+#: src/search.c:412
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:413 src/search.c:860
+msgid "Search"
+msgstr "Znajd¼"
+
+#: src/search.c:417 src/search.c:865 src/search.c:893
+msgid "Search for:"
+msgstr "Znajd¼ tekst:"
+
+#: src/search.c:766
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -501,59 +522,51 @@ msgstr ""
 "Liczba wierszy: %i\n"
 "Bie¿±cy wiersz: %i"
 
-#: src/search.c:348
+#: src/search.c:788
 msgid "Go to line"
 msgstr "Przejd¼ do wiersza"
 
-#: src/search.c:358
+#: src/search.c:798
 msgid "Line number"
 msgstr "Numer wiersza"
 
-#: src/search.c:381
+#: src/search.c:821
 msgid "Search from cursor"
 msgstr "Szukaj od kursora"
 
-#: src/search.c:388
+#: src/search.c:828
 msgid "Search from beginning of document"
 msgstr "Szukaj od pocz±tku dokumentu"
 
-#: src/search.c:395
+#: src/search.c:835
 msgid "Search from end of document"
 msgstr "Szukaj od koñca dokumentu"
 
-#: src/search.c:402
+#: src/search.c:842
 msgid "Case sensitive"
 msgstr "Uwzglêdniaj wielko¶æ liter"
 
-#: src/search.c:408
+#: src/search.c:848
 msgid "Reverse search"
 msgstr "Przeszukiwanie wstecz"
 
-#: src/search.c:420
-msgid "Search"
-msgstr "Znajd¼"
-
-#: src/search.c:425 src/search.c:453
-msgid "Search for:"
-msgstr "Znajd¼ tekst:"
-
-#: src/search.c:447 src/search.c:448
+#: src/search.c:887 src/search.c:888
 msgid "Replace"
 msgstr "Zast±p"
 
-#: src/search.c:449
+#: src/search.c:889
 msgid "Replace all"
 msgstr "Zast±p wszystkie"
 
-#: src/search.c:463
+#: src/search.c:903
 msgid "Replace with:"
 msgstr "Zast±p na:"
 
-#: src/search.c:474
+#: src/search.c:914
 msgid "Ask before replacing"
 msgstr "Potwierd¼ przed zast±pieniem"
 
-#: src/search.c:673
+#: src/search.c:1113
 msgid "Replace?"
 msgstr "Zast±piæ?"
 

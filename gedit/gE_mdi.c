@@ -62,13 +62,13 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	GNOMEUIINFO_SEPARATOR,
 
-        GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, (gpointer) GE_DATA),
+        GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, NULL),
 
-        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, (gpointer) GE_DATA),
+        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, NULL),
 
-	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, NULL),
 
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, NULL),
 
 
 	GNOMEUIINFO_SEPARATOR,
@@ -319,12 +319,10 @@ gE_document *gE_document_new_with_file (gchar *filename)
 {
 
 	gE_document *doc;
-	char *nfile, *name;
 	gchar *tmp_buf;
 	struct stat stats;
 	FILE *fp;
 
-	name = filename;
 /*	if ((doc = gE_document_new()))*/
 
 	if (!stat(filename, &stats) && S_ISREG(stats.st_mode)) {

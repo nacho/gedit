@@ -209,23 +209,29 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 
 	doc = view->document;
 
-/*#ifdef DEBUG */
+#ifdef DEBUG
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
-/*#endif*/	
+#endif
 
 	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
 	
+#ifdef DEBUG
 	  g_message ("g_string_insert");
+#endif
 	  doc->buf = g_string_insert (doc->buf, position, buffer);
 	
 	} else if (position == 0) {
-	  
+
+#ifdef DEBUG		  
 	  g_message ("g_string_prepend");
+#endif
 	  doc->buf = g_string_prepend (doc->buf, buffer);
 	  
 	} else {
 	  
+#ifdef DEBUG
 	  g_message ("g_string_append");
+#endif
 	  doc->buf = g_string_append (doc->buf, buffer);
 	
 	}
@@ -234,7 +240,7 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 
 	data = g_malloc0 (sizeof (gE_data));
 	
-	data->temp1 = (gint) position;
+	data->temp1 = (gint*) position;
 	data->temp2 = (guchar*) buffer;
 	
 	g_list_foreach (doc->views, (GFunc) gE_view_list_insert, data);
@@ -284,18 +290,23 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  return;
 	
 	doc = view->document;
-	
+
+#ifdef DEBUG	
 	g_message ("start: %d end: %d len: %d", start_pos, end_pos, doc->buf->len);
-	
+#endif	
 	/*if ((start_pos + end_pos) < doc->buf->len)*/
 	if (end_pos + (end_pos - start_pos) <= doc->buf->len) {
 	
+#ifdef DEBUG
 	  g_message ("g_string_erase");
+#endif
 	  doc->buf = g_string_erase (doc->buf, start_pos, (end_pos - start_pos));
 	  
 	} else {
 	  
+#ifdef DEBUG
 	  g_message ("g_string_truncate");
+#endif
 	  doc->buf = g_string_truncate (doc->buf, start_pos);
 	
 	}
@@ -377,7 +388,6 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 		return FALSE;
 	if (!settings->auto_indent)
 		return FALSE;
-g_print ("autio_indent\n");
 
 	doc = view->document;
 
@@ -823,8 +833,9 @@ GtkWidget *gE_view_new (gE_document *doc)
 
 	if (view->document->buf) {
 	
+#ifdef DEBUG
 	  	g_print ("gE_view_init: inserting buffer..\n");
-	  	
+#endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 						 &view->text->style->black,
@@ -999,8 +1010,9 @@ void gE_view_refresh (gE_view *view)
 
 	if (view->document->buf) {
 	
+#ifdef DEBUG
 	  	g_print ("gE_view_refresh: inserting buffer..\n");
-	  	
+#endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 						 &view->text->style->black,

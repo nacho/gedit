@@ -63,128 +63,6 @@ GtkWidget *osel = NULL;
 GtkWidget *col_label;
 gchar *oname = NULL;
 
-/*
- * file save callback : user selected "No"
- */
-static void
-close_file_save_no_sel(GtkWidget *w, gE_data *data)
-{
-
-	g_assert(data != NULL);
-	
-	file_close_cb (w, data);
-	data->temp1 = NULL;
-	data->temp2 = NULL;
-	data->flag = TRUE;
-	
-} /* close_file_save_no_sel */
-
-
-/*
- * file save callback : user selected "Yes"
- */
-static void
-close_file_save_yes_sel(GtkWidget *w, gE_data *data)
-{
-	gE_document *doc;
-
-	g_assert(data != NULL);
-	doc = data->document;
-
-	if (doc->filename == NULL) {
-
-	  data->temp1 = NULL;
-	  
-	  file_save_as_cb(w, data);
-	  
-	  if (data->flag == TRUE) /* close document if successful */
- 	    file_close_cb (w, data);
- 	    
-	} else {
-		
-	 int error;
-
-	 error = gE_file_save(doc, doc->filename);
-	 if (!error) {
-			
-	   data->temp1 = NULL;
-	   file_close_cb (w, data);
-	   data->temp2 = NULL;
-	   data->flag = TRUE;
-	   
-	 } else {
-	  
-	  data->flag = FALSE;
-	 
-	 }
-	 
-	}
-} /* close_file_save_yes_sel */
-
-
-/*
- * file save callback : user selected "Cancel"
- */
-static void
-close_file_save_cancel_sel(GtkWidget *w, gE_data *data)
-{
-	g_assert(data != NULL);
-	data->temp1 = NULL;
-	data->temp2 = NULL;
-	data->flag = FALSE;
-} /* close_file_save_cancel_sel */
-
-
-/*
- * creates file save (yes/no/cancel) dialog box
- */
-#define CLOSE_MSG	"has been modified.  Do you wish to save it?"
-void
-popup_close_verify(gE_document *doc, gE_data *data)
-{
-	GtkWidget *msgbox;
-	int ret;
-	char *fname, *msg;
-
-	fname = (doc->filename) ? g_basename(doc->filename) : _(UNTITLED);
-
-	msg =   (char *)g_malloc(strlen(_(CLOSE_MSG)) + strlen(fname) + 6);
-
-	sprintf(msg  , " '%s' %s ", fname, _(CLOSE_MSG));
-
-
-	/* use data->flag to indicate whether or not to quit */
-	data->flag = FALSE;
-	data->document = doc;
-
-	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
-		 GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
-		 GNOME_STOCK_BUTTON_CANCEL, NULL);
-
-	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
-
-	g_free(msg);
-
-	switch (ret) {
-	
-	case 0 :
-			close_file_save_yes_sel(NULL, data);
-			break;
-	case 1 :
-			close_file_save_no_sel(NULL, data);
-			break;
-	case 2 :
-			close_file_save_cancel_sel(NULL, data);
-			break;
-	default:
-			printf("popup_close_verify: returned %d\n", ret);
-			exit(-1);
-		
-	} /* switch */
-	
-} /* popup_close_verify */
-
-
 /* popup to handle new file creation from nothing. */
 int
 popup_create_new_file (GtkWidget *w, gchar *title)
@@ -379,8 +257,6 @@ scrollbar_auto_cb (GtkWidget *widget, gpointer cbdata)
 void
 auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
-
-	gE_data *data = (gE_data *)cbdata;
 
 	gE_window_set_auto_indent (!settings->auto_indent);
 	
@@ -597,6 +473,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
  	    
 		title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
 		file_save_as_cb(widget, title);
+	    	g_free (title);
 	    } else
 	      if ((gE_file_save(doc, doc->filename)) != 0) {
 	      
@@ -605,10 +482,15 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
        	      
        	      }
           
-          }
+	    g_free (fname);
+
+            }
+            
+          }            
         
-        }
         
+
+
 }
 
 /*
@@ -637,6 +519,7 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
 	      /*gtk_label_get((GtkLabel *)doc->tab_label, &title);*/
 
               file_save_all_as_cb(widget, title);
+	      g_free (title);
             
             } else {
               
@@ -646,6 +529,8 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
                file_save_all_as_cb(widget, NULL);
                
              }
+
+	    g_free (fname);
              
             }
             
@@ -653,6 +538,8 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
           
         }
         
+
+
 }
 
 /*
@@ -663,11 +550,14 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
 static void file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 {
 	
-	gchar *fname = gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel));
+	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel)));
 	gE_document *doc;
 
-	if (mdi->active_child == NULL)
+	if (mdi->active_child == NULL) {
+	  
+	  g_free (fname);
 	  return;
+	}		  	
 	
 	doc = gE_document_current();
 	
@@ -678,6 +568,7 @@ static void file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 	
 	}
 
+	g_free (fname);
 	gtk_widget_destroy (GTK_WIDGET (ssel));
 	ssel = NULL;
 	
@@ -718,6 +609,7 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 
 	gtk_widget_show(ssel);
 
+	g_free (title);
 }
 
 /*
@@ -728,11 +620,13 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
 {
 
-	gchar *fname = gtk_file_selection_get_filename (GTK_FILE_SELECTION(fs));
+	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(fs)));
 	gE_document *doc;
 
-	if (mdi->active_child == NULL)
-	  return;
+	if (mdi->active_child == NULL) {
+	
+	  g_free (fname);		  return;
+	}	  
 	
 	doc = gE_document_current();
 	
@@ -745,6 +639,7 @@ static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
 
 	gtk_widget_destroy (GTK_WIDGET (fs)); 
 	fs = NULL;
+	g_free (fname);	
 	
 } 
 
@@ -783,7 +678,8 @@ file_save_all_as_cb(GtkWidget *widget, gpointer cbdata)
 
 
 	gtk_widget_show(fs);
-	
+
+	g_free (title);	
 }
 
 
@@ -949,8 +845,6 @@ void
 edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 {
 
-	gE_data *data = (gE_data *)cbdata;
-
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
 		GE_VIEW (mdi->active_view)->text));
 
@@ -961,8 +855,6 @@ edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 void
 edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 {
-
-	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
@@ -975,8 +867,6 @@ void
 edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 {
 
-	gE_data *data = (gE_data *)cbdata;
-
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
 
@@ -987,8 +877,6 @@ edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 void
 edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 {
-
-	gE_data *data = (gE_data *)cbdata;
 
 	gtk_editable_select_region(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
@@ -1056,6 +944,8 @@ void recent_update (GnomeApp *app)
 	       strcpy (filename, histentry->filename);
 	       filelist = g_list_append (filelist, filename);
 
+	       g_free (filename);
+
 	       /* For recent-directories, not yet fully implemented...
 		   
 	       end_path = strrchr (histentry->filename, '/');
@@ -1084,7 +974,7 @@ void recent_update (GnomeApp *app)
 	gnome_history_free_recently_used_list (gnome_recent_list);
 	
 	recent_update_menus (app, filelist);
-	
+
 }
 
 /* Actually updates the recent-used menu... */
@@ -1144,6 +1034,9 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	settings->num_recent = g_list_length (recent_files);
 	g_list_free (recent_files);
 
+	if (path)
+	  g_free (path);	
+	
 }
 
 static void
