@@ -52,7 +52,7 @@ EXTRA_DIST = 					\
 	$(plugin_DATA)				\
 	gedit-spell-checker-dialog-marshal.list 
 
-CLEANFILES = $(BUILT_SOURCES) 
+CLEANFILES = $(BUILT_SOURCES) $(plugin_DATA)
 
 dist-hook:
 	cd $(distdir); rm -f $(BUILT_SOURCES)

@@ -24,3 +24,6 @@ plugin_in_files = time.gedit-plugin.desktop.in
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = $(glade_DATA) $(plugin_in_files) $(plugin_DATA)
+
+CLEANFILES = $(plugin_DATA)
+
