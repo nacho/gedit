@@ -52,3 +52,11 @@ else
 install-data-local:
 endif
 
+DISTCLEANFILES = 			\
+	$(desktop_DATA)			\
+	$(keys_DATA)			\
+	$(schemas_DATA)			\
+	$(server_DATA)			\
+	gedit-@GEDIT_MAJOR@.pc
+
+
