@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-05-22 01:25+0200\n"
+"POT-Creation-Date: 2000-05-23 00:38+0200\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Andreas Hyden <a.hyden@cyberpoint.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -63,7 +63,7 @@ msgid "Diff plugin."
 msgstr "Diff instickningsprogram."
 
 #: plugins/email/email.c:129 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:420 src/search.c:709 src/search.c:716
+#: src/print.c:420 src/search.c:719 src/search.c:726
 msgid "Untitled"
 msgstr "Namnlös"
 
@@ -172,7 +172,7 @@ msgstr "Byt ut"
 msgid "Replace all"
 msgstr "Byt ut alla"
 
-#: src/dialogs/dialog-replace.c:129 src/search.c:1056
+#: src/dialogs/dialog-replace.c:129 src/search.c:1066
 msgid "Search for:"
 msgstr "Sök efter:"
 
@@ -184,11 +184,11 @@ msgstr "Byt ut mot:"
 msgid "Ask before replacing"
 msgstr "Fråga före ersättning"
 
-#: src/dialogs/dialog-search.c:145
+#: src/dialogs/dialog-search.c:118
 msgid "Text not found"
 msgstr "Texten kunde inte hittas"
 
-#: src/dialogs/dialog-search.c:149
+#: src/dialogs/dialog-search.c:122
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Texten hittades vid linje :%i"
@@ -832,7 +832,15 @@ msgstr "_Arkiv/"
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/search.c:179
+#: src/search.c:187
+msgid ""
+"Can't count lines if another search operation is active, please close the "
+"search dialog."
+msgstr ""
+"Kan inte beräkna antalet rader om en annan sök-operation är aktiv. Var vänlig och stäng "
+"sökdialogen."
+
+#: src/search.c:202
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -845,11 +853,11 @@ msgstr ""
 "Totalt antal rader: %i\n"
 "Nuvarande rad: %i"
 
-#: src/search.c:1051
+#: src/search.c:1061
 msgid "Find In Files"
 msgstr "Hitta i filer"
 
-#: src/search.c:1052
+#: src/search.c:1062
 msgid "Search"
 msgstr "Sök"
 
