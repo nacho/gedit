@@ -39,8 +39,8 @@
 #include <gedit-menus.h>
 #include <gedit-utils.h>
 
-#define MENU_ITEM_LABEL		N_("_ASCII table")
-#define MENU_ITEM_PATH		"/menu/Edit/EditOps_5/"
+#define MENU_ITEM_LABEL		N_("_ASCII Table")
+#define MENU_ITEM_PATH		"/menu/View/ViewOps/"
 #define MENU_ITEM_NAME		"ASCIITablePlugin"	
 #define MENU_ITEM_TIP		N_("Pop-up a dialog containing an ASCII Table")
 
