@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <string.h> /* For strlen */
+
 #include <glib/gutils.h>
 #include <libgnome/gnome-i18n.h>
 
@@ -55,7 +57,8 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
 	GeditView *view;
-	gchar* user_name;
+	gchar *user_name;
+	const gchar *temp;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -65,7 +68,16 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	doc = gedit_view_get_document (view);
 	g_return_if_fail (doc != NULL);
 
-	user_name = g_strdup_printf ("%s ", g_get_real_name ());
+	temp = g_get_real_name ();
+	g_return_if_fail (temp != NULL);
+	
+	if (strlen (temp) <= 0)
+	{
+		temp = g_get_user_name ();
+		g_return_if_fail (temp != NULL);
+	}
+	
+	user_name = g_strdup_printf ("%s ", temp);
 	g_return_if_fail (user_name != NULL);
 
 	gedit_document_begin_user_action (doc);

@@ -450,8 +450,6 @@ static void
 gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
 	BonoboUIComponent *ui_component;
-	GConfClient *client;
-	gchar *style = NULL;
 
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -492,23 +490,10 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	switch (gedit_settings->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
-						
-			client = gconf_client_get_default ();
-			if (client == NULL) 
-				goto error;
 
-			style = gconf_client_get_string (client, 
-					"/desktop/gnome/interface/toolbar_style", NULL);
-
-			g_object_unref (G_OBJECT (client));
-			
-			if (style != NULL)
-			{
-				bonobo_ui_component_set_prop (
-					ui_component, "/Toolbar", "look", style, NULL);
-			
-				g_free (style);
-			}
+			gedit_debug (DEBUG_MDI, "GEDIT: SYSTEM");
+			bonobo_ui_component_set_prop (
+				ui_component, "/Toolbar", "look", "system", NULL);
 
 			break;
 			
