@@ -717,6 +717,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gchar *converted_text;
 
 		converted_text = gedit_utils_convert_to_utf8 (file_contents,
+							file_size,
 							&doc->priv->encoding);
 
 		if (converted_text == NULL)
@@ -793,6 +794,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 		gchar *converted_text;
 
 		converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+							-1,
 							&doc->priv->encoding);
 
 		if (converted_text == NULL)

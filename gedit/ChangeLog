@@ -1,3 +1,15 @@
+2002-09-30  James Willcox  <jwillcox@gnome.org>
+
+	* gedit-document.c: (gedit_document_load),
+	(gedit_document_load_from_stdin):
+	* gedit-utils.c: (gedit_utils_convert_to_utf8_from_charset),
+	(gedit_utils_convert_to_utf8):  Use the gedit-encodings mechanism to
+	try converting from all encodings the user wishes.
+	* gedit-utils.h:
+	* gedit2.c: (gedit_handle_automation_cmdline):  Fixes #88213
+	* gedit-mdi.c:  Add a nifty little dropdown box containing a recently-
+	used menu beside the Open button on the toolbar.
+
 2002-09-27  James Willcox  <jwillcox@gnome.org>
 	
 	Sync up to latest recent-files code.

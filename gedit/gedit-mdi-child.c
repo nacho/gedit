@@ -400,13 +400,18 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	} 
 	else 
 	{
+		GtkSettings *settings;
 		GtkWidget *hbox;
 		GtkWidget *label;
 		GtkWidget *button;
 		GtkWidget *image;
 		gint w, h;
 
-		gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+		settings = gtk_widget_get_settings (view);
+
+		gtk_icon_size_lookup_for_settings (settings,
+						   GTK_ICON_SIZE_MENU,
+						   &w, &h);
 
 		label = gtk_label_new (name);
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);

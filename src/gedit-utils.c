@@ -45,9 +45,9 @@
 #include "gedit2.h"
 #include "bonobo-mdi.h"
 #include "gedit-document.h"
+#include "gedit-prefs-manager.h"
+#include "gedit-encodings.h"
 #include "gedit-debug.h"
-
-#define DEFAULT_ENCODING "ISO-8859-15"
 
 /* =================================================== */
 /* Flash */
@@ -1585,99 +1585,100 @@ gedit_utils_get_stdin (void)
 
 
 
-gchar *
-gedit_utils_convert_to_utf8 (const gchar *content, gchar **encoding)
+static gchar *
+gedit_utils_convert_to_utf8_from_charset (const gchar *content,
+					  gsize len,
+					  const gchar *charset)
 {
 	gchar *utf8_content = NULL;
+	GError *conv_error = NULL;
+	gchar* converted_contents = NULL;
+	gsize bytes_written;
 
 	g_return_val_if_fail (content != NULL, NULL);
 
-	if (strlen (content) > 0)
-	{
-		gedit_debug (DEBUG_UTILS, "Checking to see if input is valid UTF-8");
-
-		if (!g_utf8_validate (content, -1, NULL))
-		{
-			/* The file contains invalid UTF8 data */
-			/* Try to convert it to UTF-8 from currence locale */
-			GError *conv_error = NULL;
-			gchar* converted_contents = NULL;
-			gsize bytes_written;
-
-			gedit_debug (DEBUG_UTILS, "Trying to convert from locale to UTF-8");
+	gedit_debug (DEBUG_UTILS, "Trying to convert from %s to UTF-8", charset);
 			
-			converted_contents = g_locale_to_utf8 (content, -1,
-					NULL, &bytes_written, &conv_error); 
+	converted_contents = g_convert (content, len, "UTF-8",
+					charset, NULL, &bytes_written,
+					&conv_error); 
 						
-			if ((conv_error != NULL) || 
-			    !g_utf8_validate (converted_contents, bytes_written, NULL))		
-			{
-				gedit_debug (DEBUG_UTILS,
-				    "Couldn't convert from locale to UTF-8.");
+	if ((conv_error != NULL) || 
+	    !g_utf8_validate (converted_contents, bytes_written, NULL))		
+	{
+		gedit_debug (DEBUG_UTILS, "Couldn't convert from %s to UTF-8.",
+			     charset);
 				
-				if (converted_contents != NULL)
-					g_free (converted_contents);
+		if (converted_contents != NULL)
+			g_free (converted_contents);
 
-				if (conv_error != NULL)
-				{
-					g_error_free (conv_error);
-					conv_error = NULL;
-				}
-				
-				/* try to convert from the default encoding */
-				converted_contents =
-					g_convert (content, strlen (content), 
-						"UTF-8", DEFAULT_ENCODING,
-						NULL, &bytes_written,
-						&conv_error); 
-
-				if ((conv_error != NULL) ||
-				    !g_utf8_validate (converted_contents,
-					    	      bytes_written, NULL))
-				{
-					gedit_debug (DEBUG_UTILS,
-					    "Couldn't convert from %s to UTF-8.", DEFAULT_ENCODING);
-					/* Coversion failed */	
-					if (conv_error != NULL)
-						g_error_free (conv_error);
-
-					if (converted_contents != NULL)
-						g_free (converted_contents);
-				
-					return NULL;
-				}
-				else
-				{
-					gedit_debug (DEBUG_UTILS,
-						"Converted from %s to UTF-8.", DEFAULT_ENCODING);
-					if (encoding != NULL)
-						*encoding = g_strdup (DEFAULT_ENCODING);
-				}
-			}
-			else
-			{
-				/* successfully converted from their locale
-				 * to utf8
-				 */
-				const gchar *charset;
-
-				g_get_charset (&charset);
-
-				if (encoding != NULL)
-					*encoding = g_strdup (charset);
-
-				gedit_debug (DEBUG_UTILS,
-					"Converted from locale to UTF-8.");
-			}
-
-			utf8_content = converted_contents;
-		}
-		else
+		if (conv_error != NULL)
 		{
-			/* they gave us valid UTF-8 */
-			utf8_content = g_strdup (content);
+			g_error_free (conv_error);
+			conv_error = NULL;
 		}
+
+		utf8_content = NULL;
+	} else {
+		gedit_debug (DEBUG_UTILS,
+			"Converted from %s to UTF-8.",
+			charset);
+		utf8_content = converted_contents;
 	}
 
 	return utf8_content;
+}
+
+gchar *
+gedit_utils_convert_to_utf8 (const gchar *content, gsize len,
+			     gchar **encoding_used)
+{
+	const GSList *tmp_encodings = NULL;
+	GSList *encodings = NULL;
+	const GeditEncoding *locale_encoding;
+	const gchar *locale_charset;
+
+	if (g_utf8_validate (content, len, NULL))
+		return g_strdup (content);
+
+	tmp_encodings = gedit_prefs_manager_get_encodings ();
+
+	g_get_charset (&locale_charset);
+
+	locale_encoding = gedit_encoding_get_from_charset (locale_charset);
+
+	if (strcmp (locale_charset, "UTF-8") != 0) {
+		/* add their locale to one of the encodings to try */
+		encodings = g_slist_prepend (encodings,
+					(gpointer)locale_encoding);
+		encodings = g_slist_concat (encodings,
+					(GSList *)tmp_encodings);
+	} else {
+		/* converting from UTF-8 to UTF-8 doesn't make sense */
+		encodings = g_slist_concat (NULL, (GSList *)tmp_encodings);
+	}
+
+	while (encodings != NULL) {
+		GeditEncoding *enc;
+		const gchar *charset;
+		gchar *utf8_content;
+
+		enc = (GeditEncoding *)encodings->data;
+
+		charset = gedit_encoding_get_charset (enc);
+
+		gedit_debug (DEBUG_UTILS, "Trying to convert %ld bytes of data into UTF-8.", len);
+		fflush (stdout);
+		utf8_content = gedit_utils_convert_to_utf8_from_charset
+							(content, len, charset);
+
+		if (utf8_content != NULL) {
+			*encoding_used = g_strdup (charset);
+			return utf8_content;
+		}
+
+		encodings = encodings->next;
+	}
+	
+	return NULL;
 }

@@ -66,6 +66,7 @@ void egg_recent_model_changed      (EggRecentModel *model);
 void egg_recent_model_set_limit    (EggRecentModel *model, int limit);
 int  egg_recent_model_get_limit    (EggRecentModel *model);
 
+void egg_recent_model_remove_expired (EggRecentModel *model);
 
 G_END_DECLS
 

@@ -51,6 +51,8 @@
 #include "gedit-utils.h"
 #include "gedit-plugins-engine.h"
 #include "recent-files/egg-recent-view-bonobo.h"
+#include "recent-files/egg-recent-view-gtk.h"
+#include "recent-files/egg-recent-model.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -169,6 +171,123 @@ gedit_mdi_class_init (GeditMDIClass *klass)
   	parent_class = g_type_class_peek_parent (klass);
 
   	object_class->finalize = gedit_mdi_finalize;
+}
+
+static void
+menu_position_under_widget (GtkMenu *menu, int *x, int *y,
+			    gboolean *push_in, gpointer user_data)
+{
+	GtkWidget *w;
+	int width, height;
+	int screen_width, screen_height;
+	GtkRequisition requisition;
+
+	w = GTK_WIDGET (user_data);
+	
+	gdk_drawable_get_size (w->window, &width, &height);
+	gdk_window_get_origin (w->window, x, y);
+	*y = *y + height;
+
+	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+
+	screen_width = gdk_screen_width ();
+	screen_height = gdk_screen_height ();
+
+	*x = CLAMP (*x, 0, MAX (0, screen_width - requisition.width));
+	*y = CLAMP (*y, 0, MAX (0, screen_height - requisition.height));
+}
+
+static gboolean
+open_button_pressed_cb (GtkWidget *widget,
+			      GdkEventButton *event,
+			      gpointer *user_data)
+{
+	GtkWidget *menu;
+	GeditMDI *mdi;
+
+	g_return_val_if_fail (GTK_IS_BUTTON (widget), FALSE);
+	g_return_val_if_fail (GEDIT_IS_MDI (user_data), FALSE);
+
+	mdi = GEDIT_MDI (user_data);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+	menu = g_object_get_data (G_OBJECT (widget), "recent-menu");
+	gnome_popup_menu_do_popup_modal (menu,
+				menu_position_under_widget, widget,
+				event, widget, widget);
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
+	
+	return TRUE;
+}
+
+static gboolean
+open_button_key_pressed_cb (GtkWidget *widget,
+				  GdkEventKey *event,
+				  gpointer *user_data)
+{
+	if (event->keyval == GDK_space ||
+	    event->keyval == GDK_KP_Space ||
+	    event->keyval == GDK_Return ||
+	    event->keyval == GDK_KP_Enter) {
+		open_button_pressed_cb (widget, NULL, user_data);
+	}
+
+	return FALSE;
+}
+
+
+
+static void
+gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
+			 const gchar *path, const gchar *tooltip)
+{
+	GtkWidget *menu;
+	EggRecentViewGtk *view;
+	EggRecentModel *model;
+	BonoboUIToolbarItem *item;
+	BonoboControl *wrapper;
+	GtkWidget *button;
+
+	item = BONOBO_UI_TOOLBAR_ITEM (bonobo_ui_toolbar_item_new ());
+
+	button = gtk_toggle_button_new ();
+	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+
+	gtk_container_add (GTK_CONTAINER (button),
+			   gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT));
+
+	gtk_container_add (GTK_CONTAINER (item), button);
+
+	gtk_widget_show_all (GTK_WIDGET (item));
+
+	model = gedit_recent_get_model ();
+
+	menu = gtk_menu_new ();
+	gtk_widget_show (menu);
+	view = egg_recent_view_gtk_new (menu, NULL);
+	g_signal_connect (view, "activate",
+			  G_CALLBACK (gedit_file_open_recent), NULL);
+	egg_recent_view_gtk_show_icons (view, TRUE);
+	egg_recent_view_gtk_show_numbers (view, FALSE);
+	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
+	g_object_set_data (G_OBJECT (button), "recent-menu", menu);
+	
+	g_signal_connect_object (button, "key_press_event",
+				 G_CALLBACK (open_button_key_pressed_cb),
+				 mdi, 0);
+	g_signal_connect_object (button, "button_press_event",
+				 G_CALLBACK (open_button_pressed_cb),
+				 mdi, 0);
+
+	wrapper = bonobo_control_new (GTK_WIDGET (item));
+	bonobo_ui_component_object_set (ui_component,
+					path,
+					BONOBO_OBJREF (wrapper),
+					NULL);
+
+	bonobo_object_unref (wrapper);
 }
 
 static void 
@@ -315,6 +434,11 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	bonobo_object_unref (BONOBO_OBJECT (control));
 
 	g_object_set_data (G_OBJECT (win), "OverwriteMode", widget);
+
+	/* Add custom Open button to toolbar */
+	gedit_mdi_add_open_button (GEDIT_MDI (mdi),
+				   ui_component, "/Toolbar/FileOpenMenu",
+				   _("Open a file."));
 
 	prefs = gedit_window_prefs_new ();
 	gedit_window_prefs_attach_to_window (prefs, win);

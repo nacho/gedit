@@ -15,6 +15,8 @@ EGG_FILES =				\
         egg-recent-view.h		\
         egg-recent-view-bonobo.c	\
         egg-recent-view-bonobo.h	\
+        egg-recent-view-gtk.c		\
+        egg-recent-view-gtk.h		\
         egg-recent-util.c		\
 	egg-recent-util.h
 

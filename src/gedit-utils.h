@@ -91,6 +91,7 @@ gboolean gedit_utils_create_empty_file (const gchar *uri);
 
 gchar *gedit_utils_get_stdin (void);
 gchar *gedit_utils_convert_to_utf8 (const gchar *content,
+				    gsize len,
 				    gchar **encoding);
 
 #endif /* __GEDIT_UTILS_H__ */

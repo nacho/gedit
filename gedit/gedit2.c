@@ -279,7 +279,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 	{
 		gchar *converted;
 
-		converted = gedit_utils_convert_to_utf8 (stdin_data, NULL);
+		converted = gedit_utils_convert_to_utf8 (stdin_data, -1, NULL);
 
 		if (converted != NULL)
 		{
