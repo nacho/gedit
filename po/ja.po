@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 09:38+0900\n"
-"PO-Revision-Date: 2005-02-14 09:37+0900\n"
+"POT-Creation-Date: 2005-03-02 18:22+0900\n"
+"PO-Revision-Date: 2005-03-02 18:21+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "gedit オートメーション・ファクトリ"
 msgid "Edit text files"
 msgstr "テキスト・ファイルを編集します"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit2.c:306
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "GNOME テキスト・エディタ"
 
@@ -215,19 +215,26 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr ""
 "gedit で \"元に戻す\" や \"やり直す\" ことができる動作の最大数を指定します"
 
-#: ../data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: ../data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: ../data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: ../data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: ../data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: ../data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:35
+#: ../data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -235,51 +242,61 @@ msgstr ""
 "変更したファイルを gedit が自動的に保存するまでの時間を指定します。これは "
 "\"自動保存\" オプションが有効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:36
+#: ../data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "ヘッダの印刷"
 
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "行番号の印刷"
 
-#: ../data/gedit.schemas.in.h:38
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "強調表示の印刷"
 
-#: ../data/gedit.schemas.in.h:39
+#: ../data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "印刷時の行の折り返しモード"
 
-#: ../data/gedit.schemas.in.h:40
+#: ../data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "右マージンの位置"
 
-#: ../data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: ../data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: ../data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: ../data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: ../data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: ../data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: ../data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: ../data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "選択したテキストの色"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "選択範囲の色"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -289,7 +306,7 @@ msgstr ""
 "のリストです。\"CURRENT\" は現在使用しているロケールになります。認識したエン"
 "コーディングのみ使用します。"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -303,7 +320,7 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに印刷されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -317,12 +334,12 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに表示されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
 
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -330,7 +347,7 @@ msgstr ""
 "ドキュメントを印刷する際の本文に使用するフォントを指定します。これは gnome-"
 "print 用のフォント名で print_font_body_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:52
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -338,7 +355,7 @@ msgstr ""
 "印刷する際の行番号に使用するフォントを指定します。これは \"行番号の印刷\" オ"
 "プションが 0 以外の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -348,7 +365,7 @@ msgstr ""
 "プションが 0 以外の場合のみ効果があります。これは gnome-print 用のフォント名"
 "で print_font_numbers_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -356,7 +373,7 @@ msgstr ""
 "ドキュメントを印刷する際のページ・ヘッダに使用するフォントを指定します。これ"
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:55
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -366,28 +383,28 @@ msgstr ""
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。これは gnome-"
 "print 用のフォント名で print_font_header_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:56
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "\"最近使ったファイル\" のサブメニューに表示するエントリの最大数を指定します。"
 
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "タブ文字の代わりに表示されるスペースの数を指定します。"
 
-#: ../data/gedit.schemas.in.h:58
+#: ../data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "右マージンの位置を指定します。"
 
-#: ../data/gedit.schemas.in.h:59
+#: ../data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "ステータスバーの表示"
 
-#: ../data/gedit.schemas.in.h:60
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -404,35 +421,35 @@ msgstr ""
 "することに注意して下さい。そしてここで記述したとおりに表示されるか確認して下"
 "さい。"
 
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "タブのサイズ"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "テキストの色"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "ツールバーボタンのスタイル"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "ツールバーの表示可否"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "\"やり直す\" 動作の限度"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "デフォルト色を使う"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "デフォルトのフォントを使う"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -441,7 +458,7 @@ msgstr ""
 "指定時間後に変更されたファイルを gedit が自動的に保存するかどうかを指定しま"
 "す。\"自動保存の間隔\" オプションで時間を設定できます。"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -450,52 +467,52 @@ msgstr ""
 "\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張子を"
 "設定することができます。"
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "編集領域に行番号を表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "編集領域に右マージンを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "自動インデントを有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "強調表示を有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
 msgstr "対応するカッコを強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
 msgstr "カーソル行を強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "ドキュメントを印刷する際にヘッダを含めるかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "タブ文字の代わりに空白文字を使うかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "ドキュメントを印刷する際に強調表示も印刷するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "編集ウィンドウの下にステータスバーを表示させるかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "編集ウィンドウ内にツールバーを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -506,7 +523,7 @@ msgstr ""
 "無効の場合は、編集領域の色は \"背景色\"、\"テキストの色\"、\"選択したテキスト"
 "の色\"、\"選択範囲の色\" オプションで指定されたものになります。"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -519,14 +536,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -1148,46 +1165,46 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:656 ../gedit/gedit-document.c:674
+#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:656 ../gedit/gedit-document.c:674
+#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "保存していないドキュメント"
 
-#: ../gedit/gedit-document.c:662 ../gedit/gedit-document.c:709
+#: ../gedit/gedit-document.c:672 ../gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "ファイル名が無効です"
 
-#: ../gedit/gedit-document.c:849 ../gedit/gedit-document.c:1413
+#: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "無効な UTF-8 データです"
 
-#: ../gedit/gedit-document.c:1660
+#: ../gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s のシンボリック・リンク情報を読み込むことができませんでした"
 
-#: ../gedit/gedit-document.c:1706
+#: ../gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "シンボリック・リンクが多すぎます。"
 
-#: ../gedit/gedit-document.c:1789
+#: ../gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit は書き込みモードで %s: 場所を処理できません。"
 
-#: ../gedit/gedit-document.c:1796
+#: ../gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit はこの種類の場所を書き込みモードで処理できません。"
 
-#: ../gedit/gedit-document.c:1809
+#: ../gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "ファイル名が無効です。"
 
-#: ../gedit/gedit-document.c:1958
+#: ../gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1195,7 +1212,7 @@ msgstr ""
 "ファイルを保存するための十分な空きディスクがありません。\n"
 "ディスク容量を空けてやり直して下さい。"
 
-#: ../gedit/gedit-document.c:1963
+#: ../gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1204,7 +1221,7 @@ msgstr ""
 "ファイルの保存先のディスクにはファイル・サイズの制限があります。小さいファイ"
 "ルを保存するか、この制限を解除してから保存して下さい。"
 
-#: ../gedit/gedit-document.c:2007
+#: ../gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "バックアップ・ファイルを作成できませんでした。"
 
@@ -1334,7 +1351,7 @@ msgstr "ベトナム語"
 msgid "Thai"
 msgstr "タイ語"
 
-#: ../gedit/gedit-encodings.c:433
+#: ../gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "不明"
 
@@ -1380,35 +1397,35 @@ msgstr "開くファイルの選択"
 msgid "Select a filename to save"
 msgstr "保存するファイル名の選択"
 
-#: ../gedit/gedit-file.c:191
+#: ../gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "ファイルを開く..."
 
-#: ../gedit/gedit-file.c:247 ../gedit/gedit-file.c:389
+#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "ドキュメント \"%s\" を保存しています..."
 
-#: ../gedit/gedit-file.c:276 ../gedit/gedit-file.c:407
+#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "ドキュメント \"%s\" は保存されていません。"
 
-#: ../gedit/gedit-file.c:284 ../gedit/gedit-file.c:420
+#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "ドキュメント \"%s\" は保存されました。"
 
-#: ../gedit/gedit-file.c:371
+#: ../gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "別名で保存..."
 
-#: ../gedit/gedit-file.c:525
+#: ../gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "保存していない変更をドキュメント \"%s\" へ戻しますか？"
 
-#: ../gedit/gedit-file.c:534
+#: ../gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1418,12 +1435,12 @@ msgid_plural ""
 msgstr[0] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:543
+#: ../gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "1分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:549
+#: ../gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1434,7 +1451,7 @@ msgid_plural ""
 msgstr[0] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "1分 %ld秒前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:559
+#: ../gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1444,7 +1461,7 @@ msgid_plural ""
 msgstr[0] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%ld分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:574 ../gedit/gedit-file.c:595
+#: ../gedit/gedit-file.c:577 ../gedit/gedit-file.c:598
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1452,7 +1469,7 @@ msgid_plural ""
 msgstr[0] "1時間前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "%d時間前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:580
+#: ../gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1463,70 +1480,70 @@ msgid_plural ""
 msgstr[0] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
 msgstr[1] "1時間 %d分前に編集したドキュメントへの変更が完全に失われます。"
 
-#: ../gedit/gedit-file.c:616 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-file.c:619 ../gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "戻す(_R)"
 
-#: ../gedit/gedit-file.c:661
+#: ../gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "ドキュメント \"%s\" へ戻す際にエラーが発生しました。"
 
-#: ../gedit/gedit-file.c:669
+#: ../gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "ドキュメント \"%s\" は戻していません。"
 
-#: ../gedit/gedit-file.c:673
+#: ../gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "ドキュメント \"%s\" を戻しました。"
 
-#: ../gedit/gedit-file.c:701
+#: ../gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "ドキュメント \"%s\" を戻しています..."
 
-#: ../gedit/gedit-file.c:824
+#: ../gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "標準入力からデータを読み込めませんでした。"
 
-#: ../gedit/gedit-file.c:911
+#: ../gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "戻すファイル:"
 
-#: ../gedit/gedit-file.c:911
+#: ../gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "読み込むファイル:"
 
-#: ../gedit/gedit-file.c:1091 ../gedit/gedit-file.c:1313
+#: ../gedit/gedit-file.c:1094 ../gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "ファイル \"%s\" を読み込む際にエラー"
 
-#: ../gedit/gedit-file.c:1112
+#: ../gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "ファイル '%s' を読み込みました"
 
-#: ../gedit/gedit-file.c:1207
+#: ../gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d 個のファイルを読み込みました"
 msgstr[1] "%d 個のファイルを読み込みました"
 
-#: ../gedit/gedit-file.c:1266
+#: ../gedit/gedit-file.c:1288
 #, c-format
 msgid "Created file \"%s\""
 msgstr "ファイル '%s' を作成しました"
 
-#: ../gedit/gedit-file.c:1284
+#: ../gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "ファイル \"%s\" を読み込んでいます..."
 
-#: ../gedit/gedit-file.c:1437
+#: ../gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1817,19 +1834,19 @@ msgstr "'%s' を開きます"
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: ../gedit/gedit-mdi.c:1443 ../gedit/gedit-mdi.c:1445
+#: ../gedit/gedit-mdi.c:1468 ../gedit/gedit-mdi.c:1470
 msgid "Read Only"
 msgstr "書き込み禁止"
 
-#: ../gedit/gedit-mdi.c:2068
+#: ../gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "通常"
 
-#: ../gedit/gedit-mdi.c:2069
+#: ../gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "通常の強調表示モードにします"
 
-#: ../gedit/gedit-mdi.c:2145
+#: ../gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
@@ -2293,16 +2310,16 @@ msgstr " (Unicode が不正です)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:841
+#: ../gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "(%d 行, %d 列)"
 
-#: ../gedit/gedit-view.c:877
+#: ../gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr " [上書き]"
 
-#: ../gedit/gedit-view.c:879
+#: ../gedit/gedit-view.c:928
 msgid "  INS"
 msgstr " [挿入]"
 
@@ -2324,7 +2341,7 @@ msgstr "既に実行中の gedit に新しいトップレベル・ウィンド�
 msgid "Create a new document in an existing instance of gedit"
 msgstr "既に実行中の gedit に新しいドキュメントを作成する"
 
-#: ../gedit/gedit2.c:161
+#: ../gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "指定したエンコーディング \"%s\" は正しくありません\n"
@@ -3283,601 +3300,601 @@ msgid "Declare flag"
 msgstr "DECLARE"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
+msgid "Defer attribute"
+msgstr "Defer attribute"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "<DD>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:50
+#: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "<DL>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:51
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "<DT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "<DEL>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "DIRECTION="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr "DIR="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "<DIR>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "DISABLED"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "<BASE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "<BODY> (ドキュメントの本文)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "<HEAD> (ドキュメントのヘッダ)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "<TITLE> (ドキュメントのタイトル)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "<IDOCTYPE> (ドキュメントの種類)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "ID="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "<EMBED>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:65
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "<EM> (文字の強調)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "ENCTYPE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "<FIG>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "FACE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "FOR="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "<BR>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "<FORM>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr "ACTION="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "<FIELDSET>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "<LABEL>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "<INPUT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "<INPUT TYPE=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "<FORM METHOD=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "REL=<"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "<FRAME>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr "FRAME="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "<FRAME SRC=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "TARGET="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr "FRAMEBORDER="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "<FRAMESET>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "<FRAMESET COLS=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "<FRAMESET ROWS=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr "FRAMESPACING="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "<OBJECT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "<META>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
 msgstr "<SPAN>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "HREF="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - 特殊文字"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - タグ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "<HTML>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "VERSION="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "HTTP-EQUIV="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "HEADERS="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "<H>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "<H1>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "<H2>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "<H3>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "<H4>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "<H5>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "<H6>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "HEIGHT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "<HR>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "HSPACE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr "<BDD>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "<IMG>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "<MAP>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "<AREA>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "<MAP NAME=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "<IMG SRC=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "<IFRAME>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "<ILAYER>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "<INS>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "<DFN>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "<I>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "<APPLET>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "LABEL="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "HREFLANG="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "<BIG>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "<LAYER>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "LINK="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "<LI>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr "ACCEPT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "CCEPT-CHARSET="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "<LISTING>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "<FONT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "LONGDESC="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "<BLOCKQUOTE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "MAILTO="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr "MARGINHEIGHT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr "MARGINWIDTH="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr "<MARQUEE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Maximum length of text field"
 msgstr "MAXLENGTH="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "<LINK>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "<MENU>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "<TEXTAREA>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "<MULTICOL>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "MULTIPLE"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "NAME="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "<PARAM>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "<NEXTID>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "NOHREF"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "<NOEMBED>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "<NOFRAMES>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "<NOLAYER>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "<NOBR>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "NORESIZE"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "<NOSCRIPT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "NOSHADE"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "NOWRAP"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "<NOTE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "OBJECT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "DATA="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr "CHAROFF="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "ONBLUR="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "ONCHANGE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "ONCLICK="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "ONDBLCLICK="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "ONFOCUS="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "ONKEYDOWN="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "ONKEYPRESS="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "ONKEYUP="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "ONLOAD="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "ONMOUSEDOWN="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "ONMOUSEMOVE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "ONMOUSEOUT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "ONMOUSEOVER="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "ONMOUSEUP="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "ONRESET="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "ONSELECT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "ONSUBMIT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "ONUNLOAD="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "<OPTGROUP>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "<SELECT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "<OL>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "MEDIA="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "<P>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "<P CLASS=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "<P STYLE=>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "<XMP>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "<PRE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr "PROFILE="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "PROMPT="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "<BUTTON>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "<QUOTE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "<RANGE>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "READONLY"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "COMPACT"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "REV="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "<ROOT>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "ROWS="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr "RULES="
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr "<SAMP>"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Scope covered by header cells"
 msgstr "SCOPE="
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr "DEFER"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Script language name"
