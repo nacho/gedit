@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-01-11 16:58+0100\n"
-"PO-Revision-Date: 2001-10-10 22:46+0200\n"
+"POT-Creation-Date: 2002-01-13 12:10+0100\n"
+"PO-Revision-Date: 2002-01-13 19:48+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,66 +14,920 @@ msgstr ""
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: gedit2.desktop.in.h:1
-#, fuzzy
 msgid "Gnome Text Editor"
-msgstr "Tekstredigering"
+msgstr "GNOME tekstredigering"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:468
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:479
 msgid "gedit"
 msgstr "gedit"
 
+#: plugins/ASCII/ascii.c:268 plugins/ASCII/ascii.c:269
+msgid "ASCII table"
+msgstr "ASCII-tabell"
+
+#: plugins/ASCII/ascii.c:270
+msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+msgstr "Dette tillegget viser en pop-up dialog som inneholder en ASCII-tabell."
+
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
+msgid "Browse"
+msgstr "Bla gjennom"
+
+#: plugins/browse/browse.c:251 plugins/browse/browse.c:252
+msgid "Web browse plugin"
+msgstr "Webleser tillegg"
+
+#: plugins/convert/convert.c:179
+msgid "Convert"
+msgstr "Konverter"
+
+#: plugins/convert/convert.c:180 plugins/convert/convert.c:181
+msgid "Number Converter"
+msgstr "Tallkonverterer"
+
+#: plugins/cvschangelog/cvschangelog.c:179
+msgid "CVS ChangeLog"
+msgstr "CVS endringslogg"
+
+#: plugins/cvschangelog/cvschangelog.c:180
+#: plugins/cvschangelog/cvschangelog.c:181
+msgid "A plugin that opens ChangeLogs found in CVS commit log messages."
+msgstr "Et tillegg som åpner endringslogger (ChangeLog) som finnes i CVS-loggmeldinger."
+
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/diff/diff.c:36
+msgid "diff"
+msgstr "diff"
+
+#: plugins/diff/diff.c:126
+msgid "The two documents you selected are the same."
+msgstr "De to valgte dokumentene du valgte er like."
+
+#: plugins/diff/diff.c:132
+msgid ""
+"The \"first\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"Den \"første\" filen du valgte eksisterer ikke.\n"
+"\n"
+"Vennligst oppgi en gyldig fil."
+
+#: plugins/diff/diff.c:139
+msgid ""
+"The \"second\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"Den \"andre\" filen du valgte eksisterer ikke.\n"
+"\n"
+"Vennligst oppgi en gyldig fil."
+
+#: plugins/diff/diff.c:150
+msgid "The \"first\" document contains no text."
+msgstr "Det \"første\" dokumentet inneholder ingen tekst."
+
+#: plugins/diff/diff.c:162
+msgid "The \"second\" document contains no text."
+msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
+
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:171
+msgid ""
+"gedit could not create a temp file.\n"
+"\n"
+msgstr ""
+"gedit kunne ikke opprette en midlertidig til.\n"
+"\n"
+
+#: plugins/diff/diff.c:295 plugins/email/email.c:229
+#, c-format
+msgid "Untitled %i"
+msgstr "Navnløs %i"
+
+#: plugins/diff/diff.c:496
+msgid "Diff"
+msgstr "Diff"
+
+#: plugins/diff/diff.c:497
+msgid "Makes a diff file from two documents or files"
+msgstr ""
+"Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
+
+#: plugins/diff/diff.c:498
+msgid ""
+"Makes a diff file from two documents or files on disk\n"
+"For more info on diff, type \"man diff\" in a shell prompt\n"
+msgstr ""
+"Lager en fil med forskjellene mellom to dokumenter eller filer på disk\n"
+"For mer informasjon om diff, skriv \"man diff\" på kommandolinjen\n"
+
+#: plugins/docinfo/docinfo.c:214
+msgid ""
+"No document exists.\n"
+"The Document Info plugin is going be closed."
+msgstr ""
+"Ingen dokumenter eksisterer.\n"
+"Dokumentinformasjonstillegget vil bli lukket."
+
+#: plugins/docinfo/docinfo.c:369
+msgid "Document info"
+msgstr "Dokumentinformasjon"
+
+#: plugins/docinfo/docinfo.c:370
+msgid "Get info on current document."
+msgstr "Hent informasjon om aktivt dokument."
+
+#: plugins/docinfo/docinfo.c:371
+msgid ""
+"This plugin displays a pop-up dialog which contains basic information on "
+"current document."
+msgstr ""
+"Dette tillegget viser en dialog som inneholder basisinformasjon om dette "
+"dokumentet."
+
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/email/email.c:22
+msgid "email"
+msgstr "e-post"
+
+#: plugins/email/email.c:75
+#, c-format
+msgid "Executing command: %s"
+msgstr "Kjører kommando: %s"
+
+#: plugins/email/email.c:275
+msgid "Email"
+msgstr "E-post"
+
+#: plugins/email/email.c:276
+msgid "Email the current document"
+msgstr "Send aktivt dokument"
+
+#: plugins/email/email.c:277
+msgid ""
+"Email the current document to a specified email address\n"
+"gedit searches for sendmail to use this plugin."
+msgstr ""
+"Send aktivt dokument til en spesifisert e-post adresse\n"
+"gedit søker etter sendmail for å bruke dette tillegget."
+
+#: plugins/reverse/reverse.c:69
+msgid "Reverse"
+msgstr "Reverser"
+
+#: plugins/reverse/reverse.c:70 plugins/reverse/reverse.c:71
+msgid "Reverse text"
+msgstr "Reverser tekst"
+
+#: plugins/sample/sample.c:69
+msgid "Hello World"
+msgstr "Hallo verden"
+
+#: plugins/sample/sample.c:70 plugins/sample/sample.c:71
+msgid "Sample 'hello world' plugin."
+msgstr "Eksempel 'hallo verden' tillegg."
+
+#: plugins/shell_output/shell_output.c:64
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Skallkommandooppføringen er tom.\n"
+"\n"
+"Vennligst sett inn en gyldig skallkommando."
+
+#: plugins/shell_output/shell_output.c:213
+msgid "Shell Output"
+msgstr "Skallutskrift"
+
+#: plugins/shell_output/shell_output.c:214
+#: plugins/shell_output/shell_output.c:215
+msgid "Insert the shell output in the document"
+msgstr "Sett inn utskrift fra skallet i dokumentet"
+
+#: plugins/sort/sort.c:192
+msgid "Sort"
+msgstr "Sorter"
+
+#: plugins/sort/sort.c:193
+msgid "Sort a document."
+msgstr "Sorter et dokument."
+
+#: plugins/sort/sort.c:194
+msgid "Sort a document or selected text."
+msgstr "Sorter et dokument eller valg tekst."
+
+#: plugins/spell/spell.c:235 plugins/spell/spell.c:236
+msgid "Spell Check"
+msgstr "Stavekontroll"
+
+#: plugins/time/time.c:83
+msgid "Insert Time"
+msgstr "Sett inn tid"
+
+#: plugins/time/time.c:84 plugins/time/time.c:85
+msgid "Inserts the current date and time"
+msgstr "Setter inn dagens dato og tid"
+
 #: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
-#, fuzzy, c-format
+#, c-format
 msgid "Activate %s"
-msgstr "_Aktiver alle"
+msgstr "Aktiver %s"
 
 #: src/dialogs/gedit-dialog-goto-line.c:114
-#, fuzzy
 msgid "Goto line..."
-msgstr "Gå til _linje..."
+msgstr "Gå til linje..."
 
 #. Add Goto Line button
 #: src/dialogs/gedit-dialog-goto-line.c:124
-#, fuzzy
 msgid "_Goto line"
-msgstr "Gå til linje"
+msgstr "_Gå til linje"
 
-#: src/dialogs/gedit-dialog-replace.c:165
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
 msgid "Replace"
 msgstr "Erstatt"
 
 #: src/dialogs/gedit-dialog-replace.c:176
-#, fuzzy
 msgid "Replace _All"
-msgstr "Erstatt alt"
+msgstr "Erstatt _alle"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file.c:805
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
 msgid "_Replace"
-msgstr "Erstatt"
+msgstr "E_rstatt"
 
-#: src/dialogs/gedit-dialog-replace.c:269
+#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Finn"
 
-#: src/dialogs/gedit-dialog-replace.c:471
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695 src/gedit-commands.c:339
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:475
+#: src/dialogs/gedit-dialog-replace.c:546
+#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "Søketeksten ble ikke funnet."
+msgstr "Strengen «%s» ble ikke funnet."
 
-#: src/dialogs/gedit-dialog-replace.c:704
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:712
+#, c-format
 msgid "Found and replaced %d occurences."
-msgstr "fant og erstattet %i oppføringer."
+msgstr "Fant og erstattet %d oppføringer."
+
+#: src/dialogs/gedit-preferences-dialog.c:195
+msgid "Toolbar"
+msgstr "Verktøylinje"
+
+#: src/dialogs/gedit-preferences-dialog.c:196
+msgid "Status bar"
+msgstr "Statuslinje"
+
+#: src/dialogs/gedit-preferences-dialog.c:199
+msgid "MDI"
+msgstr "MDI"
+
+#: src/dialogs/gedit-preferences-dialog.c:207
+msgid "Font & Colors"
+msgstr "Skrifter og farger"
+
+#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+msgid "Save"
+msgstr "Lagre"
+
+#.
+#. {_("Tabs"), NULL, TABS_SETTINGS},
+#.
+#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "Angre"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+msgid "Wrap mode"
+msgstr "Brytningsmodus"
+
+#: src/dialogs/gedit-preferences-dialog.c:215
+msgid "Line numbers"
+msgstr "Linjenummer"
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+msgid "Page"
+msgstr "Side"
+
+#: src/dialogs/gedit-preferences-dialog.c:229
+msgid "Editor"
+msgstr "Editor"
+
+#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "Skriv ut"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "User interface"
+msgstr "Brukergrensesnitt"
+
+#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+msgid "Preferences"
+msgstr "Brukervalg"
+
+#: src/dialogs/gedit-preferences-dialog.c:462
+msgid "Categories"
+msgstr "Kategorier"
+
+#: src/gedit-commands.c:56
+msgid "Not yet implemented."
+msgstr "Ikke implementert ennå."
+
+#: src/gedit-commands.c:411
+msgid "Impossible to update gedit settings."
+msgstr "Ikke mulig å oppdatere innstillinger for gedit."
+
+#: src/gedit-commands.c:482
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gedit er en liten lettvekt tekst editor for GNOME"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: src/gedit-document.c:454 src/gedit-document.c:465
+msgid "Untitled"
+msgstr "Navnløs"
+
+#: src/gedit-document.c:535 src/gedit-document.c:641
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr "Ugyldige UTF-8 data funnet ved lesing av filen"
+
+#: src/gedit-document.c:951
+msgid "It is not possible to revert an Untitled document"
+msgstr "Du kan ikke forkaste et dokument uten tittel"
+
+#: src/gedit-file-selector-util.c:104
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"En fil med navn «%s» eksisterer allerede.\n"
+"Vil du erstatte den med filen du lagrer?"
+
+#: src/gedit-file-selector-util.c:112
+msgid "Do_n't replace"
+msgstr "I_kke erstatt"
+
+#: src/gedit-file-selector-util.c:544
+msgid "Select a filename to save"
+msgstr "Velg et filnavn for lagring"
+
+#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
+#, c-format
+msgid "Loaded file %s"
+msgstr "Lastet fil %s"
+
+#: src/gedit-file.c:256
+#, c-format
+msgid "Loaded %i files"
+msgstr "Lastet %i filer"
+
+#: src/gedit-file.c:326 src/gedit-file.c:348
+msgid "Open File ..."
+msgstr "Åpne fil ..."
+
+#: src/gedit-file.c:395 src/gedit-file.c:443
+#, c-format
+msgid ""
+"An error occurred while opening the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"En feil oppsto under åpning av fil «%s».\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "Lagrer fil «%s»..."
+
+#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+msgid "Unknown error"
+msgstr "Ukjent feil"
+
+#: src/gedit-file.c:534 src/gedit-file.c:736
+#, c-format
+msgid ""
+"An error occurred while saving the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"En feil oppsto under lagring av fil «%s».\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+msgid "The document has not been saved."
+msgstr "Dokumentet er ikke lagret."
+
+#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#, c-format
+msgid "File '%s' saved."
+msgstr "Fil «%s» lagret."
+
+#: src/gedit-file.c:641
+msgid "Save As..."
+msgstr "Lagre som..."
+
+#: src/gedit-file.c:674
+msgid "Save as ..."
+msgstr "Lagre som..."
+
+#: src/gedit-file.c:808
+#, c-format
+msgid ""
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
+msgstr "En fil med navn «%s» eksisterer allerede her. Vil du erstatte den med filen du lagrer?"
+
+#: src/gedit-file.c:932
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "Forkaster endringer i fil «%s»..."
+
+#: src/gedit-file.c:953
+#, c-format
+msgid ""
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
+msgstr ""
+"En feil oppsto under forkasting av endringer i fil «%s».\n"
+"\n"
+"%s"
+
+#: src/gedit-file.c:981
+msgid "The document has not been reverted."
+msgstr "Endringer i dokumentet ble ikke forkastet."
+
+#: src/gedit-file.c:991
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Forkastet endringer i fil «%s»."
+
+#: src/gedit-file.c:1143
+#, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"En feil oppsto under lesing av data fra stdin.\n"
+"\n"
+"%s"
+
+#: src/gedit-mdi.c:576
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"Vil du lagre endringene du har gjort i dokumentet «%s»?\n"
+"\n"
+"Endringene vil gå tapt hvis du ikke lagrer dem."
+
+#: src/gedit-mdi.c:581
+msgid "Do_n't save"
+msgstr "I_kke lagre"
+
+#: src/gedit-mdi.c:599
+msgid "_Don't quit"
+msgstr "_Ikke avslutt"
+
+#: src/gedit-mdi.c:603
+msgid "_Don't close"
+msgstr "_Ikke lukk"
+
+#: src/gedit-mdi.c:687
+msgid "(modified)"
+msgstr "(endret)"
+
+#: src/gedit-mdi.c:693
+msgid "(readonly)"
+msgstr "(skrivebeskyttet)"
+
+#: src/gedit-print.c:158
+msgid ""
+"gedit is unable to print since it cannot find\n"
+"one of the required fonts."
+msgstr ""
+"gedit kan ikke skrive ut fordi en av skriftene\n"
+"ikke kan finnes."
+
+#: src/gedit-print.c:265
+msgid "gedit - Print Document"
+msgstr "gedit - Skriv ut dokument"
+
+#: src/gedit-print.c:274
+msgid "Lines"
+msgstr "Linjer"
+
+#: src/gedit-print.c:330
+#, c-format
+msgid "File: %s"
+msgstr "Fil: %s"
+
+#. Print right text
+#: src/gedit-print.c:335
+#, c-format
+msgid "Page: %d"
+msgstr "Side: %d"
+
+#: src/gedit-print.c:464
+msgid "gedit - Print Preview"
+msgstr "gedit: Forhåndsvisning"
+
+#: src/gedit-print.c:540
+#, c-format
+msgid ""
+"An error occurred while printing.\n"
+"\n"
+"%s,"
+msgstr ""
+"En feil oppsto under utskrift.\n"
+"\n"
+"%s"
+
+#: src/gedit-recent.c:252
+#, c-format
+msgid "Open file %s"
+msgstr "Åpne fil %s"
+
+#: src/gedit-recent.c:320
+#, c-format
+msgid "Unable to open recent file: %s"
+msgstr "Kunne ikke åpne nylig brukt fil: %s"
+
+#: src/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr "Om denne applikasjonen"
+
+#: src/gedit-ui.xml.h:2
+msgid "About..."
+msgstr "Om..."
+
+#: src/gedit-ui.xml.h:3
+msgid "Add/Remove installed plugins"
+msgstr "Legg til/fjern installerte tillegg"
+
+#: src/gedit-ui.xml.h:4
+msgid "C_lear"
+msgstr "_Tøm"
+
+#: src/gedit-ui.xml.h:5
+msgid "C_lose All"
+msgstr "_Lukk alle"
+
+#: src/gedit-ui.xml.h:6
+msgid "C_ut"
+msgstr "Klipp _ut"
+
+#: src/gedit-ui.xml.h:7
+msgid "Clear"
+msgstr "Tøm"
+
+#: src/gedit-ui.xml.h:8
+msgid "Clear the selection"
+msgstr "Tøm utvalget"
+
+#: src/gedit-ui.xml.h:9
+msgid "Close"
+msgstr "Lukk"
+
+#: src/gedit-ui.xml.h:10
+msgid "Close All"
+msgstr "Lukk alle"
+
+#: src/gedit-ui.xml.h:11
+msgid "Close all open files"
+msgstr "Lukk alle åpne filer"
+
+#: src/gedit-ui.xml.h:12
+msgid "Close the current file"
+msgstr "Lukk aktiv fil"
+
+#: src/gedit-ui.xml.h:13
+msgid "Configure the application"
+msgstr "Konfigurer applikasjonen"
+
+#: src/gedit-ui.xml.h:14
+msgid "Copy"
+msgstr "Kopier"
+
+#: src/gedit-ui.xml.h:15
+msgid "Copy the selection"
+msgstr "Kopier utvalget"
+
+#: src/gedit-ui.xml.h:16
+msgid "Create a new document"
+msgstr "Opprett et nytt dokument"
+
+#: src/gedit-ui.xml.h:17
+msgid "Customize"
+msgstr "Tilpass"
+
+#: src/gedit-ui.xml.h:18
+msgid "Customize toolbars"
+msgstr "Tilpass verktøylinjer"
+
+#: src/gedit-ui.xml.h:19
+msgid "Cut"
+msgstr "Klipp ut"
+
+#: src/gedit-ui.xml.h:20
+msgid "Cut the selection"
+msgstr "Klipp ut utvalget"
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr "Dump XML"
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr "Dump UI-beskrivelse i XML"
+
+#: src/gedit-ui.xml.h:23
+msgid "E_xit"
+msgstr "A_vslutt"
+
+#: src/gedit-ui.xml.h:24
+msgid "Exit"
+msgstr "Avslutt"
+
+#: src/gedit-ui.xml.h:25
+msgid "Exit the program"
+msgstr "Avslutt programmet"
+
+#: src/gedit-ui.xml.h:27
+msgid "Find Again"
+msgstr "Finn igjen"
+
+#: src/gedit-ui.xml.h:28
+msgid "Find _Again"
+msgstr "Finn _igjen"
+
+#: src/gedit-ui.xml.h:29
+msgid "Go to a specific line number"
+msgstr "Gå til en spesifikk linje"
+
+#: src/gedit-ui.xml.h:30
+msgid "Goto _Line"
+msgstr "Gå til _linje"
+
+#: src/gedit-ui.xml.h:31
+msgid "Main toolbar"
+msgstr "Hovedverktøylinje"
+
+#: src/gedit-ui.xml.h:32
+msgid "Manager"
+msgstr "Håndterer"
+
+#: src/gedit-ui.xml.h:33
+msgid "New"
+msgstr "Ny"
+
+#: src/gedit-ui.xml.h:34
+msgid "Open"
+msgstr "Åpne"
+
+#: src/gedit-ui.xml.h:35
+msgid "Open a file"
+msgstr "Åpne en fil"
+
+#: src/gedit-ui.xml.h:36
+msgid "Open a file from a specified URI"
+msgstr "Åpne en fil fra en spesifisert URI"
+
+#: src/gedit-ui.xml.h:37
+msgid "Open from URI"
+msgstr "Åpne fra URI"
+
+#: src/gedit-ui.xml.h:38
+msgid "Open from _URI..."
+msgstr "Åpne fra _URI..."
+
+#: src/gedit-ui.xml.h:39
+msgid "Paste"
+msgstr "Lim inn"
+
+#: src/gedit-ui.xml.h:40
+msgid "Paste the clipboard"
+msgstr "Lim inn utklippstavlen"
+
+#: src/gedit-ui.xml.h:43
+msgid "Print Pre_view"
+msgstr "Forhånds_visning av utskrift"
+
+#: src/gedit-ui.xml.h:44
+msgid "Print Preview"
+msgstr "Forhåndsvisning av utskrift"
+
+#: src/gedit-ui.xml.h:45
+msgid "Print Setup"
+msgstr "Skriveroppsett"
+
+#: src/gedit-ui.xml.h:46
+msgid "Print preview"
+msgstr "Forhåndsvisning"
+
+#: src/gedit-ui.xml.h:47
+msgid "Print the current file"
+msgstr "Skriv ut aktiv fil"
+
+#: src/gedit-ui.xml.h:48
+msgid "Redo"
+msgstr "Gjenopprett"
+
+#: src/gedit-ui.xml.h:49
+msgid "Redo the undone action"
+msgstr "Gjenopprett forrige angrede handling"
+
+#: src/gedit-ui.xml.h:51
+msgid "Replace a string"
+msgstr "Erstatt en streng"
+
+#: src/gedit-ui.xml.h:52
+msgid "Revert to a saved version of the file"
+msgstr "Gå tilbake til lagret versjon av filen"
+
+#: src/gedit-ui.xml.h:53
+msgid "Revert to saved"
+msgstr "Gå tilbake til lagret"
+
+#: src/gedit-ui.xml.h:54
+msgid "Sav_e All"
+msgstr "Lagr_e alt"
+
+#: src/gedit-ui.xml.h:56
+msgid "Save All"
+msgstr "Lagre alle"
+
+#: src/gedit-ui.xml.h:57
+msgid "Save As"
+msgstr "Lagre som"
+
+#: src/gedit-ui.xml.h:58
+msgid "Save _As..."
+msgstr "L_agre som..."
+
+#: src/gedit-ui.xml.h:59
+msgid "Save all open files"
+msgstr "Lagre alle åpne filer"
+
+#: src/gedit-ui.xml.h:60
+msgid "Save the current file"
+msgstr "Lagre aktiv fil"
+
+#: src/gedit-ui.xml.h:61
+msgid "Save the current file with a different name"
+msgstr "Lagre aktiv fil med et nytt navn"
+
+#: src/gedit-ui.xml.h:62
+msgid "Se_arch"
+msgstr "S_øk"
+
+#: src/gedit-ui.xml.h:63
+msgid "Search again for the same string"
+msgstr "Søk på nytt etter samme streng"
+
+#: src/gedit-ui.xml.h:64
+msgid "Search for a string"
+msgstr "Søk etter en streng"
+
+#: src/gedit-ui.xml.h:65
+msgid "Select All"
+msgstr "Velg alt"
+
+#: src/gedit-ui.xml.h:66
+msgid "Select the entire document"
+msgstr "Velg hele dokumentet"
+
+#: src/gedit-ui.xml.h:67
+msgid "Setup the page settings for your current printer"
+msgstr "Sideoppsett for aktiv skriver"
+
+#: src/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr "Angre forrige handling"
+
+#: src/gedit-ui.xml.h:70
+msgid "_About..."
+msgstr "_Om..."
+
+#: src/gedit-ui.xml.h:71
+msgid "_Close"
+msgstr "_Lukk"
+
+#: src/gedit-ui.xml.h:72
+msgid "_Copy"
+msgstr "_Kopier"
+
+#: src/gedit-ui.xml.h:73
+msgid "_Debug"
+msgstr "_Feilsøk"
+
+#: src/gedit-ui.xml.h:74
+msgid "_Documents"
+msgstr "_Dokumenter"
+
+#: src/gedit-ui.xml.h:75
+msgid "_Edit"
+msgstr "R_ediger"
+
+#: src/gedit-ui.xml.h:76
+msgid "_File"
+msgstr "_Fil"
+
+#: src/gedit-ui.xml.h:77
+msgid "_Find"
+msgstr "F_inn"
+
+#: src/gedit-ui.xml.h:78
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: src/gedit-ui.xml.h:79
+msgid "_Manager"
+msgstr "_Håndterer"
+
+#: src/gedit-ui.xml.h:80
+msgid "_New"
+msgstr "_Ny"
+
+#: src/gedit-ui.xml.h:81
+msgid "_Open..."
+msgstr "_Åpne..."
+
+#: src/gedit-ui.xml.h:82
+msgid "_Paste"
+msgstr "Li_m inn"
+
+#: src/gedit-ui.xml.h:83
+msgid "_Plugins"
+msgstr "_Tillegg"
+
+#: src/gedit-ui.xml.h:84
+msgid "_Preferences"
+msgstr "_Brukervalg"
+
+#: src/gedit-ui.xml.h:85
+msgid "_Print"
+msgstr "_Skriv ut"
+
+#: src/gedit-ui.xml.h:86
+msgid "_Redo"
+msgstr "_Gjenopprett"
+
+#: src/gedit-ui.xml.h:88
+msgid "_Revert"
+msgstr "Fo_rkast"
+
+#: src/gedit-ui.xml.h:89
+msgid "_Save"
+msgstr "_Lagre"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Select all"
+msgstr "_Velg alle"
+
+#: src/gedit-ui.xml.h:91
+msgid "_Settings"
+msgstr "_Innstillinger"
+
+#: src/gedit-ui.xml.h:92
+msgid "_Undo"
+msgstr "_Angre"
+
+#: src/gedit-view.c:787
+#, c-format
+msgid "  Ln %d, Col. %d"
+msgstr "  Ln %d, Kol. %d"
+
+#: src/gedit-view.c:825
+msgid "  OVR"
+msgstr "  OVR"
+
+#: src/gedit-view.c:827
+msgid "  INS"
+msgstr "  SET"
 
 #: src/gedit2.c:59
-#, fuzzy
 msgid "Show mdi debugging messages."
-msgstr "Vis feilsøkingsmeldinger for visning."
+msgstr "Vis feilsøkingsmeldinger for mdi."
 
 #: src/gedit2.c:62
 msgid "Show commands debugging messages."
@@ -120,215 +974,8 @@ msgid "Turn on all debugging messages."
 msgstr "Slå på alle feilsøkingsmeldinger."
 
 #: src/gedit2.c:147
-#, fuzzy
 msgid "The gnome text editor"
-msgstr "Tekstredigering"
-
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr ""
-
-#: src/gedit-commands.c:409
-msgid "Impossible to update gedit settings."
-msgstr ""
-
-#: src/gedit-commands.c:471
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit er en liten lettvekt tekst editor for GNOME."
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:454 src/gedit-document.c:465
-msgid "Untitled"
-msgstr "Navnløs"
-
-#: src/gedit-document.c:535 src/gedit-document.c:641
-#, fuzzy
-msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"En feil oppsto under åpning av filen:\n"
-"\n"
-"%s"
-
-#: src/gedit-document.c:951
-#, fuzzy
-msgid "It is not possible to revert an Untitled document"
-msgstr "Du kan ikke forkaste et dokument uten tittel\n"
-
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
-msgstr "Lastet fil %s"
-
-#: src/gedit-file.c:256
-#, c-format
-msgid "Loaded %i files"
-msgstr "Lastet %i filer"
-
-#: src/gedit-file.c:326 src/gedit-file.c:348
-msgid "Open File ..."
-msgstr "Åpne fil ..."
-
-#: src/gedit-file.c:395 src/gedit-file.c:441
-#, fuzzy, c-format
-msgid ""
-"An error occurred while opening the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"En feil oppsto under åpning av filen:\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:508 src/gedit-file.c:676 src/gedit-file.c:820
-#, fuzzy, c-format
-msgid "Saving file '%s' ..."
-msgstr "Lagre som..."
-
-#: src/gedit-file.c:523 src/gedit-file.c:723 src/gedit-file.c:940
-msgid "Unknown error"
-msgstr ""
-
-#: src/gedit-file.c:530 src/gedit-file.c:730
-#, fuzzy, c-format
-msgid ""
-"An error occurred while saving the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"En feil oppsto under lukking av filen:\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:556 src/gedit-file.c:683 src/gedit-file.c:827
-#, fuzzy
-msgid "The document has not been saved."
-msgstr "Dokumentet er ikke lagret."
-
-#: src/gedit-file.c:566 src/gedit-file.c:681 src/gedit-file.c:825
-#, c-format
-msgid "File '%s' saved."
-msgstr ""
-
-#: src/gedit-file.c:635
-msgid "Save As..."
-msgstr "Lagre som..."
-
-#: src/gedit-file.c:668
-#, fuzzy
-msgid "Save as ..."
-msgstr "Lagre som..."
-
-#: src/gedit-file.c:800
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-
-#: src/gedit-file.c:926
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr ""
-
-#: src/gedit-file.c:947
-#, fuzzy, c-format
-msgid ""
-"An error occurred while reverting the file \"%s\".\n"
-"\n"
-"%s."
-msgstr ""
-"En feil oppsto under åpning av filen:\n"
-"\n"
-"%s"
-
-#: src/gedit-file.c:973
-#, fuzzy
-msgid "The document has not been reverted."
-msgstr "Dokumentet er ikke lagret."
-
-#: src/gedit-file.c:983
-#, c-format
-msgid "File '%s' reverted."
-msgstr ""
-
-#: src/gedit-file.c:1135
-#, fuzzy, c-format
-msgid ""
-"An error occurred while reading data from stdin.\n"
-"\n"
-"%s."
-msgstr ""
-"En feil oppsto under åpning av filen:\n"
-"\n"
-"%s"
-
-#: src/gedit-mdi.c:524
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document ``%s''? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-
-#: src/gedit-mdi.c:529
-msgid "Do_n't save"
-msgstr ""
-
-#: src/gedit-mdi.c:547
-msgid "_Don't quit"
-msgstr ""
-
-#: src/gedit-mdi.c:551
-msgid "_Don't close"
-msgstr ""
-
-#: src/gedit-mdi.c:633
-msgid "(modified)"
-msgstr "(endret)"
-
-#: src/gedit-mdi.c:639
-msgid "(readonly)"
-msgstr "(skrivebeskyttet)"
-
-#: src/gedit-recent.c:252
-#, fuzzy, c-format
-msgid "Open file %s"
-msgstr "Åpne en fil"
-
-#: src/gedit-recent.c:320
-#, c-format
-msgid "Unable to open recent file: %s"
-msgstr "Kunne ikke åpne nylig brukt fil: %s"
-
-#~ msgid "ASCII table"
-#~ msgstr "ASCII-tabell"
-
-#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-#~ msgstr ""
-#~ "Dette tillegget viser en pop-up dialog som inneholder en ASCII-tabell."
-
-#~ msgid "Char"
-#~ msgstr "Tegn"
-
-#~ msgid "Dec#"
-#~ msgstr "Des#"
-
-#~ msgid "Hex#"
-#~ msgstr "Hex#"
-
-#~ msgid ""
-#~ "If you wish to insert any of the characters in to the active \n"
-#~ "document, select the character and click the \"Insert Char\" \n"
-#~ "button or double click the character in the table."
-#~ msgstr ""
-#~ "Hvis du ønsker å sette inn noen av tegnene i det aktive \n"
-#~ "dokumentet velger du tegnet og klikker \"Sett inn tegn\"- \n"
-#~ "knappen eller dobbelklikker på tegnet i tabellen."
+msgstr "GNOME tekstredigering"
 
 #~ msgid "Insert char"
 #~ msgstr "Sett inn tegn"
@@ -338,12 +985,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "gedit: ASCII table"
 #~ msgstr "gedit: ASCII-tabell"
-
-#~ msgid "Browse"
-#~ msgstr "Bla gjennom"
-
-#~ msgid "Web browse plugin"
-#~ msgstr "Webleser tillegg"
 
 #~ msgid " _Change... "
 #~ msgstr " _Endre... "
@@ -359,12 +1000,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "location"
 #~ msgstr "plassering"
-
-#~ msgid "Convert"
-#~ msgstr "Konverter"
-
-#~ msgid "Number Converter"
-#~ msgstr "Tallkonverterer"
 
 #~ msgid " Decimal to _Hex "
 #~ msgstr " Desimal til _heksadesimal "
@@ -383,60 +1018,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "gedit: Number Converter plugin"
 #~ msgstr "gedit: Tallkonverterer-tillegg"
-
-#~ msgid "diff"
-#~ msgstr "diff"
-
-#~ msgid "The two documents you selected are the same."
-#~ msgstr "De to valgte dokumentene du valgte er like."
-
-#~ msgid ""
-#~ "The \"first\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Den \"første\" filen du valgte eksisterer ikke.\n"
-#~ "\n"
-#~ "Vennligst oppgi en gyldig fil."
-
-#~ msgid ""
-#~ "The \"second\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Den \"andre\" filen du valgte eksisterer ikke.\n"
-#~ "\n"
-#~ "Vennligst oppgi en gyldig fil."
-
-#~ msgid "The \"first\" document contains no text."
-#~ msgstr "Det \"første\" dokumentet inneholder ingen tekst."
-
-#~ msgid "The \"second\" document contains no text."
-#~ msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
-
-#~ msgid ""
-#~ "gedit could not create a temp file.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "gedit kunne ikke opprette en midlertidig til.\n"
-#~ "\n"
-
-#~ msgid "Untitled %i"
-#~ msgstr "Navnløs %i"
-
-#~ msgid "Diff"
-#~ msgstr "Diff"
-
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr ""
-#~ "Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
-
-#~ msgid ""
-#~ "Makes a diff file from two documents or files on disk\n"
-#~ "For more info on diff, type \"man diff\" in a shell prompt\n"
-#~ msgstr ""
-#~ "Lager en fil med forskjellene mellom to dokumenter eller filer på disk\n"
-#~ "For mer informasjon om diff, skriv \"man diff\" på kommandolinjen\n"
 
 #~ msgid "Choose the files to compare"
 #~ msgstr "Velg filer som skal sammenlignes"
@@ -468,26 +1049,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "gedit: Diff plugin"
 #~ msgstr "gedit: Diff-tillegg"
 
-#~ msgid ""
-#~ "No document exists.\n"
-#~ "The Document Info plugin is going be closed."
-#~ msgstr ""
-#~ "Ingen dokumenter eksisterer.\n"
-#~ "Dokumentinformasjonstillegget vil bli lukket."
-
-#~ msgid "Document info"
-#~ msgstr "Dokumentinformasjon"
-
-#~ msgid "Get info on current document."
-#~ msgstr "Hent informasjon om aktivt dokument."
-
-#~ msgid ""
-#~ "This plugin displays a pop-up dialog which contains basic information on "
-#~ "current document."
-#~ msgstr ""
-#~ "Dette tillegget viser en dialog som inneholder basisinformasjon om dette "
-#~ "dokumentet."
-
 #~ msgid "0"
 #~ msgstr "0"
 
@@ -506,9 +1067,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "File Name"
 #~ msgstr "Filnavn"
 
-#~ msgid "Lines"
-#~ msgstr "Linjer"
-
 #~ msgid "Paragraphs"
 #~ msgstr "Avsnitt"
 
@@ -520,25 +1078,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "gedit: Document Info plugin"
 #~ msgstr "gedit: Dokumentinformasjonstillegg"
-
-#~ msgid "email"
-#~ msgstr "e-post"
-
-#~ msgid "Executing command: %s"
-#~ msgstr "Kjører kommando: %s"
-
-#~ msgid "Email"
-#~ msgstr "E-post"
-
-#~ msgid "Email the current document"
-#~ msgstr "Send aktivt dokument"
-
-#~ msgid ""
-#~ "Email the current document to a specified email address\n"
-#~ "gedit searches for sendmail to use this plugin."
-#~ msgstr ""
-#~ "Send aktivt dokument til en spesifisert e-post adresse\n"
-#~ "gedit søker etter sendmail for å bruke dette tillegget."
 
 #~ msgid "Change..."
 #~ msgstr "Endre..."
@@ -576,33 +1115,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "gedit: e-mail plugin"
 #~ msgstr "gedit: e-post tillegg"
 
-#~ msgid "Reverse"
-#~ msgstr "Reverser"
-
-#~ msgid "Reverse text"
-#~ msgstr "Reverser tekst"
-
-#~ msgid "Hello World"
-#~ msgstr "Hallo verden"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Eksempel 'hallo verden' tillegg."
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Skallkommandooppføringen er tom.\n"
-#~ "\n"
-#~ "Vennligst sett inn en gyldig skallkommando."
-
-#~ msgid "Shell Output"
-#~ msgstr "Skallutskrift"
-
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "Sett inn utskrift fra skallet i dokumentet"
-
 #~ msgid "Select the working directory..."
 #~ msgstr "Velg arbeidskatalog..."
 
@@ -618,15 +1130,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "gedit: Shell Output plugin"
 #~ msgstr "gedit: Tillegg for skallutskrift"
 
-#~ msgid "Sort"
-#~ msgstr "Sorter"
-
-#~ msgid "Sort a document."
-#~ msgstr "Sorter et dokument."
-
-#~ msgid "Sort a document or selected text."
-#~ msgstr "Sorter et dokument eller valg tekst."
-
 #~ msgid "1"
 #~ msgstr "1"
 
@@ -638,12 +1141,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "gedit: Sort plugin"
 #~ msgstr "gedit: Sorteringstillegg"
-
-#~ msgid "Insert Time"
-#~ msgstr "Sett inn tid"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Setter inn dagens dato og tid"
 
 #~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 #~ msgstr "(C) 1998, 1999, 2000 Alex Roberts og Evan Lawrence"
@@ -661,9 +1158,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr "Kunne ikke allokere minne for \"Erstatt alle\" forespørselen."
 
-#~ msgid "Line number:"
-#~ msgstr "Linjenummer:"
-
 #~ msgid "Author(s):"
 #~ msgstr "Forfatter(e):"
 
@@ -678,12 +1172,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "Plugins manager..."
 #~ msgstr "Tilleggshåndterer..."
-
-#~ msgid "Select the plugins to activate:"
-#~ msgstr "Velg tillegg som skal aktiveres:"
-
-#~ msgid "_Deactivate all"
-#~ msgstr "_Deaktiver alle"
 
 #~ msgid "Add _header"
 #~ msgstr "Legg til _header"
@@ -715,9 +1203,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "Fonts"
 #~ msgstr "Skrifttyper"
 
-#~ msgid "Fonts/Colors"
-#~ msgstr "Skrifttyper/Farger"
-
 #~ msgid "General"
 #~ msgstr "Generelt"
 
@@ -748,9 +1233,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "Pick a color"
 #~ msgstr "Velg en farge"
 
-#~ msgid "Preferences"
-#~ msgstr "Brukervalg"
-
 #~ msgid "Print line _numbers every:"
 #~ msgstr "Skriv ut linje_nummer for hver:"
 
@@ -759,9 +1241,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "Right"
 #~ msgstr "Høyre"
-
-#~ msgid "S_how statusbar"
-#~ msgstr "V_is statuslinje"
 
 #~ msgid "Set limit on _undo levels to:"
 #~ msgstr "Sett grense for an_grenivåer til:"
@@ -783,9 +1262,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "Toplevel"
 #~ msgstr "Toppnivå"
-
-#~ msgid "Undo"
-#~ msgstr "Angre"
 
 #~ msgid "_Background: "
 #~ msgstr "_Bakgrunn: "
@@ -843,12 +1319,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "Enter the location (URI) of the file you would like to open:"
 #~ msgstr "Skriv inn lokasjon (URI) for filen du ønsker å åpne:"
-
-#~ msgid "Open"
-#~ msgstr "Åpne"
-
-#~ msgid "Open from URI"
-#~ msgstr "Åpne fra URI"
 
 #~ msgid "RO - "
 #~ msgstr "RO - "
@@ -984,47 +1454,11 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "Open (swap) .c/.h file"
 #~ msgstr "Åpne (bytt) .c/.h fil"
 
-#~ msgid "_New"
-#~ msgstr "_Ny"
-
-#~ msgid "Create a new document"
-#~ msgstr "Opprett et nytt dokument"
-
-#~ msgid "Sav_e All"
-#~ msgstr "Lagr_e alt"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "Lagre alle åpne filer"
-
-#~ msgid "_Revert"
-#~ msgstr "Fo_rkast"
-
-#~ msgid "Open from _URI..."
-#~ msgstr "Åpne fra _URI..."
-
-#~ msgid "Open a file from a specified URI"
-#~ msgstr "Åpne en fil fra en spesifisert URI"
-
-#~ msgid "Print pre_view"
-#~ msgstr "Forhånds_visning"
-
-#~ msgid "Print preview"
-#~ msgstr "Forhåndsvisning"
-
 #~ msgid "Print pre_view..."
 #~ msgstr "Forhånds_visning..."
 
 #~ msgid "Preview data to be printed"
 #~ msgstr "Forhåndsvis data som skal skrives ut"
-
-#~ msgid "C_lose All"
-#~ msgstr "_Lukk alle"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "Lukk alle åpne filer"
-
-#~ msgid "Go to a specific line number"
-#~ msgstr "Gå til en spesifikk linje"
 
 #~ msgid "_Add View"
 #~ msgstr "_Legg til visning"
@@ -1037,75 +1471,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "Remove view of the document"
 #~ msgstr "Fjern visning for dokumentet"
-
-#~ msgid "Se_arch"
-#~ msgstr "S_øk"
-
-#~ msgid "_Plugins"
-#~ msgstr "_Tillegg"
-
-#~ msgid "_Documents"
-#~ msgstr "_Dokumenter"
-
-#~ msgid "New"
-#~ msgstr "Ny"
-
-#~ msgid "Save"
-#~ msgstr "Lagre"
-
-#~ msgid "Save the current file"
-#~ msgstr "Lagre aktiv fil"
-
-#~ msgid "Close"
-#~ msgstr "Lukk"
-
-#~ msgid "Close the current file"
-#~ msgstr "Lukk aktiv fil"
-
-#~ msgid "Print"
-#~ msgstr "Skriv ut"
-
-#~ msgid "Print the current file"
-#~ msgstr "Skriv ut aktiv fil"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Angre forrige operasjon"
-
-#~ msgid "Redo"
-#~ msgstr "Gjenopprett"
-
-#~ msgid "Redo last operation"
-#~ msgstr "Gjenopprett forrige operasjon"
-
-#~ msgid "Cut"
-#~ msgstr "Klipp ut"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Klipp ut utvalget"
-
-#~ msgid "Copy"
-#~ msgstr "Kopier"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Kopier utvalget"
-
-#~ msgid "Paste"
-#~ msgstr "Lim inn"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Lim inn utklippstavlen"
-
-#~ msgid "Search for a string"
-#~ msgstr "Søk etter en streng"
-
-#~ msgid "Exit"
-#~ msgstr "Avslutt"
-
-#~ msgid "Exit the program"
-#~ msgstr "Avslutt programmet"
-
-#~ msgid "_Manager ..."
-#~ msgstr "_Håndterer..."
 
 #~ msgid "Manage available plugin modules"
 #~ msgstr "Håndter tilgjengelige tilleggsmodules"
@@ -1162,18 +1527,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 #~ msgid "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
 #~ msgstr "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
 
-#~ msgid "Print Document"
-#~ msgstr "Skriv ut dokument"
-
-#~ msgid "Pages"
-#~ msgstr "Sider"
-
-#~ msgid "gedit: Print Preview\n"
-#~ msgstr "gedit: Forhåndsvisning\n"
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Side: %i/%i"
-
 #~ msgid ""
 #~ "gedit could not find the font \"%s\".\n"
 #~ "gedit is unable to print without this font installed."
@@ -1189,9 +1542,6 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "_File/"
 #~ msgstr "_Fil/"
-
-#~ msgid "_File"
-#~ msgstr "_Fil"
 
 #~ msgid ""
 #~ "Can't count lines if another search operation is active, please close the "
@@ -1225,6 +1575,3 @@ msgstr "Kunne ikke åpne nylig brukt fil: %s"
 
 #~ msgid "You can't remove the last view of a document."
 #~ msgstr "Du kan ikke fjerne forrige visning av et dokument."
-
-#~ msgid "Spell Check"
-#~ msgstr "Stavekontroll"
