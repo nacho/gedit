@@ -666,24 +666,25 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 	mdi = BONOBO_MDI (data);
 
 	if (!drag_cursor)
-		drag_cursor = gdk_cursor_new (GDK_HAND2);
-
-	if (e->window == GTK_NOTEBOOK (widget)->event_window) 
+		drag_cursor = gdk_cursor_new (/*GDK_HAND2*/GDK_FLEUR);
+		
+	mdi->priv->in_drag = TRUE;
+	gtk_grab_add (widget);
+	gdk_pointer_grab (widget->window, 
+			  FALSE,
+			  GDK_POINTER_MOTION_MASK |
+			  GDK_BUTTON_RELEASE_MASK, 
+			  NULL,
+			  drag_cursor, 
+			  GDK_CURRENT_TIME);
+	
+	if (mdi->priv->signal_id) 
 	{
-		mdi->priv->in_drag = TRUE;
-		gtk_grab_add (widget);
-		gdk_pointer_grab (widget->window, FALSE,
-						 GDK_POINTER_MOTION_MASK |
-						 GDK_BUTTON_RELEASE_MASK, NULL,
-						 drag_cursor, GDK_CURRENT_TIME);
-		if (mdi->priv->signal_id) 
-		{
-			g_signal_handler_disconnect (G_OBJECT (widget), 
-						     mdi->priv->signal_id);
-			mdi->priv->signal_id = 0;
-		}
+		g_signal_handler_disconnect (G_OBJECT (widget), 
+					     mdi->priv->signal_id);
+		mdi->priv->signal_id = 0;
 	}
-
+	
 	return FALSE;
 }
 
@@ -691,15 +692,32 @@ static gboolean
 book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 {
 	BonoboMDI *mdi;
+	BonoboMDIChild *child;
 
-	mdi = BONOBO_MDI (data);
+	g_return_val_if_fail (GTK_IS_WIDGET (data), FALSE);
+	
+	child = bonobo_mdi_get_child_from_view (GTK_WIDGET (data));
+	mdi = BONOBO_MDI (g_object_get_data (G_OBJECT (child), BONOBO_MDI_KEY));
 
-	if ((e->button == 1) && (e->window == GTK_NOTEBOOK (widget)->event_window))
+	if (e->button == 1)
+	{
+		GtkNotebook *book;
+		BonoboWindow *win;
+
+		win = bonobo_mdi_get_window_from_view (widget);
+		g_return_val_if_fail (BONOBO_IS_WINDOW (win), FALSE);
+	
+		book = GTK_NOTEBOOK (get_book_from_window (win));
+
+		if (g_list_length (mdi->priv->children) <= 1)
+			return FALSE;
+
 		mdi->priv->signal_id = g_signal_connect (
-				G_OBJECT (widget), 
+				G_OBJECT (book), 
 				"motion_notify_event",
 				G_CALLBACK (book_motion), 
 				mdi);
+	}
 
 	return FALSE;
 }
@@ -918,8 +936,10 @@ book_create (BonoboMDI *mdi)
 	g_signal_connect (G_OBJECT (us), "switch_page",
 			  G_CALLBACK (book_switch_page), mdi);
 
+	/*
 	g_signal_connect (G_OBJECT (us), "button_press_event",
 			  G_CALLBACK (book_button_press), mdi);
+	*/
 	g_signal_connect (G_OBJECT (us), "button_release_event",
 			  G_CALLBACK (book_button_release), mdi);
 
@@ -941,6 +961,9 @@ book_add_view (BonoboMDI *mdi, GtkNotebook *book, GtkWidget *view)
 	child = bonobo_mdi_get_child_from_view (view);
 
 	title = child_set_label (mdi, child, view, NULL);
+
+	g_signal_connect (G_OBJECT (title), "button_press_event",
+			  G_CALLBACK (book_button_press), view);
 
 	gtk_notebook_append_page (book, view, title);
 	

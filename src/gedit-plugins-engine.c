@@ -517,7 +517,7 @@ gboolean
 gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 {
 	gboolean res = TRUE;
-	gint r;
+	gint r = PLUGIN_OK;
 	GeditPluginInfo *info;
 	gchar *key;
 	
@@ -612,7 +612,7 @@ gedit_plugins_engine_reactivate_all (void)
 
 		if (info->state == GEDIT_PLUGIN_ACTIVATED)
 		{
-			gint r;
+			gint r = PLUGIN_OK;
 			gboolean res = TRUE;
 		       
 			if (info->plugin->handle == NULL)

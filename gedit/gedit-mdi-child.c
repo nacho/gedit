@@ -617,15 +617,12 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	{
 		GtkWidget *label;
 		GtkWidget *image;
-	       	GtkWidget *event_box;
 
 		label = g_object_get_data (G_OBJECT (old_hbox),	"label");
 		image = g_object_get_data (G_OBJECT (old_hbox),	"image");
-		event_box = g_object_get_data (G_OBJECT (old_hbox), "event-box");		
 	
 		gtk_label_set_text (GTK_LABEL (label), name);
 		set_tab_icon (image, child);
-		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
 
 		ret = old_hbox;
 	} 
@@ -669,26 +666,26 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		hbox = gtk_hbox_new (FALSE, 2);
 
 		event_box = gtk_event_box_new ();
-		gtk_container_add (GTK_CONTAINER (event_box), image);
-
-		gtk_box_pack_start (GTK_BOX (hbox), event_box, FALSE, FALSE, 0);
+		
+		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		
-		g_object_set_data (G_OBJECT (hbox), "label", label);
-		g_object_set_data (G_OBJECT (hbox), "image", image);
-		g_object_set_data (G_OBJECT (hbox), "event-box", event_box);			
+		g_object_set_data (G_OBJECT (event_box), "label", label);
+		g_object_set_data (G_OBJECT (event_box), "image", image);
 		
-		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
-
 		popup_menu = create_popup_menu (child, view);
 		
 		gnome_popup_menu_attach (popup_menu, event_box, NULL);
-		
-		gtk_widget_show_all (hbox);
-		ret = hbox;
+
+		gtk_container_add (GTK_CONTAINER (event_box), hbox);
+
+		gtk_widget_show_all (event_box);
+		ret = event_box;
 	}
-	
+
+	gtk_tooltips_set_tip (tooltips, ret, uri, NULL);
+
 	g_free (name);
 	g_free (uri);
 
