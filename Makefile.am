@@ -7,7 +7,8 @@ GEDIT_SCHEMA = gedit.schemas
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	gedit.1 gedit2.desktop.in \
 	TODO gedit.keys.in app-docs.make \
-	intltool-extract.in intltool-merge.in intltool-update.in
+	intltool-extract.in intltool-merge.in intltool-update.in \
+	$(GEDIT_SCHEMA)
 
 #sysdir   = $(datadir)/gnome/apps/Applications
 #sys_in_files = gedit2.desktop.in
@@ -23,4 +24,4 @@ pixmapsdir = $(datadir)/pixmaps
 pixmaps_DATA = 
 
 install-data-local:
-	gconftool-2 --install-schema-file $(GEDIT_SCHEMA)
+	gconftool-2 --install-schema-file $(srcdir)/$(GEDIT_SCHEMA)
