@@ -56,11 +56,6 @@
 static void            bonobo_mdi_class_init     (BonoboMDIClass  *);
 static void            bonobo_mdi_instance_init  (BonoboMDI *);
 static void            bonobo_mdi_finalize       (GObject *);
-static void            child_list_menu_create    (BonoboMDI *, BonoboWindow *);
-static void            child_list_menu_create_all (BonoboMDI *);
-static void            child_list_menu_remove    (BonoboMDI *, BonoboWindow *);
-static void            child_list_menu_remove_all (BonoboMDI *);
-
 
 static void            child_list_activated_cb   (BonoboUIComponent *uic, gpointer user_data, 
 						  const gchar* verbname);
@@ -462,31 +457,28 @@ static void
 child_list_activated_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	BonoboMDI* mdi;
-	BonoboMDIChild *child = BONOBO_MDI_CHILD (user_data);
-	g_return_if_fail (child != NULL);
+	BonoboMDIChild *child;
+	GtkWidget *view = GTK_WIDGET (user_data);
+	
+	g_return_if_fail (view != NULL);
 
 	gedit_debug (DEBUG_MDI, "");
+
+	child = bonobo_mdi_get_child_from_view (view);
 
 	mdi = BONOBO_MDI (g_object_get_data (G_OBJECT (child), BONOBO_MDI_KEY));
 	g_return_if_fail (mdi != NULL);
 		
-	if (child && (child != mdi->priv->active_child)) 
+	if (view && (view != mdi->priv->active_view)) 
 	{
-		GList *views = bonobo_mdi_child_get_views (child);
-		
-		if (views)
-		{
-			GtkWindow *window;
+		GtkWindow *window;
 
-			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (views->data));
-			gtk_window_present (window);
+		window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
+		gtk_window_present (window);
 
-			bonobo_mdi_set_active_view (mdi, views->data);
-		}
-		else
-			bonobo_mdi_add_view (mdi, child);
+		bonobo_mdi_set_active_view (mdi, view);
 	}
-
+	
 	gedit_debug (DEBUG_MDI, "END");
 }
 
@@ -528,68 +520,118 @@ escape_underscores (const gchar* text)
 	return g_string_free (str, FALSE);
 }
 
+/* Note: must be called between component_freeze and thaw! */
+static void
+child_list_menu_add_item_from_view (BonoboMDI *mdi,
+				    BonoboUIComponent *ui_component,
+				    GtkWidget *view,
+				    guint accell_num)
+{
+	BonoboMDIChild *child;
+	gchar *xml = NULL;
+	gchar *cmd = NULL;
+	gchar *verb_name = NULL;
+	gchar *tip;
+	gchar *escaped_name;
+	gchar *safe_name;
+	gchar *child_name;
+
+	child = bonobo_mdi_get_child_from_view (view);
+	child_name = bonobo_mdi_child_get_name (child);
+
+	safe_name = g_markup_escape_text (child_name, strlen (child_name));
+	g_return_if_fail (safe_name != NULL);
+
+	escaped_name = escape_underscores (safe_name);
+	g_return_if_fail (escaped_name != NULL);
+
+	tip =  g_strdup_printf (_("Activate %s"), safe_name);
+	verb_name = g_strdup_printf ("View_%p", view);
+	xml = g_strdup_printf ("<menuitem name=\"View_%p\" verb=\"%s\""
+			       " _label=\"%s\"/>", view, verb_name, escaped_name);
+
+	if (accell_num > 0)
+		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+					" _tip=\"%s\" accel=\"*Alt*%d\"/>", 
+					verb_name, escaped_name, tip, accell_num);
+	else
+		cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
+					" _tip=\"%s\"/>", verb_name, escaped_name, tip);
+
+	g_free (tip);
+	g_free (child_name);
+	g_free (safe_name);
+	g_free (escaped_name);
+
+	bonobo_ui_component_set_translate (ui_component, mdi->priv->child_list_path, xml, NULL);
+	bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
+	bonobo_ui_component_add_verb (ui_component, verb_name, child_list_activated_cb, view); 
+
+	g_free (xml); 
+	g_free (cmd);
+	g_free (verb_name);
+}
+
 static void 
 child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 {
-	GList *child;
+	GList *views;
+       	GList *windows;
+	GList *list;
+
 	BonoboUIComponent *ui_component;
-	gint accell_num = 1;
+	guint accell_num = 1;
 
 	if (mdi->priv->child_list_path == NULL)
 		return;
-	
+
 	ui_component = BONOBO_UI_COMPONENT (
 			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
-			
-	child = mdi->priv->children;
-	
+
 	bonobo_ui_component_freeze (ui_component, NULL);
-	
-	while (child) 
+
+	/* first list all the docs in this window */
+	views = bonobo_mdi_get_views_from_window (mdi, win);
+	list = views;
+
+	while (views)
 	{
-		gchar *xml = NULL;
-		gchar *cmd = NULL;
-		gchar *verb_name = NULL;
-		gchar *tip;
-		gchar *escaped_name;
-		gchar *safe_name;
-		gchar *child_name = bonobo_mdi_child_get_name (BONOBO_MDI_CHILD (child->data));
+		child_list_menu_add_item_from_view (mdi,
+						    ui_component,
+						    GTK_WIDGET (views->data),
+						    (accell_num <= 9) ? accell_num : 0);	
 
-		safe_name = g_markup_escape_text (child_name, strlen (child_name));
-		g_return_if_fail (safe_name != NULL);
+		++accell_num;
 
-		escaped_name = escape_underscores (safe_name);
-		g_return_if_fail (escaped_name != NULL);
+		views = g_list_next (views);
+	}
 
-		tip =  g_strdup_printf (_("Activate %s"), safe_name);
-		verb_name = g_strdup_printf ("Child_%p", child->data);
-		xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"%s\""
-				" _label=\"%s\"/>", verb_name, verb_name, escaped_name);
+	g_list_free (list);
 
-		if (accell_num <= 9)
-			cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
-				" _tip=\"%s\" accel=\"*Alt*%d\"/>", 
-				verb_name, escaped_name, tip, accell_num);
-		else
-			cmd =  g_strdup_printf ("<cmd name = \"%s\" _label=\"%s\""
-				" _tip=\"%s\"/>", verb_name, escaped_name, tip);
-	
-		++ accell_num;
-		
-		g_free (tip);
-		g_free (child_name);
-		g_free (safe_name);
-		g_free (escaped_name);
+	/* the the docs in the other windows */
+	windows = mdi->priv->windows;
 
-		bonobo_ui_component_set_translate (ui_component, mdi->priv->child_list_path, xml, NULL);
-		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
-		bonobo_ui_component_add_verb (ui_component, verb_name, child_list_activated_cb, child->data); 
-		
-		g_free (xml); 
-		g_free (cmd);
-		g_free (verb_name);
+	while (windows)
+	{
+		if (windows->data != win)
+		{
+			views = bonobo_mdi_get_views_from_window (mdi, BONOBO_WINDOW (windows->data));
+			list = views;
+			
+			while (views)
+			{
+				child_list_menu_add_item_from_view (mdi,
+								    ui_component,
+								    GTK_WIDGET (views->data),
+								    0);	
 
-		child = g_list_next (child);
+				views = g_list_next (views);
+			}
+
+			g_list_free (list);
+		}
+
+		windows = g_list_next (windows);
 	}
 
 	bonobo_ui_component_thaw (ui_component, NULL);
@@ -598,7 +640,8 @@ child_list_menu_create (BonoboMDI *mdi, BonoboWindow *win)
 static void 
 child_list_menu_remove (BonoboMDI *mdi, BonoboWindow *win)
 {
-	GList *child;
+	GList *views;
+	GList *list;
 	BonoboUIComponent *ui_component;
 
 	if (mdi->priv->child_list_path == NULL)
@@ -606,22 +649,24 @@ child_list_menu_remove (BonoboMDI *mdi, BonoboWindow *win)
 	
 	ui_component = BONOBO_UI_COMPONENT (
 			g_object_get_data (G_OBJECT (win), UI_COMPONENT_KEY));
-			
-	child = mdi->priv->children;
-	
+
 	bonobo_ui_component_freeze (ui_component, NULL);
+
+	views = bonobo_mdi_get_views (mdi);
+	list = views;
 	
-	while (child) 
+	while (views)
 	{
 		gchar *verb_name = NULL;
 		gchar *path;
 		gchar *cmd;
-		
-		verb_name = g_strdup_printf ("Child_%p", child->data);
-		path = g_strdup_printf ("%s%s", mdi->priv->child_list_path, verb_name);
+
+		verb_name = g_strdup_printf ("View_%p", views->data);
+		path = g_strdup_printf ("%sView_%p", mdi->priv->child_list_path, views->data);
 		cmd = g_strdup_printf ("/commands/%s", verb_name);
-	
+
 		bonobo_ui_component_remove_verb (ui_component, verb_name);
+
 		bonobo_ui_component_rm (ui_component, path, NULL);
 		bonobo_ui_component_rm (ui_component, cmd, NULL);
 
@@ -629,8 +674,10 @@ child_list_menu_remove (BonoboMDI *mdi, BonoboWindow *win)
 		g_free (cmd);
 		g_free (verb_name);
 
-		child = g_list_next (child);
+		views = g_list_next (views);
 	}
+
+	g_list_free (list);
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
@@ -644,7 +691,7 @@ child_list_menu_create_all (BonoboMDI *mdi)
 		return;
 
 	win_node = mdi->priv->windows;
-		
+	
 	while (win_node) 
 	{
 		child_list_menu_create (mdi, BONOBO_WINDOW (win_node->data));
@@ -802,9 +849,14 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 				if (cur_page >= 0) 
 				{
 					view = gtk_notebook_get_nth_page (GTK_NOTEBOOK (old_book), cur_page);
+
+					child_list_menu_remove_all (mdi);
+							
 					gtk_container_remove (GTK_CONTAINER(old_book), view);
 
 					book_add_view (mdi, GTK_NOTEBOOK (new_book), view, TRUE);
+
+					child_list_menu_create_all (mdi);
 
 					win = bonobo_mdi_get_window_from_view (view);
 					gdk_window_raise (GTK_WIDGET(win)->window);
@@ -853,6 +905,8 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 			win = bonobo_mdi_get_window_from_view (view);
 
 			gtk_window_get_size (GTK_WINDOW (win), &width, &height);
+
+			child_list_menu_remove_all (mdi);
 		
 			gtk_container_remove (GTK_CONTAINER (old_book), view);
 			
@@ -861,6 +915,8 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 			new_book = book_create (mdi);
 	
 			book_add_view (mdi, GTK_NOTEBOOK (new_book), view, TRUE);
+
+			child_list_menu_create_all (mdi);
 
 			gtk_window_set_position (GTK_WINDOW (mdi->priv->active_window), GTK_WIN_POS_MOUSE);
 	
@@ -907,6 +963,8 @@ bonobo_mdi_move_view_to_new_window (BonoboMDI *mdi, GtkWidget *view)
 
 	gtk_window_get_size (GTK_WINDOW (old_win), &width, &height);
 
+	child_list_menu_remove_all (mdi);
+
 	gtk_container_remove (GTK_CONTAINER (old_book), view);
 			
 	app_clone (mdi, old_win, NULL);
@@ -915,6 +973,8 @@ bonobo_mdi_move_view_to_new_window (BonoboMDI *mdi, GtkWidget *view)
 	
 	book_add_view (mdi, new_book, view, TRUE);
 
+	child_list_menu_create_all (mdi);
+	
 	gtk_window_set_default_size (GTK_WINDOW (mdi->priv->active_window), width, height);
 
 	if (!GTK_WIDGET_VISIBLE (mdi->priv->active_window))
@@ -964,10 +1024,6 @@ book_create (BonoboMDI *mdi)
 	g_signal_connect (G_OBJECT (us), "switch_page",
 			  G_CALLBACK (book_switch_page), mdi);
 
-	/*
-	g_signal_connect (G_OBJECT (us), "button_press_event",
-			  G_CALLBACK (book_button_press), mdi);
-	*/
 	g_signal_connect (G_OBJECT (us), "button_release_event",
 			  G_CALLBACK (book_button_release), mdi);
 
@@ -1418,8 +1474,6 @@ app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 
 	g_signal_emit (G_OBJECT (mdi), mdi_signals [TOP_WINDOW_CREATED], 0, window);
 
-	child_list_menu_create (mdi, bw);
-
 	gedit_debug (DEBUG_MDI, "END");
 }
 
@@ -1510,7 +1564,7 @@ bonobo_mdi_add_view_real (BonoboMDI *mdi, BonoboMDIChild *child, gboolean set_vi
 
 	g_signal_emit (G_OBJECT (mdi), mdi_signals [ADD_VIEW], 0, view, &ret);
 
-	if (!ret) 
+	if (!ret)
 	{
 		bonobo_mdi_child_remove_view (child, view);
 		
@@ -1518,6 +1572,9 @@ bonobo_mdi_add_view_real (BonoboMDI *mdi, BonoboMDIChild *child, gboolean set_vi
 
 		return FALSE;
 	}
+
+	/* remove the old children menu */
+	child_list_menu_remove_all (mdi);
 
 	if (mdi->priv->active_window == NULL) 
 	{
@@ -1543,7 +1600,10 @@ bonobo_mdi_add_view_real (BonoboMDI *mdi, BonoboMDIChild *child, gboolean set_vi
 	gtk_object_sink (GTK_OBJECT (view));
 	
 	g_object_set_data (G_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
-	
+
+	/* rebuild the children menu */
+	child_list_menu_create_all (mdi);
+
 	gedit_debug (DEBUG_MDI, "END2");
 
 	return TRUE;
@@ -1605,9 +1665,7 @@ bonobo_mdi_add_views (BonoboMDI *mdi, GSList *children)
 	}
 
 	return i;
-	
 }
-
 
 /**
  * bonobo_mdi_add_toplevel_view:
@@ -1654,6 +1712,9 @@ bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child, const char 
 		return FALSE;
 	}
 
+	/* remove the old children menu */
+	child_list_menu_remove_all (mdi);
+
 	bonobo_mdi_open_toplevel (mdi, window_role);
 	
 	if (!GTK_WIDGET_VISIBLE (view))
@@ -1672,6 +1733,9 @@ bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child, const char 
 	gtk_object_sink (GTK_OBJECT (view));
 	
 	g_object_set_data (G_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
+
+	/* rebuild the children menu */
+	child_list_menu_create_all (mdi);
 	
 	gedit_debug (DEBUG_MDI, "END2");
 
@@ -1719,6 +1783,9 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 
 		return FALSE;
 	}
+
+	/* remove the old children menu */
+	child_list_menu_remove_all (mdi);
 
 	was_active_window = (view == mdi->priv->active_view);
 	
@@ -1772,7 +1839,9 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 		app_set_view (mdi, window, gtk_notebook_get_nth_page (GTK_NOTEBOOK (book), pn));
 	}
 
-		
+	/* rebuild the children menu */
+	child_list_menu_create_all (mdi);
+
 	gedit_debug (DEBUG_MDI, "END2");
 
 	return TRUE;
@@ -1823,14 +1892,10 @@ bonobo_mdi_add_child (BonoboMDI *mdi, BonoboMDIChild *child)
 
 	bonobo_mdi_child_set_parent (child, G_OBJECT (mdi));
 
-	child_list_menu_remove_all (mdi);
-	
 	mdi->priv->children = g_list_append (mdi->priv->children, child);
 
 	g_signal_connect (G_OBJECT (child), "name_changed",
 			  G_CALLBACK (child_name_changed), mdi);
-
-	child_list_menu_create_all (mdi);
 
 	g_object_set_data (G_OBJECT (child), BONOBO_MDI_KEY, mdi);
 
@@ -1890,11 +1955,7 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 		bonobo_mdi_remove_view (mdi, GTK_WIDGET (view), TRUE);
 	}
 
-	child_list_menu_remove_all (mdi);
-	
 	mdi->priv->children = g_list_remove (mdi->priv->children, child);
-
-	child_list_menu_create_all (mdi);
 
 	if (child == mdi->priv->active_child)
 		mdi->priv->active_child = NULL;

@@ -1,3 +1,22 @@
+2005-02-07  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #122433: Alt+N shortcut does not select correct tab
+
+	* bonobo-mdi.c (child_list_activated_cb): uses view instead of child
+	(child_list_menu_add_item_from_view): new function
+	(child_list_menu_create): uses views instead of children
+	(child_list_menu_remove): ditto (child_list_menu_create_all)
+	(book_button_release) (bonobo_mdi_move_view_to_new_window)
+	(book_create) (app_create) (bonobo_mdi_add_view_real)
+	(bonobo_mdi_add_views) (bonobo_mdi_add_toplevel_view)
+	(bonobo_mdi_remove_view): call child_list_menu_remove_all and
+	child_list_menu_create_all
+	 (bonobo_mdi_add_child)	(bonobo_mdi_remove_child): don't call
+	child_list_menu_remove_all and child_list_menu_create_all
+
+	Thanks to Paolo Borelli  <pborelli@katamail.com> for the first 
+	version of the patch.
+
 2005-02-03  Paolo Maggi  <paolo@gnome.org>
 
 	* recent-files/* : update from libegg.
