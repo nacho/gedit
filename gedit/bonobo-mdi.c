@@ -301,6 +301,8 @@ bonobo_mdi_class_init (BonoboMDIClass *class)
 	class->child_changed 		= NULL;
 	class->view_changed 		= NULL;
 	class->top_window_created 	= NULL;
+	class->top_window_destroy	= NULL;
+	class->all_windows_destroyed	= NULL;
 
 	parent_class = gtk_type_class (G_TYPE_OBJECT);
 }

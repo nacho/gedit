@@ -46,10 +46,6 @@
 #include "gedit2.h"
 #include "gedit-plugin-manager.h"
 
-#if 0
-#include "gedit-encodings-dialog.h"
-#endif 
-
 #include "gnome-print-font-picker.h"
 
 /* To be syncronized with gedit-preferences.glade2 */
@@ -59,14 +55,9 @@
 #define TABS_SETTINGS		1
 #define UNDO_SETTINGS		0
 #define WRAP_MODE_SETTINGS	5
-#define PRINT_SETTINGS		6
-#define LINE_NUMBERS_SETTINGS	7
-#define PRINT_FONTS_SETTINGS	8
-#define PLUGIN_MANAGER_SETTINGS 9
-#if 0
-#define LOAD_SETTINGS		10
-#endif
-#define AUTO_INDENT_SETTINGS	11
+#define LINE_NUMBERS_SETTINGS	6
+#define PLUGIN_MANAGER_SETTINGS 7
+#define AUTO_INDENT_SETTINGS	8
 
 
 enum
@@ -85,11 +76,11 @@ enum
 
 struct _GeditPreferencesDialogPrivate
 {
-	GtkWidget* categories_tree;
+	GtkWidget	*categories_tree;
 
-	GtkWidget* notebook;
+	GtkWidget	*notebook;
 
-	GtkTreeModel *categories_tree_model;
+	GtkTreeModel	*categories_tree_model;
 
 	GtkTooltips	*tooltips;
 
@@ -124,39 +115,12 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*backup_copy_checkbutton;
 	GtkWidget	*auto_save_checkbutton;
 	GtkWidget	*auto_save_spinbutton;
-	GtkWidget	*utf8_radiobutton;
-	GtkWidget	*locale_if_possible_radiobutton;
-	GtkWidget	*original_if_possible_radiobutton;
-	GtkWidget	*create_frame;
-	GtkWidget	*create_utf8_radiobutton;
-	GtkWidget	*create_locale_if_possible_radiobutton;
-
-	/* Print/page page */
-	GtkWidget	*add_header_checkbutton;
-	GtkWidget	*wrap_lines_checkbutton;
-	GtkWidget	*line_numbers_checkbutton;
-	GtkWidget	*line_numbers_spinbutton;
 
 	/* Line numbers page */
 	GtkWidget	*display_line_numbers_checkbutton;
 
-	/* Print/Fonts page */
-	GtkWidget	*body_fontpicker;
-	GtkWidget	*headers_fontpicker;
-	GtkWidget	*numbers_fontpicker;
-	GtkWidget	*restore_default_fonts_button;
-
 	/* Plugin/Manager */
 	GtkWidget	*plugin_manager;
-
-#if 0
-	/* Open page */
-	GtkWidget	*encodings_treeview;
-	GtkWidget	*add_enc_button;
-	GtkWidget	*remove_enc_button;
-	GtkWidget	*up_enc_button;
-	GtkWidget	*down_enc_button;
-#endif	
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -197,16 +161,8 @@ static gboolean gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesD
 static void gedit_preferences_dialog_auto_save_checkbutton_toggled (GtkToggleButton *button,
 							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui);
-static void gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
-							 GeditPreferencesDialog *dlg);
-static gboolean gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, 
 							          GladeXML *gui);
-static gboolean gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, 
-								 GladeXML *gui);
-static void gedit_preferences_dialog_print_font_restore_default_button_clicked (
-								GtkButton *button, 
-								GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_selection_init (GtkTreeModel *model, 
 							 GtkTreePath *path, 
 							 GtkTreeIter *iter, 
@@ -228,9 +184,7 @@ static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (G
 									       GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, 
 								    GladeXML *gui);
-#if 0
-static gboolean gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui);
-#endif
+
 static gboolean gedit_preferences_dialog_setup_auto_indent_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static gint get_desktop_default_font_size (void);
@@ -243,12 +197,9 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 
 	{N_("Tabs"), NULL, TABS_SETTINGS},
-	{N_("Wrap Mode"), NULL, WRAP_MODE_SETTINGS},
+	{N_("Text Wrapping"), NULL, WRAP_MODE_SETTINGS},
 	{N_("Auto Indent"), NULL, AUTO_INDENT_SETTINGS},
 	{N_("Line Numbers"), NULL , LINE_NUMBERS_SETTINGS},
-#if 0	
-	{N_("Open"), NULL, LOAD_SETTINGS },
-#endif
  	{N_("Save"), NULL, SAVE_SETTINGS },
 	{N_("Undo"), NULL, UNDO_SETTINGS},
 
@@ -256,16 +207,6 @@ static CategoriesTreeItem editor_behavior [] =
 	{ NULL }
 };
 
-#if 0
-static CategoriesTreeItem print [] =
-{
-	{N_("Page"), NULL, PRINT_SETTINGS},
-
-	{N_("Fonts"), NULL, PRINT_FONTS_SETTINGS},
-
-	{ NULL }
-};
-#endif
 
 static CategoriesTreeItem plugins [] =
 {
@@ -278,9 +219,7 @@ static CategoriesTreeItem plugins [] =
 static CategoriesTreeItem toplevel [] =
 {
 	{N_("Editor"), editor_behavior, LOGO},
-#if 0
-	{N_("Print"), print, LOGO},
-#endif
+	
 	{N_("Plugins"), plugins, LOGO},	
 
 	{ NULL }
@@ -668,13 +607,8 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_logo_page (dlg, gui);
 	gedit_preferences_dialog_setup_wrap_mode_page (dlg, gui);
 	gedit_preferences_dialog_setup_save_page (dlg, gui);
-	gedit_preferences_dialog_setup_page_page (dlg, gui);
 	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
-	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
 	gedit_preferences_dialog_setup_plugin_manager_page (dlg, gui);
-#if 0
-	gedit_preferences_dialog_setup_load_page (dlg, gui);
-#endif
 	gedit_preferences_dialog_setup_auto_indent_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
@@ -1343,107 +1277,18 @@ gedit_preferences_dialog_auto_save_spinbutton_value_changed (GtkSpinButton *spin
 			MAX (1, gtk_spin_button_get_value_as_int (spin_button)));
 }
 
-#if 0
-static void
-gedit_preferences_dialog_save_radiobutton_toggled (GtkToggleButton *button,
-		GeditPreferencesDialog *dlg)
-{
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_ALWAYS_UTF8);
-
-			gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
-			
-			return;
-		}
-	}
-
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->locale_if_possible_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE);
-
-			gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
-
-			return;
-		}
-	}
-
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton)))
-				gedit_prefs_manager_set_save_encoding (
-						GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE);
-			else
-			{
-				g_return_if_fail (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
-								dlg->priv->create_locale_if_possible_radiobutton)));
-
-				gedit_prefs_manager_set_save_encoding (
-						GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL);
-
-			}
-			
-			gtk_widget_set_sensitive (dlg->priv->create_frame, TRUE);
-
-			return;
-		}
-	}
-
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			g_return_if_fail (gtk_toggle_button_get_active (
-						GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton)));
-
-			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE);
-
-			return;
-		}
-	}
-
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->create_locale_if_possible_radiobutton))
-	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			g_return_if_fail (gtk_toggle_button_get_active (
-						GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton)));
-
-			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL);
-
-			return;
-		}
-	}
-}
-#endif
 
 static gboolean 
 gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
 	GtkWidget *autosave_hbox;
-	GtkWidget *save_frame;
 	gboolean auto_save;
-#if 0
-	GeditSaveEncodingSetting encoding;
-#endif	
+
 	gedit_debug (DEBUG_PREFS, "");
 	
 	autosave_hbox = glade_xml_get_widget (gui, 
 			"autosave_hbox");
 
-	save_frame = glade_xml_get_widget (gui, 
-			"save_frame");
-		
 	dlg->priv->backup_copy_checkbutton = glade_xml_get_widget (gui, 
 			"backup_copy_checkbutton");
 	
@@ -1453,37 +1298,11 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	dlg->priv->auto_save_spinbutton = glade_xml_get_widget (gui, 
 			"auto_save_spinbutton");
 
-	dlg->priv->utf8_radiobutton = glade_xml_get_widget (gui, 
-			"utf8_radiobutton"); 
-	dlg->priv->locale_if_possible_radiobutton= glade_xml_get_widget (gui, 
-			"locale_if_possible_radiobutton"); 
-	dlg->priv->original_if_possible_radiobutton = glade_xml_get_widget (gui, 
-			"original_if_possible_radiobutton");
-
-	dlg->priv->create_frame = glade_xml_get_widget (gui, 
-			"create_frame"); 
-	dlg->priv->create_utf8_radiobutton = glade_xml_get_widget (gui, 
-			"create_utf8_radiobutton"); 
-	dlg->priv->create_locale_if_possible_radiobutton = glade_xml_get_widget (gui, 
-			"create_locale_if_possible_radiobutton"); 
 
 	g_return_val_if_fail (autosave_hbox, FALSE);
-	g_return_val_if_fail (save_frame, FALSE);
 
 	g_return_val_if_fail (dlg->priv->backup_copy_checkbutton, FALSE);
 	
-	g_return_val_if_fail (dlg->priv->utf8_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->locale_if_possible_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->original_if_possible_radiobutton, FALSE);
-
-	g_return_val_if_fail (dlg->priv->create_frame, FALSE);
-	g_return_val_if_fail (dlg->priv->create_utf8_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->create_locale_if_possible_radiobutton, FALSE);
-
-	/* FIXME */
-	/*
-	gtk_widget_set_sensitive (dlg->priv->locale_if_previous_radiobutton, FALSE);
-	*/
 	/* Set current values */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
 				      gedit_prefs_manager_get_create_backup_copy ());
@@ -1494,60 +1313,13 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton),
 				   gedit_prefs_manager_get_auto_save_interval ());
 
-#if 0	
-	encoding = gedit_prefs_manager_get_save_encoding ();
-
-	switch (encoding)
-	{
-		case GEDIT_SAVE_ALWAYS_UTF8:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton), TRUE);
-			break;
-		case GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->locale_if_possible_radiobutton),
-				TRUE);
-			break;
-		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton),
-				TRUE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton),
-				TRUE);
-			break;
-		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton),
-				TRUE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->create_locale_if_possible_radiobutton),
-				TRUE);
-			break;
-			
-		default:
-			/* Not possible */
-			g_return_val_if_fail (FALSE, FALSE);
-	}
-#endif	
 	/* Set sensitivity */
 	gtk_widget_set_sensitive (dlg->priv->backup_copy_checkbutton,
 				  gedit_prefs_manager_create_backup_copy_can_set ());
 
 	gtk_widget_set_sensitive (autosave_hbox, 
 				  gedit_prefs_manager_auto_save_can_set ()); 
-#if 0
-	gtk_widget_set_sensitive (save_frame,
-				  gedit_prefs_manager_save_encoding_can_set ());
 	
-	gtk_widget_set_sensitive (dlg->priv->create_frame,
-				  gedit_prefs_manager_save_encoding_can_set () && 
-				  ((encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE) ||
-				   (encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)));
-#else
-	gtk_widget_set_sensitive (save_frame, FALSE);
-	gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
-#endif
 	gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, 
 			          auto_save &&
 				  gedit_prefs_manager_auto_save_interval_can_set ());
@@ -1564,397 +1336,10 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_signal_connect (G_OBJECT (dlg->priv->auto_save_spinbutton), "value_changed",
 			  G_CALLBACK (gedit_preferences_dialog_auto_save_spinbutton_value_changed),
 			  dlg);
-#if 0
-	g_signal_connect (G_OBJECT (dlg->priv->utf8_radiobutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->locale_if_possible_radiobutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->original_if_possible_radiobutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->create_utf8_radiobutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->create_locale_if_possible_radiobutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
-			  dlg);
-#endif
-	return TRUE;
-}
-
-static void
-gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
-							 GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton));
-	
-	if (gtk_toggle_button_get_active (button))
-	{
-		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, 
-					  gedit_prefs_manager_print_line_numbers_can_set ());
-		/*
-		gtk_widget_grab_focus (dlg->priv->line_numbers_spinbutton);
-		*/
-
-		gedit_prefs_manager_set_print_line_numbers (
-			MAX (1, gtk_spin_button_get_value_as_int (
-			   GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton))));
-	}
-	else	
-	{
-		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, FALSE);
-		gedit_prefs_manager_set_print_line_numbers (0);
-	}
-}
-
-static void
-gedit_preferences_dialog_add_header_checkbutton_toggled (GtkToggleButton *button,
-							 GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->add_header_checkbutton));
-	
-	gedit_prefs_manager_set_print_header (gtk_toggle_button_get_active (button));
-}
-
-static void
-gedit_preferences_dialog_wrap_lines_checkbutton_toggled (GtkToggleButton *button,
-							 GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->wrap_lines_checkbutton));
-	
-	gedit_prefs_manager_set_print_wrap_mode (
-			gtk_toggle_button_get_active (button) ? GTK_WRAP_WORD : GTK_WRAP_NONE);
-}
-
-static void
-gedit_preferences_dialog_line_numbers_spinbutton_value_changed (GtkSpinButton *spin_button,
-		GeditPreferencesDialog *dlg)
-{
-	g_return_if_fail (spin_button == GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton));
-
-	gedit_prefs_manager_set_print_line_numbers (
-			MAX (1, gtk_spin_button_get_value_as_int (spin_button)));
-}
-
-static gboolean 
-gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui)
-{
-	GtkWidget *line_numbers_hbox;
-	gint print_line_numbers;
-
-	gedit_debug (DEBUG_PREFS, "");
-	
-	line_numbers_hbox = glade_xml_get_widget (gui,
-				"line_numbers_hbox");
-	dlg->priv->add_header_checkbutton = glade_xml_get_widget (gui, 
-				"add_header_checkbutton");
-	dlg->priv->wrap_lines_checkbutton= glade_xml_get_widget (gui, 
-				"wrap_lines_checkbutton");
-	dlg->priv->line_numbers_checkbutton = glade_xml_get_widget (gui, 
-				"line_numbers_checkbutton");
-	dlg->priv->line_numbers_spinbutton = glade_xml_get_widget (gui, 
-				"line_numbers_spinbutton");
-
-	g_return_val_if_fail (line_numbers_hbox, FALSE);
-	g_return_val_if_fail (dlg->priv->add_header_checkbutton, FALSE);
-	g_return_val_if_fail (dlg->priv->wrap_lines_checkbutton, FALSE);
-	g_return_val_if_fail (dlg->priv->line_numbers_checkbutton, FALSE);
-	g_return_val_if_fail (dlg->priv->line_numbers_spinbutton, FALSE);
-
-	/* Set initial values */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->add_header_checkbutton),
-			gedit_prefs_manager_get_print_header ());
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_lines_checkbutton),
-			gedit_prefs_manager_get_print_wrap_mode () != GTK_WRAP_NONE);
-	
-	print_line_numbers = gedit_prefs_manager_get_print_line_numbers ();
-		
-	if (print_line_numbers > 0)
-	{
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton),
-					   (guint) print_line_numbers);
-		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, 
-					  gedit_prefs_manager_print_line_numbers_can_set ());
-	}
-	else
-		gtk_widget_set_sensitive (dlg->priv->line_numbers_spinbutton, FALSE);
-	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton),
-				      print_line_numbers > 0);
-
-	/* Set widget sensitivity */
-	gtk_widget_set_sensitive (dlg->priv->add_header_checkbutton, 
-				  gedit_prefs_manager_print_header_can_set ());
-	gtk_widget_set_sensitive (dlg->priv->wrap_lines_checkbutton,
-				  gedit_prefs_manager_print_wrap_mode_can_set ());
-	gtk_widget_set_sensitive (line_numbers_hbox,
-				  gedit_prefs_manager_print_line_numbers_can_set ());
-
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (dlg->priv->line_numbers_checkbutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_line_numbers_checkbutton_toggled), dlg);
-	g_signal_connect (G_OBJECT (dlg->priv->add_header_checkbutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_add_header_checkbutton_toggled), dlg);
-	g_signal_connect (G_OBJECT (dlg->priv->wrap_lines_checkbutton), "toggled", 
-			  G_CALLBACK (gedit_preferences_dialog_wrap_lines_checkbutton_toggled), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->line_numbers_spinbutton), "value_changed",
-			  G_CALLBACK (gedit_preferences_dialog_line_numbers_spinbutton_value_changed),
-			  dlg);
-	return TRUE;
-}
-
-static void
-gedit_preferences_dialog_print_font_restore_default_button_clicked (
-		GtkButton *button, GeditPreferencesDialog *dlg)
-{
-	g_return_if_fail (dlg->priv->body_fontpicker != NULL);
-	g_return_if_fail (dlg->priv->headers_fontpicker != NULL);
-	g_return_if_fail (dlg->priv->numbers_fontpicker != NULL);
-
-	if (gedit_prefs_manager_print_font_body_can_set ())
-	{
-		const gchar* font = gedit_prefs_manager_get_default_print_font_body ();
-
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
-				font);
-		
-		gedit_prefs_manager_set_print_font_body (font);
-	}
-	
-	if (gedit_prefs_manager_print_font_header_can_set ())
-	{
-		const gchar* font = gedit_prefs_manager_get_default_print_font_header ();
-
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
-				font);
-		
-		gedit_prefs_manager_set_print_font_header (font);
-	}
-		
-	if (gedit_prefs_manager_print_font_numbers_can_set ())
-	{
-		const gchar* font = gedit_prefs_manager_get_default_print_font_numbers ();
-		
-		gnome_print_font_picker_set_font_name (
-				GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
-				font);
-		
-		gedit_prefs_manager_set_print_font_numbers (font);
-	}
-}
-
-static void
-gedit_preferences_dialog_body_font_picker_font_set (GnomePrintFontPicker *gfp, 
-		const gchar *font_name, GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker));
-	g_return_if_fail (font_name != NULL);
-
-	gedit_prefs_manager_set_print_font_body (font_name);
-}
-
-static void
-gedit_preferences_dialog_headers_font_picker_font_set (GnomePrintFontPicker *gfp, 
-		const gchar *font_name, GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker));
-	g_return_if_fail (font_name != NULL);
-
-	gedit_prefs_manager_set_print_font_header (font_name);
-}
-
-static void
-gedit_preferences_dialog_numbers_font_picker_font_set (GnomePrintFontPicker *gfp, 
-		const gchar *font_name, GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (gfp == GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker));
-	g_return_if_fail (font_name != NULL);
-
-	gedit_prefs_manager_set_print_font_numbers (font_name);
-}
-
-static gboolean 
-gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, GladeXML *gui)
-{	
-	GtkWidget *print_fonts_table;
-	GtkWidget *body_font_label;
-	GtkWidget *headers_font_label;
-	GtkWidget *numbers_font_label;
-	gboolean can_set;
-	gchar* font;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	print_fonts_table = glade_xml_get_widget (gui, "print_fonts_table");
-	body_font_label = glade_xml_get_widget (gui, "body_font_label");
-	headers_font_label = glade_xml_get_widget (gui,	"headers_font_label");
-	numbers_font_label = glade_xml_get_widget (gui,	"numbers_font_label");
-	dlg->priv->restore_default_fonts_button = glade_xml_get_widget (gui, 
- 			"restore_default_fonts_button");
-
-	g_return_val_if_fail (print_fonts_table != NULL, FALSE);
-	g_return_val_if_fail (body_font_label != NULL, FALSE);
-	g_return_val_if_fail (headers_font_label != NULL, FALSE);
-	g_return_val_if_fail (numbers_font_label != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->restore_default_fonts_button != NULL, FALSE);
-			
-	/* Body font picker */
-	dlg->priv->body_fontpicker = gnome_print_font_picker_new ();
-
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), TRUE);
-
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
-
-	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
-			dlg->priv->body_fontpicker, 1, 2, 0, 1);
-	
-	/* Headers font picker */
-	dlg->priv->headers_fontpicker = gnome_print_font_picker_new ();
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), TRUE);
-	
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
-
-	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
-			dlg->priv->headers_fontpicker, 1, 2, 1, 2);
-
-	/* Numbers font picker */
-	dlg->priv->numbers_fontpicker = gnome_print_font_picker_new ();
-	gnome_print_font_picker_set_mode (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), 
-			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
-	
-	gnome_print_font_picker_fi_set_show_size (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), TRUE);
-	
-	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), 
-			TRUE, 
-			get_desktop_default_font_size ());
-
-	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
-			dlg->priv->numbers_fontpicker, 1, 2, 2, 3);
-
-	gtk_label_set_mnemonic_widget (GTK_LABEL (body_font_label), 
-				       dlg->priv->body_fontpicker);
-	
-	gtk_label_set_mnemonic_widget (GTK_LABEL (headers_font_label), 
-				       dlg->priv->headers_fontpicker);
-
-	gtk_label_set_mnemonic_widget (GTK_LABEL (numbers_font_label), 
-				       dlg->priv->numbers_fontpicker);
-
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->body_fontpicker, 
-		_("Push this button to select the font to be used to print the body"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->headers_fontpicker, 
-		_("Push this button to select the font to be used to print the headers"), NULL);
-	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->numbers_fontpicker, 
-		_("Push this button to select the font to be used to print line numbers"), NULL);
-
-	gedit_utils_set_atk_relation (dlg->priv->body_fontpicker, body_font_label, 
-							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->priv->headers_fontpicker, headers_font_label, 
-							ATK_RELATION_LABELLED_BY);
-	gedit_utils_set_atk_relation (dlg->priv->numbers_fontpicker, numbers_font_label, 
-							ATK_RELATION_LABELLED_BY);
-
-	/* Set initial values */
-	font = gedit_prefs_manager_get_print_font_body ();
-	g_return_val_if_fail (font, FALSE);
-
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
-			font);
-	
-	g_free (font);
-
-	font = gedit_prefs_manager_get_print_font_header ();
-	g_return_val_if_fail (font, FALSE);
-
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
-			font);
-
-	g_free (font);
-
-	font = gedit_prefs_manager_get_print_font_numbers ();
-	g_return_val_if_fail (font, FALSE);
-	
-	gnome_print_font_picker_set_font_name (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
-			font);
-
-	g_free (font);
-
-	/* Set widgets sensitivity */
-	can_set = gedit_prefs_manager_print_font_body_can_set ();
-	gtk_widget_set_sensitive (dlg->priv->body_fontpicker, can_set);
-	gtk_widget_set_sensitive (body_font_label, can_set);
-		  
-	can_set = gedit_prefs_manager_print_font_header_can_set ();
-	gtk_widget_set_sensitive (dlg->priv->headers_fontpicker, can_set);
-	gtk_widget_set_sensitive (headers_font_label, can_set);
-
-	can_set = gedit_prefs_manager_print_font_numbers_can_set ();
-	gtk_widget_set_sensitive (dlg->priv->numbers_fontpicker, can_set);
-	gtk_widget_set_sensitive (numbers_font_label, can_set);
-
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (dlg->priv->restore_default_fonts_button), "clicked",
-			  G_CALLBACK (gedit_preferences_dialog_print_font_restore_default_button_clicked),
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->body_fontpicker), "font_set", 
-			  G_CALLBACK (gedit_preferences_dialog_body_font_picker_font_set), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->headers_fontpicker), "font_set", 
-			  G_CALLBACK (gedit_preferences_dialog_headers_font_picker_font_set), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->numbers_fontpicker), "font_set", 
-			  G_CALLBACK (gedit_preferences_dialog_numbers_font_picker_font_set), 
-			  dlg);
-
 
 	return TRUE;
 }
+
 
 static void
 gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (GtkToggleButton *button,
@@ -2010,426 +1395,6 @@ gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg,
 	
 	return TRUE;
 }
-
-#if 0
-static gboolean
-add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
-{
-	GSList **list;
-
-	GValue value = {0, };
-	const GeditEncoding *enc;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	list = (GSList **)data;
-
-	gtk_tree_model_get_value (model, iter, COLUMN_ENCODING_POINTER, &value);
-
-	enc = (const GeditEncoding *) g_value_get_pointer (&value);
-	g_return_val_if_fail (enc != NULL, TRUE);
-	
-
-#if 0
-	{
-		gchar *name;
-		name = gedit_encoding_to_string (enc);
-		
-		g_print ("Add %s to list\n", name);
-		
-		g_free (name);
-	}
-#endif
-
-	*list = g_slist_prepend (*list, (gpointer) enc);
-
-	g_value_unset (&value);
-
-	return FALSE;
-};
-
-static void 
-update_encodings_list (GeditPreferencesDialog *dlg)
-{
-	GtkTreeModel *model;
-	GSList *enc_list = NULL;
-	
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-	g_return_if_fail (gedit_prefs_manager_encodings_can_set ());
-	
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_if_fail (model != NULL);
-
-	gtk_tree_model_foreach (model, add_enc_to_list, &enc_list);
-
-	enc_list = g_slist_reverse (enc_list);
-
-	gedit_prefs_manager_set_encodings (enc_list);
-
-	g_slist_free (enc_list);
-}
-
-static GtkTreeModel*
-create_encodings_treeview_model (void)
-{
-	GtkListStore *store;
-	GtkTreeIter iter;
-	GSList *list;
-	
-	gedit_debug (DEBUG_PREFS, "");
-
-	/* create list store */
-	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER);
-
-	/* add data to the list store */
-	list = gedit_prefs_manager_get_encodings ();
-	
-	while (list != NULL)
-	{
-		const GeditEncoding* enc;
-		gchar *name;
-
-		enc = (const GeditEncoding*) list->data;
-		name = gedit_encoding_to_string (enc);
-		
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-				    COLUMN_ENCODING_NAME, name,
-				    COLUMN_ENCODING_POINTER, enc,
-				    -1);
-
-		g_free (name);
-		
-		list = g_slist_next (list);
-	}
-
-	g_slist_free (list);
-	
-	return GTK_TREE_MODEL (store);
-}
-
-static void
-gedit_preferences_dialog_add_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-	
-	gedit_encodings_dialog_run (GTK_WINDOW (dlg));
-}
-
-static void
-gedit_preferences_dialog_remove_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
-{
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	GtkTreePath *path;
-
-	GtkTreeModel *model;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_if_fail (selection != NULL);
-
-	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-		return;
-	
-	path = gtk_tree_model_get_path (model, &iter);
-
-	gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
-
-	update_encodings_list (dlg);
-
-	gtk_tree_selection_select_path (selection, path);
-
-	/* If the last item is removed, select the prev item */
-	if (!gtk_tree_selection_get_selected (selection, NULL, NULL))
-	{
-		if (gtk_tree_path_prev (path))
-			gtk_tree_selection_select_path (selection, path);
-	}
-			
-	gtk_tree_path_free (path);
-}
-
-
-static void
-gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection *selection, GeditPreferencesDialog *dlg)
-{
-	gboolean selected;
-	GtkTreeModel *model;
-	gint n_rows;
-	GtkTreeIter iter;
-	gboolean disable_up = TRUE;
-	gboolean disable_down = TRUE;
-	gboolean res;
-	
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-	g_return_if_fail (selection != NULL);
-
-	/* FIXME: disabled - Paolo */
-
-	selected = FALSE;
-		/*
-		gtk_tree_selection_get_selected (selection, NULL, NULL) &&
-		gedit_prefs_manager_encodings_can_set ();
-		*/
-	
-	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, selected);
-
-	if (!selected)
-	{
-		gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
-		gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
-
-		return;
-	}
-
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_if_fail (model != NULL);
-
-	n_rows = gtk_tree_model_iter_n_children (model, NULL);
-
-	if (n_rows > 0)
-	{
-		res = gtk_tree_model_get_iter_first (model, &iter);
-		g_return_if_fail (res);
-		disable_up = gtk_tree_selection_iter_is_selected (selection, &iter);
-	
-		res = gtk_tree_model_iter_nth_child (model, &iter, NULL, n_rows - 1);
-		g_return_if_fail (res);
-		disable_down = gtk_tree_selection_iter_is_selected (selection, &iter);
-	}
-	
-	gtk_widget_set_sensitive (dlg->priv->up_enc_button, !disable_up);
-	gtk_widget_set_sensitive (dlg->priv->down_enc_button, !disable_down);
-}
-
-static void
-gedit_preferences_dialog_up_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
-{
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	GtkTreeIter prev_iter;
-	GtkTreePath *path;
-	gboolean res;
-
-	GtkTreeModel *model;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_if_fail (selection != NULL);
-
-	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-		return;
-
-	path = gtk_tree_model_get_path (model, &iter);
-
-	res = gtk_tree_path_prev (path);
-	g_return_if_fail (res);
-
-	gtk_tree_model_get_iter (model, &prev_iter, path);
-	gtk_tree_path_free (path);
-	
-	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev_iter);
-
-	gedit_preferences_dialog_encodings_treeview_selection_changed (selection, dlg);
-
-	update_encodings_list (dlg);	
-}
-
-static void
-gedit_preferences_dialog_down_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
-{
-	GtkTreeSelection *selection;
-	GtkTreeIter iter;
-	GtkTreeIter next_iter;
-	gboolean res;
-
-	GtkTreeModel *model;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (dlg != NULL);
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_if_fail (selection != NULL);
-
-	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-		return;
-
-	next_iter = iter;
-	
-	res = gtk_tree_model_iter_next (model, &next_iter);
-	g_return_if_fail (res);
-
-	gtk_list_store_swap (GTK_LIST_STORE (model), &next_iter, &iter);
-
-	gedit_preferences_dialog_encodings_treeview_selection_changed (selection, dlg);
-
-	update_encodings_list (dlg);
-}
-
-static gboolean 
-gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui)
-{
-	GtkTreeModel *model;
-	GtkTreeViewColumn *column;
-	GtkCellRenderer *cell;
-	GtkTreeSelection *selection;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	dlg->priv->encodings_treeview = glade_xml_get_widget (gui, "encodings_treeview");
-	dlg->priv->add_enc_button = glade_xml_get_widget (gui, "add_enc_button");
-	dlg->priv->remove_enc_button = glade_xml_get_widget (gui, "remove_enc_button") ;
-	dlg->priv->up_enc_button = glade_xml_get_widget (gui, "up_enc_button");
-	dlg->priv->down_enc_button = glade_xml_get_widget (gui, "down_enc_button");
-
-	g_return_val_if_fail (dlg->priv->encodings_treeview != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->add_enc_button != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->remove_enc_button != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->up_enc_button != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->down_enc_button != NULL, FALSE);
-
-	/* FIXME: disabled - Paolo */
-	gtk_widget_set_sensitive (dlg->priv->add_enc_button, FALSE /*gedit_prefs_manager_encodings_can_set ()*/);
-	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, FALSE);
-	gtk_widget_set_sensitive (dlg->priv->up_enc_button, FALSE);
-	gtk_widget_set_sensitive (dlg->priv->down_enc_button, FALSE);
-	
-
-	g_signal_connect (G_OBJECT (dlg->priv->add_enc_button), "clicked", 
-			  G_CALLBACK (gedit_preferences_dialog_add_enc_button_clicked), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->remove_enc_button), "clicked", 
-			  G_CALLBACK (gedit_preferences_dialog_remove_enc_button_clicked), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->up_enc_button), "clicked", 
-			  G_CALLBACK (gedit_preferences_dialog_up_enc_button_clicked), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->priv->down_enc_button), "clicked", 
-			  G_CALLBACK (gedit_preferences_dialog_down_enc_button_clicked), 
-			  dlg);
-
-	model = create_encodings_treeview_model ();
-	g_return_val_if_fail (model != NULL, FALSE);
-
-	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview), model);
-
-	/* Add the encoding column */
-	cell = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Encodings"), cell, 
-			"text", COLUMN_ENCODING_NAME, NULL);
-	
-	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->encodings_treeview), column);
-
-	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dlg->priv->encodings_treeview),
-			COLUMN_ENCODING_NAME);
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_val_if_fail (selection != NULL, FALSE);
-
-	if (gedit_prefs_manager_encodings_can_set ())
-		g_signal_connect (G_OBJECT (selection), "changed", 
-				  G_CALLBACK (gedit_preferences_dialog_encodings_treeview_selection_changed), 
-			  	  dlg);
-
-	return TRUE;
-}
-
-static gboolean
-gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditEncoding* enc)
-{
-	GtkTreeModel *model;
-
-	gboolean found = FALSE;
-	GtkTreeIter iter;
-	gchar *name;
-	GValue value = {0, };
-
-	gedit_debug (DEBUG_PREFS, "");
-	
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-
-	if (gtk_tree_model_get_iter_first (model, &iter))
-	{
-		gtk_tree_model_get_value (model, &iter,
-			    COLUMN_ENCODING_POINTER, &value);
-
-		if (enc == g_value_get_pointer (&value))
-			found = TRUE;
-			
-		g_value_unset (&value);
-
-		while (gtk_tree_model_iter_next (model, &iter) && !found)
-		{
-			gtk_tree_model_get_value (model, &iter,
-				    COLUMN_ENCODING_POINTER, &value);
-
-			if (enc == g_value_get_pointer (&value))
-				found = TRUE;
-			
-			g_value_unset (&value);
-		}
-	}
-
-	if (found)
-		return FALSE;
-
-	name = gedit_encoding_to_string (enc);
-		
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    COLUMN_ENCODING_NAME, name,
-				    COLUMN_ENCODING_POINTER, enc,
-				    -1);
-	g_free (name);
-
-	return TRUE;
-}
-
-gboolean
-gedit_preferences_dialog_add_encodings (GeditPreferencesDialog *dlg, const GSList* encs)
-{
-	GtkTreeSelection *selection;
-
-	gboolean changed = FALSE;
-
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
-	g_return_val_if_fail (selection != NULL, FALSE);
-
-	gtk_tree_selection_unselect_all (selection);
-
-	while (encs != NULL)
-	{
-		const GeditEncoding* enc = (const GeditEncoding *)encs->data;
-		
-		changed |= gedit_preferences_dialog_add_encoding (dlg, enc);
-
-		encs = g_slist_next (encs);
-	}
-	
-	if (changed)
-		update_encodings_list (dlg);
-
-	return changed;
-}
-#endif
 
 #define DEFAULT_FONT_SIZE 10
 

@@ -1,3 +1,22 @@
+2003-08-22  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-document.c (gedit_document_new): disable bracket matching
+	since it is broken.
+	(gedit_document_set_uri)(gedit_document_set_language): 
+	use the new function gedit_languages_manager_get_language_from_id 
+	instead of the old gedit_languages_manager_get_language_from_name
+
+	* gedit-languages-manager.[ch]: rename 
+	gedit_languages_manager_get_language_from_name to
+	gedit_languages_manager_get_language_from_id
+
+	* gedit2.c (main): fix the --help messages translation problem 
+	as reported on the desktop-devel mailing list
+
+	* dialogs/gedit-preferences-dialog.c: remove unused code
+
+	* dialogs/gedit-preferences.glade2: remove unused pages
+
 2003-06-30  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* dialogs/gedit-preferences-dialog.c: disable the Print pages

@@ -351,8 +351,9 @@ main (int argc, char **argv)
 	gboolean restored = FALSE;
 	CORBA_Object factory;
 
+	setlocale (LC_ALL, "");
+
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
 	/* Initialize gnome program */
@@ -363,6 +364,8 @@ main (int argc, char **argv)
 		            _("Text Editor"),
 			    GNOME_PARAM_APP_DATADIR, DATADIR,
 			    NULL);
+
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	/* check whether we are running already */
         factory = bonobo_activation_activate_from_id

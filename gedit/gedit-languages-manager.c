@@ -45,11 +45,12 @@ gedit_get_languages_manager (void)
 
 
 GtkSourceLanguage *
-gedit_languages_manager_get_language_from_name (GtkSourceLanguagesManager *lm,
-						const gchar 		  *lang_name)
+gedit_languages_manager_get_language_from_id (GtkSourceLanguagesManager *lm,
+					      const gchar               *lang_id)
 {
 	const GSList *languages;
-	g_return_val_if_fail (lang_name != NULL, NULL);
+	
+	g_return_val_if_fail (lang_id != NULL, NULL);
 
 	languages = gtk_source_languages_manager_get_available_languages (lm);
 
@@ -59,9 +60,9 @@ gedit_languages_manager_get_language_from_name (GtkSourceLanguagesManager *lm,
 
 		GtkSourceLanguage *lang = GTK_SOURCE_LANGUAGE (languages->data);
 		
-		name = gtk_source_language_get_name (lang);
+		name = gtk_source_language_get_id (lang);
 
-		if (strcmp (name, lang_name) == 0)
+		if (strcmp (name, lang_id) == 0)
 		{	
 			g_free (name);	
 			return lang;

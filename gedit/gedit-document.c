@@ -374,7 +374,9 @@ gedit_document_new (void)
 
 	gedit_document_set_max_undo_levels (document,
 					    gedit_prefs_manager_get_undo_actions_limit ());    
-			
+
+	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
+		
 	return document;
 }
 
@@ -999,7 +1001,7 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		if (strcmp (data, "_NORMAL_") == 0)
 			language = NULL;
 		else
-			language = gedit_languages_manager_get_language_from_name (
+			language = gedit_languages_manager_get_language_from_id (
 						gedit_get_languages_manager (),
 						data);
 
@@ -2277,16 +2279,16 @@ gedit_document_set_language (GeditDocument *doc, GtkSourceLanguage *lang)
 
 	if (doc->priv->uri != NULL)
 	{
-		gchar *lang_name = NULL;
+		gchar *lang_id = NULL;
 
 		if (lang != NULL)
-			lang_name = gtk_source_language_get_name (lang);
+			lang_id = gtk_source_language_get_id (lang);
 		
 		gedit_metadata_manager_set (doc->priv->uri,
 					    "language",
-					    lang_name == NULL ? "_NORMAL_" : lang_name);
+					    lang_id == NULL ? "_NORMAL_" : lang_id);
 
-		g_free (lang_name);
+		g_free (lang_id);
 	}
 }
 

@@ -144,6 +144,8 @@ gedit_cmd_file_page_setup (BonoboUIComponent *uic, gpointer user_data, const gch
 {
 	BonoboWindow *active_window;
 
+	gedit_debug (DEBUG_COMMANDS, "");
+
 	active_window = gedit_get_active_window ();
 	g_return_if_fail (active_window != NULL);
 

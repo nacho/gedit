@@ -34,7 +34,7 @@
 
 GtkSourceLanguagesManager *gedit_get_languages_manager (void);
 
-GtkSourceLanguage	  *gedit_languages_manager_get_language_from_name
+GtkSourceLanguage	  *gedit_languages_manager_get_language_from_id
 						       (GtkSourceLanguagesManager *lm,
 						        const gchar               *lang_name);
 
