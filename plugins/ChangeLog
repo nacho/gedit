@@ -1,3 +1,10 @@
+1998-10-13  Martin Baulig  <martin@home-of-linux.org>
+
+	* client/Makefile.am (geditincludedir): New variable pointing to
+	`$(includedir)/gedit'. We need to install the header files to make
+	it possible to write plugins outside the gedit module.
+	(geditinclude_HEADERS): Added `client.h' here.
+
 1998-10-06  Chris Lahey  <clahey@umich.edu>
 
 	* client/client.h, client/client.c: Added text_insert

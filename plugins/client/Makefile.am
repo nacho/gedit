@@ -4,8 +4,13 @@ pluginlibdir = $(libdir)
 
 pluginlib_LIBRARIES = libclient.a
 
+geditincludedir = $(includedir)/gedit
+
 libclient_a_SOURCES = \
 	client.c	\
+	client.h
+
+geditinclude_HEADERS = \
 	client.h
 
 INCLUDES = -I$(includedir) 				\
