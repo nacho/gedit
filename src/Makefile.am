@@ -1,25 +1,18 @@
 ## Process this file with automake to produce Makefile.in
 
-#appicondir = $(datadir)/pixmaps
-#appicon_DATA = gnome-gedit.png
-
-#applogodir = $(datadir)/pixmaps
-#applogo_DATA = gedit-logo.png
-
-INCLUDES = -I$(includedir) -I$(top_srcdir) \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DLOCALEDIR=\"$(datadir)/locale\" \
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
-	$(GNOME_INCLUDEDIR) \
+INCLUDES = -I$(includedir) 				\
+	-I$(top_srcdir) 			 	\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+	-DLOCALEDIR=\"$(datadir)/locale\" 		\
+	-I$(top_srcdir)/intl				\
+	-I$(top_builddir)/intl 				\
+	$(GNOME_INCLUDEDIR) 				\
 	$(GNOME_PRINT_CFLAGS)
-
 
 ## This need to be two distinct directories
 plugindir = $(libexecdir)/go/plugins
 pluginlibdir = $(libexecdir)/gedit/plugins
-
 geditincludedir = $(includedir)/gedit
-
 gtkrcdir = $(datadir)
 gtkrc_DATA = geditrc
 
@@ -71,28 +64,15 @@ gedit_SOURCES = 	\
 	menus.c		\
 	search.h	\
 	search.c	
-#	gE_plugin_api.c	\
-#	gE_plugin_api.h	\
-#	plugin.c        \
-#	plugin.h        \
-#	gE_prefslib.c	\
-#	gE_prefslib.h	\
-#	gE_document.c	\
-#	gE_window.h	\
-#	dialog.h	\
-#	dialog.c	\
-#	$(GMODULE_PLUGIN_SRCLIST)
-#	toolbar.c	\
 
-#gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
-
-gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(corba_libs) \
-	      $(libgnorba_libs) $(INTLLIBS) \
-              $(GNOME_PRINT_LIBS)
+gedit_LDADD =	$(GNOME_LIBDIR) 	\
+		$(GNOMEUI_LIBS)		\
+		$(corba_libs) 		\
+		$(libgnorba_libs)	\
+		$(INTLLIBS) 		\
+		$(GNOME_PRINT_LIBS)
 
 EXTRA_DIST = $(gtkrc_DATA) 
-	#gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm 
-	#$(appicon_DATA) $(applogo_DATA)
 
 CPPFLAGS = \
 	-DBINDIR=\""$(bindir)"\" \
@@ -100,5 +80,9 @@ CPPFLAGS = \
 	-DPLUGINDIR=\""$(plugindir)"\" \
 	-DPLUGINLIBDIR=\""$(pluginlibdir)"\" \
 	-Wall -Wno-unused -ansi -D_IN_GEDIT
-#	-DDEBUG
+
+
+
+
+
 
