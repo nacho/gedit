@@ -71,6 +71,7 @@ typedef struct
 typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );
 
 plugin *plugin_new( gchar * );
+plugin *plugin_new_with_param( gchar *, int argc, gchar *argv[] );
 plugin *plugin_query( gchar * );
 void plugin_query_all( plugin_callback_struct * );
 void plugin_send( plugin *, gchar *, gint length );

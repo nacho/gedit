@@ -96,6 +96,9 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
 #endif
       exit( 0 );
     }
+  argv[4] = argv[0];
+  *argv += 4;
+  *argc -= 4;
 
   return getnumber( fd );
 }

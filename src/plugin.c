@@ -23,7 +23,7 @@
 
 static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
 
-plugin *plugin_new_with_param( gchar *plugin_name, gboolean query )
+plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
 {
   int toline[2]; /* Commands to the plugin. */
   int fromline[2]; /* Commands from the plugin. */
@@ -48,8 +48,8 @@ plugin *plugin_new_with_param( gchar *plugin_name, gboolean query )
       close( new_plugin->pipe_to );
       close( new_plugin->pipe_from );
       close( new_plugin->pipe_data );
-      argv[0] = g_malloc0( 13 + strlen( new_plugin->name ) );
-      sprintf( argv[0], "gedit-plugin-%s", new_plugin->name );
+      argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
+      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
       argv[1] = g_strdup( "-go" );
       argv[2] = g_malloc0( 15 );
       g_snprintf( argv[2], 15, "%d", toline[0] );
@@ -90,12 +90,76 @@ plugin *plugin_new_with_param( gchar *plugin_name, gboolean query )
 
 plugin *plugin_new( gchar *plugin_name )
 {
-  return plugin_new_with_param( plugin_name, FALSE );
+  return plugin_new_with_query( plugin_name, FALSE );
 }
 
 plugin *plugin_query( gchar *plugin_name )
 {
-  return plugin_new_with_param( plugin_name, TRUE );
+  return plugin_new_with_query( plugin_name, TRUE );
+}
+
+plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
+{
+  int toline[2]; /* Commands to the plugin. */
+  int fromline[2]; /* Commands from the plugin. */
+  int dataline[2]; /* Data to the plugin. */
+  plugin *new_plugin = g_new( plugin, 1 ); /* The plugin. */
+  
+  if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 )
+    {
+      g_free( new_plugin );
+      return 0;
+    }
+  new_plugin->pipe_to = toline[1];
+  new_plugin->pipe_from = fromline[0];
+  new_plugin->pipe_data = dataline[1];
+  new_plugin->name = g_strdup( strrchr( plugin_name, '/' ) ? strrchr( plugin_name, '/' ) + 1 : plugin_name );
+  new_plugin->pid = fork();
+  if ( new_plugin->pid == 0 )
+    {
+      /* New process. */
+      char **argv = g_malloc0 ( sizeof(char *) * argc + 6 );
+      int i;
+
+      close( new_plugin->pipe_to );
+      close( new_plugin->pipe_from );
+      close( new_plugin->pipe_data );
+      argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
+      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
+      argv[1] = g_strdup( "-go" );
+      argv[2] = g_malloc0( 15 );
+      g_snprintf( argv[2], 15, "%d", toline[0] );
+      argv[3] = g_malloc0( 15 );
+      g_snprintf( argv[3], 15, "%d", fromline[1] );
+      argv[4] = g_malloc0( 15 );
+      g_snprintf( argv[4], 15, "%d", dataline[0] );
+      for( i = 0; i < argc; i++ )
+	{
+	  argv[i + 5] = arg[i];
+	}
+      argv[5+argc] = NULL;
+      if ( *plugin_name != '/' )
+	{
+	  gchar *temp = plugin_name;
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
+	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	}
+      execv(plugin_name, argv);
+      /* This is only reached if something goes wrong. */
+      _exit( 1 );
+    }
+  else if ( new_plugin->pid == -1 )
+    {
+      /* Failure. */
+      g_free( new_plugin );
+      return 0;
+    }
+  /* Success. */
+
+  close( toline[0] );
+  close( fromline[1] );
+  close( dataline[0] );
+  return new_plugin;
 }
 
 void plugin_query_all( plugin_callback_struct *callbacks )

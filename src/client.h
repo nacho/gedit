@@ -20,6 +20,11 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
+#ifdef __cplusplus__
+extern "C"
+{
+#endif /* __cplusplus__ */
+  
 #include <glib.h>
 
 typedef struct
@@ -38,4 +43,8 @@ void client_finish( gint context );
 gchar *client_text_get( gint docid );
 gboolean client_program_quit();
 
-#endif
+#ifdef __cplusplus__
+}
+#endif /* __cplusplus__ */
+
+#endif /* __CLIENT_H__ */
