@@ -1,3 +1,23 @@
+1999-04-10 (16:06) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_document.c: (gE_window_new) Ok, i got it wrong, we should be
+	  using the `plugins' GList.
+	
+	* gE_plugin_api.c: (gE_plugin_program_register) Ok, nobody ever told
+	  me about this function. This has been the cause for all my Plugins 
+	  problems. By replacing the window_list in g_list_foreach () with
+	  mdi->windows (i only just found this GList.. never noticed it before)
+	  we get plugins added to the menu properly.
+	  
+	* plugin.c: Made the plugin_callback_struct pl_callbacks an extern, why
+	  define it lots of times.. as it's initialised in gedit.c without an 
+	  extern.
+	
+	* gE_prefs_box.c: (gE_window_refresh) I also found mdi->children for all
+	  the mdi children (obviously). So by replacing the calls to the
+	  gE_documents GList with mdi->children we can now change the text font
+	  globally :)
+
 1999-04-09 Alex Roberts  <bse@gedit.pn.org>
 
 	* Mooooo! Plugins!!!! Hurrahh! Except the only plugin really working

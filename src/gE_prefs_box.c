@@ -68,7 +68,8 @@ typedef struct _gE_prefs_data {
 
 static gE_prefs_data *prefs;
 GList *plugin_list;
-plugin_callback_struct pl_callbacks;
+/*plugin_callback_struct pl_callbacks;*/
+extern GList *plugins;
 
 guint mdi_type [NUM_MDI_MODES] = {
 	GNOME_MDI_DEFAULT_MODE,
@@ -119,22 +120,22 @@ gint i;
          break;
        }
   
-/*  style = gtk_style_new();
+  style = gtk_style_new();
   gdk_font_unref (style->font);
   style->font = gdk_font_load (settings->font);
   
   gtk_widget_push_style (style);    
-  for (i = 0; i < g_list_length (gE_documents); i++)
+  for (i = 0; i < g_list_length (mdi->children); i++)
   {
   	gtk_widget_set_style(GTK_WIDGET(
-  		((gE_document *) g_list_nth_data (gE_documents, i))->split_screen), style);
+  		((gE_document *) g_list_nth_data (mdi->children, i))->split_screen), style);
 
   	gtk_widget_set_style(GTK_WIDGET(
-  		((gE_document *) g_list_nth_data (gE_documents, i))->text), style);
+  		((gE_document *) g_list_nth_data (mdi->children, i))->text), style);
   }
 
   gtk_widget_pop_style ();
-*/  	
+  	
   
 }
 
@@ -554,8 +555,6 @@ static void plugins_toggle (GtkWidget *w)
  	   plugin_list = NULL;
  	   
  	plugin_load_list("gEdit");
-	g_list_foreach(plugin_list, (GFunc) add_plugins_to_window, mdi->active_window);
- 	
   		
     }
 

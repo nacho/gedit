@@ -24,7 +24,7 @@
 #include "plugin.h"
 
 GList *plugin_list = NULL;
-plugin_callback_struct pl_callbacks;
+extern plugin_callback_struct pl_callbacks;
 
 
 /* static void process_command( plugin *plug, gchar *buffer, int length, gpointer data ); */

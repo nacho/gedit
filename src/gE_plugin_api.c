@@ -385,7 +385,7 @@ gE_plugin_program_register(plugin_info * info)
    strcpy(info->plugin_name, temp->plugin_name);
    plugins = g_list_append(plugins, info);
 
-   g_list_foreach(window_list, (GFunc) add_plugin_to_menu, info);
+   g_list_foreach(mdi->windows, (GFunc) add_plugin_to_menu, info);
 }
 
 #ifdef WITH_GMODULE_PLUGINS

@@ -38,7 +38,7 @@
 #include "search.h"
 #include "gE_prefs.h"
 
-/*extern GList *plugins;*/
+extern GList *plugins;
 gE_window *window;
 GtkWidget  *col_label;
 
@@ -140,7 +140,7 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	gE_set_menu_toggle_states();
 
-	g_list_foreach(plugin_list, (GFunc) add_plugins_to_window, app);
+	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
 	
 	settings->num_recent = 0;
 	recent_update(app);
