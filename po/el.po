@@ -20,6 +20,7 @@
 # Nikos: 12Feb2004, fixes for Gnome2.6
 # kostas:13feb2003,646 messages
 # Nikos: 29jun2004 review
+# Nikos: 30Jul2004 Consistency
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
 # Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
 # Kostas Papadimas <pkst@gnome.org>, 2002, 2003, 2004.
@@ -30,8 +31,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-29 15:07+0300\n"
-"PO-Revision-Date: 2004-06-29 15:55+0300\n"
+"POT-Creation-Date: 2004-07-30 00:43+0300\n"
+"PO-Revision-Date: 2004-07-30 01:08+0300\n"
 "Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
 "Language-Team:  <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +69,7 @@ msgstr "Αυτοματοποιήσεις gedit "
 msgid "Edit text files"
 msgstr "Επεξεργασία αρχείων κειμένου"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Επεξεργαστής Κειμένου"
 
@@ -225,9 +226,8 @@ msgid "Monospace 12"
 msgstr ""
 
 #: data/gedit.schemas.in.h:29
-#, fuzzy
 msgid "Monospace Regular 9"
-msgstr "Sans Regular 12"
+msgstr "Monospace Regular 9"
 
 #: data/gedit.schemas.in.h:30
 msgid ""
@@ -259,14 +259,12 @@ msgid "Right Margin Position"
 msgstr "Θέση Δεξιού Περιθωρίου"
 
 #: data/gedit.schemas.in.h:36
-#, fuzzy
 msgid "Sans Regular 11"
-msgstr "Sans Regular 12"
+msgstr "Sans Regular 11"
 
 #: data/gedit.schemas.in.h:37
-#, fuzzy
 msgid "Sans Regular 8"
-msgstr "Sans Regular 12"
+msgstr "Sans Regular 8"
 
 #: data/gedit.schemas.in.h:38
 msgid "Selected Text Color"
@@ -315,7 +313,8 @@ msgstr ""
 "πρέπει να εμφανιστούν όπως ακριβώς αναφέρονται εδώ."
 
 #: data/gedit.schemas.in.h:43
-msgid "Specifies the font to use for a document's body when printing documents."
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Καθορίζει τη χρήση της γραμματοσειράς στο σώμα του εγγράφου κατά την "
 "εκτύπωση."
@@ -428,11 +427,13 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:60
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr "Αν η εφαρμογή θα προβάλλει τους αριθμούς γραμμών στην περιοχή επεξεργασίας."
+msgstr ""
+"Αν η εφαρμογή θα προβάλλει τους αριθμούς γραμμών στην περιοχή επεξεργασίας."
 
 #: data/gedit.schemas.in.h:61
 msgid "Whether gedit should display the right margin in the editing area."
-msgstr "Αν η εφαρμογή θα προβάλλει το δεξιό περιθώριο στην περιοχή επεξεργασίας."
+msgstr ""
+"Αν η εφαρμογή θα προβάλλει το δεξιό περιθώριο στην περιοχή επεξεργασίας."
 
 #: data/gedit.schemas.in.h:62
 msgid "Whether gedit should enable auto indentation."
@@ -455,8 +456,10 @@ msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Αν η εφαρμογή θα εκτυπώνει επισήμανση σύνταξης κατά την εκτύπωση."
 
 #: data/gedit.schemas.in.h:67
-msgid "Whether the status bar at the bottom of editing windows should be visible."
-msgstr "Αν η γραμμή κατάστασης στο κάτω μέρος του ενεργού παραθύρου θα είναι ορατή."
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr ""
+"Αν η γραμμή κατάστασης στο κάτω μέρος του ενεργού παραθύρου θα είναι ορατή."
 
 #: data/gedit.schemas.in.h:68
 msgid "Whether the toolbar should be visible in editing windows."
@@ -512,7 +515,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "Αν δεν αποθηκεύσετε τα έγγραφα σας, όλες οι αλλαγές σας θα χαθούν."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "Επι_λέξτε τα έγγραφα που θέλετε να αποθηκεύσετε:"
 
@@ -524,11 +527,16 @@ msgstr "Κα_μμία αποθήκευση"
 msgid "_Save Selected"
 msgstr "_Αποθήκευση Επιλεγμένων"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "Ό_χι αποθήκευση"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+msgid "Question"
+msgstr "Ερώτηση"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -543,13 +551,14 @@ msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld "
 "δευτερόλεπτα θα χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
-msgid "If you don't save, changes from the last minute will be definitively lost."
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό θα "
 "χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -564,7 +573,7 @@ msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό "
 "και %ld δευτερόλεπτα θα χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -579,13 +588,14 @@ msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld "
 "λεπτά θα χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
-msgid "If you don't save, changes from the last hour will be definitively lost."
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα "
 "χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -600,10 +610,12 @@ msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και "
 "%d λεπτά θα χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
-msgid "If you don't save, changes from the last %d hour will be definitively lost."
-msgid_plural "If you don't save, changes from the last %d hours will be definitively lost."
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
 msgstr[0] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο την τελευταία %d ώρα "
 "θα χαθούν."
@@ -611,15 +623,16 @@ msgstr[1] ""
 "Αν δεν αποθηκεύσετε, οι αλλαγές που έγιναν στο έγγραφο τις τελευταίες %d "
 "ώρες θα χαθούν."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Αποθήκευση των αλλαγών στο έγγραφο  \"%s\" πριν το κλείσιμο;"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
 "Υπάρχουν %d έγγραφα με μη αποθηκευμένες αλλαγές. Αποθήκευση αλλαγών πριν το "
 "κλείσιμο;"
@@ -628,7 +641,7 @@ msgstr[1] ""
 "κλείσιμο;"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "Αν δεν αποθηκεύσετε, όλες οι αλλαγές θα χαθούν."
 
@@ -641,7 +654,7 @@ msgid "_Go to Line"
 msgstr "_Μετάβαση σε Γραμμή"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Το κείμενο \"%s\" δε βρέθηκε."
@@ -688,7 +701,7 @@ msgstr "_Περιγραφή"
 #: gedit/dialogs/gedit-encodings-dialog.c:390
 #: gedit/dialogs/gedit-encodings-dialog.c:458
 msgid "_Encoding"
-msgstr "Κω_δικοποιήσεις"
+msgstr "Κω_δικοποίηση"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
 msgid "A_vailable encodings:"
@@ -702,11 +715,11 @@ msgstr "Κωδικοποιήσεις χαρακτήρων"
 msgid "E_ncodings shown in menu:"
 msgstr "Κω_δικοποιήσεις που εμφανίζονται στο μενού:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "Σώμα για τον επιλογέα"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -714,21 +727,22 @@ msgstr ""
 "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
 "χρησιμοποιείται για την εκτύπωση του σώματος του εγγράφου"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "Επιλογέας γραμματοσειράς για κεφαλίδες σελίδας"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
-msgid "Push this button to select the font to be used to print the page headers"
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
+msgid ""
+"Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Πατήστε αυτό το κουμπί για να επιλέξετε την γραμματοσειρά που θα "
 "χρησιμοποιείται για την εκτύπωση των κεφαλίδων"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "Επιλογέας γραμματοσειράς αριθμών γραμμής"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
@@ -776,21 +790,21 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Το επιλεγμένο αρχείο δεν είναι εκτελέσιμο."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Πατήστε αυτό το κουμπί για να επιλέξετε τη γραμματοσειρά που θα "
 "χρησιμοποιείται από τον επεξεργαστή"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα κειμένου"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "Πιέστε αυτό το κουμπί για τη ρύθμιση χρώματος παρασκηνίου"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -798,7 +812,7 @@ msgstr ""
 "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα στο οποίο θα εμφανίζεται το "
 "κείμενο"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -806,7 +820,7 @@ msgstr ""
 "Πατήστε αυτό το κουμπί για να ρυθμίσετε το χρώμα στο οποίο θα σημειώνεται το "
 "επιλεγμένο κείμενο"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1089
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "Στοιχεία"
 
@@ -1098,7 +1112,8 @@ msgstr "Μέγεθος γραμματοσειράς για ετικέτα"
 
 #: gedit/dialogs/gnome-print-font-picker.c:228
 msgid "Font size for label in font info mode"
-msgstr "Μέγεθος γραμματοσειράς για ετικέτα σε λειτουργία πληροφ. γραμματοσειράς."
+msgstr ""
+"Μέγεθος γραμματοσειράς για ετικέτα σε λειτουργία πληροφ. γραμματοσειράς."
 
 #: gedit/dialogs/gnome-print-font-picker.c:238
 msgid "Show size"
@@ -1247,18 +1262,18 @@ msgstr "Εισάγετε την τοποθεσία (URI) του αρχείου �
 msgid "Open from URI"
 msgstr "Άνοιγμα από URI"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr ""
 "Σπύρος Παπαδημητρίου <spapadim+@cs.cmu.edu>\n"
 "Συμεών (σίμος) Ξενιτέλλης <simos@hellug.gr>\n"
 "Κώστας Παπαδήμας <pkst@gnome.org>"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:569
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:573
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "Το gedit είναι ένας μικρός και ελαφρύς διορθωτής κειμένου για το GNOME"
 
@@ -1292,7 +1307,8 @@ msgstr "Το αρχείο έχει πάρα πολλούς συμβολικού�
 #: gedit/gedit-document.c:1743
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr "Η εφαρμογή δεν μπορεί να χειριστεί τοποθεσίες %s: σε λειτουργία εγγραφής."
+msgstr ""
+"Η εφαρμογή δεν μπορεί να χειριστεί τοποθεσίες %s: σε λειτουργία εγγραφής."
 
 #: gedit/gedit-document.c:1750
 msgid "gedit cannot handle this kind of location in write mode."
@@ -1324,7 +1340,7 @@ msgstr ""
 
 #: gedit/gedit-document.c:1924
 msgid "Could not create a backup file."
-msgstr "Αδυναμία δημιουργίας αρχείου ασφαλείας."
+msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας."
 
 #: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
@@ -1451,10 +1467,6 @@ msgstr "Βιετναμέζικη"
 msgid "Thai"
 msgstr "Ταϊλανδέζικη"
 
-#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:704
-msgid "Question"
-msgstr "Ερώτηση"
-
 #: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
@@ -1462,7 +1474,8 @@ msgstr "Ένα αρχείο με όνομα \"%s\" υπάρχει ήδη.\n"
 
 #: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
-msgstr "Θέλετε να γίνει προσπάθεια να το αντικαταστήσετε με αυτό που αποθηκεύετε?"
+msgstr ""
+"Θέλετε να γίνει προσπάθεια να το αντικαταστήσετε με αυτό που αποθηκεύετε?"
 
 #: gedit/gedit-file-selector-util.c:163
 #, c-format
@@ -1471,15 +1484,16 @@ msgstr "Το αρχείο  \"%s\"  είναι μόνο για ανάγνωση.\
 
 #: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
-msgstr "Θέλετε να γίνει προσπάθεια να το αντικαταστήσετε με αυτό που αποθηκεύετε?"
+msgstr ""
+"Θέλετε να γίνει προσπάθεια να το αντικαταστήσετε με αυτό που αποθηκεύετε?"
 
 #: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
-msgstr "Όλα τα αρχεία"
+msgstr "Όλα τα Αρχεία"
 
 #: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
-msgstr "Όλα τα αρχεία κειμένου"
+msgstr "Όλα τα Αρχεία Κειμένου"
 
 #: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
@@ -1497,48 +1511,55 @@ msgstr "Επιλογή αρχείων για άνοιγμα"
 msgid "Select a filename to save"
 msgstr "Επιλογή ενός ονόματος αρχείου για αποθήκευση"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "Άνοιγμα Αρχείου ..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:425
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Αποθήκευση εγγράφου \"%s\"..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:446
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Το έγγραφο \"%s\" δεν αποθηκεύτηκε."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:438
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Το έγγραφο  \"%s\" αποθηκεύτηκε."
 
-#: gedit/gedit-file.c:405
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "Αποθήκευση ως..."
 
-#: gedit/gedit-file.c:605
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Επαναφορά μη αποθηκευμένων αλλαγών στο έγγραφο \"%s\"?"
 
-#: gedit/gedit-file.c:614
+#: gedit/gedit-file.c:612
 #, c-format
-msgid "Changes made to the document in the last %ld second will be permanently lost."
+msgid ""
+"Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο %ld δευτερόλεπτο θα χαθούν οριστικά."
-msgstr[1] "Οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld δευτερόλεπτα θα χαθούν οριστικά."
+msgstr[0] ""
+"Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο %ld δευτερόλεπτο θα χαθούν "
+"οριστικά."
+msgstr[1] ""
+"Οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld δευτερόλεπτα θα χαθούν "
+"οριστικά."
 
-#: gedit/gedit-file.c:623
-msgid "Changes made to the document in the last minute will be permanently lost."
-msgstr "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό θα χαθούν οριστικά."
+#: gedit/gedit-file.c:621
+msgid ""
+"Changes made to the document in the last minute will be permanently lost."
+msgstr ""
+"Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:627
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1550,23 +1571,26 @@ msgstr[0] ""
 "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτό και %ld δευτερόλεπτο θα "
 "χαθούν οριστικά."
 msgstr[1] ""
-"Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτά και %ld δευτερόλεπτα "
-"θα χαθούν οριστικά."
+"Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο λεπτά και %ld δευτερόλεπτα θα "
+"χαθούν οριστικά."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:637
 #, c-format
-msgid "Changes made to the document in the last %ld minute will be permanently lost."
+msgid ""
+"Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο %ld λεπτό θα χαθούν οριστικά."
+msgstr[0] ""
+"Οι αλλαγές που έγιναν στο έγγραφο το τελευταίο %ld λεπτό θα χαθούν οριστικά."
 msgstr[1] "Οι αλλαγές που έγιναν στο έγγραφο τα τελευταία %ld λεπτά θα χαθούν."
 
-#: gedit/gedit-file.c:654
+#: gedit/gedit-file.c:652
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα χαθούν οριστικά."
+msgstr ""
+"Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα θα χαθούν οριστικά."
 
-#: gedit/gedit-file.c:660
+#: gedit/gedit-file.c:658
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1574,80 +1598,79 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και %d λεπτό θα χαθούν."
-msgstr[1] "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και %d  λεπτά θα χαθούν."
+msgstr[0] ""
+"Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και %d λεπτό θα χαθούν."
+msgstr[1] ""
+"Οι αλλαγές που έγιναν στο έγγραφο την τελευταία ώρα και %d  λεπτά θα χαθούν."
 
-#: gedit/gedit-file.c:675
+#: gedit/gedit-file.c:673
 #, fuzzy, c-format
-msgid "Changes made to the document in the last %d hour will be permanently lost."
-msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgid ""
+"Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "Οι αλλαγές που έγιναν στο έγγραφο την τελευταία %d ώρα θα χαθούν."
 msgstr[1] "Οι αλλαγές που έγιναν στο έγγραφο τις τελευταίες %d ώρες θα χαθούν."
 
-#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Επανα_φορά"
 
-#: gedit/gedit-file.c:747
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Σφάλμα επαναφοράς του εγγράφου \"%s\"."
 
-#: gedit/gedit-file.c:754
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Δεν έγινε επαναφορά του εγγράφου  \"%s\"."
 
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Έγινε επαναφορά του εγγράφου  \"%s\"."
 
-#: gedit/gedit-file.c:786
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Γίνεται επαναφορά αρχείου \"%s\"..."
 
-#: gedit/gedit-file.c:921
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "Αδυναμία ανάγνωσης δεδομένων από stdin."
 
-#: gedit/gedit-file.c:971
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Το αρχείο \"%s\" δεν υπάρχει. Θέλετε να το δημιουργήσετε;"
-
-#: gedit/gedit-file.c:1094
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Γίνεται επαναφορά αρχείου:"
 
-#: gedit/gedit-file.c:1098
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Φόρτωση αρχείου:"
 
-#: gedit/gedit-file.c:1267 gedit/gedit-file.c:1426
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Σφάλμα φόρτωσης αρχείου  \"%s\""
 
-#: gedit/gedit-file.c:1288
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Φόρτωμένο αρχείο \"%s\""
 
-#: gedit/gedit-file.c:1365
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Φορτώθηκε %d αρχείο"
 msgstr[1] "Φορτώθηκαν %d αρχεία"
 
-#: gedit/gedit-file.c:1399
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Φόρτωση αρχείου \"%s\"..."
 
-#: gedit/gedit-file.c:1546
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1702,15 +1725,15 @@ msgstr "(τροποποιήθηκε)"
 msgid "(readonly)"
 msgstr "(μόνο ανάγνωση)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "Χρήση Κανονικής λειτουργίας επισήμανσης"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Χρήση %s λειτουργίας επισήμανσης"
@@ -1744,12 +1767,14 @@ msgstr "Σφάλμα, η πρόσθετη εφαρμογή '%s'  δεν περι
 #: gedit/gedit-plugins-engine.c:383
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Σφάλμα, η πρόσθετη εφαρμογή '%s'  δεν περιέχει τη συνάρτηση ενεργοποίησης."
+msgstr ""
+"Σφάλμα, η πρόσθετη εφαρμογή '%s'  δεν περιέχει τη συνάρτηση ενεργοποίησης."
 
 #: gedit/gedit-plugins-engine.c:393
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Σφάλμα, η πρόσθετη εφαρμογή '%s'  δεν περιέχει τη συνάρτηση απενεργοποίησης."
+msgstr ""
+"Σφάλμα, η πρόσθετη εφαρμογή '%s'  δεν περιέχει τη συνάρτηση απενεργοποίησης."
 
 #: gedit/gedit-plugins-engine.c:418
 #, c-format
@@ -1859,7 +1884,7 @@ msgstr "Αντιγραφή"
 
 #: gedit/gedit-ui.xml.h:10
 msgid "Copy the selection"
-msgstr "Αντιγραφή επιλεγμένου"
+msgstr "Αντιγραφή της επιλογής"
 
 #: gedit/gedit-ui.xml.h:11
 msgid "Create a new document"
@@ -1979,7 +2004,7 @@ msgstr "Έξοδος από το πρόγραμμα"
 
 #: gedit/gedit-ui.xml.h:44
 msgid "Redo"
-msgstr "Επανεκτέλεση"
+msgstr "Ακύρωση αναίρεσης"
 
 #: gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
@@ -1991,7 +2016,7 @@ msgstr "Επαναφορά"
 
 #: gedit/gedit-ui.xml.h:48
 msgid "Revert to a saved version of the file"
-msgstr "Επαναφορά σε μια προσφάτως αποθηκευμένη έκδοση του αρχείου"
+msgstr "Επαναφορά σε μια αποθηκευμένη έκδοση του αρχείου"
 
 #: gedit/gedit-ui.xml.h:49
 msgid "Save"
@@ -2046,8 +2071,10 @@ msgid "Select the entire document"
 msgstr "Επιλογή ολόκληρου του εγγράφου"
 
 #: gedit/gedit-ui.xml.h:62
-msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-msgstr "Ορισμός κουμπιού εργαλειοθήκης βάσει των ρυθμίσεων της επιφάνειας εργασίας"
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr ""
+"Ορισμός κουμπιού εργαλειοθήκης βάσει των ρυθμίσεων της επιφάνειας εργασίας"
 
 #: gedit/gedit-ui.xml.h:63
 msgid "Setup the page settings"
@@ -2071,7 +2098,7 @@ msgstr "Κεί_μενο για σημαντικά εικονίδια"
 
 #: gedit/gedit-ui.xml.h:68
 msgid "Undo"
-msgstr "Ακύρωση"
+msgstr "Αναίρεση"
 
 #: gedit/gedit-ui.xml.h:69
 msgid "Undo the last action"
@@ -2179,7 +2206,7 @@ msgstr "_Αποθήκευση Όλων"
 
 #: gedit/gedit-ui.xml.h:97
 msgid "_Search"
-msgstr "Ε_ύρεση"
+msgstr "Α_ναζήτηση"
 
 #: gedit/gedit-ui.xml.h:98
 msgid "_Statusbar"
@@ -2225,7 +2252,8 @@ msgstr ""
 
 #: gedit/gedit-utils.c:426
 #, c-format
-msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" η εφαρμογή δεν μπορεί να "
 "χειριστεί τοποθεσίες %s:."
@@ -2237,7 +2265,8 @@ msgstr "Αδυναμία ανοίγματος του αρχείου \"%s\""
 
 #: gedit/gedit-utils.c:442
 #, c-format
-msgid "Could not open the file \"%s\" because it contains data in an invalid format."
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή περιέχει μη έγκυρο "
 "τύπο δεδομένων."
@@ -2245,7 +2274,8 @@ msgstr ""
 #: gedit/gedit-utils.c:449
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
+msgstr ""
+"Δεν είναι δυνατό το άνοιγμα του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
 
 #: gedit/gedit-utils.c:456
 #, c-format
@@ -2447,7 +2477,8 @@ msgstr ""
 
 #: gedit/gedit-utils.c:793
 #, c-format
-msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή η εφαρμογή δεν μπορεί "
 "να χειριστεί τοποθεσίες%s:."
@@ -2469,7 +2500,8 @@ msgstr ""
 #: gedit/gedit-utils.c:816
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
+msgstr ""
+"Δεν είναι δυνατή η επαναφορά του αρχείου \"%s\" επειδή είναι πολύ μεγάλο."
 
 #: gedit/gedit-utils.c:823
 #, c-format
@@ -2634,17 +2666,28 @@ msgstr "  ΑΝΤ"
 msgid "  INS"
 msgstr "  ΕΙΣ"
 
-#: gedit/gedit2.c:82
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
+
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Έξοδος από υπάρχουσα εκτέλεση του gedit"
 
-#: gedit/gedit2.c:85
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Δημιουργία νέου παραθύρου σε υπάρχουσα εκτέλεση του gedit"
 
-#: gedit/gedit2.c:88
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Δημιουργία νέου εγγράφου σε υπάρχουσα εκτέλεση του gedit"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
 
 #: plugins/changecase/changecase.c:43
 #, fuzzy
@@ -2672,12 +2715,12 @@ msgstr "Τίτλος"
 #: plugins/changecase/changecase.c:54
 #, fuzzy
 msgid "Change selected text to upper case"
-msgstr "Επιλογή του επιλεγμένου κειμένου στο πρόχειρο"
+msgstr "Μετατροπή του επιλεγμένου κειμένου σε κεφαλαία"
 
 #: plugins/changecase/changecase.c:55
 #, fuzzy
 msgid "Change selected text to lower case"
-msgstr "Επιλογή του επιλεγμένου κειμένου στο πρόχειρο"
+msgstr "Μετατροπή του επιλεγμένου κειμένου σε πεζά"
 
 #: plugins/changecase/changecase.c:56
 #, fuzzy
@@ -3009,7 +3052,7 @@ msgstr "Esperanto"
 
 #: plugins/spell/gedit-spell-checker.c:90
 msgid "Spanish"
-msgstr "Spanish"
+msgstr "Ισπανική"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "Faroese"
@@ -3025,19 +3068,19 @@ msgstr "French (Swiss)"
 
 #: plugins/spell/gedit-spell-checker.c:94
 msgid "Italian"
-msgstr "Italian"
+msgstr "Ιταλική"
 
 #: plugins/spell/gedit-spell-checker.c:95
 msgid "Dutch"
-msgstr "Dutch"
+msgstr "Ολλανδική"
 
 #: plugins/spell/gedit-spell-checker.c:96
 msgid "Norwegian"
-msgstr "Norwegian"
+msgstr "Νορβηγική"
 
 #: plugins/spell/gedit-spell-checker.c:97
 msgid "Polish"
-msgstr "Polish"
+msgstr "Πολωνική"
 
 #: plugins/spell/gedit-spell-checker.c:98
 msgid "Portuguese (Portugal)"
@@ -3049,15 +3092,15 @@ msgstr "Portuguese (Brazilian)"
 
 #: plugins/spell/gedit-spell-checker.c:100
 msgid "Russian"
-msgstr "Russian"
+msgstr "Ρωσική"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Swedish"
-msgstr "Swedish"
+msgstr "Σουηδική"
 
 #: plugins/spell/gedit-spell-checker.c:102
 msgid "Ukrainian"
-msgstr "Ukrainian"
+msgstr "Ουκρανική"
 
 #: plugins/spell/gedit-spell-checker.c:735
 msgid "Default"
@@ -3284,13 +3327,16 @@ msgstr "_Χρήση προσαρμοσμένου τύπου"
 
 #: viewer/gedit-persist-stream.c:44
 msgid "Save method not implemented for gedit viewer"
-msgstr "Η μέθοδος αποθήκευσης δεν έχει ακόμα εφαρμοστεί για την προβολή του gedit"
+msgstr ""
+"Η μέθοδος αποθήκευσης δεν έχει ακόμα εφαρμοστεί για την προβολή του gedit"
 
 #: viewer/gedit-viewer-ui.xml.h:1
 msgid "Copy the selected text to the clipboard"
-msgstr "Επιλογή του επιλεγμένου κειμένου στο πρόχειρο"
+msgstr "Αντιγραφή του επιλεγμένου κειμένου στο πρόχειρο"
 
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Αντιγραφή κειμένου"
 
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "Το αρχείο \"%s\" δεν υπάρχει. Θέλετε να το δημιουργήσετε;"
