@@ -1,15 +1,22 @@
 # Translation of gedit to Croatian
 # Copyright (C) Croatian team
 # Translators: Automatski Prijevod <>,Denis Lackovic <delacko@fly.srk.fer.hr>,Robert Sedak <robert.sedak@sk.tel.hr>,pr pr <delacko@192.168.0.1>,
+
+# Translation of gedit to Croatian
+# Copyright (C) Croatian team
+# Translators: Automatski Prijevod <>,Denis Lackovic <delacko@fly.srk.fer.hr>,Robert Sedak <robert.sedak@sk.tel.hr>,pr pr <delacko@192.168.0.1>,
+# Translation of gedit to Croatian
+# Copyright (C) Croatian team
+# Translators: Automatski Prijevod <>,Denis Lackovic <delacko@fly.srk.fer.hr>,Robert Sedak <robert.sedak@sk.tel.hr>,pr pr <delacko@192.168.0.1>,
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0\n"
-"POT-Creation-Date: 2003-11-06 18:07+0100\n"
-"PO-Revision-Date: 2003-12-30 20:45+CET\n"
-"Last-Translator: auto\n"
+"POT-Creation-Date: 2004-01-02 14:42+0100\n"
+"PO-Revision-Date: 2004-01-02 20:47+CET\n"
+"Last-Translator: Robert Sedak <robert.sedak@sk.tel.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: TransDict server\n"
 
@@ -456,7 +463,7 @@ msgstr ""
 "isključena, pismo navedeno u postavci \"Pismo uređivača\" će biti korišteno umjesto "
 "sustavskog pisma."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1965
 msgid "Activate %s"
 msgstr "U�itana datoteka %s"
 
@@ -493,7 +500,7 @@ msgstr "_Zamjeni sve"
 
 #. Add Replace button
 #: gedit/dialogs/gedit-dialog-replace.c:282
-#: gedit/gedit-file-selector-util.c:131
+#: gedit/gedit-file-selector-util.c:144
 msgid "_Replace"
 msgstr "_Zamijeni"
 
@@ -501,10 +508,13 @@ msgstr "_Zamijeni"
 msgid "Find"
 msgstr "Nađi"
 
+#. plural form
 #: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
-msgid "Found and replaced %d occurrences."
-msgstr "Pronađeno i zamijenjeno %d pojava."
+msgid "Found and replaced %d occurrence."
+msgid_plural "Found and replaced %d occurrences."
+msgstr[0] "Pronađena i zamijenjena %d pojava."
+msgstr[1] "Pronađeno i zamijenjeno %d pojava."
 
 #: gedit/dialogs/gedit-dialog-uri.c:87
 msgid "Open Location"
@@ -1119,46 +1129,46 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit je mali i lagani uređivač teksta za GNOME radnu površinu"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
 msgid "%s %d"
 msgstr "    --force                    - registracija sustava čak i ako je već registriran"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
 msgid "Untitled"
 msgstr "Bez naslova"
 
-#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
+#: gedit/gedit-document.c:608 gedit/gedit-document.c:655
 msgid "Invalid file name"
 msgstr "Pogrešno ime datoteke"
 
-#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: gedit/gedit-document.c:824 gedit/gedit-document.c:930
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Neispravni UTF-8 podaci"
 
-#: gedit/gedit-document.c:1210
+#: gedit/gedit-document.c:1229
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Ne mogu pročitati podatke o simboličkom linku za %s"
 
-#: gedit/gedit-document.c:1256
+#: gedit/gedit-document.c:1275
 msgid "The file has too many symbolic links."
 msgstr "Datoteka ima previše simboličkih veza."
 
-#: gedit/gedit-document.c:1312
+#: gedit/gedit-document.c:1331
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ne može rukovati s %s: adrese za pisanje."
 
-#: gedit/gedit-document.c:1319
+#: gedit/gedit-document.c:1338
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ne može rukovati s ovom vrstom lokacije za pisanje"
 
-#: gedit/gedit-document.c:1332
+#: gedit/gedit-document.c:1351
 msgid "Invalid filename."
 msgstr "Nevaljani naziv datoteke."
 
-#: gedit/gedit-document.c:1444
+#: gedit/gedit-document.c:1463
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1166,7 +1176,7 @@ msgstr ""
 "Nema dovoljno prostora na disku za spremanje datoteku.\n"
 "Molimo da oslobodite prostor na disku i pokušate ponovo."
 
-#: gedit/gedit-document.c:1449
+#: gedit/gedit-document.c:1468
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1176,11 +1186,11 @@ msgstr ""
 "datoteka. Molimo da snimite manju datoteku ili da je snimite na disk "
 "koji nema ovo ograničenje."
 
-#: gedit/gedit-document.c:1493
+#: gedit/gedit-document.c:1512
 msgid "Could not create a backup file."
 msgstr "Ne mogu stvoriti sigurnosnu kopiju."
 
-#: gedit/gedit-document.c:1613
+#: gedit/gedit-document.c:1633
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nije moguće povratiti dokument bez imena"
 
@@ -1309,68 +1319,68 @@ msgstr "Vijetnamska"
 msgid "Thai"
 msgstr "Tajlandski"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:162
 #, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Datoteka \"%s\" već postoji.\n"
-"Želite li je zamijeniti ovom koju pokušavate spremiti?"
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Datoteka \"%s\" već postoji.\n"
 
-#: gedit/gedit-file-selector-util.c:160
+#: gedit/gedit-file-selector-util.c:163
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Želite li zamijeniti ovom koju spremate?"
+
+#: gedit/gedit-file-selector-util.c:172
 #, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"Datoteka \"%s\" se može samo čitati.\n"
-"Želite li je zamijeniti sa ovom koju pokušavate spremiti?"
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Datoteka \"%s\" se moze samo citati.\n"
 
-#: gedit/gedit-file-selector-util.c:283
+#: gedit/gedit-file-selector-util.c:173
+msgid "Do you want to try to replace it with the one you are saving?"
+msgstr "Želite li pokušati zamijeniti sa ovom koju spremate?"
+
+#: gedit/gedit-file-selector-util.c:445
 msgid "Ch_aracter Coding:"
 msgstr "Kodiranje zn_akova:"
 
-#: gedit/gedit-file-selector-util.c:460
+#: gedit/gedit-file-selector-util.c:569
 msgid "Select a file to open"
 msgstr "Odaberi datoteku"
 
-#: gedit/gedit-file-selector-util.c:489
+#: gedit/gedit-file-selector-util.c:595
 msgid "Select files to open"
 msgstr "Izaberite datoteke za otvaranje"
 
-#: gedit/gedit-file-selector-util.c:519
+#: gedit/gedit-file-selector-util.c:622
 msgid "Select a filename to save"
 msgstr "Izaberite ime datoteke za spremanje"
 
-#: gedit/gedit-file.c:155
+#: gedit/gedit-file.c:157
 msgid "Open File..."
 msgstr "Otvori datoteku..."
 
-#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#: gedit/gedit-file.c:185 gedit/gedit-file.c:908
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Datoteka \"%s\" je učitana"
 
-#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#: gedit/gedit-file.c:323 gedit/gedit-file.c:472
 #, c-format
 msgid "Saving file '%s'..."
 msgstr "Spremam datoteku \"%s\"..."
 
-#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+#: gedit/gedit-file.c:351 gedit/gedit-file.c:487
 msgid "The document has not been saved."
 msgstr "Dokument nije spremljen."
 
-#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#: gedit/gedit-file.c:365 gedit/gedit-file.c:484
 #, c-format
 msgid "File '%s' saved."
 msgstr "Datoteka \"%s\" je spremljena."
 
-#: gedit/gedit-file.c:444
+#: gedit/gedit-file.c:451
 msgid "Save as..."
 msgstr "Spremi kao..."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:645
 #, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
@@ -1381,111 +1391,124 @@ msgstr ""
 "\n"
 "Nećete moći poništiti ovu operaciju."
 
-#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:655 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "_Vrati"
 
-#: gedit/gedit-file.c:683
+#: gedit/gedit-file.c:689
 #, c-format
 msgid "Reverting file '%s'..."
 msgstr "Vraćam datoteku \"%s\"..."
 
-#: gedit/gedit-file.c:696
+#: gedit/gedit-file.c:702
 msgid "The document has not been reverted."
 msgstr "Dokument nije vraćen."
 
-#: gedit/gedit-file.c:706
+#: gedit/gedit-file.c:712
 #, c-format
-msgid "File '%s' reverted."
-msgstr "Datoteka \"%s\" je vraćena."
+msgid "File '%s' has been reverted."
+msgstr "Datoteka '%s' je vraćena."
 
-#: gedit/gedit-file.c:732
+#. plural form
+#: gedit/gedit-file.c:738
 #, c-format
-msgid "Loading %d files..."
-msgstr "Učitavanje %d datoteka..."
+msgid "Loading %d file..."
+msgid_plural "Loading %d files..."
+msgstr[0] "Učitavanje %d datoteke..."
+msgstr[1] "Učitavanje %d datoteka..."
 
-#: gedit/gedit-file.c:768
+#: gedit/gedit-file.c:777
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Datoteka \"%s\" ne postoji. Želite li je napraviti?"
 
-#: gedit/gedit-file.c:823
+#: gedit/gedit-file.c:832
 #, c-format
 msgid "Loaded %i files"
 msgstr "Učitano %i datoteka"
 
-#: gedit/gedit-file.c:957
+#: gedit/gedit-file.c:966
 msgid "Could not read data from stdin."
 msgstr "Ne mogu pročitati podatke sa standardnog ulaza."
 
 #. Read only
-#: gedit/gedit-mdi-child.c:238
+#: gedit/gedit-mdi-child.c:246
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:582 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "Pre_mijesti u novi prozor"
 
-#: gedit/gedit-mdi-child.c:664
+#: gedit/gedit-mdi-child.c:672
 msgid "Unknown"
 msgstr "Napoznato"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:680
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
+#: gedit/gedit-mdi-child.c:687
+msgid "Name:"
+msgstr "Ime:"
+
+#: gedit/gedit-mdi-child.c:688
+msgid "MIME Type:"
+msgstr "MIME tip:"
+
+#: gedit/gedit-mdi-child.c:689
+msgid "Encoding:"
+msgstr "Kodiranje:"
+
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:414
+#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
 #, c-format
 msgid "Open '%s'"
 msgstr "Otvori '%s'"
 
-#: gedit/gedit-mdi.c:488
+#: gedit/gedit-mdi.c:491
 msgid "Open a recently used file"
 msgstr "Otvori nedavno korištenu datoteku"
 
-#: gedit/gedit-mdi.c:994
+#: gedit/gedit-mdi.c:1006
 #, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Želite li spremiti promjene dokumenta \"%s\"? \n"
-"\n"
-"Promjene će biti izgubljene ukoliko ih ne spremite."
+msgid "Do you want to save the changes you made to the document \"%s\"?"
+msgstr "Želite li spremiti promjene koje ste napravili na dokumentu \"%s\"?"
 
-#: gedit/gedit-mdi.c:999
-msgid "Do_n't save"
-msgstr "_Ne spremaj"
+#: gedit/gedit-mdi.c:1014
+msgid "Your changes will be lost if you don't save them."
+msgstr "Promjene će biti izgubljene ukoliko ih ne spremite."
 
-#: gedit/gedit-mdi.c:1018
+#: gedit/gedit-mdi.c:1022
 msgid "_Don't quit"
 msgstr "Nemoj _izaći"
 
-#: gedit/gedit-mdi.c:1022
+#: gedit/gedit-mdi.c:1026
 msgid "_Don't close"
 msgstr "Nemoj _zatvoriti"
 
-#: gedit/gedit-mdi.c:1115
+#: gedit/gedit-mdi.c:1030
+msgid "Do_n't save"
+msgstr "_Ne spremaj"
+
+#: gedit/gedit-mdi.c:1122
 msgid "(modified)"
 msgstr "(izmjenjeno)"
 
-#: gedit/gedit-mdi.c:1121
+#: gedit/gedit-mdi.c:1128
 msgid "(readonly)"
 msgstr "(samo za čitanje)"
 
-#: gedit/gedit-mdi.c:1716
+#: gedit/gedit-mdi.c:1734
 msgid "Normal"
 msgstr "Obično"
 
-#: gedit/gedit-mdi.c:1717
+#: gedit/gedit-mdi.c:1735
 msgid "Use Normal highlight mode"
 msgstr "Koristi običan način isticanja"
 
-#: gedit/gedit-mdi.c:1793
+#: gedit/gedit-mdi.c:1811
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Koristi %s način isticanja"
