@@ -451,8 +451,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 		GdkPixbuf* temp_pixbuf = NULL;
 
 		temp_pixbuf = gdk_pixbuf_scale_simple (pixbuf, 
-					 gdk_pixbuf_get_width (pixbuf) / 2,
-					 gdk_pixbuf_get_height (pixbuf) / 2,
+					 gdk_pixbuf_get_width (pixbuf),
+					 gdk_pixbuf_get_height (pixbuf),
 					 GDK_INTERP_HYPER);
 		g_object_unref (pixbuf);
 

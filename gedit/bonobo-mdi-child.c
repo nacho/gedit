@@ -40,7 +40,7 @@ static void       bonobo_mdi_child_class_init       (BonoboMDIChildClass *klass)
 static void       bonobo_mdi_child_instance_init    (BonoboMDIChild *);
 static void       bonobo_mdi_child_finalize         (GObject *);
 
-static GtkWidget *bonobo_mdi_child_set_label        (BonoboMDIChild *, GtkWidget *, gpointer);
+static GtkWidget *bonobo_mdi_child_set_label        (BonoboMDIChild *, GtkWidget *, GtkWidget *, gpointer);
 static GtkWidget *bonobo_mdi_child_create_view      (BonoboMDIChild *);
 
 static void bonobo_mdi_child_real_name_changed (BonoboMDIChild *child, gchar* old_name);
@@ -125,10 +125,11 @@ bonobo_mdi_child_instance_init (BonoboMDIChild *mdi_child)
  * should (obviously) NOT call the parent class handler!
  */
 static GtkWidget *
-bonobo_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *old_label, gpointer data)
+bonobo_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view, GtkWidget *old_label, gpointer data)
 {
 	g_return_val_if_fail (BONOBO_IS_MDI_CHILD (child), NULL);
 	g_return_val_if_fail (child->priv != NULL, NULL);
+	g_return_val_if_fail (view != NULL, NULL);
 
 	if (old_label != NULL) 
 	{

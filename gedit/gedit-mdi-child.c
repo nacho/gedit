@@ -32,10 +32,12 @@
 #include "gedit-debug.h"
 #include "gedit-view.h"
 #include "gedit-marshal.h"
+#include "gedit-file.h"
+#include "gedit2.h"
 
 struct _GeditMDIChildPrivate
 {
-	GtkWidget *tab_label;
+	gint dummy;
 };
 
 enum {
@@ -61,7 +63,13 @@ static void gedit_mdi_child_document_can_undo_redo_handler (GeditDocument *docum
 						gboolean can, GeditMDIChild* child);
 
 static gchar* gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data);
-		
+
+
+static GtkWidget * gedit_mdi_child_set_label (BonoboMDIChild *child,
+					      GtkWidget *view,					
+                                              GtkWidget *old_label,
+					      gpointer data);
+
 static BonoboMDIChildClass *parent_class = NULL;
 static guint mdi_child_signals[LAST_SIGNAL] = { 0 };
 
@@ -132,6 +140,10 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 
 	BONOBO_MDI_CHILD_CLASS (klass)->get_config_string = 
 		(BonoboMDIChildConfigFunc)(gedit_mdi_child_get_config_string);
+
+	BONOBO_MDI_CHILD_CLASS (klass)->set_label = 
+		(BonoboMDIChildLabelFunc)(gedit_mdi_child_set_label);
+
 }
 
 static void 
@@ -140,8 +152,6 @@ gedit_mdi_child_init (GeditMDIChild  *child)
 	gedit_debug (DEBUG_MDI, "START");
 
 	child->priv = g_new0 (GeditMDIChildPrivate, 1);
-
-	child->priv->tab_label = NULL;
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -352,4 +362,78 @@ gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data)
 	c = GEDIT_MDI_CHILD (child);
 	
 	return gedit_document_get_raw_uri (c->document);
+}
+
+static void
+gedit_mdi_child_tab_close_clicked (GtkWidget *button, GtkWidget *view)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	
+	gedit_file_close (view);
+}
+
+static GtkWidget *
+gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *old_hbox,
+                           gpointer data)
+{
+	GtkWidget *ret;
+	gchar *name;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_val_if_fail (child != NULL, NULL);
+	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), NULL);
+
+	name = bonobo_mdi_child_get_name (child);
+
+	if (old_hbox != NULL) 
+	{
+		GtkWidget *label = g_object_get_data (G_OBJECT (old_hbox),
+				"label");
+		gtk_label_set_text (GTK_LABEL (label), name);
+		ret = old_hbox;
+	} 
+	else 
+	{
+		GtkWidget *hbox;
+		GtkWidget *label;
+		GtkWidget *button;
+		GtkWidget *image;
+		gint w, h;
+
+		gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+
+		label = gtk_label_new (name);
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+
+		button = gtk_button_new ();
+				
+		g_signal_connect (button, "clicked",
+				  G_CALLBACK (gedit_mdi_child_tab_close_clicked),
+				  view);
+		
+		gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+		image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
+		gtk_widget_set_size_request (button, w + 2, h + 2);
+
+		gtk_container_add (GTK_CONTAINER (button), image);
+
+		hbox = gtk_hbox_new (FALSE, 2);
+		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+		
+		g_object_set_data (G_OBJECT (hbox), "label", label);
+
+		gtk_widget_show_all (hbox);
+		ret = hbox;
+	}
+
+	g_free (name);
+
+	return ret;
 }

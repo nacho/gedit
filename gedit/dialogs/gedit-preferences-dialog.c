@@ -58,6 +58,7 @@
 #define LINE_NUMBERS_SETTINGS	7
 #define PRINT_FONTS_SETTINGS	8
 #define PLUGIN_MANAGER_SETTINGS 9
+#define LOAD_SETTINGS		10
 
 enum
 {
@@ -210,6 +211,7 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
 	{N_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
 	
+	{N_("Load"), NULL, LOAD_SETTINGS },
  	{N_("Save"), NULL, SAVE_SETTINGS },
 	{N_("Undo"), NULL, UNDO_SETTINGS},
 
@@ -299,11 +301,12 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	gedit_preferences_dialog_add_buttons (dlg);	
 	
-	hbox = gtk_hbox_new (FALSE, 12);
+	hbox = gtk_hbox_new (FALSE, 18);
 	
-	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-	
-	r = gtk_vbox_new (FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (dlg), 12);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 12);
+
+	r = gtk_vbox_new (FALSE, 6);
 	
 	label = gtk_label_new_with_mnemonic (_("Cat_egories:"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
@@ -311,7 +314,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	ct = gedit_preferences_dialog_create_categories_tree (dlg);
 		
-	gtk_box_pack_start (GTK_BOX (r), label, FALSE, FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (r), label, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (r), ct, TRUE, TRUE, 0);
 
 	l = gedit_preferences_dialog_create_notebook (dlg);

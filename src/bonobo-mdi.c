@@ -86,7 +86,7 @@ static gboolean        toplevel_focus           (BonoboWindow *, GdkEventFocus *
 static void            set_active_view          (BonoboMDI *, GtkWidget *);
 
 /* convenience functions that call child's "virtual" functions */
-static GtkWidget      *child_set_label         (BonoboMDIChild *, GtkWidget *);
+static GtkWidget      *child_set_label         (BonoboMDIChild *, GtkWidget *, GtkWidget *);
 
 static void 	       child_name_changed 	(BonoboMDIChild *mdi_child, 
 						 gchar* old_name, 
@@ -408,10 +408,10 @@ bonobo_mdi_new (const gchar *mdi_name, const gchar *title,
 }
 
 static GtkWidget *
-child_set_label (BonoboMDIChild *child, GtkWidget *label)
+child_set_label (BonoboMDIChild *child, GtkWidget *view, GtkWidget *label)
 {
 	GtkWidget *w;
-	w = BONOBO_MDI_CHILD_GET_CLASS (child)->set_label (child, label, NULL);
+	w = BONOBO_MDI_CHILD_GET_CLASS (child)->set_label (child, view, label, NULL);
 	
 	return w;
 }
@@ -875,7 +875,7 @@ book_add_view (GtkNotebook *book, GtkWidget *view)
 
 	child = bonobo_mdi_get_child_from_view (view);
 
-	title = child_set_label (child, NULL);
+	title = child_set_label (child, view, NULL);
 
 	gtk_notebook_append_page (book, view, title);
 
@@ -1834,7 +1834,7 @@ bonobo_mdi_update_child (BonoboMDI *mdi, BonoboMDIChild *child)
 	{
 		view = GTK_WIDGET (view_node->data);
 
-		title = child_set_label (child, NULL);
+		title = child_set_label (child, view, NULL);
 		
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (view->parent), view, title);
 		

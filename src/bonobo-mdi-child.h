@@ -55,7 +55,7 @@ typedef struct
 typedef GtkWidget *(*BonoboMDIChildViewCreator) (BonoboMDIChild *, gpointer);
 typedef GList     *(*BonoboMDIChildMenuCreator) (BonoboMDIChild *, GtkWidget *, gpointer);
 typedef gchar     *(*BonoboMDIChildConfigFunc)  (BonoboMDIChild *, gpointer);
-typedef GtkWidget *(*BonoboMDIChildLabelFunc)   (BonoboMDIChild *, GtkWidget *, gpointer);
+typedef GtkWidget *(*BonoboMDIChildLabelFunc)   (BonoboMDIChild *, GtkWidget *, GtkWidget *, gpointer);
 
 /* 
  * Note that if you override the set_label virtual function, it should return

@@ -1,3 +1,22 @@
+2002-08-30  Paolo Maggi  <maggi@athena.polito.it>
+
+	* bonobo-mdi-child.[ch]: added a view parameter to 
+	bonobo_mdi_child_set_label 
+
+	* bonobo-mdi.c: ditto
+
+	* gedit-commands.c (gedit_cmd_help_about): use the new logo
+
+	* gedit-mdi-child.c (gedit_mdi_child_set_label)(gedit_mdi_child_tab_close_clicked): 
+	added a close button to the tab label 
+	(thanks to James Willcox for the initial patch)
+
+	* gedit-ui.xml: removed the close button from the toolbar
+	
+	* dialogs/gedit-preferences-dialog.c: updated for HIG compliance, added a load tab
+	
+	* dialogs/gedit-preferences.glade2: ditto
+
 2002-08-28  Paolo Maggi  <maggi@athena.polito.it>
 
 	Fix bug #91791
