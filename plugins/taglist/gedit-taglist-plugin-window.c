@@ -151,7 +151,7 @@ void taglist_window_show ()
 
 	gtk_tooltips_set_tip (gtk_tooltips_new (),
 			GTK_COMBO (tag_list_window->tag_groups_combo)->entry,
-			_("Select the group of tab you want to use"),
+			_("Select the group of tags you want to use"),
 			NULL);
 	
 	gtk_editable_set_editable (GTK_EDITABLE (
