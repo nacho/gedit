@@ -12,4 +12,4 @@ if HAVE_GNOME
 spell = spell
 endif
 
-SUBDIRS = cvsdiff diff email encrypt reverse $(spell) prm
+SUBDIRS = cvsdiff diff email encrypt reverse $(spell) prm convert
