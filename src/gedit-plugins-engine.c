@@ -60,6 +60,11 @@ static GeditPlugin 	*gedit_plugins_engine_load 	(const gchar *file);
 static GeditPluginInfo  *gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin);
 static void		 gedit_plugins_engine_reactivate_all (void);
 
+static void 		 gedit_plugins_engine_active_plugins_changed (GConfClient *client,
+								      guint cnxn_id, 
+								      GConfEntry *entry, 
+								      gpointer user_data);
+
 static GList *gedit_plugins_list = NULL;
 
 static GConfClient *gedit_plugins_engine_gconf_client = NULL;
@@ -79,7 +84,12 @@ gedit_plugins_engine_init (void)
 			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
 			      GCONF_CLIENT_PRELOAD_ONELEVEL,
 			      NULL);
-	
+
+	gconf_client_notify_add (gedit_plugins_engine_gconf_client,
+				 GEDIT_PLUGINS_ENGINE_BASE_KEY,
+				 gedit_plugins_engine_active_plugins_changed,
+				 NULL, NULL, NULL);
+
 	gedit_plugins_engine_load_all ();
 
 	return TRUE;
@@ -283,7 +293,7 @@ gedit_plugins_engine_load (const gchar *file)
 		goto error;
 	}
 
-	key = g_strdup_printf ("%s%s", 
+	key = g_strdup_printf ("%s/%s", 
 			GEDIT_PLUGINS_ENGINE_BASE_KEY, 
 			plugin->location);
 
@@ -547,7 +557,7 @@ gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 	/* Update plugin state */
 	info->state = GEDIT_PLUGIN_ACTIVATED;
 
-	key = g_strdup_printf ("%s%s", 
+	key = g_strdup_printf ("%s/%s", 
 			       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
 			       plugin->location);
 
@@ -573,7 +583,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 	info = gedit_plugins_engine_find_plugin_info (plugin);
 	g_return_val_if_fail (info != NULL, FALSE);
 	
-	/* Activate plugin */
+	/* Deactivate plugin */
 	res = plugin->deactivate (plugin);
 	if (res != PLUGIN_OK)
 	{
@@ -586,7 +596,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 	/* Update plugin state */
 	info->state = GEDIT_PLUGIN_DEACTIVATED;
 
-	key = g_strdup_printf ("%s%s", 
+	key = g_strdup_printf ("%s/%s", 
 			       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
 			       plugin->location);
 
@@ -706,3 +716,86 @@ gedit_plugins_engine_configure_plugin (GeditPlugin *plugin, GtkWidget* parent)
 	
 	return (plugin->configure (plugin, parent) == PLUGIN_OK);
 }
+
+static void 
+gedit_plugins_engine_active_plugins_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	GList *pl;
+	gboolean to_activate;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+	
+	if (entry->value->type == GCONF_VALUE_BOOL)
+		to_activate = gconf_value_get_bool (entry->value);
+	else
+		return;
+
+	pl = gedit_plugins_list;
+
+	while (pl)
+	{
+		gchar *key;
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		key = g_strdup_printf ("%s/%s", 
+				       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+				       info->plugin->location);
+
+		if (strcmp (entry->key, key) == 0)
+		{
+			if ((info->state == GEDIT_PLUGIN_DEACTIVATED) && to_activate)
+			{
+				/* Activate plugin */
+				gint r = PLUGIN_OK;
+				gboolean res = TRUE;
+		       
+				if (info->plugin->handle == NULL)
+					res = load_plugin_module (info->plugin);
+
+				if (res)
+					r = info->plugin->activate (info->plugin);
+			
+				if (!res || (r != PLUGIN_OK))
+				{
+					g_warning (_("Error, impossible to activate plugin '%s'"),
+			   			info->plugin->name);
+				}
+				else
+					/* Update plugin state */
+					info->state = GEDIT_PLUGIN_ACTIVATED;
+
+			}
+			else
+				if ((info->state == GEDIT_PLUGIN_ACTIVATED) && !to_activate)
+				{
+					gint r;
+
+					/* Deactivate plugin */
+					r = info->plugin->deactivate (info->plugin);
+					
+					if (r != PLUGIN_OK)
+					{
+						g_warning (_("Error, impossible to deactivate plugin '%s'"),
+						   	info->plugin->name);
+					}
+					else	
+						/* Update plugin state */
+						info->state = GEDIT_PLUGIN_DEACTIVATED;
+				}
+			
+			g_free (key);
+			return;
+		}
+
+		g_free (key);
+		
+		pl = g_list_next (pl);
+	}
+}
+
+
+
