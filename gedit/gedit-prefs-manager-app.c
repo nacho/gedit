@@ -689,13 +689,11 @@ gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
-	g_print ("Pippo");
 	if (strcmp (entry->key, GPM_HIGHLIGHT_CURRENT_LINE) == 0)
 	{
 		gboolean hl;
 			
 		GList *children;
-		g_print ("Pluto");
 
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			hl = gconf_value_get_bool (entry->value);	

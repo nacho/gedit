@@ -1,3 +1,26 @@
+2005-01-10  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #145085: Tag list plugin is not localized.
+	Patch by Takao Fujiwara <Takao.Fujiwara@sun.com>
+
+	* taglist/HTML.tags: removed
+
+	* taglist/HTML.tags.xml.in: new file
+
+	* taglist/Latex.tags: removed
+
+	* taglist/Latex.tags.xml.in: new file
+
+	* taglist/Makefile.am: generate .tags file from .tags.xml.in files
+
+	* taglist/XSLT.tags: removed
+
+	* taglist/XSLT.tags.xml.in: new file
+
+	* taglist/gedit-taglist-plugin-parser.c (get_tag_group)
+	(lookup_best_lang) (parse_taglist_file): fixed the .tags file parser
+	to read translated names
+
 2004-12-05  Paolo Maggi  <paolo@gnome.org>
 
 	Fixed bug #160411: Misspelled word in spellchecker dialog

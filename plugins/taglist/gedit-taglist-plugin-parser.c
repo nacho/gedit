@@ -39,6 +39,7 @@
 #include <errno.h>
 
 #include <libgnome/gnome-util.h>
+#include <libgnome/gnome-i18n.h> /* gnome_i18n_get_language_list */
 
 #include <gedit/gedit-debug.h>
 
@@ -51,6 +52,10 @@ TagList *taglist = NULL;
 static gboolean	 parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
 static gboolean	 parse_tag_group (TagGroup *tg, const gchar *fn, 
 				  xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
+static TagGroup* get_tag_group (const gchar* filename, xmlDocPtr doc, 
+				xmlNsPtr ns, xmlNodePtr cur);
+static TagList* lookup_best_lang (TagList *taglist, const gchar *filename, 
+				xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
 static TagList 	*parse_taglist_file (const gchar* filename);
 static TagList  *parse_taglist_dir (const gchar *dir);
 
@@ -161,6 +166,209 @@ parse_tag_group (TagGroup *tg, const gchar* fn, xmlDocPtr doc,
 }
 
 
+static TagGroup*
+get_tag_group (const gchar* filename, xmlDocPtr doc, 
+		 xmlNsPtr ns, xmlNodePtr cur) 
+{
+			TagGroup *tag_group;
+
+
+			tag_group = g_new0 (TagGroup, 1);
+
+			/* Get TagGroup name */
+			tag_group->name = xmlGetProp (cur, (const xmlChar *) "name");
+
+			if (tag_group->name == NULL)
+			{
+				/* Error: No name */
+				g_warning ("The tag list file '%s' is of the wrong type, "
+				   "TagGroup without name.", filename);
+
+				g_free (tag_group);
+			}
+			else
+			{
+				/* Name found */
+				gboolean exists = FALSE;
+				GList *t = taglist->tag_groups;
+				
+				/* Check if the tag group already exists */
+				while (t && !exists)
+				{
+					gchar *tgn = (gchar*)((TagGroup*)(t->data))->name;
+					
+					if (strcmp (tgn, (gchar*)tag_group->name) == 0)
+					{
+						gedit_debug (DEBUG_PLUGINS, 
+							     "Tag group '%s' already exists.", tgn);
+						
+						exists = TRUE;
+
+						free_tag_group (tag_group);
+					}
+					
+					t = g_list_next (t);		
+				}
+
+				if (!exists)
+				{				
+					/* Parse tag group */
+					if (parse_tag_group (tag_group, filename, doc, ns, cur))
+					{
+						return tag_group;
+					}
+					else
+					{
+						/* Error parsing TagGroup */
+						g_warning ("The tag list file '%s' is of the wrong type, "
+				   			   "error parsing TagGroup '%s'.", 
+							   filename, tag_group->name);
+
+						free_tag_group (tag_group);
+					}
+				}
+			}
+	return NULL;
+}
+
+
+/* 
+ *  tags file is localized by intltool-merge below.
+ *
+ *      <gedit:TagGroup name="XSLT - Elements">
+ *      </gedit:TagGroup>
+ *      <gedit:TagGroup xml:lang="am" name="LOCALIZED TEXT">
+ *      </gedit:TagGroup>
+ *      <gedit:TagGroup xml:lang="ar" name="LOCALIZED TEXT">
+ *      </gedit:TagGroup>
+ *      .....
+ *      <gedit:TagGroup name="XSLT - Functions">
+ *      </gedit:TagGroup>
+ *      .....
+ *  Therefore need to pick up the best lang on the current locale.
+ */
+static TagList*
+lookup_best_lang (TagList *taglist, const gchar *filename, 
+		xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur) 
+{
+
+	TagGroup *best_tag_group = NULL;
+	TagGroup *tag_group;
+	gint best_lanking = -1;
+
+	/*
+	 * Walk the tree.
+	 *
+	 * First level we expect a list TagGroup 
+	 */
+	cur = cur->xmlChildrenNode;
+	
+	while (cur != NULL)
+     	{ 	
+		if ((xmlStrcmp (cur->name, (const xmlChar *) "TagGroup")) || (cur->ns != ns)) 
+		{
+			g_warning ("The tag list file '%s' is of the wrong type, "
+				   "was '%s', 'TagGroup' expected.", filename, cur->name);
+			xmlFreeDoc (doc);
+		
+			return taglist;
+		}
+		else
+		{
+			/*
+			 * I'm not sure but the latest GNOME may change 
+			 * gnome_i18n_get_language_list to
+			 * g_i18n_get_language_list.
+			 */
+			const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
+
+			gchar* lang= (gchar*)xmlGetProp (cur, (const xmlChar*) "lang");
+			gint cur_lanking = 1;
+
+			/* 
+			 * When found a new TagGroup, append the best 
+			 * tag_group to taglist. In the current intltool-merge, 
+			 * the first section is the default lang NULL.
+			 */
+			if (lang == NULL) {
+				if (best_tag_group != NULL) {
+					taglist->tag_groups = 
+					g_list_append (taglist->tag_groups, best_tag_group);
+				}
+
+				best_tag_group = NULL;
+				best_lanking = -1;
+			}
+
+			/* 
+			 * If already find the best TagGroup on the current 
+			 * locale, ignore the logic.
+			 */
+			if (best_lanking != -1 && best_lanking <= cur_lanking) {
+				cur = cur->next;
+				continue;
+			}
+
+			/* try to find the best lang */
+			while (list != NULL) {
+				const gchar *best_lang = list->data;
+
+				/*
+				 * if launch on C, POSIX locale or does 
+				 * not find the best lang on the current locale,
+				 * this is called.
+				 * gnome_i18n_get_language_list returns lang 
+				 * lists with C locale.
+				 */
+				if (lang == NULL && ( !g_ascii_strcasecmp (best_lang, "C") || 
+					!g_ascii_strcasecmp (best_lang, "POSIX"))) {
+					tag_group = get_tag_group (filename, doc, ns, cur);
+					if (tag_group != NULL) {
+						if (best_tag_group !=NULL) 
+							free_tag_group (best_tag_group);
+						best_lanking = cur_lanking;
+						best_tag_group = tag_group;
+					}
+				}
+
+				/* if it is possible the best lang is not C */
+				else if (lang == NULL) {
+					list = list->next;
+					cur_lanking++;
+					continue;
+				}
+
+				/* if the best lang is found */
+				else if (!g_ascii_strcasecmp (best_lang, lang)) {
+					tag_group = get_tag_group (filename, doc, ns, cur);
+					if (tag_group != NULL) {
+						if (best_tag_group !=NULL) 
+							free_tag_group (best_tag_group);
+						best_lanking = cur_lanking;
+						best_tag_group = tag_group;
+					}
+				}
+
+				list = list->next;
+				cur_lanking++;
+			} /* End of while (list != NULL) */
+
+			if (lang) g_free (lang);
+		} /* End of else */
+	
+		cur = cur->next;
+    	} /* End of while (cur != NULL) */
+
+	/* Append TagGroup to TagList */
+	if (best_tag_group != NULL) {
+		taglist->tag_groups = 
+			g_list_append (taglist->tag_groups, best_tag_group);
+	}
+
+	return taglist;
+}
+
+
 static TagList *
 parse_taglist_file (const gchar* filename)
 {
@@ -225,88 +433,7 @@ parse_taglist_file (const gchar* filename)
 	if (taglist == NULL)
 		taglist = g_new0 (TagList, 1);
 	
-	/*
-	 * Walk the tree.
-	 *
-	 * First level we expect a list TagGroup 
-	 */
-	cur = cur->xmlChildrenNode;
-	
-	while (cur != NULL)
-     	{ 	
-		if ((xmlStrcmp (cur->name, (const xmlChar *) "TagGroup")) || (cur->ns != ns)) 
-		{
-			g_warning ("The tag list file '%s' is of the wrong type, "
-				   "was '%s', 'TagGroup' expected.", filename, cur->name);
-			xmlFreeDoc (doc);
-		
-			return taglist;
-		}
-		else
-		{
-			TagGroup *tag_group;
-
-			tag_group = g_new0 (TagGroup, 1);
-
-			/* Get TagGroup name */
-			tag_group->name = xmlGetProp (cur, (const xmlChar *) "name");
-
-			if (tag_group->name == NULL)
-			{
-				/* Error: No name */
-				g_warning ("The tag list file '%s' is of the wrong type, "
-				   "TagGroup without name.", filename);
-
-				g_free (tag_group);
-			}
-			else
-			{
-				/* Name found */
-				gboolean exists = FALSE;
-				GList *t = taglist->tag_groups;
-				
-				/* Check if the tag group already exists */
-				while (t && !exists)
-				{
-					gchar *tgn = ((TagGroup*)(t->data))->name;
-					
-					if (strcmp (tgn, tag_group->name) == 0)
-					{
-						gedit_debug (DEBUG_PLUGINS, 
-							     "Tag group '%s' already exists.", tgn);
-						
-						exists = TRUE;
-
-						free_tag_group (tag_group);
-					}
-					
-					t = g_list_next (t);		
-				}
-
-				if (!exists)
-				{				
-					/* Parse tag group */
-					if (parse_tag_group (tag_group, filename, doc, ns, cur))
-					{
-						/* Append TagGroup to TagList */
-						taglist->tag_groups = 
-							g_list_append (taglist->tag_groups, tag_group);
-					}
-					else
-					{
-						/* Error parsing TagGroup */
-						g_warning ("The tag list file '%s' is of the wrong type, "
-				   			   "error parsing TagGroup '%s'.", 
-							   filename, tag_group->name);
-
-						free_tag_group (tag_group);
-					}
-				}
-			}
-		}
-	
-		cur = cur->next;
-    	}
+	taglist = lookup_best_lang (taglist, filename, doc, ns, cur);
 
 	xmlFreeDoc (doc);
 
