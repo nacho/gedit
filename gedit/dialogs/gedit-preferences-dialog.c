@@ -197,7 +197,7 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 
 	{N_("Tabs"), NULL, TABS_SETTINGS},
-	{N_("Text Wrapping"), NULL, WRAP_MODE_SETTINGS},
+	{N_("Wrap Mode"), NULL, WRAP_MODE_SETTINGS},
 	{N_("Auto Indent"), NULL, AUTO_INDENT_SETTINGS},
 	{N_("Line Numbers"), NULL , LINE_NUMBERS_SETTINGS},
  	{N_("Save"), NULL, SAVE_SETTINGS },
