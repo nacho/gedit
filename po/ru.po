@@ -4,23 +4,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-08 23:29+0000\n"
-"PO-Revision-Date: 2000-06-08 23:29+00:00\n"
+"POT-Creation-Date: 2000-06-10 16:49+0000\n"
+"PO-Revision-Date: 2000-06-10 16:49+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:170
+#: plugins/browse/browse.c:157
 msgid "Browse"
 msgstr "Просмотр Web"
 
-#: plugins/browse/browse.c:171
+#: plugins/browse/browse.c:158
 msgid "Web browse plugin"
 msgstr "Дополнение просмотра Web"
 
-#: plugins/convert/convert.c:130
+#: plugins/convert/convert.c:129
 msgid "Convert"
 msgstr "Преобразовать"
 
@@ -29,7 +29,7 @@ msgstr "Преобразовать"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/convert/convert.c:131 plugins/convert/convert.glade.h:7
+#: plugins/convert/convert.c:130 plugins/convert/convert.glade.h:7
 msgid "Number Converter"
 msgstr "Преобразователь чисел"
 
@@ -53,11 +53,11 @@ msgstr "Десятичное в восьмеричное"
 msgid "Hex to Decimal"
 msgstr "Шестнадцатиричное в десятичное"
 
-#: plugins/diff/diff.c:211
+#: plugins/diff/diff.c:199
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:212
+#: plugins/diff/diff.c:200
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
@@ -99,19 +99,19 @@ msgstr "Тема:"
 msgid "File to use as body of message: "
 msgstr "Файл используемый как тело сообщения:"
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:43
 msgid "Hello World"
 msgstr "Здравствуй, Мир!"
 
-#: plugins/sample/sample.c:53
+#: plugins/sample/sample.c:44
 msgid "Sample 'hello world' plugin."
 msgstr "Пример дополнения \"Здравствуй, Мир!\"."
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:84
 msgid "Insert Time"
 msgstr "Вставить время"
 
-#: plugins/time/time.c:98
+#: plugins/time/time.c:85
 msgid "Inserts the current date and time"
 msgstr "Вставить текущую дату и время"
 
@@ -147,10 +147,10 @@ msgstr "gedit: Настройки"
 
 #: src/dialogs/dialog-replace.c:172
 #, c-format
-msgid "found and replaced %i ocurrences."
+msgid "found and replaced %i occurrences."
 msgstr "найдено и заменено %i вхождений."
 
-#: src/dialogs/dialog-replace.c:227 src/search.c:289
+#: src/dialogs/dialog-replace.c:234 src/search.c:288
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Текст найден в строке:%i"
@@ -320,7 +320,7 @@ msgid "line(s)"
 msgstr "строк(и)"
 
 #: src/dialogs/prefs.glade.h:46
-msgid "_Potrait"
+msgid "_Portrait"
 msgstr "Портрет"
 
 #: src/dialogs/prefs.glade.h:47
@@ -406,7 +406,7 @@ msgstr ""
 "Убедитесь, что файл не используется другим приложением\n"
 "и что файл не пуст."
 
-#: src/file.c:111 src/file.c:256
+#: src/file.c:111 src/file.c:254
 msgid "Could not allocate the required memory."
 msgstr "Не удалось получить необходимую память."
 
@@ -476,41 +476,41 @@ msgstr ""
 "По неизвестной причине (2). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:275
+#: src/file.c:273
 msgid "Error in the pipe ."
 msgstr "Ошибка в канале."
 
-#: src/file.c:326
+#: src/file.c:324
 msgid "Open File ..."
 msgstr "Открыть файл..."
 
-#: src/file.c:367
+#: src/file.c:365
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/file.c:403
+#: src/file.c:401
 #, c-format
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
 
-#: src/file.c:467
+#: src/file.c:465
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:478
+#: src/file.c:476
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:487
+#: src/file.c:485
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:560
+#: src/file.c:558
 msgid "You can't revert an Untitled document\n"
 msgstr "Вы не можете восстановить неозаглавленный документ\n"
 
-#: src/file.c:573
+#: src/file.c:571
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -519,7 +519,7 @@ msgstr ""
 "Вы уверены в том что хотите отменить все изменения?\n"
 "(%s)"
 
-#: src/file.c:602
+#: src/file.c:600
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
@@ -721,7 +721,7 @@ msgstr "Найти"
 msgid "Search for a string"
 msgstr "Поиск строки"
 
-#: src/menus.c:369 src/window.c:78
+#: src/menus.c:369 src/window.c:80
 msgid "Line"
 msgstr "Строка"
 
@@ -776,7 +776,7 @@ msgstr "Файл/"
 msgid "_File"
 msgstr "Файл"
 
-#: src/search.c:191
+#: src/search.c:190
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -784,7 +784,7 @@ msgstr ""
 "Невозможно подсчитать строки, если работает другой поиск, пожалуйста "
 "закройте окно диалога поиска."
 
-#: src/search.c:206
+#: src/search.c:205
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -797,22 +797,22 @@ msgstr ""
 "Всего строк: %i\n"
 "Текущая строка: %i"
 
-#: src/search.c:231
+#: src/search.c:230
 msgid "Text not found"
 msgstr "Текст не найден"
 
-#: src/search.c:236
+#: src/search.c:235
 msgid "Text not found."
 msgstr "Текст не найден."
 
-#: src/search.c:267
+#: src/search.c:266
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Повторный поиск невозможен. Нет текстовой строки для поиска."
 
-#: src/window.c:77
+#: src/window.c:79
 msgid "Filename"
 msgstr "Имя файла"
 
-#: src/window.c:79
+#: src/window.c:81
 msgid "Contents"
 msgstr "Содержание"
