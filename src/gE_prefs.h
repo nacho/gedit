@@ -21,7 +21,7 @@
 
 extern gE_prefs *prefs_window;
 
-extern void gE_save_settings(gE_window *window, gchar *cmd);
+extern void gE_save_settings(gE_window *window, gpointer cbwindow);
 extern void gE_get_settings(gE_window *window);
 extern gE_prefs *gE_prefs_window();
 extern void gE_get_rc_file();

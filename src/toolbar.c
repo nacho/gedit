@@ -164,7 +164,7 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 	gnome_app_set_toolbar (GNOME_APP (gw->window), GTK_TOOLBAR(toolbar));
 #endif
 
-	gw->have_toolbar = TRUE;
+	gw->have_toolbar = 1;
 
 } /* gE_create_toolbar */
 
@@ -252,7 +252,7 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 	if (!GTK_WIDGET_VISIBLE (GNOME_APP (window->window)->toolbar->parent))
 		gtk_widget_show (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	window->have_toolbar = TRUE;
+	window->have_toolbar = 1;
 }
 
 
@@ -280,7 +280,7 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 	if (GTK_WIDGET_VISIBLE (GNOME_APP(window->window)->toolbar->parent))
 		gtk_widget_hide (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	window->have_toolbar = FALSE;
+	window->have_toolbar = 0;
 }
 
 
@@ -295,8 +295,8 @@ tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_BOTH);
-	window->have_tb_text = TRUE;
-	window->have_tb_pix = TRUE;
+	window->have_tb_text = 1;
+	window->have_tb_pix = 1;
 }
 
 
@@ -311,8 +311,8 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_ICONS);
-	window->have_tb_text = FALSE;
-	window->have_tb_pix = TRUE;
+	window->have_tb_text = 0;
+	window->have_tb_pix = 1;
 	
 	/*
 	 * forces the gnome toolbar to resize itself.. slows it down some,
@@ -334,9 +334,9 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
-	window->have_tb_text = TRUE;
-	window->have_tb_pix = FALSE;
-
+	window->have_tb_text = 1;
+	window->have_tb_pix = 0;
+mbprintf("window->have_tb_text = %d, window->have_tb_pix = %d",window->have_tb_text,window->have_tb_pix);
 	gtk_widget_hide (window->toolbar);
 	gtk_widget_show (window->toolbar);
 }

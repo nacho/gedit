@@ -361,15 +361,24 @@ gE_prefs *prefs_window;
 
 #ifndef WITHOUT_GNOME
 
-void gE_save_settings(gE_window *window, gchar *cmd)
+void gE_save_settings(gE_window *window, gpointer cbwindow)
 {
   /*char cmd[256];*/
-
+	
+	gE_window *window = (gE_window *) cbwindow;
+	
   gnome_config_push_prefix ("/gEdit/Global/");
 
+	mbprintf("window->tab_pos = %d",window->tab_pos);
+	mbprintf("window->auto_indent = %d",window->auto_indent);
+	mbprintf("window->show_status = %d",window->show_status);
+	mbprintf("window->have_toolbar = %d",window->have_toolbar);
+	mbprintf("window->have_tb_text = %d",window->have_tb_text);
+	mbprintf("window->have_tb_pix = %d",window->have_tb_pix);
+
   gnome_config_set_int ("tab pos", (gint) window->tab_pos);
-  gnome_config_set_int ("auto indent", (gint) window->auto_indent);
-  gnome_config_set_int ("show statusbar", (gint) window->show_status);
+  gnome_config_set_int ("auto indent", (gboolean) window->auto_indent);
+  gnome_config_set_int ("show statusbar", (gboolean) window->show_status);
   gnome_config_set_int ("toolbar", (gint) window->have_toolbar);
   gnome_config_set_int ("tb text", (gint) window->have_tb_text);
   gnome_config_set_int ("tb pix", (gint) window->have_tb_pix);
@@ -406,13 +415,13 @@ void gE_get_settings(gE_window *window)
  
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), window->tab_pos);
   
-  if (window->show_status == FALSE)
+  if (window->show_status == 0)
   {
     gtk_widget_hide (window->statusbox);
-    window->show_status = FALSE;
+    window->show_status = 0;
   }
  
-  if (window->have_toolbar == TRUE)
+  if (window->have_toolbar == 1)
     {
 
      tb_on_cb(NULL,window);
@@ -428,10 +437,10 @@ void gE_get_settings(gE_window *window)
       tb_pic_text_cb(NULL,window);
 
     }
-  if (window->have_toolbar == FALSE)
+  if (window->have_toolbar == 0)
     {
      tb_off_cb(NULL, window);
-     window->have_toolbar = FALSE;
+     window->have_toolbar = 0;
     }
   
 }

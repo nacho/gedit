@@ -375,7 +375,7 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings },
+	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings, (gpointer) GE_WINDOW, NULL },
 	GNOMEUIINFO_END
 };
 
