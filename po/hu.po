@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.4\n"
-"POT-Creation-Date: 2002-08-12 11:13+0200\n"
-"PO-Revision-Date: 2002-08-13 14:19+0200\n"
+"POT-Creation-Date: 2002-08-14 11:01+0200\n"
+"PO-Revision-Date: 2002-08-14 11:04+0200\n"
 "Last-Translator: Emese KOVACS <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -879,7 +879,7 @@ msgid "Replace _All"
 msgstr "_Mindet cseréli"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:126
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
 #: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "_Csere"
@@ -1551,20 +1551,29 @@ msgstr "Nem tudom létrehozni a biztonsági mentést."
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot"
 
-#: src/gedit-file-selector-util.c:114
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Már létezik egy \"%s\" nevű fájl.\n"
-"Akarod hogy lecseréljem ezzel ?"
-
-#: src/gedit-file-selector-util.c:122
+#: src/gedit-file-selector-util.c:125
 msgid "Do_n't replace"
 msgstr "_Ne cserélje"
 
-#: src/gedit-file-selector-util.c:502
+#: src/gedit-file-selector-util.c:147
+#, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Már létezik egy \"%s\" nevű fájl.\n"
+"Lecseréljem azzal, amit épp menteni készülsz?"
+
+#: src/gedit-file-selector-util.c:158
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"A \"%s\" nevű fájl írásvédett.\n"
+"Megpróbálod lecserélni azzal, mit épp menteni készülsz? "
+
+#: src/gedit-file-selector-util.c:544
 msgid "Select a filename to save"
 msgstr "Válaszd ki a mentendő fájlnevet"
 
@@ -1572,7 +1581,7 @@ msgstr "Válaszd ki a mentendő fájlnevet"
 msgid "Open File ..."
 msgstr "Fájl megnyitása..."
 
-#: src/gedit-file.c:176 src/gedit-file.c:811
+#: src/gedit-file.c:176 src/gedit-file.c:806
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "%s fájl betöltve"
@@ -1614,17 +1623,17 @@ msgstr "'%s' visszaállítása sikerült."
 msgid "Loading %d files..."
 msgstr "%d fájl betöltése..."
 
-#: src/gedit-file.c:687
+#: src/gedit-file.c:691
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "A \"%s'' fájl nem létezik. Létrehozzam?"
 
-#: src/gedit-file.c:746
+#: src/gedit-file.c:741
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i fájl betöltve"
 
-#: src/gedit-file.c:869
+#: src/gedit-file.c:864
 msgid "Could not read data from stdin."
 msgstr "Nem tudom adatokat olvasni az stdin-ről."
 
@@ -1739,7 +1748,7 @@ msgstr "%d. oldal"
 msgid "gedit - Print Preview"
 msgstr "gedit - Nyomtatási kép"
 
-#: src/gedit-print.c:591
+#: src/gedit-print.c:595
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
