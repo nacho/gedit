@@ -172,7 +172,7 @@ init (GeditPlugin *pd)
 	pd->name = _("User name");
 	pd->desc = _("Inserts the user name at the cursor position.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
+	pd->copyright = "Copyright \xc2\xa9 2002 Paolo Maggi";
 #endif	
 	pd->private_data = NULL;
 		

@@ -494,8 +494,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	}
 
 	about = gnome_about_new (_("gedit"), VERSION,
-				_("(C) 1998-2000 Evan Lawrence and Alex Robert\n"
-				  "(C) 2000-2002 Chema Celorio and Paolo Maggi"),
+				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
+				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi",
 				_("gedit is a small and lightweight text editor for Gnome"),
 				(const char **)authors,
 				(const char **)documenters,

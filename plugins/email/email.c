@@ -466,7 +466,7 @@ init (GeditPlugin *pd)
 	pd->name = PLUGIN_NAME;
 	pd->desc = _("Sends the current document via email.  You must have sendmail installed for this to work.");
 	pd->author = "James Willcox <jwillcox@cs.indiana.edu>";
-	pd->copyright = _("Copyright (C) 2000 - 2002 Alex Roberts,Chema Celorio\nJames Willcox");
+	pd->copyright = "Copyright \xc2\xa9 2000-2002 Alex Roberts, Chema Celorio, James Willcox";
 	
 	pd->private_data = NULL;
 
