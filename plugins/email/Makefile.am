@@ -17,4 +17,6 @@ INCLUDES =						\
 gladedir = $(datadir)/gedit/glade
 glade_DATA = email.glade
 
-EXTRA_DIST = $(glade_DATA)
+glade_msgs = email.glade.h
+
+EXTRA_DIST = $(glade_DATA) $(glade_msgs)
