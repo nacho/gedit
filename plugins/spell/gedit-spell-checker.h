@@ -127,7 +127,9 @@ gboolean		 gedit_spell_checker_set_correction 	(GeditSpellChecker *spell,
 
 gchar 			*gedit_language_to_string 		(const GeditLanguage *lang);
 
+gchar			*gedit_language_to_key			(const GeditLanguage *lang);
 
+const GeditLanguage 	*gedit_language_from_key		(const gchar *key);
 
 G_END_DECLS
 

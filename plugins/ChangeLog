@@ -1,3 +1,23 @@
+2004-11-15  Paolo Maggi  <paolo@gnome.org>
+
+	* spell/gedit-spell-checker.c (get_language_from_abrev): rewritten
+	(gedit_language_to_key) (gedit_language_from_key): new methods
+	(lazy_init): implements a better algorithm for selecting the default
+	language
+
+	* spell/gedit-spell-language-dialog.c (get_languages_dialog): adds column to 
+	the tree view before selecting the default item
+
+	* spell/languages-dialog.glade2: removes rules hint
+
+	* spell/spell-checker.glade2: removes rulues hint
+
+	* spell/spell.c (set_spell_language_cb)
+	(get_spell_checker_from_document): uses metadata to store the last selected language
+
+	* time/time.c (create_formats_list):  adds column to 
+	the tree view before selecting the default item
+
 2004-11-13  Paolo Borelli  <pborelli@katamail.com>
 
 	* */*.c: use gi18n.h instead of gnome-i18n.h.

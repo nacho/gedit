@@ -319,17 +319,35 @@ gedit_spell_checker_finalize (GObject *object)
 static const GeditLanguage*
 get_language_from_abrev (const gchar *abrev)
 {
-	int i;
-	
 	g_return_val_if_fail (abrev != NULL, NULL);
-	
-	for (i = 0; known_languages [i].abrev; i++) 
+
+	const GSList *langs;
+	langs = gedit_spell_checker_get_available_languages ();
+
+	while (langs != NULL)
 	{
-		if (g_ascii_strncasecmp (abrev, known_languages [i].abrev, strlen(known_languages [i].abrev)) == 0)
-			return &known_languages [i];
+		const GeditLanguage *l = (const GeditLanguage *)langs->data;
+
+		if (g_ascii_strncasecmp (abrev, l->abrev, strlen(l->abrev)) == 0)
+			return l;
+
+		langs = g_slist_next (langs);
 	}
 
 	return NULL;
+	
+}
+
+gchar *
+gedit_language_to_key (const GeditLanguage *lang)
+{
+	return g_strdup (lang->abrev);
+}
+
+const GeditLanguage *
+gedit_language_from_key	(const gchar *key)
+{
+	return get_language_from_abrev (key);
 }
 
 static gboolean
@@ -346,15 +364,23 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 	config = new_pspell_config ();
 	g_return_val_if_fail (config != NULL, FALSE);
 	
-	if (language != NULL)
-		pspell_config_replace (config, "language-tag", language->abrev);
-		
+/*
+	g_print ("lazy_init: Language: %s\n", gedit_language_to_string (language));
+*/
 	pspell_config_replace (config, "encoding", "utf-8");
 	
 	pspell_config_replace (config, "mode", "url");
 
-	if (language == NULL)
+	if (language != NULL)
 	{
+		if (get_language_from_abrev (language->abrev) != NULL)
+		{
+			spell->active_lang = language;
+		}
+	}
+	else	
+	{
+		/* First try to get a default language */	
 		const gchar *language_tag;
 
 		language_tag = pspell_config_retrieve (config, "language-tag");
@@ -364,17 +390,31 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 			spell->active_lang = get_language_from_abrev (language_tag);
 		}
 
-		/*
+/*
 		g_print ("Language tag: %s\n", language_tag);
-		*/
+*/
+	}	
+
+	/* Second try to get a default language */
+
+	if (spell->active_lang == NULL)
+		spell->active_lang = get_language_from_abrev ("en_us");
+
+	/* Last try to get a default language */
+	if (spell->active_lang == NULL)
+	{
+		const GSList *langs;
+		langs = gedit_spell_checker_get_available_languages ();
+		spell->active_lang = (const GeditLanguage *)langs->data;
 	}
-	else
-		spell->active_lang = language;
 
-	/*
+	if (spell->active_lang != NULL)
+	{
+		pspell_config_replace (config, "language-tag", spell->active_lang->abrev);
+	}
+/*
 	g_print ("Language: %s\n", gedit_language_to_string (spell->active_lang ));
-	*/
-
+*/	
 	err = new_pspell_manager (config);
 
 	delete_pspell_config (config);

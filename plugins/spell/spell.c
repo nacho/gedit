@@ -39,6 +39,7 @@
 #include <gedit/gedit-menus.h>
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>
+#include <gedit/gedit-metadata-manager.h>
 
 #include <libgnomeui/gnome-stock-icons.h>
 
@@ -84,6 +85,34 @@ struct _CheckRange
 static GQuark spell_checker_id = 0;
 static GQuark check_range_id = 0;
 
+static void 
+set_spell_language_cb (GeditSpellChecker   *spell,
+		       const GeditLanguage *lang,
+		       GeditDocument 	   *doc)
+{
+	gchar *raw_uri;
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (lang != NULL);
+
+	raw_uri = gedit_document_get_raw_uri (doc);
+
+	if (raw_uri != NULL)
+	{
+		gchar *key;
+
+		key = gedit_language_to_key (lang);
+		g_return_if_fail (key != NULL);
+
+		gedit_metadata_manager_set (raw_uri, 
+					    "spell-language",
+					    key);
+
+		g_free (key);
+		g_free (raw_uri);
+	}
+}
+
 static GeditSpellChecker *
 get_spell_checker_from_document (GeditDocument *doc)
 {
@@ -98,12 +127,40 @@ get_spell_checker_from_document (GeditDocument *doc)
 
 	if (data == NULL)
 	{
+		gchar *raw_uri;
+		
 		spell = gedit_spell_checker_new ();
+
+		raw_uri = gedit_document_get_raw_uri (doc);
+
+		if (raw_uri != NULL)
+		{
+			gchar *key;
+			const GeditLanguage *lang = NULL;
+
+			key = gedit_metadata_manager_get (raw_uri, "spell-language");
+			
+			if (key != NULL)
+			{
+				lang = gedit_language_from_key (key);
+				g_free (key);
+			}
+
+			if (lang != NULL)
+				gedit_spell_checker_set_language (spell,
+								  lang,
+								  NULL);	
+		}
 
 		g_object_set_qdata_full (G_OBJECT (doc), 
 					 spell_checker_id, 
 					 spell, 
 					 (GDestroyNotify)g_object_unref);
+
+		g_signal_connect (G_OBJECT (spell),
+				  "set_language",
+				  G_CALLBACK (set_spell_language_cb),
+				  doc);
 	}
 	else
 	{
@@ -660,7 +717,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 }	
 
 static void
-auto_spell_cb (BonoboUIComponent           *ui_component,
+auto_spell_cb (BonoboUIComponent          *ui_component,
 	     const char                  *path,
 	     Bonobo_UIComponent_EventType type,
 	     const char                  *state,

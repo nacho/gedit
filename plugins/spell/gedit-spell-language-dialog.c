@@ -252,8 +252,7 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->languages_treeview), dialog->model);
 
-	init_languages_treeview_model (dialog);
-
+	
 	/* Add the encoding column */
 	cell = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("Languages"), cell, 
@@ -263,6 +262,8 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 
 	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dialog->languages_treeview),
 			COLUMN_LANGUAGE_NAME);
+
+	init_languages_treeview_model (dialog);
 
 	g_signal_connect (G_OBJECT (dialog->languages_treeview), "realize", 
 			  G_CALLBACK (scroll_to_selected), dialog);
