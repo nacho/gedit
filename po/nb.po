@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
-"PO-Revision-Date: 2004-12-28 03:55+0100\n"
+"POT-Creation-Date: 2005-01-15 22:16+0100\n"
+"PO-Revision-Date: 2005-01-15 22:42+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -157,11 +157,11 @@ msgstr "Skrift for topptekst ved utskrift"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Uthev aktiv linje"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Uthev tilhørende hakeparantes"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -463,14 +463,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "Om gedit skal aktivere automatisk syntaksutheving."
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Om gedit skal aktivere automatisk syntaksutheving."
+msgstr "Om gedit skal utheve tilhørende hakeparantes."
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "Om gedit skal ta med en syntaksutheving ved utskrift av dokumenter."
+msgstr "Om gedit skal utheve aktiv linje."
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -534,9 +532,8 @@ msgid "Activate %s"
 msgstr "Aktiver %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Lukk utdatavindu"
+msgstr "Lukk _uten å lagre"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -779,14 +776,12 @@ msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatisk innrykk</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Tekstbryting</b>"
+msgstr "<b>Sammenhørende hakeparanteser</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Tekstbryting</b>"
+msgstr "<b>Aktiv linje</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -863,7 +858,7 @@ msgstr "Skrifter og farger"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "Ut_hev aktiv linje"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -871,7 +866,7 @@ msgstr "Uthevings_modus:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "Uthev tilhørende hakeparantes"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -962,7 +957,6 @@ msgid "_Display line numbers"
 msgstr "Vis _linjenummer"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Aktiv_er automatisk innrykk"
 
@@ -987,7 +981,6 @@ msgid "_Right margin at column:"
 msgstr "Høy_re marg ved kolonne:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "_Tabulatorbredde:"
 
@@ -1173,7 +1166,6 @@ msgstr "gedit er en liten og lett tekst editor for GNOME skrivebordet"
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
@@ -1390,15 +1382,15 @@ msgstr "Filen «%s» er skrivebeskyttet.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vil du prøve å erstatte den med filen du lagrer?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:385
 msgid "All Files"
 msgstr "Alle filer"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:393
 msgid "All Text Files"
 msgstr "Alle tekstfiler"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:404
 msgid "_Character Coding:"
 msgstr "T_egnkoding:"
 
@@ -1481,12 +1473,12 @@ msgstr[0] "Endringer gjort i dokumentet det siste %ld minuttet vil gå tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %ld minuttene vil gå tapt."
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "Endringer gjort i dokumentet den siste timen vil gå tapt."
-msgstr[1] "Endringer gjort i dokumentet den siste timen vil gå tapt."
+msgstr[1] "Endringer gjort i dokumentet de siste %d timene vil gå tapt."
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1578,12 +1570,8 @@ msgstr "Kunne ikke finne filen «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» er en katalog.\n"
-"\n"
-"Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
+msgstr "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1629,13 +1617,9 @@ msgid "Access was denied."
 msgstr "Tilgang ble nektet."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open file and try again."
-msgstr ""
-"Kunne ikke åpne fil «%s» fordi du har for mange åpne filer.\n"
-"\n"
-"Vennligst lukk noen filer og prøv igjen."
+msgstr "du har for mange åpne filer. Vennligst lukk noen filer og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
@@ -1643,110 +1627,71 @@ msgid "\"%s\" is a directory"
 msgstr "«%s» er en katalog"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "application and try again."
-msgstr ""
-"Ikke nok tilgjengelig minne til å åpne fil «%s». Vennligst lukk noen "
-"applikasjoner og prøv igjen."
+msgstr "Ikke nok minne tilgjengelig til å åpne fil «%s». Vennligst lukk noen applikasjoner og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr ""
-"Kunne ikke forkaste fil «%s» fordi ingen vert «%s» ble funnet.\n"
-"\n"
-"Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
+msgstr "Vert «%s» ble ikke funnet. Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
-msgstr ""
-"«%s» er ikke en gyldig lokasjon.\n"
-"\n"
-"Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
+msgstr "Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
-msgstr ""
-"Kunne ikke åpne fil «%s» fordi vertsnavnet var tomt.\n"
-"\n"
-"Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
+msgstr "Vertsnavnet var tomt. Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"Kunne ikke finne fil «%s».\n"
-"\n"
-"Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
+msgstr "Forsøk på å logge inn feilet. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
-msgstr ""
-"Kunne ikke åpne filen «%s» fordi den inneholder ugyldige data.\n"
-"\n"
-"Du prøver sannsynligvis å åpne en binærfil."
+msgstr "Filen inneholder ugyldige data. Du prøver sannsynligvis å åpne en binærfil."
 
 #: gedit/gedit-io-error-dialogs.c:248
-#, fuzzy
 msgid "The file you are trying to open is not a regular file."
-msgstr "Filen du prøver å åpne inneholder ugyldige tegn."
+msgstr "Filen du prøver å åpne er ikke en vanlig fil."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"Kunne ikke åpne filen «%s» fordi gedit ikke kunne gjenkjenne tegnkodingen "
-"automatisk.\n"
-"\n"
-"Vennligst sjekk at du ikke prøver å åpne en binærfil og velg en tegnkoding i "
-"dialogen «Åpne fil...» (eller «Åpne lokasjon») før du prøver på nytt."
+msgstr "gedit ikke kunne gjenkjenne tegnkodingen automatisk. Vennligst sjekk at du ikke prøver å åpne en binærfil og velg en tegnkoding i dialogen «Åpne fil...» (eller «Åpne lokasjon») før du prøver på nytt."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Kunne ikke åpne filen «%s» fordi den er for stor."
+msgstr "Kunne ikke åpne filen «%s» som bruker tegnkoding %s"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not tryingto open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
-msgstr ""
-"Kunne ikke åpne fil «%s» med tegnkoding %s.\n"
-"\n"
-"Vennligst sjekk at du ikke prøver å åpne en binærfil og at du valgte den "
-"riktige tegnkodingen i dialogen «Åpne fil...» (eller «Åpne lokasjon...») og "
-"prøv igjen."
+msgstr "Vennligst sjekk at du ikke prøver å åpne en binærfil og at du valgte den riktige tegnkodingen i dialogen «Åpne fil...» (eller «Åpne lokasjon...») og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid data. Probably, you are trying to open "
 "a binary file."
-msgstr ""
-"Kunne ikke åpne filen «%s» fordi den inneholder ugyldige data.\n"
-"\n"
-"Du prøver sannsynligvis å åpne en binærfil."
+msgstr "Filen inneholder ugyldige data. Du prøver sannsynligvis å åpne en binærfil."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1755,125 +1700,85 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Kunne ikke forkaste fil «%s»."
+msgstr "Kunne ikke forkaste endringer i fil «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Kunne ikke forkaste fil «%s» fordi gedit ikke kan finne den.\n"
-"\n"
-"Kanskje den ble slettet nylig."
+msgstr "gedit ikke kan finne den. Kanskje den ble slettet nylig."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open file and try again."
-msgstr ""
-"Kunne ikke åpne fil «%s» fordi du har for mange åpne filer.\n"
-"\n"
-"Vennligst lukk noen filer og prøv igjen."
+msgstr "Du har for mange åpne filer. Vennligst lukk noen filer og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running application and try "
 "again."
-msgstr ""
-"Ikke nok tilgjengelig minne til å åpne fil «%s». Vennligst lukk noen "
-"applikasjoner og prøv igjen."
+msgstr "Ikke nok tilgjengelig minne. Vennligst lukk noen applikasjoner og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
-msgstr ""
-"Kunne ikke åpne fil «%s» fordi vertsnavnet var tomt.\n"
-"\n"
-"Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
+msgstr "Vertsnavnet var tomt. Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
 msgstr "Forsøk på å logge inn feilet."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr ""
-"Kunne ikke forkaste fil «%s» fordi den inneholder ugyldige UTF-8-data.\n"
-"\n"
-"Du prøver sannsynligvis å forkaste en binærfil."
+msgstr "Filen inneholder ugyldige UTF-8-data. Du prøver sannsynligvis å forkaste en binærfil."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Du kan ikke forkaste et dokument uten tittel."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Kunne ikke lagre fil «%s»."
+msgstr "Kunne ikke lagre fil «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Filen «%s» eksisterer allerede."
+msgstr "Filen «%s» eksisterer allerede"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"«%s» er en katalog.\n"
-"\n"
-"Vennligst sjekk at plasseringen er korrekt oppgitt."
+msgstr "Vennligst sjekk at du skrev lokasjonen korrekt."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Kunne ikke opprette filen «%s»."
+msgstr "Kunne ikke opprette fil «%s»"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Kan ikke opprette filen «%s».\n"
-"\n"
-"Sjekk at du har nødvendige skriverettigheter."
+msgstr "Sjekk at du har nødvendige skriverettigheter."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Kunne ikke opprette filen «%s».\n"
-"\n"
-"Filnavnet er for langt."
+msgstr "Filnavnet er for langt."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"Kan ikke opprette filen «%s».\n"
-"\n"
-"En katalogdel i filnavnet eksisterer ikke eller er en symbolsk lenke som "
-"ikke peker til noe."
+msgstr "En katalogdel i filnavnet eksisterer ikke eller er en symbolsk lenke som ikke peker til noe."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
-msgstr ""
-"Det er ikke nok plass på disken til å opprette filen «%s».\n"
-"\n"
-"Vennligst frigjør plass og prøv igjen."
+msgstr "Det er ikke nok plass på disken til å opprette filen. Vennligst frigjør plass og prøv igjen."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -2385,16 +2290,16 @@ msgstr " (ugyldig Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln. %d, Kol. %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr "  SET"
 
@@ -2575,39 +2480,33 @@ msgid "User name"
 msgstr "Brukernavn"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
-msgid "Sa_ve Copy"
-msgstr "_Kopier"
+msgid "Sa_ve Copy..."
+msgstr "_Lagre kopi..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Sett språk for aktivt dokument"
+msgstr "Lagre en kopi av aktivt dokument"
 
 #: plugins/savecopy/savecopy.c:212
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy the file to \"%s\""
-msgstr "Kunne ikke lagre fil «%s»."
+msgstr "Kunne ikke lagre en kopi av filen til «%s»"
 
 #: plugins/savecopy/savecopy.c:311
-#, fuzzy
 msgid "You are trying to overwrite the original file"
-msgstr "Filen du prøver å åpne inneholder ugyldige tegn."
+msgstr "Du prøver å overskrive originalfilen"
 
-#: plugins/savecopy/savecopy.c:362
-#, fuzzy
-msgid "Save Copy"
-msgstr "Ikke lagre _noen"
+#: plugins/savecopy/savecopy.c:363
+msgid "Save Copy..."
+msgstr "Lagre kopi..."
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Lagre alle åpne filer"
+msgstr "Lagre en kopi"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Sorter aktivt dokument eller utvalg."
+msgstr "Lagrer en kopi av aktivt dokument til en lokal eller ekstern lokasjon."
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -3006,14 +2905,12 @@ msgid "The document is empty."
 msgstr "Dokumentet er tomt."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "Valgt tekst inneholder ingen feilstavede ord."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
-msgstr " Dokumentet inneholder ikke feilstavede ord."
+msgstr "Dokumentet inneholder ikke feilstavede ord."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
@@ -3024,52 +2921,48 @@ msgid "Spell checker"
 msgstr "Stavekontroll"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "Tilgjengelige formater"
+msgstr "Forkortet form"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Armensk"
+msgstr "Forkortelse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "Over"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Tegn for tilgjengelighetstast"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "Akronym"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "linjer"
+msgstr "Juster"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "Justeringstegn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "Anker"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "Anker-URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Velg en fil som skal åpnes"
+msgstr "Filkode for applet-klasse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3077,85 +2970,75 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "Tilhørende informasjon"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "Autoindenter"
+msgstr "Informasjon om forfatter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "Skriv ut _topptekst"
+msgstr "Topptekst relatert til akse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGLyd"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "_Bakgrunnsfarge:"
+msgstr "Bakgrunnsfarge"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Bakgrunnsfarge"
+msgstr "Teksturfil for bakgrunn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "Basis-URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font size"
-msgstr "Bruk skrift i etikett"
+msgstr "Grunnleggende skriftstørrelse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "Oppførsel"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "Blinkende tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "Uthevet"
+msgstr "Kant"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "_Bakgrunnsfarge:"
+msgstr "Farge for kant"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "Boks"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Sentral-Europeisk"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Generelt"
+msgstr "Senter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
-msgstr ""
+msgstr "Tegnkoding for lenket ressurs"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "Avkrysset (tilstand)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "handl_inger"
+msgstr "Sitering"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3166,22 +3049,20 @@ msgid "Class implementation ID"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Tag-liste"
+msgstr "Klasseliste"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Flytkontroll for klartekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Kopier valgte linjer"
+msgstr "Farge for merket lenke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3189,31 +3070,27 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "Kolonner"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Innhold"
+msgstr "Kommentar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Fragment av datamaskinkode"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Innhold"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "_Innhold"
+msgstr "Innholdstype"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Innhold"
+msgstr "Koordinater"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3225,34 +3102,31 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "Dato og tid for endring"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "_Beskrivelse"
+msgstr "Definisjonsbeskrivelse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
-msgstr ""
+msgstr "Definisjonsliste"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "Slett valgt tekst"
+msgstr "Slettet tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "Breton"
+msgstr "Retning"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
@@ -3263,44 +3137,36 @@ msgid "Directory list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "Aktivert"
+msgstr "Deaktivert"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document ID"
-msgstr "_Dokumenter"
+msgstr "Dokument-ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document base URI"
-msgstr "_Dokumenter"
+msgstr "Dokumentets basis-URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document body"
-msgstr "_Dokumenter"
+msgstr "Dokumentkropp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document head"
-msgstr "_Dokumenter"
+msgstr "Topptekst for dokument"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
-msgstr "Dokumentstatistikk"
+msgstr "Dokumenttittel"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document type"
-msgstr "_Dokumenter"
+msgstr "Dokumenttype"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Document version"
-msgstr "_Dokumenter"
+msgstr "Versjon av dokumentet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
@@ -3316,26 +3182,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
-msgstr ""
+msgstr "Figur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "Font face"
 msgstr "Skriftnavn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
-#, fuzzy
 msgid "For label"
-msgstr "etikett"
+msgstr "For etikett"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
-msgstr ""
+msgstr "Tvunget linjeskift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Form"
-msgstr "Normal"
+msgstr "Skjema"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
@@ -3366,9 +3229,8 @@ msgid "Forward link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
 msgid "Frame"
-msgstr "Navn:"
+msgstr "Ramme"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
@@ -3387,14 +3249,12 @@ msgid "Frameborder"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
 msgid "Frameset"
-msgstr "Færøysk"
+msgstr "Rammesett"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-#, fuzzy
 msgid "Frameset columns"
-msgstr "S_tart ved kolonne:"
+msgstr "Kolonner for rammesett"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
@@ -3413,9 +3273,8 @@ msgid "Generic metainformation"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
-#, fuzzy
 msgid "Generic span"
-msgstr "Generelt"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
@@ -3423,7 +3282,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
-msgstr ""
+msgstr "HTML - spesielle tegn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
@@ -3431,7 +3290,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
-msgstr ""
+msgstr "HTML - rotelement"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
@@ -3443,39 +3302,39 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
-msgstr ""
+msgstr "Overskrift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading 1"
-msgstr ""
+msgstr "Overskrift 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 2"
-msgstr ""
+msgstr "Overskrift 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 3"
-msgstr ""
+msgstr "Overskrift 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 4"
-msgstr ""
+msgstr "Overskrift 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 5"
-msgstr ""
+msgstr "Overskrift 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 6"
-msgstr ""
+msgstr "Overskrift 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Height"
-msgstr ""
+msgstr "Høyde"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Horizontal rule"
-msgstr ""
+msgstr "Horisontal linjal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal space"
@@ -3487,77 +3346,71 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Image"
-msgstr ""
+msgstr "Bilde"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image map"
-msgstr ""
+msgstr "Bildekart"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map area"
-msgstr ""
+msgstr "Område for bildekart"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map name"
-msgstr ""
+msgstr "Navn på bildekart"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image source"
-msgstr ""
+msgstr "Kilde for bilde"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "Ugyldig filnavn"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "Sett inn dato/klokkeslett"
+msgstr "Innsatt tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
-msgstr ""
+msgstr "Instansdefinisjon"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "Kursiv"
+msgstr "Kursiv tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
-msgstr ""
+msgstr "Java-applet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
-msgstr "etikett"
+msgstr "Etikett"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "Språk"
+msgstr "Språkkode"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
-msgstr ""
+msgstr "Stil for stor tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Layer"
-msgstr ""
+msgstr "Lag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link"
-msgstr "Linjer"
+msgstr "Lenke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
-msgstr ""
+msgstr "Listeoppføring"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
@@ -3572,14 +3425,12 @@ msgid "Listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "Velg skrift for redigering"
+msgstr "Lokal endring av skrift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
 msgid "Long description link"
-msgstr "_Beskrivelse"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
@@ -3587,7 +3438,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
-msgstr ""
+msgstr "E-postlenke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
@@ -3606,9 +3457,8 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
 msgid "Media"
-msgstr "gedit"
+msgstr "Medie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
@@ -3616,7 +3466,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
-msgstr ""
+msgstr "Menyliste"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
@@ -3631,9 +3481,8 @@ msgid "Multiple"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-#, fuzzy
 msgid "Name"
-msgstr "Navn:"
+msgstr "Navn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
@@ -3641,11 +3490,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
-msgstr ""
+msgstr "Neste ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
-msgstr ""
+msgstr "Ingen URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
@@ -3653,45 +3502,43 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
-msgstr ""
+msgstr "Ingen rammer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
-msgstr ""
+msgstr "Ingen lag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
-msgstr ""
+msgstr "Ingen linjeskift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-#, fuzzy
 msgid "No resize"
-msgstr "Vis størrelse"
+msgstr "Ingen endring av størrelse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
-msgstr ""
+msgstr "Ingen skript"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
-msgstr ""
+msgstr "Ingen skygge"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
-msgstr ""
+msgstr "Ingen orddeling"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
-msgstr ""
+msgstr "Merknad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-#, fuzzy
 msgid "Object applet file"
-msgstr "Åpne en fil"
+msgstr "Åpne applet-fil"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
-msgstr ""
+msgstr "Referanse til objektdata"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
@@ -3702,9 +3549,8 @@ msgid "OnBlur event"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-#, fuzzy
 msgid "OnChange event"
-msgstr "Bytt mellom store og små bokstaver"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
@@ -3775,9 +3621,8 @@ msgid "Option group"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-#, fuzzy
 msgid "Option selector"
-msgstr "Skriftutvalg"
+msgstr "Valg av alternativ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
@@ -3785,7 +3630,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
-msgstr ""
+msgstr "Avsnitt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph class"
@@ -3800,9 +3645,8 @@ msgid "Preformatted listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
 msgid "Preformatted text"
-msgstr "Forhåndsvist tekst"
+msgstr "Forhåndsformatert tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
@@ -3813,19 +3657,16 @@ msgid "Prompt message"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "Avslutt"
+msgstr "Sitat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "E_ndre"
+msgstr "Område"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
@@ -3836,17 +3677,16 @@ msgid "Reduced spacing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "_Omvendt rekkefølge"
+msgstr "Omvendt lenke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
-msgstr ""
+msgstr "Rot"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Rows"
-msgstr ""
+msgstr "Rader"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rulings between rows and columns"
@@ -3865,9 +3705,8 @@ msgid "Script execution defer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "Sett språk"
+msgstr "Navn på skriptspråk"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
@@ -3875,26 +3714,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
-msgstr ""
+msgstr "Rullefelt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "Velg en fil som skal åpnes"
+msgstr "Valgbart alternativ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "_Lagre valgte"
+msgstr "Valgt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Lagre"
+msgstr "Form"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -3905,36 +3741,32 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "Fanestørrelse"
+msgstr "Størrelse"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "Alle tekstfiler"
+msgstr "Stil for liten tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "Mykt linjeskift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "Lyd"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "Lagre"
+msgstr "Mellomrom"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "Erstatt"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
@@ -3945,9 +3777,8 @@ msgid "Spacing within cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "Spansk"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -3958,19 +3789,16 @@ msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "Skriv ut _linjenummer"
+msgstr "Startsekvensnummer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "Gjennomstreking"
+msgstr "Gjennomstreket tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "Gjennomstreking"
+msgstr "Stil for gjennomstreket tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
@@ -3985,27 +3813,24 @@ msgid "Subscript"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "_Beskrivelse"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "Aktivert"
+msgstr "Tabell"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "Åpne lokasjon"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column"
@@ -4064,7 +3889,6 @@ msgid "Text"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "Tekstfarge"
 
@@ -4082,25 +3906,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "Understrek"
+msgstr "Stil for understreket tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "Understrek"
+msgstr "Liste uten sortering"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "Bruk bildekart"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "Verdi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
@@ -4115,18 +3937,16 @@ msgid "Vertical cell alignment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "Sett inn mellomrom"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "Velg farge for utvalget"
+msgstr "Farge for besøkt lenke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "Bredde"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
@@ -4165,9 +3985,8 @@ msgid "File input"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "Skrift"
+msgstr "Fotnote"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
@@ -4194,37 +4013,32 @@ msgid "Function sine"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "Gresk"
+msgstr "Gresk alfa"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "Gresk"
+msgstr "Gresk beta"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "Gresk epsilon"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "Gresk"
+msgstr "Gresk gamma"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "Gresk lambda"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "Gresk"
+msgstr "Gresk rho"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "Gresk"
+msgstr "Gresk tau"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
@@ -4268,20 +4082,19 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Oppføring"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Oppføring med etikett"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Beskrivelse"
+msgstr "Listebeskrivelse"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
@@ -4300,9 +4113,8 @@ msgid "Maths (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Åpne lokasjon"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4321,14 +4133,12 @@ msgid "Operator sum (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Brukervalg"
+msgstr "Etikett for referanse"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Brukervalg"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
@@ -4432,16 +4242,15 @@ msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - akser"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "Elementer"
+msgstr "XSLT - elementer"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - funksjoner"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
@@ -4476,14 +4285,12 @@ msgid "following-sibling"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Sett inn mellomrom"
+msgstr "navneområde"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "Åpne"
+msgstr "opphav"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
