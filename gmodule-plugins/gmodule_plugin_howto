@@ -1,8 +1,8 @@
 This is a new plugin interface which uses shared libraries that are
-dynamically loaded into the running GEdit process when they are
+dynamically loaded into the running gEdit process when they are
 required.
 
-You need to configure GEdit with the `--with-gmodule-plugins' option
+You need to configure gEdit with the `--with-gmodule-plugins' option
 to use this new plugin interface. It will not affect your old plugins,
 you can still use them. This is only designed for new plugins.
 
@@ -44,7 +44,7 @@ Writing your own plugins
 ========================
 
 First, you need to include <gE_plugin.h>. This header file is used both
-in GEdit and in all plugins since they share some data structures.
+in gEdit and in all plugins since they share some data structures.
 
 There is a `gE_Plugin_Info' type declared in this header file which is
 used to store information about your plugin:
