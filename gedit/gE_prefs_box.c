@@ -72,9 +72,9 @@ GtkStyle *style;
 gint i;
 
     if (w->show_status == 0)
-       gtk_widget_hide (w->statusbox);
+       gtk_widget_hide (GTK_WIDGET (w->statusbar)->parent);
      else
-       gtk_widget_show (w->statusbox);
+       gtk_widget_show (GTK_WIDGET (w->statusbar)->parent);
        
      /* if (w->splitscreen == TRUE) */
        gE_document_set_split_screen (gE_document_current(w), (gint) w->splitscreen);

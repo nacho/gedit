@@ -317,21 +317,6 @@ void gE_get_settings(gE_window *w)
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
 
 	if (w->show_status == FALSE)
-		gtk_widget_hide(w->statusbox);
-/*
-	if (w->have_toolbar == TRUE) {
-		tb_on_cb(NULL, w);
+		gtk_widget_hide(GTK_WIDGET (w->statusbar)->parent);
 
-		if (w->have_tb_text == FALSE && w->have_tb_pix == TRUE)
-			tb_pic_only_cb(NULL, w);
-
-		if (w->have_tb_text == TRUE && w->have_tb_pix == FALSE)
-			tb_text_only_cb(NULL, w);
-
-		if (w->have_tb_text == FALSE && w->have_tb_pix == FALSE)
-			tb_pic_text_cb(NULL, w);
-	} else {
-		tb_off_cb(NULL, w);
-	}
-*/
 }
