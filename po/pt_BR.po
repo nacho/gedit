@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Gedit 0.5.2\n"
-"POT-Creation-Date: 1999-05-18 05:05-0300\n"
+"POT-Creation-Date: 1999-05-24 20:17+0100\n"
 "PO-Revision-Date: 1999-05-18 20:00-0300\n"
 "Last-Translator: Frederic L.W.Meunier <linux@urbi.com.br>\n"
 "Language-Team: pt_BR <pt_BR@li.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/email.c:86
+#: editor-plugins/email.c:89
 msgid "The gEdit Email Plugin"
 msgstr "O Plugin de Email do gEdit"
 
@@ -30,35 +30,35 @@ msgstr "Docid é %ld.\n"
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:560
+#: src/commands.c:556
 msgid "Open File..."
 msgstr "Abrir Arquivo..."
 
-#: src/commands.c:637
+#: src/commands.c:633
 msgid "Read only file!"
 msgstr "Arquivo somente para leitura!"
 
-#: src/commands.c:663
+#: src/commands.c:659
 msgid "Error saving file!"
 msgstr "Erro salvando arquivo!"
 
-#: src/commands.c:686
+#: src/commands.c:682
 msgid "Save As..."
 msgstr "Salvar como..."
 
-#: src/commands.c:728
+#: src/commands.c:724
 msgid "Are you sure you wish to revert all changes?"
 msgstr "Você tem certeza que quer voltar atrás em todas as mudanças?"
 
-#: src/commands.c:770
+#: src/commands.c:766
 msgid "Document Unchanged..."
 msgstr "Documento não foi modifico..."
 
-#: src/commands.c:772
+#: src/commands.c:768
 msgid "Document Unsaved..."
 msgstr "Documento não foi salvo..."
 
-#: src/commands.c:1083 src/commands.c:1084
+#: src/commands.c:1079 src/commands.c:1080
 msgid "_File"
 msgstr "_Arquivo"
 
@@ -98,11 +98,19 @@ msgstr ""
 msgid "       Martin Baulig"
 msgstr ""
 
-#: src/gE_about.c:50
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+#: src/gE_about.c:39
+msgid "       Thomas Holmgren"
+msgstr ""
+
+#: src/gE_about.c:40
+msgid "       Martijn van Beers"
 msgstr ""
 
 #: src/gE_about.c:52
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:54
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit é um pequeno e leve editor de texto para o GNOME/Gtk+"
 
@@ -128,8 +136,8 @@ msgid "Close"
 msgstr "Fechar"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:763
-#: src/gE_print.c:70 src/toolbar.c:46
+#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:917
+#: src/gE_print.c:71 src/toolbar.c:46
 msgid "Print"
 msgstr "Imprimir"
 
@@ -138,11 +146,11 @@ msgid "Open (swap) .c/.h file"
 msgstr "Abrir (alternar) arquivo .c/.h"
 
 #. line and column indicators
-#: src/gE_document.c:117
+#: src/gE_document.c:118
 msgid "Column:"
 msgstr "Coluna:"
 
-#: src/gE_document.c:126
+#: src/gE_document.c:127
 msgid "Line"
 msgstr "Linha"
 
@@ -170,115 +178,129 @@ msgstr "_Remover Visão"
 msgid "Remove view of the document"
 msgstr "Remover visão do documento"
 
-#: src/gE_mdi.c:483
+#: src/gE_mdi.c:486
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr "'%s' foi modificado. Você desejá salvá-lo?"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:481
-#: src/gE_prefs_box.c:482 src/gE_prefs_box.c:532 src/gE_prefs_box.c:533
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:508
+#: src/gE_prefs_box.c:509 src/gE_prefs_box.c:559 src/gE_prefs_box.c:560
 #: src/menus.c:251
 msgid "_Plugins"
 msgstr ""
 
-#: src/gE_prefs_box.c:82
+#: src/gE_prefs_box.c:89
 msgid "Default"
 msgstr ""
 
-#: src/gE_prefs_box.c:83
+#: src/gE_prefs_box.c:90
 msgid "Notebook"
 msgstr ""
 
-#: src/gE_prefs_box.c:84
+#: src/gE_prefs_box.c:91
 msgid "Toplevel"
 msgstr "Primeiro plano"
 
-#: src/gE_prefs_box.c:85
+#: src/gE_prefs_box.c:92
 msgid "Modal"
 msgstr ""
 
-#: src/gE_prefs_box.c:230
+#: src/gE_prefs_box.c:251
 msgid "Appearance"
 msgstr "Aparência"
 
-#: src/gE_prefs_box.c:243
+#: src/gE_prefs_box.c:264
 msgid "Show Statusbar"
 msgstr "Mostrar barra de estado"
 
-#: src/gE_prefs_box.c:252
+#: src/gE_prefs_box.c:273
 msgid "Show Splitscreen"
 msgstr "Mostrar divisão de tela"
 
-#: src/gE_prefs_box.c:261
+#: src/gE_prefs_box.c:282
 msgid "Editor Behavior"
 msgstr "Comportamento do Editor"
 
-#: src/gE_prefs_box.c:274
+#: src/gE_prefs_box.c:295
 msgid "Enable Autoindent"
 msgstr "Habilitar Autoindent"
 
-#: src/gE_prefs_box.c:283
+#: src/gE_prefs_box.c:304
 msgid "Enable Wordwrap"
 msgstr "Habilitar retorno de linha automático"
 
-#: src/gE_prefs_box.c:303
+#: src/gE_prefs_box.c:324
 msgid "Print Command"
 msgstr "Comando para Imprimir"
 
-#: src/gE_prefs_box.c:393
+#: src/gE_prefs_box.c:414
 msgid "Current Font"
 msgstr "Fonte Atual"
 
-#: src/gE_prefs_box.c:410
+#: src/gE_prefs_box.c:431
 msgid "Select..."
 msgstr "Selecionar..."
 
-#: src/gE_prefs_box.c:575
+#: src/gE_prefs_box.c:481
+msgid "Plugin Selector"
+msgstr ""
+
+#: src/gE_prefs_box.c:602
 msgid "Name"
 msgstr "Nome"
 
-#: src/gE_prefs_box.c:575
+#: src/gE_prefs_box.c:602
 msgid "Location"
 msgstr "Posição"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
+#: src/gE_prefs_box.c:609 src/gE_prefs_box.c:927
 msgid "Plugins"
 msgstr ""
 
-#: src/gE_prefs_box.c:596
+#: src/gE_prefs_box.c:623
 msgid "Use Plugins"
 msgstr "Usar Plugins"
 
-#: src/gE_prefs_box.c:663
+#: src/gE_prefs_box.c:690
 msgid "Add"
 msgstr "Adicionar"
 
-#: src/gE_prefs_box.c:668
+#: src/gE_prefs_box.c:695
 msgid "Remove"
 msgstr "Remover"
 
-#: src/gE_prefs_box.c:691
+#: src/gE_prefs_box.c:718
 msgid "MDI Mode"
 msgstr "Modo MDI"
 
+#: src/gE_prefs_box.c:773
+msgid "Window Size"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:758
+#: src/gE_prefs_box.c:907
 msgid "General"
 msgstr "Geral"
 
+#. Window Settings
+#: src/gE_prefs_box.c:912
+#, fuzzy
+msgid "Window"
+msgstr "Achar"
+
 #. Font Settings
-#: src/gE_prefs_box.c:768
+#: src/gE_prefs_box.c:922
 msgid "Font"
 msgstr "Fonte"
 
 #. MDI Settings
-#: src/gE_prefs_box.c:778
+#: src/gE_prefs_box.c:932
 msgid "MDI"
 msgstr ""
 
-#: src/gE_print.c:83
+#: src/gE_print.c:84
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -287,23 +309,23 @@ msgstr ""
 "Entre a seguir o comando para imprimir\n"
 "Lembre-se de incluir '%s'"
 
-#: src/gE_print.c:91
+#: src/gE_print.c:92
 msgid "Print Command:"
 msgstr "Comando para Imprimir:"
 
-#: src/gE_print.c:218
+#: src/gE_print.c:219
 msgid "Print anyway"
 msgstr "Imprimir de qualquer maneira"
 
-#: src/gE_print.c:218
+#: src/gE_print.c:219
 msgid " Save, then print "
 msgstr "Salvar e imprimir em seguida"
 
-#: src/gedit.c:125
+#: src/gedit.c:126
 msgid "Launch a plugin at startup"
 msgstr "Carregar um plugin quando iniciar"
 
-#: src/gedit.c:125
+#: src/gedit.c:126
 msgid "PLUGIN-NAME"
 msgstr "NOME-DO-PLUGIN"
 
@@ -481,55 +503,55 @@ msgstr ""
 "Total de Linhas: %i\n"
 "Linha Atual: %i"
 
-#: src/search.c:309
+#: src/search.c:310
 msgid "Go to line"
 msgstr "Ir para a linha"
 
-#: src/search.c:319
+#: src/search.c:320
 msgid "Line number"
 msgstr "Linha número"
 
-#: src/search.c:342
+#: src/search.c:343
 msgid "Search from cursor"
 msgstr "Procurar a partir do cursor"
 
-#: src/search.c:349
+#: src/search.c:350
 msgid "Search from beginning of document"
 msgstr "Procurar a partir do começo do documento"
 
-#: src/search.c:356
+#: src/search.c:357
 msgid "Search from end of document"
 msgstr "Procurar a partir do fim do documento"
 
-#: src/search.c:363
+#: src/search.c:364
 msgid "Case sensitive"
 msgstr "Case sensitiva"
 
-#: src/search.c:369
+#: src/search.c:370
 msgid "Reverse search"
 msgstr "Inverter procura"
 
-#: src/search.c:381
+#: src/search.c:382
 msgid "Search"
 msgstr "Procurar de novo"
 
-#: src/search.c:386 src/search.c:414
+#: src/search.c:387 src/search.c:415
 msgid "Search for:"
 msgstr "Procurar por:"
 
-#: src/search.c:408
+#: src/search.c:409
 msgid "Replace"
 msgstr "Substituir"
 
-#: src/search.c:424
+#: src/search.c:425
 msgid "Replace with:"
 msgstr "Substituir com:"
 
-#: src/search.c:435
+#: src/search.c:436
 msgid "Ask before replacing"
 msgstr "Perguntar antes de substituir"
 
-#: src/search.c:628
+#: src/search.c:629
 msgid "Replace?"
 msgstr "Substituir?"
 

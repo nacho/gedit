@@ -390,12 +390,18 @@ static void
 line_pos_cb(GtkWidget *w, gE_data *data)
 {
 	static char col [32];
+	GtkWidget *label;
+	GnomeApp *app;
 	/*GtkWidget *text = data->temp2;*/
 	int x;
-
-	sprintf (col, "%d", GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
 	
-	gtk_label_set (GTK_LABEL(col_label), col);
+	app = gnome_mdi_get_active_window  (mdi);
+	
+	sprintf (col, "Column:\t%d", GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
+	
+	label = gnome_dock_item_get_child (gnome_app_get_dock_item_by_name (app, "Column"));
+	
+	gtk_label_set (GTK_LABEL(label), col);
 
 }
 
@@ -1117,12 +1123,17 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 static void
 recent_cb(GtkWidget *w, gE_data *data)
 {
-	gE_document *doc = gE_document_current ();
+	gE_document *doc;
 	
-	if (doc->filename || doc->changed)
+	if ((doc = gE_document_current ()))
+	  {
+	    if (doc->filename || doc->changed)
+	      doc = gE_document_new_with_file (data->temp1);
+	    else		
+	      gE_file_open (doc, data->temp1);
+	  }
+	else
 	  doc = gE_document_new_with_file (data->temp1);
-	else		
-	  gE_file_open (doc, data->temp1);
 }
 
 

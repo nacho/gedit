@@ -79,9 +79,10 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 {
         /*GnomeUIInfo * gedit_menu;
 	gE_window *w;*/
-	GtkWidget *tmp, *statusbar;
+	GtkWidget *tmp, *statusbar, *box;
 	gint *ptr; /* For plugin stuff. */
-
+	gint statsize;
+	
 	static GtkTargetEntry drag_types[] =
 	{
 		{ "text/uri-list", 0, 0 },
@@ -104,37 +105,55 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 	g_hash_table_insert (win_pointer_to_int, app, ptr);
 	
 
-	gtk_widget_set_usize (GTK_WIDGET(app), settings->width, settings->height);
+	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 
 	/* statusbar */
+	statsize = (settings->width - 160);
+	
 	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+	gtk_widget_set_usize (GTK_WIDGET (statusbar), statsize, 0);
+	gnome_app_add_docked (GNOME_APP (app), GTK_WIDGET (statusbar), "Statusbar", 
+						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
+						0, 0, 0);
 	gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
-
 
 	/* line and column indicators */
 
-	tmp = gtk_label_new(_("Column:"));
+	/*tmp = gtk_label_new(_("Column:"));
 	gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
-	gtk_widget_show(tmp);
+	gtk_widget_show(tmp);*/
 
-	col_label = gtk_label_new("0");
-	gtk_box_pack_start(GTK_BOX(statusbar), col_label, FALSE, FALSE, 1);
-	gtk_widget_set_usize(col_label, 40, 0);
+	col_label = gtk_label_new (_("Column:\t0"));
+	/*gtk_box_pack_start(GTK_BOX(statusbar), col_label, FALSE, FALSE, 1);*/
+	gtk_widget_set_usize(col_label, 100, 0);
 	gtk_widget_show(col_label);
 
+	gnome_app_add_docked (GNOME_APP (app), col_label, "Column", 
+						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
+						0, 1, 0);
+
+	
+	box = gtk_hbox_new (FALSE, 1);
+	gtk_widget_show (box);
+	
 	tmp = gtk_button_new_with_label(_("Line"));
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(count_lines_cb), NULL);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (box), tmp, TRUE, TRUE, 5);
+	/*gtk_box_pack_start(GTK_BOX(statusbar), tmp, TRUE, TRUE, 0);*/
 	gtk_widget_show(tmp);
+
+	gnome_app_add_docked (GNOME_APP (app), box, "Line", 
+						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
+						0, 2, 0);
 
 	/*w->statusbox = statusbar;*/
 
 	/* finish up */
-	gtk_widget_show(statusbar);
+	/*gtk_widget_show(statusbar);*/
 
 	gE_get_settings ();
 
@@ -185,13 +204,12 @@ void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 	if (split_screen)
 	  {
 	   	gtk_widget_show (doc->split_parent);
-	   	settings->splitscreen = TRUE;
 	  }
 	else
 	  {
 		gtk_widget_hide (doc->split_parent);
-		settings->splitscreen = FALSE;
 	  }
+   	doc->splitscreen = split_screen;
 }
 
 

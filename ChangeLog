@@ -1,3 +1,27 @@
+Thu Jun 10 16:42:56 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_document.c: (gE_window_new) Using gtk_window_set_default_size 
+	  finally fixes the window-jumping-back-to-the-usize-setting! GtkWidgets
+	  don't like being resized smaller than the size they have been
+	  specified! grr... this works.. no more email about it!
+	  
+	  Made the statusbar, Column indicator, and Line button GnomeDockItem's..
+	  Now you can customise the bottom row (i'll add some prefs box
+	  stuff for these features).. Problem: Statusbar is now a hardcoded
+	  size (kinda.. window_width minus 160 (size of the other two dock
+	  items), so it all fits on the window properly.. otherwise it looks
+	  yukky when you do things! (again, i'll fiddle with the prefs box
+	  and add customisability to all this)...
+	
+	* makeconfig.pl: Upped version to 0.5.4pre.. now the code is nolonger 
+	  the same as the released 0.5.3 code =)
+
+Fri Jun  4 13:52:21 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (recent_cb) Check wether there actually is a document
+	  available, instead of presuming there is.
+	  Fixes a bug brought up by Kuba Winnicki <bw@idc.com.pl>.
+
 Mon May 24 19:50:58 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* Released 0.5.3

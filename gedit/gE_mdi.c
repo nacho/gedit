@@ -36,6 +36,7 @@
 #include "gE_mdi.h"
 #include "gE_print.h"
 #include "gE_plugin_api.h"
+#include "menus.h"
 
 static void 	  gE_document_class_init (gE_document_class *);
 static void 	  gE_document_init (gE_document *);
@@ -533,19 +534,22 @@ void view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	GnomeUIInfo *uiinfo;
 	gE_document *doc;
 	GtkWidget *shell, *item;
-	gint group_item, pos;
+	gint group_item, pos, i;
 	gchar *p, *label;
 
 	if (mdi->active_view == NULL)
 	  return;
 	  
 	app = gnome_mdi_get_app_from_view (mdi->active_view);
-/*	
-	label = NULL;
+	
+	/*gE_set_menu_toggle_states();
+	*/
+/*	label = NULL;
 	p = g_strconcat (GNOME_MENU_VIEW_PATH, label, NULL);
 	shell = gnome_app_find_menu_pos (app->menubar, p, &pos);
 	if (shell)
 	  {
+	    
 	    item = g_list_nth_data (GTK_MENU_SHELL (shell)->children, pos -1);
 	    
 	    if (item)
@@ -553,8 +557,8 @@ void view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
    
 	  }
 	g_free (p);
-*/
-	
+
+*/	
 }
 
 void add_view_cb (GnomeMDI *mdi, gE_document *doc)
