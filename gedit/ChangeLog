@@ -1,5 +1,13 @@
 2000-06-15  Chema Celorio  <chema@celorio.com>
 
+	* print.c (file_print_cb): finish print_range = selection
+	you will need to update gnome_print.
+
+	* view.c (gedit_view_get_selection): if star_pos = end_pos
+	selection is not active.
+
+2000-06-15  Chema Celorio  <chema@celorio.com>
+
 	* document.c (gedit_document_get_tab_name): mark strings for tranlation
 	in a different way. They are not beeing tranlated.
 	(gedit_document_set_title): mark string

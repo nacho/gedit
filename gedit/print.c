@@ -156,9 +156,19 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	/* file_print preview is a false when preview is requested */ 
 	if (file_printpreview)
 	{
+		gint selection_flag;
+		guint start_pos, end_pos;
+
+		if (gedit_view_get_selection (pji->view, &start_pos, &end_pos))
+			selection_flag = GNOME_PRINT_RANGE_SELECTION;
+		else
+			selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
+		
 		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
-							  GNOME_PRINT_RANGE_ALL | GNOME_PRINT_RANGE_RANGE | GNOME_PRINT_RANGE_SELECTION,
+							  GNOME_PRINT_RANGE_ALL |
+							  GNOME_PRINT_RANGE_RANGE |
+							  selection_flag,
 							  1, pji->pages, "A",
 							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
 
@@ -179,15 +189,29 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 
 		printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
 
-		pji->print_first =0;
-		pji->print_last =0;
+		pji->print_first = 0;
+		pji->print_last = 0;
+
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
+
 		if (pji->range == GNOME_PRINT_RANGE_SELECTION)
 		{
-			g_warning ("Print selection not implemented\nSetting printing range to PRINT_RANGE_ALL");
-			pji->range = GNOME_PRINT_RANGE_ALL;
+			g_free (pji->buffer);
+			pji->buffer = gedit_document_get_chars (pji->doc, start_pos, end_pos);
+			pji->buffer_size = end_pos - start_pos;
+			pji->total_lines = print_determine_lines(pji, FALSE);
+			pji->total_lines_real = print_determine_lines(pji, TRUE);
+			pji->pages = ((int) (pji->total_lines_real-1)/pji->lines_per_page)+1;
+			pji->print_first = 1;
+			pji->print_last = pji->pages;
+			/*
+			g_print ("size: %i lines: %i lines real: %i pages :%i\n",
+				 pji->buffer_size,
+				 pji->total_lines,
+				 pji->total_lines_real,
+				 pji->pages);
+			*/
 		}
-		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
 	else

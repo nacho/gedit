@@ -798,10 +798,16 @@ gedit_view_get_selection (View *view, guint *start, guint *end)
 	if (end != NULL)
 		*end = end_pos;
 
-	if (start_pos > 0 || end_pos > 0)
+	if ((start_pos > 0 || end_pos > 0) && (start_pos != end_pos))
+	{
 		return TRUE;
+	}
 	else
+	{
+		start_pos = 0;
+		end_pos = 0;
 		return FALSE;
+	}
 }
 
 
