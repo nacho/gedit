@@ -19,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-01 13:22+0100\n"
-"PO-Revision-Date: 2004-08-18 11:33+0200\n"
+"POT-Creation-Date: 2004-11-22 13:04+0100\n"
+"PO-Revision-Date: 2004-11-22 15:15+0100\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgstr "Tekstredigeringautomatfabrik"
 msgid "Edit text files"
 msgstr "Redigér tekstfiler"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:337
 msgid "Text Editor"
 msgstr "Tekstredigering"
 
@@ -69,9 +69,8 @@ msgstr ""
 "standardskrifttype\" er slået fra."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "Aktivér %s"
+msgstr "Aktive udvidelsesmoduler"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -115,7 +114,7 @@ msgstr "Endelse for sikkerhedskopier"
 
 #: data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
-msgstr "Kropskrifttype ved udskrift"
+msgstr "Kropskrifttype ved udskrivning"
 
 #: data/gedit.schemas.in.h:12
 msgid "Create Backup Copies"
@@ -167,7 +166,7 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
-msgstr "Sidehovedskrifttype ved udskrift"
+msgstr "Sidehovedskrifttype ved udskrivning"
 
 #: data/gedit.schemas.in.h:22
 msgid ""
@@ -184,7 +183,7 @@ msgstr "Indsæt mellemrum"
 
 #: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
-msgstr "Linjenummerskrifttype ved udskrift"
+msgstr "Linjenummerskrifttype ved udskrivning"
 
 #: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
@@ -195,6 +194,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Liste af aktive udvidelsesmoduler. Den indeholder \"Location\" for the "
+"aktive udvidelsesmodul. Kig i .gedit-plugin-filen for at hente \"Location\" "
+"for et givet udvidelsesmodul."
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -217,10 +219,14 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:31
+msgid "Monospace 9"
+msgstr "Monospace 9"
+
+#: data/gedit.schemas.in.h:32
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:33
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -228,43 +234,51 @@ msgstr ""
 "Antal minutter der går før ændrede filer gemmes automatisk. Træder kun i "
 "kraft hvis \"Automatisk gemning\" slås til."
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:34
 msgid "Print Header"
 msgstr "Udskriv sidehoveder"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:35
 msgid "Print Line Numbers"
 msgstr "Udskriv linjenumre"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:36
 msgid "Print Syntax Highlighting"
 msgstr "Udskriv syntaksfremhævning"
 
-#: data/gedit.schemas.in.h:36
-msgid "Printing Line Wrapping Mode"
-msgstr "Linjeombrydning ved udskrift"
-
 #: data/gedit.schemas.in.h:37
+msgid "Printing Line Wrapping Mode"
+msgstr "Linjeombrydning ved udskrivning"
+
+#: data/gedit.schemas.in.h:38
 msgid "Right Margin Position"
 msgstr "Højre margens position"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:39
+msgid "Sans 11"
+msgstr "Sans 11"
+
+#: data/gedit.schemas.in.h:40
+msgid "Sans 8"
+msgstr "Sans 8"
+
+#: data/gedit.schemas.in.h:41
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:42
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:43
 msgid "Selected Text Color"
 msgstr "Markeret tekstfarve"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:44
 msgid "Selection Color"
 msgstr "Markeringsfarve"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -274,7 +288,7 @@ msgstr ""
 "filer. \"CURRENT\" er den aktuelle regions kodning. Kun genkendte kodninger "
 "benyttes."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -282,12 +296,12 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
-"Angiver hvordan lange linjer skal ombrydes ved udskrift. Benyt "
+"Angiver hvordan lange linjer skal ombrydes ved udskrivning. Benyt "
 "\"GTK_WRAP_NONE\" for ingen ombrydning, \"GTK_WRAP_WORD\" for ombrydning ved "
 "mellemrum mellem ord og \"GTK_WRAP_CHAR\" for ombrydning ved enkelt tegn. "
 "Bemærk at værdierne skal skrives med store bogstaver."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -300,30 +314,59 @@ msgstr ""
 "mellemrum mellem ord og \"GTK_WRAP_CHAR\" for ombrydning ved enkelt tegn. "
 "Bemærk at værdierne skal skrives med store bogstaver."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Angiver den skrifttype der benyttes for et dokuments krop ved udskrivning."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:49
+msgid ""
+"Specifies the font to use for a document's body when printing documents. "
+"This is a gnome-print font name and replaced by print_font_body_pango."
+msgstr ""
+"Angiver den skrifttype der benyttes for et dokuments krop ved udskrivning. "
+"Dette er et gnome-print-skrifttypenavn og udskiftet med print_font_body_pango."
+
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"Angiver den skrifttype der benyttes for linjenumre ved udskrift. Dette "
+"Angiver den skrifttype der benyttes for linjenumre ved udskrivning. Dette "
 "træder kun i kraft hvis \"Udskriv linjenumre\" er sat til en værdi "
 "forskellig fra nul."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+"gnome-print font name and replaced by print_font_numbers_pango."
+msgstr ""
+"Angiver den skrifttype der benyttes for linjenumre ved udskrivning. Dette "
+"træder kun i kraft hvis \"Udskriv linjenumre\" er sat til en værdi "
+"forskellig fra nul. Dette er et gnome-print-skrifttypenavn og udskiftet "
+"med print_font_numbers_pango."
+
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
-"Angiver den skrifttype der benyttes til sidehoveder ved udskrift. Dette "
+"Angiver den skrifttype der benyttes til sidehoveder ved udskrivning. Dette "
 "træder kun i kraft hvis \"Udskriv sidehoveder\" er slået til."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on. This is a "
+"gnome-print font name and replaced by print_font_header_pango."
+msgstr ""
+"Angiver den skrifttype der benyttes til sidehoveder ved udskrivning. Dette "
+"træder kun i kraft hvis \"Udskriv sidehoveder\" er slået til. Dette er et "
+"gnome-print-skrifttypenavn og udskiftet med print_font_header_pango."
+
+#: data/gedit.schemas.in.h:54
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -331,22 +374,22 @@ msgstr ""
 "Angiver det maksimale antal af nyligt åbnede filer der vises i undermenuen "
 "\"Seneste filer\"."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:55
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Angiver antallet af mellemrum der skal vises i stedet for tabulatortegn."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:56
 msgid "Specifies the position of the right margin."
 msgstr "Angiver positionen af den højre margen."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:57
 msgid "Status Bar is Visible"
 msgstr "Vis statuslinje"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -361,35 +404,35 @@ msgstr ""
 "\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" for at vise prioriteret tekst ved siden "
 "af ikoner. Bemærk at værdierne skal skrives med stort."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:59
 msgid "Tab Size"
 msgstr "Tabulatorstørrelse"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:60
 msgid "Text Color"
 msgstr "Tekstfarve"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:61
 msgid "Toolbar Buttons Style"
 msgstr "Knaptype for værktøjslinje"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:62
 msgid "Toolbar is Visible"
 msgstr "Vis værktøjslinje"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:63
 msgid "Undo Actions Limit"
 msgstr "Antal fortrudte handlinger"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:64
 msgid "Use Default Colors"
 msgstr "Benyt standardfarver"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:65
 msgid "Use Default Font"
 msgstr "Benyt standardskrifttype"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -398,7 +441,7 @@ msgstr ""
 "Om ændrede filer skal gemmes efter et stykke tid. Du kan angive intervallet "
 "med \"Interval for automatisk gemning\""
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -406,44 +449,44 @@ msgstr ""
 "Om der skal oprettes sikkerhedskopier af gemte filer. Du kan angive endelse "
 "for sikkerhedskopierne med indstillingen \"Endelse for sikkerhedskopier\"."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:68
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Om linjenumre skal vises i redigeringsområdet."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:69
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Om den højre margen skal vises i redigeringsområdet."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:70
 msgid "Whether gedit should enable auto indentation."
 msgstr "Om automatisk indrykning skal aktiveres."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:71
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Om syntaksfremhævning skal aktiveres."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:72
 msgid "Whether gedit should include a document header when printing documents."
-msgstr "Om der skal medtages et sidehoved ved udskrift."
+msgstr "Om der skal medtages et sidehoved ved udskrivning."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:73
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Om mellemrum skal indsættes i stedet for tabulatorer."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:74
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr "Om syntaksfremhævning skal medtages ved udskrift."
+msgstr "Om syntaksfremhævning skal medtages ved udskrivning."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:75
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Om statuslinjen nederst i redigeringsvinduer vises."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:76
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Om værktøjslinjen skal vises i redigeringsvinduer."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -454,7 +497,7 @@ msgstr ""
 "slået fra, bliver farvene fra \"Baggrundsfarve\", \"Tekstfarve\", \"Markeret "
 "tekstfarve\" og \"Markeringsfarve\" benyttet."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:78
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -464,11 +507,11 @@ msgstr ""
 "dette er slået fra, bliver den skrifttype der er angivet under "
 "\"Redigeringsskrifttype\", brugt i stedet."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:79
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:80
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -490,7 +533,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "Hvis du ikke gemmer dine dokumenter, vil alle dine ændringer gå tabt."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:663
 msgid "S_elect the documents you want to save:"
 msgstr "_Vælg de dokumenter du ønsker at gemme:"
 
@@ -507,11 +550,10 @@ msgid "Do_n't save"
 msgstr "Gem _ikke"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 msgid "Question"
 msgstr "Spørgsmål"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -523,12 +565,12 @@ msgstr[0] ""
 msgstr[1] ""
 "Hvis du ikke gemmer, vil ændringer fra de sidste %ld sekunder gå tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Hvis du ikke gemmer, vil ændringer fra det sidste minut gå tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:382
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -543,7 +585,7 @@ msgstr[1] ""
 "Hvis du ikke gemmer, vil ændringer fra det sidste minut og %ld sekunder gå "
 "tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -555,11 +597,11 @@ msgstr[0] ""
 msgstr[1] ""
 "Hvis du ikke gemmer, vil ændringer fra de sidste %ld minutter gå tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr "Hvis du ikke gemmer, vil ændringer fra den sidste time gå tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -573,7 +615,7 @@ msgstr[1] ""
 "Hvis du ikke gemmer, vil ændringer fra den sidste time og %d minutter gå "
 "tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
@@ -582,12 +624,12 @@ msgid_plural ""
 msgstr[0] "Hvis du ikke gemmer, vil ændringer fra den sidste %d time gå tabt."
 msgstr[1] "Hvis du ikke gemmer, vil ændringer fra de sidste %d timer gå tabt."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Gem ændringerne i dokumentet \"%s\" før programmet lukkes?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:646
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -598,20 +640,20 @@ msgstr[1] ""
 "Der er %d dokumenter med ugemte ændringer. Gem ændringer før lukning?"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Hvis du ikke gemmer, vil alle dine ændringer gå tabt."
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:160
+#: gedit/dialogs/gedit-dialog-goto-line.c:184
 msgid "Go to Line"
 msgstr "Gå til linje"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:173
+#: gedit/dialogs/gedit-dialog-goto-line.c:197
 msgid "_Go to Line"
 msgstr "_Gå til linje"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:379
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:383
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teksten \"%s\" blev ikke fundet."
@@ -626,7 +668,7 @@ msgid "Replace _All"
 msgstr "Erstat _alle"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:127
+#: gedit/gedit-file-selector-util.c:114
 msgid "_Replace"
 msgstr "_Erstat"
 
@@ -634,7 +676,7 @@ msgstr "_Erstat"
 msgid "Find"
 msgstr "Find"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1134
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
 msgid "Found and replaced %d occurrence."
 msgid_plural "Found and replaced %d occurrences."
@@ -645,18 +687,18 @@ msgstr[1] "Fandt og erstattede %d forekomster."
 msgid "Open Location"
 msgstr "Åbn placering"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:76
+#: gedit/dialogs/gedit-encodings-dialog.c:75
 #, c-format
 msgid "There was an error displaying help: %s"
 msgstr "Der opstod en fejl ved visning af hjælp: %s"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:381
-#: gedit/dialogs/gedit-encodings-dialog.c:449
+#: gedit/dialogs/gedit-encodings-dialog.c:380
+#: gedit/dialogs/gedit-encodings-dialog.c:448
 msgid "_Description"
 msgstr "_Beskrivelse"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:390
-#: gedit/dialogs/gedit-encodings-dialog.c:458
+#: gedit/dialogs/gedit-encodings-dialog.c:389
+#: gedit/dialogs/gedit-encodings-dialog.c:457
 msgid "_Encoding"
 msgstr "_Kodning"
 
@@ -672,11 +714,11 @@ msgstr "Tegnkodninger"
 msgid "E_ncodings shown in menu:"
 msgstr "_Kodninger der vises i menu:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:496
+#: gedit/dialogs/gedit-page-setup-dialog.c:428
 msgid "Body font picker"
 msgstr "Kropskrifttypevælger"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:497
+#: gedit/dialogs/gedit-page-setup-dialog.c:429
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -684,43 +726,34 @@ msgstr ""
 "Tryk på denne knap for at vælge den skrifttype der bliver brugt til at "
 "udskrive kroppen af dokumentet"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:498
+#: gedit/dialogs/gedit-page-setup-dialog.c:430
 msgid "Page headers font picker"
 msgstr "Sidehovedskrifttypevælger"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:499
+#: gedit/dialogs/gedit-page-setup-dialog.c:431
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Tryk på denne knap for at vælge den skrifttype der bliver brugt til at "
 "udskrive sidehoveder"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:500
+#: gedit/dialogs/gedit-page-setup-dialog.c:432
 msgid "Line numbers font picker"
 msgstr "Linjenumreskrifttypevælger"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:501
+#: gedit/dialogs/gedit-page-setup-dialog.c:433
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Tryk på denne knap for at vælge den skrifttype der bliver brugt til at "
 "udskrive linjenumre"
 
-#: gedit/dialogs/gedit-plugin-manager.c:53
+#: gedit/dialogs/gedit-plugin-manager.c:55
 msgid "Plugin"
 msgstr "Udvidelsesmodul"
 
-#: gedit/dialogs/gedit-plugin-manager.c:54
+#: gedit/dialogs/gedit-plugin-manager.c:56
 msgid "Enabled"
 msgstr "Aktiveret"
-
-#: gedit/dialogs/gedit-plugin-manager.c:499
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "Kunne ikke finde plugin-manager.glade2, geninstallér gedit.\n"
-
-#: gedit/dialogs/gedit-plugin-manager.c:517
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"Ugyldig Glade-fil for modulhåndtering - ikke alle kontroller blev fundet.\n"
 
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
@@ -743,34 +776,34 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Den valgte fil er ikke kørbar."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:673
+#: gedit/dialogs/gedit-preferences-dialog.c:672
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Tryk på denne knap for at vælge den skrifttype der bliver brugt af "
 "redigeringsprogrammet"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:674
 msgid "Push this button to configure text color"
 msgstr "Tryk på denne knap for at konfigurere tekstfarven"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:677
+#: gedit/dialogs/gedit-preferences-dialog.c:676
 msgid "Push this button to configure background color"
 msgstr "Tryk på denne knap for at konfigurere baggrundsfarven"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:679
+#: gedit/dialogs/gedit-preferences-dialog.c:678
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Tryk på denne knap for at konfigurere farven for markeret tekst"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:682
+#: gedit/dialogs/gedit-preferences-dialog.c:681
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Tryk på denne knap for at konfigurere baggrundsfarven for markeret tekst"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1132
+#: gedit/dialogs/gedit-preferences-dialog.c:1131
 msgid "Elements"
 msgstr "Elementer"
 
@@ -992,91 +1025,6 @@ msgstr "_minutter"
 msgid "act_ions"
 msgstr "_handlinger"
 
-#: gedit/dialogs/gnome-print-font-dialog.c:111
-msgid "_Insert a new preview phrase."
-msgstr "_Indsæt en ny eksempeltekst"
-
-#: gedit/dialogs/gnome-print-font-dialog.c:117
-msgid "Modify preview phrase..."
-msgstr "Ret eksempelteksten..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:171
-msgid "Preview"
-msgstr "Eksempel"
-
-#: gedit/dialogs/gnome-print-font-dialog.c:184
-msgid "_Modify preview phrase..."
-msgstr "_Ret eksempelteksten..."
-
-#: gedit/dialogs/gnome-print-font-dialog.c:245
-msgid "Font Selection"
-msgstr "Skrifttypevælger"
-
-#: gedit/dialogs/gnome-print-font-picker.c:92
-msgid "Sans Regular 12"
-msgstr "Sans Regular 12"
-
-#: gedit/dialogs/gnome-print-font-picker.c:93
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
-
-#: gedit/dialogs/gnome-print-font-picker.c:94
-msgid "Pick a Font"
-msgstr "Vælg en skrifttype"
-
-#: gedit/dialogs/gnome-print-font-picker.c:179
-msgid "Title"
-msgstr "Titel"
-
-#: gedit/dialogs/gnome-print-font-picker.c:180
-msgid "The title of the selection dialog box"
-msgstr "Titlen for vælgervinduet"
-
-#: gedit/dialogs/gnome-print-font-picker.c:200
-msgid "Font name"
-msgstr "Skrifttypenavn"
-
-#: gedit/dialogs/gnome-print-font-picker.c:201
-msgid "Name of the selected font"
-msgstr "Navnet på den valgte skrifttype"
-
-#: gedit/dialogs/gnome-print-font-picker.c:209
-msgid "Preview text"
-msgstr "Eksempeltekst"
-
-#: gedit/dialogs/gnome-print-font-picker.c:210
-msgid "Preview text shown in the dialog"
-msgstr "Eksempeltekst der vises i vinduet"
-
-#: gedit/dialogs/gnome-print-font-picker.c:218
-msgid "Use font in label"
-msgstr "Benyt skrifttype i etiket"
-
-#: gedit/dialogs/gnome-print-font-picker.c:219
-msgid "Use font in the label in font info mode"
-msgstr "Benyt skrifttype i etiket i skrifttypeinfotilstand"
-
-#: gedit/dialogs/gnome-print-font-picker.c:227
-msgid "Font size for label"
-msgstr "Skriftstørrelse for etiket"
-
-#: gedit/dialogs/gnome-print-font-picker.c:228
-msgid "Font size for label in font info mode"
-msgstr "Skriftstørrelse for etiket i skrifttypeinfotilstand"
-
-#: gedit/dialogs/gnome-print-font-picker.c:238
-msgid "Show size"
-msgstr "Vis størrelse"
-
-#: gedit/dialogs/gnome-print-font-picker.c:239
-msgid "Show size in font info mode"
-msgstr "Vis størrelse i skrifttypeinfotilstand"
-
-#: gedit/dialogs/gnome-print-font-picker.c:1018
-msgid "Font"
-msgstr "Skrifttype"
-
-#. gnome_print_font_picker_update_font_info
 #: gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "Gå til linje"
@@ -1211,25 +1159,28 @@ msgstr "Indtast _placeringen (URI'en) af den fil du ønsker at åbne:"
 msgid "Open from URI"
 msgstr "Åbn fra URI"
 
-#: gedit/gedit-commands.c:536
-msgid "translator_credits"
-msgstr ""
-"Birger Langkjer <birger.langkjer@image.dk>\n"
-"Keld Simonsen <keld@dkuug.dk>\n"
-"Kenneth Christiansen <kenneth@gnome.org>\n"
-"Marie Lund <marielund@post.cybercity.dk>\n"
-"Martin Willemoes Hansen <mwh@sysrq.dk>\n"
-"Ole Laursen <olau@hardworking.dk>"
-
-#: gedit/gedit-commands.c:549
-msgid "gedit"
-msgstr "Tekstredigering"
-
-#: gedit/gedit-commands.c:553
+#: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr ""
 "Tekstredigering er et lille letvægts redigeringsprogram til Gnome-"
 "skrivebordet"
+
+#: gedit/gedit-commands.c:570
+msgid "gedit"
+msgstr "Tekstredigering"
+
+#: gedit/gedit-commands.c:577
+msgid "translator_credits"
+msgstr ""
+"Birger Langkjer\n"
+"Keld Simonsen\n"
+"Kenneth Christiansen\n"
+"Marie Lund\n"
+"Martin Willemoes Hansen\n"
+"Ole Laursen\n"
+"\n"
+"Dansk-gruppen <dansk@klid.dk>\n"
+"Mere info: http://www.klid.dk/dansk/"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
@@ -1237,9 +1188,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "_Dokumenter"
+msgstr "Ikke gemt dokument"
 
 #: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
@@ -1293,204 +1243,207 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "Kunne ikke oprette en sikkerhedskopi."
 
-#: gedit/gedit-encodings-option-menu.c:207
+#: gedit/gedit-encodings-option-menu.c:204
 msgid "Auto Detected"
 msgstr "Automatisk gættet"
 
-#: gedit/gedit-encodings-option-menu.c:227
-#: gedit/gedit-encodings-option-menu.c:249
+#: gedit/gedit-encodings-option-menu.c:224
+#: gedit/gedit-encodings-option-menu.c:246
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Aktuel region (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:310
+#: gedit/gedit-encodings-option-menu.c:307
 msgid "Add or _Remove..."
 msgstr "Tilføj eller _fjern..."
 
-#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
-#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
-#: gedit/gedit-encodings.c:182
+#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:179
+#: gedit/gedit-encodings.c:181 gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:185
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
-#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:148 gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:258
 msgid "Western"
 msgstr "Vestligt"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:254
 msgid "Central European"
 msgstr "Centraleuropæisk"
 
-#: gedit/gedit-encodings.c:149
+#: gedit/gedit-encodings.c:152
 msgid "South European"
 msgstr "Sydeuropa"
 
-#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
-#: gedit/gedit-encodings.c:265
+#: gedit/gedit-encodings.c:154 gedit/gedit-encodings.c:170
+#: gedit/gedit-encodings.c:268
 msgid "Baltic"
 msgstr "Baltisk"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
-#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
-#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:219
+#: gedit/gedit-encodings.c:232 gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:238 gedit/gedit-encodings.c:256
 msgid "Cyrillic"
 msgstr "Kyrillisk"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
-#: gedit/gedit-encodings.c:263
+#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:266
 msgid "Arabic"
 msgstr "Arabisk"
 
-#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
 #: plugins/spell/gedit-spell-checker.c:89
 msgid "Greek"
 msgstr "Græsk"
 
-#: gedit/gedit-encodings.c:159
+#: gedit/gedit-encodings.c:162
 msgid "Hebrew Visual"
 msgstr "Hebraisk, visuel"
 
-#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
-#: gedit/gedit-encodings.c:261
+#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
+#: gedit/gedit-encodings.c:264
 msgid "Hebrew"
 msgstr "Hebraisk"
 
-#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
+#: gedit/gedit-encodings.c:262
 msgid "Turkish"
 msgstr "Tyrkisk"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:168
 msgid "Nordic"
 msgstr "Nordisk"
 
-#: gedit/gedit-encodings.c:169
+#: gedit/gedit-encodings.c:172
 msgid "Celtic"
 msgstr "Keltisk"
 
-#: gedit/gedit-encodings.c:173
+#: gedit/gedit-encodings.c:176
 msgid "Romanian"
 msgstr "Romansk"
 
-#: gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:188
 msgid "Armenian"
 msgstr "Armensk"
 
-#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
-#: gedit/gedit-encodings.c:198
+#: gedit/gedit-encodings.c:190 gedit/gedit-encodings.c:192
+#: gedit/gedit-encodings.c:201
 msgid "Chinese Traditional"
 msgstr "Kinesisk, traditionel"
 
-#: gedit/gedit-encodings.c:191
+#: gedit/gedit-encodings.c:194
 msgid "Cyrillic/Russian"
 msgstr "Kyrillisk/russisk"
 
-#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:228
+#: gedit/gedit-encodings.c:243
 msgid "Japanese"
 msgstr "Japansk"
 
-#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
-#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
+#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:230
+#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:249
 msgid "Korean"
 msgstr "Koreansk"
 
-#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
-#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
+#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:208 gedit/gedit-encodings.c:212
 msgid "Chinese Simplified"
 msgstr "Kinesisk, forenklet"
 
-#: gedit/gedit-encodings.c:207
+#: gedit/gedit-encodings.c:210
 msgid "Georgian"
 msgstr "Geogiansk"
 
-#: gedit/gedit-encodings.c:237
+#: gedit/gedit-encodings.c:240
 msgid "Cyrillic/Ukrainian"
 msgstr "Kyrillisk/ukrainsk"
 
-#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
-#: gedit/gedit-encodings.c:267
+#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:270
 msgid "Vietnamese"
 msgstr "Vietnamesisk"
 
-#: gedit/gedit-encodings.c:244
+#: gedit/gedit-encodings.c:247
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-file-selector-util.c:146
+#: gedit/gedit-encodings.c:433 gedit/gedit-mdi-child.c:769
+msgid "Unknown"
+msgstr "Ukendt"
+
+#: gedit/gedit-file-selector-util.c:132
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "En fil med navnet \"%s\" eksisterer allerede.\n"
 
-#: gedit/gedit-file-selector-util.c:147
+#: gedit/gedit-file-selector-util.c:133
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Vil du erstatte den med den du er ved at gemme?"
 
-#: gedit/gedit-file-selector-util.c:156
+#: gedit/gedit-file-selector-util.c:142
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Filen \"%s\" er skrivebeskyttet.\n"
 
-#: gedit/gedit-file-selector-util.c:157
+#: gedit/gedit-file-selector-util.c:143
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vil du forsøge at erstatte den med den du er ved at gemme?"
 
-#: gedit/gedit-file-selector-util.c:370
+#: gedit/gedit-file-selector-util.c:356
 msgid "All Files"
 msgstr "Alle filer"
 
-#: gedit/gedit-file-selector-util.c:378
+#: gedit/gedit-file-selector-util.c:364
 msgid "All Text Files"
 msgstr "Alle tekstfiler"
 
-#: gedit/gedit-file-selector-util.c:396
-#, fuzzy
+#: gedit/gedit-file-selector-util.c:382
 msgid "_Character Coding:"
 msgstr "_Tegnkodning:"
 
-#: gedit/gedit-file-selector-util.c:541
+#: gedit/gedit-file-selector-util.c:527
 msgid "Select a file to open"
 msgstr "Vælg en fil at åbne"
 
-#: gedit/gedit-file-selector-util.c:566
+#: gedit/gedit-file-selector-util.c:552
 msgid "Select files to open"
 msgstr "Vælg filer at åbne"
 
-#: gedit/gedit-file-selector-util.c:598
+#: gedit/gedit-file-selector-util.c:584
 msgid "Select a filename to save"
 msgstr "Vælg et filnavn at gemme som"
 
-#: gedit/gedit-file.c:187
+#: gedit/gedit-file.c:190
 msgid "Open File..."
 msgstr "Åbn fil..."
 
-#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
+#: gedit/gedit-file.c:246 gedit/gedit-file.c:387
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Gemmer dokumentet \"%s\"..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
+#: gedit/gedit-file.c:274 gedit/gedit-file.c:404
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumentet \"%s\" er ikke blevet gemt."
 
-#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
+#: gedit/gedit-file.c:282 gedit/gedit-file.c:417
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumentet \"%s\" er blevet gemt."
 
-#: gedit/gedit-file.c:366
+#: gedit/gedit-file.c:369
 msgid "Save as..."
 msgstr "Gem som..."
 
-#: gedit/gedit-file.c:520
+#: gedit/gedit-file.c:522
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Forkast ugemte ændringer i dokumentet \"%s\"?"
 
-#: gedit/gedit-file.c:529
+#: gedit/gedit-file.c:531
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1503,13 +1456,13 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld sekunder vil gå "
 "tabt."
 
-#: gedit/gedit-file.c:538
+#: gedit/gedit-file.c:540
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for det sidste minut vil gå tabt."
 
-#: gedit/gedit-file.c:544
+#: gedit/gedit-file.c:546
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1524,7 +1477,7 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for det sidste minut og %ld sekunder "
 "gå tabt."
 
-#: gedit/gedit-file.c:554
+#: gedit/gedit-file.c:556
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1537,12 +1490,12 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for de sidste %ld minutter vil gå "
 "tabt."
 
-#: gedit/gedit-file.c:569
+#: gedit/gedit-file.c:571
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Ændringer foretaget i dokumentet inden for den sidste time vil gå tabt."
 
-#: gedit/gedit-file.c:575
+#: gedit/gedit-file.c:577
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1557,7 +1510,7 @@ msgstr[1] ""
 "Ændringer foretaget i dokumentet inden for den sidste time og %d minutter gå "
 "tabt."
 
-#: gedit/gedit-file.c:590
+#: gedit/gedit-file.c:592
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1572,61 +1525,66 @@ msgstr[1] ""
 msgid "_Revert"
 msgstr "_Forkast"
 
-#: gedit/gedit-file.c:662
+#: gedit/gedit-file.c:658
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Fejl ved forkastning af dokumentet \"%s\"."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:665
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumentet \"%s\" er ikke blevet forkastet."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumentet \"%s\" er blevet forkastet."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:697
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Forkaster ændringer i dokumentet \"%s\"..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:820
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke læse fra standard-ind."
 
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 msgid "Reverting file:"
 msgstr "Forkaster fil:"
 
-#: gedit/gedit-file.c:926
+#: gedit/gedit-file.c:907
 msgid "Loading file:"
 msgstr "Indlæser fil:"
 
-#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
+#: gedit/gedit-file.c:1087 gedit/gedit-file.c:1307
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Fejl ved indlæsning af filen \"%s\""
 
-#: gedit/gedit-file.c:1120
+#: gedit/gedit-file.c:1108
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Indlæste filen \"%s\""
 
-#: gedit/gedit-file.c:1197
+#: gedit/gedit-file.c:1203
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Indlæste %i fil"
 msgstr[1] "Indlæste %i filer"
 
-#: gedit/gedit-file.c:1231
+#: gedit/gedit-file.c:1262
+#, c-format
+msgid "Created file \"%s\""
+msgstr "Oprettede filen \"%s\""
+
+#: gedit/gedit-file.c:1280
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Indlæser filen \"%s\"..."
 
-#: gedit/gedit-file.c:1378
+#: gedit/gedit-file.c:1431
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1644,53 +1602,45 @@ msgstr "SB"
 msgid "_Move to New Window"
 msgstr "_Flyt til nyt vindue"
 
-#: gedit/gedit-mdi-child.c:768
-msgid "Unknown"
-msgstr "Ukendt"
-
-#: gedit/gedit-mdi-child.c:779
+#: gedit/gedit-mdi-child.c:780
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:786
+#: gedit/gedit-mdi-child.c:790
 msgid "Name:"
 msgstr "Navn:"
 
-#: gedit/gedit-mdi-child.c:787
+#: gedit/gedit-mdi-child.c:791
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: gedit/gedit-mdi-child.c:788
+#: gedit/gedit-mdi-child.c:792
 msgid "Encoding:"
 msgstr "Kodning:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:291 gedit/gedit-mdi.c:451
+#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "Åbn '%s'"
 
-#: gedit/gedit-mdi.c:526
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "Åbn en senest benyttet fil"
 
-#: gedit/gedit-mdi.c:1394
-msgid "(modified)"
-msgstr "(ændret)"
+#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
+msgid "Read Only"
+msgstr "Skrivebeskyttet"
 
-#: gedit/gedit-mdi.c:1400
-msgid "(readonly)"
-msgstr "(skrivebeskyttet)"
-
-#: gedit/gedit-mdi.c:2028
+#: gedit/gedit-mdi.c:2071
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2029
+#: gedit/gedit-mdi.c:2072
 msgid "Use Normal highlight mode"
 msgstr "Benyt normal fremhævningstilstand"
 
-#: gedit/gedit-mdi.c:2105
+#: gedit/gedit-mdi.c:2148
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Benyt fremhævningstilstanden %s"
@@ -1711,11 +1661,11 @@ msgstr "Ryd uddatavinduet"
 msgid "Output Lines"
 msgstr "Uddatalinjer"
 
-#: gedit/gedit-prefs-manager.c:177
+#: gedit/gedit-prefs-manager.c:175
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke klargøre indstillingshåndteringen."
 
-#: gedit/gedit-prefs-manager.c:1151
+#: gedit/gedit-prefs-manager.c:1316
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Forventede '%s', modtog '%s' for nøglen %s"
@@ -1728,30 +1678,30 @@ msgstr "Udskriv"
 msgid "Lines"
 msgstr "Linjer"
 
-#: gedit/gedit-print.c:330
+#: gedit/gedit-print.c:328
 msgid "Preparing pages..."
 msgstr "Forbereder sider..."
 
-#: gedit/gedit-print.c:357
+#: gedit/gedit-print.c:355
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Tegner side %d af %d..."
 
-#: gedit/gedit-print.c:359
+#: gedit/gedit-print.c:357
 #, c-format
 msgid "Printing page %d of %d..."
 msgstr "Udskriver side %d af %d..."
 
-#: gedit/gedit-print.c:381 gedit/gedit-ui.xml.h:40
+#: gedit/gedit-print.c:379 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
 msgstr "Vis udskrift"
 
-#: gedit/gedit-print.c:547
+#: gedit/gedit-print.c:549
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: gedit/gedit-print.c:553
+#: gedit/gedit-print.c:555
 msgid "Page %N of %Q"
 msgstr "Side %N af %Q"
 
@@ -2142,7 +2092,7 @@ msgstr "_Fortryd"
 msgid "_View"
 msgstr "_Vis"
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:421
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2153,36 +2103,36 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placering korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:430
+#: gedit/gedit-utils.c:429
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Kunne ikke åbne filen \"%s\" fordi den indeholder ødelagte data."
 
-#: gedit/gedit-utils.c:441
+#: gedit/gedit-utils.c:440
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Kunne ikke åbne filen \"%s\" fordi \"%s:\"-placeringer ikke kan håndteres."
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:446
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Kunne ikke åbne filen \"%s\""
 
-#: gedit/gedit-utils.c:457
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "Kunne ikke åbne filen \"%s\" fordi den indeholder data i et ugyldigt format."
 
-#: gedit/gedit-utils.c:464
+#: gedit/gedit-utils.c:463
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Kunne ikke åbne filen \"%s\" fordi den er for stor."
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:470
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2193,12 +2143,12 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:479
+#: gedit/gedit-utils.c:478
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Kunne ikke åbne filen \"%s\" fordi adgang blev nægtet."
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:485
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2209,7 +2159,7 @@ msgstr ""
 "\n"
 "Luk nogle filer og prøv igen."
 
-#: gedit/gedit-utils.c:494
+#: gedit/gedit-utils.c:493
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2220,7 +2170,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:502
+#: gedit/gedit-utils.c:501
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2229,7 +2179,7 @@ msgstr ""
 "Ikke tilstrækkeligt med hukommelse til at åbne filen \"%s\". Luk nogle åbne "
 "programmer og prøv igen."
 
-#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
+#: gedit/gedit-utils.c:521 gedit/gedit-utils.c:535 gedit/gedit-utils.c:562
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2240,7 +2190,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:547
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2253,7 +2203,7 @@ msgstr ""
 "Kontrollér at du har indtastet placeringen korrekt og at dine "
 "mellemværtsindstillinger er rigtige, og prøv så igen."
 
-#: gedit/gedit-utils.c:572
+#: gedit/gedit-utils.c:571
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2264,7 +2214,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:580
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2275,7 +2225,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
+#: gedit/gedit-utils.c:589 gedit/gedit-utils.c:662
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2286,12 +2236,12 @@ msgstr ""
 "\n"
 "Sandsynligvis prøver du at åbne en binær fil."
 
-#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
+#: gedit/gedit-utils.c:598 gedit/gedit-utils.c:696
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Kunne ikke åbne filen \"%s\"."
 
-#: gedit/gedit-utils.c:639
+#: gedit/gedit-utils.c:638
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2307,7 +2257,7 @@ msgstr ""
 "Kontrollér at du ikke forsøger at åbne en binær fil og prøv at vælge en "
 "tegnkodning i filåbningsvinduet."
 
-#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
+#: gedit/gedit-utils.c:650 gedit/gedit-utils.c:680
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2321,7 +2271,7 @@ msgstr ""
 "Kontrollér at du ikke forsøger at åbne en binær fil eller bruger en forkert "
 "tegnkodning i filåbningsvinduet."
 
-#: gedit/gedit-utils.c:701
+#: gedit/gedit-utils.c:700
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2332,12 +2282,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:753
+#: gedit/gedit-utils.c:752
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Kunne ikke gemme filen \"%s\"."
 
-#: gedit/gedit-utils.c:757
+#: gedit/gedit-utils.c:756
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2348,7 +2298,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:807
+#: gedit/gedit-utils.c:806
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2359,13 +2309,13 @@ msgstr ""
 "\n"
 "Måske er den lige blevet slettet."
 
-#: gedit/gedit-utils.c:814
+#: gedit/gedit-utils.c:813
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Kunne ikke gå tilbage til filen \"%s\" fordi den indeholder ugyldige data."
 
-#: gedit/gedit-utils.c:825
+#: gedit/gedit-utils.c:824
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2373,13 +2323,13 @@ msgstr ""
 "Kunne ikke gå tilbage til filen \"%s\" fordi \"%s\"-placeringer ikke kan "
 "håndteres."
 
-#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
-#: gedit/gedit-utils.c:985
+#: gedit/gedit-utils.c:830 gedit/gedit-utils.c:889 gedit/gedit-utils.c:900
+#: gedit/gedit-utils.c:984
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Kunne ikke gå tilbage til filen \"%s\"."
 
-#: gedit/gedit-utils.c:841
+#: gedit/gedit-utils.c:840
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2388,17 +2338,17 @@ msgstr ""
 "Kunne ikke gå tilbage til filen \"%s\" fordi den indeholder data i et "
 "ugyldigt format."
 
-#: gedit/gedit-utils.c:848
+#: gedit/gedit-utils.c:847
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Kunne ikke gå tilbage til filen \"%s\" fordi den er for stor."
 
-#: gedit/gedit-utils.c:855
+#: gedit/gedit-utils.c:854
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Kunne ikke gå tilbage til filen \"%s\" fordi adgang blev nægtet."
 
-#: gedit/gedit-utils.c:862
+#: gedit/gedit-utils.c:861
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2409,7 +2359,7 @@ msgstr ""
 "\n"
 "Luk nogle filer og prøv igen."
 
-#: gedit/gedit-utils.c:870
+#: gedit/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2418,7 +2368,7 @@ msgstr ""
 "Ikke tilstrækkeligt med hukommelse til at gå tilbage til filen \"%s\". Luk "
 "nogle åbne programmer og prøv igen."
 
-#: gedit/gedit-utils.c:909
+#: gedit/gedit-utils.c:908
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2431,7 +2381,7 @@ msgstr ""
 "Kontrollér at du har indtastet placeringen korrekt og at dine "
 "mellemværtsindstillinger er rigtige, og prøv så igen."
 
-#: gedit/gedit-utils.c:924
+#: gedit/gedit-utils.c:923
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2442,7 +2392,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:931
+#: gedit/gedit-utils.c:930
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
@@ -2451,7 +2401,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt og prøv igen."
 
-#: gedit/gedit-utils.c:938
+#: gedit/gedit-utils.c:937
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2463,16 +2413,16 @@ msgstr ""
 "\n"
 "Sandsynligvis prøver du at åbne en binær fil."
 
-#: gedit/gedit-utils.c:947
+#: gedit/gedit-utils.c:946
 msgid "It is not possible to revert an Untitled document."
 msgstr "Det er ikke muligt at gå tilbage til et unavngivet dokument."
 
-#: gedit/gedit-utils.c:1036
+#: gedit/gedit-utils.c:1035
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Filen \"%s\" eksisterer allerede."
 
-#: gedit/gedit-utils.c:1042
+#: gedit/gedit-utils.c:1041
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2483,7 +2433,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har indtastet placeringen korrekt."
 
-#: gedit/gedit-utils.c:1051
+#: gedit/gedit-utils.c:1050
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2494,7 +2444,7 @@ msgstr ""
 "\n"
 "Kontrollér at du har de nødvendige skriverettigheder."
 
-#: gedit/gedit-utils.c:1058
+#: gedit/gedit-utils.c:1057
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2505,7 +2455,7 @@ msgstr ""
 "\n"
 "Filnavnet er for langt."
 
-#: gedit/gedit-utils.c:1065
+#: gedit/gedit-utils.c:1064
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2518,7 +2468,7 @@ msgstr ""
 "En komponent i mappedelen af filnavnet eksisterer ikke eller en ødelagt "
 "symbolsk henvisning."
 
-#: gedit/gedit-utils.c:1074
+#: gedit/gedit-utils.c:1073
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2529,12 +2479,12 @@ msgstr ""
 "\n"
 "Frigør noget diskplads og prøv igen."
 
-#: gedit/gedit-utils.c:1080
+#: gedit/gedit-utils.c:1079
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Kan ikke oprette filen \"%s\"."
 
-#: gedit/gedit-utils.c:1417
+#: gedit/gedit-utils.c:1416
 msgid " (invalid Unicode)"
 msgstr " (ugyldig Unicode)"
 
@@ -2544,57 +2494,111 @@ msgstr " (ugyldig Unicode)"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:665
+#: gedit/gedit-view.c:663
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  lnj. %d, kol. %d"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:701
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:705
+#: gedit/gedit-view.c:703
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:87
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "Sæt tegnsættet som skal bruges til at åbne filerne angivet på kommandolinjen"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:90
 msgid "Quit an existing instance of gedit"
 msgstr "Afslut en eksisterende instans af redigeringsprogrammet<"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:93
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Opret et nyt vindue i en eksisterende instans"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:96
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opret et nyt dokument i en eksisterende instans"
 
-#: gedit/gedit2.c:182
+#: gedit/gedit2.c:183
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Det angivne tegnsæt, \"%s\", er ikke gyldigt\n"
 
-#: plugins/docinfo/docinfo.c:46
+#: gedit/gedit-convert.c:91
+msgid "The file you are trying to open contains an invalid byte sequence."
+msgstr "Filen som du prøver at åbne indeholder en ugyldig byte-sekvens."
+
+#: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
+msgid ""
+"gedit was not able to automatically determine the encoding of the file you "
+"want to open."
+msgstr "gedit kunne ikke automatisk fastslå kodningen for filen du vil åbne."
+
+#: plugins/changecase/changecase.c:43
+msgid "C_hange Case"
+msgstr "_Skift bogstaver"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr "Alle st_ore bogstaver"
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr "Alle s_må bogstaver"
+
+#: plugins/changecase/changecase.c:51
+msgid "_Invert Case"
+msgstr "_Invertér bogstavstørrelse"
+
+#: plugins/changecase/changecase.c:52
+msgid "_Title Case"
+msgstr "_Første bogstav med stort"
+
+#: plugins/changecase/changecase.c:54
+msgid "Change selected text to upper case"
+msgstr "Skift markeret tekst til at være med store bogstaver"
+
+#: plugins/changecase/changecase.c:55
+msgid "Change selected text to lower case"
+msgstr "Skift markeret tekst til at være med små bogstaver"
+
+#: plugins/changecase/changecase.c:56
+msgid "Invert the case of selected text"
+msgstr "Inverter bogstavernes størrelse i markeret tekst"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr "Skift det første bogstav for hvert valgt ord til at være med stort"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+msgid "Change Case"
+msgstr "Skift bogstaver"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+msgid "Changes the case of selected text."
+msgstr "Skifter mellem store og små bogstaver i det markerede tekst."
+
+#: plugins/docinfo/docinfo.c:45
 msgid "_Document Statistics"
 msgstr "_Dokumentstatistik"
 
-#: plugins/docinfo/docinfo.c:49
+#: plugins/docinfo/docinfo.c:48
 msgid "Get statistic info on current document"
 msgstr "Vis statistiske oplysninger om det aktuelle dokument"
 
-#: plugins/docinfo/docinfo.c:140
+#: plugins/docinfo/docinfo.c:139
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Dokumentstatistik"
 
-#: plugins/docinfo/docinfo.c:154
+#: plugins/docinfo/docinfo.c:153
 msgid "_Update"
 msgstr "_Opdatér"
 
@@ -2765,11 +2769,11 @@ msgstr "_Arbejdsmappe:"
 msgid "gedit: Shell Output plugin"
 msgstr "Terminaluddatamodul"
 
-#: plugins/sort/sort.c:27
+#: plugins/sort/sort.c:29
 msgid "S_ort..."
 msgstr "Sor_tér..."
 
-#: plugins/sort/sort.c:30
+#: plugins/sort/sort.c:32
 msgid "Sort the current document or selection."
 msgstr "Sortér det aktuelle dokument eller det markerede."
 
@@ -2805,26 +2809,26 @@ msgstr "_Omvendt orden"
 msgid "_Sort"
 msgstr "_Sortér"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:351
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(ingen foreslåede ord)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:375
 msgid "_More..."
 msgstr "_Flere..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:428
 msgid "_Ignore All"
 msgstr "_Ignorér alle"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:441
 msgid "_Add"
 msgstr "_Tilføj"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:478
 msgid "_Spelling Suggestions..."
 msgstr "_Stavningsforslag..."
 
@@ -2968,16 +2972,16 @@ msgstr "Svensk"
 msgid "Ukrainian"
 msgstr "Ukrainsk"
 
-#: plugins/spell/gedit-spell-checker.c:744
+#: plugins/spell/gedit-spell-checker.c:784
 msgid "Default"
 msgstr "Forvalgt"
 
-#: plugins/spell/gedit-spell-language-dialog.c:241
+#: plugins/spell/gedit-spell-language-dialog.c:239
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Kunne ikke finde de påkrævede kontroller i %s."
 
-#: plugins/spell/gedit-spell-language-dialog.c:261
+#: plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "Sprog"
 
@@ -3045,39 +3049,39 @@ msgstr "_Ignorér"
 msgid "_Suggestions:"
 msgstr "_Forslag:"
 
-#: plugins/spell/spell.c:51
+#: plugins/spell/spell.c:52
 msgid "_Check Spelling"
 msgstr "_Kontrollér stavning"
 
-#: plugins/spell/spell.c:54
+#: plugins/spell/spell.c:55
 msgid "Check the current document for incorrect spelling"
 msgstr "Kontrollér det aktuelle dokument for forkert stavning"
 
-#: plugins/spell/spell.c:56
+#: plugins/spell/spell.c:57
 msgid "_Autocheck Spelling"
 msgstr "Kontrollér stavning _automatisk"
 
-#: plugins/spell/spell.c:59
+#: plugins/spell/spell.c:60
 msgid "Automatically spell-check the current document"
 msgstr "Kontrollér automatisk det aktuelle dokument for stavning"
 
-#: plugins/spell/spell.c:61
+#: plugins/spell/spell.c:62
 msgid "Set _Language"
 msgstr "Vælg _sprog"
 
-#: plugins/spell/spell.c:64
+#: plugins/spell/spell.c:65
 msgid "Set the language of the current document"
 msgstr "Vælg sproget for det aktuelle dokument"
 
-#: plugins/spell/spell.c:557
+#: plugins/spell/spell.c:625
 msgid "The document is empty."
 msgstr "Dokumentet er tomt."
 
-#: plugins/spell/spell.c:575
+#: plugins/spell/spell.c:643
 msgid "The selected text does not contain mispelled words."
 msgstr "Det markerede tekst indeholder ikke forkert stavede ord."
 
-#: plugins/spell/spell.c:576
+#: plugins/spell/spell.c:644
 msgid "The document does not contain mispelled words."
 msgstr "Dokumentet indeholder ikke forkert stavede ord."
 
@@ -3133,19 +3137,19 @@ msgstr ""
 msgid "Tag list"
 msgstr "Mærkeliste"
 
-#: plugins/time/time.c:50
+#: plugins/time/time.c:49
 msgid "In_sert Date and Time..."
 msgstr "Indsæt _dato og tid..."
 
-#: plugins/time/time.c:53
+#: plugins/time/time.c:52
 msgid "Insert current date and time at the cursor position"
 msgstr "Indsæt den aktuelle dato og tid ved markørpositionen"
 
-#: plugins/time/time.c:449
+#: plugins/time/time.c:445
 msgid "Available formats"
 msgstr "Tilgængelige formater"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:553
 msgid "Configure insert date/time plugin..."
 msgstr "Konfigurér indsætning af dato/tid..."
 
@@ -3189,8 +3193,82 @@ msgstr "_Spørg efter et format"
 msgid "_Use custom format"
 msgstr "Benyt _brugerdefineret format"
 
+#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+#~ msgstr "Kunne ikke finde plugin-manager.glade2, geninstallér gedit.\n"
+
+#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+#~ msgstr ""
+#~ "Ugyldig Glade-fil for modulhåndtering - ikke alle kontroller blev "
+#~ "fundet.\n"
+
+#~ msgid "_Insert a new preview phrase."
+#~ msgstr "_Indsæt en ny eksempeltekst"
+
+#~ msgid "Modify preview phrase..."
+#~ msgstr "Ret eksempelteksten..."
+
+#~ msgid "Preview"
+#~ msgstr "Eksempel"
+
+#~ msgid "_Modify preview phrase..."
+#~ msgstr "_Ret eksempelteksten..."
+
+#~ msgid "Font Selection"
+#~ msgstr "Skrifttypevælger"
+
+#~ msgid "Sans Regular 12"
+#~ msgstr "Sans Regular 12"
+
+#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+
+#~ msgid "Pick a Font"
+#~ msgstr "Vælg en skrifttype"
+
+#~ msgid "Title"
+#~ msgstr "Titel"
+
+#~ msgid "The title of the selection dialog box"
+#~ msgstr "Titlen for vælgervinduet"
+
+#~ msgid "Font name"
+#~ msgstr "Skrifttypenavn"
+
+#~ msgid "Name of the selected font"
+#~ msgstr "Navnet på den valgte skrifttype"
+
+#~ msgid "Preview text"
+#~ msgstr "Eksempeltekst"
+
+#~ msgid "Preview text shown in the dialog"
+#~ msgstr "Eksempeltekst der vises i vinduet"
+
+#~ msgid "Use font in label"
+#~ msgstr "Benyt skrifttype i etiket"
+
+#~ msgid "Use font in the label in font info mode"
+#~ msgstr "Benyt skrifttype i etiket i skrifttypeinfotilstand"
+
+#~ msgid "Font size for label"
+#~ msgstr "Skriftstørrelse for etiket"
+
+#~ msgid "Font size for label in font info mode"
+#~ msgstr "Skriftstørrelse for etiket i skrifttypeinfotilstand"
+
+#~ msgid "Show size"
+#~ msgstr "Vis størrelse"
+
+#~ msgid "Show size in font info mode"
+#~ msgstr "Vis størrelse i skrifttypeinfotilstand"
+
+#~ msgid "Font"
+#~ msgstr "Skrifttype"
+
 #~ msgid "Untitled"
 #~ msgstr "Unavngivet"
+
+#~ msgid "(modified)"
+#~ msgstr "(ændret)"
 
 #~ msgid "Error, unable to open module file '%s'\n"
 #~ msgstr "Fejl: kunne ikke åbne modulfilen \"%s\"\n"
@@ -3218,39 +3296,6 @@ msgstr "Benyt _brugerdefineret format"
 
 #~ msgid "Error, impossible to update ui of the plugin '%s'"
 #~ msgstr "Fejl: kunne ikke opdatere grænsefladen for modulet \"%s\""
-
-#~ msgid "C_hange Case"
-#~ msgstr "_Skift bogstaver"
-
-#~ msgid "All _Upper Case"
-#~ msgstr "Alle st_ore bogstaver"
-
-#~ msgid "All _Lower Case"
-#~ msgstr "Alle s_må bogstaver"
-
-#~ msgid "_Invert Case"
-#~ msgstr "_Invertér bogstavstørrelse"
-
-#~ msgid "_Title Case"
-#~ msgstr "_Første bogstav med stort"
-
-#~ msgid "Change selected text to upper case"
-#~ msgstr "Skift markeret tekst til at være med store bogstaver"
-
-#~ msgid "Change selected text to lower case"
-#~ msgstr "Skift markeret tekst til at være med små bogstaver"
-
-#~ msgid "Invert the case of selected text"
-#~ msgstr "Inverter bogstavernes størrelse i markeret tekst"
-
-#~ msgid "Capitalize the first letter of each selected word"
-#~ msgstr "Skift det første bogstav for hvert valgt ord til at være med stort"
-
-#~ msgid "Change Case"
-#~ msgstr "Skift bogstaver"
-
-#~ msgid "Changes the case of selected text."
-#~ msgstr "Skifter mellem store og små bogstaver i det markerede tekst."
 
 #~ msgid "Save method not implemented for gedit viewer"
 #~ msgstr "Gemningsmetode er ikke implementeret for tekstredigeringsvisning"
@@ -3909,9 +3954,6 @@ msgstr "Benyt _brugerdefineret format"
 
 #~ msgid "Gurmukhi"
 #~ msgstr "Gurmukhi"
-
-#~ msgid "sans 12"
-#~ msgstr "sans 12"
 
 #~ msgid "_Wrap lines (at character boundaries)"
 #~ msgstr "_Ombryd linjer (ved tegngrænser)"
