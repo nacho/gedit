@@ -1,3 +1,13 @@
+2001-06-04  Vlad Harchev <hvv@hippo.ru>
+
+	* print-util.[ch] (gedit_print_show): Added gedit_print_show - printing
+	routine that is fully i18n-wise correct (taken from gnumeric-0.64). 
+	(gedit_print_show_iso8859_1): compile it only if i18n-wise incorrect
+	printing is requested by undefining _PROPER_I18N
+
+	* print-doc.c (print_ps_line)(print_header): Use just added 
+	gedit_print_show instead of gedit_print_show_iso8859_1
+
 2001-06-04  Chema Celorio  <chema@celorio.com>
 
 	* file.c (gedit_file_open): if the file is not an URI, ask the user if he

@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <locale.h>
 
 #include <libgnomeprint/gnome-print.h>
 
@@ -30,6 +31,8 @@
 #include "window.h"
 #include "print.h" /* for the defined fontnames */
 #include "print-util.h"
+
+#define _PROPER_I18N
 
 /* Taken from gnumeric */
 /**
@@ -94,7 +97,7 @@ g_unichar_to_utf8 (gint c, gchar *outbuf)
   return len;
 }
 
-
+#ifndef _PROPER_I18N
 /*
  * print_show_iso8859_1
  *
@@ -104,7 +107,7 @@ g_unichar_to_utf8 (gint c, gchar *outbuf)
  * and will disappear again once Gnumeric makes the switch. Deprecated at
  * birth! 
  */
-int
+static int
 gedit_print_show_iso8859_1 (GnomePrintContext *pc, char const *text)
 {
 	gchar *p, *utf, *udyn, ubuf[4096];
@@ -137,6 +140,62 @@ gedit_print_show_iso8859_1 (GnomePrintContext *pc, char const *text)
 
 	return ret;
 }
+#endif
+
+/** 
+ * This code is also taken from gnumeric, but from version 0.63. It's fully 
+ * i18n-wise correct - so feel free to copy it from here everywhere you can 
+ * (but please copy it from gnumeric, since it also has a routine for 
+ * measuring string width properly). 
+ *  Argument 'text' is text that is in current locale's encoding.
+ *	Code is (c) 2001 Vlad Harchev <hvv@hippo.ru>
+ */
+int
+gedit_print_show (GnomePrintContext *pc, char const *text)
+{
+#ifdef _PROPER_I18N
+	wchar_t* wcs,wcbuf[4096];
+	char* utf8,utf8buf[4096];
+	
+	int conv_status;
+	int n = strlen(text);
+	int retval;
+
+	g_return_val_if_fail (pc && text, -1);	
+	
+	if ( n > (sizeof(wcbuf)/sizeof(wcbuf[0])))
+		wcs = g_new(wchar_t,n);
+	else
+		wcs = wcbuf;
+
+	conv_status = mbstowcs(wcs, text, n);
+
+	if (conv_status == (size_t)(-1)){
+		if (wcs != wcbuf)
+			g_free (wcs);
+		return 0;
+	};
+	if (conv_status * 6 > sizeof(utf8buf))
+		utf8 = g_new(gchar, conv_status * 6);
+	else
+		utf8 = utf8buf;
+	{
+		int i;
+		char* p = utf8;
+		for(i = 0; i < conv_status; ++i)
+			p += g_unichar_to_utf8 ( (gint) wcs[i], p);
+		if (wcs != wcbuf)
+			g_free(wcs);			
+		retval = gnome_print_show_sized (pc, utf8, p - utf8);			
+	}	
+
+	if (utf8 != utf8buf)
+		g_free(utf8);
+	return retval;		
+#else
+	return gedit_print_show_iso8859_1 (pc, text);
+#endif
+};
 
 
 /**

@@ -275,7 +275,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 		return;
 	
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
-	gedit_print_show_iso8859_1 (pji->pc, pji->temp);
+	gedit_print_show (pji->pc, pji->temp);
 
 	/* Print the line number */
 	if (pji->print_line_numbers >0 &&
@@ -286,7 +286,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 
 		gnome_print_setfont (pji->pc, pji->font_numbers);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
-		gedit_print_show_iso8859_1 (pji->pc, number_text);
+		gedit_print_show (pji->pc, number_text);
 		g_free (number_text);
 		gnome_print_setfont (pji->pc, pji->font_body);
 	}
@@ -514,14 +514,14 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	len = gnome_font_get_width_string (pji->font_header, text1);
 	x = pji->page_width/2 - len/2;
 	gnome_print_moveto(pji->pc, x, y);
-	gedit_print_show_iso8859_1 (pji->pc, text1);
+	gedit_print_show (pji->pc, text1);
 
 	/* Print the page/pages  */
 	y = pji->page_height - pji->margin_top - pji->header_height/4;
 	len = gnome_font_get_width_string (pji->font_header, text2);
 	x = pji->page_width - len - 36;
 	gnome_print_moveto (pji->pc, x, y);
-	gedit_print_show_iso8859_1 (pji->pc, text2);
+	gedit_print_show (pji->pc, text2);
 
 	g_free (text1);
 	g_free (text2);
