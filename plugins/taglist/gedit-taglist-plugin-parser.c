@@ -31,15 +31,15 @@
 #include <config.h>
 #endif
 
-#include <libxml/parser.h>
-#include <glib.h>
-
 #include <dirent.h> 
 #include <string.h>
 #include <errno.h>
 
+#include <libxml/parser.h>
+#include <glib.h>
+#include <glib/gi18n.h>
+
 #include <libgnome/gnome-util.h>
-#include <libgnome/gnome-i18n.h> /* gnome_i18n_get_language_list */
 
 #include <gedit/gedit-debug.h>
 
@@ -270,17 +270,15 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 			g_warning ("The tag list file '%s' is of the wrong type, "
 				   "was '%s', 'TagGroup' expected.", filename, cur->name);
 			xmlFreeDoc (doc);
-		
+
 			return taglist;
 		}
 		else
 		{
-			/*
-			 * I'm not sure but the latest GNOME may change 
-			 * gnome_i18n_get_language_list to
-			 * g_i18n_get_language_list.
-			 */
-			const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
+			const char * const *langs_pointer;
+			gint i;
+
+			langs_pointer = g_get_language_names ();
 
 			gchar* lang= (gchar*)xmlGetProp (cur, (const xmlChar*) "lang");
 			gint cur_lanking = 1;
@@ -310,20 +308,24 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 			}
 
 			/* try to find the best lang */
-			while (list != NULL) {
-				const gchar *best_lang = list->data;
+			for (i = 0; langs_pointer[i] != NULL; i++)
+			{
+				const gchar *best_lang = langs_pointer[i];
 
 				/*
 				 * if launch on C, POSIX locale or does 
 				 * not find the best lang on the current locale,
 				 * this is called.
-				 * gnome_i18n_get_language_list returns lang 
+				 * g_get_language_names returns lang 
 				 * lists with C locale.
 				 */
-				if (lang == NULL && ( !g_ascii_strcasecmp (best_lang, "C") || 
-					!g_ascii_strcasecmp (best_lang, "POSIX"))) {
+				if (lang == NULL &&
+				    (!g_ascii_strcasecmp (best_lang, "C") || 
+				     !g_ascii_strcasecmp (best_lang, "POSIX")))
+				{
 					tag_group = get_tag_group (filename, doc, ns, cur);
-					if (tag_group != NULL) {
+					if (tag_group != NULL)
+					{
 						if (best_tag_group !=NULL) 
 							free_tag_group (best_tag_group);
 						best_lanking = cur_lanking;
@@ -332,16 +334,18 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 				}
 
 				/* if it is possible the best lang is not C */
-				else if (lang == NULL) {
-					list = list->next;
+				else if (lang == NULL)
+				{
 					cur_lanking++;
 					continue;
 				}
 
 				/* if the best lang is found */
-				else if (!g_ascii_strcasecmp (best_lang, lang)) {
+				else if (!g_ascii_strcasecmp (best_lang, lang))
+				{
 					tag_group = get_tag_group (filename, doc, ns, cur);
-					if (tag_group != NULL) {
+					if (tag_group != NULL)
+					{
 						if (best_tag_group !=NULL) 
 							free_tag_group (best_tag_group);
 						best_lanking = cur_lanking;
@@ -349,9 +353,8 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 					}
 				}
 
-				list = list->next;
 				cur_lanking++;
-			} /* End of while (list != NULL) */
+			}
 
 			if (lang) g_free (lang);
 		} /* End of else */
