@@ -838,7 +838,7 @@ run_command_real (ShellOutputDialog *dialog)
 		running = NOT_RUNNING;
 
 		gedit_warning (GTK_WINDOW (dialog->dialog),
-			       _("An error occured while running the selected command."));
+			       _("An error occurred while running the selected command."));
 
 		g_free (unescaped_command_string);
 		gtk_widget_destroy (dialog->dialog);
