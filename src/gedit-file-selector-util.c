@@ -66,13 +66,12 @@
 
 #include <bonobo/bonobo-i18n.h>
 
-#include <libgnomevfs/gnome-vfs-uri.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "gnome-vfs-helpers.h"
 #include "gedit-utils.h"
 
-#define RETURN_DATA "return_data"
+static GQuark user_data_id = 0;
 
 static gint
 delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
@@ -157,8 +156,8 @@ listener_cb (BonoboListener *listener,
 			
 	gnome_vfs_uri_unref (uri);
 
-	g_object_set_data (G_OBJECT (dialog), 
-			   RETURN_DATA,
+	g_object_set_qdata (G_OBJECT (dialog), 
+			   user_data_id,
 			   g_strdup (seq->_buffer[0]));
 
  cancel_clicked:
@@ -171,7 +170,8 @@ listener_cb (BonoboListener *listener,
 static BonoboWidget *
 create_control (gboolean enable_vfs)
 {
-	GtkWidget *control;
+	CORBA_Environment ev;
+	BonoboWidget *bw;
 	char *moniker;
 
 	moniker = g_strdup_printf (
@@ -185,10 +185,16 @@ create_control (gboolean enable_vfs)
 		FALSE, 
 		TRUE);
 
-	control = bonobo_widget_new_control (moniker, CORBA_OBJECT_NIL);
+	bw = g_object_new (BONOBO_TYPE_WIDGET, NULL);
+	CORBA_exception_init (&ev);
+
+	bw = bonobo_widget_construct_control (
+		bw, moniker, CORBA_OBJECT_NIL, &ev);
+
+	CORBA_exception_free (&ev);
 	g_free (moniker);
 
-	return control ? BONOBO_WIDGET (control) : NULL;
+	return bw;
 }
 
 static GtkWindow *
@@ -280,8 +286,8 @@ ok_clicked_cb (GtkWidget *widget, gpointer data)
 
 		gtk_widget_hide (GTK_WIDGET (fsel));
 
-		g_object_set_data (G_OBJECT (fsel),
-			    	   RETURN_DATA,
+		g_object_set_qdata (G_OBJECT (fsel),
+			    	   user_data_id,
 				   g_strdup (file_name));
 		gtk_main_quit ();
 	} 
@@ -349,11 +355,19 @@ run_file_selector (GtkWindow  *parent,
 {
 	GtkWindow *dialog = NULL;
 	gpointer   retval;
+	gpointer   data;
+	gboolean   using_bonobo_filesel = FALSE;
 
+	if (!user_data_id)
+		user_data_id = g_quark_from_static_string ("GeditUserData");
 
 	if (!g_getenv ("GNOME_FILESEL_DISABLE_BONOBO"))
+	{
 		dialog = create_bonobo_selector (enable_vfs, mime_types, 
 						 default_path, default_filename);
+		using_bonobo_filesel = TRUE;
+	}
+	
 	if (!dialog)
 		dialog = create_gtk_selector (default_path, default_filename);
 
@@ -371,7 +385,15 @@ run_file_selector (GtkWindow  *parent,
 
 	gtk_main ();
 
-	retval = g_object_get_data (G_OBJECT (dialog), RETURN_DATA);
+	data = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
+
+	if (enable_vfs && !using_bonobo_filesel)
+	{
+		retval = gnome_vfs_get_uri_from_local_path (data);
+ 		g_free (data);
+	}
+	else
+		retval = data;
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
