@@ -1,3 +1,13 @@
+2001-02-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_save_as_ok_sel): remove g_assert
+	that crashed gedit when exiting and saving a file.
+	(file_save_document): before saving a document raise
+	one of its views.
+	
+	* document.c (remve_child_cb): before removing a mdi child
+	raise a view if the document is changed.	
+	
 2001-02-11  Chema Celorio  <chema@celorio.com>
 
 	* file.c (gedit_file_save_as_ok_sel): remove g_asserts

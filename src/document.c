@@ -456,9 +456,14 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 
 	if (doc->changed)
 	{
-		GtkWidget *msgbox;
+		GtkWidget *msgbox, *w;
 		gchar *fname = NULL, *msg = NULL;
 		gint ret;
+
+		w = GTK_WIDGET (g_list_nth_data(doc->views, 0));
+			
+		if(w != NULL)
+			gnome_mdi_set_active_view (mdi, w);
 
 		fname = gedit_document_get_tab_name (doc, FALSE);
 

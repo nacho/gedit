@@ -934,6 +934,11 @@ file_save_document (GeditDocument *doc)
 
 	if (doc->filename == NULL)
 	{
+		GtkWidget *w = GTK_WIDGET (g_list_nth_data(doc->views, 0));
+			
+		if(w != NULL)
+			gnome_mdi_set_active_view (mdi, w);
+
 		gedit_file_save_as (doc);
 		return FALSE;
 	}
@@ -1068,14 +1073,12 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	
 	/* We need to set the revert menu item sensitivity if we where saving
 	   as from an Untitled doc */
-	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app ());
 
-#if 1
-	g_assert(gedit_window_active_app() != NULL);
-	g_assert(gedit_document_current() != NULL);
-#endif	
-
-	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), FALSE);	
+	if(gedit_window_active_app () != NULL)
+	{
+		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app (), FALSE);	
+	}
 }
 
 
