@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.52)
 
-AC_INIT(gedit, 2.1.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT(gedit, 2.1.0.1, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(src/gedit2.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -67,8 +67,9 @@ AC_SUBST(LDFLAGS)
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 2.0.0 libglade-2.0 >= 2.0.0
-                         libgnomeprintui-2.0 >= 1.115.0 eel-2.0 >= 2.0.0)
+PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 2.1.0 libglade-2.0 >= 2.0.0
+                         libgnomeprintui-2.0 >= 1.115.0 libgnomeprintui-2.0 <= 1.116.1 
+                         eel-2.0 >= 2.0.0)
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)

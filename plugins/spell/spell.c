@@ -667,6 +667,12 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	else
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
 
+	if (doc == NULL)
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_LANG, FALSE);
+	else
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_LANG, TRUE);
+
+
 	return PLUGIN_OK;
 }
 

@@ -1909,7 +1909,9 @@ add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpoi
 	{
 		gchar *name;
 		name = gedit_encoding_to_string (enc);
+		/*
 		g_print ("Add %s to list\n", name);
+		*/
 		g_free (name);
 	}
 
@@ -1998,7 +2000,8 @@ gedit_preferences_dialog_remove_enc_button_clicked (GtkButton *button, GeditPref
 {
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
-	
+	GtkTreePath *path;
+
 	GtkTreeModel *model;
 
 	gedit_debug (DEBUG_PREFS, "");
@@ -2008,16 +2011,38 @@ gedit_preferences_dialog_remove_enc_button_clicked (GtkButton *button, GeditPref
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
 	g_return_if_fail (selection != NULL);
 
-	if (gtk_tree_selection_get_selected (selection, &model, &iter))
-		gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
+	
+	path = gtk_tree_model_get_path (model, &iter);
+
+	gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
 	update_encodings_list (dlg);
+
+	gtk_tree_selection_select_path (selection, path);
+
+	/* If the last item is removed, select the prev item */
+	if (!gtk_tree_selection_get_selected (selection, NULL, NULL))
+	{
+		if (gtk_tree_path_prev (path))
+			gtk_tree_selection_select_path (selection, path);
+	}
+			
+	gtk_tree_path_free (path);
 }
+
 
 static void
 gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection *selection, GeditPreferencesDialog *dlg)
 {
 	gboolean selected;
+	GtkTreeModel *model;
+	gint n_rows;
+	GtkTreeIter iter;
+	gboolean disable_up = TRUE;
+	gboolean disable_down = TRUE;
+	gboolean res;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -2026,14 +2051,102 @@ gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection 
 
 	selected = gtk_tree_selection_get_selected (selection, NULL, NULL) &&
 		gedit_prefs_manager_encodings_can_set ();
-		
+	
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, selected);
-	/* FIXME: enable the up and down button */
-	/*
-	gtk_widget_set_sensitive (dlg->priv->up_enc_button, selected);
-	gtk_widget_set_sensitive (dlg->priv->down_enc_button, selected);
-	*/
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
+	g_return_if_fail (model != NULL);
+
+	n_rows = gtk_tree_model_iter_n_children (model, NULL);
+
+	if (n_rows > 0)
+	{
+		res = gtk_tree_model_get_iter_first (model, &iter);
+		g_return_if_fail (res);
+		disable_up = gtk_tree_selection_iter_is_selected (selection, &iter);
+	
+		res = gtk_tree_model_iter_nth_child (model, &iter, NULL, n_rows - 1);
+		g_return_if_fail (res);
+		disable_down = gtk_tree_selection_iter_is_selected (selection, &iter);
+	}
+	
+	gtk_widget_set_sensitive (dlg->priv->up_enc_button, selected && !disable_up);
+	gtk_widget_set_sensitive (dlg->priv->down_enc_button, selected && !disable_down);
 }
+
+static void
+gedit_preferences_dialog_up_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
+{
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	GtkTreeIter prev_iter;
+	GtkTreePath *path;
+	gboolean res;
+
+	GtkTreeModel *model;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (dlg != NULL);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
+	g_return_if_fail (selection != NULL);
+
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
+
+	path = gtk_tree_model_get_path (model, &iter);
+
+	res = gtk_tree_path_prev (path);
+	g_return_if_fail (res);
+
+	gtk_tree_model_get_iter (model, &prev_iter, path);
+	
+	gtk_tree_path_free (path);
+
+	gtk_tree_selection_unselect_iter (selection, &iter);
+
+	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev_iter);
+
+	update_encodings_list (dlg);
+
+	gtk_tree_selection_select_iter (selection, &iter);
+}
+
+static void
+gedit_preferences_dialog_down_enc_button_clicked (GtkButton *button, GeditPreferencesDialog *dlg)
+{
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	GtkTreeIter next_iter;
+	gboolean res;
+
+	GtkTreeModel *model;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (dlg != NULL);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
+	g_return_if_fail (selection != NULL);
+
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
+
+	next_iter = iter;
+	
+	res = gtk_tree_model_iter_next (model, &next_iter);
+	g_return_if_fail (res);
+
+	gtk_tree_selection_unselect_iter (selection, &iter);
+
+	gtk_list_store_swap (GTK_LIST_STORE (model), &next_iter, &iter);
+
+	update_encodings_list (dlg);
+
+	gtk_tree_selection_select_iter (selection, &iter);
+}
+
 
 static gboolean 
 gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui)
@@ -2070,7 +2183,15 @@ gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_signal_connect (G_OBJECT (dlg->priv->remove_enc_button), "clicked", 
 			  G_CALLBACK (gedit_preferences_dialog_remove_enc_button_clicked), 
 			  dlg);
-	
+
+	g_signal_connect (G_OBJECT (dlg->priv->up_enc_button), "clicked", 
+			  G_CALLBACK (gedit_preferences_dialog_up_enc_button_clicked), 
+			  dlg);
+
+	g_signal_connect (G_OBJECT (dlg->priv->down_enc_button), "clicked", 
+			  G_CALLBACK (gedit_preferences_dialog_down_enc_button_clicked), 
+			  dlg);
+
 	model = create_encodings_treeview_model ();
 	g_return_val_if_fail (model != NULL, FALSE);
 

@@ -359,7 +359,8 @@ gedit_view_line_numbers_expose (GtkWidget      *widget,
   
 	g_object_unref (G_OBJECT (layout));
 
-	return TRUE;
+	/* don't stop emission, need to draw children */
+	return FALSE;
 }
 
 
