@@ -74,9 +74,31 @@ typedef struct _SearchInfo {
 	guchar * buffer;
 	gulong buffer_length;
 	View *view;
+	Document *doc;
 } SearchInfo;
 
 SearchInfo gedit_search_info;
+
+gint
+search_verify_document (void)
+{
+	Document *doc = gedit_document_current();
+
+	/* If everything is "cool" return ..*/
+	if (gedit_search_info.doc == doc)
+		return TRUE;
+
+	/* If there are no documents open, error */
+	if (doc==NULL)
+		return FALSE;
+
+	/* Reload the doc */
+	search_end();
+	search_start();
+
+	return TRUE;
+	
+}
 
 void
 search_start (void)
@@ -88,6 +110,7 @@ search_start (void)
 	text_buffer = GTK_TEXT ( VIEW (mdi->active_view)->text );
 
 	gedit_search_info.view = VIEW (mdi->active_view);
+	gedit_search_info.doc = gedit_document_current();
 	gedit_search_info.original_readonly_state = gedit_search_info.view->read_only;
 	gedit_view_set_read_only (gedit_search_info.view, TRUE);
 
@@ -124,8 +147,9 @@ search_end (void)
 {
 	gedit_debug("\n", DEBUG_SEARCH);
 
-	gedit_view_set_read_only (gedit_search_info.view,
-				  gedit_search_info.original_readonly_state);
+	if (mdi->active_child != NULL)
+		gedit_view_set_read_only (gedit_search_info.view,
+					  gedit_search_info.original_readonly_state);
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -234,7 +258,7 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	dialog_find_line ();
+	dialog_goto_line ();
 }
 
 

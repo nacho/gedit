@@ -23,10 +23,12 @@
 #define __SEARCH_H__
 
 
+gint search_verify_document (void);
 void search_end (void);
 void search_start (void);
 
 void dump_search_state (void);
+
 
 void count_lines_cb (GtkWidget *widget, gpointer data);
 void find_cb (GtkWidget *widget, gpointer data);

@@ -1,3 +1,16 @@
+2000-05-23  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-search.c (dialog_find): make window
+	modal and do more checks.
+
+	* dialogs/dialog-goto-line.c (goto_line_activate_cb):
+	rename find_line -> goto_line
+	(dialog_goto_line): make window modal to avoid weird
+	situations
+
+	* dialogs/dialogs.h: ditto
+	* search.c (goto_line_cb): ditto
+
 2000-05-22  Chema Celorio  <chema@celorio.com>
 
 	* window.c (gedit_window_set_icon): use the correct
