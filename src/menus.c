@@ -23,6 +23,7 @@
 #include <gnome.h>
 
 #include "window.h"
+#include "view.h"
 #include "file.h"
 #include "search.h"
 #include "print.h"

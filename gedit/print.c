@@ -57,55 +57,55 @@ typedef struct _PrintJobInfo {
 	
 	/* Font stuff */ 
 	guchar *font_name;
-	int   font_size;
-	float font_char_width;
-	float font_char_height;
+	gint    font_size;
+	float   font_char_width;
+	float   font_char_height;
 
 	/* Page stuff */ 
-	int    pages;
-	float  page_width, page_height;
-	float  margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
-	float  printable_width, printable_height;
-	float  header_height;
-	gint   total_lines, total_lines_real;
-	gint   lines_per_page;
-	gint   chars_per_line;
+	guint   pages;
+	float   page_width, page_height;
+	float   margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
+	float   printable_width, printable_height;
+	float   header_height;
+	guint   total_lines, total_lines_real;
+	guint   lines_per_page;
+	guint   chars_per_line;
 	guchar* temp;
-	gint   orientation;
+	guint   orientation;
 
 	/* Range stuff */
 	gint range;
 	gint print_first;
 	gint print_last;
-	gint print_this_page;
-	gint preview;
+	gint print_this_page : 1;
+	gint preview : 1;
 	
 	/* buffer stuff */
 	gint file_offset;
 	gint current_line;
 
 	/* Text Wrapping */
-	gint wrapping;
-	gint break_chars;
+	gint wrapping : 1;
 	gint tab_size;
 } PrintJobInfo;
 
 
-       void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
-       void file_print_preview_cb (GtkWidget *widget, gpointer data);
-static void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
-static void print_line (PrintJobInfo *pji, int line);
-static void print_ps_line(PrintJobInfo * pji, gint line, gint first_line);
-static int  print_determine_lines (PrintJobInfo *pji, int real);
-static void print_header (PrintJobInfo *pji, unsigned int page);
-static void start_job (PrintJobInfo *pji);
-static void print_header (PrintJobInfo *pji, unsigned int page);
-static void print_setfont (PrintJobInfo *pji);
-static void end_page (PrintJobInfo *pji);
-static void end_job (GnomePrintContext *pc);
-static void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
-static void print_pji_destroy (PrintJobInfo *pji);
-static void set_pji ( PrintJobInfo * pji, Document *doc);
+        void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
+        void file_print_preview_cb (GtkWidget *widget, gpointer data);
+static  void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
+static  void print_line (PrintJobInfo *pji, int line);
+static  void print_ps_line(PrintJobInfo * pji, gint line, gint first_line);
+static guint print_determine_lines (PrintJobInfo *pji, int real);
+static  void print_header (PrintJobInfo *pji, unsigned int page);
+static  void print_start_job (PrintJobInfo *pji);
+static  void print_set_orientation (PrintJobInfo *pji);
+static  void print_header (PrintJobInfo *pji, unsigned int page);
+static  void print_setfont (PrintJobInfo *pji);
+static  void print_end_page (PrintJobInfo *pji);
+static  void print_end_job (GnomePrintContext *pc);
+static  void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
+static  void print_pji_destroy (PrintJobInfo *pji);
+static  void print_set_pji ( PrintJobInfo * pji, Document *doc);
 
 
 /**
@@ -143,7 +143,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	
 	/* We need to calculate the number of pages before running
 	   the dialog, so load pji with info now */
-	set_pji (pji, doc);
+	print_set_pji (pji, doc);
 
 	/* file_print preview is a false when preview is requested */ 
 	if (file_printpreview)
@@ -258,7 +258,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 
 	current_line = 0;
 	
-	start_job (pji);
+	print_start_job (pji);
 	
 	for (current_page = 1; current_page <= pji->pages; current_page++)
 	{
@@ -281,7 +281,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 			g_free (pagenumbertext);
 
 			/* Print the header of the page */
-			if (settings->printheader)
+			if (settings->print_header)
 				print_header(pji, current_page);
 			print_setfont (pji);
 		}
@@ -301,9 +301,9 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 		}
 
 		if (pji->print_this_page)
-			end_page (pji);
+			print_end_page (pji);
 	}
-	end_job (pji->pc);
+	print_end_job (pji->pc);
 	g_free (pji->temp);
 		
 	gnome_print_context_close (pji->pc);
@@ -447,7 +447,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 	if ( pji->temp!='\0')
 		gnome_print_stroke (pji->pc);
 
-	if (settings->printlines>0 && line%settings->printlines==0 && first_line)
+	if (settings->print_lines>0 && line%settings->print_lines==0 && first_line)
 	{
 		char * number_text = g_strdup_printf ("%i",line);
 		GnomeFont *temp_font = gnome_font_new (pji->font_name, 6);
@@ -462,11 +462,11 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 }
 
 static void
-set_pji (PrintJobInfo * pji, Document *doc)
+print_set_pji (PrintJobInfo * pji, Document *doc)
 {
 	gedit_debug ("", DEBUG_PRINT);
 
-	pji->view = VIEW(mdi->active_view);
+	pji->view = gedit_view_current();
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
 	pji->buffer = gedit_document_get_buffer (doc);
@@ -476,7 +476,7 @@ set_pji (PrintJobInfo * pji, Document *doc)
 	else
 		pji->filename = g_strdup (doc->filename);
 
-	pji->orientation = PRINT_ORIENT_PORTRAIT;
+	pji->orientation = settings->print_orientation;
 	if (pji->orientation == PRINT_ORIENT_LANDSCAPE)
 	{
 		pji->page_width  = gnome_paper_psheight (pji->paper);
@@ -492,14 +492,14 @@ set_pji (PrintJobInfo * pji, Document *doc)
 	pji->margin_top = .75 * 72;       /* Printer margins, not page margins */
 	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
 	pji->margin_left = .75 * 72;      /* gnome-print implements them */
-	if (settings->printlines > 0)
+	if (settings->print_lines > 0)
 		pji->margin_left += pji->margin_numbers;
 	pji->margin_right = .75 * 72;
-	pji->header_height = settings->printheader * 72;
+	pji->header_height = settings->print_header * 72;
 	pji->printable_width  = pji->page_width -
 		                pji->margin_left -
 		                pji->margin_right -
-		                ((settings->printlines>0)?pji->margin_numbers:0);
+		                ((settings->print_lines>0)?pji->margin_numbers:0);
 	pji->printable_height = pji->page_height -
 		                pji->margin_top -
 		                pji->margin_bottom;
@@ -507,7 +507,7 @@ set_pji (PrintJobInfo * pji, Document *doc)
 	pji->font_size = 10;
 	pji->font_char_width = 0.0808 * 72;
 	pji->font_char_height = .14 * 72;
-	pji->wrapping = settings->printwrap;
+	pji->wrapping = settings->print_wrap_lines;
 	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
 	pji->lines_per_page = (pji->printable_height -
 			      pji->header_height) /pji->font_char_height -  1;
@@ -534,7 +534,7 @@ set_pji (PrintJobInfo * pji, Document *doc)
  * of debuging code, remove later. Chema
  *
  **/
-static int
+static guint
 print_determine_lines (PrintJobInfo *pji, int real)
 {
 	gint lines=0;
@@ -701,11 +701,17 @@ print_determine_lines (PrintJobInfo *pji, int real)
 }
 
 static void
-start_job (PrintJobInfo *pji)
+print_start_job (PrintJobInfo *pji)
+{
+	gedit_debug ("", DEBUG_PRINT);
+
+	print_set_orientation(pji);
+}
+
+static void
+print_set_orientation (PrintJobInfo *pji)
 {
 	double affine [6];
-
-	gedit_debug ("", DEBUG_PRINT);
 
 	if (pji->orientation == PRINT_ORIENT_PORTRAIT)
 		return;
@@ -715,7 +721,6 @@ start_job (PrintJobInfo *pji)
 
 	art_affine_translate (affine, 0, -pji->page_height);
 	gnome_print_concat (pji->pc, affine);
-
 
 }
 
@@ -768,26 +773,16 @@ print_setfont (PrintJobInfo *pji)
 	
 
 static void
-end_page (PrintJobInfo *pji)
+print_end_page (PrintJobInfo *pji)
 {
-	double affine [6];
-
 	gedit_debug ("", DEBUG_PRINT);
 
 	gnome_print_showpage (pji->pc);
-
-	if (pji->orientation == PRINT_ORIENT_PORTRAIT)
-		return;
-
-	art_affine_rotate (affine, 90.0);
-	gnome_print_concat (pji->pc, affine);
-
-	art_affine_translate (affine, 0, -pji->page_height);
-	gnome_print_concat (pji->pc, affine);
+	print_set_orientation (pji);
 }
 
 static void
-end_job (GnomePrintContext *pc)
+print_end_job (GnomePrintContext *pc)
 {
 	gedit_debug ("", DEBUG_PRINT);
 }

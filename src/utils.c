@@ -56,6 +56,12 @@ gtk_radio_button_select (GSList *group, int n)
 	GSList *l;
 	int len = g_slist_length (group);
 
+	if (n >= len || n < 0)
+	{
+		g_warning ("Cant' set the radio button. invalid number");
+		return;
+	}
+	
 	l = g_slist_nth (group, len - n - 1);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (l->data), 1);
 }

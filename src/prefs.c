@@ -73,10 +73,11 @@ gedit_save_settings (void)
 	gnome_config_set_int ("height", (gint) settings->height);
 
 
-	gnome_config_set_bool ("printwrap", settings->printwrap);
-	gnome_config_set_bool ("printheader", settings->printheader);
-	gnome_config_set_int  ("printlines", settings->printlines);
+	gnome_config_set_bool ("printwrap", settings->print_wrap_lines);
+	gnome_config_set_bool ("printheader", settings->print_header);
+	gnome_config_set_int  ("printlines", settings->print_lines);
 	gnome_config_set_string ("papersize", settings->papersize);
+	gnome_config_set_int ("printorientation", settings->print_orientation);
 	gnome_config_set_string ("font", settings->font);
 
 	if (!settings->run)
@@ -149,9 +150,10 @@ gedit_load_settings (void)
 	settings->width = gnome_config_get_int ("width=600");
 	settings->height = gnome_config_get_int ("height=400");
 	 
-	settings->printwrap = gnome_config_get_bool ("printwrap=TRUE");
-	settings->printheader = gnome_config_get_bool ("printheader=TRUE");
-	settings->printlines = gnome_config_get_int ("printlines=0");
+	settings->print_wrap_lines = gnome_config_get_bool ("printwrap=TRUE");
+	settings->print_header = gnome_config_get_bool ("printheader=TRUE");
+	settings->print_lines = gnome_config_get_int ("printlines=0");
+	settings->print_orientation = gnome_config_get_int ("printorientation=1");
 	settings->papersize = gnome_config_get_string ("papersize");
 	if (settings->papersize==NULL)
 		settings->papersize = g_strdup (gnome_paper_name_default());

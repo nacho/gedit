@@ -360,3 +360,24 @@ line_to_pos (Document *doc, gint line, gint *lines)
 
 
 
+gint gedit_search_replace_all_execute ( View *view, guchar *text_to_search_for,
+					guchar *text_to_replace_with, gint case_sensitive)
+{
+	guchar * buffer_in;
+	guchar * buffer_out;
+	guint buffer_in_length;
+	guint buffer_out_length;
+	
+	gedit_debug ("", DEBUG_SEARCH);
+
+	g_return_val_if_fail (gedit_search_info.state == SEARCH_IN_PROGRESS_YES, 0);
+
+	buffer_in = gedit_search_info.buffer;
+	buffer_in_length = gedit_search_info.buffer_length;
+
+	/* Where's the Beef ????? */
+	
+	gedit_debug ("end", DEBUG_SEARCH);
+
+	return 0;
+}

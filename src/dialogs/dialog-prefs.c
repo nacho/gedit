@@ -2,6 +2,8 @@
 /*
  * gedit
  *
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose Celorio
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -19,11 +21,6 @@
  * Prefs glade-ized and rewritten by Jason Leach <leach@wam.umd.edu>
  */
 
-/* TODO:
- * [ ] I think we're leaking mem with setting styles and whatnot.
- *
- */
-
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
@@ -34,6 +31,7 @@
 #include "utils.h"
 #include "commands.h"
 #include "window.h"
+#include "print.h"
 
 static GtkWidget *propertybox;
 static GtkWidget *statusbar;
@@ -45,11 +43,13 @@ static GtkWidget *tabpos;
 static GtkWidget *foreground;
 static GtkWidget *background;
 static GtkWidget *defaultfont;
-static GtkWidget *printwrap;
-static GtkWidget *printheader;
-static GtkWidget *printlines;
-static GtkWidget *printlinesspin;
-static GtkWidget *lineslabel;
+static GtkWidget *print_wrap;
+static GtkWidget *print_header;
+static GtkWidget *print_lines;
+static GtkWidget *print_orientation_portrait_radio_button;
+static GtkWidget *print_lines_spin_button;
+static GtkWidget *lines_label;
+
 static GtkWidget *paperselector;
 static GtkWidget *undo_levels;
 static GtkWidget *undo_levels_spin_button;
@@ -193,10 +193,14 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
-	settings->printheader = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printheader));
-	settings->printwrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printwrap));
+	if (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group)==0)
+		settings->print_orientation = PRINT_ORIENT_PORTRAIT;
+	else
+		settings->print_orientation = PRINT_ORIENT_LANDSCAPE;
+				
+	settings->print_header = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_header));
+	settings->print_wrap_lines = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_wrap));
 
-	
 	g_free (settings->papersize);
 	if (strcmp( "custom", gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)))==0)
 	{
@@ -206,10 +210,10 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	else
 		settings->papersize = strdup (gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)));
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines)))
-		settings->printlines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (printlinesspin));
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
+		settings->print_lines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (print_lines_spin_button));
 	else
-		settings->printlines = 0;
+		settings->print_lines = 0;
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (undo_levels)))
 		settings->undo_levels = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (undo_levels_spin_button));
@@ -342,6 +346,7 @@ prepare_documents_page (GladeXML *gui)
 	     !undo_levels_spin_button)
 	{
 		g_warning ("Could not load widgets from prefs.glade correctly\n");
+		return;
 	}
 	     
 
@@ -422,21 +427,21 @@ prepare_fontscolors_page (GladeXML *gui)
 
 
 static void
-printlines_toggled (GtkWidget *widget, gpointer data)
+print_lines_toggled (GtkWidget *widget, gpointer data)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines)))
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
 	{
-		gtk_toggle_button_update_label_sensitivity (printlines, TRUE);
+		gtk_toggle_button_update_label_sensitivity (print_lines, TRUE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), TRUE);
-		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), TRUE);
 	}
 	else
 	{
-		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
+		gtk_toggle_button_update_label_sensitivity (print_lines, FALSE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), FALSE);
 	}
 
 	gnome_property_box_changed (GNOME_PROPERTY_BOX (propertybox));
@@ -447,41 +452,60 @@ prepare_printing_page (GladeXML *gui)
 {
 	gedit_debug("F:prepare_priting_page\n", DEBUG_PREFS);
 
-	printheader = glade_xml_get_widget (gui, "printheader");
-	printlines = glade_xml_get_widget (gui, "printlines");
-	printlinesspin = glade_xml_get_widget (gui, "printlinesspin");
-	lineslabel = glade_xml_get_widget (gui, "lineslabel");
-	printwrap = glade_xml_get_widget (gui, "printwrap");
+	print_header = glade_xml_get_widget (gui, "printheader");
+	print_lines = glade_xml_get_widget (gui, "printlines");
+	print_lines_spin_button = glade_xml_get_widget (gui, "printlinesspin");
+	lines_label = glade_xml_get_widget (gui, "lineslabel");
+	print_wrap = glade_xml_get_widget (gui, "printwrap");
+	print_orientation_portrait_radio_button = glade_xml_get_widget (gui,
+									"print_orientation_portrait_radio_button");
+
+	if ( !print_header ||
+	     !print_lines ||
+	     !print_lines_spin_button ||
+	     !lines_label ||
+	     !print_wrap ||
+	     !print_orientation_portrait_radio_button)
+	{
+		g_warning ("Could not load the widgets for the print page.");
+		return;
+	}
 
 	/* set initial button states */
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printheader),
-				     settings->printheader);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printlines),
-				     settings->printlines);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (printwrap),
-				     settings->printwrap);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (print_header),
+				     settings->print_header);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (print_lines),
+				     settings->print_lines);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (print_wrap),
+				     settings->print_wrap_lines);
 
-	if (!settings->printlines)
+	if (settings->print_orientation == PRINT_ORIENT_PORTRAIT)
+		gtk_radio_button_select (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group,0);
+	else
+		gtk_radio_button_select (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group,1);
+
+	if (!settings->print_lines)
 	{
-		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
+		gtk_toggle_button_update_label_sensitivity (print_lines, FALSE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), FALSE);
 	}
 	else
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON( printlinesspin), (gint)settings->printlines);
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON( print_lines_spin_button), (gint)settings->print_lines);
 			
 
 	/* connect signals */
-	gtk_signal_connect (GTK_OBJECT (printheader), "toggled",
+	gtk_signal_connect (GTK_OBJECT (print_header), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
-	gtk_signal_connect (GTK_OBJECT (printwrap), "toggled",
+	gtk_signal_connect (GTK_OBJECT (print_wrap), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
-	gtk_signal_connect (GTK_OBJECT (printlines), "toggled",
-			    GTK_SIGNAL_FUNC (printlines_toggled), NULL);
-	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (printlinesspin)->adjustment),
-			    "value_changed",
-			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT (print_lines), "toggled",
+			    GTK_SIGNAL_FUNC (print_lines_toggled), NULL);
+	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (print_lines_spin_button)->adjustment),
+			    "value_changed", GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	gtk_signal_connect (GTK_OBJECT (print_orientation_portrait_radio_button),
+			    "toggled", GTK_SIGNAL_FUNC (prefs_changed), NULL);
 }
 
 static void

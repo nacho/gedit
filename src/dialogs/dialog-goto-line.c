@@ -8,9 +8,10 @@
 
 #include <config.h>
 #include <gnome.h>
+
+#include "view.h"
 #include "document.h"
 #include "search.h"
-#include "view.h"
 #include "utils.h"
 #include "dialogs/dialogs.h"
 #include <glade/glade.h>

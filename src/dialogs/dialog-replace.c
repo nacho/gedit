@@ -26,9 +26,9 @@
 #include <config.h>
 #include <gnome.h>
 
+#include "view.h"
 #include "document.h"
 #include "search.h"
-#include "view.h"
 #include "utils.h"
 #include "window.h"
 #include "dialogs/dialogs.h"
@@ -121,63 +121,27 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   chage signals. Chema [ This might not be true anymore since
 		   we are "freezing gedit before doing the search/replace */
 
-		int start, end, delta = 0;
-		start_pos = 0;
-		eureka = TRUE;
+		gint ocurrences = 0;
+		guchar *msg;
 
-		/*
-		gtk_text_freeze (GTK_TEXT (view->text));
-		*/
-
-		while (TRUE)
-		{
-			eureka = search_text_execute ( start_pos,
-						       GTK_TOGGLE_BUTTON (case_sensitive)->active,
-						       text_to_search_for,
-						       &pos_found,
-						       &line_found,
-						       &total_lines,
-						       FALSE);
-
-			if (!eureka)
-				break;
-			
-			start = pos_found + delta + 1;
-			end   = pos_found + search_text_length + delta + 1;
-
-			/*
-			doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
-			*/
-			/*
-			views_delete (view->document, start, end);
-			*/
-
-			/*
-			doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
-			*/
-			/*
-			views_insert (view->document, start, text_to_replace_with, replace_text_length, NULL);
-			*/
-
-			start_pos = pos_found + search_text_length;
-
-			delta = delta + replace_text_length - search_text_length + 1;
-		}
-
-		/*
-		gtk_text_thaw (GTK_TEXT (view->text));
-		*/
-
-		/* Diselect the text and set the point after this occurence*/
-
-
-		/*
-		gtk_text_set_point (text, end);
-		*/
-
-		/* We need to reload the buffer since we changed it */
+		ocurrences = gedit_search_replace_all_execute ( view,
+								text_to_search_for,
+								text_to_replace_with,
+								GTK_TOGGLE_BUTTON (case_sensitive)->active);
 		search_end();
 		search_start();
+
+		gnome_dialog_close (GNOME_DIALOG (widget));
+
+		msg = g_strdup_printf (_("found and replaced %i ocurrences."),
+				       ocurrences);
+		gnome_dialog_run_and_close ((GnomeDialog *)
+					    gnome_message_box_new (msg,
+								   GNOME_MESSAGE_BOX_INFO,
+								   GNOME_STOCK_BUTTON_OK,
+								   NULL));
+		g_free (msg);
+
 	}
 	 
 	if (button == 1) /* Replace */
@@ -193,15 +157,13 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (!gedit_view_get_selection (view, &start, &end))
 			g_warning("This should not happen !!!!. There should be some text selected");
-		/* FIXME !!!!!!!!!! this is a big problem testing for a selection !!! */
+		/* FIXME !!!!!!!!!! this is a big problem testing for
+		   a selection is not the way to do it !!!. Chema */
 
 		/* Diselect the text and set the point after this occurence*/
 		gedit_view_set_selection (view, 0, 0);
 		gedit_document_delete_text (view->document, start, search_text_length, TRUE);
 		gedit_document_insert_text (view->document, text_to_replace_with, start, TRUE);
-		/*
-		gtk_text_set_point (text, end);
-		*/
 
 		/* We need to reload the buffer since we changed it */
 		search_end();

@@ -33,7 +33,9 @@
   gint pos_to_line (gint pos, gint *numlines);
 gulong line_to_pos (Document *doc, gint line, gint *lines);
   gint search_text_execute ( gulong starting_position, gint case_sensitive, guchar *text_to_search_for,
-			   guint * pos_found, gint * line_found, gint * total_lines, gint return_the_line_number);
+			     guint * pos_found, gint * line_found, gint * total_lines, gint return_the_line_number);
+  gint gedit_search_replace_all_execute ( View *view, guchar *text_to_search_for,
+					  guchar *text_to_replace_with, gint case_sensitive);
 
 /* Stopwatch functions */
 void start_time (void);

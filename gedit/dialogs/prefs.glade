@@ -632,7 +632,7 @@ Default
 	    <class>GtkCheckButton</class>
 	    <name>printheader</name>
 	    <can_focus>True</can_focus>
-	    <label>Add header</label>
+	    <label>Add _header</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -657,7 +657,7 @@ Default
 	      <class>GtkCheckButton</class>
 	      <name>printwrap</name>
 	      <can_focus>True</can_focus>
-	      <label>Enable word wrapping</label>
+	      <label>Enable word _wrapping</label>
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -683,7 +683,7 @@ Default
 	      <class>GtkCheckButton</class>
 	      <name>printlines</name>
 	      <can_focus>True</can_focus>
-	      <label>Print line numbers every:</label>
+	      <label>Print _line numbers every:</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -726,6 +726,58 @@ Default
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVBox</class>
+	    <name>vbox8</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkHSeparator</class>
+	      <name>hseparator1</name>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkRadioButton</class>
+	      <name>print_orientation_portrait_radio_button</name>
+	      <can_focus>True</can_focus>
+	      <label>_Potrait</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>print_orientation_group</group>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkRadioButton</class>
+	      <name>print_orientation_landscape_radio_button</name>
+	      <can_focus>True</can_focus>
+	      <label>_Landscape</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>print_orientation_group</group>
 	      <child>
 		<padding>0</padding>
 		<expand>False</expand>
