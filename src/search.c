@@ -64,6 +64,7 @@ static void search_select            (gE_document *doc,
                                       gint         pos,
                                       gulong       options);
 static gint ask_replace ();
+static gint num_widechars	     (const gchar *str);
 
 /* old stuff, remove soon */
 void search_replace_cb(GtkWidget *w, gpointer cbdata) { }
@@ -166,19 +167,19 @@ gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options)
 	gint i, textlen;
 
 	textlen = gtk_text_get_length(GTK_TEXT(doc->text));
-	if (textlen < strlen (str)) {
+	if (textlen < num_widechars (str)) {
 		return -1;
 	}
 
 	if (options & SEARCH_BACKWARDS) {
-		pos -= strlen (str);
+		pos -= num_widechars (str);
 		for (i = pos; i >= 0; i--) {
 			if (search (GTK_EDITABLE (doc->text), str, i, options)) {
 				return i;
 			}
 		}
 	} else {
-		for (i = pos; i <= (textlen - strlen(str)); i++) {
+		for (i = pos; i <= (textlen - num_widechars (str)); i++) {
 			if (search (GTK_EDITABLE (doc->text), str, i, options)) {
 				return i;
 			}
@@ -524,16 +525,16 @@ replace_dialog_button_cb (GtkWidget *widget, gint button, gE_document *doc)
 				if (dowhat == 2)  break;
 				if (dowhat == 1) {
 					if ( !(options | SEARCH_BACKWARDS)) {
-						pos += strlen (str);
+						pos += num_widechars (str);
 					}
 					continue;
 				}
 			}
 
-			gE_search_replace (doc, pos, strlen (str),
+			gE_search_replace (doc, pos, num_widechars (str),
 					replace);
 			if ( !(options | SEARCH_BACKWARDS)) {
-				pos += strlen (replace);
+				pos += num_widechars (replace);
 			}
 		} while (button);
 	} else {
@@ -593,32 +594,35 @@ static gboolean
 search (GtkEditable *text, gchar *str, gint pos, gulong options)
 {
 	gchar *buffer;
+	gint retval;
 
-	buffer = g_malloc0 (strlen (str) + 1);
-	buffer = gtk_editable_get_chars (text, pos, pos + strlen (str));
+	buffer = gtk_editable_get_chars (text, pos, pos + num_widechars (str));
 	if (options & SEARCH_NOCASE) {
-		return (!g_strcasecmp (buffer, str));
+		retval = (!g_strcasecmp (buffer, str));
 	} else {
-		return (!strcmp (buffer, str));
+		retval = (!strcmp (buffer, str));
 	}
+	g_free(buffer);
+	return retval;
 }
 static void
 search_select (gE_document *doc, gchar *str, gint pos, gulong options)
 {
-	gint line, numlines;
+	gint line, numlines, numwcs;
 
+	numwcs = num_widechars(str);
 	line = pos_to_line (doc, pos, &numlines);
 	seek_to_line (doc, line, numlines);
 	if (options | SEARCH_BACKWARDS) {
 		gtk_editable_set_position (GTK_EDITABLE (doc->text),
 				pos);
 		gtk_editable_select_region (GTK_EDITABLE (doc->text),
-				pos + strlen (str), pos);
+				pos + numwcs, pos);
 	} else {
 		gtk_editable_set_position (GTK_EDITABLE (doc->text),
-				pos + strlen (str));
+				pos + numwcs);
 		gtk_editable_select_region (GTK_EDITABLE (doc->text),
-				 pos, pos + strlen (str));
+				 pos, pos + numwcs);
 	}
 }
 
@@ -631,5 +635,18 @@ ask_replace ()
 			GNOME_STOCK_BUTTON_NO,
 			GNOME_STOCK_BUTTON_CANCEL,
 			NULL)));
+}
+
+/* returns the number of wide characters contained in str */
+static gint
+num_widechars (const gchar *str)
+{
+	gint numwcs;
+	GdkWChar *wcs;
+
+	wcs = g_new (GdkWChar, strlen(str));
+	numwcs = gdk_mbstowcs (wcs, str, strlen(str));
+	g_free(wcs);
+	return numwcs >= 0 ? numwcs : 0;
 }
 /* the end */

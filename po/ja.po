@@ -1,0 +1,612 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gEdit 0.5.3\n"
+"POT-Creation-Date: 1999-06-04 12:08+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
+"Language-Team: Japanese <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=euc-japan\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: editor-plugins/email.c:89
+msgid "The gEdit Email Plugin"
+msgstr ""
+
+#: editor-plugins/browse.c:119
+msgid "The gEdit Web Browse Plugin"
+msgstr ""
+
+#: gmodule-plugins/launcher/main.c:57
+#, c-format
+msgid "Docid is %ld.\n"
+msgstr ""
+
+#: gmodule-plugins/shell/main.c:63
+msgid "Shell"
+msgstr ""
+
+#: src/commands.c:556
+msgid "Open File..."
+msgstr "開くファイル名..."
+
+#: src/commands.c:633
+msgid "Read only file!"
+msgstr "読み込み専用のファイルです！"
+
+#: src/commands.c:659
+msgid "Error saving file!"
+msgstr "保存中にエラーが起きました！"
+
+#: src/commands.c:682
+msgid "Save As..."
+msgstr "保存するファイル名.."
+
+#: src/commands.c:724
+msgid "Are you sure you wish to revert all changes?"
+msgstr "変更を全て取り消していいですか？"
+
+#: src/commands.c:766
+msgid "Document Unchanged..."
+msgstr "この文書は変更されていません..."
+
+#: src/commands.c:768
+msgid "Document Unsaved..."
+msgstr "この文書は保存されていません..."
+
+#: src/commands.c:1070
+msgid "_File/"
+msgstr "ファイル(_F)/"
+
+#: src/commands.c:1079 src/commands.c:1080
+msgid "_File"
+msgstr "ファイル(_F)"
+
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr ""
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr ""
+
+#: src/gE_about.c:33
+msgid "With special thanks to:"
+msgstr ""
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr ""
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr ""
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr ""
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr ""
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr ""
+
+#: src/gE_about.c:39
+msgid "       Thomas Holmgren"
+msgstr ""
+
+#: src/gE_about.c:40
+msgid "       Martijn van Beers"
+msgstr ""
+
+#: src/gE_about.c:52
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:54
+msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
+
+#: src/gE_document.c:61 src/toolbar.c:51
+msgid "Cut"
+msgstr "切り取り"
+
+#: src/gE_document.c:62 src/toolbar.c:53
+msgid "Copy"
+msgstr "複写"
+
+#: src/gE_document.c:63 src/toolbar.c:55
+msgid "Paste"
+msgstr "貼り付け"
+
+#. { N_("Open in new window"), file_open_in_new_win_cb },
+#: src/gE_document.c:66 src/gE_mdi.c:102 src/toolbar.c:42
+msgid "Save"
+msgstr "保存"
+
+#: src/gE_document.c:67 src/gE_mdi.c:103 src/toolbar.c:44
+msgid "Close"
+msgstr "閉じる"
+
+#. Print Settings
+#: src/gE_document.c:68 src/gE_mdi.c:104 src/gE_prefs_box.c:920
+#: src/gE_print.c:71 src/toolbar.c:46
+msgid "Print"
+msgstr "印刷"
+
+#: src/gE_document.c:70 src/gE_mdi.c:107
+msgid "Open (swap) .c/.h file"
+msgstr "対応する .c/.h ファイルを開く"
+
+#. line and column indicators
+#: src/gE_document.c:118
+msgid "Column:"
+msgstr "列:"
+
+#: src/gE_document.c:127
+msgid "Line"
+msgstr "行"
+
+#: src/gE_mdi.c:64
+msgid "Find _Line..."
+msgstr "指定行へ(_L)..."
+
+#: src/gE_mdi.c:65
+msgid "Search for a line"
+msgstr "指定された行を見付ける"
+
+#: src/gE_mdi.c:78
+msgid "_Add View"
+msgstr "ビューを追加(_A)"
+
+#: src/gE_mdi.c:79
+msgid "Add a new view of the document"
+msgstr "文書に新しいビューを追加"
+
+#: src/gE_mdi.c:80
+msgid "_Remove View"
+msgstr "ビューを削除"
+
+#: src/gE_mdi.c:81
+msgid "Remove view of the document"
+msgstr "文書のビューを削除する"
+
+#: src/gE_mdi.c:493
+#, c-format
+msgid " '%s' has been modified. Do you wish to save it?"
+msgstr "'%s' は変更されています。保存しますか？"
+
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:511
+#: src/gE_prefs_box.c:512 src/gE_prefs_box.c:562 src/gE_prefs_box.c:563
+#: src/menus.c:251
+msgid "_Plugins"
+msgstr "プラグイン(_P)"
+
+#: src/gE_prefs_box.c:89
+msgid "Default"
+msgstr "デフォルト"
+
+#: src/gE_prefs_box.c:90
+msgid "Notebook"
+msgstr "ノートブック"
+
+#: src/gE_prefs_box.c:91
+msgid "Toplevel"
+msgstr "トップレベル"
+
+#: src/gE_prefs_box.c:92
+msgid "Modal"
+msgstr "モーダル"
+
+#: src/gE_prefs_box.c:254
+msgid "Appearance"
+msgstr "外見"
+
+#: src/gE_prefs_box.c:267
+msgid "Show Statusbar"
+msgstr "ステータスバーを表示"
+
+#: src/gE_prefs_box.c:276
+msgid "Show Splitscreen"
+msgstr "分割表示"
+
+#: src/gE_prefs_box.c:285
+msgid "Editor Behavior"
+msgstr "エディタの動作"
+
+#: src/gE_prefs_box.c:298
+msgid "Enable Autoindent"
+msgstr "自動字下げ"
+
+#: src/gE_prefs_box.c:307
+msgid "Enable Wordwrap"
+msgstr "単語の次行送り"
+
+#: src/gE_prefs_box.c:327
+msgid "Print Command"
+msgstr "印刷コマンド"
+
+#: src/gE_prefs_box.c:417
+msgid "Current Font"
+msgstr "フォント"
+
+#: src/gE_prefs_box.c:434
+msgid "Select..."
+msgstr "選択..."
+
+#: src/gE_prefs_box.c:484
+msgid "Plugin Selector"
+msgstr "プラグインの選択"
+
+#: src/gE_prefs_box.c:605
+msgid "Name"
+msgstr "名前"
+
+#: src/gE_prefs_box.c:605
+msgid "Location"
+msgstr "位置"
+
+#. Plugins Settings
+#: src/gE_prefs_box.c:612 src/gE_prefs_box.c:930
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: src/gE_prefs_box.c:626
+msgid "Use Plugins"
+msgstr "プラグインを使用する"
+
+#: src/gE_prefs_box.c:693
+msgid "Add"
+msgstr "追加"
+
+#: src/gE_prefs_box.c:698
+msgid "Remove"
+msgstr "削除"
+
+#: src/gE_prefs_box.c:721
+msgid "MDI Mode"
+msgstr "MDIモード"
+
+#: src/gE_prefs_box.c:776
+msgid "Window Size"
+msgstr "ウインドウの大きさ"
+
+#. General Settings
+#: src/gE_prefs_box.c:910
+msgid "General"
+msgstr "一般"
+
+#. Window Settings
+#: src/gE_prefs_box.c:915
+msgid "Window"
+msgstr "ウインドウ"
+
+#. Font Settings
+#: src/gE_prefs_box.c:925
+msgid "Font"
+msgstr "フォント"
+
+#. MDI Settings
+#: src/gE_prefs_box.c:935
+msgid "MDI"
+msgstr "MDI"
+
+#: src/gE_print.c:84
+#, c-format
+msgid ""
+"Enter print command below\n"
+"Remember to include '%s'"
+msgstr ""
+"印刷に使用するコマンドを入力して下さい\n"
+"コマンド行には忘れずに '%s' を含めて下さい"
+
+#: src/gE_print.c:92
+msgid "Print Command:"
+msgstr "印刷コマンド"
+
+#: src/gE_print.c:219
+msgid "Print anyway"
+msgstr "そのまま印刷"
+
+#: src/gE_print.c:219
+msgid " Save, then print "
+msgstr "保存してから印刷"
+
+#: src/gedit.c:127
+msgid "Launch a plugin at startup"
+msgstr ""
+
+#: src/gedit.c:127
+msgid "PLUGIN-NAME"
+msgstr ""
+
+#: src/menus.c:65
+msgid "_Autoindent"
+msgstr "自動字下げ(_A)"
+
+#: src/menus.c:66
+msgid "Status_bar"
+msgstr "ステータスバー(_B)"
+
+#: src/menus.c:67
+msgid "_Wordwrap"
+msgstr "単語の次行送り(_W)"
+
+#: src/menus.c:68
+msgid "_Linewrap"
+msgstr "行送り(_L)"
+
+#: src/menus.c:69
+msgid "_Readonly"
+msgstr "読出し専用"
+
+#: src/menus.c:70
+msgid "_Splitscreen"
+msgstr "分割表示(_S)"
+
+#: src/menus.c:71
+msgid "_Show tabs"
+msgstr ""
+
+#: src/menus.c:72
+msgid "Toolbar _relief"
+msgstr ""
+
+#: src/menus.c:73
+msgid "_Show tooltips"
+msgstr ""
+
+#: src/menus.c:74
+msgid "Show toolbar _text"
+msgstr ""
+
+#: src/menus.c:75
+msgid "Show toolbar _icons"
+msgstr ""
+
+#. and this one is the default file name
+#: src/menus.c:77
+msgid "Untitled"
+msgstr "名前無し"
+
+#: src/menus.c:85
+msgid "_New"
+msgstr "新規(_N)"
+
+#: src/menus.c:85 src/toolbar.c:38
+msgid "Create a new document"
+msgstr "新規文書を作る"
+
+#: src/menus.c:94
+msgid "Revert"
+msgstr "元に戻す"
+
+#: src/menus.c:116
+msgid "_Top"
+msgstr "上(_T)"
+
+#: src/menus.c:117
+msgid "Put the document tabs at the top"
+msgstr "つまみをウインドウの上に"
+
+#: src/menus.c:120
+msgid "_Bottom"
+msgstr "下(_B)"
+
+#: src/menus.c:121
+msgid "Put the document tabs at the bottom"
+msgstr "つまみをウインドウの下へ"
+
+#: src/menus.c:124
+msgid "_Left"
+msgstr "左(_L)"
+
+#: src/menus.c:125
+msgid "Put the document tabs on the left"
+msgstr "つまみをウインドウの左へ"
+
+#: src/menus.c:128
+msgid "_Right"
+msgstr "右(_R)"
+
+#: src/menus.c:129
+msgid "Put the document tabs on the right"
+msgstr "つまみをウインドウの右へ"
+
+#: src/menus.c:142
+msgid "_None"
+msgstr "無し(_N)"
+
+#: src/menus.c:143
+msgid "Don't have a scrollbar"
+msgstr "スクロールバーを表示しない"
+
+#: src/menus.c:146
+msgid "_Always"
+msgstr "常時(_Y)"
+
+#: src/menus.c:147
+msgid "Always have the scrollbar"
+msgstr "常にスクロールバーを表示"
+
+#: src/menus.c:150
+msgid "_Automatic"
+msgstr "自動(_A)"
+
+#: src/menus.c:151
+msgid "Only have scrollbar when it's needed"
+msgstr "必要なときだけスクロールバーを表示"
+
+#: src/menus.c:160
+msgid "Toggle autoindent"
+msgstr "自動字下げ(トグル)"
+
+#: src/menus.c:165
+msgid "Toggle statusbar"
+msgstr "ステータスバー(トグル)"
+
+#: src/menus.c:170
+msgid "Toggle Wordwrap"
+msgstr "単語の次行送り(トグル)"
+
+#: src/menus.c:175
+msgid "Toggle Linewrap"
+msgstr "次行送り(トグル)"
+
+#: src/menus.c:180
+msgid "Toggle Readonly"
+msgstr "読出し専用(トグル)"
+
+#: src/menus.c:185
+msgid "Toggle Split Screen"
+msgstr "分割表示(トグル)"
+
+#: src/menus.c:191
+msgid "_Document Tabs"
+msgstr "つまみの位置(_D)"
+
+#: src/menus.c:192
+msgid "Change the placement of the document tabs"
+msgstr "つまみを表示する位置を変更"
+
+#: src/menus.c:194
+msgid "_Scrollbar"
+msgstr "スクロールバー(_S)"
+
+#: src/menus.c:195
+msgid "Change visibility options of the scrollbar"
+msgstr "スクロールバーの表示を制御する"
+
+#: src/menus.c:199
+msgid "Sa_ve Settings"
+msgstr "設定を保存(_V)"
+
+#: src/menus.c:200
+msgid "Save the current settings for future sessions"
+msgstr "設定を次回からも有効にする"
+
+#: src/search.c:289
+#, c-format
+msgid ""
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+"合計: %i 行\n"
+"現在: %i 行"
+
+#: src/search.c:311
+msgid "Go to line"
+msgstr "指定行へ移動"
+
+#: src/search.c:321
+msgid "Line number"
+msgstr "行番号"
+
+#: src/search.c:344
+msgid "Search from cursor"
+msgstr "カーソル位置から検索"
+
+#: src/search.c:351
+msgid "Search from beginning of document"
+msgstr "文書の最初から検索"
+
+#: src/search.c:358
+msgid "Search from end of document"
+msgstr "文書の最後から検索"
+
+#: src/search.c:365
+msgid "Case sensitive"
+msgstr "大文字小文字の区別"
+
+#: src/search.c:371
+msgid "Reverse search"
+msgstr "後向き検索"
+
+#: src/search.c:383
+msgid "Search"
+msgstr "検索"
+
+#: src/search.c:388 src/search.c:416
+msgid "Search for:"
+msgstr "検索対象:"
+
+#: src/search.c:410
+msgid "Replace"
+msgstr "置換"
+
+#: src/search.c:426
+msgid "Replace with:"
+msgstr "置換対象:"
+
+#: src/search.c:437
+msgid "Ask before replacing"
+msgstr "置換前に確認"
+
+#: src/search.c:633
+msgid "Replace?"
+msgstr "置換しますか？"
+
+#: src/toolbar.c:38
+msgid "New"
+msgstr "新規"
+
+#: src/toolbar.c:40
+msgid "Open"
+msgstr "開く"
+
+#: src/toolbar.c:40
+msgid "Open a file"
+msgstr "ファイルを開く"
+
+#: src/toolbar.c:42
+msgid "Save the current file"
+msgstr "現在編集中のファイルを保存"
+
+#: src/toolbar.c:44
+msgid "Close the current file"
+msgstr "現在編集中のファイルを閉じる"
+
+#: src/toolbar.c:46
+msgid "Print the current file"
+msgstr "現在編集中のファイルを印刷"
+
+#: src/toolbar.c:51
+msgid "Cut the selection"
+msgstr "選択領域を切り取り"
+
+#: src/toolbar.c:53
+msgid "Copy the selection"
+msgstr "選択領域を複写"
+
+#: src/toolbar.c:55
+msgid "Paste the clipboard"
+msgstr "クリップボードを張り付け"
+
+#: src/toolbar.c:57
+msgid "Find"
+msgstr "検索"
+
+#: src/toolbar.c:57
+msgid "Search for a string"
+msgstr "文字列を検索"
+
+#: src/toolbar.c:62
+msgid "Exit"
+msgstr "終了"
+
+#: src/toolbar.c:62
+msgid "Exit the program"
+msgstr "エディタを終了する"

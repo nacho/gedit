@@ -30,6 +30,10 @@ extern "C" {
 #define UNKNOWN		N_("Unknown")
 #define UNTITLED	N_("Untitled")
 
+#define DEFAULT_FONT \
+	"-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
+#define DEFAULT_FONTSET \
+	"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
 
 typedef struct _gE_window {
 	GtkWidget *window;
@@ -106,6 +110,7 @@ GList *gE_documents;
 
 extern GnomeMDI *mdi;
 extern gint mdiMode;
+extern gboolean use_fontset;
 
 #ifdef __cplusplus
 }

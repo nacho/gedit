@@ -131,7 +131,10 @@ gint i;
   
   style = gtk_style_new();
   gdk_font_unref (style->font);
-  style->font = gdk_font_load (settings->font);
+  if (use_fontset)
+	  style->font = gdk_fontset_load (settings->font);
+  else
+	  style->font = gdk_font_load (settings->font);
   
   gtk_widget_push_style (style);    
   for (i = 0; i < g_list_length (mdi->children); i++)

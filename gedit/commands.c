@@ -42,6 +42,7 @@
 #include "gE_files.h"
 #include "gE_plugin_api.h"
 #include "dialog.h"
+#include "search.h"
 
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
 static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
@@ -393,11 +394,12 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	GtkWidget *label;
 	GnomeApp *app;
 	/*GtkWidget *text = data->temp2;*/
-	int x;
+/*	gint x, y;*/
 	
 	app = gnome_mdi_get_active_window  (mdi);
 	
-	sprintf (col, "Column:\t%d", GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
+	sprintf (col, "Column:\t%d",
+	 GTK_TEXT(gE_document_current()->text)->cursor_pos_x/7);
 	
 	label = gnome_dock_item_get_child (gnome_app_get_dock_item_by_name (app, "Column"));
 	
@@ -1073,7 +1075,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	int i;
 
 	if (settings->num_recent)
-	  gnome_app_remove_menu_range (app, "_File/", 6, settings->num_recent + 1);
+	  gnome_app_remove_menu_range (app, _("_File/"), 6, settings->num_recent + 1);
 
 	if (recent_files == NULL)
 		return;

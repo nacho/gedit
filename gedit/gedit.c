@@ -51,6 +51,7 @@ gE_preference *settings;
 
 gint mdiMode = GNOME_MDI_DEFAULT_MODE;
 /*gint mdiMode = GNOME_MDI_NOTEBOOK;*/
+gboolean use_fontset = FALSE;
 
 void setup_callbacks( plugin_callback_struct *callbacks )
 {
@@ -167,6 +168,7 @@ int main (int argc, char **argv)
 	char **args;
 	poptContext ctx;
 	int i;
+	GtkWidget *dummy_widget;
 
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
@@ -199,6 +201,15 @@ int main (int argc, char **argv)
 	gnome_init_with_popt_table ("gEdit", VERSION, argc, argv, options, 0, &ctx);
 	
 #endif /* HAVE_LIBGNORBA */
+
+	/* Determine we use fonts or fontsets. If a fontset is supplied
+	   for text widgets, we use fontsets for drawing texts. Otherwise
+	   we use normal fonts instead. */
+	dummy_widget = gtk_text_new(NULL, NULL);
+	gtk_widget_ensure_style(dummy_widget);
+	if (dummy_widget->style->font->type == GDK_FONT_FONTSET)
+		use_fontset = TRUE;
+	gtk_widget_destroy(dummy_widget);
 
 	g_slist_foreach(launch_plugins, launch_plugin, NULL);
 	g_slist_free(launch_plugins);

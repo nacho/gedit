@@ -1,3 +1,23 @@
+Wed Jun 16 18:23:00 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+	(From patch supplied by Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>)
+	
+	* po/ja.po: New file.
+	
+	* src/commands.c: Marked a string for translation. Without this,
+	  gnome_app_remove_menu_range() may fail.
+	
+	* src/gE_plugin_api.c: Include config.h first. Or gettext will
+	  not work.
+	
+	* src/main.h:
+	  src/gE_mdi.c:
+	  src/gE_prefs.c:
+	  src/gE_prefs_box.c:
+	  src/gedit.c: Added fontset support. We use fontsets if a
+	  fontset is supplied for text widgets.
+	  
+	* src/search.c: Added multibyte support.
+	
 Sat Jun 12 19:28:38 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_mdi.c: Removed references to the gE_documents GList.. i think this

@@ -105,8 +105,12 @@ void gE_get_settings()
 	   settings->height = 390;
 	 
 	 settings->font = gE_prefs_get_char("font");
-	 if (settings->font == NULL)
-	   settings->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
+	 if (settings->font == NULL) {
+	   if (use_fontset)
+	     settings->font = DEFAULT_FONTSET;
+	   else
+	     settings->font = DEFAULT_FONT;
+	 }
 	 settings->print_cmd = gE_prefs_get_char("print command"); 
 	 if (settings->print_cmd == NULL)
 	   settings->print_cmd = "lpr %s";

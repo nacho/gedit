@@ -199,6 +199,10 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	gtk_signal_connect_after (GTK_OBJECT(doc->text), "insert_text",
 		GTK_SIGNAL_FUNC(auto_indent_cb), NULL);
 
+	gtk_signal_connect_after (GTK_OBJECT(doc->text), "move_cursor",
+		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);
+
+
 	gtk_container_add (GTK_CONTAINER (doc->scrwindow[0]), doc->text);
 
 	style = gtk_style_new();
@@ -257,12 +261,19 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 
 	style = gtk_style_new();
   	gdk_font_unref (style->font);
- 	 style->font = gdk_font_load (doc->font);
-  	if (style->font == NULL)
-  	 {
-  	 style->font = gdk_font_load ("-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1");
-  	 	doc->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
-  	 } 
+	if (use_fontset) {
+		style->font = doc->font ? gdk_fontset_load (doc->font) : NULL;
+		if (style->font == NULL) {
+			style->font = gdk_fontset_load (DEFAULT_FONTSET);
+			doc->font = DEFAULT_FONTSET;
+		} 
+	} else {
+		style->font = doc->font ? gdk_font_load (doc->font) : NULL;
+		if (style->font == NULL) {
+			style->font = gdk_font_load (DEFAULT_FONT);
+			doc->font = DEFAULT_FONT;
+		} 
+	}
   	 
  	 gtk_widget_push_style (style);     
 	 gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);
