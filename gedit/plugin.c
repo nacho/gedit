@@ -531,7 +531,7 @@ static void *plugin_parse(plugin *plug)
 		    break;
 		  }
 		*strchr( buffer, ']' ) = 0;
-		if ( strcmp( buffer, "Plugins" ) )
+		if ( strcmp( buffer, "_Plugins" ) )
 		  {
 		    g_free( -- buffer );
 		    break;
@@ -885,7 +885,7 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 		if ( strchr( buffer, ']' ) == 0 )
 		  break;
 		*strchr( buffer, ']' ) = 0;
-		if ( strcmp( buffer, "Plugins" ) )
+		if ( strcmp( buffer, "_Plugins" ) )
 		  break;
 		info = g_malloc0( sizeof( plugin_info ) );
 		info->type = PLUGIN_STANDARD;
