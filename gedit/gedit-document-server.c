@@ -153,7 +153,7 @@ impl_gedit_document_server_getCharCount (PortableServer_Servant _servant,
 
 	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
 
-	len = gedit_document_get_char_count (doc_server->doc);
+	len = gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc_server->doc));
 
 	return len;
 }

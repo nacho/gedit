@@ -334,7 +334,7 @@ sort_document (SortDialog * dlg)
 		buffer = gedit_document_get_chars (doc, start, end);
 	}
 
-	lines = g_new0 (gpointer, gedit_document_get_line_count (doc) + 1);
+	lines = g_new0 (gpointer, gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc)) + 1);
 
 	gedit_debug (DEBUG_PLUGINS, "Building list...");
 

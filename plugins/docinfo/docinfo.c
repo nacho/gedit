@@ -237,8 +237,8 @@ word_count_real (void)
 	text = gedit_document_get_chars (doc, 0, -1);
 	g_return_if_fail (g_utf8_validate (text, -1, NULL));
 
-	lines = gedit_document_get_line_count (doc);
-	
+	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
+
 	chars = g_utf8_strlen (text, -1);
  	attrs = g_new0 (PangoLogAttr, chars + 1);
 

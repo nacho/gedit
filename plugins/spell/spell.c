@@ -188,7 +188,7 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (start >= 0);
-	g_return_if_fail (start < gedit_document_get_char_count (doc));
+	g_return_if_fail (start < gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc)));
 	g_return_if_fail ((end >= start) || (end < 0));
 
 	range = get_check_range (doc);
@@ -222,7 +222,7 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->start_mark, &iter);
 	
 	if (end < 0)
-		end = gedit_document_get_char_count (doc);
+		end = gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc));
 	g_return_if_fail (end >= start);
 	
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
@@ -387,7 +387,7 @@ get_next_mispelled_word (GeditDocument *doc)
 	}
 
 	if (!goto_next_word (doc))
-		update_current (doc, gedit_document_get_char_count (doc));
+		update_current (doc, gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc)));
 
 	if (word != NULL)
 	{
@@ -619,7 +619,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	spell = get_spell_checker_from_document (doc);
 	g_return_if_fail (spell != NULL);
 
-	if (gedit_document_get_char_count (doc) <= 0)
+	if (gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc)) <= 0)
 	{
 		show_empty_document_dialog ();
 		return;

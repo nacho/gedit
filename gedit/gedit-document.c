@@ -2098,44 +2098,6 @@ gedit_document_get_deleted (GeditDocument *doc)
 	return deleted;
 }
 
-/**
- * gedit_document_get_char_count:
- * @doc: a #GeditDocument 
- * 
- * Gets the number of characters in the buffer; note that characters
- * and bytes are not the same, you can't e.g. expect the contents of
- * the buffer in string form to be this many bytes long. 
- * 
- * Return value: number of characters in the document
- **/
-gint 
-gedit_document_get_char_count (const GeditDocument *doc)
-{
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (doc != NULL, FALSE);
-
-	return gtk_text_buffer_get_char_count (GTK_TEXT_BUFFER (doc));
-}
-
-/**
- * gedit_document_get_line_count:
- * @doc: a #GeditDocument 
- * 	
- * Obtains the number of lines in the buffer. 
- * 
- * Return value: number of lines in the document
- **/
-gint 
-gedit_document_get_line_count (const GeditDocument *doc)
-{
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (doc != NULL, FALSE);
-
-	return gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
-}
-
 void 
 gedit_document_revert (GeditDocument *doc)
 {

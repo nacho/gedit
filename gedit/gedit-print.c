@@ -216,9 +216,9 @@ get_print_dialog (GeditPrintJobInfo *pji)
 	gnome_print_dialog_construct (GNOME_PRINT_DIALOG (dialog), 
 				      _("Print"),
 			              GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
-	
-	lines = gedit_document_get_line_count (pji->doc);
-	
+
+	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (pji->doc));
+
 	gnome_print_dialog_construct_range_page ( GNOME_PRINT_DIALOG (dialog),
 						  GNOME_PRINT_RANGE_ALL |
 						  GNOME_PRINT_RANGE_RANGE |
