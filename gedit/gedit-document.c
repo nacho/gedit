@@ -132,8 +132,7 @@ static gboolean	gedit_document_save_as_real (GeditDocument *doc, const gchar *ur
 					     gboolean create_backup_copy, GError **error);
 static void gedit_document_set_uri (GeditDocument* doc, const gchar* uri);
 
-static gboolean gedit_document_auto_save (GeditDocument *doc, GError **error);
-static gboolean gedit_document_auto_save_timeout (GeditDocument *doc);
+static gboolean gedit_document_auto_save (GeditDocument *doc);
 
 static GtkTextBufferClass *parent_class 	= NULL;
 static guint document_signals[LAST_SIGNAL] 	= { 0 };
@@ -498,7 +497,7 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 				
 			document->priv->auto_save_timeout = g_timeout_add 
 				(auto_save_interval * 1000 * 60,
-		 		 (GSourceFunc)gedit_document_auto_save_timeout,
+		 		 (GSourceFunc)gedit_document_auto_save,
 		  		 document);		
 		}
 	}
@@ -711,12 +710,15 @@ gedit_document_io_error_quark (void)
 }
 
 static gboolean
-gedit_document_auto_save_timeout (GeditDocument *doc)
+gedit_document_auto_save (GeditDocument *doc)
 {
+	const GeditEncoding *encoding;
+	gboolean create_backup;
 	GError *error = NULL;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (!gedit_document_is_readonly (doc), FALSE);
 
 	/* Remove timeout if now auto_save is FALSE */
@@ -726,7 +728,19 @@ gedit_document_auto_save_timeout (GeditDocument *doc)
 	if (!gedit_document_get_modified (doc))
 		return TRUE;
 
-	gedit_document_auto_save (doc, &error);
+	encoding = gedit_document_get_encoding (doc);
+	create_backup = gedit_prefs_manager_get_create_backup_copy ();
+
+	/* we save a backup just if backups are enabled and if the last
+	 * save was manual.
+	 */
+	if (gedit_document_save_as_real (doc, doc->priv->uri, encoding,
+					 doc->priv->last_save_was_manually && create_backup,
+					 &error))
+	{
+		doc->priv->last_save_was_manually = FALSE;
+		g_get_current_time (&doc->priv->time_of_last_save_or_load);
+	}
 
 	if (error) 
 	{
@@ -734,27 +748,6 @@ gedit_document_auto_save_timeout (GeditDocument *doc)
 		 * the user there was an error? - James */
 		g_error_free (error);
 		return TRUE;
-	}
-
-	return TRUE;
-}
-
-static gboolean
-gedit_document_auto_save (GeditDocument* doc, GError **error)
-{
-	const GeditEncoding *encoding;
-	
-	gedit_debug (DEBUG_DOCUMENT, "");
-	
-	g_return_val_if_fail (doc != NULL, FALSE);
-
-	encoding = gedit_document_get_encoding (doc);
-		
-	if (gedit_document_save_as_real (doc, doc->priv->uri, encoding,
-					 doc->priv->last_save_was_manually, NULL))
-	{
-		doc->priv->last_save_was_manually = FALSE;
-		g_get_current_time (&doc->priv->time_of_last_save_or_load);
 	}
 
 	return TRUE;
@@ -1603,9 +1596,10 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 			const GeditEncoding *encoding, GError **error)
 {	
 	gboolean auto_save;
-	
+	gboolean create_backup;
+
 	gboolean ret = FALSE;
-	
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
@@ -1616,10 +1610,10 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 		encoding = gedit_document_get_encoding (doc);
 
 	auto_save = gedit_prefs_manager_get_auto_save ();
+	create_backup = gedit_prefs_manager_get_create_backup_copy ();
 
 	if (auto_save) 
 	{
-
 		if (doc->priv->auto_save_timeout > 0)
 		{
 			g_source_remove (doc->priv->auto_save_timeout);
@@ -1627,7 +1621,7 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 		}
 	}
 
-	if (gedit_document_save_as_real (doc, uri, encoding, TRUE, error))
+	if (gedit_document_save_as_real (doc, uri, encoding, create_backup, error))
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);
@@ -1638,7 +1632,7 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 		gedit_document_set_encoding (doc, encoding);
 			
 		ret = TRUE;
-	}		
+	}
 
 	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
