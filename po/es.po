@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2000-06-20 03:21-0500\n"
+"POT-Creation-Date: 2000-07-07 13:11-0500\n"
 "PO-Revision-Date: 2000-06-08 21:55+0100\n"
 "Last-Translator: Carlos Perelló Marín <carpema@hispalinux.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -15,11 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:157
+#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:191
+msgid "browse"
+msgstr "Navegador"
+
+#: plugins/browse/browse.c:249
 msgid "Browse"
 msgstr "Navegador"
 
-#: plugins/browse/browse.c:158
+#: plugins/browse/browse.c:250 plugins/browse/browse.c:251
 msgid "Web browse plugin"
 msgstr "Extensión de navegador Web"
 
@@ -32,7 +38,8 @@ msgstr "Convertir"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/convert/convert.c:151 plugins/convert/convert.glade.h:7
+#: plugins/convert/convert.c:151 plugins/convert/convert.c:152
+#: plugins/convert/convert.glade.h:7
 msgid "Number Converter"
 msgstr "Convertidor de números"
 
@@ -56,87 +63,74 @@ msgstr "Decimal a octal"
 msgid "Hex to Decimal"
 msgstr "Hexadecimal a decimal"
 
-#: plugins/diff/diff.c:59
-msgid "Choose a file"
-msgstr "Selecione un archivo"
+#: plugins/diff/diff.c:109
+msgid "The two documents selected are the same"
+msgstr "Los dos documentos selecionados son el mismo"
 
-#: plugins/diff/diff.c:150
-msgid "Choose files to diff"
-msgstr "Selecione los archivos para obtener diferencias"
-
-#: plugins/diff/diff.c:155
-msgid "Choose files to diff:"
-msgstr "Selecione los archivos para obtener diferencias :"
-
-#: plugins/diff/diff.c:164 plugins/diff/diff.c:172
-msgid "Browse..."
-msgstr "Navegador"
-
-#: plugins/diff/diff.c:177
-msgid "Calculate Diff"
-msgstr "Calcular diferencias"
-
-#: plugins/diff/diff.c:199
-msgid "Diff"
-msgstr "Archivo de diferencias"
-
-#: plugins/diff/diff.c:200
-msgid "Diff plugin."
-msgstr "Extensión diff"
-
-#: plugins/email/email.c:139
+#: plugins/diff/diff.c:116
 msgid ""
-"The program sendmail could not be found.\n"
+"The file selected does not exists\n"
+"\n"
+"Please provide a valid file"
+msgstr ""
+"El archivo selecionado no existe\n"
+"\n"
+"Favor de proporcionar un archivo valido"
+
+#: plugins/diff/diff.c:127 plugins/diff/diff.c:139
+msgid "The document contains no text"
+msgstr "El documento no contiene texto"
+
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:148
+msgid ""
+"gedit could not create a temp file.\n"
 "\n"
 msgstr ""
-
-#: plugins/email/email.c:154
-#, c-format
-msgid ""
-"'%s' doesn't seem to exist.\n"
+"gedit no pudo crear un archivo temporal\n"
 "\n"
-msgstr ""
 
-#: plugins/email/email.c:156
-#, c-format
-msgid ""
-"'%s' seems to be a directory.\n"
-"but 'sendmail' could not be found inside it.\n"
-"\n"
-msgstr ""
-
-#: plugins/email/email.c:159
-#, c-format
-msgid ""
-"'%s' doesn't seem to be a program.\n"
-"\n"
-msgstr ""
-
-#: plugins/email/email.c:163
-#, c-format
-msgid ""
-"%sYou won't be able to use the email plugin without sendmail. \n"
-" Do you want to specify a new location for sendmail?"
-msgstr ""
-
-#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:260
-msgid "email"
-msgstr "email"
-
-#: plugins/email/email.c:309 plugins/email/email.c:316 src/document.c:261
-#: src/print.c:581
+#: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
+#: src/document.c:261 src/print.c:584
 msgid "Untitled"
 msgstr "SinNombre"
 
-#: plugins/email/email.c:350
+#: plugins/diff/diff.c:421
+msgid "Diff"
+msgstr "Archivo de diferencias"
+
+#: plugins/diff/diff.c:422
+msgid "Makes a diff file from 2 documents or files"
+msgstr "Crea un archivo de diferencias a partir de 2 documentos"
+
+#: plugins/diff/diff.c:423
+msgid ""
+"Makes a diff file from 2 documents or files on disk\n"
+"For more info on diff, type \"man diff\" in a shell prompt\n"
+msgstr ""
+"Crea un archivo diff a partir de 2 documentos o archivos en disco\n"
+"Para mas informacion sobre diff, utilize \"man diff\" en una terminal\n"
+
+#: plugins/email/email.c:60
+#, c-format
+msgid "Executing command : %s"
+msgstr "Ejecutando el comando : %s"
+
+#: plugins/email/email.c:262
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: plugins/email/email.c:351
+#: plugins/email/email.c:263
 msgid "Email the current document"
 msgstr "Enviar el documento actual por correo"
+
+#: plugins/email/email.c:264
+msgid ""
+"Email the current document to a specified email address\n"
+"gedit searches for sendmail to use this plugin."
+msgstr ""
+"Mande por email el documento activo a una direccion de email\n"
+"gedit busca por el programa sendmail para utilizar este plugin"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -157,37 +151,50 @@ msgstr "Para:"
 
 #: plugins/email/email.glade.h:10
 msgid "Subject:"
-msgstr "Tema:"
+msgstr "Titulo:"
 
 #: plugins/email/email.glade.h:11
-msgid "File to use as body of message: "
-msgstr "Archivo a emplear como cuerpo del mensaje: "
+msgid "Change..."
+msgstr "Cambiar..."
 
 #: plugins/email/email.glade.h:12
-msgid "Sendmail found at : "
-msgstr ""
+msgid "label12"
+msgstr "label12"
 
-#: plugins/reverse/reverse.c:56
+#: plugins/email/email.glade.h:13
+msgid "File to use as body of message : "
+msgstr "Archivo a emplear como cuerpo del mensaje: "
+
+#: plugins/email/email.glade.h:14
+msgid "Sendmail found at :"
+msgstr "Sendmail fue encontrado en :"
+
+#: plugins/email/email.glade.h:15
+msgid "label13"
+msgstr "label13"
+
+#: plugins/reverse/reverse.c:70
 msgid "Reverse"
 msgstr "Revertir"
 
-#: plugins/reverse/reverse.c:57
+#: plugins/reverse/reverse.c:71 plugins/reverse/reverse.c:72
 msgid "Reverse text"
 msgstr "Reacomodar el text en reversa"
 
-#: plugins/sample/sample.c:43
+#: plugins/sample/sample.c:55
 msgid "Hello World"
 msgstr "Hola Mundo"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:56 plugins/sample/sample.c:57
 msgid "Sample 'hello world' plugin."
 msgstr "Extensión 'hola mundo' de ejemplo."
 
-#: plugins/shell_output/shell_output.c:172
+#: plugins/shell_output/shell_output.c:177
 msgid "Shell Output"
 msgstr "Salida de shell"
 
-#: plugins/shell_output/shell_output.c:173
+#: plugins/shell_output/shell_output.c:178
+#: plugins/shell_output/shell_output.c:179
 msgid "Insert the shell output in the document"
 msgstr "Inserta texto del shell en el documento"
 
@@ -212,7 +219,7 @@ msgstr "Proporcione el comando a ejecutar"
 msgid "Insert Time"
 msgstr "Insertar hora"
 
-#: plugins/time/time.c:85
+#: plugins/time/time.c:85 plugins/time/time.c:86
 msgid "Inserts the current date and time"
 msgstr "Insertar la fecha y hora actual"
 
@@ -230,7 +237,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit es un editor de texto pequeño y simple para GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:574
+#: src/dialogs/dialog-prefs.c:555
 msgid "gedit: Preferences"
 msgstr "gedit: Preferencias"
 
@@ -239,7 +246,7 @@ msgstr "gedit: Preferencias"
 msgid "found and replaced %i occurrences."
 msgstr "encontradas y reemplazadas %i casos"
 
-#: src/dialogs/dialog-replace.c:241 src/search.c:267
+#: src/dialogs/dialog-replace.c:246 src/search.c:282
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Se ha encontrado el texto en la línea:%i"
@@ -334,7 +341,7 @@ msgstr "Modo: "
 msgid "Notebook Tab Position: "
 msgstr "Posición de las pestañas: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:241
+#: src/dialogs/prefs.glade.h:28 src/menus.c:239
 msgid "Undo"
 msgstr "Deshacer"
 
@@ -427,7 +434,7 @@ msgstr "Papel"
 msgid "Replace"
 msgstr "Remplazar"
 
-#: src/dialogs/replace.glade.h:8 src/menus.c:261
+#: src/dialogs/replace.glade.h:8 src/menus.c:259
 msgid "Find"
 msgstr "Buscar"
 
@@ -459,24 +466,24 @@ msgstr "_Distinguir mayúsculas y minúsculas"
 msgid "RO - "
 msgstr "SL - "
 
-#: src/document.c:437
+#: src/document.c:434
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "«%s» fue modificado. ¿Desea guardarlo?"
 
-#: src/document.c:648
+#: src/document.c:644
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/document.c:650
+#: src/document.c:646
 msgid "(readonly)"
 msgstr "(solo lectura)"
 
-#: src/document.c:695 src/document.c:735
+#: src/document.c:692 src/document.c:732
 msgid "This file does not end with a valid extension\n"
 msgstr "Exte archivo no termina con una extension valida\n"
 
-#: src/document.c:743
+#: src/document.c:740
 #, c-format
 msgid "The file %s was not found."
 msgstr "El documento %s no fue encontrado."
@@ -528,7 +535,7 @@ msgstr ""
 "\n"
 "Asegúrese que tiene los derechos de acceso necesarios para abrirlo."
 
-#: src/file.c:215
+#: src/file.c:214
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -545,7 +552,7 @@ msgstr ""
 "Asegúrese que el camino que indicó existe, y que Vd. tiene los derechos de "
 "acceso adecuados."
 
-#: src/file.c:229
+#: src/file.c:228
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -562,7 +569,7 @@ msgstr ""
 "Por una razón desconocida (1). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:244
+#: src/file.c:243
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -579,7 +586,7 @@ msgstr ""
 "Por una razón desconocida (2). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:331
+#: src/file.c:330
 msgid "Save As..."
 msgstr "Guardar como..."
 
@@ -609,11 +616,11 @@ msgstr "El documento no fue guardado..."
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
-#: src/file.c:738
+#: src/file.c:735
 msgid "You can't revert an Untitled document\n"
 msgstr "No puede revertir un documento Sin título\n"
 
-#: src/file.c:751
+#: src/file.c:748
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -622,7 +629,7 @@ msgstr ""
 "¿Está seguro que desea deshacer todos los cambios?\n"
 "(%s)"
 
-#: src/file.c:780
+#: src/file.c:777
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
@@ -635,7 +642,7 @@ msgstr "Abrir (alternar) archivo .c/.h"
 msgid "_New"
 msgstr "_Nuevo"
 
-#: src/menus.c:60 src/menus.c:220
+#: src/menus.c:60 src/menus.c:218
 msgid "Create a new document"
 msgstr "Crear un nuevo documento"
 
@@ -699,133 +706,190 @@ msgstr "_Quitar vista"
 msgid "Remove view of the document"
 msgstr "Quitar una vista del documento"
 
-#: src/menus.c:196 src/plugin.c:115 src/plugin.c:211
+#: src/menus.c:194 src/plugin.c:82 src/plugin.c:390
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/menus.c:206
+#: src/menus.c:204
 msgid "_Documents"
 msgstr "_Documentos"
 
-#: src/menus.c:220
+#: src/menus.c:218
 msgid "New"
 msgstr "Nuevo"
 
-#: src/menus.c:224
+#: src/menus.c:222
 msgid "Open"
 msgstr "Abrir"
 
-#: src/menus.c:224
+#: src/menus.c:222
 msgid "Open a file"
 msgstr "Abrir un archivo"
 
-#: src/menus.c:228
+#: src/menus.c:226
 msgid "Save"
 msgstr "Guardar"
 
-#: src/menus.c:228
+#: src/menus.c:226
 msgid "Save the current file"
 msgstr "Guardar el archivo actual"
 
-#: src/menus.c:232
+#: src/menus.c:230
 msgid "Close"
 msgstr "Cerrar"
 
-#: src/menus.c:232
+#: src/menus.c:230
 msgid "Close the current file"
 msgstr "Cerrar el archivo actual"
 
-#: src/menus.c:236
+#: src/menus.c:234
 msgid "Print"
 msgstr "Imprimir"
 
-#: src/menus.c:236
+#: src/menus.c:234
 msgid "Print the current file"
 msgstr "Imprimir el archivo actual"
 
-#: src/menus.c:241
+#: src/menus.c:239
 msgid "Undo last operation"
 msgstr "Deshacer la última operación"
 
-#: src/menus.c:245
+#: src/menus.c:243
 msgid "Redo"
 msgstr "Rehacer"
 
-#: src/menus.c:245
+#: src/menus.c:243
 msgid "Redo last operation"
 msgstr "Rehacer la última operación que fue deshecha"
 
-#: src/menus.c:249
+#: src/menus.c:247
 msgid "Cut"
 msgstr "Cortar"
 
-#: src/menus.c:249
+#: src/menus.c:247
 msgid "Cut the selection"
 msgstr "Cortar la selección"
 
-#: src/menus.c:253
+#: src/menus.c:251
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/menus.c:253
+#: src/menus.c:251
 msgid "Copy the selection"
 msgstr "Copiar la selección"
 
-#: src/menus.c:257
+#: src/menus.c:255
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/menus.c:257
+#: src/menus.c:255
 msgid "Paste the clipboard"
 msgstr "Pegar el contenido del portapapeles"
 
-#: src/menus.c:261
+#: src/menus.c:259
 msgid "Search for a string"
 msgstr "Buscar una cadena de texto"
 
-#: src/menus.c:265
+#: src/menus.c:263
 msgid "Line"
 msgstr "Línea"
 
-#: src/menus.c:265
-msgid "Get the current and total lines"
-msgstr "Obtener las líneas actuales y totales"
+#: src/menus.c:263
+msgid "Get file info like characters, lines, words & paragraphs count."
+msgstr ""
+"Obtenga la informacion del documento. Como numbero de caracters, lineas, "
+"palabras etc."
 
-#: src/menus.c:270
+#: src/menus.c:268
 msgid "Exit"
 msgstr "Salir"
 
-#: src/menus.c:270
+#: src/menus.c:268
 msgid "Exit the program"
 msgstr "Salir del programa"
 
-#: src/plugin.c:59
+#: src/plugin.c:93
+msgid "Manager ..."
+msgstr "Administrador ..."
+
+#: src/plugin.c:94
+msgid "Add/Remove installed plugins"
+msgstr "Agrega/Remueve plugins instalados"
+
+#: src/plugin.c:189
+#, c-format
+msgid ""
+"The program %s could not be found.\n"
+"\n"
+msgstr ""
+"El programa %s no pudo ser encontrado.\n"
+"\n"
+
+#: src/plugin.c:204
+#, c-format
+msgid ""
+"'%s' doesn't seem to exist.\n"
+"\n"
+msgstr ""
+"'%s' parece no existir.\n"
+"\n"
+
+#: src/plugin.c:206
+#, c-format
+msgid ""
+"'%s' seems to be a directory.\n"
+"but '%s' could not be found inside it.\n"
+"\n"
+msgstr ""
+"'%s' parece ser un directorio.\n"
+"pero '%s' no pudo ser encontrado dentro del mismo.\n"
+"\n"
+
+#: src/plugin.c:209
+#, c-format
+msgid ""
+"'%s' doesn't seem to be a program.\n"
+"\n"
+msgstr ""
+"'%s' no parece ser un programa.\n"
+"\n"
+
+#: src/plugin.c:213
+#, c-format
+msgid ""
+"%sYou won't be able to use the %s plugin without %s. \n"
+" Do you want to specify a new location for %s?"
+msgstr ""
+"%sUsted no va a poder utilizar el plugin de %s sin %s. \n"
+" Desea especificar una nueva localizacion para %s?"
+
+#: src/plugin.c:311
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Error, no puedo abrir el archivo de módulo, %s"
 
-#: src/plugin.c:70
+#: src/plugin.c:321
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Error, la extensión no provee la función init_plugin."
 
-#: src/plugin.c:77
+#: src/plugin.c:333
 msgid "Error, init_plugin returned an error"
 msgstr "Error, init_plugin devolvió un error"
 
-#: src/plugin.c:105
+#: src/plugin.c:380
 msgid "Error, plugin is still in use"
 msgstr "Error, la extensión aún está en uso"
 
-#: src/print.c:176
+#: src/print.c:179
 msgid "Pages"
 msgstr "Páginas"
 
-#: src/print.c:237
+#: src/print.c:240
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Ver antes de imprimir"
 
-#: src/print.c:530 src/print.c:545
+#: src/print.c:533 src/print.c:548
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -834,7 +898,7 @@ msgstr ""
 "gedit no pudo encontrar la fuente \"%s\".\n"
 "gedit no puede continuar la impresion sin esta fuente instalada."
 
-#: src/print.c:838
+#: src/print.c:841
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Página: %i/%i"
@@ -852,7 +916,7 @@ msgstr "_Archivo"
 msgid "Unable to open recent file : %s"
 msgstr "Error, no puedo abrir el archivo, %s"
 
-#: src/search.c:169
+#: src/search.c:175
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -860,82 +924,129 @@ msgstr ""
 "No puedo contar las lineas si hay otra operación de búsqueda activa, por "
 "favor cierre el dialogo de búsqueda."
 
-#: src/search.c:184
+#: src/search.c:191
 #, c-format
 msgid ""
 "Filename: %s\n"
 "\n"
+"Total Characters: %i\n"
+"Total Words: %i\n"
 "Total Lines: %i\n"
-"Current Line: %i"
-msgstr ""
-"Nombre de archivo: %s\n"
+"Total Paragraphs: %i\n"
+"Total Bytes: %i\n"
 "\n"
-"Total de Líneas: %i\n"
-"Línea Actual: %i"
+"Current Line: %i\n"
+"Current Column: %i"
+msgstr ""
+"Documento : %s\n"
+"\n"
+"Caracters: %i\n"
+"Palabras: %i\n"
+"Lineas: %i\n"
+"Parrafos: %i\n"
+"Bytes: %i\n"
+"\n"
+"Linea actual : %i\n"
+"Columna Actual: %i"
 
-#: src/search.c:209
+#: src/search.c:224
 msgid "Text not found"
 msgstr "Texto no encontrado"
 
-#: src/search.c:214
+#: src/search.c:229
 msgid "Text not found."
 msgstr "Texto no encontrado."
 
-#: src/search.c:245
+#: src/search.c:260
 msgid "Can't find again. There is not a text string to search for."
 msgstr "No se puede buscar de nuevo. No hay ninguna cadena de texto a buscar."
 
-#: src/utils.h:94
+#: src/utils.h:71
 msgid "Show window debugging messages."
 msgstr "Desplegar mensajes de debugeo de Window"
 
-#: src/utils.h:97
+#: src/utils.h:74
 msgid "Show commands debugging messages."
 msgstr "Desplegar mensajes de debugeo de Command"
 
-#: src/utils.h:100
+#: src/utils.h:77
 msgid "Show document debugging messages."
 msgstr "Desplegar mensajes de debugeo de Document"
 
-#: src/utils.h:103
+#: src/utils.h:80
 msgid "Show file debugging messages."
 msgstr "Desplegar mensajes de debugeo de File"
 
-#: src/utils.h:106
+#: src/utils.h:83
 msgid "Show plugin debugging messages."
 msgstr "Desplegar mensajes de debugeo de Plugins"
 
-#: src/utils.h:109
+#: src/utils.h:86
 msgid "Show prefs debugging messages."
 msgstr "Desplegar mensajes de debugeo de Prefs"
 
-#: src/utils.h:112
+#: src/utils.h:89
 msgid "Show printing debugging messages."
 msgstr "Desplegar mensajes de debugeo de Print"
 
-#: src/utils.h:115
+#: src/utils.h:92
 msgid "Show search debugging messages."
 msgstr "Desplegar mensajes de debugeo de Search"
 
-#: src/utils.h:118
+#: src/utils.h:95
 msgid "Show undo debugging messages."
 msgstr "Desplegar mensajes de debugeo de Undo"
 
-#: src/utils.h:121
+#: src/utils.h:98
 msgid "Show view debugging messages."
 msgstr "Desplegar mensajes de debugeo de View"
 
-#: src/utils.h:124
+#: src/utils.h:101
 msgid "Show recent debugging messages."
 msgstr "Desplegar mensajes de debugeo de Recent"
 
-#: src/utils.h:127
+#: src/utils.h:104
 msgid "Turn on all debugging messages."
 msgstr "Desplegar todos los mensajes de debugeo"
 
-#: src/view.c:895
+#: src/view.c:933
 msgid "You can't remove the last view of a document."
 msgstr "No puede revertir un documento Sin título."
+
+#~ msgid "Choose a file"
+#~ msgstr "Selecione un archivo"
+
+#~ msgid "Choose files to diff"
+#~ msgstr "Selecione los archivos para obtener diferencias"
+
+#~ msgid "Choose files to diff:"
+#~ msgstr "Selecione los archivos para obtener diferencias :"
+
+#~ msgid "Browse..."
+#~ msgstr "Navegador"
+
+#~ msgid "Calculate Diff"
+#~ msgstr "Calcular diferencias"
+
+#~ msgid "Diff plugin."
+#~ msgstr "Extensión diff"
+
+#~ msgid "email"
+#~ msgstr "email"
+
+#~ msgid "Get the current and total lines"
+#~ msgstr "Obtener las líneas actuales y totales"
+
+#~ msgid ""
+#~ "Filename: %s\n"
+#~ "\n"
+#~ "Total Lines: %i\n"
+#~ "Current Line: %i"
+#~ msgstr ""
+#~ "Nombre de archivo: %s\n"
+#~ "\n"
+#~ "Total de Líneas: %i\n"
+#~ "Línea Actual: %i"
 
 #~ msgid "Show splitscreen"
 #~ msgstr "División de pantalla"
