@@ -356,13 +356,13 @@ static GtkWidget *doc_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  prefs->DButton1 = gtk_radio_button_new_with_label (NULL, "New Document After Closing Last");
+  prefs->DButton1 = gtk_radio_button_new_with_label (NULL, _("New Document After Closing Last"));
   gtk_box_pack_start (GTK_BOX (hbox), prefs->DButton1, TRUE, TRUE, 0);
   gtk_widget_show (prefs->DButton1);
   
   prefs->DButton2 = gtk_radio_button_new_with_label (
 	         gtk_radio_button_group (GTK_RADIO_BUTTON (prefs->DButton1)),
-		 "Close Window After Closing Last");
+		 _("Close Window After Closing Last"));
   gtk_box_pack_start (GTK_BOX (hbox), prefs->DButton2, TRUE, TRUE, 0);
   gtk_widget_show (prefs->DButton2);
   
