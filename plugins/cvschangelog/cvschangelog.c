@@ -23,6 +23,10 @@
  *   James Willcox <jwillcox@cs.indiana.edu>
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <libgnome/gnome-i18n.h>
 
 #include <errno.h>
