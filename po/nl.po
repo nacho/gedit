@@ -9,21 +9,357 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-06-02 13:09+0200\n"
-"PO-Revision-Date: 2002-06-04 01:37+0200\n"
+"POT-Creation-Date: 2002-07-18 09:02+0200\n"
+"PO-Revision-Date: 2002-07-18 15:59+0200\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gedit.desktop.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
+#, fuzzy
+msgid "gedit application"
+msgstr "Toepassing configureren"
+
+#: data/GNOME_Gedit.server.in.h:2
+msgid "gedit automation factory"
+msgstr "gedit automatiseringsfabriek"
+
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
 msgstr "Tekstbestanden bewerken"
 
-#: gedit.desktop.in.h:2
+#: data/gedit.desktop.in.h:2 src/gedit2.c:297
 msgid "Text Editor"
 msgstr "Tekst-editor"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+"Een eigen lettertype om te gebruiken in het bewerkingsgedeelte. Dit heeft "
+"alleen effect indien de optie \"Standaardlettertype gebruiken\" is "
+"uitgeschakeld."
+
+#: data/gedit.schemas.in.h:2
+#, fuzzy
+msgid "Auto Save"
+msgstr "Opslaan"
+
+#: data/gedit.schemas.in.h:3
+msgid "Auto Save Interval"
+msgstr "Auto-opslaan interval"
+
+#: data/gedit.schemas.in.h:4
+#, fuzzy
+msgid "Background Color"
+msgstr "A_chtergrondkleur:"
+
+#: data/gedit.schemas.in.h:5
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Achtergrondkleur voor geselecteerde tekst in het bewerkingsgedeelte. Dit "
+"heeft alleen effect indien de optie \"Standaardkleuren gebruiken\" is "
+"uitgeschakeld."
+
+#: data/gedit.schemas.in.h:6
+msgid ""
+"Background color for unselected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Achtergrondkleur voor niet geselecteerde tekst in het bewerkingsgedeelte. Dit "
+"heeft alleen effect indien de optie \"Standaardkleuren gebruiken\" is "
+"uitgeschakeld."
+
+#: data/gedit.schemas.in.h:7
+msgid "Backup Copy Extension"
+msgstr "Achtervoegsel voor reservekopie"
+
+#: data/gedit.schemas.in.h:8
+msgid "Body Font for Printing"
+msgstr "Afdruklettertype voor inhoud"
+
+#: data/gedit.schemas.in.h:9
+msgid "Create Backup Copies"
+msgstr "Reservekopieën maken"
+
+#: data/gedit.schemas.in.h:10
+#, fuzzy
+msgid "Display Line Numbers"
+msgstr "Regelnummers _weergeven"
+
+#: data/gedit.schemas.in.h:11
+#, fuzzy
+msgid "Editor Font"
+msgstr "Editor"
+
+#: data/gedit.schemas.in.h:12
+msgid "Encoding for Saving"
+msgstr "Opslagcodering"
+
+#: data/gedit.schemas.in.h:13
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+"Achtervoegsel voor reservekopieën. Dit heeft alleen effect bij gebruik van "
+"de optie \"Reservekopieën maken\"."
+
+#: data/gedit.schemas.in.h:14
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Voorgrondkleur voor geselecteerde tekst in het bewerkingsgedeelte. Dit heeft "
+"alleen effect indien de optie \"Standaardkleuren gebruiken\" is "
+"uitgeschakeld."
+
+#: data/gedit.schemas.in.h:15
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Achtergrondkleur voor niet geselecteerde tekst in het bewerkingsgedeelte. Dit "
+"heeft alleen effect indien de optie \"Standaardkleuren gebruiken\" is "
+"uitgeschakeld."
+
+#: data/gedit.schemas.in.h:16
+msgid "Header Font for Printing"
+msgstr "Afdruklettertype voor kop"
+
+#: data/gedit.schemas.in.h:17
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+"Als deze waarde 0 is dan zullen er geen regelnummers worden afgedrukt. Anders "
+"zal gedit iedere zoveel regels het regelnummer afdrukken."
+
+#: data/gedit.schemas.in.h:18
+msgid "Line Number Font for Printing"
+msgstr ""
+
+#: data/gedit.schemas.in.h:19
+msgid "Line Wrapping Mode"
+msgstr ""
+
+#: data/gedit.schemas.in.h:20
+msgid "Maximum Recent Files"
+msgstr "Maximaal aantal recente bestanden"
+
+#: data/gedit.schemas.in.h:21
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr "Maximaal aantal herstelacties die onthouden zullen worden door gedit."
+
+#: data/gedit.schemas.in.h:22
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+
+#: data/gedit.schemas.in.h:23
+#, fuzzy
+msgid "Print Header"
+msgstr "_Paginakoppen afdrukken"
+
+#: data/gedit.schemas.in.h:24
+#, fuzzy
+msgid "Print Line Numbers"
+msgstr "Rege_lnummers elke"
+
+#: data/gedit.schemas.in.h:25
+msgid "Printing Line Wrapping Mode"
+msgstr ""
+
+#: data/gedit.schemas.in.h:26
+#, fuzzy
+msgid "Selected Text Color"
+msgstr "Tekstselectie kleur:"
+
+#: data/gedit.schemas.in.h:27
+#, fuzzy
+msgid "Selection Color"
+msgstr "Se_lectiekleur:"
+
+#: data/gedit.schemas.in.h:28
+#, fuzzy
+msgid "Show Cursor Position"
+msgstr "_Cursorpositie tonen"
+
+#: data/gedit.schemas.in.h:29
+#, fuzzy
+msgid "Show Overwrite Mode"
+msgstr "_Overschrijfmodus tonen"
+
+#: data/gedit.schemas.in.h:30
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:31
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:32
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr ""
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only take "
+"effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+
+#: data/gedit.schemas.in.h:35
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+
+#: data/gedit.schemas.in.h:36
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr ""
+
+#: data/gedit.schemas.in.h:37
+msgid "Status Bar is Visible"
+msgstr ""
+
+#: data/gedit.schemas.in.h:38
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:39
+msgid "Tab Size"
+msgstr ""
+
+#: data/gedit.schemas.in.h:40
+#, fuzzy
+msgid "Text Color"
+msgstr "_Tekst kleur:"
+
+#: data/gedit.schemas.in.h:41
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to convert "
+"the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try to "
+"use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to try "
+"to use the original file encoding (new files in current locale's encoding). "
+"If the conversion is successful, it will be used. Otherwise, UTF-8 will be "
+"used. Note that the values are case-sensitive, so make sure they appear "
+"exactly as mentioned here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:42
+#, fuzzy
+msgid "Toolbar Buttons Style"
+msgstr "Knopstijl"
+
+#: data/gedit.schemas.in.h:43
+#, fuzzy
+msgid "Toolbar is Visible"
+msgstr "Werkbalken"
+
+#: data/gedit.schemas.in.h:44
+msgid "Undo Actions Limit"
+msgstr ""
+
+#: data/gedit.schemas.in.h:45
+msgid "Use Default Colors"
+msgstr "Standaardkleuren gebruiken"
+
+#: data/gedit.schemas.in.h:46
+msgid "Use Default Font"
+msgstr "Standaardlettertype gebruiken"
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Whether gedit should automatically save modified files after a time interval. "
+"You can set the time interval with the \"Auto Save Interval\" option."
+msgstr ""
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can set "
+"the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+
+#: data/gedit.schemas.in.h:49
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr ""
+
+#: data/gedit.schemas.in.h:50
+msgid ""
+"Whether gedit should include a document header when printing documents."
+msgstr ""
+
+#: data/gedit.schemas.in.h:51
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr ""
+
+#: data/gedit.schemas.in.h:52
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+
+#: data/gedit.schemas.in.h:54
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr ""
+
+#: data/gedit.schemas.in.h:55
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text "
+"Color\", and \"Selection Color\" options."
+msgstr ""
+
+#: data/gedit.schemas.in.h:56
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -84,24 +420,24 @@ msgid "gedit: ASCII table"
 msgstr "gedit: ASCII tabel"
 
 #. AFAIK, all cvs commit messages start with this
-#: plugins/cvschangelog/cvschangelog.c:48
+#: plugins/cvschangelog/cvschangelog.c:49
 msgid "Open CVS Chan_geLogs"
 msgstr "CVS Chan_geLogs openen"
 
-#: plugins/cvschangelog/cvschangelog.c:51
+#: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Zoekt naar ChangeLogs in het huidige document en opent ze."
 
-#: plugins/cvschangelog/cvschangelog.c:263
+#: plugins/cvschangelog/cvschangelog.c:269
 msgid "CVS ChangeLog"
 msgstr "CVS ChangeLog"
 
-#: plugins/cvschangelog/cvschangelog.c:264
+#: plugins/cvschangelog/cvschangelog.c:270
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
 "Een plugin die ChangeLogs opent die gevonden zijn in CVS commit berichten."
 
-#: plugins/cvschangelog/cvschangelog.c:266
+#: plugins/cvschangelog/cvschangelog.c:272
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
@@ -278,17 +614,17 @@ msgstr "_Update"
 
 #: plugins/docinfo/docinfo.c:366
 msgid ""
-"The word count plugin analyzes the current document and determines the "
-"number of words, lines, characters and non-space characters in it and "
-"display the result."
+"The word count plugin analyzes the current document and determines the number "
+"of words, lines, characters and non-space characters in it and display the "
+"result."
 msgstr ""
 "De 'woorden tellen'-plugin analyseert het huidige document, telt het aantal "
-"woorden, regels, karakters en niet-spatie karakters, en laat het resultaat "
-"op het scherm zien."
+"woorden, regels, karakters en niet-spatie karakters, en laat het resultaat op "
+"het scherm zien."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
-#: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
+#: plugins/shell_output/shell_output.c:553
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:568
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -312,7 +648,7 @@ msgstr "Karakters (met spaties)"
 msgid "File Name"
 msgstr "Bestandsnaam"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
 msgstr "Regels"
 
@@ -336,32 +672,37 @@ msgstr "Gebruikers_naam invoegen"
 msgid "Insert the user name at the cursor position"
 msgstr "Voegt de gebruikersnaam in op de cursor positie."
 
-#: plugins/sample/sample.c:160
+#: plugins/sample/sample.c:172
 msgid "User name"
 msgstr "Gebruikers naam"
 
-#: plugins/sample/sample.c:161
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
 msgstr "Voegt de gebruikersnaam in op de cursor positie."
 
-#: plugins/shell_output/shell_output.c:45
+#: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
 msgstr "Shell _uitvoer invoegen"
 
-#: plugins/shell_output/shell_output.c:48
+#: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
 msgstr "Voeg de shell uitvoer in in het huidige document."
 
-#: plugins/shell_output/shell_output.c:163
-#: plugins/shell_output/shell_output.c:432
+#: plugins/shell_output/shell_output.c:137
+msgid "An error occurs while running the selected command."
+msgstr ""
+"Er is een fout opgetreden tijdens het uitvoeren van het opgegeven commando."
+
+#: plugins/shell_output/shell_output.c:187
+#: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
 msgstr "Shell-uitvoer"
 
-#: plugins/shell_output/shell_output.c:176
+#: plugins/shell_output/shell_output.c:200
 msgid "_Run"
 msgstr "_Starten"
 
-#: plugins/shell_output/shell_output.c:264
+#: plugins/shell_output/shell_output.c:360
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -371,7 +712,7 @@ msgstr ""
 "\n"
 "Gelieve een geldige shell-opdracht in te voeren."
 
-#: plugins/shell_output/shell_output.c:293
+#: plugins/shell_output/shell_output.c:389
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -381,32 +722,30 @@ msgstr ""
 "\n"
 "Gelieve een geldige shell-opdracht in te geven."
 
-#: plugins/shell_output/shell_output.c:346
-msgid "An error occurs while running the selected command."
-msgstr ""
-"Er is een fout opgetreden tijdens het uitvoeren van het opgegeven commando."
-
-#: plugins/shell_output/shell_output.c:433
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
+#: plugins/shell_output/shell_output.c:551
+#, fuzzy
+msgid "Execute an external program and insert its output in a new document."
 msgstr ""
 "Voer een programma uit en voeg de uitvoer in in het huidige document op de "
 "huidige cursor positie"
 
 #: plugins/shell_output/shell_output.glade2.h:1
+msgid "Capture the command _output"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
 msgstr "Geef de werkfolder en het commando dat u wilt starten."
 
-#: plugins/shell_output/shell_output.glade2.h:2
+#: plugins/shell_output/shell_output.glade2.h:3
 msgid "_Shell command:"
 msgstr "_Shell commando:"
 
-#: plugins/shell_output/shell_output.glade2.h:3
+#: plugins/shell_output/shell_output.glade2.h:4
 msgid "_Working directory:"
 msgstr "Werkfolder:"
 
-#: plugins/shell_output/shell_output.glade2.h:4
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Shell uitvoer plugin"
 
@@ -465,19 +804,19 @@ msgstr "Datum/Tijd _invoegen"
 msgid "Insert current date and time at the cursor position"
 msgstr "Voegt de huidige datum en tijd in op de cursor positie."
 
-#: plugins/time/time.c:259
+#: plugins/time/time.c:271
 msgid "Available formats"
 msgstr "Beschikbare formaten"
 
-#: plugins/time/time.c:300 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:312 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "'Datum/tijd invoegen'-plugin configureren"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:565
 msgid "Insert Date/Time"
 msgstr "Datum/tijd invoegen"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:566
 msgid "Inserts current date and time at the cursor position."
 msgstr "Voegt de huidige datum en tijd in op de cursor positie."
 
@@ -485,84 +824,51 @@ msgstr "Voegt de huidige datum en tijd in op de cursor positie."
 msgid "Select the format to use when inserting date/time."
 msgstr "Selecteer het te gebruiken formaat voor het invoegen van datum/tijd."
 
-#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
+#: src/bonobo-mdi.c:517 src/bonobo-mdi.c:600 src/bonobo-mdi.c:1837
 #, c-format
 msgid "Activate %s"
 msgstr "%s activeren"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
 msgstr "Ga naar regel..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
 msgstr "_Ga naar regel"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "Kan de vereiste widgets niet vinden binnen goto-line.glade2.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:51
-msgid "Plugin"
-msgstr "Plugin"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:52
-msgid "Load"
-msgstr "Laden"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:318
-msgid "Module file name"
-msgstr "Module-bestandsnaam"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:319
-msgid "Author(s)"
-msgstr "Auteur(s)"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "Kan plugin-manager.glade2 niet vinden, installeer gedit opnieuw.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
-msgid "Plugin Manager"
-msgstr "Pluginbeheer"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"Ongeldig glade-bestand voor pluginbeheer -- niet alle widgets gevonden.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:582
-msgid "Could not create the Plugin Manager dialog"
-msgstr "Kan het Pluginbeheer-dialoogvenster niet creëren"
-
-#: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:56
+#: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
+#: src/gedit-ui.xml.h:53
 msgid "Replace"
 msgstr "Vervangen"
 
-#: src/dialogs/gedit-dialog-replace.c:182
+#: src/dialogs/gedit-dialog-replace.c:183
 msgid "Replace _All"
 msgstr "_Alles vervangen"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
-#: src/gedit-ui.xml.h:101
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:121
+#: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "Ve_rvangen"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
+#: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
 msgid "Find"
 msgstr "Zoeken"
 
-#: src/dialogs/gedit-dialog-replace.c:473
-#: src/dialogs/gedit-dialog-replace.c:544
-#: src/dialogs/gedit-dialog-replace.c:718
+#: src/dialogs/gedit-dialog-replace.c:474
+#: src/dialogs/gedit-dialog-replace.c:545
+#: src/dialogs/gedit-dialog-replace.c:722
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "De zoekterm \"%s\" werd niet gevonden."
 
-#: src/dialogs/gedit-dialog-replace.c:727
+#: src/dialogs/gedit-dialog-replace.c:731
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "%d zoektermen gevonden en vervangen."
@@ -570,6 +876,31 @@ msgstr "%d zoektermen gevonden en vervangen."
 #: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
 msgid "Open from URI"
 msgstr "Openen van URI"
+
+#: src/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Plugin"
+
+#: src/dialogs/gedit-plugin-manager.c:54
+msgid "Load"
+msgstr "Laden"
+
+#: src/dialogs/gedit-plugin-manager.c:320
+msgid "Module file name"
+msgstr "Module-bestandsnaam"
+
+#: src/dialogs/gedit-plugin-manager.c:321
+msgid "Author(s)"
+msgstr "Auteur(s)"
+
+#: src/dialogs/gedit-plugin-manager.c:443
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Kan plugin-manager.glade2 niet vinden, installeer gedit opnieuw.\n"
+
+#: src/dialogs/gedit-plugin-manager.c:466
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"Ongeldig glade-bestand voor pluginbeheer -- niet alle widgets gevonden.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
@@ -589,8 +920,8 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
-"De %s plugin gebruikt een extern programma, genaamd <tt>%s</tt>, om zijn "
-"taak uit te voeren.\n"
+"De %s plugin gebruikt een extern programma, genaamd <tt>%s</tt>, om zijn taak "
+"uit te voeren.\n"
 "\n"
 "Gelieve de locatie van het <tt>%s</tt> programma in te voeren."
 
@@ -598,124 +929,135 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Het geselecteerde bestand is niet uitvoerbaar."
 
-#: src/dialogs/gedit-preferences-dialog.c:226
-msgid "Toolbar"
-msgstr "Werkbalk"
-
-#: src/dialogs/gedit-preferences-dialog.c:227
-#: src/dialogs/gedit-preferences.glade2.h:38
-msgid "Status bar"
-msgstr "Statusbalk"
-
-#: src/dialogs/gedit-preferences-dialog.c:230
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "MDI"
-msgstr "MDI"
-
-#: src/dialogs/gedit-preferences-dialog.c:239
+#: src/dialogs/gedit-preferences-dialog.c:207
 msgid "Font & Colors"
 msgstr "Lettertype & kleuren"
 
-#: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences-dialog.c:209
+#: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Tabs"
 msgstr "Tabs"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:62
+#: src/dialogs/gedit-preferences-dialog.c:210
+#: src/dialogs/gedit-preferences.glade2.h:47
 msgid "Wrap mode"
 msgstr "Tekstdoorloop modus"
 
-#: src/dialogs/gedit-preferences-dialog.c:243
-#: src/dialogs/gedit-preferences.glade2.h:16
+#: src/dialogs/gedit-preferences-dialog.c:211
+#: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Line numbers"
 msgstr "Regelnummers"
 
-#: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:213
+#: src/dialogs/gedit-preferences.glade2.h:23 src/gedit-ui.xml.h:58
 msgid "Save"
 msgstr "Opslaan"
 
-#: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
+#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:76
 msgid "Undo"
 msgstr "Ongedaan maken"
 
-#: src/dialogs/gedit-preferences-dialog.c:254
+#: src/dialogs/gedit-preferences-dialog.c:222
 msgid "Page"
 msgstr "Pagina"
 
-#: src/dialogs/gedit-preferences-dialog.c:256
+#: src/dialogs/gedit-preferences-dialog.c:224
 msgid "Fonts"
 msgstr "Lettertypes"
 
-#: src/dialogs/gedit-preferences-dialog.c:263
+#: src/dialogs/gedit-preferences-dialog.c:231
+#, fuzzy
+msgid "Manager"
+msgstr "Pluginbeheer"
+
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Editor"
 msgstr "Editor"
 
-#: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
-#: src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:240
+#: src/dialogs/gedit-preferences.glade2.h:19 src/gedit-print.c:309
+#: src/gedit-ui.xml.h:42
 msgid "Print"
 msgstr "Afdrukken"
 
-#: src/dialogs/gedit-preferences-dialog.c:266
-msgid "User interface"
-msgstr "Gebruikers-interface"
+#: src/dialogs/gedit-preferences-dialog.c:241
+#, fuzzy
+msgid "Plugins"
+msgstr "Plugin"
 
-#: src/dialogs/gedit-preferences-dialog.c:333
+#: src/dialogs/gedit-preferences-dialog.c:308
 msgid "Cat_egories:"
 msgstr "Cat_egorieën:"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: src/dialogs/gedit-preferences-dialog.c:574
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
 msgstr "Categorien"
 
-#: src/dialogs/gedit-preferences-dialog.c:906
+#: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Druk op deze knop om het lettertype te selecteren dat zal worden gebruikt "
 "door de tekstverwerke"
 
-#: src/dialogs/gedit-preferences-dialog.c:909
+#: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
 msgstr "Druk op deze knop om de kleur van de text te kiezen"
 
-#: src/dialogs/gedit-preferences-dialog.c:911
+#: src/dialogs/gedit-preferences-dialog.c:805
 msgid "Push this button to configure background color"
 msgstr "Druk op deze knop om de achtergrondkleur te configureren"
 
-#: src/dialogs/gedit-preferences-dialog.c:913
+#: src/dialogs/gedit-preferences-dialog.c:807
+#, fuzzy
 msgid ""
-"Push this button to configure color in which selected text should appear"
+"Push this button to configure the color in which the selected text should "
+"appear"
 msgstr ""
-"Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst zal "
-"worden afgebeeld"
+"Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst zal worden "
+"afgebeeld"
 
-#: src/dialogs/gedit-preferences-dialog.c:915
+#: src/dialogs/gedit-preferences-dialog.c:810
+#, fuzzy
 msgid ""
-"Push this button to configure color in which selected text should be marked"
+"Push this button to configure the color in which the selected text should be "
+"marked"
 msgstr ""
-"Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst zal "
-"worden gemarkeerd"
+"Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst zal worden "
+"gemarkeerd"
 
-#: src/dialogs/gedit-preferences-dialog.c:1313
+#: src/dialogs/gedit-preferences-dialog.c:1592
+#: src/dialogs/gedit-preferences-dialog.c:1594
+msgid "Courier 9"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1601
+#: src/dialogs/gedit-preferences-dialog.c:1603
+msgid "Helvetica 11"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1610
+#: src/dialogs/gedit-preferences-dialog.c:1612
+msgid "Helvetica 8"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1733
 msgid "Push this button to select the font to be used to print the body"
 msgstr ""
 "Druk op deze knop om het lettertype te selecteren voor het afdrukken van de "
 "tekstinhoud"
 
-#: src/dialogs/gedit-preferences-dialog.c:1315
+#: src/dialogs/gedit-preferences-dialog.c:1735
 msgid "Push this button to select the font to be used to print the headers"
 msgstr ""
 "Druk op deze knop om het lettertype te selecteren voor het afdrukken van "
 "koppen"
 
-#: src/dialogs/gedit-preferences-dialog.c:1317
+#: src/dialogs/gedit-preferences-dialog.c:1737
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Druk op deze knop om het lettertype te selecteren voor het afdrukken van "
@@ -734,139 +1076,94 @@ msgid " line(s)"
 msgstr " regel(s) afdrukken"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
-msgid "Always use _UTF-8 encoding (faster)"
+#, fuzzy
+msgid "Always use U_TF-8 encoding (faster)"
 msgstr "Gebruik altijd _UTF-8 encodering (sneller)"
 
 #: src/dialogs/gedit-preferences.glade2.h:5
-msgid "Bottom"
-msgstr "Onderkant"
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr "Gebruik altijd _UTF-8 encodering (sneller)"
 
 #: src/dialogs/gedit-preferences.glade2.h:6
-msgid "Button style"
-msgstr "Knopstijl"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Colors"
 msgstr "Kleuren"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
+#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Create a _backup copy of files before saving"
 msgstr "_Reservekopie maken van bestanden voor het opslaan"
 
-#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gedit-preferences.glade2.h:8
 #: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "Lettertype"
 
-#: src/dialogs/gedit-preferences.glade2.h:10
+#: src/dialogs/gedit-preferences.glade2.h:9
 msgid "Font used to print line _numbers:"
 msgstr "Lettertype voor afdrukken regel_nummers:"
 
-#: src/dialogs/gedit-preferences.glade2.h:11
+#: src/dialogs/gedit-preferences.glade2.h:10
 msgid "Font used to print the _body:"
 msgstr "Lettertype voor afdrukken _tekstinhoud:"
 
-#: src/dialogs/gedit-preferences.glade2.h:12
+#: src/dialogs/gedit-preferences.glade2.h:11
 msgid "Fonts & Colors"
 msgstr "Lettertype & kleuren"
 
-#: src/dialogs/gedit-preferences.glade2.h:13
-msgid "Icon and _text"
-msgstr "Pictogram en _tekst"
-
-#: src/dialogs/gedit-preferences.glade2.h:14
+#: src/dialogs/gedit-preferences.glade2.h:12
 msgid "LOGO"
 msgstr "LOGO"
 
-#: src/dialogs/gedit-preferences.glade2.h:15
-msgid "Left"
-msgstr "Links"
-
-#: src/dialogs/gedit-preferences.glade2.h:18
-msgid "Modal"
-msgstr "Modaal"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-msgid "Notebook"
-msgstr "Notitieboek"
-
-#: src/dialogs/gedit-preferences.glade2.h:20
-msgid "Notebook _tab position:"
-msgstr "Positie _tabbladen:"
-
-#: src/dialogs/gedit-preferences.glade2.h:21
+#: src/dialogs/gedit-preferences.glade2.h:14
 msgid "Pick the background color"
 msgstr "Kies de achtergrondkleur"
 
-#: src/dialogs/gedit-preferences.glade2.h:22
+#: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Pick the selected text color"
 msgstr "Kies de geselecteerde-tekstkleur"
 
-#: src/dialogs/gedit-preferences.glade2.h:23
+#: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Pick the selection color"
 msgstr "Kies de selectie kleur"
 
-#: src/dialogs/gedit-preferences.glade2.h:24
+#: src/dialogs/gedit-preferences.glade2.h:17
 msgid "Pick the text color"
 msgstr "Kies de tekst kleur"
 
-#: src/dialogs/gedit-preferences.glade2.h:26
+#: src/dialogs/gedit-preferences.glade2.h:18
+#, fuzzy
+msgid "Plugin manager"
+msgstr "Pluginbeheer"
+
+#: src/dialogs/gedit-preferences.glade2.h:20
 msgid "Print _line numbers every"
 msgstr "Rege_lnummers elke"
 
-#: src/dialogs/gedit-preferences.glade2.h:27
+#: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Print _page headers"
 msgstr "_Paginakoppen afdrukken"
 
-#: src/dialogs/gedit-preferences.glade2.h:28
+#: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Print fonts"
 msgstr "Afdruklettertypes"
 
-#: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Right"
-msgstr "Rechts"
-
-#: src/dialogs/gedit-preferences.glade2.h:30
-msgid "S_elected text color:"
-msgstr "Tekstselectie kleur:"
-
-#: src/dialogs/gedit-preferences.glade2.h:32
+#: src/dialogs/gedit-preferences.glade2.h:24
 msgid "Se_lection color:"
 msgstr "Se_lectiekleur:"
 
-#: src/dialogs/gedit-preferences.glade2.h:33
+#: src/dialogs/gedit-preferences.glade2.h:25
+#, fuzzy
+msgid "Selecte_d text color:"
+msgstr "Tekstselectie kleur:"
+
+#: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Set _tabs width equivalent to  "
 msgstr "Tabbreedte instellen gelijk aan  "
 
-#: src/dialogs/gedit-preferences.glade2.h:34
+#: src/dialogs/gedit-preferences.glade2.h:27
 msgid "Set limit on _undo actions to"
 msgstr "Het maximale aantal \"_ongedaan maken\" acties instellen op"
 
-#: src/dialogs/gedit-preferences.glade2.h:35
-msgid "Sho_w tooltips"
-msgstr "Zwevende tips _tonen"
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-msgid "Show cursor _position"
-msgstr "Cursor_positie tonen"
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid "Show overwrite _mode"
-msgstr "Overschrijf_modus tonen"
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-"De MDI (Meerdere Documenten Interface) mode betekent dat meerdere bestanden "
-"in gedit kunnen worden geopend.\n"
-"De Notebook mode betekent dat de locatie van de tabs zelf kunnen worden "
-"gekozen."
-
-#: src/dialogs/gedit-preferences.glade2.h:42
+#: src/dialogs/gedit-preferences.glade2.h:29
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
@@ -874,7 +1171,7 @@ msgstr ""
 "Met de Lettertype & kleuren-instellingen kunnen de lettertypes en kleuren in "
 "het tekstvenster worden gekozen."
 
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
@@ -882,7 +1179,16 @@ msgstr ""
 "Met de regelnummer-instellingen kunnen regelnummers aan de linkerkant van de "
 "tekstvensters worden geplaatst."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
+#: src/dialogs/gedit-preferences.glade2.h:31
+#, fuzzy
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
+msgstr ""
+"Met de regelafbreek instellingen kan worden aangegeven hoe regels moeten "
+"worden afgebroken."
+
+#: src/dialogs/gedit-preferences.glade2.h:32
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
@@ -890,39 +1196,23 @@ msgstr ""
 "Met de lettertype-afdrukinstellingen kunt u aangeven welke lettertypen "
 "gebruikt moetne worden voor het afdrukken."
 
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:33
 msgid "The print page settings let you customize how gedit prints documents."
 msgstr ""
 "Met de pagina-afdrukinstellingen kunt u aangeven hoe gedit documenten moet "
 "afdrukken."
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
 "Met de opslag-instellingen kan worden aangegeven hoe gedit bestanden moet "
 "opslaan."
 
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr ""
-"Met de statusbalk instellingen kan de statusbalk worden aan- en uitgezet en "
-"kan de visuele verschijning worden gewijzigd."
-
-#: src/dialogs/gedit-preferences.glade2.h:48
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The tabs settings let you customize the tabs width."
 msgstr "Met de tabs instellingen kan de tabbreedte worden gewijzigd."
 
-#: src/dialogs/gedit-preferences.glade2.h:49
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr ""
-"Met de werkbalk instellingen kan de werkbalk worden aan- en uitgezet en kan "
-"de visuele verschijning worden gewijzigd."
-
-#: src/dialogs/gedit-preferences.glade2.h:50
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
@@ -930,109 +1220,87 @@ msgstr ""
 "Met de \"ongedaan maken\"-instellingen kan het maximale aantal ongedaan "
 "maken-acties worden ingesteld."
 
-#: src/dialogs/gedit-preferences.glade2.h:51
+#: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr ""
 "Met de regelafbreek instellingen kan worden aangegeven hoe regels moeten "
 "worden afgebroken."
 
-#: src/dialogs/gedit-preferences.glade2.h:52
-msgid "Toolbars"
-msgstr "Werkbalken"
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Top"
-msgstr "Bovenkant"
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-msgid "Toplevel"
-msgstr "Hoogste niveau"
-
-#: src/dialogs/gedit-preferences.glade2.h:55
-msgid "U_se current locale only if the file already use it"
-msgstr "_Huidige locale alleen gebruiken wanneer het bestand dat al gebruikt."
-
-#: src/dialogs/gedit-preferences.glade2.h:56
+#: src/dialogs/gedit-preferences.glade2.h:38
 msgid "U_se default theme colors"
 msgstr "Geb_ruik standaard thema kleuren"
 
-#: src/dialogs/gedit-preferences.glade2.h:58
-msgid "Use current _locale when possible"
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid "U_se original file encoding if possible"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+#, fuzzy
+msgid "Use cu_rrent locale's encoding if possible"
 msgstr "Gebruik huidige _locale indien mogelijk"
 
-#: src/dialogs/gedit-preferences.glade2.h:59
+#: src/dialogs/gedit-preferences.glade2.h:42
+#, fuzzy
+msgid "Use current _locale's encoding if possible"
+msgstr "Gebruik huidige _locale indien mogelijk"
+
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "When creating a new file..."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:44
 msgid "When saving..."
 msgstr "Bij opslaan..."
 
-#: src/dialogs/gedit-preferences.glade2.h:60
+#: src/dialogs/gedit-preferences.glade2.h:45
 msgid "Wrap lines at _word boundaries"
 msgstr "Regels afbreken bij _woord grenzen"
 
-#: src/dialogs/gedit-preferences.glade2.h:61
+#: src/dialogs/gedit-preferences.glade2.h:46
 msgid "Wrap lines at ch_aracter boundaries"
 msgstr "Regels afbreken bij k_arakter grenzen"
 
-#: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_According to system settings"
-msgstr "G_ebruik systeeminstellingen"
-
-#: src/dialogs/gedit-preferences.glade2.h:64
+#: src/dialogs/gedit-preferences.glade2.h:48
 msgid "_Autosave current file every"
 msgstr "_Automatisch huidige bestand opslaan na"
 
-#: src/dialogs/gedit-preferences.glade2.h:65
+#: src/dialogs/gedit-preferences.glade2.h:49
 msgid "_Background color:"
 msgstr "A_chtergrondkleur:"
 
-#: src/dialogs/gedit-preferences.glade2.h:66
+#: src/dialogs/gedit-preferences.glade2.h:50
 msgid "_Display line numbers"
 msgstr "Regelnummers _weergeven"
 
-#: src/dialogs/gedit-preferences.glade2.h:67
+#: src/dialogs/gedit-preferences.glade2.h:51
 msgid "_Font used by the editor: "
 msgstr "Lettertype in de editor:"
 
-#: src/dialogs/gedit-preferences.glade2.h:68
+#: src/dialogs/gedit-preferences.glade2.h:52
 msgid "_Font used to print headers:"
 msgstr "_Lettertype om koppen af te drukken:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
-msgid "_Icon"
-msgstr "_Pictogram"
-
-#: src/dialogs/gedit-preferences.glade2.h:70
-msgid "_MDI Mode:"
-msgstr "_MDI Mode:"
-
-#: src/dialogs/gedit-preferences.glade2.h:71
+#: src/dialogs/gedit-preferences.glade2.h:53
 msgid "_Never wrap lines"
 msgstr "_Nooit regels afbreken"
 
-#: src/dialogs/gedit-preferences.glade2.h:72
+#: src/dialogs/gedit-preferences.glade2.h:54
 msgid "_Restore default fonts"
 msgstr "Standaard lettertypes _terugzetten"
 
-#: src/dialogs/gedit-preferences.glade2.h:73
-msgid "_Show status bar"
-msgstr "_Statusbalk weergeven"
-
-#: src/dialogs/gedit-preferences.glade2.h:74
-msgid "_Show toolbar"
-msgstr "_Werkbalk weergeven"
-
-#: src/dialogs/gedit-preferences.glade2.h:75
+#: src/dialogs/gedit-preferences.glade2.h:55
 msgid "_Text color:"
 msgstr "_Tekst kleur:"
 
-#: src/dialogs/gedit-preferences.glade2.h:76
+#: src/dialogs/gedit-preferences.glade2.h:56
 msgid "_Use default theme font"
 msgstr "Gebr_uik standaard thema lettertype"
 
-#: src/dialogs/gedit-preferences.glade2.h:77
+#: src/dialogs/gedit-preferences.glade2.h:57
 msgid "action(s)"
 msgstr "actie(s)"
 
-#: src/dialogs/gedit-preferences.glade2.h:78
+#: src/dialogs/gedit-preferences.glade2.h:58
 msgid "minutes"
 msgstr "minuten"
 
@@ -1134,24 +1402,15 @@ msgid "Configure the selected plugin"
 msgstr "De geselecteerde plugin configureren"
 
 #: src/dialogs/plugin-manager.glade2.h:3
-msgid "D_etails"
+#, fuzzy
+msgid "De_tails"
 msgstr "D_etails"
 
 #: src/dialogs/plugin-manager.glade2.h:4
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
-"Dit is Pluginbeheer. Plugins zijn extra stukjes software die de "
-"mogelijkheden van gedit uitbreiden. Hier kunt u aangegeven welke plugins "
-"moeten worden geladen."
-
-#: src/dialogs/plugin-manager.glade2.h:5
 msgid "_Description"
 msgstr "_Beschrijving"
 
-#: src/dialogs/plugin-manager.glade2.h:6
+#: src/dialogs/plugin-manager.glade2.h:5
 msgid "dialog1"
 msgstr "dialoog1"
 
@@ -1191,95 +1450,97 @@ msgstr "_Zoeken naar: "
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "Geef de locatie (URI) op van het te openen bestand:"
 
-#: src/gedit-commands.c:57
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr "Nog niet geïmplementeerd."
 
-#: src/gedit-commands.c:340
+#: src/gedit-commands.c:339
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "De zoekterm \"%s\" werd niet gevonden."
 
-#: src/gedit-commands.c:422
-msgid "Impossible to update gedit settings."
-msgstr "Onmogelijk om gedit voorkeuren aan te passen."
-
-#: src/gedit-commands.c:491
+#: src/gedit-commands.c:437
 msgid "translator_credits"
 msgstr "Mensen die mee hebben gewerkt aan het vertalen van dit programma"
 
-#: src/gedit-commands.c:516
+#: src/gedit-commands.c:462
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:519
+#: src/gedit-commands.c:463
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
+msgstr ""
+
+#: src/gedit-commands.c:465
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit is een kleine en lichte tekst bewerker voor Gnome"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 msgid "Untitled"
 msgstr "Naamloos"
 
-#: src/gedit-document.c:556 src/gedit-document.c:579
+#: src/gedit-document.c:579 src/gedit-document.c:626
 msgid "Invalid file name"
 msgstr "Ongeldige bestandsnaam"
 
-#: src/gedit-document.c:700 src/gedit-document.c:806
+#: src/gedit-document.c:756 src/gedit-document.c:914
 msgid "Invalid UTF-8 data"
 msgstr "Ongeldige UTF-8 data"
 
-#: src/gedit-document.c:1006
+#: src/gedit-document.c:1146
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kon de symbolische verwijzing niet lezen voor %s"
 
-#: src/gedit-document.c:1052
+#: src/gedit-document.c:1192
 msgid "The file has too many symbolic links."
 msgstr "Het bestand heeft te veel sybolische verwijzingen."
 
-#: src/gedit-document.c:1101
+#: src/gedit-document.c:1246
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
 
-#: src/gedit-document.c:1108
+#: src/gedit-document.c:1253
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan deze locatie niet gebruiken in schrijfmodus."
 
-#: src/gedit-document.c:1120
+#: src/gedit-document.c:1274
 msgid "Invalid filename."
 msgstr "Ongeldige bestandsnaam"
 
-#: src/gedit-document.c:1198
+#: src/gedit-document.c:1387
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 msgstr "Er is niet genoeg vrije schijfruimte om het bestand op te slaan."
 
-#: src/gedit-document.c:1203
+#: src/gedit-document.c:1392
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
+"sizes.  Please try saving a smaller file or saving it to a disk that does not "
+"have this limitation."
 msgstr ""
 "De schjif waarop u probeert op te slaan heeft limitaties op de grootte van "
 "bestanden. Probeer het bestand kleiner te maken of sla het op een andere "
 "schijf op."
 
-#: src/gedit-document.c:1240
+#: src/gedit-document.c:1431
 msgid "Could not create a backup file."
 msgstr "Kan geen reservekopie van het bestand maken."
 
-#: src/gedit-document.c:1388
+#: src/gedit-document.c:1579
 msgid "It is not possible to revert an Untitled document"
 msgstr "Naamloze bestanden kunnen niet teruggezet worden"
 
-#: src/gedit-file-selector-util.c:96
+#: src/gedit-file-selector-util.c:109
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1288,70 +1549,75 @@ msgstr ""
 "Een bestand met de naam ''%s'' bestaat reeds.\n"
 "Wilt u het vervangen door het bestand dat u nu opslaat?"
 
-#: src/gedit-file-selector-util.c:104
+#: src/gedit-file-selector-util.c:117
 msgid "Do_n't replace"
 msgstr "_Niet vervangen"
 
-#: src/gedit-file-selector-util.c:484
+#: src/gedit-file-selector-util.c:497
 msgid "Select a filename to save"
 msgstr "Selecteer een bestandsnaam om op te slaan"
 
-#: src/gedit-file.c:128
+#: src/gedit-file.c:150
 msgid "Open File ..."
 msgstr "Bestand openen..."
 
-#: src/gedit-file.c:148 src/gedit-file.c:763
+#: src/gedit-file.c:168 src/gedit-file.c:858
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Bestand '%s' geladen"
 
-#: src/gedit-file.c:279 src/gedit-file.c:401
+#: src/gedit-file.c:314 src/gedit-file.c:435
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Bezig met opslaan van '%s' ..."
 
-#: src/gedit-file.c:300 src/gedit-file.c:416
+#: src/gedit-file.c:335 src/gedit-file.c:450
 msgid "The document has not been saved."
 msgstr "Het bestand is niet opgeslagen."
 
-#: src/gedit-file.c:315 src/gedit-file.c:408
+#: src/gedit-file.c:350 src/gedit-file.c:442
 #, c-format
 msgid "File '%s' saved."
 msgstr "Bestand '%s' opgeslagen."
 
-#: src/gedit-file.c:383
+#: src/gedit-file.c:417
 msgid "Save as ..."
 msgstr "Opslaan als ..."
 
-#: src/gedit-file.c:574
+#: src/gedit-file.c:614
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Bezig met het terugzetten van het bestand '%s' ..."
 
-#: src/gedit-file.c:587
+#: src/gedit-file.c:627
 msgid "The document has not been reverted."
 msgstr "Het bestand is niet teruggezet."
 
-#: src/gedit-file.c:597
+#: src/gedit-file.c:637
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Bestand '%s' is teruggezet."
 
-#: src/gedit-file.c:644
+#: src/gedit-file.c:684
 #, c-format
 msgid "Loading %d file..."
 msgstr "Bestand %d wordt geladen..."
 
-#: src/gedit-file.c:680
+#: src/gedit-file.c:716
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr ""
+
+#: src/gedit-file.c:775
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i bestanden geladen"
 
-#: src/gedit-file.c:821
+#: src/gedit-file.c:916
 msgid "Could not read data from stdin."
 msgstr "Er is een fout opgetreden tijdens het lezen van data van stdin."
 
-#: src/gedit-mdi.c:759
+#: src/gedit-mdi.c:840
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1362,23 +1628,23 @@ msgstr ""
 "\n"
 "Uw veranderingen zullen verloren gaan als u deze niet opslaat."
 
-#: src/gedit-mdi.c:764
+#: src/gedit-mdi.c:845
 msgid "Do_n't save"
 msgstr "_Niet opslaan"
 
-#: src/gedit-mdi.c:783
+#: src/gedit-mdi.c:864
 msgid "_Don't quit"
 msgstr "_Niet afsluiten"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:868
 msgid "_Don't close"
 msgstr "_Niet sluiten"
 
-#: src/gedit-mdi.c:874
+#: src/gedit-mdi.c:958
 msgid "(modified)"
 msgstr "(veranderd)"
 
-#: src/gedit-mdi.c:880
+#: src/gedit-mdi.c:964
 msgid "(readonly)"
 msgstr "(alleen lezen)"
 
@@ -1432,7 +1698,16 @@ msgstr "Fout: kan plugin '%s' niet deactiveren"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Fout: kan de grafische interface van plugin '%s' niet vernieuwen"
 
-#: src/gedit-print.c:178
+#: src/gedit-prefs-manager.c:319
+msgid "Cannot initialize preferences manager."
+msgstr ""
+
+#: src/gedit-prefs-manager.c:1520
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr ""
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1440,22 +1715,22 @@ msgstr ""
 "gedit kan niet afdrukken, omdat het een van de\n"
 "vereiste lettertypen niet kan vinden."
 
-#: src/gedit-print.c:354
+#: src/gedit-print.c:377
 #, c-format
 msgid "File: %s"
 msgstr "Bestand: %s"
 
 #. Print right text
-#: src/gedit-print.c:359
+#: src/gedit-print.c:384
 #, c-format
 msgid "Page: %d"
 msgstr "Pagina: %d"
 
-#: src/gedit-print.c:492
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
 msgstr "gedit - Afdrukvoorbeeld"
 
-#: src/gedit-print.c:566
+#: src/gedit-print.c:591
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1471,406 +1746,398 @@ msgid "About this application"
 msgstr "Info over deze toepassing"
 
 #: src/gedit-ui.xml.h:2
-msgid "Add/Remove plugins"
-msgstr "Plugins toevoegen/verwijderen"
-
-#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "Statusbalk aanpassen"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Verander zichtbaarheid van de statusbalk in het huidige venster"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Verander zichtbaarheid van de werkbalk in het huidige venster"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Clos_e All"
 msgstr "All_es sluiten"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Close"
 msgstr "Sluiten"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close All"
 msgstr "Alles sluiten"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
 msgstr "Alle geopende bestanden sluiten"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close the current file"
 msgstr "Huidig bestand sluiten"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Configure the application"
 msgstr "Toepassing configureren"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Copy"
 msgstr "Kopiëren"
 
-#: src/gedit-ui.xml.h:13
+#: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
 msgstr "Selectie kopiëren"
 
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:13
 msgid "Create a new document"
 msgstr "Nieuw document creëren"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:14
 msgid "Cu_t"
 msgstr "_Knippen"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:15
 msgid "Customize"
 msgstr "Aanpassen"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:16
 msgid "Customize toolbars"
 msgstr "Werkbalken aanpassen"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:17
 msgid "Cut"
 msgstr "Knippen"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
 msgstr "Selectie knippen"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:19
 msgid "Delete"
 msgstr "Wissen"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:20
 msgid "Delete the selected text"
 msgstr "Geselecteerde tekst verwijderen"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:21
 msgid "Dump XML"
 msgstr "XML verwijderen"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:22
 msgid "Dump the UI Xml description"
 msgstr "UI XML-omschrijving weggooien"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:24
 msgid "Find Again"
 msgstr "Opnieuw zoeken"
 
-#: src/gedit-ui.xml.h:26
+#: src/gedit-ui.xml.h:25
 msgid "Find Ne_xt"
 msgstr "V_olgende zoeken"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:26
 msgid "Go to a specific line number"
 msgstr "Ga naar een bepaald regelnummer"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:27
 msgid "Goto _Line"
 msgstr "Ga naar _regel"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
 msgstr "Pictogram en _tekst"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:29
 msgid "Main toolbar"
 msgstr "Hoofdwerkbalk"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:30
 msgid "New"
 msgstr "Nieuw"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:31
 msgid "Only show icons in the toolbar"
 msgstr "Alleen pictogrammen tonen in de werkbalk"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:32
 msgid "Open"
 msgstr "Openen"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:33
 msgid "Open Location..."
 msgstr "Locatie openen..."
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:34
 msgid "Open _Location..."
 msgstr "_Locatie openen..."
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:35
 msgid "Open a file"
 msgstr "Een bestand openen"
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:36
 msgid "Open a file from a specified location"
 msgstr "Open een bestand van een aangegeven locatie"
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:37
 msgid "Open the gedit manual"
 msgstr "Open de gedit-handleiding"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:38
 msgid "Paste"
 msgstr "Plakken"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
 msgstr "Klembord plakken"
 
-#: src/gedit-ui.xml.h:41
-msgid "Plugin _Manager"
-msgstr "Plugin_beheer"
-
-#: src/gedit-ui.xml.h:42
-msgid "Plugin _Manager..."
-msgstr "Plugin_beheer..."
-
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
 msgstr "Inst_ellingen"
 
-#: src/gedit-ui.xml.h:46
+#: src/gedit-ui.xml.h:43
 msgid "Print Previe_w"
 msgstr "Afdruk_voorbeeld"
 
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:44
 msgid "Print Preview"
 msgstr "Afdrukvoorbeeld"
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:45
 msgid "Print Setup"
 msgstr "Printerinstellingen"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:46
 msgid "Print preview"
 msgstr "Afdrukvoorbeeld"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:47
 msgid "Print the current file"
 msgstr "Het huidige bestand afdrukken"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:48
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:49
 msgid "Quit the program"
 msgstr "Het programma afsluiten"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:50
 msgid "Recent _Files"
 msgstr "_Recente bestanden"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:51
 msgid "Redo"
 msgstr "Opnieuw"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:52
 msgid "Redo the undone action"
 msgstr "De ongedaan gemaakte actie opnieuw uitvoeren"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:54
 msgid "Replace a string"
 msgstr "Tekstdeel vervangen"
 
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:55
 msgid "Revert"
 msgstr "Terugzetten"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:56
 msgid "Revert to a saved version of the file"
 msgstr "Terugkeren naar een opgeslagen versie van het bestand"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:57
 msgid "Sa_ve All"
 msgstr "Alles ops_laan"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:59
 msgid "Save All"
 msgstr "Alles Opslaan"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:60
 msgid "Save As"
 msgstr "Opslaan Als"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:61
 msgid "Save _As..."
 msgstr "O_pslaan Als..."
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:62
 msgid "Save all open files"
 msgstr "Alle geopende bestanden opslaan"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:63
 msgid "Save the current file"
 msgstr "Huidig bestand opslaan"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:64
 msgid "Save the current file with a different name"
 msgstr "Huidig bestand onder een andere naam opslaan"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:65
 msgid "Search again for the same string"
 msgstr "Zoek nogmaals naar dezelfde tekst"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:66
 msgid "Search for a string"
 msgstr "Zoek naar een tekst"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:67
 msgid "Select All"
 msgstr "Alles selecteren"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:68
 msgid "Select _All"
 msgstr "_Alles selecteren"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:69
 msgid "Select the entire document"
 msgstr "Het gehele document selecteren"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:70
 msgid "Set toolbar button style according to desktop default"
 msgstr "Zet de werkbalk knop stijl naar de desktop standaard"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:71
 msgid "Setup the page settings for your current printer"
 msgstr "De pagina-instellingen van de huidig printer configureren"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:72
 msgid "Show _Cursor Position"
 msgstr "_Cursorpositie tonen"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:73
 msgid "Show _Overwrite Mode"
 msgstr "_Overschrijfmodus tonen"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:74
 msgid "Show cursor position in the statusbar"
 msgstr "Cursorpositie in de statusbalk tonen"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:75
 msgid "Show overwrite mode in the statusbar"
 msgstr "Overschrijfmodus in de statusbalk tonen"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:77
 msgid "Undo the last action"
 msgstr "De laatste actie ongedaan maken"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:78
 msgid "_About"
 msgstr "_Info"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:79
 msgid "_Close"
 msgstr "_Sluiten"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:80
 msgid "_Contents"
 msgstr "_Inhoud"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:81
 msgid "_Copy"
 msgstr "K_opiëren"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:82
 msgid "_Customize Toolbar"
 msgstr "Werkbalken _Aanpassen"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:83
 msgid "_Debug"
 msgstr "_Debug"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:84
 msgid "_Delete"
 msgstr "_Verwijder"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:85
 msgid "_Desktop Default"
 msgstr "_Desktop Standaard"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:86
 msgid "_Documents"
 msgstr "_Documenten"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:87
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:88
 msgid "_File"
 msgstr "_Bestand"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:89
 msgid "_Find"
 msgstr "_Zoeken"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:90
 msgid "_Help"
 msgstr "_Help"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:91
+msgid "_Icon"
+msgstr "_Pictogram"
+
+#: src/gedit-ui.xml.h:92
 msgid "_New"
 msgstr "_Nieuw"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:93
 msgid "_Open..."
 msgstr "_Openen..."
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:94
 msgid "_Paste"
 msgstr "_Plakken"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:95
 msgid "_Print..."
 msgstr "A_fdrukken"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:96
 msgid "_Quit"
 msgstr "_Afsluiten"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:97
 msgid "_Redo"
 msgstr "O_pnieuw"
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:99
 msgid "_Revert"
 msgstr "_Terugzetten"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:100
 msgid "_Save"
 msgstr "Ops_laan"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:101
 msgid "_Search"
 msgstr "_Zoeken"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:102
 msgid "_Statusbar"
 msgstr "_Statusbalk"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:103
 msgid "_Toolbar"
 msgstr "_Werkbalk"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:104
 msgid "_Tools"
 msgstr "_Gereedschappen"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:105
 msgid "_Undo"
 msgstr "_Ongedaan maken"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:106
 msgid "_View"
 msgstr "_Beeld"
 
-#: src/gedit-utils.c:842
+#: src/gedit-utils.c:778
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1881,12 +2148,12 @@ msgstr ""
 "\n"
 "Kijk of de juiste bestandslocatie werd ingevoerd en probeer opnieuw."
 
-#: src/gedit-utils.c:849
+#: src/gedit-utils.c:785
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Kan het bestand \"%s\" niet openen, want het bevat foute data."
 
-#: src/gedit-utils.c:860
+#: src/gedit-utils.c:796
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -1894,12 +2161,12 @@ msgstr ""
 "Kan het bestand \"%s\" niet openen omdat gedit geen %s: locaties kan "
 "gebruiken."
 
-#: src/gedit-utils.c:868
+#: src/gedit-utils.c:802
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Kan het bestand \"%s\" niet openen."
 
-#: src/gedit-utils.c:875
+#: src/gedit-utils.c:812
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -1907,12 +2174,12 @@ msgstr ""
 "Kan het bestand \"%s\" niet openen omdat het data in een onjuist formaat "
 "bevat."
 
-#: src/gedit-utils.c:882
+#: src/gedit-utils.c:819
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Kan het bestand \"%s\" niet openen omdat het te groot is."
 
-#: src/gedit-utils.c:889
+#: src/gedit-utils.c:826
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1923,14 +2190,14 @@ msgstr ""
 "\n"
 "Ga na of u de locatie correct heeft ingetypt en probeer het opnieuw."
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr ""
 "Kan het bestand \"%s\" niet openen omdat toegang tot het bestand werd "
 "ontzegd."
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1941,7 +2208,7 @@ msgstr ""
 "\n"
 "Sluit enkele bestanden en probeer opnieuw."
 
-#: src/gedit-utils.c:911
+#: src/gedit-utils.c:848
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1952,7 +2219,7 @@ msgstr ""
 "\n"
 "Ga na of u een juiste bestandslocatie heeft ingevoerd en probeer het opnieuw."
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:855
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -1961,7 +2228,7 @@ msgstr ""
 "Er is niet genoeg geheugen om \"%s\" te openen. Sluit enkele programma's en "
 "probeer opnieuw."
 
-#: src/gedit-utils.c:931
+#: src/gedit-utils.c:881
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1975,7 +2242,7 @@ msgstr ""
 "Kijk of de bestandslocatie juist werd ingevoerd en of de proxy-instellingen "
 "juist zijn en probeer opnieuw."
 
-#: src/gedit-utils.c:944
+#: src/gedit-utils.c:896
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1986,7 +2253,7 @@ msgstr ""
 "\n"
 "Kijk of u een juiste bestandslocatie heeft ingevoerd en probeer opnieuw."
 
-#: src/gedit-utils.c:951
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1997,7 +2264,7 @@ msgstr ""
 "\n"
 "Kijk of de proxy-instellingen juist zijn en probeer opnieuw."
 
-#: src/gedit-utils.c:958
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2008,28 +2275,28 @@ msgstr ""
 "\n"
 "Kijk of u een juiste bestandslocatie heeft ingevoerd en probeer opnieuw."
 
-#: src/gedit-utils.c:966
+#: src/gedit-utils.c:918
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
+"Could not open the file \"%s\" because it contains invalid UTF-8 "
+"data.\n\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
 "Kan het bestand \"%s\" niet openen omdat het onjuiste UTF-8 data bevat.\n"
 "\n"
 "U heeft waarschijnlijk geprobeerd een binair bestand te openen."
 
-#: src/gedit-utils.c:1004
+#: src/gedit-utils.c:956
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Kan het bestand \"%s\" niet openen."
 
-#: src/gedit-utils.c:1055
+#: src/gedit-utils.c:1007
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Kan het bestand \"%s\" niet opslaan."
 
-#: src/gedit-utils.c:1059
+#: src/gedit-utils.c:1011
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2037,7 +2304,7 @@ msgid ""
 "%s"
 msgstr "Kan het bestand \"%s\" niet opslaan./n%s"
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1064
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2048,12 +2315,12 @@ msgstr ""
 "\n"
 "Misschien is het onlangs verwijderd."
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1071
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Kon het bestand \"%s\" niet terugzetten omdat het onjuiste data bevat."
 
-#: src/gedit-utils.c:1130
+#: src/gedit-utils.c:1082
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2061,31 +2328,31 @@ msgstr ""
 "Kan het bestand \"%s\" niet terugzetten omdat gedit geen %s: locaties kan "
 "gebruiken."
 
-#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
+#: src/gedit-utils.c:1088 src/gedit-utils.c:1228
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Kon het bestand \"%s\" niet terugzetten."
 
-#: src/gedit-utils.c:1145
+#: src/gedit-utils.c:1098
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
-"Kan het bestand \"%s\" niet terugzetten omdat het data in een onjuist "
-"formaat bevat."
+"Kan het bestand \"%s\" niet terugzetten omdat het data in een onjuist formaat "
+"bevat."
 
-#: src/gedit-utils.c:1152
+#: src/gedit-utils.c:1105
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Kan het bestand \"%s\" niet terugzetten omdat het te groot is."
 
-#: src/gedit-utils.c:1159
+#: src/gedit-utils.c:1112
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Kan het bestand \"%s\" niet terugzetten omdat toegang werd ontzegd."
 
-#: src/gedit-utils.c:1166
+#: src/gedit-utils.c:1119
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2097,16 +2364,16 @@ msgstr ""
 "\n"
 "Sluit enkele bestanden en probeer opnieuw."
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1127
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
-"Er is niet genoeg geheugen beschikbaar om het bestand \"%s\" terug te "
-"zetten. Sluit enkele applicaties en probeer opnieuw."
+"Er is niet genoeg geheugen beschikbaar om het bestand \"%s\" terug te zetten. "
+"Sluit enkele applicaties en probeer opnieuw."
 
-#: src/gedit-utils.c:1187
+#: src/gedit-utils.c:1153
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2118,7 +2385,7 @@ msgstr ""
 "\n"
 "Kijk of de proxysettings juist zijn en probeer opnieuw."
 
-#: src/gedit-utils.c:1199
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2129,101 +2396,278 @@ msgstr ""
 "\n"
 "Kijk of de proxysettings juist zijn en probeer opnieuw."
 
-#: src/gedit-utils.c:1206
+#: src/gedit-utils.c:1174
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Kan het bestand \"%s\" niet terugzetten omdat er niet kon worden ingelogd."
 
-#: src/gedit-utils.c:1213
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
-"Kan het bestand \"%s\" niet terugzetten omdat het onjuiste UTF-8 data "
-"bevat.\n"
+"Kan het bestand \"%s\" niet terugzetten omdat het onjuiste UTF-8 data bevat.\n"
 "\n"
 "U probeert waarschijnlijk een binair bestand te openen."
 
-#: src/gedit-utils.c:1222
+#: src/gedit-utils.c:1190
 msgid "It is not possible to revert an Untitled document."
 msgstr "Het is niet mogelijk om Naamlose documenten terugzetten."
 
-#: src/gedit-view.c:896
+#: src/gedit-utils.c:1279
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr ""
+
+#: src/gedit-utils.c:1285
+#, fuzzy, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" is een map.\n"
+"\n"
+"Ga na of u een juiste bestandslocatie heeft ingevoerd en probeer het opnieuw."
+
+#: src/gedit-utils.c:1294
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+
+#: src/gedit-utils.c:1301
+#, fuzzy, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr "Kan het bestand \"%s\" niet terugzetten omdat het te groot is."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+
+#: src/gedit-utils.c:1317
+#, fuzzy, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr "Er is niet genoeg vrije schijfruimte om het bestand op te slaan."
+
+#: src/gedit-utils.c:1323
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Kon het bestand \"%s\" niet terugzetten."
+
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Rg %d, Kol. %d"
 
-#: src/gedit-view.c:934
+#: src/gedit-view.c:942
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:936
+#: src/gedit-view.c:944
 msgid "  INS"
 msgstr "  INS"
 
-#: src/gedit2.c:69
+#: src/gedit2.c:75
 msgid "Show mdi debugging messages."
 msgstr "MDI-debugberichten tonen."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:78
 msgid "Show commands debugging messages."
 msgstr "Opdracht-debugberichten tonen."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:81
 msgid "Show document debugging messages."
 msgstr "Document-debugberichten tonen."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:84
 msgid "Show file debugging messages."
 msgstr "Bestand-debugberichten tonen."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:87
 msgid "Show plugin debugging messages."
 msgstr "Plugin-debugberichten tonen."
 
-#: src/gedit2.c:84
+#: src/gedit2.c:90
 msgid "Show prefs debugging messages."
 msgstr "Voorkeuren-debugberichten tonen."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:93
 msgid "Show printing debugging messages."
 msgstr "Afdruk-debugberichten tonen."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:96
 msgid "Show search debugging messages."
 msgstr "Zoek-debugberichten tonen."
 
-#: src/gedit2.c:93
+#: src/gedit2.c:99
 msgid "Show undo debugging messages."
 msgstr "Laat undo debug berichten zien."
 
-#: src/gedit2.c:96
+#: src/gedit2.c:102
 msgid "Show view debugging messages."
 msgstr "Laat debug-berichten zien."
 
-#: src/gedit2.c:99
+#: src/gedit2.c:105
 msgid "Show recent debugging messages."
 msgstr "Recente debugberichten tonen."
 
-#: src/gedit2.c:102
+#: src/gedit2.c:108
 msgid "Show session management debugging messages."
 msgstr "Debugberichten tonen van sessiebeheer"
 
-#: src/gedit2.c:105
+#: src/gedit2.c:111
 msgid "Turn on all debugging messages."
 msgstr "Zet alle debugberichten aan."
 
-#: src/gedit2.c:164
-msgid "The GNOME text editor"
-msgstr "De GNOME tekst-editor"
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr ""
+
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr ""
+
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr ""
 
 #: src/gnome-recent-view-bonobo.c:189
 #, c-format
 msgid "Open %s"
 msgstr "Open bestand %s"
+
+#~ msgid "Could not create the Plugin Manager dialog"
+#~ msgstr "Kan het Pluginbeheer-dialoogvenster niet creëren"
+
+#~ msgid "Toolbar"
+#~ msgstr "Werkbalk"
+
+#~ msgid "Status bar"
+#~ msgstr "Statusbalk"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "User interface"
+#~ msgstr "Gebruikers-interface"
+
+#~ msgid "Bottom"
+#~ msgstr "Onderkant"
+
+#~ msgid "Icon and _text"
+#~ msgstr "Pictogram en _tekst"
+
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgid "Modal"
+#~ msgstr "Modaal"
+
+#~ msgid "Notebook"
+#~ msgstr "Notitieboek"
+
+#~ msgid "Notebook _tab position:"
+#~ msgstr "Positie _tabbladen:"
+
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Sho_w tooltips"
+#~ msgstr "Zwevende tips _tonen"
+
+#~ msgid "Show cursor _position"
+#~ msgstr "Cursor_positie tonen"
+
+#~ msgid "Show overwrite _mode"
+#~ msgstr "Overschrijf_modus tonen"
+
+#~ msgid ""
+#~ "The MDI (Multiple Document Interface) mode refers to the way more than "
+#~ "one text document is displayed in gedit. \n"
+#~ "If you choose the Notebook mode, you may then decide where you want the "
+#~ "tabs to appear in the gedit window."
+#~ msgstr ""
+#~ "De MDI (Meerdere Documenten Interface) mode betekent dat meerdere "
+#~ "bestanden in gedit kunnen worden geopend.\n"
+#~ "De Notebook mode betekent dat de locatie van de tabs zelf kunnen worden "
+#~ "gekozen."
+
+#~ msgid ""
+#~ "The status bar settings let you show or hide status bar and customize its "
+#~ "appearance."
+#~ msgstr ""
+#~ "Met de statusbalk instellingen kan de statusbalk worden aan- en uitgezet "
+#~ "en kan de visuele verschijning worden gewijzigd."
+
+#~ msgid ""
+#~ "The toolbar settings let you show or hide toolbar and customize its "
+#~ "appearance."
+#~ msgstr ""
+#~ "Met de werkbalk instellingen kan de werkbalk worden aan- en uitgezet en "
+#~ "kan de visuele verschijning worden gewijzigd."
+
+#~ msgid "Top"
+#~ msgstr "Bovenkant"
+
+#~ msgid "Toplevel"
+#~ msgstr "Hoogste niveau"
+
+#~ msgid "U_se current locale only if the file already use it"
+#~ msgstr ""
+#~ "_Huidige locale alleen gebruiken wanneer het bestand dat al gebruikt."
+
+#~ msgid "_According to system settings"
+#~ msgstr "G_ebruik systeeminstellingen"
+
+#~ msgid "_MDI Mode:"
+#~ msgstr "_MDI Mode:"
+
+#~ msgid "_Show status bar"
+#~ msgstr "_Statusbalk weergeven"
+
+#~ msgid "_Show toolbar"
+#~ msgstr "_Werkbalk weergeven"
+
+#~ msgid ""
+#~ "This is the Plugin Manager. Plugins are extra pieces of software that "
+#~ "extend gedit capabilities. From here, you can choose which plugins you "
+#~ "want to have loaded."
+#~ msgstr ""
+#~ "Dit is Pluginbeheer. Plugins zijn extra stukjes software die de "
+#~ "mogelijkheden van gedit uitbreiden. Hier kunt u aangegeven welke plugins "
+#~ "moeten worden geladen."
+
+#~ msgid "Impossible to update gedit settings."
+#~ msgstr "Onmogelijk om gedit voorkeuren aan te passen."
+
+#~ msgid "Add/Remove plugins"
+#~ msgstr "Plugins toevoegen/verwijderen"
+
+#~ msgid "Plugin _Manager"
+#~ msgstr "Plugin_beheer"
+
+#~ msgid "Plugin _Manager..."
+#~ msgstr "Plugin_beheer..."
+
+#~ msgid "The GNOME text editor"
+#~ msgstr "De GNOME tekst-editor"
 
 #~ msgid "Show _Tooltips"
 #~ msgstr "Laat _Teksthulp Zien"
