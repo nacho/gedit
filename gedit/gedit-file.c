@@ -790,10 +790,10 @@ gedit_file_open_single_uri (const gchar* uri, const GeditEncoding *encoding)
 	if (uri == NULL) 
 		return FALSE;
 
-	full_path = eel_make_uri_from_input (uri);
+	full_path = gnome_vfs_make_uri_from_input (uri);
 
 	uri_list = g_slist_prepend (NULL, full_path);
-	
+
 	gedit_file_open_uri_list (uri_list, encoding, 0, FALSE);
 
 	return TRUE;
