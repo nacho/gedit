@@ -116,7 +116,7 @@ if gnome-config --libs vfs > /dev/null 2>&1; then
    if test "$vers" -ge 6002; then
       AC_MSG_RESULT(found)
    else
-      AC_MSG_ERROR(You need at least gnome-vfs 0.5.0 for this version of gedit)
+      AC_MSG_ERROR(You need at least gnome-vfs 0.6.2 for this version of gedit)
    fi
 else
    AC_MSG_ERROR(Did not find gnome-vfs installed)

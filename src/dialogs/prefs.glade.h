@@ -4,14 +4,15 @@
  * DO NOT compile it as part of your application.
  */
 
+gchar *s = N_("Preferences");
 gchar *s = N_("Appearance");
-gchar *s = N_("Show Statusbar");
-gchar *s = N_("Set toolbar according to system settings");
-gchar *s = N_("Set toolbar to Icons only");
-gchar *s = N_("Set toolbar to Icons with text");
+gchar *s = N_("S_how statusbar");
+gchar *s = N_("Set toolbar according to _system settings");
+gchar *s = N_("Set toolbar to _icons only");
+gchar *s = N_("Set toolbar to icons with _text");
 gchar *s = N_("Editor Behavior");
-gchar *s = N_("Enable Auto-indent");
-gchar *s = N_("Tab width: ");
+gchar *s = N_("Enable _Auto-indent");
+gchar *s = N_("Tab _width: ");
 gchar *s = N_("General");
 gchar *s = N_("MDI (Multiple Document Interface)");
 gchar *s = N_("Left\n"
@@ -24,28 +25,30 @@ gchar *s = N_("Notebook\n"
               "Modal\n"
               "Default\n"
               "");
-gchar *s = N_("Mode: ");
-gchar *s = N_("Notebook Tab Position: ");
+gchar *s = N_("_Mode: ");
+gchar *s = N_("Notebook _tab position: ");
 gchar *s = N_("Undo");
-gchar *s = N_("Set limit on undo levels to:");
-gchar *s = N_("level(s)");
+gchar *s = N_("Set limit on _undo levels to:");
+gchar *s = N_("_level(s)");
 gchar *s = N_("Documents");
 gchar *s = N_("Fonts");
 gchar *s = N_("Pick a Font");
 gchar *s = N_("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz");
-gchar *s = N_("Default Font: ");
+gchar *s = N_("_Default font: ");
 gchar *s = N_("Colors");
 gchar *s = N_("Pick a color");
 gchar *s = N_("Pick a color");
-gchar *s = N_("Background: ");
-gchar *s = N_("Foreground: ");
+gchar *s = N_("_Background: ");
+gchar *s = N_("_Foreground: ");
 gchar *s = N_("Fonts/Colors");
 gchar *s = N_("Printing");
 gchar *s = N_("Add _header");
 gchar *s = N_("Enable word _wrapping");
-gchar *s = N_("Print _line numbers every:");
-gchar *s = N_("line(s)");
+gchar *s = N_("Print line _numbers every:");
+gchar *s = N_("l_ine(s)");
+gchar *s = N_("Orientation");
 gchar *s = N_("_Portrait");
 gchar *s = N_("_Landscape");
 gchar *s = N_("Printing");
+gchar *s = N_("Paper");
 gchar *s = N_("Paper");

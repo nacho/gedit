@@ -46,6 +46,8 @@ static GtkWidget *from_file_2;
 static GtkWidget *file_entry_1;
 static GtkWidget *file_entry_2;
 
+static GtkWidget *unified_checkbutton;
+
 static gint document_selected_1;
 static gint document_selected_2;
 
@@ -83,7 +85,8 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 	gchar * file_name_1;
 	gchar * file_name_2;
 	GeditDocument *document;
-
+	gboolean unified_mode;
+	
 	int pid;
 	char buff[1025];
 	guint length, pos; 
@@ -97,7 +100,10 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 	g_return_if_fail (label != NULL);
 
 	program_location = GTK_LABEL(label)->label;
-			
+	
+	unified_mode = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (unified_checkbutton)); 
+	gnome_config_set_bool ("/gedit/diff_plugin/unified_mode", unified_mode);
+
 	state_1 = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (from_document_1));
 	state_2 = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (from_document_2));
 
@@ -178,7 +184,14 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 	if (pid == 0)
 	{
 		/* New process. */
-		char *argv[4];
+
+	        gint i;
+		char *argv[5];
+
+		if (unified_mode) 
+			i = 1;
+		else
+			i = 0;
 
 		close (1);
 		dup (fdpipe[1]);
@@ -186,12 +199,13 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 		close (fdpipe[1]);
       
 		argv[0] = "diff";
-#ifdef WHEN_WILL_SOLARIS_UPGRADE_THEIR_OS_TO_GNU_SOLARIS_I_ASK_MYSELF_CONSTANTLY
-		argv[1] = "-u";
-#endif	
-		argv[1] = file_name_1;
-		argv[2] = file_name_2;
-		argv[3] = NULL;
+		
+		if (unified_mode) 
+			argv[1] = "-u";
+		
+		argv[i + 1] = file_name_1;
+		argv[i + 2] = file_name_2;
+		argv[i + 3] = NULL;
 		execv (program_location, argv);
 		/* This is only reached if something goes wrong. */
 		_exit (1);
@@ -333,6 +347,7 @@ gedit_plugin_create_dialog (void)
 	GtkWidget *file_selector_combo_2;
 	
 	gchar * program_location;
+	gboolean unified_mode;
 
 	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
 							      GEDIT_PLUGIN_NAME,
@@ -370,6 +385,8 @@ gedit_plugin_create_dialog (void)
 	location_label         = glade_xml_get_widget (gui, "location_label");
 	change_button          = glade_xml_get_widget (gui, "change_button");
 
+	unified_checkbutton    = glade_xml_get_widget (gui, "unified_checkbutton");
+	
 	ok_button              = glade_xml_get_widget (gui, "ok_button");
 	cancel_button          = glade_xml_get_widget (gui, "cancel_button");
 	help_button            = glade_xml_get_widget (gui, "help_button");
@@ -393,16 +410,22 @@ gedit_plugin_create_dialog (void)
 	g_return_if_fail (location_label        != NULL);
 	g_return_if_fail (change_button         != NULL);
 
+	g_return_if_fail (unified_checkbutton   != NULL);
+	
 	g_return_if_fail (ok_button             != NULL);
 	g_return_if_fail (cancel_button         != NULL);
 	g_return_if_fail (help_button           != NULL);
 
 
-	        /* Set the location label */
+	/* Set the location label */
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "location_label")),
 			    program_location);
 	g_free (program_location);
+	
+	unified_mode = gnome_config_get_bool ("/gedit/diff_plugin/unified_mode=FALSE");
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (unified_checkbutton), unified_mode); 
 	
         /* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",

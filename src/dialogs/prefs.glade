@@ -18,11 +18,12 @@
   <class>GnomePropertyBox</class>
   <name>propertybox</name>
   <visible>False</visible>
+  <title>Preferences</title>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>False</allow_grow>
-  <auto_shrink>False</auto_shrink>
+  <auto_shrink>True</auto_shrink>
 
   <widget>
     <class>GtkNotebook</class>
@@ -43,41 +44,41 @@
     <popup_enable>False</popup_enable>
     <child>
       <padding>0</padding>
-      <expand>True</expand>
-      <fill>True</fill>
+      <expand>False</expand>
+      <fill>False</fill>
     </child>
 
     <widget>
       <class>GtkVBox</class>
       <name>page_1</name>
-      <border_width>2</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>2</spacing>
+      <spacing>0</spacing>
 
       <widget>
 	<class>GtkFrame</class>
 	<name>frame4</name>
+	<border_width>4</border_width>
 	<label>Appearance</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkVBox</class>
 	  <name>vbox4</name>
-	  <border_width>2</border_width>
+	  <border_width>5</border_width>
 	  <homogeneous>False</homogeneous>
-	  <spacing>2</spacing>
+	  <spacing>6</spacing>
 
 	  <widget>
 	    <class>GtkCheckButton</class>
 	    <name>statusbar</name>
 	    <can_focus>True</can_focus>
-	    <label>Show Statusbar</label>
+	    <label>S_how statusbar</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -90,7 +91,7 @@
 	  <widget>
 	    <class>GtkVBox</class>
 	    <name>vbox9</name>
-	    <homogeneous>False</homogeneous>
+	    <homogeneous>True</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
 	      <padding>0</padding>
@@ -102,7 +103,7 @@
 	      <class>GtkRadioButton</class>
 	      <name>toolbar_radio_button_1</name>
 	      <can_focus>True</can_focus>
-	      <label>Set toolbar according to system settings</label>
+	      <label>Set toolbar according to _system settings</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>toolbar_settings</group>
@@ -117,7 +118,7 @@
 	      <class>GtkRadioButton</class>
 	      <name>toolbar_radio_button_2</name>
 	      <can_focus>True</can_focus>
-	      <label>Set toolbar to Icons only</label>
+	      <label>Set toolbar to _icons only</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>toolbar_settings</group>
@@ -132,7 +133,7 @@
 	      <class>GtkRadioButton</class>
 	      <name>toolbar_radio_button_3</name>
 	      <can_focus>True</can_focus>
-	      <label>Set toolbar to Icons with text</label>
+	      <label>Set toolbar to icons with _text</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>toolbar_settings</group>
@@ -149,27 +150,28 @@
       <widget>
 	<class>GtkFrame</class>
 	<name>frame5</name>
+	<border_width>4</border_width>
 	<label>Editor Behavior</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkVBox</class>
 	  <name>vbox5</name>
-	  <border_width>2</border_width>
+	  <border_width>4</border_width>
 	  <homogeneous>False</homogeneous>
-	  <spacing>2</spacing>
+	  <spacing>6</spacing>
 
 	  <widget>
 	    <class>GtkCheckButton</class>
 	    <name>autoindent</name>
 	    <can_focus>True</can_focus>
-	    <label>Enable Auto-indent</label>
+	    <label>Enable _Auto-indent</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -193,13 +195,14 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label15</name>
-	      <label>Tab width: </label>
+	      <label>Tab _width: </label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0.5</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <focus_target>tabwidthspin</focus_target>
 	      <child>
 		<padding>0</padding>
 		<expand>False</expand>
@@ -250,30 +253,30 @@
     <widget>
       <class>GtkVBox</class>
       <name>page_2</name>
-      <border_width>2</border_width>
       <homogeneous>False</homogeneous>
       <spacing>0</spacing>
 
       <widget>
 	<class>GtkFrame</class>
 	<name>frame3</name>
+	<border_width>4</border_width>
 	<label>MDI (Multiple Document Interface)</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkTable</class>
 	  <name>table3</name>
-	  <border_width>2</border_width>
+	  <border_width>4</border_width>
 	  <rows>2</rows>
 	  <columns>2</columns>
 	  <homogeneous>True</homogeneous>
-	  <row_spacing>4</row_spacing>
+	  <row_spacing>6</row_spacing>
 	  <column_spacing>4</column_spacing>
 
 	  <widget>
@@ -331,13 +334,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label7</name>
-	    <label>Mode: </label>
+	    <label>_Mode: </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>1</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>mdimode</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -357,13 +361,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label8</name>
-	    <label>Notebook Tab Position: </label>
+	    <label>Notebook _tab position: </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>1</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>tabpos</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -385,18 +390,20 @@ Default
       <widget>
 	<class>GtkFrame</class>
 	<name>frame7</name>
+	<border_width>4</border_width>
 	<label>Undo</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkHBox</class>
 	  <name>hbox3</name>
+	  <border_width>4</border_width>
 	  <homogeneous>False</homogeneous>
 	  <spacing>0</spacing>
 
@@ -404,7 +411,7 @@ Default
 	    <class>GtkCheckButton</class>
 	    <name>undo_levels</name>
 	    <can_focus>True</can_focus>
-	    <label>Set limit on undo levels to:</label>
+	    <label>Set limit on _undo levels to:</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -440,13 +447,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>undo_levels_label</name>
-	    <label>level(s)</label>
+	    <label>_level(s)</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>undo_levels_spin_button</focus_target>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -473,26 +481,26 @@ Default
     <widget>
       <class>GtkVBox</class>
       <name>page_3</name>
-      <border_width>2</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>2</spacing>
+      <spacing>0</spacing>
 
       <widget>
 	<class>GtkFrame</class>
 	<name>frame1</name>
+	<border_width>4</border_width>
 	<label>Fonts</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkTable</class>
 	  <name>table4</name>
-	  <border_width>2</border_width>
+	  <border_width>4</border_width>
 	  <rows>1</rows>
 	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
@@ -528,13 +536,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label10</name>
-	    <label>Default Font: </label>
+	    <label>_Default font: </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>1</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>defaultfont</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -556,23 +565,24 @@ Default
       <widget>
 	<class>GtkFrame</class>
 	<name>frame2</name>
+	<border_width>4</border_width>
 	<label>Colors</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkTable</class>
 	  <name>table5</name>
-	  <border_width>2</border_width>
+	  <border_width>4</border_width>
 	  <rows>2</rows>
 	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
+	  <row_spacing>6</row_spacing>
 	  <column_spacing>4</column_spacing>
 
 	  <widget>
@@ -624,13 +634,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label11</name>
-	    <label>Background: </label>
+	    <label>_Background: </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
-	    <xalign>1</xalign>
+	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>background</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -650,13 +661,14 @@ Default
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label12</name>
-	    <label>Foreground: </label>
+	    <label>_Foreground: </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>1</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>foreground</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -698,20 +710,20 @@ Default
       <widget>
 	<class>GtkFrame</class>
 	<name>page_4</name>
-	<border_width>2</border_width>
+	<border_width>4</border_width>
 	<label>Printing</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
 	  <class>GtkVBox</class>
 	  <name>vbox7</name>
-	  <border_width>2</border_width>
+	  <border_width>4</border_width>
 	  <homogeneous>False</homogeneous>
 	  <spacing>2</spacing>
 
@@ -770,7 +782,7 @@ Default
 	      <class>GtkCheckButton</class>
 	      <name>printlines</name>
 	      <can_focus>True</can_focus>
-	      <label>Print _line numbers every:</label>
+	      <label>Print line _numbers every:</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -806,7 +818,7 @@ Default
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>lineslabel</name>
-	      <label>line(s)</label>
+	      <label>l_ine(s)</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0.5</xalign>
@@ -820,57 +832,57 @@ Default
 	      </child>
 	    </widget>
 	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame8</name>
+	<border_width>4</border_width>
+	<label>Orientation</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox10</name>
+	  <border_width>4</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
 
 	  <widget>
-	    <class>GtkVBox</class>
-	    <name>vbox8</name>
-	    <homogeneous>False</homogeneous>
-	    <spacing>0</spacing>
+	    <class>GtkRadioButton</class>
+	    <name>print_orientation_portrait_radio_button</name>
+	    <can_focus>True</can_focus>
+	    <label>_Portrait</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>print_orientation_group</group>
 	    <child>
 	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
+	      <expand>False</expand>
+	      <fill>False</fill>
 	    </child>
+	  </widget>
 
-	    <widget>
-	      <class>GtkHSeparator</class>
-	      <name>hseparator1</name>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkRadioButton</class>
-	      <name>print_orientation_portrait_radio_button</name>
-	      <can_focus>True</can_focus>
-	      <label>_Portrait</label>
-	      <active>False</active>
-	      <draw_indicator>True</draw_indicator>
-	      <group>print_orientation_group</group>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkRadioButton</class>
-	      <name>print_orientation_landscape_radio_button</name>
-	      <can_focus>True</can_focus>
-	      <label>_Landscape</label>
-	      <active>False</active>
-	      <draw_indicator>True</draw_indicator>
-	      <group>print_orientation_group</group>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-	    </widget>
+	  <widget>
+	    <class>GtkRadioButton</class>
+	    <name>print_orientation_landscape_radio_button</name>
+	    <can_focus>True</can_focus>
+	    <label>_Landscape</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>print_orientation_group</group>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
 	  </widget>
 	</widget>
       </widget>
@@ -890,8 +902,30 @@ Default
     </widget>
 
     <widget>
-      <class>GnomePaperSelector</class>
-      <name>paperselector</name>
+      <class>GtkVBox</class>
+      <name>vbox11</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame9</name>
+	<border_width>4</border_width>
+	<label>Paper</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePaperSelector</class>
+	  <name>paperselector</name>
+	  <border_width>4</border_width>
+	</widget>
+      </widget>
     </widget>
 
     <widget>

@@ -65,13 +65,13 @@ GnomeUIInfo gedit_file_menu[] =
 
 	GNOMEUIINFO_MENU_OPEN_ITEM (file_open_cb, NULL),
 	GNOMEUIINFO_MENU_SAVE_ITEM (file_save_cb, NULL),
-	GNOMEUIINFO_ITEM_STOCK (N_("Save All"),
+	GNOMEUIINFO_ITEM_STOCK (N_("Sav_e All"),
 				N_("Save All Open Files"),
 				file_save_all_cb,
 				GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
-	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
+	GNOMEUIINFO_ITEM_STOCK (N_("_Revert"),
 				NULL,
 				file_revert_cb, 
 				GNOME_STOCK_MENU_REFRESH),
@@ -99,7 +99,7 @@ GnomeUIInfo gedit_file_menu[] =
 		gedit_print_preview_cb, NULL, NULL),
 /*		file_print_preview_cb, NULL, preview_xpm),*/
 #else	
-	GNOMEUIINFO_ITEM (N_("Print preview..."),
+	GNOMEUIINFO_ITEM (N_("Print pre_view..."),
 			  N_("Preview data to be printed"),
 			  gedit_print_preview_cb, NULL),
 #endif	
@@ -107,7 +107,7 @@ GnomeUIInfo gedit_file_menu[] =
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_CLOSE_ITEM (file_close_cb, NULL),
-	GNOMEUIINFO_ITEM_STOCK (N_("Close All"),
+	GNOMEUIINFO_ITEM_STOCK (N_("C_lose All"),
 				N_("Close All Open Files"),
 				file_close_all_cb,
 				GNOME_STOCK_MENU_CLOSE),
@@ -129,7 +129,19 @@ GnomeUIInfo gedit_edit_menu[] =
         GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
         GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
+
+	GNOMEUIINFO_SEPARATOR,
+
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_select_all_cb, NULL),
+
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_search_menu[] =
+{	
+	GNOMEUIINFO_MENU_FIND_ITEM       (gedit_find_cb, NULL),
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM (gedit_find_again_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM    (gedit_replace_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 	
@@ -140,12 +152,6 @@ GnomeUIInfo gedit_edit_menu[] =
 		gedit_goto_line_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO
 	},
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_MENU_FIND_ITEM       (gedit_find_cb, NULL),
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM (gedit_find_again_cb, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM    (gedit_replace_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
 
@@ -209,6 +215,15 @@ GnomeUIInfo gedit_menu[] =
 {
         GNOMEUIINFO_MENU_FILE_TREE (gedit_file_menu),
 	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
+	{
+		GNOME_APP_UI_SUBTREE,
+		N_("Se_arch"),
+		NULL,
+		&gedit_search_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL,
+		0, 0, NULL
+	},
+
 	{
 		GNOME_APP_UI_SUBTREE,
 		N_("_Plugins"),
@@ -283,11 +298,13 @@ GnomeUIInfo toolbar_data[] =
 		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), gedit_find_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
 	},
+/*
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("Exit"), N_("Exit the program"), file_quit_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_QUIT
 	},
+*/
 	GNOMEUIINFO_END
 };
 

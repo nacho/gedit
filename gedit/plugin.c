@@ -104,7 +104,7 @@ gedit_plugins_menu_add (GnomeApp *app)
 
 	/* Add the plugin manager item */
 	menu[0].type = GNOME_APP_UI_ITEM;
-	menu[0].label = _("Manager ...");
+	menu[0].label = _("_Manager ...");
 	menu[0].hint  = _("Add/Remove installed plugins");
 	menu[0].moreinfo = gedit_plugin_manager_create;
 	menu[0].pixmap_type = GNOME_APP_PIXMAP_STOCK;

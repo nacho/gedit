@@ -329,12 +329,12 @@ search_not_found_notify (GeditView * view)
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
-	gedit_flash_va (_("Text not found"));
+	gedit_flash_va (_("Search string not found"));
 
 	if (gedit_view_get_selection (view, NULL, NULL))
 		gedit_view_set_selection (view, 0, 0);
 
-	msg = g_strdup (_("Text not found."));
+	msg = g_strdup (_("Search string not found."));
 	gnome_dialog = gnome_message_box_new (msg,
 					      GNOME_MESSAGE_BOX_INFO,
 					      GNOME_STOCK_BUTTON_OK,

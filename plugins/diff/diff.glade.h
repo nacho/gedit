@@ -14,6 +14,7 @@ gchar *s = N_("Second");
 gchar *s = N_("From document");
 gchar *s = N_("From a file on disk");
 gchar *s = N_("Select the \"second\" file...");
+gchar *s = N_("Use the _unified output format (-u option)");
 gchar *s = N_("Diff found at: ");
 gchar *s = N_("location");
 gchar *s = N_(" _Change... ");
