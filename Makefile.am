@@ -10,7 +10,7 @@ EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins			\
 
 man_MANS = gedit.1
 
-sysdir   = $(datadir)/apps/Applications
+sysdir   = $(datadir)/gnome/apps/Applications
 sys_DATA = gedit.desktop
 
 mimedir = $(datadir)/mime-info
