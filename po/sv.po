@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-07-11 12:15+0200\n"
-"PO-Revision-Date: 2002-07-11 12:15+0200\n"
+"POT-Creation-Date: 2002-07-13 22:04+0200\n"
+"PO-Revision-Date: 2002-07-13 22:06+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -665,7 +665,7 @@ msgstr ""
 "antalet ord, rader, tecken och icke-blanka tecken i det och visar resultatet."
 
 #: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
-#: plugins/shell_output/shell_output.c:436
+#: plugins/shell_output/shell_output.c:553
 #: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:568
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright © 2002 - Paolo Maggi"
@@ -722,24 +722,28 @@ msgstr "Användarnamn"
 msgid "Inserts the user name at the cursor position."
 msgstr "Infogar användarnamnet vid markörpositionen."
 
-#: plugins/shell_output/shell_output.c:45
+#: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
 msgstr "Infoga skal_utdata"
 
-#: plugins/shell_output/shell_output.c:48
+#: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
 msgstr "Infoga utdata från skalet i det aktuella dokumentet"
 
-#: plugins/shell_output/shell_output.c:163
-#: plugins/shell_output/shell_output.c:432
+#: plugins/shell_output/shell_output.c:137
+msgid "An error occurs while running the selected command."
+msgstr "Ett fel uppstår vid körning av det valda kommandot."
+
+#: plugins/shell_output/shell_output.c:187
+#: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
 msgstr "Skalutdata"
 
-#: plugins/shell_output/shell_output.c:176
+#: plugins/shell_output/shell_output.c:200
 msgid "_Run"
 msgstr "_Kör"
 
-#: plugins/shell_output/shell_output.c:264
+#: plugins/shell_output/shell_output.c:360
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -749,7 +753,7 @@ msgstr ""
 "\n"
 "Var vänlig och ange ett giltigt skalkommando."
 
-#: plugins/shell_output/shell_output.c:293
+#: plugins/shell_output/shell_output.c:389
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -759,31 +763,27 @@ msgstr ""
 "\n"
 "Ange ett giltigt skalkommando."
 
-#: plugins/shell_output/shell_output.c:346
-msgid "An error occurs while running the selected command."
-msgstr "Ett fel uppstår vid körning av det valda kommandot."
-
-#: plugins/shell_output/shell_output.c:433
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
-msgstr ""
-"Kör ett program och infoga dess utdata i det aktuella dokumentet vid aktuell "
-"markörposition"
+#: plugins/shell_output/shell_output.c:551
+msgid "Execute an external program and insert its output in a new document."
+msgstr "Kör ett externt program och infoga dess utdata i ett nytt dokument."
 
 #: plugins/shell_output/shell_output.glade2.h:1
+msgid "Capture the command _output"
+msgstr "Fånga kommando_utdata"
+
+#: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
 msgstr "Ange arbetskatalogen och det kommando som du vill köra."
 
-#: plugins/shell_output/shell_output.glade2.h:2
+#: plugins/shell_output/shell_output.glade2.h:3
 msgid "_Shell command:"
 msgstr "_Skalkommando:"
 
-#: plugins/shell_output/shell_output.glade2.h:3
+#: plugins/shell_output/shell_output.glade2.h:4
 msgid "_Working directory:"
 msgstr "_Arbetskatalog:"
 
-#: plugins/shell_output/shell_output.glade2.h:4
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Insticksmodul för skalutdata"
 
