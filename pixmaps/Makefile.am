@@ -1,6 +1,6 @@
 
 appicondir = $(datadir)/pixmaps
-appicon_DATA = gedit-icon.xpm
+appicon_DATA = gedit-icon.png
 
 applogodir = $(datadir)/pixmaps
 applogo_DATA = gedit-logo.png

@@ -35,7 +35,6 @@
 #include "recent.h"
 #include "file.h"
 #include "undo.h"
-#include "../pixmaps/gedit-icon.xpm"
 
 /*
 extern GtkWidget *col_label;
@@ -51,8 +50,6 @@ void	gedit_window_set_status_bar (GnomeApp *app);
 void	gedit_window_refresh_all (gint mdi_mode_changed);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
 void	gedit_window_set_widgets_sensitivity (gint sensitive);
-
-static void	gedit_window_set_icon (GtkWidget *window, char *icon);
 
 GeditToolbar *gedit_toolbar = NULL;
 
@@ -107,7 +104,6 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 				      gnome_mdi_get_menubar_info (mdi->active_window));
 
 	/* Set the window prefs. */
-	gedit_window_set_icon (GTK_WIDGET (app), "gedit_icon");
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
@@ -128,6 +124,7 @@ gedit_window_set_auto_indent (gint auto_indent)
 }
 
 /* set the a window icon */
+#if 0
 static void
 gedit_window_set_icon (GtkWidget *window, char *icon)
 {
@@ -147,6 +144,7 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	/* Not sure about this.. need to test in E 
 	gtk_widget_unrealize (window);*/
 }
+#endif
 
 void
 gedit_window_set_status_bar (GnomeApp *app)

@@ -6,6 +6,7 @@ INCLUDES = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\" 		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit/plugins"\"	\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"	\
 	-I$(includedir) 				\
 	-I$(top_srcdir) 				\
 	-I$(srcdir)/dialogs				\

@@ -146,10 +146,29 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 void
 edit_copy_cb (GtkWidget *widget, gpointer data)
 {
+	View *view;
+	GtkEditable *editable;
+
 	if (!gedit_document_current())
 		return;
 		
-	gtk_editable_copy_clipboard (gedit_editable_active());
+	view = gedit_view_active();
+
+	if (view == NULL)
+		return;
+
+	if (!GEDIT_IS_VIEW (view)) {
+		g_warning ("Error while pasting. \"view\" is not a Gedit View");
+		return;
+	}
+
+	editable = GTK_EDITABLE (view->text);
+	if (!GTK_IS_EDITABLE (editable)) {
+		g_warning ("Error while pasting. \"editable\" is not a GtkEditable");
+		return;
+	}
+
+	gtk_editable_copy_clipboard (editable);
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_COPY);
 }
@@ -157,10 +176,29 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 void
 edit_paste_cb (GtkWidget *widget, gpointer data)
 {
+	View *view;
+	GtkEditable *editable;
+
 	if (!gedit_document_current())
 		return;
 
-	gtk_editable_paste_clipboard (gedit_editable_active());
+	view = gedit_view_active();
+
+	if (view == NULL)
+		return;
+
+	if (!GEDIT_IS_VIEW (view)) {
+		g_warning ("Error while pasting. \"view\" is not a Gedit View");
+		return;
+	}
+
+	editable = GTK_EDITABLE (view->text);
+	if (!GTK_IS_EDITABLE (editable)) {
+		g_warning ("Error while pasting. \"editable\" is not a GtkEditable");
+		return;
+	}
+
+	gtk_editable_paste_clipboard (editable);
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_PASTE);
 }

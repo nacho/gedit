@@ -322,7 +322,7 @@ gedit_file_save (Document *doc, const gchar *fname)
 		}
 	}
 
-	g_return_val_if_fail (doc != NULL, 1);
+	g_return_val_if_fail (doc   != NULL, 1);
 	g_return_val_if_fail (fname != NULL, 1);
 	
 	buffer = gedit_document_get_buffer (view->doc);
@@ -365,8 +365,9 @@ gedit_file_save (Document *doc, const gchar *fname)
 		gedit_close_all_flag_clear();
 		return 1;
 	}
-	
-	g_free (buffer);
+
+	if (buffer != NULL)
+		g_free (buffer);
 	
 	if (fclose (file_pointer) != 0)
 	{
@@ -382,7 +383,8 @@ gedit_file_save (Document *doc, const gchar *fname)
 
 	if (doc->filename != fname)
 	{
-		g_free (doc->filename);
+		if (doc->filename != NULL)
+			g_free (doc->filename);
 		doc->filename = g_strdup (fname);
 	}
 	
@@ -391,7 +393,7 @@ gedit_file_save (Document *doc, const gchar *fname)
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_document_set_title (doc);
 
-	gedit_document_text_changed_signal_connect(doc);
+	gedit_document_text_changed_signal_connect (doc);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
 

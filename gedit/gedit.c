@@ -37,6 +37,8 @@
 #include <libgnorba/gnorba.h>
 #endif
 
+#include <libgnomeui/gnome-window-icon.h>
+
 gint debug = 0;
 gint debug_view = 0;
 gint debug_undo = 0;
@@ -114,6 +116,10 @@ main (int argc, char **argv)
 
 	args = (char**) poptGetArgs(ctx);
 
+	if (!g_file_exists (GNOME_ICONDIR "/gedit-icon.png"))
+	    g_warning ("Could not find %s", GNOME_ICONDIR "/gedit-icon.png");
+	gnome_window_icon_set_default_from_file (GNOME_ICONDIR "/gedit-icon.png");
+	
 	for (i = 0; args && args[i]; i++)
 		file_list = g_list_append (file_list, args[i]);
 	

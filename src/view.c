@@ -200,6 +200,9 @@ gedit_views_insert (Document *doc, guint position, gchar * text,
 
 	g_return_if_fail (doc!=NULL);
 
+	if (length < 1)
+		return;
+
 	/* Why do we have to call view_text_changed_cb ? why is the "chaged" signal not calling it ?. Chema */
 	if (!doc->changed)
 		if (g_list_length (doc->views))

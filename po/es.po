@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2000-07-09 17:00-0500\n"
+"POT-Creation-Date: 2000-08-31 00:25-0500\n"
 "PO-Revision-Date: 2000-06-08 21:55+0100\n"
 "Last-Translator: Carlos Perelló Marín <carpema@hispalinux.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -41,7 +41,7 @@ msgstr "Convertir"
 #: plugins/convert/convert.c:151 plugins/convert/convert.c:152
 #: plugins/convert/convert.glade.h:7
 msgid "Number Converter"
-msgstr "Convertidor de números"
+msgstr "Convertidor de base"
 
 #: plugins/convert/convert.glade.h:8
 msgid "Converted Value:"
@@ -91,7 +91,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
-#: src/document.c:261 src/print.c:584
+#: src/document.c:259 src/print.c:581
 msgid "Untitled"
 msgstr "SinNombre"
 
@@ -189,12 +189,12 @@ msgstr "Hola Mundo"
 msgid "Sample 'hello world' plugin."
 msgstr "Extensión 'hola mundo' de ejemplo."
 
-#: plugins/shell_output/shell_output.c:177
+#: plugins/shell_output/shell_output.c:182
 msgid "Shell Output"
 msgstr "Salida de shell"
 
-#: plugins/shell_output/shell_output.c:178
-#: plugins/shell_output/shell_output.c:179
+#: plugins/shell_output/shell_output.c:183
+#: plugins/shell_output/shell_output.c:184
 msgid "Insert the shell output in the document"
 msgstr "Inserta texto del shell en el documento"
 
@@ -503,16 +503,16 @@ msgstr "Extensioens Instaladas"
 msgid "Plugin description"
 msgstr "Descripcion del plugin"
 
-#: src/document.c:243
+#: src/document.c:241
 msgid "RO - "
 msgstr "SL - "
 
-#: src/document.c:434
+#: src/document.c:432
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "«%s» fue modificado. ¿Desea guardarlo?"
 
-#: src/document.c:639
+#: src/document.c:638
 #, c-format
 msgid "Untitled %i"
 msgstr "SinNombre %i"
@@ -525,16 +525,16 @@ msgstr "(modificado)"
 msgid "(readonly)"
 msgstr "(solo lectura)"
 
-#: src/document.c:692 src/document.c:732
+#: src/document.c:696 src/document.c:736
 msgid "This file does not end with a valid extension\n"
 msgstr "Exte archivo no termina con una extension valida\n"
 
-#: src/document.c:740
+#: src/document.c:744
 #, c-format
 msgid "The file %s was not found."
 msgstr "El documento %s no fue encontrado."
 
-#: src/file.c:109
+#: src/file.c:152
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -543,7 +543,7 @@ msgstr ""
 "Ocurion un error al intentar abrir el archivo \"%s\".\n"
 "Asegúrese que el archivo existe."
 
-#: src/file.c:118
+#: src/file.c:161
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -562,11 +562,11 @@ msgstr ""
 "Por favor asegúrese que el archivo no está siendo usado por otro programa\n"
 "y que el archivo no es vacío."
 
-#: src/file.c:128 src/file.c:383
+#: src/file.c:171 src/file.c:433
 msgid "Could not allocate the required memory."
 msgstr "No se pudo asignar la memoria necesaria."
 
-#: src/file.c:134
+#: src/file.c:177
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -581,11 +581,15 @@ msgstr ""
 "\n"
 "Asegúrese que tiene los derechos de acceso necesarios para abrirlo."
 
-#: src/file.c:218
+#: src/file.c:277
+msgid "Save As..."
+msgstr "Guardar como..."
+
+#: src/file.c:334
 msgid "The document contains no data."
 msgstr "El documento no contiene texto"
 
-#: src/file.c:228
+#: src/file.c:344
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -602,7 +606,7 @@ msgstr ""
 "Asegúrese que el camino que indicó existe, y que Vd. tiene los derechos de "
 "acceso adecuados."
 
-#: src/file.c:241
+#: src/file.c:357
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -619,7 +623,7 @@ msgstr ""
 "Por una razón desconocida (1). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:257
+#: src/file.c:373
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -636,41 +640,37 @@ msgstr ""
 "Por una razón desconocida (2). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:343
-msgid "Save As..."
-msgstr "Guardar como..."
-
-#: src/file.c:403
+#: src/file.c:453
 msgid "Error in the pipe ."
 msgstr "Error en el tubo ."
 
-#: src/file.c:458
+#: src/file.c:508
 msgid "Open File ..."
 msgstr "Abrir un archivo ..."
 
-#: src/file.c:516
+#: src/file.c:566
 #, c-format
 msgid "Loaded file %s"
 msgstr "Archivo %s cargado"
 
-#: src/file.c:607
+#: src/file.c:657
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "«%s» va a ser reemplazado. ¿Desea continuar?"
 
-#: src/file.c:619
+#: src/file.c:669
 msgid "Document has not been saved."
 msgstr "El documento no fue guardado..."
 
-#: src/file.c:629
+#: src/file.c:679
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
-#: src/file.c:748
+#: src/file.c:798
 msgid "You can't revert an Untitled document\n"
 msgstr "No puede revertir un documento Sin título\n"
 
-#: src/file.c:761
+#: src/file.c:811
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -679,7 +679,7 @@ msgstr ""
 "¿Está seguro que desea deshacer todos los cambios?\n"
 "(%s)"
 
-#: src/file.c:790
+#: src/file.c:840
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
@@ -939,7 +939,7 @@ msgstr "Páginas"
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Ver antes de imprimir"
 
-#: src/print.c:533 src/print.c:548
+#: src/print.c:530 src/print.c:545
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -948,7 +948,7 @@ msgstr ""
 "gedit no pudo encontrar la fuente \"%s\".\n"
 "gedit no puede continuar la impresion sin esta fuente instalada."
 
-#: src/print.c:841
+#: src/print.c:838
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Página: %i/%i"
@@ -1011,55 +1011,55 @@ msgstr "Texto no encontrado."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "No se puede buscar de nuevo. No hay ninguna cadena de texto a buscar."
 
-#: src/utils.h:71
+#: src/utils.h:76
 msgid "Show window debugging messages."
 msgstr "Desplegar mensajes de debugeo de Window"
 
-#: src/utils.h:74
+#: src/utils.h:79
 msgid "Show commands debugging messages."
 msgstr "Desplegar mensajes de debugeo de Command"
 
-#: src/utils.h:77
+#: src/utils.h:82
 msgid "Show document debugging messages."
 msgstr "Desplegar mensajes de debugeo de Document"
 
-#: src/utils.h:80
+#: src/utils.h:85
 msgid "Show file debugging messages."
 msgstr "Desplegar mensajes de debugeo de File"
 
-#: src/utils.h:83
+#: src/utils.h:88
 msgid "Show plugin debugging messages."
 msgstr "Desplegar mensajes de debugeo de Plugins"
 
-#: src/utils.h:86
+#: src/utils.h:91
 msgid "Show prefs debugging messages."
 msgstr "Desplegar mensajes de debugeo de Prefs"
 
-#: src/utils.h:89
+#: src/utils.h:94
 msgid "Show printing debugging messages."
 msgstr "Desplegar mensajes de debugeo de Print"
 
-#: src/utils.h:92
+#: src/utils.h:97
 msgid "Show search debugging messages."
 msgstr "Desplegar mensajes de debugeo de Search"
 
-#: src/utils.h:95
+#: src/utils.h:100
 msgid "Show undo debugging messages."
 msgstr "Desplegar mensajes de debugeo de Undo"
 
-#: src/utils.h:98
+#: src/utils.h:103
 msgid "Show view debugging messages."
 msgstr "Desplegar mensajes de debugeo de View"
 
-#: src/utils.h:101
+#: src/utils.h:106
 msgid "Show recent debugging messages."
 msgstr "Desplegar mensajes de debugeo de Recent"
 
-#: src/utils.h:104
+#: src/utils.h:109
 msgid "Turn on all debugging messages."
 msgstr "Desplegar todos los mensajes de debugeo"
 
-#: src/view.c:933
+#: src/view.c:948
 msgid "You can't remove the last view of a document."
 msgstr "No puede revertir un documento Sin título."
 
