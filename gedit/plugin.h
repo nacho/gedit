@@ -55,21 +55,23 @@ struct _PluginData
 	
 	/* filled in by plugin */
 	void	*private_data;
+
+	/* Is this plugin installed ? */
+	gint installed;
 };
 
-extern GSList	*plugin_list;
+extern GList	*plugins_list;
+extern GList	*plugins_installed_list;
 
 /* Plugin MUST have this function */
 /*extern gint init_plugin (PluginData *pd); */
 
-PluginData*	plugin_load              (const gchar *file);
-void		gedit_plugins_init       (void);
-void		plugin_unload            (PluginData *pd);
-gint		init_plugin (PluginData *pd);
-void		gedit_plugins_window_add (GnomeApp *app);
-void		gedit_plugin_program_location_clear  (gchar * program_name);
-gchar *		gedit_plugin_program_location_get    (gchar * program_name, gchar *plugin_name, gint dont_guess);
-gchar *		gedit_plugin_program_location_string (gchar * program_name);
-gchar *		gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
+gint init_plugin (PluginData *pd);
+
+void			gedit_plugins_init (void);
+void			gedit_plugins_menu_add (GnomeApp *app);
+
+gchar *			gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
+gchar *			gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
 
 #endif /* __PLUGIN_H__ */

@@ -413,7 +413,6 @@ gedit_plugin_create_dialog (void)
 	gtk_object_unref (GTK_OBJECT (gui));
 }
 
-
 gint
 init_plugin (PluginData *pd)
 {

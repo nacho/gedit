@@ -153,7 +153,7 @@ gedit_plugin_create_dialog (void)
 	if (program_location == NULL)
 		return;
 	
-	if (!g_file_exists (GEDIT_GLADEDIR ))
+	if (!g_file_exists (GEDIT_GLADEDIR GEDIT_PLUGIN_GLADE_FILE))
 	{
 		g_warning ("Could not find %s",
 			   GEDIT_GLADEDIR

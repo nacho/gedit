@@ -116,8 +116,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gedit_recent_update (app);
 
 	/* Add the plugins to the menus */
-	gedit_plugins_window_add (app);
-
+	gedit_plugins_menu_add (app);
 
 }
 
@@ -401,9 +400,9 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	}
 
 	/* plugin menus */
-	for (count = 0; count < g_slist_length (plugin_list); count++)
+	for (count = 0; count < g_list_length (plugins_list); count++)
 	{
-		pd = g_slist_nth_data (plugin_list, count);
+		pd = g_list_nth_data (plugins_list, count);
 		if (!pd->needs_a_document)
 			continue;
 		widget = pd->menu_item;

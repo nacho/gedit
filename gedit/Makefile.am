@@ -63,4 +63,5 @@ gedit_LDADD = 				\
 	$(INTLLIBS) 			\
 	$(EXTRA_GNOME_LIBS)
 
-EXTRA_DIST = 
+EXTRA_DIST =
+

@@ -8,4 +8,6 @@ void dialog_prefs     (void);
 
 gchar * gedit_plugin_program_location_dialog (void);
 
+void gedit_plugin_manager_create (GtkWidget *widget, gpointer data);
+
 #endif /* __DIALOGS_H__ */

@@ -19,8 +19,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
  
-/* Plugins system based on that used in Gnumeric */
- 
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
@@ -37,159 +35,25 @@
 #include "utils.h"
 #include "window.h"
 
-GSList	*plugin_list = NULL;
+GList	*plugins_list = NULL;
 
-/*gchar * gedit_plugin_program_location_dialog (void);*/
-void    gedit_plugin_program_location_clear  (gchar * program_name);
-gchar * gedit_plugin_program_location_get    (gchar * program_name, gchar *plugin_name, gint dont_guess);
-gchar * gedit_plugin_program_location_guess  (gchar * program_name);
-gchar * gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
+void			gedit_plugins_init (void);
+void			gedit_plugins_menu_add (GnomeApp *app);
+
+gchar *			gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
+gchar *			gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
+
+static PluginData *	gedit_plugin_load (const gchar *file);
+#if 0
+static void		gedit_plugin_unload (PluginData *pd);
+#endif
+static void		gedit_plugin_load_dir (char *dir);
+static void		gedit_plugin_load_all (void);
+static gchar*		gedit_plugin_program_location_string (gchar *program_name);
+static gchar*		gedit_plugin_guess_program_location (gchar *program_name);
+static void		gedit_plugin_program_location_clear (gchar *program_name);
 
 
-PluginData *
-plugin_load (const gchar *file)
-{
-	PluginData *pd;
-	guint res;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	g_return_val_if_fail (file != NULL, NULL);
-
-	if (!(pd = g_new0 (PluginData, 1)))
-	{
-		g_warning ("plugin allocation error");
-		return NULL;
-	}
-	
-	pd->file = g_strdup (file);
-	pd->handle = g_module_open (file, 0);
-
-	if (!pd->handle)
-	{
-		g_warning (_("Error, unable to open module file, %s"),
-			   g_module_error ());
-		
-		g_free (pd);
-		return NULL;
-	}
-	
-	if (!g_module_symbol (pd->handle, "init_plugin", 
-			      (gpointer*)&pd->init_plugin))
-	{
-		
-		g_warning (_("Error, plugin does not contain init_plugin function."));
-		goto error;
-	}
-
-	pd->needs_a_document = TRUE;
-	
-	res = pd->init_plugin (pd);
-	if (res != PLUGIN_OK)
-	{
-		g_warning (_("Error, init_plugin returned an error"));
-		goto error;
-	}
-	
-	plugin_list = g_slist_append (plugin_list, pd);
-
-	return pd;
-	
-error:
-	g_module_close (pd->handle);
-	g_free (pd->file);
-	g_free (pd);
-	return NULL;
-}
-
-void
-plugin_unload (PluginData *pd)
-{
-	int w, n;
-	char *path;
-	GnomeApp *app;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_if_fail (pd != NULL);
-	
-	if (pd->can_unload && !pd->can_unload (pd))
-	{
-		g_warning (_("Error, plugin is still in use"));
-		return;
-	}
-	
-	if (pd->destroy_plugin)
-		pd->destroy_plugin (pd);
-	
-	n = g_slist_index (plugin_list, pd);
-	plugin_list = g_slist_remove (plugin_list, pd);
-	
-	path = g_strdup_printf ("%s/", _("_Plugins"));
-	
-	for (w = 0; w < g_list_length (mdi->windows); w++)
-	{
-		app = g_list_nth_data (mdi->windows, w);
-		
-		gnome_app_remove_menu_range (app, path, n, 1);
-	}
-	
-	g_module_close (pd->handle);
-	g_free (pd->file);
-	g_free (pd);
-}
-
-static void
-plugin_load_plugins_in_dir (char *dir)
-{
-	DIR *d;
-	struct dirent *e;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	if ((d = opendir (dir)) == NULL)
-		return;
-	
-	while ((e = readdir (d)) != NULL)
-	{
-		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0)
-		{
-			char *plugin = g_strconcat (dir, e->d_name, NULL);
-
-			plugin_load (plugin);
-			g_free (plugin);
-		}
-	}
-	closedir (d);
-}
-
-static void
-load_all_plugins (void)
-{
-	char *pdir;
-	char const * const home = g_get_home_dir ();
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	/* load user plugins */
-	if (home != NULL)
-	{
-		pdir = gnome_util_prepend_user_home (".gedit/plugins/");
-		/*
-		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
-		*/
-		plugin_load_plugins_in_dir (pdir);
-		g_free (pdir);
-	}
-	
-	/* load system plgins */
-	plugin_load_plugins_in_dir (GEDIT_PLUGINDIR "/");
-}
-
-/**
- * gedit_plugins_init:
- *
- */
 void
 gedit_plugins_init (void)
 {
@@ -199,134 +63,82 @@ gedit_plugins_init (void)
 	if (!g_module_supported ())
 		return;
 	
-	load_all_plugins ();
+	gedit_plugin_load_all ();
 }
 
-/**
- * gedit_plugins_window_add:
- * @app:
- *
- *
- */
 void
-gedit_plugins_window_add (GnomeApp *app)
+gedit_plugins_menu_add (GnomeApp *app)
 {
 	PluginData  *pd;
 	gint         n;
 	gchar       *path;
 	GnomeUIInfo *menu;
+	static gint menu_pos = -1;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (app != NULL);
 
-	n = g_slist_length (plugin_list) + 1 ;
-
-	menu = g_malloc0 ( n * sizeof (GnomeUIInfo));
 	path = g_strdup_printf ("%s/", _("_Plugins"));
-	
-	for (n = 0; n < g_slist_length (plugin_list); n++)
-	{
-		pd = g_slist_nth_data (plugin_list, n);
 
-		menu[n].type = GNOME_APP_UI_ITEM;
-		menu[n].label = g_strdup (pd->name);
-		menu[n].hint = g_strdup (pd->desc);
-		menu[n].moreinfo = pd->private_data;
-		menu[n].pixmap_type = GNOME_APP_PIXMAP_NONE;
-		menu[n+1].type = GNOME_APP_UI_ENDOFINFO;
+	if (menu_pos != -1)
+		gnome_app_remove_menus (app, path, menu_pos);
+
+	n = g_list_length (plugins_list) + 1 ;
+
+	menu = g_malloc0 ( (n + 3)* sizeof (GnomeUIInfo));
+
+	/* Add the plugin manager item */
+	menu[0].type = GNOME_APP_UI_ITEM;
+	menu[0].label = g_strdup(_("Manager ..."));
+	menu[0].hint = g_strdup (_("Add/Remove installed plugins"));
+	menu[0].moreinfo = gedit_plugin_manager_create;
+	menu[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
+	
+	/* Add a Separator*/
+	menu[1].type = GNOME_APP_UI_SEPARATOR;
+
+	menu_pos = 2;
+	
+	for (n = 0; n < g_list_length (plugins_list); n++)
+	{
+		pd = g_list_nth_data (plugins_list, n);
+
+		if (!pd->installed)
+			continue;
+		
+		menu [menu_pos].type = GNOME_APP_UI_ITEM;
+		menu [menu_pos].label = g_strdup (pd->name);
+		menu [menu_pos].hint = g_strdup (pd->desc);
+		menu [menu_pos].moreinfo = pd->private_data;
+		menu [menu_pos].pixmap_type = GNOME_APP_PIXMAP_NONE;
+		menu_pos++;
 	}
+	menu [menu_pos].type = GNOME_APP_UI_ENDOFINFO;
 
 	gnome_app_insert_menus (app, path, menu);
-	g_free (path);
 	gnome_app_install_menu_hints (app, menu);
 
-	for (n = 0; n < g_slist_length (plugin_list); n++)
+	menu_pos = 2;
+	for (n = 0; n < g_list_length (plugins_list); n++)
 	{
-		pd = g_slist_nth_data (plugin_list, n);
+		pd = g_list_nth_data (plugins_list, n);
 
-		pd->menu_item = menu[n].widget;
-		g_free (menu[n].label);
+		if (!pd->installed)
+			continue;
+
+		pd->menu_item = menu [menu_pos].widget;
+		g_free (menu [menu_pos].label);
+		menu_pos++;
 	}
 	
+	g_free (path);
 	g_free (menu);
 
 }
 
-
-gchar*
-gedit_plugin_program_location_string (gchar *program_name)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-	return g_strdup_printf ("/gedit/plugin_programs/%s", program_name);
-}
-
-static gchar*
-gedit_plugin_guess_program_location (gchar *program_name)
-{
-	gchar * location = NULL;
-	gchar * config_string = NULL;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	config_string = gedit_plugin_program_location_string (program_name);
-
-	/* get the program pointed by the config */
-	if (gnome_config_get_string (config_string))
-		location = g_strdup (gnome_config_get_string (config_string));
-
-	/* If there was a program in the config, but it is no good. Clear "sendmail" */
-	if (location)
-		if (gedit_utils_is_program (location, program_name) != GEDIT_PROGRAM_OK)
-		{
-			g_free (location);
-			location = NULL;
-			/* If this was not a good location, clear the bad location on
-			   the config file */
-			gnome_config_set_string (config_string, "");
-			gnome_config_sync ();
-		}
-	g_free (config_string);
-
-	/* If we have no 1st choice yet, get from path */
-	if (!location)
-		location = g_strdup (gnome_is_program_in_path (program_name));
-
-	/* If it isn't on path, look for common places */
-	if (!location)
-	{
-		gchar * look_here [2];
-
-		look_here [0] = g_strdup_printf ("/usr/sbin/%s", program_name);
-		look_here [1] = g_strdup_printf ("/usr/lib/%s",  program_name);
-
-		if (g_file_exists (look_here[0]))
-			location = g_strdup (look_here[0]);
-		else if (g_file_exists (look_here[1]))
-			location = g_strdup (look_here[1]);
-
-		g_free (look_here[0]);
-		g_free (look_here[1]);
-	}
-
-	return location;
-}
-
-void
-gedit_plugin_program_location_clear (gchar *program_name)
-{
-	gchar *config_string;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	config_string = gedit_plugin_program_location_string (program_name);
-	gnome_config_set_string (config_string, "");
-	gnome_config_sync ();
-	g_free (config_string);
-}
-
 gchar *
-gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess, gint default_location)
+gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess)
 {
 	gchar* program_location = NULL;
 	gchar* config_string = NULL;
@@ -452,3 +264,221 @@ gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
 
 	return new_location;
 }
+
+/* --------------------------------------- Private functions ---------------------------------*/
+static PluginData *
+gedit_plugin_load (const gchar *file)
+{
+	PluginData *pd;
+	guint res;
+
+	gchar * config_string;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (file != NULL, NULL);
+	if (!(pd = g_new0 (PluginData, 1)))
+	{
+		g_warning ("plugin allocation error");
+		return NULL;
+	}
+	
+	config_string = g_strdup_printf ("/gedit/installed_plugins/%s", g_basename(file));
+	pd->installed = gnome_config_get_bool(config_string);
+	g_free (config_string);
+	
+	pd->file = g_strdup (file);
+	pd->handle = g_module_open (file, 0);
+
+	if (!pd->handle)
+	{
+		g_warning (_("Error, unable to open module file, %s"),
+			   g_module_error ());
+		g_free (pd);
+		return NULL;
+	}
+	
+	if (!g_module_symbol (pd->handle, "init_plugin", 
+			      (gpointer*)&pd->init_plugin))
+	{
+		
+		g_warning (_("Error, plugin does not contain init_plugin function."));
+		goto error;
+	}
+
+	pd->needs_a_document = TRUE;
+	
+	res = pd->init_plugin (pd);
+	if (res != PLUGIN_OK)
+	{
+		g_warning (_("Error, init_plugin returned an error"));
+		goto error;
+	}
+	
+	plugins_list = g_list_append (plugins_list, pd);
+
+	return pd;
+	
+error:
+	g_module_close (pd->handle);
+	g_free (pd->file);
+	g_free (pd);
+	return NULL;
+}
+
+#if 0
+/* Ot used, but we migth need it latter */
+static void
+gedit_plugin_unload (PluginData *pd)
+{
+	int w, n;
+	char *path;
+	GnomeApp *app;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (pd != NULL);
+	
+	if (pd->can_unload && !pd->can_unload (pd))
+	{
+		g_warning (_("Error, plugin is still in use"));
+		return;
+	}
+	
+	if (pd->destroy_plugin)
+		pd->destroy_plugin (pd);
+	
+	n = g_slist_index (plugins_list, pd);
+	plugins_list = g_slist_remove (plugins_list, pd);
+	
+	path = g_strdup_printf ("%s/", _("_Plugins"));
+	
+	for (w = 0; w < g_list_length (mdi->windows); w++)
+	{
+		app = g_list_nth_data (mdi->windows, w);
+		gnome_app_remove_menu_range (app, path, n, 1);
+	}
+	
+	g_module_close (pd->handle);
+	g_free (pd->file);
+	g_free (pd);
+}
+#endif 
+
+static void
+gedit_plugin_load_dir (char *dir)
+{
+	DIR *d;
+	struct dirent *e;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	if ((d = opendir (dir)) == NULL)
+		return;
+	
+	while ((e = readdir (d)) != NULL)
+	{
+		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0)
+		{
+			char *plugin = g_strconcat (dir, e->d_name, NULL);
+			gedit_plugin_load (plugin);
+			g_free (plugin);
+		}
+	}
+	closedir (d);
+}
+
+static void
+gedit_plugin_load_all (void)
+{
+	char *pdir;
+	char const * const home = g_get_home_dir ();
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	/* load user plugins */
+	if (home != NULL)
+	{
+		pdir = gnome_util_prepend_user_home (".gedit/plugins/");
+		/*
+		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
+		*/
+		gedit_plugin_load_dir (pdir);
+		g_free (pdir);
+	}
+	
+	/* load system plgins */
+	gedit_plugin_load_dir (GEDIT_PLUGINDIR "/");
+}
+
+static gchar*
+gedit_plugin_program_location_string (gchar *program_name)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+	return g_strdup_printf ("/gedit/plugin_programs/%s", program_name);
+}
+
+static gchar*
+gedit_plugin_guess_program_location (gchar *program_name)
+{
+	gchar * location = NULL;
+	gchar * config_string = NULL;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	config_string = gedit_plugin_program_location_string (program_name);
+
+	/* get the program pointed by the config */
+	if (gnome_config_get_string (config_string))
+		location = g_strdup (gnome_config_get_string (config_string));
+
+	/* If there was a program in the config, but it is no good. Clear "sendmail" */
+	if (location)
+		if (gedit_utils_is_program (location, program_name) != GEDIT_PROGRAM_OK)
+		{
+			g_free (location);
+			location = NULL;
+			/* If this was not a good location, clear the bad location on
+			   the config file */
+			gnome_config_set_string (config_string, "");
+			gnome_config_sync ();
+		}
+	g_free (config_string);
+
+	/* If we have no 1st choice yet, get from path */
+	if (!location)
+		location = g_strdup (gnome_is_program_in_path (program_name));
+
+	/* If it isn't on path, look for common places */
+	if (!location)
+	{
+		gchar * look_here [2];
+
+		look_here [0] = g_strdup_printf ("/usr/sbin/%s", program_name);
+		look_here [1] = g_strdup_printf ("/usr/lib/%s",  program_name);
+
+		if (g_file_exists (look_here[0]))
+			location = g_strdup (look_here[0]);
+		else if (g_file_exists (look_here[1]))
+			location = g_strdup (look_here[1]);
+
+		g_free (look_here[0]);
+		g_free (look_here[1]);
+	}
+
+	return location;
+}
+
+static void
+gedit_plugin_program_location_clear (gchar *program_name)
+{
+	gchar *config_string;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	config_string = gedit_plugin_program_location_string (program_name);
+	gnome_config_set_string (config_string, "");
+	gnome_config_sync ();
+	g_free (config_string);
+}
+
