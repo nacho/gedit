@@ -158,7 +158,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	{
 		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
-							  GNOME_PRINT_RANGE_ALL | GNOME_PRINT_RANGE_RANGE,
+							  GNOME_PRINT_RANGE_ALL | GNOME_PRINT_RANGE_RANGE | GNOME_PRINT_RANGE_SELECTION,
 							  1, pji->pages, "A",
 							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
 
@@ -182,6 +182,11 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		pji->print_first =0;
 		pji->print_last =0;
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
+		if (pji->range == GNOME_PRINT_RANGE_SELECTION)
+		{
+			g_warning ("Print selection not implemented\nSetting printing range to PRINT_RANGE_ALL");
+			pji->range = GNOME_PRINT_RANGE_ALL;
+		}
 		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
