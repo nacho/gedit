@@ -83,19 +83,19 @@ typedef struct {
 } gE_PrintJobInfo;
 
 
-       void file_print_cb(GtkWidget *widget, gpointer cbdata);
-static void print_document( gE_document *doc, GnomePrinter *printer);
-static void print_dialog_clicked_cb(GtkWidget *widget, gint button, gpointer data);
-static void print_line(gE_PrintJobInfo *pji);
-static int  print_determine_lines(gE_PrintJobInfo *pji);
-static void print_header(gE_PrintJobInfo *pji, unsigned int page);
-static void start_job(GnomePrintContext *pc);
-static void print_header(gE_PrintJobInfo *pji, unsigned int page);
-/*static void print_row(gE_PrintJobInfo *pji, unsigned int offset, unsigned int bytes, int row); */
-static void end_page(GnomePrintContext *pc);
-static void end_job(GnomePrintContext *pc);
-static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji);
-static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer);
+       void file_print_cb (GtkWidget *widget, gpointer cbdata);
+       void file_print_preview_cb (GtkWidget *widget, gpointer data);
+static void print_document (gE_document *doc, GnomePrinter *printer);
+static void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);
+static void print_line (gE_PrintJobInfo *pji);
+static int  print_determine_lines (gE_PrintJobInfo *pji);
+static void print_header (gE_PrintJobInfo *pji, unsigned int page);
+static void start_job (GnomePrintContext *pc);
+static void print_header (gE_PrintJobInfo *pji, unsigned int page);
+static void end_page (GnomePrintContext *pc);
+static void end_job (GnomePrintContext *pc);
+static void preview_destroy_cb (GtkObject *obj, gE_PrintJobInfo *pji);
+static void set_pji ( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer);
 
 /*
  * PUBLIC: file_print_cb
@@ -105,7 +105,7 @@ static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *prin
  * the world.
  */
 void
-file_print_cb(GtkWidget *widget, gpointer cbdata)
+file_print_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gE_document *doc;
 	GtkWidget   *dialog;
@@ -120,8 +120,17 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show_all(dialog);
 }
 
+void
+file_print_preview_cb (GtkWidget *widget, gpointer data)
+{
+	if(!gnome_mdi_get_active_view(mdi))
+		return;
+	print_document(gE_document_current(), NULL);
+}
+
+
 static void
-print_dialog_clicked_cb(GtkWidget *widget, gint button, gpointer data)
+print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data)
 {
 	if(button == 0) {
 		GnomePrinter *printer;
@@ -138,7 +147,7 @@ print_dialog_clicked_cb(GtkWidget *widget, gint button, gpointer data)
 }
 
 static void
-print_document( gE_document *doc, GnomePrinter *printer)
+print_document (gE_document *doc, GnomePrinter *printer)
 {
 	gE_PrintJobInfo *pji;
 	int i;
@@ -183,7 +192,8 @@ print_document( gE_document *doc, GnomePrinter *printer)
 	g_free( pji->filename);
 }
 
-static void print_line(gE_PrintJobInfo *pji)
+static void
+print_line (gE_PrintJobInfo *pji)
 {
 	float x, y;
 	char * temp = g_malloc(265);
@@ -211,7 +221,8 @@ static void print_line(gE_PrintJobInfo *pji)
 	g_free(temp);
 }
 
-static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer)
+static void
+set_pji (gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *printer)
 {
 	pji->master = gnome_print_master_new();
 	pji->paper = gnome_paper_with_name( gnome_paper_name_default());
@@ -255,7 +266,8 @@ static void set_pji( gE_PrintJobInfo * pji, gE_document *doc, GnomePrinter *prin
 	pji->current_line = 0;
 }
 
-static int print_determine_lines(gE_PrintJobInfo *pji)
+static int
+print_determine_lines (gE_PrintJobInfo *pji)
 {
 	/* For now count the number of /n 's*/
 	int lines=1;
@@ -267,11 +279,13 @@ static int print_determine_lines(gE_PrintJobInfo *pji)
 	return lines;
 }
 
-static void start_job(GnomePrintContext *pc)
+static void
+start_job (GnomePrintContext *pc)
 {
 }
 
-static void print_header(gE_PrintJobInfo *pji, unsigned int page)
+static void
+print_header (gE_PrintJobInfo *pji, unsigned int page)
 {
 	guchar* text1 = g_strdup(pji->filename);
 	guchar* text2 = g_strdup_printf(_("Page: %i/%i"),page,pji->pages);
@@ -300,27 +314,23 @@ static void print_header(gE_PrintJobInfo *pji, unsigned int page)
 	gnome_print_setfont (pji->pc, font);
 }
 
-static void end_page(GnomePrintContext *pc)
+static void
+end_page (GnomePrintContext *pc)
 {
 	gnome_print_showpage (pc);
 }
 
-static void end_job(GnomePrintContext *pc)
+static void
+end_job (GnomePrintContext *pc)
 {
 }
 
-static void preview_destroy_cb(GtkObject *obj, gE_PrintJobInfo *pji)
+static void
+preview_destroy_cb (GtkObject *obj, gE_PrintJobInfo *pji)
 {
 	gtk_object_unref(GTK_OBJECT(pji->master));
 	g_free (pji);
 }
 
-/* Defined but not used */
-#if 0
-static void print_preview_cb(GtkWidget *w)
-{
-	if(!gnome_mdi_get_active_view(mdi))
-		return;
-	print_document(gE_document_current(), NULL);
-}
-#endif /* #if 0 */
+
+

@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit Menus Definition
@@ -103,6 +104,7 @@ GnomeUIInfo gedit_file_menu [] = {
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_PRINT_ITEM(file_print_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_ITEM(N_("Print preview..."), N_("Preview data to be printed"), file_print_preview_cb, NULL),
 	
 	GNOMEUIINFO_SEPARATOR, 
 

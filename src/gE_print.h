@@ -21,6 +21,13 @@
 #define __GE_PRINT_H__
 
 extern void file_print_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_print_preview_cb (GtkWidget *widget, gpointer data);
 
 #endif /* __GE_PRINT_H__ */
+
+
+
+
+
+
 
