@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2002-01-22 15:42+0100\n"
+"POT-Creation-Date: 2002-01-24 20:36+0100\n"
 "PO-Revision-Date: 2000-08-27  11:17+0100\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Gnome Text Editor"
 msgstr "Eagarthóir Teacs"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:480
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:494
 msgid "gedit"
 msgstr "gedit"
 
@@ -43,7 +43,7 @@ msgstr ""
 msgid "Get info on current document."
 msgstr "Rphost an capéis seo"
 
-#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:401
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:403
 msgid "Word count"
 msgstr ""
 
@@ -51,14 +51,15 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:402
+#: plugins/docinfo/docinfo.c:404
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:406 plugins/sample/sample.c:173
+#: plugins/docinfo/docinfo.c:408 plugins/sample/sample.c:173
+#: plugins/shell_output/shell_output.c:456 plugins/time/time.c:554
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr ""
 
@@ -75,18 +76,75 @@ msgstr "Fáilte Domhain"
 msgid "Sample 'hello world' plugin."
 msgstr ""
 
-#: plugins/time/time.c:216
-msgid "Time"
-msgstr ""
-
-#: plugins/time/time.c:217
+#: plugins/shell_output/shell_output.c:36
 #, fuzzy
-msgid "Inserts the current time into the current document."
+msgid "Insert shell _output"
+msgstr "gedit: plogála r-phost"
+
+#: plugins/shell_output/shell_output.c:39
+#, fuzzy
+msgid "Insert the shell output in the current document."
 msgstr "Priontáil an comhad seo"
 
-#: plugins/time/time.c:219
-msgid "Copyright (C) 2002 - Alex Roberts"
+#: plugins/shell_output/shell_output.c:138
+#: plugins/shell_output/shell_output.c:452
+#, fuzzy
+msgid "Shell output"
+msgstr "gedit: plogála r-phost"
+
+#: plugins/shell_output/shell_output.c:151
+msgid "_Run"
 msgstr ""
+
+#: plugins/shell_output/shell_output.c:240
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:269
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:322
+msgid "An error occurs while running the selected command."
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:453
+msgid ""
+"Exucute a program and insert its output in the current document at the "
+"current cursor position"
+msgstr ""
+
+#: plugins/time/time.c:39
+msgid "_Insert Date/Time"
+msgstr ""
+
+#: plugins/time/time.c:42
+#, fuzzy
+msgid "Insert current date and time at the cursor position."
+msgstr "Priontáil an comhad seo"
+
+#: plugins/time/time.c:227
+msgid "Available formats"
+msgstr ""
+
+#: plugins/time/time.c:268
+msgid "Configure insert date/time plugin"
+msgstr ""
+
+#: plugins/time/time.c:551
+msgid "Insert Date/Time"
+msgstr ""
+
+#: plugins/time/time.c:552
+#, fuzzy
+msgid "Inserts the current date and time at the cursor position."
+msgstr "Priontáil an comhad seo"
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, c-format
@@ -114,20 +172,29 @@ msgstr ""
 msgid "Load"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:418
+#: src/dialogs/gedit-dialog-plugin-manager.c:316
+#, fuzzy
+msgid "Module file name"
+msgstr "Ainm Comhad"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:317
+msgid "Author(s)"
+msgstr ""
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:426
+#: src/dialogs/gedit-dialog-plugin-manager.c:458
 #, fuzzy
 msgid "Plugin Manager"
 msgstr "_Plogálí"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
+#: src/dialogs/gedit-dialog-plugin-manager.c:485
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:539
+#: src/dialogs/gedit-dialog-plugin-manager.c:574
 msgid "Could not create the Plugin Manager dialog"
 msgstr ""
 
@@ -141,7 +208,7 @@ msgstr ""
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
-#: src/gedit-file.c:821 src/gedit-ui.xml.h:85
+#: src/gedit-file.c:823 src/gedit-ui.xml.h:85
 msgid "_Replace"
 msgstr ""
 
@@ -237,24 +304,24 @@ msgstr ""
 msgid "Impossible to update gedit settings."
 msgstr ""
 
-#: src/gedit-commands.c:483
+#: src/gedit-commands.c:497
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 
-#: src/gedit-document.c:488 src/gedit-document.c:499
+#: src/gedit-document.c:471 src/gedit-document.c:482
 #, c-format
 msgid "%s %d"
 msgstr ""
 
-#: src/gedit-document.c:488 src/gedit-document.c:499
+#: src/gedit-document.c:471 src/gedit-document.c:482
 msgid "Untitled"
 msgstr "Gan Tideál"
 
-#: src/gedit-document.c:613 src/gedit-document.c:719
+#: src/gedit-document.c:596 src/gedit-document.c:702
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
 
-#: src/gedit-document.c:1072
+#: src/gedit-document.c:1055
 msgid "It is not possible to revert an Untitled document"
 msgstr ""
 
@@ -273,27 +340,26 @@ msgstr ""
 msgid "Select a filename to save"
 msgstr ""
 
-#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1094
-#: src/gedit-file.c:1137
+#: src/gedit-file.c:237 src/gedit-file.c:367 src/gedit-file.c:1148
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "Oscaíl comhad"
 
-#: src/gedit-file.c:247 src/gedit-file.c:1042
+#: src/gedit-file.c:248 src/gedit-file.c:1046
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgstr "Sabhail as..."
 
-#: src/gedit-file.c:264 src/gedit-file.c:1078
+#: src/gedit-file.c:265 src/gedit-file.c:1082
 #, c-format
 msgid "Loaded %i files"
 msgstr ""
 
-#: src/gedit-file.c:334 src/gedit-file.c:356
+#: src/gedit-file.c:335 src/gedit-file.c:357
 msgid "Open File ..."
 msgstr "Oscáil Comhad..."
 
-#: src/gedit-file.c:403 src/gedit-file.c:451
+#: src/gedit-file.c:404 src/gedit-file.c:452
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -301,16 +367,16 @@ msgid ""
 "%s."
 msgstr ""
 
-#: src/gedit-file.c:520 src/gedit-file.c:690 src/gedit-file.c:838
+#: src/gedit-file.c:522 src/gedit-file.c:692 src/gedit-file.c:840
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "Sabhail as..."
 
-#: src/gedit-file.c:535 src/gedit-file.c:737 src/gedit-file.c:954
+#: src/gedit-file.c:537 src/gedit-file.c:739 src/gedit-file.c:958
 msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:542 src/gedit-file.c:744
+#: src/gedit-file.c:544 src/gedit-file.c:746
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -318,37 +384,37 @@ msgid ""
 "%s."
 msgstr ""
 
-#: src/gedit-file.c:570 src/gedit-file.c:697 src/gedit-file.c:845
+#: src/gedit-file.c:572 src/gedit-file.c:699 src/gedit-file.c:847
 msgid "The document has not been saved."
 msgstr ""
 
-#: src/gedit-file.c:580 src/gedit-file.c:695 src/gedit-file.c:843
+#: src/gedit-file.c:582 src/gedit-file.c:697 src/gedit-file.c:845
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:649
+#: src/gedit-file.c:651
 msgid "Save As..."
 msgstr "Sabhail as..."
 
-#: src/gedit-file.c:682
+#: src/gedit-file.c:684
 #, fuzzy
 msgid "Save as ..."
 msgstr "Sabhail as..."
 
-#: src/gedit-file.c:816
+#: src/gedit-file.c:818
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:940
+#: src/gedit-file.c:944
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:961
+#: src/gedit-file.c:965
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -356,16 +422,21 @@ msgid ""
 "%s."
 msgstr ""
 
-#: src/gedit-file.c:989
+#: src/gedit-file.c:993
 msgid "The document has not been reverted."
 msgstr ""
 
-#: src/gedit-file.c:999
+#: src/gedit-file.c:1003
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1191
+#: src/gedit-file.c:1103
+#, fuzzy, c-format
+msgid "Loaded file %s"
+msgstr "Oscaíl comhad"
+
+#: src/gedit-file.c:1202
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -401,47 +472,52 @@ msgstr ""
 msgid "(readonly)"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:137
+#: src/gedit-plugins-engine.c:154
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:152
+#: src/gedit-plugins-engine.c:169
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:162
+#: src/gedit-plugins-engine.c:179
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:172
+#: src/gedit-plugins-engine.c:189
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr ""
 
-#: src/gedit-plugins-engine.c:202
+#: src/gedit-plugins-engine.c:219
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:210
+#: src/gedit-plugins-engine.c:227
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:295 src/gedit-plugins-engine.c:355
+#: src/gedit-plugins-engine.c:302
+#, c-format
+msgid "Error, impossible to save settings of the plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:322
+#: src/gedit-plugins-engine.c:397
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:397
+#: src/gedit-plugins-engine.c:469
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
@@ -472,12 +548,12 @@ msgstr "_Comhad"
 msgid "Page: %d"
 msgstr "Leathanach: %i/%i"
 
-#: src/gedit-print.c:464
+#: src/gedit-print.c:468
 #, fuzzy
 msgid "gedit - Print Preview"
 msgstr "gedit: Roghnachais..."
 
-#: src/gedit-print.c:540
+#: src/gedit-print.c:544
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -868,16 +944,16 @@ msgstr "_Barr"
 msgid "_Undo"
 msgstr "Leasú"
 
-#: src/gedit-view.c:803
+#: src/gedit-view.c:825
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:841
+#: src/gedit-view.c:863
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:843
+#: src/gedit-view.c:865
 msgid "  INS"
 msgstr ""
 
@@ -961,10 +1037,6 @@ msgstr "Eagarthóir Teacs"
 #~ msgstr "Rphost an capéis seo"
 
 #, fuzzy
-#~ msgid "Shell Output"
-#~ msgstr "gedit: plogála r-phost"
-
-#, fuzzy
 #~ msgid "Sort a document."
 #~ msgstr "Capéiseanna"
 
@@ -1001,10 +1073,6 @@ msgstr "Eagarthóir Teacs"
 #, fuzzy
 #~ msgid "_Subject:"
 #~ msgstr "Ábair:"
-
-#, fuzzy
-#~ msgid "filename"
-#~ msgstr "Ainm Comhad"
 
 #, fuzzy
 #~ msgid "gedit: E-mail plugin"
