@@ -28,6 +28,7 @@
 #include "main.h"
 #include "gE_prefs.h"
 #include "toolbar.h"
+#include "msgbox.h"
 
 
 typedef struct _gE_prefbox {
@@ -287,7 +288,7 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 {
 	window = (gE_window *) cbwindow;
 
-	mbprintf("window->tab_pos = %d", window->tab_pos);
+	/*mbprintf("window->tab_pos = %d", window->tab_pos);*/
 	mbprintf("window->auto_indent = %d", window->auto_indent);
 	mbprintf("window->show_status = %d", window->show_status);
 	mbprintf("window->have_toolbar = %d", window->have_toolbar);

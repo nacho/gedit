@@ -118,14 +118,14 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 		 * buffer.
 		 */
 		size = 2 * (doc->sb->st_size + 1);
-		while ((buf = (char *)malloc(size)) == NULL)
+		while ((buf = (char *)g_malloc(size)) == NULL)
 			size /= 2;
 #ifdef DEBUG
 		printf("size %lu is ok (using half)\n", (gulong)size);
 #endif
-		free(buf);
+		g_free(buf);
 		size /= 2;
-		if ((buf = (char *)malloc(size + 1)) == NULL) {
+		if ((buf = (char *)g_malloc(size + 1)) == NULL) {
 			perror("gE_file_open: unable to malloc read buffer");
 			close(fd);
 			return 1;
@@ -154,7 +154,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 #endif
 			}
 		}
-		free(buf);
+		g_free(buf);
 		close(fd);
 		gtk_text_thaw(GTK_TEXT(doc->text));
 	} /* filesize > 0 */

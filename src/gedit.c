@@ -33,6 +33,7 @@
 #include "gE_prefs.h"
 #include "gE_plugin_api.h"
 #include "msgbox.h"
+#include "gE_files.h"
 
 #ifdef WITH_GMODULE_PLUGINS
 #include <gE_plugin.h>
@@ -73,7 +74,7 @@ gint file_open_wrapper (gE_data *data)
 	gE_document_new(data->window);
 	nfile = g_malloc(strlen(name)+1);
 	strcpy(nfile, name);
-	gE_file_open (data->window, gE_document_current(data->window), nfile);
+	(gint) gE_file_open (data->window, gE_document_current(data->window), nfile);
 
 	return FALSE;
 }

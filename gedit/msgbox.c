@@ -47,7 +47,7 @@ typedef struct {
 static gE_msgbox msgbox;
 
 
-static void msgbox_append(char *msg);
+static void msgbox_append(const char *msg);
 static void msgbox_clear(void);
 static void msgbox_truncate(void);
 static void msgbox_set_sb(void);
@@ -231,7 +231,7 @@ msgbox_show(GtkWidget *w, gpointer data)
  * before the actual string provided by the user.
  */
 static void
-msgbox_append(char *msg)
+msgbox_append(const char *msg)
 {
 	time_t curtime;
 	char *timestr, *buf;

@@ -36,6 +36,7 @@
 #include "msgbox.h"
 #include "toolbar.h"
 #include "gE_prefs_box.h"
+#include "gE_prefslib.h"
 
 #ifdef WITHOUT_GNOME
 #include "xpm/tb_new.xpm"
@@ -126,7 +127,7 @@ static toolbar_data_t flw_tb_data[] = {
 	{ " Print ", "Print file", "Toolbar/Print", tb_print_xpm,
 		(GtkSignalFunc)file_print_cb },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ " Ok ", "Close list window", "Ok", exit_xpm,
+	{ " Ok ", "Close list window", "Ok", tb_exit_xpm,
 		(GtkSignalFunc)flw_destroy },
 	{ NULL, NULL, NULL, NULL, NULL }
 };

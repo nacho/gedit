@@ -79,7 +79,7 @@ typedef struct _gE_prefs_data {
 
 static gE_prefs_data *prefs;
 #ifdef WITHOUT_GNOME
-static gE_Prop_Box *pbox;
+gE_Prop_Box *pbox;
 #endif
 
 void cancel()
@@ -87,7 +87,8 @@ void cancel()
   #ifndef WITHOUT_GNOME
   gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
   #else
-  gtk_widget_destroy (GTK_WIDGET (pbox->window));
+  gtk_widget_hide (GTK_WIDGET (pbox->window));
+  g_free (pbox);
   #endif
   g_free(prefs);
   prefs = NULL;
@@ -115,8 +116,13 @@ GtkStyle *style;
 
 }
 
+void gE_apply(
 #ifndef WITHOUT_GNOME
-void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
+GnomePropertyBox *pbox,
+#else
+gE_Prop_Box *pbox,
+#endif
+ gint page, gE_data *data)
 {
   FILE *file;
   gchar *rc;
@@ -158,8 +164,9 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 
 }
 
-#else
 
+
+#ifdef FOOBAR
 void gE_gtk_apply (gE_Prop_Box *pbox, gint page, gE_data *data)
 {
   FILE *file;
@@ -176,7 +183,7 @@ printf("eh.\n");
   
   /* Font Settings */
     data->window->font = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->font)));
-  	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
+  /*	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
 	{
 		printf ("Couldn't open gtk rc file for parsing.\n");
 		return;
@@ -194,7 +201,7 @@ printf("eh.\n");
 	fprintf(file, "  font = \"%s\"\n", data->window->font);
 	fprintf(file, "}\n");
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
-	fclose(file);  
+	fclose(file); */ 
 printf("huh\n");
   gE_window_refresh(data->window);
   gE_save_settings(data->window, data->window);
@@ -220,7 +227,7 @@ printf("gpn...\n");
 #endif
 
   vbox = gtk_vbox_new(FALSE, 0);
-  gtk_container_border_width (GTK_CONTAINER (vbox), 10);
+  /*gtk_container_border_width (GTK_CONTAINER (GTK_BOX(vbox)), 10);*/
   #ifdef WITHOUT_GNOME
   gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), vbox, TRUE, TRUE, 0);
   #endif
@@ -417,10 +424,10 @@ static GtkWidget *font_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  /* label = gtk_label_new (N_("(Remember to Restart gEdit for font changes to take effect)")); As i've got fonts loading dynamically now, this label is uneeded, but it may come in useful sometime 		-- Alex */
+  /* label = gtk_label_new (N_("(Remember to Restart gEdit for font changes to take effect)")); As i've got fonts loading dynamically now, this label is uneeded, but it may come in useful sometime 		-- Alex
   
   gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, TRUE, 0);
-  gtk_widget_show (label);
+  gtk_widget_show (label);*/
 
   
   return vbox;
@@ -430,7 +437,7 @@ static GtkWidget *font_page_new()
 #ifdef WITHOUT_GNOME
 void apply_close(gE_data *data)
 {
-  gE_gtk_apply(pbox, 1, data);
+  gE_apply(pbox, 1, data);
   
   cancel();
 
@@ -443,7 +450,7 @@ void gE_property_box_new(gE_data *data)
 
  
   printf(".\n");
-  pbox = g_malloc(sizeof(gE_Prop_Box));
+  pbox = g_malloc0(sizeof(gE_Prop_Box));
 printf("..\n");
   pbox->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 printf(".X.\n");
@@ -460,7 +467,7 @@ printf(".!.\n");
 	gtk_widget_show(vbox);
 
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+	gtk_container_border_width(GTK_CONTAINER(GTK_BOX(hbox)), 10);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
  printf("..\n");
@@ -473,6 +480,7 @@ printf(".!.\n");
   label = gtk_label_new ("General");
   pbox->gen_vbox = gtk_vbox_new (FALSE, 0);
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), pbox->gen_vbox, label);
+ /* gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), general_page_new(), label);*/
   gtk_widget_show(pbox->gen_vbox);
   gtk_widget_show(label);
   
@@ -518,7 +526,7 @@ printf(".!.\n");
 
   pbox->apply_button = gtk_button_new_with_label ("Apply");
   gtk_signal_connect (GTK_OBJECT (pbox->apply_button), "clicked",
-			  GTK_SIGNAL_FUNC (gE_gtk_apply),
+			  GTK_SIGNAL_FUNC (gE_apply),
 			  data);
   gtk_box_pack_start(GTK_BOX(hbox), pbox->apply_button, TRUE, TRUE, 0);
   gtk_widget_show (pbox->apply_button);
@@ -531,7 +539,7 @@ printf(".!.\n");
   gtk_widget_show (pbox->close_button);
   
 
-  gtk_widget_show (pbox->window);
+  gtk_widget_show_all (pbox->window);
 
 }  
 #endif
@@ -566,7 +574,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
   
 
-   prefs->pbox = GNOME_PROPERTY_BOX (gnome_property_box_new ());
+   prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
   
 
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
@@ -579,7 +587,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "apply",
 		      GTK_SIGNAL_FUNC (gE_apply), data);
 
- 
+
   /* General Settings */
   label = gtk_label_new ("General");
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
@@ -589,7 +597,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   label = gtk_label_new ("Print");
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            print_page_new(), label);
-                                             
+
   /* Font Settings */
   label = gtk_label_new ("Font");
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
@@ -618,7 +626,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
-  gtk_widget_show_all (prefs->pbox);    
+  gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
   #endif                                    
 }
 

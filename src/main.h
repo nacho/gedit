@@ -71,15 +71,7 @@ typedef struct _gE_window {
 	                         Recent Documents menu */
 #ifdef WITHOUT_GNOME
 	GtkWidget *menubar_handle;	/* holds the menubar */
-	gboolean auto_indent;
-	gboolean show_tabs;
-	gboolean show_status;
-	gboolean have_toolbar;
-	gboolean have_tb_pix;
-	gboolean have_tb_text;
-	gboolean show_tooltips;
-	gboolean use_relief_toolbar;
-#else
+#endif
 	gint auto_indent;
 	gint show_tabs;
 	gint show_status;
@@ -88,7 +80,7 @@ typedef struct _gE_window {
 	gint have_tb_pix;
 	gint have_tb_text;
 	gint use_relief_toolbar;
-#endif
+	
 	gchar *print_cmd;
 	gchar *font;
 	GtkPositionType tab_pos;

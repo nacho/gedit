@@ -119,7 +119,7 @@ gE_window_new(void)
 		GTK_SIGNAL_FUNC(gE_destroy_window), data);
 	gtk_window_set_wmclass(GTK_WINDOW(w->window), "gEdit", "gedit");
 	gtk_window_set_title(GTK_WINDOW(w->window), GEDIT_ID);
-	gtk_widget_set_usize(GTK_WIDGET(w->window), 595, 390);
+	gtk_widget_set_usize(GTK_WIDGET(w->window), 630, 390);
 	gtk_window_set_policy(GTK_WINDOW(w->window), TRUE, TRUE, FALSE);
 	gtk_container_border_width(GTK_CONTAINER(w->window), 0);
 	box1 = gtk_vbox_new(FALSE, 0);

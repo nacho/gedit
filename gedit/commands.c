@@ -410,10 +410,10 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	GtkWidget *text = data->temp2;
 	int x;
 	
-	x = GTK_TEXT(text)->current_line->data;
+	/*x = GTK_TEXT(text)->current_line->data;*/
 	
-	/*sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);*/
-	sprintf(line,"%d", x);
+	sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
+	/*sprintf(line,"%d", x);*/
 	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
 	
 	gtk_label_set (GTK_LABEL(data->window->line_label), line);
@@ -553,7 +553,7 @@ file_save_cb(GtkWidget *widget, gpointer cbdata)
 		file_save_as_cb(NULL, data);
 	else
 	 if ((gE_file_save(data->window, gE_document_current(data->window),
-	               gE_document_current(data->window)->filename)) != NULL)
+	               gE_document_current(data->window)->filename)) != 0)
 	   {
 	gE_msgbar_set(data->window, "Read only file!");
 	file_save_as_cb(NULL, data);
@@ -1187,4 +1187,3 @@ void options_toggle_status_bar_cb (GtkWidget *w, gE_window *window)
 {
 	gE_window_set_status_bar (window, !window->show_status);
 }
-

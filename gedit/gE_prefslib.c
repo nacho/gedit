@@ -24,6 +24,7 @@
 #include <sys/stat.h>
 #include <gtk/gtk.h>
 #include <fcntl.h>
+#include <unistd.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
@@ -143,7 +144,7 @@ int gE_prefs_open ()
 	gE_pref *new = NULL;
 	FILE *fp;
 	char line[256];
-	char *ptr, *ptr2, *filename;
+	gchar *ptr, *ptr2, *filename;
 
 	if ((filename = gE_prefs_open_file ("geditrc", "r")) == NULL)
 	{
@@ -162,7 +163,8 @@ int gE_prefs_open ()
 	while (fgets(line, 256, fp))
 	{
 		new = g_malloc0(sizeof(gE_pref));
-		ptr = ptr2 = strdup(line);
+		(char *)ptr = strdup(line);
+		(char *)ptr2 = strdup(line);
 
 		while (*ptr2 != '\0' && *ptr2 != '=')
 			ptr2++;
