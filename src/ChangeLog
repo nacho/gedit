@@ -1,3 +1,9 @@
+Mon Aug 24 07:56:59 1998  Tim Janik  <timj@gtk.org>
+
+	* msgbox.h (mbprintf): feature G_GNUC_PRINTF() macro.
+	* msgbox.c (mbprintf): use g_strdup_vprintf() instead
+	of_g_vsprintf().
+
 1998-08-23  Alex Roberts <bse@dial.pipex.com>
 
 	* Separated plugins into their own directories

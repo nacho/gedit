@@ -62,26 +62,19 @@ static char *msgdbg_str = "added a message!";
  *
  * print a formatted message to a the msgbox
  *
- * we need to use g_vsprintf(), which is in glib/gstring.c, but isn't found in
- * glib.h.  and of course, we can't have gstring.h be public because it might
- * be indecent exposure.  basically, we use g_vsprintf() to build a buffer of
- * the right/exact size needed to print the message.  if we don't, then we'd
- * have to parse the va_list and check all the printf formatters.
  */
-extern char *g_vsprintf (const gchar *fmt, va_list *args, va_list *args2);
 
 void
 mbprintf(const char *fmt, ...)
 {
-	va_list ap1, ap2;
-	char *buf;
+        va_list args;
+	gchar *buf;
 
-	va_start(ap1, fmt);
-	va_start(ap2, fmt);
-	buf = g_vsprintf(fmt, &ap1, &ap2);
-	va_end(ap1);
-	va_end(ap2);
-	msgbox_append(buf);
+	va_start (args, fmt);
+	buf = g_strdup_vprintf (fmt, args);
+	va_end (args);
+	msgbox_append (buf);
+	g_free (buf);
 } /* mbprintf */
 
 

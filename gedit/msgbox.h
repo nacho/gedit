@@ -21,7 +21,7 @@
 
 #define mbprint(x)	mbprintf(x);
 
-extern void mbprintf(const char *fmt, ...);
+extern void mbprintf(const char *fmt, ...) G_GNUC_PRINTF (1, 2);
 extern void msgbox_create(void);
 extern void msgbox_show(GtkWidget *, gpointer data);
 extern void msgbox_close(void);
