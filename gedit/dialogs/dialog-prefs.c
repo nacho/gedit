@@ -550,10 +550,14 @@ dialog_prefs_impl (GladeXML *gui)
 	gedit_debug (DEBUG_PREFS, "");
 	
 	propertybox = glade_xml_get_widget (gui, "propertybox");
-	notebook    = glade_xml_get_widget (gui, "page_1");
+	/*
+	notebook    = glade_xml_get_widget (gui, "notebook");
+	*/
 
 	g_return_if_fail (propertybox != NULL);
+	/*
 	g_return_if_fail (notebook    != NULL);
+	*/
 	
 	/* glade won't let me set the title of the propertybox */
 	gtk_window_set_title (GTK_WINDOW (propertybox), _("gedit: Preferences"));
@@ -573,9 +577,10 @@ dialog_prefs_impl (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (gtk_false), NULL);
 	gtk_signal_connect (GTK_OBJECT (propertybox),"help",
 			    GTK_SIGNAL_FUNC (help_cb), NULL);
-
+	/*
 	gtk_signal_connect (GTK_OBJECT (notebook),"switch_page",
 			    GTK_SIGNAL_FUNC (gedit_prefs_notebook_switch_page), NULL);
+	*/
 
 
 	

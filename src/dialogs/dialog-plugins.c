@@ -410,7 +410,7 @@ gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpoin
 						"Description : %s\n"),
 					      plugin->name,
 					      plugin->author,
-					      plugin->desc);
+					      plugin->long_desc);
 	text_length = strlen (plugin_description);
 	dummy_pos = 0;
 	gtk_editable_insert_text (GTK_EDITABLE(plugin_info_local), plugin_description, text_length, &dummy_pos);

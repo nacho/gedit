@@ -1,7 +1,13 @@
 2000-06-30    <chema@celorio.com>
 
+	* plugin.h (struct _PluginData): add long_desc
+
 	* dialogs/dialog-plugins.c: 
-	(gedit_plugin_manager_item_clicked): find a work arround for the crash.
+	(gedit_plugin_manager_item_clicked): use pd->long_desc v.s. pd->desc
+
+2000-06-30    <chema@celorio.com>
+
+	* dialogs/dialog-plugins.c: find a work arround for the crash.
 
 2000-06-29  Chema Celorio  <chema@celorio.com>
 

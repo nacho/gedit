@@ -149,6 +149,7 @@ init_plugin (PluginData *pd)
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Convert");
 	pd->desc = _("Number Converter");
+	pd->long_desc = _("Number Converter");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = FALSE;
 

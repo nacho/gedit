@@ -54,6 +54,7 @@ init_plugin (PluginData *pd)
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");
+	pd->long_desc = _("Sample 'hello world' plugin.");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = TRUE;
 	
@@ -61,13 +62,6 @@ init_plugin (PluginData *pd)
 	
 	return PLUGIN_OK;
 }
-
-
-
-
-
-
-
 
 
 

@@ -322,12 +322,24 @@ gedit_plugin_load (const gchar *file)
 	}
 
 	pd->needs_a_document = TRUE;
-	pd->installed_by_default = FALSE;	
+	pd->installed_by_default = FALSE;
+	pd->desc = NULL;
+	pd->long_desc = NULL;
 	
 	res = pd->init_plugin (pd);
 	if (res != PLUGIN_OK)
 	{
 		g_warning (_("Error, init_plugin returned an error"));
+		goto error;
+	}
+	if (pd->desc == NULL)
+	{
+		g_warning (_("Error, the plugin did not specified a description"));
+		goto error;
+	}
+	if (pd->long_desc == NULL)
+	{
+		g_warning (_("Error, the plugin did not specified a long description"));
 		goto error;
 	}
 

@@ -45,6 +45,7 @@ struct _PluginData
 	
 	gchar	*name;
 	gchar	*desc;
+	gchar	*long_desc;
 	gchar	*author;
 
 	/* if the plugin needs an open document to

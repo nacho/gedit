@@ -69,6 +69,7 @@ init_plugin (PluginData *pd)
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Reverse");
 	pd->desc = _("Reverse text");
+	pd->long_desc = _("Reverse text");
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
 	pd->needs_a_document = TRUE;
 	

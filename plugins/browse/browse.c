@@ -248,6 +248,7 @@ init_plugin (PluginData *pd)
 	pd->destroy_plugin = gedit_plugin_destroy;
 	pd->name = _("Browse");
 	pd->desc = _("Web browse plugin");
+	pd->long_desc = _("Web browse plugin");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = FALSE;
 

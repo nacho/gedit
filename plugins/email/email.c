@@ -261,6 +261,8 @@ init_plugin (PluginData *pd)
 	pd->destroy_plugin = gedit_plugin_destroy;
 	pd->name = _("Email");
 	pd->desc = _("Email the current document");
+	pd->long_desc = _("Email the current document to a specified email address\n"
+			  "gedit searches for sendmail to use this plugin.");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = TRUE;
 	pd->private_data = (gpointer)gedit_plugin_create_dialog;

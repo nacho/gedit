@@ -18,11 +18,16 @@
   <class>GnomePropertyBox</class>
   <name>propertybox</name>
   <visible>False</visible>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
 
   <widget>
     <class>GtkNotebook</class>
     <child_name>GnomePropertyBox:notebook</child_name>
-    <name>notebook1</name>
+    <name>notebook</name>
     <can_focus>True</can_focus>
     <signal>
       <name>switch_page</name>
