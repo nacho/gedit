@@ -30,7 +30,7 @@
 
 
 /* TODO: 
- * [ ] It should be rewritten to use GConf 
+ * [X] It should be rewritten to use GConf 
  * [ ] check if all the preferences are really used in the code 
  * [ ] stop saving everything in /gedit2/Global/, split config file
  *     into sections
@@ -44,7 +44,6 @@
 #include "gedit-prefs.h"
 #include "gedit-debug.h"
 #include "gedit2.h"
-
 
 
 GeditPreferences *settings = NULL;
@@ -97,6 +96,9 @@ gedit_prefs_save_settings (void)
 	GdkWindow *toplevel;
 	gint root_x;
 	gint root_y;
+
+	gedit_debug (DEBUG_PREFS, "START");
+	g_return_if_fail (gconf_client != NULL);
 
 	gconf_client_set_int (gconf_client,
 			      GEDIT_BASE_KEY GEDIT_PREF_TAB_POS,
@@ -286,13 +288,14 @@ gedit_prefs_save_settings (void)
 #if 0 /* FIXME */
 	gedit_plugin_save_settings ();
 #endif	
-	gedit_debug (DEBUG_PREFS, "end");
+	gedit_debug (DEBUG_PREFS, "END");
 }
 
 void
 gedit_prefs_load_settings (void)
 {
 	gedit_debug (DEBUG_PREFS, "");
+	g_return_if_fail (gconf_client != NULL);
 
 	if (!settings)
 	{
@@ -417,10 +420,16 @@ gedit_prefs_load_settings (void)
 	settings->papersize = gconf_client_get_string (gconf_client,
 					      GEDIT_BASE_KEY GEDIT_PREF_PAPERSIZE,
 					      NULL);
-#if 0 /* FIXME */
+	
 	if (settings->papersize == NULL)
+	{
+		/* FIXME */
+		/*
 		settings->papersize = g_strdup (gnome_paper_name_default());
-#endif
+		*/
+		settings->papersize = "FIXME";
+	}
+	
 	if (settings->font != NULL)
 		g_free (settings->font);
 	
@@ -462,7 +471,11 @@ static void gedit_prefs_notify_cb (GConfClient *client,
 
 void gedit_prefs_init ()
 {
+	gedit_debug (DEBUG_PREFS, "");
+
 	gconf_client = gconf_client_get_default ();
+	
+	g_return_if_fail (gconf_client != NULL);
 
 	gconf_client_add_dir (gconf_client,
 			      GEDIT_BASE_KEY,

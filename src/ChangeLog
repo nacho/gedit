@@ -1,4 +1,13 @@
+2001-12-11  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-prefs.c (gedit_prefs_save_settings): check if gconf_client != NULL
+	(gedit_prefs_load_settings): ditto
+	(gedit_prefs_init): ditto
+
+	* bonobo-mdi.c: calls to g_print removed
+
 2001-12-10  James Willcox  <jwillcox@cs.indiana.edu>
+
 	* gedit-prefs.c: Converted to use gconf.
 
 2001-12-10  Paolo Maggi  <maggi@athena.polito.it>

@@ -862,10 +862,9 @@ app_clone(BonoboMDI *mdi, BonoboWindow *win)
 		if (dock != NULL)
 		{
 			layout = bonobo_dock_get_layout (dock);
+			if (layout)
 			layout_string = bonobo_dock_layout_create_string (layout);
-			g_print ("/-- Eventually FIXME later -------\\\n");
-			gtk_object_unref (GTK_OBJECT (layout));
-			g_print ("\\---------/\n");
+			g_object_unref (G_OBJECT (layout));
 		}
 	}
 
@@ -1600,7 +1599,6 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 				if (g_list_length (mdi->priv->windows) > 1 || 
 				    mdi->priv->registered) 
 				{
-					g_print ("/ EVENTUALLY FIX ME ---------------\\\n");
 					/* if this is NOT the last toplevel or a registered object
 				   	exists, destroy the toplevel */
 					mdi->priv->windows = g_list_remove (mdi->priv->windows, window);
@@ -1611,8 +1609,6 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 						mdi->priv->active_view = 
 							bonobo_mdi_get_view_from_window (mdi, 
 									mdi->priv->active_window);
-					g_print ("\\---------------/\n");
-
 				}
 				else
 					app_set_view (mdi, window, NULL);
