@@ -103,5 +103,7 @@ void		gedit_view_set_overwrite_mode_statusbar  (GeditView *view, GtkWidget* stat
 
 GtkTextView    *gedit_view_get_gtk_text_view 	(const GeditView *view);
 
+void 		gedit_view_set_editable 	(GeditView *view, gboolean editable);
+
 #endif /* __GEDIT_VIEW_H__ */
 

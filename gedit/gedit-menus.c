@@ -71,6 +71,90 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB_END
 };
 
+gchar *gedit_menus_all_sensible_verbs [] = {
+	"/commands/FileNew",
+	"/commands/FileOpen",
+	"/commands/FileSave",
+	"/commands/FileSaveAs",
+	"/commands/FileSaveAll",
+	"/commands/FileRevert",
+	"/commands/FileOpenURI",
+	"/commands/FilePrint",
+	"/commands/FilePrintPreview",
+	"/commands/FileClose",
+	"/commands/FileCloseAll",
+	"/commands/FileExit",
+	"/commands/EditUndo",
+	"/commands/EditRedo",
+	"/commands/EditCut",
+	"/commands/EditPaste",
+	"/commands/EditClear",
+	"/commands/SearchReplace",
+	"/commands/SettingsPreferences",
+	"/commands/DocumentsMoveToNewWindow",
+	"/commands/FilePageSetup",
+	"/commands/EditCopy",
+	"/commands/EditSelectAll",
+	"/commands/SearchFind",
+	"/commands/SearchFindNext",
+	"/commands/SearchFindPrev",
+	"/commands/SearchGoToLine",
+
+	NULL
+};
+
+gchar *gedit_menus_loading_sensible_verbs [] = {
+	"/commands/FileNew",
+	"/commands/FileOpen",
+	"/commands/FileSave",
+	"/commands/FileSaveAs",
+	"/commands/FileSaveAll",
+	"/commands/FileRevert",
+	"/commands/FileOpenURI",
+	"/commands/FilePrint",
+	"/commands/FilePrintPreview",
+	"/commands/FileClose",
+	"/commands/FileCloseAll",
+	"/commands/FileExit",
+	"/commands/EditUndo",
+	"/commands/EditRedo",
+	"/commands/EditCut",
+	"/commands/EditPaste",
+	"/commands/EditClear",
+	"/commands/SearchReplace",
+	"/commands/SettingsPreferences",
+	"/commands/DocumentsMoveToNewWindow",
+
+	NULL
+};
+
+gchar *gedit_menus_printing_sensible_verbs [] = {
+	"/commands/FileNew",
+	"/commands/FileOpen",
+	"/commands/FileSave",
+	"/commands/FileSaveAs",
+	"/commands/FileSaveAll",
+	"/commands/FileRevert",
+	"/commands/FileOpenURI",
+	"/commands/FilePageSetup",
+	"/commands/FilePrint",
+	"/commands/FilePrintPreview",
+	"/commands/FileClose",
+	"/commands/FileCloseAll",
+	"/commands/FileExit",
+	"/commands/EditUndo",
+	"/commands/EditRedo",
+	"/commands/EditCut",
+	"/commands/EditPaste",
+	"/commands/EditClear",
+	"/commands/SearchReplace",
+	"/commands/SettingsPreferences",
+	"/commands/DocumentsMoveToNewWindow",
+
+	NULL
+};
+
+
 gchar* gedit_menus_ro_sensible_verbs [] = {
 	"/commands/FileSave",
 	"/commands/FileRevert",
@@ -106,6 +190,7 @@ gchar* gedit_menus_no_docs_sensible_verbs [] = {
 	"/commands/SearchReplace",
 	"/commands/SearchGoToLine",
 	"/commands/DocumentsMoveToNewWindow",
+	
 	NULL
 };
 

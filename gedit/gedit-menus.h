@@ -36,12 +36,13 @@
 #include <bonobo/bonobo-window.h>
 
 extern BonoboUIVerb gedit_verbs [];
-extern gchar* gedit_menus_ro_sensible_verbs [];
-extern gchar* gedit_menus_no_docs_sensible_verbs []; 
-extern gchar* gedit_menus_untitled_doc_sensible_verbs [];
-extern gchar* gedit_menus_not_modified_doc_sensible_verbs []; 
-
-#define gedit_menus_all_sensible_verbs gedit_menus_no_docs_sensible_verbs
+extern gchar *gedit_menus_ro_sensible_verbs [];
+extern gchar *gedit_menus_no_docs_sensible_verbs []; 
+extern gchar *gedit_menus_untitled_doc_sensible_verbs [];
+extern gchar *gedit_menus_not_modified_doc_sensible_verbs []; 
+extern gchar *gedit_menus_all_sensible_verbs [];
+extern gchar *gedit_menus_loading_sensible_verbs [];
+extern gchar *gedit_menus_printing_sensible_verbs [];
 
 void gedit_menus_set_verb_sensitive 		(BonoboUIComponent *ui_component,
 					 	 gchar             *cname,

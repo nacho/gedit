@@ -300,6 +300,21 @@ gedit_mdi_child_document_can_find_again_handler (GeditDocument *document, GeditM
 	g_signal_emit (G_OBJECT (child), mdi_child_signals [FIND_STATE_CHANGED], 0);
 }
 
+static void
+gedit_state_changed_handler (GeditMDI *mdi, gint state, GeditMDIChild *child)
+{
+	gpointer button;
+
+	button = g_object_get_data (G_OBJECT (child), "close-button");
+
+	if (button == NULL)
+		return;
+
+	if (state == GEDIT_STATE_NORMAL)
+		gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
+	else
+		gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+}
 
 static void
 gedit_mdi_child_connect_signals (GeditMDIChild *child)
@@ -322,6 +337,9 @@ gedit_mdi_child_connect_signals (GeditMDIChild *child)
 	g_signal_connect (G_OBJECT (child->document), "can_find_again",
 			  G_CALLBACK (gedit_mdi_child_document_can_find_again_handler), 
 			  child);
+	g_signal_connect_object (G_OBJECT (gedit_mdi), "state_changed",
+			         G_CALLBACK (gedit_state_changed_handler),
+				 G_OBJECT (child), 0);
 }
 
 /**
@@ -514,18 +532,35 @@ gedit_mdi_child_tab_move_window_clicked (GtkWidget *button,  GtkWidget *view)
 static void 
 menu_show (GtkWidget *widget, GtkWidget *view)
 {
-	GtkWidget *menu_item;
-
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	if (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)) != view)
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 
-	menu_item = g_object_get_data (G_OBJECT (widget), "move-to-menu-item");
-	
-	gtk_widget_set_sensitive (menu_item, 
-			bonobo_mdi_n_children_for_window (
-				bonobo_mdi_get_window_from_view (view)) > 1);
+	/* FIXME: I should set sensitivity of the children, not of the entire memu -
+	 * Paolo (Jan 13, 2004) */
+	if (gedit_mdi_get_state (gedit_mdi) != GEDIT_STATE_NORMAL)
+	{
+		gtk_container_foreach (GTK_CONTAINER (widget),
+				       (GtkCallback)gtk_widget_set_sensitive,
+				       GINT_TO_POINTER (FALSE));
+	}
+	else
+	{
+		gtk_container_foreach (GTK_CONTAINER (widget),
+				       (GtkCallback)gtk_widget_set_sensitive,
+				       GINT_TO_POINTER (TRUE));
+
+		if (bonobo_mdi_n_children_for_window (
+					bonobo_mdi_get_window_from_view (view)) <= 1)
+		{
+			GtkWidget *menu_item;
+
+			menu_item = g_object_get_data (G_OBJECT (widget), "move-to-menu-item");
+
+			gtk_widget_set_sensitive (menu_item, FALSE);
+		}
+	}
 }
 
 static void 
@@ -797,6 +832,8 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 		gtk_widget_set_size_request (button, w + 2, h + 2);
 		gtk_container_add (GTK_CONTAINER (button), image);
+		
+		g_object_set_data (G_OBJECT (child), "close-button", button);
 		
 		/* setup the document image */
 		image = gtk_image_new ();

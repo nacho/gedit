@@ -80,8 +80,6 @@ static void 	 document_loading_cb 		(GeditDocument       *document,
 						 gulong               size,
 		     				 gulong               total_size,
 		     				 gboolean             reverting);
-static void	 grab_mouse 			(void);
-static void	 ungrab_mouse 			(void);
 
 
 static gchar* gedit_default_path = NULL;
@@ -94,7 +92,6 @@ static const GeditEncoding *encoding_to_use 	= NULL;
 static gint                 line 		= -1;
 static GSList              *new_children 	= NULL;
 static GSList		   *children_to_unref	= NULL;
-static GtkWidget           *grab_widget 	= NULL;
 static gint		    times_called	= 0;
 
 static GtkWidget           *loading_window	= NULL;
@@ -728,8 +725,6 @@ document_reverted_cb (GeditDocument *document,
 
 	gedit_utils_set_status (NULL);
 
-	ungrab_mouse ();
-
 	if (error != NULL)
 	{
 		gedit_utils_flash_va (_("Error reverting the document \"%s\"."), uri_to_display);
@@ -745,6 +740,8 @@ document_reverted_cb (GeditDocument *document,
 	{
 		gedit_utils_flash_va (_("The document \"%s\" has been reverted."), uri_to_display);
 	}
+
+	gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_NORMAL);
 
 	g_free (uri_to_display);
 	g_free (raw_uri);
@@ -799,6 +796,9 @@ gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 	GeditView* active_view;
 	gchar *uri_utf8;
 
+	if (gedit_mdi_get_state (gedit_mdi) != GEDIT_STATE_NORMAL)
+		return TRUE;
+	
 	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri_utf8);
@@ -933,70 +933,6 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 	return ret;
 }
 
-static void
-grab_mouse ()
-{
-	GdkCursor *cursor;
-	GList *windows;
-
-	if (grab_widget == NULL)
-	{
-		
-		GdkScreen *screen;
-
-		screen = gtk_widget_get_screen (GTK_WIDGET (gedit_get_active_window ()));
-		grab_widget = gtk_invisible_new_for_screen (screen);
-		
-	}
-
-	gtk_widget_show (grab_widget);
-		
-	cursor = gdk_cursor_new_for_display (
-			gtk_widget_get_display (grab_widget),
-			GDK_WATCH);
-		
-	windows = bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
-	while (windows != NULL)
-	{
-		GtkWidget *win;
-
-		g_return_if_fail (windows->data != NULL);
-		
-		win = GTK_WIDGET (windows->data);
-		
-		gdk_window_set_cursor (win->window, cursor);
-
-		windows = g_list_next (windows);
-	}
-
-	gdk_cursor_unref (cursor);
-	
-	gtk_grab_add (grab_widget);
-}
-
-static void
-ungrab_mouse ()
-{
-	GList *windows;
-	
-	g_return_if_fail (grab_widget != NULL);
-	  
-	gtk_grab_remove (grab_widget);
-
-	windows = bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
-	while (windows != NULL)
-	{
-		GtkWidget *win;
-
-		g_return_if_fail (windows->data != NULL);
-		
-		win = GTK_WIDGET (windows->data);
-		
-		gdk_window_set_cursor (win->window, NULL);
-
-		windows = g_list_next (windows);
-	}
-}
 
 static gboolean
 create_new_file (const gchar *uri)
@@ -1114,7 +1050,7 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	g_return_if_fail (uri_for_display != NULL);
 
 	loading_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_modal (GTK_WINDOW (loading_window), TRUE);
+	gtk_window_set_modal (GTK_WINDOW (loading_window), FALSE);
 	gtk_window_set_resizable (GTK_WINDOW (loading_window), FALSE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (loading_window), TRUE);
 	gtk_window_set_position (GTK_WINDOW (loading_window), GTK_WIN_POS_CENTER_ON_PARENT);
@@ -1317,12 +1253,8 @@ document_loaded_cb (GeditDocument *document,
 
 		remove_recent_file (uri);
 
-		ungrab_mouse ();
-		
 		gedit_utils_error_reporting_loading_file (uri, encoding_to_use, (GError *)error,
 					GTK_WINDOW (gedit_get_active_window ()));
-
-		grab_mouse ();
 
 		if (new_child != NULL)
 		{
@@ -1410,8 +1342,6 @@ open_files ()
 		g_slist_free (children_to_unref);
 		children_to_unref = NULL;
 		
-		ungrab_mouse ();
-
 		if (num_of_uris_to_open > 1)
 		{
 			gedit_utils_set_status (NULL);
@@ -1432,6 +1362,7 @@ open_files ()
 			g_timer_destroy (timer);
 		)
 
+		gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_NORMAL);
 		return;
 	}
 	
@@ -1471,14 +1402,10 @@ open_files ()
 
 		if (new_child == NULL)
 		{
-			ungrab_mouse ();
-
 			/* FIXME: this is a too generic error message - Paolo */
 			gedit_utils_error_reporting_loading_file (uri, encoding_to_use, NULL,
 					GTK_WINDOW (gedit_get_active_window ()));
 
-			grab_mouse ();
-			 
 			gedit_utils_flash_va (_("Error loading file \"%s\""), uri_to_display);
 
 			g_free (uri_to_display);
@@ -1607,7 +1534,7 @@ gedit_file_open_uri_list_real (GSList *uri_list, const GeditEncoding *encoding, 
 
 		encoding_to_use = encoding;
 		
-		grab_mouse ();
+		gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_LOADING);
 		
 		open_files ();
 	}

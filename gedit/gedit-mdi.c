@@ -73,7 +73,7 @@
 
 struct _GeditMDIPrivate
 {
-	gint dummy;
+	GeditState state;
 };
 
 typedef struct _GeditWindowPrefs	GeditWindowPrefs;
@@ -133,7 +133,14 @@ static void		 gedit_window_prefs_attach_to_window 	(GeditWindowPrefs *prefs,
 static GeditWindowPrefs	*gedit_window_prefs_get_from_window 	(BonoboWindow     *win);
 static void		 gedit_window_prefs_save 		(GeditWindowPrefs *prefs);
 
+enum 
+{
+	STATE_CHANGED = 0,
+	LAST_SIGNAL
+};
+
 static BonoboMDIClass *parent_class = NULL;
+static guint mdi_signals [LAST_SIGNAL] = { 0 };
 
 enum
 {
@@ -185,6 +192,17 @@ gedit_mdi_class_init (GeditMDIClass *klass)
   	parent_class = g_type_class_peek_parent (klass);
 
   	object_class->finalize = gedit_mdi_finalize;
+
+	mdi_signals[STATE_CHANGED] = 
+		g_signal_new ("state_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditMDIClass, state_changed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__INT,
+			      G_TYPE_NONE, 
+			      1, 
+			      G_TYPE_INT);
 }
 
 static void
@@ -272,7 +290,7 @@ tooltip_func (GtkTooltips   *tooltips,
 	g_free (tip);
 }
 
-static void
+static GtkWidget *
 gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 			 const gchar *path, const gchar *tooltip)
 {
@@ -319,6 +337,8 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 
 	bonobo_ui_component_widget_set (ui_component, path, GTK_WIDGET (button),
 					NULL);
+
+	return button;
 }
 
 static void 
@@ -333,6 +353,8 @@ gedit_mdi_init (GeditMDI  *mdi)
 			      gedit_prefs_manager_get_default_window_height ());
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
+
+	mdi->priv->state = GEDIT_STATE_NORMAL;
 
 	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), GEDIT_UI_DIR "gedit-ui.xml", gedit_verbs);
 	
@@ -491,9 +513,11 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	g_object_set_data (G_OBJECT (win), "OverwriteMode", widget);
 	
 	/* Add custom Open button to toolbar */
-	gedit_mdi_add_open_button (GEDIT_MDI (mdi),
-				   ui_component, "/Toolbar/FileOpenMenu",
-				   _("Open a recently used file"));
+	widget = gedit_mdi_add_open_button (GEDIT_MDI (mdi),
+					    ui_component, 
+					    "/Toolbar/FileOpenMenu",
+					    _("Open a recently used file"));
+	g_object_set_data (G_OBJECT (win), "recent-menu-button", widget);
 
 	prefs = gedit_window_prefs_new ();
 	gedit_window_prefs_attach_to_window (prefs, win);
@@ -1196,6 +1220,9 @@ gedit_mdi_remove_views_handler (BonoboMDI *mdi, BonoboWindow *window)
 	
 	gedit_debug (DEBUG_MDI, "");
 
+	if (gedit_mdi_get_state (GEDIT_MDI (mdi)) != GEDIT_STATE_NORMAL)
+		return FALSE;
+
 	views = bonobo_mdi_get_views_from_window (mdi, window);
 
 	ret = gedit_mdi_can_remove_views (views, window);
@@ -1390,6 +1417,12 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	
 	gedit_plugins_engine_update_plugins_ui (active_window, FALSE);
 	
+	gedit_menus_set_verb_list_sensitive (ui_component, 
+				gedit_menus_all_sensible_verbs, TRUE);
+
+	bonobo_ui_component_set_prop (
+			ui_component, "/menu/View/HighlightMode", "sensitive", "1", NULL);
+	
 	if (active_child == NULL)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
@@ -1399,15 +1432,6 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 			ui_component, "/menu/View/HighlightMode", "sensitive", "0", NULL);
 
 		goto end;
-	}
-	else
-	{
-		gedit_menus_set_verb_list_sensitive (ui_component, 
-				gedit_menus_all_sensible_verbs, TRUE);
-
-		bonobo_ui_component_set_prop (
-			ui_component, "/menu/View/HighlightMode", "sensitive", "1", NULL);
-
 	}
 
 	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
@@ -1448,6 +1472,33 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	}
 
 end:
+
+	switch (gedit_mdi_get_state (GEDIT_MDI (mdi)))
+	{
+		case GEDIT_STATE_LOADING:
+		case GEDIT_STATE_SAVING:
+		case GEDIT_STATE_REVERTING:
+			gedit_menus_set_verb_list_sensitive (ui_component,
+				gedit_menus_loading_sensible_verbs, FALSE);
+			
+			bonobo_ui_component_set_prop (ui_component, 
+					"/menu/View/HighlightMode", "sensitive", "0", NULL);
+
+			break;
+
+		case GEDIT_STATE_PRINTING:
+			gedit_menus_set_verb_list_sensitive (ui_component,
+				gedit_menus_printing_sensible_verbs, FALSE);
+
+			bonobo_ui_component_set_prop (ui_component, 
+					"/menu/View/HighlightMode", "sensitive", "0", NULL);
+
+			break;
+		default:
+			/* Do nothing */
+			break;
+	}
+
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
@@ -2007,4 +2058,126 @@ void gedit_mdi_update_languages_menu (BonoboMDI *mdi)
 	g_free (verb_name);
 }
 
+static void
+update_ui_according_to_state (GeditMDI *mdi)
+{
+	GList *views;
+	GdkCursor *cursor;
+	GList *windows;
+
+	gedit_debug (DEBUG_MDI, "");
+	
+	/* Upate menus and toolbars */
+	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+
+	/* Update views editability */
+	views = bonobo_mdi_get_views (BONOBO_MDI (mdi));
+	while (views != NULL)
+	{
+		GeditView *view;
+		GeditDocument *doc;
+
+		view = GEDIT_VIEW (views->data);
+		doc = gedit_view_get_document (view);
+		
+		switch (gedit_mdi_get_state (mdi))
+		{
+			case GEDIT_STATE_NORMAL:
+				if (!gedit_document_is_readonly (doc))
+				{
+					gedit_view_set_editable (view, TRUE);
+				}
+
+				break;
+
+			case GEDIT_STATE_LOADING:
+			case GEDIT_STATE_PRINTING:
+			case GEDIT_STATE_SAVING:
+			case GEDIT_STATE_REVERTING:
+				gedit_view_set_editable (view, FALSE);
+				break;
+		}
+
+		views = g_list_next (views);
+	}
+
+	g_list_free (views);
+
+	/* Change cursor */
+	if (gedit_mdi_get_state (mdi) == GEDIT_STATE_NORMAL)
+	{
+		cursor = NULL;
+	}
+	else
+	{
+		cursor =  gdk_cursor_new_for_display (
+				gtk_widget_get_display (GTK_WIDGET (gedit_get_active_window ())),
+				GDK_WATCH);
+	}
+
+	windows = bonobo_mdi_get_windows (BONOBO_MDI (mdi));
+	while (windows != NULL)
+	{
+		GtkWidget *win;
+		gpointer recent_menu_button;
+
+		g_return_if_fail (windows->data != NULL);
+		
+		win = GTK_WIDGET (windows->data);
+		
+		gdk_window_set_cursor (win->window, cursor);
+
+		recent_menu_button = g_object_get_data (G_OBJECT (win), "recent-menu-button");
+
+		if (recent_menu_button != NULL)
+		{
+			gtk_widget_set_sensitive (GTK_WIDGET (recent_menu_button),
+						  gedit_mdi_get_state (mdi) == GEDIT_STATE_NORMAL);
+		}
+
+		windows = g_list_next (windows);
+	}
+
+	if (cursor != NULL)
+		gdk_cursor_unref (cursor);
+
+
+	/* TODO: Update/Add state icon - Paolo (Jan 13, 2004) */
+}
+
+GeditState
+gedit_mdi_get_state (GeditMDI *mdi)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_val_if_fail (GEDIT_IS_MDI (mdi), GEDIT_STATE_NORMAL);
+
+	return mdi->priv->state;
+}
+
+void
+gedit_mdi_set_state (GeditMDI   *mdi,
+		     GeditState  state)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_MDI (mdi));
+	g_return_if_fail ((state == GEDIT_STATE_NORMAL) ||
+			  (state == GEDIT_STATE_LOADING) ||
+			  (state == GEDIT_STATE_SAVING) ||
+			  (state == GEDIT_STATE_PRINTING) ||
+			  (state == GEDIT_STATE_REVERTING));
+
+	if (state != mdi->priv->state)
+	{
+		mdi->priv->state = state;
+		
+		update_ui_according_to_state (mdi);
+
+		g_signal_emit (G_OBJECT (mdi), 
+			       mdi_signals [STATE_CHANGED],
+			       0,
+			       state);
+	}
+}
 

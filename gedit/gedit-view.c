@@ -132,6 +132,17 @@ gedit_view_grab_focus (GtkWidget *widget)
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
 }
 
+void 
+gedit_view_set_editable (GeditView *view, gboolean editable)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	gtk_text_view_set_editable (GTK_TEXT_VIEW (view->priv->text_view), 
+				    editable);
+}
+
 static void
 gedit_view_doc_readonly_changed_handler (GeditDocument *document, gboolean readonly,
 		GeditView *view)
@@ -140,7 +151,7 @@ gedit_view_doc_readonly_changed_handler (GeditDocument *document, gboolean reado
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (view->priv->text_view), !readonly);	
+	gedit_view_set_editable (view, !readonly);	
 }
 
 

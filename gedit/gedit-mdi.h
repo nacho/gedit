@@ -49,6 +49,16 @@ typedef struct _GeditMDIClass		GeditMDIClass;
 
 typedef struct _GeditMDIPrivate		GeditMDIPrivate;
 
+typedef enum
+{
+	GEDIT_STATE_NORMAL,
+	GEDIT_STATE_LOADING,
+	GEDIT_STATE_SAVING,
+	GEDIT_STATE_PRINTING,
+	GEDIT_STATE_REVERTING
+}
+GeditState;
+
 struct _GeditMDI
 {
 	BonoboMDI mdi;
@@ -59,6 +69,9 @@ struct _GeditMDI
 struct _GeditMDIClass
 {
 	BonoboMDIClass parent_class;
+
+	void (*state_changed) (GeditMDI   *mdi,
+			       GeditState  state);
 };
 
 
@@ -82,6 +95,8 @@ GtkWidget	*gedit_mdi_get_progress_bar_from_window (BonoboWindow *win);
 void		 gedit_mdi_show_progress_bar_for_window (BonoboWindow *win,
 							  gboolean show);
 
-
+GeditState	 gedit_mdi_get_state 			(GeditMDI   *mdi);
+void		 gedit_mdi_set_state			(GeditMDI   *mdi,
+							 GeditState  state);
 #endif /* __GEDIT_MDI_H__ */
 

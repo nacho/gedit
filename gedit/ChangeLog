@@ -1,3 +1,27 @@
+2004-01-13  Paolo Maggi  <paolo.maggi@polito.it> 
+
+	* gedit-view.[ch] (gedit_view_set_editable): new function
+
+	* gedit-menus.[ch] (gedit_menus_all_sensible_verbs)
+	(gedit_menus_loading_sensible_verbs)
+	(gedit_menus_printing_sensible_verbs): new sets of verbs
+
+	* gedit-mdi.[ch] (state_changed): new signal
+	(gedit_mdi_get_state)(gedit_mdi_set_state): new methods
+
+	* gedit-mdi.c (update_ui_according_to_state): new function.
+	(gedit_mdi_add_open_button): returns the button
+	(gedit_mdi_remove_views_handler): doesn't remove view if state
+	is different from GEDIT_STATE_NORMAL
+	(gedit_mdi_set_active_window_verbs_sensitivity): take care of
+	state
+
+	* gedit-mdi-child.c (gedit_state_changed_handler): new function
+	(menu_show): disable menu items if state is different from normal
+
+	* gedit-file.c (grab_mouse)(ungrab_mouse): removed. 
+	Use gedit_mdi_set_state to set the state while loading.
+
 2004-01-12  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/bonobo-mdi.c: handle don't start drag&drop when
