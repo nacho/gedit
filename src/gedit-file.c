@@ -70,6 +70,8 @@ gedit_file_new (void)
 	ret = bonobo_mdi_add_view (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
 	g_return_if_fail (ret != FALSE);
 	gedit_debug (DEBUG_COMMANDS, "View added.");
+
+	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
 }
 
 void 
@@ -718,6 +720,8 @@ gedit_file_open_recent (GeditMDIChild *child, const gchar* uri)
 	}
 
 	g_free (temp_uri);
+
+	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
 
 	gedit_debug (DEBUG_FILE, "END");
 

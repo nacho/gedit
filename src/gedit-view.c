@@ -444,14 +444,6 @@ gedit_view_finalize (GObject *object)
 	g_object_unref (view->priv->document);
 	view->priv->document = NULL;
 
-	if (view->priv->cursor_position_statusbar != NULL)
-		gtk_statusbar_pop (GTK_STATUSBAR (
-				   view->priv->cursor_position_statusbar), 0); 
-
-	if (view->priv->overwrite_mode_statusbar != NULL)
-		gtk_statusbar_pop (GTK_STATUSBAR (
-				   view->priv->overwrite_mode_statusbar), 0); 
-
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	g_free (view->priv);

@@ -55,6 +55,7 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
 	GeditView *view;
+	gchar* user_name;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -64,11 +65,16 @@ sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	doc = gedit_view_get_document (view);
 	g_return_if_fail (doc != NULL);
 
+	user_name = g_strdup_printf ("%s ", g_get_real_name ());
+	g_return_if_fail (user_name != NULL);
+
 	gedit_document_begin_user_action (doc);
 	
-	gedit_document_insert_text_at_cursor (doc, g_get_real_name (), -1);
+	gedit_document_insert_text_at_cursor (doc, user_name, -1);
 
 	gedit_document_end_user_action (doc);
+
+	g_free (user_name);
 }
 
 G_MODULE_EXPORT GeditPluginState

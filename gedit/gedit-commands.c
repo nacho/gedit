@@ -445,9 +445,6 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 void 
 gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	/* TODO: add logo -- Paolo */
-	/* FIXME: set window position at the center of the active window -- Paolo */
-
 	static GtkWidget *about = NULL;
 	GdkPixbuf* pixbuf = NULL;
 	

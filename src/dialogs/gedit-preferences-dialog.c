@@ -294,6 +294,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	dlg->priv = g_new0 (GeditPreferencesDialogPrivate, 1);
 
+	gedit_preferences_dialog_add_buttons (dlg);	
+	
 	hbox = gtk_hbox_new (FALSE, 12);
 	
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
@@ -307,7 +309,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	ct = gedit_preferences_dialog_create_categories_tree (dlg);
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dlg->priv->categories_tree);
-	
+		
 	gtk_box_pack_start (GTK_BOX (r), label, FALSE, FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (r), ct, TRUE, TRUE, 0);
 
@@ -319,15 +321,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), hbox,
 			FALSE, FALSE, 0);
-
-	GTK_WIDGET_SET_FLAGS (dlg->priv->categories_tree, GTK_CAN_FOCUS);
 	
-	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);
-
-      	if (!GTK_WIDGET_REALIZED (dlg->priv->categories_tree))
-		gtk_widget_show (dlg->priv->categories_tree);
-
-	gedit_preferences_dialog_add_buttons (dlg);	
+	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);	
 
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
@@ -424,7 +419,7 @@ gedit_preferences_dialog_create_categories_tree_model ()
 		}
       
 		category++;
-	}
+	}	
 
 	gedit_debug (DEBUG_PREFS, "Done");
 
@@ -467,6 +462,7 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 	GtkTreeSelection *selection;
 	GtkTreeViewColumn *column;
  	gint col_offset;
+	GtkTreeIter iter;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -484,6 +480,11 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 	treeview = gtk_tree_view_new_with_model (model);
 	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	g_return_val_if_fail (selection != NULL, NULL);
+
+	if (gtk_tree_model_get_iter_root (model, &iter))
+		gtk_tree_selection_select_iter (selection, &iter);
+	
 	gtk_tree_selection_set_mode (selection,
 				   GTK_SELECTION_SINGLE);
 
@@ -509,7 +510,7 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 			G_CALLBACK (gtk_tree_view_expand_all), NULL);
 
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
-
+	
 	dlg->priv->categories_tree = treeview;
 	dlg->priv->categories_tree_model = model;
 	

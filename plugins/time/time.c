@@ -489,7 +489,7 @@ activate (GeditPlugin *pd)
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP,
-				     "gnome-stock-timer", time_world_cb);
+				     NULL, time_world_cb);
 
                 pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
 
