@@ -197,9 +197,18 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 void get_prefs(gE_data *data)
 {
   gint i;
+  gchar *tmp;
   
   gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), settings->print_cmd);
   gtk_entry_set_text (GTK_ENTRY (prefs->font), settings->font);
+
+  tmp = g_malloc (1);
+  sprintf (tmp, "%d", settings->width);
+  gtk_entry_set_text (GTK_ENTRY (prefs->preW), tmp);
+  sprintf (tmp, "%d", settings->height);
+  gtk_entry_set_text (GTK_ENTRY (prefs->preH), tmp);
+  g_free (tmp);
+
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->autoindent), 
   					   settings->auto_indent);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->status),

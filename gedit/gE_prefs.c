@@ -59,6 +59,8 @@ gE_save_settings()
 	gE_prefs_set_int ("mdi mode", settings->mdi_mode);
 	gE_prefs_set_int ("scrollbar", settings->scrollbar);
 	gE_prefs_set_char ("font", settings->font);
+	gE_prefs_set_int ("width", (gint) settings->width);
+	gE_prefs_set_int ("height", (gint) settings->height);
 	if (settings->print_cmd == "")
 		gE_prefs_set_char ("print command", "lpr -rs %s");
 	else
@@ -90,6 +92,13 @@ void gE_get_settings()
 	 if (!settings->scrollbar)
 	   settings->scrollbar = GTK_POLICY_AUTOMATIC;
 	 
+	 settings->width = gE_prefs_get_int ("width");
+	 if (!settings->width)
+	   settings->width = 630;
+
+	 settings->height = gE_prefs_get_int ("height");
+	 if (!settings->height)
+	   settings->height = 390;
 	 
 	 settings->font = gE_prefs_get_char("font");
 	 if (settings->font == NULL)

@@ -43,6 +43,8 @@ typedef struct _gE_preference {
 	                   Recent Documents menu */
 	gint mdi_mode;
 	gint scrollbar;
+	
+	gint width, height;
 
 } gE_preference;
 

@@ -1,3 +1,13 @@
+1999-05-20 23:32:57 BST Alex Roberts  <bse@gedit.pn.org>
+	* src/gE_prefs.h: Added width/height gints.
+	
+	* src/gE_prefs.c: Load and Set Width and Height settings. If Width/Height
+	  aren't available we set them to the defaults.
+	
+	* src/gE_prefs_box.c: (get_prefs) Set the Width and Height entries to the
+	  settings->width/height values. 
+	  Now I need to implement these numbers further to make it all work together =)
+
 1999-05-20  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_prefs_box.c: Started to implement Window Size settings, so you
