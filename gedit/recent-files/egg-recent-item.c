@@ -128,6 +128,7 @@ egg_recent_item_copy (const EggRecentItem *item)
 	newitem->uri = g_strdup (item->uri);
 	if (item->mime_type)
 		newitem->mime_type = g_strdup (item->mime_type);
+	newitem->mime_type_is_explicit = item->mime_type_is_explicit
 	newitem->timestamp = item->timestamp;
 	newitem->private_data = item->private_data;
 	newitem->groups = egg_recent_item_copy_groups (item->groups);
@@ -186,10 +187,7 @@ egg_recent_item_update_mime_type (EggRecentItem *item)
 		item->mime_type = NULL;
 
 		if (item->uri)
-		{
-			/* g_print ("Get mime-type for %s\n", item->uri); */
 			item->mime_type = gnome_vfs_get_mime_type (item->uri);
-		}
 
 		if (!item->mime_type)
 			item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
@@ -221,8 +219,6 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 
 		g_free (utf8_uri);
 	}
-
-	egg_recent_item_update_mime_type (item);
 
 	return TRUE;
 }
@@ -264,7 +260,7 @@ make_valid_utf8 (const char *name)
 
 	string = NULL;
 	remainder = name;
-	remaining_bytes = strlen (name);
+	remaining_bytes = name ? strlen (name) : 0;
 
 	while (remaining_bytes != 0) {
 		if (g_utf8_validate (remainder, remaining_bytes, &invalid))
@@ -320,9 +316,6 @@ egg_recent_item_get_short_name (const EggRecentItem *item)
 		return NULL;
 
 	short_name = gnome_vfs_uri_extract_short_name (uri);
-	if (short_name == NULL)
-		return NULL;
-
 	valid = FALSE;
 
 	if (strcmp (gnome_vfs_uri_get_scheme (uri), "file") == 0) {
@@ -361,13 +354,14 @@ egg_recent_item_set_mime_type (EggRecentItem *item, const gchar *mime)
 		item->mime_type             = g_strdup (mime);
 	} else {
 		item->mime_type_is_explicit = FALSE;
-		egg_recent_item_update_mime_type (item);
 	}
 }
 
 gchar * 
-egg_recent_item_get_mime_type (const EggRecentItem *item)
+egg_recent_item_get_mime_type (EggRecentItem *item)
 {
+	egg_recent_item_update_mime_type (item);
+
 	return g_strdup (item->mime_type);
 }
 
