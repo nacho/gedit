@@ -11,11 +11,6 @@ Features to add, bugs to fix:
 
 	^^ Basically finished - just needs proper prefs added..
 
-	* Fix it so font changes take affect immediately, and you don't
-	  have to restart gEdit...
-	
-	^^ Fixed that, it works great! :) 		-- Alex
-
 	* Add DND support between multiple windows, and between other gnome
 	  apps such as gmc - also add an "Open in New window option that 
 	  would appear when you right click on a documents notebook tab.
@@ -54,24 +49,11 @@ Added by andy:
 	  write()).  currently, the code is totally sloppy, and has next
 	  to no error handling.
 
-	* Fix preferences to save and restore for gtk-only version.
-	^^ Kinda fixed, doesn't work on my system, seems to work for Evan tho... --Alex
-
-	* Fix/improve/rewrite search and replace routine.  it is really
-	  really slow right now and doesn't work on larger files (e.g., on
-	  a 1MB file, i get malloc errors).  i am working on this.
-
 	* Add file locking/unlocking before/after opening/saving a file.
 	  i will probably end up doing this because no one else cares.
 
 	* Add more search features: replace all, and search (and replace)
 	  across all open documents.
-
-	* Add preferences popup window similar to Netscape's.  currently,
-	  everything is under one menu.  make this a nice popup with a
-	  tree view, or with notebook tabs, etc.  i am working on this.
-	  
-	^^ Implemented... Gotta Add some more options... -- Alex
 	
 	* Add preferences setting for location of temp directory.
 
@@ -91,10 +73,6 @@ Added by andy:
 	  is that gedit shouldn't contain any C parsing code.  this is how
 	  gIDE does it, and this is unnecessary.
 
-	* Add interface/plugin for spell-checker (spell or ispell).
-	
-	^^ THat one was done ages ago... --Alex
-
 	* Add auto-save options.  timeout configurable via preferences.
 
 	* Add file info option for line count, word count, and byte count.
@@ -108,15 +86,15 @@ Added by andy:
 	  toolbar wanted, including icon name, and even what to execute
 	  (basically, not limit the user to what's already available).
 	  store settings in preferences.
+	
+	^^^ Lay off! I'm working on this one... --Alex
 
 	* Add configurable location for toolbar (e.g., top, bottom, left
 	  right).  store settings in preferences.
 
-	* Do something about read-only files.  should the text widget be
-	  editable?  should we allow edit and do something (Save As?) when
-	  trying to save?  haven't given this much thought right now...
-	  we should probably allow opening and editing, but flash a message
-	  saying it's read-only, and then when saving, tell the user to
-	  select save-as.
-        
-        ^^ Semi/Quasi Fixed! If its Read-Only, a Save As... box appears...
+
+Added by Alex:
+
+	* Add more options to Preferences box (i'm working on this one..)
+	
+	* Make Read-Only files display something to show them as Read-Only..
