@@ -109,6 +109,7 @@ load_library(gchar * key, gE_Plugin_Object * plug)
       g_print("error: %s\n", g_module_error());
       return;
    }
+   g_module_make_resident(module);
    g_hash_table_insert(shlib_hash, pathname, module);
 
    /* Only set this if we are loading the "real" plugin and

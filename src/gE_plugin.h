@@ -35,7 +35,21 @@
 
 #ifdef WITH_GMODULE_PLUGINS
 
-/* We have gmodule plugins or we are included from such a plugin ... */
+/*
+ * We have gmodule plugins or we are included from such a plugin ...
+ */
+
+/* This is also used in gEdit when we set up a handler for this. */
+#define GE_PLUGIN_LOG_DOMAIN	"gEdit-Plugin"
+
+#ifndef _IN_GEDIT
+/* If we are included from a plugin, define G_LOG_DOMAIN here. */
+#ifndef G_LOG_DOMAIN
+#define G_LOG_DOMAIN GE_PLUGIN_LOG_DOMAIN
+#endif
+/* After this is done, include the GNOME header files. */
+#include <gnome.h>
+#endif
 
 #include <glib.h>
 #include <gmodule.h>
