@@ -32,6 +32,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include <gedit-plugin.h>
 #include <gedit-file.h>
@@ -39,6 +40,9 @@
 #include <gedit-menus.h>
 
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
+
+/* AFAIK, all cvs commit messages start with this */
+#define GEDIT_CVSCHANGELOG_START_HEADER "CVS: ------"
 
 
 #define MENU_ITEM_LABEL		N_("Open CVS Chan_geLogs")
@@ -85,13 +89,15 @@ is_changelog (const gchar * path)
 	return FALSE;
 }
 
+
 static GList *
-get_changelogs (gchar *buf)
+get_changelogs (const gchar *buf)
 {
 	GList *list=NULL;
 	guchar *filename;
 	gchar *current_dir;
-	gchar *full_uri;
+	gchar *uri;
+	gchar *local_path;
 	gchar **split_file;
 	gchar **split_line;
 	gint i, j;
@@ -114,12 +120,14 @@ get_changelogs (gchar *buf)
 				
 				if(!current_dir)
 					continue;
-				
-				full_uri = g_strdup_printf("file:///%s/%s", current_dir, filename);
-				list = g_list_append (list, full_uri);
+
+				local_path = g_strdup_printf("%s/%s", current_dir, filename);
+				uri = gnome_vfs_get_uri_from_local_path (local_path);
+				list = g_list_append (list, uri);
 
 				/* cleanup. */
 				g_free(current_dir);
+				g_free (local_path);
 			}
 		}
 
@@ -129,6 +137,21 @@ get_changelogs (gchar *buf)
 	g_strfreev (split_file);
 
 	return list;
+}
+
+static gboolean
+is_commit_message (const char *buf)
+{
+	GList *list = NULL;
+
+	if (!strncmp (buf, GEDIT_CVSCHANGELOG_START_HEADER,
+		      strlen (GEDIT_CVSCHANGELOG_START_HEADER))) {
+		list = get_changelogs (buf);
+		if (list)
+			return TRUE;
+	}
+	
+	return FALSE;
 }
 
 static void
@@ -164,7 +187,6 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	BonoboUIComponent *uic;
 	GeditDocument *doc;
 	gchar *buf;
-	GList *list;
 	
 	gedit_debug (DEBUG_PLUGINS, "");	
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
@@ -175,9 +197,8 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 
 	if (doc != NULL) {	 	
 		buf = gedit_document_get_buffer (doc);
-		list = get_changelogs (buf);
 
-		if (list != NULL)
+		if (is_commit_message (buf))
 			gedit_menus_set_verb_sensitive (uic,
 							"/commands/" MENU_ITEM_NAME, TRUE);
 		else
