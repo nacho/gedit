@@ -191,6 +191,7 @@ gedit_file_open (GeditMDIChild *active_child)
 static gboolean
 gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 {
+	EggRecentItem *item;
 	GError *error = NULL;
 	gchar *uri;
 	
@@ -247,7 +248,10 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 	}
 	
 	recent = gedit_recent_get_model ();
-	egg_recent_model_add (recent, uri);
+	item = egg_recent_item_new_from_uri (uri);
+	egg_recent_item_add_group (item, "gedit");
+	egg_recent_model_add_full (recent, item);
+	egg_recent_item_unref (item);
 
 	g_free (uri);
 
@@ -339,6 +343,7 @@ gedit_file_save (GeditMDIChild* child)
 	else
 	{
 		EggRecentModel *recent;
+		EggRecentItem *item;
 		gchar *raw_uri;
 		
 		gedit_debug (DEBUG_FILE, "OK");
@@ -351,7 +356,10 @@ gedit_file_save (GeditMDIChild* child)
 		g_return_val_if_fail (raw_uri != NULL, TRUE);
 		
 		recent = gedit_recent_get_model ();
-		egg_recent_model_add (recent, raw_uri);
+		item = egg_recent_item_new_from_uri (raw_uri);
+		egg_recent_item_add_group (item, "gedit");
+		egg_recent_model_add_full (recent, item);
+		egg_recent_item_unref (item);
 
 		g_free (raw_uri);
 		
@@ -497,9 +505,13 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	else
 	{
 		EggRecentModel *recent;
+		EggRecentItem *item;
 
 		recent = gedit_recent_get_model ();
-		egg_recent_model_add (recent, uri);
+		item = egg_recent_item_new_from_uri (uri);
+		egg_recent_item_add_group (item, "gedit");
+		egg_recent_model_add_full (recent, item);
+		egg_recent_item_unref (item);
 
 		g_free (uri);
 

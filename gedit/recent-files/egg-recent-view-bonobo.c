@@ -28,7 +28,9 @@
 #include <gtk/gtk.h>
 #include <libbonoboui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#ifndef USE_STABLE_LIBGNOMEUI
 #include <libgnomeui/gnome-icon-theme.h>
+#endif
 #include <gconf/gconf-client.h>
 #include "egg-recent-model.h"
 #include "egg-recent-view.h"
@@ -50,9 +52,9 @@ struct _EggRecentViewBonobo {
 
 	gboolean show_icons;
 	gboolean show_numbers;
-
+#ifndef USE_STABLE_LIBGNOMEUI
 	GnomeIconTheme *theme;
-
+#endif
 	EggRecentModel *model;
 	GConfClient *client;
 };
@@ -199,9 +201,12 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 			mime_type = egg_recent_item_get_mime_type (item);
 			uri = egg_recent_item_get_uri (item);
-			
+#ifndef USE_STABLE_LIBGNOMEUI
 			pixbuf = egg_recent_util_get_icon (view->theme,
 							   uri, mime_type);
+#else
+			pixbuf = NULL;
+#endif
 
 
 			if (pixbuf != NULL) {
@@ -390,7 +395,9 @@ egg_recent_view_bonobo_finalize (GObject *object)
 
 	g_object_unref (view->model);
 	g_object_unref (view->uic);
+#ifndef USE_STABLE_LIBGNOMEUI
 	g_object_unref (view->theme);
+#endif
 	g_object_unref (view->client);
 }
 
@@ -480,7 +487,9 @@ static void
 egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 {
 	view->uid = egg_recent_util_get_unique_id ();
+#ifndef USE_STABLE_LIBGNOMEUI
 	view->theme = gnome_icon_theme_new ();
+#endif
 
 	view->client = gconf_client_get_default ();
 	view->show_icons =

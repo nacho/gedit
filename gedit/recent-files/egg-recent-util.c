@@ -5,8 +5,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
+#ifndef USE_STABLE_LIBGNOMEUI
 #include <libgnomeui/gnome-icon-theme.h>
 #include <libgnomeui/gnome-icon-lookup.h>
+#endif
 #ifdef HAVE_RSVG
 #include <librsvg/rsvg.h>
 #endif
@@ -159,7 +161,7 @@ load_icon_file (char          *filename,
 	return pixbuf;
 }
 
-
+#ifndef USE_STABLE_LIBGNOMEUI
 GdkPixbuf *
 egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
 			  const gchar *mime_type)
@@ -185,6 +187,7 @@ egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
 	
 	return pixbuf;
 }
+#endif /* !USE_STABLE_LIBGNOMEUI */
 
 gchar *
 egg_recent_util_get_unique_id (void)

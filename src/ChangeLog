@@ -1,3 +1,11 @@
+2002-10-07  James Willcox  <jwillcox@gnome.org>
+
+	* gedit-file.c: (gedit_file_open_real), (gedit_file_save),
+	(gedit_file_save_as_real):  Add the "gedit" group to recent items.
+	* gedit-recent.c: (gedit_recent_init):  filter by group instead of
+	mime type
+	* recent-files/*:  sync up with libegg
+
 2002-10-07  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-document.[ch] (gedit_document_find)(gedit_document_replace_all):	added the entire_word parameter
