@@ -33,6 +33,7 @@
 #include "menus.h"
 #include "toolbar.h"
 
+extern GList *plugins;
 
 gE_window *gE_window_new()
 {
@@ -40,7 +41,7 @@ gE_window *gE_window_new()
   gE_data *data;
   GtkWidget *box1;
   GtkWidget *box2;
-  GtkWidget *line_button, *col_button;
+  GtkWidget *line_button, *col_button, *button;
  
   window = g_malloc(sizeof(gE_window));
   window->notebook = NULL;
@@ -85,14 +86,17 @@ gE_window *gE_window_new()
 #ifdef WITHOUT_GNOME
   gtk_container_add (GTK_CONTAINER (window->window), box1);
 #endif
+
   gE_menus_init (window, data);
-  
+
 #ifdef WITHOUT_GNOME
+/*
 #ifdef GTK_HAVE_ACCEL_GROUP
   gtk_window_add_accel_group(GTK_WINDOW(window->window), window->accel);
 #else
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
 #endif
+*/
   gtk_box_pack_start(GTK_BOX(box1), window->menubar, FALSE, TRUE, 0);
   gtk_widget_show(window->menubar);
 #else
@@ -112,12 +116,6 @@ gE_window *gE_window_new()
 
   gtk_box_pack_start(GTK_BOX(box1), window->notebook, TRUE, TRUE, 0);
 
-/* looks ugly.. */
-/*
-      separator = gtk_hseparator_new ();
-      gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, TRUE, 0);
-      gtk_widget_show (separator);
-*/
       box2 = gtk_hbox_new (FALSE, 0);
       gtk_container_border_width (GTK_CONTAINER (box2), 0);
       gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
@@ -148,6 +146,11 @@ gE_window *gE_window_new()
 /*  gtk_widget_show(window->menubar); 
 */
   gtk_widget_show (window->notebook);
+
+  g_list_append (window_list, window);
+
+  g_list_foreach (plugins, add_plugins_to_window, window);
+  
   gtk_widget_show (window->window);
 
 
@@ -297,33 +300,3 @@ void gE_show_version()
 	g_print ("%s\n", GEDIT_ID);
 }
 
-#if PLUGIN_TEST
-
-void start_plugin( GtkWidget *widget, gchar *name, gE_data *data )
-{
-  plugin_callback_struct callbacks;
-  plugin *plug = plugin_new( name );
-
-  callbacks.document.create = gE_plugin_create;
-  callbacks.text.append = gE_plugin_append;
-  callbacks.document.show = gE_plugin_show;
-  callbacks.document.current = gE_plugin_current;
-  callbacks.document.filename = gE_plugin_filename;
-  callbacks.text.get = gE_plugin_text_get;
-  
-  plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
-}
-
-void start_diff( GtkWidget *widget, gE_data *data )
-{
-  start_plugin( widget, PLUGINDIR "/diff-plugin", data );
-}
-void start_cvsdiff( GtkWidget *widget, gE_data *data )
-{
-  start_plugin( widget, PLUGINDIR "/cvsdiff-plugin", data );
-}
-void start_reverse( GtkWidget *widget, gE_data *data )
-{
-  start_plugin( widget, PLUGINDIR "/reverse-plugin", data );
-}
-#endif

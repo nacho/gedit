@@ -30,9 +30,11 @@
 #define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
+#include "gE_plugin_api.h"
 #endif
 
 GList *window_list;
+extern GList *plugins;
 char home[STRING_LENGTH_MAX];
 char *homea;
 char rc[STRING_LENGTH_MAX];
@@ -136,6 +138,7 @@ int main (int argc, char **argv)
 
 	gE_window *window;
 	gE_data *data;
+	plugin_callback_struct callbacks;
 	argp_program_version = VERSION;
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
@@ -145,9 +148,9 @@ int main (int argc, char **argv)
 	gE_rc_parse();
 
 	data = g_malloc0 (sizeof (gE_data));
-	window_list = g_list_alloc ();
+	window_list = NULL;
 	window = gE_window_new();
-	g_list_append (window_list, window);
+
 	data->window = window;
 	window->show_status = 1;
 	gE_get_settings(window);
@@ -166,11 +169,25 @@ int main (int argc, char **argv)
 
 		for (;file_list; file_list = file_list->next)
 		{
-			data->temp1 = file_list->data;
+			data->temp2 = file_list->data;
 			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
 		}
 	}
 
+	/* Init plugins... */
+	plugins = NULL;
+	
+	callbacks.document.create = gE_plugin_document_create;
+	callbacks.text.append = gE_plugin_text_append;
+	callbacks.document.show = gE_plugin_document_show;
+	callbacks.document.current = gE_plugin_document_current;
+	callbacks.document.filename = gE_plugin_document_filename;
+	callbacks.text.get = gE_plugin_text_get;
+	callbacks.program.quit = NULL;
+	callbacks.program.reg = gE_plugin_program_register;
+	
+	plugin_query_all (&callbacks);
+	
 	gtk_main ();
 	return 0;
 }

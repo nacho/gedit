@@ -19,13 +19,83 @@
 #include <gtk/gtk.h>
 #include "main.h"
 #include "gE_plugin_api.h"
+#ifndef WITHOUT_GNOME
+#include <config.h>
+#include <gnome.h>
+#endif
 
-int gE_plugin_create( gint context, gchar *title )
+GList *plugins;
+
+/* --- Accesory functions for gedit's handling of the plugins --- */
+
+void start_plugin( GtkWidget *widget, gE_data *data )
+{
+  plugin_callback_struct callbacks;
+  plugin *plug = plugin_new( data->temp1 );
+
+  callbacks.document.create = gE_plugin_document_create;
+  callbacks.text.append = gE_plugin_text_append;
+  callbacks.document.show = gE_plugin_document_show;
+  callbacks.document.current = gE_plugin_document_current;
+  callbacks.document.filename = gE_plugin_document_filename;
+  callbacks.text.get = gE_plugin_text_get;
+  
+  plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
+}
+
+
+void add_plugin_to_menu (gE_window *window, plugin_info *info)
+{
+	gE_data *data = g_malloc0 (sizeof (gE_data));
+#ifdef WITHOUT_GNOME
+	GtkMenuENtry *entry = g_malloc0 (sizeof (GtkMenuEntry));
+	
+	entry->path = g_malloc0 (strlen (info->menu_location) + strlen ("Plugins/") + 1);
+	sprintf (entry->path, "Plugins/%s", info->menu_location);
+	entry->accelerator = NULL;
+	entry->callback = start_plugin;
+	data->temp1 = g_strdup (info->plugin_name);
+	data->window = window;
+	entry->callback_data = data;
+	
+	gtk_menu_factory_add_entries (window->menubar, entry, 1);
+#else
+	gchar *path;
+	GnomeUIInfo *menu = g_malloc0 (sizeof (GnomeUIInfo));
+	
+	data->temp1 = g_strdup (info->plugin_name);
+	data->window = window;
+	path = g_malloc0 (strlen (info->menu_location) + strlen ("Plugins/") + 1);
+	sprintf (path, "Plugins/%s", info->menu_location);
+	menu->label = g_strdup (info->plugin_name);
+	menu->type = GNOME_APP_UI_ITEM;
+	menu->hint = NULL;
+	menu->moreinfo = start_plugin;
+	menu->user_data = data;
+	menu->unused_data = NULL;
+	menu->pixmap_type = GNOME_APP_PIXMAP_NONE;
+	menu->pixmap_info = NULL;
+	menu->accelerator_key = 0;
+	
+	gnome_app_insert_menus_with_data (GNOME_APP(window->window), path, menu, data);
+#endif
+
+}
+
+void add_plugins_to_window (plugin_info *info, gE_window *window)
+{
+	add_plugin_to_menu (window, info);
+}
+
+
+/* --- Direct interface to the plugins API --- */
+
+int gE_plugin_document_create( gint context, gchar *title )
 {
   return GPOINTER_TO_INT( gE_document_new( GINT_TO_POINTER( context ) ) );
 }
 
-void gE_plugin_append( gint docid, gchar *buffer, gint length )
+void gE_plugin_text_append( gint docid, gchar *buffer, gint length )
 {
   gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
   GtkText *text = GTK_TEXT( document->text );
@@ -36,16 +106,16 @@ void gE_plugin_append( gint docid, gchar *buffer, gint length )
   document->changed = 1;
 }
 
-void gE_plugin_show( gint docid )
+void gE_plugin_document_show( gint docid )
 {
 }
 
-int gE_plugin_current( gint context )
+int gE_plugin_document_current( gint context )
 {
   return GPOINTER_TO_INT( gE_document_current( GINT_TO_POINTER( context ) ) );
 }
 
-gchar *gE_plugin_filename( gint docid )
+gchar *gE_plugin_document_filename( gint docid )
 {
   gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
   if (document->filename == NULL)
@@ -58,4 +128,22 @@ char *gE_plugin_text_get( gint docid )
 {
   gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
   return gtk_editable_get_chars( GTK_EDITABLE( document->text ), 0, -1 );
+}
+
+/* mercilessly lifted right out of go.. */
+
+void gE_plugin_program_register (plugin_info *info)
+{
+  plugin_info *temp;
+
+  temp = info;
+  info = g_malloc0( sizeof( plugin_info ) );
+  info->type = temp->type;
+  info->menu_location = g_malloc0( strlen( temp->menu_location ) + 1 );
+  strcpy( info->menu_location, temp->menu_location );
+  info->plugin_name = g_malloc0( strlen( temp->plugin_name ) + 1 );
+  strcpy( info->plugin_name, temp->plugin_name );
+  plugins = g_list_append( plugins, info );
+
+  g_list_foreach( window_list, add_plugin_to_menu, info );
 }

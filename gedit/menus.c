@@ -8,14 +8,13 @@
 #include <config.h>
 #include <gnome.h>
 #endif
-
-#define PLUGIN_TEST
+#define PLUGIN_TEST 1
 #include "main.h"
 #include "toolbar.h"
 
 static void menus_remove_accel(GtkWidget * widget, gchar * signal_name, gchar * path);
 static gint menus_install_accel(GtkWidget * widget, gchar * signal_name, gchar key, gchar modifiers, gchar * path);
-void menus_init(void);
+void menus_init(gE_window *window, gE_data *data);
 void menus_create(GtkMenuEntry * entries, int nmenu_entries);
 
 static int initialize = TRUE;
@@ -142,12 +141,7 @@ GnomeUIInfo gedit_help_menu []= {
 
 #if PLUGIN_TEST
 GnomeUIInfo gedit_plugins_menu []= {
-  { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, data, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
-  { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, data, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
-  { GNOME_APP_UI_ITEM, N_("Reverse"), NULL, start_reverse, data, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_SEPARATOR },
   { GNOME_APP_UI_ENDOFINFO}
 };
 #endif
@@ -170,11 +164,46 @@ GnomeUIInfo gedit_menu [] = {
 	GNOMEUIINFO_END
 };
 
+
+	gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
+
 #else
+
+GtkWidget **menubar;
+#ifdef GTK_HAVE_ACCEL_GROUP
+GtkAccelGroup **accel;
+#else
+GtkAcceleratorTable **accel;
+#endif
+
+menubar = &window->menubar;
+accel = &window->accel;
+
+	menus_init (window, data);
+
+	if (menubar)
+		*menubar = subfactory[0]->widget;
+
+#ifdef GTK_HAVE_ACCEL_GROUP
+    if(accel)
+       	    *accel = subfactory[0]->accel_group;
+#else
+    if(accel)
+       	    *accel = subfactory[0]->table;
+#endif
+
+
+#endif
+}
+
+#ifdef WITHOUT_GNOME
+
+void menus_init(gE_window *window, gE_data *data)
+{
 
 GtkMenuEntry menu_items[] =
 {
-	{"<Main>/File/New", "<control>N", file_new_cmd_callback, data},
+	{"<Main>/File/New", "<control>N", file_new_cmd_callback, (gpointer) data},
 	{"<Main>/File/New Window", NULL, file_newwindow_cmd_callback, data},
 	{"<Main>/File/Open", "<control>O", file_open_cmd_callback, data},
 	{"<Main>/File/Save", "<control>S", file_save_cmd_callback, data},
@@ -185,14 +214,14 @@ GtkMenuEntry menu_items[] =
 	{"<Main>/File/Print", NULL, file_print_cmd_callback, data,NULL},     
 	{"<Main>/File/<separator>", NULL, NULL, NULL},
 	{"<Main>/File/Quit", "<control>Q", file_quit_cmd_callback, data},
-	{"<Main>/Edit/Cut", "<control>X", edit_cut_cmd_callback, NULL},
-	{"<Main>/Edit/Copy", "<control>C", edit_copy_cmd_callback, NULL},
-	{"<Main>/Edit/Paste", "<control>V", edit_paste_cmd_callback, NULL},
+	{"<Main>/Edit/Cut", "<control>X", edit_cut_cmd_callback, data},
+	{"<Main>/Edit/Copy", "<control>C", edit_copy_cmd_callback, data},
+	{"<Main>/Edit/Paste", "<control>V", edit_paste_cmd_callback, data},
 	{"<Main>/Edit/<separator>", NULL, NULL, NULL},
-	{"<Main>/Edit/Select All", "<control>A", edit_selall_cmd_callback, NULL},
-	{"<Main>/Search/Search...", NULL, search_search_cmd_callback, NULL},
-	{"<Main>/Search/Search and Replace...", NULL, search_replace_cmd_callback, NULL},
-	{"<Main>/Search/Search Again", NULL, search_again_cmd_callback, NULL},
+	{"<Main>/Edit/Select All", "<control>A", edit_selall_cmd_callback, data},
+	{"<Main>/Search/Search...", NULL, search_search_cmd_callback, data},
+	{"<Main>/Search/Search and Replace...", NULL, search_replace_cmd_callback, data},
+	{"<Main>/Search/Search Again", NULL, search_again_cmd_callback, data},
 	{"<Main>/Options/Text Font...", NULL, prefs_callback, window},
 	{"<Main>/Options/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Toggle Autoindent", NULL, auto_indent_toggle_callback, data},
@@ -209,7 +238,7 @@ GtkMenuEntry menu_items[] =
 	{"<Main>/Options/Toolbar/Show Toolbar", NULL, tb_on_cb, window},
 	{"<Main>/Options/Toolbar/Hide Toolbar", NULL, tb_off_cb, window},
 	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, window},
-	{"<Main>/Options/Toolbar/Pictures and Text", NULL, tb_pic_text_cb, windowL},
+	{"<Main>/Options/Toolbar/Pictures and Text", NULL, tb_pic_text_cb, window},
 	{"<Main>/Options/Toolbar/Pictures only", NULL, tb_pic_only_cb, window},
 	{"<Main>/Options/Toolbar/Text only", NULL, tb_text_only_cb, window},
 	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
@@ -218,57 +247,25 @@ GtkMenuEntry menu_items[] =
 	#if PLUGINS_TEST
 	{"<Main>/Plugins/Diff", NULL, start_diff, data},
 	{"<Main>/Plugins/CVS Diff", NULL, start_cvsdiff, data},
+	{"<Main>/Plugins/Reverse", NULL, start_reverse, data},
+	{"<Main>/Plugins/Email", NULL, start_email, data},
 	#endif
 	{"<Main>/Help/About", "<control>H", gE_about_box, NULL}
 };
 
 int nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
-#endif
 
-#ifndef WITHOUT_GNOME
-	gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
-
-#else
-
-    if (initialize)
-    	    menus_init();
-    
-    if (menubar)
-            *menubar = subfactory[0]->widget;
-#ifdef GTK_HAVE_ACCEL_GROUP
-    if(window->accel)
-       	    *window->accel = subfactory[0]->accel_group;
-#else
-    if(window->accel)
-       	    *accel = subfactory[0]->table;
-#endif
-
-#endif
-}
-
-#ifdef WITHOUT_GNOME
-
-void menus_init(void)
-{
-
-    if (initialize) {
-        initialize = FALSE;
-	
 	factory = gtk_menu_factory_new(GTK_MENU_FACTORY_MENU_BAR);
 	subfactory[0] = gtk_menu_factory_new(GTK_MENU_FACTORY_MENU_BAR);
 	
 	gtk_menu_factory_add_subfactory(factory, subfactory[0], "<Main>");
 	menus_create(menu_items, nmenu_items);
-    }
 }
 	    
 void menus_create(GtkMenuEntry * entries, int nmenu_entries)
 {
    char *accelerator;
    int i;
-   
-   if (initialize)
-     menus_init();
    
    if (entry_ht)
            for (i = 0; i < nmenu_entries; i++) {
@@ -282,7 +279,7 @@ void menus_create(GtkMenuEntry * entries, int nmenu_entries)
 	   }
    gtk_menu_factory_add_entries(factory, entries, nmenu_entries);
    
-   for (i = 0; i < nmenu_entries; i++)
+/*   for (i = 0; i < nmenu_entries; i++)
            if (entries[i].widget) {
 	       gtk_signal_connect(GTK_OBJECT(entries[i].widget), "install_accelerator",
 				  (GtkSignalFunc) menus_install_accel,
@@ -291,6 +288,7 @@ void menus_create(GtkMenuEntry * entries, int nmenu_entries)
 				  (GtkSignalFunc) menus_remove_accel,
 				  entries[i].path);
 	   }
+*/
 }
 
 static gint menus_install_accel( GtkWidget * widget, gchar * signal_name, gchar key, char modifiers, gchar * path)
@@ -337,9 +335,6 @@ static void menus_remove_accel(GtkWidget * widget, gchar * signal_name, gchar * 
 void menus_set_sensitive(char *path, int sensitive)
 {
    GtkMenuPath *menu_path;
-   
-   if (initialize)
-     menus_init();
    
    menu_path = gtk_menu_factory_find(factory, path);
    if (menu_path)

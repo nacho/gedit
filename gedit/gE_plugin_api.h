@@ -22,12 +22,13 @@
 extern "C" {
 #endif /* __cplusplus */
   
-  int gE_plugin_create( gint context, gchar *title );
-  void gE_plugin_append( gint docid, gchar *buffer, gint length );
-  void gE_plugin_show( gint docid );
-  int gE_plugin_current( gint context );
-  char *gE_plugin_filename( gint docid );
+  int gE_plugin_document_create( gint context, gchar *title );
+  void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
+  void gE_plugin_document_show( gint docid );
+  int gE_plugin_document_current( gint context );
+  char *gE_plugin_document_filename( gint docid );
   char *gE_plugin_text_get( gint docid );
+  void gE_plugin_program_register (plugin_info *info);
 
 #ifdef __cplusplus
 }
