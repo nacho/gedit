@@ -177,7 +177,7 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 		egg_recent_item_ref (md->item);
 
 		uri = egg_recent_item_get_uri (item);
-		utf8_uri = egg_recent_item_get_uri_utf8 (item);
+		utf8_uri = egg_recent_item_get_uri_for_display (item);
 		base_uri = g_path_get_basename (utf8_uri);
 	
 		escaped_name = egg_recent_util_escape_underlines (base_uri);

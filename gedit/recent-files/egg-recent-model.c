@@ -438,7 +438,6 @@ text_handler (GMarkupParseContext *context,
 		     GError **error)
 {
 	ParseInfo *info = (ParseInfo *)user_data;
-	gchar *unescaped;
 
 	switch (peek_state (info)) {
 		case STATE_START:
@@ -448,10 +447,7 @@ text_handler (GMarkupParseContext *context,
 		case STATE_GROUPS:
 		break;
 		case STATE_URI:
-			unescaped = gnome_vfs_unescape_string_for_display (text);
-			egg_recent_item_set_uri (info->current_item, unescaped);
-
-			g_free (unescaped);
+			egg_recent_item_set_uri (info->current_item, text);
 		break;
 		case STATE_MIME_TYPE:
 			egg_recent_item_set_mime_type (info->current_item,
@@ -474,7 +470,7 @@ error_handler (GMarkupParseContext *context,
 		      GError *error,
 		      gpointer user_data)
 {
-	g_print ("Error in parse: %s\n", error->message);
+	g_warning ("Error in parse: %s", error->message);
 }
 
 static void
@@ -762,15 +758,19 @@ egg_recent_model_write (EggRecentModel *model, FILE *file, GList *list)
 	i=0;
 	while (list) {
 		gchar *uri;
+		gchar *uri_utf8;
 		gchar *mime_type;
 		gchar *escaped_uri;
 		time_t timestamp;
 		item = (EggRecentItem *)list->data;
 
 
-		uri = egg_recent_item_get_uri_utf8 (item);
-		escaped_uri = g_markup_escape_text (uri, strlen (uri));
+		uri = egg_recent_item_get_uri (item);
+		uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
+		escaped_uri = g_markup_escape_text (uri_utf8,
+						    strlen (uri_utf8));
 		g_free (uri);
+		g_free (uri_utf8);
 
 		mime_type = egg_recent_item_get_mime_type (item);
 		timestamp = egg_recent_item_get_timestamp (item);
@@ -919,7 +919,8 @@ egg_recent_model_set_property (GObject *object,
 		break;
 
 		case PROP_LIMIT:
-			model->limit = g_value_get_int (value);
+			egg_recent_model_set_limit (model,
+						g_value_get_int (value));
 		break;
 
 		default:
@@ -1027,10 +1028,31 @@ egg_recent_model_class_init (EggRecentModelClass * klass)
 }
 
 static void
+egg_recent_model_monitor (EggRecentModel *model, gboolean should_monitor)
+{
+	GnomeVFSResult res;
+
+	if (should_monitor && model->monitor == NULL) {
+
+		res = gnome_vfs_monitor_add (&model->monitor, model->path,
+					     GNOME_VFS_MONITOR_FILE,
+					     egg_recent_model_monitor_cb,
+					     model);
+
+		if (res != GNOME_VFS_OK)
+			g_warning ("Unable to monitor XML document.  Notification "
+				   "of changes in recent documents list will not be"
+				   "available.");
+	} else if (!should_monitor && model->monitor != NULL) {
+		gnome_vfs_monitor_cancel (model->monitor);
+		model->monitor = NULL;
+	}
+}
+
+static void
 egg_recent_model_init (EggRecentModel * model)
 {
 	gchar *path;
-	GnomeVFSResult res;
 
 	if (!gnome_vfs_init ()) {
 		g_warning ("gnome-vfs initialization failed.");
@@ -1050,15 +1072,8 @@ egg_recent_model_init (EggRecentModel * model)
 				(GDestroyNotify)g_free,
 				(GDestroyNotify)gnome_vfs_monitor_cancel);
 
-	res = gnome_vfs_monitor_add (&model->monitor, path,
-				     GNOME_VFS_MONITOR_FILE,
-				     egg_recent_model_monitor_cb,
-				     model);
-
-	if (res != GNOME_VFS_OK)
-		g_warning ("Unable to monitor XML document.  Notification "
-			   "of changes in recent documents list will not be"
-			   "available.");
+	model->monitor = NULL;
+	egg_recent_model_monitor (model, TRUE);
 }
 
 
@@ -1102,6 +1117,7 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 	gboolean ret = FALSE;
 	gboolean updated = FALSE;
 	time_t t;
+	gchar *uri;
 	
 	g_return_val_if_fail (model != NULL, FALSE);
 	g_return_val_if_fail (EGG_IS_RECENT_MODEL (model), FALSE);
@@ -1111,6 +1127,8 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 
 	time (&t);
 	egg_recent_item_set_timestamp (item, t);
+
+	uri = egg_recent_item_get_uri (item);
 
 	if (egg_recent_model_lock_file (file)) {
 
@@ -1295,7 +1313,12 @@ egg_recent_model_set_limit (EggRecentModel *model, int limit)
 {
 	model->limit = limit;
 
-	egg_recent_model_changed (model);
+	if (limit <= 0)
+		egg_recent_model_monitor (model, FALSE);
+	else {
+		egg_recent_model_monitor (model, TRUE);
+		egg_recent_model_changed (model);
+	}
 }
 
 /**
@@ -1493,12 +1516,13 @@ egg_recent_model_changed (EggRecentModel *model)
 {
 	GList *list = NULL;
 
-	if (model->limit != 0) {
+	if (model->limit > 0) {
 		list = egg_recent_model_get_list (model);
 		egg_recent_model_monitor_list (model, list);
-	}
 	
-	g_signal_emit (G_OBJECT (model), model_signals[CHANGED], 0, list);
+		g_signal_emit (G_OBJECT (model), model_signals[CHANGED], 0,
+			       list);
+	}
 
 	if (list)
 		EGG_RECENT_ITEM_LIST_UNREF (list);

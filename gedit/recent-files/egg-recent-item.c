@@ -84,6 +84,7 @@ EggRecentItem *
 egg_recent_item_new_from_uri (const gchar *uri)
 {
 	EggRecentItem *item;
+	gchar *uri_utf8;
 
 	g_return_val_if_fail (uri != NULL, NULL);
 
@@ -91,10 +92,13 @@ egg_recent_item_new_from_uri (const gchar *uri)
 
 	egg_recent_item_set_uri (item ,uri);
 	
-	item->mime_type = gnome_vfs_get_mime_type (item->uri);
+	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
+	item->mime_type = gnome_vfs_get_mime_type (uri_utf8);
 
 	if (!item->mime_type)
 		item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
+
+	g_free (uri_utf8);
 
 	return item;
 }
@@ -183,9 +187,10 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 
 	ascii_uri = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
 
-	g_return_if_fail (ascii_uri != NULL);
-	
-	item->uri = ascii_uri;
+	if (ascii_uri != NULL)
+		item->uri = ascii_uri;
+	else
+		item->uri = g_strdup (uri);
 }
 
 gchar * 
@@ -198,6 +203,21 @@ gchar *
 egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 {
 	return g_filename_to_utf8 (item->uri, -1, NULL, NULL, NULL);
+}
+
+gchar *
+egg_recent_item_get_uri_for_display (const EggRecentItem *item)
+{
+	gchar *uri_utf8;
+	gchar *str;
+
+	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
+
+	str = gnome_vfs_unescape_string_for_display (uri_utf8);
+
+	g_free (uri_utf8);
+
+	return str;
 }
 
 void 
