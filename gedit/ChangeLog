@@ -1,3 +1,16 @@
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_remove_cb): don't remove views if views # < 2
+	( this fixes a crash too )
+
+	* commands.c (edit_cut_cb): use gedit_editable_current() and
+	not GTK_TEXT(mdi->whatever....
+
+	* utils.h (gedit_editable_current): macro for gedit_editable_current()
+
+	* document.c (child_changed_cb): dont use mdi->active view
+	use gedit_view_current()
+
 2000-06-10  Chema Celorio  <chema@celorio.com>
 
 	* search.c (count_lines_cb): don't display filename (NULL)
