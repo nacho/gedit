@@ -47,17 +47,19 @@
 
 struct _GeditDocumentPrivate
 {
-	gchar*	uri;
-	gint 	untitled_number;	
+	gchar		*uri;
+	gint 		 untitled_number;	
 
-	gchar*  last_searched_text;
-	gchar*  last_replace_text;
-	gboolean  last_search_was_case_sensitive;
-	guint	auto_save_timeout;
+	gchar		*last_searched_text;
+	gchar		*last_replace_text;
+	gboolean  	 last_search_was_case_sensitive;
+
+	guint		 auto_save_timeout;
+	gboolean	 last_save_was_manually; 
 	
-	gboolean readonly;
+	gboolean 	 readonly;
 
-	GeditUndoManager* undo_manager;
+	GeditUndoManager *undo_manager;
 };
 
 static gint current_max_untitled_num = 0;
@@ -246,6 +248,8 @@ gedit_document_init (GeditDocument *document)
 
 	document->priv->readonly = FALSE;
 
+	document->priv->last_save_was_manually = TRUE;
+
 	document->priv->undo_manager = gedit_undo_manager_new (document);
 
 	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_undo",
@@ -376,13 +380,36 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 	g_return_if_fail (document != NULL);
 	g_return_if_fail (document->priv != NULL);
 
+	if (readonly) 
+	{
+		if (gedit_settings->auto_save && (document->priv->auto_save_timeout > 0))
+		{
+			gedit_debug (DEBUG_DOCUMENT, "Remove autosave timeout");
+
+			g_source_remove (document->priv->auto_save_timeout);
+			document->priv->auto_save_timeout = 0;
+		}
+	}
+	else
+	{
+		if (gedit_settings->auto_save && (document->priv->auto_save_timeout <= 0))
+		{
+			gedit_debug (DEBUG_DOCUMENT, "Install autosave timeout");
+
+			document->priv->auto_save_timeout = g_timeout_add 
+				(gedit_settings->auto_save_interval*1000*60,
+		 		 (GSourceFunc)gedit_document_auto_save_timeout,
+		  		 document);		
+		}
+	}
+
 	if (document->priv->readonly == readonly) 
 		return;
 
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
       	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
 
-	if(readonly) 
+	if (readonly) 
 	{
 		gtk_text_buffer_apply_tag_by_name (GTK_TEXT_BUFFER (document), 
 					NOT_EDITABLE_TAG_NAME, &start, &end);
@@ -488,12 +515,26 @@ static gboolean
 gedit_document_auto_save_timeout (GeditDocument *doc)
 {
 	GError *error = NULL;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (!gedit_document_is_readonly (doc), FALSE);
+
+	/* Romove timeout if now gedit_settings->auto_save is FALSE */
+	if (!gedit_settings->auto_save) 
+		return FALSE;
+
+	if (!gedit_document_get_modified (doc))
+		return TRUE;
+
 	gedit_document_auto_save (doc, &error);
 
-	if (error) {
-		/* Should we actually tell the user there was an error? */
+	if (error) 
+	{
+		/* FIXME - Should we actually tell 
+		 * the user there was an error? - James */
 		g_error_free (error);
-		return FALSE;
+		return TRUE;
 	}
 
 	return TRUE;
@@ -502,9 +543,12 @@ gedit_document_auto_save_timeout (GeditDocument *doc)
 static gboolean
 gedit_document_auto_save (GeditDocument* doc, GError **error)
 {
+	gedit_debug (DEBUG_DOCUMENT, "");
+	
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	gedit_document_save_as_real (doc, doc->priv->uri, FALSE, NULL);
+	if (gedit_document_save_as_real (doc, doc->priv->uri, doc->priv->last_save_was_manually, NULL))
+		doc->priv->last_save_was_manually = FALSE;
 
 	return TRUE;
 }
@@ -613,12 +657,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
 	gedit_document_set_uri (doc, uri);
-
-	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0))
-		doc->priv->auto_save_timeout = g_timeout_add(gedit_settings->auto_save_interval*1000*60,
-							     (GSourceFunc)gedit_document_auto_save_timeout,
-							     doc);
-	
+		
 	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
 
 	return TRUE;
@@ -704,11 +743,6 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	gedit_document_set_readonly (doc, FALSE);
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
 
-	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0))
-		doc->priv->auto_save_timeout =
-			g_timeout_add(gedit_settings->auto_save_interval*1000*60,
-				      (GSourceFunc)gedit_document_auto_save, doc);
-
 	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0);
 
 	return TRUE;
@@ -747,42 +781,76 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 gboolean 
 gedit_document_save (GeditDocument* doc, GError **error)
 {	
+	gboolean ret;
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 
-	if (gedit_settings->auto_save) {
-
+	if (gedit_settings->auto_save) 
+	{
 		if (doc->priv->auto_save_timeout > 0)
+		{
 			g_source_remove (doc->priv->auto_save_timeout);
+			doc->priv->auto_save_timeout = 0;
+		}
+	}
+	
+	ret = gedit_document_save_as_real (doc, doc->priv->uri, 
+			gedit_settings->create_backup_copy, error);
 
+	if (ret)
+		doc->priv->last_save_was_manually = TRUE;
+
+	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	{
 		doc->priv->auto_save_timeout =
-			g_timeout_add(gedit_settings->auto_save_interval*1000*60,(GSourceFunc)gedit_document_auto_save, doc);
+			g_timeout_add (gedit_settings->auto_save_interval*1000*60,
+				       (GSourceFunc)gedit_document_auto_save, doc);
 	}
 
-	return gedit_document_save_as_real (doc, doc->priv->uri, 
-			gedit_settings->create_backup_copy, error);
+	return ret;
 }
 
 gboolean	
 gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 {	
+	gboolean ret = FALSE;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
+	if (gedit_settings->auto_save) 
+	{
+
+		if (doc->priv->auto_save_timeout > 0)
+		{
+			g_source_remove (doc->priv->auto_save_timeout);
+			doc->priv->auto_save_timeout = 0;
+		}
+	}
+
 	if (gedit_document_save_as_real (doc, uri, FALSE, error))
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);
-		return TRUE;
+		doc->priv->last_save_was_manually = TRUE;
+
+		ret = TRUE;
 	}		
 
-	return FALSE;
+	if (gedit_settings->auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	{
+		doc->priv->auto_save_timeout =
+			g_timeout_add (gedit_settings->auto_save_interval*1000*60,
+				       (GSourceFunc)gedit_document_auto_save, doc);
+	}
+
+	return ret;
 }
 
 static gboolean	

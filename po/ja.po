@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2002-01-14 16:58+0100\n"
+"POT-Creation-Date: 2002-01-18 09:59+0100\n"
 "PO-Revision-Date: 2001-06-27 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
+#: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
 #, fuzzy, c-format
 msgid "Activate %s"
 msgstr "すべて有効にする(_A)"
@@ -39,7 +39,7 @@ msgstr "指定行へ移動(_L)..."
 msgid "_Goto line"
 msgstr "指定行へ移動"
 
-#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:50
+#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
 #, fuzzy
 msgid "Replace"
 msgstr "置換"
@@ -51,94 +51,99 @@ msgstr "すべて置換"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
-#: src/gedit-file.c:813 src/gedit-ui.xml.h:87
+#: src/gedit-file.c:821 src/gedit-ui.xml.h:85
 #, fuzzy
 msgid "_Replace"
 msgstr "置換"
 
-#: src/dialogs/gedit-dialog-replace.c:271 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:268 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "検索"
 
-#: src/dialogs/gedit-dialog-replace.c:475
-#: src/dialogs/gedit-dialog-replace.c:546
-#: src/dialogs/gedit-dialog-replace.c:703 src/gedit-commands.c:339
+#: src/dialogs/gedit-dialog-replace.c:469
+#: src/dialogs/gedit-dialog-replace.c:540
+#: src/dialogs/gedit-dialog-replace.c:697
 #, fuzzy, c-format
-msgid "The string \"%s\" has not been found."
-msgstr "検索文字列は見つかりませんでした。"
+msgid "The text \"%s\" was not found."
+msgstr "ファイル %s が見つかりません。"
 
-#: src/dialogs/gedit-dialog-replace.c:712
+#: src/dialogs/gedit-dialog-replace.c:706
 #, fuzzy, c-format
 msgid "Found and replaced %d occurences."
 msgstr "%i個が見つかって置換しました。"
 
-#: src/dialogs/gedit-preferences-dialog.c:195
+#: src/dialogs/gedit-preferences-dialog.c:197
 msgid "Toolbar"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:196
+#: src/dialogs/gedit-preferences-dialog.c:198
 #, fuzzy
 msgid "Status bar"
 msgstr "ステータスバーを表示(_S)"
 
-#: src/dialogs/gedit-preferences-dialog.c:199
+#: src/dialogs/gedit-preferences-dialog.c:201
 msgid "MDI"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:207
+#: src/dialogs/gedit-preferences-dialog.c:209
 #, fuzzy
 msgid "Font & Colors"
 msgstr "フォント/色"
 
-#: src/dialogs/gedit-preferences-dialog.c:209 src/gedit-ui.xml.h:55
+#: src/dialogs/gedit-preferences-dialog.c:211 src/gedit-ui.xml.h:54
 msgid "Save"
 msgstr "保存"
 
 #.
 #. {_("Tabs"), NULL, TABS_SETTINGS},
 #.
-#: src/dialogs/gedit-preferences-dialog.c:213 src/gedit-ui.xml.h:68
+#: src/dialogs/gedit-preferences-dialog.c:215 src/gedit-ui.xml.h:67
 msgid "Undo"
 msgstr "元に戻す"
 
-#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences-dialog.c:216
 msgid "Wrap mode"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:215
+#: src/dialogs/gedit-preferences-dialog.c:217
 #, fuzzy
 msgid "Line numbers"
 msgstr "行番号:"
 
-#: src/dialogs/gedit-preferences-dialog.c:222
+#: src/dialogs/gedit-preferences-dialog.c:224
 #, fuzzy
 msgid "Page"
 msgstr "ページ"
 
-#: src/dialogs/gedit-preferences-dialog.c:229
+#: src/dialogs/gedit-preferences-dialog.c:231
 #, fuzzy
 msgid "Editor"
 msgstr "終了"
 
-#: src/dialogs/gedit-preferences-dialog.c:230 src/gedit-ui.xml.h:42
+#: src/dialogs/gedit-preferences-dialog.c:232 src/gedit-ui.xml.h:41
 msgid "Print"
 msgstr "印刷"
 
-#: src/dialogs/gedit-preferences-dialog.c:231
+#: src/dialogs/gedit-preferences-dialog.c:233
 msgid "User interface"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:301 src/gedit-ui.xml.h:41
+#: src/dialogs/gedit-preferences-dialog.c:303 src/gedit-ui.xml.h:40
 msgid "Preferences"
 msgstr "設定"
 
-#: src/dialogs/gedit-preferences-dialog.c:462
+#: src/dialogs/gedit-preferences-dialog.c:464
 msgid "Categories"
 msgstr ""
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr ""
+
+#: src/gedit-commands.c:339
+#, fuzzy, c-format
+msgid "The string \"%s\" has not been found."
+msgstr "検索文字列は見つかりませんでした。"
 
 #: src/gedit-commands.c:411
 msgid "Impossible to update gedit settings."
@@ -149,16 +154,16 @@ msgstr ""
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "geditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
 
-#: src/gedit-document.c:454 src/gedit-document.c:465
+#: src/gedit-document.c:488 src/gedit-document.c:499
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:454 src/gedit-document.c:465
+#: src/gedit-document.c:488 src/gedit-document.c:499
 msgid "Untitled"
 msgstr "名前無し"
 
-#: src/gedit-document.c:537 src/gedit-document.c:643
+#: src/gedit-document.c:613 src/gedit-document.c:719
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
@@ -166,7 +171,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-document.c:953
+#: src/gedit-document.c:1072
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "無題のドキュメントを元には戻せません。\n"
@@ -188,21 +193,27 @@ msgstr "置換"
 msgid "Select a filename to save"
 msgstr "有効にするプラグインの選択:"
 
-#: src/gedit-file.c:235 src/gedit-file.c:246 src/gedit-file.c:358
-#, c-format
-msgid "Loaded file %s"
+#: src/gedit-file.c:236 src/gedit-file.c:366 src/gedit-file.c:1091
+#: src/gedit-file.c:1132
+#, fuzzy, c-format
+msgid "Loaded file '%s'"
 msgstr "読み込み完了: %s"
 
-#: src/gedit-file.c:256
+#: src/gedit-file.c:247 src/gedit-file.c:1042
+#, fuzzy, c-format
+msgid "Loading %d file..."
+msgstr "%i ファイルを読み込みました"
+
+#: src/gedit-file.c:264 src/gedit-file.c:1078
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i ファイルを読み込みました"
 
-#: src/gedit-file.c:326 src/gedit-file.c:348
+#: src/gedit-file.c:334 src/gedit-file.c:356
 msgid "Open File ..."
 msgstr "開く..."
 
-#: src/gedit-file.c:395 src/gedit-file.c:443
+#: src/gedit-file.c:403 src/gedit-file.c:451
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -213,16 +224,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:512 src/gedit-file.c:682 src/gedit-file.c:830
+#: src/gedit-file.c:520 src/gedit-file.c:690 src/gedit-file.c:838
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:527 src/gedit-file.c:729 src/gedit-file.c:946
+#: src/gedit-file.c:535 src/gedit-file.c:737 src/gedit-file.c:954
 msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:534 src/gedit-file.c:736
+#: src/gedit-file.c:542 src/gedit-file.c:744
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -233,38 +244,38 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:562 src/gedit-file.c:689 src/gedit-file.c:837
+#: src/gedit-file.c:570 src/gedit-file.c:697 src/gedit-file.c:845
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "この文書は保存されていません。"
 
-#: src/gedit-file.c:572 src/gedit-file.c:687 src/gedit-file.c:835
+#: src/gedit-file.c:580 src/gedit-file.c:695 src/gedit-file.c:843
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:641
+#: src/gedit-file.c:649
 msgid "Save As..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:674
+#: src/gedit-file.c:682
 #, fuzzy
 msgid "Save as ..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:816
 #, c-format
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
 
-#: src/gedit-file.c:932
+#: src/gedit-file.c:940
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:953
+#: src/gedit-file.c:961
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -275,17 +286,17 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:981
+#: src/gedit-file.c:989
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "この文書は保存されていません。"
 
-#: src/gedit-file.c:991
+#: src/gedit-file.c:999
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:1143
+#: src/gedit-file.c:1186
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -323,6 +334,41 @@ msgstr "(修正されました)"
 #: src/gedit-mdi.c:696
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
+
+#: src/gedit-plugins-engine.c:134
+#, fuzzy, c-format
+msgid "Error, unable to open module file '%s'\n"
+msgstr "エラー: モジュール %s を開けません"
+
+#: src/gedit-plugins-engine.c:149
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain init function."
+msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
+
+#: src/gedit-plugins-engine.c:159
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain activate function."
+msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
+
+#: src/gedit-plugins-engine.c:169
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain deactivate function."
+msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
+
+#: src/gedit-plugins-engine.c:179
+#, c-format
+msgid "Error, impossible to initialize plugin '%s'"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:187
+#, c-format
+msgid "Error, the plugin '%s' did not specified a name"
+msgstr ""
+
+#: src/gedit-plugins-engine.c:244
+#, c-format
+msgid "Error, impossible to activate plugin '%s'"
+msgstr ""
 
 #: src/gedit-print.c:158
 msgid ""
@@ -386,7 +432,7 @@ msgid "About..."
 msgstr ""
 
 #: src/gedit-ui.xml.h:3
-msgid "Add/Remove installed plugins"
+msgid "Add/Remove plugins"
 msgstr ""
 
 #: src/gedit-ui.xml.h:4
@@ -507,320 +553,327 @@ msgid "Main toolbar"
 msgstr ""
 
 #: src/gedit-ui.xml.h:32
-#, fuzzy
-msgid "Manager"
-msgstr "マネージャ(_M) ..."
-
-#: src/gedit-ui.xml.h:33
 msgid "New"
 msgstr "新規"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "開く"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:34
 #, fuzzy
 msgid "Open a file"
 msgstr "ファイルを開く"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:35
 msgid "Open a file from a specified URI"
 msgstr "指定したURIからファイルを開く"
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:36
 msgid "Open from URI"
 msgstr "URIから開く..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:37
 msgid "Open from _URI..."
 msgstr "URIを開く(_U)..."
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:38
 msgid "Paste"
 msgstr "貼り付け"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
 msgstr "クリップボードを張り付け"
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:42
 #, fuzzy
 msgid "Print Pre_view"
 msgstr "印刷プレビュー(_V)"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:43
 #, fuzzy
 msgid "Print Preview"
 msgstr "印刷プレビュー"
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:44
 #, fuzzy
 msgid "Print Setup"
 msgstr "ドキュメントの印刷"
 
-#: src/gedit-ui.xml.h:46
+#: src/gedit-ui.xml.h:45
 msgid "Print preview"
 msgstr "印刷プレビュー"
 
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:46
 msgid "Print the current file"
 msgstr "現在編集中のファイルを印刷"
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:47
 msgid "Redo"
 msgstr "やり直す"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:48
 #, fuzzy
 msgid "Redo the undone action"
 msgstr "最後にやったことをやり直す"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:50
 #, fuzzy
 msgid "Replace a string"
 msgstr "文字列を検索"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:51
 msgid "Revert to a saved version of the file"
 msgstr ""
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:52
 #, fuzzy
 msgid "Revert to saved"
 msgstr "リバース"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:53
 msgid "Sav_e All"
 msgstr "すべて保存(_E)"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:55
 #, fuzzy
 msgid "Save All"
 msgstr "すべて保存(_E)"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:56
 #, fuzzy
 msgid "Save As"
 msgstr "名前をつけて保存..."
 
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:57
 #, fuzzy
 msgid "Save _As..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:58
 #, fuzzy
 msgid "Save all open files"
 msgstr "開いているすべてのファイルを保存"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:59
 msgid "Save the current file"
 msgstr "現在編集中のファイルを保存"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:60
 #, fuzzy
 msgid "Save the current file with a different name"
 msgstr "現在編集中のファイルを保存"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:61
 msgid "Se_arch"
 msgstr "検索(_A)"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:62
 #, fuzzy
 msgid "Search again for the same string"
 msgstr "文字列を検索"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:63
 msgid "Search for a string"
 msgstr "文字列を検索"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:64
 #, fuzzy
 msgid "Select All"
 msgstr "すべて置換"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:65
 #, fuzzy
 msgid "Select the entire document"
 msgstr "現在編集中のファイルをメールで送信"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:66
 msgid "Setup the page settings for your current printer"
 msgstr ""
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:68
 #, fuzzy
 msgid "Undo the last action"
 msgstr "最後にやったことを元に戻す"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:69
 msgid "_About..."
 msgstr ""
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:70
 #, fuzzy
 msgid "_Close"
 msgstr "閉じる"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:71
 #, fuzzy
 msgid "_Copy"
 msgstr "コピー"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:72
 msgid "_Debug"
 msgstr ""
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:73
 msgid "_Documents"
 msgstr "ドキュメント(_D)"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:74
 #, fuzzy
 msgid "_Edit"
 msgstr "終了"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:75
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:76
 #, fuzzy
 msgid "_Find"
 msgstr "検索"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:77
 msgid "_Help"
 msgstr ""
 
-#: src/gedit-ui.xml.h:79
-#, fuzzy
-msgid "_Manager"
-msgstr "マネージャ(_M) ..."
-
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:78
 msgid "_New"
 msgstr "新規(_N)"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:79
 #, fuzzy
 msgid "_Open..."
 msgstr "開く"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:80
 #, fuzzy
 msgid "_Paste"
 msgstr "貼り付け"
 
-#: src/gedit-ui.xml.h:83
-msgid "_Plugins"
-msgstr "プラグイン(_P)"
+#: src/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_Plugins manager"
+msgstr "プラグインマネージャ..."
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 #, fuzzy
 msgid "_Preferences"
 msgstr "設定"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 #, fuzzy
 msgid "_Print"
 msgstr "印刷"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 #, fuzzy
 msgid "_Redo"
 msgstr "やり直す"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:86
 msgid "_Revert"
 msgstr "戻す(_R)"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:87
 #, fuzzy
 msgid "_Save"
 msgstr "保存"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:88
 #, fuzzy
 msgid "_Select all"
 msgstr "すべて無効にする(_D)"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:89
 msgid "_Settings"
 msgstr ""
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:90
+#, fuzzy
+msgid "_Tools"
+msgstr "宛先(_T):"
+
+#: src/gedit-ui.xml.h:91
 #, fuzzy
 msgid "_Undo"
 msgstr "元に戻す"
 
-#: src/gedit-view.c:787
+#: src/gedit-view.c:786
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:825
+#: src/gedit-view.c:824
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:827
+#: src/gedit-view.c:826
 msgid "  INS"
 msgstr ""
 
-#: src/gedit2.c:59
+#: src/gedit2.c:70
 #, fuzzy
 msgid "Show mdi debugging messages."
 msgstr "表示のデバッグメッセージの表示。"
 
-#: src/gedit2.c:62
+#: src/gedit2.c:73
 msgid "Show commands debugging messages."
 msgstr "コマンドのデバッグメッセージの表示。"
 
-#: src/gedit2.c:65
+#: src/gedit2.c:76
 msgid "Show document debugging messages."
 msgstr "ドキュメントのデバッグメッセージの表示。"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:79
 msgid "Show file debugging messages."
 msgstr "ファイルのデバッグメッセージの表示。"
 
-#: src/gedit2.c:71
+#: src/gedit2.c:82
 msgid "Show plugin debugging messages."
 msgstr "プラグインのデバッグメッセージの表示。"
 
-#: src/gedit2.c:74
+#: src/gedit2.c:85
 msgid "Show prefs debugging messages."
 msgstr "Show prefs debugging messages."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:88
 msgid "Show printing debugging messages."
 msgstr "印刷のデバッグメッセージの表示。"
 
-#: src/gedit2.c:80
+#: src/gedit2.c:91
 msgid "Show search debugging messages."
 msgstr "検索のデバッグメッセージの表示。"
 
-#: src/gedit2.c:83
+#: src/gedit2.c:94
 msgid "Show undo debugging messages."
 msgstr "元に戻すときのデバッグメッセージの表示。"
 
-#: src/gedit2.c:86
+#: src/gedit2.c:97
 msgid "Show view debugging messages."
 msgstr "表示のデバッグメッセージの表示。"
 
-#: src/gedit2.c:89
+#: src/gedit2.c:100
 msgid "Show recent debugging messages."
 msgstr "最近使ったファイルのデバッグメッセージの表示。"
 
-#: src/gedit2.c:92
+#: src/gedit2.c:103
 msgid "Turn on all debugging messages."
 msgstr "すべてのデバッグメッセージを表示。"
 
-#: src/gedit2.c:147
+#: src/gedit2.c:164
 msgid "The gnome text editor"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Manager"
+#~ msgstr "マネージャ(_M) ..."
+
+#, fuzzy
+#~ msgid "_Manager"
+#~ msgstr "マネージャ(_M) ..."
+
+#~ msgid "_Plugins"
+#~ msgstr "プラグイン(_P)"
 
 #~ msgid "ASCII table"
 #~ msgstr "ASCIIテーブル"
@@ -1116,9 +1169,6 @@ msgstr ""
 #~ msgid "_Subject:"
 #~ msgstr "件名(_S):"
 
-#~ msgid "_To:"
-#~ msgstr "宛先(_T):"
-
 #~ msgid "filename"
 #~ msgstr "ファイル名"
 
@@ -1181,9 +1231,6 @@ msgstr ""
 
 #~ msgid "File name:"
 #~ msgstr "ファイル名:"
-
-#~ msgid "Plugins manager..."
-#~ msgstr "プラグインマネージャ..."
 
 #~ msgid "Add _header"
 #~ msgstr "ヘッダの追加(_H)"
@@ -1328,9 +1375,6 @@ msgstr ""
 
 #~ msgid "This file does not end with a valid extension\n"
 #~ msgstr "このファイルは正しい拡張子で終了していません\n"
-
-#~ msgid "The file %s was not found."
-#~ msgstr "ファイル %s が見つかりません。"
 
 #~ msgid ""
 #~ "An error was encountered while opening the file \"%s\".\n"
@@ -1505,12 +1549,6 @@ msgstr ""
 #~ msgstr ""
 #~ "%s %sプラグインは、%s無しでは使えません。\n"
 #~ " %sの場所をもう一度指定しますか?"
-
-#~ msgid "Error, unable to open module file, %s"
-#~ msgstr "エラー: モジュール %s を開けません"
-
-#~ msgid "Error, plugin does not contain init_plugin function."
-#~ msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
 #~ msgid "Error, init_plugin returned an error"
 #~ msgstr "エラー: プラグインを初期化できません"

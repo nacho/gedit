@@ -193,7 +193,9 @@ main (int argc, char **argv)
 	gedit_mdi = gedit_mdi_new ();
 	bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
 
-	gedit_plugins_engine_init ();
+	/*
+	 * gedit_plugins_engine_init ();
+	 */
 
 	gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
 

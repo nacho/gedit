@@ -170,18 +170,8 @@ gedit_plugins_engine_load (const gchar *file)
 			   file);
 		
 		goto error;
-	}
-
-	/* Load "destroy" symbol */
-	if (!g_module_symbol (plugin->handle, "destroy", 
-			      (gpointer*)&plugin->destroy))
-	{
-		g_warning (_("Error, plugin '%s' does not contain destroy function."),
-			   file);
-		
-		goto error;
-	}
-
+	}	
+	
 	/* Initialize plugin */
 	res = plugin->init (plugin);
 	if (res != PLUGIN_OK)
@@ -190,18 +180,7 @@ gedit_plugins_engine_load (const gchar *file)
 			   file);
 		
 		goto error;
-	}
-
-	/* FIXME: remove when we will have a PluginManager */
-	res = plugin->activate (plugin);
-	if (res != PLUGIN_OK)
-	{
-		g_warning (_("Error, impossible to activate plugin '%s'"),
-			   file);
-		
-		goto error;
-	}
-
+	}	
 
 	if (plugin->name == NULL)
 	{
@@ -213,7 +192,7 @@ gedit_plugins_engine_load (const gchar *file)
 
 	gedit_debug (DEBUG_PLUGINS, "Plugin: %s (INSTALLED)", plugin->name);
 
-	info->state	= GEDIT_PLUGIN_DEACTIVATED;
+	info->state = GEDIT_PLUGIN_DEACTIVATED;
 
 	gedit_plugins_list = g_list_append (gedit_plugins_list, info);
 
@@ -255,9 +234,21 @@ gedit_plugins_engine_get_plugins_list ()
 gboolean 	 
 gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 {
+	gboolean res;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	/* TODO */
+	res = plugin->activate (plugin);
+	if (res != PLUGIN_OK)
+	{
+		g_warning (_("Error, impossible to activate plugin '%s'"),
+			   plugin->file);
+		
+		return FALSE;
+	}
+
+	/* TODO: Update plugin list */
+	
 	return FALSE;
 }
 
@@ -271,5 +262,18 @@ gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 }
 	
 
+gboolean	 
+gedit_plugins_engine_update_plugins_ui (gboolean new_window)
+{
+	/*
+	if (new_window)
+		gedit_plugins_engine_reactivate_all ();
 
+*/
+	/* TODO: updated ui di tutti i plugin che hanno
+	 * la funzione update_ui
+	 */
+
+	return FALSE;
+}
 

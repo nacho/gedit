@@ -48,20 +48,24 @@ struct _GeditPlugin
 	gchar	*file;
 	GModule	*handle;
 
+	/* The following fields are compulsory */
 	gchar	*name;
 	gchar	*desc;
 	gchar	*author;
 	gchar   *copyright;
 	
+	/* The following fields are compulsory */
 	GeditPluginState	(*init) 	(GeditPlugin *);
 	GeditPluginState	(*activate)	(GeditPlugin *);
 	GeditPluginState	(*deactivate)	(GeditPlugin *);
+
+	/* The following fields are optional */
 	GeditPluginState	(*configure)	(GeditPlugin *, GtkWidget *parent);
 	GeditPluginState	(*save_settings)(GeditPlugin *);
 	GeditPluginState	(*update_ui)	(GeditPlugin *);
 	GeditPluginState	(*destroy)	(GeditPlugin *);
 
-	/* filled in by plugin */
+	/* Eventually filled in by the plugin */
 	gpointer	private_data;
 };	
 	
