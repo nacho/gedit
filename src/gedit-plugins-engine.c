@@ -42,9 +42,9 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-debug.h"
 
-#define USER_GEDIT_PLUGINS_LOCATION ".gedit2/plugins/"
+#define USER_GEDIT_PLUGINS_LOCATION ".gedit-2/plugins/"
 
-#define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit2/plugins"
+#define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit-2/plugins"
 
 static void		 gedit_plugins_engine_load_all 	(void);
 static void		 gedit_plugins_engine_load_dir	(const gchar *dir);

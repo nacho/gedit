@@ -44,9 +44,9 @@
 #define MENU_ITEM_LABEL		N_("_Insert Date/Time")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
 #define MENU_ITEM_NAME		"PluginInsertDateAndTime"	
-#define MENU_ITEM_TIP		N_("Insert current date and time at the cursor position.")
+#define MENU_ITEM_TIP		N_("Insert current date and time at the cursor position")
 
-#define TIME_BASE_KEY 	"/apps/gedit2/plugins/time"
+#define TIME_BASE_KEY 	"/apps/gedit-2/plugins/time"
 #define SEL_FORMAT_KEY	"/sel-format"
 
 
@@ -535,7 +535,7 @@ init (GeditPlugin *pd)
 	gedit_debug (DEBUG_PLUGINS, "");
      
 	pd->name = _("Insert Date/Time");
-	pd->desc = _("Inserts the current date and time at the cursor position.");
+	pd->desc = _("Inserts current date and time at the cursor position.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	

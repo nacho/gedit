@@ -44,7 +44,7 @@
 #define MENU_ITEM_LABEL		N_("Insert shell _output")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
 #define MENU_ITEM_NAME		"PluginShellOutput"	
-#define MENU_ITEM_TIP		N_("Insert the shell output in the current document.")
+#define MENU_ITEM_TIP		N_("Insert the shell output in the current document")
 
 #define SHELL_OUTPUT_LOGO "/shell-output-logo.png"
 

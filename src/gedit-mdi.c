@@ -136,7 +136,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 {
 	gedit_debug (DEBUG_MDI, "START");
 
-	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", 
+	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit-2", "gedit", 
 			      gedit_settings->mdi_tabs_position);
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);

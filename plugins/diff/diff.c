@@ -53,7 +53,7 @@
 #include <gedit-file.h>
 #include <dialogs/gedit-dialogs.h>
 
-#define DIFF_BASE_KEY 		"/apps/gedit2/plugins/diff"
+#define DIFF_BASE_KEY 		"/apps/gedit-2/plugins/diff"
 #define DIFF_LOCATION_KEY	"/diff-program-location"
 #define UNIFIED_FORMAT_KEY	"/use-unified-format"
 #define IGNORE_BLANKS		"/ignore-blanks"

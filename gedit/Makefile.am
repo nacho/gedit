@@ -1,9 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 SUBDIRS= dialogs
 
-bin_PROGRAMS = gedit2
+bin_PROGRAMS = gedit
 
-uidir = $(datadir)/gedit2/ui/
+uidir = $(datadir)/gedit-2/ui/
 
 
 INCLUDES = \
@@ -13,18 +13,18 @@ INCLUDES = \
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" 	\
-	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit2/plugins"\"\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\" \
+	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\" 	\
+	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\" \
 	-DG_DISABLE_DEPRECATED				\
 	-DGDK_DISABLE_DEPRECATED			\
 	-DGTK_DISABLE_DEPRECATED			\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
 	-DGNOME_DISABLE_DEPRECATED			
 
-gedit2_LDFLAGS = -export-dynamic
+gedit_LDFLAGS = -export-dynamic
 
-gedit2_LDADD = 				\
+gedit_LDADD = 				\
 	dialogs/libdialogs.a		\
 	$(GEDIT_LIBS)			
 
@@ -32,7 +32,7 @@ BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h
 
-gedit2_SOURCES = 			\
+gedit_SOURCES = 			\
 	gedit2.c			\
 	gedit2.h			\
 	gedit-mdi.c			\

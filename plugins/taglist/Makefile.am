@@ -1,7 +1,7 @@
 # Tag list plugin
-plugindir = $(libdir)/gedit2/plugins
+plugindir = $(libdir)/gedit-2/plugins
 
-taglistdir = $(datadir)/gedit2/taglist
+taglistdir = $(datadir)/gedit-2/taglist
 taglist_DATA = \
 	HTML.tags	\
 	Latex.tags
@@ -10,7 +10,7 @@ INCLUDES = \
 	-I$(top_srcdir)/src 				\
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
 	-DGEDIT_TAGLIST_DIR=\""$(taglistdir)/"\"	\
 	-DG_DISABLE_DEPRECATED				\
 	-DGDK_DISABLE_DEPRECATED			\

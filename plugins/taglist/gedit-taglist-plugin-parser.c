@@ -40,7 +40,7 @@
 
 #include "gedit-taglist-plugin-parser.h"
 
-#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gedit2/plugins/taglist/"
+#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gedit-2/plugins/taglist/"
 
 TagList *taglist = NULL;
 

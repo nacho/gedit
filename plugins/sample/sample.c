@@ -31,16 +31,17 @@
 #include <config.h>
 #endif
 
+#include <glib/gutils.h>
 #include <libgnome/gnome-i18n.h>
 
 #include <gedit-menus.h>
 #include <gedit-plugin.h>
 #include <gedit-debug.h>
 
-#define MENU_ITEM_LABEL		N_("_Hello World")
-#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps/"
-#define MENU_ITEM_NAME		"HelloWorld"	
-#define MENU_ITEM_TIP		N_("Prints Hello World.")
+#define MENU_ITEM_LABEL		N_("Insert user _name")
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
+#define MENU_ITEM_NAME		"UserName"	
+#define MENU_ITEM_TIP		N_("Insert the user name at the cursor position")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
@@ -50,7 +51,7 @@ G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 
 
 static void
-hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+sample_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
 	GeditView *view;
@@ -65,7 +66,7 @@ hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbnam
 
 	gedit_document_begin_user_action (doc);
 	
-	gedit_document_insert_text_at_cursor (doc, _("Hello World "), -1);
+	gedit_document_insert_text_at_cursor (doc, g_get_real_name (), -1);
 
 	gedit_document_end_user_action (doc);
 }
@@ -114,7 +115,7 @@ activate (GeditPlugin *pd)
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
-				     hello_world_cb);
+				     sample_cb);
 
                 pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
 
@@ -138,8 +139,8 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->name = _("Hello World");
-	pd->desc = _("Sample 'hello world' plugin.");
+	pd->name = _("User name");
+	pd->desc = _("Inserts the user name at the cursor position.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	

@@ -44,7 +44,7 @@
 #define MENU_ITEM_LABEL		N_("Open CVS Chan_geLogs")
 #define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
 #define MENU_ITEM_NAME		"CVSChangeLog"	
-#define MENU_ITEM_TIP		N_("Searches for ChangeLogs in the current document and opens them.")
+#define MENU_ITEM_TIP		N_("Searches for ChangeLogs in the current document and opens them")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);

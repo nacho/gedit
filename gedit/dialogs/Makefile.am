@@ -1,14 +1,14 @@
-gladedir = $(datadir)/gedit2/glade/
+gladedir = $(datadir)/gedit-2/glade/
 
 INCLUDES = \
-	-I$(top_srcdir)/src 				\
-	$(GEDIT_CFLAGS) 				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"	\
-	-DG_DISABLE_DEPRECATED				\
-	-DGDK_DISABLE_DEPRECATED			\
-	-DGTK_DISABLE_DEPRECATED			\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-I$(top_srcdir)/src 					\
+	$(GEDIT_CFLAGS) 					\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
+	-DG_DISABLE_DEPRECATED					\
+	-DGDK_DISABLE_DEPRECATED				\
+	-DGTK_DISABLE_DEPRECATED				\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED			
 
 

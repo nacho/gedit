@@ -39,7 +39,7 @@
 #include "gedit2.h"
 
 
-#define GEDIT_BASE_KEY "/apps/gedit2"
+#define GEDIT_BASE_KEY "/apps/gedit-2"
 
 #define GEDIT_PREF_USE_DEFAULT_FONT	"/use-default-font"
 #define GEDIT_PREF_EDITOR_FONT		"/editor-font"

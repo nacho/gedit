@@ -1,14 +1,16 @@
 <gconfschemafile>
   <schemalist>
     <schema>
-      <key>/schemas/apps/gedit2/default-TRUE-booleans</key>
-      <applyto>/apps/gedit2/use-default-colors</applyto>
-      <applyto>/apps/gedit2/toolbar-visible</applyto>
-      <applyto>/apps/gedit2/toolbar-view-tooltips</applyto>
-      <applyto>/apps/gedit2/statusbar-visible</applyto>
-      <applyto>/apps/gedit2/print-header</applyto>
-      <applyto>/apps/gedit2/print-wrap-lines</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/default-TRUE-booleans</key>
+      <applyto>/apps/gedit-2/use-default-colors</applyto>
+      <applyto>/apps/gedit-2/toolbar-visible</applyto>
+      <applyto>/apps/gedit-2/toolbar-view-tooltips</applyto>
+      <applyto>/apps/gedit-2/statusbar-visible</applyto>
+      <applyto>/apps/gedit-2/print-header</applyto>
+      <applyto>/apps/gedit-2/print-wrap-lines</applyto>
+      <applyto>/apps/gedit-2/statusbar-view-cursor-position</applyto>
+      <applyto>/apps/gedit-2/statusbar-view-overwrite-mode</applyto>
+      <owner>gedit</owner>
       <default>TRUE</default>
       <type>bool</type>
       <locale name="C">
@@ -18,14 +20,12 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/default-FALSE-booleans</key>
-      <applyto>/apps/gedit2/use-default-font</applyto>
-      <applyto>/apps/gedit2/auto-save</applyto>
-      <applyto>/apps/gedit2/create-backup-copy</applyto>
-      <applyto>/apps/gedit2/show-line-numbers</applyto>
-      <applyto>/apps/gedit2/statusbar-view-cursor-position</applyto>
-      <applyto>/apps/gedit2/statusbar-view-overwrite-mode</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/default-FALSE-booleans</key>
+      <applyto>/apps/gedit-2/use-default-font</applyto>
+      <applyto>/apps/gedit-2/auto-save</applyto>
+      <applyto>/apps/gedit-2/create-backup-copy</applyto>
+      <applyto>/apps/gedit-2/show-line-numbers</applyto>
+      <owner>gedit</owner>
       <type>bool</type>
       <default>FALSE</default>
       <locale name="C">
@@ -35,9 +35,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/editor-font</key>
-      <applyto>/apps/gedit2/editor-font</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/editor-font</key>
+      <applyto>/apps/gedit-2/editor-font</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>Courier Medium 12</default>
       <locale name="C">
@@ -47,9 +47,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/background-color</key>
-      <applyto>/apps/gedit2/background-color</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/background-color</key>
+      <applyto>/apps/gedit-2/background-color</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>#ffffffffffff</default>
       <locale name="C">
@@ -59,9 +59,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/text-color</key>
-      <applyto>/apps/gedit2/text-color</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/text-color</key>
+      <applyto>/apps/gedit-2/text-color</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>#000000000000</default>
       <locale name="C">
@@ -71,9 +71,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/selected-text_color</key>
-      <applyto>/apps/gedit2/selected-text-color</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/selected-text_color</key>
+      <applyto>/apps/gedit-2/selected-text-color</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>#ffffffffffff</default>
       <locale name="C">
@@ -83,9 +83,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/selection-color</key>
-      <applyto>/apps/gedit2/selection-color</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/selection-color</key>
+      <applyto>/apps/gedit-2/selection-color</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>#000000009c9c</default>
       <locale name="C">
@@ -95,9 +95,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/backup-copy-extension</key>
-      <applyto>/apps/gedit2/backup-copy-extension</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/backup-copy-extension</key>
+      <applyto>/apps/gedit-2/backup-copy-extension</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>.bak</default>
       <locale name="C">
@@ -107,9 +107,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/auto-save-interval</key>
-      <applyto>/apps/gedit2/auto-save-interval</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/auto-save-interval</key>
+      <applyto>/apps/gedit-2/auto-save-interval</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>10</default>
       <locale name="C">
@@ -119,9 +119,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/save-encoding</key>
-      <applyto>/apps/gedit2/save-encoding</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/save-encoding</key>
+      <applyto>/apps/gedit-2/save-encoding</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
@@ -132,9 +132,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/undo-levels</key>
-      <applyto>/apps/gedit2/undo-levels</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/undo-levels</key>
+      <applyto>/apps/gedit-2/undo-levels</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>25</default>
       <locale name="C">
@@ -144,9 +144,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/wrap-mode</key>
-      <applyto>/apps/gedit2/wrap-mode</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/wrap-mode</key>
+      <applyto>/apps/gedit-2/wrap-mode</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
@@ -157,9 +157,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/tab-size</key>
-      <applyto>/apps/gedit2/tab-size</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/tab-size</key>
+      <applyto>/apps/gedit-2/tab-size</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>8</default>
       <locale name="C">
@@ -169,9 +169,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/toolbar-buttons-style</key>
-      <applyto>/apps/gedit2/toolbar-buttons-style</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/toolbar-buttons-style</key>
+      <applyto>/apps/gedit-2/toolbar-buttons-style</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
@@ -182,9 +182,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/mdi-mode</key>
-      <applyto>/apps/gedit2/mdi-mode</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/mdi-mode</key>
+      <applyto>/apps/gedit-2/mdi-mode</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
@@ -194,9 +194,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/mdi-tabs-position</key>
-      <applyto>/apps/gedit2/mdi-tabs-position</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/mdi-tabs-position</key>
+      <applyto>/apps/gedit-2/mdi-tabs-position</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>2</default>
       <locale name="C">
@@ -206,9 +206,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/print-line-numbers</key>
-      <applyto>/apps/gedit2/print-line-numbers</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/print-line-numbers</key>
+      <applyto>/apps/gedit-2/print-line-numbers</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>0</default>
       <locale name="C">
@@ -218,9 +218,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/print-font-body</key>
-      <applyto>/apps/gedit2/print-font-body</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/print-font-body</key>
+      <applyto>/apps/gedit-2/print-font-body</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>Courier 9</default>
       <locale name="C">
@@ -230,9 +230,9 @@
     </schema>
     
     <schema>
-      <key>/schemas/apps/gedit2/print-font-header</key>
-      <applyto>/apps/gedit2/print-font-header</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/print-font-header</key>
+      <applyto>/apps/gedit-2/print-font-header</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>Helvetica 11</default>
       <locale name="C">
@@ -242,9 +242,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/print-font-numbers</key>
-      <applyto>/apps/gedit2/print-font-numbers</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/print-font-numbers</key>
+      <applyto>/apps/gedit-2/print-font-numbers</applyto>
+      <owner>gedit</owner>
       <type>string</type>
       <default>Helvetica 8</default>
       <locale name="C">
@@ -254,9 +254,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/window-width</key>
-      <applyto>/apps/gedit2/window-width</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/window-width</key>
+      <applyto>/apps/gedit-2/window-width</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>700</default>
       <locale name="C">
@@ -266,9 +266,9 @@
     </schema>
 
     <schema>
-      <key>/schemas/apps/gedit2/window-height</key>
-      <applyto>/apps/gedit2/window-height</applyto>
-      <owner>gedit2</owner>
+      <key>/schemas/apps/gedit-2/window-height</key>
+      <applyto>/apps/gedit-2/window-height</applyto>
+      <owner>gedit</owner>
       <type>int</type>
       <default>500</default>
       <locale name="C">

@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(gedit2, 1.112.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT(gedit, 1.113.0cvs, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(src/gedit2.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -59,7 +59,7 @@ dnl Check popt
 dnl
 
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
-gedit2. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
+gedit. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
 
 
 dnl ================================================================
@@ -141,6 +141,7 @@ dnl ==========================================================================
 
 AC_OUTPUT([
 Makefile
+gedit.desktop
 po/Makefile.in
 src/Makefile
 src/dialogs/Makefile

@@ -44,7 +44,7 @@
 #define MENU_ITEM_LABEL		N_("Tag _List")
 #define MENU_ITEM_PATH		"/menu/View/ViewOps/"
 #define MENU_ITEM_NAME		"TagList"	
-#define MENU_ITEM_TIP		N_("Show the tag list window.")
+#define MENU_ITEM_TIP		N_("Show the tag list window")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);

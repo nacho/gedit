@@ -51,7 +51,7 @@
 #define MAX_RECENT 4
 #endif
 
-#define GEDIT_RECENT_BASE_KEY "/apps/gedit2/recent-files"
+#define GEDIT_RECENT_BASE_KEY "/apps/gedit-2/recent-files"
 
 static gchar* 	gedit_recent_escape_underscores (const gchar* text);
 
