@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-14 14:56+0200\n"
-"PO-Revision-Date: 2003-06-14 15:01+0200\n"
+"POT-Creation-Date: 2003-08-24 23:51+0200\n"
+"PO-Revision-Date: 2003-08-24 23:54+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid "Edit text files"
 msgstr "Edita fitxers de text"
 
 #
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:363
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "Editor de text"
 
@@ -71,7 +71,7 @@ msgstr "Desament automàtic"
 msgid "Auto Save Interval"
 msgstr "Interval de desament automàtic"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "Auto indent"
 msgstr "Autosagnar"
 
@@ -466,23 +466,23 @@ msgstr ""
 "inhabilita, s'utilitzarà el tipus de lletra fixat en l'opció «Tipus de "
 "lletra de l'editor» en comptes del tipus de lletra del sistema."
 
-#: gedit/bonobo-mdi.c:549 gedit/bonobo-mdi.c:1962
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
 #, c-format
 msgid "Activate %s"
 msgstr "Activa %s"
 
 #
-#: gedit/dialogs/gedit-dialog-goto-line.c:161
+#: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
 msgstr "Vés a la línia"
 
 #
 #. Add Goto Line button
-#: gedit/dialogs/gedit-dialog-goto-line.c:171
+#: gedit/dialogs/gedit-dialog-goto-line.c:170
 msgid "_Go to Line"
 msgstr "_Vés a la línia"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:187
+#: gedit/dialogs/gedit-dialog-goto-line.c:186
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #, c-format
@@ -490,34 +490,34 @@ msgid "Could not find the required widgets inside %s."
 msgstr "No s'han trobat els ginys necessaris dins de %s."
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:400
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "No s'ha trobat el text \"%s\"."
 
 #
-#: gedit/dialogs/gedit-dialog-replace.c:269 gedit/dialogs/replace.glade2.h:4
+#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
 #: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "Reemplaça"
 
 #
-#: gedit/dialogs/gedit-dialog-replace.c:280
+#: gedit/dialogs/gedit-dialog-replace.c:279
 msgid "Replace _All"
 msgstr "Reempl_aça-ho tot"
 
 #
 #. Add Replace button
-#: gedit/dialogs/gedit-dialog-replace.c:283
+#: gedit/dialogs/gedit-dialog-replace.c:282
 #: gedit/gedit-file-selector-util.c:131
 msgid "_Replace"
 msgstr "_Reemplaça"
 
-#: gedit/dialogs/gedit-dialog-replace.c:407 gedit/gedit-ui.xml.h:17
+#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
 msgid "Find"
 msgstr "Cerca"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1150
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
 msgid "Found and replaced %d occurrences."
 msgstr "S'han trobat i reemplaçat %d cadenes coincidents."
@@ -575,7 +575,9 @@ msgstr "Seleccionador de tipus de lletra per a les capçaleres de les pàgines"
 #: gedit/dialogs/gedit-page-setup-dialog.c:493
 msgid ""
 "Push this button to select the font to be used to print the page headers"
-msgstr "Premeu aquest botó per a seleccionar el tipus de lletra amb el que s'imprimeixen les capçaleres de les pàgines"
+msgstr ""
+"Premeu aquest botó per a seleccionar el tipus de lletra amb el que "
+"s'imprimeixen les capçaleres de les pàgines"
 
 #
 #: gedit/dialogs/gedit-page-setup-dialog.c:494
@@ -583,7 +585,6 @@ msgid "Line numbers font picker"
 msgstr "Seleccionador de tipus de lletra per als números de línia"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
-#: gedit/dialogs/gedit-preferences-dialog.c:1884
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Premeu aquest botó per a seleccionar el tipus de lletra amb el que es "
@@ -651,101 +652,80 @@ msgid "The selected file is not executable."
 msgstr "El fitxer seleccionat no és executable."
 
 #
-#: gedit/dialogs/gedit-preferences-dialog.c:243
+#: gedit/dialogs/gedit-preferences-dialog.c:197
 msgid "Font & Colors"
 msgstr "Tipus de lletra i colors"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Tabs"
 msgstr "Tabuladors"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:246
-msgid "Wrap Mode"
-msgstr "Mode d'ajustament"
+#: gedit/dialogs/gedit-preferences-dialog.c:200
+msgid "Text Wrapping"
+msgstr "Ajustament del text"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:247
+#: gedit/dialogs/gedit-preferences-dialog.c:201
 msgid "Auto Indent"
 msgstr "Autosagnat"
 
 #
-#: gedit/dialogs/gedit-preferences-dialog.c:248
+#: gedit/dialogs/gedit-preferences-dialog.c:202
 msgid "Line Numbers"
 msgstr "Números de línia"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:250 gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Obre"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:252
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Desa"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:253
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:68
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
 msgid "Undo"
 msgstr "Desfés"
 
 #
-#: gedit/dialogs/gedit-preferences-dialog.c:261
-msgid "Page"
-msgstr "Pàgina"
-
-#
-#: gedit/dialogs/gedit-preferences-dialog.c:263
-#: gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Tipus de lletra"
-
-#
-#: gedit/dialogs/gedit-preferences-dialog.c:270
+#: gedit/dialogs/gedit-preferences-dialog.c:213
 msgid "Manager"
 msgstr "Gestor"
 
 #
-#: gedit/dialogs/gedit-preferences-dialog.c:278
+#: gedit/dialogs/gedit-preferences-dialog.c:221
 msgid "Editor"
 msgstr "Editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:279
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:217
-#: gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "Imprimeix"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:280
+#: gedit/dialogs/gedit-preferences-dialog.c:223
 msgid "Plugins"
 msgstr "Connectors"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:352
+#: gedit/dialogs/gedit-preferences-dialog.c:295
 msgid "Cat_egories:"
 msgstr "Cat_egories:"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:374
+#: gedit/dialogs/gedit-preferences-dialog.c:317
 msgid "Preferences"
 msgstr "Preferències"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:614
+#: gedit/dialogs/gedit-preferences-dialog.c:557
 msgid "Categories"
 msgstr "Categories"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:849
+#: gedit/dialogs/gedit-preferences-dialog.c:787
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Premeu aquest botó per a seleccionar el tipus de lletra a utilitzar per "
 "l'editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:852
+#: gedit/dialogs/gedit-preferences-dialog.c:790
 msgid "Push this button to configure text color"
 msgstr "Premeu aquest botó per a configurar el text en color"
 
 #
-#: gedit/dialogs/gedit-preferences-dialog.c:854
+#: gedit/dialogs/gedit-preferences-dialog.c:792
 msgid "Push this button to configure background color"
 msgstr "Premeu aquest botó per a configurar el color de fons"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:856
+#: gedit/dialogs/gedit-preferences-dialog.c:794
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -753,29 +733,13 @@ msgstr ""
 "Premeu aquest botó per a configurar el color amb el que apareix el text "
 "seleccionat"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:859
+#: gedit/dialogs/gedit-preferences-dialog.c:797
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr ""
 "Premeu aquest botó per a configurar el color amb el que es marca el text "
 "seleccionat"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1880
-msgid "Push this button to select the font to be used to print the body"
-msgstr ""
-"Premeu aquest botó per a seleccionar el tipus de lletra que s'utilitzarà per "
-"a imprimir el cos"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1882
-msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
-"Premeu aquest botó per a seleccionar el tipus de lletra amb el que es "
-"mostren les capçaleres"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:2331
-msgid "Encodings"
-msgstr "Codificacions"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -796,262 +760,162 @@ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Tipus de lletra i colors</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Tipus de lletres</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Números de línies</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:7
+#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Gestor</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Obre</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Pàgina</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:10
+#: gedit/dialogs/gedit-preferences.glade2.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Desa</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:11
+#: gedit/dialogs/gedit-preferences.glade2.h:8
 msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Tabulacions</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:12
+#: gedit/dialogs/gedit-preferences.glade2.h:9
 msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Desfés</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:13
+#: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Mode d'ajustament</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Colors</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">En desar un fitxer nou...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">En desar un fitxer ja existent...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Afegeix noves codificacions"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Utilitza sempre la codificació U_TF-8 (més ràpida)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Utilitza sempre la codificació _UTF-8 (més ràpida)"
-
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "Crea una cò_pia de seguretat dels fitxers abans de desar-los"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:14
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "No _separa les paraules en dues línies"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 msgid "Editor _font: "
 msgstr "_Tipus de lletra de l'editor: "
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "Enable _auto indentation"
 msgstr "Habilita el sagnat _automàtic"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Habilita l'_ajustament de text"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Fonts & Colors"
 msgstr "Tipus de lletra i colors"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Insereix e_spais en comptes de tabulacions"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "LOGO"
 msgstr "LOGO"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "_Números de línia:"
-
-#
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Line numbers"
 msgstr "Números de línia"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Mou cap avall"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Mou cap amunt"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "C_apçaleres de la pàgina:"
-
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Pick the background color"
 msgstr "Agafa el color de fons"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Pick the selected text color"
 msgstr "Agafa el color del text seleccionat"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick the selection color"
 msgstr "Agafa el color de la selecció"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the text color"
 msgstr "Agafa el color del text"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Plugin manager"
 msgstr "Gestor de connectors"
 
-#
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "Imprimeix els números de _línia cada"
-
-#
-#: gedit/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Imprimeix els tipus de lletra"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Elimina una codificació"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Se_lection color:"
 msgstr "Color de la selecció"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Selecte_d text color:"
 msgstr "Color del text selecciona_t:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Set _tabs width equivalent to"
 msgstr "Defineix l'amplada dels _tabuladors equivalent a "
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Set limit on _undo actions to"
 msgstr "Limita els nivells de _desfer a"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "U_se default theme colors"
 msgstr "Utilit_za els colors del tema predeterminat"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "Utilit_za la codificació original del fitxer si és possible"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Utilitza la codificació del locale ac_tual si és possible"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Utilitza la codificació del _locale actual si és possible"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:54
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "_Autosave current file every"
 msgstr "Desa _automàticament el fitxer actual cada"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:55
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "_Background color:"
 msgstr "Color de _fons:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:56
-#: gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "_Cos:"
-
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:57
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "_Display line numbers"
 msgstr "Mostra els números de línia"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:58
-#: gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "Im_primeix les capçaleres de la pàgina"
-
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:59
-#: gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Restaura els tipus de lletra per defecte"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "Codificacions _permeses:"
-
-#
-#: gedit/dialogs/gedit-preferences.glade2.h:61
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "_Text color:"
 msgstr "Color del _text:"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:62
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Use default theme font"
 msgstr "Usa la lletra del tema per defecte "
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:63
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_action(s)"
 msgstr "_acció(ns)"
 
 #
-#: gedit/dialogs/gedit-preferences.glade2.h:64
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_minutes"
 msgstr "_minuts"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:65
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "character(s)"
 msgstr "caràcter(s)"
-
-#
-#: gedit/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr " lí_nia(es)"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -1071,7 +935,7 @@ msgid "_Modify preview phrase..."
 msgstr "_Modifica la vista preliminar de la frase..."
 
 #
-#: gedit/dialogs/gnome-print-font-dialog.c:247
+#: gedit/dialogs/gnome-print-font-dialog.c:245
 msgid "Font Selection"
 msgstr "Selecció del tipus de lletra"
 
@@ -1163,7 +1027,12 @@ msgstr "<b>Números de línia</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
-msgstr "<b>Ajust del text</b>"
+msgstr "<b>Ajustament del text</b>"
+
+#
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Tipus de lletra"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
@@ -1187,6 +1056,10 @@ msgstr "Imprimeix els números de _línia"
 msgid "Print s_yntax highlighting"
 msgstr "Imprimeix el resaltat de s_intaxi"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "_Cos:"
+
 #
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
 msgid "_Line numbers:"
@@ -1195,6 +1068,15 @@ msgstr "Números de _línia:"
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
 msgid "_Number every"
 msgstr "_Número cada"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "Im_primeix les capçaleres de la pàgina"
+
+#
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Restaura els tipus de lletra per defecte"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
 msgid "lines"
@@ -1288,65 +1170,65 @@ msgstr "Introduïu la _ubicació (URI) del fitxer que voleu obrir:"
 msgid "Open from URI"
 msgstr "Obre des de l'URI"
 
-#: gedit/gedit-commands.c:562
+#: gedit/gedit-commands.c:564
 msgid "translator_credits"
 msgstr ""
 "Quico Llach <quico@softcatala.org>\n"
 "Jordi Mallach <jordi@sindominio.net>"
 
-#: gedit/gedit-commands.c:587
+#: gedit/gedit-commands.c:589
 msgid "gedit"
 msgstr "gedit"
 
 #
-#: gedit/gedit-commands.c:591
+#: gedit/gedit-commands.c:593
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "El gedit és un editor de text petit i lleuger per al GNOME."
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 msgid "Untitled"
 msgstr "Sense títol"
 
 #
-#: gedit/gedit-document.c:599 gedit/gedit-document.c:646
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
 msgid "Invalid file name"
 msgstr "Nom de fitxer invàlid"
 
-#: gedit/gedit-document.c:812 gedit/gedit-document.c:916
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Dades UTF-8 invàlides"
 
-#: gedit/gedit-document.c:1206
+#: gedit/gedit-document.c:1210
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "No s'ha pogut llegir la informació de l'enllaç simbòlic per a %s"
 
-#: gedit/gedit-document.c:1252
+#: gedit/gedit-document.c:1256
 msgid "The file has too many symbolic links."
 msgstr "El fitxer té massa enllaços simbòlics."
 
-#: gedit/gedit-document.c:1308
+#: gedit/gedit-document.c:1312
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "No es pot treballar amb %s: ubicacions en el mode d'escriptura."
 
-#: gedit/gedit-document.c:1315
+#: gedit/gedit-document.c:1319
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 "No es pot treballar amb aquest tipus de ubicacions en el mode d'escriptura."
 
 #
-#: gedit/gedit-document.c:1328
+#: gedit/gedit-document.c:1332
 msgid "Invalid filename."
 msgstr "Nom del fitxer invàlid."
 
-#: gedit/gedit-document.c:1440
+#: gedit/gedit-document.c:1444
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1354,7 +1236,7 @@ msgstr ""
 "No hi ha suficient espai al disc per desar el fitxer.\n"
 "Si us plau, allibereu espai al disc i torneu-ho a intentar."
 
-#: gedit/gedit-document.c:1445
+#: gedit/gedit-document.c:1449
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1365,12 +1247,12 @@ msgstr ""
 "que no tinga aquesta limitació."
 
 #
-#: gedit/gedit-document.c:1489
+#: gedit/gedit-document.c:1493
 msgid "Could not create a backup file."
 msgstr "No s'ha pogut crear una còpia de seguretat."
 
 #
-#: gedit/gedit-document.c:1609
+#: gedit/gedit-document.c:1613
 msgid "It is not possible to revert an Untitled document"
 msgstr "No podeu tornar a un document sense títol"
 
@@ -1380,123 +1262,123 @@ msgstr "Autodetectat"
 
 #
 #: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:244
+#: gedit/gedit-encodings-option-menu.c:245
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Locale actual (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:305
+#: gedit/gedit-encodings-option-menu.c:306
 msgid "Add or _Remove..."
 msgstr "Afegeix o e_limina..."
 
-#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:168
-#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
-#: gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
+#: gedit/gedit-encodings.c:182
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:163
-#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:247
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
+#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
 msgid "Western"
 msgstr "Occidental"
 
-#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
-#: gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:251
 msgid "Central European"
 msgstr "Centreeuropeu"
 
-#: gedit/gedit-encodings.c:141
+#: gedit/gedit-encodings.c:149
 msgid "South European"
 msgstr "Sudeuropeu"
 
-#: gedit/gedit-encodings.c:143 gedit/gedit-encodings.c:159
-#: gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
+#: gedit/gedit-encodings.c:265
 msgid "Baltic"
 msgstr "Bàltic"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:208
-#: gedit/gedit-encodings.c:221 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:227 gedit/gedit-encodings.c:245
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
+#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
+#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
 msgid "Cyrillic"
 msgstr "Ciríl·lic"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
+#: gedit/gedit-encodings.c:263
 msgid "Arabic"
 msgstr "Àrab"
 
-#: gedit/gedit-encodings.c:149 gedit/gedit-encodings.c:249
+#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
 msgid "Greek"
 msgstr "Grec"
 
-#: gedit/gedit-encodings.c:151
+#: gedit/gedit-encodings.c:159
 msgid "Hebrew Visual"
 msgstr "Hebreu visual"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:212
-#: gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
+#: gedit/gedit-encodings.c:261
 msgid "Hebrew"
 msgstr "Hebreu"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:210
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:259
 msgid "Turkish"
 msgstr "Turc"
 
-#: gedit/gedit-encodings.c:157
+#: gedit/gedit-encodings.c:165
 msgid "Nordic"
 msgstr "Nòrdic"
 
-#: gedit/gedit-encodings.c:161
+#: gedit/gedit-encodings.c:169
 msgid "Celtic"
 msgstr "Cèltic"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:173
 msgid "Romanian"
 msgstr "Romanès"
 
-#: gedit/gedit-encodings.c:177
+#: gedit/gedit-encodings.c:185
 msgid "Armenian"
 msgstr "Armeni"
 
-#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:181
-#: gedit/gedit-encodings.c:190
+#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
+#: gedit/gedit-encodings.c:198
 msgid "Chinese Traditional"
 msgstr "Xinès tradicional"
 
-#: gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:191
 msgid "Cyrillic/Russian"
 msgstr "Ciríl·lic/rus"
 
-#: gedit/gedit-encodings.c:186 gedit/gedit-encodings.c:217
-#: gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:240
 msgid "Japanese"
 msgstr "Japonès"
 
-#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:219
-#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:238
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
 msgid "Korean"
 msgstr "Coreà"
 
-#: gedit/gedit-encodings.c:193 gedit/gedit-encodings.c:195
-#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
+#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
 msgid "Chinese Simplified"
 msgstr "Xinès simplificat"
 
-#: gedit/gedit-encodings.c:199
+#: gedit/gedit-encodings.c:207
 msgid "Georgian"
 msgstr "Georgià"
 
-#: gedit/gedit-encodings.c:229
+#: gedit/gedit-encodings.c:237
 msgid "Cyrillic/Ukrainian"
 msgstr "Ciríl·lic/ucrainès"
 
-#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:240
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:267
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
-#: gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:244
 msgid "Thai"
 msgstr "Tailandès"
 
@@ -1670,15 +1552,15 @@ msgstr "(modificat)"
 msgid "(readonly)"
 msgstr "(només de lectura)"
 
-#: gedit/gedit-mdi.c:1675
+#: gedit/gedit-mdi.c:1676
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:1676
+#: gedit/gedit-mdi.c:1677
 msgid "Use Normal highlight mode"
 msgstr "Utilitza el mode de resaltat normal"
 
-#: gedit/gedit-mdi.c:1752
+#: gedit/gedit-mdi.c:1753
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Utilitza el mode de resaltat %s"
@@ -1756,6 +1638,10 @@ msgstr "No es pot inicialitzar el gestor de preferències."
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "S'esperava «%s» i s'ha rebut «%s» per a la clau %s"
+
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "Imprimeix"
 
 #: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
@@ -1893,6 +1779,10 @@ msgstr "Mou el document actual a una finestra nova"
 #: gedit/gedit-ui.xml.h:26
 msgid "New"
 msgstr "Nou"
+
+#: gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Obre"
 
 #
 #: gedit/gedit-ui.xml.h:28
@@ -2057,7 +1947,8 @@ msgstr "Mostra text sota totes les icones a la barra d'eines"
 
 #: gedit/gedit-ui.xml.h:66
 msgid "Show text only beside important icons in the toolbar"
-msgstr "Mostra text només al costat de les icones importants a la barra d'eines"
+msgstr ""
+"Mostra text només al costat de les icones importants a la barra d'eines"
 
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
@@ -3348,6 +3239,90 @@ msgstr "Còpia el text seleccionat al portaretalls"
 msgid "_Copy Text"
 msgstr "_Còpia el text"
 
+#~ msgid "Wrap Mode"
+#~ msgstr "Mode d'ajustament"
+
+#
+#~ msgid "Page"
+#~ msgstr "Pàgina"
+
+#~ msgid "Push this button to select the font to be used to print the body"
+#~ msgstr ""
+#~ "Premeu aquest botó per a seleccionar el tipus de lletra que s'utilitzarà "
+#~ "per a imprimir el cos"
+
+#~ msgid "Push this button to select the font to be used to print the headers"
+#~ msgstr ""
+#~ "Premeu aquest botó per a seleccionar el tipus de lletra amb el que es "
+#~ "mostren les capçaleres"
+
+#~ msgid "Encodings"
+#~ msgstr "Codificacions"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Tipus de lletres</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Obre</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Pàgina</span>"
+
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">En desar un fitxer nou...</span>"
+
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr "<span weight=\"bold\">En desar un fitxer ja existent...</span>"
+
+#~ msgid "Add new encodings"
+#~ msgstr "Afegeix noves codificacions"
+
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "Utilitza sempre la codificació U_TF-8 (més ràpida)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Utilitza sempre la codificació _UTF-8 (més ràpida)"
+
+#
+#~ msgid "Line _numbers:"
+#~ msgstr "_Números de línia:"
+
+#~ msgid "Move down"
+#~ msgstr "Mou cap avall"
+
+#~ msgid "Move up"
+#~ msgstr "Mou cap amunt"
+
+#~ msgid "Page he_aders:"
+#~ msgstr "C_apçaleres de la pàgina:"
+
+#
+#~ msgid "Print _line numbers every"
+#~ msgstr "Imprimeix els números de _línia cada"
+
+#
+#~ msgid "Print fonts"
+#~ msgstr "Imprimeix els tipus de lletra"
+
+#~ msgid "Remove an encoding"
+#~ msgstr "Elimina una codificació"
+
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "Utilit_za la codificació original del fitxer si és possible"
+
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Utilitza la codificació del locale ac_tual si és possible"
+
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Utilitza la codificació del _locale actual si és possible"
+
+#~ msgid "_Supported encodings:"
+#~ msgstr "Codificacions _permeses:"
+
+#
+#~ msgid "li_ne(s)"
+#~ msgstr " lí_nia(es)"
+
 #~ msgid ""
 #~ "gedit is unable to print since it cannot find\n"
 #~ "one of the required fonts."
@@ -3854,9 +3829,7 @@ msgstr "_Còpia el text"
 
 #~ msgid ""
 #~ "The wrap mode settings let you customize how lines have to be wrapped."
-#~ msgstr ""
-#~ "Els paràmetres del mode d'ajust permeten personalitzar com s'ajusten les "
-#~ "línies."
+#~ msgstr "Els paràmetres del mode d'ajustament permeten personalitzar com s'ajusten les línies."
 
 #~ msgid ""
 #~ "Use current locale's encoding if possible when creating a new file\n"
