@@ -298,6 +298,10 @@ cancel_clicked_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_widget_hide (GTK_WIDGET (data));
 	gtk_main_quit ();
+
+	g_object_set_qdata (G_OBJECT (data),
+ 		    	    user_data_id,
+			    NULL);
 }
 
 
@@ -386,7 +390,7 @@ run_file_selector (GtkWindow  *parent,
 
 	data = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
 
-	if (enable_vfs && !using_bonobo_filesel)
+	if ((data != NULL) && enable_vfs && !using_bonobo_filesel)
 	{
 		retval = gnome_vfs_get_uri_from_local_path (data);
  		g_free (data);
