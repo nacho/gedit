@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.6.1\n"
-"POT-Creation-Date: 2000-04-14 20:54-0400\n"
-"PO-Revision-Date: 2000-04-12 20:04+02:00\n"
+"POT-Creation-Date: 2000-04-16 14:58+0200\n"
+"PO-Revision-Date: 2000-04-15 20:04+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
-"Language-Team: Dansk/Danish <sslug-locale@sslug.dk>\n"
+"Language-Team: Dansk/Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgid "Inserts the current date and time"
 msgstr "Indsætter nuværende dato og tidspunkt"
 
 #: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:281
+#: src/print.c:354
 msgid "Untitled"
 msgstr "Unavngivet"
 
@@ -65,19 +65,24 @@ msgstr ""
 "Sørg venligst for at filen eksisterer."
 
 #: src/file.c:94
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file is not beeing used by another aplication."
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
 msgstr ""
 "En fejl opstod ved åbning af filen.\n"
-"Sørg venligst for at filen eksisterer."
+"Sørg venligst for at filen ikke er i brug af en anden applikation."
 
-#: src/file.c:103
+#: src/file.c:106
 msgid "Could not allocate the requrired memory."
 msgstr "Kunne ikke tildele den krævede hukommelse."
 
-#: src/file.c:109
+#: src/file.c:112
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -92,7 +97,7 @@ msgstr ""
 "\n"
 "Sørg for at du har rettigheder til at åbne filen."
 
-#: src/file.c:177
+#: src/file.c:180
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -109,7 +114,7 @@ msgstr ""
 "Sørg for at stien, du angav, eksisterer og at du har de nødvendige "
 "skriverettigheder."
 
-#: src/file.c:191 src/file.c:205
+#: src/file.c:194 src/file.c:208
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -126,38 +131,38 @@ msgstr ""
 "På grund af en ukendt årsag (1). Rapportér venligst dette problem til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:271
+#: src/file.c:274
 msgid "Open File ..."
 msgstr "Åbn fil ..."
 
-#: src/file.c:313
+#: src/file.c:316
 msgid "Save As..."
 msgstr "Gem som..."
 
-#: src/file.c:351
+#: src/file.c:354
 #, c-format
 msgid "Loaded file %s"
 msgstr "Indlæste fil %s"
 
-#: src/file.c:417
+#: src/file.c:420
 #, c-format
 msgid "``%s'' is about to be overwriten. Do you want to continue ?"
 msgstr "'%s' vil blive overskrevet. Vil du fortsætte ?"
 
-#: src/file.c:428
+#: src/file.c:431
 msgid "Document has not been saved."
 msgstr "Dokument er ikke blevet gemt."
 
-#: src/file.c:436
+#: src/file.c:439
 msgid "Error saving file!"
 msgstr "Gemning mislykkedes!"
 
-#: src/file.c:518
+#: src/file.c:521
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen `%s' eksisterer ikke. Vil du gerne oprette den?"
 
-#: src/document.c:340
+#: src/document.c:341
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "'%s' er blevet ændret. Ønsker du at gemme det?"
@@ -183,12 +188,12 @@ msgstr "Fejl, indstik er stadig i brug"
 msgid "_Plugins"
 msgstr "_Indstik"
 
-#: src/print.c:211
+#: src/print.c:240
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Vis udskrift"
 
-#: src/print.c:361
+#: src/print.c:458
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Side: %i/%i"
@@ -456,16 +461,14 @@ msgid "Appearance"
 msgstr "Udseende"
 
 #: src/dialogs/prefs.glade.h:9
-#, fuzzy
 msgid "Show splitscreen"
-msgstr "Vis opdelt skærm"
+msgstr "Vis opdeltskærm"
 
 #: src/dialogs/prefs.glade.h:10
 msgid "Editor Behavior"
 msgstr "Tekstbehandleradfærd"
 
 #: src/dialogs/prefs.glade.h:11
-#, fuzzy
 msgid "Enable Auto-indent"
 msgstr "Brug autoindryk"
 
@@ -479,7 +482,7 @@ msgstr "Generelt"
 
 #: src/dialogs/prefs.glade.h:14
 msgid "MDI (Multiple Document Interface)"
-msgstr ""
+msgstr "MDI (Multiple Dokument Interface)"
 
 #: src/dialogs/prefs.glade.h:15
 msgid ""
@@ -488,6 +491,10 @@ msgid ""
 "Top\n"
 "Bottom\n"
 msgstr ""
+"Venstre\n"
+"Højre\n"
+"Top\n"
+"Bund\n"
 
 #: src/dialogs/prefs.glade.h:20
 msgid ""
@@ -496,84 +503,85 @@ msgid ""
 "Modal\n"
 "Default\n"
 msgstr ""
+"Notesbog\n"
+"Toplag\n"
+"Modal\n"
+"Standard\n"
 
 #: src/dialogs/prefs.glade.h:25
 msgid "Mode: "
-msgstr ""
+msgstr "Modus:"
 
 #: src/dialogs/prefs.glade.h:26
 msgid "Notebook Tab Position: "
-msgstr ""
+msgstr "Notesbog faneplacering "
 
 #: src/dialogs/prefs.glade.h:27
-#, fuzzy
 msgid "Documents"
-msgstr "Dokument"
+msgstr "Dokumenter"
 
 #: src/dialogs/prefs.glade.h:28
-#, fuzzy
 msgid "Fonts"
-msgstr "Indhold"
+msgstr "Skrifttyper"
 
 #: src/dialogs/prefs.glade.h:29
 msgid "Pick a Font"
-msgstr ""
+msgstr "Vælg en skrifttype"
 
 #: src/dialogs/prefs.glade.h:30
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: src/dialogs/prefs.glade.h:31
-#, fuzzy
 msgid "Default Font: "
-msgstr "Standard"
+msgstr "Standard skrifttype"
 
 #: src/dialogs/prefs.glade.h:32
-#, fuzzy
 msgid "Colors"
-msgstr "Luk"
+msgstr "Farver"
 
 #: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
 msgid "Pick a color"
-msgstr ""
+msgstr "Vælg en farve"
 
 #: src/dialogs/prefs.glade.h:35
-#, fuzzy
 msgid "Background: "
-msgstr "Tekstbaggrund"
+msgstr "Baggrund:"
 
 #: src/dialogs/prefs.glade.h:36
-#, fuzzy
 msgid "Foreground: "
-msgstr "Tekstforgrund"
+msgstr "Forgrund:"
 
 #: src/dialogs/prefs.glade.h:37
 msgid "Fonts/Colors"
-msgstr ""
+msgstr "Skrifttyper/farver"
 
 #: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
-#, fuzzy
 msgid "Printing"
-msgstr "Udskriv"
+msgstr "Udskriver"
 
 #: src/dialogs/prefs.glade.h:39
 msgid "Add header"
-msgstr ""
+msgstr "Tilføj hoved"
 
 #: src/dialogs/prefs.glade.h:40
 msgid "Wrap long lines at the page width"
-msgstr ""
+msgstr "Ombryd lange linier ved sidekant"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
-msgstr ""
+msgstr "Udskriv linienumre hver:"
 
 #: src/dialogs/prefs.glade.h:42
 msgid "line(s)"
-msgstr ""
+msgstr "linie(r)"
+
+#: src/dialogs/prefs.glade.h:44
+#, fuzzy
+msgid "Paper"
+msgstr "Indsæt"
 
 #: src/dialogs/search.glade.h:9
-#, fuzzy
 msgid ""
 "Cursor\n"
 "Beginning of Document\n"
@@ -621,185 +629,3 @@ msgstr ""
 #: src/dialogs/replace.glade.h:19
 msgid "Ask before replacing"
 msgstr "Spørg før erstatning"
-
-#~ msgid "Notebook"
-#~ msgstr "Notesbog"
-
-#~ msgid "Toplevel"
-#~ msgstr "Toplag"
-
-#~ msgid "Modal"
-#~ msgstr "Modal"
-
-#~ msgid "Document Settings"
-#~ msgstr "Dokumentindstillinger"
-
-#~ msgid "New Document After Closing Last"
-#~ msgstr "Nyt dokument når du har lukket det sidste"
-
-#~ msgid "Close Window After Closing Last"
-#~ msgstr "Luk vindue når du har lukket det sidste"
-
-#~ msgid "Current Font"
-#~ msgstr "Nuværende skrifttype"
-
-#~ msgid "Select..."
-#~ msgstr "Vælg..."
-
-#~ msgid "Window Size"
-#~ msgstr "Vinduesstørrelse"
-
-#~ msgid "Current Width:"
-#~ msgstr "Nuværende bredde:"
-
-#~ msgid "Startup Width:"
-#~ msgstr "Startbredde:"
-
-#~ msgid "Use Current"
-#~ msgstr "Brug nuværende"
-
-#~ msgid "Current Height:"
-#~ msgstr "Nuværende højde:"
-
-#~ msgid "Startup Height:"
-#~ msgstr "Starthøjde:"
-
-#~ msgid "MDI Mode"
-#~ msgstr "MDI-tilstand"
-
-#~ msgid "Window"
-#~ msgstr "Vindue"
-
-#~ msgid "Find _In Files..."
-#~ msgstr "Find i fi_ler..."
-
-#~ msgid "Find text in all open files"
-#~ msgstr "Find tekst i alle åbne filer"
-
-#~ msgid "_Top"
-#~ msgstr "_Top"
-
-#~ msgid "Put the document tabs at the top"
-#~ msgstr "Placér dokumentfanebladene øverst"
-
-#~ msgid "_Bottom"
-#~ msgstr "_Bund"
-
-#~ msgid "Put the document tabs at the bottom"
-#~ msgstr "Placér dokumentfanebladene nederst"
-
-#~ msgid "_Left"
-#~ msgstr "_Venstre"
-
-#~ msgid "Put the document tabs on the left"
-#~ msgstr "Placér fanebladene til venstre"
-
-#~ msgid "_Right"
-#~ msgstr "_Højre"
-
-#~ msgid "Put the document tabs on the right"
-#~ msgstr "Placér dokumentfanebladene til højre"
-
-#~ msgid "_Readonly"
-#~ msgstr "_Skrivebeskyttet"
-
-#~ msgid "Toggle Readonly"
-#~ msgstr "Skrivebeskyttet til/fra"
-
-#~ msgid "_Document Tabs"
-#~ msgstr "_Dokumentfaner"
-
-#~ msgid "Change the placement of the document tabs"
-#~ msgstr "Ny placering af dokumentfaneblade"
-
-#~ msgid "Sa_ve Settings"
-#~ msgstr "_Gem indstillinger"
-
-#~ msgid "Save the current settings for future sessions"
-#~ msgstr "Gem nuværende indstillinger for fremtidigt brug"
-
-#~ msgid "The gEdit Email Plugin"
-#~ msgstr "gEdit epost-indstik"
-
-#~ msgid "Could not save file!"
-#~ msgstr "Kunne ikke gemme fil!"
-
-#~ msgid "Save %s As..."
-#~ msgstr "Gem %s som..."
-
-#~ msgid "Save %s As ..."
-#~ msgstr "Gem %s som..."
-
-#~ msgid ""
-#~ "Are you sure you wish to revert all changes?\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Er du sikker på at du vil forkaste alle ændringer?\n"
-#~ "(%s)"
-
-#~ msgid "Document Unchanged..."
-#~ msgstr "Dokument er uændret..."
-
-#~ msgid "Can not open file!"
-#~ msgstr "Kan ikke åbne fil!"
-
-#~ msgid "Print Command"
-#~ msgstr "Printerkommando"
-
-#~ msgid "Read only file!"
-#~ msgstr "Skrivebeskyttet fil!"
-
-#~ msgid "_File/"
-#~ msgstr "_Filer/"
-
-#~ msgid "Find _Line..."
-#~ msgstr "Find _linie..."
-
-#~ msgid "_Autoindent"
-#~ msgstr "_Autoindryk"
-
-#~ msgid "Status_bar"
-#~ msgstr "Statusli_nie"
-
-#~ msgid "_Wordwrap"
-#~ msgstr "_Tekstombrydning"
-
-#~ msgid "_Splitscreen"
-#~ msgstr "_Opdelt skærm"
-
-#~ msgid "_Show tabs"
-#~ msgstr "_Vis faneblade"
-
-#~ msgid "Toolbar _relief"
-#~ msgstr "F_remhæv værktøjslinie"
-
-#~ msgid "_Show tooltips"
-#~ msgstr "Vi_s værktøjstips"
-
-#~ msgid "Show toolbar _text"
-#~ msgstr "Vis værktøjs_tekst"
-
-#~ msgid "Show toolbar _icons"
-#~ msgstr "Vis værktøjs_ikoner"
-
-#~ msgid "Revert"
-#~ msgstr "Forkast"
-
-#~ msgid "Replace?"
-#~ msgstr "Erstat?"
-
-#~ msgid ""
-#~ "Enter print command below\n"
-#~ "Remember to include '%s'"
-#~ msgstr ""
-#~ "Indtast printerkommando her\n"
-#~ "Husk at tilføje '%s'"
-
-#~ msgid "Print Command:"
-#~ msgstr "Printerkommando:"
-
-#~ msgid "Print anyway"
-#~ msgstr "Udskriv alligevel"
-
-#~ msgid "Cancel"
-#~ msgstr "Annullér"
