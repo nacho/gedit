@@ -56,6 +56,6 @@ CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(plugindir)"\" \
-	-Wall -ansi -pedantic
+	-Wall -Wno-unused -ansi
 #	-DDEBUG
 
