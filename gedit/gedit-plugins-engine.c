@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA. 
  */
- 
+
 /*
  * Modified by the gedit Team, 2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
@@ -31,15 +31,11 @@
 #include <config.h>
 #endif
 
-#include <sys/types.h>
-#include <dirent.h> 
 #include <string.h>
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-i18n.h>
-
 #include <libgnomeui/gnome-theme-parser.h>
-
 #include <gconf/gconf-client.h>
 
 #include "gedit-plugins-engine.h"
@@ -54,12 +50,6 @@
 
 #define PLUGIN_EXT	".gedit-plugin"
 
-static void		 gedit_plugins_engine_load_all 	(void);
-static void		 gedit_plugins_engine_load_dir	(const gchar *dir);
-static GeditPlugin 	*gedit_plugins_engine_load 	(const gchar *file);
-
-static GeditPluginInfo  *gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin);
-static void		 gedit_plugins_engine_reactivate_all (void);
 
 static void 		 gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 								      guint cnxn_id, 
@@ -70,112 +60,13 @@ static GList *gedit_plugins_list = NULL;
 
 static GConfClient *gedit_plugins_engine_gconf_client = NULL;
 
-gboolean
-gedit_plugins_engine_init (void)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	if (!g_module_supported ())
-		return FALSE;
-
-	gedit_plugins_engine_gconf_client = gconf_client_get_default ();
-	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, FALSE);
-
-	gconf_client_add_dir (gedit_plugins_engine_gconf_client,
-			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
-			      GCONF_CLIENT_PRELOAD_ONELEVEL,
-			      NULL);
-
-	gconf_client_notify_add (gedit_plugins_engine_gconf_client,
-				 GEDIT_PLUGINS_ENGINE_BASE_KEY,
-				 gedit_plugins_engine_active_plugins_changed,
-				 NULL, NULL, NULL);
-
-	gedit_plugins_engine_load_all ();
-
-	return TRUE;
-}
-
-static void
-gedit_plugins_engine_load_all (void)
-{
-	gchar *pdir;
-
-	gchar const * const home = g_get_home_dir ();
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	/* load user's plugins */
-	if (home != NULL)
-	{
-		pdir = gnome_util_prepend_user_home (USER_GEDIT_PLUGINS_LOCATION);
-		gedit_plugins_engine_load_dir (pdir);
-		g_free (pdir);
-	}
-	
-	/* load system plugins */
-	gedit_plugins_engine_load_dir (GEDIT_PLUGINDIR "/");
-}
-
-static gboolean
-str_has_suffix (const char *haystack, const char *needle)
-{
-	const char *h, *n;
-
-	if (needle == NULL) {
-		return TRUE;
-	}
-	if (haystack == NULL) {
-		return needle[0] == '\0';
-	}
-		
-	/* Eat one character at a time. */
-	h = haystack + strlen(haystack);
-	n = needle + strlen(needle);
-	do {
-		if (n == needle) {
-			return TRUE;
-		}
-		if (h == haystack) {
-			return FALSE;
-		}
-	} while (*--h == *--n);
-	return FALSE;
-}
-
-static void
-gedit_plugins_engine_load_dir (const gchar *dir)
-{
-	DIR *d;
-	struct dirent *e;
-
-	gedit_debug (DEBUG_PLUGINS, "DIR: %s", dir);
-
-	d = opendir (dir);
-	
-	if (d == NULL)
-	{		
-		gedit_debug (DEBUG_PLUGINS, "%s", strerror (errno));
-		return;
-	}
-	
-	while ((e = readdir (d)) != NULL)
-	{
-		if (str_has_suffix (e->d_name, PLUGIN_EXT))
-		{
-			gchar *plugin = g_strconcat (dir, e->d_name, NULL);
-			gedit_plugins_engine_load (plugin);
-			g_free (plugin);
-		}
-	}
-	closedir (d);
-}
 
 #define GeditPluginFile GnomeThemeFile
 #define gedit_plugin_file_new_from_string  gnome_theme_file_new_from_string
 #define gedit_plugin_file_free gnome_theme_file_free
 #define gedit_plugin_file_get_string gnome_theme_file_get_string
 #define gedit_plugin_file_get_locale_string gnome_theme_file_get_locale_string
+
 
 static GeditPlugin *
 gedit_plugins_engine_load (const gchar *file)
@@ -186,10 +77,10 @@ gedit_plugins_engine_load (const gchar *file)
 
 	GeditPluginFile *gedit_plugin_file = NULL;
 	gchar *str;
-	
+
 	gboolean to_be_activated;
 	gchar *key;
-	
+
 	gchar *contents;
 
 	g_return_val_if_fail (file != NULL, NULL);
@@ -203,10 +94,9 @@ gedit_plugins_engine_load (const gchar *file)
 	plugin = g_new0 (GeditPlugin, 1);
 	g_return_val_if_fail (plugin != NULL, NULL);
 	
-	info->plugin 	= plugin;
+	info->plugin = plugin;
 
-	plugin->file 	= g_strdup (file);
-
+	plugin->file = g_strdup (file);
 
 	if (!g_file_get_contents (file, &contents, NULL, NULL)) 
 	{
@@ -264,7 +154,6 @@ gedit_plugins_engine_load (const gchar *file)
 		g_warning ("Couldn't find 'Name' in %s", file);
 		goto error;
 	}
-
 
 	/* Get Author */
 	if (gedit_plugin_file_get_locale_string (gedit_plugin_file, 
@@ -337,27 +226,177 @@ error:
 	return NULL;
 }
 
+static void
+gedit_plugins_engine_load_dir (const gchar *dir)
+{
+	GError *error = NULL;
+	GDir *d;
+	const gchar *dirent;
+
+	gedit_debug (DEBUG_PLUGINS, "DIR: %s", dir);
+
+	d = g_dir_open (dir, 0, &error);
+	if (!d)
+	{		
+		gedit_debug (DEBUG_PLUGINS, "%s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	while ((dirent = g_dir_read_name (d)))
+	{
+		if (g_str_has_suffix (dirent, PLUGIN_EXT))
+		{
+			gchar *plugin = g_build_filename (dir, dirent, NULL);
+			gedit_plugins_engine_load (plugin);
+			g_free (plugin);
+		}
+	}
+
+	g_dir_close (d);
+}
+
+static void
+gedit_plugins_engine_load_all (void)
+{
+	gchar const *home = g_get_home_dir ();
+
+	/* load user's plugins */
+	if (home != NULL)
+	{
+		gchar *pdir;
+
+		pdir = gnome_util_prepend_user_home (USER_GEDIT_PLUGINS_LOCATION);
+		gedit_plugins_engine_load_dir (pdir);
+		g_free (pdir);
+	}
+	
+	/* load system plugins */
+	gedit_plugins_engine_load_dir (GEDIT_PLUGINDIR "/");
+}
+
+gboolean
+gedit_plugins_engine_init (void)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	if (!g_module_supported ())
+		return FALSE;
+
+	gedit_plugins_engine_gconf_client = gconf_client_get_default ();
+	g_return_val_if_fail (gedit_plugins_engine_gconf_client != NULL, FALSE);
+
+	gconf_client_add_dir (gedit_plugins_engine_gconf_client,
+			      GEDIT_PLUGINS_ENGINE_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL,
+			      NULL);
+
+	gconf_client_notify_add (gedit_plugins_engine_gconf_client,
+				 GEDIT_PLUGINS_ENGINE_BASE_KEY,
+				 gedit_plugins_engine_active_plugins_changed,
+				 NULL, NULL, NULL);
+
+	gedit_plugins_engine_load_all ();
+
+	return TRUE;
+}
+
+void
+gedit_plugins_engine_shutdown (void)
+{
+	GList *pl;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
+
+	for (pl = gedit_plugins_list; pl; pl = pl->next)
+	{
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		if (info->plugin->destroy != NULL)
+		{
+			gint r;
+		       	gedit_debug (DEBUG_PLUGINS, "Destroy plugin %s", info->plugin->name);
+
+			r = info->plugin->destroy (info->plugin);
+			
+			if (r != PLUGIN_OK)
+			{
+				g_warning (_("Error, impossible to destroy plugin '%s'"),
+			   		info->plugin->name);
+			}
+		}
+
+		if (info->plugin->handle != NULL)
+			g_module_close (info->plugin->handle);
+
+		g_free (info->plugin->file);
+		g_free (info->plugin->location);
+		g_free (info->plugin->name);
+		g_free (info->plugin->desc);
+		g_free (info->plugin->author);
+		g_free (info->plugin->copyright);
+	
+		g_free (info->plugin);
+	
+		g_free (info);
+	}
+
+	g_list_free (gedit_plugins_list);
+	gedit_plugins_list = NULL;
+
+	g_object_unref (gedit_plugins_engine_gconf_client);
+	gedit_plugins_engine_gconf_client = NULL;
+}
+
+const GList *
+gedit_plugins_engine_get_plugins_list (void)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	return gedit_plugins_list;
+}
+
+static GeditPluginInfo *
+gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin)
+{
+	GList *pl;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	for (pl = gedit_plugins_list; pl; pl = pl->next)
+	{
+		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		if (info->plugin == plugin)
+			return info;
+	}
+
+	return NULL;
+}
+
 static gboolean
 load_plugin_module (GeditPlugin *plugin)
 {
 	gchar *path;
 	gchar *dirname;
 	gint res;
-	
+
 	g_return_val_if_fail (plugin != NULL, FALSE);
 	g_return_val_if_fail (plugin->file != NULL, FALSE);
 	g_return_val_if_fail (plugin->location != NULL, FALSE);
 
 	dirname = g_path_get_dirname (plugin->file);	
 	g_return_val_if_fail (dirname != NULL, FALSE);
-	
+
 	path = g_module_build_path (dirname, plugin->location);
 	g_free (dirname);
 	g_return_val_if_fail (path != NULL, FALSE);
 	
 	plugin->handle 	= g_module_open (path, G_MODULE_BIND_LAZY);
 	g_free (path);
-	
+
 	if (plugin->handle == NULL)
 	{
 		g_warning (_("Error, unable to open module file '%s'\n"),
@@ -372,7 +411,7 @@ load_plugin_module (GeditPlugin *plugin)
 	{
 		g_warning (_("Error, plugin '%s' does not contain init function."),
 			   plugin->name);
-		
+
 		goto error_2;
 	}
 
@@ -417,7 +456,7 @@ load_plugin_module (GeditPlugin *plugin)
 	{
 		g_warning (_("Error, impossible to initialize plugin '%s'"),
 			   plugin->name);
-		
+
 		goto error_2;
 	}		
 
@@ -439,108 +478,12 @@ error_2:
 	return FALSE;
 }
 
-void
-gedit_plugins_engine_shutdown (void)
-{
-	GList *pl;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
-
-	/* destroy all the plugins that implement the
-	 * destroy function
-	 */
-	pl = gedit_plugins_list;
-	
-	while (pl)
-	{
-		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
-	
-		if (info->plugin->destroy != NULL)
-		{
-			gint r;
-		       	gedit_debug (DEBUG_PLUGINS, "Destroy plugin %s", info->plugin->name);
-
-			r = info->plugin->destroy (info->plugin);
-			
-			if (r != PLUGIN_OK)
-			{
-				g_warning (_("Error, impossible to destroy plugin '%s'"),
-			   		info->plugin->name);
-			}
-		}
-
-		if (info->plugin->handle != NULL)
-			g_module_close (info->plugin->handle);
-
-		g_free (info->plugin->file);
-		g_free (info->plugin->location);
-		g_free (info->plugin->name);
-		g_free (info->plugin->desc);
-		g_free (info->plugin->author);
-		g_free (info->plugin->copyright);
-	
-		g_free (info->plugin);
-	
-		g_free (info);
-
-		pl = g_list_next (pl);
-	}
-
-	g_list_free (gedit_plugins_list);
-	
-	gedit_plugins_list = NULL;
-
-	g_object_unref (gedit_plugins_engine_gconf_client);
-	gedit_plugins_engine_gconf_client = NULL;
-}
-
-const GList *
-gedit_plugins_engine_get_plugins_list (void)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	return gedit_plugins_list;
-}
-
-static GeditPluginInfo *
-gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin)
-{
-	GList *pl;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	pl = gedit_plugins_list;
-	
-	while (pl)
-	{
-		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
-
-		if (info->plugin == plugin)
-			return info;
-
-		pl = g_list_next (pl);
-	}
-
-	return NULL;
-}
-
-
-gboolean 	 
-gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
+static gboolean 	 
+gedit_plugins_engine_activate_plugin_real (GeditPlugin *plugin)
 {
 	gboolean res = TRUE;
 	gint r = PLUGIN_OK;
-	GeditPluginInfo *info;
-	gchar *key;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
 
-	info = gedit_plugins_engine_find_plugin_info (plugin);
-	g_return_val_if_fail (info != NULL, FALSE);
-	
-	/* Activate plugin */
 	if (plugin->handle == NULL)
 		res = load_plugin_module (plugin);
 
@@ -551,23 +494,62 @@ gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 	{
 		g_warning (_("Error, impossible to activate plugin '%s'"),
 			   plugin->name);
-	
+
 		return FALSE;
 	}
 
-	/* Update plugin state */
-	info->state = GEDIT_PLUGIN_ACTIVATED;
+	return TRUE;
+}
 
-	key = g_strdup_printf ("%s/%s", 
-			       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
-			       plugin->location);
+gboolean 	 
+gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
+{
+	GeditPluginInfo *info;
 
-	gconf_client_set_bool (gedit_plugins_engine_gconf_client,
-			       key,
-			       TRUE,
-			       NULL);
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (plugin != NULL, FALSE);
+
+	info = gedit_plugins_engine_find_plugin_info (plugin);
+	g_return_val_if_fail (info != NULL, FALSE);
+
+	if (gedit_plugins_engine_activate_plugin_real (plugin))
+	{
+		gchar *key;
+
+		/* Update plugin state */
+		info->state = GEDIT_PLUGIN_ACTIVATED;
+
+		key = g_strdup_printf ("%s/%s", 
+				       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+				       plugin->location);
+
+		gconf_client_set_bool (gedit_plugins_engine_gconf_client,
+				       key,
+				       TRUE,
+				       NULL);
+
+		g_free (key);
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gboolean
+gedit_plugins_engine_deactivate_plugin_real (GeditPlugin *plugin)
+{
+	gint res;
 	
-	g_free (key);
+	res = plugin->deactivate (plugin);
+	if (res != PLUGIN_OK)
+	{
+		g_warning (_("Error, impossible to deactivate plugin '%s'"),
+			   plugin->name);
+
+		return FALSE;
+	}
 
 	return TRUE;
 }
@@ -575,78 +557,56 @@ gedit_plugins_engine_activate_plugin (GeditPlugin *plugin)
 gboolean
 gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 {
-	gint res;
 	GeditPluginInfo *info;
-	gchar *key;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (plugin != NULL, FALSE);
 
 	info = gedit_plugins_engine_find_plugin_info (plugin);
 	g_return_val_if_fail (info != NULL, FALSE);
-	
-	/* Deactivate plugin */
-	res = plugin->deactivate (plugin);
-	if (res != PLUGIN_OK)
+
+	if (gedit_plugins_engine_deactivate_plugin_real (plugin))
 	{
-		g_warning (_("Error, impossible to deactivate plugin '%s'"),
-			   plugin->name);
-		
-		return FALSE;
+		gchar *key;
+
+		/* Update plugin state */
+		info->state = GEDIT_PLUGIN_DEACTIVATED;
+
+		key = g_strdup_printf ("%s/%s", 
+				       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
+				       plugin->location);
+
+		gconf_client_set_bool (gedit_plugins_engine_gconf_client,
+				       key,
+				       FALSE,
+				       NULL);
+
+		g_free (key);
+
+		return TRUE;
 	}
 
-	/* Update plugin state */
-	info->state = GEDIT_PLUGIN_DEACTIVATED;
-
-	key = g_strdup_printf ("%s/%s", 
-			       GEDIT_PLUGINS_ENGINE_BASE_KEY, 
-			       plugin->location);
-
-	gconf_client_set_bool (gedit_plugins_engine_gconf_client,
-			       key,
-			       FALSE,
-			       NULL);
-	
-	g_free (key);
-
-	return TRUE;
+	return FALSE;
 }
 
 static void
 gedit_plugins_engine_reactivate_all (void)
 {
 	GList *pl;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	pl = gedit_plugins_list;
-	
-	while (pl)
+	for (pl = gedit_plugins_list; pl; pl = pl->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
 		if (info->state == GEDIT_PLUGIN_ACTIVATED)
 		{
-			gint r = PLUGIN_OK;
-			gboolean res = TRUE;
-		       
-			if (info->plugin->handle == NULL)
-				res = load_plugin_module (info->plugin);
-
-			if (res)
-				r = info->plugin->activate (info->plugin);
-			
-			if (!res || (r != PLUGIN_OK))
-			{
-				g_warning (_("Error, impossible to activate plugin '%s'"),
-			   		info->plugin->name);
-				
+			if (!gedit_plugins_engine_activate_plugin_real (info->plugin))
 				info->state = GEDIT_PLUGIN_DEACTIVATED;			
-			}
 		}
-	
-		pl = g_list_next (pl);
 	}
-	
 }
 
 void
@@ -662,34 +622,25 @@ gedit_plugins_engine_update_plugins_ui (BonoboWindow* window, gboolean new_windo
 	if (new_window)
 		gedit_plugins_engine_reactivate_all ();
 
-	/* updated ui of all the plugins that implement thae
-	 * update_ui function
-	 */
-	pl = gedit_plugins_list;
-	
-	while (pl)
+	/* updated ui of all the plugins that implement update_ui */
+	for (pl = gedit_plugins_list; pl; pl = pl->next)
 	{
+		gint r;
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
-		
-		if ((info->state == GEDIT_PLUGIN_ACTIVATED) &&
-		    (info->plugin->update_ui != NULL))
+
+		if ((info->state != GEDIT_PLUGIN_ACTIVATED) ||
+		    (info->plugin->update_ui == NULL))
+			continue;
+
+	       	gedit_debug (DEBUG_PLUGINS, "Updating UI of %s", info->plugin->name);
+
+		r = info->plugin->update_ui (info->plugin, window);
+		if (r != PLUGIN_OK)
 		{
-			gint r;
-		       	gedit_debug (DEBUG_PLUGINS, "Updating UI of %s", info->plugin->name);
-
-			r = info->plugin->update_ui (info->plugin, window);
-			
-			if (r != PLUGIN_OK)
-			{
-				g_warning (_("Error, impossible to update ui of the plugin '%s'"),
-			   		info->plugin->name);
-			}
+			g_warning (_("Error, impossible to update ui of the plugin '%s'"),
+				   info->plugin->name);
 		}
-	
-		pl = g_list_next (pl);
 	}
-
-	gedit_debug (DEBUG_PLUGINS, "END");
 }
 
 gboolean
@@ -714,30 +665,30 @@ gedit_plugins_engine_configure_plugin (GeditPlugin *plugin, GtkWidget* parent)
 
 	g_return_val_if_fail (plugin != NULL, FALSE);
 	g_return_val_if_fail (plugin->configure != NULL, FALSE);
-	
+
 	return (plugin->configure (plugin, parent) == PLUGIN_OK);
 }
 
 static void 
 gedit_plugins_engine_active_plugins_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					     guint cnxn_id,
+					     GConfEntry *entry,
+					     gpointer user_data)
 {
 	GList *pl;
 	gboolean to_activate;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
-	
+
 	if (entry->value->type == GCONF_VALUE_BOOL)
 		to_activate = gconf_value_get_bool (entry->value);
 	else
 		return;
 
-	pl = gedit_plugins_list;
-
-	while (pl)
+	for (pl = gedit_plugins_list; pl; pl = pl->next)
 	{
 		gchar *key;
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
@@ -753,13 +704,13 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 				/* Activate plugin */
 				gint r = PLUGIN_OK;
 				gboolean res = TRUE;
-		       
+
 				if (info->plugin->handle == NULL)
 					res = load_plugin_module (info->plugin);
 
 				if (res)
 					r = info->plugin->activate (info->plugin);
-			
+
 				if (!res || (r != PLUGIN_OK))
 				{
 					g_warning (_("Error, impossible to activate plugin '%s'"),
@@ -768,9 +719,9 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 				else
 					/* Update plugin state */
 					info->state = GEDIT_PLUGIN_ACTIVATED;
-
 			}
 			else
+			{
 				if ((info->state == GEDIT_PLUGIN_ACTIVATED) && !to_activate)
 				{
 					gint r;
@@ -787,16 +738,13 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 						/* Update plugin state */
 						info->state = GEDIT_PLUGIN_DEACTIVATED;
 				}
-			
+			}
+
 			g_free (key);
 			return;
 		}
 
 		g_free (key);
-		
-		pl = g_list_next (pl);
 	}
 }
-
-
 
