@@ -292,10 +292,10 @@ gE_document *gE_document_new(gE_window *window)
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
 	style = gtk_style_new ();
 /*	style->bg[GTK_STATE_NORMAL] = style->white;*/
-	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
-	/*gtk_widget_set_style (GTK_TEXT(document->text), style);*/
+/*	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";*/
+	gtk_widget_set_style (GTK_WIDGET(document->text), style);
         /*style = gtk_style_attach (style, document->window);*/
-	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
+	gtk_widget_set_rc_style(GTK_WIDGET(document->text));
 
 
 	document->changed = FALSE;
