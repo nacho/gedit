@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
-"POT-Creation-Date: 2003-04-29 13:01+0200\n"
-"PO-Revision-Date: 2003-04-29 19:02+0200\n"
+"POT-Creation-Date: 2003-05-13 12:26+0200\n"
+"PO-Revision-Date: 2003-05-13 14:35+0200\n"
 "Last-Translator: Miloslav trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "Pohled Gedit"
 msgid "Gedit View."
 msgstr "Pohled Gedit."
 
-#: data/GNOME_Gedit.server.in.h:3
+#: data/GNOME_Gedit.server.in.h:3 viewer/gedit-factory.c:53
 msgid "Gedit viewer factory"
 msgstr "Generátor prohlížeče Gedit"
 
@@ -216,14 +216,6 @@ msgid "Selection Color"
 msgstr "Barva výběru"
 
 #: data/gedit.schemas.in.h:32
-msgid "Show Cursor Position"
-msgstr "Ukazovat pozici kurzoru"
-
-#: data/gedit.schemas.in.h:33
-msgid "Show Overwrite Mode"
-msgstr "Ukazovat režim přepisování"
-
-#: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -238,7 +230,7 @@ msgstr ""
 "písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
 "popsány."
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:33
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -253,12 +245,12 @@ msgstr ""
 "písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
 "popsány."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Udává písmo, které bude použito pro tělo dokumentu při jeho tisku."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -267,7 +259,7 @@ msgstr ""
 "bude mít vliv pouze v případě, že hodnota \"Tisknout čísla řádků\" je "
 "nenulová."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -276,7 +268,7 @@ msgstr ""
 "nastavení bude mít vliv pouze v případě, že je zapnuta hodnota \"Tisknout "
 "záhlaví\"."
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -284,18 +276,18 @@ msgstr ""
 "Udává maximální počet nedávno otevřených souborů, které se budou zobrazovat "
 "v podmenu \"Otevřít nedávný\"."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Udává počet mezerníků, které by se měly zobrazovat místo znaků tabelátoru."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:39
 msgid "Status Bar is Visible"
 msgstr "Ukazovat stavovou lištu"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -312,15 +304,15 @@ msgstr ""
 "vedle ikon. Tyto hodnoty jsou citlivé na malá a velká písmena, takže dejte "
 "pozor, aby odpovídaly přesně hodnotám, které jsou zde popsány."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:41
 msgid "Tab Size"
 msgstr "Velikost tabelátoru"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:42
 msgid "Text Color"
 msgstr "Barva textu"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:43
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -347,27 +339,27 @@ msgstr ""
 "písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
 "popsány."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:44
 msgid "Toolbar Buttons Style"
 msgstr "Styl tlačítek nástrojové lišty"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:45
 msgid "Toolbar is Visible"
 msgstr "Ukazovat nástrojovou lištu"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:46
 msgid "Undo Actions Limit"
 msgstr "Limit pro zpětné akce"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:47
 msgid "Use Default Colors"
 msgstr "Používat výchozí barvy"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:48
 msgid "Use Default Font"
 msgstr "Používat výchozí písmo"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:49
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -377,7 +369,7 @@ msgstr ""
 "intervalu. Časový interval lze nastavit volbou \"Interval pro automatické "
 "ukládání\"."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -385,52 +377,32 @@ msgstr ""
 "Mají-li se vytvářet záložní kopie souborů při jejich uložení. Ve volbě "
 "\"Přípona záložní kopie\" můžete nastavit příponu těchto záložních souborů."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:51
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Mají-li se zobrazovat čísla řádků v editační oblasti."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:52
 msgid "Whether gedit should enable auto indentation."
 msgstr "Má-li se povolit automatické odsazování."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:53
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Má-li být vložena hlavička dokumentu při jeho tisku."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:54
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Mají-li se vkládat mezery místo tabelátorů."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:55
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Má-li být viditelná stavová lišta pod editační oblastí."
 
-#: data/gedit.schemas.in.h:58
-msgid ""
-"Whether the status bar should show the cursor position in editing windows. "
-"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
-"effect."
-msgstr ""
-"Má-li stavová lišta zobrazovat aktuální pozici kurzoru v editační oblasti. "
-"Toto nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Ukazovat "
-"stavový řádek\"."
-
-#: data/gedit.schemas.in.h:59
-msgid ""
-"Whether the status bar should show the insert/overwrite mode in editing "
-"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
-"to take effect."
-msgstr ""
-"Má-li stavová lišta zobrazovat při editaci režim přepisu nebo vkládání. Toto "
-"nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Ukazovat "
-"stavový řádek\"."
-
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:56
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Má-li se zobrazovat v editačních oknech stavový řádek."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:57
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -441,7 +413,7 @@ msgstr ""
 "volba vypnuta, budou pro editační oblast použity barvy zvolené jako \"Barva "
 "pozadí\", \"Barva textu\". \"Barva vybraného textu\" a \"Barva výběru\"."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -488,7 +460,7 @@ msgstr "Znaků (s mezerami)"
 msgid "File Name"
 msgstr "Název souboru"
 
-#: plugins/docinfo/docinfo.glade2.h:6 gedit/gedit-print.c:373
+#: plugins/docinfo/docinfo.glade2.h:6 gedit/gedit-print.c:376
 msgid "Lines"
 msgstr "Řádek"
 
@@ -866,7 +838,7 @@ msgid "The text \"%s\" was not found."
 msgstr "Text \"%s\" nebyl nalezen."
 
 #: gedit/dialogs/gedit-dialog-replace.c:266 gedit/dialogs/replace.glade2.h:4
-#: gedit/gedit-ui.xml.h:49
+#: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "Nahradit"
 
@@ -880,7 +852,7 @@ msgstr "Nahradit vš_e"
 msgid "_Replace"
 msgstr "Nah_radit"
 
-#: gedit/dialogs/gedit-dialog-replace.c:402 gedit/gedit-ui.xml.h:20
+#: gedit/dialogs/gedit-dialog-replace.c:402 gedit/gedit-ui.xml.h:19
 msgid "Find"
 msgstr "Najít"
 
@@ -961,17 +933,17 @@ msgstr "Automatické odsazení"
 msgid "Line Numbers"
 msgstr "Čísla řádek"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:243 gedit/gedit-ui.xml.h:30
+#: gedit/dialogs/gedit-preferences-dialog.c:243 gedit/gedit-ui.xml.h:27
 msgid "Open"
 msgstr "Otevřít"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:244
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Uložit"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:70
+#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:65
 msgid "Undo"
 msgstr "Zpět"
 
@@ -992,8 +964,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:271
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:364
-#: gedit/gedit-ui.xml.h:39
+#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:367
+#: gedit/gedit-ui.xml.h:36
 msgid "Print"
 msgstr "Tisk"
 
@@ -1488,6 +1460,7 @@ msgid "Invalid file name"
 msgstr "Chybný název souboru"
 
 #: gedit/gedit-document.c:667 gedit/gedit-document.c:751
+#: viewer/gedit-persist-stream.c:114
 msgid "Invalid UTF-8 data"
 msgstr "Nepovolená UTF-8 data"
 
@@ -1557,7 +1530,7 @@ msgstr ""
 "Soubor \"%s\" je určen pouze pro čtení.\n"
 "Chcete se pokusit nahradit jej souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:544
+#: gedit/gedit-file-selector-util.c:545
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
@@ -1599,7 +1572,7 @@ msgstr ""
 "\n"
 "Tuto operaci nebude možné vrátit zpět."
 
-#: gedit/gedit-file.c:638 gedit/gedit-ui.xml.h:97
+#: gedit/gedit-file.c:638 gedit/gedit-ui.xml.h:91
 msgid "_Revert"
 msgstr "V_rátit"
 
@@ -1642,15 +1615,15 @@ msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:543 gedit/gedit-ui.xml.h:87
+#: gedit/gedit-mdi-child.c:543 gedit/gedit-ui.xml.h:82
 msgid "_Move to New Window"
 msgstr "Přes_unout do nového okna"
 
-#: gedit/gedit-mdi.c:441
+#: gedit/gedit-mdi.c:443
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: gedit/gedit-mdi.c:1027
+#: gedit/gedit-mdi.c:930
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1661,23 +1634,23 @@ msgstr ""
 "\n"
 "Pokud vaše změny neuložíte, budou ztraceny."
 
-#: gedit/gedit-mdi.c:1032
+#: gedit/gedit-mdi.c:935
 msgid "Do_n't save"
 msgstr "_Neukládat"
 
-#: gedit/gedit-mdi.c:1051
+#: gedit/gedit-mdi.c:954
 msgid "_Don't quit"
 msgstr "Ne_končit"
 
-#: gedit/gedit-mdi.c:1055
+#: gedit/gedit-mdi.c:958
 msgid "_Don't close"
 msgstr "Ne_zavírat"
 
-#: gedit/gedit-mdi.c:1145
+#: gedit/gedit-mdi.c:1048
 msgid "(modified)"
 msgstr "(změněný)"
 
-#: gedit/gedit-mdi.c:1151
+#: gedit/gedit-mdi.c:1054
 msgid "(readonly)"
 msgstr "(pouze pro čtení)"
 
@@ -1731,7 +1704,7 @@ msgstr "Chyba, nelze aktualizovat UI pro plugin '%s'."
 msgid "Cannot initialize preferences manager."
 msgstr "Nelze inicializovat správce nastavení."
 
-#: gedit/gedit-prefs-manager.c:1121
+#: gedit/gedit-prefs-manager.c:1111
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Očekával jsem '%s', ale obdržel jsem '%s' pro klíč %s"
@@ -1744,22 +1717,22 @@ msgstr ""
 "GEdit nemůže tisknout, jelikož nemůže nalézt\n"
 "jedno z potřebných písem."
 
-#: gedit/gedit-print.c:432
+#: gedit/gedit-print.c:435
 #, c-format
 msgid "File: %s"
 msgstr "Soubor: %s"
 
 #. Print right text
-#: gedit/gedit-print.c:439
+#: gedit/gedit-print.c:442
 #, c-format
 msgid "Page: %d"
 msgstr "Stránka: %d"
 
-#: gedit/gedit-print.c:580
+#: gedit/gedit-print.c:583
 msgid "gedit - Print Preview"
 msgstr "GEdit - Náhled tisku"
 
-#: gedit/gedit-print.c:658
+#: gedit/gedit-print.c:661
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1775,386 +1748,369 @@ msgid "About this application"
 msgstr "O této aplikaci"
 
 #: gedit/gedit-ui.xml.h:2
-msgid "C_ustomize Statusbar"
-msgstr "Nastavit stavovo_u lištu"
-
-#: gedit/gedit-ui.xml.h:3
 msgid "Change the visibility of the output window in the current window"
 msgstr "Změní viditelnost okna s výstupem v aktuálním okně"
 
-#: gedit/gedit-ui.xml.h:4
+#: gedit/gedit-ui.xml.h:3
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Změní viditelnost stavové lišty v aktuálním okně"
 
-#: gedit/gedit-ui.xml.h:5
+#: gedit/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Změní viditelnost nástrojové lišty v aktuálním okně"
 
-#: gedit/gedit-ui.xml.h:6
+#: gedit/gedit-ui.xml.h:5
 msgid "Close"
 msgstr "Zavřít"
 
-#: gedit/gedit-ui.xml.h:7
+#: gedit/gedit-ui.xml.h:6
 msgid "Close all open files"
 msgstr "Zavřít všechny otevřené soubory"
 
-#: gedit/gedit-ui.xml.h:8
+#: gedit/gedit-ui.xml.h:7
 msgid "Close the current file"
 msgstr "Zavřít tento soubor"
 
-#: gedit/gedit-ui.xml.h:9
+#: gedit/gedit-ui.xml.h:8
 msgid "Configure the application"
 msgstr "Nastavit aplikaci"
 
-#: gedit/gedit-ui.xml.h:10
+#: gedit/gedit-ui.xml.h:9
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: gedit/gedit-ui.xml.h:11
+#: gedit/gedit-ui.xml.h:10
 msgid "Copy the selection"
 msgstr "Kopírovat výběr"
 
-#: gedit/gedit-ui.xml.h:12
+#: gedit/gedit-ui.xml.h:11
 msgid "Create a new document"
 msgstr "Vytvořit nový dokument"
 
-#: gedit/gedit-ui.xml.h:13
+#: gedit/gedit-ui.xml.h:12
 msgid "Cu_t"
 msgstr "Vyjmou_t"
 
-#: gedit/gedit-ui.xml.h:14
+#: gedit/gedit-ui.xml.h:13
 msgid "Customize"
 msgstr "Nastavit"
 
-#: gedit/gedit-ui.xml.h:15
+#: gedit/gedit-ui.xml.h:14
 msgid "Customize toolbars"
 msgstr "Nastavit nástrojové lišty"
 
-#: gedit/gedit-ui.xml.h:16
+#: gedit/gedit-ui.xml.h:15
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: gedit/gedit-ui.xml.h:17
+#: gedit/gedit-ui.xml.h:16
 msgid "Cut the selection"
 msgstr "Vyjmout výběr"
 
-#: gedit/gedit-ui.xml.h:18
+#: gedit/gedit-ui.xml.h:17
 msgid "Delete"
 msgstr "Smazat"
 
-#: gedit/gedit-ui.xml.h:19
+#: gedit/gedit-ui.xml.h:18
 msgid "Delete the selected text"
 msgstr "Smazat vybraný text"
 
-#: gedit/gedit-ui.xml.h:21
+#: gedit/gedit-ui.xml.h:20
 msgid "Find Again"
 msgstr "Najít znovu"
 
-#: gedit/gedit-ui.xml.h:22
+#: gedit/gedit-ui.xml.h:21
 msgid "Find Ne_xt"
 msgstr "Najít d_alší"
 
-#: gedit/gedit-ui.xml.h:23
+#: gedit/gedit-ui.xml.h:22
 msgid "Go to _Line..."
 msgstr "Jít na _řádek..."
 
-#: gedit/gedit-ui.xml.h:24
+#: gedit/gedit-ui.xml.h:23
 msgid "Go to a specific line number"
 msgstr "Přechod na zadané číslo řádku."
 
-#: gedit/gedit-ui.xml.h:25
-msgid "Icon and _Text"
-msgstr "Ikona a _text"
-
-#: gedit/gedit-ui.xml.h:26
+#: gedit/gedit-ui.xml.h:24
 msgid "Main toolbar"
 msgstr "Hlavní nástrojová lišta"
 
-#: gedit/gedit-ui.xml.h:27
+#: gedit/gedit-ui.xml.h:25
 msgid "Move the current document to a new window"
 msgstr "Přesunout aktuální dokument do nového okna"
 
-#: gedit/gedit-ui.xml.h:28
+#: gedit/gedit-ui.xml.h:26
 msgid "New"
 msgstr "Nový"
 
-#: gedit/gedit-ui.xml.h:29
-msgid "Only show icons in the toolbar"
-msgstr "Zobrazit v nástrojové liště pouze ikony"
-
-#: gedit/gedit-ui.xml.h:31
+#: gedit/gedit-ui.xml.h:28
 msgid "Open Location..."
 msgstr "Otevřít lokaci..."
 
-#: gedit/gedit-ui.xml.h:32
+#: gedit/gedit-ui.xml.h:29
 msgid "Open _Location..."
 msgstr "Otevřít _lokaci..."
 
-#: gedit/gedit-ui.xml.h:33
+#: gedit/gedit-ui.xml.h:30
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
-#: gedit/gedit-ui.xml.h:34
+#: gedit/gedit-ui.xml.h:31
 msgid "Open a file from a specified location"
 msgstr "Otevřít soubor ze zadané lokace."
 
-#: gedit/gedit-ui.xml.h:35
+#: gedit/gedit-ui.xml.h:32
 msgid "Open the gedit manual"
 msgstr "Otevřít příručku aplikace GEdit"
 
-#: gedit/gedit-ui.xml.h:36
+#: gedit/gedit-ui.xml.h:33
 msgid "Paste"
 msgstr "Vložit"
 
-#: gedit/gedit-ui.xml.h:37
+#: gedit/gedit-ui.xml.h:34
 msgid "Paste the clipboard"
 msgstr "Vložit ze schránky"
 
-#: gedit/gedit-ui.xml.h:38
+#: gedit/gedit-ui.xml.h:35
 msgid "Pr_eferences"
 msgstr "_Nastavení"
 
-#: gedit/gedit-ui.xml.h:40
+#: gedit/gedit-ui.xml.h:37
 msgid "Print Previe_w..."
 msgstr "Náhled t_isku..."
 
-#: gedit/gedit-ui.xml.h:41
+#: gedit/gedit-ui.xml.h:38
 msgid "Print Preview"
 msgstr "Náhled tisku"
 
-#: gedit/gedit-ui.xml.h:42
+#: gedit/gedit-ui.xml.h:39
 msgid "Print Setup"
 msgstr "Nastavení tisku"
 
-#: gedit/gedit-ui.xml.h:43
+#: gedit/gedit-ui.xml.h:40
 msgid "Print preview"
 msgstr "Náhled tisku"
 
-#: gedit/gedit-ui.xml.h:44
+#: gedit/gedit-ui.xml.h:41
 msgid "Print the current file"
 msgstr "Tisknout tento soubor"
 
-#: gedit/gedit-ui.xml.h:45
+#: gedit/gedit-ui.xml.h:42
 msgid "Quit"
 msgstr "Konec"
 
-#: gedit/gedit-ui.xml.h:46
+#: gedit/gedit-ui.xml.h:43
 msgid "Quit the program"
 msgstr "Skončit program"
 
-#: gedit/gedit-ui.xml.h:47
+#: gedit/gedit-ui.xml.h:44
 msgid "Redo"
 msgstr "Znovu"
 
-#: gedit/gedit-ui.xml.h:48
+#: gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
 msgstr "Provést znovu akci vzatou zpět"
 
-#: gedit/gedit-ui.xml.h:50
+#: gedit/gedit-ui.xml.h:47
 msgid "Replace a string"
 msgstr "Nahradit řetězec"
 
-#: gedit/gedit-ui.xml.h:51
+#: gedit/gedit-ui.xml.h:48
 msgid "Revert"
 msgstr "Vrátit"
 
-#: gedit/gedit-ui.xml.h:52
+#: gedit/gedit-ui.xml.h:49
 msgid "Revert to a saved version of the file"
 msgstr "Návrat k uložené verzi souboru"
 
-#: gedit/gedit-ui.xml.h:54
+#: gedit/gedit-ui.xml.h:51
 msgid "Save As"
 msgstr "Uložit jako"
 
-#: gedit/gedit-ui.xml.h:55
+#: gedit/gedit-ui.xml.h:52
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: gedit/gedit-ui.xml.h:56
+#: gedit/gedit-ui.xml.h:53
 msgid "Save all open files"
 msgstr "Uložit všechny otevřené soubory"
 
-#: gedit/gedit-ui.xml.h:57
+#: gedit/gedit-ui.xml.h:54
 msgid "Save the current file"
 msgstr "Uložit tento soubor"
 
-#: gedit/gedit-ui.xml.h:58
+#: gedit/gedit-ui.xml.h:55
 msgid "Save the current file with a different name"
 msgstr "Uložit tento soubor pod jiným jménem"
 
-#: gedit/gedit-ui.xml.h:59
+#: gedit/gedit-ui.xml.h:56
 msgid "Search again for the same string"
 msgstr "Vyhledat znovu tentýž řetězec"
 
-#: gedit/gedit-ui.xml.h:60
+#: gedit/gedit-ui.xml.h:57
 msgid "Search for a string"
 msgstr "Najít řetězec"
 
-#: gedit/gedit-ui.xml.h:61
+#: gedit/gedit-ui.xml.h:58
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: gedit/gedit-ui.xml.h:62
+#: gedit/gedit-ui.xml.h:59
 msgid "Select _All"
 msgstr "Vybrat _vše"
 
-#: gedit/gedit-ui.xml.h:63
+#: gedit/gedit-ui.xml.h:60
 msgid "Select the entire document"
 msgstr "Vybere celý dokument"
 
-#: gedit/gedit-ui.xml.h:64
-msgid "Set toolbar button style according to desktop default"
-msgstr "Nastaví styl nástrojové lišty podle výchozího stylu"
+#: gedit/gedit-ui.xml.h:61
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr ""
+"Nastaví styl tlačítek nástrojové lišty podle nastavení pracovní plochy "
+"Nástrojové lišty & menu"
 
-#: gedit/gedit-ui.xml.h:65
+#: gedit/gedit-ui.xml.h:62
 msgid "Setup the page settings for your current printer"
 msgstr "Nastaví stránku pro vaši tiskárnu"
 
+#: gedit/gedit-ui.xml.h:63
+msgid "Show only icons in the toolbar"
+msgstr "Zobrazovat v nástrojové liště pouze ikony"
+
+#: gedit/gedit-ui.xml.h:64
+msgid "T_ext for Important Icons"
+msgstr "Text pro _důležité ikony"
+
 #: gedit/gedit-ui.xml.h:66
-msgid "Show _Cursor Position"
-msgstr "Zobrazit aktuální pozi_ci"
-
-#: gedit/gedit-ui.xml.h:67
-msgid "Show _Overwrite Mode"
-msgstr "Zobrazit režim přepis_ování"
-
-#: gedit/gedit-ui.xml.h:68
-msgid "Show cursor position in the statusbar"
-msgstr "Zobrazí pozici kurzoru ve stavové liště"
-
-#: gedit/gedit-ui.xml.h:69
-msgid "Show overwrite mode in the statusbar"
-msgstr "Zobrazí režim přepisování ve stavové liště"
-
-#: gedit/gedit-ui.xml.h:71
 msgid "Undo the last action"
 msgstr "Vrátí zpět poslední akci"
 
-#: gedit/gedit-ui.xml.h:72
+#: gedit/gedit-ui.xml.h:67
 msgid "_About"
 msgstr "_O programu"
 
-#: gedit/gedit-ui.xml.h:73
+#: gedit/gedit-ui.xml.h:68
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: gedit/gedit-ui.xml.h:74
+#: gedit/gedit-ui.xml.h:69
 msgid "_Close All"
 msgstr "Zavřít vš_e"
 
-#: gedit/gedit-ui.xml.h:75
+#: gedit/gedit-ui.xml.h:70
 msgid "_Contents"
 msgstr "O_bsah"
 
-#: gedit/gedit-ui.xml.h:76
+#: gedit/gedit-ui.xml.h:71
 msgid "_Copy"
 msgstr "_Kopírovat"
 
-#: gedit/gedit-ui.xml.h:77
+#: gedit/gedit-ui.xml.h:72
 msgid "_Customize Toolbar"
 msgstr "_Upravit nástrojovou lištu"
 
-#: gedit/gedit-ui.xml.h:78
+#: gedit/gedit-ui.xml.h:73
 msgid "_Debug"
 msgstr "_Ladění"
 
-#: gedit/gedit-ui.xml.h:79
+#: gedit/gedit-ui.xml.h:74
 msgid "_Delete"
 msgstr "_Smazat"
 
-#: gedit/gedit-ui.xml.h:80
+#: gedit/gedit-ui.xml.h:75
 msgid "_Desktop Default"
 msgstr "_Výchozí nastavení"
 
-#: gedit/gedit-ui.xml.h:81
+#: gedit/gedit-ui.xml.h:76
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: gedit/gedit-ui.xml.h:82
+#: gedit/gedit-ui.xml.h:77
 msgid "_Edit"
 msgstr "Ú_pravy"
 
-#: gedit/gedit-ui.xml.h:83
+#: gedit/gedit-ui.xml.h:78
 msgid "_File"
 msgstr "_Soubor"
 
-#: gedit/gedit-ui.xml.h:84
+#: gedit/gedit-ui.xml.h:79
 msgid "_Find..."
 msgstr "_Najít..."
 
-#: gedit/gedit-ui.xml.h:85
+#: gedit/gedit-ui.xml.h:80
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: gedit/gedit-ui.xml.h:86
-msgid "_Icon"
-msgstr "_Ikona"
+#: gedit/gedit-ui.xml.h:81
+msgid "_Icons Only"
+msgstr "Jen _ikony"
 
-#: gedit/gedit-ui.xml.h:88
+#: gedit/gedit-ui.xml.h:83
 msgid "_New"
 msgstr "_Nový"
 
-#: gedit/gedit-ui.xml.h:89
+#: gedit/gedit-ui.xml.h:84
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: gedit/gedit-ui.xml.h:90
+#: gedit/gedit-ui.xml.h:85
 msgid "_Output Window"
 msgstr "_Okno s výstupem"
 
-#: gedit/gedit-ui.xml.h:91
+#: gedit/gedit-ui.xml.h:86
 msgid "_Paste"
 msgstr "V_ložit"
 
-#: gedit/gedit-ui.xml.h:92
+#: gedit/gedit-ui.xml.h:87
 msgid "_Print..."
 msgstr "_Tisk..."
 
-#: gedit/gedit-ui.xml.h:93
-msgid "_Priority Text beside Icons"
-msgstr "_Důležitý text vedle ikon"
-
-#: gedit/gedit-ui.xml.h:94
+#: gedit/gedit-ui.xml.h:88
 msgid "_Quit"
 msgstr "_Konec"
 
-#: gedit/gedit-ui.xml.h:95
+#: gedit/gedit-ui.xml.h:89
 msgid "_Redo"
 msgstr "Zn_ovu"
 
-#: gedit/gedit-ui.xml.h:96
+#: gedit/gedit-ui.xml.h:90
 msgid "_Replace..."
 msgstr "Nah_radit..."
 
-#: gedit/gedit-ui.xml.h:98
+#: gedit/gedit-ui.xml.h:92
 msgid "_Save"
 msgstr "_Uložit"
 
-#: gedit/gedit-ui.xml.h:99
+#: gedit/gedit-ui.xml.h:93
 msgid "_Save All"
 msgstr "Uložit _vše"
 
-#: gedit/gedit-ui.xml.h:100
+#: gedit/gedit-ui.xml.h:94
 msgid "_Search"
 msgstr "_Najít"
 
-#: gedit/gedit-ui.xml.h:101
+#: gedit/gedit-ui.xml.h:95
 msgid "_Statusbar"
 msgstr "_Stavová lišta"
 
-#: gedit/gedit-ui.xml.h:102
+#: gedit/gedit-ui.xml.h:96
+msgid "_Text for All Icons"
+msgstr "_Text pro všechny ikony"
+
+#: gedit/gedit-ui.xml.h:97
 msgid "_Toolbar"
 msgstr "Nástrojová liš_ta"
 
-#: gedit/gedit-ui.xml.h:103
+#: gedit/gedit-ui.xml.h:98
 msgid "_Tools"
 msgstr "Nás_troje"
 
-#: gedit/gedit-ui.xml.h:104
+#: gedit/gedit-ui.xml.h:99
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: gedit/gedit-ui.xml.h:105
+#: gedit/gedit-ui.xml.h:100
 msgid "_View"
 msgstr "_Zobrazit"
 
@@ -2622,116 +2578,128 @@ msgstr "Řádky výstupu"
 msgid "Choose one or more e_ncodings:"
 msgstr "Vyberte jed_no nebo více kódování:"
 
-#: gedit/gedit-encodings.c:128 gedit/gedit-encodings.c:154
-#: gedit/gedit-encodings.c:195 gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:129 gedit/gedit-encodings.c:155
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:239
 msgid "Western"
 msgstr "Západní"
 
-#: gedit/gedit-encodings.c:130 gedit/gedit-encodings.c:197
-#: gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:198
+#: gedit/gedit-encodings.c:235
 msgid "Central European"
 msgstr "Středoevropské"
 
-#: gedit/gedit-encodings.c:132
+#: gedit/gedit-encodings.c:133
 msgid "South European"
 msgstr "Jihoevropské"
 
-#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:150
-#: gedit/gedit-encodings.c:246
+#: gedit/gedit-encodings.c:135 gedit/gedit-encodings.c:151
+#: gedit/gedit-encodings.c:249
 msgid "Baltic"
 msgstr "Baltské"
 
-#: gedit/gedit-encodings.c:136 gedit/gedit-encodings.c:199
-#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:216
-#: gedit/gedit-encodings.c:234
+#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:200
+#: gedit/gedit-encodings.c:213 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:219 gedit/gedit-encodings.c:237
 msgid "Cyrillic"
 msgstr "Cyrilika"
 
-#: gedit/gedit-encodings.c:138 gedit/gedit-encodings.c:205
-#: gedit/gedit-encodings.c:244
+#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:247
 msgid "Arabic"
 msgstr "Arabské"
 
-#: gedit/gedit-encodings.c:140 gedit/gedit-encodings.c:238
+#: gedit/gedit-encodings.c:141 gedit/gedit-encodings.c:241
 msgid "Greek"
 msgstr "Řecké"
 
-#: gedit/gedit-encodings.c:142
+#: gedit/gedit-encodings.c:143
 msgid "Hebrew Visual"
 msgstr "Hebrejské vizuální"
 
-#: gedit/gedit-encodings.c:144 gedit/gedit-encodings.c:203
-#: gedit/gedit-encodings.c:242
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:204
+#: gedit/gedit-encodings.c:245
 msgid "Hebrew"
 msgstr "Hebrejské"
 
-#: gedit/gedit-encodings.c:146 gedit/gedit-encodings.c:201
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:202
+#: gedit/gedit-encodings.c:243
 msgid "Turkish"
 msgstr "Turecké"
 
-#: gedit/gedit-encodings.c:148
+#: gedit/gedit-encodings.c:149
 msgid "Nordic"
 msgstr "Nordické"
 
-#: gedit/gedit-encodings.c:152
+#: gedit/gedit-encodings.c:153
 msgid "Celtic"
 msgstr "Keltské"
 
-#: gedit/gedit-encodings.c:156
+#: gedit/gedit-encodings.c:157
 msgid "Romanian"
 msgstr "Rumunské"
 
-#: gedit/gedit-encodings.c:159 gedit/gedit-encodings.c:161
-#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:162
+#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:166
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:168
+#: gedit/gedit-encodings.c:169
 msgid "Armenian"
 msgstr "Arménské"
 
-#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
-#: gedit/gedit-encodings.c:181
+#: gedit/gedit-encodings.c:171 gedit/gedit-encodings.c:173
+#: gedit/gedit-encodings.c:182
 msgid "Chinese Traditional"
 msgstr "Čínské tradiční"
 
-#: gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:175
 msgid "Cyrillic/Russian"
 msgstr "Cyrilika / Ruské"
 
-#: gedit/gedit-encodings.c:177 gedit/gedit-encodings.c:208
-#: gedit/gedit-encodings.c:221
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:209
+#: gedit/gedit-encodings.c:224
 msgid "Japanese"
 msgstr "Japonské"
 
-#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:210
-#: gedit/gedit-encodings.c:214 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:180 gedit/gedit-encodings.c:211
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:230
 msgid "Korean"
 msgstr "Korejské"
 
-#: gedit/gedit-encodings.c:184 gedit/gedit-encodings.c:186
-#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:192
+#: gedit/gedit-encodings.c:185 gedit/gedit-encodings.c:187
+#: gedit/gedit-encodings.c:189 gedit/gedit-encodings.c:193
 msgid "Chinese Simplified"
 msgstr "Čínské zjednodušené"
 
-#: gedit/gedit-encodings.c:190
+#: gedit/gedit-encodings.c:191
 msgid "Georgian"
 msgstr "Gruzínské"
 
-#: gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:221
 msgid "Cyrillic/Ukrainian"
 msgstr "Cyrilika / Ukrajinské"
 
-#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:229
-#: gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:226 gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:251
 msgid "Vietnamese"
 msgstr "Vietnamské"
 
-#: gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:228
 msgid "Thai"
 msgstr "Thajské"
 
 #: gedit/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (neplatný Unicode)"
+
+#: viewer/gedit-persist-stream.c:44
+msgid "Save method not implemented for gedit viewer"
+msgstr "Metoda save neimplementována v prohlížeči gedit"
+
+#: viewer/gedit-viewer-ui.xml.h:1
+msgid "Copy the selected text to the clipboard"
+msgstr "Zkopírovat vybraný text do schránky"
+
+#: viewer/gedit-viewer-ui.xml.h:2
+msgid "_Copy Text"
+msgstr "_Kopírovat text"
