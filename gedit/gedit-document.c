@@ -1398,7 +1398,7 @@ gedit_document_find_again (GeditDocument* doc)
 }
 
 gchar*
-gedit_document_get_selected_text (GeditDocument *doc)
+gedit_document_get_selected_text (GeditDocument *doc, gint *start, gint *end)
 {
 	GtkTextIter iter;
 	GtkTextIter sel_bound;
@@ -1416,7 +1416,13 @@ gedit_document_get_selected_text (GeditDocument *doc)
                                     &sel_bound,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "selection_bound"));
-	gtk_text_iter_order (&sel_bound, &iter);	
+	gtk_text_iter_order (&iter, &sel_bound);	
+
+	if (start != NULL)
+		*start = gtk_text_iter_get_offset (&iter); 
+
+	if (end != NULL)
+		*end = gtk_text_iter_get_offset (&sel_bound); 
 
 	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &iter, &sel_bound, TRUE);
 }
@@ -1512,3 +1518,18 @@ gedit_document_replace_all (GeditDocument *doc,
 
 	return cont;
 }
+
+guint
+gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset)
+{
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, offset);
+	
+	return gtk_text_iter_get_line (&iter);
+}
+

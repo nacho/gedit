@@ -605,7 +605,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	if (strlen (replace_string) <= 0)
 		return;
 
-	selected_text = gedit_document_get_selected_text (doc);
+	selected_text = gedit_document_get_selected_text (doc, NULL, NULL);
 
 	if (strcmp (selected_text, search_string) != 0)
 	{

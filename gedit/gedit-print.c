@@ -367,7 +367,8 @@ gedit_print_document (GeditPrintJobInfo *pji)
 	gint paragraph_delimiter_index;
 	gint next_paragraph_start;
 	gdouble fontheight;
-
+	gint start;
+	
 	gedit_debug (DEBUG_PRINT, "");	
 	
 	switch (pji->range_type)
@@ -377,8 +378,11 @@ gedit_print_document (GeditPrintJobInfo *pji)
 			text_end = text_to_print + strlen (text_to_print);
 			break;
 		case GNOME_PRINT_RANGE_SELECTION:
-			text_to_print = gedit_document_get_selected_text (pji->doc);
+			text_to_print = gedit_document_get_selected_text (pji->doc, &start, NULL);
 			text_end = text_to_print + strlen (text_to_print);
+
+			pji->first_line_to_print =  
+				gedit_document_get_line_at_offset (pji->doc, start) + 1;
 			break;
 		default:
 			g_return_if_fail (FALSE);

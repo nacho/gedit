@@ -1,228 +1,467 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 
- * Shell output plugin.
- * Roberto Majadas <phoenix@nova.es>
+/*
+ * shell_output.c
+ * This file is part of gedit
  *
- * Print the shell output in the current document
+ * Copyright (C) 2002 Paolo Maggi 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA. 
  */
  
-#include <config.h>
-#include <gnome.h>
-#include <glade/glade.h>
+/*
+ * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
 
-#include "window.h"
-#include "document.h"
-#include "plugin.h"
-#include "view.h"
-#include "utils.h"
+#include <glade/glade-xml.h>
+#include <libgnome/gnome-i18n.h>
 
-#define GEDIT_PLUGIN_SHELL_BUFFER_SIZE 1024
+#include "gedit-plugin.h"
+#include "gedit-debug.h"
 
-static GtkWidget *directory;
-static GtkWidget *command;
-static GtkWidget *dialog;
+#define MENU_ITEM_LABEL		N_("Insert shell _output")
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
+#define MENU_ITEM_NAME		"PluginShellOutput"	
+#define MENU_ITEM_TIP		N_("Insert the shell output in the current document.")
+
+#define SHELL_OUTPUT_LOGO "/shell-output-logo.png"
+
+typedef struct _ShellOutputDialog ShellOutputDialog;
+
+struct _ShellOutputDialog {
+	GtkWidget *dialog;
+
+	GtkWidget *logo;
+	GtkWidget *command;
+	GtkWidget *directory;
+};
+
+static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
+static ShellOutputDialog *get_dialog ();
+static void dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog);
+
+static void	run_command_cb (BonoboUIComponent *uic, gpointer user_data, 
+			       const gchar* verbname);
+static gboolean	run_command_real (ShellOutputDialog *dialog);
+
+gchar *current_directory = NULL;
 
 static void
-destroy_plugin (PluginData *pd)
+dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 {
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	if (dialog_pointer != NULL)
+	{
+		g_free (*dialog_pointer);
+		*dialog_pointer = NULL;
+	}	
 }
 
 static void
-shell_output_help (GtkWidget *widget, gpointer data)
+dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog)
 {
-	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+	gedit_debug (DEBUG_PLUGINS, "");
 
-	gnome_help_display (NULL, &help_entry);
-}
-
-static void
-shell_output_finish (GtkWidget *w , gpointer data)
-{
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-}
-
-static void
-shell_output_scan_text (GtkWidget *w , gpointer data)
-{
-
-	GeditDocument *doc         = gedit_document_current ();
-	gchar    *buffer_in        = NULL ;
-	GString  *buffer_out       = g_string_new (NULL) ;
-	gchar    *command_string   = NULL ;
-	gchar    *directory_string = NULL ;
-	gchar    **arg             = NULL ;
-	gint     fdpipe [2];
-	gint     pid ;
-	gint     buffer_length ;
-	gint     position ;
+	switch (res_id) {
+		case GTK_RESPONSE_OK:
+			if (run_command_real (dialog))
+				gtk_widget_destroy (dialog->dialog);
+			break;
+			
+		case GTK_RESPONSE_HELP:
+			/* TODO */
+			break;
 	
+		default:
+			gtk_widget_destroy (dialog->dialog);
+	}
+}
 
-	command_string = gtk_entry_get_text (GTK_ENTRY (command));
+
+static ShellOutputDialog*
+get_dialog ()
+{
+	static ShellOutputDialog *dialog = NULL;
+
+	GladeXML *gui;
+	GtkWindow *window;
+	GtkWidget *content;
+	GtkWidget *button;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	window = GTK_WINDOW (gedit_get_active_window ());
+
+	if (dialog != NULL)
+	{
+		gdk_window_show (dialog->dialog->window);
+		gdk_window_raise (dialog->dialog->window);
+		gtk_widget_grab_focus (dialog->dialog);
+
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+				window);
+	
+		gtk_widget_grab_focus (dialog->command);
+
+		if (!GTK_WIDGET_VISIBLE (dialog->dialog))
+			gtk_widget_show (dialog->dialog);
+
+		return dialog;
+	}
+
+	gui = glade_xml_new (GEDIT_GLADEDIR "shell_output.glade2",
+			     "shell_output_dialog_content", NULL);
+
+	if (!gui) {
+		g_warning
+		    ("Could not find shell_output.glade2, reinstall gedit.\n");
+		return NULL;
+	}
+
+	dialog = g_new0 (ShellOutputDialog, 1);
+
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Shell output"),
+						      window,
+						      GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_STOCK_CLOSE,
+						      GTK_RESPONSE_CLOSE,
+						      GTK_STOCK_HELP,
+						      GTK_RESPONSE_HELP,
+						      NULL);
+
+	g_return_val_if_fail (dialog->dialog != NULL, NULL);
+
+	/* Add the run button */
+	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog), 
+				 _("_Run"), GTK_STOCK_EXECUTE, GTK_RESPONSE_OK);
+
+	content			= glade_xml_get_widget (gui, "shell_output_dialog_content");
+
+	g_return_val_if_fail (content != NULL, NULL);
+
+	dialog->logo		= glade_xml_get_widget (gui, "logo");
+ 
+	dialog->command    	= glade_xml_get_widget (gui, "command_entry");
+	dialog->directory  	= glade_xml_get_widget (gui, "directory_entry");
+
+	g_return_val_if_fail (dialog->logo      != NULL, NULL);
+	g_return_val_if_fail (dialog->command   != NULL, NULL);
+	g_return_val_if_fail (dialog->directory != NULL, NULL);
+
+	/* stick the shell_output logo in there */
+	gtk_image_set_from_file (GTK_IMAGE (dialog->logo), GNOME_ICONDIR SHELL_OUTPUT_LOGO);
+
+	gtk_entry_set_text (GTK_ENTRY (dialog->directory), current_directory);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
+			    content, FALSE, FALSE, 0);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
+					 GTK_RESPONSE_OK);
+
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
+			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
+			   GTK_SIGNAL_FUNC (dialog_response_handler), dialog);
+
+	g_object_unref (gui);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+
+	gtk_widget_grab_focus (dialog->command);
+
+	gtk_widget_show (dialog->dialog);
+
+	return dialog;
+
+}
+
+static void
+run_command_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	ShellOutputDialog *dialog;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	dialog = get_dialog ();
+	if (dialog == NULL) {
+		g_warning ("Could not create the Shell Output dialog");
+		return;
+	}
+}
+
+static gboolean
+run_command_real (ShellOutputDialog *dialog)
+{
+	const gchar    *command_string   = NULL ;
+	const gchar    *directory_string = NULL ;
+	gboolean  retval;
+	gchar 	**argv = 0;
+	GError   *error = NULL;
+	gchar    *standard_output = NULL;
+	GeditDocument	*doc;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (dialog != NULL);
+
+	doc = gedit_get_active_document ();
+
+	if (doc == NULL)
+		return TRUE;
+
+	command_string = gtk_entry_get_text (GTK_ENTRY (dialog->command));
 
 	if (command_string == NULL || (strlen (command_string) == 0))
 	{
-		gedit_utils_error_dialog (_("The shell command entry is empty.\n\n"
-					    "Please, insert a valid shell command."), data);
-		return;
+		GtkWidget *err_dialog;
+		
+		err_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (dialog->dialog),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			   	GTK_MESSAGE_ERROR,
+			   	GTK_BUTTONS_OK,
+				_("The shell command entry is empty.\n\n"
+				  "Please, insert a valid shell command."));
+			
+		gtk_dialog_set_default_response (GTK_DIALOG (err_dialog), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (err_dialog), FALSE);
+
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+  		gtk_widget_destroy (err_dialog);
+
+		return FALSE;
 	}
 
-	directory_string = gtk_entry_get_text (GTK_ENTRY (directory));
+	directory_string = gtk_entry_get_text (GTK_ENTRY (dialog->directory));
 	
 	if (directory_string == NULL || (strlen (directory_string) == 0)) 
+		directory_string = current_directory;
+	
+	if (!g_shell_parse_argv (command_string,
+                           NULL, &argv,
+                           NULL))
 	{
-		directory_string =  gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
+		GtkWidget *err_dialog;
+		
+		err_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (dialog->dialog),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			   	GTK_MESSAGE_ERROR,
+			   	GTK_BUTTONS_OK,
+				_("Error parsing the shell command.\n\n"
+				  "Please, insert a valid shell command."));
+			
+		gtk_dialog_set_default_response (GTK_DIALOG (err_dialog), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (err_dialog), FALSE);
+
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+  		gtk_widget_destroy (err_dialog);
+
+		return FALSE;
+	}
+
+		
+	retval = g_spawn_sync (directory_string,
+                         argv,
+                         NULL,
+                         G_SPAWN_SEARCH_PATH,
+                         NULL,
+                         NULL,
+                         &standard_output,
+                         NULL,
+                         NULL,
+                         NULL);
+	g_strfreev (argv);
+
+	if (retval)
+	{
+		gedit_document_begin_user_action (doc);
+
+		gedit_document_insert_text_at_cursor (doc, standard_output, -1);
+
+		gedit_document_end_user_action (doc);
+
+		g_free (standard_output);
+
+		if (directory_string != current_directory)
+		{
+			g_free (current_directory);
+			current_directory = g_strdup (directory_string);
+		}
+
+		return TRUE;
 	}
 	else
 	{
-		 gnome_config_set_string ("/Editor_Plugins/shell_output/directory", directory_string );
-		 gnome_config_sync ();
-	}
-	
-	if (pipe (fdpipe) == -1)
-	{
-		_exit (1);
-	}
-  
-	pid = fork();
-	if (pid == 0)
-	{
-		/* New process. */
-
-		close (1);
-		dup (fdpipe[1]);
-		close (fdpipe[0]);
-		close (fdpipe[1]);
-
-		arg = g_strsplit (command_string," ",-1);
-
-		chdir (directory_string);
-			
-		execvp (*arg,arg);
+		GtkWidget *err_dialog;
 		
-		/* FIXME: do a better error report... PAOLO */
-		g_warning ("A undetermined PIPE problem occurred");
-
-		/* This is only reached if something goes wrong. */
-		_exit (1);
-	}
-	close (fdpipe[1]);
-
-	g_strfreev (arg);
-
-	buffer_length = 1;
-	
-	while (buffer_length > 0)
-	{
-
-		buffer_in = g_malloc (GEDIT_PLUGIN_SHELL_BUFFER_SIZE);
-		memset ( buffer_in , 0 ,GEDIT_PLUGIN_SHELL_BUFFER_SIZE );
-		
-		if ( (buffer_length  = read (fdpipe[0], buffer_in , GEDIT_PLUGIN_SHELL_BUFFER_SIZE)) > 0  )
-		{
-			buffer_out = g_string_append ( buffer_out , buffer_in );
+		err_dialog = gtk_message_dialog_new (
+				GTK_WINDOW (dialog->dialog),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			   	GTK_MESSAGE_ERROR,
+			   	GTK_BUTTONS_OK,
+				_("An error occurs while running the selected command."));
 			
-		}
+		gtk_dialog_set_default_response (GTK_DIALOG (err_dialog), GTK_RESPONSE_OK);
 
-		g_free ( buffer_in ) ;
+		gtk_window_set_resizable (GTK_WINDOW (err_dialog), FALSE);
+
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
+  		gtk_widget_destroy (err_dialog);
+
+		return FALSE;
 	}
-	
-	position = gedit_view_get_position (gedit_view_active ());
-	 
-	gedit_document_insert_text (doc, buffer_out->str , position , TRUE);
-
-	gedit_view_set_position (gedit_view_active (), position + buffer_out->len);
-			
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-
-	g_string_free ( buffer_out , TRUE ) ;
-
 }
 
-
-
-static void
-shell_output (void){
-
-     GladeXML *gui;
-
-     GtkWidget *ok;
-     GtkWidget *cancel;
-     GtkWidget *help;
-
-     gchar *text;
-
-     if (gedit_document_current () == NULL)
-	     return;
-     
-     gui = glade_xml_new (GEDIT_GLADEDIR "/shell_output.glade",NULL);
-
-     if (!gui)
-     {
-	     g_warning ("Could not find shell_output.glade");
-	     return;
-     }
-
-     dialog     = glade_xml_get_widget (gui,"shell_output_dialog");
- 
-     ok         = glade_xml_get_widget (gui,"ok_button");
-     cancel     = glade_xml_get_widget (gui,"cancel_button");
-     help       = glade_xml_get_widget (gui,"help_button");
- 
-     command    = glade_xml_get_widget (gui,"command_entry");
-     directory  = glade_xml_get_widget (gui,"directory_entry");
-
-     g_return_if_fail (dialog    != NULL);
-     g_return_if_fail (ok        != NULL);
-     g_return_if_fail (cancel    != NULL);
-     g_return_if_fail (help      != NULL);
-     g_return_if_fail (command   != NULL);
-     g_return_if_fail (directory != NULL);
-
-     text = gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
-     gtk_entry_set_text (GTK_ENTRY (directory), text);
-     g_free (text);
-     
-     gtk_signal_connect (GTK_OBJECT (ok), "clicked",
-			 GTK_SIGNAL_FUNC(shell_output_scan_text), NULL);
-     gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
-			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
-     gtk_signal_connect (GTK_OBJECT (help), "clicked",
-			 GTK_SIGNAL_FUNC(shell_output_help), NULL);
-     gtk_signal_connect (GTK_OBJECT (dialog), "delete_event",
-			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
-     
-     gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
-     gtk_window_set_modal         (GTK_WINDOW (dialog), TRUE);
-     gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
-     gnome_dialog_editable_enters (GNOME_DIALOG (dialog), GTK_EDITABLE (command));
-
-     gtk_widget_show_all (dialog);
-     
-     gtk_object_unref (GTK_OBJECT (gui));
-}
-
-
-
-gint
-init_plugin (PluginData *pd)
+G_MODULE_EXPORT GeditPluginState
+destroy (GeditPlugin *plugin)
 {
-	gchar *current_directory;
-	
-	/* initialize */
-	pd->destroy_plugin = destroy_plugin;
-	pd->name = _("Shell Output");
-	pd->desc = _("Insert the shell output in the document");
-	pd->long_desc = _("Insert the shell output in the document");
-	pd->author = "Roberto Majadas <phoenix@nova.es>";
-	pd->needs_a_document = TRUE;
-	pd->modifies_an_existing_doc = TRUE;
+	gedit_debug (DEBUG_PLUGINS, "");
 
-	pd->private_data = (gpointer)shell_output;
-	pd->installed_by_default = TRUE;
+	plugin->deactivate (plugin);
 
-	current_directory = g_get_current_dir ();
-	gnome_config_set_string ("/Editor_Plugins/shell_output/directory", current_directory);
 	g_free (current_directory);
+}
 	
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
+{
+	BonoboUIEngine *ui_engine;
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_PLUGINS, "");	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	ui_engine = bonobo_window_get_ui_engine (window);
+
+	doc = gedit_get_active_document ();
+
+	if (doc == NULL)		
+		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, FALSE);
+	else
+		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, TRUE);
+
 	return PLUGIN_OK;
 }
+	
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup (MENU_ITEM_PATH MENU_ITEM_NAME);
+
+		if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			gchar *xml;
+					
+			xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"\""
+					" _label=\"%s\" _tip=\"%s\" hidden=\"0\" />", 
+					MENU_ITEM_NAME, MENU_ITEM_LABEL, MENU_ITEM_TIP);
+
+			bonobo_ui_component_set_translate (ui_component, 
+					MENU_ITEM_PATH, xml, NULL);
+
+			bonobo_ui_component_set_translate (ui_component, 
+					"/commands/", "<cmd name = \"" MENU_ITEM_NAME "\" "
+					"pixtype=\"stock\" pixname=\"gtk-execute\"/>", NULL);
+
+			bonobo_ui_component_add_verb (ui_component, 
+					MENU_ITEM_NAME, run_command_cb, 
+					      NULL); 
+
+			g_free (xml);
+		}
+		
+		g_free (item_path);
+
+		pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
+		top_windows = g_list_next (top_windows);
+	}
+}
+
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup (MENU_ITEM_PATH MENU_ITEM_NAME);
+
+		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			bonobo_ui_component_rm (ui_component, item_path, NULL);
+			bonobo_ui_component_rm (ui_component, "/commands/" MENU_ITEM_NAME, NULL);
+		}
+		
+		g_free (item_path);
+		
+		top_windows = g_list_next (top_windows);
+	}
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
+{
+	/* initialize */
+	gedit_debug (DEBUG_PLUGINS, "");
+     
+	pd->name = _("Shell output");
+	pd->desc = _("Exucute a program and insert its output in the current document at the current "
+		     "cursor position");
+	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
+	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
+	
+	pd->private_data = NULL;
+
+	current_directory = g_get_current_dir ();
+		
+	return PLUGIN_OK;
+}
+
+
+
+

@@ -61,40 +61,43 @@ struct _TimeConfigureDialog {
 
 static gchar *formats[] =
 {
-	"%c",
-	"%x",
-	"%X",
-	"%x %X",
-	"%a %b %d %H:%M:%S %Z %Y",
-	"%a %b %d %H:%M:%S %Y",
-	"%d/%m/%Y",
-	"%m/%d/%Y",
-	"%A %d %B %Y",
-	"%Y-%m-%d",
-	"%d %B %Y",
-	"%A %b %d",
-	"%H:%M:%S",
-	"%H:%M",
-	"%I:%M:%S %p",
-	"%I:%M %p",
-	"%H.%M.%S",
-	"%H.%M",
-	"%I.%M.%S %p",
-	"%I.%M %p",
-	"%d/%m/%Y %H:%M:%S",
-	"%d/%m/%y %H:%M:%S",
+	"%c ",
+	"%x ",
+	"%X ",
+	"%x %X ",
+	"%a %b %d %H:%M:%S %Z %Y ",
+	"%a %b %d %H:%M:%S %Y ",
+	"%a %d %b %Y %H:%M:%S %Z ",
+	"%a %d %b %Y %H:%M:%S ",
+	"%d/%m/%Y ",
+	"%d/%m/%y ",
+	"%D ",
+	"%A %d %B %Y ",
+	"%A %B %d %Y ",
+	"%Y-%m-%d ",
+	"%d %B %Y ",
+	"%B %d, %Y ",
+	"%A %b %d ",
+	"%H:%M:%S ",
+	"%H:%M ",
+	"%I:%M:%S %p ",
+	"%I:%M %p ",
+	"%H.%M.%S ",
+	"%H.%M ",
+	"%I.%M.%S %p ",
+	"%I.%M %p ",
+	"%d/%m/%Y %H:%M:%S ",
+	"%d/%m/%y %H:%M:%S ",
 	NULL
 };
 
 static gint 		 sel_format 		= 0;
 static GConfClient 	*time_gconf_client 	= NULL;	
 
-/* Gratiously ripped out of GIMP (app/general.c), with a fiew minor changes */
 static char *
 get_time (const gchar* format)
 {
-	static char static_buf[21];
-  	gchar *tmp, *out = NULL;
+  	gchar *out = NULL;
   	time_t clock;
   	struct tm *now;
   	size_t out_length = 0;
@@ -104,15 +107,12 @@ get_time (const gchar* format)
   	clock = time (NULL);
   	now = localtime (&clock);
 	  	
-  	tmp = static_buf;
-	
 	do
 	{
 		out_length += 255;
-		out = (char *) realloc (out, out_length);
+		out = g_realloc (out, out_length);
 	}
   	while (strftime (out, out_length, format, now) == 0);
-
   	
   	return out;
 }
@@ -126,7 +126,10 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 	{
 		g_free (*dialog_pointer);
 		*dialog_pointer = NULL;
-	}	
+	}
+
+	gedit_debug (DEBUG_PLUGINS, "END");
+	
 }
 
 static GtkTreeModel*
@@ -143,8 +146,7 @@ create_model (TimeConfigureDialog *dialog)
 
 	/* Set tree view model*/
 	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->list), GTK_TREE_MODEL (store));
-	g_object_unref (G_OBJECT (store));
-
+	
 	/* add data to the list store */
 	while (formats[i] != NULL)
 	{
@@ -158,21 +160,50 @@ create_model (TimeConfigureDialog *dialog)
 				    COLUMN_FORMATS, str,
 				    COLUMN_INDEX, i,
 				    -1);
-		g_free (str);
-
+		g_free (str);	
+		
 		if (i == sel_format)
 		{
 			GtkTreeSelection *selection;
-		
+						
 			selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->list));
 			g_return_val_if_fail (selection != NULL, GTK_TREE_MODEL (store));
 			gtk_tree_selection_select_iter (selection, &iter);
-		}
+		}	
 
 		++i;
 	}
 	
 	return GTK_TREE_MODEL (store);
+}
+
+void 
+scroll_to_selected (GtkTreeView *tree_view)
+{
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	model = gtk_tree_view_get_model (tree_view);
+	g_return_if_fail (model != NULL);
+
+	/* Scroll to selected */
+	selection = gtk_tree_view_get_selection (tree_view);
+	g_return_if_fail (selection != NULL);
+
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+	{
+		GtkTreePath* path;
+
+		path = gtk_tree_model_get_path (model, &iter);
+		g_return_if_fail (path != NULL);
+
+		gtk_tree_view_scroll_to_cell (tree_view,
+					      path, NULL, TRUE, 1.0, 0.0);
+		gtk_tree_path_free (path);
+	}
 }
 
 static void
@@ -197,9 +228,12 @@ create_formats_list (TimeConfigureDialog *dialog)
 			"text", COLUMN_FORMATS, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->list), column);
 
-	gtk_widget_show (dialog->list);
+	g_signal_connect (G_OBJECT (dialog->list), "realize", 
+			G_CALLBACK (scroll_to_selected), NULL);
 
+	gtk_widget_show (dialog->list);
 }
+
 
 static TimeConfigureDialog*
 get_configure_dialog (GtkWindow* parent)
@@ -264,9 +298,10 @@ get_configure_dialog (GtkWindow* parent)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);
 
+	
 	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
 			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
-
+	
 	g_object_unref (gui);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
@@ -308,6 +343,7 @@ ok_button_pressed (TimeConfigureDialog *dialog)
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->list));
+	g_return_if_fail (model != NULL);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->list));
 	g_return_if_fail (selection != NULL);
@@ -352,19 +388,24 @@ configure (GeditPlugin *p, GtkWidget *parent)
 		switch (ret)
 		{
 			case GTK_RESPONSE_OK:
+				gedit_debug (DEBUG_PLUGINS, "Ok button pressed");
 				ok_button_pressed (dialog);
-				gtk_widget_hide (dialog->dialog);
 				break;
 			case GTK_RESPONSE_HELP:
+				gedit_debug (DEBUG_PLUGINS, "Help button pressed");
 				help_button_pressed (dialog);
 				break;
 			default:
-				gtk_widget_hide (dialog->dialog);
+				gedit_debug (DEBUG_PLUGINS, "Default");
 		}
 
-	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
+	} while (ret == GTK_RESPONSE_HELP);
+
+	gedit_debug (DEBUG_PLUGINS, "Destroying dialog");
 
 	gtk_widget_destroy (dialog->dialog);
+
+	gedit_debug (DEBUG_PLUGINS, "Done");
 
 	return PLUGIN_OK;
 }
@@ -432,7 +473,8 @@ activate (GeditPlugin *pd)
 					MENU_ITEM_PATH, xml, NULL);
 
 			bonobo_ui_component_set_translate (ui_component, 
-					"/commands/", "<cmd name = \"" MENU_ITEM_NAME "\" />", NULL);
+					"/commands/", "<cmd name = \"" MENU_ITEM_NAME "\" "
+					"pixtype=\"stock\" pixname=\"gnome-stock-timer\"/>", NULL);
 
 			bonobo_ui_component_add_verb (ui_component, 
 					MENU_ITEM_NAME, time_world_cb, 

@@ -90,7 +90,8 @@ configure_button_cb (GtkWidget *button, gpointer data)
 	gedit_debug (DEBUG_PLUGINS, "Configuring: %s\n", info->plugin->name);
 
 	gedit_plugins_engine_configure_plugin (info->plugin, dialog->dialog);
-	
+
+	gedit_debug (DEBUG_PLUGINS, "Done");	
 }
 
 static void
@@ -488,8 +489,8 @@ dialog_plugin_manager_get_dialog (void)
 	}
 
 	/* setup a window of a sane size. */
-	gtk_widget_set_size_request (GTK_WIDGET (dialog->notebook), 250, 150);
-	gtk_widget_set_size_request (GTK_WIDGET (viewport), 250, 120);
+	gtk_widget_set_size_request (GTK_WIDGET (dialog->notebook), 270, 140);
+	gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 140);
 	
 	/* stick the plugin manager logo in there */
 	gtk_image_set_from_file (GTK_IMAGE (dialog->logo), GNOME_ICONDIR PLUGIN_MANAGER_LOGO);

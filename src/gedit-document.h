@@ -131,7 +131,9 @@ void 		gedit_document_delete_text 	(GeditDocument *doc,
 gchar*		gedit_document_get_chars 	(GeditDocument *doc, 
 					         gint start, gint end);
 
-gchar*		gedit_document_get_selected_text (GeditDocument *doc);
+gchar*		gedit_document_get_selected_text (GeditDocument *doc,
+						  gint* start, gint* end);
+
 gboolean	gedit_document_has_selected_text (GeditDocument *doc);
 
 /* Multi-level Undo/Redo operations */
@@ -162,6 +164,7 @@ void		gedit_document_replace_selected_text (GeditDocument *doc,
 gboolean	gedit_document_replace_all (GeditDocument *doc,
 				            const gchar *find, const gchar *replace, 
 					    gboolean case_sensitive);
+guint		gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset);
 
 #endif /* __GEDIT_DOCUMENT_H__ */
 

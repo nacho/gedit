@@ -1,3 +1,14 @@
+2002-01-24  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.[ch] (gedit_document_get_selected_text): now
+	take two new paramters: start and end
+	(gedit_document_get_line_at_offset): new function
+
+	* gedit-print.c (gedit_print_document): print the right start
+	line number when printing selections
+
+	* dialogs/plugin-manager.glade2: cosmetic changes
+
 2002-01-23  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-commands.c (gedit_commands_about_cmd): fixed the

@@ -44,25 +44,25 @@
           <widget class="GtkVBox" id="plugin_manager_dialog_content">
             <property name="border_width">5</property>
             <property name="homogeneous">no</property>
-            <property name="spacing">0</property>
+            <property name="spacing">5</property>
             <property name="visible">yes</property>
 
             <child>
               <widget class="GtkHBox" id="hbox1">
                 <property name="homogeneous">no</property>
-                <property name="spacing">0</property>
+                <property name="spacing">10</property>
                 <property name="visible">yes</property>
 
                 <child>
                   <widget class="GtkImage" id="plugin_logo">
-                    <property name="xalign">0.5</property>
+                    <property name="xalign">0.0</property>
                     <property name="yalign">0.5</property>
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
                     <property name="visible">yes</property>
                   </widget>
                   <packing>
-                    <property name="padding">10</property>
+                    <property name="padding">0</property>
                     <property name="expand">no</property>
                     <property name="fill">no</property>
                   </packing>
@@ -70,10 +70,10 @@
 
                 <child>
                   <widget class="GtkLabel" id="label1">
-                    <property name="label" translatable="yes">This is the Plugin Manager.  From here, you can choose which plugins you want to have loaded.</property>
+                    <property name="label" translatable="yes">This is the Plugin Manager. Plugins are extra pieces of software that extend gedit capabilities. From here, you can choose which plugins you want to have loaded.</property>
                     <property name="justify">GTK_JUSTIFY_LEFT</property>
                     <property name="wrap">yes</property>
-                    <property name="xalign">7.45058e-09</property>
+                    <property name="xalign">0.0</property>
                     <property name="yalign">0.5</property>
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
@@ -87,7 +87,7 @@
                 </child>
               </widget>
               <packing>
-                <property name="padding">10</property>
+                <property name="padding">0</property>
                 <property name="expand">no</property>
                 <property name="fill">no</property>
               </packing>
@@ -158,7 +158,7 @@
                   <widget class="GtkButton" id="configure_button">
                     <property name="tooltip" translatable="yes">Configure the selected plugin</property>
                     <property name="can_focus">yes</property>
-                    <property name="label" translatable="yes">_Configure plugin</property>
+                    <property name="label" translatable="yes">C_onfigure plugin</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
                     <property name="width-request">0</property>
                     <property name="height-request">0</property>
@@ -168,12 +168,12 @@
                   <packing>
                     <property name="padding">0</property>
                     <property name="expand">no</property>
-                    <property name="fill">no</property>
+                    <property name="fill">yes</property>
                   </packing>
                 </child>
               </widget>
               <packing>
-                <property name="padding">10</property>
+                <property name="padding">5</property>
                 <property name="expand">no</property>
                 <property name="fill">no</property>
               </packing>
@@ -185,7 +185,7 @@
                 <property name="show_tabs">yes</property>
                 <property name="show_border">yes</property>
                 <property name="tab_pos">GTK_POS_BOTTOM</property>
-                <property name="scrollable">no</property>
+                <property name="scrollable">yes</property>
                 <property name="tab_hborder">2</property>
                 <property name="tab_vborder">2</property>
                 <property name="width-request">250</property>
@@ -194,15 +194,29 @@
                 <property name="visible">yes</property>
 
                 <child>
-                  <widget class="GtkLabel" id="desc_label">
-                    <property name="label" translatable="yes"></property>
-                    <property name="justify">GTK_JUSTIFY_LEFT</property>
-                    <property name="wrap">yes</property>
-                    <property name="xalign">0.05</property>
-                    <property name="yalign">0.05</property>
-                    <property name="xpad">0</property>
-                    <property name="ypad">0</property>
+                  <widget class="GtkVBox" id="vbox112">
+                    <property name="homogeneous">no</property>
+                    <property name="spacing">0</property>
                     <property name="visible">yes</property>
+                    <property name="border_width">5</property>
+
+                    <child>
+                      <widget class="GtkLabel" id="desc_label">
+                        <property name="label" translatable="yes"></property>
+                        <property name="justify">GTK_JUSTIFY_LEFT</property>
+                        <property name="wrap">yes</property>
+                        <property name="xalign">0.0</property>
+                        <property name="yalign">0.0</property>
+                        <property name="xpad">0</property>
+                        <property name="ypad">0</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
                   </widget>
                 </child>
 
@@ -228,13 +242,13 @@
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
+                    <property name="border_width">5</property>
                     <child>
                       <widget class="GtkLabel" id="name_label">
                         <property name="label" translatable="yes"></property>
                         <property name="justify">GTK_JUSTIFY_LEFT</property>
                         <property name="wrap">no</property>
-                        <property name="xalign">0.05</property>
+                        <property name="xalign">0.0</property>
                         <property name="yalign">0.5</property>
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
@@ -252,7 +266,7 @@
                         <property name="label" translatable="yes"></property>
                         <property name="justify">GTK_JUSTIFY_LEFT</property>
                         <property name="wrap">no</property>
-                        <property name="xalign">0.05</property>
+                        <property name="xalign">0.0</property>
                         <property name="yalign">0.5</property>
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
@@ -270,7 +284,7 @@
                         <property name="label" translatable="yes"></property>
                         <property name="justify">GTK_JUSTIFY_LEFT</property>
                         <property name="wrap">yes</property>
-                        <property name="xalign">0.05</property>
+                        <property name="xalign">0.0</property>
                         <property name="yalign">0.5</property>
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
@@ -288,7 +302,7 @@
                         <property name="label" translatable="yes"></property>
                         <property name="justify">GTK_JUSTIFY_LEFT</property>
                         <property name="wrap">yes</property>
-                        <property name="xalign">0.05</property>
+                        <property name="xalign">0.0</property>
                         <property name="yalign">0.5</property>
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
