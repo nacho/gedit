@@ -29,15 +29,15 @@
 
 /* FIXME: Monitor gconf keys */
 
+#include <string.h>
+
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
-
 #include <gtksourceview/gtksourcetag.h>
 
 #include "gedit-languages-manager.h"
 #include "gedit-prefs-manager.h"
 
-#include <string.h>
 
 static GtkSourceLanguagesManager *language_manager = NULL;
 static GConfClient 		 *gconf_client = NULL;
@@ -56,8 +56,6 @@ gedit_get_languages_manager (void)
 
 	return language_manager;
 }
-
-
 
 GtkSourceLanguage *
 gedit_languages_manager_get_language_from_id (GtkSourceLanguagesManager *lm,
@@ -90,7 +88,6 @@ gedit_languages_manager_get_language_from_id (GtkSourceLanguagesManager *lm,
 	return NULL;
 }
 
-
 static gchar*
 get_gconf_key (GtkSourceLanguage *language, const gchar *tag_id)
 {
@@ -108,7 +105,7 @@ get_gconf_key (GtkSourceLanguage *language, const gchar *tag_id)
 	return key;
 }
 
-static gchar* 
+static gchar * 
 gdk_color_to_string (GdkColor color)
 {
 	return g_strdup_printf ("#%04x%04x%04x",
@@ -251,7 +248,7 @@ gedit_language_set_tag_style (GtkSourceLanguage       *language,
 	g_free (key);
 }
 
-GSList *initialized_languages = NULL;
+static GSList *initialized_languages = NULL;
 
 void 
 gedit_language_init_tag_styles (GtkSourceLanguage *language)
@@ -291,10 +288,6 @@ gedit_language_init_tag_styles (GtkSourceLanguage *language)
 		
 		value = gconf_client_get_string (gconf_client, key, NULL);
 		
-		/* 
-		 * g_print ("%s -> %s\n", key, value);
-		 */
-
 		if (value != NULL)
 		{
 			GtkSourceTagStyle *style;
@@ -320,9 +313,10 @@ gedit_language_init_tag_styles (GtkSourceLanguage *language)
 
 		l = g_slist_next (l);
 	}
-	
+
 	g_slist_foreach (tags, (GFunc)g_object_unref, NULL);
 	g_slist_free (tags);
 
 	initialized_languages =	g_slist_prepend (initialized_languages, language);
 }
+
