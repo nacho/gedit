@@ -65,13 +65,17 @@ gE_save_settings()
 		gE_prefs_set_char ("print command", "lpr -rs %s");
 	else
 		gE_prefs_set_char ("print command", settings->print_cmd);
-
+	
+	if (!settings->run)
+	  settings->run = TRUE;
+	gE_prefs_set_int ("run", (gint) settings->run);
 }
 
 void gE_get_settings()
 {
 	
 /*	 settings->tab_pos = gE_prefs_get_int("tab pos");*/
+	 settings->run = gE_prefs_get_int ("run");
 	 settings->show_status = gE_prefs_get_int("show statusbar");
 	 settings->have_toolbar = gE_prefs_get_int("toolbar");
 	 settings->have_tb_text = gE_prefs_get_int("tb text");
@@ -110,6 +114,15 @@ void gE_get_settings()
 
 /*bOrK	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);*/
 
-	if (settings->show_status == FALSE)
-	  gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+	if (settings->run)
+	  {
+	   if (settings->show_status == FALSE)
+	     gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+	  }
+	else
+	  {
+	   settings->show_status = TRUE;
+	   gE_prefs_set_int ("show statusbar", (gboolean) settings->show_status);
+	  }
+	
 }

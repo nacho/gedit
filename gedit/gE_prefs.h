@@ -45,7 +45,8 @@ typedef struct _gE_preference {
 	gint scrollbar;
 	
 	gint width, height;
-
+	
+	gint run;		/* Flag to see if this is the first time gEdit is run */
 } gE_preference;
 
 extern gE_preference *settings;
