@@ -49,6 +49,9 @@
 #define A4_WIDTH (210.0 * 72 / 25.4)
 #define A4_HEIGHT (297.0 * 72 / 25.4)
 
+
+static GnomePrintConfig *gedit_print_config = NULL;
+
 typedef struct _GeditPrintJobInfo	GeditPrintJobInfo;
 
 struct _GeditPrintJobInfo {
@@ -133,6 +136,15 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	g_return_val_if_fail (doc != NULL, NULL);
 	g_return_val_if_fail (gedit_settings != NULL, NULL);
 
+	if (gedit_print_config == NULL)
+	{
+		gedit_print_config = gnome_print_config_default ();
+		g_return_val_if_fail (gedit_print_config != NULL, NULL);
+
+		gnome_print_config_set (gedit_print_config, "Settings.Transport.Backend", "lpr");
+		gnome_print_config_set (gedit_print_config, "Printer", "GENERIC");
+	}
+
 	pji = g_new0 (GeditPrintJobInfo, 1);
 
 	pji->doc = doc;
@@ -180,6 +192,10 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	
 	pji->first_line_to_print = 1;
 	pji->printed_lines = 0;
+
+		
+	pji->config = gedit_print_config;
+	gnome_print_config_ref (pji->config);
 
 	return pji;
 }	
@@ -270,8 +286,11 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 	else
 		selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		
-	dialog = gnome_print_dialog_new ((const char *) _("Print"),
-			          GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
+	dialog = g_object_new (GNOME_TYPE_PRINT_DIALOG, "print_config", pji->config, NULL);
+	
+	gnome_print_dialog_construct (GNOME_PRINT_DIALOG (dialog), 
+				      _("Print"),
+			              GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 	
 	lines = gedit_document_get_line_count (pji->doc);
 	
@@ -302,9 +321,6 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 			return TRUE;
 	}
 	
-	g_return_val_if_fail (pji->config == NULL, TRUE);
-	pji->config = gnome_print_dialog_get_config (GNOME_PRINT_DIALOG (dialog));
-
 	pji->range_type = gnome_print_dialog_get_range (GNOME_PRINT_DIALOG (dialog));
 
 	gtk_widget_destroy (dialog);
@@ -507,8 +523,6 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 		 * pji->config 
 		 */
 		cancel = gedit_print_run_dialog (pji);
-	else
-		pji->config = gnome_print_config_default ();
 
 	/* The canceled button on the dialog was clicked */
 	if (cancel) {
