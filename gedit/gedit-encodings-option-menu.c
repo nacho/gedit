@@ -239,7 +239,8 @@ update_menu (GeditEncodingsOptionMenu *option_menu)
 
 	g_free (str);
 
-	if (utf8_encoding != current_encoding)
+	if ((utf8_encoding != current_encoding) && 
+	    (current_encoding != NULL))
 	{
 		str = g_strdup_printf (_("Current Locale (%s)"), 
 				       gedit_encoding_get_charset (current_encoding));

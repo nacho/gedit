@@ -121,7 +121,8 @@ typedef enum
 
   GEDIT_ENCODING_LAST,
 
-  GEDIT_ENCODING_UTF_8
+  GEDIT_ENCODING_UTF_8,
+  GEDIT_ENCODING_ASCII
   
 } GeditEncodingIndex;
 
@@ -130,6 +131,13 @@ static GeditEncoding utf8_encoding =
 	  "UTF-8", 
 	  N_("Unicode") 
 	};
+
+static GeditEncoding ascii_encoding = 
+	{ GEDIT_ENCODING_ASCII,
+	  "US-ASCII", 
+	  "ASCII" 
+	};
+
 	
 static GeditEncoding encodings [] = {
 
@@ -300,6 +308,14 @@ gedit_encoding_get_from_charset (const gchar *charset)
 	if (g_ascii_strcasecmp (charset, "UTF-8") == 0)
 		return gedit_encoding_get_utf8 ();
 
+	if (g_ascii_strcasecmp (charset, "US-ASCII") == 0)
+	{
+		g_return_val_if_fail (gedit_encoding_get_current () == &ascii_encoding,
+				NULL);
+		
+		return &ascii_encoding;
+	}
+
 	i = 0; 
 	while (i < GEDIT_ENCODING_LAST)
 	{
@@ -350,17 +366,21 @@ gedit_encoding_get_current (void)
 	{
 		if (locale_charset != NULL)
 			locale_encoding = gedit_encoding_get_from_charset (locale_charset);
-	
 	}
 	else
 	{
 		locale_encoding = &utf8_encoding;
 	}
 	
+	
+	if (locale_encoding == NULL)
+		locale_encoding = &ascii_encoding;
+
+	g_return_val_if_fail (locale_encoding != NULL, NULL);
+
 	initialized = TRUE;
 
 	return locale_encoding;
-
 }
 	
 

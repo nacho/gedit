@@ -1,3 +1,15 @@
+2003-08-23  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixed bug #119361
+
+	* gedit-encodings.c (gedit_encoding_get_current): set locale_encoding
+	to ASCII if the current charset is unknown.
+	(gedit_encoding_get_from_charset): returns a pointer to ascii_encoding
+	if charset is US-ASCII
+
+	* gedit-encodings-option-menu.c (update_menu): check if 
+	current_encoding != NULL before adding the "Current Locale" menu item
+
 2003-08-22  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-file-selector-util.c (create_gtk_selector): 

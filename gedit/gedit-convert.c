@@ -156,6 +156,7 @@ gedit_convert_to_utf8   (const gchar          *content,
 			{
 				gedit_debug (DEBUG_UTILS, "validate failed.");
 
+				/* FIXME: Mark for translation - Paolo */
 				g_set_error (error, GEDIT_CONVERT_ERROR, 
 					     GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED,
 				 	     "gedit has not been able to automatically determine "
@@ -199,6 +200,8 @@ gedit_convert_to_utf8   (const gchar          *content,
 
 		gedit_debug (DEBUG_UTILS, "gedit has not been able to automatically determine the encoding of "
 			     "the file you want to open.");
+		
+		/* FIXME: Mark for translation - Paolo */
 
 		g_set_error (error, GEDIT_CONVERT_ERROR, GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED,
 		 	     "gedit has not been able to automatically determine the encoding of "
