@@ -382,15 +382,24 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 {
 	GtkWidget *ret;
 	gchar *name;
+	gchar *uri;
+
+	static GtkTooltips *tooltips = NULL;
 	
 	gedit_debug (DEBUG_MDI, "");
 
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
 	g_return_val_if_fail (GEDIT_IS_VIEW (view), NULL);
-
+		
+	if (tooltips == NULL)
+		tooltips = gtk_tooltips_new ();
+	
 	name = bonobo_mdi_child_get_name (child);
 
+ 	uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);
+	g_return_val_if_fail (uri != NULL, NULL);
+		
 	if (old_hbox != NULL) 
 	{
 		GtkWidget *label = g_object_get_data (G_OBJECT (old_hbox),
@@ -400,6 +409,7 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	} 
 	else 
 	{
+		GtkWidget *event_box;
 		GtkSettings *settings;
 		GtkWidget *hbox;
 		GtkWidget *label;
@@ -434,11 +444,18 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		
 		g_object_set_data (G_OBJECT (hbox), "label", label);
 
-		gtk_widget_show_all (hbox);
-		ret = hbox;
+		event_box = gtk_event_box_new ();
+
+		gtk_container_add (GTK_CONTAINER (event_box), hbox);
+
+		gtk_widget_show_all (event_box);
+		ret = event_box;
 	}
 
+	gtk_tooltips_set_tip (tooltips, ret, uri, NULL);
+
 	g_free (name);
+	g_free (uri);
 
 	return ret;
 }
