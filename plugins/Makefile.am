@@ -1,3 +1,3 @@
-SUBDIRS = docinfo sample 
+SUBDIRS = docinfo sample cvschangelog time
 
 EXTRA_DIST = ChangeLog

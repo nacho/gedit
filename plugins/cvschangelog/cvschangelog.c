@@ -1,8 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit
+ * cvschangelog.c
+ * This file is part of gedit
  *
- * Copyright (C) 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach & Jose M Celorio
+ * Copyright (C) 2002 James Willcox
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,40 +23,14 @@
  *   James Willcox <jwillcox@cs.indiana.edu>
  */
 
-#include <config.h>
+#include <libgnome/gnome-i18n.h>
 #include <errno.h>
-#include <gnome.h>
-
-#include "window.h"
-#include "document.h"
-#include "utils.h"
-#include "view.h"
-#include "plugin.h"
+#include "gedit-plugin.h"
+#include "gedit-file.h"
+#include "gedit-debug.h"
 
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
 
-/**
- * destroy_plugin:
- * @pd:
- *
- * Plugin destruction.
- *
- * Return Value: void
- **/
-static void
-destroy_plugin (PluginData * pd)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-}
-
-/**
- * get_cwd:
- * @:
- *
- * Returns a string containing the current working directory.  
- *
- * Return Value: a pointer the current working directory. Caller should free the string
- **/
 static gchar *
 get_cwd (void)
 {
@@ -76,14 +51,6 @@ get_cwd (void)
 	return buf;
 }
 
-/**
- * is_changelog:
- * @path: a path to a file
- *
- * Determine if the path is a changelog file
- *
- * Return Value: TRUE if the path is a changelog file, FALSE otherwise
- **/
 static gint
 is_changelog (const gchar * path)
 {
@@ -97,22 +64,15 @@ is_changelog (const gchar * path)
 	return FALSE;
 }
 
-/**
- * open_changelogs:
- * @:
- *
- * Opens all changelogs found in the current buffer.
- *
- * Return Value: void
- **/
 static void
-open_changelogs (void)
+cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verbname)
 {
-	GeditView *view = gedit_view_active ();
-	guchar *buf;
+	GeditView *view = gedit_get_active_view ();
+	GeditDocument *doc;
+	gchar *buf;
 	guchar *filename;
 	gchar *current_dir;
-	gchar *full_filename;
+	gchar *full_uri;
 	gchar **split_file;
 	gchar **split_line;
 	gint i, j;
@@ -120,10 +80,11 @@ open_changelogs (void)
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	if (!view)
-		return;
+	g_return_if_fail (view);
 
-	buf = gedit_document_get_buffer (view->doc);
+	doc = gedit_view_get_document (view);
+
+	buf = gedit_document_get_buffer (doc);
 
 	/* split the file up line by line */
 	split_file = g_strsplit (buf, "\n", 0);
@@ -144,13 +105,13 @@ open_changelogs (void)
 				if(!current_dir)
 					continue;
 				
-				full_filename = g_strdup_printf("%s/%s", current_dir, filename);
+				full_uri = g_strdup_printf("file:///%s/%s", current_dir, filename);
 
 				/* open the changelog */
-				gedit_document_new_with_file (full_filename);
+				gedit_file_open_single_uri (full_uri);
 				
 				/* cleanup. */
-				g_free(full_filename);
+				g_free(full_uri);
 				g_free(current_dir);
 			}
 		}
@@ -161,29 +122,106 @@ open_changelogs (void)
 	g_strfreev (split_file);
 }
 
-/**
- * init_changelogs:
- * @pd:
- *
- * Plugin initialization.
- *
- * Return Value: gint
- **/
-gint
-init_plugin (PluginData * pd)
+G_MODULE_EXPORT GeditPluginState
+destroy (GeditPlugin *plugin)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+}
+
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_if_fail (top_windows != NULL);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup ("/menu/File/FileOps/CVSChangelog");
+
+		if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			gchar *xml;
+					
+			xml = g_strdup ("<menuitem name=\"CVSChangelog\" verb=\"\""
+					" _label=\"Open _CVS Changelogs\""
+				        " _tip=\"Opens changelogs from CVS commit logs\" hidden=\"0\" />");
+
+			bonobo_ui_component_set_translate (ui_component, 
+					"/menu/File/FileOps/", xml, NULL);
+
+			bonobo_ui_component_set_translate (ui_component, 
+					"/commands/", "<cmd name = \"CVSChangelog\" />", NULL);
+
+			bonobo_ui_component_add_verb (ui_component, 
+					"CVSChangelog", cvs_changelogs_cb, 
+					      NULL); 
+
+			g_free (xml);
+		}
+		
+		g_free (item_path);
+		
+		top_windows = g_list_next (top_windows);
+	}
+
+	return PLUGIN_OK;
+}
+
+
+
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *plugin)
+{
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_if_fail (top_windows != NULL);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup ("/menu/File/FileOps/CVSChangelog");
+
+		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			bonobo_ui_component_rm (ui_component, item_path, NULL);
+			bonobo_ui_component_rm (ui_component, "/commands/CVSChangelog", NULL);
+		}
+		
+		g_free (item_path);
+		
+		top_windows = g_list_next (top_windows);
+	}
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin* plugin)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	pd->destroy_plugin = destroy_plugin;
-	pd->name = _("CVS ChangeLog");
-	pd->desc = _("A plugin that opens ChangeLogs found in CVS commit log messages.");
-	pd->long_desc = _("A plugin that opens ChangeLogs found in CVS commit log messages.");
-	pd->author = "James Willcox <jwillcox@cs.indiana.edu>";
-	pd->needs_a_document = TRUE;
-	pd->modifies_an_existing_doc = TRUE;
+	plugin->destroy = destroy;
+	plugin->name = _("CVS ChangeLog");
+	plugin->desc = _("A plugin that opens ChangeLogs found in CVS commit messages.");
+	plugin->author = "James Willcox <jwillcox@cs.indiana.edu>";
+	plugin->copyright = _("Copyright (C) 2002 - James Willcox");
 
-	pd->private_data = (gpointer) open_changelogs;
+	plugin->private_data = NULL;
 
 	return PLUGIN_OK;
 }

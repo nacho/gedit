@@ -126,6 +126,8 @@ activate (GeditPlugin *pd)
 		
 		top_windows = g_list_next (top_windows);
 	}
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState
