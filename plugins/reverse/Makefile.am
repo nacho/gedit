@@ -6,7 +6,7 @@ plugin_LTLIBRARIES = libreverse.la
 
 libreverse_la_SOURCES = reverse.c
 
-INCLUDES = -I../../src \
+INCLUDES = -I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)	\
 	$(GNOME_INCLUDEDIR)
