@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-07-16 15:12+0200\n"
-"PO-Revision-Date: 2002-07-16 15:13+0200\n"
+"POT-Creation-Date: 2002-07-17 11:01+0200\n"
+"PO-Revision-Date: 2002-07-17 11:02+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1593,7 +1593,7 @@ msgstr "Välj ett filnamn att spara"
 msgid "Open File ..."
 msgstr "Öppna fil..."
 
-#: src/gedit-file.c:168 src/gedit-file.c:803
+#: src/gedit-file.c:168 src/gedit-file.c:858
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Läste in filen \"%s\""
@@ -1635,12 +1635,17 @@ msgstr "Filen \"%s\" återställdes."
 msgid "Loading %d file..."
 msgstr "Läser in %d filer..."
 
-#: src/gedit-file.c:720
+#: src/gedit-file.c:716
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
+
+#: src/gedit-file.c:775
 #, c-format
 msgid "Loaded %i files"
 msgstr "Läste in %i filer"
 
-#: src/gedit-file.c:861
+#: src/gedit-file.c:916
 msgid "Could not read data from stdin."
 msgstr "Kunde inte läsa data från standard in."
 
@@ -2447,6 +2452,72 @@ msgstr ""
 msgid "It is not possible to revert an Untitled document."
 msgstr "Det går inte att återställa ett namnlöst dokument."
 
+#: src/gedit-utils.c:1279
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Filen \"%s\" finns redan."
+
+#: src/gedit-utils.c:1285
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" är en katalog.\n"
+"\n"
+"Kontrollera att du angav platsen korrekt."
+
+#: src/gedit-utils.c:1294
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Kan inte skapa filen \"%s\".\n"
+"\n"
+"Se till att du har de rätta skrivrättigheterna."
+
+#: src/gedit-utils.c:1301
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Kan inte skapa filen \"%s\".\n"
+"\n"
+"Filnamnet är för långt."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Kan inte skapa filen \"%s\".\n"
+"\n"
+"En katalogkomponent i filnamnet finns inte eller är en lös symbolisk länk."
+
+#: src/gedit-utils.c:1317
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Det finns inte tillräckligt med diskutrymme för att spara filen \"%s\".\n"
+"\n"
+"Frigör en del utrymme på disken och försök igen."
+
+#: src/gedit-utils.c:1323
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Kunde inte skapa filen \"%s\"."
+
 #: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
@@ -2659,13 +2730,6 @@ msgstr "Öppna %s"
 
 #~ msgid "level(s)"
 #~ msgstr "nivå(er)"
-
-#~ msgid ""
-#~ "Make sure that the path you provided exists, and that you have the "
-#~ "appropriate write permissions."
-#~ msgstr ""
-#~ "Se till att sökvägen du angav existerar, och att du har de rätta "
-#~ "skrivrättigheterna."
 
 #~ msgid "gedit - Print Document"
 #~ msgstr "gedit - Skriv ut dokument"
@@ -3176,9 +3240,6 @@ msgstr "Öppna %s"
 #~ msgstr ""
 #~ "Är du säker att du vill återställa alla ändringar?\n"
 #~ "(%s)"
-
-#~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
-#~ msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
 
 #~ msgid "Show window debugging messages."
 #~ msgstr "Visa felsökningsmeddelanden för fönster."
