@@ -58,6 +58,7 @@ static void recent_cb(GtkWidget *w, gE_data *data);
 static GtkWidget *open_fs, *save_fs;
 GtkWidget *ssel = NULL;
 GtkWidget *osel = NULL;
+gchar *oname = NULL;
 
 /* handles changes in the text widget... */
 void
@@ -416,11 +417,11 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 	gchar *nfile;
 	struct stat sb;
 	gE_document *doc;
-	/*GtkFileSelection *fs;
+/*	GtkFileSelection *fs;
 
 
-	fs = GTK_FILE_SELECTION(open_fs);*/
-
+	fs = GTK_FILE_SELECTION(osel);
+*/
 	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));
 
 	if (filename != NULL) 
@@ -442,17 +443,19 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 		     if (doc->filename || doc->changed)
 		       doc = gE_document_new_with_file (filename);
 		     else
-		       gE_file_open (doc, filename);
+		       gE_file_open (GE_DOCUMENT(doc), filename);
 		   }
 		 else
+		   {
 		     doc = gE_document_new_with_file (filename);
+		   }
 	
 		
 
 	  }
 
 	gtk_widget_hide (GTK_WIDGET(osel));
-
+	
 } /* file_open_ok_sel */
 
 /*
@@ -551,6 +554,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 	    if (doc->changed)
 	      {
  	        fname = doc->filename;
+
  	    
 	        if (fname == NULL)
 	           file_save_as_cb(widget, NULL);
@@ -1009,6 +1013,14 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	GtkWidget *significant_other;
 	gchar *buffer;
 	gint position = *pos;
+	gint n;
+	gE_document *temp = NULL;
+	gE_data *data;
+
+	data = g_malloc0 (sizeof (gE_data));
+	line_pos_cb(NULL, data);
+	
+	g_free (data);
 	
 	if (!doc->split_screen)
 		return;
@@ -1019,6 +1031,7 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 		return;
 	}
 	
+	
 	if (editable == doc->text)
 		significant_other = doc->split_screen;
 	else if (editable == doc->split_screen)
@@ -1028,6 +1041,18 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	
 	doc->flag = significant_other;	
 	buffer = g_strdup (insertion_text);
+	for (n = 1; n < g_list_length (GNOME_MDI_CHILD (doc)->views); n++)
+	   {
+	     g_print ("doc_insert_text: n = %d views = %d\n",n, g_list_length (GNOME_MDI_CHILD (doc)->views));
+	     temp = g_list_nth_data (GNOME_MDI_CHILD (doc)->views, n);
+
+	     gtk_text_freeze (GTK_TEXT(temp->text));
+	     
+	     gtk_editable_insert_text (GTK_EDITABLE(temp->text), buffer, length, &position);
+	     
+	     gtk_text_thaw (GTK_TEXT(temp->text));
+	   }
+	   
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));
@@ -1040,7 +1065,13 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	gE_document *doc)
 {
 	GtkWidget *significant_other;
+	gE_data *data;
+
+	data = g_malloc0 (sizeof (gE_data));
+	line_pos_cb(NULL, data);
 	
+	g_free (data);
+		
 	if (!doc->split_screen)
 		return;
 

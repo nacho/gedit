@@ -49,7 +49,7 @@ extern void gE_document_set_read_only (gE_document *doc, gint read_only);
 
 extern void gE_document_set_split_screen (gE_document *doc, gint split_screen);
 
-
+extern void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
 extern void child_switch (GnomeMDI *mdi, gE_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS

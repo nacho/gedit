@@ -1,3 +1,20 @@
+1999-04-30  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (file_open_ok_sel) Setting the filename selected in 
+	  the File Selector to "" was a bad idea. Trying to save the file,
+	  the filename of the doc itself was being corrupted. I've now 
+	  removed this and it works fine.
+	
+	* gE_mdi.c: Moved the gE_document hash table initialisation to the
+	  document class initialiser function.
+	  Fixed up the context menu, and re-implemented the "Open .c/.h file"
+	  option.
+
+	* gE_document.h: Made the doc_swaphc_cb function an extern so gE_mdi.c
+	  can use it for the context menu
+	  
+	* Some other minor bug fixes/code cleanups
+
 1999-04-23  Martijn van Beers  <martijn@earthling.net>
 	* commands.c:
 	* gE_prefs_box.c: removed some commented stuff

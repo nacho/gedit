@@ -61,6 +61,7 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	{ GNOME_APP_UI_ITEM, N_("Find _Line..."),
 	  N_("Search for a line"),
+
 	  goto_line_cb, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 
@@ -86,14 +87,22 @@ GnomeUIInfo doc_menu[] = {
 };
 
 GnomeUIInfo popup_menu [] = {
-	
-	GNOMEUIINFO_ITEM_STOCK (N_("Cut"), NULL, edit_cut_cb, GNOME_STOCK_MENU_CUT),
-	GNOMEUIINFO_ITEM_STOCK (N_("Copy"), NULL,edit_cut_cb,GNOME_STOCK_MENU_COPY),
-	GNOMEUIINFO_ITEM_STOCK (N_("Paste"), NULL, edit_paste_cb, GNOME_STOCK_MENU_PASTE),
-	GNOMEUIINFO_SEPARATOR, 
+	GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, (gpointer) GE_DATA),
+
+        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, (gpointer) GE_DATA),
+
+
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK (N_("Save"),NULL,file_save_cb,GNOME_STOCK_MENU_SAVE),
 	GNOMEUIINFO_ITEM_STOCK (N_("Close"), NULL, file_close_cb, GNOME_STOCK_MENU_CLOSE),
 	GNOMEUIINFO_ITEM_STOCK (N_("Print"), NULL, file_print_cb, GNOME_STOCK_MENU_PRINT),
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_ITEM_STOCK (N_("Open (swap) .c/.h file"),NULL,doc_swaphc_cb,GNOME_STOCK_MENU_REFRESH),
 	
 	GNOMEUIINFO_END
 };
@@ -149,14 +158,14 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	gE_document *doc;
 	GtkWidget *vpaned, *vbox, *menu;
 	GtkStyle *style;
-	gint *ptr; /* For plugin stuff. */
+	/*gint *ptr;*/ /* For plugin stuff. */
 	
 	doc = GE_DOCUMENT(child);
 
-	ptr = g_new(int, 1);
+	/*ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;
 	g_hash_table_insert(doc_int_to_pointer, ptr, doc);
-	g_hash_table_insert(doc_pointer_to_int, doc, ptr);
+	g_hash_table_insert(doc_pointer_to_int, doc, ptr);*/
 
 	doc->font = gE_prefs_get_char("font");
 	
@@ -213,12 +222,12 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
 	of implementing undo/redo... 
-	
+	*/
 	gtk_signal_connect (GTK_OBJECT (doc->text), "insert_text",
 		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->text), "delete_text",
 		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
-*/
+
 	/* Create the bottom split screen */
 	doc->scrwindow = gtk_scrolled_window_new (NULL, NULL);
 	gtk_box_pack_start (GTK_BOX (vpaned), doc->scrwindow, TRUE, TRUE, 1);
@@ -318,6 +327,7 @@ static void gE_document_class_init (gE_document_class *class)
 void gE_document_init (gE_document *doc)
 {
 	/* FIXME: This prolly needs work.. */
+	gint *ptr;
 	
 	doc->filename = NULL;
 	doc->word_wrap = TRUE;
@@ -329,6 +339,11 @@ void gE_document_init (gE_document *doc)
 									GTK_SIGNAL_FUNC(doc_changed_cb), doc);*/
 		
 	gnome_mdi_child_set_menu_template (GNOME_MDI_CHILD (doc), doc_menu);
+	
+	ptr = g_new(int, 1);
+	*ptr = ++last_assigned_integer;
+	g_hash_table_insert(doc_int_to_pointer, ptr, doc);
+	g_hash_table_insert(doc_pointer_to_int, doc, ptr);
 }
 
 gE_document *gE_document_new ()
@@ -420,14 +435,14 @@ void gE_add_view (GtkWidget *w, gpointer data)
 {
 	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
 	gE_document *child = (gE_document *)data;
-	gchar *buf;
+/*	gchar *buf;
 	gint len, pos = 0;
 	
 	buf = gtk_editable_get_chars (GTK_EDITABLE (child->text), 0, -1);
-	
+*/	
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(child));
 	
-	if (mdi->active_child)
+/*	if (mdi->active_child)
 	  {
 	   if (buf)
 	     {
@@ -436,7 +451,7 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	     }
 	     
 	   }
-
+*/
 }
 
 void gE_remove_view (GtkWidget *w, gpointer data)
@@ -452,7 +467,7 @@ void gE_remove_view (GtkWidget *w, gpointer data)
 gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 {
 	GnomeMessageBox *msgbox;
-	int ret;
+	int ret, *ptr;
 	char *fname, *msg;
 	gE_data *data = g_malloc (sizeof(gE_data));
 
@@ -494,7 +509,12 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	      else if (ret == 2)
 	       return FALSE;
 	  }
-	  
+	
+	ptr = g_hash_table_lookup(doc_pointer_to_int, doc);
+	g_hash_table_remove(doc_int_to_pointer, ptr);
+	g_hash_table_remove(doc_pointer_to_int, doc);
+	g_free (ptr);
+	
 	gE_documents = g_list_remove (gE_documents, doc);
 	return TRUE;
 }

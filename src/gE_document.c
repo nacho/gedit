@@ -52,7 +52,7 @@ typedef struct {
 
 /*static gint gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);*/
 static void gE_window_create_popupmenu(gE_data *);
-static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
+/*static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);*/
 static gboolean gE_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
 static void gE_msgbar_timeout_add(gE_window *window);
 
@@ -343,18 +343,13 @@ gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
  * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we should put a
  * check in there.  if both exist, then probably open both files.
  */
-static void
+void
 doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 {
 	size_t len;
 	char *newfname;
 	gE_document *doc;
-	gE_window *w;
-	gE_data *data = (gE_data *)cbdata;
-
-	g_assert(data != NULL);
-	w = data->window;
-	g_assert(w != NULL);
+	
 	doc = gE_document_current();
 	if (!doc || !doc->filename)
 		return;
