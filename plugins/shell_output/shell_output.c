@@ -243,7 +243,7 @@ display_error_dialog (GtkWindow *parent)
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		   	GTK_MESSAGE_ERROR,
 		   	GTK_BUTTONS_OK,
-			_("An error occurs while running the selected command."));
+			_("An error occured while running the selected command."));
 			
 	gtk_dialog_set_default_response (GTK_DIALOG (err_dialog), GTK_RESPONSE_OK);
 	gtk_window_set_resizable (GTK_WINDOW (err_dialog), FALSE);

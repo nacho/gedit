@@ -173,9 +173,9 @@ void taglist_window_show ()
 	tag_list_window->tags_list = gtk_tree_view_new ();
 
 	gedit_utils_set_atk_name_description (tag_list_window->tag_groups_combo, 
-							_("Tag Groups Combo"), NULL);
+							_("Available Tag Lists"), NULL);
 	gedit_utils_set_atk_name_description (tag_list_window->tags_list, 
-							_("Tags Name List"), NULL);
+							_("Tags"), NULL);
 	gedit_utils_set_atk_relation (tag_list_window->tag_groups_combo, tag_list_window->tags_list, 
 							ATK_RELATION_CONTROLLER_FOR);
 	gedit_utils_set_atk_relation (tag_list_window->tags_list, tag_list_window->tag_groups_combo, 

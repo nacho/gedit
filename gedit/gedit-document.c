@@ -723,9 +723,9 @@ gedit_document_load (GeditDocument        *doc,
 		     const GeditEncoding  *encoding,
 		     GError              **error)
 {
-	char* file_contents;
+	gchar* file_contents;
 	GnomeVFSResult res;
-   	gsize file_size;
+   	gint file_size;
 	GtkTextIter iter, end;
 	
 	gedit_debug (DEBUG_DOCUMENT, "File to load: %s", uri);
@@ -733,7 +733,7 @@ gedit_document_load (GeditDocument        *doc,
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
-	res = eel_read_entire_file (uri, &file_size, &file_contents);
+	res = gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
 
 	gedit_debug (DEBUG_DOCUMENT, "End reading %s (result: %s)", uri, gnome_vfs_result_to_string (res));
 	

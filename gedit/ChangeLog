@@ -1,3 +1,19 @@
+2003-10-21  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Partially fixes compilation on Darwin (bug #124238, patch by
+	Jerry Talkington <jtalkington@users.sourceforge.net>)
+
+	* gedit-document.c (gedit_document_load): s/gsize/gint for file_size,
+	s/eel_read_entire_file/gnome_vfs_read_entire_file
+
+	* gedit-plugins-engine.c: #include <sys/types.h> before <dirent.h>
+
+2003-10-21  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* dialogs/gedit-page-setup-dialog.c (get_page_setup_dialog):
+	fixes some troublesome strings (bug #117360 and bug #115633, patch
+	by Dafydd Harries <daf@parnassus.ath.cx>)
+
 2003-10-20  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-print.c (preview_finished_cb)(print_finished_cb): fixes

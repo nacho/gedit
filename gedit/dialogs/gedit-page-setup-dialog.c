@@ -584,8 +584,17 @@ get_page_setup_dialog (GtkWindow *parent)
 
 	if (!gui)
 	{
-		gedit_warning (_("Could not find '" GEDIT_GLADEDIR "page-setup-dialog.glade2'.\n\n"
-			       "Reinstall gedit."), parent);
+		gchar *tmp;
+		
+		/* Translators: %s is a file path */
+		tmp = g_strdup_printf (
+			_("Could not find '%s'.\n\nPlease, reinstall gedit"),
+			GEDIT_GLADEDIR "page-setup-dialog.glade2");
+
+		gedit_warning (tmp, parent);
+
+		g_free (tmp);
+
 		return NULL;
 	}
 
@@ -625,9 +634,17 @@ get_page_setup_dialog (GtkWindow *parent)
 	    !dialog->numbers_font_label		||
 	    !dialog->restore_button)
 	{
-		gedit_warning (_("Could not find the required widgets inside '" 
-			       GEDIT_GLADEDIR "page-setup-dialog.glade2'.\n\n"
-			       "Reinstall gedit."), parent);
+		gchar *tmp;
+		
+		/* Translators: %s is a file path */
+		tmp = g_strdup_printf (
+			_("Could not find the required widgets inside '%s'.\n\n"
+			  "Please, reinstall gedit."),
+			GEDIT_GLADEDIR "page-setup-dialog.glade2");
+
+		gedit_warning (tmp, parent);
+
+		g_free (tmp);
 
 		if (!dialog->dialog)
 			gtk_widget_destroy (dialog->dialog);
