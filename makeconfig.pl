@@ -17,46 +17,21 @@ AM_INIT_AUTOMAKE(gedit, 0.5.1)
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
 
+GNOME_INIT
+
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
 AC_ARG_PROGRAM
 AM_PROG_LIBTOOL
 
+
+GNOME_X_CHECKS
+
+
 AM_CONDITIONAL(FALSE, test foo = bar)
 
-dnl check for Gtk versions...
-AM_PATH_GTK(1.0.5,
- 	    [LIBS="$LIBS $GTK_LIBS"
-	    CFLAGS="$CFLAGS $GTK_CFLAGS"],
-	    AC_MSG_ERROR(Cannot find Gtk+: Is gtk-config in path?))
-
-AC_MSG_CHECKING([wheter to use features from (unstable) GTK+ 1.1.x])
-        AC_EGREP_CPP(answer_affirmatively,
-        [#include <gtk/gtkfeatures.h>
-        #ifdef GTK_HAVE_FEATURES_1_1_0
-           answer_affirmatively
-        #endif
-        ], dev_gtk=yes, dev_gtk=no)
-        if test "$dev_gtk" = "yes"; then
-           USE_DEVGTK=true 
-        fi 
-        AC_MSG_RESULT("$dev_gtk")
-
-
-dnl Let the user disable GNOME even if it can be found
-AC_ARG_ENABLE(gnome,
-	      [  --disable-gnome         Do not try to use GNOME ],
-	      enable_gnome="$enableval",)
-dnl If GNOME is found, run the script in square brackets.
-if test x$enable_gnome != xno ; then
-  GNOME_INIT_HOOK([have_gnome=yes])
-fi
-AM_CONDITIONAL(HAVE_GNOME, test x$have_gnome = xyes)
-if test x$have_gnome != xyes ; then
-  AC_DEFINE(WITHOUT_GNOME)
-fi
-
+	    
 dnl Let the user enable the new GModule Plugins
 AC_ARG_WITH(gmodule-plugins,
 	    [  --with-gmodule-plugins  Enable GModule Plugins [default=no]],
@@ -64,12 +39,11 @@ AC_ARG_WITH(gmodule-plugins,
 
 dnl We need to have GNOME to use them
 have_gmodule_plugins=no
-if test x$have_gnome = xyes ; then
   if test x$enable_gmodule_plugins = xyes ; then
     AC_DEFINE(WITH_GMODULE_PLUGINS)
     have_gmodule_plugins=yes
   fi
-fi
+
 AM_CONDITIONAL(WITH_GMODULE_PLUGINS, test x$have_gmodule_plugins = xyes)
 
 dnl Let the user disable ORBit even if it can be found
@@ -94,19 +68,10 @@ if test x$have_libgnorba = xyes ; then
 fi
 AM_CONDITIONAL(HAVE_LIBGNORBA, test x$have_libgnorba = xyes)
 
-if test x$have_gnome = xyes ; then
-GNOME_X_CHECKS
-fi
-
 dnl Check for libzvt from gnome-libs/zvt
 AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
-dnl This is necessary when we don't have GNOME.
-if test x$have_gnome != xyes ; then
-  GNOMEUI_LIBS="$GTK_LIBS"
-  GNOME_INCLUDEDIR="$GTK_CFLAGS"
-fi
 
 ALL_LINGUAS="cs de es fr ga it ko no pt ru sv nl"
 AM_GNU_GETTEXT
