@@ -877,7 +877,7 @@ edit_cut_cb(GtkWidget *widget, gpointer cbdata)
 		GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
-		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
+		gE_document_current(data->window)->text));
 #endif
 	gE_msgbar_set(data->window, MSGBAR_CUT);
 }
