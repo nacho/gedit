@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.0.2\n"
-"POT-Creation-Date: 2002-11-26 11:06+0100\n"
-"PO-Revision-Date: 2002-11-26 10:58GMT\n"
+"POT-Creation-Date: 2002-11-28 09:47+0100\n"
+"PO-Revision-Date: 2002-11-28 09:47GMT\n"
 "Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -572,7 +572,7 @@ msgstr ""
 "Výsledek obsahuje neplatná data v UTF-8."
 
 #: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
-#: plugins/time/time.glade2.h:4 plugins/spell/spell-checker.glade2.h:1
+#: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
 #: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
 msgid "*"
 msgstr "*"
@@ -849,19 +849,19 @@ msgstr "Seznam _značek"
 msgid "Show the tag list window"
 msgstr "Ukázat okno se seznamem značek"
 
-#: plugins/time/time.c:47
+#: plugins/time/time.c:48
 msgid "In_sert Date/Time"
 msgstr "Vložit datum a ča_s"
 
-#: plugins/time/time.c:50
+#: plugins/time/time.c:51
 msgid "Insert current date and time at the cursor position"
 msgstr "Vloží aktuální datum a čas na aktuální pozici kurzoru"
 
-#: plugins/time/time.c:439
+#: plugins/time/time.c:450
 msgid "Available formats"
 msgstr "Dostupné formáty"
 
-#: plugins/time/time.c:539
+#: plugins/time/time.c:554
 msgid "Configure insert date/time plugin..."
 msgstr "Nastavit zásuvný modul pro vložení data a času..."
 
@@ -871,39 +871,34 @@ msgid "    "
 msgstr "    "
 
 #: plugins/time/time.glade2.h:3
-#, no-c-format
-msgid "%d/%m/%Y %H:%M:%S"
-msgstr "%d. %m. %Y %H:%M:%S"
-
-#: plugins/time/time.glade2.h:5
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">01. 11. 2002 17:52:00</span>"
 
-#: plugins/time/time.glade2.h:6
+#: plugins/time/time.glade2.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\"> Při vkládání data a času...</span>"
 
-#: plugins/time/time.glade2.h:7
+#: plugins/time/time.glade2.h:5
 msgid "Configure date/time plugin"
 msgstr "Nastavit zásuvný modul pro vložení data a času"
 
-#: plugins/time/time.glade2.h:8
+#: plugins/time/time.glade2.h:6
 msgid "Select a format"
 msgstr "Vyberte formát"
 
-#: plugins/time/time.glade2.h:9
+#: plugins/time/time.glade2.h:7
 msgid "Use the _selected format"
 msgstr "Použít _vybraný formát"
 
-#: plugins/time/time.glade2.h:10
+#: plugins/time/time.glade2.h:8
 msgid "_Insert"
 msgstr "Vlož_it"
 
-#: plugins/time/time.glade2.h:11
+#: plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
 msgstr "Ze_ptat se na formát"
 
-#: plugins/time/time.glade2.h:12
+#: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Po_užít vlastní formát"
 
@@ -994,9 +989,9 @@ msgstr "Návrhy"
 msgid "(correct spelling)"
 msgstr "(správný tvar)"
 
-#: plugins/spell/gedit-spell-checker-dialog.c:784
-msgid "<b>Completed spell checking</b>"
-msgstr "<b>Kontrola pravopisu dokončena</b>"
+#: plugins/spell/gedit-spell-checker-dialog.c:785
+msgid "Completed spell checking"
+msgstr "Kontrola pravopisu dokončena"
 
 #: plugins/spell/gedit-spell-checker.c:73
 msgid "Breton"
@@ -1211,7 +1206,7 @@ msgstr "Vybraný text neobsahuje chybně napsaná slova."
 msgid "The document does not contain mispelled words."
 msgstr "Dokument neobsahuje chybně napsaná slova."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1886
+#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1939
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivovat %s"
@@ -1292,8 +1287,9 @@ msgstr ""
 "nalezeny.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
-msgid "Set program location ..."
-msgstr "Nastavit umístění programu ..."
+#: src/dialogs/program-location-dialog.glade2.h:1
+msgid "Set program location..."
+msgstr "Nastavit umístění programu..."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid ""
@@ -1774,10 +1770,6 @@ msgstr "_Popis"
 msgid "dialog1"
 msgstr "dialog1"
 
-#: src/dialogs/program-location-dialog.glade2.h:1
-msgid "Set program location..."
-msgstr "Nastavit umístění programu..."
-
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
 msgstr "Hledat _lokaci:"
@@ -1943,8 +1935,8 @@ msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
 #: src/gedit-file.c:151
-msgid "Open File ..."
-msgstr "Otevřít soubor ..."
+msgid "Open File..."
+msgstr "Otevřít soubor..."
 
 #: src/gedit-file.c:177 src/gedit-file.c:887
 #, c-format
@@ -1953,8 +1945,8 @@ msgstr "Soubor '%s' načten"
 
 #: src/gedit-file.c:309 src/gedit-file.c:455
 #, c-format
-msgid "Saving file '%s' ..."
-msgstr "Ukládám soubor '%s' ..."
+msgid "Saving file '%s'..."
+msgstr "Ukládá se soubor '%s'..."
 
 #: src/gedit-file.c:337 src/gedit-file.c:470
 msgid "The document has not been saved."
@@ -1966,17 +1958,17 @@ msgid "File '%s' saved."
 msgstr "Soubor '%s' byl uložen."
 
 #: src/gedit-file.c:434
-msgid "Save as ..."
-msgstr "Uložit jako ..."
+msgid "Save as..."
+msgstr "Uložit jako..."
 
 #: src/gedit-file.c:628
 #, c-format
 msgid ""
-"Do you want to revert to saved the document \"%s\" ?\n"
+"Do you want to revert to saved the document '%s'?\n"
 "\n"
 "You will not be able to undo this operation."
 msgstr ""
-"Chcete se vrátit k uložené podobě dokumentu \"%s\"?\n"
+"Chcete se vrátit k uložené podobě dokumentu '%s'?\n"
 "\n"
 "Tuto operaci nebude možné vrátit zpět."
 
@@ -1986,8 +1978,8 @@ msgstr "V_rátit"
 
 #: src/gedit-file.c:672
 #, c-format
-msgid "Reverting file '%s' ..."
-msgstr "Vracím soubor '%s' ..."
+msgid "Reverting file '%s'..."
+msgstr "Vrací se soubor '%s'..."
 
 #: src/gedit-file.c:685
 msgid "The document has not been reverted."
@@ -2016,6 +2008,11 @@ msgstr "Načteno %i souborů."
 #: src/gedit-file.c:945
 msgid "Could not read data from stdin."
 msgstr "Nebylo možné načíst data ze standardního vstupu."
+
+#. Add the detach tab button
+#: src/gedit-mdi-child.c:538
+msgid "_Move to New Window"
+msgstr "Přes_unout do nového okna"
 
 #: src/gedit-mdi.c:446
 msgid "Open a file."
@@ -2101,7 +2098,7 @@ msgstr "Chyba, nelze aktualizovat UI pro plugin '%s'."
 msgid "Cannot initialize preferences manager."
 msgstr "Nelze inicializovat správce nastavení."
 
-#: src/gedit-prefs-manager.c:1752
+#: src/gedit-prefs-manager.c:1757
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Očekával jsem '%s', ale obdržel jsem '%s' pro klíč %s"
@@ -2897,16 +2894,16 @@ msgstr ""
 msgid "Could not create the file \"%s\"."
 msgstr "Nelze vytvořit soubor \"%s\"."
 
-#: src/gedit-view.c:991
+#: src/gedit-view.c:1015
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ř. %d, Slo. %d"
 
-#: src/gedit-view.c:1029
+#: src/gedit-view.c:1053
 msgid "  OVR"
 msgstr "  PŘE"
 
-#: src/gedit-view.c:1031
+#: src/gedit-view.c:1055
 msgid "  INS"
 msgstr "  VLO"
 
@@ -3142,6 +3139,12 @@ msgstr "Thajské"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (neplatný Unicode)"
+
+#~ msgid "%d/%m/%Y %H:%M:%S"
+#~ msgstr "%d. %m. %Y %H:%M:%S"
+
+#~ msgid "Set program location ..."
+#~ msgstr "Nastavit umístění programu ..."
 
 #~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 #~ msgstr "Tento plugin zobrazuje dialog obsahující tabulku znaků ASCII."
