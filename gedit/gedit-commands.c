@@ -197,15 +197,10 @@ gedit_cmd_file_close (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	active_view = bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi));
-	
 	if (active_view == NULL)
 		return;
-	
-	gedit_close_x_button_pressed = TRUE;
-	
-	gedit_file_close (active_view);
 
-	gedit_close_x_button_pressed = FALSE;
+	gedit_file_close (active_view);
 }
 
 void 
@@ -213,11 +208,7 @@ gedit_cmd_file_close_all (BonoboUIComponent *uic, gpointer user_data, const gcha
 {
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	gedit_close_x_button_pressed = TRUE;
-	
 	gedit_file_close_all ();
-
-	gedit_close_x_button_pressed = FALSE;
 }
 
 void 
@@ -225,11 +216,7 @@ gedit_cmd_file_exit (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 {
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	gedit_exit_button_pressed = TRUE;
-	
 	gedit_file_exit ();	
-
-	gedit_exit_button_pressed = FALSE;
 }
 
 void 

@@ -41,8 +41,6 @@
 #include <gedit/gedit-view.h>
 
 extern GeditMDI* gedit_mdi;
-extern gboolean gedit_close_x_button_pressed;
-extern gboolean gedit_exit_button_pressed;
 extern BonoboObject *gedit_app_server;
 
 #define GBOOLEAN_TO_POINTER(i) ((gpointer)  ((i) ? 2 : 1))
