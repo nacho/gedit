@@ -33,7 +33,7 @@
 #include "utils.h"
 #include "plugin.h"
 #include "recent.h"
-#include "../pixmaps/gE_icon.xpm"
+#include "../pixmaps/gedit-icon.xpm"
 
 extern GtkWidget *col_label;
 
@@ -135,7 +135,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_signal_connect (GTK_OBJECT (app), "drag_data_received",
 			    GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
-	gedit_window_set_icon (GTK_WIDGET (app), "gE_icon");
+	gedit_window_set_icon (GTK_WIDGET (app), "gedit_icon");
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
@@ -182,7 +182,7 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	
 	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
 					       &window->style->bg[GTK_STATE_NORMAL],
-					       (char **)gE_icon);
+					       (char **)gedit_icon);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
