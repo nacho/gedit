@@ -17,6 +17,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+
+/* This file needs rewriting ........... Chema */
 #include <config.h>
 #include <gnome.h>
 

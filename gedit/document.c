@@ -81,14 +81,15 @@ gedit_document_get_type (void)
 static GtkWidget *
 gedit_document_create_view (GnomeMDIChild *child)
 {
-	GtkWidget *new_view;
+	View  *new_view;
 	
-	new_view = gedit_view_new (DOCUMENT (child));
+	new_view = VIEW (gedit_view_new (DOCUMENT (child)));
 
-	gedit_view_set_font (VIEW (new_view), settings->font);
+	gedit_view_set_font (new_view, settings->font);
+	gedit_view_set_read_only ( new_view, DOCUMENT (child)->readonly);
 	gtk_widget_queue_resize (GTK_WIDGET (new_view));
 	
-	return new_view;
+	return GTK_WIDGET(new_view);
 }
 
 static void
@@ -386,16 +387,12 @@ gedit_mdi_init (void)
 	 * FIXME:  Why are we doing this in main() ? */
 	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
 			    GTK_SIGNAL_FUNC (remove_child_cb), NULL);
-
 	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
 			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
-
 	gtk_signal_connect (GTK_OBJECT (mdi), "child_changed",
 			    GTK_SIGNAL_FUNC (child_changed_cb), NULL);
-
         gtk_signal_connect (GTK_OBJECT (mdi), "app_created",
 			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
-
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/

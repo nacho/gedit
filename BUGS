@@ -1,23 +1,20 @@
 Fixed BUGS have been moved to the bottom of the file.
 
 Known bugs in the current version of gEdit (as of April/2000):
-
-        * If you open a file it gets the name Untitled, if you
-	  type something it changed to Untitled1. If you then
-	  open another file it get opened witht the name Untilted1
-	  if you type in the file it changes to Untitled2
+------	  Known BUGS ----------------------
 
 	* if you ./configure --prefix to somewhere other than
           gnome-config --prefix, then the plugins won't be recognized.
 
-	* Need to fix the text wrapping when printing and
-	  print previewing.
+	* "Replace All" bug (Bug #6140, #4105)
 
-	* We need to be able to deal with a broken config file after
-          launching gedit. It seems to crash with some problems with
-	  the config file.
-	  (Many bug reports...)
+------	  Known but small BUGS ----------------------
+	
+	* If you delete with the delete key v.s. the
+	  backspace and the undo the cursor does reposition itself o.k.
 
+------	  To be confirmed BUGS ----------------------
+	
 	* Deleting a line will sometimes make the next line down dissappear,
 	  until you highlight it.
 	  ( we need to confirm if this is still a problem )
@@ -25,13 +22,7 @@ Known bugs in the current version of gEdit (as of April/2000):
 	* There are issues with auto indent and multiple views of a document
 	  ( we need to confirm if this is still a problem )
 
-	* "Replace All" bug (Bug #6140, #4105)
-
-	* small bug : if you delete with the delete key v.s. the
-	  backspace and the undo the cursor does reposition itself o.k.
-
-	* Revert is not working and thus it has been disabled.
-
+	
 ------	  FIXED BUGS	  ----------------------
 Done	* Get gmodules to build
 
@@ -58,4 +49,27 @@ Fixed	* The "recent files" listing will include files that no longer
 	  is no error message or any visual clue that the file is not
 	  going to be loaded because it no longer exists.
 
+Fixed   * If you open a file it gets the name Untitled, if you
+	  type something it changed to Untitled1. If you then
+	  open another file it get opened witht the name Untilted1
+	  if you type in the file it changes to Untitled2
+
+Fixed	* Revert is not working and thus it has been disabled.
+
+Fixed	* We need to be able to deal with a broken config file after
+          launching gedit. It seems to crash with some problems with
+	  the config file.
+	  (Many bug reports...)
+
+Fixed	* Need to fix the text wrapping when printing and
+	  print previewing.
+
+Fixed	* CTRL + Q does not work
+
+Fixed	* Column counting does not work properly
+	 ( what a stupid bug this was !!!!!!)
+
+Fixed	* If you close with Ctrl + K you modifiy the document
+	  so you get asked if you want to save it even if the document
+	  has not been modified.
 

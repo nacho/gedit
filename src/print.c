@@ -21,6 +21,18 @@
  * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
+/* FIXME :
+   We need to put this in the prefs. box but I need Jason to finish it
+   first.
+   [ a1 ] No wraping ( clip lines )
+   [ a2 ] Enable wrapping   ---------- break chars [ b1 ] 
+                                |----- break lines [ b2 ]
+	 Add marks [ c ]
+
+*/
+#define WRAPPING    TRUE
+#define ADD_MARKS   FALSE
+
 #include <config.h>
 #include <gnome.h>
 
@@ -65,12 +77,19 @@ typedef struct _PrintJobInfo {
 	float margin_top, margin_bottom, margin_left, margin_right;
 	float printable_width, printable_height;
 	float header_height;
-	int   total_lines;
-	int   lines_per_page;
+	gint   total_lines;
+	gint   lines_per_page;
+	gint   chars_per_line;
+	guchar* temp;
 
 	/* Variables */
-	int   file_offset;
-	int   current_line; 
+	gint   file_offset;
+	gint   current_line;
+
+	/* Text Wrapping */
+	gint   wrapping;
+	gint   break_chars;
+	gint   add_marks; /* little mark on lines that are a continuation of the above */ 
 } PrintJobInfo;
 
 
@@ -79,11 +98,12 @@ typedef struct _PrintJobInfo {
 static void print_document (Document *doc, GnomePrinter *printer);
 static void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);
 static void print_line (PrintJobInfo *pji);
+static void print_ps_line(PrintJobInfo * pji);
 static int  print_determine_lines (PrintJobInfo *pji);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void start_job (GnomePrintContext *pc);
 static void print_header (PrintJobInfo *pji, unsigned int page);
-static void end_page (GnomePrintContext *pc);
+static void end_page (PrintJobInfo *pji);
 static void end_job (GnomePrintContext *pc);
 static void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
 static void set_pji ( PrintJobInfo * pji, Document *doc, GnomePrinter *printer);
@@ -143,25 +163,31 @@ static void
 print_document (Document *doc, GnomePrinter *printer)
 {
 	PrintJobInfo *pji;
-	int i;
+	int i,j;
 
 	pji = g_new0 (PrintJobInfo, 1);
 	set_pji (pji, doc, printer);
+
+	pji->temp = g_malloc( pji->chars_per_line + 1);
 
 	start_job (pji->pc);
 	for(i = 1; i <= pji->pages; i++)
 	{
 		print_header(pji, i);
-		while (pji->file_offset < pji->buffer_size)
+		for (j = 1; j<= pji->total_lines; j++)
+/*		while (pji->file_offset < pji->buffer_size)*/ 
 		{
+			g_print("j: %i\n",j);
 			print_line (pji);
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
-		end_page (pji->pc);
+		end_page (pji);
 	}
 	end_job (pji->pc);
 
+	g_free (pji->temp);
+		
 	gnome_print_context_close (pji->pc);
 	gnome_print_master_close (pji->master);
 
@@ -190,30 +216,45 @@ print_document (Document *doc, GnomePrinter *printer)
 static void
 print_line (PrintJobInfo *pji)
 {
-	float x, y;
-	char * temp = g_malloc(265);
 	int i;
+	int print_line = TRUE;
 
+	g_print("Print line \n");
 	i = 0;
-	while( pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i < pji->buffer_size) )
+	while( pji->buffer[ pji->file_offset + i] != '\n' && pji->current_line < pji->total_lines && (pji->file_offset+i) < pji->buffer_size)
 	{
-		temp[i]=pji->buffer[ pji->file_offset + i];
+		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
-		if( i > 254)
-			break;
+		
+		if( i == pji->chars_per_line )
+		{
+			pji->temp[i]=(guchar) '\0';
+			pji->file_offset = pji->file_offset + i + 1;
+			i=0;
+			if (print_line)
+				print_ps_line (pji);
+			if (!pji->wrapping)
+				print_line = FALSE;
+		}
 	}
-	temp[i]=(guchar) '\0';	
+	pji->temp[i]=(guchar) '\0';	
 	pji->file_offset = pji->file_offset + i + 1;
+	if (print_line)
+		print_ps_line (pji);
+}
 
-	y = pji->page_height -
-	    pji->margin_top -
- 	    pji->header_height -
-	    (pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
-	x = pji->margin_left;
-	gnome_print_moveto (pji->pc, x , y);
-	gnome_print_show (pji->pc, temp);
-	gnome_print_stroke (pji->pc);
-	g_free (temp);
+static void
+print_ps_line (PrintJobInfo * pji)
+{
+	float y = pji->page_height -  pji->margin_top - pji->header_height -
+	(pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
+
+	g_print("Print PS line \n");
+
+	gnome_print_moveto (pji->pc, pji->margin_left, y);
+	gnome_print_show (pji->pc, pji->temp);
+	if ( pji->temp!='\0')
+		gnome_print_stroke (pji->pc);
 }
 
 static void
@@ -255,6 +296,9 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	pji->font_size = 10;
 	pji->font_char_width = 0.0808 * 72;
 	pji->font_char_height = .14 * 72;
+	pji->wrapping = WRAPPING;       /* We need to add this to the prefs box */ 
+	pji->add_marks = ADD_MARKS;     /* We need to add this to the prefs box */ 
+	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
 	pji->total_lines = print_determine_lines(pji);
 	pji->lines_per_page = (pji->printable_height -
 			      pji->header_height)/pji->font_char_height
@@ -267,13 +311,40 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 static int
 print_determine_lines (PrintJobInfo *pji)
 {
-	/* For now count the number of /n 's*/
 	int lines=1;
 	int i;
+	int character = 0;
 
 	for (i=0; i < pji->buffer_size; i++)
+	{
 		if (pji->buffer[i] == '\n')
+		{
 			lines++;
+			character=0;
+		}
+		else
+		{
+			if( pji->wrapping )
+			{
+				character++;
+				if ( character > pji->chars_per_line)
+				{
+					lines++;
+					character=0;
+				}
+			}
+		}
+	}
+        /* After counteing, scan the doc backwards to determine how many
+	   blanks lines there are (at the bottom),substract that from lines */
+	for ( i=pji->buffer_size-1; i>0; i--)
+		if (pji->buffer[i] != '\n' && pji->buffer[i] != ' ' )
+			break;
+		else
+			if (pji->buffer[i] == '\n')
+				lines--;
+
+	g_print("Lines: %i\n", lines);
 	return lines;
 }
 
@@ -315,9 +386,11 @@ print_header (PrintJobInfo *pji, unsigned int page)
 }
 
 static void
-end_page (GnomePrintContext *pc)
+end_page (PrintJobInfo *pji)
 {
-	gnome_print_showpage (pc);
+/*	if (!pji->wrapping)
+	g_print("FIXME: add a box over the text on right margin to 'clip' the text\n");*/
+	gnome_print_showpage (pji->pc);
 }
 
 static void

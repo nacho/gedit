@@ -1,3 +1,22 @@
+2000-04-09  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_init): Do not connect key_press_event
+	with gtk_signal_connect_after. key_press_event has to be
+	the first function to handle this event. This fixes the Ctrl+W
+	bug.
+
+	**We still need to add wrapping to the
+	prefs box.***
+	* print.c (print_line): Implemented text
+	wrapping.
+	(print_ps_line): created
+	(set_pji): added wrapping stuff
+	(print_determine_lines): added wrapping stuff
+
+	* document.c (gedit_document_create_view): call
+	"gedit_view_set_read_only" when creating a new view
+	to update the title and the RO status.
+
 2000-04-08  Chema Celorio  <chema@celorio.com>
 
 	* file.c (gedit_file_open): Close the Untiled

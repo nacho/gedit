@@ -19,6 +19,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/* This file need rewriting ... CHEMA */ 
 #include <config.h>
 #include <gnome.h>
 
@@ -28,9 +29,7 @@
 #include "print.h"
 #include "utils.h"
 #include "file.h"
-
-#include "menus.h" /* We need this because some functions
-		      modify menu entries. Chema */
+#include "menus.h"
 #include "view.h"
 #include "document.h"
 #include "commands.h"
@@ -43,19 +42,37 @@ enum {
 	LAST_SIGNAL
 };
 
-void line_pos_cb (GtkWidget *w, gedit_data *data);
-void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
-
 static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 GtkVBoxClass *parent_class = NULL;
 
-void view_changed_cb (GtkWidget *w, gpointer cbdata);
-void gedit_view_list_insert (View *view, gedit_data *data);
-void view_list_erase (View *view, gedit_data *data);
-gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
+       void view_changed_cb (GtkWidget *w, gpointer cbdata);
+       void gedit_view_list_insert (View *view, gedit_data *data);
+       void view_list_erase (View *view, gedit_data *data);
+       gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
+       void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
+       void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
+   gboolean auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
+       void line_pos_cb (GtkWidget *widget, gedit_data *data);
+       gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
+       gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
+static void gedit_view_class_init (ViewClass *klass);
+static void gedit_view_init (View *view);
+      guint gedit_view_get_type (void);
+GtkWidget * gedit_view_new (Document *doc);
+       void gedit_view_set_group_type (View *view, guint type); /* Why is this here ??? maybe taken from ghex. we dont use group types asaik */
+       void gedit_view_set_split_screen (View *view, gint split_screen);
+       void gedit_view_set_word_wrap (View *view, gint word_wrap);
+       void gedit_view_set_line_wrap (View *view, gint line_wrap);
+       void gedit_view_set_read_only (View *view, gint read_only);
+       void gedit_view_set_font (View *view, gchar *fontname);
+       void gedit_view_set_position (View *view, gint pos);
+      guint gedit_view_get_position (View *view);
+      guint gedit_view_get_length (View *view);
+       void gedit_view_set_selection (View *view, gint start, gint end);
+       void gedit_view_buffer_sync (View *view);
+       void gedit_view_refresh (View *view);
 
 
-/* Callback to the "changed" signal in the text widget */
 void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
@@ -63,7 +80,6 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	
 	gedit_debug_mess ("F:view_changed_cb\n", DEBUG_VIEW);
 	g_return_if_fail (cbdata != NULL);
-
 	view = (View *) cbdata;
 
 	if (view->document->changed)
@@ -74,8 +90,9 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	view->changed_id = FALSE;
 
 	/* Set the title */
-	/*gedit_set_title (view->document);*/ 
+	gedit_set_title (view->document);
 	gedit_view_set_read_only ( view, view->document->readonly);
+	
 }
 
 /* 
@@ -198,6 +215,8 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 
 	gedit_debug_mess ("F:doc_delete_text_cb\n", DEBUG_VIEW);
 
+	g_print("Aqui esta el Bife !\n");
+	
 	if (!view->split_screen)
 		return;
 
@@ -342,8 +361,7 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 
 	gedit_debug_mess ("F:line_pos_cb\n", DEBUG_VIEW);
 
-	sprintf (col, "Column: %d",
-		 GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/6);
+	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
 
 	if (settings->show_status)
 	{
@@ -373,19 +391,23 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	gedit_debug_mess ("F:gedit_event_key_press\n", DEBUG_VIEW);
 
 	line_pos_cb (NULL, NULL);
-	
+
 	mask = GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD2_MASK |
 	       GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
-	
+
 	if (event->state & GDK_MOD1_MASK)
 	{
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+		/* We dont need this. Chema 
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");*/
 		return FALSE;
 	}
 
+	gedit_debug_mess ("F: About to if\n", DEBUG_VIEW);
+	
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
+		gedit_debug_mess ("F:If successfull \n", DEBUG_VIEW);
 		switch (event->keyval)
 		{
 		case 's':
@@ -395,7 +417,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		file_print_cb (w, NULL);
 	    		break;
 		case 'n':
-			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");*/
 			return FALSE;
 			break;
 		case 'w':
@@ -410,11 +432,17 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		case 'k':
 	    		gedit_undo_redo (w, NULL);
 	    		break;
+		case 'q':
+	    		file_quit_cb (w, NULL);
+	    		break;
 		default:
 	    		return TRUE;
 	    		break;
 		}
 	}
+
+	gedit_debug_mess ("F:returning from : gedit_event_key_press\n", DEBUG_VIEW);
+
 	return TRUE;
 }
 
@@ -491,10 +519,24 @@ gedit_view_init (View *view)
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 	
 	/* - Signals - */
+/*	By chema :
 	gtk_signal_connect_after(GTK_OBJECT (view->text), "button_press_event",
 				 GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
-				  GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
+	GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
+
+	I dont know why this are connected "after".
+	This is causing a bug when you click CTRL+W it will call doc_delete_text_cb
+	before calling key_press_event, since for the text widwet Ctrl+W
+	is delete word ( or something like that ) I will comment this lines
+	to see if there are no side effects because of this change ...
+	Same thing fot the split window ..
+*/
+	
+	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
+			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
+	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
+			    GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
 
 
 	/* Handle Auto Indent */
@@ -547,11 +589,10 @@ gedit_view_init (View *view)
 	gtk_text_set_line_wrap (GTK_TEXT (view->split_screen), view->line_wrap);
 	
 	/* - Signals - */
-	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "button_press_event",
-				  GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
-
-	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "key_press_event",
-				  GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
+	gtk_signal_connect (GTK_OBJECT (view->split_screen), "button_press_event",
+			   GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
+	gtk_signal_connect (GTK_OBJECT (view->split_screen), "key_press_event",
+			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
 	
 	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
 					     GTK_SIGNAL_FUNC (doc_insert_text_cb),
@@ -766,7 +807,7 @@ gedit_view_set_read_only (View *view, gint read_only)
 	if (view->split_screen)
 		gtk_text_set_editable (GTK_TEXT (view->split_screen),
 				       !view->read_only);
-
+	
 }
 
 /**

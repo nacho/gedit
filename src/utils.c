@@ -99,7 +99,7 @@ gedit_debug_mess (gchar *message, DebugSection type)
 {
 /* FIXME: I know how evil this hack is. Chema. */
 /* right now I am to tired to think of something better ..*/
-#if 0
+#if 1
 	switch (type)
 	{
 	case DEBUG_UNDO:

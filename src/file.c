@@ -79,7 +79,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	Document *currentdoc;
 	/* FIXME: this variables never get used. See below ... Chema */
 	gint i;
-	View *nth_view; 
+	View *nth_view;
 	
 	gedit_debug_mess ("F:Entering gedit_file_open ..\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
@@ -126,10 +126,9 @@ gedit_file_open (Document *doc, gchar *fname)
 	doc->filename = g_strdup (fname);
 	doc->readonly = access(fname, W_OK)?TRUE:FALSE;
 
-	/* FIXME: This never gets executed ... Chema */
+	/* This gets executed when we do a revert ....Chema */
 	for (i = 0; i < g_list_length (doc->views); i++) 
 	{
-		g_print("-------------------------------------------------------------!\n");
 		nth_view = g_list_nth_data (doc->views, 0);
 		gedit_view_refresh (nth_view);
 		gedit_set_title (nth_view->document);

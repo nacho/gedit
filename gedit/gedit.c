@@ -118,7 +118,6 @@ main (int argc, char **argv)
 		file_list = g_list_append (file_list, args[i]);
 	
 	poptFreeContext (ctx);
-	
 
 	gedit_plugins_init ();
 	glade_gnome_init ();
