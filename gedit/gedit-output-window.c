@@ -38,7 +38,6 @@
 #include <libgnomeui/gnome-popup-menu.h>
 
 #include "gedit-output-window.h"
-#include "gedit-debug.h"
 
 struct _GeditOutputWindowPrivate
 {
@@ -58,6 +57,8 @@ struct _GeditOutputWindowPrivate
 
 enum {
 	CLOSE_REQUESTED,
+	SELECTION_CHANGED,
+	LINE_ACTIVATED,
 	LAST_SIGNAL
 };
 
@@ -127,6 +128,29 @@ gedit_output_window_class_init (GeditOutputWindowClass *klass)
 			      g_cclosure_marshal_VOID__VOID,
 			      G_TYPE_NONE, 
 			      0);
+	signals[SELECTION_CHANGED] = 
+		g_signal_new ("selection_changed",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditOutputWindowClass, selection_changed),
+			      NULL, 
+			      NULL,
+			      g_cclosure_marshal_VOID__INT,
+			      G_TYPE_NONE, 
+			      1,
+			      G_TYPE_INT);
+
+	signals[LINE_ACTIVATED] = 
+		g_signal_new ("line_activated",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditOutputWindowClass, line_activated),
+			      NULL, 
+			      NULL,
+			      g_cclosure_marshal_VOID__STRING,
+			      G_TYPE_NONE, 
+			      1,
+			      G_TYPE_STRING);
 }
 
 static void		 
@@ -273,18 +297,41 @@ create_popup_menu (GeditOutputWindow  *output_window)
 }
 
 static void
-gedit_output_window_treeview_selection_changed (GtkTreeSelection *selection, 
-						GeditOutputWindow  *output_window)
+gedit_output_window_treeview_selection_changed (GtkTreeSelection  *selection, 
+						GeditOutputWindow *output_window)
 {
-	gboolean selected;
+	gint lines;
 	
 	g_return_if_fail (output_window != NULL);
 	g_return_if_fail (selection != NULL);
 
-	selected = (gtk_tree_selection_count_selected_rows (selection) > 0);
+	lines = gtk_tree_selection_count_selected_rows (selection);
 	
-	gtk_widget_set_sensitive (output_window->priv->copy_menu_item, selected);
-	gtk_widget_set_sensitive (output_window->priv->copy_button, selected);
+	gtk_widget_set_sensitive (output_window->priv->copy_menu_item, lines > 0);
+	gtk_widget_set_sensitive (output_window->priv->copy_button, lines > 0);
+
+	g_signal_emit (output_window, signals [SELECTION_CHANGED], 0, lines);
+}
+
+static void
+gedit_output_window_treeview_row_activated (GtkTreeView       *tree_view,
+                  			    GtkTreePath       *path,
+		  			    GtkTreeViewColumn *column,
+					    GeditOutputWindow *output_window)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	gchar *line;
+
+	model = gtk_tree_view_get_model (tree_view);
+  
+	gtk_tree_model_get_iter (model, &iter, path);
+
+	gtk_tree_model_get (model, &iter, COLUMN_LINES, &line, -1);	
+
+	g_signal_emit (output_window, signals [LINE_ACTIVATED], 0, line);
+
+	g_free (line);
 }
 
 static void 
@@ -304,8 +351,6 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	GtkWidget 		*popup_menu;
 
 	GList			*focusable_widgets = NULL;
-
-	gedit_debug (DEBUG_MDI, "");
 
 	output_window->priv = g_new0 (GeditOutputWindowPrivate, 1);
 
@@ -453,6 +498,10 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 			  G_CALLBACK (gedit_output_window_treeview_selection_changed), 
 			  output_window);
 
+	g_signal_connect (G_OBJECT (output_window->priv->treeview), "row_activated",
+			  G_CALLBACK (gedit_output_window_treeview_row_activated), output_window);
+
+
 	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->treeview);
 	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->close_button);
 	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->copy_button);
@@ -542,4 +591,106 @@ gedit_output_window_append_line	(GeditOutputWindow *ow, const gchar *line, gbool
 
 	gtk_tree_path_free (path);
 }
+
+void
+gedit_output_window_prepend_line (GeditOutputWindow *ow, const gchar *line, gboolean scroll)
+{
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GtkTreePath *path;
+
+	g_return_if_fail (GEDIT_IS_OUTPUT_WINDOW (ow));
+	g_return_if_fail (line != NULL);
+	
+	store = GTK_LIST_STORE (ow->priv->model);
+	g_return_if_fail (store != NULL);
+
+	gtk_list_store_prepend (store, &iter);
+
+	gtk_list_store_set (store, &iter, COLUMN_LINES, line, -1);
+
+	gtk_widget_set_sensitive (ow->priv->clear_button, TRUE);
+	gtk_widget_set_sensitive (ow->priv->clear_menu_item, TRUE);
+
+	if (!scroll)
+		return;
+
+	path = gtk_tree_model_get_path (GTK_TREE_MODEL (store), &iter);
+	g_return_if_fail (path != NULL);
+		
+	gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (ow->priv->treeview),
+				      path, 
+				      NULL,
+				      TRUE,
+				      0.0,
+				      0.0);
+
+	gtk_tree_path_free (path);
+
+}
+
+void
+gedit_output_window_set_selection_mode (GeditOutputWindow *ow,
+					const GtkSelectionMode type)
+{
+	GtkTreeSelection *selection;
+
+	g_return_if_fail (GEDIT_IS_OUTPUT_WINDOW (ow));
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ow->priv->treeview));
+	g_return_if_fail (selection != NULL);
+
+	gtk_tree_selection_set_mode (selection, type);
+}
+
+GtkSelectionMode 
+gedit_output_window_get_selection_mode (GeditOutputWindow *ow)
+{
+	GtkTreeSelection *selection;
+
+	g_return_val_if_fail (GEDIT_IS_OUTPUT_WINDOW (ow), GTK_SELECTION_MULTIPLE);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ow->priv->treeview));
+	g_return_val_if_fail (GEDIT_IS_OUTPUT_WINDOW (ow), GTK_SELECTION_MULTIPLE);
+
+	return gtk_tree_selection_get_mode (selection);
+}
+
+GSList *
+gedit_output_window_get_selected_lines (GeditOutputWindow *ow)
+{
+	GSList *list;
+
+	gboolean ret;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+	
+	g_return_val_if_fail (GEDIT_IS_OUTPUT_WINDOW (ow), NULL);
+
+	selection = gtk_tree_view_get_selection (
+			GTK_TREE_VIEW (ow->priv->treeview));
+
+	list = NULL;
+
+	ret = gtk_tree_model_get_iter_first (ow->priv->model, &iter);
+
+	while (ret)
+	{
+		if (gtk_tree_selection_iter_is_selected (selection, &iter))
+		{
+			gchar *line;
+			
+			gtk_tree_model_get (ow->priv->model, &iter, COLUMN_LINES, &line, -1);
+
+			list = g_slist_prepend (list, line);
+		}
+
+		ret = gtk_tree_model_iter_next (ow->priv->model, &iter);
+	}
+
+	list = g_slist_reverse (list);
+
+	return list;
+}
+
 

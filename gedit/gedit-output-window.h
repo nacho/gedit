@@ -3,7 +3,7 @@
  * gedit-output-window.h
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2004 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2004. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -57,7 +57,11 @@ struct _GeditOutputWindowClass
 {
 	GtkHBoxClass parent_class;
 
-	void (*close_requested) (GeditOutputWindow	*ow);
+	void (*close_requested) 	(GeditOutputWindow *ow);
+	void (*selection_changed) 	(GeditOutputWindow *ow,
+                                         gint               num_of_sel_lines); 
+	void (*line_activated)	 	(GeditOutputWindow *ow,
+                                         const gchar	   *line); 
 };
 
 
@@ -68,8 +72,19 @@ GtkWidget	*gedit_output_window_new		(void);
 void		 gedit_output_window_clear		(GeditOutputWindow *ow);
 
 void 		 gedit_output_window_append_line	(GeditOutputWindow *ow,
-							 const gchar *line,
-							 gboolean scroll);
+							 const gchar       *line,
+							 gboolean           scroll);
+
+void 		 gedit_output_window_prepend_line	(GeditOutputWindow *ow,
+							 const gchar       *line,
+							 gboolean           scroll);
+
+void		 gedit_output_window_set_selection_mode (GeditOutputWindow *ow,
+							 const GtkSelectionMode type);
+
+GtkSelectionMode gedit_output_window_get_selection_mode (GeditOutputWindow *ow);
+
+GSList 		*gedit_output_window_get_selected_lines (GeditOutputWindow *ow);
 
 #endif /* __GEDIT_OUTPUT_WINDOW_H__ */
 

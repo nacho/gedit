@@ -1,3 +1,18 @@
+2004-10-25  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit-output-window.c (gedit_output_window_class_init): declares two 
+	new signals (selection_changed and line_activated)
+	(gedit_output_window_treeview_selection_changed): emits the "selection_changed"
+	signal
+	(gedit_output_window_treeview_row_activated): new function
+	(gedit_output_window_init): connect to the needed signals
+	(gedit_output_window_prepend_line): new function
+	(gedit_output_window_set_selection_mode): ditto
+	(gedit_output_window_get_selection_mode): ditto
+	(gedit_output_window_get_selected_lines): ditto
+
+	* gedit-output-window.h: adds new methods and signals
+
 2004-10-24  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-document.c: remove insert_text_at_cursor.
