@@ -819,23 +819,21 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 
 	if (strcmp (entry->key, GPM_SYNTAX_HL_ENABLE) == 0)
 	{
-		gboolean enable;
-			
 		GList *docs;
 		GList *l;
-		
+		gboolean enable;
+
 		if (entry->value->type == GCONF_VALUE_BOOL)
-			enable = gconf_value_get_bool (entry->value);	
+			enable = gconf_value_get_bool (entry->value);
 		else
 			enable = GPM_DEFAULT_SYNTAX_HL_ENABLE;
-	
+
 		docs = gedit_get_open_documents ();
 		l = docs;
-
 		while (l != NULL)
 		{
 			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
-			
+
 			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (l->data),
 							 enable);
 
@@ -843,6 +841,25 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 		}
 
 		g_list_free (docs);
+
+		/* update the sensitivity of the Higlight Mode menu item */
+		l = gedit_get_top_windows ();
+		while (l != NULL)
+		{
+			BonoboUIComponent *ui_component;
+
+			g_return_if_fail (BONOBO_IS_WINDOW (l->data));
+
+			ui_component = bonobo_mdi_get_ui_component_from_window (l->data);
+			if (enable)
+				bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
+						      "sensitive", "1", NULL);
+			else
+				bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
+						      "sensitive", "0", NULL);
+
+			l = g_list_next (l);
+		}
 	}
 }
 

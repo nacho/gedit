@@ -1420,9 +1420,6 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_all_sensible_verbs, TRUE);
 
-	bonobo_ui_component_set_prop (
-			ui_component, "/menu/View/HighlightMode", "sensitive", "1", NULL);
-	
 	if (active_child == NULL)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
@@ -1433,6 +1430,13 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 
 		goto end;
 	}
+
+	if (gedit_prefs_manager_get_enable_syntax_highlighting ())
+		bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
+					      "sensitive", "1", NULL);
+	else
+		bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
+					      "sensitive", "0", NULL);
 
 	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
 				(bonobo_mdi_n_children_for_window (active_window) > 1) ? TRUE : FALSE);
@@ -1501,7 +1505,6 @@ end:
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
-
 
 static void 
 gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
@@ -1636,7 +1639,6 @@ gedit_mdi_hide_output_window_cb (GtkWidget *widget, gpointer user_data)
 				    prefs->output_window_visible);
 }
 
-
 GtkWidget *
 gedit_mdi_get_output_window_from_window (BonoboWindow *win)
 {
@@ -1666,8 +1668,6 @@ gedit_mdi_get_output_window_from_window (BonoboWindow *win)
 	
 	return (r != NULL) ? GTK_WIDGET (r) : NULL;
 }
-
-
 
 static GeditWindowPrefs *
 gedit_window_prefs_new (void)
@@ -1908,7 +1908,6 @@ get_verb_name_for_language (GtkSourceLanguage *lang)
 
 	return verb_name;
 }
-
 
 static void
 add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
