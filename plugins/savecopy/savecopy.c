@@ -46,7 +46,7 @@
 #include <gedit/gedit-utils.h>
 
 
-#define MENU_ITEM_LABEL	N_("Sa_ve Copy")
+#define MENU_ITEM_LABEL	N_("Sa_ve Copy...")
 #define MENU_ITEM_NAME	"SaveCopy"
 #define MENU_ITEM_PATH	"/menu/File/FileOps_0/"
 #define MENU_ITEM_TIP	N_("Save a copy of the current document")
@@ -359,7 +359,7 @@ run_copy_file_chooser (GtkWindow *parent,
 	gint res;
 	gpointer retval;
 
-	chooser = gtk_file_chooser_dialog_new (_("Save Copy"),
+	chooser = gtk_file_chooser_dialog_new (_("Save Copy..."),
 					       parent,
 					       GTK_FILE_CHOOSER_ACTION_SAVE,
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -368,6 +368,8 @@ run_copy_file_chooser (GtkWindow *parent,
 
 	gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
+
+	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
 
 	/* Filters */
 	filter = gtk_file_filter_new ();
