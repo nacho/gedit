@@ -1,3 +1,11 @@
+2000-04-03  Chema Celorio  <chema@celorio.com>
+
+	* gedit-undo.c (views_insert): fixed a cursor
+	positioning problem when undoing
+	(views_delete): ditto
+	basiclly thaw gtk_text befor inserting/deleting
+	this keeps the cursor in the correct position
+
 2000-04-02  Jason Leach  <leach@wam.umd.edu>
 
 	* gE_mdi.c (get_untitled_as_string): made static

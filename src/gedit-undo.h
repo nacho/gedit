@@ -28,24 +28,16 @@
 
 typedef struct _gedit_undo {
 	gchar *text;		/* The text data */
-	/* The position in the document */
-	gint start_pos;
+	gint start_pos;	/* The position in the document */
 	gint end_pos;
-		
 	gint action;	/* whether the user has inserted or deleted */
 	gint status;	/* the changed status of the document used with this node */
-
 }gedit_undo;
 
-
-/* add an undo node */
-extern void gedit_undo_add (gchar*, gint, gint, gint, gedit_document*);
-/* clear the list */
+extern void gedit_undo_add      (gchar*, gint, gint, gint, gedit_document*);
 extern void gedit_undo_reset	(GList*);
-/* callbacks to do the undo or the redo */
-extern void gedit_undo_do		(GtkWidget*, gpointer);
+extern void gedit_undo_do	(GtkWidget*, gpointer);
 extern void gedit_undo_redo	(GtkWidget*, gpointer);
-/* let the user see the undo history of the docu,emt */
 extern void gedit_undo_history	(GtkWidget*, gpointer*);
 
 #endif /* __GE_UNDO_H__ */

@@ -28,12 +28,16 @@
 
 void views_insert (gedit_document *doc, gedit_undo *undo);
 void views_delete (gedit_document *doc, gedit_undo *undo);
+void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc);
+void gedit_undo_do (GtkWidget *w, gpointer data);
+void gedit_undo_redo (GtkWidget *w, gpointer data);
 
 void
-gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
-	     gedit_document *doc)
+gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc)
 {
 	gedit_undo *undo;
+
+	g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
 
 	undo = g_new(gedit_undo, 1);
 	
@@ -46,9 +50,11 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
 	/* nuke the redo list, if its available */
 	if (doc->redo)
 	{
+		g_print("About to free doc->redo...\n");
 		g_list_free (doc->redo);
 		doc->redo = NULL;
 	}
+
 	doc->undo = g_list_prepend (doc->undo, undo);
 }
 
@@ -57,20 +63,20 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 {
 	gedit_document *doc = gedit_document_current();
 	gedit_undo *undo;
-	
-	if (!doc->undo)
-	  return;
+
+	g_return_if_fail(doc->undo!=NULL);
 	
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */
 	undo = g_list_nth_data (doc->undo, 0);
-	/* add this undo data to the top of the redo stack.. */
 	doc->redo = g_list_prepend (doc->redo, undo);
-	/* remove the data from the undo stack */
 	doc->undo = g_list_remove (doc->undo, undo);
-	/* Now we can do the undo proper.. */
-	if (undo->action)
+
+	g_print("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+	
+	if (undo->action == DELETE )
 	{
+		g_print("undo do action DELETE ");
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos))
 		{
@@ -86,7 +92,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 		}
 		views_insert (doc, undo);
 	}
-	else
+	else if (undo->action == INSERT )
 	{
 		/* We're deleteing somthing that had been inserted */
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
@@ -98,9 +104,12 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 			doc->buf = g_string_truncate (doc->buf, undo->start_pos);
 		}
 		views_delete (doc, undo);
-		doc->changed = undo->status;		
+		doc->changed = undo->status;
 	}
-
+	else
+	{
+		g_return_if_fail(FALSE);
+	}
 }
 
 void
@@ -109,26 +118,27 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 
 	gedit_document *doc = gedit_document_current();
 	gedit_undo *redo;
+
+	g_print("Entering undo_redo..\n");
 	
 	if (!doc->redo)
 	  return;
 	
-	/* The redo data we need is always at the top op the
-	   stack. So, therefore, the first one =) */
 	redo = g_list_nth_data (doc->redo, 0);
-	/* add this redo data to the top of the undo stack.. */
 	doc->undo = g_list_prepend (doc->undo, redo);
-	/* remove the data from the redo stack */
 	doc->redo = g_list_remove (doc->redo, redo);
+
 	/* Now we can do the undo proper.. */
-	if (!redo->action)
+	if ( redo->action == INSERT )
 	{
+		g_print("INSERT buggy ....  ...\n");
+		g_print("%s", redo->text);
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
 		{
 			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
 		}
-		else if (redo->end_pos == 0)
+		if (redo->end_pos == 0)
 		{
 			doc->buf = g_string_prepend (doc->buf, redo->text);
 		}
@@ -138,8 +148,9 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		}
 		views_insert (doc, redo);
 	}
-	else
+	else if ( redo->action == DELETE )
 	{
+		g_print("DELETE ...\n");
 		/* We're deleteing somthing that had been inserted */
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len)
 		{
@@ -150,6 +161,11 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
 		}
 		views_delete (doc, redo);
+		/*doc->changed = undo->status; this line by chema */ 
+	}
+	else 
+	{
+		g_return_if_fail(FALSE);
 	}
 }
 
@@ -160,6 +176,8 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 	gint i;
 	gint p1;
 	gedit_view *view;
+
+	g_print("Entering views insert..\n");
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
@@ -167,23 +185,22 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 		gtk_text_freeze (GTK_TEXT (view->text));
 		p1 = gtk_text_get_point (GTK_TEXT (view->text));
 		gtk_text_set_point (GTK_TEXT(view->text), undo->start_pos);
+		gtk_text_thaw (GTK_TEXT (view->text));
 		gtk_text_insert (GTK_TEXT (view->text), NULL,
 				 NULL,
 				 NULL,
 				 undo->text,
 				 strlen(undo->text));
-		gtk_text_set_point (GTK_TEXT (view->text), p1);
-		gtk_text_thaw (GTK_TEXT (view->text));
+
 		gtk_text_freeze (GTK_TEXT (view->split_screen));
 		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
 		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
+		gtk_text_thaw (GTK_TEXT (view->split_screen));
 		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 				 NULL,
 				 NULL,
 				 undo->text,
 				 strlen(undo->text));
-		gtk_text_set_point (GTK_TEXT (view->text), p1);
-		gtk_text_thaw (GTK_TEXT (view->split_screen));
 	}  
 }
 
@@ -195,24 +212,36 @@ views_delete (gedit_document *doc, gedit_undo *undo)
 	gint n;
 	gint p1;
 	gint start_pos, end_pos;
-	
+
+	gint chema1, chema2, chema3;
+
 	start_pos = undo->start_pos;
 	end_pos = undo->end_pos;
-	
+
+	g_print("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
 		nth_view = g_list_nth_data (doc->views, n);
+
 		gtk_text_freeze (GTK_TEXT (nth_view->text));
-		p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
+	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
 		gtk_text_set_point (GTK_TEXT(nth_view->text), end_pos);
+		gtk_text_thaw (GTK_TEXT (nth_view->text)); /* thaw before deleting so that cursos repositions ok */
 		gtk_text_backward_delete (GTK_TEXT (nth_view->text), (end_pos - start_pos));
-		gtk_text_set_point (GTK_TEXT (nth_view->text), p1);
-		gtk_text_thaw (GTK_TEXT (nth_view->text));
+			
 		gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
-		p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
+	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
 		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), start_pos);
-		gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-		gtk_text_set_point (GTK_TEXT (nth_view->split_screen), p1);
 		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
+		gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
 	}
 }
+
+
+
+
+
+
+
+
