@@ -1202,7 +1202,7 @@
 				  <property name="yalign">0.5</property>
 				  <property name="xpad">0</property>
 				  <property name="ypad">0</property>
-				  <property name="mnemonic_widget">fontpicker</property>
+				  <property name="mnemonic_widget">font_button</property>
 				</widget>
 				<packing>
 				  <property name="padding">0</property>
@@ -1212,14 +1212,14 @@
 			      </child>
 
 			      <child>
-				<widget class="GnomeFontPicker" id="fontpicker">
+				<widget class="GtkFontButton" id="font_button">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="title" translatable="yes">Pick the editor font</property>
-				  <property name="mode">GNOME_FONT_PICKER_MODE_FONT_INFO</property>
+				  <property name="show_style">True</property>
 				  <property name="show_size">True</property>
-				  <property name="use_font_in_label">False</property>
-				  <property name="label_font_size">14</property>
+				  <property name="use_font">True</property>
+				  <property name="use_size">False</property>
 				  <property name="focus_on_click">True</property>
 				</widget>
 				<packing>

@@ -42,7 +42,6 @@
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagesmanager.h>
 
-
 #include <gedit/gedit-prefs-manager.h>
 
 #include "gedit-preferences-dialog.h"
@@ -70,7 +69,7 @@ struct _GeditPreferencesDialog
 	/* Font & Colors */
 	GtkWidget	*default_font_checkbutton;
 	GtkWidget	*default_colors_checkbutton;
-	GtkWidget	*fontpicker;
+	GtkWidget	*font_button;
 	GtkWidget	*text_colorpicker;
 	GtkWidget	*background_colorpicker;
 	GtkWidget	*sel_text_colorpicker;
@@ -130,52 +129,6 @@ struct _GeditPreferencesDialog
 	GtkWidget	*plugin_manager_place_holder;
 };
 
-
-static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
-
-/* TODO: monitor changes of the font size - Paolo */
-#define DEFAULT_FONT_SIZE 10
-
-static gint 
-get_desktop_default_font_size ()
-{
-	GConfClient *gconf_client = NULL;
-	gint res;
-	gchar *font;
-	
-	PangoFontDescription *desc;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	gconf_client = gconf_client_get_default ();
-	if (gconf_client == NULL)
-	{
-		return DEFAULT_FONT_SIZE;
-	}
-
-	font = gconf_client_get_string (gconf_client,
-				   	"/desktop/gnome/interface/font_name",
-				   	NULL);
-	if (font == NULL)
-		return DEFAULT_FONT_SIZE;
-	
-	gedit_debug (DEBUG_PREFS, "Font: %s", font);
-
-	desc = pango_font_description_from_string (font);
-
-	g_free (font);
-	g_return_val_if_fail (desc != NULL, DEFAULT_FONT_SIZE);
-
-	res = pango_font_description_get_size (desc) / PANGO_SCALE;
-
-	pango_font_description_free (desc);
-
-	g_object_unref (gconf_client);
-
-	gedit_debug (DEBUG_PREFS, "Size: %d", res);
-
-	return res;
-}
 
 static void
 dialog_destroyed (GtkObject  *obj,  
@@ -486,8 +439,7 @@ right_margin_checkbutton_toggled (GtkToggleButton        *button,
 {
 	gboolean active;
 	
-	g_return_if_fail (button == 
-			GTK_TOGGLE_BUTTON (dlg->right_margin_checkbutton));
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->right_margin_checkbutton));
 
 	active = gtk_toggle_button_get_active (button);
 	
@@ -600,60 +552,67 @@ setup_view_page (GeditPreferencesDialog *dlg)
 }
 
 static void
+default_font_font_checkbutton_toggled (GtkToggleButton        *button,
+				       GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->default_font_checkbutton));
+
+	if (gtk_toggle_button_get_active (button))
+	{
+		gtk_widget_set_sensitive (dlg->font_hbox, FALSE);
+		gedit_prefs_manager_set_use_default_font (TRUE);
+	}
+	else
+	{
+		gtk_widget_set_sensitive (dlg->font_hbox, 
+					  gedit_prefs_manager_editor_font_can_set ());
+		gedit_prefs_manager_set_use_default_font (FALSE);
+	}
+}
+
+static void
 default_font_colors_checkbutton_toggled (GtkToggleButton        *button,
 					 GeditPreferencesDialog *dlg)
 {
 	gedit_debug (DEBUG_PREFS, "");
 
-	if (GTK_TOGGLE_BUTTON (dlg->default_font_checkbutton) == button)
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->default_colors_checkbutton));
+
+	if (gtk_toggle_button_get_active (button))
 	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gtk_widget_set_sensitive (dlg->font_hbox, FALSE);
-			gedit_prefs_manager_set_use_default_font (TRUE);
-		}
-		else
-		{
-			gtk_widget_set_sensitive (dlg->font_hbox, 
-						  gedit_prefs_manager_editor_font_can_set ());
-			gedit_prefs_manager_set_use_default_font (FALSE);
-		}
-
-		return;
+		gtk_widget_set_sensitive (dlg->colors_table, FALSE);
+		gedit_prefs_manager_set_use_default_colors (TRUE);
 	}
-
-	if (GTK_TOGGLE_BUTTON (dlg->default_colors_checkbutton) == button)
+	else
 	{
-		if (gtk_toggle_button_get_active (button))
-		{
-			gtk_widget_set_sensitive (dlg->colors_table, FALSE);
-			gedit_prefs_manager_set_use_default_colors (TRUE);
-		}
-		else
-		{
-			gedit_prefs_manager_set_use_default_colors (FALSE);
-			gtk_widget_set_sensitive (dlg->colors_table, 
-						  gedit_prefs_manager_background_color_can_set () &&
-					  	  gedit_prefs_manager_text_color_can_set () &&
-					  	  gedit_prefs_manager_selection_color_can_set () &&
-					  	  gedit_prefs_manager_selected_text_color_can_set ());
-		}
-
-		return;
+		gedit_prefs_manager_set_use_default_colors (FALSE);
+		gtk_widget_set_sensitive (dlg->colors_table, 
+					  gedit_prefs_manager_background_color_can_set () &&
+				  	  gedit_prefs_manager_text_color_can_set () &&
+				  	  gedit_prefs_manager_selection_color_can_set () &&
+				  	  gedit_prefs_manager_selected_text_color_can_set ());
 	}
-
-	g_return_if_fail (FALSE);
 }
 
 static void
-editor_font_picker_font_set (GnomeFontPicker        *gfp,
-			     const gchar            *font_name,
+editor_font_button_font_set (GtkFontButton          *font_button,
 			     GeditPreferencesDialog *dlg)
 {
+	const gchar *font_name;
+
 	gedit_debug (DEBUG_PREFS, "");
 
-	g_return_if_fail (gfp == GNOME_FONT_PICKER (dlg->fontpicker));
-	g_return_if_fail (font_name != NULL);
+	g_return_if_fail (font_button == GTK_FONT_BUTTON (dlg->font_button));
+
+	/* FIXME: Can this fail? Gtk docs are a bit terse... 21-02-2004 pbor */
+	font_name = gtk_font_button_get_font_name (font_button);
+	if (!font_name)
+	{
+		g_warning ("Could not get font name");
+		return;
+	}
 
 	gedit_prefs_manager_set_editor_font (font_name);
 }
@@ -713,10 +672,9 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 	gchar *editor_font = NULL;
 
 	gedit_debug (DEBUG_PREFS, "");
-	
-	gtk_tooltips_set_tip (dlg->tooltips, dlg->fontpicker, 
-			_("Push this button to select the font to be used by the editor"), NULL);
 
+	gtk_tooltips_set_tip (dlg->tooltips, dlg->font_button, 
+			_("Push this button to select the font to be used by the editor"), NULL);
 	gtk_tooltips_set_tip (dlg->tooltips, dlg->text_colorpicker, 
 			_("Push this button to configure text color"), NULL);
 	gtk_tooltips_set_tip (dlg->tooltips, dlg->background_colorpicker, 
@@ -728,14 +686,10 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 			_("Push this button to configure the color in which the selected "
 			  "text should be marked"), NULL);
 
-	gedit_utils_set_atk_relation (dlg->fontpicker, dlg->default_font_checkbutton, 
+	gedit_utils_set_atk_relation (dlg->font_button, dlg->default_font_checkbutton, 
                                                           ATK_RELATION_CONTROLLED_BY);
-	gedit_utils_set_atk_relation (dlg->default_font_checkbutton, dlg->fontpicker, 
+	gedit_utils_set_atk_relation (dlg->default_font_checkbutton, dlg->font_button, 
                                                          ATK_RELATION_CONTROLLER_FOR);
-	
-	gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (dlg->fontpicker),
-                                                    TRUE, 
-						    get_desktop_default_font_size ());
 
 	/* read config value */
 	use_default_font = gedit_prefs_manager_get_use_default_font ();
@@ -771,8 +725,8 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 
 	if (editor_font != NULL)
 	{
-		gnome_font_picker_set_font_name (GNOME_FONT_PICKER (dlg->fontpicker),
-						 editor_font);
+		gtk_font_button_set_font_name (GTK_FONT_BUTTON (dlg->font_button),
+					       editor_font);
 
 		g_free (editor_font);
 	}
@@ -784,34 +738,26 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 			(dlg->default_colors_checkbutton), use_default_colors);
 
 	/* Connect signals */
-	
 	g_signal_connect (G_OBJECT (dlg->default_font_checkbutton), "toggled", 
-			G_CALLBACK (default_font_colors_checkbutton_toggled), 
-			dlg);
+			  G_CALLBACK (default_font_font_checkbutton_toggled), dlg);
 
 	g_signal_connect (G_OBJECT (dlg->default_colors_checkbutton), "toggled", 
-			G_CALLBACK (default_font_colors_checkbutton_toggled), 
-			dlg);
+			  G_CALLBACK (default_font_colors_checkbutton_toggled), dlg);
 
-	g_signal_connect (G_OBJECT (dlg->fontpicker), "font_set", 
-			G_CALLBACK (editor_font_picker_font_set), 
-			dlg);
+	g_signal_connect (G_OBJECT (dlg->font_button), "font_set", 
+			  G_CALLBACK (editor_font_button_font_set), dlg);
 
 	g_signal_connect (G_OBJECT (dlg->background_colorpicker), "color_set",
-			G_CALLBACK (editor_color_picker_color_set),
-			dlg);
+			  G_CALLBACK (editor_color_picker_color_set), dlg);
 
 	g_signal_connect (G_OBJECT (dlg->text_colorpicker), "color_set",
-			G_CALLBACK (editor_color_picker_color_set),
-			dlg);
+			  G_CALLBACK (editor_color_picker_color_set), dlg);
 
 	g_signal_connect (G_OBJECT (dlg->selection_colorpicker), "color_set",
-			G_CALLBACK (editor_color_picker_color_set),
-			dlg);
+			  G_CALLBACK (editor_color_picker_color_set), dlg);
 
 	g_signal_connect (G_OBJECT (dlg->sel_text_colorpicker), "color_set",
-			G_CALLBACK (editor_color_picker_color_set),
-			dlg);
+			  G_CALLBACK (editor_color_picker_color_set), dlg);
 
 	/* Set initial widget sensitivity */
 	gtk_widget_set_sensitive (dlg->default_font_checkbutton, 
@@ -1252,7 +1198,7 @@ get_preferences_dialog (GtkWindow *parent)
 	dialog->default_font_checkbutton = glade_xml_get_widget (gui, "default_font_checkbutton");
 	dialog->default_colors_checkbutton = glade_xml_get_widget (gui, "default_colors_checkbutton");
 	
-	dialog->fontpicker = glade_xml_get_widget (gui, "fontpicker");
+	dialog->font_button = glade_xml_get_widget (gui, "font_button");
 	dialog->text_colorpicker = glade_xml_get_widget (gui, "text_colorpicker");
 	dialog->background_colorpicker = glade_xml_get_widget (gui, "background_colorpicker");
 	dialog->sel_text_colorpicker = glade_xml_get_widget (gui, "sel_text_colorpicker");
@@ -1304,7 +1250,7 @@ get_preferences_dialog (GtkWindow *parent)
 	    !dialog->split_checkbutton ||
 	    !dialog->default_font_checkbutton ||
 	    !dialog->default_colors_checkbutton ||
-	    !dialog->fontpicker ||
+	    !dialog->font_button ||
 	    !dialog->text_colorpicker ||
 	    !dialog->background_colorpicker ||
 	    !dialog->sel_text_colorpicker ||
