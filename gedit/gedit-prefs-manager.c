@@ -101,6 +101,12 @@
 #define GPM_PRINT_FONT_HEADER		GPM_PRINT_FONT_DIR "/print_font_header"
 #define GPM_PRINT_FONT_NUMBERS		GPM_PRINT_FONT_DIR "/print_font_numbers"
 
+/* Window geometry and state */
+#define GPM_WINDOW_DIR			GPM_PREFS_DIR "/ui/window"
+#define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
+#define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
+#define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
+
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -146,6 +152,11 @@
 #define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 8"
 
 #define GPM_DEFAULT_MAX_RECENTS		5
+
+#define GPM_DEFAULT_WINDOW_STATE	0
+#define GPM_DEFAULT_WINDOW_WIDTH	650
+#define GPM_DEFAULT_WINDOW_HEIGHT	500
+
 
 #define DEFINE_BOOL_PREF(name, key, def) gboolean 			\
 gedit_prefs_manager_get_ ## name (void)					\
@@ -1371,6 +1382,34 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 		}
 	}
 }
+
+/* Window state */
+DEFINE_INT_PREF (window_state,
+		 GPM_WINDOW_STATE,
+		 GPM_DEFAULT_WINDOW_STATE)
+
+/* Window width */
+DEFINE_INT_PREF (window_width,
+		 GPM_WINDOW_WIDTH,
+		 GPM_DEFAULT_WINDOW_WIDTH)
+
+gint
+gedit_prefs_manager_get_default_window_width (void)
+{
+	return GPM_DEFAULT_WINDOW_WIDTH;
+}
+
+/* Window height */
+DEFINE_INT_PREF (window_height,
+		 GPM_WINDOW_HEIGHT,
+		 GPM_DEFAULT_WINDOW_HEIGHT)
+
+gint
+gedit_prefs_manager_get_default_window_height (void)
+{
+	return GPM_DEFAULT_WINDOW_HEIGHT;
+}
+
 
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 

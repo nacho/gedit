@@ -99,6 +99,8 @@ static void gedit_mdi_child_state_changed_handler (GeditMDIChild *child);
 
 static void gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi);
 
+static void gedit_mdi_app_destroy_handler (BonoboMDI *mdi, BonoboWindow *window);
+
 static void gedit_mdi_view_menu_item_toggled_handler (
 			BonoboUIComponent           *ui_component,
 			const char                  *path,
@@ -161,7 +163,11 @@ gedit_mdi_init (GeditMDI  *mdi)
 {
 	gedit_debug (DEBUG_MDI, "START");
 
-	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit-2", "gedit");
+	bonobo_mdi_construct (BONOBO_MDI (mdi), 
+			      "gedit-2", 
+			      "gedit",
+			      gedit_prefs_manager_get_default_window_width (),
+			      gedit_prefs_manager_get_default_window_height ());
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
 
@@ -190,6 +196,10 @@ gedit_mdi_init (GeditMDI  *mdi)
 	
 	g_signal_connect (G_OBJECT (mdi), "all_windows_destroyed",
 			  G_CALLBACK (gedit_file_exit), NULL);
+
+	g_signal_connect (G_OBJECT (mdi), "top_window_destroy",
+			  G_CALLBACK (gedit_mdi_app_destroy_handler), NULL);
+
 			  
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -243,6 +253,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GnomeRecentView *view;
 	GnomeRecentModel *model;
 	GeditWindowPrefs *prefs;
+	GdkWindowState state;
 
 	static GtkTargetEntry drag_types[] =
 	{
@@ -335,7 +346,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* add a GeditRecentView object */
 	model = gedit_recent_get_model ();
-	view = GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (ui_component, "/menu/File/Recents"));
+	view = GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (
+					ui_component, "/menu/File/Recents"));
 	gnome_recent_view_set_model (view, model);
 	
 	g_signal_connect (G_OBJECT (view), "activate",
@@ -343,20 +355,57 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	g_object_set_data_full (G_OBJECT (win), RECENT_KEY, view,
 				g_object_unref);
+	
+	/* Set window state and size */
+	state = gedit_prefs_manager_get_window_state ();
 
-	/* FIXME: Set the window size. */
-	gtk_window_set_default_size (GTK_WINDOW (win), 
-			600, /*gedit_settings->window_width*/
-			400 /*gedit_settings->window_height*/);
+	if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+	{
+		gtk_window_set_default_size (GTK_WINDOW (win),
+			gedit_prefs_manager_get_default_window_width (),
+			gedit_prefs_manager_get_default_window_height ());
 
-	/* FIXME
-	g_signal_connect (G_OBJECT (win), "configure_event",
-	                  G_CALLBACK (gedit_prefs_configure_event_handler), 
-			  NULL);
-	*/
+		gtk_window_maximize (GTK_WINDOW (win));
+	}
+	else
+	{
+		gtk_window_set_default_size (GTK_WINDOW (win), 
+			gedit_prefs_manager_get_window_width (),
+			gedit_prefs_manager_get_window_height ());
+
+		gtk_window_unmaximize (GTK_WINDOW (win));
+	}
+
+	if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
+		gtk_window_stick (GTK_WINDOW (win));
+	else
+		gtk_window_unstick (GTK_WINDOW (win));
 	
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
+}
+
+static void
+gedit_mdi_app_destroy_handler (BonoboMDI *mdi, BonoboWindow *window)
+{
+	const BonoboMDIWindowInfo *window_info;
+
+	gedit_debug (DEBUG_MDI, "");
+	
+	g_return_if_fail (window != NULL);
+	g_return_if_fail (BONOBO_IS_WINDOW (window));
+
+	window_info = bonobo_mdi_get_window_info (window);
+	g_return_if_fail (window_info != NULL);
+	
+	if (gedit_prefs_manager_window_height_can_set ())
+		gedit_prefs_manager_set_window_height (window_info->height);
+
+	if (gedit_prefs_manager_window_width_can_set ())
+		gedit_prefs_manager_set_window_width (window_info->width);
+
+	if (gedit_prefs_manager_window_state_can_set ())
+		gedit_prefs_manager_set_window_state (window_info->state);
 }
 
 static void

@@ -1,3 +1,20 @@
+2002-07-05  Paolo Maggi <maggi@athena.polito.it>
+
+	Fixed bug #76001
+
+	* bonobo-mdi.[ch]: added a "top_window_destroy"
+	signal
+	(bonobo_mdi_new)(bonobo_mdi_construct): take the default
+	size of the toplevel windows as parameter
+	(app_clone): clone the window size and state
+	
+	* gedit-mdi.c (gedit_mdi_app_destroy_handler): new function for
+	saving the size and state if the destroyed window
+	(gedit_mdi_app_created_handler): set window size and state
+
+	* gedit-prefs-manager.[ch]: added functions to set and get
+	the window size and state
+
 2002-07-04  James Willcox <jwillcox@cs.indiana.edu>
 
 	* gedit-document.c (gedit_document_load):

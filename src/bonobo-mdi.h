@@ -22,6 +22,12 @@
  * Author: Paolo Maggi 
  */
 
+/*
+ * Modified by the gedit Team, 2001-2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
+
 #ifndef _BONOBO_MDI_H_
 #define _BONOBO_MDI_H_
 
@@ -58,7 +64,7 @@ typedef struct {
 	void 		(*child_changed)	(BonoboMDI *mdi, BonoboMDIChild *child);
 	void 		(*view_changed)		(BonoboMDI *mdi, GtkWidget *view);
 	void 		(*top_window_created)	(BonoboMDI *mdi, BonoboWindow *window);
-	void 		(*top_window_destroyed)	(BonoboMDI *mdi, BonoboWindow *window);
+	void 		(*top_window_destroy)	(BonoboMDI *mdi, BonoboWindow *window);
 	void		(*all_windows_destroyed)(BonoboMDI *mdi);
 } BonoboMDIClass;
 
@@ -106,11 +112,15 @@ struct _BonoboMDIWindowInfo {
 GType         bonobo_mdi_get_type            	(void);
 
 GObject      *bonobo_mdi_new                	(const gchar *mdi_name, 
-						 const gchar *title);
+						 const gchar *title,
+						 gint default_window_width,
+						 gint default_window_height);
 
 void 	      bonobo_mdi_construct 		(BonoboMDI *mdi, 
 						 const gchar *name, 
-						 const gchar *title);
+						 const gchar *title,
+						 gint default_window_width,
+						 gint default_window_height);
 
 /* setting the ui template*/
 void          bonobo_mdi_set_ui_template	(BonoboMDI *mdi, 
@@ -188,9 +198,6 @@ BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow *win);
 char *bonobo_mdi_generate_window_role (void);
 
 const BonoboMDIWindowInfo *bonobo_mdi_get_window_info		(BonoboWindow *win);
-
-/* Utility function to generate unique window roles */
-char *bonobo_mdi_generate_window_role (void);
 
 #endif /* _BONOBO_MDI_H_ */
 

@@ -195,6 +195,24 @@ gboolean		 gedit_prefs_manager_print_font_numbers_can_set	(void);
  */
 gint		 	 gedit_prefs_manager_get_max_recents		(void);
 
+/* Window state */
+gint		 	 gedit_prefs_manager_get_window_state		(void);
+void 			 gedit_prefs_manager_set_window_state		(gint ws);
+gboolean		 gedit_prefs_manager_window_state_can_set	(void);
+
+/* Window height */
+gint		 	 gedit_prefs_manager_get_window_height		(void);
+gint		 	 gedit_prefs_manager_get_default_window_height	(void);
+void 			 gedit_prefs_manager_set_window_height		(gint wh);
+gboolean		 gedit_prefs_manager_window_height_can_set	(void);
+
+/* Window width */
+gint		 	 gedit_prefs_manager_get_window_width		(void);
+gint		 	 gedit_prefs_manager_get_default_window_width	(void);
+void 			 gedit_prefs_manager_set_window_width		(gint ww);
+gboolean		 gedit_prefs_manager_window_width_can_set	(void);
+
+
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 
 
