@@ -196,40 +196,6 @@ is_read_only (const gchar *name)
 	return ret;	
 }
 
-static gboolean
-file_is_dir (gchar *name)
-{
-	gboolean                 ret;
-	GnomeVFSFileInfo        *info;
-
-	g_return_val_if_fail (name != NULL, FALSE);
-	
-	info = gnome_vfs_file_info_new ();
-	
-	/* FIXME: is GNOME_VFS_FILE_INFO_FOLLOW_LINKS right in this case? - Paolo */
-	if (gnome_vfs_get_file_info (name, 
-				     info, 
-				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS) != GNOME_VFS_OK)
-	{
-		gnome_vfs_file_info_unref (info);
-		
-		return FALSE;
-	}
-		
-	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE)
-	{
-		ret = (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
-	}
-	else
-	{
-		ret = FALSE;
-	}
-	
-	gnome_vfs_file_info_unref (info);
-
-	return ret;	
-}
-
 static gboolean 
 file_exists (gchar *name)
 {
@@ -289,15 +255,7 @@ analyze_response (GtkFileChooser *chooser, gint response)
 		uri = gnome_vfs_get_uri_from_local_path (file_name);
 	}
 
-	/* Change into directory if that's what user selected */
-	if (file_is_dir (uri)) 
-	{		
-		gtk_file_chooser_set_current_folder_uri (chooser, uri);
-		
-		g_free (file_name);
-		g_free (uri);
-	} 
-	else if (GET_MODE (chooser) == FILESEL_OPEN_MULTI) 
+	if (GET_MODE (chooser) == FILESEL_OPEN_MULTI) 
 	{
 		GSList *files;
 	       
