@@ -19,12 +19,15 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include "main.h"
+#include <config.h>
+#ifdef WITH_GMODULE_PLUGINS
+#include "gE_plugin.h"
+#endif
 #include "gE_plugin_api.h"
 #include "gE_document.h"
 #include "gE_files.h"
 #include "commands.h"
 
-#include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
@@ -39,6 +42,7 @@ void start_plugin( GtkWidget *widget, gE_data *data )
 {
   plugin_callback_struct callbacks;
   plugin *plug = plugin_new( data->temp1 );
+  plugin_info *info = data->temp2;
 
   memset (&callbacks, 0, sizeof (plugin_callback_struct));
 
@@ -55,7 +59,9 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.set_word_wrap = gE_plugin_set_word_wrap;
   callbacks.document.set_read_only = gE_plugin_set_read_only;
   callbacks.document.set_split_screen = gE_plugin_set_split_screen;
+#ifndef WITHOUT_GNOME
   callbacks.document.set_scroll_ball = gE_plugin_set_scroll_ball;
+#endif
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
 
@@ -67,10 +73,16 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.text.set_selected_text = NULL;
   callbacks.document.get_position = NULL;
   callbacks.document.get_selection = NULL;
-  
+
+#ifdef WITH_GMODULE_PLUGINS
+  if ( info->type == PLUGIN_GMODULE ) {
+      gE_Plugin_Load ( (gE_Plugin_Object *)info->user_data );
+      return;
+  }
+#endif
+
   plugin_register( plug, &callbacks, *(int *)g_hash_table_lookup (win_pointer_to_int, data->window ) );
 }
-
 
 void add_plugin_to_menu (gE_window *window, plugin_info *info)
 {
@@ -92,6 +104,7 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
 	
 	data->temp1 = g_strdup (info->plugin_name);
+	data->temp2 = info;
 	data->window = window;
 	path = g_new (gchar, strlen (_("Plugins") ) + 2 );
 	sprintf (path, "%s/", _("Plugins"));
@@ -235,12 +248,14 @@ void gE_plugin_set_split_screen (gint docid, gint split_screen)
 	gE_document_set_split_screen (document, split_screen);
 }
 
+#ifndef WITHOUT_GNOME
 void gE_plugin_set_scroll_ball (gint docid, gint scroll_ball)
 {
 	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
 
 	gE_document_set_scroll_ball (document, scroll_ball);
 }
+#endif
 
 char *gE_plugin_text_get( gint docid )
 {
@@ -270,6 +285,7 @@ void gE_plugin_program_register (plugin_info *info)
   temp = info;
   info = g_malloc0( sizeof( plugin_info ) );
   info->type = temp->type;
+  info->user_data = temp->user_data;
   info->menu_location = g_malloc0( strlen( temp->menu_location ) + 1 );
   strcpy( info->menu_location, temp->menu_location );
   info->suggested_accelerator = NULL;

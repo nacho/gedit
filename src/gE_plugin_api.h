@@ -45,7 +45,9 @@ extern void gE_plugin_set_status_bar (gint docid, gint status_bar);
 extern void gE_plugin_set_word_wrap (gint docid, gint word_wrap);
 extern void gE_plugin_set_read_only (gint docid, gint read_only);
 extern void gE_plugin_set_split_screen (gint docid, gint split_screen);
+#ifndef WITHOUT_GNOME
 extern void gE_plugin_set_scroll_ball (gint docid, gint scroll_ball);
+#endif
 extern char *gE_plugin_text_get( gint docid );
 extern void gE_plugin_program_register (plugin_info *info);
 extern gboolean gE_plugin_program_quit (void);

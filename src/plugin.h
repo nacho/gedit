@@ -22,7 +22,7 @@
 #include <unistd.h>
 #include <glib.h>
 
-typedef enum { PLUGIN_STANDARD } PluginType;
+typedef enum { PLUGIN_STANDARD, PLUGIN_GMODULE } PluginType;
 
 typedef struct
 {
@@ -36,6 +36,7 @@ typedef struct
   gchar *suggested_accelerator;
   gchar *plugin_name;
   PluginType type;
+  gpointer user_data;
 } plugin_info;
 
 typedef struct

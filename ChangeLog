@@ -1,3 +1,45 @@
+1998-10-14  Martin Baulig  <martin@home-of-linux.org>
+
+	Added GModule Plugins which are dynamically loaded into the
+	running GEdit process. This has the advantage that the plugin
+	can access Gtk and Gnome structures like widgets directly and
+	we don't need to implement a rather complex interface.
+
+	Look at plugins/gmodule_plugin_howto for details about this
+	plugin interface.
+
+	* configure.in (--with-gmodule-plugins): New parameter to
+	enable the new GModule Plugins. Disabled by default. If
+	enabled, AC_DEFINE(WITH_GMODULE_PLUGINS).
+	(WITH_GMODULE_PLUGINS): New automake conditional.
+
+	Changes to existing code:
+	
+	* gE_plugin_api.c (start_plugin): Call gE_Plugin_Load () for
+ 	plugins of type PLUGIN_GMODULE.
+
+	* plugin.h (PluginType): Added `PLUGIN_GMODULE'.
+	(plugin_info): Added `user_data' which is a gpointer.
+
+	* gedit.c (prog_init, main): Call gE_Plugin_Query_All ().
+
+	Newly added files:
+
+	* gE_plugin.h: This is installed in `$(includedir)/gedit' and is
+	included both in GEdit and the plugins.
+	(gE_Plugin_Info): New struct typedef.
+	(gE_Plugin_Object): New struct typedef.
+
+	* gE_plugin.c (gE_Plugin_Query_All): This is used to read all plugin
+	description files and add the plugins to the Plugins menu.
+	(gE_Plugin_Query): Query a single plugin and call gE_Plugin_Register
+	on it, but do not load it into memory.
+	(gE_Plugin_Register): This sets up a plugin_info structure for the
+	plugin ans calls gE_plugin_program_register () so it will be added
+	to the Plugins menu.
+	(gE_Plugin_Load): Actually read a plugin into memory and call its
+	init function.
+
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
 	* src/plugin.h (plugin_document_callbacks): Added

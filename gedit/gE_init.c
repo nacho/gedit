@@ -23,6 +23,9 @@
 #include "gE_files.h"
 #include "gE_document.h"
 #include "gE_plugin_api.h"
+#ifdef WITH_GMODULE_PLUGINS
+#include "gE_plugin.h"
+#endif
 #include "msgbox.h"
 
 extern GList *plugins;
@@ -92,7 +95,9 @@ void prog_init(char **file)
 	callbacks.program.reg = gE_plugin_program_register;
 	
 	plugin_query_all (&callbacks);
-	
+#ifdef WITH_GMODULE_PLUGINS
+	gE_Plugin_Query_All ();
+#endif
 }
 
 /* the end */

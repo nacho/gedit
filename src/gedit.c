@@ -35,9 +35,12 @@
 #include "gE_plugin_api.h"
 #include "msgbox.h"
 
+#ifdef WITH_GMODULE_PLUGINS
+#include <gE_plugin.h>
+#endif
+
 GList *window_list;
 extern GList *plugins;
-
 
 void setup_callbacks( plugin_callback_struct *callbacks )
 {
@@ -127,6 +130,10 @@ void prog_init(char **file)
 	setup_callbacks (&callbacks);
 	
 	plugin_query_all (&callbacks);
+
+#ifdef WITH_GMODULE_PLUGINS
+	gE_Plugin_Query_All ();
+#endif
 	
 }
 
@@ -296,8 +303,11 @@ int main (int argc, char **argv)
 	setup_callbacks (&callbacks);
 	
 	plugin_query_all (&callbacks);
-	
 
+#ifdef WITH_GMODULE_PLUGINS
+	gE_Plugin_Query_All ();
+#endif
+	
 	gtk_main ();
 	return 0;
 }
