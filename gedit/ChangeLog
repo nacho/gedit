@@ -1,3 +1,13 @@
+2002-01-22  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* gedit-file.c:  Fixed a bug where after opening one of the recent
+	documents, garbage would appear on the status bar.  This was caused
+	by gedit_recent_add() freeing the uri before we were done with it.
+
+	* gedit-mdi.c:  Fixed calls to bonobo_ui_engine_xml_set_prop (it
+	previously would not compile).
+	* gedit-menus.c:  ditto
+
 2002-01-22  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-view.c (gedit_view_doc_readonly_changed_handler):

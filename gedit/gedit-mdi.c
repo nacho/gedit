@@ -339,7 +339,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	if (!gedit_settings->toolbar_visible)
 	{
 		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-				"hidden", "1");
+				"hidden", "1", "1");
 		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
 
 		return;
@@ -348,12 +348,12 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	bonobo_ui_engine_freeze (ui_engine);
 
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-				"hidden", "0");
+				"hidden", "0", "0");
 	if (ret != BONOBO_UI_ERROR_OK) 
 		goto error;
 
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-					"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0");
+					"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0", "0");
 
 	if (ret != BONOBO_UI_ERROR_OK) 
 		goto error;
@@ -376,7 +376,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			{			
 				gedit_debug (DEBUG_MDI, "SYSTEM: BOTH");
 				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "both");
+						"look", "both", "both");
 				if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
 			
@@ -385,7 +385,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			{
 				gedit_debug (DEBUG_MDI, "SYSTEM: ICONS");
 				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "icons");
+						"look", "icons", "icons");
 				if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
 			}
@@ -393,7 +393,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 		case GEDIT_TOOLBAR_ICONS:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "icon");
+						"look", "icon", "icon");
 			if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
 
@@ -401,7 +401,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_AND_TEXT");
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "both");
+						"look", "both", "both");
 			if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
 			break;
@@ -434,7 +434,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	g_return_if_fail (ui_engine != NULL);
 
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
-				"hidden", gedit_settings->statusbar_visible ? "0" : "1");
+				"hidden", gedit_settings->statusbar_visible ? "0" : "1", "0");
 	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
 
 	cp = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "CursorPosition"));
@@ -462,13 +462,13 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	    !gedit_settings->statusbar_view_overwrite_mode)
 	{
 		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
-				"resize_grip", "1");
+				"resize_grip", "1", "1");
 		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
 	}
 	else
 	{
 		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
-				"resize_grip", "0");
+				"resize_grip", "0", "0");
 		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);	
 	}	
 }

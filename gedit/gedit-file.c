@@ -477,10 +477,11 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 	gedit_recent_add (uri);
 	gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
+
 	
 	g_free (uri);
 
-	gedit_debug (DEBUG_FILE, "END");
+	gedit_debug (DEBUG_FILE, "END: %s\n", file_name);
 
 	return TRUE;
 }
@@ -1084,17 +1085,23 @@ gboolean
 gedit_file_open_recent (GeditMDIChild *child, const gchar* uri)
 {
 	gboolean ret;
+	gchar *temp_uri;
+
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
+
+	/* we need to do this to avoid gedit_recent_add() freeing our uri */
+	temp_uri = g_strdup (uri);
 	
-	ret = gedit_file_open_real (uri, child);
+	ret = gedit_file_open_real (temp_uri, child);
 
 	if (ret)
 	{
-		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
-		g_print ("* %s\t", t);
+		gchar* t = gnome_vfs_x_format_uri_for_display (temp_uri);
 		gedit_utils_flash_va (_("Loaded file %s"), t);
 		g_free (t);
 	}
+
+	g_free (temp_uri);
 
 	gedit_debug (DEBUG_FILE, "END");
 

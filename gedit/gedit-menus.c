@@ -124,7 +124,7 @@ gedit_menus_set_verb_sensitive (BonoboUIEngine* ui_engine, gchar* cname, gboolea
 	g_return_if_fail (BONOBO_IS_UI_ENGINE (ui_engine));
 	g_return_if_fail (cname != NULL);
 
-	bonobo_ui_engine_xml_set_prop (ui_engine, cname, "sensitive", sensitive ? "1" : "0");
+	bonobo_ui_engine_xml_set_prop (ui_engine, cname, "sensitive", sensitive ? "1" : "0", "1");
 }
 
 void
@@ -135,6 +135,6 @@ gedit_menus_set_verb_list_sensitive (BonoboUIEngine* ui_engine, gchar** vlist, g
 
 	for ( ; *vlist; ++vlist)
 	{
-		bonobo_ui_engine_xml_set_prop (ui_engine, *vlist, "sensitive", sensitive ? "1" : "0");
+		bonobo_ui_engine_xml_set_prop (ui_engine, *vlist, "sensitive", sensitive ? "1" : "0", "1");
 	}
 }
