@@ -316,14 +316,14 @@ void start_plugin( GtkWidget *widget, gchar *name, gE_data *data )
 
 void start_diff( GtkWidget *widget, gE_data *data )
 {
-  start_plugin( widget, BINDIR "/diff-plugin", data );
+  start_plugin( widget, PLUGINDIR "/diff-plugin", data );
 }
 void start_cvsdiff( GtkWidget *widget, gE_data *data )
 {
-  start_plugin( widget, BINDIR "/cvsdiff-plugin", data );
+  start_plugin( widget, PLUGINDIR "/cvsdiff-plugin", data );
 }
 void start_reverse( GtkWidget *widget, gE_data *data )
 {
-  start_plugin( widget, BINDIR "/reverse-plugin", data );
+  start_plugin( widget, PLUGINDIR "/reverse-plugin", data );
 }
 #endif

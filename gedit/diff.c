@@ -55,8 +55,11 @@ int main( int argc, char *argv[] )
   GtkWidget *hbox;
   GtkWidget *button;
   GtkWidget *dialog;
+  client_info info;
 
-  context = client_init( &argc, &argv );
+  info.menu_location = "[Plugins]Diff";
+
+  context = client_init( &argc, &argv, &info );
   
   gtk_init( &argc, &argv );
 

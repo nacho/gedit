@@ -9,7 +9,11 @@ EXTRA_DIST = KNOWNBUGS ChangeLog README INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.
 
 man_MANS = gedit.1
 
-bin_PROGRAMS = gedit diff-plugin cvsdiff-plugin reverse-plugin
+plugindir = $(prefix)/share/go/plugins
+
+bin_PROGRAMS = gedit
+
+plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin
 
 gedit_SOURCES = 	\
 	gedit.c		\
@@ -60,4 +64,5 @@ sys_DATA = gedit.desktop
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
-        -DDATADIR=\""$(datadir)"\"
+        -DDATADIR=\""$(datadir)"\" \
+	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\"

@@ -35,8 +35,11 @@ int main( int argc, char *argv[] )
   int docid;
   int length;
   int context;
+  client_info info;
 
-  context = client_init( &argc, &argv );
+  info.menu_location = "[Plugins]CVS Diff";
+
+  context = client_init( &argc, &argv, &info );
 
   docid = client_document_current( context );
   filename = client_document_filename( docid );

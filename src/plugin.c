@@ -18,8 +18,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <dirent.h>
 
-plugin *plugin_new( gchar *plugin_name )
+static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
+
+plugin *plugin_new_with_param( gchar *plugin_name, gboolean query )
 {
   int toline[2]; /* Commands to the plugin. */
   int fromline[2]; /* Commands from the plugin. */
@@ -53,7 +57,19 @@ plugin *plugin_new( gchar *plugin_name )
       g_snprintf( argv[3], 15, "%d", fromline[1] );
       argv[4] = g_malloc0( 15 );
       g_snprintf( argv[4], 15, "%d", dataline[0] );
-      argv[5] = NULL;
+      if ( query )
+	{
+	  argv[5] = g_strdup( "--query" );
+	  argv[6] = NULL;
+	}
+      else
+	argv[5] = NULL;
+      if ( *plugin_name != '/' )
+	{
+	  gchar *temp = plugin_name;
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
+	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	}
       execv(plugin_name, argv);
       /* This is only reached if something goes wrong. */
       _exit( 1 );
@@ -70,6 +86,30 @@ plugin *plugin_new( gchar *plugin_name )
   close( fromline[1] );
   close( dataline[0] );
   return new_plugin;
+}
+
+plugin *plugin_new( gchar *plugin_name )
+{
+  return plugin_new_with_param( plugin_name, FALSE );
+}
+
+plugin *plugin_query( gchar *plugin_name )
+{
+  return plugin_new_with_param( plugin_name, TRUE );
+}
+
+void plugin_query_all( plugin_callback_struct *callbacks )
+{
+  DIR *dir = opendir( PLUGINDIR );
+  struct dirent *direntry;
+  while( direntry = readdir( dir ) )
+    {
+      plugin *plug;
+      plug = plugin_query( direntry->d_name );
+      plug->callbacks = *callbacks;
+      plugin_get_all( plug, 1, process_command, NULL );
+    }
+  closedir( dir );
 }
 
 void plugin_finish( plugin *the_plugin )
@@ -110,6 +150,12 @@ void plugin_send_data_with_length( plugin *plug, gchar *buffer, gint length )
 {
   plugin_send_data_int( plug, length );
   plugin_send_data( plug, buffer, length );
+}
+
+void plugin_send_data_bool( plugin *the_plugin, gboolean bool)
+{
+  unsigned char ch = bool ? 1 : 0;
+  write( the_plugin->pipe_data, &ch, sizeof( ch ) );
 }
 
 void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
@@ -162,11 +208,10 @@ void plugin_get_all( plugin *plug, gint length, plugin_callback *finished, gpoin
   partly->data = data;
 }
 
-static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
-
 static void process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 {
   gint next = GPOINTER_TO_INT( data );
+  plugin_info *info;
   switch( next )
     {
     case 1:
@@ -197,7 +242,7 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 6:
-      if ( plug->callbacks.document.current )
+     if ( plug->callbacks.document.current )
 	plugin_send_data_int( plug, plug->callbacks.document.current( *( (int *) buffer ) ) );
       else
 	plugin_send_data_int( plug, 0 );
@@ -220,6 +265,7 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
       break;
     case 9:
     case 13:
+    case 15:
       plugin_get_all( plug, *( (int *) buffer ), process_next, GINT_TO_POINTER( next + 1 ) );
       break;
     case 10:
@@ -234,6 +280,34 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
 	plugin_send_data_int( plug, plug->callbacks.document.open( plug->docid, buffer ) );
       else
 	plugin_send_data_int( plug, 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 16:
+      if ( plug->callbacks.program.reg )
+	{
+	  if( buffer[0] != '[' )
+	    {
+	      plugin_get_all( plug, 1, process_command, NULL );
+	      break;
+	    }
+	  buffer ++;
+	  if ( strchr( buffer, ']' ) == 0 )
+	    {
+	      plugin_get_all( plug, 1, process_command, NULL );
+	      break;
+	    }
+	  *strchr( buffer, ']' ) = 0;
+	  if ( strcmp( buffer, "Plugins" ) )
+	    {
+	      plugin_get_all( plug, 1, process_command, NULL );
+	      break;
+	    }
+	  info = g_malloc0( sizeof( plugin_info ) );
+	  info->type = PLUGIN_STANDARD;
+	  info->menu_location = buffer + strlen( buffer ) + 1;
+	  info->plugin_name = plug->name;
+	  plug->callbacks.program.reg( info );
+	}
       plugin_get_all( plug, 1, process_command, NULL );
       break;
      }
@@ -267,6 +341,16 @@ static void process_command( plugin *plug, gchar *buffer, int length, gpointer d
     case 'd':
       plugin_finish( plug );
       g_free( plug );
+      break;
+    case 'q':
+      if ( plug->callbacks.program.quit )
+	plugin_send_data_bool( plug, plug->callbacks.program.quit() );
+      else
+	plugin_send_data_bool( plug, FALSE );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 'r':
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 15 ) );
       break;
     }
 }

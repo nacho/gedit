@@ -22,7 +22,12 @@
 
 #include <glib.h>
 
-gint client_init( gint *argc, gchar **argv[] );
+typedef struct
+{
+  gchar *menu_location;
+} client_info;
+
+gint client_init( gint *argc, gchar **argv[], client_info *info );
 gint client_document_current( gint context );
 gchar *client_document_filename( gint docid );
 gint client_document_new( gint context, gchar *title );
@@ -31,5 +36,6 @@ void client_text_append( gint docid, gchar *buff, gint length );
 void client_document_show( gint docid );
 void client_finish( gint context );
 gchar *client_text_get( gint docid );
+gboolean client_program_quit();
 
 #endif

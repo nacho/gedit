@@ -19,6 +19,15 @@
 #include <unistd.h>
 #include <glib.h>
 
+typedef enum { PLUGIN_STANDARD } PluginType;
+
+typedef struct
+{
+  gchar *menu_location;
+  gchar *plugin_name;
+  PluginType type;
+} plugin_info;
+
 typedef struct
 {
   gint (*create) ( gint context, gchar *title );
@@ -36,8 +45,15 @@ typedef struct
 
 typedef struct
 {
+  gboolean (*quit) ();
+  void (*reg) ( plugin_info *info );
+} plugin_program_callbacks;
+
+typedef struct
+{
   plugin_document_callbacks document;
   plugin_text_callbacks text;
+  plugin_program_callbacks program;
 } plugin_callback_struct;
 
 typedef struct
@@ -55,6 +71,8 @@ typedef struct
 typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );
 
 plugin *plugin_new( gchar * );
+plugin *plugin_query( gchar * );
+void plugin_query_all( plugin_callback_struct * );
 void plugin_send( plugin *, gchar *, gint length );
 void plugin_send_int( plugin *, gint );
 void plugin_send_data( plugin *, gchar *, gint length );

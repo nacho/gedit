@@ -37,6 +37,20 @@ static int getnumber( int fd )
   return number;
 }
 
+static gboolean getbool( int fd )
+{
+  unsigned char number = 0;
+  int length = 1;
+  if ( read( fd, &number, 1 ) )
+    {
+#ifdef DEBUG
+      printf( "To: %s\n", number ? "TRUE" : "FALSE" );
+#endif
+      return number;
+    }
+  else return TRUE;
+}
+
 static void putnumber( int fd, int number )
 {
   write( fd, &number, sizeof( number ) );
@@ -49,7 +63,7 @@ static int fd;
 static int fdsend;
 static int fddata;
 
-gint client_init( gint *argc, gchar **argv[] )
+gint client_init( gint *argc, gchar **argv[], client_info *info )
 {
 
   if( *argc < 5 || strcmp( (*argv)[1], "-go" ) )
@@ -58,14 +72,30 @@ gint client_init( gint *argc, gchar **argv[] )
       _exit(1);
     }
 
-  if( *argc > 5 && ! strcmp( (*argv)[5], "-query" ) )
-    {
-      
-    }
-
   fd = atoi( (*argv)[2] );
   fdsend = atoi( (*argv)[3] );
   fddata = atoi( (*argv)[4] );
+
+  if( *argc > 5 && ! strcmp( (*argv)[5], "--query" ) )
+    {
+      if( info->menu_location )
+	{
+	  write( fdsend, "r", 1 );
+#ifdef DEBUG
+	  printf( "From: r\n" );
+#endif
+	  putnumber( fdsend, strlen( info->menu_location ) );
+	  write( fdsend, info->menu_location, strlen( info->menu_location ) );
+#ifdef DEBUG
+	  printf( "From: %s\n", info->menu_location );
+#endif	  
+	}
+      write( fdsend, "d", 1 );
+#ifdef DEBUG
+      printf( "From: d\n" );
+#endif
+      exit( 0 );
+    }
 
   return getnumber( fd );
 }
@@ -177,3 +207,12 @@ void client_finish( gint context )
   write( fdsend, "d", 1 );
 }
 
+/* Returns true if program actually quit. */
+gboolean client_program_quit()
+{
+#ifdef DEBUG
+  printf( "From: q\n" );
+#endif
+  write( fdsend, "q", 1 );
+  return getbool( fddata );
+}

@@ -29,8 +29,11 @@ int main( int argc, char *argv[] )
   int context;
   int i;
   gchar *buff;
+  client_info info;
 
-  context = client_init( &argc, &argv );
+  info.menu_location = "[Plugins]Reverse";
+
+  context = client_init( &argc, &argv, &info );
 
   docid = client_document_current( context );
   length = strlen( buff = client_text_get( docid ) );
