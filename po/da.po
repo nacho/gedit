@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
-"PO-Revision-Date: 1999-09-03 22:33+0100\n"
+"POT-Creation-Date: 1999-10-09 00:37+0200\n"
+"PO-Revision-Date: 1999-10-09 00:53+02:00\n"
 "Last-Translator: Kenneth Christiansen <kenneth@ripen.dk>\n"
 "Language-Team: Dansk/Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -16,20 +16,11 @@ msgstr ""
 
 #: editor-plugins/email.c:89
 msgid "The gEdit Email Plugin"
-msgstr "gEdit epost tillæg"
+msgstr "gEdit epost indplug"
 
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
-msgstr "gEdit Webbrowser tillæg"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Docid er %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Skal"
+msgstr "gEdit webbrowser indplug"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -88,40 +79,11 @@ msgstr "Med særlig tak til:"
 
 #: src/gE_about.c:47
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "Ophavsret (C) 1998, 1999 Alex Roberts og Evan Lawrence"
+msgstr "(C) 1998, 1999 Alex Roberts og Evan Lawrence"
 
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit er en lille og hurtig teksteditor for GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Klip"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Kopier"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Indsæt"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Gem"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Luk"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Udskriv"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Åbn (ombyt) .c/.h fil"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -166,7 +128,7 @@ msgstr " '%s' er blevet ændret. Ønsker du at gemme det?"
 #: src/gE_prefs_box.c:540 src/gE_prefs_box.c:595 src/gE_prefs_box.c:596
 #: src/menus.c:266
 msgid "_Plugins"
-msgstr "_Tillæg"
+msgstr "Ind_Plug"
 
 #: src/gE_prefs_box.c:102
 msgid "Default"
@@ -174,11 +136,11 @@ msgstr "Standard"
 
 #: src/gE_prefs_box.c:103
 msgid "Notebook"
-msgstr "Notesblok"
+msgstr "Notesbog"
 
 #: src/gE_prefs_box.c:104
 msgid "Toplevel"
-msgstr ""
+msgstr "Toplag"
 
 #: src/gE_prefs_box.c:105
 msgid "Modal"
@@ -235,11 +197,11 @@ msgstr "Vælg..."
 #. Print COmmand
 #: src/gE_prefs_box.c:459
 msgid "Print Command"
-msgstr "Printer kommando"
+msgstr "Printerkommando"
 
 #: src/gE_prefs_box.c:511
 msgid "Plugin Selector"
-msgstr "Tillægsvælger"
+msgstr "Indplugsvælger"
 
 #: src/gE_prefs_box.c:626
 msgid "Name"
@@ -252,11 +214,11 @@ msgstr "Placering"
 #. Plugins Settings
 #: src/gE_prefs_box.c:633 src/gE_prefs_box.c:932
 msgid "Plugins"
-msgstr "Tillæg"
+msgstr "Indplug"
 
 #: src/gE_prefs_box.c:646
 msgid "Use Plugins"
-msgstr "Anvend tillæg"
+msgstr "Anvend indplug"
 
 #: src/gE_prefs_box.c:712
 msgid "Add"
@@ -311,7 +273,11 @@ msgstr "Vindue"
 msgid "Document"
 msgstr "Dokument"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Udskriv"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -320,21 +286,25 @@ msgstr ""
 "Indtast printerkommando her\n"
 "Husk at tilføje '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Printerkommando:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Udskriv alligevel"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Gem, udskriv så "
 
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr "Annuller"
+
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
-msgstr "Aktiver en plugin ved start"
+msgstr "Aktiver et indplug ved start"
 
 #: src/gedit.c:116
 msgid "PLUGIN-NAME"
@@ -346,7 +316,7 @@ msgstr "_Autoindryk"
 
 #: src/menus.c:67
 msgid "Status_bar"
-msgstr "Statuslinie"
+msgstr "Statusli_nie"
 
 #: src/menus.c:68
 msgid "_Wordwrap"
@@ -393,7 +363,7 @@ msgstr "Unavngivet"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
@@ -459,7 +429,7 @@ msgstr "Ingen rullebjælke"
 
 #: src/menus.c:154
 msgid "_Always"
-msgstr "_Altid"
+msgstr "A_ltid"
 
 #: src/menus.c:155
 msgid "Always have the scrollbar"
@@ -467,7 +437,7 @@ msgstr "Rullebjælken skal altid være der"
 
 #: src/menus.c:158
 msgid "_Automatic"
-msgstr "A_utomatisk"
+msgstr "_Automatisk"
 
 #: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
@@ -574,57 +544,71 @@ msgstr "Spørg før erstatning"
 msgid "Replace?"
 msgstr "Erstat?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Ny"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Gem"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Åbn"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Luk"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Åbn en fil"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Åbn (ombyt) .c/.h fil"
 
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Gem den aktuelle fil"
+#~ msgid "Docid is %ld.\n"
+#~ msgstr "Docid er %ld.\n"
 
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Luk den aktuelle fil"
+#~ msgid "Shell"
+#~ msgstr "Skal"
 
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Udskriv den aktuelle fil"
+#~ msgid "Cut"
+#~ msgstr "Klip"
 
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Klip det markerede"
+#~ msgid "Copy"
+#~ msgstr "Kopier"
 
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Kopier det markerede"
+#~ msgid "Paste"
+#~ msgstr "Indsæt"
 
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Indsæt fra udklipsbord"
+#~ msgid "New"
+#~ msgstr "Ny"
 
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Find"
+#~ msgid "Open"
+#~ msgstr "Åbn"
 
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Søg efter en tekst"
+#~ msgid "Open a file"
+#~ msgstr "Åbn en fil"
 
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "afslut"
+#~ msgid "Save the current file"
+#~ msgstr "Gem den aktuelle fil"
 
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Afslut programmet"
+#~ msgid "Close the current file"
+#~ msgstr "Luk den aktuelle fil"
+
+#~ msgid "Print the current file"
+#~ msgstr "Udskriv den aktuelle fil"
+
+#~ msgid "Cut the selection"
+#~ msgstr "Klip det markerede"
+
+#~ msgid "Copy the selection"
+#~ msgstr "Kopier det markerede"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "Indsæt fra udklipsbord"
+
+#~ msgid "Find"
+#~ msgstr "Find"
+
+#~ msgid "Search for a string"
+#~ msgstr "Søg efter en tekst"
+
+#~ msgid "Exit"
+#~ msgstr "afslut"
+
+#~ msgid "Exit the program"
+#~ msgstr "Afslut programmet"
 
 #~ msgid "Font"
 #~ msgstr "Skrifttype"
