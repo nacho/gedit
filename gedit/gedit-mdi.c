@@ -139,8 +139,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 {
 	gedit_debug (DEBUG_MDI, "START");
 
-	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit-2", "gedit", 
-			      gedit_settings->mdi_tabs_position);
+	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit-2", "gedit");
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
 
@@ -149,8 +148,6 @@ gedit_mdi_init (GeditMDI  *mdi)
 	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), GEDIT_UI_DIR "gedit-ui.xml", gedit_verbs);
 	
 	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
-
-	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (mdi), "top_window_created",
@@ -171,8 +168,10 @@ gedit_mdi_init (GeditMDI  *mdi)
 	g_signal_connect (G_OBJECT (mdi), "view_changed",
 			  G_CALLBACK (gedit_mdi_view_changed_handler), NULL);
 
-	g_signal_connect (G_OBJECT (mdi), "destroy",
+	
+	g_signal_connect (G_OBJECT (mdi), "all_windows_destroyed",
 			  G_CALLBACK (gedit_file_exit), NULL);
+			  
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -191,9 +190,9 @@ gedit_mdi_finalize (GObject *object)
 	g_return_if_fail (GEDIT_IS_MDI (mdi));
 	g_return_if_fail (mdi->priv != NULL);
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
 	g_free (mdi->priv);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -459,7 +458,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
 	BonoboUIComponent *ui_component;
 	GConfClient *client;
-	gboolean labels;
+	gchar *style = NULL;
 
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -519,25 +518,19 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			if (client == NULL) 
 				goto error;
 
-			labels = gconf_client_get_bool (client, 
-					"/desktop/gnome/interface/toolbar-labels", NULL);
+			style = gconf_client_get_string (client, 
+					"/desktop/gnome/interface/toolbar_style", NULL);
 
 			g_object_unref (G_OBJECT (client));
 			
-			if (labels)
-			{			
-				gedit_debug (DEBUG_MDI, "SYSTEM: BOTH");
-				bonobo_ui_component_set_prop (
-					ui_component, "/Toolbar", "look", "both", NULL);
-			
-			}
-			else
+			if (style != NULL)
 			{
-				gedit_debug (DEBUG_MDI, "SYSTEM: ICONS");
 				bonobo_ui_component_set_prop (
-					ui_component, "/Toolbar", "look", "icons", NULL);
+					ui_component, "/Toolbar", "look", style, NULL);
+			
+				g_free (style);
 			}
-	
+
 			break;
 			
 		case GEDIT_TOOLBAR_ICONS:
@@ -724,7 +717,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 			   drag_types, n_drag_types,
 			   GDK_ACTION_COPY);
 		
-	g_signal_connect (GTK_OBJECT (view), "drag_data_received",
+	g_signal_connect (G_OBJECT (view), "drag_data_received",
 			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
 			  NULL);
 
@@ -910,14 +903,14 @@ static
 void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 {
 	BonoboWindow *win;
-	GtkWidget* status;
-	GeditView *active_view;
+	GtkWidget *status;
+	GtkWidget *active_view;
 	
 	gedit_debug (DEBUG_MDI, "");
 
 	gedit_mdi_set_active_window_verbs_sensitivity (mdi);
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (mdi));
+	active_view = bonobo_mdi_get_active_view (mdi);
 		
 	win = bonobo_mdi_get_active_window (mdi);
 	g_return_if_fail (win != NULL);
@@ -928,13 +921,16 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 		gedit_view_set_overwrite_mode_statusbar (GEDIT_VIEW (old_view), NULL);
 	}
 
-	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	if (active_view == NULL)
+		return;
+
+	gtk_widget_grab_focus (active_view);
 
 	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
-	gedit_view_set_cursor_position_statusbar (active_view, status);
+	gedit_view_set_cursor_position_statusbar (GEDIT_VIEW (active_view), status);
 
 	status = g_object_get_data (G_OBJECT (win), "OverwriteMode");	
-	gedit_view_set_overwrite_mode_statusbar (active_view, status);
+	gedit_view_set_overwrite_mode_statusbar (GEDIT_VIEW (active_view), status);
 }
 
 void 

@@ -47,7 +47,6 @@ enum {
 static void gedit_mdi_child_class_init 	(GeditMDIChildClass	*klass);
 static void gedit_mdi_child_init	(GeditMDIChild 		*mdi);
 static void gedit_mdi_child_finalize 	(GObject 		*obj);
-static void gedit_mdi_child_destroy 	(GtkObject 		*obj);
 
 static void gedit_mdi_child_real_state_changed (GeditMDIChild* child);
 
@@ -98,19 +97,17 @@ static void
 gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 {
 	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass *object_class = GTK_OBJECT_CLASS (klass);
 
 	parent_class = g_type_class_peek_parent (klass);
 
   	gobject_class->finalize = gedit_mdi_child_finalize;
-	object_class->destroy = gedit_mdi_child_destroy;
 
 	klass->state_changed 		= gedit_mdi_child_real_state_changed;
 	klass->undo_redo_state_changed  = NULL;
   		
 	mdi_child_signals [STATE_CHANGED] =
 		g_signal_new ("state_changed",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
 			      G_STRUCT_OFFSET (GeditMDIChildClass, state_changed),
 			      NULL, NULL,
@@ -120,7 +117,7 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 
 	mdi_child_signals [UNDO_REDO_STATE_CHANGED] =
 		g_signal_new ("undo_redo_state_changed",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
 			      G_STRUCT_OFFSET (GeditMDIChildClass, undo_redo_state_changed),
 			      NULL, NULL,
@@ -138,11 +135,8 @@ gedit_mdi_child_init (GeditMDIChild  *child)
 	gedit_debug (DEBUG_MDI, "START");
 
 	child->priv = g_new0 (GeditMDIChildPrivate, 1);
-	/* TODO */
 
-	/* Probably not needed 
-	bonobo_mdi_child_set_menu_template (BONOBO_MDI_CHILD (child), gedit_doc_menu);
-	*/
+	child->priv->tab_label = NULL;
 
 	gedit_debug (DEBUG_MDI, "END");
 }
@@ -161,35 +155,18 @@ gedit_mdi_child_finalize (GObject *obj)
 	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
 	g_return_if_fail (child->priv != NULL);
 
-	G_OBJECT_CLASS (parent_class)->finalize (obj);
+	if (child->document != NULL)
+		g_object_unref (G_OBJECT (child->document));
 
 	g_free (child->priv);
+	
+	G_OBJECT_CLASS (parent_class)->finalize (obj);
 
 	gedit_debug (DEBUG_MDI, "END");
 }
 
 static void 
-gedit_mdi_child_destroy (GtkObject *obj)
-{
-	GeditMDIChild *child;
-
-	gedit_debug (DEBUG_MDI, "");
-
-	g_return_if_fail (obj != NULL);
-	
-   	child = GEDIT_MDI_CHILD (obj);
-
-	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
-
-	gedit_debug (DEBUG_MDI, "Unref document...");
-	g_object_unref (G_OBJECT (child->document));
-	gedit_debug (DEBUG_MDI, "Unref document...DONE");
-
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);
-}
-
-static void gedit_mdi_child_real_state_changed (GeditMDIChild* child)
+gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 {
 	gchar* docname = NULL;
 	gchar* tab_name = NULL;

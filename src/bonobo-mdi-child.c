@@ -1,7 +1,7 @@
 /*
  * bonobo-mdi-child.c - implementation of a BonoboMDI object
  *
- * Copyright (C) 2001 Free Software Foundation
+ * Copyright (C) 2001-2002 Free Software Foundation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,15 +25,10 @@
 
 struct _BonoboMDIChildPrivate
 {
-	GtkObject	*parent;
+	GObject		*parent;
 
 	gchar 		*name;
-
 	GList 		*views;
-
-/*
-	BonoboUIInfo *menu_template;
-*/
 };
 
 enum {
@@ -43,7 +38,6 @@ enum {
 
 static void       bonobo_mdi_child_class_init       (BonoboMDIChildClass *klass);
 static void       bonobo_mdi_child_instance_init    (BonoboMDIChild *);
-static void       bonobo_mdi_child_destroy          (GtkObject *);
 static void       bonobo_mdi_child_finalize         (GObject *);
 
 static GtkWidget *bonobo_mdi_child_set_label        (BonoboMDIChild *, GtkWidget *, gpointer);
@@ -51,7 +45,7 @@ static GtkWidget *bonobo_mdi_child_create_view      (BonoboMDIChild *);
 
 static void bonobo_mdi_child_real_name_changed (BonoboMDIChild *child, gchar* old_name);
 
-static GtkObjectClass *parent_class = NULL;
+static GObjectClass *parent_class = NULL;
 static guint mdi_child_signals [LAST_SIGNAL] = { 0 };
 
 GType
@@ -74,7 +68,7 @@ bonobo_mdi_child_get_type (void)
         		(GInstanceInitFunc) bonobo_mdi_child_instance_init
       		};
 
-      		bonobo_mdi_child_type = g_type_register_static (GTK_TYPE_OBJECT,
+      		bonobo_mdi_child_type = g_type_register_static (G_TYPE_OBJECT,
                 				    "BonoboMDIChild",
                                        	 	    &our_info,
                                        		    0);
@@ -86,19 +80,15 @@ bonobo_mdi_child_get_type (void)
 static void 
 bonobo_mdi_child_class_init (BonoboMDIChildClass *klass)
 {
-	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	object_class = (GtkObjectClass*)klass;
 	gobject_class = (GObjectClass*)klass;
   
-	object_class->destroy = bonobo_mdi_child_destroy;
 	gobject_class->finalize = bonobo_mdi_child_finalize;
   
 	klass->create_view = NULL;
-	klass->create_menus = NULL;
 	klass->get_config_string = NULL;
 	klass->set_label = bonobo_mdi_child_set_label;
 
@@ -106,7 +96,7 @@ bonobo_mdi_child_class_init (BonoboMDIChildClass *klass)
 
   	mdi_child_signals[NAME_CHANGED] =
 		g_signal_new ("name_changed",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
                     	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
                     	      G_STRUCT_OFFSET (BonoboMDIChildClass, name_changed),
 			      NULL, NULL,
@@ -126,9 +116,6 @@ bonobo_mdi_child_instance_init (BonoboMDIChild *mdi_child)
 	mdi_child->priv->name = NULL;
 	mdi_child->priv->parent = NULL;
 	mdi_child->priv->views = NULL;
-
-	g_object_ref (G_OBJECT (mdi_child));
-	gtk_object_sink (GTK_OBJECT (mdi_child));
 }
 
 
@@ -143,18 +130,18 @@ bonobo_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *old_label, gpointe
 	g_return_val_if_fail (BONOBO_IS_MDI_CHILD (child), NULL);
 	g_return_val_if_fail (child->priv != NULL, NULL);
 
-	if (old_label) {
+	if (old_label != NULL) 
+	{
 		gtk_label_set_text (GTK_LABEL (old_label), child->priv->name);
 		return old_label;
 	}
-	else {
+	else 
+	{
 		GtkWidget *label;
 
 		label = gtk_label_new (child->priv->name);
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-		/*
-		gtk_widget_show (label);
-		*/
+		
 		return label;
 	}
 }
@@ -169,32 +156,18 @@ bonobo_mdi_child_finalize (GObject *obj)
 	mdi_child = BONOBO_MDI_CHILD (obj);
 	g_return_if_fail (mdi_child->priv != NULL);
 
-	g_free (mdi_child->priv->name);
-	mdi_child->priv->name = NULL;
-
-	g_free (mdi_child->priv);
-	mdi_child->priv = NULL;
-	
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize)(obj);
-}
-
-static void 
-bonobo_mdi_child_destroy (GtkObject *obj)
-{
-	BonoboMDIChild *mdi_child;
-
-	g_return_if_fail (BONOBO_IS_MDI_CHILD (obj));
-
-	mdi_child = BONOBO_MDI_CHILD (obj);
-	g_return_if_fail (mdi_child->priv != NULL);
-
 	while (mdi_child->priv->views)
 		bonobo_mdi_child_remove_view (mdi_child, 
 				GTK_WIDGET (mdi_child->priv->views->data));
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy)(obj);
+	if (mdi_child->priv->name != NULL)
+		g_free (mdi_child->priv->name);
+
+	if (mdi_child->priv != NULL)
+		g_free (mdi_child->priv);
+	
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize)(obj);
 }
 
 /**
@@ -220,10 +193,10 @@ bonobo_mdi_child_add_view (BonoboMDIChild *mdi_child)
 
 	view = bonobo_mdi_child_create_view (mdi_child);
 
-	if(view) {
+	if (view) {
 		mdi_child->priv->views = g_list_append (mdi_child->priv->views, view);
 
-		g_object_set_data (G_OBJECT(view), "BonoboMDIChild", mdi_child);
+		g_object_set_data (G_OBJECT (view), "BonoboMDIChild", mdi_child);
 	}
 
 	return view;
@@ -247,7 +220,7 @@ bonobo_mdi_child_remove_view (BonoboMDIChild *mdi_child, GtkWidget *view)
 
 	mdi_child->priv->views = g_list_remove (mdi_child->priv->views, view);
 
-	gtk_widget_unref (view);
+	g_object_unref (G_OBJECT (view));	
 }
 
 /**
@@ -282,26 +255,6 @@ bonobo_mdi_child_set_name (BonoboMDIChild *mdi_child, const gchar *name)
 	if (old_name)
 		g_free (old_name);
 }
-
-/**
- * bonobo_mdi_child_set_menu_template:
- * @mdi_child: A pointer to a BonoboMDIChild object.
- * @menu_tmpl: A BonoboUIInfo array describing the child specific menus.
- * 
- * Description:
- * Sets the template for menus that are added and removed when differrent
- * children get activated. This way, each child can modify the MDI menubar
- * to suit its needs. If no template is set, the create_menus virtual
- * function will be used for creating these menus (it has to return a
- * GList of menu items). If no such function is specified, the menubar will
- * be unchanged by MDI children.
- **/
-/* FIXME
-void bonobo_mdi_child_set_menu_template (BonoboMDIChild *mdi_child, BonoboUIInfo *menu_tmpl)
-{
-	mdi_child->menu_template = menu_tmpl;
-}
-*/
 
 static GtkWidget *
 bonobo_mdi_child_create_view (BonoboMDIChild *child)
@@ -343,18 +296,18 @@ bonobo_mdi_child_get_views (const BonoboMDIChild *mdi_child)
 	return mdi_child->priv->views;
 }
 
-GtkObject *
+GObject *
 bonobo_mdi_child_get_parent (const BonoboMDIChild *mdi_child)
 {
 	g_return_val_if_fail (BONOBO_IS_MDI_CHILD (mdi_child), NULL);
 	g_return_val_if_fail (mdi_child->priv != NULL, NULL);
 
-	return GTK_OBJECT (mdi_child->priv->parent);
+	return G_OBJECT (mdi_child->priv->parent);
 	
 }
 
 void
-bonobo_mdi_child_set_parent (BonoboMDIChild *mdi_child, GtkObject *parent)
+bonobo_mdi_child_set_parent (BonoboMDIChild *mdi_child, GObject *parent)
 {
 	g_return_if_fail (BONOBO_IS_MDI_CHILD (mdi_child));
 	g_return_if_fail (mdi_child->priv != NULL);

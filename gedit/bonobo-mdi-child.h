@@ -1,7 +1,7 @@
 /*
  * bonobo-mdi-child.h - definition of a BonoboMDI object
  *
- * Copyright (C) 2001 Free Software Foundation
+ * Copyright (C) 2001-2002 Free Software Foundation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ typedef struct _BonoboMDIChildPrivate BonoboMDIChildPrivate;
 
 typedef struct
 {
-	GtkObject object;
+	GObject object;
 
 	BonoboMDIChildPrivate *priv;
 } BonoboMDIChild;
@@ -66,11 +66,10 @@ typedef GtkWidget *(*BonoboMDIChildLabelFunc)   (BonoboMDIChild *, GtkWidget *, 
 
 typedef struct
 {
-	GtkObjectClass parent_class;
+	GObjectClass parent_class;
 
 	/* Virtual functions */
 	BonoboMDIChildViewCreator create_view;
-	BonoboMDIChildMenuCreator create_menus;
 	BonoboMDIChildConfigFunc  get_config_string;
 	BonoboMDIChildLabelFunc   set_label;
 
@@ -81,20 +80,19 @@ typedef struct
 GType         bonobo_mdi_child_get_type         (void) G_GNUC_CONST;
 
 GtkWidget    *bonobo_mdi_child_add_view   	(BonoboMDIChild *mdi_child);
-void          bonobo_mdi_child_remove_view      (BonoboMDIChild *mdi_child, GtkWidget *view);
+void          bonobo_mdi_child_remove_view      (BonoboMDIChild *mdi_child, 
+						 GtkWidget *view);
 
 GList        *bonobo_mdi_child_get_views        (const BonoboMDIChild *mdi_child);
 
-void          bonobo_mdi_child_set_name         (BonoboMDIChild *mdi_child, const gchar *name);
+void          bonobo_mdi_child_set_name         (BonoboMDIChild *mdi_child, 
+						 const gchar *name);
 gchar        *bonobo_mdi_child_get_name         (const BonoboMDIChild *mdi_child);
 
-void          bonobo_mdi_child_set_parent       (BonoboMDIChild *mdi_child, GtkObject *parent);
-GtkObject    *bonobo_mdi_child_get_parent       (const BonoboMDIChild *mdi_child);
+void          bonobo_mdi_child_set_parent       (BonoboMDIChild *mdi_child, 
+						 GObject *parent);
+GObject      *bonobo_mdi_child_get_parent       (const BonoboMDIChild *mdi_child);
 
-
-/*
-void          bonobo_mdi_child_set_menu_template(BonoboMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
-*/
 G_END_DECLS
 
 #endif /* _BONOBO_MDI_CHILD_H_ */

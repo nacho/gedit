@@ -106,6 +106,8 @@ gedit_file_close (GtkWidget *view)
 		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 		gedit_mdi_clear_active_window_statusbar (gedit_mdi);
 	}
+
+	gedit_debug (DEBUG_FILE, "END");
 }
 
 void
@@ -406,12 +408,6 @@ gedit_file_exit (void)
 		return;
 
 	gedit_debug (DEBUG_FILE, "All files closed.");
-	
-	/* We need to disconnect the signal because mdi "destroy" event
-	   is connected to gedit_file_exit ( i.e. this function ). */
-	g_signal_handlers_disconnect_by_func (
-			G_OBJECT (gedit_mdi),
-			G_CALLBACK (gedit_file_exit), NULL);
 	
 	gedit_plugins_engine_save_settings ();
 	

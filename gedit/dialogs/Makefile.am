@@ -22,6 +22,10 @@ libdialogs_a_SOURCES = 			\
 	gedit-preferences-dialog.c	\
 	gedit-dialog-plugin-manager.c	\
 	gedit-plugin-program-location-dialog.c \
+	gnome-print-font-picker.c	\
+	gnome-print-font-picker.h	\
+	gnome-print-font-dialog.c	\
+	gnome-print-font-dialog.h	\
 	gedit-dialogs.h		
 
 glade_DATA =				\

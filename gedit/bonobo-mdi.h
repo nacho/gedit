@@ -2,7 +2,7 @@
 /*
  * bonobo-mdi.h - definition of a BonoboMDI object
  *
- * Copyright (C) 2001 Free Software Foundation
+ * Copyright (C) 2001-2002 Free Software Foundation
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,23 +39,16 @@
 #define BONOBO_IS_MDI_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), BONOBO_TYPE_MDI))
 #define BONOBO_MDI_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), BONOBO_TYPE_MDI, BonoboMDIClass))
 
-typedef enum {
-	BONOBO_MDI_NOTEBOOK = 0,
-	BONOBO_MDI_TOPLEVEL,
-	BONOBO_MDI_MODAL,
-	BONOBO_MDI_DEFAULT_MODE = 42
-} BonoboMDIMode;
-
 typedef struct _BonoboMDIPrivate BonoboMDIPrivate;
 
 typedef struct {
-	GtkObject object;
+	GObject 		 object;
 
-	BonoboMDIPrivate* priv;
+	BonoboMDIPrivate	*priv;
 } BonoboMDI;
 
 typedef struct {
-	GtkObjectClass parent_class;
+	GObjectClass 	parent_class;
 
 	/* Signals */
 	gboolean	(*add_child)		(BonoboMDI *mdi, BonoboMDIChild *child); 
@@ -65,6 +58,7 @@ typedef struct {
 	void 		(*child_changed)	(BonoboMDI *mdi, BonoboMDIChild *child);
 	void 		(*view_changed)		(BonoboMDI *mdi, GtkWidget *view);
 	void 		(*top_window_created)	(BonoboMDI *mdi, BonoboWindow *window);
+	void		(*all_windows_destroyed)(BonoboMDI *mdi);
 } BonoboMDIClass;
 
 /*
@@ -101,43 +95,53 @@ typedef struct {
 
 GType         bonobo_mdi_get_type            	(void);
 
-GtkObject    *bonobo_mdi_new                	(const gchar *mdi_name, const gchar *title);
+GObject      *bonobo_mdi_new                	(const gchar *mdi_name, 
+						 const gchar *title);
 
-void 	      bonobo_mdi_construct (BonoboMDI *mdi, gchar* name, gchar* title, GtkPositionType tab_pos);
-
-void          bonobo_mdi_set_mode 		(BonoboMDI *mdi, BonoboMDIMode mode);
-BonoboMDIMode bonobo_mdi_get_mode 		(BonoboMDI *mdi);
+void 	      bonobo_mdi_construct 		(BonoboMDI *mdi, 
+						 const gchar *name, 
+						 const gchar *title);
 
 /* setting the ui template*/
-void          bonobo_mdi_set_ui_template	(BonoboMDI *mdi, const gchar *xml, BonoboUIVerb verbs[]);
-void          bonobo_mdi_set_ui_template_file	(BonoboMDI *mdi, const gchar *file_name, 
-									BonoboUIVerb verbs[]);
-/*
-void          bonobo_mdi_set_child_menu_path (BonoboMDI *mdi, const gchar *path);
-*/
-void          bonobo_mdi_set_child_list_path 	(BonoboMDI *mdi, const gchar *path);
+void          bonobo_mdi_set_ui_template	(BonoboMDI *mdi, 
+						 const gchar *xml, 
+						 BonoboUIVerb verbs[]);
+void          bonobo_mdi_set_ui_template_file	(BonoboMDI *mdi, 
+						 const gchar *file_name, 
+						 BonoboUIVerb verbs[]);
+
+void          bonobo_mdi_set_child_list_path 	(BonoboMDI *mdi, 
+						 const gchar *path);
 
 /* manipulating views */
-gboolean      bonobo_mdi_add_view            	(BonoboMDI *mdi, BonoboMDIChild *child);
-gboolean      bonobo_mdi_add_toplevel_view   	(BonoboMDI *mdi, BonoboMDIChild *child);
-gboolean      bonobo_mdi_remove_view         	(BonoboMDI *mdi, GtkWidget *view, gboolean force);
+gboolean      bonobo_mdi_add_view            	(BonoboMDI *mdi, 
+						 BonoboMDIChild *child);
+gboolean      bonobo_mdi_add_toplevel_view   	(BonoboMDI *mdi, 
+						 BonoboMDIChild *child);
+gboolean      bonobo_mdi_remove_view         	(BonoboMDI *mdi, 
+						 GtkWidget *view, 
+						 gboolean force);
 
 GtkWidget    *bonobo_mdi_get_active_view    	(BonoboMDI *mdi);
-void          bonobo_mdi_set_active_view     	(BonoboMDI *mdi, GtkWidget *view);
+void          bonobo_mdi_set_active_view     	(BonoboMDI *mdi, 
+						 GtkWidget *view);
 
 /* manipulating children */
-gint          bonobo_mdi_add_child           	(BonoboMDI *mdi, BonoboMDIChild *child);
-gint          bonobo_mdi_remove_child        	(BonoboMDI *mdi, BonoboMDIChild *child, gboolean force);
-gint          bonobo_mdi_remove_all          	(BonoboMDI *mdi, gboolean force);
+gint          bonobo_mdi_add_child           	(BonoboMDI *mdi, 
+						 BonoboMDIChild *child);
+gint          bonobo_mdi_remove_child        	(BonoboMDI *mdi, 
+						 BonoboMDIChild *child, 
+						 gboolean force);
+gint          bonobo_mdi_remove_all          	(BonoboMDI *mdi, 
+						 gboolean force);
 
 void          bonobo_mdi_open_toplevel       	(BonoboMDI *mdi);
-/*
-void          bonobo_mdi_update_child        (BonoboMDI *mdi, BonoboMDIChild *child);
-*/
-BonoboMDIChild *bonobo_mdi_get_active_child   (BonoboMDI *mdi);
-BonoboMDIChild *bonobo_mdi_find_child         (BonoboMDI *mdi, const gchar *name);
 
-BonoboWindow   *bonobo_mdi_get_active_window  (BonoboMDI *mdi);
+BonoboMDIChild *bonobo_mdi_get_active_child   	(BonoboMDI *mdi);
+BonoboMDIChild *bonobo_mdi_find_child         	(BonoboMDI *mdi, 
+						 const gchar *name);
+
+BonoboWindow   *bonobo_mdi_get_active_window  	(BonoboMDI *mdi);
 
 /*
  * the following two functions are here to make life easier if an application
@@ -148,35 +152,25 @@ BonoboWindow   *bonobo_mdi_get_active_window  (BonoboMDI *mdi);
  * other hand, closing the last MDI window when no objects are registered
  * with the MDI will result in MDI being gtk_object_destroy()ed.
  */
-void          bonobo_mdi_register            (BonoboMDI *mdi, GtkObject *object);
-void          bonobo_mdi_unregister          (BonoboMDI *mdi, GtkObject *object);
+void          bonobo_mdi_register            	(BonoboMDI *mdi, 
+						 GObject *object);
+void          bonobo_mdi_unregister          	(BonoboMDI *mdi, 
+						 GObject *object);
 
 /*
  * convenience functions for retrieveing BonoboMDIChild and BonoboApp
  * objects associated with a particular view and for retrieveing the
  * visible view of a certain BonoboWindow.
  */
-BonoboWindow      *bonobo_mdi_get_window_from_view    (GtkWidget *view);
-BonoboMDIChild    *bonobo_mdi_get_child_from_view     (GtkWidget *view);
-GtkWidget         *bonobo_mdi_get_view_from_window    (BonoboMDI *mdi, BonoboWindow *window);
+BonoboWindow		*bonobo_mdi_get_window_from_view    	(GtkWidget *view);
+BonoboMDIChild		*bonobo_mdi_get_child_from_view     	(GtkWidget *view);
+GtkWidget		*bonobo_mdi_get_view_from_window	(BonoboMDI *mdi, 
+								 BonoboWindow *window);
 
-/* the following functions are used to obtain pointers to the BonoboUIInfo
- * structures for a specified MDI BonoboApp widget. this might be useful for
- * enabling/disabling menu items (via ui_info[i]->widget) when certain events
- * happen or selecting the default menuitem in a radio item group. these
- * BonoboUIInfo structures are exact copies of the template BonoboUIInfo trees
- * and are non-NULL only if templates are used for menu/toolbar creation.
- */
-/*
-BonoboUIInfo   *bonobo_mdi_get_menubar_info     (BonoboApp *app);
-BonoboUIInfo   *bonobo_mdi_get_toolbar_info     (BonoboApp *app);
-BonoboUIInfo   *bonobo_mdi_get_child_menu_info  (BonoboApp *app);
-*/
+GList          		*bonobo_mdi_get_children		(BonoboMDI *mdi);
+GList          		*bonobo_mdi_get_windows			(BonoboMDI *mdi);
 
-GList          		*bonobo_mdi_get_children 			(BonoboMDI *mdi);
-GList          		*bonobo_mdi_get_windows				(BonoboMDI *mdi);
-
-BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window 	(BonoboWindow* win);
+BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow* win);
 
 #endif /* _BONOBO_MDI_H_ */
 

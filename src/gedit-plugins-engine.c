@@ -458,6 +458,9 @@ gedit_plugins_engine_update_plugins_ui (BonoboWindow* window, gboolean new_windo
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	g_return_if_fail (window != NULL);
+	g_return_if_fail (BONOBO_IS_WINDOW (window));
+
 	if (new_window)
 		gedit_plugins_engine_reactivate_all ();
 
@@ -487,6 +490,8 @@ gedit_plugins_engine_update_plugins_ui (BonoboWindow* window, gboolean new_windo
 	
 		pl = g_list_next (pl);
 	}
+
+	gedit_debug (DEBUG_PLUGINS, "END");
 }
 
 gboolean

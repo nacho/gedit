@@ -111,18 +111,19 @@ gedit_view_grab_focus (GtkWidget *widget)
 	gedit_debug (DEBUG_VIEW, "");
 	
 	view = GEDIT_VIEW (widget);
-	
+
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
 	
 	/* Try to have a visible cursor */
 
 	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
 	 * understand why it is not visible */
-	
+	/*
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", FALSE, NULL);
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
-	
+	*/
+
 }
 
 static void
@@ -147,7 +148,6 @@ gedit_view_class_init (GeditViewClass *klass)
   	object_class->finalize = gedit_view_finalize;
 	
 	GTK_WIDGET_CLASS (klass)->grab_focus = gedit_view_grab_focus;
-	
 }
 
 /* This function is taken from gtk+/tests/testtext.c */
@@ -351,6 +351,7 @@ gedit_view_init (GeditView  *view)
 	GtkTextView *text_view;
 	GtkWidget *sw; /* the scrolled window */
 	GdkColor background, text, selection, sel_text;
+	GList *focus_chain = NULL;
 
 	/* FIXME
 	static GtkWidget *popup_menu = NULL;
@@ -374,6 +375,11 @@ gedit_view_init (GeditView  *view)
 	text_view = GTK_TEXT_VIEW (gtk_text_view_new ());
 	g_return_if_fail (text_view != NULL);
 	view->priv->text_view = text_view;
+
+	focus_chain = g_list_append (focus_chain, sw);
+
+	gtk_container_set_focus_chain (GTK_CONTAINER (view), focus_chain);
+	g_list_free (focus_chain);
 
 	/*
 	 *  Set tab, fonts, wrap mode, colors, etc. according
@@ -406,9 +412,10 @@ gedit_view_init (GeditView  *view)
 	gtk_text_view_set_left_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 
-/*
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view), GTK_CAN_FOCUS);
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (sw), GTK_CAN_FOCUS);
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
-*/
+
 #if 0
 	/* FIXME */
 	/* Popup Menu */
@@ -431,10 +438,11 @@ gedit_view_finalize (GObject *object)
 {
 	GeditView *view;
 
-	gedit_debug (DEBUG_VIEW, "");
+	gedit_debug (DEBUG_VIEW, "%d", object->ref_count);
 
 	g_return_if_fail (object != NULL);
-	
+	g_return_if_fail (GEDIT_IS_VIEW (object));
+
    	view = GEDIT_VIEW (object);
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
@@ -447,6 +455,8 @@ gedit_view_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	g_free (view->priv);
+
+	gedit_debug (DEBUG_VIEW, "END");
 }
 
 
@@ -514,7 +524,7 @@ gedit_view_new (GeditDocument *doc)
 	gtk_text_view_set_editable (view->priv->text_view, !gedit_document_is_readonly (doc));	
 
 	
-	gedit_debug (DEBUG_VIEW, "END");
+	gedit_debug (DEBUG_VIEW, "END: %d", G_OBJECT (view)->ref_count);
 
 	return view;
 }

@@ -39,6 +39,8 @@
 #include "gedit-view.h"
 #include "gedit2.h"
 
+#include "gnome-print-font-picker.h"
+
 /* To be syncronized with gedit-preferences.glade2 */
 #define LOGO			6
 #define	TOOLBAR_SETTINGS  	0
@@ -136,6 +138,11 @@ struct _GeditPreferencesDialogPrivate
 	/* Line numbers page */
 	GtkWidget	*display_line_numbers_checkbutton;
 
+	/* Print/Fonts page */
+	GtkWidget	*body_fontpicker;
+	GtkWidget	*headers_fontpicker;
+	GtkWidget	*numbers_fontpicker;
+	GtkWidget	*restore_default_fonts_button;
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -194,7 +201,11 @@ static void gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggle
 static gboolean gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, 
 							          GladeXML *gui);
-
+static gboolean gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, 
+								 GladeXML *gui);
+static void gedit_preferences_dialog_print_font_restore_default_button_clicked (
+								GtkButton *button, 
+								GeditPreferencesDialog *dlg);
 
 static GtkDialogClass* parent_class = NULL;
 #if 0
@@ -560,6 +571,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_save_page (dlg, gui);
 	gedit_preferences_dialog_setup_page_page (dlg, gui);
 	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
+	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -1120,6 +1132,127 @@ gedit_preferences_dialog_setup_page_page (GeditPreferencesDialog *dlg, GladeXML 
 	return TRUE;
 }
 
+static void
+gedit_preferences_dialog_print_font_restore_default_button_clicked (
+		GtkButton *button, GeditPreferencesDialog *dlg)
+{
+	g_return_if_fail (dlg->priv->body_fontpicker != NULL);
+	g_return_if_fail (dlg->priv->headers_fontpicker != NULL);
+	g_return_if_fail (dlg->priv->numbers_fontpicker != NULL);
+
+	/* FIXME: define constants, or take them from schemas */
+	gnome_print_font_picker_set_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
+			"Courier 9");
+
+	gnome_print_font_picker_set_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
+			"Helvetica 11");
+
+	gnome_print_font_picker_set_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
+			"Helvetica 8");
+}
+
+static gboolean 
+gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{	
+	GtkWidget *print_fonts_table;
+	GtkWidget *body_font_label;
+	GtkWidget *headers_font_label;
+	GtkWidget *numbers_font_label;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	print_fonts_table = glade_xml_get_widget (gui, "print_fonts_table");
+	body_font_label = glade_xml_get_widget (gui, "body_font_label");
+	headers_font_label = glade_xml_get_widget (gui,	"headers_font_label");
+	numbers_font_label = glade_xml_get_widget (gui,	"numbers_font_label");
+	dlg->priv->restore_default_fonts_button = glade_xml_get_widget (gui, 
+ 			"restore_default_fonts_button");
+
+	g_return_val_if_fail (print_fonts_table != NULL, FALSE);
+	g_return_val_if_fail (body_font_label != NULL, FALSE);
+	g_return_val_if_fail (headers_font_label != NULL, FALSE);
+	g_return_val_if_fail (numbers_font_label != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->restore_default_fonts_button != NULL, FALSE);
+			
+	/* Body font picker */
+	dlg->priv->body_fontpicker = gnome_print_font_picker_new ();
+	gnome_print_font_picker_set_mode (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), 
+			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
+	
+	gnome_print_font_picker_fi_set_show_size (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), TRUE);
+
+	gnome_print_font_picker_fi_set_use_font_in_label (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), TRUE, 14);
+
+	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
+			dlg->priv->body_fontpicker, 1, 2, 0, 1);
+	
+	/* Headers font picker */
+	dlg->priv->headers_fontpicker = gnome_print_font_picker_new ();
+	gnome_print_font_picker_set_mode (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), 
+			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
+	
+	gnome_print_font_picker_fi_set_show_size (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), TRUE);
+	
+	gnome_print_font_picker_fi_set_use_font_in_label (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), TRUE, 14);
+
+	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
+			dlg->priv->headers_fontpicker, 1, 2, 1, 2);
+
+	/* Numbers font picker */
+	dlg->priv->numbers_fontpicker = gnome_print_font_picker_new ();
+	gnome_print_font_picker_set_mode (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), 
+			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
+	
+	gnome_print_font_picker_fi_set_show_size (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), TRUE);
+	
+	gnome_print_font_picker_fi_set_use_font_in_label (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), TRUE, 14);
+
+	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
+			dlg->priv->numbers_fontpicker, 1, 2, 2, 3);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (body_font_label), 
+				       dlg->priv->body_fontpicker);
+	
+	gtk_label_set_mnemonic_widget (GTK_LABEL (headers_font_label), 
+				       dlg->priv->headers_fontpicker);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (numbers_font_label), 
+				       dlg->priv->numbers_fontpicker);
+
+	if (gedit_settings->print_font_body)
+		gnome_print_font_picker_set_font_name (
+				GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
+						 gedit_settings->print_font_body);
+
+	if (gedit_settings->print_font_header)
+		gnome_print_font_picker_set_font_name (
+				GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
+						 gedit_settings->print_font_header);
+
+	if (gedit_settings->print_font_numbers)
+		gnome_print_font_picker_set_font_name (
+				GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
+						 gedit_settings->print_font_numbers);
+
+	g_signal_connect (G_OBJECT (dlg->priv->restore_default_fonts_button), "clicked",
+			  G_CALLBACK (gedit_preferences_dialog_print_font_restore_default_button_clicked),
+			  dlg);
+
+	return TRUE;
+}
+
 static gboolean 
 gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -1307,6 +1440,31 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	/* Tabs page */	
 	gedit_settings->tab_size =
 		gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton));
+
+	/* Print/fonts page */
+	font = gnome_print_font_picker_get_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker));		
+	if (font != NULL)
+	{
+		g_free (gedit_settings->print_font_body);
+		gedit_settings->print_font_body = g_strdup (font);
+	}
+
+	font = gnome_print_font_picker_get_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker));		
+	if (font != NULL)
+	{
+		g_free (gedit_settings->print_font_header);
+		gedit_settings->print_font_header = g_strdup (font);
+	}
+
+	font = gnome_print_font_picker_get_font_name (
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker));		
+	if (font != NULL)
+	{
+		g_free (gedit_settings->print_font_numbers);
+		gedit_settings->print_font_numbers = g_strdup (font);
+	}
 
 	return TRUE;
 #if 0	
