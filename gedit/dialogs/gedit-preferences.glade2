@@ -98,10 +98,10 @@
 
                         <child>
                           <widget class="GtkLabel" id="label87">
-                            <property name="label" translatable="yes">The toolbar settings let you customize the toolbar appearance.</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="label" translatable="yes">The toolbar settings let you show or hide toolbar and customize its appearance.</property>
+                            <property name="justify">GTK_JUSTIFY_LEFT</property>
                             <property name="wrap">yes</property>
-                            <property name="xalign">7.45058e-09</property>
+                            <property name="xalign">0.0</property>
                             <property name="yalign">7.45058e-09</property>
                             <property name="xpad">0</property>
                             <property name="ypad">0</property>
@@ -114,62 +114,22 @@
                           </packing>
                         </child>
 
-                        <child>
-                          <widget class="GtkFrame" id="frame13">
-                            <property name="label" translatable="yes">Visible</property>
-                            <property name="label_xalign">0</property>
-                            <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+		        <child>
+                          <widget class="GtkCheckButton" id="toolbar_show_checkbutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">_Show toolbar</property>
+                            <property name="active">yes</property>
+                            <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
-
-                            <child>
-                              <widget class="GtkVBox" id="vbox17">
-                                <property name="border_width">5</property>
-                                <property name="homogeneous">no</property>
-                                <property name="spacing">0</property>
-                                <property name="visible">yes</property>
-
-                                <child>
-                                  <widget class="GtkRadioButton" id="toolbar_show_radiobutton">
-                                    <property name="can_focus">yes</property>
-                                    <property name="label" translatable="yes">_Show</property>
-                                    <property name="active">yes</property>
-                                    <property name="draw_indicator">yes</property>
-                                    <property name="visible">yes</property>
-                                    <property name="use_underline">yes</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="padding">0</property>
-                                    <property name="expand">no</property>
-                                    <property name="fill">no</property>
-                                  </packing>
-                                </child>
-
-                                <child>
-                                  <widget class="GtkRadioButton" id="toolbar_hide_radiobutton">
-                                    <property name="can_focus">yes</property>
-                                    <property name="label" translatable="yes">Hi_de</property>
-                                    <property name="active">no</property>
-                                    <property name="draw_indicator">yes</property>
-                                    <property name="visible">yes</property>
-                                    <property name="use_underline">yes</property>
-                                    <property name="group">toolbar_show_radiobutton</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="padding">0</property>
-                                    <property name="expand">yes</property>
-                                    <property name="fill">yes</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                            </child>
+                            <property name="use_underline">yes</property>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
-                            <property name="expand">yes</property>
-                            <property name="fill">yes</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
                           </packing>
                         </child>
-
+		
                         <child>
                           <widget class="GtkFrame" id="toolbar_button_frame">
                             <property name="label" translatable="yes">Button style</property>
@@ -246,7 +206,7 @@
                         <child>
                           <widget class="GtkCheckButton" id="toolbar_tooltips_checkbutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">_View tooltips</property>
+                            <property name="label" translatable="yes">Sho_w tooltips</property>
                             <property name="active">yes</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
@@ -299,10 +259,10 @@
 
                 <child>
                   <widget class="GtkLabel" id="label91">
-                    <property name="label" translatable="yes">The statubar settings let you show or hide statusbar and customize its appearance.</property>
+                    <property name="label" translatable="yes">The status bar settings let you show or hide status bar and customize its appearance.</property>
                     <property name="justify">GTK_JUSTIFY_LEFT</property>
                     <property name="wrap">yes</property>
-                    <property name="xalign">7.45058e-09</property>
+                    <property name="xalign">0.0</property>
                     <property name="yalign">7.45058e-09</property>
                     <property name="xpad">0</property>
                     <property name="ypad">0</property>
@@ -315,25 +275,12 @@
                   </packing>
                 </child>
 
-                <child>
-                  <widget class="GtkFrame" id="frame4">
-                    <property name="label" translatable="yes">Visible</property>
-                    <property name="label_xalign">0</property>
-                    <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
-                    <property name="visible">yes</property>
-
-                    <child>
-                      <widget class="GtkVBox" id="vbox5">
-                        <property name="border_width">5</property>
-                        <property name="homogeneous">no</property>
-                        <property name="spacing">0</property>
-                        <property name="visible">yes</property>
-
-                        <child>
-                          <widget class="GtkRadioButton" id="statusbar_show_radiobutton">
+                
+		<child>
+                          <widget class="GtkCheckButton" id="statusbar_show_checkbutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">_Show</property>
-                            <property name="active">no</property>
+                            <property name="label" translatable="yes">_Show status bar</property>
+                            <property name="active">yes</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
                             <property name="use_underline">yes</property>
@@ -343,38 +290,12 @@
                             <property name="expand">no</property>
                             <property name="fill">no</property>
                           </packing>
-                        </child>
-
-                        <child>
-                          <widget class="GtkRadioButton" id="statusbar_hide_radiobutton">
-                            <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">Hi_de</property>
-                            <property name="active">no</property>
-                            <property name="draw_indicator">yes</property>
-                            <property name="visible">yes</property>
-                            <property name="use_underline">yes</property>
-                            <property name="group">statusbar_show_radiobutton</property>
-                          </widget>
-                          <packing>
-                            <property name="padding">0</property>
-                            <property name="expand">yes</property>
-                            <property name="fill">yes</property>
-                          </packing>
-                        </child>
-                      </widget>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="padding">0</property>
-                    <property name="expand">no</property>
-                    <property name="fill">no</property>
-                  </packing>
                 </child>
 
                 <child>
                           <widget class="GtkCheckButton" id="statusbar_cursor_position_checkbutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">_View current cursor position</property>
+                            <property name="label" translatable="yes">Show cursor _position</property>
                             <property name="active">yes</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
@@ -390,7 +311,7 @@
                 <child>
                           <widget class="GtkCheckButton" id="statusbar_overwrite_mode_checkbutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">View current overwrite _mode</property>
+                            <property name="label" translatable="yes">Show overwrite _mode</property>
                             <property name="active">yes</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>

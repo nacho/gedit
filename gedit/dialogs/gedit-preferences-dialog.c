@@ -72,8 +72,7 @@ struct _GeditPreferencesDialogPrivate
 	GtkTreeModel *categories_tree_model;
 
 	/* Toolbar page */
-	GtkWidget	*toolbar_show_radiobutton;
-	GtkWidget	*toolbar_hide_radiobutton;
+	GtkWidget	*toolbar_show_checkbutton;
 	
 	GtkWidget	*toolbar_button_frame;
 	GtkWidget	*toolbar_system_radiobutton;
@@ -83,8 +82,7 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*toolbar_tooltips_checkbutton;
 
 	/* Statusbar page */
-	GtkWidget	*statusbar_show_radiobutton;
-	GtkWidget	*statusbar_hide_radiobutton;
+	GtkWidget	*statusbar_show_checkbutton;
 	GtkWidget	*statusbar_cursor_position_checkbutton;
 	GtkWidget	*statusbar_overwrite_mode_checkbutton;
 
@@ -164,9 +162,11 @@ static void gedit_preferences_dialog_categories_tree_selection_cb (GtkTreeSelect
 							GeditPreferencesDialog *dlg);
 
 static gboolean gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeXML *gui);
-static void gedit_preferences_dialog_toolbar_show_radiobutton_toggled (GtkToggleButton *show_button,
+static void gedit_preferences_dialog_toolbar_show_checkbutton_toggled (GtkToggleButton *show_button,
 							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static void gedit_preferences_dialog_statusbar_show_checkbutton_toggled (GtkToggleButton *show_button,
+							 GeditPreferencesDialog *dlg);
 
 #ifdef DEBUG_MDI_PREFS
 static gboolean gedit_preferences_dialog_setup_mdi_page (GeditPreferencesDialog *dlg, GladeXML *gui);
@@ -281,14 +281,30 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	GtkWidget *hbox;
 	GtkWidget *r;
        	GtkWidget *l;
+	GtkWidget *ct;
+	GtkWidget *label;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
 	dlg->priv = g_new0 (GeditPreferencesDialogPrivate, 1);
 
 	hbox = gtk_hbox_new (FALSE, 12);
+	
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-	r = gedit_preferences_dialog_create_categories_tree (dlg);
+	
+	r = gtk_vbox_new (FALSE, 0);
+	
+	label = gtk_label_new_with_mnemonic (_("Cat_egories:"));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	g_object_set (G_OBJECT (label), "xalign", 0.0, NULL);
+
+	ct = gedit_preferences_dialog_create_categories_tree (dlg);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dlg->priv->categories_tree);
+	
+	gtk_box_pack_start (GTK_BOX (r), label, FALSE, FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (r), ct, TRUE, TRUE, 0);
+
 	l = gedit_preferences_dialog_create_notebook (dlg);
 
 	gtk_box_pack_start (GTK_BOX (hbox), r, FALSE, FALSE, 0);
@@ -298,7 +314,12 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), hbox,
 			FALSE, FALSE, 0);
 
-	gtk_widget_show_all (hbox);
+	GTK_WIDGET_SET_FLAGS (dlg->priv->categories_tree, GTK_CAN_FOCUS);
+	
+	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);
+
+      	if (!GTK_WIDGET_REALIZED (dlg->priv->categories_tree))
+		gtk_widget_show (dlg->priv->categories_tree);
 
 	gedit_preferences_dialog_add_buttons (dlg);	
 
@@ -455,9 +476,7 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 	model = gedit_preferences_dialog_create_categories_tree_model ();
 	
 	treeview = gtk_tree_view_new_with_model (model);
-/*
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
-*/
+	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (selection,
 				   GTK_SELECTION_SINGLE);
@@ -482,6 +501,8 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 
       	g_signal_connect (G_OBJECT (treeview), "realize", 
 			G_CALLBACK (gtk_tree_view_expand_all), NULL);
+
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
 
 	dlg->priv->categories_tree = treeview;
 	dlg->priv->categories_tree_model = model;
@@ -554,8 +575,7 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 {
 	gedit_debug (DEBUG_PREFS, "");
 
-	dlg->priv->toolbar_show_radiobutton = glade_xml_get_widget (gui, "toolbar_show_radiobutton");
-	dlg->priv->toolbar_hide_radiobutton = glade_xml_get_widget (gui, "toolbar_hide_radiobutton");
+	dlg->priv->toolbar_show_checkbutton = glade_xml_get_widget (gui, "toolbar_show_checkbutton");
 	
 	dlg->priv->toolbar_button_frame = glade_xml_get_widget (gui, "toolbar_button_frame");
 	dlg->priv->toolbar_system_radiobutton = glade_xml_get_widget (gui, "toolbar_system_radiobutton");
@@ -564,8 +584,7 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 	
 	dlg->priv->toolbar_tooltips_checkbutton = glade_xml_get_widget (gui, "toolbar_tooltips_checkbutton");
 
-	g_return_val_if_fail (dlg->priv->toolbar_show_radiobutton != NULL, FALSE);
-	g_return_val_if_fail (dlg->priv->toolbar_hide_radiobutton != NULL, FALSE);
+	g_return_val_if_fail (dlg->priv->toolbar_show_checkbutton != NULL, FALSE);
 	
 	g_return_val_if_fail (dlg->priv->toolbar_button_frame != NULL, FALSE);
 	g_return_val_if_fail (dlg->priv->toolbar_system_radiobutton != NULL, FALSE);
@@ -574,16 +593,11 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 	
 	g_return_val_if_fail (dlg->priv->toolbar_tooltips_checkbutton != NULL, FALSE);
 
-	g_signal_connect (G_OBJECT (dlg->priv->toolbar_show_radiobutton), "toggled", 
-			G_CALLBACK (gedit_preferences_dialog_toolbar_show_radiobutton_toggled), dlg);
+	g_signal_connect (G_OBJECT (dlg->priv->toolbar_show_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_toolbar_show_checkbutton_toggled), dlg);
 
-
-	if (gedit_settings->toolbar_visible)
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_radiobutton), TRUE);
-	else
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_hide_radiobutton), TRUE);
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_checkbutton), gedit_settings->toolbar_visible);
 
 	switch (gedit_settings->toolbar_buttons_style)
 	{
@@ -615,7 +629,7 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 }
 
 static void 
-gedit_preferences_dialog_toolbar_show_radiobutton_toggled (GtkToggleButton *show_button,
+gedit_preferences_dialog_toolbar_show_checkbutton_toggled (GtkToggleButton *show_button,
 							 GeditPreferencesDialog *dlg)
 {
 	gedit_debug (DEBUG_PREFS, "");
@@ -632,29 +646,43 @@ gedit_preferences_dialog_toolbar_show_radiobutton_toggled (GtkToggleButton *show
 	}
 }
 
+static void 
+gedit_preferences_dialog_statusbar_show_checkbutton_toggled (GtkToggleButton *show_button,
+							 GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	if (gtk_toggle_button_get_active (show_button))
+	{
+		gtk_widget_set_sensitive (dlg->priv->statusbar_cursor_position_checkbutton, TRUE);
+		gtk_widget_set_sensitive (dlg->priv->statusbar_overwrite_mode_checkbutton, TRUE);
+	}
+	else
+	{
+		gtk_widget_set_sensitive (dlg->priv->statusbar_cursor_position_checkbutton, FALSE);
+		gtk_widget_set_sensitive (dlg->priv->statusbar_overwrite_mode_checkbutton, FALSE);
+	}
+}
+
+
 static gboolean 
 gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
 	gedit_debug (DEBUG_PREFS, "");
 
-	dlg->priv->statusbar_show_radiobutton = glade_xml_get_widget (gui, "statusbar_show_radiobutton");
-	dlg->priv->statusbar_hide_radiobutton = glade_xml_get_widget (gui, "statusbar_hide_radiobutton");
+	dlg->priv->statusbar_show_checkbutton = glade_xml_get_widget (gui, "statusbar_show_checkbutton");
 	dlg->priv->statusbar_cursor_position_checkbutton = glade_xml_get_widget (gui, 
 								"statusbar_cursor_position_checkbutton");
 	dlg->priv->statusbar_overwrite_mode_checkbutton = glade_xml_get_widget (gui, 
 								"statusbar_overwrite_mode_checkbutton");
 
-	g_return_val_if_fail (dlg->priv->statusbar_show_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->statusbar_hide_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->statusbar_show_checkbutton, FALSE);
 	g_return_val_if_fail (dlg->priv->statusbar_cursor_position_checkbutton, FALSE);
 	g_return_val_if_fail (dlg->priv->statusbar_overwrite_mode_checkbutton, FALSE);
 	
-	if (gedit_settings->statusbar_visible)
-		gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton), TRUE);
-	else
-		gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_hide_radiobutton), TRUE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
+				      dlg->priv->statusbar_show_checkbutton), 
+				      gedit_settings->statusbar_visible);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
 				      dlg->priv->statusbar_cursor_position_checkbutton),	
@@ -663,6 +691,16 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (
 				      dlg->priv->statusbar_overwrite_mode_checkbutton),
 				      gedit_settings->statusbar_view_overwrite_mode);
+
+	if (!gedit_settings->statusbar_visible)
+	{
+		gtk_widget_set_sensitive (dlg->priv->statusbar_cursor_position_checkbutton, FALSE);
+		gtk_widget_set_sensitive (dlg->priv->statusbar_overwrite_mode_checkbutton, FALSE);
+	}
+
+	g_signal_connect (G_OBJECT (dlg->priv->statusbar_show_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_statusbar_show_checkbutton_toggled), dlg);
+
 	return TRUE;
 }
 
@@ -1081,7 +1119,7 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	old_prefs = *gedit_settings;
 	
 	/* Get data from toolbar page */
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_radiobutton)))
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_checkbutton)))
 		gedit_settings->toolbar_visible = FALSE;
 	else
 	{
@@ -1105,10 +1143,9 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	}
 
 	/* Get data from status bar page */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton)))
-		gedit_settings->statusbar_visible = TRUE;
-	else
-		gedit_settings->statusbar_visible = FALSE;
+	gedit_settings->statusbar_visible =
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
+					dlg->priv->statusbar_show_checkbutton));
 
 	gedit_settings->statusbar_view_cursor_position = 
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
