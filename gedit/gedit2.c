@@ -58,8 +58,6 @@
 #endif
 
 GeditMDI *gedit_mdi = NULL;
-gboolean gedit_close_x_button_pressed = FALSE;
-gboolean gedit_exit_button_pressed = FALSE; 
 BonoboObject *gedit_app_server = NULL;
 
 static gchar *encoding_charset = NULL;
