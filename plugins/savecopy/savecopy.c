@@ -209,7 +209,7 @@ run_copy_error_dialog (GtkWindow *parent,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
-					 _("Could not save a copy the file to \"%s\""),
+					 _("Could not save a copy of the file to \"%s\""),
 					 dest_uri_for_display);
 
 	if (details != NULL && strcmp (details, " ") != 0)

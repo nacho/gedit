@@ -141,7 +141,7 @@ gedit_error_reporting_loading_file (const gchar *uri,
 			error_message = g_strdup_printf (_("Could not open the file \"%s\""),
 							 uri_for_display);
 			message_details = g_strdup (_("there are too many open files. Please, "
-						      "close some open file and try again."));
+						      "close some open files and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_IS_DIRECTORY:
@@ -156,7 +156,7 @@ gedit_error_reporting_loading_file (const gchar *uri,
 							 uri_for_display);
 			message_details = g_strdup (_("Not enough available memory to open "
 						      "the file. Please, close some running "
-						      "application and try again."));
+						      "applications and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
@@ -302,7 +302,7 @@ gedit_error_reporting_loading_file (const gchar *uri,
 			error_message = g_strdup_printf (_("Could not open the file \"%s\" using "
 							   "the %s character coding"),
 							 uri_for_display, encoding_name);
-			message_details = g_strdup (_("Please, check that you are not trying"
+			message_details = g_strdup (_("Please, check that you are not trying "
 						      "to open a binary file "
 						      "and that you selected the right "
 						      "character coding in the 'Open File... ' "
@@ -312,7 +312,7 @@ gedit_error_reporting_loading_file (const gchar *uri,
 		case GEDIT_CONVERT_ERROR_BINARY_FILE:
 			error_message = g_strdup_printf (_("Could not open the file \"%s\""),
 							 uri_for_display);
-			message_details = g_strdup (_("The file contains data in an invalid data. "
+			message_details = g_strdup (_("The file contains data in an invalid format. "
 						      "Probably, you are trying to open a binary file."));
 			break;
 		}
@@ -328,7 +328,7 @@ gedit_error_reporting_loading_file (const gchar *uri,
 			error_message = g_strdup_printf (_("Could not open the file \"%s\" using "
 							   "the %s character coding"),
 							 uri_for_display, encoding_name);
-			message_details = g_strdup (_("Please, check that you are not trying"
+			message_details = g_strdup (_("Please, check that you are not trying "
 						      "to open a binary file "
 						      "and that you selected the right "
 						      "character coding in the 'Open File... ' "
@@ -447,14 +447,14 @@ gedit_error_reporting_reverting_file (const gchar *uri,
 		error_message = g_strdup_printf (_("Could not revert the file \"%s\""),
 						 uri_for_display);
 		message_details = g_strdup (_("There are too many open files. "
-					      "Please, close some open file and try again."));
+					      "Please, close some open files and try again."));
 		break;
 
 	case GNOME_VFS_ERROR_NO_MEMORY:
 		error_message = g_strdup_printf (_("Could not revert the file \"%s\""),
 						 uri_for_display);
 		message_details = g_strdup (_("Not enough available memory. "
-					      "Please, close some running application and try again."));
+					      "Please, close some running applications and try again."));
                	break;
 
 	case GNOME_VFS_ERROR_HOST_NOT_FOUND:
