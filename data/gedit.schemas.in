@@ -404,5 +404,20 @@
 	that will be displayed in the "Recent Files" submenu.</long>
       </locale>
     </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/load/encodings</key>
+      <applyto>/apps/gedit-2/preferences/editor/load/encodings</applyto>
+      <owner>gedit</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[ISO-8859-15]</default>
+      <locale name="C">
+	<short>Encodings</short>
+	<long>List of encodings used by gedit for reading files not encoded
+	in UTF-8 or in the current locale encoding.</long>
+      </locale>
+    </schema>
+
   </schemalist>
 </gconfschemafile>
