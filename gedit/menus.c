@@ -246,10 +246,6 @@ GnomeUIInfo gedit_file_menu [] = {
 	
 	GNOMEUIINFO_SEPARATOR, 
 
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gE_prefs_dialog, (gpointer) GE_DATA),
-
-	GNOMEUIINFO_SEPARATOR, 
-
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
@@ -320,7 +316,7 @@ GnomeUIInfo gedit_toolbar_menu []= {
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo gedit_options_menu []= {
+GnomeUIInfo gedit_settings_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, options_toggle_status_bar_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, options_toggle_word_wrap_cb, (gpointer) GE_WINDOW, NULL },
@@ -330,11 +326,19 @@ GnomeUIInfo gedit_options_menu []= {
 #ifndef WITHOUT_GNOME
 	{ GNOME_APP_UI_ITEM, N_("Toggle Scrollball"), NULL, options_toggle_scroll_ball_cb, (gpointer) GE_WINDOW, NULL },
 #endif
-	{ GNOME_APP_UI_SEPARATOR },
+	GNOMEUIINFO_SEPARATOR,
+
 	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
-	{ GNOME_APP_UI_SEPARATOR },
+
+	GNOMEUIINFO_SEPARATOR,
+
 	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings, (gpointer) GE_WINDOW, NULL },
+
+	GNOMEUIINFO_SEPARATOR, 
+
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gE_prefs_dialog, (gpointer) GE_DATA),
+
 	GNOMEUIINFO_END
 };
 
@@ -382,7 +386,7 @@ GnomeUIInfo gedit_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("_Search"), NULL, &gedit_search_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 
-	GNOMEUIINFO_MENU_OPTIONS_TREE(gedit_options_menu),
+	GNOMEUIINFO_MENU_SETTINGS_TREE(gedit_settings_menu),
 
 #if PLUGIN_TEST
 	{ GNOME_APP_UI_SUBTREE, N_("_Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
@@ -403,7 +407,7 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 	add_callback_data (gedit_search_menu, window, data);
 	add_callback_data (gedit_tab_menu, window, data);
 	add_callback_data (gedit_toolbar_menu, window, data);
-	add_callback_data (gedit_options_menu, window, data);
+	add_callback_data (gedit_settings_menu, window, data);
 	add_callback_data (gedit_window_menu, window, data);
 	add_callback_data (gedit_help_menu, window, data);
 
@@ -414,7 +418,7 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 	remove_callback_data (gedit_search_menu, window, data);
 	remove_callback_data (gedit_tab_menu, window, data);
 	remove_callback_data (gedit_toolbar_menu, window, data);
-	remove_callback_data (gedit_options_menu, window, data);
+	remove_callback_data (gedit_settings_menu, window, data);
 	remove_callback_data (gedit_window_menu, window, data);
 	remove_callback_data (gedit_help_menu, window, data);
 
