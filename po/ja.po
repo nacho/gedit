@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-01 18:45+0200\n"
-"PO-Revision-Date: 2004-07-10 13:04+0900\n"
+"POT-Creation-Date: 2004-08-02 23:15+0900\n"
+"PO-Revision-Date: 2004-08-02 23:12+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -688,13 +688,13 @@ msgstr "プラグイン"
 msgid "Enabled"
 msgstr "有効"
 
-#: gedit/dialogs/gedit-plugin-manager.c:496
+#: gedit/dialogs/gedit-plugin-manager.c:499
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
 "'plugin-manager.glade2' が見つかりませんでした。gedit を再インストールして下"
 "さい。\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:514
+#: gedit/dialogs/gedit-plugin-manager.c:517
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "プラグイン・マネージャの glade ファイルが無効です。一部のウィジットが見つかり"
@@ -1209,47 +1209,47 @@ msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr ""
 "gedit は GNOME デスクトップ用に作られた小型軽量のテキスト・エディタです。"
 
-#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
+#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
+#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
 msgid "Untitled"
 msgstr "名前無し"
 
-#: gedit/gedit-document.c:641 gedit/gedit-document.c:688
+#: gedit/gedit-document.c:640 gedit/gedit-document.c:687
 msgid "Invalid file name"
 msgstr "ファイル名が無効です"
 
-#: gedit/gedit-document.c:839 gedit/gedit-document.c:1314
+#: gedit/gedit-document.c:838 gedit/gedit-document.c:1314
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "無効な UTF-8 データです"
 
-#: gedit/gedit-document.c:1641
+#: gedit/gedit-document.c:1640
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s のシンボリック・リンク情報を読み込むことができませんでした"
 
-#: gedit/gedit-document.c:1687
+#: gedit/gedit-document.c:1686
 msgid "The file has too many symbolic links."
 msgstr "シンボリック・リンクが多すぎます。"
 
-#: gedit/gedit-document.c:1743
+#: gedit/gedit-document.c:1742
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit は書き込みモードで %s: 場所を処理できません。"
 
-#: gedit/gedit-document.c:1750
+#: gedit/gedit-document.c:1749
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit はこの種類の場所を書き込みモードで処理できません。"
 
-#: gedit/gedit-document.c:1763
+#: gedit/gedit-document.c:1762
 msgid "Invalid filename."
 msgstr "ファイル名が無効です。"
 
-#: gedit/gedit-document.c:1875
+#: gedit/gedit-document.c:1874
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1257,7 +1257,7 @@ msgstr ""
 "ファイルを保存するための十分な空きディスクがありません。\n"
 "ディスク容量を空けてやり直して下さい。"
 
-#: gedit/gedit-document.c:1880
+#: gedit/gedit-document.c:1879
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1266,7 +1266,7 @@ msgstr ""
 "ファイルの保存先のディスクにはファイル・サイズの制限があります。小さいファイ"
 "ルを保存するか、この制限を解除してから保存して下さい。"
 
-#: gedit/gedit-document.c:1924
+#: gedit/gedit-document.c:1923
 msgid "Could not create a backup file."
 msgstr "バックアップ・ファイルを作成できませんでした。"
 
@@ -2550,7 +2550,7 @@ msgstr " [挿入]"
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr ""
+msgstr "オープンするファイルで使用する文字エンコーディングをセットする"
 
 #: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
@@ -2567,7 +2567,7 @@ msgstr "既に実行中の gedit に新しいドキュメントを作成する"
 #: gedit/gedit2.c:182
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
-msgstr ""
+msgstr "指定したエンコーディング \"%s\" は正しくありません\n"
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -3201,6 +3201,3 @@ msgstr "選択したテキストをクリップボードにコピーします"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "テキストのコピー(_C)"
-
-#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
-#~ msgstr "ファイル \"%s\" は存在しません。作成してもよろしいですか？"
