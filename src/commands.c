@@ -44,9 +44,7 @@
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
 static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
 static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
-static void popup_close_verify (gE_document *doc, gE_data *data);
 static void close_doc_common(gE_data *data);
-static void close_doc_execute(GtkWidget *widget, gpointer cbdata);
 static void close_window_common(gE_window *w);
 static void file_saveas_destroy(GtkWidget *w, gpointer cbdata);
 static void file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
@@ -74,7 +72,7 @@ static void
 close_file_save_no_sel(GtkWidget *w, gE_data *data)
 {
 	assert(data != NULL);
-	close_doc_execute(w, data);
+	close_doc_execute(NULL, data);
 	gtk_widget_destroy(data->temp1);	/* verify dialog box */
 	data->temp1 = NULL;
 	data->temp2 = NULL;
@@ -134,7 +132,7 @@ close_file_save_cancel_sel(GtkWidget *w, gE_data *data)
  *
  * returns TRUE if file was closed
  */
-static void
+void
 popup_close_verify(gE_document *doc, gE_data *data)
 {
 	GtkWidget *verify, *yes, *no, *cancel, *label;
@@ -596,8 +594,8 @@ close_doc_common(gE_data *data)
 /*
  * actually close the document.
  */
-static void
-close_doc_execute(GtkWidget *widget, gpointer cbdata)
+void
+close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 {
 	int num, numdoc;
 	GtkNotebook *nb;
@@ -610,7 +608,11 @@ close_doc_execute(GtkWidget *widget, gpointer cbdata)
 	assert(w != NULL);
 	nb = GTK_NOTEBOOK(w->notebook);
 	assert(nb != NULL);
-	doc = gE_document_current(w);
+	if (opt_doc == NULL) /* Provide the option to pass the specific document 
+	                        as an argument instead of always going with the
+	                        current document - needed for the plugins api...
+	                      */
+		doc = gE_document_current(w);
 	assert(doc != NULL);
 
 	/* if all we have is a blank, Untitled doc, then return immediately */
@@ -1326,7 +1328,8 @@ void recent_update (gE_window *window)
 	GList *gnome_recent_list;
 	GnomeHistoryEntry histentry;
 	char *filename;
-	int i;
+	int i, j;
+	gboolean duplicate;
 	
 	filelist = NULL;
 	gnome_recent_list = gnome_history_get_recently_used ();
@@ -1338,9 +1341,17 @@ void recent_update (gE_window *window)
 			histentry = g_list_nth_data (gnome_recent_list, i);
 			if (strcmp ("gEdit", histentry->creator) == 0)
 			{
-				filename = g_malloc0 (strlen (histentry->filename) + 1);
-				strcpy (filename, histentry->filename);
-				filelist = g_list_append (filelist, filename);
+				if (g_list_length (filelist) > 0)
+					for (j = 0; j < g_list_length (filelist); j++)
+						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
+							duplicate = TRUE;
+				if (!duplicate)
+				{
+					filename = g_malloc0 (strlen (histentry->filename) + 1);
+					strcpy (filename, histentry->filename);
+					filelist = g_list_append (filelist, filename);
+				}
+				duplicate = FALSE;
 				if (g_list_length (filelist) == MAX_RECENT)
 					break;
 			}

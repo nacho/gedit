@@ -74,6 +74,10 @@ extern void recent_update (gE_window *window);
 extern void recent_update_menus (gE_window *window, GList *recent_files);
 extern void recent_callback (GtkWidget *w, gE_data *data);
 
+/* Functions needed to be made external for the plugins api */
+extern void popup_close_verify (gE_document *doc, gE_data *data);
+extern void close_doc_execute(gE_document *opt_doc, gpointer cbdata);
+
 
 #ifdef __cplusplus
 }

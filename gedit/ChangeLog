@@ -1,5 +1,15 @@
 1998-08-07  Evan Lawrence <evan@worldpath.net>
 
+	* Made some changes to the way close_execute works, so we could
+	  use it in the document_close plugins api.
+
+	* Broke recent-documents. I was trying to fix it so it wouldn't show
+	  duplicates of the same document, but screwed some stuff up in the
+	  algorythm - nothing real bad, just doesn't work quite right. The
+	  reason I'm committing this is so I could commit the above changes..
+
+1998-08-07  Evan Lawrence <evan@worldpath.net>
+
 	* Added the proper api to plugin_document_open and plugin_document_close
 	  and had to make a minor modification of close_doc_execute to
 	  incorporate them...
