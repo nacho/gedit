@@ -1,0 +1,113 @@
+This is going to be a mini-howto on writing plugins for go and gedit.
+
+A plugin in this case is written almost exactly like any other
+program.  You just have to call client_init at the beginning and you
+have a few functions extra.  You also can't be called except as a
+plugin.  This will change in the future.
+
+The first thing you have to do to write a plugin is include
+"client.h".  It's called client.h because this is a client of the
+plugin API.  gE_plugin_api.[ch] and go_plugin_api.[ch] are the
+interface between plugins and the actual program.  Sorry about the
+confusion.
+
+The rest of this document will be a list of functions and their
+descriptions.  It should be pretty clear what's going on.
+
+
+int client_init( int *argc, char **argv[], char *menu_location);
+
+This function initializes the plugin interface.  It reads some of the
+arguments (discarding them in the process).  It does some initial
+communication with the editor.  It's meant to be called as
+context = client_init( &argc, &argv, "menu_location" );
+
+The return value of client_init is a context identifier.  Some later
+functions require that you pass them the context identifier.  If they
+accept a paramerter gint context, you should pass them your context
+identifier.  Currently, you can only operate in one context, that is,
+the one given to you by client_init.  This may change in the future.
+
+If the return value of client_init is 0, you're being called from the
+command line by the --launch-plugin argument to the editor.  There are
+some functions that you can't call, but it's currently dependant on
+which editor you're being called from.
+
+Finally, the format of menu_location.  The only menu_location that's
+supported right now is "[Plugins]Menu label", where Menu label is how
+you want the menu item for your plugin to read.  You can also pass in
+"" and your plugin won't appear on any menus.  This is only used if
+your plugin is called in query mode.  In query mode client_init
+doesn't return.
+
+
+gint client_document_current( gint context );
+
+Each view of a document is identified by an int called docid.  This
+function returns the docid of the current document.
+
+This function isn't valid if context == 0.
+
+
+gchar *client_document_filename( gint docid );
+
+This function returns the filename of the given document.  It returns
+memory allocated with g_malloc.  You're responsible for freeing the
+memory.
+
+
+gint client_document_new( gint context, gchar *title );
+
+This function creates a new document with the given title.
+
+This function isn't valid under gedit if context == 0.
+
+
+gint client_document_open( gint context, gchar *title );
+
+This function opens the document with the given title.
+
+This function isn't valid under gedit if context == 0.
+
+
+void client_document_show( gint docid );
+
+This function shows the document.  This doesn't actually do anything
+yet.  Documents are shown when new or open is called.  However, the
+API requires that you call this function, or your document may not be displayed.
+
+
+void client_text_append( gint docid, gchar *buff, gint length );
+
+This functions appends the given text to the given document.
+
+
+gchar *client_text_get( gint docid );
+
+This function returns the full text of the given document.  It returns
+memory allocated with g_malloc.  You're responsible for freeing the
+memory.
+
+
+gboolean client_program_quit();
+
+This function causes the editor to quit.  It returns a boolean that
+tells you whether the editor actually quit.  TRUE signifies that the
+program actually quit.  FALSE signifies that the program didn't quit.
+This may happen because there were unsaved documents.
+
+
+void client_finish( gint context );
+
+This function tells the editor that your plugin is finished.  You are
+required to call this function, and after you have, none of the other
+functions are valid.  You cannot call client_init again after calling
+client_finish.
+
+
+The final thing that you have to do is to link with client.c and put
+yourself in PLUGINDIR.  Then you should be done.
+
+
+Please submit any suggestions for new API functions to
+clahey@umich.edu.  I hope this document is helpful.
