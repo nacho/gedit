@@ -438,10 +438,10 @@ search_create_dialog(gE_window *window, gE_search *options, gboolean replace)
 		GTK_SIGNAL_FUNC(search_start), data);
 	gtk_signal_connect_object(GTK_OBJECT(ok), "clicked",
 		GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
-	/*
-	 * GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
-	 * gtk_widget_grab_default (ok);
-	 */
+	
+	  GTK_WIDGET_SET_FLAGS (GTK_WIDGET(ok), GTK_CAN_DEFAULT);
+	  gtk_widget_grab_default (GTK_WIDGET(ok));
+	 
 	gtk_signal_connect_object(GTK_OBJECT(cancel), "clicked",
 		GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
 } /* search_create_dialog */
