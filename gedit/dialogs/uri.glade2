@@ -91,7 +91,7 @@
 	      <property name="ypad">0</property>
 	      <property name="mnemonic_widget">uri</property>
 	      <accessibility>
-		<atkrelation target="uri" type="label-for"/>
+		<atkrelation target="uri_list" type="label-for"/>
 	      </accessibility>
 	    </widget>
 	    <packing>
@@ -107,6 +107,9 @@
 	      <property name="has_focus">True</property>
 	      <property name="history_id">gedit2_uri_list</property>
 	      <property name="max_saved">10</property>
+	      <accessibility>
+		<atkrelation target="label1" type="labelled-by"/>
+	      </accessibility>
 
 	      <child internal-child="entry">
 		<widget class="GtkEntry" id="uri">
@@ -120,9 +123,6 @@
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">True</property>
-		  <accessibility>
-		    <atkrelation target="label1" type="labelled-by"/>
-		  </accessibility>
 		</widget>
 	      </child>
 	    </widget>
