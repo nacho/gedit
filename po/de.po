@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.x\n"
-"POT-Creation-Date: 2001-03-10 13:53+0100\n"
+"POT-Creation-Date: 2001-03-23 19:57+0100\n"
 "PO-Revision-Date: 2001-03-08 15:33+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -123,10 +123,10 @@ msgid ""
 "gedit could not create a temp file.\n"
 "\n"
 msgstr ""
-"gedit konnte keine temporäre Datei anlegen.\n"
+"gedit konnte keine temporäre Datei erstellen.\n"
 "\n"
 
-#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:759
 #, c-format
 msgid "Untitled %i"
 msgstr "Unbenannt %i"
@@ -728,7 +728,7 @@ msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' wurde geändert. Wollen Sie sie speichern?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:710
+#: src/document.c:716
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -743,19 +743,19 @@ msgstr ""
 "\n"
 "Bitte stellen Sie sicher, dass es sie gibt."
 
-#: src/document.c:763 src/document.c:771
+#: src/document.c:769 src/document.c:777
 msgid "(modified)"
 msgstr "(geändert)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:771 src/document.c:779
 msgid "(readonly)"
 msgstr "(schreibgeschützt)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:830 src/document.c:870
 msgid "This file does not end with a valid extension\n"
 msgstr "Diese Datei endet nicht mit einem gültigen Suffix\n"
 
-#: src/document.c:872
+#: src/document.c:878
 #, c-format
 msgid "The file %s was not found."
 msgstr "Die Datei %s konnte nicht gefunden werden."
@@ -935,7 +935,7 @@ msgstr ""
 #: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr "Die Datei ``%s'' gibt es nicht. Möchten Sie sie anlegen?"
+msgstr "Die Datei ``%s'' gibt es nicht. Möchten Sie sie erstellen?"
 
 #: src/gedit.c:47
 msgid "Show window debugging messages."
@@ -1053,14 +1053,6 @@ msgstr "Gehe zu _Zeile..."
 msgid "Go to a specific line number"
 msgstr "Zu einer bestimmten Zeilennummer gehen"
 
-#: src/menus.c:160
-msgid "File _Info"
-msgstr "Datei_info"
-
-#: src/menus.c:161
-msgid "Get the basic file info"
-msgstr "Grundlegende Dateiinfo ansehen"
-
 #: src/menus.c:173
 msgid "_Add View"
 msgstr "Ansicht _hinzufügen"
@@ -1161,6 +1153,14 @@ msgstr "Zwischenablage einfügen"
 #: src/menus.c:298
 msgid "Search for a string"
 msgstr "Eine Zeichenkette suchen"
+
+#: src/menus.c:303
+msgid "Exit"
+msgstr "Beenden"
+
+#: src/menus.c:303
+msgid "Exit the program"
+msgstr "Das Programm beenden"
 
 #: src/plugin.c:107
 msgid "_Manager ..."
