@@ -573,8 +573,6 @@ gedit_spell_checker_add_word_to_session (GeditSpellChecker *spell,
 
 		return FALSE;
 	}
-
-	pspell_manager_save_all_word_lists (spell->manager);
 	
 	return TRUE;
 }

@@ -52,13 +52,18 @@ struct _GeditSpellCheckerDialogClass
 	GtkWindowClass parent_class;
 
 	/* Signals */
-	gboolean	(*ignore)		(const gchar *word);
-	gboolean	(*ignore_all)		(const gchar *word);
-	gboolean	(*change)		(const gchar *word, 
+	void		(*ignore)		(GeditSpellCheckerDialog *dlg,
+						 const gchar *word);
+	void		(*ignore_all)		(GeditSpellCheckerDialog *dlg,
+						 const gchar *word);
+	void		(*change)		(GeditSpellCheckerDialog *dlg,
+						 const gchar *word, 
 						 const gchar *change_to);
-	gboolean	(*change_all)		(const gchar *word, 
+	void		(*change_all)		(GeditSpellCheckerDialog *dlg,
+						 const gchar *word, 
 						 const gchar *change_to);
-	gboolean	(*add_word_to_personal)	(const gchar *word);
+	void		(*add_word_to_personal)	(GeditSpellCheckerDialog *dlg,
+						 const gchar *word);
 
 };
 
