@@ -230,10 +230,14 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (app != NULL);
-
+	
+        /* xgettext translators : Use the name of the stock Menu item for "File"
+	   if it is not the same, we are going to fail to insert the recent menu items.*/
 	gnome_app_remove_menu_range (app, _("_File/"), 7, items_in_menu);
 	items_in_menu = g_list_length (recent_files);
 	
+        /* xgettext translators : Use the name of the stock Menu item for "File"
+	   if it is not the same, we are going to fail to insert the recent menu items. */
 	path = g_strdup_printf ("%s/%s", _("_File"), "<Separator>");
 	for (i = items_in_menu; i > 0;  i--) {
 		file_name = g_list_nth_data (recent_files, i-1);
