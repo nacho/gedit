@@ -1,3 +1,12 @@
+2004-07-19  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixes bug #135452: "Failed to lock" -> recent files disappear
+
+	* recent-files/egg-recent-model.c (egg_recent_model_lock_file):
+	Attempt to lock the file 5 times, waiting a random interval (< 1 second)
+	in between attempts.
+	(egg_recent_model_unlock_file): cosmetic changes
+
 2004-07-16  Vinay  <vinay.mandyakoppal@wipro.com>
 
 	* gedit/gedit2.c (gedit_load_file_list):
