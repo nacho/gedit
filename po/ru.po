@@ -4,19 +4,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-18 15:40+0000\n"
-"PO-Revision-Date: 2000-06-18 15:42+00:00\n"
+"POT-Creation-Date: 2000-06-24 13:32+0000\n"
+"PO-Revision-Date: 2000-06-24 13:36+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:157
+#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:189
+msgid "browse"
+msgstr "просмотр"
+
+#: plugins/browse/browse.c:247
 msgid "Browse"
 msgstr "Просмотр Web"
 
-#: plugins/browse/browse.c:158
+#: plugins/browse/browse.c:248
 msgid "Web browse plugin"
 msgstr "Дополнение просмотра Web"
 
@@ -53,44 +59,29 @@ msgstr "Десятичное в восьмеричное"
 msgid "Hex to Decimal"
 msgstr "Шестнадцатиричное в десятичное"
 
-#: plugins/diff/diff.c:59
-msgid "Choose a file"
-msgstr "Выбрыть файл"
-
-#: plugins/diff/diff.c:150
-msgid "Choose files to diff"
-msgstr "Выбор файлов для diff"
-
-#: plugins/diff/diff.c:155
-msgid "Choose files to diff:"
-msgstr "Выбор файлов для diff:"
-
-#: plugins/diff/diff.c:164 plugins/diff/diff.c:172
-msgid "Browse..."
-msgstr "Просмотр..."
-
-#: plugins/diff/diff.c:177
-msgid "Calculate Diff"
-msgstr "Вычислить различия"
-
-#: plugins/diff/diff.c:199
-msgid "Diff"
-msgstr "Diff"
-
-#: plugins/diff/diff.c:200
-msgid "Diff plugin."
-msgstr "Дополнение diff"
-
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:261
-#: src/print.c:581
+#: plugins/diff/diff.c:196 plugins/email/email.c:219 plugins/email/email.c:225
+#: src/document.c:261 src/print.c:581
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: plugins/email/email.c:172
+#: plugins/diff/diff.c:324
+msgid "Diff"
+msgstr "Diff"
+
+#: plugins/diff/diff.c:325
+msgid "diff plugin"
+msgstr "Дополнение diff"
+
+#: plugins/email/email.c:60
+#, c-format
+msgid "Executing command : %s"
+msgstr "Выполнение команды: %s"
+
+#: plugins/email/email.c:263
 msgid "Email"
 msgstr "Эл. адрес"
 
-#: plugins/email/email.c:173
+#: plugins/email/email.c:264
 msgid "Email the current document"
 msgstr "Эл. адрес текущего документа"
 
@@ -116,8 +107,24 @@ msgid "Subject:"
 msgstr "Тема:"
 
 #: plugins/email/email.glade.h:11
-msgid "File to use as body of message: "
+msgid "Change..."
+msgstr "Изменить..."
+
+#: plugins/email/email.glade.h:12
+msgid "label12"
+msgstr "метка12"
+
+#: plugins/email/email.glade.h:13
+msgid "File to use as body of message : "
 msgstr "Файл используемый как тело сообщения:"
+
+#: plugins/email/email.glade.h:14
+msgid "Sendmail found at :"
+msgstr "Sendmail найдена в:"
+
+#: plugins/email/email.glade.h:15
+msgid "label13"
+msgstr "метка13"
 
 #: plugins/reverse/reverse.c:56
 msgid "Reverse"
@@ -135,11 +142,11 @@ msgstr "Здравствуй, Мир!"
 msgid "Sample 'hello world' plugin."
 msgstr "Пример дополнения \"Здравствуй, Мир!\"."
 
-#: plugins/shell_output/shell_output.c:172
+#: plugins/shell_output/shell_output.c:175
 msgid "Shell Output"
 msgstr "Вывод оболочки"
 
-#: plugins/shell_output/shell_output.c:173
+#: plugins/shell_output/shell_output.c:176
 msgid "Insert the shell output in the document"
 msgstr "Вставить вывод оболочки в документ"
 
@@ -182,7 +189,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:619
+#: src/dialogs/dialog-prefs.c:574
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -191,7 +198,7 @@ msgstr "gedit: Настройки"
 msgid "found and replaced %i occurrences."
 msgstr "найдено и заменено %i вхождений."
 
-#: src/dialogs/dialog-replace.c:241 src/search.c:267
+#: src/dialogs/dialog-replace.c:246 src/search.c:267
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Текст найден в строке:%i"
@@ -411,25 +418,29 @@ msgstr "Чувствительный к регистру"
 msgid "RO - "
 msgstr "Только чтение - "
 
-#: src/document.c:430
+#: src/document.c:437
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/document.c:641
+#: src/document.c:648
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/document.c:718
+#: src/document.c:650
+msgid "(readonly)"
+msgstr "(только чтение)"
+
+#: src/document.c:695 src/document.c:735
 msgid "This file does not end with a valid extension\n"
 msgstr "Этот файл заканчивается недопустимым расширением\n"
 
-#: src/document.c:726
+#: src/document.c:743
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
 
-#: src/file.c:107
+#: src/file.c:109
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -438,7 +449,7 @@ msgstr ""
 "При открытии файла была обнаружена ошибка \"%s\".\n"
 "Убедитесь, что файл существует."
 
-#: src/file.c:116
+#: src/file.c:118
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -457,11 +468,11 @@ msgstr ""
 "Убедитесь, что файл не используется другим приложением\n"
 "и что файл не пуст."
 
-#: src/file.c:126 src/file.c:369
+#: src/file.c:128 src/file.c:370
 msgid "Could not allocate the required memory."
 msgstr "Не удалось получить необходимую память."
 
-#: src/file.c:132
+#: src/file.c:134
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -476,7 +487,7 @@ msgstr ""
 "\n"
 "Убедитесь, что у вас есть права на чтение этого файла."
 
-#: src/file.c:214
+#: src/file.c:215
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -493,7 +504,7 @@ msgstr ""
 "Убедитесь, что указанный путь существует и что у вас есть соответствующие "
 "права на запись."
 
-#: src/file.c:228
+#: src/file.c:229
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -510,7 +521,7 @@ msgstr ""
 "По неизвестной причине (1). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:243
+#: src/file.c:244
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -527,33 +538,33 @@ msgstr ""
 "По неизвестной причине (2). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:330
+#: src/file.c:331
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/file.c:389
+#: src/file.c:390
 msgid "Error in the pipe ."
 msgstr "Ошибка в канале."
 
-#: src/file.c:444
+#: src/file.c:445
 msgid "Open File ..."
 msgstr "Открыть файл..."
 
-#: src/file.c:502
+#: src/file.c:503
 #, c-format
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
 
-#: src/file.c:593
+#: src/file.c:594
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:605
+#: src/file.c:606
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:615
+#: src/file.c:616
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
@@ -647,7 +658,7 @@ msgstr "Удалить окно"
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:196 src/plugin.c:115 src/plugin.c:211
+#: src/menus.c:196 src/plugin.c:126 src/plugin.c:224
 msgid "_Plugins"
 msgstr "Дополнения"
 
@@ -747,22 +758,63 @@ msgstr "Выход"
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
-#: src/plugin.c:59
+#: src/plugin.c:70
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Ошибка, не удалось открыть файл модуля, %s"
 
-#: src/plugin.c:70
+#: src/plugin.c:81
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Ошибка, дополнение не содержит функции init_plugin."
 
-#: src/plugin.c:77
+#: src/plugin.c:88
 msgid "Error, init_plugin returned an error"
 msgstr "Ошибка, init_plugin вернула ошибку"
 
-#: src/plugin.c:105
+#: src/plugin.c:116
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
+
+#: src/plugin.c:361
+#, c-format
+msgid ""
+"The program %s could not be found.\n"
+"\n"
+msgstr "Программа %s не найдена.\n\n"
+
+#: src/plugin.c:376
+#, c-format
+msgid ""
+"'%s' doesn't seem to exist.\n"
+"\n"
+msgstr "'%s' видимо не существует.\n\n"
+
+#: src/plugin.c:378
+#, c-format
+msgid ""
+"'%s' seems to be a directory.\n"
+"but '%s' could not be found inside it.\n"
+"\n"
+msgstr ""
+"'%s' видимо является каталогом,\n"
+"но '%s' не может быть найдено внутри.\n"
+"\n"
+
+#: src/plugin.c:381
+#, c-format
+msgid ""
+"'%s' doesn't seem to be a program.\n"
+"\n"
+msgstr "'%s' видимо не является программой.\n\n"
+
+#: src/plugin.c:385
+#, c-format
+msgid ""
+"%sYou won't be able to use the %s plugin without %s. \n"
+" Do you want to specify a new location for %s?"
+msgstr ""
+"%s Вы не сможете использовать дополнение %s без %s. \n"
+"Хотите указать новое расположение для %s?"
 
 #: src/print.c:176
 msgid "Pages"
@@ -881,6 +933,6 @@ msgstr "Показать последние отладочные сообщения."
 msgid "Turn on all debugging messages."
 msgstr "Включить все отладочные сообщения."
 
-#: src/view.c:868
+#: src/view.c:906
 msgid "You can't remove the last view of a document."
 msgstr "Вы не можете удалить последнее окно документа."
