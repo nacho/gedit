@@ -275,21 +275,22 @@ void count_lines_cb (GtkWidget *widget, gpointer data)
 	gchar *msg;
 	gE_document *doc;
 
-	doc = gE_document_current ();
+	if ((doc = gE_document_current ()))
+	  {
 	
-	g_assert (doc != NULL);
-	g_assert (doc->text != NULL);
+	    g_assert (doc->text != NULL);
 
-	line_number = pos_to_line (doc,
-			gtk_editable_get_position (GTK_EDITABLE (doc->text)),
-			&total_lines);
+	    line_number = pos_to_line (doc,
+	    gtk_editable_get_position (GTK_EDITABLE (doc->text)),
+								&total_lines);
 	
-	msg = g_malloc0 (200);
-	sprintf (msg, _("Total Lines: %i\nCurrent Line: %i"), total_lines, line_number);
+	    msg = g_malloc0 (200);
+	    sprintf (msg, _("Total Lines: %i\nCurrent Line: %i"), total_lines, line_number);
 	
-	gnome_dialog_run_and_close ((GnomeDialog *)
-		gnome_message_box_new (msg, GNOME_MESSAGE_BOX_INFO,
-			GNOME_STOCK_BUTTON_OK, NULL));
+	    gnome_dialog_run_and_close ((GnomeDialog *)
+		   gnome_message_box_new (msg, GNOME_MESSAGE_BOX_INFO,
+			   					  GNOME_STOCK_BUTTON_OK, NULL));
+	   }
 }
 
 /* private functions */

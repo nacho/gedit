@@ -50,7 +50,7 @@ static void close_doc_common(gE_data *data);
 static void close_window_common(gE_window *w);
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
-static gint file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
+static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
 static void line_pos_cb(GtkWidget *w, gE_data *data);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb(GtkWidget *w, gE_data *data);
@@ -529,13 +529,11 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 /*
  * file selection dialog callback
  */
-static gint
+static void
 file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 {
-	gtk_widget_destroy (GTK_WIDGET(fs));
-	fs = NULL;
-	
-	return TRUE;
+	gtk_widget_hide (w);
+		
 }
 
 /*
@@ -560,8 +558,8 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 
 	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
 	
-/*	gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
-			(GtkSignalFunc)file_sel_destroy, osel);*/
+	gtk_signal_connect(GTK_OBJECT(osel), "delete_event",
+			(GtkSignalFunc)file_sel_destroy, osel);
 			
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->ok_button), 
 				   "clicked", (GtkSignalFunc)file_open_ok_sel,

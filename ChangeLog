@@ -1,3 +1,15 @@
+1999-05-22 00:42:04  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/commands.c: (file_open_cb) Use a delete_event signal instead of a 
+	  destroy signal to close the dialog with the WM (Thanks to the GIMP source
+	  for that handy fix).
+	
+	* src/search.c: (count_lines_cb) Make sure that gE_document_current returns a
+	  document, before continuing, instead of bombing out on an assertion error, 
+	  makes the program much nicer when running.
+	
+	* Thanks to Sergio A. Kessler (and his group) for pointing out these bugs.
+
 1999-05-21 16:55:57  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_prefs_box.c: (window_page_new) get the allocation.width and height
