@@ -7,12 +7,6 @@ INCLUDES = -I$(includedir) 				\
 
 plugindir = $(prefix)/share/go/plugins
 
-SUBDIRS = plugins
-
-EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE_icon.xpm gedit.desktop 
-
-man_MANS = gedit.1
-
 bin_PROGRAMS = gedit
 
 gedit_SOURCES = 	\
@@ -53,8 +47,7 @@ gedit_SOURCES = 	\
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
-sysdir   = $(datadir)/apps/Applications
-sys_DATA = gedit.desktop
+
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
@@ -62,8 +55,4 @@ CPPFLAGS = \
 	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
 	-Wall -ansi -pedantic  \
 	#-DDEBUG
-
-dist-hook:
-	mkdir $(distdir)/xpm
-	cp $(srcdir)/xpm/*.xpm $(distdir)/xpm
 
