@@ -94,6 +94,8 @@ void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
 void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 
+void	gedit_view_remove (View *view);
+
 /* General utils */
 guint	   	gedit_view_get_type	(void);
 GtkWidget*	gedit_view_new		(Document *doc);

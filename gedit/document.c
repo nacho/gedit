@@ -585,6 +585,7 @@ gedit_mdi_init (void)
 
 	/* Loads the structure gedit_toolbar with the widgets */
 	gedit_window_set_toolbar_labels (mdi->active_window);
+	gedit_window_set_view_menu_sensitivity (mdi->active_window);
 
 	gedit_debug (DEBUG_DOCUMENT, "end");
 }

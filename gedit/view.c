@@ -99,8 +99,6 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	Document *doc = view->doc;
 	gint undo_state, redo_state;
 
-	g_print ("View changed !!!!!!!!!\n");
-	
 	gedit_debug (DEBUG_VIEW, "start");
 
 	g_return_if_fail (view!=NULL);
@@ -762,7 +760,6 @@ gedit_view_get_position (View *view)
 
 	if (gedit_view_get_selection (view, &start_pos, &end_pos))
 	{
-		g_print ("returning endpos %i\n", end_pos);
 		return end_pos;
 	}
 
@@ -887,9 +884,32 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 }
 
 void
+gedit_view_remove (View *view)
+{
+	Document *doc;
+	
+	doc = view->doc;
+	
+	g_return_if_fail (doc != NULL);
+
+	if (g_list_length (doc->views) < 2)
+	{
+		gnome_app_error (gedit_window_active_app(), _("You can't remove the last view of a document."));
+		return;
+	}
+
+	/* First, we remove the view from the document's list */
+	doc->views = g_list_remove (doc->views, view);
+
+	/* Now, we can remove the view proper */
+	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
+
+	gedit_document_set_title (doc);
+}
+
+void
 gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 {
-	Document *doc = DOCUMENT (data);
 	View *view;
 
 	gedit_debug (DEBUG_VIEW, "");
@@ -899,20 +919,9 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 	if (view == NULL)
 		return;
 
-	if (g_list_length (doc->views) < 2)
-	{
-		gnome_app_error (gedit_window_active_app(), _("You can't remove the last view of a document."));
-		return;
-	}
-	 
-	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, view);
-	  
-	/* Now, we can remove the view proper */
-	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
-
-	gedit_document_set_title (doc);
+	gedit_view_remove (view);
 }
+
 
 static void
 gedit_view_update_line_indicator (void)
@@ -1009,34 +1018,24 @@ gedit_view_load_widgets (View *view)
 	GnomeUIInfo *toolbar_ui_info = NULL;
 	GnomeUIInfo *menu_ui_info = NULL;
 	gint count, sub_count;
-	gint temp_undo, temp_redo;
 
 	gedit_debug (DEBUG_VIEW, "");
 	
 	g_return_if_fail (view->app != NULL);
 
 	toolbar_ui_info = gnome_mdi_get_toolbar_info (view->app);
+	menu_ui_info	= gnome_mdi_get_menubar_info (view->app);
+/*
 	menu_ui_info    = gnome_mdi_get_child_menu_info (view->app);
-
+*/
 	g_return_if_fail (toolbar_ui_info != NULL);
 	g_return_if_fail (menu_ui_info != NULL);
 
-	if (view->toolbar)
-	{
-		g_print ("This view had a toolbar....");
-		return;
-		
-		temp_undo = view->toolbar->undo;
-		temp_redo = view->toolbar->redo;
-		g_free (view->toolbar);
-		view->toolbar->undo = temp_undo;
-		view->toolbar->redo = temp_redo;
-	}
-	g_print ("start scanning  ...\n");
+	if (!view->toolbar)
+		view->toolbar = g_malloc (sizeof (GeditToolbar));
 	
-	view->toolbar = g_malloc (sizeof (GeditToolbar));
-	view->toolbar->undo_button = NULL;
-	view->toolbar->redo_button = NULL;
+	view->toolbar->undo_button    = NULL;
+	view->toolbar->redo_button    = NULL;
 	view->toolbar->undo_menu_item = NULL;
 	view->toolbar->redo_menu_item = NULL;
 	
@@ -1081,10 +1080,12 @@ gedit_view_load_widgets (View *view)
 				{
 					view->toolbar->undo_menu_item = sub_menu_ui_info[sub_count].widget;
 					g_return_if_fail (GTK_IS_WIDGET(view->toolbar->undo_menu_item));
+#if 0					
 					g_print ("<-undo menu item Widget 0x%x      view 0x%x toolbar: 0x%x\n",
 						 (gint) view->toolbar->undo_menu_item,
 						 (gint) view,
 						 (gint) view->toolbar);
+#endif					
 				}
 				if (sub_menu_ui_info [sub_count].moreinfo == gedit_undo_redo)
 				{
@@ -1123,11 +1124,13 @@ gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
 {
 	gedit_debug (DEBUG_VIEW, "");
 
+#if 0
 	g_print ("\nSet_undo. view:0x%x Widget: 0x%x  UNDO:%i  REDO:%i\n",
 		 (gint) view,
 		 (gint) view->toolbar->undo_menu_item,
 		 undo_state,
 		 redo_state);
+#endif	
 	g_return_if_fail (view != NULL);
 	g_return_if_fail (view->toolbar != NULL);
 	g_return_if_fail (view->toolbar->undo_button != NULL);

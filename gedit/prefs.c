@@ -34,6 +34,8 @@
 #include "document.h"
 #include "utils.h"
 #include "window.h"
+#include "plugin.h"
+
 
 Preferences *settings = NULL;
 
@@ -89,7 +91,6 @@ gedit_prefs_save_settings (void)
 	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
-
 
 	gedit_plugin_save_settings ();
 	

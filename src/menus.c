@@ -150,9 +150,6 @@ GnomeUIInfo view_menu[] =
 
 GnomeUIInfo doc_menu[] =
 {
-	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
-
 	GNOMEUIINFO_END
 };
 
@@ -191,6 +188,7 @@ GnomeUIInfo gedit_plugins_menu[] =
 GnomeUIInfo gedit_menu[] =
 {
         GNOMEUIINFO_MENU_FILE_TREE (gedit_file_menu),
+	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
 	{
 		GNOME_APP_UI_SUBTREE,
 		N_("_Plugins"),
@@ -199,7 +197,7 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
-
+	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
 	{
 		GNOME_APP_UI_SUBTREE,

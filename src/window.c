@@ -216,6 +216,68 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 	}
 }
 
+void
+gedit_window_set_view_menu_sensitivity (GnomeApp *app)
+{
+	GnomeUIInfo *ui_info;
+	GnomeUIInfo *sub_ui_info;
+	GtkWidget *widget;
+	gint sensitivity = FALSE;
+	gint count, sub_count;
+	
+	gedit_debug (DEBUG_WINDOW, "");
+
+	g_return_if_fail (app != NULL);
+	
+	switch (settings->mdi_mode)
+	{
+	case GNOME_MDI_NOTEBOOK:
+	case GNOME_MDI_TOPLEVEL:
+		sensitivity = TRUE;
+		break;
+	case GNOME_MDI_MODAL:
+		sensitivity = FALSE;
+		break;
+	case GNOME_MDI_DEFAULT_MODE:
+		if (gnome_preferences_get_mdi_mode() == GNOME_MDI_MODAL)
+			sensitivity = FALSE;
+		else
+			sensitivity = TRUE;
+		break;
+	default:
+		g_assert_not_reached();
+	}
+
+	/* get the UI_info structures */
+	ui_info = gnome_mdi_get_menubar_info (app);
+
+	g_return_if_fail (ui_info != NULL);
+
+	/* Set the menus and submenus */
+	count = 0;
+	while (ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (ui_info[count].type == GNOME_APP_UI_SUBTREE_STOCK ||
+		    ui_info[count].type == GNOME_APP_UI_SUBTREE)
+		{
+			sub_count = 0;
+			sub_ui_info = ui_info [count].moreinfo;
+			while (sub_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
+			{
+				if (sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb ||
+				    sub_ui_info [sub_count].moreinfo == gedit_view_add_cb)
+				{
+					widget =  sub_ui_info [sub_count].widget;
+					if (widget)
+						gtk_widget_set_sensitive (widget, sensitivity);
+				}
+				sub_count++;
+			}
+		}
+		count++;
+	}
+
+}
 
 void
 gedit_window_refresh_all (gint mdi_mode_changed)
@@ -234,9 +296,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 
 	/* Set mdi mode */
 	if (mdi_mode_changed)
-	{
 		gnome_mdi_set_mode (mdi, settings->mdi_mode);
-	}
 
 	tab_pos (settings->tab_pos);
 
@@ -252,6 +312,8 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
 		gedit_window_set_status_bar (nth_app);
 		gedit_window_set_toolbar_labels (nth_app);
+		if (mdi_mode_changed)
+			gedit_window_set_view_menu_sensitivity (nth_app);
 	}
 
 	if (gedit_document_current()==NULL)
@@ -275,7 +337,6 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		for (m = 0; m < g_list_length (nth_doc->views); m++)
 		{
 			mth_view = VIEW (g_list_nth_data (nth_doc->views, m));
-			/* WE NEED TO SET VIEW->APP FIRST !!!!!!!!!!!!!! */
 			if (mdi_mode_changed)
 			{
 				gtk_widget_grab_focus (mth_view->text);
@@ -323,7 +384,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 
 	if (!sensitive && g_list_length (mdi->children) > 0)
 		return;
-	if (sensitive &&g_list_length (mdi->children) == 0)
+	if (sensitive && g_list_length (mdi->children) == 0)
 		return;
 
 	app = g_list_nth_data (mdi->windows, 0);

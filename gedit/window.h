@@ -44,6 +44,7 @@ void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
 void	gedit_window_set_status_bar (GnomeApp *app);
 void	gedit_window_refresh_all (gint mdi_mode_changed);
+void	gedit_window_set_view_menu_sensitivity (GnomeApp *app);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
 void	gedit_window_set_widgets_sensitivity (gint unsensitive);
 
