@@ -1,6 +1,6 @@
-# translation of cs.po to Czech
 # Czech translation for gedit.
 # Copyright (C) 2002,2003 Free Software Foundation, Inc.
+# Copyright (C) 2003 Miloslav Trmac <mitr@volny.cz>
 # Michal Bukovjan <michal.bukovjan@openone.cz>, 2002.
 # Michal Bukovjan <bukm@centrum.cz>, 2003
 # Miloslav Trmac <mitr@volny.cz>, 2003.
@@ -9,13 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-28 14:36+0100\n"
-"PO-Revision-Date: 2003-11-28 20:21+0100\n"
+"POT-Creation-Date: 2003-12-30 19:40+0100\n"
+"PO-Revision-Date: 2003-12-30 22:02+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -507,7 +508,7 @@ msgstr "Nahradit vš_e"
 
 #. Add Replace button
 #: gedit/dialogs/gedit-dialog-replace.c:282
-#: gedit/gedit-file-selector-util.c:131
+#: gedit/gedit-file-selector-util.c:136
 msgid "_Replace"
 msgstr "Nah_radit"
 
@@ -517,8 +518,11 @@ msgstr "Hledat"
 
 #: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
-msgid "Found and replaced %d occurrences."
-msgstr "Nalezeno a nahrazeno %d výskytů."
+msgid "Found and replaced %d occurrence."
+msgid_plural "Found and replaced %d occurrences."
+msgstr[0] "Nalezen a nahrazen %d výskyt."
+msgstr[1] "Nalezeny a nahrazeny %d výskyty."
+msgstr[2] "Nalezeno a nahrazeno %d výskytů."
 
 #: gedit/dialogs/gedit-dialog-uri.c:87
 msgid "Open Location"
@@ -1144,49 +1148,50 @@ msgstr "gedit"
 
 #: gedit/gedit-commands.c:582
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr "gedit je malý a jednoduchý textový editor pro prostředí pracovní plochy GNOME"
+msgstr ""
+"gedit je malý a jednoduchý textový editor pro prostředí pracovní plochy GNOME"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:598 gedit/gedit-document.c:616
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:598 gedit/gedit-document.c:616
 msgid "Untitled"
 msgstr "Nepojmenovaný"
 
-#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
+#: gedit/gedit-document.c:604 gedit/gedit-document.c:651
 msgid "Invalid file name"
 msgstr "Chybný název souboru"
 
-#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: gedit/gedit-document.c:817 gedit/gedit-document.c:921
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Nepovolená UTF-8 data"
 
-#: gedit/gedit-document.c:1210
+#: gedit/gedit-document.c:1213
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nemohu načíst informace o symbolickém odkazu pro %s"
 
-#: gedit/gedit-document.c:1256
+#: gedit/gedit-document.c:1259
 msgid "The file has too many symbolic links."
 msgstr "Soubor má příliš mnoho symbolických odkazů."
 
-#: gedit/gedit-document.c:1312
+#: gedit/gedit-document.c:1315
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
 
-#: gedit/gedit-document.c:1319
+#: gedit/gedit-document.c:1322
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "GEdit nemůže zpracovat tento typ umístění v režimu zápisu."
 
-#: gedit/gedit-document.c:1332
+#: gedit/gedit-document.c:1335
 msgid "Invalid filename."
 msgstr "Chybný název souboru."
 
-#: gedit/gedit-document.c:1444
+#: gedit/gedit-document.c:1447
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1194,7 +1199,7 @@ msgstr ""
 "Pro uložení souboru není dostatek místa na disku.\n"
 "Uvolněte prosím nějaké místo a zkuste to znovu."
 
-#: gedit/gedit-document.c:1449
+#: gedit/gedit-document.c:1452
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1204,11 +1209,11 @@ msgstr ""
 "souboru.  Zkuste prosím uložit menší soubor, nebo uložit tento soubor na "
 "disk, který nemá toto omezení."
 
-#: gedit/gedit-document.c:1493
+#: gedit/gedit-document.c:1496
 msgid "Could not create a backup file."
 msgstr "Nemohu vytvořit záložní soubor."
 
-#: gedit/gedit-document.c:1613
+#: gedit/gedit-document.c:1616
 msgid "It is not possible to revert an Untitled document"
 msgstr "Není možné vrátit Nepojmenovaný dokument."
 
@@ -1337,7 +1342,7 @@ msgstr "Vietnamské"
 msgid "Thai"
 msgstr "Thajské"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 #, c-format
 msgid ""
 "A file named \"%s\" already exists.\n"
@@ -1346,7 +1351,7 @@ msgstr ""
 "Soubor zvaný \"%s\" již existuje.\n"
 "Přejete si jej nahradit souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:160
+#: gedit/gedit-file-selector-util.c:165
 #, c-format
 msgid ""
 "The file \"%s\" is read-only.\n"
@@ -1355,19 +1360,19 @@ msgstr ""
 "Soubor \"%s\" je určen pouze pro čtení.\n"
 "Chcete se pokusit nahradit jej souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:283
+#: gedit/gedit-file-selector-util.c:439
 msgid "Ch_aracter Coding:"
 msgstr "_Kódování znaků:"
 
-#: gedit/gedit-file-selector-util.c:460
+#: gedit/gedit-file-selector-util.c:563
 msgid "Select a file to open"
 msgstr "Vyberte soubor, který otevřít"
 
-#: gedit/gedit-file-selector-util.c:489
+#: gedit/gedit-file-selector-util.c:589
 msgid "Select files to open"
 msgstr "Vyberte soubory, které otevřít"
 
-#: gedit/gedit-file-selector-util.c:519
+#: gedit/gedit-file-selector-util.c:616
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
@@ -1375,30 +1380,30 @@ msgstr "Vyberte název souboru pro uložení"
 msgid "Open File..."
 msgstr "Otevřít soubor..."
 
-#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#: gedit/gedit-file.c:183 gedit/gedit-file.c:906
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Soubor '%s' načten"
 
-#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#: gedit/gedit-file.c:321 gedit/gedit-file.c:470
 #, c-format
 msgid "Saving file '%s'..."
 msgstr "Ukládá se soubor '%s'..."
 
-#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+#: gedit/gedit-file.c:349 gedit/gedit-file.c:485
 msgid "The document has not been saved."
 msgstr "Dokument nebyl uložen."
 
-#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#: gedit/gedit-file.c:363 gedit/gedit-file.c:482
 #, c-format
 msgid "File '%s' saved."
 msgstr "Soubor '%s' byl uložen."
 
-#: gedit/gedit-file.c:444
+#: gedit/gedit-file.c:449
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:643
 #, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
@@ -1409,40 +1414,43 @@ msgstr ""
 "\n"
 "Tuto operaci nebude možné vrátit zpět."
 
-#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:653 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: gedit/gedit-file.c:683
+#: gedit/gedit-file.c:687
 #, c-format
 msgid "Reverting file '%s'..."
 msgstr "Vrací se soubor '%s'..."
 
-#: gedit/gedit-file.c:696
+#: gedit/gedit-file.c:700
 msgid "The document has not been reverted."
 msgstr "Dokument nebyl vrácen do původní podoby."
 
-#: gedit/gedit-file.c:706
+#: gedit/gedit-file.c:710
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Soubor '%s' byl vrácen do původní podoby."
 
-#: gedit/gedit-file.c:732
+#: gedit/gedit-file.c:736
 #, c-format
-msgid "Loading %d files..."
-msgstr "Načítám %d souborů ..."
+msgid "Loading %d file..."
+msgid_plural "Loading %d files..."
+msgstr[0] "Načítám %d soubor ..."
+msgstr[1] "Načítám %d soubory ..."
+msgstr[2] "Načítám %d souborů ..."
 
-#: gedit/gedit-file.c:768
+#: gedit/gedit-file.c:775
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
 
-#: gedit/gedit-file.c:823
+#: gedit/gedit-file.c:830
 #, c-format
 msgid "Loaded %i files"
 msgstr "Načteno %i souborů."
 
-#: gedit/gedit-file.c:957
+#: gedit/gedit-file.c:964
 msgid "Could not read data from stdin."
 msgstr "Nebylo možné načíst data ze standardního vstupu."
 
@@ -1464,56 +1472,66 @@ msgstr "Neznámý"
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
+#: gedit/gedit-mdi-child.c:679
+msgid "Name:"
+msgstr "Název:"
+
+#: gedit/gedit-mdi-child.c:680
+msgid "MIME Type:"
+msgstr "Typ MIME:"
+
+#: gedit/gedit-mdi-child.c:681
+msgid "Encoding:"
+msgstr "Kódování:"
+
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:414
+#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
 #, c-format
 msgid "Open '%s'"
 msgstr "Otevřít '%s'"
 
-#: gedit/gedit-mdi.c:488
+#: gedit/gedit-mdi.c:491
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: gedit/gedit-mdi.c:994
+#: gedit/gedit-mdi.c:1006
 #, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Chcete uložit změny provedené v dokumentu \"%s\"?\n"
-"\n"
-"Pokud vaše změny neuložíte, budou ztraceny."
+msgid "Do you want to save the changes you made to the document \"%s\"?"
+msgstr "Chcete uložit změny provedené v dokumentu \"%s\"?"
 
-#: gedit/gedit-mdi.c:999
-msgid "Do_n't save"
-msgstr "_Neukládat"
+#: gedit/gedit-mdi.c:1014
+msgid "Your changes will be lost if you don't save them."
+msgstr "Pokud vaše změny neuložíte, budou ztraceny."
 
-#: gedit/gedit-mdi.c:1018
+#: gedit/gedit-mdi.c:1022
 msgid "_Don't quit"
 msgstr "Ne_končit"
 
-#: gedit/gedit-mdi.c:1022
+#: gedit/gedit-mdi.c:1026
 msgid "_Don't close"
 msgstr "Ne_zavírat"
 
-#: gedit/gedit-mdi.c:1115
+#: gedit/gedit-mdi.c:1030
+msgid "Do_n't save"
+msgstr "_Neukládat"
+
+#: gedit/gedit-mdi.c:1122
 msgid "(modified)"
 msgstr "(změněný)"
 
-#: gedit/gedit-mdi.c:1121
+#: gedit/gedit-mdi.c:1128
 msgid "(readonly)"
 msgstr "(pouze pro čtení)"
 
-#: gedit/gedit-mdi.c:1716
+#: gedit/gedit-mdi.c:1735
 msgid "Normal"
 msgstr "Normální"
 
-#: gedit/gedit-mdi.c:1717
+#: gedit/gedit-mdi.c:1736
 msgid "Use Normal highlight mode"
 msgstr "Použít režim zvýrazňování Normální"
 
-#: gedit/gedit-mdi.c:1793
+#: gedit/gedit-mdi.c:1812
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použít režim zvýzazňování %s"
@@ -3095,162 +3113,157 @@ msgstr "Zkopírovat vybraný text do schránky"
 msgid "_Copy Text"
 msgstr "_Kopírovat text"
 
-msgid "Tabs"
-msgstr "Tabelátory"
+#~ msgid "Tabs"
+#~ msgstr "Tabelátory"
 
-msgid "Wrap Mode"
-msgstr "Režim zalamování"
+#~ msgid "Wrap Mode"
+#~ msgstr "Režim zalamování"
 
-msgid "Line Numbers"
-msgstr "Čísla řádků"
+#~ msgid "Line Numbers"
+#~ msgstr "Čísla řádků"
 
-msgid "Manager"
-msgstr "Správce"
+#~ msgid "Manager"
+#~ msgstr "Správce"
 
-msgid "Cat_egories:"
-msgstr "_Kategorie:"
+#~ msgid "Cat_egories:"
+#~ msgstr "_Kategorie:"
 
-msgid "Categories"
-msgstr "Kategorie"
+#~ msgid "Categories"
+#~ msgstr "Kategorie"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Automatické odsazování</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"x-large\">Automatické odsazování</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Písmo a barvy</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Písmo a barvy</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Čísla řádků</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Čísla řádků</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Správce</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Správce</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Ukládání</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Ukládání</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Tabelátory</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Tabelátory</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Akce zpět</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Akce zpět</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Režim zalamování</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Režim zalamování</span>"
 
-msgid "Fonts & Colors"
-msgstr "Písma a barvy"
+#~ msgid "Fonts & Colors"
+#~ msgstr "Písma a barvy"
 
-msgid "LOGO"
-msgstr "LOGO"
+#~ msgid "LOGO"
+#~ msgstr "LOGO"
 
-msgid "Line numbers"
-msgstr "Čísla řádků"
+#~ msgid "Line numbers"
+#~ msgstr "Čísla řádků"
 
-msgid "Plugin manager"
-msgstr "Správce zásuvných modulů"
+#~ msgid "Plugin manager"
+#~ msgstr "Správce zásuvných modulů"
 
-msgid "Set _tabs width equivalent to"
-msgstr "Nastavit šířku _tabelátoru na"
+#~ msgid "Set _tabs width equivalent to"
+#~ msgstr "Nastavit šířku _tabelátoru na"
 
-msgid "Set limit on _undo actions to"
-msgstr "Nastavit _omezení pro zpětné akce na"
+#~ msgid "Set limit on _undo actions to"
+#~ msgstr "Nastavit _omezení pro zpětné akce na"
 
-msgid "Wrap mode"
-msgstr "Zalamování"
+#~ msgid "Wrap mode"
+#~ msgstr "Zalamování"
 
-msgid "character(s)"
-msgstr "znak(ů)"
+#~ msgid "character(s)"
+#~ msgstr "znak(ů)"
 
-msgid "About selected plugin"
-msgstr "O vybraném pluginu"
+#~ msgid "About selected plugin"
+#~ msgstr "O vybraném pluginu"
 
-msgid "Configure the selected plugin"
-msgstr "Nastavit vybraný plugin"
+#~ msgid "Configure the selected plugin"
+#~ msgstr "Nastavit vybraný plugin"
 
-msgid "Replace a string"
-msgstr "Nahradit řetězec"
+#~ msgid "Replace a string"
+#~ msgstr "Nahradit řetězec"
 
-msgid "Search again for the same string"
-msgstr "Vyhledat znovu tentýž řetězec"
+#~ msgid "Search again for the same string"
+#~ msgstr "Vyhledat znovu tentýž řetězec"
 
-msgid "Tag Groups Combo"
-msgstr "Kombo skupiny tagů"
+#~ msgid "Tag Groups Combo"
+#~ msgstr "Kombo skupiny tagů"
 
-msgid "Tags Name List"
-msgstr "Seznam názvů tagů"
+#~ msgid "Tags Name List"
+#~ msgstr "Seznam názvů tagů"
 
-msgid "Text Wrapping"
-msgstr "Zalamování textu"
+#~ msgid "Text Wrapping"
+#~ msgstr "Zalamování textu"
 
-msgid "Page"
-msgstr "Stránka"
+#~ msgid "Page"
+#~ msgstr "Stránka"
 
-msgid "Push this button to select the font to be used to print the body"
-msgstr ""
-"Chcete-li vybrat písmo, které se použije pro tisk těla dokumentu, zmáčkněte "
-"toto tlačítko."
+#~ msgid "Push this button to select the font to be used to print the body"
+#~ msgstr ""
+#~ "Chcete-li vybrat písmo, které se použije pro tisk těla dokumentu, "
+#~ "zmáčkněte toto tlačítko."
 
-msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
-"Chcete-li vybrat písmo, které se použije pro tisk záhlaví dokumentu, "
-"zmáčkněte toto tlačítko."
+#~ msgid "Push this button to select the font to be used to print the headers"
+#~ msgstr ""
+#~ "Chcete-li vybrat písmo, které se použije pro tisk záhlaví dokumentu, "
+#~ "zmáčkněte toto tlačítko."
 
-msgid "Encodings"
-msgstr "Kódování"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Písma</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Písma</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Otevřít</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Otevřít</span>"
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Stránka</span>"
 
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Stránka</span>"
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">Při ukládání nového souboru...</span>"
 
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Při ukládání nového souboru...</span>"
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr "<span weight=\"bold\">Při ukládání existujícího souboru...</span>"
 
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Při ukládání existujícího souboru...</span>"
+#~ msgid "Add new encodings"
+#~ msgstr "Přidat nová kódování"
 
-msgid "Add new encodings"
-msgstr "Přidat nová kódování"
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Vždy používat kódování _UTF-8 (rychlejší)"
 
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Vždy používat kódování U_TF-8 (rychlejší)"
+#~ msgid "Line _numbers:"
+#~ msgstr "_Čísla řádků:"
 
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Vždy používat kódování _UTF-8 (rychlejší)"
+#~ msgid "Move down"
+#~ msgstr "Posunout dolů"
 
-msgid "Line _numbers:"
-msgstr "_Čísla řádků:"
+#~ msgid "Move up"
+#~ msgstr "Posunout nahoru"
 
-msgid "Move down"
-msgstr "Posunout dolů"
+#~ msgid "Page he_aders:"
+#~ msgstr "_Záhlaví stránek:"
 
-msgid "Move up"
-msgstr "Posunout nahoru"
+#~ msgid "Print _line numbers every"
+#~ msgstr "Tisknout _čísla řádků každých"
 
-msgid "Page he_aders:"
-msgstr "_Záhlaví stránek:"
+#~ msgid "Print fonts"
+#~ msgstr "Písma pro tisk"
 
-msgid "Print _line numbers every"
-msgstr "Tisknout _čísla řádků každých"
+#~ msgid "Remove an encoding"
+#~ msgstr "Odstranit kódování"
 
-msgid "Print fonts"
-msgstr "Písma pro tisk"
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "Použít _původní kódování souboru, pokud je to možné"
 
-msgid "Remove an encoding"
-msgstr "Odstranit kódování"
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Použít kódování p_rostředí, pokud je to možné"
 
-msgid "U_se original file encoding if possible"
-msgstr "Použít _původní kódování souboru, pokud je to možné"
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Použít kódování pr_ostředí, pokud je to možné"
 
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Použít kódování p_rostředí, pokud je to možné"
-
-msgid "Use current _locale's encoding if possible"
-msgstr "Použít kódování pr_ostředí, pokud je to možné"
-
-msgid "_Supported encodings:"
-msgstr "_Podporovaná kódování:"
+#~ msgid "_Supported encodings:"
+#~ msgstr "_Podporovaná kódování:"
