@@ -31,9 +31,8 @@
 #include <config.h>
 #endif
 
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 #include <glade/glade-xml.h>
+#include <libgnome/libgnome.h>
 
 #include <string.h>
 
@@ -47,8 +46,12 @@
 #include "gedit-plugin.h"
 #include "gedit-debug.h"
 
-#define PLUGIN_MANAGER_ACTIVE_COLUMN 0
-#define PLUGIN_MANAGER_NAME_COLUMN 1
+enum
+{
+	ACTIVE_COLUMN,
+	NAME_COLUMN,
+	N_COLUMNS
+};
 
 #define PLUGIN_MANAGER_NAME_TITLE _("Plugin")
 #define PLUGIN_MANAGER_ACTIVE_TITLE _("Enabled")
@@ -74,9 +77,6 @@ static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *
 static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model);
 static void plugin_manager_toggle_all (GeditPluginManager *dialog);
 
-static void plugin_manager_destroyed (GtkObject *obj,  void *dialog_pointer);
-
-
 static void
 about_button_cb (GtkWidget *button, GeditPluginManager *pm)
 {
@@ -95,38 +95,33 @@ about_button_cb (GtkWidget *button, GeditPluginManager *pm)
 
 	authors = g_strsplit (info->plugin->author, ", ", 0); 
 
-	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-plugin-manager.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file (GNOME_ICONDIR "/gedit-plugin-manager.png", NULL);
 
 	/* if there is another about dialog already open destroy it */
 	if (about)
 		gtk_widget_destroy (about);
 
-	about = gnome_about_new (info->plugin->name,
-				 NULL,
-				 info->plugin->copyright,
-				 info->plugin->desc,
-				 (const gchar**) authors,
-				 NULL,
-				 NULL,
-				 pixbuf);
+	about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
+			      "name", info->plugin->name,
+			      "copyright", info->plugin->copyright,
+			      "authors", (const gchar**) authors,
+			      "logo", pixbuf,
+			      NULL);
 
-	g_signal_connect (G_OBJECT (about), "destroy",
-			  G_CALLBACK (gtk_widget_destroyed), &about);
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+
+	g_signal_connect (about, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+	g_signal_connect (about, "destroy", G_CALLBACK (gtk_widget_destroyed), &about);
+
+	gtk_window_set_transient_for (GTK_WINDOW (about),
+				      GTK_WINDOW (gtk_widget_get_toplevel (pm->page)));
+	gtk_window_present (GTK_WINDOW (about));
 
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 
 	if (authors != NULL)
 		g_strfreev (authors);
-
-	gtk_window_set_transient_for (GTK_WINDOW (about),
-			GTK_WINDOW (gtk_widget_get_toplevel (pm->page)));
-
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
-
-	gtk_widget_show (about);
-
-	gedit_debug (DEBUG_PLUGINS, "Done");	
 }
 
 static void
@@ -136,7 +131,7 @@ configure_button_cb (GtkWidget *button, gpointer data)
 	GeditPluginInfo *info;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-	
+
 	info = plugin_manager_get_selected_plugin (pm);
 
 	g_return_if_fail (info != NULL);
@@ -158,15 +153,11 @@ plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 {
 	GeditPluginInfo *info;
 	const gchar *title;
-
-	/*
-	gedit_debug (DEBUG_PLUGINS, "");
-	*/
 	
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (tree_column != NULL);
 
-	gtk_tree_model_get (tree_model, iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (tree_model, iter, NAME_COLUMN, &info, -1);
 
 	if (info == NULL)
 		return;
@@ -179,16 +170,17 @@ plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 }
 
 static void
-active_toggled_cb (GtkCellRendererToggle     *cell,
+active_toggled_cb (GtkCellRendererToggle *cell,
 		   gchar                 *path_str,
-		   gpointer               data)
+		   GeditPluginManager    *dialog)
 {
-	GeditPluginManager *dialog = (GeditPluginManager *)data;
-	GtkTreeIter  iter;
-	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	GtkTreeIter iter;
+	GtkTreePath *path;
 	GtkTreeModel *model;
 
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	path = gtk_tree_path_new_from_string (path_str);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->tree));
 	g_return_if_fail (model != NULL);
@@ -254,7 +246,6 @@ column_clicked_cb (GtkTreeViewColumn *tree_column, gpointer data)
 	plugin_manager_toggle_all (dialog);
 }
 
-
 static void
 plugin_manager_populate_lists (GeditPluginManager *dialog)
 {
@@ -273,8 +264,8 @@ plugin_manager_populate_lists (GeditPluginManager *dialog)
 		info = (GeditPluginInfo *)plugins->data;
 
 		gtk_list_store_append (model, &iter);
-		gtk_list_store_set (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, info,
-				    PLUGIN_MANAGER_ACTIVE_COLUMN,(info->state == GEDIT_PLUGIN_ACTIVATED),
+		gtk_list_store_set (model, &iter, NAME_COLUMN, info,
+				    ACTIVE_COLUMN,(info->state == GEDIT_PLUGIN_ACTIVATED),
 				    -1);
 
 		plugins = plugins->next;
@@ -290,7 +281,7 @@ plugin_manager_populate_lists (GeditPluginManager *dialog)
 		gtk_tree_selection_select_iter (selection, &iter);
 
 		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
-				    PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+				    NAME_COLUMN, &info, -1);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
@@ -304,18 +295,20 @@ plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboolean acti
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gtk_tree_model_get (model, iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (model, iter, NAME_COLUMN, &info, -1);
 
 	g_return_if_fail (info != NULL);
 
-	if (active) {
+	if (active)
+	{
 		/* activate the plugin */
 		if (!gedit_plugins_engine_activate_plugin (info->plugin)) {
 			gedit_debug (DEBUG_PLUGINS, "Could not activate %s.\n", info->plugin->name);
 			active ^= 1;
 		}
 	}
-	else {
+	else
+	{
 		/* deactivate the plugin */
 		if (!gedit_plugins_engine_deactivate_plugin (info->plugin)) {
 			gedit_debug (DEBUG_PLUGINS, "Could not deactivate %s.\n", info->plugin->name);
@@ -324,10 +317,8 @@ plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboolean acti
 	}
   
 	/* set new value */
-	gtk_list_store_set (GTK_LIST_STORE (model), iter,
-			    PLUGIN_MANAGER_ACTIVE_COLUMN,
+	gtk_list_store_set (GTK_LIST_STORE (model), iter, ACTIVE_COLUMN,
 			    (info->state == GEDIT_PLUGIN_ACTIVATED), -1);
-
 }
 
 static void
@@ -337,7 +328,7 @@ plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gtk_tree_model_get (model, iter, PLUGIN_MANAGER_ACTIVE_COLUMN, &active, -1);
+	gtk_tree_model_get (model, iter, ACTIVE_COLUMN, &active, -1);
 
 	active ^= 1;
 
@@ -363,7 +354,7 @@ plugin_manager_get_selected_plugin (GeditPluginManager *dialog)
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-		gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+		gtk_tree_model_get (model, &iter, NAME_COLUMN, &info, -1);
 	}
 	
 	return info;
@@ -408,7 +399,7 @@ name_search_cb (GtkTreeModel *model,
 	gint key_len;
 	gboolean retval;
 
-	gtk_tree_model_get (model, iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (model, iter, NAME_COLUMN, &info, -1);
 	if (!info)
 		return FALSE;
 
@@ -441,8 +432,11 @@ plugin_manager_construct_tree (GeditPluginManager *dialog)
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	model = gtk_list_store_new (2, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+
 	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->tree), GTK_TREE_MODEL (model));
+	g_object_unref (model);
+
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (dialog->tree), TRUE);
 	gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (dialog->tree), TRUE);
 
@@ -451,7 +445,7 @@ plugin_manager_construct_tree (GeditPluginManager *dialog)
 	g_signal_connect (G_OBJECT (cell), "toggled", G_CALLBACK (active_toggled_cb), dialog);
 	column = gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_ACTIVE_TITLE,
 							   cell, "active",
-							   PLUGIN_MANAGER_ACTIVE_COLUMN, NULL);
+							   ACTIVE_COLUMN, NULL);
 	gtk_tree_view_column_set_clickable (column, TRUE);
 	gtk_tree_view_column_set_resizable (column, TRUE);
 	g_signal_connect (G_OBJECT (column), "clicked", G_CALLBACK (column_clicked_cb), dialog);
@@ -466,7 +460,7 @@ plugin_manager_construct_tree (GeditPluginManager *dialog)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->tree), column);
 
 	/* Enable search for our non-string column */
-	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dialog->tree), PLUGIN_MANAGER_NAME_COLUMN);
+	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dialog->tree), NAME_COLUMN);
 	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (dialog->tree),
 					     name_search_cb,
 					     NULL,
@@ -477,9 +471,19 @@ plugin_manager_construct_tree (GeditPluginManager *dialog)
 	g_signal_connect (G_OBJECT (dialog->tree), "row_activated",
 			  G_CALLBACK (row_activated_cb), dialog);
 
-	g_object_unref (G_OBJECT (model));
-	
 	gtk_widget_show (dialog->tree);
+}
+
+static void
+plugin_manager_destroyed (GtkObject *obj, void *pm_pointer)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	if (pm_pointer != NULL)
+	{
+		g_free (pm_pointer);
+		pm_pointer = NULL;
+	}
 }
 
 GtkWidget *
@@ -495,8 +499,9 @@ gedit_plugin_manager_get_page (void)
 	gui = glade_xml_new (GEDIT_GLADEDIR "plugin-manager.glade2",
 			     "plugin_manager_dialog_content", NULL);
 
-	if (!gui) {
-		g_warning (_("Could not find plugin-manager.glade2, reinstall gedit.\n"));
+	if (!gui)
+	{
+		g_warning (MISSING_FILE, GEDIT_GLADEDIR "plugin-manager.glade2");
 		return NULL;
 	}
 
@@ -511,10 +516,13 @@ gedit_plugin_manager_get_page (void)
 	pm->configure_button = glade_xml_get_widget (gui, "configure_button");
 	viewport = glade_xml_get_widget (gui, "plugin_viewport");
 
-	if (!(content && pm->tree && pm->configure_button &&
-	      viewport && pm->about_button)) {
-
-		g_warning (_("Invalid glade file for plugin manager -- not all widgets found.\n"));
+	if (!content		  ||
+	    !pm->tree		  ||
+	    !pm->configure_button ||
+	    !viewport		  ||
+	    !pm->about_button)
+	{
+		g_warning (MISSING_WIDGETS, GEDIT_GLADEDIR "replace.glade2");
 		g_object_unref (gui);
 
 		return NULL;
@@ -536,8 +544,8 @@ gedit_plugin_manager_get_page (void)
 	gtk_box_pack_start (GTK_BOX (pm->page),
 			    content, TRUE, TRUE, 0);
 
-	g_signal_connect(G_OBJECT (pm->page), "destroy",
-			 G_CALLBACK (plugin_manager_destroyed), pm);
+	g_signal_connect (G_OBJECT (pm->page), "destroy",
+			  G_CALLBACK (plugin_manager_destroyed), pm);
 
 	g_object_unref (gui);
 
@@ -547,15 +555,5 @@ gedit_plugin_manager_get_page (void)
 	plugin_manager_populate_lists (pm);
 
 	return pm->page;
-}
-
-static void
-plugin_manager_destroyed (GtkObject *obj,  void *pm_pointer)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (pm_pointer != NULL)
-		g_free (pm_pointer);
-
 }
 

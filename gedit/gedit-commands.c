@@ -36,7 +36,6 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
 
 #include "gedit-commands.h"
 #include "gedit2.h"
@@ -53,7 +52,7 @@ void
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	gedit_debug (DEBUG_COMMANDS, "verbname: %s", verbname);
-	
+
 	gedit_file_new ();
 }
 
@@ -512,62 +511,78 @@ gedit_cmd_help_contents (BonoboUIComponent *uic, gpointer user_data, const gchar
 	}
 }
 
+static void
+activate_url (GtkAboutDialog *about, const gchar *url, gpointer data)
+{
+	gnome_url_show (url, NULL);
+}
+
 void 
 gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	static GtkWidget *about = NULL;
-	GdkPixbuf* pixbuf = NULL;
-	
-	gchar *authors[] = {
+
+	GdkPixbuf *logo;
+
+	const gchar *authors[] = {
 		"Paolo Maggi <paolo.maggi@polito.it>",
-		"James Willcox <jwillcox@cs.indiana.edu>",
-		"Chema Celorio <chema@ximian.com>", 
-		"Federico Mena Quintero <federico@ximian.com>",
 		"Paolo Borelli <pborelli@katamail.com>",
+		"James Willcox <jwillcox@gnome.org>",
+		"Chema Celorio", 
+		"Federico Mena Quintero <federico@ximian.com>",
 		NULL
 	};
-	
-	gchar *documenters[] = {
+
+	const gchar *documenters[] = {
 		"Sun GNOME Documentation Team <gdocteam@sun.com>",
 		"Eric Baudais <baudais@okstate.edu>",
 		NULL
 	};
-	
-	gchar *translator_credits = _("translator_credits");
+
+	const gchar *copyright = "Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
+				 "Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
+				 "Copyright \xc2\xa9 2003-2004 Paolo Maggi";
+
+	const gchar *comments = _("gedit is a small and lightweight text editor for the GNOME Desktop");
+
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	if (about != NULL)
 	{
+		gtk_window_set_transient_for (GTK_WINDOW (about),
+					      GTK_WINDOW (gedit_get_active_window ()));
 		gtk_window_present (GTK_WINDOW (about));
 
 		return;
 	}
-	
-	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-logo.png", NULL);
 
-	about = gnome_about_new (_("gedit"), VERSION,
-				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
-				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
-				"Copyright \xc2\xa9 2003-2004 Paolo Maggi",
-				_("gedit is a small and lightweight text editor for the GNOME Desktop"),
-				(const char **)authors,
-				(const char **)documenters,
-				strcmp (translator_credits, "translator_credits") != 0 ? 
-					(const char *)translator_credits : NULL,
-				pixbuf);
+	logo = gdk_pixbuf_new_from_file (GNOME_ICONDIR "/gedit-logo.png", NULL);
 
-	gtk_window_set_transient_for (GTK_WINDOW (about),
-			GTK_WINDOW (gedit_get_active_window ()));
+	gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
+
+	about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
+			      "name", _("gedit"),
+			      "version", VERSION,
+			      "copyright", copyright,
+			      "comments", comments,
+			      "website", "http://gedit.sourceforge.net",
+			      "authors", authors,
+			      "documenters", documenters,
+			      "translator_credits", _("translator_credits"),
+			      "logo", logo,
+			      NULL);
 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
 
-	if (pixbuf != NULL)
-		g_object_unref (pixbuf);
-	
-	g_signal_connect (G_OBJECT (about), "destroy",
-			  G_CALLBACK (gtk_widget_destroyed), &about);
-	
-	gtk_widget_show (about);
+	g_signal_connect (about, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+	g_signal_connect (about, "destroy", G_CALLBACK (gtk_widget_destroyed), &about);
+
+	gtk_window_set_transient_for (GTK_WINDOW (about),
+				      GTK_WINDOW (gedit_get_active_window ()));
+	gtk_window_present (GTK_WINDOW (about));
+
+	if (logo)
+		g_object_unref (logo);
 }
 
