@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.8\n"
-"POT-Creation-Date: 1999-04-03 17:40+0100\n"
+"POT-Creation-Date: 1999-04-06 15:56+0100\n"
 "PO-Revision-Date: 1999-01-04 23:40+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -105,7 +105,7 @@ msgid "Close"
 msgstr "Lukk"
 
 #. Print Settings
-#: src/gE_document.c:67 src/gE_prefs_box.c:679 src/gE_print.c:70
+#: src/gE_document.c:67 src/gE_prefs_box.c:763 src/gE_print.c:70
 #: src/toolbar.c:46
 #, fuzzy
 msgid "Print"
@@ -125,83 +125,108 @@ msgid "Line"
 msgstr ""
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:434
-#: src/gE_prefs_box.c:435 src/gE_prefs_box.c:485 src/gE_prefs_box.c:486
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:480
+#: src/gE_prefs_box.c:481 src/gE_prefs_box.c:531 src/gE_prefs_box.c:532
 #: src/menus.c:232
 msgid "_Plugins"
 msgstr "Tillegg"
 
-#: src/gE_prefs_box.c:183
+#: src/gE_prefs_box.c:81
+msgid "Default"
+msgstr ""
+
+#: src/gE_prefs_box.c:82
+msgid "Notebook"
+msgstr ""
+
+#: src/gE_prefs_box.c:83
+msgid "Toplevel"
+msgstr ""
+
+#: src/gE_prefs_box.c:84
+msgid "Modal"
+msgstr ""
+
+#: src/gE_prefs_box.c:229
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:196
+#: src/gE_prefs_box.c:242
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "Slå av/på statuslinje"
 
-#: src/gE_prefs_box.c:205
+#: src/gE_prefs_box.c:251
 #, fuzzy
 msgid "Show Splitscreen"
 msgstr "Slå av/på splittet skjerm"
 
-#: src/gE_prefs_box.c:214
+#: src/gE_prefs_box.c:260
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:227
+#: src/gE_prefs_box.c:273
 #, fuzzy
 msgid "Enable Autoindent"
 msgstr "Slå av/på autoindentering"
 
-#: src/gE_prefs_box.c:236
+#: src/gE_prefs_box.c:282
 #, fuzzy
 msgid "Enable Wordwrap"
 msgstr "Slå av/på ordbryting"
 
-#: src/gE_prefs_box.c:256
+#: src/gE_prefs_box.c:302
 msgid "Print Command"
 msgstr ""
 
-#: src/gE_prefs_box.c:346
+#: src/gE_prefs_box.c:392
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:363
+#: src/gE_prefs_box.c:409
 #, fuzzy
 msgid "Select..."
 msgstr "Marker alt"
 
-#: src/gE_prefs_box.c:529
+#: src/gE_prefs_box.c:575
 msgid "Name"
 msgstr ""
 
-#: src/gE_prefs_box.c:529
+#: src/gE_prefs_box.c:575
 msgid "Location"
 msgstr ""
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:536 src/gE_prefs_box.c:689
+#: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
 #, fuzzy
 msgid "Plugins"
 msgstr "Tillegg"
 
-#: src/gE_prefs_box.c:617
+#: src/gE_prefs_box.c:663
 msgid "Add"
 msgstr ""
 
-#: src/gE_prefs_box.c:622
+#: src/gE_prefs_box.c:668
 msgid "Remove"
 msgstr ""
 
+#: src/gE_prefs_box.c:691
+msgid "MDI Mode"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:758
 msgid "General"
 msgstr ""
 
 #. Font Settings
-#: src/gE_prefs_box.c:684
+#: src/gE_prefs_box.c:768
 msgid "Font"
+msgstr ""
+
+#. MDI Settings
+#: src/gE_prefs_box.c:778
+msgid "MDI"
 msgstr ""
 
 #: src/gE_print.c:83
@@ -377,59 +402,59 @@ msgstr "Lagre instillinger"
 msgid "Save the current settings for future sessions"
 msgstr ""
 
-#: src/search.c:148
+#: src/search.c:150
 #, c-format
 msgid ""
 "Total Lines: %i\n"
 "Current Line: %i"
 msgstr ""
 
-#: src/search.c:362 src/search.c:580
+#: src/search.c:365 src/search.c:586
 #, fuzzy
 msgid "Search and Replace"
 msgstr "Søk og erstatt..."
 
-#: src/search.c:362 src/search.c:580
+#: src/search.c:365 src/search.c:586
 #, fuzzy
 msgid "Search"
 msgstr "Søk"
 
-#: src/search.c:365
+#: src/search.c:368
 #, fuzzy
 msgid "Search For:"
 msgstr "Søk"
 
-#: src/search.c:369
+#: src/search.c:372
 #, fuzzy
 msgid "Text"
 msgstr "Bare tekst"
 
-#: src/search.c:376
+#: src/search.c:379
 msgid "Line Number"
 msgstr ""
 
-#: src/search.c:395
+#: src/search.c:398
 #, fuzzy
 msgid "Search:"
 msgstr "Søk"
 
-#: src/search.c:398
+#: src/search.c:401
 msgid "Start searching at cursor position"
 msgstr ""
 
-#: src/search.c:403
+#: src/search.c:406
 msgid "Start searching at beginning of the document"
 msgstr ""
 
-#: src/search.c:405
+#: src/search.c:408
 msgid "Case sensitive"
 msgstr ""
 
-#: src/search.c:409
+#: src/search.c:412
 msgid "Replace:"
 msgstr ""
 
-#: src/search.c:412
+#: src/search.c:415
 msgid "Prompt before replacing"
 msgstr ""
 

@@ -30,6 +30,7 @@
 #include "gE_prefs_box.h"
 #include "gE_document.h"
 #include "gE_plugin_api.h"
+#include "gE_mdi.h"
 
 typedef struct _gE_prefs_data {
 	GnomePropertyBox *pbox;
@@ -54,6 +55,10 @@ typedef struct _gE_prefs_data {
 	GtkWidget *plugins_toggle;
 	gE_data *gData;
 	
+	/* MDI Settings */
+	GtkRadioButton *mdi_type [NUM_MDI_MODES];
+	GSList *mdi_list;
+
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
 	
@@ -64,6 +69,20 @@ typedef struct _gE_prefs_data {
 static gE_prefs_data *prefs;
 GList *plugin_list;
 plugin_callback_struct pl_callbacks;
+
+guint mdi_type [NUM_MDI_MODES] = {
+	GNOME_MDI_DEFAULT_MODE,
+	GNOME_MDI_NOTEBOOK,
+	GNOME_MDI_TOPLEVEL,
+	GNOME_MDI_MODAL
+};
+
+gchar *mdi_type_label [NUM_MDI_MODES] = {
+	N_("Default"),
+	N_("Notebook"),
+	N_("Toplevel"),
+	N_("Modal"),
+};
 
 void cancel()
 {
@@ -89,6 +108,17 @@ gint i;
   
   	gE_window_set_status_bar (settings->show_status);
   
+  for (i = 0; i < NUM_MDI_MODES; i++)
+     if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active)
+       {
+         if (mdiMode != mdi_type[i])
+           {
+             mdiMode = mdi_type[i];
+             gnome_mdi_set_mode (mdi, mdiMode);
+           }
+         break;
+       }
+  
 /*  style = gtk_style_new();
   gdk_font_unref (style->font);
   style->font = gdk_font_load (settings->font);
@@ -112,7 +142,7 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 {
   FILE *file;
   gchar *rc;
-
+  gint i;
 
   /* General Settings */
   settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
@@ -144,6 +174,14 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);  
 
+  /* MDI Settings */
+  for (i = 0; i < NUM_MDI_MODES; i++)
+     if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active)
+       {
+         settings->mdi_mode = i;
+       }
+  
+  
   gE_window_refresh(data->window);
   gE_save_settings();
 }
@@ -152,7 +190,7 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 
 void get_prefs(gE_data *data)
 {
-  gint uP;
+  gint i;
   
   gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), settings->print_cmd);
   gtk_entry_set_text (GTK_ENTRY (prefs->font), settings->font);
@@ -168,6 +206,14 @@ void get_prefs(gE_data *data)
      gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
    else
      gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), TRUE);
+   
+   for (i = 0; i < NUM_MDI_MODES; i++)
+      if (mdiMode == mdi_type[i]) 
+        {
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->mdi_type[i]),
+          							 TRUE);
+          break;
+        }
 }
 
 /* General UI Stuff.. */
@@ -629,6 +675,44 @@ static GtkWidget *plugins_page_new()
 
 /* End of Plugins Stuff... */
 
+/* MDI Stuff.. */
+
+
+static GtkWidget *mdi_page_new()
+{
+  GtkWidget *main_vbox, *vbox, *frame, *hbox;
+  GtkWidget *label;
+  gint i;
+
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("MDI Mode"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new(FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+  
+  prefs->mdi_list = NULL;
+  
+  for (i = 0; i < NUM_MDI_MODES; i++)
+     {
+       prefs->mdi_type[i] = GTK_RADIO_BUTTON
+        	(gtk_radio_button_new_with_label(prefs->mdi_list, _(mdi_type_label[i])));
+       
+       gtk_widget_show (GTK_WIDGET (prefs->mdi_type[i]));
+       gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(prefs->mdi_type[i]), TRUE, TRUE, 2);
+       prefs->mdi_list = gtk_radio_button_group (prefs->mdi_type[i]);
+     }
+  
+  return main_vbox;
+}
+
+/* End of MDI Stuff */
+
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 {
   gnome_property_box_changed (pbox);
@@ -638,7 +722,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 {
   static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
   GtkWidget *label;
-
+  gint i;
   
   gE_data *data = (gE_data *)cbdata;
 
@@ -689,6 +773,11 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   label = gtk_label_new (_("Plugins"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            plugins_page_new(), label);
+  
+  /* MDI Settings */
+  label = gtk_label_new (_("MDI"));
+  gtk_notebook_append_page (GTK_NOTEBOOK ((prefs->pbox)->notebook),
+  					mdi_page_new(), label);
     
   get_prefs(data);
 
@@ -709,6 +798,11 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
   gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+
+  for (i = 0; i < NUM_MDI_MODES; i++)
+     gtk_signal_connect (GTK_OBJECT (prefs->mdi_type[i]), "clicked",
+		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+
   
   
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));

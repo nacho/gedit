@@ -74,10 +74,10 @@ search_again_cb(GtkWidget * w, gpointer cbdata)
 {
 	gE_data *data = (gE_data *) cbdata;
 
-	if (data->window->search->window) {
-		data->temp2 = data->window->search;
-		data->window->search->replace = FALSE;
-		data->window->search->again = TRUE;
+	if (data->document->search->window) {
+		data->temp2 = data->document->search;
+		data->document->search->replace = FALSE;
+		data->document->search->again = TRUE;
 		search_start(w, data);
 	}
 } /* search_again_cb */
@@ -92,17 +92,19 @@ search_again_cb(GtkWidget * w, gpointer cbdata)
 void 
 goto_line_cb(GtkWidget *wgt, gpointer cbwindow)
 {
-	gE_window *w = (gE_window *)cbwindow;
+	gE_data *data = (gE_data *)cbwindow;
 
-	g_assert(w != NULL);
-	g_assert(w->search != NULL);
-	if (!w->search->window)
-		search_create_dialog(w, w->search, FALSE);
+	g_assert(data != NULL);
+	data->document = gE_document_current();
+	
+	g_assert(data->document->search != NULL);
+	if (!data->document->search->window)
+		search_create_dialog(NULL, data->document->search, FALSE);
 	gtk_check_menu_item_set_state(
-		GTK_CHECK_MENU_ITEM(w->search->line_item), 1);
-	gtk_option_menu_set_history(GTK_OPTION_MENU(w->search->search_for), 1);
-	search_for_line(NULL, w->search);
-	gtk_widget_show(w->search->window);
+		GTK_CHECK_MENU_ITEM(data->document->search->line_item), 1);
+	gtk_option_menu_set_history(GTK_OPTION_MENU(data->document->search->search_for), 1);
+	search_for_line(NULL, data->document->search);
+	gtk_widget_show(data->document->search->window);
 
 } /* goto_line_cb */
 
@@ -213,9 +215,10 @@ search_start(GtkWidget * w, gE_data * data)
 	gchar bla[] = " ";
 	gint len, start_pos, text_len, match, i, search_for_line, cur_line,
 	end_line, oldchanged, replace_diff = 0;
-	/*options = data->temp2;*/
-	options = data->window->search;
+	options = data->temp2;
+/*	options = data->document->search;*/
 	doc = gE_document_current();
+	options = doc->search;
 	search_for = gtk_entry_get_text(GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text(GTK_ENTRY(options->replace_entry));
 	buffer = g_malloc0(sizeof(search_for));
@@ -566,41 +569,44 @@ search_replace_common(gE_data *data, gboolean do_replace)
 	gE_data *d;
 
 	g_assert(data != NULL);
+	
+	data->document = gE_document_current();
+	
 	w = data->window;
 	g_assert(w != NULL);
-	g_assert(w->search != NULL);
+	g_assert(data->document->search != NULL);
 
-	if (!w->search->window)
-		search_create_dialog(data->window, w->search, do_replace);
+	if (!data->document->search->window)
+		search_create_dialog(data->window, data->document->search, do_replace);
 
-	w->search->replace = do_replace;
-	w->search->again = FALSE;
-	search_for_text(NULL, w->search);
-	gtk_window_set_title(GTK_WINDOW(w->search->window),
+	data->document->search->replace = do_replace;
+	data->document->search->again = FALSE;
+	search_for_text(NULL, data->document->search);
+	gtk_window_set_title(GTK_WINDOW(data->document->search->window),
 			(do_replace) ? _("Search and Replace") : _("Search"));
 
-	/*d = g_malloc0(sizeof(gE_data));
-	d->window = w;
-	d->temp2 = w->search;
-*/
+	d = g_malloc0(sizeof(gE_data));
+	d->document = data->document;
+	d->temp2 = data->document->search;
+
 	if (do_replace)
 	{
-		gtk_signal_disconnect_by_func (GTK_OBJECT (w->search->search_entry),
+		gtk_signal_disconnect_by_func (GTK_OBJECT (data->document->search->search_entry),
 			GTK_SIGNAL_FUNC (search_start), data);
-		gtk_signal_disconnect_by_func (GTK_OBJECT (w->search->search_entry),
-			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer)w->search->window);
-		gtk_widget_show(w->search->replace_box);
+		gtk_signal_disconnect_by_func (GTK_OBJECT (data->document->search->search_entry),
+			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer)data->document->search->window);
+		gtk_widget_show(data->document->search->replace_box);
 	}
 	else
 	{
-		gtk_signal_connect (GTK_OBJECT (w->search->search_entry), "activate",
+		gtk_signal_connect (GTK_OBJECT (data->document->search->search_entry), "activate",
 			GTK_SIGNAL_FUNC (search_start), data);
-		gtk_signal_connect_object (GTK_OBJECT (w->search->search_entry), "activate",
-			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer) w->search->window);
-		gtk_widget_hide(w->search->replace_box);
+		gtk_signal_connect_object (GTK_OBJECT (data->document->search->search_entry), "activate",
+			GTK_SIGNAL_FUNC (gtk_widget_hide), (gpointer) data->document->search->window);
+		gtk_widget_hide(data->document->search->replace_box);
 	}
 	
-	gtk_widget_show(w->search->window);
+	gtk_widget_show(data->document->search->window);
 } /* search_replace_common */
 
 /* the end */

@@ -292,6 +292,7 @@ char *gE_prefs_get_default (char *name)
 		{ "show statusbar", "1" },
 		{ "tb relief", "0" },
 		{ "splitscreen", "0" },
+		{ "mdi mode", "0" },
 		{ NULL, NULL }
 	};
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.0\n"
-"POT-Creation-Date: 1999-04-03 17:40+0100\n"
+"POT-Creation-Date: 1999-04-06 15:56+0100\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -111,7 +111,7 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. Print Settings
-#: src/gE_document.c:67 src/gE_prefs_box.c:679 src/gE_print.c:70
+#: src/gE_document.c:67 src/gE_prefs_box.c:763 src/gE_print.c:70
 #: src/toolbar.c:46
 msgid "Print"
 msgstr "Impresión"
@@ -130,78 +130,103 @@ msgid "Line"
 msgstr "Líneas"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:434
-#: src/gE_prefs_box.c:435 src/gE_prefs_box.c:485 src/gE_prefs_box.c:486
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:480
+#: src/gE_prefs_box.c:481 src/gE_prefs_box.c:531 src/gE_prefs_box.c:532
 #: src/menus.c:232
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/gE_prefs_box.c:183
+#: src/gE_prefs_box.c:81
+msgid "Default"
+msgstr ""
+
+#: src/gE_prefs_box.c:82
+msgid "Notebook"
+msgstr ""
+
+#: src/gE_prefs_box.c:83
+msgid "Toplevel"
+msgstr ""
+
+#: src/gE_prefs_box.c:84
+msgid "Modal"
+msgstr ""
+
+#: src/gE_prefs_box.c:229
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/gE_prefs_box.c:196
+#: src/gE_prefs_box.c:242
 msgid "Show Statusbar"
 msgstr "Ver barra de estado"
 
-#: src/gE_prefs_box.c:205
+#: src/gE_prefs_box.c:251
 msgid "Show Splitscreen"
 msgstr "División de pantalla"
 
-#: src/gE_prefs_box.c:214
+#: src/gE_prefs_box.c:260
 msgid "Editor Behavior"
 msgstr "Comportamiento del Editor"
 
-#: src/gE_prefs_box.c:227
+#: src/gE_prefs_box.c:273
 msgid "Enable Autoindent"
 msgstr "Auto-indentación"
 
-#: src/gE_prefs_box.c:236
+#: src/gE_prefs_box.c:282
 msgid "Enable Wordwrap"
 msgstr "Wordwrap"
 
-#: src/gE_prefs_box.c:256
+#: src/gE_prefs_box.c:302
 msgid "Print Command"
 msgstr "Comando de Impresión"
 
-#: src/gE_prefs_box.c:346
+#: src/gE_prefs_box.c:392
 msgid "Current Font"
 msgstr "Fuente Actual"
 
-#: src/gE_prefs_box.c:363
+#: src/gE_prefs_box.c:409
 msgid "Select..."
 msgstr "Seleccionar..."
 
-#: src/gE_prefs_box.c:529
+#: src/gE_prefs_box.c:575
 msgid "Name"
 msgstr "Nombre"
 
-#: src/gE_prefs_box.c:529
+#: src/gE_prefs_box.c:575
 msgid "Location"
 msgstr "Localización"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:536 src/gE_prefs_box.c:689
+#: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
 msgid "Plugins"
 msgstr "Extensiones"
 
-#: src/gE_prefs_box.c:617
+#: src/gE_prefs_box.c:663
 msgid "Add"
 msgstr "Añadir"
 
-#: src/gE_prefs_box.c:622
+#: src/gE_prefs_box.c:668
 msgid "Remove"
 msgstr "Borrar"
 
+#: src/gE_prefs_box.c:691
+msgid "MDI Mode"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:758
 msgid "General"
 msgstr "General"
 
 #. Font Settings
-#: src/gE_prefs_box.c:684
+#: src/gE_prefs_box.c:768
 msgid "Font"
 msgstr "Fuente"
+
+#. MDI Settings
+#: src/gE_prefs_box.c:778
+msgid "MDI"
+msgstr ""
 
 #: src/gE_print.c:83
 #, c-format
@@ -361,7 +386,7 @@ msgstr "_Guardar la configuración"
 msgid "Save the current settings for future sessions"
 msgstr "Guardar la configuración actual para futuras sesiones"
 
-#: src/search.c:148
+#: src/search.c:150
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -370,47 +395,47 @@ msgstr ""
 "Total de Líneas: %i\n"
 "Línea Actual: %i"
 
-#: src/search.c:362 src/search.c:580
+#: src/search.c:365 src/search.c:586
 msgid "Search and Replace"
 msgstr "Búsqueda y Reemplazo"
 
-#: src/search.c:362 src/search.c:580
+#: src/search.c:365 src/search.c:586
 msgid "Search"
 msgstr "Búsqueda"
 
-#: src/search.c:365
+#: src/search.c:368
 msgid "Search For:"
 msgstr "Buscar por:"
 
-#: src/search.c:369
+#: src/search.c:372
 msgid "Text"
 msgstr "Texto"
 
-#: src/search.c:376
+#: src/search.c:379
 msgid "Line Number"
 msgstr "Número de Línea"
 
-#: src/search.c:395
+#: src/search.c:398
 msgid "Search:"
 msgstr "Buscar:"
 
-#: src/search.c:398
+#: src/search.c:401
 msgid "Start searching at cursor position"
 msgstr "Iniciar la búsqueda a la posición del cursor"
 
-#: src/search.c:403
+#: src/search.c:406
 msgid "Start searching at beginning of the document"
 msgstr "Iniciar la búsqueda al principio del documento"
 
-#: src/search.c:405
+#: src/search.c:408
 msgid "Case sensitive"
 msgstr "Distingir mayúsculas y minúsculas"
 
-#: src/search.c:409
+#: src/search.c:412
 msgid "Replace:"
 msgstr "Reemplazar con:"
 
-#: src/search.c:412
+#: src/search.c:415
 msgid "Prompt before replacing"
 msgstr "Preguntar antes de reemplazar"
 

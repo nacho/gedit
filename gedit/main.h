@@ -75,9 +75,12 @@ typedef struct _gE_document {
 	GnomeMDIChild mdi_child;
 	
 	/*gE_window *window;*/
+	gE_search *search;
+	
 	GtkWidget *text;
 	GtkWidget *tab_label;
 	GtkWidget *viewport;
+	GtkWidget *scrwindow;
 	
 	gchar *filename;
 	gint changed_id;
@@ -119,6 +122,7 @@ extern GList *window_list;
 GList *gE_documents;
 
 extern GnomeMDI *mdi;
+extern gint mdiMode;
 
 #ifdef __cplusplus
 }

@@ -1,3 +1,35 @@
+1999-04-06 (15:57) Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: Added GtkWidget *scrwindow member to the gE_document
+	  struct.
+	
+	* gE_mdi.c: Replaced table with a Scrolled Window for the text
+	  entry area. Now we can resize and keep the scroll bar, also
+	  means we don't have to add a vscrollbar ourselves, making the
+	  code leaner and lighter.
+	
+	* gE_document.c: (gE_document_set_split_screen) Re-Implemented
+	  split-screen toggling. The Split-Screen mode is (kinda) back.
+	
+1999-04-06 (15:28) Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: Added a gE_search member to the gE_document struct.
+	
+	* gE_mdi.c: (gE_document_init) Initialise the gE_search member.
+	
+	* search.c: Made all search functions use the gE_search member of
+	  the current gE_document, instead of the current gE_window.
+
+1999-04-06 (13:56) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_prefs_box.c: Added MDI Page. We can now set the MDI mode and
+	  keep it over sessions of gEdit.
+	
+	* gE_prefs.c: Get/Save MDI mode settings.
+	
+	* gE_prefslib.c: (gE_prefs_get_default) Added default setting for
+	  MDI mode.
+
 1999-04-04 (14:57) Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_files.c: Moved fcntl.h under the sys/types.h so it can compile on

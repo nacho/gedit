@@ -216,7 +216,7 @@ void gE_window_set_status_bar (gint show_status)
 
 void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 {
-	/*if (!doc->split_parent)
+	if (!doc->split_parent)
 		return;
 
 	if (split_screen)
@@ -228,7 +228,7 @@ void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 	  {
 		gtk_widget_hide (doc->split_parent);
 		settings->splitscreen = FALSE;
-	  }*/
+	  }
 }
 
 

@@ -26,6 +26,7 @@
 #include "main.h"
 #include "gE_prefs.h"
 #include "toolbar.h"
+#include "gE_mdi.h"
 
 
 static char *rc;
@@ -55,6 +56,7 @@ gE_save_settings()
 	gE_prefs_set_int("tb pix", (gint) settings->have_tb_pix);
 	gE_prefs_set_int("tb relief", (gint) settings->use_relief_toolbar);
 	gE_prefs_set_int("splitscreen", (gint) settings->splitscreen);
+	gE_prefs_set_int("mdi mode", settings->mdi_mode);
 
 	gE_prefs_set_char("font", settings->font);
 	if (settings->print_cmd == "")
@@ -74,6 +76,16 @@ void gE_get_settings()
 	 settings->have_tb_pix = gE_prefs_get_int("tb pix");
 	 settings->use_relief_toolbar = gE_prefs_get_int("tb relief");
 	 settings->splitscreen = gE_prefs_get_int("splitscreen");
+	 settings->mdi_mode = gE_prefs_get_int ("mdi mode");
+	 if (settings->mdi_mode == NULL)
+	   settings->mdi_mode = mdi_type[0];
+	   
+	 if (mdiMode != settings->mdi_mode)
+	   {
+	     mdiMode = settings->mdi_mode;
+             gnome_mdi_set_mode (mdi, mdiMode);
+           }
+	 
 	 settings->font = gE_prefs_get_char("font");
 	 if (settings->font == NULL)
 	   settings->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";

@@ -45,6 +45,9 @@ typedef struct _gE_document_class
 
 } gE_document_class;
 
+#define NUM_MDI_MODES		4
+extern guint mdi_type [NUM_MDI_MODES];
+
 GtkType gE_document_get_type ();
 gE_document *gE_document_new ();
 gE_document *gE_document_new_with_file (gchar *filename);
