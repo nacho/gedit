@@ -38,7 +38,6 @@
 #include <glib/gi18n.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnomeui/gnome-window-icon.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "gedit2.h"
@@ -53,9 +52,6 @@
 #include "gedit-application-server.h"
 #include "gedit-convert.h"
 
-#ifndef GNOME_ICONDIR
-#define GNOME_ICONDIR "" 
-#endif
 
 GeditMDI *gedit_mdi = NULL;
 BonoboObject *gedit_app_server = NULL;
@@ -77,7 +73,6 @@ struct _CommandLineData
 	gint line_pos;
 };
 
-static void gedit_set_default_icon ();
 static void gedit_load_file_list (CommandLineData *data);
 
 static const struct poptOption options [] =
@@ -96,18 +91,6 @@ static const struct poptOption options [] =
 
 	{NULL, '\0', 0, NULL, 0}
 };
-
-static void 
-gedit_set_default_icon ()
-{
-	if (!gtk_window_set_default_icon_from_file (GNOME_ICONDIR "/gedit-icon.png", NULL))
-	{
-		g_warning ("Could not set the main window icon.");
-
-		/* In case we haven't yet been installed */
-		gtk_window_set_default_icon_from_file ("../pixmaps/gedit-icon.png", NULL);
-	}
-}
 
 static void 
 gedit_load_file_list (CommandLineData *data)
@@ -355,8 +338,8 @@ main (int argc, char **argv)
 	gedit_debug_init ();
 
 	/* Set default icon */
-	gedit_set_default_icon ();
-	
+	gtk_window_set_default_icon_name ("text-editor");
+
 	/* Load user preferences */
 	gedit_prefs_manager_app_init ();
 
