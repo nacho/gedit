@@ -48,6 +48,11 @@ void egg_recent_view_bonobo_set_tooltip_func (EggRecentViewBonobo *view,
 					EggRecentViewBonoboTooltipFunc func,
 					gpointer user_data);
 
+void egg_recent_view_bonobo_set_icon_size (EggRecentViewBonobo *view,
+					   GtkIconSize icon_size);
+
+GtkIconSize egg_recent_view_bonobo_get_icon_size (EggRecentViewBonobo *view);
+
 G_END_DECLS
 
 #endif /* __EGG_RECENT_VIEW_BONOBO_H__ */

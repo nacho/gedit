@@ -561,6 +561,7 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	GdkPixbuf *pixbuf;
 	gchar *raw_uri;
 	gchar *mime_type = NULL;
+	int icon_size;
 
 	g_return_val_if_fail (GTK_IS_IMAGE (image), NULL);
 	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
@@ -576,8 +577,11 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	if (mime_type == NULL)
 		mime_type = g_strdup ("text/plain");
 
+	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (image),
+					   GTK_ICON_SIZE_MENU, NULL,
+					   &icon_size);
 	pixbuf = egg_recent_util_get_icon (theme, raw_uri,
-					   mime_type);
+					   mime_type, icon_size);
 
 	g_free (raw_uri);
 	g_free (mime_type);

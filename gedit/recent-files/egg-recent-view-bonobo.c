@@ -60,6 +60,7 @@ struct _EggRecentViewBonobo {
 
 	EggRecentModel *model;
 	GConfClient *client;
+	GtkIconSize icon_size;
 };
 
 
@@ -220,8 +221,18 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 			mime_type = egg_recent_item_get_mime_type (item);
 			uri = egg_recent_item_get_uri (item);
 #ifndef USE_STABLE_LIBGNOMEUI
-			pixbuf = egg_recent_util_get_icon (view->theme,
-							   uri, mime_type);
+			{
+				int width, height;
+
+				gtk_icon_size_lookup_for_settings
+					(gtk_settings_get_default (),
+					 view->icon_size,
+					 &width, &height);
+				pixbuf = egg_recent_util_get_icon
+							(view->theme,
+							 uri, mime_type,
+							 height);
+			}
 #else
 			pixbuf = NULL;
 #endif
@@ -540,6 +551,26 @@ egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 
 	view->tooltip_func = NULL;
 	view->tooltip_func_data = NULL;
+
+	view->icon_size = GTK_ICON_SIZE_MENU;
+}
+
+void
+egg_recent_view_bonobo_set_icon_size (EggRecentViewBonobo *view,
+				      GtkIconSize icon_size)
+{
+	if (view->icon_size != icon_size) {
+		view->icon_size = icon_size;
+		egg_recent_model_changed (view->model);
+	} else {
+		view->icon_size = icon_size;
+	}
+}
+                                                                              
+GtkIconSize
+egg_recent_view_bonobo_get_icon_size (EggRecentViewBonobo *view)
+{
+	return view->icon_size;
 }
 
 void
