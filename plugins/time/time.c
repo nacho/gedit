@@ -44,6 +44,8 @@
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-menus.h>
+#include <gedit/gedit-utils.h>
+
 
 #define MENU_ITEM_LABEL		N_("In_sert Date and Time...")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
@@ -945,11 +947,11 @@ help_button_pressed (TimeConfigureDialog *dialog)
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	gnome_help_display ("gedit.xml", "gedit-date-time-configure", &error);
 
 	if (error != NULL)
 	{
-		g_warning (error->message);
+		gedit_warning (error->message, GTK_WINDOW (dialog->dialog));
 
 		g_error_free (error);
 	}

@@ -72,7 +72,9 @@ struct _GeditPlugin
 	
 gchar* gedit_plugin_locate_program  (const gchar *program_name, 
 				     const gchar *plugin_name, 
-				     GtkWindow *parent);
+				     GtkWindow   *parent,
+				     const gchar *gconf_key,
+				     const gchar *help_id);
 
 #endif  /* __GEDIT_PLUGIN_H__ */
 

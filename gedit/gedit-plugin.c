@@ -35,8 +35,16 @@
 #include "dialogs/gedit-dialogs.h"
 
 gchar* 
-gedit_plugin_locate_program  (const gchar *program_name, const gchar *plugin_name, GtkWindow *parent)
+gedit_plugin_locate_program  (const gchar *program_name, 
+			      const gchar *plugin_name, 
+			      GtkWindow   *parent, 
+			      const gchar *gconf_key,
+			      const gchar *help_id)
 {
-	return gedit_plugin_program_location_dialog (program_name, plugin_name, parent);
+	return gedit_plugin_program_location_dialog (program_name, 
+						     plugin_name, 
+						     parent, 
+						     gconf_key, 
+						     help_id);
 }
 

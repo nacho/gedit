@@ -1,3 +1,18 @@
+2003-09-25  Paolo Maggi  <paolo.maggi@polito.it>
+ 
+ 	* gedit-plugin.[ch](gedit_plugin_locate_program): added gconf_key and
+ 	  help_id parameters.
+ 
+ 	* dialogs/gedit-dialogs.h (gedit_plugin_program_location_dialog): 
+ 	* dialogs/gedit-plugin-program-location-dialog.c (gedit_plugin_program_location_dialog):
+ 	  added gconf_key and help_id parameters.
+ 
+ 	This patch is needed to fix bugs #117365 and #117443.
+ 
+ 	Thanks to Balamurali Viswanathan <balamurali.viswanathan@wipro.com> for
+ 	the initial patch.
+ 
+
 2003-09-18  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* dialogs/gedit-preferences.glade2:

@@ -3,7 +3,7 @@
  * gedit-plugin-program-location-dialog.c
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2003 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2003. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -35,9 +35,11 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-help.h>
+#include <gconf/gconf-client.h>
 
 #include "gedit-dialogs.h"
 #include "gedit-debug.h"
+#include "gedit-utils.h"
 
 #define PLUGIN_MANAGER_LOGO "/gedit-plugin-manager.png"
 
@@ -48,7 +50,7 @@ static void error_dialog (const gchar* str, GtkWindow *parent);
  */
 gchar *
 gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *plugin_name,
-		GtkWindow *parent)
+		GtkWindow *parent, const gchar *gconf_key, const gchar *help_id)
 {
 	GladeXML *gui;
 
@@ -57,6 +59,7 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	GtkWidget *label;
 	GtkWidget *logo;
 	GtkWidget *program_location_entry;
+	GConfClient *gconf_client;
 	
 	gchar *str_label;
 	gchar *program_location;
@@ -65,13 +68,18 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	g_return_val_if_fail (program_name != NULL, NULL);
+	g_return_val_if_fail (plugin_name != NULL, NULL);
+	g_return_val_if_fail (gconf_key != NULL, NULL);
+
+	gconf_client = gconf_client_get_default ();
 	
 	gui = glade_xml_new (GEDIT_GLADEDIR "program-location-dialog.glade2",
 			     "dialog_content", NULL);
 
 	if (!gui) {
-		g_warning
-		    ("Could not find program-location-dialog.glade2, reinstall gedit.\n");
+		gedit_warning (
+		    "Could not find program-location-dialog.glade2, reinstall gedit.", parent);
 		return NULL;
 	}
 
@@ -101,6 +109,7 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 			     "program-location-dialog.glade2");
 		return NULL;
 	}
+	
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
 	str_label = g_strdup_printf(_("The %s plugin uses an external program, "
@@ -114,7 +123,13 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	/* stick the plugin manager logo in there */
 	gtk_image_set_from_file (GTK_IMAGE (logo), GNOME_ICONDIR PLUGIN_MANAGER_LOGO);
 
-	program_location = g_find_program_in_path (program_name);
+	program_location = gconf_client_get_string (gconf_client,
+						    gconf_key,
+						    NULL);
+	
+	if (program_location == NULL)
+		program_location = g_find_program_in_path (program_name);
+
 	if (program_location != NULL)
 	{
 		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (program_location_entry),
@@ -158,11 +173,18 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 				break;
 				
 			case GTK_RESPONSE_HELP:
-				gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+				if (help_id == NULL)
+				{
+					gnome_help_display ("gedit.xml", "gedit-plugins", &error);
+				}
+				else
+				{
+					gnome_help_display ("gedit.xml", help_id, &error);
+				}
 	
 				if (error != NULL)
 				{
-					g_warning (error->message);
+					gedit_warning (error->message, GTK_WINDOW (dialog));
 	
 					g_error_free (error);
 				}
@@ -177,6 +199,16 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 	} while (GTK_WIDGET_VISIBLE (dialog));
 
 	gtk_widget_destroy (dialog);
+
+	if (program_location != NULL)
+	{
+		gconf_client_set_string (gconf_client,
+					 gconf_key,
+					 program_location,
+					 NULL);
+	}
+
+	g_object_unref (gconf_client);
 
 	return program_location;
 }

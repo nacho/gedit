@@ -44,6 +44,8 @@ void gedit_dialog_open_uri  (void);
 
 gchar *gedit_plugin_program_location_dialog (const gchar *program_name, 
 					     const gchar *plugin_name, 
-					     GtkWindow *parent);
+					     GtkWindow   *parent,
+					     const gchar *gconf_key,
+					     const gchar *help_id);
 
 #endif /* __GEDIT_DIALOGS_H__ */
