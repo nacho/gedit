@@ -1,3 +1,13 @@
+2004-10-02  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit-file.[ch] (gedit_file_close): returns TRUE if the file has been
+	really closed
+
+	* gedit-mdi-child.c (gedit_mdi_child_tab_close_clicked): If a view is closed 
+	while another one is active, re-activate the previous active view (fixes
+	bug #149811: after closing a document jump to document which has been 
+	open before)
+
 2004-10-02  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-file.c: don't interpret escaped sequences in a filename

@@ -140,26 +140,27 @@ gedit_file_new (void)
 	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
 }
 
-void 
+gboolean
 gedit_file_close (GtkWidget *view)
 {
 	BonoboMDIChild* child;
+	gboolean closed;
 
 	gedit_debug (DEBUG_FILE, "");
 
-	g_return_if_fail (view != NULL);
+	g_return_val_if_fail (view != NULL, FALSE);
 
 	child = bonobo_mdi_get_child_from_view (view);
 	g_return_if_fail (child != NULL);
 
 	if (g_list_length (bonobo_mdi_child_get_views (child)) > 1)
 	{		
-		bonobo_mdi_remove_view (BONOBO_MDI (gedit_mdi), view, FALSE);
+		closed = bonobo_mdi_remove_view (BONOBO_MDI (gedit_mdi), view, FALSE);
 		gedit_debug (DEBUG_COMMANDS, "View removed.");
 	}
 	else
 	{
-		bonobo_mdi_remove_child (BONOBO_MDI (gedit_mdi), child, FALSE);
+		closed = bonobo_mdi_remove_child (BONOBO_MDI (gedit_mdi), child, FALSE);
 		gedit_debug (DEBUG_COMMANDS, "Child removed.");
 	}
 
@@ -171,6 +172,8 @@ gedit_file_close (GtkWidget *view)
 	}
 
 	gedit_debug (DEBUG_FILE, "END");
+
+	return closed;
 }
 
 void

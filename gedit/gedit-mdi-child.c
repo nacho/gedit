@@ -457,13 +457,26 @@ gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data)
 static void
 gedit_mdi_child_tab_close_clicked (GtkWidget *button, GtkWidget *view)
 {
+	GtkWidget *active_view;
+	gboolean closed;
+
 	gedit_debug (DEBUG_MDI, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	active_view = gedit_get_active_view();
+
+	if (active_view != view)
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	else
+		active_view = NULL;
 	
-	gedit_file_close (view);
+	closed = gedit_file_close (view);
+
+	/* If a view is closed while another one is active, re-activate the previous
+	 * active view */
+	if ((active_view != NULL) && closed)
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), active_view);
 }
 
 static void
