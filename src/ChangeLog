@@ -1,3 +1,14 @@
+2002-05-21  Yogeesh MB  <yogeeshappa.mathighatta@wipro.com>
+
+	* gedit-view.c (gedit_view_grab_focus): Fixed bug #77735 
+	both on Solaris and Linux
+
+2002-05-21  Federico Mena Quintero  <federico@ximian.com>
+ 
+ 	* gedit-view.c (gedit_view_init): Do not set a focus chain.  I
+ 	don't see how this could affect things for this bug, but it is
+ 	intended to fix #77735 anyways.
+
 2002-05-21  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-file.c (gedit_file_save): convert filename to
@@ -19,7 +30,7 @@
 
 2002-05-20  Paolo Maggi <maggi@athena.polito.it>
 	
-	gedit-ui.xml: s/About/About...
+	gedit-ui.xml: s/About.../About
 		
 2002-05-15  Paolo Maggi <maggi@athena.polito.it>
 

@@ -116,16 +116,17 @@ gedit_view_grab_focus (GtkWidget *widget)
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
 	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = FALSE;
 
-	/* Try to have a visible cursor */
+	/* Try to have a visible cursor on Solaris*/
 
 	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
-	 * understand why it is not visible */
-	/*
-	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
-	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", FALSE, NULL);
-	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
-	*/
+	 * understand why it is not visible on Solaris */
 
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
+	
+	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", 
+		      FALSE, NULL);
+	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", 
+		      TRUE, NULL);
 }
 
 static void
@@ -353,7 +354,6 @@ gedit_view_init (GeditView  *view)
 	GtkTextView *text_view;
 	GtkWidget *sw; /* the scrolled window */
 	GdkColor background, text, selection, sel_text;
-	GList *focus_chain = NULL;
 
 	/* FIXME
 	static GtkWidget *popup_menu = NULL;
@@ -377,11 +377,6 @@ gedit_view_init (GeditView  *view)
 	text_view = GTK_TEXT_VIEW (gtk_text_view_new ());
 	g_return_if_fail (text_view != NULL);
 	view->priv->text_view = text_view;
-
-	focus_chain = g_list_append (focus_chain, sw);
-
-	gtk_container_set_focus_chain (GTK_CONTAINER (view), focus_chain);
-	g_list_free (focus_chain);
 
 	/*
 	 *  Set tab, fonts, wrap mode, colors, etc. according
@@ -415,8 +410,6 @@ gedit_view_init (GeditView  *view)
 	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view), GTK_CAN_FOCUS);
-	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (sw), GTK_CAN_FOCUS);
-	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
 
 #if 0
 	/* FIXME */
@@ -433,7 +426,7 @@ gedit_view_init (GeditView  *view)
 	/* The same popup menu is attached to all views */
 	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);	
 #endif 
-	}
+}
 
 static void 
 gedit_view_finalize (GObject *object)
