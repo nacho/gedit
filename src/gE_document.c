@@ -219,9 +219,9 @@ void gE_window_set_status_bar (gE_window *window, gint show_status)
 {
 	window->show_status = show_status;
 	if (show_status)
-		gtk_widget_show (window->statusbox);
+		gtk_widget_show (GTK_WIDGET(window->statusbar)->parent);
 	else
-		gtk_widget_hide (window->statusbox);
+		gtk_widget_hide (GTK_WIDGET (window->statusbar)->parent);
 }
 
 gE_document
