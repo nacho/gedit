@@ -4,12 +4,15 @@ plugindir = $(libdir)/go/plugins
 
 SUBDIRS = macros po intl src plugins
 
-EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop ABOUT-NLS TODO gedit.spec
+EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop ABOUT-NLS TODO gedit.spec gedit.keys
 
 man_MANS = gedit.1
 
 sysdir   = $(datadir)/apps/Applications
 sys_DATA = gedit.desktop
+
+mimedir = $(datadir)/mime-info
+mime_DATA = gedit.keys
 
 dist-hook:
 	mkdir $(distdir)/xpm
