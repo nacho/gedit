@@ -118,15 +118,14 @@ gedit_plugin_manager_lists_thaw (GtkWidget *widget)
 	gtk_clist_unselect_all (GTK_CLIST (installed_list));
 	gtk_clist_unselect_all (GTK_CLIST (available_list));
 
-	g_print ("A:%i I:%i\n",
+#if 0
+ 	g_print ("A:%i I:%i\n",
 		 GTK_CLIST (available_list)->rows,
 		 GTK_CLIST (installed_list)->rows);
-
+#endif
 	gtk_clist_thaw (GTK_CLIST (available_list));
 	gtk_clist_thaw (GTK_CLIST (installed_list));
 
-	g_print ("thaw\n");
-	
 	gedit_plugin_manager_info_clear (widget);
 }
 
@@ -266,15 +265,6 @@ gedit_plugin_manager_item_remove (GtkWidget *widget, gpointer data)
 static void
 gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
 {
-	/*
-	gint row;
-	gint row_inserted;
-	gint rows;
-	gchar *name;
-	gchar *name_array[1];
-	gpointer item_data;
-	*/
-
 	gint row, rows, new_row;
 	gchar *name;
 	gchar *name_array[1];
@@ -286,16 +276,9 @@ gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
 
 	rows = GTK_CLIST(available_list)->rows;
 
-	g_print ("rows %i\n", rows);
-	
 	for (row = 0; row < rows; row++)
 	{
-		/*
-		row = (gint) g_list_nth_data (GTK_CLIST (available_list)->row_list, n);
-		g_print ("Row :%i  rows:%i\n", row, g_list_length (GTK_CLIST (available_list)->row_list));
-		*/
 		gtk_clist_get_text (GTK_CLIST (available_list), 0, 0, &name);
-		g_print ("name : %s\n", name);
 		item_data = gtk_clist_get_row_data (GTK_CLIST(available_list), 0);
 
 		name_array[0] = g_strdup(name);
@@ -322,16 +305,9 @@ gedit_plugin_manager_item_remove_all (GtkWidget *widget, gpointer data)
 
 	rows = GTK_CLIST(installed_list)->rows;
 
-	g_print ("rows %i\n", rows);
-	
 	for (row = 0; row < rows; row++)
 	{
-		/*
-		row = (gint) g_list_nth_data (GTK_CLIST (available_list)->row_list, n);
-		g_print ("Row :%i  rows:%i\n", row, g_list_length (GTK_CLIST (available_list)->row_list));
-		*/
 		gtk_clist_get_text (GTK_CLIST (installed_list), 0, 0, &name);
-		g_print ("name : %s\n", name);
 		item_data = gtk_clist_get_row_data (GTK_CLIST(installed_list), 0);
 
 		name_array[0] = g_strdup(name);
@@ -407,14 +383,11 @@ gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpoin
 	dummy_pos = 0;
 	gtk_editable_insert_text (GTK_EDITABLE(plugin_info_local), plugin_description, text_length, &dummy_pos);
 
-#if 0
 	dummy_pos = 0;
 	gtk_editable_insert_text (GTK_EDITABLE(plugin_info_local), " ", 1, &dummy_pos);
 	gtk_editable_delete_text (GTK_EDITABLE(plugin_info_local), 0, 1);
-#endif	
-/*
+
 	g_free (plugin_description);
-*/
 }
 
 static void
