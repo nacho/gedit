@@ -39,7 +39,7 @@ extern GtkWidget *col_label;
 
 extern void gE_window_set_auto_indent (gint auto_indent);
 extern void gE_window_set_status_bar (gint show_status);
-extern /*gE_window */ void gE_window_new(GnomeMDI *mdi, GnomeApp *app);
+extern void gE_window_new(GnomeMDI *mdi, GnomeApp *app);
 /* gE_document_new : relocated to gE_mdi.[ch] */
 /* gE_document_new_with_file : relocated to gE_mdi.[ch] */
 /* gE_document_current: relocated to gE_mdi.[ch] */

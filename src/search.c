@@ -27,6 +27,7 @@
 #include "main.h"
 #include "dialog.h"
 #include "gE_document.h"
+#include "gE_mdi.h"
 
 
 static void seek_to_line(gE_document *doc, gint line_number);
@@ -124,9 +125,7 @@ void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
 	gchar *buttons[] = { GE_BUTTON_OK };
 	
 	gE_document *doc;
-	gE_window *w =  (gE_window *) cbwindow;
 	
-	g_assert (w != NULL);
 	doc = gE_document_current ();
 	
 	g_assert (doc != NULL);

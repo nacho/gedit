@@ -33,6 +33,7 @@
 #include "search.h"
 #include "gE_mdi.h"
 #include "gE_print.h"
+#include "gE_plugin_api.h"
 
 static void 	  gE_document_class_init (gE_document_class *);
 static void 	  gE_document_init (gE_document *);
@@ -88,13 +89,13 @@ GnomeUIInfo doc_menu[] = {
 
 GnomeUIInfo popup_menu [] = {
 	
-	GNOMEUIINFO_ITEM_STOCK ("Cut", NULL, edit_cut_cb, GNOME_STOCK_MENU_CUT),
-	GNOMEUIINFO_ITEM_STOCK ("Copy", NULL, edit_cut_cb, GNOME_STOCK_MENU_COPY),
-	GNOMEUIINFO_ITEM_STOCK ("Paste", NULL, edit_paste_cb, GNOME_STOCK_MENU_PASTE),
+	GNOMEUIINFO_ITEM_STOCK (N_("Cut"), NULL, edit_cut_cb, GNOME_STOCK_MENU_CUT),
+	GNOMEUIINFO_ITEM_STOCK (N_("Copy"), NULL,edit_cut_cb,GNOME_STOCK_MENU_COPY),
+	GNOMEUIINFO_ITEM_STOCK (N_("Paste"), NULL, edit_paste_cb, GNOME_STOCK_MENU_PASTE),
 	GNOMEUIINFO_SEPARATOR, 
-	GNOMEUIINFO_ITEM_STOCK ("Save", NULL, file_save_cb, GNOME_STOCK_MENU_SAVE),
-	GNOMEUIINFO_ITEM_STOCK ("Close", NULL, file_close_cb, GNOME_STOCK_MENU_CLOSE),
-	GNOMEUIINFO_ITEM_STOCK ("Print", NULL, file_print_cb, GNOME_STOCK_MENU_PRINT),
+	GNOMEUIINFO_ITEM_STOCK (N_("Save"),NULL,file_save_cb,GNOME_STOCK_MENU_SAVE),
+	GNOMEUIINFO_ITEM_STOCK (N_("Close"), NULL, file_close_cb, GNOME_STOCK_MENU_CLOSE),
+	GNOMEUIINFO_ITEM_STOCK (N_("Print"), NULL, file_print_cb, GNOME_STOCK_MENU_PRINT),
 	
 	GNOMEUIINFO_END
 };
@@ -154,11 +155,10 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	
 	doc = GE_DOCUMENT(child);
 
-/*	ptr = g_new(int, 1);
-BORK!!	*ptr = ++last_assigned_integer;
+	ptr = g_new(int, 1);
+	*ptr = ++last_assigned_integer;
 	g_hash_table_insert(doc_int_to_pointer, ptr, doc);
 	g_hash_table_insert(doc_pointer_to_int, doc, ptr);
-*/
 
 	doc->font = gE_prefs_get_char("font");
 	

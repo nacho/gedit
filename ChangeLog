@@ -1,3 +1,28 @@
+1999-04-09 Alex Roberts  <bse@gedit.pn.org>
+
+	* Mooooo! Plugins!!!! Hurrahh! Except the only plugin really working
+	  is E-Mail, but that doesnt add or edit any docs.
+	
+	* gE_document.c: (gE_window_new) Removed old code (which was
+	  commented out). 
+	  Changed the GSlist lookup to not check `plugins' but `plugin_list'.
+	  FIxed the hash table to use the GnomeApp arg.
+	  Dropped the gE_window. 
+	  Added function wide statusbar.
+	
+	* gE_mdi.h: Internationalisation stuff for the menus.
+	  (gE_document_create_view) Brought back the hash table stuff for the 
+	
+	* gE_plugin_api.c: (add_plugin_to_menu) gnome_app_insert_menus replaced
+	  with gnome_app_insert_menus_with_data, we should send the gE_data.
+	  the plugin_register (...) call should send a mdi->active_window, not
+	  data->window.
+
+1999-04-08 (23:39) Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_mdi.c: Fixed the popup menu entries for the internationalisation
+	  translation thingies..
+
 1999-04-08 (15:05) Alex Roberts  <bse@gedit.pn.org>
 
 	* menus.c: Instead of sending GE_DATA gpointers, send NULL. The

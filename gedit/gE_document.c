@@ -38,7 +38,7 @@
 #include "search.h"
 #include "gE_prefs.h"
 
-extern GList *plugins;
+/*extern GList *plugins;*/
 gE_window *window;
 GtkWidget  *col_label;
 
@@ -75,13 +75,11 @@ static char *lastmsg = NULL;
 static gint msgbar_timeout_id;
 
 /*gE_window */
-void
-gE_window_new(GnomeMDI *mdi, GnomeApp *app)
+void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
-        GnomeUIInfo * gedit_menu;
-	gE_window *w;
-	gE_data *data;
-	GtkWidget *box1, *box2, *tmp;
+        /*GnomeUIInfo * gedit_menu;
+	gE_window *w;*/
+	GtkWidget *tmp, *statusbar;
 	gint *ptr; /* For plugin stuff. */
 
 	static GtkTargetEntry drag_types[] =
@@ -91,12 +89,11 @@ gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
 	/* various initializations */
-	w = g_malloc0(sizeof(gE_window));
-	w->search = g_malloc0(sizeof(gE_search));
+	/*w = g_malloc0(sizeof(gE_window));
+	w->search = g_malloc0(sizeof(gE_search));*/
 
 	settings->auto_indent = TRUE;
 	settings->show_tabs = TRUE;
-/*	settings->tab_pos = GTK_POS_TOP;*/
 	settings->splitscreen = FALSE;
 
 	settings->show_status = TRUE;
@@ -104,83 +101,50 @@ gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;
-	g_hash_table_insert(win_int_to_pointer, ptr, w);
-	g_hash_table_insert(win_pointer_to_int, w, ptr);
+	g_hash_table_insert(win_int_to_pointer, ptr, app);
+	g_hash_table_insert(win_pointer_to_int, app, ptr);
 	
-/*	data = g_malloc0(sizeof(gE_data));
 
-	w->window = gnome_app_new("gEdit", GEDIT_ID);
-
-	data->window = w;*/
-/*	gtk_signal_connect(GTK_OBJECT(w->window), "delete_event",
-		GTK_SIGNAL_FUNC(gE_destroy_window), data);
-	gtk_window_set_wmclass(GTK_WINDOW(w->window), "gEdit", "gedit");
-	gtk_window_set_title(GTK_WINDOW(w->window), GEDIT_ID);*/
 	gtk_widget_set_usize(GTK_WIDGET(app), 630, 390);
-/*	gtk_window_set_policy(GTK_WINDOW(w->window), TRUE, TRUE, FALSE);
-	gtk_container_border_width(GTK_CONTAINER(w->window), 0);*/
-	box1 = gtk_vbox_new(FALSE, 0);
 
-	/* popup menu (activated when clicking on mouse button 3) */
-/*	gE_window_create_popupmenu(data);
-*/
-	/* main menu */
-/*	gedit_menu = gE_menus_init(w, data);
 
-	gnome_app_set_contents(GNOME_APP(w->window), box1);
-*/
-	/* toolbar */
-/*	gE_create_toolbar(w, data);
-*/
-	/* add a new document to the window */
-/*	gE_document_new(w);
-	gtk_box_pack_start(GTK_BOX(box1), w->notebook, TRUE, TRUE, 0);
-*/
 	/* statusbar */
-	w->statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gnome_app_set_statusbar (app, GTK_WIDGET (w->statusbar));
-/*	gE_msgbar_timeout_add(w);
-*/
-	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
+	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+	gnome_app_set_statusbar (app, GTK_WIDGET (statusbar));
+
 
 	/* line and column indicators */
 
 	tmp = gtk_label_new(_("Column:"));
-	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 1);
+	gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 1);
 	gtk_widget_show(tmp);
 
 	col_label = gtk_label_new("0");
-	gtk_box_pack_start(GTK_BOX(w->statusbar), col_label, FALSE, FALSE, 1);
+	gtk_box_pack_start(GTK_BOX(statusbar), col_label, FALSE, FALSE, 1);
 	gtk_widget_set_usize(col_label, 40, 0);
 	gtk_widget_show(col_label);
 
 	tmp = gtk_button_new_with_label(_("Line"));
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(count_lines_cb), w);
+		GTK_SIGNAL_FUNC(count_lines_cb), NULL);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(statusbar), tmp, FALSE, FALSE, 0);
 	gtk_widget_show(tmp);
 
-	w->statusbox = w->statusbar;
+	/*w->statusbox = statusbar;*/
 
 	/* finish up */
-	gtk_widget_show(w->statusbar);
-	gtk_widget_show(box1);
-/*	gtk_widget_show(w->notebook);
-	gtk_widget_show(w->window);
-*/
+	gtk_widget_show(statusbar);
+
 	gE_get_settings ();
 
 	gE_set_menu_toggle_states();
 
-	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
+	g_list_foreach(plugin_list, (GFunc) add_plugins_to_window, app);
 	
 	settings->num_recent = 0;
 	recent_update(app);
-	window_list = g_list_append(window_list, (gpointer) w);
 
-/*	gE_window_refresh (w);
-	*/
 	gtk_drag_dest_set (GTK_WIDGET(app),
 		GTK_DEST_DEFAULT_ALL,
 		drag_types, n_drag_types,
@@ -190,9 +154,7 @@ gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 		"drag_data_received",
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 	
-/*	gtk_signal_emit_by_name (GTK_OBJECT (w->window), "check_resize");
-	gtk_widget_grab_focus (GTK_WIDGET (gE_document_current ()->text));*/
-	return;
+
 } /* gE_window_new */
 
 void gE_window_set_auto_indent (gint auto_indent)

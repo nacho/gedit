@@ -88,7 +88,7 @@ start_plugin(GtkWidget * widget, gE_data * data)
    }
 #endif
 
-   plugin_register(plug, &callbacks, *(int *) g_hash_table_lookup(win_pointer_to_int, data->window));
+   plugin_register(plug, &callbacks, *(int *) g_hash_table_lookup(win_pointer_to_int, mdi->active_window));
 }
 
 void 
@@ -116,7 +116,7 @@ add_plugin_to_menu(GnomeApp *app, plugin_info * info)
 
    (menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 
-   gnome_app_insert_menus(app, path, menu);
+   gnome_app_insert_menus_with_data (app, path, menu, data);
 
 }
 

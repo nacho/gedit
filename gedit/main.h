@@ -27,8 +27,8 @@ extern "C" {
 #define STRING_LENGTH_MAX	256
 #define GEDIT_ID	"gEdit "VERSION
 
-#define UNKNOWN		"Unknown"
-#define UNTITLED	"Untitled"
+#define UNKNOWN		N_("Unknown")
+#define UNTITLED	N_("Untitled")
 
 typedef struct _gE_search {
 	GtkWidget *window;

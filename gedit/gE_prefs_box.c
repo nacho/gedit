@@ -554,6 +554,7 @@ static void plugins_toggle (GtkWidget *w)
  	   plugin_list = NULL;
  	   
  	plugin_load_list("gEdit");
+	g_list_foreach(plugin_list, (GFunc) add_plugins_to_window, mdi->active_window);
  	
   		
     }
