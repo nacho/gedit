@@ -69,7 +69,7 @@ typedef struct _gE_window {
 	gE_search *search;
 	int num_recent; /* Number of recently accessed documents in the 
 	                         Recent Documents menu */
-#ifdef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	GtkWidget *menubar_handle;	/* holds the menubar */
 	gboolean auto_indent;
 	gboolean show_tabs;

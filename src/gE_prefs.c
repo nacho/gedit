@@ -290,9 +290,9 @@ gettime(char *buf)
 #ifndef WITHOUT_GNOME
 
 void 
-gE_save_settings(gE_window * window, gpointer cbwindow)
+gE_save_settings(gE_window *window, gpointer cbwindow)
 {
-	gE_window *window = (gE_window *) cbwindow;
+	window = (gE_window *) cbwindow;
 
 	gnome_config_push_prefix("/gEdit/Global/");
 
@@ -320,8 +320,7 @@ gE_save_settings(gE_window * window, gpointer cbwindow)
 	gnome_config_sync();
 }
 
-void 
-gE_get_settings(gE_window *w)
+void gE_get_settings(gE_window *w)
 {
 	gnome_config_push_prefix("/gEdit/Global/");
 

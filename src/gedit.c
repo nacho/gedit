@@ -166,12 +166,13 @@ int main (int argc, char **argv)
 	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
 
 	msgbox_create ();
-	data = g_malloc0 (sizeof (gE_data));
+	data = g_malloc (sizeof (gE_data));
 	window_list = NULL;
 	window = gE_window_new();
 
 	data->window = window;
 	window->show_status = TRUE;
+	window->have_toolbar = FALSE;
 	gE_get_settings(window);
 
 	g_print("...\n");

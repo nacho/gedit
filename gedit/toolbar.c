@@ -157,10 +157,12 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 
 #ifdef GTK_HAVE_FEATURES_1_1_0
 #ifndef WITHOUT_GNOME
-	if ( ! gnome_preferences_get_toolbar_relief() ) 
+/*	if ( ! gnome_preferences_get_toolbar_relief() ) */
 #endif
+/*		Dunno if it's me, but i find relief buttons ugly... --Alex
 		gtk_toolbar_set_button_relief(GTK_TOOLBAR(toolbar), 
 					      GTK_RELIEF_NONE);
+*/
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
 
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
@@ -261,15 +263,18 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 		gtk_widget_show(window->toolbar_handle);
 #endif
 
-	if (window->files_list_window_toolbar &&
+/*	if (window->files_list_window_toolbar &&
 		!GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))
-		gtk_widget_show(window->files_list_window_toolbar);
+		gtk_widget_show(window->files_list_window_toolbar);*/
 
 #ifndef WITHOUT_GNOME
-	if (!GTK_WIDGET_VISIBLE (GNOME_APP (window->window)->toolbar->parent))
+	/*if (!GTK_WIDGET_VISIBLE (GNOME_APP(window)->toolbar))*/
+	/*if (window-*/
 		gtk_widget_show (GNOME_APP(window->window)->toolbar->parent);
 #endif
+
 	window->have_toolbar = TRUE;
+	printf("..WORK	damn you!\n");
 }
 
 
@@ -291,9 +296,9 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 		gtk_widget_hide(window->toolbar_handle);
 #endif
 
-	if (window->files_list_window_toolbar &&
+/*	if (window->files_list_window_toolbar &&
 		GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))
-		gtk_widget_hide(window->files_list_window_toolbar);
+		gtk_widget_hide(window->files_list_window_toolbar);*/
 
 #ifndef WITHOUT_GNOME
 	/*
@@ -318,7 +323,7 @@ tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_BOTH);
-	if (window->files_list_window_toolbar) {
+/*	if (window->files_list_window_toolbar) {
 		gtk_toolbar_set_style(
 			GTK_TOOLBAR(window->files_list_window_toolbar),
 			GTK_TOOLBAR_BOTH);
@@ -326,7 +331,7 @@ tb_pic_text_cb(GtkWidget *w, gpointer cbwindow)
 			gtk_widget_hide(window->files_list_window_toolbar);
 			gtk_widget_show(window->files_list_window_toolbar);
 		}
-	}
+	}*/
 	window->have_tb_text = TRUE;
 	window->have_tb_pix = TRUE;
 	if (GTK_WIDGET_VISIBLE(window->toolbar)) {
@@ -347,7 +352,7 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_ICONS);
-	if (window->files_list_window_toolbar) {
+/*	if (window->files_list_window_toolbar) {
 		gtk_toolbar_set_style(
 			GTK_TOOLBAR(window->files_list_window_toolbar),
 			GTK_TOOLBAR_ICONS);
@@ -355,7 +360,7 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 			gtk_widget_hide(window->files_list_window_toolbar);
 			gtk_widget_show(window->files_list_window_toolbar);
 		}
-	}
+	}*/
 	window->have_tb_text = FALSE;
 	window->have_tb_pix = TRUE;
 	
@@ -381,7 +386,7 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
-	if (window->files_list_window_toolbar) {
+/*	if (window->files_list_window_toolbar) {
 		gtk_toolbar_set_style(
 			GTK_TOOLBAR(window->files_list_window_toolbar),
 			GTK_TOOLBAR_TEXT);
@@ -389,7 +394,7 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 			gtk_widget_hide(window->files_list_window_toolbar);
 			gtk_widget_show(window->files_list_window_toolbar);
 		}
-	}
+	}*/
 	window->have_tb_text = TRUE;
 	window->have_tb_pix = FALSE;
 	if (GTK_WIDGET_VISIBLE(window->toolbar)) {
@@ -410,9 +415,9 @@ tb_tooltips_on_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), TRUE);
-	if (window->files_list_window_toolbar)
+/*	if (window->files_list_window_toolbar)
 		gtk_toolbar_set_tooltips(
-			GTK_TOOLBAR(window->files_list_window_toolbar), TRUE);
+			GTK_TOOLBAR(window->files_list_window_toolbar), TRUE);*/
 	window->show_tooltips = TRUE;
 }
 
@@ -428,9 +433,9 @@ tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
 	gE_window *window = (gE_window *)cbwindow;
 
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), FALSE);
-	if (window->files_list_window_toolbar)
+/*	if (window->files_list_window_toolbar)
 		gtk_toolbar_set_tooltips(
-			GTK_TOOLBAR(window->files_list_window_toolbar), FALSE);
+			GTK_TOOLBAR(window->files_list_window_toolbar), FALSE);*/
 	window->show_tooltips = FALSE;
 }
 
