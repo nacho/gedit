@@ -275,21 +275,35 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 
 
 	stdin_data = gedit_utils_get_stdin ();
-	if (stdin_data != NULL)
+
+	if (stdin_data != NULL && strlen (stdin_data) > 0)
 	{
-		gchar *converted;
+		gchar *converted_text;
 
-		converted = gedit_utils_convert_to_utf8 (stdin_data, -1, NULL);
+		if (g_utf8_validate (stdin_data, -1, NULL))
+		{
+			converted_text = stdin_data;
+			stdin_data = NULL;
+		}
+		else
+			converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+							-1,
+							NULL);
 
-		if (converted != NULL)
+		if (converted_text != NULL)
 		{
 			window = GNOME_Gedit_Application_getActiveWindow (server, &env);
 			document = GNOME_Gedit_Window_newDocument (window, &env);
 
-			GNOME_Gedit_Document_insert (document, 0, converted,
-						     strlen (converted), &env);
+			GNOME_Gedit_Document_insert (document, 0, converted_text,
+						     strlen (converted_text), &env);
+
+			g_free (converted_text);
 		}
 	}
+
+	if (stdin_data != NULL)
+		g_free (stdin_data);
 
 	if (!quit_option)
 	{

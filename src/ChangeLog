@@ -1,5 +1,17 @@
 2002-10-05  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-document.c (gedit_document_load)(gedit_document_load_from_stdin):
+	don't convert to utf8 data if the are already utf8, fix a mem leak,
+	always pass the right len to gtk_text_buffer_insert
+
+	* gedit2.c (gedit_handle_automation_cmdline): don't convert to utf8 data if 
+	they are already utf8, fix a mem leak,
+
+	* gedit-utils.c (gedit_utils_convert_to_utf8): don't accept utf8 data,
+	if encoding_used == NULL don't return the used encoding, fix a mem leak
+
+2002-10-05  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-marshal.list: added VOID:OBJECT
 
 	* gedit-menus.[ch] (gedit_menus_add_submenu)(gedit_menus_add_submenu_all)

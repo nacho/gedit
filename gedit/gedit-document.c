@@ -688,8 +688,16 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 	if (file_size > 0)
 	{
 		gchar *converted_text;
+		gint len = -1;
 
-		converted_text = gedit_utils_convert_to_utf8 (file_contents,
+		if (g_utf8_validate (file_contents, file_size, NULL))
+		{
+			converted_text = file_contents;
+			len = file_size;
+			file_contents = NULL;
+		}
+		else
+			converted_text = gedit_utils_convert_to_utf8 (file_contents,
 							file_size,
 							&doc->priv->encoding);
 
@@ -711,7 +719,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, file_size);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, len);
 		g_free (converted_text);
 
 		/* We had a newline in the buffer to begin with. (The buffer always contains
@@ -726,7 +734,8 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
 	}
 
-	g_free (file_contents);
+	if (file_contents != NULL)
+		g_free (file_contents);
 
 	if (gedit_utils_is_uri_read_only (uri))
 	{
@@ -766,7 +775,13 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	{
 		gchar *converted_text;
 
-		converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+		if (g_utf8_validate (stdin_data, -1, NULL))
+		{
+			converted_text = stdin_data;
+			stdin_data = NULL;
+		}
+		else
+			converted_text = gedit_utils_convert_to_utf8 (stdin_data,
 							-1,
 							&doc->priv->encoding);
 
@@ -797,8 +812,13 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 
 		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+		
 		g_free (converted_text);
 	}
+
+	if (stdin_data != NULL)
+		g_free (stdin_data);
+			
 
 	gedit_document_set_readonly (doc, FALSE);
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
