@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
-%define ver      0.4.9
-%define rel      SNAP
+%define ver      0.5.0
+%define rel      1
 %define prefix   /usr
 
 Summary:   gEdit 

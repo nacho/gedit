@@ -126,10 +126,8 @@ gmodule-plugins/Makefile
 gmodule-plugins/idl/Makefile
 gmodule-plugins/goad/Makefile
 gmodule-plugins/client/Makefile
-gmodule-plugins/hello/Makefile
 gmodule-plugins/shell/Makefile
 gmodule-plugins/launcher/Makefile
-gmodule-plugins/ctag/Makefile
 editor-plugins/Makefile
 EOF
 

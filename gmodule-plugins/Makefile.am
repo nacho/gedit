@@ -1,13 +1,5 @@
 ## Process this file with automake to produce Makefile.in
 
-if FALSE
-extra_dirs = hello reverse testselect
-endif
-
-if HAVE_GNOME
-ctag = ctag
-endif
-
 if WITH_GMODULE_PLUGINS
 
 if HAVE_LIBZVT
@@ -21,6 +13,6 @@ endif
 gmodule_plugins = $(shell) $(corba)
 endif
 
-SUBDIRS = client $(ctag) $(gmodule_plugins) $(extra_dirs)
+SUBDIRS = client $(gmodule_plugins)
 
 EXTRA_DIST = plugin_howto gmodule_plugin_howto ChangeLog

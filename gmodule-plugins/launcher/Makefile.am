@@ -48,7 +48,7 @@ liblauncher_plugin_la_LIBADD = \
 	@GNOME_LIBDIR@ -lgnorba @GNOMEUI_LIBS@ @ORBIT_LIBS@ \
 	liblauncher_corba.la
 
-$(CORBA_SRCLIST): $(top_srcdir)/plugins/idl/launcher.idl
+$(CORBA_SRCLIST): $(top_srcdir)/gmodule-plugins/idl/launcher.idl
 	orbit-idl $<
 
 ## We create the plugin files here and not from configure because we want
