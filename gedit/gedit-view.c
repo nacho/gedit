@@ -29,7 +29,6 @@
  */
 
 #include <libgnome/gnome-i18n.h>
-
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"

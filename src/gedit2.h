@@ -49,6 +49,7 @@ GeditView* 		gedit_get_active_view 			();
 GList* 			gedit_get_top_windows 			();
 BonoboUIComponent*	gedit_get_ui_component_from_window 	(BonoboWindow* win);
 
+
 #endif /* __GEDIT2_H__ */
 
 

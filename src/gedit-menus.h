@@ -33,6 +33,7 @@
 
 #include <bonobo/bonobo-ui-component.h>
 #include <bonobo/bonobo-ui-engine.h>
+#include <bonobo/bonobo-window.h>
 
 extern BonoboUIVerb gedit_verbs [];
 extern gchar* gedit_menus_ro_sensible_verbs [];
@@ -46,6 +47,31 @@ void gedit_menus_set_verb_sensitive 		(BonoboUIEngine* ui_engine,
 					 	 gchar* cname, gboolean sensitive);
 void gedit_menus_set_verb_list_sensitive 	(BonoboUIEngine* ui_engine, 
 						 gchar** vlist, gboolean sensitive);
+
+/* convenience functions for plugins */
+
+void gedit_menus_add_menu_item (BonoboWindow *window,
+		     const gchar *path,
+		     const gchar *name,
+		     const gchar *label,
+		     const gchar *tooltip,
+		     const gchar *stock_pixmap,
+		     BonoboUIVerbFn cb);
+
+void gedit_menus_remove_menu_item (BonoboWindow *window,
+		     const gchar *path,
+		     const gchar *name);
+
+
+void gedit_menus_add_menu_item_all (const gchar *path,
+		     const gchar *name,
+		     const gchar *label,
+		     const gchar *tooltip,
+		     const gchar *stock_pixmap,
+		     BonoboUIVerbFn cb);
+
+void gedit_menus_remove_menu_item_all (const gchar *path,
+		     const gchar *name);
 
 
 #endif /* __GEDIT_MENU_H__ */

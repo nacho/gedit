@@ -29,9 +29,14 @@
 
 #include <libgnome/gnome-i18n.h>
 
+#include "gedit-menus.h"
 #include "gedit-plugin.h"
 #include "gedit-debug.h"
 
+#define MENU_ITEM_LABEL		N_("_Hello World")
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps/"
+#define MENU_ITEM_NAME		"HelloWorld"	
+#define MENU_ITEM_TIP		N_("Prints Hello World.")
 
 static void
 hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -85,80 +90,31 @@ destroy (GeditPlugin *plugin)
 G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
 {
-	GList* top_windows;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
+	GList *top_windows;
+        gedit_debug (DEBUG_PLUGINS, "");
 
-	top_windows = gedit_get_top_windows ();
-	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
-       
-	while (top_windows)
-	{
-		BonoboUIComponent* ui_component;
-		gchar *item_path;
-		ui_component = gedit_get_ui_component_from_window (
-					BONOBO_WINDOW (top_windows->data));
-		
-		item_path = g_strdup ("/menu/Tools/ToolsOps/HelloWorld");
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
 
-		if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-		{
-			gchar *xml;
-					
-			xml = g_strdup ("<menuitem name=\"HelloWorld\" verb=\"\""
-					" _label=\"_Hello World\""
-				        " _tip=\"Print Hello World\" hidden=\"0\" />");
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME,
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
+				     hello_world_cb);
 
-			bonobo_ui_component_set_translate (ui_component, 
-					"/menu/Tools/ToolsOps/", xml, NULL);
+                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
 
-			bonobo_ui_component_set_translate (ui_component, 
-					"/commands/", "<cmd name = \"HelloWorld\" />", NULL);
+                top_windows = g_list_next (top_windows);
+        }
 
-			bonobo_ui_component_add_verb (ui_component, 
-					"HelloWorld", hello_world_cb, 
-					      NULL); 
-
-			g_free (xml);
-		}
-		
-		g_free (item_path);
-		
-		top_windows = g_list_next (top_windows);
-	}
-
-	return PLUGIN_OK;
+        return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
-	GList* top_windows;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	top_windows = gedit_get_top_windows ();
-	g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
-       
-	while (top_windows)
-	{
-		BonoboUIComponent* ui_component;
-		gchar *item_path;
-		ui_component = gedit_get_ui_component_from_window (
-					BONOBO_WINDOW (top_windows->data));
-		
-		item_path = g_strdup ("/menu/Tools/ToolsOps/HelloWorld");
-
-		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-		{
-			bonobo_ui_component_rm (ui_component, item_path, NULL);
-			bonobo_ui_component_rm (ui_component, "/commands/HelloWorld", NULL);
-		}
-		
-		g_free (item_path);
-		
-		top_windows = g_list_next (top_windows);
-	}
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
 }
 
 G_MODULE_EXPORT GeditPluginState

@@ -31,6 +31,12 @@
 
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
 
+
+#define MENU_ITEM_LABEL		N_("Open _CVS ChangeLogs")
+#define MENU_ITEM_PATH		"/menu/File/FileOps/"
+#define MENU_ITEM_NAME		"CVSChangeLog"	
+#define MENU_ITEM_TIP		N_("Searches for ChangeLogs in the current document and opens them.")
+
 static gchar *
 get_cwd (void)
 {
@@ -64,27 +70,16 @@ is_changelog (const gchar * path)
 	return FALSE;
 }
 
-static void
-cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verbname)
+static GList *
+get_changelogs (gchar *buf)
 {
-	GeditView *view = gedit_get_active_view ();
-	GeditDocument *doc;
-	gchar *buf;
+	GList *list=NULL;
 	guchar *filename;
 	gchar *current_dir;
 	gchar *full_uri;
 	gchar **split_file;
 	gchar **split_line;
 	gint i, j;
-
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_if_fail (view);
-
-	doc = gedit_view_get_document (view);
-
-	buf = gedit_document_get_buffer (doc);
 
 	/* split the file up line by line */
 	split_file = g_strsplit (buf, "\n", 0);
@@ -106,12 +101,9 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 					continue;
 				
 				full_uri = g_strdup_printf("file:///%s/%s", current_dir, filename);
+				list = g_list_append (list, full_uri);
 
-				/* open the changelog */
-				gedit_file_open_single_uri (full_uri);
-				
 				/* cleanup. */
-				g_free(full_uri);
 				g_free(current_dir);
 			}
 		}
@@ -120,6 +112,34 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 	}
 
 	g_strfreev (split_file);
+
+	return list;
+}
+
+static void
+cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verbname)
+{
+	GeditView *view = gedit_get_active_view ();
+	GeditDocument *doc;
+	gchar *buf;
+	GList *list;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (view);
+
+	doc = gedit_view_get_document (view);
+
+	buf = gedit_document_get_buffer (doc);
+
+	list = get_changelogs (buf);
+
+	while (list) {
+		gedit_file_open_single_uri ((gchar *)list->data);
+
+		list = list->next;
+	}
+
 }
 
 G_MODULE_EXPORT GeditPluginState
@@ -129,51 +149,61 @@ destroy (GeditPlugin *plugin)
 }
 
 G_MODULE_EXPORT GeditPluginState
-activate (GeditPlugin *pd)
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
-	GList* top_windows;
+	BonoboUIEngine *ui_engine;
+	GeditDocument *doc;
+	gchar *buf;
+	GList *list;
 	
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS, "");	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
-	top_windows = gedit_get_top_windows ();
-	g_return_if_fail (top_windows != NULL);
-       
-	while (top_windows)
-	{
-		BonoboUIComponent* ui_component;
-		gchar *item_path;
-		ui_component = gedit_get_ui_component_from_window (
-					BONOBO_WINDOW (top_windows->data));
-		
-		item_path = g_strdup ("/menu/File/FileOps/CVSChangelog");
+	ui_engine = bonobo_window_get_ui_engine (window);
 
-		if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-		{
-			gchar *xml;
-					
-			xml = g_strdup ("<menuitem name=\"CVSChangelog\" verb=\"\""
-					" _label=\"Open _CVS Changelogs\""
-				        " _tip=\"Opens changelogs from CVS commit logs\" hidden=\"0\" />");
+	doc = gedit_get_active_document ();
 
-			bonobo_ui_component_set_translate (ui_component, 
-					"/menu/File/FileOps/", xml, NULL);
+	if (doc != NULL) {	 	
+		buf = gedit_document_get_buffer (doc);
+		list = get_changelogs (buf);
 
-			bonobo_ui_component_set_translate (ui_component, 
-					"/commands/", "<cmd name = \"CVSChangelog\" />", NULL);
+		if (list != NULL)
+			gedit_menus_set_verb_sensitive (ui_engine,
+							"/commands/" MENU_ITEM_NAME, TRUE);
+		else
+			gedit_menus_set_verb_sensitive (ui_engine,
+							"/commands/" MENU_ITEM_NAME, FALSE);
 
-			bonobo_ui_component_add_verb (ui_component, 
-					"CVSChangelog", cvs_changelogs_cb, 
-					      NULL); 
-
-			g_free (xml);
-		}
-		
-		g_free (item_path);
-		
-		top_windows = g_list_next (top_windows);
+	}
+	else {
+		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, FALSE);
 	}
 
 	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList *top_windows;
+        gedit_debug (DEBUG_PLUGINS, "");
+
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME,
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP,
+				     GTK_STOCK_OPEN, cvs_changelogs_cb);
+
+                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
+                top_windows = g_list_next (top_windows);
+        }
+
+        return PLUGIN_OK;
 }
 
 
@@ -181,32 +211,7 @@ activate (GeditPlugin *pd)
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *plugin)
 {
-	GList* top_windows;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	top_windows = gedit_get_top_windows ();
-	g_return_if_fail (top_windows != NULL);
-       
-	while (top_windows)
-	{
-		BonoboUIComponent* ui_component;
-		gchar *item_path;
-		ui_component = gedit_get_ui_component_from_window (
-					BONOBO_WINDOW (top_windows->data));
-		
-		item_path = g_strdup ("/menu/File/FileOps/CVSChangelog");
-
-		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
-		{
-			bonobo_ui_component_rm (ui_component, item_path, NULL);
-			bonobo_ui_component_rm (ui_component, "/commands/CVSChangelog", NULL);
-		}
-		
-		g_free (item_path);
-		
-		top_windows = g_list_next (top_windows);
-	}
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
 }
 
 G_MODULE_EXPORT GeditPluginState
