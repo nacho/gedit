@@ -51,6 +51,7 @@ gedit_save_settings (void)
 	gnome_config_set_bool ("auto_indent", settings->auto_indent);
 	gnome_config_set_bool ("word_wrap", settings->word_wrap);
 	gnome_config_set_bool ("show_statusbar", settings->show_status);
+	gnome_config_set_bool ("toolbar_labels", settings->toolbar_labels);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
 	gnome_config_set_int ("tb_text", (gint) settings->have_tb_text);
 	gnome_config_set_int ("tb_pix", (gint) settings->have_tb_pix);
@@ -134,6 +135,7 @@ gedit_load_settings (void)
 	settings->word_wrap = gnome_config_get_bool ("word_wrap");
 	settings->run = gnome_config_get_int ("run");
 	settings->show_status = gnome_config_get_bool ("show_statusbar");
+	settings->toolbar_labels = gnome_config_get_bool ("toolbar_labels");
 	settings->have_toolbar = gnome_config_get_int ("toolbar");
 	settings->have_tb_text = gnome_config_get_int ("tb text");
 	settings->have_tb_pix = gnome_config_get_int ("tb_pix");

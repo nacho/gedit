@@ -64,6 +64,7 @@ static	void		gedit_document_init (Document *doc);
 void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
 void gedit_document_set_title (Document *doc);
+void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
 
 /**
  * gedit_document_insert_text: Inserts text to a document and hadles all the details like
@@ -553,7 +554,7 @@ gedit_document_get_type (void)
 void
 gedit_mdi_init (void)
 {
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 
 	/*
 	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VESION));
@@ -566,7 +567,7 @@ gedit_mdi_init (void)
 	gnome_mdi_set_toolbar_template (mdi, toolbar_data);
 	
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
-	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
+	gnome_mdi_set_child_list_path (mdi, D_("_Documents/"));
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
@@ -580,6 +581,14 @@ gedit_mdi_init (void)
 			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
 
 	gnome_mdi_set_mode (mdi, settings->mdi_mode);
+
+	gnome_mdi_open_toplevel (mdi);
+
+	/* Loads the structure gedit_toolbar with the widgets */
+	gedit_window_set_toolbar_labels ();
+	gedit_window_load_toolbar_widgets ();
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 void
@@ -640,3 +649,104 @@ gedit_document_set_title (Document *doc)
 }
 
 
+/**
+ * gedit_document_swap_hc_cb:
+ * 
+ * if .c file is open, then open the related .h file and v.v.
+ *
+ * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we
+ * should put a check in there.  if both exist, then probably open
+ * both files.
+ **/
+void
+gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
+{
+	size_t len;
+	gchar *new_file_name;
+	Document *doc, *nth_doc;
+	gint n;
+
+	gedit_debug ("", DEBUG_FILE);
+	
+	doc = gedit_document_current();
+	if (!doc || !doc->filename)
+		return;
+
+	new_file_name = NULL;
+	len = strlen (doc->filename);
+	
+	while (len)
+	{
+		if (doc->filename[len] == '.')
+			break;
+		len--;
+	}
+
+	len++;
+	if (doc->filename[len] == 'h')
+	{
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'c';
+	}
+	else if (doc->filename[len] == 'H')
+	{
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'C';
+	}
+	else if (doc->filename[len] == 'c')
+	{
+		new_file_name = g_strdup (doc->filename);
+		new_file_name[len] = 'h';
+
+		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "cpp") == 0)
+			new_file_name[len+1] = '\0';
+	}
+	else if (doc->filename[len] == 'C')
+	{
+		new_file_name = g_strdup (doc->filename);
+
+		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0)
+		{
+			new_file_name[len] = 'H';
+			new_file_name[len+1] = '\0';
+		}
+		else
+			new_file_name[len] = 'H';
+	}
+
+	if (!new_file_name)
+	{
+		gchar *errstr = g_strdup (_("This file does not end with a valid extension\n"));
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		return;
+	}
+
+	if (!g_file_exists (new_file_name))
+	{
+		gchar *errstr = g_strdup_printf (_("The file %s was not found."), new_file_name);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		return;
+	}
+
+	g_print ("NewFileName: %s\n", new_file_name);
+
+	/* Scan the documents to see if the file we are looking for is allready open */
+	for (n = 0; n < g_list_length (mdi->children); n++)
+	{
+		nth_doc = (Document *)g_list_nth_data (mdi->children, n);
+		
+		if (strcmp(nth_doc->filename, new_file_name) == 0)
+		{
+			View *view;
+			view = g_list_nth_data (nth_doc->views, 0);
+			g_return_if_fail (view != NULL);
+			gnome_mdi_set_active_view (mdi, GTK_WIDGET (view));
+			return;
+		}
+		
+	}
+	
+	gedit_document_new_with_file (new_file_name);
+}

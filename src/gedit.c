@@ -31,6 +31,7 @@
 #include "plugin.h"
 #include "recent.h"
 #include "utils.h"
+#include "window.h"
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
@@ -123,11 +124,7 @@ main (int argc, char **argv)
 	gedit_load_settings ();
 	gedit_plugins_init ();
 	gedit_mdi_init ();
-
-	gnome_mdi_open_toplevel (mdi);
-
 	gedit_document_load (file_list);
-
 	gedit_close_all_flag_clear ();
 
 	gtk_main();

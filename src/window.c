@@ -33,25 +33,30 @@
 #include "utils.h"
 #include "plugin.h"
 #include "recent.h"
+#include "undo.h"
 #include "../pixmaps/gedit-icon.xpm"
 
+/*
 extern GtkWidget *col_label;
+GList *window_list = NULL; dis by chema*/
+/* Window *window; dis by chema*/
 
-GList *window_list = NULL;
+GtkWindow *	gedit_window_active (void);
+GnomeApp *	gedit_window_active_app (void);
 
-/* I am rewriting the search option, and search results from all
-   documents will not get imlemented initially */
-#define ENABLE_SEARCH_RESULT_CLIST
-#undef  ENABLE_SEARCH_RESULT_CLIST
+void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
+void	gedit_window_set_auto_indent (gint auto_indent);
+void	gedit_window_set_status_bar (gint show_status);
+void	gedit_window_refresh_toolbar (void);
+void	gedit_window_set_toolbar_labels (void);
+void	gedit_window_load_toolbar_widgets (void);
 
+static void	gedit_window_set_icon (GtkWidget *window, char *icon);
+#if 0
+static gint gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data);
+#endif 
 
-/* Window *window; */
-
-/* Prototype for setting the window icon */
-static void gedit_window_set_icon (GtkWidget *window, char *icon);
-GtkWindow * gedit_window_active (void);
-GnomeApp  * gedit_window_active_app (void);
-
+GeditToolbar *gedit_toolbar = NULL;
 
 GtkWindow *
 gedit_window_active (void)
@@ -66,80 +71,6 @@ gedit_window_active_app (void)
 	gedit_debug ("", DEBUG_WINDOW);
 	return mdi->active_window;
 }
-
-
-#ifdef ENABLE_SEARCH_RESULT_CLIST
-
-/* Create a find in all files search result window but don't show it. */
-static GtkWidget*
-create_find_in_files_result_window (void)
-{
-	GtkWidget *wnd, *btn, *top, *frame, *image, *label, *hsep;
-	gchar *titles[] = {
-		N_("Filename"),
-		N_("Line"),
-		N_("Contents") 
-	};
-	int i;
-
-	gedit_debug ("", DEBUG_WINDOW);
-	
-	search_result_clist = gtk_clist_new_with_titles (3, titles);
-	gtk_signal_connect (GTK_OBJECT(search_result_clist), 
-			    "select_row",
-			    GTK_SIGNAL_FUNC(search_result_clist_cb),
-			    NULL);
-
-	for (i = 0; i < 3; i++) 
-		gtk_clist_set_column_auto_resize ((GtkCList *)search_result_clist, i, TRUE);
-
-	wnd = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy ((GtkScrolledWindow *)wnd,
-					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(wnd),
-					       search_result_clist); 
-	gtk_widget_show (search_result_clist);
-	gtk_widget_show (wnd);
-
-	btn = gtk_button_new ();
-
-	/*image = gnome_pixmap_new_from_file_at_size ("../xpm/tb_cancel.xpm", 15, 15);*/
-	image = gnome_stock_new_with_icon (GNOME_STOCK_PIXMAP_CLOSE);
-	
-	gtk_container_add (GTK_CONTAINER (btn), image);
-
-	gtk_button_set_relief (GTK_BUTTON(btn), GTK_RELIEF_NONE);
-	
-	gtk_signal_connect (GTK_OBJECT(btn), "clicked",
-			    GTK_SIGNAL_FUNC(remove_search_result_cb),
-			    NULL);
-
-	gtk_widget_show (image);
-	gtk_widget_show (btn);
-	
-	frame = gtk_vbox_new (FALSE, 0);
-	top = gtk_hbox_new (FALSE, 0);	
-	
-	label = gtk_label_new ("Search Results");
-
-	gtk_label_set_justify (GTK_LABEL(label), GTK_JUSTIFY_LEFT);
-	hsep = gtk_hseparator_new ();
-
-	gtk_box_pack_start (GTK_BOX (top), label, FALSE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (top), hsep, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (top), btn, FALSE, TRUE, 0);
-	
-	gtk_box_pack_start (GTK_BOX (frame), top, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (frame), wnd, TRUE, TRUE, 0);
-
-	gtk_widget_show (hsep);
-	gtk_widget_show (label);
-	gtk_widget_show (top);
-
-	return frame;
-}
-#endif
 
 void
 gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
@@ -171,20 +102,6 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 	/*gedit_load_settings ();*/
-	
-	/* find in files result window  dont show it.*/
-#ifdef ENABLE_SEARCH_RESULT_CLIST
-	
-	search_result_window = create_find_in_files_result_window ();
-
-	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window,
-			    TRUE, TRUE, 0);
-#endif
-	
-
-	/* gtk_widget_hide(search_result_window); */
-
-
 	gedit_plugins_window_add (app);
 	
 	settings->num_recent = 0;
@@ -197,6 +114,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 		gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
 		gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
 	}
+
 }
 
 void
@@ -263,115 +181,115 @@ gedit_window_set_status_bar (gint show_status)
 	}
 }
 
-
-/**
- * doc_swaphc_cb:
- * 
- * if .c file is open, then open the related .h file
- *
- * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we
- * should put a check in there.  if both exist, then probably open
- * both files.
- **/
+/* WHY is this in gnome-mdi.c and not gnome-mdi.h ????????? Ask Jaka.
+   Chema */
+#define GNOME_MDI_TOOLBAR_INFO_KEY		"MDIToolbarUIInfo"
+/* FIXME : This is not nice. But we can't use the toolbar labels since
+ */
+#define GEDIT_TOOLBAR_UNDO_BUTTON_POSITION	6
+#define GEDIT_TOOLBAR_REDO_BUTTON_POSITION	7
 void
-doc_swaphc_cb (GtkWidget *widget, gpointer data)
+gedit_window_load_toolbar_widgets (void)
 {
-	size_t len;
-	gchar *new_file_name;
-	Document *doc, *nth_doc;
-	gint n;
-
-	gedit_debug ("", DEBUG_FILE);
+	GnomeUIInfo *toolbar_ui_info;
+	gint count;
 	
-	doc = gedit_document_current();
-	if (!doc || !doc->filename)
-		return;
+	gedit_debug ("", DEBUG_WINDOW);
 
-	new_file_name = NULL;
-	len = strlen (doc->filename);
-	
-	while (len)
+	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (gedit_window_active()), GNOME_MDI_TOOLBAR_INFO_KEY);
+
+	if (!gedit_toolbar)
+		gedit_toolbar = g_malloc (sizeof (GeditToolbar));
+
+	count = 0;
+	while (toolbar_ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
 	{
-		if (doc->filename[len] == '.')
-			break;
-		len--;
+		if (toolbar_ui_info [count].moreinfo == gedit_undo_undo)
+			gedit_toolbar->undo_button = toolbar_ui_info[count].widget;
+		if (toolbar_ui_info [count].moreinfo == gedit_undo_redo)
+			gedit_toolbar->redo_button = toolbar_ui_info[count].widget;
+		count++;
 	}
 
-	len++;
-	if (doc->filename[len] == 'h')
-	{
-		new_file_name = g_strdup (doc->filename);
-		new_file_name[len] = 'c';
-	}
-	else if (doc->filename[len] == 'H')
-	{
-		new_file_name = g_strdup (doc->filename);
-		new_file_name[len] = 'C';
-	}
-	else if (doc->filename[len] == 'c')
-	{
-		new_file_name = g_strdup (doc->filename);
-		new_file_name[len] = 'h';
+	g_return_if_fail (gedit_toolbar->undo_button != NULL);
+	g_return_if_fail (gedit_toolbar->redo_button != NULL);
 
-		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "cpp") == 0)
-			new_file_name[len+1] = '\0';
-	}
-	else if (doc->filename[len] == 'C')
-	{
-		new_file_name = g_strdup (doc->filename);
+	/* initialy both undo and redo are unsensitive */
+	gtk_widget_set_sensitive (gedit_toolbar->undo_button, FALSE);
+	gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
+	gedit_toolbar->undo = FALSE;
+	gedit_toolbar->redo = FALSE;
 
-		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0)
-		{
-			new_file_name[len] = 'H';
-			new_file_name[len+1] = '\0';
-		}
-		else
-			new_file_name[len] = 'H';
-	}
-
-	if (!new_file_name)
-	{
-		gchar *errstr = g_strdup (_("This file does not end with a valid extension\n"));
-		gnome_app_error (gedit_window_active_app(), errstr);
-		g_free (errstr);
-		return;
-	}
-
-	if (!g_file_exists (new_file_name))
-	{
-		gchar *errstr = g_strdup_printf (_("The file %s was not found."), new_file_name);
-		gnome_app_error (gedit_window_active_app(), errstr);
-		g_free (errstr);
-		return;
-	}
-
-	g_print ("NewFileName: %s\n", new_file_name);
-
-	
-	/* Scan the documents to see if the file we are looking for is allready
-	   open */
-	for (n = 0; n < g_list_length (mdi->children); n++)
-	{
-		nth_doc = (Document *)g_list_nth_data (mdi->children, n);
-		
-		if (strcmp(nth_doc->filename, new_file_name) == 0)
-		{
-			View *view;
-			view = g_list_nth_data (nth_doc->views, 0);
-			g_return_if_fail (view != NULL);
-			gnome_mdi_set_active_view (mdi, GTK_WIDGET (view));
-			return;
-		}
-		
-	}
-	
-	gedit_document_new_with_file (new_file_name);
 }
 
-
-/* Unused functions */
 #if 0
+void
+gedit_window_refresh_toolbar (void)
+{
+	GnomeApp *app;
+	GnomeDockItem *dock_item;
 
+	GtkToolbar *toolbar;
+
+	GList * toolbar_item;
+	GList *tooltip_item;
+
+	GtkToolbarChild *toolbar_child;
+	GtkTooltipsData *tooltip_data;
+
+	gchar *label;
+	
+	gedit_debug ("", DEBUG_WINDOW);
+
+	app = gedit_window_active_app();
+	g_return_if_fail (app != NULL);
+
+	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
+	toolbar = GTK_TOOLBAR (gnome_dock_item_get_child (dock_item));
+	
+	toolbar_item = GTK_TOOLBAR (toolbar)->children;
+	tooltip_item = GTK_TOOLBAR (toolbar)->tooltips->tips_data_list;
+	
+	for ( ; toolbar_item; toolbar_item = toolbar_item->next)
+	{
+		toolbar_child = toolbar_item->data;
+		if (toolbar_child->type == GTK_TOOLBAR_CHILD_BUTTON)
+		{
+			gtk_label_get (GTK_LABEL(toolbar_child->label), &label);
+			g_print ("label: %s \n", label);
+		}
+		if (toolbar_child->type != GTK_TOOLBAR_CHILD_SPACE)
+		{
+			tooltip_data = tooltip_item->data;
+			g_print("t: %s\n", tooltip_data->tip_text);
+			tooltip_item = tooltip_item->next;
+		}
+	}
+}
+#endif
+
+void
+gedit_window_set_toolbar_labels (void)
+{
+	GnomeApp *app;
+	GnomeDockItem *dock_item;
+	GtkToolbar *toolbar;
+
+	gedit_debug ("", DEBUG_WINDOW);
+
+	app = mdi->active_window;
+	g_return_if_fail (app != NULL);
+	
+	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
+	toolbar = GTK_TOOLBAR (gnome_dock_item_get_child (dock_item));
+	if (settings->toolbar_labels)
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
+	else
+		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+
+}
+/* Unused functions. We should enable it!!! Chema */
+#if 0
 static gint
 gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
 {

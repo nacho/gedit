@@ -49,7 +49,7 @@ GnomeUIInfo popup_menu[] =
 	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_ITEM_STOCK (N_("Open (swap) .c/.h file"), NULL,
-				doc_swaphc_cb, GNOME_STOCK_MENU_REFRESH),
+				gedit_document_swap_hc_cb, GNOME_STOCK_MENU_REFRESH),
 	
 	GNOMEUIINFO_END
 };
@@ -97,30 +97,22 @@ GnomeUIInfo gedit_edit_menu[] =
 {
 	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_undo, NULL),
 	GNOMEUIINFO_MENU_REDO_ITEM (gedit_undo_redo, NULL),
+
 	GNOMEUIINFO_SEPARATOR,
+
         GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
         GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
 
-#if 0
-	Simplify the interface. Find in files should be a plugin
-	Find in all the files open is something that will be used
-	very very little times. We should have it as a plugin, tho
-	{
-		GNOME_APP_UI_ITEM,
-		N_("Find _In Files..."),
-		N_("Find text in all open files"),
-		find_in_files_cb, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
-	},
-#endif       
-
 	GNOMEUIINFO_SEPARATOR,
+
 	GNOMEUIINFO_MENU_FIND_ITEM ( find_cb, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM ( find_again_cb, NULL),
 	GNOMEUIINFO_MENU_REPLACE_ITEM ( replace_cb, NULL),
+
 	GNOMEUIINFO_SEPARATOR,
+
 	{
 		GNOME_APP_UI_ITEM,
 		N_("Goto _Line..."),
@@ -128,6 +120,7 @@ GnomeUIInfo gedit_edit_menu[] =
 		goto_line_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
+
 	GNOMEUIINFO_END
 };
 
@@ -146,120 +139,18 @@ GnomeUIInfo doc_menu[] =
 {
 	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
 	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
+
 	GNOMEUIINFO_END
 };
 
-#if 0
-/* We need to simplify the menus !!.
-   A newbiew will probably never want to change this
-   option, disable it as a menu option but add it as
-   a preference item.
-   Chema. */
-GnomeUIInfo gedit_tab_menu[] =
-{
-	{
-		GNOME_APP_UI_ITEM,
-		N_("_Top"),
-		N_("Put the document tabs at the top"),
-		tab_top_cb, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM,
-		N_("_Bottom"),
-		N_("Put the document tabs at the bottom"),
-		tab_bot_cb, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM,
-		N_("_Left"),
-		N_("Put the document tabs on the left"),
-		tab_lef_cb, NULL
-	},
-	{
-		GNOME_APP_UI_ITEM,
-		N_("_Right"),
-		N_("Put the document tabs on the right"),
-		tab_rgt_cb, NULL
-	},
-
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SHOWTABS,
-			            N_("Toggle the presence of the document tabs"),
-				    tab_toggle_cb, (gpointer) GE_WINDOW, NULL),
-	
-				    GNOMEUIINFO_END 
-}; 
-
-#endif
-/* These are the customizable checkboxes in the Settings menu,
-   Readonly and Splitscreen are on a per-document basis */
-/* We need to simplify the interface. Why would the user
-   want to change the ReadOnly flag ???. Chema */
-
 GnomeUIInfo gedit_settings_menu[] =
 {
-/*      
-        GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-				    N_("Toggle autoindent"),
-				    auto_indent_toggle_cb, NULL,
-				    NULL),
-*/
-
 	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
 				    N_("Enable or disable the statusbar at the bottom of this application window."),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
-
-/*
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
-				    N_("Toggle Wordwrap"),
-				    options_toggle_word_wrap_cb,
-				    NULL, NULL),
-
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_LINEWRAP,
-				    N_("Toggle Linewrap"),
-				    options_toggle_line_wrap_cb,
-				    NULL, NULL),
-*/
-/*
-	GNOMEUIINFO_TOGGLEITEM_DATA (N_("_Readonly"),
-				     N_("Toggle Readonly"),
-				     options_toggle_read_only_cb,
-				     NULL, NULL),
-*/
-
-/*
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
-				    N_("Toggle Split Screen"),
-				    options_toggle_split_screen_cb,
-				    NULL, NULL),
-*/
-/*	GNOMEUIINFO_SEPARATOR, */
-
-	/*
-	{
-		GNOME_APP_UI_SUBTREE,
-		N_("_Document Tabs"),
-		N_("Change the placement of the document tabs"),
-		&gedit_tab_menu
-	},
-		
-	GNOMEUIINFO_SEPARATOR,*/
-/* Simplify the menus, save setting should be in the preferences window,
-   not as a menu option. Chema 
-	{
-		GNOME_APP_UI_ITEM,
-		N_("Sa_ve Settings"),
-		N_("Save the current settings for future sessions"),
-		gedit_save_settings, NULL,
-		NULL
-		},*/
-
-/* 	GNOMEUIINFO_SEPARATOR, */ 
-
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM (dialog_prefs, NULL),
+
 	GNOMEUIINFO_END
 };
 
@@ -294,7 +185,14 @@ GnomeUIInfo gedit_menu[] =
 		0, 0, NULL
 	},
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
-	GNOMEUIINFO_MENU_FILES_TREE (gedit_docs_menu),
+	{
+		GNOME_APP_UI_SUBTREE,
+		N_("_Documents"),
+		NULL,
+		&gedit_docs_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL,
+		0, 0, NULL
+	},
 	GNOMEUIINFO_MENU_HELP_TREE (gedit_help_menu),
 
 	GNOMEUIINFO_END

@@ -1,5 +1,31 @@
 2000-06-14  Chema Celorio  <chema@celorio.com>
 
+	* window.h (struct _GeditToolbar): new
+
+	* undo.c (gedit_undo_redo): add the stuff needed to set the
+	undo and redo buttons sensitivity
+	(gedit_undo_undo): ditto
+
+	* document.c (gedit_mdi_init): move mdi_open_toplevel here
+
+	* dialogs/dialog-prefs.c (gedit_window_refresh): set toolbar_labels on/off
+	* gedit.c (main): ditto
+	* prefs.c (gedit_save_settings): 
+	(gedit_load_settings): ditto
+	* prefs.h (struct _Preferences): ditto
+
+	* document.c (gedit_mdi_init): rename the "Files" menu to
+	"Documents"
+
+	* window.c : remove swap hc and move to document.c
+
+	* document.c (gedit_document_swap_hc_cb): moved here & rename
+
+	* window.h: comment out a structure and some variables
+	that are not beeing used.
+
+2000-06-14  Chema Celorio  <chema@celorio.com>
+
 	* print.c (gedit_print_verify_fonts): new function. It verifies
 	that the user has the fonts required.	
 	(print_set_pji): fix a stupid bug, close 13922.
