@@ -321,7 +321,7 @@ files_list_popup(GtkWidget *widget, gpointer cbdata)
 		return;
 
 	flw = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(flw), "Currently Open Files");
+	gtk_window_set_title(GTK_WINDOW(flw), _("Currently Open Files"));
 	gtk_signal_connect(GTK_OBJECT(flw), "destroy",
 		GTK_SIGNAL_FUNC(flw_destroy), cbdata);
 
@@ -476,7 +476,7 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 		 */
 		static char *t;
 		gtk_clist_get_text(clist, rownum, FlwFnameColumn, &t);
-		if (t != NULL && strcmp(t, UNTITLED) == 0) {
+		if (t != NULL && strcmp(t, _(UNTITLED)) == 0) {
 			gtk_clist_freeze(clist);
 			gtk_clist_remove(clist, rownum);
 			gtk_clist_thaw(clist);
@@ -486,7 +486,7 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 	g_snprintf(numstr, 4, "%d", rownum + 1);
 	rownfo[0] = numstr;
 	if (curdoc->sb == NULL)
-		rownfo[1] = UNKNOWN;
+		rownfo[1] = _(UNKNOWN);
 	else {
 		g_snprintf(sizestr, 16, "%8lu ", (gulong)(curdoc->sb->st_size));
 		rownfo[1] = sizestr;
@@ -499,8 +499,8 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 		rownfo[2] = strrchr (text, '/');
 	#endif
 	} else {
-		rownfo[1] = UNKNOWN;
-		rownfo[2] = UNTITLED;
+		rownfo[1] = _(UNKNOWN);
+		rownfo[2] = _(UNTITLED);
 	}
 	gtk_clist_freeze(clist);
 	gtk_clist_append(clist, rownfo);
@@ -552,7 +552,7 @@ flw_update_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 		if (stat(text, curdoc->sb) == -1) {
 			/* print warning */
 			gtk_clist_set_text(clist, rownum, FlwFsizeColumn,
-				UNKNOWN);
+				_(UNKNOWN));
 			g_free(curdoc->sb);
 			curdoc->sb = NULL;
 		} else {

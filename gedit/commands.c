@@ -145,16 +145,16 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL} ;
 
 #ifdef GTK_HAVE_FEATURES_1_1_0	
-	fname = (doc->filename) ? g_basename(doc->filename) : UNTITLED;
+	fname = (doc->filename) ? g_basename(doc->filename) : _(UNTITLED);
 #else
 	fname = doc->filename;
 #endif
 	
-	title = (char *)g_malloc(strlen(CLOSE_TITLE) + strlen(fname) + 5);
-	msg =   (char *)g_malloc(strlen(CLOSE_MSG) + strlen(fname) + 6);
+	title = (char *)g_malloc(strlen(_(CLOSE_TITLE)) + strlen(fname) + 5);
+	msg =   (char *)g_malloc(strlen(_(CLOSE_MSG)) + strlen(fname) + 6);
 
-	sprintf(title, "%s '%s'?", CLOSE_TITLE, fname);
-	sprintf(msg  , " '%s' %s ", fname, CLOSE_MSG);
+	sprintf(title, "%s '%s'?", _(CLOSE_TITLE), fname);
+	sprintf(msg  , " '%s' %s ", fname, _(CLOSE_MSG));
 
 	#ifdef WITHOUT_GNOME
 	ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
@@ -698,7 +698,7 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 	num = gtk_notebook_current_page(nb);
 	gtk_notebook_remove_page(nb, num);
 	w->documents = g_list_remove(w->documents, doc);
-	mbprintf("closed %s", (doc->filename) ? doc->filename : UNTITLED);
+	mbprintf("closed %s", (doc->filename) ? doc->filename : _(UNTITLED));
 	if (doc->filename)
 		g_free(doc->filename);
 	if (doc->sb)

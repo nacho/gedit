@@ -146,9 +146,9 @@ void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
 	}
 	
 	msg = g_malloc0 (200);
-	sprintf (msg, "Total Lines: %i\nCurrent Line: %i", total_lines, line_number);
+	sprintf (msg, _("Total Lines: %i\nCurrent Line: %i"), total_lines, line_number);
 	#ifdef WITHOUT_GNOME
-	ge_dialog ("Line Information",
+	ge_dialog (_("Line Information"),
 		msg,
 		1, buttons,
 		1, NULL, NULL, TRUE);
@@ -366,21 +366,21 @@ search_create_dialog(gE_window *window, gE_search *options, gboolean replace)
 
 	options->replace = replace;
 	gtk_window_set_title(GTK_WINDOW(options->window),
-		(replace) ? "Search and Replace" : "Search");
+		(replace) ? _("Search and Replace") : _("Search"));
 
 	hbox = gtk_hbox_new(FALSE, 1);
-	search_for_label = gtk_label_new("Search For:");
+	search_for_label = gtk_label_new(_("Search For:"));
 	gtk_widget_show(search_for_label);
 
 	search_for_menu_items = gtk_menu_new();
-	options->text_item = gtk_radio_menu_item_new_with_label(NULL, "Text");
+	options->text_item = gtk_radio_menu_item_new_with_label(NULL, _("Text"));
 	gtk_menu_append(GTK_MENU(search_for_menu_items), options->text_item);
 	gtk_widget_show(options->text_item);
 	options->line_item =
 		gtk_radio_menu_item_new_with_label(
 			gtk_radio_menu_item_group(
 				GTK_RADIO_MENU_ITEM(options->text_item)),
-			"Line Number");
+			_("Line Number"));
 	gtk_menu_append(GTK_MENU(search_for_menu_items), options->line_item);
 	gtk_widget_show(options->line_item);
 
@@ -399,24 +399,24 @@ search_create_dialog(gE_window *window, gE_search *options, gboolean replace)
 	search_hbox = gtk_hbox_new(FALSE, 1);
 	options->search_entry = gtk_entry_new();
 
-	search_label = gtk_label_new("Search:");
+	search_label = gtk_label_new(_("Search:"));
 	options->start_at_cursor =
 		gtk_radio_button_new_with_label(
-			NULL, "Start searching at cursor position");
+			NULL, _("Start searching at cursor position"));
 	options->start_at_beginning =
 		gtk_radio_button_new_with_label(
 			gtk_radio_button_group(
 				GTK_RADIO_BUTTON(options->start_at_cursor)),
-			"Start searching at beginning of the document");
+			_("Start searching at beginning of the document"));
 	options->case_sensitive =
-		gtk_check_button_new_with_label("Case sensitive");
+		gtk_check_button_new_with_label(_("Case sensitive"));
 
 	options->replace_box = gtk_vbox_new(FALSE, 1);
 	replace_hbox = gtk_hbox_new(FALSE, 1);
-	replace_label = gtk_label_new("Replace:");
+	replace_label = gtk_label_new(_("Replace:"));
 	options->replace_entry = gtk_entry_new();
 	options->prompt_before_replacing =
-		gtk_check_button_new_with_label("Prompt before replacing");
+		gtk_check_button_new_with_label(_("Prompt before replacing"));
 
 #ifdef WITHOUT_GNOME
 	ok = gtk_button_new_with_label("OK");
@@ -588,7 +588,7 @@ search_replace_common(gE_data *data, gboolean do_replace)
 	w->search->again = FALSE;
 	search_for_text(NULL, w->search);
 	gtk_window_set_title(GTK_WINDOW(w->search->window),
-			(do_replace) ? "Search and Replace" : "Search");
+			(do_replace) ? _("Search and Replace") : _("Search"));
 
 	/*d = g_malloc0(sizeof(gE_data));
 	d->window = w;

@@ -119,7 +119,7 @@ msgbox_create(void)
 	gtk_widget_set_name(msgbox.toplev, "MessageBox");
 	gtk_widget_set_usize(msgbox.toplev, 500, 250);
 	gtk_window_set_policy(GTK_WINDOW(msgbox.toplev), TRUE, TRUE, FALSE);
-	gtk_window_set_title(GTK_WINDOW(msgbox.toplev), "gEdit Messages");
+	gtk_window_set_title(GTK_WINDOW(msgbox.toplev), _("gEdit Messages"));
 	gtk_container_border_width(GTK_CONTAINER(msgbox.toplev), 0);
 
 	gtk_signal_connect(GTK_OBJECT(msgbox.toplev), "destroy",
@@ -182,13 +182,13 @@ msgbox_create(void)
 	gtk_widget_show(button);
 #endif
 
-	button = gtk_button_new_with_label("Clear");
+	button = gtk_button_new_with_label(_("Clear"));
 	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 		GTK_SIGNAL_FUNC(msgbox_clear), NULL);
 	gtk_box_pack_start(GTK_BOX(hbox), button, TRUE, TRUE, 0);
 	gtk_widget_show(button);
 
-	button = gtk_button_new_with_label("Close");
+	button = gtk_button_new_with_label(_("Close"));
 	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 		GTK_SIGNAL_FUNC(msgbox_close), NULL);
 	gtk_box_pack_start(GTK_BOX(hbox), button, TRUE, TRUE, 0);

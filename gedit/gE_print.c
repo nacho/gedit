@@ -68,7 +68,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 
 	print_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-	gtk_window_set_title(GTK_WINDOW(print_dialog), "Print");
+	gtk_window_set_title(GTK_WINDOW(print_dialog), _("Print"));
 	gtk_signal_connect(GTK_OBJECT(print_dialog), "destroy",
 		GTK_SIGNAL_FUNC(print_destroy), NULL);
 
@@ -81,7 +81,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 10);
 	gtk_widget_show(hbox);
 
-	tmp = gtk_label_new("Enter print command below\nRemember to include '%s'");
+	tmp = gtk_label_new(("Enter print command below\nRemember to include '%s'"));
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, FALSE, TRUE, 5);
 	gtk_widget_show(tmp);
 
@@ -89,7 +89,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 5);
 	gtk_widget_show(hbox);
 
-	tmp = gtk_label_new("Print Command:");
+	tmp = gtk_label_new(_("Print Command:"));
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, FALSE, TRUE, 5);
 	gtk_widget_show(tmp);
 
@@ -223,7 +223,7 @@ get_filename(gE_data *data)
 	gE_document *doc;
 	char *fname = NULL;
 	char *buttons[] =
-		{ "Print anyway", " Save, then print ", GE_BUTTON_CANCEL };
+		{ N_("Print anyway"), N_(" Save, then print "), GE_BUTTON_CANCEL };
 	char *title, *msg;
 
 	g_assert(data != NULL);
@@ -243,15 +243,15 @@ get_filename(gE_data *data)
 	} else { /* doc changed or no filename */
 		int ret;
 
-		title = g_strdup(PRINT_TITLE);
+		title = g_strdup(_(PRINT_TITLE));
 		if (doc->filename)
-			msg = (char *)g_malloc(strlen(PRINT_MSG) +
+			msg = (char *)g_malloc(strlen(_(PRINT_MSG)) +
 						strlen(doc->filename) + 6);
 		else
-			msg = (char *)g_malloc(strlen(PRINT_MSG) +
-						strlen(UNTITLED) + 6);
+			msg = (char *)g_malloc(strlen(_(PRINT_MSG)) +
+						strlen(_(UNTITLED)) + 6);
 		sprintf(msg, " '%s' %s ", 
-			(doc->filename) ? doc->filename : UNTITLED, PRINT_MSG);
+			(doc->filename) ? doc->filename : _(UNTITLED), PRINT_MSG);
 
 		#ifdef WITHOUT_GNOME
 		ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);

@@ -60,16 +60,16 @@ static void gE_msgbar_timeout_add(gE_window *window);
 
 static popup_t popup_menu[] =
 {
-	{ "Cut", edit_cut_cb },
-	{ "Copy", edit_copy_cb },
-	{ "Paste", edit_paste_cb },
+	{ N_("Cut"), edit_cut_cb },
+	{ N_("Copy"), edit_copy_cb },
+	{ N_("Paste"), edit_paste_cb },
 	{ "<separator>", NULL },
-	{ "Open in new window", file_open_in_new_win_cb },
-	{ "Save", file_save_cb },
-	{ "Close", file_close_cb },
-	{ "Print", file_print_cb },
+	{ N_("Open in new window"), file_open_in_new_win_cb },
+	{ N_("Save"), file_save_cb },
+	{ N_("Close"), file_close_cb },
+	{ N_("Print"), file_print_cb },
 	{ "<separator>", NULL },
-	{ "Open (swap) .c/.h file", doc_swaphc_cb },
+	{ N_("Open (swap) .c/.h file"), doc_swaphc_cb },
 	{ NULL, NULL }
 };
 
@@ -164,7 +164,7 @@ gE_window_new(void)
 
 	/* line and column indicators */
 
-	tmp = gtk_label_new("Column:");
+	tmp = gtk_label_new(_("Column:"));
 	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 1);
 	gtk_widget_show(tmp);
 
@@ -173,7 +173,7 @@ gE_window_new(void)
 	gtk_widget_set_usize(w->col_label, 40, 0);
 	gtk_widget_show(w->col_label);
 
-	tmp = gtk_button_new_with_label("Line");
+	tmp = gtk_button_new_with_label(_("Line"));
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(count_lines_cb), w);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
@@ -258,7 +258,7 @@ gE_document
 	
 	vpaned = gtk_vbox_new (TRUE, TRUE);
 	
-	doc->tab_label = gtk_label_new(UNTITLED);
+	doc->tab_label = gtk_label_new(_(UNTITLED));
 	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
 	doc->filename = NULL;
 	doc->word_wrap = TRUE;
