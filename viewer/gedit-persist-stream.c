@@ -38,7 +38,7 @@ impl_save (BonoboPersistStream       *ps,
 	   void                      *closure,
 	   CORBA_Environment         *ev)
 {
-	g_message (_("Save method not implemented for Gedit viewer"));
+	g_message (_("Save method not implemented for gedit viewer"));
 
 	return 0;
 }

@@ -84,14 +84,88 @@ activate_cb (BonoboObject *control,
 	}
 }
 
+static void 
+gedit_viewer_set_colors (GtkWidget *view, gboolean def, GdkColor *backgroud, GdkColor *text,
+		GdkColor *selection, GdkColor *sel_text)
+{
+	if (!def)
+	{	
+		if (backgroud != NULL)
+			gtk_widget_modify_base (GTK_WIDGET (view), 
+						GTK_STATE_NORMAL, backgroud);
+
+		if (text != NULL)			
+			gtk_widget_modify_text (GTK_WIDGET (view), 
+						GTK_STATE_NORMAL, text);
+	
+		if (selection != NULL)
+		{
+			gtk_widget_modify_base (GTK_WIDGET (view), 
+						GTK_STATE_SELECTED, selection);
+
+			gtk_widget_modify_base (GTK_WIDGET (view), 
+						GTK_STATE_ACTIVE, selection);
+		}
+
+		if (sel_text != NULL)
+		{
+			gtk_widget_modify_text (GTK_WIDGET (view), 
+						GTK_STATE_SELECTED, sel_text);		
+
+			gtk_widget_modify_text (GTK_WIDGET (view), 
+						GTK_STATE_ACTIVE, sel_text);		
+		}
+	}
+	else
+	{
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_widget_get_modifier_style (GTK_WIDGET (view));
+
+		rc_style->color_flags [GTK_STATE_NORMAL] = 0;
+		rc_style->color_flags [GTK_STATE_SELECTED] = 0;
+		rc_style->color_flags [GTK_STATE_ACTIVE] = 0;
+
+		gtk_widget_modify_style (GTK_WIDGET (view), rc_style);
+	}
+}
+
+static void
+gedit_viewer_set_font (GtkWidget *view, gboolean def, const gchar *font_name)
+{
+	if (!def)
+	{
+		PangoFontDescription *font_desc = NULL;
+
+		g_return_if_fail (font_name != NULL);
+		
+		font_desc = pango_font_description_from_string (font_name);
+		g_return_if_fail (font_desc != NULL);
+
+		gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
+		
+		pango_font_description_free (font_desc);		
+	}
+	else
+	{
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_widget_get_modifier_style (GTK_WIDGET (view));
+
+		if (rc_style->font_desc)
+			pango_font_description_free (rc_style->font_desc);
+
+		rc_style->font_desc = NULL;
+		
+		gtk_widget_modify_style (GTK_WIDGET (view), rc_style);
+	}
+}
+
 BonoboControl *
 gedit_viewer_new (void)
 {
 	GtkWidget *source_view, *scrolled;
 	GtkSourceLanguagesManager *lm;
-	GConfClient *conf_client;
-	char *monospace_font;
-	PangoFontDescription *monospace_font_desc;
 	BonoboControl *control;
 	BonoboPersistStream *persist_stream;
 
@@ -105,24 +179,47 @@ gedit_viewer_new (void)
 				lm, (GDestroyNotify) g_object_unref);
 
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (source_view), FALSE);
-	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (source_view), GTK_WRAP_NONE);
-	gtk_text_view_set_left_margin (GTK_TEXT_VIEW (source_view), 3);
-	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (source_view), 3);
 
-	/* Pick up the monospace font from desktop preferences */
-	conf_client = gconf_client_get_default ();
-	monospace_font = gconf_client_get_string (conf_client, "/desktop/gnome/interface/monospace_font_name", NULL);
-	if (monospace_font) {
-		monospace_font_desc = pango_font_description_from_string (monospace_font);
-		gtk_widget_modify_font (source_view, monospace_font_desc);
-		pango_font_description_free (monospace_font_desc);
+	/*
+	 *  Set tab, fonts, wrap mode, colors, etc. according
+	 *  to preferences 
+	 */
+	if (!gedit_prefs_manager_get_use_default_font ())
+	{
+		gchar *editor_font = gedit_prefs_manager_get_editor_font ();
+		
+		gedit_viewer_set_font (source_view, FALSE, editor_font);
+
+		g_free (editor_font);
 	}
-	g_object_unref (conf_client);
 
+	if (!gedit_prefs_manager_get_use_default_colors ())
+	{
+		GdkColor background, text, selection, sel_text;
+
+		background = gedit_prefs_manager_get_background_color ();
+		text = gedit_prefs_manager_get_text_color ();
+		selection = gedit_prefs_manager_get_selection_color ();
+		sel_text = gedit_prefs_manager_get_selected_text_color ();
+
+		gedit_viewer_set_colors (source_view, FALSE,
+				&background, &text, &selection, &sel_text);
+	}	
+
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (source_view), 
+				     gedit_prefs_manager_get_wrap_mode ());
+	
+	g_object_set (G_OBJECT (source_view), 
+		      "tabs_width", gedit_prefs_manager_get_tabs_size (),
+		      "show_line_numbers", gedit_prefs_manager_get_display_line_numbers (),
+		      NULL);
+	
 	scrolled = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
+                                             GTK_SHADOW_IN);
 
 	gtk_container_add (GTK_CONTAINER (scrolled), source_view);
 	gtk_widget_show_all (scrolled);

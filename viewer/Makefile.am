@@ -31,4 +31,4 @@ libgedit_control_la_LIBADD = \
 uidir = $(datadir)/gnome-2.0/ui
 ui_DATA = gedit-viewer-ui.xml
 
-EXTRA_DIST = $(ui_DATA)
+EXTRA_DIST = $(ui_DATA) ChangeLog
