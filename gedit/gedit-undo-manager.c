@@ -141,13 +141,13 @@ gedit_undo_manager_get_type (void)
     	{
       		static const GTypeInfo our_info =
       		{
-        		sizeof (GeditDocumentClass),
+        		sizeof (GeditUndoManagerClass),
         		NULL,		/* base_init */
         		NULL,		/* base_finalize */
         		(GClassInitFunc) gedit_undo_manager_class_init,
         		NULL,           /* class_finalize */
         		NULL,           /* class_data */
-        		sizeof (GeditDocument),
+        		sizeof (GeditUndoManager),
         		0,              /* n_preallocs */
         		(GInstanceInitFunc) gedit_undo_manager_init
       		};

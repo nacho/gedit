@@ -33,6 +33,7 @@
 
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
+#include <gconf/gconf-client.h>
 
 #include <glade/glade-xml.h>
 
@@ -224,6 +225,8 @@ static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPrefere
 								    GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_auto_indent_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+
+static gint get_desktop_default_font_size (void);
 
 static gint last_selected_page_num = FONT_COLORS_SETTINGS;
 static GtkDialogClass* parent_class = NULL;
@@ -816,7 +819,7 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	gnome_font_picker_set_mode (GNOME_FONT_PICKER (dlg->priv->fontpicker), 
 			GNOME_FONT_PICKER_MODE_FONT_INFO);
 	gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (dlg->priv->fontpicker),
-                                                       TRUE, 14);
+                                                       TRUE, get_desktop_default_font_size ());
 	gnome_font_picker_fi_set_show_size (GNOME_FONT_PICKER (dlg->priv->fontpicker), TRUE);
 
 	g_return_val_if_fail (dlg->priv->default_font_checkbutton, FALSE);
@@ -1702,32 +1705,35 @@ gedit_preferences_dialog_print_font_restore_default_button_clicked (
 
 	if (gedit_prefs_manager_print_font_body_can_set ())
 	{
+		const gchar* font = gedit_prefs_manager_get_default_print_font_body ();
+
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
-				gedit_prefs_manager_get_default_print_font_body ());
-
-		gedit_prefs_manager_set_print_font_body (
-				gedit_prefs_manager_get_default_print_font_body ());
+				font);
+		
+		gedit_prefs_manager_set_print_font_body (font);
 	}
 	
 	if (gedit_prefs_manager_print_font_header_can_set ())
 	{
+		const gchar* font = gedit_prefs_manager_get_default_print_font_header ();
+
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
-				gedit_prefs_manager_get_default_print_font_header ());
+				font);
 		
-		gedit_prefs_manager_set_print_font_header (
-				gedit_prefs_manager_get_default_print_font_header ());
+		gedit_prefs_manager_set_print_font_header (font);
 	}
 		
 	if (gedit_prefs_manager_print_font_numbers_can_set ())
 	{
+		const gchar* font = gedit_prefs_manager_get_default_print_font_numbers ();
+		
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
-				gedit_prefs_manager_get_default_print_font_numbers ());
+				font);
 		
-		gedit_prefs_manager_set_print_font_numbers (
-				gedit_prefs_manager_get_default_print_font_numbers ());
+		gedit_prefs_manager_set_print_font_numbers (font);
 	}
 }
 
@@ -1803,7 +1809,9 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), TRUE);
 
 	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), TRUE, 14);
+			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), 
+			TRUE, 
+			get_desktop_default_font_size ());
 
 	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
 			dlg->priv->body_fontpicker, 1, 2, 0, 1);
@@ -1818,7 +1826,9 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), TRUE);
 	
 	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), TRUE, 14);
+			GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker), 
+			TRUE, 
+			get_desktop_default_font_size ());
 
 	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
 			dlg->priv->headers_fontpicker, 1, 2, 1, 2);
@@ -1833,7 +1843,9 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), TRUE);
 	
 	gnome_print_font_picker_fi_set_use_font_in_label (
-			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), TRUE, 14);
+			GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker), 
+			TRUE, 
+			get_desktop_default_font_size ());
 
 	gtk_table_attach_defaults (GTK_TABLE (print_fonts_table), 
 			dlg->priv->numbers_fontpicker, 1, 2, 2, 3);
@@ -1864,11 +1876,11 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 	/* Set initial values */
 	font = gedit_prefs_manager_get_print_font_body ();
 	g_return_val_if_fail (font, FALSE);
-	
+
 	gnome_print_font_picker_set_font_name (
 			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
 			font);
-
+	
 	g_free (font);
 
 	font = gedit_prefs_manager_get_print_font_header ();
@@ -2389,6 +2401,51 @@ gedit_preferences_dialog_add_encodings (GeditPreferencesDialog *dlg, const GSLis
 		update_encodings_list (dlg);
 
 	return changed;
+}
+
+#define DEFAULT_FONT_SIZE 10
+
+/* TODO: monitor changes of the font size - Paolo */
+
+static gint 
+get_desktop_default_font_size ()
+{
+	GConfClient *gconf_client = NULL;
+	gint res;
+	gchar *font;
+	
+	PangoFontDescription *desc;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	gconf_client = gconf_client_get_default ();
+	if (gconf_client == NULL)
+	{
+		return DEFAULT_FONT_SIZE;
+	}
+
+	font = gconf_client_get_string (gconf_client,
+				   	"/desktop/gnome/interface/font_name",
+				   	NULL);
+	if (font == NULL)
+		return DEFAULT_FONT_SIZE;
+	
+	gedit_debug (DEBUG_PREFS, "Font: %s", font);
+
+	desc = pango_font_description_from_string (font);
+
+	g_free (font);
+	g_return_val_if_fail (desc != NULL, DEFAULT_FONT_SIZE);
+
+	res = pango_font_description_get_size (desc) / PANGO_SCALE;
+
+	pango_font_description_free (desc);
+
+	g_object_unref (gconf_client);
+
+	gedit_debug (DEBUG_PREFS, "Size: %d", res);
+
+	return res;
 }
 
 

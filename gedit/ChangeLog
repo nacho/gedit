@@ -1,3 +1,12 @@
+2003-03-09  Paolo Maggi <paolo.maggi@polito.it>
+
+	* gedit-undo-manager.c (gedit_undo_manager_get_type): fixed a 
+	cut and paste bug (s/GeditDocument/GeditUndoManager/)
+
+	* dialogs/gedit-preferences-dialog.c: use the application font
+	size for the font in the font pickers (fix bug #106471)
+	(get_desktop_default_font_size): new function
+
 2003-03-04  Hidetoshi Tajima  <hidetoshi.tajima@sun.com>
 
 	* gedit-encodings.c: use ISO-2022-JP/ISO-2022-KR instead
