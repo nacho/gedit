@@ -15,9 +15,8 @@
 #include "plugin.h"
 #include "view.h"
 
-/* Roberto : no utilices defines que sean comunes puesto que se pueden duplicar,
-   cambia este por GEDIT_PLUGIN_SHELL_BUFFER_SIZE */
-#define BUFFER_SIZE 1024
+
+#define GEDIT_PLUGIN_SHELL_BUFFER_SIZE 1024
 
 static GtkWidget *directory;
 static GtkWidget *command;
@@ -98,10 +97,10 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 	while (buffer_length > 0)
 	{
 
-		buffer_in = g_malloc (BUFFER_SIZE);
-		memset ( buffer_in , 0 , BUFFER_SIZE );
+		buffer_in = g_malloc (GEDIT_PLUGIN_SHELL_BUFFER_SIZE);
+		memset ( buffer_in , 0 ,GEDIT_PLUGIN_SHELL_BUFFER_SIZE );
 		
-		if ( (buffer_length  = read (fdpipe[0], buffer_in , BUFFER_SIZE)) > 0  )
+		if ( (buffer_length  = read (fdpipe[0], buffer_in , GEDIT_PLUGIN_SHELL_BUFFER_SIZE)) > 0  )
 		{
 			buffer_out = g_string_append ( buffer_out , buffer_in );
 			
