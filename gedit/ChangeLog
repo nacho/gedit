@@ -1,3 +1,11 @@
+2004-03-05  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixes bug #104950 (Right-click unselects text if you click 
+	outside the selection)
+
+	* gedit-view.c (button_press_event): removed
+	(gedit_view_init): does not connect the "button-press-event" signal
+
 2004-03-05  Albert Chin-A-Young  <china@thewrittenword.com>
 
 	* dialogs/gnome-print-font-picker.c: IBM C compiler wants

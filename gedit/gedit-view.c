@@ -178,35 +178,6 @@ gedit_view_class_init (GeditViewClass *klass)
 			      GTK_TYPE_MENU);
 }
 
-/* when the user right-clicks on a word, we move the cursor to the 
- * location of the clicked-upon word.
- */
-
-static gboolean
-button_press_event (GtkTextView *view, GdkEventButton *event, gpointer data) 
-{
-	if (event->button == 3) 
-	{
-		gint x, y;
-		GtkTextIter iter;
-		GtkTextIter start, end;
-
-		gtk_text_view_window_to_buffer_coords (view, 
-				GTK_TEXT_WINDOW_TEXT, 
-				event->x, event->y,
-				&x, &y);
-		
-		gtk_text_view_get_iter_at_location(view, &iter, x, y);
-
-		if (!(gtk_text_buffer_get_selection_bounds (
-					gtk_text_view_get_buffer (view), &start, &end) &&          
-		    gtk_text_iter_in_range (&iter, &start, &end)))
-			gtk_text_buffer_place_cursor (gtk_text_view_get_buffer (view), &iter);
-	}
-	return FALSE; /* false: let gtk process this event, too.
-			 we don't want to eat any events. */
-}
-
 static void 
 gedit_view_init (GeditView  *view)
 {
@@ -282,9 +253,6 @@ gedit_view_init (GeditView  *view)
 	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
 			  G_CALLBACK (gedit_view_populate_popup), view);
 	
-	g_signal_connect (G_OBJECT (view->priv->text_view), "button-press-event",
-			  G_CALLBACK (button_press_event), NULL);
-
 }
 
 static void 
