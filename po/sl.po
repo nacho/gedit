@@ -5,12 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2001-03-02 22:41+0100\n"
+"POT-Creation-Date: 2001-03-11 14:55+0100\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=iso8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: plugins/browse/browse.c:251
@@ -38,12 +38,12 @@ msgstr "Vpi¹ite _URL za brskanje:"
 msgid "Lynx found at: "
 msgstr "Program lynx je bil najden v:"
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "lokacija"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr " _Spremeni..."
@@ -85,11 +85,11 @@ msgstr " Deseti¹ko v _osmi¹ko "
 msgid " Hex to Decima_l "
 msgstr " ©estnajsti¹ko v deseti¹ko"
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "Dokumenta, ki ste ju izbrali sta enaka."
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -99,7 +99,7 @@ msgstr ""
 "\n"
 "Prosim izberite veljavno datoteko."
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -109,16 +109,16 @@ msgstr ""
 "\n"
 "Prosim izberite veljavno datoteko."
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "Prvi dokument vsebuje besedila."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "Drugi dokument ne vsebuje besedila."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -126,20 +126,20 @@ msgstr ""
 "gedit ne more ustvariti zaèasne datoteke.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Neimenovan %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Program diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr "Ustvari datoteko diff iz dveh dokumentov ali datotek"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -185,6 +185,10 @@ msgid "Select the \"second\" file..."
 msgstr "Izberi drugo datoteko..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Uporabi poenoteno obliko izpisa (mo¾nost -u)"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Program diff je bil najden v: "
 
@@ -382,17 +386,17 @@ msgstr "gedit: Nastavitve"
 msgid "Replace"
 msgstr "Zamenjaj"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Poi¹èi"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
-msgstr "Besedilo ni bilo najdeno"
+msgid "Search string not found"
+msgstr "Iskano besedilo ni bilo najdeno"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
-msgstr "Besedilo ni bilo najdeno."
+msgid "Search string not found."
+msgstr "Iskano besedilo ni bilo najdeno."
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
@@ -403,7 +407,7 @@ msgstr "Na¹el in zamenjal %i pojavitev."
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Nisem mogel rezervirati pomnilnika za Zamenjaj vse pojavitve."
 
-#: src/dialogs/dialog-uri.c:138 src/file.c:828 src/file.c:835
+#: src/dialogs/dialog-uri.c:138 src/file.c:827 src/file.c:834
 #, c-format
 msgid "Loaded file %s"
 msgstr "Nalo¾ena datoteka %s"
@@ -427,46 +431,50 @@ msgstr "©tevilka vrstice:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Nastavitve"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Videz"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
-msgstr "Ka¾i vrstico stanja"
-
 #: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr "Nastavi orodno vrstico ustrezno sistemskim nastavitvam"
+msgid "S_how statusbar"
+msgstr "_Ka¾i vrstico stanja"
 
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Nastavi orodno vrstico le na ikone"
+msgid "Set toolbar according to _system settings"
+msgstr "Nastavi orodno vrstico ustrezno _sistemskim nastavitvam"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr "Nastavi orodno vrstico na ikone z besedilom"
+msgid "Set toolbar to _icons only"
+msgstr "Nastavi orodno vrstico le na _ikone"
 
 #: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
+msgstr "Nastavi orodno vrstico na ikone z _besedilom"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Obna¹anje urejevalnika"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Vkljuèi samodejno oznaèevanje"
-
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
-msgstr "©irina uhlja: "
+msgid "Enable _Auto-indent"
+msgstr "Vkljuèi s_amodejno oznaèevanje"
 
 #: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
+msgstr "©irina _uhlja: "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Splo¹no"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (veèdokumentni vmesnik)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -478,7 +486,7 @@ msgstr ""
 "Zgoraj\n"
 "Spodaj\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -490,95 +498,99 @@ msgstr ""
 "Modalni\n"
 "Privzet\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
-msgstr "Naèin: "
-
 #: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Mesto uhljev notesnika: "
+msgid "_Mode: "
+msgstr "_Naèin: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "Mesto _uhljev notesnika: "
+
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
-msgstr "Nastavi omejitev razeljavitvenih stopenj na:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr "stopenj"
+msgid "Set limit on _undo levels to:"
+msgstr "Nastavi omejitev _razeljavitvenih stopenj na:"
 
 #: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
+msgstr "_stopenj"
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Dokumenti"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Pisave"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Izberi pisavo"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcÈèDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSs©¹TtUuVvWwXxYyZz®¾"
 
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Privzeta pisava: "
-
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "_Privzeta pisava: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Barve"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Izberi barvo"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
-msgstr "Ozadje: "
-
 #: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
-msgstr "Ospredje: "
+msgid "_Background: "
+msgstr "_Ozadje: "
 
 #: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
+msgstr "Os_predje: "
+
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Pisave/Barve"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Tiskanje"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Dodaj _glavo"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Vkljuèi lo_mljenje vrstic ob besedah"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
+#: src/dialogs/prefs.glade.h:47
+msgid "Print line _numbers every:"
 msgstr "Natisni ¹_tevilke vrstic vsakih:"
 
-#: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
-msgstr "vrstic"
-
 #: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
+msgstr "_vrstic"
+
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Orientacija"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "_Pokonèno"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "_Le¾eèe"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Papir"
 
@@ -681,7 +693,7 @@ msgstr "Opis vtiènika"
 msgid "Open as URI"
 msgstr "Odpri kot URI"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Odpri"
 
@@ -693,9 +705,19 @@ msgstr "Vnesite lokacijo (URI) datoteke, ki jo ¾elite odpreti:"
 msgid "RO - "
 msgstr "Le branje - "
 
+#: src/document.c:295
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Neimenovan"
+
+#: src/document.c:299
+#, c-format
+msgid "%s %d*"
+msgstr "%s %d*"
 
 #: src/document.c:479
 #, c-format
@@ -810,15 +832,15 @@ msgstr ""
 "\n"
 "se je zgodila napaka"
 
-#: src/file.c:482
+#: src/file.c:481
 msgid "Save As..."
 msgstr "Shrani kot..."
 
-#: src/file.c:552
+#: src/file.c:551
 msgid "The document contains no data."
 msgstr "Dokument ne vsebuje podatkov."
 
-#: src/file.c:563
+#: src/file.c:562
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -835,7 +857,7 @@ msgstr ""
 "Preprièajte se, èe pot, ki ste jo navedli obstaja in ali imate ustrezno "
 "dovoljenje za pisanje."
 
-#: src/file.c:577
+#: src/file.c:576
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -853,7 +875,7 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 # c-format
-#: src/file.c:595
+#: src/file.c:594
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -870,41 +892,41 @@ msgstr ""
 "Zaradi neznanega razloga (2). Prosim sporoèite ta problem na "
 "submit@bugs.gnome.org"
 
-#: src/file.c:697
+#: src/file.c:696
 msgid "Could not allocate the required memory."
 msgstr "Nisem mogel rezervirati ¾elenega pomnilnika."
 
-#: src/file.c:717
+#: src/file.c:716
 msgid "Error in the pipe."
 msgstr "Napaka v cevi."
 
-#: src/file.c:842
+#: src/file.c:841
 #, c-format
 msgid "Loaded %i files"
 msgstr "Nalo¾enih %i datotek"
 
-#: src/file.c:908
+#: src/file.c:907
 msgid "Open File ..."
 msgstr "Odpri datoteko ..."
 
-#: src/file.c:1041
+#: src/file.c:1040
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "Datoteka ``%s'' bo prepisana. ®elite nadaljevati?"
 
-#: src/file.c:1053
+#: src/file.c:1052
 msgid "Document has not been saved."
 msgstr "Dokument ¹e ni bil shranjen."
 
-#: src/file.c:1063
+#: src/file.c:1062
 msgid "Error saving file!"
 msgstr "Napaka pri shranjevanju datoteke!"
 
-#: src/file.c:1192
+#: src/file.c:1191
 msgid "You can't revert an Untitled document\n"
 msgstr "Ne morete razveljaviti neimenovanega dokumenta\n"
 
-#: src/file.c:1205
+#: src/file.c:1204
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -913,7 +935,7 @@ msgstr ""
 "Ste preprièani, da ¾elite razveljaviti vse spremembe?\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Datoteka ``%s'' ne obstaja. Ali jo ¾elite ustvariti?"
@@ -978,21 +1000,21 @@ msgstr "Odpri (zamenjaj) .s/.h datoteko"
 msgid "_New"
 msgstr "_Nova"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Ustvari nov dokument"
 
 #: src/menus.c:68
-msgid "Save All"
-msgstr "Shrani vse"
+msgid "Sav_e All"
+msgstr "_Shrani vse"
 
 #: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Shrani vse odprte datoteke"
 
 #: src/menus.c:74
-msgid "Revert"
-msgstr "Povrni"
+msgid "_Revert"
+msgstr "_Povrni"
 
 #: src/menus.c:83
 msgid "Open from _URI..."
@@ -1011,145 +1033,141 @@ msgid "Print preview"
 msgstr "Predogled tiskanja"
 
 #: src/menus.c:102
-msgid "Print preview..."
-msgstr "Predogled tiskanja..."
+msgid "Print pre_view..."
+msgstr "_Predogled tiskanja..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Predoglej si podatke, ki bodo natisnjeni"
 
 #: src/menus.c:110
-msgid "Close All"
-msgstr "Zapri vse"
+msgid "C_lose All"
+msgstr "_Zapri vse"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Zapri vse odprte datoteke"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "_Skoèi na vrstico..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Pojdi na doloèeno ¹tevilko vrstice"
 
-#: src/menus.c:154
+#: src/menus.c:160
 msgid "File _Info"
 msgstr "_Podatki o datoteki"
 
-#: src/menus.c:155
+#: src/menus.c:161
 msgid "Get the basic file info"
 msgstr "Dobi osnovne podatke o datoteki"
 
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Dodaj Pogled"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Dodaj nov pogled dokumenta"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "_Odstrani Pogled"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Odstrani pogled na dokument"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "_Iskanje"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "_Vtièniki"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "_Dokumenti"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Nova"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Odpri datoteko"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Shrani"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Shrani trenutno datoteko"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Zapri"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Zapri trenutno datoteko"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Natisni"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Natisni trenutno datoteko"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Razveljavi zadnje dejanje"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Obnovi"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Obnovi zadnje dejanje"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Izre¾i"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Izre¾i izbrano"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Kopiraj izbrano"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Prilepi"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Prilepi odlo¾i¹èe"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "I¹èi niz"
 
-#: src/menus.c:288
-msgid "Exit"
-msgstr "Izhod"
-
-#: src/menus.c:288
-msgid "Exit the program"
-msgstr "Izhod iz programa"
-
 #: src/plugin.c:107
-msgid "Manager ..."
-msgstr "Upravljalnik ..."
+msgid "_Manager ..."
+msgstr "_Upravljalnik ..."
 
 #: src/plugin.c:108
 msgid "Add/Remove installed plugins"
@@ -1308,11 +1326,11 @@ msgstr ""
 msgid "You can't remove the last view of a document."
 msgstr "Ne morete razveljaviti neimenovanega dokumenta."
 
-#~ msgid "%s %d"
-#~ msgstr "%s %d"
+#~ msgid "Exit"
+#~ msgstr "Izhod"
 
-#~ msgid "%s %d*"
-#~ msgstr "%s %d*"
+#~ msgid "Exit the program"
+#~ msgstr "Izhod iz programa"
 
 #~ msgid "Text editor"
 #~ msgstr "Urejevalnik besedil"
@@ -1502,9 +1520,6 @@ msgstr "Ne morete razveljaviti neimenovanega dokumenta."
 
 #~ msgid "Find In Files"
 #~ msgstr "Poi¹èi V Datotekah"
-
-#~ msgid "Search"
-#~ msgstr "Iskanje"
 
 #~ msgid "Search for:"
 #~ msgstr "I¹èi za:"
