@@ -9,13 +9,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-06-21 17:50+0200\n"
-"PO-Revision-Date: 2002-06-21 17:51+0200\n"
+"POT-Creation-Date: 2002-07-08 11:49+0200\n"
+"PO-Revision-Date: 2002-07-08 11:58+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: GNOME_Gedit.server.in.h:1
+msgid "gedit application"
+msgstr "aplikacja gedit"
+
+#: GNOME_Gedit.server.in.h:1
+msgid "gedit automation factory"
+msgstr "generator automatyzacji programu gedit"
 
 #: gedit.desktop.in.h:1
 msgid "Edit text files"
@@ -91,7 +99,7 @@ msgstr "Otwórz plik _Changelog z CVS"
 #: plugins/cvschangelog/cvschangelog.c:1
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr ""
-"Wyszukuje pliki Changelog odnoszące się do bieżącego dokumentu i otwiera je"
+"Wyszukuje pliki ChangeLog odnoszące się do bieżącego dokumentu i otwiera je"
 
 #: plugins/cvschangelog/cvschangelog.c:1
 msgid "CVS ChangeLog"
@@ -605,20 +613,6 @@ msgid "The selected file is not executable."
 msgstr "Wybrany plik nie jest wykonywalny."
 
 #: src/dialogs/gedit-preferences-dialog.c:1
-msgid "Toolbar"
-msgstr "Pasek narzędziowy"
-
-#: src/dialogs/gedit-preferences-dialog.c:1
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Status bar"
-msgstr "Pasek stanu"
-
-#: src/dialogs/gedit-preferences-dialog.c:1
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Font & Colors"
 msgstr "Czcionki i kolory"
 
@@ -666,10 +660,6 @@ msgid "Print"
 msgstr "Wydrukuj"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
-msgid "User interface"
-msgstr "Interfejs użytkownika"
-
-#: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Cat_egories:"
 msgstr "Kat_egorie:"
 
@@ -695,20 +685,38 @@ msgstr "Wciśnięcie tego przycisku umożliwia ustawienie koloru tła"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid ""
-"Push this button to configure color in which selected text should appear"
-msgstr "Wciśnięcie tego przycisku umożliwia ustawienie koloru wybranego tekstu"
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr ""
+"Wciśnięcie tego przycisku umożliwia ustawienie koloru zaznaczonego tekstu"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid ""
-"Push this button to configure color in which selected text should be marked"
+"Push this button to configure the color in which the selected text should be "
+"marked"
 msgstr ""
-"Wciśnięcie tego przycisku umożliwia ustawienie koloru zaznaczenia wybranego "
-"tekstu"
+"Wciśnięcie tego przycisku umożliwia ustawienie koloru oznaczenia "
+"zaznaczonego tekstu"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Courier 9"
+msgstr "Courier 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Helvetica 11"
+msgstr "Helvetica 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Helvetica 8"
+msgstr "Helvetica 8"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Push this button to select the font to be used to print the body"
 msgstr ""
-"Wciśnięcie tego przycisku umożliwia wybór czionki używanej przy wydruku "
+"Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
 "dokumentu"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
@@ -720,7 +728,7 @@ msgstr ""
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
-"Wciśnięcie tego przycisku umożliwia wybór czionki używanej przy wydruku "
+"Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
 "numerów wierszy"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
@@ -783,6 +791,10 @@ msgstr "LOGO"
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Left"
 msgstr "Lewo"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid "MDI"
+msgstr "MDI"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Modal"
@@ -857,16 +869,20 @@ msgid "Show overwrite _mode"
 msgstr "Wyświetlanie trybu _nadpisywania"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Status bar"
+msgstr "Pasek stanu"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The MDI (Multiple Document Interface) mode refers to the way more than one "
 "text document is displayed in gedit. \n"
 "If you choose the Notebook mode, you may then decide where you want the tabs "
 "to appear in the gedit window."
 msgstr ""
-"Tryb MDI (Interfejs Wielu Dokumentów) określa sposób w jaki program gEdit ma "
+"Tryb MDI (Interfejs Wielu Dokumentów) określa sposób w jaki program gedit ma "
 "wyświetlać wiele dokumentów.\n"
 "Jeśli zostanie wybrany tryb notatnika, wówczas można zdecydować gdzie w "
-"oknie gEdita mają pojawiać się odpowiednie zakładki."
+"oknie gedita mają pojawiać się odpowiednie zakładki."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
@@ -1204,10 +1220,6 @@ msgid "The string \"%s\" has not been found."
 msgstr "Nie odnaleziono tekstu \"%s\"."
 
 #: src/gedit-commands.c:1
-msgid "Impossible to update gedit settings."
-msgstr "Nie można zaktualizować ustawień gedita."
-
-#: src/gedit-commands.c:1
 msgid "translator_credits"
 msgstr "GNOME PL Team <translators@gnome.pl>"
 
@@ -1436,6 +1448,15 @@ msgstr "Błąd, nie można unieaktywnić wtyczki \"%s\""
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Błąd, nie można uaktualnić interfejsu użytkownika wtyczki \"%s\""
+
+#: src/gedit-prefs-manager.c:1
+msgid "Cannot initialize preferences manager."
+msgstr "Nie można zainicjować menedżera ustawień."
+
+#: src/gedit-prefs-manager.c:1
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "Oczekiwano \"%s\", otrzymano \"%s\" dla klucza %s"
 
 #: src/gedit-print.c:1
 msgid ""
@@ -2219,6 +2240,18 @@ msgstr "Komunikaty debugowania zarządzania sesją."
 #: src/gedit2.c:1
 msgid "Turn on all debugging messages."
 msgstr "Włączenie wszystkich komunikatów debugowania."
+
+#: src/gedit2.c:1
+msgid "Quit an existing instance of gedit"
+msgstr "Kończy działanie istniejącej instancji programu gedit"
+
+#: src/gedit2.c:1
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Tworzy nowe główne okno w ramach istniejącej instancji programu gedit"
+
+#: src/gedit2.c:1
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Tworzy nowy dokument w ramach istniejącej instancji programu gedit"
 
 #: src/gedit2.c:1
 msgid "The GNOME text editor"
