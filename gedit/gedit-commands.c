@@ -544,6 +544,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 		"James Willcox <jwillcox@cs.indiana.edu>",
 		"Chema Celorio <chema@ximian.com>", 
 		"Federico Mena Quintero <federico@ximian.com>",
+		"Paolo Borelli <pborelli@katamail.com>",
 		NULL
 	};
 	
@@ -581,7 +582,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	about = gnome_about_new (_("gedit"), VERSION,
 				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
 				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
-				"Copyright \xc2\xa9 2003 Paolo Maggi",
+				"Copyright \xc2\xa9 2003-2004 Paolo Maggi",
 				_("gedit is a small and lightweight text editor for the GNOME Desktop"),
 				(const char **)authors,
 				(const char **)documenters,
