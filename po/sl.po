@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2002-03-12 23:52+0100\n"
+"Project-Id-Version: gedit\n"
+"POT-Creation-Date: 2002-04-23 12:16+0200\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -253,25 +253,6 @@ msgstr "Druga"
 msgid "Use the _unified output format (-u option)"
 msgstr "Uporabi poenoteno obliko izpisa (možnost -u)"
 
-#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
-#: src/dialogs/gedit-preferences.glade2.h:70 src/dialogs/goto-line.glade2.h:3
-#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
-msgid "gtk-cancel"
-msgstr "gtk-prekliči"
-
-#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
-#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:71
-#: src/dialogs/uri.glade2.h:4
-msgid "gtk-help"
-msgstr "gtk-pomoč"
-
-#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
-#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:72
-#: src/dialogs/goto-line.glade2.h:4
-#: src/dialogs/program-location-dialog.glade2.h:4
-msgid "gtk-ok"
-msgstr "gtk-v redu"
-
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
 msgstr "Število _besed"
@@ -299,7 +280,7 @@ msgstr ""
 
 #: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
 #: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:556
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Avtorske pravice pridržane (C) 2002 - Paolo Maggi"
 
@@ -338,11 +319,6 @@ msgstr "Besed"
 #: plugins/docinfo/docinfo.glade2.h:9
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Vtičnik podatki o dokumentu"
-
-#: plugins/docinfo/docinfo.glade2.h:10
-#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
-msgid "gtk-close"
-msgstr "gtk-zapri"
 
 #: plugins/sample/sample.c:41
 msgid "Insert User _Name"
@@ -424,41 +400,52 @@ msgstr "_Delovni imenik:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Vtičnik izhoda lupine"
 
-#: plugins/taglist/gedit-taglist-plugin.c:44
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Vtičnik seznam oznak"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tab you want to use"
+msgstr "Izberi skupino tabulatorjev, ki jih želiš uporabljati"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Kombinacije skupin tabulatorjev"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "Seznam imen tabulatorjev"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:187
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Dvokliknite na oznako za vstavitev v trenutni dokument."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:198
+msgid "Tags"
+msgstr "Oznake"
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
 msgstr "_Seznam oznak"
 
-#: plugins/taglist/gedit-taglist-plugin.c:47
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
 msgstr "Kaži okno seznama oznak"
 
-#: plugins/taglist/gedit-taglist-plugin.c:140
+#: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
 msgstr "Seznam oznak"
 
-#: plugins/taglist/gedit-taglist-plugin.c:141
+#: plugins/taglist/gedit-taglist-plugin.c:161
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
 "Vtičnik Seznam oznak omogoča način enostavnega vstavljanja pogostih "
 "tabulatorjev/nizov v dokument brez potrebe po tipkanju."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:117
-msgid "Tag list plugin"
-msgstr "Vtičnik seznam oznak"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:135
-msgid "Select the group of tab you want to use."
-msgstr "Izberi skupino tabulatorjev, ki naj se uporabijo."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:159
-msgid "Double-click on a tag to insert it in the current document."
-msgstr "Dvokliknite na oznako za vstavitev v trenutni dokument."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:170
-msgid "Tags"
-msgstr "Oznake"
 
 #: plugins/time/time.c:45
 msgid "_Insert Date/Time"
@@ -488,7 +475,7 @@ msgstr "Vstavi trenutna datum in uro na položaju kazalca."
 msgid "Select the format to use when inserting date/time."
 msgstr "Izberite obliko, ki naj se uporabi za vstavljanje datuma/ure."
 
-#: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
+#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiviraj %s"
@@ -506,70 +493,74 @@ msgstr "_Skoči na vrstico"
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "Nisem mogel najti zahtevanih gradnikov v goto-line.glade2.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:47
+#: src/dialogs/gedit-dialog-plugin-manager.c:51
 msgid "Plugin"
 msgstr "Vtičnik"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:48
+#: src/dialogs/gedit-dialog-plugin-manager.c:52
 msgid "Load"
 msgstr "Naloži"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:314
+#: src/dialogs/gedit-dialog-plugin-manager.c:318
 msgid "Module file name"
 msgstr "Ime datoteke modula"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
+#: src/dialogs/gedit-dialog-plugin-manager.c:319
 msgid "Author(s)"
 msgstr "Avtor(ji)"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:446
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Nisem našel datoteke plugin-manager.glade2, znova namestite gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:454
+#: src/dialogs/gedit-dialog-plugin-manager.c:458
 msgid "Plugin Manager"
 msgstr "Upravljalnik vtičnikov"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:481
+#: src/dialogs/gedit-dialog-plugin-manager.c:485
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Neveljavna datoteka glade za upravljalnik vtičnikov -- vsi gradniki niso "
 "bili najdeni.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:578
+#: src/dialogs/gedit-dialog-plugin-manager.c:582
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Nisem mogel ustvariti dialoga upravljalnika vtičnikov"
 
-#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
-#: src/gedit-ui.xml.h:56
+#: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
+#: src/gedit-ui.xml.h:58
 msgid "Replace"
 msgstr "Zamenjaj"
 
-#: src/dialogs/gedit-dialog-replace.c:178
+#: src/dialogs/gedit-dialog-replace.c:182
 msgid "Replace _All"
 msgstr "Zamenjaj _vse"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
 #: src/gedit-ui.xml.h:105
 msgid "_Replace"
 msgstr "_Zamenjaj"
 
-#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Poišči"
 
-#: src/dialogs/gedit-dialog-replace.c:469
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695
+#: src/dialogs/gedit-dialog-replace.c:473
+#: src/dialogs/gedit-dialog-replace.c:544
+#: src/dialogs/gedit-dialog-replace.c:714
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Besedilo \"%s\" ni bilo najdeno."
 
-#: src/dialogs/gedit-dialog-replace.c:704
+#: src/dialogs/gedit-dialog-replace.c:723
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Našel in zamenjal sem %d pojavitev."
+
+#: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr "Odpri iz URIja"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
@@ -598,77 +589,117 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Izbrana datoteka ni izvršljiva"
 
-#: src/dialogs/gedit-preferences-dialog.c:202
+#: src/dialogs/gedit-preferences-dialog.c:226
 msgid "Toolbar"
 msgstr "Orodjarna"
 
-#: src/dialogs/gedit-preferences-dialog.c:203
-#: src/dialogs/gedit-preferences.glade2.h:34
+#: src/dialogs/gedit-preferences-dialog.c:227
+#: src/dialogs/gedit-preferences.glade2.h:38
 msgid "Status bar"
 msgstr "Vrstica stanja"
 
-#: src/dialogs/gedit-preferences-dialog.c:206
-#: src/dialogs/gedit-preferences.glade2.h:14
+#: src/dialogs/gedit-preferences-dialog.c:230
+#: src/dialogs/gedit-preferences.glade2.h:17
 msgid "MDI"
 msgstr "Večdokumentni vmesnik"
 
-#: src/dialogs/gedit-preferences-dialog.c:215
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Font & Colors"
 msgstr "Pisave in barve"
 
-#: src/dialogs/gedit-preferences-dialog.c:217
-#: src/dialogs/gedit-preferences.glade2.h:35
+#: src/dialogs/gedit-preferences-dialog.c:241
+#: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr "Uhlj"
 
-#: src/dialogs/gedit-preferences-dialog.c:218
-#: src/dialogs/gedit-preferences.glade2.h:57
+#: src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences.glade2.h:62
 msgid "Wrap mode"
 msgstr "Način lomljenja"
 
-#: src/dialogs/gedit-preferences-dialog.c:219
-#: src/dialogs/gedit-preferences.glade2.h:13
+#: src/dialogs/gedit-preferences-dialog.c:243
+#: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Line numbers"
 msgstr "Številke vrstic"
 
-#: src/dialogs/gedit-preferences-dialog.c:221
-#: src/dialogs/gedit-preferences.glade2.h:27 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:245
+#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:63
 msgid "Save"
 msgstr "Shrani"
 
-#: src/dialogs/gedit-preferences-dialog.c:222
-#: src/dialogs/gedit-preferences.glade2.h:52 src/gedit-ui.xml.h:81
+#: src/dialogs/gedit-preferences-dialog.c:246
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:83
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: src/dialogs/gedit-preferences-dialog.c:230
+#: src/dialogs/gedit-preferences-dialog.c:254
 msgid "Page"
 msgstr "Stran"
 
-#: src/dialogs/gedit-preferences-dialog.c:237
+#: src/dialogs/gedit-preferences-dialog.c:256
+msgid "Fonts"
+msgstr "Pisave"
+
+#: src/dialogs/gedit-preferences-dialog.c:263
 msgid "Editor"
 msgstr "Urejevalni"
 
-#: src/dialogs/gedit-preferences-dialog.c:238
-#: src/dialogs/gedit-preferences.glade2.h:22 src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:264
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:47
 msgid "Print"
 msgstr "Natisni"
 
-#: src/dialogs/gedit-preferences-dialog.c:240
+#: src/dialogs/gedit-preferences-dialog.c:266
 msgid "User interface"
 msgstr "Uporabniški vmesnik"
 
-#: src/dialogs/gedit-preferences-dialog.c:307
+#: src/dialogs/gedit-preferences-dialog.c:333
 msgid "Cat_egories:"
 msgstr "Kategorije"
 
-#: src/dialogs/gedit-preferences-dialog.c:331 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:46
 msgid "Preferences"
 msgstr "Nastavitve"
 
-#: src/dialogs/gedit-preferences-dialog.c:498
+#: src/dialogs/gedit-preferences-dialog.c:574
 msgid "Categories"
 msgstr "Kategorije"
+
+#: src/dialogs/gedit-preferences-dialog.c:906
+msgid "Push this button to select the font to be used by the editor"
+msgstr "Pritisnite ta gumb za izbiro pisave, ki naj jo uporablja urejevalnik"
+
+#: src/dialogs/gedit-preferences-dialog.c:909
+msgid "Push this button to configure text color"
+msgstr "Pritisnite ta gumb za izbiro barve besedila"
+
+#: src/dialogs/gedit-preferences-dialog.c:911
+msgid "Push this button to configure background color"
+msgstr "Pritisnite ta gumb za nastavitev barve ozadja"
+
+#: src/dialogs/gedit-preferences-dialog.c:913
+msgid ""
+"Push this button to configure color in which selected text should appear"
+msgstr ""
+"Pritisnite ta gumb za nastavitev barve za izbrano besedila"
+
+#: src/dialogs/gedit-preferences-dialog.c:915
+msgid ""
+"Push this button to configure color in which selected text should be marked"
+msgstr ""
+"Pritisnite ta gumb za nastavitev barve označitve izbranega besedila"
+
+#: src/dialogs/gedit-preferences-dialog.c:1313
+msgid "Push this button to select the font to be used to print the body"
+msgstr "Pritisnite ta gumb za izbiro pisave za tiskanje telesa"
+
+#: src/dialogs/gedit-preferences-dialog.c:1315
+msgid "Push this button to select the font to be used to print the headers"
+msgstr "Pritisnite ta gumb za izbiro pisave za tiskanje glav"
+
+#: src/dialogs/gedit-preferences-dialog.c:1317
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr "Pritisnite ta gumb za izbiro pisave za tiskanje številk vrstic"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -679,122 +710,131 @@ msgid " character(s)"
 msgstr " znak(ov)"
 
 #: src/dialogs/gedit-preferences.glade2.h:3
+msgid " line(s)"
+msgstr " vrstic"
+
+#: src/dialogs/gedit-preferences.glade2.h:4
 msgid "Always use _UTF-8 encoding (faster)"
 msgstr "Vedno uporabljaj kodni nabor _UTF-8 (hitreje)"
 
-#: src/dialogs/gedit-preferences.glade2.h:4
+#: src/dialogs/gedit-preferences.glade2.h:5
 msgid "Bottom"
 msgstr "Dno"
 
-#: src/dialogs/gedit-preferences.glade2.h:5
+#: src/dialogs/gedit-preferences.glade2.h:6
 msgid "Button style"
 msgstr "Slog gumba"
 
-#: src/dialogs/gedit-preferences.glade2.h:6
+#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Colors"
 msgstr "Barve"
 
-#: src/dialogs/gedit-preferences.glade2.h:7
+#: src/dialogs/gedit-preferences.glade2.h:8
 msgid "Create a _backup copy of files before saving"
 msgstr "Ustvari varnostne kopije datotek pred shranjevanjem"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
+#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "Pisava"
 
-#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gedit-preferences.glade2.h:10
+msgid "Font used to print line _numbers:"
+msgstr "Pisava uporabljena za tisk številk _vrstic:"
+
+#: src/dialogs/gedit-preferences.glade2.h:11
+msgid "Font used to print the _body:"
+msgstr "Pisava uporabljena za tisk _telesa:"
+
+#: src/dialogs/gedit-preferences.glade2.h:12
 msgid "Fonts & Colors"
 msgstr "Pisave in barve"
 
-#: src/dialogs/gedit-preferences.glade2.h:10
+#: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Icon and _text"
 msgstr "Ikona in _besedilo"
 
-#: src/dialogs/gedit-preferences.glade2.h:11
+#: src/dialogs/gedit-preferences.glade2.h:14
 msgid "LOGO"
 msgstr "LOGOTIP"
 
-#: src/dialogs/gedit-preferences.glade2.h:12
+#: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Left"
 msgstr "Levo"
 
-#: src/dialogs/gedit-preferences.glade2.h:15
+#: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Modal"
 msgstr "Modalni"
 
-#: src/dialogs/gedit-preferences.glade2.h:16
+#: src/dialogs/gedit-preferences.glade2.h:19
 msgid "Notebook"
 msgstr "Notesnik"
 
-#: src/dialogs/gedit-preferences.glade2.h:17
+#: src/dialogs/gedit-preferences.glade2.h:20
 msgid "Notebook _tab position:"
 msgstr "Mesto _uhljev notesnika:"
 
-#: src/dialogs/gedit-preferences.glade2.h:18
+#: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Pick the background color"
 msgstr "Izberi barvo ozadja"
 
-#: src/dialogs/gedit-preferences.glade2.h:19
+#: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Pick the selected text color"
 msgstr "Izberi barvo izbranega besedila"
 
-#: src/dialogs/gedit-preferences.glade2.h:20
+#: src/dialogs/gedit-preferences.glade2.h:23
 msgid "Pick the selection color"
 msgstr "Izberi barvo izbire"
 
-#: src/dialogs/gedit-preferences.glade2.h:21
+#: src/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick the text color"
 msgstr "Izberi barvo besedila"
 
-#: src/dialogs/gedit-preferences.glade2.h:23
+#: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Print _line numbers every"
 msgstr "Natisni š_tevilke vrstic vsakih"
 
-#: src/dialogs/gedit-preferences.glade2.h:24
+#: src/dialogs/gedit-preferences.glade2.h:27
 msgid "Print _page headers"
 msgstr "Natisni glave _strani"
 
-#: src/dialogs/gedit-preferences.glade2.h:25
+#: src/dialogs/gedit-preferences.glade2.h:28
+msgid "Print fonts"
+msgstr "Tiskalniške pisave"
+
+#: src/dialogs/gedit-preferences.glade2.h:29
 msgid "Right"
 msgstr "Desno"
 
-#: src/dialogs/gedit-preferences.glade2.h:26
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid "S_elected text color:"
 msgstr "Barva _izbranega besedila:"
 
-#: src/dialogs/gedit-preferences.glade2.h:28
+#: src/dialogs/gedit-preferences.glade2.h:32
 msgid "Se_lection color:"
 msgstr "Barva i_zbire:"
 
-#: src/dialogs/gedit-preferences.glade2.h:29
+#: src/dialogs/gedit-preferences.glade2.h:33
 msgid "Set _tabs width equivalent to  "
 msgstr "Nastavi širino _uhljev na  "
 
-#: src/dialogs/gedit-preferences.glade2.h:30
-msgid "Set limit on _undo levels to"
+#: src/dialogs/gedit-preferences.glade2.h:34
+msgid "Set limit on _undo actions to"
 msgstr "Nastavi omejitev _razeljavitvenih stopenj na"
 
-#: src/dialogs/gedit-preferences.glade2.h:31
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "Sho_w tooltips"
 msgstr "Kaži _orodne namige"
 
-#: src/dialogs/gedit-preferences.glade2.h:32
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid "Show cursor _position"
 msgstr "Kaži položaj _kazalca"
 
-#: src/dialogs/gedit-preferences.glade2.h:33
+#: src/dialogs/gedit-preferences.glade2.h:37
 msgid "Show overwrite _mode"
 msgstr "Kaži način _prepisovanja"
 
-#: src/dialogs/gedit-preferences.glade2.h:36
-msgid ""
-"The Font & Colors settings let you choose the font and the colors to be used "
-"in the editor windows."
-msgstr ""
-"Nastavitve pisav in barv vam omogočajo nastaviti pisavo in barvo, ki bosta "
-"uporabljeni v oknih urejevalnika."
-
-#: src/dialogs/gedit-preferences.glade2.h:37
+#: src/dialogs/gedit-preferences.glade2.h:40
 msgid ""
 "The MDI (Multiple Document Interface) mode refers to the way more than one "
 "text document is displayed in gedit. \n"
@@ -806,7 +846,15 @@ msgstr ""
 "Če želite način beležke lahko nato določite še kje v oknu naj se uhlji "
 "nahajajo."
 
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid ""
+"The font & colors settings let you choose the font and the colors to be used "
+"in the editor windows."
+msgstr ""
+"Nastavitve pisav in barv vam omogočajo nastaviti pisavo in barvo, ki bosta "
+"uporabljeni v oknih urejevalnika."
+
+#: src/dialogs/gedit-preferences.glade2.h:43
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
@@ -814,16 +862,22 @@ msgstr ""
 "Nastavitev številke vrstic vam omogoča izbrati kako prikazati številke "
 "vrstic na levi strani okna."
 
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid "The print settings let you customize how gedit prints documents."
-msgstr "Nastavitev tiskanja vam omogoči nastaviti kako gedit tiska dokumente."
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid ""
+"The print fonts settings let you choose the fonts to be used to print "
+"documents."
+msgstr "Nastavitev pisav tiskanja vam omogoa nastaviti tiskalniške pisave."
 
-#: src/dialogs/gedit-preferences.glade2.h:41
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "The print page settings let you customize how gedit prints documents."
+msgstr "Nastavitev tiskanja vam omogoa nastaviti kako gedit tiska dokumente."
+
+#: src/dialogs/gedit-preferences.glade2.h:46
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
 "Nastavitev shranjevanja vam omogoči nastaviti kako gedit shranjuje datoteke."
 
-#: src/dialogs/gedit-preferences.glade2.h:42
+#: src/dialogs/gedit-preferences.glade2.h:47
 msgid ""
 "The status bar settings let you show or hide status bar and customize its "
 "appearance."
@@ -831,11 +885,11 @@ msgstr ""
 "Nastavitve vrstice stanja vam omogočajo skritje ali prikaz vrstice in "
 "prilagoditev njenega izgleda."
 
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:48
 msgid "The tabs settings let you customize the tabs width."
 msgstr "Nastavitve uhljev vam omogočajo nastavitev njihove širine."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
+#: src/dialogs/gedit-preferences.glade2.h:49
 msgid ""
 "The toolbar settings let you show or hide toolbar and customize its "
 "appearance."
@@ -843,7 +897,7 @@ msgstr ""
 "Nastavitve orodjarne vam omogočajo skritje ali prikaz orodjarne in "
 "prilagoditev njenega izgleda."
 
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:50
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
@@ -851,107 +905,192 @@ msgstr ""
 "Nastavitve razveljavitve vam omogočajo nastaviti največje število dejanj, ki "
 "jih lahko gedit razveljavi."
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:51
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr ""
 "Nastavitev načina lomljenja omogoča nastavitev kje naj se lomijo vrstice."
 
-#: src/dialogs/gedit-preferences.glade2.h:47
+#: src/dialogs/gedit-preferences.glade2.h:52
 msgid "Toolbars"
 msgstr "Orodjarne"
 
-#: src/dialogs/gedit-preferences.glade2.h:48
+#: src/dialogs/gedit-preferences.glade2.h:53
 msgid "Top"
 msgstr "Vrh"
 
-#: src/dialogs/gedit-preferences.glade2.h:49
+#: src/dialogs/gedit-preferences.glade2.h:54
 msgid "Toplevel"
 msgstr "Na vrhu"
 
-#: src/dialogs/gedit-preferences.glade2.h:50
+#: src/dialogs/gedit-preferences.glade2.h:55
 msgid "U_se current locale only if the file already use it"
 msgstr "_Uporabi trenutni locale le, če ga datoteka že uporablja"
 
-#: src/dialogs/gedit-preferences.glade2.h:51
+#: src/dialogs/gedit-preferences.glade2.h:56
 msgid "U_se default theme colors"
 msgstr "U_porabi privzete barve teme"
 
-#: src/dialogs/gedit-preferences.glade2.h:53
+#: src/dialogs/gedit-preferences.glade2.h:58
 msgid "Use current _locale when possible"
 msgstr "Kadar je možno uporabi trenutni _locale"
 
-#: src/dialogs/gedit-preferences.glade2.h:54
+#: src/dialogs/gedit-preferences.glade2.h:59
 msgid "When saving..."
 msgstr "Ob shranjevanju..."
 
-#: src/dialogs/gedit-preferences.glade2.h:55
+#: src/dialogs/gedit-preferences.glade2.h:60
 msgid "Wrap lines at _word boundaries"
 msgstr "Lomi vrstice ob _besedah"
 
-#: src/dialogs/gedit-preferences.glade2.h:56
+#: src/dialogs/gedit-preferences.glade2.h:61
 msgid "Wrap lines at ch_aracter boundaries"
 msgstr "Lomi vrstice ob _znakih"
 
-#: src/dialogs/gedit-preferences.glade2.h:58
+#: src/dialogs/gedit-preferences.glade2.h:63
 msgid "_According to system settings"
 msgstr "_V skladu z nastavitvami sistema"
 
-#: src/dialogs/gedit-preferences.glade2.h:59
-msgid "_Auto save current file every"
+#: src/dialogs/gedit-preferences.glade2.h:64
+msgid "_Autosave current file every"
 msgstr "Samodejno _shrani trenutno datoteko vsakih"
 
-#: src/dialogs/gedit-preferences.glade2.h:60
+#: src/dialogs/gedit-preferences.glade2.h:65
 msgid "_Background color:"
 msgstr "Barva _ozadja: "
 
-#: src/dialogs/gedit-preferences.glade2.h:61
+#: src/dialogs/gedit-preferences.glade2.h:66
 msgid "_Display line numbers"
 msgstr "_Kaži številke vrstic"
 
-#: src/dialogs/gedit-preferences.glade2.h:62
+#: src/dialogs/gedit-preferences.glade2.h:67
 msgid "_Font used by the editor: "
 msgstr "_Pisava, ki naj jo uprablja urejevalnik:"
 
-#: src/dialogs/gedit-preferences.glade2.h:63 src/gedit-ui.xml.h:96
+#: src/dialogs/gedit-preferences.glade2.h:68
+msgid "_Font used to print headers:"
+msgstr "_Pisava uporabljena za tisk glav:"
+
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:98
 msgid "_Icon"
 msgstr "_Ikona"
 
-#: src/dialogs/gedit-preferences.glade2.h:64
+#: src/dialogs/gedit-preferences.glade2.h:70
 msgid "_MDI Mode:"
 msgstr "_Način MDI:"
 
-#: src/dialogs/gedit-preferences.glade2.h:65
+#: src/dialogs/gedit-preferences.glade2.h:71
 msgid "_Never wrap lines"
 msgstr "_Nikoli ne lomi vrstic"
 
-#: src/dialogs/gedit-preferences.glade2.h:66
+#: src/dialogs/gedit-preferences.glade2.h:72
+msgid "_Restore default fonts"
+msgstr "_Povrni privzete pisave"
+
+#: src/dialogs/gedit-preferences.glade2.h:73
 msgid "_Show status bar"
 msgstr "_Kaži vrstico stanja"
 
-#: src/dialogs/gedit-preferences.glade2.h:67
+#: src/dialogs/gedit-preferences.glade2.h:74
 msgid "_Show toolbar"
 msgstr "_Kaži orodjarno"
 
-#: src/dialogs/gedit-preferences.glade2.h:68
+#: src/dialogs/gedit-preferences.glade2.h:75
 msgid "_Text color:"
 msgstr "Barva _besedila:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69
+#: src/dialogs/gedit-preferences.glade2.h:76
 msgid "_Use default theme font"
 msgstr "_Uporabi privzeto pisavo teme"
 
-#: src/dialogs/gedit-preferences.glade2.h:73
-msgid "level(s)"
-msgstr "stopenj"
+#: src/dialogs/gedit-preferences.glade2.h:77
+msgid "action(s)"
+msgstr "dejanja"
 
-#: src/dialogs/gedit-preferences.glade2.h:74
-msgid "line(s)"
-msgstr "vrstic"
-
-#: src/dialogs/gedit-preferences.glade2.h:75
+#: src/dialogs/gedit-preferences.glade2.h:78
 msgid "minutes"
 msgstr "minut"
 
+#: src/dialogs/gnome-print-font-dialog.c:107
+msgid "_Insert a new preview phrase."
+msgstr "_Vstavi novo predogledno frazo."
+
+#: src/dialogs/gnome-print-font-dialog.c:113
+msgid "Modify preview phrase..."
+msgstr "Spremeni predogledno frazo..."
+
+#: src/dialogs/gnome-print-font-dialog.c:167
+msgid "Preview"
+msgstr "Predogled"
+
+#: src/dialogs/gnome-print-font-dialog.c:180
+msgid "_Modify preview phrase..."
+msgstr "_Spremeni predogledno frazo..."
+
+#: src/dialogs/gnome-print-font-dialog.c:243
+msgid "Font Selection"
+msgstr "Izbira pisave"
+
+#: src/dialogs/gnome-print-font-picker.c:89
+msgid "sans 12"
+msgstr "sans 12"
+
+#: src/dialogs/gnome-print-font-picker.c:90
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcČčDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšTtUuVvWwXxYyZzŽž"
+
+#: src/dialogs/gnome-print-font-picker.c:91
+msgid "Pick a Font"
+msgstr "Izberi pisavo"
+
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Naziv"
+
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr "Naziv dialoga izbire"
+
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "Ime pisave"
+
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "Ime izbrane pisave"
+
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Predogled besedila"
+
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr "Predogled besedila prikazanega v dialogu"
+
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr "Uporabi pisavo v oznaki"
+
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr "Uporabi pisavo v oznaki v načinu podatkov o pisavi"
+
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr "Velikost pisave v oznaki"
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr "Velikost pisave v oznaki v načinu podatkov o pisavi"
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr "Kaži velikost"
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr "Kaži velikost v načinu podatkov o pisavi"
+
+#. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "Pojdi na vrstico"
@@ -998,7 +1137,7 @@ msgstr "Nastavi lokacijo programa..."
 msgid "_Location to search for:"
 msgstr "_Pot kjer naj se išče:"
 
-#: src/dialogs/program-location-dialog.glade2.h:5
+#: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
 msgstr "label"
 
@@ -1006,27 +1145,19 @@ msgstr "label"
 msgid "Case sensi_tive"
 msgstr "_Razlikuj velike in male črke"
 
-#: src/dialogs/replace.glade2.h:2
-msgid "Find Next"
-msgstr "Poišči naslednjega"
-
-#: src/dialogs/replace.glade2.h:4
-msgid "Replace All"
-msgstr "Zamenjaj vse"
-
-#: src/dialogs/replace.glade2.h:5
+#: src/dialogs/replace.glade2.h:3
 msgid "Replace _with: "
 msgstr "_Zamenjaj z: "
 
-#: src/dialogs/replace.glade2.h:6
+#: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
 msgstr "Išči od _začetka dokumenta"
 
-#: src/dialogs/replace.glade2.h:7
+#: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
 msgstr "Išči od mesta _kazalca"
 
-#: src/dialogs/replace.glade2.h:8
+#: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
 msgstr "_Išči za: "
 
@@ -1034,84 +1165,28 @@ msgstr "_Išči za: "
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "Vnesite lokacijo (URI) datoteke, ki jo želite odpreti:"
 
-#: src/dialogs/uri.glade2.h:2
-msgid "Open from URI"
-msgstr "Odpri iz URIja"
-
-#: src/dialogs/uri.glade2.h:5
-msgid "gtk-open"
-msgstr "gtk-odpri"
-
-#: src/gedit2.c:68
-msgid "Show mdi debugging messages."
-msgstr "Kaži sporočila za razhroščevanje mdi."
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Kaži sporočila za razhroščevanje ukazov."
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Kaži sporočila za razhroščevanje dokumenta."
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Kaži sporočila za razhroščevanje datoteke."
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Kaži sporočila za razhroščevanje vtičnikov."
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Kaži sporočila za razhroščevanje nastavitev."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Kaži sporočil za razhroščevanje tiska."
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Kaži sporočila za razhroščevanje iskanja."
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Kaži sporočila za razhroščevanje razveljavljanja."
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Kaži sporočila za razhroščevanje pogledov."
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Kaži zadnja sporočila za razhroščevanje."
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Vklopi prikazovanje vseh sporočil za razhroščevanje."
-
-#: src/gedit2.c:159
-msgid "The GNOME text editor"
-msgstr "Urejevalnik besedil GNOME"
-
-#: src/gedit-commands.c:56
+#: src/gedit-commands.c:57
 msgid "Not yet implemented."
 msgstr "Še ni implementiran."
 
-#: src/gedit-commands.c:339
+#: src/gedit-commands.c:340
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Besedilo \"%s\" ni bilo najdeno."
 
-#: src/gedit-commands.c:421
+#: src/gedit-commands.c:422
 msgid "Impossible to update gedit settings."
 msgstr "Nastavitev gedit-a ni mogoče posodobiti."
 
-#: src/gedit-commands.c:518
+#: src/gedit-commands.c:491
+msgid "translator_credits"
+msgstr "Prevedel: Andraž Tori"
+
+#: src/gedit-commands.c:516
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:521
+#: src/gedit-commands.c:519
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit je majhen enostaven urejevalnik besedil za Gnome"
 
@@ -1165,61 +1240,6 @@ msgstr "Datoteka je prevelika"
 msgid "It is not possible to revert an Untitled document"
 msgstr "Neimenovanega dokumenta ni mogoče povrniti"
 
-#: src/gedit-file.c:121
-msgid "Open File ..."
-msgstr "Odpri datoteko ..."
-
-#: src/gedit-file.c:131 src/gedit-file.c:638
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "Naložena datoteka '%s'"
-
-#: src/gedit-file.c:241 src/gedit-file.c:315
-#, c-format
-msgid "Saving file '%s' ..."
-msgstr "Shranjujem datoteko '%s' ..."
-
-#: src/gedit-file.c:262 src/gedit-file.c:322
-msgid "The document has not been saved."
-msgstr "Dokument ni bil shranjen."
-
-#: src/gedit-file.c:275 src/gedit-file.c:320
-#, c-format
-msgid "File '%s' saved."
-msgstr "Datoteka '%s' je bila shranjena."
-
-#: src/gedit-file.c:307
-msgid "Save as ..."
-msgstr "Shrani kot ..."
-
-#: src/gedit-file.c:473
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr "Povračam datoteko '%s' ..."
-
-#: src/gedit-file.c:486
-msgid "The document has not been reverted."
-msgstr "Dokument ni bil povrnjen."
-
-#: src/gedit-file.c:496
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Datoteka '%s' je bila povrnjena."
-
-#: src/gedit-file.c:539
-#, c-format
-msgid "Loading %d file..."
-msgstr "Nalagam datoteko št. %d..."
-
-#: src/gedit-file.c:575
-#, c-format
-msgid "Loaded %i files"
-msgstr "Naloženih %i datotek"
-
-#: src/gedit-file.c:692
-msgid "Could not read data from stdin."
-msgstr "Nisem mogel brati podatkov iz standardnega vhoda."
-
 #: src/gedit-file-selector-util.c:97
 #, c-format
 msgid ""
@@ -1237,7 +1257,62 @@ msgstr "_Ne zamenjaj"
 msgid "Select a filename to save"
 msgstr "Izberite ime datoteke za shranitev"
 
-#: src/gedit-mdi.c:765
+#: src/gedit-file.c:123
+msgid "Open File ..."
+msgstr "Odpri datoteko ..."
+
+#: src/gedit-file.c:133 src/gedit-file.c:634
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "Naložena datoteka '%s'"
+
+#: src/gedit-file.c:243 src/gedit-file.c:317
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "Shranjujem datoteko '%s' ..."
+
+#: src/gedit-file.c:264 src/gedit-file.c:324
+msgid "The document has not been saved."
+msgstr "Dokument ni bil shranjen."
+
+#: src/gedit-file.c:277 src/gedit-file.c:322
+#, c-format
+msgid "File '%s' saved."
+msgstr "Datoteka '%s' je bila shranjena."
+
+#: src/gedit-file.c:309
+msgid "Save as ..."
+msgstr "Shrani kot ..."
+
+#: src/gedit-file.c:469
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "Povračam datoteko '%s' ..."
+
+#: src/gedit-file.c:482
+msgid "The document has not been reverted."
+msgstr "Dokument ni bil povrnjen."
+
+#: src/gedit-file.c:492
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Datoteka '%s' je bila povrnjena."
+
+#: src/gedit-file.c:535
+#, c-format
+msgid "Loading %d file..."
+msgstr "Nalagam datoteko št. %d..."
+
+#: src/gedit-file.c:571
+#, c-format
+msgid "Loaded %i files"
+msgstr "Naloženih %i datotek"
+
+#: src/gedit-file.c:688
+msgid "Could not read data from stdin."
+msgstr "Nisem mogel brati podatkov iz standardnega vhoda."
+
+#: src/gedit-mdi.c:758
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1248,23 +1323,23 @@ msgstr ""
 "\n"
 "V kolikor jih ne shranite, bodo vaše spremembe izgubljene."
 
-#: src/gedit-mdi.c:770
+#: src/gedit-mdi.c:763
 msgid "Do_n't save"
 msgstr "_Ne shrani"
 
-#: src/gedit-mdi.c:789
+#: src/gedit-mdi.c:782
 msgid "_Don't quit"
 msgstr "N_e končaj"
 
-#: src/gedit-mdi.c:793
+#: src/gedit-mdi.c:786
 msgid "_Don't close"
 msgstr "N_e zapri"
 
-#: src/gedit-mdi.c:880
+#: src/gedit-mdi.c:873
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/gedit-mdi.c:886
+#: src/gedit-mdi.c:879
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
@@ -1313,7 +1388,7 @@ msgstr "Napka, vtičnika '%s' ni mogoče aktivirati"
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Napaka, vtičnika '%s' ni mogoče deaktivirati"
 
-#: src/gedit-plugins-engine.c:483
+#: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Napaka, ni mogoče posodobiti uporabniškega vmesnika vtičnika '%s'"
@@ -1374,11 +1449,11 @@ msgid "Add/Remove plugins"
 msgstr "Dodaj/odstrani vtičnike"
 
 #: src/gedit-ui.xml.h:4
-msgid "C_ustomize Status Bar"
+msgid "C_ustomize Statusbar"
 msgstr "P_rikroji vrstico stanja"
 
 #: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the status bar in the current window"
+msgid "Change the visibility of the statusbar in the current window"
 msgstr "Spremeni vidnost vrstice stanja v trenutnem oknu"
 
 #: src/gedit-ui.xml.h:6
@@ -1446,12 +1521,12 @@ msgid "Cut the selection"
 msgstr "Izreži izbrano"
 
 #: src/gedit-ui.xml.h:22
-msgid "Delete the selected text"
-msgstr "Zbriši izbrano besedilo"
+msgid "Delete"
+msgstr "Zbriši"
 
 #: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr "Zbrisano"
+msgid "Delete the selected text"
+msgstr "Zbriši izbrano besedilo"
 
 #: src/gedit-ui.xml.h:24
 msgid "Dump XML"
@@ -1526,216 +1601,216 @@ msgid "Paste the clipboard"
 msgstr "Prilepi odložišče"
 
 #: src/gedit-ui.xml.h:43
+msgid "Plugin _Manager"
+msgstr "_Upravljalnik vtičnikov"
+
+#: src/gedit-ui.xml.h:44
+msgid "Plugin _Manager..."
+msgstr "_Upravljalnik vtičnikov..."
+
+#: src/gedit-ui.xml.h:45
 msgid "Pr_eferences..."
 msgstr "_Nastavitve..."
 
-#: src/gedit-ui.xml.h:46
+#: src/gedit-ui.xml.h:48
 msgid "Print Previe_w"
 msgstr "P_redogled tiskanja"
 
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:49
 msgid "Print Preview"
 msgstr "Predogled tiskanja"
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:50
 msgid "Print Setup"
 msgstr "Nastavitve tiskanja"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:51
 msgid "Print preview"
 msgstr "Predogled tiskanja"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:52
 msgid "Print the current file"
 msgstr "Natisni trenutno datoteko"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:53
 msgid "Quit"
 msgstr "Končaj"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:54
 msgid "Quit the program"
 msgstr "Končaj program"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:55
 msgid "Recent _Files"
 msgstr "Nedavne _datoteke"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:56
 msgid "Redo"
 msgstr "Obnovi"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:57
 msgid "Redo the undone action"
 msgstr "Obnovi razveljavljeno dejanje"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:59
 msgid "Replace a string"
 msgstr "Zamenjaj niz"
 
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:60
 msgid "Revert"
 msgstr "Povrni"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:61
 msgid "Revert to a saved version of the file"
 msgstr "Povrni na shranjeno različico datoteke"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:62
 msgid "Sa_ve All"
 msgstr "S_hrani vse"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:64
 msgid "Save All"
 msgstr "_Shrani vse"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:65
 msgid "Save As"
 msgstr "Shrani kot..."
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:66
 msgid "Save _As..."
 msgstr "Shrani _kot..."
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:67
 msgid "Save all open files"
 msgstr "Shrani vse odprte datoteke"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:68
 msgid "Save the current file"
 msgstr "Shrani trenutno datoteko"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:69
 msgid "Save the current file with a different name"
 msgstr "Shrani trenutno datoteko pod drugim imenom"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:70
 msgid "Search again for the same string"
 msgstr "Znova išči enak niz"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:71
 msgid "Search for a string"
 msgstr "Išči niz"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:72
 msgid "Select All"
 msgstr "Izberi vse"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:73
 msgid "Select _All"
 msgstr "Izberi _vse"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:74
 msgid "Select the entire document"
 msgstr "Izberi celoten dokument"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:75
 msgid "Set toolbar button style according to desktop default"
 msgstr "Gumbi orodjarne naj ustrezajo nastavitvam namizja"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:76
 msgid "Setup the page settings for your current printer"
 msgstr "Nastavi stran za vaš trenutni tiskalnik"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:77
 msgid "Show _Cursor Position"
 msgstr "Kaži položaj _kazalca"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:78
 msgid "Show _Overwrite Mode"
 msgstr "Kaži način _prepisovanja"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:79
 msgid "Show _Tooltips"
 msgstr "Kaži _namige"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:80
 msgid "Show cursor position in the statusbar"
 msgstr "Kaži položaj kazalca v vrstici stanja"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:81
 msgid "Show overwrite mode in the statusbar"
 msgstr "Kaži način prepisovanja v vrstici stanja"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:82
 msgid "Show tooltips in the toolbar"
 msgstr "Kaži namige v orodjarni"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:84
 msgid "Undo the last action"
 msgstr "Razveljavi zadnje dejanje"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:85
 msgid "_About..."
 msgstr "_O programu..."
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:86
 msgid "_Close"
 msgstr "_Zapri"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:87
 msgid "_Contents"
 msgstr "_Vsebina"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:88
 msgid "_Copy"
 msgstr "_Kopiraj"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:89
 msgid "_Customize Toolbar"
 msgstr "_Prikroji orodjarno"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:90
 msgid "_Debug"
 msgstr "_Razhroščuj"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:91
 msgid "_Delete"
 msgstr "_Zbriši"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:92
 msgid "_Desktop Default"
 msgstr "Privzeto po _namizju"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:93
 msgid "_Documents"
 msgstr "_Dokumenti"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:94
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:95
 msgid "_File"
 msgstr "_Datoteka"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:96
 msgid "_Find"
 msgstr "_Poišči"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:97
 msgid "_Help"
 msgstr "_Pomoč"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:99
 msgid "_New"
 msgstr "_Nova"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:100
 msgid "_Open..."
 msgstr "_Odpri..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:101
 msgid "_Paste"
 msgstr "_Prilepi"
-
-#: src/gedit-ui.xml.h:100
-msgid "_Plugin Manager"
-msgstr "_Upravljalnik vtičnikov"
-
-#: src/gedit-ui.xml.h:101
-msgid "_Plugin Manager..."
-msgstr "_Upravljalnik vtičnikov..."
 
 #: src/gedit-ui.xml.h:102
 msgid "_Print..."
@@ -1762,7 +1837,7 @@ msgid "_Search"
 msgstr "_Iskanje"
 
 #: src/gedit-ui.xml.h:109
-msgid "_Status Bar"
+msgid "_Statusbar"
 msgstr "Vrstica _stanja"
 
 #: src/gedit-ui.xml.h:110
@@ -1781,7 +1856,7 @@ msgstr "_Razveljavi"
 msgid "_View"
 msgstr "_Poglej"
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:839
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1792,24 +1867,24 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:847
+#: src/gedit-utils.c:846
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Nisem mogel odpreti datoteke \"%s\", ker vsebuje pokvarjene podatke."
 
-#: src/gedit-utils.c:858
+#: src/gedit-utils.c:857
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Nisem mogel odpreti datoteke \"%s\", ker gedit ne zna obravnavati lokacij %s"
 
-#: src/gedit-utils.c:866
+#: src/gedit-utils.c:865
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Nisem mogel odpreti datoteke \"%s\""
 
-#: src/gedit-utils.c:873
+#: src/gedit-utils.c:872
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -1817,12 +1892,12 @@ msgstr ""
 "Nisem mogel odpreti datoteke \"%s\", ker vsebuje podatke v neveljavni obliki "
 "zapisa"
 
-#: src/gedit-utils.c:880
+#: src/gedit-utils.c:879
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Nisem mogel odpreti datoteke \"%s\", ker je predolga"
 
-#: src/gedit-utils.c:887
+#: src/gedit-utils.c:886
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1833,12 +1908,12 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:894
+#: src/gedit-utils.c:893
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Nisem mogel odpreti datoteke \"%s\", ker je bil dostop zavrnjen."
 
-#: src/gedit-utils.c:901
+#: src/gedit-utils.c:900
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1849,7 +1924,7 @@ msgstr ""
 "\n"
 "Prosim, nekaj jih zaprite in poskusite znova."
 
-#: src/gedit-utils.c:909
+#: src/gedit-utils.c:908
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1860,7 +1935,8 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:916
+#: src/gedit-utils.c:915
+#, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
@@ -1868,7 +1944,8 @@ msgstr ""
 "Za odprtje datoteke \"%s\" ni na voljo dovolj pomnilnika. Prosim, zaprite "
 "nekaj programov in poskusite znova."
 
-#: src/gedit-utils.c:929
+#: src/gedit-utils.c:928
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
@@ -1880,7 +1957,7 @@ msgstr ""
 "Prosim, preverite ali ste lokacijo vpisali pravilno in ali so nastavitve "
 "vašega posrednika pravilne ter poskusite znova."
 
-#: src/gedit-utils.c:942
+#: src/gedit-utils.c:941
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1891,7 +1968,7 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:949
+#: src/gedit-utils.c:948
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1902,7 +1979,7 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:955
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -1913,7 +1990,7 @@ msgstr ""
 "\n"
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
-#: src/gedit-utils.c:964
+#: src/gedit-utils.c:963
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1924,17 +2001,17 @@ msgstr ""
 "\n"
 "Verjetno poskušate odpreti binarno datoteko."
 
-#: src/gedit-utils.c:1002
+#: src/gedit-utils.c:1001
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Nisem mogel odpreti datoteke \"%s\"."
 
-#: src/gedit-utils.c:1053
+#: src/gedit-utils.c:1052
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Nisem shraniti datoteke \"%s\"."
 
-#: src/gedit-utils.c:1057
+#: src/gedit-utils.c:1056
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1945,7 +2022,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-utils.c:1110
+#: src/gedit-utils.c:1109
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -1956,12 +2033,12 @@ msgstr ""
 "\n"
 "Morda je bila nedavno zbrisana."
 
-#: src/gedit-utils.c:1117
+#: src/gedit-utils.c:1116
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Nisem mogel povrniti datoteke \"%s\", ker vsebuje pokvarjene podatke."
 
-#: src/gedit-utils.c:1128
+#: src/gedit-utils.c:1127
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -1969,12 +2046,12 @@ msgstr ""
 "Nisem mogel povrniti datoteke \"%s\", ker gedit ne zna obravnavati lokacij %"
 "s."
 
-#: src/gedit-utils.c:1136 src/gedit-utils.c:1258
+#: src/gedit-utils.c:1135 src/gedit-utils.c:1257
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Nisem mogel povrniti datoteke \"%s\"."
 
-#: src/gedit-utils.c:1143
+#: src/gedit-utils.c:1142
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -1983,17 +2060,18 @@ msgstr ""
 "Nisem mogel povrniti datoteke \"%s\", ker vsebuje podatke v neveljavni "
 "obliki zapisa"
 
-#: src/gedit-utils.c:1150
+#: src/gedit-utils.c:1149
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Nisem mogel povrniti datoteke \"%s\", ker je prevelika."
 
-#: src/gedit-utils.c:1157
+#: src/gedit-utils.c:1156
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Nisem mogel povrniti datoteke \"%s\", ker je bil dostop zavrnjen."
 
-#: src/gedit-utils.c:1164
+#: src/gedit-utils.c:1163
+#, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
@@ -2003,7 +2081,8 @@ msgstr ""
 "\n"
 "Prosim, zaprite nekaj datotek in poskusite znova."
 
-#: src/gedit-utils.c:1172
+#: src/gedit-utils.c:1171
+#, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
@@ -2011,7 +2090,8 @@ msgstr ""
 "Za povrnitev datoteke \"%s\" ni dovolj pomnilnika. Prosim zaprite nekaj "
 "programov in poskusite znova."
 
-#: src/gedit-utils.c:1185
+#: src/gedit-utils.c:1184
+#, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
@@ -2022,7 +2102,7 @@ msgstr ""
 "Prosim, preverite ali so nastavitve vašega posrednika pravilne in poskusite "
 "znova."
 
-#: src/gedit-utils.c:1197
+#: src/gedit-utils.c:1196
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2034,12 +2114,12 @@ msgstr ""
 "Prosim, preverite ali so nastavitve vašega posrednika pravilne in poskusite "
 "znova."
 
-#: src/gedit-utils.c:1204
+#: src/gedit-utils.c:1203
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "Nisem mogel povrniti datoteke \"%s\", ker je poskus prijave ni uspel."
 
-#: src/gedit-utils.c:1211
+#: src/gedit-utils.c:1210
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2050,22 +2130,104 @@ msgstr ""
 "\n"
 "Verjetno poskušate povrniti binarno datoteko."
 
-#: src/gedit-utils.c:1220
+#: src/gedit-utils.c:1219
 msgid "It is not possible to revert an Untitled document."
 msgstr "Neimenovanega dokumenta ni mogoče povrniti"
 
-#: src/gedit-view.c:878
+#: src/gedit-view.c:928
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Vr. %d, St. %d"
 
-#: src/gedit-view.c:916
+#: src/gedit-view.c:966
 msgid "  OVR"
 msgstr "  PREP"
 
-#: src/gedit-view.c:918
+#: src/gedit-view.c:968
 msgid "  INS"
 msgstr "  VSTAV"
+
+#: src/gedit2.c:68
+msgid "Show mdi debugging messages."
+msgstr "Kaži sporočila za razhroščevanje mdi."
+
+#: src/gedit2.c:71
+msgid "Show commands debugging messages."
+msgstr "Kaži sporočila za razhroščevanje ukazov."
+
+#: src/gedit2.c:74
+msgid "Show document debugging messages."
+msgstr "Kaži sporočila za razhroščevanje dokumenta."
+
+#: src/gedit2.c:77
+msgid "Show file debugging messages."
+msgstr "Kaži sporočila za razhroščevanje datoteke."
+
+#: src/gedit2.c:80
+msgid "Show plugin debugging messages."
+msgstr "Kaži sporočila za razhroščevanje vtičnikov."
+
+#: src/gedit2.c:83
+msgid "Show prefs debugging messages."
+msgstr "Kaži sporočila za razhroščevanje nastavitev."
+
+#: src/gedit2.c:86
+msgid "Show printing debugging messages."
+msgstr "Kaži sporočil za razhroščevanje tiska."
+
+#: src/gedit2.c:89
+msgid "Show search debugging messages."
+msgstr "Kaži sporočila za razhroščevanje iskanja."
+
+#: src/gedit2.c:92
+msgid "Show undo debugging messages."
+msgstr "Kaži sporočila za razhroščevanje razveljavljanja."
+
+#: src/gedit2.c:95
+msgid "Show view debugging messages."
+msgstr "Kaži sporočila za razhroščevanje pogledov."
+
+#: src/gedit2.c:98
+msgid "Show recent debugging messages."
+msgstr "Kaži zadnja sporočila za razhroščevanje."
+
+#: src/gedit2.c:101
+msgid "Turn on all debugging messages."
+msgstr "Vklopi prikazovanje vseh sporočil za razhroščevanje."
+
+#: src/gedit2.c:159
+msgid "The GNOME text editor"
+msgstr "Urejevalnik besedil GNOME"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-prekliči"
+
+#~ msgid "gtk-help"
+#~ msgstr "gtk-pomoč"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-v redu"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-zapri"
+
+#~ msgid "level(s)"
+#~ msgstr "stopenj"
+
+#~ msgid "Find Next"
+#~ msgstr "Poišči naslednjega"
+
+#~ msgid "Replace All"
+#~ msgstr "Zamenjaj vse"
+
+#~ msgid "gtk-open"
+#~ msgstr "gtk-odpri"
+
+#~ msgid "_Plugin Manager"
+#~ msgstr "_Upravljalnik vtičnikov"
+
+#~ msgid "_Status Bar"
+#~ msgstr "Vrstica _stanja"
 
 #~ msgid "Could not revert the file \"%s\""
 #~ msgstr "Nisem mogel povrniti datoteke \"%s\""
@@ -2191,9 +2353,6 @@ msgstr "  VSTAV"
 #~ msgid "Reverse"
 #~ msgstr "Obrni"
 
-#~ msgid "Reverse text"
-#~ msgstr "Obrni besedilo"
-
 #~ msgid "Hello World"
 #~ msgstr "Pozdravljen svet"
 
@@ -2269,12 +2428,6 @@ msgstr "  VSTAV"
 
 #~ msgid "Documents"
 #~ msgstr "Dokumenti"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Izberi pisavo"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcČčDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšTtUuVvWwXxYyZzŽž"
 
 #~ msgid "_Foreground: "
 #~ msgstr "Os_predje: "
@@ -2681,9 +2834,6 @@ msgstr "  VSTAV"
 
 #~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 #~ msgstr "gedit je majhen enostaven urejevalnik besedil za GNOME/Gtk+"
-
-#~ msgid "Show splitscreen"
-#~ msgstr "Kaži razdeljeno površino"
 
 #~ msgid "Enable Wordwrap"
 #~ msgstr "Vključi lom besed"
