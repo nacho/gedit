@@ -5,8 +5,8 @@
  * Prints "Hello World" into the current document
  */
  
-#include <gnome.h>
 #include <config.h>
+#include <gnome.h>
 
 #include "../../src/window.h"
 #include "../../src/document.h"

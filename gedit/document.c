@@ -61,18 +61,18 @@ gedit_document_get_type (void)
 	
 	if (!doc_type)
 	{
-	  static const GtkTypeInfo doc_info =
-	  {
-	  	"Document",
-	  	sizeof (Document),
-	  	sizeof (DocumentClass),
-	  	(GtkClassInitFunc) gedit_document_class_init,
-	  	(GtkObjectInitFunc) gedit_document_init,
-	  	(GtkArgSetFunc) NULL,
-	  	(GtkArgGetFunc) NULL,
-	  };
+		static const GtkTypeInfo doc_info =
+		{
+			"Document",
+			sizeof (Document),
+			sizeof (DocumentClass),
+			(GtkClassInitFunc) gedit_document_class_init,
+			(GtkObjectInitFunc) gedit_document_init,
+			(GtkArgSetFunc) NULL,
+			(GtkArgGetFunc) NULL,
+		};
 	  
-	  doc_type = gtk_type_unique (gnome_mdi_child_get_type (), &doc_info);
+		doc_type = gtk_type_unique (gnome_mdi_child_get_type (), &doc_info);
 	}
 	  
 	return doc_type;
@@ -85,7 +85,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 	
 	new_view = gedit_view_new (DOCUMENT (child));
 
-	gedit_view_set_font (VIEW(new_view), settings->font);
+	gedit_view_set_font (VIEW (new_view), settings->font);
 	gtk_widget_queue_resize (GTK_WIDGET (new_view));
 	
 	return new_view;
@@ -94,22 +94,13 @@ gedit_document_create_view (GnomeMDIChild *child)
 static void
 gedit_document_destroy (GtkObject *obj)
 {
-	Document *doc;
+	Document *doc = DOCUMENT (obj);
 	
-	doc = DOCUMENT (obj);
-
 	g_free (doc->filename);
+	g_string_free (doc->buf, TRUE);
 
-	if (doc->buf)
-		g_free (doc->buf->str);
-
-	doc->buf = NULL;
-	
-	if (doc->undo)
-		g_list_free (doc->undo);
-	
-	if (doc->redo)
-		g_list_free (doc->redo);
+	g_list_free (doc->undo);
+	g_list_free (doc->redo);
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
@@ -180,14 +171,13 @@ gedit_document_new (void)
 {
 	Document *doc;
 
-	/* FIXME: Blarg!! */
 	doc = gtk_type_new (gedit_document_get_type ());
 	if (doc)
 	{
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 					  gedit_get_document_tab_name());
-		
-		doc->buf = g_string_sized_new (64);
+
+		doc->buf = g_string_sized_new (256);
 		return doc;
 	}
 
@@ -210,7 +200,7 @@ gedit_document_new_with_title (gchar *title)
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
 					  title);
 
-		doc->buf = g_string_sized_new (64);
+		doc->buf = g_string_sized_new (256);
 	
 		return doc;
         }
@@ -376,7 +366,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 void
 gedit_mdi_init (void)
 {
-	mdi = GNOME_MDI (gnome_mdi_new ("gedit", GEDIT_ID));
+	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VERSION));
 
 	gnome_config_push_prefix ("/gedit/Global/");
 	mdi->tab_pos = gnome_config_get_int ("tab_pos=2");

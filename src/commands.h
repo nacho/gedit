@@ -1,5 +1,4 @@
-/* vi:set ts=8 sts=0 sw=8:
- *
+/* 
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,14 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
-
-#include "gedit.h"
-
-#ifndef MAX_RECENT
-#define MAX_RECENT 4
-#endif
 
 /* File Ops */
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
@@ -67,22 +61,18 @@ extern void scrollbar_auto_cb (GtkWidget *widget, gpointer cbwindow);
 
 /* Auto indent */
 
-extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);
+extern void auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata);
 
 
 
 /* DND */
 extern void filenames_dropped (GtkWidget * widget,
-	GdkDragContext   *context,
-	gint              x,
-	gint              y,
-	GtkSelectionData *selection_data,
-	guint             info,
-	guint             time);
-
-/* Recent documents */
-extern void recent_add (char *filename);
-extern void recent_update (GnomeApp *app);
+			       GdkDragContext   *context,
+			       gint              x,
+			       gint              y,
+			       GtkSelectionData *selection_data,
+			       guint             info,
+			       guint             time);
 
 extern void options_toggle_split_screen_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_status_bar_cb (GtkWidget *widget, gpointer data);

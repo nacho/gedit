@@ -17,8 +17,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GEDIT_PREFS_H__
-#define __GEDIT_PREFS_H__
+#ifndef __PREFS_H__
+#define __PREFS_H__
 
 #define DEFAULT_FONT "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
 #define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
@@ -76,8 +76,6 @@ struct _PrefsData
 	GtkWidget *bgpick;
 	GtkWidget *fgpick;
 	
-	gedit_data *gData;
-	
 	/* MDI Settings */
 	GtkRadioButton *mdi_type [NUM_MDI_MODES];
 	GSList *mdi_list;
@@ -111,8 +109,8 @@ extern void gedit_save_settings (void);
 extern void gedit_load_settings (void);
 
 extern void gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata);
-extern void gedit_property_box_new (gedit_data *data);
+extern void gedit_property_box_new (void);
 extern void gedit_window_refresh (Window *w);
 
 
-#endif /* __GEDIT_PREFS_H__ */
+#endif /* __PREFS_H__ */

@@ -4,6 +4,9 @@
  * Author:
  *  Jason Leach <leach@wam.umd.edu>
  *
+ * TODO:
+ * [ ] revert back to non-glade, this dialog is too small to get anything
+ *     from it.
  */
 
 #include <config.h>
@@ -28,12 +31,12 @@ create_line_dialog (void)
 				   GNOME_STOCK_BUTTON_CANCEL,
 				   NULL);
 
-	hbox = gtk_hbox_new (FALSE, 0);
+	hbox = gtk_hbox_new (TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox,
 			    FALSE, FALSE, 0);
 	gtk_widget_show (hbox);
 
-	label = gtk_label_new (_("Line number"));
+	label = gtk_label_new (_("Line number: "));
 	gtk_box_pack_start (GTK_BOX (hbox), label,
 			    FALSE, FALSE, 0);
 	gtk_widget_show (label);
@@ -73,26 +76,33 @@ find_line_clicked_cb (GtkWidget *widget, gint button, Document *doc)
 		gnome_dialog_close (GNOME_DIALOG (widget));
 }
 
+
 void
-find_line_cb (GtkWidget *widget, gpointer data)
+dialog_find_line (void)
 {
 #if 1
-	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR
-				       "/find-line.glade",
-				       NULL);
 	GtkWidget *dialog;
 	GtkWidget *spinb;
 	GtkAdjustment *adj;
 	Document *doc = gedit_document_current ();
+	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR
+				       "/find-line.glade",
+				       NULL);
 
 	if (!gui)
 	{
-		g_warning ("Could not find find-line.glade");
+		g_warning ("Could not find find-line.glade, reinstall gedit.");
 		return;
 	}
 
 	dialog = glade_xml_get_widget (gui, "dialog");
 	spinb = glade_xml_get_widget (gui, "spinb");
+
+	if (!dialog || !spinb)
+	{
+		g_print ("Corrupted find-line.glade detected, reinstall gedit.");
+		return;
+	}
 
 	gtk_object_set_data (GTK_OBJECT (dialog), "spinb", spinb);
 

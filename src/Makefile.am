@@ -27,31 +27,32 @@ gedit_SOURCES = 		\
 	gedit.c			\
 	commands.c		\
 	commands.h		\
-	window.c 		\
-	window.h 		\
-	view.c			\
-	view.h			\
 	document.c		\
 	document.h		\
-	undo.c 			\
-	undo.h	 		\
 	file.c 			\
 	file.h		 	\
-	utils.c 		\
-	utils.h 		\
-	prefs.c			\
-	prefs.h			\
-	about.c 		\
-	about.h 		\
-	print.c 		\
-	print.h 		\
-	plugin.c 		\
-	plugin.h 		\
 	gedit.h			\
 	menus.c 		\
 	menus.h 		\
+	plugin.c 		\
+	plugin.h 		\
+	prefs.c			\
+	prefs.h			\
+	print.c 		\
+	print.h 		\
+	recent.c		\
+	recent.h		\
 	search.c 		\
-	search.h
+	search.h		\
+	undo.c 			\
+	undo.h	 		\
+	utils.c 		\
+	utils.h 		\
+	view.c			\
+	view.h			\
+	window.c 		\
+	window.h
+
 
 gedit_LDADD = 				\
 	dialogs/libdialogs.a		\

@@ -79,6 +79,6 @@ void add_view_cb         (GnomeMDI *mdi, Document *doc);
 gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 
 gchar* gedit_get_document_tab_name (void);
-
+void gedit_mdi_init (void);
 
 #endif /* __GEDIT_DOCUMENT_H__ */

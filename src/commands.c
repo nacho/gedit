@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* vi:set ts=8 sts=0 sw=8:
- *
+/* 
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +19,6 @@
 
 #include <config.h>
 #include <gnome.h>
-#include <libgnome/gnome-history.h>
 
 #include <unistd.h>
 #define __need_sigset_t
@@ -43,8 +41,6 @@
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
-static void recent_update_menus (GnomeApp *app, GList *recent_files);
-static void recent_cb (GtkWidget *w, gedit_data *data);
 
 /* static GtkWidget *open_fs, *save_fs; */
 GtkWidget *col_label;
@@ -489,191 +485,12 @@ void
 edit_selall_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_select_region(GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
-				   gtk_text_get_length( GTK_TEXT(VIEW (mdi->active_view)->text)));
+				   gtk_text_get_length (GTK_TEXT(VIEW (mdi->active_view)->text)));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
 }
 
 
-/**
- * recent_update:
- * @app: 
- *
- * Grabs the list of recently used documents, then updates the menus by
- * calling recent_update_menus().  Should be called after each addition
- * to the recent documents list.
- **/
-void
-recent_update (GnomeApp *app)
-{
-	GList *filelist = NULL;
-	GList *gnome_recent_list;
-	GnomeHistoryEntry histentry;
-	char *filename;
-	int i, j;
-	int nrecentdocs = 0;
-
-	filelist = NULL;
-	gnome_recent_list = gnome_history_get_recently_used ();
-	
-	if (g_list_length (gnome_recent_list) > 0)
-	{
-		for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
-		{
-			histentry = g_list_nth_data (gnome_recent_list, i);
-	     
-			if (strcmp ("gedit", histentry->creator) == 0)
-			{
-				/* This is to make sure you don't have more than one
-				   file of the same name in the recent list
-				*/
-	      
-				if (g_list_length (filelist) > 0)
-				{
-					for (j = g_list_length (filelist) - 1; j >= 0; j--)
-					{
-						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
-						{
-							filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
-							nrecentdocs--;
-						}
-					}
-				}
-
-				filename = g_malloc0 (strlen (histentry->filename) + 1);
-				strcpy (filename, histentry->filename);
-				filelist = g_list_append (filelist, filename);
-				nrecentdocs++;
-				
-				/* For recent-directories, not yet fully implemented...
-		   
-				   end_path = strrchr (histentry->filename, '/');
-				   if (end_path) {
-		   
-				   for (i = 0; i < strlen (histentry->filename); i++)
-				   if ((histentry->filename + i) == end_path)
-				   break;
-				
-				   directory = g_malloc0 (i + 2);
-				   strcat (directory, histentry->filename, i);
-			
-				   }
-				*/
-                   
-				if (nrecentdocs == MAX_RECENT)
-/*				if (g_list_length (filelist) == MAX_RECENT) */
-					break;
-			}
-		}
-	}
-	
-	gnome_history_free_recently_used_list (gnome_recent_list);
-	
-	recent_update_menus (app, filelist);
-}
-
-/* Actually updates the recent-used menu... */
-
-static void
-recent_update_menus (GnomeApp *app, GList *recent_files)
-{
-	GnomeUIInfo *menu;
-	gedit_data *data;
-	gchar *path;
-	int i;
-
-	g_return_if_fail (app != NULL);
-
-	if (settings->num_recent)
-		gnome_app_remove_menu_range (app, _("_File/"), 6, settings->num_recent + 1);
-
-	if (recent_files == NULL)
-		return;
-
-
-	/* insert a separator at the beginning */
-	
-	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	path = g_new (gchar, strlen (_("_File")) + strlen ("<Separator>") + 3 );
-	sprintf (path, "%s/%s", _("_File"), "<Separator>");
-	menu->type = GNOME_APP_UI_SEPARATOR;
-
-	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-	gnome_app_insert_menus (GNOME_APP(app), path, menu);
-
-	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
-	{
-		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	
-		data = g_malloc0 (sizeof (gedit_data));
-		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
-	
-		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
-		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
-		menu->type = GNOME_APP_UI_ITEM;
-		menu->hint = NULL;
-		menu->moreinfo = (gpointer) recent_cb;
-		menu->user_data = data;
-		menu->unused_data = NULL;
-		menu->pixmap_type = 0;
-		menu->pixmap_info = NULL;
-		menu->accelerator_key = 0;
-
-		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-	
-		gnome_app_insert_menus (GNOME_APP(app), path, menu);
-		g_free (g_list_nth_data (recent_files, i));	 
-	}
-	
-	g_free (menu);
-	settings->num_recent = g_list_length (recent_files);
-	g_list_free (recent_files);
-
-	g_free (path);
-}
-
-/* Callback for a users click on one of the recent docs in the File menu */
-static void
-recent_cb (GtkWidget *widget, gedit_data *data)
-{
-	Document *doc = gedit_document_current ();
-	
-	g_return_if_fail (data != NULL);
-
-	if (doc)
-	{
-		if (doc->filename || VIEW(mdi->active_view)->changed)
-		{
-			doc = gedit_document_new_with_file (data->temp1);
-			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	    
-		}
-		else
-		{
-			/* FIXME.jel: add some conditional check and
-			   an else to handle the case where the file
-			   in the recent menu fails to open
-			   (deleted/moved/new permissions) */
-			gedit_file_open (doc, data->temp1);
-		}
-	}
-}
-
-/**
- * recent_add:
- * @filename: Filename of document to add to the recently accessed list
- *
- * Record a file in GNOME's recent documents database 
- **/
-void
-recent_add (char *filename)
-{
-	g_return_if_fail (filename != NULL);
-
-	gnome_history_recently_used (filename, "text/plain",
-				     "gedit", "gedit document");
-}
 
 void
 options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)

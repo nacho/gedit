@@ -22,9 +22,6 @@
 #ifndef __GEDIT_UTILS_H__
 #define __GEDIT_UTILS_H__
 
-#include "gedit.h"
-
-
 typedef enum {
 	DEBUG_UNDO,
 	DEBUG_UNDO_DEEP,
@@ -44,7 +41,3 @@ void gedit_flash_va  (gchar *format, ...);
 void gedit_debug_mess (gchar *message, DebugSection type);
 
 #endif /* __GEDIT_UTILS_H__ */
-
-
-
-

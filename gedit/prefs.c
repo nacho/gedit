@@ -85,23 +85,22 @@ gedit_window_refresh (Window *w)
 
 	gedit_window_set_status_bar (settings->show_status);
 
+
 /*  
-	for (i = 0; i < NUM_MDI_MODES; i++) {
-	
-	  if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active) {
-	
-            if (mdiMode != mdi_type[i]) {
-          
-              mdiMode = mdi_type[i];
-              gnome_mdi_set_mode (mdi, mdiMode);
-            }
-         
-            break;
-        
-          }
-          
+	for (i = 0; i < NUM_MDI_MODES; i++)
+	{
+		if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active)
+		{
+			if (mdiMode != mdi_type[i])
+			{
+				mdiMode = mdi_type[i];
+				gnome_mdi_set_mode (mdi, mdiMode);
+			}
+			break;
+		}
         }
 */
+
 	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 
 	bg = &style->base[0];
@@ -674,15 +673,12 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 	static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
 	gint i;
 
-	gedit_data *data = (gedit_data *)cbdata;
-
 	prefs = g_malloc (sizeof(gedit_prefs_data));
 
 	if (!prefs)
 		return;
 
 	prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
-	prefs->gData = data;
   
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
 			    GTK_SIGNAL_FUNC (cancel_cb), prefs);
@@ -691,7 +687,7 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 			    GTK_SIGNAL_FUNC (gtk_false), NULL);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "apply",
-			    GTK_SIGNAL_FUNC (apply_cb), data);
+			    GTK_SIGNAL_FUNC (apply_cb), cbdata);
 
 	help_entry.name = gnome_app_id;
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "help",
@@ -715,7 +711,7 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 				  gtk_label_new (_("Document")));
  
   
-	get_prefs (data);
+	get_prefs (cbdata);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
 			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);

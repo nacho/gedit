@@ -29,6 +29,7 @@
 #include "prefs.h"
 #include "file.h"
 #include "utils.h"
+#include "recent.h"
 
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;

@@ -18,13 +18,12 @@
 static GtkWidget *replace_dialog;
 
 static GtkWidget* create_replace_dialog (void);
-static void replace_clicked_cb (GtkWidget *widget, gint button, Document *doc);
-
+static void clicked_cb (GtkWidget *widget, gint button, Document *doc);
 static gint ask_replace (void);
 
 
 void
-dialog_replace (GtkWidget *widget, gpointer data)
+dialog_replace (void)
 {
 	Document *doc;
 
@@ -34,12 +33,13 @@ dialog_replace (GtkWidget *widget, gpointer data)
 		replace_dialog = create_replace_dialog ();
 
 	gtk_signal_connect (GTK_OBJECT (replace_dialog), "clicked",
-			    GTK_SIGNAL_FUNC (replace_clicked_cb), doc);
+			    GTK_SIGNAL_FUNC (clicked_cb), doc);
 	gtk_widget_show (replace_dialog);
 }
 
+/* Callback on the dialog's "clicked" signal */
 static void
-replace_clicked_cb (GtkWidget *widget, gint button, Document *doc)
+clicked_cb (GtkWidget *widget, gint button, Document *doc)
 {
 	GtkWidget *datalink;
 	gint pos, dowhat = 0;
@@ -83,7 +83,7 @@ replace_clicked_cb (GtkWidget *widget, gint button, Document *doc)
 	else
 	{
 		gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
-					       GTK_SIGNAL_FUNC (replace_clicked_cb),
+					       GTK_SIGNAL_FUNC (clicked_cb),
 					       doc);
 		gnome_dialog_close (GNOME_DIALOG (widget));
 	}

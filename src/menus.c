@@ -22,7 +22,6 @@
 
 #define PLUGIN_TEST 1
 #include "window.h"
-#include "about.h"
 #include "file.h"
 #include "search.h"
 #include "print.h"
@@ -119,7 +118,7 @@ GnomeUIInfo gedit_edit_menu[] =
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
 	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM (dialog_replace, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM (replace_cb, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM,
@@ -277,7 +276,7 @@ GnomeUIInfo gedit_docs_menu[] =
 GnomeUIInfo gedit_help_menu[] =
 {
 	GNOMEUIINFO_HELP ("gedit"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM (gedit_about, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM (dialog_about, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -386,3 +385,21 @@ gedit_menus_init (Window *window)
 	return (GnomeUIInfo *) gedit_menu;
 }
 #endif
+
+void
+find_line_cb (GtkWidget *widget, gpointer data)
+{
+	dialog_find_line ();
+}
+
+void
+replace_cb (GtkWidget *widget, gpointer data)
+{
+	dialog_replace ();
+}
+
+void
+about_cb (GtkWidget *widget, gpointer data)
+{
+	dialog_about ();
+}

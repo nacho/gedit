@@ -1,8 +1,8 @@
 #ifndef __DIALOGS_H__
 #define __DIALOGS_H__
 
-#include <gnome.h>
-
-void dialog_replace (GtkWidget, gpointer data);
+void dialog_about     (void);
+void dialog_find_line (void);
+void dialog_replace   (void);
 
 #endif /* __DIALOGS_H__ */

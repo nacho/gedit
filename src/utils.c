@@ -22,30 +22,31 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
-#include "utils.h"
 #include "document.h"
+#include "utils.h"
+
 
 /**
  * gedit_set_title:
- * @doc: Document that's active right now, what we're setting the
- * title to
+ * @docname : Document name in a string, the new title
  *
- * Set the title to "$filename - $gedit_ver" and if the document has
+ * Set the title to "$docname - $gedit_ver" and if the document has
  * changed, lets show that it has. 
- */
+ **/
 void
 gedit_set_title (Document *doc)
 {
 	gchar *title;
+	gchar *docname;
 
 	g_return_if_fail (doc != NULL);
 
+	docname = GNOME_MDI_CHILD (doc)->name;
+
 	if (doc->changed)
-		title = g_strdup_printf ("%s (modified) - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
+		title = g_strdup_printf ("%s (modified) - %s", docname, "gedit "VERSION);
 	else
-		title = g_strdup_printf ("%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
+		title = g_strdup_printf ("%s - %s", docname, "gedit "VERSION);
 
 	gtk_window_set_title (GTK_WINDOW (mdi->active_window), title);
 
@@ -57,7 +58,7 @@ gedit_set_title (Document *doc)
  * @msg: Message to flash on the statusbar
  *
  * Flash a temporary message on the statusbar of gedit.
- */
+ **/
 void
 gedit_flash (gchar *msg)
 {
@@ -69,7 +70,7 @@ gedit_flash (gchar *msg)
 /**
  * gedit_flash_va:
  * @format:
- */
+ **/
 void
 gedit_flash_va (gchar *format, ...)
 {
@@ -92,12 +93,11 @@ gedit_flash_va (gchar *format, ...)
  * @type : Group type of message
  *
  * Print a debug message out to the console
- */
-
-/* FIXME: I know how evil this hack is. chema. */
+ **/
 void
 gedit_debug_mess (gchar *message, DebugSection type)
 {
+/* FIXME: I know how evil this hack is. Chema. */
 #if 0
 	switch (type)
 	{
