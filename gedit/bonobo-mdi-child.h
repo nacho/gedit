@@ -93,6 +93,8 @@ void          bonobo_mdi_child_set_parent       (BonoboMDIChild *mdi_child,
 						 GObject *parent);
 GObject      *bonobo_mdi_child_get_parent       (const BonoboMDIChild *mdi_child);
 
+BonoboMDIChild *bonobo_mdi_child_get_from_view  (GtkWidget *view);
+
 G_END_DECLS
 
 #endif /* _BONOBO_MDI_CHILD_H_ */

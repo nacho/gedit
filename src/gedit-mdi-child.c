@@ -28,12 +28,21 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#include <libgnomeui/gnome-popup-menu.h>
+#include <libgnomeui/gnome-icon-theme.h>
+#include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
+
+#include <bonobo/bonobo-i18n.h>
+
 #include "gedit-mdi-child.h"
 #include "gedit-debug.h"
 #include "gedit-view.h"
 #include "gedit-marshal.h"
 #include "gedit-file.h"
 #include "gedit2.h"
+#include "gedit-print.h"
+#include "recent-files/egg-recent-util.h"
 
 struct _GeditMDIChildPrivate
 {
@@ -376,6 +385,210 @@ gedit_mdi_child_tab_close_clicked (GtkWidget *button, GtkWidget *view)
 	gedit_file_close (view);
 }
 
+static void
+gedit_mdi_child_tab_save_clicked (GtkWidget *button,  GtkWidget *view)
+{
+	BonoboMDIChild *child;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	
+	child = bonobo_mdi_child_get_from_view (view);
+	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
+
+	gedit_file_save (GEDIT_MDI_CHILD (child), TRUE);
+}
+
+static void
+gedit_mdi_child_tab_save_as_clicked (GtkWidget *button,  GtkWidget *view)
+{
+	BonoboMDIChild *child;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	
+	child = bonobo_mdi_child_get_from_view (view);
+	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
+
+	gedit_file_save_as (GEDIT_MDI_CHILD (child));
+}
+
+static void
+gedit_mdi_child_tab_print_clicked (GtkWidget *button,  GtkWidget *view)
+{
+	BonoboMDIChild *child;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	
+	child = bonobo_mdi_child_get_from_view (view);
+	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
+	
+	gedit_print (GEDIT_MDI_CHILD (child));
+}
+
+static void
+gedit_mdi_child_tab_move_window_clicked (GtkWidget *button,  GtkWidget *view)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+
+	bonobo_mdi_move_view_to_new_window (BONOBO_MDI (gedit_mdi), view);
+}
+
+static void 
+menu_show (GtkWidget *widget, GtkWidget *view)
+{
+	GtkWidget *menu_item;
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	if (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)) != view)
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+
+	menu_item = g_object_get_data (G_OBJECT (widget), "move-to-menu-item");
+	
+	gtk_widget_set_sensitive (menu_item, 
+			bonobo_mdi_n_children_for_window (
+				bonobo_mdi_get_window_from_view (view)) > 1);
+}
+
+static void 
+read_only_changed_cb (GeditDocument *doc, gboolean readonly, gpointer *data)
+{
+	g_return_if_fail (GTK_IS_WIDGET (data));
+
+	gtk_widget_set_sensitive (GTK_WIDGET (data), !readonly);
+}
+
+static GtkWidget *
+create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
+{
+	GtkWidget *menu;
+	GtkWidget *menu_item;
+	GeditDocument *doc;
+	
+	menu = gtk_menu_new ();
+
+	/* Add the close button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLOSE, NULL);
+	gtk_widget_show (menu_item);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_mdi_child_tab_close_clicked), view);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the separator */
+	menu_item = gtk_separator_menu_item_new ();
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the print button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_PRINT, NULL);
+	gtk_widget_show (menu_item);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_mdi_child_tab_print_clicked), view);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the separator */
+	menu_item = gtk_separator_menu_item_new ();
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the save as button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_SAVE_AS, NULL);
+	gtk_widget_show (menu_item);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_mdi_child_tab_save_as_clicked), view);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the save button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_SAVE, NULL);
+	gtk_widget_show (menu_item);
+
+	doc = GEDIT_MDI_CHILD (child)->document;
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	gtk_widget_set_sensitive (menu_item, !gedit_document_is_readonly (doc));
+	g_signal_connect (G_OBJECT (doc), "readonly_changed",
+		      	  G_CALLBACK (read_only_changed_cb), menu_item);
+
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_mdi_child_tab_save_clicked), view);
+	
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+		
+	/* Add the separator */
+	menu_item = gtk_separator_menu_item_new ();
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the detach tab button */
+	menu_item = gtk_menu_item_new_with_mnemonic (_("_Move to a new window"));
+	gtk_widget_show (menu_item);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_mdi_child_tab_move_window_clicked), view);
+	
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+	g_object_set_data (G_OBJECT (menu), "move-to-menu-item", menu_item);
+
+	g_signal_connect (G_OBJECT (menu), "show",
+		      	  G_CALLBACK (menu_show), view);
+
+	return menu;
+}
+
+
+/* FIXME: implementing theme changed handler */
+
+static GnomeIconTheme *theme = NULL;
+
+static GtkWidget *
+set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
+{
+	GdkPixbuf *pixbuf;
+	gchar *raw_uri;
+	gchar *mime_type = NULL;
+
+	g_return_val_if_fail (GTK_IS_IMAGE (image), NULL);
+	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
+
+	if (theme == NULL)
+		theme = gnome_icon_theme_new ();
+
+	raw_uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);	
+	
+	if (raw_uri != NULL)
+		mime_type = gnome_vfs_get_mime_type (raw_uri);
+
+	if (mime_type == NULL)
+		mime_type = g_strdup ("text/plain");
+
+	pixbuf = egg_recent_util_get_icon (theme, raw_uri,
+					   mime_type);
+
+	g_free (raw_uri);
+	g_free (mime_type);
+		
+	gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
+		
+	if (pixbuf)
+		g_object_unref (pixbuf);
+
+	return image;	
+}
+	
 static GtkWidget *
 gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *old_hbox,
                            gpointer data)
@@ -402,19 +615,29 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		
 	if (old_hbox != NULL) 
 	{
-		GtkWidget *label = g_object_get_data (G_OBJECT (old_hbox),
-				"label");
+		GtkWidget *label;
+		GtkWidget *image;
+	       	GtkWidget *event_box;
+
+		label = g_object_get_data (G_OBJECT (old_hbox),	"label");
+		image = g_object_get_data (G_OBJECT (old_hbox),	"image");
+		event_box = g_object_get_data (G_OBJECT (old_hbox), "event-box");		
+	
 		gtk_label_set_text (GTK_LABEL (label), name);
+		set_tab_icon (image, child);
+		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
+
 		ret = old_hbox;
 	} 
 	else 
 	{
-		GtkWidget *event_box;
+		GtkWidget *event_box;	
 		GtkSettings *settings;
 		GtkWidget *hbox;
 		GtkWidget *label;
 		GtkWidget *button;
 		GtkWidget *image;
+		GtkWidget *popup_menu;
 		gint w, h;
 
 		settings = gtk_widget_get_settings (view);
@@ -437,23 +660,35 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		gtk_widget_set_size_request (button, w + 2, h + 2);
 
 		gtk_container_add (GTK_CONTAINER (button), image);
+		
+		image = gtk_image_new ();
+		set_tab_icon (image, child);
+		
+		gtk_widget_show (image);
 
 		hbox = gtk_hbox_new (FALSE, 2);
+
+		event_box = gtk_event_box_new ();
+		gtk_container_add (GTK_CONTAINER (event_box), image);
+
+		gtk_box_pack_start (GTK_BOX (hbox), event_box, FALSE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		
 		g_object_set_data (G_OBJECT (hbox), "label", label);
+		g_object_set_data (G_OBJECT (hbox), "image", image);
+		g_object_set_data (G_OBJECT (hbox), "event-box", event_box);			
+		
+		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
 
-		event_box = gtk_event_box_new ();
-
-		gtk_container_add (GTK_CONTAINER (event_box), hbox);
-
-		gtk_widget_show_all (event_box);
-		ret = event_box;
+		popup_menu = create_popup_menu (child, view);
+		
+		gnome_popup_menu_attach (popup_menu, event_box, NULL);
+		
+		gtk_widget_show_all (hbox);
+		ret = hbox;
 	}
-
-	gtk_tooltips_set_tip (tooltips, ret, uri, NULL);
-
+	
 	g_free (name);
 	g_free (uri);
 

@@ -1,3 +1,22 @@
+2002-11-26  Paolo Maggi <maggi@athena.polito.it>
+
+	* bonobo-mdi-child.[ch] (bonobo_mdi_child_get_from_view):
+	new function
+
+	* bonobo-mdi.c (book_add_view)(child_set_label): 
+	now take mdi as parameter
+	(bonobo_mdi_update_child): modify the old tab_label instead of
+	creating a new one 
+	(bonobo_mdi_move_view_to_new_window): new method
+	(bonobo_mdi_n_children_for_window): new method
+
+	* gedit-mdi-child.c: added a context menu and an icon the the
+	tab label of each child
+
+	* gedit-prefs-manager.c (gedit_prefs_manager_editor_font_changed):
+	set tab size when font changes
+
+
 2002-11-21  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-plugins-engine.[ch]: much improved plugin engine (load

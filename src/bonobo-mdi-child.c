@@ -203,6 +203,18 @@ bonobo_mdi_child_add_view (BonoboMDIChild *mdi_child)
 	return view;
 }
 
+BonoboMDIChild *
+bonobo_mdi_child_get_from_view (GtkWidget *view)
+{
+	gpointer res;
+	
+	g_return_val_if_fail (view != NULL, NULL);
+
+	res = g_object_get_data (G_OBJECT (view), "BonoboMDIChild");
+
+	return res != NULL ? BONOBO_MDI_CHILD (res) : NULL;
+}
+
 /**
  * bonobo_mdi_child_remove_view:
  * @mdi_child: A pointer to a BonoboMDIChild object.

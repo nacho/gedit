@@ -1165,13 +1165,18 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 
 	while (children != NULL)
 	{
+		gint ts;
+		
 		GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
 
+		ts = gedit_prefs_manager_get_tabs_size ();
 		while (views != NULL)
 		{
 			GeditView *v =	GEDIT_VIEW (views->data);
 			
 			gedit_view_set_font (v, def, font);
+			gedit_view_set_tab_size (v, ts);
+
 			views = views->next;
 		}
 		
