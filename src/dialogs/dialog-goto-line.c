@@ -96,17 +96,8 @@ dialog_goto_line_get_dialog (GtkWidget **dialog_, GtkWidget **entry_)
 	return TRUE;
 }
 
-
-/* - In the first method, we don't free the dialog, and thus avoid memleaking, but it uses
-     more memory
-   - The second method uses less memory overall since the dialog is freed after it is used
-     but it memleaks, probably a mem-leak in gnome-libs. I keep this code here to eventually
-     find this leak
-     (Chema)
-*/
-#if 1 
 void
-dialog_goto_line (void)
+gedit_dialog_goto_line (void)
 {
 	const gchar *text;
 	static GtkWidget *goto_line_dialog = NULL;
@@ -136,50 +127,3 @@ dialog_goto_line (void)
 	gnome_dialog_close (GNOME_DIALOG (goto_line_dialog));
 	
 }
-
-#else
-
-/* Why is this function leaking 52 bytes ???? */
-void
-dialog_goto_line (void)
-{
-	GtkWidget *goto_line_dialog;
-	GladeXML *gui;
-	gint ret;
-	gint n;
-
-	for (n = 0; n < 100; n++) {
-		gedit_debug(DEBUG_SEARCH, "");
-		
-		gui = glade_xml_new (GEDIT_GLADEDIR "/goto-line.glade", "dialog");
-		
-		if (!gui) {
-			g_warning ("Could not find goto-line.glade, reinstall gedit.");
-			return;
-		}
-		
-		goto_line_dialog = glade_xml_get_widget (gui, "dialog");
-
-		if (!goto_line_dialog) {
-			g_print ("Could not find the required widgets inside goto-line.glade.");
-			return;
-		}
-		
-		ret = gnome_dialog_run (GNOME_DIALOG (goto_line_dialog));
-
-		g_print ("Ret %i\n", ret);
-		
-		if (ret == -1) {
-			gtk_object_unref (GTK_OBJECT (gui));
-			return;
-		}
-		
-		gnome_dialog_close (GNOME_DIALOG (goto_line_dialog));
-
-		gtk_object_unref (GTK_OBJECT (gui));
-	}
-	
-	return;
-}
-
-#endif

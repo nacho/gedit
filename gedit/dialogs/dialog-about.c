@@ -18,10 +18,12 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+
+#include <glib.h>
+#include <gtk/gtkwidget.h>
 #include <glade/glade.h>
 
-void dialog_about (void);
+#include "dialogs/dialogs.h"
 
 /**
  * dialog_about:
@@ -29,15 +31,20 @@ void dialog_about (void);
  * Show the user the information about the program and its authors.
  */
 void
-dialog_about (void)
+gedit_dialog_about (void)
 {
 	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR "about.glade", NULL);
+	GtkWidget *about;
 
 	if (!gui)
 	{
 		g_warning ("Could not find about.glade");
 		return;
 	}
-	gtk_widget_show (glade_xml_get_widget (gui, "about"));
+
+	about = glade_xml_get_widget (gui, "about");
+
+	gtk_widget_show (about);
+	
 	gtk_object_unref (GTK_OBJECT (gui));
 }

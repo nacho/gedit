@@ -64,9 +64,20 @@ gedit_undo_check_size (Document *doc)
 	   since the undo list gets freed on any call to gedit_undo_add */
 	if (g_list_length (doc->undo) > settings->undo_levels && settings->undo_levels > 0)
 	{
-		for (n=g_list_length (doc->undo)-1; n >= settings->undo_levels;  n--)
+		gint start;
+		gint end;
+
+		start = g_list_length (doc->undo);
+		end   = settings->undo_levels;
+		for (n = start; n >= end;  n--)
 		{
-			nth_undo = g_list_nth_data (doc->undo, n);
+			nth_undo = g_list_nth_data (doc->undo, n - 1);
+			/* We don't want to remove a REPLACE level, since they are loaded in
+			   pairs */
+			if (n == end) {
+				if ((nth_undo->action == GEDIT_UNDO_ACTION_REPLACE_DELETE))
+				continue;
+			}
 			doc->undo = g_list_remove (doc->undo, nth_undo);
 			g_free (nth_undo->text);
 			g_free (nth_undo);
@@ -83,7 +94,8 @@ gedit_undo_check_size (Document *doc)
  * @action: 
  * 
  * This function tries to merge the undo object at the top of
- * the stack with a new set of data
+ * the stack with a new set of data. So when we undo for example
+ * typing, we can undo the whole word and not each letter by itself
  * 
  * Return Value: TRUE is merge was sucessful, FALSE otherwise
  **/
@@ -94,17 +106,17 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 	GeditUndoInfo * last_undo;
 	
 	gedit_debug (DEBUG_UNDO, "");
-	/* This are the cases in which we will not merge :
+	/* This are the cases in which we will NOT merge :
 	   1. if (last_undo->mergeable == FALSE)
 	   [mergeable = FALSE when the size of the undo data was not 1.
 	   or if the data was size = 1 but = '\n' or if the undo object
-	   has been "undone" ]
+	   has been "undone" already ]
 	   2. The size of text is not 1
 	   3. If the new merging data is a '\n'
 	   4. If the last char of the undo_last data is a space/tab
 	   and the new char is not a space/tab ( so that we undo
 	   words and not chars )
-	   5. If the type (action) of undo is different
+	   5. If the type (action) of undo is different from the last one
 	Chema */
 
 	if (list==NULL)
@@ -124,30 +136,18 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 	}
 
 	if (text[0]=='\n')
-	{
-		last_undo->mergeable = FALSE;		
-		return FALSE;
-	}
+		goto gedit_undo_do_not_merge;
 
 	if (action != last_undo->action)
-	{
-		last_undo->mergeable = FALSE;
-		return FALSE;
-	}
+		goto gedit_undo_do_not_merge;
 
 	if (action == GEDIT_UNDO_ACTION_REPLACE_INSERT || action == GEDIT_UNDO_ACTION_REPLACE_DELETE)
-	{
-		last_undo->mergeable = FALSE;
-		return FALSE;
-	}
+		goto gedit_undo_do_not_merge;
 
 	if (action == GEDIT_UNDO_ACTION_DELETE)
 	{
 		if (last_undo->start_pos!=end_pos && last_undo->start_pos != start_pos)
-		{
-			last_undo->mergeable = FALSE;			
-			return FALSE;
-		}
+			goto gedit_undo_do_not_merge;
 
 		if (last_undo->start_pos == start_pos)
 		{
@@ -155,10 +155,7 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 			if ( text[0]!=' ' && text[0]!='\t' &&
 			     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
 			      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
-			{
-				last_undo->mergeable = FALSE;			
-				return FALSE;
-			}
+				goto gedit_undo_do_not_merge;
 			
 			temp_string = g_strdup_printf ("%s%s", last_undo->text, text);
 			g_free (last_undo->text);
@@ -169,12 +166,9 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 		{
 			/* Deleted with the backspace key */
 			if ( text[0]!=' ' && text[0]!='\t' &&
-			     (last_undo->text [0] ==' '
+			     (last_undo->text [0] == ' '
 			      || last_undo->text [0] == '\t'))
-			{
-				last_undo->mergeable = FALSE;			
-				return FALSE;
-			}
+				goto gedit_undo_do_not_merge;
 
 			temp_string = g_strdup_printf ("%s%s", text, last_undo->text);
 			g_free (last_undo->text);
@@ -185,18 +179,12 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 	else if (action == GEDIT_UNDO_ACTION_INSERT)
 	{
 		if (last_undo->end_pos != start_pos)
-		{
-			last_undo->mergeable = FALSE;			
-			return FALSE;
-		}
+			goto gedit_undo_do_not_merge;
 
 		if ( text[0]!=' ' && text[0]!='\t' &&
 		     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
 		      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
-		{
-			last_undo->mergeable = FALSE;			
-			return FALSE;
-		}
+			goto gedit_undo_do_not_merge;
 
 		temp_string = g_strdup_printf ("%s%s", last_undo->text, text);
 		g_free (last_undo->text);
@@ -204,9 +192,13 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, cons
 		last_undo->text = temp_string;
 	}
 	else
-		g_assert_not_reached();
+		g_warning ("Unknown action [%i] inside undo merge encountered", action);
 
 	return TRUE;
+
+gedit_undo_do_not_merge:
+	last_undo->mergeable = FALSE;		
+	return FALSE;
 }
 
 /**
@@ -227,10 +219,10 @@ gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
 {
 	GeditUndoInfo *undo;
 
-	gedit_debug (DEBUG_UNDO, "");
+	gedit_debug (DEBUG_UNDO, "(%i)*%s*", strlen (text), text);
 
 	g_return_if_fail (text != NULL);
-	g_return_if_fail (end_pos > start_pos);
+	g_return_if_fail (end_pos >= start_pos);
 	
 
 	gedit_undo_free_list (&doc->redo);

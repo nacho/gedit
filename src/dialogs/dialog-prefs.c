@@ -22,7 +22,13 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include <glib.h>
+#include <gtk/gtkwidget.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/gnome-font-picker.h>
+#include <libgnomeui/gnome-paper-selector.h>
+#include <libgnomeui/gnome-color-picker.h>
+#include <libgnomeui/gnome-propertybox.h>
 #include <glade/glade.h>
 
 #include "prefs.h"
@@ -153,10 +159,10 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	if (strcmp( "custom", gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)))==0)
 	{
 		g_warning ("Custom paper sizes not yet supported. Setting paper size to default\n");
-		settings->papersize = strdup (gnome_paper_name_default());
+		settings->papersize = g_strdup (gnome_paper_name_default());
 	}
 	else
-		settings->papersize = strdup (gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)));
+		settings->papersize = g_strdup (gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)));
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines))) {
 		settings->print_lines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (print_lines_spin_button));
@@ -586,7 +592,7 @@ dialog_prefs_impl (GladeXML *gui)
 }
 
 void
-dialog_prefs (void)
+gedit_dialog_prefs (void)
 {
 	static GladeXML *gui = NULL;
 

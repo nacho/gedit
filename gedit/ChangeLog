@@ -1,5 +1,32 @@
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_add): allow adding 0 size undo elements. The user
+	might replace "foo" with "".
+
+	* prefs.c (gedit_prefs_save_settings): only save the window size when
+	the window is not maximized.
+
+	* dialogs/dialogs.h: prepend gedit_ to all the functions. Rename
+	the references to this function names.
+
+	* dialogs/dialog-replace.c (gedit_find_again): implement find again
+
+	* undo.c (gedit_undo_check_size): when removing undo objects from the stack
+	verify that we remove pairs of replaces together. We where leaving half of
+	an undo state in the stack
+
+	* search.c (gedit_search_replace_all_execute): limit the size that the buffer
+	can grow to. Gedit pukes on large g_reallocs.
+
 2000-10-14  Chema Celorio  <chema@celorio.com>
 
+	* search.c (gedit_search_replace_all_execute): grow the buffer using levien's
+	method (<<=1). This helps gedit to not crash when allocating for large buffers.
+
+	* view.c (gedit_view_init): remove the panned window again
+
+2000-10-14  Chema Celorio  <chema@celorio.com>
+	
 	* dialogs/dialog-replace.c: rewrite, use coolio gnome-dialog functions.
 	This code looks so much cleaner.
 

@@ -164,7 +164,7 @@ GnomeUIInfo gedit_settings_menu[] =
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
 	*/
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM (dialog_prefs, NULL),
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM (gedit_dialog_prefs, NULL),
 
 	GNOMEUIINFO_END
 };
@@ -177,7 +177,7 @@ GnomeUIInfo gedit_docs_menu[] =
 GnomeUIInfo gedit_help_menu[] =
 {
 	GNOMEUIINFO_HELP ("gedit"),
-	GNOMEUIINFO_MENU_ABOUT_ITEM (dialog_about, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM (gedit_dialog_about, NULL),
 	GNOMEUIINFO_END
 };
 

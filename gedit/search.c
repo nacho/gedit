@@ -212,13 +212,6 @@ file_info_cb (GtkWidget *widget, gpointer data)
 }
 
 void
-find_cb (GtkWidget *widget, gpointer data)
-{
-	gedit_debug (DEBUG_RECENT, "");
-	gedit_dialog_replace (FALSE);
-}
-
-void
 search_text_not_found_notify (View * view)
 {
 	GtkWidget *gnome_dialog;
@@ -290,34 +283,6 @@ find_again_execute (void)
 	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
 	gtk_editable_select_region (GTK_EDITABLE(view->text), pos_found+1, pos_found+1+search_text_length);
 }
-
-void
-find_again_cb (GtkWidget *widget, gpointer data)
-{
-	gedit_debug (DEBUG_RECENT, "");
-	find_again_execute ();
-}
-
-void
-replace_cb (GtkWidget *widget, gpointer data)
-{
-	gedit_debug (DEBUG_RECENT, "");
-	gedit_dialog_replace (TRUE);
-}
-
-
-void
-goto_line_cb (GtkWidget *widget, gpointer data)
-{
-	gedit_debug (DEBUG_RECENT, "");
-
-	if (!gedit_document_current())
-		return;
-
-	dialog_goto_line ();
-}
-
-
 
 gint
 search_text_execute ( gulong starting_position,
@@ -529,8 +494,8 @@ file_info ( gint pos,  gint *total_chars, gint *total_words, gint *total_lines,
 
 
 
-#define GEDIT_EXTRA_REPLACEMENTS 20
-
+#define GEDIT_EXTRA_REPLACEMENTS_ 4
+#define GEDIT_REPLACE_ALL_SIZE_LIMIT 1000000
 gint
 gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *search_text,
 				   const guchar *replace_text, gint case_sensitive,
@@ -550,6 +515,7 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *se
 	   p3 = pointer to the index in search_text
 	   p4 = pointer to the index in replace_text */
 	gint case_sensitive_mask;
+	gint grow_factor = GEDIT_EXTRA_REPLACEMENTS_;
 
 	gedit_debug (DEBUG_RECENT, "");
 	
@@ -571,7 +537,7 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *se
 
 	delta = replace_text_length - search_text_length;
 	if (delta > 0)
-		buffer_out_length = buffer_in_length + (GEDIT_EXTRA_REPLACEMENTS) * delta;
+		buffer_out_length = buffer_in_length + (grow_factor) * delta;
 	else
 		buffer_out_length = buffer_in_length;
 
@@ -627,13 +593,21 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *se
 				g_warning ("This should not happen.\n");
 				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
 			}
-			buffer_out_length = buffer_in_length + (replacements + GEDIT_EXTRA_REPLACEMENTS) * delta;
+			buffer_out_length = buffer_in_length + (replacements +
+								(grow_factor <<= 1)) * delta;
+			/* g_realloc dies when g_reallocating large buffers, limit the buffer
+			   to x MB's, which is a pretty large buffer. This is ugly but a crash
+			   is even uglier. Chema */
+			if (buffer_out_length > GEDIT_REPLACE_ALL_SIZE_LIMIT) {
+				return -1;
+			}
 			buffer_out = g_realloc (buffer_out, buffer_out_length);
 			if (buffer_out == NULL)
 			{
 				g_warning ("Unable to realocate buffer");
 				return 0;
 			}
+			
 		}
 		buffer_out [p2++] = buffer_in [p1++];
 	}
@@ -642,12 +616,49 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *se
 
 	if (p2 > buffer_out_length )
 	{
+		g_warning ("Error ...\n");
 		g_assert_not_reached();
 	}
 
 	*buffer = buffer_out;
 
+	g_warning ("Return ...\n");
+	
 	return replacements;
 }
 
 
+
+/* ----- Callbacks -------- */
+void
+find_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug (DEBUG_RECENT, "");
+	gedit_dialog_replace (FALSE);
+}
+
+void
+find_again_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug (DEBUG_RECENT, "");
+	gedit_find_again();
+}
+
+void
+replace_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug (DEBUG_RECENT, "");
+	gedit_dialog_replace (TRUE);
+}
+
+
+void
+goto_line_cb (GtkWidget *widget, gpointer data)
+{
+	gedit_debug (DEBUG_RECENT, "");
+
+	if (!gedit_document_current())
+		return;
+
+	gedit_dialog_goto_line ();
+}

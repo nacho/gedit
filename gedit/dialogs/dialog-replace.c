@@ -47,6 +47,7 @@ typedef struct
 	View *view;
 	GladeXML *gui;
 	GnomeDialog *dialog;
+	gboolean done;
 	gboolean not_found;
 	gboolean replacements;
 	GtkWidget *search_entry;
@@ -60,16 +61,21 @@ typedef struct
 }GeditReplaceDialog;
 
 static GeditReplaceDialog *
-get_dialog (gboolean full)
+get_dialog (void)
 {
-	GeditReplaceDialog *dialog;
+	static GeditReplaceDialog *dialog = NULL;
 
 	gedit_debug (DEBUG_SEARCH, "");
+
+	if (dialog != NULL)
+		return dialog;
 
 	dialog = g_new0 (GeditReplaceDialog, 1);
 	dialog->gui = glade_xml_new (GEDIT_GLADEDIR "/replace.glade", NULL);
 	if (!dialog->gui) {
 		g_warning ("Could not find replace.glade.");
+		g_free (dialog);
+		dialog = NULL;
 		return NULL;
 	}
 
@@ -127,8 +133,6 @@ dialog_set (GeditReplaceDialog *dialog, gboolean replace, gboolean first)
 	}
 
 	if (first) {
-		dialog->not_found = FALSE;
-		dialog->replacements = -1;
 		dialog->view = gedit_view_active ();
 		
 		gtk_label_set_text (label, "Find");
@@ -172,6 +176,7 @@ action_find (GeditReplaceDialog *dialog,
 
 	if (!found) {
 		dialog->not_found = TRUE;
+		dialog->done = TRUE;
 		return;
 	}
 
@@ -179,7 +184,7 @@ action_find (GeditReplaceDialog *dialog,
 	gedit_view_set_window_position_from_lines (dialog->view, line_found, total_lines);
 	gedit_view_set_position	(dialog->view, pos_found);
 	gedit_view_set_selection (dialog->view,
-				  pos_found + 1,	
+				  pos_found + 1,
 				  pos_found + 1 + strlen (search_text));
 	
 	gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 1);
@@ -196,7 +201,7 @@ action_replace (GeditReplaceDialog *dialog,
 	gedit_document_replace_text (dialog->view->doc,
 				     replace_text,
 				     strlen (search_text),
-				     start_pos - 1,
+				     start_pos - strlen (search_text),
 				     TRUE);
 
 	/* We need to reload the buffer since we changed it */
@@ -224,7 +229,6 @@ action_replace_all (GeditReplaceDialog *dialog,
 								 replace_text,
 								 case_sensitive,
 								 &new_buffer);
-	
 	if (dialog->replacements > 0)
 	{
 		gedit_document_delete_text (dialog->view->doc, 0,
@@ -235,11 +239,11 @@ action_replace_all (GeditReplaceDialog *dialog,
 		/*
 		  gedit_document_replace_text (view->doc, new_buffer, 0, gedit_document_get_buffer_length(view->doc), TRUE);
 		*/
-	}
+	} else
+		dialog->done = TRUE;
 
 	if (new_buffer!=NULL)
 		g_free (new_buffer);
-		
 }
 
 static void
@@ -261,9 +265,11 @@ dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
 
 	g_return_if_fail (search_text != NULL);
 	g_return_if_fail (replace_text != NULL);
-	
-	if (*search_text == 0)
+
+	if (*search_text == 0) {
+		dialog->done = TRUE;
 		return;
+	}
 	
 	/* Get the initial position */
 	selected = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(dialog->position)->group);
@@ -299,6 +305,38 @@ dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
 	}
 }
 
+
+static void
+dialog_display_messages (GeditReplaceDialog *dialog)
+{
+	gchar *msg;
+	/* This is done like this, since we need to close the other
+	   dialog before poping this dialogs*/
+	if (dialog->not_found || dialog->replacements == 0)
+		search_text_not_found_notify (dialog->view);
+
+	if (dialog->replacements > 0) {
+		msg = g_strdup_printf (_("found and replaced %i occurrences."),
+				       dialog->replacements);
+		gnome_dialog_run_and_close ((GnomeDialog *)
+					    gnome_message_box_new (msg,
+								   GNOME_MESSAGE_BOX_INFO,
+								   GNOME_STOCK_BUTTON_OK,
+								   NULL));
+		g_free (msg);
+	}
+	if (dialog->replacements == -1) {
+		msg = g_strdup_printf (_("Could not allocate the memory for the Replace all request."),
+				       dialog->replacements);
+		gnome_dialog_run_and_close ((GnomeDialog *)
+					    gnome_message_box_new (msg,
+								   GNOME_MESSAGE_BOX_INFO,
+								   GNOME_STOCK_BUTTON_OK,
+								   NULL));
+		g_free (msg);
+	}
+}
+
 /**
  * gedit_dialog_replace:
  * @replace: If true, it pops up a replace dialog. If false, it pops up a Find dialog
@@ -314,7 +352,7 @@ gedit_dialog_replace (gboolean replace)
 	gedit_debug (DEBUG_SEARCH, "");
 
 	if (dialog == NULL) {
-		dialog = get_dialog (replace);
+		dialog = get_dialog ();
 		if (dialog == NULL)
 			return;
 	}
@@ -322,10 +360,11 @@ gedit_dialog_replace (gboolean replace)
 	dialog_set (dialog, replace, TRUE);
 	if (dialog->view == NULL)
 		return;
+	dialog->done = FALSE;
+	dialog->not_found = FALSE;
+	dialog->replacements = -2;
 	
-	while (!dialog->not_found &&
-	       (dialog->replacements < 0)) {
-
+	while (!dialog->done) {
 		button = gnome_dialog_run (dialog->dialog);
 		if (button == -1)
 			return;
@@ -344,23 +383,35 @@ gedit_dialog_replace (gboolean replace)
 
 	gnome_dialog_close (dialog->dialog);
 
-	/* This is done like this, since we need to close the other
-	   dialog before poping this dialogs*/
-	if (dialog->not_found || dialog->replacements == 0)
-		search_text_not_found_notify (dialog->view);
+	dialog_display_messages (dialog);
 
-	if (dialog->replacements > 0) {
-		gchar *msg;
-		msg = g_strdup_printf (_("found and replaced %i occurrences."),
-				       dialog->replacements);
-		gnome_dialog_run_and_close ((GnomeDialog *)
-					    gnome_message_box_new (msg,
-								   GNOME_MESSAGE_BOX_INFO,
-								   GNOME_STOCK_BUTTON_OK,
-								   NULL));
-		g_free (msg);
+}
+
+void
+gedit_find_again (void)
+{
+	GeditReplaceDialog *dialog;
+	const gchar *search_text;
+	
+	dialog = get_dialog ();
+
+	g_return_if_fail (dialog != NULL);
+	
+	search_text  = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
+
+	if (*search_text == 0) {
+		gedit_dialog_replace (FALSE);
+		return;
 	}
 
+	/* We always find again from the current position, since we don't have
+	   a dialog up */
+	gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 1);
+	
+	gedit_search_start ();
+	dialog_action (dialog, 0, FALSE);
+	gedit_search_end ();
 
-	return;
+	dialog_display_messages (dialog);
+
 }

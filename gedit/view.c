@@ -493,26 +493,24 @@ gedit_view_init (View *view)
 	/* Vbox */
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
-	gtk_widget_show (view->vbox);
 	
 	/* create our paned window */
+#if 0	
 	view->pane = gtk_vpaned_new ();
 	gtk_box_pack_start (GTK_BOX (view->vbox), view->pane, TRUE, TRUE, 0);
 	gtk_paned_set_handle_size (GTK_PANED (view->pane), 10);
 	gtk_paned_set_gutter_size (GTK_PANED (view->pane), 10);
-	gtk_widget_show (view->pane);
+#endif	
 	
 	/* Create the upper split screen */
 	view->window = gtk_scrolled_window_new (NULL, NULL);
+#if 0	
 	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
+#endif	
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
-	gtk_widget_show (view->window);
-	
-#if 0
 	gtk_box_pack_start (GTK_BOX (view->vbox), view->window, TRUE, TRUE, 0);
-#endif	
 	
 
         /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
@@ -643,7 +641,9 @@ gedit_view_init (View *view)
 	gnome_config_sync ();
 #endif	
 
+#if 0	
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
+#endif	
 	gtk_widget_show_all (view->vbox);
 	gtk_widget_grab_focus (view->text);
 

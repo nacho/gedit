@@ -20,7 +20,12 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include <glib.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnome/gnome-util.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-file-entry.h>
 #include <glade/glade.h>
 
 #include "file.h"
