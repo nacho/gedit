@@ -78,5 +78,22 @@ void gedit_menus_add_menu_item_all (const gchar *path,
 void gedit_menus_remove_menu_item_all (const gchar *path,
 		     const gchar *name);
 
+void gedit_menus_add_menu_item_toggle (BonoboWindow *window, 
+		     const gchar *path,
+		     const gchar *name, 
+		     const gchar *label, 
+		     const gchar *tooltip, 
+		     BonoboUIListenerFn lt, 
+		     gpointer data);
+
+void gedit_menus_add_menu_item_toggle_all (const gchar *path,
+		     const gchar *name, 
+		     const gchar *label, 
+		     const gchar *tooltip, 
+		     BonoboUIListenerFn lt, 
+		     gpointer data);
+
+#define gedit_menus_remove_menu_item_toggle 	gedit_menus_remove_menu_item
+#define gedit_menus_remove_menu_item_toggle_all	gedit_menus_remove_menu_item_all
 
 #endif /* __GEDIT_MENU_H__ */

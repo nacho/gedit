@@ -33,6 +33,8 @@
 #include <libxml/tree.h>
 #include <glib/glist.h>
 
+#define MENU_ITEM_NAME		"TagList"	
+
 typedef struct _TagList TagList;
 typedef struct _TagGroup TagGroup;
 typedef struct _Tag Tag;

@@ -31,6 +31,7 @@
 #define __GEDIT_TAGLIST_PLUGIN_WINDOW_H__
 
 void taglist_window_show (void);
+void taglist_window_close (void);
 
 #endif /* __GEDIT_TAGLIST_PLUGIN_WINDOW_H__ */
 

@@ -45,6 +45,7 @@
 #include <gedit2.h>
 #include <gedit-document.h>
 #include <gedit-utils.h>
+#include <gedit-menus.h>
 
 enum
 {
@@ -86,8 +87,25 @@ window_destroyed (GtkObject *obj,  void **window_pointer)
 
 	if (window_pointer != NULL)
 	{
+		GList *top_windows;
+        	gedit_debug (DEBUG_PLUGINS, "");
+
+        	top_windows = gedit_get_top_windows ();
+
+        	while (top_windows)
+        	{
+			BonoboUIComponent *ui_component;
+			
+			ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+			
+			gedit_menus_set_verb_state (ui_component, "/commands/" MENU_ITEM_NAME, 0);
+
+			top_windows = g_list_next (top_windows);
+		}
+
 		g_free (*window_pointer);
-		*window_pointer = NULL;
+		*window_pointer = NULL;	
 	}	
 }
 
@@ -133,7 +151,7 @@ void taglist_window_show ()
 
 	gtk_tooltips_set_tip (gtk_tooltips_new (),
 			GTK_COMBO (tag_list_window->tag_groups_combo)->entry,
-			_("Select the group of tab you want to use."),
+			_("Select the group of tab you want to use"),
 			NULL);
 	
 	gtk_editable_set_editable (GTK_EDITABLE (
@@ -166,7 +184,7 @@ void taglist_window_show ()
 
 	gtk_tooltips_set_tip (gtk_tooltips_new (),
 			tag_list_window->tags_list,
-			_("Double-click on a tag to insert it in the current document."),
+			_("Double-click on a tag to insert it in the current document"),
 			NULL);
 
 	g_signal_connect_after (G_OBJECT (tag_list_window->tags_list), "row_activated",
@@ -205,6 +223,15 @@ void taglist_window_show ()
 	gtk_widget_show_all (GTK_WIDGET (tag_list_window->window));
 	gtk_widget_grab_focus (tag_list_window->tags_list);
 
+}
+
+void 
+taglist_window_close ()
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	if (tag_list_window != NULL)
+		gtk_widget_destroy (GTK_WIDGET (tag_list_window->window));
 }
 
 static void
@@ -447,7 +474,7 @@ tag_list_window_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 {
 	if ((event->keyval == 'w') && (event->state & GDK_CONTROL_MASK))
 	{
-		gtk_widget_destroy (GTK_WIDGET (tag_list_window->window));
+		taglist_window_close ();
 		return TRUE;
 	}
 

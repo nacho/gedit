@@ -175,7 +175,7 @@ gedit_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 
 		xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"\""
 				       " _label=\"%s\""
-				       " _tip=\"%s\" hident=\"0\" />", name,
+				       " _tip=\"%s\" hidden=\"0\" />", name,
 				       label, tooltip);
 
 
@@ -267,10 +267,75 @@ gedit_menus_remove_menu_item_all (const gchar *path, const gchar *name)
 	{
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
 
-
 		gedit_menus_remove_menu_item (window, path, name);
-
 		
 		top_windows = g_list_next (top_windows);
 	}
 }
+
+
+void
+gedit_menus_add_menu_item_toggle (BonoboWindow *window, const gchar *path,
+		     const gchar *name, const gchar *label, const gchar *tooltip, 
+		     BonoboUIListenerFn lt, gpointer data)
+{
+	BonoboUIComponent *ui_component;
+	gchar *item_path;
+	gchar *cmd;
+
+	g_return_if_fail (window != NULL);
+	g_return_if_fail (path != NULL);
+	g_return_if_fail (label != NULL);
+	g_return_if_fail (lt != NULL);
+	
+	item_path = g_strconcat (path, name, NULL);
+	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
+	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) 
+	{
+		gchar *xml;
+
+		xml = g_strdup_printf ("<menuitem name=\"%s\" id=\"%s\" verb=\"\" />",
+				       name, name);
+
+		cmd = g_strdup_printf ("<cmd name=\"%s\" _label=\"%s\" type=\"toggle\" _tip=\"%s\" state=\"0\"/>", 
+				name, label, tooltip);
+		
+		bonobo_ui_component_set_translate (ui_component, "/commands/",
+						   cmd, NULL);
+
+		bonobo_ui_component_set_translate (ui_component, path,
+						   xml, NULL);
+
+		bonobo_ui_component_add_listener (ui_component, name, lt, data);
+
+		g_free (xml);
+		g_free (cmd);
+	}
+
+	g_free (item_path);
+}
+
+
+void
+gedit_menus_add_menu_item_toggle_all (const gchar *path,
+		     const gchar *name, const gchar *label, const gchar *tooltip, 
+		     BonoboUIListenerFn lt, gpointer data)
+{
+	GList* top_windows;
+	
+	top_windows = gedit_get_top_windows ();
+	g_return_if_fail (top_windows != NULL);
+       
+	while (top_windows)
+	{
+		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
+
+
+		gedit_menus_add_menu_item_toggle (window, path, name, label, tooltip,
+				     lt, data);
+		
+		top_windows = g_list_next (top_windows);
+	}
+}
+
+

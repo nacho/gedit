@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <libgnome/gnome-i18n.h>
 
 #include <gedit-menus.h>
@@ -43,7 +45,9 @@
 
 #define MENU_ITEM_LABEL		N_("Tag _List")
 #define MENU_ITEM_PATH		"/menu/View/ViewOps/"
+/*
 #define MENU_ITEM_NAME		"TagList"	
+*/
 #define MENU_ITEM_TIP		N_("Show the tag list window")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
@@ -54,10 +58,24 @@ G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 
 
 static void
-tag_list_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+tag_list_cb (BonoboUIComponent           *ui_component,
+	     const char                  *path,
+	     Bonobo_UIComponent_EventType type,
+	     const char                  *state,
+	     gpointer               	  data)
 {
-	taglist_window_show ();
+	gboolean s;
+	
+	gedit_debug (DEBUG_PLUGINS, "%s toggled to '%s'", path, state);
+
+	s = (strcmp (state, "1") == 0);
+
+	if (s)
+		taglist_window_show ();
+	else
+		taglist_window_close ();
 }
+
 
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
@@ -102,10 +120,10 @@ activate (GeditPlugin *pd)
         {
 		BonoboUIComponent *ui_component;
 
-		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+		gedit_menus_add_menu_item_toggle (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
-				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
-				     tag_list_cb);
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP,
+				     tag_list_cb, NULL);
 
 		ui_component = gedit_get_ui_component_from_window (
 					BONOBO_WINDOW (top_windows->data));
@@ -124,7 +142,9 @@ activate (GeditPlugin *pd)
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
-	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+	gedit_menus_remove_menu_item_toggle_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	taglist_window_close ();
 
 	free_taglist ();
 	
