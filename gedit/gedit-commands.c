@@ -530,7 +530,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	GdkPixbuf *logo;
 
 	const gchar *authors[] = {
-		"Paolo Maggi <paolo.maggi@polito.it>",
+		"Paolo Maggi <paolo@gnome.org>",
 		"Paolo Borelli <pborelli@katamail.com>",
 		"James Willcox <jwillcox@gnome.org>",
 		"Chema Celorio", 

@@ -884,6 +884,9 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	gtk_window_set_position (GTK_WINDOW (loading_window), GTK_WIN_POS_CENTER_ON_PARENT);
 		
 	gtk_window_set_decorated (GTK_WINDOW (loading_window), FALSE); 
+	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (loading_window), TRUE);
+	gtk_window_set_skip_pager_hint (GTK_WINDOW (loading_window), TRUE);
+
 	gtk_window_set_transient_for (GTK_WINDOW (loading_window), parent);
 
 	frame = gtk_frame_new (NULL);

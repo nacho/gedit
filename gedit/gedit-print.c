@@ -305,7 +305,10 @@ show_printing_dialog (GeditPrintJobInfo *pji, GtkWindow *parent)
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (window), TRUE);
 	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER_ON_PARENT);
 		
-	gtk_window_set_decorated (GTK_WINDOW (window), FALSE); 
+	gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
+	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), TRUE);
+	gtk_window_set_skip_pager_hint (GTK_WINDOW (window), TRUE);
+ 
 	gtk_window_set_transient_for (GTK_WINDOW (window), parent);
 
 	frame = gtk_frame_new (NULL);
