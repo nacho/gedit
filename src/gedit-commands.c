@@ -5,6 +5,7 @@
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2002, 2003 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2003. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -455,9 +456,9 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	GdkPixbuf* pixbuf = NULL;
 	
 	gchar *authors[] = {
-		"Paolo Maggi <maggi@athena.polito.it>",
-		"Chema Celorio <chema@ximian.com>", 
+		"Paolo Maggi <paolo.maggi@polito.it>",
 		"James Willcox <jwillcox@cs.indiana.edu>",
+		"Chema Celorio <chema@ximian.com>", 
 		"Federico Mena Quintero <federico@ximian.com>",
 		NULL
 	};
@@ -495,7 +496,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 
 	about = gnome_about_new (_("gedit"), VERSION,
 				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
-				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi",
+				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
+				"Copyright \xc2\xa9 2003 Paolo Maggi",
 				_("gedit is a small and lightweight text editor for Gnome"),
 				(const char **)authors,
 				(const char **)documenters,

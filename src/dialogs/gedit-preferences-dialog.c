@@ -87,6 +87,8 @@ struct _GeditPreferencesDialogPrivate
 
 	GtkTreeModel *categories_tree_model;
 
+	GtkTooltips	*tooltips;
+
 	/* Font & Colors page */
 	GtkWidget	*default_font_checkbutton;
 	GtkWidget	*default_colors_checkbutton;
@@ -328,13 +330,12 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	
 	hbox = gtk_hbox_new (FALSE, 18);
 	
-	/*
-	gtk_container_set_border_width (GTK_CONTAINER (dlg), 12);
-	*/
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
-	/*
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 12);
-	*/
+	
+	dlg->priv->tooltips = gtk_tooltips_new ();
+
+	g_object_ref (G_OBJECT (dlg->priv->tooltips ));
+	gtk_object_sink (GTK_OBJECT (dlg->priv->tooltips ));
 
 	r = gtk_vbox_new (FALSE, 6);
 	
@@ -379,6 +380,7 @@ gedit_preferences_dialog_finalize (GObject *object)
 	g_return_if_fail (GEDIT_IS_PREFERENCES_DIALOG (dlg));
 	g_return_if_fail (dlg->priv != NULL);
 
+	g_object_unref (G_OBJECT (dlg->priv->tooltips));
 	g_object_unref (G_OBJECT (dlg->priv->categories_tree_model));
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -831,17 +833,17 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 
 	g_return_val_if_fail (font_label, FALSE);
 
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->fontpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->fontpicker, 
 			_("Push this button to select the font to be used by the editor"), NULL);
 
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->text_colorpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->text_colorpicker, 
 			_("Push this button to configure text color"), NULL);
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->background_colorpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->background_colorpicker, 
 			_("Push this button to configure background color"), NULL);
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->sel_text_colorpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->sel_text_colorpicker, 
 			_("Push this button to configure the color in which the selected "
 			  "text should appear"), NULL);
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->selection_colorpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->selection_colorpicker, 
 			_("Push this button to configure the color in which the selected "
 			  "text should be marked"), NULL);
 
@@ -1846,11 +1848,11 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 	gtk_label_set_mnemonic_widget (GTK_LABEL (numbers_font_label), 
 				       dlg->priv->numbers_fontpicker);
 
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->body_fontpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->body_fontpicker, 
 		_("Push this button to select the font to be used to print the body"), NULL);
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->headers_fontpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->headers_fontpicker, 
 		_("Push this button to select the font to be used to print the headers"), NULL);
-	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->numbers_fontpicker, 
+	gtk_tooltips_set_tip (dlg->priv->tooltips, dlg->priv->numbers_fontpicker, 
 		_("Push this button to select the font to be used to print line numbers"), NULL);
 
 	gedit_utils_set_atk_relation (dlg->priv->body_fontpicker, body_font_label, 
