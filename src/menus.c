@@ -35,6 +35,7 @@
 #include "gE_about.h"
 #include "gE_print.h"
 #include "gE_prefs.h"
+#include "gE_prefs_box.h"
 #include "msgbox.h"
 #include "search.h"
 
@@ -308,7 +309,7 @@ GnomeUIInfo gedit_toolbar_menu []= {
 };
 
 GnomeUIInfo gedit_options_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Preferences..."),  NULL, gE_prefs_dialog, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, (gpointer) GE_WINDOW, NULL },

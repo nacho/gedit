@@ -88,6 +88,7 @@ typedef struct _gE_window {
 	gint have_tb_text;
 #endif
 	gchar *print_cmd;
+	gchar *font;
 	GtkPositionType tab_pos;
 
 } gE_window;
