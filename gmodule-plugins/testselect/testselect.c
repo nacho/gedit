@@ -23,7 +23,7 @@ int main (int argc, char *argv[])
 		printf ("\"%s\" selected\n", text);
 	printf ("Cursor is at position %i\n", pos);
 	printf ("Selection starts at point %i, and ends at point %i\n", start, end);
-
+	free (text);
 	exit (0);
 }
 
