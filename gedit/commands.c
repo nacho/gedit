@@ -278,8 +278,8 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer data)
   if (GTK_WIDGET_VISIBLE(main_window->open_fileselector))
     return;
   else {
-    gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->open_fileselector), "./");
-    gtk_widget_show (main_window->open_fileselector);
+/*    gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->open_fileselector), "./");
+*/    gtk_widget_show (main_window->open_fileselector);
   }
 }
 
@@ -287,7 +287,7 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 {
 	gchar *fname, *fname2;
  	fname = gE_document_current(main_window)->filename;
- 	g_print("%s\n",fname);
+ 	/*g_print("%s\n",fname);*/
 	if (fname == NULL)
 	{
 		#ifdef DEBUG
@@ -313,7 +313,7 @@ void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 	if (GTK_WIDGET_VISIBLE(main_window->save_fileselector))
     		return;
   	else {
-  		gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->save_fileselector), "./");
+  		/*gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->save_fileselector), "./");*/
     		gtk_widget_show (main_window->save_fileselector);
 	}
 }
