@@ -36,6 +36,7 @@
 #include <libgnomeui/gnome-icon-theme.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <eel/eel-input-event-box.h>
 
 #include <bonobo/bonobo-i18n.h>
 
@@ -602,13 +603,20 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	return image;	
 }
 	
+/**
+ * gedit_mdi_child_set_label:
+ * 
+ * Creates a tab label for the selected #BonoboMDIChild or 
+ * updates the incoming tab label.
+ *
+ * Return value: a tab label
+ **/
 static GtkWidget *
 gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *old_hbox,
                            gpointer data)
 {
 	GtkWidget *ret;
-	gchar *name;
-	gchar *uri;
+	gchar *name, *uri;
 
 	static GtkTooltips *tooltips = NULL;
 	
@@ -621,83 +629,103 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 	if (tooltips == NULL)
 		tooltips = gtk_tooltips_new ();
 	
+	/* setup the name for the tab title */
 	name = bonobo_mdi_child_get_name (child);
 
+	/* setup the location for the tooltip and title */
  	uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);
 	g_return_val_if_fail (uri != NULL, NULL);
 		
 	if (old_hbox != NULL) 
 	{
-		GtkWidget *label;
-		GtkWidget *image;
+		GtkWidget *image, *label, *event_box;
 
+		/* fetch the label/image/event_box */
 		label = g_object_get_data (G_OBJECT (old_hbox),	"label");
 		image = g_object_get_data (G_OBJECT (old_hbox),	"image");
+		event_box = g_object_get_data (G_OBJECT(old_hbox),"event_box");
 	
+		/* update the label/image/tooltip */
 		gtk_label_set_text (GTK_LABEL (label), name);
 		set_tab_icon (image, child);
+		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
 
 		ret = old_hbox;
 	} 
 	else 
 	{
-		GtkWidget *event_box;	
-		GtkSettings *settings;
-		GtkWidget *hbox;
-		GtkWidget *label;
-		GtkWidget *button;
-		GtkWidget *image;
+		GtkWidget *image, *label, *button;
+		GtkWidget *event_box, *event_hbox, *hbox;
 		GtkWidget *popup_menu;
+		GtkSettings *settings;
 		gint w, h;
 
+		/* fetch the size of an icon */
 		settings = gtk_widget_get_settings (view);
-
 		gtk_icon_size_lookup_for_settings (settings,
 						   GTK_ICON_SIZE_MENU,
 						   &w, &h);
 
-		label = gtk_label_new (name);
-		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		/* create our layout/event boxes */
+		event_box = eel_input_event_box_new();
+		event_hbox = gtk_hbox_new (FALSE, 0);
+		hbox = gtk_hbox_new (FALSE, 0);
 
+		/* setup the close button */
 		button = gtk_button_new ();
-				
+		gtk_button_set_relief ( GTK_BUTTON (button),
+					GTK_RELIEF_NONE);
 		g_signal_connect (button, "clicked",
 				  G_CALLBACK (gedit_mdi_child_tab_close_clicked),
 				  view);
 		
-		gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+		/* setup the close button's image */
 		image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 		gtk_widget_set_size_request (button, w + 2, h + 2);
-
 		gtk_container_add (GTK_CONTAINER (button), image);
 		
+		/* setup the document image */
 		image = gtk_image_new ();
 		set_tab_icon (image, child);
-		
 		gtk_widget_show (image);
 
-		hbox = gtk_hbox_new (FALSE, 2);
+		/* setup the tab title */
+		label = gtk_label_new (name);
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		gtk_misc_set_padding (GTK_MISC (label), 4, 0);
 
-		event_box = gtk_event_box_new ();
+		/* pack the elements */
+		gtk_box_pack_start (GTK_BOX (event_hbox), image, FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (event_hbox), label, TRUE, FALSE, 0);
+		gtk_container_add (GTK_CONTAINER (event_box), event_hbox);
+
+		/* setup the data hierarchy */
+		g_object_set_data (G_OBJECT (hbox), "label", label);
+		g_object_set_data (G_OBJECT (hbox), "image", image);
+		g_object_set_data (G_OBJECT (hbox), "event_box", event_box);
 			
-		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
+		/* pack our top-level layout box */
+		gtk_box_pack_start (GTK_BOX (hbox), event_box, TRUE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 		
-		g_object_set_data (G_OBJECT (event_box), "label", label);
-		g_object_set_data (G_OBJECT (event_box), "image", image);
-		
+		/* setup popup menu */
 		popup_menu = create_popup_menu (child, view);
 		
+		/* un/set widget flags. otherwise  menu_attach() iterates
+		 * upwards (hierarchically) and rejects our event_box. 
+		 */
+		GTK_WIDGET_UNSET_FLAGS (event_box, GTK_NO_WINDOW);
 		gnome_popup_menu_attach (popup_menu, event_box, NULL);
+		GTK_WIDGET_SET_FLAGS (event_box, GTK_NO_WINDOW);
 
-		gtk_container_add (GTK_CONTAINER (event_box), hbox);
+		/* setup the tooltip */
+		gtk_tooltips_set_tip (tooltips, event_box, uri, NULL);
 
-		gtk_widget_show_all (event_box);
-		ret = event_box;
+		/* show all children of our newly-created tab pane */
+		gtk_widget_show_all (hbox);
+
+		ret = hbox;
 	}
-
-	gtk_tooltips_set_tip (tooltips, ret, uri, NULL);
 
 	g_free (name);
 	g_free (uri);

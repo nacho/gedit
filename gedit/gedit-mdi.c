@@ -414,7 +414,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	widget = gtk_statusbar_new ();
 	control = bonobo_control_new (widget);
 	
-	gtk_widget_set_size_request (widget, 180, 10);
+	gtk_widget_set_size_request (widget, 240, 10);
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
 
 	bonobo_ui_component_object_set (ui_component,
@@ -432,7 +432,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	widget = gtk_statusbar_new ();
 	control = bonobo_control_new (widget);
 	
-	gtk_widget_set_size_request (widget, 150, 10);	
+	gtk_widget_set_size_request (widget, 160, 10);	
 	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
 	
 	bonobo_ui_component_object_set (ui_component,
