@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <string.h>
 #include "gnome-recent-util.h"
 
 /* ripped out of gedit2 */
