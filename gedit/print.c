@@ -157,12 +157,15 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	if (file_printpreview)
 	{
 		gint selection_flag;
+#ifdef GEDIT_PRINT_SELECTION		
 		guint start_pos, end_pos;
 
-		if (gedit_view_get_selection (pji->view, &start_pos, &end_pos))
-			selection_flag = GNOME_PRINT_RANGE_SELECTION;
-		else
+		if (!gedit_view_get_selection (pji->view, &start_pos, &end_pos))
 			selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
+		else
+#endif
+			selection_flag = GNOME_PRINT_RANGE_SELECTION;
+		
 
 		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
@@ -194,6 +197,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
 
+#ifdef GEDIT_PRINT_SELECTION		
 		if (pji->range == GNOME_PRINT_RANGE_SELECTION)
 		{
 			g_free (pji->buffer);
@@ -213,6 +217,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 				 pji->pages);
 			*/
 		}
+#endif		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
 	else
