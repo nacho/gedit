@@ -443,6 +443,23 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 }
 
 void 
+gedit_cmd_help_contents (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GError *error = NULL;
+
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	gnome_help_display_with_doc_id (NULL, NULL, "gedit.xml", NULL, &error);
+	
+	if (error != NULL)
+	{
+		g_warning (error->message);
+
+		g_error_free (error);
+	}
+}
+
+void 
 gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	static GtkWidget *about = NULL;

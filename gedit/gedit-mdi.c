@@ -626,10 +626,10 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	if (!gedit_settings->statusbar_view_cursor_position &&
 	    !gedit_settings->statusbar_view_overwrite_mode)
 		bonobo_ui_component_set_prop (
-			ui_component, "/status/item", "resize_grip", "1", NULL);
+			ui_component, "/status/main", "resize_grip", "1", NULL);
 	else
 		bonobo_ui_component_set_prop (
-			ui_component, "/status/item", "resize_grip", "0", NULL);
+			ui_component, "/status/main", "resize_grip", "0", NULL);
 
 error:
 	bonobo_ui_component_thaw (ui_component, NULL);
