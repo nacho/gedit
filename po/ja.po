@@ -4,20 +4,20 @@
 # Yuusuke Tahara <tahara@gnome.gr.jp>
 # Yukihiro Nakai <nakai@gnome.gr.jp>
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
-# KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003
+# KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 # Takeshi AIHANA <aihana@gnome.gr.jp>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
-"POT-Creation-Date: 2003-08-26 23:48+0200\n"
-"PO-Revision-Date: 2003-09-05 00:45+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-10-30 01:01+0900\n"
+"PO-Revision-Date: 2003-10-30 00:48+0900\n"
+"Last-Translator: KAMAGASASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -47,7 +47,7 @@ msgstr "gedit オートメーション・ファクトリ"
 msgid "Edit text files"
 msgstr "テキスト・ファイルを編集します"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:365
 msgid "Text Editor"
 msgstr "GNOME テキスト・エディタ"
 
@@ -71,7 +71,7 @@ msgstr "自動保存"
 msgid "Auto Save Interval"
 msgstr "自動保存の間隔"
 
-#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
+#: data/gedit.schemas.in.h:5
 msgid "Auto indent"
 msgstr "自動インデント"
 
@@ -112,18 +112,26 @@ msgid "Display Line Numbers"
 msgstr "行番号の表示"
 
 #: data/gedit.schemas.in.h:13
+msgid "Display Right Margin"
+msgstr "右マージンを表示"
+
+#: data/gedit.schemas.in.h:14
 msgid "Editor Font"
 msgstr "エディタのフォント"
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:15
+msgid "Enable Syntax Highlighting"
+msgstr "強調表示を有効にする"
+
+#: data/gedit.schemas.in.h:16
 msgid "Encoding for Saving"
 msgstr "保存に使用するエンコーディング"
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
 msgstr "メニューに表示するエンコーディング"
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -131,7 +139,7 @@ msgstr ""
 "バックアップ・ファイル名に使われる拡張子を指定します。これは \"バックアップコ"
 "ピーの作成\" オプションが有効になっている場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -139,7 +147,7 @@ msgstr ""
 "編集領域にあるテキストを選択した際に使用する色を指定します。これは \"デフォル"
 "ト色を使う\" オプションが無効の場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -147,11 +155,11 @@ msgstr ""
 "編集領域にあるテキストの選択を解除した際に使用する色を指定します。これは \"デ"
 "フォルト色を使う\" オプションが無効の場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
 msgstr "印刷時のヘッダに使用するフォント"
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:22
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -160,19 +168,19 @@ msgstr ""
 "この値が 0 の場合は文書を印刷する時に行番号を挿入しません。それ以外の場合は "
 "gedit は行番号を印刷します。"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
 msgstr "空白の挿入"
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
 msgstr "印刷時の行番号に使用するフォント"
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
 msgstr "行の折り返しモード"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:26
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -180,16 +188,16 @@ msgstr ""
 "開く/保存のファイル選択ダイアログの文字コード・メニューの中に表示するエンコー"
 "ディングのリストです。認識したエンコーディングのみ使用します。"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:27
 msgid "Maximum Recent Files"
 msgstr "最近使ったファイルの最大値"
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr ""
 "gedit で \"元に戻す\" や \"やり直す\" ことができる動作の最大数を指定します"
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -197,31 +205,35 @@ msgstr ""
 "変更したファイルを gedit が自動的に保存するまでの時間を指定します。これは "
 "\"自動保存\" オプションが有効の場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Print Header"
 msgstr "ヘッダの印刷"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Line Numbers"
 msgstr "行番号の印刷"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Syntax Highlighting"
 msgstr "強調表示の印刷"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Printing Line Wrapping Mode"
 msgstr "印刷時の行の折り返しモード"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
+msgid "Right Margin Position"
+msgstr "右マージンの位置"
+
+#: data/gedit.schemas.in.h:35
 msgid "Selected Text Color"
 msgstr "選択したテキストの色"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:36
 msgid "Selection Color"
 msgstr "選択範囲の色"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -231,7 +243,7 @@ msgstr ""
 "のリストです。\"CURRENT\" は現在使用しているロケールになります。認識したエン"
 "コーディングのみ使用します。"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -245,7 +257,7 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに印刷されるか確認して下さ"
 "い。"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:39
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -259,12 +271,12 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに表示されるか確認して下さ"
 "い。"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "文書を印刷する際の本文に使用するフォントを指定します。"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -272,7 +284,7 @@ msgstr ""
 "印刷する際の行番号に使用するフォントを指定します。これは \"行番号の印刷\" オ"
 "プションが 0 以外の場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -280,24 +292,28 @@ msgstr ""
 "文書を印刷する際のページ・ヘッダに使用するフォントを指定します。これは \"ヘッ"
 "ダの印刷\" オプションが有効の場合のみ効果があります。"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "\"最近使ったファイル\" のサブメニューに表示するエントリの最大数を指定します。"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "タブ文字の代わりに表示されるスペースの数を指定します。"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:45
+msgid "Specifies the position of the right margin."
+msgstr "右マージンの位置を指定します。"
+
+#: data/gedit.schemas.in.h:46
 msgid "Status Bar is Visible"
 msgstr "ステータスバーの表示"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -314,15 +330,15 @@ msgstr ""
 "することに注意して下さい。そしてここで記述したとおりに表示されるか確認して下"
 "さい。"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:48
 msgid "Tab Size"
 msgstr "タブのサイズ"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:49
 msgid "Text Color"
 msgstr "テキストの色"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:50
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -347,27 +363,27 @@ msgstr ""
 "それ以外は UTF-8 が使われます。値は大文字小文字を区別することに注意して下さ"
 "い。そしてここで記述したとおりに保存されるか確認して下さい。"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Toolbar Buttons Style"
 msgstr "ツールバーボタンのスタイル"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Toolbar is Visible"
 msgstr "ツールバーの表示可否"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Undo Actions Limit"
 msgstr "\"やり直す\" 動作の限度"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Use Default Colors"
 msgstr "デフォルト色を使う"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Use Default Font"
 msgstr "デフォルトのフォントを使う"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -376,7 +392,7 @@ msgstr ""
 "指定時間後に変更されたファイルを gedit が自動的に保存するかどうかを指定しま"
 "す。\"自動保存の間隔\" オプションで時間を設定できます。"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -385,36 +401,44 @@ msgstr ""
 "\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張子を"
 "設定することができます。"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "編集領域に行番号を表示するかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
+msgid "Whether gedit should display the right margin in the editing area."
+msgstr "編集領域に右マージンを表示するかどうかを指定します。"
+
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should enable auto indentation."
 msgstr "自動インデントを有効にするかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:61
+msgid "Whether gedit should enable syntax highlighting."
+msgstr "強調表示を有効にするかどうかを指定します。"
+
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "文書を印刷する際に文書のヘッダを含めるかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "タブ文字の代わりに空白文字を使うかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "文書を印刷する際に強調表示を印刷するかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "編集ウィンドウの下にステータスバーを表示させるかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:66
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "編集ウィンドウ内にツールバーを表示するかどうかを指定します。"
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -425,7 +449,7 @@ msgstr ""
 "無効の場合は、編集領域の色は \"背景色\"、\"テキストの色\"、\"選択したテキスト"
 "の色\"、\"選択範囲の色\" オプションで指定されたものになります。"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -451,7 +475,7 @@ msgid "_Go to Line"
 msgstr "指定行へジャンプ(_G)"
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:186
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:108
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #, c-format
 msgid "Could not find the required widgets inside %s."
@@ -551,24 +575,27 @@ msgstr ""
 "行番号を印刷する際に使用するフォントを選択する場合は、このボタンをクリックし"
 "て下さい"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:587
-msgid "Could not find '"
-msgstr "glade ファイルが見つかりませんでした:"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:587
-#: gedit/dialogs/gedit-page-setup-dialog.c:629
+#: gedit/dialogs/gedit-page-setup-dialog.c:591
+#, c-format
 msgid ""
-"page-setup-dialog.glade2'.\n"
+"Could not find '%s'.\n"
 "\n"
-"Reinstall gedit."
+"Please, reinstall gedit"
 msgstr ""
-"page-setup-dialog.glade2\n"
+"'%s' が見つかりませんでした。\n"
 "\n"
 "gedit を再インストールして下さい。"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:628
-msgid "Could not find the required widgets inside '"
-msgstr "要求したウィジットが見つかりませんでした:"
+#: gedit/dialogs/gedit-page-setup-dialog.c:641
+#, c-format
+msgid ""
+"Could not find the required widgets inside '%s'.\n"
+"\n"
+"Please, reinstall gedit."
+msgstr ""
+"%s の中に要求したウィジットが見つかりませんでした。\n"
+"\n"
+"gedit を再インストールして下さい。"
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
@@ -590,12 +617,12 @@ msgstr ""
 "プラグイン・マネージャの glade ファイルが無効です。一部のウィジットが見つかり"
 "ませんでした。\n"
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:78
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
 msgid "Set program location..."
 msgstr "プログラムの格納場所の設定..."
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:106
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:115
 #, c-format
 msgid ""
 "The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
@@ -607,79 +634,24 @@ msgstr ""
 "\n"
 "プログラム <tt>%s</tt> の格納場所を指定して下さい。"
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:152
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:167
 msgid "The selected file is not executable."
 msgstr "選択したファイルは実行可能ではありません。"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:197
-msgid "Font & Colors"
-msgstr "フォントと色"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:199
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Tabs"
-msgstr "タブ"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:200
-msgid "Wrap Mode"
-msgstr "折り返しモード"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:201
-msgid "Auto Indent"
-msgstr "自動インデント"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:202
-msgid "Line Numbers"
-msgstr "行番号"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:203
-#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
-msgid "Save"
-msgstr "保存"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:204
-#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
-msgid "Undo"
-msgstr "元に戻す"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:213
-msgid "Manager"
-msgstr "マネージャ"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:221
-msgid "Editor"
-msgstr "エディタ"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:223
-msgid "Plugins"
-msgstr "プラグイン"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:295
-msgid "Cat_egories:"
-msgstr "カテゴリ(_E):"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:317
-msgid "Preferences"
-msgstr "設定"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:557
-msgid "Categories"
-msgstr "カテゴリ"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:787
+#: gedit/dialogs/gedit-preferences-dialog.c:718
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "エディタで使用するフォントを選択する場合は、このボタンをクリックして下さい"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:790
+#: gedit/dialogs/gedit-preferences-dialog.c:721
 msgid "Push this button to configure text color"
 msgstr "テキスト色の設定をする場合は、このボタンをクリックして下さい"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:792
+#: gedit/dialogs/gedit-preferences-dialog.c:723
 msgid "Push this button to configure background color"
 msgstr "背景色を設定する場合は、このボタンをクリックして下さい"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:794
+#: gedit/dialogs/gedit-preferences-dialog.c:725
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -687,11 +659,34 @@ msgstr ""
 "テキストを選択した際に表示する色を設定する場合は、このボタンをクリックして下"
 "さい"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:797
+#: gedit/dialogs/gedit-preferences-dialog.c:728
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "マークしたテキスト色を設定する場合は、このボタンをクリックして下さい"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1078
+msgid "Elements"
+msgstr "要素"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1170
+msgid "Could not find '"
+msgstr "glade ファイルが見つかりませんでした:"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1170
+#: gedit/dialogs/gedit-preferences-dialog.c:1275
+msgid ""
+"gedit-preferences.glade2'.\n"
+"\n"
+"Reinstall gedit."
+msgstr ""
+"page-setup-dialog.glade2'\n"
+"\n"
+"gedit を再インストールして下さい。"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1274
+msgid "Could not find the required widgets inside '"
+msgstr "要求したウィジットが見つかりませんでした:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -700,158 +695,216 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
+msgid "<b>Auto Indentation</b>"
+msgstr "<b>自動インデント</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:3
+msgid "<b>Elements</b>"
+msgstr "<b>要素</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+msgid "<b>File Saving</b>"
+msgstr "<b>ファイルの保存</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Font</b>"
 msgstr "<b>フォント</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:3
-msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">自動インデント</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:4
-msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">フォントと色</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">行番号</span>"
-
 #: gedit/dialogs/gedit-preferences.glade2.h:6
-msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">マネージャ</span>"
+#: gedit/dialogs/page-setup-dialog.glade2.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>行番号</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:7
-msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">保存</span>"
+msgid "<b>Right Margin</b>"
+msgstr "<b>右マージン</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">タブ</span>"
+msgid "<b>Tabs</b>"
+msgstr "<b>タブ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">取り消し</span>"
+#: gedit/dialogs/page-setup-dialog.glade2.h:3
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>テキストの折り返し</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">折り返しモード</span>"
+msgid "<b>Undo</b>"
+msgstr "<b>取り消し</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">色</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:12
+msgid "Bold"
+msgstr "太字"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "保存する前にファイルのバックアップ・コピーを作成する(_B)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:14
+msgid "D_isplay right margin"
+msgstr "右マージンを表示する(_I)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "単語を 2 行以上に分割しない(_S)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
+#: gedit/dialogs/gedit-preferences.glade2.h:16
+msgid "Editor"
+msgstr "エディタ"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor _font: "
 msgstr "エディタのフォント(_F):"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "Enable _auto indentation"
-msgstr "自動インデントを有効にする(_A)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "テキストの折り返しを有効にする(_W)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Fonts & Colors"
+#: gedit/dialogs/gedit-preferences.glade2.h:19
+msgid "Font & Colors"
 msgstr "フォントと色"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:19
+#: gedit/dialogs/gedit-preferences.glade2.h:20
+msgid "Highlight _mode:"
+msgstr "強調表示モード(_M):"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "タブの代わりにスペースを挿入する(_S)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:20
-msgid "LOGO"
-msgstr "LOGO"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:21
-msgid "Line numbers"
-msgstr "行番号"
-
 #: gedit/dialogs/gedit-preferences.glade2.h:22
-msgid "Pick the background color"
-msgstr "背景色の取得"
+msgid "Italic"
+msgstr "斜体"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
-msgid "Pick the selected text color"
-msgstr "テキストを選択した際の色の取得"
+msgid "Normal _text color:"
+msgstr "ノーマルなテキストの色(_T):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Pick the selection color"
-msgstr "選択範囲の色の取得"
+msgid "Pick a color"
+msgstr "色を取得します"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
-msgid "Pick the text color"
-msgstr "テキスト色の取得"
+msgid "Pick the background color"
+msgstr "背景色を取得します"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:26
-msgid "Plugin manager"
-msgstr "プラグイン・マネージャ"
+msgid "Pick the editor font"
+msgstr "エディタのフォントを取得します"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:27
+msgid "Pick the normal text color"
+msgstr "ノーマルなテキスト色を取得します"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:28
+msgid "Pick the selected text color"
+msgstr "テキストを選択した際の色を取得します"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:29
+msgid "Pick the selection color"
+msgstr "選択範囲の色を取得します"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:30
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:31
+msgid "Preferences"
+msgstr "設定"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Se_lection color:"
 msgstr "選択範囲の色(_L):"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Selecte_d text color:"
 msgstr "選択されたテキストの色(_D):"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Set _tabs width equivalent to"
-msgstr "タブ幅(_T):"
+#: gedit/dialogs/gedit-preferences.glade2.h:34
+msgid "Strikethrough"
+msgstr "打ち消し線"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Set limit on _undo actions to"
-msgstr "元に戻せる回数(_U):"
+#: gedit/dialogs/gedit-preferences.glade2.h:35
+msgid "Syntax Highlighting"
+msgstr "強調表示"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "U_se default theme colors"
 msgstr "デフォルト・テーマの色を使う(_S)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
-msgid "Wrap mode"
-msgstr "折り返しモード"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:36
-msgid "_Autosave current file every"
-msgstr "自動保存する周期(_A) "
-
 #: gedit/dialogs/gedit-preferences.glade2.h:37
+msgid "Underline"
+msgstr "下線"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:38
+msgid "View"
+msgstr "表示"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:39
+msgid "_Autosave files every"
+msgstr "すべてのファイルを自動保存する(_A)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Background color:"
 msgstr "背景色(_B): "
 
-#: gedit/dialogs/gedit-preferences.glade2.h:38
+#: gedit/dialogs/gedit-preferences.glade2.h:41
+msgid "_Background:"
+msgstr "背景(_B):"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Display line numbers"
 msgstr "行番号を表示する(_D)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "_Text color:"
-msgstr "テキストの色(_T):"
+#: gedit/dialogs/gedit-preferences.glade2.h:43
+msgid "_Enable auto indentation"
+msgstr "自動インデントを有効にする(_E)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:40
+#: gedit/dialogs/gedit-preferences.glade2.h:44
+msgid "_Enable syntax highlighting"
+msgstr "文法の強調表示を有効にする(_E)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:45
+msgid "_Foreground:"
+msgstr "前景(_F):"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:46
+msgid "_Limit to"
+msgstr "限界(_L)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:47
+msgid "_Reset to Default "
+msgstr "デフォルトに戻る(_R)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:48
+msgid "_Right margin at column:"
+msgstr "列の右マージン(_R):"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:49
+msgid "_Tabs width:"
+msgstr "タブの幅(_T):"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:50
+msgid "_Unlimited undo"
+msgstr "無制限の取り消し(_U)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Use default theme font"
 msgstr "デフォルト・テーマのフォントを使う(_U)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "_action(s)"
-msgstr "回(_A)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:42
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_minutes"
 msgstr "分(_M)"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "character(s)"
-msgstr "文字"
+#: gedit/dialogs/gedit-preferences.glade2.h:53
+msgid "act_ions"
+msgstr "回(_I)"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -946,14 +999,6 @@ msgstr "指定行へジャンプ"
 msgid "_Line number:"
 msgstr "行番号(_L):"
 
-#: gedit/dialogs/page-setup-dialog.glade2.h:2
-msgid "<b>Line Numbers</b>"
-msgstr "<b>行番号</b>"
-
-#: gedit/dialogs/page-setup-dialog.glade2.h:3
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>テキストの折り返し</b>"
-
 #: gedit/dialogs/page-setup-dialog.glade2.h:6
 msgid "Fonts"
 msgstr "フォント"
@@ -1003,22 +1048,18 @@ msgid "lines"
 msgstr "行"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
-msgid "About selected plugin"
-msgstr "選択したプラグインの情報を表示します"
-
-#: gedit/dialogs/plugin-manager.glade2.h:2
 msgid "C_onfigure Plugin"
 msgstr "プラグインの設定(_O)"
 
-#: gedit/dialogs/plugin-manager.glade2.h:3
-msgid "Configure the selected plugin"
-msgstr "選択したプラグインを設定します"
+#: gedit/dialogs/plugin-manager.glade2.h:2
+msgid "_About Plugin"
+msgstr "プラグインについて(_A)"
 
-#: gedit/dialogs/plugin-manager.glade2.h:4
+#: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "button1"
 msgstr "button1"
 
-#: gedit/dialogs/plugin-manager.glade2.h:5
+#: gedit/dialogs/plugin-manager.glade2.h:4
 msgid "dialog1"
 msgstr "dialog1"
 
@@ -1084,7 +1125,7 @@ msgstr "開くファイルの格納場所 (URI) を入力して下さい:"
 msgid "Open from URI"
 msgstr "URIから開く..."
 
-#: gedit/gedit-commands.c:564
+#: gedit/gedit-commands.c:553
 msgid "translator_credits"
 msgstr ""
 "Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
@@ -1094,13 +1135,14 @@ msgstr ""
 "KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Takeshi AIHANA <aihana@gnome.gr.jp>"
 
-#: gedit/gedit-commands.c:589
+#: gedit/gedit-commands.c:578
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:593
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit は GNOME 用に作られた小型軽量のテキストエディタです"
+#: gedit/gedit-commands.c:582
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
+msgstr ""
+"gedit は GNOME デスクトップ用に作られた小型軽量のテキスト・エディタです"
 
 #: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 #, c-format
@@ -1418,11 +1460,17 @@ msgstr "不明"
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi.c:450
+#. Translators: %s is a URI
+#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:414
+#, c-format
+msgid "Open '%s'"
+msgstr "'%s' を開く"
+
+#: gedit/gedit-mdi.c:488
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: gedit/gedit-mdi.c:954
+#: gedit/gedit-mdi.c:994
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1432,35 +1480,35 @@ msgstr ""
 "ドキュメント \"%s\" の変更を保存してもよろしいですか？\n"
 "保存しない場合は変更が失われてしまいます。"
 
-#: gedit/gedit-mdi.c:959
+#: gedit/gedit-mdi.c:999
 msgid "Do_n't save"
 msgstr "保存しない(_N)"
 
-#: gedit/gedit-mdi.c:978
+#: gedit/gedit-mdi.c:1018
 msgid "_Don't quit"
 msgstr "終了しない(_D)"
 
-#: gedit/gedit-mdi.c:982
+#: gedit/gedit-mdi.c:1022
 msgid "_Don't close"
 msgstr "閉じない(_D)"
 
-#: gedit/gedit-mdi.c:1075
+#: gedit/gedit-mdi.c:1115
 msgid "(modified)"
 msgstr "(修正しました)"
 
-#: gedit/gedit-mdi.c:1081
+#: gedit/gedit-mdi.c:1121
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
 
-#: gedit/gedit-mdi.c:1676
+#: gedit/gedit-mdi.c:1716
 msgid "Normal"
 msgstr "通常"
 
-#: gedit/gedit-mdi.c:1677
+#: gedit/gedit-mdi.c:1717
 msgid "Use Normal highlight mode"
 msgstr "通常の強調表示モードにします"
 
-#: gedit/gedit-mdi.c:1753
+#: gedit/gedit-mdi.c:1793
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
@@ -1481,48 +1529,48 @@ msgstr "この出力ウィンドウをクリアします"
 msgid "Output Lines"
 msgstr "出力行"
 
-#: gedit/gedit-plugins-engine.c:362
+#: gedit/gedit-plugins-engine.c:363
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "エラー: モジュール・ファイル '%s'を開けません。\n"
 
-#: gedit/gedit-plugins-engine.c:372
+#: gedit/gedit-plugins-engine.c:373
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "エラー: プラグイン '%s' は init 関数を含んでいません。"
 
-#: gedit/gedit-plugins-engine.c:382
+#: gedit/gedit-plugins-engine.c:383
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "エラー: プラグイン '%s' は activate 関数を含んでいません。"
 
-#: gedit/gedit-plugins-engine.c:392
+#: gedit/gedit-plugins-engine.c:393
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "エラー: プラグイン '%s' は deactivate 関数を含んでいません。"
 
-#: gedit/gedit-plugins-engine.c:417
+#: gedit/gedit-plugins-engine.c:418
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "エラー: プラグイン '%s' を初期化できません。"
 
-#: gedit/gedit-plugins-engine.c:468
+#: gedit/gedit-plugins-engine.c:469
 #, c-format
 msgid "Error, impossible to destroy plugin '%s'"
 msgstr "エラー: プラグイン '%s' を無効にできません。"
 
-#: gedit/gedit-plugins-engine.c:551 gedit/gedit-plugins-engine.c:639
-#: gedit/gedit-plugins-engine.c:764
+#: gedit/gedit-plugins-engine.c:552 gedit/gedit-plugins-engine.c:640
+#: gedit/gedit-plugins-engine.c:765
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "エラー: プラグイン '%s' を起動できません。"
 
-#: gedit/gedit-plugins-engine.c:590 gedit/gedit-plugins-engine.c:782
+#: gedit/gedit-plugins-engine.c:591 gedit/gedit-plugins-engine.c:783
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "エラー: プラグイン '%s' を停止できません。"
 
-#: gedit/gedit-plugins-engine.c:683
+#: gedit/gedit-plugins-engine.c:684
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "エラー: プラグイン '%s' の UI を更新できません。"
@@ -1531,7 +1579,7 @@ msgstr "エラー: プラグイン '%s' の UI を更新できません。"
 msgid "Cannot initialize preferences manager."
 msgstr "設定マネージャを初期化できません。"
 
-#: gedit/gedit-prefs-manager.c:1136
+#: gedit/gedit-prefs-manager.c:1151
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "キー %3$s の `%1$s' を期待しましたが `%2$s' を得ました"
@@ -1652,8 +1700,8 @@ msgid "Go to _Line..."
 msgstr "指定行へジャンプ(_L)..."
 
 #: gedit/gedit-ui.xml.h:23
-msgid "Go to a specific line number"
-msgstr "指定した行にカーソルを移動します"
+msgid "Go to a specific line"
+msgstr "指定した行に移動します"
 
 #: gedit/gedit-ui.xml.h:24
 msgid "Main toolbar"
@@ -1736,48 +1784,52 @@ msgid "Redo the undone action"
 msgstr "最後に実行した操作をやり直します"
 
 #: gedit/gedit-ui.xml.h:47
-msgid "Replace a string"
-msgstr "文字列を置換します"
-
-#: gedit/gedit-ui.xml.h:48
 msgid "Revert"
 msgstr "戻す"
 
-#: gedit/gedit-ui.xml.h:49
+#: gedit/gedit-ui.xml.h:48
 msgid "Revert to a saved version of the file"
 msgstr "保存したファイルのバージョンへ戻します"
 
-#: gedit/gedit-ui.xml.h:51
+#: gedit/gedit-ui.xml.h:49
+msgid "Save"
+msgstr "保存"
+
+#: gedit/gedit-ui.xml.h:50
 msgid "Save As"
 msgstr "別名で保存"
 
-#: gedit/gedit-ui.xml.h:52
+#: gedit/gedit-ui.xml.h:51
 msgid "Save _As..."
 msgstr "別名で保存(_A)..."
 
-#: gedit/gedit-ui.xml.h:53
+#: gedit/gedit-ui.xml.h:52
 msgid "Save all open files"
 msgstr "開いている全てのファイルを保存します"
 
-#: gedit/gedit-ui.xml.h:54
+#: gedit/gedit-ui.xml.h:53
 msgid "Save the current file"
 msgstr "このファイルを保存します"
 
-#: gedit/gedit-ui.xml.h:55
+#: gedit/gedit-ui.xml.h:54
 msgid "Save the current file with a different name"
 msgstr "このファイルに名前を付けて保存します"
 
+#: gedit/gedit-ui.xml.h:55
+msgid "Search backwards for the same text"
+msgstr "同じ文字列を後方検索します"
+
 #: gedit/gedit-ui.xml.h:56
-msgid "Search again for the same string"
-msgstr "同じ文字列を再度検索します"
+msgid "Search for and replace text"
+msgstr "文字列を検索し置換します"
 
 #: gedit/gedit-ui.xml.h:57
-msgid "Search backwards for the same string"
-msgstr "同じ文字列を再度後方検索します"
+msgid "Search for text"
+msgstr "検索する文字列"
 
 #: gedit/gedit-ui.xml.h:58
-msgid "Search for a string"
-msgstr "文字を検索します"
+msgid "Search forwards for the same text"
+msgstr "同じ文字列を前方検索します"
 
 #: gedit/gedit-ui.xml.h:59
 msgid "Select All"
@@ -1817,6 +1869,10 @@ msgstr "ツールバーにある重要なアイコンの横にラベルを表示
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
 msgstr "重要なアイコンのテキスト(_E)"
+
+#: gedit/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "元に戻す"
 
 #: gedit/gedit-ui.xml.h:69
 msgid "Undo the last action"
@@ -2343,88 +2399,88 @@ msgstr "ファイル \"%s\" を作成できませんでした。"
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:685
+#: gedit/gedit-view.c:686
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "(%d 行, %d 列)"
 
-#: gedit/gedit-view.c:723
+#: gedit/gedit-view.c:724
 msgid "  OVR"
 msgstr " [上書き]"
 
-#: gedit/gedit-view.c:725
+#: gedit/gedit-view.c:726
 msgid "  INS"
 msgstr " [挿入]"
 
-#: gedit/gedit2.c:81
+#: gedit/gedit2.c:82
 msgid "Show utility debugging messages."
 msgstr "ユーティリティのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:84
+#: gedit/gedit2.c:85
 msgid "Show metadata debugging messages."
 msgstr "メタデータのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:88
 msgid "Show mdi debugging messages."
 msgstr "MDI のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:91
 msgid "Show commands debugging messages."
 msgstr "コマンドのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:94
 msgid "Show document debugging messages."
 msgstr "ドキュメントのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:97
 msgid "Show file debugging messages."
 msgstr "ファイルのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:99
+#: gedit/gedit2.c:100
 msgid "Show plugin debugging messages."
 msgstr "プラグインのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:102
+#: gedit/gedit2.c:103
 msgid "Show prefs debugging messages."
 msgstr "設定のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:105
+#: gedit/gedit2.c:106
 msgid "Show printing debugging messages."
 msgstr "印刷のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:108
+#: gedit/gedit2.c:109
 msgid "Show search debugging messages."
 msgstr "検索のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:111
+#: gedit/gedit2.c:112
 msgid "Show undo debugging messages."
 msgstr "元に戻すのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:114
+#: gedit/gedit2.c:115
 msgid "Show view debugging messages."
 msgstr "表示のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:117
+#: gedit/gedit2.c:118
 msgid "Show recent debugging messages."
 msgstr "最近使ったファイルのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:120
+#: gedit/gedit2.c:121
 msgid "Show session management debugging messages."
 msgstr "セッション管理のデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:123
+#: gedit/gedit2.c:124
 msgid "Turn on all debugging messages."
 msgstr "全てのデバッグ・メッセージを表示する"
 
-#: gedit/gedit2.c:126
+#: gedit/gedit2.c:127
 msgid "Quit an existing instance of gedit"
 msgstr "既に実行中の gedit を終了させる"
 
-#: gedit/gedit2.c:129
+#: gedit/gedit2.c:130
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "既に実行中の gedit に新しいトップレベル・ウィンドウを作成する"
 
-#: gedit/gedit2.c:132
+#: gedit/gedit2.c:133
 msgid "Create a new document in an existing instance of gedit"
 msgstr "既に実行中の gedit に新しいドキュメントを作成する"
 
@@ -2539,12 +2595,12 @@ msgid "Run a command"
 msgstr "コマンドを実行します"
 
 #: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:516
+#: plugins/shell_output/shell_output.c:523
 msgid "Stopped"
 msgstr "停止中"
 
 #: plugins/shell_output/shell_output.c:246
-msgid "An error occurs while running the selected command."
+msgid "An error occured while running the selected command."
 msgstr "選択したコマンドの実行中にエラーが発生しました。"
 
 #: plugins/shell_output/shell_output.c:302
@@ -2555,15 +2611,15 @@ msgstr "コマンドの実行"
 msgid "_Run"
 msgstr "実行(_R)"
 
-#: plugins/shell_output/shell_output.c:522
+#: plugins/shell_output/shell_output.c:529
 msgid "Done"
 msgstr "完了"
 
-#: plugins/shell_output/shell_output.c:524
+#: plugins/shell_output/shell_output.c:531
 msgid "Failed"
 msgstr "失敗しました"
 
-#: plugins/shell_output/shell_output.c:696
+#: plugins/shell_output/shell_output.c:703
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2573,7 +2629,7 @@ msgstr ""
 "\n"
 "正しい SHELL コマンドを入力して下さい。"
 
-#: plugins/shell_output/shell_output.c:729
+#: plugins/shell_output/shell_output.c:736
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2583,7 +2639,7 @@ msgstr ""
 "\n"
 "正しい SHELL コマンドを挿入して下さい。"
 
-#: plugins/shell_output/shell_output.c:815
+#: plugins/shell_output/shell_output.c:822
 msgid "Executing command"
 msgstr "コマンドの実行中"
 
@@ -2785,7 +2841,11 @@ msgstr "ロシア語"
 msgid "Swedish"
 msgstr "スウェーデン語"
 
-#: plugins/spell/gedit-spell-checker.c:734
+#: plugins/spell/gedit-spell-checker.c:102
+msgid "Ukrainian"
+msgstr "ウクライナ語"
+
+#: plugins/spell/gedit-spell-checker.c:735
 msgid "Default"
 msgstr "デフォルト"
 
@@ -2910,20 +2970,17 @@ msgid "Select the group of tags you want to use"
 msgstr "使用するタグのグループを選択して下さい"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
-msgid "Tag Groups Combo"
-msgstr "タグのグループ・コンボ"
+msgid "Available Tag Lists"
+msgstr "利用可能なタグの一覧"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
-msgid "Tags Name List"
-msgstr "タグ名の一覧"
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
+msgid "Tags"
+msgstr "タグ"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:188
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "このドキュメントに挿入するタグをダブル・クリックして下さい"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
-msgid "Tags"
-msgstr "タグ"
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
@@ -2948,19 +3005,19 @@ msgstr ""
 "タグ一覧のプラグインを使用すると、頻繁に使用するタグまたは文字列を (キーボー"
 "ドから) 入力せずに簡単にドキュメントに挿入できます。"
 
-#: plugins/time/time.c:48
+#: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
 msgstr "日付/時間の挿入(_S)"
 
-#: plugins/time/time.c:51
+#: plugins/time/time.c:53
 msgid "Insert current date and time at the cursor position"
 msgstr "カーソル位置に現在の日付と時間を挿入します"
 
-#: plugins/time/time.c:448
+#: plugins/time/time.c:450
 msgid "Available formats"
 msgstr "利用可能なフォーマット"
 
-#: plugins/time/time.c:552
+#: plugins/time/time.c:554
 msgid "Configure insert date/time plugin..."
 msgstr "日付/時間挿入プラグインの設定..."
 
@@ -3015,3 +3072,87 @@ msgstr "選択したテキストをクリップボードにコピーします"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "テキストのコピー(_C)"
+
+#~ msgid "Tabs"
+#~ msgstr "タブ"
+
+#~ msgid "Wrap Mode"
+#~ msgstr "折り返しモード"
+
+#~ msgid "Line Numbers"
+#~ msgstr "行番号"
+
+#~ msgid "Manager"
+#~ msgstr "マネージャ"
+
+#~ msgid "Cat_egories:"
+#~ msgstr "カテゴリ(_E):"
+
+#~ msgid "Categories"
+#~ msgstr "カテゴリ"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">自動インデント</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">フォントと色</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">行番号</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">マネージャ</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">保存</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">タブ</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">取り消し</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">折り返しモード</span>"
+
+#~ msgid "Fonts & Colors"
+#~ msgstr "フォントと色"
+
+#~ msgid "LOGO"
+#~ msgstr "LOGO"
+
+#~ msgid "Line numbers"
+#~ msgstr "行番号"
+
+#~ msgid "Plugin manager"
+#~ msgstr "プラグイン・マネージャ"
+
+#~ msgid "Set _tabs width equivalent to"
+#~ msgstr "タブ幅(_T):"
+
+#~ msgid "Set limit on _undo actions to"
+#~ msgstr "元に戻せる回数(_U):"
+
+#~ msgid "Wrap mode"
+#~ msgstr "折り返しモード"
+
+#~ msgid "character(s)"
+#~ msgstr "文字"
+
+#~ msgid "About selected plugin"
+#~ msgstr "選択したプラグインの情報を表示します"
+
+#~ msgid "Configure the selected plugin"
+#~ msgstr "選択したプラグインを設定します"
+
+#~ msgid "Replace a string"
+#~ msgstr "文字列を置換します"
+
+#~ msgid "Search again for the same string"
+#~ msgstr "同じ文字列を再度検索します"
+
+#~ msgid "Tag Groups Combo"
+#~ msgstr "タグのグループ・コンボ"
+
+#~ msgid "Tags Name List"
+#~ msgstr "タグ名の一覧"
