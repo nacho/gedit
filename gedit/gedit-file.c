@@ -33,8 +33,7 @@
 #include <config.h>
 #endif
 
-#include <libgnome/libgnome.h>
-#include <libgnomeui/libgnomeui.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
 
 #include <eel/eel-alert-dialog.h>
@@ -73,6 +72,12 @@ static void 	 document_loading_cb 		(GeditDocument       *document,
 
 
 static gchar* gedit_default_path = NULL;
+
+/* type of the elements of the uris_to_open list */
+typedef struct {
+	gchar *uri;
+	gboolean create;
+} UriToLoad;
 
 /* Global variables for managing async loading */
 static gint                 num_of_uris_to_open = 0;
@@ -853,24 +858,6 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 	return ret;
 }
 
-static void 
-create_new_file (const gchar *uri)
-{
-	gint ret;
-	GeditMDIChild *new_child;
-
-	new_child = gedit_mdi_child_new_with_uri (uri, NULL);
-	ret = bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
-	g_return_if_fail (ret != FALSE);
-	gedit_debug (DEBUG_COMMANDS, "Child added.");
-
-	ret = bonobo_mdi_add_view (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
-	g_return_if_fail (ret != FALSE);
-	gedit_debug (DEBUG_COMMANDS, "View added.");
-
-	gtk_widget_grab_focus (gedit_get_active_view ());
-}
-
 #define MAX_URI_IN_DIALOG_LENGTH 50
 
 static void
@@ -1009,11 +996,14 @@ document_loading_cb (GeditDocument *document,
 		     gboolean       reverting)
 {
 	static GTimer *d_timer = NULL;
-	
+	UriToLoad *utl;
 	gchar *uri;
 	double et;
 
-	uri = (gchar*)uris_to_open->data;
+	utl = (UriToLoad *)uris_to_open->data;
+	g_return_if_fail (utl != NULL);
+
+	uri = utl->uri;
 	g_return_if_fail (uri != NULL);
 
 	if (d_timer == NULL)
@@ -1070,10 +1060,14 @@ document_loaded_cb (GeditDocument *document,
 		    const GError  *error,
 		    GeditMDIChild *new_child)
 {
+	UriToLoad *utl;
 	gchar *uri;
 	gchar *uri_to_display;
-	
-	uri = (gchar*)uris_to_open->data;
+
+	utl = (UriToLoad *)uris_to_open->data;
+	g_return_if_fail (utl != NULL);
+
+	uri = utl->uri;
 	g_return_if_fail (uri != NULL);
 
 	show_progress_bar (NULL, FALSE, FALSE);
@@ -1154,13 +1148,14 @@ document_loaded_cb (GeditDocument *document,
 
 	/* Load the next file in the uris_to_open list */
 	g_free (uri);
+	g_free (utl);
 	uris_to_open = g_slist_delete_link (uris_to_open, uris_to_open);
 
 	open_files ();
 }
 
 static gboolean
-unref_real (const GSList *children)
+unref_real (GSList *children)
 {
 	g_slist_foreach (children, (GFunc)g_object_unref, NULL);
 
@@ -1184,70 +1179,106 @@ unref_not_opened_children ()
 }
 
 static void
+open_files_done ()
+{
+	/* Add all the views in the right order */
+	new_children = g_slist_reverse (new_children);
+
+	PROFILE (
+		g_message ("Document Loaded: %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	bonobo_mdi_add_views (BONOBO_MDI (gedit_mdi),
+			      new_children);
+
+	PROFILE (
+		g_message ("View added: %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	g_slist_free (new_children);
+	new_children = NULL;
+
+	/* Unref the children that were not opened to an error */
+	unref_not_opened_children ();
+	g_slist_free (children_to_unref);
+	children_to_unref = NULL;
+
+	if (num_of_uris_to_open > 1)
+	{
+		gedit_utils_set_status (NULL);
+		gedit_utils_flash_va (ngettext("Loaded %d file",
+					       "Loaded %d files", 
+					       opened_uris), 
+				      opened_uris);
+	}
+
+	/* Clean up temp variables */
+	num_of_uris_to_open = 0;
+	opened_uris = 0;
+	encoding_to_use = NULL;
+	line = -1;
+
+	PROFILE (
+		g_message ("Done all: %.3f", g_timer_elapsed (timer, NULL));
+		g_timer_destroy (timer);
+	)
+
+	gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_NORMAL);
+
+	return;
+}
+
+static void
 open_files ()
 {
 	GeditDocument  *active_document;
-	
-	gchar          *uri;
-	gchar          *uri_to_display;
+	UriToLoad *utl;
+	gchar *uri;
+	gchar *uri_to_display;
 
 	if (uris_to_open == NULL)
-	{		
-		/* Add all the views in the right order */
-		new_children = g_slist_reverse (new_children);
-
-		PROFILE (
-			g_message ("Document Loaded: %.3f", g_timer_elapsed (timer, NULL));
-		)
-		
-		bonobo_mdi_add_views (BONOBO_MDI (gedit_mdi),
-				      new_children);
-	
-		PROFILE (
-			g_message ("View added: %.3f", g_timer_elapsed (timer, NULL));
-		)
-	
-		g_slist_free (new_children);
-		new_children = NULL;
-
-		/* Unref the children that were not opened to an error */
-		unref_not_opened_children ();
-		g_slist_free (children_to_unref);
-		children_to_unref = NULL;
-		
-		if (num_of_uris_to_open > 1)
-		{
-			gedit_utils_set_status (NULL);
-			gedit_utils_flash_va (ngettext("Loaded %d file",
-						       "Loaded %d files", 
-						       opened_uris), 
-					      opened_uris);
-		}
-
-		/* Clean up temp variables */
-		num_of_uris_to_open = 0;
-		opened_uris = 0;
-		encoding_to_use = NULL;
-		line = -1;
-
-		PROFILE (
-			g_message ("Done all: %.3f", g_timer_elapsed (timer, NULL));
-			g_timer_destroy (timer);
-		)
-
-		gedit_mdi_set_state (gedit_mdi, GEDIT_STATE_NORMAL);
+	{
+		/* stop recursion */
+		open_files_done ();
 		return;
 	}
-	
-	uri = (gchar*)uris_to_open->data;
+
+	utl = (UriToLoad *)uris_to_open->data;
+	g_return_if_fail (utl != NULL);
+
+	uri = utl->uri;
 	g_return_if_fail (uri != NULL);
-	
+
 	gedit_debug (DEBUG_FILE, "File name: %s", uri);
+
+	uri_to_display = gnome_vfs_format_uri_for_display (uri);
+
+	/* create children for non existing files */
+	if (utl->create)
+	{
+		GeditMDIChild *new_child;
+
+		new_child = gedit_mdi_child_new_with_uri (uri, NULL);
+		bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+
+		new_children = g_slist_prepend (new_children, new_child);
+		opened_uris++;
+
+		gedit_utils_set_status (NULL);
+		gedit_utils_flash_va (_("Created file \"%s\""), uri_to_display);
+
+		g_free (uri_to_display);
+		g_free (uri);
+		g_free (utl);
+		uris_to_open = g_slist_delete_link (uris_to_open, uris_to_open);
+
+		open_files ();
+
+		return;
+	}
 
 	active_document = gedit_get_active_document ();
 	
-	uri_to_display = gnome_vfs_format_uri_for_display (uri);
-
 	PROFILE (
 		g_message ("URI to open: %.3f", g_timer_elapsed (timer, NULL));
 	)
@@ -1283,7 +1314,7 @@ open_files ()
 
 			g_free (uri_to_display);
 			g_free (uri);
-			 
+			g_free (utl);
 			uris_to_open = g_slist_delete_link (uris_to_open, uris_to_open);
 
 			open_files ();
@@ -1365,6 +1396,7 @@ gedit_file_open_uri_list (GSList *uri_list,
 	for (l = uri_list; l; l = l->next)
 	{
 		gchar *uri;
+		UriToLoad *u;
 
 		uri = gnome_vfs_make_uri_canonical ((const gchar*)l->data);
 
@@ -1376,15 +1408,22 @@ gedit_file_open_uri_list (GSList *uri_list,
 			continue;
 		}
 
+		u = g_new (UriToLoad, 1);
+
+		u->uri = uri;
+
 		if (create &&
 		    gedit_utils_uri_has_file_scheme (uri) &&
 		    !gedit_utils_uri_exists (uri))
 		{
-			create_new_file (uri);
-			continue;
+			u->create = TRUE;
+		}
+		else
+		{
+			u->create = FALSE;
 		}
 
-		uris_to_open = g_slist_prepend (uris_to_open, uri);
+		uris_to_open = g_slist_prepend (uris_to_open, u);
 	}
 
 	uris_to_open = g_slist_reverse (uris_to_open);
