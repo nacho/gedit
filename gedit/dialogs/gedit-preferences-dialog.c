@@ -751,6 +751,24 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 }
 
 static void
+enable_syntax_hl_button_toggled (GtkWidget              *button,
+				 GeditPreferencesDialog *dlg)
+{
+	g_return_if_fail (button == dlg->enable_syntax_hl_checkbutton);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+	{
+		gedit_prefs_manager_set_enable_syntax_highlighting (TRUE);
+		gtk_widget_set_sensitive (dlg->hl_vbox, TRUE);
+	}
+	else
+	{
+		gedit_prefs_manager_set_enable_syntax_highlighting (FALSE);
+		gtk_widget_set_sensitive (dlg->hl_vbox, FALSE);
+	}
+}
+
+static void
 language_changed_cb (GtkOptionMenu *optionmenu,
 		     GeditPreferencesDialog *dlg)
 {
@@ -1037,16 +1055,23 @@ reset_button_clicked (GtkButton              *button,
 static void
 setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 {
+	gboolean hl_enabled;
 	GtkWidget *menu;
 	const GSList *languages, *l;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 
+	/* Set initial state */
+	hl_enabled = gedit_prefs_manager_get_enable_syntax_highlighting ();
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->enable_syntax_hl_checkbutton),
+				      hl_enabled);
+	gtk_widget_set_sensitive (dlg->hl_vbox, hl_enabled);
+
 	/* Create GtkListStore for styles & setup treeview. */
 	dlg->tags_treeview_model = gtk_list_store_new (NUM_COLUMNS, 
 						       G_TYPE_STRING, 
 						       G_TYPE_STRING);
-	
+
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (dlg->tags_treeview_model),
 					      0, 
 					      GTK_SORT_ASCENDING);
@@ -1095,6 +1120,8 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 	
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (dlg->hl_mode_optionmenu), menu);
 
+	g_signal_connect (G_OBJECT (dlg->enable_syntax_hl_checkbutton), "toggled",
+			  G_CALLBACK (enable_syntax_hl_button_toggled), dlg);
 	g_signal_connect (G_OBJECT (dlg->bold_togglebutton), "toggled",
 			  G_CALLBACK (style_button_toggled), dlg);
 	g_signal_connect (G_OBJECT (dlg->italic_togglebutton), "toggled",

@@ -323,7 +323,7 @@ gedit_document_init (GeditDocument *document)
 				gedit_encoding_get_charset (enc));
 
 	gedit_document_set_max_undo_levels (document,
-					    gedit_prefs_manager_get_undo_actions_limit ());    
+					    gedit_prefs_manager_get_undo_actions_limit ());
 
 	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
 }
@@ -1406,8 +1406,6 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 
 	if (doc->priv->uri != NULL)
 		g_free (doc->priv->uri);
-		
-	g_return_if_fail (uri != NULL);
 
 	doc->priv->uri = g_strdup (uri);
 
@@ -2699,7 +2697,8 @@ gedit_document_set_language (GeditDocument *doc, GtkSourceLanguage *lang)
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
 	if (lang != NULL)
-		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), TRUE);
+		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc),
+						 gedit_prefs_manager_get_enable_syntax_highlighting ());
 	else
 		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), FALSE);
 
