@@ -2,13 +2,14 @@
 # Totally rewritten by Tom Mak <mhh@126.com>, 2001
 #   Minor update by Wang Jian <lark@linux.net.cn>, 2001
 #   Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002
+#   Miles Hoo <MilesHoo@sohu.com>, 2002
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "POT-Creation-Date: 2002-08-18 12:03+0000\n"
-"PO-Revision-Date: 2002-08-18 20:01\n"
-"Last-Translator: Mai Hao Hui <mhh@126.com>\n"
+"PO-Revision-Date: 2002-08-27 20:48+0800\n"
+"Last-Translator:  Miles Hoo <MilesHoo@sohu.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,13 +17,12 @@ msgstr ""
 "X-Generator: KBabel 0.8\n"
 
 #: data/GNOME_Gedit.server.in.h:1
-#, fuzzy
 msgid "gedit application"
-msgstr "剪切选中的范围"
+msgstr "gedit 程序"
 
 #: data/GNOME_Gedit.server.in.h:2
 msgid "gedit automation factory"
-msgstr ""
+msgstr "gedit 自动工厂"
 
 # SUN NEW TRANSLATION
 #: data/gedit.desktop.in.h:1
@@ -30,89 +30,84 @@ msgid "Edit text files"
 msgstr "编辑文本文件"
 
 #: data/gedit.desktop.in.h:2 src/gedit2.c:297
-#, fuzzy
 msgid "Text Editor"
-msgstr "退出"
+msgstr "文本编辑器"
 
 #: data/gedit.schemas.in.h:1
 msgid ""
 "A custom font that will be used for the editing area. This will only take "
 "effect if the \"Use Default Font\" option is turned off."
-msgstr ""
+msgstr "编辑区使用的自定义字体。只有当“使用默认字体”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Auto Save"
-msgstr "保存"
+msgstr "自动保存"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save Interval"
-msgstr ""
+msgstr "自动保存时间间隔"
 
 #: data/gedit.schemas.in.h:4
-#, fuzzy
 msgid "Background Color"
-msgstr "背景色(_B)："
+msgstr "背景色"
 
 #: data/gedit.schemas.in.h:5
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
-msgstr ""
+msgstr "编辑区选定文本的背景色。只有当“使用默认颜色”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:6
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
-msgstr ""
+msgstr "编辑区未选定文本的背景色。只有当“使用默认颜色”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:7
 msgid "Backup Copy Extension"
-msgstr ""
+msgstr "备份文件扩展名"
 
 #: data/gedit.schemas.in.h:8
 msgid "Body Font for Printing"
-msgstr ""
+msgstr "打印时文档主体所用字体"
 
 #: data/gedit.schemas.in.h:9
 msgid "Create Backup Copies"
-msgstr ""
+msgstr "生成备份文件"
 
 #: data/gedit.schemas.in.h:10
-#, fuzzy
 msgid "Display Line Numbers"
-msgstr "行号："
+msgstr "显示行号"
 
 #: data/gedit.schemas.in.h:11
-#, fuzzy
 msgid "Editor Font"
-msgstr "退出"
+msgstr "编辑字体"
 
 #: data/gedit.schemas.in.h:12
 msgid "Encoding for Saving"
-msgstr ""
+msgstr "保存时的编码"
 
 #: data/gedit.schemas.in.h:13
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
-msgstr ""
+msgstr "备份文件的扩展名或后缀。只有当“生成备份文件”选项选中时才有效。"
 
 #: data/gedit.schemas.in.h:14
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
-msgstr ""
+msgstr "编辑区选定文本的前景色。只有当“使用默认颜色”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:15
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
-msgstr ""
+msgstr "编辑区未选定文本的前景色。只有当“使用默认颜色”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:16
 msgid "Header Font for Printing"
-msgstr ""
+msgstr "打印时文档头所用的字体"
 
 #: data/gedit.schemas.in.h:17
 msgid ""
@@ -120,68 +115,57 @@ msgid ""
 "document. Otherwise, gedit will print line numbers every such number of "
 "lines."
 msgstr ""
+"如果该值(N)为0，则在打印文档时不插入行号；否则，gedit 将每隔N行插入行号。"
 
 #: data/gedit.schemas.in.h:18
 msgid "Line Number Font for Printing"
-msgstr ""
+msgstr "打印时行号所用的字体"
 
 #: data/gedit.schemas.in.h:19
 msgid "Line Wrapping Mode"
-msgstr ""
+msgstr "卷行模式"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:20
-#, fuzzy
 msgid "Maximum Recent Files"
-msgstr "最近打开的文件(_F)"
+msgstr "最大当前文件数"
 
 #: data/gedit.schemas.in.h:21
 msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr ""
+msgstr "撤消或重复操作的最大值"
 
 #: data/gedit.schemas.in.h:22
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
-msgstr ""
+msgstr "文件修改后到自动保存的时间。只有当“自动保存”选项打开后才有效。"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:23
-#, fuzzy
 msgid "Print Header"
-msgstr "打印页眉(_P)"
+msgstr "打印页头"
 
 #: data/gedit.schemas.in.h:24
-#, fuzzy
 msgid "Print Line Numbers"
-msgstr "每隔几行打印行号(_N)："
+msgstr "打印行号"
 
 #: data/gedit.schemas.in.h:25
 msgid "Printing Line Wrapping Mode"
-msgstr ""
+msgstr "打印时卷行模式"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:26
-#, fuzzy
 msgid "Selected Text Color"
-msgstr "选定的文本颜色(_E):"
+msgstr "选中文本的颜色"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:27
-#, fuzzy
 msgid "Selection Color"
-msgstr "选择区颜色(_L):"
+msgstr "选中范围背景色"
 
 #: data/gedit.schemas.in.h:28
-#, fuzzy
 msgid "Show Cursor Position"
-msgstr "从光标的位置开始搜索(_C)"
+msgstr "显示光标的位置"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:29
-#, fuzzy
 msgid "Show Overwrite Mode"
-msgstr "显示覆盖模式(_O)"
+msgstr "显示覆盖模式"
 
 #: data/gedit.schemas.in.h:30
 msgid ""
@@ -204,36 +188,35 @@ msgstr ""
 #: data/gedit.schemas.in.h:32
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
-msgstr ""
+msgstr "设定打印时文档主体所用的字体。"
 
 #: data/gedit.schemas.in.h:33
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
-msgstr ""
+msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
 
 #: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
-msgstr ""
+msgstr "设定打印时页头所用的字体。只有当“打印页头”选项打开时才有效。"
 
 #: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
-msgstr ""
+msgstr "设定最近打开文件数的最大值，这个将在“最近打开过的文件”子菜单中显示。"
 
 #: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
-msgstr ""
+msgstr "设定用于代替 Tab 的空格数。"
 
 #: data/gedit.schemas.in.h:37
-#, fuzzy
 msgid "Status Bar is Visible"
-msgstr "显示状态栏(_H)"
+msgstr "显示状态栏"
 
 #: data/gedit.schemas.in.h:38
 msgid ""
@@ -244,16 +227,13 @@ msgid ""
 "mentioned here."
 msgstr ""
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:39
-#, fuzzy
 msgid "Tab Size"
-msgstr "缩进键"
+msgstr "Tab 长度"
 
 #: data/gedit.schemas.in.h:40
-#, fuzzy
 msgid "Text Color"
-msgstr "退出"
+msgstr "文本颜色"
 
 #: data/gedit.schemas.in.h:41
 msgid ""
@@ -270,32 +250,25 @@ msgid ""
 "appear exactly as mentioned here."
 msgstr ""
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid "Toolbar Buttons Style"
-msgstr "按钮样式"
+msgstr "工具栏按钮风格"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:43
-#, fuzzy
 msgid "Toolbar is Visible"
-msgstr "按钮样式"
+msgstr "显示工具栏"
 
 #: data/gedit.schemas.in.h:44
 msgid "Undo Actions Limit"
-msgstr ""
+msgstr "撤消操作次数限制"
 
-# SUN NEW TRANSLATION
 #: data/gedit.schemas.in.h:45
-#, fuzzy
 msgid "Use Default Colors"
-msgstr "使用默认主题颜色(_S)"
+msgstr "使用默认颜色"
 
 #: data/gedit.schemas.in.h:46
-#, fuzzy
 msgid "Use Default Font"
-msgstr "默认字体(_D)："
+msgstr "使用默认字体"
 
 #: data/gedit.schemas.in.h:47
 msgid ""
@@ -303,25 +276,29 @@ msgid ""
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
+"gedit 是否每隔一段时间自动保存已修改的文件。您可以在“自动保存时间间隔”选项中"
+"设置该时间间隔。"
 
 #: data/gedit.schemas.in.h:48
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
+"gedit 是否为保存的文件创建备份文件。您可以在“备份文件扩展名”选项中设置备份文"
+"件的扩展名。"
 
 #: data/gedit.schemas.in.h:49
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr ""
+msgstr "gedit 是否在编辑区域显示行号。"
 
 #: data/gedit.schemas.in.h:50
 msgid "Whether gedit should include a document header when printing documents."
-msgstr ""
+msgstr "gedit 是否在打印文档时显示文档头。"
 
 #: data/gedit.schemas.in.h:51
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
+msgstr "是否显示编辑窗口底部的状态栏。"
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -329,6 +306,8 @@ msgid ""
 "Make sure you turn on the \"Status Bar is Visible\" option for this to take "
 "effect."
 msgstr ""
+"状态栏中是否显示编辑窗口的光标位置。为使此选项生效，请确定您已经打开“显示状态"
+"栏”选项。"
 
 #: data/gedit.schemas.in.h:53
 msgid ""
@@ -336,10 +315,12 @@ msgid ""
 "windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
 "to take effect."
 msgstr ""
+"状态栏中是否显示编辑窗口的插入/覆盖状态。为使此选项生效，请确定您已经打开“显"
+"示状态栏”选项。"
 
 #: data/gedit.schemas.in.h:54
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr ""
+msgstr "是否在编辑窗口中显示工具栏。"
 
 #: data/gedit.schemas.in.h:55
 msgid ""
@@ -357,17 +338,14 @@ msgid ""
 msgstr ""
 
 #: plugins/ASCII/ascii.c:43
-#, fuzzy
 msgid "_ASCII Table"
-msgstr "ASCII码表"
+msgstr "_ASCII 码表"
 
 #: plugins/ASCII/ascii.c:46
-#, fuzzy
 msgid "Pop-up a dialog containing an ASCII Table"
-msgstr "该插件显示一个有ASCII码表的弹出对话框。"
+msgstr "弹出一个有 ASCII 码表的对话框"
 
 #: plugins/ASCII/ascii.c:336
-#, fuzzy
 msgid "Char"
 msgstr "字符"
 
@@ -385,16 +363,15 @@ msgstr "名称"
 
 #: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
 msgid "ASCII table"
-msgstr "ASCII码表"
+msgstr "ASCII 码表"
 
 #: plugins/ASCII/ascii.c:415
-#, fuzzy
 msgid "_Insert char"
-msgstr "插入字符"
+msgstr "插入字符(_I)"
 
 #: plugins/ASCII/ascii.c:524
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr "该插件显示一个有ASCII码表的弹出对话框。"
+msgstr "该插件显示一个包含 ASCII 码表的弹出对话框。"
 
 # SUN NEW TRANSLATION
 #: plugins/ASCII/ascii.c:526
@@ -411,13 +388,12 @@ msgstr ""
 "按钮，或者双击码表中的字符。"
 
 #: plugins/ASCII/asciitable.glade2.h:4
-#, fuzzy
 msgid "Insert char"
 msgstr "插入字符"
 
 #: plugins/ASCII/asciitable.glade2.h:5
 msgid "gedit: ASCII table"
-msgstr "gedit：ASCII码表"
+msgstr "gedit：ASCII 码表"
 
 # SUN NEW TRANSLATION
 #. AFAIK, all cvs commit messages start with this
@@ -428,7 +404,7 @@ msgstr "打开 CVS 更改日志(_G)"
 # SUN NEW TRANSLATION
 #: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr "搜索当前文档中的更改日志，然后打开它们"
+msgstr "搜索当前文档的更改日志，然后打开它们"
 
 # SUN NEW TRANSLATION
 #: plugins/cvschangelog/cvschangelog.c:269
@@ -438,7 +414,7 @@ msgstr "CVS 更改日志"
 # SUN NEW TRANSLATION
 #: plugins/cvschangelog/cvschangelog.c:270
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr "在 CVS 提交消息中找到打开更改日志的插件。"
+msgstr "用于打开在 CVS 提交消息中找到的更改日志的插件。"
 
 # SUN NEW TRANSLATION
 #: plugins/cvschangelog/cvschangelog.c:272
@@ -446,18 +422,16 @@ msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
 #: plugins/diff/diff.c:61
-#, fuzzy
 msgid "Co_mpare Files..."
-msgstr "打开文件 ..."
+msgstr "比较文件(_M)..."
 
 #: plugins/diff/diff.c:64
 msgid "Makes a diff file from two documents or files"
-msgstr "比较两个文档或者是两个文件，生成一个差别文件"
+msgstr "比较两个文档或者是两个文件，生成一个 diff 文件"
 
 #: plugins/diff/diff.c:66
-#, fuzzy
 msgid "Compare files"
-msgstr "载入了文件 %s"
+msgstr "比较文件"
 
 # SUN NEW TRANSLATION
 #. Create the dialog
@@ -472,7 +446,7 @@ msgstr "比较(_O)"
 
 #: plugins/diff/diff.c:502
 msgid "The two documents you selected are the same."
-msgstr "您选择的两个文档是相同的"
+msgstr "您选择的两个文档是相同的。"
 
 #: plugins/diff/diff.c:510
 msgid ""
@@ -480,7 +454,7 @@ msgid ""
 "\n"
 "Please provide a valid file."
 msgstr ""
-"您选择的第一个文件不存在\n"
+"您选择的第一个文件不存在。\n"
 "\n"
 "请指定一个有效的文件。"
 
@@ -495,9 +469,8 @@ msgstr ""
 "请指定一个有效的文件。"
 
 #: plugins/diff/diff.c:527
-#, fuzzy
 msgid "The two files you selected are the same."
-msgstr "您选择的两个文档是相同的"
+msgstr "您选择的两个文件是相同的。"
 
 #: plugins/diff/diff.c:544
 msgid "The \"first\" document contains no text."
@@ -547,14 +520,14 @@ msgstr ""
 "结果包含无效的 UTF-8 数据。"
 
 #: plugins/diff/diff.c:912
-#, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
 "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
 msgstr ""
-"比较两个文档或者是两个文件，生成一个 diff 文件\n"
-"要得到更多关于 diff 的信息，请在命令行输入“man diff”\n"
+"比较两个文档或者是两个文件，生成一个 diff 文件。\n"
+"\n"
+"要得到更多关于“diff”的信息，请在命令行输入“man diff”。\n"
 
 # SUN NEW TRANSLATION
 #: plugins/diff/diff.c:915
@@ -567,127 +540,111 @@ msgstr ""
 
 #: plugins/diff/diff.glade2.h:1
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: plugins/diff/diff.glade2.h:2
-#, fuzzy
 msgid "Choose the files to compare."
-msgstr "选择要进行比较的文件"
+msgstr "选择要进行比较的文件。"
 
 #: plugins/diff/diff.glade2.h:3
-#, fuzzy
 msgid "Compare files..."
-msgstr "打开文件 ..."
+msgstr "比较文件..."
 
 #: plugins/diff/diff.glade2.h:4
-#, fuzzy
 msgid "F_rom document"
-msgstr "来自文档"
+msgstr "来自文档(_R)"
 
 #: plugins/diff/diff.glade2.h:5
 msgid "First"
-msgstr "第一"
+msgstr "一"
 
 #: plugins/diff/diff.glade2.h:6
-#, fuzzy
 msgid "First file from disk"
-msgstr "来自磁盘文件"
+msgstr "第一个文件来自磁盘"
 
 #: plugins/diff/diff.glade2.h:7
-#, fuzzy
 msgid "First file from open document"
-msgstr "获取当前文档的信息。"
+msgstr "第一个文件来自打开文档"
 
 #: plugins/diff/diff.glade2.h:8
-#, fuzzy
 msgid "From _document"
-msgstr "来自文档"
+msgstr "来自文档(_D)"
 
 #: plugins/diff/diff.glade2.h:9
-#, fuzzy
 msgid "From a _file on disk"
-msgstr "来自磁盘文件"
+msgstr "来自磁盘文件(_F)"
 
 #: plugins/diff/diff.glade2.h:10
-#, fuzzy
 msgid "From a file o_n disk"
-msgstr "来自磁盘文件"
+msgstr "来自磁盘文件(_N)"
 
 # SUN NEW TRANSLATION
 #: plugins/diff/diff.glade2.h:11
 msgid "Ignore _blanks (-b option)"
-msgstr "忽略空值（-b 选项）(_B)"
+msgstr "忽略空白（-b 选项）(_B)"
 
 # SUN NEW TRANSLATION
 #: plugins/diff/diff.glade2.h:12
 msgid "Note that this option is only supported by GNU diff"
-msgstr "注意，只有 GNU diff 支持此选项"
+msgstr "注意只有 GNU diff 支持此选项"
 
 #: plugins/diff/diff.glade2.h:13
 msgid "Second"
-msgstr "第二"
+msgstr "二"
 
 #: plugins/diff/diff.glade2.h:14
-#, fuzzy
 msgid "Second file from disk"
-msgstr "来自磁盘文件"
+msgstr "第二个文件来自磁盘"
 
 #: plugins/diff/diff.glade2.h:15
-#, fuzzy
 msgid "Second file from open document"
-msgstr "删除这个文档的视图"
+msgstr "第二个文件来自打开文档"
 
 #: plugins/diff/diff.glade2.h:16
 msgid "Select the \"first\" file..."
-msgstr "请选择第一个文件...."
+msgstr "请选择第一个文件..."
 
 #: plugins/diff/diff.glade2.h:17
 msgid "Select the \"second\" file..."
-msgstr "选择第二个文件..."
+msgstr "请选择第二个文件..."
 
 #: plugins/diff/diff.glade2.h:18
-#, fuzzy
 msgid "Select the first file to compare"
-msgstr "请选择第一个文件...."
+msgstr "选择要比较的第一个文件"
 
 #: plugins/diff/diff.glade2.h:19
-#, fuzzy
 msgid "Select the first open document to compare"
-msgstr "邮寄当前文档"
+msgstr "选择要比较的第一个打开文档"
 
 #: plugins/diff/diff.glade2.h:20
-#, fuzzy
 msgid "Select the second file to compare"
-msgstr "选择第二个文件..."
+msgstr "选择要比较的第二个文件"
 
 #: plugins/diff/diff.glade2.h:21
-#, fuzzy
 msgid "Select the second open document to compare"
-msgstr "邮寄当前文档"
+msgstr "选择要比较的第二个打开文档"
 
 #: plugins/diff/diff.glade2.h:22
 msgid "Use the _unified output format (-u option)"
-msgstr "使用统一的输出格式(-u 选项)"
+msgstr "使用“统一”输出格式（-u 选项）(_U)"
 
 # SUN NEW TRANSLATION
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
-msgstr "字数统计(_W)"
+msgstr "字词统计(_W)"
 
 #: plugins/docinfo/docinfo.c:49
-#, fuzzy
 msgid "Get info on current document"
-msgstr "获取当前文档的信息。"
+msgstr "获取当前文档的信息"
 
 # SUN NEW TRANSLATION
 #: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
-msgstr "字数统计"
+msgstr "字词统计"
 
 #: plugins/docinfo/docinfo.c:156
-#, fuzzy
 msgid "_Update"
-msgstr "更新"
+msgstr "更新(_U)"
 
 # SUN NEW TRANSLATION
 #: plugins/docinfo/docinfo.c:366
@@ -696,7 +653,7 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
-"字数统计插件分析当前文档，然后确定文档中的字数、行数、字符数和非空格字符数并"
+"字词统计插件分析当前文档，然后确定文档中的词数、行数、字符数和非空格字符数并"
 "显示结果。"
 
 # SUN NEW TRANSLATION
@@ -732,7 +689,6 @@ msgid "Lines"
 msgstr "行"
 
 #: plugins/docinfo/docinfo.glade2.h:7
-#, fuzzy
 msgid "Update"
 msgstr "更新"
 
@@ -745,48 +701,37 @@ msgid "gedit: Document Info plugin"
 msgstr "gedit：文档信息插件"
 
 #: plugins/sample/sample.c:43
-#, fuzzy
 msgid "Insert User _Name"
-msgstr "插入时间"
+msgstr "插入用户名(_N)"
 
 #: plugins/sample/sample.c:46
-#, fuzzy
 msgid "Insert the user name at the cursor position"
-msgstr "插入现在的日期和时间"
+msgstr "在光标处插入用户名"
 
 #: plugins/sample/sample.c:172
-#, fuzzy
 msgid "User name"
-msgstr "文件名："
+msgstr "用户名"
 
 #: plugins/sample/sample.c:173
-#, fuzzy
 msgid "Inserts the user name at the cursor position."
-msgstr "插入现在的日期和时间"
+msgstr "在光标处插入用户名。"
 
 #: plugins/shell_output/shell_output.c:49
-#, fuzzy
 msgid "Insert Shell _Output"
-msgstr "把执行命令的输出结果插入到文档中"
+msgstr "插入命令输出(_O)"
 
 #: plugins/shell_output/shell_output.c:52
-#, fuzzy
 msgid "Insert the shell output in the current document"
 msgstr "把执行命令的输出结果插入到文档中"
 
 #: plugins/shell_output/shell_output.c:137
-#, fuzzy
 msgid "An error occurs while running the selected command."
-msgstr ""
-"在打开文件时产生了错误。\n"
-"\n"
-"%s"
+msgstr "运行选定的命令时出错。"
 
 #: plugins/shell_output/shell_output.c:187
 #: plugins/shell_output/shell_output.c:550
-#, fuzzy
 msgid "Shell output"
-msgstr "命令行输出"
+msgstr "命令输出"
 
 # SUN NEW TRANSLATION
 #: plugins/shell_output/shell_output.c:200
@@ -799,38 +744,35 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"命令项式空的。\n"
+"命令为空。\n"
 "\n"
-"请插入一个有效的命令。"
+"请输入一个有效的命令。"
 
 #: plugins/shell_output/shell_output.c:389
-#, fuzzy
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"命令项式空的。\n"
+"命令解析出错。\n"
 "\n"
-"请插入一个有效的命令。"
+"请输入一个有效的命令。"
 
 #: plugins/shell_output/shell_output.c:551
-#, fuzzy
 msgid "Execute an external program and insert its output in a new document."
-msgstr "插入现在的日期和时间"
+msgstr "执行一个外部程序并将其输出插入到文档中。"
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Capture the command _output"
-msgstr ""
+msgstr "捕获命令输出(_O)"
 
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
 msgstr "指定您要运行的命令和工作目录。"
 
 #: plugins/shell_output/shell_output.glade2.h:3
-#, fuzzy
 msgid "_Shell command:"
-msgstr "Shell命令(_C)："
+msgstr "_Shell 命令："
 
 #: plugins/shell_output/shell_output.glade2.h:4
 msgid "_Working directory:"
@@ -841,28 +783,24 @@ msgid "gedit: Shell Output plugin"
 msgstr "gedit：命令行输出插件"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
-#, fuzzy
 msgid "Tag list plugin"
-msgstr "gedit：diff 插件"
+msgstr "标记列表插件"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
 msgid "Select the group of tab you want to use"
-msgstr ""
+msgstr "选择你想使用的标签组"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
 msgid "Tag Groups Combo"
-msgstr ""
+msgstr "标记组组合"
 
-# SUN NEW TRANSLATION
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
-#, fuzzy
 msgid "Tags Name List"
-msgstr "标记列表(_L)"
+msgstr "标记名字列表"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:187
-#, fuzzy
 msgid "Double-click on a tag to insert it in the current document"
-msgstr "把执行命令的输出结果插入到文档中"
+msgstr "在标记上双击把它插入到文档中"
 
 # SUN NEW TRANSLATION
 #: plugins/taglist/gedit-taglist-plugin-window.c:198
@@ -893,17 +831,15 @@ msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
-"标记列表插件提供了一种无需键入即可将常用缩进键/字符串轻易插入文档的方法。"
+"标记列表插件提供了一种无需键入即可将常用标签/字符串轻易插入文档的方法。"
 
 #: plugins/time/time.c:45
-#, fuzzy
 msgid "_Insert Date/Time"
-msgstr "插入时间"
+msgstr "插入日期/时间(_I)"
 
 #: plugins/time/time.c:48
-#, fuzzy
 msgid "Insert current date and time at the cursor position"
-msgstr "插入现在的日期和时间"
+msgstr "在光标处插入当前的日期和时间"
 
 # SUN NEW TRANSLATION
 #: plugins/time/time.c:274
@@ -916,14 +852,12 @@ msgid "Configure insert date/time plugin"
 msgstr "配置插入日期/时间插件"
 
 #: plugins/time/time.c:568
-#, fuzzy
 msgid "Insert Date/Time"
-msgstr "插入时间"
+msgstr "插入日期/时间"
 
 #: plugins/time/time.c:569
-#, fuzzy
 msgid "Inserts current date and time at the cursor position."
-msgstr "插入现在的日期和时间"
+msgstr "在光标处插入当前的日期和时间。"
 
 # SUN NEW TRANSLATION
 #: plugins/time/time.glade2.h:2
@@ -931,43 +865,38 @@ msgid "Select the format to use when inserting date/time."
 msgstr "选择插入日期/时间时使用的格式。"
 
 #: src/bonobo-mdi.c:532 src/bonobo-mdi.c:622 src/bonobo-mdi.c:1858
-#, fuzzy, c-format
+#, c-format
 msgid "Activate %s"
-msgstr "全部激活(_A)"
+msgstr "激活 %s"
 
 #: src/dialogs/gedit-dialog-goto-line.c:139
-#, fuzzy
 msgid "Goto line..."
-msgstr "转到行(_L)..."
+msgstr "跳到行..."
 
 #. Add Goto Line button
 #: src/dialogs/gedit-dialog-goto-line.c:149
-#, fuzzy
 msgid "_Goto line"
-msgstr "转到行"
+msgstr "跳到行(_G)"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr "在 goto-line.glade2 中找不到所需的构件。\n"
+msgstr "在 goto-line.glade2 中找不到所需的部件。\n"
 
 #: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
 #: src/gedit-ui.xml.h:53
-#, fuzzy
 msgid "Replace"
 msgstr "替换"
 
 #: src/dialogs/gedit-dialog-replace.c:183
-#, fuzzy
 msgid "Replace _All"
-msgstr "全部替换"
+msgstr "全部替换(_A)"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
 #: src/gedit-ui.xml.h:98
-#, fuzzy
 msgid "_Replace"
-msgstr "替换"
+msgstr "替换(_R)"
 
 #: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
 msgid "Find"
@@ -976,38 +905,35 @@ msgstr "查找"
 #: src/dialogs/gedit-dialog-replace.c:474
 #: src/dialogs/gedit-dialog-replace.c:545
 #: src/dialogs/gedit-dialog-replace.c:722
-#, fuzzy, c-format
+#, c-format
 msgid "The text \"%s\" was not found."
-msgstr "没有找到文件 %s。"
+msgstr "没有找到文本“%s” 。"
 
 #: src/dialogs/gedit-dialog-replace.c:731
-#, fuzzy, c-format
+#, c-format
 msgid "Found and replaced %d occurences."
-msgstr "找到并替换了 %i 处。"
+msgstr "找到并替换了 %d 处。"
 
 #: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
 msgid "Open from URI"
 msgstr "打开 URI"
 
 #: src/dialogs/gedit-plugin-manager.c:53
-#, fuzzy
 msgid "Plugin"
-msgstr "插件(_P)"
+msgstr "插件"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-plugin-manager.c:54
 msgid "Load"
-msgstr "载入"
+msgstr "加载"
 
 #: src/dialogs/gedit-plugin-manager.c:320
-#, fuzzy
 msgid "Module file name"
-msgstr "文件名"
+msgstr "模块文件名"
 
 #: src/dialogs/gedit-plugin-manager.c:321
-#, fuzzy
 msgid "Author(s)"
-msgstr "作者："
+msgstr "作者(们)"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-plugin-manager.c:488
@@ -1017,18 +943,17 @@ msgstr "找不到 plugin-manager.glade2，请重新安装 gedit。\n"
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-plugin-manager.c:511
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr "插件管理器的 glade 文件无效 -- 没有找到全部构件。\n"
+msgstr "插件管理器的 glade 文件无效 -- 没有找到全部部件。\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
-#, fuzzy
 msgid "Set program location ..."
-msgstr "gedit：设置程序的位置..."
+msgstr "设置程序的位置..."
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid ""
 "Could not find the required widgets inside program-location-dialog.glade2.\n"
-msgstr "program-location-dialog.glade2 中找不到所需的构件。\n"
+msgstr "program-location-dialog.glade2 中找不到所需的部件。\n"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
@@ -1049,7 +974,6 @@ msgid "The selected file is not executable."
 msgstr "选中的文件不可执行。"
 
 #: src/dialogs/gedit-preferences-dialog.c:207
-#, fuzzy
 msgid "Font & Colors"
 msgstr "字体和颜色"
 
@@ -1063,13 +987,12 @@ msgstr "缩进键"
 #: src/dialogs/gedit-preferences-dialog.c:210
 #: src/dialogs/gedit-preferences.glade2.h:51
 msgid "Wrap mode"
-msgstr "回绕模式"
+msgstr "自动换行模式"
 
 #: src/dialogs/gedit-preferences-dialog.c:211
 #: src/dialogs/gedit-preferences.glade2.h:15
-#, fuzzy
 msgid "Line numbers"
-msgstr "行号："
+msgstr "行号"
 
 #: src/dialogs/gedit-preferences-dialog.c:213
 #: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:58
@@ -1082,24 +1005,20 @@ msgid "Undo"
 msgstr "撤消"
 
 #: src/dialogs/gedit-preferences-dialog.c:222
-#, fuzzy
 msgid "Page"
-msgstr "页："
+msgstr "页"
 
 #: src/dialogs/gedit-preferences-dialog.c:224
-#, fuzzy
 msgid "Fonts"
 msgstr "字体"
 
 #: src/dialogs/gedit-preferences-dialog.c:231
-#, fuzzy
 msgid "Manager"
-msgstr "管理(_M) ..."
+msgstr "管理"
 
 #: src/dialogs/gedit-preferences-dialog.c:239
-#, fuzzy
 msgid "Editor"
-msgstr "退出"
+msgstr "编辑器"
 
 #: src/dialogs/gedit-preferences-dialog.c:240
 #: src/dialogs/gedit-preferences.glade2.h:21 src/gedit-print.c:309
@@ -1108,9 +1027,8 @@ msgid "Print"
 msgstr "打印"
 
 #: src/dialogs/gedit-preferences-dialog.c:241
-#, fuzzy
 msgid "Plugins"
-msgstr "插件(_P)"
+msgstr "插件"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences-dialog.c:308
@@ -1119,7 +1037,7 @@ msgstr "类别(_E)："
 
 #: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
-msgstr "选项"
+msgstr "首选项"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences-dialog.c:569
@@ -1128,124 +1046,108 @@ msgstr "类别"
 
 #: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
+msgstr "按下这个按钮以选择编辑器所用的字体"
 
 #: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
-msgstr ""
+msgstr "按下这个按钮以配置文本颜色"
 
 #: src/dialogs/gedit-preferences-dialog.c:805
-#, fuzzy
 msgid "Push this button to configure background color"
-msgstr "选择颜色"
+msgstr "按下这个按钮以配置背景色"
 
 #: src/dialogs/gedit-preferences-dialog.c:807
-#, fuzzy
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
-msgstr "选择颜色"
+msgstr "按下这个按钮以配置选中文本的颜色"
 
 #: src/dialogs/gedit-preferences-dialog.c:810
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
-msgstr ""
+msgstr "按下这个按钮以配置选中文本的背景色"
 
 #: src/dialogs/gedit-preferences-dialog.c:1592
 #: src/dialogs/gedit-preferences-dialog.c:1594
 msgid "Courier 9"
-msgstr ""
+msgstr "Courier 9"
 
 #: src/dialogs/gedit-preferences-dialog.c:1601
 #: src/dialogs/gedit-preferences-dialog.c:1603
 msgid "Helvetica 11"
-msgstr ""
+msgstr "Helvetica 11"
 
 #: src/dialogs/gedit-preferences-dialog.c:1610
 #: src/dialogs/gedit-preferences-dialog.c:1612
 msgid "Helvetica 8"
-msgstr ""
+msgstr "Helvetica 8"
 
 #: src/dialogs/gedit-preferences-dialog.c:1733
 msgid "Push this button to select the font to be used to print the body"
-msgstr ""
+msgstr "按下这个按钮以选择打印文档主体的字体"
 
 #: src/dialogs/gedit-preferences-dialog.c:1735
 msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
+msgstr "按下这个按钮以选择打印页头所用的字体"
 
 #: src/dialogs/gedit-preferences-dialog.c:1737
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
+msgstr "按下这个按钮以选择打印行号所用的字体"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
-msgstr "回绕行（在字符边界处）(_W)"
+msgstr " 自动换行（在字符边界处）(_W)"
 
 #: src/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid " character(s)"
-msgstr "字符(不含空格)"
+msgstr " 字符"
 
 #: src/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid " line(s)"
-msgstr "行(_I)"
+msgstr " 行"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "Always use UTF-8 encoding (faster) when creating a new file"
-msgstr "总是使用 UTF-8 编码（速度更快）"
+msgstr "创建文件时总是使用 UTF-8 编码（更快）"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:5
-#, fuzzy
 msgid "Always use UTF-8 encoding (faster) when saving"
-msgstr "总是使用 UTF-8 编码（速度更快）"
+msgstr "保存时总是使用 UTF-8 编码（更快）"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:6
-#, fuzzy
 msgid "Always use U_TF-8 encoding (faster)"
-msgstr "总是使用 UTF-8 编码（速度更快）"
+msgstr "总是使用 U_TF-8 编码（更快）"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Always use _UTF-8 encoding (faster)"
-msgstr "总是使用 UTF-8 编码（速度更快）"
+msgstr "总是使用 _UTF-8 编码（更快）"
 
 #: src/dialogs/gedit-preferences.glade2.h:8
 msgid "Colors"
 msgstr "颜色"
 
-# SUN CHANGED MESSAGE
 #: src/dialogs/gedit-preferences.glade2.h:9
-#, fuzzy
 msgid "Create a _backup copy of files before saving"
-msgstr "在保存之前创建一个备份"
+msgstr "在保存之前创建一个备份文件(_B)"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
 #: src/dialogs/gnome-print-font-picker.c:1014
-#, fuzzy
 msgid "Font"
 msgstr "字体"
 
 #: src/dialogs/gedit-preferences.glade2.h:11
-#, fuzzy
 msgid "Font used to print line _numbers:"
-msgstr "跳转到指定的行号"
+msgstr "打印行号时使用的字体(_N)："
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:12
-#, fuzzy
 msgid "Font used to print the _body:"
-msgstr "编辑器使用的字体(_F)："
+msgstr "打印文档主体时使用的字体(_B)："
 
 #: src/dialogs/gedit-preferences.glade2.h:13
-#, fuzzy
 msgid "Fonts & Colors"
 msgstr "字体和颜色"
 
@@ -1255,124 +1157,106 @@ msgid "LOGO"
 msgstr "徽标"
 
 #: src/dialogs/gedit-preferences.glade2.h:16
-#, fuzzy
 msgid "Pick the background color"
-msgstr "选择颜色"
+msgstr "选择背景色"
 
 #: src/dialogs/gedit-preferences.glade2.h:17
-#, fuzzy
 msgid "Pick the selected text color"
-msgstr "剪切选中的范围"
+msgstr "选择选中文本的颜色"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
-#, fuzzy
 msgid "Pick the selection color"
-msgstr "剪切选中的范围"
+msgstr "选择选中区域的背景色"
 
 #: src/dialogs/gedit-preferences.glade2.h:19
-#, fuzzy
 msgid "Pick the text color"
-msgstr "选择颜色"
+msgstr "选择文本颜色"
 
 #: src/dialogs/gedit-preferences.glade2.h:20
-#, fuzzy
 msgid "Plugin manager"
-msgstr "插件管理器..."
+msgstr "插件管理器"
 
 #: src/dialogs/gedit-preferences.glade2.h:22
-#, fuzzy
 msgid "Print _line numbers every"
-msgstr "每隔几行打印行号(_N)："
+msgstr "每几行打印一次行号(_L)："
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:23
 msgid "Print _page headers"
-msgstr "打印页眉(_P)"
+msgstr "打印页头(_P)"
 
 #: src/dialogs/gedit-preferences.glade2.h:24
-#, fuzzy
 msgid "Print fonts"
-msgstr "打印文档"
+msgstr "打印字体"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Se_lection color:"
-msgstr "选择区颜色(_L):"
+msgstr "选择区颜色(_L)："
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:27
-#, fuzzy
 msgid "Selecte_d text color:"
-msgstr "选定的文本颜色(_E):"
+msgstr "选中文本的颜色(_D)："
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Set _tabs width equivalent to  "
-msgstr "设置缩进键宽度等于(_T)"
+msgstr "设置缩进键宽度等于(_T) "
 
 #: src/dialogs/gedit-preferences.glade2.h:29
-#, fuzzy
 msgid "Set limit on _undo actions to"
-msgstr "设置最大的撤消次数为(_U)："
+msgstr "设置最大的撤消次数为(_U)"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:31
-#, fuzzy
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
-msgstr "行号设置使您可以选择是否将行号显示在窗口的左侧。"
+msgstr "字体和颜色设置可以让您选择用于编辑器窗口中的字体和颜色。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:32
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
-msgstr "行号设置使您可以选择是否将行号显示在窗口的左侧。"
+msgstr "行号设置可以让您选择是否在窗口的左侧显示行号。"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:33
-#, fuzzy
 msgid ""
 "The plugin manager settings let you choose which plugins you want to have "
 "loaded."
-msgstr "回绕模式设置使您可以定制行回绕的方式。"
+msgstr "插件设置可以让您选择您想加载的插件。"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:34
-#, fuzzy
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
-msgstr "缩进键设置使您可以定制缩进键宽度。"
+msgstr "打印字体设置可以让您选择用于打印文档的字体。"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:35
-#, fuzzy
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr "保存设置使您可以定制 gedit 保存文件的方式。"
+msgstr "打印页面设置可以让您设置 gedit 如何打印文档。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:36
 msgid "The save settings let you customize how gedit saves files."
-msgstr "保存设置使您可以定制 gedit 保存文件的方式。"
+msgstr "保存设置可以让您定制 gedit 保存文件的方式。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The tabs settings let you customize the tabs width."
-msgstr "缩进键设置使您可以定制缩进键宽度。"
+msgstr "缩进键设置可以让您定制缩进键宽度。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:38
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
-msgstr "取消设置使您可以设置 gedit 可以取消的最大操作次数。"
+msgstr "撤消设置可以让您设置 gedit 可以撤消的最大操作次数。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr "回绕模式设置使您可以定制行回绕的方式。"
+msgstr "自动换行模式设置可以让您定制自动换行的方式。"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:40
@@ -1381,164 +1265,139 @@ msgstr "使用默认主题颜色(_S)"
 
 #: src/dialogs/gedit-preferences.glade2.h:41
 msgid "U_se original file encoding if possible"
-msgstr ""
+msgstr "如果可能的话使用原始的文件编码(_S)"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
 msgid "Use cu_rrent locale's encoding if possible"
-msgstr "尽可能使用当前区域设置(_L)"
+msgstr "如果可能的话使用当前 locale 的编码(_R)"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:44
-#, fuzzy
 msgid "Use current _locale's encoding if possible"
-msgstr "尽可能使用当前区域设置(_L)"
+msgstr "如果可能的话使用当前 _locale 的编码"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:45
-#, fuzzy
 msgid "Use current locale's encoding if possible when creating a new file"
-msgstr "尽可能使用当前区域设置(_L)"
+msgstr "新建文件时如果可能的话使用当前 locale 的编码"
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:46
-#, fuzzy
 msgid "Use current locale's encoding if possible when saving"
-msgstr "尽可能使用当前区域设置(_L)"
+msgstr "保存文件时如果可能的话使用当前 locale 的编码"
 
 #: src/dialogs/gedit-preferences.glade2.h:47
 msgid "When creating a new file..."
-msgstr ""
+msgstr "新建一个文件时..."
 
 #: src/dialogs/gedit-preferences.glade2.h:48
-#, fuzzy
 msgid "When saving..."
-msgstr "更改..."
+msgstr "保存文件时..."
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:49
 msgid "Wrap lines at _word boundaries"
-msgstr "在字边界处回绕行(_W)"
+msgstr "在字边界处自动换行(_W)"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:50
 msgid "Wrap lines at ch_aracter boundaries"
-msgstr "在字符边界处回绕行(_A)"
+msgstr "在字符边界处自动换行(_A)"
 
 #: src/dialogs/gedit-preferences.glade2.h:52
-#, fuzzy
 msgid "_Autosave current file every"
-msgstr "保存当前文件"
+msgstr "自动保存当前文件每(_A)"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Background color:"
 msgstr "背景色(_B)："
 
 #: src/dialogs/gedit-preferences.glade2.h:54
-#, fuzzy
 msgid "_Display line numbers"
-msgstr "行号："
+msgstr "显示行号(_D)"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:55
 msgid "_Font used by the editor: "
 msgstr "编辑器使用的字体(_F)："
 
-# SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:56
-#, fuzzy
 msgid "_Font used to print headers:"
-msgstr "编辑器使用的字体(_F)："
+msgstr "用于打印页头的字体(_F)："
 
 # SUN NEW TRANSLATION
 #: src/dialogs/gedit-preferences.glade2.h:57
 msgid "_Never wrap lines"
-msgstr "从不回绕行(_N)"
+msgstr "从不自动换行(_N)"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-#, fuzzy
 msgid "_Restore default fonts"
-msgstr "默认字体(_D)："
+msgstr "恢复为默认字体(_R)"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
 msgid "_Text color:"
-msgstr "退出"
+msgstr "文本颜色(_T)："
 
 #: src/dialogs/gedit-preferences.glade2.h:60
-#, fuzzy
 msgid "_Use default theme font"
-msgstr "默认字体(_D)："
+msgstr "使用当前主题的默认字体(_U)"
 
 #: src/dialogs/gedit-preferences.glade2.h:61
-#, fuzzy
 msgid "action(s)"
-msgstr "行(_I)"
+msgstr "次"
 
 #: src/dialogs/gedit-preferences.glade2.h:62
-#, fuzzy
 msgid "minutes"
-msgstr "行"
+msgstr "分钟"
 
 #: src/dialogs/gnome-print-font-dialog.c:107
 msgid "_Insert a new preview phrase."
-msgstr ""
+msgstr "插入一个新的预览短语(_I)"
 
 #: src/dialogs/gnome-print-font-dialog.c:113
 msgid "Modify preview phrase..."
-msgstr ""
+msgstr "修改预览短语..."
 
 #: src/dialogs/gnome-print-font-dialog.c:167
-#, fuzzy
 msgid "Preview"
-msgstr "打印预览"
+msgstr "预览"
 
 #: src/dialogs/gnome-print-font-dialog.c:180
 msgid "_Modify preview phrase..."
-msgstr ""
+msgstr "修改预览短语(_M)"
 
 #: src/dialogs/gnome-print-font-dialog.c:243
-#, fuzzy
 msgid "Font Selection"
-msgstr "复制选中的范围"
+msgstr "字体选择"
 
 #: src/dialogs/gnome-print-font-picker.c:89
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: src/dialogs/gnome-print-font-picker.c:90
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: src/dialogs/gnome-print-font-picker.c:91
 msgid "Pick a Font"
 msgstr "选择字体"
 
 #: src/dialogs/gnome-print-font-picker.c:176
-#, fuzzy
 msgid "Title"
-msgstr "未命名"
+msgstr "标题"
 
 #: src/dialogs/gnome-print-font-picker.c:177
 msgid "The title of the selection dialog box"
 msgstr "选择对话框的标题"
 
 #: src/dialogs/gnome-print-font-picker.c:197
-#, fuzzy
 msgid "Font name"
-msgstr "字体"
+msgstr "字体名"
 
 #: src/dialogs/gnome-print-font-picker.c:198
-#, fuzzy
 msgid "Name of the selected font"
-msgstr "剪切选中的范围"
+msgstr "选中的字体名"
 
 #: src/dialogs/gnome-print-font-picker.c:206
-#, fuzzy
 msgid "Preview text"
-msgstr "反转文字"
+msgstr "预览文本"
 
 #: src/dialogs/gnome-print-font-picker.c:207
 msgid "Preview text shown in the dialog"
@@ -1546,11 +1405,11 @@ msgstr "显示在对话框中的预览文本"
 
 #: src/dialogs/gnome-print-font-picker.c:215
 msgid "Use font in label"
-msgstr "标签中的字体"
+msgstr "标签使用字体"
 
 #: src/dialogs/gnome-print-font-picker.c:216
 msgid "Use font in the label in font info mode"
-msgstr "字体信息模式中标签使用的字体"
+msgstr "字体信息模式中标签是否使用字体"
 
 #: src/dialogs/gnome-print-font-picker.c:224
 msgid "Font size for label"
@@ -1566,39 +1425,32 @@ msgstr "显示尺寸"
 
 #: src/dialogs/gnome-print-font-picker.c:236
 msgid "Show size in font info mode"
-msgstr "显示字体信息模式中的尺寸"
+msgstr "字体信息模式中的显示尺寸"
 
 #. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
-#, fuzzy
 msgid "Goto Line"
-msgstr "转到行"
+msgstr "跳到行"
 
 #: src/dialogs/goto-line.glade2.h:2
-#, fuzzy
 msgid "_Line number:"
-msgstr "行号："
+msgstr "行号(_L)："
 
 #: src/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
 msgid "C_onfigure plugin"
-msgstr "剪切选中的范围"
+msgstr "配置插件(_O)"
 
 #: src/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "Configure the selected plugin"
-msgstr "剪切选中的范围"
+msgstr "配置选中的插件"
 
 #: src/dialogs/plugin-manager.glade2.h:3
-#, fuzzy
 msgid "De_tails"
 msgstr "细节(_T)"
 
-# SUN CHANGED MESSAGE
 #: src/dialogs/plugin-manager.glade2.h:4
-#, fuzzy
 msgid "_Description"
-msgstr "说明(_S)"
+msgstr "描述(_D)"
 
 # SUN NEW TRANSLATION
 #: src/dialogs/plugin-manager.glade2.h:5
@@ -1606,9 +1458,8 @@ msgid "dialog1"
 msgstr "dialog1"
 
 #: src/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
 msgid "Set program location..."
-msgstr "gedit：设置程序的位置..."
+msgstr "设置程序的位置..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
@@ -1619,24 +1470,20 @@ msgid "label"
 msgstr "标签"
 
 #: src/dialogs/replace.glade2.h:1
-#, fuzzy
 msgid "Case sensi_tive"
-msgstr "区分大小写(_S)"
+msgstr "区分大小写(_T)"
 
 #: src/dialogs/replace.glade2.h:3
-#, fuzzy
 msgid "Replace _with: "
-msgstr "替换为(_R)："
+msgstr "替换为(_W)："
 
 #: src/dialogs/replace.glade2.h:4
-#, fuzzy
 msgid "Search fro_m the beginning of the document"
-msgstr "从开头开始搜索(_B)"
+msgstr "从文档开头开始搜索(_M)"
 
 #: src/dialogs/replace.glade2.h:5
-#, fuzzy
 msgid "Search from the c_ursor position"
-msgstr "插入现在的日期和时间"
+msgstr "从当前位置开始搜索(_U)"
 
 #: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
@@ -1652,13 +1499,18 @@ msgid "Not yet implemented."
 msgstr "尚未实现。"
 
 #: src/gedit-commands.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "找不到字串。"
+msgstr "找不到字串“%s”。"
 
 #: src/gedit-commands.c:437
 msgid "translator_credits"
 msgstr ""
+"Dillion Chen <dillon.chen@turbolinux.com.cn>\n"
+"Tom Mak <mhh@126.com>, 2001\n"
+"Wang Jian <lark@linux.net.cn>, 2001\n"
+"Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002\n"
+"Miles Hoo <MilesHoo@sohu.com>, 2002"
 
 # SUN NEW TRANSLATION
 #: src/gedit-commands.c:462
@@ -1670,11 +1522,12 @@ msgid ""
 "(C) 1998-2000 Evan Lawrence and Alex Robert\n"
 "(C) 2000-2002 Chema Celorio and Paolo Maggi"
 msgstr ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
 
 #: src/gedit-commands.c:465
-#, fuzzy
 msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit 是一个 GNOME 的轻量级的文字编辑器。"
+msgstr "gedit 是一个 GNOME 的轻量级文本编辑器。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-document.c:573 src/gedit-document.c:591
@@ -1687,9 +1540,8 @@ msgid "Untitled"
 msgstr "未命名"
 
 #: src/gedit-document.c:579 src/gedit-document.c:626
-#, fuzzy
 msgid "Invalid file name"
-msgstr "文件名"
+msgstr "无效文件名"
 
 # SUN NEW TRANSLATION
 #: src/gedit-document.c:756 src/gedit-document.c:914
@@ -1699,19 +1551,17 @@ msgstr "UTF-8 数据无效"
 #: src/gedit-document.c:1149
 #, c-format
 msgid "Could not read symbolic link information for %s"
-msgstr ""
+msgstr "无法读入 %s 的符号链接信息"
 
-# SUN NEW TRANSLATION
 #: src/gedit-document.c:1195
-#, fuzzy
 msgid "The file has too many symbolic links."
-msgstr "文件太大。"
+msgstr "该文件有太多的符号链接。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit 无法在写入模式下处理 %s：位置。"
+msgstr "gedit 无法在写入模式下处理 %s: 位置。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-document.c:1256
@@ -1719,19 +1569,16 @@ msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit 无法在写入模式下处理此类位置。"
 
 #: src/gedit-document.c:1269
-#, fuzzy
 msgid "Invalid filename."
-msgstr "文件名"
+msgstr "无效的文件名。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-document.c:1382
-#, fuzzy
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 msgstr ""
-"磁盘空间不足，无法保存文件。\n"
-"请释放一些磁盘空间并重试。"
+"没有足够的磁盘空间用于保存文件。\n"
+"请释放一些磁盘空间，然后重试。"
 
 #: src/gedit-document.c:1387
 msgid ""
@@ -1739,66 +1586,57 @@ msgid ""
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
+"磁盘有文件大小的限制，请保存较小的文件或者将文件保存到没有此限制的磁盘上。"
 
-# SUN CHANGED MESSAGE
 #: src/gedit-document.c:1426
-#, fuzzy
 msgid "Could not create a backup file."
-msgstr "无法创建一个临时文件。"
+msgstr "gedit 无法创建一个临时文件。"
 
-# SUN CHANGED MESSAGE
 #: src/gedit-document.c:1574
-#, fuzzy
 msgid "It is not possible to revert an Untitled document"
-msgstr "您不能还原一个未命名文档的内容"
+msgstr "您不能还原一个未命名文档的内容。"
 
 #: src/gedit-file-selector-util.c:125
-#, fuzzy
 msgid "Do_n't replace"
-msgstr "替换"
+msgstr "不替换(_N)"
 
-# SUN NEW TRANSLATION
 #: src/gedit-file-selector-util.c:147
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "A file named \"%s\" already exists.\n"
 "Do you want to replace it with the one you are saving?"
 msgstr ""
-"已存在名为“%s”的文件。\n"
-"是否要用正在保存的文件替换它？"
+"一个名为“%s”的文件已经存在。\n"
+"您想替换它吗？"
 
-# SUN NEW TRANSLATION
 #: src/gedit-file-selector-util.c:158
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The file \"%s\" is read-only.\n"
 "Do you want to try to replace it with the one you are saving?"
 msgstr ""
-"已存在名为“%s”的文件。\n"
-"是否要用正在保存的文件替换它？"
+"文件“%s”为只读。\n"
+"您想替换它吗？"
 
 #: src/gedit-file-selector-util.c:544
-#, fuzzy
 msgid "Select a filename to save"
-msgstr "选择要激活的插件："
+msgstr "选择要保存的文件名"
 
 #: src/gedit-file.c:150
 msgid "Open File ..."
-msgstr "打开文件 ..."
+msgstr "打开文件..."
 
 #: src/gedit-file.c:176 src/gedit-file.c:831
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file '%s'"
-msgstr "载入了文件 %s"
+msgstr "已载入文件“%s”"
 
 #: src/gedit-file.c:304 src/gedit-file.c:433
-#, fuzzy, c-format
+#, c-format
 msgid "Saving file '%s' ..."
-msgstr "另存为 ..."
+msgstr "保存文件“%s”..."
 
-# SUN CHANGED MESSAGE
 #: src/gedit-file.c:332 src/gedit-file.c:448
-#, fuzzy
 msgid "The document has not been saved."
 msgstr "文档还没有保存。"
 
@@ -1809,9 +1647,8 @@ msgid "File '%s' saved."
 msgstr "文件“%s”已保存。"
 
 #: src/gedit-file.c:412
-#, fuzzy
 msgid "Save as ..."
-msgstr "另存为 ..."
+msgstr "另存为..."
 
 # SUN NEW TRANSLATION
 #: src/gedit-file.c:626
@@ -1820,9 +1657,8 @@ msgid "Reverting file '%s' ..."
 msgstr "正在还原文件“%s”..."
 
 #: src/gedit-file.c:639
-#, fuzzy
 msgid "The document has not been reverted."
-msgstr "文档没有还没有保存。"
+msgstr "文档还没有还原。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-file.c:649
@@ -1831,27 +1667,23 @@ msgid "File '%s' reverted."
 msgstr "文件“%s”已还原。"
 
 #: src/gedit-file.c:675
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %d files..."
-msgstr "载入了 %i 个文件"
+msgstr "正在载入 %i 个文件..."
 
 #: src/gedit-file.c:711
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "文件“%s”不存在，您是否想创建它？"
 
 #: src/gedit-file.c:766
 #, c-format
 msgid "Loaded %i files"
-msgstr "载入了 %i 个文件"
+msgstr "已载入 %i 个文件"
 
 #: src/gedit-file.c:889
-#, fuzzy
 msgid "Could not read data from stdin."
-msgstr ""
-"在打开文件时产生了错误。\n"
-"\n"
-"%s"
+msgstr "无法从标准输入中读数据。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-mdi.c:850
@@ -1863,7 +1695,7 @@ msgid ""
 msgstr ""
 "是否想要保存对文档“%s”所做的更改？\n"
 "\n"
-"如果不保存更改，将会丢失它们。"
+"如果不保存，您的更改将会丢失。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-mdi.c:855
@@ -1882,78 +1714,76 @@ msgstr "不关闭(_D)"
 
 #: src/gedit-mdi.c:968
 msgid "(modified)"
-msgstr "(修改)"
+msgstr "(已修改)"
 
 #: src/gedit-mdi.c:974
 msgid "(readonly)"
 msgstr "(只读)"
 
-# SUN CHANGED MESSAGE
 #: src/gedit-plugins-engine.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "Error, unable to open module file '%s'\n"
-msgstr "错误：不能打开模块文件 %s\n"
+msgstr "错误：无法打开模块文件“%s”\n"
 
 #: src/gedit-plugins-engine.c:174
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr "错误：插件没有init_plugin函数。"
+msgstr "错误：插件“%s”没有初始化函数。"
 
 #: src/gedit-plugins-engine.c:184
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "错误：插件没有init_plugin函数。"
+msgstr "错误：插件“%s”没有激活函数。"
 
 #: src/gedit-plugins-engine.c:194
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "错误：插件没有init_plugin函数。"
+msgstr "错误：插件“%s”没有取消激活函数。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:224
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr "错误，无法初始化插件“%s”"
+msgstr "错误：无法初始化插件“%s”"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr "错误，插件“%s”没有指定名称"
+msgstr "错误：插件“%s”没有指定名称"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:312
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr "错误，无法保存插件“%s”的设置"
+msgstr "错误：无法保存插件“%s”的设置"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr "错误，无法激活插件“%s”"
+msgstr "错误：无法激活插件“%s”"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:411
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "错误，无法使插件“%s”不活动"
+msgstr "错误：无法停用插件“%s”"
 
 # SUN NEW TRANSLATION
 #: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "错误，无法更新插件“%s”的 UI"
+msgstr "错误：无法更新插件“%s”的 UI"
 
 #: src/gedit-prefs-manager.c:323
-#, fuzzy
 msgid "Cannot initialize preferences manager."
-msgstr "不能初始化 gnome-vfs。"
+msgstr "无法初始化首选项管理器。"
 
 #: src/gedit-prefs-manager.c:1589
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr ""
+msgstr "Gconf 项 %3$s 期望的类型是“%1$s”，得到的类型是“%2$s”"
 
 # SUN NEW TRANSLATION
 #: src/gedit-print.c:191
@@ -1965,82 +1795,71 @@ msgstr ""
 "其中一种需要的字体。"
 
 #: src/gedit-print.c:377
-#, fuzzy, c-format
+#, c-format
 msgid "File: %s"
-msgstr "文件(_F)"
+msgstr "文件：%s"
 
 #. Print right text
 #: src/gedit-print.c:384
-#, fuzzy, c-format
+#, c-format
 msgid "Page: %d"
-msgstr "页 ： %i/%i"
+msgstr "页：%d"
 
-# SUN CHANGED MESSAGE
 #: src/gedit-print.c:517
-#, fuzzy
 msgid "gedit - Print Preview"
-msgstr "gedit： 打印预览"
+msgstr "gedit - 打印预览"
 
 #: src/gedit-print.c:595
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while printing.\n"
 "\n"
 "%s,"
 msgstr ""
-"在打开文件时产生了错误。\n"
+"打印时出错。\n"
 "\n"
-"%s"
+"%s,"
 
 #: src/gedit-ui.xml.h:1
-#, fuzzy
 msgid "About this application"
-msgstr "剪切选中的范围"
+msgstr "关于这个程序"
 
-# SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:2
-#, fuzzy
 msgid "C_ustomize Statusbar"
-msgstr "定制工具栏"
+msgstr "定制状态栏(_U)"
 
-# SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:3
-#, fuzzy
 msgid "Change the visibility of the statusbar in the current window"
-msgstr "更改当前窗口中工具栏的可见性"
+msgstr "设置是否在当前窗口中显示状态栏"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
-msgstr "更改当前窗口中工具栏的可见性"
+msgstr "设置是否在当前窗口中显示工具栏"
 
 #: src/gedit-ui.xml.h:5
-#, fuzzy
 msgid "Clos_e All"
-msgstr "全部关闭(_L)"
+msgstr "全部关闭(_E)"
 
 #: src/gedit-ui.xml.h:6
 msgid "Close"
 msgstr "关闭"
 
 #: src/gedit-ui.xml.h:7
-#, fuzzy
 msgid "Close All"
-msgstr "全部关闭(_L)"
+msgstr "全部关闭"
 
 #: src/gedit-ui.xml.h:8
-#, fuzzy
 msgid "Close all open files"
-msgstr "关闭全部打开了的文件"
+msgstr "关闭所有已打开的文件"
 
 #: src/gedit-ui.xml.h:9
 msgid "Close the current file"
 msgstr "关闭当前文件"
 
 #: src/gedit-ui.xml.h:10
-#, fuzzy
 msgid "Configure the application"
-msgstr "剪切选中的范围"
+msgstr "配置此应用程序"
 
 #: src/gedit-ui.xml.h:11
 msgid "Copy"
@@ -2048,16 +1867,15 @@ msgstr "复制"
 
 #: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
-msgstr "复制选中的范围"
+msgstr "复制选中的区域"
 
 #: src/gedit-ui.xml.h:13
 msgid "Create a new document"
-msgstr "创建一个新的文档"
+msgstr "新建一个文档"
 
 #: src/gedit-ui.xml.h:14
-#, fuzzy
 msgid "Cu_t"
-msgstr "剪切"
+msgstr "剪切(_T)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:15
@@ -2075,18 +1893,15 @@ msgstr "剪切"
 
 #: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
-msgstr "剪切选中的范围"
+msgstr "剪切选中的区域"
 
-# SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:19
-#, fuzzy
 msgid "Delete"
-msgstr "删除(_D)"
+msgstr "删除"
 
 #: src/gedit-ui.xml.h:20
-#, fuzzy
 msgid "Delete the selected text"
-msgstr "剪切选中的范围"
+msgstr "删除选中的文本"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:21
@@ -2096,7 +1911,7 @@ msgstr "转储 XML"
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:22
 msgid "Dump the UI Xml description"
-msgstr "转储 UI Xml 说明"
+msgstr "转储 UI 的 XML 描述"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:24
@@ -2104,23 +1919,21 @@ msgid "Find Again"
 msgstr "再次查找"
 
 #: src/gedit-ui.xml.h:25
-#, fuzzy
 msgid "Find Ne_xt"
-msgstr "查找下一个"
+msgstr "查找下一个(_X)"
 
 #: src/gedit-ui.xml.h:26
 msgid "Go to a specific line number"
 msgstr "跳转到指定的行号"
 
 #: src/gedit-ui.xml.h:27
-#, fuzzy
 msgid "Goto _Line"
-msgstr "转到行"
+msgstr "跳到行(_L)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
-msgstr "图标和文本(_T)"
+msgstr "图标和文字(_T)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:29
@@ -2134,31 +1947,27 @@ msgstr "新建"
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:31
 msgid "Only show icons in the toolbar"
-msgstr "只显示工具栏中的图标"
+msgstr "在工具栏中只显示图标"
 
 #: src/gedit-ui.xml.h:32
 msgid "Open"
 msgstr "打开"
 
 #: src/gedit-ui.xml.h:33
-#, fuzzy
 msgid "Open Location..."
-msgstr "打开文件 ..."
+msgstr "打开位置..."
 
 #: src/gedit-ui.xml.h:34
-#, fuzzy
 msgid "Open _Location..."
-msgstr "打开文件 ..."
+msgstr "打开位置(_L)..."
 
 #: src/gedit-ui.xml.h:35
-#, fuzzy
 msgid "Open a file"
 msgstr "打开一个文件"
 
 #: src/gedit-ui.xml.h:36
-#, fuzzy
 msgid "Open a file from a specified location"
-msgstr "从指定的 URI 打开文件"
+msgstr "从指定的位置打开文件"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:37
@@ -2171,27 +1980,23 @@ msgstr "粘贴"
 
 #: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
-msgstr "把剪贴板上的内容粘贴下来"
+msgstr "粘贴剪贴板上的内容"
 
 #: src/gedit-ui.xml.h:40
-#, fuzzy
 msgid "Pr_eferences..."
-msgstr "选项"
+msgstr "首选项(_E)..."
 
 #: src/gedit-ui.xml.h:43
-#, fuzzy
 msgid "Print Previe_w"
-msgstr "打印预览"
+msgstr "打印预览(_W)"
 
 #: src/gedit-ui.xml.h:44
-#, fuzzy
 msgid "Print Preview"
 msgstr "打印预览"
 
 #: src/gedit-ui.xml.h:45
-#, fuzzy
 msgid "Print Setup"
-msgstr "打印文档"
+msgstr "打印设置"
 
 #: src/gedit-ui.xml.h:46
 msgid "Print preview"
@@ -2207,7 +2012,6 @@ msgid "Quit"
 msgstr "退出"
 
 #: src/gedit-ui.xml.h:49
-#, fuzzy
 msgid "Quit the program"
 msgstr "退出程序"
 
@@ -2221,19 +2025,16 @@ msgid "Redo"
 msgstr "重复"
 
 #: src/gedit-ui.xml.h:52
-#, fuzzy
 msgid "Redo the undone action"
-msgstr "重复上次的操作"
+msgstr "重复已撤消的操作"
 
 #: src/gedit-ui.xml.h:54
-#, fuzzy
 msgid "Replace a string"
-msgstr "搜索一个字串"
+msgstr "替换一个字串"
 
 #: src/gedit-ui.xml.h:55
-#, fuzzy
 msgid "Revert"
-msgstr "还原(_R)"
+msgstr "还原"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:56
@@ -2241,67 +2042,56 @@ msgid "Revert to a saved version of the file"
 msgstr "恢复为已保存的文件"
 
 #: src/gedit-ui.xml.h:57
-#, fuzzy
 msgid "Sa_ve All"
-msgstr "全部保存(_E)"
+msgstr "全部保存(_V)"
 
 #: src/gedit-ui.xml.h:59
-#, fuzzy
 msgid "Save All"
-msgstr "全部保存(_E)"
+msgstr "全部保存"
 
 #: src/gedit-ui.xml.h:60
-#, fuzzy
 msgid "Save As"
-msgstr "另存为 ..."
+msgstr "另存为"
 
 #: src/gedit-ui.xml.h:61
-#, fuzzy
 msgid "Save _As..."
-msgstr "另存为 ..."
+msgstr "另存为(_A)..."
 
 #: src/gedit-ui.xml.h:62
-#, fuzzy
 msgid "Save all open files"
-msgstr "保存所有打开了的文件"
+msgstr "保存所有已打开的文件"
 
 #: src/gedit-ui.xml.h:63
 msgid "Save the current file"
 msgstr "保存当前文件"
 
 #: src/gedit-ui.xml.h:64
-#, fuzzy
 msgid "Save the current file with a different name"
-msgstr "保存当前文件"
+msgstr "用新文件名保存当前文件"
 
 #: src/gedit-ui.xml.h:65
-#, fuzzy
 msgid "Search again for the same string"
-msgstr "搜索一个字串"
+msgstr "再次搜索相同的字串"
 
 #: src/gedit-ui.xml.h:66
 msgid "Search for a string"
 msgstr "搜索一个字串"
 
 #: src/gedit-ui.xml.h:67
-#, fuzzy
 msgid "Select All"
-msgstr "全部替换"
+msgstr "全部选中"
 
 #: src/gedit-ui.xml.h:68
-#, fuzzy
 msgid "Select _All"
-msgstr "全部替换"
+msgstr "全部选中(_A)"
 
 #: src/gedit-ui.xml.h:69
-#, fuzzy
 msgid "Select the entire document"
-msgstr "邮寄当前文档"
+msgstr "选中整个文档"
 
 #: src/gedit-ui.xml.h:70
-#, fuzzy
 msgid "Set toolbar button style according to desktop default"
-msgstr "根据系统的设置来设置工具栏(_S)"
+msgstr "根据系统的默认设置来设置工具栏按钮风格"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:71
@@ -2309,9 +2099,8 @@ msgid "Setup the page settings for your current printer"
 msgstr "设置当前打印机的页面设置"
 
 #: src/gedit-ui.xml.h:72
-#, fuzzy
 msgid "Show _Cursor Position"
-msgstr "从光标的位置开始搜索(_C)"
+msgstr "显示光标位置(_C)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:73
@@ -2329,30 +2118,24 @@ msgid "Show overwrite mode in the statusbar"
 msgstr "在状态栏中显示覆盖模式"
 
 #: src/gedit-ui.xml.h:77
-#, fuzzy
 msgid "Undo the last action"
 msgstr "撤消上次操作"
 
-# SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:78
-#, fuzzy
 msgid "_About"
-msgstr "关于(_A)..."
+msgstr "关于(_A)"
 
 #: src/gedit-ui.xml.h:79
-#, fuzzy
 msgid "_Close"
-msgstr "关闭"
+msgstr "关闭(_C)"
 
 #: src/gedit-ui.xml.h:80
-#, fuzzy
 msgid "_Contents"
-msgstr "文档(_D)"
+msgstr "内容(_C)"
 
 #: src/gedit-ui.xml.h:81
-#, fuzzy
 msgid "_Copy"
-msgstr "复制"
+msgstr "复制(_C)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:82
@@ -2370,27 +2153,24 @@ msgid "_Delete"
 msgstr "删除(_D)"
 
 #: src/gedit-ui.xml.h:85
-#, fuzzy
 msgid "_Desktop Default"
-msgstr "默认"
+msgstr "桌面默认值(_D)"
 
 #: src/gedit-ui.xml.h:86
 msgid "_Documents"
 msgstr "文档(_D)"
 
 #: src/gedit-ui.xml.h:87
-#, fuzzy
 msgid "_Edit"
-msgstr "退出"
+msgstr "编辑(_E)"
 
 #: src/gedit-ui.xml.h:88
 msgid "_File"
 msgstr "文件(_F)"
 
 #: src/gedit-ui.xml.h:89
-#, fuzzy
 msgid "_Find"
-msgstr "查找"
+msgstr "查找(_F)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-ui.xml.h:90
@@ -2407,68 +2187,56 @@ msgid "_New"
 msgstr "新建(_N)"
 
 #: src/gedit-ui.xml.h:93
-#, fuzzy
 msgid "_Open..."
-msgstr "打开"
+msgstr "打开(_O)..."
 
 #: src/gedit-ui.xml.h:94
-#, fuzzy
 msgid "_Paste"
-msgstr "粘贴"
+msgstr "粘贴(_P)"
 
 #: src/gedit-ui.xml.h:95
-#, fuzzy
 msgid "_Print..."
-msgstr "打印"
+msgstr "打印(_P)..."
 
 #: src/gedit-ui.xml.h:96
-#, fuzzy
 msgid "_Quit"
-msgstr "剪切"
+msgstr "退出(_Q)"
 
 #: src/gedit-ui.xml.h:97
-#, fuzzy
 msgid "_Redo"
-msgstr "重复"
+msgstr "重复(_R)"
 
 #: src/gedit-ui.xml.h:99
 msgid "_Revert"
 msgstr "还原(_R)"
 
 #: src/gedit-ui.xml.h:100
-#, fuzzy
 msgid "_Save"
-msgstr "保存"
+msgstr "保存(_S)"
 
 #: src/gedit-ui.xml.h:101
-#, fuzzy
 msgid "_Search"
-msgstr "查找(_A)："
+msgstr "搜索(_S)"
 
 #: src/gedit-ui.xml.h:102
-#, fuzzy
 msgid "_Statusbar"
-msgstr "显示状态栏(_H)"
+msgstr "状态栏(_S)"
 
 #: src/gedit-ui.xml.h:103
-#, fuzzy
 msgid "_Toolbar"
-msgstr "收件人(_T)："
+msgstr "工具栏(_T)"
 
 #: src/gedit-ui.xml.h:104
-#, fuzzy
 msgid "_Tools"
-msgstr "收件人(_T)："
+msgstr "工具(_T)"
 
 #: src/gedit-ui.xml.h:105
-#, fuzzy
 msgid "_Undo"
-msgstr "撤消"
+msgstr "撤消(_U)"
 
 #: src/gedit-ui.xml.h:106
-#, fuzzy
 msgid "_View"
-msgstr "添加视图(_A)"
+msgstr "查看(_V)"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:792
@@ -2496,9 +2264,9 @@ msgid ""
 msgstr "无法打开文件“%s”，因为 gedit 不能处理 %s: 位置。"
 
 #: src/gedit-utils.c:816
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\""
-msgstr "无法打开最近使用的文件：%s"
+msgstr "无法打开文件“%s”"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:826
@@ -2531,17 +2299,16 @@ msgstr ""
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "无法打开文件“%s”，因为访问被拒绝。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:854
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
-"无法打开文件“%s”，因为登录尝试失败。\n"
+"无法打开文件“%s”，因为已经打开太多的文件了。\n"
 "\n"
-"请检查键入的位置是否正确，然后重试。"
+"请关闭一些已打开的文件，然后重试。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:862
@@ -2555,28 +2322,24 @@ msgstr ""
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:869
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
-msgstr ""
-"磁盘空间不足，无法保存文件。\n"
-"请释放一些磁盘空间并重试。"
+msgstr "内存不足，无法打开文件“%s”。请关闭一些正在运行的程序，然后重试。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:895
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
-"无法打开文件“%s”，因为主机名称无效。\n"
+"无法打开文件“%s”，因为找不到主机“%s”。\n"
 "\n"
-"请检查键入的位置是否正确，然后重试。"
+"请检查键入的位置和代理服务器设置是否正确，然后重试。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:910
@@ -2586,7 +2349,7 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
-"无法打开文件“%s”，因为主机名称无效。\n"
+"无法打开文件“%s”，因为主机名无效。\n"
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
@@ -2600,7 +2363,7 @@ msgid ""
 msgstr ""
 "无法打开文件“%s”，因为主机名为空。\n"
 "\n"
-"请检查代理设置是否正确，然后重试。"
+"请检查代理服务器设置是否正确，然后重试。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:924
@@ -2627,23 +2390,23 @@ msgstr ""
 "可能您正在尝试打开一个二进制文件。"
 
 #: src/gedit-utils.c:970
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\"."
-msgstr "不能分配需要的内存。"
+msgstr "无法打开文件“%s”。"
 
 #: src/gedit-utils.c:1021
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\"."
-msgstr "不能分配需要的内存。"
+msgstr "无法保存文件“%s”。"
 
 #: src/gedit-utils.c:1025
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
 "\n"
 "%s"
 msgstr ""
-"在关闭文件时发生了错误：\n"
+"无法保存文件“%s”。\n"
 "\n"
 "%s"
 
@@ -2657,7 +2420,7 @@ msgid ""
 msgstr ""
 "无法还原文件“%s”，因为 gedit 找不到它。\n"
 "\n"
-"可能它最近已被删除。"
+"可能它已被删除。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:1085
@@ -2673,12 +2436,9 @@ msgid ""
 msgstr "无法还原文件“%s”，因为 gedit 不能处理 %s: 位置。"
 
 #: src/gedit-utils.c:1102 src/gedit-utils.c:1242
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\"."
-msgstr ""
-"在打开文件时产生了错误。\n"
-"\n"
-"%s"
+msgstr "无法还原文件“%s”。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:1112
@@ -2700,39 +2460,34 @@ msgstr "无法还原文件“%s”，因为它太大。"
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "无法还原文件“%s”，因为访问被拒绝。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1133
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
-"无法打开文件“%s”，因为登录尝试失败。\n"
+"无法还原文件“%s” 因为打开了太多的文件。\n"
 "\n"
-"请检查键入的位置是否正确，然后重试。"
+"请关闭一些已打开的文件，然后重试。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1141
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
-msgstr ""
-"磁盘空间不足，无法保存文件。\n"
-"请释放一些磁盘空间并重试。"
+msgstr "没有足够的内存可用于还原文件“%s”。请关闭一些正在运行的程序，然后重试。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1167
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
-"无法还原文件“%s”，因为主机名为空。\n"
+"无法还原文件“%s”，因为因为找不到主机“%s”。\n"
 "\n"
-"请检查代理设置是否正确，然后重试。"
+"请检查您的代理服务器设置是否正确，然后重试。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:1181
@@ -2744,7 +2499,7 @@ msgid ""
 msgstr ""
 "无法还原文件“%s”，因为主机名为空。\n"
 "\n"
-"请检查代理设置是否正确，然后重试。"
+"请检查代理服务器设置是否正确，然后重试。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-utils.c:1188
@@ -2764,50 +2519,47 @@ msgstr ""
 "\n"
 "可能您正在尝试还原一个二进制文件。"
 
-# SUN CHANGED MESSAGE
 #: src/gedit-utils.c:1204
-#, fuzzy
 msgid "It is not possible to revert an Untitled document."
 msgstr "您不能还原一个未命名文档的内容。"
 
 #: src/gedit-utils.c:1293
 #, c-format
 msgid "The file \"%s\" already exists."
-msgstr ""
+msgstr "文件“%s”已经存在。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1299
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "\n"
 "Please, check that you typed the location correctly."
 msgstr ""
-"“%s”是目录。\n"
+"“%s”是一个目录。\n"
 "\n"
-"请检查键入的位置是否正确，然后重试。"
+"请检查您是否键入了正确的位置。"
 
 #: src/gedit-utils.c:1308
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
 "\n"
 "Make sure you have the appropriate write permissions."
 msgstr ""
-"gedit 无法保存这个文件：\n"
+"无法创建文件“%s”。\n"
 "\n"
-" %s \n"
-"\n"
-"请确保您指定的路径是存在的，而且您有足够和适当的权限来写入。"
+"请确保您有写入的权限。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1315
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
 "\n"
 "The file name is too long."
-msgstr "无法还原文件“%s”，因为它太大。"
+msgstr ""
+"无法创建文件“%s”。\n"
+"\n"
+"文件名太长。"
 
 #: src/gedit-utils.c:1322
 #, c-format
@@ -2817,25 +2569,25 @@ msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
+"无法创建文件“%s”。\n"
+"\n"
+"文件名中的某一级目录不存在或者是个目标不存在的符号链接。"
 
-# SUN NEW TRANSLATION
 #: src/gedit-utils.c:1331
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
 "\n"
 "Please free some disk space and try again."
 msgstr ""
-"磁盘空间不足，无法保存文件。\n"
-"请释放一些磁盘空间并重试。"
+"没有足够的磁盘空间来创建文件“%s”。\n"
+"\n"
+"请释放一些磁盘空间，然后重试。"
 
 #: src/gedit-utils.c:1337
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\"."
-msgstr ""
-"在打开文件时产生了错误。\n"
-"\n"
-"%s"
+msgstr "无法创建文件“%s”。"
 
 # SUN NEW TRANSLATION
 #: src/gedit-view.c:904
@@ -2846,62 +2598,60 @@ msgstr "  行 %d，列 %d"
 # SUN NEW TRANSLATION
 #: src/gedit-view.c:942
 msgid "  OVR"
-msgstr "  OVR"
+msgstr " 覆盖"
 
 # SUN NEW TRANSLATION
 #: src/gedit-view.c:944
 msgid "  INS"
-msgstr "  INS"
+msgstr " 插入"
 
 #: src/gedit2.c:75
-#, fuzzy
 msgid "Show mdi debugging messages."
-msgstr "显示视图方面的调试信息。"
+msgstr "显示有关多文档视图的调试信息。"
 
 #: src/gedit2.c:78
 msgid "Show commands debugging messages."
-msgstr "显示命令方面的调试信息。"
+msgstr "显示有关命令的调试信息。"
 
 #: src/gedit2.c:81
 msgid "Show document debugging messages."
-msgstr "显示文档方面的调试信息。"
+msgstr "显示有关文档的调试信息。"
 
 #: src/gedit2.c:84
 msgid "Show file debugging messages."
-msgstr "显示文件方面的调试信息。"
+msgstr "显示有关文件的调试信息。"
 
 #: src/gedit2.c:87
 msgid "Show plugin debugging messages."
-msgstr "显示插件方面的调试信息。"
+msgstr "显示有关插件的调试信息。"
 
 #: src/gedit2.c:90
 msgid "Show prefs debugging messages."
-msgstr "显示选项方面的调试信息。"
+msgstr "显示有关选项的调试信息。"
 
 #: src/gedit2.c:93
 msgid "Show printing debugging messages."
-msgstr "显示打印方面的调试信息"
+msgstr "显示有关打印的调试信息"
 
 #: src/gedit2.c:96
 msgid "Show search debugging messages."
-msgstr "显示搜索方面的调试信息。"
+msgstr "显示有关搜索的调试信息。"
 
 #: src/gedit2.c:99
 msgid "Show undo debugging messages."
-msgstr "显示撤消方面的调试信息。"
+msgstr "显示有关撤消的调试信息。"
 
 #: src/gedit2.c:102
 msgid "Show view debugging messages."
-msgstr "显示视图方面的调试信息。"
+msgstr "显示有关视图的调试信息。"
 
 #: src/gedit2.c:105
 msgid "Show recent debugging messages."
-msgstr "显示最近打开文档方面的调试信息。"
+msgstr "显示有关最近打开文档的调试信息。"
 
 #: src/gedit2.c:108
-#, fuzzy
 msgid "Show session management debugging messages."
-msgstr "显示文档方面的调试信息。"
+msgstr "显示有关对话管理的调试信息。"
 
 #: src/gedit2.c:111
 msgid "Turn on all debugging messages."
@@ -2909,79 +2659,20 @@ msgstr "打开所有的调试信息。"
 
 #: src/gedit2.c:114
 msgid "Quit an existing instance of gedit"
-msgstr ""
+msgstr "退出一个 gedit 实例"
 
 #: src/gedit2.c:117
 msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr ""
+msgstr "在已存在的 gedit 实例中创建一个最上层窗口"
 
 #: src/gedit2.c:120
 msgid "Create a new document in an existing instance of gedit"
-msgstr ""
+msgstr "在已存在的 gedit 实例中创建一个新文档"
 
 #: src/gnome-recent-view-bonobo.c:218
-#, fuzzy, c-format
+#, c-format
 msgid "Open %s"
-msgstr "打开一个文件"
-
-#, fuzzy
-#~ msgid "Default background color"
-#~ msgstr "选择颜色"
-
-# SUN NEW TRANSLATION
-#, fuzzy
-#~ msgid "Default font used by the editor"
-#~ msgstr "编辑器使用的字体(_F)："
-
-#, fuzzy
-#~ msgid "Default selected text color"
-#~ msgstr "剪切选中的范围"
-
-#, fuzzy
-#~ msgid "Default selection color"
-#~ msgstr "剪切选中的范围"
-
-# SUN NEW TRANSLATION
-#, fuzzy
-#~ msgid "Default text color"
-#~ msgstr "选定的文本颜色(_E):"
-
-#, fuzzy
-#~ msgid "Font used to print line numbers"
-#~ msgstr "跳转到指定的行号"
-
-# SUN NEW TRANSLATION
-#, fuzzy
-#~ msgid "Font used to print page headers"
-#~ msgstr "打印页眉(_P)"
-
-#, fuzzy
-#~ msgid "MDI Mode"
-#~ msgstr "模式(_M)："
-
-#, fuzzy
-#~ msgid "MDI tabs position"
-#~ msgstr "Notebook 标签位置(_T)："
-
-#, fuzzy
-#~ msgid "Max number of recent file"
-#~ msgstr "无法打开最近使用的文件：%s"
-
-#, fuzzy
-#~ msgid "Print line numbers every x lines"
-#~ msgstr "每隔几行打印行号(_N)："
-
-#, fuzzy
-#~ msgid "Print line numbers every x lines (x == 0: no numbers)"
-#~ msgstr "每隔几行打印行号(_N)："
-
-#, fuzzy
-#~ msgid "Undo levels"
-#~ msgstr "顶层"
-
-#, fuzzy
-#~ msgid "Plugin Manager"
-#~ msgstr "插件管理器..."
+msgstr "打开 %s"
 
 # SUN NEW TRANSLATION
 #~ msgid "Could not create the Plugin Manager dialog"
@@ -2990,10 +2681,6 @@ msgstr "打开一个文件"
 # SUN NEW TRANSLATION
 #~ msgid "Toolbar"
 #~ msgstr "工具栏"
-
-#, fuzzy
-#~ msgid "Status bar"
-#~ msgstr "显示状态栏(_H)"
 
 # SUN NEW TRANSLATION
 #~ msgid "MDI"
@@ -3023,20 +2710,8 @@ msgstr "打开一个文件"
 #~ msgid "Notebook"
 #~ msgstr "笔记本"
 
-#, fuzzy
-#~ msgid "Notebook _tab position:"
-#~ msgstr "Notebook 标签位置(_T)："
-
 #~ msgid "Right"
 #~ msgstr "右"
-
-#, fuzzy
-#~ msgid "Sho_w tooltips"
-#~ msgstr "收件人(_T)："
-
-#, fuzzy
-#~ msgid "Show cursor _position"
-#~ msgstr "从光标的位置开始搜索(_C)"
 
 # SUN NEW TRANSLATION
 #~ msgid "Show overwrite _mode"
@@ -3064,10 +2739,6 @@ msgstr "打开一个文件"
 #~ "appearance."
 #~ msgstr "工具栏设置使您可以显示或隐藏工具栏并可以定制它的外观。"
 
-#, fuzzy
-#~ msgid "Toolbars"
-#~ msgstr "收件人(_T)："
-
 #~ msgid "Top"
 #~ msgstr "顶部"
 
@@ -3081,18 +2752,6 @@ msgstr "打开一个文件"
 # SUN NEW TRANSLATION
 #~ msgid "_According to system settings"
 #~ msgstr "依照系统设置(_A)"
-
-#, fuzzy
-#~ msgid "_MDI Mode:"
-#~ msgstr "模式(_M)："
-
-#, fuzzy
-#~ msgid "_Show status bar"
-#~ msgstr "显示状态栏(_H)"
-
-#, fuzzy
-#~ msgid "_Show toolbar"
-#~ msgstr "收件人(_T)："
 
 # SUN NEW TRANSLATION
 #~ msgid ""
@@ -3111,76 +2770,17 @@ msgstr "打开一个文件"
 #~ msgid "Add/Remove plugins"
 #~ msgstr "添加/删除插件"
 
-#, fuzzy
-#~ msgid "Plugin _Manager"
-#~ msgstr "插件管理器..."
-
-#, fuzzy
-#~ msgid "Plugin _Manager..."
-#~ msgstr "插件管理器..."
-
 # SUN NEW TRANSLATION
 #~ msgid "The GNOME text editor"
 #~ msgstr "GNOME 文本编辑器"
-
-#, fuzzy
-#~ msgid "level(s)"
-#~ msgstr "次(_L)"
-
-#, fuzzy
-#~ msgid "Find Next"
-#~ msgstr "查找下一个"
-
-#, fuzzy
-#~ msgid "Replace All"
-#~ msgstr "全部替换"
-
-#, fuzzy
-#~ msgid "gedit - Print Document"
-#~ msgstr "打印文档"
 
 # SUN NEW TRANSLATION
 #~ msgid "About..."
 #~ msgstr "关于..."
 
-#, fuzzy
-#~ msgid "Contents"
-#~ msgstr "转换"
-
-#, fuzzy
-#~ msgid "Show _Tooltips"
-#~ msgstr "收件人(_T)："
-
 # SUN NEW TRANSLATION
 #~ msgid "Show tooltips in the toolbar"
 #~ msgstr "在工具栏中显示工具提示"
-
-#, fuzzy
-#~ msgid "_Plugin Manager"
-#~ msgstr "插件管理器..."
-
-#, fuzzy
-#~ msgid "Could not revert the file \"%s\""
-#~ msgstr ""
-#~ "在打开文件时产生了错误。\n"
-#~ "\n"
-#~ "%s"
-
-#, fuzzy
-#~ msgid "Loaded file %s"
-#~ msgstr "载入了文件 %s"
-
-#, fuzzy
-#~ msgid "_Hello World"
-#~ msgstr "Hello World"
-
-#, fuzzy
-#~ msgid "Prints Hello World."
-#~ msgstr "Hello World"
-
-#, fuzzy
-#~ msgid "Hello World "
-#~ msgstr "Hello World"
 
 #~ msgid "Hello World"
 #~ msgstr "Hello World"
@@ -3188,37 +2788,8 @@ msgstr "打开一个文件"
 #~ msgid "Sample 'hello world' plugin."
 #~ msgstr "“hello world”例子插件。"
 
-#, fuzzy
-#~ msgid "Invalid UTF-8 data encountered reading file"
-#~ msgstr ""
-#~ "在打开文件时产生了错误。\n"
-#~ "\n"
-#~ "%s"
-
-#, fuzzy
-#~ msgid ""
-#~ "An error occurred while opening the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "在打开文件时产生了错误。\n"
-#~ "\n"
-#~ "%s"
-
-#, fuzzy
-#~ msgid "C_lear"
-#~ msgstr "字符"
-
 #~ msgid "C_lose All"
 #~ msgstr "全部关闭(_L)"
-
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "字符"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "退出"
 
 #~ msgid "Exit"
 #~ msgstr "退出"
@@ -3226,31 +2797,11 @@ msgstr "打开一个文件"
 #~ msgid "Open from _URI..."
 #~ msgstr "打开_URI ..."
 
-#, fuzzy
-#~ msgid "Print Pre_view"
-#~ msgstr "打印预览(_V)"
-
-#, fuzzy
-#~ msgid "Revert to saved"
-#~ msgstr "反转"
-
 #~ msgid "Sav_e All"
 #~ msgstr "全部保存(_E)"
 
-#, fuzzy
-#~ msgid "_Preferences"
-#~ msgstr "选项"
-
-#, fuzzy
-#~ msgid "_Select all"
-#~ msgstr "全部解除(_D)"
-
 #~ msgid "Save As..."
 #~ msgstr "另存为 ..."
-
-#, fuzzy
-#~ msgid "_Manager"
-#~ msgstr "管理(_M) ..."
 
 #~ msgid "Browse"
 #~ msgstr "浏览"
@@ -3260,10 +2811,6 @@ msgstr "打开一个文件"
 
 #~ msgid "Number Converter"
 #~ msgstr "数制转换"
-
-#, fuzzy
-#~ msgid "diff"
-#~ msgstr "比较差异"
 
 #~ msgid "Untitled %i"
 #~ msgstr "未命名 %i"
@@ -3285,10 +2832,6 @@ msgstr "打开一个文件"
 #~ "This plugin displays a pop-up dialog which contains basic information on "
 #~ "current document."
 #~ msgstr "该插件弹出一个显示当前文档的基本信息的对话框。"
-
-#, fuzzy
-#~ msgid "email"
-#~ msgstr "邮寄"
 
 #~ msgid "Executing command: %s"
 #~ msgstr "正在执行命令：%s"
@@ -3340,7 +2883,7 @@ msgstr "打开一个文件"
 #~ msgstr "十进制到八进制(_O)"
 
 #~ msgid " Hex to Decima_l "
-#~ msgstr "十六进制到十进制(_l)"
+#~ msgstr "十六进制到十进制(_L)"
 
 #~ msgid "_Converted value:"
 #~ msgstr "转换后的数值(_C)："
