@@ -64,7 +64,7 @@ typedef struct _PrintJobInfo {
 	float margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
 	float printable_width, printable_height;
 	float header_height;
-	gint   total_lines;
+	gint   total_lines, total_lines_real;
 	gint   lines_per_page;
 	gint   chars_per_line;
 	guchar* temp;
@@ -86,7 +86,7 @@ static void print_document (Document *doc, GnomePrinter *printer);
 static void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);
 static void print_line (PrintJobInfo *pji, int line);
 static void print_ps_line(PrintJobInfo * pji, int line);
-static int  print_determine_lines (PrintJobInfo *pji);
+static int  print_determine_lines (PrintJobInfo *pji, int real);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void start_job (GnomePrintContext *pc);
 static void print_header (PrintJobInfo *pji, unsigned int page);
@@ -175,20 +175,27 @@ print_document (Document *doc, GnomePrinter *printer)
 
 	start_job (pji->pc);
 
+	g_print("Pages : %i Total Lines : %i Total Lines Real :%i\n", pji->pages, pji->total_lines, pji->total_lines_real);
+
+	j=0;
 	for(i = 1; i <= pji->pages; i++)
 	{
+		g_print("Printing page %i\n", i);
 		if (settings->printheader)
 			print_header(pji, i);
 
 		print_setfont (pji);
-		for (j = 1; j<= pji->total_lines; j++)
+		for (j++; j < pji->total_lines; j++)
 		{
+			g_print("Printing line:%i\n", j);
 			print_line (pji, j);
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
 		end_page (pji);
 	}
+
+
 	end_job (pji->pc);
 
 	g_free (pji->temp);
@@ -226,26 +233,27 @@ print_line (PrintJobInfo *pji, int line)
 	int first_line = TRUE;
 
 	i = 0;
-	while( pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size)
+	while( (pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size) )
 	{
 		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
-		
-		if( i == pji->chars_per_line )
+		if( i == pji->chars_per_line + 1 )
 		{
 			pji->temp[i]=(guchar) '\0';
-			pji->file_offset = pji->file_offset + i + 1;
+			pji->file_offset = pji->file_offset + i;
 			if (print_line)
 				print_ps_line (pji, (first_line)?line:0);
 			if (!pji->wrapping)
 				print_line = FALSE;
 			i=0;
 			first_line=FALSE;
+			if (pji->current_line % pji->lines_per_page == 0)
+				return;
 		}
 	}
-	pji->temp[i]=(guchar) '\0';	
+	pji->temp[i]=(guchar) '\0';
 	pji->file_offset = pji->file_offset + i + 1;
-	if (print_line)
+	if (print_line && i > 0)
 		print_ps_line (pji, (first_line)?line:0);
 }
 
@@ -319,35 +327,41 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	pji->font_char_height = .14 * 72;
 	pji->wrapping = settings->printwrap;
 	pji->chars_per_line = (gint)(pji->printable_width / pji->font_char_width);
-	pji->total_lines = print_determine_lines(pji);
+	pji->total_lines = print_determine_lines(pji, FALSE);
+	pji->total_lines_real = print_determine_lines(pji, TRUE);
 	pji->lines_per_page = (pji->printable_height -
 			      pji->header_height)/pji->font_char_height
 		              - 1 ;
-	pji->pages = ((int) (pji->total_lines-1)/pji->lines_per_page)+1;
+	pji->pages = ((int) (pji->total_lines_real-1)/pji->lines_per_page)+1;
+	g_print("Pages : %i - Lines pp: %i \n", pji->pages, pji->lines_per_page);
+	if (pji->pages==0)
+		return;
+	
 	pji->file_offset = 0;
 	pji->current_line = 0;
 }
 
 static int
-print_determine_lines (PrintJobInfo *pji)
+print_determine_lines (PrintJobInfo *pji, int real)
 {
-	int lines=1;
+	int lines=0;
 	int i;
 	int character = 0;
 
-	for (i=0; i < pji->buffer_size; i++)
+	for (i=0; i <= pji->buffer_size; i++)
 	{
-		if (pji->buffer[i] == '\n')
+		if (pji->buffer[i] == '\n' || i==pji->buffer_size)
 		{
-			lines++;
+			if (character>0 || !real || !pji->wrapping)
+				lines++;
 			character=0;
 		}
 		else
 		{
-			if( pji->wrapping && FALSE)
+			if( pji->wrapping && real)
 			{
 				character++;
-				if ( character > pji->chars_per_line)
+				if (character == pji->chars_per_line + 1)
 				{
 					lines++;
 					character=0;
@@ -355,15 +369,23 @@ print_determine_lines (PrintJobInfo *pji)
 			}
 		}
 	}
+/*	if (real)
+	g_print("Se econtro que lineas : %i\n", lines);*/
         /* After counting, scan the doc backwards to determine how many
 	   blanks lines there are (at the bottom),substract that from lines */
-	for ( i=pji->buffer_size-1; i>0; i--)
+/*	for ( i=pji->buffer_size-1; i>0; i--)
 		if (pji->buffer[i] != '\n' && pji->buffer[i] != ' ' )
 			break;
 		else
 			if (pji->buffer[i] == '\n')
-				lines--;
+			lines--;*/
+/*	if (real)
+	g_print("Se econtro que lineas.: %i\n", lines);*/
 
+	/* Fine tunning. Like if the text fills exactly 1 page */ 
+/*	if ( character == 0 && real)
+	lines--;*/
+	
 	return lines;
 }
 

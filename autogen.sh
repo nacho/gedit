@@ -5,7 +5,7 @@ srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 export srcdir
 
-PKG_NAME="gEdit"
+PKG_NAME="gedit"
 
 (test -f $srcdir/src/gedit.h) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
