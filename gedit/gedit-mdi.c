@@ -727,19 +727,40 @@ save_prefs:
 }
 
 static void 
-gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context, 
-		                      gint x, gint y, GtkSelectionData *selection_data, 
-				      guint info, guint time)
+gedit_mdi_drag_data_received_handler (GtkWidget *widget, 
+				      GdkDragContext *context, 
+		                      gint x, 
+				      gint y, 
+				      GtkSelectionData *selection_data, 
+				      guint info, 
+				      guint time)
 {
 	GList *list = NULL;
 	GSList *file_list = NULL;
 	GList *p = NULL;
-	
+	GtkWidget *target_window;
+
 	gedit_debug (DEBUG_MDI, "");
 
 	if (info != TARGET_URI_LIST)
 		return;
-			
+
+	g_return_if_fail (widget != NULL);
+
+	target_window = gtk_widget_get_toplevel (widget);
+	g_return_if_fail (BONOBO_IS_WINDOW (target_window));
+
+	/* Make sure to activate the target window so to load the
+	 * dropped files in the right window */
+	if (target_window != GTK_WIDGET(gedit_get_active_window ()))
+	{
+		GtkWidget *view;
+		view = bonobo_mdi_get_view_from_window (BONOBO_MDI (gedit_mdi),
+							BONOBO_WINDOW (target_window));
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi),
+					    view);
+	}
+					
 	list = gnome_vfs_uri_list_parse (selection_data->data);
 	p = list;
 
