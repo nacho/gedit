@@ -659,6 +659,7 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 		const gchar *start, const gchar *end, gboolean first_line_of_par)
 {
 	const gchar* p;
+	const gchar* t;
 	gdouble line_width = 0.0;
 	gdouble printable_page_width;
 	ArtPoint space_advance;
@@ -675,6 +676,7 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 			(pji->margin_right + pji->margin_left);
 	
 	p = start;
+	t = start;
 
 	/* Find space advance */
 	space = gnome_font_lookup_default (pji->font_body, ' ');
@@ -708,14 +710,17 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 			chars_in_this_line += num_of_equivalent_spaces - 1;
 			
 			line_width += (num_of_equivalent_spaces * space_advance.x); 
+			t = p;
 		}
 		else
 		{
 			glyph = gnome_font_lookup_default (pji->font_body, ch);
 
 			/* FIXME */
-			if (glyph == space)
+			if (glyph == space){			
 				line_width += space_advance.x;
+				t = p;
+			}
 			else
 			/*
 			if ((glyph < 0) || (glyph >= 256))
@@ -739,8 +744,15 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 
 		if (line_width > printable_page_width)
 		{
-			/* FIXME: take care of lines wrapping at word boundaries too */
-			return p;
+                        /* Fix for word wrap at line boundaries */
+                        if (pji->print_wrap_mode == GTK_WRAP_WORD)
+			{
+                                if (t == start)   /* handling words longer than a line */
+                                        return p;
+                                return t;	 
+                        }
+
+                        return p; /* keeping char-wrap and wrap-none unaltered */
 		}
 
 		p = g_utf8_next_char (p);

@@ -1,3 +1,16 @@
+2002-12-16  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* dialogs/gedit-preferences-dialog.c 
+	(gedit_preferences_dialog_wrap_lines_chec): s/GTK_WRAP_CHAR/GTK_WRAP_WORD
+
+	* dialogs/gedit-preferences.glade2: fix Print/Page page according to
+	ui-review
+
+2002-12-16  Kaushal Kumar  <kaushal.kumar@wipro.com>
+
+	* gedit-print.c: Fixed the word-wrap problem (bug#99273). 
+	Character-wrap and wrap-none features kept unaltered.
+
 2002-12-15  Paolo Maggi  <paolo.maggi@polito.it>
 	
 	* gedit-viewc.c (gedit_view_grab_focus): don't modify GtkTextView 

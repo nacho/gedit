@@ -1610,7 +1610,7 @@ gedit_preferences_dialog_wrap_lines_checkbutton_toggled (GtkToggleButton *button
 	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->wrap_lines_checkbutton));
 	
 	gedit_prefs_manager_set_print_wrap_mode (
-			gtk_toggle_button_get_active (button) ? GTK_WRAP_CHAR : GTK_WRAP_NONE);
+			gtk_toggle_button_get_active (button) ? GTK_WRAP_WORD : GTK_WRAP_NONE);
 }
 
 static void
