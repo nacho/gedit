@@ -48,13 +48,6 @@ encrypt_plugin_SOURCES =  \
 	
 encrypt_plugin_LDFLAGS = `gtk-config --libs`
 
-decrypt_plugin_SOURCES =  \
-	decrypt.c		\
-	client.c	\
-	client.h	
-	
-decrypt_plugin_LDFLAGS = `gtk-config --libs`
-
 #email_plugin_SOURCES =	\
 #	email.c		\
 #	client.c	\

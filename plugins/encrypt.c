@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * Btw, this plugin also Decrypts as well as encrypt... as documented in 
+ * ../plugin_README
  */
 
 #include <string.h>
@@ -32,7 +35,7 @@ int main( int argc, char *argv[] )
   gchar *buff;
   client_info info;
 
-  info.menu_location = "[Plugins]Encrypt";
+  info.menu_location = "[Plugins]Encryption";
 
   context = client_init( &argc, &argv, &info );
 
