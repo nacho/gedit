@@ -24,11 +24,13 @@
 #include "main.h"
 #include "menus.h"
 
+/*
 #ifdef WITHOUT_GNOME
 gchar gEdit_ID[] = "gEdit 0.3.2";
 #else
 gchar gEdit_ID[] = "gEdit 0.13";
 #endif
+*/
 
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
@@ -290,10 +292,10 @@ gE_document *gE_document_new(gE_window *window)
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
 	style = gtk_style_new ();
 /*	style->bg[GTK_STATE_NORMAL] = style->white;*/
-	style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
-	gtk_widget_set_style (GTK_TEXT(document->text), style);
+	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
+	/*gtk_widget_set_style (GTK_TEXT(document->text), style);*/
         /*style = gtk_style_attach (style, document->window);*/
-	gtk_widget_set_rc_style(GTK_TEXT(document->text));
+	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
 
 
 	document->changed = FALSE;

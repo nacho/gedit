@@ -99,7 +99,7 @@ void gE_about_box()
 		NULL
 	};
 
-        about = gnome_about_new (_("gEdit"), VERSION,
+        about = gnome_about_new (_(gEdit_ID), NULL,
 				 "(C) 1998 Alex Roberts and Evan Lawrence",
 				 authors,
 				 _("gEdit is a small and lightweight text editor for GNOME/Gtk+"),

@@ -6,6 +6,13 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define STRING_LENGTH_MAX	256
+
+/*#ifdef WITHOUT_GNOME*/
+static gchar gEdit_ID[] = "gEdit 0.4";
+/*#else
+gchar gEdit_ID[] = "gEdit 0.13";
+#endif*/
+
 typedef struct _gE_search gE_search;
 typedef struct _gE_prefs gE_prefs;
 typedef struct _gE_window gE_window;

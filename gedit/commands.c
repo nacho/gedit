@@ -285,8 +285,9 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer data)
 
 void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 {
-	gchar *fname;
+	gchar *fname, *fname2;
  	fname = gE_document_current(main_window)->filename;
+ 	g_print("%s\n",fname);
 	if (fname == NULL)
 	{
 		#ifdef DEBUG
@@ -295,7 +296,7 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 		file_save_as_cmd_callback(NULL, NULL);
 	}
 	else
-		gE_file_save (gE_document_current(main_window), (gE_document_current(main_window))->filename);
+		gE_file_save (gE_document_current(main_window),fname /*(gtk_label_get((gE_document_current(main_window))->tab_label,fname2)*/);
 }
 
 void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)

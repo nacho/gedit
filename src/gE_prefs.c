@@ -79,6 +79,7 @@ gE_prefs *prefs_window;
  void gE_rc_parse()
  {
 GList *toplevels;
+   
 /*	gE_get_rc_file();*/
 
 #ifdef HAVE_GTK_RC_REPARSE_ALL
@@ -110,6 +111,7 @@ GList *toplevels;
     }
 
   g_list_free (toplevels);
+
 #endif
  }
  

@@ -34,8 +34,10 @@ char fname[STRING_LENGTH_MAX];
 
 void  destroy_window (GtkWidget *widget, GtkWidget **window)
 {
-   *window = NULL;
-   gtk_exit(0);
+ /*  *window = NULL;
+   gtk_exit(0);*/
+  file_close_cmd_callback (widget, main_window);
+   
 }
 
 
