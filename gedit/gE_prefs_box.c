@@ -84,7 +84,11 @@ static gE_Prop_Box *pbox;
 
 void cancel()
 {
-  gtk_widget_destroy (GTK_WIDGET (pbox));
+  #ifndef WITHOUT_GNOME
+  gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
+  #else
+  gtk_widget_destroy (GTK_WIDGET (pbox->window));
+  #endif
   g_free(prefs);
   prefs = NULL;
 }

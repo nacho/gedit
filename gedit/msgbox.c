@@ -72,6 +72,7 @@ mbprintf(const char *fmt, ...)
 
 	va_start (args, fmt);
 	buf = g_strdup_vprintf (fmt, args);
+
 	va_end (args);
 	msgbox_append (buf);
 	g_free (buf);
@@ -83,7 +84,7 @@ mbprintf(const char *fmt, ...)
  *
  * basically taken from testgtk.c.  should be called before any file is
  * opened.
- */
+ */ 
 void
 msgbox_create(void)
 {
@@ -238,7 +239,9 @@ msgbox_append(char *msg)
 	g_free(buf);
 
 	msgbox_set_sb();
+	
 	gtk_text_thaw(GTK_TEXT(msgbox.text));
+;
 } /* void msgbox_entry_append */
 
 
@@ -275,13 +278,12 @@ msgbox_destroy(GtkWidget *w, gpointer data)
 	msgbox.toplev = NULL;
 } /* msgbox_destroy */
 
-
 static void
 msgbox_set_sb(void)
 {
 	GtkAdjustment *vadj;
 	GtkText *text;
-	float value;
+	gfloat value;
 
 	g_return_if_fail(msgbox.toplev != NULL);
 	g_return_if_fail(msgbox.text != NULL);
@@ -296,7 +298,11 @@ msgbox_set_sb(void)
 		value = (msgbox.num * vadj->upper) * 1.0 /
 			msgbox.num - vadj->page_increment;
 
+		/* THis is making gEdit sigsegv... it seems correct...
 		gtk_adjustment_set_value(GTK_ADJUSTMENT(text->vadj), value);
+					--Alex
+		*/
+		
 	}
 } /* msgbox_set_sb */
 
