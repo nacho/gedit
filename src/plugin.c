@@ -39,10 +39,11 @@
 
 GSList	*plugin_list = NULL;
 
-void    gedit_plugin_program_location_clear (gchar *program_name);
-gchar * gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
 /*gchar * gedit_plugin_program_location_dialog (void);*/
-gchar * gedit_plugin_program_location_guess (gchar *program_name);
+void    gedit_plugin_program_location_clear  (gchar * program_name);
+gchar * gedit_plugin_program_location_get    (gchar * program_name, gchar *plugin_name, gint dont_guess);
+gchar * gedit_plugin_program_location_guess  (gchar * program_name);
+gchar * gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
 
 
 PluginData *
@@ -336,8 +337,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 	if (!dont_guess)
 		program_location = gedit_plugin_guess_program_location (program_name);
 
-	g_print ("1, program location %s\n", program_location);
-	
 	/* While "sendmail" is not valid, display error messages */
 	while (dont_guess || (error_code = gedit_utils_is_program (program_location, program_name))!=GEDIT_PROGRAM_OK)
 	{
@@ -345,20 +344,16 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		gchar *message_full;
 		GtkWidget *dialog;
 
-		g_print ("1.1, program location %s\n", program_location);
 		if (dont_guess)
 		{
 			program_location = g_strdup (gedit_plugin_program_location_dialog ());
-			g_print ("2, program location %s\n", program_location);
 			dont_guess = FALSE;
 			/* If the user cancelled or pressed ESC */
 			if (program_location == NULL)
 			{
-				g_print ("2.0, program location %s\n", program_location);
 				gedit_debug ("return NULL", DEBUG_PLUGINS);
 				return NULL;
 			}
-			g_print ("2.1, program location %s\n", program_location);
 			continue;
 		}
 		
@@ -366,7 +361,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 			message = g_strdup_printf (_("The program %s could not be found.\n\n"), program_name);
 		else if (error_code == GEDIT_PROGRAM_IS_INSIDE_DIRECTORY)
 		{
-			g_print ("a.1, Insidre program location %s\n", program_location);
 			/* the user chose a directory and "sendmail" was found inside it */
 			/* message is use as a temp holder for the program */
 			message = g_strdup (program_location);
@@ -376,7 +370,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 						    (message [strlen(message)-1] == '/')?"":"/",
 						    program_name);
 			g_free (message);
-			g_print ("a.1, Insidre program location %s\n", program_location);
 			continue;
 		}
 		else if (error_code == GEDIT_PROGRAM_NOT_EXISTS)
@@ -408,7 +401,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		{
 			g_free (program_location);
 			program_location = g_strdup (gedit_plugin_program_location_dialog ());
-			g_print ("3, program location %s\n", program_location);
 			continue;
 		}
 		else
@@ -424,12 +416,45 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 	gnome_config_sync ();
 	g_free (config_string);
 
-	g_print ("4, program location %s\n", program_location);
-
 	gedit_debug ("end", DEBUG_PLUGINS);
 	return program_location;
 }
 
 
 
+gchar *
+gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
+{
+	gchar * config_string;
+	gchar * old_location = NULL;
+	gchar * new_location = NULL;
 
+	gedit_debug ("start", DEBUG_PLUGINS);
+
+	/* Save a copy of the old location, in case the user cancels the dialog */
+	config_string = gedit_plugin_program_location_string (program_name);
+	if (gnome_config_get_string (config_string))
+		old_location = g_strdup (gnome_config_get_string (config_string));
+	g_free (config_string);
+
+	gedit_plugin_program_location_clear (program_name);
+	new_location  = gedit_plugin_program_location_get (program_name,  plugin_name, TRUE);
+
+	if (!new_location)
+	{
+		if (old_location != NULL)
+		{
+			config_string = gedit_plugin_program_location_string (program_name);
+			gnome_config_set_string (config_string, old_location);
+			g_free (config_string);
+			gnome_config_sync ();
+			g_free (old_location);
+		}
+		return NULL;
+	}
+
+	g_free (old_location);
+
+	gedit_debug ("end", DEBUG_PLUGINS);
+	return new_location;
+}

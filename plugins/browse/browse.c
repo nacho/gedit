@@ -17,15 +17,14 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  * Converted to a gmodule plugin by Jason Leach <leach@wam.umd.edu>
+ * Libgladify and better error recovery Chema Celorio <chema@celorio.com>
+ *
  */
 
-/* TODO:
- * [ ] make me a GnomeDialog instead of a GtkDialog
- * [ ] maybe libglade-ify me
- */
 
 #include <config.h>
 #include <gnome.h>
+#include <glade/glade.h>
 
 #include "window.h"
 #include "document.h"
@@ -33,131 +32,219 @@
 #include "view.h"
 #include "utils.h"
 
-static GtkWidget *dialog;
-static GtkWidget *entry1;
-
-
-static void
-goLynx (GtkWidget *widget, gpointer data)
-{
-	char buff[1025];
-	int fdpipe[2];
-	int pid;
-	gchar *url;
-	guint length, pos;
-	Document *doc;
-
-	url = gtk_entry_get_text (GTK_ENTRY (entry1));
-
-	if (pipe (fdpipe) == -1)
-	{
-		g_assert_not_reached ();
-	}
-  
-	pid = fork();
-	if (pid == 0)
-	{
-		char *argv[4];
-
-		close (1);
-		dup (fdpipe[1]);
-		close (fdpipe[0]);
-		close (fdpipe[1]);
-      
-		argv[0] = "lynx";
-		argv[1] = "-dump";
-		argv[2] = url;
-		argv[3] = NULL;
-		execv ("/usr/bin/lynx", argv);
-
-		g_assert_not_reached ();
-	}
-	close (fdpipe[1]);
-
-	doc = gedit_document_new_with_title (url);
-
-	length = 1;
-	pos = 0;
-	while (length > 0)
-	{
-		buff [ length = read (fdpipe[0], buff, 1024) ] = 0;
-		if (length > 0)
-		{
-		     	gedit_document_insert_text (doc, buff, pos, FALSE);
-			pos += length;
-		}
-	}
-/*
-	gnome_config_push_prefix ("/Editor_Plugins/Browse/");
-	gnome_config_set_string ("Url", url[0]);
-	gnome_config_pop_prefix ();
-	gnome_config_sync ();
-*/
-}
+static GtkWidget *location_label;
+static GtkWidget *url_entry;
 
 static void
-destroy_plugin (PluginData *pd)
+gedit_plugin_browse_destroy (PluginData *pd)
 {
 	g_free (pd->name);
 }
 
 static void
-browse_close (GtkWidget *widget, gpointer data)
+gedit_plugin_browse_finish (GtkWidget *widget, gpointer data)
 {
-	gtk_widget_destroy (dialog);
+	gnome_dialog_close (GNOME_DIALOG(widget));
+}
+
+/* WE need to make this plugin non-blocking and to improve the error
+   reporting. !! It is very bad !
+   Chema
+*/
+   
+static void
+gedit_plugin_browse_execute (GtkWidget *widget, gint button, gpointer data)
+{
+	int fdpipe[2];
+	gchar *url;
+	Document *doc;
+	guint length, pos;
+	char buff[1025];
+	int pid;
+	gchar *lynx_location;
+
+	if (button == 0)
+	{
+		url = g_strdup (gtk_entry_get_text (GTK_ENTRY (url_entry)));
+		
+		if (!url || strlen (url) == 0)
+		{
+			GnomeDialog *error_dialog;
+			error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid URL.",
+								    gedit_window_active()));
+			gnome_dialog_run_and_close (error_dialog);
+			gdk_window_raise (widget->window);
+			return;
+		}
+		
+		lynx_location = g_strdup (GTK_LABEL(location_label)->label);
+		
+		if (pipe (fdpipe) == -1)
+		{
+			g_warning ("Could not open pipe\n");
+			return;
+		}
+  
+		pid = fork();
+		if (pid == 0)
+		{
+			char *argv[4];
+			
+			close (1);
+			dup (fdpipe[1]);
+			close (fdpipe[0]);
+			close (fdpipe[1]);
+      
+			argv[0] = "lynx";
+			argv[1] = "-dump";
+			argv[2] = url;
+			argv[3] = NULL;
+			execv (lynx_location, argv);
+
+			/* don't use asserts not reached ! Chema.
+			   why crash gedit when you can display an error
+			   and give the user a chance to save it's work ?
+			g_assert_not_reached ();
+			*/
+			g_warning ("A undetermined PIPE problem occurred");
+			return;
+		}
+		close (fdpipe[1]);
+
+		doc = gedit_document_new_with_title (url);
+
+		length = 1;
+		pos = 0;
+		while (length > 0)
+		{
+			buff [ length = read (fdpipe[0], buff, 1024) ] = 0;
+			if (length > 0)
+			{
+				gedit_document_insert_text (doc, buff, pos, FALSE);
+				pos += length;
+			}
+		}
+
+                /*
+		  gnome_config_push_prefix ("/Editor_Plugins/Browse/");
+		  gnome_config_set_string ("Url", url[0]);
+		  gnome_config_pop_prefix ();
+		  gnome_config_sync ();
+		*/
+		g_free (url);
+		g_free (lynx_location);
+	}
+
+	gnome_dialog_close (GNOME_DIALOG(widget));
 }
 
 static void
-browse (void)
+gedit_plugin_browse_change_location (GtkWidget *button, gpointer userdata)
 {
+	GtkWidget *dialog;
 	GtkWidget *label;
-	GtkWidget *hbox;
-	GtkWidget *button;
+	gchar * new_location;
 
-	dialog = gtk_dialog_new ();
-	gtk_window_set_title (GTK_WINDOW (dialog), "The gEdit Web Browse Plugin");
-	gtk_widget_set_usize (GTK_WIDGET (dialog), 353, 100);
+	gedit_debug ("start", DEBUG_PLUGINS);
+	dialog = userdata;
+
+	/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+	   it is used to display "you can not use the [name] plugin without this program... */
+	new_location = gedit_plugin_program_location_change ("lynx", _("browse"));
+
+	if ( new_location == NULL)
+	{
+		gdk_window_raise (dialog->window);
+		return;
+	}
+
+	/* We need to update the label */
+	label  = gtk_object_get_data (GTK_OBJECT (dialog), "location_label");
+	g_return_if_fail (label!=NULL);
+	gtk_label_set_text (GTK_LABEL (label),
+			    new_location);
+	g_free (new_location);
+
+	gdk_window_raise (dialog->window);	
+
+	gedit_debug ("end", DEBUG_PLUGINS);
+}
+
+static void
+gedit_plugin_browse_create_dialog (void)
+{
+	GladeXML *gui;
+	GtkWidget *dialog;
+	GtkWidget *change_button;
+	
+	gchar *browser_location;
+	gchar *location_label_label;
+
+        /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+	 it is used to display "you can not use the [name] plugin without this program... */
+	browser_location = gedit_plugin_program_location_get ("lynx", _("browse"), FALSE);
+
+	if (browser_location == NULL)
+		return;
+
+	if (!g_file_exists (GEDIT_GLADEDIR "/browse.glade"))
+	{
+		g_warning ("Could not find %s", GEDIT_GLADEDIR "/browse.glade");
+		return;
+	}
+	    
+	gui = glade_xml_new (GEDIT_GLADEDIR "/browse.glade", NULL);
+
+	if (!gui)
+	{
+		g_warning ("Could not find browse.glade in %s", GEDIT_GLADEDIR "/browse.glade");
+		return;
+	}
+
+	dialog         = glade_xml_get_widget (gui, "dialog");
+	url_entry      = glade_xml_get_widget (gui, "url_entry");
+	location_label = glade_xml_get_widget (gui, "location_label");
+	change_button  = glade_xml_get_widget (gui, "change_button");
+
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (url_entry != NULL);
+	g_return_if_fail (location_label != NULL);
+	g_return_if_fail (change_button != NULL);
+	
+        /* Set the location label */
+	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
+	location_label_label = g_strdup (browser_location);
+	gtk_label_set_text (GTK_LABEL (location_label),
+			    location_label_label);
+	g_free (location_label_label);
+
+	/* Connect the signals */
+	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_browse_execute), NULL);
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (browse_close), NULL);
-	gtk_container_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), 10);
+			    GTK_SIGNAL_FUNC (gedit_plugin_browse_finish), NULL);
+	gtk_signal_connect (GTK_OBJECT (change_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_browse_change_location), dialog);
 
-	label = gtk_label_new ("Url: ");
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), label, FALSE, FALSE, 0);
+        /* Set the dialog parent and modal type */ 
+	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
+				 gedit_window_active());
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 0);
-  
-	entry1 = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), entry1, TRUE, TRUE, 0);
-
-/*
-	gnome_config_push_prefix ("/Editor_Plugins/Browse/");
-	gtk_entry_set_text (GTK_ENTRY (entry1), gnome_config_get_string ("Url"));
-	gnome_config_pop_prefix ();
-	gnome_config_sync ();
-*/
-	button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    GTK_SIGNAL_FUNC (goLynx), NULL);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, FALSE, TRUE, 0);
-
-	button = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    GTK_SIGNAL_FUNC (browse_close), NULL);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->action_area), button, FALSE, TRUE, 0);
-
+	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);
+	gtk_object_unref (GTK_OBJECT (gui));
 }
 
 gint
 init_plugin (PluginData *pd)
 {
-	pd->destroy_plugin = destroy_plugin;
+	pd->destroy_plugin = gedit_plugin_browse_destroy;
 	pd->name = _("Browse");
 	pd->desc = _("Web browse plugin");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 
-	pd->private_data = (gpointer)browse;
+	pd->private_data = (gpointer)gedit_plugin_browse_create_dialog;
 
 	return PLUGIN_OK;
 }

@@ -24,8 +24,8 @@
   <position>GTK_WIN_POS_CENTER</position>
   <modal>False</modal>
   <default_width>400</default_width>
-  <default_height>209</default_height>
-  <allow_shrink>True</allow_shrink>
+  <default_height>210</default_height>
+  <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
   <auto_close>False</auto_close>
@@ -101,7 +101,7 @@
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
-	  <fill>True</fill>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
@@ -258,22 +258,21 @@
       <widget>
 	<class>GtkTable</class>
 	<name>table4</name>
-	<border_width>3</border_width>
 	<rows>2</rows>
 	<columns>3</columns>
 	<homogeneous>False</homogeneous>
 	<row_spacing>0</row_spacing>
-	<column_spacing>14</column_spacing>
+	<column_spacing>0</column_spacing>
 	<child>
 	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
+	  <expand>True</expand>
+	  <fill>True</fill>
 	</child>
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>labely</name>
-	  <label>Sendmail found at : </label>
+	  <name>label14</name>
+	  <label></label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
@@ -281,10 +280,10 @@
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>1</right_attach>
-	    <top_attach>1</top_attach>
-	    <bottom_attach>2</bottom_attach>
+	    <left_attach>2</left_attach>
+	    <right_attach>3</right_attach>
+	    <top_attach>0</top_attach>
+	    <bottom_attach>1</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <xexpand>False</xexpand>
@@ -298,9 +297,9 @@
 
 	<widget>
 	  <class>GtkButton</class>
-	  <name>change_location_button</name>
+	  <name>change_button</name>
 	  <can_focus>True</can_focus>
-	  <label>Change</label>
+	  <label>Change...</label>
 	  <child>
 	    <left_attach>2</left_attach>
 	    <right_attach>3</right_attach>
@@ -319,7 +318,33 @@
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>labelx</name>
+	  <name>filename_label</name>
+	  <label>label12</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>2</right_attach>
+	    <top_attach>0</top_attach>
+	    <bottom_attach>1</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>True</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>False</xfill>
+	    <yfill>False</yfill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label10</name>
 	  <label>File to use as body of message : </label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -334,7 +359,7 @@
 	    <bottom_attach>1</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
+	    <xexpand>True</xexpand>
 	    <yexpand>False</yexpand>
 	    <xshrink>False</xshrink>
 	    <yshrink>False</yshrink>
@@ -345,8 +370,8 @@
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>filename_label</name>
-	  <label></label>
+	  <name>label11</name>
+	  <label>Sendmail found at :</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
@@ -354,16 +379,16 @@
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <child>
-	    <left_attach>1</left_attach>
-	    <right_attach>2</right_attach>
-	    <top_attach>0</top_attach>
-	    <bottom_attach>1</bottom_attach>
+	    <left_attach>0</left_attach>
+	    <right_attach>1</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
+	    <xexpand>True</xexpand>
 	    <yexpand>False</yexpand>
-	    <xshrink>True</xshrink>
-	    <yshrink>True</yshrink>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
 	    <xfill>False</xfill>
 	    <yfill>False</yfill>
 	  </child>
@@ -372,7 +397,7 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>sendmail_label</name>
-	  <label></label>
+	  <label>label13</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
@@ -384,12 +409,12 @@
 	    <right_attach>2</right_attach>
 	    <top_attach>1</top_attach>
 	    <bottom_attach>2</bottom_attach>
-	    <xpad>0</xpad>
+	    <xpad>15</xpad>
 	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
+	    <xexpand>True</xexpand>
 	    <yexpand>False</yexpand>
-	    <xshrink>True</xshrink>
-	    <yshrink>True</yshrink>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
 	    <xfill>False</xfill>
 	    <yfill>False</yfill>
 	  </child>

@@ -86,7 +86,11 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 			
 		execvp (*arg,arg);
 		
+		g_warning ("A undetermined PIPE problem occurred");
+			return;
+		/* Dont _exit, just display an error 
 		_exit (1);
+		*/
 	}
 	close (fdpipe[1]);
 

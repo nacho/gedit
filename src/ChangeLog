@@ -1,3 +1,16 @@
+2000-06-22  Chema Celorio  <chema@celorio.com>
+
+	* plugin.c (gedit_plugin_program_location_get): clean g_prints
+	* dialogs/dialog-plugins.c: ditto
+
+2000-06-21  Chema Celorio  <chema@celorio.com>
+
+	* utils.h: remove the defines used for accesing the toolbar/menus.
+
+	* view.c (gedit_view_load_widgets): call gnome_mdi_get[menubar/toolbar]
+	to get the menu/tooblar UI_INFO
+	* window.c (gedit_window_set_widgets_sensitivity): ditto
+
 2000-06-21  Chema Celorio  <chema@celorio.com>
 
 	* search.c (gedit_search_replace_all_execute): add sanity check

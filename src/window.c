@@ -332,8 +332,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	g_return_if_fail (app!=NULL);
 
 	/* get the UI_info structures */
-	ui_info = gtk_object_get_data (GTK_OBJECT (app),
-					       GNOME_MDI_TOOLBAR_INFO_KEY);
+	ui_info = gnome_mdi_get_toolbar_info (app);
 
 	g_return_if_fail (ui_info != NULL);
 
@@ -360,8 +359,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	}
 
 
-	ui_info = gtk_object_get_data (GTK_OBJECT (app),
-				       GNOME_MDI_MENUBAR_INFO_KEY);
+	ui_info = gnome_mdi_get_menubar_info (app);
+	
 	g_return_if_fail (ui_info != NULL);
 
 	/* Set the menus and submenus */

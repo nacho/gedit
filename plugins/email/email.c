@@ -2,8 +2,6 @@
 /* 
  * Email plugin.
  * Alex Roberts <bse@error.fsnet.co.uk>
- *
- * Check and ask for the location of sendmail :
  * Chema Celorio <chema@celorio.com>
  *
  */
@@ -20,20 +18,19 @@
 static GtkWidget *from_entry, *subject_entry, *to_entry, *sendmail_label;
 
 static void
-destroy_plugin (PluginData *pd)
+gedit_plugin_email_destroy (PluginData *pd)
 {
 	g_free (pd->name);
 }
 
 static void
-email_finish (GtkWidget *w, gpointer data)
+gedit_plugin_email_finish (GtkWidget *widget, gpointer data)
 {
-	gnome_dialog_close (GNOME_DIALOG (w));
+	gnome_dialog_close (GNOME_DIALOG (widget));
 }
 
-/* the function that actually does the work */
 static void
-email_clicked (GtkWidget *w, gint button, gpointer data)
+gedit_plugin_email_execute (GtkWidget *widget, gint button, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
@@ -59,13 +56,13 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 			error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid email address.",
 								    gedit_window_active()));
 			gnome_dialog_run_and_close (error_dialog);
-			gdk_window_raise (w->window);
+			gdk_window_raise (widget->window);
 			return;
 		}
 
 		if ((sendmail = popen (command, "w")) == NULL)
 		{
-			g_warning ("Couldn't open stream to /usr/bin/sendmail\n");
+			g_warning ("Couldn't open stream to %s\n", mailer_location);
 			g_free (command);
 			return;
 		}
@@ -89,48 +86,26 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 		g_free (command);
 	}
 
-	gnome_dialog_close (GNOME_DIALOG (w));
+	gnome_dialog_close (GNOME_DIALOG (widget));
 }
 
 static void
-change_location_cb (GtkWidget *button, gpointer userdata)
+gedit_plugin_email_change_location (GtkWidget *button, gpointer userdata)
 {
-	gchar * new_location;
 	GtkWidget *dialog;
 	GtkWidget *label;
-	gchar * config_string;
-	gchar * old_location = NULL;
+	gchar * new_location;
 
 	gedit_debug ("start", DEBUG_PLUGINS);
-
 	dialog = userdata;
-
-	/* Save a copy of the old location, in case the user cancels the dialog */
-	config_string = gedit_plugin_program_location_string ("sendmail");
-	if (gnome_config_get_string (config_string))
-		old_location = g_strdup (gnome_config_get_string (config_string));
-	g_free (config_string);
 
 	/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 	   it is used to display "you can not use the [name] plugin without this program... */
-	gedit_plugin_program_location_clear ("sendmail");
-	new_location  = gedit_plugin_program_location_get ("sendmail",  _("email"), TRUE);
+	new_location = gedit_plugin_program_location_change ("sendmail", _("email"));
 
-	g_print ("New location : *%s* !!!!!!!!!!!!\n", new_location);
-
-	if (!new_location)
+	if ( new_location == NULL)
 	{
 		gdk_window_raise (dialog->window);
-		if (old_location != NULL)
-		{
-			config_string = gedit_plugin_program_location_string ("sendmail");
-			g_print ("Setting config string to %s\n", old_location);
-			gnome_config_set_string (config_string, old_location);
-			g_free (config_string);
-			gnome_config_sync ();
-			g_free (old_location);
-		}
-		gedit_debug ("return", DEBUG_PLUGINS);
 		return;
 	}
 
@@ -140,15 +115,15 @@ change_location_cb (GtkWidget *button, gpointer userdata)
 	gtk_label_set_text (GTK_LABEL (label),
 			    new_location);
 	g_free (new_location);
-	g_free (old_location);
-	
+
 	gdk_window_raise (dialog->window);	
 
 	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
+
 static void
-email (void)
+gedit_plugin_email_create_dialog (void)
 {
 	GladeXML *gui;
 	GtkWidget *dialog;
@@ -171,6 +146,12 @@ email (void)
 	if (mailer_location == NULL)
 		return;
 	
+	if (!g_file_exists (GEDIT_GLADEDIR "/email.glade"))
+	{
+		g_warning ("Could not find %s", GEDIT_GLADEDIR "/email.glade");
+		return;
+	}
+
 	gui = glade_xml_new (GEDIT_GLADEDIR "/email.glade", NULL);
 
 	if (!gui)
@@ -185,15 +166,15 @@ email (void)
 	subject_entry   = glade_xml_get_widget (gui, "subject_entry");
 	filename_label  = glade_xml_get_widget (gui, "filename_label");
 	sendmail_label  = glade_xml_get_widget (gui, "sendmail_label");
-	change_location = glade_xml_get_widget (gui, "change_location_button");
+	change_location = glade_xml_get_widget (gui, "change_button");
 
-	g_return_if_fail (dialog &&
-			  to_entry &&
-			  from_entry &&
-			  subject_entry &&
-			  filename_label &&
-			  sendmail_label &&
-			  change_location );
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (to_entry != NULL);
+	g_return_if_fail (from_entry  != NULL);
+	g_return_if_fail (subject_entry != NULL);
+	g_return_if_fail (filename_label != NULL);
+	g_return_if_fail (sendmail_label != NULL);
+	g_return_if_fail (change_location != NULL);
 
 
 	username = g_get_user_name ();
@@ -244,11 +225,11 @@ email (void)
 
 	/* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (email_clicked), NULL);
+			    GTK_SIGNAL_FUNC (gedit_plugin_email_execute), NULL);
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (email_finish), NULL);
+			    GTK_SIGNAL_FUNC (gedit_plugin_email_finish), NULL);
 	gtk_signal_connect (GTK_OBJECT (change_location), "clicked",
-			    GTK_SIGNAL_FUNC (change_location_cb), dialog);
+			    GTK_SIGNAL_FUNC (gedit_plugin_email_change_location), dialog);
 
 	/* Set the dialog parent and modal type */ 
 	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
@@ -257,19 +238,19 @@ email (void)
 
 	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);
-	gtk_object_destroy (GTK_OBJECT (gui));
+	gtk_object_unref (GTK_OBJECT (gui));
 }
 
 gint
 init_plugin (PluginData *pd)
 {
 	/* initialise */
-	pd->destroy_plugin = destroy_plugin;
+	pd->destroy_plugin = gedit_plugin_email_destroy;
 	pd->name = _("Email");
 	pd->desc = _("Email the current document");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	
-	pd->private_data = (gpointer)email;
+	pd->private_data = (gpointer)gedit_plugin_email_create_dialog;
 
 	return PLUGIN_OK;
 }

@@ -1,13 +1,23 @@
-2000-06-22  Roberto Majadas  <phoenix@nova.es>
+2000-06-22  Chema Celorio  <chema@celorio.com>
 
-	* shell_output/shell_output.c : Change BUFFER_SIZE -> GEDIT_PLUGIN_SHELL_BUFFER_SIZE 
-	* spell/* : Spell Check code , but don't use it . It's crash
-	
+	* email/email.c (email.glade): cosmeticfixes
+
+	* browse/browse.c: libgladify, search for lynx before runing and
+	clean the code a bit, beter error reporting and stuf.
+
+	* email/email.c (change_location_cb): remove the g_prints
+
 2000-06-20  Chema Celorio  <chema@celorio.com>
 
 	* email/email.c (gedit_plugin_email_sendmail_location_dialog): moved to
 	plugin.c to be used in other pluggins
 
+
+2000-06-22  Roberto Majadas  <phoenix@nova.es>
+
+	* shell_output/shell_output.c : Change BUFFER_SIZE -> GEDIT_PLUGIN_SHELL_BUFFER_SIZE 
+	* spell/* : Spell Check code , but don't use it . It's crash
+	
 2000-06-20  Chema Celorio  <chema@celorio.com>
 
 	* email/email.c (gedit_util_is_program): move to util

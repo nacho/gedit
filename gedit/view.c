@@ -1004,11 +1004,9 @@ gedit_view_load_widgets (View *view)
 	
 	g_return_if_fail (view->app != NULL);
 
-	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (view->app),
-					       GNOME_MDI_TOOLBAR_INFO_KEY);
-	menu_ui_info = gtk_object_get_data (GTK_OBJECT (view->app),
-					    GNOME_MDI_CHILD_MENU_INFO_KEY);
-	
+	toolbar_ui_info = gnome_mdi_get_toolbar_info (view->app);
+	menu_ui_info    = gnome_mdi_get_child_menu_info (view->app);
+
 	g_return_if_fail (toolbar_ui_info != NULL);
 	g_return_if_fail (menu_ui_info != NULL);
 
