@@ -388,7 +388,7 @@ gedit_view_init (GeditView  *view)
 	 *  to preferences 
 	 */
 	if (!gedit_settings->use_default_font)
-		gedit_view_set_font (view, gedit_settings->editor_font);
+		gedit_view_set_font (view, FALSE, gedit_settings->editor_font);
 
 	if (!gedit_settings->use_default_colors)
 	{
@@ -397,7 +397,7 @@ gedit_view_init (GeditView  *view)
 		selection = gedit_settings->selection_color;
 		sel_text = gedit_settings->selected_text_color;
 
-		gedit_view_set_colors (view, 
+		gedit_view_set_colors (view, FALSE,
 				&background, &text, &selection, &sel_text);
 	}	
 
@@ -665,47 +665,85 @@ gedit_view_scroll_to_cursor (GeditView *view)
 }
 
 void 
-gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text,
+gedit_view_set_colors (GeditView* view, gboolean def, GdkColor* backgroud, GdkColor* text,
 		GdkColor* selection, GdkColor* sel_text)
 {
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_NORMAL, backgroud);
+	if (!def)
+	{
+		g_return_if_fail (backgroud 	!= NULL);
+		g_return_if_fail (text 		!= NULL);
+		g_return_if_fail (selection 	!= NULL);
+		g_return_if_fail (sel_text 	!= NULL);
 
-	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_NORMAL, text);
+		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_NORMAL, backgroud);
+
+		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_NORMAL, text);
 	
-	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_SELECTED, selection);
+		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_SELECTED, selection);
 
-	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_SELECTED, sel_text);		
+		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_SELECTED, sel_text);		
 
-	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_ACTIVE, selection);
+		gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_ACTIVE, selection);
 
-	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
-				GTK_STATE_ACTIVE, sel_text);		
+		gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+					GTK_STATE_ACTIVE, sel_text);		
+	}
+	else
+	{
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_widget_get_modifier_style (GTK_WIDGET (view->priv->text_view));
+
+		rc_style->color_flags [GTK_STATE_NORMAL] = 0;
+		rc_style->color_flags [GTK_STATE_SELECTED] = 0;
+		rc_style->color_flags [GTK_STATE_ACTIVE] = 0;
+
+		gtk_widget_modify_style (GTK_WIDGET (view->priv->text_view), rc_style);
+	}
 }
 
 void
-gedit_view_set_font (GeditView* view, const gchar* font_name)
+gedit_view_set_font (GeditView* view, gboolean def, const gchar* font_name)
 {
-	PangoFontDescription *font_desc = NULL;
-
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	font_desc = pango_font_description_from_string (font_name);
-	g_return_if_fail (font_desc != NULL);
-	
-	gtk_widget_modify_font (GTK_WIDGET (view->priv->text_view), font_desc);
+	if (!def)
+	{
+		PangoFontDescription *font_desc = NULL;
 
-	pango_font_description_free (font_desc);
+		g_return_if_fail (font_name != NULL);
+		
+		font_desc = pango_font_description_from_string (font_name);
+		g_return_if_fail (font_desc != NULL);
+
+		gtk_widget_modify_font (GTK_WIDGET (view->priv->text_view), font_desc);
+		
+		pango_font_description_free (font_desc);		
+	}
+	else
+	{
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_widget_get_modifier_style (GTK_WIDGET (view->priv->text_view));
+
+		if (rc_style->font_desc)
+			pango_font_description_free (rc_style->font_desc);
+
+		rc_style->font_desc = NULL;
+		
+		gtk_widget_modify_style (GTK_WIDGET (view->priv->text_view), rc_style);
+	}
 }
 
 void

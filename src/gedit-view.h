@@ -76,10 +76,12 @@ void		gedit_view_scroll_to_cursor 	(GeditView *view);
 GeditDocument*	gedit_view_get_document		(const GeditView *view);
 
 void 		gedit_view_set_colors 		(GeditView* view, 
+						 gboolean def,
 						 GdkColor* backgroud, GdkColor* text,
 						 GdkColor* selection, GdkColor* sel_text);
 
 void 		gedit_view_set_font		(GeditView* view,
+						 gboolean def,
 						 const gchar* font_name);
 
 void		gedit_view_set_wrap_mode 	(GeditView* view, GtkWrapMode wrap_mode);

@@ -1066,56 +1066,19 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 void
 gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 {
-#if 0
-	GList *windows;		
-#endif
 	GList *children;
 	GdkColor background;
 	GdkColor text;
 	GdkColor selection;
 	GdkColor sel_text;
-	gchar* font;
+
+	gchar* font = NULL;
 
 	gedit_debug (DEBUG_MDI, "");
 
-#if 0
-	windows = bonobo_mdi_get_windows (BONOBO_MDI (mdi));
-
-	while (windows != NULL)
-	{
-		BonoboUIComponent *ui_component;
-		BonoboWindow *active_window = BONOBO_WINDOW (windows->data);
-		g_return_if_fail (active_window != NULL);
-		
-		ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
-		g_return_if_fail (ui_component != NULL);
-
-		bonobo_ui_component_freeze (ui_component, NULL);
-
-		gedit_mdi_set_app_statusbar_style (active_window);
-		gedit_mdi_set_app_toolbar_style (active_window);
-
-		bonobo_ui_component_thaw (ui_component, NULL);
-
-		windows = windows->next;
-	}
-#endif
 	children = bonobo_mdi_get_children (BONOBO_MDI (mdi));
 
-	if (gedit_settings->use_default_colors)
-	{
-		GtkStyle *style;
-	       
-		style = gtk_style_new ();
-
-		background = style->base [GTK_STATE_NORMAL];
-		text = style->text [GTK_STATE_NORMAL];
-		sel_text = style->text [GTK_STATE_SELECTED];
-		selection = style->base [GTK_STATE_SELECTED];
-
-		g_object_unref (G_OBJECT (style));
-	}
-	else
+	if (!gedit_settings->use_default_colors)
 	{
 		background = gedit_settings->background_color;
 		text = gedit_settings->text_color;
@@ -1123,22 +1086,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		sel_text = gedit_settings->selected_text_color;
 	}
 
-	if (gedit_settings->use_default_font)
-	{
-		GtkStyle *style;
-		
-		style = gtk_style_new ();
-
-		font = pango_font_description_to_string (style->font_desc);
-		
-		if (font == NULL)
-			/* Fallback */
-			font = g_strdup (gedit_settings->editor_font);
-
-		g_object_unref (G_OBJECT (style));
-
-	}
-	else
+	if (!gedit_settings->use_default_font)
 		font = g_strdup (gedit_settings->editor_font);
 
 	while (children != NULL)
@@ -1149,8 +1097,8 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		{
 			GeditView *v =	GEDIT_VIEW (views->data);
 			
-			gedit_view_set_colors (v, &background, &text, &selection, &sel_text);
-			gedit_view_set_font (v, font);
+			gedit_view_set_font (v, gedit_settings->use_default_font, font);
+			gedit_view_set_colors (v, gedit_settings->use_default_colors, &background, &text, &selection, &sel_text);
 			gedit_view_set_wrap_mode (v, gedit_settings->wrap_mode);
 			gedit_view_show_line_numbers (v, gedit_settings->show_line_numbers);
 			gedit_view_set_tab_size (v, gedit_settings->tab_size);
@@ -1161,10 +1109,6 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	}
 
 	g_free (font);
-
-/*
-	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
-*/
 }
 
 GeditRecent*
