@@ -1313,8 +1313,10 @@ gedit_file_open_uri_list (GSList *uri_list,
 			  gint line_pos,
 			  gboolean create)
 {
+	GSList *l;
+
 	gedit_debug (DEBUG_FILE, "");
-	
+
 	if (uri_list == NULL)
 		return TRUE;
 
@@ -1336,35 +1338,29 @@ gedit_file_open_uri_list (GSList *uri_list,
 		timer = g_timer_new ();
 	)
 
-	while (uri_list != NULL)
+	for (l = uri_list; l; l = l->next)
 	{
 		gchar *uri;
 
-		uri = gnome_vfs_make_uri_canonical ((const gchar*)uri_list->data);
-		
+		uri = gnome_vfs_make_uri_canonical ((const gchar*)l->data);
+
 		gedit_debug (DEBUG_FILE, "URI: %s", uri);
 
-		if (uri != NULL)
+		if (!uri)
 		{
-			if (!gedit_utils_uri_has_file_scheme (uri) || 
-			     gedit_utils_uri_exists (uri))
-			{
-				uris_to_open = g_slist_prepend (uris_to_open, uri);
-			}
-			else
-			{
-				if (create)
-				{
-					create_new_file (uri);
-				}
-				else
-				{
-					uris_to_open = g_slist_prepend (uris_to_open, uri);
-				}
-			}		
-		}	
-			
-		uri_list = g_slist_next (uri_list);
+			g_warning ("Could not get canonical uri\n");
+			continue;
+		}
+
+		if (create &&
+		    gedit_utils_uri_has_file_scheme (uri) &&
+		    !gedit_utils_uri_exists (uri))
+		{
+			create_new_file (uri);
+			continue;
+		}
+
+		uris_to_open = g_slist_prepend (uris_to_open, uri);
 	}
 
 	uris_to_open = g_slist_reverse (uris_to_open);
