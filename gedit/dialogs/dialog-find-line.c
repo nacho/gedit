@@ -22,7 +22,8 @@ static void find_line_clicked_cb (GtkWidget *widget, gint button, Document *doc)
        void dialog_find_line (void);
 
 
-/* This function seems not beeing used. Chema
+/* This function seems not beeing used. Chema*/
+#if 0
 static GtkWidget *
 create_line_dialog (void)
 {
@@ -56,7 +57,7 @@ create_line_dialog (void)
 
 	return dialog;
 }
-*/
+#endif
 
 
 /* Callback on the "clicked" signal in the Find Line dialog */
