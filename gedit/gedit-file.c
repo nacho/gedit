@@ -1013,6 +1013,7 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	GtkWidget *image;
 	GtkWidget *vbox;
 	GtkWidget *label;
+	GtkWidget *uri_label;
 	gchar *str;
 	gchar *uri_for_display;
 	gchar *full_formatted_uri;
@@ -1023,7 +1024,7 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 
 	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
-	/* Truncate the URI so it doesn't get insanely wide.  */
+	/* Truncate the URI so it doesn't get insanely wide. */
         uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
 							   MAX_URI_IN_DIALOG_LENGTH);
 	g_free (full_formatted_uri);
@@ -1053,23 +1054,23 @@ show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
 	vbox = gtk_vbox_new (FALSE, 12);
 	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
 
-	if (reverting)
-	{
-		str = g_strdup_printf ("<b>%s</b>\n%s", _("Reverting file:"), uri_for_display);
-	}
-	else
-	{
-		str = g_strdup_printf ("<b>%s</b>\n%s", _("Loading file:"), uri_for_display);		
-	}
+	str = g_strdup_printf ("<b>%s</b>",
+			reverting? _("Reverting file:") : _("Loading file:"));
 
 	label = gtk_label_new (str);
-	g_free (uri_for_display);
 	g_free (str);
-	
+
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+	uri_label = gtk_label_new (uri_for_display);
+	g_free (uri_for_display);
+
+	gtk_box_pack_start (GTK_BOX (vbox), uri_label, FALSE, FALSE, 0);
+	gtk_label_set_justify (GTK_LABEL (uri_label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (uri_label), 0, 0.5);
 
 	progress_bar = gtk_progress_bar_new ();
 	gtk_box_pack_start (GTK_BOX (vbox), progress_bar, FALSE, FALSE, 0);
