@@ -62,11 +62,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS
 %{prefix}/bin/gedit
-%{prefix}/share/locale/*/*/*
-%{prefix}/share/gnome/apps/*/*
-%{prefix}/share/pixmaps/*
-%{prefix}/share/mime-info/*
-%{prefix}/share/geditrc
+%{prefix}/share/*
+#%{prefix}/share/locale/*/*/*
+#%{prefix}/share/gnome/apps/*/*
+#%{prefix}/share/pixmaps/*
+#%{prefix}/share/mime-info/*
+#%{prefix}/share/geditrc
 %{prefix}/man/*/*
 %{prefix}/libexec/*/*/*
 
