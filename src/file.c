@@ -167,7 +167,7 @@ gedit_file_open (Document *doc, const gchar *fname)
 	if (stats.st_size  == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
-						    "\nPlease make sure the file is not being used by another 0pplication\n"
+						    "\nPlease make sure the file is not being used by another application\n"
 						    "and that the file is not empty."), fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
