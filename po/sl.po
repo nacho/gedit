@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-24 21:42+0200\n"
+"POT-Creation-Date: 2003-08-26 23:48+0200\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -173,8 +173,8 @@ msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"Seznam naborov znakov prikazanih v menuju \"Nabor znakov\" v izbirniku za odpiranje in shranjevanje datotek. "
-"Uporabljeni so le prepoznani nabori."
+"Seznam naborov znakov prikazanih v menuju \"Nabor znakov\" v izbirniku za "
+"odpiranje in shranjevanje datotek. Uporabljeni so le prepoznani nabori."
 
 #: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
@@ -222,8 +222,9 @@ msgid ""
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
-"Urejen seznam znakovnih naborov uporablje s strani gedita za samodejno zaznavanje znakovnega nabora "
-"datoteke. Trenutni znakovni nabor locale je \"CURRENT\". Uporabljeni so le prepoznani nabori."
+"Urejen seznam znakovnih naborov uporablje s strani gedita za samodejno "
+"zaznavanje znakovnega nabora datoteke. Trenutni znakovni nabor locale je "
+"\"CURRENT\". Uporabljeni so le prepoznani nabori."
 
 #: data/gedit.schemas.in.h:35
 msgid ""
@@ -478,6 +479,7 @@ msgid "Find"
 msgstr "Poišči"
 
 #: gedit/dialogs/gedit-dialog-replace.c:1149
+#, c-format
 msgid "Found and replaced %d occurrences."
 msgstr "Našel in zamenjal sem %d pojavitev."
 
@@ -520,7 +522,9 @@ msgstr "Izbirnik pisave telesa"
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
-msgstr "Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje telesa dokumenta"
+msgstr ""
+"Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje telesa "
+"dokumenta"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:492
 msgid "Page headers font picker"
@@ -529,7 +533,9 @@ msgstr "Izbirnik pisave glav strani"
 #: gedit/dialogs/gedit-page-setup-dialog.c:493
 msgid ""
 "Push this button to select the font to be used to print the page headers"
-msgstr "Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje glav strani"
+msgstr ""
+"Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje glav "
+"strani"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:494
 msgid "Line numbers font picker"
@@ -537,7 +543,9 @@ msgstr "Izbirnik pisave Številk vrstic"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr "Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje številk vrstic"
+msgstr ""
+"Pritisnite ta gumb za izbiro pisave, ki bo uporabljena za tiskanje številk "
+"vrstic"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 msgid "Could not find '"
@@ -607,8 +615,8 @@ msgid "Tabs"
 msgstr "Uhlj"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:200
-msgid "Text Wrapping"
-msgstr "Lomljenje besedila"
+msgid "Wrap Mode"
+msgstr "Način lomljenja"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:201
 msgid "Auto Indent"
@@ -624,7 +632,7 @@ msgid "Save"
 msgstr "Shrani"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:204
-#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:66
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
 msgid "Undo"
 msgstr "Razveljavi"
 
@@ -1345,7 +1353,7 @@ msgstr ""
 "\n"
 "Tega dejanja ne boste mogli razveljaviti."
 
-#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:93
+#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "_Povrni"
 
@@ -1388,7 +1396,7 @@ msgid "RO"
 msgstr "Le beri"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:84
+#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "_Prestavi na naslednje okno"
 
@@ -1536,6 +1544,8 @@ msgstr "Pripravljam strani..."
 msgid "Rendering page %d of %d..."
 msgstr "Izrisujem stran %d od %d..."
 
+#: gedit/gedit-print.c:360
+#, c-format
 msgid "Printing page %d of %d..."
 msgstr "Tiskam stran %d od %d..."
 
@@ -1786,142 +1796,152 @@ msgid "Show only icons in the toolbar"
 msgstr "V orodjarni kaži le ikone"
 
 #: gedit/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Show text below every icon in the toolbar"
+msgstr "V orodjarni kaži le ikone"
+
+#: gedit/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Show text only beside important icons in the toolbar"
+msgstr "V orodjarni kaži le ikone"
+
+#: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
 msgstr "B_esedilo za pomembne ikone"
 
-#: gedit/gedit-ui.xml.h:67
+#: gedit/gedit-ui.xml.h:69
 msgid "Undo the last action"
 msgstr "Razveljavi zadnje dejanje"
 
-#: gedit/gedit-ui.xml.h:68
+#: gedit/gedit-ui.xml.h:70
 msgid "_About"
 msgstr "_O programu"
 
-#: gedit/gedit-ui.xml.h:69
+#: gedit/gedit-ui.xml.h:71
 msgid "_Close"
 msgstr "_Zapri"
 
-#: gedit/gedit-ui.xml.h:70
+#: gedit/gedit-ui.xml.h:72
 msgid "_Close All"
 msgstr "_Zapri vse"
 
-#: gedit/gedit-ui.xml.h:71
+#: gedit/gedit-ui.xml.h:73
 msgid "_Contents"
 msgstr "_Vsebina"
 
-#: gedit/gedit-ui.xml.h:72
+#: gedit/gedit-ui.xml.h:74
 msgid "_Copy"
 msgstr "_Kopiraj"
 
-#: gedit/gedit-ui.xml.h:73
+#: gedit/gedit-ui.xml.h:75
 msgid "_Customize Toolbar"
 msgstr "_Prikroji orodjarno"
 
-#: gedit/gedit-ui.xml.h:74
+#: gedit/gedit-ui.xml.h:76
 msgid "_Debug"
 msgstr "_Razhroščuj"
 
-#: gedit/gedit-ui.xml.h:75
+#: gedit/gedit-ui.xml.h:77
 msgid "_Delete"
 msgstr "_Zbriši"
 
-#: gedit/gedit-ui.xml.h:76
+#: gedit/gedit-ui.xml.h:78
 msgid "_Desktop Default"
 msgstr "Privzeto po _namizju"
 
-#: gedit/gedit-ui.xml.h:77
+#: gedit/gedit-ui.xml.h:79
 msgid "_Documents"
 msgstr "_Dokumenti"
 
-#: gedit/gedit-ui.xml.h:78
+#: gedit/gedit-ui.xml.h:80
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: gedit/gedit-ui.xml.h:79
+#: gedit/gedit-ui.xml.h:81
 msgid "_File"
 msgstr "_Datoteka"
 
-#: gedit/gedit-ui.xml.h:80
+#: gedit/gedit-ui.xml.h:82
 msgid "_Find..."
 msgstr "_Poišči..."
 
-#: gedit/gedit-ui.xml.h:81
+#: gedit/gedit-ui.xml.h:83
 msgid "_Help"
 msgstr "_Pomoč"
 
-#: gedit/gedit-ui.xml.h:82
+#: gedit/gedit-ui.xml.h:84
 msgid "_Highlight Mode"
 msgstr "_Osvetlitveni način"
 
-#: gedit/gedit-ui.xml.h:83
+#: gedit/gedit-ui.xml.h:85
 msgid "_Icons Only"
 msgstr "Le _ikone"
 
-#: gedit/gedit-ui.xml.h:85
+#: gedit/gedit-ui.xml.h:87
 msgid "_New"
 msgstr "_Nova"
 
-#: gedit/gedit-ui.xml.h:86
+#: gedit/gedit-ui.xml.h:88
 msgid "_Open..."
 msgstr "_Odpri..."
 
-#: gedit/gedit-ui.xml.h:87
+#: gedit/gedit-ui.xml.h:89
 msgid "_Output Window"
 msgstr "_Izhodno okno"
 
-#: gedit/gedit-ui.xml.h:88
+#: gedit/gedit-ui.xml.h:90
 msgid "_Paste"
 msgstr "_Prilepi"
 
-#: gedit/gedit-ui.xml.h:89
+#: gedit/gedit-ui.xml.h:91
 msgid "_Print..."
 msgstr "Na_tisni..."
 
-#: gedit/gedit-ui.xml.h:90
+#: gedit/gedit-ui.xml.h:92
 msgid "_Quit"
 msgstr "_Končaj"
 
-#: gedit/gedit-ui.xml.h:91
+#: gedit/gedit-ui.xml.h:93
 msgid "_Redo"
 msgstr "_Obnovi"
 
-#: gedit/gedit-ui.xml.h:92
+#: gedit/gedit-ui.xml.h:94
 msgid "_Replace..."
 msgstr "_Zamenjaj..."
 
-#: gedit/gedit-ui.xml.h:94
+#: gedit/gedit-ui.xml.h:96
 msgid "_Save"
 msgstr "_Shrani"
 
-#: gedit/gedit-ui.xml.h:95
+#: gedit/gedit-ui.xml.h:97
 msgid "_Save All"
 msgstr "Shrani _vse"
 
-#: gedit/gedit-ui.xml.h:96
+#: gedit/gedit-ui.xml.h:98
 msgid "_Search"
 msgstr "_Iskanje"
 
-#: gedit/gedit-ui.xml.h:97
+#: gedit/gedit-ui.xml.h:99
 msgid "_Statusbar"
 msgstr "Vrstica _stanja"
 
-#: gedit/gedit-ui.xml.h:98
+#: gedit/gedit-ui.xml.h:100
 msgid "_Text for All Icons"
 msgstr "_Besedilo za vse ikone"
 
-#: gedit/gedit-ui.xml.h:99
+#: gedit/gedit-ui.xml.h:101
 msgid "_Toolbar"
 msgstr "_Orodjarna"
 
-#: gedit/gedit-ui.xml.h:100
+#: gedit/gedit-ui.xml.h:102
 msgid "_Tools"
 msgstr "_Orodja"
 
-#: gedit/gedit-ui.xml.h:101
+#: gedit/gedit-ui.xml.h:103
 msgid "_Undo"
 msgstr "_Razveljavi"
 
-#: gedit/gedit-ui.xml.h:102
+#: gedit/gedit-ui.xml.h:104
 msgid "_View"
 msgstr "_Poglej"
 
@@ -2060,6 +2080,7 @@ msgstr ""
 "Prosim, preverite ali ste lokacijo vpisali pravilno in poskusite znova."
 
 #: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
 "\n"
@@ -2079,12 +2100,15 @@ msgid ""
 "selecting a character coding in the 'Open File...' (or 'Open Location') "
 "dialog."
 msgstr ""
-"Nisem mogel odpreti datoteke \"%s\", ker gedit ni uspel samodejno ugotoviti uporabljenega nabora znakov.\n"
+"Nisem mogel odpreti datoteke \"%s\", ker gedit ni uspel samodejno ugotoviti "
+"uporabljenega nabora znakov.\n"
 "\n"
-"Prosim, preverite ali poskušate odpreti binarno datoteko in "
-"poskusite znova z izbiro nabora znakov v dialogu \"Odpri datoteko...\" (ali \"Odpri lokacijo\")."
+"Prosim, preverite ali poskušate odpreti binarno datoteko in poskusite znova "
+"z izbiro nabora znakov v dialogu \"Odpri datoteko...\" (ali \"Odpri lokacijo"
+"\")."
 
 #: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
+#, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
 "\n"
@@ -2094,9 +2118,9 @@ msgid ""
 msgstr ""
 "Nisem mogel odpreti datoteke \"%s\" z uporabo znakovnega nabora %s.\n"
 "\n"
-"Prosim, preverite ali poskušate odpreti binarno datoteko in "
-"ali ste v dialogu \"Odpri datoteko...\" (ali \"Odpri lokacijo\") izbrali "
-"pravilen nabor znakov."
+"Prosim, preverite ali poskušate odpreti binarno datoteko in ali ste v "
+"dialogu \"Odpri datoteko...\" (ali \"Odpri lokacijo\") izbrali pravilen "
+"nabor znakov."
 
 #: gedit/gedit-utils.c:662
 #, c-format
@@ -2104,11 +2128,13 @@ msgid "Could not open the file \"%s\"."
 msgstr "Nisem mogel odpreti datoteke \"%s\"."
 
 #: gedit/gedit-utils.c:666
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
 "%s"
-msgstr "Nisem mogel odpreti datoteke \"%s\".\n"
+msgstr ""
+"Nisem mogel odpreti datoteke \"%s\".\n"
 "\n"
 "%s"
 
@@ -2314,6 +2340,7 @@ msgstr "Nisem mogel ustvariti datoteke \"%s\"."
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
 #: gedit/gedit-view.c:685
+#, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Vr. %d, St. %d"
 
@@ -2987,6 +3014,9 @@ msgstr "Kopiraj izbrano besedilo na odložišče"
 msgid "_Copy Text"
 msgstr "_Kopiraj besedilo"
 
+#~ msgid "Text Wrapping"
+#~ msgstr "Lomljenje besedila"
+
 #~ msgid "Show Cursor Position"
 #~ msgstr "Kaži položaj kazalca"
 
@@ -3215,9 +3245,6 @@ msgstr "_Kopiraj besedilo"
 
 #~ msgid "Author(s)"
 #~ msgstr "Avtor(ji)"
-
-#~ msgid "Wrap Mode"
-#~ msgstr "Način lomljenja"
 
 #~ msgid "Page"
 #~ msgstr "Stran"
