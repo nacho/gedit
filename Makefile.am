@@ -2,9 +2,7 @@
 
 SUBDIRS = gedit pixmaps po help data plugins viewer
 
-distcleancheck_listfiles = find . -type f -print | grep -v 'omf\.out'
-
-distuninstallcheck_listfiles = find . -type f -print | grep -v '^\./var/scrollkeeper' | grep -v 'omf' | grep -v 'figures'
+distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
 EXTRA_DIST = BUGS		\
 	ChangeLog  		\
