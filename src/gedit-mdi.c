@@ -336,6 +336,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
+
+	/* Set window role */
+	gtk_window_set_role (GTK_WINDOW (win), "gedit main window");
 }
 
 static void

@@ -432,8 +432,8 @@ gedit_view_init (GeditView  *view)
 
 	/* The same popup menu is attached to all views */
 	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);	
-#endif 	
-}
+#endif 
+	}
 
 static void 
 gedit_view_finalize (GObject *object)
