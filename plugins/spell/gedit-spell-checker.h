@@ -60,6 +60,24 @@ typedef struct _GeditSpellChecker GeditSpellChecker;
 
 typedef struct _GeditSpellCheckerClass GeditSpellCheckerClass;
 
+struct _GeditSpellCheckerClass 
+{
+	GObjectClass parent_class;
+
+	/* Signals */
+	void (*add_word_to_personal) (GeditSpellChecker *spell, 
+				      const gchar *word,
+				      gint len);
+
+	void (*add_word_to_session)  (GeditSpellChecker *spell, 
+				      const gchar *word, 
+				      gint len);
+
+	void (*set_language)         (GeditSpellChecker *spell, 
+				      const GeditLanguage *lang);
+
+	void (*clear_session)	     (GeditSpellChecker *spell);
+};
 
 
 GType        		 gedit_spell_checker_get_type		(void) G_GNUC_CONST;

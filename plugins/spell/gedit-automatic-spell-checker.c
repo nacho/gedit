@@ -262,8 +262,6 @@ add_to_dictionary (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 	
 	gedit_spell_checker_add_word_to_personal (spell->spell_checker, word, -1, NULL);
 
-	remove_tag_to_word (spell, word);
-	
 	g_free (word);
 }
 
@@ -282,8 +280,6 @@ ignore_all (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 					 FALSE);
 	
 	gedit_spell_checker_add_word_to_session (spell->spell_checker, word, -1, NULL);
-
-	remove_tag_to_word (spell, word);
 
 	g_free (word);
 }
@@ -488,8 +484,39 @@ gedit_automatic_spell_checker_recheck_all (GeditAutomaticSpellChecker *spell)
 	check_range (spell, start, end);
 }
 
+static void 
+add_word_signal_cb (GeditSpellChecker          *checker, 
+		    const gchar                *word, 
+		    gint                        len,
+		    GeditAutomaticSpellChecker *spell)
+{
+	gchar *w;
 
-		
+	if (len < 0)
+		w = g_strdup (word);
+	else
+		w = g_strndup (word, len);
+
+	remove_tag_to_word (spell, w);
+
+	g_free (w);
+}
+
+static void 
+set_language_cb (GeditSpellChecker          *checker,
+		 const GeditLanguage        *lang,
+		 GeditAutomaticSpellChecker *spell)
+{
+	gedit_automatic_spell_checker_recheck_all (spell);
+}
+
+static void 
+clear_session_cb (GeditSpellChecker          *checker,
+		  GeditAutomaticSpellChecker *spell)
+{
+	gedit_automatic_spell_checker_recheck_all (spell);
+}
+	
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checker)
 {
@@ -533,6 +560,26 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 	g_signal_connect_after (G_OBJECT (doc),
 			  "delete-range",
 			  G_CALLBACK (delete_range_after), 
+			  spell);
+
+	g_signal_connect (G_OBJECT (spell->spell_checker),
+			  "add_word_to_session",
+			  G_CALLBACK (add_word_signal_cb),
+			  spell);
+
+	g_signal_connect (G_OBJECT (spell->spell_checker),
+			  "add_word_to_personal",
+			  G_CALLBACK (add_word_signal_cb),
+			  spell);
+
+	g_signal_connect (G_OBJECT (spell->spell_checker),
+			  "clear_session",
+			  G_CALLBACK (clear_session_cb),
+			  spell);
+
+	g_signal_connect (G_OBJECT (spell->spell_checker),
+			  "set_language",
+			  G_CALLBACK (set_language_cb),
 			  spell);
 
 	spell->tag_highlight = gtk_text_buffer_create_tag (
@@ -608,12 +655,17 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 		gtk_text_tag_table_remove (table, spell->tag_highlight);
 	}
 		
-	g_object_unref (spell->spell_checker);
-	
 	g_signal_handlers_disconnect_matched (G_OBJECT (spell->doc),
 			G_SIGNAL_MATCH_DATA,
 			0, 0, NULL, NULL,
 			spell);
+
+	g_signal_handlers_disconnect_matched (G_OBJECT (spell->spell_checker),
+			G_SIGNAL_MATCH_DATA,
+			0, 0, NULL, NULL,
+			spell);
+
+	g_object_unref (spell->spell_checker);
 
 	list = spell->views;
 	while (list != NULL)

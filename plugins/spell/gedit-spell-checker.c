@@ -40,17 +40,15 @@
 
 #include "gedit-spell-checker.h"
 
+/* FIXME - Rename the marshal file - Paolo */
+#include "gedit-spell-checker-dialog-marshal.h"
+
 struct _GeditSpellChecker 
 {
 	GObject parent_instance;
 	
 	PspellManager *manager;
 	const GeditLanguage *active_lang;
-};
-
-struct _GeditSpellCheckerClass 
-{
-	GObjectClass parent_class;	
 };
 
 struct _GeditLanguage 
@@ -61,10 +59,19 @@ struct _GeditLanguage
 
 /* GObject properties */
 enum {
-	PROP_0,
+	PROP_0 = 0,
 	PROP_AVAILABLE_LANGUAGES,
 	PROP_LANGUAGE,
 	LAST_PROP
+};
+
+/* Signals */
+enum {
+	ADD_WORD_TO_PERSONAL = 0,
+	ADD_WORD_TO_SESSION,
+	SET_LANGUAGE,
+	CLEAR_SESSION,
+	LAST_SIGNAL
 };
 
 #define KNOWN_LANGUAGES 22
@@ -107,6 +114,7 @@ static GSList *available_languages = NULL;
 
 static GObjectClass *parent_class = NULL;
 
+static guint signals[LAST_SIGNAL] = { 0 };
 
 GQuark
 gedit_spell_checker_error_quark (void)
@@ -216,6 +224,51 @@ gedit_spell_checker_class_init (GeditSpellCheckerClass * klass)
 						 	      "Language",
 							      "The language used by the spell checker",
 							      G_PARAM_READWRITE));
+
+	signals[ADD_WORD_TO_PERSONAL] =
+	    g_signal_new ("add_word_to_personal",
+			  G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditSpellCheckerClass, add_word_to_personal),
+			  NULL, NULL,
+			  gedit_marshal_VOID__STRING_INT,
+			  G_TYPE_NONE, 
+			  2, 
+			  G_TYPE_STRING,
+			  G_TYPE_INT);
+
+	signals[ADD_WORD_TO_SESSION] =
+	    g_signal_new ("add_word_to_session",
+			  G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditSpellCheckerClass, add_word_to_session),
+			  NULL, NULL,
+			  gedit_marshal_VOID__STRING_INT,
+			  G_TYPE_NONE, 
+			  2, 
+			  G_TYPE_STRING,
+			  G_TYPE_INT);
+
+	signals[SET_LANGUAGE] =
+	    g_signal_new ("set_language",
+			  G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditSpellCheckerClass, set_language),
+			  NULL, NULL,
+			  gedit_marshal_VOID__POINTER,
+			  G_TYPE_NONE, 
+			  1, 
+			  G_TYPE_POINTER);
+
+	signals[CLEAR_SESSION] =
+	    g_signal_new ("clear_session",
+			  G_OBJECT_CLASS_TYPE (object_class),
+			  G_SIGNAL_RUN_LAST,
+			  G_STRUCT_OFFSET (GeditSpellCheckerClass, clear_session),
+			  NULL, NULL,
+			  gedit_marshal_VOID__VOID,
+			  G_TYPE_NONE, 
+			  0); 
 }
 
 
@@ -251,31 +304,22 @@ gedit_spell_checker_finalize (GObject *object)
 
 	if (spell_checker->manager != NULL)
 		delete_pspell_manager (spell_checker->manager);
-
-	g_print ("Spell checker finalized.\n");
 }
 
-static const gchar*
-get_lang_code (const GeditLanguage *language)
+static const GeditLanguage*
+get_language_from_abrev (const gchar *abrev)
 {
-	const gchar *lang;
-
-	if (language == NULL) 
+	int i;
+	
+	g_return_val_if_fail (abrev != NULL, NULL);
+	
+	for (i = 0; known_languages [i].abrev; i++) 
 	{
-		lang = g_getenv ("LANG");
-		
-		if (lang != NULL) 
-		{
-			if (strncmp (lang, "C", 1) == 0)
-				lang = NULL;
-			else if (lang[0] == 0)
-				lang = NULL;
-		}
+		if (g_ascii_strncasecmp (abrev, known_languages [i].abrev, strlen(known_languages [i].abrev)) == 0)
+			return &known_languages [i];
 	}
-	else
-		lang = language->abrev;
 
-	return lang;
+	return NULL;
 }
 
 static gboolean
@@ -283,24 +327,43 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 {
 	PspellConfig *config;
 	PspellCanHaveError *err;
-	const gchar *lang;
-
+	
 	g_return_val_if_fail (spell != NULL, FALSE);
 
 	if (spell->manager != NULL)
 		return TRUE;
 
-	lang = get_lang_code (language);
-
 	config = new_pspell_config ();
 	g_return_val_if_fail (config != NULL, FALSE);
 	
-	if (lang != NULL)
-		pspell_config_replace (config, "language-tag", lang);
-	
+	if (language != NULL)
+		pspell_config_replace (config, "language-tag", language->abrev);
+		
 	pspell_config_replace (config, "encoding", "utf-8");
 	
 	pspell_config_replace (config, "mode", "url");
+
+	if (language == NULL)
+	{
+		const gchar *language_tag;
+
+		language_tag = pspell_config_retrieve (config, "language-tag");
+
+		if (language_tag != NULL)
+		{
+			spell->active_lang = get_language_from_abrev (language_tag);
+		}
+
+		/*
+		g_print ("Language tag: %s\n", language_tag);
+		*/
+	}
+	else
+		spell->active_lang = language;
+
+	/*
+	g_print ("Language: %s\n", gedit_language_to_string (spell->active_lang ));
+	*/
 
 	err = new_pspell_manager (config);
 
@@ -308,8 +371,12 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 
 	if (pspell_error_number (err) != 0) 
 	{
-		g_set_error (error, GEDIT_SPELL_CHECKER_ERROR, GEDIT_SPELL_CHECKER_ERROR_PSPELL,
+		spell->active_lang = NULL;
+
+		if (error != NULL)
+			g_set_error (error, GEDIT_SPELL_CHECKER_ERROR, GEDIT_SPELL_CHECKER_ERROR_PSPELL,
 				"pspell: %s", pspell_error_message (err));
+
 		return FALSE;
 	} 
 	
@@ -318,9 +385,7 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 	
 	spell->manager = to_pspell_manager (err);
 	g_return_val_if_fail (spell->manager != NULL, FALSE);
-
-	spell->active_lang = language;
-
+	
 	return TRUE;
 }
 
@@ -362,6 +427,8 @@ gedit_spell_checker_set_language (GeditSpellChecker *spell,
 			const GeditLanguage *language,
 			GError **error)
 {
+	gboolean ret;
+	
 	g_return_val_if_fail (spell != NULL, FALSE);
 	g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (spell), FALSE);
 
@@ -371,7 +438,12 @@ gedit_spell_checker_set_language (GeditSpellChecker *spell,
 		spell->manager = NULL;
 	}
 
-	return lazy_init (spell, language, error);
+	ret = lazy_init (spell, language, error);
+
+	if (ret)
+		g_signal_emit (G_OBJECT (spell), signals[SET_LANGUAGE], 0, language);
+
+	return ret;
 }
 
 const GeditLanguage *
@@ -379,6 +451,9 @@ gedit_spell_checker_get_language (GeditSpellChecker *spell)
 {
 	g_return_val_if_fail (spell != NULL, NULL);
 	g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (spell), NULL);
+
+	if (!lazy_init (spell, spell->active_lang, NULL))
+		return NULL;
 
 	return spell->active_lang;
 }
@@ -533,6 +608,8 @@ gedit_spell_checker_add_word_to_personal (GeditSpellChecker *spell,
 
 	pspell_manager_save_all_word_lists (spell->manager);
 
+	g_signal_emit (G_OBJECT (spell), signals[ADD_WORD_TO_PERSONAL], 0, word, len);
+	
 	return TRUE;
 }
 
@@ -569,6 +646,8 @@ gedit_spell_checker_add_word_to_session (GeditSpellChecker *spell,
 		return FALSE;
 	}
 	
+	g_signal_emit (G_OBJECT (spell), signals[ADD_WORD_TO_SESSION], 0, word, len);
+
 	return TRUE;
 }
 
@@ -594,6 +673,8 @@ gedit_spell_checker_clear_session (GeditSpellChecker *spell, GError **error)
 
 		return FALSE;
 	}	
+
+	g_signal_emit (G_OBJECT (spell), signals[CLEAR_SESSION], 0);
 
 	return TRUE;
 }

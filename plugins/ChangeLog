@@ -1,3 +1,30 @@
+2003-04-18  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixed bug #108708 - Automatic spell checker highlights unknown words already 
+	ignored in manual spell check
+
+	* spell/gedit-automatic-spell-checker.c (add_to_dictionary)
+	(ignore_all): do not call remove_tag_to_word (new GeditSPellChecker signals are
+	used to get the same result)
+	(add_word_signal_cb)(set_language_cb)(clear_session_cb): new callbacks
+	(gedit_automatic_spell_checker_new): connect the new GeditSpellChecker signals
+	(gedit_automatic_spell_checker_free_inter): disconnect new signals
+
+	* spell/gedit-spell-checker-dialog-marshal.list: added VOID:STRIN,INT, VOID:POINTER 
+	and VOID:VOID
+
+	* spell/gedit-spell-checker.[ch]: added add_word_to_session, add_word_to_personal,
+	set_language and clear_session signals
+	(get_lang_code): removed
+	(get_language_from_abrev): new static function
+	(lazy_init): set current language from aspell config information when possible
+	( gedit_spell_checker_set_language):
+	(gedit_spell_checker_add_word_to_personal):
+	(gedit_spell_checker_add_word_to_session):
+	(gedit_spell_checker_clear_session): emit the appropriate signal
+	(gedit_spell_checker_get_language): call lazy_init
+
+
 2003-04-16  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* spell/Makefile.am: don't compile preload.[ch]
