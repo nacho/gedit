@@ -47,6 +47,8 @@
 #include <glib/gstrfuncs.h>
 #include <glib/gutils.h>
 
+#include "gedit-debug.h"
+
 #define READ_CHUNK_SIZE 8192
 
 struct GnomeVFSXReadFileHandle {
@@ -136,12 +138,15 @@ gnome_vfs_x_read_entire_file (const char *uri,
 	*file_contents = NULL;
 
 	/* Open the file. */
+	gedit_debug (DEBUG_DOCUMENT, "Opening file");
 	result = gnome_vfs_open (&handle, uri, GNOME_VFS_OPEN_READ);
 	if (result != GNOME_VFS_OK) {
+		gedit_debug (DEBUG_DOCUMENT, "Failed");
 		return result;
 	}
 
 	/* Read the whole thing. */
+	gedit_debug (DEBUG_DOCUMENT, "Start reading");
 	buffer = NULL;
 	total_bytes_read = 0;
 	do {
@@ -150,29 +155,44 @@ gnome_vfs_x_read_entire_file (const char *uri,
 					 buffer + total_bytes_read,
 					 READ_CHUNK_SIZE,
 					 &bytes_read);
-		if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_EOF) {
+		if ((result != GNOME_VFS_OK) && (result != GNOME_VFS_ERROR_EOF)) {
+			gedit_debug (DEBUG_DOCUMENT, "Failed");
 			g_free (buffer);
 			gnome_vfs_close (handle);
 			return result;
 		}
 
 		/* Check for overflow. */
-		if (total_bytes_read + bytes_read < total_bytes_read) {
+		if ((total_bytes_read + bytes_read) < total_bytes_read) {
+			gedit_debug (DEBUG_DOCUMENT, "Overflow");
 			g_free (buffer);
 			gnome_vfs_close (handle);
 			return GNOME_VFS_ERROR_TOO_BIG;
 		}
 
+		gedit_debug (DEBUG_DOCUMENT, "Read %d bytes", bytes_read);
+		gedit_debug (DEBUG_DOCUMENT, "Result: %d", result);
+
 		total_bytes_read += bytes_read;
-	} while (result == GNOME_VFS_OK);
+		gedit_debug (DEBUG_DOCUMENT, "Total bytes read: %d", total_bytes_read);
+
+		/*FIXME: I should not check bytes_read != 0, but there are problems with 
+		 * ftp
+		 */
+	} while ((result == GNOME_VFS_OK) && (bytes_read != 0));
 
 	/* Close the file. */
+	gedit_debug (DEBUG_DOCUMENT, "Closing file");
+
 	result = gnome_vfs_close (handle);
 	if (result != GNOME_VFS_OK) {
+		gedit_debug (DEBUG_DOCUMENT, "Failed");
 		g_free (buffer);
 		return result;
 	}
-
+	
+	gedit_debug (DEBUG_DOCUMENT, "Done");
+	
 	/* Return the file. */
 	*file_size = total_bytes_read;
 	*file_contents = g_realloc (buffer, total_bytes_read);

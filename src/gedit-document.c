@@ -495,13 +495,15 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
    	gsize file_size;
 	GtkTextIter iter, end;
 	
-	gedit_debug (DEBUG_DOCUMENT, "");
+	gedit_debug (DEBUG_DOCUMENT, "File to load: %s", uri);
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	res = gnome_vfs_x_read_entire_file (uri, &file_size, &file_contents);
 
+	gedit_debug (DEBUG_DOCUMENT, "End reading %s (result: %s)", uri, gnome_vfs_result_to_string (res));
+	
 	if (res != GNOME_VFS_OK)
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, res,
