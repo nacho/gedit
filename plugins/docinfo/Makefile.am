@@ -15,6 +15,7 @@ INCLUDES = \
 plugin_LTLIBRARIES = libdocinfo.la
 
 libdocinfo_la_SOURCES = docinfo.c
+libdocinfo_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = docinfo.glade2

@@ -15,6 +15,7 @@ INCLUDES = \
 plugin_LTLIBRARIES = libdiff.la
 
 libdiff_la_SOURCES = diff.c
+libdiff_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = diff.glade2

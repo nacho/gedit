@@ -15,4 +15,5 @@ INCLUDES = \
 plugin_LTLIBRARIES = libcvschangelog.la
 
 libcvschangelog_la_SOURCES = cvschangelog.c
+libcvschangelog_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 

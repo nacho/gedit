@@ -4,6 +4,7 @@ plugindir = $(libdir)/gedit-2/plugins
 plugin_LTLIBRARIES = libasciitable.la
 
 libasciitable_la_SOURCES = ascii.c
+libasciitable_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 
 INCLUDES =						\

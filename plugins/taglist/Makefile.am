@@ -28,5 +28,6 @@ libtaglist_la_SOURCES = \
 	gedit-taglist-plugin.c		\
 	gedit-taglist-plugin.h
 
+libtaglist_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 EXTRA_DIST = $(taglist_DATA)

@@ -15,4 +15,4 @@ INCLUDES = \
 plugin_LTLIBRARIES = libsample.la
 
 libsample_la_SOURCES = sample.c
-
+libsample_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)

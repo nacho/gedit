@@ -15,6 +15,7 @@ INCLUDES = \
 plugin_LTLIBRARIES = libtime.la
 
 libtime_la_SOURCES = time.c
+libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = time.glade2

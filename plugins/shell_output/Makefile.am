@@ -15,6 +15,7 @@ INCLUDES = \
 plugin_LTLIBRARIES = libshell_output.la
 
 libshell_output_la_SOURCES = shell_output.c
+libshell_output_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = shell_output.glade2
