@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.5.2\n"
-"POT-Creation-Date: 1999-04-08 23:27+0200\n"
+"POT-Creation-Date: 1999-04-29 09:56+0200\n"
 "PO-Revision-Date: 1999-04-08 23:27+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -38,7 +38,7 @@ msgstr "Feil under lagring av fil!"
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/commands.c:961 src/commands.c:962
+#: src/commands.c:951 src/commands.c:952
 msgid "_File"
 msgstr "_Fil"
 
@@ -118,70 +118,70 @@ msgid "Open (swap) .c/.h file"
 msgstr "Åpne (bytt) .c/.h fil"
 
 #. line and column indicators
-#: src/gE_document.c:148
+#: src/gE_document.c:117
 msgid "Column:"
 msgstr "Kolonne:"
 
-#: src/gE_document.c:157
+#: src/gE_document.c:126
 msgid "Line"
 msgstr "Linje"
 
 #. data->window = app;
-#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:480
-#: src/gE_prefs_box.c:481 src/gE_prefs_box.c:531 src/gE_prefs_box.c:532
+#: src/gE_plugin_api.c:105 src/gE_plugin_api.c:106 src/gE_prefs_box.c:481
+#: src/gE_prefs_box.c:482 src/gE_prefs_box.c:532 src/gE_prefs_box.c:533
 #: src/menus.c:232
 msgid "_Plugins"
 msgstr "_Tillegg"
 
-#: src/gE_prefs_box.c:81
+#: src/gE_prefs_box.c:82
 msgid "Default"
 msgstr "Standard"
 
-#: src/gE_prefs_box.c:82
+#: src/gE_prefs_box.c:83
 msgid "Notebook"
 msgstr "Notisblokk"
 
-#: src/gE_prefs_box.c:83
+#: src/gE_prefs_box.c:84
 msgid "Toplevel"
 msgstr "Toppnivå"
 
-#: src/gE_prefs_box.c:84
+#: src/gE_prefs_box.c:85
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:229
+#: src/gE_prefs_box.c:230
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/gE_prefs_box.c:242
+#: src/gE_prefs_box.c:243
 msgid "Show Statusbar"
 msgstr "Vis statuslinje"
 
-#: src/gE_prefs_box.c:251
+#: src/gE_prefs_box.c:252
 msgid "Show Splitscreen"
 msgstr "Vis splittet skjerm"
 
-#: src/gE_prefs_box.c:260
+#: src/gE_prefs_box.c:261
 msgid "Editor Behavior"
 msgstr "Editorens oppførsel"
 
-#: src/gE_prefs_box.c:273
+#: src/gE_prefs_box.c:274
 msgid "Enable Autoindent"
 msgstr "Slå på autoindentering"
 
-#: src/gE_prefs_box.c:282
+#: src/gE_prefs_box.c:283
 msgid "Enable Wordwrap"
 msgstr "Slå på ordbryting"
 
-#: src/gE_prefs_box.c:302
+#: src/gE_prefs_box.c:303
 msgid "Print Command"
 msgstr "Utskriftskommando"
 
-#: src/gE_prefs_box.c:392
+#: src/gE_prefs_box.c:393
 msgid "Current Font"
 msgstr "Aktiv skrifttype"
 
-#: src/gE_prefs_box.c:409
+#: src/gE_prefs_box.c:410
 msgid "Select..."
 msgstr "Marker..."
 
@@ -197,6 +197,10 @@ msgstr "Plassering"
 #: src/gE_prefs_box.c:582 src/gE_prefs_box.c:773
 msgid "Plugins"
 msgstr "Tillegg"
+
+#: src/gE_prefs_box.c:596
+msgid "Use Plugins"
+msgstr "Bruk tillegg"
 
 #: src/gE_prefs_box.c:663
 msgid "Add"
@@ -383,7 +387,7 @@ msgstr "La_gre instillinger"
 msgid "Save the current settings for future sessions"
 msgstr "Lagre nåværende innstillinger for fremtidige sesjoner"
 
-#: src/search.c:150
+#: src/search.c:282
 #, c-format
 msgid ""
 "Total Lines: %i\n"
@@ -392,49 +396,57 @@ msgstr ""
 "Totalt antall linjer: %i\n"
 "Nåværende linje: %i"
 
-#: src/search.c:365 src/search.c:586
-msgid "Search and Replace"
-msgstr "Søk og erstatt"
+#: src/search.c:303
+msgid "Go to line"
+msgstr "Gå til linje"
 
-#: src/search.c:365 src/search.c:586
-msgid "Search"
-msgstr "Søk"
-
-#: src/search.c:368
-msgid "Search For:"
-msgstr "Søk etter:"
-
-#: src/search.c:372
-msgid "Text"
-msgstr "Tekst"
-
-#: src/search.c:379
-msgid "Line Number"
+#: src/search.c:313
+msgid "Line number"
 msgstr "Linjenummer"
 
-#: src/search.c:398
-msgid "Search:"
-msgstr "Søk:"
+#: src/search.c:336
+msgid "Search from cursor"
+msgstr "Søk fra markør"
 
-#: src/search.c:401
-msgid "Start searching at cursor position"
-msgstr "Start søk ved markørposisjonen"
+#: src/search.c:343
+msgid "Search from beginning of document"
+msgstr "Søk fra begynnelsen av dokumentet"
 
-#: src/search.c:406
-msgid "Start searching at beginning of the document"
-msgstr "Start søk ved slutten av dokumentet"
+#: src/search.c:350
+msgid "Search from end of document"
+msgstr "Søk fra slutten av dokumentet"
 
-#: src/search.c:408
+#: src/search.c:357
 msgid "Case sensitive"
 msgstr "Skill mellome store/små bokstaver"
 
-#: src/search.c:412
-msgid "Replace:"
-msgstr "Erstatt:"
+#: src/search.c:363
+msgid "Reverse search"
+msgstr "Baklengs søk"
 
-#: src/search.c:415
-msgid "Prompt before replacing"
+#: src/search.c:375
+msgid "Search"
+msgstr "Søk"
+
+#: src/search.c:380 src/search.c:408
+msgid "Search for:"
+msgstr "Søk etter:"
+
+#: src/search.c:402
+msgid "Replace"
+msgstr "Erstatt"
+
+#: src/search.c:418
+msgid "Replace with:"
+msgstr "Erstatt med:"
+
+#: src/search.c:429
+msgid "Ask before replacing"
 msgstr "Spør før du erstatter"
+
+#: src/search.c:624
+msgid "Replace?"
+msgstr "Erstatt?"
 
 #: src/toolbar.c:38
 msgid "New"
@@ -487,4 +499,3 @@ msgstr "Avslutt"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "Avslutt programmet"
-
