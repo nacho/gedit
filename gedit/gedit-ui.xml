@@ -32,9 +32,8 @@
 	_tip="Print the current file" pixtype="stock" pixname="gtk-print"
 	accel="*Control*P"/>
 	
-        <cmd name="FilePrintSetup" _label="Print Setup"
-          _tip="Setup the page settings for your current printer"
-	  pixtype="stock" pixname="gtk-print"/>
+        <cmd name="FilePageSetup" _label="Page Set_up"
+          _tip="Setup the page settings"/>
 
 	<cmd name="FilePrintPreview" _label="Print Preview"
 	_tip="Print preview" pixtype="stock" pixname="gtk-print-preview"
@@ -146,7 +145,9 @@
         <menuitem name="FileRevert" verb="" _label="_Revert"/>
 	
 	<separator/>
-			
+		
+	<menuitem name="FilePageSetup" verb=""/>
+	
 	<menuitem name="FilePrintPreview" verb="" _label="Print Previe_w..."/>
 
 	<menuitem name="FilePrint" verb="" _label="_Print..."/>

@@ -84,6 +84,8 @@ gboolean gedit_utils_create_empty_file (const gchar *uri);
 
 gchar *gedit_utils_get_stdin (void);
 
+void gedit_warning (gchar *str, GtkWindow *parent);
+
 #endif /* __GEDIT_UTILS_H__ */
 
 

@@ -1,3 +1,35 @@
+2003-06-12  Paolo Maggi <paolo.maggi@polito.it>
+
+	Added Page Setup menu item and dialog
+
+	* dialogs/page-setup-dialog.glade2:
+	* dialogs/gedit-page-setup-dialog.[ch]: new files
+
+	* dialogs/Makefile.am: compile the new files
+
+	* dialogs/gedit-dialog-goto-line.c (dialog_goto_line_get_dialog):
+	fix a mem leak
+
+	* dialogs/gnome-print-font-picker.c: fix a mem leak
+
+	* gedit-commands.[ch] (gedit_cmd_file_page_setup): new function,
+	shows the page setup dialog
+
+	* gedit-menus.c: added FilePageSetup to gedit_verbs
+
+	* gedit-prefs-manager.[ch] (gedit_prefs_manager_get_print_syntax_hl)
+	(gedit_prefs_manager_set_print_syntax_hl)
+	(gedit_prefs_manager_print_syntax_hl_can_set): new functions
+
+	* gedit-print.c (gedit_print_job_info_new): print syntax highlighting
+	only if gedit_prefs_manager_get_print_syntax_hl returns TRUE. 
+	Mark "Page %N of %Q" string for translation.
+	
+	* gedit-ui.xml: added the File->Page Setup menu item
+
+	* gedit-utils.[ch] (gedit_warning): new function, displays an error 
+	message	box
+
 2003-06-09  Paolo Maggi <paolo.maggi@polito.it>
 
 	* gedit-print.[ch]: rewritten

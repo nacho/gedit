@@ -526,7 +526,8 @@ gedit_print_job_info_new (GeditDocument* doc)
 	gnome_print_config_unref (config);
 
 	gtk_source_print_job_set_highlight (pjob, 
-			gtk_source_buffer_get_highlight (GTK_SOURCE_BUFFER (doc)));
+			gtk_source_buffer_get_highlight (GTK_SOURCE_BUFFER (doc)) &&
+			gedit_prefs_manager_get_print_syntax_hl ());
 	
 	gtk_source_print_job_set_print_numbers (pjob,
 			gedit_prefs_manager_get_print_line_numbers ());
@@ -548,8 +549,11 @@ gedit_print_job_info_new (GeditDocument* doc)
 
 		left = g_strdup_printf (_("File: %s"), name_to_display);
 		
+		/* Translators: %N is the current page number, %Q is the total
+		 * number of pages (ex. Page 2 of 10) 
+		 */
 		gtk_source_print_job_set_header_format (pjob,
-				left, NULL, "Page %N/%Q", TRUE);
+				left, NULL, _("Page %N of %Q"), TRUE);
 
 		gtk_source_print_job_set_print_header (pjob, TRUE);
 

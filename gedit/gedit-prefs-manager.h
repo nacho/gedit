@@ -86,6 +86,7 @@
 
 /* Print */
 #define GPM_PRINT_PAGE_DIR		GPM_PREFS_DIR "/print/page"
+#define GPM_PRINT_SYNTAX		GPM_PRINT_PAGE_DIR "/print_syntax_highlighting"
 #define GPM_PRINT_HEADER		GPM_PRINT_PAGE_DIR "/print_header"
 #define GPM_PRINT_WRAP_MODE		GPM_PRINT_PAGE_DIR "/print_wrap_mode"
 #define GPM_PRINT_LINE_NUMBERS		GPM_PRINT_PAGE_DIR "/print_line_numbers"
@@ -143,8 +144,9 @@
 
 #define GPM_DEFAULT_STATUSBAR_VISIBLE	1 /* TRUE */
 
+#define GPM_DEFAULT_PRINT_SYNTAX	1 /* TRUE */
 #define GPM_DEFAULT_PRINT_HEADER	1 /* TRUE */
-#define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_CHAR"
+#define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_WORD"
 #define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
 
 #define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace Regular 9"
@@ -277,6 +279,11 @@ gboolean		 gedit_prefs_manager_toolbar_buttons_style_can_set (void);
 gboolean		 gedit_prefs_manager_get_statusbar_visible	(void);
 void			 gedit_prefs_manager_set_statusbar_visible	(gboolean sv);
 gboolean		 gedit_prefs_manager_statusbar_visible_can_set	(void);
+
+/* Print syntax highlighting */
+gboolean		 gedit_prefs_manager_get_print_syntax_hl	(void);
+void			 gedit_prefs_manager_set_print_syntax_hl	(gboolean ps);
+gboolean		 gedit_prefs_manager_print_syntax_hl_can_set	(void);
 
 /* Print header */
 gboolean		 gedit_prefs_manager_get_print_header		(void);

@@ -40,6 +40,7 @@ void gedit_cmd_file_save_as     (BonoboUIComponent *uic, gpointer user_data, con
 void gedit_cmd_file_save_all    (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 void gedit_cmd_file_revert      (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 void gedit_cmd_file_open_uri    (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
+void gedit_cmd_file_page_setup  (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 void gedit_cmd_file_print       (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 void gedit_cmd_file_print_preview 
 				(BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);

@@ -187,6 +187,7 @@ dialog_goto_line_get_dialog (void)
 			_("Could not find the required widgets inside %s."),
 			"goto-line.glade2");
 		g_object_unref (gui);
+		g_free (dialog);
 		return NULL;
 	}
 	

@@ -729,6 +729,11 @@ DEFINE_BOOL_PREF (statusbar_visible,
 		  GPM_STATUSBAR_VISIBLE,
 		  GPM_DEFAULT_STATUSBAR_VISIBLE)
 
+/* Print syntax highlighting */
+DEFINE_BOOL_PREF (print_syntax_hl,
+		  GPM_PRINT_SYNTAX,
+		  GPM_DEFAULT_PRINT_SYNTAX)
+
 /* Print header */
 DEFINE_BOOL_PREF (print_header,
 		  GPM_PRINT_HEADER,

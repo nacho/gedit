@@ -305,6 +305,19 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/gedit-2/preferences/print/page/print_syntax_highlighting</key>
+      <applyto>/apps/gedit-2/preferences/print/page/print_syntax_highlighting</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <locale name="C">
+	<short>Print Syntax Highlighting</short>
+	<long>Whether gedit should print syntax highlighting when
+	printing documents.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <key>/schemas/apps/gedit-2/preferences/print/page/print_header</key>
       <applyto>/apps/gedit-2/preferences/print/page/print_header</applyto>
       <owner>gedit</owner>
@@ -322,7 +335,7 @@
       <applyto>/apps/gedit-2/preferences/print/page/print_wrap_mode</applyto>
       <owner>gedit</owner>
       <type>string</type>
-      <default>GTK_WRAP_CHAR</default>
+      <default>GTK_WRAP_WORD</default>
       <locale name="C">
 	<short>Printing Line Wrapping Mode</short>
 	<long>Specifies how to wrap long lines for printing.  Use

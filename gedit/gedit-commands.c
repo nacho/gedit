@@ -47,7 +47,7 @@
 #include "gedit-print.h"
 #include "dialogs/gedit-dialogs.h"
 #include "dialogs/gedit-preferences-dialog.h"
-
+#include "dialogs/gedit-page-setup-dialog.h"
 
 void 
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -137,6 +137,17 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	gedit_dialog_open_uri ();
+}
+
+void
+gedit_cmd_file_page_setup (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	BonoboWindow *active_window;
+
+	active_window = gedit_get_active_window ();
+	g_return_if_fail (active_window != NULL);
+
+	gedit_show_page_setup_dialog (GTK_WINDOW (active_window));
 }
 
 void

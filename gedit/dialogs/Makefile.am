@@ -30,6 +30,8 @@ libdialogs_la_SOURCES = 			\
 	gnome-print-font-dialog.h	\
 	gedit-encodings-dialog.c	\
 	gedit-encodings-dialog.h	\
+	gedit-page-setup-dialog.c	\
+	gedit-page-setup-dialog.h	\
 	gedit-dialogs.h		
 
 glade_DATA =				\
@@ -39,7 +41,8 @@ glade_DATA =				\
 	plugin-manager.glade2		\
 	gedit-preferences.glade2	\
 	program-location-dialog.glade2	\
-	gedit-encodings-dialog.glade2
+	gedit-encodings-dialog.glade2	\
+	page-setup-dialog.glade2
 
 EXTRA_DIST = $(glade_DATA) 
 

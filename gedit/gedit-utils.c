@@ -1284,6 +1284,25 @@ gedit_utils_get_stdin (void)
 	return g_string_free (file_contents, FALSE);
 }
 
+void 
+gedit_warning (gchar *str, GtkWindow *parent)
+{
+	GtkWidget *dialog;
 
+	dialog = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			str);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+}
 
 
