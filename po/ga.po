@@ -2,11 +2,10 @@
 # Copyright (C) 2000,2003 Free Software Foundation, Inc.
 # Alastair McKinstry <mckinstry@computer.org>, 2000
 # Paul Duffy <dubhthach@frink.nuigalway.ie>, 2003
-
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-HEAD\n"
-"POT-Creation-Date: 2003-04-11 10:57+0100\n"
+"POT-Creation-Date: 2003-05-13 15:20+0100\n"
 "PO-Revision-Date: 2003-04-11  11:17+0100\n"
 "Last-Translator: Paul Duffy <dubhthach@frink.nuigalway.ie>\n"
 "Language-Team: Irish\n"
@@ -15,21 +14,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/GNOME_Gedit.server.in.h:1
-msgid "gedit application"
-msgstr ""
+msgid "Gedit View"
+msgstr "Radharc Gedit"
 
 #: data/GNOME_Gedit.server.in.h:2
+msgid "Gedit View."
+msgstr "Radharc Gedit."
+
+#: data/GNOME_Gedit.server.in.h:3 viewer/gedit-factory.c:53
+msgid "Gedit viewer factory"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.h:4
+msgid "Source"
+msgstr "Foinse"
+
+#: data/GNOME_Gedit.server.in.h:5
+msgid "gedit application"
+msgstr "Clár gedit"
+
+
+#: data/GNOME_Gedit.server.in.h:6
 msgid "gedit automation factory"
 msgstr ""
 
 #: data/gedit.desktop.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "Eagar comhad Téacs"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:343
-
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:347
 msgid "Text Editor"
-msgstr "Eagarthóir Teacs"
+msgstr "Eagarthóir Téacs"
 
 #: data/gedit.schemas.in.h:1
 msgid ""
@@ -38,9 +53,8 @@ msgid ""
 msgstr ""
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Auto Save"
-msgstr "Sábháil"
+msgstr "Uath-Sábháil"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save Interval"
@@ -183,15 +197,6 @@ msgid "Selection Color"
 msgstr "Tóg Dath"
 
 #: data/gedit.schemas.in.h:32
-#, fuzzy
-msgid "Show Cursor Position"
-msgstr "Priontáil an comhad seo"
-
-#: data/gedit.schemas.in.h:33
-msgid "Show Overwrite Mode"
-msgstr ""
-
-#: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -200,7 +205,7 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:33
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -209,40 +214,40 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:34
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:39
 msgid "Status Bar is Visible"
 msgstr ""
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -252,16 +257,16 @@ msgid ""
 "mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:41
 msgid "Tab Size"
 msgstr ""
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:42
 #, fuzzy
 msgid "Text Color"
 msgstr "Eagarthóir Teacs"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:43
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -276,81 +281,67 @@ msgid ""
 "appear exactly as mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:44
 msgid "Toolbar Buttons Style"
 msgstr ""
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:45
 #, fuzzy
 msgid "Toolbar is Visible"
 msgstr "_Barr"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:46
 msgid "Undo Actions Limit"
 msgstr ""
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:47
 msgid "Use Default Colors"
 msgstr ""
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:48
 #, fuzzy
 msgid "Use Default Font"
 msgstr "Cló gnáth: "
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:49
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:51
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr ""
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:52
 msgid "Whether gedit should enable auto indentation."
 msgstr ""
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:53
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:54
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr ""
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:55
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 
-#: data/gedit.schemas.in.h:58
-msgid ""
-"Whether the status bar should show the cursor position in editing windows. "
-"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
-"effect."
-msgstr ""
-
-#: data/gedit.schemas.in.h:59
-msgid ""
-"Whether the status bar should show the insert/overwrite mode in editing "
-"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
-"to take effect."
-msgstr ""
-
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:56
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr ""
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:57
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -358,7 +349,7 @@ msgid ""
 "\", and \"Selection Color\" options."
 msgstr ""
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -406,7 +397,7 @@ msgstr ""
 msgid "File Name"
 msgstr "Ainm Comhad"
 
-#: gedit/gedit-print.c:373 plugins/docinfo/docinfo.glade2.h:6
+#: gedit/gedit-print.c:376 plugins/docinfo/docinfo.glade2.h:6
 msgid "Lines"
 msgstr ""
 
@@ -519,28 +510,28 @@ msgstr ""
 msgid "Inserts current date and time at the cursor position."
 msgstr "Priontáil an comhad seo"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:322
+#: plugins/spell/gedit-automatic-spell-checker.c:336
 #: plugins/spell/gedit-spell-checker-dialog.c:504
 msgid "(no suggested words)"
 msgstr ""
 
-#: plugins/spell/gedit-automatic-spell-checker.c:346
+#: plugins/spell/gedit-automatic-spell-checker.c:360
 #, fuzzy
 msgid "_More..."
 msgstr "Oscáil"
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:399
+#: plugins/spell/gedit-automatic-spell-checker.c:413
 #, fuzzy
 msgid "_Ignore All"
 msgstr "Dún Gach Rud"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:412
+#: plugins/spell/gedit-automatic-spell-checker.c:426
 msgid "_Add"
 msgstr ""
 
-#: plugins/spell/gedit-automatic-spell-checker.c:449
+#: plugins/spell/gedit-automatic-spell-checker.c:463
 msgid "_Spelling Suggestions..."
 msgstr ""
 
@@ -560,100 +551,100 @@ msgstr ""
 msgid "Completed spell checking"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:73
+#: plugins/spell/gedit-spell-checker.c:80
 msgid "Breton"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:74
+#: plugins/spell/gedit-spell-checker.c:81
 msgid "Catalan"
 msgstr "Catalóinis"
 
-#: plugins/spell/gedit-spell-checker.c:75
+#: plugins/spell/gedit-spell-checker.c:82
 msgid "Czech"
 msgstr "Seicis"
 
-#: plugins/spell/gedit-spell-checker.c:76
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Danish"
 msgstr "Danmhairgis"
 
-#: plugins/spell/gedit-spell-checker.c:77
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "German (Germany)"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:78
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "German (Swiss)"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:79
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "English (American)"
 msgstr "Bearla (Meirica)"
 
-#: plugins/spell/gedit-spell-checker.c:80
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "English (British)"
 msgstr "Bearla (Sasna)"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "English (Canadian)"
 msgstr "Bearla (Ceanada)"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:90
 msgid "Spanish"
 msgstr "Spáinnis"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "Faroese"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "French (France)"
 msgstr "Fraincis"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "French (Swiss)"
 msgstr "Fraincis (Elvéiseach)"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "Italian"
 msgstr "Iodáilis"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "Dutch"
 msgstr "Ollainis"
 
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "Norwegian"
 msgstr "Ioruais"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Polish"
 msgstr "Polainnis"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Portuguese (Portugal)"
 msgstr "Portaingéilis"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:99
 msgid "Portuguese (Brazilian)"
 msgstr "Portaingéilis na Brasaíl"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:100
 msgid "Russian"
 msgstr "Rúisis"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Swedish"
 msgstr "Sualainnis"
 
-#: plugins/spell/gedit-spell-checker.c:653
+#: plugins/spell/gedit-spell-checker.c:734
 #, fuzzy
 msgid "Default"
 msgstr "Cló gnáth: "
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:169
+#: gedit/dialogs/gedit-dialog-goto-line.c:187
 #: gedit/dialogs/gedit-encodings-dialog.c:242
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
 #: plugins/spell/gedit-spell-language-dialog.c:233
@@ -784,43 +775,43 @@ msgstr ""
 msgid "Activate %s"
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:143
+#: gedit/dialogs/gedit-dialog-goto-line.c:161
 msgid "Go to Line"
 msgstr ""
 
 #. Add Goto Line button
-#: gedit/dialogs/gedit-dialog-goto-line.c:153
+#: gedit/dialogs/gedit-dialog-goto-line.c:171
 msgid "_Go to Line"
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-replace.c:132
-#: gedit/dialogs/gedit-dialog-replace.c:1025 gedit/gedit-commands.c:363
+#: gedit/dialogs/gedit-dialog-replace.c:133
+#: gedit/dialogs/gedit-dialog-replace.c:1059 gedit/gedit-commands.c:387
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-replace.c:240 gedit/dialogs/replace.glade2.h:4
-#: gedit/gedit-ui.xml.h:49
+#: gedit/dialogs/gedit-dialog-replace.c:266 gedit/dialogs/replace.glade2.h:4
+#: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-replace.c:251
+#: gedit/dialogs/gedit-dialog-replace.c:277
 msgid "Replace _All"
 msgstr ""
 
 #. Add Replace button
-#: gedit/dialogs/gedit-dialog-replace.c:254
+#: gedit/dialogs/gedit-dialog-replace.c:280
 #: gedit/gedit-file-selector-util.c:129
 msgid "_Replace"
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-replace.c:376 gedit/gedit-ui.xml.h:20
+#: gedit/dialogs/gedit-dialog-replace.c:402 gedit/gedit-ui.xml.h:19
 msgid "Find"
 msgstr ""
 
-#: gedit/dialogs/gedit-dialog-replace.c:1034
+#: gedit/dialogs/gedit-dialog-replace.c:1068
 #, c-format
-msgid "Found and replaced %d occurences."
+msgid "Found and replaced %d occurrences."
 msgstr ""
 
 #: gedit/dialogs/gedit-dialog-uri.c:83
@@ -894,17 +885,17 @@ msgstr ""
 msgid "Line Numbers"
 msgstr ""
 
-#: gedit/dialogs/gedit-preferences-dialog.c:243 gedit/gedit-ui.xml.h:30
+#: gedit/dialogs/gedit-preferences-dialog.c:243 gedit/gedit-ui.xml.h:27
 msgid "Open"
 msgstr "Oscáil"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:244
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Sábháil"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:70
+#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:65
 msgid "Undo"
 msgstr "Leasú"
 
@@ -929,8 +920,8 @@ msgid "Editor"
 msgstr "Ealu"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:271
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:364
-#: gedit/gedit-ui.xml.h:39
+#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:367
+#: gedit/gedit-ui.xml.h:36
 msgid "Print"
 msgstr "Priontáil"
 
@@ -1414,77 +1405,78 @@ msgstr ""
 msgid "Open from URI"
 msgstr "Oscail ó Comhad"
 
-#: gedit/gedit-commands.c:472
+#: gedit/gedit-commands.c:503
 msgid "translator_credits"
 msgstr ""
 
-#: gedit/gedit-commands.c:497
+#: gedit/gedit-commands.c:528
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:501
+#: gedit/gedit-commands.c:532
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 
-#: gedit/gedit-document.c:538 gedit/gedit-document.c:556
+#: gedit/gedit-document.c:560 gedit/gedit-document.c:578
 #, c-format
 msgid "%s %d"
 msgstr ""
 
-#: gedit/gedit-document.c:538 gedit/gedit-document.c:556
+#: gedit/gedit-document.c:560 gedit/gedit-document.c:578
 msgid "Untitled"
 msgstr "Gan Tideál"
 
-#: gedit/gedit-document.c:544 gedit/gedit-document.c:591
+#: gedit/gedit-document.c:566 gedit/gedit-document.c:613
 #, fuzzy
 msgid "Invalid file name"
 msgstr "Ainm Comhad"
 
-#: gedit/gedit-document.c:703 gedit/gedit-document.c:787
+#: gedit/gedit-document.c:725 gedit/gedit-document.c:809
+#: viewer/gedit-persist-stream.c:114
 msgid "Invalid UTF-8 data"
 msgstr ""
 
-#: gedit/gedit-document.c:1017
+#: gedit/gedit-document.c:1073
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr ""
 
-#: gedit/gedit-document.c:1063
+#: gedit/gedit-document.c:1119
 msgid "The file has too many symbolic links."
 msgstr ""
 
-#: gedit/gedit-document.c:1119
+#: gedit/gedit-document.c:1175
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
 
-#: gedit/gedit-document.c:1126
+#: gedit/gedit-document.c:1182
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 
-#: gedit/gedit-document.c:1139
+#: gedit/gedit-document.c:1195
 #, fuzzy
 msgid "Invalid filename."
 msgstr "Ainm Comhad"
 
-#: gedit/gedit-document.c:1279
+#: gedit/gedit-document.c:1335
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 msgstr ""
 
-#: gedit/gedit-document.c:1284
+#: gedit/gedit-document.c:1340
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
 
-#: gedit/gedit-document.c:1328
+#: gedit/gedit-document.c:1384
 msgid "Could not create a backup file."
 msgstr ""
 
-#: gedit/gedit-document.c:1448
+#: gedit/gedit-document.c:1504
 msgid "It is not possible to revert an Untitled document"
 msgstr ""
 
@@ -1502,38 +1494,38 @@ msgid ""
 "Do you want to try to replace it with the one you are saving?"
 msgstr ""
 
-#: gedit/gedit-file-selector-util.c:544
+#: gedit/gedit-file-selector-util.c:545
 msgid "Select a filename to save"
 msgstr "Pioc ainm Comhad chun a sábháil"
 
-#: gedit/gedit-file.c:151
+#: gedit/gedit-file.c:152
 msgid "Open File..."
 msgstr "Oscail Comhad..."
 
-#: gedit/gedit-file.c:177 gedit/gedit-file.c:887
+#: gedit/gedit-file.c:178 gedit/gedit-file.c:888
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "Oscaíl comhad"
 
-#: gedit/gedit-file.c:309 gedit/gedit-file.c:455
+#: gedit/gedit-file.c:310 gedit/gedit-file.c:456
 #, fuzzy, c-format
 msgid "Saving file '%s'..."
 msgstr "Sabhail as..."
 
-#: gedit/gedit-file.c:337 gedit/gedit-file.c:470
+#: gedit/gedit-file.c:338 gedit/gedit-file.c:471
 msgid "The document has not been saved."
 msgstr ""
 
-#: gedit/gedit-file.c:351 gedit/gedit-file.c:467
+#: gedit/gedit-file.c:352 gedit/gedit-file.c:468
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: gedit/gedit-file.c:434
+#: gedit/gedit-file.c:435
 msgid "Save as..."
 msgstr "Sábháil mar..."
 
-#: gedit/gedit-file.c:628
+#: gedit/gedit-file.c:629
 #, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
@@ -1541,40 +1533,40 @@ msgid ""
 "You will not be able to undo this operation."
 msgstr ""
 
-#: gedit/gedit-file.c:638 gedit/gedit-ui.xml.h:97
+#: gedit/gedit-file.c:639 gedit/gedit-ui.xml.h:91
 msgid "_Revert"
 msgstr ""
 
-#: gedit/gedit-file.c:672
+#: gedit/gedit-file.c:673
 #, fuzzy, c-format
 msgid "Reverting file '%s'..."
 msgstr "Sabhail as..."
 
-#: gedit/gedit-file.c:685
+#: gedit/gedit-file.c:686
 msgid "The document has not been reverted."
 msgstr ""
 
-#: gedit/gedit-file.c:695
+#: gedit/gedit-file.c:696
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: gedit/gedit-file.c:721
+#: gedit/gedit-file.c:722
 #, fuzzy, c-format
 msgid "Loading %d files..."
 msgstr "Sabhail as..."
 
-#: gedit/gedit-file.c:757
+#: gedit/gedit-file.c:758
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr ""
 
-#: gedit/gedit-file.c:812
+#: gedit/gedit-file.c:813
 #, c-format
 msgid "Loaded %i files"
 msgstr ""
 
-#: gedit/gedit-file.c:945
+#: gedit/gedit-file.c:946
 msgid "Could not read data from stdin."
 msgstr ""
 
@@ -1584,15 +1576,16 @@ msgid "RO"
 msgstr ""
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:543 gedit/gedit-ui.xml.h:87
+#: gedit/gedit-mdi-child.c:543 gedit/gedit-ui.xml.h:82
 msgid "_Move to New Window"
 msgstr "_Gluais go Fuinneog Nua"
 
-#: gedit/gedit-mdi.c:434
-msgid "Open a file."
-msgstr "Oscail comhad"
+#: gedit/gedit-mdi.c:443
+#, fuzzy
+msgid "Open a recently used file"
+msgstr "Oscaíl comhad"
 
-#: gedit/gedit-mdi.c:1020
+#: gedit/gedit-mdi.c:930
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1600,23 +1593,23 @@ msgid ""
 "Your changes will be lost if you don't save them."
 msgstr ""
 
-#: gedit/gedit-mdi.c:1025
+#: gedit/gedit-mdi.c:935
 msgid "Do_n't save"
 msgstr ""
 
-#: gedit/gedit-mdi.c:1044
+#: gedit/gedit-mdi.c:954
 msgid "_Don't quit"
 msgstr ""
 
-#: gedit/gedit-mdi.c:1048
+#: gedit/gedit-mdi.c:958
 msgid "_Don't close"
 msgstr ""
 
-#: gedit/gedit-mdi.c:1138
+#: gedit/gedit-mdi.c:1048
 msgid "(modified)"
 msgstr ""
 
-#: gedit/gedit-mdi.c:1144
+#: gedit/gedit-mdi.c:1054
 msgid "(readonly)"
 msgstr ""
 
@@ -1670,7 +1663,7 @@ msgstr ""
 msgid "Cannot initialize preferences manager."
 msgstr ""
 
-#: gedit/gedit-prefs-manager.c:1121
+#: gedit/gedit-prefs-manager.c:1111
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr ""
@@ -1681,23 +1674,23 @@ msgid ""
 "one of the required fonts."
 msgstr ""
 
-#: gedit/gedit-print.c:432
+#: gedit/gedit-print.c:435
 #, c-format
 msgid "File: %s"
 msgstr "Comhad: %s"
 
 #. Print right text
-#: gedit/gedit-print.c:439
+#: gedit/gedit-print.c:442
 #, c-format
 msgid "Page: %d"
 msgstr "Leathanach: %d"
 
-#: gedit/gedit-print.c:580
+#: gedit/gedit-print.c:583
 #, fuzzy
 msgid "gedit - Print Preview"
 msgstr "gedit: Roghnachais..."
 
-#: gedit/gedit-print.c:658
+#: gedit/gedit-print.c:661
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1710,409 +1703,390 @@ msgid "About this application"
 msgstr "Faoi an chláir seo"
 
 #: gedit/gedit-ui.xml.h:2
-msgid "C_ustomize Statusbar"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:3
 #, fuzzy
 msgid "Change the visibility of the output window in the current window"
 msgstr "Priontáil an comhad seo"
 
-#: gedit/gedit-ui.xml.h:4
+#: gedit/gedit-ui.xml.h:3
 msgid "Change the visibility of the statusbar in the current window"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:5
+#: gedit/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:6
+#: gedit/gedit-ui.xml.h:5
 msgid "Close"
 msgstr "Dún"
 
-#: gedit/gedit-ui.xml.h:7
+#: gedit/gedit-ui.xml.h:6
 msgid "Close all open files"
 msgstr "Dún gach comhad a bhfuil oscailte"
 
-#: gedit/gedit-ui.xml.h:8
+#: gedit/gedit-ui.xml.h:7
 msgid "Close the current file"
 msgstr "Dún an comhad seo"
 
-#: gedit/gedit-ui.xml.h:9
+#: gedit/gedit-ui.xml.h:8
 msgid "Configure the application"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:10
+#: gedit/gedit-ui.xml.h:9
 msgid "Copy"
 msgstr "Cóip"
 
-#: gedit/gedit-ui.xml.h:11
+#: gedit/gedit-ui.xml.h:10
 msgid "Copy the selection"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:12
+#: gedit/gedit-ui.xml.h:11
 #, fuzzy
 msgid "Create a new document"
 msgstr "Capéiseanna"
 
-#: gedit/gedit-ui.xml.h:13
+#: gedit/gedit-ui.xml.h:12
 msgid "Cu_t"
 msgstr "Ge_arr"
 
-#: gedit/gedit-ui.xml.h:14
+#: gedit/gedit-ui.xml.h:13
 msgid "Customize"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:15
+#: gedit/gedit-ui.xml.h:14
 msgid "Customize toolbars"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:16
+#: gedit/gedit-ui.xml.h:15
 msgid "Cut"
 msgstr "Gearr"
 
-#: gedit/gedit-ui.xml.h:17
+#: gedit/gedit-ui.xml.h:16
 msgid "Cut the selection"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:18
+#: gedit/gedit-ui.xml.h:17
 msgid "Delete"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:19
+#: gedit/gedit-ui.xml.h:18
 #, fuzzy
 msgid "Delete the selected text"
 msgstr "Rphost an capéis seo"
 
-#: gedit/gedit-ui.xml.h:21
+#: gedit/gedit-ui.xml.h:20
 msgid "Find Again"
 msgstr "Cuardaigh Aréis"
 
-#: gedit/gedit-ui.xml.h:22
+#: gedit/gedit-ui.xml.h:21
 msgid "Find Ne_xt"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:23
+#: gedit/gedit-ui.xml.h:22
 msgid "Go to _Line..."
 msgstr "Dul go dtí _Líona a..."
 
-#: gedit/gedit-ui.xml.h:24
+#: gedit/gedit-ui.xml.h:23
 msgid "Go to a specific line number"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:25
-msgid "Icon and _Text"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:26
+#: gedit/gedit-ui.xml.h:24
 msgid "Main toolbar"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:27
+#: gedit/gedit-ui.xml.h:25
 #, fuzzy
 msgid "Move the current document to a new window"
 msgstr "Rphost an capéis seo"
 
-#: gedit/gedit-ui.xml.h:28
+#: gedit/gedit-ui.xml.h:26
 msgid "New"
 msgstr "Nua"
 
-#: gedit/gedit-ui.xml.h:29
-msgid "Only show icons in the toolbar"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:31
+#: gedit/gedit-ui.xml.h:28
 #, fuzzy
 msgid "Open Location..."
 msgstr "Oscáil Comhad..."
 
-#: gedit/gedit-ui.xml.h:32
+#: gedit/gedit-ui.xml.h:29
 #, fuzzy
 msgid "Open _Location..."
 msgstr "Oscáil Comhad..."
 
-#: gedit/gedit-ui.xml.h:33
+#: gedit/gedit-ui.xml.h:30
 msgid "Open a file"
 msgstr "Oscaíl comhad"
 
-#: gedit/gedit-ui.xml.h:34
+#: gedit/gedit-ui.xml.h:31
 msgid "Open a file from a specified location"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:35
+#: gedit/gedit-ui.xml.h:32
 msgid "Open the gedit manual"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:36
+#: gedit/gedit-ui.xml.h:33
 msgid "Paste"
 msgstr "Greamaigh"
 
-#: gedit/gedit-ui.xml.h:37
+#: gedit/gedit-ui.xml.h:34
 msgid "Paste the clipboard"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:38
+#: gedit/gedit-ui.xml.h:35
 #, fuzzy
 msgid "Pr_eferences"
 msgstr "gedit: Roghnachais..."
 
-#: gedit/gedit-ui.xml.h:40
+#: gedit/gedit-ui.xml.h:37
 #, fuzzy
 msgid "Print Previe_w..."
 msgstr "gedit: Roghnachais..."
 
-#: gedit/gedit-ui.xml.h:41
+#: gedit/gedit-ui.xml.h:38
 #, fuzzy
 msgid "Print Preview"
 msgstr "gedit: Roghnachais..."
 
-#: gedit/gedit-ui.xml.h:42
+#: gedit/gedit-ui.xml.h:39
 #, fuzzy
 msgid "Print Setup"
 msgstr "Capéiseanna"
 
-#: gedit/gedit-ui.xml.h:43
+#: gedit/gedit-ui.xml.h:40
 #, fuzzy
 msgid "Print preview"
 msgstr "gedit: Roghnachais..."
 
-#: gedit/gedit-ui.xml.h:44
+#: gedit/gedit-ui.xml.h:41
 msgid "Print the current file"
 msgstr "Priontáil an comhad seo"
 
-#: gedit/gedit-ui.xml.h:45
+#: gedit/gedit-ui.xml.h:42
 msgid "Quit"
 msgstr "Ealu"
 
-#: gedit/gedit-ui.xml.h:46
+#: gedit/gedit-ui.xml.h:43
 msgid "Quit the program"
 msgstr "Ealu as an ríomhchlár"
 
-#: gedit/gedit-ui.xml.h:47
+#: gedit/gedit-ui.xml.h:44
 msgid "Redo"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:48
+#: gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:50
+#: gedit/gedit-ui.xml.h:47
 msgid "Replace a string"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:51
+#: gedit/gedit-ui.xml.h:48
 msgid "Revert"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:52
+#: gedit/gedit-ui.xml.h:49
 msgid "Revert to a saved version of the file"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:54
+#: gedit/gedit-ui.xml.h:51
 msgid "Save As"
 msgstr "Sábháil Mar"
 
-#: gedit/gedit-ui.xml.h:55
+#: gedit/gedit-ui.xml.h:52
 msgid "Save _As..."
 msgstr "Sábháil M_ar..."
 
-#: gedit/gedit-ui.xml.h:56
+#: gedit/gedit-ui.xml.h:53
 msgid "Save all open files"
 msgstr "Sábháil gach comhad a bhfuil oscailte"
 
-#: gedit/gedit-ui.xml.h:57
+#: gedit/gedit-ui.xml.h:54
 msgid "Save the current file"
 msgstr "Sábháil an comhad seo"
 
-#: gedit/gedit-ui.xml.h:58
+#: gedit/gedit-ui.xml.h:55
 msgid "Save the current file with a different name"
 msgstr "Sábháil an comhad seo le ainm eile"
 
-#: gedit/gedit-ui.xml.h:59
+#: gedit/gedit-ui.xml.h:56
 msgid "Search again for the same string"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:60
+#: gedit/gedit-ui.xml.h:57
 #, fuzzy
 msgid "Search for a string"
 msgstr "Cuairdaigh ar: "
 
-#: gedit/gedit-ui.xml.h:61
+#: gedit/gedit-ui.xml.h:58
 msgid "Select All"
 msgstr "Pioc gach rud"
 
-#: gedit/gedit-ui.xml.h:62
+#: gedit/gedit-ui.xml.h:59
 msgid "Select _All"
 msgstr "Pioc _gach rud"
 
-#: gedit/gedit-ui.xml.h:63
+#: gedit/gedit-ui.xml.h:60
 #, fuzzy
 msgid "Select the entire document"
 msgstr "Rphost an capéis seo"
 
-#: gedit/gedit-ui.xml.h:64
-msgid "Set toolbar button style according to desktop default"
+#: gedit/gedit-ui.xml.h:61
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:65
+#: gedit/gedit-ui.xml.h:62
 msgid "Setup the page settings for your current printer"
 msgstr ""
 
+#: gedit/gedit-ui.xml.h:63
+msgid "Show only icons in the toolbar"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:64
+msgid "T_ext for Important Icons"
+msgstr ""
+
 #: gedit/gedit-ui.xml.h:66
-msgid "Show _Cursor Position"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:67
-msgid "Show _Overwrite Mode"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:68
-msgid "Show cursor position in the statusbar"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:69
-msgid "Show overwrite mode in the statusbar"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:71
 msgid "Undo the last action"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:72
+#: gedit/gedit-ui.xml.h:67
 msgid "_About"
 msgstr "F_aoi"
 
-#: gedit/gedit-ui.xml.h:73
+#: gedit/gedit-ui.xml.h:68
 msgid "_Close"
 msgstr "_Dún"
 
-#: gedit/gedit-ui.xml.h:74
+#: gedit/gedit-ui.xml.h:69
 msgid "_Close All"
 msgstr "_Dún Gach Rud"
 
-#: gedit/gedit-ui.xml.h:75
+#: gedit/gedit-ui.xml.h:70
 #, fuzzy
 msgid "_Contents"
 msgstr "Capéiseanna"
 
-#: gedit/gedit-ui.xml.h:76
+#: gedit/gedit-ui.xml.h:71
 msgid "_Copy"
 msgstr "_Cóip"
 
-#: gedit/gedit-ui.xml.h:77
+#: gedit/gedit-ui.xml.h:72
 msgid "_Customize Toolbar"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:78
+#: gedit/gedit-ui.xml.h:73
 msgid "_Debug"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:79
+#: gedit/gedit-ui.xml.h:74
 msgid "_Delete"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:80
+#: gedit/gedit-ui.xml.h:75
 #, fuzzy
 msgid "_Desktop Default"
 msgstr "Cló gnáth: "
 
-#: gedit/gedit-ui.xml.h:81
+#: gedit/gedit-ui.xml.h:76
 #, fuzzy
 msgid "_Documents"
 msgstr "Capéiseanna"
 
-#: gedit/gedit-ui.xml.h:82
+#: gedit/gedit-ui.xml.h:77
 #, fuzzy
 msgid "_Edit"
 msgstr "Ealu"
 
-#: gedit/gedit-ui.xml.h:83
+#: gedit/gedit-ui.xml.h:78
 msgid "_File"
 msgstr "_Comhad"
 
-#: gedit/gedit-ui.xml.h:84
+#: gedit/gedit-ui.xml.h:79
 #, fuzzy
 msgid "_Find..."
 msgstr "_Comhad"
 
-#: gedit/gedit-ui.xml.h:85
+#: gedit/gedit-ui.xml.h:80
 msgid "_Help"
 msgstr "_Cabhair"
 
-#: gedit/gedit-ui.xml.h:86
-msgid "_Icon"
+#: gedit/gedit-ui.xml.h:81
+msgid "_Icons Only"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:88
+#: gedit/gedit-ui.xml.h:83
 msgid "_New"
 msgstr "_Nua"
 
-#: gedit/gedit-ui.xml.h:89
+#: gedit/gedit-ui.xml.h:84
 msgid "_Open..."
 msgstr "_Oscáil..."
 
-#: gedit/gedit-ui.xml.h:90
+#: gedit/gedit-ui.xml.h:85
 msgid "_Output Window"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:91
+#: gedit/gedit-ui.xml.h:86
 #, fuzzy
 msgid "_Paste"
 msgstr "Greamaigh"
 
-#: gedit/gedit-ui.xml.h:92
+#: gedit/gedit-ui.xml.h:87
 msgid "_Print..."
 msgstr "_Priontáil"
 
-#: gedit/gedit-ui.xml.h:93
-msgid "_Priority Text beside Icons"
-msgstr ""
-
-#: gedit/gedit-ui.xml.h:94
+#: gedit/gedit-ui.xml.h:88
 msgid "_Quit"
 msgstr "_Ealu"
 
-#: gedit/gedit-ui.xml.h:95
+#: gedit/gedit-ui.xml.h:89
 msgid "_Redo"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:96
+#: gedit/gedit-ui.xml.h:90
 #, fuzzy
 msgid "_Replace..."
 msgstr "Sábháil gach rud"
 
-#: gedit/gedit-ui.xml.h:98
+#: gedit/gedit-ui.xml.h:92
 msgid "_Save"
 msgstr "_Sábháil"
 
-#: gedit/gedit-ui.xml.h:99
+#: gedit/gedit-ui.xml.h:93
 msgid "_Save All"
 msgstr "_Sábháil gach rud"
 
-#: gedit/gedit-ui.xml.h:100
+#: gedit/gedit-ui.xml.h:94
 msgid "_Search"
 msgstr "_Cuairdaigh"
 
-#: gedit/gedit-ui.xml.h:101
+#: gedit/gedit-ui.xml.h:95
 msgid "_Statusbar"
 msgstr ""
 
-#: gedit/gedit-ui.xml.h:102
+#: gedit/gedit-ui.xml.h:96
+msgid "_Text for All Icons"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:97
 #, fuzzy
 msgid "_Toolbar"
 msgstr "_Barr"
 
-#: gedit/gedit-ui.xml.h:103
+#: gedit/gedit-ui.xml.h:98
 #, fuzzy
 msgid "_Tools"
 msgstr "_Barr"
 
-#: gedit/gedit-ui.xml.h:104
+#: gedit/gedit-ui.xml.h:99
 #, fuzzy
 msgid "_Undo"
 msgstr "Leasú"
 
-#: gedit/gedit-ui.xml.h:105
+#: gedit/gedit-ui.xml.h:100
 msgid "_View"
 msgstr "_Radharc"
 
@@ -2388,88 +2362,92 @@ msgstr ""
 
 #.
 #. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
 #. else
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
+#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:1076
+#: gedit/gedit-view.c:682
 #, c-format
-msgid "  Ln %d, Col. %d"
+msgid "  Ln %d, Col %d"
 msgstr ""
 
-#: gedit/gedit-view.c:1114
+#: gedit/gedit-view.c:720
 msgid "  OVR"
 msgstr ""
 
-#: gedit/gedit-view.c:1116
+#: gedit/gedit-view.c:722
 msgid "  INS"
 msgstr ""
 
-#: gedit/gedit2.c:80
+#: gedit/gedit2.c:81
 msgid "Show utility debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:83
+#: gedit/gedit2.c:84
+msgid "Show metadata debugging messages."
+msgstr ""
+
+#: gedit/gedit2.c:87
 msgid "Show mdi debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:90
 msgid "Show commands debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:93
 msgid "Show document debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:96
 msgid "Show file debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:99
 msgid "Show plugin debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:98
+#: gedit/gedit2.c:102
 msgid "Show prefs debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:101
+#: gedit/gedit2.c:105
 msgid "Show printing debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:104
+#: gedit/gedit2.c:108
 msgid "Show search debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:107
+#: gedit/gedit2.c:111
 msgid "Show undo debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:110
+#: gedit/gedit2.c:114
 msgid "Show view debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:113
+#: gedit/gedit2.c:117
 msgid "Show recent debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:116
+#: gedit/gedit2.c:120
 msgid "Show session management debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:119
+#: gedit/gedit2.c:123
 msgid "Turn on all debugging messages."
 msgstr ""
 
-#: gedit/gedit2.c:122
+#: gedit/gedit2.c:126
 msgid "Quit an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:125
+#: gedit/gedit2.c:129
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:128
+#: gedit/gedit2.c:132
 msgid "Create a new document in an existing instance of gedit"
 msgstr ""
 
@@ -2494,116 +2472,137 @@ msgstr ""
 msgid "Choose one or more e_ncodings:"
 msgstr ""
 
-#: gedit/gedit-encodings.c:128 gedit/gedit-encodings.c:154
-#: gedit/gedit-encodings.c:195 gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:129 gedit/gedit-encodings.c:155
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:239
 msgid "Western"
 msgstr "Thiariocht"
 
-#: gedit/gedit-encodings.c:130 gedit/gedit-encodings.c:197
-#: gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:198
+#: gedit/gedit-encodings.c:235
 msgid "Central European"
 msgstr "Eorpach Lárnach"
 
-#: gedit/gedit-encodings.c:132
+#: gedit/gedit-encodings.c:133
 msgid "South European"
 msgstr "Eorapach Deisceartach"
 
-#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:150
-#: gedit/gedit-encodings.c:246
+#: gedit/gedit-encodings.c:135 gedit/gedit-encodings.c:151
+#: gedit/gedit-encodings.c:249
 msgid "Baltic"
 msgstr "Bhailt"
 
-#: gedit/gedit-encodings.c:136 gedit/gedit-encodings.c:199
-#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:216
-#: gedit/gedit-encodings.c:234
+#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:200
+#: gedit/gedit-encodings.c:213 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:219 gedit/gedit-encodings.c:237
 msgid "Cyrillic"
 msgstr ""
 
-#: gedit/gedit-encodings.c:138 gedit/gedit-encodings.c:205
-#: gedit/gedit-encodings.c:244
+#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:247
 msgid "Arabic"
 msgstr "Araibis"
 
-#: gedit/gedit-encodings.c:140 gedit/gedit-encodings.c:238
+#: gedit/gedit-encodings.c:141 gedit/gedit-encodings.c:241
 msgid "Greek"
 msgstr "Gréigis"
 
-#: gedit/gedit-encodings.c:142
+#: gedit/gedit-encodings.c:143
 msgid "Hebrew Visual"
 msgstr ""
 
-#: gedit/gedit-encodings.c:144 gedit/gedit-encodings.c:203
-#: gedit/gedit-encodings.c:242
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:204
+#: gedit/gedit-encodings.c:245
 msgid "Hebrew"
 msgstr "Eabhrais"
 
-#: gedit/gedit-encodings.c:146 gedit/gedit-encodings.c:201
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:202
+#: gedit/gedit-encodings.c:243
 msgid "Turkish"
 msgstr "Tuircis"
 
-#: gedit/gedit-encodings.c:148
+#: gedit/gedit-encodings.c:149
 msgid "Nordic"
 msgstr ""
 
-#: gedit/gedit-encodings.c:152
+#: gedit/gedit-encodings.c:153
 msgid "Celtic"
 msgstr "Celtis"
 
-#: gedit/gedit-encodings.c:156
+#: gedit/gedit-encodings.c:157
 msgid "Romanian"
 msgstr ""
 
-#: gedit/gedit-encodings.c:159 gedit/gedit-encodings.c:161
-#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:162
+#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:166
 msgid "Unicode"
 msgstr "Unicód"
 
-#: gedit/gedit-encodings.c:168
+#: gedit/gedit-encodings.c:169
 msgid "Armenian"
 msgstr ""
 
-#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
-#: gedit/gedit-encodings.c:181
+#: gedit/gedit-encodings.c:171 gedit/gedit-encodings.c:173
+#: gedit/gedit-encodings.c:182
 msgid "Chinese Traditional"
 msgstr ""
 
-#: gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:175
 msgid "Cyrillic/Russian"
 msgstr ""
 
-#: gedit/gedit-encodings.c:177 gedit/gedit-encodings.c:208
-#: gedit/gedit-encodings.c:221
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:209
+#: gedit/gedit-encodings.c:224
 msgid "Japanese"
 msgstr "Seapáinis"
 
-#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:210
-#: gedit/gedit-encodings.c:214 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:180 gedit/gedit-encodings.c:211
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:230
 msgid "Korean"
 msgstr "Córéis"
 
-#: gedit/gedit-encodings.c:184 gedit/gedit-encodings.c:186
-#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:192
+#: gedit/gedit-encodings.c:185 gedit/gedit-encodings.c:187
+#: gedit/gedit-encodings.c:189 gedit/gedit-encodings.c:193
 msgid "Chinese Simplified"
 msgstr ""
 
-#: gedit/gedit-encodings.c:190
+#: gedit/gedit-encodings.c:191
 msgid "Georgian"
 msgstr ""
 
-#: gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:221
 msgid "Cyrillic/Ukrainian"
 msgstr ""
 
-#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:229
-#: gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:226 gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:251
 msgid "Vietnamese"
 msgstr "Vítneaimi"
 
-#: gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:228
 msgid "Thai"
 msgstr "Téalannais"
 
 #: gedit/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (Unicód mícheart)"
+
+#: viewer/gedit-persist-stream.c:44
+msgid "Save method not implemented for gedit viewer"
+msgstr ""
+
+#: viewer/gedit-viewer-ui.xml.h:1
+#, fuzzy
+msgid "Copy the selected text to the clipboard"
+msgstr "Rphost an capéis seo"
+
+#: viewer/gedit-viewer-ui.xml.h:2
+#, fuzzy
+msgid "_Copy Text"
+msgstr "_Cóip"
+
+#, fuzzy
+#~ msgid "Show Cursor Position"
+#~ msgstr "Priontáil an comhad seo"
+
+#~ msgid "Open a file."
+#~ msgstr "Oscail comhad"
