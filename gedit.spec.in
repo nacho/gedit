@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
 %define ver      @VERSION@
-%define rel      3
+%define rel      1
 %define prefix   /usr
 
 Summary: gEdit is a small but powerful text editor for GNOME.
@@ -40,8 +40,13 @@ in arbitrary ways.
 %setup
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
+%ifarch alpha
+   CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure --host=alpha-redhat-linux\
 	--prefix=%{prefix} 
+%else
+   CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
+	--prefix=%{prefix} 
+%endif
 make
 
 %install
@@ -58,7 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS
 %{prefix}/bin/gedit
 %{prefix}/share/locale/*/*/*
-%{prefix}/share/apps/*/*
+%{prefix}/share/gnome/apps/*/*
 %{prefix}/share/pixmaps/*
 %{prefix}/share/mime-info/*
 %{prefix}/share/geditrc
