@@ -24,8 +24,8 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 #include <gtk/gtk.h>

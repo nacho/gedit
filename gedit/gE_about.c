@@ -18,8 +18,8 @@
  */
 #include <assert.h>
 #include <gtk/gtk.h>
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #else
 #include "gE_icon.xpm"

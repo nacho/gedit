@@ -20,8 +20,8 @@
 #include <stdarg.h>
 #include <time.h>
 #include <string.h>
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 #include <gtk/gtk.h>

@@ -19,8 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 

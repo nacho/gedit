@@ -19,8 +19,8 @@
 #include <gtk/gtk.h>
 #include <strings.h>
 
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #define WITH_FOOT
 #include "xpm/foot.xpm"

@@ -24,8 +24,8 @@
 #include "gE_files.h"
 #include "commands.h"
 
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 

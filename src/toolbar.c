@@ -21,8 +21,8 @@
  */
 
 #include <stdio.h>
-#ifndef WITHOUT_GNOME
 #include <config.h>
+#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
 #include <string.h>
