@@ -570,7 +570,7 @@ dialog_prefs_impl (GladeXML *gui)
 
 	help_entry.name = gnome_app_id;
 	gtk_signal_connect (GTK_OBJECT (propertybox),"help",
-			    GTK_SIGNAL_FUNC (gnome_help_pbox_goto), &help_entry);
+			    GTK_SIGNAL_FUNC (gnome_help_pbox_display), &help_entry);
 #ifdef USE_NOTEBBOK	
 	gtk_signal_connect (GTK_OBJECT (notebook),"switch_page",
 			    GTK_SIGNAL_FUNC (gedit_prefs_notebook_switch_page), NULL);
