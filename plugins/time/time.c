@@ -95,6 +95,9 @@ static gchar *formats[] =
 	"%I.%M %p ",
 	"%d/%m/%Y %H:%M:%S ",
 	"%d/%m/%y %H:%M:%S ",
+#if __GLIBC__ >= 2
+	"%a, %d %b %Y %H:%M:%S %z ",
+#endif
 	NULL
 };
 
