@@ -132,6 +132,9 @@ void taglist_window_show ()
 	tag_list_window = g_new0 (TagListWindow, 1);
 	
 	tag_list_window->window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
+
+	gtk_window_set_type_hint (GTK_WINDOW (tag_list_window->window),
+				  GDK_WINDOW_TYPE_HINT_UTILITY);
 	gtk_window_set_title (GTK_WINDOW (tag_list_window->window), 
 			      _("Tag list plugin"));
 	
