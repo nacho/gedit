@@ -146,6 +146,7 @@ gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 				GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_YES);
+	atk_object_set_role (gtk_widget_get_accessible (GTK_WIDGET (dlg)), ATK_ROLE_ALERT);
 }
 
 static void 
