@@ -389,24 +389,6 @@ tag_list_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 		return FALSE;
 	}
 
-	if (event->keyval == GDK_F1)
-	{
-		GError *error = NULL;
-
-		gedit_debug (DEBUG_PLUGINS, "F1 Pressed");
-
-		gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
-	
-		if (error != NULL)
-		{
-			g_warning (error->message);
-	
-			g_error_free (error);
-		}
-
-		return FALSE;
-	}
-
 	return FALSE;
 }
 
@@ -453,10 +435,28 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 static gboolean 
 tag_list_window_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 {
-	if ((event->keyval == GDK_F4) && (event->state & GDK_MOD1_MASK))
+	if ((event->keyval == 'w') && (event->state & GDK_CONTROL_MASK))
 	{
 		gtk_widget_destroy (GTK_WIDGET (tag_list_window->window));
 		return TRUE;
+	}
+
+	if (event->keyval == GDK_F1)
+	{
+		GError *error = NULL;
+
+		gedit_debug (DEBUG_PLUGINS, "F1 Pressed");
+
+		gnome_help_display ("gedit.xml", "gedit-use-plugins", &error);
+	
+		if (error != NULL)
+		{
+			g_warning (error->message);
+	
+			g_error_free (error);
+		}
+
+		return FALSE;
 	}	
 
 	return FALSE;

@@ -206,7 +206,14 @@ static gboolean gedit_preferences_dialog_setup_print_fonts_page (GeditPreference
 static void gedit_preferences_dialog_print_font_restore_default_button_clicked (
 								GtkButton *button, 
 								GeditPreferencesDialog *dlg);
+static gboolean gedit_preferences_dialog_selection_init (GtkTreeModel *model, 
+							 GtkTreePath *path, 
+							 GtkTreeIter *iter, 
+							 GeditPreferencesDialog *dlg);
+static void gedit_preferences_dialog_categories_tree_realize (GtkWidget		     *widget, 
+						  	      GeditPreferencesDialog *dlg);
 
+static gint last_selected_page_num = FONT_COLORS_SETTINGS;
 static GtkDialogClass* parent_class = NULL;
 #if 0
 static CategoriesTreeItem user_interface [] =
@@ -339,7 +346,7 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dlg->priv->categories_tree);
 
 	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);	
-
+	
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 
 	gtk_window_set_title (GTK_WINDOW (dlg), _("Preferences"));
@@ -444,11 +451,11 @@ gedit_preferences_dialog_create_categories_tree_model ()
 }
 
 static void
-gedit_preferences_dialog_categories_tree_selection_cb (GtkTreeSelection *selection, GeditPreferencesDialog *dlg)
+gedit_preferences_dialog_categories_tree_selection_cb (GtkTreeSelection *selection, 
+		GeditPreferencesDialog *dlg)
 {
  	GtkTreeIter iter;
 	GValue value = {0, };
-	gint page_num;
 
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -459,14 +466,65 @@ gedit_preferences_dialog_categories_tree_selection_cb (GtkTreeSelection *selecti
 			    PAGE_NUM_COLUMN,
 			    &value);
 
-	page_num = g_value_get_int (&value);
+	last_selected_page_num = g_value_get_int (&value);
 
 	if (dlg->priv->notebook != NULL)
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), page_num);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), 
+					       last_selected_page_num);
       	
 	g_value_unset (&value);
 }
 
+static gboolean 
+gedit_preferences_dialog_selection_init (
+		GtkTreeModel *model, 
+		GtkTreePath *path, 
+		GtkTreeIter *iter, 
+		GeditPreferencesDialog *dlg)
+{
+	GValue value = {0, };
+	gint page_num;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	gtk_tree_model_get_value (dlg->priv->categories_tree_model, iter,
+			    PAGE_NUM_COLUMN,
+			    &value);
+
+	page_num = g_value_get_int (&value);
+
+	g_value_unset (&value);
+
+	if (page_num == last_selected_page_num)
+	{
+		GtkTreeSelection *selection;
+
+		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->categories_tree));
+		g_return_val_if_fail (selection != NULL, TRUE);
+
+		gtk_tree_selection_select_iter (selection, iter);
+
+		g_return_val_if_fail (dlg->priv->notebook != NULL, TRUE);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), page_num);
+    	
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static void
+gedit_preferences_dialog_categories_tree_realize (GtkWidget		 *widget, 
+						  GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	gtk_tree_view_expand_all (GTK_TREE_VIEW (widget));
+
+	gtk_tree_model_foreach (dlg->priv->categories_tree_model, 
+			(GtkTreeModelForeachFunc) gedit_preferences_dialog_selection_init,
+			(gpointer)dlg);
+}
 
 static GtkWidget*
 gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
@@ -478,7 +536,6 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 	GtkTreeSelection *selection;
 	GtkTreeViewColumn *column;
  	gint col_offset;
-	GtkTreeIter iter;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -495,12 +552,12 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
 	
 	treeview = gtk_tree_view_new_with_model (model);
 	
+	dlg->priv->categories_tree = treeview;
+	dlg->priv->categories_tree_model = model;
+
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	g_return_val_if_fail (selection != NULL, NULL);
 
-	if (gtk_tree_model_get_iter_root (model, &iter))
-		gtk_tree_selection_select_iter (selection, &iter);
-	
 	gtk_tree_selection_set_mode (selection,
 				   GTK_SELECTION_SINGLE);
 
@@ -518,18 +575,17 @@ gedit_preferences_dialog_create_categories_tree (GeditPreferencesDialog *dlg)
   	gtk_tree_view_column_set_clickable (GTK_TREE_VIEW_COLUMN (column), FALSE);
 
 	g_signal_connect (selection, "changed", 
-			G_CALLBACK (gedit_preferences_dialog_categories_tree_selection_cb), dlg);
+			  G_CALLBACK (gedit_preferences_dialog_categories_tree_selection_cb), 
+			  dlg);
 
 	gtk_container_add (GTK_CONTAINER (sw), treeview);
 
       	g_signal_connect (G_OBJECT (treeview), "realize", 
-			G_CALLBACK (gtk_tree_view_expand_all), NULL);
+			  G_CALLBACK (gedit_preferences_dialog_categories_tree_realize), 
+			  dlg);
 
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
-	
-	dlg->priv->categories_tree = treeview;
-	dlg->priv->categories_tree_model = model;
-	
+		
 	return sw;
 }
 
