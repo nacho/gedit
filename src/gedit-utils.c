@@ -72,7 +72,7 @@ remove_message_timeout (MessageInfo * mi)
 	bonobo_ui_component_set_status (ui_component, " ", NULL);
 
 	g_signal_handler_disconnect (G_OBJECT (mi->win), mi->handlerid);
-
+	
 	g_free (mi);
 	current_mi = NULL;
 
@@ -87,6 +87,9 @@ remove_timeout_cb (GtkWidget *win, MessageInfo *mi)
 {
  	gtk_timeout_remove (mi->timeoutid);
   	g_free (mi);
+
+	if (mi == current_mi)
+	       	current_mi = NULL;
 }
 
 static const guint32 flash_length = 3000; /* 3 seconds, I hope */

@@ -1,3 +1,20 @@
+2002-05-22  Paolo Maggi <maggi@athena.polito.it>
+
+	* bonobo-mdi.c (app_close_book)(book_motion)(book_button_press)
+	(book_button_release): return gboolean instead of gint
+	(toplevel_focus): always returns FALSE (this fixes bug #77735)
+
+	* gedit-view.c (gedit_view_grab_focus): removed the ack to fix
+	bug #77735
+
+	Thanks to Yogeesh MB, Federico Mena Quintero and Owen Taylor for
+	their help in fixing this bug
+
+2002-05-22  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-utils.c (remove_timeout_cb): set current_mi to NULL to
+	fix a crash
+
 2002-05-21  Paolo Maggi <maggi@athena.polito.it>
 
 	Fixed bug #79205 removing the "Show Tooltips" menu item

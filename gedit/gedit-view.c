@@ -115,18 +115,6 @@ gedit_view_grab_focus (GtkWidget *widget)
 	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = TRUE;
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
 	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = FALSE;
-
-	/* Try to have a visible cursor on Solaris*/
-
-	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
-	 * understand why it is not visible on Solaris */
-
-	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_HAS_FOCUS);
-	
-	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", 
-		      FALSE, NULL);
-	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", 
-		      TRUE, NULL);
 }
 
 static void

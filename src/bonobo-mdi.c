@@ -58,21 +58,21 @@ static void            app_clone                (BonoboMDI *, BonoboWindow *);
 static void            app_destroy              (BonoboWindow *, BonoboMDI *);
 static void            app_set_view             (BonoboMDI *, BonoboWindow *, GtkWidget *);
 
-static gint            app_close_book           (BonoboWindow *, GdkEventAny *, BonoboMDI *);
+static gboolean        app_close_book           (BonoboWindow *, GdkEventAny *, BonoboMDI *);
 
 static GtkWidget      *book_create             	(BonoboMDI *);
 static void            book_switch_page         (GtkNotebook *, GtkNotebookPage *,
 						 gint, BonoboMDI *);
-static gint            book_motion              (GtkWidget *widget, GdkEventMotion *e,
+static gboolean        book_motion              (GtkWidget *widget, GdkEventMotion *e,
 						 gpointer data);
-static gint            book_button_press        (GtkWidget *widget, GdkEventButton *e,
+static gboolean        book_button_press        (GtkWidget *widget, GdkEventButton *e,
 						 gpointer data);
-static gint            book_button_release      (GtkWidget *widget, GdkEventButton *e,
+static gboolean        book_button_release      (GtkWidget *widget, GdkEventButton *e,
 						 gpointer data);
 static void            book_add_view            (GtkNotebook *, GtkWidget *);
 static void            set_page_by_widget       (GtkNotebook *, GtkWidget *);
 
-static void            toplevel_focus           (BonoboWindow *, GdkEventFocus *, BonoboMDI *);
+static gboolean        toplevel_focus           (BonoboWindow *, GdkEventFocus *, BonoboMDI *);
 
 static void            set_active_view          (BonoboMDI *, GtkWidget *);
 
@@ -595,7 +595,7 @@ child_list_menu_add_item (BonoboMDI *mdi, BonoboMDIChild *child)
 	g_free (verb_name);
 }
 
-static gint 
+static gboolean 
 book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 {
 	BonoboMDI *mdi;
@@ -624,7 +624,7 @@ book_motion (GtkWidget *widget, GdkEventMotion *e, gpointer data)
 	return FALSE;
 }
 
-static gint 
+static gboolean 
 book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 {
 	BonoboMDI *mdi;
@@ -641,7 +641,7 @@ book_button_press (GtkWidget *widget, GdkEventButton *e, gpointer data)
 	return FALSE;
 }
 
-static gint 
+static gboolean
 book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 {
 	gint x = e->x_root, y = e->y_root;
@@ -861,7 +861,7 @@ get_book_from_window (BonoboWindow *window)
 	return (book != NULL) ? GTK_WIDGET (book) : NULL;
 }
 
-static void 
+static gboolean
 toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 {
 	GtkWidget *contents;
@@ -869,7 +869,7 @@ toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 	gedit_debug (DEBUG_MDI, "");
 
 	/* updates active_view and active_child when a new toplevel receives focus */
-	g_return_if_fail (BONOBO_IS_WINDOW (win));
+	g_return_val_if_fail (BONOBO_IS_WINDOW (win), FALSE);
 	
 	mdi->priv->active_window = win;
 	
@@ -889,6 +889,7 @@ toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 	
 	gedit_debug (DEBUG_MDI, "END");
 
+	return FALSE;
 }
 
 static void 
