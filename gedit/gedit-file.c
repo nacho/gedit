@@ -592,7 +592,7 @@ gedit_file_revert_dialog (GeditDocument *doc)
 		hours = seconds / 3600;
 
 		secondary_msg = g_strdup_printf (
-					ngettext ("Changes made to the document in the last %d hour "
+					ngettext ("Changes made to the document in the last hour "
 					    	  "will be permanently lost.",
 						  "Changes made to the document in the last %d hours "
 					    	  "will be permanently lost.",
