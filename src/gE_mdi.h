@@ -42,11 +42,11 @@ typedef struct _gedit_document_class
 #define NUM_MDI_MODES		4
 extern guint mdi_type [NUM_MDI_MODES];
 
-GtkType gedit_document_get_type ();
-gedit_document *gedit_document_new ();
-gedit_document *gedit_document_new_with_title (gchar *title);
-gedit_document *gedit_document_new_with_file (gchar *filename);
-gedit_document *gedit_document_current ();
+GtkType gedit_document_get_type (void);
+gedit_document* gedit_document_new (void);
+gedit_document* gedit_document_new_with_title (gchar *title);
+gedit_document* gedit_document_new_with_file (gchar *filename);
+gedit_document* gedit_document_current (void);
 void gedit_add_view (GtkWidget *w, gpointer data);
 void gedit_remove_view (GtkWidget *w, gpointer data);
 gint remove_doc_cb (GnomeMDI *mdi, gedit_document *doc);

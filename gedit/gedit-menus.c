@@ -112,32 +112,35 @@ GnomeUIInfo gedit_edit_menu[] =
 
 	GNOMEUIINFO_SEPARATOR,
 
-        GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, NULL),
+        GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
 
-        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, NULL),
+        GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 
-	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
 
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, NULL),
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
 
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Find _Line..."),
-	  N_("Search for a line"),
-
-	  goto_line_cb, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-
-	{ GNOME_APP_UI_ITEM, N_("Find _In Files..."),
-	  N_("Find text in all open files"),
-	  find_in_files_cb, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
+	{
+		GNOME_APP_UI_ITEM,
+		N_("Find _Line..."),
+		N_("Search for a line"),
+		goto_line_cb, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
+	},
+	{
+		GNOME_APP_UI_ITEM,
+		N_("Find _In Files..."),
+		N_("Find text in all open files"),
+		find_in_files_cb, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
 
-	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),
 
-	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM (replace_cb, NULL),
 	
 	GNOMEUIINFO_END
 };
@@ -155,8 +158,8 @@ GnomeUIInfo view_menu[] =
 
 GnomeUIInfo doc_menu[] =
 {
-	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE(view_menu), 
+	GNOMEUIINFO_MENU_EDIT_TREE (gedit_edit_menu),
+	GNOMEUIINFO_MENU_VIEW_TREE (view_menu), 
 	GNOMEUIINFO_END
 };
 
@@ -387,7 +390,7 @@ GnomeUIInfo toolbar_data[] =
  * @window:
  * @data: 
  * 
- */
+ **/
 GnomeUIInfo *
 gedit_menus_init (gedit_window *window, gedit_data *data)
 {

@@ -25,13 +25,6 @@
 #include "gE_view.h"
 #include "gE_mdi.h"
 
-/*
-#include <gtk/gtk.h>
-#include <glib.h>
-#include <time.h>
-#include <stdio.h>
-#include <string.h>
-*/
 
 typedef struct _gedit_prefs_data gedit_prefs_data;
 
@@ -132,7 +125,6 @@ gedit_window_refresh (gedit_window *w)
 
 	gedit_view_set_split_screen (GE_VIEW (mdi->active_view),
 				     (gint) GE_VIEW (mdi->active_view)->splitscreen);
-   
 
 	gedit_window_set_status_bar (settings->show_status);
 
@@ -154,7 +146,8 @@ gedit_window_refresh (gedit_window *w)
         }
 */
 	style = gtk_style_copy (gtk_widget_get_style (
-						GE_VIEW (mdi->active_view)->text));
+		GE_VIEW (mdi->active_view)->text));
+
 	bg = &style->base[0];
 	bg->red = settings->bg[0];
 	bg->green = settings->bg[1];
@@ -271,41 +264,39 @@ get_prefs (gedit_data *data)
 	g_free (tmp);
 
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->autoindent), 
-							 settings->auto_indent);
+				     settings->auto_indent);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->status),
-							 settings->show_status);
+				     settings->show_status);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
-							 GE_VIEW (mdi->active_view)->splitscreen);
+				     GE_VIEW (mdi->active_view)->splitscreen);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->wordwrap),
-							 settings->word_wrap);
+				     settings->word_wrap);
   					   
 
-
 	style = gtk_style_copy (gtk_widget_get_style (
-						GE_VIEW (mdi->active_view)->text));
+		GE_VIEW (mdi->active_view)->text));
 	c = &style->base[0];
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (prefs->bgpick),
-							c->red, c->green, c->blue, 0);
+				    c->red, c->green, c->blue, 0);
 	
 	c = &style->text[0];
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (prefs->fgpick),
-							c->red, c->green, c->blue, 0);
+				    c->red, c->green, c->blue, 0);
 	
 
 
 	if (!settings->close_doc)
-	  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton1), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton1), TRUE);
 	else
-	  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton2), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton2), TRUE);
      
 	for (i = 0; i < NUM_MDI_MODES; i++)
-	  if (mdiMode == mdi_type[i]) {
-	  
-	    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->mdi_type[i]),
-									TRUE);
-	    break;
-	    
-	  }
+		if (mdiMode == mdi_type[i])
+		{
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->mdi_type[i]),
+						      TRUE);
+			break;
+		}
 }
 
 /* General UI Stuff.. */
@@ -464,10 +455,6 @@ font_sel (void)
 	gtk_widget_show (fs);
 }
 
-/* End of Fonts Stuff... */
-
-/* Document Stuf.. */
-
 static GtkWidget *
 doc_page_new (void)
 {
@@ -541,7 +528,7 @@ doc_page_new (void)
   
 	/* End of Font Setttings */
 
-	/* Print COmmand */
+	/* Print Command */
 	frame = gtk_frame_new (_("Print Command"));
 	gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
 	gtk_widget_show (frame);
@@ -564,22 +551,16 @@ doc_page_new (void)
 
 }
 
-/* End of Print Stuff */
-
-
-
 
 /* Window Stuff.. */
 
 void
 use_current (GtkWidget *w, gpointer size)
 {
-
 	if (size == 0)
 		gtk_entry_set_text (GTK_ENTRY (prefs->preW), prefs->curW);
 	else
 		gtk_entry_set_text (GTK_ENTRY (prefs->preH), prefs->curH);
-
 }
 
 static GtkWidget *
@@ -703,17 +684,16 @@ window_page_new (void)
   
 	for (i = 0; i < NUM_MDI_MODES; i++)
 	{
-	  prefs->mdi_type[i] = GTK_RADIO_BUTTON (
-		  gtk_radio_button_new_with_label (prefs->mdi_list,
-						   _(mdi_type_label[i])));
+		prefs->mdi_type[i] = GTK_RADIO_BUTTON (
+			gtk_radio_button_new_with_label (prefs->mdi_list,
+							 _(mdi_type_label[i])));
        
-	  gtk_widget_show (GTK_WIDGET (prefs->mdi_type[i]));
-	  gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(prefs->mdi_type[i]), TRUE, TRUE, 2);
-	  prefs->mdi_list = gtk_radio_button_group (prefs->mdi_type[i]);
+		gtk_widget_show (GTK_WIDGET (prefs->mdi_type[i]));
+		gtk_box_pack_start(GTK_BOX(vbox), GTK_WIDGET(prefs->mdi_type[i]), TRUE, TRUE, 2);
+		prefs->mdi_list = gtk_radio_button_group (prefs->mdi_type[i]);
 	}
   
 	return main_vbox;
-	
 }
 
 /* End of Window Stuff */
@@ -727,21 +707,18 @@ properties_changed (GtkWidget *widget, GnomePropertyBox *pbox)
 }
 
 void
-gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
+gedit_prefs_dialog (GtkWidget *widget, gpointer data)
 {
 	static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
 	GtkWidget *label;
 	gint i;
-  
-	gedit_data *data = (gedit_data *)cbdata;
+
+	gedit_data *data = (gedit_data *)data;
 
 	prefs = g_malloc (sizeof(gedit_prefs_data));
 
-	if (!prefs) {
-
+	if (!prefs)
 		return;
-	
-	}
 
 	prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
 	prefs->gData = data;
@@ -777,8 +754,7 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 				  gtk_label_new _("Document"));
  
   
-	get_prefs(data);
-
+	get_prefs (data);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
 			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);

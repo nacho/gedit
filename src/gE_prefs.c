@@ -27,7 +27,7 @@
 void 
 gedit_save_settings (void)
 {
-	gnome_config_push_prefix ("/gEdit/Global/");
+	gnome_config_push_prefix ("/gedit/Global/");
 
 	gnome_config_set_int ("tab_pos", (gint) mdi->tab_pos);
 	gnome_config_set_int ("auto_indent", (gboolean) settings->auto_indent);
@@ -69,9 +69,10 @@ gedit_save_settings (void)
 void
 gedit_load_settings (void)
 {
-	gnome_config_push_prefix ("/gEdit/Global/");
+	gnome_config_push_prefix ("/gedit/Global/");
 	 
-	mdi->tab_pos = gnome_config_get_int ("tab_pos");
+	mdi->tab_pos = gnome_config_get_int ("tab_pos=GTK_POS_TOP");
+	settings->tab_pos = gnome_config_get_int ("tab_pos=GTK_POS_TOP");
 	settings->auto_indent = gnome_config_get_int ("auto_indent");
 	settings->word_wrap = gnome_config_get_int ("word_wrap");
 	settings->run = gnome_config_get_int ("run");
@@ -95,7 +96,6 @@ gedit_load_settings (void)
 	
 	settings->width = gnome_config_get_int ("width=630");
 	settings->height = gnome_config_get_int ("height=390");
-
 	 
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
@@ -106,6 +106,8 @@ gedit_load_settings (void)
 			settings->font = DEFAULT_FONT;
 	}
 	
+	tab_pos (mdi->tab_pos);
+
 	settings->print_cmd = gnome_config_get_string ("print_command=lpr %s"); 
 
 	if (settings->run)

@@ -52,7 +52,7 @@ void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 static void file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
 static void file_saveas_ok_sel (GtkWidget *w, gedit_data *data);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
-static void cancel_cb (GtkWidget *w, GtkWidget *me);
+static void cancel_cb (GtkWidget *w, gpointer data);
 
 /* TODO : add flash on all operations ....Chema*/
 
@@ -160,7 +160,7 @@ gedit_file_save (gedit_document *doc, gchar *fname)
 	   view #1. Chema */
 	gedit_debug_mess ("F:Entering gedit_file_save.\n", DEBUG_FILE);
 
-	if( fname == NULL )
+	if (fname == NULL)
 		fname = doc->filename;
 
 	/* sanity checks */
@@ -232,51 +232,6 @@ gedit_file_save (gedit_document *doc, gchar *fname)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void
 file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
@@ -295,7 +250,7 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 
 	gedit_debug_mess("F:Entering file open cb\n", DEBUG_FILE);
 	
-	if (open_file_selector && GTK_WIDGET_VISIBLE( open_file_selector))
+	if (open_file_selector && GTK_WIDGET_VISIBLE (open_file_selector))
 		return;
 
 	if (open_file_selector == NULL)
@@ -309,7 +264,7 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 				   "clicked", GTK_SIGNAL_FUNC(cancel_cb), open_file_selector);
 	}
 
-	gtk_window_set_title(GTK_WINDOW(open_file_selector), _("Open File ..."));
+	gtk_window_set_title (GTK_WINDOW(open_file_selector), _("Open File ..."));
 
 	if (!GTK_WIDGET_VISIBLE (open_file_selector))
 	{
@@ -324,17 +279,26 @@ void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	if (save_file_selector && GTK_WIDGET_VISIBLE( save_file_selector))
+	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
 		return;
+
 	if (save_file_selector == NULL)
 	{
-		save_file_selector = gtk_file_selection_new(NULL);
-		gtk_signal_connect(GTK_OBJECT(save_file_selector), "delete_event",
-				   GTK_SIGNAL_FUNC(delete_event_cb), save_file_selector);
+		save_file_selector = gtk_file_selection_new (NULL);
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(delete_event_cb),
+				   save_file_selector);
+
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
-				    "clicked", GTK_SIGNAL_FUNC (file_saveas_ok_sel), NULL);
+				    "clicked",
+				    GTK_SIGNAL_FUNC (file_saveas_ok_sel),
+				    NULL);
+
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
-				    "clicked", GTK_SIGNAL_FUNC(cancel_cb), save_file_selector);
+				    "clicked",
+				    GTK_SIGNAL_FUNC(cancel_cb),
+				    save_file_selector);
 	}
 
 	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
@@ -348,16 +312,16 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 }
 
 static gint
-delete_event_cb(GtkWidget *w, GdkEventAny *e)
+delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
-	gtk_widget_hide(w);
+	gtk_widget_hide (widget);
 	return TRUE;
 }
  
 static void
-cancel_cb(GtkWidget *w, GtkWidget *me)
+cancel_cb (GtkWidget *w, gpointer data)
 {
-	gtk_widget_hide(me);
+	gtk_widget_hide (data);
 }
 
 static void
@@ -365,21 +329,21 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	gedit_document *doc;
 	gchar *filename;
-	gchar *flash;
 
 	gedit_debug_mess("file-io.c - file open ok sel\n", DEBUG_FILE);
-	if((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL) {
+	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
+	{
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		flash = g_strdup_printf(_("Loaded file %s"), doc->filename);
-		gnome_app_flash(mdi->active_window, flash);
-		g_free(flash);
+
+		
+		gedit_flash_va (_("Loaded file %s"), doc->filename);
 	}
 	else
-		gnome_app_error(mdi->active_window, _("Can not open file!"));
+		gnome_app_error (mdi->active_window, _("Can not open file!"));
 
 	gtk_widget_hide(GTK_WIDGET(open_file_selector));
-	/* FIXME : do not destroy it but
+	/* FIXME : do not destroy it
 	gtk_widget_destroy(GTK_WIDGET(open_file_selector));
 	open_file_selector = NULL;*/
 	return;
@@ -390,10 +354,10 @@ file_save_cb (GtkWidget *widget)
 {
 	gedit_document *doc;
 
-	if( gnome_mdi_get_active_child(mdi) == NULL)
+	if (gnome_mdi_get_active_child(mdi) == NULL)
 		return;
 
-	doc = gedit_document_current();
+	doc = gedit_document_current ();
 
 	if (doc->changed)
 		gedit_file_save( doc, NULL);
@@ -438,7 +402,7 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 
 
 void
-file_close_cb(GtkWidget *widget, gpointer cbdata)
+file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 	if (mdi->active_child == NULL)
 		return;
@@ -446,7 +410,7 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 void
-file_close_all_cb(GtkWidget *widget, gpointer cbdata)
+file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	if (mdi->active_child == NULL)
 		return;
@@ -468,13 +432,13 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 
 
 void
-file_revert_cb (GtkWidget *widget, gpointer cbdata)
+file_revert_cb (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *msgbox;
 	gchar * msg;
 	gedit_document *doc = gedit_document_current ();
 
-	msg = g_strdup_printf( "Are you sure you wish to revert all changes?\n(%s)",
+	msg = g_strdup_printf ("Are you sure you wish to revert all changes?\n(%s)",
 			       doc->filename);
 
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,

@@ -560,10 +560,10 @@ remove_search_result_cb (GtkWidget 	*widget,
 } 
 
 void
-search_results_clist_insert  (gchar 	*fname, 
-			      gchar 	*contents,
-			      gint 	line, 
-			      gint 	index)
+search_results_clist_insert (gchar *fname, 
+			     gchar *contents,
+			     gint   line, 
+			     gint   index)
 {
 	gchar 			*insert[3];
 	gedit_clist_data 	*data;
@@ -649,15 +649,18 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	gchar *msg;
 	gedit_document *doc;
 
-	if ((doc = gedit_document_current ()))
+	doc = gedit_document_current ();
+
+	if (doc)
 	{
 		line_number = pos_to_line (doc,
 					   gtk_editable_get_position (GTK_EDITABLE (GE_VIEW (mdi->active_view)->text)),
 					   &total_lines);
 	
-		msg = g_malloc0 (200);
-		sprintf (msg, _("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"), doc->filename, total_lines, line_number);
-	
+		
+		msg = g_strdup_printf (_("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"),
+				       doc->filename, total_lines, line_number);
+			
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,
 								   GNOME_MESSAGE_BOX_INFO,

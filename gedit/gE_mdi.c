@@ -177,7 +177,7 @@ gedit_get_document_tab_name (void)
         if (counter == 0)
 		return _(UNTITLED);
         else
-		return _(g_strdup_printf("%s %d", UNTITLED, counter));
+		return _(g_strdup_printf ("%s %d", UNTITLED, counter));
 	   
 	return NULL;
 }
