@@ -1,69 +1,434 @@
 # gEdit Hungarian translations.
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Szabolcs (Shooby) Ban <bansz@szif.hu>, 2000.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.4\n"
-"POT-Creation-Date: 2002-03-04 16:09+0100\n"
-"PO-Revision-Date: 2001-02-28 13:03+01:00\n"
+"POT-Creation-Date: 2002-08-12 11:13+0200\n"
+"PO-Revision-Date: 2002-08-13 14:19+0200\n"
 "Last-Translator: Emese KOVACS <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gedit.desktop.in.h:1
-msgid "Edit text files"
-msgstr ""
+#: data/GNOME_Gedit.server.in.h:1
+msgid "gedit application"
+msgstr "gedit alkalmazás"
 
-#: gedit.desktop.in.h:2
-#, fuzzy
+#: data/GNOME_Gedit.server.in.h:2
+msgid "gedit automation factory"
+msgstr "gedit automation factory"
+
+#: data/gedit.desktop.in.h:1
+msgid "Edit text files"
+msgstr "Szövegszerkesztő"
+
+#: data/gedit.desktop.in.h:2 src/gedit2.c:297
 msgid "Text Editor"
 msgstr "Szövegszerkesztő"
 
-#: plugins/ASCII/ascii.c:42
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+"A szerkesztőterülethez használt egyéni betűtípus. Csak akkor lép érvénybe ez "
+"a beállítás, ha az \"Alapértelmezett betűtípus használata\" ki van kapcsolva."
+
+#: data/gedit.schemas.in.h:2
+msgid "Auto Save"
+msgstr "Automatikus mentés"
+
+#: data/gedit.schemas.in.h:3
+msgid "Auto Save Interval"
+msgstr "Automatikus mentés időtartama"
+
+#: data/gedit.schemas.in.h:4
+msgid "Background Color"
+msgstr "Háttérszín"
+
+#: data/gedit.schemas.in.h:5
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"A kiválasztott szöveg háttérszíne a szerkesztőterületen. Ez csak akkor lép "
+"érvénybe, ha az \"Alapértelmezett színek használata\" ki van kapcsolva."
+
+#: data/gedit.schemas.in.h:6
+msgid ""
+"Background color for unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"A nem kiválasztott szöveg háttérszíne a szerkesztőterületen. Ez csak akkor "
+"lép érvénybe, ha az \"Alapértelmezett színek használata\" ki van kapcsolva."
+
+#: data/gedit.schemas.in.h:7
+msgid "Backup Copy Extension"
+msgstr "Biztonsági mentés kiterjesztés"
+
+#: data/gedit.schemas.in.h:8
+msgid "Body Font for Printing"
+msgstr "Törzs betűtípusa nyomtatáskor"
+
+#: data/gedit.schemas.in.h:9
+msgid "Create Backup Copies"
+msgstr "Biztonsági mentések létrehozása"
+
+#: data/gedit.schemas.in.h:10
+msgid "Display Line Numbers"
+msgstr "Sorok számának megjelenítése"
+
+#: data/gedit.schemas.in.h:11
+msgid "Editor Font"
+msgstr "Szerkesztő betűtípusa"
+
+#: data/gedit.schemas.in.h:12
+msgid "Encoding for Saving"
+msgstr "Mentéshez használt kódolás"
+
+#: data/gedit.schemas.in.h:13
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+"Biztonsági mentés fájljainak kiterjesztése vagy utótagja. Csak akkor lép "
+"érvénybe, ha a \"Biztonsági mentések létrehozása\" beállítás be van kapcsolva"
+
+#: data/gedit.schemas.in.h:14
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"A kiválasztott szöveg előterének színe a szerkesztő területen. Csak akkor "
+"lép érvénybe, ha az \"Alapértelmezett színek használata\" beállítás ki van "
+"kapcsolva."
+
+#: data/gedit.schemas.in.h:15
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"A nem kiválasztott szöveg előterének színe a szerkesztő területen. Csak "
+"akkor lép érvénybe a beállítás, ha az \"Alapértelmezett színek használata\" "
+"beállítás ki van kapcsolva."
+
+#: data/gedit.schemas.in.h:16
+msgid "Header Font for Printing"
+msgstr "Fejléc betűtípusa nyomtatáskor"
+
+#: data/gedit.schemas.in.h:17
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+"Ha ez az érték 0, a sorok száma nem kerül beillesztésre nyomtatáskor. Egyéb "
+"esetben a gedit ennyi soronként nyomtatja a sorok számát."
+
+#: data/gedit.schemas.in.h:18
+msgid "Line Number Font for Printing"
+msgstr "Sorok számának betűtípusa nyomtatáskor"
+
+#: data/gedit.schemas.in.h:19
+msgid "Line Wrapping Mode"
+msgstr "Sortörési mód"
+
+#: data/gedit.schemas.in.h:20
+msgid "Maximum Recent Files"
+msgstr "Legutóbbi fájlok maximális értéke"
+
+#: data/gedit.schemas.in.h:21
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr "A visszavonható/újra elvégezhető műveletek maximális száma."
+
+#: data/gedit.schemas.in.h:22
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+"Az automatikus mentés intervallumának megadása (percekben). Csak akkor lép "
+"érvénybe ha az \"Automatikus mentés\" beállítás be van kapcsolva."
+
+#: data/gedit.schemas.in.h:23
+msgid "Print Header"
+msgstr "Nyomtatási fejléc"
+
+#: data/gedit.schemas.in.h:24
+msgid "Print Line Numbers"
+msgstr "Sorok számának kiírása"
+
+#: data/gedit.schemas.in.h:25
+msgid "Printing Line Wrapping Mode"
+msgstr "Sörtörési mód nyomtatáskor"
+
+#: data/gedit.schemas.in.h:26
+msgid "Selected Text Color"
+msgstr "Kijelölt szöveg színe"
+
+#: data/gedit.schemas.in.h:27
+msgid "Selection Color"
+msgstr "Kiválasztás színe"
+
+#: data/gedit.schemas.in.h:28
+msgid "Show Cursor Position"
+msgstr "Kurzor pozíciójának megjelenítése"
+
+#: data/gedit.schemas.in.h:29
+msgid "Show Overwrite Mode"
+msgstr "Mutassa az átírás módját"
+
+#: data/gedit.schemas.in.h:30
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Meghatározza a hosszú sorok törését a nyomtatásnál. Használj \"GTK_WRAP_NONE"
+"\"-t ha ne legyen törés, \"GTK_WRAP_WORD\"-t a szóhatároknál történő "
+"töréshez és \"GTK_WRAP_CHAR\"-t az egyes karaktereknél történő töréshez. "
+"Megjegyzés: ezek az értékek kisbetű/nagybetű érzékenyek, pontosan úgy "
+"használd őket, ahogy itt vannak."
+
+#: data/gedit.schemas.in.h:31
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Meghatározza a hosszú sorok törését a szerkesztőterületen. Használj "
+"\"GTK_WRAP_NONE\"-t ha ne legyen törés, \"GTK_WRAP_WORD\"-t a szóhatároknál "
+"történő töréshez és \"GTK_WRAP_CHAR\"-t az egyes karaktereknél történő "
+"töréshez. Megjegyzés: ezek az értékek kisbetű/nagybetű érzékenyek, pontosan "
+"úgy használd őket, ahogy itt vannak."
+
+#: data/gedit.schemas.in.h:32
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr "Meghatározza nyomtatáskor a dokumentum törzséhez használt betűtípust."
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"Meghatározza nyomtatáskor a sorok számához használt betűtípust. Csak akkor "
+"lép érvénybe, ha a \"Sorok számának kiírása\" be van állítva."
+
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"Meghatározza nyomtatáskor az oldal fejlécéhez használt betűtípust. Csak "
+"akkor lép érvénybe, ha a \"Nyomtatási fejléc\" be van kapcsolva."
+
+#: data/gedit.schemas.in.h:35
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"Meghatározza a \"Legutóbbi fájlok\" almenüben megjelenített fájlok számát."
+
+#: data/gedit.schemas.in.h:36
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr "Meghatározza a tabulátor karakter helyett használd szóközök számát."
+
+#: data/gedit.schemas.in.h:37
+msgid "Status Bar is Visible"
+msgstr "Státuszsor látható"
+
+#: data/gedit.schemas.in.h:38
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+"Az eszköztár gombjainak stílusa. Lehetséges értékei: \"GEDIT_TOOLBAR_SYSTEM"
+"\" a rendszer alapértelmezett stílusának használatához, \"GEDIT_TOOLBAR_ICONS"
+"\" csak ikon megjelenítéséhez és \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" szöveg és "
+"ikon megjelenítéséhez. Megjegyzés: ezek az értékek kisbetű/nagybetű "
+"érzékenyek, pontosan úgy használd, ahogy itt le vannak írva."
+
+#: data/gedit.schemas.in.h:39
+msgid "Tab Size"
+msgstr "Tabulátor mérete"
+
+#: data/gedit.schemas.in.h:40
+msgid "Text Color"
+msgstr "Szöveg színe"
+
+#: data/gedit.schemas.in.h:41
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
+"convert the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try "
+"to use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to "
+"try to use the original file encoding (new files in current locale's "
+"encoding). If the conversion is successful, it will be used. Otherwise, UTF-"
+"8 will be used. Note that the values are case-sensitive, so make sure they "
+"appear exactly as mentioned here."
+msgstr ""
+"A fájlok mentéséhez használd kódolási mód. Lehetséges értékei: "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" a kötelező UTF-8 mentéshez, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\", ha szeretnéd, hogy a gedit "
+"megpróbálja átkonvertálni a dokumentumot a jelenlegi nyelvi beállításaidra, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\", ha szeretnéd, hogy a "
+"gedit megpróbálja az eredeti fájl kódolását használni (új fájlok esetében "
+"UTF8) és \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\", ha "
+"szeretnéd, hogy a gedit megpróbálja az eredeti fájl kódolását használni (új "
+"fájlok esetében az aktuális nyelvi beállítások). Ha a fájl konvertálása "
+"sikeres, akkor azt használja. Egyéb esetben az UTF-8-at használja. "
+"Megjegyzés: az értékek kisbetű-nagybetű érzékenyek, csak úgy használd, hogy "
+"itt le van írva."
+
+#: data/gedit.schemas.in.h:42
+msgid "Toolbar Buttons Style"
+msgstr "Eszköztár gombjainak stílusa"
+
+#: data/gedit.schemas.in.h:43
+msgid "Toolbar is Visible"
+msgstr "Eszköztár látható"
+
+#: data/gedit.schemas.in.h:44
+msgid "Undo Actions Limit"
+msgstr "Visszavonási műveletek korlátozása"
+
+#: data/gedit.schemas.in.h:45
+msgid "Use Default Colors"
+msgstr "Alapértelmezett színek használata"
+
+#: data/gedit.schemas.in.h:46
+msgid "Use Default Font"
+msgstr "Alapértelmezett betűkészlet használata"
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+"A módosított fájlok automatikus mentésének ki/bekapcsolása. Az automatikus "
+"mentés idejét beállíthatod az \"Automatikus mentés időtartama\" beállítással."
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+"A biztonsági mentések ki/bekapcsolása. A biztonsági mentés kiterjesztését "
+"beállíthatod a \"Biztonsági mentés kiterjesztése\" beállításnál."
+
+#: data/gedit.schemas.in.h:49
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr "A sorok számának megjelenítése a szerkesztő területen."
+
+#: data/gedit.schemas.in.h:50
+msgid "Whether gedit should include a document header when printing documents."
+msgstr "Nyomtatáskor a dokumentumok fejlécének ki/bekapcsolása."
+
+#: data/gedit.schemas.in.h:51
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr "A szerkesztőablak alján található állapotsor ki/bekapcsolása."
+
+#: data/gedit.schemas.in.h:52
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+"A kurzorpozíció megjelenítésének ki/bekapcsolása az állapotsorban. "
+"Ellenőrizd, hogy bekapcsoltad-e az \"Állapotsor látható\" beállítást."
+
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+"Az állapotsorban megjelenő ÁTÍR/BESZÚR megjelenítésének ki/bekapcsolása a "
+"szerkesztőablakokban. Ellenőrizd, hogy bekapcsoltad-e az \"Állapotsor látható"
+"\" beállítást."
+
+#: data/gedit.schemas.in.h:54
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr "Az eszköztár megjelenítésének ki/bekapcsolása a szerkesztőablakokban."
+
+#: data/gedit.schemas.in.h:55
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
+"\", and \"Selection Color\" options."
+msgstr ""
+"A rendszer alapértelmezett színeinek használata a szerkesztőterületen. Ha ez "
+"a beállítás ki van kapcsolva, a következő beállításokból használja a "
+"színeket: \"Háttérszín\", \"Szövegszín\", \"Kiválasztott szöveg színe\" és a "
+"\"Kiválasztás színe\"."
+
+#: data/gedit.schemas.in.h:56
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
+"A rendszer alapértelmezett betűtípusának használata szövegszerkesztésre a "
+"gedit beállított fontja helyett. Ha ez a beállítás ki van kapcsolva, a "
+"\"Szerkesztő betűtípusa\" beállítást használja a rendszer betűtípusa helyett."
+
+#: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
-msgstr ""
+msgstr "_ASCII Tábla"
 
-#: plugins/ASCII/ascii.c:45
+#: plugins/ASCII/ascii.c:46
 msgid "Pop-up a dialog containing an ASCII Table"
-msgstr ""
+msgstr "Megnyit egy ablakot, benne egy ASCII-táblával"
 
-#: plugins/ASCII/ascii.c:325
-#, fuzzy
+#: plugins/ASCII/ascii.c:336
 msgid "Char"
-msgstr "Másik"
+msgstr "Kar."
 
-#: plugins/ASCII/ascii.c:332
+#: plugins/ASCII/ascii.c:343
 msgid "Dec#"
-msgstr ""
+msgstr "Dec#"
 
-#: plugins/ASCII/ascii.c:339
+#: plugins/ASCII/ascii.c:350
 msgid "Hex#"
-msgstr ""
+msgstr "Hex#"
 
-#: plugins/ASCII/ascii.c:346
-#, fuzzy
+#: plugins/ASCII/ascii.c:357
 msgid "Name"
-msgstr "fájlnév"
+msgstr "Név"
 
-#: plugins/ASCII/ascii.c:391 plugins/ASCII/ascii.c:512
+#: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
 msgid "ASCII table"
-msgstr ""
+msgstr "ASCII-tábla"
 
-#: plugins/ASCII/ascii.c:404
-#, fuzzy
+#: plugins/ASCII/ascii.c:415
 msgid "_Insert char"
-msgstr "Idő beszúrása"
+msgstr "_Karakter beszúrása"
 
-#: plugins/ASCII/ascii.c:513
+#: plugins/ASCII/ascii.c:524
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr ""
+msgstr "Ez a bővítmény egy előugró ablakban jelenít meg egy ASCII-táblázatot"
 
-#: plugins/ASCII/ascii.c:515
+#: plugins/ASCII/ascii.c:526
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2001-2002 Paolo Maggi"
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid ""
@@ -71,65 +436,67 @@ msgid ""
 "document, select the character and click the \"Insert Char\" \n"
 "button or double click the character in the table."
 msgstr ""
+"Ha be szeretnél szúrni az aktív dokumentumba az itt szereplők közül "
+"bármilyen karaktert, válaszd ki a karaktert és kattints a \"Karakter "
+"beszúrása\" gombra, vagy kattints duplán a karakterre."
 
 #: plugins/ASCII/asciitable.glade2.h:4
-#, fuzzy
 msgid "Insert char"
-msgstr "Idő beszúrása"
+msgstr "Karakter beszúrása"
 
 #: plugins/ASCII/asciitable.glade2.h:5
 msgid "gedit: ASCII table"
-msgstr ""
+msgstr "gedit: ASCII-tábla"
 
-#: plugins/cvschangelog/cvschangelog.c:44
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:49
 msgid "Open CVS Chan_geLogs"
-msgstr ""
+msgstr "CVS Chan_geLog megnyitása"
 
-#: plugins/cvschangelog/cvschangelog.c:47
+#: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr ""
+"ChangeLog bejegyzéseket keres a jelenlegi dokumentumban, és megnyitja őket."
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/cvschangelog/cvschangelog.c:269
 msgid "CVS ChangeLog"
-msgstr ""
+msgstr "CVS ChangeLog"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:270
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
+"Ez a bővítmény a CVS commit üzenetekben található ChangeLog-okat nyitja meg."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:272
 msgid "Copyright (C) 2002 - James Willcox"
-msgstr ""
+msgstr "Copyright (C) 2002 - James Willcox"
 
 #: plugins/diff/diff.c:61
-#, fuzzy
 msgid "Co_mpare Files..."
-msgstr "Fájl megnyitás..."
+msgstr "Fájlok össze_hasonlítása..."
 
 #: plugins/diff/diff.c:64
 msgid "Makes a diff file from two documents or files"
 msgstr "diff (különbség) fájlt készít 2 dokumentumból vagy fájlból"
 
 #: plugins/diff/diff.c:66
-#, fuzzy
 msgid "Compare files"
-msgstr "%s fájl betöltve"
+msgstr "Fájlok összehasonlítása"
 
 #. Create the dialog
 #: plugins/diff/diff.c:267
 msgid "Compare two files..."
-msgstr ""
+msgstr "Két fájl összehasonlítása..."
 
 #: plugins/diff/diff.c:281
 msgid "C_ompare"
-msgstr ""
+msgstr "Összehas_onlítás"
 
-#: plugins/diff/diff.c:491
+#: plugins/diff/diff.c:502
 msgid "The two documents you selected are the same."
 msgstr "A két kijelölt dokumentum megegyezik."
 
-#: plugins/diff/diff.c:499
-#, fuzzy
+#: plugins/diff/diff.c:510
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -139,8 +506,7 @@ msgstr ""
 "\n"
 "Kérlek adj meg egy érvényes fájlnevet."
 
-#: plugins/diff/diff.c:508
-#, fuzzy
+#: plugins/diff/diff.c:519
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -150,103 +516,107 @@ msgstr ""
 "\n"
 "Kérlek adj meg egy érvényes fájlnevet."
 
-#: plugins/diff/diff.c:516
-#, fuzzy
+#: plugins/diff/diff.c:527
 msgid "The two files you selected are the same."
 msgstr "A két kijelölt dokumentum megegyezik."
 
-#: plugins/diff/diff.c:533
+#: plugins/diff/diff.c:544
 msgid "The \"first\" document contains no text."
 msgstr "Az \"első\" dokumentumban nincs szöveg."
 
-#: plugins/diff/diff.c:562
+#: plugins/diff/diff.c:573
 msgid "The \"second\" document contains no text."
 msgstr "A \"második\"dokumentumban nincs szöveg."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:583
+#: plugins/diff/diff.c:594
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
+"Lehetetlen a kiválasztott dokumentumok összehasonlítása.\n"
+"\n"
+"A gedit nem tudott ideiglenes fájlt létrehozni."
 
-#: plugins/diff/diff.c:601 plugins/diff/diff.c:614
+#: plugins/diff/diff.c:612 plugins/diff/diff.c:625
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "Error executing the diff command."
 msgstr ""
+"Lehetetlen a kiválasztott dokumentumok összehasonlítása.\n"
+"\n"
+"Hiba történt a diff parancs futtatása közben."
 
-#: plugins/diff/diff.c:636
+#: plugins/diff/diff.c:647
 msgid "No differences were found between the selected documents."
-msgstr ""
+msgstr "Nincs különbség a kiválasztott dokumentumok között."
 
-#: plugins/diff/diff.c:677
+#: plugins/diff/diff.c:688
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "The result contains invalid UTF-8 data."
 msgstr ""
+"Lehetetlen összehasonlítani a kiválasztott dokumentumokat.\n"
+"\n"
+"Az eredmény érvénytelen UTF-8 adatokat tartalmaz."
 
-#: plugins/diff/diff.c:901
-#, fuzzy
+#: plugins/diff/diff.c:912
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
 "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
 msgstr ""
 "diff (különbség) fájlt készít 2 dokumentumból vagy fájlból.\n"
-"Megtudhatsz többet a diff parancsról, ha beírod, hogy \"man diff\" a shell "
-"promptnál.\n"
+"\n"
+"A diff parancsról megtudhatsz többet, ha a shell promptnál beírod, hogy "
+"\"man diff\".\n"
 
-#: plugins/diff/diff.c:904
+#: plugins/diff/diff.c:915
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
 msgstr ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
 
 #: plugins/diff/diff.glade2.h:1
-#, fuzzy
 msgid "Choose the files to compare."
 msgstr "Válaszd ki az összehasonlítandó fájlokat"
 
 #: plugins/diff/diff.glade2.h:2
-#, fuzzy
 msgid "Compare files..."
-msgstr "Fájl megnyitás..."
+msgstr "Fájlok összehasonlítása..."
 
 #: plugins/diff/diff.glade2.h:3
-#, fuzzy
 msgid "F_rom document"
-msgstr "Dokumentumból"
+msgstr "Dokumentum_ból"
 
 #: plugins/diff/diff.glade2.h:4
 msgid "First"
 msgstr "Első"
 
 #: plugins/diff/diff.glade2.h:5
-#, fuzzy
 msgid "From _document"
-msgstr "Dokumentumból"
+msgstr "_Dokumentumból"
 
 #: plugins/diff/diff.glade2.h:6
-#, fuzzy
 msgid "From a _file on disk"
-msgstr "Fájlból"
+msgstr "Lemezen levő _fájlból"
 
 #: plugins/diff/diff.glade2.h:7
-#, fuzzy
 msgid "From a file o_n disk"
-msgstr "Fájlból"
+msgstr "Lemezen _levő fájlból"
 
 #: plugins/diff/diff.glade2.h:8
 msgid "Ignore _blanks (-b option)"
-msgstr ""
+msgstr "Hagyja figyelmen kívül az _üres részeket (-b paraméter)"
 
 #: plugins/diff/diff.glade2.h:9
 msgid "Note that this option is only supported by GNU diff"
-msgstr ""
+msgstr "Megjegyzés: ezt az opciót csak a GNU diff támogatja"
 
 #: plugins/diff/diff.glade2.h:10
 msgid "Second"
@@ -254,44 +624,23 @@ msgstr "Második"
 
 #: plugins/diff/diff.glade2.h:11
 msgid "Use the _unified output format (-u option)"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
-#: src/dialogs/gedit-preferences.glade2.h:70 src/dialogs/goto-line.glade2.h:3
-#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
-msgid "gtk-cancel"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
-#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:71
-#: src/dialogs/uri.glade2.h:4
-msgid "gtk-help"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
-#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:72
-#: src/dialogs/goto-line.glade2.h:4
-#: src/dialogs/program-location-dialog.glade2.h:4
-msgid "gtk-ok"
-msgstr ""
+msgstr "Használja az _unified kimeneti formátumot (-u paraméter)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
-msgstr ""
+msgstr "_Szavak száma"
 
 #: plugins/docinfo/docinfo.c:49
-#, fuzzy
 msgid "Get info on current document"
-msgstr "Küldd el az aktuális dokumentumot"
+msgstr "Információ az aktuális dokumentumról"
 
 #: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
-msgstr ""
+msgstr "Szavak száma"
 
 #: plugins/docinfo/docinfo.c:156
-#, fuzzy
 msgid "_Update"
-msgstr "Beszúr"
+msgstr "_Frissítés"
 
 #: plugins/docinfo/docinfo.c:366
 msgid ""
@@ -299,319 +648,298 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
+"A szószámláló bővítmény végignézi a dokumentumot, meghatározza a benne "
+"található szavak, sorok, karakterek és a nem-szóköz típusú karakterek számát "
+"és megjeleníti az eredményt."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
-#: plugins/shell_output/shell_output.c:424
-#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:540
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
+#: plugins/shell_output/shell_output.c:553
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
 msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2002 - Paolo Maggi"
 
 #: plugins/docinfo/docinfo.glade2.h:1
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "Bytes"
-msgstr ""
+msgstr "Bájt"
 
 #: plugins/docinfo/docinfo.glade2.h:3
 msgid "Characters (no spaces)"
-msgstr ""
+msgstr "Karakterek (szóköz nélkül)"
 
 #: plugins/docinfo/docinfo.glade2.h:4
 msgid "Characters (with spaces)"
-msgstr ""
+msgstr "Karakterek (szóközökkel)"
 
 #: plugins/docinfo/docinfo.glade2.h:5
-#, fuzzy
 msgid "File Name"
-msgstr "fájlnév"
+msgstr "Fájlnév"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
-#, fuzzy
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
 msgstr "Sor"
 
 #: plugins/docinfo/docinfo.glade2.h:7
-#, fuzzy
 msgid "Update"
-msgstr "Beszúr"
+msgstr "Frissítés"
 
 #: plugins/docinfo/docinfo.glade2.h:8
 msgid "Words"
-msgstr ""
+msgstr "Szavak"
 
 #: plugins/docinfo/docinfo.glade2.h:9
-#, fuzzy
 msgid "gedit: Document Info plugin"
-msgstr "gedit: diff-beépülő"
+msgstr "gedit: Dokumentum információs bővítmény"
 
-#: plugins/docinfo/docinfo.glade2.h:10
-#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
-msgid "gtk-close"
-msgstr ""
-
-#: plugins/sample/sample.c:41
-#, fuzzy
+#: plugins/sample/sample.c:43
 msgid "Insert User _Name"
-msgstr "Idő beszúrása"
+msgstr "Felhasználó_név beszúrása"
 
-#: plugins/sample/sample.c:44
-#, fuzzy
+#: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
-msgstr "Beszúrja a jelenlegi időt és dátumot"
+msgstr "Beszúrja a felhasználónevet"
 
-#: plugins/sample/sample.c:148
-#, fuzzy
+#: plugins/sample/sample.c:172
 msgid "User name"
-msgstr "fájlnév"
+msgstr "Felhasználónév"
 
-#: plugins/sample/sample.c:149
-#, fuzzy
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
-msgstr "Beszúrja a jelenlegi időt és dátumot"
+msgstr "Beszúrja a felhasználó nevét a kurzor pozíciójába."
 
-#: plugins/shell_output/shell_output.c:44
-#, fuzzy
+#: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
-msgstr "Shell kimenet beszúrása a dokumentumba"
+msgstr "Shell kimenet _beszúrása"
 
-#: plugins/shell_output/shell_output.c:47
-#, fuzzy
+#: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
 msgstr "Shell kimenet beszúrása a dokumentumba"
 
-#: plugins/shell_output/shell_output.c:151
-#: plugins/shell_output/shell_output.c:420
-#, fuzzy
+#: plugins/shell_output/shell_output.c:137
+msgid "An error occurs while running the selected command."
+msgstr "Hiba történt a parancs futtatásakor."
+
+#: plugins/shell_output/shell_output.c:187
+#: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
 msgstr "Shell kimenete"
 
-#: plugins/shell_output/shell_output.c:164
+#: plugins/shell_output/shell_output.c:200
 msgid "_Run"
-msgstr ""
+msgstr "_Futtatás"
 
-#: plugins/shell_output/shell_output.c:252
+#: plugins/shell_output/shell_output.c:360
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"A parancs mező üres.\n"
+"A parancsmező üres.\n"
 "\n"
 "Adj meg egy létező parancsot."
 
-#: plugins/shell_output/shell_output.c:281
-#, fuzzy
+#: plugins/shell_output/shell_output.c:389
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"A parancs mező üres.\n"
+"Hiba történt a shell parancs értelmezése közben.\n"
 "\n"
 "Adj meg egy létező parancsot."
 
-#: plugins/shell_output/shell_output.c:334
-#, fuzzy
-msgid "An error occurs while running the selected command."
+#: plugins/shell_output/shell_output.c:551
+msgid "Execute an external program and insert its output in a new document."
 msgstr ""
-"Hiba történt a következő fájl olvasásakor:\n"
-"\n"
-"%s"
-
-#: plugins/shell_output/shell_output.c:421
-#, fuzzy
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
-msgstr "Beszúrja a jelenlegi időt és dátumot"
+"Külső program futtatása és a kimenetének beszúrása egy új dokumentumba."
 
 #: plugins/shell_output/shell_output.glade2.h:1
+msgid "Capture the command _output"
+msgstr "A parancs _kimenetének átirányítása"
+
+#: plugins/shell_output/shell_output.glade2.h:2
 msgid "Specify the working directory and the command you want to run."
 msgstr "Add meg a munkakönyvtárat és a futtatandó parancsot."
 
-#: plugins/shell_output/shell_output.glade2.h:2
-#, fuzzy
+#: plugins/shell_output/shell_output.glade2.h:3
 msgid "_Shell command:"
 msgstr "_Parancs:"
 
-#: plugins/shell_output/shell_output.glade2.h:3
+#: plugins/shell_output/shell_output.glade2.h:4
 msgid "_Working directory:"
 msgstr "_Munkakönyvtár:"
 
-#: plugins/shell_output/shell_output.glade2.h:4
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Shellkimenet-beépülő"
 
-#: plugins/taglist/gedit-taglist-plugin.c:44
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Tag lista bővítmény"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tab you want to use"
+msgstr "Válaszd ki az elemcsoportok közül azt, amit használni szeretnél"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Elemcsoportok"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "Elemnév lista"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:187
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Shell kimenet beszúrása a dokumentumba"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:198
+msgid "Tags"
+msgstr "Elemek"
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr ""
+msgstr "Elem_lista"
 
-#: plugins/taglist/gedit-taglist-plugin.c:47
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
-msgstr ""
+msgstr "Mutassa az elem lista ablakát"
 
-#: plugins/taglist/gedit-taglist-plugin.c:140
+#: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
-msgstr ""
+msgstr "Elemlista"
 
-#: plugins/taglist/gedit-taglist-plugin.c:141
+#: plugins/taglist/gedit-taglist-plugin.c:161
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
+"Az elem lista bővítmény megkönnyíti a gyakran használt elemek/karakterláncok "
+"dokumentumba illesztését, anélkül, hogy be kellene gépelni őket."
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:116
-#, fuzzy
-msgid "Tag list plugin"
-msgstr "gedit: diff-beépülő"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:134
-msgid "Select the group of tab you want to use."
-msgstr ""
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:158
-#, fuzzy
-msgid "Double-click on a tag to insert it in the current document."
-msgstr "Shell kimenet beszúrása a dokumentumba"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:169
-msgid "Tags"
-msgstr ""
-
-#: plugins/time/time.c:44
-#, fuzzy
+#: plugins/time/time.c:45
 msgid "_Insert Date/Time"
-msgstr "Idő beszúrása"
+msgstr "_Dátum/Idő beszúrása"
 
-#: plugins/time/time.c:47
-#, fuzzy
+#: plugins/time/time.c:48
 msgid "Insert current date and time at the cursor position"
 msgstr "Beszúrja a jelenlegi időt és dátumot"
 
-#: plugins/time/time.c:256
+#: plugins/time/time.c:274
 msgid "Available formats"
-msgstr ""
+msgstr "Elérhető formátumok"
 
-#: plugins/time/time.c:297 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "A dátum/idő bővítmény beállítása"
 
-#: plugins/time/time.c:537
-#, fuzzy
+#: plugins/time/time.c:568
 msgid "Insert Date/Time"
-msgstr "Idő beszúrása"
+msgstr "Dátum/Idő beszúrása"
 
-#: plugins/time/time.c:538
-#, fuzzy
+#: plugins/time/time.c:569
 msgid "Inserts current date and time at the cursor position."
-msgstr "Beszúrja a jelenlegi időt és dátumot"
+msgstr "Beszúrja a jelenlegi időt és dátumot."
 
 #: plugins/time/time.glade2.h:2
 msgid "Select the format to use when inserting date/time."
-msgstr ""
+msgstr "Válaszd ki a dátum/idő beszúrásához használt formátumot."
 
-#: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
-#, fuzzy, c-format
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
+#, c-format
 msgid "Activate %s"
-msgstr "Mindent cserél"
+msgstr "%s aktiválása"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
-msgstr "_Sorra ugrás..."
+msgstr "Sorra ugrás..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
-msgstr "Sorra ugrás"
+msgstr "Sorra _ugrás"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Nem találom a szükséges widgeteket a goto-line.glade2-ben.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:47
-#, fuzzy
-msgid "Plugin"
-msgstr "_Plugin-ek"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:48
-msgid "Load"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:314
-#, fuzzy
-msgid "Module file name"
-msgstr "fájlnév"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
-msgid "Author(s)"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:446
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:454
-#, fuzzy
-msgid "Plugin Manager"
-msgstr "gedit Plugin Manager"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:481
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:571
-msgid "Could not create the Plugin Manager dialog"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
-#: src/gedit-ui.xml.h:56
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
+#: src/gedit-ui.xml.h:53
 msgid "Replace"
-msgstr "Cserél"
+msgstr "Csere"
 
-#: src/dialogs/gedit-dialog-replace.c:178
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:183
 msgid "Replace _All"
-msgstr "Mindent cserél"
+msgstr "_Mindet cseréli"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:126
+#: src/gedit-ui.xml.h:98
 msgid "_Replace"
-msgstr "Cserél"
+msgstr "_Csere"
 
-#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
 msgid "Find"
-msgstr "Keres"
+msgstr "Keresés"
 
-#: src/dialogs/gedit-dialog-replace.c:469
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:474
+#: src/dialogs/gedit-dialog-replace.c:545
+#: src/dialogs/gedit-dialog-replace.c:722
+#, c-format
 msgid "The text \"%s\" was not found."
-msgstr "A %s fájl nem található"
+msgstr "A \"%s\" szöveg nem található"
 
-#: src/dialogs/gedit-dialog-replace.c:704
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:731
+#, c-format
 msgid "Found and replaced %d occurences."
-msgstr "%i találat és csere"
+msgstr "Találtam és kicseréltem %d találatot."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:73
-#, fuzzy
+#: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr "Megnyitás erről az _URI-ról"
+
+#: src/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Bővítmény"
+
+#: src/dialogs/gedit-plugin-manager.c:54
+msgid "Load"
+msgstr "Betöltés"
+
+#: src/dialogs/gedit-plugin-manager.c:320
+msgid "Module file name"
+msgstr "Modul fájlnév"
+
+#: src/dialogs/gedit-plugin-manager.c:321
+msgid "Author(s)"
+msgstr "Készítő(k)"
+
+#: src/dialogs/gedit-plugin-manager.c:443
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Nem találom a plugin-manager.glade2-t, telepítsd újra a gedit-et.\n"
+
+#: src/dialogs/gedit-plugin-manager.c:466
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"Érvénytelen glade fájl a bővítménykezelőhöz -- nincs meg minden widget.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
-msgstr "gedit: Program helyének megadása..."
+msgstr "Program helyének megadása..."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:95
+#: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid ""
 "Could not find the required widgets inside program-location-dialog.glade2.\n"
 msgstr ""
+"Nem találom a szükséges widgeteket a program-location-dialog.glade2-ben.\n"
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
 msgid ""
 "The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
@@ -619,1541 +947,1709 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
+"A %s bővítmény a <tt>%s</tt> külső programot használja a működéshez.\n"
+"\n"
+"Add meg a <tt>%s</tt> program pontos helyét."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+#: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
-msgstr ""
+msgstr "A kiválasztott fájl nem futtatható."
 
-#: src/dialogs/gedit-preferences-dialog.c:202
-msgid "Toolbar"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:203
-#: src/dialogs/gedit-preferences.glade2.h:34
-#, fuzzy
-msgid "Status bar"
-msgstr "Státuszsor mutatása"
-
-#: src/dialogs/gedit-preferences-dialog.c:206
-#: src/dialogs/gedit-preferences.glade2.h:14
-msgid "MDI"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:215
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:207
 msgid "Font & Colors"
-msgstr "Betűkészlet/Szín"
+msgstr "Betűtípusok és színek"
 
-#: src/dialogs/gedit-preferences-dialog.c:217
-#: src/dialogs/gedit-preferences.glade2.h:35
+#: src/dialogs/gedit-preferences-dialog.c:209
+#: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Tabs"
-msgstr ""
+msgstr "Tabulátorok"
 
-#: src/dialogs/gedit-preferences-dialog.c:218
-#: src/dialogs/gedit-preferences.glade2.h:57
+#: src/dialogs/gedit-preferences-dialog.c:210
+#: src/dialogs/gedit-preferences.glade2.h:47
 msgid "Wrap mode"
-msgstr ""
+msgstr "Sortörési mód"
 
-#: src/dialogs/gedit-preferences-dialog.c:219
+#: src/dialogs/gedit-preferences-dialog.c:211
 #: src/dialogs/gedit-preferences.glade2.h:13
-#, fuzzy
 msgid "Line numbers"
-msgstr "Sor száma:"
+msgstr "Sorok száma"
 
-#: src/dialogs/gedit-preferences-dialog.c:221
-#: src/dialogs/gedit-preferences.glade2.h:27 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:213
+#: src/dialogs/gedit-preferences.glade2.h:23 src/gedit-ui.xml.h:58
 msgid "Save"
-msgstr "Ment"
+msgstr "Mentés"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:76
+msgid "Undo"
+msgstr "Visszavonás"
 
 #: src/dialogs/gedit-preferences-dialog.c:222
-#: src/dialogs/gedit-preferences.glade2.h:52 src/gedit-ui.xml.h:81
-msgid "Undo"
-msgstr "Visszanon"
-
-#: src/dialogs/gedit-preferences-dialog.c:230
-#, fuzzy
 msgid "Page"
-msgstr "Oldalak"
+msgstr "Oldal"
 
-#: src/dialogs/gedit-preferences-dialog.c:237
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:224
+msgid "Fonts"
+msgstr "Betűtípusok"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "Manager"
+msgstr "Kezelő"
+
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Editor"
-msgstr "Kilép"
-
-#: src/dialogs/gedit-preferences-dialog.c:238
-#: src/dialogs/gedit-preferences.glade2.h:22 src/gedit-ui.xml.h:45
-msgid "Print"
-msgstr "Nyomtat"
+msgstr "Szerkesztő"
 
 #: src/dialogs/gedit-preferences-dialog.c:240
-msgid "User interface"
-msgstr ""
+#: src/dialogs/gedit-preferences.glade2.h:19 src/gedit-print.c:309
+#: src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "Nyomtatás"
 
-#: src/dialogs/gedit-preferences-dialog.c:307
+#: src/dialogs/gedit-preferences-dialog.c:241
+msgid "Plugins"
+msgstr "Bővítmények"
+
+#: src/dialogs/gedit-preferences-dialog.c:308
 msgid "Cat_egories:"
-msgstr ""
+msgstr "Kat_egóriák:"
 
-#: src/dialogs/gedit-preferences-dialog.c:331 src/gedit-ui.xml.h:44
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
-msgstr "gedit: Beállítások"
+msgstr "Beállítások"
 
-#: src/dialogs/gedit-preferences-dialog.c:498
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
+msgstr "Kategóriák"
+
+#: src/dialogs/gedit-preferences-dialog.c:800
+msgid "Push this button to select the font to be used by the editor"
 msgstr ""
+"Nyomd meg ezt a gombot a szerkesztőben használt betűtípus kiválasztásához"
+
+#: src/dialogs/gedit-preferences-dialog.c:803
+msgid "Push this button to configure text color"
+msgstr "Nyomd meg ezt a gombot a szöveg színének kiválasztásához."
+
+#: src/dialogs/gedit-preferences-dialog.c:805
+msgid "Push this button to configure background color"
+msgstr "Nyomd meg ezt a gombot a háttérszín beállításához"
+
+#: src/dialogs/gedit-preferences-dialog.c:807
+msgid ""
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr "Nyomd meg ezt a gombot a kiválasztott szöveg színének kiválasztásához."
+
+#: src/dialogs/gedit-preferences-dialog.c:810
+msgid ""
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr ""
+"Nyomd meg ezt a gombot a kiválasztott szöveg háttérszínének kiválasztásához."
+
+#: src/dialogs/gedit-preferences-dialog.c:1592
+#: src/dialogs/gedit-preferences-dialog.c:1594
+msgid "Courier 9"
+msgstr "Courier 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1601
+#: src/dialogs/gedit-preferences-dialog.c:1603
+msgid "Helvetica 11"
+msgstr "Helvetica 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1610
+#: src/dialogs/gedit-preferences-dialog.c:1612
+msgid "Helvetica 8"
+msgstr "Helvetica 8"
+
+#: src/dialogs/gedit-preferences-dialog.c:1733
+msgid "Push this button to select the font to be used to print the body"
+msgstr ""
+"Nyomd meg ezt a gombot a törzs nyomtatáskor használt betűtípusának "
+"kiválasztásához"
+
+#: src/dialogs/gedit-preferences-dialog.c:1735
+msgid "Push this button to select the font to be used to print the headers"
+msgstr ""
+"Nyomd meg ezt a gombot a fejléc nyomtatáskor használt betűtípusának "
+"kiválasztásához"
+
+#: src/dialogs/gedit-preferences-dialog.c:1737
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr ""
+"Nyomd meg ezt a gombot a sorok számának nyomtatáskor használt betűtípusának "
+"kiválasztásához"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
-msgstr ""
+msgstr " Sorok _törése (karakterhatároknál)"
 
 #: src/dialogs/gedit-preferences.glade2.h:2
 msgid " character(s)"
-msgstr ""
+msgstr " karakter"
 
 #: src/dialogs/gedit-preferences.glade2.h:3
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr ""
+msgid " line(s)"
+msgstr ". sornál"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
-msgid "Bottom"
-msgstr ""
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "Mindig használjon U_TF-8 kódolást (gyorsabb)"
 
 #: src/dialogs/gedit-preferences.glade2.h:5
-msgid "Button style"
-msgstr ""
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr "Mindig használjon _UTF-8 kódolást (gyorsabb)"
 
 #: src/dialogs/gedit-preferences.glade2.h:6
 msgid "Colors"
-msgstr "Szín"
+msgstr "Színek"
 
 #: src/dialogs/gedit-preferences.glade2.h:7
-#, fuzzy
 msgid "Create a _backup copy of files before saving"
-msgstr ""
-"A gedit nem tudott temp fájlt létrehozni.\n"
-"\n"
+msgstr "_Biztonsági másolatok létrehozása mentés előtt"
 
 #: src/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
+#: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
-msgstr "Betűkészletek"
+msgstr "Betűtípusok"
 
 #: src/dialogs/gedit-preferences.glade2.h:9
-#, fuzzy
-msgid "Fonts & Colors"
-msgstr "Betűkészlet/Szín"
+msgid "Font used to print line _numbers:"
+msgstr "A sorok _számának megjelenítéséhez használt betűtípus:"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
-msgid "Icon and _text"
-msgstr ""
+msgid "Font used to print the _body:"
+msgstr "Dokumentum_törzs nyomtatásához használt betűtípus:"
 
 #: src/dialogs/gedit-preferences.glade2.h:11
-msgid "LOGO"
-msgstr ""
+msgid "Fonts & Colors"
+msgstr "Betűtípusok és színek"
 
 #: src/dialogs/gedit-preferences.glade2.h:12
-msgid "Left"
-msgstr ""
+msgid "LOGO"
+msgstr "LOGO"
+
+#: src/dialogs/gedit-preferences.glade2.h:14
+msgid "Pick the background color"
+msgstr "Válassz háttérszínt"
 
 #: src/dialogs/gedit-preferences.glade2.h:15
-msgid "Modal"
-msgstr ""
+msgid "Pick the selected text color"
+msgstr "Válassz színt a kiválasztott szöveghez"
 
 #: src/dialogs/gedit-preferences.glade2.h:16
-msgid "Notebook"
-msgstr ""
+msgid "Pick the selection color"
+msgstr "Válassz színt a kiválasztáshoz"
 
 #: src/dialogs/gedit-preferences.glade2.h:17
-#, fuzzy
-msgid "Notebook _tab position:"
-msgstr "Regiszterfül pozíciója: "
+msgid "Pick the text color"
+msgstr "Válassz szövegszínt"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
-#, fuzzy
-msgid "Pick the background color"
-msgstr "Válassz színt"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-#, fuzzy
-msgid "Pick the selected text color"
-msgstr "Kivágja a kijelölt részt"
+msgid "Plugin manager"
+msgstr "Bővítménykezelő"
 
 #: src/dialogs/gedit-preferences.glade2.h:20
-#, fuzzy
-msgid "Pick the selection color"
-msgstr "Kivágja a kijelölt részt"
-
-#: src/dialogs/gedit-preferences.glade2.h:21
-#, fuzzy
-msgid "Pick the text color"
-msgstr "Válassz színt"
-
-#: src/dialogs/gedit-preferences.glade2.h:23
-#, fuzzy
 msgid "Print _line numbers every"
 msgstr "Kiírja a s_orok számát minden:"
 
-#: src/dialogs/gedit-preferences.glade2.h:24
+#: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Print _page headers"
-msgstr ""
+msgstr "_Oldal fejlécének nyomtatása"
+
+#: src/dialogs/gedit-preferences.glade2.h:22
+msgid "Print fonts"
+msgstr "Nyomtatás"
+
+#: src/dialogs/gedit-preferences.glade2.h:24
+msgid "Se_lection color:"
+msgstr "Kivá_lasztás színe:"
 
 #: src/dialogs/gedit-preferences.glade2.h:25
-msgid "Right"
-msgstr ""
+msgid "Selecte_d text color:"
+msgstr "_Kiválasztott szöveg színe:"
 
 #: src/dialogs/gedit-preferences.glade2.h:26
-msgid "S_elected text color:"
-msgstr ""
+msgid "Set _tabs width equivalent to  "
+msgstr "_Tabulátor mérete megegyezik  "
 
-#: src/dialogs/gedit-preferences.glade2.h:28
-msgid "Se_lection color:"
-msgstr ""
+#: src/dialogs/gedit-preferences.glade2.h:27
+msgid "Set limit on _undo actions to"
+msgstr "_Visszavonások számának korlátozása :"
 
 #: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Set _tabs width equivalent to  "
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:30
-#, fuzzy
-msgid "Set limit on _undo levels to"
-msgstr "Visszavonások számának korlátozása :"
-
-#: src/dialogs/gedit-preferences.glade2.h:31
-#, fuzzy
-msgid "Sho_w tooltips"
-msgstr "_Címzett:"
-
-#: src/dialogs/gedit-preferences.glade2.h:32
-#, fuzzy
-msgid "Show cursor _position"
-msgstr "_kurzor pozíciótól keres"
-
-#: src/dialogs/gedit-preferences.glade2.h:33
-msgid "Show overwrite _mode"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
-"The Font & Colors settings let you choose the font and the colors to be used "
+"The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr ""
+"A betűtípusok és színek beállításával kiválaszthatod a szerkesztő ablakban "
+"használandó betűtípust és színeket."
 
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
+"A sorok száma beállításával kiválaszthatod, hogy megjelenjen-e a sorok száma "
+"az ablak bal oldalán."
 
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid "The print settings let you customize how gedit prints documents."
+#: src/dialogs/gedit-preferences.glade2.h:31
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
 msgstr ""
+"A bővítménykezelő beállításával kiválaszthatot a betöltendő bővítményeket."
 
-#: src/dialogs/gedit-preferences.glade2.h:41
+#: src/dialogs/gedit-preferences.glade2.h:32
+msgid ""
+"The print fonts settings let you choose the fonts to be used to print "
+"documents."
+msgstr ""
+"A nyomtatott betűtípusok beállításaival kiválaszthatod a dokumentumok "
+"nyomtatásánál használt betűtípusokat."
+
+#: src/dialogs/gedit-preferences.glade2.h:33
+msgid "The print page settings let you customize how gedit prints documents."
+msgstr ""
+"A nyomtatási beállításokkal testreszabhatod a dokumentumok nyomtatását."
+
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "The save settings let you customize how gedit saves files."
-msgstr ""
+msgstr "A mentési beállításokkal testreszabhatod a fájlok mentését."
 
-#: src/dialogs/gedit-preferences.glade2.h:42
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
+msgstr "A tabulátor-beállításokkal testreszabhatod a tabulátor szélességét."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr ""
+"A visszavonás beállításaiban beállíthatod a visszavonható műveletek "
+"maximális számát."
+
+#: src/dialogs/gedit-preferences.glade2.h:37
+msgid "The wrap mode settings let you customize how lines have to be wrapped."
+msgstr "A törési mód beállításaival testreszabhatod a sorok törését."
+
+#: src/dialogs/gedit-preferences.glade2.h:38
+msgid "U_se default theme colors"
+msgstr "Téma alapértelmezett színeinek _használata"
+
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid "U_se original file encoding if possible"
+msgstr "Használja a fájl eredeti kódolását, amennyiben lehetséges"
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+msgid "Use cu_rrent locale's encoding if possible"
+msgstr "Használja a _jelenlegi nyelvi kódolást, amennyiben lehetséges"
+
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid "Use current _locale's encoding if possible"
+msgstr "Használja a jelenlegi _nyelvi kódolást, amennyiben lehetséges"
+
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "When creating a new file..."
+msgstr "Új fájl létrehozásakor..."
+
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid "When saving..."
+msgstr "Mentéskor..."
+
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "Wrap lines at _word boundaries"
+msgstr "Sorok törése _szóhatároknál"
 
 #: src/dialogs/gedit-preferences.glade2.h:46
-msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
-msgid "Toolbars"
-msgstr "_Címzett:"
+msgid "Wrap lines at ch_aracter boundaries"
+msgstr "Sorok törése k_arakterhatároknál"
 
 #: src/dialogs/gedit-preferences.glade2.h:48
-#, fuzzy
-msgid "Top"
-msgstr "Címzett:"
+msgid "_Autosave current file every"
+msgstr "Aktuális fájl _automatikus mentése"
 
 #: src/dialogs/gedit-preferences.glade2.h:49
-msgid "Toplevel"
-msgstr ""
+msgid "_Background color:"
+msgstr "_Háttérszín:"
 
 #: src/dialogs/gedit-preferences.glade2.h:50
-msgid "U_se current locale only if the file already use it"
-msgstr ""
+msgid "_Display line numbers"
+msgstr "Sorok számának _megjelenítése"
 
 #: src/dialogs/gedit-preferences.glade2.h:51
-msgid "U_se default theme colors"
-msgstr ""
+msgid "_Font used by the editor: "
+msgstr "A szerkesztő által használt _betűtípus:"
+
+#: src/dialogs/gedit-preferences.glade2.h:52
+msgid "_Font used to print headers:"
+msgstr "A fejlécek megjelenítésére használt _betűtípus:"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Use current _locale when possible"
-msgstr ""
+msgid "_Never wrap lines"
+msgstr "_Soha ne törje a sorokat"
 
 #: src/dialogs/gedit-preferences.glade2.h:54
-#, fuzzy
-msgid "When saving..."
-msgstr "Másik..."
+msgid "_Restore default fonts"
+msgstr "_Alapértelmezett betűtípusok visszállítása"
 
 #: src/dialogs/gedit-preferences.glade2.h:55
-msgid "Wrap lines at _word boundaries"
-msgstr ""
+msgid "_Text color:"
+msgstr "_Szöveg színe:"
 
 #: src/dialogs/gedit-preferences.glade2.h:56
-msgid "Wrap lines at ch_aracter boundaries"
-msgstr ""
+msgid "_Use default theme font"
+msgstr "A témához tartozó alapértelmezett betűkészlet _használata"
+
+#: src/dialogs/gedit-preferences.glade2.h:57
+msgid "action(s)"
+msgstr "művelet"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-msgid "_According to system settings"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
-msgid "_Auto save current file every"
-msgstr "Aktuális fájl mentése"
-
-#: src/dialogs/gedit-preferences.glade2.h:60
-#, fuzzy
-msgid "_Background color:"
-msgstr "Háttér: "
-
-#: src/dialogs/gedit-preferences.glade2.h:61
-#, fuzzy
-msgid "_Display line numbers"
-msgstr "Sor száma:"
-
-#: src/dialogs/gedit-preferences.glade2.h:62
-msgid "_Font used by the editor: "
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:63 src/gedit-ui.xml.h:96
-msgid "_Icon"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:64
-#, fuzzy
-msgid "_MDI Mode:"
-msgstr "Mód:  "
-
-#: src/dialogs/gedit-preferences.glade2.h:65
-msgid "_Never wrap lines"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:66
-#, fuzzy
-msgid "_Show status bar"
-msgstr "Státuszsor mutatása"
-
-#: src/dialogs/gedit-preferences.glade2.h:67
-#, fuzzy
-msgid "_Show toolbar"
-msgstr "_Címzett:"
-
-#: src/dialogs/gedit-preferences.glade2.h:68
-#, fuzzy
-msgid "_Text color:"
-msgstr "Szövegszerkesztő"
-
-#: src/dialogs/gedit-preferences.glade2.h:69
-#, fuzzy
-msgid "_Use default theme font"
-msgstr "Alapértelmezett betűkészlet: "
-
-#: src/dialogs/gedit-preferences.glade2.h:73
-#, fuzzy
-msgid "level(s)"
-msgstr " "
-
-#: src/dialogs/gedit-preferences.glade2.h:74
-#, fuzzy
-msgid "line(s)"
-msgstr "-ik sornál"
-
-#: src/dialogs/gedit-preferences.glade2.h:75
-#, fuzzy
 msgid "minutes"
-msgstr "Sor"
+msgstr " percenként"
 
+#: src/dialogs/gnome-print-font-dialog.c:107
+msgid "_Insert a new preview phrase."
+msgstr "Új előnézeti szöveg _beillesztése."
+
+#: src/dialogs/gnome-print-font-dialog.c:113
+msgid "Modify preview phrase..."
+msgstr "Előnézeti szöveg módosítása..."
+
+#: src/dialogs/gnome-print-font-dialog.c:167
+msgid "Preview"
+msgstr "Előnézet"
+
+#: src/dialogs/gnome-print-font-dialog.c:180
+msgid "_Modify preview phrase..."
+msgstr "Előnézeti szöveg _módosítása..."
+
+#: src/dialogs/gnome-print-font-dialog.c:243
+msgid "Font Selection"
+msgstr "Betűtípus kiválasztása"
+
+#: src/dialogs/gnome-print-font-picker.c:89
+msgid "sans 12"
+msgstr "sans 12"
+
+#: src/dialogs/gnome-print-font-picker.c:90
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaÁáBbCcDdEeÉéFfGgHhIiÍíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúÜüŰűVvWwXxYyZz"
+
+#: src/dialogs/gnome-print-font-picker.c:91
+msgid "Pick a Font"
+msgstr "Válassz betűkészletet"
+
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Cím"
+
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr "A kiválasztó párbeszéddoboz címsora"
+
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "Betűtípus neve"
+
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "A kiválasztott betűtípus neve"
+
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Szöveg előnézete"
+
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr "A párbeszédablakban mutatott előnézeti szöveg"
+
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr "Címke betűtípusa"
+
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr "Betűtípus használata a betűtípus információs mód címkéjében"
+
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr "Címke betűmérete"
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr "Betűtípus mérete a betűtípus információs mód címkéjéhez"
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr "Méret mutatása"
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr "Mutassa a mérete a betűtípus információs módban"
+
+#. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
-#, fuzzy
 msgid "Goto Line"
-msgstr "Sorra ugrás"
+msgstr "Ugrás sorra"
 
 #: src/dialogs/goto-line.glade2.h:2
-#, fuzzy
 msgid "_Line number:"
-msgstr "Sor száma: "
+msgstr "_Sor száma: "
 
 #: src/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
 msgid "C_onfigure plugin"
-msgstr "Kivágja a kijelölt részt"
+msgstr "Bővítmény _beállítása"
 
 #: src/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "Configure the selected plugin"
-msgstr "Kivágja a kijelölt részt"
+msgstr "A kiválasztott bővítmény beállítása"
 
 #: src/dialogs/plugin-manager.glade2.h:3
-#, fuzzy
-msgid "D_etails"
-msgstr "Email"
+msgid "De_tails"
+msgstr "Bővebben"
 
 #: src/dialogs/plugin-manager.glade2.h:4
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
+msgid "_Description"
+msgstr "_Leírás"
 
 #: src/dialogs/plugin-manager.glade2.h:5
-#, fuzzy
-msgid "_Description"
-msgstr "Plugin leírása"
-
-#: src/dialogs/plugin-manager.glade2.h:6
 msgid "dialog1"
-msgstr ""
+msgstr "1. párbeszédablak"
 
 #: src/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
 msgid "Set program location..."
-msgstr "gedit: Program helyének megadása..."
+msgstr "Program helyének megadása..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
-#, fuzzy
 msgid "_Location to search for:"
 msgstr "Ezen a _helyen keresd:"
 
-#: src/dialogs/program-location-dialog.glade2.h:5
+#: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
 msgstr "label"
 
 #: src/dialogs/replace.glade2.h:1
-#, fuzzy
 msgid "Case sensi_tive"
-msgstr "Kis- nagy_betű különbség"
+msgstr "Kis- nagy_betű megkülönböztetése"
 
-#: src/dialogs/replace.glade2.h:2
-#, fuzzy
-msgid "Find Next"
-msgstr "Következő találat"
-
-#: src/dialogs/replace.glade2.h:4
-#, fuzzy
-msgid "Replace All"
-msgstr "Mindent cserél"
-
-#: src/dialogs/replace.glade2.h:5
-#, fuzzy
+#: src/dialogs/replace.glade2.h:3
 msgid "Replace _with: "
 msgstr "_Csere ezzel: "
 
-#: src/dialogs/replace.glade2.h:6
-#, fuzzy
+#: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
 msgstr "A dokumentum _elejétől keres"
 
-#: src/dialogs/replace.glade2.h:7
-#, fuzzy
+#: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
 msgstr "A _kurzor állásától keres"
 
-#: src/dialogs/replace.glade2.h:8
+#: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
 msgstr "_Keresés erre: "
 
 #: src/dialogs/uri.glade2.h:1
 msgid "Enter the location (URI) of the file you would like to open:"
-msgstr ""
-
-#: src/dialogs/uri.glade2.h:2
-#, fuzzy
-msgid "Open from URI"
-msgstr "Megnyitás errő a _URI-ről..."
-
-#: src/dialogs/uri.glade2.h:5
-msgid "gtk-open"
-msgstr ""
-
-#: src/gedit2.c:68
-#, fuzzy
-msgid "Show mdi debugging messages."
-msgstr "Mutasd a nézet hibekereső üzeneteit."
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Mutasd a parancsok hibakereső üzeneteit."
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Mutasd a dokumetumok hibakereső üzeneteit."
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Mutasd a fájl hibakereső őzeneteit."
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Mutasd a plugin-ok hibakereső üzeneteit."
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Mutasd a beállítások hibekereső üzeneteit."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Mutasd a nyomtatás hibekereső üzeneteit."
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Mutasd a keresés hibekereső üzeneteit."
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Mutasd a visszavonás hibekereső üzeneteit."
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Mutasd a nézet hibekereső üzeneteit."
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Mutasd a beállítások hibekereső üzeneteit."
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Mutass minden hibakereső üzenetet"
-
-#: src/gedit2.c:159
-#, fuzzy
-msgid "The GNOME text editor"
-msgstr "Szövegszerkesztő"
+msgstr "Írd be a megnyitandó fájl helyét (URI):"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Fejlesztés alatt."
 
 #: src/gedit-commands.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "Nincs találat."
+msgstr "Nem találtam a \"%s\" szöveget."
 
-#: src/gedit-commands.c:419
-msgid "Impossible to update gedit settings."
+#: src/gedit-commands.c:437
+msgid "translator_credits"
 msgstr ""
+"Doma Péter <zelin@pointernet.hu>\n"
+"Kovács Emese <emese@gnome.hu>"
 
-#: src/gedit-commands.c:508
+#: src/gedit-commands.c:462
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:511
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit egy kicsi és könnyű szövegszerkesztő a GNOME-hoz"
+#: src/gedit-commands.c:463
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
+msgstr ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-commands.c:465
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "A gedit egy kicsi és könnyű szövegszerkesztő a Gnome-hoz"
+
+#: src/gedit-document.c:573 src/gedit-document.c:591
 #, c-format
 msgid "%s %d"
-msgstr ""
+msgstr "%s %d"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:573 src/gedit-document.c:591
 msgid "Untitled"
 msgstr "Névtelen"
 
-#: src/gedit-document.c:648 src/gedit-document.c:754
-msgid "Invalid UTF-8 data"
-msgstr ""
+#: src/gedit-document.c:579 src/gedit-document.c:626
+msgid "Invalid file name"
+msgstr "Érvénytelen fájlnév"
 
-#: src/gedit-document.c:948
+#: src/gedit-document.c:756 src/gedit-document.c:914
+msgid "Invalid UTF-8 data"
+msgstr "Érvénytelen UTF-8 adat"
+
+#: src/gedit-document.c:1149
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Nem tudom a %s szimbolikus link információit olvasni"
+
+#: src/gedit-document.c:1195
+msgid "The file has too many symbolic links."
+msgstr "A fájl túl sok szimbolikus linket tartalmaz."
+
+#: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
+msgstr "A gedit nem tudja a %s: típusú helyeket írásra használni."
 
-#: src/gedit-document.c:955
+#: src/gedit-document.c:1256
 msgid "gedit cannot handle this kind of location in write mode."
-msgstr ""
+msgstr "A gedit nem tudja ezt a típusú helyet írásra használni."
 
-#: src/gedit-document.c:972
-#, fuzzy
-msgid "Could not create the backup copy of the file."
-msgstr ""
-"A gedit nem tudott temp fájlt létrehozni.\n"
-"\n"
+#: src/gedit-document.c:1269
+msgid "Invalid filename."
+msgstr "Érvénytelen fájlnév."
 
-#: src/gedit-document.c:991
-#, fuzzy
+#: src/gedit-document.c:1382
 msgid ""
-"Make sure that the path you provided exists, and that you have the "
-"appropriate write permissions."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
 msgstr ""
-"A gedit nem tudta elmenteni a fájlt: \n"
-"\n"
-" %s \n"
-"\n"
-"Győződj meg róla, hogy a megadott elérési út létezik és hogy rendelkezel a "
-"szükséges jogosultságokkal."
+"Nincs elég hely a lemezen a fájl mentéséhez.\n"
+"Csinálj egy kis helyet és próbáld újra."
 
-#: src/gedit-document.c:1029
+#: src/gedit-document.c:1387
 msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
 msgstr ""
+"Az a lemez, amire a fájlt próbálod menteni, fájlméret-korlátozással "
+"rendelkezik.  Próbálj meg kisebb fájlt menteni, vagy egy olyan lemezre "
+"ments, amin nincs korlátozás."
 
-#: src/gedit-document.c:1034
-msgid "The file is too big."
-msgstr ""
+#: src/gedit-document.c:1426
+msgid "Could not create a backup file."
+msgstr "Nem tudom létrehozni a biztonsági mentést."
 
-#: src/gedit-document.c:1184
-#, fuzzy
+#: src/gedit-document.c:1574
 msgid "It is not possible to revert an Untitled document"
-msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot\n"
+msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot"
 
-#: src/gedit-file.c:121
-msgid "Open File ..."
-msgstr "Fájl megnyitás..."
-
-#: src/gedit-file.c:131 src/gedit-file.c:638
-#, fuzzy, c-format
-msgid "Loaded file '%s'"
-msgstr "%s fájl betöltve"
-
-#: src/gedit-file.c:241 src/gedit-file.c:315
-#, fuzzy, c-format
-msgid "Saving file '%s' ..."
-msgstr "Mentés másként.."
-
-#: src/gedit-file.c:262 src/gedit-file.c:322
-#, fuzzy
-msgid "The document has not been saved."
-msgstr "A dokumentum nincs elmentve."
-
-#: src/gedit-file.c:275 src/gedit-file.c:320
-#, c-format
-msgid "File '%s' saved."
-msgstr ""
-
-#: src/gedit-file.c:307
-#, fuzzy
-msgid "Save as ..."
-msgstr "Mentés másként.."
-
-#: src/gedit-file.c:473
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr ""
-
-#: src/gedit-file.c:486
-#, fuzzy
-msgid "The document has not been reverted."
-msgstr "A dokumentum nincs elmentve."
-
-#: src/gedit-file.c:496
-#, c-format
-msgid "File '%s' reverted."
-msgstr ""
-
-#: src/gedit-file.c:539
-#, fuzzy, c-format
-msgid "Loading %d file..."
-msgstr "%i fájl betöltve"
-
-#: src/gedit-file.c:575
-#, c-format
-msgid "Loaded %i files"
-msgstr "%i fájl betöltve"
-
-#: src/gedit-file.c:692
-#, fuzzy
-msgid "Could not read data from stdin."
-msgstr ""
-"Hiba történt a következő fájl olvasásakor:\n"
-"\n"
-"%s"
-
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:114
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
 "Do you want to replace it with the one you are saving?"
 msgstr ""
+"Már létezik egy \"%s\" nevű fájl.\n"
+"Akarod hogy lecseréljem ezzel ?"
 
-#: src/gedit-file-selector-util.c:105
-#, fuzzy
+#: src/gedit-file-selector-util.c:122
 msgid "Do_n't replace"
-msgstr "Cserél"
+msgstr "_Ne cserélje"
 
-#: src/gedit-file-selector-util.c:459
-#, fuzzy
+#: src/gedit-file-selector-util.c:502
 msgid "Select a filename to save"
-msgstr "Válaszd ki a telepítendő plugin-okat"
+msgstr "Válaszd ki a mentendő fájlnevet"
 
-#: src/gedit-mdi.c:766
+#: src/gedit-file.c:150
+msgid "Open File ..."
+msgstr "Fájl megnyitása..."
+
+#: src/gedit-file.c:176 src/gedit-file.c:811
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "%s fájl betöltve"
+
+#: src/gedit-file.c:304 src/gedit-file.c:420
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "'%s' mentése..."
+
+#: src/gedit-file.c:325 src/gedit-file.c:435
+msgid "The document has not been saved."
+msgstr "A dokumentum nincs elmentve."
+
+#: src/gedit-file.c:338 src/gedit-file.c:432
+#, c-format
+msgid "File '%s' saved."
+msgstr "'%s' mentése sikerült."
+
+#: src/gedit-file.c:399
+msgid "Save as ..."
+msgstr "Mentés másként..."
+
+#: src/gedit-file.c:606
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "'%s' fájl visszaállítása..."
+
+#: src/gedit-file.c:619
+msgid "The document has not been reverted."
+msgstr "A dokumentum nincs visszaállítva."
+
+#: src/gedit-file.c:629
+#, c-format
+msgid "File '%s' reverted."
+msgstr "'%s' visszaállítása sikerült."
+
+#: src/gedit-file.c:655
+#, c-format
+msgid "Loading %d files..."
+msgstr "%d fájl betöltése..."
+
+#: src/gedit-file.c:687
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "A \"%s'' fájl nem létezik. Létrehozzam?"
+
+#: src/gedit-file.c:746
+#, c-format
+msgid "Loaded %i files"
+msgstr "%i fájl betöltve"
+
+#: src/gedit-file.c:869
+msgid "Could not read data from stdin."
+msgstr "Nem tudom adatokat olvasni az stdin-ről."
+
+#: src/gedit-mdi.c:840
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"El akarod menteni a \"%s\" fájlban történt változtatásokat?\n"
+"\n"
+"Ha nem mented el, a változtatások elvesznek."
 
-#: src/gedit-mdi.c:771
+#: src/gedit-mdi.c:845
 msgid "Do_n't save"
-msgstr ""
+msgstr "_Nem menti"
 
-#: src/gedit-mdi.c:790
+#: src/gedit-mdi.c:864
 msgid "_Don't quit"
-msgstr ""
+msgstr "_Ne lépjen ki."
 
-#: src/gedit-mdi.c:794
+#: src/gedit-mdi.c:868
 msgid "_Don't close"
-msgstr ""
+msgstr "_Ne zárja be"
 
-#: src/gedit-mdi.c:881
+#: src/gedit-mdi.c:958
 msgid "(modified)"
 msgstr "(változott)"
 
-#: src/gedit-mdi.c:887
+#: src/gedit-mdi.c:964
 msgid "(readonly)"
 msgstr "(csak olvasható)"
 
 #: src/gedit-plugins-engine.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "Error, unable to open module file '%s'\n"
-msgstr "hiba, nem tudom a %s modul fájlt megnyitni"
+msgstr "Hiba, nem tudom a %s modulfájlt megnyitni\n"
 
 #: src/gedit-plugins-engine.c:174
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr "hiba, a plugin nem tartalmazza az init_plugin fügvényt."
+msgstr "Hiba, a '%s' bővítmény nem tartalmazza az init függvényt."
 
 #: src/gedit-plugins-engine.c:184
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "hiba, a plugin nem tartalmazza az init_plugin fügvényt."
+msgstr "Hiba, a '%s' bővítmény nem tartalmazza az activate függvényt."
 
 #: src/gedit-plugins-engine.c:194
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "hiba, a plugin nem tartalmazza az init_plugin fügvényt."
+msgstr "Hiba, a '%s' bővítmény nem tartalmazza az deactivate függvényt."
 
 #: src/gedit-plugins-engine.c:224
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Hiba, lehetetlen a '%s' bővítmény indítása"
 
 #: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Hiba, '%s' bővítmény nem adott meg nevet."
 
 #: src/gedit-plugins-engine.c:312
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr ""
+msgstr "Hiba, lehetetlen a '%s' bővítmény beállításait menteni"
 
 #: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Hiba, lehetetlen a '%s' bővítményt bekapcsolni"
 
 #: src/gedit-plugins-engine.c:411
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Hiba, lehetetlen a '%s' bővítményt kikapcsolni"
 
-#: src/gedit-plugins-engine.c:483
+#: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Hiba, lehetetlen a '%s' bővítmény ui-ját frissíteni"
 
-#: src/gedit-print.c:166
+#: src/gedit-prefs-manager.c:323
+msgid "Cannot initialize preferences manager."
+msgstr "Nem tudom indítani a beállításkezelőt."
+
+#: src/gedit-prefs-manager.c:1589
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "A %s kulcs várt `%s' értéke helyett a jelenlegi érték `%s'"
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
-msgstr ""
+msgstr "A gedit nem tud nyomtatni, mert nem található egy szükséges betűtípus."
 
-#: src/gedit-print.c:273
-#, fuzzy
-msgid "gedit - Print Document"
-msgstr "Dokumentumok nyomtatása"
-
-#: src/gedit-print.c:338
-#, fuzzy, c-format
+#: src/gedit-print.c:377
+#, c-format
 msgid "File: %s"
-msgstr "_Fájl"
+msgstr "Fájl: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
-#, fuzzy, c-format
+#: src/gedit-print.c:384
+#, c-format
 msgid "Page: %d"
-msgstr "Oldal: %i/%i"
+msgstr "%d. oldal"
 
-#: src/gedit-print.c:476
-#, fuzzy
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
-msgstr "gedit: Nyomtatási kép\n"
+msgstr "gedit - Nyomtatási kép"
 
-#: src/gedit-print.c:552
-#, fuzzy, c-format
+#: src/gedit-print.c:591
+#, c-format
 msgid ""
 "An error occurred while printing.\n"
 "\n"
 "%s,"
 msgstr ""
-"Hiba történt a következő fájl olvasásakor:\n"
+"Hiba történt nyomtatás közben.\n"
 "\n"
-"%s"
-
-#: src/gedit-recent.c:486
-#, fuzzy, c-format
-msgid "Open %s"
-msgstr "Fájl megnyitása"
+"%s,"
 
 #: src/gedit-ui.xml.h:1
-#, fuzzy
 msgid "About this application"
-msgstr "Kivágja a kijelölt részt"
+msgstr "Az alkalmazás névjegye"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr ""
+msgid "C_ustomize Statusbar"
+msgstr "Állapotsor _beállítása"
 
 #: src/gedit-ui.xml.h:3
-#, fuzzy
-msgid "Add/Remove plugins"
-msgstr "Telepített plugin-okat hozzáad/eltávolít"
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "Az állapotsor megjelenítésének módosítása a jelenlegi ablakban"
 
 #: src/gedit-ui.xml.h:4
-msgid "C_ustomize Status Bar"
-msgstr ""
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "Az eszköztárak megjelenítésének módosítása a jelenlegi ablakban"
 
 #: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the status bar in the current window"
-msgstr ""
+msgid "Clos_e All"
+msgstr "Mindent _bezár"
 
 #: src/gedit-ui.xml.h:6
-msgid "Change the visibility of the toolbar in the current window"
-msgstr ""
+msgid "Close"
+msgstr "Bezárás"
 
 #: src/gedit-ui.xml.h:7
-#, fuzzy
-msgid "Clos_e All"
-msgstr "Mindent bezár"
-
-#: src/gedit-ui.xml.h:8
-msgid "Close"
-msgstr "Bezár"
-
-#: src/gedit-ui.xml.h:9
-#, fuzzy
 msgid "Close All"
 msgstr "Mindent bezár"
 
-#: src/gedit-ui.xml.h:10
-#, fuzzy
+#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
-msgstr "Minden nyitott fájl bezárása"
+msgstr "Minden megnyitott fájl bezárása"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:9
 msgid "Close the current file"
 msgstr "Az aktuális fájl bezárása"
 
-#: src/gedit-ui.xml.h:12
-#, fuzzy
+#: src/gedit-ui.xml.h:10
 msgid "Configure the application"
-msgstr "Kivágja a kijelölt részt"
+msgstr "Alkalmazás beállítása"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Tartalom"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:11
 msgid "Copy"
-msgstr "Másol"
+msgstr "Másolás"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
 msgstr "Másolja a kijelölt részt"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:13
 msgid "Create a new document"
 msgstr "Egy új dokumentum készítése"
 
-#: src/gedit-ui.xml.h:17
-#, fuzzy
+#: src/gedit-ui.xml.h:14
 msgid "Cu_t"
-msgstr "Kivág"
+msgstr "_Kivágás"
+
+#: src/gedit-ui.xml.h:15
+msgid "Customize"
+msgstr "Testreszabás"
+
+#: src/gedit-ui.xml.h:16
+msgid "Customize toolbars"
+msgstr "Eszköztárak testreszabása"
+
+#: src/gedit-ui.xml.h:17
+msgid "Cut"
+msgstr "Kivágás"
 
 #: src/gedit-ui.xml.h:18
-msgid "Customize"
-msgstr ""
-
-#: src/gedit-ui.xml.h:19
-msgid "Customize toolbars"
-msgstr ""
-
-#: src/gedit-ui.xml.h:20
-msgid "Cut"
-msgstr "Kivág"
-
-#: src/gedit-ui.xml.h:21
 msgid "Cut the selection"
 msgstr "Kivágja a kijelölt részt"
 
-#: src/gedit-ui.xml.h:22
-#, fuzzy
-msgid "Delete the selected text"
-msgstr "Kivágja a kijelölt részt"
+#: src/gedit-ui.xml.h:19
+msgid "Delete"
+msgstr "Törlés"
 
-#: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr ""
+#: src/gedit-ui.xml.h:20
+msgid "Delete the selected text"
+msgstr "A kiválasztott szöveg törlése"
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr "XML dump készítése"
+
+#: src/gedit-ui.xml.h:22
+msgid "Dump the UI Xml description"
+msgstr "UI Xml leírás dump készítése"
 
 #: src/gedit-ui.xml.h:24
-msgid "Dump XML"
-msgstr ""
+msgid "Find Again"
+msgstr "Következő keresése"
 
 #: src/gedit-ui.xml.h:25
-msgid "Dump the UI Xml description"
-msgstr ""
-
-#: src/gedit-ui.xml.h:27
-msgid "Find Again"
-msgstr ""
-
-#: src/gedit-ui.xml.h:28
-#, fuzzy
 msgid "Find Ne_xt"
-msgstr "Következő találat"
+msgstr "_Következő találat"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:26
 msgid "Go to a specific line number"
 msgstr "Megadott számú sorra ugrik"
 
-#: src/gedit-ui.xml.h:30
-#, fuzzy
+#: src/gedit-ui.xml.h:27
 msgid "Goto _Line"
-msgstr "Sorra ugrás"
+msgstr "Ugrás _sorra"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
-msgstr ""
+msgstr "_Szöveg és ikon"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:29
 msgid "Main toolbar"
-msgstr ""
+msgstr "Fő eszköztár"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:30
 msgid "New"
 msgstr "Új"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:31
 msgid "Only show icons in the toolbar"
-msgstr ""
+msgstr "Csak ikonok megjelenítése az eszköztárakban"
+
+#: src/gedit-ui.xml.h:32
+msgid "Open"
+msgstr "Megnyitás"
+
+#: src/gedit-ui.xml.h:33
+msgid "Open Location..."
+msgstr "Hely megnyitása..."
+
+#: src/gedit-ui.xml.h:34
+msgid "Open _Location..."
+msgstr "_Hely megnyitása..."
 
 #: src/gedit-ui.xml.h:35
-msgid "Open"
-msgstr "Megnyit"
-
-#: src/gedit-ui.xml.h:36
-#, fuzzy
-msgid "Open Location..."
-msgstr "Fájl megnyitás..."
-
-#: src/gedit-ui.xml.h:37
-#, fuzzy
-msgid "Open _Location..."
-msgstr "Fájl megnyitás..."
-
-#: src/gedit-ui.xml.h:38
-#, fuzzy
 msgid "Open a file"
 msgstr "Fájl megnyitása"
 
-#: src/gedit-ui.xml.h:39
-#, fuzzy
+#: src/gedit-ui.xml.h:36
 msgid "Open a file from a specified location"
-msgstr "Megadott URI-ről nyitja meg a fájlt"
+msgstr "Megadott helyről nyitja meg a fájlt"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:37
 msgid "Open the gedit manual"
-msgstr ""
+msgstr "A gedit felhasználói kézikönyvének megnyitása"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:38
 msgid "Paste"
-msgstr "Beszúr"
+msgstr "Beszúrás"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
 msgstr "Beszúrja a vágólap tartalmát"
 
-#: src/gedit-ui.xml.h:43
-#, fuzzy
+#: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
-msgstr "gedit: Beállítások"
+msgstr "_Beállítások"
+
+#: src/gedit-ui.xml.h:43
+msgid "Print Previe_w"
+msgstr "Nyomtatási _kép"
+
+#: src/gedit-ui.xml.h:44
+msgid "Print Preview"
+msgstr "Nyomtatási kép"
+
+#: src/gedit-ui.xml.h:45
+msgid "Print Setup"
+msgstr "Nyomtatás beállítása"
 
 #: src/gedit-ui.xml.h:46
-#, fuzzy
-msgid "Print Previe_w"
-msgstr "Nomtatási kép"
-
-#: src/gedit-ui.xml.h:47
-#, fuzzy
-msgid "Print Preview"
-msgstr "Nomtatási kép"
-
-#: src/gedit-ui.xml.h:48
-#, fuzzy
-msgid "Print Setup"
-msgstr "Dokumentumok nyomtatása"
-
-#: src/gedit-ui.xml.h:49
 msgid "Print preview"
 msgstr "Nomtatási kép"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:47
 msgid "Print the current file"
 msgstr "Az aktuális fájl nyomtatása"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:48
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
 
-#: src/gedit-ui.xml.h:52
-#, fuzzy
+#: src/gedit-ui.xml.h:49
 msgid "Quit the program"
 msgstr "Kilép a programból"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:50
 msgid "Recent _Files"
-msgstr ""
+msgstr "Legutóbbi _fájlok"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:51
 msgid "Redo"
 msgstr "Újra"
 
-#: src/gedit-ui.xml.h:55
-#, fuzzy
+#: src/gedit-ui.xml.h:52
 msgid "Redo the undone action"
-msgstr "Utolsó visszavonást semlegesíti"
+msgstr "Utolsó visszavonás semlegesítése"
+
+#: src/gedit-ui.xml.h:54
+msgid "Replace a string"
+msgstr "Karakterlánc cseréje"
+
+#: src/gedit-ui.xml.h:55
+msgid "Revert"
+msgstr "Visszaállítás"
+
+#: src/gedit-ui.xml.h:56
+msgid "Revert to a saved version of the file"
+msgstr "A fájl mentett verziójának visszaállítása"
 
 #: src/gedit-ui.xml.h:57
-#, fuzzy
-msgid "Replace a string"
-msgstr "Karakterlánc keresése"
-
-#: src/gedit-ui.xml.h:58
-#, fuzzy
-msgid "Revert"
-msgstr "Visszaállít"
+msgid "Sa_ve All"
+msgstr "Mindent _ment"
 
 #: src/gedit-ui.xml.h:59
-msgid "Revert to a saved version of the file"
-msgstr ""
-
-#: src/gedit-ui.xml.h:60
-#, fuzzy
-msgid "Sa_ve All"
-msgstr "Mindent ment"
-
-#: src/gedit-ui.xml.h:62
-#, fuzzy
 msgid "Save All"
 msgstr "Mindent ment"
 
-#: src/gedit-ui.xml.h:63
-#, fuzzy
+#: src/gedit-ui.xml.h:60
 msgid "Save As"
-msgstr "Mentés másként.."
+msgstr "Mentés másként"
 
-#: src/gedit-ui.xml.h:64
-#, fuzzy
+#: src/gedit-ui.xml.h:61
 msgid "Save _As..."
-msgstr "Mentés másként.."
+msgstr "Mentés _másként"
 
-#: src/gedit-ui.xml.h:65
-#, fuzzy
+#: src/gedit-ui.xml.h:62
 msgid "Save all open files"
 msgstr "Minden megnyitott fájl mentése"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:63
 msgid "Save the current file"
 msgstr "Aktuális fájl mentése"
 
-#: src/gedit-ui.xml.h:67
-#, fuzzy
+#: src/gedit-ui.xml.h:64
 msgid "Save the current file with a different name"
-msgstr "Aktuális fájl mentése"
+msgstr "Aktuális fájl mentése más néven"
 
-#: src/gedit-ui.xml.h:68
-#, fuzzy
+#: src/gedit-ui.xml.h:65
 msgid "Search again for the same string"
-msgstr "Karakterlánc keresése"
+msgstr "Keresse újra ugyanazt a karakterláncot"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:66
 msgid "Search for a string"
 msgstr "Karakterlánc keresése"
 
-#: src/gedit-ui.xml.h:70
-#, fuzzy
+#: src/gedit-ui.xml.h:67
 msgid "Select All"
-msgstr "Mindent cserél"
+msgstr "Mindent kijelöl"
+
+#: src/gedit-ui.xml.h:68
+msgid "Select _All"
+msgstr "_Mindent kijelöl"
+
+#: src/gedit-ui.xml.h:69
+msgid "Select the entire document"
+msgstr "Teljes dokumentum kijelölése"
+
+#: src/gedit-ui.xml.h:70
+msgid "Set toolbar button style according to desktop default"
+msgstr "Eszköztár beállítása az asztal alapértelmezett beállításai alapján"
 
 #: src/gedit-ui.xml.h:71
-#, fuzzy
-msgid "Select _All"
-msgstr "Mindent cserél"
+msgid "Setup the page settings for your current printer"
+msgstr "Az oldalak beállítása a jelenlegi nyomtatódhoz."
 
 #: src/gedit-ui.xml.h:72
-#, fuzzy
-msgid "Select the entire document"
-msgstr "Küldd el az aktuális dokumentumot"
+msgid "Show _Cursor Position"
+msgstr "_Kurzorpozíció megejelenítése"
 
 #: src/gedit-ui.xml.h:73
-#, fuzzy
-msgid "Set toolbar button style according to desktop default"
-msgstr "Eszközsor beállítása a rendszerbeállítások alapján"
+msgid "Show _Overwrite Mode"
+msgstr "Mutassa az _átírás módját"
 
 #: src/gedit-ui.xml.h:74
-msgid "Setup the page settings for your current printer"
-msgstr ""
+msgid "Show cursor position in the statusbar"
+msgstr "Mutassa a kurzor pozícióját az állapotsoron"
 
 #: src/gedit-ui.xml.h:75
-#, fuzzy
-msgid "Show _Cursor Position"
-msgstr "_kurzor pozíciótól keres"
-
-#: src/gedit-ui.xml.h:76
-msgid "Show _Overwrite Mode"
-msgstr ""
+msgid "Show overwrite mode in the statusbar"
+msgstr "Mutassa a BESZÚR/ÁTÍR állapotát az állapotsoron"
 
 #: src/gedit-ui.xml.h:77
-#, fuzzy
-msgid "Show _Tooltips"
-msgstr "_Címzett:"
+msgid "Undo the last action"
+msgstr "Utolsó művelet visszavonása"
 
 #: src/gedit-ui.xml.h:78
-msgid "Show cursor position in the statusbar"
-msgstr ""
+msgid "_About"
+msgstr "_Névjegy"
 
 #: src/gedit-ui.xml.h:79
-msgid "Show overwrite mode in the statusbar"
-msgstr ""
+msgid "_Close"
+msgstr "_Bezárás"
 
 #: src/gedit-ui.xml.h:80
-msgid "Show tooltips in the toolbar"
-msgstr ""
+msgid "_Contents"
+msgstr "_Tartalom"
+
+#: src/gedit-ui.xml.h:81
+msgid "_Copy"
+msgstr "_Másolás"
 
 #: src/gedit-ui.xml.h:82
-#, fuzzy
-msgid "Undo the last action"
-msgstr "Utolsó műveletet visszavonja"
+msgid "_Customize Toolbar"
+msgstr "Eszköztárak _testreszabása"
 
 #: src/gedit-ui.xml.h:83
-msgid "_About..."
-msgstr ""
+msgid "_Debug"
+msgstr "_Hibakeresés"
 
 #: src/gedit-ui.xml.h:84
-#, fuzzy
-msgid "_Close"
-msgstr "Bezár"
+msgid "_Delete"
+msgstr "_Törlés"
 
 #: src/gedit-ui.xml.h:85
-#, fuzzy
-msgid "_Contents"
-msgstr "Tartalom"
+msgid "_Desktop Default"
+msgstr "_Asztal alapértelmezett"
 
 #: src/gedit-ui.xml.h:86
-#, fuzzy
-msgid "_Copy"
-msgstr "Másol"
-
-#: src/gedit-ui.xml.h:87
-msgid "_Customize Toolbar"
-msgstr ""
-
-#: src/gedit-ui.xml.h:88
-msgid "_Debug"
-msgstr ""
-
-#: src/gedit-ui.xml.h:89
-msgid "_Delete"
-msgstr ""
-
-#: src/gedit-ui.xml.h:90
-#, fuzzy
-msgid "_Desktop Default"
-msgstr "Alapértelmezett betűkészlet: "
-
-#: src/gedit-ui.xml.h:91
 msgid "_Documents"
 msgstr "_Dokumentumok"
 
-#: src/gedit-ui.xml.h:92
-#, fuzzy
+#: src/gedit-ui.xml.h:87
 msgid "_Edit"
-msgstr "Kilép"
+msgstr "S_zerkesztés"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:88
 msgid "_File"
 msgstr "_Fájl"
 
-#: src/gedit-ui.xml.h:94
-#, fuzzy
+#: src/gedit-ui.xml.h:89
 msgid "_Find"
-msgstr "Keres"
+msgstr "_Keresés"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:90
 msgid "_Help"
-msgstr ""
+msgstr "_Súgó"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:91
+msgid "_Icon"
+msgstr "_Ikon"
+
+#: src/gedit-ui.xml.h:92
 msgid "_New"
 msgstr "Ú_j"
 
-#: src/gedit-ui.xml.h:98
-#, fuzzy
+#: src/gedit-ui.xml.h:93
 msgid "_Open..."
-msgstr "Megnyit"
+msgstr "_Megnyitás..."
+
+#: src/gedit-ui.xml.h:94
+msgid "_Paste"
+msgstr "_Beszúrás"
+
+#: src/gedit-ui.xml.h:95
+msgid "_Print..."
+msgstr "_Nyomtatás..."
+
+#: src/gedit-ui.xml.h:96
+msgid "_Quit"
+msgstr "_Kilépés"
+
+#: src/gedit-ui.xml.h:97
+msgid "_Redo"
+msgstr "Új_ra"
 
 #: src/gedit-ui.xml.h:99
-#, fuzzy
-msgid "_Paste"
-msgstr "Beszúr"
+msgid "_Revert"
+msgstr "_Visszaállítás"
 
 #: src/gedit-ui.xml.h:100
-#, fuzzy
-msgid "_Plugin Manager"
-msgstr "gedit Plugin Manager"
+msgid "_Save"
+msgstr "_Mentés"
 
 #: src/gedit-ui.xml.h:101
-#, fuzzy
-msgid "_Plugin Manager..."
-msgstr "gedit Plugin Manager"
+msgid "_Search"
+msgstr "_Keresés"
 
 #: src/gedit-ui.xml.h:102
-#, fuzzy
-msgid "_Print..."
-msgstr "Nyomtat"
+msgid "_Statusbar"
+msgstr "Á_llapotsor"
 
 #: src/gedit-ui.xml.h:103
-#, fuzzy
-msgid "_Quit"
-msgstr "Kivág"
+msgid "_Toolbar"
+msgstr "_Eszköztár"
 
 #: src/gedit-ui.xml.h:104
-#, fuzzy
-msgid "_Redo"
-msgstr "Újra"
+msgid "_Tools"
+msgstr "_Eszközök"
+
+#: src/gedit-ui.xml.h:105
+msgid "_Undo"
+msgstr "_Visszavonás"
 
 #: src/gedit-ui.xml.h:106
-#, fuzzy
-msgid "_Revert"
-msgstr "Visszaállít"
-
-#: src/gedit-ui.xml.h:107
-#, fuzzy
-msgid "_Save"
-msgstr "Ment"
-
-#: src/gedit-ui.xml.h:108
-#, fuzzy
-msgid "_Search"
-msgstr "Keresés"
-
-#: src/gedit-ui.xml.h:109
-#, fuzzy
-msgid "_Status Bar"
-msgstr "Státuszsor mutatása"
-
-#: src/gedit-ui.xml.h:110
-#, fuzzy
-msgid "_Toolbar"
-msgstr "_Címzett:"
-
-#: src/gedit-ui.xml.h:111
-#, fuzzy
-msgid "_Tools"
-msgstr "_Címzett:"
-
-#: src/gedit-ui.xml.h:112
-#, fuzzy
-msgid "_Undo"
-msgstr "Visszanon"
-
-#: src/gedit-ui.xml.h:113
-#, fuzzy
 msgid "_View"
-msgstr "_Nézet hozzáadása"
+msgstr "_Nézet"
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:792
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nem található a \"%s\" fájlt.\n"
+"\n"
+"Ellenőrizd, hogy a helyét pontosan írtad be, és próbáld újra."
 
-#: src/gedit-utils.c:847
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr ""
+"Nem lehet a \"%s\" fájlt megnyitni, mert olvashatatlan adatokat tartalmaz."
 
-#: src/gedit-utils.c:858
+#: src/gedit-utils.c:810
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Nem lehet a \"%s\" fájlt megnyitni, mert a gedit nem támogatja a %s: típusú "
+"helyeket."
 
-#: src/gedit-utils.c:866
-#, fuzzy, c-format
+#: src/gedit-utils.c:816
+#, c-format
 msgid "Could not open the file \"%s\""
-msgstr "Nem tudom az előző fájlt megnyitni: %s"
+msgstr "Nem tudom megnyitni a \"%s\" fájlt"
 
-#: src/gedit-utils.c:873
+#: src/gedit-utils.c:826
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
+"Nem tudom a \"%s\" fájlt megnyitni, mert érvénytelen formátumú adatokat "
+"tartalmaz."
 
-#: src/gedit-utils.c:880
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Nem tudom a \"%s\" fájlt visszaállítani, mert túl nagy."
 
-#: src/gedit-utils.c:887
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" nem létező hely.\n"
+"\n"
+"Kérlek ellenőrizd, hogy jól írtad-e be a helyet és próbálkozz újra."
 
-#: src/gedit-utils.c:894
+#: src/gedit-utils.c:847
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Nem tudom a \"%s\" fájlt megnyitni jogosultsági problémák miatt."
 
-#: src/gedit-utils.c:901
+#: src/gedit-utils.c:854
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because there are too many open files\n"
+"Could not open the file \"%s\" because there are too many open files.\n"
 "\n"
-".Please, close some open file and try again."
+"Please, close some open file and try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt megnyitni, mert túl sok a nyitott fájl.\n"
+"\n"
+"Zárj be néhány nyitott fájlt és próbáld újra."
 
-#: src/gedit-utils.c:909
+#: src/gedit-utils.c:862
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" egy könyvtár.\n"
+"\n"
+"Kérlek ellenőrizd, hogy jól írtad-e be a helyet és próbálkozz újra."
 
-#: src/gedit-utils.c:916
+#: src/gedit-utils.c:869
 #, c-format
 msgid ""
-"Not enough available memory to open the file \"%s\".Please, close some "
+"Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Nincs elég memória a \"%s\" fájl megnyitásához. Zárj be néhány futó "
+"alkalmazást és próbáld újra."
 
-#: src/gedit-utils.c:929
+#: src/gedit-utils.c:895
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found. \n"
+"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again"
+"settings are correct and then try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt megnyitni, mert a \"%s\" nevű gépet nem találom.\n"
+"\n"
+"Ellenőrizd a proxybeállításaidat és próbáld újra."
 
-#: src/gedit-utils.c:942
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nem tudom megnyitni a \"%s\" fájlt, mert a megadott gépnév érvénytelen.\n"
+"\n"
+"Ellenőrizd, hogy jól írtad-e be a helyet és próbáld újra."
 
-#: src/gedit-utils.c:949
+#: src/gedit-utils.c:917
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nem tudom megnyitni a \"%s\" fájlt, mert a megadott gépnév üres.\n"
+"\n"
+"Ellenőrizd a proxybeállításaidat és próbáld újra."
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt megnyitni mert a belépés nem sikerült.\n"
+"\n"
+"Ellenőrizd, hogy helyesen írtad-e be a helyet és próbáld újra."
 
-#: src/gedit-utils.c:964
+#: src/gedit-utils.c:932
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
+"Nem tudom a \"%s\" fájlt megnyitni, mert érvénytelen UTF-8 adatokat "
+"tartalmaz.\n"
+"\n"
+"Valószínűleg egy bináris fájlt próbálsz megnyitni."
 
-#: src/gedit-utils.c:1002
-#, fuzzy, c-format
+#: src/gedit-utils.c:970
+#, c-format
 msgid "Could not open the file \"%s\"."
-msgstr "Nem tudtam a szükséges memóriát allokálni."
+msgstr "Nem tudom megnyitni a \"%s\" fájlt."
 
-#: src/gedit-utils.c:1053
-#, fuzzy, c-format
+#: src/gedit-utils.c:1021
+#, c-format
 msgid "Could not save the file \"%s\"."
-msgstr "Nem tudtam a szükséges memóriát allokálni."
+msgstr "Nem sikerült a \"%s\" fájlt elmenteni."
 
-#: src/gedit-utils.c:1057
-#, fuzzy, c-format
+#: src/gedit-utils.c:1025
+#, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
 "\n"
 "%s"
 msgstr ""
-"Hiba történt a következő fájl bezárásakor:\n"
+"Hiba történt a \"%s\" fájl mentésekor.\n"
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1110
+#: src/gedit-utils.c:1078
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
 "\n"
 "Perhaps, it has recently been deleted."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert a gedit nem találja.\n"
+"\n"
+"Valószínűleg mostanában le lett törölve."
 
-#: src/gedit-utils.c:1117
+#: src/gedit-utils.c:1085
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert olvashatatlan adatokat "
+"tartalmaz."
 
-#: src/gedit-utils.c:1128
+#: src/gedit-utils.c:1096
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert a gedit nem támogatja a %s: "
+"típusú helyeket."
 
-#: src/gedit-utils.c:1136
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\""
-msgstr ""
-"Hiba történt a következő fájl olvasásakor:\n"
-"\n"
-"%s"
+#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
+#, c-format
+msgid "Could not revert the file \"%s\"."
+msgstr "Hiba történt a \"%s\" fájl visszaállításakor."
 
-#: src/gedit-utils.c:1143
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert érvénytelen formátumú adatokat "
+"tartalmaz."
 
-#: src/gedit-utils.c:1150
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Nem tudom a \"%s\" fájlt visszaállítani, mert túl nagy."
 
-#: src/gedit-utils.c:1157
+#: src/gedit-utils.c:1126
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Nem tudom a \"%s\" fájlt visszaállítani jogosultsági problémák miatt."
 
-#: src/gedit-utils.c:1164
+#: src/gedit-utils.c:1133
 #, c-format
 msgid ""
-"Could not revert the file \"%s\" because there are too many open files\n"
+"Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
-".Please, close some open file and try again."
+"Please, close some open file and try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert túl sok a nyitott fájl.\n"
+"\n"
+"Zárj be néhány nyitott fájlt és próbáld újra."
 
-#: src/gedit-utils.c:1172
+#: src/gedit-utils.c:1141
 #, c-format
 msgid ""
-"Not enough available memory to revert the file \"%s\".Please, close some "
+"Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert elfogyott a memória. Kérlek "
+"zárj be néhány futó alkalmazást és próbáld újra."
 
-#: src/gedit-utils.c:1185
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found. \n"
+"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
-"Please, check that your proxy settings are correct and try again"
+"Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nem tudom a \"%s\" fájlt visszaállítani, mert a \"%s\" nevű gépet nem "
+"találom.\n"
+"\n"
+"Ellenőrizd a proxybeállításaidat és próbáld újra."
 
-#: src/gedit-utils.c:1197
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nem tudom visszaállítani a \"%s\" fájlt, mert a megadott gépnév üres.\n"
+"\n"
+"Ellenőrizd a proxybeállításaidat és próbáld újra."
 
-#: src/gedit-utils.c:1204
+#: src/gedit-utils.c:1188
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
+msgstr "Nem tudom a \"%s\" fájlt visszaállítani mert a belépés nem sikerült."
 
-#: src/gedit-utils.c:1211
+#: src/gedit-utils.c:1195
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
-
-#: src/gedit-utils.c:1220
-#, fuzzy
-msgid "It is not possible to revert an Untitled document."
-msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot\n"
-
-#: src/gedit-utils.c:1258
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr ""
-"Hiba történt a következő fájl olvasásakor:\n"
+"Nem tudom a \"%s\" fájlt visszaállítani, mert érvénytelen UTF-8 adatot "
+"tartalmaz.\n"
 "\n"
-"%s"
+"Lehetséges, hogy egy bináris fájlt próbálsz visszaállítani."
 
-#: src/gedit-view.c:878
+#: src/gedit-utils.c:1204
+msgid "It is not possible to revert an Untitled document."
+msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot"
+
+#: src/gedit-utils.c:1293
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "A \"%s\" nevű fájl már létezik."
+
+#: src/gedit-utils.c:1299
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" egy könyvtár.\n"
+"\n"
+"Kérlek ellenőrizd, hogy jól írtad-e be a helyet."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Nem tudom létrehozni a \"%s\" fájlt.\n"
+"\n"
+"Győződj meg róla, hogy a megadott elérési út létezik és hogy rendelkezel a "
+"szükséges jogosultságokkal."
+
+#: src/gedit-utils.c:1315
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Nem tudom létrehozni a \"%s\" fájlt.\n"
+"\n"
+"A fájlnév túl hosszú."
+
+#: src/gedit-utils.c:1322
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nem tudom létrehozni a \"%s\" fájlt.\n"
+"\n"
+"A fájlnévhez tartozó könyvtár nem létezik vagy hibás szimbolikus link."
+
+#: src/gedit-utils.c:1331
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Nincs elég hely a lemezen a \"%s\" fájl létrehozásához.\n"
+"\n"
+"Csinájl egy kis helyet a lemezen és próbáld újra."
+
+#: src/gedit-utils.c:1337
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Nem tudom létehozni a \"%s\" fájlt."
+
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
-msgstr ""
+msgstr "  %d. sor, %d. oszlop"
 
-#: src/gedit-view.c:916
+#: src/gedit-view.c:942
 msgid "  OVR"
-msgstr ""
+msgstr "  ÁTÍR"
 
-#: src/gedit-view.c:918
+#: src/gedit-view.c:944
 msgid "  INS"
-msgstr ""
+msgstr "  BESZÚR"
+
+#: src/gedit2.c:75
+msgid "Show mdi debugging messages."
+msgstr "Mutasd az mdi hibakereső üzeneteit."
+
+#: src/gedit2.c:78
+msgid "Show commands debugging messages."
+msgstr "Mutasd a parancsok hibakereső üzeneteit."
+
+#: src/gedit2.c:81
+msgid "Show document debugging messages."
+msgstr "Mutasd a dokumetumok hibakereső üzeneteit."
+
+#: src/gedit2.c:84
+msgid "Show file debugging messages."
+msgstr "Mutasd a fájl hibakereső őzeneteit."
+
+#: src/gedit2.c:87
+msgid "Show plugin debugging messages."
+msgstr "Mutasd a plugin-ok hibakereső üzeneteit."
+
+#: src/gedit2.c:90
+msgid "Show prefs debugging messages."
+msgstr "Mutasd a beállítások hibakereső üzeneteit."
+
+#: src/gedit2.c:93
+msgid "Show printing debugging messages."
+msgstr "Mutasd a nyomtatás hibakereső üzeneteit."
+
+#: src/gedit2.c:96
+msgid "Show search debugging messages."
+msgstr "Mutasd a keresés hibakereső üzeneteit."
+
+#: src/gedit2.c:99
+msgid "Show undo debugging messages."
+msgstr "Mutasd a visszavonás hibakereső üzeneteit."
+
+#: src/gedit2.c:102
+msgid "Show view debugging messages."
+msgstr "Mutasd a nézet hibakereső üzeneteit."
+
+#: src/gedit2.c:105
+msgid "Show recent debugging messages."
+msgstr "Mutasd a beállítások hibakereső üzeneteit."
+
+#: src/gedit2.c:108
+msgid "Show session management debugging messages."
+msgstr "Mutasd a munkafolyamat-kezelő hibakereső üzeneteit."
+
+#: src/gedit2.c:111
+msgid "Turn on all debugging messages."
+msgstr "Mutass minden hibakereső üzenetet"
+
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr "Egy létező gedit példány bezárása"
+
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Új felső szintű ablak létrehozása a gedit egy már futó példányában"
+
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Új dokumentum létrehozása egy már megnyitott gedit példányban"
+
+#: src/gnome-recent-view-bonobo.c:218
+#, c-format
+msgid "Open %s"
+msgstr "%s megnyitása"
+
+#, fuzzy
+#~ msgid "Plugin Manager"
+#~ msgstr "gedit Plugin Manager"
+
+#, fuzzy
+#~ msgid "Notebook _tab position:"
+#~ msgstr "Regiszterfül pozíciója: "
+
+#, fuzzy
+#~ msgid "Sho_w tooltips"
+#~ msgstr "_Címzett:"
+
+#, fuzzy
+#~ msgid "Show cursor _position"
+#~ msgstr "_kurzor pozíciótól keres"
+
+#, fuzzy
+#~ msgid "Top"
+#~ msgstr "Címzett:"
+
+#, fuzzy
+#~ msgid "_MDI Mode:"
+#~ msgstr "Mód:  "
+
+#, fuzzy
+#~ msgid "_Show toolbar"
+#~ msgstr "_Címzett:"
+
+#, fuzzy
+#~ msgid "level(s)"
+#~ msgstr " "
+
+#, fuzzy
+#~ msgid "Find Next"
+#~ msgstr "Következő találat"
+
+#, fuzzy
+#~ msgid "Replace All"
+#~ msgstr "Mindent cserél"
+
+#, fuzzy
+#~ msgid "The GNOME text editor"
+#~ msgstr "Szövegszerkesztő"
+
+#, fuzzy
+#~ msgid "gedit - Print Document"
+#~ msgstr "Dokumentumok nyomtatása"
+
+#, fuzzy
+#~ msgid "Add/Remove plugins"
+#~ msgstr "Telepített plugin-okat hozzáad/eltávolít"
+
+#~ msgid "Contents"
+#~ msgstr "Tartalom"
+
+#, fuzzy
+#~ msgid "Show _Tooltips"
+#~ msgstr "_Címzett:"
+
+#, fuzzy
+#~ msgid "_Plugin Manager"
+#~ msgstr "gedit Plugin Manager"
+
+#, fuzzy
+#~ msgid "_Plugin Manager..."
+#~ msgstr "gedit Plugin Manager"
+
+#, fuzzy
+#~ msgid "Could not revert the file \"%s\""
+#~ msgstr ""
+#~ "Hiba történt a következő fájl olvasásakor:\n"
+#~ "\n"
+#~ "%s"
 
 #, fuzzy
 #~ msgid "Loaded file %s"
@@ -2233,19 +2729,11 @@ msgstr ""
 #~ msgstr "Mindent ment"
 
 #, fuzzy
-#~ msgid "_Plugins manager"
-#~ msgstr "gedit Plugin Manager"
-
-#, fuzzy
 #~ msgid "_Preferences"
 #~ msgstr "gedit: Beállítások"
 
 #~ msgid "Save As..."
 #~ msgstr "Mentés másként.."
-
-#, fuzzy
-#~ msgid "Manager"
-#~ msgstr "Plugin kezelő"
 
 #, fuzzy
 #~ msgid "_Manager"
@@ -2296,9 +2784,6 @@ msgstr ""
 
 #~ msgid "Reverse"
 #~ msgstr "Fordított"
-
-#~ msgid "Reverse text"
-#~ msgstr "Megfordítja a szöveget"
 
 #, fuzzy
 #~ msgid "Sort a document."
@@ -2443,9 +2928,6 @@ msgstr ""
 #~ msgid "Paper"
 #~ msgstr "Papír"
 
-#~ msgid "Pick a Font"
-#~ msgstr "Válassz betűkészletet"
-
 #~ msgid "Printing"
 #~ msgstr "Nyomtatás"
 
@@ -2576,9 +3058,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Biztos, hogy minden változtatást el akarsz vetni?\n"
 #~ "(%s)"
-
-#~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
-#~ msgstr "A ``%s'' fájl nem létezik. Hozzam létre?"
 
 #~ msgid "Show window debugging messages."
 #~ msgstr "Mutatsd az ablak hibakereső üzeneteit."
@@ -2728,9 +3207,6 @@ msgstr ""
 #~ "Modal\n"
 #~ "Alapértelmezett\n"
 
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
 #~ msgid "File to use as body of message : "
 #~ msgstr "Ez a fájl legyen a levél törzse: "
 
@@ -2844,15 +3320,8 @@ msgstr ""
 #~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 #~ msgstr "gedit egy kicsi és könnyű szövegszerkesztő a GNOME/Gtk+-hoz"
 
-#~ msgid "Show splitscreen"
-#~ msgstr "Splitscreen mutatása"
-
 #~ msgid "Enable Wordwrap"
 #~ msgstr "Sortörés"
-
-#~ msgid ""
-#~ "Enable or disable the statusbar at the bottom of this application window."
-#~ msgstr "Az alkalmazás ablakának alján található státuszsor ki/bekapcsolása."
 
 #~ msgid "Get the current and total lines"
 #~ msgstr "Aktuális és összes sort kiírja"
