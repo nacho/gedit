@@ -41,6 +41,8 @@
 
 GList *window_list;
 extern GList *plugins;
+plugin_callback_struct pl_callbacks;
+
 
 void setup_callbacks( plugin_callback_struct *callbacks )
 {
@@ -236,9 +238,12 @@ int main (int argc, char **argv)
 	/* Init plugins... */
 	plugins = NULL;
 	
-	setup_callbacks (&callbacks);
+	setup_callbacks (&pl_callbacks);
 	
-	plugin_query_all (&callbacks);
+	/*plugin_query_all (&pl_callbacks);*/
+	/*custom_plugin_query_all ( "/usr/gnome/libexec/plugins", &pl_callbacks);*/
+	/*custom_plugin_query ( "/usr/gnome/libexec", "print-plugin", &pl_callbacks);*/
+	plugin_load_list();
       
 #ifdef WITH_GMODULE_PLUGINS
 	gE_Plugin_Query_All ();

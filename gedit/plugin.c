@@ -20,12 +20,18 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <gtk/gtk.h>
+#include <gnome.h>
 #include "plugin.h"
+
+GList *plugin_list = NULL;
+plugin_callback_struct pl_callbacks;
+
 
 /* static void process_command( plugin *plug, gchar *buffer, int length, gpointer data ); */
 /* static void *plugin_parse(plugin *plug); */
 static void
 process_command( plugin *plug, gchar *buffer, int length, gpointer data );
+plugin *custom_plugin_new_with_query( gchar *path, gchar *plugin_name, gboolean query );
 
 typedef struct
 {
@@ -39,6 +45,88 @@ typedef struct
 } partly_read;
 
 plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
+{
+	/* This function can just call the custom version, with PLUGINDIR as the path;
+	   as this is just what _this_ function does --Alex */
+	   
+	return custom_plugin_new_with_query ( PLUGINDIR, plugin_name, query );
+	
+/* Keep the function proper, in case we need to use it later..
+  int toline[2]; // Commands to the plugin. 
+  int fromline[2]; // Commands from the plugin. 
+  int dataline[2]; // Data to the plugin. 
+  plugin *new_plugin = g_new( plugin, 1 ); // The plugin.
+  
+  if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 )
+    {
+      g_free( new_plugin );
+      return 0;
+    }
+  new_plugin->pipe_to = toline[1];
+  new_plugin->pipe_from = fromline[0];
+  new_plugin->pipe_data = dataline[1];
+  new_plugin->name = g_strdup( strrchr( plugin_name, '/' ) ? strrchr( plugin_name, '/' ) + 1 : plugin_name );
+  new_plugin->pid = fork();
+  if ( new_plugin->pid == 0 )
+    {
+      // New process. 
+      char *argv[7];
+
+      close( new_plugin->pipe_to );
+      close( new_plugin->pipe_from );
+      close( new_plugin->pipe_data );
+      argv[0] = g_malloc0( 11 + strlen( new_plugin->name ) );
+      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
+      argv[1] = g_strdup( "-go" );
+      argv[2] = g_malloc0( 15 );
+      g_snprintf( argv[2], 15, "%d", toline[0] );
+      argv[3] = g_malloc0( 15 );
+      g_snprintf( argv[3], 15, "%d", fromline[1] );
+      argv[4] = g_malloc0( 15 );
+      g_snprintf( argv[4], 15, "%d", dataline[0] );
+      if ( query )
+	{
+	  argv[5] = g_strdup( "--query" );
+	  argv[6] = NULL;
+	}
+      else
+	argv[5] = NULL;
+      if ( *plugin_name != '/' )
+	{
+	  gchar *temp = plugin_name;
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
+	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	}
+      execv(plugin_name, argv);
+      // This is only reached if something goes wrong. 
+      _exit( 1 );
+    }
+  else if ( new_plugin->pid == -1 )
+    {
+      // Failure. 
+      g_free( new_plugin );
+      return 0;
+    }
+   // Success.
+
+  close( toline[0] );
+  close( fromline[1] );
+  close( dataline[0] );
+  return new_plugin;
+*/
+}
+
+plugin *plugin_new( gchar *plugin_name )
+{
+  return plugin_new_with_query( plugin_name, FALSE );
+}
+
+plugin *plugin_query( gchar *plugin_name )
+{
+  return plugin_new_with_query( plugin_name, TRUE );
+}
+
+plugin *custom_plugin_new_with_query( gchar *path, gchar *plugin_name, gboolean query )
 {
   int toline[2]; /* Commands to the plugin. */
   int fromline[2]; /* Commands from the plugin. */
@@ -82,8 +170,8 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
       if ( *plugin_name != '/' )
 	{
 	  gchar *temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
-	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
+	  sprintf( plugin_name, "%s/%s", path, temp );
 	}
       execv(plugin_name, argv);
       /* This is only reached if something goes wrong. */
@@ -103,17 +191,40 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
   return new_plugin;
 }
 
-plugin *plugin_new( gchar *plugin_name )
+plugin *custom_plugin_new( gchar *path, gchar *plugin_name )
 {
-  return plugin_new_with_query( plugin_name, FALSE );
+  return custom_plugin_new_with_query( path, plugin_name, FALSE );
 }
 
-plugin *plugin_query( gchar *plugin_name )
+void custom_plugin_query( gchar *path, gchar *plugin_name, plugin_callback_struct *callbacks )
 {
-  return plugin_new_with_query( plugin_name, TRUE );
+plugin *plug;
+plugin_list_data *pl_list;
+int i;
+
+  plug = custom_plugin_new_with_query( path, plugin_name, TRUE );
+  plug->callbacks = *callbacks;
+  
+#if 0 		
+	      plug->context = 0;
+	      pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
+#else
+	      plugin_get_all( plug, 1, process_command, NULL ); 
+	      plugin_send_int( plug, 0 );
+#endif
+
+	if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL)
+	  {
+	    g_print ("custom_plugin_query: Memory Allocation Error.\n");
+	    return;
+	  }
+	  
+	pl_list->name = g_strdup (plugin_name);
+	pl_list->location = g_strdup (path);
+	plugin_list = g_list_append (plugin_list, pl_list);
 }
 
-plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
+plugin *custom_plugin_new_with_param( gchar *path, gchar *plugin_name, int argc, gchar *arg[] )
 {
   int toline[2]; /* Commands to the plugin. */
   int fromline[2]; /* Commands from the plugin. */
@@ -156,8 +267,8 @@ plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
       if ( *plugin_name != '/' )
 	{
 	  gchar *temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
-	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
+	  sprintf( plugin_name, "%s/%s", path, temp );
 	}
       execv(plugin_name, argv);
       /* This is only reached if something goes wrong. */
@@ -177,8 +288,85 @@ plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
   return new_plugin;
 }
 
+plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
+{
+	/* This function can just call the custom version, with PLUGINDIR as the path;
+	   as this is just what _this_ function does --Alex */
+	   
+	return custom_plugin_new_with_param ( PLUGINDIR, plugin_name, argc, arg );
+	
+/* Keep the function proper, in case we need to use it later..
+  int toline[2]; // Commands to the plugin. 
+  int fromline[2]; // Commands from the plugin. 
+  int dataline[2]; // Data to the plugin. 
+  plugin *new_plugin = g_new( plugin, 1 ); // The plugin. 
+  
+  if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 )
+    {
+      g_free( new_plugin );
+      return 0;
+    }
+  new_plugin->pipe_to = toline[1];
+  new_plugin->pipe_from = fromline[0];
+  new_plugin->pipe_data = dataline[1];
+  new_plugin->name = g_strdup( strrchr( plugin_name, '/' ) ? strrchr( plugin_name, '/' ) + 1 : plugin_name );
+  new_plugin->pid = fork();
+  if ( new_plugin->pid == 0 )
+    {
+      // New process. 
+      char **argv = g_malloc0 ( sizeof(char *) * argc + 6 );
+      int i;
+
+      close( new_plugin->pipe_to );
+      close( new_plugin->pipe_from );
+      close( new_plugin->pipe_data );
+      argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
+      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
+      argv[1] = g_strdup( "-go" );
+      argv[2] = g_malloc0( 15 );
+      g_snprintf( argv[2], 15, "%d", toline[0] );
+      argv[3] = g_malloc0( 15 );
+      g_snprintf( argv[3], 15, "%d", fromline[1] );
+      argv[4] = g_malloc0( 15 );
+      g_snprintf( argv[4], 15, "%d", dataline[0] );
+      for( i = 0; i < argc; i++ )
+	{
+	  argv[i + 5] = arg[i];
+	}
+      argv[5+argc] = NULL;
+      if ( *plugin_name != '/' )
+	{
+	  gchar *temp = plugin_name;
+	  plugin_name = g_malloc0( strlen( temp ) + strlen( PLUGINDIR ) + 2 );
+	  sprintf( plugin_name, "%s/%s", PLUGINDIR, temp );
+	}
+      execv(plugin_name, argv);
+      // This is only reached if something goes wrong. 
+      _exit( 1 );
+    }
+  else if ( new_plugin->pid == -1 )
+    {
+      // Failure. 
+      g_free( new_plugin );
+      return 0;
+    }
+  // Success.
+
+  close( toline[0] );
+  close( fromline[1] );
+  close( dataline[0] );
+  return new_plugin;
+*/
+}
+
 void plugin_query_all( plugin_callback_struct *callbacks )
 {
+	/* This function can just call the custom version, with PLUGINDIR as the path;
+	   as this is just what _this_ function does --Alex */
+	   
+	  custom_plugin_query_all ( PLUGINDIR, callbacks );
+	
+/* Keep the function proper, in case we need to use it later..
   DIR *dir = opendir( PLUGINDIR );
   struct dirent *direntry;
   gchar *shortname;
@@ -207,8 +395,51 @@ void plugin_query_all( plugin_callback_struct *callbacks )
 	}
       closedir( dir );
     }
+*/
 }
 
+void custom_plugin_query_all( gchar *path, plugin_callback_struct *callbacks )
+{
+  DIR *dir = opendir( path );
+  struct dirent *direntry;
+  gchar *shortname;
+  plugin_list_data *pl_list;
+
+	  
+  if ( dir )
+    {
+      while ( ( direntry = readdir( dir ) ) )
+	{
+	  plugin *plug;
+	  if ( strrchr( direntry->d_name, '/' ) )
+	    shortname = strrchr( direntry->d_name, '/' ) + 1;
+	  else
+	    shortname = direntry->d_name;     
+	  if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
+	    {
+	      plug = plugin_query( direntry->d_name );
+	      plug->callbacks = *callbacks;
+#if 0 		
+	      plug->context = 0;
+	      pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
+#else
+	      plugin_get_all( plug, 1, process_command, NULL ); 
+	      plugin_send_int( plug, 0 );
+#endif
+		if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL)
+	 	  {
+	    		 g_print ("custom_plugin_query: Memory Allocation Error.\n");
+	   		 return;
+	 	  }
+
+		pl_list->name = g_strdup (direntry->d_name);
+		pl_list->location = g_strdup (path);
+		plugin_list = g_list_append (plugin_list, pl_list);
+	    }
+	}
+      closedir( dir );
+    }
+}
 
 void plugin_finish( plugin *the_plugin )
 {
@@ -1010,4 +1241,82 @@ process_command( plugin *plug, gchar *buffer, int length, gpointer data )
       g_free( state );
       plugin_get_all( plug, 1, process_command, NULL );
     }
+}
+
+/* New Gnome Config interface for Plugins.. */
+void plugin_load_list ()
+{
+  char *value;
+  char *location;
+  char *c, c2[20];
+  plugin_list_data *pl_list;
+  int i, i2;
+  
+  gnome_config_push_prefix ("/Editor_Plugins/Use/");
+  i = gnome_config_get_int ("Use");
+  if (!i)
+    {
+      g_print ("plugins_load_list: No Plugins list found..\nUsing defaults..\n");
+      plugin_query_all ( &pl_callbacks);
+      
+      plugin_save_list ();	/* Save the list of plugins now, in case the editor dies
+      					   and the list doesn't get saved... */
+      return;
+    }
+  
+  for (i2 = 0; i2 < i; i2++)
+     {
+       sprintf (c2, "%d_name", i2);
+       c = g_strdup (c2);
+       value = g_strdup (gnome_config_get_string (c));
+
+       sprintf (c2, "%d_location", i2);
+       c = g_strdup (c2);
+       location = g_strdup (gnome_config_get_string (c));
+       
+       custom_plugin_query (location, value, &pl_callbacks);
+     }
+
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
+}
+
+void plugin_save_list()
+{
+  char *value;
+  char *location;
+  char *c, c2[20];
+  plugin_list_data *plugins_data;
+  int i, i2;
+  
+  i2 = 0;
+  
+  for (i = 0; i < g_list_length (plugin_list); i++)
+     {
+       i2++;
+     }
+  
+  gnome_config_push_prefix ("/Editor_Plugins/Use/");
+  gnome_config_set_int ("Use", i2);
+  
+  for (i = 0; i < g_list_length (plugin_list); i++)
+     {
+       plugins_data = g_list_nth_data (plugin_list, i);
+       
+
+       value = g_strdup (plugins_data->name);
+       location = g_strdup (plugins_data->location);
+       
+       sprintf (c2, "%i_name", i);
+       c = g_strdup (c2);
+       gnome_config_set_string (c, value);
+       
+       sprintf (c2, "%i_location", i);
+       c = g_strdup (c2);
+       gnome_config_set_string (c, location);
+     }
+  
+  
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
 }

@@ -1,3 +1,31 @@
+1999-02-05  Alex Roberts  <bse@dial.pipex.com>
+
+	* plugin.[ch]: Added custom_* for plugins in places other
+	  than $PLUGINDIR..
+	
+	* plugin.[ch]: plugin_load_list() and plugin_save_list()... new functions.
+	  They load and save the list of plugins currently in use into the
+	  Editor_Plugins Gnome config file.. if there is no list, the default 
+	  plugins are loaded (from $PLUGINDIR)..
+
+	* plugin.h: Added plugin_list_data and plugin_list as Linked Lists
+	  for the plugins running, and their locations..
+	
+	* plugin.h: (extern plugin_callback_struct pl_callbacks): Added
+	  as a global setup of plugins callbacks (setup in gedit.c, 
+	  s/callbacks/pl_callbacks)... Whenever a new plugin is loaded, 
+	  pl_callbacks must be referenced; or new sets of callbacks could
+	  be setup in the application.
+	
+	* gE_prefs_box.c: Added Plugins section.. with a CList holding all the
+	  plugins loaded (via the Linked List setup above, from the custom_*
+	  functions in plugin.[ch])..
+	  Adding a plugin calls custom_plugin_query(..) which adds the plugin
+	  to the menu and adds it to the List of plugins..
+	
+	* All this code i have added, _should_ work in GO and GWP, as long as
+	  they use the same kind of plugin.[ch] interface...
+
 1999-02-04  Chris Lahey  <clahey@umich.edu>
 
 	* gedit.spec: Got this working.

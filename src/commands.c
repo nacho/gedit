@@ -852,7 +852,9 @@ file_quit_cb(GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 	g_assert(data != NULL);
-
+	
+	plugin_save_list();
+	
 	while (window_list) {
 		data->window = g_list_nth_data(window_list, 0);
 		window_close_cb(widget, data);

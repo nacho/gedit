@@ -21,7 +21,6 @@
 #include <config.h>
 #include <gnome.h>
 
-
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <time.h>
@@ -30,8 +29,7 @@
 #include "toolbar.h"
 #include "gE_prefs_box.h"
 #include "gE_document.h"
-
-
+#include "gE_plugin_api.h"
 
 typedef struct _gE_prefs_data {
 	GnomePropertyBox *pbox;
@@ -49,6 +47,11 @@ typedef struct _gE_prefs_data {
 	GtkWidget *wordwrap;
 	GtkWidget *split;
 	
+	/* Plugins Settings */
+	/* FIXME: Fix it! Damn you! */
+	GtkWidget *plugin_list;
+	GtkWidget *scroll_window;
+	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
 	
@@ -57,7 +60,8 @@ typedef struct _gE_prefs_data {
 } gE_prefs_data;
 
 static gE_prefs_data *prefs;
-
+GList *plugin_list;
+plugin_callback_struct pl_callbacks;
 
 void cancel()
 {
@@ -152,6 +156,8 @@ void get_prefs(gE_data *data)
   					   data->window->splitscreen);
 }
 
+/* General UI Stuff.. */
+
 static GtkWidget *general_page_new()
 {
   GtkWidget *main_vbox, *vbox, *frame, *hbox;
@@ -220,6 +226,10 @@ static GtkWidget *general_page_new()
   return main_vbox;
 }
 
+/* End of General Stuff.. */
+
+/* Print Stuf.. */
+
 static GtkWidget *print_page_new()
 {
   GtkWidget *main_vbox, *vbox, *frame, *hbox;
@@ -249,6 +259,10 @@ static GtkWidget *print_page_new()
   return main_vbox;
 }
 
+/* End of Print Stuff */
+
+
+/* Font Stuff... */
 
 void font_sel_ok (GtkWidget	*w, GtkWidget *fsel)
 {
@@ -354,7 +368,171 @@ static GtkWidget *font_page_new()
   return main_vbox;
 }
 
+/* End of Fonts Stuff... */
 
+
+/* Plugins Stuff... */
+
+static void plugins_fsel_ok (GtkWidget *w, GtkFileSelection *fs)
+{
+ gchar *clist_plugin [2];
+ 
+ plugin_callback_struct callbacks;
+	
+	clist_plugin [0] = g_strdup (g_basename (gtk_file_selection_get_filename (fs)));
+	clist_plugin [1] = g_strdup (g_dirname (gtk_file_selection_get_filename (fs)));
+	
+	custom_plugin_query ( clist_plugin[1], clist_plugin[0], &pl_callbacks);
+
+ 	gtk_clist_freeze (GTK_CLIST (prefs->plugin_list));
+ 	gtk_clist_append (GTK_CLIST (prefs->plugin_list), clist_plugin);
+ 	gtk_clist_thaw (GTK_CLIST (prefs->plugin_list));
+	
+	gtk_widget_destroy (GTK_WIDGET (fs));
+}
+
+static void plugins_clist_add (GtkWidget *w, gpointer data)
+{
+ GtkWidget *fsel;
+ 
+ 	fsel = gtk_file_selection_new ("Plugin Selector");
+ 	gtk_file_selection_hide_fileop_buttons (GTK_FILE_SELECTION (fsel));
+ 	
+ 	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (fsel)->ok_button),
+			  "clicked", GTK_SIGNAL_FUNC(plugins_fsel_ok),
+			  fsel);
+      	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (fsel)->cancel_button),
+				 "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy),
+				 GTK_OBJECT (fsel));
+	
+	gtk_widget_show (fsel);
+}
+
+static void plugins_clist_remove (GtkWidget *w, gpointer data)
+{
+  int i;
+  plugin_list_data *plugins_data;
+
+	/* FIXME: Needs to actually unload the plugin itself.. */
+
+  	for (i = 0; i < GTK_CLIST(data)->focus_row; i++);
+  	   
+  	   plugins_data = g_list_nth_data (plugin_list, i);
+  	   
+  	   plugin_list = g_list_remove (plugin_list, plugins_data);
+  	
+  	gtk_clist_remove (GTK_CLIST (data), GTK_CLIST (data)->focus_row);
+
+}
+
+static void plugins_clist_click_column (GtkCList *clist, gint column, gpointer data)
+{
+  if (column == 4)
+    gtk_clist_set_column_visibility (clist, column, FALSE);
+  else if (column == clist->sort_column)
+    {
+      if (clist->sort_type == GTK_SORT_ASCENDING)
+	clist->sort_type = GTK_SORT_DESCENDING;
+      else
+	clist->sort_type = GTK_SORT_ASCENDING;
+    }
+  else
+    gtk_clist_set_sort_column (clist, column);
+
+  gtk_clist_sort (clist);
+}
+
+static GtkWidget *plugins_page_new()
+{
+  GtkWidget *main_vbox, *vbox, *hbox, *frame, *box;
+  GtkWidget *label;
+  GtkWidget *button;
+  gchar clist_plugins_data [5][80];
+  gchar *clist_plugins [2];
+  plugin_list_data *plugins_data;
+  int i;
+  
+  static char *titles[] =
+  {
+    "Name", "Location"
+  };
+  
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("Available Plugins"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new(FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+  
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+  gtk_widget_show(hbox);
+  
+  
+  prefs->plugin_list = gtk_clist_new_with_titles (2, titles);
+  gtk_widget_show (prefs->plugin_list);
+
+  prefs->scroll_window = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (prefs->scroll_window),
+				      GTK_POLICY_AUTOMATIC, 
+				      GTK_POLICY_AUTOMATIC);
+  gtk_container_add (GTK_CONTAINER (prefs->scroll_window), prefs->plugin_list);
+
+  gtk_signal_connect (GTK_OBJECT (prefs->plugin_list), "click_column",
+			  (GtkSignalFunc) plugins_clist_click_column, (gpointer) prefs->plugin_list); 
+
+  box = gtk_vbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(box), 5);
+  gtk_box_pack_start(GTK_BOX(vbox), box, TRUE, TRUE, 0);
+  gtk_widget_show(box);
+  
+  gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 0, TRUE);
+  gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 1, TRUE);
+  
+  
+  for (i = 0; i < g_list_length (plugin_list); i++)
+     {
+       plugins_data = g_list_nth_data (plugin_list, i);
+       
+       /*
+       sprintf (clist_plugins[0], "%s", plugins_data->name);
+       sprintf (clist_plugins[1], "%s", plugins_data->location);
+       */
+       clist_plugins[0] = g_strdup (plugins_data->name);
+       clist_plugins[1] = g_strdup (plugins_data->location);
+       
+       gtk_clist_append (GTK_CLIST (prefs->plugin_list), clist_plugins);
+     }
+  
+  
+   gtk_container_set_border_width (GTK_CONTAINER (prefs->scroll_window), 5);
+   gtk_box_pack_start (GTK_BOX (box), prefs->scroll_window, TRUE, TRUE, 0);
+  
+  hbox = gtk_hbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (hbox), 10);
+  gtk_box_pack_start (GTK_BOX (box), hbox, FALSE, TRUE, 0);
+  gtk_widget_show (hbox);
+  
+  button = gtk_button_new_with_label ("Add");
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
+  gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      (GtkSignalFunc) plugins_clist_add, (gpointer) prefs->plugin_list);
+
+  button = gtk_button_new_with_label ("Remove");
+  gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 2);
+  gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                      (GtkSignalFunc) plugins_clist_remove, (gpointer) prefs->plugin_list);
+  
+  return main_vbox;
+}
+
+/* End of Plugins Stuff... */
 
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 {
@@ -411,7 +589,12 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   label = gtk_label_new (_("Font"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            font_page_new(), label);
-   
+  
+  /* Plugins Settings */
+  label = gtk_label_new (_("Plugins"));
+  gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
+                                           plugins_page_new(), label);
+    
   get_prefs(data);
 
 
@@ -431,7 +614,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
   gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
-
+  		      
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
                                     
 }

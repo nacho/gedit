@@ -87,6 +87,8 @@ typedef struct
   plugin_program_callbacks program;
 } plugin_callback_struct;
 
+extern plugin_callback_struct pl_callbacks;
+
 typedef struct
 {
   int pipe_to;
@@ -119,11 +121,27 @@ typedef struct
   
 } plugin_parse_state;
 
+typedef struct
+{
+	char *name;
+	char *location; /* or should that be Path? */
+	/* Other options may become available later.. Author, date, etc.. */
+} plugin_list_data;
+
+extern GList *plugin_list;
+
+
 typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );
 
 plugin *plugin_new( gchar * );
 plugin *plugin_new_with_param( gchar *, int argc, gchar *argv[] );
 plugin *plugin_query( gchar * );
+
+plugin *custom_plugin_new (gchar *path, gchar *plugin_name);
+plugin *custom_plugin_new_with_param (gchar *path, gchar *plugin_name, int argc, gchar *argv[]);
+void custom_plugin_query (gchar *path, gchar *plugin_name, plugin_callback_struct *callbacks);
+void custom_plugin_query_all( gchar *, plugin_callback_struct * );
+
 void plugin_query_all( plugin_callback_struct * );
 void plugin_send( plugin *, gchar *, gint length );
 void plugin_send_int( plugin *, gint );
@@ -132,4 +150,7 @@ void plugin_send_data_int( plugin *, gint );
 void plugin_get( plugin *, gchar *, gint length );
 void plugin_get_all( plugin *, gint length, plugin_callback *finished, gpointer data );
 void plugin_register( plugin *, plugin_callback_struct *, gint context );
+
+void plugin_load_list ();
+void plugin_save_list ();
 #endif
