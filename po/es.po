@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.2.0\n"
-"POT-Creation-Date: 2002-11-25 05:39+0100\n"
+"POT-Creation-Date: 2002-11-28 05:52+0100\n"
 "PO-Revision-Date: 2002-11-25 13:05-0300\n"
 "Last-Translator: Pablo Gonzalo del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -165,8 +165,8 @@ msgid ""
 "List of encodings used by gedit for reading files not encoded in UTF-8 or in "
 "the current locale encoding."
 msgstr ""
-"Lista de codificaciones usadas por gedit para leer archivos no codificados en UTF-8 o en "
-"la codificación local actual."
+"Lista de codificaciones usadas por gedit para leer archivos no codificados "
+"en UTF-8 o en la codificación local actual."
 
 #: data/gedit.schemas.in.h:24
 msgid "Maximum Recent Files"
@@ -298,10 +298,11 @@ msgid ""
 msgstr ""
 "Estilo para los botones de la barra de herramientas. Los valores posibles "
 "son «GEDIT_TOOLBAR_SYSTEM» para usar el estilo predeterminado del sistema. "
-"«GEDIT_TOOLBAR_ICONS» para mostrar sólo los iconos, «GEDIT_TOOLBAR_ICONS_AND_TEXT» "
-"para mostrar tanto iconos como texto y «GEDIT_TOOLBAR_ICONS_BOTH_HORIZ» para mostrar "
-"el texto prioritario a los lados de los iconos. Note que los valores son sensibles a "
-"mayúsculas y minúsculas, por ello asegúrese que estos aparecen exactamente como se "
+"«GEDIT_TOOLBAR_ICONS» para mostrar sólo los iconos, "
+"«GEDIT_TOOLBAR_ICONS_AND_TEXT» para mostrar tanto iconos como texto y "
+"«GEDIT_TOOLBAR_ICONS_BOTH_HORIZ» para mostrar el texto prioritario a los "
+"lados de los iconos. Note que los valores son sensibles a mayúsculas y "
+"minúsculas, por ello asegúrese que estos aparecen exactamente como se "
 "mencionan aquí."
 
 #: data/gedit.schemas.in.h:43
@@ -585,7 +586,7 @@ msgstr ""
 "El resultado contiene datos UTF-8 inválidos."
 
 #: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
-#: plugins/time/time.glade2.h:4 plugins/spell/spell-checker.glade2.h:1
+#: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
 #: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
 msgid "*"
 msgstr "*"
@@ -862,19 +863,19 @@ msgstr "_Lista de marcas"
 msgid "Show the tag list window"
 msgstr "Mostrar la ventana de lista de marcas "
 
-#: plugins/time/time.c:47
+#: plugins/time/time.c:48
 msgid "In_sert Date/Time"
 msgstr "In_sertar fecha/hora"
 
-#: plugins/time/time.c:50
+#: plugins/time/time.c:51
 msgid "Insert current date and time at the cursor position"
 msgstr "Inserta la fecha y hora actual en la posición del cursor"
 
-#: plugins/time/time.c:439
+#: plugins/time/time.c:450
 msgid "Available formats"
 msgstr "Formatos disponibles"
 
-#: plugins/time/time.c:539
+#: plugins/time/time.c:554
 msgid "Configure insert date/time plugin..."
 msgstr "Configurar la extensión de inserción de fecha/hora..."
 
@@ -884,39 +885,34 @@ msgid "    "
 msgstr "    "
 
 #: plugins/time/time.glade2.h:3
-#, no-c-format
-msgid "%d/%m/%Y %H:%M:%S"
-msgstr "%d/%m/%Y %H:%M:%S"
-
-#: plugins/time/time.glade2.h:5
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
-#: plugins/time/time.glade2.h:6
+#: plugins/time/time.glade2.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr "<span weight=\"bold\"> Al insertar fecha/hora...</span>"
 
-#: plugins/time/time.glade2.h:7
+#: plugins/time/time.glade2.h:5
 msgid "Configure date/time plugin"
 msgstr "Configurar la extensión de inserción de fecha/hora"
 
-#: plugins/time/time.glade2.h:8
+#: plugins/time/time.glade2.h:6
 msgid "Select a format"
 msgstr "Seleccione un formato"
 
-#: plugins/time/time.glade2.h:9
+#: plugins/time/time.glade2.h:7
 msgid "Use the _selected format"
 msgstr "Usar el formato _seleccionado"
 
-#: plugins/time/time.glade2.h:10
+#: plugins/time/time.glade2.h:8
 msgid "_Insert"
 msgstr "_Insertar"
 
-#: plugins/time/time.glade2.h:11
+#: plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
 msgstr "_Preguntar por un formato"
 
-#: plugins/time/time.glade2.h:12
+#: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Usar el formato personalizado"
 
@@ -1007,9 +1003,9 @@ msgstr "Sugerencias"
 msgid "(correct spelling)"
 msgstr "(corrección ortográfica correcta)"
 
-#: plugins/spell/gedit-spell-checker-dialog.c:784
-msgid "<b>Completed spell checking</b>"
-msgstr "<b>Corrección ortográfica finalizada</b>"
+#: plugins/spell/gedit-spell-checker-dialog.c:785
+msgid "Completed spell checking"
+msgstr "Corrección ortográfica finalizada"
 
 #: plugins/spell/gedit-spell-checker.c:73
 msgid "Breton"
@@ -1105,7 +1101,9 @@ msgstr "Predeterminado"
 
 #: plugins/spell/gedit-spell-language-dialog.c:229
 msgid "Could not find the required widgets inside languages-dialog.glade2.\n"
-msgstr "No se han podido encontrar los controles necesarios dentro de languages-dialog.glade2.\n"
+msgstr ""
+"No se han podido encontrar los controles necesarios dentro de languages-"
+"dialog.glade2.\n"
 
 #: plugins/spell/gedit-spell-language-dialog.c:249
 msgid "Languages"
@@ -1224,7 +1222,7 @@ msgstr "El texto seleccionado no contiene errores ortográficos."
 msgid "The document does not contain mispelled words."
 msgstr "El documento no contiene errores ortográficos."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1886
+#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1939
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -1307,8 +1305,9 @@ msgstr ""
 "encontraron todos los controles\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
-msgid "Set program location ..."
-msgstr "Configurar la ruta del programa..."
+#: src/dialogs/program-location-dialog.glade2.h:1
+msgid "Set program location..."
+msgstr "Configurar ruta del programa..."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid "Could not find the required widgets inside program-location-dialog.glade2.\n"
@@ -1793,10 +1792,6 @@ msgstr "_Descripción"
 msgid "dialog1"
 msgstr "diálogo1"
 
-#: src/dialogs/program-location-dialog.glade2.h:1
-msgid "Set program location..."
-msgstr "Configurar ruta del programa..."
-
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
 msgstr "Ruta de búsqueda para :"
@@ -1968,8 +1963,8 @@ msgid "Select a filename to save"
 msgstr "Seleccione el nombre de archivo a guardar"
 
 #: src/gedit-file.c:151
-msgid "Open File ..."
-msgstr "Abrir un archivo ..."
+msgid "Open File..."
+msgstr "Abrir un archivo..."
 
 #: src/gedit-file.c:177 src/gedit-file.c:887
 #, c-format
@@ -1978,7 +1973,7 @@ msgstr "Archivo «%s» cargado"
 
 #: src/gedit-file.c:309 src/gedit-file.c:455
 #, c-format
-msgid "Saving file '%s' ..."
+msgid "Saving file '%s'..."
 msgstr "Guardando el archivo «%s»..."
 
 #: src/gedit-file.c:337 src/gedit-file.c:470
@@ -1991,13 +1986,13 @@ msgid "File '%s' saved."
 msgstr "Se guardó el archivo «%s»."
 
 #: src/gedit-file.c:434
-msgid "Save as ..."
+msgid "Save as..."
 msgstr "Guardar como..."
 
 #: src/gedit-file.c:628
 #, c-format
 msgid ""
-"Do you want to revert to saved the document \"%s\" ?\n"
+"Do you want to revert to saved the document '%s'?\n"
 "\n"
 "You will not be able to undo this operation."
 msgstr ""
@@ -2011,7 +2006,7 @@ msgstr "Re_vertir"
 
 #: src/gedit-file.c:672
 #, c-format
-msgid "Reverting file '%s' ..."
+msgid "Reverting file '%s'..."
 msgstr "Recuperando el archivo «%s»..."
 
 #: src/gedit-file.c:685
@@ -2041,6 +2036,11 @@ msgstr "%i archivos cargados"
 #: src/gedit-file.c:945
 msgid "Could not read data from stdin."
 msgstr "No se ha podido leer datos desde la entrada estándar."
+
+#. Add the detach tab button
+#: src/gedit-mdi-child.c:538
+msgid "_Move to New Window"
+msgstr "_Mover a una ventana nueva"
 
 #: src/gedit-mdi.c:446
 msgid "Open a file."
@@ -2126,7 +2126,7 @@ msgstr "Error: imposible actualizar la interfaz de usuario de la extensión «%s
 msgid "Cannot initialize preferences manager."
 msgstr "No se pudo inicializar el administrador de preferencias."
 
-#: src/gedit-prefs-manager.c:1752
+#: src/gedit-prefs-manager.c:1757
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Se esperadaba «%s» y se obtuvo «%s» para la clave %s"
@@ -2931,16 +2931,16 @@ msgstr ""
 msgid "Could not create the file \"%s\"."
 msgstr "No se ha podido crear el archivo «%s»."
 
-#: src/gedit-view.c:991
+#: src/gedit-view.c:1015
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Col. %d"
 
-#: src/gedit-view.c:1029
+#: src/gedit-view.c:1053
 msgid "  OVR"
 msgstr "  SOB"
 
-#: src/gedit-view.c:1031
+#: src/gedit-view.c:1055
 msgid "  INS"
 msgstr "  INS"
 
@@ -3032,7 +3032,9 @@ msgstr "Líneas de salida"
 
 #: src/dialogs/gedit-encodings-dialog.c:238
 msgid "Could not find the required widgets inside gedit-encodings-dialog.glade2.\n"
-msgstr "No se han podido encontrar los controles necesarios dentro de gedit-encodings-dialog.glade2.\n"
+msgstr ""
+"No se han podido encontrar los controles necesarios dentro de gedit-"
+"encodings-dialog.glade2.\n"
 
 #: src/dialogs/gedit-encodings-dialog.glade2.h:1
 msgid "Choose one or more e_ncodings:"
@@ -3177,6 +3179,12 @@ msgstr "Tailandesa"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (Unicode inválido)"
+
+#~ msgid "%d/%m/%Y %H:%M:%S"
+#~ msgstr "%d/%m/%Y %H:%M:%S"
+
+#~ msgid "Set program location ..."
+#~ msgstr "Configurar la ruta del programa..."
 
 #~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 #~ msgstr "Esta extensión muestra un diálogo que contiene una tabla ASCII."
