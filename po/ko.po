@@ -5,11 +5,11 @@
 # Changwoo Ryu <cwryu@debian.org>, 2004
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 2.8.0\n"
+"Project-Id-Version: AC_PACKAGE_NAME AC_PACKAGE_VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2004-10-06 14:02+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"POT-Creation-Date: 2005-02-13 17:35+0900\n"
+"PO-Revision-Date: 2005-02-14 17:24+0900\n"
+"Last-Translator: Young-Ho Cha <ganadist at mizi.com>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +44,7 @@ msgstr "gedit 자동화 팩토리"
 msgid "Edit text files"
 msgstr "텍스트 파일을 편집합니다"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
 msgid "Text Editor"
 msgstr "텍스트 편집기"
 
@@ -57,9 +57,8 @@ msgstr ""
 "적용됩니다."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "%s 활성"
+msgstr "활성 플러그인"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -159,11 +158,11 @@ msgstr "인쇄용 머릿말 글꼴"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "현재 줄 강조"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "일치하는 괄호 강조"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -191,13 +190,15 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"활성화된 플러그인 목록. 활성화된 플러그인의 \"위치\"를 포함합니다. "
+"주어진 플러그인의 \"위치\"를 알아보려면 .gedit-plugin 파일을 보십시오."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"파일 열기/저장에서 문자 코딩 메뉴에 보일 인코딩 목록. 알려져 있는 인코딩 이름"
+"파일 열기/저장에서 글자 코딩 메뉴에 보일 인코딩 목록. 알려져 있는 인코딩 이름"
 "만을 사용합니다."
 
 #: data/gedit.schemas.in.h:30
@@ -213,9 +214,8 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:33
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #: data/gedit.schemas.in.h:34
 msgid "Monospace Regular 9"
@@ -250,14 +250,12 @@ msgid "Right Margin Position"
 msgstr "오른쪽 여백 위치"
 
 #: data/gedit.schemas.in.h:41
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid "Sans 8"
-msgstr "스페인어"
+msgstr "Sans 8"
 
 #: data/gedit.schemas.in.h:43
 msgid "Sans Regular 11"
@@ -317,11 +315,12 @@ msgid ""
 msgstr "문서를 인쇄할 때 문서의 본문에 쓸 글꼴을 지정합니다."
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "문서를 인쇄할 때 문서의 본문에 쓸 글꼴을 지정합니다."
+msgstr ""
+"문서를 인쇄할 때 문서의 본문에 쓸 글꼴을 지정합니다.이것은 gnome-print의 글꼴"
+"이름이고 print_font_body_pango에 의해 바뀝니다."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -332,14 +331,14 @@ msgstr ""
 "일 때 적용됩니다."
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "인쇄할 때 줄 번호에 쓸 글꼴을 지정합니다. \"줄 번호 인쇄\" 옵션이 0이 아닌 값"
-"일 때 적용됩니다."
+"일 때 적용됩니다.이것은 gnome-print의 글꼴이름이고 print_font_numbers_pango"
+"에 의해 바뀝니다."
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -350,14 +349,14 @@ msgstr ""
 "있어야만 적용됩니다."
 
 #: data/gedit.schemas.in.h:55
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "문서를 인쇄할 때 머릿말에 쓸 글꼴을 지정합니다. \"머릿말 인쇄\" 옵션이 켜져 "
-"있어야만 적용됩니다."
+"있어야만 적용됩니다.이것은 gnome-print의 글꼴이름이고 print_font_header_pango"
+"에 의해 바뀝니다."
 
 #: data/gedit.schemas.in.h:56
 msgid ""
@@ -457,14 +456,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "구문 강조를 사용할 지 여부."
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "구문 강조를 사용할 지 여부."
+msgstr "gedit에서 일치하는 괄호를 강조할 지 여부."
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "문서를 인쇄할 때 구문 강조를 인쇄합니다."
+msgstr "gedit에서 현재 줄을 강조할 지 여부."
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -526,9 +523,8 @@ msgid "Activate %s"
 msgstr "%s 활성"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "출력창 닫기"
+msgstr "저장하지 않고 닫기(_W)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -570,11 +566,12 @@ msgstr[0] "저장하지 않으면, 최근 %ld분동안 편집한 사항을 잃�
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "저장하지 않으면, 최근 1시간동안 편집한 사항을 잃을 것입니다."
+msgstr[1] "저장하지 않으면, 최근 %d시간동안 편집한 사항을 잃을 것입니다."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -673,7 +670,7 @@ msgstr "사용 가능한 인코딩(_V):"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
 msgid "Character codings"
-msgstr "문자 코딩"
+msgstr "글자 코딩"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
 msgid "E_ncodings shown in menu:"
@@ -744,19 +741,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>자동 들여쓰기</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>줄 바꿈</b>"
+msgstr "<b>괄호 일치</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>줄 바꿈</b>"
+msgstr "<b>현재 줄</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -780,9 +774,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>오른쪽 여백</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>탭</b>"
+msgstr "<b>탭 여백</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -834,7 +827,7 @@ msgstr "글꼴 & 색상"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "현재줄 강조(_G)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -842,7 +835,7 @@ msgstr "강조 모드(_M):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "일치하는 괄호 강조"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -935,7 +928,6 @@ msgid "_Display line numbers"
 msgstr "줄 번호 보기(_D)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "자동 들여 쓰기 사용(_E)"
 
@@ -964,7 +956,6 @@ msgid "_Right margin at column:"
 msgstr "다음 열에 오른쪽 여백(_R):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "탭 너비(_T):"
 
@@ -1112,7 +1103,7 @@ msgstr "끝까지 가면 처음부터(_W)"
 
 #: gedit/dialogs/uri.glade2.h:2
 msgid "Ch_aracter coding:"
-msgstr "문자 코딩(_A):"
+msgstr "글자 코딩(_A):"
 
 #: gedit/dialogs/uri.glade2.h:3
 msgid "Enter the _location (URI) of the file you would like to open:"
@@ -1154,12 +1145,12 @@ msgstr "gedit은 그놈 데스크탑을 위한 작고 가벼운 텍스트 에디
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "남성현 <namsh@lgic.co.kr>, 1998\n"
 "황치덕 <hwang@mizi.co.kr>, 2000, 2001\n"
-"차영호 <ganadist@chollian.net>, 2001, 2002, 2003"
+"차영호 <ganadist@chollian.net>, 2001 - 2003, 2005\n"
+"류창우 <cwryu@debian.org>, 2004"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
@@ -1171,9 +1162,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "문서(_D)"
+msgstr "저장되지 않은 문서"
 
 #: gedit/gedit-document.c:662 gedit/gedit-document.c:709
 msgid "Invalid file name"
@@ -1383,9 +1373,8 @@ msgid "All Text Files"
 msgstr "모든 텍스트 파일"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
-msgstr "문자 코딩(_A):"
+msgstr "글자 코딩(_C):"
 
 #: gedit/gedit-file-selector-util.c:509
 msgid "Select a file to open"
@@ -1461,11 +1450,12 @@ msgid_plural ""
 msgstr[0] "최근 %ld분동안 문서에 바뀐 점을 잃을 것입니다."
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "최근 1시간동안 문서에 바뀐 점을 잃을 것입니다."
+msgstr[0] "최근 한시간동안 문서에 바뀐 점을 잃을 것입니다."
+msgstr[1] "최근 %d시간동안 문서에 바뀐 점을 잃을 것입니다."
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1530,9 +1520,9 @@ msgid_plural "Loaded %d files"
 msgstr[0] "%d개 파일을 읽어들였습니다"
 
 #: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "\"%s\" 파일을 읽어들이는 중입니다"
+msgstr "\"%s\" 파일을 만들었습니다"
 
 #: gedit/gedit-file.c:1284
 #, c-format
@@ -1546,18 +1536,14 @@ msgid_plural "Loading %d files..."
 msgstr[0] "%d개 파일을 읽어들이는 중입니다..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "파일 \"%s\"을(를) 열 수 없습니다"
+msgstr "파일 \"%s\"을(를) 찾을 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\"은(는) 디렉토리입니다.\n"
-"\n"
-"입력한 위치가 올바른지 확인하고 다시 시도하십시오."
+msgstr "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1573,155 +1559,127 @@ msgid "Could not open the file \"%s\""
 msgstr "파일 \"%s\"을(를) 열 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "파일 \"%s\"을(를) 열 수 없습니다. 깨진 데이터를 포함하고 있습니다."
+msgstr "깨진 데이터를 포함하고 있습니다."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit가 쓰기 모드에서 %s: 위치를 처리할 수 없습니다."
+msgstr "gedit가 %s: 위치를 처리할 수 없습니다."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit가 쓰기 모드에서 %s: 위치를 처리할 수 없습니다."
+msgstr "gedit가 이 위치를 처리할 수 없습니다."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "파일 \"%s\"을(를) 열 수 없습니다. 데이터에 잘못된 형식이 있습니다."
+msgstr "데이터에 잘못된 형식이 있습니다."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "파일이 너무 많은 심벌릭 링크가 있습니다."
+msgstr "파일이 너무 큽니다."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\"(은)는 올바른 위치가 아닙니다"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "접근이 거부되었습니다."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
-msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 너무 많은 파일이 열렸습니다.\n"
-"\n"
-"몇몇 파일을 닫은 후 다시 시도하십시오."
+msgstr "너무 많은 파일이 열렸습니다. 몇몇 파일을 닫은 후 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\"(은)는 디렉토리 입니다"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"파일 \"%s\"을(를) 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다"
-"시 시도하십시오."
+"파일을 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다시 시도하십"
+"시오."
 
+# c-format
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"파일 \"%s\"을(를) 되돌릴 수 없습니다. 호스트 \"%s\"을(를) 찾을 수 없습니다.\n"
-"\n"
-"프록시 설정이 올바른지 확인하고 다시 시도하십시오."
+"호스트 \"%s\"을(를) 찾을 수 없습니다. 프록시 설정이 올바른지 확인하고 다시 시"
+"도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\"은(는) 올바른 위치가 아닙니다.\n"
-"\n"
-"입력한 위치가 올바른지 확인하고 다시 시도하십시오."
+"호스트이름이 올바르지 않습니다. 입력한 위치가 올바른지 확인하고 다시 시도하십"
+"시오."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 호스트 이름이 비어있습니다.\n"
-"\n"
-"프록시 설정이 올바른지 확인하고 다시 시도하십시오."
+"호스트 이름이 비어있습니다. 프록시 설정이 올바른지 확인하고 다시 시도하십시"
+"오."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"파일 \"%s\"을(를) 찾을 수 없습니다.\n"
-"\n"
-"입력한 위치가 올바른지 확인하고 다시 시도하십시오."
+"기록을 준비하는데 실패했습니다. 입력한 위치가 올바른지 확인하고 다시 시도하십"
+"시오."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
-msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 잘못된 데이터가 들어있습니다.\n"
-"\n"
-"이진 파일을 열려고 한 것 같습니다."
+msgstr "잘못된 데이터가 들어있습니다. 이진 파일을 열려고 한 것 같습니다."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "열려고 한 파일은 보통파일이 아닙니다."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"\"%s\" 파일을 열 수 없습니다. 문자 코딩을 자동으로 찾을 수가 없습니다.\n"
-"\n"
-"이진 파일이 아닌지 확인하시고, \"파일 열기...\"(혹은 \"위치 열기...\")에서 올"
-"바른 문자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
+"gedit 글자 코딩을 자동으로 찾을 수가 없습니다. 이진 파일이 아닌지 확인하시"
+"고, '파일 열기...'(혹은 '위치 열기...')에서 올바른 글자 코딩을 선택했는지 확"
+"인한 다음 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "파일 \"%s\"을(를) 열 수 없습니다. 파일이 너무 큽니다."
+msgstr "%2$s 글자 코딩으로 파일 \"%1$s\"을(를) 열 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"파일 \"%s\"을(를) %s 문자 코딩으로 열 수 없습니다.\n"
-"\n"
-"이진 파일이 아닌지 확인하시고, \"파일 열기...\"(혹은 \"위치 열기...\")에서 올"
-"바른 문자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
+"이진 파일이 아닌지 확인하시고, '파일 열기...'(혹은 '위치 열기...')에서 올바"
+"른 글자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
-msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 잘못된 데이터가 들어있습니다.\n"
-"\n"
-"이진 파일을 열려고 한 것 같습니다."
+msgstr "잘못된 데이터가 들어있습니다. 이진 파일을 열려고 한 것 같습니다."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1730,124 +1688,91 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
+msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"파일 \"%s\"을(를) 되돌릴 수 없습니다. gedit가 찾아내지 못했습니다.\n"
-"\n"
-"최근에 지워졌을 것입니다."
+msgstr "gedit가 찾아내지 못했습니다. 최근에 지워졌을 것입니다."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
-msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 너무 많은 파일이 열렸습니다.\n"
-"\n"
-"몇몇 파일을 닫은 후 다시 시도하십시오."
+msgstr "너무 많은 파일이 열렸습니다. 몇몇 파일을 닫은 후 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
-msgstr ""
-"파일 \"%s\"을(를) 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다"
-"시 시도하십시오."
+msgstr "메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다시 시도하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 호스트 이름이 비어있습니다.\n"
-"\n"
-"프록시 설정이 올바른지 확인하고 다시 시도하십시오."
+"호스트 이름이 비어있습니다. 프록시 설정이 올바른지 확인하고 다시 시도하십시"
+"오."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "기록 준비 실패."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"파일 \"%s\"을(를) 되돌릴 수 없습니다. 잘못된 UTF-8 데이터가 들어 있습니다.\n"
-"\n"
-"아마 이진 파일을 되돌릴려고 하는 것 같습니다."
+"잘못된 UTF-8 데이터가 들어 있습니다. 아마 이진 파일을 되돌릴려고 하는 것 같습"
+"니다."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "제목 없는 문서는 되돌릴 수 없습니다."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "파일 \"%s\"을(를) 저장할 수 없습니다."
+msgstr "파일 \"%s\"을(를) 저장할 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "파일 \"%s\"이(가) 이미 있습니다."
+msgstr "파일 \"%s\"이(가) 이미 있습니다"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\"은(는) 디렉토리입니다.\n"
-"\n"
-"입력한 위치가 올바른지 확인하십시오."
+msgstr "입력한 위치가 올바른지 확인하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "파일 \"%s\"을(를) 만들 수 없습니다."
+msgstr "파일 \"%s\"을(를) 만들 수 없습니다"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"파일 \"%s\"을(를) 만들 수 없습니다.\n"
-"\n"
-"적절한 쓰기 권한이 있는지 확인하십시오."
+msgstr "적절한 쓰기 권한이 있는지 확인하십시오."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"파일 \"%s\"을(를) 만들 수 없습니다.\n"
-"\n"
-"파일 이름이 너무 깁니다."
+msgstr "파일 이름이 너무 깁니다."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"파일 \"%s\"을(를) 만들 수 없습니다.\n"
-"\n"
-"파일 이름에 포함된 디렉토리가 없거나 깨진 심벌릭 링크가 있습니다."
+msgstr "파일 이름에 포함된 디렉토리가 없거나 깨진 심벌릭 링크가 있습니다."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"파일 \"%s\"을(를) 저장하기 위한 디스크 공간이 부족합니다\n"
-".\n"
-"디스크 공간을 확보하고 다시 시도하십시오."
+"파일 만들기 위한 디스크 공간이 부족합니다. 디스크 공간을 확보하고 다시 시도하"
+"십시오."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1886,9 +1811,8 @@ msgid "Open a recently used file"
 msgstr "최근에 열었던 파일을 엽니다"
 
 #: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
-#, fuzzy
 msgid "Read Only"
-msgstr "(읽기 전용)"
+msgstr "읽기 전용"
 
 #: gedit/gedit-mdi.c:2068
 msgid "Normal"
@@ -2352,7 +2276,7 @@ msgstr "보기(_V)"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (잘못된 유니코드)"
 
 #.
 #. if (col == chars)
@@ -2375,38 +2299,39 @@ msgstr " 바꿈"
 msgid "  INS"
 msgstr " 삽입"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr "명령행에서 지정한 파일을 여는 데 사용할 문자 인코딩을 설정합니다"
+msgstr "명령행에서 지정한 파일을 여는 데 사용할 글자 인코딩을 설정합니다"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "실행 중인 gedit의 인스턴스를 마칩니다"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "실행 중인 gedit의 인스턴스에서 새로운 최상위 창을 만듭니다"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "실행 중인 gedit의 인스턴스에서 새로운 문서를 만듭니다"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:161
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "지정한 \"%s\" 인코딩이 올바르지 않습니다\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "잘못된 바이트 순서를 포함하는 파일을 열려합니다."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"gedit가 열려고 하는 파일의 인코딩을 자동으로 알 수 없습니다."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2550,44 +2475,39 @@ msgid "User name"
 msgstr "사용자 이름"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "복사(_C)"
+msgstr "사본 복사(_V)..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "현재 문서의 언어를 설정합니다"
+msgstr "현재 문서의 사본을 저장합니다"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "파일 \"%s\"을(를) 저장할 수 없습니다."
+msgstr "파일의 사본을 \"%s\"(으)로 저장할 수 없습니다"
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "원래 파일을 덮어쓰려 합니다"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "저장하지 않기(_N)"
+msgstr "사본 저장..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (사본)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "열려있는 모든 파일을 저장합니다"
+msgstr "사본 저장"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "현재 문서나 선택한 부분을 정렬합니다."
+msgstr "현재 문서의 사본을 로컬 또는 원격위치에 저장합니다."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -2706,11 +2626,11 @@ msgstr "한번 정렬하면 되돌릴 수 없습니다"
 
 #: plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
-msgstr "대소문자 구분하지 않기(_I)"
+msgstr "대소문자 가리지 않기(_I)"
 
 #: plugins/sort/sort.glade2.h:6
 msgid "_Reverse order"
-msgstr "역순 정렬(_R)"
+msgstr "거꾸로 정렬(_R)"
 
 #: plugins/sort/sort.glade2.h:7
 msgid "_Sort"
@@ -2757,21 +2677,19 @@ msgstr "맞춤법 검사 완료"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "남아공용어"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "아라비아어"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "아제르바이잔어"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "불가리아어"
+msgstr "벨라루스어"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2802,9 +2720,8 @@ msgid "Danish"
 msgstr "덴마크어"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "독일어 (독일)"
+msgstr "독일어 (오스트리아)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2835,14 +2752,12 @@ msgid "Spanish"
 msgstr "스페인어"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "루마니아어"
+msgstr "에스토니아어"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "인쇄"
+msgstr "페르시아어"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2861,41 +2776,36 @@ msgid "French (Swiss)"
 msgstr "프랑스어 (스위스)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "터키어"
+msgstr "아일랜드어"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "스코트랜드 게일어"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "그루지야어"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "찾기"
+msgstr "힌디어"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "카탈로니아어"
+msgstr "크로아티아어"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "불가리아어"
+msgstr "헝가리어"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
@@ -2903,7 +2813,7 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "인도네시아어"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2914,22 +2824,20 @@ msgid "Italian"
 msgstr "이탈리아어"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "터키어"
+msgstr "쿠르드어"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "줄"
+msgstr "라틴어"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "리투아니아어"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "라트비아어"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
@@ -2937,38 +2845,35 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "마오리어"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "gedit"
+msgstr "마케도니아어"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "몽골어"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "말레이어"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "노르웨이어"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "네덜란드어"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "노르웨이어"
+msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -2992,7 +2897,7 @@ msgstr "포르투갈어 (브라질)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "케추아어"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3003,9 +2908,8 @@ msgid "Kinyarwanda"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "우크라이나어"
+msgstr "사르디니아어"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3021,12 +2925,11 @@ msgstr "스웨덴어"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "스와힐리어"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "타이어"
+msgstr "타밀어"
 
 #: plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
@@ -3034,7 +2937,7 @@ msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "타갈로그어"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
@@ -3046,19 +2949,19 @@ msgstr "우크라이나어"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "우즈벡어"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
-msgstr ""
+msgstr "왈룬어"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "이디시어"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "줄루어"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3166,12 +3069,10 @@ msgid "The document is empty."
 msgstr "문서가 비어있습니다."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "선택한 부분에 맞춤법이 틀린 단어가 없습니다."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "문서에 맞춤법이 틀린 단어가 없습니다."
 
@@ -3184,35 +3085,32 @@ msgid "Spell checker"
 msgstr "맞춤법 검사"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "쓸 수 있는 형식"
+msgstr "축약형"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "아르메니아어"
+msgstr "축약"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "위"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "접근성 키 글자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "줄"
+msgstr "정렬"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "정렬 문자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
@@ -3227,97 +3125,84 @@ msgid "Anchor URI"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "열 파일을 선택하십시오"
+msgstr "애플릿 클래스 파일 코드"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "배열"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "관련된 정보"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "자동 들여쓰기"
+msgstr "만든이 정보"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "글머리 인쇄(_P)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "배경 소리"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "바탕색(_B):"
+msgstr "바탕색"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "바탕색"
+msgstr "배경 타일"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "기본 URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "레이블에 쓸 글꼴"
+msgstr "기본 글꼴"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "행동"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "깜빡이는 글자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "굵게"
+msgstr "테두리"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "바탕색(_B):"
+msgstr "테두리 색"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "상자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "중앙 유럽어"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "일반"
+msgstr "중앙"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+msgid "Character encoding of linked resource"
+msgstr "연결된 자원의 글자 인코딩"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
 msgstr ""
 
-# FIXME - english grammar based UI + label
-# "_Limit to <number> act_ions"
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "동작(_I)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3325,12 +3210,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "클래스 구현 ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "태그 목록"
+msgstr "클래스 목록"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3341,9 +3225,8 @@ msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "선택한 줄 복사"
+msgstr "선택한 연결의 색"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3354,28 +3237,24 @@ msgid "Columns"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "차례(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "차례(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "차례(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "차례(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3394,9 +3273,8 @@ msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "설명(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
@@ -3407,14 +3285,12 @@ msgid "Definition term"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "선택한 텍스트를 지웁니다"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "브르타뉴어"
+msgstr "방향"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
@@ -3422,77 +3298,67 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directory list"
-msgstr ""
+msgstr "디렉토리 목록"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "사용"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document base"
-msgstr "문서(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document body"
-msgstr "문서(_D)"
+msgstr "문서 본문"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document head"
-msgstr "문서(_D)"
+msgstr "문서 머릿말"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document title"
-msgstr "문서 통계"
+msgstr "문서 제목"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document type"
-msgstr "문서(_D)"
+msgstr "문서 형식"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Element ID"
-msgstr "구성 요소"
+msgstr "요소 ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
-msgstr ""
+msgstr "포함된 개체"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
+msgstr "강조"
 
 #: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
-msgstr ""
+msgstr "인코드 형식"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
-msgstr ""
+msgstr "그림"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
 msgid "Font face"
-msgstr "글꼴 이름"
+msgstr "글꼴"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "For label"
-msgstr "레이블"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
-msgstr ""
+msgstr "강제 줄바꿈"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
-#, fuzzy
 msgid "Form"
-msgstr "보통"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
@@ -3523,9 +3389,8 @@ msgid "Forward link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
 msgid "Frame"
-msgstr "이름:"
+msgstr "프레임"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
@@ -3541,17 +3406,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frameborder"
-msgstr ""
+msgstr "프레임 테두리"
 
 #: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
 msgid "Frameset"
-msgstr "페로스어"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
 msgid "Frameset columns"
-msgstr "시작할 열(_T):"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset rows"
@@ -3563,16 +3426,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
-msgstr ""
+msgstr "일반 포함된 개체"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
-msgstr ""
+msgstr "일반 메타 정보"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
 msgid "Generic span"
-msgstr "일반"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
@@ -3580,63 +3442,63 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
-msgstr ""
+msgstr "HTML - 특수 문자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Tags"
-msgstr ""
+msgstr "HTML - 태그"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
-msgstr ""
+msgstr "HTML 루트 요소"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML version"
-msgstr ""
+msgstr "HTML 판번호"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
-msgstr ""
+msgstr "HTTP 헤더 이름"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Header cell ID's"
-msgstr ""
+msgstr "머릿말 셀 ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
-msgstr ""
+msgstr "표제"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading 1"
-msgstr ""
+msgstr "표제 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 2"
-msgstr ""
+msgstr "표제 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 3"
-msgstr ""
+msgstr "표제 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 4"
-msgstr ""
+msgstr "표제 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 5"
-msgstr ""
+msgstr "표제 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 6"
-msgstr ""
+msgstr "표제 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Height"
-msgstr ""
+msgstr "높이"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Horizontal rule"
-msgstr ""
+msgstr "가로 줄"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal space"
@@ -3648,107 +3510,99 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Image"
-msgstr ""
+msgstr "그림"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image map"
-msgstr ""
+msgstr "이미지 맵"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map area"
-msgstr ""
+msgstr "이미지 맵 영역"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map name"
-msgstr ""
+msgstr "이미지 맵 이름"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image source"
-msgstr ""
+msgstr "이미지 위치"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "잘못된 파일이름"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "날짜/시간을 입력"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "이탤릭"
+msgstr "기울인 글자"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
-msgstr ""
+msgstr "자바 애플릿"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
-msgstr "레이블"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "언어"
+msgstr "언어 코드"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
-msgstr ""
+msgstr "큰 글자 형식"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Layer"
-msgstr ""
+msgstr "계층"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link color"
-msgstr "색 고르기"
+msgstr "연결 색"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
-msgstr ""
+msgstr "목록 항목"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
-msgstr ""
+msgstr "올릴 파일의 MIME 형식 목록"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of supported character sets"
-msgstr ""
+msgstr "지원되는 글자셋의 목록"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "편집기 글꼴을 고르십시오"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
 msgid "Long description link"
-msgstr "설명(_D)"
+msgstr "긴 설명 연결"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
-msgstr ""
+msgstr "긴 인용"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
-msgstr ""
+msgstr "메일 연결"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
@@ -3763,7 +3617,7 @@ msgid "Marquee"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
+msgid "Maximum length of text field"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
@@ -3787,9 +3641,8 @@ msgid "Multiple"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-#, fuzzy
 msgid "Name"
-msgstr "이름:"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Named property value"
@@ -3805,28 +3658,27 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
-msgstr ""
+msgstr "포함된 개체 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
-msgstr ""
+msgstr "프레임 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
-msgstr ""
+msgstr "계층 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No line break"
-msgstr ""
+msgstr "줄바꿈 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-#, fuzzy
 msgid "No resize"
-msgstr "크기 보기"
+msgstr "크기조절 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
-msgstr ""
+msgstr "스크립트 없음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
@@ -3834,16 +3686,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
-msgstr ""
+msgstr "단어단위로 끊지 않음"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Note"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
 msgid "Object applet file"
-msgstr "파일 열기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
@@ -3858,25 +3709,24 @@ msgid "OnBlur event"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "OnChange event"
-msgstr "대소문자 바꾸기"
+msgstr "바꿈 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
-msgstr ""
+msgstr "클릭 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
-msgstr ""
+msgstr "더블클릭 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
-msgstr ""
+msgstr "포커스 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
-msgstr ""
+msgstr "키누름 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
@@ -3884,7 +3734,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
-msgstr ""
+msgstr "키뗌 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
@@ -3892,11 +3742,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
-msgstr ""
+msgstr "마우스 누름 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
-msgstr ""
+msgstr "마우스 움직임 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
@@ -3904,7 +3754,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
-msgstr ""
+msgstr "마우스 올림 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
@@ -3916,7 +3766,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
-msgstr ""
+msgstr "선택 이벤트"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
@@ -3931,18 +3781,16 @@ msgid "Option group"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
 msgid "Option selector"
-msgstr "글꼴 선택"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
 msgid "Output media"
-msgstr "출력 줄"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
@@ -3961,9 +3809,8 @@ msgid "Preformatted listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
 msgid "Preformatted text"
-msgstr "글자 미리 보기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
@@ -3974,19 +3821,16 @@ msgid "Prompt message"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "끝내기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "바꾸기(_N)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
@@ -3997,9 +3841,8 @@ msgid "Reduced spacing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "역순 정렬(_R)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
@@ -4026,9 +3869,8 @@ msgid "Script execution defer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "언어 선택"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
@@ -4039,23 +3881,20 @@ msgid "Scrollbar"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "열 파일을 선택하십시오"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "선택한 문서 저장(_S)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "저장"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -4066,14 +3905,12 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "탭 크기"
+msgstr "크기"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "모든 텍스트 파일"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
@@ -4081,21 +3918,19 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "소리"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "저장"
+msgstr "공백"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "바꾸기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
@@ -4106,9 +3941,8 @@ msgid "Spacing within cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "스페인어"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -4119,19 +3953,16 @@ msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "줄 번호 인쇄(_L)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "취소선"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "취소선"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
@@ -4146,27 +3977,24 @@ msgid "Subscript"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "설명(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "사용"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "위치 열기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
@@ -4225,7 +4053,6 @@ msgid "Text"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "글자 색상"
 
@@ -4243,25 +4070,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "밑줄"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "밑줄"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "이미지 맵 쓰기"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "값"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
@@ -4276,18 +4101,16 @@ msgid "Vertical cell alignment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "공백 입력"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "선택 색상 고르기"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "너비"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
@@ -4307,109 +4130,103 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "괄호 &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "괄호 ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "괄호 []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "괄호 {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "파일 입력"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "글꼴"
+msgstr "꼬리말"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "cos 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "e^ 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "exp 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "log 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "log10 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "sin 함수"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "그리스어"
+msgstr "α"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "그리스어"
+msgstr "β"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "ε"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "그리스어"
+msgstr "γ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "λ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "그리스어"
+msgstr "ρ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "그리스어"
+msgstr "τ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "머릿말 0 (장)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "머릿말 0 (장*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "머릿말 1 (항)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "머릿말 1 (항*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "머릿말 2 (소구분)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "머릿말 2 (소구분*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
@@ -4421,7 +4238,7 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "머릿말 4 (절)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
@@ -4429,7 +4246,7 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "항목"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
@@ -4437,12 +4254,11 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - 태그"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "설명(_D)"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
@@ -4461,9 +4277,8 @@ msgid "Maths (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "위치 열기"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4482,70 +4297,68 @@ msgid "Operator sum (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "기본 설정"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "기본 설정"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "기호 &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "기호 &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "기호 &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "기호 &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "기호 and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "기호 const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "기호 d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "기호 d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "기호 d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "기호 dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "기호 equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "기호 hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "기호 hyphen ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "기호 infinity"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
@@ -4573,15 +4386,15 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "굵은 글씨"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "기운 글씨"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "굵고 기운 글씨"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
@@ -4593,70 +4406,67 @@ msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - 축"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "구성 요소"
+msgstr "XSLT - 구성 요소"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - 함수"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "공백 입력"
+msgstr "namespace"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "열기"
+msgstr "parent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4664,7 +4474,7 @@ msgstr "태그 목록 플러그인"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:167
 msgid "Select the group of tags you want to use"
-msgstr "쓸려는 태그 묶음을 선택하십시오"
+msgstr "쓸 태그 묶음을 선택하십시오"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:189
 msgid "Available Tag Lists"
@@ -4708,11 +4518,11 @@ msgstr "날짜/시간을 입력(_S)..."
 msgid "Insert current date and time at the cursor position"
 msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "쓸 수 있는 형식"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "날짜/시간 입력 플러그인 설정..."
 
@@ -4755,255 +4565,3 @@ msgstr "입력할 형식 기다리기(_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "사용자 형식 쓰기(_U)"
-
-#~ msgid "Irish (Gaeilge)"
-#~ msgstr "아일랜드어 (Gaeilge)"
-
-#, fuzzy
-#~ msgid "Document ID"
-#~ msgstr "문서(_D)"
-
-#, fuzzy
-#~ msgid "Document version"
-#~ msgstr "문서(_D)"
-
-#~ msgid "Do_n't save"
-#~ msgstr "저장하지 않기(_N)"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] ""
-#~ "문서를 저장하지 않으면, 최근 %d시간동안 편집한 사항을 잃을 것입니다."
-
-#~ msgid "Body font picker"
-#~ msgstr "본문 글꼴 선택"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr "이 단추를 눌러서 본문 인쇄에 쓸 글꼴을 선택하십시오"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "글머리 글꼴 선택"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr "이 단추를 눌러서 글머리 인쇄에 쓸 글꼴을 선택하십시오"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "줄 번호 글꼴 선택"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr "이 단추를 눌러서 줄 번호 인쇄에 쓸 글꼴을 선택하십시오"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "최근 %d시간동안 문서에 바뀐 점을 잃을 것입니다."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 열 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "파일 \"%s\"을(를) 열 수 없습니다. 접근이 거부되었습니다."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 열 수 없습니다. 호스트 이름이 올바르지 않습니다.\n"
-#~ "\n"
-#~ "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 열 수 없습니다. 호스트 \"%s\"을(를) 찾을 수 없습니다.\n"
-#~ "\n"
-#~ "입력한 위치와 프록시 설정이 올바른지 확인하고 다시 시도하십시오."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 열 수 없습니다. 기록 준비가 실패하였습니다.\n"
-#~ "\n"
-#~ "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "파일 \"%s\"을(를) 열 수 없습니다."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 열 수 없습니다.\n"
-#~ "\n"
-#~ "%s."
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 저장할 수 없습니다.\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 깨진 데이터가 들어 있습니다."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 되돌릴 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니"
-#~ "다."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 되돌릴 수 없습니다. 데이터에 잘못된 형식이 들어 있습니"
-#~ "다."
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 파일이 너무 큽니다."
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 접근이 거부되었습니다."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 되돌릴 수 없습니다. 너무 많은 파일이 열려있습니다.\n"
-#~ "\n"
-#~ "몇몇 파일을 닫은 후 다시 시도하십시오."
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 되돌리려는데 메모리가 부족합니다. 몇몇 응용 프로그램을 "
-#~ "닫은 후 다시 시도하십시오."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "파일 \"%s\"을(를) 되돌릴 수 없습니다. 호스트 이름이 비어있습니다.\n"
-#~ "\n"
-#~ "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 기록 준비가 실패하였습니다."
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr ""
-#~ "plugin-manager.glade2를 찾을 수 없습니다, gedit를 다시 설치하십시오.\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr ""
-#~ "플러그인 관리자용 glade 파일이 잘못되었습니다 -- 모든 위젯을 찾을 수 없습"
-#~ "니다.\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "미리 보기에 쓸 문장 입력(_I)."
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "미리 보기 문장 수정..."
-
-#~ msgid "Preview"
-#~ msgstr "미리 보기"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "미리 보기 문장 수정(_M)..."
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "Sans Regular 12"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "가나다라마바사AaBbCcDdEeFfGgHhIiJjKkLlMm"
-
-#~ msgid "Pick a Font"
-#~ msgstr "글꼴 선택"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "선택 대화 상자의 제목"
-
-#~ msgid "Name of the selected font"
-#~ msgstr "선택한 글꼴 이름"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "대화창에 보일 글자 미리 보기"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr "글꼴 정보모드에서 레이블의 글꼴"
-
-#~ msgid "Font size for label"
-#~ msgstr "레이블의 글꼴 크기"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr "글꼴 정보 모드에서 레이블의 글꼴 크기"
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "글꼴 정보 모드에서 크기를 봅니다"
-
-#~ msgid "(modified)"
-#~ msgstr "(바뀜)"
-
-#~ msgid "Untitled"
-#~ msgstr "제목 없음"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "오류, 모듈 파일'%s'을(를) 열 수가 없습니다\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "오류, 플러그인 '%s'이(가) init함수를 가지고 있지 않습니다."
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "오류, 플러그인 '%s'이(가) 활성 함수를 가지고 있지 않습니다."
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "오류, 플러그인 '%s'이(가) 비활성 함수를 가지고 있지않습니다."
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "오류, 플러그인 '%s'을(를) 초기화 할 수 없습니다"
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "오류, 플러그인 '%s'을(를) 종료할 수 없습니다"
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "오류, 플러그인 '%s'을(를) 활성화 할 수 없습니다"
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "오류, 플러그인 '%s'을(를) 비활성화 할 수 없습니다"
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "오류, 플러그인 '%s'의 UI를 새로 고칠 수 없습니다"
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "gedit 뷰어에서는 저장 메소드가 구현되지 않았습니다"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "선택한 텍스트를 클립보드로 복사합니다"
-
-#~ msgid "_Copy Text"
-#~ msgstr "텍스트 복사(_C)"
