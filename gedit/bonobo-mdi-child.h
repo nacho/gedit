@@ -27,6 +27,8 @@
 #include <gtk/gtk.h>
 #include <bonobo/bonobo-window.h>
 
+G_BEGIN_DECLS
+
 #define BONOBO_TYPE_MDI_CHILD            (bonobo_mdi_child_get_type ())
 #define BONOBO_MDI_CHILD(obj)            (GTK_CHECK_CAST ((obj), BONOBO_TYPE_MDI_CHILD, BonoboMDIChild))
 #define BONOBO_MDI_CHILD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), BONOBO_TYPE_MDI_CHILD, BonoboMDIChildClass))
