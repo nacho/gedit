@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2002-01-24 11:00+0200\n"
-"PO-Revision-Date: 2002-01-24 17:07+0200\n"
+"POT-Creation-Date: 2002-01-25 17:35+0200\n"
+"PO-Revision-Date: 2002-01-25 17:51+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,35 +49,73 @@ msgstr "Доповнення для підрахунку слів аналізу
 
 #: plugins/docinfo/docinfo.c:408
 #: plugins/sample/sample.c:173
-#: plugins/time/time.c:512
+#: plugins/shell_output/shell_output.c:456
+#: plugins/time/time.c:554
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Авторські права © 2002 - Паоло Маґґі"
 
 #: plugins/sample/sample.c:52
 msgid "Hello World "
-msgstr ""
+msgstr "Привіт, світ"
 
 #: plugins/sample/sample.c:170
 msgid "Hello World"
-msgstr ""
+msgstr "Привіт, світ"
 
 #: plugins/sample/sample.c:171
 msgid "Sample 'hello world' plugin."
-msgstr ""
+msgstr "Приклад доповнення \"Привіт світ\"."
 
-#: plugins/time/time.c:196
+#: plugins/shell_output/shell_output.c:138
+#: plugins/shell_output/shell_output.c:452
+msgid "Shell output"
+msgstr "Вивід з оболонки"
+
+#: plugins/shell_output/shell_output.c:151
+msgid "_Run"
+msgstr "_Виконати"
+
+#: plugins/shell_output/shell_output.c:240
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Поле команди оболонки порожнє.\n"
+"\n"
+"Будь ласка, вкажіть вірну команду оболонки."
+
+#: plugins/shell_output/shell_output.c:269
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Помилка аналізу команди оболонки.\n"
+"\n"
+"Будь ласка, впишіть вірну команду оболонки."
+
+#: plugins/shell_output/shell_output.c:322
+msgid "An error occurs while running the selected command."
+msgstr "Сталася помилка під час виконання вибраної команди."
+
+#: plugins/shell_output/shell_output.c:453
+msgid "Exucute a program and insert its output in the current document at the current cursor position"
+msgstr "Виконати програму, і вставити її вивід у поточний документ у позицію курсора"
+
+#: plugins/time/time.c:227
 msgid "Available formats"
 msgstr "Доступні формати"
 
-#: plugins/time/time.c:234
+#: plugins/time/time.c:268
 msgid "Configure insert date/time plugin"
 msgstr "Налаштувати доповнення дати й часу"
 
-#: plugins/time/time.c:509
+#: plugins/time/time.c:551
 msgid "Insert Date/Time"
 msgstr "Вставити дату й час"
 
-#: plugins/time/time.c:510
+#: plugins/time/time.c:552
 msgid "Inserts the current date and time at the cursor position."
 msgstr "Вставити поточну дату й час в позицію курсора"
 
@@ -102,32 +140,38 @@ msgid ""
 "Could not find the required widgets inside goto-line.glade2.\n"
 ""
 msgstr ""
+"Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
+""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
+#: src/dialogs/gedit-dialog-plugin-manager.c:316
 msgid "Module file name"
 msgstr "Назва файлу модуля"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:316
+#: src/dialogs/gedit-dialog-plugin-manager.c:317
 msgid "Author(s)"
 msgstr "Автори"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:449
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
 msgid ""
 "Could not find plugin-manager.glade2, reinstall gedit.\n"
 ""
 msgstr ""
+"Не вдалося знайти plugin-manager.glade2, перевстановіть gedit.\n"
+""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:457
+#: src/dialogs/gedit-dialog-plugin-manager.c:458
 msgid "Plugin Manager"
 msgstr "Керування доповненнями"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:484
+#: src/dialogs/gedit-dialog-plugin-manager.c:485
 msgid ""
 "Invalid glade file for plugin manager -- not all widgets found.\n"
 ""
 msgstr ""
+"Невірний файл glade для керування доповненнями -- не всі віджети знайдено.\n"
+""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:573
+#: src/dialogs/gedit-dialog-plugin-manager.c:574
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Не вдалося створити діалог керування доповненнями"
 
@@ -175,7 +219,7 @@ msgstr "Панель стану"
 
 #: src/dialogs/gedit-preferences-dialog.c:201
 msgid "MDI"
-msgstr ""
+msgstr "MDI"
 
 #: src/dialogs/gedit-preferences-dialog.c:209
 msgid "Font & Colors"
@@ -196,7 +240,7 @@ msgstr "Відмінити"
 
 #: src/dialogs/gedit-preferences-dialog.c:216
 msgid "Wrap mode"
-msgstr ""
+msgstr "Режим загортання"
 
 #: src/dialogs/gedit-preferences-dialog.c:217
 msgid "Line numbers"
@@ -222,7 +266,7 @@ msgstr "Інтерфейс користувача"
 #: src/dialogs/gedit-preferences-dialog.c:303
 #: src/gedit-ui.xml.h:40
 msgid "Preferences"
-msgstr ""
+msgstr "Приорітети"
 
 #: src/dialogs/gedit-preferences-dialog.c:464
 msgid "Categories"
@@ -469,7 +513,7 @@ msgstr "Помилка, неможливо ініціалізувати допо
 #: src/gedit-plugins-engine.c:227
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Помилка, доповнення \"%s\" не вказало назви"
 
 #: src/gedit-plugins-engine.c:302
 #, c-format
@@ -519,11 +563,11 @@ msgstr "Файл: %s"
 msgid "Page: %d"
 msgstr "Сторінка: %d"
 
-#: src/gedit-print.c:464
+#: src/gedit-print.c:468
 msgid "gedit - Print Preview"
 msgstr "gedit - попередній перегляд друку"
 
-#: src/gedit-print.c:540
+#: src/gedit-print.c:544
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
