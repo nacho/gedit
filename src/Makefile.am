@@ -13,7 +13,7 @@ plugindir = $(prefix)/share/go/plugins
 
 bin_PROGRAMS = gedit
 
-plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin #email-plugin
+plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin hello_plugin #email-plugin
 
 gedit_SOURCES = 	\
 	gedit.c		\
@@ -40,7 +40,6 @@ gedit_SOURCES = 	\
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
-
 diff_plugin_SOURCES =	\
 	diff.c		\
 	client.c	\
@@ -62,6 +61,16 @@ reverse_plugin_SOURCES=	\
 
 reverse_plugin_LDFLAGS = `gtk-config --libs`
 
+# To stop this compiling, add #'s to the following lines...
+hello_plugin_SOURCES =  \
+	hello.c		\
+	client.c	\
+	client.h	
+	
+hello_plugin_LDFLAGS = `gtk-config --libs`
+# Stop putting the #'s here if you dont want this plugin
+
+
 #email_plugin_SOURCES =	\
 #	email.c		\
 #	client.c	\
@@ -76,4 +85,5 @@ CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic
+	-Wall -ansi -pedantic  \
+	#-DDEBUG

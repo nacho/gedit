@@ -1,6 +1,6 @@
 /* hello.c - test plugin.
  *
- * Copyright (C) 1998 Chris Lahey.
+ * Copyright (C) 1998 Chris Lahey, Alex Roberts.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -11,31 +11,38 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
+ *
+ * ---------------
+ *
+ * This is a test Plugin, for learning purposes. I agree it isn't the 
+ * _best_ plugin for learning how to write them, a tutorial will probably
+ * be written at some point, when the Plugin interface is out of its
+ * current flux.
+ * 			--Alex <bse@dial.pipex.com>
+ *
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+/* Header for making plugin act as a plugin */
+#include "client.h"
+
+static gint context;
 
 int main( int argc, char *argv[] )
 {
-  int fd;
-  int undone = 1;
-  char buff[1025];
+  client_info info;
+  
+  /* Location of the plugin in the 'Plugin's' menu in gEdit */
+  info.menu_location = "[Plugins]Hello";
+  
+  	      /* Initialisation of the Plugin itself, checking if being
+  	         run as a plugin (ie, fromg gEdit, not from command line */	
+    context = client_init( &argc, &argv, &info );
 
-  if( argc < 5 || strcmp( argv[1], "-go" ) )
-    {
-      printf( "Must be run as a plugin.\n" );
-      _exit(1);
-    }
-  else
-    {
-      fd = atoi( argv[2] );
-      while( undone > 0 )
-	{
-	  buff[ undone = read( fd, buff, 1024 ) ] = 0;
-	  printf( buff );
-	}
-    }
-  _exit(0);
+	/* The 'output' of the Plugin */
+      printf("Hello World!\n");
+ 
+  exit(0);
 }
