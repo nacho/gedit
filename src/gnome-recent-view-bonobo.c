@@ -217,7 +217,7 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 
 		tip =  g_strdup_printf (_("Open %s"), escaped_uri_for_display);
 
-		verb_name = g_strdup_printf ("%s%s%d", appname,GNOME_RECENT_VERB_NAME, i);
+		verb_name = g_strdup_printf ("%s%s%d", appname, GNOME_RECENT_VERB_NAME, i);
 		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
 		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
 
@@ -274,6 +274,7 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 		++num;
 	}
 
+	g_free (appname);
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 }

@@ -439,6 +439,8 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
 	utf8_uri = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
+	g_free (canonical_uri);
+
 	if (utf8_uri == NULL) {
 		g_warning ("Couldn't add %s to recent file list", uri);
 		return FALSE;
