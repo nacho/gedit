@@ -51,7 +51,7 @@
 #define PLUGIN_MANAGER_NAME_COLUMN 1
 
 #define PLUGIN_MANAGER_NAME_TITLE _("Plugin")
-#define PLUGIN_MANAGER_ACTIVE_TITLE _("Load")
+#define PLUGIN_MANAGER_ACTIVE_TITLE _("Enabled")
 
 #define PLUGIN_MANAGER_LOGO "/gedit-plugin-manager.png"
 
@@ -62,13 +62,10 @@ struct _GeditPluginManager {
 
 	GtkWidget *tree; 	/* a GtkTreeView, shows plugins */
 	GtkWidget *notebook; 	/* a GtkNotebook, shows info about plugins */
-	
-	GtkWidget *author; 	/* a GtkLabel, shows the author of the plugin */
-	GtkWidget *filename; 	/* a GtkLabel, shows the filename of the plugin */
-	GtkWidget *desc; 	/* a GtkLabel, shows the description of the plugin */
-	GtkWidget *name; 	/* a GtkLabel, shows the name of the plugin */
-	GtkWidget *copyright; 	/* a GtkLabel, shows the copyright info of the plugin */
-	GtkWidget *configure_button; /* a GtkButton,configures a plugin when clicked */
+
+	GtkWidget *about_button; /* a GtkButton, show info about a plugin when clicked */
+
+	GtkWidget *configure_button; /* a GtkButton, configures a plugin when clicked */
 
 	const GList *plugins; 	/* a list of type GeditPlugin  */
 };
@@ -76,11 +73,68 @@ struct _GeditPluginManager {
 static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *dialog);
 static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model);
 static void plugin_manager_toggle_all (GeditPluginManager *dialog);
-static void plugin_manager_update_info (GeditPluginManager *dialog,
-					       GeditPluginInfo *info);
 
 static void plugin_manager_destroyed (GtkObject *obj,  void *dialog_pointer);
 
+
+static void
+about_button_cb (GtkWidget *button, gpointer data)
+{
+	GeditPluginManager *pm = data;
+	GeditPluginInfo *info;
+	GtkWidget *about = NULL;
+	gchar **authors;
+	GdkPixbuf* pixbuf = NULL;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	info = plugin_manager_get_selected_plugin (pm);
+
+	g_return_if_fail (info != NULL);
+
+	gedit_debug (DEBUG_PLUGINS, "About: %s\n", info->plugin->name);
+
+	authors = g_strsplit (info->plugin->author, ", ", 0); 
+
+	pixbuf = gdk_pixbuf_new_from_file ( GNOME_ICONDIR "/gedit-plugin-manager.png", NULL);
+	if (pixbuf != NULL)
+	{
+		GdkPixbuf* temp_pixbuf = NULL;
+
+		temp_pixbuf = gdk_pixbuf_scale_simple (pixbuf, 
+					 gdk_pixbuf_get_width (pixbuf),
+					 gdk_pixbuf_get_height (pixbuf),
+					 GDK_INTERP_HYPER);
+		g_object_unref (pixbuf);
+
+		pixbuf = temp_pixbuf;
+	}
+
+	about = gnome_about_new (info->plugin->name, 
+				 NULL,
+				 info->plugin->copyright,
+				 info->plugin->desc,
+				 (const gchar**) authors,
+				 NULL,
+				 NULL,
+				 pixbuf);
+	
+	if (pixbuf != NULL)
+		g_object_unref (pixbuf);
+
+	if (authors != NULL)
+		g_strfreev (authors);
+
+	gtk_window_set_transient_for (GTK_WINDOW (about),
+			GTK_WINDOW (gtk_widget_get_toplevel (pm->page)));
+
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (about), TRUE);
+
+	gtk_widget_show (about);
+	
+	
+	gedit_debug (DEBUG_PLUGINS, "Done");	
+}
 
 static void
 configure_button_cb (GtkWidget *button, gpointer data)
@@ -170,8 +224,6 @@ cursor_changed_cb (GtkTreeView  *view, gpointer data)
 
 	gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
-		
-	plugin_manager_update_info (dialog, info);
 }
 
 static void
@@ -249,8 +301,6 @@ plugin_manager_populate_lists (GeditPluginManager *dialog)
 
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
-
-		plugin_manager_update_info (dialog, info);
 	}
 }
 
@@ -301,37 +351,6 @@ plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 	plugin_manager_set_active (iter, model, active);
 }
 
-
-
-static void
-plugin_manager_update_info (GeditPluginManager *dialog, GeditPluginInfo *info)
-{
-	gchar *t;
-	gchar *filename;
-	gchar *author;
-	gchar *name;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	/* maybe we should put the full path?  It's pretty long.... */
-	t = g_path_get_basename (info->plugin->file);
-	g_return_if_fail (t != NULL);
-
-	filename = g_strdup_printf ("%s: %s", _("Module file name"), t);
-	author = g_strdup_printf ("%s: %s", _("Author(s)"), info->plugin->author);
-	name = g_strdup_printf ("%s plugin", info->plugin->name);
-
-	gtk_label_set_markup (GTK_LABEL (dialog->desc), info->plugin->desc);
-	gtk_label_set_text (GTK_LABEL (dialog->author), author);
-	gtk_label_set_text (GTK_LABEL (dialog->filename), filename);
-	gtk_label_set_text (GTK_LABEL (dialog->copyright), info->plugin->copyright);
-	gtk_label_set_text (GTK_LABEL (dialog->name), name);
-
-	g_free (t);
-	g_free (author);
-	g_free (filename);
-	g_free (name);
-}
 
 static GeditPluginInfo *
 plugin_manager_get_selected_plugin (GeditPluginManager *dialog)
@@ -495,18 +514,13 @@ gedit_plugin_manager_get_page (void)
 
 	content = glade_xml_get_widget (gui, "plugin_manager_dialog_content");
 	pm->tree = glade_xml_get_widget (gui, "plugin_tree");
-	pm->notebook = glade_xml_get_widget (gui, "plugin_notebook");
-	pm->desc = glade_xml_get_widget (gui, "desc_label");
-	pm->author = glade_xml_get_widget (gui, "author_label");
-	pm->filename = glade_xml_get_widget (gui, "file_label");
-	pm->name = glade_xml_get_widget (gui, "name_label");
-	pm->copyright = glade_xml_get_widget (gui, "copyright_label");
+
+	pm->about_button = glade_xml_get_widget (gui, "about_button");
 	pm->configure_button = glade_xml_get_widget (gui, "configure_button");
 	viewport = glade_xml_get_widget (gui, "plugin_viewport");
 
-	if (!(content && pm->tree && pm->notebook && pm->desc &&
-	      pm->author && pm->filename && pm->configure_button &&
-	      viewport && pm->name && pm->copyright)) {
+	if (!(content && pm->tree && pm->configure_button &&
+	      viewport && pm->about_button)) {
 
 		g_warning (_("Invalid glade file for plugin manager -- not all widgets found.\n"));
 		g_object_unref (gui);
@@ -516,6 +530,10 @@ gedit_plugin_manager_get_page (void)
 
 	/* setup a window of a sane size. */
 	gtk_widget_set_size_request (GTK_WIDGET (viewport), 270, 100);
+
+	/* connect something to the "about" button */
+	g_signal_connect (G_OBJECT (pm->about_button), "clicked",
+			  G_CALLBACK (about_button_cb), pm);
 
 	/* connect something to the "configure" button */
 	g_signal_connect (G_OBJECT (pm->configure_button), "clicked",
