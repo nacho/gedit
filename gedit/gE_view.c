@@ -774,6 +774,7 @@ gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 	{
 		gtk_widget_hide (view->split_parent);
 	}
+ 
    	view->splitscreen = split_screen;
 }
 
@@ -828,8 +829,7 @@ gedit_view_set_font (gedit_view *view, gchar *font)
 {
 	GtkStyle *style;
 	
-	style = gtk_style_copy(gtk_widget_get_style (
-		GTK_WIDGET((view)->text)));
+	style = gtk_style_copy(gtk_widget_get_style (GTK_WIDGET((view)->text)));
   	gdk_font_unref (style->font);
   	
   	if (use_fontset)
