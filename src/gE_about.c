@@ -34,23 +34,23 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		"http://gedit.pn.org",
 		"",
 		N_("With special thanks to:"),
-		"       Will LaShell",
-		"       Chris Lahey",
-		"       Andy Kahn",
-		"       Miguel de Icaza",
-		"       Martin Baulig",
-		"       Thomas Holmgren",
-		"       Martijn van Beers",
+		"     Will LaShell, Chris Lahey, Andy Kahn,",
+		"     Miguel de Icaza, Martin Baulig,",
+		"     Thomas Holmgren, Martijn van Beers",
 		NULL
 		
 	};
+
+			
 
 	about = gnome_about_new ("gEdit", VERSION,
 			_("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
 			authors,
 			_("gEdit is a small and lightweight text editor for GNOME/Gtk+"),
-			NULL);
+			"gedit-logo.png");
 			
 	gtk_widget_show (about);
 	
+	/*gtk_widget_destroy (about);
+	g_free (authors);	*/
 }

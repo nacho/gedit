@@ -467,7 +467,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 	    
 	  if (doc->changed) {
 	  
- 	    fname = doc->filename;
+ 	    fname = g_strdup (doc->filename);
 
  	    if (fname == NULL) {
  	    
@@ -511,7 +511,7 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
           doc = (gE_document *)g_list_nth_data (mdi->children, i);
           if (doc->changed) {
           
-            fname = doc->filename;
+            fname = g_strdup(doc->filename);
 
             if (fname == NULL) {
             
@@ -625,7 +625,8 @@ static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
 
 	if (mdi->active_child == NULL) {
 	
-	  g_free (fname);		  return;
+	  g_free (fname);
+	  return;
 	}	  
 	
 	doc = gE_document_current();

@@ -158,6 +158,36 @@ void view_list_erase (gE_view *view, gE_data *data)
 
 }
 
+gint insert_into_buffer (gE_document *doc, gchar *buffer, gint position)
+{
+
+	  		if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
+	
+#ifdef DEBUG
+	  g_message ("g_string_insert");
+#endif
+	  doc->buf = g_string_insert (doc->buf, position, buffer);
+	
+	} else if (position == 0) {
+
+#ifdef DEBUG		  
+	  g_message ("g_string_prepend");
+#endif
+	  doc->buf = g_string_prepend (doc->buf, buffer);
+	  
+	} else {
+	  
+#ifdef DEBUG
+	  g_message ("g_string_append");
+#endif
+	  doc->buf = g_string_append (doc->buf, buffer);
+	
+	}
+	
+	return 0;		
+
+}
+
 void
 doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length,
 	int *pos, gE_view *view)
@@ -213,28 +243,7 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
 #endif
 
-	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
-	
-#ifdef DEBUG
-	  g_message ("g_string_insert");
-#endif
-	  doc->buf = g_string_insert (doc->buf, position, buffer);
-	
-	} else if (position == 0) {
-
-#ifdef DEBUG		  
-	  g_message ("g_string_prepend");
-#endif
-	  doc->buf = g_string_prepend (doc->buf, buffer);
-	  
-	} else {
-	  
-#ifdef DEBUG
-	  g_message ("g_string_append");
-#endif
-	  doc->buf = g_string_append (doc->buf, buffer);
-	
-	}
+	insert_into_buffer (doc, buffer, position);
 
 	gE_undo_add (buffer, position, (position + length), INSERT, doc);
 
@@ -255,7 +264,7 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	g_free (data);
 
 
-	if (length > 96)  
+	/*if (length > 96)  */
 	  g_free (buffer);
 
 }
@@ -380,6 +389,7 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	gchar *buffer, *whitespace;
 	gE_view *view = (gE_view *)cbdata;
 	gE_document *doc;
+	gE_data *data;	
 	
 	
 	if ((length != 1) || (insertion_text[0] != '\n'))
@@ -443,11 +453,13 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	if (strlen(whitespace) > 0) {
 
 		i = *pos;
-		/*gtk_text_set_point (GTK_TEXT (text), i);
+		gtk_text_set_point (GTK_TEXT (text), i);
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
-			whitespace, strlen (whitespace));*/
-		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace,
-								  strlen(whitespace), &i);
+			whitespace, strlen (whitespace));
+	
+		insert_into_buffer (doc, whitespace, i);
+
+		
 
 	}
 	
@@ -666,6 +678,11 @@ static void gE_view_init (gE_view *view)
 					GTK_SIGNAL_FUNC (gE_event_key_press), 0);
 
 		
+
+	/* Handle Auto Indent */
+	gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
+		GTK_SIGNAL_FUNC(auto_indent_cb), view);
+
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
 	of implementing undo/redo... 
@@ -677,10 +694,6 @@ static void gE_view_init (gE_view *view)
 		                           (gpointer) view);
 
 
-
-	/* Handle Auto Indent */
-	gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
-		GTK_SIGNAL_FUNC(auto_indent_cb), view);
 
 /*	gtk_signal_connect_after (GTK_OBJECT(view->text), "key_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);*/

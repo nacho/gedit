@@ -1,3 +1,27 @@
+Mon Oct  4 16:29:40 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+	
+	* README: Updated for 0.5.5.	
+
+Mon Oct  4 15:00:07 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_about.c: (gE_about_box) Tided up the authors section, and added
+	  the gEdit logo. 
+	
+	* src/Makefile.am: Added the gEdit logo to be installed.		  	
+
+Mon Oct  4 14:45:56 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_plugin_api.c: (gE_plugin_text_insert) Get an accurate position,
+	  for some reason get_point doesnt seem to return the proper postiion.
+	  The insert time plugin now functions properly.. as does every other
+	  plugin that inserts text. =)	  	  		
+
+Sun Oct  3 21:15:27 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (file_save_cb) (file_save_all_cb) Let's duplicate the
+	  filename, string, instead of just pointing to it.. eh? g_free was
+	  	scking up the filename after saving.	
+
 Fri Sep 24 20:05:02 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* commands.c: (recent_update) Removed g_free that was mucking everything up.

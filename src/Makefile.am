@@ -4,6 +4,9 @@ appicondir=$(datadir)/pixmaps
 
 appicon_DATA = gnome-gedit.png
 
+applogodir=$(datadir)/pixmaps
+applogo_DATA = gedit-logo.png
+
 INCLUDES = -I$(includedir) -I$(top_srcdir)		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\

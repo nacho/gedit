@@ -220,7 +220,7 @@ int main (int argc, char **argv)
 	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
 
 	
-	data = g_malloc (sizeof (gE_data));
+	/*data = g_malloc (sizeof (gE_data));*/
 	window_list = NULL;
 	settings = g_malloc (sizeof (gE_preference));
 	
@@ -297,7 +297,7 @@ int main (int argc, char **argv)
 	    
 	}
 	
-	g_free (data);
+	/*g_free (data);*/
 
 	
 	gtk_main ();
