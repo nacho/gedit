@@ -102,26 +102,49 @@ gE_show_version(void)
 }
 
 #else	/* USING GNOME */
-/*
 static struct argp_option argp_options [] = {
-	{ NULL, 0, NULL, 0, NULL, 0 },
+  { "launch-plugin", 'p', N_("Plugin Name"), 0, N_("Launch a plugin at startup"), 1 },
+  { NULL, 0, NULL, 0, NULL, 0 },
 };
-*/
 
 static GList *file_list;
 
 static error_t
 parse_an_arg (int key, char *arg, struct argp_state *state)
 {
-	
-	if (key == ARGP_KEY_ARG)
-		file_list = g_list_append (file_list, arg);
-	return 0;
+  if (key == 'p')
+    {
+      gchar *fullname;
+      plugin_callback_struct callbacks;
+      plugin *plug;
+  
+      fullname = g_new( gchar, strlen( PLUGINDIR ) + strlen( arg ) + 2 + strlen( "-plugin" ) );
+      sprintf( fullname, "%s/%s%s", PLUGINDIR, arg, "-plugin" );
+      
+      plug = plugin_new( fullname );
+      
+      callbacks.document.create = gE_plugin_document_create;
+      callbacks.text.append = gE_plugin_text_append;
+      callbacks.document.show = gE_plugin_document_show;
+      callbacks.document.current = gE_plugin_document_current;
+      callbacks.document.filename = gE_plugin_document_filename;
+      callbacks.text.get = gE_plugin_text_get;
+      callbacks.program.quit = NULL;
+      callbacks.program.reg = gE_plugin_program_register;
+      
+      plugin_register( plug, &callbacks, 0 );
+      
+      g_free( fullname );
+      return 0;
+    }
+  if (key == ARGP_KEY_ARG)
+    file_list = g_list_append (file_list, arg);
+  return 0;
 }
 
 static struct argp parser =
 {
-	NULL, parse_an_arg, NULL, NULL, NULL, NULL, NULL
+	argp_options, parse_an_arg, NULL, NULL, NULL, NULL, NULL
 };
 
 int main (int argc, char **argv)

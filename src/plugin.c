@@ -12,14 +12,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
+#include "plugin.h"
 #include <unistd.h>
+#include <gtk/gtk.h>
 #include <string.h>
 #include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <gtk/gtk.h>
-#include "plugin.h"
 
 static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
 
@@ -168,7 +168,7 @@ void plugin_query_all( plugin_callback_struct *callbacks )
   struct dirent *direntry;
   gchar *shortname;
   
-  while( (direntry = readdir( dir )) )
+  while( direntry = readdir( dir ) )
     {
       plugin *plug;
       if ( strrchr( direntry->d_name, '/' ) )
@@ -256,7 +256,8 @@ static void plugin_get_more( gpointer data, gint source, GdkInputCondition condi
   if( partly->length - partly->sofar == 0 )
     {
       gdk_input_remove( partly->incall );
-      partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+      if( partly->finished )
+	partly->finished( partly->plug, partly->buff, partly->length, partly->data );
       g_free( partly->buff );
       g_free( partly );
     }
@@ -268,7 +269,8 @@ static void plugin_get_more( gpointer data, gint source, GdkInputCondition condi
     }
 }
 
-void plugin_get_all( plugin *plug, gint length, plugin_callback *finished, gpointer data )
+void
+plugin_get_all( plugin *plug, gint length, plugin_callback *finished, gpointer data )
 {
   partly_read *partly = g_malloc0( sizeof( partly_read ) );
   partly->plug = plug;
@@ -281,7 +283,53 @@ void plugin_get_all( plugin *plug, gint length, plugin_callback *finished, gpoin
   partly->data = data;
 }
 
-static void process_next( plugin *plug, gchar *buffer, int length, gpointer data )
+static void
+plugin_send_more( gpointer data, gint source, GdkInputCondition condition )
+{
+  partly_read *partly = (partly_read *) data;
+  int count;
+
+  partly->sofar += (count = write( source, partly->buff + partly->sofar, partly->length - partly->sofar ) );
+  if( partly->length - partly->sofar == 0 )
+    {
+      gdk_input_remove( partly->incall );
+      if( partly->finished )
+	partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+      g_free( partly->buff );
+      g_free( partly );
+    }
+  else if( count == -1 )
+    {
+      gdk_input_remove( partly->incall );
+      g_free( partly->buff );
+      g_free( partly );
+    }
+}
+
+void
+plugin_send_data_all_with_length( plugin *plug, gchar *buffer, gint length, plugin_callback *finished, gpointer data )
+{
+  partly_read *partly = g_malloc0( sizeof( partly_read ) );
+  partly->plug = plug;
+  partly->buff = g_malloc( length + sizeof( int ) + 1 );
+  *( (int *) partly->buff) = length;
+  strcpy( partly->buff + sizeof( int ), buffer );
+  partly->length = length + sizeof( int );
+  partly->sofar = 0;
+  partly->incall = gdk_input_add( plug->pipe_data, GDK_INPUT_WRITE,
+				  plugin_send_more, partly );
+  partly->finished = finished;
+  partly->data = data;
+}
+
+static void
+plugin_get_command( plugin *plug, gchar *buffer, int length, gpointer data )
+{
+  plugin_get_all( plug, 1, process_command, NULL );
+}
+
+static void
+process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 {
   gint next = GPOINTER_TO_INT( data );
   plugin_info *info;
@@ -330,11 +378,10 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
       if ( plug->callbacks.text.get )
 	{
 	  char *data = plug->callbacks.text.get( *( (int *) buffer ) );
-	  plugin_send_data_with_length( plug, data, strlen( data ) );
+	  plugin_send_data_all_with_length( plug, data, strlen( data ), plugin_get_command, NULL );
 	}
       else
-	plugin_send_data_with_length( plug, "", 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
+	plugin_send_data_all_with_length( plug, "", 0, plugin_get_command, NULL );
       break;
     case 9:
     case 13:
@@ -387,7 +434,8 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
      }
 }
 
-static void process_command( plugin *plug, gchar *buffer, int length, gpointer data )
+static void
+process_command( plugin *plug, gchar *buffer, int length, gpointer data )
 {
   switch ( *buffer )
     {

@@ -1,6 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
- *
- * plugin.h - plugin header files.
+/* plugin.h - plugin header files.
  *
  * Copyright (C) 1998 Chris Lahey.
  *
