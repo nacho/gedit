@@ -32,7 +32,7 @@
 #include "gedit-recent.h"
 #include "gedit-debug.h"
 
-#define GEDIT_RECENT_BASE_KEY "/desktop/gnome/gal-recent"
+#define GEDIT_RECENT_BASE_KEY "/desktop/gnome/recent-files"
 #define GEDIT_RECENT_DEFAULT_LIMIT 10
 #define GEDIT_RECENT_GLOBAL_LIMIT_ENV "GEDIT_RECENT_GLOBAL_LIMIT"
 #define GEDIT_RECENT_VERB_NAME "-uri-"
@@ -912,7 +912,8 @@ gedit_recent_g_slist_deep_free (GSList *list)
 {
 	GSList *lst;
 
-	g_return_if_fail (list);
+	if (list == NULL)
+		return;
 
 	lst = list;
 	while (lst) {
