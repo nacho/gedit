@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
 "POT-Creation-Date: 2000-06-01 17:07-0400\n"
-"PO-Revision-Date: 2000-06-04 03:04+02:00\n"
+"PO-Revision-Date: 2000-06-09 03:04+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Dansk/Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -64,8 +64,8 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Diff-indstik."
 
-#: plugins/email/email.c:135 plugins/email/email.c:144 src/document.c:161
-#: src/print.c:472
+#: plugins/email/email.c:135 plugins/email/email.c:144 src/document.c:159
+#: src/print.c:475
 msgid "Untitled"
 msgstr "Unavngivet"
 
@@ -144,11 +144,16 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gedit er en lille og hurtig tekstbehandler til Gnome/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:511
+#: src/dialogs/dialog-prefs.c:535
 msgid "gedit: Preferences"
 msgstr "gedit: Brugervalg"
 
-#: src/dialogs/dialog-replace.c:261
+#: src/dialogs/dialog-replace.c:172
+#, c-format
+msgid "found and replaced %i occurrences."
+msgstr "fandt og erstattede %i forekomster."
+
+#: src/dialogs/dialog-replace.c:227 src/search.c:289
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Teksten fundet på linje :%i"
@@ -185,7 +190,7 @@ msgstr "Udseende"
 #. auto_indent_toggle_cb, NULL,
 #. NULL),
 #.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:208
+#: src/dialogs/prefs.glade.h:8 src/menus.c:210
 msgid "Show Statusbar"
 msgstr "Vis statuslinje"
 
@@ -245,7 +250,7 @@ msgstr "Tilstand:"
 msgid "Notebook Tab Position: "
 msgstr "Notesbog faneplacering "
 
-#: src/dialogs/prefs.glade.h:27 src/menus.c:343
+#: src/dialogs/prefs.glade.h:27 src/menus.c:345
 msgid "Undo"
 msgstr "Fortryd"
 
@@ -297,27 +302,35 @@ msgstr "Forgrund:"
 msgid "Fonts/Colors"
 msgstr "Skrifttyper/farver"
 
-#: src/dialogs/prefs.glade.h:41 src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:41 src/dialogs/prefs.glade.h:48
 msgid "Printing"
 msgstr "Udskriver"
 
 #: src/dialogs/prefs.glade.h:42
-msgid "Add header"
-msgstr "Tilføj hoved"
+msgid "Add _header"
+msgstr "Tilføj _hoved"
 
 #: src/dialogs/prefs.glade.h:43
-msgid "Enable word wrapping"
-msgstr "Slå orddeling til"
+msgid "Enable word _wrapping"
+msgstr "Slå _orddeling til"
 
 #: src/dialogs/prefs.glade.h:44
-msgid "Print line numbers every:"
-msgstr "Udskriv linjenumre hver:"
+msgid "Print _line numbers every:"
+msgstr "Udskriv _linjenumre hver:"
 
 #: src/dialogs/prefs.glade.h:45
 msgid "line(s)"
 msgstr "linje(r)"
 
+#: src/dialogs/prefs.glade.h:46
+msgid "_Portrait"
+msgstr "_Portræt"
+
 #: src/dialogs/prefs.glade.h:47
+msgid "_Landscape"
+msgstr "_Landskab"
+
+#: src/dialogs/prefs.glade.h:49
 msgid "Paper"
 msgstr "Papir"
 
@@ -339,31 +352,37 @@ msgid "Replace All"
 msgstr "Erstat alle"
 
 #: src/dialogs/replace.glade.h:11
-msgid "Search for: "
-msgstr "Søg efter: "
+msgid "_Search for: "
+msgstr "_Søg efter: "
 
 #: src/dialogs/replace.glade.h:12
-msgid "Replace with: "
-msgstr "Erstat med: "
+msgid "_Replace with: "
+msgstr "_Erstat med: "
 
 #: src/dialogs/replace.glade.h:13
-msgid "beginning of document"
-msgstr "begyndelsen af dokumentet"
+msgid "b_eginning of document"
+msgstr "_begyndelsen af dokumentet"
 
 #: src/dialogs/replace.glade.h:14
-msgid "cursor position"
-msgstr "markørposition"
+msgid "_cursor position"
+msgstr "_markørposition"
 
 #: src/dialogs/replace.glade.h:15
-msgid "Case sensitive"
-msgstr "Forskel på små og store bogstaver"
+msgid "Case se_nsitive"
+msgstr "_Forskel på små og store bogstaver"
 
-#: src/document.c:375
+#. xgettext translators : RO = Read Only, it apears before
+#. the document "tab" in the mdi window like "R0 - file.txt"
+#: src/document.c:162
+msgid "RO - "
+msgstr "KL - "
+
+#: src/document.c:344
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "'%s' er blevet ændret. Ønsker du at gemme det?"
 
-#: src/file.c:91
+#: src/file.c:94
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -371,7 +390,7 @@ msgstr ""
 "En fejl opstod ved åbning af filen.\n"
 "Sørg venligst for at filen eksisterer."
 
-#: src/file.c:98
+#: src/file.c:101
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -390,11 +409,11 @@ msgstr ""
 "Sørg venligst for at filen ikke er i brug af en anden applikation\n"
 "og at filen ikke er tom."
 
-#: src/file.c:110
+#: src/file.c:111 src/file.c:256
 msgid "Could not allocate the required memory."
 msgstr "Kunne ikke tildele den krævede hukommelse."
 
-#: src/file.c:116
+#: src/file.c:117
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -409,7 +428,7 @@ msgstr ""
 "\n"
 "Sørg for at du har rettigheder til at åbne filen."
 
-#: src/file.c:185
+#: src/file.c:171
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -426,7 +445,7 @@ msgstr ""
 "Sørg for at stien, du angav, eksisterer og at du har de nødvendige "
 "skriverettigheder."
 
-#: src/file.c:199
+#: src/file.c:184
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -443,7 +462,7 @@ msgstr ""
 "På grund af en ukendt årsag (1). Rapportér venligst dette problem til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:213
+#: src/file.c:198
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -460,37 +479,41 @@ msgstr ""
 "På grund af en ukendt årsag (2). Rapportér venligst dette problem til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:279
+#: src/file.c:275
+msgid "Error in the pipe ."
+msgstr "Fejl i røret ."
+
+#: src/file.c:326
 msgid "Open File ..."
 msgstr "Åbn fil ..."
 
-#: src/file.c:321
+#: src/file.c:367
 msgid "Save As..."
 msgstr "Gem som..."
 
-#: src/file.c:359
+#: src/file.c:403
 #, c-format
 msgid "Loaded file %s"
 msgstr "Indlæste fil %s"
 
-#: src/file.c:424
+#: src/file.c:467
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "'%s' vil blive overskrevet. Vil du fortsætte ?"
 
-#: src/file.c:435
+#: src/file.c:478
 msgid "Document has not been saved."
 msgstr "Dokument er ikke blevet gemt."
 
-#: src/file.c:443
+#: src/file.c:487
 msgid "Error saving file!"
 msgstr "Gemning mislykkedes!"
 
-#: src/file.c:507
+#: src/file.c:560
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke omgøre et dokument uden titel\n"
 
-#: src/file.c:520
+#: src/file.c:573
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -499,266 +522,222 @@ msgstr ""
 "Er du sikker på at du vil omgøre alle ændringer?\n"
 "(%s)"
 
-#: src/file.c:548
+#: src/file.c:602
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen `%s' eksisterer ikke. Vil du gerne oprette den?"
 
-#: src/gedit.c:54
-msgid "Show commands debugging messages."
-msgstr "Vis fejlsøgningshjælp for kommando."
-
-#: src/gedit.c:57
-msgid "Show document debugging messages."
-msgstr "Vis fejlsøgningshjælp for dokument."
-
-#: src/gedit.c:60
-msgid "Show file debugging messages."
-msgstr "Vis fejlsøgningshjælp for fil."
-
-#: src/gedit.c:63
-msgid "Show plugin debugging messages."
-msgstr "Vis fejlsøgningshjælp for indstik."
-
-#: src/gedit.c:66
-msgid "Show prefs debugging messages."
-msgstr "Vis fejlsøgningshjælp for præferencer."
-
-#: src/gedit.c:69
-msgid "Show printing debugging messages."
-msgstr "Vis fejlsøgningshjælp for udskrift."
-
-#: src/gedit.c:72
-msgid "Show search debugging messages."
-msgstr "Vis fejlsøgningshjælp for søgning."
-
-#: src/gedit.c:75
-msgid "Show undo debugging messages."
-msgstr "Vis fejlsøgningshjælp for fortryd-funktion."
-
-#: src/gedit.c:78
-msgid "Show view debugging messages."
-msgstr "Vis fejlsøgningshjælp for visning."
-
-#: src/gedit.c:81
-msgid "Show recent debugging messages."
-msgstr "Vis fejlsøgningshjælp for nyligt åbnede filer."
-
-#: src/gedit.c:84
-msgid "Turn on all debugging messages."
-msgstr "Aktivér alt fejlsøgningshjælp."
-
-#: src/menus.c:50
+#: src/menus.c:51
 msgid "Open (swap) .c/.h file"
 msgstr "Åbn (ombyt) .c/.h fil"
 
-#: src/menus.c:58
+#: src/menus.c:59
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:59 src/menus.c:322
+#: src/menus.c:60 src/menus.c:324
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
-#: src/menus.c:64
+#: src/menus.c:65
 msgid "Save All"
 msgstr "Gem alle"
 
-#: src/menus.c:65
+#: src/menus.c:66
 msgid "Save All Open Files"
 msgstr "Gem alle åbne filer"
 
-#: src/menus.c:71
+#: src/menus.c:72
 msgid "Revert"
 msgstr "Forkast"
 
-#: src/menus.c:79
+#: src/menus.c:80
 msgid "Print preview..."
 msgstr "Vis udskrift..."
 
-#: src/menus.c:80
+#: src/menus.c:81
 msgid "Preview data to be printed"
 msgstr "Se eksempel på udskrift"
 
-#: src/menus.c:86
+#: src/menus.c:87
 msgid "Close All"
 msgstr "Luk alle"
 
-#: src/menus.c:87
+#: src/menus.c:88
 msgid "Close All Open Files"
 msgstr "Luk alle åbne filer"
 
-#: src/menus.c:111
+#: src/menus.c:112
 msgid "Find _In Files..."
 msgstr "Find _i filer..."
 
-#: src/menus.c:112
+#: src/menus.c:113
 msgid "Find text in all open files"
 msgstr "Find tekst i alle åbne filer"
 
-#: src/menus.c:124
+#: src/menus.c:126
 msgid "Goto _Line..."
 msgstr "Gå til _linje..."
 
-#: src/menus.c:125
+#: src/menus.c:127
 msgid "Go to a specific line number"
 msgstr "Gå til et specifikt linjenummer"
 
-#: src/menus.c:134
+#: src/menus.c:136
 msgid "_Add View"
 msgstr "_Tilføj visning"
 
-#: src/menus.c:135
+#: src/menus.c:137
 msgid "Add a new view of the document"
 msgstr "Tilføj ny visning af dokumentet"
 
-#: src/menus.c:137
+#: src/menus.c:139
 msgid "_Remove View"
 msgstr "_Fjern visning"
 
-#: src/menus.c:138
+#: src/menus.c:140
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/menus.c:160
+#: src/menus.c:162
 msgid "_Top"
 msgstr "_Øverst"
 
-#: src/menus.c:161
+#: src/menus.c:163
 msgid "Put the document tabs at the top"
 msgstr "Placér dokumentfanerne øverst"
 
-#: src/menus.c:166
+#: src/menus.c:168
 msgid "_Bottom"
 msgstr "_Nederst"
 
-#: src/menus.c:167
+#: src/menus.c:169
 msgid "Put the document tabs at the bottom"
 msgstr "Placér dokumentfanerne nederst"
 
-#: src/menus.c:172
+#: src/menus.c:174
 msgid "_Left"
 msgstr "_Venstre"
 
-#: src/menus.c:173
+#: src/menus.c:175
 msgid "Put the document tabs on the left"
 msgstr "Placér dokumentfanerne til venstre"
 
-#: src/menus.c:178
+#: src/menus.c:180
 msgid "_Right"
 msgstr "_Højre"
 
-#: src/menus.c:179
+#: src/menus.c:181
 msgid "Put the document tabs on the right"
 msgstr "Placér dokumentfanerne til højre"
 
-#: src/menus.c:187
+#: src/menus.c:189
 msgid "Toggle the presence of the document tabs"
 msgstr "Aktivér/deaktivér visning af dokumentfaner"
 
-#: src/menus.c:209
+#: src/menus.c:211
 msgid ""
 "Enable or disable the statusbar at the bottom of this application window."
 msgstr ""
 "Aktiverer eller deaktiverer statuslinjen i bunden af dette programvindue."
 
-#: src/menus.c:305 src/plugin.c:111 src/plugin.c:201
+#: src/menus.c:307 src/plugin.c:111 src/plugin.c:201
 msgid "_Plugins"
 msgstr "_Indstik"
 
-#: src/menus.c:322
+#: src/menus.c:324
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:326
+#: src/menus.c:328
 msgid "Open"
 msgstr "Åbn"
 
-#: src/menus.c:326
+#: src/menus.c:328
 msgid "Open a file"
 msgstr "Åbn en fil"
 
-#: src/menus.c:330
+#: src/menus.c:332
 msgid "Save"
 msgstr "Gem"
 
-#: src/menus.c:330
+#: src/menus.c:332
 msgid "Save the current file"
 msgstr "Gem den nuværende fil"
 
-#: src/menus.c:334
+#: src/menus.c:336
 msgid "Close"
 msgstr "Luk"
 
-#: src/menus.c:334
+#: src/menus.c:336
 msgid "Close the current file"
 msgstr "Luk den nuværende fil"
 
-#: src/menus.c:338
+#: src/menus.c:340
 msgid "Print"
 msgstr "Udskriv"
 
-#: src/menus.c:338
+#: src/menus.c:340
 msgid "Print the current file"
 msgstr "Udskriv den nuværende fil"
 
-#: src/menus.c:343
+#: src/menus.c:345
 msgid "Undo last operation"
 msgstr "Fortryd sidste handling"
 
-#: src/menus.c:347
+#: src/menus.c:349
 msgid "Redo"
 msgstr "Gentag"
 
-#: src/menus.c:347
+#: src/menus.c:349
 msgid "Redo last operation"
 msgstr "Gentag sidste handling"
 
-#: src/menus.c:351
+#: src/menus.c:353
 msgid "Cut"
 msgstr "Klip"
 
-#: src/menus.c:351
+#: src/menus.c:353
 msgid "Cut the selection"
 msgstr "Udklip det markerede"
 
-#: src/menus.c:355
+#: src/menus.c:357
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:355
+#: src/menus.c:357
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
-#: src/menus.c:359
+#: src/menus.c:361
 msgid "Paste"
 msgstr "Indsæt"
 
-#: src/menus.c:359
+#: src/menus.c:361
 msgid "Paste the clipboard"
 msgstr "Indsæt indhold af klipbord"
 
-#: src/menus.c:363
+#: src/menus.c:365
 msgid "Find"
 msgstr "Find"
 
-#: src/menus.c:363
+#: src/menus.c:365
 msgid "Search for a string"
 msgstr "Søg efter en tekst"
 
-#: src/menus.c:367 src/window.c:63
+#: src/menus.c:369 src/window.c:78
 msgid "Line"
 msgstr "Linje"
 
-#: src/menus.c:367
+#: src/menus.c:369
 msgid "Get the current and total lines"
 msgstr "Få nuværende og alle linjer"
 
-#: src/menus.c:372
+#: src/menus.c:374
 msgid "Exit"
 msgstr "Afslut"
 
-#: src/menus.c:372
+#: src/menus.c:374
 msgid "Exit the program"
 msgstr "Afslut programmet"
 
@@ -779,29 +758,29 @@ msgstr "Fejl, init_plugin returnerede fejl"
 msgid "Error, plugin is still in use"
 msgstr "Fejl, indstik er stadig i brug"
 
-#: src/print.c:152
+#: src/print.c:155
 msgid "Pages"
 msgstr "Papir"
 
-#: src/print.c:191
+#: src/print.c:194
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Vis udskrift"
 
-#: src/print.c:700
+#: src/print.c:731
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Side: %i/%i"
 
-#: src/recent.c:188
+#: src/recent.c:187
 msgid "_File/"
 msgstr "_Fil/"
 
-#: src/recent.c:196 src/recent.c:197
+#: src/recent.c:195 src/recent.c:196
 msgid "_File"
 msgstr "_Fil"
 
-#: src/search.c:215
+#: src/search.c:191
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -809,7 +788,7 @@ msgstr ""
 "Kan ikke tælle linier hvis en anden søgeoperation er aktiv, venligst luk "
 "søgedialogen."
 
-#: src/search.c:230
+#: src/search.c:206
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -822,18 +801,55 @@ msgstr ""
 "Linjer ialt: %i\n"
 "Nuværende linje: %i"
 
-#: src/search.c:397
+#: src/search.c:231
 msgid "Text not found"
 msgstr "Teksten blev ikke fundet"
 
-#: src/search.c:408
+#: src/search.c:236
 msgid "Text not found."
 msgstr "Teksten ikke fundet."
 
-#: src/window.c:62
+#: src/search.c:267
+msgid "Can't find again. There is not a text string to search for."
+msgstr "Kan ikke finde igen. Der er ingen tekststreng at søge efter."
+
+#: src/window.c:77
 msgid "Filename"
 msgstr "Filnavn"
 
-#: src/window.c:64
+#: src/window.c:79
 msgid "Contents"
 msgstr "Indhold"
+
+#~ msgid "Show commands debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for kommando."
+
+#~ msgid "Show document debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for dokument."
+
+#~ msgid "Show file debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for fil."
+
+#~ msgid "Show plugin debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for indstik."
+
+#~ msgid "Show prefs debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for præferencer."
+
+#~ msgid "Show printing debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for udskrift."
+
+#~ msgid "Show search debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for søgning."
+
+#~ msgid "Show undo debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for fortryd-funktion."
+
+#~ msgid "Show view debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for visning."
+
+#~ msgid "Show recent debugging messages."
+#~ msgstr "Vis fejlsøgningshjælp for nyligt åbnede filer."
+
+#~ msgid "Turn on all debugging messages."
+#~ msgstr "Aktivér alt fejlsøgningshjælp."
