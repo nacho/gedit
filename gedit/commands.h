@@ -32,6 +32,7 @@ extern void file_quit_cmd_callback(GtkWidget *widget, gpointer cbdata);
 extern void file_new_cmd_callback(GtkWidget *widget, gpointer cbdata);
 extern void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata);
 extern void file_open_cmd_callback(GtkWidget *widget, gpointer cbdata);
+extern void file_open_in_new_win_cmd_callback (GtkWidget *widget, gE_data *data);
 extern void file_save_cmd_callback(GtkWidget *widget, gpointer cbdata);
 extern void file_save_as_cmd_callback(GtkWidget *widget, gpointer cbdata);
 extern void file_close_cmd_callback(GtkWidget *widget, gpointer cbdata);
@@ -67,6 +68,12 @@ extern void recent_add (char *filename);
 extern void recent_update (gE_window *window);
 extern void recent_update_menus (gE_window *window, GList *recent_files);
 extern void recent_callback (GtkWidget *w, gE_data *data);
+
+/* Insert/delete text callbacks for undo/redo and split screening */
+
+extern void document_insert_text_callback (GtkWidget *editable, gchar *insertion_text, gint length, gint *pos, gE_document *doc);
+extern void document_delete_text_callback (GtkWidget *editable, gint start_pos, gint end_pos, gE_document *doc);
+extern void options_toggle_split_screen (GtkWidget *widget, gE_window *window);
 
 /* Functions needed to be made external for the plugins api */
 extern void popup_close_verify (gE_document *doc, gE_data *data);

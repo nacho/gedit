@@ -479,6 +479,27 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(w->open_fileselector);
 }
 
+
+void file_open_in_new_win_cmd_callback (GtkWidget *widget, gE_data *data)
+{
+	gE_document *src_doc, *dest_doc;
+	gE_window *win;
+	gchar *buffer;
+	int pos = 0;
+	
+	src_doc = gE_document_current (data->window);
+	buffer = gtk_editable_get_chars (GTK_EDITABLE (src_doc->text), 0, -1);
+	win = gE_window_new ();
+	dest_doc = gE_document_current (win);
+	dest_doc->filename = g_strdup (src_doc->filename);
+	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)basename (dest_doc->filename));
+	gtk_editable_insert_text (GTK_EDITABLE (dest_doc->text), buffer, strlen (buffer), &pos);
+	dest_doc->changed = src_doc->changed;
+	close_doc_execute (src_doc, data);
+	g_free (buffer);
+}
+
+
 void file_save_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
 	gchar *fname;
@@ -865,7 +886,7 @@ void recent_update (gE_window *window)
 	GnomeHistoryEntry histentry;
 	char *filename;
 	int i, j;
-	gboolean duplicate;
+	gboolean duplicate = FALSE;
 	
 	filelist = NULL;
 	gnome_recent_list = gnome_history_get_recently_used ();
@@ -877,10 +898,16 @@ void recent_update (gE_window *window)
 			histentry = g_list_nth_data (gnome_recent_list, i);
 			if (strcmp ("gEdit", histentry->creator) == 0)
 			{
+				/* This is to make sure you don't have more than one
+				   file of the same name in the recent list, but doesn't currently
+				   work right...
+
 				if (g_list_length (filelist) > 0)
 					for (j = g_list_length (filelist) - 1; j >= 0; j--)
 						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
 							duplicate = TRUE;
+				*/
+
 				if (!duplicate)
 				{
 					filename = g_malloc0 (strlen (histentry->filename) + 1);
@@ -966,3 +993,77 @@ void recent_callback (GtkWidget *w, gE_data *data)
 }
 
 
+
+/* 
+ * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
+ */
+
+#ifdef GTK_HAVE_FEATURES_1_1_0
+
+void document_insert_text_callback (GtkWidget *editable, gchar *insertion_text, gint length, gint *pos, gE_document *doc)
+{
+	GtkWidget *significant_other;
+	gchar *buffer;
+	gint position = *pos;
+	
+	if (!doc->split_screen)
+		return;
+	
+	if (doc->flag == editable)
+	{
+		doc->flag = NULL;
+		return;
+	}
+	
+	if (editable == doc->text)
+		significant_other = doc->split_screen;
+	else if (editable == doc->split_screen)
+		significant_other = doc->text;
+	else
+		return;
+	
+	doc->flag = significant_other;	
+	buffer = g_strdup (insertion_text);
+	gtk_text_freeze (GTK_TEXT (significant_other));
+	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
+	gtk_text_thaw (GTK_TEXT (significant_other));
+	g_free (buffer);
+
+}
+
+void document_delete_text_callback (GtkWidget *editable, gint start_pos, gint end_pos, gE_document *doc)
+{
+	GtkWidget *significant_other;
+	
+	if (!doc->split_screen)
+		return;
+
+	if (doc->flag == editable)
+	{
+		doc->flag = NULL;
+		return;
+	}
+	
+	if (editable == doc->text)
+		significant_other = doc->split_screen;
+	else if (editable == doc->split_screen)
+		significant_other = doc->text;
+	else
+		return;
+	
+	doc->flag = significant_other;
+	gtk_text_freeze (GTK_TEXT (significant_other));
+	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
+	gtk_text_thaw (GTK_TEXT (significant_other));
+}
+
+void options_toggle_split_screen (GtkWidget *widget, gE_window *window)
+{
+	gE_document *doc = gE_document_current (window);
+	if (GTK_WIDGET_VISIBLE (GTK_WIDGET (doc->split_screen)->parent))
+		gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
+	else
+		gtk_widget_show (GTK_WIDGET (doc->split_screen)->parent);
+}
+
+#endif	/* GTK_HAVE_FEATURES_1_1_0 */

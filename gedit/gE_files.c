@@ -61,8 +61,8 @@ gint
 gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 {
 	char *buf;
-	int fd;
-	gchar *title;
+	int fd, pos;
+	gchar *title, *buff;
 	size_t size, bytesread, num;
 
 	/* get file stats (e.g., file size is used by files list window) */
@@ -161,6 +161,22 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)basename(fname));
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
+	/* Copy the buffer if split-screening enabled */
+	#ifdef GTK_HAVE_FEATURES_1_1_0
+	if (doc->split_screen)
+	{
+		buff = gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0, -1);
+		pos = 0;
+		doc->flag = doc->split_screen;
+		gtk_text_freeze (GTK_TEXT (doc->split_screen));
+		gtk_editable_insert_text (GTK_EDITABLE (doc->split_screen),
+			buff,
+			strlen (buff),
+			&pos);
+		gtk_text_thaw (GTK_TEXT (doc->split_screen));
+	}
+	#endif
+	
 	/* enable document change detection */
 	doc->changed = FALSE;
 	if (!doc->changed_id)

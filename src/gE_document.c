@@ -204,7 +204,7 @@ gE_document
 *gE_document_new(gE_window *w)
 {
 	gE_document *doc;
-	GtkWidget *table, *vscrollbar;
+	GtkWidget *table, *vscrollbar, *vpaned;
 #ifndef WITHOUT_GNOME
 	GtkWidget *scrollball;
 #endif
@@ -222,15 +222,20 @@ gE_document
 			GTK_SIGNAL_FUNC(notebook_switch_page),
 			w);
 	}
+	
+	vpaned = gtk_vbox_new (TRUE, TRUE);
+	
 	doc->tab_label = gtk_label_new(UNTITLED);
 	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
 	doc->filename = NULL;
 	doc->word_wrap = TRUE;
 	gtk_widget_show(doc->tab_label);
 
+	/* Create the upper split screen */
 	table = gtk_table_new(2, 2, FALSE);
 	gtk_table_set_row_spacing(GTK_TABLE(table), 0, 2);
 	gtk_table_set_col_spacing(GTK_TABLE(table), 0, 2);
+	gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
 	gtk_widget_show(table);
 
 	doc->text = gtk_text_new(NULL, NULL);
@@ -286,7 +291,67 @@ gE_document
 	                  0, GTK_FILL, 0, 0);
 	gtk_widget_show (scrollball);
 #endif
-	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), table,
+
+
+	#ifdef GTK_HAVE_FEATURES_1_1_0
+	
+	gtk_signal_connect (GTK_OBJECT (doc->text), "insert_text",
+		GTK_SIGNAL_FUNC (document_insert_text_callback), (gpointer) doc);
+	gtk_signal_connect (GTK_OBJECT (doc->text), "delete_text",
+		GTK_SIGNAL_FUNC (document_delete_text_callback), (gpointer) doc);
+
+	/* Create the bottom split screen */
+	table = gtk_table_new(2, 2, FALSE);
+	gtk_table_set_row_spacing(GTK_TABLE(table), 0, 2);
+	gtk_table_set_col_spacing(GTK_TABLE(table), 0, 2);
+
+	gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
+	gtk_widget_show(table);
+
+	doc->split_screen = gtk_text_new(NULL, NULL);
+	gtk_text_set_editable(GTK_TEXT(doc->split_screen), TRUE);
+	gtk_text_set_word_wrap(GTK_TEXT(doc->split_screen), TRUE);
+
+	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen), "button_press_event",
+		GTK_SIGNAL_FUNC(gE_event_button_press), w);
+
+	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen), "key_press_event",
+		GTK_SIGNAL_FUNC(auto_indent_callback), w);
+
+	gtk_table_attach_defaults(GTK_TABLE(table), doc->split_screen, 0, 1, 0, 1);
+
+	style = gtk_style_new();
+
+	gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);
+
+	gtk_widget_set_rc_style(GTK_WIDGET(doc->split_screen));
+	gtk_widget_ensure_style(GTK_WIDGET(doc->split_screen));
+
+	gtk_signal_connect_object(GTK_OBJECT(doc->split_screen),"event",
+			GTK_SIGNAL_FUNC(gE_document_callback_showpopup),GTK_OBJECT(doc->window->popup->menu));
+
+
+	gtk_widget_show(doc->split_screen);
+	gtk_text_set_point(GTK_TEXT(doc->split_screen), 0);
+
+	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->split_screen)->vadj);
+
+	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
+		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+
+
+	GTK_WIDGET_UNSET_FLAGS(vscrollbar, GTK_CAN_FOCUS);
+	gtk_widget_show(vscrollbar);
+
+	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "insert_text",
+		GTK_SIGNAL_FUNC (document_insert_text_callback), (gpointer) doc);
+	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "delete_text",
+		GTK_SIGNAL_FUNC (document_delete_text_callback), (gpointer) doc);
+
+	#endif	/* GTK_HAVE_FEATURES_1_1_0 */
+	
+	gtk_widget_show (vpaned);
+	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), vpaned,
 		doc->tab_label);
 
 	w->documents = g_list_append(w->documents, doc);
@@ -435,33 +500,22 @@ void gE_window_create_popupmenu(gE_data *data)
 	gE_window *window=data->window;
 	window->popup->menu=gtk_menu_new();
 
-#ifdef WITHOUT_GNOME
-	window->popup->menu_cut=gtk_menu_item_new_with_label("Cut");
-	window->popup->menu_copy=gtk_menu_item_new_with_label("Copy");
-	window->popup->menu_paste=gtk_menu_item_new_with_label("Paste");
-	window->popup->menu_separator1=gtk_menu_item_new();
-	window->popup->menu_save=gtk_menu_item_new_with_label ("Save");
-	window->popup->menu_close=gtk_menu_item_new_with_label("Close");
-	window->popup->menu_print=gtk_menu_item_new_with_label ("Print");
-	window->popup->menu_separator2=gtk_menu_item_new();
-	window->popup->menu_swaphc=gtk_menu_item_new_with_label("Open (swap) .c/.h file");
-#else
 	window->popup->menu_cut=gtk_menu_item_new_with_label(N_("Cut"));
 	window->popup->menu_copy=gtk_menu_item_new_with_label(N_("Copy"));
 	window->popup->menu_paste=gtk_menu_item_new_with_label(N_("Paste"));
 	window->popup->menu_separator1=gtk_menu_item_new();
+	window->popup->menu_open_in_new_win=gtk_menu_item_new_with_label (N_("Open in new window"));
 	window->popup->menu_save=gtk_menu_item_new_with_label (N_("Save"));
 	window->popup->menu_close=gtk_menu_item_new_with_label(N_("Close"));
 	window->popup->menu_print=gtk_menu_item_new_with_label (N_("Print"));
 	window->popup->menu_separator2=gtk_menu_item_new();
 	window->popup->menu_swaphc=gtk_menu_item_new_with_label(N_("Open (swap) .c/.h file"));
-	
-#endif	/* WITHOUT_GNOME */
 
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_cut );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_copy );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_paste );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_separator1 );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_open_in_new_win );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_save );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_close );
 	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_print );
@@ -474,6 +528,7 @@ void gE_window_create_popupmenu(gE_data *data)
   	gtk_widget_show(window->popup->menu_copy);
   	gtk_widget_show(window->popup->menu_paste);
   	gtk_widget_show(window->popup->menu_separator1);
+  	gtk_widget_show(window->popup->menu_open_in_new_win);
 	gtk_widget_show(window->popup->menu_save);
   	gtk_widget_show(window->popup->menu_close);
   	gtk_widget_show(window->popup->menu_print);
@@ -489,6 +544,8 @@ void gE_window_create_popupmenu(gE_data *data)
   				GTK_SIGNAL_FUNC(edit_copy_cmd_callback),data);
    gtk_signal_connect(GTK_OBJECT(window->popup->menu_paste),"activate",
   				GTK_SIGNAL_FUNC(edit_paste_cmd_callback),data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_open_in_new_win), "activate",
+   				GTK_SIGNAL_FUNC(file_open_in_new_win_cmd_callback), data);
    gtk_signal_connect(GTK_OBJECT(window->popup->menu_save), "activate",
    				GTK_SIGNAL_FUNC(file_save_cmd_callback), data);
    gtk_signal_connect(GTK_OBJECT(window->popup->menu_close), "activate",

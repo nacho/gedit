@@ -1,3 +1,61 @@
+1998-08-09  Evan Lawrence <evan@worldpath.net>
+
+	* Added "Open in new window" to the right-click popup-menu that calls
+	  file_open_in_new_win_cmd_callback, so that now you can be editting a file
+	  and immediately switch it over to its own window - will also help for when
+	  we implement DND to the desktop...
+
+	* Implemented (slightly buggy) split-screen support for users with gtk 1.1 
+	  - still needs proper prefs implemented, as it's always on at startup now...
+
+1998-08-08  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch below, after making the neccassary modifications
+	  to the toolbar routines to get the gnome version to work, and removed the
+	  plugin changes per Chris's request - he made some changes today that
+	  weren't taken into account in the patch...
+
+	* Added the patch from Mikael Hermansson that creates a popup menu
+	  when you right click on the text widget, after I moved a couple items around
+	  to (I hope - this is debatable) more logical position, and added a couple more
+	  functions (Save and Print.) Also added the proper internationalization support
+	  for the gnome version...
+
+1998-08-08  Andy Kahn <kahn@zk3.dec.com>
+
+	* generalize popup dialog boxes by using a common routine.  currently,
+	the search/replace popup, the save-file-on-close popup, and the
+	save-file-before-printing popup, use this.
+
+	* improve print routine to be more intelligent and not have to always
+	create a temporary file.
+
+	* for non-Gnome version, add floating menubar.  whee
+
+	* moved all search routines out of commands.[ch] to search.[ch].
+
+	* change all assert() statements to g_assert().
+
+	* include plugin patch to cleanup compiler warnings that Alex included
+	for 0.4.5, but forgot to commit into cvs.
+
+	* update TODO list
+
+	* new files: dialog.[ch], search.[ch].
+
+	* main.h: drop unused from gE_window struct.  change some gint fields
+	back to gboolean, because that's what they are.  add toolbar field
+	to gE_window for files_list_window so that main toolbar options
+	(on/off, pic/text/both, etc.) also affect the toolbar for the files
+	list window.
+
+	* gE_files.c: fix bug where doing a Save after a Save-As would result
+	in a bogus filename.
+
+	* toolbar.c: minor code cleanup, including use boolean defs TRUE/FALSE
+	instead of 1/0.  i had these here before (see 1998-07-13 entry), but
+	alex changed them back to 1/0.
+
 1998-08-08  Chris Lahey  <clahey@umich.edu>
 
 	* plugin.c: Fixed #include ordering.
@@ -12,17 +70,16 @@
 	  algorythm - nothing real bad, just doesn't work quite right. The
 	  reason I'm committing this is so I could commit the above changes..
 
-1998-08-07  Evan Lawrence <evan@worldpath.net>
-
 	* Added the proper api to plugin_document_open and plugin_document_close
 	  and had to make a minor modification of close_doc_execute to
 	  incorporate them...
 
-	* Temporarily added a gtkscrollball widget immediately above the scrollbar,
-	  per Dan Dunbar's request - this is all part of my quest for world domination...
+	* Temporarily added a gtkscrollball widget immediately above the
+	  scrollbar, per Dan Dunbar's request - this is all part of my quest
+	  for world domination...
 
-	* Temporarily added a foot/program menu, so as to give the gnome-gui guys something
-	  to play with...
+	* Temporarily added a foot/program menu, so as to give the gnome-gui
+	  guys something to play with...
 
 1998-08-06  Chris Lahey  <clahey@umich.edu>
 
@@ -31,22 +88,7 @@
 	the plugin_document_close function is now required to return a
 	bool based on whether the document actually closed.  Returns TRUE
 	if the plugin actually closed.
-
-1998-08-06  Chris Lahey  <clahey@umich.edu>
-
-	* plugin.h: 
 	* plugin.c: Added a document_close function to the API.
-
-1998-07-29  Alex Roberts  <bse@dial.pipex.com>
-
-	* Fixed the preferences routines, that had been mysteriously broken,
-	  without even a word in this ChangeLog...!
-
-1998-07-29  Evan Lawrence <evan@worldpath.net>
-
-	* Got recent documents working for the gnome version.. Currently you can
-	  change the # of documents it displays by redefining the  MAX_RECENT
-	  variable.. The default is 4, per the style guide..
 
 1998-07-31  Andy Kahn <kahn@zk3.dec.com>
 
@@ -65,6 +107,16 @@
 	* fix for bug reported by Marin Purgar, where if PLUGINDIR did not
 	exist, readdir() causes a segv (e.g., on Linux).
 
+1998-07-29  Alex Roberts  <bse@dial.pipex.com>
+
+	* Fixed the preferences routines, that had been mysteriously broken,
+	  without even a word in this ChangeLog...!
+
+1998-07-29  Evan Lawrence <evan@worldpath.net>
+
+	* Got recent documents working for the gnome version.. Currently you can
+	  change the # of documents it displays by redefining the  MAX_RECENT
+	  variable.. The default is 4, per the style guide..
 
 1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
@@ -77,8 +129,8 @@
 	  to the gnome version - I also moved New Window and Close Window
 	  into, logically, the Window menu...
 
-	* Wrote up a TODO file of some of the things I'd like to get done, most of
-	  them before 0.5.0...
+	* Wrote up a TODO file of some of the things I'd like to get done, most
+	  of them before 0.5.0...
 	
 	* After modifying the gnome Makefile.am to reflect Andy's changes,
 	  I added his actual Makefile.am as GTK.Makefile.am, so any new gtk-only
@@ -814,4 +866,3 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 
 	* Started Log
 	
-

@@ -57,6 +57,7 @@ typedef struct _gE_text_popupmenu{
 	GtkWidget *menu_copy;
 	GtkWidget *menu_paste;
 	GtkWidget *menu_separator2;
+	GtkWidget *menu_open_in_new_win;
 	GtkWidget *menu_close;
 	GtkWidget *menu_save;
 	GtkWidget *menu_print;
@@ -119,6 +120,11 @@ typedef struct _gE_document {
 	gint changed;
 	gint word_wrap;
 	struct stat *sb;
+	#ifdef GTK_HAVE_FEATURES_1_1_0
+	gint split;
+	GtkWidget *split_screen;
+	GtkWidget *flag;
+	#endif
 } gE_document;
 
 typedef struct _gE_prefs {
@@ -143,6 +149,21 @@ typedef struct _gE_data {
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
 } gE_data;
+
+typedef struct _gE_function {
+	gchar *name;
+	gchar *tooltip_text;
+	#ifdef WITHOUT_GNOME
+	gchar **icon;
+	#else
+	gchar *icon;
+	#endif
+	GtkSignalFunc callback;
+} gE_function;
+
+#ifdef WITHOUT_GNOME
+#define N_(String) (String)	/* To avoid duplication of code when adding gnome internationalization. */
+#endif
 
 extern GList *window_list;
 
