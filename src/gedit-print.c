@@ -94,9 +94,6 @@ struct _GeditPrintJobInfo {
 };
 
 
-/* FIXME: remove when libgnomeprint well define it -- Paolo */
-GnomeGlyphList *gnome_glyphlist_unref (GnomeGlyphList *gl);
-
 static GQuark gedit_print_error_quark (void);
 #define GEDIT_PRINT_ERROR gedit_print_error_quark ()	
 
