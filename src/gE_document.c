@@ -51,12 +51,11 @@ GnomeUIInfo gedit_file_menu [] = {
 	  'S', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
-	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
-	  'W', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },	
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
+	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
+	  'W', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
@@ -237,8 +236,11 @@ gE_window *gE_window_new()
 #endif
 
   gE_create_toolbar(window);
+  
+#ifdef WITHOUT_GNOME
   gtk_box_pack_start(GTK_BOX(box1), window->toolbar, FALSE, TRUE, 0);
   gtk_widget_show(window->toolbar);
+#endif
 
   gtk_widget_show (box1);
 
@@ -246,11 +248,12 @@ gE_window *gE_window_new()
 
   gtk_box_pack_start(GTK_BOX(box1), window->notebook, TRUE, TRUE, 0);
 
-
+/* looks ugly.. */
+/*
       separator = gtk_hseparator_new ();
       gtk_box_pack_start (GTK_BOX (box1), separator, FALSE, TRUE, 0);
       gtk_widget_show (separator);
-
+*/
       box2 = gtk_hbox_new (FALSE, 0);
       gtk_container_border_width (GTK_CONTAINER (box2), 0);
       gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
@@ -282,6 +285,7 @@ gE_window *gE_window_new()
 */
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
+
 
   return window;
 }

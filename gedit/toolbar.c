@@ -21,6 +21,10 @@
  */
 
 #include <stdio.h>
+#ifndef WITHOUT_GNOME
+#include <config.h>
+#include <gnome.h>
+#endif
 #include <string.h>
 #include <gtk/gtk.h>
 #include <glib.h>
@@ -33,6 +37,10 @@
  * XXX fixme - should make xpm pathname configurable or at least set
  * in a static location (e.g., /usr/local/lib/gedit/xpm)
  */
+ /* ^^^ Proper location would be $INSTALL_DIR/share/pixmaps/gedit ^^^ */
+ 
+#ifdef WITHOUT_GNOME
+
 static toolbar_data_t toolbar_data[] = {
 	{ " New ", "Start a new file", "Toolbar/New", "xpm/tb_new.xpm",
 		(GtkSignalFunc)file_new_cmd_callback },
@@ -51,15 +59,67 @@ static toolbar_data_t toolbar_data[] = {
 		(GtkSignalFunc)edit_copy_cmd_callback },
 	{ " Paste ", "Paste text", "Toolbar/Paste", "xpm/tb_paste.xpm",
 		(GtkSignalFunc)edit_paste_cmd_callback },
-	{ " Find ", "Find text", "Toolbar/Find", "xpm/tb_search.xpm",
+	{ " Search ", "Search for text", "Toolbar/Search", "xpm/tb_search.xpm",
 		(GtkSignalFunc)search_search_cmd_callback },
-	{ " SPACE ", NULL, NULL, NULL, NULL },
-
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
+#else
 
-static GtkWidget *new_pixmap(char *fname, GdkWindow *gdkw, GdkColor *bgcolor);
+static toolbar_data_t toolbar_data[] = {
+	{ " New ", "Start a new file", "Toolbar/New", GNOME_STOCK_PIXMAP_NEW,
+		(GtkSignalFunc)file_new_cmd_callback },
+	{ " Open ", "Open a file", "Toolbar/Open", GNOME_STOCK_PIXMAP_OPEN,
+		(GtkSignalFunc)file_open_cmd_callback },
+	{ " Save ", "Save file", "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
+		(GtkSignalFunc)file_save_cmd_callback },
+	{ " Close ", "Close the current file", "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
+		(GtkSignalFunc)file_close_cmd_callback },
+	{ " Print ", "Print file", "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
+		(GtkSignalFunc)file_print_cmd_callback },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ " Cut ", "Cut text", "Toolbar/Cut", GNOME_STOCK_PIXMAP_CUT,
+		(GtkSignalFunc)edit_cut_cmd_callback },
+	{ " Copy ", "Copy text", "Toolbar/Copy", GNOME_STOCK_PIXMAP_COPY,
+		(GtkSignalFunc)edit_copy_cmd_callback },
+	{ " Paste ", "Paste text", "Toolbar/Paste", GNOME_STOCK_PIXMAP_PASTE,
+		(GtkSignalFunc)edit_paste_cmd_callback },
+	{ " Search ", "Search for text", "Toolbar/Search", GNOME_STOCK_PIXMAP_SEARCH,
+		(GtkSignalFunc)search_search_cmd_callback },
+	{ NULL, NULL, NULL, NULL, NULL }
+};
+
+#endif
+
+/*
+
+GnomeUIInfo toolbar[] = {
+	{GNOME_APP_UI_ITEM, N_("New"), N_("Start a new File"), file_new_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_NEW, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Open"), N_("Open a file"), file_open_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_OPEN, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Save"), N_("Save the current file"), file_save_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SAVE, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Close"), N_("Close the current file"), file_close_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CLOSE, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Print"), N_("Print the current file"), file_print_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT, 0, 0, NULL },
+	GNOMEUIINFO_SEPARATOR,
+	{GNOME_APP_UI_ITEM, N_("Cut"), N_("Cut selected text"), edit_cut_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Copy"), N_("Copy selected text"), edit_copy_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Paste"), N_("Paste text on clipboard"), edit_paste_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE, 0, 0, NULL },
+	{GNOME_APP_UI_ITEM, N_("Find"), N_("Find pattern in document"), search_search_cmd_callback, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+*/
+
+
+static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
 
 
 /*
@@ -70,11 +130,15 @@ static GtkWidget *new_pixmap(char *fname, GdkWindow *gdkw, GdkColor *bgcolor);
 void
 gE_create_toolbar(gE_window *gw)
 {
+
+
 	GtkWidget *toolbar;
-	GtkWidget *w = gw->window;
+
 	toolbar_data_t *tbdp = toolbar_data;
 
-	gtk_widget_realize(w);
+#ifdef WITHOUT_GNOME
+	gtk_widget_realize(gw->window);
+#endif
 	toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 
 	while (tbdp->callback != NULL) {
@@ -83,7 +147,7 @@ gE_create_toolbar(gE_window *gw)
 			tbdp->text,
 			tbdp->tooltip_text,
 			tbdp->tooltip_private_text,
-			new_pixmap(tbdp->icon, w->window, &w->style->bg[GTK_STATE_NORMAL]),
+			new_pixmap(tbdp->icon, toolbar),
 			(GtkSignalFunc)tbdp->callback,
 			NULL);
 
@@ -96,6 +160,13 @@ gE_create_toolbar(gE_window *gw)
 	}
 
 	gw->toolbar = toolbar;
+	gtk_widget_show (toolbar);
+
+#ifndef WITHOUT_GNOME
+	gnome_app_set_toolbar (GNOME_APP (gw->window), GTK_TOOLBAR(toolbar));
+#endif
+
+	gw->have_toolbar = 1;
 
 } /* gE_create_toolbar */
 
@@ -110,6 +181,11 @@ tb_on_cb(GtkWidget *w, gpointer data)
 {
 	if (!GTK_WIDGET_VISIBLE(main_window->toolbar))
 		gtk_widget_show (main_window->toolbar);
+
+#ifndef WITHOUT_GNOME
+	if (!GTK_WIDGET_VISIBLE (GNOME_APP (main_window->window)->toolbar->parent))
+		gtk_widget_show (GNOME_APP(main_window->window)->toolbar->parent);
+#endif
 	main_window->have_toolbar = 1;
 }
 
@@ -124,6 +200,12 @@ tb_off_cb(GtkWidget *w, gpointer data)
 {
 	if (GTK_WIDGET_VISIBLE(main_window->toolbar))
 		gtk_widget_hide (main_window->toolbar);
+		
+/* This is a bit of a hack to get the entire toolbar to disappear instead of just the buttons */
+#ifndef WITHOUT_GNOME
+	if (GTK_WIDGET_VISIBLE (GNOME_APP(main_window->window)->toolbar->parent))
+		gtk_widget_hide (GNOME_APP(main_window->window)->toolbar->parent);
+#endif
 	main_window->have_toolbar = 0;
 }
 
@@ -149,6 +231,12 @@ void
 tb_pic_only_cb(GtkWidget *w, gpointer data)
 {
 	gtk_toolbar_set_style(GTK_TOOLBAR(main_window->toolbar), GTK_TOOLBAR_ICONS);
+
+/* forces the gnome toolbar to resize itself.. slows it down some, but not much.. */
+#ifndef WITHOUT_GNOME
+	gtk_widget_hide (main_window->toolbar);
+	gtk_widget_show (main_window->toolbar);
+#endif
 }
 
 
@@ -161,6 +249,10 @@ void
 tb_text_only_cb(GtkWidget *w, gpointer data)
 {
 	gtk_toolbar_set_style(GTK_TOOLBAR(main_window->toolbar), GTK_TOOLBAR_TEXT);
+#ifndef WITHOUT_GNOME
+	gtk_widget_hide (main_window->toolbar);
+	gtk_widget_show (main_window->toolbar);
+#endif
 }
 
 
@@ -194,14 +286,19 @@ tb_tooltips_off_cb(GtkWidget *w, gpointer data)
  * taken from testgtk.c
  */
 static GtkWidget*
-new_pixmap(char *fname, GdkWindow *gdkw, GdkColor *bgcolor)
+new_pixmap(char *fname, GtkWidget *w)
 {
 	GtkWidget *wpixmap;
+
+#ifdef WITHOUT_GNOME
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
-	pixmap = gdk_pixmap_create_from_xpm(gdkw, &mask, bgcolor, fname);
+	pixmap = gdk_pixmap_create_from_xpm(w->window, &mask, &w->style->bg[GTK_STATE_NORMAL], fname);
 	wpixmap = gtk_pixmap_new(pixmap, mask);
+#else
+	wpixmap = gnome_stock_pixmap_widget ((GtkWidget *) w, fname);
+#endif
 
 	return wpixmap;
 } /* new pixmap */
