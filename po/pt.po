@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-02-06 01:12+0000\n"
-"PO-Revision-Date: 2002-02-06 00:35+0000\n"
+"POT-Creation-Date: 2002-02-10 01:16+0000\n"
+"PO-Revision-Date: 2002-02-10 01:19+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese pt\n"
 "MIME-Version: 1.0\n"
@@ -41,6 +41,119 @@ msgstr "Um plugin que abre ChangeLogs encontrados em mensagens de CVS commit."
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
+#: plugins/diff/diff.c:52
+msgid "_Compare files..."
+msgstr "_Comparar ficheiros..."
+
+#: plugins/diff/diff.c:55
+msgid "Makes a diff file from two documents or files"
+msgstr ""
+"Gera um ficheiro com as diferenças (diff) entre dois documentos ou ficheiros"
+
+#: plugins/diff/diff.c:57
+msgid "Compare files"
+msgstr "Comparar ficheiros"
+
+#. Create the dialog
+#: plugins/diff/diff.c:255
+msgid "Compare two files..."
+msgstr "Comparar dois ficheiros..."
+
+#: plugins/diff/diff.c:269
+msgid "C_ompare"
+msgstr "C_omparar"
+
+#: plugins/diff/diff.c:479
+msgid "The two documents you selected are the same."
+msgstr "Os dois documentos seleccionados são idênticos."
+
+#: plugins/diff/diff.c:487
+msgid ""
+"The \"first\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"O \"primeiro\" ficheiro que seleccionou não existe.\n"
+"\n"
+"Por favor indique um ficheiro válido."
+
+#: plugins/diff/diff.c:496
+msgid ""
+"The \"second\" file you selected does not exist.\n"
+"\n"
+"Please provide a valid file."
+msgstr ""
+"O \"segundo\" ficheiro que seleccionou não existe.\n"
+"\n"
+"Por favor indique um ficheiro válido."
+
+#: plugins/diff/diff.c:504
+msgid "The two files you selected are the same."
+msgstr "Os dois documentos seleccionados são idênticos."
+
+#: plugins/diff/diff.c:521
+msgid "The \"first\" document contains no text."
+msgstr "O \"primeiro\" documento está vazio."
+
+#: plugins/diff/diff.c:550
+msgid "The \"second\" document contains no text."
+msgstr "O \"segundo\" documento está vazio."
+
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:571
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"gedit could not create a temporary file."
+msgstr ""
+"Impossível comparar os documentos seleccionados.\n"
+"\n"
+"gedit foi incapaz de criar o ficheiro temporário."
+
+#: plugins/diff/diff.c:589 plugins/diff/diff.c:602
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"Error executing the diff command."
+msgstr ""
+"Impossível comparar os documentos seleccionados.\n"
+"\n"
+"Erro ao executar o comando diff."
+
+#: plugins/diff/diff.c:624
+msgid "No differences were found between the selected documents."
+msgstr "Não foram encontradas diferenças entre os documentos seleccionados."
+
+#: plugins/diff/diff.c:665
+msgid ""
+"Impossible to compare the selected documents.\n"
+"\n"
+"The result contains invalid UTF-8 data."
+msgstr ""
+"Impossível comparar os documentos seleccionados.\n"
+"\n"
+"O resultado contém dados UTF-8 inválidos."
+
+#: plugins/diff/diff.c:848
+msgid ""
+"Makes a diff file from two documents or files on disk.\n"
+"\n"
+"For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
+msgstr ""
+"Gera um ficheiro de diferenças (diff) entre dois documentos ou ficheiros em "
+"disco.\n"
+"\n"
+"Para mais informações sobre o \"diff\", tecle \"man diff\" numa linha de "
+"comando.\n"
+
+#: plugins/diff/diff.c:851
+msgid ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
+msgstr ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
+
 #: plugins/docinfo/docinfo.c:42
 msgid "_Word Count"
 msgstr "Contagem Pala_vras"
@@ -49,15 +162,15 @@ msgstr "Contagem Pala_vras"
 msgid "Get info on current document."
 msgstr "Obter informação sobre o documento actual"
 
-#: plugins/docinfo/docinfo.c:143 plugins/docinfo/docinfo.c:363
+#: plugins/docinfo/docinfo.c:141 plugins/docinfo/docinfo.c:361
 msgid "Word count"
 msgstr "Contagem palavras"
 
-#: plugins/docinfo/docinfo.c:154
-msgid "Update"
-msgstr "Actualizar"
+#: plugins/docinfo/docinfo.c:152
+msgid "_Update"
+msgstr "Act_ualizar"
 
-#: plugins/docinfo/docinfo.c:364
+#: plugins/docinfo/docinfo.c:362
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
@@ -67,8 +180,9 @@ msgstr ""
 "número de palavras, linhas, caracteres e caracteres não-espaço deste, "
 "mostrando os resultados."
 
-#: plugins/docinfo/docinfo.c:368 plugins/sample/sample.c:140
-#: plugins/shell_output/shell_output.c:420 plugins/time/time.c:531
+#: plugins/docinfo/docinfo.c:366 plugins/sample/sample.c:140
+#: plugins/shell_output/shell_output.c:420
+#: plugins/taglist/gedit-taglist-plugin.c:139 plugins/time/time.c:533
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -138,8 +252,44 @@ msgid ""
 "Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
-"Executar uma aplicação e inserir o seu retorno no documento actual na posição "
-"actual do cursor"
+"Executar uma aplicação e inserir o seu retorno no documento actual na "
+"posição actual do cursor"
+
+#: plugins/taglist/gedit-taglist-plugin.c:40
+msgid "_Show tag list"
+msgstr "Mo_strar lista etiquetas"
+
+#: plugins/taglist/gedit-taglist-plugin.c:43
+msgid "Show the tag list window."
+msgstr "Mostrar a janela de lista de etiquetas."
+
+#: plugins/taglist/gedit-taglist-plugin.c:135
+msgid "Tag list"
+msgstr "Lista etiquetas"
+
+#: plugins/taglist/gedit-taglist-plugin.c:136
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tabs/strings without having to type them."
+msgstr ""
+"O plugin de lista de etiquetas disponibiliza um método de inserir "
+"facilmente num documento expressões muito utilizadas sem ter de as escrever."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:113
+msgid "Tag list plugin"
+msgstr "Plugin lista etiquetas"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:131
+msgid "Select the group of tab you want to use."
+msgstr "Seleccione o grupo de pastas que quer utilizar."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:155
+msgid "Double-click on a tag to insert it in the current document."
+msgstr "Clique-duplo sobre uma etiqueta para a inserir no documento actual."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:166
+msgid "Tags"
+msgstr "Etiquetas"
 
 #: plugins/time/time.c:40
 msgid "_Insert Date/Time"
@@ -157,15 +307,15 @@ msgstr "Formatos disponíveis"
 msgid "Configure insert date/time plugin"
 msgstr "Configurar plugin de inserção de data/hora"
 
-#: plugins/time/time.c:528
+#: plugins/time/time.c:530
 msgid "Insert Date/Time"
 msgstr "Inserir Data/Hora"
 
-#: plugins/time/time.c:529
+#: plugins/time/time.c:531
 msgid "Inserts the current date and time at the cursor position."
 msgstr "Insere a data e hora actuais na posição do cursor."
 
-#: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
+#: src/bonobo-mdi.c:519 src/bonobo-mdi.c:595 src/bonobo-mdi.c:1973
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -200,21 +350,21 @@ msgstr "Nome de ficheiro módulo"
 msgid "Author(s)"
 msgstr "Autor(es)"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:445
+#: src/dialogs/gedit-dialog-plugin-manager.c:447
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Incapaz de encontrar plugin-manager.glade2, reinstale o gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:453
+#: src/dialogs/gedit-dialog-plugin-manager.c:455
 msgid "Plugin Manager"
 msgstr "Gestor de Plugin"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:480
+#: src/dialogs/gedit-dialog-plugin-manager.c:482
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Ficheiro glade inválido para o gestor de plugin -- nem todos os widgets "
 "encontrados.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:568
+#: src/dialogs/gedit-dialog-plugin-manager.c:572
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Incapaz de criar o diálogo de Gestor de Plugin"
 
@@ -227,8 +377,8 @@ msgid "Replace _All"
 msgstr "Substituir Tod_as"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:106
-#: src/gedit-file.c:823 src/gedit-ui.xml.h:85
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:107
+#: src/gedit-ui.xml.h:85
 msgid "_Replace"
 msgstr "Substitui_r"
 
@@ -248,6 +398,33 @@ msgstr "O texto \"%s\" não foi encontrado."
 msgid "Found and replaced %d occurences."
 msgstr "Encontradas e substituidas %d ocorrências."
 
+#: src/dialogs/gedit-plugin-program-location-dialog.c:73
+msgid "Set program location ..."
+msgstr "Definir localização da aplicação ..."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:95
+msgid ""
+"Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr ""
+"Incapaz de encontrar os widgets necessários dentro de program-location-dialog.glade2.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#, c-format
+msgid ""
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
+"\n"
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr ""
+"O plugin %s utiliza uma aplicação externa, chamada <tt>%s</tt>, para realizar "
+"as suas tarefas.\n"
+"\n"
+"Especifique a localização da aplicação <tt>%s</tt>."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+msgid "The selected file is not executable."
+msgstr "O ficheiro seleccionado não é executável."
+
 #: src/dialogs/gedit-preferences-dialog.c:197
 msgid "Toolbar"
 msgstr "Barra Ferramentas"
@@ -264,24 +441,25 @@ msgstr "MDI"
 msgid "Font & Colors"
 msgstr "Fontes & Cores"
 
-#: src/dialogs/gedit-preferences-dialog.c:211 src/gedit-ui.xml.h:54
-msgid "Save"
-msgstr "Gravar"
+#: src/dialogs/gedit-preferences-dialog.c:211
+msgid "Tabs"
+msgstr "Pastas"
 
-#.
-#. {_("Tabs"), NULL, TABS_SETTINGS},
-#.
-#: src/dialogs/gedit-preferences-dialog.c:215 src/gedit-ui.xml.h:67
-msgid "Undo"
-msgstr "Desfazer"
-
-#: src/dialogs/gedit-preferences-dialog.c:216
+#: src/dialogs/gedit-preferences-dialog.c:212
 msgid "Wrap mode"
 msgstr "Modo quebra"
 
-#: src/dialogs/gedit-preferences-dialog.c:217
+#: src/dialogs/gedit-preferences-dialog.c:213
 msgid "Line numbers"
 msgstr "Número de linha"
+
+#: src/dialogs/gedit-preferences-dialog.c:215 src/gedit-ui.xml.h:54
+msgid "Save"
+msgstr "Gravar"
+
+#: src/dialogs/gedit-preferences-dialog.c:216 src/gedit-ui.xml.h:67
+msgid "Undo"
+msgstr "Desfazer"
 
 #: src/dialogs/gedit-preferences-dialog.c:224
 msgid "Page"
@@ -324,24 +502,24 @@ msgstr "Impossível actualizar definições do gedit."
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit é um editor de texto pequeno e leve para o Gnome"
 
-#: src/gedit-document.c:471 src/gedit-document.c:482
+#: src/gedit-document.c:472 src/gedit-document.c:483
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:471 src/gedit-document.c:482
+#: src/gedit-document.c:472 src/gedit-document.c:483
 msgid "Untitled"
 msgstr "Sem título"
 
-#: src/gedit-document.c:597 src/gedit-document.c:703
+#: src/gedit-document.c:598 src/gedit-document.c:704
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "Encontrados dados UTF-8 inválidos ao ler ficheiro"
 
-#: src/gedit-document.c:1056
+#: src/gedit-document.c:1078
 msgid "It is not possible to revert an Untitled document"
 msgstr "Não é possível reverter um documento Sem Título"
 
-#: src/gedit-file-selector-util.c:94
+#: src/gedit-file-selector-util.c:95
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -350,34 +528,24 @@ msgstr ""
 "Já existe um ficheiro de nome ''%s''.\n"
 "Deseja substitui-lo com aquele que está a gravar?"
 
-#: src/gedit-file-selector-util.c:102
+#: src/gedit-file-selector-util.c:103
 msgid "Do_n't replace"
 msgstr "_Não substituir"
 
-#: src/gedit-file-selector-util.c:454
+#: src/gedit-file-selector-util.c:457
 msgid "Select a filename to save"
 msgstr "Seleccione um nome de ficheiro a gravar"
 
-#: src/gedit-file.c:237 src/gedit-file.c:367 src/gedit-file.c:1148
+#: src/gedit-file.c:112
+msgid "Open File ..."
+msgstr "Abrir Ficheiro ..."
+
+#: src/gedit-file.c:122 src/gedit-file.c:762
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Carregado o ficheiro '%s'"
 
-#: src/gedit-file.c:248 src/gedit-file.c:1046
-#, c-format
-msgid "Loading %d file..."
-msgstr "A Carregar %i ficheiro..."
-
-#: src/gedit-file.c:265 src/gedit-file.c:1082
-#, c-format
-msgid "Loaded %i files"
-msgstr "Carregados %i ficheiros"
-
-#: src/gedit-file.c:335 src/gedit-file.c:357
-msgid "Open File ..."
-msgstr "Abrir Ficheiro ..."
-
-#: src/gedit-file.c:404 src/gedit-file.c:452
+#: src/gedit-file.c:158 src/gedit-file.c:206
 #, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -388,16 +556,16 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:522 src/gedit-file.c:692 src/gedit-file.c:840
+#: src/gedit-file.c:275 src/gedit-file.c:374
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "A gravar ficheiro '%s' ..."
 
-#: src/gedit-file.c:537 src/gedit-file.c:739 src/gedit-file.c:958
+#: src/gedit-file.c:290 src/gedit-file.c:420 src/gedit-file.c:572
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
-#: src/gedit-file.c:544 src/gedit-file.c:746
+#: src/gedit-file.c:297 src/gedit-file.c:427
 #, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -408,38 +576,25 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:572 src/gedit-file.c:699 src/gedit-file.c:847
+#: src/gedit-file.c:325 src/gedit-file.c:381
 msgid "The document has not been saved."
 msgstr "O documento não foi gravado."
 
-#: src/gedit-file.c:582 src/gedit-file.c:697 src/gedit-file.c:845
+#: src/gedit-file.c:335 src/gedit-file.c:379
 #, c-format
 msgid "File '%s' saved."
 msgstr "Ficheiro '%s' gravado."
 
-#: src/gedit-file.c:651
-msgid "Save As..."
-msgstr "Gravar Como..."
-
-#: src/gedit-file.c:684
+#: src/gedit-file.c:366
 msgid "Save as ..."
 msgstr "Gravar como ..."
 
-#: src/gedit-file.c:818
-#, c-format
-msgid ""
-"A file named ``%s'' already exists in this location. Do you want to replace "
-"it with the one you are saving?"
-msgstr ""
-"Já existe um ficheiro de nome ``%s'' no destino. Deseja substitui-lo com "
-"aquele que está a gravar?"
-
-#: src/gedit-file.c:944
+#: src/gedit-file.c:558
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "A reverter ficheiro '%s' ..."
 
-#: src/gedit-file.c:965
+#: src/gedit-file.c:579
 #, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -450,21 +605,31 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-file.c:993
+#: src/gedit-file.c:607
 msgid "The document has not been reverted."
 msgstr "O documento não foi revertido."
 
-#: src/gedit-file.c:1003
+#: src/gedit-file.c:617
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Ficheiro '%s' revertido."
 
-#: src/gedit-file.c:1103
+#: src/gedit-file.c:660
+#, c-format
+msgid "Loading %d file..."
+msgstr "A Carregar %i ficheiro..."
+
+#: src/gedit-file.c:696
+#, c-format
+msgid "Loaded %i files"
+msgstr "Carregados %i ficheiros"
+
+#: src/gedit-file.c:717
 #, c-format
 msgid "Loaded file %s"
 msgstr "Carregado o ficheiro %s"
 
-#: src/gedit-file.c:1202
+#: src/gedit-file.c:816
 #, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -475,7 +640,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:548
+#: src/gedit-mdi.c:549
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -486,72 +651,72 @@ msgstr ""
 "\n"
 "As alterações serão perdidas se as não gravar."
 
-#: src/gedit-mdi.c:553
+#: src/gedit-mdi.c:554
 msgid "Do_n't save"
 msgstr "_Não gravar"
 
-#: src/gedit-mdi.c:571
+#: src/gedit-mdi.c:572
 msgid "_Don't quit"
 msgstr "Não sai_r"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:576
 msgid "_Don't close"
 msgstr "_Não fec_har"
 
-#: src/gedit-mdi.c:659
+#: src/gedit-mdi.c:660
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/gedit-mdi.c:665
+#: src/gedit-mdi.c:666
 msgid "(readonly)"
 msgstr "(apenas leitura)"
 
-#: src/gedit-plugins-engine.c:154
+#: src/gedit-plugins-engine.c:155
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Erro, impossível abrir ficheiro de módulo '%s'\n"
 
-#: src/gedit-plugins-engine.c:169
+#: src/gedit-plugins-engine.c:170
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Erro, o plugin '%s' não contém a função init."
 
-#: src/gedit-plugins-engine.c:179
+#: src/gedit-plugins-engine.c:180
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Erro, o plugin '%s' não contém a função activate."
 
-#: src/gedit-plugins-engine.c:189
+#: src/gedit-plugins-engine.c:190
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Erro, o plugin '%s' não contém a função deactivate."
 
-#: src/gedit-plugins-engine.c:219
+#: src/gedit-plugins-engine.c:220
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Erro, impossível inicializar plugin '%s'"
 
-#: src/gedit-plugins-engine.c:227
+#: src/gedit-plugins-engine.c:228
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr "Erro, o plugin '%s' não especificou um nome"
 
-#: src/gedit-plugins-engine.c:302
+#: src/gedit-plugins-engine.c:308
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
 msgstr "Erro, impossível gravar definições do plugin '%s'"
 
-#: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
+#: src/gedit-plugins-engine.c:380 src/gedit-plugins-engine.c:438
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Erro, impossível activar plugin '%s'"
 
-#: src/gedit-plugins-engine.c:397
+#: src/gedit-plugins-engine.c:407
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Erro, impossível desactivar plugin '%s'"
 
-#: src/gedit-plugins-engine.c:469
+#: src/gedit-plugins-engine.c:479
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Erro, impossível actualizar interf. gráfico do plugin '%s'"
@@ -598,12 +763,12 @@ msgstr ""
 "\n"
 "%s,"
 
-#: src/gedit-recent.c:252
+#: src/gedit-recent.c:253
 #, c-format
 msgid "Open file %s"
 msgstr "Abrir ficheiro %s"
 
-#: src/gedit-recent.c:320
+#: src/gedit-recent.c:321
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Incapaz de abrir ficheiros recentes: %s"
@@ -944,16 +1109,16 @@ msgstr "_Ferramentas"
 msgid "_Undo"
 msgstr "_Desfazer"
 
-#: src/gedit-view.c:824
+#: src/gedit-view.c:882
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Col. %d"
 
-#: src/gedit-view.c:862
+#: src/gedit-view.c:920
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:864
+#: src/gedit-view.c:922
 msgid "  INS"
 msgstr "  INS"
 
@@ -1005,9 +1170,19 @@ msgstr "Mostrar mensagens de depuração recentes."
 msgid "Turn on all debugging messages."
 msgstr "Activar todas as mensagens de depuração."
 
-#: src/gedit2.c:162
+#: src/gedit2.c:161
 msgid "The gnome text editor"
 msgstr "O editor de texto do gnome"
+
+#~ msgid "Save As..."
+#~ msgstr "Gravar Como..."
+
+#~ msgid ""
+#~ "A file named ``%s'' already exists in this location. Do you want to "
+#~ "replace it with the one you are saving?"
+#~ msgstr ""
+#~ "Já existe um ficheiro de nome ``%s'' no destino. Deseja substitui-lo com "
+#~ "aquele que está a gravar?"
 
 #~ msgid "Manager"
 #~ msgstr "Gestor"
@@ -1036,33 +1211,6 @@ msgstr "O editor de texto do gnome"
 #~ msgid "diff"
 #~ msgstr "diff"
 
-#~ msgid "The two documents you selected are the same."
-#~ msgstr "Os dois documentos seleccionados são idênticos."
-
-#~ msgid ""
-#~ "The \"first\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "O \"primeiro\" ficheiro que seleccionou não existe.\n"
-#~ "\n"
-#~ "Por favor indique um ficheiro válido."
-
-#~ msgid ""
-#~ "The \"second\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "O \"segundo\" ficheiro que seleccionou não existe.\n"
-#~ "\n"
-#~ "Por favor indique um ficheiro válido."
-
-#~ msgid "The \"first\" document contains no text."
-#~ msgstr "O \"primeiro\" documento está vazio."
-
-#~ msgid "The \"second\" document contains no text."
-#~ msgstr "O \"segundo\" documento está vazio."
-
 #~ msgid ""
 #~ "gedit could not create a temp file.\n"
 #~ "\n"
@@ -1075,20 +1223,6 @@ msgstr "O editor de texto do gnome"
 
 #~ msgid "Diff"
 #~ msgstr "Diff"
-
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr ""
-#~ "Gera um ficheiro com as diferenças (diff) entre dois documentos ou "
-#~ "ficheiros"
-
-#~ msgid ""
-#~ "Makes a diff file from two documents or files on disk\n"
-#~ "For more info on diff, type \"man diff\" in a shell prompt\n"
-#~ msgstr ""
-#~ "Gera um ficheiro de diferenças (diff) entre dois documentos ou ficheiros "
-#~ "em disco\n"
-#~ "Para mais informações sobre o diff, tecle \"man diff\" numa linha de "
-#~ "comando\n"
 
 #~ msgid ""
 #~ "No document exists.\n"
@@ -1224,9 +1358,6 @@ msgstr "O editor de texto do gnome"
 
 #~ msgid "Use the _unified output format (-u option)"
 #~ msgstr "Utilize o formato de saída _unificado (opção -u)"
-
-#~ msgid "gedit: Diff plugin"
-#~ msgstr "gedit: plugin Diff"
 
 #~ msgid "0"
 #~ msgstr "0"
@@ -1460,9 +1591,6 @@ msgstr "O editor de texto do gnome"
 
 #~ msgid "gedit: Browse for program location..."
 #~ msgstr "gedit: Procurar localização da aplicação..."
-
-#~ msgid "gedit: Set program location..."
-#~ msgstr "gedit: Definir localização da aplicação..."
 
 #~ msgid "label"
 #~ msgstr "etiqueta"
