@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-10-05 21:46+0100\n"
-"PO-Revision-Date: 1999-09-14 00:28+02:00\n"
+"POT-Creation-Date: 1999-10-07 11:20+0200\n"
+"PO-Revision-Date: 1999-10-07 11:21+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,15 +20,6 @@ msgstr "gEdit e-post tillegg"
 #: editor-plugins/browse.c:119
 msgid "The gEdit Web Browse Plugin"
 msgstr "gEdit web-leser tillegg"
-
-#: gmodule-plugins/launcher/main.c:57
-#, c-format
-msgid "Docid is %ld.\n"
-msgstr "Dokid er %ld.\n"
-
-#: gmodule-plugins/shell/main.c:63
-msgid "Shell"
-msgstr "Skall"
 
 #: src/commands.c:93
 msgid "Could not save file!"
@@ -92,35 +83,6 @@ msgstr "(C) 1998, 1999 Alex Roberts og Evan Lawrence"
 #: src/gE_about.c:49
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit er en liten lettvekt tekst editor for GNOME/Gtk+"
-
-#: src/gE_document.c:62 src/toolbar.c:51
-msgid "Cut"
-msgstr "Klipp ut"
-
-#: src/gE_document.c:63 src/toolbar.c:53
-msgid "Copy"
-msgstr "Kopier"
-
-#: src/gE_document.c:64 src/toolbar.c:55
-msgid "Paste"
-msgstr "Lim inn"
-
-#. { N_("Open in new window"), file_open_in_new_win_cb },
-#: src/gE_document.c:67 src/toolbar.c:42
-msgid "Save"
-msgstr "Lagre"
-
-#: src/gE_document.c:68 src/toolbar.c:44
-msgid "Close"
-msgstr "Lukk"
-
-#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
-msgid "Print"
-msgstr "Skriv ut"
-
-#: src/gE_document.c:71
-msgid "Open (swap) .c/.h file"
-msgstr "Åpne (bytt) .c/.h fil"
 
 #: src/gE_mdi.c:76
 msgid "Find _Line..."
@@ -310,7 +272,11 @@ msgstr "Vindu"
 msgid "Document"
 msgstr "Dokument"
 
-#: src/gE_print.c:87
+#: src/gE_print.c:73 src/gE_view.c:48
+msgid "Print"
+msgstr "Skriv ut"
+
+#: src/gE_print.c:86
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -319,17 +285,21 @@ msgstr ""
 "Skriv inn utskriftskommando under\n"
 "Husk å ta med '%s'"
 
-#: src/gE_print.c:95
+#: src/gE_print.c:94
 msgid "Print Command:"
 msgstr "Utskriftskommando:"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid "Print anyway"
 msgstr "Skriv ut likevel"
 
-#: src/gE_print.c:236
+#: src/gE_print.c:235
 msgid " Save, then print "
 msgstr " Lagre og skriv ut "
+
+#: src/gE_print.c:235
+msgid "Cancel"
+msgstr "Avbryt"
 
 #: src/gedit.c:116
 msgid "Launch a plugin at startup"
@@ -392,7 +362,7 @@ msgstr "Navnløs"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:87 src/toolbar.c:38
+#: src/menus.c:87
 msgid "Create a new document"
 msgstr "Opprett et nytt dokument"
 
@@ -573,54 +543,14 @@ msgstr "Spør før du erstatter"
 msgid "Replace?"
 msgstr "Erstatt?"
 
-#: src/toolbar.c:38
-msgid "New"
-msgstr "Ny"
+#: src/gE_view.c:46
+msgid "Save"
+msgstr "Lagre"
 
-#: src/toolbar.c:40
-msgid "Open"
-msgstr "Åpne"
+#: src/gE_view.c:47
+msgid "Close"
+msgstr "Lukk"
 
-#: src/toolbar.c:40
-msgid "Open a file"
-msgstr "Åpne en fil"
-
-#: src/toolbar.c:42
-msgid "Save the current file"
-msgstr "Lagre aktiv fil"
-
-#: src/toolbar.c:44
-msgid "Close the current file"
-msgstr "Lukk aktiv fil"
-
-#: src/toolbar.c:46
-msgid "Print the current file"
-msgstr "Skriv ut aktiv fil"
-
-#: src/toolbar.c:51
-msgid "Cut the selection"
-msgstr "Klipp ut utvalget"
-
-#: src/toolbar.c:53
-msgid "Copy the selection"
-msgstr "Kopier utvalget"
-
-#: src/toolbar.c:55
-msgid "Paste the clipboard"
-msgstr "Lim inn utvalget"
-
-#: src/toolbar.c:57
-msgid "Find"
-msgstr "Finn"
-
-#: src/toolbar.c:57
-msgid "Search for a string"
-msgstr "Søk etter en streng"
-
-#: src/toolbar.c:62
-msgid "Exit"
-msgstr "Avslutt"
-
-#: src/toolbar.c:62
-msgid "Exit the program"
-msgstr "Avslutt programmet"
+#: src/gE_view.c:51
+msgid "Open (swap) .c/.h file"
+msgstr "Åpne (bytt) .c/.h fil"
