@@ -96,7 +96,7 @@
       <name>vbox1</name>
       <border_width>2</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>2</spacing>
+      <spacing>6</spacing>
       <child>
 	<padding>0</padding>
 	<expand>True</expand>
@@ -125,7 +125,6 @@
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
-	  <default_focus_target>search_for_text_entry</default_focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -141,8 +140,9 @@
 	  <max_saved>10</max_saved>
 	  <child>
 	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	    <pack>GTK_PACK_END</pack>
 	  </child>
 
 	  <widget>
@@ -150,6 +150,8 @@
 	    <child_name>GnomeEntry:entry</child_name>
 	    <name>search_for_text_entry</name>
 	    <width>300</width>
+	    <can_default>True</can_default>
+	    <has_default>True</has_default>
 	    <can_focus>True</can_focus>
 	    <has_focus>True</has_focus>
 	    <editable>True</editable>
@@ -198,8 +200,8 @@
 	  <max_saved>10</max_saved>
 	  <child>
 	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
+	    <expand>True</expand>
+	    <fill>True</fill>
 	  </child>
 
 	  <widget>
@@ -222,7 +224,7 @@
 	<homogeneous>False</homogeneous>
 	<spacing>0</spacing>
 	<child>
-	  <padding>0</padding>
+	  <padding>4</padding>
 	  <expand>False</expand>
 	  <fill>False</fill>
 	</child>
@@ -231,7 +233,7 @@
 	  <class>GtkRadioButton</class>
 	  <name>radio_button_1</name>
 	  <can_focus>True</can_focus>
-	  <label>b_eginning of document</label>
+	  <label>Search from the _beginning of the document</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>start_search_from</group>
@@ -246,7 +248,7 @@
 	  <class>GtkRadioButton</class>
 	  <name>radio_button_2</name>
 	  <can_focus>True</can_focus>
-	  <label>_cursor position</label>
+	  <label>Search from the _cursor position</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>start_search_from</group>
@@ -254,21 +256,6 @@
 	    <padding>0</padding>
 	    <expand>False</expand>
 	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkTable</class>
-	  <name>table1</name>
-	  <rows>1</rows>
-	  <columns>2</columns>
-	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
-	  <column_spacing>4</column_spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
 	  </child>
 	</widget>
       </widget>
@@ -288,7 +275,7 @@
 	  <class>GtkCheckButton</class>
 	  <name>case_sensitive</name>
 	  <can_focus>True</can_focus>
-	  <label>Case se_nsitive</label>
+	  <label>Case _sensitive</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
@@ -296,14 +283,6 @@
 	    <expand>False</expand>
 	    <fill>False</fill>
 	  </child>
-	</widget>
-
-	<widget>
-	  <class>Placeholder</class>
-	</widget>
-
-	<widget>
-	  <class>Placeholder</class>
 	</widget>
       </widget>
     </widget>
