@@ -161,7 +161,9 @@ gedit_document_get_tab_name (Document *doc)
 	int max_number = 0;
 	int i;
 	const char *UNTITLED = N_("Untitled");
-	const char *RO = N_("RO - "); /* xgettext translators : RO = Read Only */
+	 /* xgettext translators : RO = Read Only, it apears before
+	    the document "tab" in the mdi window like "R0 - file.txt"*/
+	const char *RO = N_("RO - ");
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
