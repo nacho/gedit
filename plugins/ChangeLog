@@ -1,3 +1,9 @@
+2005-01-25  Paolo Maggi  <paolo@gnome.org>
+
+	* savecopy/savecopy.c (get_buffer_contents) (write_to_file)
+	(real_save_copy): fixes a mem leak, fixed bug #156423 (Saving 
+	in UTF-16 encoding destroys files). Patch by Paolo Borelli.
+
 2005-01-19  Paolo Maggi  <paolo@gnome.org>
 
 	* taglist/HTML.tags.xml.in: changes some string as suggested in 

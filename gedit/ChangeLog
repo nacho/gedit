@@ -1,5 +1,13 @@
 2005-01-25  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit-convert.[ch] (gedit_convert_from_utf8): returns the size of
+	the converted text (as number of bytes)
+
+	* gedit-document.c (gedit_document_save_as_real): fixes 
+	bug #156423 (Saving in UTF-16 encoding destroys files)
+
+2005-01-25  Paolo Maggi  <paolo@gnome.org>
+
 	Fixed bug #115070 (RFE: usability: <esc> shoud close Search dialog)
 
 	Since nothing seems to change on the HIG side, I have decided 

@@ -1748,9 +1748,10 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	mode_t saved_umask;
 	struct stat st;
 	gchar *chars = NULL;
-	gint chars_len;
 	gint fd;
 	gint retval;
+	gsize chars_len = 0;
+	gsize new_len = 0;
 	gboolean res;
 	gboolean add_cr;
 	GtkTextIter start_iter;
@@ -1875,14 +1876,24 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	chars = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
 					   &start_iter, &end_iter, TRUE);
 
+	chars_len = strlen (chars);
+
+	add_cr = FALSE;
+	
+	if (chars_len >= 1)
+	{
+		add_cr = (*(chars + chars_len - 1) != '\n');
+	}
+	
 	if (encoding != gedit_encoding_get_utf8 ())
 	{
 		GError *conv_error = NULL;
 		gchar* converted_file_contents = NULL;
 
 		converted_file_contents = gedit_convert_from_utf8 (chars, 
-								   -1, 
+								   chars_len, 
 								   encoding,
+								   &new_len,
 								   &conv_error);
 
 		if (conv_error != NULL)
@@ -1900,17 +1911,42 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 			chars = converted_file_contents;
 		}
 	}
-
-	chars_len = strlen (chars);
-
-	add_cr = (*(chars + chars_len - 1) != '\n');
+	else
+	{
+		new_len = chars_len;
+	}
 
 	/* Save the file content */
-	res = (write (fd, chars, chars_len) == chars_len);
+	res = (write (fd, chars, new_len) == new_len);
 
 	if (res && add_cr)
+	{
 		/* Add \n if needed */
-		res = (write (fd, "\n", 1) == 1);
+		if (encoding != gedit_encoding_get_utf8 ())
+		{
+			gchar* converted_n = NULL;
+		
+			converted_n = gedit_convert_from_utf8 ("\n", 
+							       -1, 
+							       encoding,
+							       &new_len,
+							       NULL);
+			
+			if (converted_n == NULL)
+			{
+				g_warning ("Cannot add '\\n' at the end of the file.");
+			}
+			else
+			{
+				res = (write (fd, converted_n, new_len) == new_len);
+				g_free (converted_n);
+			}
+		}
+		else
+		{	
+			res = (write (fd, "\n", 1) == 1);
+		}
+	}
 
 	if (!res)
 	{

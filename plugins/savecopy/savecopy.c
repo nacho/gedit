@@ -60,40 +60,13 @@ G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 
 
 static gchar *
-get_contents (GeditDocument *doc, const GeditEncoding *encoding, GError **error)
+get_buffer_contents (GeditDocument *doc)
 {
-	gchar *chars;
 	GtkTextIter start, end;
 
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
-	chars = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
-					   &start, &end, TRUE);
-
-	if (encoding != gedit_encoding_get_utf8 ())
-	{
-		GError *conv_error = NULL;
-		gchar* converted_file_contents = NULL;
-
-		converted_file_contents = gedit_convert_from_utf8 (chars, 
-								   -1, 
-								   encoding,
-								   &conv_error);
-
-		if (conv_error != NULL)
-		{
-			/* Conversion error */
-			g_propagate_error (error, conv_error);
-			g_free (chars);
-			return NULL;
-		}
-		else
-		{
-			g_free (chars);
-			chars = converted_file_contents;
-		}
-	}
-
-	return chars;
+	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
+					  &start, &end, TRUE);
 }
 
 static GnomeVFSResult
@@ -101,7 +74,6 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 {
 	GnomeVFSFileSize written;
 	GnomeVFSResult res = GNOME_VFS_OK;
-	gboolean add_cr;
 
 	while (len > 0)
 	{
@@ -114,12 +86,6 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 			break;
 	}
 
-	/* Add \n if needed */
-	add_cr = (*(data + len - 1) != '\n');
-
-	if (res == GNOME_VFS_OK && add_cr)
-		res = gnome_vfs_write (handle, "\n", 1, &written);
-
 	return res;
 }
 
@@ -131,14 +97,55 @@ real_save_copy (GeditDocument *doc,
 		GError **error)
 {
 	gchar *contents;
+	gboolean add_cr;
+	gsize len = 0;
+	gsize new_len = 0;
 	GnomeVFSHandle *handle;
 	mode_t saved_umask;
 	guint perms = 0;
 	GnomeVFSResult vfs_res;
 
-	contents = get_contents (doc, encoding, error);
+	contents = get_buffer_contents (doc);
 	if (contents == NULL)
 		return FALSE;
+
+	len = strlen (contents);
+
+	add_cr = FALSE;
+	
+	if (len >= 1)
+	{
+		add_cr = (*(contents + len - 1) != '\n');
+	}
+
+	if (encoding != gedit_encoding_get_utf8 ())
+	{
+		GError *conv_error = NULL;
+		gchar *converted_file_contents = NULL;
+
+		converted_file_contents = gedit_convert_from_utf8 (contents, 
+								   len, 
+								   encoding,
+								   &new_len,
+								   &conv_error);
+
+		if (conv_error != NULL)
+		{
+			/* Conversion error */
+			g_propagate_error (error, conv_error);
+			g_free (contents);
+			return FALSE;
+		}
+		else
+		{
+			g_free (contents);
+			contents = converted_file_contents;
+		}
+	}
+	else
+	{
+		new_len = len;
+	}
 
 	/* init default permissions */
 	saved_umask = umask(0);
@@ -158,6 +165,8 @@ real_save_copy (GeditDocument *doc,
 				    perms);
 	if (vfs_res != GNOME_VFS_OK)
 	{
+		g_free (contents);
+
 		g_set_error (error,
 			     GEDIT_DOCUMENT_IO_ERROR, 
 			     vfs_res,
@@ -166,7 +175,8 @@ real_save_copy (GeditDocument *doc,
 		return FALSE;
 	}
 
-	vfs_res = write_to_file (handle, contents, strlen (contents));
+	vfs_res = write_to_file (handle, contents, new_len);
+	g_free (contents);
 	if (vfs_res != GNOME_VFS_OK)
 	{
 		g_set_error (error,
@@ -177,6 +187,46 @@ real_save_copy (GeditDocument *doc,
 		gnome_vfs_close (handle);
 
 		return FALSE;
+	}
+
+	/* make sure the file is \n terminated.
+	 * However if writing it fails we do not abort
+	 */
+	if (add_cr)
+	{
+		GnomeVFSFileSize written;
+
+		if (encoding != gedit_encoding_get_utf8 ())
+		{
+			gchar *converted_n = NULL;
+		
+			converted_n = gedit_convert_from_utf8 ("\n", 
+							       -1, 
+							       encoding,
+							       &new_len,
+							       NULL);
+
+			if (converted_n == NULL)
+			{
+				g_warning ("Cannot add '\\n' at the end of the file.");
+			}
+			else
+			{
+				vfs_res = gnome_vfs_write (handle, converted_n, new_len, &written);
+
+				if ((vfs_res != GNOME_VFS_OK) || (written != new_len))
+					g_warning ("Cannot add '\\n' at the end of the file.");
+
+				g_free (converted_n);
+			}
+		}
+		else
+		{
+			vfs_res = gnome_vfs_write (handle, "\n", 1, &written);
+
+			if ((vfs_res != GNOME_VFS_OK) || (written != 1))
+				g_warning ("Cannot add '\\n' at the end of the file.");
+		}
 	}
 
 	gnome_vfs_close (handle);

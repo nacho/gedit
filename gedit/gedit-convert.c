@@ -214,10 +214,12 @@ gchar *
 gedit_convert_from_utf8 (const gchar          *content, 
 		         gsize                 len,
 		         const GeditEncoding  *encoding,
+			 gsize                *new_len,
 			 GError 	     **error)
 {
 	GError *conv_error         = NULL;
 	gchar  *converted_contents = NULL;
+	gsize   bytes_written = 0;
 
 	gedit_debug (DEBUG_UTILS, "");
 	
@@ -236,7 +238,7 @@ gedit_convert_from_utf8 (const gchar          *content,
 					gedit_encoding_get_charset (encoding), 
 					"UTF-8",
 					NULL, 
-					NULL,
+					&bytes_written,
 					&conv_error); 
 
 	if (conv_error != NULL)
@@ -251,6 +253,11 @@ gedit_convert_from_utf8 (const gchar          *content,
 		}
 
 		g_propagate_error (error, conv_error);
+	}
+	else
+	{
+		if (new_len != NULL)
+			*new_len = bytes_written;
 	}
 
 	return converted_contents;
