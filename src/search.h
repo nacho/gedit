@@ -37,7 +37,7 @@ void goto_line_cb (GtkWidget *widget, gpointer data);
 
 gint pos_to_line (gint pos, gint *numlines);
 gulong line_to_pos (Document *doc, gint line, gint *lines);
-void update_text (GtkText *text, gint line, gint lines);
+void update_window_position (GtkText *text, gint line, gint lines);
 
 gint search_text_execute ( gulong starting_position,
 			   gint case_sensitive,

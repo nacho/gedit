@@ -23,6 +23,7 @@
 #define __UNDO_H__
 
 #include "document.h"
+#include "view.h"
 
 /* Actions */
 #define	INSERT	0
@@ -37,9 +38,11 @@ struct _gedit_undo
 	gint end_pos;
 	gint action;	/* whether the user has inserted or deleted */
 	gint status;	/* the changed status of the document used with this node */
+	View *view;
+	gfloat window_position;
 };
 
-extern void gedit_undo_add      (gchar*, gint, gint, gint, Document*);
+extern void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
 extern void gedit_undo_reset	(GList*);
 extern void gedit_undo_do	(GtkWidget*, gpointer);
 extern void gedit_undo_redo	(GtkWidget*, gpointer);

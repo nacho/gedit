@@ -86,24 +86,19 @@ void
 gedit_window_refresh (void)
 {
 	gint i, j;
-	View *nth_view;
+	View *view, *nth_view;
 	Document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
-	View *view;
 
 	gedit_debug("F:gedit_window_refresh\n", DEBUG_PREFS);
 
-	/* I did this hack so as to not generate a
-	   warning, dunno if there is a better way. Chema*/
+	/* us "if" to not generate a warning */
 	if (mdi->active_view!=NULL)
 		view = VIEW ( mdi->active_view);
 	else
 		view = NULL;
 			
-	if (view!=NULL)
-		gedit_view_set_split_screen ( view, (gint) view->splitscreen);
-
 	gedit_window_set_status_bar (settings->show_status);
 
 	/* the "Default" mode is index 3, but GNOME_MDI_DEFAULT_MODE
@@ -139,11 +134,12 @@ gedit_window_refresh (void)
 			nth_view = g_list_nth_data (doc->views, j);
 			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
 
-			gtk_widget_set_style (GTK_WIDGET (nth_view->split_screen),
-					      style);
 			gtk_widget_set_style (GTK_WIDGET (nth_view->text),
 					      style);
 			gedit_view_set_font (nth_view, settings->font);
+#ifdef ENABLE_SPLIT_SCREEN
+			gedit_view_set_split_screen ( nth_view, (gint) settings->splitscreen);
+#endif	
 		}
 	}
 }

@@ -47,10 +47,13 @@ struct _View
 	GtkWidget *pane;
 	GtkWidget *scrwindow[2];
 	
-	gint split, splitscreen;
+	gint split;
+	gint splitscreen;
 	GtkWidget *split_parent;
 	GtkWidget *split_viewport;
+#ifdef ENABLE_SPLIT_SCREEN	
 	GtkWidget *split_screen;
+#endif	
 	
 	gint changed_id;
 	gint changed;

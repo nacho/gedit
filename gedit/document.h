@@ -57,10 +57,10 @@ struct _Document
 
 	/* Undo/Redo GLists */
 	GList *undo;		/* Undo Stack */
-	GList *undo_top;	
 	GList *redo;		/* Redo Stack */
 
 	int  readonly;
+	gint untitled_number;
 };
 
 
@@ -82,7 +82,7 @@ void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void add_view_cb         (GnomeMDI *mdi, Document *doc);
 gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 
-gchar* gedit_get_document_tab_name (void);
+gchar* gedit_get_document_tab_name (Document *doc);
 void gedit_mdi_init (void);
 
 #endif /* __DOCUMENT_H__ */

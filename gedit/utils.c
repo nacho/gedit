@@ -128,7 +128,6 @@ gedit_flash_va (gchar *format, ...)
 
 
 
-
 /* This is just a stopwatch. Chema
    I need it to time search functions but
    it can be removed after I am done with
@@ -143,12 +142,15 @@ typedef struct {
 
 static time_keeper tk;
 
+void start_time (void);
+
 void start_time (void)
 {
 	tk.begin_clock = tk.save_clock = clock ();
 	tk.begin_time = tk.save_time = time (NULL);
 }
 
+double print_time (void);
 double
 print_time (void)
 {

@@ -253,7 +253,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		}
 
 		gedit_flash_va (_("Text found at line :%i"),line_found);
-		update_text (text, line_found, total_lines);
+		update_window_position (text, line_found, total_lines);
 		gtk_text_set_point (text, pos_found+1);
 		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
 		gtk_text_backward_delete (text, 1);

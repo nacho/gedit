@@ -65,7 +65,7 @@ goto_line_clicked_cb (GtkWidget *widget, gint button)
 			line = lines;
 
 		
-		update_text (text, line, lines);
+		update_window_position (text, line, lines);
 		gtk_text_set_point (text, pos);
 		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
 		gtk_text_backward_delete (text, 1);

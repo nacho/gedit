@@ -1,3 +1,24 @@
+2000-05-30  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_do): before undoing/redoing
+	adjust the window so that we dont have to see
+	the document scroll in a very anoying fashion
+	(gedit_undo_redo): ditto.
+
+	* document.h (struct _Document): added untitled_number
+	entry.
+
+	* view.c : #ifdef out split screen code
+	* undo.c : #ifdef out split screen code
+	* document.c : #ifdef out split screen code
+	It seems that the speed problems have been solved !
+	We need to confirm this whit the users that reported
+	them.
+	(gedit_get_document_tab_name): fix, added new parameter.
+
+	* dialogs/dialog-prefs.c (gedit_window_refresh): set split screen in
+	all docs and all views.
+
 2000-05-29  Chema Celorio  <chema@celorio.com>
 
 	* print.c (print_determine_lines): fix

@@ -196,6 +196,7 @@ edit_selall_cb (GtkWidget *widget, gpointer data)
 
 
 
+#ifdef ENABLE_SPLIT_SCREEN
 void
 options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
@@ -210,6 +211,7 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 	gedit_view_set_split_screen (view,
 				     !GTK_WIDGET_VISIBLE (view->split_parent));
 }
+#endif
 
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)

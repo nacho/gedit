@@ -43,7 +43,7 @@ static void	  gedit_document_destroy (GtkObject *);
 /*static void	  gedit_document_real_changed (Document *, gpointer); */
 static gchar* gedit_document_get_config_string (GnomeMDIChild *child);
 
-gchar* gedit_get_document_tab_name (void);
+gchar* gedit_get_document_tab_name (Document *doc);
 
 GnomeMDI *mdi;
 
@@ -152,24 +152,30 @@ gedit_document_init (Document *doc)
 }
 
 gchar*
-gedit_get_document_tab_name (void)
+gedit_get_document_tab_name (Document *doc)
 {
-	Document *doc;	
-	int counter = 0;
+	Document *nth_doc;
+	int max_number = 0;
 	int i;
 	const char *UNTITLED = N_("Untitled");
 
 	gedit_debug ("\n", DEBUG_DOCUMENT);
-	
-        for (i = 0; i < g_list_length (mdi->children); i++)
+
+	if (doc->untitled_number == 0)
 	{
-		doc = (Document *)g_list_nth_data (mdi->children, i);
-	  
-		if (!doc->filename)
-			counter++;
+		for (i = 0; i < g_list_length (mdi->children); i++)
+		{
+			nth_doc = (Document *)g_list_nth_data (mdi->children, i);
+			
+			if ( nth_doc->untitled_number > max_number)
+			{
+				max_number = nth_doc->untitled_number;
+			}
+		}
+		doc->untitled_number = max_number + 1;
 	}
 	
-	return _(g_strdup_printf ("%s %d", UNTITLED, counter ));
+	return _(g_strdup_printf ("%s %d", UNTITLED, doc->untitled_number));
 	   
 }
 
@@ -184,7 +190,8 @@ gedit_document_new (void)
 	doc = gtk_type_new (gedit_document_get_type ());
 	if (doc)
 	{
-		doc_name = gedit_get_document_tab_name();
+		doc->untitled_number = 0;
+		doc_name = gedit_get_document_tab_name(doc);
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 					  doc_name);
 
