@@ -54,3 +54,44 @@ gedit_recent_init (void)
 
 	egg_recent_model_set_filter_groups (model, "gedit", NULL);
 }
+
+static gboolean
+add_recent_file_real (const gchar *uri)
+{
+	EggRecentItem *item;
+
+	item = egg_recent_item_new_from_uri (uri);
+
+	egg_recent_item_add_group (item, "gedit");
+	egg_recent_model_add_full (model, item);
+	egg_recent_item_unref (item);
+
+	return FALSE;
+}
+
+void
+gedit_recent_add (const gchar *uri)
+{
+	g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+			 (GSourceFunc)add_recent_file_real,
+			 g_strdup (uri),
+			 (GDestroyNotify)g_free);
+}
+
+static gboolean
+remove_recent_file_real (const gchar *uri)
+{
+	egg_recent_model_delete (model, uri);
+
+	return FALSE;
+}
+
+void
+gedit_recent_remove (const gchar *uri)
+{
+	g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+			 (GSourceFunc)remove_recent_file_real,
+			 g_strdup (uri),
+			 (GDestroyNotify)g_free);
+}
+

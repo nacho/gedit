@@ -61,7 +61,6 @@
 #include <bonobo/bonobo-i18n.h>
 
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel-vfs-extensions.h>
 #include <eel/eel-alert-dialog.h>
 
 #include "gedit-utils.h"
@@ -86,7 +85,7 @@ typedef enum {
 static gboolean
 replace_dialog (GtkWindow *parent,
 		const gchar *primary_message,
-		const gchar *file_name,
+		const gchar *uri,
 		const gchar *secondary_message)
 {
 	GtkWidget *msgbox;
@@ -94,15 +93,10 @@ replace_dialog (GtkWindow *parent,
 	gint ret;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
-	gchar *uri;
 	gchar *message_with_uri;
-
-	uri = eel_make_uri_from_shell_arg (file_name);
-	g_return_val_if_fail (uri != NULL, FALSE);
 
 	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
-	g_free (uri);
 	
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -146,20 +140,20 @@ replace_dialog (GtkWindow *parent,
 
 /* Presents a confirmation dialog for whether to replace an existing file */
 static gboolean
-replace_existing_file (GtkWindow *parent, const gchar* file_name)
+replace_existing_file (GtkWindow *parent, const gchar *uri)
 {
 	return replace_dialog (parent,
-			       _("A file named \"%s\" already exists.\n"), file_name,
+			       _("A file named \"%s\" already exists.\n"), uri,
 			       _("Do you want to replace it with the "
 			         "one you are saving?"));
 }
 
 /* Presents a confirmation dialog for whether to replace a read-only file */
 static gboolean
-replace_read_only_file (GtkWindow *parent, const gchar* file_name)
+replace_read_only_file (GtkWindow *parent, const gchar *uri)
 {
 	return replace_dialog (parent,
-			       _("The file \"%s\" is read-only.\n"), file_name,
+			       _("The file \"%s\" is read-only.\n"), uri,
 			       _("Do you want to try to replace it with the "
 			         "one you are saving?"));
 }
@@ -221,7 +215,6 @@ file_exists (gchar *name)
 static gpointer
 analyze_response (GtkFileChooser *chooser, gint response)
 {
-	gchar *file_name;
 	gchar *uri;
 	gboolean enable_vfs;
 	
@@ -237,43 +230,63 @@ analyze_response (GtkFileChooser *chooser, gint response)
 
 	if (enable_vfs)
 	{
-		file_name = gtk_file_chooser_get_uri (chooser);
+		uri = gtk_file_chooser_get_uri (chooser);
 	}
 	else
 	{
+		gchar *file_name;
+
 		file_name = gtk_file_chooser_get_filename (chooser);
-	}
+		uri = file_name ? gnome_vfs_get_uri_from_local_path (file_name) : NULL;
 
-	if ((file_name == NULL) || (strlen (file_name) == 0)) 
-	{
 		g_free (file_name);
-		return NULL;
 	}
 
-	if (enable_vfs)
+	if ((uri == NULL) || (strlen (uri) == 0)) 
 	{
-		uri = g_strdup (file_name);
-	}
-	else
-	{
-		uri = gnome_vfs_get_uri_from_local_path (file_name);
+		g_free (uri);
+
+		return NULL;
 	}
 
 	if (GET_MODE (chooser) == FILESEL_OPEN_MULTI) 
 	{
-		GSList *files;
-	       
-		g_free (file_name);
+		GSList *uris = NULL;
+
 		g_free (uri);
 
 		if (enable_vfs)
-			files = gtk_file_chooser_get_uris (chooser);
+		{
+			uris = gtk_file_chooser_get_uris (chooser);
+		}
 		else
+		{
+			GSList *files;
+			GSList *l;
+
 			files = gtk_file_chooser_get_filenames (chooser);
+
+			for (l = files; l; l = l->next)
+			{
+				gchar *u;
+				gchar *file_name = (gchar *)l->data;
+
+				u = file_name ? gnome_vfs_get_uri_from_local_path (file_name) : NULL;
+
+				if (u != NULL)
+					uris = g_slist_prepend (uris, u);
+
+				g_free (file_name);
+			}
+
+			g_slist_free (files);
+
+			uris = g_slist_reverse (uris);
+		}
 
 		gtk_widget_hide (GTK_WIDGET (chooser));
 
-		return files;
+		return uris;
 	}
 	else	
 	{	
@@ -283,17 +296,15 @@ analyze_response (GtkFileChooser *chooser, gint response)
 			{
 				if (is_read_only (uri))
 				{
-					if (!replace_read_only_file (GTK_WINDOW (chooser), file_name)) 
+					if (!replace_read_only_file (GTK_WINDOW (chooser), uri)) 
 					{
-						g_free (file_name);
 						g_free (uri);
 
 						return NULL;
 					}
 				}
-				else if (!replace_existing_file (GTK_WINDOW (chooser), file_name)) 
+				else if (!replace_existing_file (GTK_WINDOW (chooser), uri)) 
 				{
-					g_free (file_name);
 					g_free (uri);
 
 					return NULL;
@@ -303,12 +314,10 @@ analyze_response (GtkFileChooser *chooser, gint response)
 
 		gtk_widget_hide (GTK_WIDGET (chooser));
 
-		g_free (uri);
-
-		return file_name;
+		return uri;
 	} 
 
-	return NULL;
+	g_return_val_if_reached (NULL);
 }
 
 static gboolean
@@ -519,8 +528,7 @@ run_file_selector (GtkWindow  *parent,
  * Creates and shows a modal open file dialog, waiting for the user to
  * select a file or cancel before returning.
  *
- * Return value: the URI (or plain file path if @enable_vfs is FALSE)
- * of the file selected, or NULL if cancel was pressed.
+ * Return value: the URI of the file selected, or NULL if cancel was pressed.
  **/
 char *
 gedit_file_selector_open (GtkWindow  *parent,
@@ -544,9 +552,8 @@ gedit_file_selector_open (GtkWindow  *parent,
  * Creates and shows a modal open file dialog, waiting for the user to
  * select a file or cancel before returning.
  *
- * Return value: a GSList list of the selected URIs 
- * (or local file paths if @enable_vfs is FALSE), 
- * or NULL if cancel was pressed.
+ * Return value: a GSList list of the selected URIs, or NULL if
+ * cancel was pressed.
  **/
 GSList *
 gedit_file_selector_open_multi (GtkWindow  *parent,
@@ -572,8 +579,8 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
  * Creates and shows a modal save file dialog, waiting for the user to
  * select a file or cancel before returning.
  *
- * Return value: the URI (or plain file path if @enable_vfs is FALSE)
- * of the file selected, or NULL if cancel was pressed.
+ * Return value: the URI of the file selected, or NULL if cancel
+ * was pressed.
  **/
 char *
 gedit_file_selector_save (GtkWindow  *parent,
