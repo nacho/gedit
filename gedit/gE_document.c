@@ -80,6 +80,7 @@ gE_window_new(void)
 	gE_window *w;
 	gE_data *data;
 	GtkWidget *box1, *box2, *tmp;
+	gint *ptr; /* For plugin stuff. */
 
 	/* various initializations */
 	w = g_malloc(sizeof(gE_window));
@@ -97,8 +98,10 @@ gE_window_new(void)
 	w->files_list_window_data = NULL;
 	w->toolbar = NULL;
 
-	g_hash_table_insert(win_int_to_pointer, GINT_TO_POINTER(++last_assigned_integer), w);
-	g_hash_table_insert(win_pointer_to_int, w, GINT_TO_POINTER (last_assigned_integer));
+	ptr = g_new(int, 1);
+	*ptr = ++last_assigned_integer;
+	g_hash_table_insert(win_int_to_pointer, ptr, w);
+	g_hash_table_insert(win_pointer_to_int, w, ptr);
 	
 	data = g_malloc0(sizeof(gE_data));
 #ifdef WITHOUT_GNOME
@@ -221,11 +224,14 @@ gE_document
 	GtkWidget *scrollball;
 #endif
 	GtkStyle *style;
+	gint *ptr; /* For plugin stuff. */
 
 	doc = g_malloc0(sizeof(gE_document));
 
-	g_hash_table_insert(doc_int_to_pointer, GINT_TO_POINTER(++last_assigned_integer), doc);
-	g_hash_table_insert(doc_pointer_to_int, doc, GINT_TO_POINTER (last_assigned_integer));
+	ptr = g_new(int, 1);
+	*ptr = ++last_assigned_integer;
+	g_hash_table_insert(doc_int_to_pointer, ptr, doc);
+	g_hash_table_insert(doc_pointer_to_int, doc, ptr);
 
 	doc->window = w;
 

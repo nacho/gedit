@@ -50,10 +50,7 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
   
-  plugin_register( plug, &callbacks, GPOINTER_TO_INT (
-  	g_hash_table_lookup (win_pointer_to_int, data->window )
-  	)
-  );
+  plugin_register( plug, &callbacks, *(int *)g_hash_table_lookup (win_pointer_to_int, data->window ) );
 }
 
 
@@ -107,22 +104,12 @@ void add_plugins_to_window (plugin_info *info, gE_window *window)
 
 int gE_plugin_document_create( gint context, gchar *title )
 {
-  return GPOINTER_TO_INT (
-  	g_hash_table_lookup (doc_pointer_to_int, 
-  		( gE_document_new( 
-  			GINT_TO_POINTER (
-  				g_hash_table_lookup( win_int_to_pointer, 
-  					GINT_TO_POINTER(context) )
-  				) 
-  			) 
-  		)
-  	)
-  );
+  return *(int *)g_hash_table_lookup( doc_pointer_to_int, gE_document_new( (gE_window *) g_hash_table_lookup( win_int_to_pointer, &context )));
 }
 
 void gE_plugin_text_append( gint docid, gchar *buffer, gint length )
 {
-  gE_document *document = (gE_document *) g_hash_table_lookup( doc_int_to_pointer, GINT_TO_POINTER (docid) );
+  gE_document *document = (gE_document *) g_hash_table_lookup( doc_int_to_pointer, &docid );
   GtkText *text = GTK_TEXT( document->text );
   gtk_text_freeze( text );
   gtk_text_set_point( text, gtk_text_get_length( text ) );
@@ -137,18 +124,12 @@ void gE_plugin_document_show( gint docid )
 
 int gE_plugin_document_current( gint context )
 {
-  return GPOINTER_TO_INT (
-  	g_hash_table_lookup (doc_pointer_to_int, 
-  		( GINT_TO_POINTER (gE_document_current( 
-  			g_hash_table_lookup( win_int_to_pointer, GINT_TO_POINTER (context) ) ) 
-  		) ) 
-  	)
-  );
+  return *(int *)g_hash_table_lookup (doc_pointer_to_int, ( gE_document_current( g_hash_table_lookup( win_int_to_pointer, &context ) ) ) );
 }
 
 gchar *gE_plugin_document_filename( gint docid )
 {
-  gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, GINT_TO_POINTER( docid ));
+  gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
   if (document->filename == NULL)
   	return "";
   else
@@ -161,15 +142,15 @@ int gE_plugin_document_open(gint context,gchar *fname)
       gE_document *doc;
 
       newfname=g_strdup(fname);
-      doc=gE_document_new( g_hash_table_lookup (win_int_to_pointer, GINT_TO_POINTER( context ) )) ;
+      doc=gE_document_new( g_hash_table_lookup (win_int_to_pointer, &context )) ;
 
-      gE_file_open(g_hash_table_lookup (win_int_to_pointer, GINT_TO_POINTER( context )) ,doc,newfname);
-      return GPOINTER_TO_INT (g_hash_table_lookup (doc_pointer_to_int, (doc)));
+      gE_file_open(g_hash_table_lookup (win_int_to_pointer, &context) ,doc,newfname);
+      return *(int *)g_hash_table_lookup (doc_pointer_to_int, (doc));
 }
 
 gboolean gE_plugin_document_close (gint docid)
 {
-	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, GINT_TO_POINTER(docid));
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
 	gE_data *data = g_malloc (sizeof (gE_data));
 	gboolean flag;
 
@@ -190,7 +171,7 @@ gboolean gE_plugin_document_close (gint docid)
 
 char *gE_plugin_text_get( gint docid )
 {
-  gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, GINT_TO_POINTER( docid ));
+  gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
   return gtk_editable_get_chars( GTK_EDITABLE( document->text ), 0, -1 );
 }
 
