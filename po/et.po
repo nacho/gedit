@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit2\n"
-"POT-Creation-Date: 2002-03-24 13:10+0200\n"
-"PO-Revision-Date: 2002-03-24 14:00+0200\n"
+"POT-Creation-Date: 2002-06-04 21:51+0300\n"
+"PO-Revision-Date: 2002-06-04 23:11+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,14 @@ msgstr "Redigeeri tekstifaile"
 #: gedit.desktop.in.h:2
 msgid "Text Editor"
 msgstr "Tekstiredaktor"
+
+#: plugins/ASCII/ascii.c:43
+msgid "_ASCII Table"
+msgstr "_ASCII tabel"
+
+#: plugins/ASCII/ascii.c:46
+msgid "Pop-up a dialog containing an ASCII Table"
+msgstr "Ava dialoogiaken ASCII tabeliga"
 
 #: plugins/ASCII/ascii.c:336
 msgid "Char"
@@ -72,17 +80,39 @@ msgstr "Lisa märk"
 msgid "gedit: ASCII table"
 msgstr "gedit: ASCII tabel"
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:48
+msgid "Open CVS Chan_geLogs"
+msgstr "Ava CVSi lo_giraamatud (ChangeLog)"
+
+#: plugins/cvschangelog/cvschangelog.c:51
+msgid "Searches for ChangeLogs in the current document and opens them"
+msgstr "Otsib aktiivsest dokumendist logiraamatu kirjed (ChangeLog) ja avab need"
+
+#: plugins/cvschangelog/cvschangelog.c:263
 msgid "CVS ChangeLog"
 msgstr "CVS logiraamat"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:264
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr "Plugin, mis avab CVSi sissekannete logis leitud logiraamatud (ChangeLog)."
+msgstr ""
+"Plugin, mis avab CVSi sissekannete teadetes leitud logiraamatu kirjed (ChangeLog)."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:266
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright © 2002 - James Willcox"
+
+#: plugins/diff/diff.c:61
+msgid "Co_mpare Files..."
+msgstr "_Võrdle faile..."
+
+#: plugins/diff/diff.c:64
+msgid "Makes a diff file from two documents or files"
+msgstr "Loob diff faili (erinevused) kahest dokumendist või failist"
+
+#: plugins/diff/diff.c:66
+msgid "Compare files"
+msgstr "Võrdle faile"
 
 #. Create the dialog
 #: plugins/diff/diff.c:267
@@ -226,24 +256,13 @@ msgstr "Teine"
 msgid "Use the _unified output format (-u option)"
 msgstr "Kasuta _ühtlustatud väljundvormingut (-u parameeter)"
 
-#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
-#: src/dialogs/gedit-preferences.glade2.h:77 src/dialogs/goto-line.glade2.h:3
-#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
-msgid "gtk-cancel"
-msgstr "gtk-cancel"
+#: plugins/docinfo/docinfo.c:46
+msgid "_Word Count"
+msgstr "_Sõnade arv"
 
-#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
-#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:78
-#: src/dialogs/uri.glade2.h:4
-msgid "gtk-help"
-msgstr "gtk-help"
-
-#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
-#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:79
-#: src/dialogs/goto-line.glade2.h:4
-#: src/dialogs/program-location-dialog.glade2.h:4
-msgid "gtk-ok"
-msgstr "gtk-ok"
+#: plugins/docinfo/docinfo.c:49
+msgid "Get info on current document"
+msgstr "Näitab aktiivse dokumendi kohta infot"
 
 #: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
@@ -259,13 +278,12 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
-"\"Sõnade arv\"-plugin analüüsib aktiivset dokumenti ja leiab sõnade, "
-"ridade, märkide ja mitte-tühik märkide arvu selles ning väljastab "
-"tulemuse."
+"\"Sõnade arv\"-plugin analüüsib aktiivset dokumenti ja leiab sõnade, ridade, "
+"märkide ja mitte-tühik märkide arvu selles ning väljastab tulemuse."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
 #: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:556
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright © 2002 - Paolo Maggi"
 
@@ -289,7 +307,7 @@ msgstr "Märke (koos tühikutega)"
 msgid "File Name"
 msgstr "Faili nimi"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
 msgid "Lines"
 msgstr "Ridu"
 
@@ -305,18 +323,29 @@ msgstr "Sõnu"
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Dokumendi info plugin"
 
-#: plugins/docinfo/docinfo.glade2.h:10
-#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
-msgid "gtk-close"
-msgstr "gtk-close"
+#: plugins/sample/sample.c:43
+msgid "Insert User _Name"
+msgstr "Lisa kasutaja _nimi"
 
-#: plugins/sample/sample.c:148
+#: plugins/sample/sample.c:46
+msgid "Insert the user name at the cursor position"
+msgstr "Lisa kasutaja nimi kursori asukohta"
+
+#: plugins/sample/sample.c:160
 msgid "User name"
 msgstr "Kasutaja nimi"
 
-#: plugins/sample/sample.c:149
+#: plugins/sample/sample.c:161
 msgid "Inserts the user name at the cursor position."
-msgstr "Lisa kasutajanimi kursori asukohta."
+msgstr "Lisab kasutaja nime kursori asukohta."
+
+#: plugins/shell_output/shell_output.c:45
+msgid "Insert Shell _Output"
+msgstr "Lisa kesta _väljund"
+
+#: plugins/shell_output/shell_output.c:48
+msgid "Insert the shell output in the current document"
+msgstr "Lisa kesta väljund aktiivsesse dokumenti"
 
 #: plugins/shell_output/shell_output.c:163
 #: plugins/shell_output/shell_output.c:432
@@ -356,8 +385,7 @@ msgid ""
 "Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
-"Käivita programm ja lisa selle väljund aktiivsesse dokumenti kursori "
-"asukohta"
+"Käivita programm ja lisa selle väljund aktiivsesse dokumenti kursori asukohta"
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Specify the working directory and the command you want to run."
@@ -375,31 +403,58 @@ msgstr "_Töökataloog:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Kesta väljundi plugin"
 
-#: plugins/taglist/gedit-taglist-plugin.c:140
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tab you want to use"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:187
+msgid "Double-click on a tag to insert it in the current document"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:198
+msgid "Tags"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
+msgid "Tag _List"
+msgstr ""
+
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
+msgid "Show the tag list window"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:141
+#: plugins/taglist/gedit-taglist-plugin.c:161
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:117
-msgid "Tag list plugin"
-msgstr ""
+#: plugins/time/time.c:45
+msgid "_Insert Date/Time"
+msgstr "_Lisa kuupäev/kell"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:135
-msgid "Select the group of tab you want to use."
-msgstr ""
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:159
-msgid "Double-click on a tag to insert it in the current document."
-msgstr ""
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:170
-msgid "Tags"
-msgstr ""
+#: plugins/time/time.c:48
+msgid "Insert current date and time at the cursor position"
+msgstr "Lisa praegune kuupäev ja kellaaeg kursori asukohta"
 
 #: plugins/time/time.c:259
 msgid "Available formats"
@@ -437,71 +492,84 @@ msgstr "_Mine reale"
 
 #: src/dialogs/gedit-dialog-goto-line.c:140
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Ei leia vajalikke vidinaid failist goto-line.glade2.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:314
+#: src/dialogs/gedit-dialog-plugin-manager.c:51
+msgid "Plugin"
+msgstr "Plugin"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:52
+msgid "Load"
+msgstr "Laadi"
+
+#: src/dialogs/gedit-dialog-plugin-manager.c:318
 msgid "Module file name"
 msgstr "Mooduli failinimi"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
+#: src/dialogs/gedit-dialog-plugin-manager.c:319
 msgid "Author(s)"
 msgstr "Autor(id)"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:446
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
+msgstr "Ei leia faili plugin-manager.glade2, palun installi gedit uuesti.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:454
+#: src/dialogs/gedit-dialog-plugin-manager.c:458
 msgid "Plugin Manager"
 msgstr "Pluginahaldur"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:481
+#: src/dialogs/gedit-dialog-plugin-manager.c:485
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
+msgstr "Vigane pluginahalduri glade fail -- ei leia kõik vidinaid.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:578
+#: src/dialogs/gedit-dialog-plugin-manager.c:582
 msgid "Could not create the Plugin Manager dialog"
-msgstr ""
+msgstr "Ei saa pluginahalduri dialoogiakent luua"
 
-#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
+#: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
 #: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Asenda"
 
-#: src/dialogs/gedit-dialog-replace.c:178
+#: src/dialogs/gedit-dialog-replace.c:182
 msgid "Replace _All"
 msgstr "Asenda _kõik"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:101
 msgid "_Replace"
 msgstr "_Asenda"
 
-#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Otsi"
 
-#: src/dialogs/gedit-dialog-replace.c:469
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:710
+#: src/dialogs/gedit-dialog-replace.c:473
+#: src/dialogs/gedit-dialog-replace.c:544
+#: src/dialogs/gedit-dialog-replace.c:718
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Ei leia teksti \"%s\"."
 
-#: src/dialogs/gedit-dialog-replace.c:719
+#: src/dialogs/gedit-dialog-replace.c:727
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Leitud ja asendatud %d korral."
 
+#: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr "Ava URIlt"
+
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
-msgstr ""
+msgstr "Määra programmi asukoht ..."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 msgid ""
 "Could not find the required widgets inside program-location-dialog.glade2.\n"
 msgstr ""
+"Ei leia vajalikke vidinaid failist program-location-dialog.glade2.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
@@ -511,86 +579,126 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
+"Plugin %s kasutab oma ülesannete täitmiseks välist programmi nimega <tt>%s</tt>.\n"
+"\n"
+"Palun näita programmi <tt>%s</tt> asukoht."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
-msgstr ""
+msgstr "Valitud fail ei ole käivitatav."
 
-#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences-dialog.c:226
 msgid "Toolbar"
 msgstr "Tööriistariba"
 
-#: src/dialogs/gedit-preferences-dialog.c:215
+#: src/dialogs/gedit-preferences-dialog.c:227
 #: src/dialogs/gedit-preferences.glade2.h:38
 msgid "Status bar"
 msgstr "Olekuriba"
 
-#: src/dialogs/gedit-preferences-dialog.c:218
+#: src/dialogs/gedit-preferences-dialog.c:230
 #: src/dialogs/gedit-preferences.glade2.h:17
 msgid "MDI"
 msgstr "MDI"
 
-#: src/dialogs/gedit-preferences-dialog.c:227
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Font & Colors"
 msgstr "Kirjatüübid & värvid"
 
-#: src/dialogs/gedit-preferences-dialog.c:229
+#: src/dialogs/gedit-preferences-dialog.c:241
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr "Tabulaatorid"
 
-#: src/dialogs/gedit-preferences-dialog.c:230
+#: src/dialogs/gedit-preferences-dialog.c:242
 #: src/dialogs/gedit-preferences.glade2.h:62
 msgid "Wrap mode"
 msgstr "Reamurdmine"
 
-#: src/dialogs/gedit-preferences-dialog.c:231
+#: src/dialogs/gedit-preferences-dialog.c:243
 #: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Line numbers"
 msgstr "Reanumbrid"
 
-#: src/dialogs/gedit-preferences-dialog.c:233
+#: src/dialogs/gedit-preferences-dialog.c:245
 #: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Salvesta"
 
-#: src/dialogs/gedit-preferences-dialog.c:234
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
+#: src/dialogs/gedit-preferences-dialog.c:246
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
 msgid "Undo"
 msgstr "Unusta"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences-dialog.c:254
 msgid "Page"
 msgstr "Lehekülg"
 
-#: src/dialogs/gedit-preferences-dialog.c:244
+#: src/dialogs/gedit-preferences-dialog.c:256
 msgid "Fonts"
 msgstr "Kirjatüübid"
 
-#: src/dialogs/gedit-preferences-dialog.c:251
+#: src/dialogs/gedit-preferences-dialog.c:263
 msgid "Editor"
 msgstr "Redaktor"
 
-#: src/dialogs/gedit-preferences-dialog.c:252
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:264
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Prindi"
 
-#: src/dialogs/gedit-preferences-dialog.c:254
+#: src/dialogs/gedit-preferences-dialog.c:266
 msgid "User interface"
 msgstr "Kasutajaliides"
 
-#: src/dialogs/gedit-preferences-dialog.c:321
+#: src/dialogs/gedit-preferences-dialog.c:333
 msgid "Cat_egories:"
 msgstr "_Kategooriad:"
 
-#: src/dialogs/gedit-preferences-dialog.c:345 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Häälestus"
 
-#: src/dialogs/gedit-preferences-dialog.c:512
+#: src/dialogs/gedit-preferences-dialog.c:574
 msgid "Categories"
 msgstr "Kategooriad"
+
+#: src/dialogs/gedit-preferences-dialog.c:906
+msgid "Push this button to select the font to be used by the editor"
+msgstr "Redaktoris kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:909
+msgid "Push this button to configure text color"
+msgstr "Teksti värvi määramiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:911
+msgid "Push this button to configure background color"
+msgstr "Taustavärvi muutmiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:913
+msgid ""
+"Push this button to configure color in which selected text should appear"
+msgstr ""
+"Valitud teksti värvi määramiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:915
+msgid ""
+"Push this button to configure color in which selected text should be marked"
+msgstr ""
+"Valitud teksti taustavärvi määramiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:1313
+msgid "Push this button to select the font to be used to print the body"
+msgstr "Teksti printimiseks kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:1315
+msgid "Push this button to select the font to be used to print the headers"
+msgstr "Päiste printimiseks kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
+
+#: src/dialogs/gedit-preferences-dialog.c:1317
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr "Reanumbrite printimiseks kasutatava kirjatüübi valimiseks klõpsa sellel nupul"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -610,7 +718,7 @@ msgstr "Kasuta alati _UTF-8 kodeeringut (kiirem)"
 
 #: src/dialogs/gedit-preferences.glade2.h:5
 msgid "Bottom"
-msgstr ""
+msgstr "All"
 
 #: src/dialogs/gedit-preferences.glade2.h:6
 msgid "Button style"
@@ -622,9 +730,10 @@ msgstr "Värvid"
 
 #: src/dialogs/gedit-preferences.glade2.h:8
 msgid "Create a _backup copy of files before saving"
-msgstr ""
+msgstr "Enne salvestamist tee failidest _varukoopia"
 
 #: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "Kirjatüüp"
 
@@ -650,7 +759,7 @@ msgstr "LOGO"
 
 #: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Left"
-msgstr ""
+msgstr "Vasakul"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Modal"
@@ -658,11 +767,11 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:19
 msgid "Notebook"
-msgstr ""
+msgstr "Märkmik"
 
 #: src/dialogs/gedit-preferences.glade2.h:20
 msgid "Notebook _tab position:"
-msgstr ""
+msgstr "Märkmiku _sakkide asukoht:"
 
 #: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Pick the background color"
@@ -694,7 +803,7 @@ msgstr "Printimise kirjatüübid"
 
 #: src/dialogs/gedit-preferences.glade2.h:29
 msgid "Right"
-msgstr ""
+msgstr "Paremal"
 
 #: src/dialogs/gedit-preferences.glade2.h:30
 msgid "S_elected text color:"
@@ -709,16 +818,16 @@ msgid "Set _tabs width equivalent to  "
 msgstr "_Tabulaatori laius on "
 
 #: src/dialogs/gedit-preferences.glade2.h:34
-msgid "Set limit on _undo levels to"
-msgstr ""
+msgid "Set limit on _undo actions to"
+msgstr "_Unustatavate tegevuste limiit on"
 
 #: src/dialogs/gedit-preferences.glade2.h:35
 msgid "Sho_w tooltips"
-msgstr ""
+msgstr "Näita _vihjeid"
 
 #: src/dialogs/gedit-preferences.glade2.h:36
 msgid "Show cursor _position"
-msgstr ""
+msgstr "Näita kursori _asukohta"
 
 #: src/dialogs/gedit-preferences.glade2.h:37
 msgid "Show overwrite _mode"
@@ -737,52 +846,63 @@ msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr ""
+"Kirjatüübi ja värvi sätted lasevad sul redaktoriaknas kasutatavaid kirjatüüpe ja "
+"värve valida."
 
 #: src/dialogs/gedit-preferences.glade2.h:43
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
+"Reanumbrite säte laseb sul valida, kas akna vasakus ääres näidata reanumbreid"
 
 #: src/dialogs/gedit-preferences.glade2.h:44
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
 msgstr ""
+"Printimise kirjatüüpide sätted lasevad sul dokumentide printimisel kasutatavaid "
+"kirjatüüpe valida."
 
 #: src/dialogs/gedit-preferences.glade2.h:45
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr ""
+msgstr "Prinditava lehe sätted lasevad sul dokumentide printimist kohandada."
 
 #: src/dialogs/gedit-preferences.glade2.h:46
 msgid "The save settings let you customize how gedit saves files."
-msgstr ""
+msgstr "Salvestamise sätted lasevad sul kohandada, kuidas gedit faile salvestab."
 
 #: src/dialogs/gedit-preferences.glade2.h:47
 msgid ""
 "The status bar settings let you show or hide status bar and customize its "
 "appearance."
 msgstr ""
+"Olekuriba sätted lasevad sul valida, kas olekuriba näidata või mitte ning "
+"kohandada riba välimust."
 
 #: src/dialogs/gedit-preferences.glade2.h:48
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
+msgstr "Tabulaatori sätted lasevad sul tabulaatori laiust kohandada."
 
 #: src/dialogs/gedit-preferences.glade2.h:49
 msgid ""
 "The toolbar settings let you show or hide toolbar and customize its "
 "appearance."
 msgstr ""
+"Tööriistariba sätted lasevad sul valida, kas tööriistariba näidata või mitte ning "
+"kohandada riba välimust."
 
 #: src/dialogs/gedit-preferences.glade2.h:50
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr ""
+"Unustamise sätted lasevad sul määrata maksimaalse tegevuste arvu, mida gedit "
+"saab unustada."
 
 #: src/dialogs/gedit-preferences.glade2.h:51
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr ""
+msgstr "Murdmise sätted lasevad sul kohandada, kuidas gedit ridu murrab."
 
 #: src/dialogs/gedit-preferences.glade2.h:52
 msgid "Toolbars"
@@ -790,7 +910,7 @@ msgstr "Tööriistaribad"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
 msgid "Top"
-msgstr ""
+msgstr "Üleval"
 
 #: src/dialogs/gedit-preferences.glade2.h:54
 msgid "Toplevel"
@@ -798,15 +918,15 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:55
 msgid "U_se current locale only if the file already use it"
-msgstr ""
+msgstr "Kasuta _aktiivset lokaati ainult kui fail seda eelnevalt kasutas"
 
 #: src/dialogs/gedit-preferences.glade2.h:56
 msgid "U_se default theme colors"
-msgstr ""
+msgstr "Kas_uta teema vaikimisi värve"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
 msgid "Use current _locale when possible"
-msgstr ""
+msgstr "Kasuta aktiivset _lokaati kui võimalik"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
 msgid "When saving..."
@@ -822,10 +942,10 @@ msgstr "Murra read _märgi piirides"
 
 #: src/dialogs/gedit-preferences.glade2.h:63
 msgid "_According to system settings"
-msgstr ""
+msgstr "_Vastavalt süsteemi sätetele"
 
 #: src/dialogs/gedit-preferences.glade2.h:64
-msgid "_Auto save current file every"
+msgid "_Autosave current file every"
 msgstr "Salvesta aktiivne fail _automaatselt iga"
 
 #: src/dialogs/gedit-preferences.glade2.h:65
@@ -838,13 +958,13 @@ msgstr "_Näita reanumbreid"
 
 #: src/dialogs/gedit-preferences.glade2.h:67
 msgid "_Font used by the editor: "
-msgstr ""
+msgstr "Redaktoris kasutatav _kirjatüüp: "
 
 #: src/dialogs/gedit-preferences.glade2.h:68
 msgid "_Font used to print headers:"
-msgstr ""
+msgstr "_Päiste printimisel kasutatav kirjatüüp: "
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:96
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
 msgid "_Icon"
 msgstr "_Ikoon"
 
@@ -854,7 +974,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:71
 msgid "_Never wrap lines"
-msgstr ""
+msgstr "_Ära murra ridu"
 
 #: src/dialogs/gedit-preferences.glade2.h:72
 msgid "_Restore default fonts"
@@ -876,14 +996,95 @@ msgstr "_Teksti värv:"
 msgid "_Use default theme font"
 msgstr "_Kasuta teema vaikimisi kirjatüüpi"
 
-#: src/dialogs/gedit-preferences.glade2.h:80
-msgid "level(s)"
-msgstr ""
+#: src/dialogs/gedit-preferences.glade2.h:77
+msgid "action(s)"
+msgstr "tegevus(t)"
 
-#: src/dialogs/gedit-preferences.glade2.h:81
+#: src/dialogs/gedit-preferences.glade2.h:78
 msgid "minutes"
 msgstr "minuti järel"
 
+#: src/dialogs/gnome-print-font-dialog.c:107
+msgid "_Insert a new preview phrase."
+msgstr "_Lisa uus näidistekst."
+
+#: src/dialogs/gnome-print-font-dialog.c:113
+msgid "Modify preview phrase..."
+msgstr "Muuda näidisteksti..."
+
+#: src/dialogs/gnome-print-font-dialog.c:167
+msgid "Preview"
+msgstr "Näidis"
+
+#: src/dialogs/gnome-print-font-dialog.c:180
+msgid "_Modify preview phrase..."
+msgstr "_Muuda näidisteksti..."
+
+#: src/dialogs/gnome-print-font-dialog.c:243
+msgid "Font Selection"
+msgstr "Kirjatüübi valik"
+
+#: src/dialogs/gnome-print-font-picker.c:89
+msgid "sans 12"
+msgstr "sans 12"
+
+#: src/dialogs/gnome-print-font-picker.c:90
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšZzŽžTtUuVvWwÕõÄäÖöÜüXxYy"
+
+#: src/dialogs/gnome-print-font-picker.c:91
+msgid "Pick a Font"
+msgstr "Vali kirjatüüp"
+
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Pealkiri"
+
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "Kirjatüübi nimi"
+
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "Valitud kirjatüübi nimi"
+
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Näidistekst"
+
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr ""
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr ""
+
+#. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "Mine reale"
@@ -923,13 +1124,13 @@ msgstr "dialog1"
 
 #: src/dialogs/program-location-dialog.glade2.h:1
 msgid "Set program location..."
-msgstr ""
+msgstr "Säti programmi asukoht..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
-msgstr ""
+msgstr "_Asukoht, kust otsida:"
 
-#: src/dialogs/program-location-dialog.glade2.h:5
+#: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
 msgstr "label"
 
@@ -937,27 +1138,19 @@ msgstr "label"
 msgid "Case sensi_tive"
 msgstr "_Tõstutundlik"
 
-#: src/dialogs/replace.glade2.h:2
-msgid "Find Next"
-msgstr "Otsi järgmine"
-
-#: src/dialogs/replace.glade2.h:4
-msgid "Replace All"
-msgstr "Asenda kõik"
-
-#: src/dialogs/replace.glade2.h:5
+#: src/dialogs/replace.glade2.h:3
 msgid "Replace _with: "
 msgstr "_Asenda tekstiga:"
 
-#: src/dialogs/replace.glade2.h:6
+#: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
 msgstr "Otsi dokumendi a_lgusest"
 
-#: src/dialogs/replace.glade2.h:7
+#: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
 msgstr "Otsi _kursori asukohast"
 
-#: src/dialogs/replace.glade2.h:8
+#: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
 msgstr "_Otsi teksti:"
 
@@ -965,185 +1158,100 @@ msgstr "_Otsi teksti:"
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "Sisesta avatava faili asukoht (URI):"
 
-#: src/dialogs/uri.glade2.h:2
-msgid "Open from URI"
-msgstr "Ava URIlt"
+#: src/gedit-commands.c:57
+msgid "Not yet implemented."
+msgstr "Pole veel programmeeritud."
 
-#: src/dialogs/uri.glade2.h:5
-msgid "gtk-open"
-msgstr "gtk-open"
-
-#: src/gedit2.c:68
-msgid "Show mdi debugging messages."
-msgstr "Näita mdi silumisteateid."
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Näita käskude silumisteateid."
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Näita dokumendi silumisteateid."
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Näita failide silumisteateid."
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Näita pluginate silumisteateid."
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Näita häälestuse silumisteateid."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Näita printimise silumisteateid."
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Näita otsingu silumisteateid."
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Näita unustamise silumisteateid."
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Näita vaate silumisteateid."
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Näita hiljutiste silumisteateid."
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Näita kõiki silumisteateid."
-
-#: src/gedit2.c:159
-msgid "The GNOME text editor"
-msgstr "GNOME tekstiredaktor"
-
-#: src/gedit-commands.c:339
+#: src/gedit-commands.c:340
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Ei leia stringi \"%s\"."
 
-#: src/gedit-commands.c:421
+#: src/gedit-commands.c:422
 msgid "Impossible to update gedit settings."
 msgstr "gediti sätete uuendamine on võimatu."
 
-#: src/gedit-commands.c:518
+#: src/gedit-commands.c:491
+msgid "translator_credits"
+msgstr ""
+"Tõlge eesti keelde:\n"
+"       Ilmar Kerm <ikerm@hot.ee>, 2002.\n"
+"       Tõivo Leedjärv <toivo@linux.ee>, 2002."
+
+#: src/gedit-commands.c:516
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:521
+#: src/gedit-commands.c:519
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit on väike ja lihtne Gnome tekstiredaktor"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:549 src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:549 src/gedit-document.c:572
 msgid "Untitled"
 msgstr "Pealkirjata"
 
-#: src/gedit-document.c:648 src/gedit-document.c:754
+#: src/gedit-document.c:556 src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Vigane failinimi"
+
+#: src/gedit-document.c:700 src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Vigased UTF-8 andmed"
 
-#: src/gedit-document.c:948
+#: src/gedit-document.c:1006
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr ""
+
+#: src/gedit-document.c:1052
+msgid "The file has too many symbolic links."
+msgstr ""
+
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
+msgstr "gedit ei oska %s: asukohta kirjutada."
 
-#: src/gedit-document.c:955
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
-msgstr ""
+msgstr "gedit ei oska sellisesse asukohta kirjutada."
 
-#: src/gedit-document.c:972
-msgid "Could not create the backup copy of the file."
+#: src/gedit-document.c:1120
+msgid "Invalid filename."
+msgstr "Vigane failinimi."
+
+#: src/gedit-document.c:1198
+msgid ""
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
+msgstr ""
+"Kettal ei ole faili salvestamiseks piisavalt vaba ruumi.\n"
+"Palun vabasta natuke kettaruumi ja proovi uuesti."
+
+#: src/gedit-document.c:1203
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"Ketas, kuhu sa üritad faili salvestada, piirab failide maksimaalset "
+"suurust.  Proovi salvestada väiksemat faili või salvesta kettale, millel "
+"sellist piirangut pole."
+
+#: src/gedit-document.c:1240
+msgid "Could not create a backup file."
 msgstr "Ei saa faili tagavarakoopiat luua."
 
-#: src/gedit-document.c:991
-msgid ""
-"Make sure that the path you provided exists, and that you have the "
-"appropriate write permissions."
-msgstr ""
-
-#: src/gedit-document.c:1029
-msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
-msgstr ""
-
-#: src/gedit-document.c:1034
-msgid "The file is too big."
-msgstr "Fail on liiga suur."
-
-#: src/gedit-document.c:1184
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "Pealkirjata dokumendi taastamine on võimatu"
 
-#: src/gedit-file.c:123
-msgid "Open File ..."
-msgstr "Ava fail ..."
-
-#: src/gedit-file.c:133 src/gedit-file.c:634
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "Laetud fail '%s'"
-
-#: src/gedit-file.c:243 src/gedit-file.c:317
-#, c-format
-msgid "Saving file '%s' ..."
-msgstr "Faili '%s' salvestamine ..."
-
-#: src/gedit-file.c:264 src/gedit-file.c:324
-msgid "The document has not been saved."
-msgstr "Dokumenti ei ole veel salvestatud."
-
-#: src/gedit-file.c:277 src/gedit-file.c:322
-#, c-format
-msgid "File '%s' saved."
-msgstr "Fail '%s' salvestatud."
-
-#: src/gedit-file.c:309
-msgid "Save as ..."
-msgstr "Salvesta kui..."
-
-#: src/gedit-file.c:469
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr "Faili '%s' taastamine ..."
-
-#: src/gedit-file.c:482
-msgid "The document has not been reverted."
-msgstr "Dokumenti ei taastatud."
-
-#: src/gedit-file.c:492
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Fail '%s' on taastatud."
-
-#: src/gedit-file.c:535
-#, c-format
-msgid "Loading %d file..."
-msgstr ""
-
-#: src/gedit-file.c:571
-#, c-format
-msgid "Loaded %i files"
-msgstr "Laetud %i faili"
-
-#: src/gedit-file.c:688
-msgid "Could not read data from stdin."
-msgstr "Standardsisendist (stdin) andmete lugemine ebaõnnestus."
-
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1152,15 +1260,70 @@ msgstr ""
 "Fail nimega ''%s'' on juba olemas.\n"
 "Kas tahad seda asendada salvestatava failiga?"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "Ä_ra asenda"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:484
 msgid "Select a filename to save"
 msgstr "Vali failinimi salvestamiseks"
 
-#: src/gedit-mdi.c:758
+#: src/gedit-file.c:128
+msgid "Open File ..."
+msgstr "Ava fail ..."
+
+#: src/gedit-file.c:148 src/gedit-file.c:763
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "Laetud fail '%s'"
+
+#: src/gedit-file.c:279 src/gedit-file.c:401
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "Faili '%s' salvestamine ..."
+
+#: src/gedit-file.c:300 src/gedit-file.c:416
+msgid "The document has not been saved."
+msgstr "Dokumenti ei ole veel salvestatud."
+
+#: src/gedit-file.c:315 src/gedit-file.c:408
+#, c-format
+msgid "File '%s' saved."
+msgstr "Fail '%s' salvestatud."
+
+#: src/gedit-file.c:383
+msgid "Save as ..."
+msgstr "Salvesta kui..."
+
+#: src/gedit-file.c:574
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "Faili '%s' taastamine ..."
+
+#: src/gedit-file.c:587
+msgid "The document has not been reverted."
+msgstr "Dokumenti ei taastatud."
+
+#: src/gedit-file.c:597
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Fail '%s' on taastatud."
+
+#: src/gedit-file.c:644
+#, c-format
+msgid "Loading %d file..."
+msgstr "Laadin %d faili..."
+
+#: src/gedit-file.c:680
+#, c-format
+msgid "Loaded %i files"
+msgstr "Laetud %i faili"
+
+#: src/gedit-file.c:821
+msgid "Could not read data from stdin."
+msgstr "Standardsisendist (stdin) andmete lugemine ebaõnnestus."
+
+#: src/gedit-mdi.c:759
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1171,23 +1334,23 @@ msgstr ""
 "\n"
 "Kui sa muudatusi ei salvesta, siis lähevad need kaduma."
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:764
 msgid "Do_n't save"
 msgstr "Ä_ra salvesta"
 
-#: src/gedit-mdi.c:782
+#: src/gedit-mdi.c:783
 msgid "_Don't quit"
 msgstr "Ära _välju"
 
-#: src/gedit-mdi.c:786
+#: src/gedit-mdi.c:787
 msgid "_Don't close"
 msgstr "Ära _sulge"
 
-#: src/gedit-mdi.c:873
+#: src/gedit-mdi.c:874
 msgid "(modified)"
 msgstr "(muudetud)"
 
-#: src/gedit-mdi.c:879
+#: src/gedit-mdi.c:880
 msgid "(readonly)"
 msgstr "(kirjutuskaitsega)"
 
@@ -1199,49 +1362,49 @@ msgstr "Viga, ei saa moodulifaili '%s' avada\n"
 #: src/gedit-plugins-engine.c:174
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr ""
+msgstr "Viga, plugin '%s' ei sisalda algväärtustamise funktsiooni."
 
 #: src/gedit-plugins-engine.c:184
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr ""
+msgstr "Viga, plugin '%s' ei sisalda aktiveerimise funktsiooni."
 
 #: src/gedit-plugins-engine.c:194
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr ""
+msgstr "Viga, plugin '%s' ei sisalda deaktiveerimise funktsiooni."
 
 #: src/gedit-plugins-engine.c:224
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Viga, võimatu algväärtustada pluginat '%s'"
 
 #: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Viga, plugin '%s' ei täpsustanud oma nime"
 
 #: src/gedit-plugins-engine.c:312
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr ""
+msgstr "Viga, võimatu salvestada plugina '%s' sätteid"
 
 #: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Viga, võimatu aktiveerida pluginat '%s'"
 
 #: src/gedit-plugins-engine.c:411
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Viga, võimatu deaktiveerida pluginat '%s'"
 
 #: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Viga, võimatu uuendada plugina '%s' kasutajaliidest"
 
-#: src/gedit-print.c:166
+#: src/gedit-print.c:178
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1249,26 +1412,22 @@ msgstr ""
 "ei saa printida, sest ei leia ühte vajalikest\n"
 "kirjatüüpidest."
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit - Prindi dokument"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "Fail: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "Lehekülg: %d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit - Prindivaade"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1279,174 +1438,169 @@ msgstr ""
 "\n"
 "%s,"
 
-#: src/gedit-recent.c:496
-#, c-format
-msgid "Open %s"
-msgstr "Ava %s"
-
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
 msgstr "Info programmi kohta"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "Info..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Lisa/eemalda pluginaid"
 
-#: src/gedit-ui.xml.h:4
-msgid "C_ustomize Status Bar"
+#: src/gedit-ui.xml.h:3
+msgid "C_ustomize Statusbar"
 msgstr "Ko_handa olekuriba"
 
-#: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the status bar in the current window"
+#: src/gedit-ui.xml.h:4
+msgid "Change the visibility of the statusbar in the current window"
 msgstr "Muuda olekuriba nähtavaust aktiivses aknas"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Muuda tööriistariba nähtavust aktiivses aknas"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Sulg_e kõik"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Sulge"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Sulge kõik"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Sulge kõik avatud failid"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Sulge aktiivne fail"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Muuda rakendus omale meelepäraseks"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Sisu"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Kopeeri"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Kopeeri valik"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Loo uus dokument"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "_Lõika"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Kohanda"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Kohanda tööriistaribasid"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Lõika"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Lõika valik"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
+msgid "Delete"
+msgstr "Kustuta"
+
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Kustuta valitud tekst"
 
-#: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr "Kustutatud"
-
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
-msgstr ""
+msgstr "Väljasta XML"
+
+#: src/gedit-ui.xml.h:23
+msgid "Dump the UI Xml description"
+msgstr "Väljasta kasutajaliidese XML kirjeldus"
 
 #: src/gedit-ui.xml.h:25
-msgid "Dump the UI Xml description"
-msgstr ""
-
-#: src/gedit-ui.xml.h:27
 msgid "Find Again"
 msgstr "Otsi uuesti"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "Otsi _uuesti"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Liigu määratud reanumbrile"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "Mine _reale"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Ikoon ja _tekst"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Peatööriistariba"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Uus"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Näita tööriistaribal ainult ikoone"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Ava"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 msgid "Open Location..."
 msgstr "Ava asukoht ..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 msgid "Open _Location..."
 msgstr "Ava asuk_oht ..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Ava fail"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
 msgstr "Ava fail määratud asukohast"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Ava gediti kasutajajuhend"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Aseta"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Aseta lõikepuhvri sisu"
+
+#: src/gedit-ui.xml.h:41
+msgid "Plugin _Manager"
+msgstr "Plugina_haldur"
+
+#: src/gedit-ui.xml.h:42
+msgid "Plugin _Manager..."
+msgstr "_Pluginahaldur..."
 
 #: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
@@ -1554,7 +1708,7 @@ msgstr "Vali terve dokument"
 
 #: src/gedit-ui.xml.h:73
 msgid "Set toolbar button style according to desktop default"
-msgstr ""
+msgstr "Säti tööriistariba vastavalt töölaua vaikeväärtustele"
 
 #: src/gedit-ui.xml.h:74
 msgid "Setup the page settings for your current printer"
@@ -1562,220 +1716,220 @@ msgstr "Sinu aktiivse printeri lehekülgede häälestus"
 
 #: src/gedit-ui.xml.h:75
 msgid "Show _Cursor Position"
-msgstr ""
+msgstr "Näita _kursori asukohta"
 
 #: src/gedit-ui.xml.h:76
 msgid "Show _Overwrite Mode"
-msgstr ""
+msgstr "Näita _ülekirjutamise olekut"
 
 #: src/gedit-ui.xml.h:77
-msgid "Show _Tooltips"
-msgstr ""
+msgid "Show cursor position in the statusbar"
+msgstr "Näita kursori asukohta olekuribal"
 
 #: src/gedit-ui.xml.h:78
-msgid "Show cursor position in the statusbar"
-msgstr ""
-
-#: src/gedit-ui.xml.h:79
 msgid "Show overwrite mode in the statusbar"
-msgstr ""
+msgstr "Näita ülekirjutamise olekut olekuribal"
 
 #: src/gedit-ui.xml.h:80
-msgid "Show tooltips in the toolbar"
-msgstr ""
-
-#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Unusta viimane tegevus"
 
-#: src/gedit-ui.xml.h:83
-msgid "_About..."
-msgstr "_Info..."
+#: src/gedit-ui.xml.h:81
+msgid "_About"
+msgstr "_Info"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "_Close"
 msgstr "Sul_ge"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_Contents"
 msgstr "_Sisu"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Copy"
 msgstr "_Kopeeri"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
 msgid "_Customize Toolbar"
 msgstr "_Kohanda tööriistariba"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:86
 msgid "_Debug"
 msgstr "_Silu (debug)"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:87
 msgid "_Delete"
 msgstr "Ku_stuta"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:88
 msgid "_Desktop Default"
-msgstr ""
+msgstr "T_öölaua vaikeväärtus"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:89
 msgid "_Documents"
 msgstr "_Dokumendid"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:90
 msgid "_Edit"
 msgstr "_Redaktor"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:91
 msgid "_File"
 msgstr "_Fail"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:92
 msgid "_Find"
 msgstr "_Otsi"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:93
 msgid "_Help"
 msgstr "_Abi"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:95
 msgid "_New"
 msgstr "_Uus"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:96
 msgid "_Open..."
 msgstr "_Ava..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:97
 msgid "_Paste"
 msgstr "_Aseta"
 
-#: src/gedit-ui.xml.h:100
-msgid "_Plugin Manager"
-msgstr "_Pluginhaldur"
-
-#: src/gedit-ui.xml.h:101
-msgid "_Plugin Manager..."
-msgstr "_Pluginahaldur..."
-
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:98
 msgid "_Print..."
 msgstr "_Prindi..."
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:99
 msgid "_Quit"
 msgstr "L_õpeta"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:100
 msgid "_Redo"
 msgstr "Uu_esti"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:102
 msgid "_Revert"
 msgstr "_Taasta"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:103
 msgid "_Save"
 msgstr "_Salvesta"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:104
 msgid "_Search"
 msgstr "_Otsi"
 
-#: src/gedit-ui.xml.h:109
-msgid "_Status Bar"
+#: src/gedit-ui.xml.h:105
+msgid "_Statusbar"
 msgstr "_Olekuriba"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:106
 msgid "_Toolbar"
 msgstr "_Tööriistariba"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:107
 msgid "_Tools"
 msgstr "_Tööriistad"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:108
 msgid "_Undo"
 msgstr "_Unusta"
 
-#: src/gedit-ui.xml.h:113
+#: src/gedit-ui.xml.h:109
 msgid "_View"
 msgstr "_Vaade"
 
-#: src/gedit-utils.c:839
+#: src/gedit-utils.c:842
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ei leia faili \"%s\".\n"
+"\n"
+"Palun kontrolli, kas sa sisestasid faili asukoha õieti ja proovi uuesti."
 
-#: src/gedit-utils.c:846
+#: src/gedit-utils.c:849
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr ""
+msgstr "Ei saa faili \"%s\" avada, sest see sisaldab vigaseid andmeid."
 
-#: src/gedit-utils.c:857
+#: src/gedit-utils.c:860
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest gedit ei oska %s: asukohti kasutada."
 
-#: src/gedit-utils.c:865
+#: src/gedit-utils.c:868
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Ei saa faili \"%s\" avada"
 
-#: src/gedit-utils.c:872
+#: src/gedit-utils.c:875
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest see sisaldab vigases vormingus andmeid."
 
-#: src/gedit-utils.c:879
+#: src/gedit-utils.c:882
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Ei saa faili \"%s\" avada, sest see on liiga suur."
 
-#: src/gedit-utils.c:886
+#: src/gedit-utils.c:889
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" ei ole korrektne asukoht.\n"
+"\n"
+"Palun kontrolli, kas sa sisestasid asukoha õieti ja proovi uuesti."
 
-#: src/gedit-utils.c:893
+#: src/gedit-utils.c:896
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Ei saa faili \"%s\" avada, sest juurdepääs on keelatud."
 
-#: src/gedit-utils.c:900
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest korraga on liiga palju faile avatud.\n"
+"\n"
+"Palun sulge mõned failid ja proovi uuesti."
 
-#: src/gedit-utils.c:908
+#: src/gedit-utils.c:911
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" on kataloog.\n"
+"\n"
+"Palun kontrolli, kas sisestasid asukoha õieti ja proovi uuesti."
 
-#: src/gedit-utils.c:915
+#: src/gedit-utils.c:918
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Faili \"%s\" avamiseks ei ole piisavalt vaba mälu. Palun sulge mõned "
+"töötavad rakendused ja proovi uuesti."
 
-#: src/gedit-utils.c:928
+#: src/gedit-utils.c:931
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1783,50 +1937,66 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest ei leia serverit nimega \"%s\".\n"
+"\n"
+"Palun kontrolli, kas sisestasid asukoha õieti ning su proksi sätted on "
+"korrektsed ja proovi uuesti."
 
-#: src/gedit-utils.c:941
+#: src/gedit-utils.c:944
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest serveri nimi on vigane.\n"
+"\n"
+"Palun kontrolli, kas sisestasid asukoha õieti ja proovi uuesti."
 
-#: src/gedit-utils.c:948
+#: src/gedit-utils.c:951
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ei faili \"%s\" avada, sest serveri nimi on tühi.\n"
+"\n"
+"Palun kontrolli, kas su proksi sätted on korrektsed ja proovi uuesti."
 
-#: src/gedit-utils.c:955
+#: src/gedit-utils.c:958
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ei faili \"%s\" avada, sest sisselogimine ebaõnnestus.\n"
+"\n"
+"Palun kontrolli, kas sisestasid asukoha õieti ja proovi uuesti."
 
-#: src/gedit-utils.c:963
+#: src/gedit-utils.c:966
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
+"Ei saa faili \"%s\" avada, sest see sisaldab vigaseid UTF-8 andmeid.\n"
+"\n"
+"Tõenäoliselt üritad sa binaarfaili avada."
 
-#: src/gedit-utils.c:1001
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Ei saa faili \"%s\" avada."
 
-#: src/gedit-utils.c:1052
+#: src/gedit-utils.c:1055
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Ei saa faili \"%s\" salvestada."
 
-#: src/gedit-utils.c:1056
+#: src/gedit-utils.c:1059
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1837,107 +2007,222 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1109
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
 "\n"
 "Perhaps, it has recently been deleted."
 msgstr ""
+"Ei saa faili \"%s\" taastada, sest gedit ei leia seda.\n"
+"\n"
+"Võib-olla on see fail hiljuti kustutatud."
 
-#: src/gedit-utils.c:1116
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
+msgstr "Ei saa faili \"%s\" taastada, sest see sisaldab vigaseid andmeid."
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1130
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
+msgstr "Ei saa faili \"%s\" taastada, sest gedit ei oska %s: asukohti kasutada."
 
-#: src/gedit-utils.c:1135 src/gedit-utils.c:1257
+#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Ei saa faili \"%s\" taastada."
 
-#: src/gedit-utils.c:1142
+#: src/gedit-utils.c:1145
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
+"Ei saa faili \"%s\" taastada, sest see sisaldab vigases vormingus andmeid."
 
-#: src/gedit-utils.c:1149
+#: src/gedit-utils.c:1152
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Ei saa faili \"%s\" taastada, sest see on liiga suur."
 
-#: src/gedit-utils.c:1156
+#: src/gedit-utils.c:1159
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Ei saa faili \"%s\" taastada, sest juurdepääs on keelatud."
 
-#: src/gedit-utils.c:1163
+#: src/gedit-utils.c:1166
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
+"Ei saa faili \"%s\" taastada, sest korraga on liiga palju faile avatud.\n"
+"\n"
+"Palun sulge mõned failid ja proovi uuesti."
 
-#: src/gedit-utils.c:1171
+#: src/gedit-utils.c:1174
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Faili \"%s\" taastamiseks ei ole piisavalt vaba mälu. Palun sulge mõned "
+"töötavad rakendused ja proovi uuesti."
 
-#: src/gedit-utils.c:1184
+#: src/gedit-utils.c:1187
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ei saa faili \"%s\" taastada, sest ei leia serverit nimega \"%s\".\n"
+"\n"
+"Palun kontrolli, kas su proksi sätted on korrektsed ja proovi uuesti."
 
-#: src/gedit-utils.c:1196
+#: src/gedit-utils.c:1199
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ei faili \"%s\" taastada, sest serveri nimi on tühi.\n"
+"\n"
+"Palun kontrolli, kas su proksi sätted on korrektsed ja proovi uuesti."
 
-#: src/gedit-utils.c:1203
+#: src/gedit-utils.c:1206
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
+msgstr "Ei faili \"%s\" taastada, sest sisselogimine ebaõnnestus."
 
-#: src/gedit-utils.c:1210
+#: src/gedit-utils.c:1213
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
+"Ei saa faili \"%s\" taastada, sest see sisaldab vigaseid UTF-8 andmeid.\n"
+"\n"
+"Tõenäoliselt üritad sa binaarfaili taastada."
 
-#: src/gedit-utils.c:1219
+#: src/gedit-utils.c:1222
 msgid "It is not possible to revert an Untitled document."
 msgstr "Pealkirjata dokumendi taastamine on võimatu."
 
-#: src/gedit-view.c:890
+#: src/gedit-view.c:896
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Rid %d, vrg %d"
 
-#: src/gedit-view.c:928
+#: src/gedit-view.c:934
 msgid "  OVR"
 msgstr "  ÜLK"
 
-#: src/gedit-view.c:930
+#: src/gedit-view.c:936
 msgid "  INS"
 msgstr "  LIS"
+
+#: src/gedit2.c:69
+msgid "Show mdi debugging messages."
+msgstr "Näita mdi silumisteateid."
+
+#: src/gedit2.c:72
+msgid "Show commands debugging messages."
+msgstr "Näita käskude silumisteateid."
+
+#: src/gedit2.c:75
+msgid "Show document debugging messages."
+msgstr "Näita dokumendi silumisteateid."
+
+#: src/gedit2.c:78
+msgid "Show file debugging messages."
+msgstr "Näita failide silumisteateid."
+
+#: src/gedit2.c:81
+msgid "Show plugin debugging messages."
+msgstr "Näita pluginate silumisteateid."
+
+#: src/gedit2.c:84
+msgid "Show prefs debugging messages."
+msgstr "Näita häälestuse silumisteateid."
+
+#: src/gedit2.c:87
+msgid "Show printing debugging messages."
+msgstr "Näita printimise silumisteateid."
+
+#: src/gedit2.c:90
+msgid "Show search debugging messages."
+msgstr "Näita otsingu silumisteateid."
+
+#: src/gedit2.c:93
+msgid "Show undo debugging messages."
+msgstr "Näita unustamise silumisteateid."
+
+#: src/gedit2.c:96
+msgid "Show view debugging messages."
+msgstr "Näita vaate silumisteateid."
+
+#: src/gedit2.c:99
+msgid "Show recent debugging messages."
+msgstr "Näita hiljutiste silumisteateid."
+
+#: src/gedit2.c:102
+msgid "Show session management debugging messages."
+msgstr "Näita sessioonihalduse silumisteateid."
+
+#: src/gedit2.c:105
+msgid "Turn on all debugging messages."
+msgstr "Näita kõiki silumisteateid."
+
+#: src/gedit2.c:164
+msgid "The GNOME text editor"
+msgstr "GNOME tekstiredaktor"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Ava %s"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-help"
+#~ msgstr "gtk-help"
+
+#~ msgid "gtk-ok"
+#~ msgstr "gtk-ok"
+
+#~ msgid "gtk-close"
+#~ msgstr "gtk-close"
+
+#~ msgid "Find Next"
+#~ msgstr "Otsi järgmine"
+
+#~ msgid "Replace All"
+#~ msgstr "Asenda kõik"
+
+#~ msgid "gtk-open"
+#~ msgstr "gtk-open"
+
+#~ msgid "gedit - Print Document"
+#~ msgstr "gedit - Prindi dokument"
+
+#~ msgid "About..."
+#~ msgstr "Info..."
+
+#~ msgid "Contents"
+#~ msgstr "Sisu"
+
+#~ msgid "_Plugin Manager"
+#~ msgstr "_Pluginhaldur"
+
+#~ msgid "_Status Bar"
+#~ msgstr "_Olekuriba"
 
 #~ msgid "Browse"
 #~ msgstr "Lehitse"
@@ -1957,18 +2242,12 @@ msgstr "  LIS"
 #~ msgid "Diff"
 #~ msgstr "Diff"
 
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr "Loob diff faili (erinevused) kahest dokumendist või failist"
-
 #~ msgid ""
 #~ "No document exists.\n"
 #~ "The Document Info plugin is going be closed."
 #~ msgstr ""
 #~ "Ei leia ühtegi dokumenti.\n"
 #~ "Dokumendi info plugin suletakse."
-
-#~ msgid "Get info on current document."
-#~ msgstr "Näitab aktiivse dokumendi kohta infot."
 
 #~ msgid ""
 #~ "This plugin displays a pop-up dialog which contains basic information on "
@@ -2002,9 +2281,6 @@ msgstr "  LIS"
 #~ msgid "Sample 'hello world' plugin."
 #~ msgstr "Näidisplugin 'tere, maailm'"
 
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "Lisa kesta väljund dokumenti"
-
 #~ msgid "Sort"
 #~ msgstr "Sorteeri"
 
@@ -2013,9 +2289,6 @@ msgstr "  LIS"
 
 #~ msgid "Spell Check"
 #~ msgstr "Õigekirjakontroll"
-
-#~ msgid "Not yet implemented."
-#~ msgstr "Pole veel programmeeritud."
 
 #~ msgid "Invalid UTF-8 data encountered reading file"
 #~ msgstr "Failist lugemisel leitud vigaseid UTF-8 andmeid"
@@ -2027,8 +2300,8 @@ msgstr "  LIS"
 #~ msgstr "Salvesta kui..."
 
 #~ msgid ""
-#~ "A file named ``%s'' already exists in this location. Do you want to replace "
-#~ "it with the one you are saving?"
+#~ "A file named ``%s'' already exists in this location. Do you want to "
+#~ "replace it with the one you are saving?"
 #~ msgstr ""
 #~ "Fail nimega ``%s'' asub juba selles asukohas. Kas tahad seda salvestatava "
 #~ "failiga asendada?"
@@ -2059,9 +2332,6 @@ msgstr "  LIS"
 
 #~ msgid "Sav_e All"
 #~ msgstr "Salvesta _kõik"
-
-#~ msgid "_Plugins"
-#~ msgstr "_Pluginad"
 
 #~ msgid "_Preferences"
 #~ msgstr "_Häälestus"
