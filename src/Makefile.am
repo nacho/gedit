@@ -24,13 +24,13 @@ endif
 bin_PROGRAMS = gedit
 
 gedit_SOURCES = 		\
-	gedit.c			\
 	commands.c		\
 	commands.h		\
 	document.c		\
 	document.h		\
 	file.c 			\
 	file.h		 	\
+	gedit.c			\
 	gedit.h			\
 	menus.c 		\
 	menus.h 		\
