@@ -682,7 +682,6 @@ print_determine_lines (PrintJobInfo *pji, int real)
 			/*
 			g_print("\ntabs agregados = %i\n", chars_in_this_line - temp_i);
 			*/
-
 		}
 
 
