@@ -15,6 +15,8 @@ gE_Plugin_Info gedit_plugin_info = {
 	init_plugin,
 };
 
+#define DEFAULT_FONT "-misc-fixed-medium-r-normal--20-200-75-75-c-100-iso8859-1"
+
 void
 init_plugin (gE_Plugin_Object *plugin, gint context)
 {
@@ -30,6 +32,9 @@ init_plugin (gE_Plugin_Object *plugin, gint context)
 
 	zterm = zvt_term_new ();
 	gtk_widget_ensure_style (zterm);
+
+	zvt_term_set_scrollback (ZVT_TERM (zterm), 5000);
+	zvt_term_set_font_name (ZVT_TERM (zterm), DEFAULT_FONT);
 
 	switch (zvt_term_forkpty (ZVT_TERM (zterm))) {
 	case -1:
