@@ -238,7 +238,6 @@ gedit_handle_automation (GnomeProgram *program)
 	}
 
 	stdin_data = gedit_utils_get_stdin ();
-
 	if (stdin_data != NULL && strlen (stdin_data) > 0)
 	{
 		GError *conv_error = NULL;
@@ -282,7 +281,9 @@ gedit_handle_automation (GnomeProgram *program)
 
 	if (new_document_option ||
 	    (data == NULL && stdin_data == NULL) ||
-	    (data != NULL && data->file_list == NULL && stdin_data == NULL))
+	    (data == NULL && strlen (stdin_data) == 0) ||
+	    (data != NULL && data->file_list == NULL && stdin_data == NULL) ||
+	    (data != NULL && data->file_list == NULL && strlen (stdin_data) == 0))
 	{
 		GNOME_Gedit_Window_newDocument (window, new_document_option, &env);
 	}
