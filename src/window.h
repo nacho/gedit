@@ -34,8 +34,63 @@
 #define MSGBAR_PASTE		"Selection Pasted..."
 #define MSGBAR_SELECT_ALL	"All Text Selected..."
 
-typedef struct _Window Window;
+typedef struct _GeditToolbar GeditToolbar;
 
+struct _GeditToolbar
+{
+	GtkWidget *new_button;
+	GtkWidget *open_button;
+	GtkWidget *save_button;
+	GtkWidget *close_button;
+
+	GtkWidget *print_button;
+
+	GtkWidget *undo_button;
+	GtkWidget *redo_button;
+	GtkWidget *cut_button;
+	GtkWidget *copy_button;
+	GtkWidget *paste_button;
+
+	GtkWidget *find_button;
+	GtkWidget *info_button;
+	GtkWidget *exit_button;
+
+	gint new : 1;
+	gint open : 1;
+	gint save : 1;
+	gint close : 1;
+	gint print : 1;
+	gint undo : 1;
+	gint redo : 1;
+	gint cut : 1;
+	gint copy : 1;
+	gint paste : 1;
+	gint find : 1;
+	gint info : 1;
+	gint exit : 1;
+};
+
+GtkWindow *	gedit_window_active (void);
+GnomeApp *	gedit_window_active_app (void);
+
+void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
+void	gedit_window_set_auto_indent (gint auto_indent);
+void	gedit_window_set_status_bar (gint show_status);
+void	gedit_window_refresh_toolbar (void);
+void	gedit_window_set_toolbar_labels (void);
+void	gedit_window_load_toolbar_widgets (void);
+
+extern GeditToolbar *gedit_toolbar;
+
+#endif /* __WINDOW_H__ */
+
+
+
+
+
+
+/* disabled by Chema.
+typedef struct _Window Window;
 struct _Window
 {
 	GtkWidget *window;
@@ -54,21 +109,9 @@ struct _Window
 	GtkWidget *popup;
 
 	GtkPositionType tab_pos;
+
 };
-
+*/
 /*extern Window *window; */
-extern GList *window_list;
-
-extern GtkWidget *col_label;
-
-void gedit_window_set_auto_indent (gint auto_indent);
-void gedit_window_set_status_bar (gint show_status);
-void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
-
-void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
-
-GtkWindow * gedit_window_active (void);
-GnomeApp  * gedit_window_active_app (void);
-
-
-#endif /* __WINDOW_H__ */
+/*extern GList *window_list;
+extern GtkWidget *col_label;*/
