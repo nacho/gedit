@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2005-01-04 11:30+0100\n"
+"POT-Creation-Date: 2005-02-25 06:45+0100\n"
+"PO-Revision-Date: 2005-02-25 12:47+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Fabrika e automatizimit të gedit"
 msgid "Edit text files"
 msgstr "Përpuno files teksti"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Editues teksti"
 
@@ -163,11 +163,11 @@ msgstr "Gërmat e kreut për printim"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Vër në dukje rreshtin aktual"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Vër në dukje kllapat korrisponduese"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -218,19 +218,26 @@ msgstr ""
 "Numri maksimum i veprimeve që gedit do të jetë në gjendje të anullojë apo "
 "rikthejë."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -239,51 +246,61 @@ msgstr ""
 "ndryshuar. Do të ketë efekt vetëm nëse opcioni \"Ruajtje automatike\" është "
 "aktivuar."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Printo kreun (Header)"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Printo numrat e rreshtave"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Printo vënien në dukje të sintaksës"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Printo në modalitetin në krye automatikisht"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Pozicioni i kufirit të djathtë"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Ngjyra e tekstit të zgjedhur"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Ngjyra e pjesës së zgjedhur"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -293,7 +310,7 @@ msgstr ""
 "kodifikimin e një file. \"CURRENT\" specifikon kodifikimin aktual. Përdoren "
 "vetëm kodifikimet e njohur."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -308,7 +325,7 @@ msgstr ""
 "janë të ndjeshme ndaj përdorimit të gërmave të mëdha/të vogla, prandaj duhet "
 "t'i shkruani ekzaktësisht sikurse janë të shkruara këtu sipër."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -324,13 +341,11 @@ msgstr ""
 "vogla, prandaj duhet t'i shkruani ekzaktësisht sikurse janë të shkruara këtu "
 "sipër."
 
-#: data/gedit.schemas.in.h:50
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
-msgstr ""
-"Specifikon gërmat e përdorura për trupin e tekstit në momentin e printimit."
+#: data/gedit.schemas.in.h:67
+msgid "Specifies the font to use for a document's body when printing documents."
+msgstr "Specifikon gërmat e përdorura për trupin e tekstit në momentin e printimit."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -339,7 +354,7 @@ msgstr ""
 "dokumentëve. Është emri i gërmave të gnome-print dhe zëvendësohet nga "
 "print_font_body_pango."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -348,7 +363,7 @@ msgstr ""
 "Do të ketë efekt vetëm nëse opcioni \"Printo numrat e rreshtave\" nuk është "
 "zero."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -359,7 +374,7 @@ msgstr ""
 "zero. Është emri i gërmave të gnome-print dhe zëvendësohet nga "
 "print_font_body_pango."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -367,7 +382,7 @@ msgstr ""
 "Specifikon gërmat që duhen përdorur kreun e faqes gjatë printimit. Do të "
 "ketë efekt vetëm nëse opcioni \"Print Header\" është aktivuar."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -377,7 +392,7 @@ msgstr ""
 "ketë efekt vetëm nëse opcioni \"Print Header\" është aktivuar. Është emri i "
 "gërmave të gnome-print dhe zëvendësohet nga print_font_body_pango."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -385,21 +400,21 @@ msgstr ""
 "Specifikon numrin maksimum të files të hapur të fundit që do të shfaqen tek "
 "nën-menu e \"Hapur të fundit\"."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Specifikon numrin e hapësirave që do të shfaqen në vend të Tab."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "Përcakton pozicionin e kufirit të djathtë."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "Paneli i gjëndjes është i dukshëm"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -417,35 +432,35 @@ msgstr ""
 "përdorimit të gërmave të mëdha/të vogla, prandaj duhet t'i shkruani "
 "ekzaktësisht sikurse janë të shkruara këtu sipër."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "Përmasa e tab"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "Ngjyra e tekstit"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "Stili i pulsantëve të panelit të instrumentëve"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "Paneli i instrumentëve është i dukshëm"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "Limiti për veprimet që mund të anullohen"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "Përdor ngjyrat e prezgjedhura"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "Përdor gërmat e prezgjedhura"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -454,7 +469,7 @@ msgstr ""
 "Aktivo ruajtjen automatike mbas një farë intervali kohe. Ky interval është "
 "përcaktuar tek «Intervali për ruajtjen automatike»."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -463,57 +478,51 @@ msgstr ""
 "backup mund të konfigurohet me anë të opcionit \"Sufiksi i kopjes së backup"
 "\"."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Aktivo vizualizimin e numrave të rreshtave tek zona e shkrimit."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Nëse gedit duhet të shfaqë kufirin e djathtë tek zona e shkrimit."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "Aktivo auto ngushtimin."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Nëse gedit duhet të aktivojë vënien në dukje të sintaksës."
 
-#: data/gedit.schemas.in.h:74
-#, fuzzy
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Nëse gedit duhet të aktivojë vënien në dukje të sintaksës."
+msgstr "Nëse gedit duhet të vërë në dukje kllapat korrisponduese."
 
-#: data/gedit.schemas.in.h:75
-#, fuzzy
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
-msgstr ""
-"Aktivon printimin e vënies në dukje të sintaksës kur printon dokumentet."
+msgstr "Nëse gedit duhet të vërë në dukje rreshtin aktual."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Nëse gedit duhet të krijojë një krye (header) kur printon dokumentet."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Aktivo futjen e hapësirave në vend të tab-eve."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr ""
-"Aktivon printimin e vënies në dukje të sintaksës kur printon dokumentet."
+msgstr "Aktivon printimin e vënies në dukje të sintaksës kur printon dokumentet."
 
-#: data/gedit.schemas.in.h:79
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
-"Bën të dukshëm ose jo panelin e gjëndjes në fund të dritareve të shkrimit."
+#: data/gedit.schemas.in.h:96
+msgid "Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Bën të dukshëm ose jo panelin e gjëndjes në fund të dritareve të shkrimit."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Bën të dukshëm ose jo panelin e instrumentëve tek dritaret e shkrimit."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -526,7 +535,7 @@ msgstr ""
 "sfondit\", \"Ngjyra e tekstit\", \"Ngjyra e tekstit të zgjedhur\" dhe "
 "\"Ngjyra e pjesës së zgjedhur\"."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -539,14 +548,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,AKTUAL,ISO-8859-15]"
 
@@ -556,9 +565,8 @@ msgid "Activate %s"
 msgstr "Aktivo %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Mbyll dritaren e output"
+msgstr "Mbyll _pa ruajtur"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -566,8 +574,7 @@ msgstr "Pyetje"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld second will be permanently lost."
+msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
@@ -579,10 +586,8 @@ msgstr[1] ""
 "përfundimisht."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
-msgid ""
-"If you don't save, changes from the last minute will be permanently lost."
-msgstr ""
-"Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
+msgid "If you don't save, changes from the last minute will be permanently lost."
+msgstr "Nëse nuk ruani, ndryshimet nga minuta e fundit do të humbin përfundimisht."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:382
 #, c-format
@@ -601,8 +606,7 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld minute will be permanently lost."
+msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
@@ -617,12 +621,9 @@ msgstr[1] ""
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] ""
-"Nëse nuk ruani, ndryshimet nga ora e fundit do të humben përfundimisht."
-msgstr[1] ""
-"Nëse nuk ruani, ndryshimet nga %d orët e fundit do të humbin përfundimisht."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Nëse nuk ruani, ndryshimet nga ora e fundit do të humben përfundimisht."
+msgstr[1] "Nëse nuk ruani, ndryshimet nga %d orët e fundit do të humbin përfundimisht."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -647,8 +648,7 @@ msgstr "Ruan ndryshimet tek dokumenti \"%s\" para se t'a mbyllni?"
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
 "Keni %d dokument me ndryshime të paruajtura. Ruan ndryshimet para se t'a "
 "mbyllësh?"
@@ -657,15 +657,13 @@ msgstr[1] ""
 "mbyllni?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "Z_gjidh dokumentet që dëshironi të ruani:"
 
 #. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be permanently lost."
-msgstr ""
-"Nëse nuk ruani, të gjithë ndryshimet tuaja do të humbasin përgjithmonë."
+msgstr "Nëse nuk ruani, të gjithë ndryshimet tuaja do të humbasin përgjithmonë."
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:184
 msgid "Go to Line"
@@ -769,8 +767,7 @@ msgstr "File i zgjedhur nuk është i ekzekutueshëm."
 
 #: gedit/dialogs/gedit-preferences-dialog.c:730
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
-"Shtyp këtë pulsant për të zgjedhur gërmat që duhen përdorur nga editori"
+msgstr "Shtyp këtë pulsant për të zgjedhur gërmat që duhen përdorur nga editori"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:732
 msgid "Push this button to configure text color"
@@ -811,14 +808,12 @@ msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Dhëmbëzim automatik</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Në krye automatikisht</b>"
+msgstr "<b>Korrispondimi i kllapave</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Në krye automatikisht</b>"
+msgstr "<b>Rreshti aktual</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -895,7 +890,7 @@ msgstr "Gërmat & Ngjyrat"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "Vër në _dukje rreshtin aktual"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -903,7 +898,7 @@ msgstr "Modaliteti i vënies në _dukje:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "Vër në dukje kllapat korrisponduese"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -1019,7 +1014,7 @@ msgstr "_Kufiri i djathtë tek kollona:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_Tab width:"
-msgstr ""
+msgstr "Gjerësia e _Tab:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
@@ -1171,28 +1166,6 @@ msgstr "Shkruaj _vendodhjen (URI) e file që dëshironi të hapni:"
 msgid "Open from URI"
 msgstr "Hap nga URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Keni X dokumente me ndryshime të "
-"paruajtura. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
-"Nëse nuk ruani dokumentet tuaja, të gjithë ndryshimet e kryera do të "
-"humbasin."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "Mos ruaj _Asnjë"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "_Ruaji të zgjedhurit"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit është një editor teksti i thjeshtë për Desktop GNOME"
@@ -1205,7 +1178,6 @@ msgstr "gedit është një editor teksti i thjeshtë për Desktop GNOME"
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr "Laurent Dhima <laurenti@alblinux.net>"
 
@@ -1213,46 +1185,46 @@ msgstr "Laurent Dhima <laurenti@alblinux.net>"
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "Dokument i paruajtur"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Emër file i pasaktë"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1423
 msgid "Invalid UTF-8 data"
 msgstr "Të dhëna UTF-8 të pavlefshme"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1670
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "I pamundur leximi i të dhënave të lidhjes simbolike për %s"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1716
 msgid "The file has too many symbolic links."
 msgstr "Ky file ka shumë lidhje simbolike."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1799
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nuk mund të manazhojë pozicionet \"%s\" në shkrim."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1806
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit nuk mund të manazhojë këtë lloj pozicioni në shkrim."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1819
 msgid "Invalid filename."
 msgstr "Emër file i pasaktë."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1968
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1260,7 +1232,7 @@ msgstr ""
 "Hapësirë e pamjaftueshme në disk për të ruajtur këtë file.\n"
 "Liro pak vend në disk dhe provo përsëri."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1973
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1270,7 +1242,7 @@ msgstr ""
 "madhësinë e file.  Provo të ruash një file më të vogël ose ruaje në një disk "
 "ku limitet nuk ekzistojnë."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2017
 msgid "Could not create a backup file."
 msgstr "I pamundur krijimi i file të backup."
 
@@ -1446,38 +1418,37 @@ msgstr "Zgjidh files që duhen hapur"
 msgid "Select a filename to save"
 msgstr "Zgjidh emrin e file për të ruajtur"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Hap file..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Duke ruajtur dokumentin \"%s\"..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumenti \"%s\" nuk u ruajt."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumenti \"%s\" u ruajt."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Ruaje si..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Dëshironi të ktheni ndryshimet e paruajtura tek dokumenti \"%s\"?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld second will be permanently lost."
+msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
@@ -1488,14 +1459,13 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld sekondat e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:543
-msgid ""
-"Changes made to the document in the last minute will be permanently lost."
+#: gedit/gedit-file.c:546
+msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ndryshimet e kryera në dokument në minutën e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1510,10 +1480,9 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në minutën e fundit dhe %ld sekonda do të "
 "humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld minute will be permanently lost."
+msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
@@ -1524,18 +1493,16 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld minutat e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] ""
-"Ndryshimet e kryera në dokument në orën e fundit do të humbasin përgjithmonë."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Ndryshimet e kryera në dokument në orën e fundit do të humbasin përgjithmonë."
 msgstr[1] ""
 "Ndryshimet e kryera në dokument në %d orët e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1550,70 +1517,70 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në orën e fundit dhe %d minuta do të "
 "humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Kthe mbrapa"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Gabim gjatë rikthimit të dokumentit \"%s\"."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumenti \"%s\" nuk u rikthye."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumenti \"%s\" u rikthye."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Duke rikthyer dokumentin '%s'..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "I pamundur leximi i të dhënave nga stdin."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Duke rikthyer file:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Duke ngarkuar file:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Gabim gjatë ngarkimit të file \"%s\""
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "File \"%s\" u ngarkua"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "U ngarkua %d file"
 msgstr[1] "U ngarkua %d file"
 
-#: gedit/gedit-file.c:1266
+#: gedit/gedit-file.c:1288
 #, c-format
 msgid "Created file \"%s\""
 msgstr "File \"%s\" u krijua"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Duke ngarkuar file \"%s\"..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1473
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1676,9 +1643,7 @@ msgid "Access was denied."
 msgstr "Hyrja është bllokuar."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
-msgid ""
-"there are too many open files. Please, close some open files and try again."
+msgid "there are too many open files. Please, close some open files and try again."
 msgstr ""
 "kemi shumë files të hapur. Ju lutem, mbyllni ndonjërin prej tyre dhe provoni "
 "përsëri."
@@ -1689,7 +1654,6 @@ msgid "\"%s\" is a directory"
 msgstr "\"%s\" është një directory"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1760,7 +1724,6 @@ msgid "Could not open the file \"%s\" using the %s character coding"
 msgstr "E pamundur hapja e file \"%s\" duke përdorur kodifikimin %s"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
@@ -1771,13 +1734,12 @@ msgstr ""
 "riprovo."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"File përmban të dhëna të pavlefshme. Ndoshta, po përpiqeni të hapni një file "
-"binar."
+"File përmban të dhëna në një format të pavlefshëm. Ndoshta, po përpiqeni "
+"të hapni një file binar."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1795,15 +1757,12 @@ msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit nuk arrin t'a gjejë. Mos ndoshta, e ke fshirë?"
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
-msgid ""
-"There are too many open files. Please, close some open files and try again."
+msgid "There are too many open files. Please, close some open files and try again."
 msgstr ""
 "Kemi shumë files të hapur. Të lutem, mbyll ndonjërin prej tyre dhe provo "
 "përsëri."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
@@ -2218,8 +2177,7 @@ msgid "Select the entire document"
 msgstr "Zgjith të gjithë dokumentin"
 
 #: gedit/gedit-ui.xml.h:62
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr ""
 "Konfiguro stilin e pulsantëve të panelit të instrumentëve në bazë të "
 "rregullimeve korrisponduese të desktop"
@@ -2394,20 +2352,20 @@ msgstr " (Unicode i pavlefshëm)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rr %d, Kol %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  MSH"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  SHT"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2415,19 +2373,19 @@ msgstr ""
 "Zgjidh kodifikimin që duhet përdorur për të hapur files e dhënë në rreshtin "
 "e komandës"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Dil nga një instancë ekzistuese të gedit"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Krijo një dritare të re toplevel në një instancë ekzistuese të gedit"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Krijo një dokument të ri në një instancë ekzistuese të gedit"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Kodifikimi \"%s\" i zgjedhur nuk është i vlefshëm\n"
@@ -2586,45 +2544,39 @@ msgid "User name"
 msgstr "Emri i përdoruesit"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "_Kopjo"
+msgstr "Rua_j një kopje..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Përcakto gjuhën e dokumentit aktual"
+msgstr "Ruan një kopje të dokumentit aktual"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "E pamundur ruajtja e file \"%s\""
+msgstr "E pamundur ruajtja e kopjes së file tek \"%s\""
 
 #: plugins/savecopy/savecopy.c:361
-#, fuzzy
 msgid "You are trying to overwrite the original file"
-msgstr "File që dëshironi të hapni nuk është një file i rregullt."
+msgstr "Po përpiqeni të mbishkruani file orgjinal"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "Mos ruaj _Asnjë"
+msgstr "Ruaj kopje..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (kopje)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Ruaj të gjithë files e hapur"
+msgstr "Ruaj një kopje"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Rendit dokumentin apo zgjedhjen aktuale."
+msgstr "Ruan një kopje të dokumentit aktual në një pozicion likal ose remot."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -2796,21 +2748,19 @@ msgstr "Kontrolli i drejtshkrimit u kompletua"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikane"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "Arabe"
+msgstr "Amharic"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaixhani"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "Bullgarisht"
+msgstr "Belarusian"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2841,9 +2791,8 @@ msgid "Danish"
 msgstr "Danisht"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "Gjermanisht (Gjermani)"
+msgstr "Gjermanisht (Austri)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2874,14 +2823,12 @@ msgid "Spanish"
 msgstr "Spanjisht"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "Rumanisht"
+msgstr "Estonisht"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "Printo"
+msgstr "Persisht"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2900,49 +2847,44 @@ msgid "French (Swiss)"
 msgstr "Frengjisht (Zvicër)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "Turqisht"
+msgstr "Irlandeze"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Skoceze Gaelane"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "Gjeorgjisht"
+msgstr "Gallegan"
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Manx Gaelic"
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "Gjej"
+msgstr "Hindi"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "Katalane"
+msgstr "Kroate"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Upper Sorbian"
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "Bullgarisht"
+msgstr "Hungarisht"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Interlingua (IALA)"
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indoneziane"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2953,61 +2895,56 @@ msgid "Italian"
 msgstr "Italisht"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "Turqisht"
+msgstr "Kurde"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "Rreshta"
+msgstr "Latinisht"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "Lituaniane"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "Letonisht"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "Malagasy"
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "gedit"
+msgstr "Maqedonase"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongoliane"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "Malay"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "Malteze"
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Norvegjeze"
+msgstr "Bokmal Norvegjeze"
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Hollandeze"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Norvegjeze"
+msgstr "Nynorsk Norvegjeze"
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -3015,7 +2952,7 @@ msgstr "Norvegjeze"
 
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3031,7 +2968,7 @@ msgstr "Portugeze (Brazil)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "Quechua"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3039,12 +2976,11 @@ msgstr "Rusisht"
 
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Ukrahinase"
+msgstr "Sardinian"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3060,24 +2996,23 @@ msgstr "Suedisht"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "Thai"
+msgstr "Tamil"
 
 #: plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
-msgstr ""
+msgstr "Tetum"
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "Tagalog"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "Tswana"
 
 #: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3085,19 +3020,20 @@ msgstr "Ukrahinase"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "Uzbeke"
 
 #: plugins/spell/gedit-spell-checker.c:153
+#, fuzzy
 msgid "Walloon"
-msgstr ""
+msgstr "Walloon"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Yiddish"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3221,841 +3157,791 @@ msgid "Spell checker"
 msgstr "Kontrolluesi i drejtshkrimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "Formatet në dispozicion"
+msgstr "Forma e shkurtër"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Armenisht"
+msgstr "Shkurtim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "Sipër"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Simboli i kyçit të açesibilitetit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "Akronim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "rreshta"
+msgstr "Rreshtimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "Simbol rreshtimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "Spiranca"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "URI spirancës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Zgjidh file që duhet hapur"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "Rreshtimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "Informacioni shoqërues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "Ngushtim automatik"
+msgstr "Informacione të autorit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "_Printo header e faqes"
+msgstr "Headers relativë të akseve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "_Ngjyra e sfondit:"
+msgstr "Ngjyra e sfondit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Ngjyra e Sfondit"
+msgstr "Struktura e tullzave të sfondit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "URI Bazë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Base font"
-msgstr ""
+msgstr "Gërmat bazë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "Sjellja"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "Tekst pulsues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "Me të trasha"
+msgstr "Korniza"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "_Ngjyra e sfondit:"
+msgstr "Ngjyra e kornizës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "Kuti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Europa Qendrore"
+msgstr "Hapsira e rreshtave të qelisë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Të përgjithshme"
+msgstr "Në qendër"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+msgid "Character encoding of linked resource"
+msgstr "Kodifikimi i gërmave të lidhur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "Kontrolluar(gjendja)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "vepr_ime"
+msgstr "Citim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
-msgstr ""
+msgstr "Cito arsyen e ndryshimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "ID e ekezekutimit të kategorisë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Lista e tag"
+msgstr "Lista e klasave"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Kontrolli i fliksit të lirë të tekstit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Kopjo rreshtat e zgjedhur"
+msgstr "Ngjyra e lidhjeve të zgjedhura"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "Hapsira e kollonës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "Kollonat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Përmbajtja"
+msgstr "Komenti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Fragment kodi kompjuteri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Përmbajtja"
+msgstr "Skema përmbajtjes"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "_Përmbajtja"
+msgstr "Lloji i përmbajtjes"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Përmbajtja"
+msgstr "Koordinatat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "Përmbajtës stili DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "Përmbajtës DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "Data dhe ora e ndryshimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Shenja deklarimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
-msgid "Definition description"
-msgstr "_Përshkrimi"
+msgid "Defer attribute"
+msgstr "Ridërgimi i atributit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
-msgid "Definition list"
-msgstr ""
+msgid "Definition description"
+msgstr "Përshkrimi i përcaktimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
-msgid "Definition term"
-msgstr ""
+msgid "Definition list"
+msgstr "Lista përcaktimeve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
-msgid "Deleted text"
-msgstr "Fshi tekstin e zgjedhur"
+msgid "Definition term"
+msgstr "Term përcaktues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
-msgid "Direction"
-msgstr "Bretone"
+msgid "Deleted text"
+msgstr "Tekst i fshirë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
-msgid "Directionality"
-msgstr ""
+msgid "Direction"
+msgstr "Drejtimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
-msgid "Directory list"
-msgstr ""
+msgid "Directionality"
+msgstr "Orientimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
-msgid "Disabled"
-msgstr "Aktiv"
+msgid "Directory list"
+msgstr "Lista e directory"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
-msgid "Document base"
-msgstr "_Dokumente"
+msgid "Disabled"
+msgstr "Jo aktiv"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
-msgid "Document body"
-msgstr "_Dokumente"
+msgid "Document base"
+msgstr "Baza e dokumentit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
-msgid "Document head"
-msgstr "_Dokumente"
+msgid "Document body"
+msgstr "Trupi i dokumentit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
-msgid "Document title"
-msgstr "Statistikat e dokumentit"
+msgid "Document head"
+msgstr "Kreu i dokumentit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
-msgid "Document type"
-msgstr "_Dokumente"
+msgid "Document title"
+msgstr "Titulli i dokumentit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
-msgid "Element ID"
-msgstr "Elementët"
+msgid "Document type"
+msgstr "Lloji i dokumentit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
+msgid "Element ID"
+msgstr "ID e elementit"
+
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
-msgstr ""
+msgstr "Objekt i trupëzuar"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:65
-msgid "Encode type"
-msgstr ""
+msgstr "Thekset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
-msgid "Figure"
-msgstr ""
+msgid "Encode type"
+msgstr "Lloji i kodimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
-msgid "Font face"
-msgstr "Mo_s ruaj"
+msgid "Figure"
+msgstr "Figura"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
-msgid "For label"
-msgstr "etiketa"
+msgid "Font face"
+msgstr "Lloji i gërmave"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
-msgid "Forced line break"
-msgstr ""
+msgid "For label"
+msgstr "Për etiketat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
-#, fuzzy
-msgid "Form"
-msgstr "Normal"
+msgid "Forced line break"
+msgstr "Ndërprerje e detyruar e rreshtit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-msgid "Form action handler"
-msgstr ""
+msgid "Form"
+msgstr "Formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
-msgid "Form control group"
-msgstr ""
+msgid "Form action handler"
+msgstr "Trajtuesi i veprimeve të formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
-msgid "Form field label text"
-msgstr ""
+msgid "Form control group"
+msgstr "Grupi i kontrollit të formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
-msgid "Form input"
-msgstr ""
+msgid "Form field label text"
+msgstr "Teksti i fushës së etiketës së formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:75
-msgid "Form input type"
-msgstr ""
+msgid "Form input"
+msgstr "Input i formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:76
-msgid "Form method"
-msgstr ""
+msgid "Form input type"
+msgstr "Lloji i input të formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
-msgid "Forward link"
-msgstr ""
+msgid "Form method"
+msgstr "Metoda e formularit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
-msgid "Frame"
-msgstr "Emri:"
+msgid "Forward link"
+msgstr "Lidhja vazhdo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-msgid "Frame render parts"
-msgstr ""
+msgid "Frame"
+msgstr "Frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
-msgid "Frame source"
-msgstr ""
+#, fuzzy
+msgid "Frame render parts"
+msgstr "Korniza"
 
 #: plugins/taglist/HTML.tags.xml.in.h:81
-msgid "Frame target"
-msgstr ""
+msgid "Frame source"
+msgstr "Burimi i frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
-msgid "Frameborder"
-msgstr ""
+msgid "Frame target"
+msgstr "Destinimi i frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
-msgid "Frameset"
-msgstr "Faroese"
+msgid "Frameborder"
+msgstr "Korniza e frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
-msgid "Frameset columns"
-msgstr "Fillo _tek kollona:"
+msgid "Frameset"
+msgstr "Frameset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-msgid "Frameset rows"
-msgstr ""
+msgid "Frameset columns"
+msgstr "Kollonat e frameset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
-msgid "Framespacing"
-msgstr ""
+msgid "Frameset rows"
+msgstr "Rreshtat e frameset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
-msgid "Generic embedded object"
-msgstr ""
+msgid "Framespacing"
+msgstr "Hapsira e frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
-msgid "Generic metainformation"
-msgstr ""
+msgid "Generic embedded object"
+msgstr "Objekt i trupzuar i përgjithshëm"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
-msgid "Generic span"
-msgstr "Të përgjithshme"
+msgid "Generic metainformation"
+msgstr "Metainformacion i përgjithshëm"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
-msgid "HREF URI"
-msgstr ""
+msgid "Generic span"
+msgstr "Hapsirë e përgjithshme"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
-msgid "HTML - Special Characters"
-msgstr ""
+msgid "HREF URI"
+msgstr "HREF URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
-msgid "HTML - Tags"
-msgstr ""
+msgid "HTML - Special Characters"
+msgstr "HTML - Simbole specialë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
-msgid "HTML root element"
-msgstr ""
+msgid "HTML - Tags"
+msgstr "HTML - Tags"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
-msgid "HTML version"
-msgstr ""
+msgid "HTML root element"
+msgstr "Elementi bazë HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
-msgid "HTTP header name"
-msgstr ""
+msgid "HTML version"
+msgstr "Versioni HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
-msgid "Header cell ID's"
-msgstr ""
+msgid "HTTP header name"
+msgstr "Emri i titullit HTTP"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
-msgid "Heading"
-msgstr ""
+msgid "Header cell ID's"
+msgstr "ID e qelisë së kreut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
-msgid "Heading 1"
-msgstr ""
+msgid "Heading"
+msgstr "Titulli"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
-msgid "Heading 2"
-msgstr ""
+msgid "Heading 1"
+msgstr "Titulli 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
-msgid "Heading 3"
-msgstr ""
+msgid "Heading 2"
+msgstr "Titulli 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
-msgid "Heading 4"
-msgstr ""
+msgid "Heading 3"
+msgstr "Titulli 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
-msgid "Heading 5"
-msgstr ""
+msgid "Heading 4"
+msgstr "Titulli 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
-msgid "Heading 6"
-msgstr ""
+msgid "Heading 5"
+msgstr "Titulli 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
-msgid "Height"
-msgstr ""
+msgid "Heading 6"
+msgstr "Titulli 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
-msgid "Horizontal rule"
-msgstr ""
+msgid "Height"
+msgstr "Lartësia"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
-msgid "Horizontal space"
-msgstr ""
+msgid "Horizontal rule"
+msgstr "Shirit horizontal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:107
-msgid "I18N BiDi over-ride"
-msgstr ""
+msgid "Horizontal space"
+msgstr "Hapësirë horizontale"
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
-msgid "Image"
-msgstr ""
+msgid "I18N BiDi over-ride"
+msgstr "I18N BiDi over-ride"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
-msgid "Image map"
-msgstr ""
+msgid "Image"
+msgstr "Figurë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
-msgid "Image map area"
-msgstr ""
+msgid "Image map"
+msgstr "Harta e figurës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
-msgid "Image map name"
-msgstr ""
+msgid "Image map area"
+msgstr "Zona e hartës së figurës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
-msgid "Image source"
-msgstr ""
+msgid "Image map name"
+msgstr "Emri i hartës së figurës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
-msgid "Inline frame"
-msgstr "Emër file i pasaktë"
+msgid "Image source"
+msgstr "Burimi i figurës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
-msgid "Inline layer"
-msgstr ""
+msgid "Inline frame"
+msgstr "Strukturë në linjë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
-msgid "Inserted text"
-msgstr "Shto datën/orën"
+msgid "Inline layer"
+msgstr "Nivel në linjë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
-msgid "Instance definition"
-msgstr ""
+msgid "Inserted text"
+msgstr "Teksti i shtuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
-msgid "Italic text"
-msgstr "Italic"
+msgid "Instance definition"
+msgstr "Përkufizimi i shembullit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
-msgid "Java applet"
-msgstr ""
+msgid "Italic text"
+msgstr "Tekst Italic"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
-msgid "Label"
-msgstr "etiketa"
+msgid "Java applet"
+msgstr "Applet Java"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
-msgid "Language code"
-msgstr "Gjuhët"
+msgid "Label"
+msgstr "Etiketa"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
-msgid "Large text style"
-msgstr ""
+msgid "Language code"
+msgstr "Kodi i gjuhës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
-msgid "Layer"
-msgstr ""
+msgid "Large text style"
+msgstr "Stili i tekstit të madh"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
-msgid "Link color"
-msgstr "Zgjidh një ngjyrë"
+msgid "Layer"
+msgstr "Nivel"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
-msgid "List item"
-msgstr ""
+msgid "Link color"
+msgstr "Ngjyra e lidhjes"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
-msgid "List of MIME types for file upload"
-msgstr ""
+msgid "List item"
+msgstr "Element liste"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
-msgid "List of supported character sets"
-msgstr ""
+msgid "List of MIME types for file upload"
+msgstr "Lista e llojeve MIME për ngarkimin e file"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
-msgid "Listing"
-msgstr ""
+msgid "List of supported character sets"
+msgstr "Lista e grupeve të suportuar të simboleve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
-msgid "Local change to font"
-msgstr "Zgjidh shkronjën e editorit"
+msgid "Listing"
+msgstr "Lista"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
-msgid "Long description link"
-msgstr "_Përshkrimi"
+msgid "Local change to font"
+msgstr "Ndryshimi lokal në shkronja"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
-msgid "Long quotation"
-msgstr ""
+msgid "Long description link"
+msgstr "Lidhja me përshkrimin e plotë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
-msgid "Mail link"
-msgstr ""
+msgid "Long quotation"
+msgstr "Kuotim i gjatë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
-msgid "Margin pixel height"
-msgstr ""
+msgid "Mail link"
+msgstr "Lidhje mail"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
-msgid "Margin pixel width"
-msgstr ""
+msgid "Margin pixel height"
+msgstr "Lartësia e pixel kufizues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
-msgid "Marquee"
-msgstr ""
+msgid "Margin pixel width"
+msgstr "Gjerësia e pixel kufizues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
+msgid "Marquee"
+msgstr "Shënim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media-independent link"
-msgstr ""
+msgid "Maximum length of text field"
+msgstr "Gjatësia maksimum i fushës së tekstit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
-msgid "Menu list"
-msgstr ""
+msgid "Media-independent link"
+msgstr "Lidhje e varur-nga-mjeti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
-msgid "Multi-line text field"
-msgstr ""
+msgid "Menu list"
+msgstr "Lista e menu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
-msgid "Multicolumn"
-msgstr ""
+msgid "Multi-line text field"
+msgstr "Fusha e teksteve shumë-rreshtash"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
-msgid "Multiple"
-msgstr ""
+msgid "Multicolumn"
+msgstr "Shumë kollonëshe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-#, fuzzy
-msgid "Name"
-msgstr "Emri:"
+msgid "Multiple"
+msgstr "Shumëfish"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-msgid "Named property value"
-msgstr ""
+msgid "Name"
+msgstr "Emri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
-msgid "Next ID"
-msgstr ""
+msgid "Named property value"
+msgstr "Vlera e pronësisë me emër"
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
-msgid "No URI"
-msgstr ""
+msgid "Next ID"
+msgstr "ID në vazhdo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
-msgid "No embedded objects"
-msgstr ""
+msgid "No URI"
+msgstr "Asnjë URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
-msgid "No frames"
-msgstr ""
+msgid "No embedded objects"
+msgstr "Asnjë objekt i trupzuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
-msgid "No layers"
-msgstr ""
+msgid "No frames"
+msgstr "Pa korniza"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
-msgid "No line break"
-msgstr ""
+msgid "No layers"
+msgstr "PA nivelë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-msgid "No resize"
-msgstr ""
+msgid "No line break"
+msgstr "Pa ndërprerje rreshti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-msgid "No script"
-msgstr ""
+msgid "No resize"
+msgstr "Pa ndryshim madhësie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
-msgid "No shade"
-msgstr ""
+msgid "No script"
+msgstr "Asnjë script"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
-msgid "No word wrap"
-msgstr ""
+msgid "No shade"
+msgstr "Asnjë ngjyrosje"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
-msgid "Note"
-msgstr ""
+msgid "No word wrap"
+msgstr "Jo në krye automatikisht"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
+msgid "Note"
+msgstr "Shënim"
+
+#: plugins/taglist/HTML.tags.xml.in.h:155
 #, fuzzy
 msgid "Object applet file"
 msgstr "Hap një file"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
-msgid "Object data reference"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:156
-msgid "Offset for alignment character"
-msgstr ""
+msgid "Object data reference"
+msgstr "Riferues i të dhënave të objektit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
-msgid "OnBlur event"
-msgstr ""
+msgid "Offset for alignment character"
+msgstr "Spostimi për simbolin e rreshtimit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
-msgid "OnChange event"
-msgstr "Ndrysho gërma të mëdha/vogla"
+msgid "OnBlur event"
+msgstr "Aksioni OnBlur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-msgid "OnClick event"
-msgstr ""
+msgid "OnChange event"
+msgstr "Aksioni OnChange"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
-msgid "OnDblClick event"
-msgstr ""
+msgid "OnClick event"
+msgstr "Aksioni OnClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
-msgid "OnFocus event"
-msgstr ""
+msgid "OnDblClick event"
+msgstr "Aksioni OnDblClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
-msgid "OnKeyDown event"
-msgstr ""
+msgid "OnFocus event"
+msgstr "Aksioni OnFocus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
-msgid "OnKeyPress event"
-msgstr ""
+msgid "OnKeyDown event"
+msgstr "Aksioni OnKeyDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
-msgid "OnKeyUp event"
-msgstr ""
+msgid "OnKeyPress event"
+msgstr "Aksioni OnKeyPress"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
-msgid "OnLoad event"
-msgstr ""
+msgid "OnKeyUp event"
+msgstr "Aksioni OnKeyUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
-msgid "OnMouseDown event"
-msgstr ""
+msgid "OnLoad event"
+msgstr "Aksioni OnLoad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
-msgid "OnMouseMove event"
-msgstr ""
+msgid "OnMouseDown event"
+msgstr "Aksioni OnMouseDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
-msgid "OnMouseOut event"
-msgstr ""
+msgid "OnMouseMove event"
+msgstr "Aksioni OnMouseMove"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
-msgid "OnMouseOver event"
-msgstr ""
+msgid "OnMouseOut event"
+msgstr "Aksioni OnMouseOut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
-msgid "OnMouseUp event"
-msgstr ""
+msgid "OnMouseOver event"
+msgstr "Aksioni OnMouseOver"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
-msgid "OnReset event"
-msgstr ""
+msgid "OnMouseUp event"
+msgstr "Aksioni OnMouseUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
-msgid "OnSelect event"
-msgstr ""
+msgid "OnReset event"
+msgstr "Aksioni OnReset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
-msgid "OnSubmit event"
-msgstr ""
+msgid "OnSelect event"
+msgstr "Aksioni OnSelect"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
-msgid "OnUnload event"
-msgstr ""
+msgid "OnSubmit event"
+msgstr "Aksioni OnSubmit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
-msgid "Option group"
-msgstr ""
+msgid "OnUnload event"
+msgstr "Aksioni OnUnload"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
-msgid "Option selector"
-msgstr "Kopjo pjesën e zgjedhur"
+msgid "Option group"
+msgstr "Grupi opcioneve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-msgid "Ordered list"
-msgstr ""
+msgid "Option selector"
+msgstr "Zgjedhësi opcioneve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
-msgid "Output media"
-msgstr "Rreshtat e output"
+msgid "Ordered list"
+msgstr "Listë e renditur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
-msgid "Paragraph"
-msgstr ""
+msgid "Output media"
+msgstr "Mjeti i daljes"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
-msgid "Paragraph class"
-msgstr ""
+msgid "Paragraph"
+msgstr "Paragrafi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
-msgid "Paragraph style"
-msgstr ""
+msgid "Paragraph class"
+msgstr "Klasa e paragrafëve"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
-msgid "Preformatted listing"
-msgstr ""
+msgid "Paragraph style"
+msgstr "Stili i paragrafit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-msgid "Preformatted text"
-msgstr ""
+msgid "Preformatted listing"
+msgstr "Listë e preformatuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
-msgid "Profile metainfo dictionary"
-msgstr ""
+msgid "Preformatted text"
+msgstr "Tekst i preformatuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
-msgid "Prompt message"
-msgstr ""
+msgid "Profile metainfo dictionary"
+msgstr "Fjalori i informacioneve të profilit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
-msgid "Push button"
-msgstr "pulsanti1"
+msgid "Prompt message"
+msgstr "Mesazhi përshëndetës"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
-msgid "Quote"
-msgstr "Dalja"
+msgid "Push button"
+msgstr "Pulsanti shtyp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
-msgid "Range"
-msgstr "N_drysho"
+msgid "Quote"
+msgstr "Kuota"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
-msgid "ReadOnly text and password"
-msgstr ""
+msgid "Range"
+msgstr "Grada"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
-msgid "Reduced spacing"
-msgstr ""
+msgid "ReadOnly text and password"
+msgstr "Tekst dhe fjalëkalim vetëm në lexim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
-msgid "Reverse link"
-msgstr "_Renditje e kundërt"
+msgid "Reduced spacing"
+msgstr "Hapsirë e reduktuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
-msgid "Root"
-msgstr ""
+msgid "Reverse link"
+msgstr "Lidhje e kundërt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
-msgid "Rows"
-msgstr ""
+msgid "Root"
+msgstr "Root"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
-msgid "Rulings between rows and columns"
-msgstr ""
+msgid "Rows"
+msgstr "Rreshtat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
-msgid "Sample program output, scripts"
-msgstr ""
+msgid "Rulings between rows and columns"
+msgstr "Rregullat midis rreshtave dhe kollonave"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
+msgid "Sample program output, scripts"
+msgstr "Shembull rezultat programi, script-e"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr ""
+#, fuzzy
+msgid "Scope covered by header cells"
+msgstr "Qëllimi sipas titull"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
 #, fuzzy
@@ -4063,8 +3949,9 @@ msgid "Script language name"
 msgstr "Vendos gjuhën"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
+#, fuzzy
 msgid "Script statments"
-msgstr ""
+msgstr "Script"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
@@ -4081,8 +3968,9 @@ msgid "Selected"
 msgstr "_Ruaji të zgjedhurit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
+#, fuzzy
 msgid "Server-side image map"
-msgstr ""
+msgstr "Serveri figurë harta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
 #, fuzzy
@@ -4108,12 +3996,14 @@ msgid "Small text style"
 msgstr "Të gjithë files teksti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
+#, fuzzy
 msgid "Soft line break"
-msgstr ""
+msgstr "Butë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
+#, fuzzy
 msgid "Sound"
-msgstr ""
+msgstr "Zëri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
 #, fuzzy
@@ -4121,8 +4011,9 @@ msgid "Space"
 msgstr "Ruaj"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
+#, fuzzy
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Hapësira arkiv lista"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
 #, fuzzy
@@ -4130,12 +4021,14 @@ msgid "Spacer"
 msgstr "Zëvendëso"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
+#, fuzzy
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Hapësira e ndërmjetme"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
+#, fuzzy
 msgid "Spacing within cells"
-msgstr ""
+msgstr "Hapësira e ndërmjetme"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
 #, fuzzy
@@ -4143,8 +4036,9 @@ msgid "Span"
 msgstr "Spanjisht"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
+#, fuzzy
 msgid "Square root"
-msgstr ""
+msgstr "Rrënjë katrore"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
@@ -4170,12 +4064,14 @@ msgid "Strong emphasis"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
+#, fuzzy
 msgid "Style info"
-msgstr ""
+msgstr "Stili"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
+#, fuzzy
 msgid "Subscript"
-msgstr ""
+msgstr "Subscript"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
 #, fuzzy
@@ -4183,8 +4079,9 @@ msgid "Superscript"
 msgstr "_Përshkrimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
+#, fuzzy
 msgid "Tab order position"
-msgstr ""
+msgstr "Tab"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
 #, fuzzy
@@ -4192,8 +4089,9 @@ msgid "Table"
 msgstr "Aktiv"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
+#, fuzzy
 msgid "Table body"
-msgstr ""
+msgstr "Tabela trupi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
 #, fuzzy
@@ -4201,60 +4099,74 @@ msgid "Table caption"
 msgstr "Hap pozicionin"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
+#, fuzzy
 msgid "Table column group properties"
-msgstr ""
+msgstr "Tabela grupi pronësitë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
+#, fuzzy
 msgid "Table column properties"
-msgstr ""
+msgstr "Tabela pronësitë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
+#, fuzzy
 msgid "Table data cell"
-msgstr ""
+msgstr "Tabela"
 
 #: plugins/taglist/HTML.tags.xml.in.h:234
+#, fuzzy
 msgid "Table footer"
-msgstr ""
+msgstr "Tabela fund'faqe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:235
+#, fuzzy
 msgid "Table header"
-msgstr ""
+msgstr "Tabela titull"
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
+#, fuzzy
 msgid "Table header cell"
-msgstr ""
+msgstr "Tabela titull"
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
+#, fuzzy
 msgid "Table row"
-msgstr ""
+msgstr "Tabela"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
+#, fuzzy
 msgid "Table summary"
-msgstr ""
+msgstr "Tabela"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
+#, fuzzy
 msgid "Target - Blank"
-msgstr ""
+msgstr "Objektivi Fshih"
 
 #: plugins/taglist/HTML.tags.xml.in.h:240
+#, fuzzy
 msgid "Target - Parent"
-msgstr ""
+msgstr "Objektivi Parent"
 
 #: plugins/taglist/HTML.tags.xml.in.h:241
+#, fuzzy
 msgid "Target - Self"
-msgstr ""
+msgstr "Objektivi Vetë"
 
 #: plugins/taglist/HTML.tags.xml.in.h:242
+#, fuzzy
 msgid "Target - Top"
-msgstr ""
+msgstr "Objektivi Sipër"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
+#, fuzzy
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "or tekst"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
+#, fuzzy
 msgid "Text"
-msgstr ""
+msgstr "Teksti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
 #, fuzzy
@@ -4262,8 +4174,9 @@ msgid "Text color"
 msgstr "Ngjyra e tekstit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
+#, fuzzy
 msgid "Text entered by user"
-msgstr ""
+msgstr "Teksti sipas përdorues"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
 #, fuzzy
@@ -4271,12 +4184,14 @@ msgid "Title"
 msgstr "Gërmat e _Titullit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
+#, fuzzy
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "në pixels"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
+#, fuzzy
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
 #, fuzzy
@@ -4289,24 +4204,29 @@ msgid "Unordered list"
 msgstr "Nënvizuar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
+#, fuzzy
 msgid "Use image map"
-msgstr ""
+msgstr "figurë harta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
+#, fuzzy
 msgid "Value"
-msgstr ""
+msgstr "Vlera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
+#, fuzzy
 msgid "Value interpretation"
-msgstr ""
+msgstr "Vlera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
+#, fuzzy
 msgid "Variable or program argument"
-msgstr ""
+msgstr "E ndryshueshme or programi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
+#, fuzzy
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Vertikal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
 #, fuzzy
@@ -4319,24 +4239,29 @@ msgid "Visited link color"
 msgstr "Zgjidh ngjyrën për pjesën e zgjedhur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
+#, fuzzy
 msgid "Width"
-msgstr ""
+msgstr "Gjerësia"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
+#, fuzzy
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Bibliografia"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
+#, fuzzy
 msgid "Bibliography item"
-msgstr ""
+msgstr "Bibliografia element"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
+#, fuzzy
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Bibliografia"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
+#, fuzzy
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Bibliografia"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4355,8 +4280,9 @@ msgid "Brackets {}"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
+#, fuzzy
 msgid "File input"
-msgstr ""
+msgstr "File"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
 #, fuzzy
@@ -4364,28 +4290,34 @@ msgid "Footnote"
 msgstr "Gërmat"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
+#, fuzzy
 msgid "Function cosin"
-msgstr ""
+msgstr "Funksioni"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
+#, fuzzy
 msgid "Function e^"
-msgstr ""
+msgstr "Funksioni e"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
+#, fuzzy
 msgid "Function exp"
-msgstr ""
+msgstr "Funksioni exp"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
+#, fuzzy
 msgid "Function log"
-msgstr ""
+msgstr "Funksioni log"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
+#, fuzzy
 msgid "Function log10"
-msgstr ""
+msgstr "Funksioni"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
+#, fuzzy
 msgid "Function sine"
-msgstr ""
+msgstr "Funksioni"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
 #, fuzzy
@@ -4398,8 +4330,9 @@ msgid "Greek beta"
 msgstr "Greqisht"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
+#, fuzzy
 msgid "Greek epsilon"
-msgstr ""
+msgstr "Greqisht"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
 #, fuzzy
@@ -4407,8 +4340,9 @@ msgid "Greek gamma"
 msgstr "Greqisht"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
+#, fuzzy
 msgid "Greek lambda"
-msgstr ""
+msgstr "Greqisht"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
 #, fuzzy
@@ -4421,56 +4355,68 @@ msgid "Greek tau"
 msgstr "Greqisht"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
+#, fuzzy
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
+#, fuzzy
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
+#, fuzzy
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
+#, fuzzy
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
+#, fuzzy
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
+#, fuzzy
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
+#, fuzzy
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
+#, fuzzy
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
+#, fuzzy
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Kreu i faqes paragraf"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
+#, fuzzy
 msgid "Header appendix"
-msgstr ""
+msgstr "Kreu i faqes"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
+#, fuzzy
 msgid "Item with label"
-msgstr ""
+msgstr "me etiketa"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
+#, fuzzy
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Tags"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
 #, fuzzy
@@ -4478,12 +4424,14 @@ msgid "List description"
 msgstr "_Përshkrimi"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
+#, fuzzy
 msgid "List enumerate"
-msgstr ""
+msgstr "Lista"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
+#, fuzzy
 msgid "List itemize"
-msgstr ""
+msgstr "Lista"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
@@ -4541,24 +4489,28 @@ msgid "Symbol &lt;="
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
+#, fuzzy
 msgid "Symbol and"
-msgstr ""
+msgstr "dhe"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
+#, fuzzy
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "sipas"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
+#, fuzzy
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "sipas"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
+#, fuzzy
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "sipas"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
@@ -4605,24 +4557,28 @@ msgid "Symbol star"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
+#, fuzzy
 msgid "Typeface bold"
-msgstr ""
+msgstr "me të trasha"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
+#, fuzzy
 msgid "Typeface italic"
-msgstr ""
+msgstr "italic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
+#, fuzzy
 msgid "Typeface type"
-msgstr ""
+msgstr "lloji"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
+#, fuzzy
 msgid "Unbreakable text"
-msgstr ""
+msgstr "tekst"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
@@ -4634,32 +4590,36 @@ msgid "XSLT - Elements"
 msgstr "Elementët"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
+#, fuzzy
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "Funksionet"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
+#, fuzzy
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "or"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
+#, fuzzy
 msgid "child"
-msgstr ""
+msgstr "fëmi (sekondar, i dytë)"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
+#, fuzzy
 msgid "descendant-or-self"
-msgstr ""
+msgstr "or"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
@@ -4743,11 +4703,11 @@ msgstr "Sh_to datën dhe orën..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Shto datën dhe orën aktuale tek pozicioni i kursorit"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Formatet në dispozicion"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Konfiguro plugin e «Shto datën dhe orën»..."
 
@@ -4791,13 +4751,3 @@ msgstr "_Kërko formatin"
 msgid "_Use custom format"
 msgstr "_Përdor një format të personalizuar"
 
-#~ msgid "Irish (Gaeilge)"
-#~ msgstr "Irlandeze (Gaeilge)"
-
-#, fuzzy
-#~ msgid "Document ID"
-#~ msgstr "_Dokumente"
-
-#, fuzzy
-#~ msgid "Document version"
-#~ msgstr "_Dokumente"
