@@ -37,14 +37,13 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
-	gchar *subject, *from, *to, *buffer, *command;
+	gchar *subject, *from, *to, *command;
 
 	if (button == 0)
 	{
 		to = gtk_entry_get_text (GTK_ENTRY (to_entry));
 		from = gtk_entry_get_text (GTK_ENTRY (from_entry));
 		subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
-		buffer = g_strdup (doc->buf->str);
 	    
 		command = g_malloc0 (strlen (MAILER) + strlen (to) + 2);
 		sprintf (command, "%s %s", MAILER, to);
@@ -53,7 +52,6 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 		{
 			printf ("Couldn't open stream to /usr/bin/sendmail\n");
 			g_free (command);
-			g_free (buffer);
 			return;
 		}
 	    
@@ -62,7 +60,7 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 		fprintf (sendmail, "Subject: %s\n", subject);
 		fprintf (sendmail, "X-Mailer: gedit email plugin v 0.2\n");
 		fflush (sendmail);
-		fprintf (sendmail, "%s\n", buffer);
+		fprintf (sendmail, "%s\n", doc->buf->str);
 		fflush (sendmail);
 	    
 		pclose (sendmail);
@@ -71,7 +69,6 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 		gnome_config_sync ();
 		
 		g_free (command);
-		g_free (buffer);
 	}
 
 	gnome_dialog_close (GNOME_DIALOG (w));

@@ -184,7 +184,10 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	buffer = g_new0 (guchar, length + 1);
 	strncpy (buffer, insertion_text, length);
 	doc = view->document;
+
+	insert_into_buffer (doc, buffer, position);
 	gedit_undo_add (buffer, position, (position + length), INSERT, doc);
+
 	data = g_malloc0 (sizeof (gedit_data));
 	data->temp1 = (gint*) position;
 	data->temp2 = (guchar*) buffer;

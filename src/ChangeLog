@@ -1,3 +1,10 @@
+2000-05-01  Jason Leach  <leach@wam.umd.edu>
+
+	* view.c (doc_insert_text_cb): added a call to insert_into_buffer,
+	this is important because otherwise doc->buf->str otherwise won't
+	contain the contents of your document until you save or something,
+	so like the e-mail plugin sends no body on Untitled documents.
+
 2000-05-01  Chema Celorio  <chema@celorio.com>
 
 	* recent.c (recent_update_menus): memleaks -= 4;
