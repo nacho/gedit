@@ -397,9 +397,6 @@ gedit_utils_error_reporting_loading_file (
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
 	gchar *encoding_name = NULL;
-	
-	GnomeVFSURI *vfs_uri;
-	
 	GtkWidget *dialog;
 
 	g_return_if_fail (uri != NULL);
@@ -517,31 +514,51 @@ gedit_utils_error_reporting_loading_file (
 			 	* the proxy is set up wrong.
 		 		*/
 				{
-					gchar *host_name;
+					GnomeVFSURI *vfs_uri;
+
 					vfs_uri = gnome_vfs_uri_new (uri);
-				
+
 					if (vfs_uri == NULL)
-						host_name = g_strdup ("XXX");
+					{
+						/* use the same string as INVALID_HOST */
+						error_message = g_strdup_printf (
+						_("Could not open the file \"%s\" because the host name "
+						  "was invalid.\n\n"
+						  "Please, check that you typed the location correctly "
+						  "and try again."),
+						  uri_for_display);
+					}
 					else
 					{
-						host_name = eel_make_valid_utf8 (
-							gnome_vfs_uri_get_host_name (vfs_uri));
+						const gchar *hn = gnome_vfs_uri_get_host_name (vfs_uri);
 
+						if (hn == NULL)
+						{
+							/* use the same string as INVALID_HOST */
+							error_message = g_strdup_printf (
+							_("Could not open the file \"%s\" because the host name "
+							  "was invalid.\n\n"
+							  "Please, check that you typed the location correctly "
+							  "and try again."),
+							  uri_for_display);
+						}
+						else
+						{
+							gchar *host_name = eel_make_valid_utf8 (hn);
+
+							error_message = g_strdup_printf (
+							_("Could not open the file \"%s\" because no host \"%s\" " 
+							  "could be found.\n\n"
+							  "Please, check that you typed the location correctly "
+							  "and that your proxy settings are correct and then "
+							  "try again."),
+							  uri_for_display, host_name);
+
+							g_free (host_name);
+						}
 						gnome_vfs_uri_unref (vfs_uri);		
 					}
-				
-	                		error_message = g_strdup_printf (
-						_("Could not open the file \"%s\" because no host \"%s\" " 
-					  	  "could be found.\n\n"
-                			  	  "Please, check that you typed the location correctly "
-					  	  "and that your proxy settings are correct and then "
-				  		  "try again."),
-						  uri_for_display,
-						  host_name);
-
-					g_free (host_name);
 				}
-
 				break;
 
 			case GNOME_VFS_ERROR_INVALID_HOST_NAME:
@@ -771,9 +788,6 @@ gedit_utils_error_reporting_reverting_file (
 	gchar *error_message;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
-	
-	GnomeVFSURI *vfs_uri;
-	
 	GtkWidget *dialog;
 
 	g_return_if_fail (uri != NULL);
@@ -868,30 +882,44 @@ gedit_utils_error_reporting_reverting_file (
 		 	* the proxy is set up wrong.
 		 	*/
 			{
-				gchar *host_name;
+				GnomeVFSURI *vfs_uri;
+
 				vfs_uri = gnome_vfs_uri_new (uri);
-				
+
 				if (vfs_uri == NULL)
-					host_name = g_strdup ("XXX");
+				{
+					/* use the default string */
+					error_message = g_strdup_printf (
+		                        	_("Could not revert the file \"%s\"."),
+					 	uri_for_display);
+				}
 				else
 				{
-					host_name = eel_make_valid_utf8 (
-							gnome_vfs_uri_get_host_name (vfs_uri));
+					const gchar *hn = gnome_vfs_uri_get_host_name (vfs_uri);
 
+					if (hn == NULL)
+					{
+						/* use the default string */
+						error_message = g_strdup_printf (
+			                        	_("Could not revert the file \"%s\"."),
+						 	uri_for_display);
+					}
+					else
+					{
+						gchar *host_name = eel_make_valid_utf8 (hn);
+
+						error_message = g_strdup_printf (
+						_("Could not revert the file \"%s\" because no host \"%s\" " 
+					  	  "could be found.\n\n"
+        	        		  	  "Please, check that your proxy settings are correct and "
+					  	  "try again."),
+						  uri_for_display, host_name);
+
+						g_free (host_name);
+					}
 					gnome_vfs_uri_unref (vfs_uri);		
 				}
-				
-				error_message = g_strdup_printf (
-					_("Could not revert the file \"%s\" because no host \"%s\" " 
-				  	  "could be found.\n\n"
-                		  	  "Please, check that your proxy settings are correct and "
-				  	  "try again."),
-					  uri_for_display,
-					  host_name);
-
-				g_free (host_name);
 			}
-
 			break;
             
 		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
