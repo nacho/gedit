@@ -8,14 +8,10 @@
 
 ** Jason **
 [ ] New webpage
-[ ] Convert the rest of the plugins
 [ ] Hack around the problem with recently used files, maybe we should
     do all the code for that and not use gnome-history
-[ ] Fix the bug reported in www.freshmeat.net, when a user compiles
+[X] Fix the bug reported in www.freshmeat.net, when a user compiles
     with --disable-gnome
-[ ] Finish libglade-ifying the dialogs and such
-[ ] Plugin manager, can borrow some of this code from gnumeric or
-    gide
 [ ] Menu bug when a language translates "Files" == "File", so we don't
     insert all the open windows into the end of the user's File menu
 
@@ -32,13 +28,65 @@
 [ ] Add view set tabs NONE
 [ ] Rewrite or clean search.c
 
+----------------------------------------------------------------------
+  gedit 0.8.0
+----------------------------------------------------------------------
 
---------------------------------------------------------------------
+** Unclaimed **
+[ ] Plugin manager, can borrow some of this code from gnumeric or
+    gide
+[ ] Convert the rest of the plugins
+[ ] Finish libglade-ifying the dialogs and such
+
+----------------------------------------------------------------------
   gedit 1.0
---------------------------------------------------------------------
+----------------------------------------------------------------------
 
-	* Syntax Highlighting (plugin?)
-	
-	* GNOME Session Management complience
-	
-	* Better Line counting
+
+Short/easier tasks
+
+ * File Info (plugin?)
+ * GNOME Session Management complience
+ * Add preferences setting for location of temp directory.
+
+Medium tasks
+
+ * Add more options to the Preferences
+ * Auto-save options (configurable timeout in prefs)
+ * Add plugin to allow posting a document to a newsgroup.
+ * Make the column indicator accurate (if possible)
+ * Get some decent documentation
+
+Big/hard tasks
+
+ * Port to TkText
+ * Better line counting (might be easier after porting to TkText)
+ * regex searching
+ * Syntax Highlighting (plugin?)
+
+Extra items (from TODO-large)
+
+ * Block Indent (what's this?)
+
+ * Add concept of "sets" of documents - I want to write the code for
+   this one, so back off! ;-)
+
+ * Add file locking/unlocking before/after opening/saving a file.  I
+   will probably end up doing this because no one else cares.
+
+ * Add more search features: replace all, and search (and replace)
+   across all open documents.
+
+ * Add interface/plugin for calling "ctags -x" on the current document
+   (maybe all open documents?).  build a tree of the output, and when
+   clicked on, will go to the selected location.  i'm not sure if this
+   should be code in gedit that simply does fork and exec, or if it
+   should be its own plugin.  one i know for certain is that gedit
+   shouldn't contain any C parsing code.  this is how gIDE does it,
+   and this is unnecessary.
+
+ * Add a plugin to read ctags generated tags at startup. When
+   gtkrichtext is done, this should be used to colorise the tags read
+   at startup, and turn them in some sort of hyperlinks.
+
+ * Improve the existing plugins to take advantage of preferences.
