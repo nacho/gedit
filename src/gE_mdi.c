@@ -29,7 +29,7 @@
 #include "gE_view.h"
 #include "gE_files.h"
 #include "commands.h"
-#include "search.h"
+#include "gedit-search.h"
 #include "gE_mdi.h"
 #include "gedit-print.h"
 #include "gedit-menus.h"

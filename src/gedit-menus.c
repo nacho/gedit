@@ -33,7 +33,7 @@
 #include "gE_prefs_box.h"
 #include "gE_view.h"
 #include "gE_window.h"
-#include "search.h"
+#include "gedit-search.h"
 
 
 /* Why do we need/use this stuff ??? - JEL */

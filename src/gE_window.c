@@ -31,7 +31,7 @@
 #include "gedit-print.h"
 #include "gedit-menus.h"
 #include "gE_prefs.h"
-#include "search.h"
+#include "gedit-search.h"
 #include "gE_plugin.h"
 #include "../pixmaps/gE_icon.xpm"
 

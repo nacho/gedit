@@ -50,15 +50,13 @@ gedit_SOURCES = 	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
 	gedit-about.c gedit-about.h \
-	gedit-print.c	\
-	gedit-print.h	\
+	gedit-print.c gedit-print.h \
 	gE_prefs.h	\
 	gE_plugin.h \
 	gE_plugin.c \
 	main.h		\
 	gedit-menus.c gedit-menus.h \
-	search.h	\
-	search.c	
+	gedit-search.c gedit-search.h
 
 gedit_LDADD =	$(GNOME_LIBDIR) 	\
 		$(GNOMEUI_LIBS)		\

@@ -45,7 +45,7 @@
 #include "gE_window.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
-#include "search.h"
+#include "gedit-search.h"
 
 /*
 static void close_file_save_yes_sel (GtkWidget *w, gedit_data *data);
