@@ -622,10 +622,7 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	hbox = gtk_hbox_new (FALSE, 12);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
   	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), 
-			    hbox, 
-	                    FALSE, 
-			    FALSE, 
-			    0);
+			    hbox, TRUE, TRUE, 0);
 
 	/* Image */
 	image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, 
@@ -634,7 +631,7 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
 	vbox = gtk_vbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
 	/* Primary label */
 	primary_label = gtk_label_new (NULL);
