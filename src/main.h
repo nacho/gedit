@@ -80,6 +80,8 @@ typedef struct _gE_window {
 	gint have_tb_pix;
 	gint have_tb_text;
 	gint use_relief_toolbar;
+	gint splitscreen;
+	gint scrollball;
 	
 	gchar *print_cmd;
 	gchar *font;

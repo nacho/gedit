@@ -306,6 +306,10 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	gE_prefs_set_int("tb pix", (gint) window->have_tb_pix);
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	gE_prefs_set_int("tb relief", (gint) window->use_relief_toolbar);
+	gE_prefs_set_int("splitscreen", (gint) window->splitscreen);
+#endif
+#ifndef WITHOUT_GNOME
+	gE_prefs_set_int("scrollball", (gint) window->scrollball);
 #endif
 	gE_prefs_set_char("font", window->font);
 	if (window->print_cmd == "")
@@ -325,6 +329,7 @@ void gE_get_settings(gE_window *w)
 	 w->have_tb_pix = gE_prefs_get_int("tb pix");
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	 w->use_relief_toolbar = gE_prefs_get_int("tb relief");
+	 w->splitscreen = gE_prefs_get_int("splitscreen");
 #endif
 	 w->font = gE_prefs_get_char("font");
 	 if (w->font == NULL)

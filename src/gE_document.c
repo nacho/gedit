@@ -98,6 +98,7 @@ gE_window_new(void)
 	w->files_list_window = NULL;
 	w->files_list_window_data = NULL;
 	w->toolbar = NULL;
+	w->splitscreen = FALSE;
 
 	w->show_status = TRUE;
 	w->have_toolbar = TRUE;
@@ -302,7 +303,10 @@ gE_document
 #ifndef WITHOUT_GNOME
 	scrollball = gtk_scrollball_new (NULL, GTK_TEXT(doc->text)->vadj);
 	gtk_box_pack_start (GTK_BOX (vbox), scrollball, FALSE, FALSE, 1);
-	gtk_widget_show (scrollball);
+	
+	w->scrollball = gE_prefs_get_int("scrollball");
+	if (w->scrollball == TRUE)
+	  gtk_widget_show (scrollball);
 	doc->scrollball = scrollball;
 #endif
 
@@ -383,7 +387,10 @@ gE_document
 		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->split_screen), "delete_text",
 		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
-	gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
+		
+	w->splitscreen = gE_prefs_get_int("splitscreen");
+	if (w->splitscreen == FALSE)
+	  gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
 	
@@ -439,9 +446,15 @@ void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 		return;
 
 	if (split_screen)
-		gtk_widget_show (doc->split_parent);
+	  {
+	   	gtk_widget_show (doc->split_parent);
+	   	doc->window->splitscreen = TRUE;
+	  }
 	else
+	  {
 		gtk_widget_hide (doc->split_parent);
+		doc->window->splitscreen = FALSE;
+	  }
 }
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
@@ -493,9 +506,15 @@ gchar *fname;
 void gE_document_set_scroll_ball (gE_document *doc, gint scroll_ball)
 {
 	if (scroll_ball)
-		gtk_widget_show (doc->scrollball);
+	  {
+	  	gtk_widget_show (doc->scrollball);
+	  	doc->window->scrollball = TRUE;
+	  }
 	else
+	  {
 		gtk_widget_hide (doc->scrollball);
+		doc->window->scrollball = FALSE;
+	  }
 }
 #endif
 

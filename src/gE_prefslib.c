@@ -336,6 +336,10 @@ char *gE_prefs_get_default (char *name)
 		{ "show statusbar", "1" },
 #ifdef GTK_HAVE_FEATURES_1_1_0
 		{ "tb relief", "0" },
+		{ "splitscreen", "0" },
+#endif
+#ifndef WITHOUT_GNOME
+		{ "scrollball", "1" },
 #endif
 		{ NULL, NULL }
 	};

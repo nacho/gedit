@@ -106,6 +106,14 @@ GtkStyle *style;
      else
        gtk_widget_show (w->statusbox);
        
+    #ifdef GTK_HAVE_FEATURES_1_1_0
+     /* if (w->splitscreen == TRUE) */
+       gE_document_set_split_screen (gE_document_current(w), (gint) w->splitscreen);
+    #endif
+    
+    #ifndef WITHOUT_GNOME
+       gE_document_set_scroll_ball (gE_document_current(w), (gint) w->scrollball);
+    #endif
      
   style = gtk_style_new();
   gdk_font_unref (style->font);
@@ -138,6 +146,12 @@ gE_Prop_Box *pbox,
   /* General Settings */
   data->window->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
   data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
+  #ifdef GTK_HAVE_FEATURES_1_1_0
+  data->window->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
+  #endif
+  #ifndef WITHOUT_GNOME
+  data->window->scrollball  = (GTK_TOGGLE_BUTTON (prefs->sball)->active);
+  #endif
 
   /* Print Settings */
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
@@ -178,6 +192,10 @@ void get_prefs(gE_data *data)
   					   data->window->auto_indent);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->status),
   					   data->window->show_status);
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
+  					   data->window->splitscreen);
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->sball),
+  					   data->window->scrollball);
 }
 
 static GtkWidget *general_page_new()
