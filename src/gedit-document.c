@@ -1330,7 +1330,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		goto out;
 	}
 
-      	chars = gedit_document_get_buffer (doc);
+      	chars = gedit_document_get_chars (doc, 0, -1);
 
 	encoding_setting = gedit_prefs_manager_get_save_encoding ();
 
@@ -1485,21 +1485,6 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	return retval;
 }
 
-gchar* 
-gedit_document_get_buffer (const GeditDocument *doc)
-{
-	GtkTextIter start, end;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (doc != NULL, FALSE);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, 0);
-      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
-  
-      	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start, &end, TRUE);
-}
-
 gboolean	
 gedit_document_is_untitled (const GeditDocument* doc)
 {
@@ -1559,21 +1544,6 @@ gedit_document_get_line_count (const GeditDocument *doc)
 	return gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
 }
 
-void 
-gedit_document_delete_all_text (GeditDocument *doc)
-{
-	GtkTextIter start, end;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_if_fail (doc != NULL);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start, 0);
-      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
-	
-	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start, &end);
-}
-
 gboolean 
 gedit_document_revert (GeditDocument *doc,  GError **error)
 {
@@ -1590,11 +1560,11 @@ gedit_document_revert (GeditDocument *doc,  GError **error)
 		return FALSE;
 	}
 			
-	buffer = gedit_document_get_buffer (doc);
+	buffer = gedit_document_get_chars (doc, 0, -1);
 
 	gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
 
-	gedit_document_delete_all_text (doc);
+	gedit_document_delete_text (doc, 0, -1);
 
 	if (!gedit_document_load (doc, doc->priv->uri, error))
 	{
@@ -1658,10 +1628,14 @@ gedit_document_delete_text (GeditDocument *doc, gint start, gint end)
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (start >= 0);
-	g_return_if_fail (end >= 0);
+	g_return_if_fail ((end > start) || end < 0);
 
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
+
+	if (end < 0)
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
+	else
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
 
 	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter);
 }
@@ -1676,10 +1650,14 @@ gedit_document_get_chars (GeditDocument *doc, gint start, gint end)
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 	g_return_val_if_fail (start >= 0, NULL);
-	g_return_val_if_fail (end >= 0, NULL);
+	g_return_val_if_fail ((end > start) || (end < 0), NULL);
 
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
+
+	if (end < 0)
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
+	else
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
 
 	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter, TRUE);
 }
@@ -1940,44 +1918,8 @@ gedit_document_find_again (GeditDocument* doc)
 	return found;
 }
 
-gchar*
-gedit_document_get_selected_text (GeditDocument *doc, gint *start, gint *end)
-{
-	GtkTextIter iter;
-	GtkTextIter sel_bound;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
-		
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &sel_bound,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "selection_bound"));
-	gtk_text_iter_order (&iter, &sel_bound);	
-
-	if (start != NULL)
-		*start = gtk_text_iter_get_offset (&iter); 
-
-	if (end != NULL)
-		*end = gtk_text_iter_get_offset (&sel_bound); 
-
-	if (gtk_text_iter_equal (&sel_bound, &iter))
-	{
-		gedit_debug (DEBUG_DOCUMENT, "There is no selected text");
-
-		return NULL;
-	}
-	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &iter, &sel_bound, TRUE);
-}
-
-gboolean
-gedit_document_has_selected_text (GeditDocument *doc)
+gboolean 
+gedit_document_get_selection (GeditDocument *doc, gint *start, gint *end)
 {
 	GtkTextIter iter;
 	GtkTextIter sel_bound;
@@ -1995,6 +1937,13 @@ gedit_document_has_selected_text (GeditDocument *doc)
                                     &sel_bound,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "selection_bound"));
+	gtk_text_iter_order (&iter, &sel_bound);	
+
+	if (start != NULL)
+		*start = gtk_text_iter_get_offset (&iter); 
+
+	if (end != NULL)
+		*end = gtk_text_iter_get_offset (&sel_bound); 
 
 	return !gtk_text_iter_equal (&sel_bound, &iter);	
 }
@@ -2127,3 +2076,30 @@ gedit_document_set_cursor (GeditDocument *doc, gint cursor)
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, cursor);
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 }
+
+void
+gedit_document_set_selection (GeditDocument *doc, gint start, gint end)
+{
+  	GtkTextIter start_iter;
+	GtkTextIter end_iter;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (start >= 0);
+	g_return_if_fail ((end > start) || (end < 0));
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
+
+	if (end < 0)
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
+	else
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
+
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &end_iter);
+
+	gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+                               gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "selection_bound"),
+                               &start_iter);
+}
+

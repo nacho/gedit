@@ -286,7 +286,7 @@ email_execute (EmailDialog *dialog)
 	doc = gedit_view_get_document (view);
 	g_return_val_if_fail (doc != NULL, FALSE);
 
-	body = gedit_document_get_buffer (doc);
+	body = gedit_document_get_chars (doc, 0, -1);
 
 	command_line = g_strdup_printf ("%s -x -t", email_program_location);
 
@@ -363,7 +363,6 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
 	BonoboUIComponent *uic;
 	GeditDocument *doc;
-	gchar *buf;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -374,14 +373,11 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	doc = gedit_get_active_document ();
 	
 	if (doc) {
-		buf = gedit_document_get_buffer (doc);
-		
-		if (strlen (buf) > 0)
+		if (gedit_document_get_char_count (doc) > 0)
 			gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
 		else
 			gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
 		
-		g_free (buf);
 	}
 	else
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);

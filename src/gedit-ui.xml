@@ -134,24 +134,18 @@
         <menuitem name="FileOpen" verb="" _label="_Open..."/>
 
 	<menuitem name="FileOpenURI" verb="" _label="Open _Location..."/>
-
-	<submenu name="Recents" _label="Recent _Files">
-
-	</submenu>
-
+	
 	<separator/>
 
         <menuitem name="FileSave" verb="" _label="_Save"/>
 	
         <menuitem name="FileSaveAs" verb="" _label="Save _As..."/>
-
-	<menuitem name="FileSaveAll" verb="" _label="Sa_ve All"/>
-
+	
         <menuitem name="FileRevert" verb="" _label="_Revert"/>
 	
 	<separator/>
 			
-	<menuitem name="FilePrintPreview" verb="" _label="Print Previe_w"/>
+	<menuitem name="FilePrintPreview" verb="" _label="Print Previe_w..."/>
 
 	<menuitem name="FilePrint" verb="" _label="_Print..."/>
 
@@ -159,12 +153,12 @@
 
 	<placeholder name="FileOps_2" delimit="top"/>
 
+	<placeholder name="Recents" delimit="top"/>
+
 	<separator/>
 	
         <menuitem name="FileClose" verb="" _label="_Close"/>
-
-	<menuitem name="FileCloseAll" verb="" _label="Clos_e All"/>
-
+	
         <menuitem name="FileExit" verb="" _label="_Quit"/>
 
 </submenu>
@@ -269,11 +263,23 @@
 
 <submenu name="Documents" _label="_Documents">
 
-	<placeholder name="DocumentsOps_1" delimit="bottom"/>
+	<placeholder name="DocumentsOps_1" />
 
-	<placeholder name="OpenDocuments" />
+	<placeholder name="DocumentsOps_2" delimit="top" />
 
-	<placeholder name="DocumentsOps_2" delimit="top"/>
+	<menuitem name="FileSaveAll" verb="" _label="_Save All"/>
+
+	<menuitem name="FileCloseAll" verb="" _label="_Close All"/>
+
+	<placeholder name="DocumentsOps_3" />
+
+	<placeholder name="DocumentsOps_4" delimit="top"/>
+
+	<placeholder name="OpenDocuments" delimit="top"/>
+ 
+	<placeholder name="DocumentsOps_5" delimit="top"/>
+	
+	<placeholder name="DocumentsOps_6" delimit="top"/>	
 
 </submenu>
 

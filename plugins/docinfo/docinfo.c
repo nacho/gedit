@@ -235,7 +235,7 @@ word_count_real (void)
 		return;
 	}
 
-	text = gedit_document_get_buffer (doc);
+	text = gedit_document_get_chars (doc, 0, -1);
 	g_return_if_fail (g_utf8_validate (text, -1, NULL));
 
 	lines = gedit_document_get_line_count (doc);

@@ -289,12 +289,11 @@ gedit_cmd_edit_clear (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 void
 gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditView* active_view;
+	GeditDocument* active_doc;
 
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
-	g_return_if_fail (active_view);
-	
-	gedit_view_select_all (active_view); 
+	active_doc = gedit_get_active_document ();
+
+	gedit_document_set_selection (active_doc, 0, -1); 
 }
 
 void 

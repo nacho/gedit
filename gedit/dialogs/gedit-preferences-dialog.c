@@ -321,8 +321,13 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	
 	hbox = gtk_hbox_new (FALSE, 18);
 	
+	/*
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 12);
+	*/
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 10);
+	/*
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 12);
+	*/
 
 	r = gtk_vbox_new (FALSE, 6);
 	
@@ -1606,32 +1611,34 @@ gedit_preferences_dialog_print_font_restore_default_button_clicked (
 	g_return_if_fail (dlg->priv->headers_fontpicker != NULL);
 	g_return_if_fail (dlg->priv->numbers_fontpicker != NULL);
 
-	/* FIXME: define constants, or take them from schemas - Paolo */
 	if (gedit_prefs_manager_print_font_body_can_set ())
 	{
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker),
-				_("Courier 9"));
+				gedit_prefs_manager_get_default_print_font_body ());
 
-		gedit_prefs_manager_set_print_font_body (_("Courier 9"));
+		gedit_prefs_manager_set_print_font_body (
+				gedit_prefs_manager_get_default_print_font_body ());
 	}
 	
 	if (gedit_prefs_manager_print_font_header_can_set ())
 	{
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->headers_fontpicker),
-				_("Helvetica 11"));
+				gedit_prefs_manager_get_default_print_font_header ());
 		
-		gedit_prefs_manager_set_print_font_header (_("Helvetica 11"));
+		gedit_prefs_manager_set_print_font_header (
+				gedit_prefs_manager_get_default_print_font_header ());
 	}
 		
 	if (gedit_prefs_manager_print_font_numbers_can_set ())
 	{
 		gnome_print_font_picker_set_font_name (
 				GNOME_PRINT_FONT_PICKER (dlg->priv->numbers_fontpicker),
-				_("Helvetica 8"));
+				gedit_prefs_manager_get_default_print_font_numbers ());
 		
-		gedit_prefs_manager_set_print_font_numbers (_("Helvetica 8"));
+		gedit_prefs_manager_set_print_font_numbers (
+				gedit_prefs_manager_get_default_print_font_numbers ());
 	}
 }
 

@@ -577,6 +577,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	gchar* selected_text = NULL;
 	gchar *converted_search_string = NULL;
 	gboolean case_sensitive;
+	gint start, end;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -607,8 +608,9 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	if (strlen (search_string) <= 0)
 		return;
 	
-	selected_text = gedit_document_get_selected_text (doc, NULL, NULL);
-
+	if (gedit_document_get_selection (doc, &start, &end))
+		selected_text = gedit_document_get_chars (doc, start, end);
+	
 	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text ? selected_text : "NULL");
 	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string ? search_string : "NULL");
 

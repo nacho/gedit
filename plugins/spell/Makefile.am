@@ -1,20 +1,46 @@
-# Shell output plugin
+# Spell checker plugin
+plugindir = $(libdir)/gedit-2/plugins
 
-plugindir = $(libdir)/gedit/plugins
+BUILT_SOURCES = \
+	gedit-spell-checker-dialog-marshal.c		\
+	gedit-spell-checker-dialog-marshal.h
+
+	
+INCLUDES = \
+	-I$(top_srcdir)/src 				\
+	$(GEDIT_CFLAGS) 				\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
+	-DG_DISABLE_DEPRECATED				\
+	-DGDK_DISABLE_DEPRECATED			\
+	-DGTK_DISABLE_DEPRECATED			\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-DGNOME_DISABLE_DEPRECATED			
 
 plugin_LTLIBRARIES = libspell.la
 
-libspell_la_SOURCES = spell.c
+libspell_la_SOURCES = spell.c 				\
+	preload.c					\
+	preload.h					\
+	gedit-spell-checker.c 				\
+	gedit-spell-checker.h				\
+	gedit-spell-checker-dialog.c			\
+	gedit-spell-checker-dialog.h			\
+	$(BUILT_SOURCES)	
 
+libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libspell_la_LIBADD = $(PSPELL_LIBS)
 
-INCLUDES =						\
-	-I$(top_srcdir)/src				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
-	-I$(includedir)					\
-	$(GNOME_INCLUDEDIR)
+gladedir = $(datadir)/gedit-2/glade
+glade_DATA = spell-checker.glade2
 
-gladedir = $(datadir)/gedit/glade
-glade_DATA = spell.glade
+gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
 
-EXTRA_DIST = $(glade_DATA)
+gedit-spell-checker-dialog-marshal.c: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
+	echo "#include \"gedit-spell-checker-dialog-marshal.h\"" > $@ && \
+	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
+
+EXTRA_DIST = $(glade_DATA) gedit-spell-checker-dialog-marshal.list 
+
+CLEANFILES = $(BUILT_SOURCES) 

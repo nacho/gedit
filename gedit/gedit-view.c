@@ -621,28 +621,6 @@ gedit_view_delete_selection (GeditView *view)
 				"insert"));
 }
 
-void
-gedit_view_select_all (GeditView *view)
-{
-	/* FIXME: it does not select the last char of the buffer */
-  	GtkTextBuffer* buffer = NULL;
-	GtkTextIter start_iter, end_iter;
-	
-	gedit_debug (DEBUG_VIEW, "");
-
-	buffer = gtk_text_view_get_buffer (view->priv->text_view);
-	g_return_if_fail (buffer != NULL);
-
-	gtk_text_buffer_get_start_iter (buffer, &start_iter);
-	gtk_text_buffer_get_end_iter (buffer, &end_iter);
-
-	gtk_text_buffer_place_cursor (buffer, &end_iter);
-
-	gtk_text_buffer_move_mark (buffer,
-                               gtk_text_buffer_get_mark (buffer, "selection_bound"),
-                               &start_iter);
-}
-
 GeditDocument*	
 gedit_view_get_document	(const GeditView *view)
 {

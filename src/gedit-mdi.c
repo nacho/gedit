@@ -186,7 +186,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 
 	bonobo_mdi_set_ui_template_file (BONOBO_MDI (mdi), GEDIT_UI_DIR "gedit-ui.xml", gedit_verbs);
 	
-	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
+	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/OpenDocuments/");
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (mdi), "top_window_created",

@@ -113,7 +113,7 @@
 /* Fallback default values. Keep in sync with gedit.schemas */
 
 #define GPM_DEFAULT_USE_DEFAULT_FONT 	0 /* FALSE */
-#define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Courier Medium 12"
+#define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Monospace 12"
 
 #define GPM_DEFAULT_USE_DEFAULT_COLORS 	1 /* TRUE */
 #define GPM_DEFAULT_BACKGROUND_COLOR	(const gchar*) "#ffffffffffff"
@@ -151,9 +151,9 @@
 #define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_CHAR"
 #define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
 
-#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 9"
-#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Helvetica 11"
-#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 8"
+#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace 9"
+#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans Normal 11"
+#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans Normal 8"
 
 #define GPM_DEFAULT_MAX_RECENTS		5
 
@@ -1054,15 +1054,33 @@ DEFINE_STRING_PREF (print_font_body,
 		    GPM_PRINT_FONT_BODY,
 		    GPM_DEFAULT_PRINT_FONT_BODY);
 
+const gchar *
+gedit_prefs_manager_get_default_print_font_body (void)
+{
+	return GPM_DEFAULT_PRINT_FONT_BODY;
+}
+
 /* Font used to print headers */
 DEFINE_STRING_PREF (print_font_header,
 		    GPM_PRINT_FONT_HEADER,
 		    GPM_DEFAULT_PRINT_FONT_HEADER);
 
+const gchar *
+gedit_prefs_manager_get_default_print_font_header (void)
+{
+	return GPM_DEFAULT_PRINT_FONT_HEADER;
+}
+
 /* Font used to print line numbers */
 DEFINE_STRING_PREF (print_font_numbers,
 		    GPM_PRINT_FONT_NUMBERS,
 		    GPM_DEFAULT_PRINT_FONT_NUMBERS);
+
+const gchar *
+gedit_prefs_manager_get_default_print_font_numbers (void)
+{
+	return GPM_DEFAULT_PRINT_FONT_NUMBERS;
+}
 
 
 /* Max number of files in "Recent Files" menu. 

@@ -1,246 +1,518 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 
- * Spell Check plugin.
- * Roberto Majadas <phoenix@nova.es>
+/*
+ * spell.c
+ * This file is part of gedit
  *
+ * Copyright (C) 2002 Paolo Maggi 
  *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA. 
  */
  
+/*
+ * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <gnome.h>
-#include <glade/glade.h>
-#include <ctype.h>
+#include <string.h> /* For strlen */
 
-#include "window.h"
-#include "document.h"
-#include "plugin.h"
-#include "utils.h"
+#include <glib/gutils.h>
+#include <libgnome/gnome-i18n.h>
 
-/*Chema , echale un vistazo a este codigo que se me atraviesa . Lo que he hecho es meter en un
- buffer (buffer) todo el texto , buffer_position => posicion respecto al buffer y
- spelling_position posicion respecto al widget de texto . Mira haber si sabes donde falla */
+#include <gedit-menus.h>
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
 
-GtkWidget *spell;
+#include "gedit-spell-checker.h"
+#include "gedit-spell-checker-dialog.h"
 
-gchar *buffer;
-guint  buffer_length;
 
-static void
-destroy_plugin (PluginData *pd)
+#define MENU_ITEM_LABEL		N_("_Spell check")
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
+#define MENU_ITEM_NAME		"SpellChecker"	
+#define MENU_ITEM_TIP		N_("Check the spelling of the current document.")
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+
+typedef struct _CheckRange CheckRange;
+
+struct _CheckRange
 {
-	gedit_debug (DEBUG_PLUGINS, "");
-}
+	gint start;
+	gint end;
 
-static void
-spell_check_finish ( GtkWidget *widget, gpointer data )
+	gint current;
+};
+
+static GQuark spell_checker_id = 0;
+static GQuark check_range_id = 0;
+
+static GeditSpellChecker *
+get_spell_checker_from_document (GeditDocument *doc)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	GeditSpellChecker *spell;
+	gpointer data;
 
-	if (buffer != NULL)
-		g_free (buffer);
-	buffer = NULL;
-}
-
-static void
-spell_check_cancel_clicked (GtkWidget *widget, gpointer data)
-{
-	gnome_dialog_close (GNOME_DIALOG (widget));
-}
-
-static gchar *
-spell_check_parse_word (void)
-{
-	static gint buffer_position;
-	gint word_length;
-	gchar *word;
-
-	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	word_length = 0;
-	while ( (buffer_position + word_length) <= buffer_length)
+	g_return_val_if_fail (doc != NULL, NULL);
+
+	data = g_object_get_qdata (G_OBJECT (doc), spell_checker_id);
+
+	if (data == NULL)
 	{
-		if (isalnum (buffer [buffer_position + word_length]))
-		{
-			word_length++;
-			continue;
-		}
-#if 0
-		g_print ("buff_pos:%i wordlenght:%i -%s-\n",
-			 buffer_position, word_length, word);
-#endif
-		word = g_strndup ( buffer + buffer_position, word_length);
+		spell = gedit_spell_checker_new ();
 
-		/* We need to advance buffer_position to the start
-		   of the next word for the next time */
-		buffer_position += word_length;
-
-		while (!isalnum (buffer [buffer_position]))
-			buffer_position++;
-		
-		return word;
+		g_object_set_qdata_full (G_OBJECT (doc), 
+					 spell_checker_id, 
+					 spell, 
+					 (GDestroyNotify)g_object_unref);
+	}
+	else
+	{
+		g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (data), NULL);
+		spell = GEDIT_SPELL_CHECKER (data);
 	}
 
-	return NULL;
+	return spell;
 }
+
+static void
+set_check_range (GeditDocument *doc, gint start, gint end)
+{
+	CheckRange *range;
+	gpointer data;
+	GtkTextIter start_iter;
 	
-static gint
-spell_check_start ( void )
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (start >= 0);
+	g_return_if_fail (start < gedit_document_get_char_count (doc));
+	g_return_if_fail ((end >= start) || (end < 0));
+
+	data = g_object_get_qdata (G_OBJECT (doc), check_range_id);
+
+	if (data != NULL)
+		g_free (data);
+
+	if (end < 0)
+		end = gedit_document_get_char_count (doc) - 1;
+
+	g_return_if_fail (end >= start);
+
+	range = g_new0 (CheckRange, 1);
+
+	range->start = start;
+	range->end = end;
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
+			&start_iter, start);
+
+	if (!gtk_text_iter_starts_word (&start_iter) && !gtk_text_iter_inside_word (&start_iter))
+	{	
+		/* if we're neither at the beginning nor inside a word,
+		 * me must be in some spaces.
+		 * skip forward to the beginning of the next word. */
+		if (gtk_text_iter_forward_word_end (&start_iter))
+			gtk_text_iter_backward_word_start (&start_iter);	
+	}
+
+	range->current = MIN (gtk_text_iter_get_offset (&start_iter), range->end);
+
+	g_object_set_qdata_full (G_OBJECT (doc), 
+				 check_range_id, 
+				 range, 
+				 (GDestroyNotify)g_free);
+
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", start, end, start);
+}
+
+static CheckRange*
+get_check_range (GeditDocument *doc)
+{
+	CheckRange *range;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (doc != NULL, NULL);
+
+	range = (CheckRange *) g_object_get_qdata (G_OBJECT (doc), check_range_id);
+
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range->start, range->end, 
+			range->current);
+
+	return range;
+}
+
+
+static void
+update_current (GeditDocument *doc, gint current)
+{
+	CheckRange *range;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (current >= 0);
+	
+	range = get_check_range (doc);
+	g_return_if_fail (range != NULL);
+
+	range->current = current;
+
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range->start, range->end, 
+		range->current);
+}
+
+static void
+delete_check_range (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (doc != NULL);
+
+	g_object_steal_qdata (G_OBJECT (doc), check_range_id);
+}
+
+static gboolean
+get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
+{
+	const CheckRange *range;
+	
+	GtkTextIter end_iter;
+	GtkTextIter current_iter;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (start != NULL, FALSE);
+	g_return_val_if_fail (end != NULL, FALSE);
+	
+	range = get_check_range (doc);
+	g_return_val_if_fail (range != NULL, FALSE);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
+			&current_iter, range->current);
+
+	end_iter = current_iter;
+
+	if (gtk_text_iter_inside_word (&end_iter))
+		if (!gtk_text_iter_forward_word_end (&end_iter))
+			return FALSE;
+
+	*start = range->current;
+	*end = MIN (gtk_text_iter_get_offset (&end_iter), range->end);
+
+	return (*start < *end);
+}
+
+static gboolean
+goto_next_word (GeditDocument *doc)
+{
+	CheckRange *range;
+	
+	GtkTextIter current_iter;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	range = get_check_range (doc);
+	g_return_val_if_fail (range != NULL, FALSE);
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
+			&current_iter, range->current);
+
+	if (!gtk_text_iter_forward_word_ends (&current_iter, 2))
+		return FALSE;
+	
+	if (!gtk_text_iter_backward_word_start (&current_iter))
+		return FALSE;
+
+	update_current (doc, gtk_text_iter_get_offset (&current_iter));
+
+	return TRUE;
+}
+
+static gchar*
+get_next_mispelled_word (GeditDocument *doc)
+{
+	CheckRange *range;
+	gint start, end;
+	gchar *word;
+	GeditSpellChecker *spell;
+
+	g_return_val_if_fail (doc != NULL, NULL);
+
+	range = get_check_range (doc);
+	g_return_val_if_fail (range != NULL, NULL);
+
+	spell = get_spell_checker_from_document (doc);
+	g_return_val_if_fail (spell != NULL, NULL);
+
+	if (!get_current_word_extents (doc, &start, &end))
+		return NULL;
+
+	word = gedit_document_get_chars (doc, start, end);
+	g_return_val_if_fail (word != NULL, NULL);
+
+	gedit_debug (DEBUG_PLUGINS, "Word to check: %s", word);
+
+	while (gedit_spell_checker_check_word (spell, word, -1, NULL))
+	{
+		g_free (word);
+
+		if (!goto_next_word (doc))
+			return NULL;
+
+		if (!get_current_word_extents (doc, &start, &end))
+			return NULL;
+
+		word = gedit_document_get_chars (doc, start, end);
+		g_return_val_if_fail (word != NULL, NULL);
+
+		gedit_debug (DEBUG_PLUGINS, "Word to check: %s", word);
+	}
+
+	if (!goto_next_word (doc))
+		range->current = gedit_document_get_char_count (doc) - 1;
+
+	if (word != NULL)
+	{
+		gedit_document_set_selection (doc, start, end);
+		gedit_view_scroll_to_cursor (gedit_get_active_view ());
+	}
+
+	return word;
+}
+
+static gboolean
+ignore_cb (GeditSpellCheckerDialog *dlg, const gchar *w, GeditDocument *doc)
 {
 	gchar *word = NULL;
-	gint retval;
-
-	g_print ("Spell check start\n");
+	gedit_debug (DEBUG_PLUGINS, "");
 	
-	word = spell_check_parse_word ();
-	g_print ("Word to check for : *%s*\n", word);
+	g_return_val_if_fail (doc != NULL, TRUE);
+	g_return_val_if_fail (w != NULL, TRUE);
 
-	/* if we are done */
+	word = get_next_mispelled_word (doc);
 	if (word == NULL)
-		return FALSE;
-
-	retval = 0;
-	
-	retval = gnome_spell_check (GNOME_SPELL(spell), word);
-
-	g_print ("retval %i\n", retval);
-
-	if (retval!=1)
-		g_print ("!!!!!!!!!!!!!!!!!"
-			 "!!!!!!!!!!!!!!!!!"
-			 "!!!!!!!!!!!!!!!!!"
-			 "!!!!!\n");
-	if (retval == 0)
-		return FALSE;
-	else
-		return TRUE;
-}
-
-
-static void
-handled_word_cb ( GtkWidget *spell , gpointer data )
-{
-	GString *word_to_change ;
-	GnomeSpellInfo *si = (GnomeSpellInfo *) GNOME_SPELL(spell)->spellinfo->data;
-	gint len ;
-	Document *doc = data;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	g_return_if_fail (doc!=NULL);
-
-	g_print ("Returning from handled_word_cb\n");
-
-	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
-
-	return;
-	
-#if 0
-	len = strlen (si->word);
-	
-	if (si->replacement)
 	{
-	
-                word_to_change = g_string_new (si->replacement);
-	        gedit_document_replace_text ( doc , word_to_change->str , spelling_position , len  , TRUE );
-	}
-	else
-	{
+		delete_check_range (doc);
+
+		gedit_spell_checker_dialog_set_completed (dlg);
 		
-		word_to_change = g_string_new (si->word);
-        }
-	
-	spelling_position = spelling_position + word_to_change->len + 1 ;
+		return TRUE;
+	}
 
-	g_string_free (word_to_change,TRUE);
+	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
+			word, -1);
 
-	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
-#endif
-	
+	g_free (word);
+
+	return TRUE;
 }
 
 static void
-spell_check (void)
+show_empty_document_dialog ()
 {
-
-	GladeXML *gui;
-	GtkWidget *cancel;
-	GtkWidget *dialog;
-	GtkWidget *dialog_vbox;
-	Document *doc;
-    
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	doc = gedit_document_current ();
-
-	if (doc == NULL)
-		return ;
-
-	gui = glade_xml_new (GEDIT_GLADEDIR "/spell.glade",NULL);
-
-	if (!gui)
-	{
-		g_warning ("Could not find spell.glade");
-		return;
-	}
-
-	dialog      = glade_xml_get_widget (gui, "dialog");
-	cancel      = glade_xml_get_widget (gui, "cancel_button");
-	dialog_vbox = glade_xml_get_widget (gui, "vbox");
+	 GtkWidget *message_dlg; 
 	
+	 message_dlg = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+			                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			                       GTK_MESSAGE_INFO,
+			                       GTK_BUTTONS_OK,
+					       _("The document is empty."));
+	 gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+	 
+	 gtk_dialog_run (GTK_DIALOG (message_dlg));
+	 
+	 gtk_widget_destroy (message_dlg);
+}
 
-	g_return_if_fail (dialog_vbox != NULL);
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (cancel != NULL);
+static void
+show_no_mispelled_words_dialog (gboolean sel)
+{
+	 GtkWidget *message_dlg; 
+	
+	 message_dlg = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+			                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			                       GTK_MESSAGE_INFO,
+			                       GTK_BUTTONS_OK,
+					       sel ? 
+					       _("The selected text does not contain mispelled words.") :
+					       _("The document does not contain mispelled words."));
 
-	spell = gnome_spell_new();
-
-	g_return_if_fail (spell  != NULL);
-
-	gtk_box_pack_start (GTK_BOX (dialog_vbox),
-			    spell, FALSE, FALSE, FALSE);
-	gtk_widget_show (spell);
-
-	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (spell_check_cancel_clicked), NULL);
-	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (spell_check_finish), NULL);
-	gtk_signal_connect (GTK_OBJECT (spell), "handled_word",
-			    GTK_SIGNAL_FUNC (handled_word_cb), doc);
-
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-
-	buffer = gedit_document_get_buffer (doc);
-	buffer_length = strlen (buffer);
-
-	if (buffer_length < 1)
-		return;
-
-
-	gtk_widget_show_all (dialog);
-	gtk_object_destroy (GTK_OBJECT (gui));
-
-	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
+	 gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+	 
+	 gtk_dialog_run (GTK_DIALOG (message_dlg));
+	 
+	 gtk_widget_destroy (message_dlg);
 }
 
 
-
-gint
-init_plugin (PluginData *pd)
+static void
+spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+	GeditDocument *doc;
+	GeditSpellChecker *spell;
+	GtkWidget *dlg;
+	gint start;
+	gint end;
+	gchar *word;
+	gboolean sel = FALSE;
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	pd->destroy_plugin = destroy_plugin;
-	pd->name = _("Spell Check");
-	pd->desc = _("Spell Check");
-	pd->author = "Roberto Majadas <phoenix@nova.es>";
-	pd->needs_a_document = TRUE;
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc != NULL);
+
+	spell = get_spell_checker_from_document (doc);
+	g_return_if_fail (spell != NULL);
+
+	if (gedit_document_get_char_count (doc) <= 0)
+	{
+		show_empty_document_dialog ();
+		return;
+	}
+
+	if (gedit_document_get_selection (doc, &start, &end))
+	{
+		/* get selection points */
+		set_check_range (doc, start, end);
+		sel = TRUE;
+	}
+	else	
+		set_check_range (doc, 0, -1);
 	
-	pd->private_data = (gpointer)spell_check;
+	word = get_next_mispelled_word (doc);
+	if (word == NULL)
+	{
+		delete_check_range (doc);
+
+		show_no_mispelled_words_dialog (sel);
+		return;
+	}
+
+	dlg = gedit_spell_checker_dialog_new_from_spell_checker (spell);
+	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
+	gtk_window_set_transient_for (GTK_WINDOW (dlg), 
+				      GTK_WINDOW (gedit_get_active_window ()));
+
+	g_signal_connect (G_OBJECT (dlg), "ignore", G_CALLBACK (ignore_cb), doc);
+	g_signal_connect (G_OBJECT (dlg), "ignore_all", G_CALLBACK (ignore_cb), doc);
+
+	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
+			word, -1);
+
+	g_free (word);
+
+	gtk_widget_show (dlg);
+}	
+
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
+{
+	BonoboUIComponent *uic;
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	uic = gedit_get_ui_component_from_window (window);
+
+	doc = gedit_get_active_document ();
+
+	if ((doc == NULL) || gedit_document_is_readonly (doc))
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
+	else
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
 
 	return PLUGIN_OK;
 }
+
+G_MODULE_EXPORT GeditPluginState
+destroy (GeditPlugin *plugin)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	return PLUGIN_OK;
+}
+	
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList *top_windows;
+        gedit_debug (DEBUG_PLUGINS, "");
+
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME,
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP, GTK_STOCK_SPELL_CHECK,
+				     spell_cb);
+
+                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
+                top_windows = g_list_next (top_windows);
+        }
+
+        return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
+{
+	/* initialize */
+	gedit_debug (DEBUG_PLUGINS, "");
+     
+	pd->name = _("Spell checker");
+	pd->desc = _("Checks the spelling of the current document.");
+	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
+	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
+	
+	pd->private_data = NULL;
+
+	spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
+	check_range_id = g_quark_from_static_string ("CheckRangeID");
+
+	return PLUGIN_OK;
+}
+
+
+
+

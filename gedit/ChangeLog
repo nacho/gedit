@@ -1,3 +1,29 @@
+2002-09-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-commands.c (gedit_cmd_edit_select_all): use gedit_document_set_selection
+	instead of gedit_view_select_all
+
+	* gedit-document.[ch] (gedit_document_get_buffer)(gedit_document_delete_all_text)
+	(gedit_document_get_selected_text)(gedit_document_has_selected_text): removed
+	(gedit_document_set_selection)(gedit_document_get_selection): new functions
+	
+	* gedit-mdi.c (gedit_mdi_init): set the correct child list path
+
+	* gedit-prefs-manager.c: Courier->Monospace, Helvetica->Sans Normal
+	(fix bug #88076)
+	(gedit_prefs_manager_get_default_print_font_*): new functions
+	
+	* dialogs/gedit-preferences-dialog.c: ditto
+
+	* gedit-print.c: use the new gedit-document API
+
+	* dialogs/gedit-dialog-replace.c: ditto
+
+	* gedit-ui.xml: updated to be HIG compliant
+
+	* gedit-view.[ch] (gedit_view_select_all): removed
+
+
 2002-09-05  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/gedit-encodings-dialog.c:

@@ -69,7 +69,6 @@ void 		gedit_view_cut_clipboard 	(GeditView *view);
 void 		gedit_view_copy_clipboard 	(GeditView *view);
 void 		gedit_view_paste_clipboard	(GeditView *view);
 void 		gedit_view_delete_selection	(GeditView *view);
-void 		gedit_view_select_all 		(GeditView *view);
 
 void		gedit_view_scroll_to_cursor 	(GeditView *view);
 

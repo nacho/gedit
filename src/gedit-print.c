@@ -298,7 +298,7 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 
 	g_return_val_if_fail (pji != NULL, TRUE);
 	
-	if (!gedit_document_has_selected_text (pji->doc))
+	if (!gedit_document_get_selection (pji->doc, NULL, NULL))
 		selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
 	else
 		selection_flag = GNOME_PRINT_RANGE_SELECTION;
@@ -416,22 +416,30 @@ gedit_print_document (GeditPrintJobInfo *pji)
 	gint paragraph_delimiter_index;
 	gint next_paragraph_start;
 	gdouble fontheight;
-	gint start;
+	gint start, end_sel;
 	
 	gedit_debug (DEBUG_PRINT, "");	
 	
 	switch (pji->range_type)
 	{
 		case GNOME_PRINT_RANGE_ALL:
-			text_to_print = gedit_document_get_buffer (pji->doc);
+			text_to_print = gedit_document_get_chars (pji->doc, 0, -1);
 			text_end = text_to_print + strlen (text_to_print);
 			break;
 		case GNOME_PRINT_RANGE_SELECTION:
-			text_to_print = gedit_document_get_selected_text (pji->doc, &start, NULL);
-			text_end = text_to_print + strlen (text_to_print);
+			if (gedit_document_get_selection (pji->doc, &start, &end_sel))
+			{
+				text_to_print = gedit_document_get_chars (pji->doc, 
+							start, end_sel);
+				
+				text_end = text_to_print + strlen (text_to_print);
+		
+				pji->first_line_to_print =  
+					gedit_document_get_line_at_offset (pji->doc, start) + 1;
+			}
+			else
+				g_return_if_fail (FALSE);
 
-			pji->first_line_to_print =  
-				gedit_document_get_line_at_offset (pji->doc, start) + 1;
 			break;
 		default:
 			g_return_if_fail (FALSE);
