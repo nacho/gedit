@@ -53,6 +53,7 @@ typedef struct _gE_window {
 	GtkWidget *menubar;
 	GtkMenuFactory *factory; /* <-- Auto-plugin detection needs this */
 	GtkWidget *toolbar;
+	GtkWidget *toolbar_handle;	/* holds the toolbar */
 	GtkWidget *notebook;
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;

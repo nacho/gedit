@@ -153,7 +153,9 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
-	gtk_widget_show (toolbar);
+	gw->toolbar_handle = gtk_handle_box_new();
+	gtk_container_add(GTK_CONTAINER(gw->toolbar_handle), toolbar);
+	gtk_widget_show(toolbar);
 
 #ifndef WITHOUT_GNOME
 	gnome_app_set_toolbar (GNOME_APP (gw->window), GTK_TOOLBAR(toolbar));
@@ -177,6 +179,8 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 	if (!GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_show (window->toolbar);
 	
+	if (!GTK_WIDGET_VISIBLE(window->toolbar_handle))
+		gtk_widget_show (window->toolbar_handle);
 
 #ifndef WITHOUT_GNOME
 	if (!GTK_WIDGET_VISIBLE (GNOME_APP (window->window)->toolbar->parent))
@@ -198,6 +202,9 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 
 	if (GTK_WIDGET_VISIBLE(window->toolbar))
 		gtk_widget_hide (window->toolbar);
+		
+	if (GTK_WIDGET_VISIBLE(window->toolbar_handle))
+		gtk_widget_hide (window->toolbar_handle);
 		
 #ifndef WITHOUT_GNOME
 	/*

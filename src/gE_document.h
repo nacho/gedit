@@ -28,7 +28,7 @@ extern "C" {
 #define MSGBAR_FILE_OPENED		"File Opened..."
 #define MSGBAR_FILE_CLOSED		"File Closed..."
 #define MSGBAR_FILE_CLOSED_ALL	"All Files Closed..."
-#define MSGBAR_FILE_PRINTED		"File Printed..."
+#define MSGBAR_FILE_PRINTED		"Print Command Executed..."
 #define MSGBAR_FILE_SAVED		"File Saved..."
 #define MSGBAR_CUT				"Selection Cut..."
 #define MSGBAR_COPY				"Selection Copied..."

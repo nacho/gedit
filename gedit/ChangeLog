@@ -1,3 +1,17 @@
+1998-07-17  Andy Kahn <kahn@zk3.dec.com>
+
+	* rework and improve the print routine:
+		- rename _file_print() to file_print_execute()
+		- creates temporary file a *lot* faster now (dumps all the
+		text in one swell foop instead of one character at a time)
+		- deletes the temporary file
+		- drop a lot of excess/unnecessary variables
+		- add a small note that code was borrowed from gIDE
+		- misc code cleanup
+		- more todo: see file_print_execute() comments in code
+
+	* add a toolbar handle, so you can have floating toolbars.  whee
+
 1998-07-16  Alex Roberts  <bse@dial.pipex.com>
 
 	* Fixed printing in non-Gnome
@@ -307,7 +321,7 @@
 
 	* diff.c: New file.  A plugin to do diffs.
 
-1998-06-xx  Andy Kahn <kahn@zk3.dec.com>
+1998-06-21  Andy Kahn <kahn@zk3.dec.com>
  
        * fix new_pixmap() so that Gtk warning messages go away.
  

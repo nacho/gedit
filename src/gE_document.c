@@ -120,8 +120,8 @@ gE_window *gE_window_new()
   gE_create_toolbar(window, data);
   
 #ifdef WITHOUT_GNOME
-  gtk_box_pack_start(GTK_BOX(box1), window->toolbar, FALSE, TRUE, 0);
-  gtk_widget_show(window->toolbar);
+  gtk_box_pack_start(GTK_BOX(box1), window->toolbar_handle, FALSE, TRUE, 0);
+  gtk_widget_show(window->toolbar_handle);
 #endif
 
   gtk_widget_show (box1);
