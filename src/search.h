@@ -39,8 +39,9 @@ void gedit_find_cb (GtkWidget *widget, gpointer data);
 void gedit_find_again_cb (GtkWidget *widget, gpointer data);
 void gedit_replace_cb (GtkWidget *widget, gpointer data);
 void gedit_goto_line_cb (GtkWidget *widget, gpointer data);
+/*
 void gedit_file_info_cb (GtkWidget *widget, gpointer data);
-
+*/
 
 guint gedit_search_line_to_pos (gint line, gint *lines);
 

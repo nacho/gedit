@@ -575,8 +575,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 		    ui_info [count].moreinfo == edit_cut_cb     ||
 		    ui_info [count].moreinfo == edit_copy_cb    ||
 		    ui_info [count].moreinfo == edit_paste_cb   ||
-		    ui_info [count].moreinfo == gedit_find_cb   ||
-		    ui_info [count].moreinfo == gedit_file_info_cb  )
+		    ui_info [count].moreinfo == gedit_find_cb   /*||
+		    ui_info [count].moreinfo == gedit_file_info_cb*/  )
 		{
 			widget =  ui_info [count].widget;
 			if (GTK_IS_WIDGET (widget))
@@ -620,8 +620,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 				    sub_ui_info [sub_count].moreinfo == gedit_replace_cb ||
 				    sub_ui_info [sub_count].moreinfo == gedit_goto_line_cb ||
 				    sub_ui_info [sub_count].moreinfo == gedit_view_add_cb||
-				    sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb ||
-				    sub_ui_info [sub_count].moreinfo == gedit_file_info_cb  )
+				    sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb /*||
+				    sub_ui_info [sub_count].moreinfo == gedit_file_info_cb */ )
 				{
 					widget =  sub_ui_info [sub_count].widget;
 					if (GTK_IS_WIDGET (widget))

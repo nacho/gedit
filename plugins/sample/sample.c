@@ -29,7 +29,7 @@ destroy_plugin (PluginData *pd)
 }
 
 
-/* the function that actually does the wrok */
+/* the function that actually does the work */
 static void
 insert_hello (void)
 {

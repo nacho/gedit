@@ -674,7 +674,7 @@ gedit_document_load (GList *file_list)
 		        gchar* tmp_str2;
 			
 			can_be_created = TRUE;
-						
+			
 			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
 			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
 
@@ -682,9 +682,15 @@ gedit_document_load (GList *file_list)
 			
 			g_free (tmp_str);
 			g_free (tmp_str2);
-
+			
 			gnome_vfs_uri_unref (uri);	
 			uri = gnome_vfs_uri_new (file_name);
+
+			if(uri == NULL) 
+			{
+				g_print("Wrong URI: %s\n", file_name);
+				continue;
+			}
 		}
 		else
 		{

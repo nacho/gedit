@@ -283,7 +283,7 @@ gedit_search_verify (void)
 	
 }
 
-
+#if 0
 static void
 file_info ( gint pos,  gint *total_chars, gint *total_words, gint *total_lines,
 	    gint *total_paragraphs, gint *line_number, gint *column_number )
@@ -427,6 +427,7 @@ gedit_file_info_cb (GtkWidget *widget, gpointer data)
 	g_free (msg);
 	
 }
+#endif
 
 gint
 gedit_search_pos_to_line (guint pos, gint *numlines)

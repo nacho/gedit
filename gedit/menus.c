@@ -152,7 +152,7 @@ GnomeUIInfo gedit_search_menu[] =
 		gedit_goto_line_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO
 	},
-
+/*
 	GNOMEUIINFO_SEPARATOR,
 
 	{
@@ -162,7 +162,7 @@ GnomeUIInfo gedit_search_menu[] =
 		gedit_file_info_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX
 	},
-
+*/
 
 	GNOMEUIINFO_END
 };
