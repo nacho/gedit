@@ -150,24 +150,22 @@ gE_window_new(void)
 	/* add a new document to the window */
 	gE_document_new(w);
 	gtk_box_pack_start(GTK_BOX(box1), w->notebook, TRUE, TRUE, 0);
-	box2 = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(box2), 0);
-	gtk_box_pack_start(GTK_BOX(box1), box2, FALSE, TRUE, 0);
 
 	/* statusbar */
-	w->statusbar = gtk_label_new("Welcome to gEdit");
+	w->statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+	gnome_app_set_statusbar (GNOME_APP (w->window),
+		GTK_WIDGET (w->statusbar));
 	gE_msgbar_timeout_add(w);
-	gtk_box_pack_start(GTK_BOX(box2), w->statusbar, TRUE, TRUE, 0);
-	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);
+/*	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);*/
 
 	/* line and column indicators */
 
 	tmp = gtk_label_new("Column:");
-	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 1);
+	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 1);
 	gtk_widget_show(tmp);
 
 	w->col_label = gtk_label_new("0");
-	gtk_box_pack_start(GTK_BOX(box2), w->col_label, FALSE, FALSE, 1);
+	gtk_box_pack_start(GTK_BOX(w->statusbar), w->col_label, FALSE, FALSE, 1);
 	gtk_widget_set_usize(w->col_label, 40, 0);
 	gtk_widget_show(w->col_label);
 
@@ -175,10 +173,10 @@ gE_window_new(void)
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(count_lines_cb), w);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(w->statusbar), tmp, FALSE, FALSE, 0);
 	gtk_widget_show(tmp);
 
-	w->statusbox = box2;
+	w->statusbox = w->statusbar;
 
 	/* finish up */
 	#ifdef WITHOUT_GNOME
@@ -188,7 +186,7 @@ gE_window_new(void)
 	#endif
 	gtk_widget_show(w->statusbar);
 	gtk_widget_show(box1);
-	gtk_widget_show(box2);
+/*	gtk_widget_show(box2);*/
 	gtk_widget_show(w->notebook);
 	gtk_widget_show(w->window);
 
@@ -569,7 +567,7 @@ void
 gE_msgbar_set(gE_window *window, char *msg)
 {
 	if (lastmsg == NULL || strcmp(lastmsg, msg)) {
-		gtk_label_set(GTK_LABEL(window->statusbar), msg);
+		gnome_appbar_set_status (GNOME_APPBAR (window->statusbar), msg);
 		if (lastmsg)
 			g_free(lastmsg);
 		lastmsg = g_strdup(msg);
