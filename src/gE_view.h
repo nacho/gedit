@@ -65,6 +65,10 @@ typedef struct _gE_view {
 	gint line_wrap;
 	gint read_only;
 	
+	/* Temporary flags */
+	gpointer temp1;
+	gpointer temp2;
+	
 } gE_view;
 
 typedef struct _gE_view_class {

@@ -1,3 +1,20 @@
+Tue Aug 17 23:38:53 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* This code was done some time last week.. somehow i managed to mess up
+	  most of the source code.. which i have now fixed and can continue 
+	  coding =)
+	
+	* gE_mdi.c: (add_view) Added some temporary checking of views.. 
+	  something is borked somewhere.. a lot of this will be removed
+	
+	* gE_view.c: (view_list_insert) new function.. we use this with a
+	  g_list_foreach in (doc_insert_text). its a better method for 
+	  getting the text to insert.. although its still not working properly..
+	  bleh.. 
+	
+	* gE_view.h: Added some temop flags to the gE_view struct.. for use with
+	  the new list_insert function above.
+
 Tue Aug 10 18:58:57 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* main.h: (gE_documnet) Added views GList.

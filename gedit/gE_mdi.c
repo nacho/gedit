@@ -329,16 +329,36 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	gchar *buf;
 	GtkText *text;
 	gE_document *doc = GE_DOCUMENT (data);
+	gE_view *view;
+	gint v;
 	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
   
 	if (mdi->active_view)
 	{
+	   view = GE_VIEW (mdi->active_view);
 	   g_print ("contents: %d\n", 
 			GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
-	     
+	   
+	   buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
+	   										0, 
+	   										gtk_text_get_length (
+	   											GTK_TEXT (view->text))));
+	   
+	   if (strcmp (doc->buf->str, buf))
+	   {
+	   	/*g_free (doc->buf->str);*/
+	   	
+	   	doc->buf = g_string_new (buf);
+	   }
+	   
 	   child = gnome_mdi_get_child_from_view (mdi->active_view);
-	       
-	   gnome_mdi_add_view (mdi, child);
+	   
+	    GE_VIEW (mdi->active_view)->temp1 = (gint) 1;
+	   
+	    gnome_mdi_add_view (mdi, child);
+	   
+	   if (GE_VIEW (mdi->active_view)->temp1 == (gint)1)
+	     g_warning ("eeeerk!");
 	   
 	   /* Now the gE_view has been added, we can update the GList */
 	   doc->views = g_list_append (doc->views, GE_VIEW (mdi->active_view));
