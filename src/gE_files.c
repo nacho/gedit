@@ -61,7 +61,7 @@ clear_text (gE_view *view)
  * TODO - lock/unlock file before/after
  */
 gint
-gE_file_open(gE_document *doc, gchar *fname)
+gE_file_open (gE_document *doc, gchar *fname)
 {
 
 	char *nfile, *name;
@@ -98,14 +98,20 @@ gE_file_open(gE_document *doc, gchar *fname)
   	          nth_view = g_list_nth_data (doc->views, i);
   	          
   	          gE_view_refresh (nth_view);
-  	          
+
   	          /* Make the document readonly if you can't write to the file. */
 		  gE_view_set_read_only (nth_view, access (fname, W_OK) != 0);
+
+		  if (!nth_view->changed_id)
+	  		nth_view->changed_id =	gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
+									    GTK_SIGNAL_FUNC(view_changed_cb), nth_view); 
   	        }
   	        
   	        flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
 		gnome_app_flash(mdi->active_window, flash);
 		g_free(flash);
+		
+		doc->changed = FALSE;
 		
 		recent_add (doc->filename);
 		recent_update (GNOME_APP (mdi->active_window));

@@ -136,7 +136,7 @@ void gE_window_refresh(gE_window *w)
    
   
 	gE_window_set_status_bar (settings->show_status);
-  
+/*  
 	for (i = 0; i < NUM_MDI_MODES; i++) {
 	
 	  if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active) {
@@ -152,7 +152,7 @@ void gE_window_refresh(gE_window *w)
           }
           
         }
-  
+*/
 	for (i = 0; i < g_list_length (mdi->children); i++) {
   
 	  doc = GE_DOCUMENT(g_list_nth_data (mdi->children, i));
@@ -189,11 +189,6 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	/* Font Settings */
 	settings->font = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->font)));
 
-	/* MDI Settings */
-	for (i = 0; i < NUM_MDI_MODES; i++)
-	  if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active)
-	    settings->mdi_mode = i;
-  
 	/* Window Settings */
 	settings->width = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preW)));
 	settings->height = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preH)));  
@@ -203,6 +198,22 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	  settings->close_doc = FALSE;
 	if (GTK_TOGGLE_BUTTON (prefs->DButton2)->active)
 	  settings->close_doc = TRUE;
+
+	for (i = 0; i < NUM_MDI_MODES; i++) {
+	
+	  if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active) {
+	
+            if (mdiMode != mdi_type[i]) {
+          
+              mdiMode = mdi_type[i];
+              gnome_mdi_set_mode (mdi, mdiMode);
+            }
+         
+            break;
+        
+          }
+          
+        }
   
 	gE_window_refresh(data->window);
 	gE_save_settings();

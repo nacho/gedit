@@ -237,7 +237,7 @@ get_filename(gE_data *data)
 	char *title, *msg;
 
 	g_assert(data != NULL);
-	g_assert(data->window != NULL);
+
 	doc = gE_document_current();
 
 	if (!GE_VIEW(mdi->active_view)->changed && doc->filename) {

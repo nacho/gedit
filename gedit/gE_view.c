@@ -194,11 +194,6 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	gE_view *nth_view = NULL;
 	GtkWidget *text;
 
-	data = g_malloc0 (sizeof (gE_data));
-	line_pos_cb(NULL, data);
-	
-	g_free (data);
-
 	if (!view->split_screen)
 	  return;
 	
@@ -231,11 +226,28 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	  
 	strncpy (buffer, insertion_text, length);
 
+	doc = view->document;
+
 /*#ifdef DEBUG */
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
-/*#endif*/
+/*#endif*/	
 
-	doc = view->document;
+	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
+	
+	  g_message ("g_string_insert");
+	  doc->buf = g_string_insert (doc->buf, position, buffer);
+	
+	} else if (position == 0) {
+	  
+	  g_message ("g_string_prepend");
+	  doc->buf = g_string_prepend (doc->buf, buffer);
+	  
+	} else {
+	  
+	  g_message ("g_string_append");
+	  doc->buf = g_string_append (doc->buf, buffer);
+	
+	}
 
 	data = g_malloc0 (sizeof (gE_data));
 	
@@ -248,13 +260,6 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
 						  &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));
-	
-
-	if ((doc->buf->len > 0) && (position < doc->buf->len))
-	  doc->buf = g_string_insert (doc->buf, position, buffer);
-	else
-	  doc->buf = g_string_append (doc->buf, buffer);
-	
 
 	
 	g_free (data);
@@ -271,15 +276,9 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 
 	GtkWidget *significant_other;
 	gE_document *doc;
-	gE_data *data;
 	gE_view *nth_view = NULL;
 	gint n;
 
-	data = g_malloc0 (sizeof (gE_data));
-	line_pos_cb(NULL, data);
-	
-	g_free (data);
-		
 	if (!view->split_screen)
 	  return;
 
@@ -306,7 +305,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	if (end_pos + (end_pos - start_pos) <= doc->buf->len) {
 	
 	  g_message ("g_string_erase");
-	  doc->buf = g_string_erase (doc->buf, end_pos, (end_pos - start_pos));
+	  doc->buf = g_string_erase (doc->buf, start_pos, (end_pos - start_pos));
 	  
 	} else {
 	  
@@ -470,8 +469,10 @@ line_pos_cb(GtkWidget *w, gE_data *data)
 	
 	app = gnome_mdi_get_active_window  (mdi);
 	
-	sprintf (col, "Column:\t%d",
-	 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/7);
+	sprintf (col, "Column: %d",
+	 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/6);
+	
+	gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
 	
 }
 
@@ -492,6 +493,59 @@ gint gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 
 }
 
+gint gE_event_key_press (GtkWidget *w, GdkEventKey *event)
+{
+
+	gint mask;
+	gE_data *data = g_malloc0 (sizeof (gE_data));
+
+	line_pos_cb (NULL, NULL);
+	
+	mask = GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD2_MASK |
+		GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
+	
+	/* Control key related */
+	if (event->state == GDK_CONTROL_MASK) {
+	  
+	  switch (event->keyval) {
+	  
+	    case 'x':
+	    		edit_cut_cb (w, NULL);
+	    		break;
+	    
+	    case 'c':
+	    		edit_copy_cb (w, NULL);
+	    		break;
+	    
+	    case 'v':
+	    		edit_paste_cb (w, NULL);
+	    		break;
+	    
+	    case 's':
+	    		file_save_cb (w, NULL);
+	    		break;
+	    
+	    case 'p':
+	    		file_print_cb (w, (gpointer)data);
+	    		break;
+
+	    case 'w':
+	    		file_close_cb (w, NULL);
+	    		break;
+	    
+	    default:
+	    		return TRUE;
+	    		break;
+	  
+	  }
+	
+	}
+	
+	
+	return TRUE;
+
+}
+
 /* The Widget Stuff */
 
 static void gE_view_realize (GtkWidget *w)
@@ -499,7 +553,6 @@ static void gE_view_realize (GtkWidget *w)
 
 	if (GTK_WIDGET_CLASS (parent_class)->realize)
 				(* GTK_WIDGET_CLASS(parent_class)->realize)(w);  	
-
 
 }
 
@@ -614,6 +667,9 @@ static void gE_view_init (gE_view *view)
 	gtk_signal_connect_after(GTK_OBJECT(view->text), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);
 
+	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
+					GTK_SIGNAL_FUNC (gE_event_key_press), 0);
+
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
 	of implementing undo/redo... 
@@ -667,9 +723,12 @@ static void gE_view_init (gE_view *view)
 	
 	/* - Signals - */
 
-	gtk_signal_connect_after(GTK_OBJECT(view->split_screen),
-		"button_press_event",
+	gtk_signal_connect_after(GTK_OBJECT(view->split_screen), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);
+
+	gtk_signal_connect_after (GTK_OBJECT (view->split_screen), "key_press_event",
+					GTK_SIGNAL_FUNC (gE_event_key_press), NULL);
+
 
 	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
 		                             GTK_SIGNAL_FUNC(doc_insert_text_cb),

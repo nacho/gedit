@@ -1,3 +1,66 @@
+Fri Sep 10 18:47:17 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (gE_event_key_press) Added keypress event shortcuts. ^S, ^P
+	  and ^W for save, print and close are now implemented (Although ^W functions as
+	  a delete-word function with the GtkText widget.. minor problem)
+	
+	* src/gE_print.c: (get_filename) Removed assertion check for a data->window.
+
+Fri Sep 10 17:43:31 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (line_pos_cb) Use the statusbar to display the column number.
+	  Also fixed the method of finding the column number.. its a divide by 6, not
+	  7! aargh! Now the indicator is finally accurate. =)
+	  (gE_event_key_press) Update the column indicator each time a key is pressed.
+	  (gE_view_init) Attached key_press_event signals to the text boxes.
+	  (doc_insert_text_cb) (doc_delete_text_cb) Removed calls to line_pos_cb.
+
+Fri Sep 10 17:16:31 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_window.c: (gE_window_new) Re-Added the g_list_foreach that adds the
+	  plugins to the window. Now when we create a new window, the plugins dont
+	  mysteriously vanish from their menu..
+
+Fri Sep 10 16:42:19 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_window.c: (gE_window_new) Removed fucntion call to gE_get_settings.
+	  This is why the mdi modes were getting all borked before. as before we werent
+	  setting the correct values and it was getting all confuzzled. I'm not sure
+	  WHY we were calling gE_get_settings each time a new window is requested, but
+	  anyway...
+
+Fri Sep 10 16:14:25 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_prefs.c: (gE_save_settings) (gE_get_settings) Ok, why bother with
+	  the settings->mdi_mode variable. Just save and load into the global mdiMode.
+	
+	* src/gE_prefs_box.c: (gE_apply) Removed the settings->mdi_mode cofniguring
+	  operation.
+	
+	* hrmm.. it appears setting the mode to toplevel works fine now.. how strange.
+
+Fri Sep 10 16:05:04 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_prefs_box.c: (gE_apply) changing the global mdi setting, needs to 
+	  refer to the proper GnomeMDI values, not the radiobutton group values.
+	  We still go crazy when swtiching to toplevel view, btu at least we store
+	  the correct mdi type value now. Also, moved the code to change the mdi
+	  mode into this function.
+
+Fri Sep 10 14:56:44 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (doc_insert_text_cb) Moved buffer insertion code to before
+	  the point at which the other views and the split screen are updated.
+	  Also check the position, and if it's 0, we do a g_string_prepend.
+	  This seems to have fixed the buffer corruption that occured before.
+	
+	* src/commands.c: (file_revert_cb) Check the doc->changed flag, not the
+	  gE_view changed flag. 
+	
+	* gE_files.c: (gE_file_open) Reset changed flags for all views, and for
+	  the document. This fixes problems when you revert changes to a saved
+	  file.
+
 Thu Sep  9 21:36:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_view.[ch]: (gE_view_refresh) New function. To refresh the text

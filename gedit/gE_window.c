@@ -47,7 +47,6 @@ extern GtkWidget  *col_label;
 /* Prototype for setting the window icon */
 void gE_window_set_icon(GtkWidget *window, char *icon);
 
-
 /*gE_window */
 void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
@@ -62,6 +61,17 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
+	gtk_drag_dest_set (GTK_WIDGET(app),
+		GTK_DEST_DEFAULT_MOTION |
+		GTK_DEST_DEFAULT_HIGHLIGHT |
+		GTK_DEST_DEFAULT_DROP,
+		drag_types, n_drag_types,
+		GDK_ACTION_COPY);
+		
+	gtk_signal_connect (GTK_OBJECT (app),
+		"drag_data_received",
+		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
+
 	ptr = g_new (int, 1);
 	*ptr = ++last_assigned_integer;
 	g_hash_table_insert (win_int_to_pointer, ptr, app);
@@ -70,19 +80,13 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
-	gE_get_settings ();
+	/*gE_get_settings ();*/
+
+	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
+
 
 	settings->num_recent = 0;
 	recent_update(GNOME_APP(app));
-
-	gtk_drag_dest_set (GTK_WIDGET(app),
-		GTK_DEST_DEFAULT_ALL,
-		drag_types, n_drag_types,
-		GDK_ACTION_COPY);
-		
-	gtk_signal_connect (GTK_OBJECT (app),
-		"drag_data_received",
-		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
 	/* statusbar */
 	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
@@ -133,7 +137,6 @@ void gE_window_set_status_bar (gint show_status)
 	  gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
 
 }
-
 
 void
 child_switch (GnomeMDI *mdi, gE_document *doc)

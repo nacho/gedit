@@ -858,7 +858,7 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata)
 	    
 	  if (doc->filename) {
 	  
-	    if (GE_VIEW (mdi->active_view)->changed) {
+	    if (doc->changed) {
 	    
 	      if ((file_revert_do (doc)) == 0)
 	        return;

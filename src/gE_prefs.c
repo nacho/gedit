@@ -43,7 +43,7 @@ gE_save_settings()
 	gnome_config_set_int ("tb relief", (gint) settings->use_relief_toolbar);
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
 	gnome_config_set_int ("close doc", (gint) settings->close_doc);
-	gnome_config_set_int ("mdi mode", settings->mdi_mode);
+	gnome_config_set_int ("mdi mode", mdiMode);
 	gnome_config_set_int ("scrollbar", settings->scrollbar);
 	gnome_config_set_string ("font", settings->font);
 	gnome_config_set_int ("width", (gint) settings->width);
@@ -77,16 +77,10 @@ void gE_get_settings()
 	settings->use_relief_toolbar = gnome_config_get_int("tb relief");
 	settings->splitscreen = gnome_config_get_int("splitscreen");
 	settings->close_doc = gnome_config_get_int ("close doc");
-	settings->mdi_mode = gnome_config_get_int ("mdi mode");
-	if (!settings->mdi_mode)
-	  settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];
+	mdiMode = gnome_config_get_int ("mdi mode");
+	if (!mdiMode)
+	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];
 	   
-	if (mdiMode != settings->mdi_mode) {
-
-	  mdiMode = settings->mdi_mode;
-	  gnome_mdi_set_mode (mdi, mdiMode);
-	}
-	 
 	settings->scrollbar = gnome_config_get_int ("scrollbar");
 	if (!settings->scrollbar)
 	  settings->scrollbar = GTK_POLICY_AUTOMATIC;

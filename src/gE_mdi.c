@@ -189,9 +189,10 @@ static void gE_document_class_init (gE_document_class *class)
 	object_class = (GtkObjectClass*)class;
 	child_class = GNOME_MDI_CHILD_CLASS (class);
 	
-	/* blarg.. signals stuff.. doc_changed? FIXME */
+	/* blarg.. signals stuff.. doc_changed? FIXME 
 	
 	gtk_object_class_add_signals (object_class, gE_document_signals, LAST_SIGNAL);
+	*/
 	
 	object_class->destroy = gE_document_destroy;
 	

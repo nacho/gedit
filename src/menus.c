@@ -255,6 +255,7 @@ GnomeUIInfo gedit_help_menu []= {
 
 GnomeUIInfo gedit_plugins_menu []= {
   { GNOME_APP_UI_ENDOFINFO}
+
 };
 
 
