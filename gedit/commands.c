@@ -238,6 +238,67 @@ tab_toggle_cb(GtkWidget *widget, gpointer cbwindow)
 }
 */
 
+/* Scrollbar Options */
+void
+scrollbar_none_cb (GtkWidget *widget, gpointer cbdata)
+{
+int c, w;
+
+	for (c = 0; c < g_list_length (mdi->children); c++)
+  	   {
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_NEVER);
+
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_NEVER);
+           }
+         settings->scrollbar = GTK_POLICY_NEVER;
+}
+
+void
+scrollbar_always_cb (GtkWidget *widget, gpointer cbdata)
+{
+int c, w;
+
+	for (c = 0; c < g_list_length (mdi->children); c++)
+  	   {
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_ALWAYS);
+
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_ALWAYS);
+           }
+         settings->scrollbar = GTK_POLICY_ALWAYS;
+
+}
+
+void
+scrollbar_auto_cb (GtkWidget *widget, gpointer cbdata)
+{
+int c, w;
+
+	for (c = 0; c < g_list_length (mdi->children); c++)
+  	   {
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[0]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_AUTOMATIC);
+
+	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (
+	        ((gE_document *) g_list_nth_data (mdi->children, c))->scrwindow[1]),
+				      GTK_POLICY_NEVER,
+				      GTK_POLICY_AUTOMATIC);
+           }
+         settings->scrollbar = GTK_POLICY_NEVER;
+}
 
 /* ---- Auto-indent Callback(s) --- */
 
@@ -1008,10 +1069,10 @@ recent_cb(GtkWidget *w, gE_data *data)
 {
 	gE_document *doc = gE_document_current ();
 	
-	if (doc->filename != NULL || doc->changed != 0)
-		doc = gE_document_new ();
-		
-	gE_file_open (gE_document_current (), data->temp1);
+	if (doc->filename || doc->changed)
+	  doc = gE_document_new_with_file (data->temp1);
+	else		
+	  gE_file_open (doc, data->temp1);
 }
 
 

@@ -63,7 +63,7 @@ typedef struct _gE_document {
 	GtkWidget *text;
 	GtkWidget *tab_label;
 	GtkWidget *viewport;
-	GtkWidget *scrwindow;
+	GtkWidget *scrwindow[2];
 	
 	gchar *filename;
 	gint changed_id;

@@ -26,7 +26,7 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gE_prefslib.h"
+#include "gE_prefs.h"
 #include "gE_document.h"
 #include "gE_files.h"
 #include "commands.h"
@@ -178,12 +178,12 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	doc->splitscreen = FALSE;*/
 
 	/* Create the upper split screen */
-	doc->scrwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (vpaned), doc->scrwindow, TRUE, TRUE, 1);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (doc->scrwindow),
+	doc->scrwindow[0] = gtk_scrolled_window_new (NULL, NULL);
+	gtk_box_pack_start (GTK_BOX (vpaned), doc->scrwindow[0], TRUE, TRUE, 1);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (doc->scrwindow[0]),
 				      GTK_POLICY_NEVER,
-				      GTK_POLICY_ALWAYS);
-      	gtk_widget_show (doc->scrwindow);
+				      settings->scrollbar);
+      	gtk_widget_show (doc->scrwindow[0]);
 
 	doc->text = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->text), !doc->read_only);
@@ -196,7 +196,7 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	gtk_signal_connect_after (GTK_OBJECT(doc->text), "insert_text",
 		GTK_SIGNAL_FUNC(auto_indent_cb), NULL);
 
-	gtk_container_add (GTK_CONTAINER (doc->scrwindow), doc->text);
+	gtk_container_add (GTK_CONTAINER (doc->scrwindow[0]), doc->text);
 
 	style = gtk_style_new();
 	gtk_widget_set_style(GTK_WIDGET(doc->text), style);
@@ -229,12 +229,12 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) doc);
 
 	/* Create the bottom split screen */
-	doc->scrwindow = gtk_scrolled_window_new (NULL, NULL);
-	gtk_box_pack_start (GTK_BOX (vpaned), doc->scrwindow, TRUE, TRUE, 1);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (doc->scrwindow),
+	doc->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
+	gtk_box_pack_start (GTK_BOX (vpaned), doc->scrwindow[1], TRUE, TRUE, 1);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (doc->scrwindow[1]),
 				      GTK_POLICY_NEVER,
-				      GTK_POLICY_ALWAYS);
-      	gtk_widget_show (doc->scrwindow);
+				      settings->scrollbar);
+      	gtk_widget_show (doc->scrwindow[1]);
 
 	doc->split_screen = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->split_screen), !doc->read_only);
@@ -248,7 +248,7 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
 		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), window);*/
 
-	gtk_container_add (GTK_CONTAINER (doc->scrwindow), doc->split_screen);
+	gtk_container_add (GTK_CONTAINER (doc->scrwindow[1]), doc->split_screen);
 
 	doc->split_parent = GTK_WIDGET (doc->split_screen)->parent;
 

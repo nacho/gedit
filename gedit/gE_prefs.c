@@ -48,17 +48,17 @@ gE_save_settings()
 {
 /*	window = (gE_window *) cbwindow;*/
 
-/*	gE_prefs_set_int("tab pos", (gint) settings->tab_pos);*/
-	gE_prefs_set_int("auto indent", (gboolean) settings->auto_indent);
-	gE_prefs_set_int("show statusbar", (gboolean) settings->show_status);
-	gE_prefs_set_int("toolbar", (gint) settings->have_toolbar);
-	gE_prefs_set_int("tb text", (gint) settings->have_tb_text);
-	gE_prefs_set_int("tb pix", (gint) settings->have_tb_pix);
-	gE_prefs_set_int("tb relief", (gint) settings->use_relief_toolbar);
-	gE_prefs_set_int("splitscreen", (gint) settings->splitscreen);
-	gE_prefs_set_int("mdi mode", settings->mdi_mode);
-
-	gE_prefs_set_char("font", settings->font);
+/*	gE_prefs_set_int ("tab pos", (gint) settings->tab_pos);*/
+	gE_prefs_set_int ("auto indent", (gboolean) settings->auto_indent);
+	gE_prefs_set_int ("show statusbar", (gboolean) settings->show_status);
+	gE_prefs_set_int ("toolbar", (gint) settings->have_toolbar);
+	gE_prefs_set_int ("tb text", (gint) settings->have_tb_text);
+	gE_prefs_set_int ("tb pix", (gint) settings->have_tb_pix);
+	gE_prefs_set_int ("tb relief", (gint) settings->use_relief_toolbar);
+	gE_prefs_set_int ("splitscreen", (gint) settings->splitscreen);
+	gE_prefs_set_int ("mdi mode", settings->mdi_mode);
+	gE_prefs_set_int ("scrollbar", settings->scrollbar);
+	gE_prefs_set_char ("font", settings->font);
 	if (settings->print_cmd == "")
 		gE_prefs_set_char ("print command", "lpr -rs %s");
 	else
@@ -85,6 +85,11 @@ void gE_get_settings()
 	     mdiMode = settings->mdi_mode;
              gnome_mdi_set_mode (mdi, mdiMode);
            }
+	 
+	 settings->scrollbar = gE_prefs_get_int ("scrollbar");
+	 if (settings->scrollbar == NULL)
+	   settings->scrollbar = GTK_POLICY_AUTOMATIC;
+	 
 	 
 	 settings->font = gE_prefs_get_char("font");
 	 if (settings->font == NULL)

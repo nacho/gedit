@@ -136,7 +136,21 @@ GnomeUIInfo gedit_tab_menu []= {
 	GNOMEUIINFO_END
 };
 
+GnomeUIInfo gedit_scrbar_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("_None"),
+	  N_("Don't have a scrollbar"),
+	  scrollbar_none_cb, (gpointer) GE_DATA, NULL },
 
+	{ GNOME_APP_UI_ITEM, N_("_Always"),
+	  N_("Always have the scrollbar"),
+	  scrollbar_always_cb, (gpointer) GE_DATA, NULL },
+
+	{ GNOME_APP_UI_ITEM, N_("_Automatic"),
+	  N_("Only have scrollbar when it's needed"),
+	  scrollbar_auto_cb, (gpointer) GE_DATA, NULL },
+
+	GNOMEUIINFO_END
+};
 
 
 GnomeUIInfo gedit_settings_menu []= {
@@ -174,6 +188,9 @@ GnomeUIInfo gedit_settings_menu []= {
 
 	{ GNOME_APP_UI_SUBTREE, N_("_Document Tabs"),
 	  N_("Change the placement of the document tabs"), &gedit_tab_menu },
+	  
+	{ GNOME_APP_UI_SUBTREE, N_("_Scrollbar"),
+	  N_("Change visibility options of the scrollbar"), &gedit_scrbar_menu },
 
 	GNOMEUIINFO_SEPARATOR,
 

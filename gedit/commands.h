@@ -55,6 +55,11 @@ extern void tab_lef_cb(GtkWidget *widget, gpointer cbwindow);
 extern void tab_rgt_cb(GtkWidget *widget, gpointer cbwindow);
 extern void tab_toggle_cb(GtkWidget *widget, gpointer cbwindow);
 
+/* Scrollbar options */
+extern void scrollbar_none_cb (GtkWidget *widget, gpointer cbwindow);
+extern void scrollbar_always_cb (GtkWidget *widget, gpointer cbwindow);
+extern void scrollbar_auto_cb (GtkWidget *widget, gpointer cbwindow);
+
 /* Auto indent */
 extern gint auto_indent_cb(GtkWidget *text, char *insertion_text, int length, int *pos, gpointer cbdata);
 extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);

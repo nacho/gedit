@@ -42,6 +42,7 @@ typedef struct _gE_preference {
 	gint num_recent; /* Number of recently accessed documents in the 
 	                   Recent Documents menu */
 	gint *mdi_mode;
+	gint scrollbar;
 
 } gE_preference;
 

@@ -1,3 +1,36 @@
+1999-05-11  Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: Made the scrwindow widget an array of 2.
+	
+	* gE_mdi.c: (gE_document_create_view) Let the main text entry area use
+	  the first scrwindow widget, and the splitscreen use the second.
+	
+	* commands.[ch]: (scrollbar_never_cb,
+				  scrollbar_always_cb,
+				  scrollbar_auto_cb) New functions. Select the scrollbars
+				  to be Never on, Always on, or Automatic.
+
+	* menus.c: Added Scrollbar submenu of the settings menu. Using the above
+	  new functions to select the status of the scrollbar. (I'm not sure if
+	  this should be in the Preferences Box or not..?)
+	
+	* gE_prefs.[ch]: Save the status of the Scrollbar into settings->scrollbar.
+	  (*FIXME* This doesn't seem to be all together working properly. Maybe some
+	  kind of reference system should be done, or something..)
+
+1999-05-10  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (recent_cb) Use the same filename/modified checking
+	  that file_open_ok_sel uses in the recent document opening callback.
+	  Now when you open a recent document it doesn't open into the current
+	  document.
+	  
+	* gE_mdi.c: (gE_document_create_view) Made he vertical scrolling of the
+	  scrolled window AUTOMATIC. So now the scrollbar only appears when the
+	  text overflows the visible on-screen textbox. This was an extremly
+	  popular request, and now it's there :) (maybe it should be a configurable
+	  feature..?)
+
 1999-05-09  Alex Roberts  <bse@gedit.pn.org>
 
 	* INSTALL: Finally removed the gmodule stuff, which doesn't work
