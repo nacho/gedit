@@ -118,14 +118,15 @@ void file_open_ok_sel (GtkWidget *w, GtkFileSelection *fs)
 
 void file_save_ok_sel (GtkWidget *w, GtkFileSelection *fs)
 {
-  char *filename;
+  char *filename, *nfile;
   filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
   if (filename != NULL)
-  {  
-     gE_file_save (gE_document_current(main_window),
-     gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs)));
-    filename = NULL;
-    }
+  {
+    nfile = g_malloc(strlen(filename)+1);
+    strcpy(nfile, filename);
+    gE_file_save (gE_document_current(main_window), nfile);
+  }
+  
   if (GTK_WIDGET_VISIBLE(fs))
     gtk_widget_hide (GTK_WIDGET(fs));
 }

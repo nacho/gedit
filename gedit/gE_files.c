@@ -73,8 +73,12 @@ gint gE_file_open(gE_document *document, gchar *filename)
 	do {
 		if (fgets(str, sizeof(str)+1, file_handle) == NULL)
 			break;
-		else if ( ((int) str[0] > 31)  || ((int) str[0] > 7 && (int)str[0] <14) || ((int)str[0] == 0))
-			gtk_text_insert (GTK_TEXT(document->text), NULL, &document->text->style->black, NULL, str, strlen(str));
+			
+/* Was needed to protect against openning binary files, doesn't seem to be needed anymore.. Fix in text widget? */
+/*		else if ( ((int) str[0] > 31)  || ((int) str[0] > 7 && (int)str[0] <14) || ((int)str[0] == 0)) */
+
+		gtk_text_insert (GTK_TEXT(document->text), NULL, &document->text->style->black, NULL, str, strlen(str));
+
 	} while(!feof(file_handle));
 	fclose(file_handle);
 	gtk_text_thaw (GTK_TEXT(document->text));
@@ -107,13 +111,6 @@ gint gE_file_save(gE_document *document, gchar *filename)
 	   not to read in all the characters at once...
 							-Evan */
 
-	/* Old loop that apparently crashes when you try and save an empty file.. */
-
-/*	for (i=0; i<=(gtk_text_get_length(GTK_TEXT(document->text))-1); i++)
-		fputc((int) gtk_editable_get_chars(GTK_EDITABLE(document->text), i, i+1)[0], 
-		      file_handle);
-*/
-
 	/* New, improved loop, brought to us by T Taneli Vahakangas - thanks for the fix! :-) */
 
        for (i=1; i<=gtk_text_get_length(GTK_TEXT(document->text)); i++)
@@ -121,10 +118,7 @@ gint gE_file_save(gE_document *document, gchar *filename)
                       file_handle);
 
 	fclose(file_handle);
-/*	gtk_label_set(GTK_LABEL(document->tab_label), strip_filename(filename));
-*/	
-	/* This shoud be right, it was left out!
-				- Alex */
+	
 	document->filename = filename;
 	/*g_print("%s\n",filename);*/
 	document->changed = FALSE;
