@@ -298,6 +298,19 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 }
 
 
+/**
+ * gedit_window_set_widgets_sensitivity:
+ * @sensitive: 
+ *
+ * for sensitive = FALSE
+ * this rutine is called when a document is closed and it there aren't any documents
+ * opened it sets the menu items and toolbar items sensitivity.
+ *
+ * for sensitive = TRUE
+ * is called whenever a new document is created, and will set menu/toolbar items
+ * sensitivity to SENSITIVE
+ *
+ **/
 void
 gedit_window_set_widgets_sensitivity (gint sensitive)
 {
@@ -309,9 +322,9 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	
 	gedit_debug("", DEBUG_FILE);
 
-	if (!sensitive && gedit_document_current()!=NULL)
+	if (!sensitive && g_list_length (mdi->children) > 0)
 		return;
-	if (sensitive && gedit_document_current()==NULL)
+	if (sensitive &&g_list_length (mdi->children) == 0)
 		return;
 
 	app = g_list_nth_data (mdi->windows, 0);

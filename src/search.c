@@ -317,8 +317,19 @@ search_text_execute ( gulong starting_position,
 
 	gedit_debug ("", DEBUG_SEARCH);
 
-	g_return_val_if_fail (gedit_search_info.state ==  SEARCH_IN_PROGRESS_YES, 0);
+#if 0
+	/* FIXME: why do we get starting_position as a gulong ??? chema. It should
+	   be guint */
+	g_print ("Search text execute : start@ %i search for:%s buffer size :%i\n",
+		 (gint) starting_position,
+		 text_to_search_for,
+		 (gint) gedit_search_info.buffer_length);
+#endif
 
+	g_return_val_if_fail (gedit_search_info.state ==  SEARCH_IN_PROGRESS_YES, FALSE);
+	g_return_val_if_fail (starting_position < gedit_search_info.buffer_length, FALSE);
+
+	
 	case_sensitive_mask = case_sensitive?0:32;
 	text_length = strlen (text_to_search_for);
 	for ( p2=starting_position; p2 < gedit_search_info.buffer_length; p2 ++)
@@ -334,7 +345,12 @@ search_text_execute ( gulong starting_position,
 	}
 
 	if (p2 == gedit_search_info.buffer_length)
+	{
+#if 0
+		g_print ("Search NOT FOUND\n");
+#endif
 		return FALSE;
+	}
 
 	if (return_the_line_number)
 		*line_found = pos_to_line ( p2, total_lines);
@@ -344,6 +360,9 @@ search_text_execute ( gulong starting_position,
 	if (gedit_view_active() != gedit_search_info.view)
 		g_warning("View is not the same !!!!!!!!!!!! search.c");
 
+#if 0
+	g_print ("Search found !\n");
+#endif
 	return TRUE;
 }
 

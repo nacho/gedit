@@ -72,7 +72,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	GtkWidget *search_entry, *replace_entry, *case_sensitive, *radio_button_1;
 	gint line_found, total_lines, eureka;
 	gint start_search_from;
-	guint pos_found, start_pos = 0, end_pos = 0;
+	guint pos_found, start_position = 0, end_pos = 0;
 	gint search_text_length, replace_text_length;
 	gchar * text_to_search_for, *text_to_replace_with;
 	
@@ -117,13 +117,13 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 	switch (start_search_from){
 	case 0:
-		start_pos = 0;
+		start_position = 0;
 		break;
 	case 1:
-		if (gedit_view_get_selection (view, &start_pos, &end_pos))
-			start_pos = end_pos;
+		if (gedit_view_get_selection (view, &start_position, &end_pos))
+			start_position = end_pos;
 		else
-			start_pos = gedit_view_get_position (view);
+			start_position = gedit_view_get_position (view);
 		break;
 	default:
 		g_warning ("Invalid start search from value");
@@ -150,7 +150,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
 		replacements = gedit_search_replace_all_execute ( view,
-								  start_pos,
+								  start_position,
 								  text_to_search_for,
 								  text_to_replace_with,
 								  GTK_TOGGLE_BUTTON (case_sensitive)->active,
@@ -217,19 +217,24 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			gedit_search_start();
 
 			/* After replacing this occurrence, act as is a Find Next was pressed */
+			/* we also need to modify start_positionition, since a replacement has been made */
 			button = 0;
+			start_position = start_position - search_text_length + replace_text_length;
 		}
 	}
 	
 	if (button == 0) /* Find Next */
 	{
-		eureka = search_text_execute ( start_pos,
-					       GTK_TOGGLE_BUTTON (case_sensitive)->active,
-					       text_to_search_for,
-					       &pos_found,
-					       &line_found,
-					       &total_lines,
-					       TRUE);
+		if (start_position >= gedit_search_info.buffer_length)
+			eureka = FALSE;
+		else
+			eureka = search_text_execute ( start_position,
+						       GTK_TOGGLE_BUTTON (case_sensitive)->active,
+						       text_to_search_for,
+						       &pos_found,
+						       &line_found,
+						       &total_lines,
+						       TRUE);
 
 		if (!eureka)
 		{
