@@ -9,7 +9,7 @@ dist-hook:
 	-cp $(EXTRA_DIST) $(distdir)
 
 install-data-local:
-	$(mkinstalldirs) $(gedit_helpdir)
-	$(INSTALL_DATA)  $(srcdir)/index.html $(gedit_helpdir)
-	$(INSTALL_DATA)  $(srcdir)/topic.dat $(gedit_helpdir)
+	$(mkinstalldirs) $(DESTDIR)$(gedit_helpdir)
+	$(INSTALL_DATA)  $(srcdir)/index.html $(DESTDIR)$(gedit_helpdir)
+	$(INSTALL_DATA)  $(srcdir)/topic.dat $(DESTDIR)$(gedit_helpdir)
 
