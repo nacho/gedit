@@ -91,6 +91,9 @@ struct _GeditDocumentPrivate
 	gboolean  	     last_search_was_case_sensitive;
 	gboolean  	     last_search_was_entire_word;
 
+	gboolean             auto_save;
+	gint                 auto_save_interval;
+
 	guint		     auto_save_timeout;
 	gboolean	     last_save_was_manually; 
 
@@ -326,6 +329,13 @@ gedit_document_init (GeditDocument *document)
 					    gedit_prefs_manager_get_undo_actions_limit ());
 
 	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
+
+	document->priv->auto_save = gedit_prefs_manager_get_auto_save ();
+	document->priv->auto_save = (document->priv->auto_save != FALSE);
+
+	document->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
+	if (document->priv->auto_save_interval <= 0)
+		document->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
 }
 
 static void
@@ -470,18 +480,14 @@ gedit_document_new_with_uri (const gchar          *uri,
 void 		
 gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 {
-	gboolean auto_save;
-	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
 	g_return_if_fail (document->priv != NULL);
 
-	auto_save = gedit_prefs_manager_get_auto_save ();
-	
 	if (readonly) 
 	{
-		if (auto_save && (document->priv->auto_save_timeout > 0))
+		if (document->priv->auto_save_timeout > 0)
 		{
 			gedit_debug (DEBUG_DOCUMENT, "Remove autosave timeout");
 
@@ -491,17 +497,14 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 	}
 	else
 	{
-		if (auto_save && (document->priv->auto_save_timeout <= 0))
+		if (document->priv->auto_save && 
+		    (document->priv->auto_save_timeout <= 0) && 
+                    !gedit_document_is_untitled (document))
 		{
-			gint auto_save_interval;
-			
 			gedit_debug (DEBUG_DOCUMENT, "Install autosave timeout");
 
-			auto_save_interval = 
-				gedit_prefs_manager_get_auto_save_interval ();
-				
 			document->priv->auto_save_timeout = g_timeout_add 
-				(auto_save_interval * 1000 * 60,
+				(document->priv->auto_save_interval * 1000 * 60,
 		 		 (GSourceFunc)gedit_document_auto_save,
 		  		 document);		
 		}
@@ -560,6 +563,7 @@ gedit_document_real_loaded (GeditDocument *document, const GError *error)
 	g_return_if_fail (document->priv->uri != NULL);
 
 	/* FIXME: commented since it does not work as expected - Paolo */
+	
 	/*
 	data = gedit_metadata_manager_get (document->priv->uri,
 					   "position");
@@ -725,10 +729,7 @@ gedit_document_auto_save (GeditDocument *doc)
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (!gedit_document_is_readonly (doc), FALSE);
-
-	/* Remove timeout if now auto_save is FALSE */
-	if (!gedit_prefs_manager_get_auto_save ()) 
-		return FALSE;
+	g_return_val_if_fail (!gedit_document_is_untitled (doc), FALSE);
 
 	if (!gedit_document_get_modified (doc))
 		return TRUE;
@@ -1376,7 +1377,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 		const GeditEncoding *encoding;
 		gchar *converted_text;
 
-		if (gedit_encoding_get_current () != gedit_encoding_get_utf8 ())
+		if (gedit_encoding_get_current () == gedit_encoding_get_utf8 ())
 		{
 			if (g_utf8_validate (stdin_data, -1, NULL))
 			{
@@ -1519,7 +1520,6 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 gboolean 
 gedit_document_save (GeditDocument *doc, GError **error)
 {	
-	gboolean auto_save;
 	gboolean create_backup_copy;
 	const GeditEncoding *encoding;
 	
@@ -1535,16 +1535,12 @@ gedit_document_save (GeditDocument *doc, GError **error)
 	encoding = gedit_document_get_encoding (doc);
 	g_return_val_if_fail (encoding != NULL, FALSE);
 	
-	auto_save = gedit_prefs_manager_get_auto_save ();
 	create_backup_copy = gedit_prefs_manager_get_create_backup_copy ();
 		
-	if (auto_save) 
+	if (doc->priv->auto_save_timeout > 0)
 	{
-		if (doc->priv->auto_save_timeout > 0)
-		{
-			g_source_remove (doc->priv->auto_save_timeout);
-			doc->priv->auto_save_timeout = 0;
-		}
+		g_source_remove (doc->priv->auto_save_timeout);
+		doc->priv->auto_save_timeout = 0;
 	}
 	
 	ret = gedit_document_save_as_real (doc, 
@@ -1559,13 +1555,10 @@ gedit_document_save (GeditDocument *doc, GError **error)
 		g_get_current_time (&doc->priv->time_of_last_save_or_load);
 	}
 
-	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	if (doc->priv->auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
-		gint auto_save_interval = 
-			gedit_prefs_manager_get_auto_save_interval ();
-
 		doc->priv->auto_save_timeout =
-			g_timeout_add (auto_save_interval * 1000 * 60,
+			g_timeout_add (doc->priv->auto_save_interval * 1000 * 60,
 				       (GSourceFunc) gedit_document_auto_save, 
 				       doc);
 	}
@@ -1577,7 +1570,6 @@ gboolean
 gedit_document_save_as (GeditDocument* doc, const gchar *uri, 
 			const GeditEncoding *encoding, GError **error)
 {	
-	gboolean auto_save;
 	gboolean create_backup;
 
 	gboolean ret = FALSE;
@@ -1591,16 +1583,12 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 	if (encoding == NULL)
 		encoding = gedit_document_get_encoding (doc);
 
-	auto_save = gedit_prefs_manager_get_auto_save ();
 	create_backup = gedit_prefs_manager_get_create_backup_copy ();
 
-	if (auto_save) 
+	if (doc->priv->auto_save_timeout > 0)
 	{
-		if (doc->priv->auto_save_timeout > 0)
-		{
-			g_source_remove (doc->priv->auto_save_timeout);
-			doc->priv->auto_save_timeout = 0;
-		}
+		g_source_remove (doc->priv->auto_save_timeout);
+		doc->priv->auto_save_timeout = 0;
 	}
 
 	if (gedit_document_save_as_real (doc, uri, encoding, create_backup, error))
@@ -1616,13 +1604,10 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 		ret = TRUE;
 	}
 
-	if (auto_save && (doc->priv->auto_save_timeout <= 0)) 
+	if (doc->priv->auto_save && (doc->priv->auto_save_timeout <= 0)) 
 	{
-		gint auto_save_interval =
-			gedit_prefs_manager_get_auto_save_interval ();
-		
 		doc->priv->auto_save_timeout =
-			g_timeout_add (auto_save_interval * 1000 * 60,
+			g_timeout_add (doc->priv->auto_save_interval * 1000 * 60,
 				       (GSourceFunc)gedit_document_auto_save, doc);
 	}
 
@@ -2637,3 +2622,79 @@ gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
 	return (current_time.tv_sec - doc->priv->time_of_last_save_or_load.tv_sec);
 }
 
+void
+gedit_document_enable_auto_save (GeditDocument *doc, gboolean enable)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	enable = (enable != FALSE);
+
+	if (doc->priv->auto_save == enable)
+		return;
+
+	doc->priv->auto_save = enable;
+
+	if (doc->priv->auto_save && 
+	    (doc->priv->auto_save_timeout <= 0) && 
+	    !gedit_document_is_untitled (doc) &&
+	    !gedit_document_is_readonly (doc))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "Install autosave timeout");
+
+		doc->priv->auto_save_timeout = g_timeout_add 
+							(doc->priv->auto_save_interval * 1000 * 60,
+			 		 		 (GSourceFunc)gedit_document_auto_save,	
+					  		 doc);		
+
+		return;
+	}
+	
+	if (!doc->priv->auto_save && (doc->priv->auto_save_timeout > 0))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "Remove autosave timeout");
+
+		g_source_remove (doc->priv->auto_save_timeout);
+		doc->priv->auto_save_timeout = 0;
+
+		return;
+	}
+
+	g_return_if_fail ((!doc->priv->auto_save && (doc->priv->auto_save_timeout <= 0)) || 
+			  gedit_document_is_untitled (doc) || gedit_document_is_readonly (doc));
+}
+
+void
+gedit_document_set_auto_save_interval (GeditDocument *doc, gint interval)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (interval > 0);
+
+	if (doc->priv->auto_save_interval == interval)
+		return;
+	
+	doc->priv->auto_save_interval = interval;
+		
+	if (!doc->priv->auto_save)
+		return;
+
+	if (doc->priv->auto_save_timeout > 0)
+	{
+		gedit_debug (DEBUG_DOCUMENT, "Remove autosave timeout");
+
+		g_source_remove (doc->priv->auto_save_timeout);
+	
+		gedit_debug (DEBUG_DOCUMENT, "Install new autosave timeout");
+
+		g_return_if_fail (!gedit_document_is_untitled (doc));
+		g_return_if_fail (!gedit_document_is_readonly (doc));
+
+		doc->priv->auto_save_timeout = g_timeout_add 
+						(doc->priv->auto_save_interval * 1000 * 60,
+		 		 		 (GSourceFunc)gedit_document_auto_save,	
+				  		 doc);		
+	}
+}

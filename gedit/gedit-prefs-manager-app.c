@@ -86,7 +86,10 @@ static void 		gedit_prefs_manager_max_recents_changed (GConfClient *client,
 								 guint cnxn_id, 
 								 GConfEntry *entry, 
 								 gpointer user_data);
-
+static void		gedit_prefs_manager_auto_save_changed (GConfClient *client,
+							       guint cnxn_id,
+							       GConfEntry *entry,
+							       gpointer user_data);
 static gint window_state = -1;
 static gint window_height = -1;
 static gint window_width = -1;
@@ -157,6 +160,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_MAX_RECENTS,
 				gedit_prefs_manager_max_recents_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SAVE_DIR,
+				gedit_prefs_manager_auto_save_changed,
 				NULL, NULL, NULL);
 	}
 
@@ -717,6 +725,7 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 	{
 		gint ul;
 		GList *docs;
+		GList *l;
 		
 		if (entry->value->type == GCONF_VALUE_INT)
 			ul = gconf_value_get_int (entry->value);
@@ -726,15 +735,17 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 		ul = CLAMP (ul, -1, 250);
 
 		docs = gedit_get_open_documents ();
-
-		while (docs != NULL)
+		l = docs;
+		while (l != NULL)
 		{
-			GeditDocument *d = GEDIT_DOCUMENT (docs->data);
+			GeditDocument *d = GEDIT_DOCUMENT (l->data);
 
 			gedit_document_set_max_undo_levels (d, ul);
 		
-			docs = g_list_next (docs);
+			l = g_list_next (l);
 		}
+
+		g_list_free (docs);
 	}
 }
 
@@ -903,3 +914,67 @@ gedit_prefs_manager_max_recents_changed (GConfClient *client,
 	}
 }
 
+static void
+gedit_prefs_manager_auto_save_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	GList *docs;
+	GList *l;
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_AUTO_SAVE) == 0)
+	{
+		gboolean auto_save;
+
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			auto_save = gconf_value_get_bool (entry->value);
+		else
+			auto_save = GPM_DEFAULT_AUTO_SAVE;
+
+		docs = gedit_get_open_documents ();
+		l = docs;
+
+		while (l != NULL)
+		{
+			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
+
+			gedit_document_enable_auto_save (doc, auto_save);
+
+			l = g_list_next (l);
+		}
+
+		g_list_free (docs);
+	}
+	else if (strcmp (entry->key,  GPM_AUTO_SAVE_INTERVAL) == 0)
+	{
+		gint auto_save_interval;
+
+		if (entry->value->type == GCONF_VALUE_INT)
+		{
+			auto_save_interval = gconf_value_get_int (entry->value);
+
+			if (auto_save_interval <= 0)
+				auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
+		}
+		else
+			auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
+
+		docs = gedit_get_open_documents ();
+		l = docs;
+		
+		while (l != NULL)
+		{
+			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
+
+			gedit_document_set_auto_save_interval (doc, auto_save_interval);
+
+			l = g_list_next (l);
+		}
+
+		g_list_free (docs);
+	}
+}

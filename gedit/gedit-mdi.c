@@ -1050,7 +1050,7 @@ gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 	g_signal_connect (G_OBJECT (child), "find_state_changed",
 			  G_CALLBACK (gedit_mdi_child_find_state_changed_handler), 
 			  NULL);
-
+		    
 	return TRUE;
 }
 
@@ -1096,7 +1096,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 static gint 
 gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
-	GeditDocument* doc;
+	GeditDocument *doc;
 	gboolean close = TRUE;
 	
 	gedit_debug (DEBUG_MDI, "");

@@ -4,7 +4,8 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000-2002 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2003-2004 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2004. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -86,7 +87,7 @@ struct _GeditDocumentClass
 	/* File name (uri) changed */
 	void (* name_changed)		(GeditDocument    *document);
 
-	/* Connect to the followinf two signals for loading and reverting */
+	/* Connect to the following two signals for loading and reverting */
 	/* Document loaded */
 	void (* loaded)			(GeditDocument    *document,
 					 const GError     *error);
@@ -202,6 +203,13 @@ const GeditEncoding *gedit_document_get_encoding (GeditDocument *doc);
 
 glong		gedit_document_get_seconds_since_last_save_or_load 
 						(GeditDocument *doc);
+
+void		gedit_document_enable_auto_save	(GeditDocument *doc, 
+						 gboolean       enable);
+void		gedit_document_set_auto_save_interval 
+						(GeditDocument *doc, 
+						 gint           interval);
+
 
 #endif /* __GEDIT_DOCUMENT_H__ */
 

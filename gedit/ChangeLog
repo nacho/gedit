@@ -1,5 +1,26 @@
 2004-12-13  Paolo Maggi  <paolo@gnome.org>
 
+	Fixed bug #130748: Auto save settings are not reflecting immediately
+
+	* gedit-document.c (gedit_document_init)
+	(gedit_document_set_readonly) (gedit_document_real_loaded)
+	(gedit_document_auto_save)(gedit_document_save) 
+	(gedit_document_save_as):  use new auto_save and auto_save_interval 
+	member variable. 
+	(gedit_document_enable_auto_save): new function 
+	(gedit_document_set_auto_save_interval): new function 
+	(gedit_document_load_from_stdin): fixed a "typo" while checking the encoding
+
+	* gedit-document.h: Added prototype for	gedit_document_enable_auto_save (), 
+	and gedit_docuent_set_auto_save_interval ().
+
+	* gedit-prefs-manager-app.c (gedit_prefs_manager_app_init)
+	(gedit_prefs_manager_auto_save_changed): notifies when auto save is 
+	enabled and/or auto save interval is changed.
+	(gedit_prefs_manager_undo_changed): fixed a mem leak
+
+2004-12-13  Paolo Maggi  <paolo@gnome.org>
+
 	* dialogs/gedit-preferences-dialog.c (setup_editor_page): check for the 
 	validity of the auto_save interval.
 
