@@ -175,7 +175,10 @@ int main (int argc, char **argv)
 	window->have_toolbar = FALSE;
 	gE_get_settings(window);
 
-	g_print("...\n");
+	#ifdef DEBUG
+	  g_print("...\n");
+	#endif
+	
 	if (file_list){
 		gE_document *doc;
 

@@ -274,7 +274,7 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 #endif
 
 	window->have_toolbar = TRUE;
-	printf("..WORK	damn you!\n");
+
 }
 
 
