@@ -222,6 +222,12 @@ load_values ()
 
 	/* FIXME: file locking - Paolo */
 	file_name = gnome_util_home_file (METADATA_FILE);
+	if (!g_file_test (file_name, G_FILE_TEST_EXISTS))
+	{
+		g_free (file_name);
+		return FALSE;
+	}
+
 	doc = xmlParseFile (file_name);
 	g_free (file_name);
 
