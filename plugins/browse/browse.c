@@ -32,10 +32,10 @@
 #include "view.h"
 #include "utils.h"
 
-#define GEDIT_PLUGIN_PROGRAM "sendmail"
+#define GEDIT_PLUGIN_PROGRAM "lynx"
 /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
    it is used to display "you can not use the [name] plugin without this program... */
-#define GEDIT_PLUGIN_NAME  _("email")
+#define GEDIT_PLUGIN_NAME  _("Browse")
 
 static GtkWidget *location_label;
 static GtkWidget *url_entry;
@@ -140,7 +140,16 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		g_free (url);
 		g_free (lynx_location);
 	}
+	else
+	{
+		if(button == 2)
+		{
+			static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html#browse" };
+			gnome_help_display (NULL, &help_entry);
 
+			return;
+		}	
+	}
 	gnome_dialog_close (GNOME_DIALOG(widget));
 }
 
@@ -186,16 +195,11 @@ gedit_plugin_browse_create_dialog (void)
 	
         /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 	 it is used to display "you can not use the [name] plugin without this program... */
-	browser_location = gedit_plugin_program_location_get ("lynx", _("browse"), FALSE);
-
-	if (browser_location == NULL)
-		return;
-
-	if (!g_file_exists (GEDIT_GLADEDIR "/browse.glade"))
-	{
-		g_warning ("Could not find %s", GEDIT_GLADEDIR "/browse.glade");
-		return;
-	}
+	browser_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
+							      GEDIT_PLUGIN_NAME,
+							      FALSE);
+	
+	g_return_if_fail(browser_location != NULL);
 	    
 	gui = glade_xml_new (GEDIT_GLADEDIR "/browse.glade", NULL);
 
@@ -230,9 +234,10 @@ gedit_plugin_browse_create_dialog (void)
 			    GTK_SIGNAL_FUNC (gedit_plugin_change_location), dialog);
 
         /* Set the dialog parent and modal type */ 
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_parent 	(GNOME_DIALOG (dialog),	 gedit_window_active());
+	gtk_window_set_modal 		(GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_default     	(GNOME_DIALOG (dialog), 0);
+	gnome_dialog_editable_enters 	(GNOME_DIALOG (dialog), GTK_EDITABLE (url_entry));
 
 	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);

@@ -183,7 +183,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		if (dont_guess)
 		{
 			g_free (program_location);
-			program_location = gedit_plugin_program_location_dialog ();
+			program_location = gedit_plugin_program_location_dialog (program_name, plugin_name);
 			dont_guess = FALSE;
 			/* If the user cancelled or pressed ESC */
 			if (program_location == NULL)
@@ -235,7 +235,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		if (GNOME_YES == gnome_dialog_run_and_close (GNOME_DIALOG (dialog)))
 		{
 			g_free (program_location);
-			program_location = g_strdup (gedit_plugin_program_location_dialog ());
+			program_location = g_strdup (gedit_plugin_program_location_dialog (program_name, plugin_name));
 			continue;
 		}
 		else

@@ -4,6 +4,8 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Shell Output plugin");
-gchar *s = N_("Directory  ");
-gchar *s = N_("Enter shell command ");
+gchar *s = N_("gedit: Shell Output plugin");
+gchar *s = N_("Specify the working directory and the command you want to run.");
+gchar *s = N_("_Working directory:");
+gchar *s = N_("Shell _command:");
+gchar *s = N_("Select the working directory...");

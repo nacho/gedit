@@ -9,6 +9,7 @@
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "document.h"
 #include "plugin.h"
@@ -21,10 +22,10 @@
 #define GEDIT_PLUGIN_NAME  _("email")
 #define GEDIT_PLUGIN_GLADE_FILE "/email.glade"
 
-static GtkWidget *from_entry;
-static GtkWidget *subject_entry;
-static GtkWidget *to_entry;
-static GtkWidget *location_label;
+static GtkWidget *from_entry = NULL;
+static GtkWidget *subject_entry = NULL;
+static GtkWidget *to_entry = NULL;
+static GtkWidget *location_label = NULL;
 
 static void
 gedit_plugin_destroy (PluginData *pd)
@@ -39,7 +40,23 @@ gedit_plugin_finish (GtkWidget *widget, gpointer data)
 }
 
 static void
-gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
+cancel_button_pressed (GtkWidget *widget, GtkWidget* data)
+{
+	gnome_dialog_close (GNOME_DIALOG (data));
+}
+
+static void
+help_button_pressed (GtkWidget *widget, gpointer data)
+{
+	/* FIXME: Paolo - change to point to the right help page */
+
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+
+	gnome_help_display (NULL, &help_entry);
+}
+
+static void
+gedit_plugin_execute (GtkWidget *widget, /*gint button,*/ GtkWidget* data)
 {
 	const gchar *subject, *from, *to;
 	const gchar *program_location = NULL;
@@ -47,11 +64,6 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	FILE *sendmail;
 	guchar * buffer;
 	gchar *command;
-
-	if (button != 0) {
-		gnome_dialog_close (GNOME_DIALOG (widget));
-		return;
-	}
 		
 	to = gtk_entry_get_text (GTK_ENTRY (to_entry));
 	from = gtk_entry_get_text (GTK_ENTRY (from_entry));
@@ -69,7 +81,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid email address.",
 									  gedit_window_active()));
 		gnome_dialog_run_and_close (error_dialog);
-		gdk_window_raise (widget->window);
+		gdk_window_raise (data->window);
 		g_free (command);
 		return;
 	}
@@ -99,7 +111,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		
 	g_free (command);
 
-	gnome_dialog_close (GNOME_DIALOG (widget));
+	gnome_dialog_close (GNOME_DIALOG (data));
 }
 
 static void
@@ -136,42 +148,36 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 static void
 gedit_plugin_create_dialog (void)
 {
-	GladeXML *gui;
-	GtkWidget *dialog;
-	GtkWidget *filename_label;
-	GtkWidget *change_location;
-	GeditDocument *doc = gedit_document_current ();
+	GladeXML *gui = NULL;
+	GtkWidget *dialog = NULL;
+	GtkWidget *filename_label = NULL;
+	GtkWidget *change_location = NULL;
+	GtkWidget *send_button = NULL;
+	GtkWidget *cancel_button = NULL;
+	GtkWidget *help_button = NULL;
+	
 	gchar *username, *fullname, *hostname;
 	gchar *from;
-	gchar *filename_label_label;
 	gchar *program_location;
 	gchar *config_string;
+	gchar *docname;
 
-	if (!doc)
-	     return;
+	GeditDocument *doc = gedit_document_current ();
+
+	g_return_if_fail (doc != NULL);
 	
 	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
 							     GEDIT_PLUGIN_NAME,
 							     FALSE);
 	
-	if (program_location == NULL)
-		return;
+	g_return_if_fail(program_location != NULL);
 	
-	if (!g_file_exists (GEDIT_GLADEDIR GEDIT_PLUGIN_GLADE_FILE))
-	{
-		g_warning ("Could not find %s",
-			   GEDIT_GLADEDIR
-			   GEDIT_PLUGIN_GLADE_FILE);
-		return;
-	}
-
 	gui = glade_xml_new (GEDIT_GLADEDIR
 			     GEDIT_PLUGIN_GLADE_FILE,
-			     NULL);
+			     "dialog");
 
-	if (!gui)
-	{
-		g_warning ("Could not find %s",
+	if (!gui) {
+		g_warning ("Could not find %s, reinstall gedit.\n",
 			   GEDIT_GLADEDIR
 			   GEDIT_PLUGIN_GLADE_FILE);
 		return;
@@ -184,6 +190,9 @@ gedit_plugin_create_dialog (void)
 	filename_label  = glade_xml_get_widget (gui, "filename_label");
 	location_label  = glade_xml_get_widget (gui, "location_label");
 	change_location = glade_xml_get_widget (gui, "change_button");
+	send_button     = glade_xml_get_widget (gui, "button0");
+	cancel_button   = glade_xml_get_widget (gui, "button1");
+	help_button     = glade_xml_get_widget (gui, "button2");
 
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (to_entry != NULL);
@@ -192,7 +201,9 @@ gedit_plugin_create_dialog (void)
 	g_return_if_fail (filename_label != NULL);
 	g_return_if_fail (location_label != NULL);
 	g_return_if_fail (change_location != NULL);
-
+	g_return_if_fail (send_button != NULL);
+	g_return_if_fail (cancel_button != NULL);
+	g_return_if_fail (help_button != NULL);
 
 	username = g_get_user_name ();
 	fullname = g_get_real_name ();
@@ -201,8 +212,7 @@ gedit_plugin_create_dialog (void)
 	config_string = gnome_config_get_string ("/gedit/email_plugin/From");
 	if (config_string)
 	{
-		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
-				    config_string);
+		gtk_entry_set_text (GTK_ENTRY (from_entry), config_string);
 		g_free (config_string);
 	}
 	else if (fullname && hostname)
@@ -212,47 +222,46 @@ gedit_plugin_create_dialog (void)
 					username,
 					hostname);
 
-		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")),
-				    from);
+		gtk_entry_set_text (GTK_ENTRY (from_entry), from);
 		g_free (from);
 	}
 
+	if (doc->filename == NULL) {
+		docname = g_strdup_printf (_("Untitled %i"), doc->untitled_number);
+	} else {
+		docname = gnome_vfs_unescape_string_for_display (doc->filename);		
+	}
+
 	/* Set the subject entry box */
-	if (doc->filename)
-		gtk_entry_set_text (GTK_ENTRY (subject_entry), g_basename(doc->filename));
-	else
-		gtk_entry_set_text (GTK_ENTRY (subject_entry), _("Untitled"));
+	gtk_entry_set_text (GTK_ENTRY (subject_entry), g_basename(docname));
 
 	/* Set the filename label */
-	if (doc->filename)
-		filename_label_label = g_strdup (g_basename(doc->filename));
-	else
-		filename_label_label = g_strdup (_("Untitled"));
-	gtk_label_set_text (GTK_LABEL (filename_label),
-			    filename_label_label);
-	g_free (filename_label_label);
-
-
+	gtk_label_set_text (GTK_LABEL (filename_label), docname);
 	
         /* Set the sendmail location label */
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
-	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "location_label")),
-			    program_location);
+	gtk_label_set_text (GTK_LABEL (location_label), program_location);
 	g_free (program_location);
 	
 
 	/* Connect the signals */
-	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_execute), NULL);
+	gtk_signal_connect (GTK_OBJECT (send_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_execute), dialog);
+	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC (cancel_button_pressed), dialog);
+	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
+			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
+	
+
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
 	gtk_signal_connect (GTK_OBJECT (change_location), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_change_location), dialog);
 
 	/* Set the dialog parent and modal type */ 
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
+	gtk_window_set_modal         (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
 
 	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);

@@ -22,6 +22,7 @@
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "window.h"
 #include "document.h"
@@ -39,6 +40,9 @@ static GtkWidget *from_document_1;
 static GtkWidget *from_document_2;
 static GtkWidget *document_list_1;
 static GtkWidget *document_list_2;
+
+static GtkWidget *from_file_1;
+static GtkWidget *from_file_2;
 static GtkWidget *file_entry_1;
 static GtkWidget *file_entry_2;
 
@@ -58,7 +62,21 @@ gedit_plugin_finish (GtkWidget *widget, gpointer data)
 }
 
 static void
-gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
+gedit_plugin_cancel_button_pressed (GtkWidget *widget, GtkWidget* data)
+{
+	gnome_dialog_close (GNOME_DIALOG (data));
+}
+
+static void
+gedit_plugin_help_button_pressed (GtkWidget *widget, gpointer data)
+{
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html#diff" };
+
+	gnome_help_display (NULL, &help_entry);
+}
+
+static void
+gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 {
 	gint state_1;
 	gint state_2;
@@ -75,20 +93,13 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 
 	GtkLabel *label;
 
-
-	label  = gtk_object_get_data (GTK_OBJECT (widget), "location_label");
-	g_return_if_fail (label!=NULL);
+	label  = gtk_object_get_data (GTK_OBJECT (data), "location_label");
+	g_return_if_fail (label != NULL);
 
 	program_location = GTK_LABEL(label)->label;
-	
-	if (button != 0)
-	{
-		gnome_dialog_close (GNOME_DIALOG (widget));
-		return;
-	}
-	
-	state_1 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_1)->group);
-	state_2 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_2)->group);
+			
+	state_1 = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (from_document_1));
+	state_2 = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (from_document_2));
 
 	file_name_1 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_1), FALSE);
 	file_name_2 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY(file_entry_2), FALSE);
@@ -104,17 +115,24 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	   - compose the diff command from the files or the temp files
 	   - execute the command and create a new document.
 	*/
+	
 	if (!state_1 && !state_2 && (document_selected_1 == document_selected_2))
 	{
-		gedit_utils_error_dialog (_("The two documents selected are the same"), widget);
+		gedit_utils_error_dialog (_("The two documents you selected are the same."), data);
 		return;
 	}
 
-	if ((state_1 && ((file_name_1 == NULL ) || (!g_file_exists (file_name_1)))) ||
-	    (state_2 && ((file_name_2 == NULL ) || (!g_file_exists (file_name_2)))) )
+	if (state_1 && ((file_name_1 == NULL ) || (!g_file_exists (file_name_1))))
 	{
-		gedit_utils_error_dialog (_("The file selected does not exists\n\n"
-					    "Please provide a valid file"), widget);
+		gedit_utils_error_dialog (_("The \"first\" file you selected does not exists.\n\n"
+					    "Please, provide a valid file."), data);
+		return;
+	}
+
+	if (state_2 && ((file_name_2 == NULL ) || (!g_file_exists (file_name_2)))) 
+	{
+		gedit_utils_error_dialog (_("The \"second\" file you selected does not exists.\n\n"
+					    "Please, provide a valid file."), data);
 		return;
 	}
 
@@ -122,21 +140,21 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	{
 		g_free (file_name_1);
 		document = (GeditDocument *)g_list_nth_data (mdi->children, document_selected_1);
-		if (gedit_document_get_buffer_length (document)<1)
+		if (gedit_document_get_buffer_length (document) < 1)
 		{
-			gedit_utils_error_dialog (_("The document contains no text"), widget);
+			gedit_utils_error_dialog (_("The \"first\" document contains no text."), data);
 			return;
 		}
 		file_name_1 = gedit_utils_create_temp_from_doc (document, 1);
-
 	}
+
 	if (!state_2)
 	{
 		g_free (file_name_2);
 		document = (GeditDocument *)g_list_nth_data (mdi->children, document_selected_2);
-		if (gedit_document_get_buffer_length (document)<1)
+		if (gedit_document_get_buffer_length (document) < 1)
 		{
-			gedit_utils_error_dialog (_("The document contains no text"), widget);
+			gedit_utils_error_dialog (_("The \"second\" document contains no text."), data);
 			return;
 		}
 		file_name_2 = gedit_utils_create_temp_from_doc (document, 2);
@@ -145,7 +163,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	if (file_name_1 == NULL || file_name_2 == NULL)
 	{
 		/* FIXME: do better error reporting ... . Chema */
-		gedit_utils_error_dialog (_("gedit could not create a temp file.\n\n"), widget);
+		gedit_utils_error_dialog (_("gedit could not create a temp file.\n\n"), data);
 		return;
 	}
 	
@@ -202,7 +220,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	g_free (file_name_1);
 	g_free (file_name_2);
 
-	gnome_dialog_close (GNOME_DIALOG (widget));
+	gnome_dialog_close (GNOME_DIALOG (data));
 }
 
 static void
@@ -231,7 +249,6 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 	g_free (new_location);
 
 	gdk_window_raise (dialog->window);	
-
 }
 
 static void
@@ -258,12 +275,14 @@ gedit_plugin_diff_load_documents (GtkWidget ** options_menu, gint second_menu)
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
 		nth_doc = (GeditDocument *)g_list_nth_data (mdi->children, n);
-		if (nth_doc->filename == NULL)
-			document_name = g_strdup_printf ("%s %d", _("Untitled"), nth_doc->untitled_number);
-		else
-			document_name = g_strdup (g_basename(nth_doc->filename));
-		
-		menu_item = gtk_menu_item_new_with_label (document_name);
+
+		if (nth_doc->filename == NULL) {
+			document_name = g_strdup_printf (_("Untitled %i"), nth_doc->untitled_number);
+		} else {
+			document_name = gnome_vfs_unescape_string_for_display (nth_doc->filename);		
+		}
+				
+		menu_item = gtk_menu_item_new_with_label (g_basename(document_name));
 		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
 				    GTK_SIGNAL_FUNC (gedit_plugin_diff_update_document),
 				    GINT_TO_POINTER (n+(second_menu?1000:0)));
@@ -276,27 +295,22 @@ gedit_plugin_diff_load_documents (GtkWidget ** options_menu, gint second_menu)
 }
 
 static void
-gedit_plugin_diff_document_selected (GtkWidget *widget, GdkEvent *event, gpointer data)
-{
-	GtkRadioButton *radio_button = data;
-
-	g_return_if_fail (radio_button!=NULL);
-	
-	gtk_radio_button_select (radio_button->group, 0);
-}
-
-static void
 gedit_plugin_diff_file_selected (GtkWidget *widget, gpointer data)
 {
-	GtkRadioButton *radio_button = data;
+	GtkToggleButton *toggle_button = data;
+	g_return_if_fail (toggle_button!=NULL);
 
-	g_return_if_fail (radio_button!=NULL);
-	
-	gtk_radio_button_select (radio_button->group, 1);
+	gtk_toggle_button_set_active (toggle_button, TRUE);
 }
 
 static void
 gedit_plugin_diff_file_selected_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	gedit_plugin_diff_file_selected (widget, data);
+}
+
+static void
+gedit_plugin_diff_document_selected (GtkWidget *widget, GdkEvent *event, gpointer data)
 {
 	gedit_plugin_diff_file_selected (widget, data);
 }
@@ -309,6 +323,10 @@ gedit_plugin_create_dialog (void)
 	GtkWidget *change_button;
 	GtkWidget *location_label;
 
+	GtkWidget *ok_button;
+	GtkWidget *cancel_button;
+	GtkWidget *help_button;
+
 	GtkWidget *file_selector_combo_1;
 	GtkWidget *file_selector_combo_2;
 	
@@ -317,16 +335,7 @@ gedit_plugin_create_dialog (void)
 	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
 							      GEDIT_PLUGIN_NAME,
 							      FALSE);
-	if (program_location == NULL)
-		return;
-
-	if (!g_file_exists (GEDIT_GLADEDIR GEDIT_PLUGIN_GLADE_FILE))
-	{
-		g_warning ("Could not find %s",
-			   GEDIT_GLADEDIR
-			   GEDIT_PLUGIN_GLADE_FILE);
-		return;
-	}
+	g_return_if_fail (program_location != NULL);
 
 	gui = glade_xml_new (GEDIT_GLADEDIR
 			     GEDIT_PLUGIN_GLADE_FILE,
@@ -340,40 +349,67 @@ gedit_plugin_create_dialog (void)
 		return;
 	}
 
-	dialog          = glade_xml_get_widget (gui, "dialog");
+	dialog                 = glade_xml_get_widget (gui, "dialog");
 
-	from_document_1 = glade_xml_get_widget (gui, "from_document_1");
-	document_list_1 = glade_xml_get_widget (gui, "document_list_1");
-	file_entry_1    = glade_xml_get_widget (gui, "file_entry_1");
-	file_selector_combo_1 = glade_xml_get_widget (gui, "file_selector_combo_1");
+	from_document_1        = glade_xml_get_widget (gui, "from_document_1");
+	document_list_1        = glade_xml_get_widget (gui, "document_list_1");
+	
+	from_file_1            = glade_xml_get_widget (gui, "from_file_1");
+	file_entry_1           = glade_xml_get_widget (gui, "file_entry_1");
+	file_selector_combo_1  = glade_xml_get_widget (gui, "file_selector_combo_1");
 
-	from_document_2 = glade_xml_get_widget (gui, "from_document_2");
-	document_list_2 = glade_xml_get_widget (gui, "document_list_2");
-	file_entry_2    = glade_xml_get_widget (gui, "file_entry_2");
-	file_selector_combo_2 = glade_xml_get_widget (gui, "file_selector_combo_2");
+	from_document_2        = glade_xml_get_widget (gui, "from_document_2");
+	document_list_2        = glade_xml_get_widget (gui, "document_list_2");
 
-	location_label  = glade_xml_get_widget (gui, "location_label");
-	change_button   = glade_xml_get_widget (gui, "change_button");
+	from_file_2            = glade_xml_get_widget (gui, "from_file_2");
+	file_entry_2           = glade_xml_get_widget (gui, "file_entry_2");
+	file_selector_combo_2  = glade_xml_get_widget (gui, "file_selector_combo_2");
 
-	g_return_if_fail (dialog          != NULL);
-	g_return_if_fail (from_document_1 != NULL);
-	g_return_if_fail (document_list_1 != NULL);
-	g_return_if_fail (file_entry_1    != NULL);
-	g_return_if_fail (from_document_2 != NULL);
-	g_return_if_fail (document_list_2 != NULL);
-	g_return_if_fail (file_entry_2    != NULL);
-	g_return_if_fail (location_label  != NULL);
-	g_return_if_fail (change_button   != NULL);
+	location_label         = glade_xml_get_widget (gui, "location_label");
+	change_button          = glade_xml_get_widget (gui, "change_button");
 
-        /* Set the location label */
+	ok_button              = glade_xml_get_widget (gui, "ok_button");
+	cancel_button          = glade_xml_get_widget (gui, "cancel_button");
+	help_button            = glade_xml_get_widget (gui, "help_button");
+
+	g_return_if_fail (dialog                != NULL);
+	
+	g_return_if_fail (from_document_1       != NULL);
+	g_return_if_fail (document_list_1       != NULL);
+
+	g_return_if_fail (from_file_1           != NULL);
+	g_return_if_fail (file_entry_1          != NULL);
+	g_return_if_fail (file_selector_combo_1 != NULL);
+
+	g_return_if_fail (from_document_2       != NULL);
+	g_return_if_fail (document_list_2       != NULL);
+
+	g_return_if_fail (from_file_2           != NULL);
+	g_return_if_fail (file_entry_2          != NULL);
+	g_return_if_fail (file_selector_combo_2 != NULL);
+
+	g_return_if_fail (location_label        != NULL);
+	g_return_if_fail (change_button         != NULL);
+
+	g_return_if_fail (ok_button             != NULL);
+	g_return_if_fail (cancel_button         != NULL);
+	g_return_if_fail (help_button           != NULL);
+
+
+	        /* Set the location label */
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "location_label")),
 			    program_location);
 	g_free (program_location);
 	
         /* Connect the signals */
-	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_execute), NULL);
+	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_execute), dialog);
+	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_cancel_button_pressed), dialog);
+	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_help_button_pressed), NULL);
+	
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
 	gtk_signal_connect (GTK_OBJECT (change_button), "clicked",
@@ -389,26 +425,39 @@ gedit_plugin_create_dialog (void)
 	
 	document_selected_1 = 0;
 	document_selected_2 = 0;
- 	gedit_plugin_diff_load_documents (&document_list_1, FALSE);
- 	gedit_plugin_diff_load_documents (&document_list_2, TRUE);
 
+	if (g_list_length (mdi->children) == 0)
+	{
+		gtk_widget_set_sensitive (from_document_1, FALSE);
+		gtk_widget_set_sensitive (from_document_2, FALSE);
+		gtk_widget_set_sensitive (document_list_1, FALSE);
+		gtk_widget_set_sensitive (document_list_2, FALSE);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (from_file_1), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (from_file_2), TRUE);
+	}
+	else
+	{
+ 		gedit_plugin_diff_load_documents (&document_list_1, FALSE);
+ 		gedit_plugin_diff_load_documents (&document_list_2, TRUE);
+	}
 	gtk_signal_connect (GTK_OBJECT (file_entry_1), "browse_clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected),
-			    from_document_1);
+			    from_file_1);
 	gtk_signal_connect (GTK_OBJECT (file_selector_combo_1), "focus_in_event",
 			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected_event),
-			    from_document_1);
+			    from_file_1);
 	gtk_signal_connect (GTK_OBJECT (file_entry_2), "browse_clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected),
-			    from_document_2);
+			    from_file_2);
 	gtk_signal_connect (GTK_OBJECT (file_selector_combo_2), "focus_in_event",
 			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected_event),
-			    from_document_2);
+			    from_file_2);
 
 	/* Set the dialog parent and modal type */ 
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_parent  (GNOME_DIALOG (dialog), gedit_window_active());
+	gtk_window_set_modal     (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_default (GNOME_DIALOG (dialog), 0);
 
 	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);
@@ -421,8 +470,8 @@ init_plugin (PluginData *pd)
 	/* initialize */
 	pd->destroy_plugin = gedit_plugin_destroy;
 	pd->name = _("Diff");
-	pd->desc = _("Makes a diff file from 2 documents or files");
-	pd->long_desc = _("Makes a diff file from 2 documents or files on disk\n"
+	pd->desc = _("Makes a diff file from two documents or files");
+	pd->long_desc = _("Makes a diff file from two documents or files on disk\n"
 			  "For more info on diff, type \"man diff\" in a shell prompt\n");
 	pd->author = "Chema Celorio";
 	pd->needs_a_document = FALSE;

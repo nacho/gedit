@@ -4,8 +4,8 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("gedit web browse plugin");
-gchar *s = N_("Enter the Url to browse for :");
-gchar *s = N_("lynx was found at : ");
+gchar *s = N_("gedit: Web Browse plugin");
+gchar *s = N_("Enter the _URL to browse for:");
+gchar *s = N_("Lynx found at: ");
 gchar *s = N_("location");
-gchar *s = N_("Change");
+gchar *s = N_(" _Change... ");

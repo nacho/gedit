@@ -29,6 +29,14 @@ destroy_plugin (PluginData *pd)
 }
 
 static void
+shell_output_help (GtkWidget *widget, gpointer data)
+{
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+
+	gnome_help_display (NULL, &help_entry);
+}
+
+static void
 shell_output_finish (GtkWidget *w , gpointer data)
 {
 	gnome_dialog_close (GNOME_DIALOG (dialog));
@@ -38,7 +46,7 @@ static void
 shell_output_scan_text (GtkWidget *w , gpointer data)
 {
 
-	GeditDocument *doc              = gedit_document_current ();
+	GeditDocument *doc         = gedit_document_current ();
 	gchar    *buffer_in        = NULL ;
 	GString  *buffer_out       = g_string_new (NULL) ;
 	gchar    *command_string   = NULL ;
@@ -54,8 +62,9 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 
 	if (command_string == NULL || (strlen (command_string) == 0))
 	{
-		gnome_dialog_close (GNOME_DIALOG (dialog));
-		return ;
+		gedit_utils_error_dialog (_("The shell command entry is empty.\n\n"
+					    "Please, insert a valid shell command."), data);
+		return;
 	}
 
 	directory_string = gtk_entry_get_text (GTK_ENTRY (directory));
@@ -91,11 +100,11 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 			
 		execvp (*arg,arg);
 		
+		/* FIXME: do a better error report... PAOLO */
 		g_warning ("A undetermined PIPE problem occurred");
-			return;
-		/* Dont _exit, just display an error 
+
+		/* This is only reached if something goes wrong. */
 		_exit (1);
-		*/
 	}
 	close (fdpipe[1]);
 
@@ -139,6 +148,8 @@ shell_output (void){
 
      GtkWidget *ok;
      GtkWidget *cancel;
+     GtkWidget *help;
+
      gchar *text;
 
      if (gedit_document_current () == NULL)
@@ -153,10 +164,20 @@ shell_output (void){
      }
 
      dialog     = glade_xml_get_widget (gui,"shell_output_dialog");
+ 
      ok         = glade_xml_get_widget (gui,"ok_button");
      cancel     = glade_xml_get_widget (gui,"cancel_button");
+     help       = glade_xml_get_widget (gui,"help_button");
+ 
      command    = glade_xml_get_widget (gui,"command_entry");
      directory  = glade_xml_get_widget (gui,"directory_entry");
+
+     g_return_if_fail (dialog    != NULL);
+     g_return_if_fail (ok        != NULL);
+     g_return_if_fail (cancel    != NULL);
+     g_return_if_fail (help      != NULL);
+     g_return_if_fail (command   != NULL);
+     g_return_if_fail (directory != NULL);
 
      text = gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
      gtk_entry_set_text (GTK_ENTRY (directory), text);
@@ -164,15 +185,17 @@ shell_output (void){
      
      gtk_signal_connect (GTK_OBJECT (ok), "clicked",
 			 GTK_SIGNAL_FUNC(shell_output_scan_text), NULL);
-     gtk_signal_connect (GTK_OBJECT (command), "activate",
-			 GTK_SIGNAL_FUNC(shell_output_scan_text), NULL);
      gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
 			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
+     gtk_signal_connect (GTK_OBJECT (help), "clicked",
+			 GTK_SIGNAL_FUNC(shell_output_help), NULL);
      gtk_signal_connect (GTK_OBJECT (dialog), "delete_event",
 			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
      
-     gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
-     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+     gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
+     gtk_window_set_modal         (GTK_WINDOW (dialog), TRUE);
+     gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
+     gnome_dialog_editable_enters (GNOME_DIALOG (dialog), GTK_EDITABLE (command));
 
      gtk_widget_show_all (dialog);
      

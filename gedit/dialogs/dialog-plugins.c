@@ -22,11 +22,7 @@
 #include <config.h>
 #include <glib.h>
 #include <string.h> /* For strlen and strcmp */
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-util.h>
-#include <libgnomeui/gnome-dialog.h>
-#include <libgnomeui/gnome-file-entry.h>
+#include <gnome.h>
 #include <glade/glade.h>
 
 #include "file.h"
@@ -58,11 +54,15 @@ gint text_length = 0;
  * Return Value: a string with the path specified by the user
  **/
 gchar *
-gedit_plugin_program_location_dialog (void)
+gedit_plugin_program_location_dialog (gchar *program_name, gchar *plugin_name)
 {
 	GladeXML *gui;
-	GtkWidget *program_location_dialog;
-	GtkWidget *program_location_entry;
+	GtkWidget *program_location_dialog = NULL;
+	GtkWidget *program_location_entry = NULL;
+	GtkWidget *program_location_combo_entry = NULL;
+	GtkWidget *label = NULL;
+	gchar *str_label;
+	
 	gchar * location = NULL;
 
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -77,13 +77,26 @@ gedit_plugin_program_location_dialog (void)
 
 	program_location_dialog = glade_xml_get_widget (gui, "program_location_dialog");
 	program_location_entry  = glade_xml_get_widget (gui, "program_location_file_entry");
+	program_location_combo_entry  = glade_xml_get_widget (gui, "combo-entry1");
+	label = glade_xml_get_widget (gui, "label");
 
-	if (!program_location_dialog || !program_location_entry)
+	if (!program_location_dialog || !program_location_entry || 
+	    !label || !program_location_combo_entry)
 	{
 		g_warning ("Could not get the program location dialog from program.glade");
 		return NULL;
 	}
 
+	str_label = g_strdup_printf(_("To use the %s plugin, you need to specify a location for \"%s\"."),
+			plugin_name, program_name);
+
+	gtk_label_set_text (GTK_LABEL (label), str_label);
+	g_free(str_label);
+
+	gnome_dialog_set_default     (GNOME_DIALOG (program_location_dialog), 0);
+	gnome_dialog_editable_enters (GNOME_DIALOG (program_location_dialog), 
+				      GTK_EDITABLE (program_location_combo_entry));
+	
 	/* If we do this the main plugin dialog goes below the program window. Chema.
 	*/
 	switch (gnome_dialog_run (GNOME_DIALOG (program_location_dialog)))
@@ -457,7 +470,23 @@ gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpoin
 }
 
 static void
-gedit_plugin_manager_clicked (GtkWidget *widget, gpointer button)
+gedit_plugin_manager_cancel_clicked (GtkWidget *widget, GtkWidget* data)
+{
+	gnome_dialog_close (GNOME_DIALOG(data));
+	return;
+}
+
+static void
+gedit_plugin_manager_help_clicked (GtkWidget *widget, GtkWidget* data)
+{
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+	gnome_help_display (NULL, &help_entry);	
+		
+	return;
+}
+
+static void
+gedit_plugin_manager_ok_clicked (GtkWidget *widget, GtkWidget* data)
 {
 	gint n;
 	gint row;
@@ -466,13 +495,7 @@ gedit_plugin_manager_clicked (GtkWidget *widget, gpointer button)
 	PluginData *plugin_data;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (button != 0)
-	{
-		gnome_dialog_close (GNOME_DIALOG(widget));
-		return;
-	}
-
+	
 	rows = GTK_CLIST (available_list)->rows;
 	for (row = rows-1; row >= 0; row--)
 	{
@@ -487,7 +510,7 @@ gedit_plugin_manager_clicked (GtkWidget *widget, gpointer button)
 		plugin_data->installed = TRUE;
 	}
 
-	gnome_dialog_close (GNOME_DIALOG(widget));
+	gnome_dialog_close (GNOME_DIALOG(data));
 
 	for (n = 0; n < g_list_length (mdi->windows); n++)
 	{
@@ -513,6 +536,10 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	GtkWidget *remove_all_button;
 	GtkWidget *plugin_info;
 	GtkWidget *plugin_info_window;
+
+	GtkWidget *ok_button;
+	GtkWidget *cancel_button;
+	GtkWidget *help_button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -540,6 +567,10 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	plugin_info        = glade_xml_get_widget (gui, "plugin_info");
 	plugin_info_window = glade_xml_get_widget (gui, "plugin_info_window");
 
+	ok_button          = glade_xml_get_widget (gui, "ok_button");
+	cancel_button      = glade_xml_get_widget (gui, "cancel_button");
+	help_button        = glade_xml_get_widget (gui, "help_button");
+
 	g_return_if_fail (dialog             != NULL);
 	g_return_if_fail (add_button         != NULL);
 	g_return_if_fail (remove_button      != NULL);
@@ -550,6 +581,10 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	g_return_if_fail (plugin_info        != NULL);
 	g_return_if_fail (plugin_info_window != NULL);
 
+	g_return_if_fail (ok_button          != NULL);
+	g_return_if_fail (cancel_button      != NULL);
+	g_return_if_fail (help_button        != NULL);
+
 	/*
 	gtk_object_set_data (GTK_OBJECT (plugin_info), "plugin_info_window", plugin_info_window);
 	*/
@@ -557,9 +592,14 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	/* connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_destroy), NULL);
-	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_clicked), NULL);
 	
+	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_ok_clicked), dialog);
+	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_cancel_clicked), dialog);
+	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_help_clicked), NULL);
+
 	/* now the buttons */
 	gtk_signal_connect (GTK_OBJECT (add_button), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_add),
@@ -584,9 +624,9 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	gedit_plugin_manager_item_load (plugin_info);
 	
 	/* Set the dialog parent and modal type */
-	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_parent  (GNOME_DIALOG (dialog), gedit_window_active());
+	gtk_window_set_modal     (GTK_WINDOW (dialog), TRUE);
+	gnome_dialog_set_default (GNOME_DIALOG (dialog), 0);
 
 	/* Show everything and free */
 	gtk_widget_show_all (dialog);

@@ -4,9 +4,7 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("gedit: e-mail plugin");
-gchar *s = N_("From:");
-gchar *s = N_("To:");
-gchar *s = N_("Subject:");
-gchar *s = N_("File to use as body of message: ");
-gchar *s = N_("Location of sendmail to search for :");
+gchar *s = N_("gedit: Set program location...");
+gchar *s = N_("label");
+gchar *s = N_("_Location to search for :");
+gchar *s = N_("gedit: Browse for program location...");

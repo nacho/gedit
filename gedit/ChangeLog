@@ -1,3 +1,18 @@
+2001-02-20  Paolo Maggi  <maggi@athena.polito.it>
+
+	* dialogs/dialogs.h: modified gedit_plugin_program_location_dialog
+	prototype
+
+	* dialogs/dialog-plugins.c (gedit_plugin_program_location_dialog):
+	added two parameters
+
+	* dialogs/dialog-plugins.c:
+	* dialogs/program.glade:
+	* plugin-manager.glade: embellishment of the dialogs
+
+	* plugin.c (gedit_plugin_program_location_get): use the modified
+	gedit_plugin_program_location_dialog 
+
 2001-02-19  Paolo Maggi  <maggi@athena.polito.it>
 
 	* document.c (gedit_document_set_readonly): now uses g_return_if_fail

@@ -18,7 +18,7 @@
   <class>GnomeDialog</class>
   <name>dialog</name>
   <visible>False</visible>
-  <title>gedit web browse plugin</title>
+  <title>gedit: Web Browse plugin</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
@@ -73,24 +73,33 @@
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button3</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_HELP</stock_button>
+      </widget>
     </widget>
 
     <widget>
       <class>GtkVBox</class>
       <name>vbox1</name>
+      <border_width>8</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
+      <spacing>14</spacing>
       <child>
 	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
+	<expand>False</expand>
+	<fill>False</fill>
       </child>
 
       <widget>
 	<class>GtkVBox</class>
 	<name>vbox2</name>
 	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
+	<spacing>4</spacing>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -100,13 +109,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label1</name>
-	  <label>Enter the Url to browse for :</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <label>Enter the _URL to browse for:</label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
+	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>url_entry</focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -137,7 +147,7 @@
 	<class>GtkHBox</class>
 	<name>hbox1</name>
 	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
+	<spacing>8</spacing>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -147,17 +157,17 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label2</name>
-	  <label>lynx was found at : </label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <label>Lynx found at: </label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
+	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>False</fill>
+	    <expand>False</expand>
+	    <fill>True</fill>
 	  </child>
 	</widget>
 
@@ -165,16 +175,16 @@
 	  <class>GtkLabel</class>
 	  <name>location_label</name>
 	  <label>location</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
+	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
-	  <xpad>18</xpad>
+	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
-	    <fill>False</fill>
+	    <fill>True</fill>
 	  </child>
 	</widget>
 
@@ -182,10 +192,10 @@
 	  <class>GtkButton</class>
 	  <name>change_button</name>
 	  <can_focus>True</can_focus>
-	  <label>Change</label>
+	  <label> _Change... </label>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
+	    <expand>False</expand>
 	    <fill>False</fill>
 	  </child>
 	</widget>

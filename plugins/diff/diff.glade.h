@@ -4,15 +4,20 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Choose the files to diff");
+gchar *s = N_("gedit: Diff plugin");
+gchar *s = N_("Choose the files to compare");
+gchar *s = N_("First");
 gchar *s = N_("From document");
-gchar *s = N_("From document");
-gchar *s = N_("From a file on disk");
-gchar *s = N_("From a file on disk");
 gchar *s = N_("don't translate this\n"
               "");
+gchar *s = N_("From a file on disk");
+gchar *s = N_("Select the \"first\" file...");
+gchar *s = N_("Second");
+gchar *s = N_("From document");
 gchar *s = N_("don't translate this\n"
               "");
-gchar *s = N_("diff found at : ");
+gchar *s = N_("From a file on disk");
+gchar *s = N_("Select the \"second\" file...");
+gchar *s = N_("Diff found at : ");
 gchar *s = N_("location");
-gchar *s = N_("Change");
+gchar *s = N_(" _Change... ");
