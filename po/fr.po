@@ -13,14 +13,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-03 23:20+0100\n"
+"POT-Creation-Date: 2004-01-15 18:27+0100\n"
 "PO-Revision-Date: 2004-01-03 22:28+0100\n"
 "Last-Translator: Sébastien Bacher <seb128@debian.org>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
@@ -51,7 +51,7 @@ msgstr "Fabrique de composants gedit"
 msgid "Edit text files"
 msgstr "Édite des fichiers texte"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:365
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
 msgid "Text Editor"
 msgstr "Éditeur de texte"
 
@@ -493,10 +493,119 @@ msgstr ""
 "désactivée, alors la police choisie dans l'option « Police de l'éditeur » "
 "sera utilisée au lieu de la police du système."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1965
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
 #, c-format
 msgid "Activate %s"
 msgstr "Activer %s"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+#, fuzzy
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Gestionnaire</span>"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:653
+#, fuzzy
+msgid "S_elect the documents you want to save:"
+msgstr "Sélectionner le groupe d'étiquettes que vous souhaitez utiliser"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+#, fuzzy
+msgid "_Save Selected"
+msgstr "Enregistrer _tout"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+msgid "Do_n't save"
+msgstr "_Ne pas enregistrer"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:360
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:369
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:375
+#, c-format
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:385
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:400
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:406
+#, c-format
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:421
+#, c-format
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:465
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:639
+#, c-format
+msgid ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr ""
+
+#. Secondary label
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:670
+msgid "If you don't save, all your changes will be definitively lost."
+msgstr ""
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -507,7 +616,7 @@ msgid "_Go to Line"
 msgstr "_Aller à la ligne"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:402
+#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Le texte « %s » n'a pas été trouvé."
@@ -1111,7 +1220,7 @@ msgstr "Saisissez l'_emplacement (URL) du fichier que vous voulez ouvrir :"
 msgid "Open from URI"
 msgstr "Ouvrir depuis une URL"
 
-#: gedit/gedit-commands.c:553
+#: gedit/gedit-commands.c:556
 msgid "translator_credits"
 msgstr ""
 "Mainteneur :\n"
@@ -1123,55 +1232,55 @@ msgstr ""
 "Yann Laviolette <borisgazoo@hotmail.com>\n"
 "Sébastien Bacher <seb128@debian.org>"
 
-#: gedit/gedit-commands.c:578
+#: gedit/gedit-commands.c:581
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:585
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit est un petit éditeur de texte, léger, pour le bureau GNOME"
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 msgid "Untitled"
 msgstr "SansTitre"
 
-#: gedit/gedit-document.c:608 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
 msgid "Invalid file name"
 msgstr "Nom de fichier invalide"
 
-#: gedit/gedit-document.c:824 gedit/gedit-document.c:930
+#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Donnée UTF-8 invalide"
 
-#: gedit/gedit-document.c:1229
+#: gedit/gedit-document.c:1615
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Impossible de lire les informations sur le lien symbolique pour %s"
 
-#: gedit/gedit-document.c:1275
+#: gedit/gedit-document.c:1661
 msgid "The file has too many symbolic links."
 msgstr "Le fichier a trop de liens symboliques."
 
-#: gedit/gedit-document.c:1331
+#: gedit/gedit-document.c:1717
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ne peut pas supporter les emplacements %s : en mode écriture."
 
-#: gedit/gedit-document.c:1338
+#: gedit/gedit-document.c:1724
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ne peut pas gérer ce type d'emplacement en mode écriture."
 
-#: gedit/gedit-document.c:1351
+#: gedit/gedit-document.c:1737
 msgid "Invalid filename."
 msgstr "Nom de fichier invalide."
 
-#: gedit/gedit-document.c:1463
+#: gedit/gedit-document.c:1849
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1179,7 +1288,7 @@ msgstr ""
 "Il n'y a pas assez d'espace disque disponible pour enregistrer le fichier.\n"
 "Veuillez libérer de l'espace disque et réessayer."
 
-#: gedit/gedit-document.c:1468
+#: gedit/gedit-document.c:1854
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1189,13 +1298,9 @@ msgstr ""
 "taille des fichiers. Veuillez essayer d'enregistrer un fichier plus petit ou "
 "d'enregistrer ce fichier sur un disque n'ayant pas de limitation."
 
-#: gedit/gedit-document.c:1512
+#: gedit/gedit-document.c:1898
 msgid "Could not create a backup file."
 msgstr "Impossible de créer une copie de sauvegarde."
-
-#: gedit/gedit-document.c:1633
-msgid "It is not possible to revert an Untitled document"
-msgstr "Vous ne pouvez pas récupérer à un document SansTitre"
 
 #: gedit/gedit-encodings-option-menu.c:203
 msgid "Auto Detected"
@@ -1356,163 +1461,228 @@ msgstr "Sélectionner des fichiers à ouvrir"
 msgid "Select a filename to save"
 msgstr "Sélectionner le nom du fichier à enregistrer"
 
-#: gedit/gedit-file.c:157
+#: gedit/gedit-file.c:208
 msgid "Open File..."
 msgstr "Ouvrir le fichier..."
 
-#: gedit/gedit-file.c:185 gedit/gedit-file.c:908
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "Fichier « %s » chargé"
-
-#: gedit/gedit-file.c:323 gedit/gedit-file.c:472
-#, c-format
-msgid "Saving file '%s'..."
+#: gedit/gedit-file.c:264 gedit/gedit-file.c:413
+#, fuzzy, c-format
+msgid "Saving document \"%s\"..."
 msgstr "Enregistrement du fichier « %s »..."
 
-#: gedit/gedit-file.c:351 gedit/gedit-file.c:487
-msgid "The document has not been saved."
+#: gedit/gedit-file.c:292 gedit/gedit-file.c:434
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been saved."
 msgstr "Le document n'a pas été enregistré."
 
-#: gedit/gedit-file.c:365 gedit/gedit-file.c:484
-#, c-format
-msgid "File '%s' saved."
-msgstr "Fichier « %s » enregistré."
+#: gedit/gedit-file.c:306 gedit/gedit-file.c:426
+#, fuzzy, c-format
+msgid "The document \"%s\" has been saved."
+msgstr "Le document n'a pas été enregistré."
 
-#: gedit/gedit-file.c:451
+#: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "Enregistrer sous..."
 
-#: gedit/gedit-file.c:645
+#: gedit/gedit-file.c:592
+#, fuzzy, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr ""
+" Voulez-vous enregistrer les changements que vous avez apportés au document  "
+"« %s » ?"
+
+#: gedit/gedit-file.c:601
 #, c-format
 msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"Voulez-vous récupérer le document « %s » ?\n"
-"\n"
-"Vous ne serez pas en mesure d'annuler cette opération."
+"Changes made to the document in the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
 
-#: gedit/gedit-file.c:655 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:610
+msgid ""
+"Changes made to the document in the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:616
+#, c-format
+msgid ""
+"Changes made to the document in the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:626
+#, c-format
+msgid ""
+"Changes made to the document in the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:641
+msgid ""
+"Changes made to the document in the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:647
+#, c-format
+msgid ""
+"Changes made to the document in the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:662
+#, c-format
+msgid ""
+"Changes made to the document in the last %d hour will be definitively lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "_Récupérer"
 
-#: gedit/gedit-file.c:689
-#, c-format
-msgid "Reverting file '%s'..."
-msgstr "Récupération du fichier « %s »..."
+#: gedit/gedit-file.c:730
+#, fuzzy, c-format
+msgid "Error reverting the document \"%s\"."
+msgstr "Impossible de récupérer le fichier « %s »."
 
-#: gedit/gedit-file.c:702
-msgid "The document has not been reverted."
+#: gedit/gedit-file.c:737
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been reverted."
 msgstr "Le document n'a pas été récupéré."
 
-#: gedit/gedit-file.c:712
-#, c-format
-msgid "File '%s' has been reverted."
-msgstr "Le fichier « %s » a été récupéré."
+#: gedit/gedit-file.c:741
+#, fuzzy, c-format
+msgid "The document \"%s\" has been reverted."
+msgstr "Le document n'a pas été récupéré."
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:769
+#, fuzzy, c-format
+msgid "Reverting the document \"%s\"..."
+msgstr "Récupération du fichier « %s »..."
+
+#: gedit/gedit-file.c:904
+msgid "Could not read data from stdin."
+msgstr "Impossible de lire à partir de l'entrée standard stdin."
+
+#: gedit/gedit-file.c:954
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Le fichier « %s » n'existe pas. Voulez-vous le créer ?"
+
+#: gedit/gedit-file.c:1077
+#, fuzzy
+msgid "Reverting file:"
+msgstr "Récupération du fichier « %s »..."
+
+#: gedit/gedit-file.c:1081
+#, fuzzy
+msgid "Loading file:"
+msgstr "Chargement de %d fichier..."
+
+#: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
+#, fuzzy, c-format
+msgid "Error loading file \"%s\""
+msgstr "Erreur lors de l'enregistrement du fichier!"
+
+#: gedit/gedit-file.c:1271
+#, fuzzy, c-format
+msgid "Loaded file \"%s\""
+msgstr "Fichier chargé %s"
+
+#: gedit/gedit-file.c:1348
+#, fuzzy, c-format
+msgid "Loaded %d file"
+msgid_plural "Loaded %d files"
+msgstr[0] "Chargement de %i fichiers"
+msgstr[1] "Chargement de %i fichiers"
+
+#: gedit/gedit-file.c:1382
+#, fuzzy, c-format
+msgid "Loading file \"%s\"..."
+msgstr "Chargement de %d fichier..."
+
+#: gedit/gedit-file.c:1529
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "Chargement de %d fichier..."
 msgstr[1] "Chargement de %d fichiers..."
 
-#: gedit/gedit-file.c:777
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Le fichier « %s » n'existe pas. Voulez-vous le créer ?"
-
-#: gedit/gedit-file.c:832
-#, c-format
-msgid "Loaded %i files"
-msgstr "Chargement de %i fichiers"
-
-#: gedit/gedit-file.c:966
-msgid "Could not read data from stdin."
-msgstr "Impossible de lire à partir de l'entrée standard stdin."
-
 #. Read only
-#: gedit/gedit-mdi-child.c:246
+#: gedit/gedit-mdi-child.c:248
 msgid "RO"
 msgstr "R"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:582 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "_Déplacer à la nouvelle fenêtre"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:726
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: gedit/gedit-mdi-child.c:680
+#: gedit/gedit-mdi-child.c:734
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:687
+#: gedit/gedit-mdi-child.c:741
 msgid "Name:"
 msgstr "Nom :"
 
-#: gedit/gedit-mdi-child.c:688
+#: gedit/gedit-mdi-child.c:742
 msgid "MIME Type:"
 msgstr "Type MIME :"
 
-#: gedit/gedit-mdi-child.c:689
+#: gedit/gedit-mdi-child.c:743
 msgid "Encoding:"
 msgstr "Codage :"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
+#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
 #, c-format
 msgid "Open '%s'"
 msgstr "Ouvrir «·%s·»"
 
-#: gedit/gedit-mdi.c:491
+#: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
 msgstr "Ouvre un fichier récemment utilisé"
 
-#: gedit/gedit-mdi.c:1006
-#, c-format
-msgid "Do you want to save the changes you made to the document \"%s\"?"
-msgstr ""
-" Voulez-vous enregistrer les changements que vous avez apportés au document  "
-"« %s » ?"
-
-#: gedit/gedit-mdi.c:1014
-msgid "Your changes will be lost if you don't save them."
-msgstr "Vos modifications seront perdues si vous ne les enregistrez pas."
-
-#: gedit/gedit-mdi.c:1022
-msgid "_Don't quit"
-msgstr "Ne pas _quitter"
-
-#: gedit/gedit-mdi.c:1026
-msgid "_Don't close"
-msgstr "Ne pas _fermer"
-
-#: gedit/gedit-mdi.c:1030
-msgid "Do_n't save"
-msgstr "_Ne pas enregistrer"
-
-#: gedit/gedit-mdi.c:1122
+#: gedit/gedit-mdi.c:1291
 msgid "(modified)"
 msgstr "(modifié)"
 
-#: gedit/gedit-mdi.c:1128
+#: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
 msgstr "(lecture-seule)"
 
-#: gedit/gedit-mdi.c:1734
+#: gedit/gedit-mdi.c:1927
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:1735
+#: gedit/gedit-mdi.c:1928
 msgid "Use Normal highlight mode"
 msgstr "Utiliser le mode de surbrillance normal"
 
-#: gedit/gedit-mdi.c:1811
+#: gedit/gedit-mdi.c:2004
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Utiliser le mode de surbrillance %s"
@@ -2020,7 +2190,7 @@ msgstr "A_nnuler"
 msgid "_View"
 msgstr "Afficha_ge"
 
-#: gedit/gedit-utils.c:365
+#: gedit/gedit-utils.c:407
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2032,13 +2202,13 @@ msgstr ""
 "Veuillez vérifier que vous avez tapé son emplacement correctement et "
 "réessayer."
 
-#: gedit/gedit-utils.c:373
+#: gedit/gedit-utils.c:415
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Impossible d'ouvrir le fichier « %s » car il contient des données corrompues."
 
-#: gedit/gedit-utils.c:384
+#: gedit/gedit-utils.c:426
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -2046,12 +2216,12 @@ msgstr ""
 "Impossible d'ouvrir le fichier « %s » car gedit ne gère pas les emplacements "
 "de type %s:"
 
-#: gedit/gedit-utils.c:390
+#: gedit/gedit-utils.c:432
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Impossible d'ouvrir le fichier « %s »"
 
-#: gedit/gedit-utils.c:400
+#: gedit/gedit-utils.c:442
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2059,12 +2229,12 @@ msgstr ""
 "Impossible d'ouvrir le fichier « %s » car il contient des données dans un "
 "format invalide."
 
-#: gedit/gedit-utils.c:407
+#: gedit/gedit-utils.c:449
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Impossible d'ouvrir le fichier « %s » car il est trop gros."
 
-#: gedit/gedit-utils.c:414
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2076,12 +2246,12 @@ msgstr ""
 "Veuillez vérifiez que vous avez tapé son emplacement correctement et "
 "réessayez."
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Impossible d'ouvrir le fichier « %s » car l'accès a été refusé."
 
-#: gedit/gedit-utils.c:429
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2092,7 +2262,7 @@ msgstr ""
 "\n"
 "Veuillez fermer quelques fichiers et réessayez."
 
-#: gedit/gedit-utils.c:437
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2104,7 +2274,7 @@ msgstr ""
 "Veuillez vérifier que vous avez taper l'emplacement correctement et "
 "réessayez."
 
-#: gedit/gedit-utils.c:445
+#: gedit/gedit-utils.c:487
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2113,7 +2283,7 @@ msgstr ""
 "Mémoire insuffisante pour ouvrir le fichier « %s ». Veuillez fermer quelques "
 "applications et réessayez."
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:513
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2126,7 +2296,7 @@ msgstr ""
 "Veuillez vérifier que vous avez tapé l'emplacement correctement et que vos "
 "réglages de proxy sont corrects."
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:528
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2137,7 +2307,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier que vous avez tapé l'emplacement correctement et réessayez."
 
-#: gedit/gedit-utils.c:495
+#: gedit/gedit-utils.c:537
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2148,7 +2318,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier que vos réglages de proxy sont corrects."
 
-#: gedit/gedit-utils.c:504
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2160,7 +2330,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier que vous avez tapé l'emplacement correctement et réessayez."
 
-#: gedit/gedit-utils.c:513 gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:555 gedit/gedit-utils.c:628
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2172,7 +2342,12 @@ msgstr ""
 "\n"
 "Vous essayez probablement d'ouvrir un fichier binaire."
 
-#: gedit/gedit-utils.c:557
+#: gedit/gedit-utils.c:564 gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "Impossible d'ouvrir le fichier « %s »."
+
+#: gedit/gedit-utils.c:604
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2189,7 +2364,7 @@ msgstr ""
 "essayez de nouveau en sélectionnant un codage de caractère dans la boîte de "
 "dialogue « Ouvrir un fichier... » (ou « Ouvrir un emplacement »)."
 
-#: gedit/gedit-utils.c:569 gedit/gedit-utils.c:599
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2205,28 +2380,23 @@ msgstr ""
 "vous avez sélectionné le bon codage de caractères dans la boîte de dialogue "
 "« Ouvrir un fichier... » (ou « Ouvrir un emplacement » et essayez de nouveau."
 
-#: gedit/gedit-utils.c:615
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Impossible d'ouvrir le fichier « %s »."
-
-#: gedit/gedit-utils.c:619
-#, c-format
+#: gedit/gedit-utils.c:666
+#, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 msgstr ""
 "Impossible d'ouvrir le fichier « %s ».\n"
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:671
+#: gedit/gedit-utils.c:718
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Impossible d'enregistrer le fichier « %s »."
 
-#: gedit/gedit-utils.c:675
+#: gedit/gedit-utils.c:722
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2237,7 +2407,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:728
+#: gedit/gedit-utils.c:775
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2248,14 +2418,14 @@ msgstr ""
 "\n"
 "Il a probablement été effacé récemment."
 
-#: gedit/gedit-utils.c:735
+#: gedit/gedit-utils.c:782
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Impossible de récupérer le fichier « %s » car il contient des données "
 "corrompues."
 
-#: gedit/gedit-utils.c:746
+#: gedit/gedit-utils.c:793
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2263,12 +2433,12 @@ msgstr ""
 "Impossible de récupérer le fichier « %s » car gedit ne sait pas gérer les "
 "emplacements de type « %s »."
 
-#: gedit/gedit-utils.c:752 gedit/gedit-utils.c:892
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Impossible de récupérer le fichier « %s »."
 
-#: gedit/gedit-utils.c:762
+#: gedit/gedit-utils.c:809
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2277,17 +2447,17 @@ msgstr ""
 "Impossible de récupérer le fichier « %s » car il contient des données dans "
 "un format invalide."
 
-#: gedit/gedit-utils.c:769
+#: gedit/gedit-utils.c:816
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Impossible de récupérer le fichier « %s » car il est trop gros."
 
-#: gedit/gedit-utils.c:776
+#: gedit/gedit-utils.c:823
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Impossible de récupérer le fichier « %s » car l'accès a été refusé."
 
-#: gedit/gedit-utils.c:783
+#: gedit/gedit-utils.c:830
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2299,7 +2469,7 @@ msgstr ""
 "\n"
 "Veuillez fermer quelques fichiers et réessayer."
 
-#: gedit/gedit-utils.c:791
+#: gedit/gedit-utils.c:838
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2308,7 +2478,7 @@ msgstr ""
 "Mémoire insuffisante pour récupérer le fichier « %s ». Veuillez fermer "
 "quelques applications et réessayer."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:864
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2320,7 +2490,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier vos réglages de proxy et réessayer."
 
-#: gedit/gedit-utils.c:831
+#: gedit/gedit-utils.c:878
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2331,14 +2501,14 @@ msgstr ""
 "\n"
 "Veuillez vérifier vos réglages de proxy et réessayer."
 
-#: gedit/gedit-utils.c:838
+#: gedit/gedit-utils.c:885
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Impossible de récupérer le fichier « %s » car la tentative "
 "d'authentification a échoué."
 
-#: gedit/gedit-utils.c:845
+#: gedit/gedit-utils.c:892
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2350,16 +2520,16 @@ msgstr ""
 "\n"
 "Vous essayez probablement de récupérer un fichier binaire."
 
-#: gedit/gedit-utils.c:854
+#: gedit/gedit-utils.c:901
 msgid "It is not possible to revert an Untitled document."
 msgstr "Vous ne pouvez pas récupérer un document SansTitre."
 
-#: gedit/gedit-utils.c:943
+#: gedit/gedit-utils.c:990
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Le fichier « %s » existe déjà."
 
-#: gedit/gedit-utils.c:949
+#: gedit/gedit-utils.c:996
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2370,7 +2540,7 @@ msgstr ""
 "\n"
 "Veuillez vérifier que vous avez taper l'emplacement correctement "
 
-#: gedit/gedit-utils.c:958
+#: gedit/gedit-utils.c:1005
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2381,7 +2551,7 @@ msgstr ""
 "\n"
 "Vérifier que vous avez les permissions requises pour l'écriture."
 
-#: gedit/gedit-utils.c:965
+#: gedit/gedit-utils.c:1012
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2392,7 +2562,7 @@ msgstr ""
 "\n"
 "Le nom de fichier est trop long."
 
-#: gedit/gedit-utils.c:972
+#: gedit/gedit-utils.c:1019
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2405,7 +2575,7 @@ msgstr ""
 "Un composant du répertoire dans le nom de fichier n'existe pas ou est un "
 "lien symbolique miroitant."
 
-#: gedit/gedit-utils.c:981
+#: gedit/gedit-utils.c:1028
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2417,7 +2587,7 @@ msgstr ""
 "\n"
 "Veuillez libérer de l'espace disque et essayer de nouveau."
 
-#: gedit/gedit-utils.c:987
+#: gedit/gedit-utils.c:1034
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Impossible de créer le fichier « %s »."
@@ -2428,16 +2598,16 @@ msgstr "Impossible de créer le fichier « %s »."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:686
+#: gedit/gedit-view.c:697
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Lig %d, Col %d"
 
-#: gedit/gedit-view.c:724
+#: gedit/gedit-view.c:735
 msgid "  OVR"
 msgstr "  ECR"
 
-#: gedit/gedit-view.c:726
+#: gedit/gedit-view.c:737
 msgid "  INS"
 msgstr "  INS"
 
@@ -2527,12 +2697,12 @@ msgstr "Statistiques du _document"
 msgid "Get statistic info on current document"
 msgstr "Obtenir les statistiques du document courant"
 
-#: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.c:140
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid "Document Statistics"
 msgstr "Statisques du document"
 
-#: plugins/docinfo/docinfo.c:153
+#: plugins/docinfo/docinfo.c:154
 msgid "_Update"
 msgstr "Mettre à jo_ur"
 
@@ -2627,32 +2797,27 @@ msgid "Run a command"
 msgstr "Exécuter une commande"
 
 #: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:523
+#: plugins/shell_output/shell_output.c:502
 msgid "Stopped"
 msgstr "Arrêté"
 
-#: plugins/shell_output/shell_output.c:246
-msgid "An error occured while running the selected command."
-msgstr ""
-" Une erreur est survenue lors de l'exécution de la commande sélectionnée."
-
-#: plugins/shell_output/shell_output.c:302
+#: plugins/shell_output/shell_output.c:282
 msgid "Run Command"
 msgstr "Exécuter la commande"
 
-#: plugins/shell_output/shell_output.c:318
+#: plugins/shell_output/shell_output.c:301
 msgid "_Run"
 msgstr "_Exécuter"
 
-#: plugins/shell_output/shell_output.c:529
+#: plugins/shell_output/shell_output.c:508
 msgid "Done"
 msgstr "Accompli"
 
-#: plugins/shell_output/shell_output.c:531
+#: plugins/shell_output/shell_output.c:510
 msgid "Failed"
 msgstr "Échec"
 
-#: plugins/shell_output/shell_output.c:703
+#: plugins/shell_output/shell_output.c:676
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2662,7 +2827,7 @@ msgstr ""
 "\n"
 "Veuillez insérer une commande de shell valide."
 
-#: plugins/shell_output/shell_output.c:736
+#: plugins/shell_output/shell_output.c:695
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2672,9 +2837,14 @@ msgstr ""
 "\n"
 "Veuillez insérer une commande de shell valide."
 
-#: plugins/shell_output/shell_output.c:822
+#: plugins/shell_output/shell_output.c:773
 msgid "Executing command"
 msgstr "Exécution de la commande"
+
+#: plugins/shell_output/shell_output.c:841
+msgid "An error occured while running the selected command."
+msgstr ""
+" Une erreur est survenue lors de l'exécution de la commande sélectionnée."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -2707,11 +2877,12 @@ msgstr "Répertoire de _travail :"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit : greffon de sortie de shell"
 
-#: plugins/sort/sort.c:26
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "_Trier..."
 
-#: plugins/sort/sort.c:29
+#: plugins/sort/sort.c:30
 msgid "Sort the current document or selection."
 msgstr "Tri le document en cours ou la sélection."
 
@@ -3053,7 +3224,7 @@ msgstr "In_sérer la date et l'heure..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Insèrer la date et l'heure courante à l'emplacement du curseur"
 
-#: plugins/time/time.c:450
+#: plugins/time/time.c:449
 msgid "Available formats"
 msgstr "Formats disponibles"
 
@@ -3114,6 +3285,36 @@ msgstr "Copie le texte sélectionné dans le presse-papiers"
 msgid "_Copy Text"
 msgstr "_Copier le texte"
 
+#~ msgid "It is not possible to revert an Untitled document"
+#~ msgstr "Vous ne pouvez pas récupérer à un document SansTitre"
+
+#~ msgid "Loaded file '%s'"
+#~ msgstr "Fichier « %s » chargé"
+
+#~ msgid "File '%s' saved."
+#~ msgstr "Fichier « %s » enregistré."
+
+#~ msgid ""
+#~ "Do you want to revert to saved the document '%s'?\n"
+#~ "\n"
+#~ "You will not be able to undo this operation."
+#~ msgstr ""
+#~ "Voulez-vous récupérer le document « %s » ?\n"
+#~ "\n"
+#~ "Vous ne serez pas en mesure d'annuler cette opération."
+
+#~ msgid "File '%s' has been reverted."
+#~ msgstr "Le fichier « %s » a été récupéré."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "Vos modifications seront perdues si vous ne les enregistrez pas."
+
+#~ msgid "_Don't quit"
+#~ msgstr "Ne pas _quitter"
+
+#~ msgid "_Don't close"
+#~ msgstr "Ne pas _fermer"
+
 #~ msgid "Could not find '"
 #~ msgstr "Impossible de trouver « "
 
@@ -3155,9 +3356,6 @@ msgstr "_Copier le texte"
 
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Numéros de line</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Gestionnaire</span>"
 
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Enregistrer</span>"
@@ -4011,9 +4209,6 @@ msgstr "_Copier le texte"
 #~ msgid "Could not revert the file \"%s\""
 #~ msgstr "Impossible de récupérer le fichier \"%s\""
 
-#~ msgid "Loaded file %s"
-#~ msgstr "Fichier chargé %s"
-
 #~ msgid "Unable to open recent file: %s"
 #~ msgstr "Impossible d'ouvrir le fichier récent: %s"
 
@@ -4353,9 +4548,6 @@ msgstr "_Copier le texte"
 
 #~ msgid "``%s'' is about to be overwritten. Do you want to continue?"
 #~ msgstr "``%s'' est sur le point d'être écrasé. Voulez-vous continuer ?"
-
-#~ msgid "Error saving file!"
-#~ msgstr "Erreur lors de l'enregistrement du fichier!"
 
 #~ msgid ""
 #~ "Are you sure you want to revert all changes?\n"

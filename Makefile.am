@@ -12,10 +12,10 @@ EXTRA_DIST = BUGS		\
 	README 			\
 	TODO 			\
 	xmldocs.make 		\
+	omf.make		\
 	intltool-extract.in 	\
 	intltool-merge.in 	\
-	intltool-update.in	\
-	intltool-modules/XML/Parser/Style/OrigTree.pm
+	intltool-update.in	
 
 DISTCLEANFILES = 		\
 	intltool-extract 	\

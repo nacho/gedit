@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
-"POT-Creation-Date: 2003-08-26 23:48+0200\n"
+"POT-Creation-Date: 2004-01-15 18:27+0100\n"
 "PO-Revision-Date: 2003-08-19 10:49+0300\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -43,7 +43,7 @@ msgstr "Аўтаматызаваная вытворчасьць gedit"
 msgid "Edit text files"
 msgstr "Рэдагаваньне тэкставых файлаў"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
 msgid "Text Editor"
 msgstr "Рэдактар тэкстаў"
 
@@ -67,7 +67,7 @@ msgstr "Аўтазахаваньне"
 msgid "Auto Save Interval"
 msgstr "Прамежак аўтазахаваньня"
 
-#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
+#: data/gedit.schemas.in.h:5
 msgid "Auto indent"
 msgstr "Аўтаводступ"
 
@@ -108,18 +108,27 @@ msgid "Display Line Numbers"
 msgstr "Адлюстроўваць нумары радкоў"
 
 #: data/gedit.schemas.in.h:13
+msgid "Display Right Margin"
+msgstr ""
+
+#: data/gedit.schemas.in.h:14
 msgid "Editor Font"
 msgstr "Шрыфт рэдактара"
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:15
+#, fuzzy
+msgid "Enable Syntax Highlighting"
+msgstr "Друк падсьвятленьня сынтаксісу"
+
+#: data/gedit.schemas.in.h:16
 msgid "Encoding for Saving"
 msgstr "Кадаваньне для захаваньня"
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
 msgstr "Кадаваньні, бачныя ў мэню"
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -127,7 +136,7 @@ msgstr ""
 "Пашырэньне ці суфікс для файлаў рэзэрвовага капіяваньня. Гэта будзе мець "
 "эфект калі ўключана магчымасьц \"Ствараць рэзэрвовыя копіі\"."
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -135,7 +144,7 @@ msgstr ""
 "Колер тэкста для вылучанага тэкста ў полі рэдагаваньня. Гэта будзе мець "
 "эфект калі выключана магчымасьць \"Выкарыстоўваць дапомныя колеры\"."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -143,11 +152,11 @@ msgstr ""
 "Колер тэкста для нявылучанага тэкста у полі рэдагаваньня. Гэта будзе мець "
 "эфект калі выключана магчымасьць \"Выкарыстоўваць дапомныя колеры\"."
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
 msgstr "Загаловак шрыфта для друку"
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:22
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -156,19 +165,19 @@ msgstr ""
 "Калі значэньне 0, нумараваньне будзе выключана. У адваротным выпадку, gedit "
 "будзе друкаваць нумары радкоў."
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:23
 msgid "Insert spaces"
 msgstr "Уставіць прагал"
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:24
 msgid "Line Number Font for Printing"
 msgstr "Шрыфт нумараваньня радкоў для друку"
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:25
 msgid "Line Wrapping Mode"
 msgstr "Рэжым загортваньня радкоў"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:26
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -176,15 +185,15 @@ msgstr ""
 "Сьпіс кадаваньняў, які бычны ў мэню \"Кадаваньне знакаў\" у вылучальніке "
 "файлаў адчыніць/захваць. Выкарыстоўваюцца толькі вядомыя кадаваньні."
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:27
 msgid "Maximum Recent Files"
 msgstr "Максымальная колькасьць апошніх файлаў"
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Максымальная колькасьць крокаў адката."
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -193,31 +202,35 @@ msgstr ""
 "мадыфікаваныя файлы. Гэта будзе мець эфект толькі калі ўключана магчымасьць "
 "\"Аўтазахаваньне\". "
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Print Header"
 msgstr "Друкаваць загалоўкі"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Line Numbers"
 msgstr "Друкаваць нумары радкоў"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Syntax Highlighting"
 msgstr "Друк падсьвятленьня сынтаксісу"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Printing Line Wrapping Mode"
 msgstr "Друк рэжыма загортваньня радкоў"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
+msgid "Right Margin Position"
+msgstr ""
+
+#: data/gedit.schemas.in.h:35
 msgid "Selected Text Color"
 msgstr "Колер вылучанага тэкста"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:36
 msgid "Selection Color"
 msgstr "Колер вылучэньня"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -227,7 +240,7 @@ msgstr ""
 "аўтавызначэньня кадаваньня файлу. \"CURRENT\" - гэта кадаваньне бягучае "
 "мясцовасьці. Выкарыстоўваюцца толькі распазнаныя кадаваньні."
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -240,7 +253,7 @@ msgstr ""
 "загортваньня па словах ці \"GTK_WRAP_CHAR\" для загортваньня па асобных "
 "сымбалях. Заўвага: гэтыя значэньні чулыя да рэгістра."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:39
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -253,12 +266,12 @@ msgstr ""
 "загортваньня па словах ці \"GTK_WRAP_CHAR\" для загортваньня па асобных "
 "сымбалях. Заўвага: гэтыя значэньні чулыя да рэгістра."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Пазначце шрыфт для цела дакумэнтаў калі адбываецца вывад на друкарку."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -266,7 +279,7 @@ msgstr ""
 "Пазначце шрыфт для нумараваньня радкоў пад час друку. Гэта будзе мець эфект "
 "толькі калі магчымасьць \"Адлюстроўваць нумары радкоў\" ня роўная нулю."
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -274,7 +287,7 @@ msgstr ""
 "Пазначце шрыфт для загалоўкаў пад час друку дакумэнта. Гэта будзе мець эфект "
 "калі ўключана магчымасьць \"Друкаваць загалоўкі радкоў\"."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -282,7 +295,7 @@ msgstr ""
 "Пазначце максымальную колькасьць файлаў якія будуць адлюстраваныя у падмэню "
 "\"Апошнія файлы\"."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -290,11 +303,15 @@ msgstr ""
 "Калі ласка, вызначце колькасьць прагалаў, што будзе адлюстроўвацца замест "
 "знакаў табуляцыі."
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:45
+msgid "Specifies the position of the right margin."
+msgstr ""
+
+#: data/gedit.schemas.in.h:46
 msgid "Status Bar is Visible"
 msgstr "Радок стану бачны"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -310,15 +327,15 @@ msgstr ""
 "\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" для прапарцыйнага тэкста пад значкамі. "
 "Заўвага: гэтыя значэньні чулыя да рэгістру."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:48
 msgid "Tab Size"
 msgstr "Памер табуляцыі"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:49
 msgid "Text Color"
 msgstr "Колер тэкста"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:50
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -343,27 +360,27 @@ msgstr ""
 "кадыроўцы бягучае лакалі). Калі канверсія скончана, гэта будзе выкарыстана. "
 "Інакш,  будзе выкарыстана UTF-8. Заўвага: гэтыя значэньні чулыя да рэгістра."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Toolbar Buttons Style"
 msgstr "Стыль панэлі інструмэнта"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Toolbar is Visible"
 msgstr "Панэль інструмэнтаў бачная"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Undo Actions Limit"
 msgstr "Абмежаваньне крокаў адката"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Use Default Colors"
 msgstr "Выкарыстоўваць дапомныя колеры"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Use Default Font"
 msgstr "Выкарыстоўваць дапомны шрыфт"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -373,7 +390,7 @@ msgstr ""
 "прамежка часу. Вы мусіце пазначыць прамежак часу ў опцыі \"Аўтаматычна "
 "захоўваць бягучы файл кожныя\""
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -381,37 +398,47 @@ msgstr ""
 "Ці стварае gedit рэзэрвовыя копіі файлаў. Вы мусіце пазначыць пашырэньне "
 "файла з дапамогай опцыі \"Пашырэньне рэзэрвовае копіі\" "
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Ці адлюстроўваць нумары радкоў у полі рэдагаваньня."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
+#, fuzzy
+msgid "Whether gedit should display the right margin in the editing area."
+msgstr "Ці адлюстроўваць нумары радкоў у полі рэдагаваньня."
+
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should enable auto indentation."
 msgstr "Ці уключае gedit аўтаматычныя абзацы."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:61
+#, fuzzy
+msgid "Whether gedit should enable syntax highlighting."
+msgstr "Ці уключае gedit аўтаматычныя абзацы."
+
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Ці уключае gedit загалоўкі для старонак пад час друку."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Ці павінен gedit устаўляць прагалы замест знакаў табуляцыі."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Ці мусіць gedit друкаваць з вылучэньнем сынтаксісу, калі друкуе дакумэнты."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Ці бачны радок стану ў акне рэдагаваньня."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:66
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Ці бачна панэль інструмэнтаў у вакне рэдагаваньня."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -423,7 +450,7 @@ msgstr ""
 "\"Колер тла\", \"Колер тэкста\", \"Колер вылучанага тэкста\", \"Колер "
 "вылучэньня\" магчымасьцьх."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -434,58 +461,160 @@ msgstr ""
 "пазначаны магчымасьцьй \"Шрыфт якім карыстаецца рэдактар\" будзе "
 "выкарыстоўвацца замест сыстэмнага шрыфта."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
 #, c-format
 msgid "Activate %s"
 msgstr "Актывізаваць %s"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+#, fuzzy
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Мэнаджар</span>"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:653
+#, fuzzy
+msgid "S_elect the documents you want to save:"
+msgstr "Выбярыце групу тэгаў, якую вы жадаеце выкарыстоўваць"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+#, fuzzy
+msgid "_Save Selected"
+msgstr "_Захаваць усе"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+msgid "Do_n't save"
+msgstr "_Не захоўваць"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:360
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:369
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:375
+#, c-format
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:385
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:400
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:406
+#, c-format
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:421
+#, c-format
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:465
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:639
+#, c-format
+msgid ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr ""
+
+#. Secondary label
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:670
+msgid "If you don't save, all your changes will be definitively lost."
+msgstr ""
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
 msgstr "Перайсьці да радка"
 
-#. Add Goto Line button
-#: gedit/dialogs/gedit-dialog-goto-line.c:170
+#: gedit/dialogs/gedit-dialog-goto-line.c:173
 msgid "_Go to Line"
 msgstr "_Перайсьці да радка"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:186
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
-#: plugins/spell/gedit-spell-language-dialog.c:233
-#, c-format
-msgid "Could not find the required widgets inside %s."
-msgstr "Ня атрымалася адшукаць неабходныя віджэты у сярэдзіне %s."
-
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
+#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Радок \"%s\" адсутнічае."
 
-#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
+#: gedit/dialogs/gedit-dialog-replace.c:270 gedit/dialogs/replace.glade2.h:4
 #: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "Замяніць"
 
-#: gedit/dialogs/gedit-dialog-replace.c:279
+#: gedit/dialogs/gedit-dialog-replace.c:283
 msgid "Replace _All"
 msgstr "Замяніць _усе"
 
-#. Add Replace button
-#: gedit/dialogs/gedit-dialog-replace.c:282
-#: gedit/gedit-file-selector-util.c:131
+#: gedit/dialogs/gedit-dialog-replace.c:286
+#: gedit/gedit-file-selector-util.c:144
 msgid "_Replace"
 msgstr "За_мяніць"
 
-#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
+#: gedit/dialogs/gedit-dialog-replace.c:403 gedit/gedit-ui.xml.h:17
 msgid "Find"
 msgstr "Шукаць"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1149
-#, c-format
-msgid "Found and replaced %d occurrences."
-msgstr "Адшукана й выпраўлена %d уваходжаньняў."
+#: gedit/dialogs/gedit-dialog-replace.c:1130
+#, fuzzy, c-format
+msgid "Found and replaced %d occurrence."
+msgid_plural "Found and replaced %d occurrences."
+msgstr[0] "Адшукана й выпраўлена %d уваходжаньняў."
+msgstr[1] "Адшукана й выпраўлена %d уваходжаньняў."
 
-#: gedit/dialogs/gedit-dialog-uri.c:87
+#: gedit/dialogs/gedit-dialog-uri.c:91
 msgid "Open Location"
 msgstr "Адчыніць знаходжаньне"
 
@@ -516,11 +645,11 @@ msgstr "Кадаваньне знакаў"
 msgid "E_ncodings shown in menu:"
 msgstr "_Кадаваньні, што паказаны ў мэню:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:489
 msgid "Body font picker"
 msgstr "Захапляльнік шрыфту асноўнага тэксту"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:490
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -528,42 +657,23 @@ msgstr ""
 "Націсьніце гэтую кнопку для вылучэньня шрыфту для друку асноўнага тэксту "
 "дакумэнта"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:491
 msgid "Page headers font picker"
 msgstr "Захапляльнік шрыфту загалоўкаў старонкі"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:492
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Націсьніце гэтую кнопку для вылучэньня шрыфту для друку загалоўкаў старонкі"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:493
 msgid "Line numbers font picker"
 msgstr "Захапляльнік шрыфту для нумароў радкоў"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:495
+#: gedit/dialogs/gedit-page-setup-dialog.c:494
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "Націсьніце гэтую кнопку для выбару шрыфта для друку нумароў радкоў"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:587
-msgid "Could not find '"
-msgstr "Немагчыма адшукаць '"
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:587
-#: gedit/dialogs/gedit-page-setup-dialog.c:629
-msgid ""
-"page-setup-dialog.glade2'.\n"
-"\n"
-"Reinstall gedit."
-msgstr ""
-"page-setup-dialog.glade2'.\n"
-"\n"
-"Пераўсталюйце gedit."
-
-#: gedit/dialogs/gedit-page-setup-dialog.c:628
-msgid "Could not find the required widgets inside '"
-msgstr "Немагчыма адшукаць неабходныя віджэты у '"
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
@@ -582,12 +692,12 @@ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Недапушчальны файл glade для мэнаджара ўтулак -- адшуканыя ня ўсе віджэты.\n"
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:78
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
 msgid "Set program location..."
 msgstr "Пазначыць разьмяшчэньне праграмы..."
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:106
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:116
 #, c-format
 msgid ""
 "The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
@@ -600,89 +710,38 @@ msgstr ""
 "\n"
 "Калі ласка, укажыце разьмяшчэньне праграмы <tt>%s<tt>."
 
-#: gedit/dialogs/gedit-plugin-program-location-dialog.c:152
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:169
 msgid "The selected file is not executable."
 msgstr "Выбраны файл не для выкананьня."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:197
-msgid "Font & Colors"
-msgstr "Шрыфт й колеры"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:199
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Tabs"
-msgstr "Табуляцыя"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:200
-msgid "Wrap Mode"
-msgstr "Рэжым пераноса радкоў"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:201
-msgid "Auto Indent"
-msgstr "Аўтаматычны адступ"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:202
-msgid "Line Numbers"
-msgstr "Нумараваньне радкоў"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:203
-#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
-msgid "Save"
-msgstr "Захаваць"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:204
-#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
-msgid "Undo"
-msgstr "Адкаціць"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:213
-msgid "Manager"
-msgstr "Мэнаджар"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:221
-msgid "Editor"
-msgstr "Рэдактар"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:223
-msgid "Plugins"
-msgstr "Утулкі"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:295
-msgid "Cat_egories:"
-msgstr "Ка_тэгорыі:"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:317
-msgid "Preferences"
-msgstr "Перавагі"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:557
-msgid "Categories"
-msgstr "Катэгорыі"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:787
+#: gedit/dialogs/gedit-preferences-dialog.c:718
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Націсьніце гэтую кнопку для выбару шрыфта, які выкарыстоўваецца рэдактарам"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:790
+#: gedit/dialogs/gedit-preferences-dialog.c:721
 msgid "Push this button to configure text color"
 msgstr "Націсьніце гэтую кнопку для выбару колера тэкста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:792
+#: gedit/dialogs/gedit-preferences-dialog.c:723
 msgid "Push this button to configure background color"
 msgstr "Націсьніце гэтую кнопку для выбару колера тла"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:794
+#: gedit/dialogs/gedit-preferences-dialog.c:725
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Націсьніце гэтую кнопку для выбару колера вылучанага тэкста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:797
+#: gedit/dialogs/gedit-preferences-dialog.c:728
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Націсьніце кнопку для канфігураваньня колера для вылучанага тэкста"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1078
+msgid "Elements"
+msgstr ""
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -691,158 +750,239 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
+#, fuzzy
+msgid "<b>Auto Indentation</b>"
+msgstr "Аўтаматычны адступ"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:3
+#, fuzzy
+msgid "<b>Elements</b>"
+msgstr "<b>Шрыфт</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+#, fuzzy
+msgid "<b>File Saving</b>"
+msgstr "<b>Загортваньне радкоў</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Font</b>"
 msgstr "<b>Шрыфт</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:3
-msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Аўтаматачны адступ</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:4
-msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Шрыфт &amp; Колеры</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Нумары радкоў</span>"
-
 #: gedit/dialogs/gedit-preferences.glade2.h:6
-msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Мэнаджар</span>"
+#: gedit/dialogs/page-setup-dialog.glade2.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Нумараваньне радкоў</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:7
-msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Захаваць</span>"
+#, fuzzy
+msgid "<b>Right Margin</b>"
+msgstr "<b>Загортваньне радкоў</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Табуляцыя</span>"
+#, fuzzy
+msgid "<b>Tabs</b>"
+msgstr "<b>слова</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Адкаціць</span>"
+#: gedit/dialogs/page-setup-dialog.glade2.h:3
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Загортваньне радкоў</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Рэжым пераносу</span>"
+#, fuzzy
+msgid "<b>Undo</b>"
+msgstr "<b>Шрыфт</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Колеры</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:12
+#, fuzzy
+msgid "Bold"
+msgstr "Ас_ноўны тэкст:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "Ствараць _рэзэрвовую копію файла перад захаваньнем"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:14
+msgid "D_isplay right margin"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Не па_дзяляць слова між дзьвума радкамі"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
+#: gedit/dialogs/gedit-preferences.glade2.h:16
+msgid "Editor"
+msgstr "Рэдактар"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor _font: "
 msgstr "Шрыфт _рэдактара:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "Enable _auto indentation"
-msgstr "Уключыць _аўтаматычныя адступы"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Уключыць _перанос тэкста"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Fonts & Colors"
-msgstr "Шрыфты й колеры"
-
 #: gedit/dialogs/gedit-preferences.glade2.h:19
+msgid "Font & Colors"
+msgstr "Шрыфт й колеры"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:20
+#, fuzzy
+msgid "Highlight _mode:"
+msgstr "Рэжым пад_сьветкі"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Устаўляць _прагалы замест знакаў табуляцыі"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:20
-msgid "LOGO"
-msgstr "Лягатып"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:21
-msgid "Line numbers"
-msgstr "Нумары радкоў"
-
 #: gedit/dialogs/gedit-preferences.glade2.h:22
+#, fuzzy
+msgid "Italic"
+msgstr "Італійская"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:23
+#, fuzzy
+msgid "Normal _text color:"
+msgstr "Колер _тэкста:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:24
+#, fuzzy
+msgid "Pick a color"
+msgstr "Выбярыце колер тэкста"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the background color"
 msgstr "Выбярыце колер тла"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:26
+#, fuzzy
+msgid "Pick the editor font"
+msgstr "Выбярыце колер тэкста"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:27
+#, fuzzy
+msgid "Pick the normal text color"
+msgstr "Выбярыце колер тэкста"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the selected text color"
 msgstr "Выбярыце колер вылучанага тэкста"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the selection color"
 msgstr "Выбярыце колер вылучэньня"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
-msgid "Pick the text color"
-msgstr "Выбярыце колер тэкста"
+#: gedit/dialogs/gedit-preferences.glade2.h:30
+msgid "Plugins"
+msgstr "Утулкі"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
-msgid "Plugin manager"
-msgstr "Мэнаджар утулак"
+#: gedit/dialogs/gedit-preferences.glade2.h:31
+msgid "Preferences"
+msgstr "Перавагі"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Se_lection color:"
 msgstr "Колер вы_лучэньня:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Selecte_d text color:"
 msgstr "Колер вы_лучанага тэкста:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Set _tabs width equivalent to"
-msgstr "Усталяваць _шырыню табуляцыі ў"
+#: gedit/dialogs/gedit-preferences.glade2.h:34
+msgid "Strikethrough"
+msgstr ""
 
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Set limit on _undo actions to"
-msgstr "Усталяваць колькасьць узроўняў _адкату ў "
+#: gedit/dialogs/gedit-preferences.glade2.h:35
+#, fuzzy
+msgid "Syntax Highlighting"
+msgstr "Друк падсьвятленьня сынтаксісу"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "U_se default theme colors"
 msgstr "_Выкарыстоўваць дапомныя колеры тэмы"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
-msgid "Wrap mode"
-msgstr "Рэжым пераносу радкоў"
+#: gedit/dialogs/gedit-preferences.glade2.h:37
+#, fuzzy
+msgid "Underline"
+msgstr "Адступіць у радках"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
-msgid "_Autosave current file every"
+#: gedit/dialogs/gedit-preferences.glade2.h:38
+#, fuzzy
+msgid "View"
+msgstr "_Выгляд"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:39
+#, fuzzy
+msgid "_Autosave files every"
 msgstr "_Аўтаматычна захоўваць бягучы файл кожныя"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Background color:"
 msgstr "Ко_лер тла:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:38
+#: gedit/dialogs/gedit-preferences.glade2.h:41
+#, fuzzy
+msgid "_Background:"
+msgstr "Ко_лер тла:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Display line numbers"
 msgstr "А_длюстроўваць нумары радкоў"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "_Text color:"
-msgstr "Колер _тэкста:"
+#: gedit/dialogs/gedit-preferences.glade2.h:43
+#, fuzzy
+msgid "_Enable auto indentation"
+msgstr "Уключыць _аўтаматычныя адступы"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:40
+#: gedit/dialogs/gedit-preferences.glade2.h:44
+#, fuzzy
+msgid "_Enable syntax highlighting"
+msgstr "Друкаваць пад_сьветлены сынтаксіс"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:45
+msgid "_Foreground:"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:46
+msgid "_Limit to"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:47
+#, fuzzy
+msgid "_Reset to Default "
+msgstr "Дапомны _сталец"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:48
+#, fuzzy
+msgid "_Right margin at column:"
+msgstr "_Пачаць са слупка:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:49
+msgid "_Tabs width:"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:50
+msgid "_Unlimited undo"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Use default theme font"
 msgstr "Вы_карыстоўваць дапомны шрыфт тэмы."
 
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "_action(s)"
-msgstr "_дзеяньне(і)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:42
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_minutes"
 msgstr "_хвіліны"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:43
-msgid "character(s)"
-msgstr "сымбаль(і)"
+#: gedit/dialogs/gedit-preferences.glade2.h:53
+#, fuzzy
+msgid "act_ions"
+msgstr "_дзеяньне(і)"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -937,14 +1077,6 @@ msgstr "Перайсьці да радка"
 msgid "_Line number:"
 msgstr "Нумар _радка:"
 
-#: gedit/dialogs/page-setup-dialog.glade2.h:2
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Нумараваньне радкоў</b>"
-
-#: gedit/dialogs/page-setup-dialog.glade2.h:3
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>Загортваньне радкоў</b>"
-
 #: gedit/dialogs/page-setup-dialog.glade2.h:6
 msgid "Fonts"
 msgstr "Шрыфты"
@@ -994,22 +1126,19 @@ msgid "lines"
 msgstr "радкі"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
-msgid "About selected plugin"
-msgstr "Апра вылучаную ўтулку"
-
-#: gedit/dialogs/plugin-manager.glade2.h:2
 msgid "C_onfigure Plugin"
 msgstr "На_ладзіць утулку"
 
-#: gedit/dialogs/plugin-manager.glade2.h:3
-msgid "Configure the selected plugin"
-msgstr "Наладзіць вылучаную ўтулку"
+#: gedit/dialogs/plugin-manager.glade2.h:2
+#, fuzzy
+msgid "_About Plugin"
+msgstr "На_ладзіць утулку"
 
-#: gedit/dialogs/plugin-manager.glade2.h:4
+#: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "button1"
 msgstr "кнопка-1"
 
-#: gedit/dialogs/plugin-manager.glade2.h:5
+#: gedit/dialogs/plugin-manager.glade2.h:4
 msgid "dialog1"
 msgstr "дыялёг-1"
 
@@ -1075,63 +1204,64 @@ msgstr "Пазначце _разьмяшчэньне (URI) файла, які т
 msgid "Open from URI"
 msgstr "Адкрыць з URI"
 
-#: gedit/gedit-commands.c:564
+#: gedit/gedit-commands.c:556
 msgid "translator_credits"
 msgstr ""
 "Belarusian Language Linux Team\n"
 "Web: http://www.mova.linux.by\n"
 "E-mail: <i18n@mova.org>"
 
-#: gedit/gedit-commands.c:589
+#: gedit/gedit-commands.c:581
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:593
-msgid "gedit is a small and lightweight text editor for Gnome"
+#: gedit/gedit-commands.c:585
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit - маленькі й леккі рэдактар тэкста для GNOME."
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 msgid "Untitled"
 msgstr "бяз_назвы"
 
-#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
+#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
 msgid "Invalid file name"
 msgstr "Недапушчальная назва файла"
 
-#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Недапушчальныя даньні ў фармаце UTF-8"
 
-#: gedit/gedit-document.c:1210
+#: gedit/gedit-document.c:1615
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Ня атрымалася прачытаць інфармацыю аб сымбалічнае спасылцы для %s"
 
-#: gedit/gedit-document.c:1256
+#: gedit/gedit-document.c:1661
 msgid "The file has too many symbolic links."
 msgstr "Файл мае зашмат сымбалічных спасылак."
 
-#: gedit/gedit-document.c:1312
+#: gedit/gedit-document.c:1717
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "Праграма gedit ня можа працаваць з %s: разьмяшчэньне ў рэжыме запісу."
 
-#: gedit/gedit-document.c:1319
+#: gedit/gedit-document.c:1724
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 "Праграма gedit ня можа працаваць з гэтым тыпам разьмяшчэньня ў рэжыме запісу."
 
-#: gedit/gedit-document.c:1332
+#: gedit/gedit-document.c:1737
 msgid "Invalid filename."
 msgstr "Недапушчальная назва файла."
 
-#: gedit/gedit-document.c:1444
+#: gedit/gedit-document.c:1849
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1139,7 +1269,7 @@ msgstr ""
 "Недастаткова мейсца на дыску для захаваньня файла.\n"
 "Вызваліце крыху мейсца на дыску й паспрабуйце нанова."
 
-#: gedit/gedit-document.c:1449
+#: gedit/gedit-document.c:1854
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1149,13 +1279,9 @@ msgstr ""
 "Паспрабуйце захаваць файл меньшага памеру ці выкарыстайце дыск, які ня мае "
 "падобнае абмежаваньне."
 
-#: gedit/gedit-document.c:1493
+#: gedit/gedit-document.c:1898
 msgid "Could not create a backup file."
 msgstr "Ня атрымалася стварыць рэзэрвовую копію файла."
-
-#: gedit/gedit-document.c:1613
-msgid "It is not possible to revert an Untitled document"
-msgstr "Немагчыма аднавіць дакумэнт бяз назвы"
 
 #: gedit/gedit-encodings-option-menu.c:203
 msgid "Auto Detected"
@@ -1282,177 +1408,268 @@ msgstr "Уетнамская"
 msgid "Thai"
 msgstr "Тайская"
 
-#: gedit/gedit-file-selector-util.c:149
-#, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
+#: gedit/gedit-file-selector-util.c:162
+#, fuzzy, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Файл \"%s\" ужо існуе."
+
+#: gedit/gedit-file-selector-util.c:163
+#, fuzzy
+msgid "Do you want to replace it with the one you are saving?"
 msgstr ""
 "Файл з імём \"%s\" ужо існуе.\n"
 "Жадаеце замяніць яго тым, які вы захоўваеце?"
 
-#: gedit/gedit-file-selector-util.c:160
-#, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
+#: gedit/gedit-file-selector-util.c:172
+#, fuzzy, c-format
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Файл \"%s\" ужо існуе."
+
+#: gedit/gedit-file-selector-util.c:173
+#, fuzzy
+msgid "Do you want to try to replace it with the one you are saving?"
 msgstr ""
 "Файл з імём \"%s\" ужо існуе.\n"
 "Жадаеце замяніць яго, тым які захоўваеце?"
 
-#: gedit/gedit-file-selector-util.c:283
+#: gedit/gedit-file-selector-util.c:445
 msgid "Ch_aracter Coding:"
 msgstr "Кадаваньне зн_акаў:"
 
-#: gedit/gedit-file-selector-util.c:460
+#: gedit/gedit-file-selector-util.c:569
 msgid "Select a file to open"
 msgstr "Вылучыце файл, які трэба адчыніць"
 
-#: gedit/gedit-file-selector-util.c:489
+#: gedit/gedit-file-selector-util.c:595
 msgid "Select files to open"
 msgstr "Вылучыце файлы, якія трэба адчыніць"
 
-#: gedit/gedit-file-selector-util.c:519
+#: gedit/gedit-file-selector-util.c:622
 msgid "Select a filename to save"
 msgstr "Вылучыце назву файла для захаваньня"
 
-#: gedit/gedit-file.c:155
+#: gedit/gedit-file.c:208
 msgid "Open File..."
 msgstr "Адкрыць файл..."
 
-#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "Загружаны файл \"%s\""
-
-#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
-#, c-format
-msgid "Saving file '%s'..."
+#: gedit/gedit-file.c:264 gedit/gedit-file.c:413
+#, fuzzy, c-format
+msgid "Saving document \"%s\"..."
 msgstr "Захаваньне файла '%s' ..."
 
-#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
-msgid "The document has not been saved."
+#: gedit/gedit-file.c:292 gedit/gedit-file.c:434
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been saved."
 msgstr "Дакумэнт ня быў захаваны."
 
-#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
-#, c-format
-msgid "File '%s' saved."
-msgstr "Файл \"%s\" захаваны."
+#: gedit/gedit-file.c:306 gedit/gedit-file.c:426
+#, fuzzy, c-format
+msgid "The document \"%s\" has been saved."
+msgstr "Дакумэнт ня быў захаваны."
 
-#: gedit/gedit-file.c:444
+#: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "Захаваць як..."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:592
+#, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr ""
+
+#: gedit/gedit-file.c:601
 #, c-format
 msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"Жадаеце вярнуцца да захаванага дакумэнта \"%s\"?\n"
-"\n"
-"Вы ня здолееце адкаціць гэтую апэрацыю."
+"Changes made to the document in the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
 
-#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:610
+msgid ""
+"Changes made to the document in the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:616
+#, c-format
+msgid ""
+"Changes made to the document in the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:626
+#, c-format
+msgid ""
+"Changes made to the document in the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:641
+msgid ""
+"Changes made to the document in the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:647
+#, c-format
+msgid ""
+"Changes made to the document in the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:662
+#, c-format
+msgid ""
+"Changes made to the document in the last %d hour will be definitively lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "Ад_навіць"
 
-#: gedit/gedit-file.c:683
-#, c-format
-msgid "Reverting file '%s'..."
-msgstr "Аднаўленьне файла \"%s\"..."
+#: gedit/gedit-file.c:730
+#, fuzzy, c-format
+msgid "Error reverting the document \"%s\"."
+msgstr "Ня атрымалася аднавіць файл \"%s\"."
 
-#: gedit/gedit-file.c:696
-msgid "The document has not been reverted."
+#: gedit/gedit-file.c:737
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been reverted."
 msgstr "Дакумэнт ня быў адноўлены."
 
-#: gedit/gedit-file.c:706
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Файл \"%s\" адноўлены."
+#: gedit/gedit-file.c:741
+#, fuzzy, c-format
+msgid "The document \"%s\" has been reverted."
+msgstr "Дакумэнт ня быў адноўлены."
 
-#: gedit/gedit-file.c:732
-#, c-format
-msgid "Loading %d files..."
-msgstr "Загрузка %d файлаў..."
+#: gedit/gedit-file.c:769
+#, fuzzy, c-format
+msgid "Reverting the document \"%s\"..."
+msgstr "Аднаўленьне файла \"%s\"..."
 
-#: gedit/gedit-file.c:768
+#: gedit/gedit-file.c:904
+msgid "Could not read data from stdin."
+msgstr "Ня атрымалася прачытаць даньні са стандартнае плыні ўводу."
+
+#: gedit/gedit-file.c:954
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Файл \"%s\" ня існуе. Жадаеце яго стварыць?"
 
-#: gedit/gedit-file.c:823
-#, c-format
-msgid "Loaded %i files"
-msgstr "Загружана %i файлаў"
+#: gedit/gedit-file.c:1077
+#, fuzzy
+msgid "Reverting file:"
+msgstr "Аднаўленьне файла \"%s\"..."
 
-#: gedit/gedit-file.c:957
-msgid "Could not read data from stdin."
-msgstr "Ня атрымалася прачытаць даньні са стандартнае плыні ўводу."
+#: gedit/gedit-file.c:1081
+#, fuzzy
+msgid "Loading file:"
+msgstr "Загрузка %d файлаў..."
+
+#: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
+#, c-format
+msgid "Error loading file \"%s\""
+msgstr ""
+
+#: gedit/gedit-file.c:1271
+#, fuzzy, c-format
+msgid "Loaded file \"%s\""
+msgstr "Загружаны файл \"%s\""
+
+#: gedit/gedit-file.c:1348
+#, fuzzy, c-format
+msgid "Loaded %d file"
+msgid_plural "Loaded %d files"
+msgstr[0] "Загружана %i файлаў"
+msgstr[1] "Загружана %i файлаў"
+
+#: gedit/gedit-file.c:1382
+#, fuzzy, c-format
+msgid "Loading file \"%s\"..."
+msgstr "Загрузка %d файлаў..."
+
+#: gedit/gedit-file.c:1529
+#, fuzzy, c-format
+msgid "Loading %d file..."
+msgid_plural "Loading %d files..."
+msgstr[0] "Загрузка %d файлаў..."
+msgstr[1] "Загрузка %d файлаў..."
 
 #. Read only
-#: gedit/gedit-mdi-child.c:238
+#: gedit/gedit-mdi-child.c:248
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "_Перанос у новае акно"
 
-#: gedit/gedit-mdi-child.c:664
+#: gedit/gedit-mdi-child.c:726
 msgid "Unknown"
 msgstr "Невядома"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:734
 msgid "Unicode (UTF-8)"
 msgstr "Унікод (UTF-8)"
 
-#: gedit/gedit-mdi.c:450
+#: gedit/gedit-mdi-child.c:741
+#, fuzzy
+msgid "Name:"
+msgstr "Назва"
+
+#: gedit/gedit-mdi-child.c:742
+msgid "MIME Type:"
+msgstr ""
+
+#: gedit/gedit-mdi-child.c:743
+#, fuzzy
+msgid "Encoding:"
+msgstr "Кадаваньні"
+
+#. Translators: %s is a URI
+#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
+#, fuzzy, c-format
+msgid "Open '%s'"
+msgstr "Адчыніць %s"
+
+#: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
 msgstr "Адчыніць адзін з папярэдніх файлаў"
 
-#: gedit/gedit-mdi.c:954
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Жадаеце захаваць зьмены зробленыя ў дакумэнце \"%s\"?\n"
-"\n"
-"Калі зьмены ня захаваць, яны будуць згублены."
-
-#: gedit/gedit-mdi.c:959
-msgid "Do_n't save"
-msgstr "_Не захоўваць"
-
-#: gedit/gedit-mdi.c:978
-msgid "_Don't quit"
-msgstr "Н_я выходзіць"
-
-#: gedit/gedit-mdi.c:982
-msgid "_Don't close"
-msgstr "Н_е зачыняць"
-
-#: gedit/gedit-mdi.c:1075
+#: gedit/gedit-mdi.c:1291
 msgid "(modified)"
 msgstr "(зьменены)"
 
-#: gedit/gedit-mdi.c:1081
+#: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
 msgstr "(толькі чытаньне)"
 
-#: gedit/gedit-mdi.c:1676
+#: gedit/gedit-mdi.c:1927
 msgid "Normal"
 msgstr "Звычайны"
 
-#: gedit/gedit-mdi.c:1677
+#: gedit/gedit-mdi.c:1928
 msgid "Use Normal highlight mode"
 msgstr "Выкарыстоўваць звычайны рэжым падсьвятленьня"
 
-#: gedit/gedit-mdi.c:1753
+#: gedit/gedit-mdi.c:2004
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Выкарыстоўваць %s рэжым падсьвятленьня"
@@ -1473,48 +1690,48 @@ msgstr "Ачысьціць акно вываду"
 msgid "Output Lines"
 msgstr "Радкі вываду"
 
-#: gedit/gedit-plugins-engine.c:362
+#: gedit/gedit-plugins-engine.c:363
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Памылка, не атрымалася адчыніць файл модулю \"%s\"\n"
 
-#: gedit/gedit-plugins-engine.c:372
+#: gedit/gedit-plugins-engine.c:373
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Памылка! Утулка \"%s\" ня утрымлівае функцыю init."
 
-#: gedit/gedit-plugins-engine.c:382
+#: gedit/gedit-plugins-engine.c:383
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Памылка, утулка \"%s\" ня ўтрымлівае функцыі задзейнічаньня."
 
-#: gedit/gedit-plugins-engine.c:392
+#: gedit/gedit-plugins-engine.c:393
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Памылка, утулка \"%s\" ня ўтрымлівае функцыі спыненьня задзейнічаньня."
 
-#: gedit/gedit-plugins-engine.c:417
+#: gedit/gedit-plugins-engine.c:418
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Памылка, немагчыма распачаць утулку \"%s\""
 
-#: gedit/gedit-plugins-engine.c:468
+#: gedit/gedit-plugins-engine.c:469
 #, c-format
 msgid "Error, impossible to destroy plugin '%s'"
 msgstr "Памылка, немагчыма разбурыць утулку \"%s\""
 
-#: gedit/gedit-plugins-engine.c:551 gedit/gedit-plugins-engine.c:639
-#: gedit/gedit-plugins-engine.c:764
+#: gedit/gedit-plugins-engine.c:552 gedit/gedit-plugins-engine.c:640
+#: gedit/gedit-plugins-engine.c:765
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Памылка, немагчыма актывізаваць дадатак \"%s\""
 
-#: gedit/gedit-plugins-engine.c:590 gedit/gedit-plugins-engine.c:782
+#: gedit/gedit-plugins-engine.c:591 gedit/gedit-plugins-engine.c:783
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Памылка, немагчыма дэактывізаваць дадатак \"%s\""
 
-#: gedit/gedit-plugins-engine.c:683
+#: gedit/gedit-plugins-engine.c:684
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Памылк! Немагчыма абнавіць спалучэньне карыстальніка ўтулкі \"%s\""
@@ -1523,7 +1740,7 @@ msgstr "Памылк! Немагчыма абнавіць спалучэньне
 msgid "Cannot initialize preferences manager."
 msgstr "Немагчыма ініцыялізаваць мэнаджар пераваг."
 
-#: gedit/gedit-prefs-manager.c:1136
+#: gedit/gedit-prefs-manager.c:1151
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Чакалася \"%s\", атрымана \"%s\" для ключа %s"
@@ -1644,7 +1861,8 @@ msgid "Go to _Line..."
 msgstr "Перайсьці да _радка..."
 
 #: gedit/gedit-ui.xml.h:23
-msgid "Go to a specific line number"
+#, fuzzy
+msgid "Go to a specific line"
 msgstr "Перайсьці да радка з указаным нумарам"
 
 #: gedit/gedit-ui.xml.h:24
@@ -1728,48 +1946,56 @@ msgid "Redo the undone action"
 msgstr "Вярнуць апошні крок"
 
 #: gedit/gedit-ui.xml.h:47
-msgid "Replace a string"
-msgstr "Замяніць радок"
-
-#: gedit/gedit-ui.xml.h:48
 msgid "Revert"
 msgstr "Аднавіць"
 
-#: gedit/gedit-ui.xml.h:49
+#: gedit/gedit-ui.xml.h:48
 msgid "Revert to a saved version of the file"
 msgstr "Аднавіць да захаванае вэрсыі файла"
 
-#: gedit/gedit-ui.xml.h:51
+#: gedit/gedit-ui.xml.h:49
+msgid "Save"
+msgstr "Захаваць"
+
+#: gedit/gedit-ui.xml.h:50
 msgid "Save As"
 msgstr "Захаваць як"
 
-#: gedit/gedit-ui.xml.h:52
+#: gedit/gedit-ui.xml.h:51
 msgid "Save _As..."
 msgstr "Захаваць _як..."
 
-#: gedit/gedit-ui.xml.h:53
+#: gedit/gedit-ui.xml.h:52
 msgid "Save all open files"
 msgstr "Захаваць усе адчыненыя файлы"
 
-#: gedit/gedit-ui.xml.h:54
+#: gedit/gedit-ui.xml.h:53
 msgid "Save the current file"
 msgstr "Захаваць бягучы файл"
 
-#: gedit/gedit-ui.xml.h:55
+#: gedit/gedit-ui.xml.h:54
 msgid "Save the current file with a different name"
 msgstr "Захаваць бягучы файл пад іншай назвай"
 
-#: gedit/gedit-ui.xml.h:56
-msgid "Search again for the same string"
-msgstr "Яшчэ раз знайсьці той жа радок"
-
-#: gedit/gedit-ui.xml.h:57
-msgid "Search backwards for the same string"
+#: gedit/gedit-ui.xml.h:55
+#, fuzzy
+msgid "Search backwards for the same text"
 msgstr "Шукаць вышэй гэты ж самы радок"
 
-#: gedit/gedit-ui.xml.h:58
-msgid "Search for a string"
+#: gedit/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Search for and replace text"
 msgstr "Пошук радка"
+
+#: gedit/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Search for text"
+msgstr "По_шук для:"
+
+#: gedit/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Search forwards for the same text"
+msgstr "Шукаць вышэй гэты ж самы радок"
 
 #: gedit/gedit-ui.xml.h:59
 msgid "Select All"
@@ -1809,6 +2035,10 @@ msgstr "Паказываць тэкст побач са значкамі на п
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
 msgstr "_Тэкст для важных значак"
+
+#: gedit/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "Адкаціць"
 
 #: gedit/gedit-ui.xml.h:69
 msgid "Undo the last action"
@@ -1946,7 +2176,7 @@ msgstr "Ад_мяніць"
 msgid "_View"
 msgstr "_Выгляд"
 
-#: gedit/gedit-utils.c:412
+#: gedit/gedit-utils.c:407
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1957,12 +2187,12 @@ msgstr ""
 "\n"
 "Калі ласка, праверце, што шлях пазначаны правільна й паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:420
+#: gedit/gedit-utils.c:415
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Ня атрымалася адчыніць файл \"%s\", таму што ён пашкоджаны."
 
-#: gedit/gedit-utils.c:431
+#: gedit/gedit-utils.c:426
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -1970,12 +2200,12 @@ msgstr ""
 "Ня атрымалася адчыніць файл \"%s\", таму праграма gedit ня можа апрацаваць "
 "шлях %s."
 
-#: gedit/gedit-utils.c:437
+#: gedit/gedit-utils.c:432
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Ня атрымалася адчыніць файл \"%s\""
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:442
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -1983,12 +2213,12 @@ msgstr ""
 "Ня атрымалася адчыніць файл \"%s\", таму што ён утрымлівае даньні ў "
 "нядапушчальным фармате."
 
-#: gedit/gedit-utils.c:454
+#: gedit/gedit-utils.c:449
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Ня атрымалася адчыніць файл \"%s\", таму што ён завялікі."
 
-#: gedit/gedit-utils.c:461
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1999,12 +2229,12 @@ msgstr ""
 "\n"
 "Праверце, што шлях пазначаны правільна й паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:469
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Ня атрымалася адчыніць файл \"%s\", таму што доступ забаронены."
 
-#: gedit/gedit-utils.c:476
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2015,7 +2245,7 @@ msgstr ""
 "\n"
 "Зачыніце некалькі адчыненых файлаў і паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:484
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2026,7 +2256,7 @@ msgstr ""
 "\n"
 "Праверце, што шлях пазначаны правільна й паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:492
+#: gedit/gedit-utils.c:487
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2035,7 +2265,7 @@ msgstr ""
 "Недастаткова памяці, каб адчыніць файл \"%s\". Зачыніце некалькі "
 "дастасаваньняў і паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:518
+#: gedit/gedit-utils.c:513
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2048,7 +2278,7 @@ msgstr ""
 "Праверце, што шлях і ўсталёўкі проксі пазначаны правільна, і паспрабуйце "
 "нанова."
 
-#: gedit/gedit-utils.c:533
+#: gedit/gedit-utils.c:528
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2059,7 +2289,7 @@ msgstr ""
 "\n"
 "Праверце, што шлях уведзены правільна й паспрабуйце яшчэ раз."
 
-#: gedit/gedit-utils.c:542
+#: gedit/gedit-utils.c:537
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2070,7 +2300,7 @@ msgstr ""
 "\n"
 "Праверце, што шлях пазначаны правільна й паспрабуйце нанова."
 
-#: gedit/gedit-utils.c:551
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2082,7 +2312,7 @@ msgstr ""
 "\n"
 "Праверце, што хлях пазначаны правільна й паспрабуйце яшчэ раз."
 
-#: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
+#: gedit/gedit-utils.c:555 gedit/gedit-utils.c:628
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2092,6 +2322,11 @@ msgstr ""
 "Немагчыма адчыніць файл \"%s\", бо ён утрымлівае нерэчаісныя даньні.\n"
 "\n"
 "Магчыма, вы спрабуеце адчыніць двайковы файл."
+
+#: gedit/gedit-utils.c:564 gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "Немагчыма адчыніць файл \"%s\"."
 
 #: gedit/gedit-utils.c:604
 #, c-format
@@ -2125,17 +2360,12 @@ msgstr ""
 "паспрабуйце шчэ раз, вылучыўшы кадаваньне знакаў у дыялёгу \"Адчыніць файл..."
 "\" (ці \"Адчыніць знаходжаньне\")."
 
-#: gedit/gedit-utils.c:662
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Немагчыма адчыніць файл \"%s\"."
-
 #: gedit/gedit-utils.c:666
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 msgstr ""
 "Немагчыма адчыніць файл \"%s\".\n"
 "\n"
@@ -2343,90 +2573,90 @@ msgstr "Ня атрымалася стварыць файл \"%s\"."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:685
+#: gedit/gedit-view.c:697
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  стар. %d, слуп. %d"
 
-#: gedit/gedit-view.c:723
+#: gedit/gedit-view.c:735
 msgid "  OVR"
 msgstr "  ЗАМ"
 
-#: gedit/gedit-view.c:725
+#: gedit/gedit-view.c:737
 msgid "  INS"
 msgstr "  УСТ"
 
-#: gedit/gedit2.c:81
+#: gedit/gedit2.c:82
 msgid "Show utility debugging messages."
 msgstr "Адлюстроўваць службовы паведамленьні атладкі."
 
-#: gedit/gedit2.c:84
+#: gedit/gedit2.c:85
 msgid "Show metadata debugging messages."
 msgstr "Паказываць мэтаданьні адладкі вакна."
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:88
 msgid "Show mdi debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі акна."
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:91
 msgid "Show commands debugging messages."
 msgstr "Адлюстроўваць каманды паведамленьняў атладкі."
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:94
 msgid "Show document debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі дакумэнта."
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:97
 msgid "Show file debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі файла."
 
-#: gedit/gedit2.c:99
+#: gedit/gedit2.c:100
 msgid "Show plugin debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі дадатка."
 
-#: gedit/gedit2.c:102
+#: gedit/gedit2.c:103
 msgid "Show prefs debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі ўласьцівасьцяў."
 
-#: gedit/gedit2.c:105
+#: gedit/gedit2.c:106
 msgid "Show printing debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі друку."
 
-#: gedit/gedit2.c:108
+#: gedit/gedit2.c:109
 msgid "Show search debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі пошуку."
 
-#: gedit/gedit2.c:111
+#: gedit/gedit2.c:112
 msgid "Show undo debugging messages."
 msgstr ""
 "Адлюстроўваць паведамленьні атладкі\n"
 "адмены апошніх дзеяньняў."
 
-#: gedit/gedit2.c:114
+#: gedit/gedit2.c:115
 msgid "Show view debugging messages."
 msgstr "Адлюстроўваць паведамленьні атладкі акна."
 
-#: gedit/gedit2.c:117
+#: gedit/gedit2.c:118
 msgid "Show recent debugging messages."
 msgstr "Адлюстроўваць апошнія паведамленьні атладкі."
 
-#: gedit/gedit2.c:120
+#: gedit/gedit2.c:121
 msgid "Show session management debugging messages."
 msgstr "Паказываць паведамленьні атладкі кіраваньня сэансам."
 
-#: gedit/gedit2.c:123
+#: gedit/gedit2.c:124
 msgid "Turn on all debugging messages."
 msgstr "Уключыць усе атладачныя паведамленьні."
 
-#: gedit/gedit2.c:126
+#: gedit/gedit2.c:127
 msgid "Quit an existing instance of gedit"
 msgstr "Выйсьці з існуючага узору gedit"
 
-#: gedit/gedit2.c:129
+#: gedit/gedit2.c:130
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Стварыць новае акно ў існуючым узоры gedit"
 
-#: gedit/gedit2.c:132
+#: gedit/gedit2.c:133
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Стварыць новы дакумэнт у адчыненай укладцы gedit"
 
@@ -2442,12 +2672,12 @@ msgstr "Статыстыка _дакумэнта"
 msgid "Get statistic info on current document"
 msgstr "Выдаць статыстыку па бягучым дакумэнце"
 
-#: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.c:140
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid "Document Statistics"
 msgstr "Статыстыка дакумэнта"
 
-#: plugins/docinfo/docinfo.c:153
+#: plugins/docinfo/docinfo.c:154
 msgid "_Update"
 msgstr "_Абнавіць"
 
@@ -2542,31 +2772,27 @@ msgid "Run a command"
 msgstr "Выкананьне каманды"
 
 #: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:516
+#: plugins/shell_output/shell_output.c:502
 msgid "Stopped"
 msgstr "Спынена"
 
-#: plugins/shell_output/shell_output.c:246
-msgid "An error occurs while running the selected command."
-msgstr "Пад час выкананьня выбранае каманды ўзьнікла памылка."
-
-#: plugins/shell_output/shell_output.c:302
+#: plugins/shell_output/shell_output.c:282
 msgid "Run Command"
 msgstr "Выкананьне каманды"
 
-#: plugins/shell_output/shell_output.c:318
+#: plugins/shell_output/shell_output.c:301
 msgid "_Run"
 msgstr "_Выканаць"
 
-#: plugins/shell_output/shell_output.c:522
+#: plugins/shell_output/shell_output.c:508
 msgid "Done"
 msgstr "Скончана"
 
-#: plugins/shell_output/shell_output.c:524
+#: plugins/shell_output/shell_output.c:510
 msgid "Failed"
 msgstr "Памылка"
 
-#: plugins/shell_output/shell_output.c:696
+#: plugins/shell_output/shell_output.c:676
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2576,7 +2802,7 @@ msgstr ""
 "\n"
 "Калі ласка, увядзіце дапушчальную каманду абалонкі."
 
-#: plugins/shell_output/shell_output.c:729
+#: plugins/shell_output/shell_output.c:695
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2586,9 +2812,14 @@ msgstr ""
 "\n"
 "Увядзіце дапушчальную каманду абалонкі."
 
-#: plugins/shell_output/shell_output.c:815
+#: plugins/shell_output/shell_output.c:773
 msgid "Executing command"
 msgstr "Выкананая каманда"
+
+#: plugins/shell_output/shell_output.c:841
+#, fuzzy
+msgid "An error occured while running the selected command."
+msgstr "Пад час выкананьня выбранае каманды ўзьнікла памылка."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -2621,11 +2852,11 @@ msgid "gedit: Shell Output plugin"
 msgstr "gedit: Дадатак вываду абалонкі"
 
 #. Key in case the plugin ever needs any settings
-#: plugins/sort/sort.c:26
+#: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "_Сартаваць..."
 
-#: plugins/sort/sort.c:29
+#: plugins/sort/sort.c:30
 msgid "Sort the current document or selection."
 msgstr "Сартуе бягучы дакумэнт ці вылучэньне."
 
@@ -2788,9 +3019,19 @@ msgstr "Расейская"
 msgid "Swedish"
 msgstr "Швэдская"
 
-#: plugins/spell/gedit-spell-checker.c:734
+#: plugins/spell/gedit-spell-checker.c:102
+#, fuzzy
+msgid "Ukrainian"
+msgstr "Кірылічная/Украінская"
+
+#: plugins/spell/gedit-spell-checker.c:735
 msgid "Default"
 msgstr "Дапомна"
+
+#: plugins/spell/gedit-spell-language-dialog.c:233
+#, c-format
+msgid "Could not find the required widgets inside %s."
+msgstr "Ня атрымалася адшукаць неабходныя віджэты у сярэдзіне %s."
 
 #: plugins/spell/gedit-spell-language-dialog.c:253
 msgid "Languages"
@@ -2913,20 +3154,18 @@ msgid "Select the group of tags you want to use"
 msgstr "Выбярыце групу тэгаў, якую вы жадаеце выкарыстоўваць"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
-msgid "Tag Groups Combo"
-msgstr "Сьпіс выпадзеньня для груп тэгаў"
+#, fuzzy
+msgid "Available Tag Lists"
+msgstr "Даступныя фарматы"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
-msgid "Tags Name List"
-msgstr "Сьпіс назваў тэгаў"
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
+msgid "Tags"
+msgstr "Тэгі"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:188
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Двойчы клікніце па тэге, каб уставіць яго ў бягучы дакумэнт."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
-msgid "Tags"
-msgstr "Тэгі"
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
@@ -2951,19 +3190,19 @@ msgstr ""
 "Дадатак сьпіса тэгаў прадастаўляе мэтад простай устаўкі ў дакумэнт бяз "
 "набору тэгаў ці радкоў, якія выкарыстоўваюцца зачаста."
 
-#: plugins/time/time.c:48
+#: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
 msgstr "У_стаўка даты і часу..."
 
-#: plugins/time/time.c:51
+#: plugins/time/time.c:53
 msgid "Insert current date and time at the cursor position"
 msgstr "Уставіць бягучую дату ці час ля становішча курсора"
 
-#: plugins/time/time.c:448
+#: plugins/time/time.c:449
 msgid "Available formats"
 msgstr "Даступныя фарматы"
 
-#: plugins/time/time.c:552
+#: plugins/time/time.c:554
 msgid "Configure insert date/time plugin..."
 msgstr "Наладзіць дадатак устаўкі даты/часу..."
 
@@ -3021,6 +3260,135 @@ msgstr "Скапіяваць вылучаны тэкст у буфер абме�
 msgid "_Copy Text"
 msgstr "_Скапіяваць тэкст"
 
+#~ msgid "Could not find '"
+#~ msgstr "Немагчыма адшукаць '"
+
+#~ msgid ""
+#~ "page-setup-dialog.glade2'.\n"
+#~ "\n"
+#~ "Reinstall gedit."
+#~ msgstr ""
+#~ "page-setup-dialog.glade2'.\n"
+#~ "\n"
+#~ "Пераўсталюйце gedit."
+
+#~ msgid "Could not find the required widgets inside '"
+#~ msgstr "Немагчыма адшукаць неабходныя віджэты у '"
+
+#~ msgid "Tabs"
+#~ msgstr "Табуляцыя"
+
+#~ msgid "Wrap Mode"
+#~ msgstr "Рэжым пераноса радкоў"
+
+#~ msgid "Line Numbers"
+#~ msgstr "Нумараваньне радкоў"
+
+#~ msgid "Manager"
+#~ msgstr "Мэнаджар"
+
+#~ msgid "Cat_egories:"
+#~ msgstr "Ка_тэгорыі:"
+
+#~ msgid "Categories"
+#~ msgstr "Катэгорыі"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Аўтаматачны адступ</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Шрыфт &amp; Колеры</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Нумары радкоў</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Захаваць</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Табуляцыя</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Адкаціць</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Рэжым пераносу</span>"
+
+#~ msgid "Fonts & Colors"
+#~ msgstr "Шрыфты й колеры"
+
+#~ msgid "LOGO"
+#~ msgstr "Лягатып"
+
+#~ msgid "Line numbers"
+#~ msgstr "Нумары радкоў"
+
+#~ msgid "Plugin manager"
+#~ msgstr "Мэнаджар утулак"
+
+#~ msgid "Set _tabs width equivalent to"
+#~ msgstr "Усталяваць _шырыню табуляцыі ў"
+
+#~ msgid "Set limit on _undo actions to"
+#~ msgstr "Усталяваць колькасьць узроўняў _адкату ў "
+
+#~ msgid "Wrap mode"
+#~ msgstr "Рэжым пераносу радкоў"
+
+#~ msgid "character(s)"
+#~ msgstr "сымбаль(і)"
+
+#~ msgid "About selected plugin"
+#~ msgstr "Апра вылучаную ўтулку"
+
+#~ msgid "Configure the selected plugin"
+#~ msgstr "Наладзіць вылучаную ўтулку"
+
+#~ msgid "It is not possible to revert an Untitled document"
+#~ msgstr "Немагчыма аднавіць дакумэнт бяз назвы"
+
+#~ msgid "File '%s' saved."
+#~ msgstr "Файл \"%s\" захаваны."
+
+#~ msgid ""
+#~ "Do you want to revert to saved the document '%s'?\n"
+#~ "\n"
+#~ "You will not be able to undo this operation."
+#~ msgstr ""
+#~ "Жадаеце вярнуцца да захаванага дакумэнта \"%s\"?\n"
+#~ "\n"
+#~ "Вы ня здолееце адкаціць гэтую апэрацыю."
+
+#~ msgid "File '%s' reverted."
+#~ msgstr "Файл \"%s\" адноўлены."
+
+#~ msgid ""
+#~ "Do you want to save the changes you made to the document \"%s\"? \n"
+#~ "\n"
+#~ "Your changes will be lost if you don't save them."
+#~ msgstr ""
+#~ "Жадаеце захаваць зьмены зробленыя ў дакумэнце \"%s\"?\n"
+#~ "\n"
+#~ "Калі зьмены ня захаваць, яны будуць згублены."
+
+#~ msgid "_Don't quit"
+#~ msgstr "Н_я выходзіць"
+
+#~ msgid "_Don't close"
+#~ msgstr "Н_е зачыняць"
+
+#~ msgid "Replace a string"
+#~ msgstr "Замяніць радок"
+
+#~ msgid "Search again for the same string"
+#~ msgstr "Яшчэ раз знайсьці той жа радок"
+
+#~ msgid "Tag Groups Combo"
+#~ msgstr "Сьпіс выпадзеньня для груп тэгаў"
+
+#~ msgid "Tags Name List"
+#~ msgstr "Сьпіс назваў тэгаў"
+
 #~ msgid "Page"
 #~ msgstr "Старонка"
 
@@ -3030,9 +3398,6 @@ msgstr "_Скапіяваць тэкст"
 
 #~ msgid "Push this button to select the font to be used to print the headers"
 #~ msgstr "Націсьніце гэтую кнопку для выбару шрыфта для друку загалоўкаў"
-
-#~ msgid "Encodings"
-#~ msgstr "Кадаваньні"
 
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Шрыфты</span>"
@@ -3130,9 +3495,6 @@ msgstr "_Скапіяваць тэкст"
 
 #~ msgid "Hex#"
 #~ msgstr "Шэс#"
-
-#~ msgid "Name"
-#~ msgstr "Назва"
 
 #~ msgid "ASCII Table"
 #~ msgstr "Табліца ASCII"
@@ -3707,6 +4069,3 @@ msgstr "_Скапіяваць тэкст"
 
 #~ msgid "Recent _Files"
 #~ msgstr "Апошнія _файлы"
-
-#~ msgid "Open %s"
-#~ msgstr "Адчыніць %s"

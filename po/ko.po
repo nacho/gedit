@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-10 19:44+0900\n"
+"POT-Creation-Date: 2004-01-15 18:27+0100\n"
 "PO-Revision-Date: 2004-01-10 20:16+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
@@ -44,7 +44,7 @@ msgstr "gedit 자동화 팩토리"
 msgid "Edit text files"
 msgstr "텍스트 파일을 편집합니다"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:365
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
 msgid "Text Editor"
 msgstr "텍스트 편집기"
 
@@ -447,10 +447,118 @@ msgstr ""
 "편집 영역에 gedit에서 지정한 글꼴 대신 시스템의 기본 글꼴을 씁니다. 이 옵션"
 "이 꺼져 있으면 시스템 글꼴 대신 \"편집기 글꼴\" 옵션의 글꼴을 씁니다."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1965
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
 #, c-format
 msgid "Activate %s"
 msgstr "%s 활성"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:653
+#, fuzzy
+msgid "S_elect the documents you want to save:"
+msgstr "쓸려는 태그 묶음을 선택하십시오"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr ""
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+#, fuzzy
+msgid "_Save Selected"
+msgstr "모두 저장(_S)"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+msgid "Do_n't save"
+msgstr "저장하지 않음(_N)"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:360
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:369
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:375
+#, c-format
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:385
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:400
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:406
+#, c-format
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:421
+#, c-format
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:465
+#, c-format
+msgid "Save the changes to document \"%s\" before closing?"
+msgstr ""
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:639
+#, c-format
+msgid ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr ""
+
+#. Secondary label
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:670
+msgid "If you don't save, all your changes will be definitively lost."
+msgstr ""
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -461,7 +569,7 @@ msgid "_Go to Line"
 msgstr "줄로 바로 가기(_G)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:402
+#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "\"%s\"(이)라는 문구가 없습니다."
@@ -1063,62 +1171,62 @@ msgstr "열려고 하는 파일의 위치(URI)를 입력(_L):"
 msgid "Open from URI"
 msgstr "URI에서 열기"
 
-#: gedit/gedit-commands.c:553
+#: gedit/gedit-commands.c:556
 msgid "translator_credits"
 msgstr ""
 "남성현 <namsh@lgic.co.kr>, 1998\n"
 "황치덕 <hwang@mizi.co.kr>, 2000, 2001\n"
 "차영호 <ganadist@chollian.net>, 2001, 2002, 2003"
 
-#: gedit/gedit-commands.c:578
+#: gedit/gedit-commands.c:581
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:585
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit은 그놈 데스크탑을 위한 작고 가벼운 텍스트 에디터입니다."
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:602 gedit/gedit-document.c:620
+#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
 msgid "Untitled"
 msgstr "이름없음"
 
-#: gedit/gedit-document.c:608 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
 msgid "Invalid file name"
 msgstr "잘못된 파일이름"
 
-#: gedit/gedit-document.c:824 gedit/gedit-document.c:930
+#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "잘못된 UTF-8 데이터"
 
-#: gedit/gedit-document.c:1229
+#: gedit/gedit-document.c:1615
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s의 심벌릭 링크 정보를 읽을 수 없습니다"
 
-#: gedit/gedit-document.c:1275
+#: gedit/gedit-document.c:1661
 msgid "The file has too many symbolic links."
 msgstr "파일이 너무 많은 심벌릭 링크가 있습니다."
 
-#: gedit/gedit-document.c:1331
+#: gedit/gedit-document.c:1717
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit가 쓰기 모드에서 %s: 위치를 처리할 수 없습니다."
 
-#: gedit/gedit-document.c:1338
+#: gedit/gedit-document.c:1724
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit가 쓰기 모드에서 이런 종류의 위치를 처리할 수 없습니다."
 
-#: gedit/gedit-document.c:1351
+#: gedit/gedit-document.c:1737
 msgid "Invalid filename."
 msgstr "잘못된 파일이름."
 
-#: gedit/gedit-document.c:1463
+#: gedit/gedit-document.c:1849
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1126,7 +1234,7 @@ msgstr ""
 "파일을 저장하기 위한 디스크 공간이 부족합니다\n"
 "디스크 공간을 확보하고 다시 시도하십시오."
 
-#: gedit/gedit-document.c:1468
+#: gedit/gedit-document.c:1854
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1135,13 +1243,9 @@ msgstr ""
 "파일을 저장하려는 디스크에 파일 크기 제한이 걸려있습니다. 파일 크기를 줄이던"
 "지 크기 제한이 풀려있는 디스크에 저장하십시오."
 
-#: gedit/gedit-document.c:1512
+#: gedit/gedit-document.c:1898
 msgid "Could not create a backup file."
 msgstr "파일의 백업본을 만들 수 없습니다."
-
-#: gedit/gedit-document.c:1656
-msgid "It is not possible to revert an Untitled document"
-msgstr "제목 없음 문서를 되돌릴 수는 없습니다"
 
 #: gedit/gedit-encodings-option-menu.c:203
 msgid "Auto Detected"
@@ -1302,160 +1406,224 @@ msgstr "저장할 파일 선택"
 msgid "Select a filename to save"
 msgstr "저장할 파일이름 선택"
 
-#: gedit/gedit-file.c:157
+#: gedit/gedit-file.c:208
 msgid "Open File..."
 msgstr "파일 열기..."
 
-#: gedit/gedit-file.c:185 gedit/gedit-file.c:908
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "파일 '%s' 읽음"
-
-#: gedit/gedit-file.c:323 gedit/gedit-file.c:472
-#, c-format
-msgid "Saving file '%s'..."
+#: gedit/gedit-file.c:264 gedit/gedit-file.c:413
+#, fuzzy, c-format
+msgid "Saving document \"%s\"..."
 msgstr "파일 '%s' 저장..."
 
-#: gedit/gedit-file.c:351 gedit/gedit-file.c:487
-msgid "The document has not been saved."
+#: gedit/gedit-file.c:292 gedit/gedit-file.c:434
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been saved."
 msgstr "문서가 저장되지 않음"
 
-#: gedit/gedit-file.c:365 gedit/gedit-file.c:484
-#, c-format
-msgid "File '%s' saved."
-msgstr "파일 '%s' 저장됨."
+#: gedit/gedit-file.c:306 gedit/gedit-file.c:426
+#, fuzzy, c-format
+msgid "The document \"%s\" has been saved."
+msgstr "문서가 저장되지 않음"
 
-#: gedit/gedit-file.c:451
+#: gedit/gedit-file.c:392
 msgid "Save as..."
 msgstr "다른 이름으로 저장..."
 
-#: gedit/gedit-file.c:645
+#: gedit/gedit-file.c:592
+#, fuzzy, c-format
+msgid "Revert unsaved changes to document \"%s\"?"
+msgstr "문서 \"%s\"의 바뀐 점을 저장 하시겠습니까?"
+
+#: gedit/gedit-file.c:601
 #, c-format
 msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"저장된 문서 '%s'(을)를 되돌리겠습니까?\n"
-"\n"
-"되돌린 문서는 다시 복구할 수 없습니다."
+"Changes made to the document in the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
 
-#: gedit/gedit-file.c:655 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:610
+msgid ""
+"Changes made to the document in the last minute will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:616
+#, c-format
+msgid ""
+"Changes made to the document in the last minute and %ld second will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last minute and %ld seconds will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:626
+#, c-format
+msgid ""
+"Changes made to the document in the last %ld minute will be definitively "
+"lost."
+msgid_plural ""
+"Changes made to the document in the last %ld minutes will be definitively "
+"lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:641
+msgid ""
+"Changes made to the document in the last hour will be definitively lost."
+msgstr ""
+
+#: gedit/gedit-file.c:647
+#, c-format
+msgid ""
+"Changes made to the document in the last hour and %d minute will be "
+"definitively lost."
+msgid_plural ""
+"Changes made to the document in the last hour and %d minutes will be "
+"definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:662
+#, c-format
+msgid ""
+"Changes made to the document in the last %d hour will be definitively lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be definitively lost."
+msgstr[0] ""
+msgstr[1] ""
+
+#: gedit/gedit-file.c:685 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "되돌리기(_R)"
 
-#: gedit/gedit-file.c:689
-#, c-format
-msgid "Reverting file '%s'..."
-msgstr "파일 '%s' 되돌리는 중..."
+#: gedit/gedit-file.c:730
+#, fuzzy, c-format
+msgid "Error reverting the document \"%s\"."
+msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
 
-#: gedit/gedit-file.c:702
-msgid "The document has not been reverted."
+#: gedit/gedit-file.c:737
+#, fuzzy, c-format
+msgid "The document \"%s\" has not been reverted."
 msgstr "문서를 되돌리지 못함"
 
-#: gedit/gedit-file.c:712
-#, c-format
-msgid "File '%s' has been reverted."
-msgstr "'%s' 파일을 되돌렸습니다."
+#: gedit/gedit-file.c:741
+#, fuzzy, c-format
+msgid "The document \"%s\" has been reverted."
+msgstr "문서를 되돌리지 못함"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:769
+#, fuzzy, c-format
+msgid "Reverting the document \"%s\"..."
+msgstr "파일 '%s' 되돌리는 중..."
+
+#: gedit/gedit-file.c:904
+msgid "Could not read data from stdin."
+msgstr "표준 입력에서 데이터를 읽을 수 없습니다."
+
+#: gedit/gedit-file.c:954
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "\"%s\" 파일이 없습니다. 새로 만드시겠습니까?"
+
+#: gedit/gedit-file.c:1077
+#, fuzzy
+msgid "Reverting file:"
+msgstr "파일 '%s' 되돌리는 중..."
+
+#: gedit/gedit-file.c:1081
+#, fuzzy
+msgid "Loading file:"
+msgstr "%d개 파일을 읽어들이는 중입니다..."
+
+#: gedit/gedit-file.c:1250 gedit/gedit-file.c:1409
+#, c-format
+msgid "Error loading file \"%s\""
+msgstr ""
+
+#: gedit/gedit-file.c:1271
+#, fuzzy, c-format
+msgid "Loaded file \"%s\""
+msgstr "파일 '%s' 읽음"
+
+#: gedit/gedit-file.c:1348
+#, fuzzy, c-format
+msgid "Loaded %d file"
+msgid_plural "Loaded %d files"
+msgstr[0] "%i개의 파일을 읽어들였습니다"
+
+#: gedit/gedit-file.c:1382
+#, fuzzy, c-format
+msgid "Loading file \"%s\"..."
+msgstr "%d개 파일을 읽어들이는 중입니다..."
+
+#: gedit/gedit-file.c:1529
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
 msgstr[0] "%d개 파일을 읽어들이는 중입니다..."
 
-#: gedit/gedit-file.c:777
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "\"%s\" 파일이 없습니다. 새로 만드시겠습니까?"
-
-#: gedit/gedit-file.c:832
-#, c-format
-msgid "Loaded %i files"
-msgstr "%i개의 파일을 읽어들였습니다"
-
-#: gedit/gedit-file.c:966
-msgid "Could not read data from stdin."
-msgstr "표준 입력에서 데이터를 읽을 수 없습니다."
-
 #. Read only
-#: gedit/gedit-mdi-child.c:246
+#: gedit/gedit-mdi-child.c:248
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:582 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "새 창으로 옮기기(_M)"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:726
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: gedit/gedit-mdi-child.c:680
+#: gedit/gedit-mdi-child.c:734
 msgid "Unicode (UTF-8)"
 msgstr "유니코드 (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:687
+#: gedit/gedit-mdi-child.c:741
 msgid "Name:"
 msgstr "이름:"
 
-#: gedit/gedit-mdi-child.c:688
+#: gedit/gedit-mdi-child.c:742
 msgid "MIME Type:"
 msgstr "MIME 종류:"
 
-#: gedit/gedit-mdi-child.c:689
+#: gedit/gedit-mdi-child.c:743
 msgid "Encoding:"
 msgstr "인코딩:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
+#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s'을(를) 엽니다"
 
-#: gedit/gedit-mdi.c:491
+#: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
 msgstr "최근에 쓰인 파일 열기"
 
-#: gedit/gedit-mdi.c:994
-#, c-format
-msgid "Do you want to save the changes you made to the document \"%s\"?"
-msgstr "문서 \"%s\"의 바뀐 점을 저장 하시겠습니까?"
-
-#: gedit/gedit-mdi.c:1002
-msgid "Your changes will be lost if you don't save them."
-msgstr "저장하지 않으면 바뀐 점을 잃어버리게 됩니다."
-
-#: gedit/gedit-mdi.c:1010
-msgid "_Don't quit"
-msgstr "마치지 않음(_D)"
-
-#: gedit/gedit-mdi.c:1014
-msgid "_Don't close"
-msgstr "닫지 않음(_D)"
-
-#: gedit/gedit-mdi.c:1018
-msgid "Do_n't save"
-msgstr "저장하지 않음(_N)"
-
-#: gedit/gedit-mdi.c:1110
+#: gedit/gedit-mdi.c:1291
 msgid "(modified)"
 msgstr "(바뀜)"
 
-#: gedit/gedit-mdi.c:1116
+#: gedit/gedit-mdi.c:1297
 msgid "(readonly)"
 msgstr "(읽기 전용)"
 
-#: gedit/gedit-mdi.c:1722
+#: gedit/gedit-mdi.c:1927
 msgid "Normal"
 msgstr "보통"
 
-#: gedit/gedit-mdi.c:1723
+#: gedit/gedit-mdi.c:1928
 msgid "Use Normal highlight mode"
 msgstr "일반 강조 모드 사용"
 
-#: gedit/gedit-mdi.c:1799
+#: gedit/gedit-mdi.c:2004
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 강조 모드 사용"
@@ -1957,7 +2125,7 @@ msgstr "실행 취소(_U)"
 msgid "_View"
 msgstr "보기(_V)"
 
-#: gedit/gedit-utils.c:365
+#: gedit/gedit-utils.c:407
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1968,35 +2136,35 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:373
+#: gedit/gedit-utils.c:415
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 깨진 데이터를 포함하고 있습니다."
 
-#: gedit/gedit-utils.c:384
+#: gedit/gedit-utils.c:426
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 열 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: gedit/gedit-utils.c:390
+#: gedit/gedit-utils.c:432
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "파일 \"%s\"을(를) 열 수 없습니다"
 
-#: gedit/gedit-utils.c:400
+#: gedit/gedit-utils.c:442
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 데이터에 잘못된 형식이 있습니다."
 
-#: gedit/gedit-utils.c:407
+#: gedit/gedit-utils.c:449
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 파일이 너무 큽니다."
 
-#: gedit/gedit-utils.c:414
+#: gedit/gedit-utils.c:456
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2007,12 +2175,12 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:422
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 접근이 거부되었습니다."
 
-#: gedit/gedit-utils.c:429
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2023,7 +2191,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:437
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2034,7 +2202,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:445
+#: gedit/gedit-utils.c:487
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2043,7 +2211,7 @@ msgstr ""
 "파일 \"%s\"을(를) 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다"
 "시 시도하십시오."
 
-#: gedit/gedit-utils.c:471
+#: gedit/gedit-utils.c:513
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2055,7 +2223,7 @@ msgstr ""
 "\n"
 "입력한 위치와 프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:486
+#: gedit/gedit-utils.c:528
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2066,7 +2234,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:495
+#: gedit/gedit-utils.c:537
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2077,7 +2245,7 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:504
+#: gedit/gedit-utils.c:546
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2088,7 +2256,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:513 gedit/gedit-utils.c:581
+#: gedit/gedit-utils.c:555 gedit/gedit-utils.c:628
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2099,7 +2267,12 @@ msgstr ""
 "\n"
 "이진 파일을 열려고 한 것 같습니다."
 
-#: gedit/gedit-utils.c:557
+#: gedit/gedit-utils.c:564 gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "파일 \"%s\"을(를) 열 수 없습니다."
+
+#: gedit/gedit-utils.c:604
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2114,7 +2287,7 @@ msgstr ""
 "이진 파일이 아닌지 확인하시고, \"파일 열기...\"(혹은 \"위치 열기...\")에서 올"
 "바른 문자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:569 gedit/gedit-utils.c:599
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2128,28 +2301,23 @@ msgstr ""
 "이진 파일이 아닌지 확인하시고, \"파일 열기...\"(혹은 \"위치 열기...\")에서 올"
 "바른 문자 코딩을 선택했는지 확인한 다음 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:615
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "파일 \"%s\"을(를) 열 수 없습니다."
-
-#: gedit/gedit-utils.c:619
-#, c-format
+#: gedit/gedit-utils.c:666
+#, fuzzy, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 msgstr ""
 "파일 \"%s\"을(를) 열 수 없습니다.\n"
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:671
+#: gedit/gedit-utils.c:718
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 저장할 수 없습니다."
 
-#: gedit/gedit-utils.c:675
+#: gedit/gedit-utils.c:722
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2160,7 +2328,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:728
+#: gedit/gedit-utils.c:775
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2171,24 +2339,24 @@ msgstr ""
 "\n"
 "최근에 지워졌을 것입니다."
 
-#: gedit/gedit-utils.c:735
+#: gedit/gedit-utils.c:782
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 깨진 데이터가 들어 있습니다."
 
-#: gedit/gedit-utils.c:746
+#: gedit/gedit-utils.c:793
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: gedit/gedit-utils.c:752 gedit/gedit-utils.c:892
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
 
-#: gedit/gedit-utils.c:762
+#: gedit/gedit-utils.c:809
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2196,17 +2364,17 @@ msgid ""
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. 데이터에 잘못된 형식이 들어 있습니다."
 
-#: gedit/gedit-utils.c:769
+#: gedit/gedit-utils.c:816
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 파일이 너무 큽니다."
 
-#: gedit/gedit-utils.c:776
+#: gedit/gedit-utils.c:823
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 접근이 거부되었습니다."
 
-#: gedit/gedit-utils.c:783
+#: gedit/gedit-utils.c:830
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2217,7 +2385,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:791
+#: gedit/gedit-utils.c:838
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2226,7 +2394,7 @@ msgstr ""
 "파일 \"%s\"을(를) 되돌리려는데 메모리가 부족합니다. 몇몇 응용 프로그램을 닫"
 "은 후 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:864
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2237,7 +2405,7 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:831
+#: gedit/gedit-utils.c:878
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2248,12 +2416,12 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:838
+#: gedit/gedit-utils.c:885
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 기록 준비가 실패하였습니다."
 
-#: gedit/gedit-utils.c:845
+#: gedit/gedit-utils.c:892
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2264,16 +2432,16 @@ msgstr ""
 "\n"
 "아마 이진 파일을 되돌릴려고 하는 것 같습니다."
 
-#: gedit/gedit-utils.c:854
+#: gedit/gedit-utils.c:901
 msgid "It is not possible to revert an Untitled document."
 msgstr "제목 없는 문서는 되돌릴 수 없습니다."
 
-#: gedit/gedit-utils.c:943
+#: gedit/gedit-utils.c:990
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "파일 \"%s\"이(가) 이미 있습니다."
 
-#: gedit/gedit-utils.c:949
+#: gedit/gedit-utils.c:996
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2284,7 +2452,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하십시오."
 
-#: gedit/gedit-utils.c:958
+#: gedit/gedit-utils.c:1005
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2295,7 +2463,7 @@ msgstr ""
 "\n"
 "적절한 쓰기 권한이 있는지 확인하십시오."
 
-#: gedit/gedit-utils.c:965
+#: gedit/gedit-utils.c:1012
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2306,7 +2474,7 @@ msgstr ""
 "\n"
 "파일 이름이 너무 깁니다."
 
-#: gedit/gedit-utils.c:972
+#: gedit/gedit-utils.c:1019
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2318,7 +2486,7 @@ msgstr ""
 "\n"
 "파일 이름에 포함된 디렉토리가 없거나 깨진 심벌릭 링크가 있습니다."
 
-#: gedit/gedit-utils.c:981
+#: gedit/gedit-utils.c:1028
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2329,7 +2497,7 @@ msgstr ""
 ".\n"
 "디스크 공간을 확보하고 다시 시도하십시오."
 
-#: gedit/gedit-utils.c:987
+#: gedit/gedit-utils.c:1034
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 만들 수 없습니다."
@@ -2340,16 +2508,16 @@ msgstr "파일 \"%s\"을(를) 만들 수 없습니다."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:686
+#: gedit/gedit-view.c:697
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr " %d행, %d열"
 
-#: gedit/gedit-view.c:724
+#: gedit/gedit-view.c:735
 msgid "  OVR"
 msgstr " 바꿈"
 
-#: gedit/gedit-view.c:726
+#: gedit/gedit-view.c:737
 msgid "  INS"
 msgstr " 삽입"
 
@@ -3018,3 +3186,30 @@ msgstr "선택한 텍스트를 클립보드로 복사합니다"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "텍스트 복사(_C)"
+
+#~ msgid "It is not possible to revert an Untitled document"
+#~ msgstr "제목 없음 문서를 되돌릴 수는 없습니다"
+
+#~ msgid "File '%s' saved."
+#~ msgstr "파일 '%s' 저장됨."
+
+#~ msgid ""
+#~ "Do you want to revert to saved the document '%s'?\n"
+#~ "\n"
+#~ "You will not be able to undo this operation."
+#~ msgstr ""
+#~ "저장된 문서 '%s'(을)를 되돌리겠습니까?\n"
+#~ "\n"
+#~ "되돌린 문서는 다시 복구할 수 없습니다."
+
+#~ msgid "File '%s' has been reverted."
+#~ msgstr "'%s' 파일을 되돌렸습니다."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "저장하지 않으면 바뀐 점을 잃어버리게 됩니다."
+
+#~ msgid "_Don't quit"
+#~ msgstr "마치지 않음(_D)"
+
+#~ msgid "_Don't close"
+#~ msgstr "닫지 않음(_D)"
