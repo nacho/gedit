@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2000-06-27 03:18+0200\n"
+"POT-Creation-Date: 2000-06-27 13:04+0200\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -92,11 +92,11 @@ msgstr ""
 msgid "Untitled"
 msgstr "Neimenovan"
 
-#: plugins/diff/diff.c:422
+#: plugins/diff/diff.c:421
 msgid "Diff"
 msgstr "Program diff"
 
-#: plugins/diff/diff.c:423
+#: plugins/diff/diff.c:422
 msgid "diff plugin"
 msgstr "diff vtiè"
 
@@ -692,7 +692,7 @@ msgstr "_Odstrani Pogled"
 msgid "Remove view of the document"
 msgstr "Odstrani pogled na dokument"
 
-#: src/menus.c:196 src/plugin.c:128 src/plugin.c:226
+#: src/menus.c:196 src/plugin.c:82 src/plugin.c:354
 msgid "_Plugins"
 msgstr "_Vtièi"
 
@@ -792,24 +792,15 @@ msgstr "Izhod"
 msgid "Exit the program"
 msgstr "Izhod iz programa"
 
-#: src/plugin.c:70
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "Napaka, ne morem odpreti datoteke vtièa, %s"
+#: src/plugin.c:93
+msgid "Manager ..."
+msgstr "Upravljalnik ..."
 
-#: src/plugin.c:81
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "Napaka, vtiè ne vsebuje init_plugin funkcije."
+#: src/plugin.c:94
+msgid "Add/Remove installed plugins"
+msgstr "Dodaj/Odstrani name¹èene vtièe"
 
-#: src/plugin.c:90
-msgid "Error, init_plugin returned an error"
-msgstr "Napaka, init_plugin je vrnila napako"
-
-#: src/plugin.c:118
-msgid "Error, plugin is still in use"
-msgstr "Napaka, vtiè je ¹e vedno v uporabi"
-
-#: src/plugin.c:358
+#: src/plugin.c:170
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -818,7 +809,7 @@ msgstr ""
 "Program %s ni bil najden.\n"
 "\n"
 
-#: src/plugin.c:373
+#: src/plugin.c:185
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -827,7 +818,7 @@ msgstr ""
 "Ka¾e, da '%s' ne obstaja.\n"
 "\n"
 
-#: src/plugin.c:375
+#: src/plugin.c:187
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -838,7 +829,7 @@ msgstr ""
 "a v njem se nahaja '%s'.\n"
 "\n"
 
-#: src/plugin.c:378
+#: src/plugin.c:190
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -847,7 +838,7 @@ msgstr ""
 "Ka¾e, da '%s' ni program.\n"
 "\n"
 
-#: src/plugin.c:382
+#: src/plugin.c:194
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -855,6 +846,23 @@ msgid ""
 msgstr ""
 "%sVtièa %s ne boste mogli uporabiti brez %s. \n"
 " ®elite navesti imenik v katerem se nahaja %s?"
+
+#: src/plugin.c:295
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr "Napaka, ne morem odpreti datoteke vtièa, %s"
+
+#: src/plugin.c:305
+msgid "Error, plugin does not contain init_plugin function."
+msgstr "Napaka, vtiè ne vsebuje init_plugin funkcije."
+
+#: src/plugin.c:314
+msgid "Error, init_plugin returned an error"
+msgstr "Napaka, init_plugin je vrnila napako"
+
+#: src/plugin.c:344
+msgid "Error, plugin is still in use"
+msgstr "Napaka, vtiè je ¹e vedno v uporabi"
 
 #: src/print.c:176
 msgid "Pages"
