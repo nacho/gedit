@@ -35,6 +35,8 @@
 #include <string.h>
 
 #include <libgnome/gnome-i18n.h>
+#include <gdk/gdkkeysyms.h>
+
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"
@@ -107,6 +109,7 @@ static void gedit_view_dnd_drop (GtkTextView *view,
 			     guint info,
 			     guint time,
 			     gpointer data);
+static gint gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view);
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -583,6 +586,12 @@ gedit_view_new (GeditDocument *doc)
 			  "readonly_changed",
 			  G_CALLBACK (gedit_view_doc_readonly_changed_handler),
 			  view);
+
+	g_signal_connect (G_OBJECT (view->priv->text_view),
+			  "key_press_event",
+			  G_CALLBACK (gedit_view_key_press_cb),
+			  view);
+
 
 	gtk_text_view_set_editable (view->priv->text_view, !gedit_document_is_readonly (doc));	
 
@@ -1137,4 +1146,115 @@ gedit_view_get_gtk_text_view (const GeditView *view)
 
 	return view->priv->text_view;
 }
+
+static gchar*
+compute_indentation (GeditView *view, gint line)
+{
+	GtkTextIter start;
+	GtkTextIter end;
+	gunichar ch;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (view->priv->document), 
+			&start, line);
+
+	end = start;
+
+	ch = gtk_text_iter_get_char (&end);
+	while (g_unichar_isspace (ch) && ch != '\n')
+	{
+		if (!gtk_text_iter_forward_char (&end))
+			break;
+
+		ch = gtk_text_iter_get_char (&end);
+	}
+
+	if (gtk_text_iter_equal (&start, &end))
+		return NULL;
+
+	return gtk_text_iter_get_slice (&start, &end);
+}
+
+static gint
+gedit_view_key_press_cb (GtkWidget *widget, GdkEventKey *event, GeditView *view)
+{
+	GtkTextBuffer *buf;
+	GtkTextIter cur;
+	GtkTextMark *mark;
+	gint key;
+	gboolean auto_indent;
+	gboolean insert_spaces;
+
+	auto_indent = gedit_prefs_manager_get_auto_indent();
+	insert_spaces = gedit_prefs_manager_get_insert_spaces ();
+
+	buf = gtk_text_view_get_buffer (GTK_TEXT_VIEW (widget));
+
+	key = event->keyval;
+
+	mark = gtk_text_buffer_get_mark (buf, "insert");
+	gtk_text_buffer_get_iter_at_mark (buf, &cur, mark);
+	
+	if ((key == GDK_Return) && auto_indent && gtk_text_iter_ends_line (&cur)) 
+	{
+		/* Auto-indent means that when you press ENTER at the end of a
+		 * line, the new line is automatically indented at the same
+		 * level as the previous line.
+		 */
+		gchar *indent = NULL;
+
+		/* Calculate line indentation and create indent string. */
+		indent = compute_indentation (view, gtk_text_iter_get_line (&cur));
+
+		if (indent != NULL)
+		{
+			/* Insert new line and auto-indent. */
+			gtk_text_buffer_begin_user_action (buf);
+			gtk_text_buffer_insert (buf, &cur, "\n", 1);
+			gtk_text_buffer_insert (buf, &cur, indent, strlen (indent));
+			g_free (indent);
+			gtk_text_buffer_end_user_action (buf);
+			gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (widget),
+							    gtk_text_buffer_get_insert (buf));
+			return TRUE;
+		}
+	}
+
+	if ((key == GDK_Tab) && insert_spaces)
+	{
+		gint cur_pos;
+		gint num_of_equivalent_spaces;
+		gint tabs_size;
+		gint i;
+		gchar *spaces;
+
+		tabs_size = gedit_prefs_manager_get_tabs_size (); 
+		
+		cur_pos = gtk_text_iter_get_line_offset (&cur);
+
+		num_of_equivalent_spaces = tabs_size - (cur_pos % tabs_size); 
+
+		spaces = g_malloc (num_of_equivalent_spaces + 1);
+		
+		for (i = 0; i < num_of_equivalent_spaces; i++)
+			spaces [i] = ' ';
+		
+		spaces [num_of_equivalent_spaces] = '\0';
+		
+		gtk_text_buffer_begin_user_action (buf);
+		gtk_text_buffer_insert (buf,  &cur, spaces, num_of_equivalent_spaces);
+		gtk_text_buffer_end_user_action (buf);
+
+		gtk_text_view_scroll_mark_onscreen (GTK_TEXT_VIEW (widget),
+						    gtk_text_buffer_get_insert (buf));
+		
+		g_free (spaces);
+
+		return TRUE;
+	}
+		
+	return GTK_WIDGET_CLASS (parent_class)->key_press_event (widget, event);
+}
+
 

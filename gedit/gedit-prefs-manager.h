@@ -134,6 +134,17 @@ gint			 gedit_prefs_manager_get_tabs_size		(void);
 void			 gedit_prefs_manager_set_tabs_size		(gint ts);
 gboolean		 gedit_prefs_manager_tabs_size_can_set		(void);
 
+/* Insert spaces */
+gboolean		 gedit_prefs_manager_get_insert_spaces	 	(void);
+void			 gedit_prefs_manager_set_insert_spaces	 	(gboolean ai);
+gboolean		 gedit_prefs_manager_insert_spaces_can_set 	(void);
+
+
+/* Auto indent */
+gboolean		 gedit_prefs_manager_get_auto_indent	 	(void);
+void			 gedit_prefs_manager_set_auto_indent	 	(gboolean ai);
+gboolean		 gedit_prefs_manager_auto_indent_can_set 	(void);
+
 /* Display line numbers */
 gboolean		 gedit_prefs_manager_get_display_line_numbers 	(void);
 void			 gedit_prefs_manager_set_display_line_numbers 	(gboolean dln);

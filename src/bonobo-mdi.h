@@ -122,6 +122,8 @@ void 	      bonobo_mdi_construct 		(BonoboMDI *mdi,
 						 gint default_window_width,
 						 gint default_window_height);
 
+void 	      bonobo_mdi_destroy 		(BonoboMDI *mdi);
+
 /* setting the ui template*/
 void          bonobo_mdi_set_ui_template	(BonoboMDI *mdi, 
 						 const gchar *xml, 

@@ -53,14 +53,16 @@
 #define LOGO			3
 #define	FONT_COLORS_SETTINGS 	2
 #define SAVE_SETTINGS		4
-#define TABS_SETTINGS		0
-#define UNDO_SETTINGS		1
+#define TABS_SETTINGS		1
+#define UNDO_SETTINGS		0
 #define WRAP_MODE_SETTINGS	5
 #define PRINT_SETTINGS		6
 #define LINE_NUMBERS_SETTINGS	7
 #define PRINT_FONTS_SETTINGS	8
 #define PLUGIN_MANAGER_SETTINGS 9
 #define LOAD_SETTINGS		10
+#define AUTO_INDENT_SETTINGS	11
+
 
 enum
 {
@@ -103,6 +105,10 @@ struct _GeditPreferencesDialogPrivate
 
 	/* Tabs page */
 	GtkWidget	*tabs_width_spinbutton;
+	GtkWidget	*insert_spaces_checkbutton;
+
+	/* Auto indent */
+	GtkWidget	*auto_indent_checkbutton;
 
 	/* Wrap mode page */
 	GtkWidget	*wrap_never_radiobutton;
@@ -217,6 +223,7 @@ static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (G
 static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, 
 								    GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_auto_indent_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 static gint last_selected_page_num = FONT_COLORS_SETTINGS;
 static GtkDialogClass* parent_class = NULL;
@@ -226,8 +233,9 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 
 	{N_("Tabs"), NULL, TABS_SETTINGS},
-	{N_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
-	{N_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
+	{N_("Wrap Mode"), NULL, WRAP_MODE_SETTINGS},
+	{N_("Auto Indent"), NULL, AUTO_INDENT_SETTINGS},
+	{N_("Line Numbers"), NULL , LINE_NUMBERS_SETTINGS},
 	
 	{N_("Load"), NULL, LOAD_SETTINGS },
  	{N_("Save"), NULL, SAVE_SETTINGS },
@@ -650,6 +658,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
 	gedit_preferences_dialog_setup_plugin_manager_page (dlg, gui);
 	gedit_preferences_dialog_setup_load_page (dlg, gui);
+	gedit_preferences_dialog_setup_auto_indent_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -1051,11 +1060,24 @@ static void
 gedit_preferences_dialog_tabs_width_spinbutton_value_changed (GtkSpinButton *spin_button,
 		GeditPreferencesDialog *dlg)
 {
+	gedit_debug (DEBUG_PREFS, "");
+
 	g_return_if_fail (spin_button == GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton));
 
 	gedit_prefs_manager_set_tabs_size (gtk_spin_button_get_value_as_int (spin_button));
 }
-			
+	
+static void
+gedit_preferences_dialog_insert_spaces_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->insert_spaces_checkbutton));
+
+	gedit_prefs_manager_set_insert_spaces (gtk_toggle_button_get_active (button));
+}
+
 static gboolean 
 gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -1065,22 +1087,70 @@ gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML 
 	
 	dlg->priv->tabs_width_spinbutton = glade_xml_get_widget (gui, "tabs_width_spinbutton");
 	tabs_width_hbox = glade_xml_get_widget (gui, "tabs_width_hbox");
+	dlg->priv->insert_spaces_checkbutton = glade_xml_get_widget (gui, "insert_spaces_checkbutton");
 		
 	g_return_val_if_fail (dlg->priv->undo_levels_spinbutton, FALSE);
 	g_return_val_if_fail (tabs_width_hbox, FALSE);
-
+	g_return_val_if_fail (dlg->priv->insert_spaces_checkbutton, FALSE);
+	
 	/* Set initial state */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton),
-					   (guint) gedit_prefs_manager_get_tabs_size ());
+				   (guint) gedit_prefs_manager_get_tabs_size ());
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->insert_spaces_checkbutton), 
+				      gedit_prefs_manager_get_insert_spaces ());
 
 	/* Set widget sensitivity */
 	gtk_widget_set_sensitive (tabs_width_hbox, 
 				  gedit_prefs_manager_tabs_size_can_set ());
-
+	gtk_widget_set_sensitive (dlg->priv->insert_spaces_checkbutton,
+				  gedit_prefs_manager_insert_spaces_can_set ());
+	
 	/* Connect signal */
 	g_signal_connect (G_OBJECT (dlg->priv->tabs_width_spinbutton), "value_changed",
 			  G_CALLBACK (gedit_preferences_dialog_tabs_width_spinbutton_value_changed),
 			  dlg);
+
+	g_signal_connect (G_OBJECT (dlg->priv->insert_spaces_checkbutton), "toggled", 
+			  G_CALLBACK (gedit_preferences_dialog_insert_spaces_checkbutton_toggled), 
+			  dlg);
+
+	return TRUE;
+}
+
+static void
+gedit_preferences_dialog_auto_indent_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->auto_indent_checkbutton));
+
+	gedit_prefs_manager_set_auto_indent (gtk_toggle_button_get_active (button));
+}
+
+static gboolean
+gedit_preferences_dialog_setup_auto_indent_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->auto_indent_checkbutton = glade_xml_get_widget (gui, "auto_indent_checkbutton");
+		
+	g_return_val_if_fail (dlg->priv->auto_indent_checkbutton, FALSE);
+	
+	/* Set initial state */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->auto_indent_checkbutton), 
+				      gedit_prefs_manager_get_auto_indent ());
+
+	/* Set widget sensitivity */
+	gtk_widget_set_sensitive (dlg->priv->auto_indent_checkbutton,
+				  gedit_prefs_manager_auto_indent_can_set ());
+	
+	/* Connect signal */
+	g_signal_connect (G_OBJECT (dlg->priv->auto_indent_checkbutton), "toggled", 
+			  G_CALLBACK (gedit_preferences_dialog_auto_indent_checkbutton_toggled), 
+			  dlg);
+
 	return TRUE;
 }
 

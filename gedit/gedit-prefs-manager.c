@@ -74,6 +74,10 @@
 
 #define GPM_TABS_DIR			GPM_PREFS_DIR "/editor/tabs"
 #define GPM_TABS_SIZE			GPM_TABS_DIR "/tabs_size"
+#define GPM_INSERT_SPACES		GPM_TABS_DIR "/insert_spaces"
+
+#define GPM_AUTO_INDENT_DIR		GPM_PREFS_DIR "/editor/auto_indent"
+#define GPM_AUTO_INDENT			GPM_AUTO_INDENT_DIR "/auto_indent"
 
 #define GPM_LINE_NUMBERS_DIR		GPM_PREFS_DIR "/editor/line_numbers"
 #define GPM_DISPLAY_LINE_NUMBERS 	GPM_LINE_NUMBERS_DIR "/display_line_numbers"
@@ -134,6 +138,9 @@
 #define GPM_DEFAULT_WRAP_MODE		"GTK_WRAP_WORD"
 
 #define GPM_DEFAULT_TABS_SIZE		8
+#define GPM_DEFAULT_INSERT_SPACES	0 /* FALSE */
+
+#define GPM_DEFAULT_AUTO_INDENT		0 /* FALSE */
 
 #define GPM_DEFAULT_DISPLAY_LINE_NUMBERS 0 /* FALSE */
 
@@ -886,6 +893,16 @@ gedit_prefs_manager_wrap_mode_can_set (void)
 DEFINE_INT_PREF (tabs_size, 
 		 GPM_TABS_SIZE, 
 		 GPM_DEFAULT_TABS_SIZE);
+
+/* Insert spaces */
+DEFINE_BOOL_PREF (insert_spaces, 
+		  GPM_INSERT_SPACES, 
+		  GPM_DEFAULT_INSERT_SPACES)
+
+/* Auto indent */
+DEFINE_BOOL_PREF (auto_indent, 
+		  GPM_AUTO_INDENT, 
+		  GPM_DEFAULT_AUTO_INDENT)
 
 /* Display line numbers */
 DEFINE_BOOL_PREF (display_line_numbers, 

@@ -136,6 +136,8 @@ client_die_cb (GnomeClient *client, gpointer data)
 
 	/* FIXME: we should enable it, but it crashes here - Paolo */
 	/*
+	bonobo_mdi_destroy (BONOBO_MDI (gedit_mdi));
+
 	g_object_unref (G_OBJECT (gedit_mdi));
 	*/
 	

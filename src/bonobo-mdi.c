@@ -314,8 +314,6 @@ bonobo_mdi_finalize (GObject *object)
 	mdi = BONOBO_MDI (object);
 	g_return_if_fail (mdi->priv != NULL);
 	
-	bonobo_mdi_remove_all (mdi, TRUE);
-
 	if (mdi->priv->child_list_path != NULL)
 		g_free (mdi->priv->child_list_path);
 	
@@ -340,6 +338,21 @@ bonobo_mdi_finalize (GObject *object)
 	gedit_debug (DEBUG_MDI, "END");
 }
 
+void 
+bonobo_mdi_destroy (BonoboMDI *mdi)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_if_fail (BONOBO_IS_MDI (mdi));
+	
+	bonobo_mdi_remove_all (mdi, TRUE);
+
+	if (bonobo_mdi_get_active_window (mdi))
+	{
+		gtk_widget_destroy (GTK_WIDGET (bonobo_mdi_get_active_window (mdi)));
+	}
+}
+	
 
 static void 
 bonobo_mdi_instance_init (BonoboMDI *mdi)

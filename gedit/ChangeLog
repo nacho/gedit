@@ -1,3 +1,21 @@
+2002-10-11  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-view.c (gedit_view_key_press_cb)(compute_indentation):
+	implemented "auto indent" and "insert spaces instead of tabs"
+
+	* dialog/gedit-preferences-dialog.c:
+	* dialog/gedit-preferences.glade2: new "auto indent" page + a lot of cosmetic
+	changes (i.e. I have removed the description text in all the pages)
+
+	* bonobo-mdi.[ch] (bonobo_mdi_destroy): new function to destroy all the toplevel
+	windows
+	(bonobo_mdi_finalize): don't call bonobo_mdi_remove_all
+
+	* gedit-file.c (gedit_file_exit): destroy the active window before quitting
+
+	* gedit-prefs-manager.[ch]: added functions for the new "insert_spaces" and 
+	"auto_indents" key
+
 2002-10-07  James Willcox  <jwillcox@gnome.org>
 
 	* gedit-file.c: (gedit_file_open_real), (gedit_file_save),
