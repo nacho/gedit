@@ -52,9 +52,9 @@ AM_GNOME_GETTEXT
 dnl ******************************
 dnl gtk+ checking
 dnl ******************************
-AM_PATH_GTK(1.2.7,,
+AM_PATH_GTK(1.2.9,,
   AC_MSG_ERROR([
-*** GTK+ 1.2.7 or better is required. The latest version of GTK+
+*** GTK+ 1.2.9 or better is required. The latest version of GTK+
 *** is always available from ftp://ftp.gtk.org/.]),
     )
 
@@ -62,14 +62,14 @@ AM_PATH_GTK(1.2.7,,
 dnl ******************************
 dnl GnomePrint checking
 dnl ******************************
-AC_MSG_CHECKING(for GnomePrint libraries >= 0.25)
+AC_MSG_CHECKING(for GnomePrint libraries >= 0.28)
 if gnome-config --libs print > /dev/null 2>&1; then 
     vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
         awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 25; then
+    if test "$vers" -ge 28; then
         AC_MSG_RESULT(found)
     else
-        AC_MSG_ERROR(You need at least GNOME print 0.25 for this version of gedit)
+        AC_MSG_ERROR(You need at least GNOME print 0.28 for this version of gedit)
     fi
 else
     AC_MSG_ERROR(Did not find GnomePrint installed)
@@ -79,13 +79,13 @@ fi
 dnl ******************************
 dnl LibGlade checking
 dnl ******************************
-AC_MSG_CHECKING(for Glade libraries >= 0.11)
+AC_MSG_CHECKING(for Glade libraries >= 0.16)
 if gnome-config --libs libglade > /dev/null 2>&1; then 
     vers=`gnome-config --modversion libglade | awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
-    if test "$vers" -ge 11; then
+    if test "$vers" -ge 16; then
         AC_MSG_RESULT(found)
     else
-        AC_MSG_ERROR(You need at least libglade 0.11 for this version of gedit)
+        AC_MSG_ERROR(You need at least libglade 0.16 for this version of gedit)
     fi
 else
     AC_MSG_ERROR(Did not find libGlade installed)
@@ -95,13 +95,13 @@ fi
 dnl ******************************
 dnl gnome-libs checking
 dnl ******************************
-AC_MSG_CHECKING(for gnome-libs >= 1.0.55)
+AC_MSG_CHECKING(for gnome-libs >= 1.2.13)
 if gnome-config --version > /dev/null 2>&1; then
    vers=`gnome-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   if test "$vers" -ge 55; then
+   if test "$vers" -ge 2013; then
       AC_MSG_RESULT(found)
    else
-      AC_MSG_ERROR(You need at least gnome-libs 1.0.55 for this version of gedit)
+      AC_MSG_ERROR(You need at least gnome-libs 1.2.13 for this version of gedit)
    fi
 else
    AC_MSG_ERROR(Did not find gnome-libs installed)
