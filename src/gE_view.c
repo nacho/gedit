@@ -124,40 +124,40 @@ void view_list_insert (gE_view *view, gE_data *data)
 	if (view != GE_VIEW(mdi->active_view)) {
 
 	  /* Disconnect the signals so we can safely update the other views */
-	  gtk_signal_disconnect (GTK_OBJECT (nth_view->text), 
+	  /*gtk_signal_disconnect (GTK_OBJECT (nth_view->text), 
 		                 (gint)nth_view->insert);
 	  gtk_signal_disconnect (GTK_OBJECT (nth_view->split_screen),
-		                 (gint)nth_view->s_insert);
+		                 (gint)nth_view->s_insert);*/
 			
 			
 	  gtk_text_freeze (GTK_TEXT (view->text));
 		
-	  /*p1 = gtk_text_get_point (GTK_TEXT (view->text));
+	  p1 = gtk_text_get_point (GTK_TEXT (view->text));
 		
-	  gtk_text_set_point (GTK_TEXT(view->text), position - 1);*/
-	  gtk_editable_insert_text (GTK_EDITABLE (nth_view->text), buffer,
-	  						length, &position);
-	  /*gtk_text_insert (GTK_TEXT (view->text), NULL,
+	  gtk_text_set_point (GTK_TEXT(view->text), position);
+	  /*gtk_editable_insert_text (GTK_EDITABLE (nth_view->text), buffer,
+	  						length, &position);*/
+	  gtk_text_insert (GTK_TEXT (view->text), NULL,
 					 &view->text->style->black,
 					 NULL, buffer, length);
-	  gtk_text_set_point (GTK_TEXT (view->text), p1);*/
+	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 		
 	  gtk_text_thaw (GTK_TEXT (view->text));
 		
 		
 	  gtk_text_freeze (GTK_TEXT (view->split_screen));
-	  /*p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
-	  gtk_text_set_point (GTK_TEXT(view->split_screen), (position - 1));*/
-	  gtk_editable_insert_text (GTK_EDITABLE (view->split_screen), buffer,
-		 					length, &position);
-	  /*gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
+	  p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
+	  gtk_text_set_point (GTK_TEXT(view->split_screen), (position));
+	  /*gtk_editable_insert_text (GTK_EDITABLE (view->split_screen), buffer,
+		 					length, &position);*/
+	  gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 					 &view->split_screen->style->black,
 					 NULL, buffer, length);
-	  gtk_text_set_point (GTK_TEXT (view->text), p1);*/
+	  gtk_text_set_point (GTK_TEXT (view->text), p1);
 	  gtk_text_thaw (GTK_TEXT (view->split_screen));
 		
 	  /* Reconnect the signals, now the views have been updated */
-	  nth_view->insert = gtk_signal_connect (GTK_OBJECT (nth_view->text),
+	  /*nth_view->insert = gtk_signal_connect (GTK_OBJECT (nth_view->text),
 		                                 "insert_text",
 							             GTK_SIGNAL_FUNC(doc_insert_text_cb),
 							             view);
@@ -166,8 +166,14 @@ void view_list_insert (gE_view *view, gE_data *data)
 		                                   "insert_text",
 							               GTK_SIGNAL_FUNC(doc_insert_text_cb),
 							               view);				
-
+*/
 	}	
+
+}
+
+void view_list_erase (gE_view *view, gE_data *data)
+{
+
 
 }
 
@@ -214,37 +220,42 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	
 
 	view->flag = significant_other;	
-	/*buffer = g_strdup (insertion_text);*/
+	/*buffer = g_strdup (insertion_text);
 	
 	if (length <= 96)
 	  buffer = buf;
 	else
-	  buffer = g_new (gchar, length);
+	  buffer = g_new (gchar, length);*/
+	
+	buffer = g_new0 (guchar, length + 1);
 	  
 	strncpy (buffer, insertion_text, length);
 
 /*#ifdef DEBUG */
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
 /*#endif*/
- 
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
-						  &position);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-	
+
 	doc = view->document;
 
-	if ((doc->buf->len > 0) && (position < doc->buf->len))
-	  doc->buf = g_string_insert (doc->buf, position, buffer);
-	else
-	  doc->buf = g_string_append (doc->buf, buffer);
-	
 	data = g_malloc0 (sizeof (gE_data));
 	
 	data->temp1 = (gint) position;
 	data->temp2 = (guchar*) buffer;
 	
 	g_list_foreach (doc->views, (GFunc) view_list_insert, data);
+ 
+	gtk_text_freeze (GTK_TEXT (significant_other));
+	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
+						  &position);
+	gtk_text_thaw (GTK_TEXT (significant_other));
+	
+
+	if ((doc->buf->len > 0) && (position < doc->buf->len))
+	  doc->buf = g_string_insert (doc->buf, position, buffer);
+	else
+	  doc->buf = g_string_append (doc->buf, buffer);
+	
+
 	
 	g_free (data);
 	
@@ -287,49 +298,62 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	else
 	  return;
 	
-	view->flag = significant_other;
-	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
-	gtk_text_thaw (GTK_TEXT (significant_other));
-	
 	doc = view->document;
 	
 	g_message ("start: %d end: %d len: %d", start_pos, end_pos, doc->buf->len);
 	
 	/*if ((start_pos + end_pos) < doc->buf->len)*/
-	  doc->buf = g_string_erase (doc->buf, start_pos, (end_pos - start_pos));
-	/*else
-	  doc->buf = g_string_truncate (doc->buf, (start_pos + end_pos));*/
+	if (end_pos + (end_pos - start_pos) <= doc->buf->len) {
+	
+	  g_message ("g_string_erase");
+	  doc->buf = g_string_erase (doc->buf, end_pos, (end_pos - start_pos));
+	  
+	} else {
+	  
+	  g_message ("g_string_truncate");
+	  doc->buf = g_string_truncate (doc->buf, start_pos);
+	
+	}
+
+	view->flag = significant_other;
+	gtk_text_freeze (GTK_TEXT (significant_other));
+	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
+	gtk_text_thaw (GTK_TEXT (significant_other));
+
 	
 	for (n = 0; n < g_list_length (doc->views); n++) {
 
 	  nth_view = g_list_nth_data (doc->views, n);
+	  
+	  if (nth_view != GE_VIEW(mdi->active_view)) {
 
-	  /* Disconnect the signals so we can safely update the other views */
-	  gtk_signal_disconnect (GTK_OBJECT (nth_view->text), 
-						 (gint)nth_view->delete);
-	  gtk_signal_disconnect (GTK_OBJECT (nth_view->split_screen),
-						 (gint)nth_view->s_delete);
+	    /* Disconnect the signals so we can safely update the other views */
+	    gtk_signal_disconnect (GTK_OBJECT (nth_view->text), 
+							(gint)nth_view->delete);
+	    gtk_signal_disconnect (GTK_OBJECT (nth_view->split_screen),
+						 	(gint)nth_view->s_delete);
 		
-	  gtk_text_freeze (GTK_TEXT (nth_view->text));
-	  gtk_editable_delete_text (GTK_EDITABLE (nth_view->text), start_pos, end_pos);
-	  gtk_text_thaw (GTK_TEXT (nth_view->text));
+	    gtk_text_freeze (GTK_TEXT (nth_view->text));
+	    gtk_editable_delete_text (GTK_EDITABLE (nth_view->text), start_pos, end_pos);
+	    gtk_text_thaw (GTK_TEXT (nth_view->text));
 		
-	  gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
-	  gtk_editable_delete_text (GTK_EDITABLE (nth_view->split_screen),
+	    gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
+	    gtk_editable_delete_text (GTK_EDITABLE (nth_view->split_screen),
 							start_pos, end_pos);
-	  gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
+	    gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
 
-	  /* Reconnect the signals, now the views have been updated */
-	  nth_view->delete = gtk_signal_connect (GTK_OBJECT (nth_view->text),
-										 "delete_text",
-										 GTK_SIGNAL_FUNC(doc_delete_text_cb),
-										 view);
+	    /* Reconnect the signals, now the views have been updated */
+	    nth_view->delete = gtk_signal_connect (GTK_OBJECT (nth_view->text),
+										 	"delete_text",
+										 	GTK_SIGNAL_FUNC(doc_delete_text_cb),
+										 	view);
 							                   
-	  nth_view->s_delete = gtk_signal_connect (GTK_OBJECT (nth_view->split_screen),
+	    nth_view->s_delete = gtk_signal_connect (GTK_OBJECT (nth_view->split_screen),
 											"delete_text",
 											GTK_SIGNAL_FUNC(doc_delete_text_cb),
 											view);	
+	  }
+	  
 	}
 	
 }
@@ -770,7 +794,7 @@ GtkWidget *gE_view_new (gE_document *doc)
 	
 	}
 	
-	doc->views = g_list_append (doc->views, view);
+	view->document->views = g_list_append (doc->views, view);
 	
 	return GTK_WIDGET (view);
 
@@ -910,4 +934,39 @@ void gE_view_set_selection (gE_view *view, gint start, gint end)
 	
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 
+}
+
+void gE_view_refresh (gE_view *view)
+{
+
+
+	gint i = gE_view_get_length (view);
+
+	if (i > 0) {
+	
+	  gE_view_set_position (view, i);
+	  gtk_text_backward_delete (GTK_TEXT(view->text), i);
+	  gtk_text_backward_delete (GTK_TEXT(view->split_screen), i);
+		
+	}
+
+	if (view->document->buf) {
+	
+	  	g_print ("gE_view_refresh: inserting buffer..\n");
+	  	
+	  	gtk_text_freeze (GTK_TEXT (view->text));
+	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
+						 &view->text->style->black,
+						 NULL, view->document->buf->str,
+						 view->document->buf->len);
+
+	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
+						 &view->split_screen->style->black,
+						 NULL, view->document->buf->str,
+						 view->document->buf->len);
+		gtk_text_thaw (GTK_TEXT (view->text));
+		
+		gE_view_set_position (view, 0);
+	
+	}
 }

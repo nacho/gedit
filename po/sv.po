@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-09-07 04:20+0200\n"
+"POT-Creation-Date: 1999-09-07 23:53+0100\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -30,23 +30,33 @@ msgstr "Dokid't är %ld.\n"
 msgid "Shell"
 msgstr "Skal"
 
-#: src/commands.c:448
+#: src/commands.c:215
+msgid "Could not save file!"
+msgstr ""
+
+#: src/commands.c:520
 msgid "Open File..."
 msgstr "Öppna fil..."
 
-#: src/commands.c:530
+#: src/commands.c:604 src/commands.c:644
 msgid "Read only file!"
 msgstr "Skrivskyddad fil!"
 
-#: src/commands.c:556
+#: src/commands.c:676 src/commands.c:741
 msgid "Error saving file!"
 msgstr "Fel vid sparning av fil!"
 
-#: src/commands.c:579
-msgid "Save As..."
+#: src/commands.c:705
+#, fuzzy, c-format
+msgid "Save %s As..."
 msgstr "Spara som..."
 
-#: src/commands.c:635
+#: src/commands.c:773
+#, fuzzy, c-format
+msgid "Save %s As ..."
+msgstr "Spara som..."
+
+#: src/commands.c:853
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -55,31 +65,31 @@ msgstr ""
 "Är du säker att du vill ångra alla förändringar?\n"
 "(%s)"
 
-#: src/commands.c:678
+#: src/commands.c:901
 msgid "Document Unchanged..."
 msgstr "Dokument oförändrat..."
 
-#: src/commands.c:680
+#: src/commands.c:905
 msgid "Document Unsaved..."
 msgstr "Dokument ej sparat..."
 
-#: src/commands.c:875
+#: src/commands.c:1094
 msgid "_File/"
 msgstr "_Arkiv/"
 
-#: src/commands.c:884 src/commands.c:885
+#: src/commands.c:1103 src/commands.c:1104
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/gE_about.c:33
+#: src/gE_about.c:36
 msgid "With special thanks to:"
 msgstr "Med extra tack till:"
 
-#: src/gE_about.c:52
+#: src/gE_about.c:49
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(C) 1998, 1999 Alex Roberts och Evan Lawrence"
 
-#: src/gE_about.c:54
+#: src/gE_about.c:51
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit är en liten och tunn texteditor för GNOME/Gtk+"
 
@@ -104,7 +114,7 @@ msgstr "Spara"
 msgid "Close"
 msgstr "Stäng"
 
-#: src/gE_document.c:69 src/gE_print.c:73 src/toolbar.c:46
+#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
 msgid "Print"
 msgstr "Skriv ut"
 
@@ -112,192 +122,187 @@ msgstr "Skriv ut"
 msgid "Open (swap) .c/.h file"
 msgstr "Öppna (byt) .c/.h filen"
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:69
 msgid "Find _Line..."
 msgstr "Hitta _rad..."
 
-#: src/gE_mdi.c:67
+#: src/gE_mdi.c:70
 msgid "Search for a line"
 msgstr "Sök efter en rad"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:85
 msgid "_Add View"
 msgstr "_Lägg till vy"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:86
 msgid "Add a new view of the document"
 msgstr "Lägg till en ny vy av dokumentet"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:87
 msgid "_Remove View"
 msgstr "_Ta bort vy"
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:88
 msgid "Remove view of the document"
 msgstr "Tar bort en vy av dokumentet"
 
-#: src/gE_mdi.c:396
+#: src/gE_mdi.c:461
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' har ändrats. Vill du spara den?"
 
-#. data->window = app;
-#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:559
-#: src/gE_prefs_box.c:560 src/gE_prefs_box.c:610 src/gE_prefs_box.c:611
-#: src/menus.c:252
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
+#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
+#: src/menus.c:265
 msgid "_Plugins"
 msgstr "_Insticksprogram"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:102
 msgid "Default"
 msgstr "Standard"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Notebook"
 msgstr "Flikar"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Toplevel"
 msgstr "Toppnivå"
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:274
+#: src/gE_prefs_box.c:270
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/gE_prefs_box.c:287
+#: src/gE_prefs_box.c:283
 msgid "Show Statusbar"
 msgstr "Visa statusrad"
 
-#: src/gE_prefs_box.c:296
+#: src/gE_prefs_box.c:292
 msgid "Show Splitscreen"
 msgstr "Visa skärmdelning"
 
-#: src/gE_prefs_box.c:305
+#: src/gE_prefs_box.c:301
 msgid "Editor Behavior"
 msgstr "Editor-uppförande"
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:314
 msgid "Enable Autoindent"
 msgstr "Använd autoindrag"
 
-#: src/gE_prefs_box.c:327
+#: src/gE_prefs_box.c:323
 msgid "Enable Wordwrap"
 msgstr "Använd ordbryting"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:348
+#: src/gE_prefs_box.c:386
 msgid "Document Settings"
 msgstr "Dokumentinställningar"
 
-#: src/gE_prefs_box.c:361
+#: src/gE_prefs_box.c:400
 msgid "New Document After Closing Last"
 msgstr "Nytt dokument efter sista stängs"
 
-#: src/gE_prefs_box.c:367
+#: src/gE_prefs_box.c:406
 msgid "Close Window After Closing Last"
 msgstr "Stäng fönstret efter sista stängs"
 
 #. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:374
-msgid "Print Command"
-msgstr "Utskriftskommando"
-
-#: src/gE_prefs_box.c:465
+#. Font Settings (within Document Settings frame)
+#: src/gE_prefs_box.c:415
 msgid "Current Font"
 msgstr "Nuvarande typsnitt"
 
-#: src/gE_prefs_box.c:482
+#: src/gE_prefs_box.c:432
 msgid "Select..."
 msgstr "Välj..."
 
-#: src/gE_prefs_box.c:532
+#. End of Font Setttings
+#. Print COmmand
+#: src/gE_prefs_box.c:448
+msgid "Print Command"
+msgstr "Utskriftskommando"
+
+#: src/gE_prefs_box.c:500
 msgid "Plugin Selector"
 msgstr "Insticksnamn-namn"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Name"
 msgstr "Namn"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Location"
 msgstr "Placering"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:660 src/gE_prefs_box.c:978
+#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
 msgid "Plugins"
 msgstr "Insticksprogram"
 
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:635
 msgid "Use Plugins"
 msgstr "Använd insticksprogram"
 
-#: src/gE_prefs_box.c:741
+#: src/gE_prefs_box.c:701
 msgid "Add"
 msgstr "Lägg till"
 
-#: src/gE_prefs_box.c:746
+#: src/gE_prefs_box.c:706
 msgid "Remove"
 msgstr "Ta bort"
 
-#: src/gE_prefs_box.c:769
-msgid "MDI Mode"
-msgstr "MDI-läge"
-
-#: src/gE_prefs_box.c:824
+#. Window Size Settings
+#: src/gE_prefs_box.c:749
 msgid "Window Size"
 msgstr "Fönsterstorlek"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:762
 msgid "Current Width:"
 msgstr "Nuvarande bredd:"
 
-#: src/gE_prefs_box.c:858
+#: src/gE_prefs_box.c:782
 msgid "Startup Width:"
 msgstr "Start-bredd:"
 
-#: src/gE_prefs_box.c:866 src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
 msgid "Use Current"
 msgstr "Använd nuvarande"
 
-#: src/gE_prefs_box.c:878
+#: src/gE_prefs_box.c:802
 msgid "Current Height:"
 msgstr "Nuvarande höjd:"
 
-#: src/gE_prefs_box.c:898
+#: src/gE_prefs_box.c:822
 msgid "Startup Height:"
 msgstr "Start-höjd:"
 
+#. MDI Mode settnigs
+#: src/gE_prefs_box.c:838
+msgid "MDI Mode"
+msgstr "MDI-läge"
+
 #. General Settings
-#: src/gE_prefs_box.c:958
+#: src/gE_prefs_box.c:906
 msgid "General"
 msgstr "Generellt"
 
 #. Window Settings
-#: src/gE_prefs_box.c:963
+#: src/gE_prefs_box.c:911
 msgid "Window"
 msgstr "Fönster"
 
-#. Print Settings
-#: src/gE_prefs_box.c:968
+#. Docuemnt Settings
+#: src/gE_prefs_box.c:916
 msgid "Document"
 msgstr "Dokument"
 
-#. Font Settings
-#: src/gE_prefs_box.c:973
-msgid "Font"
-msgstr "Typsnitt"
-
-#. MDI Settings
-#: src/gE_prefs_box.c:983
-msgid "MDI"
-msgstr "MDI"
-
-#: src/gE_print.c:86
+#: src/gE_print.c:87
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -306,23 +311,23 @@ msgstr ""
 "Mata in utskriftskommano nedan\n"
 "Glöm ej att inkludera '%s'"
 
-#: src/gE_print.c:94
+#: src/gE_print.c:95
 msgid "Print Command:"
 msgstr "Utskriftskommando:"
 
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid "Print anyway"
 msgstr "Skriv ut ändå"
 
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid " Save, then print "
 msgstr " Spara, sen skriv ut"
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "Launch a plugin at startup"
 msgstr "Starta insticksprogram vid uppstart"
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAME"
 
@@ -375,119 +380,123 @@ msgstr "Visa _ikoner på verktygsraden"
 msgid "Untitled"
 msgstr "Namnlös"
 
-#: src/menus.c:86
+#: src/menus.c:87
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:86 src/toolbar.c:38
+#: src/menus.c:87 src/toolbar.c:38
 msgid "Create a new document"
 msgstr "Skapa nytt dokument"
 
-#: src/menus.c:95
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All"
+msgstr "Spara som..."
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "Spara nuvarande fil"
+
+#: src/menus.c:99
 msgid "Revert"
 msgstr "Återgå"
 
-#: src/menus.c:117
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All"
+msgstr "Stäng"
+
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "Stäng nuvarande fil"
+
+#: src/menus.c:122
 msgid "_Top"
 msgstr "_Överst"
 
-#: src/menus.c:118
+#: src/menus.c:123
 msgid "Put the document tabs at the top"
 msgstr "Placera dokument-flikarna överst"
 
-#: src/menus.c:121
+#: src/menus.c:126
 msgid "_Bottom"
 msgstr "_Nederst"
 
-#: src/menus.c:122
+#: src/menus.c:127
 msgid "Put the document tabs at the bottom"
 msgstr "Placera dokument-flikarna nederst"
 
-#: src/menus.c:125
+#: src/menus.c:130
 msgid "_Left"
 msgstr "_Vänster"
 
-#: src/menus.c:126
+#: src/menus.c:131
 msgid "Put the document tabs on the left"
 msgstr "Placera dokument-flikarna till vänster"
 
-#: src/menus.c:129
+#: src/menus.c:134
 msgid "_Right"
 msgstr "_Höger"
 
-#: src/menus.c:130
+#: src/menus.c:135
 msgid "Put the document tabs on the right"
 msgstr "Placera dokument-flikarna till höger"
 
-#: src/menus.c:143
+#: src/menus.c:150
 msgid "_None"
 msgstr "_Ingen"
 
-#: src/menus.c:144
+#: src/menus.c:151
 msgid "Don't have a scrollbar"
 msgstr "Använd inte rullningslist"
 
-#: src/menus.c:147
+#: src/menus.c:154
 msgid "_Always"
 msgstr "_Alltid"
 
-#: src/menus.c:148
+#: src/menus.c:155
 msgid "Always have the scrollbar"
 msgstr "Använd alltid rullningslist"
 
-#: src/menus.c:151
+#: src/menus.c:158
 msgid "_Automatic"
 msgstr "A_utomatiskt"
 
-#: src/menus.c:152
+#: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
 msgstr "Använd rullningslist om det behövs"
 
-#: src/menus.c:161
-msgid "Toggle autoindent"
-msgstr "Sätt på/av autoindrag"
-
-#: src/menus.c:166
-msgid "Toggle statusbar"
-msgstr "Sätt på/av statusrad"
-
-#: src/menus.c:171
-msgid "Toggle Wordwrap"
-msgstr "Sätt på/av ordbryting"
-
-#: src/menus.c:176
-msgid "Toggle Linewrap"
-msgstr "Sätt på/av radbrytning"
-
-#: src/menus.c:181
+#: src/menus.c:192
 msgid "Toggle Readonly"
 msgstr "Sätt på/av skrivskydd"
 
-#: src/menus.c:186
+#: src/menus.c:197
 msgid "Toggle Split Screen"
 msgstr "Sätt på/av skärmdelning"
 
-#: src/menus.c:192
+#: src/menus.c:203
 msgid "_Document Tabs"
 msgstr "_Dokumentflikar"
 
-#: src/menus.c:193
+#: src/menus.c:204
 msgid "Change the placement of the document tabs"
 msgstr "Ändra placeringen av dokument-flikarna"
 
-#: src/menus.c:195
+#: src/menus.c:206
 msgid "_Scrollbar"
 msgstr "_Rullningslist"
 
-#: src/menus.c:196
+#: src/menus.c:207
 msgid "Change visibility options of the scrollbar"
 msgstr "Ändrar synlighetsinställningarna för rullningslisten"
 
-#: src/menus.c:200
+#: src/menus.c:211
 msgid "Sa_ve Settings"
 msgstr "Sp_ara inställningar"
 
-#: src/menus.c:201
+#: src/menus.c:212
 msgid "Save the current settings for future sessions"
 msgstr "Spara nuvarande inställningar för framtida sessioner"
 
@@ -607,6 +616,24 @@ msgstr "Avsluta"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "Avslutar programmet"
+
+#~ msgid "Font"
+#~ msgstr "Typsnitt"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Toggle autoindent"
+#~ msgstr "Sätt på/av autoindrag"
+
+#~ msgid "Toggle statusbar"
+#~ msgstr "Sätt på/av statusrad"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "Sätt på/av ordbryting"
+
+#~ msgid "Toggle Linewrap"
+#~ msgstr "Sätt på/av radbrytning"
 
 #~ msgid "Column:\t0"
 #~ msgstr "Kolumn:\t0"

@@ -64,154 +64,63 @@ gint
 gE_file_open(gE_document *doc, gchar *fname)
 {
 
-	int fd;
-	gchar *buf, *title, *flash;
-	size_t size, bytesread, num;
-	gE_view *view = GE_VIEW(mdi->active_view);
-	int pos;
+	char *nfile, *name;
+	gchar *tmp_buf, *flash;
+	struct stat stats;
+	gint i;
+	gE_view *nth_view;
+	FILE *fp;
 
-	/* get file stats (e.g., file size is used by files list window) */
+	name = fname;
+
+	if (!stat(fname, &stats) && S_ISREG(stats.st_mode)) {
 	
-	doc->sb = g_malloc(sizeof(struct stat));
+   	  doc->buf_size = stats.st_size;
+   	        
+   	  if ((tmp_buf = g_new0 (gchar, doc->buf_size)) != NULL) {
+   	    
+   	    if ((doc->filename = g_strdup (fname)) != NULL) {
+   	      
+   	      /*gE_file_open (GE_DOCUMENT(doc));*/
+   	                
+   	      if ((fp = fopen (fname, "r")) != NULL) {
+   	        
+   	        doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
+   	        doc->buf = g_string_new (tmp_buf);
+   	        g_free (tmp_buf);
+
+		gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(fname));
+   	          
+  	        fclose (fp);
+  	        
+  	        for (i = 0; i < g_list_length (doc->views); i++) {
+  	        
+  	          nth_view = g_list_nth_data (doc->views, i);
+  	          
+  	          gE_view_refresh (nth_view);
+  	          
+  	          /* Make the document readonly if you can't write to the file. */
+		  gE_view_set_read_only (nth_view, access (fname, W_OK) != 0);
+  	        }
+  	        
+  	        flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
+		gnome_app_flash(mdi->active_window, flash);
+		g_free(flash);
+		
+		recent_add (doc->filename);
+		recent_update (GNOME_APP (mdi->active_window));
+		
+		return 0;
+
+	      }
 	
-	if (stat(fname, doc->sb) == -1) {
-
-	  /* need to print warning */
-	  g_free(doc->sb);
-	  doc->sb = NULL;
-
-	}
-
-	if (doc->sb && doc->sb->st_size > 0) {
-
-	  /* open file */
-	  if ((fd = open(fname, O_RDONLY)) == -1) {
-	  
-	    char msg[STRING_LENGTH_MAX];
-
-	    sprintf(msg, "gE_file_open could not open %s", fname);
-	    perror(msg);
-	    
-	    return 1;
-	    
-	  }
-
-	  gtk_text_freeze(GTK_TEXT(view->text));
-	  clear_text(view);
-
-	  /*
-	   * the more aggressive/intelligent method is to try to allocate
-	   * a buffer to fit all the contents of the file; that way, we
-	   * only read the file once.  basically, we try to allocate a
-	   * buffer that is twice the number of bytes that is needed.
-	   * this is because gtk_text_insert() does a memcpy() of the
-	   * read buffer into the text widget's buffer, so we must ensure
-	   * that there is enough memory for both the read and the
-	   * memcpy().  since we'd like to read the entire file at once,
-	   * so we start with a buffer that is twice the filesize.  if
-	   * this fails (e.g., we're reading a really large file), we
-	   * keep reducing the size by half until we are able to get a
-	   * buffer.
-	   */
-
-	  size = 2 * (doc->sb->st_size + 1);
-	  while ((buf = (char *)g_malloc(size)) == NULL)
-	    size /= 2;
-
-#ifdef DEBUG
-	  printf("size %lu is ok (using half)\n", (gulong)size);
-#endif
-
-	  g_free(buf);
-	  size /= 2;
-
-	  if ((buf = (char *)g_malloc(size + 1)) == NULL) {
-
-	    perror("gE_file_open: unable to malloc read buffer");
-	    close(fd);
-
-	    return 1;
-
-	  }
-
-#ifdef DEBUG
-	  printf("malloc'd %lu bytes for read buf\n", (gulong)(size+1));
-#endif
-
-	  /* buffer allocated, now actually read the file */
-	  bytesread = 0;
-
-	  while (bytesread < doc->sb->st_size) {
-
-	    num = read(fd, buf, size);
-	    
-	    if (num > 0) {
-	    
-	       gtk_text_insert(GTK_TEXT(view->text), NULL,
-					  &view->text->style->black,
-					  NULL, buf, num);
-	      bytesread += num;
-	    
-	    } else if (num == -1) {
-	     
-	     /* need to print warning/error message */
-	     perror("read error");
-	     break;
-	     
-	    } else /* if (num == 0) */ {
-	    
-#ifdef DEBUG
-	    printf("hmm that's odd... read zero bytes");
-#endif
-	    
 	    }
-		
+	
 	  }
-		
-	  g_free(buf);
-	  close(fd);
-	  gtk_text_thaw(GTK_TEXT(view->text));
-	  
-	} /* filesize > 0 */
-
-	/* misc settings */
-	doc->filename = g_malloc0 (strlen (fname) + 1);
-	doc->filename = g_strdup (fname);
 	
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(fname));
+	}
 	
-	gE_view_set_position (view, 0);
-
-	/* Copy the buffer if split-screening enabled */
-	buf = gtk_editable_get_chars(GTK_EDITABLE(view->text), 0, -1);
-	pos = 0;
-
-	view->flag = view->split_screen;
-
-	gtk_text_freeze(GTK_TEXT(view->split_screen));
-	gtk_editable_insert_text(GTK_EDITABLE(view->split_screen),
-			buf, strlen(buf), &pos);
-	gtk_text_thaw(GTK_TEXT(view->split_screen));
-
-	g_free (buf);
-	
-	/* enable document change detection */
-	view->changed = FALSE;
-	if (!view->changed_id)
-	  view->changed_id = gtk_signal_connect(GTK_OBJECT(view->text),"changed", 
-				                       GTK_SIGNAL_FUNC(view_changed_cb),view);
-
-	flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
-	gnome_app_flash(mdi->active_window, flash);
-	g_free(flash);
-		
-	recent_add (doc->filename);
-	recent_update (GNOME_APP (mdi->active_window));
-
-	/* Make the document readonly if you can't write to the file. */
-	gE_view_set_read_only (view, access (fname, W_OK) != 0);
-	
-	return 0;
+	return 1;
 
 } /* gE_file_open */
 
@@ -249,20 +158,23 @@ gE_file_save(gE_document *doc, gchar *fname)
 	
 	gtk_text_thaw (GTK_TEXT(view->text));
 
+/*	 We dont need to get the chars, as the chars are there in the 
+  	  public buffer..
+  	  
 	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (view->text), 0,
 		gtk_text_get_length (GTK_TEXT (view->text)));
-	
-	if (fputs (tmpstr, fp) == EOF) {
+*/	
+	if (fputs (view->document->buf->str, fp) == EOF) {
 	
 	  perror("Error saving file");
 	  fclose(fp);
-	  g_free (tmpstr);
+	  /*g_free (tmpstr);*/
 	  
 	  return 1;
 	
 	}
 	
-	g_free (tmpstr);
+	/*g_free (tmpstr);*/
 	
 	if (fclose(fp) != 0) {
 	

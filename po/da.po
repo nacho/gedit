@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-09-06 12:00+0200\n"
+"POT-Creation-Date: 1999-09-07 23:53+0100\n"
 "PO-Revision-Date: 1999-09-03 22:33+0100\n"
 "Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
@@ -30,23 +30,33 @@ msgstr "Docid er %ld.\n"
 msgid "Shell"
 msgstr "Skal"
 
-#: src/commands.c:448
+#: src/commands.c:215
+msgid "Could not save file!"
+msgstr ""
+
+#: src/commands.c:520
 msgid "Open File..."
 msgstr "Åbn fil..."
 
-#: src/commands.c:530
+#: src/commands.c:604 src/commands.c:644
 msgid "Read only file!"
 msgstr "Skrivebeskyttet fil!"
 
-#: src/commands.c:556
+#: src/commands.c:676 src/commands.c:741
 msgid "Error saving file!"
 msgstr "Gemning mislykkedes!"
 
-#: src/commands.c:579
-msgid "Save As..."
+#: src/commands.c:705
+#, fuzzy, c-format
+msgid "Save %s As..."
 msgstr "Gem som..."
 
-#: src/commands.c:635
+#: src/commands.c:773
+#, fuzzy, c-format
+msgid "Save %s As ..."
+msgstr "Gem som..."
+
+#: src/commands.c:853
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -55,31 +65,31 @@ msgstr ""
 "Er du sikker på at du vil forkaste alle ændringer?\n"
 "(%s)"
 
-#: src/commands.c:678
+#: src/commands.c:901
 msgid "Document Unchanged..."
 msgstr "Dokument er uændret..."
 
-#: src/commands.c:680
+#: src/commands.c:905
 msgid "Document Unsaved..."
 msgstr "Dokument er ugemt..."
 
-#: src/commands.c:875
+#: src/commands.c:1094
 msgid "_File/"
 msgstr "_Filer/"
 
-#: src/commands.c:884 src/commands.c:885
+#: src/commands.c:1103 src/commands.c:1104
 msgid "_File"
 msgstr "_Filer"
 
-#: src/gE_about.c:33
+#: src/gE_about.c:36
 msgid "With special thanks to:"
 msgstr "Med særlig tak til:"
 
-#: src/gE_about.c:52
+#: src/gE_about.c:49
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr ""
 
-#: src/gE_about.c:54
+#: src/gE_about.c:51
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit er en lille og hurtig teksteditor for GNOME/Gtk+"
 
@@ -104,7 +114,7 @@ msgstr "Gem"
 msgid "Close"
 msgstr "Luk"
 
-#: src/gE_document.c:69 src/gE_print.c:73 src/toolbar.c:46
+#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
 msgid "Print"
 msgstr "Udskriv"
 
@@ -112,192 +122,187 @@ msgstr "Udskriv"
 msgid "Open (swap) .c/.h file"
 msgstr "Åbn (ombyt) .c/.h fil"
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:69
 msgid "Find _Line..."
 msgstr "Find _linie..."
 
-#: src/gE_mdi.c:67
+#: src/gE_mdi.c:70
 msgid "Search for a line"
 msgstr "Søg efter en linie"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:85
 msgid "_Add View"
 msgstr "_Tilføj visning"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:86
 msgid "Add a new view of the document"
 msgstr "Tilføj ny visning af dokumentet"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:87
 msgid "_Remove View"
 msgstr "Fje_rn visning"
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:88
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/gE_mdi.c:396
+#: src/gE_mdi.c:461
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' er blevet ændret. Ønsker du at gemme det?"
 
-#. data->window = app;
-#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:559
-#: src/gE_prefs_box.c:560 src/gE_prefs_box.c:610 src/gE_prefs_box.c:611
-#: src/menus.c:252
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
+#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
+#: src/menus.c:265
 msgid "_Plugins"
 msgstr ""
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:102
 msgid "Default"
 msgstr "Standard"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Notebook"
 msgstr "Notesblok"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Toplevel"
 msgstr ""
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Modal"
 msgstr "Modulær"
 
-#: src/gE_prefs_box.c:274
+#: src/gE_prefs_box.c:270
 msgid "Appearance"
 msgstr "Udseende"
 
-#: src/gE_prefs_box.c:287
+#: src/gE_prefs_box.c:283
 msgid "Show Statusbar"
 msgstr "Vis statuslinie"
 
-#: src/gE_prefs_box.c:296
+#: src/gE_prefs_box.c:292
 msgid "Show Splitscreen"
 msgstr "Vis opdelt skærm"
 
-#: src/gE_prefs_box.c:305
+#: src/gE_prefs_box.c:301
 msgid "Editor Behavior"
 msgstr "Editor opførsel"
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:314
 msgid "Enable Autoindent"
 msgstr "Anvend autoindryk"
 
-#: src/gE_prefs_box.c:327
+#: src/gE_prefs_box.c:323
 msgid "Enable Wordwrap"
 msgstr "Anvend tekstombrydning"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:348
+#: src/gE_prefs_box.c:386
 msgid "Document Settings"
 msgstr "Dokument indstillinger"
 
-#: src/gE_prefs_box.c:361
+#: src/gE_prefs_box.c:400
 msgid "New Document After Closing Last"
 msgstr "Nyt dokument når du har lukket det sidste"
 
-#: src/gE_prefs_box.c:367
+#: src/gE_prefs_box.c:406
 msgid "Close Window After Closing Last"
 msgstr "Luk vindue når du har lukket det sidste"
 
 #. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:374
-msgid "Print Command"
-msgstr "Printer kommando"
-
-#: src/gE_prefs_box.c:465
+#. Font Settings (within Document Settings frame)
+#: src/gE_prefs_box.c:415
 msgid "Current Font"
 msgstr "Aktuel skrifttype"
 
-#: src/gE_prefs_box.c:482
+#: src/gE_prefs_box.c:432
 msgid "Select..."
 msgstr "Vælg..."
 
-#: src/gE_prefs_box.c:532
+#. End of Font Setttings
+#. Print COmmand
+#: src/gE_prefs_box.c:448
+msgid "Print Command"
+msgstr "Printer kommando"
+
+#: src/gE_prefs_box.c:500
 msgid "Plugin Selector"
 msgstr "Plugin vælger"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Name"
 msgstr "Navn"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Location"
 msgstr "Placering"
 
 #. Plugins Settings
-#: src/gE_prefs_box.c:660 src/gE_prefs_box.c:978
+#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
 msgid "Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:635
 msgid "Use Plugins"
 msgstr "Anvend Plugins"
 
-#: src/gE_prefs_box.c:741
+#: src/gE_prefs_box.c:701
 msgid "Add"
 msgstr "Tilføj"
 
-#: src/gE_prefs_box.c:746
+#: src/gE_prefs_box.c:706
 msgid "Remove"
 msgstr "Fjern"
 
-#: src/gE_prefs_box.c:769
-msgid "MDI Mode"
-msgstr "MDI modus"
-
-#: src/gE_prefs_box.c:824
+#. Window Size Settings
+#: src/gE_prefs_box.c:749
 msgid "Window Size"
 msgstr "Vinduesstørrelse"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:762
 msgid "Current Width:"
 msgstr "Aktuel bredde:"
 
-#: src/gE_prefs_box.c:858
+#: src/gE_prefs_box.c:782
 msgid "Startup Width:"
 msgstr "Startbredde:"
 
-#: src/gE_prefs_box.c:866 src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
 msgid "Use Current"
 msgstr "Anvend aktuel"
 
-#: src/gE_prefs_box.c:878
+#: src/gE_prefs_box.c:802
 msgid "Current Height:"
 msgstr "Aktual højde:"
 
-#: src/gE_prefs_box.c:898
+#: src/gE_prefs_box.c:822
 msgid "Startup Height:"
 msgstr "Starthøjde:"
 
+#. MDI Mode settnigs
+#: src/gE_prefs_box.c:838
+msgid "MDI Mode"
+msgstr "MDI modus"
+
 #. General Settings
-#: src/gE_prefs_box.c:958
+#: src/gE_prefs_box.c:906
 msgid "General"
 msgstr "Generelt"
 
 #. Window Settings
-#: src/gE_prefs_box.c:963
+#: src/gE_prefs_box.c:911
 msgid "Window"
 msgstr "Vindue"
 
-#. Print Settings
-#: src/gE_prefs_box.c:968
+#. Docuemnt Settings
+#: src/gE_prefs_box.c:916
 msgid "Document"
 msgstr "Dokument"
 
-#. Font Settings
-#: src/gE_prefs_box.c:973
-msgid "Font"
-msgstr "Skrifttype"
-
-#. MDI Settings
-#: src/gE_prefs_box.c:983
-msgid "MDI"
-msgstr "MDI"
-
-#: src/gE_print.c:86
+#: src/gE_print.c:87
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -306,23 +311,23 @@ msgstr ""
 "Indtast printerkommando her\n"
 "Husk at tilføje '%s'"
 
-#: src/gE_print.c:94
+#: src/gE_print.c:95
 msgid "Print Command:"
 msgstr "Printerkommando:"
 
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid "Print anyway"
 msgstr "Udskriv alligevel"
 
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid " Save, then print "
 msgstr " Gem, udskriv så "
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "Launch a plugin at startup"
 msgstr "Aktiver en plugin ved start"
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "PLUGIN-NAME"
 msgstr "PLUGIN-NAVN"
 
@@ -375,119 +380,123 @@ msgstr "Vis værktøjs_ikoner"
 msgid "Untitled"
 msgstr "Unavngivet"
 
-#: src/menus.c:86
+#: src/menus.c:87
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:86 src/toolbar.c:38
+#: src/menus.c:87 src/toolbar.c:38
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
-#: src/menus.c:95
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All"
+msgstr "Gem som..."
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "Gem den aktuelle fil"
+
+#: src/menus.c:99
 msgid "Revert"
 msgstr "Forkast"
 
-#: src/menus.c:117
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All"
+msgstr "Luk"
+
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "Luk den aktuelle fil"
+
+#: src/menus.c:122
 msgid "_Top"
 msgstr "_Top"
 
-#: src/menus.c:118
+#: src/menus.c:123
 msgid "Put the document tabs at the top"
 msgstr "Placer dokumentfanebladene øverst"
 
-#: src/menus.c:121
+#: src/menus.c:126
 msgid "_Bottom"
 msgstr "_Bund"
 
-#: src/menus.c:122
+#: src/menus.c:127
 msgid "Put the document tabs at the bottom"
 msgstr "Placer dokumentfanebladene nederst"
 
-#: src/menus.c:125
+#: src/menus.c:130
 msgid "_Left"
 msgstr "_Venstre"
 
-#: src/menus.c:126
+#: src/menus.c:131
 msgid "Put the document tabs on the left"
 msgstr "Placer fanebladene til venstre"
 
-#: src/menus.c:129
+#: src/menus.c:134
 msgid "_Right"
 msgstr "_Højre"
 
-#: src/menus.c:130
+#: src/menus.c:135
 msgid "Put the document tabs on the right"
 msgstr "Placer dokumentfanebladene til højre"
 
-#: src/menus.c:143
+#: src/menus.c:150
 msgid "_None"
 msgstr "I_ngen"
 
-#: src/menus.c:144
+#: src/menus.c:151
 msgid "Don't have a scrollbar"
 msgstr "Ingen rullelinie"
 
-#: src/menus.c:147
+#: src/menus.c:154
 msgid "_Always"
 msgstr "_Altid"
 
-#: src/menus.c:148
+#: src/menus.c:155
 msgid "Always have the scrollbar"
 msgstr "Altid rullelinie"
 
-#: src/menus.c:151
+#: src/menus.c:158
 msgid "_Automatic"
 msgstr "_Automatisk"
 
-#: src/menus.c:152
+#: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
 msgstr "Kun rullelinie når det behøves"
 
-#: src/menus.c:161
-msgid "Toggle autoindent"
-msgstr ""
-
-#: src/menus.c:166
-msgid "Toggle statusbar"
-msgstr ""
-
-#: src/menus.c:171
-msgid "Toggle Wordwrap"
-msgstr ""
-
-#: src/menus.c:176
-msgid "Toggle Linewrap"
-msgstr ""
-
-#: src/menus.c:181
+#: src/menus.c:192
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:186
+#: src/menus.c:197
 msgid "Toggle Split Screen"
 msgstr ""
 
-#: src/menus.c:192
+#: src/menus.c:203
 msgid "_Document Tabs"
 msgstr "_Dokument faneblade"
 
-#: src/menus.c:193
+#: src/menus.c:204
 msgid "Change the placement of the document tabs"
 msgstr "Ændr placering af dokument faneblade"
 
-#: src/menus.c:195
+#: src/menus.c:206
 msgid "_Scrollbar"
 msgstr ""
 
-#: src/menus.c:196
+#: src/menus.c:207
 msgid "Change visibility options of the scrollbar"
 msgstr "Ændr indstillinger for scrollbar"
 
-#: src/menus.c:200
+#: src/menus.c:211
 msgid "Sa_ve Settings"
 msgstr "_Gem indstillinger"
 
-#: src/menus.c:201
+#: src/menus.c:212
 msgid "Save the current settings for future sessions"
 msgstr "Gem nuværende indstillinger for fremtidig brug"
 
@@ -607,3 +616,9 @@ msgstr "afslut"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "Afslut programmet"
+
+#~ msgid "Font"
+#~ msgstr "Skrifttype"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"

@@ -1,3 +1,43 @@
+Thu Sep  9 21:36:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.[ch]: (gE_view_refresh) New function. To refresh the text
+	  view. 
+	
+	* src/gE_files.c: (gE_file_open) Re-written to load files using the
+	  document buffer. We use gE_view_refresh here for document's having a 
+	  file loaded into them.
+
+Thu Sep  9 17:16:25 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (doc_delete_text_cb) Wahooo!! Buffer text deletion is
+	  now fully working. Firstly we check whether the position - the length
+	  to be deleted is less than or equal to the length of the buffer (which
+	  is what the g_string_erase assertion checks for). if it is, we run
+	  g_string_erase, if not, then it is at the very end of the string so
+	  we just truncate the text. And i think that is the mini-buffer now fully
+	  operational.
+	
+	* src/gE_mdi.c: (gE_document_new_with_file) yet again, g_new0 solves the
+	  string problem. For some reason, when opening multiple files, the buffer
+	  was appearing with trailing characters. 
+
+Thu Sep  9 16:40:54 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_files.c: (gE_file_save) Use the mini-buffer with the fputs 
+	  to save the file. SHould make saving faster as we dont have to 
+	  get the contents each time we want to save (the contents is already
+	  available to us, via the buffer).
+
+Thu Sep  9 16:21:10 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (doc_insert_text_cb) Create the buffer using g_new0..
+	  i'm not sure why this works.. but it does.. and its fixed the problem
+	  of trailing characters that sometimes appear. But that has fixed the
+	  multiple views of a document, once and for all! wheeee! ANd this 
+	  also seems to fix the problem of the mini-buffer going out of sync,
+	  due to the trailing characters. Now i just have to fix up the 
+	  buffer to do more than aid GnomeMDI..
+
 Tue Sep  7 18:15:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/*.c: Tidied up the source.

@@ -282,12 +282,19 @@ int main (int argc, char **argv)
 	    } else {
 	        	
 		popup_create_new_file (NULL, file_list->data);
-	        	  
+
 	    }
-   	    
-	        	    
+
 	  }
 
+	  /* if there are no open documents create a blank one */
+	  if (g_list_length(mdi->children) == 0) {
+	  
+		doc = gE_document_new ();
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+	  }
+	    
 	}
 	
 	g_free (data);

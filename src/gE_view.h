@@ -113,6 +113,8 @@ void 		view_changed_cb				(GtkWidget *w, gpointer cbdata);
 
 void		gE_view_set_group_type		(gE_view *view, guint type);
 
+void		gE_view_refresh				(gE_view *view);
+
 /*void gE_view_set_color (gE_view *view , teh Gdk colour thngies we need for a
 								func like this..  ); */
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-08-31 19:04+0200\n"
+"POT-Creation-Date: 1999-09-07 23:53+0100\n"
 "PO-Revision-Date: 1999-08-12 08:52+0300\n"
 "Last-Translator: Yuri Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -13,13 +13,13 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-u\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr "Доповненя gEdit - нав╕гатор Web"
-
 #: editor-plugins/email.c:89
 msgid "The gEdit Email Plugin"
 msgstr "Доповненя gEdit - електронна пошта"
+
+#: editor-plugins/browse.c:119
+msgid "The gEdit Web Browse Plugin"
+msgstr "Доповненя gEdit - нав╕гатор Web"
 
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
@@ -30,55 +30,65 @@ msgstr "╤дентиф╕катор документу - %ld.\n"
 msgid "Shell"
 msgstr "Командний ╕нтерпретатор"
 
-#: src/commands.c:448
+#: src/commands.c:215
+msgid "Could not save file!"
+msgstr ""
+
+#: src/commands.c:520
 msgid "Open File..."
 msgstr "В╕дкрити файл..."
 
-#: src/commands.c:530
+#: src/commands.c:604 src/commands.c:644
 msgid "Read only file!"
 msgstr "Файл лише для зчитування!"
 
-#: src/commands.c:556
+#: src/commands.c:676 src/commands.c:741
 msgid "Error saving file!"
 msgstr "Помилка при збереженн╕ файлу!"
 
-#: src/commands.c:579
-msgid "Save As..."
+#: src/commands.c:705
+#, fuzzy, c-format
+msgid "Save %s As..."
 msgstr "Записати як..."
 
-#: src/commands.c:635
+#: src/commands.c:773
+#, fuzzy, c-format
+msgid "Save %s As ..."
+msgstr "Записати як..."
+
+#: src/commands.c:853
 #, fuzzy, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr "Ви впевнен╕, що хочете в╕дм╕нити ус╕ зм╕ни?"
 
-#: src/commands.c:678
+#: src/commands.c:901
 msgid "Document Unchanged..."
 msgstr "Документ не зм╕нено..."
 
-#: src/commands.c:680
+#: src/commands.c:905
 msgid "Document Unsaved..."
 msgstr "Документ не збережено..."
 
-#: src/commands.c:873
+#: src/commands.c:1094
 #, fuzzy
 msgid "_File/"
 msgstr "_Файл"
 
-#: src/commands.c:882 src/commands.c:883
+#: src/commands.c:1103 src/commands.c:1104
 msgid "_File"
 msgstr "_Файл"
 
-#: src/gE_about.c:33
+#: src/gE_about.c:36
 msgid "With special thanks to:"
 msgstr "Особлива подяка:"
 
-#: src/gE_about.c:52
+#: src/gE_about.c:49
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "© 1998, 1999 Alex Roberts та Evan Lawrence"
 
-#: src/gE_about.c:54
+#: src/gE_about.c:51
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit - малий та легкий текстовий редактор для GNOME/Gtk+"
 
@@ -103,7 +113,7 @@ msgstr "Зберегти"
 msgid "Close"
 msgstr "Закрити"
 
-#: src/gE_document.c:69 src/gE_print.c:73 src/toolbar.c:46
+#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
 msgid "Print"
 msgstr "Друкувати"
 
@@ -111,197 +121,192 @@ msgstr "Друкувати"
 msgid "Open (swap) .c/.h file"
 msgstr "В╕дкрити (обм╕няти) .c/.h файл"
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:69
 msgid "Find _Line..."
 msgstr "Знайти _рядок..."
 
-#: src/gE_mdi.c:67
+#: src/gE_mdi.c:70
 msgid "Search for a line"
 msgstr "Позиц╕онування на рядок"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:85
 msgid "_Add View"
 msgstr "_Додати вигляд"
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:86
 msgid "Add a new view of the document"
 msgstr "Додавання нового вигляду документу"
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:87
 msgid "_Remove View"
 msgstr "_В╕ддалений вигляд"
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:88
 msgid "Remove view of the document"
 msgstr "В╕ддалений вигляд документу"
 
-#: src/gE_mdi.c:396
+#: src/gE_mdi.c:461
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr " '%s' було модиф╕ковано. Зберегти його?"
 
-#. data->window = app;
-#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:559
-#: src/gE_prefs_box.c:560 src/gE_prefs_box.c:610 src/gE_prefs_box.c:611
-#: src/menus.c:252
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
+#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
+#: src/menus.c:265
 msgid "_Plugins"
 msgstr "До_повненя"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:102
 msgid "Default"
 msgstr "По замовчуванню"
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Notebook"
 msgstr "Записник"
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Toplevel"
 msgstr "Зверху"
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Modal"
 msgstr "Модально"
 
-#: src/gE_prefs_box.c:274
+#: src/gE_prefs_box.c:270
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:287
+#: src/gE_prefs_box.c:283
 msgid "Show Statusbar"
 msgstr "Рядок статусу"
 
-#: src/gE_prefs_box.c:296
+#: src/gE_prefs_box.c:292
 msgid "Show Splitscreen"
 msgstr "Розд╕лений екран"
 
-#: src/gE_prefs_box.c:305
+#: src/gE_prefs_box.c:301
 msgid "Editor Behavior"
 msgstr "Режим роботи редактора"
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:314
 msgid "Enable Autoindent"
 msgstr "Автоматичний в╕дступ"
 
-#: src/gE_prefs_box.c:327
+#: src/gE_prefs_box.c:323
 msgid "Enable Wordwrap"
 msgstr "Перенос сл╕в"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:348
+#: src/gE_prefs_box.c:386
 #, fuzzy
 msgid "Document Settings"
 msgstr "_Закладки документ╕в"
 
-#: src/gE_prefs_box.c:361
+#: src/gE_prefs_box.c:400
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:367
+#: src/gE_prefs_box.c:406
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:374
-msgid "Print Command"
-msgstr "Команда друку"
-
-#: src/gE_prefs_box.c:465
+#. Font Settings (within Document Settings frame)
+#: src/gE_prefs_box.c:415
 msgid "Current Font"
 msgstr "Поточний шрифт"
 
-#: src/gE_prefs_box.c:482
+#: src/gE_prefs_box.c:432
 msgid "Select..."
 msgstr "Вибрати..."
 
-#: src/gE_prefs_box.c:532
+#. End of Font Setttings
+#. Print COmmand
+#: src/gE_prefs_box.c:448
+msgid "Print Command"
+msgstr "Команда друку"
+
+#: src/gE_prefs_box.c:500
 msgid "Plugin Selector"
 msgstr "Виб╕р доповненя"
 
-#: src/gE_prefs_box.c:653
-msgid "Location"
-msgstr "Розм╕щеня"
-
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Name"
 msgstr "Назва"
 
+#: src/gE_prefs_box.c:615
+msgid "Location"
+msgstr "Розм╕щеня"
+
 #. Plugins Settings
-#: src/gE_prefs_box.c:660 src/gE_prefs_box.c:978
+#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
 msgid "Plugins"
 msgstr "Доповненя"
 
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:635
 msgid "Use Plugins"
 msgstr "Використовувати доповненя"
 
-#: src/gE_prefs_box.c:741
+#: src/gE_prefs_box.c:701
 msgid "Add"
 msgstr "Додати"
 
-#: src/gE_prefs_box.c:746
+#: src/gE_prefs_box.c:706
 msgid "Remove"
 msgstr "Видалити"
 
-#: src/gE_prefs_box.c:769
-msgid "MDI Mode"
-msgstr "Режим MDI"
-
-#: src/gE_prefs_box.c:824
+#. Window Size Settings
+#: src/gE_prefs_box.c:749
 msgid "Window Size"
 msgstr "Розм╕р в╕кна"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:762
 #, fuzzy
 msgid "Current Width:"
 msgstr "Поточний шрифт"
 
-#: src/gE_prefs_box.c:858
+#: src/gE_prefs_box.c:782
 msgid "Startup Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:866 src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
 #, fuzzy
 msgid "Use Current"
 msgstr "Поточний шрифт"
 
-#: src/gE_prefs_box.c:878
+#: src/gE_prefs_box.c:802
 #, fuzzy
 msgid "Current Height:"
 msgstr "Поточний шрифт"
 
-#: src/gE_prefs_box.c:898
+#: src/gE_prefs_box.c:822
 msgid "Startup Height:"
 msgstr ""
 
+#. MDI Mode settnigs
+#: src/gE_prefs_box.c:838
+msgid "MDI Mode"
+msgstr "Режим MDI"
+
 #. General Settings
-#: src/gE_prefs_box.c:958
+#: src/gE_prefs_box.c:906
 msgid "General"
 msgstr "Загальне"
 
 #. Window Settings
-#: src/gE_prefs_box.c:963
+#: src/gE_prefs_box.c:911
 msgid "Window"
 msgstr "В╕кно"
 
-#. Print Settings
-#: src/gE_prefs_box.c:968
+#. Docuemnt Settings
+#: src/gE_prefs_box.c:916
 #, fuzzy
 msgid "Document"
 msgstr "_Закладки документ╕в"
 
-#. Font Settings
-#: src/gE_prefs_box.c:973
-msgid "Font"
-msgstr "Шрифт"
-
-#. MDI Settings
-#: src/gE_prefs_box.c:983
-msgid "MDI"
-msgstr "MDI"
-
-#: src/gE_print.c:86
+#: src/gE_print.c:87
 #, c-format
 msgid ""
 "Enter print command below\n"
@@ -310,23 +315,23 @@ msgstr ""
 "Введ╕ть команду друку\n"
 "Не забудьте включити '%s'"
 
-#: src/gE_print.c:94
+#: src/gE_print.c:95
 msgid "Print Command:"
 msgstr "Команда друку:"
 
-#: src/gE_print.c:221
-msgid " Save, then print "
-msgstr " Зберегти, та друкувати "
-
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid "Print anyway"
 msgstr "Друк в будь-якому випадку"
 
-#: src/gedit.c:127
+#: src/gE_print.c:236
+msgid " Save, then print "
+msgstr " Зберегти, та друкувати "
+
+#: src/gedit.c:116
 msgid "Launch a plugin at startup"
 msgstr "Запуск доповненя на старт╕"
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "PLUGIN-NAME"
 msgstr "Назва доповненя"
 
@@ -379,119 +384,123 @@ msgstr "Показувати _п╕ктограми"
 msgid "Untitled"
 msgstr "Не названий"
 
-#: src/menus.c:86 src/toolbar.c:38
-msgid "Create a new document"
-msgstr "Створення нового документу"
-
-#: src/menus.c:86
+#: src/menus.c:87
 msgid "_New"
 msgstr "_Новий"
 
-#: src/menus.c:95
+#: src/menus.c:87 src/toolbar.c:38
+msgid "Create a new document"
+msgstr "Створення нового документу"
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All"
+msgstr "Записати як..."
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "Збереження поточного файлу"
+
+#: src/menus.c:99
 msgid "Revert"
 msgstr "Повернути"
 
-#: src/menus.c:117
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All"
+msgstr "Закрити"
+
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "Закриття поточного файлу"
+
+#: src/menus.c:122
 msgid "_Top"
 msgstr "З_верху"
 
-#: src/menus.c:118
+#: src/menus.c:123
 msgid "Put the document tabs at the top"
 msgstr "Розм╕щення закладок зверху"
 
-#: src/menus.c:121
+#: src/menus.c:126
 msgid "_Bottom"
 msgstr "З_низу"
 
-#: src/menus.c:122
+#: src/menus.c:127
 msgid "Put the document tabs at the bottom"
 msgstr "Розм╕щення закладок знизу"
 
-#: src/menus.c:125
+#: src/menus.c:130
 msgid "_Left"
 msgstr "З_л╕ва"
 
-#: src/menus.c:126
+#: src/menus.c:131
 msgid "Put the document tabs on the left"
 msgstr "Розм╕щення закладок зл╕ва"
 
-#: src/menus.c:129
+#: src/menus.c:134
 msgid "_Right"
 msgstr "З_права"
 
-#: src/menus.c:130
+#: src/menus.c:135
 msgid "Put the document tabs on the right"
 msgstr "Розм╕щення закладок зправа"
 
-#: src/menus.c:143
+#: src/menus.c:150
 msgid "_None"
 msgstr "_Нема╓"
 
-#: src/menus.c:144
+#: src/menus.c:151
 msgid "Don't have a scrollbar"
 msgstr "Без панел╕ прокрутки"
 
-#: src/menus.c:147
+#: src/menus.c:154
 msgid "_Always"
 msgstr "_Завжди"
 
-#: src/menus.c:148
+#: src/menus.c:155
 msgid "Always have the scrollbar"
 msgstr "Завжди показувати д╕аграму прокрутки"
 
-#: src/menus.c:151
+#: src/menus.c:158
 msgid "_Automatic"
 msgstr "_Автоматично"
 
-#: src/menus.c:152
+#: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
 msgstr "Показувати д╕аграму прокрутки л╕ше тод╕, коли це необх╕дно"
 
-#: src/menus.c:161
-msgid "Toggle autoindent"
-msgstr "Ативувати/Дезактивувати автоматичний в╕дступ"
-
-#: src/menus.c:166
-msgid "Toggle statusbar"
-msgstr "Ативувати/Дезактивувати рядок статусу"
-
-#: src/menus.c:171
-msgid "Toggle Wordwrap"
-msgstr "Ативувати/Дезактивувати перенос сл╕в"
-
-#: src/menus.c:176
-msgid "Toggle Linewrap"
-msgstr "Ативувати/Дезактивувати перенос рядк╕в"
-
-#: src/menus.c:181
+#: src/menus.c:192
 msgid "Toggle Readonly"
 msgstr "Ативувати/Дезактивувати лише читання"
 
-#: src/menus.c:186
+#: src/menus.c:197
 msgid "Toggle Split Screen"
 msgstr "Ативувати/Дезактивувати розд╕лення екрану"
 
-#: src/menus.c:192
+#: src/menus.c:203
 msgid "_Document Tabs"
 msgstr "_Закладки документ╕в"
 
-#: src/menus.c:193
+#: src/menus.c:204
 msgid "Change the placement of the document tabs"
 msgstr "Зм╕на розм╕щення закладок документ╕в"
 
-#: src/menus.c:195
+#: src/menus.c:206
 msgid "_Scrollbar"
 msgstr "_Д╕аграма прокрутки"
 
-#: src/menus.c:196
+#: src/menus.c:207
 msgid "Change visibility options of the scrollbar"
 msgstr "Зм╕на властивостей видимост╕ панел╕ прокрутки"
 
-#: src/menus.c:200
+#: src/menus.c:211
 msgid "Sa_ve Settings"
 msgstr "Зберегти _конф╕гурац╕ю"
 
-#: src/menus.c:201
+#: src/menus.c:212
 msgid "Save the current settings for future sessions"
 msgstr "Збереження поточно╖ конф╕гурац╕╖ для наступних сес╕й"
 
@@ -612,6 +621,24 @@ msgstr "Вих╕д"
 #: src/toolbar.c:62
 msgid "Exit the program"
 msgstr "Вих╕д з програми"
+
+#~ msgid "Font"
+#~ msgstr "Шрифт"
+
+#~ msgid "MDI"
+#~ msgstr "MDI"
+
+#~ msgid "Toggle autoindent"
+#~ msgstr "Ативувати/Дезактивувати автоматичний в╕дступ"
+
+#~ msgid "Toggle statusbar"
+#~ msgstr "Ативувати/Дезактивувати рядок статусу"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "Ативувати/Дезактивувати перенос сл╕в"
+
+#~ msgid "Toggle Linewrap"
+#~ msgstr "Ативувати/Дезактивувати перенос рядк╕в"
 
 #~ msgid "Alex Roberts"
 #~ msgstr "Alex Roberts"

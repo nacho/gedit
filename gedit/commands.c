@@ -546,40 +546,6 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 
-/*
- * XXX - by using "buffer = gtk_editable_get_chars()", we're effectively making
- * a second copy of the file to be opened in a new window.  if this file is
- * huge, we have some serious memory usage and this can be really expensive.  i
- * think it would be better to remove document from the doc list of the
- * original window and directly put it into the new window.  however, we still
- * have to "close" the document in the original window without destroying the
- * actual contents.
- */
-/*void		This function is defunct..
-file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
-{
-	gE_document *src_doc, *dest_doc;
-	gE_window *win;
-	gchar *buffer;
-	gE_data *data = (gE_data *)cbdata;
-	int pos = 0;
-	gchar *base;
-	
-	src_doc = gE_document_current ();
-	buffer = gtk_editable_get_chars (GTK_EDITABLE (src_doc->text), 0, -1);
-	win = gE_window_new ();
-	dest_doc = gE_document_current ();
-	dest_doc->filename = g_strdup (src_doc->filename);
-
-	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)g_basename (dest_doc->filename));
-
-	gtk_editable_insert_text (GTK_EDITABLE (dest_doc->text), buffer, strlen (buffer), &pos);
-	dest_doc->changed = src_doc->changed;
-	close_doc_execute (src_doc, data);
-	g_free (buffer);
-}
-*/
-
 void file_save_cb(GtkWidget *widget, gpointer cbdata)
 {
 

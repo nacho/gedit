@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 1999-08-31 19:04+0200\n"
+"POT-Creation-Date: 1999-09-07 23:53+0100\n"
 "PO-Revision-Date: 1998-11-18 14:49:47+0100\n"
 "Last-Translator: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 "Language-Team: \n"
@@ -11,12 +11,12 @@ msgstr ""
 "Date: 1998-11-18 14:49:47+0100\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 
-#: editor-plugins/browse.c:119
-msgid "The gEdit Web Browse Plugin"
-msgstr ""
-
 #: editor-plugins/email.c:89
 msgid "The gEdit Email Plugin"
+msgstr ""
+
+#: editor-plugins/browse.c:119
+msgid "The gEdit Web Browse Plugin"
 msgstr ""
 
 #: gmodule-plugins/launcher/main.c:57
@@ -28,58 +28,67 @@ msgstr ""
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:448
+#: src/commands.c:215
+msgid "Could not save file!"
+msgstr ""
+
+#: src/commands.c:520
 msgid "Open File..."
 msgstr ""
 
-#: src/commands.c:530
+#: src/commands.c:604 src/commands.c:644
 msgid "Read only file!"
 msgstr ""
 
-#: src/commands.c:556
+#: src/commands.c:676 src/commands.c:741
 msgid "Error saving file!"
 msgstr ""
 
-#: src/commands.c:579
-#, fuzzy
-msgid "Save As..."
+#: src/commands.c:705
+#, fuzzy, c-format
+msgid "Save %s As..."
 msgstr "Сохранить как"
 
-#: src/commands.c:635
+#: src/commands.c:773
+#, fuzzy, c-format
+msgid "Save %s As ..."
+msgstr "Сохранить как"
+
+#: src/commands.c:853
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr ""
 
-#: src/commands.c:678
+#: src/commands.c:901
 msgid "Document Unchanged..."
 msgstr ""
 
-#: src/commands.c:680
+#: src/commands.c:905
 #, fuzzy
 msgid "Document Unsaved..."
 msgstr "Ручки Документов"
 
-#: src/commands.c:873
+#: src/commands.c:1094
 #, fuzzy
 msgid "_File/"
 msgstr "Файл"
 
-#: src/commands.c:882 src/commands.c:883
+#: src/commands.c:1103 src/commands.c:1104
 #, fuzzy
 msgid "_File"
 msgstr "Файл"
 
-#: src/gE_about.c:33
+#: src/gE_about.c:36
 msgid "With special thanks to:"
 msgstr ""
 
-#: src/gE_about.c:52
+#: src/gE_about.c:49
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr ""
 
-#: src/gE_about.c:54
+#: src/gE_about.c:51
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
@@ -104,7 +113,7 @@ msgstr "Сохранить"
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/gE_document.c:69 src/gE_print.c:73 src/toolbar.c:46
+#: src/gE_document.c:69 src/gE_print.c:74 src/toolbar.c:46
 #, fuzzy
 msgid "Print"
 msgstr "Печать"
@@ -113,229 +122,224 @@ msgstr "Печать"
 msgid "Open (swap) .c/.h file"
 msgstr ""
 
-#: src/gE_mdi.c:66
+#: src/gE_mdi.c:69
 msgid "Find _Line..."
 msgstr ""
 
-#: src/gE_mdi.c:67
+#: src/gE_mdi.c:70
 #, fuzzy
 msgid "Search for a line"
 msgstr "Искать Вновь"
 
-#: src/gE_mdi.c:80
+#: src/gE_mdi.c:85
 msgid "_Add View"
 msgstr ""
 
-#: src/gE_mdi.c:81
+#: src/gE_mdi.c:86
 msgid "Add a new view of the document"
 msgstr ""
 
-#: src/gE_mdi.c:82
+#: src/gE_mdi.c:87
 msgid "_Remove View"
 msgstr ""
 
-#: src/gE_mdi.c:83
+#: src/gE_mdi.c:88
 msgid "Remove view of the document"
 msgstr ""
 
-#: src/gE_mdi.c:396
+#: src/gE_mdi.c:461
 #, c-format
 msgid " '%s' has been modified. Do you wish to save it?"
 msgstr ""
 
-#. data->window = app;
-#: src/gE_plugin_api.c:106 src/gE_plugin_api.c:107 src/gE_prefs_box.c:559
-#: src/gE_prefs_box.c:560 src/gE_prefs_box.c:610 src/gE_prefs_box.c:611
-#: src/menus.c:252
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:99 src/gE_plugin_api.c:100 src/gE_prefs_box.c:528
+#: src/gE_prefs_box.c:529 src/gE_prefs_box.c:584 src/gE_prefs_box.c:585
+#: src/menus.c:265
 #, fuzzy
 msgid "_Plugins"
 msgstr "Модули"
 
-#: src/gE_prefs_box.c:98
+#: src/gE_prefs_box.c:102
 msgid "Default"
 msgstr ""
 
-#: src/gE_prefs_box.c:99
+#: src/gE_prefs_box.c:103
 msgid "Notebook"
 msgstr ""
 
-#: src/gE_prefs_box.c:100
+#: src/gE_prefs_box.c:104
 msgid "Toplevel"
 msgstr ""
 
-#: src/gE_prefs_box.c:101
+#: src/gE_prefs_box.c:105
 msgid "Modal"
 msgstr ""
 
-#: src/gE_prefs_box.c:274
+#: src/gE_prefs_box.c:270
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:287
+#: src/gE_prefs_box.c:283
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "Переключить Статут"
 
-#: src/gE_prefs_box.c:296
+#: src/gE_prefs_box.c:292
 #, fuzzy
 msgid "Show Splitscreen"
 msgstr "Переключить Разделение Экрана"
 
-#: src/gE_prefs_box.c:305
+#: src/gE_prefs_box.c:301
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:314
 #, fuzzy
 msgid "Enable Autoindent"
 msgstr "Переключить Автовыравнивание"
 
-#: src/gE_prefs_box.c:327
+#: src/gE_prefs_box.c:323
 #, fuzzy
 msgid "Enable Wordwrap"
 msgstr "Переключить Заворачивание Слов"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:348
+#: src/gE_prefs_box.c:386
 #, fuzzy
 msgid "Document Settings"
 msgstr "Список Документов"
 
-#: src/gE_prefs_box.c:361
+#: src/gE_prefs_box.c:400
 msgid "New Document After Closing Last"
 msgstr ""
 
-#: src/gE_prefs_box.c:367
+#: src/gE_prefs_box.c:406
 msgid "Close Window After Closing Last"
 msgstr ""
 
 #. End of docyment closing stuffs
-#. Print COmmand
-#: src/gE_prefs_box.c:374
-msgid "Print Command"
-msgstr ""
-
-#: src/gE_prefs_box.c:465
+#. Font Settings (within Document Settings frame)
+#: src/gE_prefs_box.c:415
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:482
+#: src/gE_prefs_box.c:432
 #, fuzzy
 msgid "Select..."
 msgstr "Выделить Все"
 
-#: src/gE_prefs_box.c:532
+#. End of Font Setttings
+#. Print COmmand
+#: src/gE_prefs_box.c:448
+msgid "Print Command"
+msgstr ""
+
+#: src/gE_prefs_box.c:500
 #, fuzzy
 msgid "Plugin Selector"
 msgstr "Имя Модуля"
 
-#: src/gE_prefs_box.c:653
-msgid "Location"
-msgstr ""
-
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:615
 msgid "Name"
 msgstr ""
 
+#: src/gE_prefs_box.c:615
+msgid "Location"
+msgstr ""
+
 #. Plugins Settings
-#: src/gE_prefs_box.c:660 src/gE_prefs_box.c:978
+#: src/gE_prefs_box.c:622 src/gE_prefs_box.c:921
 #, fuzzy
 msgid "Plugins"
 msgstr "Модули"
 
-#: src/gE_prefs_box.c:674
+#: src/gE_prefs_box.c:635
 #, fuzzy
 msgid "Use Plugins"
 msgstr "Модули"
 
-#: src/gE_prefs_box.c:741
+#: src/gE_prefs_box.c:701
 msgid "Add"
 msgstr ""
 
-#: src/gE_prefs_box.c:746
+#: src/gE_prefs_box.c:706
 msgid "Remove"
 msgstr ""
 
-#: src/gE_prefs_box.c:769
-msgid "MDI Mode"
-msgstr ""
-
-#: src/gE_prefs_box.c:824
+#. Window Size Settings
+#: src/gE_prefs_box.c:749
 #, fuzzy
 msgid "Window Size"
 msgstr "Окно"
 
-#: src/gE_prefs_box.c:837
+#: src/gE_prefs_box.c:762
 msgid "Current Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:858
+#: src/gE_prefs_box.c:782
 msgid "Startup Width:"
 msgstr ""
 
-#: src/gE_prefs_box.c:866 src/gE_prefs_box.c:906
+#: src/gE_prefs_box.c:790 src/gE_prefs_box.c:830
 msgid "Use Current"
 msgstr ""
 
-#: src/gE_prefs_box.c:878
+#: src/gE_prefs_box.c:802
 msgid "Current Height:"
 msgstr ""
 
-#: src/gE_prefs_box.c:898
+#: src/gE_prefs_box.c:822
 msgid "Startup Height:"
 msgstr ""
 
+#. MDI Mode settnigs
+#: src/gE_prefs_box.c:838
+msgid "MDI Mode"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:958
+#: src/gE_prefs_box.c:906
 msgid "General"
 msgstr ""
 
 #. Window Settings
-#: src/gE_prefs_box.c:963
+#: src/gE_prefs_box.c:911
 #, fuzzy
 msgid "Window"
 msgstr "Окно"
 
-#. Print Settings
-#: src/gE_prefs_box.c:968
+#. Docuemnt Settings
+#: src/gE_prefs_box.c:916
 #, fuzzy
 msgid "Document"
 msgstr "Ручки Документов"
 
-#. Font Settings
-#: src/gE_prefs_box.c:973
-msgid "Font"
-msgstr ""
-
-#. MDI Settings
-#: src/gE_prefs_box.c:983
-msgid "MDI"
-msgstr ""
-
-#: src/gE_print.c:86
+#: src/gE_print.c:87
 #, c-format
 msgid ""
 "Enter print command below\n"
 "Remember to include '%s'"
 msgstr ""
 
-#: src/gE_print.c:94
+#: src/gE_print.c:95
 msgid "Print Command:"
 msgstr ""
 
-#: src/gE_print.c:221
-msgid " Save, then print "
-msgstr ""
-
-#: src/gE_print.c:221
+#: src/gE_print.c:236
 msgid "Print anyway"
 msgstr ""
 
-#: src/gedit.c:127
+#: src/gE_print.c:236
+msgid " Save, then print "
+msgstr ""
+
+#: src/gedit.c:116
 msgid "Launch a plugin at startup"
 msgstr "Запустить модуль при запуске"
 
-#: src/gedit.c:127
+#: src/gedit.c:116
 msgid "PLUGIN-NAME"
 msgstr "Имя Модуля"
 
@@ -397,129 +401,129 @@ msgstr "Показать Панель"
 msgid "Untitled"
 msgstr ""
 
-#: src/menus.c:86 src/toolbar.c:38
-msgid "Create a new document"
-msgstr ""
-
-#: src/menus.c:86
+#: src/menus.c:87
 #, fuzzy
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:95
+#: src/menus.c:87 src/toolbar.c:38
+msgid "Create a new document"
+msgstr ""
+
+#: src/menus.c:94
+#, fuzzy
+msgid "Save All"
+msgstr "Сохранить"
+
+#: src/menus.c:94
+msgid "Save All Open Files"
+msgstr ""
+
+#: src/menus.c:99
 msgid "Revert"
 msgstr ""
 
-#: src/menus.c:117
+#: src/menus.c:109
+msgid "Close All"
+msgstr "Закрыть Все"
+
+#: src/menus.c:109
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "Закрыть Все"
+
+#: src/menus.c:122
 #, fuzzy
 msgid "_Top"
 msgstr "Верху"
 
-#: src/menus.c:118
+#: src/menus.c:123
 msgid "Put the document tabs at the top"
 msgstr ""
 
-#: src/menus.c:121
+#: src/menus.c:126
 #, fuzzy
 msgid "_Bottom"
 msgstr "Внизу"
 
-#: src/menus.c:122
+#: src/menus.c:127
 msgid "Put the document tabs at the bottom"
 msgstr ""
 
-#: src/menus.c:125
+#: src/menus.c:130
 #, fuzzy
 msgid "_Left"
 msgstr "Слева"
 
-#: src/menus.c:126
+#: src/menus.c:131
 msgid "Put the document tabs on the left"
 msgstr ""
 
-#: src/menus.c:129
+#: src/menus.c:134
 #, fuzzy
 msgid "_Right"
 msgstr "Справа"
 
-#: src/menus.c:130
+#: src/menus.c:135
 msgid "Put the document tabs on the right"
 msgstr ""
 
-#: src/menus.c:143
+#: src/menus.c:150
 #, fuzzy
 msgid "_None"
 msgstr "Новый"
 
-#: src/menus.c:144
+#: src/menus.c:151
 msgid "Don't have a scrollbar"
 msgstr ""
 
-#: src/menus.c:147
+#: src/menus.c:154
 msgid "_Always"
 msgstr ""
 
-#: src/menus.c:148
+#: src/menus.c:155
 msgid "Always have the scrollbar"
 msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:158
 msgid "_Automatic"
 msgstr ""
 
-#: src/menus.c:152
+#: src/menus.c:159
 msgid "Only have scrollbar when it's needed"
 msgstr ""
 
-#: src/menus.c:161
-#, fuzzy
-msgid "Toggle autoindent"
-msgstr "Переключить Автовыравнивание"
-
-#: src/menus.c:166
-#, fuzzy
-msgid "Toggle statusbar"
-msgstr "Переключить Статут"
-
-#: src/menus.c:171
-msgid "Toggle Wordwrap"
-msgstr "Переключить Заворачивание Слов"
-
-#: src/menus.c:176
-msgid "Toggle Linewrap"
-msgstr ""
-
-#: src/menus.c:181
+#: src/menus.c:192
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:186
+#: src/menus.c:197
 msgid "Toggle Split Screen"
 msgstr "Переключить Разделение Экрана"
 
-#: src/menus.c:192
+#: src/menus.c:203
 #, fuzzy
 msgid "_Document Tabs"
 msgstr "Ручки Документов"
 
-#: src/menus.c:193
+#: src/menus.c:204
 msgid "Change the placement of the document tabs"
 msgstr ""
 
-#: src/menus.c:195
+#: src/menus.c:206
 msgid "_Scrollbar"
 msgstr ""
 
-#: src/menus.c:196
+#: src/menus.c:207
 msgid "Change visibility options of the scrollbar"
 msgstr ""
 
-#: src/menus.c:200
+#: src/menus.c:211
 #, fuzzy
 msgid "Sa_ve Settings"
 msgstr "Сохранить Настройки"
 
-#: src/menus.c:201
+#: src/menus.c:212
 msgid "Save the current settings for future sessions"
 msgstr ""
 
@@ -644,6 +648,17 @@ msgstr "Правка"
 msgid "Exit the program"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Toggle autoindent"
+#~ msgstr "Переключить Автовыравнивание"
+
+#, fuzzy
+#~ msgid "Toggle statusbar"
+#~ msgstr "Переключить Статут"
+
+#~ msgid "Toggle Wordwrap"
+#~ msgstr "Переключить Заворачивание Слов"
+
 #~ msgid "Quit"
 #~ msgstr "Выход"
 
@@ -710,15 +725,8 @@ msgstr ""
 #~ msgstr "Закрыть"
 
 #, fuzzy
-#~ msgid " Save "
-#~ msgstr "Сохранить"
-
-#, fuzzy
 #~ msgid "Display the document list"
 #~ msgstr "Список Документов"
-
-#~ msgid "Close All"
-#~ msgstr "Закрыть Все"
 
 #, fuzzy
 #~ msgid "Search:"

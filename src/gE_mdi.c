@@ -154,14 +154,13 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 {
 
 	GtkWidget *new_view;
-
+	
 	new_view = gE_view_new (GE_DOCUMENT (child));
 
 
 	gE_view_set_font (GE_VIEW(new_view), settings->font);
 	gtk_widget_queue_resize (GTK_WIDGET (new_view));
-
-
+	
 	return new_view;
 
 }
@@ -231,7 +230,7 @@ gE_document *gE_document_new ()
 	if ((doc = gtk_type_new (gE_document_get_type ()))) {
 	
 	  gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), get_untitled_as_string());
-	    
+	  
 	  doc->buf = g_string_sized_new (64);
 
 	  return doc;
@@ -311,7 +310,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
 	  
    	    doc->buf_size = stats.st_size;
    	        
-   	    if ((tmp_buf = g_malloc (doc->buf_size)) != NULL) {
+   	    if ((tmp_buf = g_new0 (gchar, doc->buf_size)) != NULL) {
    	    
    	      if ((doc->filename = g_strdup (filename)) != NULL) {
    	      
@@ -410,12 +409,13 @@ void gE_add_view (GtkWidget *w, gpointer data)
 		    GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
 	   
 	  buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
-	   									  0, gtk_text_get_length (
-	   											GTK_TEXT (view->text))));
+	   									  0, gE_view_get_length (view)));
 	   
 	  if (strcmp (doc->buf->str, buf)) {
 	   
 	     /*g_free (doc->buf->str);*/
+	     
+	     g_warning ("Buffer problem!");
 	   	
 	     doc->buf = g_string_new (buf);
 	   	
