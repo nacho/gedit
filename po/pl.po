@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-07-15 12:35+0200\n"
-"PO-Revision-Date: 2002-07-15 12:42+0200\n"
+"POT-Creation-Date: 2002-07-19 12:21+0200\n"
+"PO-Revision-Date: 2002-07-19 15:36+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -250,9 +250,8 @@ msgid ""
 msgstr ""
 
 #: data/gedit.schemas.in.h:1
-#, fuzzy
 msgid "Toolbar Buttons Style"
-msgstr "Styl przycisku"
+msgstr "Styl przycisków na pasku narzędziowym"
 
 #: data/gedit.schemas.in.h:1
 msgid "Toolbar is Visible"
@@ -260,7 +259,7 @@ msgstr "Wyświetlanie paska narzędziowego"
 
 #: data/gedit.schemas.in.h:1
 msgid "Undo Actions Limit"
-msgstr ""
+msgstr "Liczba możliwych cofnięć operacji"
 
 #: data/gedit.schemas.in.h:1
 msgid "Use Default Colors"
@@ -693,15 +692,14 @@ msgstr ""
 "Wprowadź poprawne polecenie powłoki."
 
 #: plugins/shell_output/shell_output.c:1
-#, fuzzy
 msgid "Execute an external program and insert its output in a new document."
 msgstr ""
-"Wykonuje dowolny program i wstawia zawartość jego standardowego wyjścia do "
-"bieżącego dokumentu."
+"Wykonuje zewnętrzny program i wstawia wynik z jego standardowego wyjścia do "
+"nowego dokumentu."
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Capture the command _output"
-msgstr ""
+msgstr "Przechwycenie _wyjścia polecenia"
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Specify the working directory and the command you want to run."
@@ -1112,12 +1110,12 @@ msgid "Print fonts"
 msgstr "Czcionki na wydruku"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid "S_elected text color:"
-msgstr "Kolor zaznaczonego t_ekstu:"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Se_lection color:"
 msgstr "Kolor zazna_czenia:"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Selecte_d text color:"
+msgstr "Kolor zaznaczonego t_ekstu:"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Set _tabs width equivalent to  "
@@ -1144,12 +1142,12 @@ msgstr ""
 "wierszy z lewej strony okna."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-#, fuzzy
 msgid ""
 "The plugin manager settings let you choose which plugins you want to have "
 "loaded."
 msgstr ""
-"Ustawienia trybu zawijania pozwalają na ustalenie sposobu zawijania wierszy."
+"Ustawienia menedżera wtyczek pozwalają na wybór wtyczek, które mają być "
+"ładowane przez program."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
@@ -1193,7 +1191,7 @@ msgstr "Uży_wanie domyślnych kolorów motywu"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "U_se original file encoding if possible"
-msgstr ""
+msgstr "Użycie pierwotnego _kodowania pliku gdy to możliwe"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Use cu_rrent locale's encoding if possible"
@@ -1364,7 +1362,7 @@ msgid "Configure the selected plugin"
 msgstr "Konfiguruje wybraną wtyczkę"
 
 #: src/dialogs/plugin-manager.glade2.h:1
-msgid "D_etails"
+msgid "De_tails"
 msgstr "_Szczegóły"
 
 #: src/dialogs/plugin-manager.glade2.h:1
@@ -1427,6 +1425,14 @@ msgstr "GNOME PL Team <translators@gnome.pl>"
 #: src/gedit-commands.c:1
 msgid "gedit"
 msgstr "gedit"
+
+#: src/gedit-commands.c:1
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
+msgstr ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
 
 #: src/gedit-commands.c:1
 msgid "gedit is a small and lightweight text editor for Gnome"
@@ -1559,6 +1565,11 @@ msgstr "Plik \"%s\" został przywrócony."
 #, c-format
 msgid "Loading %d file..."
 msgstr "Wczytywanie %d. pliku..."
+
+#: src/gedit-file.c:1
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Plik \"%s\" nie istnieje. Czy chcesz go utworzyć?"
 
 #: src/gedit-file.c:1
 #, c-format
@@ -2368,6 +2379,73 @@ msgstr ""
 #: src/gedit-utils.c:1
 msgid "It is not possible to revert an Untitled document."
 msgstr "Nie można przywrócić dokumentu bez określonej nazwy."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Plik \"%s\" już istnieje."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" jest katalogiem.\n"
+"\n"
+"Sprawdź, czy wprowadzone położenie jest poprawne i spróbuj ponownie."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Upewnij się, że masz odpowiednie prawa do zapisu."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Nazwa pliku jest za długa."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nie można utworzyć pliku \"%s\".\n"
+"\n"
+"Katalogowa część ścieżki nie istnieje lub zawiera dowiązanie symboliczne "
+"wskazujące na nieistniejący plik."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Brak miejsca na dysku, aby utworzyć plik \"%s\".\n"
+"\n"
+"Zwolnij trochę miejsca i spróbuj ponownie."
+
+#: src/gedit-utils.c:1
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Nie można utworzyć pliku \"%s\"."
 
 #: src/gedit-view.c:1
 #, c-format
