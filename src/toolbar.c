@@ -248,14 +248,13 @@ tb_pic_only_cb(GtkWidget *w, gpointer cbwindow)
 	window->have_tb_text = 0;
 	window->have_tb_pix = 1;
 	
-#ifndef WITHOUT_GNOME
 	/*
-	 * forces the gnome toolbar to resize itself.. slows it down some,
+	 * forces the toolbar to resize itself.. slows it down some,
 	 * but not much..
 	 */
 	gtk_widget_hide (window->toolbar);
 	gtk_widget_show (window->toolbar);
-#endif
+
 }
 
 
@@ -272,10 +271,10 @@ tb_text_only_cb(GtkWidget *w, gpointer cbwindow)
 	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
 	window->have_tb_text = 1;
 	window->have_tb_pix = 0;
-#ifndef WITHOUT_GNOME
+
 	gtk_widget_hide (window->toolbar);
 	gtk_widget_show (window->toolbar);
-#endif
+
 }
 
 
