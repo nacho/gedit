@@ -19,21 +19,23 @@
 
 int main( int argc, char *argv[] )
 {
-  int fd = atoi( argv[2] );
+  int fd;
   int undone = 1;
   char buff[1025];
 
-  if( strcmp( argv[1], "-go" ) )
+  if( argc < 5 || strcmp( argv[1], "-go" ) )
     {
       printf( "Must be run as a plugin.\n" );
       _exit(1);
     }
   else
     {
+      fd = atoi( argv[2] );
       while( undone > 0 )
 	{
 	  buff[ undone = read( fd, buff, 1024 ) ] = 0;
-      printf( buff );
+	  sleep(10);
+	  printf( buff );
 	}
     }
   _exit(0);

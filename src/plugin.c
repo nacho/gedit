@@ -16,7 +16,7 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 
-plugin *plugin_init( gchar *plugin_name )
+plugin *plugin_new( gchar *plugin_name )
 {
   int toline[2]; /* Commands to the plugin. */
   int fromline[2]; /* Commands from the plugin. */

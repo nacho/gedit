@@ -29,7 +29,7 @@ typedef struct
   int in_call;
 } plugin;
 
-plugin *plugin_init(gchar *);
+plugin *plugin_new(gchar *);
 void plugin_send(plugin *, gchar *data, gint length);
 #if 0
 void receive_from_plug_in(plugin *);

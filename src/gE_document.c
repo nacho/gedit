@@ -179,7 +179,7 @@ gE_window *gE_window_new()
   window->show_tabs = 1;
   
 #if PLUGIN_TEST
-  window->hello = plugin_init( "/usr/local/bin/hello-plugin" );
+  window->hello = plugin_new( "/usr/local/bin/hello-plugin" );
   g_print( "Starting plugin with pid #%d", window->hello->pid );
 #endif
 
@@ -209,7 +209,11 @@ gE_window *gE_window_new()
 #ifdef WITHOUT_GNOME
   gtk_container_add (GTK_CONTAINER (window->window), box1);
   get_main_menu(&window->menubar, &window->accel);
+#ifdef GTK_HAVE_ACCEL_GROUP
+  gtk_window_add_accel_group(GTK_WINDOW(window->window), window->accel);
+#else
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
+#endif
   gtk_box_pack_start(GTK_BOX(box1), window->menubar, FALSE, TRUE, 0);
   gtk_widget_show(window->menubar);
 #else
