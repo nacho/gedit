@@ -23,16 +23,6 @@
 #include "gE_prefs.h"
 #include "gE_mdi.h"
 
-/*
-#include <gtk/gtk.h> 
-#include <stdio.h>
-#include <string.h>
-#include <glib.h>
-#include <time.h>
-#include "toolbar.h"
-*/
-
-
 void 
 gedit_save_settings (void)
 {

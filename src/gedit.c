@@ -34,7 +34,6 @@
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "gedit-menus.h"
-#include "toolbar.h"
 #include "gE_plugin.h"
 #include "gE_window.h"
 

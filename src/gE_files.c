@@ -29,18 +29,6 @@
 #include "gE_mdi.h"
 
 /*
-#include <sys/types.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-#include "toolbar.h"
-*/
-
-
-/*
  * PUBLIC: gedit_file_open
  *
  * opens the file and reads it into the text wigdget.

@@ -56,7 +56,6 @@ gedit_SOURCES = 	\
 	gE_plugin.h \
 	gE_plugin.c \
 	main.h		\
-	toolbar.h	\
 	gedit-menus.c gedit-menus.h \
 	search.h	\
 	search.c	
