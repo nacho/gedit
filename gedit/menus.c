@@ -48,18 +48,18 @@
  * reliable way to reference them when we traverse the menu tree.  And
  * that's what these macros are for.
  */
-#define GE_TOGGLE_LABEL_AUTOINDENT      N_("Autoindent")
-#define GE_TOGGLE_LABEL_STATUSBAR       N_("Statusbar")
-#define GE_TOGGLE_LABEL_WORDWRAP        N_("Wordwrap")
-#define GE_TOGGLE_LABEL_LINEWRAP        N_("Linewrap")
-#define GE_TOGGLE_LABEL_READONLY        N_("Readonly")
-#define GE_TOGGLE_LABEL_SPLITSCREEN     N_("Splitscreen")
-#define GE_TOGGLE_LABEL_SCROLLBALL      N_("Scrollball")
-#define GE_TOGGLE_LABEL_SHOWTABS        N_("Show tabs")
-#define GE_TOGGLE_LABEL_TOOLBAR_RELIEF  N_("Toolbar relief")
-#define GE_TOGGLE_LABEL_TOOLTIPS        N_("Show tooltips")
-#define GE_TOGGLE_LABEL_TOOLBAR_TEXT    N_("Show toolbar text")
-#define GE_TOGGLE_LABEL_TOOLBAR_PIX     N_("Show toolbar icons")
+#define GE_TOGGLE_LABEL_AUTOINDENT      N_("_Autoindent")
+#define GE_TOGGLE_LABEL_STATUSBAR       N_("Status_bar")
+#define GE_TOGGLE_LABEL_WORDWRAP        N_("_Wordwrap")
+#define GE_TOGGLE_LABEL_LINEWRAP        N_("_Linewrap")
+#define GE_TOGGLE_LABEL_READONLY        N_("_Readonly")
+#define GE_TOGGLE_LABEL_SPLITSCREEN     N_("_Splitscreen")
+#define GE_TOGGLE_LABEL_SCROLLBALL      N_("Scro_llball")
+#define GE_TOGGLE_LABEL_SHOWTABS        N_("_Show tabs")
+#define GE_TOGGLE_LABEL_TOOLBAR_RELIEF  N_("Toolbar _relief")
+#define GE_TOGGLE_LABEL_TOOLTIPS        N_("_Show tooltips")
+#define GE_TOGGLE_LABEL_TOOLBAR_TEXT    N_("Show toolbar _text")
+#define GE_TOGGLE_LABEL_TOOLBAR_PIX     N_("Show toolbar _icons")
 
 #ifdef WITHOUT_GNOME
 
@@ -299,19 +299,19 @@ GnomeUIInfo gedit_edit_menu [] = {
 };	
 
 GnomeUIInfo gedit_tab_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Top"),
+	{ GNOME_APP_UI_ITEM, N_("_Top"),
 	  N_("Put the document tabs at the top"),
 	  tab_top_cb, (gpointer) GE_WINDOW, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("Bottom"),
+	{ GNOME_APP_UI_ITEM, N_("_Bottom"),
 	  N_("Put the document tabs at the bottom"),
 	  tab_bot_cb, (gpointer) GE_WINDOW, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("Left"),
+	{ GNOME_APP_UI_ITEM, N_("_Left"),
 	  N_("Put the document tabs on the left"),
 	  tab_lef_cb, (gpointer) GE_WINDOW, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("Right"),
+	{ GNOME_APP_UI_ITEM, N_("_Right"),
 	  N_("Put the document tabs on the right"),
 	  tab_rgt_cb, (gpointer) GE_WINDOW, NULL },
 
@@ -394,15 +394,15 @@ GnomeUIInfo gedit_settings_menu []= {
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"),
+	{ GNOME_APP_UI_SUBTREE, N_("_Document Tabs"),
 	  N_("Change the placement of the document tabs"), &gedit_tab_menu },
 
-	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"),
+	{ GNOME_APP_UI_SUBTREE, N_("_Toolbar"),
 	  N_("Customize the toolbar"), &gedit_toolbar_menu },
 
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Save Settings"),
+	{ GNOME_APP_UI_ITEM, N_("Sa_ve Settings"),
 	  N_("Save the current settings for future sessions"),
 	  gE_save_settings, (gpointer) GE_WINDOW, NULL },
 
@@ -421,12 +421,12 @@ GnomeUIInfo gedit_window_menu []={
 	
 	GNOMEUIINFO_SEPARATOR,
 
-	{ GNOME_APP_UI_ITEM, N_("Document List"),
+	{ GNOME_APP_UI_ITEM, N_("_Document List"),
 	  N_("Display the document list"),
 	  files_list_popup, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 'L', GDK_CONTROL_MASK, NULL },
 
-	{ GNOME_APP_UI_ITEM, N_("Message Box"), N_("Display the message box"),
+	{ GNOME_APP_UI_ITEM, N_("_Message Box"), N_("Display the message box"),
 	  msgbox_show, NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL },
 
 	GNOMEUIINFO_END
