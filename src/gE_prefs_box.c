@@ -522,14 +522,14 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gE_data *data = (gE_data *)cbdata;
 
   prefs = g_malloc (sizeof(gE_prefs_data));
-  
+
   #ifdef WITHOUT_GNOME
     gE_property_box_new (data);
   #endif
 #ifndef WITHOUT_GNOME
-  if (prefs)
+  if (!prefs)
     {
-      gdk_window_raise (GTK_WIDGET (GNOME_DIALOG (prefs->pbox))->window);
+      /*gdk_window_raise (GTK_WIDGET (prefs->pbox)->window);*/
       return;
     }
 
@@ -564,8 +564,8 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
                                            font_page_new(), label);
    
-  get_prefs(data);
-
+  /*get_prefs(data);
+*/
 
   gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);

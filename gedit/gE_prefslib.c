@@ -23,7 +23,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <gtk/gtk.h>
-
+#include <fcntl.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
 #endif
