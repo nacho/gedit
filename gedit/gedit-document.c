@@ -1579,6 +1579,29 @@ gedit_document_get_modified (const GeditDocument* doc)
 	return gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc));
 }
 
+gboolean
+gedit_document_get_deleted (GeditDocument *doc)
+{
+	gchar *raw_uri;
+	gboolean deleted = FALSE;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	raw_uri = gedit_document_get_raw_uri (doc); 
+	if (raw_uri)
+	{
+		if (gedit_document_is_readonly (doc))
+			deleted = FALSE;
+		else
+			deleted = !gedit_utils_uri_exists (raw_uri);
+	}
+	g_free (raw_uri);
+
+	return deleted;
+}
+
 /**
  * gedit_document_get_char_count:
  * @doc: a #GeditDocument 

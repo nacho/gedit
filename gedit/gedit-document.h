@@ -147,6 +147,8 @@ gboolean 	gedit_document_revert 		(GeditDocument *doc,  GError **error);
 gboolean	gedit_document_is_untitled 	(const GeditDocument* doc);
 gboolean	gedit_document_get_modified 	(const GeditDocument* doc);
 
+gboolean	gedit_document_get_deleted	(GeditDocument *doc);
+
 gint		gedit_document_get_char_count	(const GeditDocument *doc);
 gint		gedit_document_get_line_count 	(const GeditDocument *doc);
 		
