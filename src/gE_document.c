@@ -250,14 +250,10 @@ gE_document *gE_document_new(gE_window *window)
 
 	gtk_notebook_append_page (GTK_NOTEBOOK(window->notebook), table, document->tab_label);
 
-	if (window->documents == NULL) {
-		window->documents = g_list_alloc ();
-	}
-
-	g_list_append (window->documents, document);
+	window->documents = g_list_append (window->documents, document);
 
 	gtk_notebook_set_page (GTK_NOTEBOOK(window->notebook), 
-	                       g_list_length(((GtkNotebook *)(window->notebook))->first_tab) -1);
+	                       g_list_length(GTK_NOTEBOOK (window->notebook)->children));
 
 	gtk_widget_grab_focus (document->text);
 	return document;
@@ -282,9 +278,9 @@ gE_document *gE_document_current(gE_window *window)
 	gint cur;
 	gE_document *current_document;
 	current_document = NULL;
-	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)) +1;
+	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook));
 	/*g_print("%d\n",cur);*/
-	current_document = (g_list_nth(window->documents, cur))->data;
+	current_document = g_list_nth_data (window->documents, cur);
 	if (current_document == NULL)
 		g_print ("Current Document == NULL\n");
 	return current_document;
@@ -302,9 +298,11 @@ void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_win
 {
 	gE_document *doc;
 	gchar *title;
-	
+
+	if (window->documents == NULL)
+		return;	
 	if (GTK_WIDGET_REALIZED (window->window)) {
-	doc = (g_list_nth (window->documents, num+1))->data;
+	doc = g_list_nth_data (window->documents, num);
 	gtk_widget_grab_focus (doc->text);
 	title = g_malloc0 (strlen (GEDIT_ID) + strlen (GTK_LABEL(doc->tab_label)->label) + 4);
 	

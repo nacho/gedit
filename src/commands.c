@@ -309,7 +309,6 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gE_data *data)
 	#ifndef WITHOUT_GNOME
 	gE_get_settings (window);
 	#endif
-	g_list_append (window_list, window);
 }
 
 
@@ -375,10 +374,10 @@ void file_close_cmd_callback (GtkWidget *widget, gE_data *data)
 
 	doc = gE_document_current(data->window);
 	if (doc->changed != TRUE) {
-		if (g_list_length(((GtkNotebook *)(data->window->notebook))->first_tab) > 1) {
+		if (g_list_length(GTK_NOTEBOOK(data->window->notebook)->children) > 1) {
 			gtk_notebook_remove_page(GTK_NOTEBOOK(data->window->notebook),
 				gtk_notebook_current_page (GTK_NOTEBOOK(data->window->notebook)));
-			g_list_remove(data->window->documents, doc);
+			data->window->documents = g_list_remove(data->window->documents, doc);
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
@@ -409,7 +408,6 @@ void file_close_cmd_callback (GtkWidget *widget, gE_data *data)
 	else
 		popup_close_verify(doc, data);
 
-		gtk_statusbar_pop (GTK_STATUSBAR(data->window->statusbar), 1);
 
 }
 
@@ -420,15 +418,15 @@ void file_close_window_cmd_callback (GtkWidget *widget, gE_data *data)
 		file_close_cmd_callback (NULL, data);
 		return;
 	}
-	if (g_list_length (window_list) > 2)
+	if (g_list_length (window_list) > 1)
 	{
 		g_free (data->window->search);
 		gtk_widget_destroy (data->window->window);
-		g_list_remove (window_list, data->window);
+		window_list = g_list_remove (window_list, data->window);
 		g_free (data->window);
 		if (data->temp2)
 		{
-			data->window = g_list_nth_data (window_list, 1);
+			data->window = g_list_nth_data (window_list, 0);
 			file_close_window_cmd_callback (NULL, data);
 		}
 	}

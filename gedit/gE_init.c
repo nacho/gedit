@@ -59,7 +59,7 @@ void prog_init(char **file)
 		doc = gE_document_current(window);
 		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
 			gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));
-		g_list_remove(window->documents, doc);
+		window->documents = g_list_remove(window->documents, doc);
 		if (doc->filename != NULL)
 			g_free (doc->filename);
 		g_free (doc);
