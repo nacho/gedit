@@ -419,7 +419,9 @@ init_plugin (PluginData *pd)
 	/* initialize */
 	pd->destroy_plugin = gedit_plugin_destroy;
 	pd->name = _("Diff");
-	pd->desc = _("diff plugin");
+	pd->desc = _("Makes a diff file from 2 documents or files on disk\n"
+		     "For more info on diff, type \"man diff\" in a shell prompt\n"
+		     "\n\n\n\n\nAsta la vista.\n");
 	pd->author = "Chema Celorio";
 	pd->needs_a_document = FALSE;
 
