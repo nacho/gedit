@@ -90,8 +90,8 @@ gedit_plugins_menu_add (GnomeApp *app)
 
 	/* Add the plugin manager item */
 	menu[0].type = GNOME_APP_UI_ITEM;
-	menu[0].label = g_strdup(_("Manager ..."));
-	menu[0].hint  = g_strdup (_("Add/Remove installed plugins"));
+	menu[0].label = _("Manager ...");
+	menu[0].hint  = _("Add/Remove installed plugins");
 	menu[0].moreinfo = gedit_plugin_manager_create;
 	menu[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
 	
@@ -108,8 +108,8 @@ gedit_plugins_menu_add (GnomeApp *app)
 			continue;
 		
 		menu [menu_pos].type = GNOME_APP_UI_ITEM;
-		menu [menu_pos].label = g_strdup (pd->name);
-		menu [menu_pos].hint = g_strdup (pd->desc);
+		menu [menu_pos].label = pd->name;
+		menu [menu_pos].hint = pd->desc;
 		menu [menu_pos].moreinfo = pd->private_data;
 		menu [menu_pos].pixmap_type = GNOME_APP_PIXMAP_NONE;
 		menu_pos++;
@@ -119,6 +119,7 @@ gedit_plugins_menu_add (GnomeApp *app)
 	gnome_app_insert_menus (app, path, menu);
 	gnome_app_install_menu_hints (app, menu);
 
+#if 0	
 	menu_pos = 2;
 	for (n = 0; n < g_list_length (plugins_list); n++)
 	{
@@ -128,14 +129,15 @@ gedit_plugins_menu_add (GnomeApp *app)
 			continue;
 
 		pd->menu_item = menu [menu_pos].widget;
+		/*
 		g_free (menu [menu_pos].label);
+		*/
 		menu_pos++;
 	}
+#endif	
 
-	g_free (menu[0].label);
 	g_free (path);
 	g_free (menu);
-
 }
 
 void

@@ -135,8 +135,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
 #endif
 
-#if 0 /* FIXME We are leaking memory here but it is crashing, I will continue tomorrow. */
-	g_print("Font : %s\n:", settings->font);
+#if 1 /* FIXME We are leaking memory here but it is crashing, I will continue tomorrow. */
 	if (settings->font)
 		g_free (settings->font);
 #endif	
@@ -521,7 +520,8 @@ prepare_pagesize_page (GladeXML *gui)
 				       settings->papersize);
 
 	/* connect signals */
-	gtk_signal_connect(GTK_OBJECT( GTK_COMBO( GNOME_PAPER_SELECTOR(paperselector)->paper)->entry), "changed",
+	gtk_signal_connect(GTK_OBJECT( GTK_COMBO( GNOME_PAPER_SELECTOR(paperselector)->paper)->entry),
+			   "changed",
 			   GTK_SIGNAL_FUNC (prefs_changed), NULL);
 			   
 }

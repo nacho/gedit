@@ -168,13 +168,15 @@ gedit_prefs_load_settings (void)
 	settings->print_lines = gnome_config_get_int ("printlines=0");
 	settings->print_orientation = gnome_config_get_int ("printorientation=1");
 	settings->papersize = gnome_config_get_string ("papersize");
-	if (settings->papersize==NULL)
+	if (settings->papersize == NULL)
 		settings->papersize = g_strdup (gnome_paper_name_default());
+#if 0 	/* This is ugly !. Chema */
 	if (strlen (settings->papersize)<1)
 	{
 		g_free (settings->papersize);
 		strcpy (settings->papersize, gnome_paper_name_default());
 	}
+#endif	
 
 	settings->use_fontset = gedit_prefs_determine_use_fontset ();
 	settings->font = gnome_config_get_string ("font");

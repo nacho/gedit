@@ -43,7 +43,10 @@
 #define GEDIT_STDIN_BUFSIZE 1024
 
 GtkWidget *save_file_selector = NULL;
+#if 0
+/* Don't use public variables */
 GtkWidget *open_file_selector = NULL;
+#endif
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
@@ -57,7 +60,10 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
        gint gedit_file_create_popup (const gchar *title);
+#if 0
+/* don't add prototypes for public functions */
 static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
+#endif
 static void gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer cbdata);
@@ -156,15 +162,19 @@ gedit_file_open (Document *doc, const gchar *fname)
 		return 1;
 	}
 
+#if 0
+	/* Disable this check, the users have requested that they need to open 0
+	   bytes files */
 	if (stats.st_size  == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
-						    "\nPlease make sure the file is not being used by another application\n"
+						    "\nPlease make sure the file is not being used by another 0pplication\n"
 						    "and that the file is not empty."), fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
 		return 1;
 	}
+#endif	
 
 	if ((tmp_buf = g_new0 (gchar, stats.st_size + 1)) == NULL)
 	{
@@ -190,6 +200,7 @@ gedit_file_open (Document *doc, const gchar *fname)
 		doc->untitled_number = 0;
 		gedit_document_insert_text_when_mapped (doc, tmp_buf, 0, FALSE);
 		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+		g_free (tmp_buf);
 	} else {
 		/* Vefify that doc->filenam == NULL ??? */
 		doc->filename = g_strdup (fname);
@@ -329,6 +340,8 @@ gedit_file_save (Document *doc, const gchar *fname)
 
 	g_return_val_if_fail (buffer != NULL, 1);
 
+#if 0
+	/* Allow the user to save 0 bytes files */
 	if (strlen(buffer) == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("The document contains no data."), fname);
@@ -338,6 +351,7 @@ gedit_file_save (Document *doc, const gchar *fname)
 		gedit_close_all_flag_clear();
 		return 1;
 	}
+#endif	
 
 	if ((file_pointer = fopen (fname, "w")) == NULL)
 	{
@@ -485,9 +499,106 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 	doc = gedit_document_new ();
 }
 
+static GSList *
+gedit_file_selector_get_filenames (GtkFileSelection *file_selector,
+				   gchar **directory_)
+{
+	GtkCListRow *row;
+	GtkCList *rows;
+	GSList *files = NULL;
+	GList *list;
+	gchar *file;
+	gint row_num = 0;
+
+	g_return_val_if_fail (GTK_IS_FILE_SELECTION (file_selector), NULL);
+
+	rows = GTK_CLIST (file_selector->file_list);
+	list = rows->row_list;
+	for (; list != NULL; list = list->next) {
+		row = list->data;
+		gtk_clist_get_text (rows, row_num, 0, &file);
+		if (row->state == GTK_STATE_SELECTED)
+			files = g_slist_prepend (files, g_strdup(file));
+		row_num++;
+	}
+						 
+	return files;
+}
+
+static gboolean
+gedit_file_open_is_dir (GtkFileSelection *file_selector)
+{
+	static gchar *selected_file;
+	gchar *directory;
+	gint length;
+
+	selected_file = gtk_file_selection_get_filename (file_selector);
+
+	if (!g_file_test (selected_file, G_FILE_TEST_ISDIR))
+		return FALSE;
+	
+	length = strlen (selected_file);
+
+	if (selected_file [length-1] == '/')
+		directory = g_strdup (selected_file);
+	else
+		directory = g_strdup_printf ("%s%c", selected_file, '/');
+
+	gtk_file_selection_set_filename (file_selector, directory);
+	gtk_entry_set_text (GTK_ENTRY(file_selector->selection_entry), "");
+
+	g_free (directory);
+	
+	return TRUE;
+}
+
+static void
+gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
+{
+	GtkFileSelection *file_selector;
+	gchar * file_name;
+	gchar * full_path;
+	gchar * directory;
+	GSList *files;
+	GSList *list;
+
+	gedit_debug (DEBUG_FILE, "");
+
+	g_return_if_fail (GTK_IS_FILE_SELECTION (file_selector_));
+	file_selector = GTK_FILE_SELECTION (file_selector_);
+
+	if (gedit_file_open_is_dir (file_selector))
+		return;
+
+	file_name = gtk_file_selection_get_filename (file_selector);
+	directory = g_dirname (file_name);
+
+	files = gedit_file_selector_get_filenames (file_selector, &directory);
+	list = files;
+	for (; list != NULL; list = list->next) {
+		file_name = list->data;
+		full_path = g_concat_dir_and_file (directory, file_name);
+		if (gedit_document_new_with_file (full_path))
+			gedit_flash_va (_("Loaded file %s"), full_path);
+		g_free (full_path);
+		g_free (file_name);
+	}
+
+	if (g_slist_length (files) > 1)
+		gedit_flash_va (_("Loaded %i files"), g_slist_length (files));
+
+	g_free (directory);
+	
+	gtk_widget_hide (GTK_WIDGET(file_selector));
+	
+	return;
+}
+
+
 void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
+	static GtkWidget *open_file_selector;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -499,12 +610,32 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 	if (open_file_selector == NULL)
 	{
 		open_file_selector = gtk_file_selection_new(NULL);
-		gtk_signal_connect(GTK_OBJECT(open_file_selector), "delete_event",
-				   GTK_SIGNAL_FUNC(delete_event_cb), open_file_selector);
+		gtk_signal_connect(GTK_OBJECT(open_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC (delete_event_cb),
+				   open_file_selector);
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(open_file_selector)->ok_button),
-				   "clicked", GTK_SIGNAL_FUNC(gedit_file_open_ok_sel), open_file_selector);
+				   "clicked",
+				   GTK_SIGNAL_FUNC (gedit_file_open_ok_sel),
+				   open_file_selector);
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(open_file_selector)->cancel_button),
-				   "clicked", GTK_SIGNAL_FUNC(cancel_cb), open_file_selector);
+				   "clicked",
+				   GTK_SIGNAL_FUNC (cancel_cb),
+				   open_file_selector);
+		gtk_clist_set_selection_mode(
+			GTK_CLIST(GTK_FILE_SELECTION(open_file_selector)->file_list),
+			GTK_SELECTION_EXTENDED);
+	}
+	else
+	{
+		GtkFileSelection *file_selector;
+
+		g_return_if_fail (GTK_IS_FILE_SELECTION (open_file_selector));
+
+		/* Clear the selection & file from the last open */
+		file_selector = GTK_FILE_SELECTION(open_file_selector);
+		gtk_clist_unselect_all (GTK_CLIST(file_selector->file_list));
+		gtk_entry_set_text (GTK_ENTRY(file_selector->selection_entry), "");
 	}
 
 	gtk_window_set_title (GTK_WINDOW(open_file_selector), _("Open File ..."));
@@ -552,25 +683,6 @@ cancel_cb (GtkWidget *w, gpointer data)
 	gedit_debug (DEBUG_FILE, "");
 	
 	gtk_widget_hide (data);
-}
-
-static void
-gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
-{
-	guchar * file_name;
-	
-	gedit_debug (DEBUG_FILE, "");
-
-	file_name = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(open_file_selector)));
-
-	if (gedit_document_new_with_file (file_name))
-	{
-		gedit_flash_va (_("Loaded file %s"), file_name);
-	}
-
-	g_free (file_name);
-	gtk_widget_hide (GTK_WIDGET(open_file_selector));
-	return;
 }
 
 gint

@@ -1,3 +1,33 @@
+2000-10-09  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-goto-line.c: the goto line dialog is no longer public
+	kill memleaks and clean the file a bit
+
+	* plugin.c (gedit_plugins_menu_add): kill 2 strings that we
+	where leaking
+
+	* recent.c (gedit_recent_update_menus): kill a mem-leak
+
+	* view.c (gedit_view_class_init): After months of not beeing
+	able to sleep well over this bug. Killed this mother fucker !
+	I wached this bug ask for forgiveness before squashing it to the
+	floor.
+
+	Close :
+	#14756, #5260, #12325, #13576, #14104, #14204,
+	#15528, #15669, #15746, #16197, #20325;
+
+	* file.c (gedit_file_open): allow the opening of 0 bytes files,
+	users have requested this feature.
+	(gedit_file_save): allow the user to save 0 bytes files
+
+	make open_file_selector private and static
+
+	(file_open_cb): Implement multiple file opening
+	(gedit_file_selector_get_filenames): 
+	(gedit_file_open_ok_sel): 
+
+
 2000-10-08  Chema Celorio  <chema@celorio.com>
 
 	* print.c: clean 

@@ -220,13 +220,11 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 	{
 		gchar *data = g_list_nth_data (recent_files, i);
 		
-		filename = g_strdup (data);
-
 		menu->label = g_strdup_printf ("_%i. %s", i+1, data);
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
 		menu->moreinfo = (gpointer) recent_cb;
-		menu->user_data = filename;
+		menu->user_data = data;
 		menu->unused_data = NULL;
 		menu->pixmap_type = 0;
 		menu->pixmap_info = NULL;
