@@ -55,6 +55,7 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB ("EditClear", gedit_cmd_edit_clear),
 	BONOBO_UI_VERB ("EditSelectAll", gedit_cmd_edit_select_all),
 	BONOBO_UI_VERB ("SearchFind", gedit_cmd_search_find),
+	BONOBO_UI_VERB ("SearchReplace", gedit_cmd_search_replace),
 	BONOBO_UI_VERB ("SearchGoToLine", gedit_cmd_search_goto_line),
 	BONOBO_UI_VERB ("About", gedit_cmd_help_about),
 

@@ -53,6 +53,7 @@ void gedit_cmd_edit_clear 	(BonoboUIComponent *uic, gpointer user_data, const gc
 void gedit_cmd_edit_select_all 	(BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 
 void gedit_cmd_search_find      (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
+void gedit_cmd_search_replace   (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 void gedit_cmd_search_goto_line (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);
 
 void gedit_cmd_help_about 	(BonoboUIComponent *uic, gpointer user_data, const gchar* verbname);

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-commands.h
+ * gedit-commands.c
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. * *
+ * Boston, MA 02111-1307, USA. 
  */
  
 /*
@@ -248,6 +248,14 @@ gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* 
 	gedit_debug (DEBUG_COMMANDS, "");
 
 	gedit_dialog_find ();
+}
+
+void 
+gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	gedit_dialog_replace ();
 }
 
 void 

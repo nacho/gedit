@@ -40,9 +40,10 @@ void gedit_dialog_replace   (gboolean replace);
 void gedit_find_again       (void);
 void gedit_dialog_prefs     (void);
 */
-void gedit_dialog_find (void);
+void gedit_dialog_find 	    (void);
+void gedit_dialog_replace   (void);
 
-void gedit_dialog_open_uri (void);
+void gedit_dialog_open_uri  (void);
 
 /*
 gchar * gedit_plugin_program_location_dialog (gchar *program_name, gchar *plugin_name);
