@@ -38,9 +38,7 @@ GtkWidget *available_list;
 
 gint text_length = 0;
 
-/*
 #define OLD_CLEAR
-*/
 
 /**
  * gedit_plugin_email_sendmail_location_dialog:

@@ -188,8 +188,8 @@ file_info_cb (GtkWidget *widget, gpointer data)
 
 	gedit_search_end();
 
-	msg = g_strdup_printf (_("Filename: %s\n\nTotal Character: %i\nTotal Words: %i\nTotal Lines: %i
-				Total Paragraphs: %i\n\nCurrent Line: %i\nCurrent Column: %i"),
+	msg = g_strdup_printf (_("Filename: %s\n\nTotal Character: %i\nTotal Words: %i\nTotal Lines: %i"
+				"Total Paragraphs: %i\n\nCurrent Line: %i\nCurrent Column: %i"),
 			       gedit_document_get_tab_name (doc), total_chars , total_words ,
 			       total_lines , total_paragraphs , line_number , column_number );
 			
