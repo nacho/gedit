@@ -1,3 +1,24 @@
+2000-06-01  Chema Celorio  <chema@celorio.com>
+
+	* document.h (struct _Document): rename buff to buffer
+	to find all the places where it is beeing used.
+
+	* file.c: use buffer now v.s. buff
+
+	* document.c (gedit_document_get_buffer): new function,
+	this provides an abstraction layey on the method to get
+	the text buffer.
+
+	* undo.c (gedit_undo_do): don't update the internal
+	buffer, this was causing a crash.
+	* undo.c (gedit_undo_redo): ditto
+
+	* view.c (insert_into_buffer): remove
+
+	* dialogs/dialog-replace.c (dialog_replace): kill
+	warning
+
+
 2000-05-31  Chema Celorio  <chema@celorio.com>
 
 	* dialogs/dialog-replace.c: use the new function

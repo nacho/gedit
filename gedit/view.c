@@ -97,7 +97,6 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	*/
 }
 
-
 void
 views_insert (Document *doc, gint position, gchar * text, gint length, View * view_exclude)
 {
@@ -115,7 +114,7 @@ views_insert (Document *doc, gint position, gchar * text, gint length, View * vi
 		   insert it in the other views */
 		if (nth_view == view_exclude)
 			continue;
-		
+
 		gtk_text_freeze (GTK_TEXT (nth_view->text));
 		p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
 		gtk_text_set_point (GTK_TEXT(nth_view->text), position);
@@ -176,6 +175,7 @@ view_list_erase (View *view, gedit_data *data)
 }
 #endif 
 
+#if 0 /* Disabled by chema */
 gint
 insert_into_buffer (Document *doc, gchar *buffer, gint position)
 {
@@ -197,6 +197,7 @@ insert_into_buffer (Document *doc, gchar *buffer, gint position)
 	}
 	return 0;		
 }
+#endif
 
 void
 doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
@@ -204,13 +205,20 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 {
 	gint position = *pos;
 	Document *doc;
+	guchar *text_to_insert;
 
 	gedit_debug ("start \n", DEBUG_VIEW);
 
 	doc = view->document;
 
-	gedit_undo_add (insertion_text, position, (position + length), INSERT, doc, view);
-	views_insert (doc, position, insertion_text, length, view);
+	/* This string might not be terminated with a null cero */
+	text_to_insert = g_new0 (guchar, length+1);
+	strncpy (text_to_insert, insertion_text, length);
+
+	gedit_undo_add (text_to_insert, position, (position + length), INSERT, doc, view);
+	views_insert (doc, position, text_to_insert, length, view);
+
+	g_free (text_to_insert);
 
 #ifdef ENABLE_SPLIT_SCREEN
 	/*
@@ -736,13 +744,13 @@ gedit_view_new (Document *doc)
 	view->document = doc;
 
 	
-	if (view->document->buf)
+	if (view->document->buffer)
 	{
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 				 NULL, NULL,
-				 view->document->buf->str,
-				 view->document->buf->len);
+				 view->document->buffer->str,
+				 view->document->buffer->len);
 #ifdef ENABLE_SPLIT_SCREEN    		
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 				 NULL, NULL,
@@ -914,7 +922,7 @@ gedit_view_buffer_sync (View *view)
 	buf = gtk_editable_get_chars (GTK_EDITABLE (view->text),
 				      0, gedit_view_get_length (view));
 
-	doc->buf = g_string_new (buf);
+	doc->buffer = g_string_new (buf);
 	
 	g_free (buf);				   									  
 }
@@ -935,21 +943,21 @@ gedit_view_refresh (View *view)
 #endif	
 	}
 
-	if (view->document->buf)
+	if (view->document->buffer)
 	{
 		gedit_debug (" Inserting buffer \n", DEBUG_VIEW);
 
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 				 NULL,
-				 NULL, view->document->buf->str,
-				 view->document->buf->len);
+				 NULL, view->document->buffer->str,
+				 view->document->buffer->len);
 
 #ifdef ENABLE_SPLIT_SCREEN
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 				 NULL,
-				 NULL, view->document->buf->str,
-				 view->document->buf->len);
+				 NULL, view->document->buffer->str,
+				 view->document->buffer->len);
 #endif	
 		gtk_text_thaw (GTK_TEXT (view->text));
 		

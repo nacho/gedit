@@ -128,7 +128,9 @@ call_diff (GtkWidget *widget, gpointer data)
 		buff[ length = read (fdpipe[0], buff, 1024) ] = 0;
 		if (length > 0)
 		{
-			doc->buf = g_string_append (doc->buf, buff);
+			/* FIXME: We are insterting in the begining of the
+			   file but we need to insert where the cursor is. Chema */
+			views_insert (doc, 0, buff, length, NULL);
 		}
 	}
 
@@ -136,7 +138,9 @@ call_diff (GtkWidget *widget, gpointer data)
 	{
 		View *nth_view;
 		nth_view = g_list_nth_data (doc->views, i);
+		/* Disabled by chema
 		gedit_view_refresh (nth_view);
+		*/
 		gedit_set_title (nth_view->document);
 	}
 }

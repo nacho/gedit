@@ -280,7 +280,9 @@ dialog_replace (gint full)
 	GtkWidget *hbox_replace_with;
 	GtkWidget *replace_button;
 	GtkWidget *replace_all_button;
+	/* kill warning 
 	GtkWidget *ask_before_replacing;
+	*/
 	GladeXML  *gui;
 
 	gedit_debug("\n", DEBUG_SEARCH);

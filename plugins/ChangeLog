@@ -1,3 +1,13 @@
+2000-06-01  Chema Celorio  <chema@celorio.com>
+
+	* diff/diff.c (call_diff): do not depend on the
+	doc->buff info use the view->text buffer by calling
+	gedit_document_get_buffer function.
+	* email/email.c (email_clicked): ditto
+	* browse/browse.c (goLynx): ditto
+	( The browser plugin is broken )
+
+
 2000-05-01  Chema Celorio  <chema@celorio.com>
 
 	* email/email.c (email): memleak.

@@ -43,7 +43,8 @@ static void	  gedit_document_destroy (GtkObject *);
 /*static void	  gedit_document_real_changed (Document *, gpointer); */
 static gchar* gedit_document_get_config_string (GnomeMDIChild *child);
 
-gchar* gedit_get_document_tab_name (Document *doc);
+gchar  * gedit_get_document_tab_name (Document *doc);
+guchar * gedit_document_get_buffer (Document * doc);
 
 GnomeMDI *mdi;
 
@@ -103,7 +104,7 @@ gedit_document_destroy (GtkObject *obj)
 	gedit_debug ("\n", DEBUG_DOCUMENT);
 	
 	g_free (doc->filename);
-	g_string_free (doc->buf, TRUE);
+	g_string_free (doc->buffer, TRUE);
 
 	g_list_free (doc->undo);
 	g_list_free (doc->redo);
@@ -179,6 +180,27 @@ gedit_get_document_tab_name (Document *doc)
 	   
 }
 
+guchar *
+gedit_document_get_buffer (Document * doc)
+{
+	guchar * buffer;
+	guint length;
+	GtkText * text;
+	View * view;
+
+	g_return_val_if_fail (doc!=NULL, NULL);
+	view = g_list_nth_data (doc->views, 0);
+	g_return_val_if_fail (view!=NULL, NULL);
+
+	text = GTK_TEXT ( view->text );
+
+	length = gtk_text_get_length (text);
+	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( text ),
+					  0,
+					  length);
+	return buffer;
+}
+
 Document *
 gedit_document_new (void)
 {
@@ -195,7 +217,7 @@ gedit_document_new (void)
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 					  doc_name);
 
-		doc->buf = g_string_sized_new (256);
+		doc->buffer = g_string_sized_new (256);
 		g_free (doc_name);
 		return doc;
 	}
@@ -221,7 +243,7 @@ gedit_document_new_with_title (gchar *title)
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 					  title);
 
-		doc->buf = g_string_sized_new (256);
+		doc->buffer = g_string_sized_new (256);
 	
 		return doc;
         }

@@ -47,8 +47,8 @@ struct _Document
 	gchar *filename;
 
 	/* guchar *buf; */
-	GString *buf;
-	guint buf_size;
+	GString *buffer;
+	guint buffer_size;
 
 	gint changed_id;
 	gint changed;
@@ -82,7 +82,8 @@ void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void add_view_cb         (GnomeMDI *mdi, Document *doc);
 gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 
-gchar* gedit_get_document_tab_name (Document *doc);
+gchar  * gedit_get_document_tab_name (Document *doc);
+guchar * gedit_document_get_buffer (Document * doc);
 void gedit_mdi_init (void);
 
 #endif /* __DOCUMENT_H__ */

@@ -90,24 +90,26 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	if (undo->action == DELETE)
 	{
 		/* We're inserting something that was deleted */
+		/*
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos))
 			doc->buf = g_string_insert (doc->buf, undo->start_pos, undo->text);
 		else if (undo->end_pos == 0)
 			doc->buf = g_string_prepend (doc->buf, undo->text);
 		else
 			doc->buf = g_string_append (doc->buf, undo->text);
-
+		*/
 		views_insert (doc, undo->start_pos, undo->text, undo->end_pos - undo->start_pos, NULL);
 	}
 	else if (undo->action == INSERT)
 	{
-		
+
 		/* We're deleteing somthing that had been inserted */
+		/*
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
 			doc->buf = g_string_erase (doc->buf, undo->start_pos, (undo->end_pos - undo->start_pos));
 		else
 			doc->buf = g_string_truncate (doc->buf, undo->start_pos);
-
+		*/
 		views_delete (doc, undo->start_pos, undo->end_pos);
 		doc->changed = undo->status;
 	}
@@ -141,12 +143,14 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	if (redo->action == INSERT)
 	{
 		/* We're inserting something that was deleted */
+		/*
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
 			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
 		if (redo->end_pos == 0)
 			doc->buf = g_string_prepend (doc->buf, redo->text);
 		else
 			doc->buf = g_string_append (doc->buf, redo->text);
+		*/
 
 		/* PRINT THE INFO BEFORE inserting */
 		views_insert (doc, redo->start_pos, redo->text, redo->end_pos - redo->start_pos, NULL);
@@ -154,10 +158,12 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	else if (redo->action == DELETE)
 	{
 		/* We're deleteing somthing that had been inserted */
+		/*
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len)
 			doc->buf = g_string_erase (doc->buf, redo->start_pos, (redo->end_pos - redo->start_pos));
 		else
 			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
+		*/
 
 		views_delete (doc, redo->start_pos, redo->end_pos);
 		/*doc->changed = undo->status; this line by chema */

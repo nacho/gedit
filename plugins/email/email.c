@@ -39,6 +39,7 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
 	gchar *subject, *from, *to, *command;
+	guchar * buffer;
 
 	if (button == 0)
 	{
@@ -61,7 +62,11 @@ email_clicked (GtkWidget *w, gint button, gpointer data)
 		fprintf (sendmail, "Subject: %s\n", subject);
 		fprintf (sendmail, "X-Mailer: gedit email plugin v 0.2\n");
 		fflush (sendmail);
-		fprintf (sendmail, "%s\n", doc->buf->str);
+		
+		buffer = gedit_document_get_buffer (doc);
+		fprintf (sendmail, "%s\n", buffer);
+		g_free (buffer);
+		
 		fflush (sendmail);
 	    
 		pclose (sendmail);
@@ -110,6 +115,7 @@ email (void)
 		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
 				    gnome_config_get_string ("/Editor_Plugins/Email/From"));
 	}
+	
 	else if (fullname && hostname)
 	{
 		from = g_strdup_printf ("%s <%s@%s>",

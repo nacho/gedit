@@ -103,9 +103,9 @@ gedit_file_open (Document *doc, gchar *fname)
 		return 1;
 	}
 	
-	doc->buf_size = stats.st_size;
+	doc->buffer_size = stats.st_size;
 
-	if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) == NULL)
+	if ((tmp_buf = g_new0 (gchar, doc->buffer_size + 1)) == NULL)
 	{
 		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
 		return 1;
@@ -125,8 +125,8 @@ gedit_file_open (Document *doc, gchar *fname)
 		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 	}
 
-	doc->buf_size = fread (tmp_buf, 1, doc->buf_size, fp);
-	doc->buf = g_string_new (tmp_buf);
+	doc->buffer_size = fread (tmp_buf, 1, doc->buffer_size, fp);
+	doc->buffer = g_string_new (tmp_buf);
 	g_free (tmp_buf);
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 				  g_basename (fname));
