@@ -423,10 +423,12 @@ gedit_recent_monitor_uri (GeditRecent *recent, const gchar *uri)
 					     g_strdup (uri),
 					     handle);
 		}
+#if 0
 		else {
 			const gchar *tmp = gnome_vfs_result_to_string (result);
 			g_warning ("%s: %s", tmp, uri);
 		}
+#endif
 	}
 }
 
@@ -448,6 +450,16 @@ gedit_recent_update_menus (GeditRecent *recent, GSList *list)
 {
 	BonoboUIComponent* ui_component;
 	unsigned int i;
+	gchar *label = NULL;
+	gchar *verb_name = NULL;
+	gchar *tip = NULL;
+	gchar *escaped_name = NULL;
+	gchar *item_path = NULL;
+	gchar *uri;
+	gchar* cmd;
+	GeditRecentMenuData *md;
+
+	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (recent);
 
@@ -460,20 +472,11 @@ gedit_recent_update_menus (GeditRecent *recent, GSList *list)
 
 	for (i = 1; i <= g_slist_length (list); ++i)
 	{
-		gchar *label = NULL;
-		gchar *verb_name = NULL;
-		gchar *tip = NULL;
-		gchar *escaped_name = NULL;
-		gchar *item_path = NULL;
-		gchar *uri;
-		gchar* cmd;
-		GeditRecentMenuData *md;
 		
 		/* this is what gets passed to our private "activate" callback */
 		md = (GeditRecentMenuData *)g_malloc (sizeof (GeditRecentMenuData));
 		md->recent = recent;
 		md->uri = g_strdup (g_slist_nth_data (list, i-1));
-
 
 		/* Maybe we should use a gnome-vfs call here?? */
 		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
@@ -529,6 +532,7 @@ gedit_recent_update_menus (GeditRecent *recent, GSList *list)
 		g_free (cmd);
 	}
 
+	gedit_debug (DEBUG_RECENT, "END");
 
 
 	bonobo_ui_component_thaw (ui_component, NULL);
@@ -829,11 +833,9 @@ gedit_recent_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 	gedit_recent_add (md->recent, md->uri);
 	*/
 	
-	g_signal_emit_by_name (G_OBJECT(md->recent),
-			      "activate",
-			      md->uri);
+	g_signal_emit (G_OBJECT(md->recent), gedit_recent_signals[ACTIVATE], 0,
+		       md->uri);
 
-	g_free (md);
 
 	gedit_debug (DEBUG_RECENT, "...Done.");
 }
@@ -969,5 +971,5 @@ gedit_recent_notify_cb (GConfClient *client, guint cnxn_id,
 		gedit_recent_update_menus (recent, list);
 	}
 
-	//gedit_recent_g_slist_deep_free (list);
+	gedit_recent_g_slist_deep_free (list);
 }
