@@ -270,7 +270,7 @@ dialog_replace_get_dialog (void)
 						      window,						      
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CLOSE,
+						      GTK_RESPONSE_CANCEL,
 						      NULL);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
@@ -403,7 +403,7 @@ dialog_find_get_dialog (void)
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CLOSE,
+						      GTK_RESPONSE_CANCEL,
 						      GTK_STOCK_FIND,
 						      GEDIT_RESPONSE_FIND,
 						      NULL);

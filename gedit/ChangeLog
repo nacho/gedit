@@ -1,3 +1,19 @@
+2005-01-25  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #115070 (RFE: usability: <esc> shoud close Search dialog)
+
+	Since nothing seems to change on the HIG side, I have decided 
+	that gedit will 'take the lead' on this problem and so, 
+	I have enabled ESC to close the search/replace dialog and the 
+	"go to line" one.
+
+	* gedit/dialogs/gedit-dialog-goto-line.c
+	(dialog_goto_line_get_dialog): close the dialog when the ESC button
+	is pressed
+
+	* gedit/dialogs/gedit-dialog-replace.c (dialog_replace_get_dialog)
+	(dialog_find_get_dialog): ditto
+
 2005-01-23  Paolo Borelli  <pborelli@katamail.com>
 
 	* recent-files/egg-recent-item.c (egg_recent_item_get_short_name):

@@ -185,7 +185,7 @@ dialog_goto_line_get_dialog (void)
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CLOSE,
+						      GTK_RESPONSE_CANCEL,
 						      NULL);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
