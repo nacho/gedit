@@ -1,4 +1,4 @@
-# Sample plugin
+# Insert Time plugin
 
 plugindir = $(libdir)/gedit/plugins
 

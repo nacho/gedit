@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* 
  * Reverse plugin
  * Roberto Majadas <phoenix@nova.es>
@@ -5,7 +6,7 @@
  * Reverse text
  */
 
-
+#include <config.h>
 #include <gnome.h>
 
 #include "document.h"

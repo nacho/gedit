@@ -7,5 +7,7 @@ figs = \
 
 app = gedit
 lang = C
+## Removed by chema
 include $(top_srcdir)/app-docs.make
+## end: removed by chema
 dist-hook: app-dist-hook
