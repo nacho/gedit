@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2003-05-27 16:04+0200\n"
-"PO-Revision-Date: 2003-05-27 16:05+0200\n"
+"POT-Creation-Date: 2003-06-04 16:00+0200\n"
+"PO-Revision-Date: 2003-06-04 16:01+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -508,22 +508,14 @@ msgid "Plugin"
 msgstr "Insticksmodul"
 
 #: gedit/dialogs/gedit-plugin-manager.c:54
-msgid "Load"
-msgstr "Läs in"
+msgid "Enabled"
+msgstr "Aktiverad"
 
-#: gedit/dialogs/gedit-plugin-manager.c:320
-msgid "Module file name"
-msgstr "Modulfilnamn"
-
-#: gedit/dialogs/gedit-plugin-manager.c:321
-msgid "Author(s)"
-msgstr "Författare"
-
-#: gedit/dialogs/gedit-plugin-manager.c:488
+#: gedit/dialogs/gedit-plugin-manager.c:507
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Kunde inte hitta plugin-manager.glade2. Installera om gedit.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:511
+#: gedit/dialogs/gedit-plugin-manager.c:525
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Ogiltig glade-fil för insticksmodulhanterare -- alla widgetar hittades "
@@ -671,7 +663,8 @@ msgstr ""
 "Tryck på denna knapp för att välja det typsnitt som används för att skriva "
 "ut radnummer"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:1 plugins/time/time.glade2.h:1
+#: gedit/dialogs/gedit-preferences.glade2.h:1
+#: plugins/docinfo/docinfo.glade2.h:1 plugins/time/time.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1014,20 +1007,20 @@ msgid "_Line number:"
 msgstr "_Radnummer:"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure plugin"
-msgstr "K_onfigurera insticksmodul"
+msgid "About selected plugin"
+msgstr "Om den valda insticksmodulen"
 
 #: gedit/dialogs/plugin-manager.glade2.h:2
+msgid "C_onfigure Plugin"
+msgstr "K_onfigurera insticksmodul"
+
+#: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "Configure the selected plugin"
 msgstr "Konfigurera den valda insticksmodulen"
 
-#: gedit/dialogs/plugin-manager.glade2.h:3
-msgid "Description"
-msgstr "Beskrivning"
-
 #: gedit/dialogs/plugin-manager.glade2.h:4
-msgid "Details"
-msgstr "Detaljer"
+msgid "button1"
+msgstr "knapp1"
 
 #: gedit/dialogs/plugin-manager.glade2.h:5
 msgid "dialog1"
@@ -1047,6 +1040,7 @@ msgstr "etikett"
 
 #: gedit/dialogs/replace.glade2.h:1 gedit/dialogs/uri.glade2.h:1
 #: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:2
+#: plugins/shell_output/shell_output.glade2.h:1
 msgid "*"
 msgstr "*"
 
@@ -1103,47 +1097,47 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit är en liten och enkel textredigerare för Gnome"
 
-#: gedit/gedit-document.c:572 gedit/gedit-document.c:590
+#: gedit/gedit-document.c:574 gedit/gedit-document.c:592
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:572 gedit/gedit-document.c:590
+#: gedit/gedit-document.c:574 gedit/gedit-document.c:592
 msgid "Untitled"
 msgstr "Namnlös"
 
-#: gedit/gedit-document.c:578 gedit/gedit-document.c:625
+#: gedit/gedit-document.c:580 gedit/gedit-document.c:627
 msgid "Invalid file name"
 msgstr "Ogiltigt filnamn"
 
-#: gedit/gedit-document.c:737 gedit/gedit-document.c:821
+#: gedit/gedit-document.c:739 gedit/gedit-document.c:823
 #: viewer/gedit-persist-stream.c:114
 msgid "Invalid UTF-8 data"
 msgstr "Ogiltig UTF-8-data"
 
-#: gedit/gedit-document.c:1095
+#: gedit/gedit-document.c:1097
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kunde inte läsa information om symbolisk länken %s"
 
-#: gedit/gedit-document.c:1141
+#: gedit/gedit-document.c:1143
 msgid "The file has too many symbolic links."
 msgstr "Filen har för många symboliska länkar."
 
-#: gedit/gedit-document.c:1197
+#: gedit/gedit-document.c:1199
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan inte hantera %s:-platser i skrivläge."
 
-#: gedit/gedit-document.c:1204
+#: gedit/gedit-document.c:1206
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan inte hantera denna typ av plats i skrivlägre."
 
-#: gedit/gedit-document.c:1217
+#: gedit/gedit-document.c:1219
 msgid "Invalid filename."
 msgstr "Ogiltigt filnamn."
 
-#: gedit/gedit-document.c:1357
+#: gedit/gedit-document.c:1359
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1151,7 +1145,7 @@ msgstr ""
 "Det finns inte tillräckligt med diskutrymme för att spara filen.\n"
 "Frigör en del utrymme på disken och försök igen."
 
-#: gedit/gedit-document.c:1362
+#: gedit/gedit-document.c:1364
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1161,11 +1155,11 @@ msgstr ""
 "Försök att spara en mindre fil eller spara den på en disk som inte har denna "
 "begränsning."
 
-#: gedit/gedit-document.c:1406
+#: gedit/gedit-document.c:1408
 msgid "Could not create a backup file."
 msgstr "Kunde inte skapa en säkerhetskopia."
 
-#: gedit/gedit-document.c:1526
+#: gedit/gedit-document.c:1528
 msgid "It is not possible to revert an Untitled document"
 msgstr "Det går inte att återställa ett namnlöst dokument"
 
@@ -1549,7 +1543,7 @@ msgstr ""
 "gedit kan inte skriva ut eftersom det inte kan\n"
 "hitta en av de nödvändiga typsnitten."
 
-#: gedit/gedit-print.c:376 plugins/docinfo/docinfo.glade2.h:6
+#: gedit/gedit-print.c:376 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
 msgstr "Rader"
 
@@ -1954,7 +1948,7 @@ msgstr "_Ångra"
 msgid "_View"
 msgstr "_Visa"
 
-#: gedit/gedit-utils.c:795
+#: gedit/gedit-utils.c:402
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1965,24 +1959,24 @@ msgstr ""
 "\n"
 "Kontrollera att du har angivit platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:802
+#: gedit/gedit-utils.c:409
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Kunde inte öppna filen \"%s\" eftersom den innehåller trasig data."
 
-#: gedit/gedit-utils.c:813
+#: gedit/gedit-utils.c:420
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Kunde inte öppna filen \"%s\" eftersom gedit inte kan hantera %s:-platser."
 
-#: gedit/gedit-utils.c:819
+#: gedit/gedit-utils.c:426
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Kunde inte öppna filen \"%s\""
 
-#: gedit/gedit-utils.c:829
+#: gedit/gedit-utils.c:436
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -1990,12 +1984,12 @@ msgstr ""
 "Kunde inte öppna filen \"%s\" eftersom den innehåller data i ett ogiltigt "
 "format."
 
-#: gedit/gedit-utils.c:836
+#: gedit/gedit-utils.c:443
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Kunde inte öppna filen \"%s\" eftersom den är för stor."
 
-#: gedit/gedit-utils.c:843
+#: gedit/gedit-utils.c:450
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2006,12 +2000,12 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:850
+#: gedit/gedit-utils.c:457
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Kunde inte öppna filen \"%s\" eftersom åtkomst nekades."
 
-#: gedit/gedit-utils.c:857
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2022,7 +2016,7 @@ msgstr ""
 "\n"
 "Stäng några öppna filer och försök igen."
 
-#: gedit/gedit-utils.c:865
+#: gedit/gedit-utils.c:472
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2033,7 +2027,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:872
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2042,7 +2036,7 @@ msgstr ""
 "Det finns inte tillräckligt med minne för att öppna filen \"%s\". Stäng "
 "några körande program och försök igen."
 
-#: gedit/gedit-utils.c:898
+#: gedit/gedit-utils.c:505
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2055,7 +2049,7 @@ msgstr ""
 "Kontrollera att du angav platsen korrekt och att dina "
 "proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:913
+#: gedit/gedit-utils.c:520
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2066,7 +2060,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:920
+#: gedit/gedit-utils.c:527
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2077,7 +2071,7 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:927
+#: gedit/gedit-utils.c:534
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2088,7 +2082,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: gedit/gedit-utils.c:935
+#: gedit/gedit-utils.c:542
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2099,17 +2093,17 @@ msgstr ""
 "\n"
 "Du försöker troligtvis öppna en binär fil."
 
-#: gedit/gedit-utils.c:973
+#: gedit/gedit-utils.c:580
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Kunde inte öppna filen \"%s\"."
 
-#: gedit/gedit-utils.c:1024
+#: gedit/gedit-utils.c:631
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Kunde inte spara filen \"%s\"."
 
-#: gedit/gedit-utils.c:1028
+#: gedit/gedit-utils.c:635
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2120,7 +2114,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:1081
+#: gedit/gedit-utils.c:688
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2131,13 +2125,13 @@ msgstr ""
 "\n"
 "Den kanske har tagits bort nyligen."
 
-#: gedit/gedit-utils.c:1088
+#: gedit/gedit-utils.c:695
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom den innehåller trasig data."
 
-#: gedit/gedit-utils.c:1099
+#: gedit/gedit-utils.c:706
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2145,12 +2139,12 @@ msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom gedit inte kan hantera %s:-"
 "platser."
 
-#: gedit/gedit-utils.c:1105 gedit/gedit-utils.c:1245
+#: gedit/gedit-utils.c:712 gedit/gedit-utils.c:852
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Kunde inte återställa filen \"%s\"."
 
-#: gedit/gedit-utils.c:1115
+#: gedit/gedit-utils.c:722
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2159,17 +2153,17 @@ msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom den innehåller data i ett "
 "ogiltigt format."
 
-#: gedit/gedit-utils.c:1122
+#: gedit/gedit-utils.c:729
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Kunde inte återställa filen \"%s\" eftersom den är för stor."
 
-#: gedit/gedit-utils.c:1129
+#: gedit/gedit-utils.c:736
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Kunde inte återställa filen \"%s\" eftersom åtkomst nekades."
 
-#: gedit/gedit-utils.c:1136
+#: gedit/gedit-utils.c:743
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2181,7 +2175,7 @@ msgstr ""
 "\n"
 "Stäng några öppna filer och försök igen."
 
-#: gedit/gedit-utils.c:1144
+#: gedit/gedit-utils.c:751
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2190,7 +2184,7 @@ msgstr ""
 "Inte tillräckligt med minne för att återställa filen \"%s\". Stäng några "
 "körande program och försök igen."
 
-#: gedit/gedit-utils.c:1170
+#: gedit/gedit-utils.c:777
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2202,7 +2196,7 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:1184
+#: gedit/gedit-utils.c:791
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2213,14 +2207,14 @@ msgstr ""
 "\n"
 "Kontrollera att dina proxyserverinställningar stämmer och försök igen."
 
-#: gedit/gedit-utils.c:1191
+#: gedit/gedit-utils.c:798
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Kunde inte återställa filen \"%s\" eftersom försöket att logga in "
 "misslyckades."
 
-#: gedit/gedit-utils.c:1198
+#: gedit/gedit-utils.c:805
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2232,16 +2226,16 @@ msgstr ""
 "\n"
 "Du försöker troligtvis återställa en binär fil."
 
-#: gedit/gedit-utils.c:1207
+#: gedit/gedit-utils.c:814
 msgid "It is not possible to revert an Untitled document."
 msgstr "Det går inte att återställa ett namnlöst dokument."
 
-#: gedit/gedit-utils.c:1296
+#: gedit/gedit-utils.c:903
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Filen \"%s\" finns redan."
 
-#: gedit/gedit-utils.c:1302
+#: gedit/gedit-utils.c:909
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2252,7 +2246,7 @@ msgstr ""
 "\n"
 "Kontrollera att du angav platsen korrekt."
 
-#: gedit/gedit-utils.c:1311
+#: gedit/gedit-utils.c:918
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2263,7 +2257,7 @@ msgstr ""
 "\n"
 "Se till att du har de rätta skrivrättigheterna."
 
-#: gedit/gedit-utils.c:1318
+#: gedit/gedit-utils.c:925
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2274,7 +2268,7 @@ msgstr ""
 "\n"
 "Filnamnet är för långt."
 
-#: gedit/gedit-utils.c:1325
+#: gedit/gedit-utils.c:932
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2286,7 +2280,7 @@ msgstr ""
 "\n"
 "En katalogkomponent i filnamnet finns inte eller är en lös symbolisk länk."
 
-#: gedit/gedit-utils.c:1334
+#: gedit/gedit-utils.c:941
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2297,7 +2291,7 @@ msgstr ""
 "\n"
 "Frigör en del utrymme på disken och försök igen."
 
-#: gedit/gedit-utils.c:1340
+#: gedit/gedit-utils.c:947
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Kunde inte skapa filen \"%s\"."
@@ -2308,16 +2302,16 @@ msgstr "Kunde inte skapa filen \"%s\"."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: gedit/gedit-view.c:682
+#: gedit/gedit-view.c:685
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rad %d, kolumn %d"
 
-#: gedit/gedit-view.c:720
+#: gedit/gedit-view.c:723
 msgid "  OVR"
 msgstr "  ÖVR"
 
-#: gedit/gedit-view.c:722
+#: gedit/gedit-view.c:725
 msgid "  INS"
 msgstr "  INF"
 
@@ -2424,35 +2418,35 @@ msgstr ""
 "avgör antalet ord, rader, tecken och icke-blanka tecken i det och visar "
 "resultatet."
 
-#: plugins/docinfo/docinfo.glade2.h:1
+#: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
 msgstr "0"
 
-#: plugins/docinfo/docinfo.glade2.h:2
+#: plugins/docinfo/docinfo.glade2.h:3
+msgid "<span weight=\"bold\">File Name</span>"
+msgstr "<span weight=\"bold\">Filnamn</span>"
+
+#: plugins/docinfo/docinfo.glade2.h:4
 msgid "Bytes"
 msgstr "Byte"
 
-#: plugins/docinfo/docinfo.glade2.h:3
+#: plugins/docinfo/docinfo.glade2.h:5
 msgid "Characters (no spaces)"
 msgstr "Tecken (utan blanksteg)"
 
-#: plugins/docinfo/docinfo.glade2.h:4
+#: plugins/docinfo/docinfo.glade2.h:6
 msgid "Characters (with spaces)"
 msgstr "Tecken (inklusive blanksteg)"
 
-#: plugins/docinfo/docinfo.glade2.h:5
-msgid "File Name"
-msgstr "Filnamn"
-
-#: plugins/docinfo/docinfo.glade2.h:7
+#: plugins/docinfo/docinfo.glade2.h:8
 msgid "Update"
 msgstr "Uppdatera"
 
-#: plugins/docinfo/docinfo.glade2.h:8
+#: plugins/docinfo/docinfo.glade2.h:9
 msgid "Words"
 msgstr "Ord"
 
-#: plugins/docinfo/docinfo.glade2.h:9
+#: plugins/docinfo/docinfo.glade2.h:10
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Insticksmodul för dokumentinformation"
 
@@ -2771,6 +2765,205 @@ msgstr "_Fråga efter ett format"
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
 
+#: plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr "_Kör kommando..."
+
+#: plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr "Kör ett kommando"
+
+#: plugins/shell_output/shell_output.c:161
+#: plugins/shell_output/shell_output.c:516
+msgid "Stopped"
+msgstr "Stoppad"
+
+#: plugins/shell_output/shell_output.c:246
+msgid "An error occurs while running the selected command."
+msgstr "Ett fel uppstår vid körning av det valda kommandot."
+
+#: plugins/shell_output/shell_output.c:302
+msgid "Run Command"
+msgstr "Kör kommando"
+
+#: plugins/shell_output/shell_output.c:318
+msgid "_Run"
+msgstr "_Kör"
+
+#: plugins/shell_output/shell_output.c:522
+msgid "Done"
+msgstr "Klar"
+
+#: plugins/shell_output/shell_output.c:524
+msgid "Failed"
+msgstr "Misslyckades"
+
+#: plugins/shell_output/shell_output.c:696
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Fältet för skalkommando är tomt.\n"
+"\n"
+"Var vänlig och ange ett giltigt skalkommando."
+
+#: plugins/shell_output/shell_output.c:729
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Fel vid tolkning av skalkommandot.\n"
+"\n"
+"Ange ett giltigt skalkommando."
+
+#: plugins/shell_output/shell_output.c:815
+msgid "Executing command"
+msgstr "Kör kommando"
+
+#: plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr "Ko_mmando:"
+
+#: plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "Ange arbetskatalogen..."
+
+#: plugins/shell_output/shell_output.glade2.h:4
+msgid "_Show results in Output Window"
+msgstr "_Visa resultat i utdatafönster"
+
+#: plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr "_Arbetskatalog:"
+
+#: plugins/shell_output/shell_output.glade2.h:6
+msgid "gedit: Shell Output plugin"
+msgstr "gedit: Insticksmodul för skalutdata"
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr "Kör ett externt program och infoga dess utdata i utdatafönstret."
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "Skalkommando"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Insticksmodul för tagglistor"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tags you want to use"
+msgstr "Välj den grupp med taggar som du vill använda"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Taggruppskombo"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "Taggnamnslista"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:188
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Dubbelklicka på en tagg för att infoga det i det aktuella dokumentet"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
+msgid "Tags"
+msgstr "Taggar"
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
+msgid "Tag _List"
+msgstr "Tagg_lista"
+
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
+msgid "Show the tag list window"
+msgstr "Visa tagglistefönstret"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+msgid "Tag list"
+msgstr "Tagglista"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tags/strings without having to type them."
+msgstr ""
+"Tagglisteinsticksmodulen tillhandahåller en metod för att enkelt infoga "
+"vanligt använda taggar/strängar i dokument utan att behöva skriva dem."
+
+#: plugins/indent/indent.c:45
+msgid "_Indent"
+msgstr "_Gör indrag"
+
+#: plugins/indent/indent.c:47
+msgid "Indent selected lines"
+msgstr "Dra in de markerade raderna"
+
+#: plugins/indent/indent.c:49
+msgid "U_nindent"
+msgstr "Dra _ut"
+
+#: plugins/indent/indent.c:51
+msgid "Unindent selected lines"
+msgstr "Dra ut de markerade raderna"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+msgid "Indent lines"
+msgstr "Dra in rader"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent or un-indent selected lines."
+msgstr "Dra in eller dra ut de markerade raderna."
+
+#: plugins/sort/sort.glade2.h:1
+msgid "R_emove duplicates"
+msgstr "_Ta bort dubletter"
+
+#: plugins/sort/sort.glade2.h:2
+msgid "S_tart at column:"
+msgstr "_Börja vid kolumn:"
+
+#: plugins/sort/sort.glade2.h:3 plugins/sort/sort.gedit-plugin.desktop.in.h:1
+msgid "Sort"
+msgstr "Sortera"
+
+#: plugins/sort/sort.glade2.h:4
+msgid "You cannot undo a sort operation"
+msgstr "Du kan inte ångra en sorteringsåtgärd"
+
+#: plugins/sort/sort.glade2.h:5
+msgid "_Ignore case"
+msgstr "_Gör ingen skillnad på gemener/VERSALER"
+
+#: plugins/sort/sort.glade2.h:6
+msgid "_Reverse order"
+msgstr "_Baklänges"
+
+#: plugins/sort/sort.glade2.h:7
+msgid "_Sort"
+msgstr "_Sortera"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+msgid "Sorts a document or selected text."
+msgstr "Sorterar ett dokument eller markerad text."
+
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:26
+msgid "S_ort..."
+msgstr "S_ortera..."
+
+#: plugins/sort/sort.c:29
+msgid "Sort the current document or selection."
+msgstr "Sortera det aktuella dokument eller markeringen."
+
 #: viewer/gedit-persist-stream.c:44
 msgid "Save method not implemented for gedit viewer"
 msgstr "Sparandemetod inte implementerad för gedit-visare"
@@ -2782,6 +2975,33 @@ msgstr "Kopiera den markerade texten till urklipp"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Kopiera text"
+
+#~ msgid "Enable"
+#~ msgstr "Aktivera"
+
+#~ msgid "Disabled"
+#~ msgstr "Inaktiverad"
+
+#~ msgid "Disable"
+#~ msgstr "Inaktivera"
+
+#~ msgid "Load"
+#~ msgstr "Läs in"
+
+#~ msgid "Module file name"
+#~ msgstr "Modulfilnamn"
+
+#~ msgid "Author(s)"
+#~ msgstr "Författare"
+
+#~ msgid "Description"
+#~ msgstr "Beskrivning"
+
+#~ msgid "Details"
+#~ msgstr "Detaljer"
+
+#~ msgid "File Name"
+#~ msgstr "Filnamn"
 
 #~ msgid "Current Locale"
 #~ msgstr "Aktuell lokal"
@@ -3105,154 +3325,6 @@ msgstr "_Kopiera text"
 #~ "\n"
 #~ "För mer information om programmet <tt>diff</tt> skriver du <tt>man diff</"
 #~ "tt>  i en skalprompt."
-
-#~ msgid "_Run Command..."
-#~ msgstr "_Kör kommando..."
-
-#~ msgid "Run a command"
-#~ msgstr "Kör ett kommando"
-
-#~ msgid "Stopped"
-#~ msgstr "Stoppad"
-
-#~ msgid "An error occurs while running the selected command."
-#~ msgstr "Ett fel uppstår vid körning av det valda kommandot."
-
-#~ msgid "Run Command"
-#~ msgstr "Kör kommando"
-
-#~ msgid "_Run"
-#~ msgstr "_Kör"
-
-#~ msgid "Done"
-#~ msgstr "Klar"
-
-#~ msgid "Failed"
-#~ msgstr "Misslyckades"
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Fältet för skalkommando är tomt.\n"
-#~ "\n"
-#~ "Var vänlig och ange ett giltigt skalkommando."
-
-#~ msgid ""
-#~ "Error parsing the shell command.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Fel vid tolkning av skalkommandot.\n"
-#~ "\n"
-#~ "Ange ett giltigt skalkommando."
-
-#~ msgid "Executing command"
-#~ msgstr "Kör kommando"
-
-#~ msgid "Co_mmand:"
-#~ msgstr "Ko_mmando:"
-
-#~ msgid "Select the working directory..."
-#~ msgstr "Ange arbetskatalogen..."
-
-#~ msgid "_Show results in Output Window"
-#~ msgstr "_Visa resultat i utdatafönster"
-
-#~ msgid "_Working directory:"
-#~ msgstr "_Arbetskatalog:"
-
-#~ msgid "gedit: Shell Output plugin"
-#~ msgstr "gedit: Insticksmodul för skalutdata"
-
-#~ msgid ""
-#~ "Execute an external program and eventually grabs its output in the output "
-#~ "window."
-#~ msgstr "Kör ett externt program och infoga dess utdata i utdatafönstret."
-
-#~ msgid "Shell command"
-#~ msgstr "Skalkommando"
-
-#~ msgid "Tag list plugin"
-#~ msgstr "Insticksmodul för tagglistor"
-
-#~ msgid "Select the group of tags you want to use"
-#~ msgstr "Välj den grupp med taggar som du vill använda"
-
-#~ msgid "Tag Groups Combo"
-#~ msgstr "Taggruppskombo"
-
-#~ msgid "Tags Name List"
-#~ msgstr "Taggnamnslista"
-
-#~ msgid "Double-click on a tag to insert it in the current document"
-#~ msgstr ""
-#~ "Dubbelklicka på en tagg för att infoga det i det aktuella dokumentet"
-
-#~ msgid "Tags"
-#~ msgstr "Taggar"
-
-#~ msgid "Tag _List"
-#~ msgstr "Tagg_lista"
-
-#~ msgid "Show the tag list window"
-#~ msgstr "Visa tagglistefönstret"
-
-#~ msgid "Tag list"
-#~ msgstr "Tagglista"
-
-#~ msgid ""
-#~ "The tag list plugin provides a method to easily insert into a document "
-#~ "commonly used tags/strings without having to type them."
-#~ msgstr ""
-#~ "Tagglisteinsticksmodulen tillhandahåller en metod för att enkelt infoga "
-#~ "vanligt använda taggar/strängar i dokument utan att behöva skriva dem."
-
-#~ msgid "_Indent"
-#~ msgstr "_Gör indrag"
-
-#~ msgid "Indent selected lines"
-#~ msgstr "Dra in de markerade raderna"
-
-#~ msgid "U_nindent"
-#~ msgstr "Dra _ut"
-
-#~ msgid "Unindent selected lines"
-#~ msgstr "Dra ut de markerade raderna"
-
-#~ msgid "Indent lines"
-#~ msgstr "Dra in rader"
-
-#~ msgid "Indent or un-indent selected lines."
-#~ msgstr "Dra in eller dra ut de markerade raderna."
-
-#~ msgid "R_emove duplicates"
-#~ msgstr "_Ta bort dubletter"
-
-#~ msgid "S_tart at column:"
-#~ msgstr "_Börja vid kolumn:"
-
-#~ msgid "You cannot undo a sort operation"
-#~ msgstr "Du kan inte ångra en sorteringsåtgärd"
-
-#~ msgid "_Ignore case"
-#~ msgstr "_Gör ingen skillnad på gemener/VERSALER"
-
-#~ msgid "_Reverse order"
-#~ msgstr "_Baklänges"
-
-#~ msgid "_Sort"
-#~ msgstr "_Sortera"
-
-#~ msgid "Sorts a document or selected text."
-#~ msgstr "Sorterar ett dokument eller markerad text."
-
-#~ msgid "S_ort..."
-#~ msgstr "S_ortera..."
-
-#~ msgid "Sort the current document or selection."
-#~ msgstr "Sortera det aktuella dokument eller markeringen."
 
 #~ msgid "Open a file."
 #~ msgstr "Öppna en fil."
