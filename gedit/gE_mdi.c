@@ -50,60 +50,6 @@ gchar* gedit_get_document_tab_name (void);
 #define GE_DATA		1
 #define GE_WINDOW	2
 
-GnomeUIInfo gedit_edit_menu[] =
-{
-	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_do, NULL),
-	GNOMEUIINFO_MENU_REDO_ITEM (gedit_undo_redo, NULL),
-
-	GNOMEUIINFO_SEPARATOR,
-
-        GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, NULL),
-
-        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, NULL),
-
-	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, NULL),
-
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM(edit_selall_cb, NULL),
-
-
-	GNOMEUIINFO_SEPARATOR,
-
-	{ GNOME_APP_UI_ITEM, N_("Find _Line..."),
-	  N_("Search for a line"),
-
-	  goto_line_cb, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-
-	{ GNOME_APP_UI_ITEM, N_("Find _In Files..."),
-	  N_("Find text in all open files"),
-	  find_in_files_cb, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
-	},
-
-	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, NULL),
-
-	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_cb, NULL),
-	
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo view_menu[] =
-{
-	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
-			       N_("Add a new view of the document"),
-			       gedit_add_view),
-	GNOMEUIINFO_ITEM_NONE (N_("_Remove View"),
-			       N_("Remove view of the document"),
-			       gedit_remove_view),
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo doc_menu[] =
-{
-	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
-	GNOMEUIINFO_MENU_VIEW_TREE(view_menu),
-	GNOMEUIINFO_END
-};
 
 enum {
 	LAST_SIGNAL
