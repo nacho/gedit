@@ -48,7 +48,7 @@
 
 #define MENU_ITEM_LABEL	N_("Save _Copy") //fixme accel clash
 #define MENU_ITEM_NAME	"SaveCopy"
-#define MENU_ITEM_PATH	"/menu/File/EditOps_1/"
+#define MENU_ITEM_PATH	"/menu/File/FileOps_0/"
 #define MENU_ITEM_TIP	N_("  blah ")
 
 
@@ -185,7 +185,6 @@ save_copy_cb (BonoboUIComponent *uic,
 {
 	GeditDocument *doc;
 	gchar *file_uri;
-	gboolean ret = FALSE;
 	gchar *untitled_name = NULL;
 	const GeditEncoding *encoding;
 
@@ -223,6 +222,7 @@ save_copy_cb (BonoboUIComponent *uic,
 	{
 		gchar *uri;
 		GError *error = NULL;
+		gboolean ret;
 
 		uri = gnome_vfs_make_uri_canonical (file_uri);
 		g_return_if_fail (uri != NULL);
@@ -242,8 +242,6 @@ save_copy_cb (BonoboUIComponent *uic,
 		g_free (uri);
 		g_free (file_uri);
 	}
-
-	return ret;
 }
 
 G_MODULE_EXPORT GeditPluginState

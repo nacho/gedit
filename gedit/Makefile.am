@@ -43,8 +43,6 @@ NON_INST_H_FILS =			\
 	gedit-application-server.h	\
 	bonobo-mdi-session.h		\
 	gedit-commands.h		\
-	gedit-file-selector-util.h 	\
-	gedit-io-error-dialogs.h	\
 	gedit-plugins-engine.h		\
 	gedit-session.h			\
 	gedit-languages-manager.h	\
@@ -55,6 +53,8 @@ NON_INST_H_FILS =			\
 INST_H_FILES =				\
 	gedit2.h			\
 	gedit-file.h			\
+	gedit-file-selector-util.h 	\
+	gedit-io-error-dialogs.h	\
 	gedit-utils.h 			\
 	gedit-mdi.h			\
 	gedit-mdi-child.h		\
