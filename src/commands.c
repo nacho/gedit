@@ -290,6 +290,9 @@ static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	       doc = gE_document_new_with_file (filename);
 	       gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	       gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+
+  	       /* Make the document readonly if you can't write to the file. */
+	       gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
 	        		 
 	     } else {
 	      
@@ -306,6 +309,10 @@ static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	    doc = gE_document_new_with_file (filename);
 	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+
+
+ 	    /* Make the document readonly if you can't write to the file. */
+	    gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
 		     
 	    gtk_widget_hide (GTK_WIDGET(osel));
 	    return;

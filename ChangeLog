@@ -1,9 +1,21 @@
+Fri Nov 26 14:33:16 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/commands.c: (file_open_ok_sel): Check whether the opened file
+	  is Read Only
+
+Fri Nov 26 14:12:34 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* makeconfig.pl:
+	  README: Bumped version number to 0.6.1. New release is iminent.
+	
+	* NEWS: Added 0.6.1 announcement.
+
 Thu Nov 25 17:34:15 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
 
-	* ommands.c: (tab_pos) Check whether the mdi mode is NOTEBOOK,
+	* src/ommands.c: (tab_pos) Check whether the mdi mode is NOTEBOOK,
 	  if it is, then we can change the tab position.
 	
-	* gE_prefs.c: (get_settings) Removed the check for the MDI Mode
+	* src/gE_prefs.c: (get_settings) Removed the check for the MDI Mode
 	  flag, becuase if it doenst exist it's 0, and Notebook mode
 	  is 0.. instead of setting it to Notebook mode (which for 
 	  some reason set it to mode 42, which is the default mdoe, which
