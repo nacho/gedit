@@ -1362,14 +1362,40 @@ gedit_mdi_remove_all (GeditMDI *mdi)
 	
 #define MAX_URI_IN_TITLE_LENGTH 75
 
+static gchar *
+get_dirname (const gchar *uri)
+{
+	gchar *res;
+	gchar *str;
+
+	str = g_path_get_dirname (uri);
+	g_return_val_if_fail (str != NULL, ".");
+
+	if ((strlen (str) == 1) && (*str == '.'))
+	{
+		g_free (str);
+		
+		return NULL;
+	}
+
+	res = gedit_utils_replace_home_dir_with_tilde (str);
+
+	g_free (str);
+	
+	return res;
+}
+
 void 
 gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 {
 	BonoboMDIChild *active_child = NULL;
 	GeditDocument *doc = NULL;
-	gchar *docname = NULL;
+	gchar *str;
+	gchar *dirname = NULL;
 	gchar *title = NULL;
 	gchar *uri;
+	gchar *name;
+
 	GtkWidget *active_window;
 	
 	gedit_debug (DEBUG_MDI, "");
@@ -1385,42 +1411,53 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 	uri = gedit_document_get_uri (doc);
 	g_return_if_fail (uri != NULL);
 
-	/* Truncate the URI so it doesn't get insanely wide. */
-	docname = gedit_utils_str_middle_truncate (uri, MAX_URI_IN_TITLE_LENGTH);
+	str = get_dirname (uri);
 	g_free (uri);
+
+	if (str != NULL)
+	{
+		/* Truncate the URI so it doesn't get insanely wide. */
+		dirname = gedit_utils_str_middle_truncate (str, MAX_URI_IN_TITLE_LENGTH);
+		g_free (str);
+	}
+	else
+	{
+		dirname = NULL;
+	}
+	
+	name = gedit_document_get_short_name (doc);
 
 	if (gedit_document_get_modified (doc))
 	{
-		title = g_strdup_printf ("%s %s - gedit", docname, _("(modified)"));
+		if (dirname != NULL)
+			title = g_strdup_printf ("*%s (%s) - gedit", name, dirname);
+		else
+			title = g_strdup_printf ("*%s - gedit", name);
 	} 
 	else 
 	{
 		if (gedit_document_is_readonly (doc)) 
 		{
-			title = g_strdup_printf ("%s %s - gedit", docname, _("(readonly)"));
+			if (dirname != NULL)
+				title = g_strdup_printf ("%s [%s] (%s) - gedit", name, _("Read Only"), dirname);
+			else
+				title = g_strdup_printf ("%s [%s] - gedit", name, _("Read Only"));
 		} 
 		else 
 		{
-			title = g_strdup_printf ("%s - gedit", docname);
+			if (dirname != NULL)
+				title = g_strdup_printf ("%s (%s) - gedit", name, dirname);
+			else
+				title = g_strdup_printf ("%s - gedit", name);
 		}
-
 	}
 
 	active_window = GTK_WIDGET (gedit_get_active_window ());
 
-	if (GTK_WIDGET_REALIZED (active_window))
-	{	
-		gchar *short_name;
-		
-		short_name = gedit_document_get_short_name (doc);
-		
-		gdk_window_set_icon_name (active_window->window, short_name);
-		g_free (short_name);
-	}
-
 	gtk_window_set_title (GTK_WINDOW (active_window), title);
 	
-	g_free (docname);
+	g_free (dirname);
+	g_free (name);
 	g_free (title);
 }
 

@@ -238,19 +238,23 @@ gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 
 	if (gedit_document_get_modified (child->document))
 	{
-		tab_name = g_strdup_printf ("%s*", docname);
+		tab_name = g_strdup_printf ("*%s", docname);
 	} 
 	else 
 	{
+ #if 0		
 		if (gedit_document_is_readonly (child->document)) 
 		{
-			tab_name = g_strdup_printf ("%s - %s", docname, 
+			tab_name = g_strdup_printf ("%s [%s]", docname, 
 						/*Read only*/ _("RO"));
 		} 
 		else 
 		{
 			tab_name = g_strdup_printf ("%s", docname);
 		}
+#endif
+		tab_name = g_strdup_printf ("%s", docname);
+
 	}
 	
 	g_free (docname);
@@ -550,8 +554,6 @@ menu_show (GtkWidget *widget, GtkWidget *view)
 	if (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)) != view)
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 
-	/* FIXME: I should set sensitivity of the children, not of the entire memu -
-	 * Paolo (Jan 13, 2004) */
 	if (gedit_mdi_get_state (gedit_mdi) != GEDIT_STATE_NORMAL)
 	{
 		gtk_container_foreach (GTK_CONTAINER (widget),
@@ -560,6 +562,8 @@ menu_show (GtkWidget *widget, GtkWidget *view)
 	}
 	else
 	{
+		GtkWidget *menu_item;
+
 		gtk_container_foreach (GTK_CONTAINER (widget),
 				       (GtkCallback)gtk_widget_set_sensitive,
 				       GINT_TO_POINTER (TRUE));
@@ -567,21 +571,19 @@ menu_show (GtkWidget *widget, GtkWidget *view)
 		if (bonobo_mdi_n_views_for_window (
 					bonobo_mdi_get_window_from_view (view)) <= 1)
 		{
-			GtkWidget *menu_item;
+			
 
 			menu_item = g_object_get_data (G_OBJECT (widget), "move-to-menu-item");
 
 			gtk_widget_set_sensitive (menu_item, FALSE);
 		}
+
+		menu_item = g_object_get_data (G_OBJECT (widget), "save-menu-item");
+
+		gtk_widget_set_sensitive (menu_item, 
+					  !gedit_document_is_readonly (
+						gedit_view_get_document (GEDIT_VIEW (view))));
 	}
-}
-
-static void 
-read_only_changed_cb (GeditDocument *doc, gboolean readonly, gpointer *data)
-{
-	g_return_if_fail (GTK_IS_WIDGET (data));
-
-	gtk_widget_set_sensitive (GTK_WIDGET (data), !readonly);
 }
 
 static GtkWidget *
@@ -632,13 +634,12 @@ create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
 	gtk_widget_set_sensitive (menu_item, !gedit_document_is_readonly (doc));
-	g_signal_connect (G_OBJECT (doc), "readonly_changed",
-		      	  G_CALLBACK (read_only_changed_cb), menu_item);
 
 	g_signal_connect (G_OBJECT (menu_item), "activate",
 		      	  G_CALLBACK (gedit_mdi_child_tab_save_clicked), view);
 	
 	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+	g_object_set_data (G_OBJECT (menu), "save-menu-item", menu_item);
 		
 	/* Add the separator */
 	menu_item = gtk_separator_menu_item_new ();
@@ -740,6 +741,7 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 {
 	gchar *tip;
 	gchar *uri;
+	gchar *ruri;
 	gchar *raw_uri;
 	gchar *mime_type = NULL;
 	const gchar *mime_description = NULL;
@@ -779,18 +781,21 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 		encoding = g_strdup (_("Unicode (UTF-8)"));
 	else
 		encoding = gedit_encoding_to_string (enc);
-		
+	
+	ruri = 	gedit_utils_replace_home_dir_with_tilde (uri);
+	g_free (uri);
+
 	tip = g_strdup_printf ("<b>%s</b> %s\n\n"
 			       "<b>%s</b> %s\n"
 			       "<b>%s</b> %s",
-			        _("Name:"), uri,
+			        _("Name:"), ruri,
 			       _("MIME Type:"), mime_full_description,
 			       _("Encoding:"), encoding);
 
 	gedit_tooltips_set_tip (tooltips, widget, tip, NULL);
 	g_free (tip);
 
-	g_free (uri);
+	g_free (ruri);
 	g_free (raw_uri);
 	g_free (mime_type);
 	g_free (encoding);

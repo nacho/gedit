@@ -1,5 +1,19 @@
 2004-11-09  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit-utils.[ch] (gedit_utils_replace_home_dir_with_tilde): new function
+
+	* gedit-mdi-child.c (gedit_mdi_child_real_state_changed):
+	uses "*doc" instead of "doc*" for changed documents. Does not use
+	"RO" for read only documents.
+	(menu_show) (create_popup_menu): fixes a problem with the sensitivity
+	of the "Save" menu item.
+	(set_tooltip): call gedit_utils_replace_home_dir_with_tilde on the displayed URI.
+
+	* gedit-mdi.c (get_dirname) (gedit_mdi_set_active_window_title): Uses 
+	"filename (dirname) - gedit" as window title. Fixes bug #152803 and bug #149553.
+
+2004-11-09  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/dialogs/gedit-page-setup-dialog.c (restore_button_clicked)
 	(body_font_button_font_set) (headers_font_button_font_set)
 	(numbers_font_button_font_set) (font_button_new) (setup_font_page):

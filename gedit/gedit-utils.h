@@ -100,6 +100,7 @@ gchar *gedit_utils_uri_get_basename (const char *uri);
 
 gchar *gedit_utils_uri_get_dirname (const char *uri);
 
+gchar *gedit_utils_replace_home_dir_with_tilde (const gchar *uri);
 
 #endif /* __GEDIT_UTILS_H__ */
 
