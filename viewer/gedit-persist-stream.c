@@ -25,6 +25,7 @@
 #include <config.h>
 #endif
 
+#include <string.h>
 #include <libbonobo.h>
 #include <gtksourceview.h>
 #include <gtksourcelanguagesmanager.h>
@@ -94,18 +95,22 @@ impl_load (BonoboPersistStream       *ps,
 
 	if (text_buf->len > 0) {
 		gchar *converted_text;
+		int len;
 
 		if (g_utf8_validate (text_buf->str, text_buf->len, NULL)) {
 			converted_text = text_buf->str;
+			len = text_buf->len;
 		} else {
 			converted_text = gedit_convert_to_utf8 (text_buf->str,
 								text_buf->len,
 								NULL);
+			len = strlen (converted_text);
+			g_free (text_buf->str);
 		}
 
 		if (converted_text == NULL) {
 			g_warning (_("Invalid UTF-8 data"));
-			g_free (converted_text);
+			g_string_free (text_buf, FALSE);
 			return FALSE;
 		}
 
@@ -113,10 +118,11 @@ impl_load (BonoboPersistStream       *ps,
 		gtk_text_buffer_insert (buffer,
 					&end,
 					converted_text,
-					text_buf->len);
+					len);
+		g_free (converted_text);
 	}
 
-	g_string_free (text_buf, TRUE);
+	g_string_free (text_buf, FALSE);
 
 	gtk_text_buffer_get_start_iter (buffer, &start);
 	gtk_text_buffer_place_cursor (buffer, &start);
@@ -133,41 +139,7 @@ impl_get_content_types (BonoboPersistStream *ps,
 			gpointer             data,
 			CORBA_Environment   *ev)
 {
-	/* FIXME: Can we suffice with "text/ *" here? */
-	return bonobo_persist_generate_content_types (32,
-						      "text/plain",
-						      "text/x-ada",
-						      "text/x-c",
-						      "text/x-c++",
-						      "text/x-dtml",
-						      "text/x-fortran",
-						      "text/x-gtkrc",
-						      "text/html",
-						      "text/x-idl",
-						      "text/x-java",
-						      "text/x-js",
-						      "text/x-lang",
-						      "text/x-tex",
-						      "text/x-makefile",
-						      "text/x-ml",
-						      "text/x-perl",
-						      "text/x-php",
-						      "text/x-po",
-						      "text/x-pot",
-						      "text/x-pox",
-						      "text/x-python",
-						      "text/x-scheme",
-						      "text/x-sgml",
-						      "text/xml",
-						      "text/x-sh",
-						      "text/x-csh",
-						      "text/x-sql",
-						      "text/x-tcl",
-						      "text/x-wml",
-						      "text/x-asm",
-						      "text/x-x86",
-						      "text/xml",
-						      "text/x-z80");
+	return bonobo_persist_generate_content_types (1, "text/*");
 }
 
 BonoboPersistStream *

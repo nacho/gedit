@@ -1,3 +1,9 @@
+2003-04-18  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
+
+	* gedit-persist-stream.c: (impl_load), (impl_get_content_types): Fix a
+	memory leak with gedit_convert_to_utf8. Replace the various mime-types
+	with just "plain/*".
+
 2003-04-16  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-persist-stream.c (impl_save):s/Gedit/gedit in g_message
