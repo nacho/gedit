@@ -63,6 +63,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
 #include <eel/eel-string.h>
+#include <eel/eel-alert-dialog.h>
 
 #include "gedit-utils.h"
 #include "gedit-encodings-option-menu.h"
@@ -95,13 +96,17 @@ delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
  * should contain a %s to include the file name.
  */
 static gboolean
-replace_dialog (GtkWindow *parent, const gchar *message, const gchar *file_name)
+replace_dialog (GtkWindow *parent,
+		const gchar *primary_message,
+		const gchar *file_name,
+		const gchar *secondary_message)
 {
 	GtkWidget *msgbox;
 	gint ret;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
 	gchar *uri;
+	gchar *message_with_uri;
 
 	uri = eel_make_uri_from_shell_arg (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
@@ -116,16 +121,19 @@ replace_dialog (GtkWindow *parent, const gchar *message, const gchar *file_name)
 	 */
         uri_for_display = eel_str_middle_truncate (full_formatted_uri, 50);
 	g_return_val_if_fail (uri_for_display != NULL, FALSE);
-
 	g_free (full_formatted_uri);
 
-	msgbox = gtk_message_dialog_new (parent,
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_NONE,
-					 message, 
-					 uri_for_display);
+	message_with_uri = g_strdup_printf (primary_message, uri_for_display);
 	g_free (uri_for_display);
+
+	msgbox = eel_alert_dialog_new (parent,
+				       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				       GTK_MESSAGE_QUESTION,
+				       GTK_BUTTONS_NONE,
+				       message_with_uri,
+				       secondary_message,
+				       NULL);
+	g_free (message_with_uri);
 
 	/* Add Cancel button */
 	gtk_dialog_add_button (GTK_DIALOG (msgbox), 
@@ -151,10 +159,9 @@ static gboolean
 replace_existing_file (GtkWindow *parent, const gchar* file_name)
 {
 	return replace_dialog (parent,
-			       _("A file named \"%s\" already exists.\n"
-				 "Do you want to replace it with the "
-				 "one you are saving?"),
-			       file_name);
+			       _("A file named \"%s\" already exists.\n"), file_name,
+			       _("Do you want to replace it with the "
+			         "one you are saving?"));
 }
 
 /* Presents a confirmation dialog for whether to replace a read-only file */
@@ -162,10 +169,9 @@ static gboolean
 replace_read_only_file (GtkWindow *parent, const gchar* file_name)
 {
 	return replace_dialog (parent,
-			       _("The file \"%s\" is read-only.\n"
-				 "Do you want to try to replace it with the "
-				 "one you are saving?"),
-			       file_name);
+			       _("The file \"%s\" is read-only.\n"), file_name,
+			       _("Do you want to try to replace it with the "
+			         "one you are saving?"));
 }
 
 /* Tests whether we have write permissions for a file */
