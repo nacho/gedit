@@ -47,6 +47,8 @@ typedef struct _gE_preference {
 	gint width, height;
 	
 	gint run;		/* Flag to see if this is the first time gEdit is run */
+	
+	gint close_doc;
 } gE_preference;
 
 extern gE_preference *settings;

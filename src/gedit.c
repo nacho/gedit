@@ -211,8 +211,8 @@ int main (int argc, char **argv)
 		use_fontset = TRUE;
 	gtk_widget_destroy(dummy_widget);
 
-	g_slist_foreach(launch_plugins, launch_plugin, NULL);
-	g_slist_free(launch_plugins);
+/*	g_slist_foreach(launch_plugins, launch_plugin, NULL);
+*/	g_slist_free(launch_plugins);
 
 	args = poptGetArgs(ctx);
 
@@ -246,12 +246,11 @@ int main (int argc, char **argv)
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 	
-/*	gnome_mdi_set_mode (mdi, mdiMode);	*/
-	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	
+
 	/*window = gE_window_new();
 	
-	data->window = window;*/
-	window = g_malloc (sizeof (gE_window));
+	data->window = window;
+	window = g_malloc (sizeof (gE_window)); */
 
 	/* Init plugins... */
 	plugins = NULL;
@@ -267,20 +266,22 @@ int main (int argc, char **argv)
     /* connect signals -- FIXME -- We'll do the rest later */
     gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "destroy", GTK_SIGNAL_FUNC(file_quit_cb), NULL);
-    gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(view_changed_cb), NULL);
+/*    gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(view_changed_cb), NULL);*/
     gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gE_window_new), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
     gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);		
 
 	gE_get_settings();
-	
+/*	gnome_mdi_set_mode (mdi, mdiMode);	*/
+	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	
+		
 	gnome_mdi_open_toplevel(mdi);
 
 	if (file_list){
 
 	  if (mdi->active_child == NULL)
-	    return;
+	    return 1;
 	
 	  gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 	

@@ -66,6 +66,14 @@ typedef struct _gE_prefs_data {
 	gchar *curW;
 	gchar *curH;
 	
+	/* Doc Settings */
+	/* Stuff like Autosave would go here.. if autosave
+	 * was actually implemented ;) */
+	/* Should print stuff go in here too? hmm.. */
+	GtkWidget *DButton1;
+	GtkWidget *DButton2;
+	
+	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
 	
@@ -198,6 +206,12 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
   settings->width = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preW)));
   settings->height = atoi (gtk_entry_get_text (GTK_ENTRY(prefs->preH)));  
   
+  /* Document Settings */
+  if (GTK_TOGGLE_BUTTON (prefs->DButton1)->active)
+    settings->close_doc = FALSE;
+  if (GTK_TOGGLE_BUTTON (prefs->DButton2)->active)
+    settings->close_doc = TRUE;
+  
   gE_window_refresh(data->window);
   gE_save_settings();
 }
@@ -226,7 +240,11 @@ void get_prefs(gE_data *data)
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
   					   settings->splitscreen);
   					   
- 
+  if (!settings->close_doc)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton1), TRUE);
+  else
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (prefs->DButton2), TRUE);
+  
    if (!GTK_TOGGLE_BUTTON(prefs->plugins_toggle)->active)
      gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
    else
@@ -315,7 +333,7 @@ static GtkWidget *general_page_new()
 
 /* Print Stuf.. */
 
-static GtkWidget *print_page_new()
+static GtkWidget *doc_page_new()
 {
   GtkWidget *main_vbox, *vbox, *frame, *hbox;
   GtkWidget *label;
@@ -324,6 +342,33 @@ static GtkWidget *print_page_new()
   gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
   gtk_widget_show (main_vbox);
   
+  /* Document Closing stuffs */
+  frame = gtk_frame_new (_("Document Settings"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new(FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+  
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+  gtk_widget_show(hbox);
+  
+  prefs->DButton1 = gtk_radio_button_new_with_label (NULL, "New Document After Closing Last");
+  gtk_box_pack_start (GTK_BOX (hbox), prefs->DButton1, TRUE, TRUE, 0);
+  gtk_widget_show (prefs->DButton1);
+  
+  prefs->DButton2 = gtk_radio_button_new_with_label (
+	         gtk_radio_button_group (GTK_RADIO_BUTTON (prefs->DButton1)),
+		 "Close Window After Closing Last");
+  gtk_box_pack_start (GTK_BOX (hbox), prefs->DButton2, TRUE, TRUE, 0);
+  gtk_widget_show (prefs->DButton2);
+  
+  /* End of docyment closing stuffs */
+  
+  /* Print COmmand */
   frame = gtk_frame_new (_("Print Command"));
   gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
   gtk_widget_show (frame);
@@ -340,6 +385,7 @@ static GtkWidget *print_page_new()
   prefs->pcmd = gtk_entry_new ();
   gtk_box_pack_start(GTK_BOX(hbox), prefs->pcmd, TRUE, TRUE, 0);
   gtk_widget_show (prefs->pcmd);
+  /* End Of Print Command */
   
   return main_vbox;
 }
@@ -917,9 +963,9 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   									window_page_new(), label);
 
   /* Print Settings */
-  label = gtk_label_new (_("Print"));
+  label = gtk_label_new (_("Document"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
-                                           	print_page_new(), label);
+                                           	doc_page_new(), label);
 
   /* Font Settings */
   label = gtk_label_new (_("Font"));
@@ -967,6 +1013,11 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   
+  gtk_signal_connect (GTK_OBJECT (prefs->DButton1), "toggled",
+		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
+
+  gtk_signal_connect (GTK_OBJECT (prefs->DButton2), "toggled",
+		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
   
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
                                     

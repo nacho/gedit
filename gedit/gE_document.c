@@ -75,7 +75,7 @@ static char *lastmsg = NULL;
 static gint msgbar_timeout_id;
 
 /*gE_window */
-void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
+void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
         /*GnomeUIInfo * gedit_menu;
 	gE_window *w;*/
@@ -92,13 +92,13 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 	/* various initializations */
 	/*w = g_malloc0(sizeof(gE_window));*/
 
-	settings->auto_indent = TRUE;
+/*	settings->auto_indent = TRUE;
 	settings->show_tabs = TRUE;
 	settings->splitscreen = FALSE;
 
 	settings->show_status = TRUE;
 	settings->have_toolbar = TRUE;
-
+*/
 	ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;
 	g_hash_table_insert (win_int_to_pointer, ptr, app);
@@ -159,8 +159,8 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 
 	gE_document_new ();
 
-	gE_set_menu_toggle_states();
-
+	/* gE_set_menu_toggle_states();*/
+	
 	g_list_foreach(plugins, (GFunc) add_plugins_to_window, GNOME_APP(app));
 	
 	settings->num_recent = 0;
@@ -174,6 +174,9 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 	gtk_signal_connect (GTK_OBJECT (app),
 		"drag_data_received",
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
+		
+	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
+
 	
 } /* gE_window_new */
 

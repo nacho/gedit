@@ -302,6 +302,7 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 
 	gtk_widget_grab_focus(doc->text);
 
+	/*return vpaned;*/
 	return vpaned;
 }
 
@@ -310,6 +311,9 @@ static void gE_document_destroy (GtkObject *obj)
 	gE_document *doc;
 	
 	doc = GE_DOCUMENT(obj);
+	
+	if (doc->filename)
+	  g_free (doc->filename);
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 	  (* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
@@ -509,7 +513,7 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
 	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
 	    	    
-/*	    switch (ret)
+	    switch (ret)
 	      {
 	        case 0:
 	                 file_save_cb (NULL, data);
@@ -518,17 +522,17 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	                 return TRUE;
 	        default:
 	                 return FALSE;
-	      }*/
-	      if (ret == 0)
+	      }
+/*	      if (ret == 0)
 	        {
-	          /*file_save_cb (NULL, data);*/
-	          if (gE_document_current()->filename)
+*/	          /*file_save_cb (NULL, data);*/
+/*	          if (gE_document_current()->filename)
 	            file_save_cb (NULL, data);
 
 	        }  
 	      else if (ret == 2)
 	       return FALSE;
-	  }
+*/	  }
 	
 	ptr = g_hash_table_lookup(doc_pointer_to_int, doc);
 	g_hash_table_remove(doc_int_to_pointer, ptr);

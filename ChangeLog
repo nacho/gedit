@@ -1,3 +1,38 @@
+Sat Jun 26 22:22:17 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* Erk! i havent been keeping this up to date.. ahwell.. here goes..
+	
+	* gE_document.[ch]: (gE_window_new) Make it a GnomeApp arg, instead
+	  of a GtkWidget.. much nicer.. And commented out the call to
+	  gE_set_menu_toggle_states, gnome-libs 1.0.11 doenst seem to like it..
+	
+	* gE_mdi.c: various improvements.. (iirc ;)
+	
+	* gE_prefs.[ch]: Added a "close doc" flag..
+	
+	* gE_prefs_box.c: Moved the print tab to a Document tab, and added a
+	  option for what to do when the last documnet of the window is closed..
+	  right now only the first option works.. this corresponds with the 
+	  flag, above.
+	
+	* commands.c: Made the close callback check the "close doc" flag, and 
+	  it will either open a new doc if there arent any more, or print hola! to
+	  stdout.. as i said, its not fully implemented yet.
+	
+	
+Thu Jun 17 19:00:32 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* commands.c: (doc_changed_cb)
+	  gE_files.c: (gE_file_save) Update the window title when the file is
+	  saved or modified.
+
+Thu Jun 17 14:49:22 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+	(From patch supplied by Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>)
+	
+	* src/gE_files.c: (gE_file_save) Better error checking when saving 
+	  files.
+	  Fixed a couple of memory leaks too.
+
 1999-06-16  Tomas Ogren  <stric@ing.umu.se>
 
 	* src/gE_about.c src/gE_plugin_api.c src/gE_prefs_box.c src/search.c

@@ -56,6 +56,7 @@ gE_save_settings()
 	gE_prefs_set_int ("tb pix", (gint) settings->have_tb_pix);
 	gE_prefs_set_int ("tb relief", (gint) settings->use_relief_toolbar);
 	gE_prefs_set_int ("splitscreen", (gint) settings->splitscreen);
+	gE_prefs_set_int ("close doc", (gint) settings->close_doc);
 	gE_prefs_set_int ("mdi mode", settings->mdi_mode);
 	gE_prefs_set_int ("scrollbar", settings->scrollbar);
 	gE_prefs_set_char ("font", settings->font);
@@ -82,6 +83,7 @@ void gE_get_settings()
 	 settings->have_tb_pix = gE_prefs_get_int("tb pix");
 	 settings->use_relief_toolbar = gE_prefs_get_int("tb relief");
 	 settings->splitscreen = gE_prefs_get_int("splitscreen");
+	 settings->close_doc = gE_prefs_get_int ("close doc");
 	 settings->mdi_mode = gE_prefs_get_int ("mdi mode");
 	 if (!settings->mdi_mode)
 	   settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];

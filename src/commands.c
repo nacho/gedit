@@ -67,6 +67,7 @@ void
 doc_changed_cb(GtkWidget *w, gpointer cbdata)
 {
 gchar MOD_label[255];
+gchar *str;
 
 	gE_document *doc = (gE_document *) cbdata;
 
@@ -74,9 +75,19 @@ gchar MOD_label[255];
 	gtk_signal_disconnect (GTK_OBJECT(doc->text), (gint) doc->changed_id);
 	doc->changed_id = FALSE;
 	
-	sprintf(MOD_label, "*%s", GNOME_MDI_CHILD(doc)->name);
+	str = g_malloc (strlen (GNOME_MDI_CHILD(doc)->name) + 2);
+	
+	sprintf(str, "*%s", GNOME_MDI_CHILD(doc)->name);
 	/*gtk_label_set(GTK_LABEL(doc->tab_label), MOD_label);*/
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), MOD_label);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), str);
+	
+	g_free (str);
+	
+	str = g_malloc0 (strlen (GEDIT_ID) +
+				 strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
+	sprintf (str, "%s - %s", GNOME_MDI_CHILD (gE_document_current())->name, GEDIT_ID);
+	gtk_window_set_title(GTK_WINDOW(mdi->active_window), str);
+	g_free(str);
 }
 
 
@@ -719,7 +730,16 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 	if (mdi->active_child == NULL)
 	  return;
 	
-	gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+	if (gnome_mdi_remove_child (mdi, mdi->active_child, FALSE))
+	  {
+	    if (mdi->active_child == NULL)
+	      {
+	        if (!settings->close_doc)
+	          gE_document_new ();
+	        else
+	          g_print ("hola!\n");
+	      }
+	  }
 }
 
 

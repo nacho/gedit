@@ -195,6 +195,7 @@ gE_file_save(gE_document *doc, gchar *fname)
 {
 	FILE *fp;
 	gchar *title;
+	gchar *tmpstr;
 
 	/* FIXME: not sure what to do with all the gE_window refs.. 
 	          i'll comment them out for now.. 				    */
@@ -208,28 +209,38 @@ gE_file_save(gE_document *doc, gchar *fname)
 	}
 	gtk_text_thaw (GTK_TEXT(doc->text));
 
-	if (fputs (gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0,
-		 gtk_text_get_length (GTK_TEXT (doc->text))), fp) == EOF) 
+	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (doc->text), 0,
+		gtk_text_get_length (GTK_TEXT (doc->text)));
+	if (fputs (tmpstr, fp) == EOF)
 	  {
 	   perror("Error saving file");
 	   fclose(fp);
+	   g_free (tmpstr);
 	   return 1;
 	  }
-	fflush(fp);
-	fclose(fp);
+	g_free (tmpstr);
+	if (fclose(fp) != 0)
+	  {
+	   perror("Error saving file");
+	   return 1;
+	  }
 
 	if (doc->filename != fname)
 	  {
 	    g_free(doc->filename);
-	    
-	    doc->filename = g_malloc0 (strlen (fname) + 1);
-	
-  
 	    doc->filename = g_strdup(fname);
 	  }
 	doc->changed = FALSE;
 	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));
+
+	tmpstr = g_malloc0 (strlen (GEDIT_ID) +
+					   strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
+	    sprintf (tmpstr, "%s - %s",
+		   GNOME_MDI_CHILD (gE_document_current())->name,
+		   GEDIT_ID);
+	    gtk_window_set_title(GTK_WINDOW(mdi->active_window), tmpstr);
+	    g_free(tmpstr);
 
 	if (!doc->changed_id)
 	  doc->changed_id =	gtk_signal_connect (GTK_OBJECT(doc->text), "changed",
