@@ -593,7 +593,7 @@ static GtkWidget *plugins_page_new()
   gtk_widget_show(hbox);
   
 
-  prefs->plugins_toggle = gtk_check_button_new_with_label ("Use Plugins");
+  prefs->plugins_toggle = gtk_check_button_new_with_label _("Use Plugins");
    uP = gnome_config_get_int ("/Editor_Plugins/Use/gEdit");
   if (uP == -1)
     uP = 0;
