@@ -37,6 +37,8 @@
 #include "recent.h"
 #include "window.h"
 
+#define GEDIT_STDIN_BUFSIZE 1024
+
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
@@ -234,9 +236,11 @@ gedit_file_stdin (Document *doc)
 {
 	gchar *tmp_buf;
 	struct stat stats;
-	gint stdin_buffer_size=100000;
 	guint buffer_length;
+	guint pos = 0;
 	View *view;
+
+	return 1;
 	
 	gedit_debug ("", DEBUG_FILE);
 
@@ -247,15 +251,11 @@ gedit_file_stdin (Document *doc)
 		return 1;
 	}
 	
-	if ((tmp_buf = g_new0 (gchar, stdin_buffer_size + 1)) == NULL)
+	if ((tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE+1)) == NULL)
 	{
 		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
 		return 1;
 	}
-        
-	buffer_length = fread (tmp_buf, 1, stdin_buffer_size+1, stdin);
-	tmp_buf [buffer_length + 1] = '\0';
-	fclose(stdin);
 
 	if (doc==NULL)
 		doc = gedit_document_new ();
@@ -263,17 +263,29 @@ gedit_file_stdin (Document *doc)
 	view = g_list_nth_data (doc->views, 0);
 
 	g_return_val_if_fail (view!=NULL, 1);
-		
-	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
 
-	doc->changed = TRUE;
+	while (feof(stdin)==0)
+	{
+		buffer_length = fread (tmp_buf,1,GEDIT_STDIN_BUFSIZE, stdin);
+		tmp_buf[buffer_length+1]='\0';
+		gedit_document_insert_text (doc,tmp_buf,pos,FALSE);
+		pos= pos + buffer_length ;
+		if (ferror(stdin)!=0)
+		{
+			gnome_app_error (mdi->active_window, _("Error in the pipe ."));
+			break ;
+		}
+	}
+	
+	fclose (stdin);
+        doc->changed = TRUE;
 	gedit_set_title (doc);
 
 	/* Move the window to the top after inserting */
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj), 0);
 
 	g_free (tmp_buf);
-	
+       
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), "STDIN");
 
 	return 0;

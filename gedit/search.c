@@ -103,7 +103,9 @@ gedit_search_start (void)
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
 		gedit_search_info.buffer_length = gedit_document_get_buffer_length (gedit_search_info.doc);
+		gedit_debug("getting buffer - start \n", DEBUG_SEARCH);
 		gedit_search_info.buffer = gedit_document_get_buffer (gedit_search_info.doc);
+		gedit_debug("getting buffer - done \n", DEBUG_SEARCH);
 		gedit_search_info.state = SEARCH_IN_PROGRESS_YES;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
@@ -244,6 +246,7 @@ search_text_not_found_notify (View * view)
 }
 
 
+
 static void
 find_again_execute (void)
 {
@@ -254,10 +257,10 @@ find_again_execute (void)
 	View *view;
 	gint case_sensitive;
 
-
 	view = gedit_view_current();
 	if (view == NULL)
 		return;
+
 	text = gedit_search_info.last_text_searched;
 	if (text == NULL)
 	{
@@ -444,7 +447,7 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 	gint case_sensitive_mask;
 
 	gedit_debug ("", DEBUG_SEARCH);
-
+	
 	g_return_val_if_fail (gedit_search_info.state == SEARCH_IN_PROGRESS_YES, 0);
 
 	search_text_length = strlen (search_text);
@@ -466,12 +469,15 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 		buffer_out_length = buffer_in_length + (GEDIT_EXTRA_REPLACEMENTS) * delta;
 	else
 		buffer_out_length = buffer_in_length;
-	
+
 	buffer_out = g_malloc (buffer_out_length);
 
 	if (buffer_out==NULL)
 	{
 		g_warning ("Could not allocate the memory needed for search & replace\n");
+		/* Allocate something, we __hope__ that 1 byte can be allocated */
+		buffer_out = g_malloc (1);
+		buffer_out [0] = '\0';
 		return 0;
 	}
 
@@ -482,6 +488,7 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 
 	case_sensitive_mask = case_sensitive?0:32;
 
+	/* Copy the start of buffer if start_pos = cursor position */
 	while (p1 < start_pos)
 	{
 		buffer_out [p2++] = buffer_in [p1++];
@@ -508,8 +515,11 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 		{
 			p3=0;
 		}
-		if (p2+2+delta > buffer_out_length)
+		
+		if (p2+2 > buffer_out_length - delta)
 		{
+			if (delta < 1)
+				g_warning ("This should not happen. Don't wine on me if we crash latter on :-)\n");
 			buffer_out_length = buffer_in_length + (replacements + GEDIT_EXTRA_REPLACEMENTS) * delta;
 			buffer_out = g_realloc (buffer_out, buffer_out_length);
 			if (buffer_out == NULL)
@@ -521,7 +531,12 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 		buffer_out [p2++] = buffer_in [p1++];
 	}
 
-	buffer_out [p2++] = '\0';
+	buffer_out [p2] = '\0';
+
+	if (p2 > buffer_out_length )
+	{
+		g_assert_not_reached();
+	}
 
 	*buffer = buffer_out;
 

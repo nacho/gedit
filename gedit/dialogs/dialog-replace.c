@@ -107,9 +107,12 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	replace_text_length  = strlen (text_to_replace_with);
 
 	if (gedit_search_info.last_text_searched != NULL)
+	{
 		g_free (gedit_search_info.last_text_searched);
+	}
 	gedit_search_info.last_text_searched = g_strdup (text_to_search_for);
 	gedit_search_info.last_text_searched_case_sensitive = GTK_TOGGLE_BUTTON (case_sensitive)->active;
+
 	start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
 
 	switch (start_search_from){
@@ -160,8 +163,10 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			gedit_search_end();
 			gedit_search_start();
 		}
-		g_free (new_buffer);
-			
+
+		if (new_buffer==NULL)
+			g_free (new_buffer);
+		
 		gnome_dialog_close (GNOME_DIALOG (widget));
 			
 		msg = g_strdup_printf (_("found and replaced %i ocurrences."),
