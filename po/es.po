@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.5.0\n"
-"POT-Creation-Date: 1999-02-18 23:30+0100\n"
+"POT-Creation-Date: 1999-02-27 22:22+0000\n"
 "PO-Revision-Date: 1999-01-13 12:44+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
@@ -113,7 +113,7 @@ msgid "Close"
 msgstr "Cerrar"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:584 src/gE_print.c:69
+#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
 #: src/toolbar.c:46
 msgid "Print"
 msgstr "Impresión"
@@ -135,76 +135,101 @@ msgstr "Líneas"
 msgid "Currently Open Files"
 msgstr "Archivos Actualmente Abiertos"
 
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/menus.c:254
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
+#: src/menus.c:256
 msgid "_Plugins"
 msgstr "E_xtensiones"
 
-#: src/gE_prefs_box.c:169
+#: src/gE_prefs_box.c:179
 msgid "Appearance"
 msgstr "Apariencia"
 
-#: src/gE_prefs_box.c:182
+#: src/gE_prefs_box.c:192
 msgid "Show Statusbar"
 msgstr "Ver barra de estado"
 
-#: src/gE_prefs_box.c:191
+#: src/gE_prefs_box.c:201
 msgid "Show Splitscreen"
 msgstr "División de pantalla"
 
-#: src/gE_prefs_box.c:200
+#: src/gE_prefs_box.c:210
 msgid "Editor Behavior"
 msgstr "Comportamiento del Editor"
 
-#: src/gE_prefs_box.c:213
+#: src/gE_prefs_box.c:223
 msgid "Enable Autoindent"
 msgstr "Auto-indentación"
 
-#: src/gE_prefs_box.c:222
+#: src/gE_prefs_box.c:232
 msgid "Enable Wordwrap"
 msgstr "Wordwrap"
 
-#: src/gE_prefs_box.c:242
+#: src/gE_prefs_box.c:252
 msgid "Print Command"
 msgstr "Comando de Impresión"
 
-#: src/gE_prefs_box.c:332
+#: src/gE_prefs_box.c:342
 msgid "Current Font"
 msgstr "Fuente Actual"
 
-#: src/gE_prefs_box.c:349
+#: src/gE_prefs_box.c:359
 msgid "Select..."
 msgstr "Seleccionar..."
 
-#: src/gE_prefs_box.c:464
-msgid "Available Plugins"
-msgstr "Extensiones disponibles"
+#: src/gE_prefs_box.c:525
+msgid "Name"
+msgstr "Nombre"
+
+#: src/gE_prefs_box.c:525
+msgid "Location"
+msgstr "Localización"
+
+#. Plugins Settings
+#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+msgid "Plugins"
+msgstr "Extensiones"
+
+#: src/gE_prefs_box.c:613
+msgid "Add"
+msgstr "Añadir"
+
+#: src/gE_prefs_box.c:618
+msgid "Remove"
+msgstr "Borrar"
 
 #. General Settings
-#: src/gE_prefs_box.c:579
+#: src/gE_prefs_box.c:670
 msgid "General"
 msgstr "General"
 
 #. Font Settings
-#: src/gE_prefs_box.c:589
+#: src/gE_prefs_box.c:680
 msgid "Font"
 msgstr "Fuente"
 
-#. Plugins Settings
-#: src/gE_prefs_box.c:594
-msgid "Plugins"
-msgstr "Extensiones"
+#: src/gE_print.c:82
+#, c-format
+msgid ""
+"Enter print command below\n"
+"Remember to include '%s'"
+msgstr ""
+"Entre el comando de impresión\n"
+"No olvide de incluir '%s'"
 
 #: src/gE_print.c:90
 msgid "Print Command:"
 msgstr "Comando de Impresión:"
 
 #: src/gE_print.c:216
-msgid " Save, then print "
-msgstr " Guardar, luego imprimir "
-
-#: src/gE_print.c:216
 msgid "Print anyway"
 msgstr "Imprimir igual"
+
+#: src/gE_print.c:216
+msgid " Save, then print "
+msgstr " Guardar, luego imprimir "
 
 #: src/gedit.c:118
 msgid "Launch a plugin at startup"
@@ -222,141 +247,152 @@ msgstr "_Autoindentación"
 msgid "Status_bar"
 msgstr "_Barra de estado"
 
+#: src/menus.c:67
 msgid "_Wordwrap"
 msgstr "_Wordwrap"
 
+#: src/menus.c:68
 msgid "_Linewrap"
 msgstr "_Vuelta a la línea"
 
+#: src/menus.c:69
 msgid "_Readonly"
 msgstr "Solo _lectura"
 
+#: src/menus.c:70
 msgid "_Splitscreen"
 msgstr "_División de pantalla"
 
-msgid "Scro_llball"
-msgstr "_Scrollball"
-
+#: src/menus.c:71
 msgid "_Show tabs"
 msgstr "Ver _tabulaciones"
 
+#: src/menus.c:72
 msgid "Toolbar _relief"
 msgstr "Íconos en _relieve"
 
+#: src/menus.c:73
 msgid "_Show tooltips"
 msgstr "Ver _tooltips"
 
+#: src/menus.c:74
 msgid "Show toolbar _text"
 msgstr "Ver te_xto"
 
+#: src/menus.c:75
 msgid "Show toolbar _icons"
 msgstr "Ver _iconos"
 
-#: src/menus.c:83 src/toolbar.c:38
-msgid "Create a new document"
-msgstr "Crear un nuevo documento"
+#. and this one is the default file name
+#: src/menus.c:77
+msgid "Untitled"
+msgstr "SinNombre"
 
-#: src/menus.c:83
+#: src/menus.c:85
 msgid "_New"
 msgstr "_Nuevo"
 
-#: src/menus.c:100
+#: src/menus.c:85 src/toolbar.c:38
+msgid "Create a new document"
+msgstr "Crear un nuevo documento"
+
+#: src/menus.c:102
 msgid "Close All"
 msgstr "Cerrar todos"
 
-#: src/menus.c:100
+#: src/menus.c:102
 msgid "Close all open files"
 msgstr "Cerrar todos los archivos abiertos"
 
-#: src/menus.c:122
+#: src/menus.c:124
 msgid "Find _Line..."
 msgstr "Buscar _Línea..."
 
-#: src/menus.c:123
+#: src/menus.c:125
 msgid "Search for a line"
 msgstr "Buscar una línea"
 
-#: src/menus.c:137
+#: src/menus.c:139
 msgid "_Top"
 msgstr "A_rriba"
 
-#: src/menus.c:138
+#: src/menus.c:140
 msgid "Put the document tabs at the top"
 msgstr "Poner las tabulaciones arriba"
 
-#: src/menus.c:141
+#: src/menus.c:143
 msgid "_Bottom"
 msgstr "Aba_jo"
 
-#: src/menus.c:142
+#: src/menus.c:144
 msgid "Put the document tabs at the bottom"
 msgstr "Poner las tabulaciones abajo"
 
-#: src/menus.c:145
+#: src/menus.c:147
 msgid "_Left"
 msgstr "_Izquierda"
 
-#: src/menus.c:146
+#: src/menus.c:148
 msgid "Put the document tabs on the left"
 msgstr "Poner las tabulaciones a la izquierda"
 
-#: src/menus.c:149
+#: src/menus.c:151
 msgid "_Right"
 msgstr "_Derecha"
 
-#: src/menus.c:150
+#: src/menus.c:152
 msgid "Put the document tabs on the right"
 msgstr "Poner las tabulaciones a la derecha"
 
-#: src/menus.c:156
+#: src/menus.c:158
 msgid "Toggle the presence of the document tabs"
 msgstr "Activar/Desactivar la presencia de las tabulaciones del documento"
 
-#: src/menus.c:167
+#: src/menus.c:169
 msgid "Toggle autoindent"
 msgstr "Activar/Desactivar Auto-indentación"
 
-#: src/menus.c:172
+#: src/menus.c:174
 msgid "Toggle statusbar"
 msgstr "Activar/Desactivar barra de estado"
 
-#: src/menus.c:177
+#: src/menus.c:179
 msgid "Toggle Wordwrap"
 msgstr "Activar/Desactivar Wordwrap"
 
-#: src/menus.c:182
+#: src/menus.c:184
 msgid "Toggle Linewrap"
 msgstr "Activar/Desactivar vuelta a la linea automática"
 
-#: src/menus.c:187
+#: src/menus.c:189
 msgid "Toggle Readonly"
 msgstr "Activar/Desactivar solo lectura"
 
-#: src/menus.c:192
+#: src/menus.c:194
 msgid "Toggle Split Screen"
 msgstr "Activar/Desactivar división de pantalla"
 
-#: src/menus.c:198
+#: src/menus.c:200
 msgid "_Document Tabs"
 msgstr "_Tabulaciones del documento"
 
-#: src/menus.c:199
+#: src/menus.c:201
 msgid "Change the placement of the document tabs"
 msgstr "Cambiar de sitio las tabulaciones del documento"
 
-#: src/menus.c:203
+#: src/menus.c:205
 msgid "Sa_ve Settings"
 msgstr "_Guardar la configuración"
 
-#: src/menus.c:204
+#: src/menus.c:206
 msgid "Save the current settings for future sessions"
 msgstr "Guardar la configuración actual para futuras sesiones"
 
-#: src/menus.c:222
+#: src/menus.c:224
 msgid "_Document List"
 msgstr "_Lista de Documentos"
 
-#: src/menus.c:223
+#: src/menus.c:225
 msgid "Display the document list"
 msgstr "Muestra la lista de documentos"
 
@@ -370,12 +406,12 @@ msgstr ""
 "Línea Actual: %i"
 
 #: src/search.c:363 src/search.c:581
-msgid "Search"
-msgstr "Búsqueda"
-
-#: src/search.c:363 src/search.c:581
 msgid "Search and Replace"
 msgstr "Búsqueda y Reemplazo"
+
+#: src/search.c:363 src/search.c:581
+msgid "Search"
+msgstr "Búsqueda"
 
 #: src/search.c:366
 msgid "Search For:"
@@ -481,86 +517,74 @@ msgstr " Imprimir "
 msgid " OK "
 msgstr " OK "
 
-msgid "_Replace..."
-msgstr "_Remplazar..."
+#~ msgid "Available Plugins"
+#~ msgstr "Extensiones disponibles"
 
-msgid "Find _Again"
-msgstr "Buscar de _Nuevo"
+#~ msgid "Scro_llball"
+#~ msgstr "_Scrollball"
 
-msgid "_Find..."
-msgstr "_Buscar..."
+#~ msgid "_Replace..."
+#~ msgstr "_Remplazar..."
 
-msgid "_Select All"
-msgstr "_Seleccionar Todo"
+#~ msgid "Find _Again"
+#~ msgstr "Buscar de _Nuevo"
 
-msgid "_Windows"
-msgstr "_Ventanas"
+#~ msgid "_Find..."
+#~ msgstr "_Buscar..."
 
-msgid "_Print"
-msgstr "_Imprimir"
+#~ msgid "_Select All"
+#~ msgstr "_Seleccionar Todo"
 
-msgid "_Preferences..."
-msgstr "_Preferencias..."
+#~ msgid "_Windows"
+#~ msgstr "_Ventanas"
 
-msgid "_Settings"
-msgstr "_Configuración"
+#~ msgid "_Print"
+#~ msgstr "_Imprimir"
 
-msgid "_Edit"
-msgstr "_Editar"
+#~ msgid "_Preferences..."
+#~ msgstr "_Preferencias..."
 
-msgid "_View"
-msgstr "_Vista"
+#~ msgid "_Settings"
+#~ msgstr "_Configuración"
 
-msgid "_Help"
-msgstr "A_yuda"
+#~ msgid "_Edit"
+#~ msgstr "_Editar"
 
-msgid "_Open..."
-msgstr "_Abrir..."
+#~ msgid "_View"
+#~ msgstr "_Vista"
 
-msgid "_Save"
-msgstr "_Guardar"
+#~ msgid "_Help"
+#~ msgstr "A_yuda"
 
-msgid "Save _As..."
-msgstr "Guardar _Como..."
+#~ msgid "_Open..."
+#~ msgstr "_Abrir..."
 
-msgid "_Close"
-msgstr "_Cerrar"
+#~ msgid "_Save"
+#~ msgstr "_Guardar"
 
-msgid "E_xit"
-msgstr "_Salir"
+#~ msgid "Save _As..."
+#~ msgstr "Guardar _Como..."
 
-msgid "_About..."
-msgstr "_Acerca..."
+#~ msgid "_Close"
+#~ msgstr "_Cerrar"
 
-msgid "C_ut"
-msgstr "Cor_tar"
+#~ msgid "E_xit"
+#~ msgstr "_Salir"
 
-msgid "_Copy"
-msgstr "_Copiar"
+#~ msgid "_About..."
+#~ msgstr "_Acerca..."
 
-msgid "_Paste"
-msgstr "_Pegar"
+#~ msgid "C_ut"
+#~ msgstr "Cor_tar"
 
-msgid "Name"
-msgstr "Nombre"
+#~ msgid "_Copy"
+#~ msgstr "_Copiar"
 
-msgid "Location"
-msgstr "Localización"
+#~ msgid "_Paste"
+#~ msgstr "_Pegar"
 
-msgid "Add"
-msgstr "Añadir"
+#~ msgid "_New Window..."
+#~ msgstr "_Nueva Ventana..."
 
-msgid "Remove"
-msgstr "Borrar"
-
-msgid "_New Window..."
-msgstr "_Nueva Ventana..."
-
-msgid "_Close Window..."
-msgstr "_Cerrar Ventana..."
-
-msgid "Untitled"
-msgstr "SinNombre"
-
-msgid "Enter print command below\nRemember to include '%s'"
-msgstr "Entre el comando de impresión\nNo olvide de incluir '%s'"
+#~ msgid "_Close Window..."
+#~ msgstr "_Cerrar Ventana..."

@@ -5,17 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.8\n"
-"POT-Creation-Date: 1999-02-04 18:05-0500\n"
+"POT-Creation-Date: 1999-02-27 22:22+0000\n"
 "PO-Revision-Date: 1998-11-07 20:10+0100\n"
 "Last-Translator: Martin Wahlen <mva@sslug.dk>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
-
-#: editor-plugins/email.c:86
-msgid "The gEdit Email Plugin"
-msgstr ""
 
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
@@ -26,12 +22,65 @@ msgstr ""
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:1048 src/commands.c:1049
+#: src/commands.c:517
+msgid "Open File..."
+msgstr ""
+
+#: src/commands.c:588
+msgid "Read only file!"
+msgstr ""
+
+#: src/commands.c:602
+#, fuzzy
+msgid "Save As..."
+msgstr "Spara som"
+
+#: src/commands.c:1050 src/commands.c:1051
 #, fuzzy
 msgid "_File"
 msgstr "Dokument"
 
-#: src/gE_about.c:45
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr ""
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr ""
+
+#: src/gE_about.c:33
+msgid "With special thanks to:"
+msgstr ""
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr ""
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr ""
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr ""
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr ""
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr ""
+
+#: src/gE_about.c:50
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:52
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit är en liten och tunn texteditor för GNOME/Gtk+"
 
@@ -60,7 +109,7 @@ msgid "Close"
 msgstr "Stäng"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:406 src/gE_print.c:69
+#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
 #: src/toolbar.c:46
 #, fuzzy
 msgid "Print"
@@ -83,60 +132,93 @@ msgstr ""
 msgid "Currently Open Files"
 msgstr ""
 
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/menus.c:237
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
+#: src/menus.c:256
 #, fuzzy
 msgid "_Plugins"
 msgstr "Plugins"
 
-#: src/gE_prefs_box.c:163
+#: src/gE_prefs_box.c:179
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:176
+#: src/gE_prefs_box.c:192
 #, fuzzy
 msgid "Show Statusbar"
 msgstr "Sätt på/av statusrad"
 
-#: src/gE_prefs_box.c:185
+#: src/gE_prefs_box.c:201
 #, fuzzy
 msgid "Show Splitscreen"
 msgstr "Sätt på/av skärmdelning"
 
-#: src/gE_prefs_box.c:194
+#: src/gE_prefs_box.c:210
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:207
+#: src/gE_prefs_box.c:223
 #, fuzzy
 msgid "Enable Autoindent"
 msgstr "Sätt på/av autoindrag"
 
-#: src/gE_prefs_box.c:216
+#: src/gE_prefs_box.c:232
 #, fuzzy
 msgid "Enable Wordwrap"
 msgstr "Sätt på/av ordbryting"
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:252
 msgid "Print Command"
 msgstr ""
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:342
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:335
+#: src/gE_prefs_box.c:359
 #, fuzzy
 msgid "Select..."
 msgstr "Markera allt"
 
+#: src/gE_prefs_box.c:525
+msgid "Name"
+msgstr ""
+
+#: src/gE_prefs_box.c:525
+msgid "Location"
+msgstr ""
+
+#. Plugins Settings
+#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+#, fuzzy
+msgid "Plugins"
+msgstr "Plugins"
+
+#: src/gE_prefs_box.c:613
+msgid "Add"
+msgstr ""
+
+#: src/gE_prefs_box.c:618
+msgid "Remove"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:670
 msgid "General"
 msgstr ""
 
 #. Font Settings
-#: src/gE_prefs_box.c:411
+#: src/gE_prefs_box.c:680
 msgid "Font"
+msgstr ""
+
+#: src/gE_print.c:82
+#, c-format
+msgid ""
+"Enter print command below\n"
+"Remember to include '%s'"
 msgstr ""
 
 #: src/gE_print.c:90
@@ -151,130 +233,190 @@ msgstr ""
 msgid " Save, then print "
 msgstr ""
 
-#: src/gedit.c:116
+#: src/gedit.c:118
 msgid "Launch a plugin at startup"
 msgstr "Starta plugin vid uppstart"
 
-#: src/gedit.c:116
+#: src/gedit.c:118
 msgid "PLUGIN-NAME"
 msgstr ""
 
+#: src/menus.c:65
+#, fuzzy
+msgid "_Autoindent"
+msgstr "Sätt på/av autoindrag"
+
 #: src/menus.c:66
+#, fuzzy
+msgid "Status_bar"
+msgstr "Sätt på/av statusrad"
+
+#: src/menus.c:67
+#, fuzzy
+msgid "_Wordwrap"
+msgstr "Sätt på/av ordbryting"
+
+#: src/menus.c:68
+#, fuzzy
+msgid "_Linewrap"
+msgstr "Sätt på/av radbrytning"
+
+#: src/menus.c:69
+#, fuzzy
+msgid "_Readonly"
+msgstr "Sätt på/av skrivskydd"
+
+#: src/menus.c:70
+#, fuzzy
+msgid "_Splitscreen"
+msgstr "Sätt på/av skärmdelning"
+
+#: src/menus.c:71
+#, fuzzy
+msgid "_Show tabs"
+msgstr "Sätt på/av statusrad"
+
+#: src/menus.c:72
+#, fuzzy
+msgid "Toolbar _relief"
+msgstr "Verktygsradsrelief på"
+
+#: src/menus.c:73
+#, fuzzy
+msgid "_Show tooltips"
+msgstr "Visa verktygsrad"
+
+#: src/menus.c:74
+#, fuzzy
+msgid "Show toolbar _text"
+msgstr "Visa verktygsrad"
+
+#: src/menus.c:75
+#, fuzzy
+msgid "Show toolbar _icons"
+msgstr "Visa verktygsrad"
+
+#. and this one is the default file name
+#: src/menus.c:77
+msgid "Untitled"
+msgstr ""
+
+#: src/menus.c:85
 #, fuzzy
 msgid "_New"
 msgstr "Nytt"
 
-#: src/menus.c:66 src/toolbar.c:38
+#: src/menus.c:85 src/toolbar.c:38
 msgid "Create a new document"
 msgstr ""
 
-#: src/menus.c:83
+#: src/menus.c:102
 msgid "Close All"
 msgstr "Stäng alla"
 
-#: src/menus.c:83
+#: src/menus.c:102
 msgid "Close all open files"
 msgstr ""
 
-#: src/menus.c:105
+#: src/menus.c:124
 msgid "Find _Line..."
 msgstr ""
 
-#: src/menus.c:106
+#: src/menus.c:125
 #, fuzzy
 msgid "Search for a line"
 msgstr "Sök igen"
 
-#: src/menus.c:120
+#: src/menus.c:139
 #, fuzzy
 msgid "_Top"
 msgstr "Överst"
 
-#: src/menus.c:121
+#: src/menus.c:140
 msgid "Put the document tabs at the top"
 msgstr ""
 
-#: src/menus.c:124
+#: src/menus.c:143
 #, fuzzy
 msgid "_Bottom"
 msgstr "Nederst"
 
-#: src/menus.c:125
+#: src/menus.c:144
 msgid "Put the document tabs at the bottom"
 msgstr ""
 
-#: src/menus.c:128
+#: src/menus.c:147
 #, fuzzy
 msgid "_Left"
 msgstr "Vänster"
 
-#: src/menus.c:129
+#: src/menus.c:148
 msgid "Put the document tabs on the left"
 msgstr ""
 
-#: src/menus.c:132
+#: src/menus.c:151
 #, fuzzy
 msgid "_Right"
 msgstr "Höger"
 
-#: src/menus.c:133
+#: src/menus.c:152
 msgid "Put the document tabs on the right"
 msgstr ""
 
-#: src/menus.c:139
+#: src/menus.c:158
 msgid "Toggle the presence of the document tabs"
 msgstr ""
 
-#: src/menus.c:150
+#: src/menus.c:169
 #, fuzzy
 msgid "Toggle autoindent"
 msgstr "Sätt på/av autoindrag"
 
-#: src/menus.c:155
+#: src/menus.c:174
 #, fuzzy
 msgid "Toggle statusbar"
 msgstr "Sätt på/av statusrad"
 
-#: src/menus.c:160
+#: src/menus.c:179
 msgid "Toggle Wordwrap"
 msgstr "Sätt på/av ordbryting"
 
-#: src/menus.c:165
+#: src/menus.c:184
 msgid "Toggle Linewrap"
 msgstr "Sätt på/av radbrytning"
 
-#: src/menus.c:170
+#: src/menus.c:189
 msgid "Toggle Readonly"
 msgstr "Sätt på/av skrivskydd"
 
-#: src/menus.c:175
+#: src/menus.c:194
 msgid "Toggle Split Screen"
 msgstr "Sätt på/av skärmdelning"
 
-#: src/menus.c:181
+#: src/menus.c:200
 #, fuzzy
 msgid "_Document Tabs"
 msgstr "Dokumentväljare"
 
-#: src/menus.c:182
+#: src/menus.c:201
 msgid "Change the placement of the document tabs"
-msgstr ""
-
-#: src/menus.c:186
-#, fuzzy
-msgid "Sa_ve Settings"
-msgstr "Spara inställningar"
-
-#: src/menus.c:187
-msgid "Save the current settings for future sessions"
 msgstr ""
 
 #: src/menus.c:205
 #, fuzzy
+msgid "Sa_ve Settings"
+msgstr "Spara inställningar"
+
+#: src/menus.c:206
+msgid "Save the current settings for future sessions"
+msgstr ""
+
+#: src/menus.c:224
+#, fuzzy
 msgid "_Document List"
 msgstr "Dokumentlista"
 
-#: src/menus.c:206
+#: src/menus.c:225
 #, fuzzy
 msgid "Display the document list"
 msgstr "Dokumentlista"
@@ -409,10 +551,6 @@ msgstr "Skriv ut"
 msgid " OK "
 msgstr ""
 
-#, fuzzy
-#~ msgid "Save As..."
-#~ msgstr "Spara som"
-
 #~ msgid "Search Again"
 #~ msgstr "Sök igen"
 
@@ -424,9 +562,6 @@ msgstr ""
 
 #~ msgid "Pictures only"
 #~ msgstr "Bara bilder"
-
-#~ msgid "Toolbar Relief On"
-#~ msgstr "Verktygsradsrelief på"
 
 #~ msgid "Toolbar Relief Off"
 #~ msgstr "Verktygsradsrelief av"
@@ -476,9 +611,6 @@ msgstr ""
 
 #~ msgid "File"
 #~ msgstr "Dokument"
-
-#~ msgid "Show Toolbar"
-#~ msgstr "Visa verktygsrad"
 
 #~ msgid "Hide Toolbar"
 #~ msgstr "Göm verktygsrad"

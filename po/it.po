@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-02-04 18:05-0500\n"
+"POT-Creation-Date: 1999-02-27 22:22+0000\n"
 "Content-Type: text/plain; charset=\n"
 "Date: 1998-10-13 14:49:47+0200\n"
 "From: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
@@ -13,10 +13,6 @@ msgstr ""
 "src/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c src/msgbox.c "
 "src/search.c\n"
 
-#: editor-plugins/email.c:86
-msgid "The gEdit Email Plugin"
-msgstr ""
-
 #: gmodule-plugins/launcher/main.c:57
 #, c-format
 msgid "Docid is %ld.\n"
@@ -26,12 +22,65 @@ msgstr ""
 msgid "Shell"
 msgstr ""
 
-#: src/commands.c:1048 src/commands.c:1049
+#: src/commands.c:517
+msgid "Open File..."
+msgstr ""
+
+#: src/commands.c:588
+msgid "Read only file!"
+msgstr ""
+
+#: src/commands.c:602
+#, fuzzy
+msgid "Save As..."
+msgstr "Salva"
+
+#: src/commands.c:1050 src/commands.c:1051
 #, fuzzy
 msgid "_File"
 msgstr "Archivio"
 
-#: src/gE_about.c:45
+#: src/gE_about.c:29
+msgid "Alex Roberts"
+msgstr ""
+
+#: src/gE_about.c:30
+msgid "Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:31
+msgid "http://gedit.pn.org"
+msgstr ""
+
+#: src/gE_about.c:33
+msgid "With special thanks to:"
+msgstr ""
+
+#: src/gE_about.c:34
+msgid "       Will LaShell"
+msgstr ""
+
+#: src/gE_about.c:35
+msgid "       Chris Lahey"
+msgstr ""
+
+#: src/gE_about.c:36
+msgid "       Andy Kahn"
+msgstr ""
+
+#: src/gE_about.c:37
+msgid "       Miguel de Icaza"
+msgstr ""
+
+#: src/gE_about.c:38
+msgid "       Martin Baulig"
+msgstr ""
+
+#: src/gE_about.c:50
+msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/gE_about.c:52
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr ""
 
@@ -60,7 +109,7 @@ msgid "Close"
 msgstr "Chiudi"
 
 #. Print Settings
-#: src/gE_document.c:68 src/gE_prefs_box.c:406 src/gE_print.c:69
+#: src/gE_document.c:68 src/gE_prefs_box.c:675 src/gE_print.c:69
 #: src/toolbar.c:46
 msgid "Print"
 msgstr ""
@@ -82,54 +131,86 @@ msgstr ""
 msgid "Currently Open Files"
 msgstr ""
 
-#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/menus.c:237
+#. FIXME: Needs to actually unload the plugin itself..
+#. Try removing plugin from Gnome Menu..
+#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/gE_prefs_box.c:430
+#: src/gE_prefs_box.c:431 src/gE_prefs_box.c:481 src/gE_prefs_box.c:482
+#: src/menus.c:256
 msgid "_Plugins"
 msgstr ""
 
-#: src/gE_prefs_box.c:163
+#: src/gE_prefs_box.c:179
 msgid "Appearance"
 msgstr ""
 
-#: src/gE_prefs_box.c:176
+#: src/gE_prefs_box.c:192
 msgid "Show Statusbar"
 msgstr ""
 
-#: src/gE_prefs_box.c:185
+#: src/gE_prefs_box.c:201
 msgid "Show Splitscreen"
 msgstr ""
 
-#: src/gE_prefs_box.c:194
+#: src/gE_prefs_box.c:210
 msgid "Editor Behavior"
 msgstr ""
 
-#: src/gE_prefs_box.c:207
+#: src/gE_prefs_box.c:223
 msgid "Enable Autoindent"
 msgstr ""
 
-#: src/gE_prefs_box.c:216
+#: src/gE_prefs_box.c:232
 msgid "Enable Wordwrap"
 msgstr ""
 
-#: src/gE_prefs_box.c:232
+#: src/gE_prefs_box.c:252
 msgid "Print Command"
 msgstr ""
 
-#: src/gE_prefs_box.c:318
+#: src/gE_prefs_box.c:342
 msgid "Current Font"
 msgstr ""
 
-#: src/gE_prefs_box.c:335
+#: src/gE_prefs_box.c:359
 msgid "Select..."
 msgstr ""
 
+#: src/gE_prefs_box.c:525
+msgid "Name"
+msgstr ""
+
+#: src/gE_prefs_box.c:525
+msgid "Location"
+msgstr ""
+
+#. Plugins Settings
+#: src/gE_prefs_box.c:532 src/gE_prefs_box.c:685
+msgid "Plugins"
+msgstr ""
+
+#: src/gE_prefs_box.c:613
+msgid "Add"
+msgstr ""
+
+#: src/gE_prefs_box.c:618
+msgid "Remove"
+msgstr ""
+
 #. General Settings
-#: src/gE_prefs_box.c:401
+#: src/gE_prefs_box.c:670
 msgid "General"
 msgstr ""
 
 #. Font Settings
-#: src/gE_prefs_box.c:411
+#: src/gE_prefs_box.c:680
 msgid "Font"
+msgstr ""
+
+#: src/gE_print.c:82
+#, c-format
+msgid ""
+"Enter print command below\n"
+"Remember to include '%s'"
 msgstr ""
 
 #: src/gE_print.c:90
@@ -144,119 +225,169 @@ msgstr ""
 msgid " Save, then print "
 msgstr ""
 
-#: src/gedit.c:116
+#: src/gedit.c:118
 msgid "Launch a plugin at startup"
 msgstr ""
 
-#: src/gedit.c:116
+#: src/gedit.c:118
 msgid "PLUGIN-NAME"
 msgstr ""
 
+#: src/menus.c:65
+msgid "_Autoindent"
+msgstr ""
+
 #: src/menus.c:66
+msgid "Status_bar"
+msgstr ""
+
+#: src/menus.c:67
+msgid "_Wordwrap"
+msgstr ""
+
+#: src/menus.c:68
+msgid "_Linewrap"
+msgstr ""
+
+#: src/menus.c:69
+msgid "_Readonly"
+msgstr ""
+
+#: src/menus.c:70
+msgid "_Splitscreen"
+msgstr ""
+
+#: src/menus.c:71
+msgid "_Show tabs"
+msgstr ""
+
+#: src/menus.c:72
+#, fuzzy
+msgid "Toolbar _relief"
+msgstr "Barra strumenti"
+
+#: src/menus.c:73
+msgid "_Show tooltips"
+msgstr ""
+
+#: src/menus.c:74
+msgid "Show toolbar _text"
+msgstr ""
+
+#: src/menus.c:75
+msgid "Show toolbar _icons"
+msgstr ""
+
+#. and this one is the default file name
+#: src/menus.c:77
+msgid "Untitled"
+msgstr ""
+
+#: src/menus.c:85
 msgid "_New"
 msgstr ""
 
-#: src/menus.c:66 src/toolbar.c:38
+#: src/menus.c:85 src/toolbar.c:38
 msgid "Create a new document"
 msgstr ""
 
-#: src/menus.c:83
+#: src/menus.c:102
 msgid "Close All"
 msgstr ""
 
-#: src/menus.c:83
+#: src/menus.c:102
 msgid "Close all open files"
 msgstr ""
 
-#: src/menus.c:105
+#: src/menus.c:124
 msgid "Find _Line..."
 msgstr ""
 
-#: src/menus.c:106
+#: src/menus.c:125
 msgid "Search for a line"
 msgstr ""
 
-#: src/menus.c:120
+#: src/menus.c:139
 msgid "_Top"
 msgstr ""
 
-#: src/menus.c:121
+#: src/menus.c:140
 msgid "Put the document tabs at the top"
 msgstr ""
 
-#: src/menus.c:124
+#: src/menus.c:143
 msgid "_Bottom"
 msgstr ""
 
-#: src/menus.c:125
+#: src/menus.c:144
 msgid "Put the document tabs at the bottom"
 msgstr ""
 
-#: src/menus.c:128
+#: src/menus.c:147
 msgid "_Left"
 msgstr ""
 
-#: src/menus.c:129
+#: src/menus.c:148
 msgid "Put the document tabs on the left"
 msgstr ""
 
-#: src/menus.c:132
+#: src/menus.c:151
 msgid "_Right"
 msgstr ""
 
-#: src/menus.c:133
+#: src/menus.c:152
 msgid "Put the document tabs on the right"
 msgstr ""
 
-#: src/menus.c:139
+#: src/menus.c:158
 msgid "Toggle the presence of the document tabs"
 msgstr ""
 
-#: src/menus.c:150
+#: src/menus.c:169
 msgid "Toggle autoindent"
 msgstr ""
 
-#: src/menus.c:155
+#: src/menus.c:174
 msgid "Toggle statusbar"
 msgstr ""
 
-#: src/menus.c:160
+#: src/menus.c:179
 msgid "Toggle Wordwrap"
 msgstr ""
 
-#: src/menus.c:165
+#: src/menus.c:184
 msgid "Toggle Linewrap"
 msgstr ""
 
-#: src/menus.c:170
+#: src/menus.c:189
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:175
+#: src/menus.c:194
 msgid "Toggle Split Screen"
 msgstr ""
 
-#: src/menus.c:181
+#: src/menus.c:200
 msgid "_Document Tabs"
 msgstr ""
 
-#: src/menus.c:182
+#: src/menus.c:201
 msgid "Change the placement of the document tabs"
 msgstr ""
 
-#: src/menus.c:186
+#: src/menus.c:205
 msgid "Sa_ve Settings"
 msgstr ""
 
-#: src/menus.c:187
+#: src/menus.c:206
 msgid "Save the current settings for future sessions"
 msgstr ""
 
-#: src/menus.c:205
+#: src/menus.c:224
 msgid "_Document List"
 msgstr ""
 
-#: src/menus.c:206
+#: src/menus.c:225
 msgid "Display the document list"
 msgstr ""
 
@@ -380,9 +511,6 @@ msgstr ""
 #: src/toolbar.c:77
 msgid " OK "
 msgstr ""
-
-#~ msgid "Toolbar"
-#~ msgstr "Barra strumenti"
 
 #~ msgid "About..."
 #~ msgstr "Informazioni..."
