@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2004-04-16 03:43-0400\n"
-"PO-Revision-Date: 2004-04-16 10:56-0400\n"
-"Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-06-17 21:39-0400\n"
+"PO-Revision-Date: 2004-06-17 21:40-0400\n"
+"Last-Translator: Alexander Winston <alexander.winston@comcast.net>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
@@ -586,7 +586,8 @@ msgstr "Save the changes to document \"%s\" before closing?"
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "There is %d document with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"There is %d document with unsaved changes. Save changes before closing?"
 msgstr[1] ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 
@@ -619,7 +620,7 @@ msgid "Replace _All"
 msgstr "Replace _All"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "_Replace"
 
@@ -1204,7 +1205,9 @@ msgstr "Open from URI"
 
 #: gedit/gedit-commands.c:557
 msgid "translator_credits"
-msgstr "Adam Weinberger <adamw@gnome.org>"
+msgstr ""
+"Adam Weinberger <adamw@gnome.org>\n"
+"Alexander Winston <alexander.winston@comcast.net>"
 
 #: gedit/gedit-commands.c:582
 msgid "gedit"
@@ -1401,45 +1404,49 @@ msgstr "Vietnamese"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:700
+msgid "Question"
+msgstr "Question"
+
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "A file named \"%s\" already exists.\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Do you want to replace it with the one you are saving?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "The file \"%s\" is read-only.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Do you want to try to replace it with the one you are saving?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:361
 msgid "All Files"
 msgstr "All Files"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:369
 msgid "All Text Files"
 msgstr "All Text Files"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:387
 msgid "Ch_aracter Coding:"
 msgstr "Ch_aracter Coding:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:504
 msgid "Select a file to open"
 msgstr "Select a file to open"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:530
 msgid "Select files to open"
 msgstr "Select files to open"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:557
 msgid "Select a filename to save"
 msgstr "Select a filename to save"
 
@@ -1466,12 +1473,12 @@ msgstr "The document \"%s\" has been saved."
 msgid "Save as..."
 msgstr "Save as..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:601
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Revert unsaved changes to document \"%s\"?"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:610
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1484,13 +1491,13 @@ msgstr[1] ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:619
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Changes made to the document in the last minute will be permanently lost."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:625
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1505,7 +1512,7 @@ msgstr[1] ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:635
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1518,12 +1525,12 @@ msgstr[1] ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:650
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Changes made to the document in the last hour will be permanently lost."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:656
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1538,7 +1545,7 @@ msgstr[1] ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:671
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1549,70 +1556,70 @@ msgstr[0] ""
 msgstr[1] ""
 "Changes made to the document in the last %d hours will be permanently lost."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:694 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Revert"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:743
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Error reverting the document \"%s\"."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:750
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "The document \"%s\" has not been reverted."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "The document \"%s\" has been reverted."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:782
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Reverting the document \"%s\"..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:917
 msgid "Could not read data from stdin."
 msgstr "Could not read data from stdin."
 
-#: gedit/gedit-file.c:962
+#: gedit/gedit-file.c:967
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "The file \"%s\" does not exist. Would you like to create it?"
 
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1090
 msgid "Reverting file:"
 msgstr "Reverting file:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1094
 msgid "Loading file:"
 msgstr "Loading file:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1263 gedit/gedit-file.c:1422
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Error loading file \"%s\""
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Loaded file \"%s\""
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1361
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Loaded %d file"
 msgstr[1] "Loaded %d files"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1395
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Loading file \"%s\"..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1542
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2817,7 +2824,6 @@ msgstr "_Working directory:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Shell Output plugin"
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "S_ort..."
