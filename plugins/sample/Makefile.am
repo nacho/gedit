@@ -20,4 +20,4 @@ plugin_in_files = sample.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(plugin_DATA) 
+EXTRA_DIST = $(plugin_in_files) $(plugin_DATA) 

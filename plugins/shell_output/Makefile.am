@@ -23,4 +23,4 @@ plugin_in_files = shell_output.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(glade_DATA) $(plugin_DATA)
+EXTRA_DIST = $(glade_DATA) $(plugin_in_files) $(plugin_DATA)

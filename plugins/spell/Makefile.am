@@ -48,6 +48,7 @@ plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = 					\
 	$(glade_DATA)				\
+	$(plugin_in_files)			\
 	$(plugin_DATA)				\
 	gedit-spell-checker-dialog-marshal.list 
 

@@ -34,4 +34,4 @@ plugin_in_files = taglist.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(taglist_DATA) $(plugin_DATA)
+EXTRA_DIST = $(taglist_DATA) $(plugin_in_files) $(plugin_DATA)

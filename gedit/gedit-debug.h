@@ -65,7 +65,7 @@ extern gint debug_utils;
 extern gint debug_metadata;
 
 /* __FUNCTION_ is not defined in Irix according to David Kaelbling <drk@sgi.com>*/
-#ifndef __GNUC__
+#if !defined(__GNUC__) && !defined(__FUNCTION__)
 #define __FUNCTION__   ""
 #endif
 
