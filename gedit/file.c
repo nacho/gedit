@@ -181,9 +181,9 @@ gedit_file_open (Document *doc, gchar *fname)
 gint
 gedit_file_save (Document *doc, gchar *fname)
 {
-	FILE *fp;
-	gchar *tmpstr;
-	View *view;
+	FILE  *file_pointer;
+	gchar *buffer;
+	View  *view;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -209,7 +209,21 @@ gedit_file_save (Document *doc, gchar *fname)
 	g_return_val_if_fail (doc != NULL, 1);
 	g_return_val_if_fail (fname != NULL, 1);
 	
-	if ((fp = fopen (fname, "w")) == NULL)
+	buffer = gedit_document_get_buffer (view->doc);
+
+	g_return_val_if_fail (buffer != NULL, 1);
+
+	if (strlen(buffer) == 0)
+	{
+		gchar *errstr = g_strdup_printf (_("The document contains no data."), fname);
+		gnome_app_error (mdi->active_window, errstr);
+		g_free (errstr);
+		g_free (buffer);
+		gedit_close_all_flag_clear();
+		return 1;
+	}
+
+	if ((file_pointer = fopen (fname, "w")) == NULL)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file: "
 						   "\n\n %s \n\n"
@@ -217,35 +231,34 @@ gedit_file_save (Document *doc, gchar *fname)
 						   "and that you have the appropriate write permissions."), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
+		g_free (buffer);
 		gedit_close_all_flag_clear();
 		return 1;
 	}
 	
-	tmpstr = gedit_document_get_buffer (view->doc);
-
-	if (fputs (tmpstr, fp) == EOF)
+	if (fputs (buffer, file_pointer) == EOF)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file :"
 						   "\n\n %s \n\n"
 						   "Because of an unknown reason (1). Please report this "
 						   "Problem to submit@bugs.gnome.org"), fname);
 		gnome_app_error (mdi->active_window, errstr);
-		fclose (fp);
+		fclose (file_pointer);
 		g_free (errstr);
+		g_free (buffer);
 		gedit_close_all_flag_clear();
 		return 1;
 	}
 	
-	g_free (tmpstr);
+	g_free (buffer);
 	
-	if (fclose (fp) != 0)
+	if (fclose (file_pointer) != 0)
 	{
 		gchar *errstr = g_strdup_printf (_("gedit was unable to save the file :"
 						   "\n\n %s \n\n"
 						   "Because of an unknown reason (2). Please report this "
 						   "Problem to submit@bugs.gnome.org"), fname);
 		gnome_app_error (mdi->active_window, errstr);
-		fclose (fp);
 		g_free (errstr);
 		gedit_close_all_flag_clear();
 		return 1;
