@@ -412,6 +412,43 @@ uri_is_in_dir (const gchar *uri, const gchar *dir_uri)
 	return ret;
 }
 
+static gboolean
+get_filename_and_extension (const gchar *name,
+			    gchar **name_without_ext,
+			    gchar **ext)
+{
+	gchar *p;
+	gchar *basename;
+	gchar *extension;
+	gboolean ret;
+
+	p = strrchr (name, '.');
+
+	if (p && *(p + 1) != '\0')
+	{
+		basename = g_malloc (p - name + 1);
+		strncpy (basename, name, p - name);
+		basename[p - name] = '\0';
+
+		extension = g_strdup (p + 1);
+
+		ret = TRUE;
+	}
+	else
+	{
+		basename = g_strdup (name);
+
+		extension = NULL;
+
+		ret = FALSE;
+	}
+
+	*name_without_ext = basename;
+	*ext = extension;
+
+	return ret;
+}
+
 static gchar *
 run_copy_file_chooser (GtkWindow *parent,
 		       GeditDocument *orig,
@@ -454,8 +491,29 @@ run_copy_file_chooser (GtkWindow *parent,
 
 		if (tmp != NULL)
 		{
-			/* translators: %s is a filename */
-			name = g_strdup_printf (_("%s (copy)"), tmp);
+			gchar *basename = NULL;
+			gchar *ext = NULL;
+
+			if (get_filename_and_extension (tmp, &basename, &ext))
+			{
+				gchar *tmp2;
+
+				/* translators: %s is a filename */
+				tmp2 = g_strdup_printf (_("%s (copy)"), basename);
+
+				/* we use another tmp so that the translatable
+				 * format is the same as below */
+				name = g_strconcat (tmp2, ".", ext, NULL);
+				g_free (tmp2);
+			}
+			else
+			{
+				/* translators: %s is a filename */
+				name = g_strdup_printf (_("%s (copy)"), basename);
+			}
+
+			g_free (basename);
+			g_free (ext);
 			g_free (tmp);
 		}
 	}
@@ -463,6 +521,7 @@ run_copy_file_chooser (GtkWindow *parent,
 	{
 		name = gedit_document_get_short_name (orig);
 	}
+
 	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (chooser), name);
 	g_free (cur_dir_uri);
 	g_free (name);
