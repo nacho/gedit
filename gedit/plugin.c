@@ -316,8 +316,6 @@ gedit_plugin_load (const gchar *file)
 	pd->file = g_strdup (file);
 	pd->handle = g_module_open (file, 0);
 
-	g_print ("Sizeof %i\n", sizeof (PluginData));
-
 	if (!pd->handle)
 	{
 		g_warning (_("Error, unable to open module file, %s"),

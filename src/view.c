@@ -40,10 +40,6 @@ enum {
 
 static GtkObjectClass * parent_class;
 
-/*
-static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
-*/
-
 void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
 void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 
@@ -455,8 +451,6 @@ gedit_view_finalize (GtkObject *object)
 
 	view = GEDIT_VIEW (object);
 
-	g_print ("Finalize ...\n");
-
 }
 
 static void
@@ -468,34 +462,10 @@ gedit_view_class_init (ViewClass *klass)
 
 	gedit_debug (DEBUG_VIEW, "");
 
-	/*
-	gedit_view_signals[CURSOR_MOVED_SIGNAL] =
-		gtk_signal_new ("cursor_moved",
-				GTK_RUN_FIRST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (ViewClass, cursor_moved),
-				gtk_signal_default_marshaller,
-				GTK_TYPE_NONE,
-				0);
-
-	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
-	klass->cursor_moved = NULL;
-	*/
-
-	/*
-	widget_class->size_allocate = gedit_view_size_allocate;
-	widget_class->size_request = gedit_view_size_request;
-	widget_class->expose_event = gedit_view_expose;
-	widget_class->realize = gedit_view_realize;
-	*/
 	object_class->finalize = gedit_view_finalize;
 	
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 }
-
-/*
-#define SLOW_WITH_BAD_THEMES
-*/
 
 static void
 gedit_view_init (View *view)

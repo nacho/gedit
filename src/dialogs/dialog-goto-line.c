@@ -84,7 +84,7 @@ dialog_goto_get_dialog (GtkWidget **dialog_, GtkWidget **entry_)
      but it memleaks, probably a mem-leak in gnome-libs. I keep this code here to eventually
      find this leak
 */
-#if 0
+#if 0 
 void
 dialog_goto_line (void)
 {

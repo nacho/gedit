@@ -6,4 +6,3 @@
 
 gchar *s = N_("Goto Line");
 gchar *s = N_("Line number:");
-gchar *s = N_("Enter the line number you wish to go to.");
