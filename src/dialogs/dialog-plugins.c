@@ -34,7 +34,7 @@
 #include "dialogs/dialogs.h"
 #include "gtkchecklist.h"
 
-#define GEDIT_PLUGIN_MANAGER_GLADE_FILE "plugin-manager2.glade"
+#define GEDIT_PLUGIN_MANAGER_GLADE_FILE "plugin-manager.glade"
 
 GtkWidget *list_of_plugins;
 GtkWidget *description_label;
