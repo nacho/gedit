@@ -143,6 +143,9 @@ struct _BonoboMDIPrivate
 
 	gint 		 default_window_height;
 	gint		 default_window_width;
+
+	/* Whether our state is being restored for session management */
+	gboolean	 restoring_state;
 };
 
 typedef gboolean   (*BonoboMDISignal1) (GObject *, gpointer, gpointer);
@@ -992,7 +995,7 @@ app_clone (BonoboMDI *mdi, BonoboWindow *win, const char *window_role)
 	
 	app_create (mdi, NULL, window_role);
 
-	if (win != NULL)
+	if (win != NULL && !bonobo_mdi_get_restoring_state (mdi))
 	{
 		const BonoboMDIWindowInfo *window_info = bonobo_mdi_get_window_info (win);
 		g_return_if_fail (window_info != NULL);
@@ -1196,9 +1199,10 @@ app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 	window = bonobo_window_new (mdi->priv->mdi_name, mdi->priv->title);
 	g_return_if_fail (window != NULL);
 
-	gtk_window_set_default_size (GTK_WINDOW (window),
-				     mdi->priv->default_window_width,
-				     mdi->priv->default_window_height);
+	if (!bonobo_mdi_get_restoring_state (mdi))
+		gtk_window_set_default_size (GTK_WINDOW (window),
+					     mdi->priv->default_window_width,
+					     mdi->priv->default_window_height);
 
 	if (window_role)
 		gtk_window_set_role (GTK_WINDOW (window), window_role);
@@ -2198,4 +2202,47 @@ bonobo_mdi_get_window_info (BonoboWindow *win)
 {
 	return (const BonoboMDIWindowInfo *) 
 			g_object_get_data (G_OBJECT (win), WINDOW_INFO_KEY);
+}
+
+/**
+ * bonobo_mdi_set_restoring_state:
+ * @mdi: A pointer to an MDI object.
+ * @restoring_state: Whether the state is being restored.
+ * 
+ * Sets whether the MDI object is being restored to a known state.
+ **/
+void
+bonobo_mdi_set_restoring_state (BonoboMDI *mdi, gboolean restoring_state)
+{
+	BonoboMDIPrivate *priv;
+
+	g_return_if_fail (mdi != NULL);
+	g_return_if_fail (BONOBO_IS_MDI (mdi));
+
+	priv = mdi->priv;
+
+	g_return_if_fail (priv->restoring_state && restoring_state);
+	g_return_if_fail (!priv->restoring_state && !restoring_state);
+
+	priv->restoring_state = restoring_state ? TRUE : FALSE;
+}
+
+/**
+ * bonobo_mdi_get_restoring_state:
+ * @mdi: A pointer to an MDI object.
+ * 
+ * Queries whether an MDI object is having its state restored.
+ * 
+ * Return value: TRUE if the MDI object is being restored, FALSE otherwise.
+ **/
+gboolean
+bonobo_mdi_get_restoring_state (BonoboMDI *mdi)
+{
+	BonoboMDIPrivate *priv;
+
+	g_return_val_if_fail (mdi != NULL, FALSE);
+	g_return_val_if_fail (BONOBO_IS_MDI (mdi), FALSE);
+
+	priv = mdi->priv;
+	return priv->restoring_state;
 }

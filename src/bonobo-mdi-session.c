@@ -240,6 +240,7 @@ gboolean
 bonobo_mdi_restore_state (BonoboMDI *mdi, const gchar *section,
 			 BonoboMDIChildCreator create_child_func)
 {
+	gboolean retval;
 	gchar key [BUFSIZ], *string;
 	GPtrArray *window_list, *child_list;
 	GHashTable *child_hash, *child_windows;
@@ -248,10 +249,14 @@ bonobo_mdi_restore_state (BonoboMDI *mdi, const gchar *section,
 	guint i;
 	gint mode;
 
+	retval = FALSE;
+
+	bonobo_mdi_set_restoring_state (mdi, TRUE);
+
 	g_snprintf (key, sizeof(key), "%s/mdi_mode=-1", section);
 	mode = gnome_config_get_int (key);
 	if (gnome_config_get_int (key) == -1)
-		return FALSE;
+		goto out;
 #if 0
 	bonobo_mdi_set_mode (mdi, mode);
 #endif
@@ -379,7 +384,12 @@ bonobo_mdi_restore_state (BonoboMDI *mdi, const gchar *section,
 	g_hash_table_destroy (view_hash);
 	g_hash_table_destroy (window_hash);
 
-	return TRUE;
+	retval = TRUE;
+
+ out:
+	bonobo_mdi_set_restoring_state (mdi, FALSE);
+
+	return retval;
 }
 
 static gpointer

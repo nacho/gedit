@@ -165,6 +165,10 @@ BonoboMDIChild *bonobo_mdi_find_child         	(BonoboMDI *mdi,
 
 BonoboWindow   *bonobo_mdi_get_active_window  	(BonoboMDI *mdi);
 
+void	      bonobo_mdi_set_restoring_state    (BonoboMDI *mdi,
+						 gboolean restoring_state);
+gboolean      bonobo_mdi_get_restoring_state    (BonoboMDI *mdi);
+
 /*
  * the following two functions are here to make life easier if an application
  * creates objects (like opening a window) that should "keep the application

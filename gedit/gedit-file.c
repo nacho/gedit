@@ -315,7 +315,14 @@ gedit_file_save (GeditMDIChild* child)
 		view = GTK_WIDGET (g_list_nth_data (
 					bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (child)), 0));
 		if (view != NULL)
+		{
+			GtkWindow *window;
+
+			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
+			gtk_window_present (window);
+
 			bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+		}
 		
 		gedit_utils_error_reporting_saving_file (uri, error,
 					GTK_WINDOW (gedit_get_active_window ()));
@@ -582,7 +589,14 @@ gedit_file_save_all (void)
 	}
 
 	if (view !=  bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)))
+	{
+		GtkWindow *window;
+
+		window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
+		gtk_window_present (window);
+
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	}
 }
 
 gboolean
@@ -729,11 +743,16 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 	if (view != NULL)
 	{
 		GeditDocument *doc;
+		GtkWindow *window;
 
 		doc = gedit_view_get_document (view);
 		g_return_val_if_fail (doc, FALSE);
 		
 		gedit_document_goto_line (doc, MAX (0, line - 1));
+
+		window = GTK_WINDOW (bonobo_mdi_get_window_from_view (GTK_WIDGET (view)));
+		gtk_window_present (window);
+
 		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), GTK_WIDGET (view));		
 	}
 

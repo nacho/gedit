@@ -355,31 +355,34 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	g_object_set_data_full (G_OBJECT (win), RECENT_KEY, view,
 				g_object_unref);
-	
-	/* Set window state and size */
-	state = gedit_prefs_manager_get_window_state ();
 
-	if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+	/* Set window state and size, but only if the session is not being restored */
+	if (!bonobo_mdi_get_restoring_state (mdi))
 	{
-		gtk_window_set_default_size (GTK_WINDOW (win),
-			gedit_prefs_manager_get_default_window_width (),
-			gedit_prefs_manager_get_default_window_height ());
+		state = gedit_prefs_manager_get_window_state ();
 
-		gtk_window_maximize (GTK_WINDOW (win));
+		if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
+		{
+			gtk_window_set_default_size (GTK_WINDOW (win),
+						     gedit_prefs_manager_get_default_window_width (),
+						     gedit_prefs_manager_get_default_window_height ());
+
+			gtk_window_maximize (GTK_WINDOW (win));
+		}
+		else
+		{
+			gtk_window_set_default_size (GTK_WINDOW (win), 
+						     gedit_prefs_manager_get_window_width (),
+						     gedit_prefs_manager_get_window_height ());
+
+			gtk_window_unmaximize (GTK_WINDOW (win));
+		}
+
+		if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
+			gtk_window_stick (GTK_WINDOW (win));
+		else
+			gtk_window_unstick (GTK_WINDOW (win));
 	}
-	else
-	{
-		gtk_window_set_default_size (GTK_WINDOW (win), 
-			gedit_prefs_manager_get_window_width (),
-			gedit_prefs_manager_get_window_height ());
-
-		gtk_window_unmaximize (GTK_WINDOW (win));
-	}
-
-	if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
-		gtk_window_stick (GTK_WINDOW (win));
-	else
-		gtk_window_unstick (GTK_WINDOW (win));
 	
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
@@ -829,7 +832,14 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 		w = GTK_WIDGET (g_list_nth_data (bonobo_mdi_child_get_views (child), 0));
 			
 		if(w != NULL)
+		{
+			GtkWindow *window;
+
+			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (w));
+			gtk_window_present (window);
+			
 			bonobo_mdi_set_active_view (mdi, w);
+		}
 
 		fname = gedit_document_get_short_name (doc);
 
