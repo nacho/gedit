@@ -42,7 +42,7 @@ gedit_launcher_LDADD = \
 
 liblauncher_plugin_la_SOURCES = \
 	launcher-server.c	\
-	launcher-impl.c		\
+	launcher-impl.c
 
 liblauncher_plugin_la_LIBADD = \
 	@GNOME_LIBDIR@ -lgnorba @GNOMEUI_LIBS@ @ORBIT_LIBS@ \
