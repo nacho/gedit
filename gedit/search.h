@@ -23,12 +23,23 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* Search and Replace */
-extern void search_cb(GtkWidget *w, gpointer cbdata);
-extern void search_replace_cb(GtkWidget *w, gpointer cbdata);
-extern void search_again_cb(GtkWidget *w, gpointer cbdata);
-extern void goto_line_cb(GtkWidget *w, gpointer cbwindow);
-extern void count_lines_cb (GtkWidget *w, gpointer cbwindow);
+#define SEARCH_NOCASE		0x00000001
+#define SEARCH_BACKWARDS	0x00000002
+
+/* interface */
+gint pos_to_line (gE_document *doc, gint pos, gint *numlines);
+gint line_to_pos (gE_document *doc, gint line, gint *numlines);
+gint get_line_count (gE_document *doc);
+void seek_to_line (gE_document *doc, gint line, gint numlines);
+
+gint gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options);
+void gE_search_replace (gE_document *doc, gint pos, gint len, gchar *replace);
+
+/* gui for interface */
+void search_cb (GtkWidget *widget, gpointer data);
+void replace_cb (GtkWidget *widget, gpointer data);
+void goto_line_cb (GtkWidget *widget, gpointer data);
+void count_lines_cb (GtkWidget *w, gpointer cbwindow);
 
 #ifdef __cplusplus
 }

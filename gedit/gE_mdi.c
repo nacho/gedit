@@ -61,14 +61,12 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	{ GNOME_APP_UI_ITEM, N_("Find _Line..."),
 	  N_("Search for a line"),
-	  goto_line_cb, (gpointer) GE_WINDOW, NULL,
+	  goto_line_cb, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 
-	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, NULL),
 
-	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(search_again_cb, (gpointer) GE_DATA),
-
-	GNOMEUIINFO_MENU_REPLACE_ITEM(search_replace_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_cb, NULL),
 	
 	GNOMEUIINFO_END
 };
@@ -327,7 +325,6 @@ void gE_document_init (gE_document *doc)
 	doc->read_only = FALSE;
 	doc->splitscreen = FALSE;
 	doc->changed = FALSE;
-	doc->search = g_malloc (sizeof(gE_search));
 	/*doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
 									GTK_SIGNAL_FUNC(doc_changed_cb), doc);*/
 		
@@ -345,6 +342,7 @@ gE_document *gE_document_new ()
 	if ((doc = gtk_type_new (gE_document_get_type ())))
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
+	    gE_documents = g_list_append(gE_documents, doc);
 	
 	    return doc;
 	  }
@@ -497,6 +495,7 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	       return FALSE;
 	  }
 	  
+	gE_documents = g_list_remove (gE_documents, doc);
 	return TRUE;
 }
 

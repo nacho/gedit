@@ -30,21 +30,6 @@ extern "C" {
 #define UNKNOWN		N_("Unknown")
 #define UNTITLED	N_("Untitled")
 
-typedef struct _gE_search {
-	GtkWidget *window;
-	GtkWidget *start_at_cursor;
-	GtkWidget *start_at_beginning;
-	GtkWidget *case_sensitive;
-	GtkWidget *search_entry;
-	gint       line;
-	gboolean   replace, again;
-	GtkWidget *replace_box;
-	GtkWidget *replace_entry;
-	GtkWidget *prompt_before_replacing;
-	GtkWidget *search_for;
-	GtkWidget *line_item, *text_item;
-
-} gE_search;
 
 typedef struct _gE_window {
 	GtkWidget *window;
@@ -62,7 +47,6 @@ typedef struct _gE_window {
 
 /*	GList *documents;	Pah.. i dunno.. */
 	GtkWidget *popup;
-	gE_search *search;
 
 	GtkPositionType tab_pos;
 
@@ -75,7 +59,6 @@ typedef struct _gE_document {
 	GnomeMDIChild mdi_child;
 	
 	/*gE_window *window;*/
-	gE_search *search;
 	
 	GtkWidget *text;
 	GtkWidget *tab_label;

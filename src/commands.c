@@ -756,18 +756,8 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 void
 file_quit_cb(GtkWidget *widget, gpointer cbdata)
 {
-/*	gE_data *data = (gE_data *)cbdata;
-
-	g_assert(data != NULL);
-*/	
 	plugin_save_list();
-/*	
-	while (window_list) {
-		data->window = g_list_nth_data(window_list, 0);
-		window_close_cb(widget, data);
-		if (data->flag == FALSE)	// cancelled by user 
-			return;
-	}*/
+
 	if (gnome_mdi_remove_all (mdi, FALSE))
 	  gtk_object_destroy (GTK_OBJECT (mdi));
 	else

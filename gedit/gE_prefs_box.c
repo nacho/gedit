@@ -103,8 +103,8 @@ gint i;
      else
        gtk_widget_show (GTK_WIDGET (w->statusbar)->parent);
 */       
-     /* if (w->splitscreen == TRUE) */
-/*       gE_document_set_split_screen (gE_document_current(), (gint) w->splitscreen);
+/*      if (w->splitscreen == TRUE) 
+       gE_document_set_split_screen (gE_document_current(), (gint) w->splitscreen);
   */  
   
   	gE_window_set_status_bar (settings->show_status);

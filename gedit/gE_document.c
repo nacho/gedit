@@ -35,8 +35,8 @@
 #include "gE_print.h"
 #include "menus.h"
 #include "toolbar.h"
-#include "search.h"
 #include "gE_prefs.h"
+#include "search.h"
 
 extern GList *plugins;
 gE_window *window;
@@ -89,8 +89,7 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
 	/* various initializations */
-	/*w = g_malloc0(sizeof(gE_window));
-	w->search = g_malloc0(sizeof(gE_search));*/
+	/*w = g_malloc0(sizeof(gE_window));*/
 
 	settings->auto_indent = TRUE;
 	settings->show_tabs = TRUE;
