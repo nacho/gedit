@@ -81,7 +81,7 @@ static gchar * message_to_translators = N_("Hello Dear Translator :\n"
 					   "I think you should be translating "
 					   "the gedit-1-0 branch. To get it from cvs type : \n"
 					   "cvs -z3 co -r gedit-1-0 gedit\n"
-					   "Thank you. Chema")
+					   "Thank you. Chema");
 
 
 typedef struct {

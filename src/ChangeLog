@@ -1,3 +1,11 @@
+2000-12-14  Alex Roberts  <bse@bakterium.com>
+
+	* prefs.c (gedit_prefs_save_settings): only save the run flag 
+	if it's FALSE. we really dont need to save it each time we save.
+
+	* file.c: added missing semicolon to the message. now it
+	actually compile ;)
+
 2000-11-28  Chema Celorio  <chema@celorio.com>
 
 	* file.c: add message for Translators

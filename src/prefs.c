@@ -98,10 +98,11 @@ gedit_prefs_save_settings (void)
 	gnome_config_set_int ("printorientation", settings->print_orientation);
 	gnome_config_set_string ("font", settings->font);
 
-	if (!settings->run)
+	if (!settings->run) {
 		settings->run = TRUE;
 	
-	gnome_config_set_int ("run", (gint) settings->run);
+		gnome_config_set_int ("run", (gint) settings->run);
+	}
 	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
