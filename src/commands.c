@@ -419,7 +419,6 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 	gE_document *doc;
 	GtkFileSelection *fs;
 
-g_warning ("Watch out!");
 	fs = GTK_FILE_SELECTION(osel);
 
 /*	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));*/
