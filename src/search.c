@@ -188,10 +188,16 @@ file_info_cb (GtkWidget *widget, gpointer data)
 
 	gedit_search_end();
 
-	msg = g_strdup_printf (_("Filename: %s\n\nTotal Character: %i\nTotal Words: %i\nTotal Lines: %i"
-				"Total Paragraphs: %i\n\nCurrent Line: %i\nCurrent Column: %i"),
+	msg = g_strdup_printf (_("Filename: %s\n\n"
+				 "Total Characters: %i\n"
+				 "Total Words: %i\n"
+				 "Total Lines: %i\n"
+				 "Total Paragraphs: %i\n"
+				 "Total Bytes: %i\n\n"
+				 "Current Line: %i\n"
+				 "Current Column: %i"),
 			       gedit_document_get_tab_name (doc), total_chars , total_words ,
-			       total_lines , total_paragraphs , line_number , column_number );
+			       total_lines , total_paragraphs , gedit_search_info.buffer_length, line_number , column_number );
 			
 	gnome_dialog_run_and_close ((GnomeDialog *)
 				    gnome_message_box_new (msg,

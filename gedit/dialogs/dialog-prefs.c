@@ -526,11 +526,13 @@ prepare_pagesize_page (GladeXML *gui)
 			   
 }
 
+#if 0
 static void
 gedit_prefs_notebook_switch_page (GtkWidget *widget, gpointer data)
 {
 	g_print ("Page switched\n");
 }
+#endif
 
 static void
 dialog_prefs_impl (GladeXML *gui)

@@ -113,8 +113,10 @@ void	gedit_view_set_window_position	(View *view, gfloat position);
 void	gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
 
 /* Insert/delete text */
-void	doc_delete_text_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
-void	doc_insert_text_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+void	doc_delete_text_real_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+/*void	doc_delete_text_cb		(GtkWidget *editable, int start_pos, int end_pos, View *view);*/
+void	doc_insert_text_real_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+/*void	doc_insert_text_cb		(GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);*/
 
 /* selection and position */
 void	gedit_view_set_selection	(View *view, guint start, guint end);

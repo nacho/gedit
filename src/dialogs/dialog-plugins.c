@@ -77,7 +77,7 @@ gedit_plugin_program_location_dialog (void)
 	}
 
 	/* If we do this the main plugin dialog goes below the program window. Chema.
-y	*/
+	*/
 	switch (gnome_dialog_run (GNOME_DIALOG (program_location_dialog)))
 	{
 	case 0:

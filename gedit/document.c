@@ -98,7 +98,7 @@ gedit_document_insert_text (Document *doc, guchar *text, guint position, gint un
 	length = strlen (text);
 	exclude_this_view = FALSE;
 
-	doc_insert_text_cb (editable, text, length, &position, view, exclude_this_view, undoable);
+	doc_insert_text_real_cb (editable, text, length, &position, view, exclude_this_view, undoable);
 }
 
 /**
@@ -131,7 +131,7 @@ gedit_document_delete_text (Document *doc, guint position, gint length, gint und
 	g_return_if_fail (editable!=NULL);
 	exclude_this_view = FALSE;
 
-	doc_delete_text_cb (editable, position, position+length, view, exclude_this_view, undoable);
+	doc_delete_text_real_cb (editable, position, position+length, view, exclude_this_view, undoable);
 }
 
 /**

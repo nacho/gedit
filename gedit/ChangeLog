@@ -1,8 +1,21 @@
+2000-07-06  Chema Celorio  <chema@celorio.com>
+
+	* view.c (doc_insert_text_real_cb): new function to fix #16374. We cant assume that
+	a parameter that is not passed to a funciton will be TRUE.
+
+	* document.c (gedit_document_insert_text): call doc_insert_text_real_cb
+
+	same for the _delete_ function
+
+2000-07-05  Chema Celorio  <chema@celorio.com>
+
+	* search.c (file_info_cb): added total size to the dialog
+
 2000-07-05  Chema Celorio  <chema@celorio.com>
 
 	* search.c (file_info_cb): kill compile warning
 
-	(gedit_view_init): fix the code a bit
+	* view.c (gedit_view_init): fix the code a bit
 
 2000-07-05  Chema Celorio  <chema@celorio.com>
 

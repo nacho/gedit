@@ -55,8 +55,10 @@ static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, V
 void		gedit_view_insert (View  *view, guint position, gchar * text, gint length);
 void		gedit_view_delete (View *view, guint position, gint length);
 
-void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
-void		doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
+void		doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+void		doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
+void		doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
 gboolean	auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
 
 guint		gedit_view_get_type (void);
@@ -261,7 +263,7 @@ gedit_view_delete (View *view, guint position, gint length)
 }
 
 void
-doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
+doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int length,
 		    int *pos, View *view, gint exclude_this_view, gint undo)
 {
 	gint position = *pos;
@@ -287,9 +289,17 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 	g_free (text_to_insert);
 }
 
+void
+doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
+		    int *pos, View *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	doc_insert_text_real_cb (editable, insertion_text, length, pos, view, TRUE, TRUE);
+}
 
 void
-doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
+doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
 		    View *view, gint exclude_this_view, gint undo)
 {
 	Document *doc;
@@ -314,6 +324,15 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	else
 		gedit_views_delete (doc, start_pos, end_pos, view);
 
+}
+
+
+void
+doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	doc_delete_text_real_cb (editable, start_pos, end_pos, view, TRUE, TRUE);
 }
 
 
@@ -499,10 +518,9 @@ gedit_view_init (View *view)
 
 	/* Connect the insert & delete text callbacks */
 	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
-			    GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
+			    GTK_SIGNAL_FUNC (doc_insert_text_cb), (gpointer) view);
 	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
-			    GTK_SIGNAL_FUNC (doc_delete_text_cb),
-			    (gpointer) view);
+			    GTK_SIGNAL_FUNC (doc_delete_text_cb), (gpointer) view);
 
 	/* View changed signal */
 	view->view_text_changed_signal =
