@@ -105,7 +105,6 @@ gedit_window_refresh (void)
 	view = gedit_view_current();
 			
 	gedit_window_set_status_bar (settings->show_status);
-
 	gedit_window_set_toolbar_labels ();
 
 	/* the "Default" mode is index 3, but GNOME_MDI_DEFAULT_MODE

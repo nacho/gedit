@@ -68,18 +68,31 @@ GnomeUIInfo gedit_file_menu[] =
 				GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
-
+#if 1
 	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
 				NULL,
 				file_revert_cb, 
 				GNOME_STOCK_MENU_REFRESH),
+#else
+	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
+				NULL,
+				file_revert_cb, 
+				GNOME_STOCK_MENU_REFRESH),
+#endif
 
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
+#if 0	
+	GNOMEUIINFO_ITEM_DATA (
+		N_("Print pre_view"), N_("Print preview"),
+		file_print_preview_cb, NULL, NULL),
+/*		file_print_preview_cb, NULL, preview_xpm),*/
+#else	
 	GNOMEUIINFO_ITEM (N_("Print preview..."),
 			  N_("Preview data to be printed"),
 			  file_print_preview_cb, NULL),
+#endif	
 
 	GNOMEUIINFO_SEPARATOR, 
 

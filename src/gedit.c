@@ -86,6 +86,7 @@ main (int argc, char **argv)
 	char **args;
 	poptContext ctx;
 	int i;
+	GnomeApp *app;
 	
 	GList *file_list = NULL;
 
@@ -124,8 +125,19 @@ main (int argc, char **argv)
 	gedit_prefs_load_settings ();
 
 	gedit_mdi_init ();
+	app = gedit_window_active_app();
+
+	gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
+
+	gedit_plugins_init ();
+	gedit_plugins_window_add (app);
+
+
 	gedit_document_load (file_list);
 	gedit_close_all_flag_clear ();
+
+
+	
 	/*
 	g_print ("settings->show_status %i\n", settings->show_status);
 	gedit_window_set_status_bar (settings->show_status);

@@ -271,8 +271,8 @@ gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos)
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
-	g_return_val_if_fail (end_pos > start_pos, NULL);
 	g_return_val_if_fail (doc!=NULL, NULL);
+	g_return_val_if_fail (end_pos > start_pos, NULL);
 	view = g_list_nth_data (doc->views, 0);
 	g_return_val_if_fail (view!=NULL, NULL);
 
@@ -584,6 +584,8 @@ gedit_mdi_init (void)
 	/* Loads the structure gedit_toolbar with the widgets */
 	gedit_window_set_toolbar_labels ();
 	gedit_window_load_toolbar_widgets ();
+
+	gedit_window_set_status_bar ();
 
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }

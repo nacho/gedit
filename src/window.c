@@ -85,6 +85,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 
 	gedit_debug ("", DEBUG_WINDOW);
 
+	g_print ("1. A\n");
 	gtk_drag_dest_set (GTK_WIDGET(app),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
@@ -92,12 +93,17 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 			   drag_types, n_drag_types,
 			   GDK_ACTION_COPY);
 		
+	g_print ("2. A\n");
 	gtk_signal_connect (GTK_OBJECT (app), "drag_data_received",
 			    GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
+	g_print ("3. A\n");
 	gedit_window_set_icon (GTK_WIDGET (app), "gedit_icon");
 
+	g_print ("4. A\n");
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
+
+	g_print ("5. A\n");
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 	/*gedit_load_settings ();*/
@@ -105,24 +111,11 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	*/
 	
 	settings->num_recent = 0;
+
+	g_print ("6. A\n");
 	gedit_recent_update (GNOME_APP (app));
-
-	gedit_window_set_status_bar ();
-
-	gedit_plugins_init ();
-	gedit_plugins_window_add (app);
+	g_print ("7. A\n");
 	
-/*
-	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
-	gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
-*/
-	/*
-	if (settings->show_status)
-	{
-		gtk_widget_show (statusbar);
-	}
-	*/
 
 }
 
@@ -157,21 +150,17 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 void
 gedit_window_set_status_bar (void)
 {
-	static GtkWidget *statusbar;
-	static gint show_status;
-		
+	GtkWidget *statusbar;
 	gedit_debug ("", DEBUG_WINDOW);
 
-	if (!statusbar)
+	if (!mdi->active_window->statusbar)
 	{
-		show_status = settings->show_status;
 		statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
 		gnome_app_set_statusbar (GNOME_APP (mdi->active_window),
 					 GTK_WIDGET (statusbar));
 		gnome_app_install_menu_hints (GNOME_APP (mdi->active_window),
 					      gnome_mdi_get_menubar_info (mdi->active_window));
 		mdi->active_window->statusbar = statusbar;
-
 	}
 
 	if (mdi->active_window->statusbar->parent)

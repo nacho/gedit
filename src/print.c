@@ -163,7 +163,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 			selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		else
 			selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
-		
+
 		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
 							  GNOME_PRINT_RANGE_ALL |
@@ -198,6 +198,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		{
 			g_free (pji->buffer);
 			pji->buffer = gedit_document_get_chars (pji->doc, start_pos, end_pos);
+			g_return_if_fail (pji->buffer!=NULL);
 			pji->buffer_size = end_pos - start_pos;
 			pji->total_lines = print_determine_lines(pji, FALSE);
 			pji->total_lines_real = print_determine_lines(pji, TRUE);

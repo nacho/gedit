@@ -93,17 +93,19 @@ gedit_view_current (void)
 void
 gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 {
-	View *view;
+	View *view = gedit_view_current();
+	GnomeApp *app = gedit_window_active_app();
 
 	gedit_debug ("start", DEBUG_DOCUMENT);
 
-	view = gedit_view_current();
+	g_return_if_fail (app !=NULL);
 	g_return_if_fail (view!=NULL);
 		
 	gtk_widget_grab_focus (view->text);
 	gedit_document_set_title (view->doc);
-	gnome_app_install_menu_hints (gedit_window_active_app(),
-				      gnome_mdi_get_child_menu_info(gedit_window_active_app()));
+	gedit_debug ("install hints", DEBUG_DOCUMENT);
+	gnome_app_install_menu_hints (app,
+				      gnome_mdi_get_child_menu_info(app));
 
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }
@@ -793,6 +795,15 @@ gedit_view_get_selection (View *view, guint *start, guint *end)
 
 	start_pos = GTK_EDITABLE(view->text)->selection_start_pos;
         end_pos   = GTK_EDITABLE(view->text)->selection_end_pos;
+
+	/* The user can select from end to start also */
+	if (end_pos < start_pos)
+	{
+		guint swap_pos;
+		swap_pos  = end_pos;
+		end_pos   = start_pos;
+		start_pos = swap_pos;
+	}
 
 	if (start != NULL)
 		*start = start_pos;

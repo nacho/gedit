@@ -47,7 +47,7 @@ plugin_load (const gchar *file)
 
 	if (!(pd = g_new0 (PluginData, 1)))
 	{
-		g_print ("plugin allocation error");
+		g_warning ("plugin allocation error");
 		return NULL;
 	}
 	
@@ -56,8 +56,8 @@ plugin_load (const gchar *file)
 
 	if (!pd->handle)
 	{
-		g_print (_("Error, unable to open module file, %s"),
-			 g_module_error ());
+		g_warning (_("Error, unable to open module file, %s"),
+			   g_module_error ());
 		
 		g_free (pd);
 		return NULL;
@@ -67,18 +67,19 @@ plugin_load (const gchar *file)
 			      (gpointer*)&pd->init_plugin))
 	{
 		
-		g_print (_("Error, plugin does not contain init_plugin function."));
+		g_warning (_("Error, plugin does not contain init_plugin function."));
 		goto error;
 	}
 	
 	res = pd->init_plugin (pd);
 	if (res != PLUGIN_OK)
 	{
-		g_print (_("Error, init_plugin returned an error"));
+		g_warning (_("Error, init_plugin returned an error"));
 		goto error;
 	}
 	
 	plugin_list = g_slist_append (plugin_list, pd);
+
 	return pd;
 	
 error:
@@ -101,7 +102,7 @@ plugin_unload (PluginData *pd)
 	
 	if (pd->can_unload && !pd->can_unload (pd))
 	{
-		g_print (_("Error, plugin is still in use"));
+		g_warning (_("Error, plugin is still in use"));
 		return;
 	}
 	
