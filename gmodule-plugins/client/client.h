@@ -57,6 +57,12 @@ extern "C"
   selection_range client_document_get_selection_range( gint docid );
   gchar *client_text_get_selection_text( gint docid );
   void client_text_set_selection_text( gint docid, gchar *buffer, gint length );
+  void client_document_set_auto_indent( gint docid, gint auto_indent );
+  void client_document_set_status_bar( gint docid, gint status_bar );
+  void client_document_set_word_wrap( gint docid, gint word_wrap );
+  void client_document_set_read_only( gint docid, gint read_only );
+  void client_document_set_split_screen( gint docid, gint split_screen );
+  void client_document_set_scroll_ball( gint docid, gint scroll_ball );
 
 #ifdef __cplusplus
 }

@@ -311,3 +311,51 @@ void client_text_set_selection_text( gint docid, gchar *buffer, gint length )
   sendnumber( fdsend, docid );
   sendblock( fdsend, buffer, length );
 }
+
+void client_document_set_auto_indent( gint docid, gint auto_indent )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 'i', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, auto_indent );
+}
+
+void client_document_set_status_bar( gint docid, gint status_bar )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 'b', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, status_bar );
+}
+
+void client_document_set_word_wrap( gint docid, gint word_wrap )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 'w', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, word_wrap );
+}
+
+void client_document_set_read_only( gint docid, gint read_only )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 'r', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, read_only );
+}
+
+void client_document_set_split_screen( gint docid, gint split_screen )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 't', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, split_screen );
+}
+
+void client_document_set_scroll_ball( gint docid, gint scroll_ball )
+{
+  sendcommand( 't', fdsend );
+  sendcommand( 'r', fdsend );
+  sendnumber( fdsend, docid );
+  sendnumber( fdsend, scroll_ball );
+}
