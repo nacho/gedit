@@ -1,6 +1,6 @@
-/* diff.c - diff plugin.
+/* encrypt.c -- Rot13 encryption plugin
  *
- * Copyright (C) 1998 Chris Lahey.
+ * Copyright (C) 1998 Alex Roberts. 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 #include "client.h"
 
 static GtkWidget *entry1;
-static GtkWidget *entry2;
 static gint context;
 
 void call_diff( GtkWidget *widget, gpointer data );
@@ -57,18 +56,18 @@ int main( int argc, char *argv[] )
   GtkWidget *dialog;
   client_info info;
 
-  info.menu_location = "[Plugins]Diff";
+  info.menu_location = "[Plugins]Decrypt";
 
   context = client_init( &argc, &argv, &info );
   
   gtk_init( &argc, &argv );
 
   dialog = gtk_dialog_new();
-  gtk_window_set_title( GTK_WINDOW( dialog ), "Choose files to diff" );
+  gtk_window_set_title( GTK_WINDOW( dialog ), "Choose file to decrypt" );
   gtk_signal_connect( GTK_OBJECT( dialog ), "destroy", gtk_main_quit, NULL );
   gtk_container_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
 
-  label = gtk_label_new( "Choose files to diff:" );
+  label = gtk_label_new( "Choose file to decrypt:" );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->vbox ), label, FALSE, FALSE, 0 );
 
   hbox = gtk_hbox_new( FALSE, 0 );
@@ -81,14 +80,7 @@ int main( int argc, char *argv[] )
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( open_file_sel ), entry1 );
   gtk_box_pack_start( GTK_BOX( hbox ), button, FALSE, FALSE, 0 );
   
-  entry2 = gtk_entry_new();
-  gtk_box_pack_start( GTK_BOX( hbox ), entry2, TRUE, TRUE, 0 );
-
-  button = gtk_button_new_with_label( "Browse..." );
-  gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( open_file_sel ), entry2 );
-  gtk_box_pack_start( GTK_BOX( hbox ), button, FALSE, FALSE, 0 );
-
-  button = gtk_button_new_with_label( "Calculate Diff" );
+  button = gtk_button_new_with_label( "Decrypt" );
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( call_diff ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
@@ -108,12 +100,13 @@ void call_diff( GtkWidget *widget, gpointer data )
   char buff[1025];
   int fdpipe[2];
   int pid;
-  char *filenames[2] = { NULL, NULL };
+  char filename[255];
   int docid;
   int length;
+  char exec[255];
 
-  filenames[0] = gtk_entry_get_text( GTK_ENTRY( entry1 ) );
-  filenames[1] = gtk_entry_get_text( GTK_ENTRY( entry2 ) );
+  strcpy(filename, gtk_entry_get_text(GTK_ENTRY(entry1)));
+
 
   if( pipe( fdpipe ) == -1 )
     {
@@ -124,24 +117,29 @@ void call_diff( GtkWidget *widget, gpointer data )
   if ( pid == 0 )
     {
       /* New process. */
-      char *argv[4];
+      /*char *argv[2];*/
 
       close( 1 );
       dup( fdpipe[1] );
       close( fdpipe[0] );
       close( fdpipe[1] );
       
-      argv[0] = g_strdup( "diff" );
-      argv[1] = filenames[0];
-      argv[2] = filenames[1];
-      argv[3] = NULL;
-      execv( "/usr/bin/diff", argv );
+      /*argv[0] = g_strdup( "rot13 <" );
+      argv[0] = filename[0];
+      argv[1] = NULL;*/
+      strcpy(exec, "");
+      strcpy(exec, "caesar < ");
+      strcat(exec, filename);
+      /*execv( "rot13 < /usr/src/gnome/gnome-utils/gedit/INSTALL");*/
+      /*system (exec);*/
+
+      system(exec);
       /* This is only reached if something goes wrong. */
       _exit( 1 );
     }
   close( fdpipe[1] );
 
-  docid = client_document_new( context, "difference" );
+  docid = client_document_new( context, "Encryption" );
   
   length = 1;
   while( length > 0 )

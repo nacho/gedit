@@ -34,6 +34,9 @@
 #include "gE_print.h"
 #include "gE_document.h"
 
+GtkWidget *print_dialog;
+GtkWidget *print_cmd_entry;
+
 void print_destroy(GtkWidget *widget, gpointer data)
 {
     gtk_widget_destroy( print_dialog );
