@@ -8,16 +8,10 @@
 #include <config.h> 
 #include <gnome.h>
 
-/*
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
-*/
-
-#include "../../src/gedit-window.h"
-#include "../../src/gedit-document.h"
-#include "../../src/gE_view.h"
-#include "../../src/gedit-plugin.h"
+#include "../../src/window.h"
+#include "../../src/document.h"
+#include "../../src/view.h"
+#include "../../src/plugin.h"
 
 
 /* first the gE_plugin centric code */

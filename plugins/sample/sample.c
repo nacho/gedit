@@ -8,15 +8,14 @@
 #include <gnome.h>
 #include <config.h>
 
-#include "../../src/gedit-window.h"
-#include "../../src/gedit-document.h"
-#include "../../src/gE_view.h"
-#include "../../src/gedit-plugin.h"
+#include "../../src/window.h"
+#include "../../src/document.h"
+#include "../../src/view.h"
+#include "../../src/plugin.h"
 
 
-/* first the gE_plugin centric code */
-
-static void destroy_plugin (PluginData *pd)
+static void
+destroy_plugin (PluginData *pd)
 {
 	g_free (pd->name);
 }
@@ -40,9 +39,10 @@ insert_hello (void)
 }
 	
 
-gint init_plugin (PluginData *pd)
+gint
+init_plugin (PluginData *pd)
 {
-	/* initialise */
+	/* initialize */
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");

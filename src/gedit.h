@@ -1,5 +1,5 @@
 /* 
- * gEdit
+ * gedit
  * Copyright (C) 1998, 1999 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #ifndef __GEDIT_H__
 #define __GEDIT_H__
 
-#define GEDIT_ID	"gEdit "VERSION
+#define GEDIT_ID	"gedit "VERSION
 
 typedef struct _gedit_data gedit_data;
 

@@ -1,6 +1,6 @@
 /* vi:set ts=8 sts=0 sw=8:
  *
- * gEdit
+ * gedit
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -93,5 +93,6 @@ extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 /* Functions needed to be made external for the plugins api */
 extern void close_doc_execute (Document *opt_doc, gpointer cbdata);
 
+void tab_pos (GtkPositionType pos);
 
 #endif /* __COMMANDS_H__ */

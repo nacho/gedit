@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
- * gEdit
+ * gedit
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,15 +29,15 @@
 #include <time.h>
 #include <signal.h>
 
-#include "gedit-window.h"
+#include "window.h"
 #include "gedit.h"
-#include "gE_view.h"
+#include "view.h"
 #include "commands.h"
-#include "gedit-document.h"
-#include "gE_prefs.h"
-#include "gedit-file-io.h"
-#include "gedit-search.h"
-#include "gedit-utils.h"
+#include "document.h"
+#include "prefs.h"
+#include "file.h"
+#include "search.h"
+#include "utils.h"
 
 
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
@@ -524,7 +524,7 @@ recent_update (GnomeApp *app)
 		{
 			histentry = g_list_nth_data (gnome_recent_list, i);
 	     
-			if (strcmp ("gEdit", histentry->creator) == 0)
+			if (strcmp ("gedit", histentry->creator) == 0)
 			{
 				/* This is to make sure you don't have more than one
 				   file of the same name in the recent list
@@ -674,7 +674,7 @@ recent_add (char *filename)
 	g_return_if_fail (filename != NULL);
 
 	gnome_history_recently_used (filename, "text/plain",
-				     "gEdit", "gEdit document");
+				     "gedit", "gedit document");
 }
 
 void

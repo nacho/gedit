@@ -3,15 +3,15 @@ Known bugs in the current version of gEdit (as of April/2000):
 	* if you ./configure --prefix to somewhere other than
           gnome-config --prefix, then the plugins won't be recognized.
 
-	* Should add version checking into configure.in such that it
+Done	* Should add version checking into configure.in such that it
           will warn the user if they don't have the latest glib/gtk or
           gnome-libs
       
-	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
+Fixed	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
           try to do "Open (swap) .c/.h file" for something that does
           not have a file that's .c/.h to swap with.
 
-	* Crash: Change your preferences to enable "Close Window After
+Fixed	* Crash: Change your preferences to enable "Close Window After
 	  Closing Last", then close all window tabs, then try to
 	  go to the Preferences.
 	
@@ -51,9 +51,8 @@ Known bugs in the current version of gEdit (as of April/2000):
 PLUG-INS :
 	Plug-ins seem are a bit unstable at the moment :
 
-	* If you launch a plugin that starts a new document, then close
+????	* If you launch a plugin that starts a new document, then close
 	  the document while it's still writing to it, it will seg fault
 	  with a broken pipe error..
 	  
-	* Get gmodules to build
-
+Done	* Get gmodules to build

@@ -47,7 +47,7 @@ dnl AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LI
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
 ALL_LINGUAS="cs da de el es fr ga gl hu it ja ko lt nl no pl pt pt_BR ru sv tr uk wa zh_TW.Big5 zh_CN.GB2312"
-AM_GNU_GETTEXT
+AM_GNOME_GETTEXT
 
 dnl ******************************
 dnl GnomePrint checking
@@ -66,6 +66,22 @@ else
 fi
 
 dnl ******************************
+dnl LibGlade checking
+dnl ******************************
+AC_MSG_CHECKING(for Glade libraries >= 0.11)
+if gnome-config --libs libglade > /dev/null 2>&1; then 
+    vers=`gnome-config --modversion libglade | awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
+    if test "$vers" -ge 11; then
+        AC_MSG_RESULT(found)
+    else
+        AC_MSG_ERROR(You need at least libglade 0.11 for this version of gedit)
+    fi
+else
+    AC_MSG_ERROR(Did not find libGlade installed)
+fi
+
+
+dnl ******************************
 dnl gtk+ checking
 dnl ******************************
 AC_MSG_CHECKING(for GTK >= 1.2.7)
@@ -75,16 +91,32 @@ if gtk-config --version > /dev/null 2>&1; then
     if test "$vers" -ge 1002007; then
         AC_MSG_RESULT(found)
     else
-        AC_MSG_ERROR(You need at least GTK+ 1.2.7 for this version of GEdit)
+        AC_MSG_ERROR(You need at least GTK+ 1.2.7 for this version of gedit)
     fi
 else
     AC_MSG_ERROR(Did not find GTK+ installed)
 fi
 
-GNOME_PRINT_LIBS=`gnome-config --libs print`
-GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
-AC_SUBST(GNOME_PRINT_LIBS)
-AC_SUBST(GNOME_PRINT_CFLAGS)
+
+dnl ******************************
+dnl gnome-libs checking
+dnl ******************************
+AC_MSG_CHECKING(for gnome-libs > 1.0.56)
+if gnome-config --version > /dev/null 2>&1; then
+   vers=`gnome-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+   if test "$vers" -ge 56; then
+      AC_MSG_RESULT(found)
+   else
+      AC_MSG_ERROR(You need at least gnome-libs 1.0.56 for this version of gedit)
+   fi
+else
+   AC_MSG_ERROR(Did not find gnome-libs installed)
+fi
+
+EXTRA_GNOME_LIBS=`gnome-config --libs print libglade`
+EXTRA_GNOME_CFLAGS=`gnome-config --cflags print libglade`
+AC_SUBST(EXTRA_GNOME_LIBS)
+AC_SUBST(EXTRA_GNOME_CFLAGS)
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
@@ -105,6 +137,7 @@ plugins/email/Makefile
 plugins/sample/Makefile
 plugins/time/Makefile
 src/Makefile
+src/dialogs/Makefile
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
 
 

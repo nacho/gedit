@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* gEdit
+/* gedit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
@@ -19,22 +19,21 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <glade/glade.h>
 
-#include "gedit-window.h"
+#include "window.h"
 #include "gedit.h"
 #include "commands.h"
-#include "gedit-document.h"
-#include "gE_prefs.h"
-#include "gedit-file-io.h"
-#include "gedit-menus.h"
-#include "gedit-plugin.h"
+#include "document.h"
+#include "prefs.h"
+#include "file.h"
+#include "menus.h"
+#include "plugin.h"
 
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
 #endif
-
-gedit_preference *settings;
 
 static const struct poptOption options[] =
 {
@@ -52,14 +51,15 @@ CORBA_Object name_service;
 void
 corba_exception (CORBA_Environment* ev)
 {
-	switch (ev->_major) {
+	switch (ev->_major)
+	{
 	case CORBA_SYSTEM_EXCEPTION:
-		g_log ("GEdit CORBA", G_LOG_LEVEL_DEBUG,
+		g_log ("gedit CORBA", G_LOG_LEVEL_DEBUG,
 		       "CORBA system exception %s.\n",
 		       CORBA_exception_id (ev));
 		break;
 	case CORBA_USER_EXCEPTION:
-		g_log ("GEdit CORBA", G_LOG_LEVEL_DEBUG,
+		g_log ("gedit CORBA", G_LOG_LEVEL_DEBUG,
 		       "CORBA user exception: %s.\n",
 		       CORBA_exception_id (ev));
 		break;
@@ -73,27 +73,23 @@ corba_exception (CORBA_Environment* ev)
 int
 main (int argc, char **argv)
 {
-	Document *doc;
-/*
-	gedit_window *window;
-	gedit_data *data;
-*/
 	char **args;
 	poptContext ctx;
 	int i;
 	GtkWidget *dummy_widget;
 	GList *file_list = NULL;
+	Document *doc;
 
+	/* Initialize i18n */
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
-
 
 #ifdef HAVE_LIBGNORBA
 
 	global_ev = g_new0 (CORBA_Environment, 1);
 
 	CORBA_exception_init (global_ev);
-	global_orb = gnome_CORBA_init ("gEdit", VERSION, &argc, argv,
+	global_orb = gnome_CORBA_init ("gedit", VERSION, &argc, argv,
 				       options, 0, &ctx, global_ev);
 	corba_exception (global_ev);
 	
@@ -111,7 +107,7 @@ main (int argc, char **argv)
 	name_service = gnome_name_service_get ();
 
 #else
-	gnome_init_with_popt_table ("gEdit", VERSION, argc, argv, options, 0, &ctx);
+	gnome_init_with_popt_table ("gedit", VERSION, argc, argv, options, 0, &ctx);
 #endif /* HAVE_LIBGNORBA */
 
 	/* Determine we use fonts or fontsets. If a fontset is supplied
@@ -123,7 +119,6 @@ main (int argc, char **argv)
 		use_fontset = TRUE;
 	gtk_widget_destroy (dummy_widget);
 
-
 	args = (char**) poptGetArgs(ctx);
 
 	for (i = 0; args && args[i]; i++)
@@ -132,43 +127,14 @@ main (int argc, char **argv)
 	poptFreeContext (ctx);
 	
 	/*data = g_malloc (sizeof (gedit_data));*/
-	settings = g_malloc (sizeof (gedit_preference));
-	
-	settings->num_recent = 0;
 
-	mdi = GNOME_MDI (gnome_mdi_new ("gEdit", GEDIT_ID));
-	mdi->tab_pos = GTK_POS_TOP;
-
-	gnome_mdi_set_menubar_template (mdi, gedit_menu);
-	gnome_mdi_set_toolbar_template (mdi, toolbar_data);
-	
-	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
-	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
-	
-	/* Init plugins... */
+	/* Init plugins */
 	gedit_plugins_init ();
+
+	gedit_mdi_init ();
 	
-	/* new plugins system init will be here */
-	/* connect signals -- FIXME -- We'll do the rest later */
-
-	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
-			    GTK_SIGNAL_FUNC (remove_doc_cb), NULL);
-
-	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
-			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
-
-	gtk_signal_connect (GTK_OBJECT (mdi), "child_changed",
-			    GTK_SIGNAL_FUNC (child_switch), NULL);
-
-        gtk_signal_connect (GTK_OBJECT (mdi), "app_created",
-			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
-
-/*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
-/*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
-/*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
-
 	gedit_load_settings ();
-	gnome_mdi_set_mode (mdi, mdiMode);	
+
 	gnome_mdi_open_toplevel (mdi);
 
 	doc = gedit_document_new ();
@@ -205,8 +171,9 @@ main (int argc, char **argv)
 		}
 	}
 	
-	/*g_free (data);*/
 	
+	glade_gnome_init ();
+
 	gtk_main ();
 	return 0;
 }

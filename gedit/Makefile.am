@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = dialogs
+
 INCLUDES = \
 	-I$(includedir) 				\
 	-I$(top_srcdir) 				\
@@ -8,14 +10,7 @@ INCLUDES = \
 	-I$(top_srcdir)/intl 				\
 	-I$(top_builddir)/intl 				\
 	$(GNOME_INCLUDEDIR) 				\
-	$(GNOME_PRINT_CFLAGS)
-
-## This need to be two distinct directories
-plugindir = $(libexecdir)/go/plugins
-pluginlibdir = $(libexecdir)/gedit/plugins
-geditincludedir = $(includedir)/gedit
-
-EXTRA_gedit_SOURCES = gE_plugin.h gE_plugin.c
+	$(EXTRA_GNOME_CFLAGS)
 
 if HAVE_ORBIT
 corba_libs = @ORBIT_LIBS@
@@ -31,40 +26,39 @@ gedit_SOURCES = 		\
 	gedit.c			\
 	commands.c		\
 	commands.h		\
-	gedit-window.c 		\
-	gedit-window.h 		\
-	gE_view.c		\
-	gE_view.h		\
-	gedit-document.c	\
-	gedit-document.h	\
-	gedit-undo.c 		\
-	gedit-undo.h 		\
-	gedit-file-io.c 	\
-	gedit-file-io.h 	\
-	gedit-utils.c 		\
-	gedit-utils.h 		\
-	gE_prefs.c		\
-	gE_prefs.h		\
-	gE_prefs_box.c		\
-	gE_prefs_box.h		\
-	gedit-about.c 		\
-	gedit-about.h 		\
-	gedit-print.c 		\
-	gedit-print.h 		\
-	gedit-plugin.c 		\
-	gedit-plugin.h 		\
+	window.c 		\
+	window.h 		\
+	view.c			\
+	view.h			\
+	document.c		\
+	document.h		\
+	undo.c 			\
+	undo.h	 		\
+	file.c 			\
+	file.h		 	\
+	utils.c 		\
+	utils.h 		\
+	prefs.c			\
+	prefs.h			\
+	about.c 		\
+	about.h 		\
+	print.c 		\
+	print.h 		\
+	plugin.c 		\
+	plugin.h 		\
 	gedit.h			\
-	gedit-menus.c 		\
-	gedit-menus.h 		\
-	gedit-search.c 		\
-	gedit-search.h
+	menus.c 		\
+	menus.h 		\
+	search.c 		\
+	search.h
 
-gedit_LDADD = \
-	$(GNOME_LIBDIR) \
-	$(GNOMEUI_LIBS) \
-	$(corba_libs) \
-	$(libgnorba_libs) \
-	$(INTLLIBS) \
-	$(GNOME_PRINT_LIBS)
+gedit_LDADD = 			\
+	dialogs/libdialogs.a	\
+	$(GNOME_LIBDIR) 	\
+	$(GNOMEUI_LIBS) 	\
+	$(corba_libs) 		\
+	$(libgnorba_libs) 	\
+	$(INTLLIBS) 		\
+	$(EXTRA_GNOME_LIBS)
 
 EXTRA_DIST = 
