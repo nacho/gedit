@@ -27,6 +27,7 @@ gedit_SOURCES = 	\
 	plugin.c        \
 	gE_plugin_api.c	\
 	gE_print.c \
+	gE_print.h \
 	gE_prefs.h	\
 	main.h		\
 	toolbar.h	\
