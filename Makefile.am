@@ -1,26 +1,8 @@
-## Process this file with automake to produce Makefile.in
+## This is a generated file.  Please see plugins.pl.
+plugindir = $(libexecdir)/go/plugins
 
-plugindir = $(libdir)/go/plugins
+plugin_PROGRAMS =
 
-SUBDIRS = macros po intl src editor-plugins gmodule-plugins
+INCLUDES = $(GTK_CFLAGS) -Wall $(GNOME_INCLUDEDIR)
+CPPFLAGS = -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins			\
-	INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop	\
-	ABOUT-NLS TODO gedit.spec gedit.keys
-
-man_MANS = gedit.1
-
-sysdir   = $(datadir)/apps/Applications
-sys_DATA = gedit.desktop
-
-mimedir = $(datadir)/mime-info
-mime_DATA = gedit.keys
-
-dist-hook:
-	mkdir $(distdir)/xpm
-	cp $(srcdir)/xpm/*.xpm $(distdir)/xpm
-
-## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
-@MAINT@include macros/macros.dep
-@MAINT@macros/macros.dep: macros/Makefile.am
-@MAINT@	cd macros && $(MAKE) macros.dep

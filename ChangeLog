@@ -1,3 +1,14 @@
+1999-02-13 (01:49) Alex Roberts  <bse@dial.pipex.com>
+
+	* plugin.c: Figured why custom plugins weren't working properly..
+	  plugin_query() was being called, which called 
+	  custom_plugin_new_with_query and had PLUGINDIR as the path..
+	  plugin_query now calls that custom_plugin function with "" as the 
+	  path, and when a plugin is added the full path is included in the
+	  plugin_name.. not just the file name.. 
+	  It fully works now.. been getting annoyed with this for the past
+	  fortnight! Argh!
+
 1999-02-05  Alex Roberts  <bse@dial.pipex.com>
 
 	* plugin.[ch]: Added custom_* for plugins in places other
