@@ -300,6 +300,7 @@ setup_editor_page (GeditPreferencesDialog *dlg)
 	gboolean auto_save;
 	gint undo_levels;
 	gboolean can_set;
+	gint auto_save_interval;
 
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -319,8 +320,13 @@ setup_editor_page (GeditPreferencesDialog *dlg)
 	auto_save = gedit_prefs_manager_get_auto_save ();
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->auto_save_checkbutton),
 				      auto_save );
+
+	auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
+	if (auto_save_interval <= 0)
+		auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
+
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->auto_save_spinbutton),
-				   gedit_prefs_manager_get_auto_save_interval ());
+				   auto_save_interval);
 
 	undo_levels = gedit_prefs_manager_get_undo_actions_limit ();
 	
