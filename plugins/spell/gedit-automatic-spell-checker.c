@@ -585,8 +585,7 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 	spell->tag_highlight = gtk_text_buffer_create_tag (
 				GTK_TEXT_BUFFER (doc),
 				"gtkspell-misspelled",
-				"foreground", "red", 
-				"underline", PANGO_UNDERLINE_SINGLE,
+				"underline", PANGO_UNDERLINE_ERROR,
 				NULL);
 
 	gtk_text_tag_set_priority (spell->tag_highlight, 0);
