@@ -245,7 +245,7 @@ gE_document *gE_document_new(gE_window *window)
 {
 	gE_document *document;
 	GtkWidget *table, *hscrollbar, *vscrollbar;
-	/*GtkStyle *style;*/
+	GtkStyle *style;
 
 
 	document = g_malloc0(sizeof(gE_document));
@@ -280,12 +280,12 @@ gE_document *gE_document_new(gE_window *window)
 
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
-/*	style = gtk_style_new ();
-	style->bg[GTK_STATE_NORMAL] = style->white;
+	style = gtk_style_new ();
+/*	style->bg[GTK_STATE_NORMAL] = style->white;*/
 	style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
-	gtk_widget_set_style (GTK_TEXT(document->text), style);*/
+	gtk_widget_set_style (GTK_TEXT(document->text), style);
         /*style = gtk_style_attach (style, document->window);*/
-	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
+	gtk_widget_set_rc_style(GTK_TEXT(document->text));
 
 
 	document->changed = FALSE;
