@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-21 20:01+0100\n"
+"POT-Creation-Date: 2005-01-12 00:20+0100\n"
 "PO-Revision-Date: 2004-08-20 14:19+0300\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Просмотр в программе Gedit."
 msgid "Gedit viewer factory"
 msgstr "Фабрика режима просмотра \"gedit\""
 
-#: data/GNOME_Gedit.server.in.in.h:4
+#: data/GNOME_Gedit.server.in.in.h:4 plugins/taglist/HTML.tags.xml.in.h:211
 msgid "Source"
 msgstr "Исходный текст"
 
@@ -165,6 +165,14 @@ msgid "Header Font for Printing"
 msgstr "Шрифт заголовка для печати"
 
 #: data/gedit.schemas.in.h:22
+msgid "Highlight Current Line"
+msgstr ""
+
+#: data/gedit.schemas.in.h:23
+msgid "Highlight Matching Bracket"
+msgstr ""
+
+#: data/gedit.schemas.in.h:24
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -173,25 +181,25 @@ msgstr ""
 "Если значение установлено в 0, номера строк не будут вставлены при печати "
 "документа. Иначе номера строк будут печататься для каждой строки."
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:25
 msgid "Insert spaces"
 msgstr "Вставлять пробелы"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:26
 msgid "Line Number Font for Printing"
 msgstr "Шрифт номера строк для печати"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:27
 msgid "Line Wrapping Mode"
 msgstr "Режим переноса строк"
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:28
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:29
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -199,28 +207,28 @@ msgstr ""
 "Список кодировок, отображаемый в меню \"Кодировка символов\" диалога выбора "
 "файлов. Используются только распознаваемые кодировки."
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:30
 msgid "Maximum Recent Files"
 msgstr "Максимальное число последних файлов"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Максимальное число действий, которые можно отменить или вернуть."
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 #, fuzzy
 msgid "Monospace 9"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -229,53 +237,53 @@ msgstr ""
 "сохранены. Будет иметь эффект, только если параметр \"Автосохранение\" "
 "включен."
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
 msgid "Print Header"
 msgstr "Печатать заголовки страниц"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:37
 msgid "Print Line Numbers"
 msgstr "Печатать номера строк"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:38
 msgid "Print Syntax Highlighting"
 msgstr "Печатать подсветку синтаксиса"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:39
 msgid "Printing Line Wrapping Mode"
 msgstr "Режим переноса строк при печати"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:40
 msgid "Right Margin Position"
 msgstr "Положение правой границы"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:41
 #, fuzzy
 msgid "Sans 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:42
 #, fuzzy
 msgid "Sans 8"
 msgstr "Испанский"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:43
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:44
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:45
 msgid "Selected Text Color"
 msgstr "Цвет выделенного текста"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:46
 msgid "Selection Color"
 msgstr "Цвет выделения"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -285,7 +293,7 @@ msgstr ""
 "файла. \"ТЕКУЩАЯ\" -- это кодировка локали. Используются только "
 "распознаваемые кодировки."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:48
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -298,7 +306,7 @@ msgstr ""
 "границе слов, и \"GTK_WRAP_CHAR\" для посимвольного переноса. Имейте в виду, "
 "что значения регистрозависимы и должны появляться точно в указанном виде."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:49
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -312,19 +320,19 @@ msgstr ""
 "Имейте в виду, что значения регистрозависимы и должны появляться точно в "
 "указанном виде."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Определяет шрифт, используемый при печати тела документов."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:51
 #, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr "Определяет шрифт, используемый при печати тела документов."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -332,7 +340,7 @@ msgstr ""
 "Определяет шрифт, используемый при печати номеров строк. Будет иметь эффект, "
 "только если параметр \"Печатать номера строк\" включен."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:53
 #, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
@@ -342,7 +350,7 @@ msgstr ""
 "Определяет шрифт, используемый при печати номеров строк. Будет иметь эффект, "
 "только если параметр \"Печатать номера строк\" включен."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:54
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -350,7 +358,7 @@ msgstr ""
 "Определяет шрифт, используемый при печати заголовков. Будет иметь эффект, "
 "только если параметр \"Печатать заголовки страниц\" включен."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:55
 #, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
@@ -360,7 +368,7 @@ msgstr ""
 "Определяет шрифт, используемый при печати заголовков. Будет иметь эффект, "
 "только если параметр \"Печатать заголовки страниц\" включен."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:56
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -368,7 +376,7 @@ msgstr ""
 "Определяет число недавно использованных файлов, которые будут отображаться в "
 "подменю \"Открыть последние файлы\"."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:57
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -376,15 +384,15 @@ msgstr ""
 "Определяет число пробелов, которые следует отображать вместо символа "
 "табуляции."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:58
 msgid "Specifies the position of the right margin."
 msgstr "Указывает положение правой границы."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:59
 msgid "Status Bar is Visible"
 msgstr "Видимость строки состояния"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:60
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -401,35 +409,35 @@ msgstr ""
 "Имейте в виду, что значения регистрозависимы и должны появляться точно в "
 "указанном виде."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:61
 msgid "Tab Size"
 msgstr "Размер табуляции"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:62
 msgid "Text Color"
 msgstr "Цвет текста"
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:63
 msgid "Toolbar Buttons Style"
 msgstr "Стиль кнопок панели инструментов"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:64
 msgid "Toolbar is Visible"
 msgstr "Панель инструментов видима"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:65
 msgid "Undo Actions Limit"
 msgstr "Лимит операций отмены"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:66
 msgid "Use Default Colors"
 msgstr "Использовать цвета по умолчанию"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:67
 msgid "Use Default Font"
 msgstr "Использовать шрифт по умолчанию"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -439,7 +447,7 @@ msgstr ""
 "времени. Интервал между сохранениями устанавливается параметром \"Интервал "
 "автосохранения\"."
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -447,44 +455,54 @@ msgstr ""
 "Следует ли создавать резервные копии сохраняемых файлов. Расширение имен "
 "резервных файлов устанавливается параметром \"Расширение резервных файлов\"."
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:70
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Следует ли отображать номера строк в области редактирования."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:71
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Следует ли отображать правую границу в области редактирования."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:72
 msgid "Whether gedit should enable auto indentation."
 msgstr "Следует ли автоматически расставлять отступы."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:73
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Следует ли включить подсветку синтаксиса."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:74
+#, fuzzy
+msgid "Whether gedit should highlight matching bracket."
+msgstr "Следует ли включить подсветку синтаксиса."
+
+#: data/gedit.schemas.in.h:75
+#, fuzzy
+msgid "Whether gedit should highlight the current line."
+msgstr "Следует ли печатать подсветку синтаксиса при печати документа."
+
+#: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Следует ли печатать заголовок документа."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:77
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Следует ли вставлять пробелы вместо табуляций."
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:78
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Следует ли печатать подсветку синтаксиса при печати документа."
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:79
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Будет ли видна строка состояния окна редактирования."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:80
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Будет ли панель инструментов видна в окне редактирования."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:81
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -496,7 +514,7 @@ msgstr ""
 "цвета, определенные в параметрах \"Цвет фона\", \"Цвет текста\", \"Цвет "
 "выделенного текста\" и \"Цвет выделения\"."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:82
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -508,14 +526,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:85
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:89
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,KOI8R,WINDOWS-1251,ISO-8859-5]"
 
@@ -524,34 +542,10 @@ msgstr "[UTF-8,CURRENT,KOI8R,WINDOWS-1251,ISO-8859-5]"
 msgid "Activate %s"
 msgstr "Активировать %s"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">У вас X документов с несохраненными "
-"изменениями. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "Если вы не сохраните документы, все изменения будут утеряны."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:663
-msgid "S_elect the documents you want to save:"
-msgstr "_Выберите документы, которые вы хотите сохранить:"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_Ничего не сохранять"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "Со_хранить выделенные"
-
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-msgid "Do_n't save"
-msgstr "_Не сохранить"
+#, fuzzy
+msgid "Close _without Saving"
+msgstr "Закрыть окно вывода"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -652,7 +646,7 @@ msgstr[2] ""
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Сохранить изменения в документе \"%s\" перед закрытием?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:646
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -667,8 +661,13 @@ msgstr[2] ""
 "%d документов имеют несохраненные изменения. Сохранить изменения перед "
 "закрытием?"
 
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/close_all_dialog.glade2.h:3
+msgid "S_elect the documents you want to save:"
+msgstr "_Выберите документы, которые вы хотите сохранить:"
+
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Если вы не сохраните, все изменения будут безвозвратно утрачены."
 
@@ -696,7 +695,7 @@ msgid "Replace _All"
 msgstr "Заменить вс_е"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:266
 msgid "_Replace"
 msgstr "_Заменить"
 
@@ -773,31 +772,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Выбранный файл не является исполняемым."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:685
+#: gedit/dialogs/gedit-preferences-dialog.c:730
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Нажмите эту кнопку для выбора шрифта, используемого редактором"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:687
+#: gedit/dialogs/gedit-preferences-dialog.c:732
 msgid "Push this button to configure text color"
 msgstr "Нажмите эту кнопку для выбора цвета текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:689
+#: gedit/dialogs/gedit-preferences-dialog.c:734
 msgid "Push this button to configure background color"
 msgstr "Нажмите эту кнопку для выбора цвета фона"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:691
+#: gedit/dialogs/gedit-preferences-dialog.c:736
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Нажмите эту кнопку для выбора цвета выделенного текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:694
+#: gedit/dialogs/gedit-preferences-dialog.c:739
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Нажмите эту кнопку для выбора цвета отметки выделенного текста"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1144
+#: gedit/dialogs/gedit-preferences-dialog.c:1189
 msgid "Elements"
 msgstr "Элементов"
 
@@ -813,208 +812,232 @@ msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Автоматический отступ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
+#, fuzzy
+msgid "<b>Bracket Matching</b>"
+msgstr "<b>Перенос текста</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+#, fuzzy
+msgid "<b>Current Line</b>"
+msgstr "<b>Перенос текста</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
 msgstr "<b>Элементы</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:4
+#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<b>File Saving</b>"
 msgstr "<b>Сохранение файлов</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:5
+#: gedit/dialogs/gedit-preferences.glade2.h:7
 msgid "<b>Font</b>"
 msgstr "<b>Шрифт</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:6
+#: gedit/dialogs/gedit-preferences.glade2.h:8
 #: gedit/dialogs/page-setup-dialog.glade2.h:2
 msgid "<b>Line Numbers</b>"
 msgstr "<b>Номера строк</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:7
+#: gedit/dialogs/gedit-preferences.glade2.h:9
 msgid "<b>Right Margin</b>"
 msgstr "<b>Правая граница</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:8
+#: gedit/dialogs/gedit-preferences.glade2.h:10
 #, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Вкладки</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:9
+#: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Перенос текста</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:10
+#: gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "<b>Undo</b>"
 msgstr "<b>Отмена</b>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:11
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Цвета</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:12
+#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Жирный"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:13
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 msgid "Create a _backup copy of files before saving"
 msgstr "Создавать _резервную копию файла перед сохранением"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "D_isplay right margin"
 msgstr "_Отображать правую границу"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Не _разрывать слово между двумя строками"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:16
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor"
 msgstr "Редактор"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Editor _font: "
 msgstr "_Шрифт редактора: "
 
-#: gedit/dialogs/gedit-preferences.glade2.h:18
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Включить режим _переноса текста"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:19
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Font & Colors"
 msgstr "Шрифты и цвета"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:22
+msgid "Hi_ghlight current line"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
 msgstr "_Режим подсветки:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:24
+msgid "Highlight matching bracket"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
 msgstr "Вставлять про_белы вместо табуляций"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Italic"
 msgstr "Курсив"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Normal _text color:"
 msgstr "Цвет обычного _текста:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick a color"
 msgstr "Выберите цвет"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the background color"
 msgstr "Выберите цвет фона"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the editor font"
 msgstr "Выберите цвет редактора"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the normal text color"
 msgstr "Выберите цвет обычного текста"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selected text color"
 msgstr "Выберите цвет выделенного текста"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Pick the selection color"
 msgstr "Выберите цвет выделения"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
+#: gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Plugins"
 msgstr "Модули"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:31
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Preferences"
 msgstr "Параметры"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:32
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Se_lection color:"
 msgstr "Цвет _выделения:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Selecte_d text color:"
 msgstr "Цвет выделенного т_екста:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Strikethrough"
 msgstr "Перечеркнутый"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "Syntax Highlighting"
 msgstr "Подсветка синтаксиса"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "U_se default theme colors"
 msgstr "Использовать _исходный набор цветов"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "Underline"
 msgstr "Подчеркнутый"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:38
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "View"
 msgstr "Вид"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Autosave files every"
 msgstr "_Автоматически сохранять файлы каждые"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:40
+#: gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background color:"
 msgstr "Цвет _фона:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:41
+#: gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Background:"
 msgstr "_Фон:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:42
+#: gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Display line numbers"
 msgstr "По_казывать номера строк"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:47
 #, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Включить автоматическую расстановку _отступов"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Enable syntax highlighting"
 msgstr "_Включить подсветку синтаксиса"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Foreground:"
 msgstr "_Передний план:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Limit to"
 msgstr "_Ограничиить до"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Reset to Default "
 msgstr "По _умолчанию "
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Right margin at column:"
 msgstr "П_равая граница у столбца:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
+#: gedit/dialogs/gedit-preferences.glade2.h:53
+#, fuzzy
+msgid "_Tab width:"
+msgstr "_Ширина вкладок:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
 msgstr "_Неограниченная отмена"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:50
+#: gedit/dialogs/gedit-preferences.glade2.h:55
 msgid "_Use default theme font"
 msgstr "Использовать ис_ходный шрифт темы"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:56
 msgid "_minutes"
 msgstr "_минут"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:57
 msgid "act_ions"
 msgstr "_действий"
 
@@ -1152,16 +1175,40 @@ msgstr "Введите _адрес (URI) файла, который необхо
 msgid "Open from URI"
 msgstr "Открыть из идентификатора (URI)"
 
+#: gedit/dialogs/close_all_dialog.glade2.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+"changes. </span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">У вас X документов с несохраненными "
+"изменениями. </span>"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:2
+msgid "If you don't save your documents, all your changes will be lost."
+msgstr "Если вы не сохраните документы, все изменения будут утеряны."
+
+#: gedit/dialogs/close_all_dialog.glade2.h:4
+msgid "Save _None"
+msgstr "_Ничего не сохранять"
+
+#: gedit/dialogs/close_all_dialog.glade2.h:5
+msgid "_Save Selected"
+msgstr "Со_хранить выделенные"
+
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit - это маленький и легкий редактор текстов для среды Гном"
 
-#: gedit/gedit-commands.c:570
-msgid "gedit"
-msgstr "Редактор \"gedit\""
-
-#: gedit/gedit-commands.c:577
-msgid "translator_credits"
+#. Translators: This is a special message that shouldn't be translated
+#. literally. It is used in the about box to give credits to
+#. the translators.
+#. Thus, you should translate it to your name and email address.
+#. You can also include other translators who have contributed to
+#. this translation; in that case, please write them on separate
+#. lines seperated by newlines (\n).
+#: gedit/gedit-commands.c:560
+#, fuzzy
+msgid "translator-credits"
 msgstr ""
 "Валек Филлипов <frob@df.ru>\n"
 "Сергей Панов <sipan@mit.edu>\n"
@@ -1169,48 +1216,52 @@ msgstr ""
 "Андрей Носенко <awn@bcs.zp.ua>\n"
 "Леонид Кантер <leon@asplinux.ru>"
 
-#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
+#: gedit/gedit-commands.c:579
+msgid "gedit"
+msgstr "Редактор \"gedit\""
+
+#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:653 gedit/gedit-document.c:671
+#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
 #, fuzzy
 msgid "Unsaved Document"
 msgstr "_Документы"
 
-#: gedit/gedit-document.c:659 gedit/gedit-document.c:706
+#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
 msgid "Invalid file name"
 msgstr "Имя файла недопустимо"
 
-#: gedit/gedit-document.c:846 gedit/gedit-document.c:1410
+#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
 msgid "Invalid UTF-8 data"
 msgstr "Данные в формате UTF-8 недопустимы"
 
-#: gedit/gedit-document.c:1657
+#: gedit/gedit-document.c:1660
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr ""
 "Не удалось прочитать информацию о символической ссылке для файла \"%s\""
 
-#: gedit/gedit-document.c:1703
+#: gedit/gedit-document.c:1706
 msgid "The file has too many symbolic links."
 msgstr "Файл имеет слишком много символических ссылок."
 
-#: gedit/gedit-document.c:1785
+#: gedit/gedit-document.c:1788
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не может работать с \"%s\": адресами в режиме записи."
 
-#: gedit/gedit-document.c:1792
+#: gedit/gedit-document.c:1795
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не может работать с этим типом адреса в режиме записи."
 
-#: gedit/gedit-document.c:1805
+#: gedit/gedit-document.c:1808
 msgid "Invalid filename."
 msgstr "Имя файла недопустимо."
 
-#: gedit/gedit-document.c:1919
+#: gedit/gedit-document.c:1922
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1218,7 +1269,7 @@ msgstr ""
 "Недостаточно места на диске для сохранения файла.\n"
 "Освободите немного места на диске и попробуйте еще раз."
 
-#: gedit/gedit-document.c:1924
+#: gedit/gedit-document.c:1927
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1228,7 +1279,7 @@ msgstr ""
 "файла. Попробуйте сохранить файл меньшего размера или воспользуйтесь диском, "
 "не имеющим подобного ограничения."
 
-#: gedit/gedit-document.c:1968
+#: gedit/gedit-document.c:1971
 msgid "Could not create a backup file."
 msgstr "Не удалось создать резервную копию файла."
 
@@ -1362,12 +1413,12 @@ msgstr "Тайская"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: gedit/gedit-file-selector-util.c:132
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:253
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Файл с именем \"%s\" уже существует.\n"
 
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:257
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Заменить его тем, который вы сохраняете?"
 
@@ -1380,28 +1431,28 @@ msgstr "Файл \"%s\" только для чтения.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Попробовать заменить его тем, который вы сохраняете?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
 msgid "All Files"
 msgstr "Все файлы"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
 msgid "All Text Files"
 msgstr "Все текатовые файлы"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "Кодировка символов:"
 
-#: gedit/gedit-file-selector-util.c:527
+#: gedit/gedit-file-selector-util.c:509
 msgid "Select a file to open"
 msgstr "Выбрать файл"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select files to open"
 msgstr "Выбрать файл для открытия"
 
-#: gedit/gedit-file-selector-util.c:584
+#: gedit/gedit-file-selector-util.c:566
 msgid "Select a filename to save"
 msgstr "Выбрать имя файла для сохранения"
 
@@ -1981,7 +2032,7 @@ msgstr "Строки вывода"
 msgid "Cannot initialize preferences manager."
 msgstr "Невозможно инициализировать менеджер настроек."
 
-#: gedit/gedit-prefs-manager.c:1316
+#: gedit/gedit-prefs-manager.c:1326
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Ожидалось значение \"%s\", было получено значение \"%s\" для ключа %s"
@@ -2420,16 +2471,16 @@ msgstr ""
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:665
+#: gedit/gedit-view.c:663
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Стр %d, Стлб %d"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:701
 msgid "  OVR"
 msgstr "  ЗАМ"
 
-#: gedit/gedit-view.c:705
+#: gedit/gedit-view.c:703
 msgid "  INS"
 msgstr "  ВСТ"
 
@@ -2608,6 +2659,40 @@ msgstr "Вставляет имя пользователя в позиции к�
 #: plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "Имя пользователя"
+
+#: plugins/savecopy/savecopy.c:49
+#, fuzzy
+msgid "Sa_ve Copy"
+msgstr "_Копировать"
+
+#: plugins/savecopy/savecopy.c:52
+#, fuzzy
+msgid "Save a copy of the current document"
+msgstr "Установить язык текущего документа"
+
+#: plugins/savecopy/savecopy.c:212
+#, fuzzy, c-format
+msgid "Could not save a copy the file to \"%s\""
+msgstr "Не удалось сохранить файл \"%s\"."
+
+#: plugins/savecopy/savecopy.c:311
+msgid "You are trying to overwrite the original file"
+msgstr ""
+
+#: plugins/savecopy/savecopy.c:362
+#, fuzzy
+msgid "Save Copy"
+msgstr "_Ничего не сохранять"
+
+#: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Save a Copy"
+msgstr "Сохранить все открытые файлы"
+
+#: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "Отсортировать текущий документ или выделенную часть."
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -3023,6 +3108,1480 @@ msgstr "Проверяет орфографию в текущем докумен
 msgid "Spell checker"
 msgstr "Проверка орфографии"
 
+#: plugins/taglist/HTML.tags.xml.in.h:1
+#, fuzzy
+msgid "Abbreviated form"
+msgstr "Доступные форматы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:2
+#, fuzzy
+msgid "Abbreviation"
+msgstr "Армянская"
+
+#: plugins/taglist/HTML.tags.xml.in.h:3
+msgid "Above"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:4
+msgid "Accessibility key character"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:5
+msgid "Acronym"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:6
+#, fuzzy
+msgid "Align"
+msgstr "строк"
+
+#: plugins/taglist/HTML.tags.xml.in.h:7
+msgid "Alignment character"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:8
+msgid "Alternative"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:9
+msgid "Anchor"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:10
+msgid "Anchor URI"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:11
+#, fuzzy
+msgid "Applet class file code"
+msgstr "Выбрать файл"
+
+#: plugins/taglist/HTML.tags.xml.in.h:12
+msgid "Array"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:13
+msgid "Associated information"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:14
+#, fuzzy
+msgid "Author info"
+msgstr "Автоматический отступ"
+
+#: plugins/taglist/HTML.tags.xml.in.h:15
+#, fuzzy
+msgid "Axis related headers"
+msgstr "Печатать за_головки страниц"
+
+#: plugins/taglist/HTML.tags.xml.in.h:16
+msgid "BGSound"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:17
+#, fuzzy
+msgid "Background color"
+msgstr "Цвет _фона:"
+
+#: plugins/taglist/HTML.tags.xml.in.h:18
+#, fuzzy
+msgid "Background texture tile"
+msgstr "Цвет фона"
+
+#: plugins/taglist/HTML.tags.xml.in.h:19
+msgid "Base URI"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:20
+#, fuzzy
+msgid "Base font size"
+msgstr "Использовать шрифт в метках"
+
+#: plugins/taglist/HTML.tags.xml.in.h:21
+msgid "Behavior"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:22
+msgid "Blinking text"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:24
+#, fuzzy
+msgid "Border"
+msgstr "Жирный"
+
+#: plugins/taglist/HTML.tags.xml.in.h:25
+#, fuzzy
+msgid "Border color"
+msgstr "Цвет _фона:"
+
+#: plugins/taglist/HTML.tags.xml.in.h:26
+msgid "Box"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:27
+#, fuzzy
+msgid "Cell rowspan"
+msgstr "Центральноевропейская"
+
+#: plugins/taglist/HTML.tags.xml.in.h:28
+#, fuzzy
+msgid "Center"
+msgstr "Общие"
+
+#: plugins/taglist/HTML.tags.xml.in.h:29
+msgid "Char enconding of linked resource"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:30
+msgid "Checked(state)"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:31
+#, fuzzy
+msgid "Citation"
+msgstr "_действий"
+
+#: plugins/taglist/HTML.tags.xml.in.h:32
+msgid "Cite reason for change"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:33
+msgid "Class implementation ID"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:34
+#, fuzzy
+msgid "Class list"
+msgstr "Список тегов"
+
+#: plugins/taglist/HTML.tags.xml.in.h:35
+msgid "Clear text flow control"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:36
+msgid "Code content type"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:37
+#, fuzzy
+msgid "Color of selected links"
+msgstr "Копировать выделенные строки"
+
+#: plugins/taglist/HTML.tags.xml.in.h:38
+msgid "Column span"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:39
+msgid "Columns"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:40
+#, fuzzy
+msgid "Comment"
+msgstr "_Содержание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:41
+msgid "Computer code fragment"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:42
+#, fuzzy
+msgid "Content scheme"
+msgstr "_Содержание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:43
+#, fuzzy
+msgid "Content type"
+msgstr "_Содержание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:44
+#, fuzzy
+msgid "Coordinates"
+msgstr "_Содержание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:45
+msgid "DIV Style container"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:46
+msgid "DIV container"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:47
+msgid "Date and time of change"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:48
+msgid "Declare flag"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:49
+#, fuzzy
+msgid "Definition description"
+msgstr "_Описание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
+msgid "Definition list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:51
+msgid "Definition term"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:52
+#, fuzzy
+msgid "Deleted text"
+msgstr "Удалить выделенный текст"
+
+#: plugins/taglist/HTML.tags.xml.in.h:53
+#, fuzzy
+msgid "Direction"
+msgstr "Бретонский"
+
+#: plugins/taglist/HTML.tags.xml.in.h:54
+msgid "Directionality"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:55
+msgid "Directory list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:56
+#, fuzzy
+msgid "Disabled"
+msgstr "Включено"
+
+#: plugins/taglist/HTML.tags.xml.in.h:57
+#, fuzzy
+msgid "Document ID"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:58
+#, fuzzy
+msgid "Document base URI"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:59
+#, fuzzy
+msgid "Document body"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:60
+#, fuzzy
+msgid "Document head"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:61
+#, fuzzy
+msgid "Document title"
+msgstr "Статистика документа"
+
+#: plugins/taglist/HTML.tags.xml.in.h:62
+#, fuzzy
+msgid "Document type"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:63
+#, fuzzy
+msgid "Document version"
+msgstr "_Документы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:64
+msgid "Embedded object"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+msgid "Emphasis"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:66
+msgid "Encode type"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:67
+msgid "Figure"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:68
+#, fuzzy
+msgid "Font face"
+msgstr "Наименование шрифта"
+
+#: plugins/taglist/HTML.tags.xml.in.h:69
+#, fuzzy
+msgid "For label"
+msgstr "метка"
+
+#: plugins/taglist/HTML.tags.xml.in.h:70
+msgid "Forced line break"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:71
+#, fuzzy
+msgid "Form"
+msgstr "Обычный"
+
+#: plugins/taglist/HTML.tags.xml.in.h:72
+msgid "Form action handler"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:73
+msgid "Form control group"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:74
+msgid "Form field label text"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:75
+msgid "Form input"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:76
+msgid "Form input type"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:77
+msgid "Form method"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:78
+msgid "Forward link"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:79
+#, fuzzy
+msgid "Frame"
+msgstr "Имя:"
+
+#: plugins/taglist/HTML.tags.xml.in.h:80
+msgid "Frame render parts"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:81
+msgid "Frame source"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:82
+msgid "Frame target"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:83
+msgid "Frameborder"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:84
+#, fuzzy
+msgid "Frameset"
+msgstr "Фарерский"
+
+#: plugins/taglist/HTML.tags.xml.in.h:85
+#, fuzzy
+msgid "Frameset columns"
+msgstr "На_чинать со столбца:"
+
+#: plugins/taglist/HTML.tags.xml.in.h:86
+msgid "Frameset rows"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:87
+msgid "Framespacing"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:88
+msgid "Generic embedded object"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:89
+msgid "Generic metainformation"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:90
+#, fuzzy
+msgid "Generic span"
+msgstr "Общие"
+
+#: plugins/taglist/HTML.tags.xml.in.h:91
+msgid "HREF URI"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:92
+msgid "HTML - Special Characters"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:93
+msgid "HTML - Tags"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:94
+msgid "HTML root element"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:95
+msgid "HTTP header name"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:96
+msgid "Header cell ID's"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:97
+msgid "Heading"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:98
+msgid "Heading 1"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:99
+msgid "Heading 2"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:100
+msgid "Heading 3"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:101
+msgid "Heading 4"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:102
+msgid "Heading 5"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:103
+msgid "Heading 6"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:104
+msgid "Height"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:105
+msgid "Horizontal rule"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:106
+msgid "Horizontal space"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:107
+msgid "I18N BiDi over-ride"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:108
+msgid "Image"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:109
+msgid "Image map"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:110
+msgid "Image map area"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:111
+msgid "Image map name"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:112
+msgid "Image source"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:113
+#, fuzzy
+msgid "Inline frame"
+msgstr "Имя файла недопустимо"
+
+#: plugins/taglist/HTML.tags.xml.in.h:114
+msgid "Inline layer"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:115
+#, fuzzy
+msgid "Inserted text"
+msgstr "Вставка даты и времени"
+
+#: plugins/taglist/HTML.tags.xml.in.h:116
+msgid "Instance definition"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:117
+#, fuzzy
+msgid "Italic text"
+msgstr "Курсив"
+
+#: plugins/taglist/HTML.tags.xml.in.h:118
+msgid "Java applet"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:119
+#, fuzzy
+msgid "Label"
+msgstr "метка"
+
+#: plugins/taglist/HTML.tags.xml.in.h:120
+#, fuzzy
+msgid "Language code"
+msgstr "Языки"
+
+#: plugins/taglist/HTML.tags.xml.in.h:121
+msgid "Large text style"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:122
+msgid "Layer"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:123
+#, fuzzy
+msgid "Link"
+msgstr "Строк"
+
+#: plugins/taglist/HTML.tags.xml.in.h:124
+msgid "List item"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:125
+msgid "List of MIME types for file upload"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:126
+msgid "List of supported character sets"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:127
+msgid "Listing"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:128
+#, fuzzy
+msgid "Local change to font"
+msgstr "Выберите цвет редактора"
+
+#: plugins/taglist/HTML.tags.xml.in.h:129
+#, fuzzy
+msgid "Long description link"
+msgstr "_Описание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:130
+msgid "Long quotation"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:131
+msgid "Mail link"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:132
+msgid "Margin pixel height"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:133
+msgid "Margin pixel width"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:134
+msgid "Marquee"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:135
+msgid "Max text field chars"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:136
+#, fuzzy
+msgid "Media"
+msgstr "Редактор \"gedit\""
+
+#: plugins/taglist/HTML.tags.xml.in.h:137
+msgid "Media-independent link"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:138
+msgid "Menu list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:139
+msgid "Multi-line text field"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:140
+msgid "Multicolumn"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:141
+msgid "Multiple"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:142
+#, fuzzy
+msgid "Name"
+msgstr "Имя:"
+
+#: plugins/taglist/HTML.tags.xml.in.h:143
+msgid "Named property value"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:144
+msgid "Next ID"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:145
+msgid "No URI"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:146
+msgid "No embedded objects"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:147
+msgid "No frames"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:148
+msgid "No layers"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:149
+msgid "No line break"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:150
+#, fuzzy
+msgid "No resize"
+msgstr "Показывать размер"
+
+#: plugins/taglist/HTML.tags.xml.in.h:151
+msgid "No script"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:152
+msgid "No shade"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:153
+msgid "No word wrap"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:154
+msgid "Note"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:155
+#, fuzzy
+msgid "Object applet file"
+msgstr "Открыть файл"
+
+#: plugins/taglist/HTML.tags.xml.in.h:156
+msgid "Object data reference"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:157
+msgid "Offset for alignment character"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:158
+msgid "OnBlur event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:159
+#, fuzzy
+msgid "OnChange event"
+msgstr "Изменить регистр"
+
+#: plugins/taglist/HTML.tags.xml.in.h:160
+msgid "OnClick event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:161
+msgid "OnDblClick event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:162
+msgid "OnFocus event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:163
+msgid "OnKeyDown event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:164
+msgid "OnKeyPress event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:165
+msgid "OnKeyUp event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:166
+msgid "OnLoad event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:167
+msgid "OnMouseDown event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:168
+msgid "OnMouseMove event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:169
+msgid "OnMouseOut event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:170
+msgid "OnMouseOver event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:171
+msgid "OnMouseUp event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:172
+msgid "OnReset event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:173
+msgid "OnSelect event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:174
+msgid "OnSubmit event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:175
+msgid "OnUnload event"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:176
+msgid "Option group"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:177
+#, fuzzy
+msgid "Option selector"
+msgstr "Выбор шрифта"
+
+#: plugins/taglist/HTML.tags.xml.in.h:178
+msgid "Ordered list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:179
+msgid "Paragraph"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:180
+msgid "Paragraph class"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:181
+msgid "Paragraph style"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:182
+msgid "Preformatted listing"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:183
+#, fuzzy
+msgid "Preformatted text"
+msgstr "Текст образца"
+
+#: plugins/taglist/HTML.tags.xml.in.h:184
+msgid "Profile metainfo dictionary"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:185
+msgid "Prompt message"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:186
+#, fuzzy
+msgid "Push button"
+msgstr "кнопка1"
+
+#: plugins/taglist/HTML.tags.xml.in.h:187
+#, fuzzy
+msgid "Quote"
+msgstr "Выход"
+
+#: plugins/taglist/HTML.tags.xml.in.h:188
+#, fuzzy
+msgid "Range"
+msgstr "_Изменить"
+
+#: plugins/taglist/HTML.tags.xml.in.h:189
+msgid "ReadOnly text and password"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:190
+msgid "Reduced spacing"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:191
+#, fuzzy
+msgid "Reverse link"
+msgstr "В _обратном порядке"
+
+#: plugins/taglist/HTML.tags.xml.in.h:192
+msgid "Root"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:193
+msgid "Rows"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:194
+msgid "Rulings between rows and columns"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:195
+msgid "Sample program output, scripts"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:196
+msgid "Scope covered by header cells"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:197
+msgid "Script execution defer"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:198
+#, fuzzy
+msgid "Script language name"
+msgstr "Установить язык"
+
+#: plugins/taglist/HTML.tags.xml.in.h:199
+msgid "Script statments"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:200
+msgid "Scrollbar"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:201
+#, fuzzy
+msgid "Selectable option"
+msgstr "Выбрать файл"
+
+#: plugins/taglist/HTML.tags.xml.in.h:202
+#, fuzzy
+msgid "Selected"
+msgstr "Со_хранить выделенные"
+
+#: plugins/taglist/HTML.tags.xml.in.h:203
+msgid "Server-side image map"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:204
+#, fuzzy
+msgid "Shape"
+msgstr "Сохранить"
+
+#: plugins/taglist/HTML.tags.xml.in.h:205
+msgid "Short inline quotation"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:206
+msgid "Single line prompt"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:207
+#, fuzzy
+msgid "Size"
+msgstr "Размер табуляции"
+
+#: plugins/taglist/HTML.tags.xml.in.h:208
+#, fuzzy
+msgid "Small text style"
+msgstr "Все текатовые файлы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:209
+msgid "Soft line break"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:210
+msgid "Sound"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:212
+#, fuzzy
+msgid "Space"
+msgstr "Сохранить"
+
+#: plugins/taglist/HTML.tags.xml.in.h:213
+msgid "Space separated archive list"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:214
+#, fuzzy
+msgid "Spacer"
+msgstr "Заменить"
+
+#: plugins/taglist/HTML.tags.xml.in.h:215
+msgid "Spacing between cells"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:216
+msgid "Spacing within cells"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:217
+#, fuzzy
+msgid "Span"
+msgstr "Испанский"
+
+#: plugins/taglist/HTML.tags.xml.in.h:218
+msgid "Square root"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:219
+msgid "Standby load msg"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:220
+#, fuzzy
+msgid "Starting sequence number"
+msgstr "Печатать _номера строк"
+
+#: plugins/taglist/HTML.tags.xml.in.h:221
+#, fuzzy
+msgid "Strike-through text"
+msgstr "Перечеркнутый"
+
+#: plugins/taglist/HTML.tags.xml.in.h:222
+#, fuzzy
+msgid "Strike-through text style"
+msgstr "Перечеркнутый"
+
+#: plugins/taglist/HTML.tags.xml.in.h:223
+msgid "Strong emphasis"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:224
+msgid "Style info"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:225
+msgid "Subscript"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:226
+#, fuzzy
+msgid "Superscript"
+msgstr "_Описание"
+
+#: plugins/taglist/HTML.tags.xml.in.h:227
+msgid "Tab order position"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:228
+#, fuzzy
+msgid "Table"
+msgstr "Включено"
+
+#: plugins/taglist/HTML.tags.xml.in.h:229
+msgid "Table body"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:230
+#, fuzzy
+msgid "Table caption"
+msgstr "Открыть адрес"
+
+#: plugins/taglist/HTML.tags.xml.in.h:231
+msgid "Table column"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:232
+msgid "Table column group"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:233
+msgid "Table data cell"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:234
+msgid "Table footer"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:235
+msgid "Table header"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:236
+msgid "Table header cell"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:237
+msgid "Table row"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:238
+msgid "Table summary"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:239
+msgid "Target - Blank"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:240
+msgid "Target - Parent"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:241
+msgid "Target - Self"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:242
+msgid "Target - Top"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:243
+msgid "Teletype or monospace text style"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:244
+msgid "Text"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:245
+#, fuzzy
+msgid "Text color"
+msgstr "Цвет текста"
+
+#: plugins/taglist/HTML.tags.xml.in.h:246
+msgid "Text entered by user"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:247
+msgid "Title"
+msgstr "Заголовок"
+
+#: plugins/taglist/HTML.tags.xml.in.h:248
+msgid "Topmargin in pixels"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:249
+msgid "URL"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:250
+#, fuzzy
+msgid "Underlined text style"
+msgstr "Подчеркнутый"
+
+#: plugins/taglist/HTML.tags.xml.in.h:251
+#, fuzzy
+msgid "Unordered list"
+msgstr "Подчеркнутый"
+
+#: plugins/taglist/HTML.tags.xml.in.h:252
+msgid "Use image map"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:253
+msgid "Value"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:254
+msgid "Value interpretation"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:255
+msgid "Variable or program argument"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:256
+msgid "Vertical cell alignment"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:257
+#, fuzzy
+msgid "Vertical space"
+msgstr "Вставлять пробелы"
+
+#: plugins/taglist/HTML.tags.xml.in.h:258
+#, fuzzy
+msgid "Visited link color"
+msgstr "Выберите цвет выделения"
+
+#: plugins/taglist/HTML.tags.xml.in.h:259
+msgid "Width"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:1
+msgid "Bibliography cite"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:2
+msgid "Bibliography item"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:3
+msgid "Bibliography shortcite"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:4
+msgid "Bibliography thebibliography"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:5
+msgid "Brackets &lt;&gt;"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:6
+msgid "Brackets ()"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:7
+msgid "Brackets []"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:8
+msgid "Brackets {}"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:10
+msgid "File input"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:11
+#, fuzzy
+msgid "Footnote"
+msgstr "Шрифт"
+
+#: plugins/taglist/Latex.tags.xml.in.h:12
+msgid "Function cosin"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:13
+msgid "Function e^"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:14
+msgid "Function exp"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:15
+msgid "Function log"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:16
+msgid "Function log10"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:17
+msgid "Function sine"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:18
+#, fuzzy
+msgid "Greek alpha"
+msgstr "Греческая"
+
+#: plugins/taglist/Latex.tags.xml.in.h:19
+#, fuzzy
+msgid "Greek beta"
+msgstr "Греческая"
+
+#: plugins/taglist/Latex.tags.xml.in.h:20
+msgid "Greek epsilon"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:21
+#, fuzzy
+msgid "Greek gamma"
+msgstr "Греческая"
+
+#: plugins/taglist/Latex.tags.xml.in.h:22
+msgid "Greek lambda"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:23
+#, fuzzy
+msgid "Greek rho"
+msgstr "Греческая"
+
+#: plugins/taglist/Latex.tags.xml.in.h:24
+#, fuzzy
+msgid "Greek tau"
+msgstr "Греческая"
+
+#: plugins/taglist/Latex.tags.xml.in.h:25
+msgid "Header 0 (chapter)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:26
+msgid "Header 0 (chapter*)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:27
+msgid "Header 1 (section)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:28
+msgid "Header 1 (section*)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:29
+msgid "Header 2 (subsection)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:30
+msgid "Header 2 (subsection*)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:31
+msgid "Header 3 (subsubsection)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:32
+msgid "Header 3 (subsubsection*)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:33
+msgid "Header 4 (paragraph)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:34
+msgid "Header appendix"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:35
+msgid "Item"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:36
+msgid "Item with label"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:37
+msgid "Latex - Tags"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:38
+#, fuzzy
+msgid "List description"
+msgstr "_Описание"
+
+#: plugins/taglist/Latex.tags.xml.in.h:39
+msgid "List enumerate"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:40
+msgid "List itemize"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:41
+msgid "Maths (display)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:42
+msgid "Maths (inline)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:43
+#, fuzzy
+msgid "Operator fraction"
+msgstr "Открыть адрес"
+
+#: plugins/taglist/Latex.tags.xml.in.h:44
+msgid "Operator integral (display)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:45
+msgid "Operator integral (inline)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:46
+msgid "Operator sum (display)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:47
+msgid "Operator sum (inline)"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:48
+#, fuzzy
+msgid "Reference label"
+msgstr "Параметры"
+
+#: plugins/taglist/Latex.tags.xml.in.h:49
+#, fuzzy
+msgid "Reference ref"
+msgstr "Параметры"
+
+#: plugins/taglist/Latex.tags.xml.in.h:50
+msgid "Symbol &gt;&gt;"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:51
+msgid "Symbol &gt;="
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:52
+msgid "Symbol &lt;&lt;"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:53
+msgid "Symbol &lt;="
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:54
+msgid "Symbol and"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:55
+msgid "Symbol const"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:56
+msgid "Symbol d-by-dt"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:57
+msgid "Symbol d-by-dt-partial"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:58
+msgid "Symbol d2-by-dt2-partial"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:59
+msgid "Symbol dagger"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:60
+msgid "Symbol equiv"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:61
+msgid "Symbol hyphen --"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:62
+msgid "Symbol hyphen ---"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:63
+msgid "Symbol infinity"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:64
+msgid "Symbol mathspace ,"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:65
+msgid "Symbol mathspace ."
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:66
+msgid "Symbol mathspace _"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:67
+msgid "Symbol mathspace __"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:68
+msgid "Symbol simeq"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:69
+msgid "Symbol star"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:70
+msgid "Typeface bold"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:71
+msgid "Typeface italic"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:72
+msgid "Typeface slanted"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:73
+msgid "Typeface type"
+msgstr ""
+
+#: plugins/taglist/Latex.tags.xml.in.h:74
+msgid "Unbreakable text"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:1
+msgid "XSLT - Axes"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:2
+#, fuzzy
+msgid "XSLT - Elements"
+msgstr "Элементов"
+
+#: plugins/taglist/XSLT.tags.xml.in.h:3
+msgid "XSLT - Functions"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:4
+msgid "ancestor"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:5
+msgid "ancestor-or-self"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:6
+msgid "attribute"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:7
+msgid "child"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:8
+msgid "descendant"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:9
+msgid "descendant-or-self"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:10
+msgid "following"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:11
+msgid "following-sibling"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:12
+#, fuzzy
+msgid "namespace"
+msgstr "Вставлять пробелы"
+
+#: plugins/taglist/XSLT.tags.xml.in.h:13
+#, fuzzy
+msgid "parent"
+msgstr "Открыть"
+
+#: plugins/taglist/XSLT.tags.xml.in.h:14
+msgid "preceding"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:15
+msgid "preceding-sibling"
+msgstr ""
+
+#: plugins/taglist/XSLT.tags.xml.in.h:16
+msgid "self"
+msgstr ""
+
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
 msgstr "Cписок тегов"
@@ -3123,6 +4682,9 @@ msgstr "_Запрашивать формат"
 msgid "_Use custom format"
 msgstr "Использовать дру_гой формат"
 
+#~ msgid "Do_n't save"
+#~ msgstr "_Не сохранить"
+
 #~ msgid ""
 #~ "If you don't save, changes from the last %d hour will be permanently lost."
 #~ msgid_plural ""
@@ -3158,9 +4720,6 @@ msgstr "Использовать дру_гой формат"
 
 #~ msgid "Push this button to select the font to be used to print line numbers"
 #~ msgstr "Нажмите эту кнопку, чтобы выбрать шрифт для печати номеров строк"
-
-#~ msgid "_Tabs width:"
-#~ msgstr "_Ширина вкладок:"
 
 #~ msgid ""
 #~ "Changes made to the document in the last %d hour will be permanently lost."
@@ -3314,9 +4873,6 @@ msgstr "Использовать дру_гой формат"
 #~ msgid "_Modify preview phrase..."
 #~ msgstr "Из_менить фразу-образец..."
 
-#~ msgid "Font Selection"
-#~ msgstr "Выбор шрифта"
-
 #~ msgid "Sans Regular 12"
 #~ msgstr "Sans Regular 12"
 
@@ -3326,26 +4882,14 @@ msgstr "Использовать дру_гой формат"
 #~ msgid "Pick a Font"
 #~ msgstr "Выбрать шрифт"
 
-#~ msgid "Title"
-#~ msgstr "Заголовок"
-
 #~ msgid "The title of the selection dialog box"
 #~ msgstr "Заголовок диалога выбора"
-
-#~ msgid "Font name"
-#~ msgstr "Наименование шрифта"
 
 #~ msgid "Name of the selected font"
 #~ msgstr "Наименование выделенного шрифта"
 
-#~ msgid "Preview text"
-#~ msgstr "Текст образца"
-
 #~ msgid "Preview text shown in the dialog"
 #~ msgstr "Текст образца, показываемый в диалоге"
-
-#~ msgid "Use font in label"
-#~ msgstr "Использовать шрифт в метках"
 
 #~ msgid "Use font in the label in font info mode"
 #~ msgstr "Использовать шрифт в метках в режиме информации о шрифте"
@@ -3356,14 +4900,8 @@ msgstr "Использовать дру_гой формат"
 #~ msgid "Font size for label in font info mode"
 #~ msgstr "Размер шрифта для метки в режиме информации о шрифте"
 
-#~ msgid "Show size"
-#~ msgstr "Показывать размер"
-
 #~ msgid "Show size in font info mode"
 #~ msgstr "Показывать размер в режиме информации о шрифте"
-
-#~ msgid "Font"
-#~ msgstr "Шрифт"
 
 #~ msgid "(modified)"
 #~ msgstr "(изменен)"
