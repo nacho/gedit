@@ -285,7 +285,6 @@ set_custom_format (const gchar *format)
 		       		 format, NULL);
 }
 
-
 static char *
 get_time (const gchar* format)
 {
@@ -543,9 +542,10 @@ get_configure_dialog (GtkWindow* parent)
 	gui = glade_xml_new (GEDIT_GLADEDIR "time.glade2",
 			     "time_dialog_content", NULL);   
 	if (!gui) 
-        {
-		g_warning
-		    ("Could not find time.glade2, reinstall gedit.\n");
+	{
+		gedit_warning (parent,
+			       MISSING_FILE,	
+			       GEDIT_GLADEDIR "time.glade2");
 		return NULL;
 	}
 
@@ -565,6 +565,9 @@ get_configure_dialog (GtkWindow* parent)
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
+
 	content		= glade_xml_get_widget (gui, "time_dialog_content");
 	viewport 	= glade_xml_get_widget (gui, "formats_viewport");
 	dialog->list 	= glade_xml_get_widget (gui, "formats_tree");
@@ -574,19 +577,25 @@ get_configure_dialog (GtkWindow* parent)
         dialog->custom_entry = glade_xml_get_widget (gui, "custom_entry");
 	dialog->custom_format_example = glade_xml_get_widget (gui, "custom_format_example");
 
-	g_return_val_if_fail (content != NULL, NULL);
-	g_return_val_if_fail (viewport != NULL, NULL);
-	g_return_val_if_fail (dialog->list != NULL, NULL);
-	g_return_val_if_fail (dialog->prompt != NULL, NULL);
-	g_return_val_if_fail (dialog->use_list != NULL, NULL);
-	g_return_val_if_fail (dialog->custom != NULL, NULL);
-	g_return_val_if_fail (dialog->custom_entry != NULL, NULL);
-	g_return_val_if_fail (dialog->custom_format_example != NULL, NULL);
+	if (!content              ||
+	    !viewport             ||
+	    !dialog->list         ||
+	    !dialog->prompt       ||
+	    !dialog->use_list     ||
+	    !dialog->custom       ||
+	    !dialog->custom_entry ||
+	    !dialog->custom_format_example)
+	{
+		gedit_warning (parent,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "time.glade2");
+		return NULL;
+	}
 
 	sf = get_selected_format ();
 	create_formats_list (dialog->list, sf);
 	g_free (sf);
-	
+
 	prompt_type = get_prompt_type ();
 
 	cf = get_custom_format ();
@@ -651,8 +660,6 @@ get_configure_dialog (GtkWindow* parent)
 
 	g_object_unref (gui);
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-
 	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 				parent);
 
@@ -694,9 +701,10 @@ get_chose_format_dialog (GtkWindow *parent)
 	gui = glade_xml_new (GEDIT_GLADEDIR "time.glade2",
 			     "chose_format_dialog", NULL);
 	if (!gui) 
-        {
-		g_warning
-		    ("Could not find time.glade2, reinstall gedit.\n");
+	{
+		gedit_warning (parent,
+			       MISSING_FILE,	
+			       GEDIT_GLADEDIR "time.glade2");
 		return NULL;
 	}
 
@@ -709,12 +717,18 @@ get_chose_format_dialog (GtkWindow *parent)
 	dialog->custom_entry	= glade_xml_get_widget (gui, "custom_entry");
 	dialog->custom_format_example = glade_xml_get_widget (gui, "custom_format_example");
 
-	g_return_val_if_fail (dialog->dialog != NULL, NULL);
-	g_return_val_if_fail (dialog->list != NULL, NULL);
-	g_return_val_if_fail (dialog->use_list != NULL, NULL);
-	g_return_val_if_fail (dialog->custom != NULL, NULL);
-	g_return_val_if_fail (dialog->custom_entry != NULL, NULL);
-	g_return_val_if_fail (dialog->custom_format_example != NULL, NULL);
+	if (!dialog->dialog       ||
+	    !dialog->list         ||
+	    !dialog->use_list     ||
+	    !dialog->custom       ||
+	    !dialog->custom_entry ||
+	    !dialog->custom_format_example)
+	{
+		gedit_warning (parent,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "time.glade2");
+		return NULL;
+	}
 
 	if (dialog_selected_format == NULL)
 		dialog_selected_format = get_selected_format ();
@@ -905,7 +919,6 @@ gint get_format_from_list(GtkWidget *listview)
         return selected_value;
 }
 
-
 static void
 ok_button_pressed (TimeConfigureDialog *dialog)
 {
@@ -939,7 +952,6 @@ ok_button_pressed (TimeConfigureDialog *dialog)
 	gedit_debug (DEBUG_PLUGINS, "Sel: %d", sel_format);
 }
 
-
 static void
 help_button_pressed (TimeConfigureDialog *dialog)
 {
@@ -957,7 +969,6 @@ help_button_pressed (TimeConfigureDialog *dialog)
 	}
 }
 
-
 G_MODULE_EXPORT GeditPluginState
 configure (GeditPlugin *p, GtkWidget *parent)
 {
@@ -967,13 +978,8 @@ configure (GeditPlugin *p, GtkWidget *parent)
 	gedit_debug (DEBUG_PLUGINS, "");
 	
 	dialog = get_configure_dialog (GTK_WINDOW (parent));
-
-	if (dialog == NULL) 
-	{
-		g_warning
-		    ("Could not create the configure dialog.\n");
+	if (!dialog) 
 		return PLUGIN_ERROR;
-	}
 
 	do
 	{
@@ -1104,7 +1110,4 @@ init (GeditPlugin *pd)
 
 	return PLUGIN_OK;
 }
-
-
-
 

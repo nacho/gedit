@@ -102,7 +102,6 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  DocInfoDialog *dialog)
 	}
 }
 
-
 static DocInfoDialog*
 get_dialog ()
 {
@@ -120,9 +119,7 @@ get_dialog ()
 	{
 		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
 				window);
-
 		gtk_window_present (GTK_WINDOW (dialog->dialog));
-		
 		gtk_widget_grab_focus (dialog->dialog);
 
 		return dialog;
@@ -130,10 +127,11 @@ get_dialog ()
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "docinfo.glade2",
 			     "docinfo_dialog_content", NULL);
-
-	if (!gui) {
-		g_warning
-		    ("Could not find %s, reinstall gedit.\n", "docinfo.glade2");
+	if (!gui)
+	{
+		gedit_warning (window,
+			       MISSING_FILE,	
+			       GEDIT_GLADEDIR "docinfo.glade2");
 		return NULL;
 	}
 
@@ -148,14 +146,14 @@ get_dialog ()
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dialog->dialog), FALSE);
+
 	/* Add the update button */
 	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog), 
 				 _("_Update"), GTK_STOCK_REFRESH, GTK_RESPONSE_OK);
 
-	content			= glade_xml_get_widget (gui, "docinfo_dialog_content");
-
-	g_return_val_if_fail (content != NULL, NULL);
-
+	content	= glade_xml_get_widget (gui, "docinfo_dialog_content");
 	dialog->file_name_label	= glade_xml_get_widget (gui, "file_name_label");
 	dialog->words_label	= glade_xml_get_widget (gui, "words_label");
 	dialog->bytes_label	= glade_xml_get_widget (gui, "bytes_label");
@@ -163,12 +161,19 @@ get_dialog ()
 	dialog->chars_label	= glade_xml_get_widget (gui, "chars_label");
 	dialog->chars_ns_label	= glade_xml_get_widget (gui, "chars_ns_label");
 
-	g_return_val_if_fail (dialog->file_name_label    != NULL, NULL);
-	g_return_val_if_fail (dialog->words_label        != NULL, NULL);
-	g_return_val_if_fail (dialog->bytes_label        != NULL, NULL);
-	g_return_val_if_fail (dialog->lines_label        != NULL, NULL);
-	g_return_val_if_fail (dialog->chars_label        != NULL, NULL);
-	g_return_val_if_fail (dialog->chars_ns_label     != NULL, NULL);
+	if (!content ||
+	    !dialog->file_name_label ||
+	    !dialog->words_label     ||
+	    !dialog->bytes_label     ||
+	    !dialog->lines_label     ||
+	    !dialog->chars_label     ||
+	    !dialog->chars_ns_label)
+	{
+		gedit_warning (window,
+			       MISSING_WIDGETS,
+			       GEDIT_GLADEDIR "docinfo.glade2");
+		return NULL;
+	}
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
@@ -177,14 +182,12 @@ get_dialog ()
 					 GTK_RESPONSE_OK);
 
 	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
-			   G_CALLBACK (dialog_destroyed), &dialog);
+			  G_CALLBACK (dialog_destroyed), &dialog);
 
 	g_signal_connect (G_OBJECT (dialog->dialog), "response",
-			   G_CALLBACK (dialog_response_handler), dialog);
+			  G_CALLBACK (dialog_response_handler), dialog);
 
 	g_object_unref (gui);
-
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
 
 	gtk_widget_show (dialog->dialog);
 
@@ -220,10 +223,8 @@ word_count_real (void)
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	dialog = get_dialog ();
-	if (dialog == NULL) {
-		g_warning ("Could not create the Word Count dialog");
+	if (!dialog)
 		return;
-	}
 
 	doc = gedit_get_active_document ();
 
@@ -248,17 +249,13 @@ word_count_real (void)
                        attrs,
                        chars + 1);
 
-	i = 0;
-	
-	while (i < chars)
+	for (i = 0; i < chars; i++)
 	{
 		if (attrs [i].is_white)
 			++white_chars;
 
 		if (attrs [i].is_word_start)
 			++words;
-
-		++i;
 	}
 
 	if (chars == 0)
@@ -298,9 +295,6 @@ word_count_real (void)
 	tmp_str = g_strdup_printf("%d", bytes);
 	gtk_label_set_text (GTK_LABEL (dialog->bytes_label), tmp_str);
 	g_free (tmp_str);
-
-
-		
 }
 
 G_MODULE_EXPORT GeditPluginState
@@ -366,7 +360,4 @@ init (GeditPlugin *pd)
 		
 	return PLUGIN_OK;
 }
-
-
-
 
