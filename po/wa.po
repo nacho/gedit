@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.4\n"
-"POT-Creation-Date: 2000-12-26 17:57+0100\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -121,7 +121,7 @@ msgid ""
 msgstr ""
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:269 src/print.c:703
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Sin no"
 
@@ -302,7 +302,7 @@ msgid ""
 msgstr ""
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: Preferinces"
 
@@ -316,7 +316,7 @@ msgstr "gedit: Preferinces"
 msgid "Replace"
 msgstr "Mete èl plaece"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:266
+#: src/dialogs/dialog-replace.c:135 src/menus.c:283
 msgid "Find"
 msgstr "Trover"
 
@@ -330,7 +330,7 @@ msgstr ""
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
-msgid "found and replaced %i occurrences."
+msgid "Found and replaced %i occurrences."
 msgstr ""
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -384,14 +384,18 @@ msgid "Enable Auto-indent"
 msgstr ""
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "Djenerå"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -403,7 +407,7 @@ msgstr ""
 "Copete\n"
 "Valeye\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -411,96 +415,96 @@ msgid ""
 "Default\n"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "Môde: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:245
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "Disfé"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "livea(s)"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "Documints"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "Fontes"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "Tchwezixhoz ene fonte"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhå!"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "Fonte prémetowe: "
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "Coleurs"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "Tchwezixhoz ene coleur"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "Coleur di fond: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "Coleur di dvant: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "Fontes/Coleurs"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "Dj' eprime"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr "roye(s)"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "Papî"
 
@@ -585,89 +589,107 @@ msgstr "Plugins astalés"
 msgid "Plugin description"
 msgstr "Discrijhaedje do plugin"
 
-#: src/document.c:251
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr ""
 
-#: src/document.c:443
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "«%s» a stî candjî. Voloz-ve li schaper ?"
 
-#: src/document.c:652
+#. If you try to open a non existant remote file
+#: src/document.c:710
+#, c-format
+msgid ""
+"An error was encountered while opening the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please make sure the file exists."
+msgstr ""
+
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Sin no %i"
 
-#: src/document.c:658
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(candjî)"
 
-#: src/document.c:660
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr ""
 
-#: src/document.c:710 src/document.c:750
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr ""
 
-#: src/document.c:758
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr ""
 
-#: src/file.c:79
-msgid ""
-"Hello Dear Translator :\n"
-"This is the unstable branch of gedit. \n"
-"I think you should be translating the gedit-1-0 branch. To get it from cvs "
-"type : \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Thank you. Chema"
-msgstr ""
-
-#: src/file.c:169
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
 "Please make sure the file exists."
 msgstr ""
 
-#: src/file.c:180
+#: src/file.c:219
 #, c-format
 msgid ""
-"An error was encountered while opening the file:\n"
+"An error was encountered while opening the file \"%s\".\n"
+"Could not allocate the required memory."
+msgstr ""
+
+#: src/file.c:232
+#, c-format
+msgid ""
+"An error was encountered while reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"\n"
-"Please make sure the file is not being used by another application\n"
-"and that the file is not empty."
+"Make sure that you have permissions for opening the file. "
 msgstr ""
 
-#: src/file.c:191 src/file.c:475
-msgid "Could not allocate the required memory."
-msgstr ""
-
-#: src/file.c:197
+#: src/file.c:252
 #, c-format
 msgid ""
-"gedit was unable to open the file: \n"
+"An error was encountered while reading the file: \n"
+"\n"
+"%s"
+msgstr ""
+
+#: src/file.c:273
+#, c-format
+msgid ""
+"Internal error reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have permissions for opening the file."
+"Please, report this error to submit@bugs.gnome.org."
 msgstr ""
 
-#: src/file.c:314
+#: src/file.c:290
+#, c-format
+msgid ""
+"An error was encountered while closing the file: \n"
+"\n"
+"%s"
+msgstr ""
+
+#: src/file.c:482
 msgid "Save As..."
 msgstr "Schaper èt rlomer..."
 
-#: src/file.c:373
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "Li documint n' a nole doneye dvins."
 
-#: src/file.c:384
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -678,7 +700,7 @@ msgid ""
 "appropriate write permissions."
 msgstr ""
 
-#: src/file.c:397
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -689,7 +711,7 @@ msgid ""
 "submit@bugs.gnome.org"
 msgstr ""
 
-#: src/file.c:414
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -700,42 +722,46 @@ msgid ""
 "submit@bugs.gnome.org"
 msgstr ""
 
-#: src/file.c:495
+#: src/file.c:697
+msgid "Could not allocate the required memory."
+msgstr ""
+
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr ""
 
-#: src/file.c:606 src/file.c:613
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "Fitchî %s tcherdjî"
 
-#: src/file.c:620
+#: src/file.c:842
 #, fuzzy, c-format
 msgid "Loaded %i files"
 msgstr "Fitchî %s tcherdjî"
 
-#: src/file.c:676
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "Drovî on fitchî..."
 
-#: src/file.c:807
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "«%s» va esse språtchî. Voloz-ve continuwer ?"
 
-#: src/file.c:819
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "Li Documint n' a nén stî schapé..."
 
-#: src/file.c:829
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "Yåk n' a nén stî tot schapant l' fitchî!"
 
-#: src/file.c:949
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr ""
 
-#: src/file.c:962
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -744,7 +770,7 @@ msgstr ""
 "Estoz-ve sheur ki vos voloz rimete les candjmints come divant?\n"
 "(%s)"
 
-#: src/file.c:993
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr ""
@@ -757,7 +783,7 @@ msgstr "Drovî (swap) fitchî .c/.h"
 msgid "_New"
 msgstr "_Novea"
 
-#: src/menus.c:63 src/menus.c:224
+#: src/menus.c:63 src/menus.c:240
 msgid "Create a new document"
 msgstr "Fé on novea documint"
 
@@ -774,151 +800,160 @@ msgstr "Schaper tos les fitchîs drovîs"
 msgid "Revert"
 msgstr "Bodjî foû"
 
-#: src/menus.c:85
+#: src/menus.c:83
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Drovî on fitchî..."
+
+#: src/menus.c:84
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/menus.c:98
 msgid "Print pre_view"
 msgstr ""
 
-#: src/menus.c:85
+#: src/menus.c:98
 msgid "Print preview"
 msgstr ""
 
-#: src/menus.c:89
+#: src/menus.c:102
 msgid "Print preview..."
 msgstr ""
 
-#: src/menus.c:90
+#: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr ""
 
-#: src/menus.c:97
+#: src/menus.c:110
 msgid "Close All"
 msgstr "Clôre tot"
 
-#: src/menus.c:98
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Clôre tos les fitchîs drovîs"
 
-#: src/menus.c:122
+#: src/menus.c:138
 msgid "Goto _Line..."
 msgstr "Potchî al _roye"
 
-#: src/menus.c:123
+#: src/menus.c:139
 msgid "Go to a specific line number"
 msgstr ""
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "File _Info"
 msgstr ""
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "Get the basic file info"
 msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:167
 msgid "_Add View"
 msgstr "_Radjouter vuwe"
 
-#: src/menus.c:152
+#: src/menus.c:168
 msgid "Add a new view of the document"
 msgstr "Radjouter ene novele vuwe d' on documint"
 
-#: src/menus.c:154
+#: src/menus.c:170
 msgid "_Remove View"
 msgstr "_Bodjî vuwe"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "Remove view of the document"
 msgstr "Bodjî ene vuwe foû do documint"
 
-#: src/menus.c:198 src/plugin.c:90 src/plugin.c:401
+#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Documents"
 msgstr "_Documints"
 
-#: src/menus.c:224
+#: src/menus.c:240
 msgid "New"
 msgstr "Novea"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open"
 msgstr "Drovî"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open a file"
 msgstr "Drovî on fitchî"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save"
 msgstr "Schaper"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save the current file"
 msgstr "Schaper li fitchî do moumint"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close"
 msgstr "Clôre"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close the current file"
 msgstr "Clôre li fitchî do moumint"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print"
 msgstr "Rexhe"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print the current file"
 msgstr "Eprimer li fitchî do moumint"
 
-#: src/menus.c:245
+#: src/menus.c:261
 msgid "Undo last operation"
 msgstr "Disfé li dierinne operåcion"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo"
 msgstr "Rifé"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo last operation"
 msgstr "Rifé li dierinne operåcion"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut"
 msgstr "Côper"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut the selection"
 msgstr ""
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy"
 msgstr "Copyî"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy the selection"
 msgstr ""
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste"
 msgstr "Aclaper"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste the clipboard"
 msgstr ""
 
-#: src/menus.c:266
+#: src/menus.c:283
 msgid "Search for a string"
 msgstr "Cwerî après ene tchinne"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit"
 msgstr "Moussî foû"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit the program"
 msgstr "Moussî foû do programe"
 
@@ -975,31 +1010,31 @@ msgstr ""
 msgid "Error, plugin does not contain init_plugin function."
 msgstr ""
 
-#: src/plugin.c:344
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr ""
 
-#: src/plugin.c:391
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr ""
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "Pådjes"
 
-#: src/print.c:353
+#: src/print.c:355
 #, c-format
-msgid "gedit (%s): Print Preview"
+msgid "gedit - [%s]: Print Preview"
 msgstr ""
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
 "gedit is unable to print without this font installed."
 msgstr ""
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Pådje: %i/%i"
@@ -1007,17 +1042,17 @@ msgstr "Pådje: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "_Fitchî/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "_Fitchî"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr ""
@@ -1043,7 +1078,7 @@ msgid ""
 "Current Column: %i"
 msgstr ""
 
-#: src/view.c:963
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "C' est nén possibe di bodjî foû li dierinne vuwe d' on documint."
 

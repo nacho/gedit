@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2000-12-26 17:40+0100\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 2000-10-15 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -116,7 +116,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:269 src/print.c:703
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "名前無し"
 
@@ -299,7 +299,7 @@ msgstr ""
 "説明 : %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: 設定"
 
@@ -313,7 +313,7 @@ msgstr "gedit: 設定"
 msgid "Replace"
 msgstr "置換"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:266
+#: src/dialogs/dialog-replace.c:135 src/menus.c:283
 msgid "Find"
 msgstr "検索"
 
@@ -326,8 +326,8 @@ msgid "Text not found."
 msgstr "テキストが見つかりません。"
 
 #: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "found and replaced %i occurrences."
+#, fuzzy, c-format
+msgid "Found and replaced %i occurrences."
 msgstr "%i個が見つかって置換しました。"
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -382,14 +382,18 @@ msgid "Enable Auto-indent"
 msgstr "自動字下げ"
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "一般"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (マルチ・ドキュメント・インターフェース)"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -401,7 +405,7 @@ msgstr ""
 "上\n"
 "下\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -413,95 +417,95 @@ msgstr ""
 "モーダル\n"
 "デフォルト\n"
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "モード: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr "タブの位置: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:245
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "元に戻す"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr "元に戻せる回数 :"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "レベル"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "ドキュメント"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "フォント"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "フォントを選択"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "デフォルト: "
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "色"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "色を選択"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "背景色: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "文字色: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "フォント/色"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "印刷"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr "ヘッダの追加(_H)"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr "文字を折り返す(_W)"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr "行数の表示(_L):"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr "行毎に表示"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr "縦(_P)"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr "横(_L)"
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "用紙"
 
@@ -587,48 +591,51 @@ msgstr "インストール済プラグイン"
 msgid "Plugin description"
 msgstr "プラグインの説明"
 
-#: src/document.c:251
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:443
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' は変更されています。保存しますか？"
 
-#: src/document.c:652
+#. If you try to open a non existant remote file
+#: src/document.c:710
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while opening the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please make sure the file exists."
+msgstr ""
+"ファイル \"%s\"を開くときにエラーが起きました。\n"
+"ファイルが存在するか、確認してください。"
+
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "無題 %i"
 
-#: src/document.c:658
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(修正されました)"
 
-#: src/document.c:660
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
 
-#: src/document.c:710 src/document.c:750
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr "このファイルは正しい拡張子で終了していません\n"
 
-#: src/document.c:758
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr "ファイル %s が見つかりません。"
 
-#: src/file.c:79
-msgid ""
-"Hello Dear Translator :\n"
-"This is the unstable branch of gedit. \n"
-"I think you should be translating the gedit-1-0 branch. To get it from cvs "
-"type : \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Thank you. Chema"
-msgstr ""
-
-#: src/file.c:169
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -637,37 +644,23 @@ msgstr ""
 "ファイル \"%s\"を開くときにエラーが起きました。\n"
 "ファイルが存在するか、確認してください。"
 
-#: src/file.c:180
-#, c-format
+#: src/file.c:219
+#, fuzzy, c-format
 msgid ""
-"An error was encountered while opening the file:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Please make sure the file is not being used by another application\n"
-"and that the file is not empty."
+"An error was encountered while opening the file \"%s\".\n"
+"Could not allocate the required memory."
 msgstr ""
-"ファイルを開いているときにエラーが発生しました:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"ファイルが他のアプリケーションに使われていないか、またはファイルが\n"
-"空でないかを確認してください。"
+"ファイル \"%s\"を開くときにエラーが起きました。\n"
+"ファイルが存在するか、確認してください。"
 
-#: src/file.c:191 src/file.c:475
-msgid "Could not allocate the required memory."
-msgstr "要求されたメモリを割り当てることができません。"
-
-#: src/file.c:197
-#, c-format
+#: src/file.c:232
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to open the file: \n"
+"An error was encountered while reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have permissions for opening the file."
+"Make sure that you have permissions for opening the file. "
 msgstr ""
 "ファイルを開くことができません:\n"
 "\n"
@@ -675,15 +668,51 @@ msgstr ""
 "\n"
 "ファイルのパーミッションを確認してください。"
 
-#: src/file.c:314
+#: src/file.c:252
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while reading the file: \n"
+"\n"
+"%s"
+msgstr ""
+"ファイル \"%s\"を開くときにエラーが起きました。\n"
+"ファイルが存在するか、確認してください。"
+
+#: src/file.c:273
+#, fuzzy, c-format
+msgid ""
+"Internal error reading the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please, report this error to submit@bugs.gnome.org."
+msgstr ""
+"ファイルを保存できません: \n"
+"\n"
+" %s \n"
+"\n"
+"不明なエラーです (1)。\n"
+"問題を submit@bugs.gnome.org に報告してください。"
+
+#: src/file.c:290
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while closing the file: \n"
+"\n"
+"%s"
+msgstr ""
+"ファイル \"%s\"を開くときにエラーが起きました。\n"
+"ファイルが存在するか、確認してください。"
+
+#: src/file.c:482
 msgid "Save As..."
 msgstr "名前をつけて保存..."
 
-#: src/file.c:373
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "このドキュメントにはデータがありません。"
 
-#: src/file.c:384
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -699,7 +728,7 @@ msgstr ""
 "\n"
 "ファイルのパーミッションを確認してください。"
 
-#: src/file.c:397
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -716,7 +745,7 @@ msgstr ""
 "不明なエラーです (1)。\n"
 "問題を submit@bugs.gnome.org に報告してください。"
 
-#: src/file.c:414
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -733,42 +762,46 @@ msgstr ""
 "不明なエラーです (1)。\n"
 "問題を submit@bugs.gnome.org に報告してください。"
 
-#: src/file.c:495
+#: src/file.c:697
+msgid "Could not allocate the required memory."
+msgstr "要求されたメモリを割り当てることができません。"
+
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr "パイプのエラーです。"
 
-#: src/file.c:606 src/file.c:613
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "読み込み完了: %s"
 
-#: src/file.c:620
+#: src/file.c:842
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i ファイルを読み込みました"
 
-#: src/file.c:676
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "開く..."
 
-#: src/file.c:807
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' を上書きしようとしています。上書きしてもよろしいですか?"
 
-#: src/file.c:819
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "この文書は保存されていません。"
 
-#: src/file.c:829
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "保存中にエラーが起きました！"
 
-#: src/file.c:949
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr "無題のドキュメントを元には戻せません。\n"
 
-#: src/file.c:962
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -777,7 +810,7 @@ msgstr ""
 "変更を全て取り消していいですか？\n"
 "(%s)"
 
-#: src/file.c:993
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "``%s'' は存在しません。新たに作成しますか?"
@@ -790,7 +823,7 @@ msgstr "対応する .c/.h ファイルを開く"
 msgid "_New"
 msgstr "新規(_N)"
 
-#: src/menus.c:63 src/menus.c:224
+#: src/menus.c:63 src/menus.c:240
 msgid "Create a new document"
 msgstr "新規文書を作る"
 
@@ -806,151 +839,160 @@ msgstr "すべてのファイルを保存"
 msgid "Revert"
 msgstr "削除"
 
-#: src/menus.c:85
+#: src/menus.c:83
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "開く..."
+
+#: src/menus.c:84
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/menus.c:98
 msgid "Print pre_view"
 msgstr "印刷プレビュー(_V)"
 
-#: src/menus.c:85
+#: src/menus.c:98
 msgid "Print preview"
 msgstr "印刷プレビュー"
 
-#: src/menus.c:89
+#: src/menus.c:102
 msgid "Print preview..."
 msgstr "印刷のプレビュー..."
 
-#: src/menus.c:90
+#: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "印刷するデータのプレビュー"
 
-#: src/menus.c:97
+#: src/menus.c:110
 msgid "Close All"
 msgstr "すべて閉じる"
 
-#: src/menus.c:98
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "すべてのファイルを閉じる"
 
-#: src/menus.c:122
+#: src/menus.c:138
 msgid "Goto _Line..."
 msgstr "指定行へ移動(_L)..."
 
-#: src/menus.c:123
+#: src/menus.c:139
 msgid "Go to a specific line number"
 msgstr "指定した行にカーソルを移動"
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "File _Info"
 msgstr ""
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "Get the basic file info"
 msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:167
 msgid "_Add View"
 msgstr "ビューを追加(_A)"
 
-#: src/menus.c:152
+#: src/menus.c:168
 msgid "Add a new view of the document"
 msgstr "文書に新しいビューを追加"
 
-#: src/menus.c:154
+#: src/menus.c:170
 msgid "_Remove View"
 msgstr "ビューを削除"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "Remove view of the document"
 msgstr "文書のビューを削除する"
 
-#: src/menus.c:198 src/plugin.c:90 src/plugin.c:401
+#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
 msgid "_Plugins"
 msgstr "プラグイン(_P)"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Documents"
 msgstr "ドキュメント(_D)"
 
-#: src/menus.c:224
+#: src/menus.c:240
 msgid "New"
 msgstr "新規"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open"
 msgstr "開く"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open a file"
 msgstr "ファイルを開く"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save"
 msgstr "保存"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save the current file"
 msgstr "現在編集中のファイルを保存"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close"
 msgstr "閉じる"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close the current file"
 msgstr "現在編集中のファイルを閉じる"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print"
 msgstr "印刷"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print the current file"
 msgstr "現在編集中のファイルを印刷"
 
-#: src/menus.c:245
+#: src/menus.c:261
 msgid "Undo last operation"
 msgstr "最後にやったことを元に戻す"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo"
 msgstr "やり直す"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo last operation"
 msgstr "最後にやったことをやり直す"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut"
 msgstr "切り取り"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut the selection"
 msgstr "選択領域を切り取り"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy"
 msgstr "コピー"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy the selection"
 msgstr "選択領域をコピー"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste"
 msgstr "貼り付け"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste the clipboard"
 msgstr "クリップボードを張り付け"
 
-#: src/menus.c:266
+#: src/menus.c:283
 msgid "Search for a string"
 msgstr "文字列を検索"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit"
 msgstr "終了"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit the program"
 msgstr "エディタを終了する"
 
@@ -1015,24 +1057,24 @@ msgstr "エラー: モジュール %s を開けません"
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/plugin.c:344
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr "エラー: プラグインを初期化できません"
 
-#: src/plugin.c:391
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "エラー: プラグインが実行中です"
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "ページ"
 
-#: src/print.c:353
-#, c-format
-msgid "gedit (%s): Print Preview"
+#: src/print.c:355
+#, fuzzy, c-format
+msgid "gedit - [%s]: Print Preview"
 msgstr "gedit (%s): 印刷のプレビュー"
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1041,7 +1083,7 @@ msgstr ""
 "フォント\"%s\"は見つけられませんでした。\n"
 "このフォントがインストールされていないと印刷できません。"
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "ページ: %i/%i"
@@ -1049,17 +1091,17 @@ msgstr "ページ: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "ファイル(_F)/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "最近使ったファイルを開けません: %s"
@@ -1097,9 +1139,26 @@ msgstr ""
 "現在の行番号: %i\n"
 "現在のカラム番号: %i"
 
-#: src/view.c:963
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "ドキュメントの最後のビューは削除できません。"
+
+#~ msgid ""
+#~ "An error was encountered while opening the file:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Please make sure the file is not being used by another application\n"
+#~ "and that the file is not empty."
+#~ msgstr ""
+#~ "ファイルを開いているときにエラーが発生しました:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "ファイルが他のアプリケーションに使われていないか、またはファイルが\n"
+#~ "空でないかを確認してください。"
 
 #~ msgid "Text found at line :%i"
 #~ msgstr "テキストが%i行目に見つかりました"

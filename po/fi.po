@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-02-11 12:51+0000\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 2001-02-11 12:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -116,7 +116,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:286 src/document.c:290
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Nimetön"
 
@@ -300,7 +300,7 @@ msgstr ""
 "Kuvaus : %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: Asetukset"
 
@@ -327,8 +327,8 @@ msgid "Text not found."
 msgstr "Merkkijonoa ei löytynyt."
 
 #: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "found and replaced %i occurrences."
+#, fuzzy, c-format
+msgid "Found and replaced %i occurrences."
 msgstr "löydetty ja korvattu %i kertaa."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -383,14 +383,18 @@ msgid "Enable Auto-indent"
 msgstr "Sisennä automaattisesti"
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "Yleiset"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr "UAK (Usean Asiakirjan Käyttöliittymä)"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -402,7 +406,7 @@ msgstr ""
 "Ylhäällä\n"
 "Alhaalla\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -414,95 +418,95 @@ msgstr ""
 "Alisteiset\n"
 "Oletus\n"
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "Tila: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr "Muistio-tilan painikkeet: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "Kumoa"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr "Aseta kumoamiskerroille raja :"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "taso(a)"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "Asiakirjat"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "Kirjasimet"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "Valitse kirjasinlaji"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "Oletuskirjasin: "
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "Värit"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "Taustaväri: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "Tekstin väri: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "Kirjasimet/Värit"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "Tulostus"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr "Lisää _otsikkorivi"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr "Rivitä _automaattisesti"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr "Tulosta _rivinumero joka"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr ":s rivi"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr "_Pysty"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr "_Vaaka"
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "Paperi"
 
@@ -583,17 +587,17 @@ msgstr "Asennetut liitännäiset"
 msgid "Plugin description"
 msgstr "Liitännäisen kuvaus"
 
-#: src/document.c:260 src/document.c:264
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:465
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "Tiedostoa ``%s'' on muutettu.  Haluatko tallentaa sen?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:692
+#: src/document.c:710
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -608,45 +612,29 @@ msgstr ""
 "\n"
 "Varmista, että tiedosto on olemassa."
 
-#: src/document.c:735
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Nimetön %i"
 
-#: src/document.c:745 src/document.c:753
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(muutettu)"
 
-#: src/document.c:747 src/document.c:755
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr "(vainluku)"
 
-#: src/document.c:806 src/document.c:846
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr "Tiedostolla ei ole oikeanlaista päätettä\n"
 
-#: src/document.c:854
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr "Tiedostoa %s ei löytynyt."
 
-#: src/file.c:84
-msgid ""
-"Hello Dear Translator :\n"
-"This is the unstable branch of gedit. \n"
-"I think you should be translating the gedit-1-0 branch. To get it from cvs "
-"type : \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Thank you. Chema"
-msgstr ""
-"Tervehdys hyvä kääntäjä :\n"
-"Tämä on geditin epävakaa haara. \n"
-"Luullakseni sinun pitäisi olla kääntämässä gedit-1-0 -haaraa. Saadaksesi sen "
-"cvs:stä, komenna: \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Kiitos. Chema"
-
-#: src/file.c:198
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -655,7 +643,7 @@ msgstr ""
 "Virhe avattaessa tiedostoa \"%s\".\n"
 "Varmista, että tiedosto on olemassa."
 
-#: src/file.c:220
+#: src/file.c:219
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -664,7 +652,7 @@ msgstr ""
 "Virhe avattaessa tiedostoa \"%s\".\n"
 "Ei voitu varata tarvittavaa muistia."
 
-#: src/file.c:233
+#: src/file.c:232
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -679,7 +667,7 @@ msgstr ""
 "\n"
 "Varmista, että sinulla on lukuoikeudet tiedostoon."
 
-#: src/file.c:253
+#: src/file.c:252
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -690,7 +678,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:274
+#: src/file.c:273
 #, c-format
 msgid ""
 "Internal error reading the file: \n"
@@ -705,7 +693,7 @@ msgstr ""
 "\n"
 "Pyydämme sinua ilmoittamaan ongelmasta osoitteeseen submit@bugs.gnome.org"
 
-#: src/file.c:291
+#: src/file.c:290
 #, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
@@ -716,15 +704,15 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:471
+#: src/file.c:482
 msgid "Save As..."
 msgstr "Tallenna nimellä..."
 
-#: src/file.c:535
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "Asiakirja on tyhjä"
 
-#: src/file.c:546
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -741,7 +729,7 @@ msgstr ""
 "Varmista, että antamasi polku on olemassa, ja että sinulla on asiaankuuluvat "
 "kirjoitusoikeudet."
 
-#: src/file.c:559
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -758,7 +746,7 @@ msgstr ""
 "Syy tuntematon (1). Pyydämme sinua ilmoittamaan ongelmasta osoitteeseen "
 "submit@bugs.gnome.org"
 
-#: src/file.c:576
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -775,46 +763,46 @@ msgstr ""
 "Syy tuntematon (2). Pyydämme sinua ilmoittamaan ongelmasta osoitteeseen "
 "submit@bugs.gnome.org"
 
-#: src/file.c:675
+#: src/file.c:697
 msgid "Could not allocate the required memory."
 msgstr "Operaatiolle ei voitu varata tarvittavaa määrää muistia."
 
-#: src/file.c:695
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr "Vika putkessa (pipe) ."
 
-#: src/file.c:806 src/file.c:813
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "Ladattu tiedosto %s"
 
-#: src/file.c:820
+#: src/file.c:842
 #, c-format
 msgid "Loaded %i files"
 msgstr "Ladattu %i tiedostoa"
 
-#: src/file.c:886
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "Avaa tiedosto ..."
 
-#: src/file.c:1014
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "Haluatko korvata tiedoston ``%s'' ?"
 
-#: src/file.c:1026
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "Asiakirjaa ei tallennettu."
 
-#: src/file.c:1036
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "Virhe tallennettaessa tiedostoa!"
 
-#: src/file.c:1165
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr "Et voi palauttaa Nimettömään asiakirjaan\n"
 
-#: src/file.c:1178
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -823,7 +811,7 @@ msgstr ""
 "Haluatko varmasti palauttaa kaikki muutokset ennalleen?\n"
 "(%s)"
 
-#: src/file.c:1209
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Tiedostoa ``%s'' ei ole olemassa.  Haluatko luoda sen?"
@@ -1080,16 +1068,16 @@ msgstr "Virhe, init_plugin palautti virheen"
 msgid "Error, plugin is still in use"
 msgstr "Virhe, liitännäinen on yhä käytössä"
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "Sivut"
 
-#: src/print.c:353
+#: src/print.c:355
 #, c-format
 msgid "gedit - [%s]: Print Preview"
 msgstr "gedit - [%s]: Tulostuksen esikatselu"
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1098,7 +1086,7 @@ msgstr ""
 "gedit ei löydä kirjasinta \"%s\".\n"
 "gedit ei pysty tulostamaan ilman tätä kirjasinta."
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Sivu: %i/%i"
@@ -1106,17 +1094,17 @@ msgstr "Sivu: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "_Tiedosto/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Virhe avattaessa tiedostoa %s pikavalinnan kautta"
@@ -1154,6 +1142,21 @@ msgstr ""
 "Nykyinen rivi: %i\n"
 "Nykyinen sarake: %i"
 
-#: src/view.c:977
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "Viimeistä näkymää ei voi poistaa."
+
+#~ msgid ""
+#~ "Hello Dear Translator :\n"
+#~ "This is the unstable branch of gedit. \n"
+#~ "I think you should be translating the gedit-1-0 branch. To get it from cvs "
+#~ "type : \n"
+#~ "cvs -z3 co -r gedit-1-0 gedit\n"
+#~ "Thank you. Chema"
+#~ msgstr ""
+#~ "Tervehdys hyvä kääntäjä :\n"
+#~ "Tämä on geditin epävakaa haara. \n"
+#~ "Luullakseni sinun pitäisi olla kääntämässä gedit-1-0 -haaraa. Saadaksesi sen "
+#~ "cvs:stä, komenna: \n"
+#~ "cvs -z3 co -r gedit-1-0 gedit\n"
+#~ "Kiitos. Chema"

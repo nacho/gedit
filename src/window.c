@@ -483,12 +483,7 @@ gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
 		}
 		
 		count++;
-
-		g_assert(count <= 10); /* Note: change this line if popup menu changes */
 	}
-
-	g_assert(count != 0);
-
 	
 	/* Set plugins menu sensitivity*/
 	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_MENUBAR_NAME);	

@@ -359,7 +359,7 @@ dialog_display_messages (GeditReplaceDialog *dialog)
 		search_not_found_notify (dialog->view);
 
 	if (dialog->replacements > 0) {
-		msg = g_strdup_printf (_("found and replaced %i occurrences."),
+		msg = g_strdup_printf (_("Found and replaced %i occurrences."),
 				       dialog->replacements);
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,

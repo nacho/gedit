@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.1\n"
-"POT-Creation-Date: 2000-12-26 17:39+0100\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 2000-10-10 21:22+0300\n"
 "Last-Translator: Gediminas Paulauskas <menesis@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konf.lt>\n"
@@ -112,7 +112,7 @@ msgid ""
 msgstr "gedit negalėjo sukurti laikinos bylos.\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:269 src/print.c:703
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Bevardis"
 
@@ -294,7 +294,7 @@ msgstr ""
 "Aprašymas: %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: Nuostatos"
 
@@ -308,7 +308,7 @@ msgstr "gedit: Nuostatos"
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:266
+#: src/dialogs/dialog-replace.c:135 src/menus.c:283
 msgid "Find"
 msgstr "Rasti"
 
@@ -321,8 +321,8 @@ msgid "Text not found."
 msgstr "Tekstas nerastas."
 
 #: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "found and replaced %i occurrences."
+#, fuzzy, c-format
+msgid "Found and replaced %i occurrences."
 msgstr "radau ir pakeičiau %i vietose."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -377,14 +377,18 @@ msgid "Enable Auto-indent"
 msgstr "Leisti savaime atitraukti"
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "Pagrindas"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (kelių dokumentų sąsaja)"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -396,7 +400,7 @@ msgstr ""
 "Viršuje\n"
 "Apačioje\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -408,95 +412,97 @@ msgstr ""
 "Modalinis\n"
 "Įprastas\n"
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "Pobūdis: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr "Užrašų knygelės lapų vieta: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:245
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "Atšaukimas"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr "Apriboti galimybę atšaukti iki "
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "kartų"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "Dokumentai"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "Šriftai"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "Pasirink šriftą"
 
-#: src/dialogs/prefs.glade.h:34
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaĄąBbCcČčDdEeĘęĖėFfGgHhIiĮįYyJjKkLlMmNnOoPpRrSsŠšTtUuŲųŪūVvZzŽž"
-
 #: src/dialogs/prefs.glade.h:35
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+"AaĄąBbCcČčDdEeĘęĖėFfGgHhIiĮįYyJjKkLlMmNnOoPpRrSsŠšTtUuŲųŪūVvZ"
+"zŽž"
+
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "Įprastas šriftas: "
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "Spalvos"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "Pasirink spalvą"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "Fono spalva: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "Raidžių spalva: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "Šriftai/Spalvos"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "Spausdinimas"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr "Pridėti _antraštę"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr "Leisti _laužyti žodžius"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr "Spausdinti eilučių _numerius kas:"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr "eilutes"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr "_Stačias lapas"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr "_Gulsčias lapas"
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "Popierius"
 
@@ -582,48 +588,51 @@ msgstr "Įdiegti priedai"
 msgid "Plugin description"
 msgstr "Priedo aprašymas"
 
-#: src/document.c:251
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:443
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "=A5%s“ buvo pakeistas. Ar nori jį išsaugoti?"
 
-#: src/document.c:652
+#. If you try to open a non existant remote file
+#: src/document.c:710
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while opening the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please make sure the file exists."
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Bevardis %i"
 
-#: src/document.c:658
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(pakeistas)"
 
-#: src/document.c:660
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr "(tik skaitomas)"
 
-#: src/document.c:710 src/document.c:750
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr "Byla nesibaigia leistinu plėtiniu\n"
 
-#: src/document.c:758
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr "Bylos %s neradau."
 
-#: src/file.c:79
-msgid ""
-"Hello Dear Translator :\n"
-"This is the unstable branch of gedit. \n"
-"I think you should be translating the gedit-1-0 branch. To get it from cvs "
-"type : \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Thank you. Chema"
-msgstr ""
-
-#: src/file.c:169
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -632,36 +641,23 @@ msgstr ""
 "Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
 "Prašau, įsitikink, ar tokia byla yra."
 
-#: src/file.c:180
+#: src/file.c:219
 #, fuzzy, c-format
 msgid ""
-"An error was encountered while opening the file:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Please make sure the file is not being used by another application\n"
-"and that the file is not empty."
+"An error was encountered while opening the file \"%s\".\n"
+"Could not allocate the required memory."
 msgstr ""
-"Įvyko klaida, bandant atidaryti bylą:\n"
-"\n"
-"%s\n"
-"\n"
-"Prašau, įsitikink, ar byla nėra naudojama kitos programos,\n"
-"ir kad byla nėra tuščia."
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
 
-#: src/file.c:191 src/file.c:475
-msgid "Could not allocate the required memory."
-msgstr "Nepavyko paskirti reikalingo atminties kiekio."
-
-#: src/file.c:197
-#, c-format
+#: src/file.c:232
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to open the file: \n"
+"An error was encountered while reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have permissions for opening the file."
+"Make sure that you have permissions for opening the file. "
 msgstr ""
 "gedit negalėjo atidaryti bylos: \n"
 "\n"
@@ -669,15 +665,51 @@ msgstr ""
 "\n"
 "Įsitikink, kad turi tos bylos skaitymo teisę."
 
-#: src/file.c:314
+#: src/file.c:252
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while reading the file: \n"
+"\n"
+"%s"
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/file.c:273
+#, fuzzy, c-format
+msgid ""
+"Internal error reading the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please, report this error to submit@bugs.gnome.org."
+msgstr ""
+"gedit negalėjo išsaugoti bylos:\n"
+"\n"
+" %s \n"
+"\n"
+"dėl nežinomos priežasties (1). Prašau pranešti šią problemą į "
+"submit@bugs.gnome.org"
+
+#: src/file.c:290
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while closing the file: \n"
+"\n"
+"%s"
+msgstr ""
+"Įvyko klaida, bandant atidaryti bylą =A5%s“.\n"
+"Prašau, įsitikink, ar tokia byla yra."
+
+#: src/file.c:482
 msgid "Save As..."
 msgstr "Išsaugoti kaip..."
 
-#: src/file.c:373
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "Dokumente nėra duomenų."
 
-#: src/file.c:384
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -694,7 +726,7 @@ msgstr ""
 "Įsitikink, ar yra toks kelias, kokį tu pateikei, ir ar turi reikalingas "
 "teises šiai bylai įrašyti."
 
-#: src/file.c:397
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -711,7 +743,7 @@ msgstr ""
 "dėl nežinomos priežasties (1). Prašau pranešti šią problemą į "
 "submit@bugs.gnome.org"
 
-#: src/file.c:414
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -728,42 +760,46 @@ msgstr ""
 "dėl nežinomos priežasties (2). Prašau pranešti šią problemą į "
 "submit@bugs.gnome.org"
 
-#: src/file.c:495
+#: src/file.c:697
+msgid "Could not allocate the required memory."
+msgstr "Nepavyko paskirti reikalingo atminties kiekio."
+
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr ""
 
-#: src/file.c:606 src/file.c:613
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "Įkelta byla %s"
 
-#: src/file.c:620
+#: src/file.c:842
 #, c-format
 msgid "Loaded %i files"
 msgstr "Įkeltos %i bylos"
 
-#: src/file.c:676
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "Atidaryti bylą..."
 
-#: src/file.c:807
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "=A5%s“ bus užrašyta ant viršaus. Ar nori tęsti?"
 
-#: src/file.c:819
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "Dokumentas nebuvo išsaugotas."
 
-#: src/file.c:829
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "Klaida išsaugant bylą!"
 
-#: src/file.c:949
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr "Tu negali atkurti Bevardžio dokumento\n"
 
-#: src/file.c:962
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -772,7 +808,7 @@ msgstr ""
 "Ar esi tikras, kad nori atkurti bylą be pakeitimų?\n"
 "(%s)"
 
-#: src/file.c:993
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Byla =A5%s“ neegzistuoja. Ar norėtum ją sukurti?"
@@ -785,7 +821,7 @@ msgstr "Atidaryti atitinkančią .c/.h bylą"
 msgid "_New"
 msgstr "_Naujas"
 
-#: src/menus.c:63 src/menus.c:224
+#: src/menus.c:63 src/menus.c:240
 msgid "Create a new document"
 msgstr "Sukurti naują dokumentą"
 
@@ -801,151 +837,160 @@ msgstr "Išsaugoti visas atidarytas bylas"
 msgid "Revert"
 msgstr "Atkurti"
 
-#: src/menus.c:85
+#: src/menus.c:83
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Atidaryti bylą..."
+
+#: src/menus.c:84
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/menus.c:98
 msgid "Print pre_view"
 msgstr "Spaudinio per_žiūra"
 
-#: src/menus.c:85
+#: src/menus.c:98
 msgid "Print preview"
 msgstr "Spaudinio peržiūra"
 
-#: src/menus.c:89
+#: src/menus.c:102
 msgid "Print preview..."
 msgstr "Spaudinio peržiūra..."
 
-#: src/menus.c:90
+#: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Peržiūrėti, kaip atrodys išspausdintas"
 
-#: src/menus.c:97
+#: src/menus.c:110
 msgid "Close All"
 msgstr "Uždaryti visas"
 
-#: src/menus.c:98
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Uždaryti visas atidarytas bylas"
 
-#: src/menus.c:122
+#: src/menus.c:138
 msgid "Goto _Line..."
 msgstr "_Eiti į eilutę..."
 
-#: src/menus.c:123
+#: src/menus.c:139
 msgid "Go to a specific line number"
 msgstr "Eiti į nurodytą eilutės numerį"
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "File _Info"
 msgstr ""
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "Get the basic file info"
 msgstr ""
 
-#: src/menus.c:151
+#: src/menus.c:167
 msgid "_Add View"
 msgstr "_Pridėti vaizdą"
 
-#: src/menus.c:152
+#: src/menus.c:168
 msgid "Add a new view of the document"
 msgstr "Pridėti naują dokumento vaizdą"
 
-#: src/menus.c:154
+#: src/menus.c:170
 msgid "_Remove View"
 msgstr "_Panaikinti vaizdą"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "Remove view of the document"
 msgstr "Panaikinti dokumento vaizdą"
 
-#: src/menus.c:198 src/plugin.c:90 src/plugin.c:401
+#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
 msgid "_Plugins"
 msgstr "_Priedai"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Documents"
 msgstr "_Dokumentai"
 
-#: src/menus.c:224
+#: src/menus.c:240
 msgid "New"
 msgstr "Naujas"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open"
 msgstr "Atidaryti"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open a file"
 msgstr "Atidaryti bylą"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save the current file"
 msgstr "Išsaugoti esamąją bylą"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close"
 msgstr "Uždaryti"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close the current file"
 msgstr "Uždaryti esamąją bylą"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print"
 msgstr "Spausdinti"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print the current file"
 msgstr "Spausdinti esamąją bylą"
 
-#: src/menus.c:245
+#: src/menus.c:261
 msgid "Undo last operation"
 msgstr "Atšaukti paskutinį veiksmą"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo"
 msgstr "Pakartoti"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo last operation"
 msgstr "Pakartoti atšauktą veiksmą"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut"
 msgstr "Iškirpti"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut the selection"
 msgstr "Iškirpti pažymėjimą"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy"
 msgstr "Kopijuoti"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy the selection"
 msgstr "Kopijuoti pažymėjimą"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste"
 msgstr "Įdėti"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste the clipboard"
 msgstr "Įdėti krepšio turinį"
 
-#: src/menus.c:266
+#: src/menus.c:283
 msgid "Search for a string"
 msgstr "Ieškoti eilutės"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit"
 msgstr "Išeiti"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit the program"
 msgstr "Išeiti iš programos"
 
@@ -1006,24 +1051,24 @@ msgstr "Klaida: negaliu atidaryti modulio bylos, %s"
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Klaida: priedas neturi init_plugin funkcijos savyje."
 
-#: src/plugin.c:344
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr "Klaida: init_plugin grąžino klaidą"
 
-#: src/plugin.c:391
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "Klaida: priedas vis dar naudojamas"
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "Puslapiai"
 
-#: src/print.c:353
-#, c-format
-msgid "gedit (%s): Print Preview"
+#: src/print.c:355
+#, fuzzy, c-format
+msgid "gedit - [%s]: Print Preview"
 msgstr "gedit (%s): Spaudinio peržiūra"
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1032,7 +1077,7 @@ msgstr ""
 "gedit negalėjo rasti šrifto =A5%s“.\n"
 "gedit nemoka spausdinti, kai šis šriftas neįdiegtas."
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Puslapis: %i/%i"
@@ -1040,17 +1085,17 @@ msgstr "Puslapis: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "_Byla/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "_Byla"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Negaliu atidaryti ankstesnės bylos: %s"
@@ -1088,9 +1133,26 @@ msgstr ""
 "Esama eilutė: %i\n"
 "Esamas stulpelis: %i"
 
-#: src/view.c:963
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "Tu negali pašalinti paskutinio dokumento vaizdo."
+
+#, fuzzy
+#~ msgid ""
+#~ "An error was encountered while opening the file:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Please make sure the file is not being used by another application\n"
+#~ "and that the file is not empty."
+#~ msgstr ""
+#~ "Įvyko klaida, bandant atidaryti bylą:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Prašau, įsitikink, ar byla nėra naudojama kitos programos,\n"
+#~ "ir kad byla nėra tuščia."
 
 #~ msgid "Text found at line :%i"
 #~ msgstr "Tekstą radau eilutėje: %i"

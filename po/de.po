@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.3\n"
-"POT-Creation-Date: 2000-11-26 11:52+0100\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 2000-11-26 11:54+0100\n"
 "Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: deutsch <gnome-de@gnome.org>\n"
@@ -114,7 +114,7 @@ msgid ""
 msgstr "gedit kann keine temp-Datei erstellen.\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:269 src/print.c:703
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Unhenannt"
 
@@ -297,7 +297,7 @@ msgstr ""
 "Beschreibung : %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: Einstellungen"
 
@@ -311,7 +311,7 @@ msgstr "gedit: Einstellungen"
 msgid "Replace"
 msgstr "Ersetzen"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:266
+#: src/dialogs/dialog-replace.c:135 src/menus.c:283
 msgid "Find"
 msgstr "Suchen"
 
@@ -324,8 +324,8 @@ msgid "Text not found."
 msgstr "Text nicht gefunden."
 
 #: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "found and replaced %i occurrences."
+#, fuzzy, c-format
+msgid "Found and replaced %i occurrences."
 msgstr "%i Treffer gefunden und ersetzt."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -381,14 +381,18 @@ msgid "Enable Auto-indent"
 msgstr "Automatisch einrücken aktivieren"
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "Allgemein"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Mehrfach-Dokument-Interface)"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -400,7 +404,7 @@ msgstr ""
 "Oben\n"
 "Unten\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -412,95 +416,95 @@ msgstr ""
 "Modal\n"
 "Voreinstellung\n"
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "Modus: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr "Reiterposition bei Notizbuch: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:245
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "Rückgängig"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr "Ebenen möglicher Rückgängigmachung begrenzen auf:"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "Ebene(n)"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "Dokumente"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "Schriftarten"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "Wählen Sie eine Schrifart"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÄäÖöÜüß"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "Voreingestellte Schrift:"
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "Farben"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "Wählen Sie eine Farbe"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "Hintergrund: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "Vordergrund: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "Schriftarten/Farben"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "Drucken"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr "Kopfzeile hinzufügen"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr "Automatischer Wortumbruch an/aus"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr "Zeilennummern drucken alle:"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr "Zeile(n)"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr "Hochformat"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr "Querformat"
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "Papier"
 
@@ -581,38 +585,51 @@ msgstr "Installierte Plugins"
 msgid "Plugin description"
 msgstr "Plugin-Beschreibung"
 
-#: src/document.c:251
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "SS - "
 
-#: src/document.c:443
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' wurde geändert. Wollen Sie es speichern?"
 
-#: src/document.c:652
+#. If you try to open a non existant remote file
+#: src/document.c:710
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while opening the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please make sure the file exists."
+msgstr ""
+"Beim Öffnen der Datei %s ist ein Fehler aufgetreten.\n"
+"Stellen Sie sicher, dass die Datei existiert."
+
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Unbenannt %i"
 
-#: src/document.c:658
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(verändert)"
 
-#: src/document.c:660
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr "(schreibgeschützt)"
 
-#: src/document.c:710 src/document.c:750
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr "Der Dateiname endet nicht mit einer gültigen Erweiterung\n"
 
-#: src/document.c:758
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr "Datei %s wirde nicht gefunden."
 
-#: src/file.c:161
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -621,37 +638,23 @@ msgstr ""
 "Beim Öffnen der Datei %s ist ein Fehler aufgetreten.\n"
 "Stellen Sie sicher, dass die Datei existiert."
 
-#: src/file.c:172
-#, c-format
+#: src/file.c:219
+#, fuzzy, c-format
 msgid ""
-"An error was encountered while opening the file:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Please make sure the file is not being used by another application\n"
-"and that the file is not empty."
+"An error was encountered while opening the file \"%s\".\n"
+"Could not allocate the required memory."
 msgstr ""
-"Ein Fehler ist beim Öffnen der Datei aufgetreten\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Bitte stellen Sie sicher, dass die Datei weder von einer anderen\n"
-"Anwendung verwendet wird noch leer ist."
+"Beim Öffnen der Datei %s ist ein Fehler aufgetreten.\n"
+"Stellen Sie sicher, dass die Datei existiert."
 
-#: src/file.c:183 src/file.c:467
-msgid "Could not allocate the required memory."
-msgstr "Benötigter Speicher konnte nicht bereitgestellt werden."
-
-#: src/file.c:189
-#, c-format
+#: src/file.c:232
+#, fuzzy, c-format
 msgid ""
-"gedit was unable to open the file: \n"
+"An error was encountered while reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have permissions for opening the file."
+"Make sure that you have permissions for opening the file. "
 msgstr ""
 "gedit konnte die Datei\n"
 "\n"
@@ -660,23 +663,59 @@ msgstr ""
 "nicht öffnen.\n"
 "Stellen Sie sicher, dass Sie Lesezugriff zu dieser Datei haben."
 
-#: src/file.c:306
+#: src/file.c:252
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while reading the file: \n"
+"\n"
+"%s"
+msgstr ""
+"Beim Öffnen der Datei %s ist ein Fehler aufgetreten.\n"
+"Stellen Sie sicher, dass die Datei existiert."
+
+#: src/file.c:273
+#, fuzzy, c-format
+msgid ""
+"Internal error reading the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please, report this error to submit@bugs.gnome.org."
+msgstr ""
+"gEdit konnte die Datei\n"
+"\n"
+" %s \n"
+"\n"
+"aus einem unbekannten Grund (1) nicht speichern. Bitte senden Sie\n"
+"einen Bericht über dieses Problem an submit@bugs.gnome.org."
+
+#: src/file.c:290
+#, fuzzy, c-format
+msgid ""
+"An error was encountered while closing the file: \n"
+"\n"
+"%s"
+msgstr ""
+"Beim Öffnen der Datei %s ist ein Fehler aufgetreten.\n"
+"Stellen Sie sicher, dass die Datei existiert."
+
+#: src/file.c:482
 msgid "Save As..."
 msgstr "Speichern unter..."
 
-#: src/file.c:365
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "Das Dokument beinhaltet keinen Text"
 
-#: src/file.c:376
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
 "\n"
 " %s \n"
 "\n"
-"Make sure that the path you provided exists,and that you have the appropriate "
-"write permissions."
+"Make sure that the path you provided exists,and that you have the "
+"appropriate write permissions."
 msgstr ""
 "gedit konnte die Datei\n"
 "\n"
@@ -687,7 +726,7 @@ msgstr ""
 "Stellen Sie sicher, dass der von Ihnen angegebene Pfad existiert und\n"
 "Sie die notwendigen Schreibrechte haben."
 
-#: src/file.c:389
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -704,7 +743,7 @@ msgstr ""
 "aus einem unbekannten Grund (1) nicht speichern. Bitte senden Sie\n"
 "einen Bericht über dieses Problem an submit@bugs.gnome.org."
 
-#: src/file.c:406
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -721,42 +760,46 @@ msgstr ""
 "aus einem unbekannten Grund (1) nicht speichern. Bitte senden Sie\n"
 "einen Bericht über dieses Problem an submit@bugs.gnome.org."
 
-#: src/file.c:487
+#: src/file.c:697
+msgid "Could not allocate the required memory."
+msgstr "Benötigter Speicher konnte nicht bereitgestellt werden."
+
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr "Fehler in Weiterleitung."
 
-#: src/file.c:598 src/file.c:605
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "Datei %s geladen"
 
-#: src/file.c:612
+#: src/file.c:842
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i Dateien geladen"
 
-#: src/file.c:668
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "Datei öffnen..."
 
-#: src/file.c:799
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' wird überschrieben werden. Wollen Sie fortfahren?"
 
-#: src/file.c:811
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "Dokument wurde noch nicht gespeichert."
 
-#: src/file.c:821
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "Fehler beim Speichern der Datei!"
 
-#: src/file.c:941
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr "Sie können kein leeres Dokument wiederherstellen\n"
 
-#: src/file.c:954
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -765,7 +808,7 @@ msgstr ""
 "Sind Sie sicher, dass Sie alle Änderungen zurücknehmen wollen?\n"
 "(%s)"
 
-#: src/file.c:985
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Die Datei ``%s'' existiert nicht. Wollen Sie sie erstellen?"
@@ -778,7 +821,7 @@ msgstr ".c/.h-Datei öffnen (austauschen)"
 msgid "_New"
 msgstr "_Neu"
 
-#: src/menus.c:63 src/menus.c:224
+#: src/menus.c:63 src/menus.c:240
 msgid "Create a new document"
 msgstr "Neues Dokument erzeugen"
 
@@ -794,151 +837,160 @@ msgstr "Alle offenen Dateien speichern"
 msgid "Revert"
 msgstr "Wiederherstellen"
 
-#: src/menus.c:85
+#: src/menus.c:83
+#, fuzzy
+msgid "Open from _URI..."
+msgstr "Datei öffnen..."
+
+#: src/menus.c:84
+msgid "Open a file from a specified URI"
+msgstr ""
+
+#: src/menus.c:98
 msgid "Print pre_view"
 msgstr "Vorschau drucken..."
 
-#: src/menus.c:85
+#: src/menus.c:98
 msgid "Print preview"
 msgstr "Vorschau drucken..."
 
-#: src/menus.c:89
+#: src/menus.c:102
 msgid "Print preview..."
 msgstr "Druckvorschau..."
 
-#: src/menus.c:90
+#: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Vorschau der Daten, die gedruckt werden sollen"
 
-#: src/menus.c:97
+#: src/menus.c:110
 msgid "Close All"
 msgstr "Alle schließen"
 
-#: src/menus.c:98
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Alle offenen Dateien schließen"
 
-#: src/menus.c:122
+#: src/menus.c:138
 msgid "Goto _Line..."
 msgstr "Gehe zu Zeile..."
 
-#: src/menus.c:123
+#: src/menus.c:139
 msgid "Go to a specific line number"
 msgstr "Zu einer bestimmten Zeilennummer gehen"
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "File _Info"
 msgstr "Datei _Informationen"
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "Get the basic file info"
 msgstr "Die Basis-Dateiinformationen holen"
 
-#: src/menus.c:151
+#: src/menus.c:167
 msgid "_Add View"
 msgstr "Ansicht hinzufügen"
 
-#: src/menus.c:152
+#: src/menus.c:168
 msgid "Add a new view of the document"
 msgstr "Eine neue Ansicht auf das Dokument hinzufügen"
 
-#: src/menus.c:154
+#: src/menus.c:170
 msgid "_Remove View"
 msgstr "Ansicht _entfernen"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "Remove view of the document"
 msgstr "Ansicht auf das Dokument entfernen"
 
-#: src/menus.c:198 src/plugin.c:90 src/plugin.c:401
+#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
 msgid "_Plugins"
 msgstr "_Plugins"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Documents"
 msgstr "_Dokumente"
 
-#: src/menus.c:224
+#: src/menus.c:240
 msgid "New"
 msgstr "Neu"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open"
 msgstr "Öffnen"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open a file"
 msgstr "Eine Datei öffnen"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save"
 msgstr "Speichern"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save the current file"
 msgstr "Die aktuelle Datei speichern"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close"
 msgstr "Schließen"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close the current file"
 msgstr "Die aktuelle Datei schließen"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print"
 msgstr "Drucken"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print the current file"
 msgstr "Aktuelle Datei drucken"
 
-#: src/menus.c:245
+#: src/menus.c:261
 msgid "Undo last operation"
 msgstr "Letzten Vorgang rückgängig machen"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo"
 msgstr "Wiederholen"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo last operation"
 msgstr "Letzten Vorgang wiederholen"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut"
 msgstr "Ausschneiden"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut the selection"
 msgstr "Markierten Text ausschneiden"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy"
 msgstr "Kopieren"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy the selection"
 msgstr "Markierten Text kopieren"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste the clipboard"
 msgstr "Zwischenablage einfügen"
 
-#: src/menus.c:266
+#: src/menus.c:283
 msgid "Search for a string"
 msgstr "Eine Zeichenkette suchen"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit"
 msgstr "Beenden"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit the program"
 msgstr "Das Programm beenden"
 
@@ -1007,24 +1059,24 @@ msgstr "Fehler, Moduldatei %s kann nicht geöffnet werden"
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Fehler, Plugin enthält keine Funktion init_plugin"
 
-#: src/plugin.c:344
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr "Fehler, init_plugin gab einen Fehler zurück"
 
-#: src/plugin.c:391
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "Fehler, Plugin wird immer noch verwendet"
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "Seiten"
 
-#: src/print.c:353
-#, c-format
-msgid "gedit (%s): Print Preview"
+#: src/print.c:355
+#, fuzzy, c-format
+msgid "gedit - [%s]: Print Preview"
 msgstr "gEdit (%s): Druckvorschau"
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1033,7 +1085,7 @@ msgstr ""
 "gedit kann die Schriftart \"%s\" nicht finden.\n"
 "gedit kann nicht drucken, ohne dass die Schrift installiert ist."
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Seite: %i/%i"
@@ -1041,17 +1093,17 @@ msgstr "Seite: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "_Datei/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "_Datei"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Fehler, Datei %s kann nicht geöffnet werden"
@@ -1061,8 +1113,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"Zeilen können nicht gezählt werden, wenn ein anderer Suchvorgang läuft. Bitte "
-"schließen Sie das Suchdialogfenster."
+"Zeilen können nicht gezählt werden, wenn ein anderer Suchvorgang läuft. "
+"Bitte schließen Sie das Suchdialogfenster."
 
 #: src/search.c:410
 #, c-format
@@ -1089,7 +1141,23 @@ msgstr ""
 "Aktuelle Zeile: %i\n"
 "Aktuelle Spalte: %i"
 
-#: src/view.c:963
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "Sie können die letzte Ansicht eines Dokuments nicht entfernen"
 
+#~ msgid ""
+#~ "An error was encountered while opening the file:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Please make sure the file is not being used by another application\n"
+#~ "and that the file is not empty."
+#~ msgstr ""
+#~ "Ein Fehler ist beim Öffnen der Datei aufgetreten\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Bitte stellen Sie sicher, dass die Datei weder von einer anderen\n"
+#~ "Anwendung verwendet wird noch leer ist."

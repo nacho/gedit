@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-02-09 14:38+0100\n"
+"POT-Creation-Date: 2001-02-19 11:10+0100\n"
 "PO-Revision-Date: 2001-01-16 00:08+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -119,7 +119,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:286 src/document.c:290
+#: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Namnlös"
 
@@ -301,7 +301,7 @@ msgstr ""
 "Beskrivning: %s\n"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:560
+#: src/dialogs/dialog-prefs.c:578
 msgid "gedit: Preferences"
 msgstr "gedit: Inställningar"
 
@@ -328,8 +328,8 @@ msgid "Text not found."
 msgstr "Texten kunde inte hittas."
 
 #: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "found and replaced %i occurrences."
+#, fuzzy, c-format
+msgid "Found and replaced %i occurrences."
 msgstr "hittade och ersatte %i förekomster."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
@@ -383,14 +383,18 @@ msgid "Enable Auto-indent"
 msgstr "Använd autoindrag"
 
 #: src/dialogs/prefs.glade.h:14
+msgid "Tab width : "
+msgstr ""
+
+#: src/dialogs/prefs.glade.h:15
 msgid "General"
 msgstr "Allmänt"
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (\"Multiple Document Interface\")"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid ""
 "Left\n"
 "Right\n"
@@ -402,7 +406,7 @@ msgstr ""
 "Överst\n"
 "Nederst\n"
 
-#: src/dialogs/prefs.glade.h:21
+#: src/dialogs/prefs.glade.h:22
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -414,95 +418,95 @@ msgstr ""
 "Modal\n"
 "Standard\n"
 
-#: src/dialogs/prefs.glade.h:26
+#: src/dialogs/prefs.glade.h:27
 msgid "Mode: "
 msgstr "Läge: "
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:28
 msgid "Notebook Tab Position: "
 msgstr "Flikhäftets flikposition: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29 src/menus.c:261
 msgid "Undo"
 msgstr "Ångra"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:30
 msgid "Set limit on undo levels to :"
 msgstr "Begränsa antalet ångra-steg till:"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 msgid "level(s)"
 msgstr "steg"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:32
 msgid "Documents"
 msgstr "Dokument"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Fonts"
 msgstr "Typsnitt"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Pick a Font"
 msgstr "Välj ett typsnitt"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvXxYyZzÅåÄäÖö"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "Default Font: "
 msgstr "Standardtypsnitt: "
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:37
 msgid "Colors"
 msgstr "Färger"
 
-#: src/dialogs/prefs.glade.h:37 src/dialogs/prefs.glade.h:38
+#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
 msgid "Pick a color"
 msgstr "Välj en färg"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:40
 msgid "Background: "
 msgstr "Bakgrund: "
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:41
 msgid "Foreground: "
 msgstr "Förgrund: "
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:42
 msgid "Fonts/Colors"
 msgstr "Typsnitt/färger"
 
-#: src/dialogs/prefs.glade.h:42 src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
 msgid "Printing"
 msgstr "Utskrift"
 
-#: src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:44
 msgid "Add _header"
 msgstr "Lägg till rubri_k"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Enable word _wrapping"
 msgstr "Använd _radbrytning"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Print _line numbers every:"
 msgstr "Skriv ut _radnumren var:"
 
-#: src/dialogs/prefs.glade.h:46
+#: src/dialogs/prefs.glade.h:47
 msgid "line(s)"
 msgstr "rad(er)"
 
-#: src/dialogs/prefs.glade.h:47
+#: src/dialogs/prefs.glade.h:48
 msgid "_Portrait"
 msgstr "_Stående"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
 msgid "_Landscape"
 msgstr "_Liggande"
 
-#: src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:51
 msgid "Paper"
 msgstr "Papper"
 
@@ -583,17 +587,17 @@ msgstr "Installerade insticksmoduler"
 msgid "Plugin description"
 msgstr "Beskrivning av insticksmodul"
 
-#: src/document.c:260 src/document.c:264
+#: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:465
+#: src/document.c:479
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "\"%s\" har ändrats. Vill du spara den?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:692
+#: src/document.c:710
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -608,45 +612,29 @@ msgstr ""
 "\n"
 "Var vänlig och kontrollera att filen finns."
 
-#: src/document.c:735
+#: src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Namnlös %i"
 
-#: src/document.c:745 src/document.c:753
+#: src/document.c:763 src/document.c:771
 msgid "(modified)"
 msgstr "(ändrad)"
 
-#: src/document.c:747 src/document.c:755
+#: src/document.c:765 src/document.c:773
 msgid "(readonly)"
 msgstr "(skrivskyddad)"
 
-#: src/document.c:806 src/document.c:846
+#: src/document.c:824 src/document.c:864
 msgid "This file does not end with a valid extension\n"
 msgstr "Denna fil slutar inte med en giltig filändelse\n"
 
-#: src/document.c:854
+#: src/document.c:872
 #, c-format
 msgid "The file %s was not found."
 msgstr "Filen %s hittades inte."
 
-#: src/file.c:84
-msgid ""
-"Hello Dear Translator :\n"
-"This is the unstable branch of gedit. \n"
-"I think you should be translating the gedit-1-0 branch. To get it from cvs "
-"type : \n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Thank you. Chema"
-msgstr ""
-"Hej kära översättare:\n"
-"Det här är den instabila grenen av gedit.\n"
-"Jag tror att du borde översätta gedit-1-0-grenen. För att hämta den från cvs "
-"kan du skriva:\n"
-"cvs -z3 co -r gedit-1-0 gedit\n"
-"Tack. Chema"
-
-#: src/file.c:198
+#: src/file.c:197
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -655,7 +643,7 @@ msgstr ""
 "Ett fel uppstod vid öppning av filen \"%s\".\n"
 "Var vänlig och se till att filen finns."
 
-#: src/file.c:220
+#: src/file.c:219
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -664,7 +652,7 @@ msgstr ""
 "Ett fel uppstod vid öppning av filen \"%s\".\n"
 "Kunde inte allokera tillräckligt med minne."
 
-#: src/file.c:233
+#: src/file.c:232
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -679,7 +667,7 @@ msgstr ""
 "\n"
 "Se till att du har rättigheter att öppna filen."
 
-#: src/file.c:253
+#: src/file.c:252
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -690,7 +678,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:274
+#: src/file.c:273
 #, c-format
 msgid ""
 "Internal error reading the file: \n"
@@ -705,7 +693,7 @@ msgstr ""
 "\n"
 "Var vänlig och rapportera detta problem till submit@bugs.gnome.org"
 
-#: src/file.c:291
+#: src/file.c:290
 #, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
@@ -716,15 +704,15 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:471
+#: src/file.c:482
 msgid "Save As..."
 msgstr "Spara som..."
 
-#: src/file.c:535
+#: src/file.c:552
 msgid "The document contains no data."
 msgstr "Dokumentet innehåller ingen information."
 
-#: src/file.c:546
+#: src/file.c:563
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -741,7 +729,7 @@ msgstr ""
 "Se till att sökvägen du angav existerar, och att du har de rätta "
 "skrivrättigheterna."
 
-#: src/file.c:559
+#: src/file.c:577
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -758,7 +746,7 @@ msgstr ""
 "på grund av en okänd orsak (1). Var vänlig och rapportera detta problem till "
 "submit@bugs.gnome.org"
 
-#: src/file.c:576
+#: src/file.c:595
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -775,46 +763,46 @@ msgstr ""
 "på grund av en okänd orsak (2). Var vänlig och rapportera detta problem till "
 "submit@bugs.gnome.org"
 
-#: src/file.c:675
+#: src/file.c:697
 msgid "Could not allocate the required memory."
 msgstr "Kunde inte allokera tillräckligt med minne."
 
-#: src/file.c:695
+#: src/file.c:717
 msgid "Error in the pipe ."
 msgstr "Fel i röret."
 
-#: src/file.c:806 src/file.c:813
+#: src/file.c:828 src/file.c:835
 #, c-format
 msgid "Loaded file %s"
 msgstr "Läste in filen %s"
 
-#: src/file.c:820
+#: src/file.c:842
 #, c-format
 msgid "Loaded %i files"
 msgstr "Läste in %i filer"
 
-#: src/file.c:886
+#: src/file.c:908
 msgid "Open File ..."
 msgstr "Öppna fil..."
 
-#: src/file.c:1014
+#: src/file.c:1041
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "\"%s\" kommer att skrivas över. Vill du fortsätta?"
 
-#: src/file.c:1026
+#: src/file.c:1053
 msgid "Document has not been saved."
 msgstr "Dokumentet har inte sparats."
 
-#: src/file.c:1036
+#: src/file.c:1063
 msgid "Error saving file!"
 msgstr "Fel vid sparande av fil!"
 
-#: src/file.c:1165
+#: src/file.c:1192
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan inte återställa ett namnlöst dokument\n"
 
-#: src/file.c:1178
+#: src/file.c:1205
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -823,7 +811,7 @@ msgstr ""
 "Är du säker att du vill återställa alla ändringar?\n"
 "(%s)"
 
-#: src/file.c:1209
+#: src/file.c:1236
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
@@ -1080,16 +1068,16 @@ msgstr "Fel, init_plugin retunerade ett fel"
 msgid "Error, plugin is still in use"
 msgstr "Fel, insticksmodulen används fortfarande"
 
-#: src/print.c:295
+#: src/print.c:297
 msgid "Pages"
 msgstr "Sidor"
 
-#: src/print.c:353
+#: src/print.c:355
 #, c-format
 msgid "gedit - [%s]: Print Preview"
 msgstr "gedit - [%s]: Förhandsgranska"
 
-#: src/print.c:652 src/print.c:667
+#: src/print.c:654 src/print.c:669
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1098,7 +1086,7 @@ msgstr ""
 "gedit kunde inte hitta typsnittet \"%s\".\n"
 "gedit kan inte skriva ut om inte det typsnittet är installerat."
 
-#: src/print.c:960
+#: src/print.c:966
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Sida: %i/%i"
@@ -1106,17 +1094,17 @@ msgstr "Sida: %i/%i"
 #. xgettext translators : Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:246
+#: src/recent.c:252
 msgid "_File/"
 msgstr "_Arkiv/"
 
 #. xgettext translators : Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:255
+#: src/recent.c:261
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/recent.c:277
+#: src/recent.c:283
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Kunde inte öppna nyligen använd fil: %s"
@@ -1154,9 +1142,24 @@ msgstr ""
 "Aktuell rad: %i\n"
 "Aktuell kolumn: %i"
 
-#: src/view.c:977
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr "Du kan inte ta bort den sista vyn av ett dokument."
+
+#~ msgid ""
+#~ "Hello Dear Translator :\n"
+#~ "This is the unstable branch of gedit. \n"
+#~ "I think you should be translating the gedit-1-0 branch. To get it from cvs "
+#~ "type : \n"
+#~ "cvs -z3 co -r gedit-1-0 gedit\n"
+#~ "Thank you. Chema"
+#~ msgstr ""
+#~ "Hej kära översättare:\n"
+#~ "Det här är den instabila grenen av gedit.\n"
+#~ "Jag tror att du borde översätta gedit-1-0-grenen. För att hämta den från cvs "
+#~ "kan du skriva:\n"
+#~ "cvs -z3 co -r gedit-1-0 gedit\n"
+#~ "Tack. Chema"
 
 #~ msgid ""
 #~ "An error was encountered while opening the file:\n"

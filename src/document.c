@@ -197,7 +197,7 @@ gedit_document_set_readonly (GeditDocument *doc, gint readonly)
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_assert(doc != NULL);
+	g_return_if_fail(doc != NULL);
 	
 	doc->readonly = readonly;
 	doc->changed = FALSE;
@@ -249,16 +249,20 @@ gedit_document_get_tab_name (GeditDocument *doc, gboolean star)
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 	
-	g_assert(doc != NULL);
+	g_return_val_if_fail (doc != NULL, g_strdup ("?"));
 	
 	if (doc->filename != NULL)
 	{
 		gchar * tab_name = NULL;
 		gchar * unescaped_str = gnome_vfs_unescape_string_for_display (doc->filename);
 
-		g_assert (unescaped_str != NULL);
+		if(unescaped_str == NULL) 
+		{
+			g_warning ("unescaped_str == NULL in gedit_document_get_tab_name ()");
+			unescaped_str = g_strdup (doc->filename);
+		}
 		
-		if(!doc->changed || !star)
+		if (!doc->changed || !star)
 		{
 			tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(unescaped_str));
 		}
@@ -279,14 +283,14 @@ gedit_document_get_tab_name (GeditDocument *doc, gboolean star)
 			{
 				nth_doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
 				
-				if ( nth_doc->untitled_number > max_number)
+				if (nth_doc->untitled_number > max_number)
 				{
 					max_number = nth_doc->untitled_number;
 				}
 			}
 			doc->untitled_number = max_number + 1;
 		}
-		if(!doc->changed || !star)
+		if (!doc->changed || !star)
 		{
 			return _(g_strdup_printf ("%s %d", _("Untitled"), doc->untitled_number));
 		}

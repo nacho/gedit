@@ -326,8 +326,8 @@ gedit_recent_update_all_windows (GnomeMDI *mdi)
 	
 	gedit_debug (DEBUG_RECENT, "");
 
-	g_assert(mdi != NULL);
-       	g_assert(mdi->windows != NULL);
+	g_return_if_fail (mdi != NULL);
+       	g_return_if_fail (mdi->windows != NULL);
        
 	for (i = 0; i < g_list_length (mdi->windows); i++)
         {

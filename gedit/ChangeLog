@@ -1,3 +1,17 @@
+2001-02-19  Paolo Maggi  <maggi@athena.polito.it>
+
+	* document.c (gedit_document_set_readonly): now uses g_return_if_fail
+	instead of g_assert
+	(gedit_document_get_tab_name): now uses g_return_val_if_fail
+	instead of g_assert
+
+	* recent.c (gedit_recent_update_all_windows): now uses g_return_if_fail
+	instead of g_assert
+
+	* window.c (gedit_window_set_widgets_sensitivity_ro): g_asserts removed
+
+	* dialogs/dialog-replace.c (dialog_display_messages): fix typo
+
 2001-02-15  Paolo Maggi  <maggi@athena.polito.it>
 
 	* file.c (gedit_file_open): flash a message on the status bar
