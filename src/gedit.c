@@ -18,9 +18,7 @@
 
 #include <unistd.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -77,120 +75,7 @@ gint file_open_wrapper (gE_data *data)
 	return FALSE;
 }
 
-#ifdef WITHOUT_GNOME 
 
-/* 
- *  GTK-ONLY CODE 
- *  STARTS HERE
- */
-
-static void gE_show_version(void);
-
-void prog_init(char **file)
-{
-	gE_window *window;
-	gE_document *doc;
-	gE_data *data;
-	plugin_callback_struct callbacks;
-	data = g_malloc0 (sizeof (gE_data));
-#ifdef DEBUG
-	g_print("Initialising gEdit...\n");
-
-	g_print("%s\n",*file);
-#endif
-
-	gE_prefs_open();
-
-#ifdef GTK_HAVE_FEATURES_1_1_0	
-	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
-	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
-	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
-	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
-#endif
-
-	window_list = NULL;
-	window = gE_window_new();
-	data->window = window;
-	if (*file != NULL) {
-		doc = gE_document_current(window);
-		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
-			gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));
-		window->documents = g_list_remove(window->documents, doc);
-		if (doc->filename != NULL)
-			g_free (doc->filename);
-		g_free (doc);
-
-		while (*file) {
-			data->temp2 = *file;
-			file_open_wrapper (data);
-			file++;
-		}
-	}
-
-	/* Init plugins... */
-	plugins = NULL;
-	
-	setup_callbacks (&callbacks);
-	
-	plugin_query_all (&callbacks);
-	
-#ifdef WITH_GMODULE_PLUGINS
-	gE_Plugin_Query_All ();
-#endif
-	
-}
-
-int
-main (int argc, char **argv)
-{
-	int x;
-
-	/* gtk_set_locale (); */
-
-	gtk_init (&argc, &argv);
-
-	for (x = 1; x < argc; x++)
-	{
-		if (strcmp (argv[x], "--help") == 0)
-		{
-			g_print("gEdit\nUsage: gedit [--help] [--version] [file...]\n");
-
-			exit(0);
-		}
-
-		else if (strcmp (argv[x], "--version") == 0)
-		{
-			gE_show_version();
-			exit(0);
-		}
-	}
-
-	gE_rc_parse();
-
-	prog_init(argv + 1);
-	
-	gtk_main ();
-
-	gE_prefs_close ();
-	return 0;
-
-} /* main */
-
-
-static void
-gE_show_version(void)
-{
-    g_print ("%s\n", GEDIT_ID);
-}
-
-
-#else
-
-
-/* 
- *  GTK-ONLY CODE ENDS 
- *  GNOME CODE BEGINS
- */
 
 GSList *launch_plugins = NULL;
 
@@ -367,5 +252,4 @@ int main (int argc, char **argv)
 	return 0;
 }
 
-#endif	/* #ifdef WITHOUT_GNOME */
 

@@ -77,9 +77,6 @@ extern void options_toggle_status_bar_cb (GtkWidget *widget, gE_window *window);
 extern void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window);
 extern void options_toggle_line_wrap_cb (GtkWidget *widget, gE_window *window);
 extern void options_toggle_read_only_cb (GtkWidget *widget, gE_window *window);
-#ifndef WITHOUT_GNOME
-extern void options_toggle_scroll_ball_cb (GtkWidget *widget, gE_window *window);
-#endif
 
 /* Functions needed to be made external for the plugins api */
 extern void popup_close_verify (gE_document *doc, gE_data *data);

@@ -1,16 +1,5 @@
 Features to add, bugs to fix:
 
-	* Keep track of the recently accessed documents, and display
-	  them in the file menu, immediately above Quit...
-
-	^^ NOTE: this one is currently functional in the gnome version,
-	         but needs some additons to the prefs system to work in
-	         the gtk-only version..
-
-	* Add split-screen support for people with gtk 1.0...
-
-	^^ Basically finished - just needs proper prefs added..
-
 	* Add DND support between multiple windows, and between other gnome
 	  apps such as gmc - also add an "Open in New window option that 
 	  would appear when you right click on a documents notebook tab.
@@ -18,32 +7,33 @@ Features to add, bugs to fix:
 	^^ Partially implemented - "Open in new window" is now an option on the
 	    right-click menu in the text widget.
 
+	^^ As soon as we can convert gEdit to use gnome-mdi, Dragging notebook
+	   tabs to the desktop will work as well.
+
 	* Add more functions to the plugins api, change the location it looks
 	  in for the plugins, and in general fix it up...
 
 	* Add concept of "sets" of documents - I want to write the code for
 	  this one, so back off! ;-)
 
+	^^ I'll probably end up doing this as a plugin, now that we can have
+	   preferences in plugins (due to the gnome requirement)
+
 	* Add regular expression searching...
 
 	* Should really find some way of fixing the problems with the line
 	  and column indicators...
+
+	^^ The Line number indicator is fixed (it's a hack, but at least it's
+	   not broken), but the column indicator is still slightly innaccurate
+	   when dealing with tabs. We should probably count the number of chars
+	   since the last newline, but that could be slowish to do in realtime.
 
 
 						-Evan
 
 
 Added by andy:
-
-	* Fix menu accelerators for gtk-only version.  they work if the
-	  accelerator just has a trivial callback (prints "hello world"),
-	  but doesn't otherwise.  probably has something to do with the
-	  multiple windows feature, since that's when accelerators stopped
-	  working.
-
-	* Fix plugin code to be 64-bit clean.  the plugin code poorly
-	  assumes that sizeof(int) == sizeof(void *) all over the place,
-	  and this breaks on true 64-bit platforms (e.g., Digital Unix).
 
 	* Fix plugin code to handle errors (e.g., error from read() or
 	  write()).  currently, the code is totally sloppy, and has next
@@ -62,9 +52,6 @@ Added by andy:
 	  specify default print options to use.  store everything in the
 	  preferences file.
 
-	* Add preferences for msgbox: whether or not to log msgs at all,
-	  max msgs limit, and how much to auto-truncate.
-
 	* Add interface/plugin for calling "ctags -x" on the current
 	  document (maybe all open documents?).  build a tree of the output,
 	  and when clicked on, will go to the selected location.  i'm not
@@ -82,33 +69,33 @@ Added by andy:
 
 	* Add plugin to allow posting a document to a newsgroup.
 
-	* Add user-configurable toolbar.  allow user to specify the exact
-	  toolbar wanted, including icon name, and even what to execute
-	  (basically, not limit the user to what's already available).
-	  store settings in preferences.
-	
-	^^^ Lay off! I'm working on this one... --Alex
-
-	* Add configurable location for toolbar (e.g., top, bottom, left
-	  right).  store settings in preferences.
-
 
 Added by Alex:
 
 	* Add more options to Preferences box (i'm working on this one..)
 	
-	* Make Read-Only files display something to show them as Read-Only..
-	^^ It does that now... The filename label, on ReadOnly files, gEdit 
-	   puts 'RO - ' before the filename ;) --Alex
-	   
 Added by Ola Sundell (m95ola@student.tdb.uu.se) - IRC: Slimer
 	
 	* Block Indent...
-	
-	* Search menu accelerators....
 
+	^^ Hate to sound like a moron, but what is block indent?
+	
 Added by Fred Leeflang <fredl@dutchie.org>
 
 	* Add a plugin to read ctags generated tags at startup. When 
 	  gtkrichtext is done, this should be used to colorise the
 	  tags read at startup, and turn them in some sort of hyperlinks.
+
+More TODO's added by Evan.
+
+	* Convert all our dialog boxes over to use gnome_dialog, or another
+	  gnome variant.
+
+	* Clean out the old gtk-only code (I'm mostly done with this).
+
+	* Convert gEdit to use gnome-mdi... It looks like this will mean making
+	  a gE_document struct == a gE_window struct. Also, use gnome functions
+	  whereever possible.
+
+	* Improve the existing plugins to take advantage of preferences.
+

@@ -21,11 +21,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 #include <gtk/gtk.h>
 #include <glib.h>
+
 #include "main.h"
 #include "gE_document.h"
 #include "gE_files.h"
@@ -35,7 +34,6 @@
 #include "gE_print.h"
 #include "menus.h"
 #include "toolbar.h"
-#include "gtkscrollball.h"
 #include "search.h"
 #include "gE_prefs.h"
 
@@ -87,19 +85,11 @@ gE_window_new(void)
 
 	/* various initializations */
 	w = g_malloc0(sizeof(gE_window));
-	w->popup = NULL;
-	w->notebook = NULL;
-	w->save_fileselector = NULL;
-	w->open_fileselector = NULL;
-	w->documents = NULL;
 	w->search = g_malloc0(sizeof(gE_search));
 
 	w->auto_indent = TRUE;
 	w->show_tabs = TRUE;
 	w->tab_pos = GTK_POS_TOP;
-	w->files_list_window = NULL;
-	w->files_list_window_data = NULL;
-	w->toolbar = NULL;
 	w->splitscreen = FALSE;
 
 	w->show_status = TRUE;
@@ -111,12 +101,9 @@ gE_window_new(void)
 	g_hash_table_insert(win_pointer_to_int, w, ptr);
 	
 	data = g_malloc0(sizeof(gE_data));
-#ifdef WITHOUT_GNOME
-	w->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_widget_set_name(w->window, "gedit window");
-#else
+
 	w->window = gnome_app_new("gEdit", GEDIT_ID);
-#endif
+
 	data->window = w;
 	gtk_signal_connect(GTK_OBJECT(w->window), "delete_event",
 		GTK_SIGNAL_FUNC(gE_destroy_window), data);
@@ -126,28 +113,17 @@ gE_window_new(void)
 	gtk_window_set_policy(GTK_WINDOW(w->window), TRUE, TRUE, FALSE);
 	gtk_container_border_width(GTK_CONTAINER(w->window), 0);
 	box1 = gtk_vbox_new(FALSE, 0);
-#ifdef WITHOUT_GNOME
-	gtk_container_add(GTK_CONTAINER(w->window), box1);
-#endif
 
 	/* popup menu (activated when clicking on mouse button 3) */
 	gE_window_create_popupmenu(data);
 
 	/* main menu */
 	gedit_menu = gE_menus_init(w, data);
-#ifdef WITHOUT_GNOME
-	w->menubar_handle = gtk_handle_box_new();
-	gtk_container_add(GTK_CONTAINER(w->menubar_handle), w->menubar);
-	gtk_box_pack_start(GTK_BOX(box1), w->menubar_handle, FALSE, TRUE, 0);
-#else
+
 	gnome_app_set_contents(GNOME_APP(w->window), box1);
-#endif
 
 	/* toolbar */
 	gE_create_toolbar(w, data);
-#ifdef WITHOUT_GNOME
-	gtk_box_pack_start(GTK_BOX(box1), w->toolbar_handle, FALSE, TRUE, 0);
-#endif
 
 	/* add a new document to the window */
 	gE_document_new(w);
@@ -160,7 +136,6 @@ gE_window_new(void)
 	gE_msgbar_timeout_add(w);
 
 	gnome_app_install_menu_hints(GNOME_APP (w->window), gedit_menu);
-/*	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);*/
 
 	/* line and column indicators */
 
@@ -183,14 +158,8 @@ gE_window_new(void)
 	w->statusbox = w->statusbar;
 
 	/* finish up */
-	#ifdef WITHOUT_GNOME
-	gtk_widget_show(w->menubar);
-	gtk_widget_show(w->menubar_handle);
-	gtk_widget_show(w->toolbar_handle);
-	#endif
 	gtk_widget_show(w->statusbar);
 	gtk_widget_show(box1);
-/*	gtk_widget_show(box2);*/
 	gtk_widget_show(w->notebook);
 	gtk_widget_show(w->window);
 
@@ -229,9 +198,6 @@ gE_document
 {
 	gE_document *doc;
 	GtkWidget *table, *vscrollbar, *vpaned, *vbox;
-#ifndef WITHOUT_GNOME
-	GtkWidget *scrollball;
-#endif
 	GtkStyle *style;
 	gint *ptr; /* For plugin stuff. */
 
@@ -276,9 +242,7 @@ gE_document
 	doc->text = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->text), !doc->read_only);
 	gtk_text_set_word_wrap(GTK_TEXT(doc->text), doc->word_wrap);
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
-	 gtk_text_set_line_wrap(GTK_TEXT(doc->text), doc->line_wrap);
-	#endif
+	gtk_text_set_line_wrap(GTK_TEXT(doc->text), doc->line_wrap);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
@@ -305,15 +269,6 @@ gE_document
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
 	vbox = gtk_vbox_new (FALSE, FALSE);
-#ifndef WITHOUT_GNOME
-	scrollball = gtk_scrollball_new (NULL, GTK_TEXT(doc->text)->vadj);
-	gtk_box_pack_start (GTK_BOX (vbox), scrollball, FALSE, FALSE, 1);
-	
-	w->scrollball = gE_prefs_get_int("scrollball");
-	if (w->scrollball == TRUE)
-	  gtk_widget_show (scrollball);
-	doc->scrollball = scrollball;
-#endif
 
 	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->text)->vadj);
 	gtk_box_pack_start (GTK_BOX (vbox), vscrollbar, TRUE, TRUE, 0);
@@ -324,7 +279,6 @@ gE_document
 	gtk_widget_show(vscrollbar);
 	gtk_widget_show (vbox);
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	gtk_signal_connect (GTK_OBJECT (doc->text), "insert_text",
 		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) doc);
 	gtk_signal_connect (GTK_OBJECT (doc->text), "delete_text",
@@ -369,11 +323,6 @@ gE_document
    	 gtk_widget_set_style(GTK_WIDGET(doc->text), style);
    	 gtk_widget_pop_style ();
 
-
-
-	/*gtk_widget_set_rc_style(GTK_WIDGET(doc->split_screen));
-	gtk_widget_ensure_style(GTK_WIDGET(doc->split_screen));*/
-
 	gtk_signal_connect_object(GTK_OBJECT(doc->split_screen), "event",
 		GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT(w->popup));
 
@@ -397,8 +346,6 @@ gE_document
 	if (w->splitscreen == FALSE)
 	  gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
 
-#endif	/* GTK_HAVE_FEATURES_1_1_0 */
-	
 	gtk_widget_show (vpaned);
 	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), vpaned,
 		doc->tab_label);
@@ -413,19 +360,6 @@ gE_document
 	return doc;
 } /* gE_document_new */
 
-/* This is currently not used, but I'm leaving it here in case we find some bugs
-   in how we're doing it now.... -Evan
-
-void get_current_doc (gpointer doc, gpointer tab)
-{
-	gE_document *a;
-	GtkWidget *b;
-	a = doc;
-	b = tab;
-	if (a->tab_label == b)
-		current_document = doc;
-}
-*/
 
 gE_document *gE_document_current(gE_window *window)
 {
@@ -433,17 +367,15 @@ gE_document *gE_document_current(gE_window *window)
 	gE_document *current_document;
 	current_document = NULL;
 
-	/*g_assert(window != NULL);
-	g_assert(window->notebook != NULL);*/
+	g_assert(window != NULL);
+	g_assert(window->notebook != NULL);
+
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook));
-	/*g_print("%d\n",cur);*/
 	current_document = g_list_nth_data (window->documents, cur);
 	if (current_document == NULL)
 		g_print ("Current Document == NULL\n");
 	return current_document;
 }
-
-#ifdef GTK_HAVE_FEATURES_1_1_0
 
 void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 {
@@ -462,7 +394,6 @@ void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 	  }
 }
 
-#endif	/* GTK_HAVE_FEATURES_1_1_0 */
 
 void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
 {
@@ -470,13 +401,11 @@ void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
-#ifdef GTK_HAVE_FEATURES_1_1_0	
 void gE_document_set_line_wrap (gE_document *doc, gint line_wrap)
 {
 	doc->line_wrap = line_wrap;
 	gtk_text_set_line_wrap (GTK_TEXT (doc->text), doc->line_wrap);
 }
-#endif
 
 void gE_document_set_read_only (gE_document *doc, gint read_only)
 {
@@ -493,35 +422,14 @@ gchar *fname;
 	}
 	else
 	{
-	 #ifdef GTK_HAVE_FEATURES_1_1_0
 	 gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(doc->filename));
-	 #else
-	 gtk_label_set(GTK_LABEL(doc->tab_label), strrchr (doc->filename, '/'));
-	 #endif
 	}
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	 if (doc->split_screen)
 		gtk_text_set_editable
 			(GTK_TEXT (doc->split_screen), !doc->read_only);
-	#endif
-	
 }
 
-#ifndef WITHOUT_GNOME
-void gE_document_set_scroll_ball (gE_document *doc, gint scroll_ball)
-{
-	if (scroll_ball)
-	  {
-	  	gtk_widget_show (doc->scrollball);
-	  	doc->window->scrollball = TRUE;
-	  }
-	else
-	  {
-		gtk_widget_hide (doc->scrollball);
-		doc->window->scrollball = FALSE;
-	  }
-}
-#endif
+
 
 static void
 notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
@@ -530,30 +438,27 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	gE_document *doc;
 	gchar *title;
 
-/*	g_assert(window != NULL);
-	g_assert(window->window != NULL);*/
+	g_assert(window != NULL);
+	g_assert(window->window != NULL);
 
 	if (window->documents == NULL)
 		return;	
-/*
-	if (GTK_WIDGET_REALIZED(window->window)) {
-		doc = g_list_nth_data(window->documents, num);*/
-		gtk_widget_grab_focus(gE_document_current(window)->text);
-		title = g_malloc0(strlen(GEDIT_ID) +
-				strlen(GTK_LABEL(gE_document_current(window)->tab_label)->label) + 4);
-		sprintf(title, "%s - %s",
-		 GTK_LABEL(gE_document_current(window)->tab_label)->label,
-		 GEDIT_ID);
-		gtk_window_set_title(GTK_WINDOW(window->window), title);
-		g_free(title);
 
-		/* update highlighted file in the doclist */
-		if (window->files_list_window)
-			gtk_clist_select_row(
-				GTK_CLIST(window->files_list_window_data),
-				num,
-				FlwFnumColumn);
-	/*}*/
+	gtk_widget_grab_focus(gE_document_current(window)->text);
+	title = g_malloc0(strlen(GEDIT_ID) +
+		strlen(GTK_LABEL(gE_document_current(window)->tab_label)->label) + 4);
+	sprintf(title, "%s - %s",
+		GTK_LABEL(gE_document_current(window)->tab_label)->label,
+		GEDIT_ID);
+	gtk_window_set_title(GTK_WINDOW(window->window), title);
+	g_free(title);
+
+	/* update highlighted file in the doclist */
+	if (window->files_list_window)
+		gtk_clist_select_row(
+			GTK_CLIST(window->files_list_window_data),
+			num,
+			FlwFnumColumn);
 }
 
 static gint
@@ -741,9 +646,7 @@ gE_document
 {
 	gE_document *doc;
 	GtkWidget *table, *vscrollbar, *vpaned, *vbox;
-#ifndef WITHOUT_GNOME
-	GtkWidget *scrollball;
-#endif
+
 	GtkStyle *style;
 	gint *ptr; /* For plugin stuff. */
 
@@ -785,13 +688,6 @@ gE_document
 	gtk_table_attach_defaults (GTK_TABLE (table), doc->viewport, 0, 1, 0, 1);
 
 	vbox = gtk_vbox_new (FALSE, FALSE);
-#ifndef WITHOUT_GNOME
-	scrollball = gtk_scrollball_new 
-		(NULL, GTK_VIEWPORT (doc->viewport)->vadjustment);
-	gtk_box_pack_start (GTK_BOX (vbox), scrollball, FALSE, FALSE, 1);
-	gtk_widget_show (scrollball);
-	doc->scrollball = scrollball;
-#endif
 
 	vscrollbar = gtk_vscrollbar_new
 		(GTK_VIEWPORT (doc->viewport)->vadjustment);
@@ -803,7 +699,6 @@ gE_document
 	gtk_widget_show (vscrollbar);
 	gtk_widget_show (vbox);
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	doc->split_screen = gtk_text_new (NULL, NULL);
 
 	if (with_split_screen) {
@@ -831,8 +726,6 @@ gE_document
 		gtk_widget_show (vscrollbar);
 		gtk_widget_hide (GTK_WIDGET (doc->split_viewport)->parent);
 	}
-
-#endif	/* GTK_HAVE_FEATURES_1_1_0 */
 	
 	gtk_widget_show (vpaned);
 	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), vpaned,

@@ -65,8 +65,6 @@ gedit_SOURCES = 	\
 	gE_plugin_api.h	\
 	menus.h		\
 	menus.c		\
-	gtkscrollball.h	\
-	gtkscrollball.c	\
 	search.h	\
 	search.c	\
 	dialog.h	\

@@ -30,10 +30,9 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
 #include <libgnome/gnome-history.h>
-#endif
+
 
 #include "main.h"
 #include "commands.h"
@@ -134,50 +133,42 @@ close_file_save_cancel_sel(GtkWidget *w, gE_data *data)
 /*
  * creates file save (yes/no/cancel) dialog box
  */
-#define CLOSE_TITLE	"Save File"
 #define CLOSE_MSG	"has been modified.  Do you wish to save it?"
 void
 popup_close_verify(gE_document *doc, gE_data *data)
 {
+	GtkWidget *msgbox;
 	int ret;
-	char *fname, *title, *msg;
+	char *fname, *msg;
 	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL} ;
 
-#ifdef GTK_HAVE_FEATURES_1_1_0	
 	fname = (doc->filename) ? g_basename(doc->filename) : _(UNTITLED);
-#else
-	fname = doc->filename;
-#endif
-	
-	title = (char *)g_malloc(strlen(_(CLOSE_TITLE)) + strlen(fname) + 5);
+
 	msg =   (char *)g_malloc(strlen(_(CLOSE_MSG)) + strlen(fname) + 6);
 
-	sprintf(title, "%s '%s'?", _(CLOSE_TITLE), fname);
 	sprintf(msg  , " '%s' %s ", fname, _(CLOSE_MSG));
 
-	#ifdef WITHOUT_GNOME
-	ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
-	#else
-	ret = gnome_dialog_run_and_close ((GnomeDialog *)
-		gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
-			buttons[0], buttons[1], buttons[2], NULL)) + 1;
-	#endif
-	
-	g_free(title);
-	g_free(msg);
 
 	/* use data->flag to indicate whether or not to quit */
 	data->flag = FALSE;
 	data->document = doc;
 
+	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
+		GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
+		GNOME_STOCK_BUTTON_CANCEL, NULL);
+
+	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+
+	g_free(msg);
+
 	switch (ret) {
-	case 1 :
+	case 0 :
 		close_file_save_yes_sel(NULL, data);
 		break;
-	case 2 :
+	case 1 :
 		close_file_save_no_sel(NULL, data);
 		break;
-	case 3 :
+	case 2 :
 		close_file_save_cancel_sel(NULL, data);
 		break;
 	default:
@@ -413,7 +404,6 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	if (strlen(whitespace) > 0)
 	{
 		i = *pos;
-/*		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);*/
 		gtk_text_set_point (GTK_TEXT (text), i);
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
 			whitespace, strlen (whitespace));
@@ -421,7 +411,7 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	
 	g_free (whitespace);
 	data->temp2 = text;
-	line_pos_cb(NULL, data); /* <-- this is so the statusbar updates when it auto-indents */
+	line_pos_cb(NULL, data);
 	return TRUE;
 }
 
@@ -429,18 +419,12 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 static void
 line_pos_cb(GtkWidget *w, gE_data *data)
 {
-	/*static char line [32];*/
 	static char col [32];
 	GtkWidget *text = data->temp2;
 	int x;
-	
-	/*x = GTK_TEXT(text)->current_line->data;*/
-	
-	/*sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);*/
-	/*sprintf(line,"%d", x);*/
+
 	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
 	
-	/*gtk_label_set (GTK_LABEL(data->window->line_label), line);*/
 	gtk_label_set (GTK_LABEL(data->window->col_label), col);
 
 }
@@ -544,20 +528,16 @@ file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 	gchar *buffer;
 	gE_data *data = (gE_data *)cbdata;
 	int pos = 0;
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gchar *base;
-	#endif
 	
 	src_doc = gE_document_current (data->window);
 	buffer = gtk_editable_get_chars (GTK_EDITABLE (src_doc->text), 0, -1);
 	win = gE_window_new ();
 	dest_doc = gE_document_current (win);
 	dest_doc->filename = g_strdup (src_doc->filename);
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
+
 	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)g_basename (dest_doc->filename));
-	#else
-	gtk_label_set (GTK_LABEL (dest_doc->tab_label), GTK_LABEL (src_doc->tab_label)->label);
-	#endif
+
 	gtk_editable_insert_text (GTK_EDITABLE (dest_doc->text), buffer, strlen (buffer), &pos);
 	dest_doc->changed = src_doc->changed;
 	close_doc_execute (src_doc, data);
@@ -833,9 +813,6 @@ close_window_common(gE_window *w)
 
 	if (window_list == NULL)
 	{
-		#ifdef WITHOUT_GNOME
-		gE_prefs_close ();
-		#endif
 		gtk_exit(0);
 	}
 }
@@ -853,7 +830,6 @@ file_quit_cb(GtkWidget *widget, gpointer cbdata)
 
 	while (window_list) {
 		data->window = g_list_nth_data(window_list, 0);
-		/*gtk_widget_hide(data->window->window);*/
 		window_close_cb(widget, data);
 		if (data->flag == FALSE)	/* cancelled by user */
 			return;
@@ -884,13 +860,8 @@ edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-#if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(gE_document_current(data->window)->text));
-#else
-	gtk_editable_copy_clipboard(GTK_EDITABLE(
-		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
-#endif
 	gE_msgbar_set(data->window, MSGBAR_COPY);
 }
 	
@@ -899,13 +870,9 @@ edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-#if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(gE_document_current(data->window)->text));
-#else
-	gtk_editable_paste_clipboard(GTK_EDITABLE(
-		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
-#endif
+
 	gE_msgbar_set(data->window, MSGBAR_PASTE);
 }
 
@@ -926,13 +893,10 @@ edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 
 void recent_add (char *filename)
 {
-#ifndef WITHOUT_GNOME
 	gnome_history_recently_used (filename, "text/plain", "gEdit", "");
-#endif
 	
 }
 
-#ifndef WITHOUT_GNOME
 /*
  * gnome_app_remove_menu_range(app, path, start, num) removes num items from the existing app's menu structure
  * begining with item described by path plus the number specified by start
@@ -976,7 +940,6 @@ gnome_app_remove_menu_range (GnomeApp *app,
 
   gtk_widget_queue_resize(parent);
 }
-#endif
 
 /* Grabs the recent used list, then updates the menus via a call to recent_update_menus 
  * Should be called after each addition to the list 
@@ -986,7 +949,6 @@ void recent_update (gE_window *window)
 {
 	GList *filelist = NULL;
 	GList *dirlist = NULL;
-#ifndef WITHOUT_GNOME
 	
 	GList *gnome_recent_list;
 	GnomeHistoryEntry histentry;
@@ -1034,8 +996,6 @@ void recent_update (gE_window *window)
 	}
 	gnome_history_free_recently_used_list (gnome_recent_list);
 	
-#endif /* Using GNOME */
-
 	recent_update_menus (window, filelist);
 }
 
@@ -1044,7 +1004,6 @@ void recent_update (gE_window *window)
 static void
 recent_update_menus (gE_window *window, GList *recent_files)
 {
-#ifndef WITHOUT_GNOME
 	GnomeUIInfo *menu;
 	gE_data *data;
 	gchar *path;
@@ -1052,7 +1011,7 @@ recent_update_menus (gE_window *window, GList *recent_files)
 	
 	if (window->num_recent > 0)
 		gnome_app_remove_menu_range (GNOME_APP (window->window), 
-		                                         "_File/", 5, window->num_recent + 1);
+			"_File/", 5, window->num_recent + 1);
 
 	if (recent_files == NULL)
 		return;
@@ -1076,7 +1035,8 @@ recent_update_menus (gE_window *window, GList *recent_files)
 		data = g_malloc0 (sizeof (gE_data));
 		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
 		data->window = window;
-		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
+		menu->label = g_new (gchar, 
+			strlen (g_list_nth_data (recent_files, i)) + 5);
 		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
@@ -1095,11 +1055,8 @@ recent_update_menus (gE_window *window, GList *recent_files)
 	window->num_recent = g_list_length (recent_files);
 	g_list_free (recent_files);
 
-#endif /* Using GNOME */
+
 }
-
-
-#ifdef GTK_HAVE_FEATURES_1_1_0
 
 static void
 recent_cb(GtkWidget *w, gE_data *data)
@@ -1188,19 +1145,6 @@ void options_toggle_split_screen_cb (GtkWidget *widget, gE_window *window)
 		(doc, !GTK_WIDGET_VISIBLE (doc->split_parent));
 }
 
-#endif	/* GTK_HAVE_FEATURES_1_1_0 */
-
-#ifndef WITHOUT_GNOME
-
-void options_toggle_scroll_ball_cb (GtkWidget *w, gE_window *window)
-{
-	gE_document *doc = gE_document_current (window);
-	gint visible = GTK_WIDGET_VISIBLE
-		(GTK_WIDGET (doc->scrollball));
-	gE_document_set_scroll_ball (doc, !visible);
-}
-
-#endif /* WITHOUT_GNOME */
 
 void options_toggle_read_only_cb (GtkWidget *widget, gE_window *window)
 {
@@ -1214,13 +1158,11 @@ void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window)
 	gE_document_set_word_wrap (doc, !doc->word_wrap);
 }
 
-#ifdef GTK_HAVE_FEATURES_1_1_0	
 void options_toggle_line_wrap_cb (GtkWidget *widget, gE_window *window)
 {
 	gE_document *doc = gE_document_current (window);
 	gE_document_set_line_wrap (doc, !doc->line_wrap);
 }
-#endif
 
 void options_toggle_status_bar_cb (GtkWidget *w, gE_window *window)
 {

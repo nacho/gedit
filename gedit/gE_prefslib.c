@@ -346,9 +346,6 @@ char *gE_prefs_get_default (char *name)
 		{ "tb relief", "0" },
 		{ "splitscreen", "0" },
 #endif
-#ifndef WITHOUT_GNOME
-		{ "scrollball", "0" },
-#endif
 		{ NULL, NULL }
 	};
 

@@ -126,10 +126,6 @@ extern void gE_plugin_set_read_only(gint, gint);
 extern void gE_plugin_set_split_screen(gint, gint);
 #endif
 
-#ifndef WITHOUT_GNOME
-extern void gE_plugin_set_scroll_ball(gint, gint);
-
-#endif
 extern gboolean gE_plugin_program_quit(void);
 extern GtkText *gE_plugin_get_widget(gint);
 extern int gE_plugin_create_widget(gint, gchar *,

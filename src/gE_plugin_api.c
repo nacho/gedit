@@ -71,9 +71,7 @@ start_plugin(GtkWidget * widget, gE_data * data)
    #ifdef GTK_HAVE_FEATURES_1_1_0
    callbacks.document.set_split_screen = gE_plugin_set_split_screen;
    #endif
-#ifndef WITHOUT_GNOME
-   callbacks.document.set_scroll_ball = gE_plugin_set_scroll_ball;
-#endif
+
    callbacks.text.get = gE_plugin_text_get;
    callbacks.program.quit = gE_plugin_program_quit;
 
@@ -374,16 +372,6 @@ gE_plugin_set_split_screen(gint docid, gint split_screen)
 }
 #endif
 
-#ifndef WITHOUT_GNOME
-void 
-gE_plugin_set_scroll_ball(gint docid, gint scroll_ball)
-{
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
-
-   gE_document_set_scroll_ball(document, scroll_ball);
-}
-
-#endif
 
 /* Program Related functions */
 

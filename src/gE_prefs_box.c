@@ -70,7 +70,6 @@ typedef struct _gE_prefs_data {
 	GtkWidget *status;
 	GtkWidget *wordwrap;
 	GtkWidget *split;
-	GtkWidget *sball;
 	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
@@ -111,10 +110,7 @@ gint i;
        gE_document_set_split_screen (gE_document_current(w), (gint) w->splitscreen);
     #endif
     
-    #ifndef WITHOUT_GNOME
-       gE_document_set_scroll_ball (gE_document_current(w), (gint) w->scrollball);
-    #endif
-     
+    
   style = gtk_style_new();
   gdk_font_unref (style->font);
   style->font = gdk_font_load (w->font);
@@ -154,9 +150,6 @@ gE_Prop_Box *pbox,
   data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
   #ifdef GTK_HAVE_FEATURES_1_1_0
   data->window->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
-  #endif
-  #ifndef WITHOUT_GNOME
-  data->window->scrollball  = (GTK_TOGGLE_BUTTON (prefs->sball)->active);
   #endif
 
   /* Print Settings */
@@ -200,8 +193,6 @@ void get_prefs(gE_data *data)
   					   data->window->show_status);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
   					   data->window->splitscreen);
-  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->sball),
-  					   data->window->scrollball);
 }
 
 static GtkWidget *general_page_new()
@@ -246,10 +237,6 @@ static GtkWidget *general_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
-  prefs->sball = gtk_check_button_new_with_label (_("Show Scrollball"));
-  gtk_box_pack_start(GTK_BOX(hbox), prefs->sball, TRUE, TRUE, 0);
-  gtk_widget_show (prefs->sball);
-
   frame = gtk_frame_new (_("Editor Behavior"));
   gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
   gtk_widget_show (frame);
@@ -609,9 +596,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   gtk_signal_connect (GTK_OBJECT (prefs->split), "toggled",
-		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
-
-  gtk_signal_connect (GTK_OBJECT (prefs->sball), "toggled",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   gtk_signal_connect (GTK_OBJECT (prefs->pcmd), "changed",

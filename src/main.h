@@ -42,6 +42,7 @@ typedef struct _gE_search {
 	GtkWidget *prompt_before_replacing;
 	GtkWidget *search_for;
 	GtkWidget *line_item, *text_item;
+
 } gE_search;
 
 typedef struct _gE_window {
@@ -49,9 +50,7 @@ typedef struct _gE_window {
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
 	GtkWidget *menubar;
-	GtkMenuFactory *factory; /* <-- Auto-plugin detection needs this */
 	GtkWidget *toolbar;
-	GtkWidget *toolbar_handle;	/* holds the toolbar */
 	GtkWidget *notebook;
 	GtkWidget *open_fileselector;
 	GtkWidget *save_fileselector;
@@ -59,19 +58,12 @@ typedef struct _gE_window {
 	GtkWidget *files_list_window;
 	GtkWidget *files_list_window_data;
 	GtkWidget *files_list_window_toolbar;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	GtkAccelGroup *accel;
-#else
-	GtkAcceleratorTable *accel;
-#endif
+
 	GList *documents;
 	GtkWidget *popup;
 	gE_search *search;
 	int num_recent; /* Number of recently accessed documents in the 
 	                         Recent Documents menu */
-#ifdef WITHOUT_GNOME
-	GtkWidget *menubar_handle;	/* holds the menubar */
-#endif
 	guint auto_indent;
 	gint show_tabs;
 	guint show_status;
@@ -81,7 +73,6 @@ typedef struct _gE_window {
 	gint have_tb_text;
 	gint use_relief_toolbar;
 	gint splitscreen;
-	gint scrollball;
 	
 	gchar *print_cmd;
 	gchar *font;
@@ -101,16 +92,13 @@ typedef struct _gE_document {
 	gint line_wrap;
 	gint read_only;
 	struct stat *sb;
-#ifndef WITHOUT_GNOME
-	GtkWidget *scrollball;
-#endif
-#ifdef GTK_HAVE_FEATURES_1_1_0
+
 	gint split;
 	GtkWidget *split_parent;
 	GtkWidget *split_viewport;
 	GtkWidget *split_screen;
 	GtkWidget *flag;
-#endif
+
 } gE_document;
 
 typedef struct _gE_data {
@@ -119,23 +107,16 @@ typedef struct _gE_data {
 	gpointer temp1;
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
+
 } gE_data;
 
 typedef struct _gE_function {
 	gchar *name;
 	gchar *tooltip_text;
-	#ifdef WITHOUT_GNOME
-	gchar **icon;
-	#else
 	gchar *icon;
-	#endif
 	GtkSignalFunc callback;
-} gE_function;
 
-#ifdef WITHOUT_GNOME
-#define N_(String) (String)	/* To avoid duplication of code when adding gnome internationalization. */
-#define _(String) (String)
-#endif
+} gE_function;
 
 extern GList *window_list;
 

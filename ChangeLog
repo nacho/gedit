@@ -1,3 +1,20 @@
+1999-01-27  Evan Lawrence <evan@worldpath.net>
+
+	* src/Makefile.am:
+	  src/commands.[ch]:
+	  src/gE_document.[ch]:
+	  src/gE_plugin.h:
+	  src/gE_plugin_api.c:
+	  src/gE_prefs_box.c:
+	  src/gE_prefslib.c:
+	  src/gedit.c:
+	  src/main.h:
+	  src/menus.c:
+	  src/plugin.[ch]: Lots and lots of code cleanup. Mostly just removing
+	left over gtk-only code, but I also removed the scrollball (since it
+	doesn't really work in a one-dimension environment. Please email me if
+	any problems pop-up after this commit.
+
 1999-01-20  Nat Friedman  <nat@nat.org>
 
 	* src/gE_prefs_box.c (gE_prefs_dialog): Connected the help signal

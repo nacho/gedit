@@ -51,7 +51,6 @@
 #define GE_TOGGLE_LABEL_LINEWRAP        N_("_Linewrap")
 #define GE_TOGGLE_LABEL_READONLY        N_("_Readonly")
 #define GE_TOGGLE_LABEL_SPLITSCREEN     N_("_Splitscreen")
-#define GE_TOGGLE_LABEL_SCROLLBALL      N_("Scro_llball")
 #define GE_TOGGLE_LABEL_SHOWTABS        N_("_Show tabs")
 #define GE_TOGGLE_LABEL_TOOLBAR_RELIEF  N_("Toolbar _relief")
 #define GE_TOGGLE_LABEL_TOOLTIPS        N_("_Show tooltips")
@@ -175,11 +174,6 @@ GnomeUIInfo gedit_settings_menu []= {
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
 				    N_("Toggle Split Screen"),
 				    options_toggle_split_screen_cb,
-				    (gpointer) GE_WINDOW, NULL),
-
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SCROLLBALL,
-				    N_("Toggle scrollball"),
-				    options_toggle_scroll_ball_cb,
 				    (gpointer) GE_WINDOW, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
@@ -332,10 +326,6 @@ gE_set_menu_toggle_states(gE_window *w)
 	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
 			      GE_TOGGLE_LABEL_SPLITSCREEN,
 			      doc->window->splitscreen);
-
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      GE_TOGGLE_LABEL_SCROLLBALL,
-			      doc->window->scrollball);
 
 	}
     }

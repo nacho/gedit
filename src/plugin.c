@@ -814,12 +814,7 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 	      if ( plug->callbacks.document.set_split_screen )
 		plug->callbacks.document.set_split_screen( state->ints[0], state->ints[1]);
 	      break;
-#ifndef WITHOUT_GNOME
-	    case 'c':
-	      if ( plug->callbacks.document.set_scroll_ball )
-		plug->callbacks.document.set_scroll_ball( state->ints[0], state->ints[1]);
-	      break;
-#endif
+
 	    }
 	  break;
 	case 'f':
