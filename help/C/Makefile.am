@@ -1,5 +1,5 @@
 figs = \
-	edit_window.png
+	figures/gedit_window.png
 docname = gedit
 lang = C
 omffile = gedit-C.omf

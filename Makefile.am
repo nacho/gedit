@@ -14,7 +14,7 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	gedit.1 \
 	$(desktop_in_files) \
 	$(desktop_DATA) \
-	TODO gedit.keys.in app-docs.make \
+	TODO gedit.keys.in xmldocs.make \
 	intltool-extract.in intltool-merge.in intltool-update.in \
 	$(GEDIT_SCHEMA)
 
