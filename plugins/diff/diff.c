@@ -124,15 +124,15 @@ gedit_plugin_execute (GtkWidget *widget, GtkWidget* data)
 
 	if (state_1 && ((file_name_1 == NULL ) || (!g_file_exists (file_name_1))))
 	{
-		gedit_utils_error_dialog (_("The \"first\" file you selected does not exists.\n\n"
-					    "Please, provide a valid file."), data);
+		gedit_utils_error_dialog (_("The \"first\" file you selected does not exist.\n\n"
+					    "Please provide a valid file."), data);
 		return;
 	}
 
 	if (state_2 && ((file_name_2 == NULL ) || (!g_file_exists (file_name_2)))) 
 	{
-		gedit_utils_error_dialog (_("The \"second\" file you selected does not exists.\n\n"
-					    "Please, provide a valid file."), data);
+		gedit_utils_error_dialog (_("The \"second\" file you selected does not exist.\n\n"
+					    "Please provide a valid file."), data);
 		return;
 	}
 
