@@ -34,25 +34,23 @@ void gedit_undo_do (GtkWidget *w, gpointer data);
 void gedit_undo_redo (GtkWidget *w, gpointer data);
 
 void
-gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc)
+gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
+		gint action, gedit_document *doc)
 {
 	gedit_undo *undo;
-	gchar *text_item;
 
-	if(debug_)
+	if (debug_)
 		g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
 
-	undo = g_new(gedit_undo, 1);
+	undo = g_new (gedit_undo, 1);
 
-	text_item = g_malloc(strlen(text));
-	strcpy( text_item, text);
-	undo->text = text_item;
+	undo->text = g_strdup (text);
 	undo->start_pos = start_pos;
 	undo->end_pos = end_pos;
 	undo->action = action;
 	undo->status = doc->changed;
-
-	if(debug_)
+	
+	if (debug_)
 		g_print("the text is :%s\n", undo->text);
 
 	/* nuke the redo list, if its available */
@@ -87,45 +85,35 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	if(debug_)
 		g_print("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
 	
-	if (undo->action == DELETE )
+	if (undo->action == DELETE)
 	{
 		if(debug_)
 			g_print("undo do action DELETE ");
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos))
-		{
 			doc->buf = g_string_insert (doc->buf, undo->start_pos, undo->text);
-		}
 		else if (undo->end_pos == 0)
-		{
 			doc->buf = g_string_prepend (doc->buf, undo->text);
-		}
 		else
-		{
 			doc->buf = g_string_append (doc->buf, undo->text);
-		}
+
 		views_insert (doc, undo);
 	}
-	else if (undo->action == INSERT )
+	else if (undo->action == INSERT)
 	{
 		if(debug_)
 			g_print("undo do action INSERT ");
 		/* We're deleteing somthing that had been inserted */
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
-		{
 			doc->buf = g_string_erase (doc->buf, undo->start_pos, (undo->end_pos - undo->start_pos));
-		}
 		else
-		{
 			doc->buf = g_string_truncate (doc->buf, undo->start_pos);
-		}
+
 		views_delete (doc, undo);
 		doc->changed = undo->status;
 	}
 	else
-	{
-		g_return_if_fail(FALSE);
-	}
+		g_assert_not_reached ();
 }
 
 void
@@ -146,46 +134,36 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	doc->redo = g_list_remove (doc->redo, redo);
 
 	/* Now we can do the undo proper.. */
-	if ( redo->action == INSERT )
+	if (redo->action == INSERT)
 	{
 		if(debug_)
 			g_print("INSERT buggy ....  ...\n");
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
-		{
 			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
-		}
 		if (redo->end_pos == 0)
-		{
 			doc->buf = g_string_prepend (doc->buf, redo->text);
-		}
 		else
-		{
 			doc->buf = g_string_append (doc->buf, redo->text);
-		}
+
 		/* PRINT THE INFO BEFORE inserting */
 		views_insert (doc, redo);
 	}
-	else if ( redo->action == DELETE )
+	else if (redo->action == DELETE)
 	{
 		if(debug_)
 			g_print("DELETE ...\n");
 		/* We're deleteing somthing that had been inserted */
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len)
-		{
 			doc->buf = g_string_erase (doc->buf, redo->start_pos, (redo->end_pos - redo->start_pos));
-		}
 		else
-		{
 			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
-		}
+
 		views_delete (doc, redo);
-		/*doc->changed = undo->status; this line by chema */ 
+		/*doc->changed = undo->status; this line by chema */
 	}
 	else 
-	{
-		g_return_if_fail(FALSE);
-	}
+		g_assert_not_reached ();
 }
 
 void
@@ -226,7 +204,6 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 void
 views_delete (gedit_document *doc, gedit_undo *undo)
 {
-
 	gedit_view *nth_view;
 	gint n;
 	gint p1;

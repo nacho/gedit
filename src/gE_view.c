@@ -67,13 +67,16 @@ GtkVBoxClass *parent_class = NULL;
 
 
 
-/* handles changes in the text widget... */
+/* Callback to the "changed" signal in the text widget */
 void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	gchar *str;
+	gedit_view *view;
 
-	gedit_view *view = (gedit_view *) cbdata;
+	g_return_if_fail (cbdata != NULL);
+
+	view = (gedit_view *) cbdata;
 
 	if (view->document->changed)
 		return;
@@ -346,29 +349,27 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	doc = view->document;
 
 	newlines = 0;
-	for (i = *pos; i > 0; i--) {
-
+	for (i = *pos; i > 0; i--)
+	{
 		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
 		
 		if (buffer == NULL)
 			continue;
-		if (buffer[0] == 10) {
-
-			if (newlines > 0) {
-			
+		if (buffer[0] == 10)
+		{
+			if (newlines > 0)
+			{
 				g_free (buffer);
 				buffer = NULL;
 				break;
-				
-			} else {
-				
+			}
+			else
+			{
 				newlines++;
 				newline_1 = i;
 				g_free (buffer);
 				buffer = NULL;
-				
 			}
-			
 		}
 		
 		g_free (buffer);
@@ -377,16 +378,15 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 
 	whitespace = g_malloc0 (newline_1 - i + 2);
 
-	for (i = i; i <= newline_1; i++) {
-
+	for (i = i; i <= newline_1; i++)
+	{
 		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i, i+1);
 		
-		if ((buffer[0] != 32) & (buffer[0] != 9)) {
-		
+		if ((buffer[0] != 32) & (buffer[0] != 9))
+		{
 			g_free (buffer);
 			buffer = NULL;
 			break;
-		
 		}
 		
 		strncat (whitespace, buffer, 1);
@@ -394,13 +394,12 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		
 	}
 
-	if (strlen(whitespace) > 0) {
-
+	if (strlen(whitespace) > 0)
+	{
 		i = *pos;
 		gtk_text_set_point (GTK_TEXT (text), i);
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
 				 whitespace, strlen (whitespace));
-	
 	}
 	
 	g_free (whitespace);
@@ -409,7 +408,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 }
 
 void
-line_pos_cb (GtkWidget *w, gedit_data *data)
+line_pos_cb (GtkWidget *widget, gedit_data *data)
 {
 	static char col [32];
 
@@ -425,12 +424,12 @@ line_pos_cb (GtkWidget *w, gedit_data *data)
 }
 
 gint
-gedit_event_button_press (GtkWidget *w, GdkEventButton *event)
+gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	gedit_data *data;
 	data = g_malloc0 (sizeof (gedit_data));
 
-	line_pos_cb(NULL, data);
+	line_pos_cb (NULL, data);
 
 #ifdef DEBUG
 	g_print ("you pressed a button\n");
@@ -445,7 +444,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	gint mask;
 	gedit_data *data = g_malloc0 (sizeof (gedit_data));
 
-	if(FALSE)
+	if (FALSE)
 		g_print("Key event pressed :%i\n", event->keyval);
 
 	line_pos_cb (NULL, NULL);
@@ -454,7 +453,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	       GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
 	
 	/* Control key related */
-	if (event->state == GDK_CONTROL_MASK)
+	if (event->state & GDK_CONTROL_MASK)
 	{
 		switch (event->keyval)
 		{
@@ -474,7 +473,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		gedit_undo_redo (w, NULL);
 	    		break;
 		case 'k':
-		        g_warning ("About to crash .. ");
 	    		gedit_undo_redo (w, NULL);
 	    		break;
 		default:
@@ -767,13 +765,9 @@ gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 		return;
 
 	if (split_screen)
-	{
 	   	gtk_widget_show (view->split_parent);
-	}
 	else
-	{
 		gtk_widget_hide (view->split_parent);
-	}
  
    	view->splitscreen = split_screen;
 }
