@@ -87,6 +87,7 @@ init_plugin (PluginData *pd)
 	pd->needs_a_document = TRUE;
 	
 	pd->private_data = (gpointer)insert_time;
+	pd->installed_by_default = TRUE;
 	
 	return PLUGIN_OK;
 }

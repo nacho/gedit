@@ -264,9 +264,21 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 			sub_ui_info = ui_info [count].moreinfo;
 			while (sub_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
 			{
-				if (sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb ||
-				    sub_ui_info [sub_count].moreinfo == gedit_view_add_cb)
+				if (sub_ui_info [sub_count].moreinfo == gedit_view_add_cb)
 				{
+					widget =  sub_ui_info [sub_count].widget;
+					if (widget)
+						gtk_widget_set_sensitive (widget, sensitivity);
+				}
+				if (sub_ui_info [sub_count].moreinfo == gedit_view_remove_cb)
+				{
+					/* We need to check if there are more than 2 views opened */
+					/* The only info we have is *app, and we can't use view_active. */
+					Document *doc;
+					doc = gedit_document_current();
+					if (doc!=NULL)
+						if (g_list_length(doc->views)<2)
+							sensitivity = FALSE;
 					widget =  sub_ui_info [sub_count].widget;
 					if (widget)
 						gtk_widget_set_sensitive (widget, sensitivity);

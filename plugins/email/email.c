@@ -264,6 +264,7 @@ init_plugin (PluginData *pd)
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
 	pd->needs_a_document = TRUE;
 	pd->private_data = (gpointer)gedit_plugin_create_dialog;
+	pd->installed_by_default = TRUE;
 
 	return PLUGIN_OK;
 }

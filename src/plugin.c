@@ -300,10 +300,7 @@ gedit_plugin_load (const gchar *file)
 		g_warning ("plugin allocation error");
 		return NULL;
 	}
-	
-	config_string = g_strdup_printf ("/gedit/installed_plugins/%s", g_basename(file));
-	pd->installed = gnome_config_get_bool(config_string);
-	g_free (config_string);
+
 	
 	pd->file = g_strdup (file);
 	pd->handle = g_module_open (file, 0);
@@ -325,6 +322,7 @@ gedit_plugin_load (const gchar *file)
 	}
 
 	pd->needs_a_document = TRUE;
+	pd->installed_by_default = FALSE;	
 	
 	res = pd->init_plugin (pd);
 	if (res != PLUGIN_OK)
@@ -332,7 +330,14 @@ gedit_plugin_load (const gchar *file)
 		g_warning (_("Error, init_plugin returned an error"));
 		goto error;
 	}
+
 	
+	config_string = g_strdup_printf ("/gedit/installed_plugins/%s=%s",
+					 g_basename(file),
+					 pd->installed_by_default?"TRUE":"FALSE");
+	pd->installed = gnome_config_get_bool(config_string);
+	g_free (config_string);
+
 	plugins_list = g_list_append (plugins_list, pd);
 
 	return pd;

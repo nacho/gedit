@@ -58,6 +58,7 @@ struct _PluginData
 
 	/* Is this plugin installed ? */
 	gint installed;
+	gint installed_by_default;
 };
 
 extern GList	*plugins_list;

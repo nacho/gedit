@@ -38,8 +38,9 @@ enum {
 	LAST_SIGNAL
 };
 
+/*
 static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
-GtkVBoxClass *parent_class = NULL;
+*/
 
 void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
 void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
@@ -322,12 +323,13 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 {
 	int i, newlines, newline_1;
 	gchar *buffer, *whitespace;
-	View *view;
+	View *view; 
 	Document *doc;
 
 	gedit_debug (DEBUG_VIEW, "");
 
 	view = (View *)data;
+
 	g_return_val_if_fail (view != NULL, FALSE);
 
 	if (!settings->auto_indent)
@@ -399,6 +401,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	return TRUE;
 }
 
+
 static void
 gedit_view_class_init (ViewClass *klass)
 {
@@ -407,7 +410,8 @@ gedit_view_class_init (ViewClass *klass)
 	object_class = (GtkObjectClass *)klass;
 
 	gedit_debug (DEBUG_VIEW, "");
-	
+
+	/*
 	gedit_view_signals[CURSOR_MOVED_SIGNAL] =
 		gtk_signal_new ("cursor_moved",
 				GTK_RUN_FIRST,
@@ -419,14 +423,16 @@ gedit_view_class_init (ViewClass *klass)
 
 	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
 	klass->cursor_moved = NULL;
+	*/
 
 	/*
 	widget_class->size_allocate = gedit_view_size_allocate;
 	widget_class->size_request = gedit_view_size_request;
 	widget_class->expose_event = gedit_view_expose;
 	widget_class->realize = gedit_view_realize;
-	object_class->finalize = gedit_view_finalize;*/
+	object_class->finalize = gedit_view_finalize;
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	*/
 }
 
 static void
@@ -461,11 +467,10 @@ gedit_view_init (View *view)
 					GTK_POLICY_AUTOMATIC);
 
         /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
-
 	view->line_wrap = 1;
 
 	view->text = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT(view->text), !view->readonly);
+	gtk_text_set_editable  (GTK_TEXT(view->text), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 
@@ -476,7 +481,7 @@ gedit_view_init (View *view)
 	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
-			    GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
+			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
 
 
 	/* Handle Auto Indent */
@@ -607,7 +612,7 @@ gedit_view_get_type (void)
 	{
 		GtkTypeInfo gedit_view_info =
 		{
-	  		"gedit_view1",
+	  		"gedit_view",
 	  		sizeof (View),
 	  		sizeof (ViewClass),
 	  		(GtkClassInitFunc) gedit_view_class_init,
@@ -879,6 +884,7 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 		/* Move the window to the top after inserting */
 		gedit_view_set_window_position (view, 0);
 		g_free (buffer);
+		gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
 	}
 
 }
@@ -903,8 +909,10 @@ gedit_view_remove (View *view)
 
 	/* Now, we can remove the view proper */
 	gnome_mdi_remove_view (mdi, GTK_WIDGET(view), FALSE);
-
+	
 	gedit_document_set_title (doc);
+
+	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
 }
 
 void

@@ -1,3 +1,11 @@
+2000-06-29  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_add_cb): call set_view_menu_sensitivity after adding a view
+	(gedit_view_remove): call set_view_menu_sensitivity after removing a view
+
+	* plugin.c (gedit_plugin_load): add installed_by_default code.
+	* plugin.h (struct _PluginData): ditto
+
 2000-06-29  Charles Kerr <charles@skywalker.ou.edu>
 
 	* document.c (gedit_document_set_title): small memory leak fixed:

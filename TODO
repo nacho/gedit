@@ -71,25 +71,26 @@
 [X] Finish the new diff plugin
 [X] Unshade the plugins that need a document to be usable
 	[X] MDI mode = TOPLEVEl, fix.
-[~] Plugin manager
+[X] Plugin manager
 	[X] Basic manager
-	[ ] Add plugin description
-	[ ] Assign short-cut keys to pluggin
+	[X] Add plugin description
 	[X] Fix the crash when mdi mode = toplevel
 	[X] Fix the problem with mdi_mode =toplevel, where the menus
             do not get updated.
+	[X] "default" set of plugins, at this point, NONE get installed
+            by default.
 [X] Fix multiple views crash, reported by drake.
+[X] When creating a new file "gedit file_a.txt" we need to set the title
+[X] Fix the problem with the Main window title when switching
+    between different views or docs, it flashes.
+[X] If doc has 1 view, set Remove View Sensitivty
 
 *** Chema maybe ***
 [ ] Try to fix the line & column pos
     *** maybe the next text widget will fix this.***
-[ ] Fix the problem with the Main window title when switching
-    between different views or docs, it flashes.
-    *** mail jaka ? ?***
 [ ] Update README, HACKING, gedit.spec.in, AUTHORS etc..
     ***  yak! ****
 [ ] Should we add the split window again ???
-
 
 ** Eric **
 [ ] New Documentation
@@ -104,12 +105,11 @@
 ----------------------------------------------------------------------
 
 ** Unclaimed **
-[ ] Plugin manager, can borrow some of this code from gnumeric or gide
 [ ] Convert the rest of the plugins
-[ ] Finish libglade-ifying the dialogs and such
-[ ] When creating a new file "gedit file_a.txt" we need to set the title
 [ ] The error reporting on the browse plugin is VERY bad, fix
 [ ] Make the browse plugin non-blocking
+[ ] Add "Documents can have multiple views [ ]" in the prefs box
+    and set this OFF by default. Multiple views confuse newbie users
 
 ----------------------------------------------------------------------
   gedit 0.7.9

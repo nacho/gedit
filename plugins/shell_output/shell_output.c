@@ -176,8 +176,8 @@ init_plugin (PluginData *pd)
 	pd->desc = _("Insert the shell output in the document");
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
 	pd->needs_a_document = TRUE;
-	
 	pd->private_data = (gpointer)shell_output;
+	pd->installed_by_default = TRUE;
 
 	gnome_config_set_string ("/Editor_Plugins/shell_output/directory", g_get_current_dir () );
 	

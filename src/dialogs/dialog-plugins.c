@@ -98,7 +98,6 @@ gedit_plugin_program_location_dialog (void)
 	return location;
 }
 
-#ifdef HAVE_INFO
 static void
 gedit_plugin_manager_info_clear (void)
 {
@@ -106,7 +105,6 @@ gedit_plugin_manager_info_clear (void)
 		gtk_editable_delete_text (text_box, 0, text_length);
 	text_length = 0;
 }
-#endif	
 
 static void
 gedit_plugin_manager_lists_thaw (void)
@@ -124,9 +122,8 @@ gedit_plugin_manager_lists_thaw (void)
 	if (GTK_CLIST (installed_list)->rows > 0)
 	    gtk_clist_thaw (GTK_CLIST (installed_list));
 	*/
-#ifdef HAVE_INFO
+
 	gedit_plugin_manager_info_clear ();
-#endif	
 }
 
 static void
@@ -334,7 +331,6 @@ gtk_clist_row_selected (GtkCList *clist, gint row)
 }
 */
 
-#ifdef HAVE_INFO
 static void
 gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpointer data)
 {
@@ -370,7 +366,6 @@ gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpoin
 	gtk_editable_insert_text (text_box, plugin_info, text_length, &dummy_pos);
 	g_free (plugin_info);
 }
-#endif
 
 static void
 gedit_plugin_manager_clicked (GtkWidget *widget, gpointer button)
@@ -471,14 +466,12 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_add_all), NULL);
 	gtk_signal_connect (GTK_OBJECT (remove_all_button), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_remove_all), NULL);
-#ifdef HAVE_INFO
 	gtk_signal_connect (GTK_OBJECT (available_list), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_clicked),
 			    plugin_info_text);
 	gtk_signal_connect (GTK_OBJECT (installed_list), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_clicked),
 			    plugin_info_text);
-#endif
 	gedit_plugin_manager_item_load ();
 	
 	/* Set the dialog parent and modal type */
