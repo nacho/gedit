@@ -36,7 +36,6 @@
 #include "gE_view.h"
 #include "gE_mdi.h"
 #include "commands.h"
-#include "dialog.h"
 #include "gE_prefs.h"
 
 static void print_destroy(GtkWidget *widget, gpointer data);
@@ -233,7 +232,7 @@ get_filename(gE_data *data)
 	gE_document *doc;
 	char *fname = NULL;
 	char *buttons[] =
-		{ N_("Print anyway"), N_(" Save, then print "), GE_BUTTON_CANCEL };
+		{ N_("Print anyway"), N_(" Save, then print "), N_("Cancel")};
 	char *title, *msg;
 
 	g_assert(data != NULL);
