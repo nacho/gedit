@@ -5,9 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 2.3.2\n"
-"POT-Creation-Date: 2003-08-26 23:48+0200\n"
-"PO-Revision-Date: 2003-06-12 08:44+0800\n"
+"Project-Id-Version: gedit 2.3.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-29 21:20+0800\n"
+"PO-Revision-Date: 2003-08-29 21:50+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -200,7 +201,7 @@ msgstr "列印行號"
 
 #: data/gedit.schemas.in.h:30
 msgid "Print Syntax Highlighting"
-msgstr ""
+msgstr "列印時顯示語法色彩"
 
 #: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
@@ -386,9 +387,8 @@ msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 應否使用空格來代替 tab 字符。"
 
 #: data/gedit.schemas.in.h:58
-#, fuzzy
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr "gedit 應否在列印文件時加上頁首。"
+msgstr "gedit 應否在列印文件時加上語法色彩處理。"
 
 #: data/gedit.schemas.in.h:59
 msgid ""
@@ -502,39 +502,34 @@ msgstr "選單中顯示的編碼(_N)："
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:490
 msgid "Body font picker"
-msgstr ""
+msgstr "內容字型選擇對話方塊"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:491
-#, fuzzy
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr "按下此按鈕後可選擇列印文件內容所用的字型"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:492
-#, fuzzy
 msgid "Page headers font picker"
-msgstr "頁首(_A)："
+msgstr "頁首字型選擇對話方塊"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:493
-#, fuzzy
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr "按下此按鈕後可選擇列印文件頁首所用的字型"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:494
-#, fuzzy
 msgid "Line numbers font picker"
-msgstr "行號"
+msgstr "行號字型選擇對話方塊"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "按下此按鈕後可選擇列印文件行號所用的字型"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
-#, fuzzy
 msgid "Could not find '"
-msgstr "無法開啟檔案 %s。"
+msgstr "找不到‘"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 #: gedit/dialogs/gedit-page-setup-dialog.c:629
@@ -543,11 +538,13 @@ msgid ""
 "\n"
 "Reinstall gedit."
 msgstr ""
+"page-setup-dialog.glade2’。\n"
+"\n"
+"請重新安裝 gedit。"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:628
-#, fuzzy
 msgid "Could not find the required widgets inside '"
-msgstr "無法在 %s 中找到所需的視窗元件。"
+msgstr "無法在以下的檔案中找到所需的視窗元件：‘"
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
@@ -919,13 +916,12 @@ msgid "_Line number:"
 msgstr "行號(_L)："
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:2
-#, fuzzy
 msgid "<b>Line Numbers</b>"
-msgstr "行號"
+msgstr "<b>行號</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
-msgstr ""
+msgstr "<b>自動換行</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:6
 msgid "Fonts"
@@ -933,39 +929,35 @@ msgstr "字型"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:8
 msgid "He_aders and footers:"
-msgstr ""
+msgstr "頁首和頁尾(_A)："
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:9
-#, fuzzy
 msgid "Page Setup"
-msgstr "列印設定"
+msgstr "頁面設定"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:10
-#, fuzzy
 msgid "Print _line numbers"
-msgstr "列印行號"
+msgstr "列印行號(_L)"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:11
 msgid "Print s_yntax highlighting"
-msgstr ""
+msgstr "列印語法色彩(_Y)"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:12
 msgid "_Body:"
 msgstr "內容(_B)："
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
-#, fuzzy
 msgid "_Line numbers:"
 msgstr "行號(_L)："
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
-#, fuzzy
 msgid "_Number every"
-msgstr "每隔指定行數印出行號(_L)："
+msgstr "每隔指定行數加上行號(_N)："
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:15
 msgid "_Print page headers"
@@ -976,7 +968,6 @@ msgid "_Restore Default Fonts"
 msgstr "還原為預設字型(_R)"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
-#, fuzzy
 msgid "lines"
 msgstr "行"
 
@@ -1525,17 +1516,17 @@ msgstr "行"
 
 #: gedit/gedit-print.c:331
 msgid "Preparing pages..."
-msgstr ""
+msgstr "準備頁面內容..."
 
 #: gedit/gedit-print.c:358
 #, c-format
 msgid "Rendering page %d of %d..."
-msgstr ""
+msgstr "正在繪製 %2$d 頁中的第 %1$d 頁內容..."
 
 #: gedit/gedit-print.c:360
 #, c-format
 msgid "Printing page %d of %d..."
-msgstr ""
+msgstr "正在列印 %2$d 頁的第 %1$d 頁..."
 
 #: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
@@ -1548,7 +1539,7 @@ msgstr "檔案：%s"
 
 #: gedit/gedit-print.c:556
 msgid "Page %N of %Q"
-msgstr ""
+msgstr "%N / %Q 頁"
 
 #: gedit/gedit-ui.xml.h:1
 msgid "About this application"
@@ -1671,9 +1662,8 @@ msgid "Open the gedit manual"
 msgstr "開啟 gedit 手冊"
 
 #: gedit/gedit-ui.xml.h:33
-#, fuzzy
 msgid "Page Set_up"
-msgstr "列印設定"
+msgstr "頁面設定(_U)"
 
 #: gedit/gedit-ui.xml.h:34
 msgid "Paste"
@@ -1777,9 +1767,8 @@ msgid ""
 msgstr "根據桌面中的「選單及工具列偏好設定」來指定工具列按鈕樣式"
 
 #: gedit/gedit-ui.xml.h:63
-#, fuzzy
 msgid "Setup the page settings"
-msgstr "更改目前印表機的頁面設定"
+msgstr "更改頁面設定"
 
 #: gedit/gedit-ui.xml.h:64
 msgid "Show only icons in the toolbar"
