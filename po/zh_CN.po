@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-23 04:19+0200\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-03-18 02:09+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -46,7 +46,7 @@ msgstr "gedit 自动工厂"
 msgid "Edit text files"
 msgstr "编辑文本文件"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -420,7 +420,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[GB2312,GB18030,UTF-8,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "激活 %s"
@@ -437,7 +437,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "如果您不保存您的文档，您所做的全部更改都将丢失。"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "选择您想要保存的文档(_E)："
 
@@ -449,11 +449,17 @@ msgstr "全部不保存(_N)"
 msgid "_Save Selected"
 msgstr "保存选中文档(_S)"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "不保存(_N)"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#, fuzzy
+msgid "Question"
+msgstr "建议"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -463,12 +469,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "如果您不保存，前 %ld 秒所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr "如果您不保存，上一分钟所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -478,7 +484,7 @@ msgid_plural ""
 "definitively lost."
 msgstr[0] "如果您不保存，前一分钟零 %ld 秒钟所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -488,12 +494,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "如果您不保存，前 %ld 分钟所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr "如果您不保存，上一小时所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -503,7 +509,7 @@ msgid_plural ""
 "definitively lost."
 msgstr[0] "如果您不保存，上一小时零 %d 分钟所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -511,12 +517,12 @@ msgid_plural ""
 "If you don't save, changes from the last %d hours will be definitively lost."
 msgstr[0] "如果您不保存，前 %d 个小时的所做的更改将永久丢失。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "在关闭前先将更改保存到文档“%s”吗？"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -524,7 +530,7 @@ msgid_plural ""
 msgstr[0] "还有 %d 个文档已做更改但尚未保存。关闭前先保存吗？"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "如果您不保存，您所做的全部更改都将永久丢失。"
 
@@ -537,7 +543,7 @@ msgid "_Go to Line"
 msgstr "跳到行(_G)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "找不到文字“%s” 。"
@@ -552,7 +558,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -597,30 +603,30 @@ msgstr "字符编码"
 msgid "E_ncodings shown in menu:"
 msgstr "菜单中显示的编码(_N)："
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "主体字体拾取器"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr "按下这个按钮以选择打印文档主体的字体"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "页眉字体拾取器"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr "按下这个按钮以选择打印页眉所用的字体"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "行号字体拾取器"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "按下这个按钮以选择打印行号所用的字体"
 
@@ -632,11 +638,11 @@ msgstr "插件"
 msgid "Enabled"
 msgstr "已启用"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "找不到 plugin-manager.glade2，请重新安装 gedit。\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr "插件管理器的 glade 文件无效 -- 没有找到全部部件。\n"
 
@@ -661,31 +667,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "选中的文件不可执行。"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr "按下这个按钮以选择编辑器所用的字体"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "按下这个按钮以配置文本颜色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "按下这个按钮以配置背景色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "按下这个按钮以配置选中文本的颜色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "按下这个按钮以配置选中文本的背景色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "元素"
 
@@ -1126,7 +1132,7 @@ msgstr "输入您想打开文件的位置(URI)(_L)："
 msgid "Open from URI"
 msgstr "从 URI 打开"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr ""
 "Dillion Chen <dillon.chen@turbolinux.com.cn>\n"
@@ -1136,11 +1142,11 @@ msgstr ""
 "Miles Hoo <MilesHoo@sohu.com>, 2002\n"
 "Funda Wang <fundawang@linux.net.cn>, 2003,2004"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit 是 GNOME 桌面的小型文本编辑器"
 
@@ -1204,17 +1210,17 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "gedit 无法创建一个临时文件。"
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "自动检测"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "当前区域(%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "添加或删除(_R)..."
 
@@ -1329,77 +1335,77 @@ msgstr "越南语"
 msgid "Thai"
 msgstr "泰语"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "名为“%s”的文件已经存在。\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "您想要将其替换为您正在保存的文件吗？"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "文件“%s”为只读。\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "全部文件"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "全部文本文件"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "字符编码(_A)："
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "选择要打开的文件"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "选择要打开的文件"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "选择要保存的文件名"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "打开文件..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "正在保存文档“%s”..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "文档“%s”尚未保存。"
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "文档“%s”已保存。"
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "另存为..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:612
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1408,12 +1414,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:621
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:627
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1423,7 +1429,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:637
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1432,11 +1438,11 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:652
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "上一小时内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:658
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1446,7 +1452,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:673
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1454,69 +1460,64 @@ msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "前 %d 小时内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "还原(_R)"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "还原文档“%s”出错。"
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "文档“%s”未还原。"
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "文档“%s”已还原。"
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "正在还原文档“%s”..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "无法从标准输入中读数据。"
 
-#: gedit/gedit-file.c:962
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "文件“%s”不存在，您是否想创建它？"
-
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "正在还原文件："
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "装入文件："
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "装入文件“%s”出错"
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "已载入文件“%s”"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "已载入 %d 个文件"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "正在文件“%s”..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1570,15 +1571,15 @@ msgstr "(已修改)"
 msgid "(readonly)"
 msgstr "(只读)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "普通"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2463,17 +2464,28 @@ msgstr " 覆盖"
 msgid "  INS"
 msgstr " 插入"
 
-#: gedit/gedit2.c:82
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
+
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "退出一个 gedit 实例"
 
-#: gedit/gedit2.c:85
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个最上层窗口"
 
-#: gedit/gedit2.c:88
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个新文档"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2540,9 +2552,7 @@ msgstr "更新(_U)"
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
-msgstr ""
-"分析当前文档，并报告文档中的单词数、行数、字符数和非空格字符数"
-"。"
+msgstr "分析当前文档，并报告文档中的单词数、行数、字符数和非空格字符数。"
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -3031,8 +3041,7 @@ msgstr "显示标记列表窗口"
 msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
-msgstr ""
-"提供一种无需键入即可将常用标签/字符串轻易插入文档的方法。"
+msgstr "提供一种无需键入即可将常用标签/字符串轻易插入文档的方法。"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
@@ -3106,3 +3115,5 @@ msgstr "将选中文本复制到剪贴板"
 msgid "_Copy Text"
 msgstr "复制文字(_C)"
 
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "文件“%s”不存在，您是否想创建它？"

@@ -4,7 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0\n"
-"POT-Creation-Date: 2004-03-28 16:57+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-03-28 16:57+CEST\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -12,7 +13,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: TransDict server\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -42,7 +44,7 @@ msgstr "tvornica gedit automatizacije"
 msgid "Edit text files"
 msgstr "Uređivanje tekstualne datoteke"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Uređivač teksta"
 
@@ -79,16 +81,16 @@ msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
-"Boja pozadine za odabrani tekst u prostoru za izmjenu teksta. Ovo će imati efekta "
-"samo ako je isključena opcija \"Koristi uobičajene boje\"."
+"Boja pozadine za odabrani tekst u prostoru za izmjenu teksta. Ovo će imati "
+"efekta samo ako je isključena opcija \"Koristi uobičajene boje\"."
 
 #: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
-"Boja pozadine za neodabrani tekst u prostoru za izmjenu teksta. Ovo će imati efekta "
-"samo ako je isključena opcija \"Koristi uobičajene boje\"."
+"Boja pozadine za neodabrani tekst u prostoru za izmjenu teksta. Ovo će imati "
+"efekta samo ako je isključena opcija \"Koristi uobičajene boje\"."
 
 #: data/gedit.schemas.in.h:9
 msgid "Backup Copy Extension"
@@ -128,24 +130,24 @@ msgid ""
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
 "Nastavak ili sufiks koji će biti korišten u imenu sigurnosne kopije "
-"datoteke. Ovo imati efekta samo ako je opcija \"Izrađuj sigurnosne "
-"kopije\" uključena."
+"datoteke. Ovo imati efekta samo ako je opcija \"Izrađuj sigurnosne kopije\" "
+"uključena."
 
 #: data/gedit.schemas.in.h:18
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
-"Boja odabranog teksta u prostoru za izmjene teksta. Ovo će imati "
-"efekta samo ako je opcija \"Koristi uobičajene boje\" isključena."
+"Boja odabranog teksta u prostoru za izmjene teksta. Ovo će imati efekta samo "
+"ako je opcija \"Koristi uobičajene boje\" isključena."
 
 #: data/gedit.schemas.in.h:19
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
-"Boja neodabranog teksta u prostoru za izmjene teksta. Ovo će imati "
-"efekta samo ako je opcija \"Koristi uobičajene boje\" isključena."
+"Boja neodabranog teksta u prostoru za izmjene teksta. Ovo će imati efekta "
+"samo ako je opcija \"Koristi uobičajene boje\" isključena."
 
 #: data/gedit.schemas.in.h:20
 msgid "Header Font for Printing"
@@ -158,8 +160,8 @@ msgid ""
 "lines."
 msgstr ""
 "Ukoliko je vrijednost 0, gedit neće umetati brojeve linija prilikom ispisa "
-"dokumenta. U suprotnom, gedit će ispisivati broj linije na svakih unesite-broj "
-"linija."
+"dokumenta. U suprotnom, gedit će ispisivati broj linije na svakih unesite-"
+"broj linija."
 
 #: data/gedit.schemas.in.h:22
 msgid "Insert spaces"
@@ -178,8 +180,8 @@ msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"Popis znakovnih skupiva prikazanih u izborniku za kodiranje znakova u izborniku "
-"datoteka. Koriste se samo prepoznati kodni rasporedi."
+"Popis znakovnih skupiva prikazanih u izborniku za kodiranje znakova u "
+"izborniku datoteka. Koriste se samo prepoznati kodni rasporedi."
 
 #: data/gedit.schemas.in.h:26
 msgid "Maximum Recent Files"
@@ -190,52 +192,72 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maksimalan broj akcija koje će gedit moći poništiti ili vratiti."
 
 #: data/gedit.schemas.in.h:28
+msgid "Monospace 12"
+msgstr ""
+
+#: data/gedit.schemas.in.h:29
+#, fuzzy
+msgid "Monospace Regular 9"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:30
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
-"Broj minuta nakon kojih će gedit automatski spremiti izmjenjenu datoteku. Ovo "
-"će imati efekta samo ukoliko je opcija \"Automatsko spremanje\" uključena."
+"Broj minuta nakon kojih će gedit automatski spremiti izmjenjenu datoteku. "
+"Ovo će imati efekta samo ukoliko je opcija \"Automatsko spremanje\" "
+"uključena."
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Header"
 msgstr "Zaglavlje ispisa"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Line Numbers"
 msgstr "Ispis brojeva linija"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Syntax Highlighting"
 msgstr "Ispisivanje isticanja sintakse"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Printing Line Wrapping Mode"
 msgstr "Ispisivanje načina omatanja linija"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Right Margin Position"
 msgstr "Položaj desne margine"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
+#, fuzzy
+msgid "Sans Regular 11"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:37
+#, fuzzy
+msgid "Sans Regular 8"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:38
 msgid "Selected Text Color"
 msgstr "Boja odabranog teksta"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:39
 msgid "Selection Color"
 msgstr "Boja odabira"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
-"Razvrstani popis znakovnih skupova za automatsko prepoznavanje "
-"kodnog rasporeda datoteke. \"CURRENT\" označava trenutni kodni raspored "
-"lokalnih postavki Koriste se jedino prepoznati kodni rasporedi."
+"Razvrstani popis znakovnih skupova za automatsko prepoznavanje kodnog "
+"rasporeda datoteke. \"CURRENT\" označava trenutni kodni raspored lokalnih "
+"postavki Koriste se jedino prepoznati kodni rasporedi."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -244,12 +266,12 @@ msgid ""
 "here."
 msgstr ""
 "Određuje način omatanja dugih linija prilikom ispisa. Koristiti "
-"\"GTK_WRAP_NONE\" za isključivanje omatanja, \"GTK_WRAP_WORD\" za omatanje na "
-"krajevima riječi, i \"GTK_WRAP_CHAR\" za omatanje između znakova. Obratite "
-"pažnju da su vrijednosti osjetljive na velika ili mala slova, pa vodite  "
-"računa da moraju biti iste kao što su ovdje navedene."
+"\"GTK_WRAP_NONE\" za isključivanje omatanja, \"GTK_WRAP_WORD\" za omatanje "
+"na krajevima riječi, i \"GTK_WRAP_CHAR\" za omatanje između znakova. "
+"Obratite pažnju da su vrijednosti osjetljive na velika ili mala slova, pa "
+"vodite  računa da moraju biti iste kao što su ovdje navedene."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -258,24 +280,25 @@ msgid ""
 "here."
 msgstr ""
 "Određuje način omatanja dugih linija u prostoru za uređivanje. Koristiti "
-"\"GTK_WRAP_NONE\" za isključivanje omatanja, \"GTK_WRAP_WORD\" za omatanje na "
-"krajevima riječi, i \"GTK_WRAP_CHAR\" za omatanje između znakova. Obratite "
-"pažnju da su vrijednosti osjetljive na velika ili mala slova, pa vodite  "
-"računa da moraju biti iste kao što su ovdje navedene."
+"\"GTK_WRAP_NONE\" za isključivanje omatanja, \"GTK_WRAP_WORD\" za omatanje "
+"na krajevima riječi, i \"GTK_WRAP_CHAR\" za omatanje između znakova. "
+"Obratite pažnju da su vrijednosti osjetljive na velika ili mala slova, pa "
+"vodite  računa da moraju biti iste kao što su ovdje navedene."
 
-#: data/gedit.schemas.in.h:39
-msgid "Specifies the font to use for a document's body when printing documents."
+#: data/gedit.schemas.in.h:43
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
 msgstr "Određuje pismo koje se koristi za tijelo dokumenta prilikom ispisa."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"Određuje pismo koje se koristi za ispis brojeva linija. Ovo ima efekta "
-"samo ako opcija \"Ispisuj brojeve linija\" nije postavljena na 0."
+"Određuje pismo koje se koristi za ispis brojeva linija. Ovo ima efekta samo "
+"ako opcija \"Ispisuj brojeve linija\" nije postavljena na 0."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -283,7 +306,7 @@ msgstr ""
 "Određuje pismo koje se koristi za ispis zaglavlja stranice. Ovo ima efekta "
 "samo ako je uključena opcija \"Ispisuj zaglavlje\"."
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -291,21 +314,21 @@ msgstr ""
 "Određuje maksimalni broj nedavno otvorenih datoteka koje se prikazuju u "
 "podizborniku \"Nedavno otvorene datoteke\"."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Određuje broj razmaka koji se prikazuju umjesto tab znakova."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:48
 msgid "Specifies the position of the right margin."
 msgstr "Određuje položaj desne margine."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:49
 msgid "Status Bar is Visible"
 msgstr "Statusna traka je vidljiva"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -314,96 +337,99 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
-"Stil gumba na alatnoj traci. Moguće vrijednosti su \"GEDIT_TOOLBAR_SYSTEM\" za "
-"predefinirani sustavski stil, \"GEDIT_TOOLBAR_ICONS\" za prikaz samo sličica, "
-"\"GEDIT_TOOLBAR_ICONS_AND_TEXT\" za prikaz i sličica i teksta, i "
-"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" za prikaz naglašenog teksta pored sličica. "
-"Obratite pažnju da su vrijednosti osjetljive na velika i mala slova, pa se "
-"uvjerite da ih koristite kao što su ovdje navedene."
+"Stil gumba na alatnoj traci. Moguće vrijednosti su \"GEDIT_TOOLBAR_SYSTEM\" "
+"za predefinirani sustavski stil, \"GEDIT_TOOLBAR_ICONS\" za prikaz samo "
+"sličica, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" za prikaz i sličica i teksta, i "
+"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" za prikaz naglašenog teksta pored "
+"sličica. Obratite pažnju da su vrijednosti osjetljive na velika i mala "
+"slova, pa se uvjerite da ih koristite kao što su ovdje navedene."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Tab Size"
 msgstr "Veličina tabulatora"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Text Color"
 msgstr "Boja Teksta"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Toolbar Buttons Style"
 msgstr "Stil gumba na alatnoj traci"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Toolbar is Visible"
 msgstr "Alatna traka je vidljiva"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Undo Actions Limit"
 msgstr "Ograničenje poništavanja akcija"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid "Use Default Colors"
 msgstr "Koristi predefinirane boje"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid "Use Default Font"
 msgstr "Koristi predefinirano pismo"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
-"Treba li gedit automatski spremati promijenjene datoteke nakone datog vremenskog "
-"razdoblja. Možete postaviti vremenski interval pomoću opcije \"Interval automatskog "
-"snimanja\"."
+"Treba li gedit automatski spremati promijenjene datoteke nakone datog "
+"vremenskog razdoblja. Možete postaviti vremenski interval pomoću opcije "
+"\"Interval automatskog snimanja\"."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
-"Treba li gedit raditi sigurnosne kopije datoteka koje sprema. Možete postaviti "
-"nastavak datoteka sigurnosnih kopija s postavkom \"Nastavak sigurnosne kopije\"."
+"Treba li gedit raditi sigurnosne kopije datoteka koje sprema. Možete "
+"postaviti nastavak datoteka sigurnosnih kopija s postavkom \"Nastavak "
+"sigurnosne kopije\"."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should display line numbers in the editing area."
-msgstr "Treba li gedit prikazivati brojeve linija u prostoru za izmjenu teksta."
+msgstr ""
+"Treba li gedit prikazivati brojeve linija u prostoru za izmjenu teksta."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:61
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Treba li gedit prikazivati desnu marginu u prostoru za izmjenu teksta."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should enable auto indentation."
 msgstr "Treba li gedit omogućiti automatsko poravnanje."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Treba li gedit omogućiti isticanje sintakse."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Treba li gedit uključiti zaglavlje dokumenta prilikom ispisa."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Treba li gedit umetnuti razmake umjesto tabova."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Treba li gedit isticati sintaksu prilikom ispisa dokumenata."
 
-#: data/gedit.schemas.in.h:63
-msgid "Whether the status bar at the bottom of editing windows should be visible."
+#: data/gedit.schemas.in.h:67
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Treba li statusna traka u dnu prozora za uređivanje biti vidljiva."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:68
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Treba li alatna traka biti vidljiva u prozorim za uređivanje."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -415,7 +441,7 @@ msgstr ""
 "teksta biti one navedene u postavkama za \"Boja pozadine\", \"Boja teksta\", "
 "\"Boja odabranog teksta\", i \"Boja odabira\"."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -423,10 +449,19 @@ msgid ""
 msgstr ""
 "Treba li koristiti predefinirano sustavsko pismo za prikaz teksta umjesto "
 "pisma navedenog u podešavanjima gedit programa. Ako je ova opcija "
-"isključena, pismo navedeno u postavci \"Pismo uređivača\" će biti korišteno umjesto "
-"sustavskog pisma."
+"isključena, pismo navedeno u postavci \"Pismo uređivača\" će biti korišteno "
+"umjesto sustavskog pisma."
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: data/gedit.schemas.in.h:71
+msgid "[ISO-8859-15]"
+msgstr ""
+
+#: data/gedit.schemas.in.h:72
+msgid "[UTF-8,CURRENT,ISO-8859-15]"
+msgstr ""
+
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#, c-format
 msgid "Activate %s"
 msgstr "U�itana datoteka %s"
 
@@ -434,14 +469,16 @@ msgstr "U�itana datoteka %s"
 msgid ""
 "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
 "changes. </span>"
-msgstr "<span weight=\"bold\" size=\"larger\">imate X dokumenata sa promjenama koje nisu pohranjene. </span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">imate X dokumenata sa promjenama koje "
+"nisu pohranjene. </span>"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:2
 msgid "If you don't save your documents, all your changes will be lost."
 msgstr "Ako ne snimite vaše dokumente, sve izmjene će biti izgubljene."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:654
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "Izaberite dokumente koje želite spremiti:"
 
@@ -453,82 +490,121 @@ msgstr "Snimi Bez _odabira"
 msgid "_Save Selected"
 msgstr "_Spremi odabrane"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "_Ne spremaj"
 
-#. plural form
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
-#, c-format
-msgid "If you don't save, changes from the last %ld second will be definitively "
-"lost."
-msgid_plural "If you don't save, changes from the last %ld seconds will be definitively "
-"lost."
-msgstr[0] "Ukoliko ne spremite, promjene u zadnjoj %ld sekundi biti će izgubljene."
-msgstr[1] "Ukoliko ne spremite, promjene u zadnje %ld sekunde biti će izgubljene."
-msgstr[2] "Ukoliko ne spremite, promjene u zadnjih %ld sekundi biti će izgubljene."
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#, fuzzy
+msgid "Question"
+msgstr "Prijedlozi"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
-msgid "If you don't save, changes from the last minute will be definitively lost."
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
+#, c-format
+msgid ""
+"If you don't save, changes from the last %ld second will be definitively "
+"lost."
+msgid_plural ""
+"If you don't save, changes from the last %ld seconds will be definitively "
+"lost."
+msgstr[0] ""
+"Ukoliko ne spremite, promjene u zadnjoj %ld sekundi biti će izgubljene."
+msgstr[1] ""
+"Ukoliko ne spremite, promjene u zadnje %ld sekunde biti će izgubljene."
+msgstr[2] ""
+"Ukoliko ne spremite, promjene u zadnjih %ld sekundi biti će izgubljene."
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
+msgid ""
+"If you don't save, changes from the last minute will be definitively lost."
 msgstr "Ako ne snimite, izmjene od zadnje minute biti će izgubljene."
 
-#. plural form
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
-msgid "If you don't save, changes from the last minute and %ld second will be "
+msgid ""
+"If you don't save, changes from the last minute and %ld second will be "
 "definitively lost."
-msgid_plural "If you don't save, changes from the last minute and %ld seconds will be "
+msgid_plural ""
+"If you don't save, changes from the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] "Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekundi biti će izgubljene."
-msgstr[1] "Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekunde biti će izgubljene."
-msgstr[2] "Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekundi biti će izgubljene."
+msgstr[0] ""
+"Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekundi biti će "
+"izgubljene."
+msgstr[1] ""
+"Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekunde biti će "
+"izgubljene."
+msgstr[2] ""
+"Ukoliko ne spremite, promjene u zadnjoj minuti i %ld sekundi biti će "
+"izgubljene."
 
-#. plural form
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
-msgid "If you don't save, changes from the last %ld minute will be definitively "
+msgid ""
+"If you don't save, changes from the last %ld minute will be definitively "
 "lost."
-msgid_plural "If you don't save, changes from the last %ld minutes will be definitively "
+msgid_plural ""
+"If you don't save, changes from the last %ld minutes will be definitively "
 "lost."
-msgstr[0] "Ukoliko ne spremite, promjene u zadnjoj %ld minuti biti će izgubljene."
-msgstr[1] "Ukoliko ne spremite, promjene u zadnje %ld minute biti će izgubljene."
-msgstr[2] "Ukoliko ne spremite, promjene u zadnjih %ld minuta biti će izgubljene."
+msgstr[0] ""
+"Ukoliko ne spremite, promjene u zadnjoj %ld minuti biti će izgubljene."
+msgstr[1] ""
+"Ukoliko ne spremite, promjene u zadnje %ld minute biti će izgubljene."
+msgstr[2] ""
+"Ukoliko ne spremite, promjene u zadnjih %ld minuta biti će izgubljene."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
-msgid "If you don't save, changes from the last hour will be definitively lost."
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
+msgid ""
+"If you don't save, changes from the last hour will be definitively lost."
 msgstr "Ako ne snimite, izmjene od prošlog sata biti će izgubljene."
 
-#. plural form
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
-msgid "If you don't save, changes from the last hour and %d minute will be "
+msgid ""
+"If you don't save, changes from the last hour and %d minute will be "
 "definitively lost."
-msgid_plural "If you don't save, changes from the last hour and %d minutes will be "
+msgid_plural ""
+"If you don't save, changes from the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] "Ukoliko ne spremite, promjene u zadnjem satu i %d minuti biti će izgubljene."
-msgstr[1] "Ukoliko ne spremite, promjene u zadnjem satu i %d minute biti će izgubljene."
-msgstr[2] "Ukoliko ne spremite, promjene u zadnjem satu i %d minuta biti će izgubljene."
+msgstr[0] ""
+"Ukoliko ne spremite, promjene u zadnjem satu i %d minuti biti će izgubljene."
+msgstr[1] ""
+"Ukoliko ne spremite, promjene u zadnjem satu i %d minute biti će izgubljene."
+msgstr[2] ""
+"Ukoliko ne spremite, promjene u zadnjem satu i %d minuta biti će izgubljene."
 
-#. plural form
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
-msgid "If you don't save, changes from the last %d hour will be definitively lost."
-msgid_plural "If you don't save, changes from the last %d hours will be definitively lost."
+msgid ""
+"If you don't save, changes from the last %d hour will be definitively lost."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be definitively lost."
 msgstr[0] "Ukoliko ne spremite, promjene u zadnjem %d satu biti će izgubljene."
 msgstr[1] "Ukoliko ne spremite, promjene u zadnja %d sata biti će izgubljene."
 msgstr[2] "Ukoliko ne spremite, promjene u zadnjih %d sati biti će izgubljene."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Snimi izmjene na dokumentu \"%s\" prije zatvaranja?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:640
-#, c-format
-msgid "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr "Postoji %d dokumenata s izmjenama koji nisu snimljeni. Želite li snimiti izmjene?"
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#, fuzzy, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] ""
+"Postoji %d dokumenata s izmjenama koji nisu snimljeni. Želite li snimiti "
+"izmjene?"
+msgstr[1] ""
+"Postoji %d dokumenata s izmjenama koji nisu snimljeni. Želite li snimiti "
+"izmjene?"
+msgstr[2] ""
+"Postoji %d dokumenata s izmjenama koji nisu snimljeni. Želite li snimiti "
+"izmjene?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:671
+#. Secondary label
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "Ako ne snimite, sve izmjene će zasigurno biti izgubljene."
 
@@ -541,7 +617,7 @@ msgid "_Go to Line"
 msgstr "_Idi na redak"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Tekst \"%s\" nije pronađen."
@@ -556,7 +632,7 @@ msgid "Replace _All"
 msgstr "_Zamjeni sve"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "_Zamijeni"
 
@@ -564,7 +640,6 @@ msgstr "_Zamijeni"
 msgid "Find"
 msgstr "Nađi"
 
-#. plural form
 #: gedit/dialogs/gedit-dialog-replace.c:1135
 #, c-format
 msgid "Found and replaced %d occurrence."
@@ -604,31 +679,38 @@ msgstr "Kodiranja znakova"
 msgid "E_ncodings shown in menu:"
 msgstr "Kodni _rasporedi prikazani u izborniku:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "Izbor pisma za tijelo teksta"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
-msgstr "Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa tijela dokumenta."
+msgstr ""
+"Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa tijela "
+"dokumenta."
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "Izbor pisma za zaglavlje stranice"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
-msgid "Push this button to select the font to be used to print the page headers"
-msgstr "Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa zaglavlja dokumenta."
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
+msgid ""
+"Push this button to select the font to be used to print the page headers"
+msgstr ""
+"Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa zaglavlja "
+"dokumenta."
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "Izbor pisma za brojeve linija"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr "Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa brojeva linija."
+msgstr ""
+"Pritisnite ovaj gumb za odabir pisma za korištenje prilikom ispisa brojeva "
+"linija."
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
@@ -638,13 +720,14 @@ msgstr "Umetak"
 msgid "Enabled"
 msgstr "Omogućeno"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Ne mogu naći plugin-manager.glade2, reinstalirajte gedit.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr """Neispravna glade datoteka za upravljač umetcima - nisu pronađeni svi "
+msgstr ""
+"Neispravna glade datoteka za upravljač umetcima - nisu pronađeni svi "
 "elementi.\n"
 
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
@@ -668,31 +751,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Odabrana datoteka nije izvršna."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Pritisnite ovaj gumb za odabir pisma za korištenje u uređivaču."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "Pritisnite ovaj gumb za podešavanje boje teksta"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "Pritisnite ovaj gumb za podešavanje boje pozadine"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Pritisnite ovaj gumb za podešavanje boje odabranog teksta."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Pritisnite ovaj gumb za podešavanje boje odabranog teksta."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "Elementi"
 
@@ -1133,58 +1216,59 @@ msgstr "Unesite lokaciju (URI) datoteke koju želite otvoriti: "
 msgid "Open from URI"
 msgstr "Otvori URI"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr "lokalizacija@linux.hr"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit je mali i lagani uređivač teksta za GNOME radnu površinu"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
+#, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 msgid "Untitled"
 msgstr "Bez naslova"
 
-#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
+#: gedit/gedit-document.c:641 gedit/gedit-document.c:688
 msgid "Invalid file name"
 msgstr "Pogrešno ime datoteke"
 
-#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
+#: gedit/gedit-document.c:839 gedit/gedit-document.c:1314
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Neispravni UTF-8 podaci"
 
-#: gedit/gedit-document.c:1643
+#: gedit/gedit-document.c:1641
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Ne mogu pročitati podatke o simboličkom linku za %s"
 
-#: gedit/gedit-document.c:1689
+#: gedit/gedit-document.c:1687
 msgid "The file has too many symbolic links."
 msgstr "Datoteka ima previše simboličkih veza."
 
-#: gedit/gedit-document.c:1745
+#: gedit/gedit-document.c:1743
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ne može rukovati s %s: adrese za pisanje."
 
-#: gedit/gedit-document.c:1752
+#: gedit/gedit-document.c:1750
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ne može rukovati s ovom vrstom lokacije za pisanje"
 
-#: gedit/gedit-document.c:1765
+#: gedit/gedit-document.c:1763
 msgid "Invalid filename."
 msgstr "Nevaljani naziv datoteke."
 
-#: gedit/gedit-document.c:1877
+#: gedit/gedit-document.c:1875
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1192,31 +1276,31 @@ msgstr ""
 "Nema dovoljno prostora na disku za spremanje datoteku.\n"
 "Molimo da oslobodite prostor na disku i pokušate ponovo."
 
-#: gedit/gedit-document.c:1882
+#: gedit/gedit-document.c:1880
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
-"Disk na koji pokušavate snimiti datoteku ima ograničene veličine "
-"datoteka. Molimo da snimite manju datoteku ili da je snimite na disk "
-"koji nema ovo ograničenje."
+"Disk na koji pokušavate snimiti datoteku ima ograničene veličine datoteka. "
+"Molimo da snimite manju datoteku ili da je snimite na disk koji nema ovo "
+"ograničenje."
 
-#: gedit/gedit-document.c:1926
+#: gedit/gedit-document.c:1924
 msgid "Could not create a backup file."
 msgstr "Ne mogu stvoriti sigurnosnu kopiju."
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "Automatski prepoznat"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Tekuće lokalne postavke (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "Dodaj ili u_kloni..."
 
@@ -1331,203 +1415,227 @@ msgstr "Vijetnamska"
 msgid "Thai"
 msgstr "Tajlandski"
 
-#: gedit/gedit-file-selector-util.c:148
-#, , c-format
+#: gedit/gedit-file-selector-util.c:153
+#, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Već postoji datoteka s imenom \"%s\".\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Želite li zamijeniti ovom koju spremate?"
 
-#: gedit/gedit-file-selector-util.c:158
-#, , c-format
+#: gedit/gedit-file-selector-util.c:163
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Datoteka \"%s\" se može samo čitati.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Želite li pokušati zamijeniti sa ovom koju spremate?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "Sve datoteke"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "Sve tekstualne datoteke"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "Kodiranje zn_akova:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "Odaberi datoteku"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "Izaberite datoteke za otvaranje"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "Izaberite ime datoteke za spremanje"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "Otvori datoteku..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
-#, , c-format
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
+#, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Spremam datoteku \"%s\"..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
-#, , c-format
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
+#, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nije spremljen."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
-#, , c-format
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
+#, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" je spremljen."
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "Spremi kao..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:603
+#, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Želite li spremiti promjene koje ste napravili na dokumentu \"%s\"?"
 
-#. plural form
-#: gedit/gedit-file.c:609
-#, c-format
-msgid "Changes made to the document in the last %ld second will be definitively "
+#: gedit/gedit-file.c:612
+#, fuzzy, c-format
+msgid ""
+"Changes made to the document in the last %ld second will be permanently lost."
+msgid_plural ""
+"Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgid_plural "Changes made to the document in the last %ld seconds will be definitively "
+msgstr[0] ""
+"Promjene napravljene na dokumentu u zadnjoj %ld sekundi biti će izgubljene."
+msgstr[1] ""
+"Promjene napravljene na dokumentu u zadnje %ld sekunde biti će izgubljene."
+msgstr[2] ""
+"Promjene napravljene na dokumentu u zadnjih %ld sekundi biti će izgubljene."
+
+#: gedit/gedit-file.c:621
+#, fuzzy
+msgid ""
+"Changes made to the document in the last minute will be permanently lost."
+msgstr ""
+"Promjene napravljene na dokumentu u zadnjoj minuti će zasigurno biti "
+"izgubljene."
+
+#: gedit/gedit-file.c:627
+#, fuzzy, c-format
+msgid ""
+"Changes made to the document in the last minute and %ld second will be "
+"permanently lost."
+msgid_plural ""
+"Changes made to the document in the last minute and %ld seconds will be "
+"permanently lost."
+msgstr[0] ""
+"Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekundi biti će "
+"izgubljene."
+msgstr[1] ""
+"Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekunde biti će "
+"izgubljene."
+msgstr[2] ""
+"Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekundi biti će "
+"izgubljene."
+
+#: gedit/gedit-file.c:637
+#, fuzzy, c-format
+msgid ""
+"Changes made to the document in the last %ld minute will be permanently lost."
+msgid_plural ""
+"Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "Promjene napravljene na dokumentu u zadnjoj %ld sekundi biti će izgubljene."
-msgstr[1] "Promjene napravljene na dokumentu u zadnje %ld sekunde biti će izgubljene."
-msgstr[2] "Promjene napravljene na dokumentu u zadnjih %ld sekundi biti će izgubljene."
+msgstr[0] ""
+"Promjene napravljene na dokumentu u zadnjoj %ld minuti biti će izgubljene."
+msgstr[1] ""
+"Promjene napravljene na dokumentu u zadnje %ld minute biti će izgubljene."
+msgstr[2] ""
+"Promjene napravljene na dokumentu u zadnjih %ld minuta biti će izgubljene."
 
-#: gedit/gedit-file.c:618
-msgid "Changes made to the document in the last minute will be definitively lost."
-msgstr "Promjene napravljene na dokumentu u zadnjoj minuti će zasigurno biti izgubljene."
+#: gedit/gedit-file.c:652
+#, fuzzy
+msgid "Changes made to the document in the last hour will be permanently lost."
+msgstr ""
+"Promjene napravljene na dokumentu u zadnjih sat će zasigurno biti "
+"izgubljene. "
 
-#. plural form
-#: gedit/gedit-file.c:624
-#, c-format
-msgid "Changes made to the document in the last minute and %ld second will be "
-"definitively lost."
-msgid_plural "Changes made to the document in the last minute and %ld seconds will be "
-"definitively lost."
-msgstr[0] "Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekundi biti će izgubljene."
-msgstr[1] "Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekunde biti će izgubljene."
-msgstr[2] "Promjene napravljene na dokumentu u zadnjoj minuti i %ld sekundi biti će izgubljene."
+#: gedit/gedit-file.c:658
+#, fuzzy, c-format
+msgid ""
+"Changes made to the document in the last hour and %d minute will be "
+"permanently lost."
+msgid_plural ""
+"Changes made to the document in the last hour and %d minutes will be "
+"permanently lost."
+msgstr[0] ""
+"Promjene napravljene na dokumentu u zadnjem satu i %d minuti biti izgubljene."
+msgstr[1] ""
+"Promjene napravljene na dokumentu u zadnjem satu i %d minute biti će "
+"izgubljene."
+msgstr[2] ""
+"Promjene napravljene na dokumentu u zadnjiem satu i %d minuta biti će "
+"izgubljene."
 
-#. plural form
-#: gedit/gedit-file.c:634
-#, c-format
-msgid "Changes made to the document in the last %ld minute will be definitively "
-"lost."
-msgid_plural "Changes made to the document in the last %ld minutes will be definitively "
-"lost."
-msgstr[0] "Promjene napravljene na dokumentu u zadnjoj %ld minuti biti će izgubljene."
-msgstr[1] "Promjene napravljene na dokumentu u zadnje %ld minute biti će izgubljene."
-msgstr[2] "Promjene napravljene na dokumentu u zadnjih %ld minuta biti će izgubljene."
+#: gedit/gedit-file.c:673
+#, fuzzy, c-format
+msgid ""
+"Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] ""
+"Promjene napravljene na dokumentu u zadnjem %d satu biti će izgubljene."
+msgstr[1] ""
+"Promjene napravljene na dokumentu u zadnja %d sata biti će izgubljene."
+msgstr[2] ""
+"Promjene napravljene na dokumentu u zadnjih %d sati biti će izgubljene."
 
-#: gedit/gedit-file.c:649
-msgid "Changes made to the document in the last hour will be definitively lost."
-msgstr "Promjene napravljene na dokumentu u zadnjih sat će zasigurno biti izgubljene. "
-
-#. plural form
-#: gedit/gedit-file.c:655
-#, c-format
-msgid "Changes made to the document in the last hour and %d minute will be "
-"definitively lost."
-msgid_plural "Changes made to the document in the last hour and %d minutes will be "
-"definitively lost."
-msgstr[0] "Promjene napravljene na dokumentu u zadnjem satu i %d minuti biti izgubljene."
-msgstr[1] "Promjene napravljene na dokumentu u zadnjem satu i %d minute biti će izgubljene."
-msgstr[2] "Promjene napravljene na dokumentu u zadnjiem satu i %d minuta biti će izgubljene."
-
-#. plural form
-#: gedit/gedit-file.c:670
-#, c-format
-msgid "Changes made to the document in the last %d hour will be definitively lost."
-msgid_plural "Changes made to the document in the last %d hours will be definitively lost."
-msgstr[0] "Promjene napravljene na dokumentu u zadnjem %d satu biti će izgubljene."
-msgstr[1] "Promjene napravljene na dokumentu u zadnja %d sata biti će izgubljene."
-msgstr[2] "Promjene napravljene na dokumentu u zadnjih %d sati biti će izgubljene."
-
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Vrati"
 
-#: gedit/gedit-file.c:738
-#, , c-format
+#: gedit/gedit-file.c:745
+#, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Greška kod vraćanja dokumenta \"%s\"."
 
-#: gedit/gedit-file.c:745
-#, , c-format
+#: gedit/gedit-file.c:752
+#, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nije vraćen."
 
-#: gedit/gedit-file.c:749
-#, , c-format
+#: gedit/gedit-file.c:756
+#, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" je vraćen."
 
-#: gedit/gedit-file.c:777
-#, , c-format
+#: gedit/gedit-file.c:784
+#, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vraćam datoteku \"%s\"..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "Ne mogu pročitati podatke sa standardnog ulaza."
 
-#: gedit/gedit-file.c:962
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Datoteka \"%s\" ne postoji. Želite li je napraviti?"
-
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Vraćam datoteku :"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Učitavam datoteku:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Greška prilikom učitavanja datoteke \"%s\""
 
-#: gedit/gedit-file.c:1279
-#, , c-format
+#: gedit/gedit-file.c:1252
+#, c-format
 msgid "Loaded file \"%s\""
 msgstr "Datoteka \"%s\" je učitana."
 
-#. plural form
-#: gedit/gedit-file.c:1356
-#, , c-format
+#: gedit/gedit-file.c:1329
+#, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Učitana %d datoteka"
 msgstr[1] "Učitane %d datoteke"
 msgstr[2] "Učitano %d datoteka"
 
-#: gedit/gedit-file.c:1390
-#, , c-format
+#: gedit/gedit-file.c:1363
+#, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Učitavam datoteku \"%s\"..."
 
-#. plural form
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1583,15 +1691,15 @@ msgstr "(izmjenjeno)"
 msgid "(readonly)"
 msgstr "(samo za čitanje)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "Obično"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "Koristi običan način isticanja"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Koristi %s način isticanja"
@@ -1927,7 +2035,8 @@ msgid "Select the entire document"
 msgstr "Ozači cijeli dokument"
 
 #: gedit/gedit-ui.xml.h:62
-msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr "Postavi stil gumba prema postavkama izbornika i alatne trakea"
 
 #: gedit/gedit-ui.xml.h:63
@@ -2104,8 +2213,11 @@ msgstr "Ne mogu otvoriti datoteku \"%s\" jer sadrži oštećene podatke."
 
 #: gedit/gedit-utils.c:426
 #, c-format
-msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "Ne mogu otvoriti datoteku \"%s\" jer gedit ne može da rukovati s %s: lokacije."
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Ne mogu otvoriti datoteku \"%s\" jer gedit ne može da rukovati s %s: "
+"lokacije."
 
 #: gedit/gedit-utils.c:432
 #, c-format
@@ -2114,8 +2226,10 @@ msgstr "Ne mogu otvoriti datoteku \"%s\""
 
 #: gedit/gedit-utils.c:442
 #, c-format
-msgid "Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr """Ne mogu otvoriti datoteku \"%s\" jer sadrži podatke u neodgovarajućem "
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr ""
+"Ne mogu otvoriti datoteku \"%s\" jer sadrži podatke u neodgovarajućem "
 "formatu."
 
 #: gedit/gedit-utils.c:449
@@ -2180,8 +2294,8 @@ msgid ""
 msgstr ""
 "Ne mogu otvoriti datoteku \"%s\" jer ne mogu naći adresu \"%s\".\n"
 "\n"
-"Molimo, provjerite jeste li unijeli točnu lokaciju i jesu li postavke "
-"proxy poslužitelja ispravne, pa zatim pokušajte ponovo."
+"Molimo, provjerite jeste li unijeli točnu lokaciju i jesu li postavke proxy "
+"poslužitelja ispravne, pa zatim pokušajte ponovo."
 
 #: gedit/gedit-utils.c:528
 #, c-format
@@ -2203,7 +2317,8 @@ msgid ""
 msgstr ""
 "Ne mogu otvoriti datoteku \"%s\" jer je adresa prazna.\n"
 "\n"
-"Molimo, provjerite da li su postavke proxy poslužitelja točne i pokušajte ponovo."
+"Molimo, provjerite da li su postavke proxy poslužitelja točne i pokušajte "
+"ponovo."
 
 #: gedit/gedit-utils.c:546
 #, c-format
@@ -2242,12 +2357,12 @@ msgid ""
 "selecting a character coding in the 'Open File...' (or 'Open Location') "
 "dialog."
 msgstr ""
-"Ne mogu otvoriti datoteku \"%s\" jer gedit ne može prepoznati "
-"znakovni skup.\n"
+"Ne mogu otvoriti datoteku \"%s\" jer gedit ne može prepoznati znakovni "
+"skup.\n"
 "\n"
 "Molim provjerite da ne pokušavate otvoriti binarnu datoteku i pokušajte "
-"ponovo odabiranjem znakovnog skupa u dijalogu 'Otvori datoteku...' "
-"(ili 'Otvori lokaciju')."
+"ponovo odabiranjem znakovnog skupa u dijalogu 'Otvori datoteku...' (ili "
+"'Otvori lokaciju')."
 
 #: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
 #, c-format
@@ -2265,7 +2380,7 @@ msgstr ""
 "pokušajte ponovo."
 
 #: gedit/gedit-utils.c:666
-#, , c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
@@ -2309,7 +2424,8 @@ msgstr "Ne mogu vratiti datoteku \"%s\" jer sadrži oštećene podatke."
 
 #: gedit/gedit-utils.c:793
 #, c-format
-msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr "Ne mogu vratiti datoteku \"%s\" jer gedit ne podržava %s: lokacije."
 
 #: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
@@ -2322,7 +2438,8 @@ msgstr "Ne mogu vratiti datoteku \"%s\"."
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
-msgstr "Ne mogu vratiti datoteku \"%s\" jer sadrži podatke u neispravnom formatu."
+msgstr ""
+"Ne mogu vratiti datoteku \"%s\" jer sadrži podatke u neispravnom formatu."
 
 #: gedit/gedit-utils.c:816
 #, c-format
@@ -2462,10 +2579,12 @@ msgstr ""
 msgid "Could not create the file \"%s\"."
 msgstr "Ne mogu stvoriti datoteku \"%s\"."
 
+#.
 #. if (col == chars)
-#.  msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
-#.  else
-#.  msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
+#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
+#. else
+#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
+#.
 #: gedit/gedit-view.c:665
 #, c-format
 msgid "  Ln %d, Col %d"
@@ -2479,77 +2598,80 @@ msgstr "  Prepiši"
 msgid "  INS"
 msgstr "  Umetni"
 
-#: gedit/gedit2.c:82
-msgid "Show utility debugging messages."
-msgstr "Prikaži poruke pri otklanjanje grešaka alata."
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
 
-#: gedit/gedit2.c:85
-msgid "Show metadata debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka metapodataka."
-
-#: gedit/gedit2.c:88
-msgid "Show mdi debugging messages."
-msgstr "Prikaži poruke pri otklanjanju mdi grešaka."
-
-#: gedit/gedit2.c:91
-msgid "Show commands debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka naredbi."
-
-#: gedit/gedit2.c:94
-msgid "Show document debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka dokumenta."
-
-#: gedit/gedit2.c:97
-msgid "Show file debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka datoteke."
-
-#: gedit/gedit2.c:100
-msgid "Show plugin debugging messages."
-msgstr "Prikaži poruke za otklanjanje grešaka umetaka."
-
-#: gedit/gedit2.c:103
-msgid "Show prefs debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka podešavanja."
-
-#: gedit/gedit2.c:106
-msgid "Show printing debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka ispisa."
-
-#: gedit/gedit2.c:109
-msgid "Show search debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka prilikom traženja."
-
-#: gedit/gedit2.c:112
-msgid "Show undo debugging messages."
-msgstr "Prikaži poruke pri otklanjanjanju grešaka poništavanja akcija."
-
-#: gedit/gedit2.c:115
-msgid "Show view debugging messages."
-msgstr "Prikaži poruke pri otklanjanjanju grešaka pogleda."
-
-#: gedit/gedit2.c:118
-msgid "Show recent debugging messages."
-msgstr "Prikaži novije poruke pri otklanjanju grešaka."
-
-#: gedit/gedit2.c:121
-msgid "Show session management debugging messages."
-msgstr "Prikaži poruke pri otklanjanju grešaka upravljanja sesijom."
-
-#: gedit/gedit2.c:124
-msgid "Turn on all debugging messages."
-msgstr "Uključi sve poruke za otklanjanje grešaka."
-
-#: gedit/gedit2.c:127
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Izađi iz  postojeće instance gedita"
 
-#: gedit/gedit2.c:130
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Napravi novi prozor najviše razine u postojećoj instanci gedita"
 
-#: gedit/gedit2.c:133
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Napravi novi dokument u postojećoj instanci gedita"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
+
+#: plugins/changecase/changecase.c:43
+#, fuzzy
+msgid "C_hange Case"
+msgstr "_Promijeni"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:51
+#, fuzzy
+msgid "_Invert Case"
+msgstr "Uvećaj"
+
+#: plugins/changecase/changecase.c:52
+#, fuzzy
+msgid "_Title Case"
+msgstr "Naslov"
+
+#: plugins/changecase/changecase.c:54
+#, fuzzy
+msgid "Change selected text to upper case"
+msgstr "Kopiraj odabrani tekst u odlagalište"
+
+#: plugins/changecase/changecase.c:55
+#, fuzzy
+msgid "Change selected text to lower case"
+msgstr "Kopiraj odabrani tekst u odlagalište"
+
+#: plugins/changecase/changecase.c:56
+#, fuzzy
+msgid "Invert the case of selected text"
+msgstr "Obriši odabrani tekst"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr ""
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Change Case"
+msgstr "_Promijeni"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Changes the case of selected text."
+msgstr "Obriši odabrani tekst"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2560,7 +2682,7 @@ msgid "Get statistic info on current document"
 msgstr "Statistika trenutne datoteke"
 
 #: plugins/docinfo/docinfo.c:140
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Statistika dokumenta"
 
@@ -2568,11 +2690,11 @@ msgstr "Statistika dokumenta"
 msgid "_Update"
 msgstr "_Ažuriraj"
 
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"The Document Statistics plugin analyzes the current document and determines "
-"the number of words, lines, characters and non-space characters in it and "
-"displays the result."
+"Analyzes the current document and reports the number of words, lines, "
+"characters and non-space characters in it."
 msgstr ""
 "Umetak za statistiku dokumenta koji analizira trenutni dokument i utvrđuje "
 "broj riječi, linija, znakova, i znakova razmaka i prikazuje rezultate."
@@ -2630,7 +2752,8 @@ msgid "Indent lines"
 msgstr "Uvlačenje linija"
 
 #: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
+#, fuzzy
+msgid "Indents or un-indents selected lines."
 msgstr "Uvlačenje ili poništavanje uvlačenja odabranih linija."
 
 #: plugins/sample/sample.c:43
@@ -2707,10 +2830,12 @@ msgid "An error occured while running the selected command."
 msgstr "Dogodila se greška tijekom pokretanja označene naredbe."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
-msgstr "Izvršite vanjski program i eventualno prikažite njegov izlaz u prozoru."
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr ""
+"Izvršite vanjski program i eventualno prikažite njegov izlaz u prozoru."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 msgid "Shell command"
@@ -3053,22 +3178,25 @@ msgstr "Kliknite dvaput na element kako biste ga ubacili u trenutni dokument"
 msgid "Tag _List"
 msgstr "_Popis tagova"
 
+#.
 #. #define MENU_ITEM_NAME		"TagList"
+#.
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
 msgstr "Prikaži prozor s popisom elemenata"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "Popis tagova"
+#, fuzzy
+msgid ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
+msgstr ""
+"Umetak za listu elemenata pruža način lakog umetanja često korištenih tagova/"
+"znakovnih nizova  u dokument bez potrebe za ručnim unosom."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
-msgstr ""
-"Umetak za listu elemenata pruža način lakog umetanja često korištenih "
-"tagova/znakovnih nizova  u dokument bez potrebe za ručnim unosom."
+msgid "Tag list"
+msgstr "Popis tagova"
 
 #: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
@@ -3138,3 +3266,50 @@ msgstr "Kopiraj odabrani tekst u odlagalište"
 msgid "_Copy Text"
 msgstr "_Kopiraj tekst"
 
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "Datoteka \"%s\" ne postoji. Želite li je napraviti?"
+
+#~ msgid "Show utility debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanje grešaka alata."
+
+#~ msgid "Show metadata debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka metapodataka."
+
+#~ msgid "Show mdi debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju mdi grešaka."
+
+#~ msgid "Show commands debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka naredbi."
+
+#~ msgid "Show document debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka dokumenta."
+
+#~ msgid "Show file debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka datoteke."
+
+#~ msgid "Show plugin debugging messages."
+#~ msgstr "Prikaži poruke za otklanjanje grešaka umetaka."
+
+#~ msgid "Show prefs debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka podešavanja."
+
+#~ msgid "Show printing debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka ispisa."
+
+#~ msgid "Show search debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka prilikom traženja."
+
+#~ msgid "Show undo debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanjanju grešaka poništavanja akcija."
+
+#~ msgid "Show view debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanjanju grešaka pogleda."
+
+#~ msgid "Show recent debugging messages."
+#~ msgstr "Prikaži novije poruke pri otklanjanju grešaka."
+
+#~ msgid "Show session management debugging messages."
+#~ msgstr "Prikaži poruke pri otklanjanju grešaka upravljanja sesijom."
+
+#~ msgid "Turn on all debugging messages."
+#~ msgstr "Uključi sve poruke za otklanjanje grešaka."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.99\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-05 12:27-0500\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-06-01 15:26+0530\n"
 "Last-Translator: zhakanini <tamilpc@ambalam.com>\n"
 "Language-Team: Tamil <tamillinux-users@lists.sourceforge.net>\n"
@@ -43,7 +43,7 @@ msgstr "தொழிற்சாலையை தானாக ஜிதொகு�
 msgid "Edit text files"
 msgstr "உரை கோப்புகளை தொகுவதற்கு"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "உரை பதிப்பான்"
 
@@ -415,7 +415,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "தூண்டு செய் %s"
@@ -433,7 +433,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "நீங்கள் தங்கள் ஆவணத்தைச் சேமிக்கவில்லையென்றால்,  உங்கள் எல்லா மாற்றங்களை இலந்துவிடுவீர்."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "சேமிக்க விரும்பும் ஆவணங்களை தெரிவு செய்யக:"
 
@@ -445,11 +445,17 @@ msgstr "எதையும் சேமிக்கவேண்டாம்"
 msgid "_Save Selected"
 msgstr "தெரிவுசெய்ததை _சேமிக்கவும்"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "சேமிக்க வேண்டாம்"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#, fuzzy
+msgid "Question"
+msgstr "யோசைகள்"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -462,14 +468,14 @@ msgstr[0] ""
 msgstr[1] ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நேரத்திலிருந்து மாற்றங்களை உறுதியாக இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நிமிடத்திலிருந்து மாற்றங்களை உறுதியாக "
 "இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -484,7 +490,7 @@ msgstr[1] ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நிமிடத்திலிருந்து மாற்றங்களை உறுதியாக "
 "இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -499,13 +505,13 @@ msgstr[1] ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நிமிடத்திலிருந்து மாற்றங்களை உறுதியாக "
 "இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நேரத்திலிருந்து மாற்றங்களை உறுதியாக இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -520,7 +526,7 @@ msgstr[1] ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நிமிடத்திலிருந்து மாற்றங்களை உறுதியாக "
 "இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, fuzzy, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -531,12 +537,12 @@ msgstr[0] ""
 msgstr[1] ""
 "நீங்கள் சேமிக்கவில்லையென்றால் கடைசி நேரத்திலிருந்து மாற்றங்களை உறுதியாக இழந்துவிடுவிர்கள்."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "\"%s\" சை மூடுவதற்கு முன் ஆவணத்தின் மாற்றங்களைச் சேமி?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -544,7 +550,8 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#. Secondary label
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "நீங்கள் சேமிக்கவில்லையென்றால், உங்களாது எல்லா மாற்றங்களும் தொலைந்துவிடும்."
 
@@ -557,7 +564,7 @@ msgid "_Go to Line"
 msgstr "வரிசைக்குப் _போகவும்"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "\"%s\" உரை கண்டுபிடிக்க முடியவில்லை."
@@ -572,7 +579,7 @@ msgid "Replace _All"
 msgstr "அனைத்தையும் மாற்று"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "இடமாற்று"
 
@@ -618,32 +625,32 @@ msgstr "வரியுரு குறிப்பீடுகள்"
 msgid "E_ncodings shown in menu:"
 msgstr "குறீயிடாக்கம் பட்டியில் காணப்பட்டுள்ளது:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "உடல் எழுத்தை பொறுக்கு"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr ""
 "இந்தப் பொத்தானை அழுத்தி ஆவண உடலைப் பயன்படுத்தி அச்சிடுவதற்காக எழுத்தினைத் தேர்ந்தெடு."
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "பக்க எழ்"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "இந்தப் பொத்தானை அழுத்திப் பக்கத் தலைப்பில் பயன்படுத்தி அச்சிடுவதற்காக எழுத்தினைத் தேர்ந்தெடு."
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "வரிசை எண்கள் எழுத்து"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "இந்தப் பொத்தானை அழுத்தி வரி எண்களைப் பயன்படுத்தி அச்சிடுவதற்காக எழுத்தினைத் தேர்ந்தெடு."
@@ -656,11 +663,11 @@ msgstr "செருகி"
 msgid "Enabled"
 msgstr "இயலுமைப்படுத்தியது"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "plugin-manager.glade2 கண்டுபிடிக்க முடியவில்லை, gedit மறுபடியும் நிறுவு.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "செருகி மேலாளருக்கான glade கோப்பு பிழையானது -- விட்செட்டுகள் அனைத்தையும் "
@@ -687,31 +694,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "தெரிவுசெய்துள்ள கோப்பு இயக்கக்கூடியதல்ல."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr "இந்தப் பொத்தானை அழுத்தி திருத்தில் பயன்படுத்துவதற்காக எழுத்தினைத் தேர்வுச் செய்க"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "உரை வண்ணத்தை அமைக்க இந்த பொத்தான் அமுத்துக"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "பின்னணி வண்ணத்தை அமைக்க இந்த பொத்தானை அமுத்துக"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "இந்தப் பொத்தானைச் அழுத்தி வண்ணத்தை உள்ளமைத்துத் தேர்ந்தெடுத்த உரை தோற்றம்"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "பொத்தானை அழுத்தி வண்ணத்தைத் தேர்ந்தெடுத்த உரையில் குறித்தை உள்ளமை"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "உறுப்புகள்"
 
@@ -1152,15 +1159,15 @@ msgstr "நீங்கள் கோப்பினைத் திறக்க 
 msgid "Open from URI"
 msgstr "இணையக முகவரியிலிருந்து திறக்கவும்"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr "மொழிபெயர்ப்பர் _பற்று"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit, கனோமுக்காக எழுதப்பட்ட ஓர் சிறிய உரை பதிப்பான்"
 
@@ -1223,17 +1230,17 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "கோப்பின் காப்பு-நகல் படைக்க முடியவில்லை."
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "தன்னாக கண்டுபிடிக்கப்பட்டது"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "தற்போதைய மொழி (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "சேர்க்கவும் அல்லது கழட்டுக..."
 
@@ -1348,77 +1355,77 @@ msgstr "வியட்னாம்"
 msgid "Thai"
 msgstr "தாய்-மொழி"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "\"%s\" கோப்புப் பெயர் ஏற்கனவே உள்ளது.\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "ஒன்றினை சேமித்துப் பின்னர் அதனை அகற்று விரும்பிகிறீர்களா? "
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "\"%s\" கோப்பு வாசிப்பு-மட்டுமே.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "ஒன்றினை சேமித்துப் பின்னர் அதனை அகற்று விரும்பிகிறீர்களா? "
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "அணைத்து கோப்புகளும்"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "அனைத்து உரை கோப்புகளும்"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "குறிமுறை எழுத்து:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "திறப்பதற்கு ஒரு கோப்பு தெரிவுசெய்க"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "திறப்பதற்கு கோப்புகள் தெரிவுசெய்க"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "சேமிப்பதற்கு கோப்பு பெயர் ஒன்றைத் தெரிவு செய்யவும்"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "கோப்பு திறக்கவும்..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "\"%s\" கோப்பு சேமிக்கப்படுகின்றது..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "\"%s\" ஆவணம் சேமிக்கப்படவில்லை."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "\"%s\" ஆவணம் சேமிக்கப்பட்டுள்ளது."
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "வேறுபெயரில் சேமிக்கவும்..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "\"%s\" ஆவணத்தில் சேமிக்காதவற்றை மாற்றலாமா?"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:612
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1430,13 +1437,13 @@ msgstr[0] ""
 msgstr[1] ""
 "கடைசி நேரத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:621
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "கடைசி நிமிடத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:627
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1449,7 +1456,7 @@ msgstr[0] ""
 msgstr[1] ""
 "கடைசி நிமிடத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:637
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1461,12 +1468,12 @@ msgstr[0] ""
 msgstr[1] ""
 "கடைசி நிமிடத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:652
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "கடைசி நேரத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:658
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1479,7 +1486,7 @@ msgstr[0] ""
 msgstr[1] ""
 "கடைசி நிமிடத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:673
 #, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1490,70 +1497,65 @@ msgstr[0] ""
 msgstr[1] ""
 "கடைசி நேரத்தில் ஆவணத்தில் மாற்றங்கள் நிகழ்த்தினால் அது நிரந்தரமாகப் பழுது அடைந்துவிடும்."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "சேமித்ததிட்கு பின்செல்"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "\"%s\" ஆவணம் மீட்பதில் பிழை."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "\"%s\" ஆவணம் மீட்கப்படவில்லை."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "\"%s\" ஆவணம் மீட்கப்பட்டுள்ளது."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "\"%s\" ஆவணம் மீட்கப்படுகின்றது..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "stdinஇலிருந்து தரவுகளை வாசிக்க முடியவில்லை."
 
-#: gedit/gedit-file.c:962
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "\"%s\"  கோப்பு இல்லை. நீங்கள் இதனை உருவாக்க விரும்பகிறீர்களா?"
-
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "மீட்கப்படும் கோப்பு:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "கோப்பு ஏற்றப்படுகின்றது:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "%s கோப்பு ஏற்றும்போது பிழை"
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "\"%s\" கோப்பு ஏற்றப்பட்டுள்ளது"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1329
 #, fuzzy, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "\"%s\" கோப்பு ஏற்றப்பட்டுள்ளது"
 msgstr[1] "\"%s\" கோப்பு ஏற்றப்பட்டுள்ளது"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "\"%s\" கோப்பு ஏற்றப்படுகின்றது..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1510
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1608,15 +1610,15 @@ msgstr "(மாற்றப்பட்டது)"
 msgid "(readonly)"
 msgstr "(வாசிக்க மட்டும்)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "சாதாரணம்"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "இயல்பானத் தனிபடுத்து வகையைப் பயன்படுத்துக"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s  தனிபடுத்துவதின் வகையைப் பயன்படுத்து"
@@ -2511,17 +2513,28 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:82
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
+
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "ஜிதிருத்தின் நிகழ்ச்சி வழியை வெளியிடு"
 
-#: gedit/gedit2.c:85
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "ஜிதிருத்ததில் தற்பொழுது இருக்கும் புதிய உயர்நிலைச் சாளரத்தை உருவாக்கு"
 
-#: gedit/gedit2.c:88
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "ஜிதிருத்ததில் தற்பொழுது இருக்கும் புதிய ஆவணத்தை உருவாக்கு"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -3155,3 +3168,6 @@ msgstr "தெரிவுசெய்த உரையை நகல்செய�
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "உரை _நகல் செய்க"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "\"%s\"  கோப்பு இல்லை. நீங்கள் இதனை உருவாக்க விரும்பகிறீர்களா?"

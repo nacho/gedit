@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-18 12:38+0200\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-07-18 12:41+0200\n"
 "Last-Translator: Pablo G. del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -51,7 +51,7 @@ msgstr "fábrica de automatización de gedit"
 msgid "Edit text files"
 msgstr "Edita archivos de texto"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Editor de textos"
 
@@ -743,11 +743,11 @@ msgstr "Complementos"
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "No se ha podido encontrar «plugin-manager.glade2», reinstale gedit.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Archivo glade inválido para el administrador de complementos -- no se "
@@ -1256,11 +1256,11 @@ msgstr ""
 "Chema Celorio <chema@celorio.com>\n"
 "Pablo Saratxaga <srtxg@chanae.alphanet.ch>"
 
-#: gedit/gedit-commands.c:569
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:573
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit es un editor de texto compacto y simple para GNOME"
 
@@ -1633,42 +1633,37 @@ msgstr "Recuperando el documento «%s»..."
 msgid "Could not read data from stdin."
 msgstr "No se han podido leer datos desde la entrada estándar."
 
-#: gedit/gedit-file.c:961
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
-
-#: gedit/gedit-file.c:1084
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Recuperando el archivo:"
 
-#: gedit/gedit-file.c:1088
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Cargando el archivo:"
 
-#: gedit/gedit-file.c:1256 gedit/gedit-file.c:1415
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Ocurrió un error al carga el archivo «%s»"
 
-#: gedit/gedit-file.c:1277
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Archivo «%s» cargado"
 
-#: gedit/gedit-file.c:1354
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Archivo %d cargado"
 msgstr[1] "%d Archivos cargados"
 
-#: gedit/gedit-file.c:1388
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Cargando el archivo «%s»..."
 
-#: gedit/gedit-file.c:1538
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2665,7 +2660,9 @@ msgstr "  INS"
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr "Establecer la codificación de caracteres a usar al abrir los archivos listados en la línea de comandos"
+msgstr ""
+"Establecer la codificación de caracteres a usar al abrir los archivos "
+"listados en la línea de comandos"
 
 #: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
@@ -2681,7 +2678,7 @@ msgstr ""
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento nuevo en una instancia existente de gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:182
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "La codificación «%s» especificada no es válida\n"
@@ -3320,6 +3317,9 @@ msgstr "Copia el texto seleccionado al portapapeles"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Copiar el texto"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
 
 #~ msgid "Show utility debugging messages."
 #~ msgstr "Mostrar mensajes de depuración de herramientas."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.6-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-30 14:33+0200\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-03-30 17:02+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
@@ -45,7 +45,7 @@ msgstr "gedit-outomeerfabriek"
 msgid "Edit text files"
 msgstr "Redigeer tekslêers"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Teksredigeerder"
 
@@ -197,6 +197,15 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maksimum getal aksies wat gedit sal kan ontdoen of herdoen."
 
 #: data/gedit.schemas.in.h:28
+msgid "Monospace 12"
+msgstr ""
+
+#: data/gedit.schemas.in.h:29
+#, fuzzy
+msgid "Monospace Regular 9"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:30
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -204,35 +213,45 @@ msgstr ""
 "Getal minute na gedit gewysigde lêers outomaties sal stoor. Dit sal eers in "
 "werking tree as die \"Outostoor\"-opsie in werking gestel word."
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Header"
 msgstr "Druk kop"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Line Numbers"
 msgstr "Druk reëlnommers"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Syntax Highlighting"
 msgstr "Druk sintaksverligting"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Printing Line Wrapping Mode"
 msgstr "Drukreëlvoumodus"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Right Margin Position"
 msgstr "Regterkantlyn-posisie"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
+#, fuzzy
+msgid "Sans Regular 11"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:37
+#, fuzzy
+msgid "Sans Regular 8"
+msgstr "Sans Regular 12"
+
+#: data/gedit.schemas.in.h:38
 msgid "Selected Text Color"
 msgstr "Geselekteerde tekskleur"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:39
 msgid "Selection Color"
 msgstr "Seleksiekleur"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -242,7 +261,7 @@ msgstr ""
 "te outospeur. \"CURRENT\" is die huidige lokaliteit se enkodering. Slegs "
 "herkende enkoderings word gebruik."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -256,7 +275,7 @@ msgstr ""
 "die waardes kas-sensitief is.  Maak dus seker hulle verskyn presies soos "
 "hierbo vermeld."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -270,14 +289,14 @@ msgstr ""
 "grense. Let op dat die waardes kas-sensitief is.  Maak dus seker hulle "
 "verskyn presies soos hierbo vermeld."
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Spesifiseer watter font vir 'n dokument se lyf gebruik moet word wanneer "
 "dokumente gedruk word."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -285,7 +304,7 @@ msgstr ""
 "Spesifiseer watter font vir reëlnommers gebruik moet word by drukwerk. Dit "
 "sal slegs in werking tree wanneer die \"Druk reëlnommers\"-opsie nie-nul is."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -293,7 +312,7 @@ msgstr ""
 "Spesifiseer watter font vir bladsykoppe gebruik moet word by drukwerk. Dit "
 "sal eers in werking tree as die \"Druk kop\"-opsie in werking gestel word."
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -301,7 +320,7 @@ msgstr ""
 "Spesifiseer die maksimum getal onlangs geopende lêers wat in die \"Onlangse "
 "lêers\"-subkieslys vertoon sal word."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -309,15 +328,15 @@ msgstr ""
 "Spesifiseer die getal spasies wat vertoon moet word in plaas van "
 "keepkarakters."
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:48
 msgid "Specifies the position of the right margin."
 msgstr "Spesifiseer die posisie van die regterkantlyn."
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:49
 msgid "Status Bar is Visible"
 msgstr "Statusstaaf is sigbaar"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -333,35 +352,35 @@ msgstr ""
 "vertoon. Let op dat die waardes kas-sensitief is.  Maak dus seker hulle "
 "verskyn presies soos hierbo vermeld."
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Tab Size"
 msgstr "Keepgrootte"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Text Color"
 msgstr "Tekskleur"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Toolbar Buttons Style"
 msgstr "Nutsbalkknoppiestyl"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Toolbar is Visible"
 msgstr "Nutsbalk is sigbaar"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Undo Actions Limit"
 msgstr "Ontdoen aksielimiet"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid "Use Default Colors"
 msgstr "Gebruik verstekkleure"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid "Use Default Font"
 msgstr "Gebruik verstekfont"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -370,7 +389,7 @@ msgstr ""
 "Of gedit gewysigde lêers outomaties na 'n sekere interval moet stoor. Jy kan "
 "die interval met die \"Outostoorinterval\"-opsie stel."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -378,44 +397,44 @@ msgstr ""
 "Of gedit rugsteunkopieë moet maak van die lêers wat dit stoor. Jy kan die "
 "rugsteunlêer-uitbreiding met die \"Rugsteunkopie-uitbreiding\"-opsie stel."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Of gedit reëlnommers in die redigeerbare streek moet vertoon."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:61
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Of gedit die regterkantlyn in die redigeerbare streek moet vertoon."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should enable auto indentation."
 msgstr "Of gedit outo-inkeping moet aktiveer."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Of gedit sinsverligting moet aktiveer."
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Of gedit 'n dokumentkop moet insluit wanneer dit dokumente druk."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Of gedit spasies in plaas van keepkarakters moet invoeg."
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Of gedit sinsverligting moet druk wanneer dit dokumente druk."
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Of die statusstaaf onderaan redigeervensters sigbaar moet wees."
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:68
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Of die nutsbalk in redigeervensters sigbaar moet wees."
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -427,7 +446,7 @@ msgstr ""
 "streek dié wees wat in die \"Agtergrondkleur\"-, \"Tekskleur\"-, "
 "\"Geselekteerde tekskleur\"- en \"Seleksiekleur\"-opsies gespesifiseer is."
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -438,7 +457,15 @@ msgstr ""
 "is, sal die font wat in die \"Redigeerderfont\"-opsie vermeld word, gebruik "
 "word in plaas van die stelselfont."
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: data/gedit.schemas.in.h:71
+msgid "[ISO-8859-15]"
+msgstr ""
+
+#: data/gedit.schemas.in.h:72
+msgid "[UTF-8,CURRENT,ISO-8859-15]"
+msgstr ""
+
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiveer %s"
@@ -456,7 +483,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "As jy nie jou dokumente stoor nie, sal al jou wysigings verlore gaan."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:654
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "S_elekteer die dokumente wat jy wil stoor:"
 
@@ -468,11 +495,17 @@ msgstr "Stoor _geen"
 msgid "_Save Selected"
 msgstr "_Stoor geselekteerde(s)"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "Mo_enie stoor nie"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#, fuzzy
+msgid "Question"
+msgstr "Voorstelle"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -487,14 +520,14 @@ msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert %ld sekondes gelede beslis verlore "
 "gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
 "As jy nie stoor nie, sal wysigings sedert 1 minuut gelede beslis verlore "
 "gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -509,7 +542,7 @@ msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert 1 minuut en %ld sekondes gelede "
 "beslis verlore gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -524,13 +557,13 @@ msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert %ld minute gelede beslis verlore "
 "gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
 "As jy nie stoor nie, sal wysigings sedert 1 uur gelede beslis verlore gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -545,7 +578,7 @@ msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert 1 uur en %d minute gelede beslis "
 "verlore gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -556,21 +589,25 @@ msgstr[0] ""
 msgstr[1] ""
 "As jy nie stoor nie, sal wysigings sedert %d ure gelede beslis verlore gaan."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Stoor die wysigings aan dokument \"%s\" voor afsluiting?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:640
-#, c-format
-msgid ""
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#, fuzzy, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr ""
+msgstr[0] ""
+"Daar is %d dokumente met ongestoorde wysigings. Stoor wysigings voor "
+"afsluiting?"
+msgstr[1] ""
 "Daar is %d dokumente met ongestoorde wysigings. Stoor wysigings voor "
 "afsluiting?"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:671
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "As jy nie stoor nie, sal al jou wysigings beslis verlore gaan."
 
@@ -583,7 +620,7 @@ msgid "_Go to Line"
 msgstr "_Gaan na reël"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Die teks \"%s\" kon nie gevind word nie."
@@ -598,7 +635,7 @@ msgid "Replace _All"
 msgstr "Vervang _almal"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "_Vervang"
 
@@ -644,11 +681,11 @@ msgstr "Karakterkoderings"
 msgid "E_ncodings shown in menu:"
 msgstr "E_nkoderings in kieslys vertoon:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "Lyffontkiesier"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -656,22 +693,22 @@ msgstr ""
 "Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
 "die lyf van die dokument"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "Bladsykop fontkieser"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
 "bladsykoppe"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "Reëlnommer fontkieser"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Druk dié knoppie om die font te kies wat gebruik moet word by die druk van "
@@ -685,11 +722,11 @@ msgstr "Inprop"
 msgid "Enabled"
 msgstr "Geaktiveer"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Kon nie plugin-manager.glade2 vind nie, herinstalleer gedit.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Ongeldige Glade-lêer vir inpropbestuurder - nie alle dingesies gevind nie.\n"
@@ -716,21 +753,21 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Die geselekteerde lêer is nie uitvoerbaar nie."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Druk dié knoppie om die font te kies wat gebruik moet word deur die "
 "redigeerder"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "Druk dié knoppie om die tekskleur op te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "Druk dié knoppie om die agtergrondkleur op te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -738,7 +775,7 @@ msgstr ""
 "Druk dié knoppie om die kleur waarin die gemerkte teks moet verskyn, op te "
 "stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -746,7 +783,7 @@ msgstr ""
 "Druk dié knoppie om die kleur waarin die gemerkte teks gemerk moet word, op "
 "te stel"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "Elemente"
 
@@ -1187,59 +1224,59 @@ msgstr "Tik die _ligging (URI) van die lêer in wat jy wil open:"
 msgid "Open from URI"
 msgstr "Open vanuit URI"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr "vertaler_kredietes"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit is 'n klein liggewig-teksredigeerder vir die GNOME Werkarea"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 msgid "Untitled"
 msgstr "Naamloos"
 
-#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
+#: gedit/gedit-document.c:641 gedit/gedit-document.c:688
 msgid "Invalid file name"
 msgstr "Ongeldige lêernaam"
 
-#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
+#: gedit/gedit-document.c:839 gedit/gedit-document.c:1314
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Ongeldige UTF-8-data"
 
-#: gedit/gedit-document.c:1643
+#: gedit/gedit-document.c:1641
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kon nie simboliese skakel se inligting vir %s lees nie"
 
-#: gedit/gedit-document.c:1689
+#: gedit/gedit-document.c:1687
 msgid "The file has too many symbolic links."
 msgstr "Die lêer het te veel simboliese skakels."
 
-#: gedit/gedit-document.c:1745
+#: gedit/gedit-document.c:1743
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan nie met %s:-liggings in skryfmodus werk nie."
 
-#: gedit/gedit-document.c:1752
+#: gedit/gedit-document.c:1750
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan nie met hierdie soort ligging in skryfmodus werk nie."
 
-#: gedit/gedit-document.c:1765
+#: gedit/gedit-document.c:1763
 msgid "Invalid filename."
 msgstr "Ongeldige lêernaam."
 
-#: gedit/gedit-document.c:1877
+#: gedit/gedit-document.c:1875
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1247,7 +1284,7 @@ msgstr ""
 "Daar is nie voldoende skyfspasie om die lêer te stoor nie.\n"
 "Maak 'n bietjie spasie beskikbaar en probeer weer."
 
-#: gedit/gedit-document.c:1882
+#: gedit/gedit-document.c:1880
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1257,21 +1294,21 @@ msgstr ""
 "lêergroottes.  Probeer 'n kleiner lêer stoor, of stoor dit op 'n skyf wat "
 "nie hierdie beperking het nie."
 
-#: gedit/gedit-document.c:1926
+#: gedit/gedit-document.c:1924
 msgid "Could not create a backup file."
 msgstr "Kon nie 'n rugsteunlêer skep nie."
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "Outobespeur"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Huidige lokaliteit (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "Voeg by of _verwyder..."
 
@@ -1386,83 +1423,82 @@ msgstr "Viëtnamees"
 msgid "Thai"
 msgstr "Thais"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "n Lêer genaamd \"%s\" bestaan reeds.\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Wil jy dit vervang met die een wat jy tans stoor?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Die lêer \"%s\" is leesalleen.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Wil jy dit probeer vervang met die een wat jy tans stoor?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "Alle lêers"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "Alle tekslêers"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "K_arakterkodering:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "Kies 'n lêer om te open"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "Kies lêers om te open"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "Kies 'n lêernaam om te stoor"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "Open Lêer..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Stoor dokument \"%s\"..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Die dokument \"%s\" is nie gestoor nie."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Die dokument \"%s\" is gestoor."
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "Stoor as..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Keer ongestoorde wysigings in dokument \"%s\" terug?"
 
-#: gedit/gedit-file.c:609
-#, c-format
+#: gedit/gedit-file.c:612
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %ld second will be definitively "
-"lost."
+"Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %ld seconds will be definitively "
+"Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
 "Wysigings aan die dokument sedert %ld sekonde gelede sal beslis verlore gaan."
@@ -1470,20 +1506,21 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert %ld sekondes gelede sal beslis verlore "
 "gaan."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:621
+#, fuzzy
 msgid ""
-"Changes made to the document in the last minute will be definitively lost."
+"Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Wysigings aan die dokument in die laaste minuut sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:624
-#, c-format
+#: gedit/gedit-file.c:627
+#, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
-"definitively lost."
+"permanently lost."
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
-"definitively lost."
+"permanently lost."
 msgstr[0] ""
 "Wysigings aan die dokument sedert 1 minuut en %ld sekonde gelede sal beslis "
 "verlore gaan."
@@ -1491,32 +1528,31 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert 1 minuut en %ld sekondes gelede sal beslis "
 "verlore gaan."
 
-#: gedit/gedit-file.c:634
-#, c-format
+#: gedit/gedit-file.c:637
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %ld minute will be definitively "
-"lost."
+"Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %ld minutes will be definitively "
+"Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 msgstr[0] ""
 "Wysigings aan die dokument sedert %ld minuut gelede sal beslis verlore gaan."
 msgstr[1] ""
 "Wysigings aan die dokument sedert %ld minute gelede sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:649
-msgid ""
-"Changes made to the document in the last hour will be definitively lost."
+#: gedit/gedit-file.c:652
+#, fuzzy
+msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Wysigings aan die dokument in die laaste uur sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:655
-#, c-format
+#: gedit/gedit-file.c:658
+#, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
-"definitively lost."
+"permanently lost."
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
-"definitively lost."
+"permanently lost."
 msgstr[0] ""
 "Wysigings aan die dokument sedert 1 uur en %d minuut gelede sal beslis "
 "verlore gaan."
@@ -1524,81 +1560,76 @@ msgstr[1] ""
 "Wysigings aan die dokument sedert 1 uur en %d minute gelede sal beslis "
 "verlore gaan."
 
-#: gedit/gedit-file.c:670
-#, c-format
+#: gedit/gedit-file.c:673
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %d hour will be definitively lost."
+"Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %d hours will be definitively lost."
+"Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] ""
 "Wysigings aan die dokument sedert %d uur gelede sal beslis verlore gaan."
 msgstr[1] ""
 "Wysigings aan die dokument sedert %d ure gelede sal beslis verlore gaan."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Keer terug"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Fout by terugkering van dokument \"%s\"."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Daar is nie na die dokument \"%s\" teruggekeer nie."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Daar is na die dokument \"%s\" teruggekeer."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Keer terug tans terug na die dokument \"%s\"..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "Kon nie data van stdin lees nie."
 
-#: gedit/gedit-file.c:962
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Die lêer \"%s\" bestaan nie. Wil jy dit skep?"
-
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Keer terug tans terug na lêer:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Laai tans lêer:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Kon nie lêer \"%s\" laai nie"
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Het lêer \"%s\" gelaai"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Het lêer %d gelaai"
 msgstr[1] "Het lêers %d gelaai"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Laai tans lêers \"%s\"..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1653,15 +1684,15 @@ msgstr "(gewysig)"
 msgid "(readonly)"
 msgstr "(leesalleen)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "Normaal"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "Gebruik normaleverligting-modus"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Gebruik %s-verligting-modus"
@@ -2570,77 +2601,80 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:82
-msgid "Show utility debugging messages."
-msgstr "Wys nuts-ontvlooiingsboodskappe."
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
 
-#: gedit/gedit2.c:85
-msgid "Show metadata debugging messages."
-msgstr "Wys metadata-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:88
-msgid "Show mdi debugging messages."
-msgstr "Wys mdi-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:91
-msgid "Show commands debugging messages."
-msgstr "Wys bevele-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:94
-msgid "Show document debugging messages."
-msgstr "Wys dokument-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:97
-msgid "Show file debugging messages."
-msgstr "Wys lêer-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:100
-msgid "Show plugin debugging messages."
-msgstr "Wys inprop-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:103
-msgid "Show prefs debugging messages."
-msgstr "Wys voorkeure-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:106
-msgid "Show printing debugging messages."
-msgstr "Wys druk-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:109
-msgid "Show search debugging messages."
-msgstr "Wys soek-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:112
-msgid "Show undo debugging messages."
-msgstr "Wys ontdoen-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:115
-msgid "Show view debugging messages."
-msgstr "Wys bekyk-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:118
-msgid "Show recent debugging messages."
-msgstr "Wys onlangse-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:121
-msgid "Show session management debugging messages."
-msgstr "Wys sessiebestuur-ontvlooiingsboodskappe."
-
-#: gedit/gedit2.c:124
-msgid "Turn on all debugging messages."
-msgstr "Skakel alle ontvlooiingsboodskappe aan."
-
-#: gedit/gedit2.c:127
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Sluit 'n bestaande geval van gedit af"
 
-#: gedit/gedit2.c:130
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Skep 'n nuwe bovlakvenster in 'n bestaande geval van gedit"
 
-#: gedit/gedit2.c:133
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Skep 'n nuwe dokument in 'n bestaande geval van gedit"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
+
+#: plugins/changecase/changecase.c:43
+#, fuzzy
+msgid "C_hange Case"
+msgstr "Wy_sig"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:51
+#, fuzzy
+msgid "_Invert Case"
+msgstr "_Ignoreer kas"
+
+#: plugins/changecase/changecase.c:52
+#, fuzzy
+msgid "_Title Case"
+msgstr "Titel"
+
+#: plugins/changecase/changecase.c:54
+#, fuzzy
+msgid "Change selected text to upper case"
+msgstr "Kopieer die gemerkte teks na die knipbord"
+
+#: plugins/changecase/changecase.c:55
+#, fuzzy
+msgid "Change selected text to lower case"
+msgstr "Kopieer die gemerkte teks na die knipbord"
+
+#: plugins/changecase/changecase.c:56
+#, fuzzy
+msgid "Invert the case of selected text"
+msgstr "Skrap die gemerkte teks"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr ""
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Change Case"
+msgstr "Wy_sig"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Changes the case of selected text."
+msgstr "Skrap die gemerkte teks"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2651,7 +2685,7 @@ msgid "Get statistic info on current document"
 msgstr "Kry statistiese inligting oor huidige dokument"
 
 #: plugins/docinfo/docinfo.c:140
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Dokumentstatistiek"
 
@@ -2659,11 +2693,11 @@ msgstr "Dokumentstatistiek"
 msgid "_Update"
 msgstr "_Bywerk"
 
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"The Document Statistics plugin analyzes the current document and determines "
-"the number of words, lines, characters and non-space characters in it and "
-"displays the result."
+"Analyzes the current document and reports the number of words, lines, "
+"characters and non-space characters in it."
 msgstr ""
 "Die dokumentstatistiek inprop analiseer die huidige dokument en bepaal die "
 "getal woorde, reëls, karakters en niespasie-karakters daarin en vertoon die "
@@ -2722,7 +2756,8 @@ msgid "Indent lines"
 msgstr "Keep reëls"
 
 #: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
+#, fuzzy
+msgid "Indents or un-indents selected lines."
 msgstr "Keep of ontkeep gemerkte reëls."
 
 #: plugins/sample/sample.c:43
@@ -2799,9 +2834,10 @@ msgid "An error occured while running the selected command."
 msgstr "'n Fout het plaasgevind tydens loop van geselekteerde bevel."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
+"Executes an external program and, if required, displays its output in the "
+"output window."
 msgstr ""
 "Laat 'n buiteprogram loop en gryp eindelik sy afvoer in die afvoervenster."
 
@@ -3154,16 +3190,17 @@ msgid "Show the tag list window"
 msgstr "Wys die merkerlys-venster"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "Merkerlys"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+#, fuzzy
 msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
 msgstr ""
 "Die merkerlys-inprop verskaf 'n metode om algemeen gebruikte merkers/stringe "
 "maklik in 'n dokument in te voeg sonder om hulle te tik."
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid "Tag list"
+msgstr "Merkerlys"
 
 #: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
@@ -3232,6 +3269,54 @@ msgstr "Kopieer die gemerkte teks na die knipbord"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Kopieer teks"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "Die lêer \"%s\" bestaan nie. Wil jy dit skep?"
+
+#~ msgid "Show utility debugging messages."
+#~ msgstr "Wys nuts-ontvlooiingsboodskappe."
+
+#~ msgid "Show metadata debugging messages."
+#~ msgstr "Wys metadata-ontvlooiingsboodskappe."
+
+#~ msgid "Show mdi debugging messages."
+#~ msgstr "Wys mdi-ontvlooiingsboodskappe."
+
+#~ msgid "Show commands debugging messages."
+#~ msgstr "Wys bevele-ontvlooiingsboodskappe."
+
+#~ msgid "Show document debugging messages."
+#~ msgstr "Wys dokument-ontvlooiingsboodskappe."
+
+#~ msgid "Show file debugging messages."
+#~ msgstr "Wys lêer-ontvlooiingsboodskappe."
+
+#~ msgid "Show plugin debugging messages."
+#~ msgstr "Wys inprop-ontvlooiingsboodskappe."
+
+#~ msgid "Show prefs debugging messages."
+#~ msgstr "Wys voorkeure-ontvlooiingsboodskappe."
+
+#~ msgid "Show printing debugging messages."
+#~ msgstr "Wys druk-ontvlooiingsboodskappe."
+
+#~ msgid "Show search debugging messages."
+#~ msgstr "Wys soek-ontvlooiingsboodskappe."
+
+#~ msgid "Show undo debugging messages."
+#~ msgstr "Wys ontdoen-ontvlooiingsboodskappe."
+
+#~ msgid "Show view debugging messages."
+#~ msgstr "Wys bekyk-ontvlooiingsboodskappe."
+
+#~ msgid "Show recent debugging messages."
+#~ msgstr "Wys onlangse-ontvlooiingsboodskappe."
+
+#~ msgid "Show session management debugging messages."
+#~ msgstr "Wys sessiebestuur-ontvlooiingsboodskappe."
+
+#~ msgid "Turn on all debugging messages."
+#~ msgstr "Skakel alle ontvlooiingsboodskappe aan."
 
 #~ msgid " (invalid Unicode)"
 #~ msgstr " (ongeldige Unikode)"

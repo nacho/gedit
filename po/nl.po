@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-09 14:44+0200\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-07-09 16:44+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -51,7 +51,7 @@ msgstr "gedit automatiseringsfabriek"
 msgid "Edit text files"
 msgstr "Tekstbestanden bewerken"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Tekst-editor"
 
@@ -489,7 +489,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "Als u uw documenten niet opslaat, gaan al uw wijzigingen verloren."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "S_electeer de documenten die u wilt opslaan:"
 
@@ -501,11 +501,16 @@ msgstr "Gee_n opslaan"
 msgid "_Save Selected"
 msgstr "Ge_selecteerden opslaan"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "Nie_t opslaan"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+msgid "Question"
+msgstr "Vraag"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -520,14 +525,14 @@ msgstr[1] ""
 "Als u niet opslaat, zijn de wijzigingen van de afgelopen %ld seconden "
 "definitief verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
 "Als u niet opslaat, zijn de wijzigingen van de afgelopen minuut definitief "
 "verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -542,7 +547,7 @@ msgstr[1] ""
 "Als u niet opslaat, zijn de wijzigingen van de afgelopen minuut en %ld "
 "seconden definitief verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -557,14 +562,14 @@ msgstr[1] ""
 "Als u niet opslaat, zijn de wijzigingen van de afgelopen %ld minuten "
 "definitief verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
 "Als u niet opslaat, zijn de wijzigingen van het afgelopen uur definitief "
 "verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -579,7 +584,7 @@ msgstr[1] ""
 "Als u niet opslaat, zijn de wijzigingen van het afgelopen uur en %d minuten "
 "definitief verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -592,12 +597,12 @@ msgstr[1] ""
 "Als u niet opslaat, zijn de wijzigingen van de afgelopen %d uren definitief "
 "verloren."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Wijzigingen aan document \"%s\" opslaan vóór afsluiten?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -610,7 +615,7 @@ msgstr[1] ""
 "afsluiten?"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "Als u niet opslaat, zijn al uw wijzigingen definitief verloren."
 
@@ -623,7 +628,7 @@ msgid "_Go to Line"
 msgstr "_Ga naar regel"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "De zoekterm \"%s\" werd niet gevonden."
@@ -725,11 +730,11 @@ msgstr "Plugin"
 msgid "Enabled"
 msgstr "Ingeschakeld"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Kan plugin-manager.glade2 niet vinden, installeer gedit opnieuw.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Ongeldig glade-bestand voor pluginbeheer -- niet alle widgets gevonden.\n"
@@ -1226,7 +1231,7 @@ msgstr "Geef de locatie (URI) van het bestand dat u wilt openen:"
 msgid "Open from URI"
 msgstr "Openen van URI"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr ""
 "Dennis Smit \n"
@@ -1238,11 +1243,11 @@ msgstr ""
 "Taco Witte \n"
 "Daniel van Eeden"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit is een kleine en lichte tekst-editor voor de GNOME-werkomgeving"
 
@@ -1431,10 +1436,6 @@ msgstr "Vietnamees"
 msgid "Thai"
 msgstr "Thais"
 
-#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:704
-msgid "Question"
-msgstr "Vraag"
-
 #: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
@@ -1477,35 +1478,35 @@ msgstr "Selecteer de te openen bestanden"
 msgid "Select a filename to save"
 msgstr "Selecteer een bestandsnaam om op te slaan"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "Bestand openen..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:425
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Opslaan van document \"%s\"..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:446
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Het bestand \"%s\" is niet opgeslagen."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:438
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Het document \"%s\" is opgeslagen."
 
-#: gedit/gedit-file.c:405
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "Opslaan als..."
 
-#: gedit/gedit-file.c:605
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Terugkeren naar opgeslagen versie van document \"%s\"?"
 
-#: gedit/gedit-file.c:614
+#: gedit/gedit-file.c:612
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1519,14 +1520,14 @@ msgstr[1] ""
 "Wijzigingen aan het document van de laatste %ld seconden zullen definitief "
 "verloren zijn."
 
-#: gedit/gedit-file.c:623
+#: gedit/gedit-file.c:621
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Wijzigingen aan het document van de laatste minuut zullen definitief "
 "verloren zijn."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:627
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1541,7 +1542,7 @@ msgstr[1] ""
 "Wijzigingen aan het document van de laatste minuut en %ld seconden zullen "
 "definitief verloren zijn."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:637
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1555,13 +1556,13 @@ msgstr[1] ""
 "Wijzigingen aan het document van de laatste %ld minuten zullen definitief "
 "verloren zijn."
 
-#: gedit/gedit-file.c:654
+#: gedit/gedit-file.c:652
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Wijzigingen aan het document van het laatste uur zullen definitief verloren "
 "zijn."
 
-#: gedit/gedit-file.c:660
+#: gedit/gedit-file.c:658
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1576,7 +1577,7 @@ msgstr[1] ""
 "Wijzigingen aan het document van het laatste uur en %d minuten zullen "
 "definitief verloren zijn."
 
-#: gedit/gedit-file.c:675
+#: gedit/gedit-file.c:673
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1589,70 +1590,65 @@ msgstr[1] ""
 "Wijzigingen aan het document van de laatste %d uren zullen definitief "
 "verloren zijn."
 
-#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Terugdraaien"
 
-#: gedit/gedit-file.c:747
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Er is een fout opgetreden bij het terugzetten van het document \"%s\"."
 
-#: gedit/gedit-file.c:754
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Het document \"%s\" is niet teruggezet."
 
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Het document \"%s\" is teruggezet."
 
-#: gedit/gedit-file.c:786
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Terugzetten van document \"%s\"..."
 
-#: gedit/gedit-file.c:921
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "Er is een fout opgetreden tijdens het lezen van data van stdin."
 
-#: gedit/gedit-file.c:971
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Het bestand \"%s\" bestaat niet. Wilt u het aanmaken?"
-
-#: gedit/gedit-file.c:1094
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Bezig met het terugzetten van bestand:"
 
-#: gedit/gedit-file.c:1098
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Bezig met laden van bestand:"
 
-#: gedit/gedit-file.c:1267 gedit/gedit-file.c:1426
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Er is een fout opgetreden bij het laden van bestand \"%s\""
 
-#: gedit/gedit-file.c:1288
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Bestand \"%s\" geladen"
 
-#: gedit/gedit-file.c:1365
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%d bestand geladen"
 msgstr[1] "%d bestanden geladen"
 
-#: gedit/gedit-file.c:1399
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Laden van bestand \"%s\"..."
 
-#: gedit/gedit-file.c:1546
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1707,15 +1703,15 @@ msgstr "(gewijzigd)"
 msgid "(readonly)"
 msgstr "(alleen lezen)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "Normaal"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "Normale oplichtingsmodus gebruiken"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Oplichtingsmodus %s gebruiken"
@@ -2623,17 +2619,28 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INV"
 
-#: gedit/gedit2.c:82
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
+
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Een bestaande instantie van gedit afsluiten"
 
-#: gedit/gedit2.c:85
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Een nieuw venster maken van een bestaande instantie van gedit"
 
-#: gedit/gedit2.c:88
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Een nieuw document maken in een bestaande instantie van gedit"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -3270,6 +3277,9 @@ msgstr "De geselecteerde-tekst kopiëren naar het klembord"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "Tekst K_opiëren"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "Het bestand \"%s\" bestaat niet. Wilt u het aanmaken?"
 
 #~ msgid "Show utility debugging messages."
 #~ msgstr "Hulpprogramma-debugberichten tonen."

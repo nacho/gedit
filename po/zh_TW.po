@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.91\n"
-"POT-Creation-Date: 2004-03-22 19:26+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-03-20 11:45+0800\n"
 "Last-Translator: Anthony Tang <tkyanthony@yahoo.com.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
@@ -45,7 +45,7 @@ msgstr "gedit 自動化工廠"
 msgid "Edit text files"
 msgstr "編輯文字檔"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:372
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "文字編輯器"
 
@@ -190,6 +190,15 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "gedit 中可復原或取消復原的操作數目上限。"
 
 #: data/gedit.schemas.in.h:28
+msgid "Monospace 12"
+msgstr ""
+
+#: data/gedit.schemas.in.h:29
+#, fuzzy
+msgid "Monospace Regular 9"
+msgstr "AR PL KaitiM Big5 14"
+
+#: data/gedit.schemas.in.h:30
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -197,35 +206,45 @@ msgstr ""
 "gedit 會在每隔指定的時間[分鐘]後自動儲存檔案。本選項只有在「自動儲存」選項開"
 "啟後才會生效。"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:31
 msgid "Print Header"
 msgstr "列印頁首"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Print Line Numbers"
 msgstr "列印行號"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Print Syntax Highlighting"
 msgstr "列印時顯示語法色彩"
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:34
 msgid "Printing Line Wrapping Mode"
 msgstr "列印換行模式"
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:35
 msgid "Right Margin Position"
 msgstr "右邊邊界位置"
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
+#, fuzzy
+msgid "Sans Regular 11"
+msgstr "AR PL KaitiM Big5 14"
+
+#: data/gedit.schemas.in.h:37
+#, fuzzy
+msgid "Sans Regular 8"
+msgstr "AR PL KaitiM Big5 14"
+
+#: data/gedit.schemas.in.h:38
 msgid "Selected Text Color"
 msgstr "被選取的文字顏色"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:39
 msgid "Selection Color"
 msgstr "選擇區域的顏色"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -234,7 +253,7 @@ msgstr ""
 "這裡是一系列已排序的編碼，gedit 會根據這個清單自動偵測檔案的字符編"
 "碼。“CURRENT”表示使用目前地區設定的編碼。所有無法識別的編碼將不會使用。"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -246,7 +265,7 @@ msgstr ""
 "詞間換行，及“GTK_WRAP_CHAR”代表在個別字符間換行。請注意，設定值是會分辨大小寫"
 "的，所以請確保設定值和上面所列出的完全一致。"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -258,19 +277,19 @@ msgstr ""
 "字詞間換行，及“GTK_WRAP_CHAR”代表在個別字符間換行。請注意，設定值是會分辨大小"
 "寫的，所以請確保設定值和上面所列出的完全一致。"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "指定列印文件時文件內容所用的字型。"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
 "指定列印時行號所用的字型。本選項只有在「列印行號」選項的值不是零的時候生效。"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:45
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -278,27 +297,27 @@ msgstr ""
 "指定列印文件時頁首所用的字型。本選項只有在「列印頁首」選項的值開啟的時候生"
 "效。"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:46
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "指定在「最近使用的檔案」副選單中，可以顯示多少個最近開啟的檔案。"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:47
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "指定顯示 Tab 字符時會以多少個空格代替。"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:48
 msgid "Specifies the position of the right margin."
 msgstr "指定右邊邊界位置。"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:49
 msgid "Status Bar is Visible"
 msgstr "顯示狀態列"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:50
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -314,35 +333,35 @@ msgstr ""
 "“GEDIT_TOOLBAR_ICONS_BOTH_HORIZ”表示一部份的圖示旁邊會加上文字。\n"
 "請注意，設定值是會分辨大小寫的，所以請確保設定值和上面所列出的完全一致。"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:51
 msgid "Tab Size"
 msgstr "Tab 字符寬度"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:52
 msgid "Text Color"
 msgstr "文字顏色"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:53
 msgid "Toolbar Buttons Style"
 msgstr "工具列按鈕樣式"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:54
 msgid "Toolbar is Visible"
 msgstr "顯示工具列"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:55
 msgid "Undo Actions Limit"
 msgstr "復原次數上限"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:56
 msgid "Use Default Colors"
 msgstr "使用預設色彩"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:57
 msgid "Use Default Font"
 msgstr "使用預設字型"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:58
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -351,7 +370,7 @@ msgstr ""
 "gedit 應否每隔某段時間自動儲存修改過的檔案。您可以在「自動儲存相隔時間」選項"
 "中指定時間。"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:59
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -359,44 +378,44 @@ msgstr ""
 "gedit 應否在儲存檔案時製作備份。您可以在「備份檔延伸檔名」中指定備份檔的延伸"
 "檔名。"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:60
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "gedit 應否在編輯區域中顯示行號。"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:61
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "gedit 應否在編輯區域中顯示右邊邊界。"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:62
 msgid "Whether gedit should enable auto indentation."
 msgstr "gedit 應否啟用自動縮排的功能。"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:63
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "gedit 應否啟用語法色彩顯示的功能。"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:64
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "gedit 應否在列印文件時加上頁首。"
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:65
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 應否使用空格來代替 Tab 字符。"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:66
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit 應否在列印文件時加上語法色彩處理。"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "編輯視窗的底部應否顯示狀態列。"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:68
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "編輯視窗應否顯示工具列。"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -406,7 +425,7 @@ msgstr ""
 "編輯區域是否使用系統預設的色彩。如果關閉本選項，那麼會根據「背景顏色」、「文"
 "字顏色」、「被選取的文字顏色」及「選擇區域的顏色」選項來決定編輯區域的顏色。"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -415,7 +434,15 @@ msgstr ""
 "gedit 是否使用系統預設的字型作為編輯文字使用，而不用 gedit 本身指定的字型。如"
 "果關閉本選項，則會使用「編輯器字型」選項中的字型，而不用系統字型。"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: data/gedit.schemas.in.h:71
+msgid "[ISO-8859-15]"
+msgstr ""
+
+#: data/gedit.schemas.in.h:72
+msgid "[UTF-8,CURRENT,ISO-8859-15]"
+msgstr ""
+
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "啟用 %s"
@@ -431,7 +458,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "如您不儲存文件，所有未儲存的部份將會失掉。"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:654
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "請選擇需要儲存的文件(_E)："
 
@@ -443,11 +470,17 @@ msgstr "全部不儲存(_N)"
 msgid "_Save Selected"
 msgstr "只儲存選定的文件(_S)"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "不要儲存(_N)"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#, fuzzy
+msgid "Question"
+msgstr "建議"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -457,12 +490,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "如您不儲存文件，最後 %ld 秒所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr "如您不儲存文件，最後一分鐘所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -472,7 +505,7 @@ msgid_plural ""
 "definitively lost."
 msgstr[0] "如您不儲存文件，最後一分鐘 %ld 秒所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -482,12 +515,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "如您不儲存文件，最後 %ld 分鐘所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr "如您不儲存文件，最後一小時所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -497,7 +530,7 @@ msgid_plural ""
 "definitively lost."
 msgstr[0] "如您不儲存文件，最後一小時 %d 分鐘所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -505,19 +538,20 @@ msgid_plural ""
 "If you don't save, changes from the last %d hours will be definitively lost."
 msgstr[0] "如您不儲存文件，最後 %d 小時所修改的部份將會失掉。"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "離開前要儲存已修改的文件 ”%s” 嗎？"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:640
-#, c-format
-msgid ""
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#, fuzzy, c-format
+msgid "There is %d document with unsaved changes. Save changes before closing?"
+msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr "還有 %d 份文件未儲存。離開前要儲存文件嗎？"
+msgstr[0] "還有 %d 份文件未儲存。離開前要儲存文件嗎？"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:671
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "如您不儲存文件，所有已修改的部份將會失掉。"
 
@@ -530,7 +564,7 @@ msgid "_Go to Line"
 msgstr "前往指定行數(_G)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:392
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "找不到字串 “%s”。"
@@ -545,7 +579,7 @@ msgid "Replace _All"
 msgstr "全部取代(_A)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "取代(_R)"
 
@@ -553,7 +587,7 @@ msgstr "取代(_R)"
 msgid "Find"
 msgstr "搜尋"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1130
+#: gedit/dialogs/gedit-dialog-replace.c:1135
 #, c-format
 msgid "Found and replaced %d occurrence."
 msgid_plural "Found and replaced %d occurrences."
@@ -590,30 +624,30 @@ msgstr "字符編碼"
 msgid "E_ncodings shown in menu:"
 msgstr "選單中顯示的編碼(_N)："
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "內容字型選擇對話方塊"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr "按下此按鈕後可選擇列印文件內容所用的字型"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "頁首字型選擇對話方塊"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr "按下此按鈕後可選擇列印文件頁首所用的字型"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "行號字型選擇對話方塊"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "按下此按鈕後可選擇列印文件行號所用的字型"
 
@@ -625,11 +659,11 @@ msgstr "增效模組"
 msgid "Enabled"
 msgstr "啟用"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "找不到 plugin-manager.glade2，請重新安裝 gedit。\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr "增效模組總管的 glade 檔案無效 ─ 沒法完全找到所有視窗元件。\n"
 
@@ -654,31 +688,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "選定的檔案是不可執行的。"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr "按下此按鈕後可選擇編輯器所用的字型"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "按下此按鈕後可設定文字的顏色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "按下此按鈕後可設定背景的顏色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "按下此按鈕後可設定被選取的文字顏色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "按下此按鈕後可設定選取文字用的區域顏色"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "元件"
 
@@ -1119,7 +1153,7 @@ msgstr "輸入準備開啟的檔案的位置[URI](_L)："
 msgid "Open from URI"
 msgstr "開啟 URI"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:544
 msgid "translator_credits"
 msgstr ""
 "i18n 程式中文化計劃\n"
@@ -1129,55 +1163,55 @@ msgstr ""
 "Abel Cheung <maddog@linux.org.hk>, 2001-2003\n"
 "Jing-Jong Shyue <shyue@sonoma.com.tw>, 2000"
 
-#: gedit/gedit-commands.c:582
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:586
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit 是一個小巧的文字編輯器，適用於 GNOME 桌面"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:637 gedit/gedit-document.c:655
+#: gedit/gedit-document.c:635 gedit/gedit-document.c:653
 msgid "Untitled"
 msgstr "未命名"
 
-#: gedit/gedit-document.c:643 gedit/gedit-document.c:690
+#: gedit/gedit-document.c:641 gedit/gedit-document.c:688
 msgid "Invalid file name"
 msgstr "檔案名稱無效"
 
-#: gedit/gedit-document.c:841 gedit/gedit-document.c:1316
+#: gedit/gedit-document.c:839 gedit/gedit-document.c:1314
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "UTF-8 資料無效"
 
-#: gedit/gedit-document.c:1643
+#: gedit/gedit-document.c:1641
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "無法讀取 %s 的符號連結資訊"
 
-#: gedit/gedit-document.c:1689
+#: gedit/gedit-document.c:1687
 msgid "The file has too many symbolic links."
 msgstr "跟隨符號連結的層數太多。"
 
-#: gedit/gedit-document.c:1745
+#: gedit/gedit-document.c:1743
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "在寫入模式中 gedit 無法處理 %s: 位置。"
 
-#: gedit/gedit-document.c:1752
+#: gedit/gedit-document.c:1750
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "在寫入模式中 gedit 無法處理這種位置。"
 
-#: gedit/gedit-document.c:1765
+#: gedit/gedit-document.c:1763
 msgid "Invalid filename."
 msgstr "檔案名稱無效。"
 
-#: gedit/gedit-document.c:1877
+#: gedit/gedit-document.c:1875
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1185,7 +1219,7 @@ msgstr ""
 "剩餘的磁碟空間不足以儲存檔案。\n"
 "請先騰空一部份磁碟空間並再嘗試。"
 
-#: gedit/gedit-document.c:1882
+#: gedit/gedit-document.c:1880
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1194,21 +1228,21 @@ msgstr ""
 "準備用來儲存檔案的磁碟加上了有關檔案大小的限制。請嘗試儲存較小的檔案，或儲存"
 "至另一個沒有檔案大小限制的磁碟。"
 
-#: gedit/gedit-document.c:1926
+#: gedit/gedit-document.c:1924
 msgid "Could not create a backup file."
 msgstr "無法製作備份檔。"
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "自動偵測"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "目前的地區設定 (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "加入或移除(_R)..."
 
@@ -1323,197 +1357,191 @@ msgstr "越南文"
 msgid "Thai"
 msgstr "泰文"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "檔案“%s”已經存在。\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "是否要用準備儲存的版本覆寫該檔案？"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "檔案“%s”是唯讀檔案。\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "是否要嘗試用準備儲存的版本覆寫該檔案？"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "所有檔案"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "所有文字檔"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "字符編碼(_A)："
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "選取準備開啟的檔案"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "選取準備開啟的檔案"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "請選擇準備儲存的檔案的名稱"
 
-#: gedit/gedit-file.c:216
+#: gedit/gedit-file.c:213
 msgid "Open File..."
 msgstr "開啟檔案..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
+#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "正在儲存文件”%s”..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
+#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "文件”%s”並未儲存。"
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
+#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "文件”%s”已被儲存。"
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:402
 msgid "Save as..."
 msgstr "另存新檔 ..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:603
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "是否要將未儲存的文件”%s”還原？"
 
-#: gedit/gedit-file.c:609
-#, c-format
+#: gedit/gedit-file.c:612
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %ld second will be definitively "
-"lost."
+"Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %ld seconds will be definitively "
+"Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr[0] "最後這 %ld 秒所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:621
+#, fuzzy
 msgid ""
-"Changes made to the document in the last minute will be definitively lost."
+"Changes made to the document in the last minute will be permanently lost."
 msgstr "最後這一分鐘所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:624
-#, c-format
+#: gedit/gedit-file.c:627
+#, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
-"definitively lost."
+"permanently lost."
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
-"definitively lost."
+"permanently lost."
 msgstr[0] "最後這一分鐘 %ld 秒所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:634
-#, c-format
+#: gedit/gedit-file.c:637
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %ld minute will be definitively "
-"lost."
+"Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %ld minutes will be definitively "
+"Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 msgstr[0] "最後這 %ld 分鐘所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:649
-msgid ""
-"Changes made to the document in the last hour will be definitively lost."
+#: gedit/gedit-file.c:652
+#, fuzzy
+msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "最後這一小時所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:655
-#, c-format
+#: gedit/gedit-file.c:658
+#, fuzzy, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
-"definitively lost."
+"permanently lost."
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
-"definitively lost."
+"permanently lost."
 msgstr[0] "最後這 1 小時 %d 分所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:670
-#, c-format
+#: gedit/gedit-file.c:673
+#, fuzzy, c-format
 msgid ""
-"Changes made to the document in the last %d hour will be definitively lost."
+"Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
-"Changes made to the document in the last %d hours will be definitively lost."
+"Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "最後這 %d 小時所修改的部份將會失掉。"
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "還原(_R)"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:745
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "還原檔案“%s”時出現錯誤。"
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:752
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "文件“%s”並沒有被還原。"
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:756
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "文件“%s”已被還原。"
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:784
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "正在還原文件“%s“..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "無法從標準輸入讀取資料。"
 
-#: gedit/gedit-file.c:962
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "檔案“%s”不存在。是否要建立該檔案？"
-
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "正在還原檔案："
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "正在載入檔案："
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "載入檔案“%s“時出現錯誤。"
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "已載入檔案 “%s“"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "已載入 %d 個檔案"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "正在載入檔案“%s“..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1567,15 +1595,15 @@ msgstr "(已更改)"
 msgid "(readonly)"
 msgstr "(唯讀)"
 
-#: gedit/gedit-mdi.c:1926
+#: gedit/gedit-mdi.c:1925
 msgid "Normal"
 msgstr "一般"
 
-#: gedit/gedit-mdi.c:1927
+#: gedit/gedit-mdi.c:1926
 msgid "Use Normal highlight mode"
 msgstr "使用一般加強顯示模式"
 
-#: gedit/gedit-mdi.c:2003
+#: gedit/gedit-mdi.c:2002
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 加強顯示模式"
@@ -2462,77 +2490,80 @@ msgstr " 覆寫"
 msgid "  INS"
 msgstr " 插入"
 
-#: gedit/gedit2.c:82
-msgid "Show utility debugging messages."
-msgstr "顯示有關公用程式的偵錯訊息。"
+#: gedit/gedit2.c:86
+msgid ""
+"Set the character encoding to be used to open the files listed on the "
+"command line"
+msgstr ""
 
-#: gedit/gedit2.c:85
-msgid "Show metadata debugging messages."
-msgstr "顯示有關 metadata 的偵錯訊息。"
-
-#: gedit/gedit2.c:88
-msgid "Show mdi debugging messages."
-msgstr "顯示有關 MDI 的偵錯訊息。"
-
-#: gedit/gedit2.c:91
-msgid "Show commands debugging messages."
-msgstr "顯示有關指令的偵錯訊息。"
-
-#: gedit/gedit2.c:94
-msgid "Show document debugging messages."
-msgstr "顯示有關文件的偵錯訊息。"
-
-#: gedit/gedit2.c:97
-msgid "Show file debugging messages."
-msgstr "顯示有關檔案的偵錯訊息。"
-
-#: gedit/gedit2.c:100
-msgid "Show plugin debugging messages."
-msgstr "顯示有關增效模組的偵錯訊息。"
-
-#: gedit/gedit2.c:103
-msgid "Show prefs debugging messages."
-msgstr "顯示有關偏好設定的偵錯訊息。"
-
-#: gedit/gedit2.c:106
-msgid "Show printing debugging messages."
-msgstr "顯示有關列印的偵錯訊息。"
-
-#: gedit/gedit2.c:109
-msgid "Show search debugging messages."
-msgstr "顯示有關搜尋的偵錯訊息。"
-
-#: gedit/gedit2.c:112
-msgid "Show undo debugging messages."
-msgstr "顯示有關還原操作的偵錯訊息。"
-
-#: gedit/gedit2.c:115
-msgid "Show view debugging messages."
-msgstr "顯示有關文件視窗的偵錯訊息。"
-
-#: gedit/gedit2.c:118
-msgid "Show recent debugging messages."
-msgstr "顯示有關最近開啟的檔案的偵錯訊息。"
-
-#: gedit/gedit2.c:121
-msgid "Show session management debugging messages."
-msgstr "顯示有關作業階段管理的偵錯訊息。"
-
-#: gedit/gedit2.c:124
-msgid "Turn on all debugging messages."
-msgstr "顯示所有偵錯訊息。"
-
-#: gedit/gedit2.c:127
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "關閉所有正在執行的 gedit"
 
-#: gedit/gedit2.c:130
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "開啟一個屬於執行中的 gedit 進程的新視窗"
 
-#: gedit/gedit2.c:133
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "在執行中的 gedit 開啟新的文件"
+
+#: gedit/gedit2.c:182
+#, c-format
+msgid "The specified encoding \"%s\" is not valid\n"
+msgstr ""
+
+#: plugins/changecase/changecase.c:43
+#, fuzzy
+msgid "C_hange Case"
+msgstr "更改(_N)"
+
+#: plugins/changecase/changecase.c:49
+msgid "All _Upper Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:50
+msgid "All _Lower Case"
+msgstr ""
+
+#: plugins/changecase/changecase.c:51
+#, fuzzy
+msgid "_Invert Case"
+msgstr "忽略大小寫(_I)"
+
+#: plugins/changecase/changecase.c:52
+#, fuzzy
+msgid "_Title Case"
+msgstr "標題"
+
+#: plugins/changecase/changecase.c:54
+#, fuzzy
+msgid "Change selected text to upper case"
+msgstr "將選定的文字複製至剪貼簿"
+
+#: plugins/changecase/changecase.c:55
+#, fuzzy
+msgid "Change selected text to lower case"
+msgstr "將選定的文字複製至剪貼簿"
+
+#: plugins/changecase/changecase.c:56
+#, fuzzy
+msgid "Invert the case of selected text"
+msgstr "刪除選定的文字"
+
+#: plugins/changecase/changecase.c:57
+msgid "Capitalize the first letter of each selected word"
+msgstr ""
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Change Case"
+msgstr "更改(_N)"
+
+#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Changes the case of selected text."
+msgstr "刪除選定的文字"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2543,7 +2574,7 @@ msgid "Get statistic info on current document"
 msgstr "獲取有關目前文件的統計資訊"
 
 #: plugins/docinfo/docinfo.c:140
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "文件統計"
 
@@ -2551,11 +2582,11 @@ msgstr "文件統計"
 msgid "_Update"
 msgstr "更新(_U)"
 
-#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"The Document Statistics plugin analyzes the current document and determines "
-"the number of words, lines, characters and non-space characters in it and "
-"displays the result."
+"Analyzes the current document and reports the number of words, lines, "
+"characters and non-space characters in it."
 msgstr ""
 "「文件統計」增效模組可分析目前的文件並計算字數、行數、字符數目及非空格的字符"
 "數目，並顯示結果。"
@@ -2613,7 +2644,8 @@ msgid "Indent lines"
 msgstr "將選定行數增加縮排"
 
 #: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
+#, fuzzy
+msgid "Indents or un-indents selected lines."
 msgstr "增加或減少選定的行數的縮排程度。"
 
 #: plugins/sample/sample.c:43
@@ -2690,9 +2722,10 @@ msgid "An error occured while running the selected command."
 msgstr "執行您指定的指令時出現錯誤。"
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+#, fuzzy
 msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
+"Executes an external program and, if required, displays its output in the "
+"output window."
 msgstr "執行外部的程式，並在輸出視窗中顯示結果。"
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
@@ -2719,7 +2752,6 @@ msgstr "執行指令的目錄(_W)："
 msgid "gedit: Shell Output plugin"
 msgstr "gedit：指令輸出增效模組"
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "排列(_O)..."
@@ -3012,24 +3044,24 @@ msgstr "檢查目前文件中的拼字。"
 msgid "Spell checker"
 msgstr "拼字檢查"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:136
+#: plugins/taglist/gedit-taglist-plugin-window.c:139
 msgid "Tag list plugin"
 msgstr "標記清單增效模組"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:154
+#: plugins/taglist/gedit-taglist-plugin-window.c:157
 msgid "Select the group of tags you want to use"
 msgstr "請選擇準備使用哪一組標記"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:176
+#: plugins/taglist/gedit-taglist-plugin-window.c:179
 msgid "Available Tag Lists"
 msgstr "可用的標記清單"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:178
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
+#: plugins/taglist/gedit-taglist-plugin-window.c:181
+#: plugins/taglist/gedit-taglist-plugin-window.c:202
 msgid "Tags"
 msgstr "標記"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:188
+#: plugins/taglist/gedit-taglist-plugin-window.c:191
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "在標記上 double-click 可在文件中加入該標記"
 
@@ -3045,16 +3077,17 @@ msgid "Show the tag list window"
 msgstr "顯示標記清單"
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "標記清單"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+#, fuzzy
 msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
 msgstr ""
 "「標記清單」增效模組提供一種不需使用鍵盤的簡易方式來在文件中加入常用的標記或"
 "字串。"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid "Tag list"
+msgstr "標記清單"
 
 #: plugins/time/time.c:50
 msgid "In_sert Date and Time..."
@@ -3123,6 +3156,54 @@ msgstr "將選定的文字複製至剪貼簿"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "複製文字(_C)"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "檔案“%s”不存在。是否要建立該檔案？"
+
+#~ msgid "Show utility debugging messages."
+#~ msgstr "顯示有關公用程式的偵錯訊息。"
+
+#~ msgid "Show metadata debugging messages."
+#~ msgstr "顯示有關 metadata 的偵錯訊息。"
+
+#~ msgid "Show mdi debugging messages."
+#~ msgstr "顯示有關 MDI 的偵錯訊息。"
+
+#~ msgid "Show commands debugging messages."
+#~ msgstr "顯示有關指令的偵錯訊息。"
+
+#~ msgid "Show document debugging messages."
+#~ msgstr "顯示有關文件的偵錯訊息。"
+
+#~ msgid "Show file debugging messages."
+#~ msgstr "顯示有關檔案的偵錯訊息。"
+
+#~ msgid "Show plugin debugging messages."
+#~ msgstr "顯示有關增效模組的偵錯訊息。"
+
+#~ msgid "Show prefs debugging messages."
+#~ msgstr "顯示有關偏好設定的偵錯訊息。"
+
+#~ msgid "Show printing debugging messages."
+#~ msgstr "顯示有關列印的偵錯訊息。"
+
+#~ msgid "Show search debugging messages."
+#~ msgstr "顯示有關搜尋的偵錯訊息。"
+
+#~ msgid "Show undo debugging messages."
+#~ msgstr "顯示有關還原操作的偵錯訊息。"
+
+#~ msgid "Show view debugging messages."
+#~ msgstr "顯示有關文件視窗的偵錯訊息。"
+
+#~ msgid "Show recent debugging messages."
+#~ msgstr "顯示有關最近開啟的檔案的偵錯訊息。"
+
+#~ msgid "Show session management debugging messages."
+#~ msgstr "顯示有關作業階段管理的偵錯訊息。"
+
+#~ msgid "Turn on all debugging messages."
+#~ msgstr "顯示所有偵錯訊息。"
 
 #~ msgid " (invalid Unicode)"
 #~ msgstr " (無效的統一碼)"

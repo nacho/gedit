@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-18 03:33+0200\n"
+"POT-Creation-Date: 2004-08-01 18:45+0200\n"
 "PO-Revision-Date: 2004-07-18 14:07+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "generátor GEdit"
 msgid "Edit text files"
 msgstr "Úprava textových souborů"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:337
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:336
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -735,12 +735,12 @@ msgstr "Plugin"
 msgid "Enabled"
 msgstr "Povoleno"
 
-#: gedit/dialogs/gedit-plugin-manager.c:507
+#: gedit/dialogs/gedit-plugin-manager.c:496
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
 "Nemohu nalézt soubor plugin-manager.glade2, nainstalujte znovu GEdit.\n"
 
-#: gedit/dialogs/gedit-plugin-manager.c:525
+#: gedit/dialogs/gedit-plugin-manager.c:514
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Chybný soubor glade pro správce zásuvných modulů -- ne všechny prvky byly "
@@ -1240,11 +1240,11 @@ msgstr ""
 "Michal Bukovjan <bukm@centrum.cz>\n"
 "Miloslav Trmač <mitr@volny.cz>"
 
-#: gedit/gedit-commands.c:569
+#: gedit/gedit-commands.c:557
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:573
+#: gedit/gedit-commands.c:561
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr ""
 "gedit je malý a jednoduchý textový editor pro prostředí pracovní plochy GNOME"
@@ -1620,30 +1620,25 @@ msgstr "Vracím dokument \"%s\"..."
 msgid "Could not read data from stdin."
 msgstr "Nemohu číst data ze standardního vstupu."
 
-#: gedit/gedit-file.c:961
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
-
-#: gedit/gedit-file.c:1084
+#: gedit/gedit-file.c:1059
 msgid "Reverting file:"
 msgstr "Vracím soubor:"
 
-#: gedit/gedit-file.c:1088
+#: gedit/gedit-file.c:1063
 msgid "Loading file:"
 msgstr "Načítám soubor:"
 
-#: gedit/gedit-file.c:1256 gedit/gedit-file.c:1415
+#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba při načítání souboru \"%s\""
 
-#: gedit/gedit-file.c:1277
+#: gedit/gedit-file.c:1252
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načten soubor \"%s\""
 
-#: gedit/gedit-file.c:1354
+#: gedit/gedit-file.c:1329
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1651,12 +1646,12 @@ msgstr[0] "Načten %i soubor."
 msgstr[1] "Načteny %i soubory."
 msgstr[2] "Načteno %i souborů."
 
-#: gedit/gedit-file.c:1388
+#: gedit/gedit-file.c:1363
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítám soubor \"%s\"..."
 
-#: gedit/gedit-file.c:1538
+#: gedit/gedit-file.c:1510
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2640,7 +2635,9 @@ msgstr "  VLO"
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr "Nastavit kódování znaků, které používat pro otevírání souborů vypsaných na příkazovém řádku"
+msgstr ""
+"Nastavit kódování znaků, které používat pro otevírání souborů vypsaných na "
+"příkazovém řádku"
 
 #: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
@@ -2654,7 +2651,7 @@ msgstr "Vytvořit nové top-level okno v existující instanci aplikace GEdit."
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Vytvořit nový dokument v existující instanci aplikace GEdit."
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:182
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Zadané kódování \"%s\" není platné\n"
@@ -3290,6 +3287,9 @@ msgstr "Zkopírovat vybraný text do schránky"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Kopírovat text"
+
+#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
+#~ msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
 
 #~ msgid "Show utility debugging messages."
 #~ msgstr "Zobrazovat pomocné ladicí zprávy."
