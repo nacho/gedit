@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2003-07-24 12:15+0300\n"
+"POT-Creation-Date: 2003-08-26 23:48+0200\n"
 "PO-Revision-Date: 2003-02-03 13:48--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -42,7 +42,7 @@ msgstr "Фабрика gedit"
 msgid "Edit text files"
 msgstr "Редагувати текстові файли"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:363
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "Текстовий редактор"
 
@@ -67,7 +67,7 @@ msgstr "Автозбереження"
 msgid "Auto Save Interval"
 msgstr "Інтервал автозбереження"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "Auto indent"
 msgstr "Автовідступ"
 
@@ -398,7 +398,8 @@ msgstr "Чи має gedit вставляти пропуски замість з�
 
 #: data/gedit.schemas.in.h:58
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr "Чи потрібно застосовувати виділення синтаксисту під час друку документів."
+msgstr ""
+"Чи потрібно застосовувати виділення синтаксисту під час друку документів."
 
 #: data/gedit.schemas.in.h:59
 msgid ""
@@ -431,21 +432,21 @@ msgstr ""
 "параметр вимкнуто, то для області редагування буде використовуватися шрифт, "
 "визначений в параметрі \"Шрифт редактора\"."
 
-#: gedit/bonobo-mdi.c:549 gedit/bonobo-mdi.c:1962
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
 #, c-format
 msgid "Activate %s"
 msgstr "Активувати %s"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:161
+#: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
 msgstr "Перейти на рядок"
 
 #. Add Goto Line button
-#: gedit/dialogs/gedit-dialog-goto-line.c:171
+#: gedit/dialogs/gedit-dialog-goto-line.c:170
 msgid "_Go to Line"
 msgstr "_Перейти на рядок"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:187
+#: gedit/dialogs/gedit-dialog-goto-line.c:186
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #, c-format
@@ -453,31 +454,31 @@ msgid "Could not find the required widgets inside %s."
 msgstr "Не вдалося знайти потрібні віджети в %s."
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:400
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Тексту \"%s\" не знайдено."
 
-#: gedit/dialogs/gedit-dialog-replace.c:269 gedit/dialogs/replace.glade2.h:4
+#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
 #: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "Замінити"
 
-#: gedit/dialogs/gedit-dialog-replace.c:280
+#: gedit/dialogs/gedit-dialog-replace.c:279
 msgid "Replace _All"
 msgstr "Замінити _все"
 
 #. Add Replace button
-#: gedit/dialogs/gedit-dialog-replace.c:283
+#: gedit/dialogs/gedit-dialog-replace.c:282
 #: gedit/gedit-file-selector-util.c:131
 msgid "_Replace"
 msgstr "Замінити"
 
-#: gedit/dialogs/gedit-dialog-replace.c:407 gedit/gedit-ui.xml.h:17
+#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
 msgid "Find"
 msgstr "Знайти"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1150
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
 msgid "Found and replaced %d occurrences."
 msgstr "Знайдено і замінено %d входжень."
@@ -541,7 +542,6 @@ msgid "Line numbers font picker"
 msgstr "Номери рядків"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
-#: gedit/dialogs/gedit-preferences-dialog.c:1888
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "Натисніть цю кнопку для встановлення шрифту друку номерів рядків"
 
@@ -601,115 +601,84 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Вибраний файл не призначений для виконання."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:243
+#: gedit/dialogs/gedit-preferences-dialog.c:197
 msgid "Font & Colors"
 msgstr "Шрифти й кольори"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Tabs"
 msgstr "Вкладки"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:246
+#: gedit/dialogs/gedit-preferences-dialog.c:200
 msgid "Wrap Mode"
 msgstr "Режим загортання"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:247
+#: gedit/dialogs/gedit-preferences-dialog.c:201
 msgid "Auto Indent"
 msgstr "Автовідступ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:248
+#: gedit/dialogs/gedit-preferences-dialog.c:202
 msgid "Line Numbers"
 msgstr "Номери рядків"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:250 gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Відкрити"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:252
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Зберегти"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:253
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:68
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
 msgid "Undo"
 msgstr "Скасувати"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:262
-msgid "Page"
-msgstr "Сторінка"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:264
-#: gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Шрифти"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:272
+#: gedit/dialogs/gedit-preferences-dialog.c:213
 msgid "Manager"
 msgstr "Менеджер"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:280
+#: gedit/dialogs/gedit-preferences-dialog.c:221
 msgid "Editor"
 msgstr "Редактор"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:282
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:217
-#: gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "Друк"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:284
+#: gedit/dialogs/gedit-preferences-dialog.c:223
 msgid "Plugins"
 msgstr "Доповнення"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:356
+#: gedit/dialogs/gedit-preferences-dialog.c:295
 msgid "Cat_egories:"
 msgstr "Кат_егорії:"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:378
+#: gedit/dialogs/gedit-preferences-dialog.c:317
 msgid "Preferences"
 msgstr "Вподобання"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:618
+#: gedit/dialogs/gedit-preferences-dialog.c:557
 msgid "Categories"
 msgstr "Категорії"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:853
+#: gedit/dialogs/gedit-preferences-dialog.c:787
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Натисніть цю кнопку для вибору шрифту редактора"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:856
+#: gedit/dialogs/gedit-preferences-dialog.c:790
 msgid "Push this button to configure text color"
 msgstr "Натисніть цю кнопку для встановлення кольору тексту"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:858
+#: gedit/dialogs/gedit-preferences-dialog.c:792
 msgid "Push this button to configure background color"
 msgstr "Натисніть цю кнопку для встановлення кольору тла"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:860
+#: gedit/dialogs/gedit-preferences-dialog.c:794
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Натисніть цю кнопку для встановлення кольору вибраного тексту"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:863
+#: gedit/dialogs/gedit-preferences-dialog.c:797
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Натисніть цю кнопку для встановлення кольору відмітки вибраного тексту"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1884
-msgid "Push this button to select the font to be used to print the body"
-msgstr "Натисніть цю кнопку для встановлення шрифту друку основного тексту"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1886
-msgid "Push this button to select the font to be used to print the headers"
-msgstr "Натисніть цю кнопку для встановлення шрифту друку заголовків"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:2335
-msgid "Encodings"
-msgstr "Кодування"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -730,241 +699,146 @@ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Шрифти і кольори</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Шрифти</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Номери рядків</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:7
+#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Менеджер</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Відкрити</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Сторінка</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:10
+#: gedit/dialogs/gedit-preferences.glade2.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Зберегти</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:11
+#: gedit/dialogs/gedit-preferences.glade2.h:8
 msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Вкладки</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:12
+#: gedit/dialogs/gedit-preferences.glade2.h:9
 msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Скасувати</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:13
+#: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Режим загортання</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Кольори</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Під час збереження нового файла...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Під час збереження зміненого файла...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Додати нові кодування"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Завжди використовувати кодування _UTF-8 (швидше)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Завжди використовувати кодування _UTF-8 (швидше)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "Створювати _резервну копію файлів перед збереженням"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:14
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Не _розривати слово між двома рядками"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 msgid "Editor _font: "
 msgstr "_Шрифт редактора:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "Enable _auto indentation"
 msgstr "Увімкнути _автовідступ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Увімкнути за_гортання тексту"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Fonts & Colors"
 msgstr "Шрифти й кольори"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Вставляти _пропуски замість табуляції"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "LOGO"
 msgstr "ЕМБЛЕМА"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "_Номери рядків:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Line numbers"
 msgstr "Номери рядків"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Вниз"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Вгору"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "За_головки сторінок:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Pick the background color"
 msgstr "Виберіть колір тла"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Pick the selected text color"
 msgstr "Виберіть колір вибраного тексту"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick the selection color"
 msgstr "Виберіть колір вибору"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the text color"
 msgstr "Виберіть колір тексту"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Plugin manager"
 msgstr "Керування доповненнями"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "Друкувати _номери рядків кожні"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Шрифти друку"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Видалити кодування"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Se_lection color:"
 msgstr "Колір ви_бору:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Selecte_d text color:"
 msgstr "Колір _вибраного тексту:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Set _tabs width equivalent to"
 msgstr "Встановити _ширину табуляцій рівною"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Set limit on _undo actions to"
 msgstr "Встановити ліміт _скасувань дій рівним"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "U_se default theme colors"
 msgstr "Використовувати _початковий набір кольорів"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "Використовувати _оригінальне кодування файла"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Використовувати кодування поточної _локалі, якщо можливо"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Використовувати кодування поточної _локалі, якщо можливо"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Wrap mode"
 msgstr "Режим загортання"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:54
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "_Autosave current file every"
 msgstr "_Автоматично зберігати поточний файл кожні"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:55
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "_Background color:"
 msgstr "Колір _тла:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:56
-#: gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "_Тіло:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:57
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "_Display line numbers"
 msgstr "Показувати _номери рядків"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:58
-#: gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "Друкувати за_головки сторінок"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:59
-#: gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Відновити початкові шрифти"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "_Підтримувані кодування:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:61
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "_Text color:"
 msgstr "Колір _тексту:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:62
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Use default theme font"
 msgstr "Шрифт _типової теми"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:63
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_action(s)"
 msgstr "_команд"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:64
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_minutes"
 msgstr "_хвилин"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:65
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "character(s)"
 msgstr "символів"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr "_рядків"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -982,7 +856,7 @@ msgstr "Перегляд"
 msgid "_Modify preview phrase..."
 msgstr "_Змінити фразу для перегляду..."
 
-#: gedit/dialogs/gnome-print-font-dialog.c:247
+#: gedit/dialogs/gnome-print-font-dialog.c:245
 msgid "Font Selection"
 msgstr "Вибір шрифта"
 
@@ -1067,6 +941,10 @@ msgstr "<b>Номери рядків</b>"
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Загортання тексту</b>"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Шрифти"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
 msgstr "Загальне"
@@ -1087,6 +965,10 @@ msgstr "Друкувати номери _рядків"
 msgid "Print s_yntax highlighting"
 msgstr "Друкувати виділення с_интакису"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "_Тіло:"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
 msgid "_Line numbers:"
 msgstr "_Номери рядків:"
@@ -1094,6 +976,14 @@ msgstr "_Номери рядків:"
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
 msgid "_Number every"
 msgstr "_Нумерувати кожен"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "Друкувати за_головки сторінок"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Відновити початкові шрифти"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
 msgid "lines"
@@ -1181,59 +1071,59 @@ msgstr "Введіть _положення (URI) файла, який потрі
 msgid "Open from URI"
 msgstr "Відкрити з URI"
 
-#: gedit/gedit-commands.c:562
+#: gedit/gedit-commands.c:564
 msgid "translator_credits"
 msgstr "Юрій Сирота <ysyrota@softservecom.com>"
 
-#: gedit/gedit-commands.c:587
+#: gedit/gedit-commands.c:589
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:591
+#: gedit/gedit-commands.c:593
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit -- це малий і легкий текстовий редактор для GNOME"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 msgid "Untitled"
 msgstr "Неназваний"
 
-#: gedit/gedit-document.c:599 gedit/gedit-document.c:646
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
 msgid "Invalid file name"
 msgstr "Неправильна назва файла"
 
-#: gedit/gedit-document.c:812 gedit/gedit-document.c:916
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Неправильні дані UTF-8"
 
-#: gedit/gedit-document.c:1208
+#: gedit/gedit-document.c:1210
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Не вдалось прочитати інформацію про символьне посилання для %s"
 
-#: gedit/gedit-document.c:1254
+#: gedit/gedit-document.c:1256
 msgid "The file has too many symbolic links."
 msgstr "Файл має надто багато символьних посилань."
 
-#: gedit/gedit-document.c:1310
+#: gedit/gedit-document.c:1312
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не може працювати з %s: місце в режимі запису."
 
-#: gedit/gedit-document.c:1317
+#: gedit/gedit-document.c:1319
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не може працювати з цим типом місця в режимі запису."
 
-#: gedit/gedit-document.c:1330
+#: gedit/gedit-document.c:1332
 msgid "Invalid filename."
 msgstr "Неправильна назва файла."
 
-#: gedit/gedit-document.c:1442
+#: gedit/gedit-document.c:1444
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1241,7 +1131,7 @@ msgstr ""
 "Недостатньо дискового простору для збереження файла.\n"
 "Звільніть, будь ласка, місце на диску і спробуйте знову."
 
-#: gedit/gedit-document.c:1447
+#: gedit/gedit-document.c:1449
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1251,11 +1141,11 @@ msgstr ""
 "Спробуйте зберегти файл меншого розміру, чи скористуйтесь диском, що не має "
 "такого обмеження."
 
-#: gedit/gedit-document.c:1491
+#: gedit/gedit-document.c:1493
 msgid "Could not create a backup file."
 msgstr "Не вдалось створити резервну копію файлу."
 
-#: gedit/gedit-document.c:1611
+#: gedit/gedit-document.c:1613
 msgid "It is not possible to revert an Untitled document"
 msgstr "Неможливо відновити документ Неназваний"
 
@@ -1264,123 +1154,123 @@ msgid "Auto Detected"
 msgstr ""
 
 #: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:244
+#: gedit/gedit-encodings-option-menu.c:245
 #, c-format
 msgid "Current Locale (%s)"
 msgstr ""
 
-#: gedit/gedit-encodings-option-menu.c:305
+#: gedit/gedit-encodings-option-menu.c:306
 msgid "Add or _Remove..."
 msgstr ""
 
-#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:168
-#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
-#: gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
+#: gedit/gedit-encodings.c:182
 msgid "Unicode"
 msgstr "Юнікод"
 
-#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:163
-#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:247
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
+#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
 msgid "Western"
 msgstr "Західне"
 
-#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
-#: gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:251
 msgid "Central European"
 msgstr "Центральноєвропейське"
 
-#: gedit/gedit-encodings.c:141
+#: gedit/gedit-encodings.c:149
 msgid "South European"
 msgstr "Південноєвропейське"
 
-#: gedit/gedit-encodings.c:143 gedit/gedit-encodings.c:159
-#: gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
+#: gedit/gedit-encodings.c:265
 msgid "Baltic"
 msgstr "Балтійське"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:208
-#: gedit/gedit-encodings.c:221 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:227 gedit/gedit-encodings.c:245
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
+#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
+#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
 msgid "Cyrillic"
 msgstr "Кирилиця"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
+#: gedit/gedit-encodings.c:263
 msgid "Arabic"
 msgstr "Арабське"
 
-#: gedit/gedit-encodings.c:149 gedit/gedit-encodings.c:249
+#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
 msgid "Greek"
 msgstr "Грецьке"
 
-#: gedit/gedit-encodings.c:151
+#: gedit/gedit-encodings.c:159
 msgid "Hebrew Visual"
 msgstr "Єврейське видиме"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:212
-#: gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
+#: gedit/gedit-encodings.c:261
 msgid "Hebrew"
 msgstr "Єврейське"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:210
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:259
 msgid "Turkish"
 msgstr "Турецьке"
 
-#: gedit/gedit-encodings.c:157
+#: gedit/gedit-encodings.c:165
 msgid "Nordic"
 msgstr "Північне"
 
-#: gedit/gedit-encodings.c:161
+#: gedit/gedit-encodings.c:169
 msgid "Celtic"
 msgstr "Кельтське"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:173
 msgid "Romanian"
 msgstr "Румунське"
 
-#: gedit/gedit-encodings.c:177
+#: gedit/gedit-encodings.c:185
 msgid "Armenian"
 msgstr "Американське"
 
-#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:181
-#: gedit/gedit-encodings.c:190
+#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
+#: gedit/gedit-encodings.c:198
 msgid "Chinese Traditional"
 msgstr "Китайське традиційне"
 
-#: gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:191
 msgid "Cyrillic/Russian"
 msgstr "Кирилиця/російська"
 
-#: gedit/gedit-encodings.c:186 gedit/gedit-encodings.c:217
-#: gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:240
 msgid "Japanese"
 msgstr "Японське"
 
-#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:219
-#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:238
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
 msgid "Korean"
 msgstr "Корейське"
 
-#: gedit/gedit-encodings.c:193 gedit/gedit-encodings.c:195
-#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
+#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
 msgid "Chinese Simplified"
 msgstr "Китайське спрощене"
 
-#: gedit/gedit-encodings.c:199
+#: gedit/gedit-encodings.c:207
 msgid "Georgian"
 msgstr "Грузинське"
 
-#: gedit/gedit-encodings.c:229
+#: gedit/gedit-encodings.c:237
 msgid "Cyrillic/Ukrainian"
 msgstr "Кирилиця/українське"
 
-#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:240
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:267
 msgid "Vietnamese"
 msgstr "В'єтнамське"
 
-#: gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:244
 msgid "Thai"
 msgstr "Таїландське"
 
@@ -1630,6 +1520,10 @@ msgstr "Неможливо ініціалізувати менеджера на�
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Очікувалось \"%s\", отримано \"%s\" для ключа %s"
 
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "Друк"
+
 #: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
 msgstr "Рядків"
@@ -1757,6 +1651,10 @@ msgstr "Перенести поточний документ у нове вік�
 msgid "New"
 msgstr "Новий"
 
+#: gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Відкрити"
+
 #: gedit/gedit-ui.xml.h:28
 msgid "Open Location..."
 msgstr "Відкрити місце..."
@@ -1881,7 +1779,8 @@ msgstr "Вибрати весь документ"
 msgid ""
 "Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr ""
-"Встановити стиль кнопок пенала відповідно до системних налаштувань меню і пеналів"
+"Встановити стиль кнопок пенала відповідно до системних налаштувань меню і "
+"пеналів"
 
 #: gedit/gedit-ui.xml.h:63
 msgid "Setup the page settings"
@@ -2183,7 +2082,8 @@ msgid ""
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
-"Не вдалось відкрити файл \"%s\", бо він містить неправильно сформовані дані.\n"
+"Не вдалось відкрити файл \"%s\", бо він містить неправильно сформовані "
+"дані.\n"
 "\n"
 "Напевно, ви намагаєтесь відкрити двійковий файл."
 
@@ -2224,8 +2124,7 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
-"Не вдалось відкрити файл \"%s\"."
-"\n"
+"Не вдалось відкрити файл \"%s\".\n"
 "%s"
 
 #: gedit/gedit-utils.c:718
@@ -3103,3 +3002,75 @@ msgstr "Скопіювати вибраний текст у кишеню"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Скопіювати текст"
+
+#~ msgid "Page"
+#~ msgstr "Сторінка"
+
+#~ msgid "Push this button to select the font to be used to print the body"
+#~ msgstr "Натисніть цю кнопку для встановлення шрифту друку основного тексту"
+
+#~ msgid "Push this button to select the font to be used to print the headers"
+#~ msgstr "Натисніть цю кнопку для встановлення шрифту друку заголовків"
+
+#~ msgid "Encodings"
+#~ msgstr "Кодування"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Шрифти</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Відкрити</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Сторінка</span>"
+
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">Під час збереження нового файла...</span>"
+
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr "<span weight=\"bold\">Під час збереження зміненого файла...</span>"
+
+#~ msgid "Add new encodings"
+#~ msgstr "Додати нові кодування"
+
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "Завжди використовувати кодування _UTF-8 (швидше)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Завжди використовувати кодування _UTF-8 (швидше)"
+
+#~ msgid "Line _numbers:"
+#~ msgstr "_Номери рядків:"
+
+#~ msgid "Move down"
+#~ msgstr "Вниз"
+
+#~ msgid "Move up"
+#~ msgstr "Вгору"
+
+#~ msgid "Page he_aders:"
+#~ msgstr "За_головки сторінок:"
+
+#~ msgid "Print _line numbers every"
+#~ msgstr "Друкувати _номери рядків кожні"
+
+#~ msgid "Print fonts"
+#~ msgstr "Шрифти друку"
+
+#~ msgid "Remove an encoding"
+#~ msgstr "Видалити кодування"
+
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "Використовувати _оригінальне кодування файла"
+
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Використовувати кодування поточної _локалі, якщо можливо"
+
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Використовувати кодування поточної _локалі, якщо можливо"
+
+#~ msgid "_Supported encodings:"
+#~ msgstr "_Підтримувані кодування:"
+
+#~ msgid "li_ne(s)"
+#~ msgstr "_рядків"

@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit for gnome v.2.1.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-03 12:14+0200\n"
+"POT-Creation-Date: 2003-08-26 23:48+0200\n"
 "PO-Revision-Date: 2003-07-24 15:15+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: Gnome-Vi <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -42,7 +42,7 @@ msgstr "gedit automation factory"
 msgid "Edit text files"
 msgstr "Hiệu chỉnh file text"
 
-#: data/gedit.desktop.in.h:2 gedit/gedit2.c:363
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "Trình hiệu chỉnh text"
 
@@ -66,7 +66,7 @@ msgstr "Tự động lưu"
 msgid "Auto Save Interval"
 msgstr "Khoảng tự động lưu"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "Auto indent"
 msgstr "Tự động thụt lề"
 
@@ -171,7 +171,9 @@ msgstr "Chế độ cuộn dòng"
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
-msgstr "Danh sách bảng mã hiển thị trong Menu Bảng mã trong hộp thoại mở/lưu tập tin. Chỉ dùng những bảng mã được công nhận."
+msgstr ""
+"Danh sách bảng mã hiển thị trong Menu Bảng mã trong hộp thoại mở/lưu tập "
+"tin. Chỉ dùng những bảng mã được công nhận."
 
 #: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
@@ -218,7 +220,10 @@ msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
-msgstr "Danh sách sắp xếp các bảng mã được dùng bởi gedit để tự động tìm bảng mã của tập tin. \"CURRENT\" là bảng mã locale hiện thời. Chỉ dùng những bảng mã được công nhận."
+msgstr ""
+"Danh sách sắp xếp các bảng mã được dùng bởi gedit để tự động tìm bảng mã của "
+"tập tin. \"CURRENT\" là bảng mã locale hiện thời. Chỉ dùng những bảng mã "
+"được công nhận."
 
 #: data/gedit.schemas.in.h:35
 msgid ""
@@ -417,21 +422,21 @@ msgstr ""
 "tùy chọn này thì sẽ dùng tùy chọn \"Font bộ biên soạn\" thay thế font hệ "
 "thống."
 
-#: gedit/bonobo-mdi.c:549 gedit/bonobo-mdi.c:1962
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
 #, c-format
 msgid "Activate %s"
 msgstr "Kích hoạt %s"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:161
+#: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
 msgstr "Đi tới Dòng"
 
 #. Add Goto Line button
-#: gedit/dialogs/gedit-dialog-goto-line.c:171
+#: gedit/dialogs/gedit-dialog-goto-line.c:170
 msgid "_Go to Line"
 msgstr "_Đi tới Dòng"
 
-#: gedit/dialogs/gedit-dialog-goto-line.c:187
+#: gedit/dialogs/gedit-dialog-goto-line.c:186
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
 #: plugins/spell/gedit-spell-language-dialog.c:233
 #, c-format
@@ -439,31 +444,31 @@ msgid "Could not find the required widgets inside %s."
 msgstr "Không thể tìm thấy widget yêu cầu trong %s."
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:400
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Không tìm thấy đoạn text \"%s\"."
 
-#: gedit/dialogs/gedit-dialog-replace.c:269 gedit/dialogs/replace.glade2.h:4
+#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
 #: gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "Thay thế"
 
-#: gedit/dialogs/gedit-dialog-replace.c:280
+#: gedit/dialogs/gedit-dialog-replace.c:279
 msgid "Replace _All"
 msgstr "Thay thế tất _cả"
 
 #. Add Replace button
-#: gedit/dialogs/gedit-dialog-replace.c:283
+#: gedit/dialogs/gedit-dialog-replace.c:282
 #: gedit/gedit-file-selector-util.c:131
 msgid "_Replace"
 msgstr "T_hay thế"
 
-#: gedit/dialogs/gedit-dialog-replace.c:407 gedit/gedit-ui.xml.h:17
+#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
 msgid "Find"
 msgstr "_Tìm"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1150
+#: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
 msgid "Found and replaced %d occurrences."
 msgstr "Đã tìm thấy và thay thế %d lần."
@@ -523,7 +528,6 @@ msgid "Line numbers font picker"
 msgstr "Bộ chọn font Số dòng"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
-#: gedit/dialogs/gedit-preferences-dialog.c:1888
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "Nhấn nút này để chọn fon cần dùng khi in số dòng"
 
@@ -586,115 +590,84 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Tập tin được chọn không phải là tập tin thực thi."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:243
+#: gedit/dialogs/gedit-preferences-dialog.c:197
 msgid "Font & Colors"
 msgstr "Font & Màu sắc"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:245
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Tabs"
 msgstr "Tab"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:246
+#: gedit/dialogs/gedit-preferences-dialog.c:200
 msgid "Wrap Mode"
 msgstr "Chế độ ngắt dòng"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:247
+#: gedit/dialogs/gedit-preferences-dialog.c:201
 msgid "Auto Indent"
 msgstr "Tự động thụt lề"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:248
+#: gedit/dialogs/gedit-preferences-dialog.c:202
 msgid "Line Numbers"
 msgstr "Số dòng"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:250 gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Mở"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:252
-#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
 msgid "Save"
 msgstr "Lưu"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:253
-#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:68
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
 msgid "Undo"
 msgstr "Hoàn lại"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:262
-msgid "Page"
-msgstr "Trang"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:264
-#: gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Font"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:272
+#: gedit/dialogs/gedit-preferences-dialog.c:213
 msgid "Manager"
 msgstr "Bộ quản lý"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:280
+#: gedit/dialogs/gedit-preferences-dialog.c:221
 msgid "Editor"
 msgstr "Trình hiệu chỉnh"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:282
-#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:217
-#: gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "In"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:284
+#: gedit/dialogs/gedit-preferences-dialog.c:223
 msgid "Plugins"
 msgstr "Plugin"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:356
+#: gedit/dialogs/gedit-preferences-dialog.c:295
 msgid "Cat_egories:"
 msgstr "_Phân loại:"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:378
+#: gedit/dialogs/gedit-preferences-dialog.c:317
 msgid "Preferences"
 msgstr "Thông số"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:618
+#: gedit/dialogs/gedit-preferences-dialog.c:557
 msgid "Categories"
 msgstr "Phân loại"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:853
+#: gedit/dialogs/gedit-preferences-dialog.c:787
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Nhấn nút này để chọn font được dùng bởi bộ soạn thảo"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:856
+#: gedit/dialogs/gedit-preferences-dialog.c:790
 msgid "Push this button to configure text color"
 msgstr "Nhấn nút này để cấu hình màu chữ"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:858
+#: gedit/dialogs/gedit-preferences-dialog.c:792
 msgid "Push this button to configure background color"
 msgstr "Nhấn nút này để cấu hình màu nền"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:860
+#: gedit/dialogs/gedit-preferences-dialog.c:794
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Nhấn nút này để cấu hình màu hiển thị cho văn bản được chọn"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:863
+#: gedit/dialogs/gedit-preferences-dialog.c:797
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Nhấn nút này để cấy hình màu đánh dấu cho văn bản được chọn"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1884
-msgid "Push this button to select the font to be used to print the body"
-msgstr "Nhấn nút này để chọn font được dùng khi in phần thân"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:1886
-msgid "Push this button to select the font to be used to print the headers"
-msgstr "Nhấn nút này để chọn font cần dùng khi in tiêu đề"
-
-#: gedit/dialogs/gedit-preferences-dialog.c:2335
-msgid "Encodings"
-msgstr "Bảng mã"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -715,241 +688,146 @@ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ &amp; Màu</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Số dòng</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:7
+#: gedit/dialogs/gedit-preferences.glade2.h:6
 msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Trình quản lý</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Mở</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Trang</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:10
+#: gedit/dialogs/gedit-preferences.glade2.h:7
 msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Lưu</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:11
+#: gedit/dialogs/gedit-preferences.glade2.h:8
 msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:12
+#: gedit/dialogs/gedit-preferences.glade2.h:9
 msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Hoàn tác</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:13
+#: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
 msgstr "<span weight=\"bold\" size=\"x-large\">Chế độ ngắt dòng</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Màu</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Khi đang lưu một tập tin mới...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Khi đang lưu tập tin đang tồn tại...</span>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Thêm bảng mã mới"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Luôn dùng bảng mã UTF-8 (nhanh hơn)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Luôn dùng bảng mã _UTF-8 (nhanh hơn)"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
 msgstr "Tạo _bản sao của tập tin trước khi lưu"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:14
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Không xẻ các từ ra quá hai dòng"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 msgid "Editor _font: "
 msgstr "Phông chữ của trình biên soạn: "
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 msgid "Enable _auto indentation"
 msgstr "Chạy tự _động thụt lề"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Bật chạy ngắt dòng văn bản"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Fonts & Colors"
 msgstr "Font & Màu sắc"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 msgid "Insert _spaces instead of tabs"
 msgstr "Chèn các dấu trống thay cho các tab"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "LOGO"
 msgstr "LOGO"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "S_ố dòng:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Line numbers"
 msgstr "Số dòng"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Chuyển xuống"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Chuyển lên"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "He_ader trang:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Pick the background color"
 msgstr "Chọn màu nền"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Pick the selected text color"
 msgstr "Chọn màu chữ trong vùng được chọn"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Pick the selection color"
 msgstr "Chọn màu vùng chọn"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the text color"
 msgstr "Chọn màu chữ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Plugin manager"
 msgstr "Bộ quản lý Plugin"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "In số _dòng mỗi"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Font in"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Loại bỏ một bảng mã"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Se_lection color:"
 msgstr "Màu _vùng chọn:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Selecte_d text color:"
 msgstr "Màu chữ được _chọn:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Set _tabs width equivalent to"
 msgstr "Đặt độ rộng các _tab tương đương với"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Set limit on _undo actions to"
 msgstr "Đặt giới hạn mức hoàn lại là"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "U_se default theme colors"
 msgstr "_Dùng màu theme mặc định"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "Dùng bảng mã n_guyên thủy nếu có thể"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Dùng bảng mã locale hiện thời khi có thể"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Dùng bảng mã _locale hiện thời khi có thể"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Wrap mode"
 msgstr "Chế độ cuốn"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:54
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "_Autosave current file every"
 msgstr "_Tự động lưu tập tin hiện thời mỗi"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:55
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "_Background color:"
 msgstr "Màu _nền:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:56
-#: gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "Th_ân:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:57
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "_Display line numbers"
 msgstr "_Hiện số dòng"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:58
-#: gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "_In header trang"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:59
-#: gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Khôi phục phông chữ mặc định"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "Bảng mã được h_ỗ trợ:"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:61
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "_Text color:"
 msgstr "Màu _chữ:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:62
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Use default theme font"
 msgstr "_Dùng font theme mặc định"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:63
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "_action(s)"
 msgstr "_hành động"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:64
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_minutes"
 msgstr "ph_út"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:65
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "character(s)"
 msgstr "ký tự"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr "d_òng"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -967,7 +845,7 @@ msgstr "Xem trước"
 msgid "_Modify preview phrase..."
 msgstr "_Thay đổi pha xem trước..."
 
-#: gedit/dialogs/gnome-print-font-dialog.c:247
+#: gedit/dialogs/gnome-print-font-dialog.c:245
 msgid "Font Selection"
 msgstr "Chọn font"
 
@@ -1052,6 +930,10 @@ msgstr "<b>Số dòng</b>"
 msgid "<b>Text Wrapping</b>"
 msgstr "<b>Cuộn chữ</b>"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Font"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:7
 msgid "General"
 msgstr "Chung"
@@ -1072,6 +954,10 @@ msgstr "In số _dòng"
 msgid "Print s_yntax highlighting"
 msgstr "In tô _sáng cú pháp"
 
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "Th_ân:"
+
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
 msgid "_Line numbers:"
 msgstr "Số _dòng:"
@@ -1079,6 +965,14 @@ msgstr "Số _dòng:"
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
 msgid "_Number every"
 msgstr "Số _dòng mỗi"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "_In header trang"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Khôi phục phông chữ mặc định"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
 msgid "lines"
@@ -1166,59 +1060,59 @@ msgstr "Nhập _vị trí (URI) của tập tin cần mở:"
 msgid "Open from URI"
 msgstr "Mở từ URI"
 
-#: gedit/gedit-commands.c:562
+#: gedit/gedit-commands.c:564
 msgid "translator_credits"
 msgstr "Nguyễn Thái Ngọc Duy"
 
-#: gedit/gedit-commands.c:587
+#: gedit/gedit-commands.c:589
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:591
+#: gedit/gedit-commands.c:593
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit là trình soạn thảo văn bản nhỏ gọn của Gnome"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
 msgid "Untitled"
 msgstr "Không tựa"
 
-#: gedit/gedit-document.c:599 gedit/gedit-document.c:646
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
 msgid "Invalid file name"
 msgstr "Tên tập tin không hợp lệ"
 
-#: gedit/gedit-document.c:812 gedit/gedit-document.c:916
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Dữ liệu UTF-8 không hợp lệ"
 
-#: gedit/gedit-document.c:1208
+#: gedit/gedit-document.c:1210
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Không thể đọc thông tin liên kết biểu tượng của %s"
 
-#: gedit/gedit-document.c:1254
+#: gedit/gedit-document.c:1256
 msgid "The file has too many symbolic links."
 msgstr "Tập tin có quá nhiều liên kết biểu tượng."
 
-#: gedit/gedit-document.c:1310
+#: gedit/gedit-document.c:1312
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit không thể xử lý %s: địa điểm đang trong chế độ ghi."
 
-#: gedit/gedit-document.c:1317
+#: gedit/gedit-document.c:1319
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit không thể xử lý loại địa điểm này trong chế độ ghi."
 
-#: gedit/gedit-document.c:1330
+#: gedit/gedit-document.c:1332
 msgid "Invalid filename."
 msgstr "Tên tập tin không hợp lệ."
 
-#: gedit/gedit-document.c:1442
+#: gedit/gedit-document.c:1444
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1226,7 +1120,7 @@ msgstr ""
 "Không đủ chỗ trên đĩa để lưu tập tin.\n"
 "Vui lòng giải phóng thêm chỗ trống trên đĩa rồi thử lại."
 
-#: gedit/gedit-document.c:1447
+#: gedit/gedit-document.c:1449
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1235,11 +1129,11 @@ msgstr ""
 "Đĩa được dùng để lưu tập tin có giới hạn về kích thước tập tin. Vui lòng lưu "
 "một tập tin nhỏ hơn hoặc lưu tập tin này vào đĩa không đặt ra giới hạn trên."
 
-#: gedit/gedit-document.c:1491
+#: gedit/gedit-document.c:1493
 msgid "Could not create a backup file."
 msgstr "Không thể tạo tập tin sao lưu."
 
-#: gedit/gedit-document.c:1611
+#: gedit/gedit-document.c:1613
 msgid "It is not possible to revert an Untitled document"
 msgstr "Không thể hoàn nguyên tài liệu Untitled"
 
@@ -1248,123 +1142,123 @@ msgid "Auto Detected"
 msgstr "Tự động dò"
 
 #: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:244
+#: gedit/gedit-encodings-option-menu.c:245
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Locale hiện thời (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:305
+#: gedit/gedit-encodings-option-menu.c:306
 msgid "Add or _Remove..."
 msgstr "Thêm hoặc _Xóa..."
 
-#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:168
-#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
-#: gedit/gedit-encodings.c:174
+#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
+#: gedit/gedit-encodings.c:182
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:163
-#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:247
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
+#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
 msgid "Western"
 msgstr "Western"
 
-#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
-#: gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:251
 msgid "Central European"
 msgstr "Central European"
 
-#: gedit/gedit-encodings.c:141
+#: gedit/gedit-encodings.c:149
 msgid "South European"
 msgstr "South European"
 
-#: gedit/gedit-encodings.c:143 gedit/gedit-encodings.c:159
-#: gedit/gedit-encodings.c:257
+#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
+#: gedit/gedit-encodings.c:265
 msgid "Baltic"
 msgstr "Baltic"
 
-#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:208
-#: gedit/gedit-encodings.c:221 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:227 gedit/gedit-encodings.c:245
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
+#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
+#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
 msgid "Cyrillic"
 msgstr "Cyrillic"
 
-#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
-#: gedit/gedit-encodings.c:255
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
+#: gedit/gedit-encodings.c:263
 msgid "Arabic"
 msgstr "Ả Rập"
 
-#: gedit/gedit-encodings.c:149 gedit/gedit-encodings.c:249
+#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
 msgid "Greek"
 msgstr "Hy Lạp"
 
-#: gedit/gedit-encodings.c:151
+#: gedit/gedit-encodings.c:159
 msgid "Hebrew Visual"
 msgstr "Hebrew Visual"
 
-#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:212
-#: gedit/gedit-encodings.c:253
+#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
+#: gedit/gedit-encodings.c:261
 msgid "Hebrew"
 msgstr "Do Thái"
 
-#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:210
-#: gedit/gedit-encodings.c:251
+#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:259
 msgid "Turkish"
 msgstr "Thổ Nhĩ Kỳ"
 
-#: gedit/gedit-encodings.c:157
+#: gedit/gedit-encodings.c:165
 msgid "Nordic"
 msgstr "Nordic"
 
-#: gedit/gedit-encodings.c:161
+#: gedit/gedit-encodings.c:169
 msgid "Celtic"
 msgstr "Celtic"
 
-#: gedit/gedit-encodings.c:165
+#: gedit/gedit-encodings.c:173
 msgid "Romanian"
 msgstr "Romanian"
 
-#: gedit/gedit-encodings.c:177
+#: gedit/gedit-encodings.c:185
 msgid "Armenian"
 msgstr "Armenian"
 
-#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:181
-#: gedit/gedit-encodings.c:190
+#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
+#: gedit/gedit-encodings.c:198
 msgid "Chinese Traditional"
 msgstr "Trung Hoa Phồn Thể"
 
-#: gedit/gedit-encodings.c:183
+#: gedit/gedit-encodings.c:191
 msgid "Cyrillic/Russian"
 msgstr "Cyrillic/Russian"
 
-#: gedit/gedit-encodings.c:186 gedit/gedit-encodings.c:217
-#: gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:240
 msgid "Japanese"
 msgstr "Nhật"
 
-#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:219
-#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:238
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
 msgid "Korean"
 msgstr "Hàn Quốc"
 
-#: gedit/gedit-encodings.c:193 gedit/gedit-encodings.c:195
-#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
+#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
 msgid "Chinese Simplified"
 msgstr "Trung Hoa Giản Thể"
 
-#: gedit/gedit-encodings.c:199
+#: gedit/gedit-encodings.c:207
 msgid "Georgian"
 msgstr "Georgian"
 
-#: gedit/gedit-encodings.c:229
+#: gedit/gedit-encodings.c:237
 msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillic/Ukrainian"
 
-#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:240
-#: gedit/gedit-encodings.c:259
+#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:267
 msgid "Vietnamese"
 msgstr "Việt Nam"
 
-#: gedit/gedit-encodings.c:236
+#: gedit/gedit-encodings.c:244
 msgid "Thai"
 msgstr "Thái"
 
@@ -1614,6 +1508,10 @@ msgstr "Không thể khởi động bộ quản lý thông số."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Yêu cầu `%s' là `%s' cho khóa %s"
 
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "In"
+
 #: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
 msgstr "Dòng"
@@ -1741,6 +1639,10 @@ msgstr "Chuyển tài liệu hiện thời vào cửa sổ mới"
 msgid "New"
 msgstr "Mới"
 
+#: gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Mở"
+
 #: gedit/gedit-ui.xml.h:28
 msgid "Open Location..."
 msgstr "Mở địa điểm..."
@@ -1864,7 +1766,8 @@ msgstr "Chọn toàn bộ tài liệu"
 #: gedit/gedit-ui.xml.h:62
 msgid ""
 "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-msgstr "Chỉnh kiểu nút thanh công cụ như Tùy thích Menu và Thanh công cụ của desktop"
+msgstr ""
+"Chỉnh kiểu nút thanh công cụ như Tùy thích Menu và Thanh công cụ của desktop"
 
 #: gedit/gedit-ui.xml.h:63
 msgid "Setup the page settings"
@@ -2174,9 +2077,11 @@ msgid ""
 "selecting a character coding in the 'Open File...' (or 'Open Location') "
 "dialog."
 msgstr ""
-"Không thể mở tập tin \"%s\" vì gedit không thể tự động xác định bảng mã của tập tin.\n"
+"Không thể mở tập tin \"%s\" vì gedit không thể tự động xác định bảng mã của "
+"tập tin.\n"
 "\n"
-"Vui lòng kiểm tra để chắc chắn bạn không mở một tập tin nhị phân, và thử chọn bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở địa điểm')"
+"Vui lòng kiểm tra để chắc chắn bạn không mở một tập tin nhị phân, và thử "
+"chọn bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở địa điểm')"
 
 #: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
 #, c-format
@@ -2189,7 +2094,9 @@ msgid ""
 msgstr ""
 "Không thể mở tập tin \"%s\" dùng mã ký tự %s\n"
 "\n"
-"Vui lòng kiểm tra xem bạn không phải đang mở một tập tin nhị phân, và bạn đã chọn đúng bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở vị trí'). Sau đó hãy thử lại."
+"Vui lòng kiểm tra xem bạn không phải đang mở một tập tin nhị phân, và bạn đã "
+"chọn đúng bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở vị trí'). Sau đó "
+"hãy thử lại."
 
 #: gedit/gedit-utils.c:662
 #, c-format
@@ -3080,6 +2987,78 @@ msgstr "Chép vùng chữ được chọn vào clipboard"
 #: viewer/gedit-viewer-ui.xml.h:2
 msgid "_Copy Text"
 msgstr "_Sao chép văn bản"
+
+#~ msgid "Page"
+#~ msgstr "Trang"
+
+#~ msgid "Push this button to select the font to be used to print the body"
+#~ msgstr "Nhấn nút này để chọn font được dùng khi in phần thân"
+
+#~ msgid "Push this button to select the font to be used to print the headers"
+#~ msgstr "Nhấn nút này để chọn font cần dùng khi in tiêu đề"
+
+#~ msgid "Encodings"
+#~ msgstr "Bảng mã"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Mở</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Trang</span>"
+
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">Khi đang lưu một tập tin mới...</span>"
+
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr "<span weight=\"bold\">Khi đang lưu tập tin đang tồn tại...</span>"
+
+#~ msgid "Add new encodings"
+#~ msgstr "Thêm bảng mã mới"
+
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "Luôn dùng bảng mã UTF-8 (nhanh hơn)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Luôn dùng bảng mã _UTF-8 (nhanh hơn)"
+
+#~ msgid "Line _numbers:"
+#~ msgstr "S_ố dòng:"
+
+#~ msgid "Move down"
+#~ msgstr "Chuyển xuống"
+
+#~ msgid "Move up"
+#~ msgstr "Chuyển lên"
+
+#~ msgid "Page he_aders:"
+#~ msgstr "He_ader trang:"
+
+#~ msgid "Print _line numbers every"
+#~ msgstr "In số _dòng mỗi"
+
+#~ msgid "Print fonts"
+#~ msgstr "Font in"
+
+#~ msgid "Remove an encoding"
+#~ msgstr "Loại bỏ một bảng mã"
+
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "Dùng bảng mã n_guyên thủy nếu có thể"
+
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Dùng bảng mã locale hiện thời khi có thể"
+
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Dùng bảng mã _locale hiện thời khi có thể"
+
+#~ msgid "_Supported encodings:"
+#~ msgstr "Bảng mã được h_ỗ trợ:"
+
+#~ msgid "li_ne(s)"
+#~ msgstr "d_òng"
 
 #~ msgid "Show Cursor Position"
 #~ msgstr "Hiện vị trí con trỏ"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.116.0\n"
-"POT-Creation-Date: 2003-01-21 04:49+0100\n"
+"POT-Creation-Date: 2003-08-26 23:48+0200\n"
 "PO-Revision-Date: 2003-01-26 09:03+0100\n"
 "Last-Translator: Roberto Rosselli Del Turco <rosselli@ling.unipi.it>\n"
 "Language-Team: italiano <tp@lists.linux.it>\n"
@@ -16,11 +16,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
-#: data/GNOME_Gedit.server.in.h:1
+#: data/GNOME_Gedit.server.in.in.h:1
+msgid "Gedit View"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:2
+msgid "Gedit View."
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+msgid "Gedit viewer factory"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:4
+#, fuzzy
+msgid "Source"
+msgstr "Ordina"
+
+#: data/GNOME_Gedit.server.in.in.h:5
 msgid "gedit application"
 msgstr "Applicazione gedit"
 
-#: data/GNOME_Gedit.server.in.h:2
+#: data/GNOME_Gedit.server.in.in.h:6
 msgid "gedit automation factory"
 msgstr ""
 
@@ -28,7 +45,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Modifica file di testo"
 
-#: data/gedit.desktop.in.h:2 src/gedit2.c:340
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "Editor di testo"
 
@@ -37,26 +54,31 @@ msgid ""
 "A custom font that will be used for the editing area. This will only take "
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
-"Un font scelto dall'utente che verrà utilizzato nell'area di editing. "
-"Verrà utilizzato soltanto se l'opzione «Usa font predefinito» è disabilitata."
+"Un font scelto dall'utente che verrà utilizzato nell'area di editing. Verrà "
+"utilizzato soltanto se l'opzione «Usa font predefinito» è disabilitata."
 
 #: data/gedit.schemas.in.h:2
+#, fuzzy
+msgid "Auto Detected Encodings"
+msgstr "C_odifiche supportate:"
+
+#: data/gedit.schemas.in.h:3
 msgid "Auto Save"
 msgstr "Salvataggio automatico"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save Interval"
 msgstr "Intervallo per il salvataggio automatico"
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "Auto indent"
 msgstr "Rientro automatico"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:6
 msgid "Background Color"
 msgstr "Colore di sfondo"
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:7
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -64,7 +86,7 @@ msgstr ""
 "Colore di sfondo per il testo selezionato nell'area di editing. Verrà "
 "utilizzato soltanto se l'opzione «Usa colori predefiniti» è disabilitata."
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -72,37 +94,36 @@ msgstr ""
 "Colore di sfondo per il testo non selezionato nell'area di editing. Verrà "
 "utilizzato soltanto se l'opzione «Usa colori predefiniti» è disabilitata."
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:9
 msgid "Backup Copy Extension"
 msgstr "Estensione della copia di backup"
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:10
 msgid "Body Font for Printing"
 msgstr "Font del corpo del testo per la stampa"
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:11
 msgid "Create Backup Copies"
 msgstr "Crea copie di backup"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:12
 msgid "Display Line Numbers"
 msgstr "Mostra i numeri di riga"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:13
 msgid "Editor Font"
 msgstr "Font dell'editor"
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:14
 msgid "Encoding for Saving"
 msgstr "Codifica per il salvataggio"
 
-#: data/gedit.schemas.in.h:14 src/dialogs/gedit-preferences-dialog.c:2292
-#: src/dialogs/gedit-encodings-dialog.c:257
-#: src/dialogs/gedit-encodings-dialog.glade2.h:2
-msgid "Encodings"
-msgstr "Codifiche"
-
 #: data/gedit.schemas.in.h:15
+#, fuzzy
+msgid "Encodings shown in menu"
+msgstr "Codifica per il salvataggio"
+
+#: data/gedit.schemas.in.h:16
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -110,7 +131,7 @@ msgstr ""
 "Estensione o suffisso da utilizzare per i nomi dei file di backup. Verrà "
 "utilizzata soltanto se l'opzione «Crea copie di backup» è abilitata."
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:17
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -118,7 +139,7 @@ msgstr ""
 "Colore in primo piano per il testo selezionato nell'area di editing. Verrà "
 "utilizzato soltanto se l'opzione «Usa colori predefiniti» è disabilitata."
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -127,11 +148,11 @@ msgstr ""
 "Verrà utilizzato soltanto se l'opzione «Usa colori predefiniti» è "
 "disabilitata."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:19
 msgid "Header Font for Printing"
 msgstr "Font dell'intestazione per la stampa"
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:20
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -141,35 +162,33 @@ msgstr ""
 "al momento della stampa di un documento. In caso contrario, gedit stamperà i "
 "numeri di riga ogni n righe, dove n corrisponde al valore indicato."
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:21
 msgid "Insert spaces"
 msgstr "Inserisci spazi"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:22
 msgid "Line Number Font for Printing"
 msgstr "Font del numero di riga per la stampa"
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:23
 msgid "Line Wrapping Mode"
 msgstr "Modalità a capo automatico"
 
-#: data/gedit.schemas.in.h:23
-msgid ""
-"List of encodings used by gedit for reading files not encoded in UTF-8 or in "
-"the current locale encoding."
-msgstr ""
-"Lista delle codifiche usate da gedit per leggere i file non codificati con "
-"UTF-8 o nella codifica della localizzazione attuale."
-
 #: data/gedit.schemas.in.h:24
+msgid ""
+"List of encodings shown in Character Coding menu in open/save file selector. "
+"Only recognized encodings are used."
+msgstr ""
+
+#: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
 msgstr "Numero massimo di file recenti."
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:26
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "N. massimo di azioni che gedit potrà annullare e ripetere."
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:27
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -178,35 +197,41 @@ msgstr ""
 "modificati. Questo avverrà soltanto se l'opzione «Salvataggio automatico» è "
 "abilitata."
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:28
 msgid "Print Header"
 msgstr "Intestazione di stampa"
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:29
 msgid "Print Line Numbers"
 msgstr "Stampa numeri di riga"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:30
+msgid "Print Syntax Highlighting"
+msgstr ""
+
+#: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
 msgstr "Stampa in modalità a capo automatico"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Selected Text Color"
 msgstr "Colore del testo selezionato"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Selection Color"
 msgstr "Colore della selezione"
 
-#: data/gedit.schemas.in.h:32
-msgid "Show Cursor Position"
-msgstr "Mostra la posizione del cursore"
-
-#: data/gedit.schemas.in.h:33
-msgid "Show Overwrite Mode"
-msgstr "Mostra la modalità sovrascrittura"
-
 #: data/gedit.schemas.in.h:34
+#, fuzzy
+msgid ""
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
+msgstr ""
+"Lista delle codifiche usate da gedit per leggere i file non codificati con "
+"UTF-8 o nella codifica della localizzazione attuale."
+
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -215,7 +240,7 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -224,13 +249,14 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:36
-msgid "Specifies the font to use for a document's body when printing documents."
+#: data/gedit.schemas.in.h:37
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Specifica il font usato per il corpo del testo di un documento al momento "
 "della stampa."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -239,7 +265,7 @@ msgstr ""
 "Verrà utilizzato soltanto se il valore impostato per l'opzione «Stampa il "
 "numeri di riga» è abilitata."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:39
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -248,7 +274,7 @@ msgstr ""
 "stampa. Verrà utilizzato soltanto se l'opzione «Intestazione di stampa» è "
 "abilitata."
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -256,7 +282,7 @@ msgstr ""
 "Specifica il numero massimo di file aperti di recente che verranno mostrati "
 "nel sotto-menu «File recenti»."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -264,11 +290,11 @@ msgstr ""
 "Specifica il numero di spazi che verranno mostrati al posto dei caratteri "
 "tab."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:42
 msgid "Status Bar is Visible"
 msgstr "La barra di stato è visibile"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -278,15 +304,15 @@ msgid ""
 "mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:44
 msgid "Tab Size"
 msgstr "Dimensione del tab"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:45
 msgid "Text Color"
 msgstr "Colore del testo"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:46
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -301,27 +327,27 @@ msgid ""
 "appear exactly as mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:47
 msgid "Toolbar Buttons Style"
 msgstr "Stile dei pulsanti della barra degli strumenti"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:48
 msgid "Toolbar is Visible"
 msgstr "La barra degli strumenti è visibile"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:49
 msgid "Undo Actions Limit"
 msgstr "Limite per le azioni che possono essere annullate"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:50
 msgid "Use Default Colors"
 msgstr "Usa i colori predefiniti"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:51
 msgid "Use Default Font"
 msgstr "Usa il font predefinito"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -330,57 +356,50 @@ msgstr ""
 "Attiva il salvataggio automatico dopo un certo intervallo di tempo. Tale "
 "intervallo è definito in «Intervallo per il salvataggio automatico»."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:53
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
-"Attiva la creazione di copie di backup per i file che si salvano. L'estensione "
-"dei file di backup può essere configurata per mezzo dell'opzione «Estensione "
-"della copia di backup»."
+"Attiva la creazione di copie di backup per i file che si salvano. "
+"L'estensione dei file di backup può essere configurata per mezzo "
+"dell'opzione «Estensione della copia di backup»."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:54
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Attiva la visualizzazione dei numeri di riga nell'area di editing."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:55
 msgid "Whether gedit should enable auto indentation."
 msgstr "Attiva l'indentazione automatica."
 
-#: data/gedit.schemas.in.h:55
-msgid "Whether gedit should include a document header when printing documents."
-msgstr "Abilita la creazione di un'intestazione per i documenti che verranno stampati."
-
 #: data/gedit.schemas.in.h:56
+msgid "Whether gedit should include a document header when printing documents."
+msgstr ""
+"Abilita la creazione di un'intestazione per i documenti che verranno "
+"stampati."
+
+#: data/gedit.schemas.in.h:57
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Abilita l'inserimento di spazi al posto dei tab."
 
-#: data/gedit.schemas.in.h:57
-msgid "Whether the status bar at the bottom of editing windows should be visible."
-msgstr "Rende visibile o meno la barra di stato in fondo alle finestre di editing."
-
 #: data/gedit.schemas.in.h:58
-msgid ""
-"Whether the status bar should show the cursor position in editing windows. "
-"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
-"effect."
+#, fuzzy
+msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
-"Attiva la visualizzazione della posizione del cursore nella barra di stato. "
-"Accertarsi di aver abilitato l'opzione «La barra di stato è visibile» se "
-"si intende attivare questa."
+"Abilita la creazione di un'intestazione per i documenti che verranno "
+"stampati."
 
 #: data/gedit.schemas.in.h:59
 msgid ""
-"Whether the status bar should show the insert/overwrite mode in editing "
-"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
-"to take effect."
+"Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
-"Attiva la visualizzazione della modalità in uso (inserimento o sovrascrittura) nella barra di stato. Accertarsi di aver abilitato l'opzione «La barra di "
-"stato è visibile» se si intende attivare questa."
+"Rende visibile o meno la barra di stato in fondo alle finestre di editing."
 
 #: data/gedit.schemas.in.h:60
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr "Rende visibile o meno la barra degli strumenti nelle finestre di editing."
+msgstr ""
+"Rende visibile o meno la barra degli strumenti nelle finestre di editing."
 
 #: data/gedit.schemas.in.h:61
 msgid ""
@@ -389,11 +408,10 @@ msgid ""
 "specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
 "\", and \"Selection Color\" options."
 msgstr ""
-"Abilita l'uso dei colori predefiniti del sistema per l'area di editing. "
-"Se questa opzione è disabilitata, allora i colori dell'area di editing "
-"saranno quelli specificati per mezzo delle opzioni «Colore di sfondo», "
-"«Colore del testo», «Colore del testo selezionato» e «Colore della "
-"selezione»."
+"Abilita l'uso dei colori predefiniti del sistema per l'area di editing. Se "
+"questa opzione è disabilitata, allora i colori dell'area di editing saranno "
+"quelli specificati per mezzo delle opzioni «Colore di sfondo», «Colore del "
+"testo», «Colore del testo selezionato» e «Colore della selezione»."
 
 #: data/gedit.schemas.in.h:62
 msgid ""
@@ -406,259 +424,2034 @@ msgstr ""
 "allora il font indicato per mezzo dell'opzione «Font dell'editor» verrà "
 "utilizzato invece del font di sistema."
 
-#: plugins/ASCII/ascii.c:43
-msgid "_ASCII Table"
-msgstr "Tabella _ASCII"
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
+#, c-format
+msgid "Activate %s"
+msgstr "Mostra %s"
 
-#: plugins/ASCII/ascii.c:46
-msgid "Pop-up a dialog containing an ASCII Table"
-msgstr "Mostra una finestra di dialogo contenente la tabella ASCII"
+#: gedit/dialogs/gedit-dialog-goto-line.c:160
+msgid "Go to Line"
+msgstr "Vai alla riga"
 
-#: plugins/ASCII/ascii.c:303
-msgid "Char"
-msgstr "Carattere"
+#. Add Goto Line button
+#: gedit/dialogs/gedit-dialog-goto-line.c:170
+msgid "_Go to Line"
+msgstr "Vai alla ri_ga"
 
-#: plugins/ASCII/ascii.c:310
-msgid "Dec#"
-msgstr "Dec#"
+#: gedit/dialogs/gedit-dialog-goto-line.c:186
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
+#: plugins/spell/gedit-spell-language-dialog.c:233
+#, c-format
+msgid "Could not find the required widgets inside %s."
+msgstr "Impossibile trovare i widget richiesti all'interno di %s."
 
-#: plugins/ASCII/ascii.c:317
-msgid "Hex#"
-msgstr "Hex#"
+#: gedit/dialogs/gedit-dialog-replace.c:136
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
+#, c-format
+msgid "The text \"%s\" was not found."
+msgstr "La stringa «%s» non è stata trovata."
 
-#: plugins/ASCII/ascii.c:324
-msgid "Name"
-msgstr "Nome"
+#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
+#: gedit/gedit-ui.xml.h:46
+msgid "Replace"
+msgstr "Sostituisci"
 
-#: plugins/ASCII/ascii.c:369
-msgid "ASCII Table"
-msgstr "Tabella ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:279
+msgid "Replace _All"
+msgstr "Sostituisci _tutti"
 
-#: plugins/ASCII/ascii.c:382 plugins/ASCII/asciitable.glade2.h:2
-msgid "_Insert char"
-msgstr "_Inserisci carattere"
+#. Add Replace button
+#: gedit/dialogs/gedit-dialog-replace.c:282
+#: gedit/gedit-file-selector-util.c:131
+msgid "_Replace"
+msgstr "Sostit_uisci"
 
-#: plugins/ASCII/asciitable.glade2.h:1
-#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:1
-msgid "ASCII table"
-msgstr "Tabella ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
+msgid "Find"
+msgstr "Trova"
 
-#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:2
-msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr "Questo plugin mostra una finestra di dialogo che contiene una tabella ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:1149
+#, fuzzy, c-format
+msgid "Found and replaced %d occurrences."
+msgstr "Trovate e sostituite %d occorrenze"
 
-#. AFAIK, all cvs commit messages start with this
-#: plugins/cvschangelog/cvschangelog.c:49
-msgid "Open CVS Chan_geLogs"
-msgstr "Apri il changelog del CVS"
+#: gedit/dialogs/gedit-dialog-uri.c:87
+msgid "Open Location"
+msgstr "Apri posizione"
 
-#: plugins/cvschangelog/cvschangelog.c:52
-msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr "Cerca dei changelog nel documento corrente e li apre"
-
-#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:1
-msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr "Un plugin che apre i changelo trovati nei messaggi di commit del CVS"
-
-#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:2
-msgid "CVS ChangeLog"
-msgstr "Changelog del CVS"
-
-#: plugins/diff/diff.c:65
-msgid "Co_mpare Files..."
-msgstr "Co_nfronta File..."
-
-#: plugins/diff/diff.c:68
-msgid "Makes a diff file from two documents or files"
-msgstr "Crea un file diff tra due documenti o file"
-
-#. Create the dialog
-#: plugins/diff/diff.c:271 plugins/diff/diff.gedit-plugin.desktop.in.h:1
-msgid "Compare Files"
-msgstr "Confronta file"
-
-#: plugins/diff/diff.c:285
-msgid "C_ompare"
-msgstr "C_onfronta"
-
-#: plugins/diff/diff.c:513
-msgid "Executed command"
-msgstr "Comando eseguito"
-
-#: plugins/diff/diff.c:652
-msgid "The two documents you selected are the same."
-msgstr "I due documenti selezionati coincidono."
-
-#: plugins/diff/diff.c:660
-msgid ""
-"The \"first\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
+#: gedit/dialogs/gedit-encodings-dialog.c:76
+#, c-format
+msgid "There was an error displaying help: %s"
 msgstr ""
-"Il primo file selezionato non esiste.\n"
-"\n"
-"Selezionare un file valido."
 
-#: plugins/diff/diff.c:669
-msgid ""
-"The \"second\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
+#: gedit/dialogs/gedit-encodings-dialog.c:381
+#: gedit/dialogs/gedit-encodings-dialog.c:449
+msgid "_Description"
+msgstr "_Descrizione"
+
+#: gedit/dialogs/gedit-encodings-dialog.c:390
+#: gedit/dialogs/gedit-encodings-dialog.c:458
+#, fuzzy
+msgid "_Encoding"
+msgstr "Codifiche"
+
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+#, fuzzy
+msgid "A_vailable encodings:"
+msgstr "Aggiungi nuove codifiche"
+
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+#, fuzzy
+msgid "Character codings"
+msgstr "carattere/i"
+
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+msgid "E_ncodings shown in menu:"
 msgstr ""
-"Il secondo file selezionato non esiste.\n"
-"\n"
-"Selezionare un file valido."
 
-#: plugins/diff/diff.c:677
-msgid "The two files you selected are the same."
-msgstr "I due file selezionati coincidono"
-
-#: plugins/diff/diff.c:695
-msgid "The \"first\" document contains no text."
-msgstr "Il primo documento non contiene testo"
-
-#: plugins/diff/diff.c:730
-msgid "The \"second\" document contains no text."
-msgstr "Il secondo documento non contiene testo."
-
-#. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:756
-msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"gedit could not create a temporary file."
+#: gedit/dialogs/gedit-page-setup-dialog.c:490
+msgid "Body font picker"
 msgstr ""
-"Impossibile confrontare i documenti selezionati.\n"
-"\n"
-"gedit non può creare un file temporaneo."
 
-#: plugins/diff/diff.c:776 plugins/diff/diff.c:789
+#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#, fuzzy
 msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"Error executing the diff command."
+"Push this button to select the font to be used to print the body of the "
+"document"
 msgstr ""
-"Impossibile confrontare i documenti selezionati.\n"
-"\n"
-"Errore durante l'esecuzione del comando diff."
+"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
+"stampare il corpo del testo"
 
-#: plugins/diff/diff.c:811
-msgid "No differences were found between the selected documents."
-msgstr "Non sono state rilevate differenze fra i documenti selezionati."
+#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#, fuzzy
+msgid "Page headers font picker"
+msgstr "Intestazioni di _pagina:"
 
-#: plugins/diff/diff.c:852
+#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#, fuzzy
 msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"The result contains invalid UTF-8 data."
+"Push this button to select the font to be used to print the page headers"
 msgstr ""
-"Impossibile confrontare i documenti selezionati.\n"
-"\n"
-"Il risultato contiene dati UTF-8 non validi."
+"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
+"stampare le intestazioni"
 
-#: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
-#: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
-#: src/dialogs/replace.glade2.h:1 src/dialogs/uri.glade2.h:1
+#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#, fuzzy
+msgid "Line numbers font picker"
+msgstr "Numeri di riga"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:495
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr ""
+"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
+"stampare le i numeri di riga"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+msgid "Could not find '"
+msgstr ""
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+#: gedit/dialogs/gedit-page-setup-dialog.c:629
+msgid ""
+"page-setup-dialog.glade2'.\n"
+"\n"
+"Reinstall gedit."
+msgstr ""
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:628
+#, fuzzy
+msgid "Could not find the required widgets inside '"
+msgstr "Impossibile trovare i widget richiesti all'interno di %s."
+
+#: gedit/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Plugin"
+
+#: gedit/dialogs/gedit-plugin-manager.c:54
+#, fuzzy
+msgid "Enabled"
+msgstr "Abilita sillabazione automatica"
+
+#: gedit/dialogs/gedit-plugin-manager.c:507
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Impossibile trovare plugin-manager.glade2, reinstallare gedit.\n"
+
+#: gedit/dialogs/gedit-plugin-manager.c:525
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"File glade per il gestore di plugin non valido -- impossibile trovare tutti "
+"i widget.\n"
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:78
+#: gedit/dialogs/program-location-dialog.glade2.h:2
+msgid "Set program location..."
+msgstr "Configurazione del percorso del programma..."
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:106
+#, c-format
+msgid ""
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
+"\n"
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr ""
+"Il plugin «%s» usa un programma esterno, chiamato <tt>%s</tt>, per eseguire "
+"questa operazione.\n"
+"\n"
+"Indicare il percorso corretto del programma <tt>%s</tt>."
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:152
+msgid "The selected file is not executable."
+msgstr "Il file selezionato non è eseguibile."
+
+#: gedit/dialogs/gedit-preferences-dialog.c:197
+msgid "Font & Colors"
+msgstr "Font e colori"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
+msgid "Tabs"
+msgstr "Tab"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:200
+msgid "Wrap Mode"
+msgstr "A capo automatico"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:201
+msgid "Auto Indent"
+msgstr "Rientro automatico"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:202
+msgid "Line Numbers"
+msgstr "Numeri di riga"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
+msgid "Save"
+msgstr "Salva"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "Annulla"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:213
+msgid "Manager"
+msgstr "Gestione"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:221
+msgid "Editor"
+msgstr "Editor"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:223
+msgid "Plugins"
+msgstr "Plugin"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:295
+msgid "Cat_egories:"
+msgstr "Cat_egorie:"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:317
+msgid "Preferences"
+msgstr "Preferenze"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:557
+msgid "Categories"
+msgstr "Categorie"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:787
+msgid "Push this button to select the font to be used by the editor"
+msgstr ""
+"Cliccare su questo pulsante per selezionare il font che verrà usato "
+"dall'editor"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:790
+msgid "Push this button to configure text color"
+msgstr "Cliccare su questo pulsante per selezionare il colore del testo"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:792
+msgid "Push this button to configure background color"
+msgstr "Cliccare su questo pulsante per selezionare il colore di sfondo"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:794
+msgid ""
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr ""
+"Cliccare su questo pulsante per scedgliere il colore del testo selezionato"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:797
+msgid ""
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr ""
+"Cliccare su questo pulsante per selezionare il colore con il quale verrà "
+"evidenziato il testo selezionato"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:1
+#: gedit/dialogs/page-setup-dialog.glade2.h:1
+#: plugins/docinfo/docinfo.glade2.h:1 plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
+
+#: gedit/dialogs/gedit-preferences.glade2.h:2
+msgid "<b>Font</b>"
+msgstr "<b>Font</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:3
+msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Rientro automatico</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Font e colori</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Numeri di riga</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:6
+msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Gestione</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:7
+msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Salva</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:8
+msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Tab</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:9
+msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Annulla</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:10
+msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"x-large\">Modalità a capo automatico</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:11
+msgid "<span weight=\"bold\">Colors</span>"
+msgstr "<span weight=\"bold\">Colori</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:13
+msgid "Create a _backup copy of files before saving"
+msgstr "Crea una copia di _backup dei file prima di salvare"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/page-setup-dialog.glade2.h:4
+msgid "Do not _split words over two lines"
+msgstr "Non dividere le parole su due righe"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Editor _font: "
+msgstr "_Font dell'editor:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:16
+msgid "Enable _auto indentation"
+msgstr "Abilita rientro _automatico"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/page-setup-dialog.glade2.h:5
+msgid "Enable text _wrapping"
+msgstr "Abilita a _capo automatico"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:18
+msgid "Fonts & Colors"
+msgstr "Font e colori"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:19
+msgid "Insert _spaces instead of tabs"
+msgstr "Inserisci _spazi invece di tab"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:20
+msgid "LOGO"
+msgstr "LOGO"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:21
+msgid "Line numbers"
+msgstr "Numeri di riga"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:22
+msgid "Pick the background color"
+msgstr "Scelta del colore di sfondo"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Pick the selected text color"
+msgstr "Scelta del colore del testo selezionato"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:24
+msgid "Pick the selection color"
+msgstr "Scelta del colore della selezione"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:25
+msgid "Pick the text color"
+msgstr "Scelta del colore del testo"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:26
+msgid "Plugin manager"
+msgstr "Gestione plugin"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:28
+msgid "Se_lection color:"
+msgstr "Colore della se_lezione:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:29
+msgid "Selecte_d text color:"
+msgstr "Colore _del testo selezionato:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:30
+msgid "Set _tabs width equivalent to"
+msgstr "Ogni tab è pari a"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:31
+msgid "Set limit on _undo actions to"
+msgstr "Limita le azioni che è possibile annullare a"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:33
+msgid "U_se default theme colors"
+msgstr "U_sa i colori predefiniti del tema"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:35
+msgid "Wrap mode"
+msgstr "A capo automatico"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:36
+msgid "_Autosave current file every"
+msgstr "Salvata_ggio automatico del file corrente ogni"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:37
+msgid "_Background color:"
+msgstr "C_olore di sfondo:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:38
+msgid "_Display line numbers"
+msgstr "_Mostra i numeri di riga"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:39
+msgid "_Text color:"
+msgstr "Colore del _testo:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:40
+msgid "_Use default theme font"
+msgstr "_Usa il font predefinito del tema"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:41
+msgid "_action(s)"
+msgstr "_azione/i"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:42
+msgid "_minutes"
+msgstr "_minuti"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:43
+msgid "character(s)"
+msgstr "carattere/i"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:111
+msgid "_Insert a new preview phrase."
+msgstr "_Inserire una nuova frase campione."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:117
+msgid "Modify preview phrase..."
+msgstr "Modifica della frase campione"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:171
+msgid "Preview"
+msgstr "Anteprima"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:184
+msgid "_Modify preview phrase..."
+msgstr "_Modifica della frase campione..."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:245
+msgid "Font Selection"
+msgstr "Selezione font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:92
+msgid "Sans Regular 12"
+msgstr "Sans Regular 12"
+
+#: gedit/dialogs/gnome-print-font-picker.c:93
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: gedit/dialogs/gnome-print-font-picker.c:94
+msgid "Pick a Font"
+msgstr "Scelta del font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:179
+msgid "Title"
+msgstr "Titolo"
+
+#: gedit/dialogs/gnome-print-font-picker.c:180
+msgid "The title of the selection dialog box"
+msgstr "Il titolo della finestra di dialogo di selezione"
+
+#: gedit/dialogs/gnome-print-font-picker.c:200
+msgid "Font name"
+msgstr "Nome del font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:201
+msgid "Name of the selected font"
+msgstr "Nome del font selezionato"
+
+#: gedit/dialogs/gnome-print-font-picker.c:209
+msgid "Preview text"
+msgstr "Anteprima del testo"
+
+#: gedit/dialogs/gnome-print-font-picker.c:210
+msgid "Preview text shown in the dialog"
+msgstr "Anteprima del testo visualizzata nella finestra di dialogo"
+
+#: gedit/dialogs/gnome-print-font-picker.c:218
+msgid "Use font in label"
+msgstr "Usa il carattere nell'etichetta"
+
+#: gedit/dialogs/gnome-print-font-picker.c:219
+msgid "Use font in the label in font info mode"
+msgstr "Usa il font nell'etichetta in modalità informazioni sul font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:227
+msgid "Font size for label"
+msgstr "Dimensioni del font per l'etichetta"
+
+#: gedit/dialogs/gnome-print-font-picker.c:228
+msgid "Font size for label in font info mode"
+msgstr "Dimensioni del font per l'etichetta in modalità informazioni sul font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:238
+msgid "Show size"
+msgstr "Mostra dimensione"
+
+#: gedit/dialogs/gnome-print-font-picker.c:239
+msgid "Show size in font info mode"
+msgstr "Mostra le dimensioni in modalità informazioni sul font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:1018
+msgid "Font"
+msgstr "Font"
+
+#. gnome_print_font_picker_update_font_info
+#: gedit/dialogs/goto-line.glade2.h:1
+msgid "Goto Line"
+msgstr "Vai alla riga"
+
+#: gedit/dialogs/goto-line.glade2.h:2
+msgid "_Line number:"
+msgstr "_Numero di riga"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:2
+#, fuzzy
+msgid "<b>Line Numbers</b>"
+msgstr "Numeri di riga"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:3
+msgid "<b>Text Wrapping</b>"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Font"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:7
+msgid "General"
+msgstr "Generale"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:8
+msgid "He_aders and footers:"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:9
+#, fuzzy
+msgid "Page Setup"
+msgstr "Configurazione stampa"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:10
+#, fuzzy
+msgid "Print _line numbers"
+msgstr "Stampa numeri di riga"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:11
+msgid "Print s_yntax highlighting"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "_Corpo del testo:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:13
+#, fuzzy
+msgid "_Line numbers:"
+msgstr "_Numero di riga"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:14
+#, fuzzy
+msgid "_Number every"
+msgstr "Plugin Browser Web per gEdit"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "_Stampa intestazioni di pagina"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Ripristina font predefiniti"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:17
+#, fuzzy
+msgid "lines"
+msgstr "Righe"
+
+#: gedit/dialogs/plugin-manager.glade2.h:1
+#, fuzzy
+msgid "About selected plugin"
+msgstr "Configura il plugin selezionato"
+
+#: gedit/dialogs/plugin-manager.glade2.h:2
+#, fuzzy
+msgid "C_onfigure Plugin"
+msgstr "C_onfigura plugin"
+
+#: gedit/dialogs/plugin-manager.glade2.h:3
+msgid "Configure the selected plugin"
+msgstr "Configura il plugin selezionato"
+
+#: gedit/dialogs/plugin-manager.glade2.h:4
+msgid "button1"
+msgstr ""
+
+#: gedit/dialogs/plugin-manager.glade2.h:5
+msgid "dialog1"
+msgstr "dialog1"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:1
+#, fuzzy
+msgid "Browse for program location..."
+msgstr "Configurazione del percorso del programma..."
+
+#: gedit/dialogs/program-location-dialog.glade2.h:3
+msgid "_Location to search for:"
+msgstr "_Posizione in cui cercare"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:4
+msgid "label"
+msgstr "etichetta"
+
+#: gedit/dialogs/replace.glade2.h:1 gedit/dialogs/uri.glade2.h:1
+#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:2
 msgid "*"
 msgstr "*"
 
-#: plugins/diff/diff.glade2.h:2
-msgid "Choose the files to compare."
-msgstr "Scelta dei file da confrontare"
+#: gedit/dialogs/replace.glade2.h:2 gedit/gedit-ui.xml.h:19
+msgid "Find Next"
+msgstr "Trova successivo"
 
-#: plugins/diff/diff.glade2.h:3
-msgid "Compare files..."
-msgstr "Confronta file..."
+#: gedit/dialogs/replace.glade2.h:3
+msgid "Match _entire word only"
+msgstr "Solo parole int_ere "
 
-#: plugins/diff/diff.glade2.h:4
-msgid "F_rom document"
-msgstr "Dal _documento"
+#: gedit/dialogs/replace.glade2.h:5
+msgid "Replace All"
+msgstr "Sostituisci tutti"
 
-#: plugins/diff/diff.glade2.h:5
-msgid "First"
-msgstr "Primo"
+#: gedit/dialogs/replace.glade2.h:6
+msgid "Replace _with: "
+msgstr "S_ostituisci con:"
 
-#: plugins/diff/diff.glade2.h:6
-msgid "First file from disk"
-msgstr "Primo file da disco"
-
-#: plugins/diff/diff.glade2.h:7
-msgid "First file from open document"
-msgstr "Il primo file dal documento corrente"
-
-#: plugins/diff/diff.glade2.h:8
-msgid "From _document"
-msgstr "Dal _documento"
-
-#: plugins/diff/diff.glade2.h:9
-msgid "From a _file on disk"
-msgstr "Da un file _su disco"
-
-#: plugins/diff/diff.glade2.h:10
-msgid "From a file o_n disk"
-msgstr "Da un file _su disco"
-
-#: plugins/diff/diff.glade2.h:11
-msgid "Ignore _blanks (-b option)"
-msgstr "Ignora i caratteri vuoti (opzione -b)"
-
-#: plugins/diff/diff.glade2.h:12
-msgid "Note that this option is only supported by GNU diff"
-msgstr "Attenzione: questa opzione è supportata soltanto da GNU diff"
-
-#: plugins/diff/diff.glade2.h:13
-msgid "Second"
-msgstr "Secondo"
-
-#: plugins/diff/diff.glade2.h:14
-msgid "Second file from disk"
-msgstr "Secondo file da disco"
-
-#: plugins/diff/diff.glade2.h:15
-msgid "Second file from open document"
-msgstr "Il secondo file dal documento corrente"
-
-#: plugins/diff/diff.glade2.h:16
-msgid "Select the \"first\" file..."
-msgstr "Selezione del primo file.."
-
-#: plugins/diff/diff.glade2.h:17
-msgid "Select the \"second\" file..."
-msgstr "Selezione del secondo file..."
-
-#: plugins/diff/diff.glade2.h:18
-msgid "Select the first file to compare"
-msgstr "Selezione del primo file da confrontare"
-
-#: plugins/diff/diff.glade2.h:19
-msgid "Select the first open document to compare"
-msgstr "Selezione del primo documento aperto da confrontare"
-
-#: plugins/diff/diff.glade2.h:20
-msgid "Select the second file to compare"
-msgstr "Selezione del secondo file da confrontare"
-
-#: plugins/diff/diff.glade2.h:21
-msgid "Select the second open document to compare"
-msgstr "Selezione del secondo documento aperto da confrontare"
-
-#: plugins/diff/diff.glade2.h:22
-msgid "Use the _unified output format (-u option)"
-msgstr "Utilizza il formato di output _unificato (opzione -u)"
-
-#: plugins/diff/diff.gedit-plugin.desktop.in.h:2
-msgid ""
-"The Compare Files plugin uses the <tt>diff</tt> program to compare two "
-"documents or files on disk.\n"
-"\n"
-"For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
-"prompt."
+#: gedit/dialogs/replace.glade2.h:7
+msgid "Search _backwards"
 msgstr ""
-"Il plugin «Confronta file» usa il programma <tt>diff</tt> per confrontare due "
-"documenti o file su disco.\n"
+
+#: gedit/dialogs/replace.glade2.h:8
+msgid "_Match case"
+msgstr "_Maiuscole/minuscole"
+
+#: gedit/dialogs/replace.glade2.h:9
+msgid "_Search for: "
+msgstr "C_erca:"
+
+#: gedit/dialogs/replace.glade2.h:10
+msgid "_Wrap around"
+msgstr "_Ricomincia dall'inizio"
+
+#: gedit/dialogs/uri.glade2.h:2
+#, fuzzy
+msgid "Ch_aracter coding:"
+msgstr "C_odifiche supportate:"
+
+#: gedit/dialogs/uri.glade2.h:3
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "Inserire _la posizione (URI) del file che si desidera aprire:"
+
+#: gedit/dialogs/uri.glade2.h:4
+msgid "Open from URI"
+msgstr "Apri da un URI"
+
+#: gedit/gedit-commands.c:564
+msgid "translator_credits"
+msgstr "Roberto Rosselli Del Turco <rosselli@ling.unipi.it>"
+
+#: gedit/gedit-commands.c:589
+msgid "gedit"
+msgstr "gedit"
+
+#: gedit/gedit-commands.c:593
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gEdit è un semplice editor di testo per GNOME"
+
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+msgid "Untitled"
+msgstr "Senza titolo"
+
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
+msgid "Invalid file name"
+msgstr "Nome di file non valido"
+
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: viewer/gedit-persist-stream.c:120
+msgid "Invalid UTF-8 data"
+msgstr "Dati UTF-8 non validi"
+
+#: gedit/gedit-document.c:1210
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Impossibile leggere le informazioni del collegamento simbolico per %s"
+
+#: gedit/gedit-document.c:1256
+msgid "The file has too many symbolic links."
+msgstr "Il file ha troppi collegamenti simbolici"
+
+#: gedit/gedit-document.c:1312
+#, c-format
+msgid "gedit cannot handle %s: locations in write mode."
+msgstr "gedit non può gestire posizioni «%s:» in scrittura."
+
+#: gedit/gedit-document.c:1319
+msgid "gedit cannot handle this kind of location in write mode."
+msgstr "gedit non può gestire questo tipo di posizione in scrittura."
+
+#: gedit/gedit-document.c:1332
+msgid "Invalid filename."
+msgstr "Nome del file non valido."
+
+#: gedit/gedit-document.c:1444
+msgid ""
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
+msgstr ""
+"Non c'è abbastanza spazio su disco per salvare il file.\n"
+"Liberare un po' di spazio su disco e riprovare."
+
+#: gedit/gedit-document.c:1449
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"Il disco sul quale si sta cercando di salvare il file presenta una "
+"limitazione per quanto riguarda le dimensioni dei file. Salvare un file più "
+"piccolo, oppure salvare il file su un disco che non ha questa limitazione."
+
+#: gedit/gedit-document.c:1493
+msgid "Could not create a backup file."
+msgstr "Impossibile creare un file di backup."
+
+#: gedit/gedit-document.c:1613
+msgid "It is not possible to revert an Untitled document"
+msgstr "Non è possibile ripristinare un documento «Senza titolo»"
+
+#: gedit/gedit-encodings-option-menu.c:203
+msgid "Auto Detected"
+msgstr ""
+
+#: gedit/gedit-encodings-option-menu.c:223
+#: gedit/gedit-encodings-option-menu.c:245
+#, fuzzy, c-format
+msgid "Current Locale (%s)"
+msgstr "Font attuale"
+
+#: gedit/gedit-encodings-option-menu.c:306
+msgid "Add or _Remove..."
+msgstr ""
+
+#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
+#: gedit/gedit-encodings.c:182
+msgid "Unicode"
+msgstr "Unicode"
+
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
+#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
+msgid "Western"
+msgstr "Occidentale"
+
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:251
+msgid "Central European"
+msgstr "Europeo centrale"
+
+#: gedit/gedit-encodings.c:149
+msgid "South European"
+msgstr "Sud europeo"
+
+#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
+#: gedit/gedit-encodings.c:265
+msgid "Baltic"
+msgstr "Baltico"
+
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
+#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
+#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
+msgid "Cyrillic"
+msgstr "Cirillico"
+
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
+#: gedit/gedit-encodings.c:263
+msgid "Arabic"
+msgstr "Arabo"
+
+#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+msgid "Greek"
+msgstr "Greco"
+
+#: gedit/gedit-encodings.c:159
+msgid "Hebrew Visual"
+msgstr "Ebraico visuale"
+
+#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
+#: gedit/gedit-encodings.c:261
+msgid "Hebrew"
+msgstr "Ebraico"
+
+#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:259
+msgid "Turkish"
+msgstr "Turco"
+
+#: gedit/gedit-encodings.c:165
+msgid "Nordic"
+msgstr "Nordico"
+
+#: gedit/gedit-encodings.c:169
+msgid "Celtic"
+msgstr "Celtico"
+
+#: gedit/gedit-encodings.c:173
+msgid "Romanian"
+msgstr "Romeno"
+
+#: gedit/gedit-encodings.c:185
+msgid "Armenian"
+msgstr "Armeno"
+
+#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
+#: gedit/gedit-encodings.c:198
+msgid "Chinese Traditional"
+msgstr "Cinese tradizionale"
+
+#: gedit/gedit-encodings.c:191
+msgid "Cyrillic/Russian"
+msgstr "Cirillico/Russo"
+
+#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:240
+msgid "Japanese"
+msgstr "Giapponese"
+
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
+msgid "Korean"
+msgstr "Coreano"
+
+#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
+#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
+msgid "Chinese Simplified"
+msgstr "Cinese semplificato"
+
+#: gedit/gedit-encodings.c:207
+msgid "Georgian"
+msgstr "Georgiano"
+
+#: gedit/gedit-encodings.c:237
+msgid "Cyrillic/Ukrainian"
+msgstr "Cirillico/Ucraino"
+
+#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:267
+msgid "Vietnamese"
+msgstr "Vietnamita"
+
+#: gedit/gedit-encodings.c:244
+msgid "Thai"
+msgstr "Tailandese"
+
+#: gedit/gedit-file-selector-util.c:149
+#, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Un file chiamato «%s» esiste già.\n"
+"Si desidera sostituirlo con quello che si sta per salvare?"
+
+#: gedit/gedit-file-selector-util.c:160
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"Il file «%s» è in modalità sola lettura.\n"
+"Si desidera tentare di sostituirlo con quello che si sta per salvare?"
+
+#: gedit/gedit-file-selector-util.c:283
+msgid "Ch_aracter Coding:"
+msgstr ""
+
+#: gedit/gedit-file-selector-util.c:460
+#, fuzzy
+msgid "Select a file to open"
+msgstr "Seleziona il none del file da salvare"
+
+#: gedit/gedit-file-selector-util.c:489
+#, fuzzy
+msgid "Select files to open"
+msgstr "Seleziona il none del file da salvare"
+
+#: gedit/gedit-file-selector-util.c:519
+msgid "Select a filename to save"
+msgstr "Seleziona il none del file da salvare"
+
+#: gedit/gedit-file.c:155
+msgid "Open File..."
+msgstr "Apri file..."
+
+#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "File «%s» caricato"
+
+#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#, c-format
+msgid "Saving file '%s'..."
+msgstr "Salvataggio del file «%s» in corso..."
+
+#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+msgid "The document has not been saved."
+msgstr "Il documento non è stato salvato."
+
+#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#, c-format
+msgid "File '%s' saved."
+msgstr "Il file «%s» è stato salvato"
+
+#: gedit/gedit-file.c:444
+msgid "Save as..."
+msgstr "Salva come..."
+
+#: gedit/gedit-file.c:639
+#, c-format
+msgid ""
+"Do you want to revert to saved the document '%s'?\n"
 "\n"
-"Per maggiori informazioni sul programma <tt>diff</tt>, digitate <tt>man "
-"diff</tt> in un terminale."
+"You will not be able to undo this operation."
+msgstr ""
+"Si desidera ripristinare il documento salvato «%s»?\n"
+"\n"
+"Questa operazione non può essere annullata."
+
+#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+msgid "_Revert"
+msgstr "_Ripristina"
+
+#: gedit/gedit-file.c:683
+#, c-format
+msgid "Reverting file '%s'..."
+msgstr "Ripristino del file «%s» in corso..."
+
+#: gedit/gedit-file.c:696
+msgid "The document has not been reverted."
+msgstr "Il documento non è stato ripristinato."
+
+#: gedit/gedit-file.c:706
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Ripristinato il file «%s»"
+
+#: gedit/gedit-file.c:732
+#, c-format
+msgid "Loading %d files..."
+msgstr "Caricamento dei file %d in corso..."
+
+#: gedit/gedit-file.c:768
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Il file «%s» non esiste. Si desidera crearlo?"
+
+#: gedit/gedit-file.c:823
+#, c-format
+msgid "Loaded %i files"
+msgstr "Caricati %i file"
+
+#: gedit/gedit-file.c:957
+msgid "Could not read data from stdin."
+msgstr "Impossibile leggere i dati da stdin."
+
+#. Read only
+#: gedit/gedit-mdi-child.c:238
+msgid "RO"
+msgstr "RO"
+
+#. Add the detach tab button
+#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+msgid "_Move to New Window"
+msgstr "_Sposta in una nuova finestra"
+
+#: gedit/gedit-mdi-child.c:664
+#, fuzzy
+msgid "Unknown"
+msgstr "Errore sconosciuto"
+
+#: gedit/gedit-mdi-child.c:672
+#, fuzzy
+msgid "Unicode (UTF-8)"
+msgstr "Unicode"
+
+#: gedit/gedit-mdi.c:450
+#, fuzzy
+msgid "Open a recently used file"
+msgstr "Apri un file"
+
+#: gedit/gedit-mdi.c:954
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"Si desidera salvare le modifiche fatte al documento «%s»?\n"
+"Tali modifiche andranno perse se non verranno salvate."
+
+#: gedit/gedit-mdi.c:959
+msgid "Do_n't save"
+msgstr "_Non salvare"
+
+#: gedit/gedit-mdi.c:978
+msgid "_Don't quit"
+msgstr "Non _uscire"
+
+#: gedit/gedit-mdi.c:982
+msgid "_Don't close"
+msgstr "Non _chiudere"
+
+#: gedit/gedit-mdi.c:1075
+msgid "(modified)"
+msgstr "(modificato)"
+
+#: gedit/gedit-mdi.c:1081
+msgid "(readonly)"
+msgstr "(sola lettura)"
+
+#: gedit/gedit-mdi.c:1676
+msgid "Normal"
+msgstr ""
+
+#: gedit/gedit-mdi.c:1677
+msgid "Use Normal highlight mode"
+msgstr ""
+
+#: gedit/gedit-mdi.c:1753
+#, c-format
+msgid "Use %s highlight mode"
+msgstr ""
+
+#: gedit/gedit-output-window.c:333
+msgid "Close the output window"
+msgstr "Chiudi la finestra di output"
+
+#: gedit/gedit-output-window.c:371
+msgid "Copy selected lines"
+msgstr "Copia le righe selezionate"
+
+#: gedit/gedit-output-window.c:391
+msgid "Clear the output window"
+msgstr "Pulisci la finestra di output"
+
+#: gedit/gedit-output-window.c:431
+msgid "Output Lines"
+msgstr "Righe di output"
+
+#: gedit/gedit-plugins-engine.c:362
+#, c-format
+msgid "Error, unable to open module file '%s'\n"
+msgstr "Errore, impossibile aprire il file modulo «%s».\n"
+
+#: gedit/gedit-plugins-engine.c:372
+#, c-format
+msgid "Error, plugin '%s' does not contain init function."
+msgstr "Errore, il plugin «%s» non contiene la funzione init."
+
+#: gedit/gedit-plugins-engine.c:382
+#, c-format
+msgid "Error, plugin '%s' does not contain activate function."
+msgstr "Errore, il plugin «%s» non contiene la funzione activate"
+
+#: gedit/gedit-plugins-engine.c:392
+#, c-format
+msgid "Error, plugin '%s' does not contain deactivate function."
+msgstr "Errore, il plugin «%s» non contiene la funzione deactivate"
+
+#: gedit/gedit-plugins-engine.c:417
+#, c-format
+msgid "Error, impossible to initialize plugin '%s'"
+msgstr "Errore, impossibile inizializzare il plugin «%s»."
+
+#: gedit/gedit-plugins-engine.c:468
+#, c-format
+msgid "Error, impossible to destroy plugin '%s'"
+msgstr "Errore, impossibile distruggere il plugin «%s»."
+
+#: gedit/gedit-plugins-engine.c:551 gedit/gedit-plugins-engine.c:639
+#: gedit/gedit-plugins-engine.c:764
+#, c-format
+msgid "Error, impossible to activate plugin '%s'"
+msgstr "Errore, impossibile attivare il plugin «%s»."
+
+#: gedit/gedit-plugins-engine.c:590 gedit/gedit-plugins-engine.c:782
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr "Errore, impossibile disattivare il plugin «%s»."
+
+#: gedit/gedit-plugins-engine.c:683
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
+msgstr "Errore, impossibile aggiornare l'interfaccia del plugin «%s»."
+
+#: gedit/gedit-prefs-manager.c:177
+msgid "Cannot initialize preferences manager."
+msgstr "Impossibile inizializzare il gestore delle preferenze"
+
+#: gedit/gedit-prefs-manager.c:1136
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr ""
+
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "Stampa"
+
+#: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
+msgid "Lines"
+msgstr "Righe"
+
+#: gedit/gedit-print.c:331
+#, fuzzy
+msgid "Preparing pages..."
+msgstr "Preferenze"
+
+#: gedit/gedit-print.c:358
+#, c-format
+msgid "Rendering page %d of %d..."
+msgstr ""
+
+#: gedit/gedit-print.c:360
+#, fuzzy, c-format
+msgid "Printing page %d of %d..."
+msgstr "Stampa"
+
+#: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
+msgid "Print preview"
+msgstr "Anteprima di stampa"
+
+#: gedit/gedit-print.c:550
+#, c-format
+msgid "File: %s"
+msgstr "File: %s"
+
+#: gedit/gedit-print.c:556
+msgid "Page %N of %Q"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr "Informazioni su questa applicazione"
+
+#: gedit/gedit-ui.xml.h:2
+msgid "Change the visibility of the output window in the current window"
+msgstr "Cambia la visibilità della finestra di output nella finestra corrente"
+
+#: gedit/gedit-ui.xml.h:3
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "Cambia la visibilità della barra di stato nella finestra corrente"
+
+#: gedit/gedit-ui.xml.h:4
+msgid "Change the visibility of the toolbar in the current window"
+msgstr ""
+"Cambia la visibilità della barra degli strumenti nella finestra corrente"
+
+#: gedit/gedit-ui.xml.h:5
+msgid "Close"
+msgstr "Chiudi"
+
+#: gedit/gedit-ui.xml.h:6
+msgid "Close all open files"
+msgstr "Chiudi tutti i file aperti"
+
+#: gedit/gedit-ui.xml.h:7
+msgid "Close the current file"
+msgstr "Chiudi il file corrente"
+
+#: gedit/gedit-ui.xml.h:8
+msgid "Configure the application"
+msgstr "Configura l'applicazione"
+
+#: gedit/gedit-ui.xml.h:9
+msgid "Copy"
+msgstr "Copia"
+
+#: gedit/gedit-ui.xml.h:10
+msgid "Copy the selection"
+msgstr "Copia la selezione"
+
+#: gedit/gedit-ui.xml.h:11
+msgid "Create a new document"
+msgstr "Crea nuovo documento"
+
+#: gedit/gedit-ui.xml.h:12
+msgid "Cu_t"
+msgstr "_Taglia"
+
+#: gedit/gedit-ui.xml.h:13
+msgid "Cut"
+msgstr "Taglia"
+
+#: gedit/gedit-ui.xml.h:14
+msgid "Cut the selection"
+msgstr "Taglia la selezione"
+
+#: gedit/gedit-ui.xml.h:15
+msgid "Delete"
+msgstr "Cancella"
+
+#: gedit/gedit-ui.xml.h:16
+msgid "Delete the selected text"
+msgstr "Cancella il testo selezionato"
+
+#: gedit/gedit-ui.xml.h:18
+msgid "Find Ne_xt"
+msgstr "Trova s_uccessivo"
+
+#: gedit/gedit-ui.xml.h:20
+#, fuzzy
+msgid "Find Pre_vious"
+msgstr "Trova _Linea"
+
+#: gedit/gedit-ui.xml.h:21
+#, fuzzy
+msgid "Find Previous"
+msgstr "Anteprima di stampa"
+
+#: gedit/gedit-ui.xml.h:22
+msgid "Go to _Line..."
+msgstr "Vai alla _riga..."
+
+#: gedit/gedit-ui.xml.h:23
+msgid "Go to a specific line number"
+msgstr "Vai a uno specifico numero di riga"
+
+#: gedit/gedit-ui.xml.h:24
+msgid "Main toolbar"
+msgstr "Barra degli strumenti principale"
+
+#: gedit/gedit-ui.xml.h:25
+msgid "Move the current document to a new window"
+msgstr "Sposta il documento corrente in una nuova finestra"
+
+#: gedit/gedit-ui.xml.h:26
+msgid "New"
+msgstr "Nuovo"
+
+#: gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Apri"
+
+#: gedit/gedit-ui.xml.h:28
+msgid "Open Location..."
+msgstr "Apri posizione..."
+
+#: gedit/gedit-ui.xml.h:29
+msgid "Open _Location..."
+msgstr "Apri posi_zione..."
+
+#: gedit/gedit-ui.xml.h:30
+msgid "Open a file"
+msgstr "Apri un file"
+
+#: gedit/gedit-ui.xml.h:31
+msgid "Open a file from a specified location"
+msgstr "Apre un file dalla posizione indicata"
+
+#: gedit/gedit-ui.xml.h:32
+msgid "Open the gedit manual"
+msgstr "Apre il manuale di gedit"
+
+#: gedit/gedit-ui.xml.h:33
+#, fuzzy
+msgid "Page Set_up"
+msgstr "Configurazione stampa"
+
+#: gedit/gedit-ui.xml.h:34
+msgid "Paste"
+msgstr "Incolla"
+
+#: gedit/gedit-ui.xml.h:35
+msgid "Paste the clipboard"
+msgstr "Incolla dalla clipboard"
+
+#: gedit/gedit-ui.xml.h:36
+msgid "Pr_eferences"
+msgstr "Preferen_ze"
+
+#: gedit/gedit-ui.xml.h:38
+msgid "Print Previe_w..."
+msgstr "Antepri_ma di stampa..."
+
+#: gedit/gedit-ui.xml.h:39
+msgid "Print Preview"
+msgstr "Anteprima di stampa"
+
+#: gedit/gedit-ui.xml.h:41
+msgid "Print the current file"
+msgstr "Stampa il file corrente"
+
+#: gedit/gedit-ui.xml.h:42
+msgid "Quit"
+msgstr "Esci"
+
+#: gedit/gedit-ui.xml.h:43
+msgid "Quit the program"
+msgstr "Esci dal programma"
+
+#: gedit/gedit-ui.xml.h:44
+msgid "Redo"
+msgstr "Ripeti"
+
+#: gedit/gedit-ui.xml.h:45
+msgid "Redo the undone action"
+msgstr "Ripeti l'azione annullata"
+
+#: gedit/gedit-ui.xml.h:47
+msgid "Replace a string"
+msgstr "Sostituisci una stringa"
+
+#: gedit/gedit-ui.xml.h:48
+msgid "Revert"
+msgstr "Ripristina"
+
+#: gedit/gedit-ui.xml.h:49
+msgid "Revert to a saved version of the file"
+msgstr "Ripristina una versione salvata del file"
+
+#: gedit/gedit-ui.xml.h:51
+msgid "Save As"
+msgstr "Salva con nome"
+
+#: gedit/gedit-ui.xml.h:52
+msgid "Save _As..."
+msgstr "Sa_lva come..."
+
+#: gedit/gedit-ui.xml.h:53
+msgid "Save all open files"
+msgstr "Salva tutti i file aperti"
+
+#: gedit/gedit-ui.xml.h:54
+msgid "Save the current file"
+msgstr "Salva il file corrente"
+
+#: gedit/gedit-ui.xml.h:55
+msgid "Save the current file with a different name"
+msgstr "Salva il file corrente con un nome diverso"
+
+#: gedit/gedit-ui.xml.h:56
+msgid "Search again for the same string"
+msgstr "Cerca ancora la stessa stringa"
+
+#: gedit/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Search backwards for the same string"
+msgstr "Cerca ancora la stessa stringa"
+
+#: gedit/gedit-ui.xml.h:58
+msgid "Search for a string"
+msgstr "Cerca una stringa"
+
+#: gedit/gedit-ui.xml.h:59
+msgid "Select All"
+msgstr "Seleziona tutto"
+
+#: gedit/gedit-ui.xml.h:60
+msgid "Select _All"
+msgstr "_Seleziona tutto"
+
+#: gedit/gedit-ui.xml.h:61
+msgid "Select the entire document"
+msgstr "Seleziona tutto il documento"
+
+#: gedit/gedit-ui.xml.h:62
+#, fuzzy
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr ""
+"Configura lo stile dei pulsanti della barra degli strumenti in base allo "
+"stile predefinito del desktop"
+
+#: gedit/gedit-ui.xml.h:63
+#, fuzzy
+msgid "Setup the page settings"
+msgstr ""
+"Configurazione delle impostazioni relative alla pagina per la stampante "
+"corrente"
+
+#: gedit/gedit-ui.xml.h:64
+#, fuzzy
+msgid "Show only icons in the toolbar"
+msgstr "Mostra _Suggerimenti"
+
+#: gedit/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Show text below every icon in the toolbar"
+msgstr "Mostra _Suggerimenti"
+
+#: gedit/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Show text only beside important icons in the toolbar"
+msgstr "Mostra soltanto icone nella barra degli strumenti"
+
+#: gedit/gedit-ui.xml.h:67
+msgid "T_ext for Important Icons"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr "Annulla l'ultima azione"
+
+#: gedit/gedit-ui.xml.h:70
+msgid "_About"
+msgstr "_Informazioni"
+
+#: gedit/gedit-ui.xml.h:71
+msgid "_Close"
+msgstr "_Chiudi"
+
+#: gedit/gedit-ui.xml.h:72
+msgid "_Close All"
+msgstr "_Chiudi tutti"
+
+#: gedit/gedit-ui.xml.h:73
+msgid "_Contents"
+msgstr "_Manuale"
+
+#: gedit/gedit-ui.xml.h:74
+msgid "_Copy"
+msgstr "_Copia"
+
+#: gedit/gedit-ui.xml.h:75
+msgid "_Customize Toolbar"
+msgstr "_Personalizza barra degli strumenti"
+
+#: gedit/gedit-ui.xml.h:76
+msgid "_Debug"
+msgstr "_Debug"
+
+#: gedit/gedit-ui.xml.h:77
+msgid "_Delete"
+msgstr "Ca_ncella"
+
+#: gedit/gedit-ui.xml.h:78
+msgid "_Desktop Default"
+msgstr "Predefinito del _desktop"
+
+#: gedit/gedit-ui.xml.h:79
+msgid "_Documents"
+msgstr "_Documenti"
+
+#: gedit/gedit-ui.xml.h:80
+msgid "_Edit"
+msgstr "_Modifica"
+
+#: gedit/gedit-ui.xml.h:81
+msgid "_File"
+msgstr "_File"
+
+#: gedit/gedit-ui.xml.h:82
+msgid "_Find..."
+msgstr "Tr_ova..."
+
+#: gedit/gedit-ui.xml.h:83
+msgid "_Help"
+msgstr "A_iuto"
+
+#: gedit/gedit-ui.xml.h:84
+msgid "_Highlight Mode"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:85
+#, fuzzy
+msgid "_Icons Only"
+msgstr "_Icona"
+
+#: gedit/gedit-ui.xml.h:87
+msgid "_New"
+msgstr "_Nuovo"
+
+#: gedit/gedit-ui.xml.h:88
+msgid "_Open..."
+msgstr "_Apri..."
+
+#: gedit/gedit-ui.xml.h:89
+msgid "_Output Window"
+msgstr "Finestra di _output"
+
+#: gedit/gedit-ui.xml.h:90
+msgid "_Paste"
+msgstr "_Incolla"
+
+#: gedit/gedit-ui.xml.h:91
+msgid "_Print..."
+msgstr "Stam_pa"
+
+#: gedit/gedit-ui.xml.h:92
+msgid "_Quit"
+msgstr "_Esci"
+
+#: gedit/gedit-ui.xml.h:93
+msgid "_Redo"
+msgstr "_Ripeti"
+
+#: gedit/gedit-ui.xml.h:94
+msgid "_Replace..."
+msgstr "_Sostituisci..."
+
+#: gedit/gedit-ui.xml.h:96
+msgid "_Save"
+msgstr "_Salva"
+
+#: gedit/gedit-ui.xml.h:97
+msgid "_Save All"
+msgstr "Sal_va tutti"
+
+#: gedit/gedit-ui.xml.h:98
+msgid "_Search"
+msgstr "_Cerca"
+
+#: gedit/gedit-ui.xml.h:99
+msgid "_Statusbar"
+msgstr "Barra di _stato"
+
+#: gedit/gedit-ui.xml.h:100
+msgid "_Text for All Icons"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:101
+msgid "_Toolbar"
+msgstr "Barra degli s_trumenti"
+
+#: gedit/gedit-ui.xml.h:102
+msgid "_Tools"
+msgstr "S_trumenti"
+
+#: gedit/gedit-ui.xml.h:103
+msgid "_Undo"
+msgstr "_Annulla"
+
+#: gedit/gedit-ui.xml.h:104
+msgid "_View"
+msgstr "_Vista"
+
+#: gedit/gedit-utils.c:412
+#, c-format
+msgid ""
+"Could not find the file \"%s\".\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Impossibile trovare il file «%s».\n"
+"Controllare di aver digitato la posizione correttamente e riprovare."
+
+#: gedit/gedit-utils.c:420
+#, c-format
+msgid "Could not open the file \"%s\" because it contains corrupted data."
+msgstr "Impossibile aprire il file «%s» perché contiene dati corrotti."
+
+#: gedit/gedit-utils.c:431
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Impossibile aprire il file «%s» perché gedit non può gestire posizioni «%s:»."
+
+#: gedit/gedit-utils.c:437
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Impossibile aprire il file «%s»"
+
+#: gedit/gedit-utils.c:447
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr ""
+"Impossibile aprire il file «%s» perché contiene dati in un formato non "
+"valido."
+
+#: gedit/gedit-utils.c:454
+#, c-format
+msgid "Could not open the file \"%s\" because it is too big."
+msgstr "Impossibile aprire il file «%s» perché troppo grande."
+
+#: gedit/gedit-utils.c:461
+#, c-format
+msgid ""
+"\"%s\" is not a valid location.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"«%s» non è una posizione valida.\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e riprovare."
+
+#: gedit/gedit-utils.c:469
+#, c-format
+msgid "Could not open the file \"%s\" because access was denied."
+msgstr "Impossibile aprire il file «%s» perché l'accesso è stato negato."
+
+#: gedit/gedit-utils.c:476
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché ci sono troppi file aperti.\n"
+"\n"
+"Chiudere qualche file aperto e riprovare."
+
+#: gedit/gedit-utils.c:484
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"«%s» è una directory.\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e riprovare."
+
+#: gedit/gedit-utils.c:492
+#, c-format
+msgid ""
+"Not enough available memory to open the file \"%s\". Please, close some "
+"running application and try again."
+msgstr ""
+"Memoria insufficiente per aprire il file «%s». Chiudere qualcuna delle "
+"applicazioni in esecuzione e riprovare."
+
+#: gedit/gedit-utils.c:518
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that you typed the location correctly and that your proxy "
+"settings are correct and then try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché non è stato trovato l'host «%s».\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e che le "
+"impostazioni del proxy siano corrette, quindi riprovare."
+
+#: gedit/gedit-utils.c:533
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché il nome host non è valido.\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e riprovare."
+
+#: gedit/gedit-utils.c:542
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché il nome host è vuoto.\n"
+"\n"
+"Controllare che le impostazioni del proxy siano corrette e riprovare."
+
+#: gedit/gedit-utils.c:551
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the attempt to log in failed.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché il tentativo di effettuare il login è "
+"fallito.\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e riprovare."
+
+#: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains invalid data.\n"
+"\n"
+"Probably, you are trying to open a binary file."
+msgstr ""
+"Impossibile aprire il file «%s» perché contiene dati UTF-8 non validi.\n"
+"\n"
+"Probabilmente si sta tentando di aprire un file binario."
+
+#: gedit/gedit-utils.c:604
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit has not been able to "
+"automatically detect the character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and try again "
+"selecting a character coding in the 'Open File...' (or 'Open Location') "
+"dialog."
+msgstr ""
+
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" using the %s character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and that you "
+"selected the right character coding in the 'Open File...' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Impossibile aprire il file «%s» perché non è stato trovato l'host «%s».\n"
+"\n"
+"Controllare di aver digitato la posizione correttamente e che le "
+"impostazioni del proxy siano corrette, quindi riprovare."
+
+#: gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "Impossibile aprire il file «%s»."
+
+#: gedit/gedit-utils.c:666
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\".\n"
+"\n"
+"%s"
+msgstr "Impossibile aprire il file «%s»."
+
+#: gedit/gedit-utils.c:718
+#, c-format
+msgid "Could not save the file \"%s\"."
+msgstr "Impossibile salvare il file «%s»."
+
+#: gedit/gedit-utils.c:722
+#, c-format
+msgid ""
+"Could not save the file \"%s\".\n"
+"\n"
+"%s"
+msgstr ""
+"Impossibile salvare il file «%s».\n"
+"\n"
+"%s"
+
+#: gedit/gedit-utils.c:775
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot find it.\n"
+"\n"
+"Perhaps, it has recently been deleted."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché gedit non lo trova.\n"
+"\n"
+"Forse è stato cancellato di recente."
+
+#: gedit/gedit-utils.c:782
+#, c-format
+msgid "Could not revert the file \"%s\" because it contains corrupted data."
+msgstr "Impossibile ripristinare il file «%s» perché contiene dati corrotti."
+
+#: gedit/gedit-utils.c:793
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché gedit non gestisce le posizioni "
+"«%s:»."
+
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
+#, c-format
+msgid "Could not revert the file \"%s\"."
+msgstr "Impossibile ripristinare il file «%s»."
+
+#: gedit/gedit-utils.c:809
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains data in an invalid "
+"format."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché contiene dati in un formato non "
+"valido."
+
+#: gedit/gedit-utils.c:816
+#, c-format
+msgid "Could not revert the file \"%s\" because it is too big."
+msgstr "Impossibile ripristinare il file «%s» perché è troppo grande."
+
+#: gedit/gedit-utils.c:823
+#, c-format
+msgid "Could not revert the file \"%s\" because access was denied."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché l'accesso non è stato "
+"consentito."
+
+#: gedit/gedit-utils.c:830
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché ci sono troppi file aperti.\n"
+"\n"
+"Chiudere alcuni file e riprovare."
+
+#: gedit/gedit-utils.c:838
+#, c-format
+msgid ""
+"Not enough available memory to revert the file \"%s\". Please, close some "
+"running application and try again."
+msgstr ""
+"Non c'è memoria sufficiente per ripristinare il file «%s». Chiudere qualcuna "
+"delle applicazioni in esecuzione e riprovare."
+
+#: gedit/gedit-utils.c:864
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché non è stato trovato nessun host "
+"«%s».\n"
+"\n"
+"Controllare che le impostazioni del proxy siano corrette e riprovare."
+
+#: gedit/gedit-utils.c:878
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché il nome dell'host è vuoto.\n"
+"\n"
+"Controllare che le impostazioni del proxy siano corrette e riprovare."
+
+#: gedit/gedit-utils.c:885
+#, c-format
+msgid "Could not revert the file \"%s\" because the attempt to log in failed."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché il tentativo di effettuare il "
+"login è fallito."
+
+#: gedit/gedit-utils.c:892
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
+"\n"
+"Probably, you are trying to revert a binary file."
+msgstr ""
+"Impossibile ripristinare il file «%s» perché contiene dati UTF-8 non "
+"validi.\n"
+"\n"
+"Probabilmente si sta tentanto di ripristinare un file binario."
+
+#: gedit/gedit-utils.c:901
+msgid "It is not possible to revert an Untitled document."
+msgstr "Non è possibile ripristinare un documento «Senza titolo»"
+
+#: gedit/gedit-utils.c:990
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Il file «%s» esiste già."
+
+#: gedit/gedit-utils.c:996
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"«%s» è una directory.\n"
+"\n"
+"Accertarsi di aver digitato la posizione correttamente."
+
+#: gedit/gedit-utils.c:1005
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Impossibile creare il file «%s».\n"
+"\n"
+"Accertarsi di disporre dei permessi in scrittura necessari."
+
+#: gedit/gedit-utils.c:1012
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Impossibile creare il file «%s».\n"
+"\n"
+"Il nome del file è troppo lungo."
+
+#: gedit/gedit-utils.c:1019
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Impossibile creare il file «%s».\n"
+"\n"
+"Una directory nel percorso del file non esiste, oppure è un collegamento "
+"simbolico errato."
+
+#: gedit/gedit-utils.c:1028
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Non c'è spazio su disco sufficiente per creare il file «%s».\n"
+"\n"
+"Liberare un po' di spazio su disco e riprovare."
+
+#: gedit/gedit-utils.c:1034
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Impossibile creare il file «%s»."
+
+#.
+#. if (col == chars)
+#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
+#. else
+#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
+#.
+#: gedit/gedit-view.c:685
+#, fuzzy, c-format
+msgid "  Ln %d, Col %d"
+msgstr "  Rg %d, Col. %d"
+
+#: gedit/gedit-view.c:723
+msgid "  OVR"
+msgstr "  SSC"
+
+#: gedit/gedit-view.c:725
+msgid "  INS"
+msgstr "  INS"
+
+#: gedit/gedit2.c:81
+msgid "Show utility debugging messages."
+msgstr "Mostra i messaggi di debug delle utility."
+
+#: gedit/gedit2.c:84
+#, fuzzy
+msgid "Show metadata debugging messages."
+msgstr "Mostra i messaggi di debug della mdi."
+
+#: gedit/gedit2.c:87
+msgid "Show mdi debugging messages."
+msgstr "Mostra i messaggi di debug della mdi."
+
+#: gedit/gedit2.c:90
+msgid "Show commands debugging messages."
+msgstr "Mostra i messaggi di debug dei comandi."
+
+#: gedit/gedit2.c:93
+msgid "Show document debugging messages."
+msgstr "Mostra i messaggi di debug del documento."
+
+#: gedit/gedit2.c:96
+msgid "Show file debugging messages."
+msgstr "Mostra i messaggi di debug del file."
+
+#: gedit/gedit2.c:99
+msgid "Show plugin debugging messages."
+msgstr "Mostra i messaggi di debug del plugin."
+
+#: gedit/gedit2.c:102
+msgid "Show prefs debugging messages."
+msgstr "Mostra i messaggi di debug delle preferenze."
+
+#: gedit/gedit2.c:105
+msgid "Show printing debugging messages."
+msgstr "Mostra i messaggi di debug della stampa."
+
+#: gedit/gedit2.c:108
+msgid "Show search debugging messages."
+msgstr "Mostra i messaggi di debug della ricerca."
+
+#: gedit/gedit2.c:111
+msgid "Show undo debugging messages."
+msgstr "Mostra i messaggi di debug delle operazioni annullate."
+
+#: gedit/gedit2.c:114
+msgid "Show view debugging messages."
+msgstr "Mostra i messaggi di debug della vista"
+
+#: gedit/gedit2.c:117
+msgid "Show recent debugging messages."
+msgstr "Mostra i messaggi di debug recenti."
+
+#: gedit/gedit2.c:120
+msgid "Show session management debugging messages."
+msgstr "Mostra i messaggi di debug della gestione della sessione."
+
+#: gedit/gedit2.c:123
+msgid "Turn on all debugging messages."
+msgstr "Abilita tutti i messaggi di debug."
+
+#: gedit/gedit2.c:126
+msgid "Quit an existing instance of gedit"
+msgstr "Esci da un'istanza esistente di gedit"
+
+#: gedit/gedit2.c:129
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Crea una nuova finestra toplevel in un'istanza esistente di gedit"
+
+#: gedit/gedit2.c:132
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Crea un nuovo documento in un'istanza esistente di gedit"
+
+#: gedit/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (Unicode non valido)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -677,42 +2470,6 @@ msgstr "Statistiche sul documento"
 msgid "_Update"
 msgstr "_Aggiorna"
 
-#: plugins/docinfo/docinfo.glade2.h:1
-msgid "0"
-msgstr "0"
-
-#: plugins/docinfo/docinfo.glade2.h:2
-msgid "Bytes"
-msgstr "Byte"
-
-#: plugins/docinfo/docinfo.glade2.h:3
-msgid "Characters (no spaces)"
-msgstr "Caratteri (senza spazi)"
-
-#: plugins/docinfo/docinfo.glade2.h:4
-msgid "Characters (with spaces)"
-msgstr "Caratteri (inclusi gli spazi)"
-
-#: plugins/docinfo/docinfo.glade2.h:5
-msgid "File Name"
-msgstr "Nome del file"
-
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:373
-msgid "Lines"
-msgstr "Righe"
-
-#: plugins/docinfo/docinfo.glade2.h:7
-msgid "Update"
-msgstr "Aggiorna"
-
-#: plugins/docinfo/docinfo.glade2.h:8
-msgid "Words"
-msgstr "Parole"
-
-#: plugins/docinfo/docinfo.glade2.h:9
-msgid "gedit: Document Info plugin"
-msgstr "gedit: plugin di informazioni sul documento"
-
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid ""
 "The Document Statistics plugin analyzes the current document and determines "
@@ -722,6 +2479,63 @@ msgstr ""
 "Il plugin di «Statistiche sul documento» analizza il documento corrente e "
 "determina il numero di parole, righe, caratteri e caratteri diversi dallo "
 "spazio che esso contiene, e visualizza il risultato."
+
+#: plugins/docinfo/docinfo.glade2.h:2
+msgid "0"
+msgstr "0"
+
+#: plugins/docinfo/docinfo.glade2.h:3
+#, fuzzy
+msgid "<span weight=\"bold\">File Name</span>"
+msgstr "<span weight=\"bold\">Colori</span>"
+
+#: plugins/docinfo/docinfo.glade2.h:4
+msgid "Bytes"
+msgstr "Byte"
+
+#: plugins/docinfo/docinfo.glade2.h:5
+msgid "Characters (no spaces)"
+msgstr "Caratteri (senza spazi)"
+
+#: plugins/docinfo/docinfo.glade2.h:6
+msgid "Characters (with spaces)"
+msgstr "Caratteri (inclusi gli spazi)"
+
+#: plugins/docinfo/docinfo.glade2.h:8
+msgid "Update"
+msgstr "Aggiorna"
+
+#: plugins/docinfo/docinfo.glade2.h:9
+msgid "Words"
+msgstr "Parole"
+
+#: plugins/docinfo/docinfo.glade2.h:10
+msgid "gedit: Document Info plugin"
+msgstr "gedit: plugin di informazioni sul documento"
+
+#: plugins/indent/indent.c:45
+msgid "_Indent"
+msgstr "Rien_tro"
+
+#: plugins/indent/indent.c:47
+msgid "Indent selected lines"
+msgstr "Applica un rientro alle righe selezionate"
+
+#: plugins/indent/indent.c:49
+msgid "U_nindent"
+msgstr "Elimina rient_ro"
+
+#: plugins/indent/indent.c:51
+msgid "Unindent selected lines"
+msgstr "Elimina il rientro per le righe selezionate"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+msgid "Indent lines"
+msgstr "Applica un rientro alle righe"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent or un-indent selected lines."
+msgstr "Applica o elimina il rientro per le righe selezionate"
 
 #: plugins/sample/sample.c:43
 msgid "Insert User Na_me"
@@ -796,6 +2610,18 @@ msgstr ""
 msgid "Executing command"
 msgstr "Sto eseguendo il comando"
 
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr ""
+"Esegue un comando esterno ed eventualmente cattura il suo output nella "
+"finestra di output"
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "Comando shell"
+
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Co_mmand:"
 msgstr "Co_mando:"
@@ -816,149 +2642,22 @@ msgstr "Directory di la_voro:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: plugin di output da shell"
 
-#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
-msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
-msgstr ""
-"Esegue un comando esterno ed eventualmente cattura il suo output nella "
-"finestra di output"
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:26
+msgid "S_ort..."
+msgstr "_Ordina..."
 
-#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
-msgid "Shell command"
-msgstr "Comando shell"
+#: plugins/sort/sort.c:29
+msgid "Sort the current document or selection."
+msgstr "Ordina il documento corrente o il testo selezionato."
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:136
-msgid "Tag list plugin"
-msgstr "Plugin «Lista dei tag»"
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1 plugins/sort/sort.glade2.h:3
+msgid "Sort"
+msgstr "Ordina"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:154
-msgid "Select the group of tags you want to use"
-msgstr "Seleziona il gruppo di tag che vuoi utilizzare"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:176
-msgid "Tag Groups Combo"
-msgstr "Combo per gruppi di tag"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:178
-msgid "Tags Name List"
-msgstr "Lista dei nomi dei tag"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:188
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Fare doppio click su un tag per inserirlo nel document corrente"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
-msgid "Tags"
-msgstr "Tag"
-
-#: plugins/taglist/gedit-taglist-plugin.c:46
-msgid "Tag _List"
-msgstr "_Lista dei tag"
-
-#.
-#. #define MENU_ITEM_NAME		"TagList"
-#.
-#: plugins/taglist/gedit-taglist-plugin.c:51
-msgid "Show the tag list window"
-msgstr "Mostra la finestra con la lista dei tag"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "Lista dei tag"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
-msgstr ""
-"Il plugin «Lista dei tag» offre la possibilità di inserire facilmente "
-"all'interno di un documento i tag o le stringhe più utilizzati senza doverli "
-"digitare per intero."
-
-#: plugins/time/time.c:48
-msgid "In_sert Date and Time..."
-msgstr "In_serisci data e ora..."
-
-#: plugins/time/time.c:51
-msgid "Insert current date and time at the cursor position"
-msgstr "Inserisce la data e l'ora attuale nella posizione corrente"
-
-#: plugins/time/time.c:448
-msgid "Available formats"
-msgstr "Formati disponibili"
-
-#: plugins/time/time.c:552
-msgid "Configure insert date/time plugin..."
-msgstr "Configura il plugin «Inserisci data e ora»..."
-
-#: plugins/time/time.glade2.h:1 src/dialogs/gedit-preferences.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#: plugins/time/time.glade2.h:3
-msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
-msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
-
-#: plugins/time/time.glade2.h:4
-msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr "<span weight=\"bold\"> Quando inserisci data e ora...</span>"
-
-#: plugins/time/time.glade2.h:5
-msgid "Configure date/time plugin"
-msgstr "Configura il plugin «Inserisci data e ora»"
-
-#: plugins/time/time.glade2.h:6
-msgid "Insert Date and Time"
-msgstr "Inserisci data e ora"
-
-#: plugins/time/time.glade2.h:7
-msgid "Use the _selected format"
-msgstr "Usa il formato _selezionato"
-
-#: plugins/time/time.glade2.h:8
-msgid "_Insert"
-msgstr "_Inserisci"
-
-#: plugins/time/time.glade2.h:9
-msgid "_Prompt for a format"
-msgstr "_Chiedi il formato"
-
-#: plugins/time/time.glade2.h:10
-msgid "_Use custom format"
-msgstr "_Usa un formato personalizzato"
-
-#: plugins/time/time.gedit-plugin.desktop.in.h:1
-msgid "Insert Date/Time"
-msgstr "Inserisci data e ora"
-
-#: plugins/time/time.gedit-plugin.desktop.in.h:2
-msgid "Inserts current date and time at the cursor position."
-msgstr "Inserisce la data e l'ora nella posizione corrente"
-
-#: plugins/indent/indent.c:45
-msgid "_Indent"
-msgstr "Rien_tro"
-
-#: plugins/indent/indent.c:47
-msgid "Indent selected lines"
-msgstr "Applica un rientro alle righe selezionate"
-
-#: plugins/indent/indent.c:49
-msgid "U_nindent"
-msgstr "Elimina rient_ro"
-
-#: plugins/indent/indent.c:51
-msgid "Unindent selected lines"
-msgstr "Elimina il rientro per le righe selezionate"
-
-#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
-msgid "Indent lines"
-msgstr "Applica un rientro alle righe"
-
-#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
-msgstr "Applica o elimina il rientro per le righe selezionate"
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+msgid "Sorts a document or selected text."
+msgstr "Ordina un documento o il testo selezionato"
 
 #: plugins/sort/sort.glade2.h:1
 msgid "R_emove duplicates"
@@ -967,10 +2666,6 @@ msgstr "Ri_muovi i duplicati"
 #: plugins/sort/sort.glade2.h:2
 msgid "S_tart at column:"
 msgstr "I_ncomincia dalla colonna:"
-
-#: plugins/sort/sort.glade2.h:3 plugins/sort/sort.gedit-plugin.desktop.in.h:1
-msgid "Sort"
-msgstr "Ordina"
 
 #: plugins/sort/sort.glade2.h:4
 msgid "You cannot undo a sort operation"
@@ -988,30 +2683,26 @@ msgstr "Ordine inve_rtito"
 msgid "_Sort"
 msgstr "_Ordina"
 
-#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
-msgid "Sorts a document or selected text."
-msgstr "Ordina un documento o il testo selezionato"
-
-#: plugins/spell/gedit-automatic-spell-checker.c:318
+#: plugins/spell/gedit-automatic-spell-checker.c:336
 #: plugins/spell/gedit-spell-checker-dialog.c:504
 msgid "(no suggested words)"
 msgstr "(nessuna parola suggerita)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:342
+#: plugins/spell/gedit-automatic-spell-checker.c:360
 msgid "_More..."
 msgstr "_Ancora..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:395
+#: plugins/spell/gedit-automatic-spell-checker.c:413
 msgid "_Ignore All"
 msgstr "_Ignora tutto"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:408
+#: plugins/spell/gedit-automatic-spell-checker.c:426
 msgid "_Add"
 msgstr "A_ggiungi"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:445
+#: plugins/spell/gedit-automatic-spell-checker.c:463
 msgid "_Spelling Suggestions..."
 msgstr "_Suggerimenti ortografici..."
 
@@ -1031,117 +2722,101 @@ msgstr "(ortografia corretta)"
 msgid "Completed spell checking"
 msgstr "Controllo ortografico completato"
 
-#: plugins/spell/gedit-spell-checker.c:73
+#: plugins/spell/gedit-spell-checker.c:80
 msgid "Breton"
 msgstr "Bretone"
 
-#: plugins/spell/gedit-spell-checker.c:74
+#: plugins/spell/gedit-spell-checker.c:81
 msgid "Catalan"
 msgstr "Catalano"
 
-#: plugins/spell/gedit-spell-checker.c:75
+#: plugins/spell/gedit-spell-checker.c:82
 msgid "Czech"
 msgstr "Ceco"
 
-#: plugins/spell/gedit-spell-checker.c:76
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Danish"
 msgstr "Danese"
 
-#: plugins/spell/gedit-spell-checker.c:77
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "German (Germany)"
 msgstr "Tedesco (Germania)"
 
-#: plugins/spell/gedit-spell-checker.c:78
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "German (Swiss)"
 msgstr "Tedesco (Svizzera)"
 
-#: plugins/spell/gedit-spell-checker.c:79
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "English (American)"
 msgstr "Inglese (Americano)"
 
-#: plugins/spell/gedit-spell-checker.c:80
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "English (British)"
 msgstr "Inglese (Britannico)"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "English (Canadian)"
 msgstr "Inglese (Canadese)"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:90
 msgid "Spanish"
 msgstr "Spagnolo"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "Faroese"
 msgstr "Faroese"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "French (France)"
 msgstr "Francese (Francia)"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "French (Swiss)"
 msgstr "Francese (Svizzera)"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "Italian"
 msgstr "Italiano"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "Dutch"
 msgstr "Olandese"
 
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "Norwegian"
 msgstr "Norvegese"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Polish"
 msgstr "Polacco"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Portuguese (Portugal)"
 msgstr "Portoghese (Portogallo)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:99
 msgid "Portuguese (Brazilian)"
 msgstr "Portoghese (Brasiliano)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:100
 msgid "Russian"
 msgstr "Russo"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Swedish"
 msgstr "Svedese"
 
-#: plugins/spell/gedit-spell-checker.c:653
+#: plugins/spell/gedit-spell-checker.c:734
 msgid "Default"
 msgstr "Predefinito"
 
-#: plugins/spell/gedit-spell-language-dialog.c:229
-#: src/dialogs/gedit-dialog-goto-line.c:165
-#: src/dialogs/gedit-plugin-program-location-dialog.c:96
-#: src/dialogs/gedit-encodings-dialog.c:238
-#, c-format
-msgid "Could not find the required widgets inside %s."
-msgstr "Impossibile trovare i widget richiesti all'interno di %s."
-
-#: plugins/spell/gedit-spell-language-dialog.c:249
+#: plugins/spell/gedit-spell-language-dialog.c:253
 msgid "Languages"
 msgstr "Lingue"
-
-#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
-msgid "Checks the spelling of the current document."
-msgstr "Controlla l'ortografia del documento corrente."
-
-#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
-msgid "Spell checker"
-msgstr "Correttore ortografico"
 
 #: plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -1207,15 +2882,6 @@ msgstr "_Ignora"
 msgid "_Suggestions:"
 msgstr "_Suggerimenti:"
 
-#. Key in case the plugin ever needs any settings
-#: plugins/sort/sort.c:26
-msgid "S_ort..."
-msgstr "_Ordina..."
-
-#: plugins/sort/sort.c:29
-msgid "Sort the current document or selection."
-msgstr "Ordina il documento corrente o il testo selezionato."
-
 #: plugins/spell/spell.c:51
 msgid "_Check Spelling"
 msgstr "_Controllo ortografico"
@@ -1240,1931 +2906,506 @@ msgstr "Configura _lingua"
 msgid "Set the language of the current document"
 msgstr "Configura la lingua del documento corrente"
 
-#: plugins/spell/spell.c:549
+#: plugins/spell/spell.c:553
 msgid "The document is empty."
 msgstr "Il documento è vuoto."
 
-#: plugins/spell/spell.c:567
+#: plugins/spell/spell.c:571
 msgid "The selected text does not contain mispelled words."
 msgstr "Il testo selezionato non contiene alcun errore ortografico."
 
-#: plugins/spell/spell.c:568
+#: plugins/spell/spell.c:572
 msgid "The document does not contain mispelled words."
 msgstr "Il documento non contiene alcun errore ortografico."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1962
-#, c-format
-msgid "Activate %s"
-msgstr "Mostra %s"
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
+msgid "Checks the spelling of the current document."
+msgstr "Controlla l'ortografia del documento corrente."
 
-#: src/dialogs/gedit-dialog-goto-line.c:139
-msgid "Go to Line"
-msgstr "Vai alla riga"
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
+msgid "Spell checker"
+msgstr "Correttore ortografico"
 
-#. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:149
-msgid "_Go to Line"
-msgstr "Vai alla ri_ga"
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Plugin «Lista dei tag»"
 
-#: src/dialogs/gedit-dialog-replace.c:132
-#: src/dialogs/gedit-dialog-replace.c:1025 src/gedit-commands.c:363
-#, c-format
-msgid "The text \"%s\" was not found."
-msgstr "La stringa «%s» non è stata trovata."
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tags you want to use"
+msgstr "Seleziona il gruppo di tag che vuoi utilizzare"
 
-#: src/dialogs/gedit-dialog-replace.c:240 src/dialogs/replace.glade2.h:4
-#: src/gedit-ui.xml.h:51
-msgid "Replace"
-msgstr "Sostituisci"
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Combo per gruppi di tag"
 
-#: src/dialogs/gedit-dialog-replace.c:251
-msgid "Replace _All"
-msgstr "Sostituisci _tutti"
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "Lista dei nomi dei tag"
 
-#. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:254 src/gedit-file-selector-util.c:129
-msgid "_Replace"
-msgstr "Sostit_uisci"
+#: plugins/taglist/gedit-taglist-plugin-window.c:188
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Fare doppio click su un tag per inserirlo nel document corrente"
 
-#: src/dialogs/gedit-dialog-replace.c:376 src/gedit-ui.xml.h:22
-msgid "Find"
-msgstr "Trova"
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
+msgid "Tags"
+msgstr "Tag"
 
-#: src/dialogs/gedit-dialog-replace.c:1034
-#, c-format
-msgid "Found and replaced %d occurences."
-msgstr "Trovate e sostituite %d occorrenze"
+#: plugins/taglist/gedit-taglist-plugin.c:46
+msgid "Tag _List"
+msgstr "_Lista dei tag"
 
-#: src/dialogs/gedit-dialog-uri.c:83
-msgid "Open Location"
-msgstr "Apri posizione"
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
+msgid "Show the tag list window"
+msgstr "Mostra la finestra con la lista dei tag"
 
-#: src/dialogs/gedit-plugin-manager.c:53
-msgid "Plugin"
-msgstr "Plugin"
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+msgid "Tag list"
+msgstr "Lista dei tag"
 
-#: src/dialogs/gedit-plugin-manager.c:54
-msgid "Load"
-msgstr "Carica"
-
-#: src/dialogs/gedit-plugin-manager.c:320
-msgid "Module file name"
-msgstr "Nome del file del modulo"
-
-#: src/dialogs/gedit-plugin-manager.c:321
-msgid "Author(s)"
-msgstr "Autore/i"
-
-#: src/dialogs/gedit-plugin-manager.c:488
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "Impossibile trovare plugin-manager.glade2, reinstallare gedit.\n"
-
-#: src/dialogs/gedit-plugin-manager.c:511
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"File glade per il gestore di plugin non valido -- impossibile trovare tutti "
-"i widget.\n"
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:74
-#: src/dialogs/program-location-dialog.glade2.h:1
-msgid "Set program location..."
-msgstr "Configurazione del percorso del programma..."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:102
-#, c-format
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tags/strings without having to type them."
 msgstr ""
-"Il plugin «%s» usa un programma esterno, chiamato <tt>%s</tt>, per eseguire "
-"questa operazione.\n"
-"\n"
-"Indicare il percorso corretto del programma <tt>%s</tt>."
+"Il plugin «Lista dei tag» offre la possibilità di inserire facilmente "
+"all'interno di un documento i tag o le stringhe più utilizzati senza doverli "
+"digitare per intero."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:148
-msgid "The selected file is not executable."
-msgstr "Il file selezionato non è eseguibile."
+#: plugins/time/time.c:48
+msgid "In_sert Date and Time..."
+msgstr "In_serisci data e ora..."
 
-#: src/dialogs/gedit-preferences-dialog.c:234
-msgid "Font & Colors"
-msgstr "Font e colori"
+#: plugins/time/time.c:51
+msgid "Insert current date and time at the cursor position"
+msgstr "Inserisce la data e l'ora attuale nella posizione corrente"
 
-#: src/dialogs/gedit-preferences-dialog.c:236
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid "Tabs"
-msgstr "Tab"
+#: plugins/time/time.c:448
+msgid "Available formats"
+msgstr "Formati disponibili"
 
-#: src/dialogs/gedit-preferences-dialog.c:237
-msgid "Wrap Mode"
-msgstr "A capo automatico"
+#: plugins/time/time.c:552
+msgid "Configure insert date/time plugin..."
+msgstr "Configura il plugin «Inserisci data e ora»..."
 
-#: src/dialogs/gedit-preferences-dialog.c:238
-msgid "Auto Indent"
-msgstr "Rientro automatico"
+#: plugins/time/time.gedit-plugin.desktop.in.h:1
+msgid "Insert Date/Time"
+msgstr "Inserisci data e ora"
 
-#: src/dialogs/gedit-preferences-dialog.c:239
-msgid "Line Numbers"
-msgstr "Numeri di riga"
+#: plugins/time/time.gedit-plugin.desktop.in.h:2
+msgid "Inserts current date and time at the cursor position."
+msgstr "Inserisce la data e l'ora nella posizione corrente"
 
-#: src/dialogs/gedit-preferences-dialog.c:241 src/gedit-ui.xml.h:32
-msgid "Open"
-msgstr "Apri"
+#: plugins/time/time.glade2.h:3
+msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
+msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:42 src/gedit-ui.xml.h:55
-msgid "Save"
-msgstr "Salva"
+#: plugins/time/time.glade2.h:4
+msgid "<span weight=\"bold\"> When inserting date/time...</span>"
+msgstr "<span weight=\"bold\"> Quando inserisci data e ora...</span>"
 
-#: src/dialogs/gedit-preferences-dialog.c:243
-#: src/dialogs/gedit-preferences.glade2.h:50 src/gedit-ui.xml.h:72
-msgid "Undo"
-msgstr "Annulla"
+#: plugins/time/time.glade2.h:5
+msgid "Configure date/time plugin"
+msgstr "Configura il plugin «Inserisci data e ora»"
 
-#: src/dialogs/gedit-preferences-dialog.c:251
-msgid "Page"
-msgstr "Pagina"
+#: plugins/time/time.glade2.h:6
+msgid "Insert Date and Time"
+msgstr "Inserisci data e ora"
 
-#: src/dialogs/gedit-preferences-dialog.c:253
-msgid "Fonts"
-msgstr "Font"
+#: plugins/time/time.glade2.h:7
+msgid "Use the _selected format"
+msgstr "Usa il formato _selezionato"
 
-#: src/dialogs/gedit-preferences-dialog.c:260
-msgid "Manager"
-msgstr "Gestione"
+#: plugins/time/time.glade2.h:8
+msgid "_Insert"
+msgstr "_Inserisci"
 
-#: src/dialogs/gedit-preferences-dialog.c:268
-msgid "Editor"
-msgstr "Editor"
+#: plugins/time/time.glade2.h:9
+msgid "_Prompt for a format"
+msgstr "_Chiedi il formato"
 
-#: src/dialogs/gedit-preferences-dialog.c:269
-#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:364
-#: src/gedit-ui.xml.h:41
-msgid "Print"
-msgstr "Stampa"
+#: plugins/time/time.glade2.h:10
+msgid "_Use custom format"
+msgstr "_Usa un formato personalizzato"
 
-#: src/dialogs/gedit-preferences-dialog.c:270
-msgid "Plugins"
-msgstr "Plugin"
-
-#: src/dialogs/gedit-preferences-dialog.c:342
-msgid "Cat_egories:"
-msgstr "Cat_egorie:"
-
-#: src/dialogs/gedit-preferences-dialog.c:364
-msgid "Preferences"
-msgstr "Preferenze"
-
-#: src/dialogs/gedit-preferences-dialog.c:604
-msgid "Categories"
-msgstr "Categorie"
-
-#: src/dialogs/gedit-preferences-dialog.c:837
-msgid "Push this button to select the font to be used by the editor"
-msgstr "Cliccare su questo pulsante per selezionare il font che verrà usato dall'editor"
-
-#: src/dialogs/gedit-preferences-dialog.c:840
-msgid "Push this button to configure text color"
-msgstr "Cliccare su questo pulsante per selezionare il colore del testo"
-
-#: src/dialogs/gedit-preferences-dialog.c:842
-msgid "Push this button to configure background color"
-msgstr "Cliccare su questo pulsante per selezionare il colore di sfondo"
-
-#: src/dialogs/gedit-preferences-dialog.c:844
-msgid ""
-"Push this button to configure the color in which the selected text should "
-"appear"
-msgstr "Cliccare su questo pulsante per scedgliere il colore del testo selezionato"
-
-#: src/dialogs/gedit-preferences-dialog.c:847
-msgid ""
-"Push this button to configure the color in which the selected text should be "
-"marked"
+#: viewer/gedit-persist-stream.c:44
+msgid "Save method not implemented for gedit viewer"
 msgstr ""
-"Cliccare su questo pulsante per selezionare il colore con il quale verrà "
-"evidenziato il testo selezionato"
 
-#: src/dialogs/gedit-preferences-dialog.c:1852
-msgid "Push this button to select the font to be used to print the body"
-msgstr ""
-"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
-"stampare il corpo del testo"
-
-#: src/dialogs/gedit-preferences-dialog.c:1854
-msgid "Push this button to select the font to be used to print the headers"
-msgstr ""
-"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
-"stampare le intestazioni"
-
-#: src/dialogs/gedit-preferences-dialog.c:1856
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr ""
-"Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
-"stampare le i numeri di riga"
-
-#: src/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Font</b>"
-msgstr "<b>Font</b>"
-
-#: src/dialogs/gedit-preferences.glade2.h:3
-msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Rientro automatico</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:4
-msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Font e colori</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Font</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:6
-msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Numeri di riga</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
-msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Gestione</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Apri</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Pagina</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:10
-msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Salva</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:11
-msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Tab</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:12
-msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Annulla</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:13
-msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Modalità a capo automatico</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:14
-msgid "<span weight=\"bold\">Colors</span>"
-msgstr "<span weight=\"bold\">Colori</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Quando viene salvato un nuovo file...</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Quando viene salvato un file esistente...</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Aggiungi nuove codifiche"
-
-#: src/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Usa sempre la codifica U_TF-8 (più veloce)"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Usa sempre la codifica _UTF-8 (più veloce)"
-
-#: src/dialogs/gedit-preferences.glade2.h:20
-msgid "Create a _backup copy of files before saving"
-msgstr "Crea una copia di _backup dei file prima di salvare"
-
-#: src/dialogs/gedit-preferences.glade2.h:21
-msgid "Do not _split words over two lines"
-msgstr "Non dividere le parole su due righe"
-
-#: src/dialogs/gedit-preferences.glade2.h:22
-msgid "Editor _font: "
-msgstr "_Font dell'editor:"
-
-#: src/dialogs/gedit-preferences.glade2.h:23
-msgid "Enable _auto indentation"
-msgstr "Abilita rientro _automatico"
-
-#: src/dialogs/gedit-preferences.glade2.h:24
-msgid "Enable text _wrapping"
-msgstr "Abilita a _capo automatico"
-
-#: src/dialogs/gedit-preferences.glade2.h:25
-msgid "Fonts & Colors"
-msgstr "Font e colori"
-
-#: src/dialogs/gedit-preferences.glade2.h:26
-msgid "Insert _spaces instead of tabs"
-msgstr "Inserisci _spazi invece di tab"
-
-#: src/dialogs/gedit-preferences.glade2.h:27
-msgid "LOGO"
-msgstr "LOGO"
-
-#: src/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "_Numeri di riga:"
-
-#: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Line numbers"
-msgstr "Numeri di riga"
-
-#: src/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Sposta in basso"
-
-#: src/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Sposta in alto"
-
-#: src/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "Intestazioni di _pagina:"
-
-#: src/dialogs/gedit-preferences.glade2.h:33
-msgid "Pick the background color"
-msgstr "Scelta del colore di sfondo"
-
-#: src/dialogs/gedit-preferences.glade2.h:34
-msgid "Pick the selected text color"
+#: viewer/gedit-viewer-ui.xml.h:1
+#, fuzzy
+msgid "Copy the selected text to the clipboard"
 msgstr "Scelta del colore del testo selezionato"
 
-#: src/dialogs/gedit-preferences.glade2.h:35
-msgid "Pick the selection color"
-msgstr "Scelta del colore della selezione"
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-msgid "Pick the text color"
-msgstr "Scelta del colore del testo"
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid "Plugin manager"
-msgstr "Gestione plugin"
-
-#: src/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "Stampa i numeri di riga ogni"
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Font di stampa"
-
-#: src/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Rimuovi una codifica"
-
-#: src/dialogs/gedit-preferences.glade2.h:43
-msgid "Se_lection color:"
-msgstr "Colore della se_lezione:"
-
-#: src/dialogs/gedit-preferences.glade2.h:44
-msgid "Selecte_d text color:"
-msgstr "Colore _del testo selezionato:"
-
-#: src/dialogs/gedit-preferences.glade2.h:45
-msgid "Set _tabs width equivalent to"
-msgstr "Ogni tab è pari a"
-
-#: src/dialogs/gedit-preferences.glade2.h:46
-msgid "Set limit on _undo actions to"
-msgstr "Limita le azioni che è possibile annullare a"
-
-#: src/dialogs/gedit-preferences.glade2.h:48
-msgid "U_se default theme colors"
-msgstr "U_sa i colori predefiniti del tema"
-
-#: src/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "U_sa la codifica originale del file se possibile"
-
-#: src/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Usa la codifica della locale co_rrente se possibile"
-
-#: src/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Usa la codifica della _locale corrente se possibile"
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Wrap mode"
-msgstr "A capo automatico"
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-msgid "_Autosave current file every"
-msgstr "Salvata_ggio automatico del file corrente ogni"
-
-#: src/dialogs/gedit-preferences.glade2.h:55
-msgid "_Background color:"
-msgstr "C_olore di sfondo:"
-
-#: src/dialogs/gedit-preferences.glade2.h:56
-msgid "_Body:"
-msgstr "_Corpo del testo:"
-
-#: src/dialogs/gedit-preferences.glade2.h:57
-msgid "_Display line numbers"
-msgstr "_Mostra i numeri di riga"
-
-#: src/dialogs/gedit-preferences.glade2.h:58
-msgid "_Print page headers"
-msgstr "_Stampa intestazioni di pagina"
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-msgid "_Restore Default Fonts"
-msgstr "_Ripristina font predefiniti"
-
-#: src/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "C_odifiche supportate:"
-
-#: src/dialogs/gedit-preferences.glade2.h:61
-msgid "_Text color:"
-msgstr "Colore del _testo:"
-
-#: src/dialogs/gedit-preferences.glade2.h:62
-msgid "_Use default theme font"
-msgstr "_Usa il font predefinito del tema"
-
-#: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_action(s)"
-msgstr "_azione/i"
-
-#: src/dialogs/gedit-preferences.glade2.h:64
-msgid "_minutes"
-msgstr "_minuti"
-
-#: src/dialogs/gedit-preferences.glade2.h:65
-msgid "character(s)"
-msgstr "carattere/i"
-
-#: src/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr "ri_ga/e"
-
-#: src/dialogs/gnome-print-font-dialog.c:107
-msgid "_Insert a new preview phrase."
-msgstr "_Inserire una nuova frase campione."
-
-#: src/dialogs/gnome-print-font-dialog.c:113
-msgid "Modify preview phrase..."
-msgstr "Modifica della frase campione"
-
-#: src/dialogs/gnome-print-font-dialog.c:167
-msgid "Preview"
-msgstr "Anteprima"
-
-#: src/dialogs/gnome-print-font-dialog.c:180
-msgid "_Modify preview phrase..."
-msgstr "_Modifica della frase campione..."
-
-#: src/dialogs/gnome-print-font-dialog.c:243
-msgid "Font Selection"
-msgstr "Selezione font"
-
-#: src/dialogs/gnome-print-font-picker.c:89
-msgid "Sans Regular 12"
-msgstr "Sans Regular 12"
-
-#: src/dialogs/gnome-print-font-picker.c:90
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
-#: src/dialogs/gnome-print-font-picker.c:91
-msgid "Pick a Font"
-msgstr "Scelta del font"
-
-#: src/dialogs/gnome-print-font-picker.c:176
-msgid "Title"
-msgstr "Titolo"
-
-#: src/dialogs/gnome-print-font-picker.c:177
-msgid "The title of the selection dialog box"
-msgstr "Il titolo della finestra di dialogo di selezione"
-
-#: src/dialogs/gnome-print-font-picker.c:197
-msgid "Font name"
-msgstr "Nome del font"
-
-#: src/dialogs/gnome-print-font-picker.c:198
-msgid "Name of the selected font"
-msgstr "Nome del font selezionato"
-
-#: src/dialogs/gnome-print-font-picker.c:206
-msgid "Preview text"
-msgstr "Anteprima del testo"
-
-#: src/dialogs/gnome-print-font-picker.c:207
-msgid "Preview text shown in the dialog"
-msgstr "Anteprima del testo visualizzata nella finestra di dialogo"
-
-#: src/dialogs/gnome-print-font-picker.c:215
-msgid "Use font in label"
-msgstr "Usa il carattere nell'etichetta"
-
-#: src/dialogs/gnome-print-font-picker.c:216
-msgid "Use font in the label in font info mode"
-msgstr "Usa il font nell'etichetta in modalità informazioni sul font"
-
-#: src/dialogs/gnome-print-font-picker.c:224
-msgid "Font size for label"
-msgstr "Dimensioni del font per l'etichetta"
-
-#: src/dialogs/gnome-print-font-picker.c:225
-msgid "Font size for label in font info mode"
-msgstr "Dimensioni del font per l'etichetta in modalità informazioni sul font"
-
-#: src/dialogs/gnome-print-font-picker.c:235
-msgid "Show size"
-msgstr "Mostra dimensione"
-
-#: src/dialogs/gnome-print-font-picker.c:236
-msgid "Show size in font info mode"
-msgstr "Mostra le dimensioni in modalità informazioni sul font"
-
-#: src/dialogs/gnome-print-font-picker.c:1015
-msgid "Font"
-msgstr "Font"
-
-#. gnome_print_font_picker_update_font_info
-#: src/dialogs/goto-line.glade2.h:1
-msgid "Goto Line"
-msgstr "Vai alla riga"
-
-#: src/dialogs/goto-line.glade2.h:2
-msgid "_Line number:"
-msgstr "_Numero di riga"
-
-#: src/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure plugin"
-msgstr "C_onfigura plugin"
-
-#: src/dialogs/plugin-manager.glade2.h:2
-msgid "Configure the selected plugin"
-msgstr "Configura il plugin selezionato"
-
-#: src/dialogs/plugin-manager.glade2.h:3
-msgid "De_tails"
-msgstr "De_ttagli"
-
-#: src/dialogs/plugin-manager.glade2.h:4
-msgid "_Description"
-msgstr "_Descrizione"
-
-#: src/dialogs/plugin-manager.glade2.h:5
-msgid "dialog1"
-msgstr "dialog1"
-
-#: src/dialogs/program-location-dialog.glade2.h:2
-msgid "_Location to search for:"
-msgstr "_Posizione in cui cercare"
-
-#: src/dialogs/program-location-dialog.glade2.h:3
-msgid "label"
-msgstr "etichetta"
-
-#: src/dialogs/replace.glade2.h:2
-msgid "Find Next"
-msgstr "Trova successivo"
-
-#: src/dialogs/replace.glade2.h:3
-msgid "Match _entire word only"
-msgstr "Solo parole int_ere "
-
-#: src/dialogs/replace.glade2.h:5
-msgid "Replace All"
-msgstr "Sostituisci tutti"
-
-#: src/dialogs/replace.glade2.h:6
-msgid "Replace _with: "
-msgstr "S_ostituisci con:"
-
-#: src/dialogs/replace.glade2.h:7
-msgid "_Match case"
-msgstr "_Maiuscole/minuscole"
-
-#: src/dialogs/replace.glade2.h:8
-msgid "_Search for: "
-msgstr "C_erca:"
-
-#: src/dialogs/replace.glade2.h:9
-msgid "_Wrap around"
-msgstr "_Ricomincia dall'inizio"
-
-#: src/dialogs/uri.glade2.h:2
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Inserire _la posizione (URI) del file che si desidera aprire:"
-
-#: src/dialogs/uri.glade2.h:3
-msgid "Open from URI"
-msgstr "Apri da un URI"
-
-#: src/gedit-commands.c:472
-msgid "translator_credits"
-msgstr "Roberto Rosselli Del Turco <rosselli@ling.unipi.it>"
-
-#: src/gedit-commands.c:497
-msgid "gedit"
-msgstr "gedit"
-
-#: src/gedit-commands.c:501
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gEdit è un semplice editor di testo per GNOME"
-
-#: src/gedit-document.c:537 src/gedit-document.c:555
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:537 src/gedit-document.c:555
-msgid "Untitled"
-msgstr "Senza titolo"
-
-#: src/gedit-document.c:543 src/gedit-document.c:590
-msgid "Invalid file name"
-msgstr "Nome di file non valido"
-
-#: src/gedit-document.c:702 src/gedit-document.c:786
-msgid "Invalid UTF-8 data"
-msgstr "Dati UTF-8 non validi"
-
-#: src/gedit-document.c:1016
-#, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "Impossibile leggere le informazioni del collegamento simbolico per %s"
-
-#: src/gedit-document.c:1062
-msgid "The file has too many symbolic links."
-msgstr "Il file ha troppi collegamenti simbolici"
-
-#: src/gedit-document.c:1118
-#, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit non può gestire posizioni «%s:» in scrittura."
-
-#: src/gedit-document.c:1125
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "gedit non può gestire questo tipo di posizione in scrittura."
-
-#: src/gedit-document.c:1138
-msgid "Invalid filename."
-msgstr "Nome del file non valido."
-
-#: src/gedit-document.c:1278
-msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
-msgstr ""
-"Non c'è abbastanza spazio su disco per salvare il file.\n"
-"Liberare un po' di spazio su disco e riprovare."
-
-#: src/gedit-document.c:1283
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
-msgstr ""
-"Il disco sul quale si sta cercando di salvare il file presenta una "
-"limitazione per quanto riguarda le dimensioni dei file. Salvare un file "
-"più piccolo, oppure salvare il file su un disco che non ha questa "
-"limitazione."
-
-#: src/gedit-document.c:1327
-msgid "Could not create a backup file."
-msgstr "Impossibile creare un file di backup."
-
-#: src/gedit-document.c:1447
-msgid "It is not possible to revert an Untitled document"
-msgstr "Non è possibile ripristinare un documento «Senza titolo»"
-
-#: src/gedit-file-selector-util.c:147
-#, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Un file chiamato «%s» esiste già.\n"
-"Si desidera sostituirlo con quello che si sta per salvare?"
-
-#: src/gedit-file-selector-util.c:158
-#, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"Il file «%s» è in modalità sola lettura.\n"
-"Si desidera tentare di sostituirlo con quello che si sta per salvare?"
-
-#: src/gedit-file-selector-util.c:544
-msgid "Select a filename to save"
-msgstr "Seleziona il none del file da salvare"
-
-#: src/gedit-file.c:151
-msgid "Open File..."
-msgstr "Apri file..."
-
-#: src/gedit-file.c:177 src/gedit-file.c:887
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "File «%s» caricato"
-
-#: src/gedit-file.c:309 src/gedit-file.c:455
-#, c-format
-msgid "Saving file '%s'..."
-msgstr "Salvataggio del file «%s» in corso..."
-
-#: src/gedit-file.c:337 src/gedit-file.c:470
-msgid "The document has not been saved."
-msgstr "Il documento non è stato salvato."
-
-#: src/gedit-file.c:351 src/gedit-file.c:467
-#, c-format
-msgid "File '%s' saved."
-msgstr "Il file «%s» è stato salvato"
-
-#: src/gedit-file.c:434
-msgid "Save as..."
-msgstr "Salva come..."
-
-#: src/gedit-file.c:628
-#, c-format
-msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"Si desidera ripristinare il documento salvato «%s»?\n"
-"\n"
-"Questa operazione non può essere annullata."
-
-#: src/gedit-file.c:638 src/gedit-ui.xml.h:99
-msgid "_Revert"
-msgstr "_Ripristina"
-
-#: src/gedit-file.c:672
-#, c-format
-msgid "Reverting file '%s'..."
-msgstr "Ripristino del file «%s» in corso..."
-
-#: src/gedit-file.c:685
-msgid "The document has not been reverted."
-msgstr "Il documento non è stato ripristinato."
-
-#: src/gedit-file.c:695
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Ripristinato il file «%s»"
-
-#: src/gedit-file.c:721
-#, c-format
-msgid "Loading %d files..."
-msgstr "Caricamento dei file %d in corso..."
-
-#: src/gedit-file.c:757
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Il file «%s» non esiste. Si desidera crearlo?"
-
-#: src/gedit-file.c:812
-#, c-format
-msgid "Loaded %i files"
-msgstr "Caricati %i file"
-
-#: src/gedit-file.c:945
-msgid "Could not read data from stdin."
-msgstr "Impossibile leggere i dati da stdin."
-
-#. Read only
-#: src/gedit-mdi-child.c:215
-msgid "RO"
-msgstr "RO"
-
-#. Add the detach tab button
-#: src/gedit-mdi-child.c:539 src/gedit-ui.xml.h:89
-msgid "_Move to New Window"
-msgstr "_Sposta in una nuova finestra"
-
-#: src/gedit-mdi.c:446
-msgid "Open a file."
-msgstr "Apri un file."
-
-#: src/gedit-mdi.c:1032
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Si desidera salvare le modifiche fatte al documento «%s»?\n"
-"Tali modifiche andranno perse se non verranno salvate."
-
-#: src/gedit-mdi.c:1037
-msgid "Do_n't save"
-msgstr "_Non salvare"
-
-#: src/gedit-mdi.c:1056
-msgid "_Don't quit"
-msgstr "Non _uscire"
-
-#: src/gedit-mdi.c:1060
-msgid "_Don't close"
-msgstr "Non _chiudere"
-
-#: src/gedit-mdi.c:1150
-msgid "(modified)"
-msgstr "(modificato)"
-
-#: src/gedit-mdi.c:1156
-msgid "(readonly)"
-msgstr "(sola lettura)"
-
-#: src/gedit-plugins-engine.c:362
-#, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "Errore, impossibile aprire il file modulo «%s».\n"
-
-#: src/gedit-plugins-engine.c:372
-#, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "Errore, il plugin «%s» non contiene la funzione init."
-
-#: src/gedit-plugins-engine.c:382
-#, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Errore, il plugin «%s» non contiene la funzione activate"
-
-#: src/gedit-plugins-engine.c:392
-#, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Errore, il plugin «%s» non contiene la funzione deactivate"
-
-#: src/gedit-plugins-engine.c:417
-#, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "Errore, impossibile inizializzare il plugin «%s»."
-
-#: src/gedit-plugins-engine.c:468
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Errore, impossibile distruggere il plugin «%s»."
-
-#: src/gedit-plugins-engine.c:551 src/gedit-plugins-engine.c:639
-#: src/gedit-plugins-engine.c:764
-#, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "Errore, impossibile attivare il plugin «%s»."
-
-#: src/gedit-plugins-engine.c:590 src/gedit-plugins-engine.c:782
-#, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "Errore, impossibile disattivare il plugin «%s»."
-
-#: src/gedit-plugins-engine.c:683
-#, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "Errore, impossibile aggiornare l'interfaccia del plugin «%s»."
-
-#: src/gedit-prefs-manager.c:335
-msgid "Cannot initialize preferences manager."
-msgstr "Impossibile inizializzare il gestore delle preferenze"
-
-#: src/gedit-prefs-manager.c:1756
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr ""
-
-#: src/gedit-print.c:254
-msgid ""
-"gedit is unable to print since it cannot find\n"
-"one of the required fonts."
-msgstr ""
-"gedit non può stampare perché non riesce a trovare\n"
-"uno dei font necessari."
-
-#: src/gedit-print.c:432
-#, c-format
-msgid "File: %s"
-msgstr "File: %s"
-
-#. Print right text
-#: src/gedit-print.c:439
-#, c-format
-msgid "Page: %d"
-msgstr "Pagina: %d"
-
-#: src/gedit-print.c:580
-msgid "gedit - Print Preview"
-msgstr "gedit - Anteprima di stampa"
-
-#: src/gedit-print.c:658
-#, c-format
-msgid ""
-"An error occurred while printing.\n"
-"\n"
-"%s,"
-msgstr ""
-"Si è verificato un errore durante la stampa.\n"
-"\n"
-"%s,"
-
-#: src/gedit-ui.xml.h:1
-msgid "About this application"
-msgstr "Informazioni su questa applicazione"
-
-#: src/gedit-ui.xml.h:2
-msgid "C_ustomize Statusbar"
-msgstr "P_ersonalizza la barra di stato"
-
-#: src/gedit-ui.xml.h:3
-msgid "Change the visibility of the output window in the current window"
-msgstr "Cambia la visibilità della finestra di output nella finestra corrente"
-
-#: src/gedit-ui.xml.h:4
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "Cambia la visibilità della barra di stato nella finestra corrente"
-
-#: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "Cambia la visibilità della barra degli strumenti nella finestra corrente"
-
-#: src/gedit-ui.xml.h:6
-msgid "Close"
-msgstr "Chiudi"
-
-#: src/gedit-ui.xml.h:7
-msgid "Close all open files"
-msgstr "Chiudi tutti i file aperti"
-
-#: src/gedit-ui.xml.h:8
-msgid "Close the current file"
-msgstr "Chiudi il file corrente"
-
-#: src/gedit-ui.xml.h:9
-msgid "Configure the application"
-msgstr "Configura l'applicazione"
-
-#: src/gedit-ui.xml.h:10
-msgid "Copy"
-msgstr "Copia"
-
-#: src/gedit-ui.xml.h:11
-msgid "Copy the selection"
-msgstr "Copia la selezione"
-
-#: src/gedit-ui.xml.h:12
-msgid "Create a new document"
-msgstr "Crea nuovo documento"
-
-#: src/gedit-ui.xml.h:13
-msgid "Cu_t"
-msgstr "_Taglia"
-
-#: src/gedit-ui.xml.h:14
-msgid "Customize"
-msgstr "Personalizza"
-
-#: src/gedit-ui.xml.h:15
-msgid "Customize toolbars"
-msgstr "Personalizza le barre degli strumenti"
-
-#: src/gedit-ui.xml.h:16
-msgid "Cut"
-msgstr "Taglia"
-
-#: src/gedit-ui.xml.h:17
-msgid "Cut the selection"
-msgstr "Taglia la selezione"
-
-#: src/gedit-ui.xml.h:18
-msgid "Delete"
-msgstr "Cancella"
-
-#: src/gedit-ui.xml.h:19
-msgid "Delete the selected text"
-msgstr "Cancella il testo selezionato"
-
-#: src/gedit-ui.xml.h:20
-msgid "Dump XML"
-msgstr ""
-
-#: src/gedit-ui.xml.h:21
-msgid "Dump the UI Xml description"
-msgstr ""
-
-#: src/gedit-ui.xml.h:23
-msgid "Find Again"
-msgstr "Trova ancora"
-
-#: src/gedit-ui.xml.h:24
-msgid "Find Ne_xt"
-msgstr "Trova s_uccessivo"
-
-#: src/gedit-ui.xml.h:25
-msgid "Go to _Line..."
-msgstr "Vai alla _riga..."
-
-#: src/gedit-ui.xml.h:26
-msgid "Go to a specific line number"
-msgstr "Vai a uno specifico numero di riga"
-
-#: src/gedit-ui.xml.h:27
-msgid "Icon and _Text"
-msgstr "Icona e _testo"
-
-#: src/gedit-ui.xml.h:28
-msgid "Main toolbar"
-msgstr "Barra degli strumenti principale"
-
-#: src/gedit-ui.xml.h:29
-msgid "Move the current document to a new window"
-msgstr "Sposta il documento corrente in una nuova finestra"
-
-#: src/gedit-ui.xml.h:30
-msgid "New"
-msgstr "Nuovo"
-
-#: src/gedit-ui.xml.h:31
-msgid "Only show icons in the toolbar"
-msgstr "Mostra soltanto icone nella barra degli strumenti"
-
-#: src/gedit-ui.xml.h:33
-msgid "Open Location..."
-msgstr "Apri posizione..."
-
-#: src/gedit-ui.xml.h:34
-msgid "Open _Location..."
-msgstr "Apri posi_zione..."
-
-#: src/gedit-ui.xml.h:35
-msgid "Open a file"
-msgstr "Apri un file"
-
-#: src/gedit-ui.xml.h:36
-msgid "Open a file from a specified location"
-msgstr "Apre un file dalla posizione indicata"
-
-#: src/gedit-ui.xml.h:37
-msgid "Open the gedit manual"
-msgstr "Apre il manuale di gedit"
-
-#: src/gedit-ui.xml.h:38
-msgid "Paste"
-msgstr "Incolla"
-
-#: src/gedit-ui.xml.h:39
-msgid "Paste the clipboard"
-msgstr "Incolla dalla clipboard"
-
-#: src/gedit-ui.xml.h:40
-msgid "Pr_eferences"
-msgstr "Preferen_ze"
-
-#: src/gedit-ui.xml.h:42
-msgid "Print Previe_w..."
-msgstr "Antepri_ma di stampa..."
-
-#: src/gedit-ui.xml.h:43
-msgid "Print Preview"
-msgstr "Anteprima di stampa"
-
-#: src/gedit-ui.xml.h:44
-msgid "Print Setup"
-msgstr "Configurazione stampa"
-
-#: src/gedit-ui.xml.h:45
-msgid "Print preview"
-msgstr "Anteprima di stampa"
-
-#: src/gedit-ui.xml.h:46
-msgid "Print the current file"
-msgstr "Stampa il file corrente"
-
-#: src/gedit-ui.xml.h:47
-msgid "Quit"
-msgstr "Esci"
-
-#: src/gedit-ui.xml.h:48
-msgid "Quit the program"
-msgstr "Esci dal programma"
-
-#: src/gedit-ui.xml.h:49
-msgid "Redo"
-msgstr "Ripeti"
-
-#: src/gedit-ui.xml.h:50
-msgid "Redo the undone action"
-msgstr "Ripeti l'azione annullata"
-
-#: src/gedit-ui.xml.h:52
-msgid "Replace a string"
-msgstr "Sostituisci una stringa"
-
-#: src/gedit-ui.xml.h:53
-msgid "Revert"
-msgstr "Ripristina"
-
-#: src/gedit-ui.xml.h:54
-msgid "Revert to a saved version of the file"
-msgstr "Ripristina una versione salvata del file"
-
-#: src/gedit-ui.xml.h:56
-msgid "Save As"
-msgstr "Salva con nome"
-
-#: src/gedit-ui.xml.h:57
-msgid "Save _As..."
-msgstr "Sa_lva come..."
-
-#: src/gedit-ui.xml.h:58
-msgid "Save all open files"
-msgstr "Salva tutti i file aperti"
-
-#: src/gedit-ui.xml.h:59
-msgid "Save the current file"
-msgstr "Salva il file corrente"
-
-#: src/gedit-ui.xml.h:60
-msgid "Save the current file with a different name"
-msgstr "Salva il file corrente con un nome diverso"
-
-#: src/gedit-ui.xml.h:61
-msgid "Search again for the same string"
-msgstr "Cerca ancora la stessa stringa"
-
-#: src/gedit-ui.xml.h:62
-msgid "Search for a string"
-msgstr "Cerca una stringa"
-
-#: src/gedit-ui.xml.h:63
-msgid "Select All"
-msgstr "Seleziona tutto"
-
-#: src/gedit-ui.xml.h:64
-msgid "Select _All"
-msgstr "_Seleziona tutto"
-
-#: src/gedit-ui.xml.h:65
-msgid "Select the entire document"
-msgstr "Seleziona tutto il documento"
-
-#: src/gedit-ui.xml.h:66
-msgid "Set toolbar button style according to desktop default"
-msgstr ""
-"Configura lo stile dei pulsanti della barra degli strumenti in base allo stile "
-"predefinito del desktop"
-
-#: src/gedit-ui.xml.h:67
-msgid "Setup the page settings for your current printer"
-msgstr ""
-"Configurazione delle impostazioni relative alla pagina per la stampante "
-"corrente"
-
-#: src/gedit-ui.xml.h:68
-msgid "Show _Cursor Position"
-msgstr "Mostra la posizione del _cursore"
-
-#: src/gedit-ui.xml.h:69
-msgid "Show _Overwrite Mode"
-msgstr "Mostra la modalità sovrascrittura"
-
-#: src/gedit-ui.xml.h:70
-msgid "Show cursor position in the statusbar"
-msgstr "Mostra la posizione del cursore nella barra di stato"
-
-#: src/gedit-ui.xml.h:71
-msgid "Show overwrite mode in the statusbar"
-msgstr "Mostra la modalità sovrascrittura nella barra di stato"
-
-#: src/gedit-ui.xml.h:73
-msgid "Undo the last action"
-msgstr "Annulla l'ultima azione"
-
-#: src/gedit-ui.xml.h:74
-msgid "_About"
-msgstr "_Informazioni"
-
-#: src/gedit-ui.xml.h:75
-msgid "_Close"
-msgstr "_Chiudi"
-
-#: src/gedit-ui.xml.h:76
-msgid "_Close All"
-msgstr "_Chiudi tutti"
-
-#: src/gedit-ui.xml.h:77
-msgid "_Contents"
-msgstr "_Manuale"
-
-#: src/gedit-ui.xml.h:78
-msgid "_Copy"
+#: viewer/gedit-viewer-ui.xml.h:2
+#, fuzzy
+msgid "_Copy Text"
 msgstr "_Copia"
 
-#: src/gedit-ui.xml.h:79
-msgid "_Customize Toolbar"
-msgstr "_Personalizza barra degli strumenti"
-
-#: src/gedit-ui.xml.h:80
-msgid "_Debug"
-msgstr "_Debug"
-
-#: src/gedit-ui.xml.h:81
-msgid "_Delete"
-msgstr "Ca_ncella"
-
-#: src/gedit-ui.xml.h:82
-msgid "_Desktop Default"
-msgstr "Predefinito del _desktop"
-
-#: src/gedit-ui.xml.h:83
-msgid "_Documents"
-msgstr "_Documenti"
-
-#: src/gedit-ui.xml.h:84
-msgid "_Edit"
-msgstr "_Modifica"
-
-#: src/gedit-ui.xml.h:85
-msgid "_File"
-msgstr "_File"
-
-#: src/gedit-ui.xml.h:86
-msgid "_Find..."
-msgstr "Tr_ova..."
-
-#: src/gedit-ui.xml.h:87
-msgid "_Help"
-msgstr "A_iuto"
-
-#: src/gedit-ui.xml.h:88
-msgid "_Icon"
-msgstr "_Icona"
-
-#: src/gedit-ui.xml.h:90
-msgid "_New"
-msgstr "_Nuovo"
-
-#: src/gedit-ui.xml.h:91
-msgid "_Open..."
-msgstr "_Apri..."
-
-#: src/gedit-ui.xml.h:92
-msgid "_Output Window"
-msgstr "Finestra di _output"
-
-#: src/gedit-ui.xml.h:93
-msgid "_Paste"
-msgstr "_Incolla"
-
-#: src/gedit-ui.xml.h:94
-msgid "_Print..."
-msgstr "Stam_pa"
-
-#: src/gedit-ui.xml.h:95
-msgid "_Priority Text beside Icons"
-msgstr ""
-
-#: src/gedit-ui.xml.h:96
-msgid "_Quit"
-msgstr "_Esci"
-
-#: src/gedit-ui.xml.h:97
-msgid "_Redo"
-msgstr "_Ripeti"
-
-#: src/gedit-ui.xml.h:98
-msgid "_Replace..."
-msgstr "_Sostituisci..."
-
-#: src/gedit-ui.xml.h:100
-msgid "_Save"
-msgstr "_Salva"
-
-#: src/gedit-ui.xml.h:101
-msgid "_Save All"
-msgstr "Sal_va tutti"
-
-#: src/gedit-ui.xml.h:102
-msgid "_Search"
-msgstr "_Cerca"
-
-#: src/gedit-ui.xml.h:103
-msgid "_Statusbar"
-msgstr "Barra di _stato"
-
-#: src/gedit-ui.xml.h:104
-msgid "_Toolbar"
-msgstr "Barra degli s_trumenti"
-
-#: src/gedit-ui.xml.h:105
-msgid "_Tools"
-msgstr "S_trumenti"
-
-#: src/gedit-ui.xml.h:106
-msgid "_Undo"
-msgstr "_Annulla"
-
-#: src/gedit-ui.xml.h:107
-msgid "_View"
-msgstr "_Vista"
-
-#: src/gedit-utils.c:795
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Impossibile trovare il file «%s».\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
-
-#: src/gedit-utils.c:802
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Impossibile aprire il file «%s» perché contiene dati corrotti."
-
-#: src/gedit-utils.c:813
-#, c-format
-msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Impossibile aprire il file «%s» perché gedit non può gestire posizioni "
-"«%s:»."
-
-#: src/gedit-utils.c:819
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Impossibile aprire il file «%s»"
-
-#: src/gedit-utils.c:829
-#, c-format
-msgid "Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "Impossibile aprire il file «%s» perché contiene dati in un formato non valido."
-
-#: src/gedit-utils.c:836
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Impossibile aprire il file «%s» perché troppo grande."
-
-#: src/gedit-utils.c:843
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» non è una posizione valida.\n"
-"\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
-
-#: src/gedit-utils.c:850
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Impossibile aprire il file «%s» perché l'accesso è stato negato."
-
-#: src/gedit-utils.c:857
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Impossibile aprire il file «%s» perché ci sono troppi file aperti.\n"
-"\n"
-"Chiudere qualche file aperto e riprovare."
-
-#: src/gedit-utils.c:865
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"«%s» è una directory.\n"
-"\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
-
-#: src/gedit-utils.c:872
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Memoria insufficiente per aprire il file «%s». Chiudere qualcuna "
-"delle applicazioni in esecuzione e riprovare."
-
-#: src/gedit-utils.c:898
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Impossibile aprire il file «%s» perché non è stato trovato l'host «%s».\n"
-"\n"
-"Controllare di aver digitato la posizione correttamente e che le "
-"impostazioni del proxy siano corrette, quindi riprovare."
-
-#: src/gedit-utils.c:913
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Impossibile aprire il file «%s» perché il nome host non è valido.\n"
-"\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
-
-#: src/gedit-utils.c:920
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Impossibile aprire il file «%s» perché il nome host è vuoto.\n"
-"\n"
-"Controllare che le impostazioni del proxy siano corrette e riprovare."
-
-#: src/gedit-utils.c:927
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Impossibile aprire il file «%s» perché il tentativo di effettuare "
-"il login è fallito.\n"
-"\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
-
-#: src/gedit-utils.c:935
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Impossibile aprire il file «%s» perché contiene dati UTF-8 non validi.\n"
-"\n"
-"Probabilmente si sta tentando di aprire un file binario."
-
-#: src/gedit-utils.c:973
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Impossibile aprire il file «%s»."
-
-#: src/gedit-utils.c:1024
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Impossibile salvare il file «%s»."
-
-#: src/gedit-utils.c:1028
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Impossibile salvare il file «%s».\n"
-"\n"
-"%s"
-
-#: src/gedit-utils.c:1081
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché gedit non lo trova.\n"
-"\n"
-"Forse è stato cancellato di recente."
-
-#: src/gedit-utils.c:1088
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Impossibile ripristinare il file «%s» perché contiene dati corrotti."
-
-#: src/gedit-utils.c:1099
-#, c-format
-msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché gedit non gestisce le "
-"posizioni «%s:»."
-
-#: src/gedit-utils.c:1105 src/gedit-utils.c:1245
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Impossibile ripristinare il file «%s»."
-
-#: src/gedit-utils.c:1115
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché contiene dati in un "
-"formato non valido."
-
-#: src/gedit-utils.c:1122
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Impossibile ripristinare il file «%s» perché è troppo grande."
-
-#: src/gedit-utils.c:1129
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché l'accesso non "
-"è stato consentito."
-
-#: src/gedit-utils.c:1136
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché ci sono troppi file aperti.\n"
-"\n"
-"Chiudere alcuni file e riprovare."
-
-#: src/gedit-utils.c:1144
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Non c'è memoria sufficiente per ripristinare il file «%s». Chiudere "
-"qualcuna delle applicazioni in esecuzione e riprovare."
-
-#: src/gedit-utils.c:1170
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché non è stato trovato "
-"nessun host «%s».\n"
-"\n"
-"Controllare che le impostazioni del proxy siano corrette e riprovare."
-
-#: src/gedit-utils.c:1184
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché il nome dell'host "
-"è vuoto.\n"
-"\n"
-"Controllare che le impostazioni del proxy siano corrette e riprovare."
-
-#: src/gedit-utils.c:1191
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché il tentativo di effettuare "
-"il login è fallito."
-
-#: src/gedit-utils.c:1198
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Impossibile ripristinare il file «%s» perché contiene dati UTF-8 non "
-"validi.\n"
-"\n"
-"Probabilmente si sta tentanto di ripristinare un file binario."
-
-#: src/gedit-utils.c:1207
-msgid "It is not possible to revert an Untitled document."
-msgstr "Non è possibile ripristinare un documento «Senza titolo»"
-
-#: src/gedit-utils.c:1296
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Il file «%s» esiste già."
-
-#: src/gedit-utils.c:1302
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"«%s» è una directory.\n"
-"\n"
-"Accertarsi di aver digitato la posizione correttamente."
-
-#: src/gedit-utils.c:1311
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Impossibile creare il file «%s».\n"
-"\n"
-"Accertarsi di disporre dei permessi in scrittura necessari."
-
-#: src/gedit-utils.c:1318
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Impossibile creare il file «%s».\n"
-"\n"
-"Il nome del file è troppo lungo."
-
-#: src/gedit-utils.c:1325
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Impossibile creare il file «%s».\n"
-"\n"
-"Una directory nel percorso del file non esiste, oppure è un collegamento "
-"simbolico errato."
-
-#: src/gedit-utils.c:1334
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Non c'è spazio su disco sufficiente per creare il file «%s».\n"
-"\n"
-"Liberare un po' di spazio su disco e riprovare."
-
-#: src/gedit-utils.c:1340
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Impossibile creare il file «%s»."
-
-#.
-#. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
-#. else
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
-#.
-#: src/gedit-view.c:1076
-#, c-format
-msgid "  Ln %d, Col. %d"
-msgstr "  Rg %d, Col. %d"
-
-#: src/gedit-view.c:1114
-msgid "  OVR"
-msgstr "  SSC"
-
-#: src/gedit-view.c:1116
-msgid "  INS"
-msgstr "  INS"
-
-#: src/gedit2.c:77
-msgid "Show utility debugging messages."
-msgstr "Mostra i messaggi di debug delle utility."
-
-#: src/gedit2.c:80
-msgid "Show mdi debugging messages."
-msgstr "Mostra i messaggi di debug della mdi."
-
-#: src/gedit2.c:83
-msgid "Show commands debugging messages."
-msgstr "Mostra i messaggi di debug dei comandi."
-
-#: src/gedit2.c:86
-msgid "Show document debugging messages."
-msgstr "Mostra i messaggi di debug del documento."
-
-#: src/gedit2.c:89
-msgid "Show file debugging messages."
-msgstr "Mostra i messaggi di debug del file."
-
-#: src/gedit2.c:92
-msgid "Show plugin debugging messages."
-msgstr "Mostra i messaggi di debug del plugin."
-
-#: src/gedit2.c:95
-msgid "Show prefs debugging messages."
-msgstr "Mostra i messaggi di debug delle preferenze."
-
-#: src/gedit2.c:98
-msgid "Show printing debugging messages."
-msgstr "Mostra i messaggi di debug della stampa."
-
-#: src/gedit2.c:101
-msgid "Show search debugging messages."
-msgstr "Mostra i messaggi di debug della ricerca."
-
-#: src/gedit2.c:104
-msgid "Show undo debugging messages."
-msgstr "Mostra i messaggi di debug delle operazioni annullate."
-
-#: src/gedit2.c:107
-msgid "Show view debugging messages."
-msgstr "Mostra i messaggi di debug della vista"
-
-#: src/gedit2.c:110
-msgid "Show recent debugging messages."
-msgstr "Mostra i messaggi di debug recenti."
-
-#: src/gedit2.c:113
-msgid "Show session management debugging messages."
-msgstr "Mostra i messaggi di debug della gestione della sessione."
-
-#: src/gedit2.c:116
-msgid "Turn on all debugging messages."
-msgstr "Abilita tutti i messaggi di debug."
-
-#: src/gedit2.c:119
-msgid "Quit an existing instance of gedit"
-msgstr "Esci da un'istanza esistente di gedit"
-
-#: src/gedit2.c:122
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "Crea una nuova finestra toplevel in un'istanza esistente di gedit"
-
-#: src/gedit2.c:125
-msgid "Create a new document in an existing instance of gedit"
-msgstr "Crea un nuovo documento in un'istanza esistente di gedit"
-
-#: src/gedit-output-window.c:333
-msgid "Close the output window"
-msgstr "Chiudi la finestra di output"
-
-#: src/gedit-output-window.c:371
-msgid "Copy selected lines"
-msgstr "Copia le righe selezionate"
-
-#: src/gedit-output-window.c:391
-msgid "Clear the output window"
-msgstr "Pulisci la finestra di output"
-
-#: src/gedit-output-window.c:431
-msgid "Output Lines"
-msgstr "Righe di output"
-
-#: src/dialogs/gedit-encodings-dialog.glade2.h:1
-msgid "Choose one or more e_ncodings:"
-msgstr "Scegli una o più _codifiche"
-
-#: src/gedit-encodings.c:143 src/gedit-encodings.c:169
-#: src/gedit-encodings.c:210 src/gedit-encodings.c:260
-#: src/gedit-encodings.c:285
-msgid "Western"
-msgstr "Occidentale"
-
-#: src/gedit-encodings.c:145 src/gedit-encodings.c:212
-#: src/gedit-encodings.c:240 src/gedit-encodings.c:281
-msgid "Central European"
-msgstr "Europeo centrale"
-
-#: src/gedit-encodings.c:147
-msgid "South European"
-msgstr "Sud europeo"
-
-#: src/gedit-encodings.c:149 src/gedit-encodings.c:165
-#: src/gedit-encodings.c:295
-msgid "Baltic"
-msgstr "Baltico"
-
-#: src/gedit-encodings.c:151 src/gedit-encodings.c:214
-#: src/gedit-encodings.c:227 src/gedit-encodings.c:231
-#: src/gedit-encodings.c:244 src/gedit-encodings.c:283
-msgid "Cyrillic"
-msgstr "Cirillico"
-
-#: src/gedit-encodings.c:153 src/gedit-encodings.c:220
-#: src/gedit-encodings.c:238 src/gedit-encodings.c:293
-msgid "Arabic"
-msgstr "Arabo"
-
-#: src/gedit-encodings.c:155 src/gedit-encodings.c:250
-#: src/gedit-encodings.c:287
-msgid "Greek"
-msgstr "Greco"
-
-#: src/gedit-encodings.c:157
-msgid "Hebrew Visual"
-msgstr "Ebraico visuale"
-
-#: src/gedit-encodings.c:159 src/gedit-encodings.c:218
-#: src/gedit-encodings.c:256 src/gedit-encodings.c:291
-msgid "Hebrew"
-msgstr "Ebraico"
-
-#: src/gedit-encodings.c:161 src/gedit-encodings.c:216
-#: src/gedit-encodings.c:264 src/gedit-encodings.c:289
-msgid "Turkish"
-msgstr "Turco"
-
-#: src/gedit-encodings.c:163
-msgid "Nordic"
-msgstr "Nordico"
-
-#: src/gedit-encodings.c:167e
-msgid "Celtic"
-msgstr "Celtico"
-
-#: src/gedit-encodings.c:171 src/gedit-encodings.c:262
-msgid "Romanian"
-msgstr "Romeno"
-
-#: src/gedit-encodings.c:174 src/gedit-encodings.c:176
-#: src/gedit-encodings.c:178 src/gedit-encodings.c:180
-msgid "Unicode"
-msgstr "Unicode"
-
-#: src/gedit-encodings.c:183
-msgid "Armenian"
-msgstr "Armeno"
-
-#: src/gedit-encodings.c:185 src/gedit-encodings.c:187
-#: src/gedit-encodings.c:196
-msgid "Chinese Traditional"
-msgstr "Cinese tradizionale"
-
-#: src/gedit-encodings.c:189
-msgid "Cyrillic/Russian"
-msgstr "Cirillico/Russo"
-
-#: src/gedit-encodings.c:192 src/gedit-encodings.c:223
-#: src/gedit-encodings.c:270
-msgid "Japanese"
-msgstr "Giapponese"
-
-#: src/gedit-encodings.c:194 src/gedit-encodings.c:225
-#: src/gedit-encodings.c:229 src/gedit-encodings.c:276
-msgid "Korean"
-msgstr "Coreano"
-
-#: src/gedit-encodings.c:199 src/gedit-encodings.c:201
-#: src/gedit-encodings.c:203 src/gedit-encodings.c:207
-msgid "Chinese Simplified"
-msgstr "Cinese semplificato"
-
-#: src/gedit-encodings.c:205
-msgid "Georgian"
-msgstr "Georgiano"
-
-#: src/gedit-encodings.c:233 src/gedit-encodings.c:266
-msgid "Cyrillic/Ukrainian"
-msgstr "Cirillico/Ucraino"
-
-#: src/gedit-encodings.c:242
-msgid "Croatian"
-msgstr "Croato"
-
-#: src/gedit-encodings.c:246
-msgid "Hindi"
-msgstr "Hindi"
-
-#: src/gedit-encodings.c:248
-msgid "Farsi"
-msgstr "Farsi"
-
-#: src/gedit-encodings.c:252
-msgid "Gujarati"
-msgstr "Gujarati"
-
-#: src/gedit-encodings.c:254
-msgid "Gurmukhi"
-msgstr "Gurmukhi"
-
-#: src/gedit-encodings.c:258
-msgid "Icelandic"
-msgstr "Islandese"
-
-#: src/gedit-encodings.c:272 src/gedit-encodings.c:278
-#: src/gedit-encodings.c:297
-msgid "Vietnamese"
-msgstr "Vietnamita"
-
-#: src/gedit-encodings.c:274
-msgid "Thai"
-msgstr "Tailandese"
-
-#: src/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (Unicode non valido)"
+#~ msgid "Show Cursor Position"
+#~ msgstr "Mostra la posizione del cursore"
+
+#~ msgid "Show Overwrite Mode"
+#~ msgstr "Mostra la modalità sovrascrittura"
+
+#~ msgid ""
+#~ "Whether the status bar should show the cursor position in editing "
+#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
+#~ "this to take effect."
+#~ msgstr ""
+#~ "Attiva la visualizzazione della posizione del cursore nella barra di "
+#~ "stato. Accertarsi di aver abilitato l'opzione «La barra di stato è "
+#~ "visibile» se si intende attivare questa."
+
+#~ msgid ""
+#~ "Whether the status bar should show the insert/overwrite mode in editing "
+#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
+#~ "this to take effect."
+#~ msgstr ""
+#~ "Attiva la visualizzazione della modalità in uso (inserimento o "
+#~ "sovrascrittura) nella barra di stato. Accertarsi di aver abilitato "
+#~ "l'opzione «La barra di stato è visibile» se si intende attivare questa."
+
+#~ msgid "_ASCII Table"
+#~ msgstr "Tabella _ASCII"
+
+#~ msgid "Pop-up a dialog containing an ASCII Table"
+#~ msgstr "Mostra una finestra di dialogo contenente la tabella ASCII"
+
+#~ msgid "Char"
+#~ msgstr "Carattere"
+
+#~ msgid "Dec#"
+#~ msgstr "Dec#"
+
+#~ msgid "Hex#"
+#~ msgstr "Hex#"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#~ msgid "ASCII Table"
+#~ msgstr "Tabella ASCII"
+
+#~ msgid "_Insert char"
+#~ msgstr "_Inserisci carattere"
+
+#~ msgid "ASCII table"
+#~ msgstr "Tabella ASCII"
+
+#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+#~ msgstr ""
+#~ "Questo plugin mostra una finestra di dialogo che contiene una tabella "
+#~ "ASCII"
+
+#~ msgid "Open CVS Chan_geLogs"
+#~ msgstr "Apri il changelog del CVS"
+
+#~ msgid "Searches for ChangeLogs in the current document and opens them"
+#~ msgstr "Cerca dei changelog nel documento corrente e li apre"
+
+#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+#~ msgstr ""
+#~ "Un plugin che apre i changelo trovati nei messaggi di commit del CVS"
+
+#~ msgid "CVS ChangeLog"
+#~ msgstr "Changelog del CVS"
+
+#~ msgid "Co_mpare Files..."
+#~ msgstr "Co_nfronta File..."
+
+#~ msgid "Makes a diff file from two documents or files"
+#~ msgstr "Crea un file diff tra due documenti o file"
+
+#~ msgid "Compare Files"
+#~ msgstr "Confronta file"
+
+#~ msgid "C_ompare"
+#~ msgstr "C_onfronta"
+
+#~ msgid "Executed command"
+#~ msgstr "Comando eseguito"
+
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "I due documenti selezionati coincidono."
+
+#~ msgid ""
+#~ "The \"first\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "Il primo file selezionato non esiste.\n"
+#~ "\n"
+#~ "Selezionare un file valido."
+
+#~ msgid ""
+#~ "The \"second\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "Il secondo file selezionato non esiste.\n"
+#~ "\n"
+#~ "Selezionare un file valido."
+
+#~ msgid "The two files you selected are the same."
+#~ msgstr "I due file selezionati coincidono"
+
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "Il primo documento non contiene testo"
+
+#~ msgid "The \"second\" document contains no text."
+#~ msgstr "Il secondo documento non contiene testo."
+
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "gedit could not create a temporary file."
+#~ msgstr ""
+#~ "Impossibile confrontare i documenti selezionati.\n"
+#~ "\n"
+#~ "gedit non può creare un file temporaneo."
+
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "Error executing the diff command."
+#~ msgstr ""
+#~ "Impossibile confrontare i documenti selezionati.\n"
+#~ "\n"
+#~ "Errore durante l'esecuzione del comando diff."
+
+#~ msgid "No differences were found between the selected documents."
+#~ msgstr "Non sono state rilevate differenze fra i documenti selezionati."
+
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "The result contains invalid UTF-8 data."
+#~ msgstr ""
+#~ "Impossibile confrontare i documenti selezionati.\n"
+#~ "\n"
+#~ "Il risultato contiene dati UTF-8 non validi."
+
+#~ msgid "Choose the files to compare."
+#~ msgstr "Scelta dei file da confrontare"
+
+#~ msgid "Compare files..."
+#~ msgstr "Confronta file..."
+
+#~ msgid "F_rom document"
+#~ msgstr "Dal _documento"
+
+#~ msgid "First"
+#~ msgstr "Primo"
+
+#~ msgid "First file from disk"
+#~ msgstr "Primo file da disco"
+
+#~ msgid "First file from open document"
+#~ msgstr "Il primo file dal documento corrente"
+
+#~ msgid "From _document"
+#~ msgstr "Dal _documento"
+
+#~ msgid "From a _file on disk"
+#~ msgstr "Da un file _su disco"
+
+#~ msgid "From a file o_n disk"
+#~ msgstr "Da un file _su disco"
+
+#~ msgid "Ignore _blanks (-b option)"
+#~ msgstr "Ignora i caratteri vuoti (opzione -b)"
+
+#~ msgid "Note that this option is only supported by GNU diff"
+#~ msgstr "Attenzione: questa opzione è supportata soltanto da GNU diff"
+
+#~ msgid "Second"
+#~ msgstr "Secondo"
+
+#~ msgid "Second file from disk"
+#~ msgstr "Secondo file da disco"
+
+#~ msgid "Second file from open document"
+#~ msgstr "Il secondo file dal documento corrente"
+
+#~ msgid "Select the \"first\" file..."
+#~ msgstr "Selezione del primo file.."
+
+#~ msgid "Select the \"second\" file..."
+#~ msgstr "Selezione del secondo file..."
+
+#~ msgid "Select the first file to compare"
+#~ msgstr "Selezione del primo file da confrontare"
+
+#~ msgid "Select the first open document to compare"
+#~ msgstr "Selezione del primo documento aperto da confrontare"
+
+#~ msgid "Select the second file to compare"
+#~ msgstr "Selezione del secondo file da confrontare"
+
+#~ msgid "Select the second open document to compare"
+#~ msgstr "Selezione del secondo documento aperto da confrontare"
+
+#~ msgid "Use the _unified output format (-u option)"
+#~ msgstr "Utilizza il formato di output _unificato (opzione -u)"
+
+#~ msgid ""
+#~ "The Compare Files plugin uses the <tt>diff</tt> program to compare two "
+#~ "documents or files on disk.\n"
+#~ "\n"
+#~ "For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
+#~ "prompt."
+#~ msgstr ""
+#~ "Il plugin «Confronta file» usa il programma <tt>diff</tt> per confrontare "
+#~ "due documenti o file su disco.\n"
+#~ "\n"
+#~ "Per maggiori informazioni sul programma <tt>diff</tt>, digitate <tt>man "
+#~ "diff</tt> in un terminale."
+
+#~ msgid "File Name"
+#~ msgstr "Nome del file"
+
+#~ msgid "Load"
+#~ msgstr "Carica"
+
+#~ msgid "Module file name"
+#~ msgstr "Nome del file del modulo"
+
+#~ msgid "Author(s)"
+#~ msgstr "Autore/i"
+
+#~ msgid "Page"
+#~ msgstr "Pagina"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Font</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Apri</span>"
+
+#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+#~ msgstr "<span weight=\"bold\" size=\"x-large\">Pagina</span>"
+
+#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
+#~ msgstr "<span weight=\"bold\">Quando viene salvato un nuovo file...</span>"
+
+#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\">Quando viene salvato un file esistente...</span>"
+
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "Usa sempre la codifica U_TF-8 (più veloce)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "Usa sempre la codifica _UTF-8 (più veloce)"
+
+#~ msgid "Line _numbers:"
+#~ msgstr "_Numeri di riga:"
+
+#~ msgid "Move down"
+#~ msgstr "Sposta in basso"
+
+#~ msgid "Move up"
+#~ msgstr "Sposta in alto"
+
+#~ msgid "Print _line numbers every"
+#~ msgstr "Stampa i numeri di riga ogni"
+
+#~ msgid "Print fonts"
+#~ msgstr "Font di stampa"
+
+#~ msgid "Remove an encoding"
+#~ msgstr "Rimuovi una codifica"
+
+#~ msgid "U_se original file encoding if possible"
+#~ msgstr "U_sa la codifica originale del file se possibile"
+
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "Usa la codifica della locale co_rrente se possibile"
+
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "Usa la codifica della _locale corrente se possibile"
+
+#~ msgid "li_ne(s)"
+#~ msgstr "ri_ga/e"
+
+#~ msgid "De_tails"
+#~ msgstr "De_ttagli"
+
+#~ msgid "Open a file."
+#~ msgstr "Apri un file."
+
+#~ msgid ""
+#~ "gedit is unable to print since it cannot find\n"
+#~ "one of the required fonts."
+#~ msgstr ""
+#~ "gedit non può stampare perché non riesce a trovare\n"
+#~ "uno dei font necessari."
+
+#~ msgid "Page: %d"
+#~ msgstr "Pagina: %d"
+
+#~ msgid "gedit - Print Preview"
+#~ msgstr "gedit - Anteprima di stampa"
+
+#~ msgid ""
+#~ "An error occurred while printing.\n"
+#~ "\n"
+#~ "%s,"
+#~ msgstr ""
+#~ "Si è verificato un errore durante la stampa.\n"
+#~ "\n"
+#~ "%s,"
+
+#~ msgid "C_ustomize Statusbar"
+#~ msgstr "P_ersonalizza la barra di stato"
+
+#~ msgid "Customize"
+#~ msgstr "Personalizza"
+
+#~ msgid "Customize toolbars"
+#~ msgstr "Personalizza le barre degli strumenti"
+
+#~ msgid "Find Again"
+#~ msgstr "Trova ancora"
+
+#~ msgid "Icon and _Text"
+#~ msgstr "Icona e _testo"
+
+#~ msgid "Show _Cursor Position"
+#~ msgstr "Mostra la posizione del _cursore"
+
+#~ msgid "Show _Overwrite Mode"
+#~ msgstr "Mostra la modalità sovrascrittura"
+
+#~ msgid "Show cursor position in the statusbar"
+#~ msgstr "Mostra la posizione del cursore nella barra di stato"
+
+#~ msgid "Show overwrite mode in the statusbar"
+#~ msgstr "Mostra la modalità sovrascrittura nella barra di stato"
+
+#~ msgid "Choose one or more e_ncodings:"
+#~ msgstr "Scegli una o più _codifiche"
+
+#~ msgid "Croatian"
+#~ msgstr "Croato"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+
+#~ msgid "Farsi"
+#~ msgstr "Farsi"
+
+#~ msgid "Gujarati"
+#~ msgstr "Gujarati"
+
+#~ msgid "Gurmukhi"
+#~ msgstr "Gurmukhi"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandese"
 
 #~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
 #~ msgstr "Copyright (C) 2001-2002 Paolo Maggi"
@@ -3366,19 +3607,11 @@ msgstr " (Unicode non valido)"
 #~ msgstr "Gestore dei _Plugin..."
 
 #, fuzzy
-#~ msgid "Pr_eferences..."
-#~ msgstr "Preferenze"
-
-#, fuzzy
 #~ msgid "Sa_ve All"
 #~ msgstr "Salva"
 
 #, fuzzy
 #~ msgid "Show _Tooltips"
-#~ msgstr "Mostra _Suggerimenti"
-
-#, fuzzy
-#~ msgid "Show tooltips in the toolbar"
 #~ msgstr "Mostra _Suggerimenti"
 
 #, fuzzy
@@ -3390,9 +3623,6 @@ msgstr " (Unicode non valido)"
 
 #~ msgid "Invalid UTF-8 data encountered reading file"
 #~ msgstr "Il file contiene dati UTF-8 non validi"
-
-#~ msgid "Unknown error"
-#~ msgstr "Errore sconosciuto"
 
 #, fuzzy
 #~ msgid "Loaded file %s"
@@ -3414,10 +3644,6 @@ msgstr " (Unicode non valido)"
 #~ msgstr "Apri file..."
 
 #, fuzzy
-#~ msgid "Print Pre_view"
-#~ msgstr "Trova _Linea"
-
-#, fuzzy
 #~ msgid "Revert to saved"
 #~ msgstr "Elimina"
 
@@ -3435,10 +3661,6 @@ msgstr " (Unicode non valido)"
 
 #, fuzzy
 #~ msgid "Web browse plugin"
-#~ msgstr "Plugin Browser Web per gEdit"
-
-#, fuzzy
-#~ msgid "Number Converter"
 #~ msgstr "Plugin Browser Web per gEdit"
 
 #, fuzzy
@@ -3463,10 +3685,6 @@ msgstr " (Unicode non valido)"
 
 #, fuzzy
 #~ msgid "Current column"
-#~ msgstr "Font attuale"
-
-#, fuzzy
-#~ msgid "Current line"
 #~ msgstr "Font attuale"
 
 #, fuzzy
@@ -3498,9 +3716,6 @@ msgstr " (Unicode non valido)"
 
 #~ msgid "Editor Behavior"
 #~ msgstr "Comportamento editor"
-
-#~ msgid "General"
-#~ msgstr "Generale"
 
 #, fuzzy
 #~ msgid "Orientation"
@@ -3561,10 +3776,6 @@ msgstr " (Unicode non valido)"
 #~ msgstr "Stampa"
 
 #, fuzzy
-#~ msgid "Printing ..."
-#~ msgstr "Stampa"
-
-#, fuzzy
 #~ msgid "_File/"
 #~ msgstr "Archivio"
 
@@ -3585,9 +3796,6 @@ msgstr " (Unicode non valido)"
 #, fuzzy
 #~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 #~ msgstr "gEdit è un editor di testo piccolo e leggero per GNOME/Gtk+"
-
-#~ msgid "Enable Wordwrap"
-#~ msgstr "Abilita sillabazione automatica"
 
 #, fuzzy
 #~ msgid "beginning of document"
@@ -3741,5 +3949,3 @@ msgstr " (Unicode non valido)"
 
 #~ msgid "_Scrollbar"
 #~ msgstr "Barra di _Scrolling"
-
-

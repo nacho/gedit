@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-08-18 05:34-0500\n"
+"POT-Creation-Date: 2003-08-26 23:48+0200\n"
 "PO-Revision-Date: 2002-06-16 16:07+0200\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -15,12 +15,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0beta1\n"
 
-#: data/GNOME_Gedit.server.in.h:1
+#: data/GNOME_Gedit.server.in.in.h:1
+msgid "Gedit View"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:2
+msgid "Gedit View."
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+msgid "Gedit viewer factory"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:4
+msgid "Source"
+msgstr ""
+
+#: data/GNOME_Gedit.server.in.in.h:5
 #, fuzzy
 msgid "gedit application"
 msgstr "إعداد التطبيق"
 
-#: data/GNOME_Gedit.server.in.h:2
+#: data/GNOME_Gedit.server.in.in.h:6
 msgid "gedit automation factory"
 msgstr ""
 
@@ -28,7 +44,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "حرّر ملفات نصية"
 
-#: data/gedit.desktop.in.h:2 src/gedit2.c:297
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:364
 msgid "Text Editor"
 msgstr "محرر نصوص Gnome"
 
@@ -39,143 +55,168 @@ msgid ""
 msgstr ""
 
 #: data/gedit.schemas.in.h:2
+msgid "Auto Detected Encodings"
+msgstr ""
+
+#: data/gedit.schemas.in.h:3
 #, fuzzy
 msgid "Auto Save"
 msgstr "احفظ"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save Interval"
 msgstr ""
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5 gedit/dialogs/gedit-preferences.glade2.h:12
+#, fuzzy
+msgid "Auto indent"
+msgstr "اذهب الى السطر"
+
+#: data/gedit.schemas.in.h:6
 #, fuzzy
 msgid "Background Color"
 msgstr "الخلفية:"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:7
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:9
 msgid "Backup Copy Extension"
 msgstr ""
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:10
 msgid "Body Font for Printing"
 msgstr ""
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:11
 msgid "Create Backup Copies"
 msgstr ""
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:12
 #, fuzzy
 msgid "Display Line Numbers"
 msgstr "عرض"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:13
 #, fuzzy
 msgid "Editor Font"
 msgstr "المحرر"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:14
 msgid "Encoding for Saving"
 msgstr ""
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:15
+msgid "Encodings shown in menu"
+msgstr ""
+
+#: data/gedit.schemas.in.h:16
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
 
-#: data/gedit.schemas.in.h:14
+#: data/gedit.schemas.in.h:17
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 
-#: data/gedit.schemas.in.h:15
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:19
 msgid "Header Font for Printing"
 msgstr ""
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:20
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
 "lines."
 msgstr ""
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:21
+#, fuzzy
+msgid "Insert spaces"
+msgstr "أدخل المستخدم"
+
+#: data/gedit.schemas.in.h:22
 msgid "Line Number Font for Printing"
 msgstr ""
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:23
 msgid "Line Wrapping Mode"
 msgstr ""
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:24
+msgid ""
+"List of encodings shown in Character Coding menu in open/save file selector. "
+"Only recognized encodings are used."
+msgstr ""
+
+#: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
 msgstr ""
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:26
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr ""
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:27
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
 
-#: data/gedit.schemas.in.h:23
+#: data/gedit.schemas.in.h:28
 #, fuzzy
 msgid "Print Header"
 msgstr "اطبع"
 
-#: data/gedit.schemas.in.h:24
+#: data/gedit.schemas.in.h:29
 #, fuzzy
 msgid "Print Line Numbers"
 msgstr "اطبع"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:30
+msgid "Print Syntax Highlighting"
+msgstr ""
+
+#: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
 msgstr ""
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:32
 #, fuzzy
 msgid "Selected Text Color"
 msgstr "مختار:"
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:33
 #, fuzzy
 msgid "Selection Color"
 msgstr "تحديد:"
 
-#: data/gedit.schemas.in.h:28
-#, fuzzy
-msgid "Show Cursor Position"
-msgstr "أظهر _موقع المؤشر"
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
+msgstr ""
 
-#: data/gedit.schemas.in.h:29
-#, fuzzy
-msgid "Show Overwrite Mode"
-msgstr "أظهر كتابة على"
-
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -184,7 +225,7 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -193,58 +234,59 @@ msgid ""
 "here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:32
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 
-#: data/gedit.schemas.in.h:33
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
 
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:39
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:42
 msgid "Status Bar is Visible"
 msgstr ""
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
-"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
+"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:44
 msgid "Tab Size"
 msgstr ""
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:45
 #, fuzzy
 msgid "Text Color"
 msgstr "نص:"
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:46
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -259,75 +301,73 @@ msgid ""
 "appear exactly as mentioned here."
 msgstr ""
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:47
 #, fuzzy
 msgid "Toolbar Buttons Style"
 msgstr "زر"
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:48
 #, fuzzy
 msgid "Toolbar is Visible"
 msgstr "أشرطة الأدوات"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:49
 msgid "Undo Actions Limit"
 msgstr ""
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:50
 #, fuzzy
 msgid "Use Default Colors"
 msgstr "استخدم افتراضي"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:51
 #, fuzzy
 msgid "Use Default Font"
 msgstr "استخدم افتراضي"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:53
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:54
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr ""
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:55
+msgid "Whether gedit should enable auto indentation."
+msgstr ""
+
+#: data/gedit.schemas.in.h:56
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:57
+msgid "Whether gedit should insert spaces instead of tabs."
+msgstr ""
+
+#: data/gedit.schemas.in.h:58
+msgid "Whether gedit should print syntax highlighting when printing documents."
+msgstr ""
+
+#: data/gedit.schemas.in.h:59
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 
-#: data/gedit.schemas.in.h:52
-msgid ""
-"Whether the status bar should show the cursor position in editing windows. "
-"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
-"effect."
-msgstr ""
-
-#: data/gedit.schemas.in.h:53
-msgid ""
-"Whether the status bar should show the insert/overwrite mode in editing "
-"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
-"to take effect."
-msgstr ""
-
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:60
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr ""
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:61
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -335,392 +375,2228 @@ msgid ""
 "\", and \"Selection Color\" options."
 msgstr ""
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:62
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
 msgstr ""
 
-#: plugins/ASCII/ascii.c:43
-msgid "_ASCII Table"
-msgstr "_جدول أسكي"
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
+#, c-format
+msgid "Activate %s"
+msgstr "نشّط %s"
 
-#: plugins/ASCII/ascii.c:46
+#: gedit/dialogs/gedit-dialog-goto-line.c:160
 #, fuzzy
-msgid "Pop-up a dialog containing an ASCII Table"
-msgstr "بوب"
+msgid "Go to Line"
+msgstr "اذهب الى السطر"
 
-#: plugins/ASCII/ascii.c:336
-msgid "Char"
-msgstr "حرف"
-
-#: plugins/ASCII/ascii.c:343
+#. Add Goto Line button
+#: gedit/dialogs/gedit-dialog-goto-line.c:170
 #, fuzzy
-msgid "Dec#"
-msgstr "عشري"
+msgid "_Go to Line"
+msgstr "اذهب الى السطر"
 
-#: plugins/ASCII/ascii.c:350
+#: gedit/dialogs/gedit-dialog-goto-line.c:186
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
+#: plugins/spell/gedit-spell-language-dialog.c:233
+#, fuzzy, c-format
+msgid "Could not find the required widgets inside %s."
+msgstr "ال"
+
+#: gedit/dialogs/gedit-dialog-replace.c:136
+#: gedit/dialogs/gedit-dialog-replace.c:1140 gedit/gedit-commands.c:402
+#, fuzzy, c-format
+msgid "The text \"%s\" was not found."
+msgstr "لم يتم ايجاد الحرفية \"%s\"."
+
+#: gedit/dialogs/gedit-dialog-replace.c:268 gedit/dialogs/replace.glade2.h:4
+#: gedit/gedit-ui.xml.h:46
 #, fuzzy
-msgid "Hex#"
-msgstr "سادس عشري"
+msgid "Replace"
+msgstr "تبديل"
 
-#: plugins/ASCII/ascii.c:357
-msgid "Name"
-msgstr "الاسم"
-
-#: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
-msgid "ASCII table"
-msgstr "جدول أسكي"
-
-#: plugins/ASCII/ascii.c:415
-msgid "_Insert char"
-msgstr "أ_درج رمزا"
-
-#: plugins/ASCII/ascii.c:524
+#: gedit/dialogs/gedit-dialog-replace.c:279
 #, fuzzy
-msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr "ملحق يحتوي جدول."
+msgid "Replace _All"
+msgstr "ت_بديل"
 
-#: plugins/ASCII/ascii.c:526
-msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr "حقوق النشر (C) 2001-2002 Paolo Maggi"
+#. Add Replace button
+#: gedit/dialogs/gedit-dialog-replace.c:282
+#: gedit/gedit-file-selector-util.c:131
+msgid "_Replace"
+msgstr "ت_بديل"
 
-#: plugins/ASCII/asciitable.glade2.h:1
+#: gedit/dialogs/gedit-dialog-replace.c:406 gedit/gedit-ui.xml.h:17
 #, fuzzy
-msgid ""
-"If you wish to insert any of the characters in to the active \n"
-"document, select the character and click the \"Insert Char\" \n"
-"button or double click the character in the table."
-msgstr "الى من ال الى ال ال و ال أدخل حرف أو ال ال."
+msgid "Find"
+msgstr "بحث"
 
-#: plugins/ASCII/asciitable.glade2.h:4
-msgid "Insert char"
-msgstr "أدرج رمزا"
+#: gedit/dialogs/gedit-dialog-replace.c:1149
+#, fuzzy, c-format
+msgid "Found and replaced %d occurrences."
+msgstr "تم ايجاد و استبدال %d ظهور(ات)"
 
-#: plugins/ASCII/asciitable.glade2.h:5
+#: gedit/dialogs/gedit-dialog-uri.c:87
 #, fuzzy
-msgid "gedit: ASCII table"
-msgstr "gedit"
+msgid "Open Location"
+msgstr "فتح ملف..."
 
-#. AFAIK, all cvs commit messages start with this
-#: plugins/cvschangelog/cvschangelog.c:49
-#, fuzzy
-msgid "Open CVS Chan_geLogs"
-msgstr "افتح"
-
-#: plugins/cvschangelog/cvschangelog.c:52
-#, fuzzy
-msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr "ال و"
-
-#: plugins/cvschangelog/cvschangelog.c:269
-msgid "CVS ChangeLog"
+#: gedit/dialogs/gedit-encodings-dialog.c:76
+#, c-format
+msgid "There was an error displaying help: %s"
 msgstr ""
 
-#: plugins/cvschangelog/cvschangelog.c:270
+#: gedit/dialogs/gedit-encodings-dialog.c:381
+#: gedit/dialogs/gedit-encodings-dialog.c:449
 #, fuzzy
-msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr "A ملحق."
+msgid "_Description"
+msgstr "ال_وصف"
 
-#: plugins/cvschangelog/cvschangelog.c:272
-msgid "Copyright (C) 2002 - James Willcox"
-msgstr "حقوق النشر (C) 2002 - James Willcox"
+#: gedit/dialogs/gedit-encodings-dialog.c:390
+#: gedit/dialogs/gedit-encodings-dialog.c:458
+msgid "_Encoding"
+msgstr ""
 
-#: plugins/diff/diff.c:61
-msgid "Co_mpare Files..."
-msgstr "_مقارنة ملفات..."
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+msgid "A_vailable encodings:"
+msgstr ""
 
-#: plugins/diff/diff.c:64
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
 #, fuzzy
-msgid "Makes a diff file from two documents or files"
-msgstr "ملف أو"
+msgid "Character codings"
+msgstr "رموز لا"
 
-#: plugins/diff/diff.c:66
-#, fuzzy
-msgid "Compare files"
-msgstr "تم تحميل الملف %s"
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+msgid "E_ncodings shown in menu:"
+msgstr ""
 
-#. Create the dialog
-#: plugins/diff/diff.c:267
-#, fuzzy
-msgid "Compare two files..."
-msgstr "قارن."
+#: gedit/dialogs/gedit-page-setup-dialog.c:490
+msgid "Body font picker"
+msgstr ""
 
-#: plugins/diff/diff.c:281
-#, fuzzy
-msgid "C_ompare"
-msgstr "قارن"
-
-#: plugins/diff/diff.c:502
-#, fuzzy
-msgid "The two documents you selected are the same."
-msgstr "لم يتم حفظ المستند."
-
-#: plugins/diff/diff.c:510
+#: gedit/dialogs/gedit-page-setup-dialog.c:491
 #, fuzzy
 msgid ""
-"The \"first\" file you selected does not exist.\n"
+"Push this button to select the font to be used to print the body of the "
+"document"
+msgstr "الى ال الى الى طباعة ال"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:492
+msgid "Page headers font picker"
+msgstr ""
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#, fuzzy
+msgid ""
+"Push this button to select the font to be used to print the page headers"
+msgstr "الى ال الى الى طباعة ال"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#, fuzzy
+msgid "Line numbers font picker"
+msgstr "أرقام الأسطر"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:495
+#, fuzzy
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr "الى ال الى الى طباعة"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+msgid "Could not find '"
+msgstr ""
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+#: gedit/dialogs/gedit-page-setup-dialog.c:629
+msgid ""
+"page-setup-dialog.glade2'.\n"
 "\n"
-"Please provide a valid file."
-msgstr "ملف ل ملف."
+"Reinstall gedit."
+msgstr ""
 
-#: plugins/diff/diff.c:519
+#: gedit/dialogs/gedit-page-setup-dialog.c:628
 #, fuzzy
+msgid "Could not find the required widgets inside '"
+msgstr "ال"
+
+#: gedit/dialogs/gedit-plugin-manager.c:53
+#, fuzzy
+msgid "Plugin"
+msgstr "ملحق"
+
+#: gedit/dialogs/gedit-plugin-manager.c:54
+msgid "Enabled"
+msgstr ""
+
+#: gedit/dialogs/gedit-plugin-manager.c:507
+#, fuzzy
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "ملحق gedit"
+
+#: gedit/dialogs/gedit-plugin-manager.c:525
+#, fuzzy
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr "غير صحيح ملف ملحق الكل"
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:78
+#: gedit/dialogs/program-location-dialog.glade2.h:2
+#, fuzzy
+msgid "Set program location..."
+msgstr "برنامج."
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:106
+#, fuzzy, c-format
 msgid ""
-"The \"second\" file you selected does not exist.\n"
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
 "\n"
-"Please provide a valid file."
-msgstr "ملف ل ملف."
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr "ث ملحق برنامج<tt> ث</tt> الى ل ال من ال<tt> ث</tt> برنامج."
 
-#: plugins/diff/diff.c:527
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:152
 #, fuzzy
-msgid "The two files you selected are the same."
-msgstr "ال."
+msgid "The selected file is not executable."
+msgstr "الملف المختار ليس ملف تنفيذي"
 
-#: plugins/diff/diff.c:544
+#: gedit/dialogs/gedit-preferences-dialog.c:197
+msgid "Font & Colors"
+msgstr "خط وألوان"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:199
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 #, fuzzy
-msgid "The \"first\" document contains no text."
-msgstr "لم يتم استرجاع المستند."
+msgid "Tabs"
+msgstr "الأشرطة"
 
-#: plugins/diff/diff.c:573
+#: gedit/dialogs/gedit-preferences-dialog.c:200
 #, fuzzy
-msgid "The \"second\" document contains no text."
-msgstr "يحتوي لا."
+msgid "Wrap Mode"
+msgstr "نظام الالتواء"
 
-#. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:594
+#: gedit/dialogs/gedit-preferences-dialog.c:201
+#, fuzzy
+msgid "Auto Indent"
+msgstr "احفظ"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:202
+#, fuzzy
+msgid "Line Numbers"
+msgstr "أرقام الأسطر"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:203
+#: gedit/dialogs/gedit-preferences.glade2.h:27 gedit/gedit-ui.xml.h:50
+#, fuzzy
+msgid "Save"
+msgstr "احفظ"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:204
+#: gedit/dialogs/gedit-preferences.glade2.h:34 gedit/gedit-ui.xml.h:68
+#, fuzzy
+msgid "Undo"
+msgstr "تراجع"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:213
+#, fuzzy
+msgid "Manager"
+msgstr "ملحق"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:221
+#, fuzzy
+msgid "Editor"
+msgstr "المحرر"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:223
+#, fuzzy
+msgid "Plugins"
+msgstr "ملحق"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:295
+#, fuzzy
+msgid "Cat_egories:"
+msgstr "تصنيفات:"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:317
+#, fuzzy
+msgid "Preferences"
+msgstr "تفضيلات"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:557
+#, fuzzy
+msgid "Categories"
+msgstr "تصنيفات"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:787
+msgid "Push this button to select the font to be used by the editor"
+msgstr "اضغط على هذا الزر لاختيار الخط المراد استخدامه في المحرر"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:790
+#, fuzzy
+msgid "Push this button to configure text color"
+msgstr "اضغط على هذا الز لتغير لون النص"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:792
+#, fuzzy
+msgid "Push this button to configure background color"
+msgstr "اضغط على هذا الزر لتغير لون الخلفية"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:794
 #, fuzzy
 msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"gedit could not create a temporary file."
-msgstr "الى ال ل ملف."
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr "الى"
 
-#: plugins/diff/diff.c:612 plugins/diff/diff.c:625
+#: gedit/dialogs/gedit-preferences-dialog.c:797
 #, fuzzy
 msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"Error executing the diff command."
-msgstr "الى ال ل ال."
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr "الى"
 
-#: plugins/diff/diff.c:647
+#: gedit/dialogs/gedit-preferences.glade2.h:1
+#: gedit/dialogs/page-setup-dialog.glade2.h:1
+#: plugins/docinfo/docinfo.glade2.h:1 plugins/time/time.glade2.h:1
+msgid "    "
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:2
+msgid "<b>Font</b>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:3
+msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:6
+msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:7
+msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:8
+msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:9
+msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:10
+msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:11
+msgid "<span weight=\"bold\">Colors</span>"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 #, fuzzy
-msgid "No differences were found between the selected documents."
-msgstr "لا بين ال."
+msgid "Create a _backup copy of files before saving"
+msgstr "انشيء من"
 
-#: plugins/diff/diff.c:688
+#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/page-setup-dialog.glade2.h:4
+msgid "Do not _split words over two lines"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:15
 #, fuzzy
-msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"The result contains invalid UTF-8 data."
-msgstr "الى ال ل يحتوي يو تي اف."
+msgid "Editor _font: "
+msgstr "المحرر"
 
-#: plugins/diff/diff.c:912
+#: gedit/dialogs/gedit-preferences.glade2.h:16
+msgid "Enable _auto indentation"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/page-setup-dialog.glade2.h:5
+msgid "Enable text _wrapping"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 #, fuzzy
-msgid ""
-"Makes a diff file from two documents or files on disk.\n"
-"\n"
-"For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
-msgstr "ملف أو تعمل قرص ل معلومة تعمل برنامج نوع man"
+msgid "Fonts & Colors"
+msgstr "خطوط"
 
-#: plugins/diff/diff.c:915
+#: gedit/dialogs/gedit-preferences.glade2.h:19
+msgid "Insert _spaces instead of tabs"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:20
+msgid "LOGO"
+msgstr ""
+
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 #, fuzzy
-msgid ""
-"Copyright (C) 2000 - 2001 Chema Celorio \n"
-"Copyright (C) 2002 Paolo Maggi"
-msgstr "حقوق النشر C C"
+msgid "Line numbers"
+msgstr "أرقام الأسطر"
 
-#: plugins/diff/diff.glade2.h:1
+#: gedit/dialogs/gedit-preferences.glade2.h:22
+#, fuzzy
+msgid "Pick the background color"
+msgstr "اختر لون الخلفية"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:23
+#, fuzzy
+msgid "Pick the selected text color"
+msgstr "ال"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:24
+#, fuzzy
+msgid "Pick the selection color"
+msgstr "ال"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:25
+#, fuzzy
+msgid "Pick the text color"
+msgstr "اختر لون النص"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:26
+#, fuzzy
+msgid "Plugin manager"
+msgstr "ملحق"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:28
+#, fuzzy
+msgid "Se_lection color:"
+msgstr "تحديد:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:29
+#, fuzzy
+msgid "Selecte_d text color:"
+msgstr "مختار:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:30
+#, fuzzy
+msgid "Set _tabs width equivalent to"
+msgstr "العرض "
+
+#: gedit/dialogs/gedit-preferences.glade2.h:31
+#, fuzzy
+msgid "Set limit on _undo actions to"
+msgstr "تعمل"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:33
+#, fuzzy
+msgid "U_se default theme colors"
+msgstr "استخدم افتراضي"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:35
+#, fuzzy
+msgid "Wrap mode"
+msgstr "نظام الالتواء"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:36
+#, fuzzy
+msgid "_Autosave current file every"
+msgstr "ملف"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:37
+#, fuzzy
+msgid "_Background color:"
+msgstr "الخلفية:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:38
+#, fuzzy
+msgid "_Display line numbers"
+msgstr "عرض"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:39
+#, fuzzy
+msgid "_Text color:"
+msgstr "نص:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:40
+#, fuzzy
+msgid "_Use default theme font"
+msgstr "استخدم افتراضي"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:41
+#, fuzzy
+msgid "_action(s)"
+msgstr "ث"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:42
+#, fuzzy
+msgid "_minutes"
+msgstr "دقائق"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:43
+#, fuzzy
+msgid "character(s)"
+msgstr " حروف"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:111
+#, fuzzy
+msgid "_Insert a new preview phrase."
+msgstr "أدخل."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:117
+#, fuzzy
+msgid "Modify preview phrase..."
+msgstr "عدّل."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:171
+#, fuzzy
+msgid "Preview"
+msgstr "معاينة"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:184
+#, fuzzy
+msgid "_Modify preview phrase..."
+msgstr "عدّل."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:245
+#, fuzzy
+msgid "Font Selection"
+msgstr "اختيار الخط"
+
+#: gedit/dialogs/gnome-print-font-picker.c:92
+msgid "Sans Regular 12"
+msgstr ""
+
+#: gedit/dialogs/gnome-print-font-picker.c:93
+#, fuzzy
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: gedit/dialogs/gnome-print-font-picker.c:94
+#, fuzzy
+msgid "Pick a Font"
+msgstr "اختر خطا"
+
+#: gedit/dialogs/gnome-print-font-picker.c:179
+#, fuzzy
+msgid "Title"
+msgstr "بدون اسم"
+
+#: gedit/dialogs/gnome-print-font-picker.c:180
+#, fuzzy
+msgid "The title of the selection dialog box"
+msgstr "عنوان صندوق مربع حوار الاختيار"
+
+#: gedit/dialogs/gnome-print-font-picker.c:200
+#, fuzzy
+msgid "Font name"
+msgstr "لا ت_حفظ"
+
+#: gedit/dialogs/gnome-print-font-picker.c:201
+#, fuzzy
+msgid "Name of the selected font"
+msgstr "اسم الخط المنتقى"
+
+#: gedit/dialogs/gnome-print-font-picker.c:209
+#, fuzzy
+msgid "Preview text"
+msgstr "نص معاينة"
+
+#: gedit/dialogs/gnome-print-font-picker.c:210
+#, fuzzy
+msgid "Preview text shown in the dialog"
+msgstr "نص المعاينة يبدو في مربع الحوار"
+
+#: gedit/dialogs/gnome-print-font-picker.c:218
+#, fuzzy
+msgid "Use font in label"
+msgstr "استخدم الخط في العنوان"
+
+#: gedit/dialogs/gnome-print-font-picker.c:219
+#, fuzzy
+msgid "Use font in the label in font info mode"
+msgstr "استخدم الخط في العنوان في نظام معلومات الخطوط"
+
+#: gedit/dialogs/gnome-print-font-picker.c:227
+#, fuzzy
+msgid "Font size for label"
+msgstr "حجم الخط للعنوان"
+
+#: gedit/dialogs/gnome-print-font-picker.c:228
+#, fuzzy
+msgid "Font size for label in font info mode"
+msgstr "حجم الخط للعنوان في نظام معلومات الخطوط"
+
+#: gedit/dialogs/gnome-print-font-picker.c:238
+#, fuzzy
+msgid "Show size"
+msgstr "أظهر الحجم"
+
+#: gedit/dialogs/gnome-print-font-picker.c:239
+#, fuzzy
+msgid "Show size in font info mode"
+msgstr "أظهر الحجم في نظام معلومات الخطوط"
+
+#: gedit/dialogs/gnome-print-font-picker.c:1018
+#, fuzzy
+msgid "Font"
+msgstr "خط"
+
+#. gnome_print_font_picker_update_font_info
+#: gedit/dialogs/goto-line.glade2.h:1
+#, fuzzy
+msgid "Goto Line"
+msgstr "اذهب الى السطر"
+
+#: gedit/dialogs/goto-line.glade2.h:2
+#, fuzzy
+msgid "_Line number:"
+msgstr "سطر:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:2
+#, fuzzy
+msgid "<b>Line Numbers</b>"
+msgstr "أرقام الأسطر"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:3
+msgid "<b>Text Wrapping</b>"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+#, fuzzy
+msgid "Fonts"
+msgstr "خطوط"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:7
+msgid "General"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:8
+msgid "He_aders and footers:"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:9
+#, fuzzy
+msgid "Page Setup"
+msgstr "اطبع"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:10
+#, fuzzy
+msgid "Print _line numbers"
+msgstr "اطبع"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:11
+msgid "Print s_yntax highlighting"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr ""
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:13
+#, fuzzy
+msgid "_Line numbers:"
+msgstr "سطر:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:14
+#, fuzzy
+msgid "_Number every"
+msgstr "اطبع"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+#, fuzzy
+msgid "_Print page headers"
+msgstr "اطبع"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+#, fuzzy
+msgid "_Restore Default Fonts"
+msgstr "استرجع افتراضي"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:17
+#, fuzzy
+msgid "lines"
+msgstr "خطوط"
+
+#: gedit/dialogs/plugin-manager.glade2.h:1
+#, fuzzy
+msgid "About selected plugin"
+msgstr "عرّف ال"
+
+#: gedit/dialogs/plugin-manager.glade2.h:2
+#, fuzzy
+msgid "C_onfigure Plugin"
+msgstr "عرّف"
+
+#: gedit/dialogs/plugin-manager.glade2.h:3
+#, fuzzy
+msgid "Configure the selected plugin"
+msgstr "عرّف ال"
+
+#: gedit/dialogs/plugin-manager.glade2.h:4
+msgid "button1"
+msgstr ""
+
+#: gedit/dialogs/plugin-manager.glade2.h:5
+#, fuzzy
+msgid "dialog1"
+msgstr "صندوق حوار"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:1
+#, fuzzy
+msgid "Browse for program location..."
+msgstr "برنامج."
+
+#: gedit/dialogs/program-location-dialog.glade2.h:3
+#, fuzzy
+msgid "_Location to search for:"
+msgstr "المكان الى:"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:4
+#, fuzzy
+msgid "label"
+msgstr "عنوان"
+
+#: gedit/dialogs/replace.glade2.h:1 gedit/dialogs/uri.glade2.h:1
+#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:2
 msgid "*"
 msgstr ""
 
-#: plugins/diff/diff.glade2.h:2
+#: gedit/dialogs/replace.glade2.h:2 gedit/gedit-ui.xml.h:19
 #, fuzzy
-msgid "Choose the files to compare."
-msgstr "اختر ال الى."
+msgid "Find Next"
+msgstr "بحث"
 
-#: plugins/diff/diff.glade2.h:3
-#, fuzzy
-msgid "Compare files..."
-msgstr "فتح ملف..."
-
-#: plugins/diff/diff.glade2.h:4
-#, fuzzy
-msgid "F_rom document"
-msgstr "من"
-
-#: plugins/diff/diff.glade2.h:5
-#, fuzzy
-msgid "First"
-msgstr "الأول"
-
-#: plugins/diff/diff.glade2.h:6
-#, fuzzy
-msgid "First file from disk"
-msgstr "من ملف تعمل"
-
-#: plugins/diff/diff.glade2.h:7
-#, fuzzy
-msgid "First file from open document"
-msgstr "معلومة تعمل"
-
-#: plugins/diff/diff.glade2.h:8
-#, fuzzy
-msgid "From _document"
-msgstr "من"
-
-#: plugins/diff/diff.glade2.h:9
-#, fuzzy
-msgid "From a _file on disk"
-msgstr "من ملف تعمل"
-
-#: plugins/diff/diff.glade2.h:10
-#, fuzzy
-msgid "From a file o_n disk"
-msgstr "من ملف تعمل"
-
-#: plugins/diff/diff.glade2.h:11
-#, fuzzy
-msgid "Ignore _blanks (-b option)"
-msgstr "تجاهل"
-
-#: plugins/diff/diff.glade2.h:12
-#, fuzzy
-msgid "Note that this option is only supported by GNU diff"
-msgstr "ملاحظة جينيو"
-
-#: plugins/diff/diff.glade2.h:13
-msgid "Second"
-msgstr "ثانية"
-
-#: plugins/diff/diff.glade2.h:14
-#, fuzzy
-msgid "Second file from disk"
-msgstr "من ملف تعمل"
-
-#: plugins/diff/diff.glade2.h:15
-#, fuzzy
-msgid "Second file from open document"
-msgstr "معلومة تعمل"
-
-#: plugins/diff/diff.glade2.h:16
-msgid "Select the \"first\" file..."
+#: gedit/dialogs/replace.glade2.h:3
+msgid "Match _entire word only"
 msgstr ""
 
-#: plugins/diff/diff.glade2.h:17
-msgid "Select the \"second\" file..."
+#: gedit/dialogs/replace.glade2.h:5
+#, fuzzy
+msgid "Replace All"
+msgstr "ت_بديل"
+
+#: gedit/dialogs/replace.glade2.h:6
+#, fuzzy
+msgid "Replace _with: "
+msgstr "ت_بديل"
+
+#: gedit/dialogs/replace.glade2.h:7
+msgid "Search _backwards"
 msgstr ""
 
-#: plugins/diff/diff.glade2.h:18
+#: gedit/dialogs/replace.glade2.h:8
+msgid "_Match case"
+msgstr ""
+
+#: gedit/dialogs/replace.glade2.h:9
 #, fuzzy
-msgid "Select the first file to compare"
-msgstr "اختر ال الى."
+msgid "_Search for: "
+msgstr "بحث "
 
-#: plugins/diff/diff.glade2.h:19
+#: gedit/dialogs/replace.glade2.h:10
 #, fuzzy
-msgid "Select the first open document to compare"
-msgstr "اختر ال"
+msgid "_Wrap around"
+msgstr "نظام الالتواء"
 
-#: plugins/diff/diff.glade2.h:20
+#: gedit/dialogs/uri.glade2.h:2
+msgid "Ch_aracter coding:"
+msgstr ""
+
+#: gedit/dialogs/uri.glade2.h:3
 #, fuzzy
-msgid "Select the second file to compare"
-msgstr "اختر ال الى."
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "أدخل ال URI من ال ملف الى:"
 
-#: plugins/diff/diff.glade2.h:21
+#: gedit/dialogs/uri.glade2.h:4
 #, fuzzy
-msgid "Select the second open document to compare"
-msgstr "اختر ال"
+msgid "Open from URI"
+msgstr "افتح"
 
-#: plugins/diff/diff.glade2.h:22
+#: gedit/gedit-commands.c:564
 #, fuzzy
-msgid "Use the _unified output format (-u option)"
-msgstr "استخدم ال إخراج"
+msgid "translator_credits"
+msgstr "_تكريم للمترجمين"
 
-#: plugins/docinfo/docinfo.c:46
+#: gedit/gedit-commands.c:589
+msgid "gedit"
+msgstr "gedit"
+
+#: gedit/gedit-commands.c:593
 #, fuzzy
-msgid "_Word Count"
-msgstr "_عد الكلمات"
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "محرر نصوص صغير و خفيف لـGnome"
 
-#: plugins/docinfo/docinfo.c:49
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
+#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+msgid "Untitled"
+msgstr "بدون اسم"
+
+#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
 #, fuzzy
-msgid "Get info on current document"
-msgstr "معلومة تعمل"
+msgid "Invalid file name"
+msgstr "تم تحميل الملف %s"
 
-#: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
+#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: viewer/gedit-persist-stream.c:120
 #, fuzzy
-msgid "Word count"
-msgstr "عدد الكلمات"
+msgid "Invalid UTF-8 data"
+msgstr "غير صحيح يو تي اف"
 
-#: plugins/docinfo/docinfo.c:156
-msgid "_Update"
-msgstr "_تحديث"
+#: gedit/gedit-document.c:1210
+#, fuzzy, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "وصلة"
 
-#: plugins/docinfo/docinfo.c:366
+#: gedit/gedit-document.c:1256
+#, fuzzy
+msgid "The file has too many symbolic links."
+msgstr "ملف."
+
+#: gedit/gedit-document.c:1312
+#, fuzzy, c-format
+msgid "gedit cannot handle %s: locations in write mode."
+msgstr "gedit ث نظام."
+
+#: gedit/gedit-document.c:1319
+#, fuzzy
+msgid "gedit cannot handle this kind of location in write mode."
+msgstr "gedit من نظام."
+
+#: gedit/gedit-document.c:1332
+#, fuzzy
+msgid "Invalid filename."
+msgstr "تم تحميل الملف %s"
+
+#: gedit/gedit-document.c:1444
 #, fuzzy
 msgid ""
-"The word count plugin analyzes the current document and determines the "
-"number of words, lines, characters and non-space characters in it and "
-"display the result."
-msgstr "ملحق ال و ال من و it و ال."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
+msgstr "لا قرص الى ال ملف تعمل ال قرص و."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
-#: plugins/shell_output/shell_output.c:553
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
+#: gedit/gedit-document.c:1449
 #, fuzzy
-msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr "حقوق النشر C"
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr "قرص قرص."
 
-#: plugins/docinfo/docinfo.glade2.h:1
+#: gedit/gedit-document.c:1493
 #, fuzzy
-msgid "0"
-msgstr "0"
+msgid "Could not create a backup file."
+msgstr "ال من ال ملف."
 
-#: plugins/docinfo/docinfo.glade2.h:2
+#: gedit/gedit-document.c:1613
+msgid "It is not possible to revert an Untitled document"
+msgstr "غير ممكن استرجاع مستند بدون اسم"
+
+#: gedit/gedit-encodings-option-menu.c:203
+msgid "Auto Detected"
+msgstr ""
+
+#: gedit/gedit-encodings-option-menu.c:223
+#: gedit/gedit-encodings-option-menu.c:245
+#, c-format
+msgid "Current Locale (%s)"
+msgstr ""
+
+#: gedit/gedit-encodings-option-menu.c:306
+msgid "Add or _Remove..."
+msgstr ""
+
+#: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
+#: gedit/gedit-encodings.c:182
+msgid "Unicode"
+msgstr ""
+
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:171
+#: gedit/gedit-encodings.c:212 gedit/gedit-encodings.c:255
+msgid "Western"
+msgstr ""
+
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:251
+msgid "Central European"
+msgstr ""
+
+#: gedit/gedit-encodings.c:149
+msgid "South European"
+msgstr ""
+
+#: gedit/gedit-encodings.c:151 gedit/gedit-encodings.c:167
+#: gedit/gedit-encodings.c:265
+msgid "Baltic"
+msgstr ""
+
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:216
+#: gedit/gedit-encodings.c:229 gedit/gedit-encodings.c:233
+#: gedit/gedit-encodings.c:235 gedit/gedit-encodings.c:253
+msgid "Cyrillic"
+msgstr ""
+
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:222
+#: gedit/gedit-encodings.c:263
+msgid "Arabic"
+msgstr ""
+
+#: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+msgid "Greek"
+msgstr ""
+
+#: gedit/gedit-encodings.c:159
+msgid "Hebrew Visual"
+msgstr ""
+
+#: gedit/gedit-encodings.c:161 gedit/gedit-encodings.c:220
+#: gedit/gedit-encodings.c:261
+msgid "Hebrew"
+msgstr ""
+
+#: gedit/gedit-encodings.c:163 gedit/gedit-encodings.c:218
+#: gedit/gedit-encodings.c:259
+msgid "Turkish"
+msgstr ""
+
+#: gedit/gedit-encodings.c:165
+msgid "Nordic"
+msgstr ""
+
+#: gedit/gedit-encodings.c:169
+msgid "Celtic"
+msgstr ""
+
+#: gedit/gedit-encodings.c:173
+msgid "Romanian"
+msgstr ""
+
+#: gedit/gedit-encodings.c:185
+msgid "Armenian"
+msgstr ""
+
+#: gedit/gedit-encodings.c:187 gedit/gedit-encodings.c:189
+#: gedit/gedit-encodings.c:198
+msgid "Chinese Traditional"
+msgstr ""
+
+#: gedit/gedit-encodings.c:191
+msgid "Cyrillic/Russian"
+msgstr ""
+
+#: gedit/gedit-encodings.c:194 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:240
+msgid "Japanese"
+msgstr ""
+
+#: gedit/gedit-encodings.c:196 gedit/gedit-encodings.c:227
+#: gedit/gedit-encodings.c:231 gedit/gedit-encodings.c:246
+msgid "Korean"
+msgstr ""
+
+#: gedit/gedit-encodings.c:201 gedit/gedit-encodings.c:203
+#: gedit/gedit-encodings.c:205 gedit/gedit-encodings.c:209
+msgid "Chinese Simplified"
+msgstr ""
+
+#: gedit/gedit-encodings.c:207
+msgid "Georgian"
+msgstr ""
+
+#: gedit/gedit-encodings.c:237
+msgid "Cyrillic/Ukrainian"
+msgstr ""
+
+#: gedit/gedit-encodings.c:242 gedit/gedit-encodings.c:248
+#: gedit/gedit-encodings.c:267
+msgid "Vietnamese"
+msgstr ""
+
+#: gedit/gedit-encodings.c:244
+msgid "Thai"
+msgstr ""
+
+#: gedit/gedit-file-selector-util.c:149
+#, fuzzy, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"هناك ملف بالإسم ``%s'' موجود مسبقا في هذا المكان. هل تريد تبديله بالذي تقوم "
+"بحفظه؟"
+
+#: gedit/gedit-file-selector-util.c:160
+#, fuzzy, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"هناك ملف بالإسم ``%s'' موجود مسبقا في هذا المكان. هل تريد تبديله بالذي تقوم "
+"بحفظه؟"
+
+#: gedit/gedit-file-selector-util.c:283
+msgid "Ch_aracter Coding:"
+msgstr ""
+
+#: gedit/gedit-file-selector-util.c:460
 #, fuzzy
-msgid "Bytes"
-msgstr "بايتات"
+msgid "Select a file to open"
+msgstr "اختر اسم ملف للتخزين"
 
-#: plugins/docinfo/docinfo.glade2.h:3
+#: gedit/gedit-file-selector-util.c:489
 #, fuzzy
-msgid "Characters (no spaces)"
-msgstr "رموز لا"
+msgid "Select files to open"
+msgstr "اختر اسم ملف للتخزين"
 
-#: plugins/docinfo/docinfo.glade2.h:4
+#: gedit/gedit-file-selector-util.c:519
 #, fuzzy
-msgid "Characters (with spaces)"
-msgstr "رموز ب"
+msgid "Select a filename to save"
+msgstr "اختر اسم ملف للتخزين"
 
-#: plugins/docinfo/docinfo.glade2.h:5
+#: gedit/gedit-file.c:155
 #, fuzzy
-msgid "File Name"
-msgstr "اسم الملف"
+msgid "Open File..."
+msgstr "فتح ملف..."
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
+#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#, fuzzy, c-format
+msgid "Loaded file '%s'"
+msgstr "تم تحميل الملف %s"
+
+#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#, fuzzy, c-format
+msgid "Saving file '%s'..."
+msgstr "جاري حفظ الملف '%s' ..."
+
+#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+msgid "The document has not been saved."
+msgstr "لم يتم حفظ المستند."
+
+#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#, c-format
+msgid "File '%s' saved."
+msgstr "تم حفظ الملف '%s'"
+
+#: gedit/gedit-file.c:444
+#, fuzzy
+msgid "Save as..."
+msgstr "إحفظ بإسم..."
+
+#: gedit/gedit-file.c:639
+#, fuzzy, c-format
+msgid ""
+"Do you want to revert to saved the document '%s'?\n"
+"\n"
+"You will not be able to undo this operation."
+msgstr ""
+"هل تريد حفظ التغييرات التي قمت بها للمستند ``%s''؟ \n"
+"\n"
+"ستخسر التعديلات الخاصة بك اذا لم تقم بالحفظ."
+
+#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+#, fuzzy
+msgid "_Revert"
+msgstr "_تراجع"
+
+#: gedit/gedit-file.c:683
+#, fuzzy, c-format
+msgid "Reverting file '%s'..."
+msgstr "جاري استعادة الملف '%s' ..."
+
+#: gedit/gedit-file.c:696
+msgid "The document has not been reverted."
+msgstr "لم يتم استرجاع المستند."
+
+#: gedit/gedit-file.c:706
+#, c-format
+msgid "File '%s' reverted."
+msgstr "تم استرجاع الملف '%s'"
+
+#: gedit/gedit-file.c:732
+#, fuzzy, c-format
+msgid "Loading %d files..."
+msgstr "تم تحميل %i ملف(ات)"
+
+#: gedit/gedit-file.c:768
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr ""
+
+#: gedit/gedit-file.c:823
+#, c-format
+msgid "Loaded %i files"
+msgstr "تم تحميل %i ملف(ات)"
+
+#: gedit/gedit-file.c:957
+#, fuzzy
+msgid "Could not read data from stdin."
+msgstr ""
+"ظهر خطأ أثناء قراءة البيانات من stdin.\n"
+"\n"
+"%s."
+
+#. Read only
+#: gedit/gedit-mdi-child.c:238
+msgid "RO"
+msgstr ""
+
+#. Add the detach tab button
+#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+msgid "_Move to New Window"
+msgstr ""
+
+#: gedit/gedit-mdi-child.c:664
+#, fuzzy
+msgid "Unknown"
+msgstr "خطأ عير معروف"
+
+#: gedit/gedit-mdi-child.c:672
+msgid "Unicode (UTF-8)"
+msgstr ""
+
+#: gedit/gedit-mdi.c:450
+#, fuzzy
+msgid "Open a recently used file"
+msgstr "افتح الملف %s"
+
+#: gedit/gedit-mdi.c:954
+#, fuzzy, c-format
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"هل تريد حفظ التغييرات التي قمت بها للمستند ``%s''؟ \n"
+"\n"
+"ستخسر التعديلات الخاصة بك اذا لم تقم بالحفظ."
+
+#: gedit/gedit-mdi.c:959
+#, fuzzy
+msgid "Do_n't save"
+msgstr "لا ت_حفظ"
+
+#: gedit/gedit-mdi.c:978
+#, fuzzy
+msgid "_Don't quit"
+msgstr "لا ت_حفظ"
+
+#: gedit/gedit-mdi.c:982
+#, fuzzy
+msgid "_Don't close"
+msgstr "لا ت_حفظ"
+
+#: gedit/gedit-mdi.c:1075
+msgid "(modified)"
+msgstr "(تم التعديل)"
+
+#: gedit/gedit-mdi.c:1081
+msgid "(readonly)"
+msgstr "(للقراءة فقط)"
+
+#: gedit/gedit-mdi.c:1676
+msgid "Normal"
+msgstr ""
+
+#: gedit/gedit-mdi.c:1677
+msgid "Use Normal highlight mode"
+msgstr ""
+
+#: gedit/gedit-mdi.c:1753
+#, c-format
+msgid "Use %s highlight mode"
+msgstr ""
+
+#: gedit/gedit-output-window.c:333
+#, fuzzy
+msgid "Close the output window"
+msgstr "أظهر ال"
+
+#: gedit/gedit-output-window.c:371
+#, fuzzy
+msgid "Copy selected lines"
+msgstr "انسخ الاختيار"
+
+#: gedit/gedit-output-window.c:391
+msgid "Clear the output window"
+msgstr ""
+
+#: gedit/gedit-output-window.c:431
+msgid "Output Lines"
+msgstr ""
+
+#: gedit/gedit-plugins-engine.c:362
+#, fuzzy, c-format
+msgid "Error, unable to open module file '%s'\n"
+msgstr "لم أتمكن من فتح الملف الحديث: %s"
+
+#: gedit/gedit-plugins-engine.c:372
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain init function."
+msgstr "خطأ ملحق ث تحوي على."
+
+#: gedit/gedit-plugins-engine.c:382
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain activate function."
+msgstr "خطأ ملحق ث تحوي على."
+
+#: gedit/gedit-plugins-engine.c:392
+#, fuzzy, c-format
+msgid "Error, plugin '%s' does not contain deactivate function."
+msgstr "خطأ ملحق ث تحوي على."
+
+#: gedit/gedit-plugins-engine.c:417
+#, fuzzy, c-format
+msgid "Error, impossible to initialize plugin '%s'"
+msgstr "خطأ الى ملحق ث"
+
+#: gedit/gedit-plugins-engine.c:468
+#, fuzzy, c-format
+msgid "Error, impossible to destroy plugin '%s'"
+msgstr "خطأ الى ملحق ث"
+
+#: gedit/gedit-plugins-engine.c:551 gedit/gedit-plugins-engine.c:639
+#: gedit/gedit-plugins-engine.c:764
+#, fuzzy, c-format
+msgid "Error, impossible to activate plugin '%s'"
+msgstr "خطأ الى ملحق ث"
+
+#: gedit/gedit-plugins-engine.c:590 gedit/gedit-plugins-engine.c:782
+#, fuzzy, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr "خطأ الى ملحق ث"
+
+#: gedit/gedit-plugins-engine.c:683
+#, fuzzy, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
+msgstr "غير ممكن تحديث اعدادات gedit"
+
+#: gedit/gedit-prefs-manager.c:177
+msgid "Cannot initialize preferences manager."
+msgstr ""
+
+#: gedit/gedit-prefs-manager.c:1136
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr ""
+
+#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+#, fuzzy
+msgid "Print"
+msgstr "إطبع"
+
+#: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
 #, fuzzy
 msgid "Lines"
 msgstr "خطوط"
 
-#: plugins/docinfo/docinfo.glade2.h:7
+#: gedit/gedit-print.c:331
+#, fuzzy
+msgid "Preparing pages..."
+msgstr "تفضيلات."
+
+#: gedit/gedit-print.c:358
+#, fuzzy, c-format
+msgid "Rendering page %d of %d..."
+msgstr "جاري استعادة الملف '%s' ..."
+
+#: gedit/gedit-print.c:360
+#, c-format
+msgid "Printing page %d of %d..."
+msgstr ""
+
+#: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
+#, fuzzy
+msgid "Print preview"
+msgstr "اطبع"
+
+#: gedit/gedit-print.c:550
+#, fuzzy, c-format
+msgid "File: %s"
+msgstr "افتح الملف %s"
+
+#: gedit/gedit-print.c:556
+msgid "Page %N of %Q"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:1
+#, fuzzy
+msgid "About this application"
+msgstr "حول هذا البرنامج"
+
+#: gedit/gedit-ui.xml.h:2
+#, fuzzy
+msgid "Change the visibility of the output window in the current window"
+msgstr "غيّر ال من ال ال"
+
+#: gedit/gedit-ui.xml.h:3
+#, fuzzy
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "غيّر ال من ال ال"
+
+#: gedit/gedit-ui.xml.h:4
+#, fuzzy
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "غيّر ال من ال ال"
+
+#: gedit/gedit-ui.xml.h:5
+#, fuzzy
+msgid "Close"
+msgstr "إغلاق"
+
+#: gedit/gedit-ui.xml.h:6
+#, fuzzy
+msgid "Close all open files"
+msgstr "إغلاق الكل"
+
+#: gedit/gedit-ui.xml.h:7
+#, fuzzy
+msgid "Close the current file"
+msgstr "أغلق الملف الحالي"
+
+#: gedit/gedit-ui.xml.h:8
+#, fuzzy
+msgid "Configure the application"
+msgstr "إعداد التطبيق"
+
+#: gedit/gedit-ui.xml.h:9
+#, fuzzy
+msgid "Copy"
+msgstr "نسخ"
+
+#: gedit/gedit-ui.xml.h:10
+#, fuzzy
+msgid "Copy the selection"
+msgstr "انسخ الاختيار"
+
+#: gedit/gedit-ui.xml.h:11
+#, fuzzy
+msgid "Create a new document"
+msgstr "انشيء"
+
+#: gedit/gedit-ui.xml.h:12
+#, fuzzy
+msgid "Cu_t"
+msgstr "_قص"
+
+#: gedit/gedit-ui.xml.h:13
+#, fuzzy
+msgid "Cut"
+msgstr "قص"
+
+#: gedit/gedit-ui.xml.h:14
+#, fuzzy
+msgid "Cut the selection"
+msgstr "قص الاختيار"
+
+#: gedit/gedit-ui.xml.h:15
+#, fuzzy
+msgid "Delete"
+msgstr "إحذف"
+
+#: gedit/gedit-ui.xml.h:16
+#, fuzzy
+msgid "Delete the selected text"
+msgstr "إحذف ال"
+
+#: gedit/gedit-ui.xml.h:18
+#, fuzzy
+msgid "Find Ne_xt"
+msgstr "بحث"
+
+#: gedit/gedit-ui.xml.h:20
+msgid "Find Pre_vious"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:21
+#, fuzzy
+msgid "Find Previous"
+msgstr "عرض اولي "
+
+#: gedit/gedit-ui.xml.h:22
+#, fuzzy
+msgid "Go to _Line..."
+msgstr "اذهب الى السطر۔۔۔"
+
+#: gedit/gedit-ui.xml.h:23
+#, fuzzy
+msgid "Go to a specific line number"
+msgstr "اذهب الى"
+
+#: gedit/gedit-ui.xml.h:24
+#, fuzzy
+msgid "Main toolbar"
+msgstr "الرئيسي"
+
+#: gedit/gedit-ui.xml.h:25
+msgid "Move the current document to a new window"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:26
+#, fuzzy
+msgid "New"
+msgstr "جديد"
+
+#: gedit/gedit-ui.xml.h:27
+#, fuzzy
+msgid "Open"
+msgstr "افتح"
+
+#: gedit/gedit-ui.xml.h:28
+#, fuzzy
+msgid "Open Location..."
+msgstr "فتح ملف..."
+
+#: gedit/gedit-ui.xml.h:29
+#, fuzzy
+msgid "Open _Location..."
+msgstr "فتح ملف..."
+
+#: gedit/gedit-ui.xml.h:30
+#, fuzzy
+msgid "Open a file"
+msgstr "افتح الملف %s"
+
+#: gedit/gedit-ui.xml.h:31
+#, fuzzy
+msgid "Open a file from a specified location"
+msgstr "افتح ملف"
+
+#: gedit/gedit-ui.xml.h:32
+#, fuzzy
+msgid "Open the gedit manual"
+msgstr "افتح ال gedit"
+
+#: gedit/gedit-ui.xml.h:33
+#, fuzzy
+msgid "Page Set_up"
+msgstr "اطبع"
+
+#: gedit/gedit-ui.xml.h:34
+#, fuzzy
+msgid "Paste"
+msgstr "لصق"
+
+#: gedit/gedit-ui.xml.h:35
+#, fuzzy
+msgid "Paste the clipboard"
+msgstr "الصق محتويات الحافظة"
+
+#: gedit/gedit-ui.xml.h:36
+#, fuzzy
+msgid "Pr_eferences"
+msgstr "تفضيلات"
+
+#: gedit/gedit-ui.xml.h:38
+#, fuzzy
+msgid "Print Previe_w..."
+msgstr "اطبع"
+
+#: gedit/gedit-ui.xml.h:39
+#, fuzzy
+msgid "Print Preview"
+msgstr "عرض اولي "
+
+#: gedit/gedit-ui.xml.h:41
+#, fuzzy
+msgid "Print the current file"
+msgstr "اطبع الملف الحالي"
+
+#: gedit/gedit-ui.xml.h:42
+#, fuzzy
+msgid "Quit"
+msgstr "اغلق"
+
+#: gedit/gedit-ui.xml.h:43
+#, fuzzy
+msgid "Quit the program"
+msgstr "اغلق ال"
+
+#: gedit/gedit-ui.xml.h:44
+#, fuzzy
+msgid "Redo"
+msgstr "تكرار"
+
+#: gedit/gedit-ui.xml.h:45
+#, fuzzy
+msgid "Redo the undone action"
+msgstr "كرّر الفعل المتراجع عنه"
+
+#: gedit/gedit-ui.xml.h:47
+#, fuzzy
+msgid "Replace a string"
+msgstr "استبدل نصا"
+
+#: gedit/gedit-ui.xml.h:48
+#, fuzzy
+msgid "Revert"
+msgstr "تراجع"
+
+#: gedit/gedit-ui.xml.h:49
+#, fuzzy
+msgid "Revert to a saved version of the file"
+msgstr "ارتدّ لنسخة محفوظة من الملف"
+
+#: gedit/gedit-ui.xml.h:51
+#, fuzzy
+msgid "Save As"
+msgstr "إحفظ بإسم..."
+
+#: gedit/gedit-ui.xml.h:52
+#, fuzzy
+msgid "Save _As..."
+msgstr "إحفظ بإسم..."
+
+#: gedit/gedit-ui.xml.h:53
+#, fuzzy
+msgid "Save all open files"
+msgstr "احفظ الكل"
+
+#: gedit/gedit-ui.xml.h:54
+#, fuzzy
+msgid "Save the current file"
+msgstr "احفظ الملف الحالي"
+
+#: gedit/gedit-ui.xml.h:55
+#, fuzzy
+msgid "Save the current file with a different name"
+msgstr "احفظ الملف الحالي باسم مختلف"
+
+#: gedit/gedit-ui.xml.h:56
+#, fuzzy
+msgid "Search again for the same string"
+msgstr "ابحث مرة أخرى عن نفس النص"
+
+#: gedit/gedit-ui.xml.h:57
+#, fuzzy
+msgid "Search backwards for the same string"
+msgstr "ابحث مرة أخرى عن نفس النص"
+
+#: gedit/gedit-ui.xml.h:58
+#, fuzzy
+msgid "Search for a string"
+msgstr "ابحث عن نص"
+
+#: gedit/gedit-ui.xml.h:59
+#, fuzzy
+msgid "Select All"
+msgstr "اختيار الكل"
+
+#: gedit/gedit-ui.xml.h:60
+#, fuzzy
+msgid "Select _All"
+msgstr "اخت_ر الجميع"
+
+#: gedit/gedit-ui.xml.h:61
+#, fuzzy
+msgid "Select the entire document"
+msgstr "اختر ال"
+
+#: gedit/gedit-ui.xml.h:62
+#, fuzzy
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr "الى"
+
+#: gedit/gedit-ui.xml.h:63
+#, fuzzy
+msgid "Setup the page settings"
+msgstr "عيّن إعدادات الصفحة لطابعتك الحالية"
+
+#: gedit/gedit-ui.xml.h:64
+#, fuzzy
+msgid "Show only icons in the toolbar"
+msgstr "أظهر ال"
+
+#: gedit/gedit-ui.xml.h:65
+#, fuzzy
+msgid "Show text below every icon in the toolbar"
+msgstr "أظهر ال"
+
+#: gedit/gedit-ui.xml.h:66
+#, fuzzy
+msgid "Show text only beside important icons in the toolbar"
+msgstr "ال"
+
+#: gedit/gedit-ui.xml.h:67
+msgid "T_ext for Important Icons"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:69
+#, fuzzy
+msgid "Undo the last action"
+msgstr "تراجع عن الفعل اﻷخير"
+
+#: gedit/gedit-ui.xml.h:70
+#, fuzzy
+msgid "_About"
+msgstr "_عن..."
+
+#: gedit/gedit-ui.xml.h:71
+#, fuzzy
+msgid "_Close"
+msgstr "أ_غلق"
+
+#: gedit/gedit-ui.xml.h:72
+#, fuzzy
+msgid "_Close All"
+msgstr "إغلاق"
+
+#: gedit/gedit-ui.xml.h:73
+#, fuzzy
+msgid "_Contents"
+msgstr "الم_حتويات"
+
+#: gedit/gedit-ui.xml.h:74
+#, fuzzy
+msgid "_Copy"
+msgstr "ا_نسخ"
+
+#: gedit/gedit-ui.xml.h:75
+#, fuzzy
+msgid "_Customize Toolbar"
+msgstr "تخصيص"
+
+#: gedit/gedit-ui.xml.h:76
+#, fuzzy
+msgid "_Debug"
+msgstr "إزالة الخلل"
+
+#: gedit/gedit-ui.xml.h:77
+#, fuzzy
+msgid "_Delete"
+msgstr "ا_حذف"
+
+#: gedit/gedit-ui.xml.h:78
+#, fuzzy
+msgid "_Desktop Default"
+msgstr "سطح المكتب"
+
+#: gedit/gedit-ui.xml.h:79
+#, fuzzy
+msgid "_Documents"
+msgstr "_مستندات"
+
+#: gedit/gedit-ui.xml.h:80
+#, fuzzy
+msgid "_Edit"
+msgstr "gedit"
+
+#: gedit/gedit-ui.xml.h:81
+#, fuzzy
+msgid "_File"
+msgstr "_ملف"
+
+#: gedit/gedit-ui.xml.h:82
+#, fuzzy
+msgid "_Find..."
+msgstr "ا_بحث"
+
+#: gedit/gedit-ui.xml.h:83
+#, fuzzy
+msgid "_Help"
+msgstr "_مساعدة"
+
+#: gedit/gedit-ui.xml.h:84
+msgid "_Highlight Mode"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:85
+#, fuzzy
+msgid "_Icons Only"
+msgstr "_رمز رسومي"
+
+#: gedit/gedit-ui.xml.h:87
+#, fuzzy
+msgid "_New"
+msgstr "_جديد"
+
+#: gedit/gedit-ui.xml.h:88
+#, fuzzy
+msgid "_Open..."
+msgstr "فتح ملف..."
+
+#: gedit/gedit-ui.xml.h:89
+msgid "_Output Window"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:90
+#, fuzzy
+msgid "_Paste"
+msgstr "_لصق"
+
+#: gedit/gedit-ui.xml.h:91
+#, fuzzy
+msgid "_Print..."
+msgstr "اطبع."
+
+#: gedit/gedit-ui.xml.h:92
+#, fuzzy
+msgid "_Quit"
+msgstr "_إنهاء"
+
+#: gedit/gedit-ui.xml.h:93
+#, fuzzy
+msgid "_Redo"
+msgstr "_إعادة"
+
+#: gedit/gedit-ui.xml.h:94
+#, fuzzy
+msgid "_Replace..."
+msgstr "ت_بديل"
+
+#: gedit/gedit-ui.xml.h:96
+#, fuzzy
+msgid "_Save"
+msgstr "_احفظ"
+
+#: gedit/gedit-ui.xml.h:97
+#, fuzzy
+msgid "_Save All"
+msgstr "إحفظ الكل..."
+
+#: gedit/gedit-ui.xml.h:98
+#, fuzzy
+msgid "_Search"
+msgstr "_إبحث"
+
+#: gedit/gedit-ui.xml.h:99
+#, fuzzy
+msgid "_Statusbar"
+msgstr "_شريط الحالة"
+
+#: gedit/gedit-ui.xml.h:100
+msgid "_Text for All Icons"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:101
+#, fuzzy
+msgid "_Toolbar"
+msgstr "_شريط الأدوات"
+
+#: gedit/gedit-ui.xml.h:102
+msgid "_Tools"
+msgstr ""
+
+#: gedit/gedit-ui.xml.h:103
+#, fuzzy
+msgid "_Undo"
+msgstr "_تراجع"
+
+#: gedit/gedit-ui.xml.h:104
+#, fuzzy
+msgid "_View"
+msgstr "_اعرض"
+
+#: gedit/gedit-utils.c:412
+#, fuzzy, c-format
+msgid ""
+"Could not find the file \"%s\".\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr "ال ملف ث ل ال و."
+
+#: gedit/gedit-utils.c:420
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" because it contains corrupted data."
+msgstr "ال ملف ث it يحتوي."
+
+#: gedit/gedit-utils.c:431
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "ال ملف ث gedit ث."
+
+#: gedit/gedit-utils.c:437
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\""
+msgstr "لم أتمكن من فتح الملف الحديث: %s"
+
+#: gedit/gedit-utils.c:447
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr "ال ملف ث it يحتوي."
+
+#: gedit/gedit-utils.c:454
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" because it is too big."
+msgstr "ال ملف ث it."
+
+#: gedit/gedit-utils.c:461
+#, fuzzy, c-format
+msgid ""
+"\"%s\" is not a valid location.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr "ث ل ال و."
+
+#: gedit/gedit-utils.c:469
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\" because access was denied."
+msgstr "ال ملف ث وصول."
+
+#: gedit/gedit-utils.c:476
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr "ال ملف ث ل ملف و."
+
+#: gedit/gedit-utils.c:484
+#, fuzzy, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr "ث ل ال و."
+
+#: gedit/gedit-utils.c:492
+#, fuzzy, c-format
+msgid ""
+"Not enough available memory to open the file \"%s\". Please, close some "
+"running application and try again."
+msgstr "ليس موجود الى ال ملف ث و."
+
+#: gedit/gedit-utils.c:518
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that you typed the location correctly and that your proxy "
+"settings are correct and then try again."
+msgstr "ال ملف ث لا ث ل ال و و."
+
+#: gedit/gedit-utils.c:533
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr "ال ملف ث ال اسم ل ال و."
+
+#: gedit/gedit-utils.c:542
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr "ال ملف ث ال اسم فارغ ل و."
+
+#: gedit/gedit-utils.c:551
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because the attempt to log in failed.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr "ال ملف ث ال الى ل ال و."
+
+#: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains invalid data.\n"
+"\n"
+"Probably, you are trying to open a binary file."
+msgstr "ال ملف ث it يحتوي يو تي اف ل الى ملف."
+
+#: gedit/gedit-utils.c:604
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit has not been able to "
+"automatically detect the character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and try again "
+"selecting a character coding in the 'Open File...' (or 'Open Location') "
+"dialog."
+msgstr ""
+
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\" using the %s character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and that you "
+"selected the right character coding in the 'Open File...' (or 'Open "
+"Location') dialog and try again."
+msgstr "ال ملف ث لا ث ل ال و و."
+
+#: gedit/gedit-utils.c:662
+#, fuzzy, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "لم أتمكن من فتح الملف الحديث: %s"
+
+#: gedit/gedit-utils.c:666
+#, fuzzy, c-format
+msgid ""
+"Could not open the file \"%s\".\n"
+"\n"
+"%s"
+msgstr "لم أتمكن من فتح الملف الحديث: %s"
+
+#: gedit/gedit-utils.c:718
+#, fuzzy, c-format
+msgid "Could not save the file \"%s\"."
+msgstr "ال ملف ث."
+
+#: gedit/gedit-utils.c:722
+#, fuzzy, c-format
+msgid ""
+"Could not save the file \"%s\".\n"
+"\n"
+"%s"
+msgstr ""
+"ظهر خطأ أثناء حفظ الملف \"%s\".\n"
+"\n"
+"%s"
+
+#: gedit/gedit-utils.c:775
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot find it.\n"
+"\n"
+"Perhaps, it has recently been deleted."
+msgstr "ال ملف ث gedit it ل it."
+
+#: gedit/gedit-utils.c:782
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\" because it contains corrupted data."
+msgstr "ال ملف ث it يحتوي."
+
+#: gedit/gedit-utils.c:793
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "ال ملف ث gedit ث."
+
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\"."
+msgstr ""
+"ظهر خطأ أثناء استعادة الملف \"%s\".\n"
+"\n"
+"%s."
+
+#: gedit/gedit-utils.c:809
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains data in an invalid "
+"format."
+msgstr "ال ملف ث it يحتوي."
+
+#: gedit/gedit-utils.c:816
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\" because it is too big."
+msgstr "ال ملف ث it."
+
+#: gedit/gedit-utils.c:823
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\" because access was denied."
+msgstr "ال ملف ث وصول."
+
+#: gedit/gedit-utils.c:830
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr "ال ملف ث ل ملف و."
+
+#: gedit/gedit-utils.c:838
+#, fuzzy, c-format
+msgid ""
+"Not enough available memory to revert the file \"%s\". Please, close some "
+"running application and try again."
+msgstr "ليس موجود الى ال ملف ث و."
+
+#: gedit/gedit-utils.c:864
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr "ال ملف ث لا ث ل و."
+
+#: gedit/gedit-utils.c:878
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr "ال ملف ث ال اسم فارغ ل و."
+
+#: gedit/gedit-utils.c:885
+#, fuzzy, c-format
+msgid "Could not revert the file \"%s\" because the attempt to log in failed."
+msgstr "ال ملف ث ال الى."
+
+#: gedit/gedit-utils.c:892
+#, fuzzy, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
+"\n"
+"Probably, you are trying to revert a binary file."
+msgstr "ال ملف ث it يحتوي يو تي اف ل الى ملف."
+
+#: gedit/gedit-utils.c:901
+#, fuzzy
+msgid "It is not possible to revert an Untitled document."
+msgstr "غير ممكن استرجاع مستند بدون اسم"
+
+#: gedit/gedit-utils.c:990
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr ""
+
+#: gedit/gedit-utils.c:996
+#, fuzzy, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr "ث ل ال و."
+
+#: gedit/gedit-utils.c:1005
+#, fuzzy, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr "Make ال و ال تصاريح."
+
+#: gedit/gedit-utils.c:1012
+#, fuzzy, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr "ال ملف ث it."
+
+#: gedit/gedit-utils.c:1019
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+
+#: gedit/gedit-utils.c:1028
+#, fuzzy, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr "لا قرص الى ال ملف تعمل ال قرص و."
+
+#: gedit/gedit-utils.c:1034
+#, fuzzy, c-format
+msgid "Could not create the file \"%s\"."
+msgstr ""
+"ظهر خطأ أثناء استعادة الملف \"%s\".\n"
+"\n"
+"%s."
+
+#.
+#. if (col == chars)
+#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
+#. else
+#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
+#.
+#: gedit/gedit-view.c:685
+#, c-format
+msgid "  Ln %d, Col %d"
+msgstr ""
+
+#: gedit/gedit-view.c:723
+msgid "  OVR"
+msgstr ""
+
+#: gedit/gedit-view.c:725
+msgid "  INS"
+msgstr ""
+
+#: gedit/gedit2.c:81
+#, fuzzy
+msgid "Show utility debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للملفات."
+
+#: gedit/gedit2.c:84
+#, fuzzy
+msgid "Show metadata debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للواجهة المتعددة"
+
+#: gedit/gedit2.c:87
+msgid "Show mdi debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للواجهة المتعددة"
+
+#: gedit/gedit2.c:90
+msgid "Show commands debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للأوامر."
+
+#: gedit/gedit2.c:93
+msgid "Show document debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للمستند."
+
+#: gedit/gedit2.c:96
+msgid "Show file debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للملفات."
+
+#: gedit/gedit2.c:99
+msgid "Show plugin debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للملحقات."
+
+#: gedit/gedit2.c:102
+msgid "Show prefs debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للمفضلات."
+
+#: gedit/gedit2.c:105
+msgid "Show printing debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للطباعة."
+
+#: gedit/gedit2.c:108
+msgid "Show search debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للبحث."
+
+#: gedit/gedit2.c:111
+msgid "Show undo debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للإبطال."
+
+#: gedit/gedit2.c:114
+msgid "Show view debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للعرض."
+
+#: gedit/gedit2.c:117
+msgid "Show recent debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل الحديثة."
+
+#: gedit/gedit2.c:120
+#, fuzzy
+msgid "Show session management debugging messages."
+msgstr "أظهر رسائل ازالة المشاكل للمستند."
+
+#: gedit/gedit2.c:123
+msgid "Turn on all debugging messages."
+msgstr "إعمال كل رسائل ازالة المشاكل"
+
+#: gedit/gedit2.c:126
+msgid "Quit an existing instance of gedit"
+msgstr ""
+
+#: gedit/gedit2.c:129
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr ""
+
+#: gedit/gedit2.c:132
+msgid "Create a new document in an existing instance of gedit"
+msgstr ""
+
+#: gedit/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr ""
+
+#: plugins/docinfo/docinfo.c:46
+#, fuzzy
+msgid "_Document Statistics"
+msgstr "_مستندات"
+
+#: plugins/docinfo/docinfo.c:49
+#, fuzzy
+msgid "Get statistic info on current document"
+msgstr "معلومة تعمل"
+
+#: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Document Statistics"
+msgstr "_مستندات"
+
+#: plugins/docinfo/docinfo.c:153
+msgid "_Update"
+msgstr "_تحديث"
+
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid ""
+"The Document Statistics plugin analyzes the current document and determines "
+"the number of words, lines, characters and non-space characters in it and "
+"displays the result."
+msgstr "ملحق ال و ال من و it و ال."
+
+#: plugins/docinfo/docinfo.glade2.h:2
+#, fuzzy
+msgid "0"
+msgstr "0"
+
+#: plugins/docinfo/docinfo.glade2.h:3
+msgid "<span weight=\"bold\">File Name</span>"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:4
+#, fuzzy
+msgid "Bytes"
+msgstr "بايتات"
+
+#: plugins/docinfo/docinfo.glade2.h:5
+#, fuzzy
+msgid "Characters (no spaces)"
+msgstr "رموز لا"
+
+#: plugins/docinfo/docinfo.glade2.h:6
+#, fuzzy
+msgid "Characters (with spaces)"
+msgstr "رموز ب"
+
+#: plugins/docinfo/docinfo.glade2.h:8
 #, fuzzy
 msgid "Update"
 msgstr "تحديث"
 
-#: plugins/docinfo/docinfo.glade2.h:8
+#: plugins/docinfo/docinfo.glade2.h:9
 #, fuzzy
 msgid "Words"
 msgstr "كلمات"
 
-#: plugins/docinfo/docinfo.glade2.h:9
+#: plugins/docinfo/docinfo.glade2.h:10
 #, fuzzy
 msgid "gedit: Document Info plugin"
 msgstr "gedit مستند معلومات"
 
+#: plugins/indent/indent.c:45
+#, fuzzy
+msgid "_Indent"
+msgstr "الم_حتويات"
+
+#: plugins/indent/indent.c:47
+#, fuzzy
+msgid "Indent selected lines"
+msgstr "عرّف ال"
+
+#: plugins/indent/indent.c:49
+msgid "U_nindent"
+msgstr ""
+
+#: plugins/indent/indent.c:51
+#, fuzzy
+msgid "Unindent selected lines"
+msgstr "عرّف ال"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Indent lines"
+msgstr " أسطر"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent or un-indent selected lines."
+msgstr ""
+
 #: plugins/sample/sample.c:43
 #, fuzzy
-msgid "Insert User _Name"
+msgid "Insert User Na_me"
 msgstr "أدخل المستخدم"
 
 #: plugins/sample/sample.c:46
@@ -728,27 +2604,30 @@ msgstr "أدخل المستخدم"
 msgid "Insert the user name at the cursor position"
 msgstr "أدخل ال اسم ال مؤشر"
 
-#: plugins/sample/sample.c:172
-#, fuzzy
-msgid "User name"
-msgstr "المستخدم"
-
-#: plugins/sample/sample.c:173
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:1
 #, fuzzy
 msgid "Inserts the user name at the cursor position."
 msgstr "ال اسم ال مؤشر."
 
-#: plugins/shell_output/shell_output.c:49
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:2
 #, fuzzy
-msgid "Insert Shell _Output"
-msgstr "أدخل شل"
+msgid "User name"
+msgstr "المستخدم"
 
-#: plugins/shell_output/shell_output.c:52
-#, fuzzy
-msgid "Insert the shell output in the current document"
-msgstr "أدخل ال إخراج ال"
+#: plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr ""
 
-#: plugins/shell_output/shell_output.c:137
+#: plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:161
+#: plugins/shell_output/shell_output.c:516
+msgid "Stopped"
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:246
 #, fuzzy
 msgid "An error occurs while running the selected command."
 msgstr ""
@@ -756,18 +2635,25 @@ msgstr ""
 "\n"
 "%s"
 
-#: plugins/shell_output/shell_output.c:187
-#: plugins/shell_output/shell_output.c:550
-#, fuzzy
-msgid "Shell output"
-msgstr "شل"
+#: plugins/shell_output/shell_output.c:302
+msgid "Run Command"
+msgstr ""
 
-#: plugins/shell_output/shell_output.c:200
+#: plugins/shell_output/shell_output.c:318
 #, fuzzy
 msgid "_Run"
 msgstr "تشغيل"
 
-#: plugins/shell_output/shell_output.c:360
+#: plugins/shell_output/shell_output.c:522
+msgid "Done"
+msgstr ""
+
+#: plugins/shell_output/shell_output.c:524
+#, fuzzy
+msgid "Failed"
+msgstr "_ملف"
+
+#: plugins/shell_output/shell_output.c:696
 #, fuzzy
 msgid ""
 "The shell command entry is empty.\n"
@@ -775,7 +2661,7 @@ msgid ""
 "Please, insert a valid shell command."
 msgstr "فارغ ل."
 
-#: plugins/shell_output/shell_output.c:389
+#: plugins/shell_output/shell_output.c:729
 #, fuzzy
 msgid ""
 "Error parsing the shell command.\n"
@@ -783,33 +2669,346 @@ msgid ""
 "Please, insert a valid shell command."
 msgstr "خطأ ال ل."
 
-#: plugins/shell_output/shell_output.c:551
-#, fuzzy
-msgid "Execute an external program and insert its output in a new document."
-msgstr "تنفيذ برنامج و إخراج ال ال مؤشر"
-
-#: plugins/shell_output/shell_output.glade2.h:1
-msgid "Capture the command _output"
+#: plugins/shell_output/shell_output.c:815
+msgid "Executing command"
 msgstr ""
 
-#: plugins/shell_output/shell_output.glade2.h:2
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
 #, fuzzy
-msgid "Specify the working directory and the command you want to run."
-msgstr "ال و ال الى."
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr "تنفيذ برنامج و إخراج ال ال مؤشر"
 
-#: plugins/shell_output/shell_output.glade2.h:3
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 #, fuzzy
-msgid "_Shell command:"
+msgid "Shell command"
 msgstr "شل:"
 
+#: plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr ""
+
 #: plugins/shell_output/shell_output.glade2.h:4
-msgid "_Working directory:"
+msgid "_Show results in Output Window"
 msgstr ""
 
 #: plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:6
 #, fuzzy
 msgid "gedit: Shell Output plugin"
 msgstr "gedit شل الإخراج"
+
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:26
+#, fuzzy
+msgid "S_ort..."
+msgstr "اطبع."
+
+#: plugins/sort/sort.c:29
+#, fuzzy
+msgid "Sort the current document or selection."
+msgstr "اختر ال"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1 plugins/sort/sort.glade2.h:3
+msgid "Sort"
+msgstr ""
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Sorts a document or selected text."
+msgstr "لم يتم حفظ المستند."
+
+#: plugins/sort/sort.glade2.h:1
+#, fuzzy
+msgid "R_emove duplicates"
+msgstr "اضف احذف"
+
+#: plugins/sort/sort.glade2.h:2
+msgid "S_tart at column:"
+msgstr ""
+
+#: plugins/sort/sort.glade2.h:4
+msgid "You cannot undo a sort operation"
+msgstr ""
+
+#: plugins/sort/sort.glade2.h:5
+msgid "_Ignore case"
+msgstr ""
+
+#: plugins/sort/sort.glade2.h:6
+msgid "_Reverse order"
+msgstr ""
+
+#: plugins/sort/sort.glade2.h:7
+msgid "_Sort"
+msgstr ""
+
+#: plugins/spell/gedit-automatic-spell-checker.c:336
+#: plugins/spell/gedit-spell-checker-dialog.c:504
+msgid "(no suggested words)"
+msgstr ""
+
+#: plugins/spell/gedit-automatic-spell-checker.c:360
+#, fuzzy
+msgid "_More..."
+msgstr "فتح ملف..."
+
+#. Ignore all
+#: plugins/spell/gedit-automatic-spell-checker.c:413
+#, fuzzy
+msgid "_Ignore All"
+msgstr "إحفظ بإسم..."
+
+#. + Add to Dictionary
+#: plugins/spell/gedit-automatic-spell-checker.c:426
+msgid "_Add"
+msgstr ""
+
+#: plugins/spell/gedit-automatic-spell-checker.c:463
+msgid "_Spelling Suggestions..."
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker-dialog.c:285
+msgid "Check Spelling"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker-dialog.c:296
+msgid "Suggestions"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker-dialog.c:608
+msgid "(correct spelling)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker-dialog.c:785
+#, fuzzy
+msgid "Completed spell checking"
+msgstr "انسخ الاختيار"
+
+#: plugins/spell/gedit-spell-checker.c:80
+msgid "Breton"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Catalan"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+msgid "Czech"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:83
+msgid "Danish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:84
+msgid "German (Germany)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:85
+msgid "German (Swiss)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:86
+msgid "English (American)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:87
+msgid "English (British)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:88
+msgid "English (Canadian)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:89
+msgid "Esperanto"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:90
+msgid "Spanish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:91
+msgid "Faroese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:92
+msgid "French (France)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:93
+msgid "French (Swiss)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:94
+msgid "Italian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:95
+msgid "Dutch"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:96
+msgid "Norwegian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:97
+#, fuzzy
+msgid "Polish"
+msgstr "ملحق"
+
+#: plugins/spell/gedit-spell-checker.c:98
+msgid "Portuguese (Portugal)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:99
+msgid "Portuguese (Brazilian)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:100
+msgid "Russian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:101
+msgid "Swedish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:734
+#, fuzzy
+msgid "Default"
+msgstr "إحذف"
+
+#: plugins/spell/gedit-spell-language-dialog.c:253
+#, fuzzy
+msgid "Languages"
+msgstr "ملحق"
+
+#: plugins/spell/languages-dialog.glade2.h:1
+#, fuzzy
+msgid "Select the _language of the current document."
+msgstr "اختر ال"
+
+#: plugins/spell/languages-dialog.glade2.h:2
+msgid "Set language"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:2
+msgid "<b>Language</b>"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:3
+msgid "<b>word</b>"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:4
+msgid "Add w_ord"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:5
+msgid "Cha_nge"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:6
+#, fuzzy
+msgid "Change A_ll"
+msgstr "إحفظ الكل..."
+
+#: plugins/spell/spell-checker.glade2.h:7
+msgid "Change _to:"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:8
+msgid "Check _Word"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:9
+msgid "Check spelling"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:10
+#, fuzzy
+msgid "Ignore _All"
+msgstr "إغلاق"
+
+#: plugins/spell/spell-checker.glade2.h:11
+#, fuzzy
+msgid "Language:"
+msgstr "ملحق"
+
+#: plugins/spell/spell-checker.glade2.h:12
+msgid "Mispelled word:"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:13
+msgid "User dictionary:"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:14
+msgid "_Ignore"
+msgstr ""
+
+#: plugins/spell/spell-checker.glade2.h:15
+msgid "_Suggestions:"
+msgstr ""
+
+#: plugins/spell/spell.c:51
+msgid "_Check Spelling"
+msgstr ""
+
+#: plugins/spell/spell.c:54
+msgid "Check the current document for incorrect spelling"
+msgstr ""
+
+#: plugins/spell/spell.c:56
+msgid "_Autocheck Spelling"
+msgstr ""
+
+#: plugins/spell/spell.c:59
+#, fuzzy
+msgid "Automatically spell-check the current document"
+msgstr "أدخل ال إخراج ال"
+
+#: plugins/spell/spell.c:61
+msgid "Set _Language"
+msgstr ""
+
+#: plugins/spell/spell.c:64
+#, fuzzy
+msgid "Set the language of the current document"
+msgstr "أدخل ال إخراج ال"
+
+#: plugins/spell/spell.c:553
+#, fuzzy
+msgid "The document is empty."
+msgstr "لم يتم استرجاع المستند."
+
+#: plugins/spell/spell.c:571
+#, fuzzy
+msgid "The selected text does not contain mispelled words."
+msgstr "الملف المختار ليس ملف تنفيذي"
+
+#: plugins/spell/spell.c:572
+#, fuzzy
+msgid "The document does not contain mispelled words."
+msgstr "لم يتم استرجاع المستند."
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid "Checks the spelling of the current document."
+msgstr "أدخل ال إخراج ال"
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
+msgid "Spell checker"
+msgstr ""
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
 msgid "Tag list plugin"
@@ -817,7 +3016,7 @@ msgstr ""
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
 #, fuzzy
-msgid "Select the group of tab you want to use"
+msgid "Select the group of tags you want to use"
 msgstr "اختر ال مجموعة من الى"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
@@ -830,12 +3029,12 @@ msgstr "مجموعات"
 msgid "Tags Name List"
 msgstr "الاسم"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:187
+#: plugins/taglist/gedit-taglist-plugin-window.c:188
 #, fuzzy
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "تعمل الى it ال"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:198
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
 #, fuzzy
 msgid "Tags"
 msgstr "علامات"
@@ -852,1941 +3051,605 @@ msgstr ""
 msgid "Show the tag list window"
 msgstr "أظهر ال"
 
-#: plugins/taglist/gedit-taglist-plugin.c:160
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
 msgid "Tag list"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:161
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 #, fuzzy
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
-"commonly used tabs/strings without having to type them."
+"commonly used tags/strings without having to type them."
 msgstr "ملحق يوفر الى الى نوع."
 
-#: plugins/time/time.c:45
+#: plugins/time/time.c:48
 #, fuzzy
-msgid "_Insert Date/Time"
+msgid "In_sert Date and Time..."
 msgstr "أدخل التاريخ"
 
-#: plugins/time/time.c:48
+#: plugins/time/time.c:51
 #, fuzzy
 msgid "Insert current date and time at the cursor position"
 msgstr "أدخل و وقت ال مؤشر"
 
-#: plugins/time/time.c:274
+#: plugins/time/time.c:448
 msgid "Available formats"
 msgstr ""
 
-#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:552
 #, fuzzy
-msgid "Configure insert date/time plugin"
+msgid "Configure insert date/time plugin..."
 msgstr "عرّف وقت"
 
-#: plugins/time/time.c:568
+#: plugins/time/time.gedit-plugin.desktop.in.h:1
 #, fuzzy
 msgid "Insert Date/Time"
 msgstr "أدخل التاريخ"
 
-#: plugins/time/time.c:569
+#: plugins/time/time.gedit-plugin.desktop.in.h:2
 #, fuzzy
 msgid "Inserts current date and time at the cursor position."
 msgstr "و وقت ال مؤشر."
 
-#: plugins/time/time.glade2.h:2
-#, fuzzy
-msgid "Select the format to use when inserting date/time."
-msgstr "اختر ال الى وقت."
-
-#: src/bonobo-mdi.c:532 src/bonobo-mdi.c:622 src/bonobo-mdi.c:1858
-#, c-format
-msgid "Activate %s"
-msgstr "نشّط %s"
-
-#: src/dialogs/gedit-dialog-goto-line.c:139
-#, fuzzy
-msgid "Goto line..."
-msgstr "اذهب الى السطر۔۔۔"
-
-#. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:149
-#, fuzzy
-msgid "_Goto line"
-msgstr "_اذهب الي السطر"
-
-#: src/dialogs/gedit-dialog-goto-line.c:165
-#, fuzzy
-msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr "ال"
-
-#: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:53
-#, fuzzy
-msgid "Replace"
-msgstr "تبديل"
-
-#: src/dialogs/gedit-dialog-replace.c:183
-#, fuzzy
-msgid "Replace _All"
-msgstr "ت_بديل"
-
-#. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
-#: src/gedit-ui.xml.h:98
-msgid "_Replace"
-msgstr "ت_بديل"
-
-#: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
-#, fuzzy
-msgid "Find"
-msgstr "بحث"
-
-#: src/dialogs/gedit-dialog-replace.c:474
-#: src/dialogs/gedit-dialog-replace.c:545
-#: src/dialogs/gedit-dialog-replace.c:722
-#, fuzzy, c-format
-msgid "The text \"%s\" was not found."
-msgstr "لم يتم ايجاد الحرفية \"%s\"."
-
-#: src/dialogs/gedit-dialog-replace.c:731
-#, c-format
-msgid "Found and replaced %d occurences."
-msgstr "تم ايجاد و استبدال %d ظهور(ات)"
-
-#: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
-#, fuzzy
-msgid "Open from URI"
-msgstr "افتح"
-
-#: src/dialogs/gedit-plugin-manager.c:53
-#, fuzzy
-msgid "Plugin"
-msgstr "ملحق"
-
-#: src/dialogs/gedit-plugin-manager.c:54
-msgid "Load"
-msgstr "حمل"
-
-#: src/dialogs/gedit-plugin-manager.c:320
-#, fuzzy
-msgid "Module file name"
-msgstr "تم تحميل الملف %s"
-
-#: src/dialogs/gedit-plugin-manager.c:321
-#, fuzzy
-msgid "Author(s)"
-msgstr "المؤلف ث"
-
-#: src/dialogs/gedit-plugin-manager.c:488
-#, fuzzy
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "ملحق gedit"
-
-#: src/dialogs/gedit-plugin-manager.c:511
-#, fuzzy
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr "غير صحيح ملف ملحق الكل"
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:74
-#, fuzzy
-msgid "Set program location ..."
-msgstr "برنامج."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:96
-#, fuzzy
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
-msgstr "ال برنامج"
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:102
-#, fuzzy, c-format
-msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
-msgstr "ث ملحق برنامج<tt> ث</tt> الى ل ال من ال<tt> ث</tt> برنامج."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:148
-#, fuzzy
-msgid "The selected file is not executable."
-msgstr "الملف المختار ليس ملف تنفيذي"
-
-#: src/dialogs/gedit-preferences-dialog.c:207
-msgid "Font & Colors"
-msgstr "خط وألوان"
-
-#: src/dialogs/gedit-preferences-dialog.c:209
-#: src/dialogs/gedit-preferences.glade2.h:30
-#, fuzzy
-msgid "Tabs"
-msgstr "الأشرطة"
-
-#: src/dialogs/gedit-preferences-dialog.c:210
-#: src/dialogs/gedit-preferences.glade2.h:51
-#, fuzzy
-msgid "Wrap mode"
-msgstr "نظام الالتواء"
-
-#: src/dialogs/gedit-preferences-dialog.c:211
-#: src/dialogs/gedit-preferences.glade2.h:15
-#, fuzzy
-msgid "Line numbers"
-msgstr "أرقام الأسطر"
-
-#: src/dialogs/gedit-preferences-dialog.c:213
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:58
-#, fuzzy
-msgid "Save"
-msgstr "احفظ"
-
-#: src/dialogs/gedit-preferences-dialog.c:214
-#: src/dialogs/gedit-preferences.glade2.h:42 src/gedit-ui.xml.h:76
-#, fuzzy
-msgid "Undo"
-msgstr "تراجع"
-
-#: src/dialogs/gedit-preferences-dialog.c:222
-#, fuzzy
-msgid "Page"
-msgstr "صفحة"
-
-#: src/dialogs/gedit-preferences-dialog.c:224
-#, fuzzy
-msgid "Fonts"
-msgstr "خطوط"
-
-#: src/dialogs/gedit-preferences-dialog.c:231
-#, fuzzy
-msgid "Manager"
-msgstr "ملحق"
-
-#: src/dialogs/gedit-preferences-dialog.c:239
-#, fuzzy
-msgid "Editor"
-msgstr "المحرر"
-
-#: src/dialogs/gedit-preferences-dialog.c:240
-#: src/dialogs/gedit-preferences.glade2.h:21 src/gedit-print.c:309
-#: src/gedit-ui.xml.h:42
-#, fuzzy
-msgid "Print"
-msgstr "إطبع"
-
-#: src/dialogs/gedit-preferences-dialog.c:241
-#, fuzzy
-msgid "Plugins"
-msgstr "ملحق"
-
-#: src/dialogs/gedit-preferences-dialog.c:308
-#, fuzzy
-msgid "Cat_egories:"
-msgstr "تصنيفات:"
-
-#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
-#, fuzzy
-msgid "Preferences"
-msgstr "تفضيلات"
-
-#: src/dialogs/gedit-preferences-dialog.c:569
-#, fuzzy
-msgid "Categories"
-msgstr "تصنيفات"
-
-#: src/dialogs/gedit-preferences-dialog.c:800
-msgid "Push this button to select the font to be used by the editor"
-msgstr "اضغط على هذا الزر لاختيار الخط المراد استخدامه في المحرر"
-
-#: src/dialogs/gedit-preferences-dialog.c:803
-#, fuzzy
-msgid "Push this button to configure text color"
-msgstr "اضغط على هذا الز لتغير لون النص"
-
-#: src/dialogs/gedit-preferences-dialog.c:805
-#, fuzzy
-msgid "Push this button to configure background color"
-msgstr "اضغط على هذا الزر لتغير لون الخلفية"
-
-#: src/dialogs/gedit-preferences-dialog.c:807
-#, fuzzy
-msgid ""
-"Push this button to configure the color in which the selected text should "
-"appear"
-msgstr "الى"
-
-#: src/dialogs/gedit-preferences-dialog.c:810
-#, fuzzy
-msgid ""
-"Push this button to configure the color in which the selected text should be "
-"marked"
-msgstr "الى"
-
-#: src/dialogs/gedit-preferences-dialog.c:1592
-#: src/dialogs/gedit-preferences-dialog.c:1594
-msgid "Courier 9"
+#: plugins/time/time.glade2.h:3
+msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:1601
-#: src/dialogs/gedit-preferences-dialog.c:1603
-msgid "Helvetica 11"
+#: plugins/time/time.glade2.h:4
+msgid "<span weight=\"bold\"> When inserting date/time...</span>"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:1610
-#: src/dialogs/gedit-preferences-dialog.c:1612
-msgid "Helvetica 8"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:1733
+#: plugins/time/time.glade2.h:5
 #, fuzzy
-msgid "Push this button to select the font to be used to print the body"
-msgstr "الى ال الى الى طباعة ال"
+msgid "Configure date/time plugin"
+msgstr "عرّف وقت"
 
-#: src/dialogs/gedit-preferences-dialog.c:1735
+#: plugins/time/time.glade2.h:6
 #, fuzzy
-msgid "Push this button to select the font to be used to print the headers"
-msgstr "الى ال الى الى طباعة ال"
+msgid "Insert Date and Time"
+msgstr "أدخل التاريخ"
 
-#: src/dialogs/gedit-preferences-dialog.c:1737
+#: plugins/time/time.glade2.h:7
 #, fuzzy
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr "الى ال الى الى طباعة"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-#, fuzzy
-msgid " _Wrap lines (at character boundaries)"
-msgstr "التواء"
-
-#: src/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
-msgid " character(s)"
-msgstr " حروف"
-
-#: src/dialogs/gedit-preferences.glade2.h:3
-msgid " line(s)"
-msgstr " أسطر"
-
-#: src/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
-msgid "Always use UTF-8 encoding (faster) when creating a new file"
-msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
-
-#: src/dialogs/gedit-preferences.glade2.h:5
-#, fuzzy
-msgid "Always use UTF-8 encoding (faster) when saving"
-msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
-
-#: src/dialogs/gedit-preferences.glade2.h:6
-#, fuzzy
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
-
-#: src/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
-msgid "Colors"
-msgstr "الألوان"
-
-#: src/dialogs/gedit-preferences.glade2.h:9
-#, fuzzy
-msgid "Create a _backup copy of files before saving"
-msgstr "انشيء من"
-
-#: src/dialogs/gedit-preferences.glade2.h:10
-#: src/dialogs/gnome-print-font-picker.c:1014
-#, fuzzy
-msgid "Font"
-msgstr "خط"
-
-#: src/dialogs/gedit-preferences.glade2.h:11
-msgid "Font used to print line _numbers:"
-msgstr "الخط المستخدم لطباعة أرقام _الأسطر:"
-
-#: src/dialogs/gedit-preferences.glade2.h:12
-#, fuzzy
-msgid "Font used to print the _body:"
-msgstr "الخط المستخدم لطباعة الجسم:"
-
-#: src/dialogs/gedit-preferences.glade2.h:13
-#, fuzzy
-msgid "Fonts & Colors"
-msgstr "خطوط"
-
-#: src/dialogs/gedit-preferences.glade2.h:14
-msgid "LOGO"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:16
-#, fuzzy
-msgid "Pick the background color"
-msgstr "اختر لون الخلفية"
-
-#: src/dialogs/gedit-preferences.glade2.h:17
-#, fuzzy
-msgid "Pick the selected text color"
-msgstr "ال"
-
-#: src/dialogs/gedit-preferences.glade2.h:18
-#, fuzzy
-msgid "Pick the selection color"
-msgstr "ال"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-#, fuzzy
-msgid "Pick the text color"
-msgstr "اختر لون النص"
-
-#: src/dialogs/gedit-preferences.glade2.h:20
-#, fuzzy
-msgid "Plugin manager"
-msgstr "ملحق"
-
-#: src/dialogs/gedit-preferences.glade2.h:22
-#, fuzzy
-msgid "Print _line numbers every"
-msgstr "اطبع"
-
-#: src/dialogs/gedit-preferences.glade2.h:23
-#, fuzzy
-msgid "Print _page headers"
-msgstr "اطبع"
-
-#: src/dialogs/gedit-preferences.glade2.h:24
-#, fuzzy
-msgid "Print fonts"
-msgstr "اطبع"
-
-#: src/dialogs/gedit-preferences.glade2.h:26
-#, fuzzy
-msgid "Se_lection color:"
-msgstr "تحديد:"
-
-#: src/dialogs/gedit-preferences.glade2.h:27
-#, fuzzy
-msgid "Selecte_d text color:"
-msgstr "مختار:"
-
-#: src/dialogs/gedit-preferences.glade2.h:28
-#, fuzzy
-msgid "Set _tabs width equivalent to  "
-msgstr "العرض "
-
-#: src/dialogs/gedit-preferences.glade2.h:29
-#, fuzzy
-msgid "Set limit on _undo actions to"
-msgstr "تعمل"
-
-#: src/dialogs/gedit-preferences.glade2.h:31
-#, fuzzy
-msgid ""
-"The font & colors settings let you choose the font and the colors to be used "
-"in the editor windows."
-msgstr ""
-"اعدادت الخط والاوان تتيح لك اختيار الخط و والالوان المراد استخدامها في نوافذ "
-"المحرر. "
-
-#: src/dialogs/gedit-preferences.glade2.h:32
-#, fuzzy
-msgid ""
-"The line numbers setting lets you choose to display the line numbers on the "
-"left hand side of the window."
-msgstr "الى ال تعمل ال من ال."
-
-#: src/dialogs/gedit-preferences.glade2.h:33
-#, fuzzy
-msgid ""
-"The plugin manager settings let you choose which plugins you want to have "
-"loaded."
-msgstr "نظام الى."
-
-#: src/dialogs/gedit-preferences.glade2.h:34
-msgid ""
-"The print fonts settings let you choose the fonts to be used to print "
-"documents."
-msgstr ""
-"اعدادت خطوط الطابعة تتيح لك اختيار الخطوط المراد استخدامها في طباعة "
-"المستندات."
-
-#: src/dialogs/gedit-preferences.glade2.h:35
-#, fuzzy
-msgid "The print page settings let you customize how gedit prints documents."
-msgstr "طباعة gedit."
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-#, fuzzy
-msgid "The save settings let you customize how gedit saves files."
-msgstr "اعدادت الحفظ تتيح لك تعديل طريقة حفظ gedit للملفات."
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-#, fuzzy
-msgid "The tabs settings let you customize the tabs width."
-msgstr "ال العرض."
-
-#: src/dialogs/gedit-preferences.glade2.h:38
-#, fuzzy
-msgid ""
-"The undo settings let you set the maximum number of actions that gedit can "
-"undo."
-msgstr "ال من gedit."
-
-#: src/dialogs/gedit-preferences.glade2.h:39
-#, fuzzy
-msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr "نظام الى."
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-#, fuzzy
-msgid "U_se default theme colors"
-msgstr "استخدم افتراضي"
-
-#: src/dialogs/gedit-preferences.glade2.h:41
-msgid "U_se original file encoding if possible"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "استخدم"
-
-#: src/dialogs/gedit-preferences.glade2.h:44
-#, fuzzy
-msgid "Use current _locale's encoding if possible"
-msgstr "استخدم"
-
-#: src/dialogs/gedit-preferences.glade2.h:45
-#, fuzzy
-msgid "Use current locale's encoding if possible when creating a new file"
-msgstr "استخدم ال ملف"
-
-#: src/dialogs/gedit-preferences.glade2.h:46
-#, fuzzy
-msgid "Use current locale's encoding if possible when saving"
-msgstr "استخدم"
-
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid "When creating a new file..."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:48
-msgid "When saving..."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:49
-#, fuzzy
-msgid "Wrap lines at _word boundaries"
-msgstr "التواء"
-
-#: src/dialogs/gedit-preferences.glade2.h:50
-#, fuzzy
-msgid "Wrap lines at ch_aracter boundaries"
-msgstr "التواء"
-
-#: src/dialogs/gedit-preferences.glade2.h:52
-#, fuzzy
-msgid "_Autosave current file every"
-msgstr "ملف"
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
-msgid "_Background color:"
-msgstr "الخلفية:"
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-#, fuzzy
-msgid "_Display line numbers"
-msgstr "عرض"
-
-#: src/dialogs/gedit-preferences.glade2.h:55
-#, fuzzy
-msgid "_Font used by the editor: "
-msgstr "خط ال "
-
-#: src/dialogs/gedit-preferences.glade2.h:56
-#, fuzzy
-msgid "_Font used to print headers:"
-msgstr "خط الى طباعة:"
-
-#: src/dialogs/gedit-preferences.glade2.h:57
-#, fuzzy
-msgid "_Never wrap lines"
-msgstr "غير ممكن"
-
-#: src/dialogs/gedit-preferences.glade2.h:58
-#, fuzzy
-msgid "_Restore default fonts"
-msgstr "استرجع افتراضي"
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
-msgid "_Text color:"
-msgstr "نص:"
-
-#: src/dialogs/gedit-preferences.glade2.h:60
-#, fuzzy
-msgid "_Use default theme font"
-msgstr "استخدم افتراضي"
-
-#: src/dialogs/gedit-preferences.glade2.h:61
-#, fuzzy
-msgid "action(s)"
-msgstr "ث"
-
-#: src/dialogs/gedit-preferences.glade2.h:62
-#, fuzzy
-msgid "minutes"
-msgstr "دقائق"
-
-#: src/dialogs/gnome-print-font-dialog.c:107
-#, fuzzy
-msgid "_Insert a new preview phrase."
-msgstr "أدخل."
-
-#: src/dialogs/gnome-print-font-dialog.c:113
-#, fuzzy
-msgid "Modify preview phrase..."
-msgstr "عدّل."
-
-#: src/dialogs/gnome-print-font-dialog.c:167
-#, fuzzy
-msgid "Preview"
-msgstr "معاينة"
-
-#: src/dialogs/gnome-print-font-dialog.c:180
-#, fuzzy
-msgid "_Modify preview phrase..."
-msgstr "عدّل."
-
-#: src/dialogs/gnome-print-font-dialog.c:243
-#, fuzzy
-msgid "Font Selection"
-msgstr "اختيار الخط"
-
-#: src/dialogs/gnome-print-font-picker.c:89
-#, fuzzy
-msgid "sans 12"
-msgstr "sans 12"
-
-#: src/dialogs/gnome-print-font-picker.c:90
-#, fuzzy
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
-#: src/dialogs/gnome-print-font-picker.c:91
-#, fuzzy
-msgid "Pick a Font"
-msgstr "اختر خطا"
-
-#: src/dialogs/gnome-print-font-picker.c:176
-#, fuzzy
-msgid "Title"
-msgstr "بدون اسم"
-
-#: src/dialogs/gnome-print-font-picker.c:177
-#, fuzzy
-msgid "The title of the selection dialog box"
-msgstr "عنوان صندوق مربع حوار الاختيار"
-
-#: src/dialogs/gnome-print-font-picker.c:197
-#, fuzzy
-msgid "Font name"
-msgstr "لا ت_حفظ"
-
-#: src/dialogs/gnome-print-font-picker.c:198
-#, fuzzy
-msgid "Name of the selected font"
+msgid "Use the _selected format"
 msgstr "اسم الخط المنتقى"
 
-#: src/dialogs/gnome-print-font-picker.c:206
+#: plugins/time/time.glade2.h:8
 #, fuzzy
-msgid "Preview text"
-msgstr "نص معاينة"
+msgid "_Insert"
+msgstr "أ_درج رمزا"
 
-#: src/dialogs/gnome-print-font-picker.c:207
-#, fuzzy
-msgid "Preview text shown in the dialog"
-msgstr "نص المعاينة يبدو في مربع الحوار"
-
-#: src/dialogs/gnome-print-font-picker.c:215
-#, fuzzy
-msgid "Use font in label"
-msgstr "استخدم الخط في العنوان"
-
-#: src/dialogs/gnome-print-font-picker.c:216
-#, fuzzy
-msgid "Use font in the label in font info mode"
-msgstr "استخدم الخط في العنوان في نظام معلومات الخطوط"
-
-#: src/dialogs/gnome-print-font-picker.c:224
-#, fuzzy
-msgid "Font size for label"
-msgstr "حجم الخط للعنوان"
-
-#: src/dialogs/gnome-print-font-picker.c:225
-#, fuzzy
-msgid "Font size for label in font info mode"
-msgstr "حجم الخط للعنوان في نظام معلومات الخطوط"
-
-#: src/dialogs/gnome-print-font-picker.c:235
-#, fuzzy
-msgid "Show size"
-msgstr "أظهر الحجم"
-
-#: src/dialogs/gnome-print-font-picker.c:236
-#, fuzzy
-msgid "Show size in font info mode"
-msgstr "أظهر الحجم في نظام معلومات الخطوط"
-
-#. gnome_print_font_picker_update_font_info
-#: src/dialogs/goto-line.glade2.h:1
-#, fuzzy
-msgid "Goto Line"
-msgstr "اذهب الى السطر"
-
-#: src/dialogs/goto-line.glade2.h:2
-#, fuzzy
-msgid "_Line number:"
-msgstr "سطر:"
-
-#: src/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
-msgid "C_onfigure plugin"
-msgstr "عرّف"
-
-#: src/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
-msgid "Configure the selected plugin"
-msgstr "عرّف ال"
-
-#: src/dialogs/plugin-manager.glade2.h:3
-msgid "De_tails"
+#: plugins/time/time.glade2.h:9
+msgid "_Prompt for a format"
 msgstr ""
 
-#: src/dialogs/plugin-manager.glade2.h:4
-#, fuzzy
-msgid "_Description"
-msgstr "ال_وصف"
-
-#: src/dialogs/plugin-manager.glade2.h:5
-#, fuzzy
-msgid "dialog1"
-msgstr "صندوق حوار"
-
-#: src/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
-msgid "Set program location..."
-msgstr "برنامج."
-
-#: src/dialogs/program-location-dialog.glade2.h:2
-#, fuzzy
-msgid "_Location to search for:"
-msgstr "المكان الى:"
-
-#: src/dialogs/program-location-dialog.glade2.h:3
-#, fuzzy
-msgid "label"
-msgstr "عنوان"
-
-#: src/dialogs/replace.glade2.h:1
-#, fuzzy
-msgid "Case sensi_tive"
-msgstr "حساس لحالة الحرف"
-
-#: src/dialogs/replace.glade2.h:3
-#, fuzzy
-msgid "Replace _with: "
-msgstr "ت_بديل"
-
-#: src/dialogs/replace.glade2.h:4
-#, fuzzy
-msgid "Search fro_m the beginning of the document"
-msgstr "بحث ال من ال"
-
-#: src/dialogs/replace.glade2.h:5
-#, fuzzy
-msgid "Search from the c_ursor position"
-msgstr "بحث ال مؤشر"
-
-#: src/dialogs/replace.glade2.h:6
-#, fuzzy
-msgid "_Search for: "
-msgstr "بحث "
-
-#: src/dialogs/uri.glade2.h:1
-#, fuzzy
-msgid "Enter the location (URI) of the file you would like to open:"
-msgstr "أدخل ال URI من ال ملف الى:"
-
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr "لم تتم هذه الميزة حتى الآن."
-
-#: src/gedit-commands.c:339
-#, c-format
-msgid "The string \"%s\" has not been found."
-msgstr "لم يتم ايجاد الحرفية \"%s\"."
-
-#: src/gedit-commands.c:437
-#, fuzzy
-msgid "translator_credits"
-msgstr "_تكريم للمترجمين"
-
-#: src/gedit-commands.c:462
-msgid "gedit"
-msgstr "gedit"
-
-#: src/gedit-commands.c:463
-msgid ""
-"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
-"(C) 2000-2002 Chema Celorio and Paolo Maggi"
+#: plugins/time/time.glade2.h:10
+msgid "_Use custom format"
 msgstr ""
 
-#: src/gedit-commands.c:465
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "محرر نصوص صغير و خفيف لـGnome"
-
-#: src/gedit-document.c:573 src/gedit-document.c:591
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:573 src/gedit-document.c:591
-msgid "Untitled"
-msgstr "بدون اسم"
-
-#: src/gedit-document.c:579 src/gedit-document.c:626
-#, fuzzy
-msgid "Invalid file name"
-msgstr "تم تحميل الملف %s"
-
-#: src/gedit-document.c:756 src/gedit-document.c:914
-#, fuzzy
-msgid "Invalid UTF-8 data"
-msgstr "غير صحيح يو تي اف"
-
-#: src/gedit-document.c:1149
-#, fuzzy, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "وصلة"
-
-#: src/gedit-document.c:1195
-#, fuzzy
-msgid "The file has too many symbolic links."
-msgstr "ملف."
-
-#: src/gedit-document.c:1249
-#, fuzzy, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit ث نظام."
-
-#: src/gedit-document.c:1256
-#, fuzzy
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "gedit من نظام."
-
-#: src/gedit-document.c:1269
-#, fuzzy
-msgid "Invalid filename."
-msgstr "تم تحميل الملف %s"
-
-#: src/gedit-document.c:1382
-#, fuzzy
-msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
-msgstr "لا قرص الى ال ملف تعمل ال قرص و."
-
-#: src/gedit-document.c:1387
-#, fuzzy
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
-msgstr "قرص قرص."
-
-#: src/gedit-document.c:1426
-#, fuzzy
-msgid "Could not create a backup file."
-msgstr "ال من ال ملف."
-
-#: src/gedit-document.c:1574
-msgid "It is not possible to revert an Untitled document"
-msgstr "غير ممكن استرجاع مستند بدون اسم"
-
-#: src/gedit-file-selector-util.c:125
-#, fuzzy
-msgid "Do_n't replace"
-msgstr "لا ت_حفظ"
-
-#: src/gedit-file-selector-util.c:147
-#, fuzzy, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"هناك ملف بالإسم ``%s'' موجود مسبقا في هذا المكان. هل تريد تبديله بالذي تقوم "
-"بحفظه؟"
-
-#: src/gedit-file-selector-util.c:158
-#, fuzzy, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"هناك ملف بالإسم ``%s'' موجود مسبقا في هذا المكان. هل تريد تبديله بالذي تقوم "
-"بحفظه؟"
-
-#: src/gedit-file-selector-util.c:544
-#, fuzzy
-msgid "Select a filename to save"
-msgstr "اختر اسم ملف للتخزين"
-
-#: src/gedit-file.c:150
-msgid "Open File ..."
-msgstr "فتح ملف..."
-
-#: src/gedit-file.c:176 src/gedit-file.c:831
-#, fuzzy, c-format
-msgid "Loaded file '%s'"
-msgstr "تم تحميل الملف %s"
-
-#: src/gedit-file.c:304 src/gedit-file.c:433
-#, c-format
-msgid "Saving file '%s' ..."
-msgstr "جاري حفظ الملف '%s' ..."
-
-#: src/gedit-file.c:332 src/gedit-file.c:448
-msgid "The document has not been saved."
-msgstr "لم يتم حفظ المستند."
-
-#: src/gedit-file.c:345 src/gedit-file.c:445
-#, c-format
-msgid "File '%s' saved."
-msgstr "تم حفظ الملف '%s'"
-
-#: src/gedit-file.c:412
-#, fuzzy
-msgid "Save as ..."
-msgstr "إحفظ بإسم..."
-
-#: src/gedit-file.c:626
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr "جاري استعادة الملف '%s' ..."
-
-#: src/gedit-file.c:639
-msgid "The document has not been reverted."
-msgstr "لم يتم استرجاع المستند."
-
-#: src/gedit-file.c:649
-#, c-format
-msgid "File '%s' reverted."
-msgstr "تم استرجاع الملف '%s'"
-
-#: src/gedit-file.c:675
-#, fuzzy, c-format
-msgid "Loading %d files..."
-msgstr "تم تحميل %i ملف(ات)"
-
-#: src/gedit-file.c:711
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
+#: viewer/gedit-persist-stream.c:44
+msgid "Save method not implemented for gedit viewer"
 msgstr ""
 
-#: src/gedit-file.c:766
-#, c-format
-msgid "Loaded %i files"
-msgstr "تم تحميل %i ملف(ات)"
-
-#: src/gedit-file.c:889
+#: viewer/gedit-viewer-ui.xml.h:1
 #, fuzzy
-msgid "Could not read data from stdin."
-msgstr ""
-"ظهر خطأ أثناء قراءة البيانات من stdin.\n"
-"\n"
-"%s."
-
-#: src/gedit-mdi.c:850
-#, fuzzy, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"هل تريد حفظ التغييرات التي قمت بها للمستند ``%s''؟ \n"
-"\n"
-"ستخسر التعديلات الخاصة بك اذا لم تقم بالحفظ."
-
-#: src/gedit-mdi.c:855
-#, fuzzy
-msgid "Do_n't save"
-msgstr "لا ت_حفظ"
-
-#: src/gedit-mdi.c:874
-#, fuzzy
-msgid "_Don't quit"
-msgstr "لا ت_حفظ"
-
-#: src/gedit-mdi.c:878
-#, fuzzy
-msgid "_Don't close"
-msgstr "لا ت_حفظ"
-
-#: src/gedit-mdi.c:968
-msgid "(modified)"
-msgstr "(تم التعديل)"
-
-#: src/gedit-mdi.c:974
-msgid "(readonly)"
-msgstr "(للقراءة فقط)"
-
-#: src/gedit-plugins-engine.c:159
-#, fuzzy, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "لم أتمكن من فتح الملف الحديث: %s"
-
-#: src/gedit-plugins-engine.c:174
-#, fuzzy, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "خطأ ملحق ث تحوي على."
-
-#: src/gedit-plugins-engine.c:184
-#, fuzzy, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "خطأ ملحق ث تحوي على."
-
-#: src/gedit-plugins-engine.c:194
-#, fuzzy, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "خطأ ملحق ث تحوي على."
-
-#: src/gedit-plugins-engine.c:224
-#, fuzzy, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "خطأ الى ملحق ث"
-
-#: src/gedit-plugins-engine.c:232
-#, fuzzy, c-format
-msgid "Error, the plugin '%s' did not specified a name"
-msgstr "خطأ ال ملحق ث"
-
-#: src/gedit-plugins-engine.c:312
-#, fuzzy, c-format
-msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr "خطأ الى من ال ملحق ث"
-
-#: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
-#, fuzzy, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "خطأ الى ملحق ث"
-
-#: src/gedit-plugins-engine.c:411
-#, fuzzy, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "خطأ الى ملحق ث"
-
-#: src/gedit-plugins-engine.c:486
-#, fuzzy, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "غير ممكن تحديث اعدادات gedit"
-
-#: src/gedit-prefs-manager.c:323
-msgid "Cannot initialize preferences manager."
-msgstr ""
-
-#: src/gedit-prefs-manager.c:1589
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr ""
-
-#: src/gedit-print.c:191
-#, fuzzy
-msgid ""
-"gedit is unable to print since it cannot find\n"
-"one of the required fonts."
-msgstr "gedit الى طباعة it لا يوجد من ال."
-
-#: src/gedit-print.c:377
-#, fuzzy, c-format
-msgid "File: %s"
-msgstr "افتح الملف %s"
-
-#. Print right text
-#: src/gedit-print.c:384
-#, fuzzy, c-format
-msgid "Page: %d"
-msgstr "صفحة"
-
-#: src/gedit-print.c:517
-#, fuzzy
-msgid "gedit - Print Preview"
-msgstr "gedit اطبع"
-
-#: src/gedit-print.c:595
-#, fuzzy, c-format
-msgid ""
-"An error occurred while printing.\n"
-"\n"
-"%s,"
-msgstr ""
-"ظهر خطأ أثناء قراءة البيانات من stdin.\n"
-"\n"
-"%s."
-
-#: src/gedit-ui.xml.h:1
-#, fuzzy
-msgid "About this application"
-msgstr "حول هذا البرنامج"
-
-#: src/gedit-ui.xml.h:2
-#, fuzzy
-msgid "C_ustomize Statusbar"
-msgstr "تخصيص"
-
-#: src/gedit-ui.xml.h:3
-#, fuzzy
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "غيّر ال من ال ال"
-
-#: src/gedit-ui.xml.h:4
-#, fuzzy
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "غيّر ال من ال ال"
-
-#: src/gedit-ui.xml.h:5
-#, fuzzy
-msgid "Clos_e All"
-msgstr "إغلاق"
-
-#: src/gedit-ui.xml.h:6
-#, fuzzy
-msgid "Close"
-msgstr "إغلاق"
-
-#: src/gedit-ui.xml.h:7
-#, fuzzy
-msgid "Close All"
-msgstr "إغلاق"
-
-#: src/gedit-ui.xml.h:8
-#, fuzzy
-msgid "Close all open files"
-msgstr "إغلاق الكل"
-
-#: src/gedit-ui.xml.h:9
-#, fuzzy
-msgid "Close the current file"
-msgstr "أغلق الملف الحالي"
-
-#: src/gedit-ui.xml.h:10
-#, fuzzy
-msgid "Configure the application"
-msgstr "إعداد التطبيق"
-
-#: src/gedit-ui.xml.h:11
-#, fuzzy
-msgid "Copy"
-msgstr "نسخ"
-
-#: src/gedit-ui.xml.h:12
-#, fuzzy
-msgid "Copy the selection"
-msgstr "انسخ الاختيار"
-
-#: src/gedit-ui.xml.h:13
-#, fuzzy
-msgid "Create a new document"
-msgstr "انشيء"
-
-#: src/gedit-ui.xml.h:14
-#, fuzzy
-msgid "Cu_t"
-msgstr "_قص"
-
-#: src/gedit-ui.xml.h:15
-#, fuzzy
-msgid "Customize"
-msgstr "تخصيص"
-
-#: src/gedit-ui.xml.h:16
-#, fuzzy
-msgid "Customize toolbars"
-msgstr "تخصيص"
-
-#: src/gedit-ui.xml.h:17
-#, fuzzy
-msgid "Cut"
-msgstr "قص"
-
-#: src/gedit-ui.xml.h:18
-#, fuzzy
-msgid "Cut the selection"
-msgstr "قص الاختيار"
-
-#: src/gedit-ui.xml.h:19
-#, fuzzy
-msgid "Delete"
-msgstr "إحذف"
-
-#: src/gedit-ui.xml.h:20
-#, fuzzy
-msgid "Delete the selected text"
-msgstr "إحذف ال"
-
-#: src/gedit-ui.xml.h:21
-msgid "Dump XML"
-msgstr ""
-
-#: src/gedit-ui.xml.h:22
-#, fuzzy
-msgid "Dump the UI Xml description"
+msgid "Copy the selected text to the clipboard"
 msgstr "ال"
 
-#: src/gedit-ui.xml.h:24
+#: viewer/gedit-viewer-ui.xml.h:2
 #, fuzzy
-msgid "Find Again"
-msgstr "بحث"
-
-#: src/gedit-ui.xml.h:25
-#, fuzzy
-msgid "Find Ne_xt"
-msgstr "بحث"
-
-#: src/gedit-ui.xml.h:26
-#, fuzzy
-msgid "Go to a specific line number"
-msgstr "اذهب الى"
-
-#: src/gedit-ui.xml.h:27
-msgid "Goto _Line"
-msgstr ""
-
-#: src/gedit-ui.xml.h:28
-#, fuzzy
-msgid "Icon and _Text"
-msgstr "أيقونة و"
-
-#: src/gedit-ui.xml.h:29
-#, fuzzy
-msgid "Main toolbar"
-msgstr "الرئيسي"
-
-#: src/gedit-ui.xml.h:30
-#, fuzzy
-msgid "New"
-msgstr "جديد"
-
-#: src/gedit-ui.xml.h:31
-#, fuzzy
-msgid "Only show icons in the toolbar"
-msgstr "ال"
-
-#: src/gedit-ui.xml.h:32
-#, fuzzy
-msgid "Open"
-msgstr "افتح"
-
-#: src/gedit-ui.xml.h:33
-#, fuzzy
-msgid "Open Location..."
-msgstr "فتح ملف..."
-
-#: src/gedit-ui.xml.h:34
-#, fuzzy
-msgid "Open _Location..."
-msgstr "فتح ملف..."
-
-#: src/gedit-ui.xml.h:35
-#, fuzzy
-msgid "Open a file"
-msgstr "افتح الملف %s"
-
-#: src/gedit-ui.xml.h:36
-#, fuzzy
-msgid "Open a file from a specified location"
-msgstr "افتح ملف"
-
-#: src/gedit-ui.xml.h:37
-#, fuzzy
-msgid "Open the gedit manual"
-msgstr "افتح ال gedit"
-
-#: src/gedit-ui.xml.h:38
-#, fuzzy
-msgid "Paste"
-msgstr "لصق"
-
-#: src/gedit-ui.xml.h:39
-#, fuzzy
-msgid "Paste the clipboard"
-msgstr "الصق محتويات الحافظة"
-
-#: src/gedit-ui.xml.h:40
-#, fuzzy
-msgid "Pr_eferences..."
-msgstr "تفضيلات."
-
-#: src/gedit-ui.xml.h:43
-#, fuzzy
-msgid "Print Previe_w"
-msgstr "اطبع"
-
-#: src/gedit-ui.xml.h:44
-#, fuzzy
-msgid "Print Preview"
-msgstr "عرض اولي "
-
-#: src/gedit-ui.xml.h:45
-#, fuzzy
-msgid "Print Setup"
-msgstr "اطبع"
-
-#: src/gedit-ui.xml.h:46
-#, fuzzy
-msgid "Print preview"
-msgstr "اطبع"
-
-#: src/gedit-ui.xml.h:47
-#, fuzzy
-msgid "Print the current file"
-msgstr "اطبع الملف الحالي"
-
-#: src/gedit-ui.xml.h:48
-#, fuzzy
-msgid "Quit"
-msgstr "اغلق"
-
-#: src/gedit-ui.xml.h:49
-#, fuzzy
-msgid "Quit the program"
-msgstr "اغلق ال"
-
-#: src/gedit-ui.xml.h:50
-msgid "Recent _Files"
-msgstr ""
-
-#: src/gedit-ui.xml.h:51
-#, fuzzy
-msgid "Redo"
-msgstr "تكرار"
-
-#: src/gedit-ui.xml.h:52
-#, fuzzy
-msgid "Redo the undone action"
-msgstr "كرّر الفعل المتراجع عنه"
-
-#: src/gedit-ui.xml.h:54
-#, fuzzy
-msgid "Replace a string"
-msgstr "استبدل نصا"
-
-#: src/gedit-ui.xml.h:55
-#, fuzzy
-msgid "Revert"
-msgstr "تراجع"
-
-#: src/gedit-ui.xml.h:56
-#, fuzzy
-msgid "Revert to a saved version of the file"
-msgstr "ارتدّ لنسخة محفوظة من الملف"
-
-#: src/gedit-ui.xml.h:57
-#, fuzzy
-msgid "Sa_ve All"
-msgstr "إحفظ بإسم..."
-
-#: src/gedit-ui.xml.h:59
-#, fuzzy
-msgid "Save All"
-msgstr "إحفظ الكل..."
-
-#: src/gedit-ui.xml.h:60
-#, fuzzy
-msgid "Save As"
-msgstr "إحفظ بإسم..."
-
-#: src/gedit-ui.xml.h:61
-#, fuzzy
-msgid "Save _As..."
-msgstr "إحفظ بإسم..."
-
-#: src/gedit-ui.xml.h:62
-#, fuzzy
-msgid "Save all open files"
-msgstr "احفظ الكل"
-
-#: src/gedit-ui.xml.h:63
-#, fuzzy
-msgid "Save the current file"
-msgstr "احفظ الملف الحالي"
-
-#: src/gedit-ui.xml.h:64
-#, fuzzy
-msgid "Save the current file with a different name"
-msgstr "احفظ الملف الحالي باسم مختلف"
-
-#: src/gedit-ui.xml.h:65
-#, fuzzy
-msgid "Search again for the same string"
-msgstr "ابحث مرة أخرى عن نفس النص"
-
-#: src/gedit-ui.xml.h:66
-#, fuzzy
-msgid "Search for a string"
-msgstr "ابحث عن نص"
-
-#: src/gedit-ui.xml.h:67
-#, fuzzy
-msgid "Select All"
-msgstr "اختيار الكل"
-
-#: src/gedit-ui.xml.h:68
-#, fuzzy
-msgid "Select _All"
-msgstr "اخت_ر الجميع"
-
-#: src/gedit-ui.xml.h:69
-#, fuzzy
-msgid "Select the entire document"
-msgstr "اختر ال"
-
-#: src/gedit-ui.xml.h:70
-#, fuzzy
-msgid "Set toolbar button style according to desktop default"
-msgstr "الى"
-
-#: src/gedit-ui.xml.h:71
-#, fuzzy
-msgid "Setup the page settings for your current printer"
-msgstr "عيّن إعدادات الصفحة لطابعتك الحالية"
-
-#: src/gedit-ui.xml.h:72
-#, fuzzy
-msgid "Show _Cursor Position"
-msgstr "أظهر _موقع المؤشر"
-
-#: src/gedit-ui.xml.h:73
-#, fuzzy
-msgid "Show _Overwrite Mode"
-msgstr "أظهر كتابة على"
-
-#: src/gedit-ui.xml.h:74
-#, fuzzy
-msgid "Show cursor position in the statusbar"
-msgstr "أظهر موقع المؤشر في شريط الحالة "
-
-#: src/gedit-ui.xml.h:75
-#, fuzzy
-msgid "Show overwrite mode in the statusbar"
-msgstr "أظهر نظام ال"
-
-#: src/gedit-ui.xml.h:77
-#, fuzzy
-msgid "Undo the last action"
-msgstr "تراجع عن الفعل اﻷخير"
-
-#: src/gedit-ui.xml.h:78
-#, fuzzy
-msgid "_About"
-msgstr "_عن..."
-
-#: src/gedit-ui.xml.h:79
-#, fuzzy
-msgid "_Close"
-msgstr "أ_غلق"
-
-#: src/gedit-ui.xml.h:80
-#, fuzzy
-msgid "_Contents"
-msgstr "الم_حتويات"
-
-#: src/gedit-ui.xml.h:81
-#, fuzzy
-msgid "_Copy"
+msgid "_Copy Text"
 msgstr "ا_نسخ"
 
-#: src/gedit-ui.xml.h:82
 #, fuzzy
-msgid "_Customize Toolbar"
-msgstr "تخصيص"
+#~ msgid "Show Cursor Position"
+#~ msgstr "أظهر _موقع المؤشر"
 
-#: src/gedit-ui.xml.h:83
 #, fuzzy
-msgid "_Debug"
-msgstr "إزالة الخلل"
+#~ msgid "Show Overwrite Mode"
+#~ msgstr "أظهر كتابة على"
 
-#: src/gedit-ui.xml.h:84
+#~ msgid "_ASCII Table"
+#~ msgstr "_جدول أسكي"
+
 #, fuzzy
-msgid "_Delete"
-msgstr "ا_حذف"
+#~ msgid "Pop-up a dialog containing an ASCII Table"
+#~ msgstr "بوب"
 
-#: src/gedit-ui.xml.h:85
+#~ msgid "Char"
+#~ msgstr "حرف"
+
 #, fuzzy
-msgid "_Desktop Default"
-msgstr "سطح المكتب"
+#~ msgid "Dec#"
+#~ msgstr "عشري"
 
-#: src/gedit-ui.xml.h:86
 #, fuzzy
-msgid "_Documents"
-msgstr "_مستندات"
+#~ msgid "Hex#"
+#~ msgstr "سادس عشري"
 
-#: src/gedit-ui.xml.h:87
+#~ msgid "Name"
+#~ msgstr "الاسم"
+
+#~ msgid "ASCII table"
+#~ msgstr "جدول أسكي"
+
 #, fuzzy
-msgid "_Edit"
-msgstr "gedit"
+#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+#~ msgstr "ملحق يحتوي جدول."
 
-#: src/gedit-ui.xml.h:88
+#~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
+#~ msgstr "حقوق النشر (C) 2001-2002 Paolo Maggi"
+
 #, fuzzy
-msgid "_File"
-msgstr "_ملف"
+#~ msgid ""
+#~ "If you wish to insert any of the characters in to the active \n"
+#~ "document, select the character and click the \"Insert Char\" \n"
+#~ "button or double click the character in the table."
+#~ msgstr "الى من ال الى ال ال و ال أدخل حرف أو ال ال."
 
-#: src/gedit-ui.xml.h:89
+#~ msgid "Insert char"
+#~ msgstr "أدرج رمزا"
+
 #, fuzzy
-msgid "_Find"
-msgstr "ا_بحث"
+#~ msgid "gedit: ASCII table"
+#~ msgstr "gedit"
 
-#: src/gedit-ui.xml.h:90
 #, fuzzy
-msgid "_Help"
-msgstr "_مساعدة"
+#~ msgid "Open CVS Chan_geLogs"
+#~ msgstr "افتح"
 
-#: src/gedit-ui.xml.h:91
 #, fuzzy
-msgid "_Icon"
-msgstr "_رمز رسومي"
+#~ msgid "Searches for ChangeLogs in the current document and opens them"
+#~ msgstr "ال و"
 
-#: src/gedit-ui.xml.h:92
 #, fuzzy
-msgid "_New"
-msgstr "_جديد"
+#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+#~ msgstr "A ملحق."
 
-#: src/gedit-ui.xml.h:93
+#~ msgid "Copyright (C) 2002 - James Willcox"
+#~ msgstr "حقوق النشر (C) 2002 - James Willcox"
+
+#~ msgid "Co_mpare Files..."
+#~ msgstr "_مقارنة ملفات..."
+
 #, fuzzy
-msgid "_Open..."
-msgstr "فتح ملف..."
+#~ msgid "Makes a diff file from two documents or files"
+#~ msgstr "ملف أو"
 
-#: src/gedit-ui.xml.h:94
 #, fuzzy
-msgid "_Paste"
-msgstr "_لصق"
+#~ msgid "Compare files"
+#~ msgstr "تم تحميل الملف %s"
 
-#: src/gedit-ui.xml.h:95
 #, fuzzy
-msgid "_Print..."
-msgstr "اطبع."
+#~ msgid "Compare two files..."
+#~ msgstr "قارن."
 
-#: src/gedit-ui.xml.h:96
 #, fuzzy
-msgid "_Quit"
-msgstr "_إنهاء"
+#~ msgid "C_ompare"
+#~ msgstr "قارن"
 
-#: src/gedit-ui.xml.h:97
 #, fuzzy
-msgid "_Redo"
-msgstr "_إعادة"
+#~ msgid ""
+#~ "The \"first\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr "ملف ل ملف."
 
-#: src/gedit-ui.xml.h:99
 #, fuzzy
-msgid "_Revert"
-msgstr "_تراجع"
+#~ msgid ""
+#~ "The \"second\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr "ملف ل ملف."
 
-#: src/gedit-ui.xml.h:100
 #, fuzzy
-msgid "_Save"
-msgstr "_احفظ"
+#~ msgid "The two files you selected are the same."
+#~ msgstr "ال."
 
-#: src/gedit-ui.xml.h:101
 #, fuzzy
-msgid "_Search"
-msgstr "_إبحث"
+#~ msgid "The \"second\" document contains no text."
+#~ msgstr "يحتوي لا."
 
-#: src/gedit-ui.xml.h:102
 #, fuzzy
-msgid "_Statusbar"
-msgstr "_شريط الحالة"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "gedit could not create a temporary file."
+#~ msgstr "الى ال ل ملف."
 
-#: src/gedit-ui.xml.h:103
 #, fuzzy
-msgid "_Toolbar"
-msgstr "_شريط الأدوات"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "Error executing the diff command."
+#~ msgstr "الى ال ل ال."
 
-#: src/gedit-ui.xml.h:104
-msgid "_Tools"
-msgstr ""
-
-#: src/gedit-ui.xml.h:105
 #, fuzzy
-msgid "_Undo"
-msgstr "_تراجع"
+#~ msgid "No differences were found between the selected documents."
+#~ msgstr "لا بين ال."
 
-#: src/gedit-ui.xml.h:106
 #, fuzzy
-msgid "_View"
-msgstr "_اعرض"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "The result contains invalid UTF-8 data."
+#~ msgstr "الى ال ل يحتوي يو تي اف."
 
-#: src/gedit-utils.c:792
-#, fuzzy, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr "ال ملف ث ل ال و."
-
-#: src/gedit-utils.c:799
-#, fuzzy, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "ال ملف ث it يحتوي."
-
-#: src/gedit-utils.c:810
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "ال ملف ث gedit ث."
-
-#: src/gedit-utils.c:816
-#, fuzzy, c-format
-msgid "Could not open the file \"%s\""
-msgstr "لم أتمكن من فتح الملف الحديث: %s"
-
-#: src/gedit-utils.c:826
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "ال ملف ث it يحتوي."
-
-#: src/gedit-utils.c:833
-#, fuzzy, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "ال ملف ث it."
-
-#: src/gedit-utils.c:840
-#, fuzzy, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr "ث ل ال و."
-
-#: src/gedit-utils.c:847
-#, fuzzy, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "ال ملف ث وصول."
-
-#: src/gedit-utils.c:854
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr "ال ملف ث ل ملف و."
-
-#: src/gedit-utils.c:862
-#, fuzzy, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr "ث ل ال و."
-
-#: src/gedit-utils.c:869
-#, fuzzy, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr "ليس موجود الى ال ملف ث و."
-
-#: src/gedit-utils.c:895
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr "ال ملف ث لا ث ل ال و و."
-
-#: src/gedit-utils.c:910
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr "ال ملف ث ال اسم ل ال و."
-
-#: src/gedit-utils.c:917
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr "ال ملف ث ال اسم فارغ ل و."
-
-#: src/gedit-utils.c:924
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr "ال ملف ث ال الى ل ال و."
-
-#: src/gedit-utils.c:932
-#, fuzzy, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr "ال ملف ث it يحتوي يو تي اف ل الى ملف."
-
-#: src/gedit-utils.c:970
-#, fuzzy, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "لم أتمكن من فتح الملف الحديث: %s"
-
-#: src/gedit-utils.c:1021
-#, fuzzy, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "ال ملف ث."
-
-#: src/gedit-utils.c:1025
-#, fuzzy, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"ظهر خطأ أثناء حفظ الملف \"%s\".\n"
-"\n"
-"%s"
-
-#: src/gedit-utils.c:1078
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr "ال ملف ث gedit it ل it."
-
-#: src/gedit-utils.c:1085
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "ال ملف ث it يحتوي."
-
-#: src/gedit-utils.c:1096
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "ال ملف ث gedit ث."
-
-#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr ""
-"ظهر خطأ أثناء استعادة الملف \"%s\".\n"
-"\n"
-"%s."
-
-#: src/gedit-utils.c:1112
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr "ال ملف ث it يحتوي."
-
-#: src/gedit-utils.c:1119
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "ال ملف ث it."
-
-#: src/gedit-utils.c:1126
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "ال ملف ث وصول."
-
-#: src/gedit-utils.c:1133
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr "ال ملف ث ل ملف و."
-
-#: src/gedit-utils.c:1141
-#, fuzzy, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr "ليس موجود الى ال ملف ث و."
-
-#: src/gedit-utils.c:1167
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr "ال ملف ث لا ث ل و."
-
-#: src/gedit-utils.c:1181
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr "ال ملف ث ال اسم فارغ ل و."
-
-#: src/gedit-utils.c:1188
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "ال ملف ث ال الى."
-
-#: src/gedit-utils.c:1195
-#, fuzzy, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr "ال ملف ث it يحتوي يو تي اف ل الى ملف."
-
-#: src/gedit-utils.c:1204
 #, fuzzy
-msgid "It is not possible to revert an Untitled document."
-msgstr "غير ممكن استرجاع مستند بدون اسم"
+#~ msgid ""
+#~ "Makes a diff file from two documents or files on disk.\n"
+#~ "\n"
+#~ "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
+#~ msgstr "ملف أو تعمل قرص ل معلومة تعمل برنامج نوع man"
 
-#: src/gedit-utils.c:1293
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr ""
-
-#: src/gedit-utils.c:1299
-#, fuzzy, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr "ث ل ال و."
-
-#: src/gedit-utils.c:1308
-#, fuzzy, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr "Make ال و ال تصاريح."
-
-#: src/gedit-utils.c:1315
-#, fuzzy, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr "ال ملف ث it."
-
-#: src/gedit-utils.c:1322
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-
-#: src/gedit-utils.c:1331
-#, fuzzy, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr "لا قرص الى ال ملف تعمل ال قرص و."
-
-#: src/gedit-utils.c:1337
-#, fuzzy, c-format
-msgid "Could not create the file \"%s\"."
-msgstr ""
-"ظهر خطأ أثناء استعادة الملف \"%s\".\n"
-"\n"
-"%s."
-
-#: src/gedit-view.c:904
-#, c-format
-msgid "  Ln %d, Col. %d"
-msgstr ""
-
-#: src/gedit-view.c:942
-msgid "  OVR"
-msgstr ""
-
-#: src/gedit-view.c:944
-msgid "  INS"
-msgstr ""
-
-#: src/gedit2.c:75
-msgid "Show mdi debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للواجهة المتعددة"
-
-#: src/gedit2.c:78
-msgid "Show commands debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للأوامر."
-
-#: src/gedit2.c:81
-msgid "Show document debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للمستند."
-
-#: src/gedit2.c:84
-msgid "Show file debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للملفات."
-
-#: src/gedit2.c:87
-msgid "Show plugin debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للملحقات."
-
-#: src/gedit2.c:90
-msgid "Show prefs debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للمفضلات."
-
-#: src/gedit2.c:93
-msgid "Show printing debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للطباعة."
-
-#: src/gedit2.c:96
-msgid "Show search debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للبحث."
-
-#: src/gedit2.c:99
-msgid "Show undo debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للإبطال."
-
-#: src/gedit2.c:102
-msgid "Show view debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للعرض."
-
-#: src/gedit2.c:105
-msgid "Show recent debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل الحديثة."
-
-#: src/gedit2.c:108
 #, fuzzy
-msgid "Show session management debugging messages."
-msgstr "أظهر رسائل ازالة المشاكل للمستند."
+#~ msgid ""
+#~ "Copyright (C) 2000 - 2001 Chema Celorio \n"
+#~ "Copyright (C) 2002 Paolo Maggi"
+#~ msgstr "حقوق النشر C C"
 
-#: src/gedit2.c:111
-msgid "Turn on all debugging messages."
-msgstr "إعمال كل رسائل ازالة المشاكل"
+#, fuzzy
+#~ msgid "Choose the files to compare."
+#~ msgstr "اختر ال الى."
 
-#: src/gedit2.c:114
-msgid "Quit an existing instance of gedit"
-msgstr ""
+#, fuzzy
+#~ msgid "Compare files..."
+#~ msgstr "فتح ملف..."
 
-#: src/gedit2.c:117
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr ""
+#, fuzzy
+#~ msgid "F_rom document"
+#~ msgstr "من"
 
-#: src/gedit2.c:120
-msgid "Create a new document in an existing instance of gedit"
-msgstr ""
+#, fuzzy
+#~ msgid "First"
+#~ msgstr "الأول"
 
-#: src/gnome-recent-view-bonobo.c:218
-#, fuzzy, c-format
-msgid "Open %s"
-msgstr "افتح الملف %s"
+#, fuzzy
+#~ msgid "First file from disk"
+#~ msgstr "من ملف تعمل"
+
+#, fuzzy
+#~ msgid "First file from open document"
+#~ msgstr "معلومة تعمل"
+
+#, fuzzy
+#~ msgid "From _document"
+#~ msgstr "من"
+
+#, fuzzy
+#~ msgid "From a _file on disk"
+#~ msgstr "من ملف تعمل"
+
+#, fuzzy
+#~ msgid "From a file o_n disk"
+#~ msgstr "من ملف تعمل"
+
+#, fuzzy
+#~ msgid "Ignore _blanks (-b option)"
+#~ msgstr "تجاهل"
+
+#, fuzzy
+#~ msgid "Note that this option is only supported by GNU diff"
+#~ msgstr "ملاحظة جينيو"
+
+#~ msgid "Second"
+#~ msgstr "ثانية"
+
+#, fuzzy
+#~ msgid "Second file from disk"
+#~ msgstr "من ملف تعمل"
+
+#, fuzzy
+#~ msgid "Second file from open document"
+#~ msgstr "معلومة تعمل"
+
+#, fuzzy
+#~ msgid "Select the first file to compare"
+#~ msgstr "اختر ال الى."
+
+#, fuzzy
+#~ msgid "Select the second file to compare"
+#~ msgstr "اختر ال الى."
+
+#, fuzzy
+#~ msgid "Select the second open document to compare"
+#~ msgstr "اختر ال"
+
+#, fuzzy
+#~ msgid "Use the _unified output format (-u option)"
+#~ msgstr "استخدم ال إخراج"
+
+#, fuzzy
+#~ msgid "_Word Count"
+#~ msgstr "_عد الكلمات"
+
+#, fuzzy
+#~ msgid "Word count"
+#~ msgstr "عدد الكلمات"
+
+#, fuzzy
+#~ msgid "Copyright (C) 2002 - Paolo Maggi"
+#~ msgstr "حقوق النشر C"
+
+#, fuzzy
+#~ msgid "File Name"
+#~ msgstr "اسم الملف"
+
+#, fuzzy
+#~ msgid "Insert Shell _Output"
+#~ msgstr "أدخل شل"
+
+#, fuzzy
+#~ msgid "Shell output"
+#~ msgstr "شل"
+
+#, fuzzy
+#~ msgid "Specify the working directory and the command you want to run."
+#~ msgstr "ال و ال الى."
+
+#, fuzzy
+#~ msgid "_Insert Date/Time"
+#~ msgstr "أدخل التاريخ"
+
+#, fuzzy
+#~ msgid "Select the format to use when inserting date/time."
+#~ msgstr "اختر ال الى وقت."
+
+#, fuzzy
+#~ msgid "_Goto line"
+#~ msgstr "_اذهب الي السطر"
+
+#~ msgid "Load"
+#~ msgstr "حمل"
+
+#, fuzzy
+#~ msgid "Module file name"
+#~ msgstr "تم تحميل الملف %s"
+
+#, fuzzy
+#~ msgid "Author(s)"
+#~ msgstr "المؤلف ث"
+
+#, fuzzy
+#~ msgid "Set program location ..."
+#~ msgstr "برنامج."
+
+#, fuzzy
+#~ msgid ""
+#~ "Could not find the required widgets inside program-location-dialog."
+#~ "glade2.\n"
+#~ msgstr "ال برنامج"
+
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "صفحة"
+
+#, fuzzy
+#~ msgid " _Wrap lines (at character boundaries)"
+#~ msgstr "التواء"
+
+#, fuzzy
+#~ msgid "Always use UTF-8 encoding (faster) when creating a new file"
+#~ msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
+
+#, fuzzy
+#~ msgid "Always use UTF-8 encoding (faster) when saving"
+#~ msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
+
+#, fuzzy
+#~ msgid "Always use U_TF-8 encoding (faster)"
+#~ msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
+
+#~ msgid "Always use _UTF-8 encoding (faster)"
+#~ msgstr "دائما استخدم ترميز UTF-8 (أسرع)"
+
+#, fuzzy
+#~ msgid "Colors"
+#~ msgstr "الألوان"
+
+#~ msgid "Font used to print line _numbers:"
+#~ msgstr "الخط المستخدم لطباعة أرقام _الأسطر:"
+
+#, fuzzy
+#~ msgid "Font used to print the _body:"
+#~ msgstr "الخط المستخدم لطباعة الجسم:"
+
+#, fuzzy
+#~ msgid "Print fonts"
+#~ msgstr "اطبع"
+
+#, fuzzy
+#~ msgid ""
+#~ "The font & colors settings let you choose the font and the colors to be "
+#~ "used in the editor windows."
+#~ msgstr ""
+#~ "اعدادت الخط والاوان تتيح لك اختيار الخط و والالوان المراد استخدامها في "
+#~ "نوافذ المحرر. "
+
+#, fuzzy
+#~ msgid ""
+#~ "The line numbers setting lets you choose to display the line numbers on "
+#~ "the left hand side of the window."
+#~ msgstr "الى ال تعمل ال من ال."
+
+#, fuzzy
+#~ msgid ""
+#~ "The plugin manager settings let you choose which plugins you want to have "
+#~ "loaded."
+#~ msgstr "نظام الى."
+
+#~ msgid ""
+#~ "The print fonts settings let you choose the fonts to be used to print "
+#~ "documents."
+#~ msgstr ""
+#~ "اعدادت خطوط الطابعة تتيح لك اختيار الخطوط المراد استخدامها في طباعة "
+#~ "المستندات."
+
+#, fuzzy
+#~ msgid ""
+#~ "The print page settings let you customize how gedit prints documents."
+#~ msgstr "طباعة gedit."
+
+#, fuzzy
+#~ msgid "The save settings let you customize how gedit saves files."
+#~ msgstr "اعدادت الحفظ تتيح لك تعديل طريقة حفظ gedit للملفات."
+
+#, fuzzy
+#~ msgid "The tabs settings let you customize the tabs width."
+#~ msgstr "ال العرض."
+
+#, fuzzy
+#~ msgid ""
+#~ "The undo settings let you set the maximum number of actions that gedit "
+#~ "can undo."
+#~ msgstr "ال من gedit."
+
+#, fuzzy
+#~ msgid ""
+#~ "The wrap mode settings let you customize how lines have to be wrapped."
+#~ msgstr "نظام الى."
+
+#, fuzzy
+#~ msgid "Use cu_rrent locale's encoding if possible"
+#~ msgstr "استخدم"
+
+#, fuzzy
+#~ msgid "Use current _locale's encoding if possible"
+#~ msgstr "استخدم"
+
+#, fuzzy
+#~ msgid "Use current locale's encoding if possible when creating a new file"
+#~ msgstr "استخدم ال ملف"
+
+#, fuzzy
+#~ msgid "Use current locale's encoding if possible when saving"
+#~ msgstr "استخدم"
+
+#, fuzzy
+#~ msgid "Wrap lines at _word boundaries"
+#~ msgstr "التواء"
+
+#, fuzzy
+#~ msgid "Wrap lines at ch_aracter boundaries"
+#~ msgstr "التواء"
+
+#, fuzzy
+#~ msgid "_Font used by the editor: "
+#~ msgstr "خط ال "
+
+#, fuzzy
+#~ msgid "_Font used to print headers:"
+#~ msgstr "خط الى طباعة:"
+
+#, fuzzy
+#~ msgid "_Never wrap lines"
+#~ msgstr "غير ممكن"
+
+#, fuzzy
+#~ msgid "sans 12"
+#~ msgstr "sans 12"
+
+#, fuzzy
+#~ msgid "Case sensi_tive"
+#~ msgstr "حساس لحالة الحرف"
+
+#, fuzzy
+#~ msgid "Search fro_m the beginning of the document"
+#~ msgstr "بحث ال من ال"
+
+#, fuzzy
+#~ msgid "Search from the c_ursor position"
+#~ msgstr "بحث ال مؤشر"
+
+#~ msgid "Not yet implemented."
+#~ msgstr "لم تتم هذه الميزة حتى الآن."
+
+#~ msgid "The string \"%s\" has not been found."
+#~ msgstr "لم يتم ايجاد الحرفية \"%s\"."
+
+#, fuzzy
+#~ msgid "Do_n't replace"
+#~ msgstr "لا ت_حفظ"
+
+#, fuzzy
+#~ msgid "Error, the plugin '%s' did not specified a name"
+#~ msgstr "خطأ ال ملحق ث"
+
+#, fuzzy
+#~ msgid "Error, impossible to save settings of the plugin '%s'"
+#~ msgstr "خطأ الى من ال ملحق ث"
+
+#, fuzzy
+#~ msgid ""
+#~ "gedit is unable to print since it cannot find\n"
+#~ "one of the required fonts."
+#~ msgstr "gedit الى طباعة it لا يوجد من ال."
+
+#, fuzzy
+#~ msgid "Page: %d"
+#~ msgstr "صفحة"
+
+#, fuzzy
+#~ msgid "gedit - Print Preview"
+#~ msgstr "gedit اطبع"
+
+#, fuzzy
+#~ msgid ""
+#~ "An error occurred while printing.\n"
+#~ "\n"
+#~ "%s,"
+#~ msgstr ""
+#~ "ظهر خطأ أثناء قراءة البيانات من stdin.\n"
+#~ "\n"
+#~ "%s."
+
+#, fuzzy
+#~ msgid "C_ustomize Statusbar"
+#~ msgstr "تخصيص"
+
+#, fuzzy
+#~ msgid "Clos_e All"
+#~ msgstr "إغلاق"
+
+#, fuzzy
+#~ msgid "Customize"
+#~ msgstr "تخصيص"
+
+#, fuzzy
+#~ msgid "Customize toolbars"
+#~ msgstr "تخصيص"
+
+#, fuzzy
+#~ msgid "Dump the UI Xml description"
+#~ msgstr "ال"
+
+#, fuzzy
+#~ msgid "Find Again"
+#~ msgstr "بحث"
+
+#, fuzzy
+#~ msgid "Icon and _Text"
+#~ msgstr "أيقونة و"
+
+#, fuzzy
+#~ msgid "Show _Cursor Position"
+#~ msgstr "أظهر _موقع المؤشر"
+
+#, fuzzy
+#~ msgid "Show _Overwrite Mode"
+#~ msgstr "أظهر كتابة على"
+
+#, fuzzy
+#~ msgid "Show cursor position in the statusbar"
+#~ msgstr "أظهر موقع المؤشر في شريط الحالة "
+
+#, fuzzy
+#~ msgid "Show overwrite mode in the statusbar"
+#~ msgstr "أظهر نظام ال"
+
+#, fuzzy
+#~ msgid "Open %s"
+#~ msgstr "افتح الملف %s"
 
 #, fuzzy
 #~ msgid "Could not create the Plugin Manager dialog"
@@ -2898,10 +3761,6 @@ msgstr "افتح الملف %s"
 #~ msgstr "غير ممكن تحديث اعدادات gedit"
 
 #, fuzzy
-#~ msgid "Add/Remove plugins"
-#~ msgstr "اضف احذف"
-
-#, fuzzy
 #~ msgid "Plugin _Manager"
 #~ msgstr "ملحق"
 
@@ -2929,12 +3788,5 @@ msgstr "افتح الملف %s"
 #~ msgid "Show _Tooltips"
 #~ msgstr "أظهر"
 
-#, fuzzy
-#~ msgid "Show tooltips in the toolbar"
-#~ msgstr "أظهر ال"
-
 #~ msgid "Invalid UTF-8 data encountered reading file"
 #~ msgstr "بيانات UTF-8 غير صحيحة أثناء قراءة الملف"
-
-#~ msgid "Unknown error"
-#~ msgstr "خطأ عير معروف"
