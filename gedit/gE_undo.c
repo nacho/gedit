@@ -29,7 +29,6 @@
 void views_insert (gE_document *doc, gE_undo *undo);
 void views_delete (gE_document *doc, gE_undo *undo);
 
-
 void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_document *doc)
 {
 
@@ -47,6 +46,7 @@ void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_doc
 	if (doc->redo) {
 	
 		g_list_free (doc->redo);
+		doc->redo = NULL;
 	
 	}
 

@@ -1,3 +1,8 @@
+Sun Sep 12 19:22:19 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_undo.c: (gE_undo_add) Nullify the redo stack after freeing it. no
+	  more lockup's! yay!
+
 Sun Sep 12 19:03:50 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_undo.c: (gE_undo_do) New function. Gets the last done item, copies
