@@ -100,6 +100,7 @@ typedef enum
   GEDIT_ENCODING_ISO_IR_111,
   GEDIT_ENCODING_JOHAB,
   GEDIT_ENCODING_KOI8_R,
+  GEDIT_ENCODING_KOI8__R,
   GEDIT_ENCODING_KOI8_U,
   
   GEDIT_ENCODING_SHIFT_JIS,
@@ -214,6 +215,8 @@ static GeditEncoding encodings [] = {
     "JOHAB", N_("Korean") },
   { GEDIT_ENCODING_KOI8_R,
     "KOI8R", N_("Cyrillic") },
+  { GEDIT_ENCODING_KOI8__R,
+    "KOI8-R", N_("Cyrillic") },
   { GEDIT_ENCODING_KOI8_U,
     "KOI8U", N_("Cyrillic/Ukrainian") },
   
