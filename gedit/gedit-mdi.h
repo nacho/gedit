@@ -32,9 +32,9 @@
 #ifndef __GEDIT_MDI_H__
 #define __GEDIT_MDI_H__
 
-#include "bonobo-mdi.h"
-#include "gedit-recent.h"
-#include "recent-files/egg-recent-view.h"
+#include <gedit/bonobo-mdi.h>
+#include <gedit/gedit-recent.h>
+#include <gedit/recent-files/egg-recent-view.h>
 
 #define GEDIT_TYPE_MDI			(gedit_mdi_get_type ())
 #define GEDIT_MDI(obj)			(GTK_CHECK_CAST ((obj), GEDIT_TYPE_MDI, GeditMDI))

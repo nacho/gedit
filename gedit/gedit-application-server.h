@@ -2,7 +2,7 @@
 #ifndef __GEDIT_APPLICATION_SERVER_H
 #define __GEDIT_APPLICATION_SERVER_H
 
-#include "GNOME_Gedit.h"
+#include <gedit/GNOME_Gedit.h>
 #include <bonobo/bonobo-control.h>
 #include <bonobo/bonobo-object.h>
 

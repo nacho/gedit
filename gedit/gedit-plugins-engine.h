@@ -30,7 +30,7 @@
 #ifndef __GEDIT_PLUGINS_ENGINE_H__
 #define __GEDIT_PLUGINS_ENGINE_H__
 
-#include "gedit-plugin.h"
+#include <gedit/gedit-plugin.h>
 
 typedef struct _GeditPluginInfo GeditPluginInfo;
 

@@ -4,8 +4,8 @@
 
 #include <bonobo/bonobo-control.h>
 #include <bonobo/bonobo-object.h>
-#include "gedit-document.h"
-#include "GNOME_Gedit.h"
+#include <gedit/gedit-document.h>
+#include <gedit/GNOME_Gedit.h>
 
 G_BEGIN_DECLS
 

@@ -32,7 +32,7 @@
 #include <gtksourceview/gtksourcelanguagesmanager.h>
 
 #include "gedit-persist-stream.h"
-#include "gedit-convert.h"
+#include <gedit/gedit-convert.h>
 
 static int
 impl_save (BonoboPersistStream       *ps,

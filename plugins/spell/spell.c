@@ -36,9 +36,9 @@
 #include <glib/gutils.h>
 #include <libgnome/gnome-i18n.h>
 
-#include <gedit-menus.h>
-#include <gedit-plugin.h>
-#include <gedit-debug.h>
+#include <gedit/gedit-menus.h>
+#include <gedit/gedit-plugin.h>
+#include <gedit/gedit-debug.h>
 
 #include <libgnomeui/gnome-stock-icons.h>
 

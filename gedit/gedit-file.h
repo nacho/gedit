@@ -31,9 +31,9 @@
 #ifndef __GEDIT_FILE_H__
 #define __GEDIT_FILE_H__
 
-#include "gedit-mdi-child.h"
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-item.h"
+#include <gedit/gedit-mdi-child.h>
+#include <gedit/recent-files/egg-recent-view.h>
+#include <gedit/recent-files/egg-recent-item.h>
 
 void 		gedit_file_new 		(void);
 void 		gedit_file_open 	(GeditMDIChild *active_child);

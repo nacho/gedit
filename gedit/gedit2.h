@@ -36,9 +36,9 @@
 #include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-window.h>
 
-#include "gedit-mdi.h"
-#include "gedit-document.h"
-#include "gedit-view.h" 
+#include <gedit/gedit-mdi.h>
+#include <gedit/gedit-document.h>
+#include <gedit/gedit-view.h>
 
 extern GeditMDI* gedit_mdi;
 extern gboolean gedit_close_x_button_pressed;

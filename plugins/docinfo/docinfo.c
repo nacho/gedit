@@ -38,10 +38,10 @@
 
 #include <string.h> /* For strlen (...) */
 
-#include <gedit-plugin.h>
-#include <gedit-debug.h>
-#include <gedit-menus.h>
-#include <gedit-utils.h>
+#include <gedit/gedit-plugin.h>
+#include <gedit/gedit-debug.h>
+#include <gedit/gedit-menus.h>
+#include <gedit/gedit-utils.h>
 
 #define MENU_ITEM_LABEL		N_("_Document Statistics")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_2/"

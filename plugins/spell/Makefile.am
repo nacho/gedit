@@ -7,7 +7,7 @@ BUILT_SOURCES = \
 
 	
 INCLUDES = \
-	-I$(top_srcdir)/gedit 				\
+	-I$(top_srcdir)					\
 	$(GEDIT_CFLAGS) 				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\

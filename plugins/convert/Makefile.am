@@ -7,7 +7,7 @@ plugin_LTLIBRARIES = libconvert.la
 libconvert_la_SOURCES = convert.c
 
 INCLUDES =						\
-	-I$(top_srcdir)/src				\
+	-I$(top_srcdir)					\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
 	-I$(includedir)					\

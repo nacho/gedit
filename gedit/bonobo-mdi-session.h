@@ -30,7 +30,7 @@
 
 #include <string.h>
 
-#include "bonobo-mdi.h"
+#include <gedit/bonobo-mdi.h>
 
 /* This function should parse the config string and return a newly
  * created BonoboMDIChild. */

@@ -35,8 +35,8 @@
 #ifndef __GEDIT_AUTOMATIC_SPELL_CHECKER_H__
 #define __GEDIT_AUTOMATIC_SPELL_CHECKER_H__
 
-#include <gedit-document.h>
-#include <gedit-view.h>
+#include <gedit/gedit-document.h>
+#include <gedit/gedit-view.h>
 
 #include "gedit-spell-checker.h"
 

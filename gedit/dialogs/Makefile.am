@@ -1,6 +1,7 @@
 gladedir = $(datadir)/gedit-2/glade/
 
 INCLUDES = \
+	-I$(top_srcdir)						\
 	-I$(top_srcdir)/gedit 					\
 	$(GEDIT_CFLAGS) 					\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\

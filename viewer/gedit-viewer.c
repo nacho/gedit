@@ -33,7 +33,8 @@
 
 #include "gedit-persist-stream.h"
 #include "gedit-viewer.h"
-#include "gedit-prefs-manager.h"
+
+#include <gedit/gedit-prefs-manager.h>
 
 static void
 copy_cb (BonoboUIComponent *component,

@@ -5,9 +5,7 @@ bin_PROGRAMS = gedit
 
 INCLUDES =							\
 	-I$(top_srcdir)						\
-	-I$(top_builddir)					\
-	-I$(top_srcdir)/dialogs					\
-	-I$(top_srcdir)/recent-files				\
+	-I$(srcdir)						\
 	$(GEDIT_CFLAGS)						\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
@@ -43,27 +41,29 @@ BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h	
 
-APP_H_FILES =				\
+NON_INST_H_FILS =			\
+	gedit-application-server.h	\
+	bonobo-mdi-session.h		\
+	gedit-commands.h		\
+	gedit-file-selector-util.h 	\
+	gedit-plugins-engine.h		\
+	gedit-session.h			
+
+INST_H_FILES =				\
 	gedit2.h			\
+	gedit-file.h			\
 	gedit-utils.h 			\
 	gedit-mdi.h			\
 	gedit-mdi-child.h		\
 	gedit-document.h 		\
 	gedit-view.h 			\
 	gedit-menus.h			\
-	gedit-file.h			\
-	gedit-commands.h		\
-	gedit-session.h			\
 	bonobo-mdi.h			\
 	gedit-print.h			\
 	bonobo-mdi-child.h		\
-	bonobo-mdi-session.h		\
-	gedit-file-selector-util.h 	\
-	gedit-plugins-engine.h		\
 	gedit-plugin.h			\
 	gedit-prefs-manager-app.h	\
 	gedit-recent.h			\
-	gedit-application-server.h	\
 	gedit-output-window.h
 
 LIB_H_FILES =				\
@@ -76,11 +76,12 @@ LIB_H_FILES =				\
 headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
 
 header_DATA = 				\
-	$(APP_H_FILES)			\
+	$(INST_H_FILES)			\
 	$(LIB_H_FILES)
 
 gedit_SOURCES = 			\
 	$(IDL_SOURCES)			\
+	$(BUILT_SOURCES)		\
 	gedit2.c			\
 	gedit-mdi.c			\
 	gedit-mdi-child.c		\
@@ -106,8 +107,8 @@ gedit_SOURCES = 			\
 	gedit-window-server.c		\
 	gedit-window-server.h		\
 	gedit-output-window.c		\
-	$(APP_H_FILES)			\
-	$(BUILT_SOURCES)
+	$(NON_INST_H_FILS)		\
+	$(INST_H_FILES)
 
 libgedit_la_SOURCES = 			\
 	gedit-debug.c			\

@@ -33,7 +33,7 @@
 
 
 #include <gtk/gtk.h>
-#include "gedit-document.h"
+#include <gedit/gedit-document.h>
 
 #define GEDIT_TYPE_VIEW			(gedit_view_get_type ())
 #define GEDIT_VIEW(obj)			(GTK_CHECK_CAST ((obj), GEDIT_TYPE_VIEW, GeditView))

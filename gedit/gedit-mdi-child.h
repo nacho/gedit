@@ -31,9 +31,9 @@
 #ifndef __GEDIT_MDI_CHILD_H__
 #define __GEDIT_MDI_CHILD_H__
 
-#include "bonobo-mdi.h"
+#include <gedit/bonobo-mdi.h>
 
-#include "gedit-document.h"
+#include <gedit/gedit-document.h>
 
 #define GEDIT_TYPE_MDI_CHILD		(gedit_mdi_child_get_type ())
 #define GEDIT_MDI_CHILD(o)		(GTK_CHECK_CAST ((o), GEDIT_TYPE_MDI_CHILD, GeditMDIChild))

@@ -32,7 +32,7 @@
 
 #include <glib.h>
 #include <gmodule.h>
-#include "gedit2.h"
+#include <gedit/gedit2.h>
 
 typedef enum
 {

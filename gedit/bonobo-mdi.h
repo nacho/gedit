@@ -36,7 +36,7 @@
 #include <bonobo/bonobo-ui-component.h>
 
 
-#include "bonobo-mdi-child.h"
+#include <gedit/bonobo-mdi-child.h>
 
 #define BONOBO_TYPE_MDI            (bonobo_mdi_get_type ())
 #define BONOBO_MDI(obj)            (GTK_CHECK_CAST ((obj), BONOBO_TYPE_MDI, BonoboMDI))

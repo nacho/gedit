@@ -2,8 +2,8 @@
 
 INCLUDES =							\
 	-I$(top_srcdir)						\
-	-I$(top_builddir)					\
-	-I$(top_srcdir)/gedit					\
+	-I$(srcdir)						\
+	-I$(builddir)						\
 	$(GEDIT_CFLAGS)						\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
@@ -19,13 +19,15 @@ INCLUDES =							\
 
 lib_LTLIBRARIES = libgedit-control.la
 
-libgedit_control_la_SOURCES = \
-	gedit-factory.c \
-	gedit-viewer.c \
+libgedit_control_la_SOURCES = 					\
+	gedit-viewer.h						\
+	gedit-factory.c 					\
+	gedit-viewer.c 						\
+	gedit-persist-stream.h					\
 	gedit-persist-stream.c
 
-libgedit_control_la_LIBADD = \
-	../gedit/libgedit.la \
+libgedit_control_la_LIBADD =					\
+	../gedit/libgedit.la 					\
 	$(GEDIT_LIBS)
 
 uidir = $(datadir)/gnome-2.0/ui
