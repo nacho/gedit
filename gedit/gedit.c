@@ -268,13 +268,11 @@ int main (int argc, char **argv)
 
 	if (file_list){
 
-
-/*		doc = gE_document_current();
-
-		if (doc->filename != NULL)
-			g_free (doc->filename);
-		g_free (doc);
-*/
+	  if (mdi->active_child == NULL)
+	    return;
+	
+	  gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+	
 		for (;file_list; file_list = file_list->next)
 		{
 			/*data->temp2 = file_list->data;*/
@@ -282,9 +280,9 @@ int main (int argc, char **argv)
 			gE_document_new_with_file (file_list->data);
 		}
 	}
-	else
+/*	else
 	  doc = gE_document_new();
-	
+*/	
 	
 	g_free (data);
 

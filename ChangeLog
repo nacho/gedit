@@ -1,3 +1,15 @@
+Sat Jun 12 13:04:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_document.c: (gE_window_new) Ok, weirdness... i've ptu a gE_document_new
+	  call in here and it works now! before it would complain then die..
+	  Ah well, now there is a default doc when you open a new window.
+	  (need to implement a if this is the last doc, and you close it, close
+	  the window..)
+	  
+	  Taken the Line button out of a hbox.. it's obvious what it is when you
+	  ptu the mouse over it.. and none of the other dock items would fit if
+	  it had the box either..
+
 Thu Jun 10 16:42:56 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_document.c: (gE_window_new) Using gtk_window_set_default_size 

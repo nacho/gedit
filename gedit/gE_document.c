@@ -135,18 +135,18 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 						0, 1, 0);
 
 	
-	box = gtk_hbox_new (FALSE, 1);
-	gtk_widget_show (box);
+	/*box = gtk_hbox_new (FALSE, 1);
+	gtk_widget_show (box);*/
 	
 	tmp = gtk_button_new_with_label(_("Line"));
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(count_lines_cb), NULL);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	gtk_box_pack_start (GTK_BOX (box), tmp, TRUE, TRUE, 5);
+	/*gtk_box_pack_start (GTK_BOX (box), tmp, TRUE, TRUE, 5);*/
 	/*gtk_box_pack_start(GTK_BOX(statusbar), tmp, TRUE, TRUE, 0);*/
 	gtk_widget_show(tmp);
 
-	gnome_app_add_docked (GNOME_APP (app), box, "Line", 
+	gnome_app_add_docked (GNOME_APP (app), tmp, "Line", 
 						GNOME_DOCK_ITEM_BEH_NORMAL, GNOME_DOCK_BOTTOM,
 						0, 2, 0);
 
@@ -156,6 +156,8 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 	/*gtk_widget_show(statusbar);*/
 
 	gE_get_settings ();
+
+	gE_document_new ();
 
 	gE_set_menu_toggle_states();
 
@@ -173,7 +175,6 @@ void gE_window_new(GnomeMDI *mdi, GtkWidget *app)
 		"drag_data_received",
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 	
-
 } /* gE_window_new */
 
 void gE_window_set_auto_indent (gint auto_indent)
