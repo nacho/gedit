@@ -545,17 +545,12 @@ gedit_document_get_uri (const GeditDocument* doc)
 		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
 	else
 	{
-		gchar *res;
 		gchar *uri = g_filename_to_utf8 (doc->priv->uri, -1, NULL, NULL, NULL);
 
 		if (uri == NULL)
 			return g_strdup (_("Invalid file name"));
 		
-		res = gnome_vfs_x_format_uri_for_display (uri);
-
-		g_free (uri);
-
-		return res;
+		return uri;
 	}
 }
 
