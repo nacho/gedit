@@ -121,7 +121,11 @@ void file_save_ok_sel (GtkWidget *w, GtkFileSelection *fs)
   char *filename;
   filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
   if (filename != NULL)
-    gE_file_save (gE_document_current(main_window), filename);
+  {  
+     gE_file_save (gE_document_current(main_window),
+     gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs)));
+    filename = NULL;
+    }
   if (GTK_WIDGET_VISIBLE(fs))
     gtk_widget_hide (GTK_WIDGET(fs));
 }
@@ -147,22 +151,26 @@ void prefs_callback (GtkWidget *widget, gpointer data)
 void tab_top_cback (GtkWidget *widget, gpointer data)
 {
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 2);
+	main_window->tab_pos = 2;
 }
 
 
 void tab_bot_cback (GtkWidget *widget, gpointer data)
 {
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 3);
+	main_window->tab_pos = 3;
 }
 
 void tab_lef_cback (GtkWidget *widget, gpointer data)
 {
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 4);
+	main_window->tab_pos = 4;
 }
 
 void tab_rgt_cback (GtkWidget *widget, gpointer data)
 {
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 1);
+	main_window->tab_pos = 1;
 }
 
 void tab_toggle_cback (GtkWidget *widget, gpointer data)
@@ -291,18 +299,19 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer data)
 
 void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 {
-	gchar *fname, *fname2;
- 	fname = gE_document_current(main_window)->filename;
- 	/*g_print("%s\n",fname);*/
+	gchar *fname, **fname2;
+ 	fname =   gE_document_current(main_window)->filename;
+ /*	g_print("%s\n",fname);*/
 	if (fname == NULL)
-	{
+	{	g_print("..\n");
 		#ifdef DEBUG
 		g_warning("The file hasn't been saved yet!\n");
 		#endif
 		file_save_as_cmd_callback(NULL, NULL);
 	}
 	else
-		gE_file_save (gE_document_current(main_window),fname /*(gtk_label_get((gE_document_current(main_window))->tab_label,fname2)*/);
+		gE_file_save (gE_document_current(main_window),
+							gE_document_current(main_window)->filename);
 }
 
 void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
@@ -315,12 +324,12 @@ void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 			"clicked", (GtkSignalFunc) file_save_ok_sel, main_window->save_fileselector);
 		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->save_fileselector)->cancel_button),
 			"clicked", (GtkSignalFunc) file_cancel_sel, main_window->save_fileselector);
-  	}
+ 	}
 	if (GTK_WIDGET_VISIBLE(main_window->save_fileselector))
     		return;
   	else {
   		/*gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->save_fileselector), "./");*/
-    		gtk_widget_show (main_window->save_fileselector);
+   		gtk_widget_show (main_window->save_fileselector);
 	}
 }
 
@@ -359,7 +368,10 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 			if (!quitting)
 				gE_document_new (main_window);
 			else
+			{
+				gE_save_settings();
 				gE_quit();
+			}
 		}
 	}
 	else

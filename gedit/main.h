@@ -8,7 +8,7 @@ extern "C" {
 #define STRING_LENGTH_MAX	256
 
 /*#ifdef WITHOUT_GNOME*/
-static gchar gEdit_ID[] = "gEdit 0.4";
+static gchar gEdit_ID[] = "gEdit 0.4.0";
 /*#else
 gchar gEdit_ID[] = "gEdit 0.13";
 #endif*/
@@ -20,6 +20,8 @@ typedef struct _gE_document gE_document;
 
 void prog_init(int fnum, char **file);
 void destroy_window (GtkWidget *widget, GtkWidget **window);
+
+/* File Ops */
 void file_quit_cmd_callback(GtkWidget *widget, gpointer data);
 void file_new_cmd_callback(GtkWidget *widget, gpointer data);
 void file_open_cmd_callback(GtkWidget *widget, gpointer data);
@@ -27,37 +29,55 @@ void file_save_cmd_callback(GtkWidget *widget, gpointer data);
 void file_save_as_cmd_callback(GtkWidget *widget, gpointer data);
 void file_close_cmd_callback(GtkWidget *widget, gE_window *quitting);
 void file_print_cmd_callback (GtkWidget *widget, gpointer data);
+
 void prefs_callback(GtkWidget *widget, gpointer data);
+
+/* Edit functions */
 void edit_cut_cmd_callback(GtkWidget *widget, gpointer data);
 void edit_copy_cmd_callback (GtkWidget *widget, gpointer data);
 void edit_paste_cmd_callback (GtkWidget *widget, gpointer data);
 void edit_selall_cmd_callback (GtkWidget *widget, gpointer data);
+
 void document_changed_callback (GtkWidget *widget, gpointer);
+
+/* Search and Replace */
 void search_search_cmd_callback (GtkWidget *w, gpointer);
 void search_replace_cmd_callback (GtkWidget *w, gpointer);
 void search_again_cmd_callback (GtkWidget *w, gpointer);
+
+/* Tab positioning */
 void tab_top_cback (GtkWidget *widget, gpointer data);
 void tab_bot_cback (GtkWidget *widget, gpointer data);
 void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
 void tab_toggle_cback (GtkWidget *widget, gpointer data);
+
+/* Auto indent */
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
 void auto_indent_toggle_callback (GtkWidget *w, gpointer data);
 void line_pos_callback (GtkWidget *w, GtkWidget *text);
 void gE_event_button_press (GtkWidget *w, GdkEventButton *event);
 
+/* Preferences */
+void gE_save_settings();
+void gE_get_settings();
 gE_prefs *gE_prefs_window();
 void gE_get_rc_file();
 void gE_rc_parse();
+
+void gE_window_toggle_statusbar (GtkWidget *w, gpointer data);
+
 void gE_show_version();
 void gE_about_box();
 void gE_quit ();
+
 void gE_window_new_with_file(gE_window *window, char *filename);
 gE_window *gE_window_new();
-void gE_window_toggle_statusbar (GtkWidget *w, gpointer data);
+
 gE_document *gE_document_new(gE_window *window);
 gE_document *gE_document_current(gE_window *window);
 void gE_document_toggle_wordwrap (GtkWidget *w, gpointer data);
+
 gint gE_file_open (gE_document *document, gchar *filename);
 gint gE_file_save (gE_document *document, gchar *filename);
 gint file_open_wrapper (char *name);
@@ -82,6 +102,8 @@ struct _gE_window {
 	gE_search *search;
 	gint auto_indent;
 	gint show_tabs;
+	gint show_status;
+	gint tab_pos;
 };
 
 struct _gE_document {

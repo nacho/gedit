@@ -84,7 +84,7 @@ GList *toplevels;
    
 /*	gE_get_rc_file();*/
 
-#ifdef HAVE_GTK_RC_REPARSE_ALL
+/*#ifdef HAVE_GTK_RC_REPARSE_ALL*/
 		home2 = getenv("HOME");
 	#ifdef DEBUG
 	g_print("Home Dir: %s\n", home2);
@@ -93,12 +93,12 @@ GList *toplevels;
 	strcpy(home_dir, home2);
 	strcat(rc, home_dir);
 	strcat(rc, rcfile);
-		/*#ifdef DEBUG*/
+		#ifdef DEBUG
 		g_print("rc: %s\n\n", rc);
-		/*#endif*/
+		#endif
 		
    	gtk_rc_parse (rc);
-   	gtk_rc_reparse_all();
+/*   	gtk_rc_reparse_all();
 
    toplevels = gdk_window_get_toplevels();
   while (toplevels)
@@ -114,7 +114,7 @@ GList *toplevels;
 
   g_list_free (toplevels);
 
-#endif
+#endif*/
  }
  
  void ok_prefs(GtkWidget *widget, gpointer *data)
@@ -331,3 +331,61 @@ GList *toplevels;
   return prefs;
 }
 
+#ifndef WITHOUT_GNOME
+/* Get defaults from config, taken from Balsa */
+gint
+get_int_set_default (const char *path,
+		     const gint value)
+{
+  GString *buffer;
+  gboolean unset;
+  gint result;
+
+  result = 0;
+  buffer = g_string_new (NULL);
+
+  g_string_sprintf (buffer, "%s=%d", path, value);
+  result = gnome_config_get_int_with_default (buffer->str, &unset);
+  if (unset)
+    gnome_config_set_int (path, value);
+
+  g_string_free (buffer, 1);
+  return result;
+}
+
+void gE_save_settings()
+{
+  gnome_config_push_prefix ("/gEdit/Global/");
+
+  gnome_config_set_int ("tab pos", (gint) main_window->tab_pos);
+  gnome_config_set_int ("auto indent", (gint) main_window->auto_indent);
+  gnome_config_set_int ("show statusbar", (gint) main_window->show_status);
+
+
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
+
+}
+
+void gE_get_settings()
+{
+  gnome_config_push_prefix ("/gEdit/Global/");
+  
+  main_window->tab_pos = get_int_set_default ("tab pos", (gint) main_window->tab_pos);
+  main_window->show_status = get_int_set_default ("show statusbar", (gint) main_window->show_status);
+
+
+  gnome_config_pop_prefix ();
+  gnome_config_sync ();
+  
+  if (main_window->tab_pos == 0) main_window->tab_pos = 2;
+  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), main_window->tab_pos);
+  
+  if (main_window->show_status != 1)
+  {
+    gtk_widget_hide (main_window->statusbox);
+    main_window->show_status = 0;
+  }
+  
+}
+#endif

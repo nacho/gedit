@@ -144,6 +144,8 @@ int main (int argc, char **argv)
 
 
 	main_window = gE_window_new ();
+	main_window->show_status = 1;
+	gE_get_settings();
 
 	g_print("...\n");
 	if (file_list){

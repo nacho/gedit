@@ -105,6 +105,8 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, NULL, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings },
 	GNOMEUIINFO_END
 };
 
@@ -211,7 +213,6 @@ gE_window *gE_window_new()
       window->statusbar = gtk_statusbar_new ();
       gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
       gtk_widget_show (window->statusbar);
-
       
       line_button = gtk_button_new_with_label ("Line");
       window->line_label = gtk_label_new ("1");
@@ -240,10 +241,17 @@ gE_window *gE_window_new()
 
 void gE_window_toggle_statusbar (GtkWidget *w, gpointer data)
 {
-	if (GTK_WIDGET_VISIBLE(main_window->statusbox))
+	/* if (GTK_WIDGET_VISIBLE(main_window->statusbox))*/
+	if (main_window->show_status == 1)
+	{
 		gtk_widget_hide (main_window->statusbox);
+		main_window->show_status = 0;
+	}
 	else
+	{
 		gtk_widget_show (main_window->statusbox);
+		main_window->show_status = 1;
+	}
 }
 
 void gE_window_new_with_file(gE_window *window, char *filename)
@@ -296,10 +304,11 @@ gE_document *gE_document_new(gE_window *window)
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
 	style = gtk_style_new ();
 	/*style->bg[GTK_STATE_NORMAL] = style->white;
-	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
-	gtk_widget_set_style (GTK_TEXT(document->text), style);*/
+        document->text->style->font = "-adobe-helvetica-medium-r-normal--12-*-*-*-*-*-*-*";*/
+	gtk_widget_set_style (GTK_TEXT(document->text), style);
         /*style = gtk_style_attach (style, document->window);*/
-	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
+	gtk_widget_set_rc_style(GTK_TEXT(document->text));
+	gtk_widget_ensure_style(GTK_TEXT(document->text));
 
 
 	document->changed = FALSE;
@@ -353,7 +362,7 @@ gE_document *gE_document_current(gE_window *window)
 	gE_document *current_document;
 	current_document = NULL;
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)) +1;
-	g_print("%d\n",cur);
+	/*g_print("%d\n",cur);*/
 	current_document = (g_list_nth(window->documents, cur))->data;
 	if (current_document == NULL)
 		g_print ("Current Document == NULL\n");

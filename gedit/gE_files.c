@@ -121,12 +121,14 @@ gint gE_file_save(gE_document *document, gchar *filename)
                       file_handle);
 
 	fclose(file_handle);
-	gtk_label_set(GTK_LABEL(document->tab_label), strip_filename(filename));
-	
+/*	gtk_label_set(GTK_LABEL(document->tab_label), strip_filename(filename));
+*/	
 	/* This shoud be right, it was left out!
 				- Alex */
 	document->filename = filename;
+	/*g_print("%s\n",filename);*/
 	document->changed = FALSE;
+	gtk_label_set(GTK_LABEL(document->tab_label), strip_filename(filename));
 	if (!document->changed_id)
 		document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", GTK_SIGNAL_FUNC(document_changed_callback), document);
 
