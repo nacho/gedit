@@ -6,8 +6,10 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#endif
 
 #include "main.h"
 #include "menus.h"
@@ -58,9 +60,9 @@ void popup_close_verify(gE_document *doc, gE_window *quitting)
 	GtkWidget *verify_window, *yes, *no, *cancel, *label;
 	verify_window = gtk_dialog_new();
 	
-	gtk_window_set_title (GTK_WINDOW(verify_window), _("Save File?"));
+	gtk_window_set_title (GTK_WINDOW(verify_window), ("Save File?"));
 	gtk_widget_set_usize (GTK_WIDGET (verify_window), 280, 90);
-	label = gtk_label_new (_("File has been modified, do you wish to save it?"));
+	label = gtk_label_new (("File has been modified, do you wish to save it?"));
 #ifdef WITHOUT_GNOME
 	yes = gtk_button_new_with_label ("Yes");
 	no = gtk_button_new_with_label ("No");
@@ -263,14 +265,14 @@ void gE_event_button_press (GtkWidget *w, GdkEventButton *event)
 
 void file_new_cmd_callback (GtkWidget *widget, gpointer data)
 {
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("New File..."));
+	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("New File..."));
   gE_document_new(main_window);
 }
 
 void file_open_cmd_callback (GtkWidget *widget, gpointer data)
 {
   if (main_window->open_fileselector == NULL) {
-	main_window->open_fileselector = gtk_file_selection_new(_("Open File..."));
+	main_window->open_fileselector = gtk_file_selection_new(("Open File..."));
 	gtk_signal_connect (GTK_OBJECT (main_window->open_fileselector), 
 		"destroy", (GtkSignalFunc) destroy, main_window->open_fileselector);
 	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->open_fileselector)->ok_button), 
@@ -306,7 +308,7 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 {
 	if (main_window->save_fileselector == NULL) {
-		main_window->save_fileselector = gtk_file_selection_new(_("Save As..."));
+		main_window->save_fileselector = gtk_file_selection_new(("Save As..."));
 		gtk_signal_connect (GTK_OBJECT (main_window->save_fileselector), 
 			"destroy", (GtkSignalFunc) destroy, main_window->save_fileselector);
 		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->save_fileselector)->ok_button), 
@@ -342,7 +344,7 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
-			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Closed..."));
+			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Closed..."));
 			if (quitting)
 				file_close_cmd_callback (widget, quitting);
 		}
@@ -386,7 +388,7 @@ FILE *temp;
 	strcat(print, gE_document_current(main_window)->filename);
 	system (print);   
 	
-   			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Printed..."));
+   			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Printed..."));
    /*system("rm -f temp001");*/
 
 }
@@ -504,27 +506,27 @@ void search_popup (gE_search *options, gint replace)
 
 	if (!replace) {
 		options->replace = 0;
-		gtk_window_set_title (GTK_WINDOW (options->window), _("Search"));
+		gtk_window_set_title (GTK_WINDOW (options->window), ("Search"));
 	}
 	else {
 		options->replace = 1;
-		gtk_window_set_title (GTK_WINDOW (options->window), _("Search and Replace"));
+		gtk_window_set_title (GTK_WINDOW (options->window), ("Search and Replace"));
 	}
 
 	search_hbox = gtk_hbox_new(FALSE, 1);
 	options->search_entry = gtk_entry_new();
-	search_label = gtk_label_new (_("Search:"));
-	options->start_at_cursor = gtk_radio_button_new_with_label (NULL, _("Start searching at cursor position"));
+	search_label = gtk_label_new (("Search:"));
+	options->start_at_cursor = gtk_radio_button_new_with_label (NULL, ("Start searching at cursor position"));
 	options->start_at_beginning = gtk_radio_button_new_with_label(
 	                                           gtk_radio_button_group(GTK_RADIO_BUTTON(options->start_at_cursor)),
-	                                           _("Start searching at beginning of the document"));
-	options->case_sensitive = gtk_check_button_new_with_label (_("Case sensitive"));
+	                                           ("Start searching at beginning of the document"));
+	options->case_sensitive = gtk_check_button_new_with_label (("Case sensitive"));
 	
 	options->replace_box = gtk_vbox_new(FALSE, 1);
 	replace_hbox = gtk_hbox_new(FALSE, 1);
-	replace_label = gtk_label_new (_("Replace:"));
+	replace_label = gtk_label_new (("Replace:"));
 	options->replace_entry = gtk_entry_new();
-	options->prompt_before_replacing = gtk_check_button_new_with_label (_("Prompt before replacing"));
+	options->prompt_before_replacing = gtk_check_button_new_with_label (("Prompt before replacing"));
 
 #ifdef WITHOUT_GNOME
 	ok = gtk_button_new_with_label ("OK");
@@ -582,7 +584,7 @@ void search_search_cmd_callback (GtkWidget *w, gpointer data)
 	if (!main_window->search->window)
 		search_popup (main_window->search, 0);
 	else {
-		gtk_window_set_title (GTK_WINDOW (main_window->search->window), _("Search"));
+		gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search"));
 		gtk_widget_hide (main_window->search->replace_box);
 		gtk_widget_show (main_window->search->window);
 		main_window->search->replace = 0;
@@ -595,7 +597,7 @@ void search_replace_cmd_callback (GtkWidget *w, gpointer data)
 	if (!main_window->search->window)
 		search_popup (main_window->search, 1);
 	else {
-		gtk_window_set_title (GTK_WINDOW (main_window->search->window), _("Search and Replace"));
+		gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search and Replace"));
 		gtk_widget_show (main_window->search->replace_box);
 		gtk_widget_show (main_window->search->window);
 		main_window->search->replace = 1;
@@ -638,9 +640,9 @@ void popup_replace_window()
 {
 	GtkWidget *window, *yes, *no, *cancel, *label;
 	window = gtk_dialog_new();
-	gtk_window_set_title (GTK_WINDOW(window), _("Replace?"));
+	gtk_window_set_title (GTK_WINDOW(window), ("Replace?"));
 	gtk_widget_set_usize (GTK_WIDGET (window), 280, 90);
-	label = gtk_label_new (_("Are you sure you want to replace this?"));
+	label = gtk_label_new (("Are you sure you want to replace this?"));
 #ifdef WITHOUT_GNOME
 	yes = gtk_button_new_with_label ("Yes");
 	no = gtk_button_new_with_label ("No");

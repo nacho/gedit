@@ -17,8 +17,10 @@
  */
 
 #include <stdio.h>
+#ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#endif
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
@@ -228,9 +230,8 @@ gE_window *gE_window_new()
       gtk_widget_show (box2);
       window->statusbox = box2;
 
-  /* gtk_widget_show(window->menubar); 
-  		Hmm, this seems to be the problem with Gtk 1.1, it 
-		seems to fix that segfault on startup --Alex */
+  gtk_widget_show(window->menubar); 
+
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
 
@@ -271,7 +272,7 @@ gE_document *gE_document_new(gE_window *window)
 		/* gtk_notebook_popup_enable (GTK_NOTEBOOK(window->notebook)); */
 	}
 
-	document->tab_label = gtk_label_new (_("Untitled"));
+	document->tab_label = gtk_label_new (("Untitled"));
 	document->filename = NULL;
 	document->word_wrap = 1;
 	gtk_widget_show (document->tab_label);
@@ -294,11 +295,11 @@ gE_document *gE_document_new(gE_window *window)
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
 	style = gtk_style_new ();
-/*	style->bg[GTK_STATE_NORMAL] = style->white;*/
-/*	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";*/
-	gtk_widget_set_style (GTK_WIDGET(document->text), style);
+	/*style->bg[GTK_STATE_NORMAL] = style->white;
+	document->text->style->font = "-adobe-courier-medium-r-normal--12-*-*-*-*-*-*-*";
+	gtk_widget_set_style (GTK_TEXT(document->text), style);*/
         /*style = gtk_style_attach (style, document->window);*/
-	gtk_widget_set_rc_style(GTK_WIDGET(document->text));
+	/*gtk_widget_set_rc_style(GTK_TEXT(document->text));*/
 
 
 	document->changed = FALSE;

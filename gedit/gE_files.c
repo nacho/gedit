@@ -1,5 +1,7 @@
+#ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -62,7 +64,7 @@ gint gE_file_open(gE_document *document, gchar *filename)
 			                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-		gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Opened..."));
+		gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Opened..."));
 		
 		return 1;
 	}
@@ -85,7 +87,7 @@ gint gE_file_open(gE_document *document, gchar *filename)
 		                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Opened..."));
+	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Opened..."));
 	return 0;
 }
 
@@ -128,7 +130,7 @@ gint gE_file_save(gE_document *document, gchar *filename)
 	if (!document->changed_id)
 		document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", GTK_SIGNAL_FUNC(document_changed_callback), document);
 
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Saved..."));
+	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Saved..."));
 	return 0;
 }
 

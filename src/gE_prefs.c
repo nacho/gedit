@@ -15,8 +15,10 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+#ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#endif
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -203,7 +205,7 @@ GList *toplevels;
 			  &prefs->window);
  
  	/*prefs_window = gtk_dialog_new ();*/
-	gtk_window_set_title (GTK_WINDOW (prefs->window), _("Font"));
+	gtk_window_set_title (GTK_WINDOW (prefs->window), ("Font"));
 	/*gtk_widget_set_usize (GTK_WIDGET (prefs->window), 370, 170);*/
 	gtk_container_border_width (GTK_CONTAINER (prefs->window), 0);
 	
@@ -215,7 +217,7 @@ GList *toplevels;
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
 	
-	prefs->label = gtk_label_new(_("Font:"));
+	prefs->label = gtk_label_new(("Font:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -232,7 +234,7 @@ GList *toplevels;
 	gtk_widget_show (prefs->bbox);
 
 
-	prefs->label = gtk_label_new(_("Size:"));
+	prefs->label = gtk_label_new(("Size:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -246,7 +248,7 @@ GList *toplevels;
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
 
-	prefs->label = gtk_label_new(_("Weight:"));
+	prefs->label = gtk_label_new(("Weight:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	
@@ -262,7 +264,7 @@ GList *toplevels;
 	gtk_widget_show (prefs->bbox);
 
 	
-	prefs->label = gtk_label_new(_("Slant:"));
+	prefs->label = gtk_label_new(("Slant:"));
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->label);
 	

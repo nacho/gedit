@@ -1,6 +1,8 @@
 /*   gEdit About Box */
+#ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#endif 
 
 #include <gtk/gtk.h>
 #include "gE_icon.xpm"
