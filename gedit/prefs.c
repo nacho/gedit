@@ -172,7 +172,9 @@ gedit_prefs_load_settings (void)
 	}
 #endif	
 
+#if 0   /* Removed to enable the use of fontsets. Paolo */	
 	settings->use_fontset = FALSE;
+#endif
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
 		settings->font = g_strdup (DEFAULT_FONT);

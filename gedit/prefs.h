@@ -47,7 +47,8 @@ struct _Preferences
 	gint  use_relief_toolbar;
 	gint  undo_levels;
 
-	gboolean use_fontset;
+/*	gboolean use_fontset;
+ */
 	gchar *font;
 
 	gint  splitscreen;

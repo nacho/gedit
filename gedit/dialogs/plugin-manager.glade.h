@@ -5,10 +5,10 @@
  */
 
 gchar *s = N_("Plugins manager...");
-gchar *s = N_("Select the plugins to install:");
-gchar *s = N_("_Select all");
-gchar *s = N_("_Remove all");
-gchar *s = N_("_Description");
+gchar *s = N_("Select the plugins to activate:");
+gchar *s = N_("_Activate all");
+gchar *s = N_("_Deactivate all");
+gchar *s = N_("De_scription");
 gchar *s = N_("File name:");
 gchar *s = N_("Author(s):");
 gchar *s = N_("De_tails");

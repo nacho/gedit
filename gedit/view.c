@@ -23,6 +23,8 @@
 #include <config.h>
 #include <gnome.h>
 
+#include <string.h> /* for strchr */
+
 #include "auto.h"
 #include "undo.h"
 #include "print.h"
@@ -390,65 +392,6 @@ gedit_view_get_document (GeditView *view)
 
         return view->doc;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 static void
 gedit_view_update_line_indicator (void)
@@ -858,19 +801,6 @@ gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 GtkWidget *
 gedit_view_new (GeditDocument *doc)
 {
@@ -915,8 +845,8 @@ gedit_view_set_font (GeditView *view, gchar *fontname)
 	gedit_debug (DEBUG_VIEW, "");
 	
 	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
-  	
-  	if (settings->use_fontset)
+
+	if (strchr (fontname, ',') >= 0)
 		font = gdk_fontset_load (fontname);
   	else
 		font = gdk_font_load (fontname);

@@ -483,9 +483,13 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 						GNOME_MESSAGE_BOX_QUESTION,
 						GNOME_STOCK_BUTTON_YES,
 						GNOME_STOCK_BUTTON_NO,
-						GNOME_STOCK_BUTTON_CANCEL,
+						GNOME_STOCK_BUTTON_CANCEL, 
 						NULL);
-		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+
+		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);	
+		gnome_dialog_set_parent (GNOME_DIALOG (msgbox),
+					 GTK_WINDOW (mdi->active_window));
+
 		ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
 
 		g_free (fname);
