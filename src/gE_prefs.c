@@ -33,6 +33,7 @@
  #include "gE_prefs.h"
  
 gE_prefs *prefs_window;
+	gE_prefs *prefs;
 
  
  gchar *prefs_filename = NULL;
@@ -121,6 +122,7 @@ GList *toplevels;
  {
     FILE *file;
     char stamp[50];
+    char cmd[256], *cmd2;
     /* GtkStyle *style; */
 
  	
@@ -159,6 +161,10 @@ GList *toplevels;
     gtk_widget_set_style (main_window->text, style);
     		Argh! It doesn't work, dunno if it is possible to do tho...
 					- Alex */
+	
+
+	cmd2 = gtk_entry_get_text(GTK_ENTRY (prefs->pcmd));
+	gE_save_settings(cmd2);
 
     gtk_widget_destroy(prefs_window->window);
     prefs_window->window = NULL;
@@ -173,11 +179,13 @@ GList *toplevels;
  gE_prefs *gE_prefs_window()
  {
 
-	gE_prefs *prefs;
+
 
 	GList *fonts = NULL;
 	GList *weight = NULL;
 	GList *slant = NULL;
+	
+	GtkWidget *frame;
 
 	
 	fonts = g_list_append(fonts, "courier");
@@ -205,12 +213,16 @@ GList *toplevels;
 			  &prefs->window);
  
  	/*prefs_window = gtk_dialog_new ();*/
-	gtk_window_set_title (GTK_WINDOW (prefs->window), ("Font"));
+	gtk_window_set_title (GTK_WINDOW (prefs->window), ("Prefs"));
 	/*gtk_widget_set_usize (GTK_WIDGET (prefs->window), 370, 170);*/
 	gtk_container_border_width (GTK_CONTAINER (prefs->window), 0);
 	
+/*	frame = gtk_frame_new (("Font"));
+	gtk_container_border_width(GTK_CONTAINER (frame), 10);*/
+	
 	prefs->abox = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (prefs->window), prefs->abox);
+	/*gtk_container_add (GTK_CONTAINER(frame), prefs->abox);*/
 	gtk_widget_show (prefs->abox);
 	prefs->bbox = gtk_hbox_new (FALSE, 0);
 	gtk_container_border_width (GTK_CONTAINER (prefs->bbox), 10);
@@ -274,19 +286,36 @@ GList *toplevels;
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->tslant, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->tslant);
 
-
-
 	prefs->bbox = gtk_hbox_new (FALSE, 10);
 	gtk_container_border_width (GTK_CONTAINER (prefs->bbox), 10);
 	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->bbox);
-/*		
-      prefs->wrap = gtk_check_button_new_with_label("Word Wrap");
-      gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->wrap, FALSE, TRUE, 0);
-      	gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(prefs->wrap), TRUE);
-      gtk_widget_show (prefs->wrap);
+
+	prefs->separator = gtk_hseparator_new ();
+	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->separator, FALSE, TRUE, 0);
+	gtk_widget_show (prefs->separator);
+	
+	prefs->bbox = gtk_hbox_new (FALSE, 10);
+	gtk_container_border_width (GTK_CONTAINER (prefs->bbox), 10);
+	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
+	gtk_widget_show (prefs->bbox);
+			
+
+	prefs->bbox = gtk_hbox_new (FALSE, 0);
+	gtk_container_border_width (GTK_CONTAINER (prefs->bbox), 10);
+	gtk_box_pack_start (GTK_BOX (prefs->abox), prefs->bbox, TRUE, TRUE, 0);
+	gtk_widget_show (prefs->bbox);
+	
+		prefs->label = gtk_label_new(("Print Command:"));
+	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->label, TRUE, TRUE, 0);
+	gtk_widget_show (prefs->label);
+	
+	prefs->pcmd = gtk_entry_new();
+	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), main_window->print_cmd);
+	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->pcmd, TRUE, TRUE, 0);
+	gtk_widget_show (prefs->pcmd);
       
-      prefs->synhi = gtk_check_button_new_with_label("Syntax Highlighting");
+/*      prefs->synhi = gtk_check_button_new_with_label("Syntax Highlighting");
       gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->synhi, FALSE, TRUE, 0);
       gtk_toggle_button_set_state(GTK_TOGGLE_BUTTON(prefs->synhi), FALSE);
       gtk_widget_show (prefs->synhi);
@@ -332,34 +361,22 @@ GList *toplevels;
 }
 
 #ifndef WITHOUT_GNOME
-/* Get defaults from config, taken from Balsa */
-gint
-get_int_set_default (const char *path,
-		     const gint value)
+
+void gE_save_settings(gchar *cmd)
 {
-  GString *buffer;
-  gboolean unset;
-  gint result;
+  /*char cmd[256];*/
 
-  result = 0;
-  buffer = g_string_new (NULL);
-
-  g_string_sprintf (buffer, "%s=%d", path, value);
-  result = gnome_config_get_int_with_default (buffer->str, &unset);
-  if (unset)
-    gnome_config_set_int (path, value);
-
-  g_string_free (buffer, 1);
-  return result;
-}
-
-void gE_save_settings()
-{
   gnome_config_push_prefix ("/gEdit/Global/");
 
   gnome_config_set_int ("tab pos", (gint) main_window->tab_pos);
   gnome_config_set_int ("auto indent", (gint) main_window->auto_indent);
   gnome_config_set_int ("show statusbar", (gint) main_window->show_status);
+
+  if (main_window->print_cmd == "")
+    gnome_config_set_string ("print command", "lpr -rs ");
+  else
+    /*gnome_config_set_string ("print command", main_window->print_cmd);*/
+    gnome_config_set_string ("print command", cmd);
 
 
   gnome_config_pop_prefix ();
@@ -371,13 +388,16 @@ void gE_get_settings()
 {
   gnome_config_push_prefix ("/gEdit/Global/");
   
-  main_window->tab_pos = get_int_set_default ("tab pos", (gint) main_window->tab_pos);
-  main_window->show_status = get_int_set_default ("show statusbar", (gint) main_window->show_status);
+  main_window->tab_pos = gnome_config_get_int ("tab pos");
+  main_window->show_status = gnome_config_get_int ("show statusbar");
+  
+ main_window->print_cmd = gnome_config_get_string("print command");
+
 
 
   gnome_config_pop_prefix ();
   gnome_config_sync ();
-  
+ 
   if (main_window->tab_pos == 0) main_window->tab_pos = 2;
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), main_window->tab_pos);
   

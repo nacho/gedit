@@ -370,7 +370,7 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 				gE_document_new (main_window);
 			else
 			{
-				gE_save_settings();
+				gE_save_settings(main_window->print_cmd);
 				gE_quit();
 			}
 		}
@@ -395,8 +395,8 @@ FILE *temp;
    /*}*/
 
 	strcpy(print, "");
-	strcpy(print, "lpr -cs ");
- /* gE_file_save(gE_document_current(main_window), "temp001");*/
+	strcpy(print, main_window->print_cmd);
+
                       
 	strcat(print, gE_document_current(main_window)->filename);
 	system (print);   

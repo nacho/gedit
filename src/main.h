@@ -59,7 +59,7 @@ void line_pos_callback (GtkWidget *w, GtkWidget *text);
 void gE_event_button_press (GtkWidget *w, GdkEventButton *event);
 
 /* Preferences */
-void gE_save_settings();
+void gE_save_settings(gchar *cmd);
 void gE_get_settings();
 gE_prefs *gE_prefs_window();
 void gE_get_rc_file();
@@ -104,6 +104,7 @@ struct _gE_window {
 	gint show_tabs;
 	gint show_status;
 	gint tab_pos;
+	gchar *print_cmd;
 };
 
 struct _gE_document {
@@ -128,6 +129,7 @@ struct _gE_prefs {
         GtkWidget *tslant;
         GtkWidget *tweight;
         GtkWidget *tsize;
+        GtkWidget *pcmd;
 }; 
 
 struct _gE_search {
