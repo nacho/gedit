@@ -1,5 +1,20 @@
 2002-02-06  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-view.c (gedit_view_set_tab_size): 
+	now it works
+	(gedit_view_calculate_real_tab_width): new static 
+	function
+	(gedit_view_new): set tab size
+
+	* gedit_mdi.c (gedit_mdi_update_ui_according_to_preferences):
+	set tab size for each view
+
+	* dialogs/gedit-preferences-dialog: show the tab page
+	(gedit_preferences_dialog_update_settings): get tab size from
+	the tab page
+	
+2002-02-06  Paolo Maggi  <maggi@athena.polito.it>
+
 	* Makefile.am: define G*_DEPRECATED 
 	in INCLUDES
 

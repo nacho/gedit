@@ -207,14 +207,14 @@ static CategoriesTreeItem user_interface [] =
 static CategoriesTreeItem editor_behavior [] =
 {
 	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
-	
- 	{_("Save"), NULL, SAVE_SETTINGS },
-/*
+
 	{_("Tabs"), NULL, TABS_SETTINGS},
-*/	
-	{_("Undo"), NULL, UNDO_SETTINGS},
 	{_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
 	{_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
+	
+ 	{_("Save"), NULL, SAVE_SETTINGS },
+	{_("Undo"), NULL, UNDO_SETTINGS},
+
 
 	{ NULL }
 };
@@ -1227,7 +1227,11 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 
 	gedit_settings->show_line_numbers = 
 		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
-					      dlg->priv->display_line_numbers_checkbutton));	
+					      dlg->priv->display_line_numbers_checkbutton));
+
+	/* Tabs page */	
+	gedit_settings->tab_size =
+		gtk_spin_button_get_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton));
 
 	return TRUE;
 	

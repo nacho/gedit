@@ -66,6 +66,7 @@ static void gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditVie
 static void gedit_view_doc_readonly_changed_handler (GeditDocument *document, 
 						     gboolean readonly, 
 						     GeditView *view);
+static gint gedit_view_calculate_real_tab_width (GeditView *view, gint tab_size);
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -390,9 +391,7 @@ gedit_view_init (GeditView  *view)
 
 	gedit_view_set_wrap_mode (view, gedit_settings->wrap_mode);
 
-	/* FIXME: uncomment when gedit_view_set_tab_size will work
-	gedit_view_set_tab_size (view, 8);
-	*/
+		
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
 	
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
@@ -419,9 +418,8 @@ gedit_view_init (GeditView  *view)
 	}
 
 	/* The same popup menu is attached to all views */
-	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);
-#endif 
-	
+	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);	
+#endif 	
 }
 
 static void 
@@ -494,6 +492,9 @@ gedit_view_new (GeditDocument *doc)
 			
 	gtk_widget_show_all (GTK_WIDGET (view));
 
+	/* Set tab size: this function must be called after show */
+	gedit_view_set_tab_size (view, gedit_settings->tab_size);
+
 	g_signal_connect (GTK_TEXT_BUFFER (doc),
 			  "changed",
 			  G_CALLBACK (gedit_view_update_cursor_position_statusbar),
@@ -516,6 +517,7 @@ gedit_view_new (GeditDocument *doc)
 
 	gtk_text_view_set_editable (view->priv->text_view, !gedit_document_is_readonly (doc));	
 
+	
 	gedit_debug (DEBUG_VIEW, "END");
 
 	return view;
@@ -708,24 +710,78 @@ gedit_view_set_wrap_mode (GeditView* view, GtkWrapMode wrap_mode)
 	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view->priv->text_view), wrap_mode);
 }
 
-void
-gedit_view_set_tab_size (GeditView* view, gint tab_size)
-{
-	/* FIXME: it is broken */
+/* This function is taken from gtksourceview
+ * 
+ * Copyright (C) 2001
+ * Mikael Hermansson<tyan@linux.se>
+ * Chris Phelps <chicane@reninet.com>
+ */
 
-	PangoTabArray *tab_array;
+static gint
+gedit_view_calculate_real_tab_width (GeditView *view, gint tab_size)
+{
+	PangoLayout *layout;
+	gchar *tab_string;
+	gint counter = 0;
+	gint tab_width = 0;
 
 	gedit_debug (DEBUG_VIEW, "");
 
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), -1);
+
+	if (tab_size == 0)
+		return -1;
+
+	tab_string = g_malloc (tab_size + 1);
+
+	while (counter < tab_size) {
+		tab_string [counter] = ' ';
+		counter++;
+	}
+
+	tab_string [tab_size] = 0;
+
+	layout = gtk_widget_create_pango_layout (
+			GTK_WIDGET (view->priv->text_view), 
+			tab_string);
+	g_free (tab_string);
+
+	if (layout != NULL) {
+		pango_layout_get_pixel_size (layout, &tab_width, NULL);
+		g_object_unref (G_OBJECT (layout));
+	} else
+		tab_width = -1;
+
+	gedit_debug (DEBUG_VIEW, "Tab width: %d", tab_width);
+
+	return tab_width;
+}
+
+void
+gedit_view_set_tab_size (GeditView* view, gint tab_size)
+{
+	PangoTabArray *tab_array;
+	gint real_tab_width;
+
+	gedit_debug (DEBUG_VIEW, "Tab size: %d", tab_size);
+
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	tab_array = pango_tab_array_new_with_positions (1,
-                                             TRUE,
-                                             PANGO_TAB_LEFT, tab_size*10);
+	real_tab_width = gedit_view_calculate_real_tab_width (
+					 GEDIT_VIEW (view),
+					 tab_size);
+
+	if (real_tab_width < 0)
+	{
+		g_warning ("Impossible to set tab width.");
+		return;
+	}
+	
+	tab_array = pango_tab_array_new (1, TRUE);
+	pango_tab_array_set_tab (tab_array, 0, PANGO_TAB_LEFT, real_tab_width);
 
 	gtk_text_view_set_tabs (GTK_TEXT_VIEW (view->priv->text_view), tab_array);
 	pango_tab_array_free (tab_array);
-
 }
 
 void
