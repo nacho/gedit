@@ -187,3 +187,56 @@ gedit_print_verify_fonts (void)
 
 	return TRUE;
 }
+
+
+
+void
+gedit_print_progress_start (PrintJobInfo *pji)
+{
+	GnomeDialog *dialog;
+	GtkWidget *label;
+	GtkWidget *progress_bar;
+
+	progress_bar = gtk_progress_bar_new ();
+	
+	dialog = GNOME_DIALOG (gnome_dialog_new (_("Printing .."),
+						 GNOME_STOCK_BUTTON_CANCEL,
+						 NULL));
+	pji->progress_dialog = dialog;
+	pji->progress_bar    = progress_bar;
+	
+	label = gtk_label_new (_("Printing ..."));
+	gtk_box_pack_start (GTK_BOX (dialog->vbox),
+			    label,
+			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (dialog->vbox),
+			    progress_bar,
+			    FALSE, FALSE, 0);
+	
+	gtk_widget_show_all (GTK_WIDGET (dialog));
+
+}
+
+void
+gedit_print_progress_tick (PrintJobInfo *pji, gint page)
+{
+	gfloat percentage;
+
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
+	percentage = (gfloat ) (page - pji->page_first) /
+		(gfloat) (pji->page_last - pji->page_first);
+
+	if (percentage > 0.0 && percentage < 1.0 )
+		gtk_progress_set_percentage (GTK_PROGRESS (pji->progress_bar),
+					     percentage );
+
+}
+
+void
+gedit_print_progress_end (PrintJobInfo *pji)
+{
+	gnome_dialog_close (pji->progress_dialog);
+}
+

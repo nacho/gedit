@@ -61,6 +61,8 @@ gedit_print_document (PrintJobInfo *pji)
 	pji->temp = g_malloc( pji->chars_per_line + 2);
 
 	current_line = 0;
+
+	gedit_print_progress_start (pji);
 	
 	print_start_job (pji);
 	
@@ -106,11 +108,15 @@ gedit_print_document (PrintJobInfo *pji)
 
 		if (pji->print_this_page)
 			print_end_page (pji);
+
+		gedit_print_progress_tick (pji, current_page);
 	}
 	print_end_job (pji->pc);
 	g_free (pji->temp);
 
 	gnome_print_context_close (pji->pc);
+
+	gedit_print_progress_end (pji);
 }
 
 static void
@@ -465,6 +471,7 @@ print_set_orientation (PrintJobInfo *pji)
 
 }
 
+
 static void
 print_header (PrintJobInfo *pji, unsigned int page)
 {
@@ -503,11 +510,14 @@ print_end_page (PrintJobInfo *pji)
 
 	gnome_print_showpage (pji->pc);
 	print_set_orientation (pji);
+
 }
 
 static void
 print_end_job (GnomePrintContext *pc)
 {
 	gedit_debug (DEBUG_PRINT, "");
+
+
 }
 

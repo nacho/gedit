@@ -95,6 +95,10 @@ typedef struct _PrintJobInfo {
 	/* Text Wrapping */
 	gboolean wrapping;
 	gint tab_size;
+
+	/* Progress */
+	GtkWidget   *progress_bar;
+	GnomeDialog *progress_dialog;
 } PrintJobInfo;
 
 
