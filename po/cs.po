@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-16 14:42+0200\n"
-"PO-Revision-Date: 2004-04-16 16:40+0200\n"
+"POT-Creation-Date: 2004-06-14 14:34+0200\n"
+"PO-Revision-Date: 2004-06-14 19:18+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -642,7 +642,7 @@ msgid "Replace _All"
 msgstr "Nahradit vš_e"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "Nah_radit"
 
@@ -1431,45 +1431,49 @@ msgstr "Vietnamské"
 msgid "Thai"
 msgstr "Thajské"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:700
+msgid "Question"
+msgstr "Otázka"
+
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Soubor pojmenovaný \"%s\" již existuje.\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Chcete jej nahradit souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Soubor \"%s\" je jen pro čtení.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Chcete se pokusit nahradit jej souborem, který ukládáte?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:361
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:369
 msgid "All Text Files"
 msgstr "Všechny textové soubory"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:387
 msgid "Ch_aracter Coding:"
 msgstr "_Kódování znaků:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:504
 msgid "Select a file to open"
 msgstr "Vyberte soubor, který otevřít"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:530
 msgid "Select files to open"
 msgstr "Vyberte soubory, které otevřít"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:557
 msgid "Select a filename to save"
 msgstr "Vyberte název souboru pro uložení"
 
@@ -1496,12 +1500,12 @@ msgstr "Dokument \"%s\" byl uložen."
 msgid "Save as..."
 msgstr "Uložit jako..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:601
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Vrátit neuložené změny v dokumentu \"%s\"?"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:610
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1515,12 +1519,12 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld sekund budou navždy ztraceny."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:619
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Změny provedené v dokumentu za poslední minutu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:625
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1538,7 +1542,7 @@ msgstr[2] ""
 "Změny provedené v dokumentu za poslední minutu a %ld sekund budou navždy "
 "ztraceny."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:635
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1552,11 +1556,11 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:650
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:656
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1574,7 +1578,7 @@ msgstr[2] ""
 "Změny provedené v dokumentu za poslední hodinu a %d minut budou navždy "
 "ztraceny."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:671
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1587,58 +1591,58 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:694 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:743
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Chyba při vracení dokumentu \"%s\" do původního stavu."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:750
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nebyl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" byl vrácen do původního stavu."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:782
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vracím dokument \"%s\"..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:917
 msgid "Could not read data from stdin."
 msgstr "Nemohu číst data ze standardního vstupu."
 
-#: gedit/gedit-file.c:962
+#: gedit/gedit-file.c:967
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
 
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1090
 msgid "Reverting file:"
 msgstr "Vracím soubor:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1094
 msgid "Loading file:"
 msgstr "Načítám soubor:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1263 gedit/gedit-file.c:1422
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba při načítání souboru \"%s\""
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načten soubor \"%s\""
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1361
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1646,12 +1650,12 @@ msgstr[0] "Načten %i soubor."
 msgstr[1] "Načteny %i soubory."
 msgstr[2] "Načteno %i souborů."
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1395
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítám soubor \"%s\"..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1542
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2708,7 +2712,9 @@ msgstr "_Aktualizovat"
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
-msgstr "Analyzuje aktuální dokument a určí v něm počet slov, řádků, znaků a znaků bez mezer."
+msgstr ""
+"Analyzuje aktuální dokument a určí v něm počet slov, řádků, znaků a znaků "
+"bez mezer."
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -3197,7 +3203,9 @@ msgstr "Zobrazit okno seznamu tagů"
 msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
-msgstr "Poskytuje možnost snadno do dokumentu vložit často používané tagy/řetězce bez nutnosti je psát."
+msgstr ""
+"Poskytuje možnost snadno do dokumentu vložit často používané tagy/řetězce "
+"bez nutnosti je psát."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
