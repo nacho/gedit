@@ -7,7 +7,7 @@ export srcdir
 
 PKG_NAME="gedit"
 
-(test -f $srcdir/src/gedit.h) || {
+(test -f $srcdir/src/gedit.c) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1
