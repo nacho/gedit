@@ -53,10 +53,10 @@
 #include <gedit-mdi.h>
 #include <gedit-output-window.h>
 
-#define MENU_ITEM_LABEL		N_("Insert Shell _Output")
-#define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
+#define MENU_ITEM_LABEL		N_("_Execute Shell Command...")
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"
 #define MENU_ITEM_NAME		"PluginShellOutput"	
-#define MENU_ITEM_TIP		N_("Insert the shell output in the current document")
+#define MENU_ITEM_TIP		N_("Execute a shell command")
 
 #define SHELL_OUTPUT_LOGO "/shell-output-logo.png"
 
@@ -957,8 +957,8 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->name = _("Shell output");
-	pd->desc = _("Execute an external program and insert its output in a new document.");
+	pd->name = _("Shell command");
+	pd->desc = _("Execute an external program and eventually grabs its output in the output window.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
