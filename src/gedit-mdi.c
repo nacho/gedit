@@ -217,40 +217,6 @@ gedit_mdi_new (void)
 	return mdi;
 }
 
-/* Computes a unique ID string for use as the window role */
-/* Taken from EOG */
-
-static char *
-gen_role (void)
-{
-        char *ret;
-	static char *hostname;
-	time_t t;
-	static int serial;
-
-	t = time (NULL);
-
-	if (!hostname) {
-		static char buffer [512];
-
-		if ((gethostname (buffer, sizeof (buffer) - 1) == 0) &&
-		    (buffer [0] != 0))
-			hostname = buffer;
-		else
-			hostname = "localhost";
-	}
-
-	ret = g_strdup_printf ("gedit-window-%d-%d-%d-%ld-%d@%s",
-			       getpid (),
-			       getgid (),
-			       getppid (),
-			       (long) t,
-			       serial++,
-			       hostname);
-
-	return ret;
-}
-
 static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 {
@@ -259,7 +225,6 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	BonoboUIComponent *ui_component;
 	GnomeRecentView *view;
 	GnomeRecentModel *model;
-	gchar *role;
 
 	static GtkTargetEntry drag_types[] =
 	{
@@ -368,11 +333,6 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
-
-	/* Set window role */
-	role = gen_role ();
-	gtk_window_set_role (GTK_WINDOW (win), role);
-	g_free (role);
 }
 
 static void

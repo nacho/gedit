@@ -36,6 +36,8 @@
 #include "gedit-debug.h"
 
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 #define BONOBO_MDI_KEY 		"BonoboMDI"
 #define BONOBO_MDI_CHILD_KEY 	"BonoboMDIChild"
@@ -53,8 +55,8 @@ static void            child_list_activated_cb   (BonoboUIComponent *uic, gpoint
 void                   child_list_menu_remove_item(BonoboMDI *, BonoboMDIChild *);
 void                   child_list_menu_add_item   (BonoboMDI *, BonoboMDIChild *);
 
-static void            app_create               (BonoboMDI *, gchar *);
-static void            app_clone                (BonoboMDI *, BonoboWindow *);
+static void            app_create               (BonoboMDI *, gchar *, const char *);
+static void            app_clone                (BonoboMDI *, BonoboWindow *, const char *);
 static void            app_destroy              (BonoboWindow *, BonoboMDI *);
 static void            app_set_view             (BonoboMDI *, BonoboWindow *, GtkWidget *);
 
@@ -747,7 +749,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 		
 			gtk_container_remove (GTK_CONTAINER (old_book), view);
 			
-			app_clone (mdi, win);
+			app_clone (mdi, win, NULL);
 				
 			new_book = book_create (mdi);
 	
@@ -892,7 +894,7 @@ toplevel_focus (BonoboWindow *win, GdkEventFocus *event, BonoboMDI *mdi)
 }
 
 static void 
-app_clone (BonoboMDI *mdi, BonoboWindow *win)
+app_clone (BonoboMDI *mdi, BonoboWindow *win, const char *window_role)
 {
 	/*
 	BonoboDockLayout *layout;
@@ -932,7 +934,7 @@ app_clone (BonoboMDI *mdi, BonoboWindow *win)
 	}
 	*/
 	
-	app_create (mdi, /*layout_string*/ NULL);
+	app_create (mdi, /*layout_string*/ NULL, window_role);
 
 	/*
 	if (layout_string)
@@ -1069,8 +1071,43 @@ app_destroy (BonoboWindow *win, BonoboMDI *mdi)
 	gedit_debug (DEBUG_MDI, "END");
 }
 
+/* Generates a unique string for a window role.
+ *
+ * Taken from EOG.
+ */
+static char *
+gen_role (void)
+{
+        char *ret;
+	static char *hostname;
+	time_t t;
+	static int serial;
+
+	t = time (NULL);
+
+	if (!hostname) {
+		static char buffer [512];
+
+		if ((gethostname (buffer, sizeof (buffer) - 1) == 0) &&
+		    (buffer [0] != 0))
+			hostname = buffer;
+		else
+			hostname = "localhost";
+	}
+
+	ret = g_strdup_printf ("bonobo-mdi-window-%d-%d-%d-%ld-%d@%s",
+			       getpid (),
+			       getgid (),
+			       getppid (),
+			       (long) t,
+			       serial++,
+			       hostname);
+
+	return ret;
+}
+
 static void 
-app_create (BonoboMDI *mdi, gchar *layout_string)
+app_create (BonoboMDI *mdi, gchar *layout_string, const char *window_role)
 {
 	GtkWidget *window;
 	BonoboWindow *bw;
@@ -1082,6 +1119,16 @@ app_create (BonoboMDI *mdi, gchar *layout_string)
 
 	window = bonobo_window_new (mdi->priv->mdi_name, mdi->priv->title);
 	g_return_if_fail (window != NULL);
+
+	if (window_role)
+		gtk_window_set_role (GTK_WINDOW (window), window_role);
+	else {
+		char *role;
+
+		role = gen_role ();
+		gtk_window_set_role (GTK_WINDOW (window), role);
+		g_free (role);
+	}
 	
 	bw = BONOBO_WINDOW (window);
 
@@ -1266,7 +1313,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 
 	if (mdi->priv->active_window == NULL) 
 	{
-		app_create (mdi, NULL);
+		app_create (mdi, NULL, NULL);
 		gtk_widget_show (GTK_WIDGET (mdi->priv->active_window));
 	}
 
@@ -1299,6 +1346,9 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
  * bonobo_mdi_add_toplevel_view:
  * @mdi: A pointer to a BonoboMDI object.
  * @child: A pointer to a BonoboMDIChild object to be added to the MDI.
+ * @window_role: X window role to use for the window, for session-management
+ * purposes.  If this is %NULL, a unique role string will be automatically
+ * generated.
  * 
  * Description:
  * Creates a new view of the child and adds it to the MDI; it behaves the
@@ -1310,7 +1360,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
  * %TRUE if adding the view succeeded and %FALSE otherwise.
  **/
 gboolean
-bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child)
+bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child, const char *window_role)
 {
 	GtkWidget *view;
 	gint ret = TRUE;
@@ -1337,7 +1387,7 @@ bonobo_mdi_add_toplevel_view (BonoboMDI *mdi, BonoboMDIChild *child)
 		return FALSE;
 	}
 
-	bonobo_mdi_open_toplevel (mdi);
+	bonobo_mdi_open_toplevel (mdi, window_role);
 	
 	if (!GTK_WIDGET_VISIBLE (view))
 		gtk_widget_show (view);
@@ -1642,6 +1692,9 @@ bonobo_mdi_remove_all (BonoboMDI *mdi, gint force)
 /**
  * bonobo_mdi_open_toplevel:
  * @mdi: A pointer to a BonoboMDI object.
+ * @window_role: X window role to use for the window, for session-management
+ * purposes.  If this is %NULL, a unique role string will be automatically
+ * generated.
  * 
  * Description:
  * Opens a new toplevel window. This is usually used only for opening
@@ -1650,14 +1703,14 @@ bonobo_mdi_remove_all (BonoboMDI *mdi, gint force)
  * because of command line args).
  **/
 void 
-bonobo_mdi_open_toplevel (BonoboMDI *mdi)
+bonobo_mdi_open_toplevel (BonoboMDI *mdi, const char *window_role)
 {
 	gedit_debug (DEBUG_MDI, "");
 
 	g_return_if_fail (mdi != NULL);
 	g_return_if_fail (BONOBO_IS_MDI (mdi));
 
-	app_clone (mdi, mdi->priv->active_window);
+	app_clone (mdi, mdi->priv->active_window, window_role);
 
 	book_create (mdi);
 		

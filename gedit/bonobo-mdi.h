@@ -117,7 +117,8 @@ void          bonobo_mdi_set_child_list_path 	(BonoboMDI *mdi,
 gboolean      bonobo_mdi_add_view            	(BonoboMDI *mdi, 
 						 BonoboMDIChild *child);
 gboolean      bonobo_mdi_add_toplevel_view   	(BonoboMDI *mdi, 
-						 BonoboMDIChild *child);
+						 BonoboMDIChild *child,
+						 const char *window_role);
 gboolean      bonobo_mdi_remove_view         	(BonoboMDI *mdi, 
 						 GtkWidget *view, 
 						 gboolean force);
@@ -135,7 +136,8 @@ gint          bonobo_mdi_remove_child        	(BonoboMDI *mdi,
 gint          bonobo_mdi_remove_all          	(BonoboMDI *mdi, 
 						 gboolean force);
 
-void          bonobo_mdi_open_toplevel       	(BonoboMDI *mdi);
+void          bonobo_mdi_open_toplevel       	(BonoboMDI *mdi,
+						 const char *window_role);
 
 BonoboMDIChild *bonobo_mdi_get_active_child   	(BonoboMDI *mdi);
 BonoboMDIChild *bonobo_mdi_find_child         	(BonoboMDI *mdi, 
@@ -171,6 +173,9 @@ GList          		*bonobo_mdi_get_children		(BonoboMDI *mdi);
 GList          		*bonobo_mdi_get_windows			(BonoboMDI *mdi);
 
 BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow* win);
+
+/* Utility function to generate unique window roles */
+char *bonobo_mdi_generate_window_role (void);
 
 #endif /* _BONOBO_MDI_H_ */
 

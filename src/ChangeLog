@@ -1,3 +1,24 @@
+2002-06-17  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes #84986.
+
+	* bonobo-mdi.c (gen_role): Moved over from gedit-mdi.c.
+	(app_create): Added a "window_role" argument so that we can set up
+	the window's role here.
+	(app_clone): Likewise.
+	(bonobo_mdi_open_toplevel): Likewise.
+	(bonobo_mdi_add_toplevel_view): Likewise.
+
+	* bonobo-mdi-session.c (restore_window_child): Pass the role
+	argument to bonobo_mdi_add_toplevel_view().
+	(restore_window): Pass the role argument to
+	bonobo_mdi_open_toplevel().
+
+	* gedit2.c (main): Likewise.
+
+	* gedit-mdi.c (gedit_mdi_app_created_handler): Do not set the role
+	here.
+
 2002-06-14  Paolo Maggi <maggi@athena.polito.it>
 
 	* src/gedit-preferences.glade2: fixed a typo

@@ -208,7 +208,7 @@ main (int argc, char **argv)
 		gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
 
 		/* Open the first top level window */
-		bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
+		bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi), NULL);
 	}
 	
 	gtk_main();

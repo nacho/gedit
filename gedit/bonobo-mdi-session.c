@@ -140,11 +140,7 @@ restore_window_child (BonoboMDI *mdi, GHashTable *child_hash,
 		if (*init)
 			bonobo_mdi_add_view (mdi, mdi_child);
 		else {
-			bonobo_mdi_add_toplevel_view (mdi, mdi_child);
-
-			if (role != NULL)
-				gtk_window_set_role (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)), 
-						     role);
+			bonobo_mdi_add_toplevel_view (mdi, mdi_child, role);
 			
 			*init = TRUE;
 
@@ -173,12 +169,8 @@ restore_window (BonoboMDI *mdi, const gchar *section, GPtrArray *child_list,
 	role = gnome_config_get_string (key);
 
 	if(child_list->len == 0) {
-		bonobo_mdi_open_toplevel (mdi);
+		bonobo_mdi_open_toplevel (mdi, role);
 	
-		if (role != NULL)
-				gtk_window_set_role (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)), 
-						     role);
-		
 		g_hash_table_insert (window_hash, (gpointer) window,
 				     bonobo_mdi_get_active_window (mdi));
  	}
