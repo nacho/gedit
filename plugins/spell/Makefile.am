@@ -45,11 +45,11 @@ gedit-spell-checker-dialog-marshal.c: gedit-spell-checker-dialog-marshal.list $(
 	echo "#include \"gedit-spell-checker-dialog-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-plugin_in_files = spell.gedit-plugin.in
+plugin_in_files = spell.gedit-plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gedit-plugin.in=.gedit-plugin)
+plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = $(glade_DATA) $(plugin_DATA) gedit-spell-checker-dialog-marshal.list 
 

@@ -20,10 +20,10 @@ libshell_output_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = shell_output.glade2
 
-plugin_in_files = shell_output.gedit-plugin.in
+plugin_in_files = shell_output.gedit-plugin.desktop.in
 
-%.gedit-plugin: %.gedit-plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+%.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
-plugin_DATA = $(plugin_in_files:.gedit-plugin.in=.gedit-plugin)
+plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 EXTRA_DIST = $(glade_DATA) $(plugin_DATA)
