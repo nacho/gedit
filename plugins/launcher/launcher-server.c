@@ -1,7 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 3 -*- */
 #include <config.h>
-#include <gnome.h>
-
 #include <gE_plugin.h>
 
 #include <launcher-impl.h>
@@ -23,8 +21,7 @@ init_plugin(gE_Plugin_Object * plugin, gint context)
    CORBA_Object launcher;
    gchar *objref;
 
-   fprintf(stderr, "Greetings from the plugin with context %d.\n",
-	   context);
+   g_message("Plugin context %d.", context);
 
    launcher = impl_gEdit_launcher__create
       (root_poa, (CORBA_long) context, global_ev);

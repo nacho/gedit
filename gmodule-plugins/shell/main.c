@@ -19,8 +19,6 @@
  */
 
 #include <config.h>
-#include <gnome.h>
-
 #include <gE_plugin.h>
 
 #include <pwd.h>
