@@ -350,7 +350,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 		gchar *title;
 
 		print_document (doc, pji, NULL);
-		title = g_strdup_printf (_("gedit (%s): Print Preview"), pji->filename);
+		title = g_strdup_printf (_("gedit - [%s]: Print Preview"), pji->filename);
 		preview = gnome_print_master_preview_new_with_orientation
 			(pji->master,
 			 title,
@@ -700,7 +700,7 @@ print_set_pji (PrintJobInfo * pji, GeditDocument *doc)
 	pji->buffer = gedit_document_get_buffer (doc);
 
 	if (doc->filename == NULL)
-		pji->filename = g_strdup (_("Untitled")); 
+		pji->filename = gedit_document_get_tab_name (doc, FALSE); 
 	else
 		pji->filename = g_strdup (doc->filename);
 

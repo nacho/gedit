@@ -432,7 +432,6 @@ gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
 			while (sub_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
 			{
 				if (sub_ui_info [sub_count].moreinfo == file_save_cb    ||
-				    sub_ui_info [sub_count].moreinfo == file_save_all_cb   ||
 				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||
 				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||
 				    sub_ui_info [sub_count].moreinfo == gedit_replace_cb)
@@ -455,17 +454,19 @@ gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
 				}
 
 				sub_count++;
+
 			}
+
 		}
 		count++;
 	}
+
 	
 	/* Set popup menu sensitivity*/
 	count = 0;
 	while (popup_menu[count].type != GNOME_APP_UI_ENDOFINFO)
 	{
 		if (popup_menu [count].moreinfo == file_save_cb    ||
-		    popup_menu [count].moreinfo == file_save_all_cb   ||
 		    popup_menu [count].moreinfo == edit_cut_cb     ||
 		    popup_menu [count].moreinfo == edit_paste_cb   ||
 		    popup_menu [count].moreinfo == gedit_replace_cb)
@@ -473,11 +474,19 @@ gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
 			widget =  popup_menu [count].widget;
 	
 			if (GTK_IS_WIDGET (widget) && (GTK_OBJECT(widget)->ref_count > 0))
+			{
 				gtk_widget_set_sensitive (widget, !unsensitive);			
+		/*		g_print("%d %s\n", count, !unsensitive ? "sensitive" : "not sensitive");*/
+			}
 		}
 		
 		count++;
+
+		g_assert(count <= 10); /* Note: change this line if popup menu changes */
 	}
+
+	g_assert(count != 0);
+
 	
 	/* Set plugins menu sensitivity*/
 	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_MENUBAR_NAME);	

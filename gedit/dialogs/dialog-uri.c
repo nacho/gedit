@@ -31,6 +31,7 @@
 
 #include "view.h"
 #include "utils.h"
+#include "window.h"
 #include "dialogs/dialogs.h"
 
 
@@ -121,8 +122,6 @@ open_button_pressed (GtkWidget *widget, gpointer data)
 {
 	gchar * file_name = NULL;
 
-	gtk_widget_hide(open_uri_dialog);
-
 	file_name = gtk_editable_get_chars (GTK_EDITABLE (uri), 0, -1);
 
 	if((file_name != NULL) && (strlen(file_name) != 0))
@@ -131,8 +130,23 @@ open_button_pressed (GtkWidget *widget, gpointer data)
 		{
 			gnome_entry_append_history ( GNOME_ENTRY (uri_list), TRUE, file_name);			
 			gedit_flash_va (_("Loaded file %s"), file_name);
+			
+ 			gtk_widget_hide(open_uri_dialog);
+			
+			if (gedit_document_current())
+			{
+				g_assert(gedit_window_active_app());
+				gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
+					gedit_document_current()->readonly);
+			}				
 		}
 	}
+	else
+	{
+		gtk_widget_hide(open_uri_dialog);
+	}
+
+	g_free (file_name);
 }
 
 static void

@@ -424,6 +424,18 @@ gedit_file_save_as (GeditDocument *doc)
 
 	}
 
+	if (doc->filename == NULL)
+	{
+		gchar* name = gedit_document_get_tab_name (doc, FALSE);
+		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), name);
+		g_free (name);
+	}
+	else
+	{
+		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), 
+						 doc->filename);
+	}
+		
 	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
 
 	if (!GTK_WIDGET_VISIBLE (save_file_selector))
@@ -554,6 +566,24 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 }
 
 
+void 
+file_save_all (void)
+{
+	int i;
+	GeditDocument *doc;
+
+	gedit_debug (DEBUG_FILE, "");
+	
+        for (i = 0; i < g_list_length (mdi->children); i++)
+	{
+		doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
+		
+		if ((!doc->readonly && doc->changed))
+		{
+			gedit_file_save (doc, NULL);
+		}
+	}
+}
 
 /**
  * gedit_file_stdin:
@@ -882,17 +912,9 @@ file_save_cb (GtkWidget *widget, gpointer cbdata)
 void 
 file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	int i;
-	GeditDocument *doc;
-
-	gedit_debug (DEBUG_FILE, "");
-	
-        for (i = 0; i < g_list_length (mdi->children); i++)
-	{
-		doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
-		gedit_file_save (doc, NULL);
-	}
+	file_save_all();
 }
+
 
 void 
 uri_open_cb (GtkWidget *widget, gpointer cbdata)

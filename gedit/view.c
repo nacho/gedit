@@ -359,7 +359,7 @@ gedit_view_get_position (GeditView *view)
 void
 gedit_view_set_readonly (GeditView *view, gint readonly)
 {
-	gchar * doc_name;
+	gchar * doc_name = NULL;
 
 	gedit_debug (DEBUG_VIEW, "");
 
@@ -368,7 +368,7 @@ gedit_view_set_readonly (GeditView *view, gint readonly)
 	view->readonly = readonly;
 	gtk_text_set_editable (view->text, !view->readonly);
 	
-	doc_name = gedit_document_get_tab_name (view->doc);
+	doc_name = gedit_document_get_tab_name (view->doc, TRUE);
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
 	gedit_document_set_title (view->doc);
 	g_free (doc_name);
@@ -711,7 +711,7 @@ gedit_view_init (GeditView *view)
 	GtkStyle *style;
 	GdkColor *bg;
 	GdkColor *fg;
-
+	
 	gedit_debug (DEBUG_VIEW, "");
 
 	/* Vbox */
@@ -826,6 +826,7 @@ void
 gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	GeditView *view;
+	gchar* doc_name;
 	
 	gedit_debug (DEBUG_VIEW, "");
 
@@ -842,6 +843,10 @@ gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 
 	/* Set the title ( so that we add the "modified" string to it )*/
 	gedit_document_set_title (view->doc);
+	
+	doc_name = gedit_document_get_tab_name (view->doc, TRUE);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
+	g_free(doc_name);
 }
 
 

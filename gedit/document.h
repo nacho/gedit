@@ -71,7 +71,7 @@ void gedit_document_replace_text (GeditDocument *doc, const guchar *text, gint  
 void gedit_document_set_readonly (GeditDocument *doc, gint readonly);
 void gedit_document_text_changed_signal_connect (GeditDocument *doc);
 
-gchar*	gedit_document_get_tab_name (GeditDocument *doc);
+gchar*	gedit_document_get_tab_name (GeditDocument *doc, gboolean star);
 guchar* gedit_document_get_chars (GeditDocument *doc, guint start_pos, guint end_pos);
 guchar*	gedit_document_get_buffer (GeditDocument *doc);
 guint	gedit_document_get_buffer_length (GeditDocument *doc);

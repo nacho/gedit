@@ -1,3 +1,32 @@
+2001-02-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (file_save_all_cb): only call file_save_all
+	(file_save_all): new function
+	(gedit_file_save_as): show file name in the save as dialog
+	
+	* file.h: added definition of file_save_all
+	
+	* window.c (gedit_window_set_widgets_sensitivity_ro): now it 
+	does not set "Save All" menu item sensitivity
+	
+	* document.c (gedit_document_set_readonly): set doc->changed to FALSE
+	(gedit_document_get_tab_name): add the 'star' parameter 
+	(remove_child_cb): little code reorganization
+	(gedit_document_set_title): now the title contains also the path of the file
+
+	* document.h: added the 'star' parameter to gedit_document_get_tab_name
+
+	* print.c(print_set_pji): new title for the preview window
+
+	* search.c (gedit_file_info_cb): now it uses the new gedit_document_get_tab_name
+
+	* view.c (gedit_view_set_readonly): now it uses the new 
+	gedit_document_get_tab_name
+	(gedit_view_text_changed_cb): now it changes the tab name when a document is
+	modified
+	
+	* dialogs/dialog-uri.c (open_button_pressed): set ro sensitivity when needed
+
 2001-01-30  Paolo Maggi  <maggi@athena.polito.it>
 	
 	* document.c: #included  <libgnomevfs/gnome-vfs.h>

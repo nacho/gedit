@@ -406,7 +406,7 @@ gedit_file_info_cb (GtkWidget *widget, gpointer data)
 
 	gedit_search_end();
 
-	doc_name = gedit_document_get_tab_name (doc);
+	doc_name = gedit_document_get_tab_name (doc, FALSE);
 	msg = g_strdup_printf (_("Filename: %s\n\n"
 				 "Total Characters: %i\n"
 				 "Total Words: %i\n"

@@ -43,6 +43,7 @@ gint gedit_file_open  (GeditDocument *doc, const gchar *fname);
 gint gedit_file_stdin (GeditDocument *doc);
 gint gedit_file_save  (GeditDocument *doc, const gchar *fname);
 gint gedit_file_create_popup (const gchar *title);
+void file_save_all (void);
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);

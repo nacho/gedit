@@ -194,10 +194,13 @@ gedit_document_set_readonly (GeditDocument *doc, gint readonly)
 {
 	GeditView * nth_view;
 	gint n;
-
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
+	g_assert(doc != NULL);
+	
 	doc->readonly = readonly;
+	doc->changed = FALSE;
 		
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
@@ -238,18 +241,29 @@ gedit_document_text_changed_signal_connect (GeditDocument *doc)
  * Return Value: a potiner to a newly allocated string 
  **/
 gchar*
-gedit_document_get_tab_name (GeditDocument *doc)
+gedit_document_get_tab_name (GeditDocument *doc, gboolean star)
 {
 	GeditDocument *nth_doc;
 	int max_number = 0;
 	int i;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
-
+	
+	g_assert(doc != NULL);
+	
 	if (doc->filename != NULL)
 	{
-		gchar * tab_name;
-		tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(doc->filename));
+		gchar * tab_name = NULL;
+		
+		if(!doc->changed || !star)
+		{
+			tab_name = g_strdup_printf ("%s%s", doc->readonly?_("RO - "):"", g_basename(doc->filename));
+		}
+		else
+		{			
+			tab_name = g_strdup_printf ("%s%s*", doc->readonly?_("RO - "):"", g_basename(doc->filename));
+		}
+		
 		return tab_name;
 	}
 	else
@@ -267,7 +281,14 @@ gedit_document_get_tab_name (GeditDocument *doc)
 			}
 			doc->untitled_number = max_number + 1;
 		}
-		return _(g_strdup_printf ("%s %d", _("Untitled"), doc->untitled_number));
+		if(!doc->changed || !star)
+		{
+			return _(g_strdup_printf ("%s %d", _("Untitled"), doc->untitled_number));
+		}
+		else
+		{
+			return _(g_strdup_printf ("%s %d*", _("Untitled"), doc->untitled_number));
+		}
 	}
 }
 
@@ -425,10 +446,6 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 static gint
 remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 {
-	GtkWidget *msgbox;
-	gchar *fname, *msg;
-	gint ret;
-
 	gedit_debug (DEBUG_DOCUMENT, "start");
 	
 	if (!gedit_view_active())
@@ -437,12 +454,17 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 		return TRUE;
 	}
 
-	fname = GNOME_MDI_CHILD(doc)->name;
-
 	if (doc->changed)
 	{
+		GtkWidget *msgbox;
+		gchar *fname = NULL, *msg = NULL;
+		gint ret;
+
+		fname = gedit_document_get_tab_name (doc, FALSE);
+
 		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"),
 				       fname);
+		
 		msgbox = gnome_message_box_new (msg,
 						GNOME_MESSAGE_BOX_QUESTION,
 						GNOME_STOCK_BUTTON_YES,
@@ -451,7 +473,10 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 						NULL);
 		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
 		ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+
+		g_free (fname);
 		g_free (msg);
+		
 		switch (ret)
 		{
 		case 0:
@@ -709,9 +734,13 @@ gedit_document_set_title (GeditDocument *doc)
 	if (doc->filename == NULL) {
 		docname = g_strdup_printf (_("Untitled %i"), doc->untitled_number);
 	} else {
+#if 0
 		docname = g_strdup (g_basename (doc->filename));
+#endif
+		docname = g_strdup (doc->filename);		
 	}
 
+#if 0
 	if (doc->changed) {
 		title = g_strdup_printf ("gedit: %s %s", docname, _("(modified)"));
 	} else if (doc->readonly) {
@@ -719,6 +748,15 @@ gedit_document_set_title (GeditDocument *doc)
 	} else {
 		title = g_strdup_printf ("gedit: %s", docname);
 	}
+#endif
+	if (doc->changed) {
+		title = g_strdup_printf ("gedit - [%s] %s", docname, _("(modified)"));
+	} else if (doc->readonly) {
+		title = g_strdup_printf ("gedit - [%s] %s", docname, _("(readonly)"));
+	} else {
+		title = g_strdup_printf ("gedit - [%s]", docname);
+	}
+
 
 	gtk_window_set_title (gedit_window_active(), title);
 	
