@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2000-06-22 00:42+0200\n"
+"POT-Creation-Date: 2000-06-25 03:29+0200\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,11 +13,17 @@ msgstr ""
 "Content-Type: text/plain; charset=iso8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:156
+#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:190
+msgid "browse"
+msgstr "brskaj"
+
+#: plugins/browse/browse.c:248
 msgid "Browse"
 msgstr "Brskaj"
 
-#: plugins/browse/browse.c:157
+#: plugins/browse/browse.c:249
 msgid "Web browse plugin"
 msgstr "Vtiè za brskanje po spletu"
 
@@ -54,55 +60,29 @@ msgstr "Decimalno v Oktalno"
 msgid "Hex to Decimal"
 msgstr "©estnajsti¹ko v Deseti¹ko"
 
-#: plugins/diff/diff.c:59
-msgid "Choose a file"
-msgstr "Izberi datoteko"
+#: plugins/diff/diff.c:194 plugins/email/email.c:218 plugins/email/email.c:224
+#: src/document.c:261 src/print.c:581
+msgid "Untitled"
+msgstr "Neimenovan"
 
-#: plugins/diff/diff.c:150
-msgid "Choose files to diff"
-msgstr "Izberi datoteke za diff"
-
-#: plugins/diff/diff.c:155
-msgid "Choose files to diff:"
-msgstr "Izberi datoteke za diff:"
-
-#: plugins/diff/diff.c:164 plugins/diff/diff.c:172
-msgid "Browse..."
-msgstr "Brskaj..."
-
-#: plugins/diff/diff.c:177
-msgid "Calculate Diff"
-msgstr "Izraèunaj Diff"
-
-#: plugins/diff/diff.c:199
+#: plugins/diff/diff.c:353
 msgid "Diff"
 msgstr "Program diff"
 
-#: plugins/diff/diff.c:200
-msgid "Diff plugin."
-msgstr "Diff vtiè."
+#: plugins/diff/diff.c:354
+msgid "diff plugin"
+msgstr "diff vtiè."
 
-#: plugins/email/email.c:54
+#: plugins/email/email.c:60
 #, c-format
 msgid "Executing command : %s"
 msgstr "Izbajam ukaz : %s"
 
-#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:117 plugins/email/email.c:169
-msgid "email"
-msgstr "epo¹ta"
-
-#: plugins/email/email.c:224 plugins/email/email.c:230 src/document.c:261
-#: src/print.c:581
-msgid "Untitled"
-msgstr "Neimenovan"
-
-#: plugins/email/email.c:268
+#: plugins/email/email.c:262
 msgid "Email"
 msgstr "Epo¹ta"
 
-#: plugins/email/email.c:269
+#: plugins/email/email.c:263
 msgid "Email the current document"
 msgstr "Epo¹lji trenutni dokument"
 
@@ -128,16 +108,24 @@ msgid "Subject:"
 msgstr "Predmet:"
 
 #: plugins/email/email.glade.h:11
-msgid "Sendmail found at : "
-msgstr "Sendmail najden v : "
+msgid "Change..."
+msgstr "Spremeni..."
 
 #: plugins/email/email.glade.h:12
-msgid "Change"
-msgstr "Spremeni"
+msgid "label12"
+msgstr "label12"
 
 #: plugins/email/email.glade.h:13
 msgid "File to use as body of message : "
 msgstr "Datoteka, ki naj se uporabi kot telo sporoèila : "
+
+#: plugins/email/email.glade.h:14
+msgid "Sendmail found at :"
+msgstr "Sendmail najden v :"
+
+#: plugins/email/email.glade.h:15
+msgid "label13"
+msgstr "label13"
 
 #: plugins/reverse/reverse.c:56
 msgid "Reverse"
@@ -147,19 +135,19 @@ msgstr "Nazaj"
 msgid "Reverse text"
 msgstr "Obrnjeno besedilo"
 
-#: plugins/sample/sample.c:43
+#: plugins/sample/sample.c:55
 msgid "Hello World"
 msgstr "Pozdravljen Svet"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:56
 msgid "Sample 'hello world' plugin."
 msgstr "Vzoreèni 'pozdravljen svet' vtiè."
 
-#: plugins/shell_output/shell_output.c:172
+#: plugins/shell_output/shell_output.c:175
 msgid "Shell Output"
 msgstr "Izhod Lupine"
 
-#: plugins/shell_output/shell_output.c:173
+#: plugins/shell_output/shell_output.c:176
 msgid "Insert the shell output in the document"
 msgstr "Vstavi izhod lupine v dokument"
 
@@ -202,7 +190,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit je majhen enostaven urejevalnik besedil za GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:574
+#: src/dialogs/dialog-prefs.c:576
 msgid "gedit: Preferences"
 msgstr "gedit: Nastavitve"
 
@@ -436,24 +424,24 @@ msgstr "Le branje - "
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/document.c:437
+#: src/document.c:434
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' je bil spremenjen.  Ga ¾elite shraniti?"
 
-#: src/document.c:648
+#: src/document.c:643
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/document.c:650
+#: src/document.c:645
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
-#: src/document.c:695 src/document.c:735
+#: src/document.c:690 src/document.c:730
 msgid "This file does not end with a valid extension\n"
 msgstr "Ime te datoteke nima velajvne pripone\n"
 
-#: src/document.c:743
+#: src/document.c:738
 #, c-format
 msgid "The file %s was not found."
 msgstr "Datoteka %s ni bila najdena."
@@ -505,7 +493,7 @@ msgstr ""
 "\n"
 "Preprièajte se, da imate dovoljenje za odprtje datoteke."
 
-#: src/file.c:215
+#: src/file.c:214
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -522,7 +510,7 @@ msgstr ""
 "Preprièajte se, èe pot, ki ste jo navedli obstaja in ali imate ustrezno "
 "dovoljenje za pisanje."
 
-#: src/file.c:229
+#: src/file.c:228
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -540,7 +528,7 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 # c-format
-#: src/file.c:244
+#: src/file.c:243
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -557,7 +545,7 @@ msgstr ""
 "Zaradi neznanega razloga (2). Prosim sporoèite ta problem na naslov: "
 "submit@bugs.gnome.org"
 
-#: src/file.c:331
+#: src/file.c:330
 msgid "Save As..."
 msgstr "Shrani Kot..."
 
@@ -587,11 +575,11 @@ msgstr "Dokument ¹e ni bil shranjen."
 msgid "Error saving file!"
 msgstr "Napaka pri shranjevanju datoteke!"
 
-#: src/file.c:738
+#: src/file.c:730
 msgid "You can't revert an Untitled document\n"
 msgstr "Ne morete razveljaviti neimenovanega dokumenta\n"
 
-#: src/file.c:751
+#: src/file.c:743
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -600,7 +588,7 @@ msgstr ""
 "Ste preprièani, da ¾elite razveljaviti vse spremembe?\n"
 "(%s)"
 
-#: src/file.c:780
+#: src/file.c:772
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Datoteka ``%s'' ne obstaja. Ali jo ¾elite ustvariti?"
@@ -677,7 +665,7 @@ msgstr "_Odstrani Pogled"
 msgid "Remove view of the document"
 msgstr "Odstrani pogled na dokument"
 
-#: src/menus.c:196 src/plugin.c:125 src/plugin.c:223
+#: src/menus.c:196 src/plugin.c:126 src/plugin.c:224
 msgid "_Plugins"
 msgstr "_Vtièi"
 
@@ -777,32 +765,33 @@ msgstr "Izhod"
 msgid "Exit the program"
 msgstr "Izhod iz programa"
 
-#: src/plugin.c:69
+#: src/plugin.c:70
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "Napaka, ne morem odpreti datoteke vtièa, %s"
 
-#: src/plugin.c:80
+#: src/plugin.c:81
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Napaka, vtiè ne vsebuje init_plugin funkcije."
 
-#: src/plugin.c:87
+#: src/plugin.c:88
 msgid "Error, init_plugin returned an error"
 msgstr "Napaka, init_plugin je vrnila napako"
 
-#: src/plugin.c:115
+#: src/plugin.c:116
 msgid "Error, plugin is still in use"
 msgstr "Napaka, vtiè je ¹e vedno v uporabi"
 
-#: src/plugin.c:366
-#,  c-format
+#: src/plugin.c:353
+#, c-format
 msgid ""
 "The program %s could not be found.\n"
 "\n"
-msgstr "Program %s ni bil najden.\n"
+msgstr ""
+"Program %s ni bil najden.\n"
 "\n"
 
-#: src/plugin.c:383
+#: src/plugin.c:368
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -811,7 +800,7 @@ msgstr ""
 "Ka¾e, da '%s' ne obstaja.\n"
 "\n"
 
-#: src/plugin.c:385
+#: src/plugin.c:370
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -822,7 +811,7 @@ msgstr ""
 "a v njem se nahaja '%s'.\n"
 "\n"
 
-#: src/plugin.c:388
+#: src/plugin.c:373
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -831,7 +820,7 @@ msgstr ""
 "Ka¾e, da '%s' ni program.\n"
 "\n"
 
-#: src/plugin.c:392
+#: src/plugin.c:377
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -909,57 +898,75 @@ msgstr "Besedilo ni bilo najdeno."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Ne morem najti znova. Ni besedila, ki naj ga i¹èem."
 
-#: src/utils.h:94
+#: src/utils.h:71
 msgid "Show window debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje oken."
 
-#: src/utils.h:97
+#: src/utils.h:74
 msgid "Show commands debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje ukazov."
 
-#: src/utils.h:100
+#: src/utils.h:77
 msgid "Show document debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje dokumenta."
 
-#: src/utils.h:103
+#: src/utils.h:80
 msgid "Show file debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje datoteke."
 
-#: src/utils.h:106
+#: src/utils.h:83
 msgid "Show plugin debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje vtièev."
 
-#: src/utils.h:109
+#: src/utils.h:86
 msgid "Show prefs debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje nastavitev."
 
-#: src/utils.h:112
+#: src/utils.h:89
 msgid "Show printing debugging messages."
 msgstr "Ka¾i sporoèil za razhro¹èevanje tiska."
 
-#: src/utils.h:115
+#: src/utils.h:92
 msgid "Show search debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje iskanja."
 
-#: src/utils.h:118
+#: src/utils.h:95
 msgid "Show undo debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje razveljavljanja."
 
-#: src/utils.h:121
+#: src/utils.h:98
 msgid "Show view debugging messages."
 msgstr "Ka¾i sporoèila za razhro¹èevanje pogledov."
 
-#: src/utils.h:124
+#: src/utils.h:101
 msgid "Show recent debugging messages."
 msgstr "Ka¾i zadnja sporoèila za razhro¹èevanje."
 
-#: src/utils.h:127
+#: src/utils.h:104
 msgid "Turn on all debugging messages."
 msgstr "Vklopi prikazovanje vseh sporoèil za razhro¹èevanje."
 
-#: src/view.c:895
+#: src/view.c:901
 msgid "You can't remove the last view of a document."
 msgstr "Ne morete razveljaviti neimenovanega dokumenta."
+
+#~ msgid "Choose a file"
+#~ msgstr "Izberi datoteko"
+
+#~ msgid "Choose files to diff"
+#~ msgstr "Izberi datoteke za diff"
+
+#~ msgid "Choose files to diff:"
+#~ msgstr "Izberi datoteke za diff:"
+
+#~ msgid "Browse..."
+#~ msgstr "Brskaj..."
+
+#~ msgid "Calculate Diff"
+#~ msgstr "Izraèunaj Diff"
+
+#~ msgid "email"
+#~ msgstr "epo¹ta"
 
 #~ msgid "With special thanks to:"
 #~ msgstr "S posebnimi zahvalami:"
