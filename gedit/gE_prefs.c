@@ -298,23 +298,3 @@ gE_prefs *prefs_window;
   return prefs;
 }
 
-void tab_top_cback (GtkWidget *widget, gpointer data)
-{
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 2);
-}
-
-
-void tab_bot_cback (GtkWidget *widget, gpointer data)
-{
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 3);
-}
-
-void tab_lef_cback (GtkWidget *widget, gpointer data)
-{
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 4);
-}
-
-void tab_rgt_cback (GtkWidget *widget, gpointer data)
-{
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 1);
-}

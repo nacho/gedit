@@ -32,6 +32,7 @@ void tab_top_cback (GtkWidget *widget, gpointer data);
 void tab_bot_cback (GtkWidget *widget, gpointer data);
 void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
+void tab_toggle_cback (GtkWidget *widget, gpointer data);
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
 void auto_indent_toggle_callback (GtkWidget *w, gpointer data);
 void line_pos_callback (GtkWidget *w, GtkWidget *text);
@@ -47,6 +48,7 @@ gE_window *gE_window_new();
 void gE_window_toggle_statusbar (GtkWidget *w, gpointer data);
 gE_document *gE_document_new(gE_window *window);
 gE_document *gE_document_current(gE_window *window);
+void gE_document_toggle_wordwrap (GtkWidget *w, gpointer data);
 gint gE_file_open (gE_document *document, gchar *filename);
 gint gE_file_save (gE_document *document, gchar *filename);
 gint file_open_wrapper (char *name);
@@ -70,6 +72,7 @@ struct _gE_window {
 	GList *documents;
 	gE_search *search;
 	gint auto_indent;
+	gint show_tabs;
 };
 
 struct _gE_document {
@@ -79,6 +82,7 @@ struct _gE_document {
 	gchar *filename;
 	gint changed_id;
 	gint changed;
+	gint word_wrap;
 };
 
 struct _gE_prefs {

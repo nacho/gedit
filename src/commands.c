@@ -130,6 +130,36 @@ void prefs_callback (GtkWidget *widget, gpointer data)
 	prefs_window = gE_prefs_window();
 }
 
+/* --- Notebook Tab Stuff --- */
+
+void tab_top_cback (GtkWidget *widget, gpointer data)
+{
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 2);
+}
+
+
+void tab_bot_cback (GtkWidget *widget, gpointer data)
+{
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 3);
+}
+
+void tab_lef_cback (GtkWidget *widget, gpointer data)
+{
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 4);
+}
+
+void tab_rgt_cback (GtkWidget *widget, gpointer data)
+{
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 1);
+}
+
+void tab_toggle_cback (GtkWidget *widget, gpointer data)
+{
+	main_window->show_tabs = !main_window->show_tabs;
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (main_window->notebook), main_window->show_tabs);
+}
+
+
 
 /* ---- Auto-indent Callback(s) --- */
 

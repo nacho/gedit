@@ -68,18 +68,22 @@ GnomeUIInfo gedit_search_menu [] = {
 
 GnomeUIInfo gedit_tab_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cback, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Botton"),  NULL, tab_bot_cback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cback, NULL, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cback, NULL, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cback, NULL, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cback, NULL, NULL },
 	GNOMEUIINFO_END
 };
 
 GnomeUIInfo gedit_options_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Text font..."),  NULL, prefs_callback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_callback, NULL, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_callback, NULL, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, NULL, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_SUBTREE, N_("Tab location"), NULL, &gedit_tab_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
 	GNOMEUIINFO_END
 };
 
@@ -117,6 +121,7 @@ gE_window *gE_window_new()
   window->search = g_malloc (sizeof(gE_search));
   window->search->window = NULL;
   window->auto_indent = 0;
+  window->show_tabs = 1;
 
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -224,10 +229,12 @@ gE_document *gE_document_new(gE_window *window)
 	if (window->notebook == NULL) {
 		window->notebook = gtk_notebook_new ();
 		gtk_notebook_set_scrollable (GTK_NOTEBOOK(window->notebook), TRUE);
+		/* gtk_notebook_popup_enable (GTK_NOTEBOOK(window->notebook)); */
 	}
 
 	document->tab_label = gtk_label_new (_("Untitled"));
 	document->filename = NULL;
+	document->word_wrap = 1;
 	gtk_widget_show (document->tab_label);
 
 	table = gtk_table_new (2, 2, FALSE);
@@ -311,8 +318,15 @@ gE_document *gE_document_current(gE_window *window)
 	return current_document;
 }
 
+void gE_document_toggle_wordwrap (GtkWidget *w, gpointer data)
+{
+	gE_document *doc;
+	doc = gE_document_current (main_window);
+	doc->word_wrap = !doc->word_wrap;
+	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
+}
 
-
+		
 void gE_show_version()
 {
 	g_print ("%s\n", gEdit_ID);
