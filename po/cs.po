@@ -5,14 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.0.2\n"
-"POT-Creation-Date: 2002-11-28 09:47+0100\n"
-"PO-Revision-Date: 2002-11-28 09:47GMT\n"
-"Last-Translator: Michal Bukovjan <bukm@centrum.cz>\n"
+"POT-Creation-Date: 2002-12-05 06:03+0100\n"
+"PO-Revision-Date: 2002-12-05 20:29+0100\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
 #: data/GNOME_Gedit.server.in.h:1
 msgid "gedit application"
@@ -97,7 +96,7 @@ msgid "Encoding for Saving"
 msgstr "Kódování uloženého souboru"
 
 #: data/gedit.schemas.in.h:14 src/dialogs/gedit-preferences-dialog.c:2290
-#: src/dialogs/gedit-encodings-dialog.c:256
+#: src/dialogs/gedit-encodings-dialog.c:257
 #: src/dialogs/gedit-encodings-dialog.glade2.h:2
 msgid "Encodings"
 msgstr "Kódování"
@@ -573,7 +572,7 @@ msgstr ""
 
 #: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
 #: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
-#: src/dialogs/replace.glade2.h:2 src/dialogs/uri.glade2.h:1
+#: src/dialogs/replace.glade2.h:1 src/dialogs/uri.glade2.h:1
 msgid "*"
 msgstr "*"
 
@@ -866,7 +865,7 @@ msgid "Configure insert date/time plugin..."
 msgstr "Nastavit zásuvný modul pro vložení data a času..."
 
 #: plugins/time/time.glade2.h:1 plugins/sort/sort.glade2.h:1
-#: src/dialogs/gedit-preferences.glade2.h:1 src/dialogs/replace.glade2.h:1
+#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1086,8 +1085,12 @@ msgid "Default"
 msgstr "Výchozí"
 
 #: plugins/spell/gedit-spell-language-dialog.c:229
-msgid "Could not find the required widgets inside languages-dialog.glade2.\n"
-msgstr "Nelze nalézt potřebné prvky uvnitř languages-dialog.glade2.\n"
+#: src/dialogs/gedit-dialog-goto-line.c:165
+#: src/dialogs/gedit-plugin-program-location-dialog.c:96
+#: src/dialogs/gedit-encodings-dialog.c:238
+#, c-format
+msgid "Could not find the required widgets inside %s."
+msgstr "Nemohu najít v %s požadované widgety."
 
 #: plugins/spell/gedit-spell-language-dialog.c:249
 msgid "Languages"
@@ -1206,7 +1209,7 @@ msgstr "Vybraný text neobsahuje chybně napsaná slova."
 msgid "The document does not contain mispelled words."
 msgstr "Dokument neobsahuje chybně napsaná slova."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1939
+#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1962
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivovat %s"
@@ -1220,37 +1223,32 @@ msgstr "Jít na řádek..."
 msgid "_Goto line"
 msgstr "_Jít na řádek"
 
-#: src/dialogs/gedit-dialog-goto-line.c:165
-msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr "Nemohl jsem nalézt potřebný prvek uvnitř goto-line.glade2.\n"
-
-#: src/dialogs/gedit-dialog-replace.c:178 src/dialogs/replace.glade2.h:8
-#: src/gedit-ui.xml.h:52
-msgid "Replace"
-msgstr "Nahradit"
-
-#: src/dialogs/gedit-dialog-replace.c:189
-msgid "Replace _All"
-msgstr "Nahradit vš_e"
-
-#. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:192 src/gedit-file-selector-util.c:129
-#: src/gedit-ui.xml.h:99
-msgid "_Replace"
-msgstr "Nah_radit"
-
-#: src/dialogs/gedit-dialog-replace.c:291 src/gedit-ui.xml.h:23
-msgid "Find"
-msgstr "Najít"
-
-#: src/dialogs/gedit-dialog-replace.c:511
-#: src/dialogs/gedit-dialog-replace.c:590
-#: src/dialogs/gedit-dialog-replace.c:795
+#: src/dialogs/gedit-dialog-replace.c:130
+#: src/dialogs/gedit-dialog-replace.c:900 src/gedit-commands.c:343
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Text \"%s\" nebyl nalezen."
 
-#: src/dialogs/gedit-dialog-replace.c:804
+#: src/dialogs/gedit-dialog-replace.c:238 src/dialogs/replace.glade2.h:4
+#: src/gedit-ui.xml.h:52
+msgid "Replace"
+msgstr "Nahradit"
+
+#: src/dialogs/gedit-dialog-replace.c:249
+msgid "Replace _All"
+msgstr "Nahradit vš_e"
+
+#. Add Replace button
+#: src/dialogs/gedit-dialog-replace.c:252 src/gedit-file-selector-util.c:129
+#: src/gedit-ui.xml.h:99
+msgid "_Replace"
+msgstr "Nah_radit"
+
+#: src/dialogs/gedit-dialog-replace.c:368 src/gedit-ui.xml.h:22
+msgid "Find"
+msgstr "Najít"
+
+#: src/dialogs/gedit-dialog-replace.c:909
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Bylo nalezeno a nahrazeno %d výskytů."
@@ -1290,11 +1288,6 @@ msgstr ""
 #: src/dialogs/program-location-dialog.glade2.h:1
 msgid "Set program location..."
 msgstr "Nastavit umístění programu..."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:96
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
-msgstr "Nelze nalézt potřebné prvky uvnitř program-location-dialog.glade2.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
@@ -1339,7 +1332,7 @@ msgid "Save"
 msgstr "Uložit"
 
 #: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:74
+#: src/dialogs/gedit-preferences.glade2.h:48 src/gedit-ui.xml.h:73
 msgid "Undo"
 msgstr "Zpět"
 
@@ -1778,64 +1771,47 @@ msgstr "Hledat _lokaci:"
 msgid "label"
 msgstr "label"
 
-#: src/dialogs/replace.glade2.h:3
-msgid "<span weight=\"bold\">Search from</span>"
-msgstr "<span weight=\"bold\">Hledat od</span>"
-
-#: src/dialogs/replace.glade2.h:4
-msgid "C_ursor position"
-msgstr "Pozice k_urzoru"
-
-#: src/dialogs/replace.glade2.h:5
-msgid "Case sensi_tive"
-msgstr "Rozlišovat _malá a velká písmena"
-
-#: src/dialogs/replace.glade2.h:6
+#: src/dialogs/replace.glade2.h:2
 msgid "Find Next"
 msgstr "Najít následující"
 
-#: src/dialogs/replace.glade2.h:7
+#: src/dialogs/replace.glade2.h:3
 msgid "Match _entire word only"
 msgstr "Vyhledávat pouze c_elá slova"
 
-#: src/dialogs/replace.glade2.h:9
+#: src/dialogs/replace.glade2.h:5
 msgid "Replace All"
 msgstr "Nahradit vše"
 
-#: src/dialogs/replace.glade2.h:10
+#: src/dialogs/replace.glade2.h:6
 msgid "Replace _with: "
 msgstr "Nahra_dit čím:"
 
-#: src/dialogs/replace.glade2.h:11
-msgid "_Beginning of the document"
-msgstr "Od začátku doku_mentu"
+#: src/dialogs/replace.glade2.h:7
+msgid "_Match case"
+msgstr "_Porovnávat velikost písmen"
 
-#: src/dialogs/replace.glade2.h:12
+#: src/dialogs/replace.glade2.h:8
 msgid "_Search for: "
 msgstr "_Hledat:"
+
+#: src/dialogs/replace.glade2.h:9
+msgid "_Wrap around"
+msgstr "_Zalamování"
 
 #: src/dialogs/uri.glade2.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
 msgstr "Zadejte umístění (UR_L) souboru, který chcete otevřít:"
 
-#: src/gedit-commands.c:56
-msgid "Not yet implemented."
-msgstr "Není zatím implementováno."
-
-#: src/gedit-commands.c:338
-#, c-format
-msgid "The string \"%s\" has not been found."
-msgstr "Řetězec \"%s\" nebyl nalezen."
-
-#: src/gedit-commands.c:436
+#: src/gedit-commands.c:452
 msgid "translator_credits"
 msgstr "Michal Bukovjan"
 
-#: src/gedit-commands.c:461
+#: src/gedit-commands.c:477
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:462
+#: src/gedit-commands.c:478
 msgid ""
 "(C) 1998-2000 Evan Lawrence and Alex Robert\n"
 "(C) 2000-2002 Chema Celorio and Paolo Maggi"
@@ -1843,7 +1819,7 @@ msgstr ""
 "(C) 1998-2000 Evan Lawrence a Alex Robert\n"
 "(C) 2000-2002 Chema Celorio a Paolo Maggi"
 
-#: src/gedit-commands.c:464
+#: src/gedit-commands.c:480
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "GEdit je jednoduchý a malý textový editor pro GNOME"
 
@@ -2010,7 +1986,7 @@ msgid "Could not read data from stdin."
 msgstr "Nebylo možné načíst data ze standardního vstupu."
 
 #. Add the detach tab button
-#: src/gedit-mdi-child.c:538
+#: src/gedit-mdi-child.c:538 src/gedit-ui.xml.h:90
 msgid "_Move to New Window"
 msgstr "Přes_unout do nového okna"
 
@@ -2049,47 +2025,47 @@ msgstr "(změněný)"
 msgid "(readonly)"
 msgstr "(pouze pro čtení)"
 
-#: src/gedit-plugins-engine.c:349
+#: src/gedit-plugins-engine.c:352
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Chyba, není možné otevřít soubor s modulem '%s'\n"
 
-#: src/gedit-plugins-engine.c:359
+#: src/gedit-plugins-engine.c:362
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Chyba, plugin '%s' neobsahuje inicializační funkci."
 
-#: src/gedit-plugins-engine.c:369
+#: src/gedit-plugins-engine.c:372
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Chyba, plugin '%s' neobsahuje aktivační funkci."
 
-#: src/gedit-plugins-engine.c:379
+#: src/gedit-plugins-engine.c:382
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Chyba, plugin '%s' neobsahuje deaktivační funkci."
 
-#: src/gedit-plugins-engine.c:404
+#: src/gedit-plugins-engine.c:407
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Chyba, není možné inicializovat plugin '%s'."
 
-#: src/gedit-plugins-engine.c:455
+#: src/gedit-plugins-engine.c:458
 #, c-format
 msgid "Error, impossible to destroy plugin '%s'"
 msgstr "Chyba, nelze zničit zásuvný modul '%s'."
 
-#: src/gedit-plugins-engine.c:538 src/gedit-plugins-engine.c:626
+#: src/gedit-plugins-engine.c:541 src/gedit-plugins-engine.c:629
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Chyba, nelze aktivovat plugin '%s'."
 
-#: src/gedit-plugins-engine.c:577
+#: src/gedit-plugins-engine.c:580
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Chyba, nelze deaktivovat plugin '%s'."
 
-#: src/gedit-plugins-engine.c:670
+#: src/gedit-plugins-engine.c:673
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Chyba, nelze aktualizovat UI pro plugin '%s'."
@@ -2162,92 +2138,92 @@ msgid "Close"
 msgstr "Zavřít"
 
 #: src/gedit-ui.xml.h:7
-msgid "Close All"
-msgstr "Zavřít vše"
-
-#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
 msgstr "Zavřít všechny otevřené soubory"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close the current file"
 msgstr "Zavřít tento soubor"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Configure the application"
 msgstr "Nastavit aplikaci"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Copy the selection"
 msgstr "Kopírovat výběr"
 
-#: src/gedit-ui.xml.h:13
+#: src/gedit-ui.xml.h:12
 msgid "Create a new document"
 msgstr "Vytvořit nový dokument"
 
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:13
 msgid "Cu_t"
 msgstr "Vyjmou_t"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:14
 msgid "Customize"
 msgstr "Nastavit"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:15
 msgid "Customize toolbars"
 msgstr "Nastavit nástrojové lišty"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:16
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:17
 msgid "Cut the selection"
 msgstr "Vyjmout výběr"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:18
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:19
 msgid "Delete the selected text"
 msgstr "Smazat vybraný text"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:20
 msgid "Dump XML"
 msgstr "Vypsat XML"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:21
 msgid "Dump the UI Xml description"
 msgstr "Vypsat popis UI v XML"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:23
 msgid "Find Again"
 msgstr "Najít znovu"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:24
 msgid "Find Ne_xt"
 msgstr "Najít d_alší"
 
-#: src/gedit-ui.xml.h:26
+#: src/gedit-ui.xml.h:25
 msgid "Go to a specific line number"
 msgstr "Přechod na zadané číslo řádku."
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:26
 msgid "Goto _Line"
 msgstr "Jít na _řádek"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:27
 msgid "Icon and _Text"
 msgstr "Ikona a _text"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:28
 msgid "Main toolbar"
 msgstr "Hlavní nástrojová lišta"
+
+#: src/gedit-ui.xml.h:29
+msgid "Move the current document to a new window"
+msgstr "Přesunout aktuální dokument do nového okna"
 
 #: src/gedit-ui.xml.h:30
 msgid "New"
@@ -2342,134 +2318,130 @@ msgid "Revert to a saved version of the file"
 msgstr "Návrat k uložené verzi souboru"
 
 #: src/gedit-ui.xml.h:57
-msgid "Save All"
-msgstr "Uložit vše"
-
-#: src/gedit-ui.xml.h:58
 msgid "Save As"
 msgstr "Uložit jako"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:58
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:59
 msgid "Save all open files"
 msgstr "Uložit všechny otevřené soubory"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:60
 msgid "Save the current file"
 msgstr "Uložit tento soubor"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:61
 msgid "Save the current file with a different name"
 msgstr "Uložit tento soubor pod jiným jménem"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:62
 msgid "Search again for the same string"
 msgstr "Vyhledat znovu tentýž řetězec"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:63
 msgid "Search for a string"
 msgstr "Najít řetězec"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:64
 msgid "Select All"
 msgstr "Vybrat vše"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:65
 msgid "Select _All"
 msgstr "Vybrat _vše"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:66
 msgid "Select the entire document"
 msgstr "Vybere celý dokument"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:67
 msgid "Set toolbar button style according to desktop default"
 msgstr "Nastaví styl nástrojové lišty podle výchozího stylu"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:68
 msgid "Setup the page settings for your current printer"
 msgstr "Nastaví stránku pro vaši tiskárnu"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:69
 msgid "Show _Cursor Position"
 msgstr "Zobrazit aktuální pozi_ci"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:70
 msgid "Show _Overwrite Mode"
 msgstr "Zobrazit režim přepis_ování"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:71
 msgid "Show cursor position in the statusbar"
 msgstr "Zobrazí pozici kurzoru ve stavové liště"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:72
 msgid "Show overwrite mode in the statusbar"
 msgstr "Zobrazí režim přepisování ve stavové liště"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:74
 msgid "Undo the last action"
 msgstr "Vrátí zpět poslední akci"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:75
 msgid "_About"
 msgstr "_O programu"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:76
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:77
 msgid "_Close All"
 msgstr "Zavřít vš_e"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:78
 msgid "_Contents"
 msgstr "O_bsah"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:79
 msgid "_Copy"
 msgstr "_Kopírovat"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:80
 msgid "_Customize Toolbar"
 msgstr "_Upravit nástrojovou lištu"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:81
 msgid "_Debug"
 msgstr "_Ladění"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:82
 msgid "_Delete"
 msgstr "_Smazat"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:83
 msgid "_Desktop Default"
 msgstr "_Výchozí nastavení"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:84
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:85
 msgid "_Edit"
 msgstr "Ú_pravy"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:86
 msgid "_File"
 msgstr "_Soubor"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:87
 msgid "_Find"
 msgstr "_Najít"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Icon"
 msgstr "_Ikona"
 
@@ -2991,11 +2963,6 @@ msgstr "Vymazat okno s výstupem"
 msgid "Output Lines"
 msgstr "Řádky výstupu"
 
-#: src/dialogs/gedit-encodings-dialog.c:238
-msgid ""
-"Could not find the required widgets inside gedit-encodings-dialog.glade2.\n"
-msgstr "Nelze nalézt potřebné prvky uvnitř gedit-encodings-dialog.glade2.\n"
-
 #: src/dialogs/gedit-encodings-dialog.glade2.h:1
 msgid "Choose one or more e_ncodings:"
 msgstr "Vyberte jed_no nebo více kódování:"
@@ -3140,6 +3107,24 @@ msgstr "Thajské"
 msgid " (invalid Unicode)"
 msgstr " (neplatný Unicode)"
 
+#~ msgid "<span weight=\"bold\">Search from</span>"
+#~ msgstr "<span weight=\"bold\">Hledat od</span>"
+
+#~ msgid "C_ursor position"
+#~ msgstr "Pozice k_urzoru"
+
+#~ msgid "_Beginning of the document"
+#~ msgstr "Od začátku doku_mentu"
+
+#~ msgid "The string \"%s\" has not been found."
+#~ msgstr "Řetězec \"%s\" nebyl nalezen."
+
+#~ msgid "Close All"
+#~ msgstr "Zavřít vše"
+
+#~ msgid "Save All"
+#~ msgstr "Uložit vše"
+
 #~ msgid "%d/%m/%Y %H:%M:%S"
 #~ msgstr "%d. %m. %Y %H:%M:%S"
 
@@ -3148,9 +3133,6 @@ msgstr " (neplatný Unicode)"
 
 #~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 #~ msgstr "Tento plugin zobrazuje dialog obsahující tabulku znaků ASCII."
-
-#~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
-#~ msgstr "Copyright (C) 2001-2002 Paolo Maggi"
 
 #~ msgid ""
 #~ "If you wish to insert any of the characters in to the active \n"
@@ -3171,9 +3153,6 @@ msgstr " (neplatný Unicode)"
 #~ msgstr ""
 #~ "Plugin, který otevře změnové soubory nalezené ve odesílacích zprávách CVS."
 
-#~ msgid "Copyright (C) 2002 - James Willcox"
-#~ msgstr "Copyright (C) 2002 - James Willcox"
-
 #~ msgid "Compare files"
 #~ msgstr "Porovnat soubory"
 
@@ -3186,13 +3165,6 @@ msgstr " (neplatný Unicode)"
 #~ "\n"
 #~ "Chcete-li více informací o programu \"diff\", zadejte na příkazové řádce "
 #~ "\"man diff\".\n"
-
-#~ msgid ""
-#~ "Copyright (C) 2000 - 2001 Chema Celorio \n"
-#~ "Copyright (C) 2002 Paolo Maggi"
-#~ msgstr ""
-#~ "Copyright (C) 2000 - 2001 Chema Celorio \n"
-#~ "Copyright (C) 2002 Paolo Maggi"
 
 #~ msgid ""
 #~ "The word count plugin analyzes the current document and determines the "
@@ -3227,15 +3199,6 @@ msgstr " (neplatný Unicode)"
 
 #~ msgid "Select the format to use when inserting date/time."
 #~ msgstr "Vyberte formát, který se při vložení data a času použije."
-
-#~ msgid "Courier 9"
-#~ msgstr "Courier 9"
-
-#~ msgid "Helvetica 11"
-#~ msgstr "Helvetica 11"
-
-#~ msgid "Helvetica 8"
-#~ msgstr "Helvetica 8"
 
 #~ msgid ""
 #~ "Always use UTF-8 encoding (faster) when creating a new file\n"
