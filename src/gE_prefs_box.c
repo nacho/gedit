@@ -41,6 +41,10 @@ typedef struct _gE_Prop_Box{
 	GtkWidget *close_button;  
 	GtkWidget *help_button;	
 	
+	 GtkWidget *gen_vbox;
+	GtkWidget *prn_vbox;
+	GtkWidget *fnt_vbox;
+	
 	GtkWidget *separator;
 
 } gE_Prop_Box;
@@ -49,8 +53,6 @@ typedef struct _gE_Prop_Box{
 typedef struct _gE_prefs_data {
 	#ifndef WITHOUT_GNOME
 	 GnomePropertyBox *pbox;
-	#else
-	 gE_Prop_Box *pbox;
 	#endif
 	
 	
@@ -82,7 +84,7 @@ static gE_Prop_Box *pbox;
 
 void cancel()
 {
-  gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
+  gtk_widget_destroy (GTK_WIDGET (pbox));
   g_free(prefs);
   prefs = NULL;
 }
@@ -147,11 +149,11 @@ void gE_gtk_apply (gE_Prop_Box *pbox, gint page, gE_data *data)
   gchar *rc;
 
 
-  
+  printf("eh\n");
   /* General Settings */
   data->window->auto_indent = GTK_TOGGLE_BUTTON (prefs->autoindent)->active;
   data->window->show_status = GTK_TOGGLE_BUTTON (prefs->status)->active;  
-
+printf("eh.\n");
   /* Print Settings */
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
   
@@ -176,7 +178,7 @@ void gE_gtk_apply (gE_Prop_Box *pbox, gint page, gE_data *data)
 	fprintf(file, "}\n");
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);  
-
+printf("huh\n");
   gE_window_refresh(data->window);
   gE_save_settings(data->window, data->window);
 }
@@ -197,21 +199,28 @@ static GtkWidget *general_page_new()
   GtkWidget *vbox, *hbox;
 
 printf("gpn...\n");
+
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (vbox), 10);
+  #ifdef WITHOUT_GNOME
+  gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), vbox, TRUE, TRUE, 0);
+  #endif
   gtk_widget_show (vbox);
   printf("gpn..2.\n");
+
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
+  
   printf("gpn..3.\n");
-/*  prefs->autoindent = gtk_check_button_new_with_label ("Autoindent");
+  prefs->autoindent = gtk_check_button_new_with_label ("Autoindent");
   printf("gpn..3.1.\n");
   gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
     printf("gpn..3.2.\n");
-  gtk_widget_show (prefs->autoindent);*/
+  gtk_widget_show (prefs->autoindent);
   printf("gpn..4.\n");
+  
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
@@ -386,7 +395,7 @@ static GtkWidget *font_page_new()
 #ifdef WITHOUT_GNOME
 void apply_close(gE_data *data)
 {
-  gE_gtk_apply(prefs->pbox, 1, data);
+  gE_gtk_apply(pbox, 1, data);
   
   cancel();
 
@@ -422,19 +431,25 @@ printf(".!.\n");
  printf("..\n");
   pbox->notebook = gtk_notebook_new();
   gtk_box_pack_start(GTK_BOX(hbox), pbox->notebook, TRUE, TRUE, 0);
-/*  gtk_widget_show (pbox->notebook);
- */
+  gtk_widget_show (pbox->notebook);
+ 
   printf("..\n");
   /* General Settings */
   label = gtk_label_new ("General");
-  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
-                                         general_page_new(), label);
+  pbox->gen_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), pbox->gen_vbox, label);
+  gtk_widget_show(pbox->gen_vbox);
+  gtk_widget_show(label);
+  
+  general_page_new();
+  
+  
  printf(".t.\n");
   /* Print Settings */
   label = gtk_label_new ("Print");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
                                print_page_new(), label);
- printf("e..\n");                                             
+ printf("e..\n");                                          
   /* Font Settings */
   label = gtk_label_new ("Font");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
@@ -501,6 +516,8 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 #endif
   
   gE_data *data = (gE_data *)cbdata;
+
+  prefs = g_malloc (sizeof(gE_prefs_data));
   
   #ifdef WITHOUT_GNOME
     gE_property_box_new (data);
@@ -513,7 +530,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
     }
 
   
-  prefs = g_malloc (sizeof(gE_prefs_data));
 
    prefs->pbox = GNOME_PROPERTY_BOX (gnome_property_box_new ());
   
