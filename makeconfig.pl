@@ -87,6 +87,8 @@ Makefile
 intl/Makefile
 po/Makefile.in
 macros/Makefile
+help/Makefile
+help/C/Makefile
 src/Makefile
 gmodule-plugins/Makefile
 gmodule-plugins/idl/Makefile

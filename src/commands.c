@@ -417,19 +417,21 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 	gchar *nfile;
 	struct stat sb;
 	gE_document *doc;
-/*	GtkFileSelection *fs;
+	GtkFileSelection *fs;
 
 
 	fs = GTK_FILE_SELECTION(osel);
-*/
-	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));
 
+/*	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));*/
+	filename = g_malloc (strlen (gtk_file_selection_get_filename (fs)));
+	strcpy (filename, gtk_file_selection_get_filename(fs));
+	
 	if (filename != NULL) 
 	  {
 		if (stat(filename, &sb) == -1)
 			return;
 
-		if (S_ISDIR(sb.st_mode)) 
+/*		if (S_ISDIR(sb.st_mode)) 
 		  {
 			nfile = g_malloc0(strlen (filename) + 3);
 			sprintf(nfile, "%s/.", filename);
@@ -437,9 +439,11 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 			g_free(nfile);
 			return;
 		  }
-
-		 if ((doc = gE_document_current ()))
+*/
+		 if (gE_document_current ())
 		   {
+		     doc = gE_document_current();
+		     
 		     if (doc->filename || doc->changed)
 		       doc = gE_document_new_with_file (filename);
 		     else
@@ -453,7 +457,7 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 		
 
 	  }
-
+	  
 	gtk_widget_hide (GTK_WIDGET(osel));
 	
 } /* file_open_ok_sel */
@@ -1014,8 +1018,12 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	gchar *buffer;
 	gint position = *pos;
 	gint n;
-	gE_document *temp = NULL;
+	gE_document *temp;
+	GnomeMDIChild *child;
+	/*GnomeMDIChild *temp = NULL;*/
 	gE_data *data;
+	GtkWidget *text;
+	GList *view;
 
 	data = g_malloc0 (sizeof (gE_data));
 	line_pos_cb(NULL, data);
@@ -1041,18 +1049,31 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	
 	doc->flag = significant_other;	
 	buffer = g_strdup (insertion_text);
-	for (n = 1; n < g_list_length (GNOME_MDI_CHILD (doc)->views); n++)
+
+/*	FIXME : This looks correct, but it isn't... I can't figure why it isnt working properly
+		( * - denotes comment, cant have comemts within comments )
+	child = GNOME_MDI_CHILD (doc);
+	view = child->views;
+	
+	while (view)
 	   {
 	     g_print ("doc_insert_text: n = %d views = %d\n",n, g_list_length (GNOME_MDI_CHILD (doc)->views));
-	     temp = g_list_nth_data (GNOME_MDI_CHILD (doc)->views, n);
+	     temp = (gE_document *)view->data;
+g_warning ("temp* has been set..");
 
+	     
+	     *gtk_text_freeze (GTK_TEXT(GE_DOCUMENT(temp)->text)); *
 	     gtk_text_freeze (GTK_TEXT(temp->text));
+g_warning ("temp->text has been frozen..");	     
+	    * gtk_editable_insert_text (GTK_EDITABLE(GE_DOCUMENT(temp)->text), buffer, length, &position);*
+	    gtk_editable_insert_text (GTK_EDITABLE(temp->text), buffer, length, &position);
 	     
-	     gtk_editable_insert_text (GTK_EDITABLE(temp->text), buffer, length, &position);
-	     
-	     gtk_text_thaw (GTK_TEXT(temp->text));
+	    * gtk_text_thaw (GTK_TEXT(GE_DOCUMENT(temp)->text));*
+	    gtk_text_thaw (GTK_TEXT(temp->text));
+	    
+	    view = g_list_next (view);
 	   }
-	   
+*/	   
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));

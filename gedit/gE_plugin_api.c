@@ -134,7 +134,8 @@ add_plugins_to_window(plugin_info * info, GnomeApp *app)
 void 
 gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
    GtkText *text = GTK_TEXT(document->text);
 
    if (position >= gtk_text_get_length(text))
@@ -149,7 +150,8 @@ gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 void 
 gE_plugin_text_append(gint docid, gchar * buffer, gint length)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
    GtkText *text = GTK_TEXT(document->text);
 
    gtk_text_freeze(text);
@@ -162,7 +164,8 @@ gE_plugin_text_append(gint docid, gchar * buffer, gint length)
 char *
 gE_plugin_text_get(gint docid)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    return gtk_editable_get_chars(GTK_EDITABLE(document->text), 0, -1);
 }
@@ -170,7 +173,9 @@ gE_plugin_text_get(gint docid)
 gchar *
 gE_plugin_text_get_selected_text (gint docid)
 {
-	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
+   
 	return gtk_editable_get_chars (GTK_EDITABLE (document->text),
 		GTK_EDITABLE (document->text)->selection_start_pos,
 		GTK_EDITABLE (document->text)->selection_end_pos);
@@ -182,7 +187,8 @@ gE_plugin_text_set_selected_text (gint docid, gchar *text)
 {
 	GtkEditable *editable;
 	selection_range selection;
-	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 	g_return_if_fail (document != NULL);
 	editable = GTK_EDITABLE (document->text);
 	if (editable->selection_start_pos <= editable->selection_end_pos)
@@ -219,13 +225,15 @@ gE_plugin_document_show(gint docid)
 int 
 gE_plugin_document_current(gint context)
 {
-   return *(int *) g_hash_table_lookup(doc_pointer_to_int, (gE_document_current()));
+/*   return *(int *) g_hash_table_lookup(doc_pointer_to_int, (gE_document_current()));*/
+  return *(int *) gE_document_current();
 }
 
 gchar *
 gE_plugin_document_filename(gint docid)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    if (document->filename == NULL)
       return "";
@@ -249,7 +257,8 @@ gE_plugin_document_open(gint context, gchar * fname)
 gboolean 
 gE_plugin_document_close(gint docid)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
    gE_data *data = g_new0(gE_data, 1);
    gboolean flag;
 
@@ -273,7 +282,8 @@ gE_plugin_document_close(gint docid)
 gint
 gE_plugin_document_get_position (gint docid)
 {
-	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   	gE_document *document = gE_document_current();
 	g_return_val_if_fail (document != NULL, 0);
 	return GTK_EDITABLE(document->text)->current_pos;
 }
@@ -283,7 +293,8 @@ gE_plugin_document_get_selection (gint docid)
 {
 	GtkEditable *editable;
 	selection_range selection;
-	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   	gE_document *document = gE_document_current();
 	selection.start = 0;
 	selection.end = 0;
 	g_return_val_if_fail (document != NULL, selection);
@@ -306,7 +317,8 @@ gE_plugin_document_get_selection (gint docid)
 void 
 gE_plugin_set_auto_indent(gint docid, gint auto_indent)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_window_set_auto_indent(auto_indent);
 }
@@ -314,7 +326,8 @@ gE_plugin_set_auto_indent(gint docid, gint auto_indent)
 void 
 gE_plugin_set_status_bar(gint docid, gint status_bar)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_window_set_status_bar(status_bar);
 }
@@ -322,7 +335,8 @@ gE_plugin_set_status_bar(gint docid, gint status_bar)
 void 
 gE_plugin_set_word_wrap(gint docid, gint word_wrap)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_document_set_word_wrap(document, word_wrap);
 }
@@ -330,7 +344,8 @@ gE_plugin_set_word_wrap(gint docid, gint word_wrap)
 void 
 gE_plugin_set_line_wrap(gint docid, gint line_wrap)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_document_set_line_wrap(document, line_wrap);
 }
@@ -338,7 +353,8 @@ gE_plugin_set_line_wrap(gint docid, gint line_wrap)
 void 
 gE_plugin_set_read_only(gint docid, gint read_only)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_document_set_read_only(document, read_only);
 }
@@ -346,7 +362,8 @@ gE_plugin_set_read_only(gint docid, gint read_only)
 void 
 gE_plugin_set_split_screen(gint docid, gint split_screen)
 {
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gE_document *document = gE_document_current();
 
    gE_document_set_split_screen(document, split_screen);
 }

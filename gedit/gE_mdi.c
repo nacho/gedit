@@ -158,7 +158,7 @@ static GtkWidget *gE_document_create_view (GnomeMDIChild *child)
 	gE_document *doc;
 	GtkWidget *vpaned, *vbox, *menu;
 	GtkStyle *style;
-	/*gint *ptr;*/ /* For plugin stuff. */
+	/*gint *ptr; *//* For plugin stuff. */
 	
 	doc = GE_DOCUMENT(child);
 
@@ -435,14 +435,14 @@ void gE_add_view (GtkWidget *w, gpointer data)
 {
 	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
 	gE_document *child = (gE_document *)data;
-/*	gchar *buf;
+	gchar *buf;
 	gint len, pos = 0;
 	
 	buf = gtk_editable_get_chars (GTK_EDITABLE (child->text), 0, -1);
-*/	
+	
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(child));
 	
-/*	if (mdi->active_child)
+	if (mdi->active_child)
 	  {
 	   if (buf)
 	     {
@@ -451,7 +451,7 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	     }
 	     
 	   }
-*/
+
 }
 
 void gE_remove_view (GtkWidget *w, gpointer data)

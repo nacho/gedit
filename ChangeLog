@@ -1,3 +1,20 @@
+1999-05-08  Alex Roberts  <bse@gedit.pn.org>
+
+	* Makefile.am:
+	  makeconfig.pl:
+	  help/C/topic.dat:
+	  help/C/index.html: Added help file
+	
+	* src/gE_plugin_api.c: Replaced all the calls to g_hash_table_lookup
+	  with straight gE_document_current() calls. Plugins seem to be 
+	  working fine now.
+	
+	* src/commands.c: (doc_insert_text_cb) Commented out the GnomeMDI CHild
+	  stuff, I have no idea why it doesn't work. Maybe some GnomeMDI guru
+	  could look at it.. :)
+	  (file_open_ok_sel) Ok, it works properly now.. It was dereferenceing
+	  the filename (iirc). It's working fine now..
+
 1999-04-30  Alex Roberts  <bse@gedit.pn.org>
 
 	* commands.c: (file_open_ok_sel) Setting the filename selected in 
