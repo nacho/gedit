@@ -1277,20 +1277,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	if (!real_filename)
 		goto out;
 
-	if (stat (real_filename, &st) != 0)
-	{
-		/* File does not exist? */
-		create_backup_copy = FALSE;
-
-		/* Use default permissions */
-		st.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-		st.st_uid = getuid ();
-		st.st_gid = getgid ();
-	}
-
-	/* Save to a temporary file.  We set the umask because some (buggy)
-	 * implementations of mkstemp() use permissions 0666 and we want 0600.
-	 */
+	/* Get the directory in which the real filename lives */
 
 	slashpos = strrchr (real_filename, G_DIR_SEPARATOR);
 
@@ -1301,6 +1288,34 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	}
 	else
 		dirname = g_strdup (".");
+
+	/* If there is not an existing file with that name, compute the
+	 * permissions and uid/gid that we will use for the newly-created file.
+	 */
+
+	if (stat (real_filename, &st) != 0)
+	{
+		struct stat dir_st;
+		int result;
+
+		/* File does not exist? */
+		create_backup_copy = FALSE;
+
+		/* Use default permissions */
+		st.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+		st.st_uid = getuid ();
+
+		result = stat (dirname, &dir_st);
+
+		if (result == 0 && (dir_st.st_mode & S_ISGID))
+			st.st_gid = dir_st.st_gid;
+		else
+			st.st_gid = getgid ();
+	}
+
+	/* Save to a temporary file.  We set the umask because some (buggy)
+	 * implementations of mkstemp() use permissions 0666 and we want 0600.
+	 */
 
 	temp_filename = g_build_filename (dirname, ".gedit-save-XXXXXX", NULL);
 	g_free (dirname);
