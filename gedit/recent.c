@@ -34,6 +34,10 @@
 #define MAX_RECENT 4
 #endif
 
+#ifndef DATA_ITEMS_TO_REMOVE
+#define DATA_ITEMS_TO_REMOVE "items_to_remove"
+#endif
+
        void gedit_recent_update (GnomeApp *app);
 static void gedit_recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gpointer data);
@@ -221,19 +225,29 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
  **/
 static void
 gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
-{
+{	
 	static gint items_in_menu = 0;
 	const gchar *file_name;
 	gchar *path;
 	int i;
-	
+	gint* items_to_remove = NULL;
+
 	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (app != NULL);
+
+	items_to_remove = gtk_object_get_data (GTK_OBJECT(app), DATA_ITEMS_TO_REMOVE);
+
+	if(items_to_remove != NULL) {
+
+	        /* xgettext translators : Use the name of the stock 
+		 * Menu item for "File"	if it is not the same, we are going to 
+		 * fail to insert the recent menu items.*/
+		gnome_app_remove_menu_range (app, _("_File/"), 7, *items_to_remove);
 	
-        /* xgettext translators : Use the name of the stock Menu item for "File"
-	   if it is not the same, we are going to fail to insert the recent menu items.*/
-	gnome_app_remove_menu_range (app, _("_File/"), 7, items_in_menu);
+		gtk_object_remove_data(GTK_OBJECT(app), DATA_ITEMS_TO_REMOVE);
+	}
+
 	items_in_menu = g_list_length (recent_files);
 	
         /* xgettext translators : Use the name of the stock Menu item for "File"
@@ -245,6 +259,9 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 	}
 	g_free (path);
 
+	items_to_remove = g_new0 (gint, 1);
+	*items_to_remove = items_in_menu;
+	gtk_object_set_data_full (GTK_OBJECT(app), DATA_ITEMS_TO_REMOVE,items_to_remove, g_free);
 }
 	
 /* Callback for a click on a file in the recently used menu */
@@ -259,7 +276,8 @@ recent_cb (GtkWidget *widget, gpointer data)
 	{
 		gedit_flash_va (_("Unable to open recent file : %s"), (gchar *) data);
 		gedit_recent_remove ((gchar *) data);
-		gedit_recent_update_menus (gedit_window_active_app (), gedit_recent_history_list);
+		gedit_recent_history_write_config ();
+		gedit_recent_update_all_windows (mdi);		
 	}
 }
 
@@ -268,8 +286,8 @@ recent_cb (GtkWidget *widget, gpointer data)
  * @app: 
  *
  * Grabs the list of recently used documents, then updates the menus by
- * calling recent_update_menus().  Should be called after each addition
- * to the recent documents list.
+ * calling recent_update_menus().  Should be called when a new
+ * window is created. It updates the menu of a single window.
  **/
 void
 gedit_recent_update (GnomeApp *app)
@@ -282,6 +300,30 @@ gedit_recent_update (GnomeApp *app)
 
 	gedit_recent_update_menus (app, filelist);
 }
+
+/**
+ * recent_update_all_windows:
+ * @app: 
+ *
+ * Updates the recent files menus in all open windows.
+ * Should be called after each addition to the recent documents list.
+ **/
+void
+gedit_recent_update_all_windows (GnomeMDI *mdi)
+{
+	gint i;
+	
+	gedit_debug (DEBUG_RECENT, "");
+
+	g_assert(mdi != NULL);
+       	g_assert(mdi->windows != NULL);
+       
+	for (i = 0; i < g_list_length (mdi->windows); i++)
+        {
+                gedit_recent_update (GNOME_APP (g_list_nth_data (mdi->windows, i)));
+        }
+}
+
 
 /**
  * recent_add:
@@ -324,7 +366,7 @@ gedit_recent_remove (char *file_name)
 		if (strcmp (nth_list_item, file_name) == 0)
 		{
 			gedit_recent_history_list = g_list_remove (gedit_recent_history_list, nth_list_item);
-			g_free (nth_list_item);
+			g_free (nth_list_item);			
 			return;
 		}
 	}

@@ -47,6 +47,7 @@ void	gedit_window_refresh_all (gint mdi_mode_changed);
 void	gedit_window_set_view_menu_sensitivity (GnomeApp *app);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
 void	gedit_window_set_widgets_sensitivity (gint unsensitive);
+void	gedit_window_set_plugins_menu_sensitivity (gint sensitive);
 
 #endif /* __WINDOW_H__ */
 

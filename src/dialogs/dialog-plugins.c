@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <string.h> /* For strlen and strcmp */
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
@@ -491,9 +492,12 @@ gedit_plugin_manager_clicked (GtkWidget *widget, gpointer button)
 	for (n = 0; n < g_list_length (mdi->windows); n++)
 	{
 		nth_app = g_list_nth_data (mdi->windows, n);
-		gedit_plugins_menu_add (nth_app);
+		gedit_plugins_menu_add (nth_app);	
 	}
-	
+
+	if(gedit_document_current () == NULL) 
+		gedit_window_set_plugins_menu_sensitivity (FALSE);
+		
 	return;
 
 }

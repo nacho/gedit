@@ -20,9 +20,7 @@
  */
 
 #include <config.h>
-#if 0
 #include <gnome.h>
-#endif
 
 #include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-preferences.h>
@@ -399,9 +397,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	GnomeUIInfo *ui_info;
 	GnomeUIInfo *sub_ui_info;
 	GtkWidget *widget;
-#if 0 /* See below */
-	PluginData  *pd;
-#endif	
+		
 	gint count = 0, sub_count = 0;
 	
 	gedit_debug (DEBUG_WINDOW, "");
@@ -493,28 +489,59 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	if (sensitive)
 		gedit_window_set_view_menu_sensitivity (app);
 
-#if 0
-	/* This is broken, since the widget pointer is stored in pd->menu_item.
-	   It is broken because with multiple windows, there are more than one
-	   widgets that need updating */
-	g_print ("Setting plugins sensitivity ...\n");
-	/* plugin menus */
-	for (count = 0; count < g_list_length (plugins_list); count++)
-	{
-		g_print ("count %i\n", count);
-		pd = g_list_nth_data (plugins_list, count);
-		if (!pd->needs_a_document) {
-			g_print ("This plugin does not need a document\n");
-			continue;
-		}
-		widget = pd->menu_item;
-		if (widget)
-			gtk_widget_set_sensitive (widget, sensitive);
-		else
-			g_print ("The widget is not laoded\n" );
-	}
-#endif	
+	gedit_window_set_plugins_menu_sensitivity (sensitive);
 
 	return;
-
 }
+
+/**
+ * gedit_window_set_plugins_menu_sensitivity:
+ * @sensitive: 
+ *
+ * Set plugins menu sensitivity
+ **/
+void
+gedit_window_set_plugins_menu_sensitivity (gint sensitive)
+{
+	GnomeApp *app;
+	PluginData  *pd;
+	GnomeDockItem *dock_item;
+	GtkWidget *menu_bar, *widget;
+	gint count;
+
+	GList* children;
+	gchar* path;
+	gint menu_pos;
+	
+	app = GNOME_APP (g_list_nth_data (mdi->windows, 0));
+	g_return_if_fail (GNOME_IS_APP (app));
+
+	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_MENUBAR_NAME);	
+	g_return_if_fail (GNOME_IS_DOCK_ITEM (dock_item));
+	
+	menu_bar = gnome_dock_item_get_child (dock_item);
+			
+	for (count = 0; count < g_list_length (plugins_list); count++)
+	{
+		pd = g_list_nth_data (plugins_list, count);
+
+		if (pd->installed && pd->needs_a_document)
+		{			       
+			path = g_strdup_printf ("%s/%s", _("_Plugins"), pd->name);
+			
+			children = gtk_container_children (GTK_CONTAINER ( 
+				gnome_app_find_menu_pos (menu_bar, path, &menu_pos)));
+	
+			widget = GTK_WIDGET (g_list_nth_data (children, menu_pos - 1));
+
+			if (GTK_IS_WIDGET (widget))
+				gtk_widget_set_sensitive (widget, sensitive);
+
+			g_free (path);
+		}
+	}
+	
+	return;
+			
+}
+

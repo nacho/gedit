@@ -30,6 +30,7 @@
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-propertybox.h>
 #include <glade/glade.h>
+#include <string.h> /* For strcmp */
 
 #include "prefs.h"
 #include "view.h"

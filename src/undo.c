@@ -20,6 +20,7 @@
  */
 
 #include <config.h>
+#include <string.h> /* For strlen */
 
 #include "window.h"
 #include "undo.h"

@@ -111,28 +111,6 @@ gedit_prefs_save_settings (void)
 	gedit_debug (DEBUG_PREFS, "end");
 }
 
-/* Determine we use fonts or fontsets. If a fontset is supplied for
- * text widgets, we use fontsets for drawing texts. Otherwise we use
- * normal fonts instead.
- */
-static gboolean
-gedit_prefs_determine_use_fontset (void)
-{
-	GtkWidget *dummy_widget;
-	gboolean retval;
-
-	dummy_widget = gtk_text_new (NULL, NULL);
-	gtk_widget_ensure_style (dummy_widget);
-	if (dummy_widget->style->font->type == GDK_FONT_FONTSET)
-		retval = TRUE;
-	else
-		retval = FALSE;
-
-	gtk_widget_unref (dummy_widget);
-
-	return retval;
-}
-
 void
 gedit_prefs_load_settings (void)
 {
@@ -191,7 +169,7 @@ gedit_prefs_load_settings (void)
 	}
 #endif	
 
-	settings->use_fontset = gedit_prefs_determine_use_fontset ();
+	settings->use_fontset = FALSE;
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
 		settings->font = g_strdup (DEFAULT_FONT);

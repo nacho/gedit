@@ -35,6 +35,7 @@
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-stock.h>
 #include <glade/glade-xml.h>
+#include <string.h> /* For strlen */
 
 #include "window.h"
 #include "search.h"
@@ -368,8 +369,12 @@ dialog_display_messages (GeditReplaceDialog *dialog)
 		g_free (msg);
 	}
 	if (dialog->replacements == -1) {
+#if 0 /* warning: too many arguments for format */
 		msg = g_strdup_printf (_("Could not allocate the memory for the Replace all request."),
 				       dialog->replacements);
+#endif
+		msg = g_strdup_printf (_("Could not allocate the memory for the Replace all request."));
+
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,
 								   GNOME_MESSAGE_BOX_INFO,

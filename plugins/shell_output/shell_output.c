@@ -140,8 +140,10 @@ shell_output (void){
      GtkWidget *ok;
      GtkWidget *cancel;
      gchar *text;
-    
 
+     if (gedit_document_current () == NULL)
+	     return;
+     
      gui = glade_xml_new (GEDIT_GLADEDIR "/shell_output.glade",NULL);
 
      if (!gui)
@@ -184,7 +186,7 @@ init_plugin (PluginData *pd)
 {
 	gchar *current_directory;
 	
-	/* initialise */
+	/* initialize */
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Shell Output");
 	pd->desc = _("Insert the shell output in the document");

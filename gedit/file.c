@@ -225,7 +225,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	gedit_recent_add (fname);
-	gedit_recent_update (gedit_window_active_app());
+	gedit_recent_update_all_windows (mdi);
 
 	return 0;
 }
@@ -833,7 +833,7 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 
 	/* Add the saved as file to the recent files ( history ) menu */
 	gedit_recent_add (file_name);
-	gedit_recent_update (gedit_window_active_app());
+	gedit_recent_update_all_windows (mdi);
 
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_SAVED), file_name);
 

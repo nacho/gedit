@@ -52,8 +52,11 @@ struct _PluginData
 	   work, and there aren't any open documents.
 	   set sentivity off in the plugins menu */
 	gint needs_a_document;
+
+#if 0 /* It is not needed*/
 	GtkWidget * menu_item;
-	
+#endif 	
+
 	/* filled in by plugin */
 	void	*private_data;
 
