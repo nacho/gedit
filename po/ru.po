@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-07-04 12:33+0000\n"
-"PO-Revision-Date: 2000-07-04 12:34+00:00\n"
+"POT-Creation-Date: 2000-07-08 13:00+0000\n"
+"PO-Revision-Date: 2000-07-08 13:01+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -88,7 +88,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
-#: src/document.c:261 src/print.c:581
+#: src/document.c:261 src/print.c:584
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -234,7 +234,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:553
+#: src/dialogs/dialog-prefs.c:555
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -243,7 +243,7 @@ msgstr "gedit: Настройки"
 msgid "found and replaced %i occurrences."
 msgstr "найдено и заменено %i вхождений."
 
-#: src/dialogs/dialog-replace.c:246 src/search.c:276
+#: src/dialogs/dialog-replace.c:246 src/search.c:282
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Текст найден в строке:%i"
@@ -871,28 +871,20 @@ msgstr "Ошибка, дополнение не содержит функции init_plugin."
 msgid "Error, init_plugin returned an error"
 msgstr "Ошибка, init_plugin вернула ошибку"
 
-#: src/plugin.c:338
-msgid "Error, the plugin did not specified a description"
-msgstr "Ошибка, дополнение не имеет описания"
-
-#: src/plugin.c:343
-msgid "Error, the plugin did not specified a long description"
-msgstr "Ошибка, дополнение не имеет подробного описания"
-
 #: src/plugin.c:380
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
 
-#: src/print.c:176
+#: src/print.c:179
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:237
+#: src/print.c:240
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:530 src/print.c:545
+#: src/print.c:533 src/print.c:548
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -901,7 +893,7 @@ msgstr ""
 "gedit: невозможно найти шрифт \"%s\".\n"
 "gedit: невозможно напечатать без установленного шрифта."
 
-#: src/print.c:838
+#: src/print.c:841
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -932,25 +924,35 @@ msgstr ""
 msgid ""
 "Filename: %s\n"
 "\n"
-"Total Character: %i\n"
+"Total Characters: %i\n"
 "Total Words: %i\n"
-"Total Lines: %i"
+"Total Lines: %i\n"
+"Total Paragraphs: %i\n"
+"Total Bytes: %i\n"
+"\n"
+"Current Line: %i\n"
+"Current Column: %i"
 msgstr ""
 "Имя файла: %s\n"
 "\n"
 "Всего символов: %i\n"
 "Всего слов: %i\n"
-"Всего строк: %i"
+"Всего строк: %i\n"
+"Всего абзацев: %i\n"
+"Всего байт: %i\n"
+"\n"
+"Текущая строка: %i\n"
+"Текущий столбец: %i"
 
-#: src/search.c:218
+#: src/search.c:224
 msgid "Text not found"
 msgstr "Текст не найден"
 
-#: src/search.c:223
+#: src/search.c:229
 msgid "Text not found."
 msgstr "Текст не найден."
 
-#: src/search.c:254
+#: src/search.c:260
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Повторный поиск невозможен. Нет текстовой строки для поиска."
 
@@ -1002,9 +1004,15 @@ msgstr "Показать последние отладочные сообщения."
 msgid "Turn on all debugging messages."
 msgstr "Включить все отладочные сообщения."
 
-#: src/view.c:905
+#: src/view.c:933
 msgid "You can't remove the last view of a document."
 msgstr "Вы не можете удалить последнее окно документа."
+
+#~ msgid "Error, the plugin did not specified a description"
+#~ msgstr "Ошибка, дополнение не имеет описания"
+
+#~ msgid "Error, the plugin did not specified a long description"
+#~ msgstr "Ошибка, дополнение не имеет подробного описания"
 
 #~ msgid "Get the current and total lines"
 #~ msgstr "Указать текущую строку и общее количество строк"
