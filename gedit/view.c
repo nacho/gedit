@@ -730,6 +730,8 @@ gedit_view_get_position (View *view)
 	
 	gedit_debug ("", DEBUG_VIEW);
 
+	g_return_val_if_fail (view!=NULL, 0);
+
 	if (gedit_view_get_selection (view, &start_pos, &end_pos))
 		return end_pos;
 	return gtk_text_get_point (GTK_TEXT (view->text));

@@ -15,6 +15,8 @@
 #include "plugin.h"
 #include "view.h"
 
+/* Roberto : no utilices defines que sean comunes puesto que se pueden duplicar,
+   cambia este por GEDIT_PLUGIN_SHELL_BUFFER_SIZE */
 #define BUFFER_SIZE 1024
 
 static GtkWidget *directory;
