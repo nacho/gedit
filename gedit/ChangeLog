@@ -1,5 +1,10 @@
 2002-07-04  James Willcox <jwillcox@cs.indiana.edu>
 
+	* gedit-document.c (gedit_document_load):
+	Set the GError back to NULL after freeing it.
+
+2002-07-04  James Willcox <jwillcox@cs.indiana.edu>
+
 	* gnome-recent-view-bonobo.c (gnome_recent_view_bonobo_finalize):
 	free some stuff when we get finalized.
 

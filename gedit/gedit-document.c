@@ -721,8 +721,10 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 			    !g_utf8_validate (converted_file_contents, bytes_written, NULL))		
 			{
 				/* Coversion failed */	
-				if (conv_error != NULL)
+				if (conv_error != NULL) {
 					g_error_free (conv_error);
+					conv_error = NULL;
+				}
 
 				if (converted_file_contents != NULL)
 					g_free (converted_file_contents);
