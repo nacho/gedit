@@ -10,14 +10,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
-"POT-Creation-Date: 2004-02-24 13:06+0100\n"
-"PO-Revision-Date: 2004-01-17 19:23+0900\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-27 01:00+0900\n"
+"PO-Revision-Date: 2004-02-27 00:58+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -1156,23 +1156,24 @@ msgstr "開くファイルの格納場所 (URI) を入力して下さい(_L):"
 
 #: gedit/dialogs/uri.glade2.h:4
 msgid "Open from URI"
-msgstr "URIから開く..."
+msgstr "URIから開く"
 
-#: gedit/gedit-commands.c:556
+#: gedit/gedit-commands.c:557
 msgid "translator_credits"
 msgstr ""
-"Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
-"Yuusuke Tahara <tahara@gnome.gr.jp>\n"
-"Yukihiro Nakai <nakai@gnome.gr.jp>\n"
-"Akira TAGOH <tagoh@gnome.gr.jp>\n"
+"相花 毅 <aihana@gnome.gr.jp>\n"
 "KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
-"Takeshi AIHANA <aihana@gnome.gr.jp>"
+"Akira TAGOH <tagoh@gnome.gr.jp>\n"
+"Yukihiro Nakai <nakai@gnome.gr.jp>\n"
+"Yuusuke Tahara <tahara@gnome.gr.jp>\n"
+"Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
+"日本GNOMEユーザー会 <http://www.gnome.gr.jp>"
 
-#: gedit/gedit-commands.c:581
+#: gedit/gedit-commands.c:582
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:585
+#: gedit/gedit-commands.c:586
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr ""
 "gedit は GNOME デスクトップ用に作られた小型軽量のテキスト・エディタです"
@@ -1383,12 +1384,11 @@ msgstr "このファイルで上書きしてみますか？"
 
 #: gedit/gedit-file-selector-util.c:398
 msgid "All Files"
-msgstr ""
+msgstr "全てのファイル"
 
 #: gedit/gedit-file-selector-util.c:406
-#, fuzzy
 msgid "All Text Files"
-msgstr "テキスト・ファイルを編集します"
+msgstr "全てのテキスト・ファイル"
 
 #: gedit/gedit-file-selector-util.c:424
 msgid "Ch_aracter Coding:"
@@ -1697,7 +1697,7 @@ msgstr "設定マネージャを初期化できません。"
 #: gedit/gedit-prefs-manager.c:1151
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr "キー %3$s の `%1$s' を期待しましたが `%2$s' を得ました"
+msgstr "キー %3$s の '%1$s' を期待しましたが '%2$s' を得ました"
 
 #: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
 msgid "Print"
@@ -2784,7 +2784,6 @@ msgstr "作業フォルダ(_W):"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: SHELL 出力プラグイン"
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "ソート(_O)..."
@@ -2815,7 +2814,7 @@ msgstr "ソート操作をやり直すことはできません"
 
 #: plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
-msgstr "大小文字を無視する(_I)"
+msgstr "大/小文字を区別する(_I)"
 
 #: plugins/sort/sort.glade2.h:6
 msgid "_Reverse order"
