@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
-  gedit 0.7.1
+  gedit 0.7.1 ( We should bump the version to 0.7.9. Chema )
 ----------------------------------------------------------------------
 
 ** Chema **
@@ -10,11 +10,14 @@
     [ ] Add acelerators to the find dialog
     [ ] Replace the "Find Next" tag with "Find" as needed
     [ ] Fix the dialog poping in two diferent places
-    [ ] add replace stuff
-    [ ] pop a message or find a better way of letting the user know
+    [X] add replace stuff
+    [ ] add replace all stuff
+    [X] pop a message or find a better way of letting the user know
 	that the text was not found
-[ ] Fix the "Untitled mess"
-[ ] Add pipes.
+    [ ] some windows are going under the main window. Very annoying.
+    [ ] replace all is not setting the file as modified
+[X] Fix the "Untitled" mess
+[ ] Move the scrollbars before undo operations
 
 ** Jason and Chema **
 [~] Seek and destroy all memory leaks
@@ -39,18 +42,7 @@
 [~] First shoot at the documentation
 
 ** Unclaimed **
-[ ] Try to break the cut and paste
-[ ] rewrite view.c ( or even better, delete it )
-[ ] Add view set tabs NONE
 [ ] Fix the recent files feature, there are still some loose ends.
-[ ] Shade and unshade the undo and redo menu items and toolbar items
-apropiatelly
-[ ] Shade and unshade the file menu items apropiatelly, for example 
-a NULL filename does not have "Revert and Save" options. 
-[ ] Plugins must check if the document is not ReadOnly before making
-modifications to it. There are also ways to crash gedit if you do like
-a) Pluggins->emal. b) Close the doc c) Hit <OK>. We need a global
-solution for this, since it affects the search funcitons too. Chema.
 
 ----------------------------------------------------------------------
   gedit 0.8.0
@@ -63,6 +55,19 @@ solution for this, since it affects the search funcitons too. Chema.
 [ ] Finish libglade-ifying the dialogs and such
 [ ] Piped input, such as doing "df | gedit" and getting a new document
     with the output of df
+[ ] Shade and unshade the undo and redo menu items and toolbar items
+apropiatelly
+[ ] Shade and unshade the file menu items apropiatelly, for example 
+a NULL filename does not have "Revert and Save" options. and when all
+docs are closed most toolbar functions do not work.
+[ ] rewrite view.c ( or even better: remove it )
+[ ] Add view set tabs NONE
+[ ] Plugins must check if the document is not ReadOnly before making
+modifications to it. There are also ways to crash gedit if you do like
+a) Pluggins->emal. b) Close the doc c) Hit <OK>. We need a global
+solution for this, since it affects the search funcitons too. Chema.
+[ ] Fix the bug in which gedit exitst when a file is modified. After
+the user hits "YES" to save the file, gedit does not exits.
 
 ----------------------------------------------------------------------
   gedit 1.0

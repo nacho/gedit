@@ -1,3 +1,20 @@
+2000-05-25  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (replace_text_clicked_cb): first
+	implementation of replace all.
+
+	* view.c: use new debug function ( macro )
+
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (views_insert): before undoing check whether there
+	is a piece of text selected.If there is, unselect it.
+	(views_delete): same
+
+	* view.c (doc_insert_text_cb): go back to the original
+	parameters, we were overloading a mdi_view function so we
+	can't change those.
+
 2000-05-24  Chema Celorio  <chema@celorio.com>
 
 	* dialogs/dialog-replace.c (replace_text_clicked_cb): replace now

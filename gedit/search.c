@@ -398,7 +398,7 @@ update_text (GtkText *text, gint line, gint lines)
 void
 search_text_not_found_notify (GtkText *text)
 {
-	GnomeDialog *gnome_dialog;
+	GtkWidget *gnome_dialog;
 	gchar * msg;
 	
 	gedit_flash_va (_("Text not found"));
@@ -419,7 +419,7 @@ search_text_not_found_notify (GtkText *text)
 					      NULL);
 	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
 				 GTK_WINDOW (mdi->active_window));
-	gnome_dialog_run_and_close (gnome_dialog);
+	gnome_dialog_run_and_close (GNOME_DIALOG(gnome_dialog));
 
 	g_free (msg);
 }

@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
@@ -33,8 +32,6 @@
 
 #include <glade/glade.h>
 
-GtkWidget *replace_text_dialog;
-
 static void replace_text_destroyed_cb (GtkWidget *widget, gint button);
 static void replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
@@ -42,14 +39,14 @@ static void replace_text_clicked_cb (GtkWidget *widget, gint button);
 static void views_delete (Document *doc, gulong start_pos, gulong end_pos);
 static void views_insert (Document *doc, gulong start_pos, gchar * text_to_insert);
 
-void dialog_replace (gint full);
+       void dialog_replace (gint full);
 
 static void
 replace_text_destroyed_cb (GtkWidget *widget, gint button)
 {
 	gedit_debug("\n", DEBUG_SEARCH);
 	search_end();
-	replace_text_dialog = NULL;
+	widget = NULL;
 }
 
 
@@ -64,8 +61,16 @@ replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 static void
 search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
+	GtkWidget *replace_entry;
+	
 	/* behave as if the user clicked Find/Find next button */
 	gedit_debug("\n", DEBUG_SEARCH);
+
+	/* We do a normal search, but we also need to move the cursor
+	   to the next field */
+	replace_entry  = gtk_object_get_data (GTK_OBJECT (widget), "replace_with_text_entry");
+	g_assert (replace_entry   != NULL);
+
 	replace_text_clicked_cb (dialog, 0);
 }
 
@@ -111,13 +116,69 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	search_text_length   = strlen (text_to_search_for);
 	replace_text_length  = strlen (text_to_replace_with);
 
-	g_print ("Button :%i\n", button);
-
 	if (button == 3) /* Close */
 		gnome_dialog_close (GNOME_DIALOG (widget));
 	
 	if (button == 2) /* Replace All */
-		g_print("Replacing All ....\n");
+	{
+		/* At this point the text we need to replace is selected */
+		/* we need to 1. call view_delete for the text selected */
+		/* and 2. call view insert to insert the new text */
+		/* FIXME : We can assume that the entries will not change for now,
+		   we will need to add a callback to the text entries on their
+		   chage signals. Chema [ This might not be true anymore since
+		   we are "freezing gedit before doing the search/replace */
+
+		int start, end, delta = 0;
+		start_pos = 0;
+		eureka = TRUE;
+
+		/*
+		gtk_text_freeze (GTK_TEXT (view->text));
+		*/
+
+		while (TRUE)
+		{
+			eureka = search_text_execute ( start_pos,
+						       GTK_TOGGLE_BUTTON (case_sensitive)->active,
+						       text_to_search_for,
+						       &pos_found,
+						       &line_found,
+						       &total_lines,
+						       TRUE);
+
+			if (!eureka)
+				break;
+			
+			start = pos_found + delta + 1;
+			end   = pos_found + search_text_length + delta + 1;
+
+			doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
+			views_delete (view->document, start, end);
+
+			doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
+			views_insert (view->document, start, text_to_replace_with);
+
+			start_pos = pos_found + search_text_length;
+
+			delta = delta + replace_text_length - search_text_length + 1;
+		}
+
+		/*
+		gtk_text_thaw (GTK_TEXT (view->text));
+		*/
+
+		/* Diselect the text and set the point after this occurence*/
+
+
+		/*
+		gtk_text_set_point (text, end);
+		*/
+
+		/* We need to reload the buffer since we changed it */
+		search_end();
+		search_start();
+	}
 	 
 	if (button == 1) /* Replace */
 	{
@@ -128,7 +189,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		   we will need to add a callback to the text entries on their
 		   chage signals */
 
-		gulong start, end;
+		int start, end;
 
 		if (!GTK_EDITABLE(text)->selection_end_pos)
 			g_warning("This should not happen !!!!. There should be some text selected");
@@ -138,12 +199,10 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		
 		/* Diselect the text and set the point after this occurence*/
 
-	        g_print("deleting text ....\n");
-
 		doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
 		views_delete (view->document, start, end);
 
-		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, start, view);
+		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
 		views_insert (view->document, start, text_to_replace_with);
 
 
@@ -178,8 +237,6 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			break;
 		}
 
-		g_print("Start_search_from %i start pos %lu\n", start_search_from, start_pos);
-			
 		eureka = search_text_execute ( start_pos,
 					       GTK_TOGGLE_BUTTON (case_sensitive)->active,
 					       text_to_search_for,
@@ -287,6 +344,7 @@ views_insert (Document *doc, gulong start_pos, gchar * text_to_insert)
 void
 dialog_replace (gint full)
 {
+	static GtkWidget *replace_text_dialog = NULL;
 	GtkWidget *search_entry;
 	GtkWidget *replace_entry;
 	GtkWidget *case_sensitive;
@@ -295,7 +353,6 @@ dialog_replace (gint full)
 	GtkWidget *replace_button;
 	GtkWidget *replace_all_button;
 	GtkWidget *ask_before_replacing;
-	
 	GladeXML  *gui;
 
 	gedit_debug("\n", DEBUG_SEARCH);
@@ -305,8 +362,12 @@ dialog_replace (gint full)
 		/* If the dialog is open and active, just show it
 		   should we "raise" it instead for showing it ? maybe
 		   chema */
-		gtk_widget_show (replace_text_dialog);
+		/* FIXME !!!!!!!!
+		g_print(" ........\n");
+		gdk_window_show (replace_text_dialog->window);
+		gdk_window_raise (replace_text_dialog->window);
 		return;
+		*/
 	}
 	
 	gui = glade_xml_new (GEDIT_GLADEDIR
@@ -369,8 +430,10 @@ dialog_replace (gint full)
 		gtk_widget_hide (hbox_replace_with);
 		gtk_widget_hide (replace_button);
 		gtk_widget_hide (replace_all_button);
-		gtk_widget_hide (ask_before_replacing);
 	}
+	/* FIXME: We hide this feature always because is not
+	   implemented yet. Chema */
+	gtk_widget_hide (ask_before_replacing);
 
 	gtk_object_destroy (GTK_OBJECT (gui));
 }

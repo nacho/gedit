@@ -94,7 +94,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 		views_insert (doc, undo);
 		break;
 	case INSERT:
-		gedit_debug ("F:undo - DELETE\n", DEBUG_UNDO);
+		gedit_debug ("undo - DELETE\n", DEBUG_UNDO);
 		
 		/* We're deleteing somthing that had been inserted */
 		if (undo->end_pos + (undo->end_pos - undo->start_pos) <= doc->buf->len)
@@ -163,29 +163,39 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 void
 views_insert (Document *doc, gedit_undo *undo)
 {
-	gint i;
+	gint n;
 	gint p1;
-	View *view;
+	View *nth_view;
 
 	gedit_debug ("\n", DEBUG_UNDO);
 	
-	for (i = 0; i < g_list_length (doc->views); i++)
+	for (n = 0; n < g_list_length (doc->views); n++)
 	{
-		view = g_list_nth_data (doc->views, i);
-		gtk_text_freeze (GTK_TEXT (view->text));
-		p1 = gtk_text_get_point (GTK_TEXT (view->text));
-		gtk_text_set_point (GTK_TEXT(view->text), undo->start_pos);
-		gtk_text_thaw (GTK_TEXT (view->text));
-		gtk_text_insert (GTK_TEXT (view->text), NULL,
+		nth_view = g_list_nth_data (doc->views, n);
+
+		/* We need to verify that there is not a selected
+		   piece of text so that the cursor repositions itself correctly */
+		if (GTK_EDITABLE(nth_view->text)->selection_end_pos)
+		{
+			gtk_editable_select_region (GTK_EDITABLE(nth_view->text), 0, 0);
+		}
+		
+		gtk_text_freeze (GTK_TEXT (nth_view->text));
+		p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
+		gtk_text_set_point (GTK_TEXT(nth_view->text), undo->start_pos);
+		gtk_text_thaw (GTK_TEXT (nth_view->text));
+		gtk_text_insert (GTK_TEXT (nth_view->text), NULL,
 				 NULL, NULL, undo->text,
 				 strlen(undo->text));
-		gtk_text_freeze (GTK_TEXT (view->split_screen));
-		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
-		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
-		gtk_text_thaw (GTK_TEXT (view->split_screen));
-		gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
+#ifdef ENABLE_SPLIT_SCREEN		
+		gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
+		p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
+		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), undo->start_pos);
+		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
+		gtk_text_insert (GTK_TEXT (nth_view->split_screen), NULL,
 				 NULL, NULL, undo->text,
 				 strlen(undo->text));
+#endif		
 	}  
 }
 
@@ -205,6 +215,14 @@ views_delete (Document *doc, gedit_undo *undo)
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
 		nth_view = g_list_nth_data (doc->views, n);
+
+
+		/* We need to verify that there is not a selected
+		   piece of text so that the cursor repositions itself correctly */
+		if (GTK_EDITABLE(nth_view->text)->selection_end_pos)
+		{
+			gtk_editable_select_region (GTK_EDITABLE(nth_view->text), 0, 0);
+		}
 
 		gtk_text_freeze (GTK_TEXT (nth_view->text));
 	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));

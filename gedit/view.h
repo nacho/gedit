@@ -132,6 +132,6 @@ void	   gedit_view_set_selection	(View *view, gint start, gint end);
 
 
 void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
-void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int pos, View *view);
+void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
 
 #endif /* __VIEW_H__ */
