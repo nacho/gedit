@@ -1,5 +1,10 @@
 2005-01-12  Paolo Maggi  <paolo@gnome.org>
 
+	* gedit-mdi-child.c (set_tooltip): use g_markup_printf_escaped instead
+	of g_strdup_printf
+
+2005-01-12  Paolo Maggi  <paolo@gnome.org>
+
 	Fixed bug #161612 (Use of "Home" key when text editing)
 
 	* gedit-view.c (move_cursor) (gedit_view_move_cursor): new functions

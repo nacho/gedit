@@ -740,12 +740,12 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	ruri = 	gedit_utils_replace_home_dir_with_tilde (uri);
 	g_free (uri);
 
-	tip = g_strdup_printf ("<b>%s</b> %s\n\n"
-			       "<b>%s</b> %s\n"
-			       "<b>%s</b> %s",
-			        _("Name:"), ruri,
-			       _("MIME Type:"), mime_full_description,
-			       _("Encoding:"), encoding);
+	tip =  g_markup_printf_escaped("<b>%s</b> %s\n\n"
+				       "<b>%s</b> %s\n"
+				       "<b>%s</b> %s",
+				       _("Name:"), ruri,
+				       _("MIME Type:"), mime_full_description,
+				       _("Encoding:"), encoding);
 
 	gedit_tooltips_set_tip (tooltips, widget, tip, NULL);
 	g_free (tip);
@@ -754,6 +754,7 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	g_free (encoding);
 	g_free (mime_full_description);
 }
+
 
 /**
  * gedit_mdi_child_set_label:
