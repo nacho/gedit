@@ -1,3 +1,15 @@
+2004-03-05  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-document.c (gedit_document_get_uri): use gnome_vfs_format_uri_for_display
+	instead of eel_vfs_format_uri_for_display
+
+	* gedit-file-selector-util.c (create_gtk_selector): uses
+	gtk_file_chooser_set_current_folder_uri istead of gtk_file_chooser_set_current_folder
+	because now the default_path must be an URI. Fixes bug #135987
+
+	* gedit-file.c (get_dirname_from_uri): returns an URI
+	(gedit_file_open): uses gedit_default_path when default_path is NULL
+
 2004-03-05  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-mdi.c: restore Higlight Mode menu to the proper sensitivity.

@@ -639,7 +639,7 @@ gedit_document_get_uri (const GeditDocument* doc)
 	{
 		gchar *res;
 
-		res = eel_format_uri_for_display (doc->priv->uri);
+		res = gnome_vfs_format_uri_for_display (doc->priv->uri);
 		g_return_val_if_fail (res != NULL, g_strdup (_("Invalid file name")));
 		
 		return res;

@@ -101,7 +101,8 @@ static gchar *
 get_dirname_from_uri (const char *uri)
 {
 	GnomeVFSURI *vfs_uri;
-	char *name;
+	gchar *name;
+	gchar *res;
 
 	/* Make VFS version of URI. */
 	vfs_uri = gnome_vfs_uri_new (uri);
@@ -113,7 +114,10 @@ get_dirname_from_uri (const char *uri)
 	name = gnome_vfs_uri_extract_dirname (vfs_uri);
 	gnome_vfs_uri_unref (vfs_uri);
 
-	return name;
+	res = g_strdup_printf ("file:///%s", name);
+	g_free (name);
+
+	return res;
 }
 
 void 
@@ -201,6 +205,10 @@ gedit_file_open (GeditMDIChild *active_child)
 
 		g_free (raw_uri);
 	}
+
+	if (default_path == NULL)
+		default_path = (gedit_default_path != NULL) ? 
+			g_strdup (gedit_default_path) : NULL;
 
 	files = gedit_file_selector_open_multi (
 			GTK_WINDOW (gedit_get_active_window ()),

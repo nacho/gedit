@@ -411,9 +411,8 @@ create_gtk_selector (GtkWindow *parent,
 
 	}
 	
-	/* FIXME: enable the use of URIs - Paolo */
 	if (default_path)
-		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filesel), default_path);
+		gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (filesel), default_path);
 
 	if (default_filename)
 		gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (filesel), default_filename);
@@ -481,7 +480,7 @@ run_file_selector (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for.
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @default_path: optional directory to start in
+ * @default_path: optional directory to start in (must be an URI)
  *
  * Creates and shows a modal open file dialog, waiting for the user to
  * select a file or cancel before returning.
@@ -506,7 +505,7 @@ gedit_file_selector_open (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @default_path: optional directory to start in
+ * @default_path: optional directory to start in (must be an URI)
  *
  * Creates and shows a modal open file dialog, waiting for the user to
  * select a file or cancel before returning.
@@ -532,7 +531,7 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @default_path: optional directory to start in
+ * @default_path: optional directory to start in (must be an URI)
  * @default_filename: optional file name to default to
  *
  * Creates and shows a modal save file dialog, waiting for the user to
