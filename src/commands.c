@@ -28,8 +28,6 @@
 #define __need_timespec
 #include <time.h>
 /*#include <signal.h>*/
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #include "main.h"
 #include "gE_view.h"
@@ -250,25 +248,18 @@ static void
 file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	gchar *filename;
-	gchar *nfile;
-	struct stat sb;
 	gedit_document *doc;
 
 	filename = g_malloc (strlen (gtk_file_selection_get_filename (GTK_FILE_SELECTION(osel))) + 1);
 	filename = g_strdup (gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel)));
-	gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel),"");
+	gtk_file_selection_set_filename (GTK_FILE_SELECTION(osel),"");
 	
 	if (filename != NULL)
 	{
-		if (stat(filename, &sb) == -1)
-			return;
-
-		if (S_ISDIR(sb.st_mode))
+		if (g_file_test (filename, G_FILE_TEST_ISDIR))
 		{
-			nfile = g_malloc0(strlen (filename) + 3);
-			sprintf (nfile, "%s/.", filename);
-			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
-			g_free (nfile);
+			gtk_file_selection_set_filename (GTK_FILE_SELECTION (osel),
+							 filename);
 			return;
 		}
 
@@ -684,24 +675,21 @@ file_revert_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_document *doc;
 	
-	if (gedit_document_current ())
+	doc = gedit_document_current ();
+
+	if (doc->filename)
 	{
-		doc = gedit_document_current ();
-	    
-		if (doc->filename)
+		if (doc->changed)
 		{
-			if (doc->changed)
-			{
-				if ((file_revert_do (doc)) == 0)
-					return;
-			}
-			else
-				gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
-	  
+			if ((file_revert_do (doc)) == 0)
+				return;
 		}
 		else
-			gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
+			gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
+	  
 	}
+	else
+		gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
 }
 
 /*

@@ -136,8 +136,8 @@ GnomeUIInfo gedit_settings_menu[] =
 				    auto_indent_toggle_cb, (gpointer) GE_DATA,
 				    NULL),
 */
-	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Toggle Statusbar"),
-				    N_("Toggle statusbar"),
+	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
+				    N_("Enable or disable the statusbar at the bottom of this application window."),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
 /*

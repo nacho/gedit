@@ -1,5 +1,8 @@
 2000-04-03  Jason Leach  <leach@wam.umd.edu>
 
+	* commands.c (file_open_ok_sel): replaced some stat() stuff with a
+	nice g_file_test() call
+
 	* gedit-undo.c (gedit_undo_add): fix for the double CTRL-K crash
 	just added to BUGS
 
