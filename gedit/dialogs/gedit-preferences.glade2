@@ -841,6 +841,7 @@
                     <property name="fill">no</property>
                   </packing>
                 </child>
+
                 <child>
                   <widget class="GtkFrame" id="save_frame">
                     <property name="label" translatable="yes">When saving...</property>
@@ -872,7 +873,7 @@
                         <child>
                           <widget class="GtkRadioButton" id="locale_if_possible_radiobutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">Use current _locale when possible</property>
+                            <property name="label" translatable="yes">Use current _locale's encoding if possible</property>
                             <property name="active">no</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
@@ -886,9 +887,9 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkRadioButton" id="locale_if_previous_radiobutton">
+                          <widget class="GtkRadioButton" id="original_if_possible_radiobutton">
                             <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">U_se current locale only if the file already uses it</property>
+                            <property name="label" translatable="yes">U_se original file encoding if possible</property>
                             <property name="active">no</property>
                             <property name="draw_indicator">yes</property>
                             <property name="visible">no</property>
@@ -911,6 +912,61 @@
                     <property name="fill">yes</property>
                   </packing>
                 </child>
+
+                <child>
+                  <widget class="GtkFrame" id="create_frame">
+                    <property name="label" translatable="yes">When creating a new file...</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+                    <property name="visible">yes</property>
+                    <property name="sensitive">yes</property>
+                    <child>
+                      <widget class="GtkVBox" id="vbox182">
+                        <property name="border_width">5</property>
+                        <property name="homogeneous">no</property>
+                        <property name="spacing">0</property>
+                        <property name="visible">yes</property>
+                        <child>
+                          <widget class="GtkRadioButton" id="create_utf8_radiobutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">Always use U_TF-8 encoding (faster)</property>
+                            <property name="active">yes</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">yes</property>
+                            <property name="use_underline">yes</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="create_locale_if_possible_radiobutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">Use cu_rrent locale's encoding if possible</property>
+                            <property name="active">no</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">yes</property>
+                            <property name="group">create_utf8_radiobutton</property>
+                            <property name="use_underline">yes</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">yes</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">yes</property>
+                  </packing>
+                </child>
+
               </widget>
             </child>
             <child>

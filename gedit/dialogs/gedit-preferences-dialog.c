@@ -104,7 +104,10 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*auto_save_spinbutton;
 	GtkWidget	*utf8_radiobutton;
 	GtkWidget	*locale_if_possible_radiobutton;
-	GtkWidget	*locale_if_previous_radiobutton;
+	GtkWidget	*original_if_possible_radiobutton;
+	GtkWidget	*create_frame;
+	GtkWidget	*create_utf8_radiobutton;
+	GtkWidget	*create_locale_if_possible_radiobutton;
 
 	/* Print/page page */
 	GtkWidget	*add_header_checkbutton;
@@ -1212,6 +1215,9 @@ gedit_preferences_dialog_save_radiobutton_toggled (GtkToggleButton *button,
 		{
 			gedit_prefs_manager_set_save_encoding (
 					GEDIT_SAVE_ALWAYS_UTF8);
+
+			gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
+			
 			return;
 		}
 	}
@@ -1221,17 +1227,61 @@ gedit_preferences_dialog_save_radiobutton_toggled (GtkToggleButton *button,
 		if (gtk_toggle_button_get_active (button))
 		{
 			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE);
+					GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE);
+
+			gtk_widget_set_sensitive (dlg->priv->create_frame, FALSE);
+
 			return;
 		}
 	}
 
-	if (button == GTK_TOGGLE_BUTTON (dlg->priv->locale_if_previous_radiobutton))
+	if (button == GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton))
 	{
 		if (gtk_toggle_button_get_active (button))
 		{
+			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton)))
+				gedit_prefs_manager_set_save_encoding (
+						GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE);
+			else
+			{
+				g_return_if_fail (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (
+								dlg->priv->create_locale_if_possible_radiobutton)));
+
+				gedit_prefs_manager_set_save_encoding (
+						GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL);
+
+			}
+			
+			gtk_widget_set_sensitive (dlg->priv->create_frame, TRUE);
+
+			return;
+		}
+	}
+
+	if (button == GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton))
+	{
+		if (gtk_toggle_button_get_active (button))
+		{
+			g_return_if_fail (gtk_toggle_button_get_active (
+						GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton)));
+
 			gedit_prefs_manager_set_save_encoding (
-					GEDIT_SAVE_CURRENT_LOCALE_IF_USED);
+					GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE);
+
+			return;
+		}
+	}
+
+	if (button == GTK_TOGGLE_BUTTON (dlg->priv->create_locale_if_possible_radiobutton))
+	{
+		if (gtk_toggle_button_get_active (button))
+		{
+			g_return_if_fail (gtk_toggle_button_get_active (
+						GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton)));
+
+			gedit_prefs_manager_set_save_encoding (
+					GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL);
+
 			return;
 		}
 	}
@@ -1243,6 +1293,7 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	GtkWidget *autosave_hbox;
 	GtkWidget *save_frame;
 	gboolean auto_save;
+	GeditSaveEncodingSetting encoding;
 	
 	gedit_debug (DEBUG_PREFS, "");
 	
@@ -1261,12 +1312,19 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	dlg->priv->auto_save_spinbutton = glade_xml_get_widget (gui, 
 			"auto_save_spinbutton");
 
-	dlg->priv->utf8_radiobutton= glade_xml_get_widget (gui, 
+	dlg->priv->utf8_radiobutton = glade_xml_get_widget (gui, 
 			"utf8_radiobutton"); 
 	dlg->priv->locale_if_possible_radiobutton= glade_xml_get_widget (gui, 
 			"locale_if_possible_radiobutton"); 
-	dlg->priv->locale_if_previous_radiobutton= glade_xml_get_widget (gui, 
-			"locale_if_previous_radiobutton");
+	dlg->priv->original_if_possible_radiobutton = glade_xml_get_widget (gui, 
+			"original_if_possible_radiobutton");
+
+	dlg->priv->create_frame = glade_xml_get_widget (gui, 
+			"create_frame"); 
+	dlg->priv->create_utf8_radiobutton = glade_xml_get_widget (gui, 
+			"create_utf8_radiobutton"); 
+	dlg->priv->create_locale_if_possible_radiobutton = glade_xml_get_widget (gui, 
+			"create_locale_if_possible_radiobutton"); 
 
 	g_return_val_if_fail (autosave_hbox, FALSE);
 	g_return_val_if_fail (save_frame, FALSE);
@@ -1275,11 +1333,16 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	
 	g_return_val_if_fail (dlg->priv->utf8_radiobutton, FALSE);
 	g_return_val_if_fail (dlg->priv->locale_if_possible_radiobutton, FALSE);
-	g_return_val_if_fail (dlg->priv->locale_if_previous_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->original_if_possible_radiobutton, FALSE);
+
+	g_return_val_if_fail (dlg->priv->create_frame, FALSE);
+	g_return_val_if_fail (dlg->priv->create_utf8_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->create_locale_if_possible_radiobutton, FALSE);
 
 	/* FIXME */
+	/*
 	gtk_widget_set_sensitive (dlg->priv->locale_if_previous_radiobutton, FALSE);
-
+	*/
 	/* Set current values */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
 				      gedit_prefs_manager_get_create_backup_copy ());
@@ -1290,22 +1353,36 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton),
 				   gedit_prefs_manager_get_auto_save_interval ());
 	
-	switch (gedit_prefs_manager_get_save_encoding ())
+	encoding = gedit_prefs_manager_get_save_encoding ();
+
+	switch (encoding)
 	{
 		case GEDIT_SAVE_ALWAYS_UTF8:
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton), TRUE);
 			break;
-		case GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE:
+		case GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE:
 			gtk_toggle_button_set_active (
 				GTK_TOGGLE_BUTTON (dlg->priv->locale_if_possible_radiobutton),
 				TRUE);
 			break;
-		case GEDIT_SAVE_CURRENT_LOCALE_IF_USED:
+		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE:
 			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dlg->priv->locale_if_previous_radiobutton),
+				GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton),
+				TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->create_utf8_radiobutton),
 				TRUE);
 			break;
+		case GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->original_if_possible_radiobutton),
+				TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->create_locale_if_possible_radiobutton),
+				TRUE);
+			break;
+			
 		default:
 			/* Not possible */
 			g_return_val_if_fail (FALSE, FALSE);
@@ -1321,6 +1398,11 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	gtk_widget_set_sensitive (save_frame,
 				  gedit_prefs_manager_save_encoding_can_set ());
 	
+	gtk_widget_set_sensitive (dlg->priv->create_frame,
+				  gedit_prefs_manager_save_encoding_can_set () && 
+				  ((encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE) ||
+				   (encoding == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)));
+
 	gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, 
 			          auto_save &&
 				  gedit_prefs_manager_auto_save_interval_can_set ());
@@ -1346,7 +1428,15 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
 			  dlg);
 
-	g_signal_connect (G_OBJECT (dlg->priv->locale_if_previous_radiobutton), "toggled", 
+	g_signal_connect (G_OBJECT (dlg->priv->original_if_possible_radiobutton), "toggled", 
+			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
+			  dlg);
+
+	g_signal_connect (G_OBJECT (dlg->priv->create_utf8_radiobutton), "toggled", 
+			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
+			  dlg);
+
+	g_signal_connect (G_OBJECT (dlg->priv->create_locale_if_possible_radiobutton), "toggled", 
 			  G_CALLBACK (gedit_preferences_dialog_save_radiobutton_toggled), 
 			  dlg);
 

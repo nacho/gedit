@@ -69,7 +69,6 @@ struct _GeditDocumentPrivate
 	gchar		*uri;
 	gint 		 untitled_number;	
 
-
 	gchar		*encoding;
 
 	gchar		*last_searched_text;
@@ -318,6 +317,17 @@ gedit_document_init (GeditDocument *document)
 
 	document->priv->undo_manager = gedit_undo_manager_new (document);
 
+	if (gedit_prefs_manager_get_save_encoding () == 
+			GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)
+	{
+		const gchar *encoding = NULL;
+		g_get_charset(&encoding);
+				
+		document->priv->encoding = g_strdup (encoding);
+	}
+	else
+		document->priv->encoding = NULL;
+			
 	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_undo",
 			  G_CALLBACK (gedit_document_can_undo_handler), 
 			  document);
@@ -786,6 +796,9 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 			}
 		}
 
+		gedit_debug (DEBUG_DOCUMENT, "Document encoding: %s", 
+			     doc->priv->encoding == NULL ? "UTF-8 (Null)" : doc->priv->encoding);
+
 		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
@@ -954,12 +967,14 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	gboolean create_backup_copy;
 
 	gboolean ret;
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
-
+	g_return_val_if_fail (doc->priv->uri != NULL, FALSE);
+	
 	auto_save = gedit_prefs_manager_get_auto_save ();
 	create_backup_copy = gedit_prefs_manager_get_create_backup_copy ();
 		
@@ -1170,7 +1185,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	gint chars_len;
 	gint fd;
 	gint retval;
-
+	GeditSaveEncodingSetting encoding_setting;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
@@ -1277,10 +1293,14 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 
       	chars = gedit_document_get_buffer (doc);
 
-	if (gedit_prefs_manager_get_save_encoding () == GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE)
+	encoding_setting = gedit_prefs_manager_get_save_encoding ();
+
+	if (encoding_setting == GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE)
 	{
 		GError *conv_error = NULL;
 		gchar* converted_file_contents = NULL;
+
+		gedit_debug (DEBUG_DOCUMENT, "Using current locale's encoding");
 
 		converted_file_contents = g_locale_from_utf8 (chars, -1, NULL, NULL, &conv_error);
 
@@ -1295,6 +1315,37 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 			chars = converted_file_contents;
 		}
 	}
+	else
+	{
+		if ((doc->priv->encoding != NULL) &&
+		    ((encoding_setting == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE) ||
+		     (encoding_setting == GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)))
+		{
+			GError *conv_error = NULL;
+			gchar* converted_file_contents = NULL;
+
+			gedit_debug (DEBUG_DOCUMENT, "Using encoding %s", doc->priv->encoding);
+
+			/* Try to convert it from UTF-8 to original encoding */
+			converted_file_contents = g_convert (chars, -1, 
+							     doc->priv->encoding, "UTF-8", 
+							     NULL, NULL, &conv_error); 
+
+			if (conv_error != NULL)
+			{
+				/* Conversion error */
+				g_error_free (conv_error);
+			}
+			else
+			{
+				g_free (chars);
+				chars = converted_file_contents;
+			}
+		}
+		else
+			gedit_debug (DEBUG_DOCUMENT, "Using UTF-8 (Null)");
+
+	}	    
 
 	chars_len = strlen (chars);
 	if (write (fd, chars, chars_len) != chars_len)

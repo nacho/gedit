@@ -1,3 +1,17 @@
+2002-07-10  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-prefs-manager.[ch]:
+	s/GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE/GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE,
+	added GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL description
+	
+	* dialogs/gedit-preferences-dialog.c: added a "When creating a new file..." 
+	frame in the Save page
+
+	* dialogs/gedit-preferences.glade2: ditto
+
+	* gedit-document.c (gedit_save_as_real): when requested	save the 
+	file using the original encoding 
+
 2002-07-09  Paolo Maggi  <maggi@athena.polito.it>
 
 	The "Plugin Manager" is now a page in the "Preferences" dialog

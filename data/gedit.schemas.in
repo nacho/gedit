@@ -167,9 +167,14 @@
 	<short>Encoding for Saving</short>
 	<long>The encoding method to use for saving files.  Possible
 	values are "GEDIT_SAVE_ALWAYS_UTF8" for mandatory UTF-8
-	saving, and "GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE" if you
+	saving, "GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE" if you
 	want gedit to try to convert the document it is saving to your
-	current locale's encoding.  If the conversion is successful,
+	current locale's encoding, 
+	"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE" if you want gedit to try
+	to use the original file encoding (new files in UTF8) and 
+	"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL" if you want gedit to try
+	to use the original file encoding (new files in current locale's encoding).  
+	If the conversion is successful,
 	it will be used.  Otherwise, UTF-8 will be used.  Note that
 	the values are case-sensitive, so make sure they appear
 	exactly as mentioned here.</long>
