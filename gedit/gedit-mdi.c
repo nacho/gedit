@@ -273,6 +273,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			gedit_settings->window_height);
 	gtk_window_set_policy (GTK_WINDOW (win), TRUE, TRUE, FALSE);
 
+	g_signal_connect (GTK_WIDGET (win), "configure_event",
+	                  GTK_SIGNAL_FUNC (gedit_prefs_configure_event_handler), 
+			  NULL);
 	
 	/* Add the recent files */
 	gedit_recent_init (win);

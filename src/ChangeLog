@@ -1,6 +1,18 @@
+2002-01-13  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-prefs.c: save and load window size
+	(gedit_prefs_configure_event_handler): new function
+	
+	* gedit-pref.h (gedit_prefs_configure_event_handler): 
+	new prototype
+
+	* gedit-mdi.c (gedit_mdi_app_created_handler): connect the
+	"configure_event" signal of the created window to 
+	gedit_prefs_configure_event_handler to track window size
+  
 2002-01-12  Paolo Maggi  <maggi@athena.polito.it>
 
-	* gedit-pref.[ch]:
+	* gedit-prefs.[ch]:
 	* gedit-mdi.c:
 	* gedit-view.[ch]:
 	* dialogs/gedit-preferences-dialog.c:

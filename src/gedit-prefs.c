@@ -116,12 +116,7 @@ gedit_prefs_gdk_color_to_string (GdkColor color)
 void 
 gedit_prefs_save_settings (void)
 {
-#if 0
-	BonoboWindow* active_window;
-	GdkWindow *toplevel;
-	gint root_x;
-	gint root_y;
-#endif	
+	BonoboWindow* active_window = NULL;		
 	gchar *str_color = NULL;
 
 	gedit_debug (DEBUG_PREFS, "START");
@@ -280,33 +275,6 @@ gedit_prefs_save_settings (void)
 				gedit_settings->mdi_tabs_position,
 				NULL);
 
-	
-#if 0 /* FIXME */
-	
-	active_window = bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
-	if (active_window) 
-	{
-		toplevel = gdk_window_get_toplevel (GTK_WIDGET (active_window)->window);
-		gdk_window_get_root_origin (toplevel, &root_x, &root_y);
-		/* We don't want to save the size of a maximized window,
-		   so chek the left margin. This will not work if there is
-		   a pannel in left, but there is no other way that I know
-		   of knowing if a window is maximzed or not */
-		if (root_x != 0)
-			if (active_window)
-				gdk_window_get_size (GTK_WIDGET (active_window)->window,
-						     &settings->width, &settings->height);
-		gconf_client_set_int (gedit_gconf_client,
-				      GEDIT_BASE_KEY GEDIT_PREF_WIDTH,
-				      settings->width,
-				      NULL);
-
-		gconf_client_set_int (gedit_gconf_client,
-				      GEDIT_BASE_KEY GEDIT_PREF_HEIGHT,
-				      settings->height,
-				      NULL);
-	}
-#endif	
 	gconf_client_set_bool (gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_PRINT_HEADER,
 			      	gedit_settings->print_header,
@@ -340,6 +308,26 @@ gedit_prefs_save_settings (void)
 			      	gedit_settings->print_font_numbers,
 			      	NULL);
 
+
+	/* FIXME: we should not save the size of a maximized or iconified window */
+	active_window = bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi));
+	if (active_window != NULL) 
+	{
+		gtk_window_get_size (GTK_WINDOW (active_window),
+				     &gedit_settings->window_width, 
+				     &gedit_settings->window_height);
+	}
+	
+	gconf_client_set_int (gedit_gconf_client,
+		      GEDIT_BASE_KEY GEDIT_PREF_WINDOW_WIDTH,
+		      gedit_settings->window_width,
+		      NULL);
+
+	gconf_client_set_int (gedit_gconf_client,
+		      GEDIT_BASE_KEY GEDIT_PREF_WINDOW_HEIGHT,
+		      gedit_settings->window_height,
+		      NULL);	
+		
 	gconf_client_suggest_sync (gedit_gconf_client, NULL);
 	
 #if 0 /* FIXME */
@@ -536,9 +524,15 @@ gedit_prefs_load_settings (void)
 				GEDIT_BASE_KEY GEDIT_PREF_TABS_POSITION,
 				NULL);
 
-	/* FIXME */
-	gedit_settings->window_width = 600;
-	gedit_settings->window_height = 400;
+	gedit_settings->window_width =  gconf_client_get_int (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_WINDOW_WIDTH,
+				NULL);
+	
+	gedit_settings->window_height =  gconf_client_get_int (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_WINDOW_HEIGHT,
+				NULL);
 
 	/* Print */
 	gedit_settings->print_header = gconf_client_get_bool (
@@ -620,4 +614,23 @@ void gedit_prefs_init ()
 				 GEDIT_BASE_KEY,
 				 gedit_prefs_notify_cb,
 				 NULL, NULL, NULL);
+}
+
+/* Track windows size */
+gboolean gedit_prefs_configure_event_handler (GtkWidget	     *widget,
+					      GdkEventConfigure   *event)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	g_return_val_if_fail (gedit_settings != NULL, FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	/* FIXME: don't save size if windowe is maximixed or iconified */
+	if ((event->width < 300) || (event->height < 200))
+		return FALSE;
+
+	gedit_settings->window_width = event->width;
+	gedit_settings->window_height = event->height;
+
+	return FALSE;
 }

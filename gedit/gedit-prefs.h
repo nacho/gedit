@@ -32,6 +32,7 @@
 #define __GEDIT_PREFS_H__
 
 #include <gdk/gdkcolor.h>
+#include <gtk/gtkwidget.h>
 
 typedef struct _GeditPreferences GeditPreferences;
 
@@ -115,6 +116,9 @@ extern GeditPreferences *gedit_settings;
 void gedit_prefs_save_settings (void);
 void gedit_prefs_load_settings (void);
 void gedit_prefs_init ();
+
+gboolean gedit_prefs_configure_event_handler (GtkWidget	     *widget,
+					      GdkEventConfigure   *event);
 
 #endif /* __GEDIT_PREFS_H__ */
 
