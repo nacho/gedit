@@ -1092,7 +1092,7 @@ gconf_value_type_to_string(GConfValueType type)
       return "*invalid*";
       break;
     default:
-      g_return_val_if_fail (FALSE, NULL);
+      g_return_val_if_reached (NULL);
       break;
     }
 }

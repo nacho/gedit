@@ -1,3 +1,9 @@
+2003-06-16  Frederic Crozat  <fcrozat@mandrakesoft.com>
+
+	* gedit-prefs-manager.c: (gconf_value_type_to_string):
+        don't use g_return_val_if_fail (FALSE, ..), use g_return_val_if_reach
+        instead, gcc 3.3 doesn like it.
+
 2003-06-14  Jordi Mallach  <jordi@sindominio.net>
 
 	* dialogs/gedit-page-setup-dialog.c (setup_font_page): Fix typo.
