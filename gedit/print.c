@@ -21,8 +21,6 @@
  * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
-/*#define ADD_MARKS   FALSE */
-
 #include <config.h>
 #include <gnome.h>
 
@@ -63,7 +61,7 @@ typedef struct _PrintJobInfo {
 	/* Page stuff */ 
 	int   pages;
 	float page_width, page_height;
-	float margin_top, margin_bottom, margin_left, margin_right;
+	float margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
 	float printable_width, printable_height;
 	float header_height;
 	gint   total_lines;
@@ -86,8 +84,8 @@ typedef struct _PrintJobInfo {
        void file_print_preview_cb (GtkWidget *widget, gpointer data);
 static void print_document (Document *doc, GnomePrinter *printer);
 static void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);
-static void print_line (PrintJobInfo *pji);
-static void print_ps_line(PrintJobInfo * pji);
+static void print_line (PrintJobInfo *pji, int line);
+static void print_ps_line(PrintJobInfo * pji, int line);
 static int  print_determine_lines (PrintJobInfo *pji);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void start_job (GnomePrintContext *pc);
@@ -176,6 +174,7 @@ print_document (Document *doc, GnomePrinter *printer)
 	pji->temp = g_malloc( pji->chars_per_line + 1);
 
 	start_job (pji->pc);
+
 	for(i = 1; i <= pji->pages; i++)
 	{
 		if (settings->printheader)
@@ -184,7 +183,7 @@ print_document (Document *doc, GnomePrinter *printer)
 		print_setfont (pji);
 		for (j = 1; j<= pji->total_lines; j++)
 		{
-			print_line (pji);
+			print_line (pji, j);
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
@@ -220,13 +219,14 @@ print_document (Document *doc, GnomePrinter *printer)
 }
 
 static void
-print_line (PrintJobInfo *pji)
+print_line (PrintJobInfo *pji, int line)
 {
 	int i;
 	int print_line = TRUE;
+	int first_line = TRUE;
 
 	i = 0;
-	while( pji->buffer[ pji->file_offset + i] != '\n' && pji->current_line < pji->total_lines && (pji->file_offset+i) < pji->buffer_size)
+	while( pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size)
 	{
 		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
@@ -235,21 +235,22 @@ print_line (PrintJobInfo *pji)
 		{
 			pji->temp[i]=(guchar) '\0';
 			pji->file_offset = pji->file_offset + i + 1;
-			i=0;
 			if (print_line)
-				print_ps_line (pji);
+				print_ps_line (pji, (first_line)?line:0);
 			if (!pji->wrapping)
 				print_line = FALSE;
+			i=0;
+			first_line=FALSE;
 		}
 	}
 	pji->temp[i]=(guchar) '\0';	
 	pji->file_offset = pji->file_offset + i + 1;
 	if (print_line)
-		print_ps_line (pji);
+		print_ps_line (pji, (first_line)?line:0);
 }
 
 static void
-print_ps_line (PrintJobInfo * pji)
+print_ps_line (PrintJobInfo * pji, int line)
 {
 	float y = pji->page_height -  pji->margin_top - pji->header_height -
 	(pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
@@ -258,13 +259,26 @@ print_ps_line (PrintJobInfo * pji)
 	gnome_print_show (pji->pc, pji->temp);
 	if ( pji->temp!='\0')
 		gnome_print_stroke (pji->pc);
+
+	if (line>0 && settings->printlines>0 && line%settings->printlines==0)
+	{
+		char * number_text = g_strdup_printf ("%i",line);
+		gnome_print_setfont (pji->pc, gnome_font_new (pji->font_name, 6));
+		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
+		gnome_print_show   (pji->pc, number_text);
+		g_free (number_text);
+		print_setfont (pji);
+	}
 }
 
 static void
 set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 {
+	pji->paper = gnome_paper_with_name (settings->papersize);
+
+	g_return_if_fail (pji->paper != NULL);
+	
 	pji->master = gnome_print_master_new();
-	pji->paper = gnome_paper_with_name( gnome_paper_name_default());
 	gnome_print_master_set_paper( pji->master, pji->paper);
 
 	if (printer)
@@ -282,11 +296,15 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 	else
 		pji->filename = g_strdup (doc->filename);
 
-	pji->page_width  = gnome_paper_pswidth( pji->paper);
-	pji->page_height = gnome_paper_psheight( pji->paper);
+	pji->page_width  = gnome_paper_pswidth (pji->paper);
+	pji->page_height = gnome_paper_psheight (pji->paper);
+
+	pji->margin_numbers = .25 * 72;
 	pji->margin_top = .75 * 72;       /* Printer margins, not page margins */
 	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
-	pji->margin_left = .75 * 72;      /* gnome-print implements them */ 
+	pji->margin_left = .75 * 72;      /* gnome-print implements them */
+	if (settings->printlines > 0)
+		pji->margin_left += pji->margin_numbers;
 	pji->margin_right = .75 * 72;
 	pji->header_height = settings->printheader * 72;
 	pji->printable_width  = pji->page_width -
@@ -326,7 +344,7 @@ print_determine_lines (PrintJobInfo *pji)
 		}
 		else
 		{
-			if( pji->wrapping )
+			if( pji->wrapping && FALSE)
 			{
 				character++;
 				if ( character > pji->chars_per_line)

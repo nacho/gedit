@@ -36,24 +36,21 @@
 #include "window.h"
 
 static GtkWidget *propertybox;
-
 static GtkWidget *statusbar;
 static GtkWidget *splitscreen;
 static GtkWidget *autoindent;
 static GtkWidget *wordwrap;
-
 static GtkWidget *mdimode;
 static GtkWidget *tabpos;
-
 static GtkWidget *foreground;
 static GtkWidget *background;
 static GtkWidget *defaultfont;
-
 static GtkWidget *printwrap;
 static GtkWidget *printheader;
 static GtkWidget *printlines;
-static GtkWidget *printlinesspinb;
+static GtkWidget *printlinesspin;
 static GtkWidget *lineslabel;
+static GtkWidget *paperselector;
 
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
@@ -194,9 +191,18 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->printheader = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printheader));
 	settings->printwrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printwrap));
+	
+	g_free (settings->papersize);
+	if (strcmp( "custom", gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)))==0)
+	{
+		g_warning ("Custom paper sizes not yet supported. Setting paper size to default\n");
+		settings->papersize = strdup (gnome_paper_name_default());
+	}
+	else
+		settings->papersize = strdup (gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)));
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (printlines)))
-		settings->printlines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (printlinesspinb));
+		settings->printlines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (printlinesspin));
 	else
 		settings->printlines = 0;
 	
@@ -354,14 +360,14 @@ printlines_toggled (GtkWidget *widget, gpointer data)
 	{
 		gtk_toggle_button_update_label_sensitivity (printlines, TRUE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), TRUE);
 	}
 	else
 	{
 		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
 	}
 
@@ -375,7 +381,7 @@ prepare_printing_page (GladeXML *gui)
 
 	printheader = glade_xml_get_widget (gui, "printheader");
 	printlines = glade_xml_get_widget (gui, "printlines");
-	printlinesspinb = glade_xml_get_widget (gui, "printlinesspinb");
+	printlinesspin = glade_xml_get_widget (gui, "printlinesspin");
 	lineslabel = glade_xml_get_widget (gui, "lineslabel");
 	printwrap = glade_xml_get_widget (gui, "printwrap");
 
@@ -391,9 +397,12 @@ prepare_printing_page (GladeXML *gui)
 	{
 		gtk_toggle_button_update_label_sensitivity (printlines, FALSE);
 
-		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspinb), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (printlinesspin), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lineslabel), FALSE);
 	}
+	else
+		gtk_spin_button_set_value(GTK_SPIN_BUTTON( printlinesspin), (gint)settings->printlines);
+			
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (printheader), "toggled",
@@ -402,9 +411,25 @@ prepare_printing_page (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT (printlines), "toggled",
 			    GTK_SIGNAL_FUNC (printlines_toggled), NULL);
-	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (printlinesspinb)->adjustment),
+	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (printlinesspin)->adjustment),
 			    "value_changed",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+}
+
+static void
+prepare_pagesize_page (GladeXML *gui)
+{
+	gedit_debug_mess("F:prepare_pagesize_page\n", DEBUG_PREFS);
+
+	paperselector  = glade_xml_get_widget (gui, "paperselector");
+
+	gnome_paper_selector_set_name( GNOME_PAPER_SELECTOR (paperselector),
+				       settings->papersize);
+
+	/* connect signals */
+	gtk_signal_connect(GTK_OBJECT( GTK_COMBO( GNOME_PAPER_SELECTOR(paperselector)->paper)->entry), "changed",
+			   GTK_SIGNAL_FUNC (prefs_changed), NULL);
+			   
 }
 
 static void
@@ -421,6 +446,7 @@ dialog_prefs_impl (GladeXML *gui)
 	prepare_documents_page (gui);
 	prepare_fontscolors_page (gui);
 	prepare_printing_page (gui);
+	prepare_pagesize_page (gui);
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (propertybox),

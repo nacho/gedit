@@ -41,3 +41,4 @@ gchar *s = N_("Wrap long lines at the page width");
 gchar *s = N_("Print line numbers every:");
 gchar *s = N_("line(s)");
 gchar *s = N_("Printing");
+gchar *s = N_("Paper");

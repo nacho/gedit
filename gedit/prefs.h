@@ -58,6 +58,7 @@ struct _Preferences
 	gint printwrap;        /* Printing stuf ...*/
 	gint printlines;
 	gint printheader;
+	gchar *papersize;
 };
 
 extern Preferences *settings;
