@@ -6,6 +6,11 @@
  *
  */
 
+/*
+ * TODO:
+ * [ ] libglade-ify me
+ */
+
 #include <config.h>
 #include <gnome.h>
 
