@@ -62,6 +62,8 @@ typedef struct _gE_document {
 
 	GnomeMDIChild mdi_child;
 	
+	GList *views;
+	
 	GtkWidget *tab_label;
 	gchar *filename;
 

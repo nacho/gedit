@@ -234,7 +234,7 @@ gE_file_save(gE_document *doc, gchar *fname)
 	    g_free(doc->filename);
 	    doc->filename = g_strdup(fname);
 	  }
-	view->changed = FALSE;
+	doc->changed = FALSE;
 	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));
 

@@ -78,7 +78,10 @@ gchar *str;
 
 	gE_view *view = (gE_view *) cbdata;
 
-	view->changed = TRUE;
+	if (view->document->changed)
+	  return;
+	
+	view->document->changed = TRUE;
 	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);
 	view->changed_id = FALSE;
 	
@@ -109,11 +112,12 @@ doc_insert_text_cb(GtkWidget *editable, const gchar *insertion_text, int length,
 	gchar *buffer;
 	gchar buf[64];
 	gint position = *pos;
-	gint n;
+	gint n, p1, p2;
 	gE_document *doc;
 	GnomeMDIChild *child;
 	/*GnomeMDIChild *temp = NULL;*/
 	gE_data *data;
+	gE_view *nth_view = NULL;
 	GtkWidget *text;
 
 	data = g_malloc0 (sizeof (gE_data));
@@ -148,20 +152,71 @@ doc_insert_text_cb(GtkWidget *editable, const gchar *insertion_text, int length,
 	  
 	strncpy (buffer, insertion_text, length);
 
-#ifdef DEBUG 
+/*#ifdef DEBUG */
  	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
-#endif
+/*#endif*/
  
 	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
+	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
+						  &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));
 	
 	doc = view->document;
-	
+
 	if ((doc->buf->len > 0) && (position < doc->buf->len))
 	  doc->buf = g_string_insert (doc->buf, position, buffer);
 	else
 	  doc->buf = g_string_append (doc->buf, buffer);
+	
+	for (n = 0; n < g_list_length (doc->views); n++)
+	{
+		nth_view = g_list_nth_data (doc->views, n);
+		
+		/*if (nth_view == view)
+		  break;*/
+		
+		g_print ("n= %d, length= %d\n", n, g_list_length (doc->views));
+		
+		/* Disconnect the signals so we can safely update the other views */
+		gtk_signal_disconnect (GTK_OBJECT (nth_view->text), 
+		                       (gint)nth_view->insert);
+		gtk_signal_disconnect (GTK_OBJECT (nth_view->split_screen),
+		                       (gint)nth_view->s_insert);
+			
+			
+		gtk_text_freeze (GTK_TEXT (nth_view->text));
+		
+		p1 = gtk_text_get_point (GTK_TEXT (nth_view->text));
+		
+		gtk_text_set_point (GTK_TEXT(nth_view->text), position - 1);
+		gtk_editable_insert_text (GTK_EDITABLE (nth_view->text), buffer, length,
+						  &position);
+		gtk_text_set_point (GTK_TEXT (nth_view->text), p1);
+		
+		gtk_text_thaw (GTK_TEXT (nth_view->text));
+		
+		
+		gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
+		p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
+		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), (position - 1));
+		gtk_editable_insert_text (GTK_EDITABLE (nth_view->split_screen), buffer,
+		 						  length, &position);
+		gtk_text_set_point (GTK_TEXT (nth_view->text), p1);
+		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
+		
+		/* Reconnect the signals, now the views have been updated */
+		nth_view->insert = gtk_signal_connect (GTK_OBJECT (nth_view->text),
+		                                       "insert_text",
+							                   GTK_SIGNAL_FUNC(doc_insert_text_cb),
+							                   view);
+							                   
+		nth_view->s_insert = gtk_signal_connect (
+		                                       GTK_OBJECT (nth_view->split_screen),
+		                                       "insert_text",
+							                   GTK_SIGNAL_FUNC(doc_insert_text_cb),
+							                   view);					
+	
+	}
 	
 	if (length > 64)  
 	  g_free (buffer);
@@ -207,7 +262,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	g_message ("start: %d end: %d len: %d", start_pos, end_pos, doc->buf->len);
 	
 	/*if ((start_pos + end_pos) < doc->buf->len)*/
-	  doc->buf = g_string_erase (doc->buf, start_pos, end_pos);
+	  doc->buf = g_string_erase (doc->buf, start_pos, (end_pos - start_pos));
 	/*else
 	  doc->buf = g_string_truncate (doc->buf, (start_pos + end_pos));*/
 	
@@ -243,7 +298,7 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 		return FALSE;
 	if (!settings->auto_indent)
 		return FALSE;
-
+g_print ("autio_indent\n");
 	newlines = 0;
 	for (i = *pos; i > 0; i--)
 	{
@@ -449,10 +504,11 @@ static void gE_view_init (gE_view *view)
 	I'm not even sure why these are here.. i'm sure there are much easier ways
 	of implementing undo/redo... 
 	*/
-	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
-		GTK_SIGNAL_FUNC(doc_insert_text_cb), view);
-	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
-		GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) view);
+	view->insert = gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
+		                           GTK_SIGNAL_FUNC(doc_insert_text_cb), view);
+	view->delete = gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
+		                           GTK_SIGNAL_FUNC(doc_delete_text_cb),
+		                           (gpointer) view);
 
 	/* Handle Auto Indent */
 	gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
@@ -471,9 +527,10 @@ static void gE_view_init (gE_view *view)
 	gtk_widget_ensure_style(GTK_WIDGET(view->text));
 	g_free (style);
 		
-/*	doc->changed = FALSE;*/
+/*	doc->changed = FALSE; */
 	view->changed_id = gtk_signal_connect(GTK_OBJECT(view->text), "changed",
 		GTK_SIGNAL_FUNC(view_changed_cb), view);
+
 
 	gtk_widget_show(view->text);
 	gtk_text_set_point(GTK_TEXT(view->text), 0);
@@ -504,10 +561,13 @@ static void gE_view_init (gE_view *view)
 		"button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);
 
-	gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
-		GTK_SIGNAL_FUNC(doc_insert_text_cb), (gpointer) view);
-	gtk_signal_connect (GTK_OBJECT (view->split_screen), "delete_text",
-				GTK_SIGNAL_FUNC(doc_delete_text_cb), (gpointer) view);
+	view->s_insert = gtk_signal_connect (GTK_OBJECT (view->split_screen), "insert_text",
+		                             GTK_SIGNAL_FUNC(doc_insert_text_cb),
+		                             (gpointer) view);
+		                             
+	view->s_delete = gtk_signal_connect (GTK_OBJECT (view->split_screen), "delete_text",
+				                     GTK_SIGNAL_FUNC(doc_delete_text_cb),
+				                     (gpointer) view);
 
 	gtk_signal_connect_after(GTK_OBJECT(view->split_screen),
 		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), NULL);

@@ -191,6 +191,8 @@ void gE_document_init (gE_document *doc)
 	gint *ptr;
 	
 	doc->filename = NULL;
+	doc->changed = FALSE;
+	doc->views = NULL;
 /*	doc->word_wrap = TRUE;
 	doc->line_wrap = TRUE;
 	doc->read_only = FALSE;
@@ -326,43 +328,35 @@ void gE_add_view (GtkWidget *w, gpointer data)
 	GnomeMDIChild *child;
 	gchar *buf;
 	GtkText *text;
+	gE_document *doc = GE_DOCUMENT (data);
 	/*GnomeMDIChild *child = GNOME_MDI_CHILD (data);*/
-	/*gE_document *child = (gE_document *)data;
-	gchar *buf;
-	gint len, pos = 0;
-	
-	buf = gtk_editable_get_chars (GTK_EDITABLE (child->text), 0, -1);
-	
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(child));
-	
-	if (mdi->active_child)
-	  {
-	   if (buf)
-	     {
-	      gtk_editable_insert_text (GTK_EDITABLE (GE_DOCUMENT(mdi->active_child)->text), buf, strlen (buf), &pos);
-	      GE_DOCUMENT(mdi->active_child)->changed_id = child->changed_id;
-	     }
+  
+	if (mdi->active_view)
+	{
+	   g_print ("contents: %d\n", 
+			GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
 	     
-	   }
-	   */
-	   
-	   if (mdi->active_view)
-	     {
-	       g_print ("contents: %d\n", 
-	       			GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
-	     
-	       child = gnome_mdi_get_child_from_view (mdi->active_view);
+	   child = gnome_mdi_get_child_from_view (mdi->active_view);
 	       
-	       gnome_mdi_add_view (mdi, child);
-	     }
-
+	   gnome_mdi_add_view (mdi, child);
+	   
+	   /* Now the gE_view has been added, we can update the GList */
+	   doc->views = g_list_append (doc->views, GE_VIEW (mdi->active_view));
+	}
+	
 }
 
 void gE_remove_view (GtkWidget *w, gpointer data)
 {
+	gE_document *doc = GE_DOCUMENT (data);
+	
 	if (mdi->active_view == NULL)
 	  return;
+
+	/* First, we remove the view from the document's list */
+	doc->views = g_list_remove (doc->views, GE_VIEW (mdi->active_view));
 	  
+	/* Now, we can remove the view proper */
 	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
 }
 
@@ -383,7 +377,7 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	
 	if (mdi->active_view)
 	  {
-	    if (GE_VIEW (mdi->active_view)->changed)
+	    if (doc->changed)
 	      {
 	        msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
 	    							  msg,

@@ -1,3 +1,58 @@
+Tue Aug 10 18:58:57 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: (gE_documnet) Added views GList.
+	
+	* gE_mdi.c: (gE_add_view) Append the new view to the GList
+	  (gE_remove_view) Remove the view from the Glist
+	  
+	* gE_view.h: (gE_view) Added Signal id int's.
+	  
+	* gE_view.c: (gE_view_init) attached the id's to the insert/delete
+	  text signals.
+	  (doc_insert_text_cb) Ok, here we have a for loop for the GList,
+	  the insert/delete signals are disconnected and the text to be
+	  inserted is inserted into each view. the signals are then 
+	  reconnected, and it starts again.
+	  There is a minor problem with this.. i think the GString buffer 
+	  isnt needed now (as we can insert the text into each new view,
+	  instaed of modifiying the GString.. hm). but i dont know.. its 
+	  annoying! but multiple views kinda works now =)
+
+Tue Aug 10 17:12:39 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* Ok, weirdness.. the buffer is working fine now.. maybe there;s
+	  a glitch somewhere..
+	  
+	* ChangeLog: The 1998-05-03 entry had some code from gE_mdi.c in it!
+	  Duely removed it =)
+
+Tue Aug 10 16:50:21 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.c: (view_changed_cb): Check to make sure the gE_document->changed
+	  flag is set, if so return, if not set it and set all the changed 
+	  info as per usual.
+	
+	* gE_mdi.c: (gE_document_init) Set the changed flag to FALSE.
+	  (remove_doc_cb) Check the gE_document->changed flag, instead of the
+	  gE_view->changed flag.
+	
+	* commands.c: (file_save_cb) Check the gE_document->changed flag, instead
+	  of the gE_view->changed one.
+	
+	* gE_files.c: (gE_file_save) reset the gE_document->changed flag.
+	
+	* Hm, now it seems the GString code for text insertion is broekd! arg..
+	  at least all the views dont have their own changed flags now =)
+
+Tue Aug 10 16:15:23 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.c: (doc_delete_text_cb) Fixed text deletion for the GString
+	  buffer. The length of the deletion is the end positon minus the start
+	  position.. instead of just the end postion like i had before. Now we
+	  have a fully working buffer. Next, some way to update all the views
+	  simultaeneously, and to make sure the modified document flag is only
+	  set in gE_document not in each individual view...
+
 Mon Aug  9 18:09:49 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gE_mdi.c: (gE_document_new) Create the GString buffer here.. using a
@@ -2815,75 +2870,7 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* Fixed the sigsegv when loading a file from the cmd line.
 	   This does break the (already broken because of the .gnome/gtkrc) font settings
-msg =   (char *)g_malloc(strlen(fname) + 52);
-	sprintf(msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
-	
-	if (doc->changed)
-	  {
-	    msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
-	    							  msg,
-	    							  GNOME_MESSAGE_BOX_QUESTION,
-	    							  GNOME_STOCK_BUTTON_YES,
-	    							  GNOME_STOCK_BUTTON_NO,
-	    							  GNOME_STOCK_BUTTON_CANCEL,
-	    							  NULL));
-	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
-	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
-	    	    
-/*	    switch (ret)
-	      {
-	        case 0:
-	                 file_save_cb (NULL, data);
-	                 g_print("blargh\n");
-	        case 1:
-	                 return TRUE;
-	        default:
-	                 return FALSE;
-	      }*/
-	      if (ret == 0)
-	        {
-	          /*file_save_cb (NULL, data);*/
-	          if (gE_document_current()->filename)
-	            file_save_cb (NULL, data);
 
-	        }  
-	      else if (ret == 2)
-	       return FALSE;
-	  }msg =   (char *)g_malloc(strlen(fname) + 52);
-	sprintf(msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
-	
-	if (doc->changed)
-	  {
-	    msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
-	    							  msg,
-	    							  GNOME_MESSAGE_BOX_QUESTION,
-	    							  GNOME_STOCK_BUTTON_YES,
-	    							  GNOME_STOCK_BUTTON_NO,
-	    							  GNOME_STOCK_BUTTON_CANCEL,
-	    							  NULL));
-	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
-	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
-	    	    
-/*	    switch (ret)
-	      {
-	        case 0:
-	                 file_save_cb (NULL, data);
-	                 g_print("blargh\n");
-	        case 1:
-	                 return TRUE;
-	        default:
-	                 return FALSE;
-	      }*/
-	      if (ret == 0)
-	        {
-	          /*file_save_cb (NULL, data);*/
-	          if (gE_document_current()->filename)
-	            file_save_cb (NULL, data);
-
-	        }  
-	      else if (ret == 2)
-	       return FALSE;
-	  }
 Sun May 03 03:17:13  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* .cvsignore: New file. Added some files to it as well.

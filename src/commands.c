@@ -516,7 +516,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 	    doc = gE_document_current();
 	    view = GE_VIEW (mdi->active_view);
 	    
-	    if (view->changed)
+	    if (doc->changed)
 	      {
  	        fname = doc->filename;
 

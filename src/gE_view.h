@@ -53,6 +53,10 @@ typedef struct _gE_view {
 	gint changed_id;
 	gint changed;
 	
+	/* GtkText Signal id's */
+	gint insert, delete, indent;
+	gint s_insert, s_delete, s_indent;
+	
 	guint group_type;
 	
 	gpointer flag;
