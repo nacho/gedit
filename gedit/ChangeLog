@@ -9,6 +9,24 @@
 	  change the # of documents it displays by redefining the  MAX_RECENT
 	  variable.. The default is 4, per the style guide..
 
+1998-07-31  Andy Kahn <kahn@zk3.dec.com>
+
+	* fix three bugs reported by Mikael Hermansson:
+
+	    1. opening a file that doesn't exist from the command line
+	    results in seg fault.
+
+	    2. doing "Save As" with a new filename results in subsequent
+	    "Save" commands failing.
+
+	    3. if quitting gedit and a changed file has not been saved,
+	    selecting "Cancel" on the yes/no/cancel save dialog box results
+	    in the original window disappearing and never coming back.
+
+	* fix for bug reported by Marin Purgar, where if PLUGINDIR did not
+	exist, readdir() causes a segv (e.g., on Linux).
+
+
 1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* main.h: check for #defined GTK_HAVE_FEATURES_1_1_0 instead of

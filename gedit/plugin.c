@@ -164,25 +164,27 @@ plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
 
 void plugin_query_all( plugin_callback_struct *callbacks )
 {
-  DIR *dir = opendir( PLUGINDIR );
-  struct dirent *direntry;
-  gchar *shortname;
-  
-  while ((direntry = readdir(dir)))
-    {
-      plugin *plug;
-      if ( strrchr( direntry->d_name, '/' ) )
-	shortname = strrchr( direntry->d_name, '/' ) + 1;
-      else
-	shortname = direntry->d_name;     
-      if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
-	{
-	  plug = plugin_query( direntry->d_name );
-	  plug->callbacks = *callbacks;
-	  plugin_get_all( plug, 1, process_command, NULL );
+	DIR *dir = opendir( PLUGINDIR );
+	struct dirent *direntry;
+	gchar *shortname;
+
+	if (dir) {
+		while ((direntry = readdir(dir)))
+		{
+			plugin *plug;
+			if ( strrchr( direntry->d_name, '/' ) )
+				shortname = strrchr( direntry->d_name, '/' ) + 1;
+			else
+				shortname = direntry->d_name;     
+			if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
+			{
+				plug = plugin_query( direntry->d_name );
+				plug->callbacks = *callbacks;
+				plugin_get_all( plug, 1, process_command, NULL );
+			}
+		}
+		closedir( dir );
 	}
-    }
-  closedir( dir );
 }
 
 void plugin_finish( plugin *the_plugin )

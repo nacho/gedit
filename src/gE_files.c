@@ -73,7 +73,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 		doc->sb = NULL;
 	}
 
-	if (doc->sb->st_size > 0) {
+	if (doc->sb && doc->sb->st_size > 0) {
 
 		/* open file */
 		if ((fd = open(fname, O_RDONLY)) == -1) {
@@ -228,9 +228,12 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	fflush(fp);
 	fclose(fp);
 
-	doc->filename = fname;
+	if (doc->filename)
+		g_free(doc->filename);
+	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
-	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)basename(fname));
+	gtk_label_set(GTK_LABEL(doc->tab_label),
+		(const char *)basename(doc->filename));
 	if (!doc->changed_id)
 		doc->changed_id =
 			gtk_signal_connect (

@@ -720,7 +720,8 @@ file_close_window_cmd_callback(GtkWidget *widget, gpointer cbdata)
 		close_window_common(data->window);	/* may not return */
 
 		data->window = g_list_nth_data(window_list, 0);
-	}
+	} else
+		gtk_widget_show(data->window->window);
 }
 
 
