@@ -43,12 +43,14 @@
 #include <libgnome/libgnome.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
+#include <libgnomevfs/gnome-vfs-mime-utils.h>
+
+#include <gtksourcelanguagesmanager.h>
 
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "gedit-undo-manager.h"
 #include "gedit-convert.h"
 
 #include "gedit-marshal.h"
@@ -60,6 +62,8 @@
 #else
 #define GEDIT_MAX_PATH_LEN  2048
 #endif
+
+static GtkSourceLanguagesManager *language_manager = NULL;
 
 struct _GeditDocumentPrivate
 {
@@ -77,8 +81,6 @@ struct _GeditDocumentPrivate
 	gboolean	 last_save_was_manually; 
 	
 	gboolean 	 readonly;
-
-	GeditUndoManager *undo_manager;
 };
 
 enum {
@@ -86,8 +88,6 @@ enum {
 	SAVED,
 	LOADED,
 	READONLY_CHANGED,
-	CAN_UNDO,
-	CAN_REDO,
 	LAST_SIGNAL
 };
 
@@ -105,11 +105,6 @@ static gboolean	gedit_document_save_as_real (GeditDocument* doc, const gchar *ur
 					     gboolean create_backup_copy, GError **error);
 static void gedit_document_set_uri (GeditDocument* doc, const gchar* uri);
 
-static void gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, 
-					     GeditDocument* doc);
-
-static void gedit_document_can_redo_handler (GeditUndoManager* um, gboolean can_redo, 
-					     GeditDocument* doc);
 static gboolean gedit_document_auto_save (GeditDocument *doc, GError **error);
 static gboolean gedit_document_auto_save_timeout (GeditDocument *doc);
 
@@ -183,7 +178,7 @@ gedit_document_get_type (void)
         		(GInstanceInitFunc) gedit_document_init
       		};
 
-      		document_type = g_type_register_static (GTK_TYPE_TEXT_BUFFER,
+      		document_type = g_type_register_static (GTK_TYPE_SOURCE_BUFFER,
                 					"GeditDocument",
                                            	 	&our_info,
                                            		0);
@@ -206,8 +201,6 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	klass->loaded 	    	= gedit_document_real_loaded;
 	klass->saved        	= gedit_document_real_saved;
 	klass->readonly_changed = gedit_document_real_readonly_changed;
-	klass->can_undo		= NULL;
-	klass->can_redo		= NULL;
 
   	document_signals[NAME_CHANGED] =
    		g_signal_new ("name_changed",
@@ -249,29 +242,6 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
-
-	document_signals[CAN_UNDO] =
-   		g_signal_new ("can_undo",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, can_undo),
-			      NULL, NULL,
-			      gedit_marshal_VOID__BOOLEAN,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_BOOLEAN);
-
-	document_signals[CAN_REDO] =
-   		g_signal_new ("can_redo",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GeditDocumentClass, can_redo),
-			      NULL, NULL,
-			      gedit_marshal_VOID__BOOLEAN,
-			      G_TYPE_NONE,
-			      1,
-			      G_TYPE_BOOLEAN);
-
 }
 
 static void
@@ -288,8 +258,6 @@ gedit_document_init (GeditDocument *document)
 
 	document->priv->last_save_was_manually = TRUE;
 
-	document->priv->undo_manager = gedit_undo_manager_new (document);
-
 	if (gedit_prefs_manager_get_save_encoding () == 
 			GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL)
 	{
@@ -300,14 +268,9 @@ gedit_document_init (GeditDocument *document)
 	}
 	else
 		document->priv->encoding = NULL;
-			
-	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_undo",
-			  G_CALLBACK (gedit_document_can_undo_handler), 
-			  document);
 
-	g_signal_connect (G_OBJECT (document->priv->undo_manager), "can_redo",
-			  G_CALLBACK (gedit_document_can_redo_handler), 
-			  document);
+	if (language_manager == NULL)
+		language_manager = gtk_source_languages_manager_new ();	
 }
 
 static void
@@ -339,8 +302,6 @@ gedit_document_finalize (GObject *object)
 	g_free (document->priv->last_replace_text);
 	g_free (document->priv->encoding);
 
-	g_object_unref (G_OBJECT (document->priv->undo_manager));
-	
 	g_free (document->priv);
 	
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -367,6 +328,9 @@ gedit_document_new (void)
 	document->priv->untitled_number = gedit_document_get_untitled_number ();
 	g_return_val_if_fail (document->priv->untitled_number > 0, NULL);
 
+	gedit_document_set_max_undo_levels (document,
+					    gedit_prefs_manager_get_undo_actions_limit ());    
+			
 	return document;
 }
 
@@ -710,7 +674,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gedit_debug (DEBUG_DOCUMENT, "Document encoding: %s", 
 			     doc->priv->encoding == NULL ? "UTF-8 (Null)" : doc->priv->encoding);
 
-		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+		gedit_document_begin_not_undoable_action (doc);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, len);
@@ -725,7 +689,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 
-		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+		gedit_document_end_not_undoable_action (doc);
 	}
 
 	if (file_contents != NULL)
@@ -791,7 +755,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 			return FALSE;
 		}
 
-		gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+		gedit_document_begin_not_undoable_action (doc);
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, -1);
@@ -805,7 +769,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 
-		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+		gedit_document_end_not_undoable_action (doc);
 		
 		g_free (converted_text);
 	}
@@ -835,6 +799,8 @@ gedit_document_is_untouched (const GeditDocument *doc)
 static void
 gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 {
+	gchar *mime_type;
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (doc != NULL);
@@ -845,7 +811,9 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 
 	if (doc->priv->uri != NULL)
 		g_free (doc->priv->uri);
-			
+		
+	g_return_if_fail (uri != NULL);
+
 	doc->priv->uri = g_strdup (uri);
 
 	if (doc->priv->untitled_number > 0)
@@ -853,7 +821,37 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		gedit_document_release_untitled_number (doc->priv->untitled_number);
 		doc->priv->untitled_number = 0;
 	}
+
+	mime_type = gnome_vfs_get_mime_type (uri);
 	
+	if (mime_type != NULL)
+	{
+		GtkSourceLanguage *language;
+		
+		language = 
+			gtk_source_languages_manager_get_language_from_mime_type (language_manager,
+										  mime_type);
+		if (language == NULL)
+		{
+			gedit_debug (DEBUG_DOCUMENT, "No language found for mime type `%s'\n", mime_type);
+
+			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), FALSE);
+		}
+		else
+		{
+			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), TRUE);
+
+			gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), language);
+		}
+
+		g_free (mime_type);
+
+	}
+	else
+	{
+		g_warning ("Couldn't get mime type for file `%s'", uri);
+	}
+
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
 }
 	
@@ -1451,7 +1449,7 @@ gedit_document_revert (GeditDocument *doc,  GError **error)
 			
 	buffer = gedit_document_get_chars (doc, 0, -1);
 
-	gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+	gedit_document_begin_not_undoable_action (doc);
 
 	gedit_document_delete_text (doc, 0, -1);
 
@@ -1465,12 +1463,12 @@ gedit_document_revert (GeditDocument *doc,  GError **error)
 
 		g_free (buffer);
 
-		gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+		gedit_document_end_not_undoable_action (doc);
 
 		return FALSE;
 	}
 
-	gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+	gedit_document_end_not_undoable_action (doc);
 
 	g_free (buffer);
 
@@ -1551,6 +1549,16 @@ gedit_document_get_chars (GeditDocument *doc, gint start, gint end)
 	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter, TRUE);
 }
 
+void
+gedit_document_set_max_undo_levels (GeditDocument *doc, gint max_undo_levels)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (doc), 
+					       max_undo_levels);
+}
 
 gboolean
 gedit_document_can_undo	(const GeditDocument *doc)
@@ -1558,9 +1566,8 @@ gedit_document_can_undo	(const GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (doc->priv != NULL, FALSE);
 
-	return gedit_undo_manager_can_undo (doc->priv->undo_manager);
+	return gtk_source_buffer_can_undo (GTK_SOURCE_BUFFER (doc));
 }
 
 gboolean
@@ -1569,9 +1576,8 @@ gedit_document_can_redo (const GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (doc->priv != NULL, FALSE);
 
-	return gedit_undo_manager_can_redo (doc->priv->undo_manager);	
+	return gtk_source_buffer_can_redo (GTK_SOURCE_BUFFER (doc));
 }
 
 void 
@@ -1580,10 +1586,9 @@ gedit_document_undo (GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv != NULL);
-	g_return_if_fail (gedit_undo_manager_can_undo (doc->priv->undo_manager));
+	g_return_if_fail (gedit_document_can_undo (doc));
 
-	gedit_undo_manager_undo (doc->priv->undo_manager);
+	gtk_source_buffer_undo (GTK_SOURCE_BUFFER (doc));
 }
 
 void 
@@ -1592,10 +1597,9 @@ gedit_document_redo (GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv != NULL);
-	g_return_if_fail (gedit_undo_manager_can_redo (doc->priv->undo_manager));
+	g_return_if_fail (gedit_document_can_redo (doc));
 
-	gedit_undo_manager_redo (doc->priv->undo_manager);
+	gtk_source_buffer_redo (GTK_SOURCE_BUFFER (doc));
 }
 
 void
@@ -1604,9 +1608,8 @@ gedit_document_begin_not_undoable_action (GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv != NULL);
 
-	gedit_undo_manager_begin_not_undoable_action (doc->priv->undo_manager);
+	gtk_source_buffer_begin_not_undoable_action (GTK_SOURCE_BUFFER (doc));
 }
 
 void	
@@ -1615,9 +1618,8 @@ gedit_document_end_not_undoable_action	(GeditDocument *doc)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (doc->priv != NULL);
 
-	gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
+	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
 }
 
 void		
@@ -1640,32 +1642,6 @@ gedit_document_end_user_action (GeditDocument *doc)
 	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
 }
 
-
-static void
-gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, GeditDocument* doc)
-{
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-	g_signal_emit (G_OBJECT (doc),
-                       document_signals [CAN_UNDO],
-                       0,
-		       can_undo);
-}
-
-static void
-gedit_document_can_redo_handler (GeditUndoManager* um, gboolean can_redo, GeditDocument* doc)
-{
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-	g_signal_emit (G_OBJECT (doc),
-                       document_signals [CAN_REDO],
-                       0,
-		       can_redo);
-}
 
 void
 gedit_document_goto_line (GeditDocument* doc, guint line)

@@ -12,9 +12,9 @@ INCLUDES = \
 	-DGNOME_DISABLE_DEPRECATED			
 
 
-noinst_LIBRARIES = libdialogs.a
+noinst_LTLIBRARIES = libdialogs.la
 
-libdialogs_a_SOURCES = 			\
+libdialogs_la_SOURCES = 			\
 	gedit-dialog-uri.c		\
 	gedit-dialog-goto-line.c	\
 	gedit-dialog-replace.c		\

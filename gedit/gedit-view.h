@@ -77,19 +77,25 @@ void		gedit_view_scroll_to_cursor 	(GeditView *view);
 
 GeditDocument*	gedit_view_get_document		(const GeditView *view);
 
-void 		gedit_view_set_colors 		(GeditView* view, 
+void 		gedit_view_set_colors 		(GeditView *view, 
 						 gboolean def,
-						 GdkColor* backgroud, GdkColor* text,
-						 GdkColor* selection, GdkColor* sel_text);
+						 GdkColor *backgroud, 
+						 GdkColor *text,
+						 GdkColor *selection, 
+						 GdkColor *sel_text);
 
-void 		gedit_view_set_font		(GeditView* view,
+void 		gedit_view_set_font		(GeditView *view,
 						 gboolean def,
-						 const gchar* font_name);
+						 const gchar *font_name);
 
-void		gedit_view_set_wrap_mode 	(GeditView* view, GtkWrapMode wrap_mode);
-void		gedit_view_set_tab_size  	(GeditView* view, gint tab_size);
+void		gedit_view_set_wrap_mode 	(GeditView *view, GtkWrapMode wrap_mode);
+void		gedit_view_set_tab_size  	(GeditView *view, gint tab_size);
+void		gedit_view_set_insert_spaces_instead_of_tabs 
+						(GeditView *view, gboolean enable);
 
-void		gedit_view_show_line_numbers 	(GeditView* view, gboolean visible);
+void		gedit_view_set_auto_indent	(GeditView *view, gboolean enable);
+
+void		gedit_view_show_line_numbers 	(GeditView *view, gboolean visible);
 
 void		gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status);
 void		gedit_view_set_overwrite_mode_statusbar  (GeditView *view, GtkWidget* status);

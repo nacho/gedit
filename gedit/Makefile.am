@@ -26,10 +26,10 @@ noinst_LTLIBRARIES = libgedit.la
 gedit_LDFLAGS = -export-dynamic
 
 gedit_LDADD =				\
-	libgedit.a			\
-	dialogs/libdialogs.a		\
-	recent-files/librecent.a	\
-	$(GEDIT_LIBS)			
+	$(GEDIT_LIBS)			\
+	libgedit.la			\
+	dialogs/libdialogs.la		\
+	recent-files/librecent.la	
 
 IDL_FILE = GNOME_Gedit.idl
 
@@ -53,7 +53,6 @@ APP_H_FILES =				\
 	gedit-menus.h			\
 	gedit-file.h			\
 	gedit-commands.h		\
-	gedit-undo-manager.h		\
 	gedit-session.h			\
 	bonobo-mdi.h			\
 	gedit-print.h			\
@@ -91,7 +90,6 @@ gedit_SOURCES = 			\
 	gedit-utils.c 			\
 	gedit-commands.c		\
 	gedit-file.c			\
-	gedit-undo-manager.c		\
 	gedit-print.c			\
 	gedit-session.c			\
 	bonobo-mdi.c			\

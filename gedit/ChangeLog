@@ -1,3 +1,30 @@
+2003-04-15  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Added support for syntax highlighting
+
+	* Makefile.am: use .la libs
+	(APP_H_FILES): removed gedit-undo-manager.h
+	(gedit_SOURCES): removed gedit-undo-manager.c
+
+	* gedit-undo-manager.[ch]: removed
+
+	* gedit-document.[ch]: GeditDocument now inherits from GtkSoureBuffer 
+
+	* gedit-mdi.c (gedit_window_prefs_save): fixed a cut and paste bug
+	
+	* gedit-prefs-manager-app.c (gedit_prefs_manager_auto_indent_changed)
+	(gedit_prefs_manager_undo_changed): new functions
+	(gedit_prefs_manager_tabs_size_changed): manages insert_spaces too
+
+	* gedit-view.[ch]: cleaned up to use GtkSourceView instead of 
+	GtkTextView
+	(gedit_view_set_insert_spaces_instead_of_tabs):
+	(gedit_view_set_auto_indent):
+	(gedit_view_show_line_numbers): new functions
+
+	* dialogs/Makefile.am:
+	* recent-files/Makefile.am: create a .la lib instead of a .a lib
+
 2003-04-14  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
 
 	* Makefile.am: Create libgedit.la instead of libgedit.a because
@@ -521,7 +548,8 @@
 
 2002-10-07  Paolo Maggi  <maggi@athena.polito.it>
 
-	* gedit-document.[ch] (gedit_document_find)(gedit_document_replace_all):	added the entire_word parameter
+	* gedit-document.[ch] (gedit_document_find)(gedit_document_replace_all):	
+	added the entire_word parameter
 	
 	* dialogs/replace.glade2: cosmetic changes
 

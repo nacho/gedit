@@ -24,9 +24,9 @@ EGG_FILES =				\
         egg-recent-util.c		\
 	$(header_DATA)
 
-noinst_LIBRARIES = librecent.a
+noinst_LTLIBRARIES = librecent.la
 
-librecent_a_SOURCES = $(EGG_FILES)
+librecent_la_SOURCES = $(EGG_FILES)
 
 EGGDIR=$(srcdir)/../../../libegg/libegg/recent-files
 regenerate-built-sources:

@@ -1502,7 +1502,7 @@ gedit_window_prefs_save (GeditWindowPrefs *prefs)
 		gedit_prefs_manager_set_toolbar_buttons_style (prefs->toolbar_buttons_style);
 
 	if ((prefs->statusbar_visible != gedit_prefs_manager_get_statusbar_visible ()) &&
-	    gedit_prefs_manager_get_statusbar_visible ())
+	    gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (prefs->statusbar_visible);
 
 	if ((prefs->statusbar_show_cursor_position != 

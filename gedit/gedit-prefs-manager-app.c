@@ -64,6 +64,15 @@ static void 		gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 								  guint cnxn_id, 
 								  GConfEntry *entry, 
 								  gpointer user_data);
+static void 		gedit_prefs_manager_auto_indent_changed (GConfClient *client,
+								 guint cnxn_id, 
+								 GConfEntry *entry, 
+								 gpointer user_data);
+static void 		gedit_prefs_manager_undo_changed (GConfClient *client,
+							  guint cnxn_id, 
+							  GConfEntry *entry, 
+							  gpointer user_data);
+
 
 static gint window_state = -1;
 static gint window_height = -1;
@@ -111,6 +120,18 @@ gedit_prefs_manager_app_init (void)
 				GPM_LINE_NUMBERS_DIR,
 				gedit_prefs_manager_line_numbers_changed,
 				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_AUTO_INDENT_DIR,
+				gedit_prefs_manager_auto_indent_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_UNDO_DIR,
+				gedit_prefs_manager_undo_changed,
+				NULL, NULL, NULL);
+
+
 	}
 
 	return gedit_prefs_manager != NULL;	
@@ -481,7 +502,38 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 		
 			children = children->next;
 		}
+
 	}
+	else if (strcmp (entry->key, GPM_INSERT_SPACES) == 0)
+	{
+		gboolean enable;
+			
+		GList *children;
+		
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			enable = gconf_value_get_bool (entry->value);	
+		else
+			enable = GPM_DEFAULT_INSERT_SPACES;
+	
+		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+		while (children != NULL)
+		{
+			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+			while (views != NULL)
+			{
+				GeditView *v =	GEDIT_VIEW (views->data);
+			
+				gedit_view_set_insert_spaces_instead_of_tabs (v, enable);
+			
+				views = views->next;
+			}
+		
+			children = children->next;
+		}
+	}
+
 }
 
 static GtkWrapMode 
@@ -582,6 +634,81 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 			}
 		
 			children = children->next;
+		}
+	}
+}
+
+static void 
+gedit_prefs_manager_auto_indent_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_AUTO_INDENT) == 0)
+	{
+		gboolean enable;
+			
+		GList *children;
+		
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			enable = gconf_value_get_bool (entry->value);	
+		else
+			enable = GPM_DEFAULT_AUTO_INDENT;
+	
+		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+
+		while (children != NULL)
+		{
+			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+
+			while (views != NULL)
+			{
+				GeditView *v =	GEDIT_VIEW (views->data);
+			
+				gedit_view_set_auto_indent (v, enable);
+			
+				views = views->next;
+			}
+		
+			children = children->next;
+		}
+	}
+}
+
+static void 
+gedit_prefs_manager_undo_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_UNDO_ACTIONS_LIMIT) == 0)
+	{
+		gint ul;
+		GList *docs;
+		
+		if (entry->value->type == GCONF_VALUE_INT)
+			ul = gconf_value_get_int (entry->value);
+		else
+			ul = GPM_DEFAULT_UNDO_ACTIONS_LIMIT;
+	
+		ul = CLAMP (ul, -1, 250);
+
+		docs = gedit_get_open_documents ();
+
+		while (docs != NULL)
+		{
+			GeditDocument *d = GEDIT_DOCUMENT (docs->data);
+
+			gedit_document_set_max_undo_levels (d, ul);
+		
+			docs = g_list_next (docs);
 		}
 	}
 }

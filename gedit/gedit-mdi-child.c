@@ -679,7 +679,7 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 		hbox = gtk_hbox_new (FALSE, 2);
 
 		event_box = gtk_event_box_new ();
-		
+			
 		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);

@@ -33,7 +33,7 @@
 
 
 #include <gtk/gtk.h>
-
+#include <gtksourcebuffer.h>
 
 #define GEDIT_TYPE_DOCUMENT             (gedit_document_get_type ())
 #define GEDIT_DOCUMENT(obj)		(GTK_CHECK_CAST ((obj), GEDIT_TYPE_DOCUMENT, GeditDocument))
@@ -50,14 +50,14 @@ typedef struct _GeditDocumentPrivate    GeditDocumentPrivate;
 
 struct _GeditDocument
 {
-	GtkTextBuffer buffer;
+	GtkSourceBuffer buffer;
 	
 	GeditDocumentPrivate *priv;
 };
 
 struct _GeditDocumentClass
 {
-	GtkTextBufferClass parent_class;
+	GtkSourceBufferClass parent_class;
 
 	/* File name (uri) changed */
 	void (* name_changed)		(GeditDocument *document);
@@ -72,12 +72,8 @@ struct _GeditDocumentClass
 	void (* readonly_changed)	(GeditDocument *document,
 					 gboolean readonly);
 
-	void (* can_undo)		(GeditDocument *document,
-					 gboolean can_undo);
-	void (* can_redo)		(GeditDocument *document,
-					 gboolean can_redo);
-
 };
+
 #define GEDIT_ERROR_INVALID_UTF8_DATA 	1024
 #define GEDIT_ERROR_UNTITLED		1025	
 #define GEDIT_DOCUMENT_IO_ERROR gedit_document_io_error_quark ()
@@ -138,6 +134,9 @@ gboolean	gedit_document_get_selection 	(GeditDocument *doc,
 						 gint* start, gint* end);
 
 /* Multi-level Undo/Redo operations */
+void		gedit_document_set_max_undo_levels (GeditDocument *doc, 
+						    gint max_undo_levels);
+
 gboolean	gedit_document_can_undo		(const GeditDocument *doc);
 gboolean	gedit_document_can_redo 	(const GeditDocument *doc);
 

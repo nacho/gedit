@@ -58,6 +58,7 @@ AC_CHECK_LIB(aspell,main,
 	     AC_CHECK_LIB(pspell_aspell,main,
              PSPELL_LIBS="$PSPELL_LIBS -lpspell_aspell -laspell"
              AC_DEFINE(HAVE_ASPELL_MODULE,,[Use aspell]),,-laspell $PSPELL_LIBS),,)
+
 AC_CHECK_LIB(pspell_ispell,main,
              PSPELL_LIBS="$PSPELL_LIBS -lpspell_ispell"
              AC_DEFINE(HAVE_ISPELL_MODULE,,[Use ispell]),,$PSPELL_LIBS)
@@ -71,9 +72,8 @@ dnl
 dnl Start of pkg-config checks
 dnl
 PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 2.2.0 libglade-2.0 >= 2.0.0
-                         libgnomeprintui-2.2 >= 2.2.0 
-                         eel-2.0 >= 2.2.0
-                         gtksourceview-1.0 >= 0.1.0)
+                         libgnomeprintui-2.2 >= 2.2.0
+                         eel-2.0 >= 2.2.0 gtksourceview-1.0 >= 0.1.0)
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)
